@@ -1,8 +1,8 @@
 # Brazilian Portuguese translations of mc
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Sandro Henrique <sandro@conectiva.com.br>, 1999.
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
@@ -19,7 +19,7 @@ msgid " Search string not found "
 msgstr " Expressão de procura não encontrada"
 
 msgid " Not implemented yet "
-msgstr ""
+msgstr "Ainda não implementado"
 
 msgid " Num of replace tokens not equal to num of found tokens "
 msgstr ""
@@ -36,22 +36,26 @@ msgid "&Regular expression"
 msgstr "E&xpressão Regular"
 
 msgid "Hexadecimal"
-msgstr ""
+msgstr "Hexadecimal"
 
 msgid "Wildcard search"
-msgstr ""
+msgstr "Procura com coringa"
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Não foi possível carregar o skin '%s'.\n"
+"O skin padrão foi carregado"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Não foi possível analisar o skin '%s'.\n"
+"O skin padrão foi carregado"
 
 msgid "Function key 1"
 msgstr "Tecla de função 1"
@@ -215,50 +219,49 @@ msgid "Function key 24"
 msgstr "Tecla de função 2"
 
 msgid "Plus"
-msgstr ""
+msgstr "Mais"
 
-#, fuzzy
 msgid "Minus"
-msgstr "Menu"
+msgstr "Menos"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Asterisco"
 
 msgid "Dot"
-msgstr ""
+msgstr "Ponto"
 
 msgid "Less than"
-msgstr ""
+msgstr "Menor que"
 
 msgid "Great than"
-msgstr ""
+msgstr "Maior que"
 
 msgid "Equal"
-msgstr ""
+msgstr "Igual"
 
 #, fuzzy
 msgid "Comma"
 msgstr "Comando"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "Apóstrofo"
 
 #, fuzzy
 msgid "Colon"
 msgstr "Total"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Exclamação"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Interrogação"
 
 #, fuzzy
 msgid "Ampersand"
 msgstr "A&dicionar"
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "Cifrão"
 
 msgid "Quotation mark"
 msgstr ""
@@ -282,19 +285,16 @@ msgid "Understrike"
 msgstr ""
 
 msgid "Pipe"
-msgstr ""
+msgstr "Pipe"
 
-#, fuzzy
 msgid "Enter"
-msgstr "Dono"
+msgstr "Enter"
 
-#, fuzzy
 msgid "Tab key"
-msgstr "+ no teclado numérico"
+msgstr "Tabulador"
 
-#, fuzzy
 msgid "Space key"
-msgstr "Barra no teclado numérico"
+msgstr "Barra de espaço"
 
 #, fuzzy
 msgid "Slash key"
@@ -308,19 +308,21 @@ msgid "Number sign #"
 msgstr ""
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Control"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
+"Resolução de tela %dx%d não é suportada,\n"
+"Cheque a variável de ambiente TERM.\n"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
@@ -328,33 +330,29 @@ msgstr "%b %e  %Y"
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "Cria um novo diretório"
+msgstr "%s não é um diretório\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "Diretório %s não pertence a você\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Impossível criar diretório de destino \"%s\" \n"
-" %s "
+msgstr "Não foi possível definir permissões para o diretório %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Impossível criar diretório de destino \"%s\" \n"
-" %s "
+msgstr "Não foi possível criar o diretório temporário %s: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr ""
+msgstr "Arquivos temporários serão criados em %s\n"
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "Arquivos temporários não serão criados\n"
 
 #, c-format
 msgid "Press any key to continue..."
@@ -421,7 +419,6 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr "Cache de dir expirou para %s"
 
-#
 msgid "Starting linear transfer..."
 msgstr "Iniciando transferência linear..."
 
@@ -433,7 +430,6 @@ msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
 
-#
 msgid "Getting file"
 msgstr "Obtendo arquivo"
 
@@ -448,9 +444,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Arquivo extfs inconsistente"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr " Impossível mudar de diretório"
+msgstr "Aviso: Não foi possível abrir o diretório %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -462,7 +458,6 @@ msgstr "peixe: Aguardando pela linha inicial..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Desculpe, impossível fazer autenticação de senha no momento."
 
-#
 msgid " fish: Password required for "
 msgstr " fish: Senha requerida para"
 
@@ -490,7 +485,6 @@ msgstr "peixe: Lendo diretório %s..."
 msgid "%s: done."
 msgstr "%s: feito."
 
-#
 #, c-format
 msgid "%s: failure"
 msgstr "%s: falha"
@@ -502,9 +496,9 @@ msgstr "peixe: armazenar %s: enviando comando..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "peixe: leitura local falhou, enviando zeros"
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "peixe: guardando %s %d (%d)"
+msgstr "fish: armazenando %s %d (%lu)"
 
 msgid "zeros"
 msgstr "zeros"
@@ -534,13 +528,12 @@ msgstr "ftpfs: enviando nome de login"
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: enviando senha do usuário"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Account required for user %s"
-msgstr "FTP: Senha requerida para "
+msgstr "FTP: Senha requerida para usuário %s"
 
-#, fuzzy
 msgid "Account:"
-msgstr "Total"
+msgstr "Conta:"
 
 #, fuzzy
 msgid "ftpfs: sending user account"
@@ -558,7 +551,7 @@ msgstr "ftpfs: nome de host inválido."
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -677,19 +670,23 @@ msgstr " Muitas conexões abertas "
 
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr ""
+msgstr "Aviso: arquivo %s não foi encontrado\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
+"Aviso: Linha inválida em %s:\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
+"Aviso: parâmetro inválido %c em %s:\n"
+"%s\n"
 
 #, c-format
 msgid ""
@@ -746,7 +743,6 @@ msgstr ""
 "%s\n"
 "não parece ser um arquivo tar."
 
-#
 msgid " undelfs: error "
 msgstr " undelfs: erro "
 
@@ -779,7 +775,6 @@ msgstr " sem memória durante a realocação do vetor "
 msgid " while doing inode scan %d "
 msgstr " executando a varredura do inode %d"
 
-#
 msgid " Ext2lib error "
 msgstr " Erro Ext2lib"
 
@@ -818,21 +813,18 @@ msgstr " Execute chdir para extrair arquivos primeiro"
 msgid " while iterating over blocks "
 msgstr " iterando sobre blocos"
 
-#
 msgid "Cannot parse:"
 msgstr "Não foi possível verificar:"
 
 msgid "More parsing errors will be ignored."
 msgstr "Mais erros de verificação serão ignorados."
 
-#
 msgid "Internal error:"
 msgstr "Erro interno:"
 
 msgid "Password:"
 msgstr "Senha:"
 
-#
 msgid "Changes to file lost"
 msgstr "Alterações no arquivo perdidas"
 
@@ -910,7 +902,7 @@ msgid "Log ftp dialog to specified file"
 msgstr "Acessar diálogo FTP para um arquivo específico"
 
 msgid "Set debug level"
-msgstr ""
+msgstr "Insira o nível de debug"
 
 msgid "Launches the file viewer on a file"
 msgstr "Lança o visualizador de arquivos"
@@ -950,7 +942,7 @@ msgid "Specifies a color configuration"
 msgstr "Especifica uma configuração de cores"
 
 msgid "Show mc with specified skin"
-msgstr ""
+msgstr "Mostrar mc com o skin especificado"
 
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
@@ -978,8 +970,7 @@ msgstr ""
 "   Diálogos    : dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Ajuda:        helpnormal, helpitalic, helplink, helpslink\n"
-"   Tipos de arq.:directory, executable, link, stalelink, device, special, "
-"core\n"
+"   Tipos de arq.:directory, executable, link, stalelink, device, special, core\n"
 "\n"
 "Cores:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1011,7 +1002,7 @@ msgid "[this_dir] [other_panel_dir]"
 msgstr "[sinalizadores] [este_dir] [outro dir_painel]\n"
 
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "Inserir o número da linha inicial para o editor interno"
 
 #, fuzzy
 msgid ""
@@ -1020,8 +1011,7 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Por favor envie qualquer relatório de problemas (incluindo a saída de 'mn - "
-"V')\n"
+"Por favor envie qualquer relatório de problemas (incluindo a saída de 'mn - V')\n"
 "a mc-devel@gnome.org\n"
 
 #, fuzzy, c-format
@@ -1132,7 +1122,7 @@ msgid "Other 8 bit"
 msgstr "Outro"
 
 msgid "Input / display codepage:"
-msgstr ""
+msgstr "Entrada e exibição de código de paágina:"
 
 #, fuzzy
 msgid "&Select"
@@ -1181,9 +1171,7 @@ msgid "Symbolic link filename:"
 msgstr "Nome do arquivo de ligação simbólica"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-"Nome do arquivo existente (nome do arquivo para o qual a ligação irá "
-"apontar):"
+msgstr "Nome do arquivo existente (nome do arquivo para o qual a ligação irá apontar):"
 
 msgid "Symbolic link"
 msgstr "Ligação Simbólica"
@@ -1217,7 +1205,7 @@ msgid "Password for \\\\%s\\%s"
 msgstr "Senha para \\\\%s\\%s"
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7 Bits ASCII"
 
 #, fuzzy, c-format
 msgid "Cannot translate from %s to %s"
@@ -1392,11 +1380,9 @@ msgstr "&Usuário"
 msgid "&System Wide"
 msgstr "&Todo o sistema"
 
-#
 msgid " Menu edit "
 msgstr " Editar menu"
 
-#
 msgid " Which menu file do you want to edit? "
 msgstr " Que arquivo de menu quer editar? "
 
@@ -1426,8 +1412,7 @@ msgid "&Thorough"
 msgstr "&Através"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr ""
-" Ambos os painéis devem estar no modo de lista para se usar este comando. "
+msgstr " Ambos os painéis devem estar no modo de lista para se usar este comando. "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1536,7 +1521,6 @@ msgstr " Sobre "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
-#
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " Falha ao abrir pipe para leitura: "
@@ -1544,12 +1528,10 @@ msgstr " Falha ao abrir pipe para leitura: "
 msgid "Error"
 msgstr "Erro"
 
-#
 #, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Problema lendo do pipe:"
 
-#
 #, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
 msgstr " Falha ao abrir pipe para leitura: "
@@ -1598,15 +1580,12 @@ msgstr ""
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
-#
 msgid " Error writing to pipe: "
 msgstr " Erro escrevendo no pipe:"
 
-#
 msgid " Cannot open pipe for writing: "
 msgstr " Falha ao abrir apipe para escrita:"
 
-#
 #, fuzzy, c-format
 msgid " Cannot open file for writing: %s "
 msgstr " Falha ao abrir apipe para escrita:"
@@ -1782,9 +1761,7 @@ msgid " Run Sort "
 msgstr "Ordenar"
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-" Informe as opções de ordenamento (veja a página de manual)  separas por "
-"espaços "
+msgstr " Informe as opções de ordenamento (veja a página de manual)  separas por espaços "
 
 msgid " Sort "
 msgstr " Ordenar "
@@ -1822,7 +1799,6 @@ msgstr "Erro ao fechar script:"
 msgid "Script created:"
 msgstr "Script criado:"
 
-#
 msgid "Process block"
 msgstr " Processar bloco "
 
@@ -1934,7 +1910,6 @@ msgstr "&Inserir arquivo F15"
 msgid "Cop&y to file..."
 msgstr "copiar para &Arquivo C-f"
 
-#
 #, fuzzy
 msgid "&User menu..."
 msgstr "Menu de &Usuário...   F11"
@@ -2100,7 +2075,6 @@ msgstr "&Ordem..."
 msgid "&Paste output of..."
 msgstr ""
 
-#
 #, fuzzy
 msgid "&External formatter"
 msgstr "Formatador E&xterno   F19"
@@ -2291,10 +2265,7 @@ msgid " %s%s file error"
 msgstr " erro de arquivo "
 
 #, fuzzy, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "Arquivo mc.ext foi alterado na\n"
 "versão 3.0. Parece que a instalação\n"
@@ -2307,10 +2278,7 @@ msgid " ~/%s file error "
 msgstr " erro de arquivo "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2338,8 +2306,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Impossível fazer ligações simbólicas estáveis  entre sistemas de arquivo "
-"não locais: \n"
+" Impossível fazer ligações simbólicas estáveis  entre sistemas de arquivo não locais: \n"
 "\n"
 " Opção de ligações simbólicas estáveis será desligada. "
 
@@ -2978,8 +2945,7 @@ msgid " Hotlist Load "
 msgstr " Carregar Lista"
 
 #, fuzzy, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " a lista antiga não foi sobrescrita"
 
 #, c-format
@@ -3652,8 +3618,7 @@ msgid "Unknown tag on display format: "
 msgstr "Padrão desconhecido no formato de apresentação:"
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
+msgstr "Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
 
 msgid " Do you really want to execute? "
 msgstr " Você quer realmente executar? "
@@ -3705,31 +3670,25 @@ msgstr "a biblioteca ncurses"
 msgid "Using the ncursesw library"
 msgstr "a biblioteca ncurses"
 
-#
 #, fuzzy
 msgid "With optional subshell support"
 msgstr "Com suporte à subinterpretadores de comandos"
 
-#
 #, fuzzy
 msgid "With subshell support as default"
 msgstr "Com suporte à subinterpretadores de comandos"
 
-#
 msgid "With support for background operations\n"
 msgstr "Com suporte a operações em segundo plano\n"
 
-#
 #, fuzzy
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "com suporte à mouse no xterm e no console Linux.\n"
 
-#
 #, fuzzy
 msgid "With mouse support on xterm\n"
 msgstr "com suporte a mouse no xterm.\n"
 
-#
 #, fuzzy
 msgid "With support for X11 events\n"
 msgstr "Com suporte a operações em segundo plano\n"
@@ -3740,7 +3699,6 @@ msgstr ""
 msgid "With multiple codepages support\n"
 msgstr ""
 
-#
 #, c-format
 msgid "Virtual File System:"
 msgstr "Sistema de arquivos virtual:"
@@ -3962,7 +3920,6 @@ msgstr " Histórico de comandos"
 msgid "Background process:"
 msgstr "Processo em segundo plano:"
 
-#, fuzzy
 #~ msgid "Status:    %s"
 #~ msgstr "Criado: %s"
 
@@ -3996,63 +3953,48 @@ msgstr "Processo em segundo plano:"
 #~ msgid "Copy to &file...     "
 #~ msgstr "copiar para &Arquivo..."
 
-#, fuzzy
 #~ msgid "&Toggle mark                 F3"
 #~ msgstr "&Alternar Marca   F3"
 
-#, fuzzy
 #~ msgid "Mar&k columns              S-F3"
 #~ msgstr "&Marcar Colunas S-F3"
 
-#, fuzzy
 #~ msgid "&Copy                        F5"
 #~ msgstr "&Copiar            F5"
 
-#, fuzzy
 #~ msgid "&Move                        F6"
 #~ msgstr "&Mover            F6"
 
-#, fuzzy
 #~ msgid "&Delete                      F8"
 #~ msgstr "&Apagar            F8"
 
-#, fuzzy
 #~ msgid "&Next bookmark              M-j"
 #~ msgstr "&Novo            C-n"
 
-#, fuzzy
 #~ msgid "&Undo                       C-u"
 #~ msgstr "&Desfazer        C-u"
 
-#, fuzzy
 #~ msgid "&Beginning               C-PgUp"
 #~ msgstr "&Início       C-PgUp"
 
-#, fuzzy
 #~ msgid "&End                     C-PgDn"
 #~ msgstr "&Final        C-PgDn"
 
-#, fuzzy
 #~ msgid "C&opy to clipfile           M-w"
 #~ msgstr "Ir para a linha...      M-l"
 
-#, fuzzy
 #~ msgid "C&ut to clipfile            C-w"
 #~ msgstr "Ir para a linha...      M-l"
 
-#, fuzzy
 #~ msgid "Toggle bookmar&k               "
 #~ msgstr "&Alternar Marca   F3"
 
-#, fuzzy
 #~ msgid "&Next bookmark                 "
 #~ msgstr "&Novo            C-n"
 
-#, fuzzy
 #~ msgid "Pre&v bookmark                 "
 #~ msgstr "orde&Nar                M-t"
 
-#, fuzzy
 #~ msgid "&Flush bookmark                "
 #~ msgstr "&Correio...                "
 
@@ -4065,7 +4007,6 @@ msgstr "Processo em segundo plano:"
 #~ msgid "&Go to line...            M-l"
 #~ msgstr "Ir para a linha...      M-l"
 
-#, fuzzy
 #~ msgid "Encod&ing...             M-e"
 #~ msgstr "orde&Nar                M-t"
 
@@ -4084,7 +4025,6 @@ msgstr "Processo em segundo plano:"
 #~ msgid "'ispell' s&pell check    M-$"
 #~ msgstr "'ispell' Chegagem orto&Gráfica    M-$"
 
-#, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Gravar configuração"
 
@@ -4106,7 +4046,6 @@ msgstr "Processo em segundo plano:"
 #~ msgid "Emacs"
 #~ msgstr "Emacs"
 
-#, fuzzy
 #~ msgid "User-defined"
 #~ msgstr "&Personalizada:"
 
@@ -4227,7 +4166,6 @@ msgstr "Processo em segundo plano:"
 #~ msgid "e&Xternal panelize    C-x !"
 #~ msgstr "Painéis e&xternos    c-x !"
 
-#, fuzzy
 #~ msgid "Command &history      M-h"
 #~ msgstr " Histórico de comandos "
 
@@ -4249,11 +4187,9 @@ msgstr "Processo em segundo plano:"
 #~ msgid "Menu"
 #~ msgstr "Menu"
 
-#, fuzzy
 #~ msgid "n"
 #~ msgstr "Ligado"
 
-#, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Extensão:"
 
@@ -4287,15 +4223,12 @@ msgstr "Processo em segundo plano:"
 #~ msgid "Rmdir"
 #~ msgstr "Rmdir"
 
-#, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Comando chown "
 
-#, fuzzy
 #~ msgid "%s: Unknown command: `%s'"
 #~ msgstr " Comando chown "
 
-#, fuzzy
 #~ msgid "%s:%d: unknown command `%s'"
 #~ msgstr " Comando chown "
 
@@ -4314,7 +4247,6 @@ msgstr "Processo em segundo plano:"
 #~ msgid "Displays a help screen on how to change the color scheme"
 #~ msgstr "Mostra uma tela de ajuda sobre como mudar o esquema de cores"
 
-#, fuzzy
 #~ msgid "unknown option"
 #~ msgstr "<Grupo desconhecido>"
 
@@ -4324,7 +4256,6 @@ msgstr "Processo em segundo plano:"
 #~ msgid "Display brief usage message"
 #~ msgstr "Mostra uma breve explanação sobre o uso"
 
-#, fuzzy
 #~ msgid "Usage:"
 #~ msgstr " Nome de usuário:"
 
@@ -4337,15 +4268,12 @@ msgstr "Processo em segundo plano:"
 #~ msgid "O&ne"
 #~ msgstr "U&M"
 
-#, fuzzy
 #~ msgid "%b %d %H:%M"
 #~ msgstr "%b %e %H:%M"
 
-#, fuzzy
 #~ msgid "%b %d %Y"
 #~ msgstr "%b %e  %Y"
 
-#, fuzzy
 #~ msgid " The current address is 0x%08"
 #~ msgstr ""
 #~ " O endereço atual é 0x%lx.\n"
@@ -4357,16 +4285,12 @@ msgstr "Processo em segundo plano:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Digite a ordem dos argumentos de substituição ex. 3,2,1,4"
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ "Expressão Regular inválida, ou expreesão scanf com muitas conversões"
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgstr "Expressão Regular inválida, ou expreesão scanf com muitas conversões"
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Erro na expressão de substituição "
 
-#, fuzzy
 #~ msgid " Replacement too long. "
 #~ msgstr "Digite a expressão de substituição:"
 
@@ -4379,15 +4303,12 @@ msgstr "Processo em segundo plano:"
 #~ msgid " The command history is empty "
 #~ msgstr " O histórico de comandos está vazio   "
 
-#
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Editar Edi&tor de Menu"
 
-#, fuzzy
 #~ msgid "Edit &syntax file"
 #~ msgstr "Editar &Menu de arquivo"
 
-#, fuzzy
 #~ msgid "Invalid hex search expression"
 #~ msgstr " Expressão regular inválida"
 
@@ -4397,11 +4318,9 @@ msgstr "Processo em segundo plano:"
 #~ msgid " Enter regexp:"
 #~ msgstr " Informar regexp:"
 
-#, fuzzy
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Biblioteca S-lang com "
 
-#, fuzzy
 #~ msgid "with termcap database"
 #~ msgstr " banco de dados"
 
@@ -4519,7 +4438,6 @@ msgstr "Processo em segundo plano:"
 #~ msgid "Unform"
 #~ msgstr "Deformar"
 
-#, fuzzy
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Menu do usuário disponível apenas em mcedit chamado por mc"
 
@@ -4550,7 +4468,6 @@ msgstr "Processo em segundo plano:"
 #~ "\n"
 #~ "\n"
 
-#, fuzzy
 #~ msgid " Listing format edit "
 #~ msgstr "Editar forma de &Listagem"
 
@@ -4560,7 +4477,6 @@ msgstr "Processo em segundo plano:"
 #~ msgid "Use to debug the background code"
 #~ msgstr "Utilize para depurar código em segundo plano"
 
-#, fuzzy
 #~ msgid "Force subshell execution"
 #~ msgstr "configurar identificação do usuário para execução"
 
