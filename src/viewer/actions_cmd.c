@@ -301,7 +301,7 @@ mcview_handle_editkey (mcview_t * view, int key)
 
     if ((view->filename != NULL) && (view->filename[0] != '\0')
         && (view->change_list == NULL))
-        view->locked = lock_file (view->filename);
+        view->locked = mcview_lock_file (view);
 
     if (node == NULL)
     {

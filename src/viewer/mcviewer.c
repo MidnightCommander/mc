@@ -264,7 +264,7 @@ mcview_viewer (const char *command, const char *file, int start_line)
         run_dlg (view_dlg);
 
         ret = lc_mcview->move_dir == 0 ? MCVIEW_EXIT_OK :
-              lc_mcview->move_dir > 0 ? MCVIEW_WANT_NEXT : MCVIEW_WANT_PREV;
+            lc_mcview->move_dir > 0 ? MCVIEW_WANT_NEXT : MCVIEW_WANT_PREV;
     }
     else
     {
@@ -291,6 +291,36 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 
     view->filename = g_strdup (file);
 
+    if ((view->workdir == NULL) && (file != NULL))
+    {
+        if (!g_path_is_absolute (file))
+        {
+#ifdef ENABLE_VFS
+            view->workdir = g_strdup (vfs_get_current_dir ());
+#else /* ENABLE_VFS */
+            view->workdir = g_get_current_dir ();
+#endif /* ENABLE_VFS */
+        }
+        else
+        {
+            /* try extract path form filename */
+            char *dirname;
+
+            dirname = g_path_get_dirname (file);
+            if (strcmp (dirname, ".") != 0)
+                view->workdir = dirname;
+            else
+            {
+                g_free (dirname);
+#ifdef ENABLE_VFS
+                view->workdir = g_strdup (vfs_get_current_dir ());
+#else /* ENABLE_VFS */
+                view->workdir = g_get_current_dir ();
+#endif /* ENABLE_VFS */
+            }
+        }
+    }
+
     if (!mcview_is_in_panel (view))
         view->dpy_text_column = 0;
 
@@ -313,6 +343,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             mcview_show_error (view, tmp);
             g_free (view->filename);
             view->filename = NULL;
+            g_free (view->workdir);
+            view->workdir = NULL;
             goto finish;
         }
 
@@ -325,6 +357,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             mcview_show_error (view, tmp);
             g_free (view->filename);
             view->filename = NULL;
+            g_free (view->workdir);
+            view->workdir = NULL;
             goto finish;
         }
 
@@ -334,6 +368,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             mcview_show_error (view, _("Cannot view: not a regular file"));
             g_free (view->filename);
             view->filename = NULL;
+            g_free (view->workdir);
+            view->workdir = NULL;
             goto finish;
         }
 

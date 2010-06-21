@@ -651,12 +651,12 @@ edit_save_as_cmd (WEdit * edit)
                     if (save_lock)
                         unlock_file (exp);
                     if (edit->locked)
-                        edit->locked = unlock_file (edit->filename);
+                        edit->locked = edit_unlock_file (edit);
                 }
                 else
                 {
                     if (edit->locked || save_lock)
-                        edit->locked = unlock_file (edit->filename);
+                        edit->locked = edit_unlock_file (edit);
                 }
 
                 edit_set_filename (edit, exp);
@@ -932,12 +932,12 @@ edit_save_cmd (WEdit * edit)
     int res, save_lock = 0;
 
     if (!edit->locked && !edit->delete_file)
-        save_lock = lock_file (edit->filename);
+        save_lock = edit_lock_file (edit);
     res = edit_save_file (edit, edit->filename);
 
     /* Maintain modify (not save) lock on failure */
     if ((res > 0 && edit->locked) || save_lock)
-        edit->locked = unlock_file (edit->filename);
+        edit->locked = edit_unlock_file (edit);
 
     /* On failure try 'save as', it does locking on its own */
     if (!res)
@@ -988,7 +988,13 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     }
 
     if (prev_locked)
-        unlock_file (prev_filename);
+    {
+        char *fullpath;
+
+        fullpath = g_build_filename (edit->dir, prev_filename, (char *) NULL);
+        unlock_file (fullpath);
+        g_free (fullpath);
+    }
     g_free (prev_filename);
     return 0;
 }

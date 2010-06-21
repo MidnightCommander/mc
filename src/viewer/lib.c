@@ -46,6 +46,7 @@
 
 #include "src/wtools.h"
 #include "src/main.h"
+#include "lib/lock.h"           /* unlock_file() */
 #include "src/charsets.h"
 #include "src/selcodepage.h"
 
@@ -155,8 +156,8 @@ mcview_ok_to_quit (mcview_t * view)
     else
     {
         r = query_dialog (_("Quit"),
-                          _("Midnight Commander is being shut down.\nSave modified file?"), D_NORMAL, 2,
-                           _("&Yes"), _("&No"));
+                          _("Midnight Commander is being shut down.\nSave modified file?"),
+                          D_NORMAL, 2, _("&Yes"), _("&No"));
         /* Esc is No */
         if (r == -1)
             r = 1;
@@ -164,9 +165,9 @@ mcview_ok_to_quit (mcview_t * view)
 
     switch (r)
     {
-    case 0: /* Yes */
+    case 0:                    /* Yes */
         return mcview_hexedit_save_changes (view) || midnight_shutdown;
-    case 1: /* No */
+    case 1:                    /* No */
         mcview_hexedit_free_change_list (view);
         return TRUE;
     default:
@@ -182,6 +183,7 @@ mcview_init (mcview_t * view)
     size_t i;
 
     view->filename = NULL;
+    view->workdir = NULL;
     view->command = NULL;
     view->search_nroff_seq = NULL;
 
@@ -246,6 +248,8 @@ mcview_done (mcview_t * view)
 
     g_free (view->filename);
     view->filename = NULL;
+    g_free (view->workdir);
+    view->workdir = NULL;
     g_free (view->command);
     view->command = NULL;
 
@@ -363,6 +367,8 @@ mcview_bol (mcview_t * view, off_t current)
     return current;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 /* returns index of last char on line + width EOL */
 /* mcview_eol of the current line == mcview_bol next line */
 off_t
@@ -394,8 +400,10 @@ mcview_eol (mcview_t * view, off_t current)
     return current;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 char *
-mcview_get_title (const Dlg_head *h, size_t len)
+mcview_get_title (const Dlg_head * h, size_t len)
 {
     const mcview_t *view = (const mcview_t *) find_widget_type (h, mcview_callback);
     const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
@@ -404,8 +412,39 @@ mcview_get_title (const Dlg_head *h, size_t len)
     len -= 4;
 
     file_label = view->filename != NULL ? view->filename :
-                 view->command != NULL ? view->command : "";
+        view->command != NULL ? view->command : "";
     file_label = str_term_trim (file_label, len - str_term_width1 (_("View: ")));
 
     return g_strconcat (_("View: "), modified, file_label, (char *) NULL);
 }
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mcview_lock_file (mcview_t * view)
+{
+    char *fullpath;
+    gboolean ret;
+
+    fullpath = g_build_filename (view->workdir, view->filename, (char *) NULL);
+    ret = lock_file (fullpath);
+    g_free (fullpath);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mcview_unlock_file (mcview_t * view)
+{
+    char *fullpath;
+    gboolean ret;
+
+    fullpath = g_build_filename (view->workdir, view->filename, (char *) NULL);
+    ret = unlock_file (fullpath);
+    g_free (fullpath);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
