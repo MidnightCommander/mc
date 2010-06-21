@@ -81,6 +81,8 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
     char *file_name, *user_home_dir;
 
     file_name = g_path_get_basename (mc_skin->name);
+    if (file_name == NULL)
+        return FALSE;
 
     if (strcmp (file_name, mc_skin->name) != 0) {
         g_free (file_name);
