@@ -7,13 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -284,6 +300,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Ezker gezi-tekla"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Eskuin gezi-tekla"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Eskuin gezi-tekla"
 
 #, fuzzy
 msgid "Enter"
@@ -1584,6 +1621,9 @@ msgstr "Ezin dituzu komandoak fitxategi-sistema ez-lokaletan exekutatu"
 msgid "The shell is already running a command"
 msgstr "Shell dagoeneko komando bat exekutatzen ari da "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Itxi"
 
@@ -1718,8 +1758,16 @@ msgid "Quit"
 msgstr "Irten"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr "Fitxategia aldatu egin da, irtetean gorde? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1952,10 +2000,6 @@ msgid "%ld replacements made"
 msgstr " %ld ordezpen eginda."
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr "Fitxategia aldatu egin da, irtetean gorde? "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "Bertan behera utzi Irten"
 
@@ -2132,22 +2176,6 @@ msgstr " Ordeztu honekin: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Berretsi ordeztea "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 msgid "&Open file..."
 msgstr "&Ireki fitxategia..."
@@ -2446,6 +2474,10 @@ msgstr "Doipen-modua"
 #, fuzzy
 msgid "Editor options"
 msgstr "Editore-aukerak "
+
+#, fuzzy
+msgid "Edit: "
+msgstr "Edizioa "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3450,6 +3482,12 @@ msgstr ""
 "tekla horietan edo egin klik saguaz definitzeko. Tabuladorearekin mugitu "
 "batetik bestera."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr "Midnight Commander-a "
@@ -3620,6 +3658,9 @@ msgstr "Aktibatu &VFS zerrenda             C-x a"
 msgid "&Background jobs"
 msgstr "Atzeko planoko lanak"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "Desautatu &fitxategiak (ext2fs bakarrik)"
 
@@ -3670,6 +3711,10 @@ msgstr " &Azpian "
 #, fuzzy
 msgid "&Right"
 msgstr " Es&kuinean "
+
+#, fuzzy
+msgid "Panels:"
+msgstr "Panel-zatiketa "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4308,6 +4353,10 @@ msgid ""
 "%s"
 msgstr " Errorea fitxategia gordetzen saiatzean. "
 
+#, fuzzy
+msgid "View: "
+msgstr "Ikuspegia"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4351,6 +4400,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Atzeko planoko prozesua:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr "Fitxategia aldatu egin da, irtetean gorde? "
 
 #~ msgid " Permission "
 #~ msgstr "Baimena "
@@ -4606,9 +4659,6 @@ msgstr "Atzeko planoko prozesua:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Gorde konfigurazioa"
-
-#~ msgid " Edit "
-#~ msgstr "Edizioa "
 
 #~ msgid " Sear/Repl "
 #~ msgstr "Bilatu/ordeztu  "

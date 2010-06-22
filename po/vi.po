@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -15,6 +15,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Tập tin \"%s\" đang được soạn thảo\n"
+"Ngưòi dùng: %s\n"
+"ID tiến trình: %d"
+
+msgid "File locked"
+msgstr "Tập tin bị khóa"
+
+msgid "&Grab lock"
+msgstr "&Chiếm đoạt khóa"
+
+msgid "&Ignore lock"
+msgstr "&Lời đi khóa"
 
 #, fuzzy
 msgid "Search string not found"
@@ -284,6 +303,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Phím mũi tên sang trái"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Phím mũi tên sang phải"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Phím mũi tên sang phải"
 
 #, fuzzy
 msgid "Enter"
@@ -1573,6 +1613,9 @@ msgstr " Chỉ có thể thực hiện câu lệnh trên hệ thống tập tin 
 msgid "The shell is already running a command"
 msgstr " shell đang chạy một câu lệnh"
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "Đó&ng"
 
@@ -1710,8 +1753,16 @@ msgid "Quit"
 msgstr "Thoát"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1938,10 +1989,6 @@ msgstr "&Thay thế"
 msgid "%ld replacements made"
 msgstr " %ld thay thế được thực hiện. "
 
-#, fuzzy
-msgid "File was modified, save with exit?"
-msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
-
 msgid "&Cancel quit"
 msgstr "&Dừng thoát"
 
@@ -2116,25 +2163,6 @@ msgstr " Thay thế bằng: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Phê chuẩn thay thế "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Tập tin \"%s\" đang được soạn thảo\n"
-"Ngưòi dùng: %s\n"
-"ID tiến trình: %d"
-
-msgid "File locked"
-msgstr "Tập tin bị khóa"
-
-msgid "&Grab lock"
-msgstr "&Chiếm đoạt khóa"
-
-msgid "&Ignore lock"
-msgstr "&Lời đi khóa"
 
 msgid "&Open file..."
 msgstr "&Mở tập tin..."
@@ -2433,6 +2461,10 @@ msgstr "Chế độ chuyển dòng"
 #, fuzzy
 msgid "Editor options"
 msgstr " Cấu hình trình soạn thảo "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Soạn thảo "
 
 #, fuzzy
 msgid "ButtonBar|Mark"
@@ -3443,6 +3475,11 @@ msgstr ""
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3612,6 +3649,9 @@ msgstr "&Danh sách VFS hoạt động     C-x a"
 msgid "&Background jobs"
 msgstr " Công việc nền sau"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Phục hồi tập tin đã xóa (chỉ ext2fs)"
 
@@ -3662,6 +3702,10 @@ msgstr " Ở &dưới "
 #, fuzzy
 msgid "&Right"
 msgstr " Bảng &phải "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Chia bảng "
 
 #, fuzzy
 msgid "ButtonBar|Menu"
@@ -4314,6 +4358,10 @@ msgstr ""
 " Không thể lưu tập tin. \n"
 " %s "
 
+#, fuzzy
+msgid "View: "
+msgstr "Xem   "
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4359,6 +4407,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Tiến trình nền sau:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
 
 #~ msgid " Permission "
 #~ msgstr " Quyền truy cập "
@@ -4619,9 +4671,6 @@ msgstr "Tiến trình nền sau:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Ghi nhớ cấu hình"
-
-#~ msgid " Edit "
-#~ msgstr " Soạn thảo "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Tìm kiếm/Thay thế "

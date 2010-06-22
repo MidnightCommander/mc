@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -15,6 +15,25 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Датотеку `%s' већ уређује\n"
+"корисник: %s\n"
+"ИБ процеса: %d"
+
+msgid "File locked"
+msgstr "Датотека је закључана"
+
+msgid "&Grab lock"
+msgstr "&Заузми катанац"
+
+msgid "&Ignore lock"
+msgstr "З&анемари катанац"
 
 #, fuzzy
 msgid "Search string not found"
@@ -285,6 +304,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Стрелица налево"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Стрелица надесно"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Стрелица надесно"
 
 #, fuzzy
 msgid "Enter"
@@ -1573,6 +1613,9 @@ msgstr " Не могу да извршавам наредбе на не-лок. 
 msgid "The shell is already running a command"
 msgstr " Љуска већ извршава наредбу "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Отпусти"
 
@@ -1708,8 +1751,16 @@ msgid "Quit"
 msgstr "Заврши"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Датотека је измењена, да сачувам при излазу? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1940,10 +1991,6 @@ msgid "%ld replacements made"
 msgstr " Извршено %ld замена. "
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Датотека је измењена, да сачувам при излазу? "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "Поништи завршетак"
 
@@ -2116,25 +2163,6 @@ msgstr " Замени са: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Потврда замене "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Датотеку `%s' већ уређује\n"
-"корисник: %s\n"
-"ИБ процеса: %d"
-
-msgid "File locked"
-msgstr "Датотека је закључана"
-
-msgid "&Grab lock"
-msgstr "&Заузми катанац"
-
-msgid "&Ignore lock"
-msgstr "З&анемари катанац"
 
 msgid "&Open file..."
 msgstr "&Отвори датотеку..."
@@ -2433,6 +2461,10 @@ msgstr "Прелом редова"
 #, fuzzy
 msgid "Editor options"
 msgstr " Избори уређивача "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Уређивање "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3438,6 +3470,12 @@ msgstr "поред којих не стоји ознака `Да'. Притис�
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "недостајућима или прит. мишем за задавање. Креће се преко `Tab'-а."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Поноћни наредник "
@@ -3607,6 +3645,9 @@ msgstr "списак &Активних ВСД      C-x a"
 msgid "&Background jobs"
 msgstr "Позадински послови"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Одобриши датотеке (само на ext2fs)"
 
@@ -3657,6 +3698,10 @@ msgstr " и&Спод "
 #, fuzzy
 msgid "&Right"
 msgstr " &Десно "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Подела окна "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4296,6 +4341,10 @@ msgid ""
 "%s"
 msgstr " Не могу да сачувам датотеку. "
 
+#, fuzzy
+msgid "View: "
+msgstr "Преглд"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4339,6 +4388,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Позадински процес:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Датотека је измењена, да сачувам при излазу? "
 
 #~ msgid " Permission "
 #~ msgstr " Дозвола "
@@ -4598,9 +4651,6 @@ msgstr "Позадински процес:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Сачувај подешавања"
-
-#~ msgid " Edit "
-#~ msgstr " Уређивање "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Претражи/замени "

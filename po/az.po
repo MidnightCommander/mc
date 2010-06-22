@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -14,6 +14,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -284,6 +300,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Sol ox düyməsi"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Sağ ox düyməsi"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Sağ ox düyməsi"
 
 #, fuzzy
 msgid "Enter"
@@ -1580,6 +1617,9 @@ msgstr " Yerli olmayan fayl sistemləri üstündə fayl işə sala bilməzsiniz 
 msgid "The shell is already running a command"
 msgstr " Shell artıq əmri işə salıb "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Keç"
 
@@ -1714,8 +1754,16 @@ msgid "Quit"
 msgstr "Çıx"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Fayl dəyişdirilmişdir, Çıxarkən qeyd edim mi? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1948,10 +1996,6 @@ msgid "%ld replacements made"
 msgstr " %ld dəyişikliklər edildi. "
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Fayl dəyişdirilmişdir, Çıxarkən qeyd edim mi? "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "Çıxışı dayandır"
 
@@ -2127,22 +2171,6 @@ msgstr " Bunla dəyişdir: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Dəyişikliyi qəbul et"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 msgid "&Open file..."
 msgstr "Fayl &aç..."
@@ -2441,6 +2469,10 @@ msgstr "Qırma modu"
 #, fuzzy
 msgid "Editor options"
 msgstr " Düzəldici seçənəkləri"
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Düzəlt "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3443,6 +3475,12 @@ msgstr "hansı düymələr OLDU deyə işarətlənməyib. Yox isə Space düymə
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "düymə ya da siçan ilə basaraq seçin. Tab ilə gəzin."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " The Midnight Commander "
@@ -3613,6 +3651,9 @@ msgstr "&Fəal VFS siyahısi   C-x a"
 msgid "&Background jobs"
 msgstr "Arxaplan vəzifələri"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "Faylları q&urtar (sadəcə olaraq ext2fs'də)"
 
@@ -3663,6 +3704,10 @@ msgstr " &Alt"
 #, fuzzy
 msgid "&Right"
 msgstr " &Sağ "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Panel bölümü "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4298,6 +4343,10 @@ msgid ""
 "%s"
 msgstr " Faylı qeyd edərkən xəta oldu . "
 
+#, fuzzy
+msgid "View: "
+msgstr "Göstər"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4341,6 +4390,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Arxaplan gedişatı:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Fayl dəyişdirilmişdir, Çıxarkən qeyd edim mi? "
 
 #~ msgid " Permission "
 #~ msgstr " İcazələr "
@@ -4596,9 +4649,6 @@ msgstr "Arxaplan gedişatı:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "Qurğuları &Qeyd et"
-
-#~ msgid " Edit "
-#~ msgstr " Düzəlt "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Axt/Dəy "

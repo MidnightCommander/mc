@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2010-03-09\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -18,6 +18,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Bestand \"%s\" wordt al bewerkt\n"
+"Gebruiker: %s\n"
+"Proces ID: %d"
+
+msgid "File locked"
+msgstr "Bestand vergrendeld"
+
+msgid "&Grab lock"
+msgstr "Ver&Grendel"
+
+msgid "&Ignore lock"
+msgstr "Negeer vergrendel&Ing"
 
 #, fuzzy
 msgid "Search string not found"
@@ -281,6 +300,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr "Pipe"
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Pijl links"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Pijl rechts"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Pijl rechts"
 
 msgid "Enter"
 msgstr "Enter"
@@ -1558,6 +1598,9 @@ msgstr " U kunt geen opdrachten uitvoeren op non-lokale bestandssystemen"
 msgid "The shell is already running a command"
 msgstr " De shell voert al een opdracht uit "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Verwerp"
 
@@ -1694,8 +1737,16 @@ msgid "Quit"
 msgstr "Afsltn"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1920,10 +1971,6 @@ msgstr "Vervangen"
 msgid "%ld replacements made"
 msgstr " %ld vervangingen doorgevoerd. "
 
-#, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
-
 msgid "&Cancel quit"
 msgstr "&Annuleer afsluiten"
 
@@ -2095,25 +2142,6 @@ msgstr " Vervangen door: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Vervanging bevestigen "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Bestand \"%s\" wordt al bewerkt\n"
-"Gebruiker: %s\n"
-"Proces ID: %d"
-
-msgid "File locked"
-msgstr "Bestand vergrendeld"
-
-msgid "&Grab lock"
-msgstr "Ver&Grendel"
-
-msgid "&Ignore lock"
-msgstr "Negeer vergrendel&Ing"
 
 msgid "&Open file..."
 msgstr "&Open bestand..."
@@ -2377,6 +2405,10 @@ msgstr "Woordafbrekingsmodus"
 #, fuzzy
 msgid "Editor options"
 msgstr " Editoropties "
+
+#, fuzzy
+msgid "Edit: "
+msgstr "Be&Werk"
 
 msgid "ButtonBar|Mark"
 msgstr "Markr"
@@ -3379,6 +3411,12 @@ msgstr "welke toetsen niet met 'OK' gemarkeerd zijn. Geef een spatie "
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "of klik met de muis om ze te definiëren. Navigeer met Tab."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " De Midnight Commander "
@@ -3520,6 +3558,9 @@ msgstr "Actieve &VFS-lijst"
 msgid "&Background jobs"
 msgstr "&Achtergrondtaken"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Herstel bestanden (alleen ext2fs)"
 
@@ -3565,6 +3606,10 @@ msgstr "&Onder"
 
 msgid "&Right"
 msgstr "&Rechts"
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Vensterverdeling "
 
 msgid "ButtonBar|Menu"
 msgstr "Menu"
@@ -4208,6 +4253,10 @@ msgstr ""
 " Kan bestand %s niet opslaan: \n"
 " %s "
 
+#, fuzzy
+msgid "View: "
+msgstr "&Weergave"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4252,6 +4301,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Achtergrondproces:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
 
 #~ msgid " Permission "
 #~ msgstr " Rechten "

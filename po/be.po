@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -14,6 +14,25 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Файл \"%s\" быў адрэдагаваны\n"
+"Карыстальнік: %s\n"
+"PID: %d"
+
+msgid "File locked"
+msgstr "Файл заблакаваны"
+
+msgid "&Grab lock"
+msgstr "Захапіць блакоўку"
+
+msgid "&Ignore lock"
+msgstr "&Ігнараваць блакоўку"
 
 #, fuzzy
 msgid "Search string not found"
@@ -278,6 +297,27 @@ msgstr "Падкрэсленне"
 
 msgid "Pipe"
 msgstr "Канал"
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Стрэлка ўлева    "
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Стрэлка ўправа   "
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Стрэлка ўправа   "
 
 #, fuzzy
 msgid "Enter"
@@ -1557,6 +1597,9 @@ msgstr " Немагчыма выконваць каманды на нелака�
 msgid "The shell is already running a command"
 msgstr " Абалонка ўжо апрацоўвае каманду "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Закрыць"
 
@@ -1693,8 +1736,16 @@ msgid "Quit"
 msgstr "Выхад"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Файл быў зменены, захаваць пры выхадзе? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1919,10 +1970,6 @@ msgstr "Замяніць"
 msgid "%ld replacements made"
 msgstr " Здзейснена падстановак: %ld "
 
-#, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Файл быў зменены, захаваць пры выхадзе? "
-
 msgid "&Cancel quit"
 msgstr "Пера&рваць выхад"
 
@@ -2094,25 +2141,6 @@ msgstr " Замяніць на: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Пацвердзіць замену "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Файл \"%s\" быў адрэдагаваны\n"
-"Карыстальнік: %s\n"
-"PID: %d"
-
-msgid "File locked"
-msgstr "Файл заблакаваны"
-
-msgid "&Grab lock"
-msgstr "Захапіць блакоўку"
-
-msgid "&Ignore lock"
-msgstr "&Ігнараваць блакоўку"
 
 msgid "&Open file..."
 msgstr "&Адкрыць файл..."
@@ -2360,6 +2388,10 @@ msgstr "Рэжым пераносу радкоў"
 #, fuzzy
 msgid "Editor options"
 msgstr " Наладкі рэдактару "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Рэдагаванне "
 
 msgid "ButtonBar|Mark"
 msgstr "Пазнч"
@@ -3375,6 +3407,13 @@ msgstr "якія клавішы не маюць адзнакі Так. Для н
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "яе пры дапамозе Tab ці мышшу і націсніце прагал."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3528,6 +3567,9 @@ msgstr "Сп&іс актыўных ВФС    C-x a"
 msgid "&Background jobs"
 msgstr "Заданні ў тле"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "Ад&наўленне файлаў (толькі ext2)"
 
@@ -3576,6 +3618,10 @@ msgstr " Ні&жняя "
 
 msgid "&Right"
 msgstr "&Правая панэль"
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Раздзяленне панэляў "
 
 msgid "ButtonBar|Menu"
 msgstr "Меню"
@@ -4221,6 +4267,10 @@ msgstr ""
 " Немагчыма захаваць файл: %s\n"
 "%s "
 
+#, fuzzy
+msgid "View: "
+msgstr "&Прагляд"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4263,6 +4313,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Працэс у тле:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Файл быў зменены, захаваць пры выхадзе? "
 
 #~ msgid " Permission "
 #~ msgstr " Правы доступу "
@@ -4506,9 +4560,6 @@ msgstr "Працэс у тле:"
 
 #~ msgid "Save setu&p"
 #~ msgstr "&Захаваць наладку"
-
-#~ msgid " Edit "
-#~ msgstr " Рэдагаванне "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Пошук/Замена "

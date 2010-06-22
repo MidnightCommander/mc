@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2010-06-10 18:44+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
@@ -15,6 +15,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Plik \"%s\" jest teraz modyfikowany.\n"
+"Użytkownik: %s\n"
+"Identyfikator procesu: %d"
+
+msgid "File locked"
+msgstr "Zablokowany plik"
+
+msgid "&Grab lock"
+msgstr "&Ustaw blokadę"
+
+msgid "&Ignore lock"
+msgstr "Z&ignoruj blokadę"
 
 msgid "Search string not found"
 msgstr "Nie odnaleziono wyszukiwanego napisu"
@@ -276,6 +295,27 @@ msgstr "Przekreślenie"
 
 msgid "Pipe"
 msgstr "Potok"
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Strzałka w lewo   "
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Strzałka w prawo  "
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Strzałka w prawo  "
 
 msgid "Enter"
 msgstr "Enter"
@@ -1480,6 +1520,9 @@ msgstr "Polecenia można wykonywać tylko na lokalnym systemie plików"
 msgid "The shell is already running a command"
 msgstr "Powłoka wykonuje już polecenie"
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Porzuć"
 
@@ -1602,8 +1645,17 @@ msgstr "Kończ"
 msgid "Quit"
 msgstr "Zakończ"
 
-msgid "File was modified, Save with exit?"
+#, fuzzy
+msgid "File was modified. Save with exit?"
 msgstr "Plik został zmodyfikowany. Zapisać przed zakończeniem?"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr "Wymagane są dwa pliki do porównania"
@@ -1806,9 +1858,6 @@ msgstr "Zastąp"
 msgid "%ld replacements made"
 msgstr "Wykonano %ld zastąpień"
 
-msgid "File was modified, save with exit?"
-msgstr "Plik został zmodyfikowany. Zapisać przed zakończeniem?"
-
 msgid "&Cancel quit"
 msgstr "N&ie zamykaj"
 
@@ -1954,25 +2003,6 @@ msgstr "Zastąpienie napisem:"
 
 msgid "Confirm replace"
 msgstr "Potwierdź zastąpienie"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Plik \"%s\" jest teraz modyfikowany.\n"
-"Użytkownik: %s\n"
-"Identyfikator procesu: %d"
-
-msgid "File locked"
-msgstr "Zablokowany plik"
-
-msgid "&Grab lock"
-msgstr "&Ustaw blokadę"
-
-msgid "&Ignore lock"
-msgstr "Z&ignoruj blokadę"
 
 msgid "&Open file..."
 msgstr "&Otwórz plik..."
@@ -2213,6 +2243,10 @@ msgstr "Tryb zawijania"
 
 msgid "Editor options"
 msgstr "Opcje edytora"
+
+#, fuzzy
+msgid "Edit: "
+msgstr "Edycja"
 
 msgid "ButtonBar|Mark"
 msgstr "Zazncz"
@@ -3172,6 +3206,13 @@ msgstr "które nie są oznaczone jako \"OK\". Naciśnięcie spacji na brakujący
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "klawiszu lub kliknięcie określi go. Poruszanie za pomocą klawisza Tab."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
 
@@ -3307,6 +3348,9 @@ msgstr "Lista &aktywnych VFS"
 msgid "&Background jobs"
 msgstr "Zadania w &tle"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Odtwórz pliki (tylko system plików ext2)"
 
@@ -3351,6 +3395,10 @@ msgstr "&Poniżej"
 
 msgid "&Right"
 msgstr "P&rawy"
+
+#, fuzzy
+msgid "Panels:"
+msgstr "Podział na panele"
 
 msgid "ButtonBar|Menu"
 msgstr "Menu"
@@ -3944,6 +3992,10 @@ msgstr ""
 "Nie można zapisać pliku:\n"
 "%s"
 
+#, fuzzy
+msgid "View: "
+msgstr "&Podgląd"
+
 #, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -3984,3 +4036,6 @@ msgstr "Wyczyścić tę historię?"
 
 msgid "Background process:"
 msgstr "Proces w tle:"
+
+#~ msgid "File was modified, save with exit?"
+#~ msgstr "Plik został zmodyfikowany. Zapisać przed zakończeniem?"

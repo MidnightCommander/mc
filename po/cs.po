@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2010-03-14 14:00+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -21,6 +21,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Soubor „%s“ je již editován\n"
+"Uživatel: %s\n"
+"Číslo procesu: %d"
+
+msgid "File locked"
+msgstr "Soubor zamčen"
+
+msgid "&Grab lock"
+msgstr "&Převzít zámek"
+
+msgid "&Ignore lock"
+msgstr "&Ignorovat zámek"
 
 #, fuzzy
 msgid "Search string not found"
@@ -284,6 +303,27 @@ msgstr "Podtržení"
 
 msgid "Pipe"
 msgstr "Roura"
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Šipka vlevo"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Šipka vpravo"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Šipka vpravo"
 
 msgid "Enter"
 msgstr "Enter"
@@ -1562,6 +1602,9 @@ msgstr " Pokud nepracujete s lokálními soubory, nelze spouštět žádné př�
 msgid "The shell is already running a command"
 msgstr " Shell už provádí příkaz "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Odmítnout"
 
@@ -1698,8 +1741,16 @@ msgid "Quit"
 msgstr "Konec"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Soubor byl změněn, uložit při odchodu? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1925,10 +1976,6 @@ msgstr "Nahradit"
 msgid "%ld replacements made"
 msgstr " Provedeno %ld nahrazení. "
 
-#, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Soubor byl změněn, uložit při odchodu? "
-
 msgid "&Cancel quit"
 msgstr "&Zrušit odchod"
 
@@ -2100,25 +2147,6 @@ msgstr " Nahradit textem: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Potvrdit náhradu "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Soubor „%s“ je již editován\n"
-"Uživatel: %s\n"
-"Číslo procesu: %d"
-
-msgid "File locked"
-msgstr "Soubor zamčen"
-
-msgid "&Grab lock"
-msgstr "&Převzít zámek"
-
-msgid "&Ignore lock"
-msgstr "&Ignorovat zámek"
 
 msgid "&Open file..."
 msgstr "&Otevřít soubor..."
@@ -2363,6 +2391,10 @@ msgstr "Režim zalamování"
 #, fuzzy
 msgid "Editor options"
 msgstr " Nastavení editoru "
+
+#, fuzzy
+msgid "Edit: "
+msgstr "&Upravit"
 
 msgid "ButtonBar|Mark"
 msgstr "TlačítkováLišta|Označ"
@@ -3370,6 +3402,13 @@ msgstr "zkontrolujte klávesy, které nejsou označeny OK. Tam stiskněte mezern
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "nebo klikněte myší. Po položkách se pohybujte pomocí tabulátoru."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3511,6 +3550,9 @@ msgstr "Seznam a&ktivních VFS"
 msgid "&Background jobs"
 msgstr "Úlohy na po&zadí"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Obnovit smazané soubory (jen ext2fs)"
 
@@ -3556,6 +3598,10 @@ msgstr "&Níže"
 
 msgid "&Right"
 msgstr "P&ravý"
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Rozdělení panelů "
 
 msgid "ButtonBar|Menu"
 msgstr "ButtonBar|Menu"
@@ -4201,6 +4247,10 @@ msgstr ""
 "Nemohu uložit soubor %s:\n"
 "%s"
 
+#, fuzzy
+msgid "View: "
+msgstr "&Prohlížet"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4243,6 +4293,10 @@ msgstr "Chcete smazat tuto historii?"
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Soubor byl změněn, uložit při odchodu? "
 
 #~ msgid " Permission "
 #~ msgstr " Práva "

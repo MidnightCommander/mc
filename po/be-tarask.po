@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -11,6 +11,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -281,6 +297,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Стрэлка ўлева    "
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Стрэлка ўправа   "
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Стрэлка ўправа   "
 
 #, fuzzy
 msgid "Enter"
@@ -1560,6 +1597,9 @@ msgstr " Немагчыма выконваць каманды на не ляка
 msgid "The shell is already running a command"
 msgstr " Інтэрпрэтатар ужо апрацоўвае каманду "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Зачыніць"
 
@@ -1694,8 +1734,16 @@ msgid "Quit"
 msgstr "Выхад"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Файл быў зьменены, захаваць пры выхадзе? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1928,10 +1976,6 @@ msgid "%ld replacements made"
 msgstr " Зьдейсьнена падстановак: %ld "
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Файл быў зьменены, захаваць пры выхадзе? "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "Перарваць выхад"
 
@@ -2107,22 +2151,6 @@ msgstr " Замяніць на: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Падцьвердзіць замену "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 msgid "&Open file..."
 msgstr "&Адчыніць файл..."
@@ -2421,6 +2449,10 @@ msgstr "Рэжым пераносу радкоў"
 #, fuzzy
 msgid "Editor options"
 msgstr " Наладка рэдактару "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Рэдагаваньне "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3424,6 +3456,12 @@ msgstr "якія клявішы ня маюць адзнакі Так. Для н
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "яе пры дапамозе Tab ці мышшу й націсьніце прагал."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3593,6 +3631,9 @@ msgstr "&Сьпіс актыўных ВФС   C-x a"
 msgid "&Background jobs"
 msgstr " Заданьні ў тле "
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "Ад&наўленьне файлаў"
 
@@ -3643,6 +3684,10 @@ msgstr " Ні&жняя "
 #, fuzzy
 msgid "&Right"
 msgstr " &Правая панэль "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Расшчапленьне панеляў "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4279,6 +4324,10 @@ msgid ""
 "%s"
 msgstr " Памылка пры захаваньні файлу "
 
+#, fuzzy
+msgid "View: "
+msgstr "Прагляд"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4322,6 +4371,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Працэс у тле:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Файл быў зьменены, захаваць пры выхадзе? "
 
 #~ msgid " Permission "
 #~ msgstr " Правы доступу "
@@ -4577,9 +4630,6 @@ msgstr "Працэс у тле:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Захаваць наладку"
-
-#~ msgid " Edit "
-#~ msgstr " Рэдагаваньне "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Пошук/Замена "

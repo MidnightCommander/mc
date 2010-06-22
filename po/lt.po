@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -16,6 +16,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
 "100<10 || n%100>=20) ? 1 : 2;\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Failas „%s“ jau taisoma\n"
+"Naudotojas: %s\n"
+"Proceso ID: %d"
+
+msgid "File locked"
+msgstr "Failas užrakintas"
+
+msgid "&Grab lock"
+msgstr "&Paimti užraktą"
+
+msgid "&Ignore lock"
+msgstr "&Ignoruoti užraktą"
 
 #, fuzzy
 msgid "Search string not found"
@@ -285,6 +304,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "„Kairėn“"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "„Dešinėn“"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "„Dešinėn“"
 
 #, fuzzy
 msgid "Enter"
@@ -1573,6 +1613,9 @@ msgstr "Negalima vykdyti komandų nevietinėje failų sistemoje"
 msgid "The shell is already running a command"
 msgstr " Aplinkoje jau vykdoma komanda "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "At&mesti"
 
@@ -1710,8 +1753,16 @@ msgid "Quit"
 msgstr "Išeiti"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Failas buvo pakeistas, įrašyti išeinant? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1939,10 +1990,6 @@ msgstr "Pa&keisti"
 msgid "%ld replacements made"
 msgstr " Atlikta %ld pakeitimų. "
 
-#, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Failas buvo pakeistas, įrašyti išeinant? "
-
 msgid "&Cancel quit"
 msgstr "&Neišeiti"
 
@@ -2116,25 +2163,6 @@ msgstr " Pakeisti su: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Patvirtinti pakeitimą "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Failas „%s“ jau taisoma\n"
-"Naudotojas: %s\n"
-"Proceso ID: %d"
-
-msgid "File locked"
-msgstr "Failas užrakintas"
-
-msgid "&Grab lock"
-msgstr "&Paimti užraktą"
-
-msgid "&Ignore lock"
-msgstr "&Ignoruoti užraktą"
 
 msgid "&Open file..."
 msgstr "At&verti failą..."
@@ -2433,6 +2461,10 @@ msgstr "Eilučių laužymas"
 #, fuzzy
 msgid "Editor options"
 msgstr " Nustatymai "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Taisa "
 
 #, fuzzy
 msgid "ButtonBar|Mark"
@@ -3443,6 +3475,13 @@ msgstr "patikrinkite, kurie iš jų nepažymėti „OK“. Paspauskite jį tarpu
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ar pele ir nurodykite jį. Naudokitės TAB perėjimui prie kitų."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3612,6 +3651,9 @@ msgstr "Aktyvių VFS sąrašas  C-x a"
 msgid "&Background jobs"
 msgstr "Darbai fone"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "Atk&urti failus  (tik ext2fs)"
 
@@ -3662,6 +3704,10 @@ msgstr " Ž&emiau "
 #, fuzzy
 msgid "&Right"
 msgstr " &Dešinysis skydas "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Skydų dalijimas "
 
 #, fuzzy
 msgid "ButtonBar|Menu"
@@ -4316,6 +4362,10 @@ msgstr ""
 " Nepavyko įrašyti failo: \n"
 " %s "
 
+#, fuzzy
+msgid "View: "
+msgstr "Rodyti"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4359,6 +4409,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Foninis procesas:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Failas buvo pakeistas, įrašyti išeinant? "
 
 #~ msgid " Permission "
 #~ msgstr " Leidimai "
@@ -4618,9 +4672,6 @@ msgstr "Foninis procesas:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "Įrašyti nu&statymus"
-
-#~ msgid " Edit "
-#~ msgstr " Taisa "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Rasti/pakeisti "

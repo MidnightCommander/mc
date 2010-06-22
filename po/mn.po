@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -287,6 +303,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Зүүн тийшээ товч    "
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Баруун тийшээ товч   "
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Баруун тийшээ товч   "
 
 #, fuzzy
 msgid "Enter"
@@ -1577,6 +1614,9 @@ msgstr " Локал бус файл систем дэх командуудыг �
 msgid "The shell is already running a command"
 msgstr " shell коммандыг аль хэдийнэ биелүүлж байна "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Хаах"
 
@@ -1711,8 +1751,16 @@ msgid "Quit"
 msgstr "Гарах"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Файл засварлагдсан байна, Хадгалж гарах уу? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1943,10 +1991,6 @@ msgid "%ld replacements made"
 msgstr " %ld нь солигдсон байна"
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Файл засварлагдсан байна, Хадгалж гарах уу? "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "Болих гарах"
 
@@ -2124,22 +2168,6 @@ msgstr " Цуг солих: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Солихыг баталгаажуулах "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 msgid "&Open file..."
 msgstr "Файл &нээх..."
@@ -2437,6 +2465,10 @@ msgstr "Таслагч горим"
 #, fuzzy
 msgid "Editor options"
 msgstr " Засварлагчын тохиргоо "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Засварлах "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3441,6 +3473,12 @@ msgstr ""
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "товчлуур эсвэл хулганаар дарж үүнийг тодорхойлно. Табын хамт зөөнө."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3610,6 +3648,9 @@ msgstr "&Идэвхтэй VFS жагсаалт C-x a"
 msgid "&Background jobs"
 msgstr " Арын ажилууд "
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Сэргээгдсэн файлууд (зөвхөн ext2fs)"
 
@@ -3660,6 +3701,10 @@ msgstr " &Доод "
 #, fuzzy
 msgid "&Right"
 msgstr " &Баруун "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Панелийг хуваах "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4294,6 +4339,10 @@ msgid ""
 "%s"
 msgstr " Файлыг хадгалж чадсангүй "
 
+#, fuzzy
+msgid "View: "
+msgstr "Харах"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4337,6 +4386,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Арын процесс:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Файл засварлагдсан байна, Хадгалж гарах уу? "
 
 #~ msgid " Permission "
 #~ msgstr " Зөвшөөрөл "
@@ -4596,9 +4649,6 @@ msgstr "Арын процесс:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Тохиргоо хадгалах"
-
-#~ msgid " Edit "
-#~ msgstr " Засварлах "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Хайх/Солих "

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.x\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2010-06-08 12:00-0000\n"
 "Last-Translator: Sebastian Siebert <freespacer@gmx.de>\n"
 "Language-Team: German <freespacer@gmx.de>\n"
@@ -21,6 +21,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de_DE\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Die Datei \"%s\" wird schon bearbeitet.\n"
+"Benutzer: %s\n"
+"Prozess-ID: %d"
+
+msgid "File locked"
+msgstr "Die Datei ist gerade gesperrt"
+
+msgid "&Grab lock"
+msgstr "Sperre &aufheben"
+
+msgid "&Ignore lock"
+msgstr "Sperre &ignorieren"
 
 msgid "Search string not found"
 msgstr "Suchstring nicht gefunden"
@@ -283,6 +302,27 @@ msgstr "Unterstrich"
 
 msgid "Pipe"
 msgstr "Pipe"
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Cursor links"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Cursor rechts"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Cursor rechts"
 
 msgid "Enter"
 msgstr "Enter"
@@ -1488,6 +1528,9 @@ msgstr "Sie können keine Befehle auf nichtlokalen Dateisystemen ausführen"
 msgid "The shell is already running a command"
 msgstr "Die Shell führt bereits einen Befehl aus"
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "S&chließen"
 
@@ -1610,8 +1653,17 @@ msgstr "ButtonBar|Beenden"
 msgid "Quit"
 msgstr "Beenden"
 
-msgid "File was modified, Save with exit?"
+#, fuzzy
+msgid "File was modified. Save with exit?"
 msgstr "Datei wurde geändert, beim Beenden speichern?"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr "2 Dateien sind zum Vergleichen erforderlich"
@@ -1815,9 +1867,6 @@ msgstr "Ersetzen"
 msgid "%ld replacements made"
 msgstr "%ld Ersetzungen durchgeführt."
 
-msgid "File was modified, save with exit?"
-msgstr "Datei wurde geändert, beim Beenden speichern?"
-
 msgid "&Cancel quit"
 msgstr "Doch nicht beenden"
 
@@ -1961,25 +2010,6 @@ msgstr "Ersetzen mit:"
 
 msgid "Confirm replace"
 msgstr "Ersetzen bestätigen"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Die Datei \"%s\" wird schon bearbeitet.\n"
-"Benutzer: %s\n"
-"Prozess-ID: %d"
-
-msgid "File locked"
-msgstr "Die Datei ist gerade gesperrt"
-
-msgid "&Grab lock"
-msgstr "Sperre &aufheben"
-
-msgid "&Ignore lock"
-msgstr "Sperre &ignorieren"
 
 msgid "&Open file..."
 msgstr "Datei ö&ffnen..."
@@ -2220,6 +2250,10 @@ msgstr "Automatischer Umbruch"
 
 msgid "Editor options"
 msgstr "Editoroptionen"
+
+#, fuzzy
+msgid "Edit: "
+msgstr "&Bearbeiten"
 
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|Markieren"
@@ -3179,6 +3213,12 @@ msgstr "welche Tasten nicht mit OK markiert sind. Drücken Sie die Leertaste"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "oder arbeiten Sie mit der Maus, um sie zu definieren. "
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "The Midnight Commander"
 msgstr "Der Midnight Commander"
 
@@ -3314,6 +3354,9 @@ msgstr "&Aktive VFS-Liste"
 msgid "&Background jobs"
 msgstr "Hintergrund-Aufga&ben"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "Löschen rückgängig (nur ext2fs)"
 
@@ -3358,6 +3401,10 @@ msgstr "&Unten"
 
 msgid "&Right"
 msgstr "&Rechts"
+
+#, fuzzy
+msgid "Panels:"
+msgstr "Panelaufteilung"
 
 msgid "ButtonBar|Menu"
 msgstr "ButtonBar|Menü"
@@ -3950,6 +3997,10 @@ msgstr ""
 "Kann Datei nicht speichern:\n"
 "%s"
 
+#, fuzzy
+msgid "View: "
+msgstr "&Ansicht"
+
 #, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -3990,3 +4041,6 @@ msgstr "Möchten Sie wirklich die Chronik löschen?"
 
 msgid "Background process:"
 msgstr "Hintergrundprozess:"
+
+#~ msgid "File was modified, save with exit?"
+#~ msgstr "Datei wurde geändert, beim Beenden speichern?"

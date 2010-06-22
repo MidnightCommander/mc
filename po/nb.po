@@ -5,13 +5,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -282,6 +298,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Venstrepil"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Høyrepil"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Høyrepil"
 
 #, fuzzy
 msgid "Enter"
@@ -1575,6 +1612,9 @@ msgstr " Kan ikke kjøre kommandoer på ikke-lokale filsystemer"
 msgid "The shell is already running a command"
 msgstr " Skallet kjører allerede en kommando "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "Forkast"
 
@@ -1709,8 +1749,16 @@ msgid "Quit"
 msgstr "Slutt"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Filen ble endret, Lagre ved avslutting? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1942,10 +1990,6 @@ msgid "%ld replacements made"
 msgstr " %ld erstatninger utført. "
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Filen ble endret, Lagre ved avslutting? "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "Avbryt avslutt"
 
@@ -2121,22 +2165,6 @@ msgstr " Erstatt med: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Bekreft erstatt "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 msgid "&Open file..."
 msgstr "&Åpne fil..."
@@ -2435,6 +2463,10 @@ msgstr "Brytningsmodus"
 #, fuzzy
 msgid "Editor options"
 msgstr " Alternativer for redigerer "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Rediger "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3437,6 +3469,12 @@ msgstr "hvilke taster som ikke er markert med OK. Trykk mellomrom på manglende"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tast, eller klikk med musen for å definere den. Flytt med Tab."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3606,6 +3644,9 @@ msgstr "Aktivt VFS liste     C-x a"
 msgid "&Background jobs"
 msgstr "Bakgrunnsjobber"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "Gjenopprett filer (kun ext2fs)"
 
@@ -3656,6 +3697,10 @@ msgstr " Under "
 #, fuzzy
 msgid "&Right"
 msgstr " Høyre "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Del panel "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4291,6 +4336,10 @@ msgid ""
 "%s"
 msgstr " Feil under lagring av fil. "
 
+#, fuzzy
+msgid "View: "
+msgstr "Se på"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4334,6 +4383,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Bakgrunnsprosess:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Filen ble endret, Lagre ved avslutting? "
 
 #~ msgid " Permission "
 #~ msgstr " Rettighet "
@@ -4589,9 +4642,6 @@ msgstr "Bakgrunnsprosess:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "Lagre oppsett"
-
-#~ msgid " Edit "
-#~ msgstr " Rediger "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Søk/Erstatt "

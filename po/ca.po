@@ -7,13 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -284,6 +300,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Cursor esquerra"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Cursor dreta"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Cursor dreta"
 
 #, fuzzy
 msgid "Enter"
@@ -1586,6 +1623,9 @@ msgstr " No podeu executar ordres a sistemes de fitxers no-locals"
 msgid "The shell is already running a command"
 msgstr " L'intèrpret ja esta executant una comanda "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Ignora"
 
@@ -1720,8 +1760,16 @@ msgid "Quit"
 msgstr "Surt"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " El fitxer s'ha modificat. El deso en sortir? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1954,10 +2002,6 @@ msgid "%ld replacements made"
 msgstr " S'han fet %ld reemplaçaments. "
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " El fitxer s'ha modificat. El deso en sortir? "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "Cancel·la la sortida"
 
@@ -2134,22 +2178,6 @@ msgstr " Reemplaça amb: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Confirma el reemplaçament "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 msgid "&Open file..."
 msgstr "&Obre el fitxer..."
@@ -2448,6 +2476,10 @@ msgstr "Mode d'ajustament"
 #, fuzzy
 msgid "Editor options"
 msgstr " Opcions de l'editor "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Edició "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3454,6 +3486,12 @@ msgstr ""
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "l'espai o feu-hi clic. Per desplaçar-vos, utilitzeu el tabulador."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " El Midnight Commander "
@@ -3624,6 +3662,9 @@ msgstr "llista de VFSs &Actius   C-x a"
 msgid "&Background jobs"
 msgstr "Tasques de fons"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Recupera els fitxers (sols ext2fs)"
 
@@ -3674,6 +3715,10 @@ msgstr " a bai&X "
 #, fuzzy
 msgid "&Right"
 msgstr " &Dreta "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Divisió de quadres "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4314,6 +4359,10 @@ msgid ""
 "%s"
 msgstr " S'ha produït un error en intentar desar el fitxer. "
 
+#, fuzzy
+msgid "View: "
+msgstr "Vista"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4357,6 +4406,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Procés de fons:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " El fitxer s'ha modificat. El deso en sortir? "
 
 #~ msgid " Permission "
 #~ msgstr " Permisos "
@@ -4613,9 +4666,6 @@ msgstr "Procés de fons:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Desa la configuració"
-
-#~ msgid " Edit "
-#~ msgstr " Edició "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Cerca/Reempl "

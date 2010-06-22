@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: SZABO Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -18,6 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.9.1\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"A(z) \"%s\" fájl már szerkesztés alatt áll\n"
+"Felhasználó: %s\n"
+"Folyamatazonosító: %d"
+
+msgid "File locked"
+msgstr "A fájl zárolva van"
+
+msgid "&Grab lock"
+msgstr "Zárolás át&vétele"
+
+msgid "&Ignore lock"
+msgstr "&Nem érdekes, tovább"
 
 #, fuzzy
 msgid "Search string not found"
@@ -281,6 +300,27 @@ msgstr "Aláhúzás"
 
 msgid "Pipe"
 msgstr "Cső"
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "<Balra> gomb"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "<Jobbra> gomb"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "<Jobbra> gomb"
 
 msgid "Enter"
 msgstr "Enter"
@@ -1578,6 +1618,9 @@ msgstr " Távoli fájlrendszeren nem lehet végrehajtani a parancsokat "
 msgid "The shell is already running a command"
 msgstr " A parancsértelmező már futtat egy parancsot. "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Tovább"
 
@@ -1718,8 +1761,16 @@ msgid "Quit"
 msgstr "Kilép"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " A fájl módosult. Menti kilépéskor? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1946,10 +1997,6 @@ msgstr "&Csere"
 msgid "%ld replacements made"
 msgstr " %ld csere történt. "
 
-#, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " A fájl módosult. Menti kilépéskor? "
-
 msgid "&Cancel quit"
 msgstr "&Mégsem lép ki"
 
@@ -2122,25 +2169,6 @@ msgstr " Csere erre: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Csere megerősítése "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"A(z) \"%s\" fájl már szerkesztés alatt áll\n"
-"Felhasználó: %s\n"
-"Folyamatazonosító: %d"
-
-msgid "File locked"
-msgstr "A fájl zárolva van"
-
-msgid "&Grab lock"
-msgstr "Zárolás át&vétele"
-
-msgid "&Ignore lock"
-msgstr "&Nem érdekes, tovább"
 
 # !! osszevetni az mc-ssel...
 msgid "&Open file..."
@@ -2392,6 +2420,10 @@ msgstr "Tördelés"
 #, fuzzy
 msgid "Editor options"
 msgstr " A szövegszerkesztő beállításai "
+
+#, fuzzy
+msgid "Edit: "
+msgstr "Szerkeszt"
 
 msgid "ButtonBar|Mark"
 msgstr "Jelöl"
@@ -3423,6 +3455,12 @@ msgstr "melyek nem lettek \"OK\"-val megjelölve. Ezek beállításához haszná
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "a Szóközt vagy kattintson a billentyűnévre. Ugrás: \"Tab\" billentyű."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3565,6 +3603,9 @@ msgstr "&Aktív VFS-lista"
 msgid "&Background jobs"
 msgstr "Háttérfolyamatok"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Törölt fájlok visszaállítása"
 
@@ -3610,6 +3651,10 @@ msgstr "&Lent"
 
 msgid "&Right"
 msgstr "&Jobb"
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Panelosztás "
 
 msgid "ButtonBar|Menu"
 msgstr "Menü"
@@ -4260,6 +4305,10 @@ msgstr ""
 "Az %s fájl nem menthető:\n"
 "%s"
 
+#, fuzzy
+msgid "View: "
+msgstr "Megnéz"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4303,6 +4352,10 @@ msgstr "Előzmények törlése?"
 
 msgid "Background process:"
 msgstr "Háttérfolyamat:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " A fájl módosult. Menti kilépéskor? "
 
 #~ msgid " Permission "
 #~ msgstr " Jogosultságok "

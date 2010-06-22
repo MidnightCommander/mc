@@ -7,13 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -284,6 +300,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "左矢印"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "右矢印"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "右矢印"
 
 #, fuzzy
 msgid "Enter"
@@ -1574,6 +1611,9 @@ msgstr " 非ローカルのファイルシステム上ではコマンドを実�
 msgid "The shell is already running a command"
 msgstr " シェルはすでにコマンドを実行中です "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "消去(&D)"
 
@@ -1708,8 +1748,16 @@ msgid "Quit"
 msgstr "終了"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr "ファイルに変更が加えられています。保存して終了しますか?"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1942,10 +1990,6 @@ msgid "%ld replacements made"
 msgstr "%ld 個置換しました"
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr "ファイルに変更が加えられています。保存して終了しますか?"
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "終了を中止"
 
@@ -2122,22 +2166,6 @@ msgstr " 置き換える文字列: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " 確認置換 "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 msgid "&Open file..."
 msgstr "ファイルを開く(&O)..."
@@ -2436,6 +2464,10 @@ msgstr "折り返し方法"
 #, fuzzy
 msgid "Editor options"
 msgstr " エディタ・オプション "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " 編集 "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3438,6 +3470,12 @@ msgstr "「良」のマークのないキーをチェックします。そのキ
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "スかマウスを押してキー定義を実行してください。TABで移動できます"
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " The Midnight Commander "
@@ -3608,6 +3646,9 @@ msgstr "アクティブなVFS一覧(&V)      C-x a"
 msgid "&Background jobs"
 msgstr "バックグラウンドジョブ"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "ファイルの復活(&U) (ext2fsのみ)"
 
@@ -3658,6 +3699,10 @@ msgstr " 下(&B) "
 #, fuzzy
 msgid "&Right"
 msgstr " 右(&R) "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " パネル分割 "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4293,6 +4338,10 @@ msgid ""
 "%s"
 msgstr "ファイルの保存時にエラーが発生しました"
 
+#, fuzzy
+msgid "View: "
+msgstr "表示"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4336,6 +4385,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "バックグラウンド処理:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr "ファイルに変更が加えられています。保存して終了しますか?"
 
 #~ msgid " Permission "
 #~ msgstr " パーミッション "
@@ -4591,9 +4644,6 @@ msgstr "バックグラウンド処理:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "設定保存(&S)"
-
-#~ msgid " Edit "
-#~ msgstr " 編集 "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " 検索・置換 "

@@ -7,13 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese Traditional <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -284,6 +300,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "向左鍵"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "向右鍵"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "向右鍵"
 
 #, fuzzy
 msgid "Enter"
@@ -1581,6 +1618,9 @@ msgstr " 不能在非本地端的檔案系統上執行指令 "
 msgid "The shell is already running a command"
 msgstr " 此系統殼正在執行指令中 "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "關閉"
 
@@ -1715,8 +1755,16 @@ msgid "Quit"
 msgstr "結束"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " 檔案已經有更動過，在離開前先存檔？ "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1948,10 +1996,6 @@ msgid "%ld replacements made"
 msgstr " 執行了 %ld 次替換。 "
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " 檔案已經有更動過，在離開前先存檔？ "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "取消結束"
 
@@ -2127,22 +2171,6 @@ msgstr " 以此替換：　"
 #, fuzzy
 msgid "Confirm replace"
 msgstr " 確定替換 "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 #, fuzzy
 msgid "&Open file..."
@@ -2442,6 +2470,10 @@ msgstr "換行模式"
 #, fuzzy
 msgid "Editor options"
 msgstr " 編輯器選項 "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " 編輯 "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3444,6 +3476,12 @@ msgstr "哪個按鍵沒有標上 \"好\"，在這些地方按一下空白鍵，�
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "用滑鼠控制來設定這些按鍵。用 Tab 鍵可以在選項之間移動。"
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " The Midnight Commander "
@@ -3614,6 +3652,9 @@ msgstr "啟動的虛擬檔案系統列表    C-x a"
 msgid "&Background jobs"
 msgstr "背景工作"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "復原檔案 (只能用在 ext2fs 上面)"
 
@@ -3664,6 +3705,10 @@ msgstr " 下方 "
 #, fuzzy
 msgid "&Right"
 msgstr " 右方 "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " 分割面板 "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4300,6 +4345,10 @@ msgid ""
 "%s"
 msgstr " 試著存檔時發生錯誤。 "
 
+#, fuzzy
+msgid "View: "
+msgstr "檢視"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4343,6 +4392,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "背景程序："
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " 檔案已經有更動過，在離開前先存檔？ "
 
 #~ msgid " Permission "
 #~ msgstr " 權限 "
@@ -4598,9 +4651,6 @@ msgstr "背景程序："
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "儲存設定"
-
-#~ msgid " Edit "
-#~ msgstr " 編輯 "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " 搜尋/替換 "

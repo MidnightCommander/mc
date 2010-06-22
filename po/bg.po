@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -11,6 +11,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -275,6 +291,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Лява стрелка"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Дясна стрелка"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Дясна стрелка"
 
 msgid "Enter"
 msgstr "Enter"
@@ -1567,6 +1604,9 @@ msgstr " Не може да изпълнявате команди на не-ло
 msgid "The shell is already running a command"
 msgstr " Обвивката вече изпълнява команда "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "Затвори"
 
@@ -1701,8 +1741,16 @@ msgid "Quit"
 msgstr "Изход"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " Файлът е модифициран, да го запазя ли? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1935,10 +1983,6 @@ msgid "%ld replacements made"
 msgstr " %ld замени направени. "
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " Файлът е модифициран, да го запазя ли? "
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr "Отмени изхода"
 
@@ -2115,22 +2159,6 @@ msgstr " Замести с:"
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Потвърдете замяната "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 msgid "&Open file..."
 msgstr "Отвори файл..."
@@ -2429,6 +2457,10 @@ msgstr "Режим на пренасяне"
 #, fuzzy
 msgid "Editor options"
 msgstr " Опции на редактора "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Редактирай "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3431,6 +3463,12 @@ msgstr "проверете кои не са маркирани с OK. Натис
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "или ги щракнете с мишката, за да ги дефинирате. Движете се с Tab."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " The Midnight Commander "
@@ -3601,6 +3639,9 @@ msgstr "Списик на активни ВФС   C-x a"
 msgid "&Background jobs"
 msgstr "Фонови процеси"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "Възстанови файлове (само ext2fs)"
 
@@ -3651,6 +3692,10 @@ msgstr " Долен "
 #, fuzzy
 msgid "&Right"
 msgstr " Десен "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Разделяне на панела "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4286,6 +4331,10 @@ msgid ""
 "%s"
 msgstr " Грешка при запазване на файла. "
 
+#, fuzzy
+msgid "View: "
+msgstr "Покажи"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4329,6 +4378,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Фонов процес:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " Файлът е модифициран, да го запазя ли? "
 
 #~ msgid " Permission "
 #~ msgstr " Режим "
@@ -4564,9 +4617,6 @@ msgstr "Фонов процес:"
 
 #~ msgid "Save setu&p"
 #~ msgstr "Запази настройките"
-
-#~ msgid " Edit "
-#~ msgstr " Редактирай "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Търси/Замести "

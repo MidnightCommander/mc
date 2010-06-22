@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.2\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2010-05-08 16:30+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -15,6 +15,25 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"El archivo \"%s\" está ya siendo editado\n"
+"Usuario: %s\n"
+"Id. Proceso: %d"
+
+msgid "File locked"
+msgstr "Archivo bloqueado"
+
+msgid "&Grab lock"
+msgstr "tomar &Bloqueo"
+
+msgid "&Ignore lock"
+msgstr "&Ignorar bloqueo"
 
 #, fuzzy
 msgid "Search string not found"
@@ -278,6 +297,27 @@ msgstr "Guión bajo"
 
 msgid "Pipe"
 msgstr "Tubería"
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Flecha izquierda"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Flecha derecha"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Flecha derecha"
 
 msgid "Enter"
 msgstr "Intro"
@@ -1545,6 +1585,9 @@ msgstr " Imposible ejecutar comandos desde directorios no locales "
 msgid "The shell is already running a command"
 msgstr " El shell ya está ejecutando un comando "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Ignorar"
 
@@ -1675,8 +1718,16 @@ msgid "Quit"
 msgstr "Salir"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1903,10 +1954,6 @@ msgstr "Reemplazar"
 msgid "%ld replacements made"
 msgstr " %ld reemplazos hechos. "
 
-#, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
-
 msgid "&Cancel quit"
 msgstr "&Cancelar salida"
 
@@ -2077,25 +2124,6 @@ msgstr " Reemplazar con: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Confirmar cambios "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"El archivo \"%s\" está ya siendo editado\n"
-"Usuario: %s\n"
-"Id. Proceso: %d"
-
-msgid "File locked"
-msgstr "Archivo bloqueado"
-
-msgid "&Grab lock"
-msgstr "tomar &Bloqueo"
-
-msgid "&Ignore lock"
-msgstr "&Ignorar bloqueo"
 
 msgid "&Open file..."
 msgstr "abrir archiv&O..."
@@ -2340,6 +2368,10 @@ msgstr "Autoajuste de párrafo"
 #, fuzzy
 msgid "Editor options"
 msgstr " Opciones del editor "
+
+#, fuzzy
+msgid "Edit: "
+msgstr "Edición"
 
 msgid "ButtonBar|Mark"
 msgstr "Marcar"
@@ -3344,6 +3376,12 @@ msgstr "redefinirla, pulse la barra espaciadora o haga clic con el ratón"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "en ella. Use el tabulador para moverse."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " The Midnight Commander "
@@ -3484,6 +3522,9 @@ msgstr "directorios virtuales (&VFS)..."
 msgid "&Background jobs"
 msgstr "&Procesos en 2º plano..."
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Recuperar archivos (ext2fs)..."
 
@@ -3529,6 +3570,10 @@ msgstr "a&Bajo"
 
 msgid "&Right"
 msgstr "&Derecho"
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Disposición de paneles "
 
 msgid "ButtonBar|Menu"
 msgstr "Menú"
@@ -4167,6 +4212,10 @@ msgstr ""
 "Imposible guardar el archivo %s: \n"
 "%s"
 
+#, fuzzy
+msgid "View: "
+msgstr "&Ver"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4211,6 +4260,10 @@ msgstr "¿Desea borrar esta historia?"
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
 
 #~ msgid " Permission "
 #~ msgstr " Permisos "

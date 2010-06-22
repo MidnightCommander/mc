@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2010-03-09 14:51+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -16,6 +16,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=1;\n"
 "X-Poedit-Language: Chinese\n"
 "X-Poedit-Country: CHINA\n"
+
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"文件\"%s\"正在被编辑\n"
+"用户：%s\n"
+"进程号：%d"
+
+msgid "File locked"
+msgstr "文件被锁定"
+
+msgid "&Grab lock"
+msgstr "获取锁(&G)"
+
+msgid "&Ignore lock"
+msgstr "忽略锁(&I)"
 
 #, fuzzy
 msgid "Search string not found"
@@ -279,6 +298,27 @@ msgstr "着重线"
 
 msgid "Pipe"
 msgstr "管道"
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "左箭头键"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "右箭头键"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "右箭头键"
 
 msgid "Enter"
 msgstr "回车"
@@ -1544,6 +1584,9 @@ msgstr "您无法在非本地文件系统上执行命令"
 msgid "The shell is already running a command"
 msgstr "Shell 正在运行一个命令 "
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "取消(&D)"
 
@@ -1674,8 +1717,16 @@ msgid "Quit"
 msgstr "退出"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " 文件被修改，保存并退出？"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr "比较时需要两个文件"
@@ -1900,10 +1951,6 @@ msgstr "替换"
 msgid "%ld replacements made"
 msgstr " 替换了 %ld 处。"
 
-#, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " 文件被修改，保存并退出？"
-
 msgid "&Cancel quit"
 msgstr "取消退出(&C)"
 
@@ -2074,25 +2121,6 @@ msgstr " 替换为："
 #, fuzzy
 msgid "Confirm replace"
 msgstr " 确认替换 "
-
-#, fuzzy, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"文件\"%s\"正在被编辑\n"
-"用户：%s\n"
-"进程号：%d"
-
-msgid "File locked"
-msgstr "文件被锁定"
-
-msgid "&Grab lock"
-msgstr "获取锁(&G)"
-
-msgid "&Ignore lock"
-msgstr "忽略锁(&I)"
 
 msgid "&Open file..."
 msgstr "打开文件(&O)..."
@@ -2337,6 +2365,10 @@ msgstr "换行模式"
 #, fuzzy
 msgid "Editor options"
 msgstr " 编辑器选项 "
+
+#, fuzzy
+msgid "Edit: "
+msgstr "编辑"
 
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|标记"
@@ -3336,6 +3368,12 @@ msgstr "哪些键没有标记上 OK。在缺少的键上按空格"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "键，或者用鼠标点击来定义。用 Tab 来移动。"
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " Midnight Commander "
@@ -3476,6 +3514,9 @@ msgstr "活动的VFS列表(&A)"
 msgid "&Background jobs"
 msgstr "后台任务（——B）"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "反删除文件(仅限 ext2fs)(&U)"
 
@@ -3521,6 +3562,10 @@ msgstr "下(&B)"
 
 msgid "&Right"
 msgstr "右(&R)"
+
+#, fuzzy
+msgid "Panels:"
+msgstr " 显示分隔 "
 
 msgid "ButtonBar|Menu"
 msgstr "ButtonBar|目录"
@@ -4158,6 +4203,10 @@ msgstr ""
 "不能保存文件%s:\n"
 "%s"
 
+#, fuzzy
+msgid "View: "
+msgstr "查看(&V)"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4200,6 +4249,10 @@ msgstr "你要清除历史"
 
 msgid "Background process:"
 msgstr "后台进程："
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " 文件被修改，保存并退出？"
 
 #~ msgid " Permission "
 #~ msgstr " 权限 "

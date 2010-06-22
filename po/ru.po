@@ -11,15 +11,15 @@
 # Andrew V. Samoilov <sav@bcs.zp.ua>, 1999.
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
 # Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
-# Andrew Borodin <aborodin@vmail.ru>, 2009.
+# Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
 # Ilia Maslakov <il.smind@gmail.com>, 2009.
 # Slava Zanko <slavazanko@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
-"PO-Revision-Date: 2009-10-29  23:37+0300\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"PO-Revision-Date: 2010-06-22  22:57+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,6 +29,25 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: mcedit 4.7.0\n"
 
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Файл \"%s\" уже редактируется.\n"
+"Пользователь: %s\n"
+"Идентификатор процесса: %d"
+
+msgid "File locked"
+msgstr "Файл заблокирован"
+
+msgid "&Grab lock"
+msgstr "Захватить замок"
+
+msgid "&Ignore lock"
+msgstr "Игнорировать замок"
+
 msgid "Search string not found"
 msgstr "Искомая строка не найдена"
 
@@ -36,7 +55,8 @@ msgid "Not implemented yet"
 msgstr "Пока не реализовано"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr "Количество шаблонных полей не соответствует количеству полей для замены"
+msgstr ""
+"Количество шаблонных полей не соответствует количеству полей для замены"
 
 #, c-format
 msgid "Invalid token number %d"
@@ -289,6 +309,24 @@ msgstr "Подчёркивание"
 msgid "Pipe"
 msgstr "Прямая черта"
 
+msgid "Left parenthese"
+msgstr "Левая скобка"
+
+msgid "Right parenthese"
+msgstr "Правая скобка"
+
+msgid "Left bracket"
+msgstr "Левая квадратная скобка"
+
+msgid "Right bracket"
+msgstr "Правая квадратная скобка"
+
+msgid "Left brace"
+msgstr "Левая фигурная скобка"
+
+msgid "Right brace"
+msgstr "Правая фигурная скобка"
+
 msgid "Enter"
 msgstr "Ввод"
 
@@ -361,9 +399,8 @@ msgstr "Сбой канала"
 msgid "Dup failed"
 msgstr "Сбой дублирования дескриптора"
 
-#, fuzzy
 msgid "Error dup'ing old error pipe"
-msgstr "Ошибка чтения из канала: %s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -961,9 +998,11 @@ msgstr ""
 "   Общие:              errors, reverse, gauge, input, viewunderline\n"
 "                       input, inputmark, inputunchanged, commandlinemark\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -1395,7 +1434,9 @@ msgstr "По&байтный"
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
-msgstr "Для выполнения этой команды\nобе панели должны быть в режиме списка"
+msgstr ""
+"Для выполнения этой команды\n"
+"обе панели должны быть в режиме списка"
 
 msgid ""
 "Not an xterm or Linux console;\n"
@@ -1487,6 +1528,9 @@ msgstr "Невозможно выполнять команды на нелока
 
 msgid "The shell is already running a command"
 msgstr "Интерпретатор занят выполнением команды"
+
+msgid "Screens"
+msgstr "Экраны"
 
 msgid "&Dismiss"
 msgstr "&Закрыть"
@@ -1610,8 +1654,17 @@ msgstr "Выход"
 msgid "Quit"
 msgstr "Выход"
 
-msgid "File was modified, Save with exit?"
-msgstr "Файл был изменен, сохранить при выходе?"
+msgid "File was modified. Save with exit?"
+msgstr "Файл был изменен. Сохранить при выходе?"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr "Midnight Commander завершается.\n"
+"Сохранить изменённый файл?"
+
+msgid "Diff:"
+msgstr "Различия:"
 
 msgid "Two files are needed to compare"
 msgstr "Для сравнения необходимы два файла"
@@ -1814,9 +1867,6 @@ msgstr "&Заменить"
 msgid "%ld replacements made"
 msgstr "Осуществлено подстановок: %ld"
 
-msgid "File was modified, save with exit?"
-msgstr "Файл был изменен, сохранить при выходе?"
-
 msgid "&Cancel quit"
 msgstr "&Прервать выход"
 
@@ -1960,25 +2010,6 @@ msgstr "Заменить на:"
 
 msgid "Confirm replace"
 msgstr "Подтвердить замену"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Файл \"%s\" уже редактируется.\n"
-"Пользователь: %s\n"
-"Идентификатор процесса: %d"
-
-msgid "File locked"
-msgstr "Файл заблокирован"
-
-msgid "&Grab lock"
-msgstr "Захватить замок"
-
-msgid "&Ignore lock"
-msgstr "Игнорировать замок"
 
 msgid "&Open file..."
 msgstr "&Открыть файл..."
@@ -2220,6 +2251,9 @@ msgstr "Режим переноса строк"
 msgid "Editor options"
 msgstr "Настройки редактора"
 
+msgid "Edit: "
+msgstr "Правка: "
+
 msgid "ButtonBar|Mark"
 msgstr "Блок"
 
@@ -2287,6 +2321,7 @@ msgstr "Параметр"
 msgid " %s%s file error"
 msgstr "%s%s ошибка файла"
 
+#, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
 "the installation failed. Please fetch a fresh copy from the Midnight "
@@ -2333,8 +2368,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Невозможно создать устойчивые симв. ссылки через нелокальные файловые"
-"системы:\n"
+"Невозможно создать устойчивые симв. ссылки через нелокальные "
+"файловыесистемы:\n"
 "\n"
 "Опция \"Устойчивые символические ссылки\" будет отменена"
 
@@ -2577,7 +2612,8 @@ msgstr ""
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr "Невозможно переписать файл \"%s\"\n"
+msgstr ""
+"Невозможно переписать файл \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2992,6 +3028,7 @@ msgstr "Информация"
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
+#, c-format
 msgid "File: %s"
 msgstr "Файл: %s"
 
@@ -3176,6 +3213,13 @@ msgstr "какие клавиши не имеют пометки \"OK\". Для 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ее при помощи Tab или мышкой и нажмите пробел."
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] "У вас %zd открытый экран. Всё равно выйти?"
+msgstr[1] "У вас %zd открытых экрана. Всё равно выйти?"
+msgstr[2] "У вас %zd открытый экранов. Всё равно выйти?"
+
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
 
@@ -3311,6 +3355,9 @@ msgstr "Список &активных ВФС"
 msgid "&Background jobs"
 msgstr "Фоновые &задания"
 
+msgid "Screen lis&t"
+msgstr "Список &экранов"
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Восстановление файлов"
 
@@ -3355,6 +3402,9 @@ msgstr "&Нижняя"
 
 msgid "&Right"
 msgstr "&Правая панель"
+
+msgid "Panels:"
+msgstr "Панели:"
 
 msgid "ButtonBar|Menu"
 msgstr "Меню"
@@ -3948,6 +3998,9 @@ msgid ""
 msgstr ""
 "Невозможно сохранить файл:\n"
 "%s"
+
+msgid "View: "
+msgstr "Просмотр: "
 
 #, c-format
 msgid ""

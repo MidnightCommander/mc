@@ -7,13 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-07 21:44+0400\n"
+"POT-Creation-Date: 2010-06-22 21:46+0400\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
 
 #, fuzzy
 msgid "Search string not found"
@@ -284,6 +300,27 @@ msgstr ""
 
 msgid "Pipe"
 msgstr ""
+
+msgid "Left parenthese"
+msgstr ""
+
+msgid "Right parenthese"
+msgstr ""
+
+#, fuzzy
+msgid "Left bracket"
+msgstr "Seta esquerda"
+
+#, fuzzy
+msgid "Right bracket"
+msgstr "Seta direita"
+
+msgid "Left brace"
+msgstr ""
+
+#, fuzzy
+msgid "Right brace"
+msgstr "Seta direita"
 
 #, fuzzy
 msgid "Enter"
@@ -1595,6 +1632,9 @@ msgstr " Não é possível executar comandos em um sistema de arquivos remoto"
 msgid "The shell is already running a command"
 msgstr " O interpretador de comandos já está executando um comando"
 
+msgid "Screens"
+msgstr ""
+
 msgid "&Dismiss"
 msgstr "&Dispensar"
 
@@ -1729,8 +1769,16 @@ msgid "Quit"
 msgstr "Sair"
 
 #, fuzzy
-msgid "File was modified, Save with exit?"
+msgid "File was modified. Save with exit?"
 msgstr " O arquivo foi modificado. Salvar antes de Sair ?"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
+msgid "Diff:"
+msgstr ""
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1969,10 +2017,6 @@ msgid "%ld replacements made"
 msgstr " %ld substituições feitas "
 
 #, fuzzy
-msgid "File was modified, save with exit?"
-msgstr " O arquivo foi modificado. Salvar antes de Sair ?"
-
-#, fuzzy
 msgid "&Cancel quit"
 msgstr " Cancelar a saída "
 
@@ -2151,22 +2195,6 @@ msgstr " Substituir com: "
 #, fuzzy
 msgid "Confirm replace"
 msgstr " Confirme substituição "
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited.\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
 
 #, fuzzy
 msgid "&Open file..."
@@ -2468,6 +2496,10 @@ msgstr "Modo Empacotado"
 #, fuzzy
 msgid "Editor options"
 msgstr " Opções do editor "
+
+#, fuzzy
+msgid "Edit: "
+msgstr " Editar "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -3473,6 +3505,12 @@ msgstr "que teclas não estão marcadas com OK. Pressione espaço na "
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tecla para definir. Para mover-se entre elas use Tab"
 
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
 msgid "The Midnight Commander"
 msgstr " O Midnight Commander"
@@ -3643,6 +3681,9 @@ msgstr "&Ativar lista VFS     C-x a"
 msgid "&Background jobs"
 msgstr "Processos em segundo plano"
 
+msgid "Screen lis&t"
+msgstr ""
+
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Recuperar arquivos (apenas ext2fs)"
 
@@ -3693,6 +3734,10 @@ msgstr " &Abaixo "
 #, fuzzy
 msgid "&Right"
 msgstr " &Direita "
+
+#, fuzzy
+msgid "Panels:"
+msgstr " Dividir painel "
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4343,6 +4388,10 @@ msgid ""
 "%s"
 msgstr " Erro ao tentar gravar arquivo. "
 
+#, fuzzy
+msgid "View: "
+msgstr "Visualizar"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -4386,6 +4435,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Processo em segundo plano:"
+
+#, fuzzy
+#~ msgid "File was modified, save with exit?"
+#~ msgstr " O arquivo foi modificado. Salvar antes de Sair ?"
 
 #~ msgid " Permission "
 #~ msgstr " Permissão "
@@ -4641,9 +4694,6 @@ msgstr "Processo em segundo plano:"
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Gravar configuração"
-
-#~ msgid " Edit "
-#~ msgstr " Editar "
 
 #~ msgid " Sear/Repl "
 #~ msgstr " Proc/Subs "
