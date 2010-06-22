@@ -43,6 +43,7 @@
 
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/key.h"        /* is_idle() */
+#include "lib/strutil.h"        /* str_term_trim() */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
@@ -52,8 +53,6 @@
 #include "src/menu.h"           /* menubar_new() */
 #include "src/cmddef.h"
 #include "src/keybind.h"
-
-int column_highlighting = 0;
 
 static cb_ret_t edit_callback (Widget *, widget_msg_t msg, int parm);
 
@@ -76,6 +75,20 @@ edit_get_shortcut (unsigned long command)
     return NULL;
 }
 
+static char *
+edit_get_title (const Dlg_head *h, size_t len)
+{
+    const WEdit *edit = (const WEdit *) find_widget_type (h, edit_callback);
+    const char *modified = edit->modified ? "(*) " : "    ";
+    const char *file_label;
+
+    len -= 4;
+
+    file_label = str_term_trim (edit->filename, len - str_term_width1 (_("Edit: ")));
+
+    return g_strconcat (_("Edit: "), modified, file_label, (char *) NULL);
+}
+
 static int
 edit_event (Gpm_Event * event, void *data)
 {
@@ -90,7 +103,7 @@ edit_event (Gpm_Event * event, void *data)
     {
         WMenuBar *menubar;
 
-        menubar = find_menubar (edit->widget.parent);
+        menubar = find_menubar (edit->widget.owner);
 
         return menubar->widget.mouse (event, menubar);
     }
@@ -231,7 +244,9 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 
     case DLG_VALIDATE:
         if (!edit_ok_to_exit (edit))
-            h->running = 1;
+            h->state = DLG_ACTIVE;
+        else
+            h->state = DLG_CLOSED;
         return MSG_HANDLED;
 
     default:
@@ -261,10 +276,12 @@ edit_file (const char *_file, int line)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-        create_dlg (0, 0, LINES, COLS, NULL, edit_dialog_callback,
+        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback,
                     "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     edit_dlg->get_shortcut = edit_get_shortcut;
+    edit_dlg->get_title = edit_get_title;
+
     menubar = menubar_new (0, 0, COLS, NULL);
     add_widget (edit_dlg, menubar);
     edit_init_menu (menubar);
@@ -278,7 +295,8 @@ edit_file (const char *_file, int line)
 
     run_dlg (edit_dlg);
 
-    destroy_dlg (edit_dlg);
+    if (edit_dlg->state == DLG_CLOSED)
+        destroy_dlg (edit_dlg);
 
     return 1;
 }

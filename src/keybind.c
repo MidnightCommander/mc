@@ -405,6 +405,9 @@ static name_keymap_t command_names[] = {
 #ifdef USE_DIFF_VIEW
     { "CmdDiffView",                     CK_DiffViewCmd},
 #endif
+    { "CmdDialogList",                   CK_DialogListCmd },
+    { "CmdDialogNext",                   CK_DialogNextCmd },
+    { "CmdDialogPrev",                   CK_DialogPrevCmd },
 
     /* panel */
     { "PanelChdirOtherPanel",            CK_PanelChdirOtherPanel },
@@ -944,9 +947,14 @@ const global_keymap_t default_main_map[] = {
     { ALT (','),    CK_TogglePanelsSplit,             "M-," },
     { XCTRL ('x'),  CK_StartExtMap1,                  "C-x" },
     /* Select/unselect group */
-    { KEY_KP_ADD,       CK_SelectCmd,           "+" },
-    { KEY_KP_SUBTRACT,  CK_UnselectCmd,         "-" },
-    { ALT ('*'),        CK_ReverseSelectionCmd, "*" },
+    { KEY_KP_ADD,      CK_SelectCmd,                  "+" },
+    { KEY_KP_SUBTRACT, CK_UnselectCmd,                "-" },
+    { ALT ('*'),       CK_ReverseSelectionCmd,        "*" },
+
+    { ALT ('`'),       CK_DialogListCmd,              "M-`"},
+    { ALT ('}'),       CK_DialogNextCmd,              "M-}"},
+    { ALT ('{'),       CK_DialogPrevCmd,              "M-{"},
+
     { 0, CK_Ignore_Key, "" }
 };
 

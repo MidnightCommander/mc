@@ -570,7 +570,7 @@ help_event (Gpm_Event * event, void *vp)
         if (history_ptr < 0)
             history_ptr = HISTORY_SIZE - 1;
 
-        help_callback (w->parent, NULL, DLG_DRAW, 0, NULL);
+        help_callback (w->owner, NULL, DLG_DRAW, 0, NULL);
         return 0;
     }
 
@@ -616,7 +616,7 @@ help_event (Gpm_Event * event, void *vp)
         move_forward (1);
 
     /* Show the new node */
-    help_callback (w->parent, NULL, DLG_DRAW, 0, NULL);
+    help_callback (w->owner, NULL, DLG_DRAW, 0, NULL);
 
     return 0;
 }
@@ -1027,7 +1027,7 @@ interactive_display (const char *filename, const char *node)
     help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
 
     whelp =
-        create_dlg (0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
+        create_dlg (TRUE, 0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
                     help_colors, help_callback, "[Help]", _("Help"),
                     DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
 

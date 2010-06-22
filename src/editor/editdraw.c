@@ -118,7 +118,7 @@ status_string (WEdit * edit, char *s, int w)
     if (simple_statusbar)
         g_snprintf (s, w,
                     "%c%c%c%c %3ld %5ld/%ld %6ld/%ld %s %s",
-                    edit->mark1 != edit->mark2 ? (column_highlighting ? 'C' : 'B') : '-',
+                    edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
                     edit->modified ? 'M' : '-',
                     edit->macro_i < 0 ? '-' : 'R',
                     edit->overwrite == 0 ? '-' : 'O',
@@ -134,7 +134,7 @@ status_string (WEdit * edit, char *s, int w)
     else
         g_snprintf (s, w,
                     "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) %s  %s",
-                    edit->mark1 != edit->mark2 ? (column_highlighting ? 'C' : 'B') : '-',
+                    edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
                     edit->modified ? 'M' : '-',
                     edit->macro_i < 0 ? '-' : 'R',
                     edit->overwrite == 0 ? '-' : 'O',
@@ -470,7 +470,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                     p->style |= MOD_CURSOR;
                 if (q >= m1 && q < m2)
                 {
-                    if (column_highlighting)
+                    if (edit->column_highlight)
                     {
                         int x;
                         x = edit_move_forward3 (edit, b, 0, q);
@@ -823,7 +823,7 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
         edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
 
     if (edit->force & REDRAW_COMPLETELY)
-        buttonbar_redraw (find_buttonbar (edit->widget.parent));
+        buttonbar_redraw (find_buttonbar (edit->widget.owner));
     render_edit_text (edit, row_start, col_start, row_end, col_end);
     /*
      * edit->force != 0 means a key was pending and the redraw

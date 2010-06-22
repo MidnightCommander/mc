@@ -95,6 +95,7 @@ typedef struct mcview_struct
     Widget widget;
 
     char *filename;             /* Name of the file */
+    char *workdir;              /* Name of the working directory */
     char *command;              /* Command used to pipe data in */
 
     enum view_ds datasource;    /* Where the displayed data comes from */
@@ -131,10 +132,11 @@ typedef struct mcview_struct
     gboolean text_nroff_mode;   /* Nroff-style highlighting */
     gboolean text_wrap_mode;    /* Wrap text lines to fit them on the screen */
     gboolean magic_mode;        /* Preprocess the file using external programs */
+    gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
+    gboolean locked;            /* We hold lock on current file */
+
     gboolean utf8;              /* It's multibyte file codeset */
 
-    /* Additional editor state */
-    gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
     coord_cache_t *coord_cache; /* Cache for mapping offsets to cursor positions */
 
     /* Display information */
@@ -160,9 +162,6 @@ typedef struct mcview_struct
     /* Search variables */
     off_t search_start;         /* First character to start searching from */
     off_t search_end;           /* Length of found string or 0 if none was found */
-
-    /* Pointer to the last search command */
-    gboolean want_to_quit;      /* Prepare for cleanup ... */
 
     /* Markers */
     int marker;                 /* mark to use */
@@ -293,6 +292,9 @@ void mcview_set_codeset (mcview_t * view);
 void mcview_show_error (mcview_t * view, const char *error);
 off_t mcview_bol (mcview_t * view, off_t current);
 off_t mcview_eol (mcview_t * view, off_t current);
+char *mcview_get_title (const Dlg_head * h, size_t len);
+gboolean mcview_lock_file (mcview_t * view);
+gboolean mcview_unlock_file (mcview_t * view);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);

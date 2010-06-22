@@ -97,7 +97,7 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
     listbox = g_new (Listbox, 1);
 
     listbox->dlg =
-	create_dlg (ypos, xpos, lines + space, cols + space,
+	create_dlg (TRUE, ypos, xpos, lines + space, cols + space,
 		    listbox_colors, NULL,
 		    help, title, DLG_REVERSE | DLG_TRYUP);
 
@@ -188,7 +188,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg =
-	create_dlg (0, 0, lines, cols, query_colors, default_query_callback,
+	create_dlg (TRUE, 0, 0, lines, cols, query_colors, default_query_callback,
 		    "[QueryBox]", header, DLG_NONE);
 
     if (count > 0) {
@@ -377,11 +377,11 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
     I18N (qd->title);
 
     if ((qd->xpos == -1) || (qd->ypos == -1))
-	dd = create_dlg (0, 0, qd->ylen, qd->xlen,
+	dd = create_dlg (TRUE, 0, 0, qd->ylen, qd->xlen,
 			    dialog_colors, NULL, qd->help, qd->title,
 			    DLG_CENTER | DLG_TRYUP | DLG_REVERSE);
     else
-	dd = create_dlg (qd->ypos, qd->xpos, qd->ylen, qd->xlen,
+	dd = create_dlg (TRUE, qd->ypos, qd->xpos, qd->ylen, qd->xlen,
 			    dialog_colors, NULL, qd->help, qd->title,
 			    DLG_REVERSE);
 

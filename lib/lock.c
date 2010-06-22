@@ -1,4 +1,4 @@
-/* editor file locking.
+/* file locking
 
    Copyright (C) 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 
@@ -22,11 +22,11 @@
 */
 
 /** \file
- *  \brief Source: editor file locking
+ *  \brief Source: file locking
  *  \author Adam Byrtek
  *  \date 2003
  *
- *  Locking scheme used in mcedit is based on a documentation found
+ *  Locking scheme is based on a documentation found
  *  in JED editor sources. Abstract from lock.c file (by John E. Davis):
  *
  *  The basic idea here is quite simple.  Whenever a buffer is attached to
@@ -54,13 +54,9 @@
 
 #include "lib/global.h"
 #include "lib/vfs/mc-vfs/vfs.h"
-#include "lib/strutil.h"	/* utf string functions */
+#include "lib/lock.h"
 
-
-#include "edit-impl.h"
-#include "editlock.h"
-
-#include "src/wtools.h"	/* edit_query_dialog () */
+#include "src/wtools.h"	/* query_dialog() */
 
 #define BUF_SIZE 255
 #define PID_BUF_SIZE 10
@@ -164,7 +160,7 @@ lock_get_info (const char *lockfname)
    Returns 1 on success,  0 on failure, -1 if abort
    Warning: Might do screen refresh and lose edit->force */
 int
-edit_lock_file (const char *fname)
+lock_file (const char *fname)
 {
     char *lockfname, *newlock, *msg, *lock;
     struct stat statbuf;
@@ -199,8 +195,8 @@ edit_lock_file (const char *fname)
 				  "User: %s\nProcess ID: %d"), x_basename (lockfname) + 2,
 				 lockinfo->who, (int) lockinfo->pid);
 	    /* TODO: Implement "Abort" - needs to rewind undo stack */
-	    switch (edit_query_dialog2
-		    (_("File locked"), msg, _("&Grab lock"),
+	    switch (query_dialog
+		    (_("File locked"), msg, D_NORMAL, 2, _("&Grab lock"),
 		     _("&Ignore lock"))) {
 	    case 0:
 		break;
@@ -229,9 +225,9 @@ edit_lock_file (const char *fname)
 }
 
 /* Lowers file lock if possible
-   Always returns 0 to make 'lock = edit_unlock_file (f)' possible */
+   Always returns 0 */
 int
-edit_unlock_file (const char *fname)
+unlock_file (const char *fname)
 {
     char *lockfname, *lock;
     struct stat statbuf;

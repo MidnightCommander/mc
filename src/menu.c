@@ -201,7 +201,7 @@ menubar_draw_drop (WMenuBar * menubar)
         column = menubar->widget.cols - menu->max_entry_len - 5;
 
     tty_setcolor (MENU_ENTRY_COLOR);
-    draw_box (menubar->widget.parent,
+    draw_box (menubar->widget.owner,
               menubar->widget.y + 1, menubar->widget.x + column,
               count + 2, menu->max_entry_len + 5, FALSE);
 
@@ -300,7 +300,7 @@ menubar_finish (WMenuBar * menubar)
     menubar->widget.lines = 1;
     widget_want_hotkey (menubar->widget, 0);
 
-    dlg_select_by_id (menubar->widget.parent, menubar->previous_widget);
+    dlg_select_by_id (menubar->widget.owner, menubar->previous_widget);
     do_refresh ();
 }
 
@@ -322,8 +322,8 @@ menubar_execute (WMenuBar * menubar)
     {
         is_right = (menubar->selected != 0);
         menubar_finish (menubar);
-        menubar->widget.parent->callback (menubar->widget.parent, &menubar->widget,
-                                          DLG_ACTION, entry->command, NULL);
+        menubar->widget.owner->callback (menubar->widget.owner, &menubar->widget,
+                                         DLG_ACTION, entry->command, NULL);
         do_refresh ();
     }
 }
@@ -608,7 +608,7 @@ menubar_event (Gpm_Event * event, void *data)
 
     if (!menubar->is_dropped)
     {
-        menubar->previous_widget = menubar->widget.parent->current->dlg_id;
+        menubar->previous_widget = dlg_get_current_widget_id (menubar->widget.owner);
         menubar->is_active = TRUE;
         menubar->is_dropped = TRUE;
         was_active = FALSE;
@@ -747,7 +747,7 @@ menubar_add_menu (WMenuBar * menubar, Menu * menu)
 {
     if (menu != NULL)
     {
-        menu_arrange (menu, menubar->widget.parent->get_shortcut);
+        menu_arrange (menu, menubar->widget.owner->get_shortcut);
         menubar->menu = g_list_append (menubar->menu, menu);
     }
 

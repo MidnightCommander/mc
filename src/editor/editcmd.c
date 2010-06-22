@@ -51,12 +51,13 @@
 #include "lib/mcconfig.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/lock.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 
 #include "src/history.h"
 #include "src/widget.h"         /* listbox_new() */
 #include "src/layout.h"         /* clr_scr() */
-#include "src/main.h"           /* mc_home */
+#include "src/main.h"           /* mc_home, midnight_shutdown */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
 #include "src/wtools.h"         /* message() */
@@ -66,7 +67,6 @@
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 
 #include "src/editor/edit-impl.h"
-#include "src/editor/editlock.h"
 #include "src/editor/edit-widget.h"
 #include "src/editor/editcmd_dialogs.h"
 #include "src/editor/etags.h"
@@ -623,13 +623,13 @@ edit_save_as_cmd (WEdit * edit)
                 {
                     edit->stat1.st_mode |= S_IWUSR;
                 }
-                save_lock = edit_lock_file (exp);
+                save_lock = lock_file (exp);
             }
             else
             {
                 /* filenames equal, check if already locked */
                 if (!edit->locked && !edit->delete_file)
-                    save_lock = edit_lock_file (exp);
+                    save_lock = lock_file (exp);
             }
 
             if (different_filename)
@@ -649,14 +649,14 @@ edit_save_as_cmd (WEdit * edit)
                 if (different_filename)
                 {
                     if (save_lock)
-                        edit_unlock_file (exp);
+                        unlock_file (exp);
                     if (edit->locked)
-                        edit->locked = edit_unlock_file (edit->filename);
+                        edit->locked = edit_unlock_file (edit);
                 }
                 else
                 {
                     if (edit->locked || save_lock)
-                        edit->locked = edit_unlock_file (edit->filename);
+                        edit->locked = edit_unlock_file (edit);
                 }
 
                 edit_set_filename (edit, exp);
@@ -675,7 +675,7 @@ edit_save_as_cmd (WEdit * edit)
             case -1:
                 /* Failed, so maintain modify (not save) lock */
                 if (save_lock)
-                    edit_unlock_file (exp);
+                    unlock_file (exp);
                 g_free (exp);
                 edit->force |= REDRAW_COMPLETELY;
                 return 0;
@@ -932,12 +932,12 @@ edit_save_cmd (WEdit * edit)
     int res, save_lock = 0;
 
     if (!edit->locked && !edit->delete_file)
-        save_lock = edit_lock_file (edit->filename);
+        save_lock = edit_lock_file (edit);
     res = edit_save_file (edit, edit->filename);
 
     /* Maintain modify (not save) lock on failure */
     if ((res > 0 && edit->locked) || save_lock)
-        edit->locked = edit_unlock_file (edit->filename);
+        edit->locked = edit_unlock_file (edit);
 
     /* On failure try 'save as', it does locking on its own */
     if (!res)
@@ -988,7 +988,13 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     }
 
     if (prev_locked)
-        edit_unlock_file (prev_filename);
+    {
+        char *fullpath;
+
+        fullpath = g_build_filename (edit->dir, prev_filename, (char *) NULL);
+        unlock_file (fullpath);
+        g_free (fullpath);
+    }
     g_free (prev_filename);
     return 0;
 }
@@ -1150,7 +1156,7 @@ eval_marks (WEdit * edit, long *start_mark, long *end_mark)
             *end_mark = max (edit->mark1, edit->curs1);
             edit->column2 = edit->curs_col + edit->over_col;
         }
-        if (column_highlighting
+        if (edit->column_highlight
             && (((edit->mark1 > edit->curs1) && (edit->column1 < edit->column2))
                 || ((edit->mark1 < edit->curs1) && (edit->column1 > edit->column2))))
         {
@@ -1321,7 +1327,7 @@ edit_block_copy_cmd (WEdit * edit)
 
     edit_push_markers (edit);
 
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         edit_insert_column_of_text (edit, copy_buf, size, abs (edit->column2 - edit->column1));
     }
@@ -1334,11 +1340,11 @@ edit_block_copy_cmd (WEdit * edit)
     g_free (copy_buf);
     edit_scroll_screen_over_cursor (edit);
 
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         edit_set_markers (edit, 0, 0, 0, 0);
         edit_push_action (edit, COLUMN_ON);
-        column_highlighting = 0;
+        edit->column_highlight = 0;
     }
     else if (start_mark < current && end_mark > current)
         edit_set_markers (edit, start_mark, end_mark + end_mark - start_mark, 0, 0);
@@ -1359,7 +1365,7 @@ edit_block_move_cmd (WEdit * edit)
 
     if (eval_marks (edit, &start_mark, &end_mark))
         return;
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         edit_update_curs_col (edit);
         x = edit->curs_col;
@@ -1381,7 +1387,7 @@ edit_block_move_cmd (WEdit * edit)
 
     edit_push_markers (edit);
     current = edit->curs1;
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         long line;
         int size, c1, c2;
@@ -1415,7 +1421,7 @@ edit_block_move_cmd (WEdit * edit)
         }
         edit_set_markers (edit, 0, 0, 0, 0);
         edit_push_action (edit, COLUMN_ON);
-        column_highlighting = 0;
+        edit->column_highlight = 0;
     }
     else
     {
@@ -1489,7 +1495,7 @@ edit_block_delete (WEdit * edit)
 
     if (eval_marks (edit, &start_mark, &end_mark))
         return 0;
-    if (column_highlighting && edit->mark2 < 0)
+    if (edit->column_highlight && edit->mark2 < 0)
         edit_mark_cmd (edit, 0);
     if ((end_mark - start_mark) > option_max_undo / 2)
     {
@@ -1523,7 +1529,7 @@ edit_block_delete (WEdit * edit)
     count = start_mark;
     if (start_mark < end_mark)
     {
-        if (column_highlighting)
+        if (edit->column_highlight)
         {
             if (edit->mark2 < 0)
                 edit_mark_cmd (edit, 0);
@@ -2039,33 +2045,48 @@ edit_search_cmd (WEdit * edit, int again)
  * Check if it's OK to close the editor.  If there are unsaved changes,
  * ask user.  Return 1 if it's OK to exit, 0 to continue editing.
  */
-int
+gboolean
 edit_ok_to_exit (WEdit * edit)
 {
+    int act;
+
     if (!edit->modified)
-        return 1;
+        return TRUE;
 
-    if (!edit_check_newline (edit))
-        return 0;
-
-    switch (edit_query_dialog3
-            (_("Quit"), _("File was modified, save with exit?"),
-             _("&Cancel quit"), _("&Yes"), _("&No")))
+    if (!midnight_shutdown)
     {
-    case 1:
-        edit_push_markers (edit);
-        edit_set_markers (edit, 0, 0, 0, 0);
-        if (!edit_save_cmd (edit))
-            return 0;
-        break;
-    case 2:
-        break;
-    case 0:
-    case -1:
-        return 0;
+        if (!edit_check_newline (edit))
+            return FALSE;
+
+        act = edit_query_dialog3 (_("Quit"), _("File was modified. Save with exit?"),
+                                  _("&Yes"), _("&No"), _("&Cancel quit"));
+    }
+    else
+    {
+        act = edit_query_dialog2 (_("Quit"), _("Midnight Commander is being shut down.\nSave modified file?"),
+                                  _("&Yes"), _("&No"));
+
+        /* Esc is No */
+        if (act == -1)
+            act = 1;
     }
 
-    return 1;
+    switch (act)
+    {
+    case 0: /* Yes */
+        edit_push_markers (edit);
+        edit_set_markers (edit, 0, 0, 0, 0);
+        if (!edit_save_cmd (edit) || midnight_shutdown)
+            return (gboolean) midnight_shutdown;
+        break;
+    case 1: /* No */
+        break;
+    case 2: /* Cancel quit */
+    case -1: /* Esc */
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 /* Return a null terminated length of text. Result must be g_free'd */
@@ -2074,7 +2095,7 @@ edit_get_block (WEdit * edit, long start, long finish, int *l)
 {
     unsigned char *s, *r;
     r = s = g_malloc0 (finish - start + 1);
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         *l = 0;
         /* copy from buffer, excluding chars that are out of the column 'margins' */
@@ -2114,7 +2135,7 @@ edit_save_block (WEdit * edit, const char *filename, long start, long finish)
     if (file == -1)
         return 0;
 
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         int r;
         r = mc_write (file, VERTICAL_MAGIC, sizeof (VERTICAL_MAGIC));

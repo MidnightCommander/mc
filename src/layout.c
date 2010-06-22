@@ -55,6 +55,7 @@
 #include "lib/strutil.h"
 
 #include "dialog.h"
+#include "dialog-switch.h"      /* dialog_switch_got_winch() */
 #include "widget.h"
 #include "command.h"
 #include "main-widgets.h"
@@ -456,7 +457,7 @@ init_layout (void)
     }
 
     layout_dlg =
-        create_dlg (0, 0, 14, first_width * 2 + 9,
+        create_dlg (TRUE, 0, 0, 14, first_width * 2 + 9,
                     dialog_colors, layout_callback, "[Layout]",
                     _("Layout"), DLG_CENTER | DLG_REVERSE);
 
@@ -734,6 +735,15 @@ low_level_change_screen_size (void)
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
+static void
+dlg_resize_cb (void *data, void *user_data)
+{
+    Dlg_head *d = data;
+
+    (void) user_data;
+    d->callback (d, NULL, DLG_RESIZE, 0, NULL);
+}
+
 void
 sigwinch_handler (int dummy)
 {
@@ -747,8 +757,6 @@ sigwinch_handler (int dummy)
 void
 change_screen_size (void)
 {
-    Dlg_head *d;
-
     winch_flag = 0;
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ
@@ -771,13 +779,10 @@ change_screen_size (void)
     tty_nodelay (FALSE);
 #endif
 
+    /* Inform all suspending dialogs */
+    dialog_switch_got_winch ();
     /* Inform all running dialogs */
-    d = current_dlg;
-    while (d != NULL)
-    {
-        (*d->callback) (d, NULL, DLG_RESIZE, 0, NULL);
-        d = d->parent;
-    }
+    g_list_foreach (top_dlg, (GFunc) dlg_resize_cb, NULL);
 
     /* Now, force the redraw */
     repaint_screen ();
@@ -817,7 +822,7 @@ print_vfs_message (const char *msg, ...)
     if (midnight_shutdown)
         return;
 
-    if (!message_visible || !the_hint || !the_hint->widget.parent)
+    if (!message_visible || !the_hint || !the_hint->widget.owner)
     {
         int col, row;
 

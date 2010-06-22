@@ -47,6 +47,7 @@
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/lock.h"
 
 #include "src/widget.h"
 #include "src/cmd.h"            /* view_other_cmd() */
@@ -61,7 +62,6 @@
 #include "src/keybind.h"
 
 #include "edit-impl.h"
-#include "editlock.h"
 #include "edit-widget.h"
 
 int option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
@@ -952,7 +952,7 @@ edit_clean (WEdit * edit)
 
     /* a stale lock, remove it */
     if (edit->locked)
-        edit->locked = edit_unlock_file (edit->filename);
+        edit->locked = edit_unlock_file (edit);
 
     /* save cursor position */
     if (option_save_position)
@@ -1273,7 +1273,7 @@ edit_modification (WEdit * edit)
 
     /* raise lock when file modified */
     if (!edit->modified && !edit->delete_file)
-        edit->locked = edit_lock_file (edit->filename);
+        edit->locked = edit_lock_file (edit);
     edit->modified = 1;
 }
 
@@ -2302,7 +2302,7 @@ edit_left_word_move (WEdit * edit, int s)
     for (;;)
     {
         int c1, c2;
-        if (column_highlighting
+        if (edit->column_highlight
             && edit->mark1 != edit->mark2
             && edit->over_col == 0 && edit->curs1 == edit_bol (edit, edit->curs1))
             break;
@@ -2334,7 +2334,7 @@ edit_right_word_move (WEdit * edit, int s)
     for (;;)
     {
         int c1, c2;
-        if (column_highlighting
+        if (edit->column_highlight
             && edit->mark1 != edit->mark2
             && edit->over_col == 0 && edit->curs1 == edit_eol (edit, edit->curs1))
             break;
@@ -2389,7 +2389,7 @@ static void
 edit_left_char_move_cmd (WEdit * edit)
 {
     int cw = 1;
-    if (column_highlighting
+    if (edit->column_highlight
         && option_cursor_beyond_eol
         && edit->mark1 != edit->mark2
         && edit->over_col == 0 && edit->curs1 == edit_bol (edit, edit->curs1))
@@ -2519,10 +2519,10 @@ edit_do_undo (WEdit * edit)
             edit_delete (edit, 1);
             break;
         case COLUMN_ON:
-            column_highlighting = 1;
+            edit->column_highlight = 1;
             break;
         case COLUMN_OFF:
-            column_highlighting = 0;
+            edit->column_highlight = 0;
             break;
         }
         if (ac >= 256 && ac < 512)
@@ -2897,7 +2897,7 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
         edit_push_key_press (edit);
 
     edit_execute_cmd (edit, command, char_for_insertion);
-    if (column_highlighting)
+    if (edit->column_highlight)
         edit->force |= REDRAW_PAGE;
 }
 
@@ -2916,12 +2916,12 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 
     /* The next key press will unhighlight the found string, so update
      * the whole page */
-    if (edit->found_len || column_highlighting)
+    if (edit->found_len || edit->column_highlight)
         edit->force |= REDRAW_PAGE;
 
     if (command / 100 == 6)
     {                           /* a highlight command like shift-arrow */
-        column_highlighting = 0;
+        edit->column_highlight = 0;
         if (!edit->highlight || (edit->mark2 != -1 && edit->mark1 != edit->mark2))
         {
             edit_mark_cmd (edit, 1);    /* clear */
@@ -3020,9 +3020,9 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         {
             if (!option_persistent_selections)
             {
-                if (column_highlighting)
+                if (edit->column_highlight)
                     edit_push_action (edit, COLUMN_ON);
-                column_highlighting = 0;
+                edit->column_highlight = 0;
                 edit_mark_cmd (edit, 1);
             }
         }
@@ -3160,19 +3160,19 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
 
     case CK_Page_Up_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Page_Up:
     case CK_Page_Up_Highlight:
         edit_move_up (edit, edit->num_widget_lines - 1, 1);
         break;
     case CK_Page_Down_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Page_Down:
     case CK_Page_Down_Highlight:
         edit_move_down (edit, edit->num_widget_lines - 1, 1);
         break;
     case CK_Left_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Left:
     case CK_Left_Highlight:
         if (option_fake_half_tabs)
@@ -3190,7 +3190,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_left_char_move_cmd (edit);
         break;
     case CK_Right_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Right:
     case CK_Right_Highlight:
         if (option_fake_half_tabs)
@@ -3223,37 +3223,37 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_right_word_move_cmd (edit);
         break;
     case CK_Up_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Up:
     case CK_Up_Highlight:
         edit_move_up (edit, 1, 0);
         break;
     case CK_Down_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Down:
     case CK_Down_Highlight:
         edit_move_down (edit, 1, 0);
         break;
     case CK_Paragraph_Up_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Paragraph_Up:
     case CK_Paragraph_Up_Highlight:
         edit_move_up_paragraph (edit, 0);
         break;
     case CK_Paragraph_Down_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Paragraph_Down:
     case CK_Paragraph_Down_Highlight:
         edit_move_down_paragraph (edit, 0);
         break;
     case CK_Scroll_Up_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Scroll_Up:
     case CK_Scroll_Up_Highlight:
         edit_move_up (edit, 1, 1);
         break;
     case CK_Scroll_Down_Alt_Highlight:
-        column_highlighting = 1;
+        edit->column_highlight = 1;
     case CK_Scroll_Down:
     case CK_Scroll_Down_Highlight:
         edit_move_down (edit, 1, 1);
@@ -3298,16 +3298,16 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Mark:
         if (edit->mark2 >= 0)
         {
-            if (column_highlighting)
+            if (edit->column_highlight)
                 edit_push_action (edit, COLUMN_ON);
-            column_highlighting = 0;
+            edit->column_highlight = 0;
         }
         edit_mark_cmd (edit, 0);
         break;
     case CK_Column_Mark:
-        if (!column_highlighting)
+        if (!edit->column_highlight)
             edit_push_action (edit, COLUMN_OFF);
-        column_highlighting = 1;
+        edit->column_highlight = 1;
         edit_mark_cmd (edit, 0);
         break;
     case CK_Mark_All:
@@ -3315,9 +3315,9 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->force |= REDRAW_PAGE;
         break;
     case CK_Unmark:
-        if (column_highlighting)
+        if (edit->column_highlight)
             edit_push_action (edit, COLUMN_ON);
-        column_highlighting = 0;
+        edit->column_highlight = 0;
         edit_mark_cmd (edit, 1);
         break;
 
@@ -3508,7 +3508,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_get_match_keyword_cmd (edit);
         break;
     case CK_Quit:
-        dlg_stop (edit->widget.parent);
+        dlg_stop (edit->widget.owner);
         break;
     case CK_New:
         edit_new_cmd (edit);
@@ -3768,4 +3768,30 @@ void
 edit_move_down (WEdit * edit, unsigned long i, int do_scroll)
 {
     edit_move_updown (edit, i, do_scroll, FALSE);
+}
+
+unsigned int
+edit_unlock_file (WEdit * edit)
+{
+    char *fullpath;
+    unsigned int ret;
+
+    fullpath = g_build_filename (edit->dir, edit->filename, (char *) NULL);
+    ret = unlock_file (fullpath);
+    g_free (fullpath);
+
+    return ret;
+}
+
+unsigned int
+edit_lock_file (WEdit * edit)
+{
+    char *fullpath;
+    unsigned int ret;
+
+    fullpath = g_build_filename (edit->dir, edit->filename, (char *) NULL);
+    ret = lock_file (fullpath);
+    g_free (fullpath);
+
+    return ret;
 }

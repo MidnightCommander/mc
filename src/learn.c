@@ -135,7 +135,7 @@ static int learn_move (int right)
     
     totalcols = (learn_total - 1) / ROWS + 1;
     for (i = 0; i < learn_total; i++)
-        if (learnkeys [i].button == learn_dlg->current) {
+        if (learnkeys [i].button == (Widget *) learn_dlg->current->data) {
             if (right) {
                 if (i < learn_total - ROWS)
                     i += ROWS;
@@ -252,7 +252,7 @@ init_learn (void)
     do_refresh ();
 
     learn_dlg =
-	create_dlg (0, 0, 23, 78, dialog_colors, learn_callback,
+	create_dlg (TRUE, 0, 0, 23, 78, dialog_colors, learn_callback,
 		    "[Learn keys]", learn_title, DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++)

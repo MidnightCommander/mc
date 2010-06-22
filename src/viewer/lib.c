@@ -46,6 +46,7 @@
 
 #include "src/wtools.h"
 #include "src/main.h"
+#include "lib/lock.h"           /* unlock_file() */
 #include "src/charsets.h"
 #include "src/selcodepage.h"
 
@@ -146,15 +147,27 @@ mcview_ok_to_quit (mcview_t * view)
     if (view->change_list == NULL)
         return TRUE;
 
-    r = query_dialog (_("Quit"),
-                      _("File was modified, Save with exit?"), D_NORMAL, 3,
-                      _("&Cancel quit"), _("&Yes"), _("&No"));
+    if (!midnight_shutdown)
+    {
+        r = query_dialog (_("Quit"),
+                          _("File was modified. Save with exit?"), D_NORMAL, 3,
+                          _("&Yes"), _("&No"), _("&Cancel quit"));
+    }
+    else
+    {
+        r = query_dialog (_("Quit"),
+                          _("Midnight Commander is being shut down.\nSave modified file?"),
+                          D_NORMAL, 2, _("&Yes"), _("&No"));
+        /* Esc is No */
+        if (r == -1)
+            r = 1;
+    }
 
     switch (r)
     {
-    case 1:
-        return mcview_hexedit_save_changes (view);
-    case 2:
+    case 0:                    /* Yes */
+        return mcview_hexedit_save_changes (view) || midnight_shutdown;
+    case 1:                    /* No */
         mcview_hexedit_free_change_list (view);
         return TRUE;
     default:
@@ -170,6 +183,7 @@ mcview_init (mcview_t * view)
     size_t i;
 
     view->filename = NULL;
+    view->workdir = NULL;
     view->command = NULL;
     view->search_nroff_seq = NULL;
 
@@ -179,6 +193,7 @@ mcview_init (mcview_t * view)
     /* leave the other growbuf fields uninitialized */
 
     view->hexedit_lownibble = FALSE;
+    view->locked = FALSE;
     view->coord_cache = NULL;
 
     view->dpy_start = 0;
@@ -197,8 +212,6 @@ mcview_init (mcview_t * view)
 
     view->search_start = 0;
     view->search_end = 0;
-
-    view->want_to_quit = FALSE;
 
     view->marker = 0;
     for (i = 0; i < sizeof (view->marks) / sizeof (view->marks[0]); i++)
@@ -235,6 +248,8 @@ mcview_done (mcview_t * view)
 
     g_free (view->filename);
     view->filename = NULL;
+    g_free (view->workdir);
+    view->workdir = NULL;
     g_free (view->command);
     view->command = NULL;
 
@@ -352,6 +367,8 @@ mcview_bol (mcview_t * view, off_t current)
     return current;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 /* returns index of last char on line + width EOL */
 /* mcview_eol of the current line == mcview_bol next line */
 off_t
@@ -382,3 +399,52 @@ mcview_eol (mcview_t * view, off_t current)
     }
     return current;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+mcview_get_title (const Dlg_head * h, size_t len)
+{
+    const mcview_t *view = (const mcview_t *) find_widget_type (h, mcview_callback);
+    const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
+    const char *file_label;
+
+    len -= 4;
+
+    file_label = view->filename != NULL ? view->filename :
+        view->command != NULL ? view->command : "";
+    file_label = str_term_trim (file_label, len - str_term_width1 (_("View: ")));
+
+    return g_strconcat (_("View: "), modified, file_label, (char *) NULL);
+}
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mcview_lock_file (mcview_t * view)
+{
+    char *fullpath;
+    gboolean ret;
+
+    fullpath = g_build_filename (view->workdir, view->filename, (char *) NULL);
+    ret = lock_file (fullpath);
+    g_free (fullpath);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mcview_unlock_file (mcview_t * view)
+{
+    char *fullpath;
+    gboolean ret;
+
+    fullpath = g_build_filename (view->workdir, view->filename, (char *) NULL);
+    ret = unlock_file (fullpath);
+    g_free (fullpath);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */

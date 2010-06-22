@@ -215,7 +215,7 @@ int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
 WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, long line);
 int edit_clean (WEdit * edit);
-int edit_ok_to_exit (WEdit * edit);
+gboolean edit_ok_to_exit (WEdit * edit);
 int edit_renew (WEdit * edit);
 int edit_new_cmd (WEdit * edit);
 int edit_reload (WEdit * edit, const char *filename);
@@ -289,6 +289,9 @@ void edit_syntax_dialog (WEdit * edit, const char *current_syntax);
 void edit_mail_dialog (WEdit * edit);
 void format_paragraph (WEdit * edit, int force);
 
+unsigned int edit_unlock_file (WEdit * edit);
+unsigned int edit_lock_file (WEdit * edit);
+
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);
 
@@ -331,7 +334,5 @@ extern int option_edit_bottom_extreme;
 
 extern const char *option_whole_chars_search;
 extern int search_create_bookmark;
-
-extern int column_highlighting;
 
 #endif /* MC_EDIT_IMPL_H */

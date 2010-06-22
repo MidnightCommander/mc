@@ -46,7 +46,6 @@
 
 #include "option.h"
 
-
 void
 configure_box (void)
 {

@@ -51,7 +51,7 @@
 #include "src/history.h"
 #include "src/panel.h"          /* Needed for current_panel and other_panel */
 #include "src/layout.h"         /* Needed for get_current_index and get_other_panel */
-#include "src/main.h"           /* mc_run_mode */
+#include "src/main.h"           /* mc_run_mode, midnight_shutdown */
 #include "src/selcodepage.h"
 
 #include "ydiff.h"
@@ -2312,8 +2312,8 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->args = args;
     dview->file[0] = file1;
     dview->file[1] = file2;
-    dview->label[0] = label1;
-    dview->label[1] = label2;
+    dview->label[0] = g_strdup (label1);
+    dview->label[1] = g_strdup (label2);
     dview->f[0] = f[0];
     dview->f[1] = f[1];
     dview->hdiff = NULL;
@@ -2449,6 +2449,9 @@ dview_fini (WDiff * dview)
     g_array_free (dview->a[0], TRUE);
     g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
     g_array_free (dview->a[1], TRUE);
+
+    g_free (dview->label[0]);
+    g_free (dview->label[1]);
 
     dview->a[1] = NULL;
     dview->a[0] = NULL;
@@ -2748,6 +2751,8 @@ dview_redo (WDiff * dview)
 static void
 dview_edit (WDiff * dview, int ord)
 {
+    Dlg_head *h;
+    gboolean h_modal;
     int linenum, lineofs;
 
     if (dview->dsrc == DATA_SRC_TMP)
@@ -2756,8 +2761,13 @@ dview_edit (WDiff * dview, int ord)
         return;
     }
 
+    h = ((Widget *) dview)->owner;
+    h_modal = h->modal;
+
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
+    h->modal = TRUE; /* not allow edit file in several editors */
     do_edit_at_line (dview->file[ord], linenum);
+    h->modal = h_modal;
     dview_redo (dview);
     dview_update (dview);
 }
@@ -2794,7 +2804,7 @@ dview_goto_cmd (WDiff * dview, int ord)
                 }
             }
             dview->skip_rows = dview->search.last_accessed_num_line = i;
-            snprintf (prev, sizeof (prev), "%d", newline);
+            g_snprintf (prev, sizeof (prev), "%d", newline);
         }
         g_free (input);
     }
@@ -2805,7 +2815,7 @@ dview_goto_cmd (WDiff * dview, int ord)
 static void
 dview_labels (WDiff * dview)
 {
-    Dlg_head *h = dview->widget.parent;
+    Dlg_head *h = dview->widget.owner;
     WButtonBar *b = find_buttonbar (h);
 
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, (Widget *) dview);
@@ -2930,23 +2940,35 @@ static gboolean
 dview_ok_to_exit (WDiff * dview)
 {
     gboolean res = TRUE;
+    int act;
+
     if (!dview->merged)
         return res;
-    switch (query_dialog
-            (_("Quit"), _("File was modified, Save with exit?"), D_NORMAL, 2, _("&Yes"),
-             _("&No")))
+
+    act = query_dialog (_("Quit"), !midnight_shutdown ?
+                                _("File was modified. Save with exit?") :
+                                _("Midnight Commander is being shut down.\nSave modified file?"),
+                          D_NORMAL, 2, _("&Yes"), _("&No"));
+
+    /* Esc is No */
+    if (midnight_shutdown || (act == -1))
+        act = 1;
+
+    switch (act)
     {
-    case -1:
+    case -1: /* Esc */
         res = FALSE;
         break;
-    case 0:
-        res = TRUE;
+    case 0: /* Yes */
         (void) dview_save (dview);
-        break;
-    case 1:
         res = TRUE;
+        break;
+    case 1: /* No */
         if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+        /* fall through */
+    default:
+        res = TRUE;
         break;
     }
     return res;
@@ -3126,7 +3148,7 @@ static cb_ret_t
 dview_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WDiff *dview = (WDiff *) w;
-    Dlg_head *h = dview->widget.parent;
+    Dlg_head *h = dview->widget.owner;
     cb_ret_t i;
 
     switch (msg)
@@ -3205,12 +3227,32 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
     case DLG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
         if (!dview_ok_to_exit (dview))
-            h->running = 1;
+            h->state = DLG_ACTIVE;
+        else
+            h->state = DLG_CLOSED;
+
         return MSG_HANDLED;
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+dview_get_title (const Dlg_head *h, size_t len)
+{
+    const WDiff *dview = (const WDiff *) find_widget_type (h, dview_callback);
+    const char *modified = dview->merged ? " (*) " : "     ";
+    size_t len1;
+
+    len -=  (size_t) str_term_width1 (_("Diff:")) + strlen (modified);
+    len1 = (len - 3)/2;
+
+    return g_strconcat (_("Diff:"), modified,
+                        str_term_trim (dview->label[0], len1), " | ",
+                        str_term_trim (dview->label[1], len - len1), (char *) NULL);
 }
 
 /*** public functions ****************************************************************************/
@@ -3221,12 +3263,11 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 {
     int error;
     WDiff *dview;
-    WButtonBar *bar;
     Dlg_head *dview_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
-        create_dlg (0, 0, LINES, COLS, NULL, dview_dialog_callback,
+        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback,
                     "[Diff Viewer]", NULL, DLG_WANT_TAB);
 
     dview = g_new0 (WDiff, 1);
@@ -3236,10 +3277,10 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     widget_want_cursor (dview->widget, 0);
 
-    bar = buttonbar_new (1);
-
     add_widget (dview_dlg, dview);
-    add_widget (dview_dlg, bar);
+    add_widget (dview_dlg, buttonbar_new (TRUE));
+
+    dview_dlg->get_title = dview_get_title;
 
     error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       /* XXX binary diff? */
 
@@ -3249,7 +3290,9 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
      */
     if (error == 0)
         run_dlg (dview_dlg);
-    destroy_dlg (dview_dlg);
+
+    if ((error != 0) || (dview_dlg->state == DLG_CLOSED))
+        destroy_dlg (dview_dlg);
 
     return error;
 }

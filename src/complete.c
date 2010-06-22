@@ -1035,7 +1035,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                         listbox_select_entry ((WListbox *) h->current, i);
                         end = str_get_prev_char (&(input->buffer[end])) - input->buffer;
                         handle_char (input, parm);
-                        send_message (h->current, WIDGET_DRAW, 0);
+                        send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
                         break;
                     }
                 }
@@ -1127,7 +1127,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                 if (need_redraw == 2)
                 {
                     insert_text (input, last_text, low);
-                    send_message (h->current, WIDGET_DRAW, 0);
+                    send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
                 }
                 else if (need_redraw == 1)
                 {
@@ -1236,7 +1236,7 @@ complete_engine (WInput * in, int what_to_do)
             min_end = end;
             query_height = h;
             query_width = w;
-            query_dlg = create_dlg (y, x, query_height, query_width,
+            query_dlg = create_dlg (TRUE, y, x, query_height, query_width,
                                     dialog_colors, query_callback,
                                     "[Completion]", NULL, DLG_COMPACT);
             query_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);

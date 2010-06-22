@@ -969,7 +969,7 @@ show_dir (WPanel * panel)
 {
     gchar *tmp;
     set_colors (panel);
-    draw_box (panel->widget.parent,
+    draw_box (panel->widget.owner,
               panel->widget.y, panel->widget.x, panel->widget.lines, panel->widget.cols, FALSE);
 
     if (show_mini_info)
@@ -2509,7 +2509,7 @@ do_enter_on_file_entry (file_entry * fe)
     }
 
     /* Try associated command */
-    if (regex_command (fe->fname, "Open", 0) != 0)
+    if (regex_command (fe->fname, "Open", NULL) != 0)
         return 1;
 
     /* Check if the file is executable */
@@ -3081,7 +3081,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         paint_dir (panel);
         panel->dirty = 0;
 
-        bb = find_buttonbar (panel->widget.parent);
+        bb = find_buttonbar (panel->widget.owner);
         midnight_set_buttonbar (bb);
         buttonbar_redraw (bb);
         return MSG_HANDLED;

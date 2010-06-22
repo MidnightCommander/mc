@@ -162,7 +162,7 @@ static cb_ret_t
 chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     char buffer[BUF_TINY];
-    int id = h->current->dlg_id - BUTTONS + single_set * 2 - 1;
+    int id = dlg_get_current_widget_id (h) - BUTTONS + single_set * 2 - 1;
 
     switch (msg)
     {
@@ -207,7 +207,7 @@ init_chmod (void)
     single_set = (current_panel->marked < 2) ? 2 : 0;
 
     ch_dlg =
-        create_dlg (0, 0, 22 - single_set, 70, dialog_colors,
+        create_dlg (TRUE, 0, 0, 22 - single_set, 70, dialog_colors,
                     chmod_callback, "[Chmod]", _("Chmod command"), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++)

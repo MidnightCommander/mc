@@ -202,7 +202,7 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
 
     displays_status = _status;
 
-    dd = create_dlg (0, 0, dlg_height, dlg_width, dialog_colors,
+    dd = create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors,
                      display_callback, "[Listing Mode...]", display_title,
                      DLG_CENTER | DLG_REVERSE);
 
@@ -597,7 +597,7 @@ init_disp_bits_box (void)
     do_refresh ();
 
     dbits_dlg =
-        create_dlg (0, 0, DISPY, DISPX, dialog_colors, NULL,
+        create_dlg (TRUE, 0, 0, DISPY, DISPX, dialog_colors, NULL,
                     "[Display bits]", _("Display bits"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (dbits_dlg, label_new (3, 4, _("Input / display codepage:")));
@@ -691,7 +691,7 @@ tree_box (const char *current_dir)
     (void) current_dir;
 
     /* Create the components */
-    dlg = create_dlg (0, 0, LINES - 9, COLS - 20, dialog_colors,
+    dlg = create_dlg (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors,
                       tree_callback, "[Directory Tree]",
                       _("Directory tree"), DLG_CENTER | DLG_REVERSE);
 
@@ -983,7 +983,7 @@ jobs_cmd (void)
     }
 #endif /* ENABLE_NLS */
 
-    jobs_dlg = create_dlg (0, 0, JOBS_Y, JOBS_X, dialog_colors, NULL,
+    jobs_dlg = create_dlg (TRUE, 0, 0, JOBS_Y, JOBS_X, dialog_colors, NULL,
                            "[Background jobs]", _("Background Jobs"), DLG_CENTER | DLG_REVERSE);
 
     bg_list = listbox_new (2, 3, JOBS_Y - 9, JOBS_X - 7, FALSE, NULL);
@@ -1074,7 +1074,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
 
     title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
 
-    auth_dlg = create_dlg (0, 0, dialog_y, dialog_x, dialog_colors, NULL,
+    auth_dlg = create_dlg (TRUE, 0, 0, dialog_y, dialog_x, dialog_colors, NULL,
                            "[Smb Authinfo]", title, DLG_CENTER | DLG_REVERSE);
 
     g_free (title);

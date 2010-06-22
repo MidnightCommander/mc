@@ -47,9 +47,8 @@
 #include "setup.h"
 #include "history.h"
 
-
-/* For the simple listbox manager */
 #include "dialog.h"
+#include "dialog-switch.h"
 #include "widget.h"
 #include "wtools.h"
 
@@ -776,8 +775,8 @@ execute_menu_command (WEdit * edit_widget, const char *commands)
     chmod (file_name, S_IRWXU);
     if (run_view)
     {
-        run_view = 0;
-        mcview_viewer (file_name, NULL, &run_view, 0);
+        mcview_viewer (file_name, NULL, 0);
+        dialog_switch_process_pending ();
     }
     else
     {

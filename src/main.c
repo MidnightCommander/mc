@@ -90,6 +90,7 @@
 #include "wtools.h"
 #include "cmddef.h"             /* CK_ cmd name const */
 #include "user.h"               /* user_file_menu_cmd() */
+#include "dialog-switch.h"
 
 #include "chmod.h"
 #include "chown.h"
@@ -324,31 +325,39 @@ change_panel (void)
 static void
 stop_dialogs (void)
 {
-    midnight_dlg->running = 0;
-    if (current_dlg)
-    {
-        current_dlg->running = 0;
-    }
+    midnight_dlg->state = DLG_CLOSED;
+
+    if ((top_dlg != NULL) && (top_dlg->data != NULL))
+        ((Dlg_head *) top_dlg->data)->state = DLG_CLOSED;
 }
 
 static int
 quit_cmd_internal (int quiet)
 {
     int q = quit;
+    size_t n = dialog_switch_num () - 1;
 
-    if (quiet || !confirm_exit)
+    if (n != 0)
     {
-        q = 1;
-    }
-    else
-    {
-        if (query_dialog
-            (_("The Midnight Commander"),
-             _("Do you really want to quit the Midnight Commander?"), D_NORMAL,
-             2, _("&Yes"), _("&No")) == 0)
+        char msg[BUF_MEDIUM];
+
+        g_snprintf (msg, sizeof (msg),
+                    ngettext ("You have %zd opened screen. Quit anyway?",
+                              "You have %zd opened screens. Quit anyway?", n),
+                    n);
+
+        if (query_dialog (_("The Midnight Commander"), msg,
+                         D_NORMAL, 2, _("&Yes"), _("&No")) == 0)
             q = 1;
-    }
-    if (q)
+
+    } else if (quiet || !confirm_exit)
+        q = 1;
+    else if (query_dialog (_("The Midnight Commander"),
+                           _("Do you really want to quit the Midnight Commander?"),
+                           D_NORMAL, 2, _("&Yes"), _("&No")) == 0)
+        q = 1;
+
+    if (q != 0)
     {
 #ifdef HAVE_SUBSHELL_SUPPORT
         if (!use_subshell)
@@ -357,7 +366,8 @@ quit_cmd_internal (int quiet)
 #endif
             stop_dialogs ();
     }
-    if (q)
+
+    if (q != 0)
         quit |= 1;
     return quit;
 }
@@ -573,7 +583,7 @@ load_prompt (int fd, void *unused)
         return 0;
 
     /* Don't actually change the prompt if it's invisible */
-    if (current_dlg == midnight_dlg && command_prompt)
+    if (((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
     {
         char *tmp_prompt;
         int prompt_len;
@@ -584,8 +594,8 @@ load_prompt (int fd, void *unused)
         /* Check for prompts too big */
         if (COLS > 8 && prompt_len > COLS - 8)
         {
-            tmp_prompt[COLS - 8] = '\0';
             prompt_len = COLS - 8;
+            tmp_prompt[prompt_len] = '\0';
         }
         mc_prompt = tmp_prompt;
         label_set_text (the_prompt, mc_prompt);
@@ -757,6 +767,7 @@ create_command_menu (void)
 #ifdef WITH_BACKGROUND
     entries = g_list_append (entries, menu_entry_create (_("&Background jobs"), CK_JobsCmd));
 #endif
+    entries = g_list_append (entries, menu_entry_create (_("Screen lis&t"), CK_DialogListCmd));
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef USE_EXT2FSLIB
     entries =
@@ -827,7 +838,7 @@ menu_last_selected_cmd (void)
 {
     the_menubar->is_active = TRUE;
     the_menubar->is_dropped = (drop_menus != 0);
-    the_menubar->previous_widget = midnight_dlg->current->dlg_id;
+    the_menubar->previous_widget = dlg_get_current_widget_id (midnight_dlg);
     dlg_select_widget (the_menubar);
 }
 
@@ -865,6 +876,41 @@ midnight_get_shortcut (unsigned long command)
         return g_strdup_printf ("%s %s", ext_map, shortcut);
 
     return NULL;
+}
+
+static char *
+midnight_get_title (const Dlg_head *h, size_t len)
+{
+    /* TODO: share code with update_xterm_title_path() */
+
+    const char *path;
+    char host[BUF_TINY];
+    char *p;
+    struct passwd *pw = NULL;
+    char *login = NULL;
+    int res = 0;
+
+    (void) h;
+
+    path = strip_home_and_password (current_panel->cwd);
+    res = gethostname (host, sizeof (host));
+    if (res != 0)
+        host[0] = '\0';
+    else
+        host [sizeof (host) - 1] = '\0';
+
+    pw = getpwuid (getuid ());
+    if (pw != NULL)
+        login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+    else
+        login = g_strdup (host);
+
+    p = g_strdup_printf ("%s [%s]:%s", _("Panels:"), login, path);
+    path = str_trunc (p, len - 4);
+    g_free (login);
+    g_free (p);
+
+    return g_strdup (path);
 }
 
 void
@@ -1179,6 +1225,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         break;
     case CK_DeleteCmd:
         delete_cmd ();
+        break;
+    case CK_DialogListCmd:
+        dialog_switch_list ();
         break;
 #ifdef USE_DIFF_VIEW
     case CK_DiffViewCmd:
@@ -1535,15 +1584,6 @@ done_mc (void)
     vfs_add_current_stamps ();
 }
 
-/* This should be called after destroy_dlg since panel widgets
- *  save their state on the profiles
- */
-static void
-done_mc_profile (void)
-{
-    done_setup ();
-}
-
 static cb_ret_t
 midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
@@ -1739,12 +1779,15 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 void
 update_xterm_title_path (void)
 {
+    /* TODO: share code with midnight_get_title () */
+
     const char *path;
     char host[BUF_TINY];
     char *p;
     struct passwd *pw = NULL;
     char *login = NULL;
     int res = 0;
+
     if (xterm_flag && xterm_title)
     {
         path = strip_home_and_password (current_panel->cwd);
@@ -1785,7 +1828,7 @@ load_hint (int force)
 {
     char *hint;
 
-    if (!the_hint->widget.parent)
+    if (!the_hint->widget.owner)
         return;
 
     if (!message_visible)
@@ -1815,6 +1858,7 @@ static void
 create_panels_and_run_mc (void)
 {
     midnight_dlg->get_shortcut = midnight_get_shortcut;
+    midnight_dlg->get_title = midnight_get_title;
 
     create_panels ();
 
@@ -1884,7 +1928,6 @@ mc_maybe_editor_or_viewer (void)
         break;
     }
     midnight_shutdown = 1;
-    done_mc ();
 }
 
 /* Run the main dialog that occupies the whole screen */
@@ -1899,7 +1942,7 @@ do_nc (void)
 
     panel_init ();
 
-    midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
+    midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
                                "[main]", NULL, DLG_WANT_IDLE);
 
     if (mc_run_mode == MC_RUN_FULL)
@@ -1924,13 +1967,14 @@ do_nc (void)
         if (mc_args__last_wd_file && vfs_current_is_local ())
             last_wd_string = g_strdup (current_panel->cwd);
 
-        done_mc ();
     }
 
+    dialog_switch_shutdown ();
+    done_mc ();
     destroy_dlg (midnight_dlg);
     panel_deinit ();
     current_panel = 0;
-    done_mc_profile ();
+    done_setup ();
 }
 
 /* POSIX version.  The only version we support.  */

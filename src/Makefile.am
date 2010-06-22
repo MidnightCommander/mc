@@ -41,22 +41,21 @@ if CHARSET
     SRC_USE_charset=$(SRC_charset)
 endif
 
-
 mc_LDADD = \
-	../lib/libmc.la \
 	viewer/libmcviewer.la \
-	$(MCLIBS) $(DIFFLIB) $(EDITLIB) $(SLANGLIB) \
-	$(GLIB_LIBS) $(PCRE_LIBS) \
-	$(LIBICONV) $(INTLLIBS)
+	$(DIFFLIB) $(EDITLIB) \
+	../lib/libmc.la \
+	$(MCLIBS) $(SLANGLIB) $(GLIB_LIBS) \
+	$(PCRE_LIBS) $(LIBICONV) $(INTLLIBS)
 
 if USE_SAMBA_FS
 # this is a hack for linking with own samba library in simple way
 mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
 endif
 
-
 SRC_mc_widgets = \
 	dialog.c dialog.h \
+	dialog-switch.c dialog-switch.h \
 	menu.c menu.h \
 	screen.c panel.h \
 	tree.c tree.h \

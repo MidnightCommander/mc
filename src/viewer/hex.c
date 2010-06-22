@@ -43,11 +43,11 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+
 #include "src/main.h"
 #include "src/wtools.h"
 #include "src/charsets.h"
-
-#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "internal.h"
 
@@ -69,8 +69,11 @@ typedef enum
 
 static const char hex_char[] = "0123456789ABCDEF";
 
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static int
-utf8_to_int (char * str, int * char_width, gboolean * result)
+utf8_to_int (char *str, int *char_width, gboolean * result)
 {
     int res = -1;
     gunichar ch;
@@ -112,10 +115,8 @@ utf8_to_int (char * str, int * char_width, gboolean * result)
     return ch;
 }
 
-/*** file scope functions ************************************************************************/
-
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -375,6 +376,11 @@ mcview_hexedit_save_changes (mcview_t * view)
                 g_free (curr);
             }
 
+            view->change_list = NULL;
+
+            if (view->locked)
+                view->locked = mcview_unlock_file (view);
+
             if (mc_close (fp) == -1)
                 message (D_ERROR, _("Save file"),
                          _("Error while closing the file:\n%s\n"
@@ -418,6 +424,10 @@ mcview_hexedit_free_change_list (mcview_t * view)
         g_free (curr);
     }
     view->change_list = NULL;
+
+    if (view->locked)
+        view->locked = mcview_unlock_file (view);
+
     view->dirty++;
 }
 

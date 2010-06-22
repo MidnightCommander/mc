@@ -199,7 +199,7 @@ update_path_name (void)
     const char *text = "";
     char *p;
     WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
-    Dlg_head *dlg = list->widget.parent;
+    Dlg_head *dlg = list->widget.owner;
 
     if (list->count != 0)
     {
@@ -555,7 +555,7 @@ hotlist_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 static int
 l_call (WListbox * list)
 {
-    Dlg_head *dlg = list->widget.parent;
+    Dlg_head *dlg = list->widget.owner;
 
     if (list->count != 0)
     {
@@ -699,7 +699,7 @@ init_hotlist (int list_type)
     }
 
     hotlist_dlg =
-        create_dlg (0, 0, LINES - 2, hotlist_cols, dialog_colors,
+        create_dlg (TRUE, 0, 0, LINES - 2, hotlist_cols, dialog_colors,
                     hotlist_callback, help_node, title, DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++)
@@ -761,7 +761,7 @@ init_movelist (int list_type, struct hotlist *item)
     do_refresh ();
 
     movelist_dlg =
-        create_dlg (0, 0, LINES - 6, movelist_cols, dialog_colors,
+        create_dlg (TRUE, 0, 0, LINES - 6, movelist_cols, dialog_colors,
                     hotlist_callback, "[Hotlist]", hdr, DLG_CENTER | DLG_REVERSE);
     g_free (hdr);
 

@@ -67,6 +67,7 @@
 #include "subshell.h"           /* use_subshell */
 #include "consaver/cons.saver.h"        /* console_flag */
 #include "dialog.h"             /* Widget */
+#include "dialog-switch.h"
 #include "wtools.h"             /* message() */
 #include "main.h"               /* change_panel() */
 #include "panel.h"              /* current_panel */
@@ -121,7 +122,6 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
     static const char *viewer = NULL;
     int move_dir = 0;
 
-
     if (plain_view)
     {
         int changed_hex_mode = 0;
@@ -140,17 +140,29 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
         mcview_default_hex_mode = 0;
         mcview_default_nroff_flag = 0;
         mcview_default_magic_flag = 0;
-        mcview_viewer (NULL, filename, &move_dir, start_line);
+
+        switch (mcview_viewer (NULL, filename, start_line))
+        {
+        case MCVIEW_WANT_NEXT:
+            move_dir = 1;
+            break;
+        case MCVIEW_WANT_PREV:
+            move_dir = -1;
+            break;
+        default:
+            move_dir = 0;
+        }
+
         if (changed_hex_mode && !mcview_altered_hex_mode)
             mcview_default_hex_mode = 1;
         if (changed_nroff_flag && !mcview_altered_nroff_flag)
             mcview_default_nroff_flag = 1;
         if (changed_magic_flag && !mcview_altered_magic_flag)
             mcview_default_magic_flag = 1;
-        repaint_screen ();
-        return move_dir;
+
+        dialog_switch_process_pending ();
     }
-    if (internal)
+    else if (internal)
     {
         char view_entry[BUF_TINY];
 
@@ -161,22 +173,35 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
 
         if (regex_command (filename, view_entry, &move_dir) == 0)
         {
-            mcview_viewer (NULL, filename, &move_dir, start_line);
-            repaint_screen ();
+            switch (mcview_viewer (NULL, filename, start_line))
+            {
+            case MCVIEW_WANT_NEXT:
+                move_dir = 1;
+                break;
+            case MCVIEW_WANT_PREV:
+                move_dir = -1;
+                break;
+            default:
+                move_dir = 0;
+            }
+
+            dialog_switch_process_pending ();
         }
     }
     else
     {
-        if (!viewer)
+        if (viewer == NULL)
         {
             viewer = getenv ("VIEWER");
-            if (!viewer)
+            if (viewer == NULL)
                 viewer = getenv ("PAGER");
-            if (!viewer)
+            if (viewer == NULL)
                 viewer = "view";
         }
+
         execute_with_vfs_arg (viewer, filename);
     }
+
     return move_dir;
 }
 
@@ -300,12 +325,13 @@ filtered_view_cmd (void)
         input_dialog (_("Filtered view"),
                       _("Filter command and arguments:"),
                       MC_HISTORY_FM_FILTERED_VIEW, selection (current_panel)->fname);
-    if (!command)
-        return;
 
-    mcview_viewer (command, "", NULL, 0);
-
-    g_free (command);
+    if (command != NULL)
+    {
+        mcview_viewer (command, "", 0);
+        g_free (command);
+        dialog_switch_process_pending ();
+    }
 }
 
 void
@@ -329,11 +355,16 @@ do_edit_at_line (const char *what, int start_line)
         }
         execute_with_vfs_arg (editor, what);
     }
+
     if (mc_run_mode == MC_RUN_FULL)
-    {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+
+#ifdef USE_INTERNAL_EDIT
+    if (use_internal_edit)
+        dialog_switch_process_pending ();
+    else
+#endif /* USE_INTERNAL_EDIT */
         repaint_screen ();
-    }
 }
 
 static void
@@ -345,7 +376,7 @@ do_edit (const char *what)
 void
 edit_cmd (void)
 {
-    if (regex_command (selection (current_panel)->fname, "Edit", 0) == 0)
+    if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
         do_edit (selection (current_panel)->fname);
 }
 
@@ -959,10 +990,9 @@ diff_view_cmd (void)
     dview_diff_cmd ();
 
     if (mc_run_mode == MC_RUN_FULL)
-    {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-        repaint_screen ();
-    }
+
+    dialog_switch_process_pending ();
 }
 #endif
 

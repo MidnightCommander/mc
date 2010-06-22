@@ -76,7 +76,7 @@ static enum ruler_type
 static void
 mcview_set_buttonbar (mcview_t * view)
 {
-    Dlg_head *h = view->widget.parent;
+    Dlg_head *h = view->widget.owner;
     WButtonBar *b = find_buttonbar (h);
     const global_keymap_t *keymap = view->hex_mode ? view->hex_map : view->plain_map;
 
@@ -188,7 +188,7 @@ mcview_update (mcview_t * view)
     {
         view->dpy_bbar_dirty = FALSE;
         mcview_set_buttonbar (view);
-        buttonbar_redraw (find_buttonbar (view->widget.parent));
+        buttonbar_redraw (find_buttonbar (view->widget.owner));
     }
 
     if (view->dirty > dirt_limit)

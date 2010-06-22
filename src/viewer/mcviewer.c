@@ -212,6 +212,7 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;
+    view->locked = FALSE;
     view->hexview_in_text = FALSE;
     view->text_nroff_mode = FALSE;
     view->text_wrap_mode = FALSE;
@@ -237,15 +238,16 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 /* --------------------------------------------------------------------------------------------- */
 
 /* Real view only */
-int
-mcview_viewer (const char *command, const char *file, int *move_dir_p, int start_line)
+mcview_ret_t
+mcview_viewer (const char *command, const char *file, int start_line)
 {
     gboolean succeeded;
     mcview_t *lc_mcview;
     Dlg_head *view_dlg;
+    mcview_ret_t ret;
 
     /* Create dialog and widgets, put them on the dialog */
-    view_dlg = create_dlg (0, 0, LINES, COLS, NULL, mcview_dialog_callback,
+    view_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback,
                            "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
     lc_mcview = mcview_new (0, 0, LINES - 1, COLS, FALSE);
@@ -253,21 +255,27 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
 
     add_widget (view_dlg, buttonbar_new (TRUE));
 
+    view_dlg->get_title = mcview_get_title;
+
     succeeded = mcview_load (lc_mcview, command, file, start_line);
+
     if (succeeded)
     {
         run_dlg (view_dlg);
-        if (move_dir_p)
-            *move_dir_p = lc_mcview->move_dir;
+
+        ret = lc_mcview->move_dir == 0 ? MCVIEW_EXIT_OK :
+            lc_mcview->move_dir > 0 ? MCVIEW_WANT_NEXT : MCVIEW_WANT_PREV;
     }
     else
     {
-        if (move_dir_p)
-            *move_dir_p = 0;
+        view_dlg->state = DLG_CLOSED;
+        ret = MCVIEW_EXIT_FAILURE;
     }
-    destroy_dlg (view_dlg);
 
-    return succeeded;
+    if (view_dlg->state == DLG_CLOSED)
+        destroy_dlg (view_dlg);
+
+    return ret;
 }
 
 /* {{{ Miscellaneous functions }}} */
@@ -282,6 +290,36 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     assert (view->bytes_per_line != 0);
 
     view->filename = g_strdup (file);
+
+    if ((view->workdir == NULL) && (file != NULL))
+    {
+        if (!g_path_is_absolute (file))
+        {
+#ifdef ENABLE_VFS
+            view->workdir = g_strdup (vfs_get_current_dir ());
+#else /* ENABLE_VFS */
+            view->workdir = g_get_current_dir ();
+#endif /* ENABLE_VFS */
+        }
+        else
+        {
+            /* try extract path form filename */
+            char *dirname;
+
+            dirname = g_path_get_dirname (file);
+            if (strcmp (dirname, ".") != 0)
+                view->workdir = dirname;
+            else
+            {
+                g_free (dirname);
+#ifdef ENABLE_VFS
+                view->workdir = g_strdup (vfs_get_current_dir ());
+#else /* ENABLE_VFS */
+                view->workdir = g_get_current_dir ();
+#endif /* ENABLE_VFS */
+            }
+        }
+    }
 
     if (!mcview_is_in_panel (view))
         view->dpy_text_column = 0;
@@ -305,6 +343,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             mcview_show_error (view, tmp);
             g_free (view->filename);
             view->filename = NULL;
+            g_free (view->workdir);
+            view->workdir = NULL;
             goto finish;
         }
 
@@ -317,6 +357,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             mcview_show_error (view, tmp);
             g_free (view->filename);
             view->filename = NULL;
+            g_free (view->workdir);
+            view->workdir = NULL;
             goto finish;
         }
 
@@ -326,6 +368,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             mcview_show_error (view, _("Cannot view: not a regular file"));
             g_free (view->filename);
             view->filename = NULL;
+            g_free (view->workdir);
+            view->workdir = NULL;
             goto finish;
         }
 

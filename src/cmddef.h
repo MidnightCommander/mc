@@ -387,6 +387,9 @@
 #define CK_DiffViewCmd                  7076
 #define CK_PanelOptionsBox              7077
 #define CK_RelativeSymlinkCmd           7078
+#define CK_DialogListCmd                7079
+#define CK_DialogNextCmd                7080
+#define CK_DialogPrevCmd                7081
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001

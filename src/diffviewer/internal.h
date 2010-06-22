@@ -82,7 +82,7 @@ typedef struct WDiff
 
     const char *args;           /* Args passed to diff */
     const char *file[2];        /* filenames */
-    const char *label[2];
+    char *label[2];
     FBUF *f[2];
     const char *backup_sufix;
     gboolean merged;
