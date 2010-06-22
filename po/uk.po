@@ -860,7 +860,7 @@ msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося змінити права на \\«%s\\» \n"
+"Не вдалося змінити права на «%s» \n"
 " %s "
 
 #, c-format
@@ -868,7 +868,7 @@ msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося змінити власника \\«%s\\» \n"
+"Не вдалося змінити власника «%s» \n"
 " %s"
 
 msgid "Displays the current version"
@@ -997,7 +997,7 @@ msgid ""
 msgstr ""
 "\n"
 "Будь ласка, створюйте будь-які повідомлення про помилки\n"
-"(включаючи вивід \\«mc -V\\») як квитки на сайті www.midnight-commander.org\n"
+"(включаючи вивід «mc -V») як квитки на сайті www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -1418,7 +1418,7 @@ msgstr "символьне посилання: %s"
 
 #, c-format
 msgid "Symlink `%s' points to:"
-msgstr "Символьне посилання \\«%s\\» вказує на:"
+msgstr "Символьне посилання «%s» вказує на:"
 
 msgid "Edit symlink"
 msgstr "Редагувати символьне посилання"
@@ -1477,7 +1477,7 @@ msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдається змінити каталог на \\«%s\\»\n"
+"Не вдається змінити каталог на «%s»\n"
 "%s "
 
 msgid "Cannot execute commands on non-local filesystems"
