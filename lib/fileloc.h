@@ -29,6 +29,23 @@
 #define CHARSETS_INDEX		"mc.charsets"
 #define MC_LIB_EXT		"mc.ext"
 
+#define FISH_PREFIX		"fish"
+
+#define FISH_LS_FILE		"ls"
+#define FISH_EXISTS_FILE	"fexists"
+#define FISH_MKDIR_FILE		"mkdir"
+#define FISH_UNLINK_FILE	"unlink"
+#define FISH_CHOWN_FILE		"chown"
+#define FISH_CHMOD_FILE		"chmod"
+#define FISH_RMDIR_FILE		"rmdir"
+#define FISH_LN_FILE		"ln"
+#define FISH_MV_FILE		"mv"
+#define FISH_HARDLINK_FILE	"hardlink"
+#define FISH_GET_FILE		"get"
+#define FISH_SEND_FILE		"send"
+#define FISH_APPEND_FILE	"append"
+#define FISH_INFO_FILE		"info"
+
 #define MC_EXTFS_DIR		"extfs.d"
 
 #define MC_BASHRC_FILE		"bashrc"

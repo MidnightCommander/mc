@@ -3,9 +3,9 @@ SAMBA_CFLAGS  = -DCONFIGDIR=\""@configdir@"\"
 SAMBA_SUBDIRS = samba
 endif
 
-DIST_SUBDIRS = extfs
+DIST_SUBDIRS = extfs fish
 
-SUBDIRS   = extfs $(SAMBA_SUBDIRS)
+SUBDIRS   = extfs fish $(SAMBA_SUBDIRS)
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(SAMBA_CFLAGS)
 
 AM_CPPFLAGS = -DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\"
@@ -13,9 +13,9 @@ AM_CPPFLAGS = -DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\"
 BASICFILES = 			\
 	cpio.c			\
 	direntry.c		\
-	extfs.c 		\
-	gc.c	 		\
-	local.c 		\
+	extfs.c			\
+	gc.c			\
+	local.c			\
 	tar.c			\
 	sfs.c			\
 	utilvfs.c		\
@@ -23,12 +23,13 @@ BASICFILES = 			\
 
 VFSHDRS = 			\
 	fish.h			\
-	ftpfs.h 		\
-	gc.h	 		\
+	fishdef.h		\
+	ftpfs.h			\
+	gc.h			\
 	local.h			\
-	mcfs.h 			\
-	mcfsutil.h 		\
-	netutil.h 		\
+	mcfs.h			\
+	mcfsutil.h		\
+	netutil.h		\
 	smbfs.h			\
 	utilvfs.h		\
 	vfs.h			\
@@ -49,7 +50,7 @@ NETFILES = netutil.c fish.c ftpfs.c mcfs.c mcfsutil.c $(SMB_NETFILES)
 
 NONETFILES = $(BASICFILES) $(UNDEL_FILES)
 
-EXTRA_DIST = HACKING README README.fish \
+EXTRA_DIST = HACKING README \
 	$(VFSHDRS) $(BASICFILES) $(NETFILES) $(SMBFILES) $(UNDELFILES)
 
 dist-hook:

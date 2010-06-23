@@ -6,6 +6,8 @@
 
    Written by: 1998 Pavel Machek
    Spaces fix: 2000 Michal Svec
+               2010 Andrew Borobin
+               2010 Ilia Maslakov
 
    Derived from ftpfs.c.
 
@@ -57,6 +59,7 @@
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
 #include "lib/strescape.h"
 #include "lib/unixcompat.h"
+#include "lib/fileloc.h"
 
 #include "src/wtools.h"         /* message() */
 #include "src/main.h"           /* print_vfs_message */
@@ -67,6 +70,7 @@
 #include "gc.h"                 /* vfs_stamp_create */
 #include "netutil.h"
 #include "fish.h"
+#include "fishdef.h"
 
 int fish_directory_timeout = 900;
 
@@ -75,7 +79,7 @@ int fish_directory_timeout = 900;
 #define DO_FREE_RESOURCE   4
 
 #define FISH_FLAG_COMPRESSED 1
-#define FISH_FLAG_RSH	     2
+#define FISH_FLAG_RSH        2
 
 #define OPT_FLUSH        1
 #define OPT_IGNORE_ERROR 2
@@ -83,23 +87,58 @@ int fish_directory_timeout = 900;
 /*
  * Reply codes.
  */
-#define PRELIM		1       /* positive preliminary */
-#define COMPLETE	2       /* positive completion */
-#define CONTINUE	3       /* positive intermediate */
-#define TRANSIENT	4       /* transient negative completion */
-#define ERROR		5       /* permanent negative completion */
+#define PRELIM          1       /* positive preliminary */
+#define COMPLETE        2       /* positive completion */
+#define CONTINUE        3       /* positive intermediate */
+#define TRANSIENT       4       /* transient negative completion */
+#define ERROR           5       /* permanent negative completion */
 
 /* command wait_flag: */
 #define NONE        0x00
 #define WAIT_REPLY  0x01
 #define WANT_STRING 0x02
+
+/* environment flags */
+#define FISH_HAVE_HEAD         1
+#define FISH_HAVE_SED          2
+#define FISH_HAVE_AWK          4
+#define FISH_HAVE_PERL         8
+#define FISH_HAVE_LSQ         16
+#define FISH_HAVE_DATE_MDYT   32
+
 static char reply_str[80];
 
 static struct vfs_class vfs_fish_ops;
 
-static int
-fish_command (struct vfs_class *me, struct vfs_s_super *super,
-              int wait_reply, const char *fmt, ...) __attribute__ ((format (__printf__, 4, 5)));
+
+static char *
+fish_load_script_from_file (const char *hostname, const char *script_name, const char *def_content)
+{
+    char *scr_filename = NULL;
+    char *scr_content;
+    gsize scr_len = 0;
+
+    /* 1st: scan user directory */
+    scr_filename = g_build_path (PATH_SEP_STR, home_dir, MC_USERCONF_DIR, FISH_PREFIX, hostname,
+                                 script_name, (char *) NULL);
+    /* silent about user dir */
+    g_file_get_contents (scr_filename, &scr_content, &scr_len, NULL);
+    g_free (scr_filename);
+    /* 2nd: scan system dir */
+    if (scr_content == NULL)
+    {
+        g_free (scr_content);
+        scr_filename = g_build_path (PATH_SEP_STR, LIBEXECDIR, FISH_PREFIX, script_name, (char *) NULL);
+        g_file_get_contents (scr_filename, &scr_content, &scr_len, NULL);
+        g_free (scr_filename);
+    }
+
+    if (scr_content != NULL)
+        return scr_content;
+
+    g_free (scr_content);
+    return g_strdup (def_content);
+}
 
 static int
 fish_decode_reply (char *s, int was_garbage)
@@ -195,6 +234,21 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     g_free (SUP.user);
     g_free (SUP.cwdir);
     g_free (SUP.password);
+    g_free (SUP.scr_ls);
+    g_free (SUP.scr_exists);
+    g_free (SUP.scr_mkdir);
+    g_free (SUP.scr_unlink);
+    g_free (SUP.scr_chown);
+    g_free (SUP.scr_chmod);
+    g_free (SUP.scr_rmdir);
+    g_free (SUP.scr_ln);
+    g_free (SUP.scr_mv);
+    g_free (SUP.scr_hardlink);
+    g_free (SUP.scr_get);
+    g_free (SUP.scr_send);
+    g_free (SUP.scr_append);
+    g_free (SUP.scr_info);
+    g_free (SUP.scr_env);
 }
 
 static void
@@ -233,6 +287,57 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
         _exit (3);
     }
 }
+
+static char *
+fish_set_env (int flags)
+{
+    GString *tmp;
+
+    tmp = g_string_sized_new (128);
+    g_string_assign (tmp, "export ");
+
+    if ((flags & FISH_HAVE_HEAD) != 0)
+       g_string_append (tmp, "FISH_HAVE_HEAD=1 ");
+
+    if ((flags & FISH_HAVE_SED) != 0)
+       g_string_append (tmp, "FISH_HAVE_SED=1 ");
+
+    if ((flags & FISH_HAVE_AWK) != 0)
+       g_string_append (tmp, "FISH_HAVE_AWK=1 ");
+
+    if ((flags & FISH_HAVE_PERL) != 0)
+       g_string_append (tmp, "FISH_HAVE_PERL=1 ");
+
+    if ((flags & FISH_HAVE_LSQ) != 0)
+       g_string_append (tmp, "FISH_HAVE_LSQ=1 ");
+
+    if ((flags & FISH_HAVE_DATE_MDYT) != 0)
+       g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 ");
+
+    return g_string_free (tmp, FALSE);
+}
+
+static gboolean
+fish_info (struct vfs_class *me, struct vfs_s_super *super)
+{
+    char buffer[8192];
+    if (fish_command (me, super, NONE, SUP.scr_info) == COMPLETE)
+    {
+        while (1)
+        {
+            int res;
+            res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP.sockr);
+            if ((!res) || (res == EINTR))
+                ERRNOR (ECONNRESET, FALSE);
+            if (!strncmp (buffer, "### ", 4))
+                break;
+            SUP.host_flags = atol (buffer);
+        }
+        return TRUE;
+    }
+    ERRNOR (E_PROTO, FALSE);
+}
+
 
 /* The returned directory should always contain a trailing slash */
 static char *
@@ -337,15 +442,19 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
         ERRNOR (E_PROTO, -1);
 
     print_vfs_message (_("fish: Handshaking version..."));
-    if (fish_command (me, super, WAIT_REPLY, "#VER 0.0.0\necho '### 000'\n") != COMPLETE)
+    if (fish_command (me, super, WAIT_REPLY, "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command
         (me, super, WAIT_REPLY,
-         "LANG=C; LC_ALL=C; LC_TIME=C\n"
-         "export LANG; export LC_ALL; export LC_TIME\n" "echo '### 200'\n") != COMPLETE)
+         "export LANG=C LC_ALL=C LC_TIME=C\n"
+         "echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
+
+    print_vfs_message (_("fish: Getting host info..."));
+    if (fish_info (me, super))
+        SUP.scr_env = fish_set_env (SUP.host_flags);
 
     print_vfs_message (_("fish: Setting up current directory..."));
     SUP.cwdir = fish_getcwd (me, super);
@@ -381,6 +490,20 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     SUP.cwdir = NULL;
     if (password)
         SUP.password = password;
+    SUP.scr_ls = fish_load_script_from_file (host, FISH_LS_FILE, FISH_LS_DEF_CONTENT);
+    SUP.scr_exists = fish_load_script_from_file (host, FISH_EXISTS_FILE, FISH_EXISTS_FILE);
+    SUP.scr_mkdir = fish_load_script_from_file (host, FISH_MKDIR_FILE, FISH_MKDIR_FILE);
+    SUP.scr_unlink = fish_load_script_from_file (host, FISH_UNLINK_FILE, FISH_UNLINK_FILE);
+    SUP.scr_chown = fish_load_script_from_file (host, FISH_CHOWN_FILE, FISH_CHOWN_FILE);
+    SUP.scr_chmod = fish_load_script_from_file (host, FISH_CHMOD_FILE, FISH_CHMOD_FILE);
+    SUP.scr_rmdir = fish_load_script_from_file (host, FISH_RMDIR_FILE, FISH_RMDIR_FILE);
+    SUP.scr_ln = fish_load_script_from_file (host, FISH_LN_FILE, FISH_LN_FILE);
+    SUP.scr_mv = fish_load_script_from_file (host, FISH_MV_FILE, FISH_MV_FILE);
+    SUP.scr_hardlink = fish_load_script_from_file (host, FISH_HARDLINK_FILE, FISH_HARDLINK_FILE);
+    SUP.scr_get = fish_load_script_from_file (host, FISH_GET_FILE, FISH_GET_FILE);
+    SUP.scr_send = fish_load_script_from_file (host, FISH_SEND_FILE,FISH_SEND_FILE);
+    SUP.scr_append = fish_load_script_from_file (host, FISH_APPEND_FILE, FISH_APPEND_FILE);
+    SUP.scr_info = fish_load_script_from_file (host, FISH_INFO_FILE, FISH_INFO_FILE);
     return fish_open_archive_int (me, super);
 }
 
@@ -424,16 +547,15 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     int reply_code;
     gchar *shell_commands;
 
-#if 0
     /*
      * Simple FISH debug interface :]
      */
+#if 0
     if (!(MEDATA->logfile))
     {
         MEDATA->logfile = fopen ("/tmp/mc-FISH.sh", "w");
     }
-#endif /* 0 */
-
+#endif
     logfile = MEDATA->logfile;
 
     print_vfs_message (_("fish: Reading directory %s..."), remote_path);
@@ -441,100 +563,8 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     gettimeofday (&dir->timestamp, NULL);
     dir->timestamp.tv_sec += fish_directory_timeout;
     quoted_path = strutils_shell_escape (remote_path);
-    /* *INDENT-OFF* */
-    shell_commands = g_strconcat (
-            "#LIST /%s\n"
-            "if `perl -v > /dev/null 2>&1` ; then\n"
-                "perl -e '\n"
-                    "use strict;\n"
-                    "use POSIX;\n"
-                    "use Fcntl;\n"
-                    "use POSIX \":fcntl_h\"; #S_ISLNK was here until 5.6\n"
-                    "import Fcntl \":mode\" unless defined &S_ISLNK; #and is now here\n"
-                    "my $dirname = $ARGV[0];\n"
-                    "if (opendir ( DIR, $dirname )) {\n"
-                        "while( (my $filename = readdir(DIR))){\n"
-                            "my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat(\"$dirname/$filename\");\n"
-                            "my $mloctime= strftime(\"%%m-%%d-%%Y %%H:%%M\", localtime $mtime);\n"
-        ,
-                            "my $strutils_shell_escape_regex = s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ \\\\])/\\\\$1/g;\n"
-                            "my $e_filename = $filename;\n"
-                            "$e_filename =~ $strutils_shell_escape_regex;\n"
-                            "if (S_ISLNK($mode) ) {\n"
-                                "my $linkname = readlink (\"$dirname/$filename\");\n"
-                                "$linkname =~ $strutils_shell_escape_regex;\n"
-                                "\n"
-                                "printf(\"R%%o %%o $uid.$gid\\n" "S$size\\n"
-                                "d$mloctime\\n"
-                                ":\\\"$e_filename\\\" -> \\\"$linkname\\\"\\n"
-                                "\\n\", S_IMODE($mode), S_IFMT($mode));\n"
-                            "} else {\n"
-                                "printf(\"R%%o %%o $uid.$gid\\n"
-                                "S$size\\n"
-                                "d$mloctime\\n"
-                                ":\\\"$e_filename\\\"\\n"
-                                "\\n\", S_IMODE($mode), S_IFMT($mode));\n"
-                            "}}\n"
-        ,
-                        "printf(\"### 200\\n\");\n"
-                        "closedir(DIR);\n"
-                    "} else {\n"
-                        "printf(\"### 500\\n\");\n"
-                    "}\n"
-                    "exit 0\n"
-                "' /%s ||\n"     /* ARGV[0] - path to browse */
-                "    echo '### 500'\n"        /* do not hang if perl is to eval it */
-            "elif `ls -1 /%s >/dev/null 2>&1` ; then\n"
-                "if `ls -Q /%s >/dev/null 2>&1`; then\n"
-                    "LSOPT=\"-Qlan\";\n"
-                    "ADD=0;\n"
-                "else\n"
-                    "LSOPT=\"-lan\";\n"
-                    "ADD=1;\n"
-                "fi\n"
-                "ls $LSOPT /%s 2>/dev/null | grep '^[^cbt]' | (\n"
-                    "while read p l u g s m d y n n2 n3; do\n"
-                        "if test \"$m\" = \"0\" ; then \n"
-                            "s=$d; m=$y; d=$n y=$n2; n=$n3\n"
-                        "else\n"
-                            "n=$n\" \"$n2\" \"$n3\n"
-                        "fi\n"
-                        "if [ $ADD  = 0 ]; then\n"
-                            "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
-                        "elif `sed --version >/dev/null 2>&1` ; then\n"
-                            "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\\1\" -> \"\\2#'`\n",
-                            "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
-                        "else\n"
-                            "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
-                        "fi\n"
-                    "done )\n"
-                "ls $LSOPT /%s 2>/dev/null | grep '^[cb]' | (\n"
-                    "while read p l u g a i m d y n n2 n3; do\n"
-                        "if test \"$a\" = \"0\" ; then \n"
-                            "a=$m; i=$d; m=$y; d=$n y=$n2; n=$n3\n"
-                        "else\n"
-                            "n=$n\" \"$n2\" \"$n3\n"
-                        "fi\n"
-                        "if [ $ADD = 0 ]; then\n"
-                            "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
-                        "elif `sed --version >/dev/null 2>&1` ; then\n"
-                            "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\\1\" -> \"\\2#'`\n"
-                            "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
-                        "else\n"
-                            "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
-                        "fi\n"
-                    "done)\n"
-                "echo '### 200'\n"
-            "else\n"
-                "echo '### 500'\n"
-            "fi\n"
-            ,
-            (char *) NULL);
-    /* *INDENT-ON* */
-
-    fish_command (me, super, NONE, shell_commands,
-                  quoted_path, quoted_path, quoted_path, quoted_path, quoted_path, quoted_path);
-
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_ls, (char *) NULL);
+    fish_command (me, super, NONE, shell_commands, quoted_path);
     g_free (shell_commands);
     g_free (quoted_path);
     ent = vfs_s_generate_entry (me, NULL, dir, 0);
@@ -714,6 +744,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 static int
 fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localname)
 {
+    gchar *shell_commands = NULL;
     struct vfs_s_super *super = FH_SUPER;
     int n, total;
     char buffer[8192];
@@ -767,50 +798,17 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
     /* FIXME: File size is limited to ULONG_MAX */
     if (!fh->u.fish.append)
     {
-        /* *INDENT-OFF* */
-        n = fish_command (me, super, WAIT_REPLY,
-                "#STOR %lu /%s\n"
-                "echo '### 001'\n"
-                "file=/%s\n"
-                "res=`exec 3>&1\n"
-                "(\n"
-                    "head -c %lu -q - || echo DD >&3\n"
-                ") 2>/dev/null | (\n"
-                    "cat > $file\n"
-                    "cat > /dev/null\n"
-                ")`; [ \"$res\" = DD ] && {\n"
-                    "> \"$file\"\n"
-                    "rest=%lu\n"
-                    "while [ $rest -gt 0 ]\n"
-                    "do\n"
-                    "    cnt=`expr \\( $rest + 255 \\) / 256`\n"
-                    "    n=`dd bs=256 count=$cnt | tee -a \"$file\" | wc -c`\n"
-                    "    rest=`expr $rest - $n`\n"
-                    "done\n"
-                "}; echo '### 200'\n",
-                (unsigned long) s.st_size, quoted_name,
-                quoted_name, (unsigned long) s.st_size, (unsigned long) s.st_size);
-        /* *INDENT-ON* */
+        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%lu;\n",
+                                      SUP.scr_append, (char *) NULL);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (unsigned long) s.st_size);
+        g_free (shell_commands);
     }
     else
     {
-        /* *INDENT-OFF* */
-        n = fish_command (me, super, WAIT_REPLY,
-                "#STOR %lu /%s\n"
-                "echo '### 001'\n"
-                "{\n"
-                    "file=/%s\n"
-                    "rest=%lu\n"
-                    "while [ $rest -gt 0 ]\n"
-                    "do\n"
-                    "    cnt=`expr \\( $rest + 255 \\) / 256`\n"
-                    "    n=`dd bs=256 count=$cnt | tee -a $file | wc -c`\n"
-                    "    rest=`expr $rest - $n`\n"
-                    "done\n"
-                "}; echo '### 200'\n",
-                (unsigned long) s.st_size, quoted_name,
-                quoted_name, (unsigned long) s.st_size);
-        /* *INDENT-ON* */
+        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%lu;\n",
+                                      SUP.scr_send, (char *) NULL);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (unsigned long) s.st_size);
+        g_free (shell_commands);
     }
     if (n != PRELIM)
     {
@@ -864,6 +862,8 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
 static int
 fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 {
+    gchar *shell_commands = NULL;
+    struct vfs_s_super *super = FH_SUPER;
     char *name;
     char *quoted_name;
     if (offset)
@@ -881,23 +881,10 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
      * with exit status of 0 use `cat' to send the file contents to the
      * standard output (i.e. over the network).
      */
-    /* *INDENT-OFF* */
-    offset = fish_command (me, FH_SUPER, WANT_STRING,
-                "#RETR /%s\n"
-                "if dd if=/%s of=/dev/null bs=1 count=1 2>/dev/null ;\n"
-                "then\n"
-                    "ls -ln /%s 2>/dev/null | (\n"
-                        "read p l u g s r\n"
-                        "echo $s\n"
-                        ")\n"
-                    "echo '### 100'\n"
-                    "cat /%s\n"
-                    "echo '### 200'\n"
-                "else\n"
-                    "echo '### 500'\n"
-                "fi\n",
-                quoted_name, quoted_name, quoted_name, quoted_name);
-    /* *INDENT-ON* */
+
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_get, (char *) NULL);
+    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name);
+    g_free (shell_commands);
     g_free (quoted_name);
     if (offset != PRELIM)
         ERRNOR (E_REMOTE, 0);
@@ -1030,92 +1017,114 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
     rpath = strutils_shell_escape (crpath); \
     g_free (mpath);
 
-#define POSTFIX(flags) \
-    g_free (rpath); \
-    return fish_send_command (me, super, buf, flags);
+static int
+fish_rename (struct vfs_class *me, const char *path1, const char *path2)
+{
+    gchar *shell_commands = NULL;
+    char buf[BUF_LARGE];
+    const char *crpath1, *crpath2;
+    char *rpath1, *rpath2, *mpath1, *mpath2;
+    struct vfs_s_super *super, *super2;
+    crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super, 0);
+    if (crpath1 == NULL)
+    {
+        g_free (mpath1);
+        return -1;
+    }
+    crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0);
+    if (crpath2 == NULL)
+    {
+        g_free (mpath1);
+        g_free (mpath2);
+        return -1;
+    }
+    rpath1 = strutils_shell_escape (crpath1);
+    g_free (mpath1);
+    rpath2 = strutils_shell_escape (crpath2);
+    g_free (mpath2);
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
+                                  SUP.scr_mv, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath1, rpath2);
+    g_free (shell_commands);
+    g_free (rpath1);
+    g_free (rpath2);
+    return fish_send_command(me, super2, buf, OPT_FLUSH);
+}
 
 static int
-fish_chmod (struct vfs_class *me, const char *path, int mode)
+fish_link (struct vfs_class *me, const char *path1, const char *path2)
 {
-    /* *INDENT-OFF* */
-    PREFIX
-    g_snprintf (buf, sizeof (buf),
-                "#CHMOD %4.4o /%s\n"
-                "if chmod %4.4o /%s 2>/dev/null; then\n"
-                    "echo '### 000'\n"
-                "else\n"
-                    "echo '### 500'\n"
-                "fi\n",
-                mode & 07777, rpath, mode & 07777, rpath);
-    POSTFIX (OPT_FLUSH);
-    /* *INDENT-ON* */
+    gchar *shell_commands = NULL;
+    char buf[BUF_LARGE];
+    const char *crpath1, *crpath2;
+    char *rpath1, *rpath2, *mpath1, *mpath2;
+    struct vfs_s_super *super, *super2;
+    crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super, 0);
+    if (crpath1 == NULL)
+    {
+        g_free (mpath1);
+        return -1;
+    }
+    crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0);
+    if (crpath2 == NULL)
+    {
+        g_free (mpath1);
+        g_free (mpath2);
+        return -1;
+    }
+    rpath1 = strutils_shell_escape (crpath1);
+    g_free (mpath1);
+    rpath2 = strutils_shell_escape (crpath2);
+    g_free (mpath2);
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
+                                  SUP.scr_hardlink, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath1, rpath2);
+    g_free (shell_commands);
+    g_free (rpath1);
+    g_free (rpath2);
+    return fish_send_command(me, super2, buf, OPT_FLUSH);
 }
-
-/* *INDENT-OFF* */
-#define FISH_OP(name, string) \
-static int fish_##name (struct vfs_class *me, const char *path1, const char *path2) \
-{ \
-    char buf[BUF_LARGE]; \
-    const char *crpath1, *crpath2; \
-    char *rpath1, *rpath2, *mpath1, *mpath2; \
-    struct vfs_s_super *super1, *super2; \
-    crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0); \
-    if (crpath1 == NULL) \
-    { \
-        g_free (mpath1); \
-        return -1; \
-    } \
-    crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0); \
-    if (crpath2 == NULL) \
-    { \
-        g_free (mpath1); \
-        g_free (mpath2); \
-        return -1; \
-    } \
-    rpath1 = strutils_shell_escape (crpath1); \
-    g_free (mpath1); \
-    rpath2 = strutils_shell_escape (crpath2); \
-    g_free (mpath2); \
-    g_snprintf (buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
-    g_free (rpath1); \
-    g_free (rpath2); \
-    return fish_send_command(me, super2, buf, OPT_FLUSH); \
-}
-
-FISH_OP (rename,
-        "#RENAME /%s /%s\n"
-        "if mv /%s /%s 2>/dev/null; then\n"
-            "echo '### 000'\n"
-        "else\n"
-            "echo '### 500'\n"
-        "fi\n")
-
-FISH_OP (link,
-        "#LINK /%s /%s\n"
-        "if ln /%s /%s 2>/dev/null; then\n"
-            "echo '### 000'\n"
-        "else\n"
-            "echo '### 500'\n"
-        "fi\n")
-/* *INDENT-ON* */
 
 static int
 fish_symlink (struct vfs_class *me, const char *setto, const char *path)
 {
     char *qsetto;
-    PREFIX qsetto = strutils_shell_escape (setto);
-    /* *INDENT-OFF* */
-    g_snprintf (buf, sizeof (buf),
-                "#SYMLINK %s /%s\n"
-                "if ln -s %s /%s 2>/dev/null; then\n"
-                    "echo '### 000'\n"
-                "else\n"
-                    "echo '### 500'\n"
-                "fi\n",
-                qsetto, rpath, qsetto, rpath);
-    /* *INDENT-ON* */
+    gchar *shell_commands = NULL;
+    char buf[BUF_LARGE];
+    const char *crpath;
+    char *rpath, *mpath = g_strdup (path);
+    struct vfs_s_super *super;
+    crpath = vfs_s_get_path_mangle (me, mpath, &super, 0);
+    if (crpath == NULL)
+    {
+        g_free (mpath);
+        return -1;
+    }
+    rpath = strutils_shell_escape (crpath);
+    g_free (mpath);
+
+    qsetto = strutils_shell_escape (setto);
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
+                                  SUP.scr_ln, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, qsetto, rpath);
+    g_free (shell_commands);
     g_free (qsetto);
-    POSTFIX (OPT_FLUSH);
+    g_free (rpath);
+    return fish_send_command (me, super, buf, OPT_FLUSH);
+}
+
+static int
+fish_chmod (struct vfs_class *me, const char *path, int mode)
+{
+    gchar *shell_commands = NULL;
+    PREFIX
+
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n",
+                                  SUP.scr_chmod, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath, mode & 07777);
+    g_free (shell_commands);
+    g_free (rpath);
+    return fish_send_command (me, super, buf, OPT_FLUSH);
 }
 
 static int
@@ -1136,55 +1145,44 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     sowner = pw->pw_name;
     sgroup = gr->gr_name;
     {
-        /* *INDENT-OFF* */
+        gchar *shell_commands = NULL;
+
         PREFIX
-        g_snprintf (buf, sizeof (buf),
-                    "#CHOWN %s:%s /%s\n"
-                    "if chown %s:%s /%s 2>/dev/null; then\n"
-                        "echo '### 000'\n"
-                    "else\n"
-                        "echo '### 500'\n"
-                    "fi\n",
-                    sowner, sgroup, rpath, sowner, sgroup, rpath);
-        /* *INDENT-ON* */
+
+        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
+                                      SUP.scr_chown, (char *) NULL);
+        g_snprintf (buf, sizeof (buf), shell_commands, rpath, sowner, sgroup);
+        g_free (shell_commands);
         fish_send_command (me, super, buf, OPT_FLUSH);
         /* FIXME: what should we report if chgrp succeeds but chown fails? */
         /* fish_send_command(me, super, buf, OPT_FLUSH); */
-    POSTFIX (OPT_FLUSH)}
+        g_free (rpath);
+        return fish_send_command (me, super, buf, OPT_FLUSH);
+    }
 }
 
 static int
 fish_unlink (struct vfs_class *me, const char *path)
 {
-    /* *INDENT-OFF* */
+    gchar *shell_commands = NULL;
     PREFIX
 
-    g_snprintf (buf, sizeof (buf),
-                "#DELE /%s\n"
-                "if rm -f /%s 2>/dev/null; then\n"
-                    "echo '### 000'\n"
-                "else\n"
-                    "echo '### 500'\n"
-                "fi\n",
-                rpath, rpath);
-    /* *INDENT-ON* */
-
-    POSTFIX (OPT_FLUSH);
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_unlink, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
+    g_free (shell_commands);
+    g_free (rpath);
+    return fish_send_command (me, super, buf, OPT_FLUSH);
 }
 
 static int
 fish_exists (struct vfs_class *me, const char *path)
 {
-    /* *INDENT-OFF* */
+    gchar *shell_commands = NULL;
     PREFIX
 
-    g_snprintf (buf, sizeof (buf),
-                "#ISEXISTS /%s\n"
-                "ls -l /%s >/dev/null 2>/dev/null\n"
-                "echo '### '$?\n",
-                rpath, rpath);
-    /* *INDENT-ON* */
-
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_exists, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
+    g_free (shell_commands);
     g_free (rpath);
 
     return (fish_send_command (me, super, buf, OPT_FLUSH) == 0) ? 1 : 0;
@@ -1194,20 +1192,14 @@ fish_exists (struct vfs_class *me, const char *path)
 static int
 fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
+    gchar *shell_commands = NULL;
     int ret_code;
 
-    /* *INDENT-OFF* */
     PREFIX (void) mode;
 
-    g_snprintf (buf, sizeof (buf),
-                "#MKD /%s\n"
-                "if mkdir /%s 2>/dev/null; then\n"
-                    "echo '### 000'\n"
-                "else\n"
-                    "echo '### 500'\n"
-                "fi\n",
-                rpath, rpath);
-    /* *INDENT-ON* */
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_mkdir, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
+    g_free (shell_commands);
 
     g_free (rpath);
     ret_code = fish_send_command (me, super, buf, OPT_FLUSH);
@@ -1225,18 +1217,14 @@ fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 static int
 fish_rmdir (struct vfs_class *me, const char *path)
 {
-    /* *INDENT-OFF* */
+    gchar *shell_commands = NULL;
     PREFIX
-    g_snprintf (buf, sizeof (buf),
-                "#RMD /%s\n"
-                "if rmdir /%s 2>/dev/null; then\n"
-                    "echo '### 000'\n"
-                "else\n"
-                    "echo '### 500'\n"
-                "fi\n",
-                rpath, rpath);
-    /* *INDENT-ON* */
-    POSTFIX (OPT_FLUSH);
+
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_rmdir, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
+    g_free (shell_commands);
+    g_free (rpath);
+    return fish_send_command (me, super, buf, OPT_FLUSH);
 }
 
 static int

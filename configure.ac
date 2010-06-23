@@ -616,6 +616,8 @@ lib/vfs/mc-vfs/extfs/urar
 lib/vfs/mc-vfs/extfs/uzip
 lib/vfs/mc-vfs/extfs/uzoo
 
+lib/vfs/mc-vfs/fish/Makefile
+
 misc/syntax/Makefile
 
 doc/Makefile

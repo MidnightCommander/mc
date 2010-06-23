@@ -50,6 +50,22 @@ struct vfs_s_super {
 	    char *host, *user;
 	    char *password;
 	    int flags;
+	    char *scr_ls;
+	    char *scr_chmod;
+	    char *scr_exists;
+	    char *scr_mkdir;
+	    char *scr_unlink;
+	    char *scr_chown;
+	    char *scr_rmdir;
+	    char *scr_ln;
+	    char *scr_mv;
+	    char *scr_hardlink;
+	    char *scr_get;
+	    char *scr_send;
+	    char *scr_append;
+	    char *scr_info;
+	    int host_flags;
+	    char *scr_env;
 	} fish;
 	struct {
 	    int sock;
