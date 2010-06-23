@@ -331,7 +331,7 @@ stop_dialogs (void)
         ((Dlg_head *) top_dlg->data)->state = DLG_CLOSED;
 }
 
-static int
+static gboolean
 quit_cmd_internal (int quiet)
 {
     int q = quit;
@@ -347,9 +347,9 @@ quit_cmd_internal (int quiet)
                     n);
 
         if (query_dialog (_("The Midnight Commander"), msg,
-                         D_NORMAL, 2, _("&Yes"), _("&No")) == 0)
-            q = 1;
-
+                         D_NORMAL, 2, _("&Yes"), _("&No")) != 0)
+            return FALSE;
+        q = 1;
     } else if (quiet || !confirm_exit)
         q = 1;
     else if (query_dialog (_("The Midnight Commander"),
@@ -369,20 +369,20 @@ quit_cmd_internal (int quiet)
 
     if (q != 0)
         quit |= 1;
-    return quit;
+    return (quit != 0);
 }
 
-static void
+static gboolean
 quit_cmd (void)
 {
-    quit_cmd_internal (0);
+    return quit_cmd_internal (0);
 }
 
-void
+gboolean
 quiet_quit_cmd (void)
 {
     print_last_revert = 1;
-    quit_cmd_internal (1);
+    return quit_cmd_internal (1);
 }
 
 /* Wrapper for do_subshell_chdir, check for availability of subshell */

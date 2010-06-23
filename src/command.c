@@ -221,19 +221,17 @@ enter (WInput *lc_cmdline)
 	do_cd_command (cmd);
 	new_input (lc_cmdline);
 	return MSG_HANDLED;
+    } else if (strcmp (cmd, "exit") == 0) {
+	assign_text (lc_cmdline, "");
+	if (!quiet_quit_cmd ())
+	    return MSG_NOT_HANDLED;
     } else {
 	char *command, *s;
 	size_t i, j, cmd_len;
 
 	if (!vfs_current_is_local ()) {
-	    if (strcmp (cmd, "exit") == 0) {
-		quiet_quit_cmd ();
-		return MSG_HANDLED;
-	    }
-
 	    message (D_ERROR, MSG_ERROR,
 		     _("Cannot execute commands on non-local filesystems"));
-
 	    return MSG_NOT_HANDLED;
 	}
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -267,10 +265,16 @@ enter (WInput *lc_cmdline)
 	g_free (command);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-	if (quit & SUBSHELL_EXIT) {
-	    quiet_quit_cmd ();
-	    return MSG_HANDLED;
+	if ((quit & SUBSHELL_EXIT) != 0) {
+	    if (quiet_quit_cmd ())
+		return MSG_HANDLED;
+
+	    quit = 0;
+	    /* restart subshell */
+	    if (use_subshell)
+		init_subshell ();
 	}
+
 	if (use_subshell)
 	    load_prompt (0, 0);
 #endif
