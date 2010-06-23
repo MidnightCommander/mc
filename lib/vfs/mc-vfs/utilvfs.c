@@ -707,7 +707,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 
 	/* Corner case: there is no whitespace(s) between maj & min */
 	if (!is_num (idx2) && idx2 == 2) {
-	    if (!is_num (++idx2) || sscanf (columns[idx2], " %d,%d", &min, &min) != 2)
+	    if (!is_num (++idx2) || sscanf (columns[idx2], " %d,%d", &maj, &min) != 2)
 		goto error;
 	} else {
 	    if (!is_num (idx2) || sscanf (columns[idx2], " %d,", &maj) != 1)
