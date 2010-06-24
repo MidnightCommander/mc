@@ -303,8 +303,6 @@ PanelSortOrderByExt=
 PanelSortOrderBySize=
 PanelSortOrderByMTime=
 
-[panel:xmap]
-
 [input]
 InputBol = ctrl-a; alt-lt; home
 InputEol = ctrl-e; alt-gt; end
