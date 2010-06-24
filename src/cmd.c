@@ -335,12 +335,12 @@ filtered_view_cmd (void)
 }
 
 void
-do_edit_at_line (const char *what, int start_line)
+do_edit_at_line (const char *what, gboolean internal, int start_line)
 {
     static const char *editor = NULL;
 
 #ifdef USE_INTERNAL_EDIT
-    if (use_internal_edit)
+    if (internal)
         edit_file (what, start_line);
     else
 #else
@@ -367,10 +367,10 @@ do_edit_at_line (const char *what, int start_line)
         repaint_screen ();
 }
 
-static void
+static inline void
 do_edit (const char *what)
 {
-    do_edit_at_line (what, 0);
+    do_edit_at_line (what, use_internal_edit, 0);
 }
 
 void
@@ -379,6 +379,15 @@ edit_cmd (void)
     if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
         do_edit (selection (current_panel)->fname);
 }
+
+#ifdef USE_INTERNAL_EDIT
+void
+edit_cmd_force_internal (void)
+{
+    if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
+        do_edit_at_line (selection (current_panel)->fname, TRUE, 0);
+}
+#endif
 
 void
 edit_cmd_new (void)

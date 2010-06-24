@@ -390,6 +390,7 @@
 #define CK_DialogListCmd                7079
 #define CK_DialogNextCmd                7080
 #define CK_DialogPrevCmd                7081
+#define CK_EditForceInternalCmd         7082
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001

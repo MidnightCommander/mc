@@ -8,6 +8,8 @@
 #ifndef MC_CMD_H
 #define MC_CMD_H
 
+#include "lib/global.h"
+
 typedef enum
 {
     LINK_HARDLINK = 0,
@@ -31,9 +33,12 @@ void view_cmd (void);
 void view_file_cmd (void);
 void view_simple_cmd (void);
 void filtered_view_cmd (void);
-void do_edit_at_line (const char *what, int start_line);
+void do_edit_at_line (const char *what, gboolean internal, int start_line);
 void edit_cmd (void);
 void edit_cmd_new (void);
+#ifdef USE_INTERNAL_EDIT
+void edit_cmd_force_internal (void);
+#endif
 void copy_cmd (void);
 void copy_cmd_local (void);
 void rename_cmd (void);

@@ -1093,7 +1093,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 
     fullname = make_fullname (dir, filename);
     if (edit)
-        do_edit_at_line (fullname, line);
+        do_edit_at_line (fullname, use_internal_edit, line);
     else
         view_file_at_line (fullname, unparsed_view, use_internal_view, line);
     g_free (fullname);

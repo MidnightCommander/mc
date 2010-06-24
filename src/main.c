@@ -1240,6 +1240,11 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_EditCmd:
         edit_cmd ();
         break;
+#ifdef USE_INTERNAL_EDIT
+    case CK_EditForceInternalCmd:
+        edit_cmd_force_internal ();
+        break;
+#endif
     case CK_EditExtFileCmd:
         ext_cmd ();
         break;
