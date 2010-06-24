@@ -80,6 +80,7 @@ context default
     keyword wholeright $+ brightgreen
     keyword ftp://+ brightgreen
     keyword http://+ brightgreen
+    keyword https://+ brightgreen
     keyword cvs://+ brightgreen
 
     keyword whole missingok brightcyan
