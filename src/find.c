@@ -58,9 +58,9 @@
 
 /* Size of the find parameters window */
 #if HAVE_CHARSET
-static int FIND_Y = 16;
+static int FIND_Y = 17;
 #else
-static int FIND_Y = 15;
+static int FIND_Y = 16;
 #endif
 static int FIND_X = 68;
 
@@ -98,6 +98,7 @@ static WCheck *file_case_sens_cbox;     /* "case sensitive" checkbox */
 static WCheck *file_pattern_cbox;       /* File name is glob or regexp */
 static WCheck *recursively_cbox;
 static WCheck *skip_hidden_cbox;
+static WCheck *content_use_cbox; /* Take into account the Content field */
 static WCheck *content_case_sens_cbox;  /* "case sensitive" checkbox */
 static WCheck *content_regexp_cbox;     /* "find regular expression" checkbox */
 static WCheck *content_first_hit_cbox;  /* "First hit" checkbox" */
@@ -170,6 +171,7 @@ typedef struct
     gboolean file_all_charsets;
 
     /* file content options */
+    gboolean content_use;
     gboolean content_case_sens;
     gboolean content_regexp;
     gboolean content_first_hit;
@@ -179,7 +181,7 @@ typedef struct
 
 static find_file_options_t options = {
     TRUE, TRUE, TRUE, FALSE, FALSE,
-    TRUE, FALSE, FALSE, FALSE, FALSE
+    FALSE, TRUE, FALSE, FALSE, FALSE, FALSE
 };
 
 static char *in_start_dir = INPUT_LAST_TEXT;
@@ -226,6 +228,8 @@ find_load_options (void)
         mc_config_get_bool (mc_main_config, "FindFile", "file_skip_hidden", FALSE);
     options.file_all_charsets =
         mc_config_get_bool (mc_main_config, "FindFile", "file_all_charsets", FALSE);
+    options.content_use =
+        mc_config_get_bool (mc_main_config, "FindFile", "content_use", FALSE);
     options.content_case_sens =
         mc_config_get_bool (mc_main_config, "FindFile", "content_case_sens", TRUE);
     options.content_regexp =
@@ -246,6 +250,7 @@ find_save_options (void)
     mc_config_set_bool (mc_main_config, "FindFile", "file_find_recurs", options.find_recurs);
     mc_config_set_bool (mc_main_config, "FindFile", "file_skip_hidden", options.skip_hidden);
     mc_config_set_bool (mc_main_config, "FindFile", "file_all_charsets", options.file_all_charsets);
+    mc_config_set_bool (mc_main_config, "FindFile", "content_use", options.content_use);
     mc_config_set_bool (mc_main_config, "FindFile", "content_case_sens", options.content_case_sens);
     mc_config_set_bool (mc_main_config, "FindFile", "content_regexp", options.content_regexp);
     mc_config_set_bool (mc_main_config, "FindFile", "content_first_hit", options.content_first_hit);
@@ -374,6 +379,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 #endif
 
     /* file content */
+    const char *content_use_label = N_("Searc&h for content");
     const char *content_case_label = N_("Case sens&itive");
     const char *content_regexp_label = N_("Re&gular expression");
     const char *content_first_hit_label = N_("Fir&st hit");
@@ -400,6 +406,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
         file_all_charsets_label = _(file_all_charsets_label);
         content_all_charsets_label = _(content_all_charsets_label);
 #endif
+        content_use_label = _(content_use_label);
         content_case_label = _(content_case_label);
         content_regexp_label = _(content_regexp_label);
         content_first_hit_label = _(content_first_hit_label);
@@ -428,27 +435,31 @@ find_parameters (char **start_dir, char **pattern, char **content)
                 button_new (FIND_Y - 3, FIND_X / 4 - b0 / 2, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
 #ifdef HAVE_CHARSET
-    content_all_charsets_cbox = check_new (11, FIND_X / 2 + 1,
+    content_all_charsets_cbox = check_new (12, FIND_X / 2 + 1,
                                            options.content_all_charsets,
                                            content_all_charsets_label);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
 
     content_whole_words_cbox =
-        check_new (10, FIND_X / 2 + 1, options.content_whole_words, content_whole_words_label);
+        check_new (11, FIND_X / 2 + 1, options.content_whole_words, content_whole_words_label);
     add_widget (find_dlg, content_whole_words_cbox);
 
     content_first_hit_cbox =
-        check_new (9, FIND_X / 2 + 1, options.content_first_hit, content_first_hit_label);
+        check_new (10, FIND_X / 2 + 1, options.content_first_hit, content_first_hit_label);
     add_widget (find_dlg, content_first_hit_cbox);
 
     content_regexp_cbox =
-        check_new (8, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
+        check_new (9, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
     add_widget (find_dlg, content_regexp_cbox);
 
     content_case_sens_cbox =
-        check_new (7, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
+        check_new (8, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
     add_widget (find_dlg, content_case_sens_cbox);
+
+    content_use_cbox =
+        check_new (7, FIND_X / 2 + 1, options.content_use, content_use_label);
+    add_widget (find_dlg, content_use_cbox);
 
 #ifdef HAVE_CHARSET
     file_all_charsets_cbox = check_new (11, 3, options.file_all_charsets, file_all_charsets_label);
@@ -501,6 +512,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
             options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
             options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
 #endif
+            options.content_use = content_use_cbox->state & C_BOOL;
             options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
             options.content_regexp = content_regexp_cbox->state & C_BOOL;
             options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
@@ -529,6 +541,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
         options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
         options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
 #endif
+        options.content_use = content_use_cbox->state & C_BOOL;
         options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
         options.content_regexp = content_regexp_cbox->state & C_BOOL;
         options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
