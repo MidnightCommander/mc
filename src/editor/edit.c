@@ -741,9 +741,6 @@ edit_load_file (WEdit * edit)
     }
     else
     {
-#ifdef HAVE_CHARSET
-        const char *codepage_id;
-#endif
         edit->last_byte = 0;
         if (*edit->filename)
         {
@@ -755,12 +752,6 @@ edit_load_file (WEdit * edit)
             }
             edit->stack_disable = 0;
         }
-
-#ifdef HAVE_CHARSET
-        codepage_id = get_codepage_id (source_codepage);
-        if (codepage_id)
-            edit->utf8 = str_isutf8 (codepage_id);
-#endif
     }
     edit->lb = LB_ASIS;
     return 0;
