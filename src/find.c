@@ -1293,8 +1293,10 @@ find_file (const char *start_dir, const char *pattern, const char *content,
 
     /* FIXME: Need to cleanup this, this ought to be passed non-globaly */
     find_pattern = str_unconst (pattern);
-    content_pattern = (content != NULL && str_is_valid_string (content))
-        ? g_strdup (content) : NULL;
+
+    content_pattern = NULL;
+    if (options.content_use && content != NULL && str_is_valid_string (content))
+        content_pattern = g_strdup (content);
 
     init_find_vars ();
     push_directory (start_dir);
