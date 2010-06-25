@@ -273,9 +273,8 @@ toggle_panels (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
     {
-        new_dir_p = vfs_current_is_local ()? &new_dir : NULL;
-        if (invoke_subshell (NULL, VISIBLY, new_dir_p))
-            quiet_quit_cmd ();  /* User did `exit' or `logout': quit MC quietly */
+        new_dir_p = vfs_current_is_local () ? &new_dir : NULL;
+        invoke_subshell (NULL, VISIBLY, new_dir_p);
     }
     else
 #endif /* HAVE_SUBSHELL_SUPPORT */
@@ -290,6 +289,7 @@ toggle_panels (void)
         else
             get_key_code (0);
     }
+
     if (console_flag)
         handle_console (CONSOLE_SAVE);
 
@@ -300,8 +300,19 @@ toggle_panels (void)
 
     /* Prevent screen flash when user did 'exit' or 'logout' within
        subshell */
-    if (quit)
-        return;
+    if ((quit & SUBSHELL_EXIT) != 0)
+    {
+        /* User did `exit' or `logout': quit MC */
+        if (quiet_quit_cmd ())
+            return;
+
+        quit = 0;
+#ifdef HAVE_SUBSHELL_SUPPORT
+        /* restart subshell */
+        if (use_subshell)
+            init_subshell ();
+#endif /* HAVE_SUBSHELL_SUPPORT */
+    }
 
     enable_mouse ();
     channels_up ();

@@ -114,7 +114,7 @@ int do_cd (const char *new_dir, enum cd_enum cd_type);  /* For find.c */
 void sort_cmd (void);
 void change_panel (void);
 void save_cwds_stat (void);
-void quiet_quit_cmd (void);     /* For cmd.c and command.c */
+gboolean quiet_quit_cmd (void);     /* For cmd.c and command.c */
 
 void touch_bar (void);
 void update_xterm_title_path (void);
