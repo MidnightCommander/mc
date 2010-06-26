@@ -392,6 +392,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     int b0, b1, b2;
 
+    int cbox_position;
+
 #ifdef ENABLE_NLS
     {
         int i = sizeof (buts) / sizeof (buts[0]);
@@ -434,49 +436,54 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg,
                 button_new (FIND_Y - 3, FIND_X / 4 - b0 / 2, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
+    cbox_position = FIND_Y - 5;
+
+    content_first_hit_cbox =
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_first_hit, content_first_hit_label);
+    widget_disable (content_first_hit_cbox->widget, disable);
+    add_widget (find_dlg, content_first_hit_cbox);
+
+    content_whole_words_cbox =
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_whole_words, content_whole_words_label);
+    add_widget (find_dlg, content_whole_words_cbox);
+
 #ifdef HAVE_CHARSET
-    content_all_charsets_cbox = check_new (12, FIND_X / 2 + 1,
+    content_all_charsets_cbox = check_new (cbox_position--, FIND_X / 2 + 1,
                                            options.content_all_charsets,
                                            content_all_charsets_label);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
 
-    content_whole_words_cbox =
-        check_new (11, FIND_X / 2 + 1, options.content_whole_words, content_whole_words_label);
-    add_widget (find_dlg, content_whole_words_cbox);
-
-    content_first_hit_cbox =
-        check_new (10, FIND_X / 2 + 1, options.content_first_hit, content_first_hit_label);
-    add_widget (find_dlg, content_first_hit_cbox);
-
-    content_regexp_cbox =
-        check_new (9, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
-    add_widget (find_dlg, content_regexp_cbox);
-
     content_case_sens_cbox =
-        check_new (8, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
     add_widget (find_dlg, content_case_sens_cbox);
 
-    content_use_cbox =
-        check_new (7, FIND_X / 2 + 1, options.content_use, content_use_label);
-    add_widget (find_dlg, content_use_cbox);
+    content_regexp_cbox =
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
+    add_widget (find_dlg, content_regexp_cbox);
+
+    cbox_position = FIND_Y - 6;
+
+    skip_hidden_cbox = check_new (cbox_position--, 3, options.skip_hidden, file_skip_hidden_label);
+    add_widget (find_dlg, skip_hidden_cbox);
 
 #ifdef HAVE_CHARSET
-    file_all_charsets_cbox = check_new (11, 3, options.file_all_charsets, file_all_charsets_label);
+    file_all_charsets_cbox = check_new (cbox_position--, 3, options.file_all_charsets, file_all_charsets_label);
     add_widget (find_dlg, file_all_charsets_cbox);
 #endif
 
-    skip_hidden_cbox = check_new (10, 3, options.skip_hidden, file_skip_hidden_label);
-    add_widget (find_dlg, skip_hidden_cbox);
+    file_case_sens_cbox = check_new (cbox_position--, 3, options.file_case_sens, file_case_label);
+    add_widget (find_dlg, file_case_sens_cbox);
 
-    recursively_cbox = check_new (9, 3, options.find_recurs, file_recurs_label);
-    add_widget (find_dlg, recursively_cbox);
-
-    file_pattern_cbox = check_new (8, 3, options.file_pattern, file_pattern_label);
+    file_pattern_cbox = check_new (cbox_position--, 3, options.file_pattern, file_pattern_label);
     add_widget (find_dlg, file_pattern_cbox);
 
-    file_case_sens_cbox = check_new (7, 3, options.file_case_sens, file_case_label);
-    add_widget (find_dlg, file_case_sens_cbox);
+    recursively_cbox = check_new (cbox_position, 3, options.find_recurs, file_recurs_label);
+    add_widget (find_dlg, recursively_cbox);
+
+    /* This checkbox is located in the second column */
+    content_use_cbox = check_new (cbox_position, FIND_X / 2 + 1, options.content_use, content_use_label);
+    add_widget (find_dlg, content_use_cbox);
 
     in_with = input_new (6, FIND_X / 2 + 1, input_get_default_colors(), FIND_X / 2 - 4, INPUT_LAST_TEXT,
                          MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
@@ -533,7 +540,6 @@ find_parameters (char **start_dir, char **pattern, char **content)
                 in_start_dir = g_strdup (temp_dir);
             /* Warning: Dreadful goto */
             goto find_par_start;
-            break;
         }
 
     default:
