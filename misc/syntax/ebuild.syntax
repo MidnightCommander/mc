@@ -23,6 +23,7 @@ context default
     keyword whole EDARCS_GET_CMD brightcyan
     keyword whole EDARCS_LOCALREPO brightcyan
     keyword whole EGIT_BRANCH brightcyan
+    keyword whole EGIT_PROJECT brightcyan
     keyword whole EGIT_REPO_URI brightcyan
     keyword whole EGIT_TREE brightcyan
     keyword whole ESVN_REPO_URI brightcyan
