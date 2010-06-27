@@ -299,25 +299,22 @@ msgid "Pipe"
 msgstr "Труба"
 
 msgid "Left parenthese"
-msgstr ""
+msgstr "Ліва кругла дужка"
 
 msgid "Right parenthese"
-msgstr ""
+msgstr "Права кругла дужка"
 
-#, fuzzy
 msgid "Left bracket"
-msgstr "Стрілка вліво"
+msgstr "Ліва квадратна дужка"
 
-#, fuzzy
 msgid "Right bracket"
-msgstr "Стрілка вправо"
+msgstr "Права квадратна дужкп"
 
 msgid "Left brace"
-msgstr ""
+msgstr "Ліва фігурна дужка"
 
-#, fuzzy
 msgid "Right brace"
-msgstr "Стрілка вправо"
+msgstr "Права фігурна дужка"
 
 msgid "Enter"
 msgstr "Ентер"
@@ -989,8 +986,7 @@ msgid ""
 msgstr ""
 "--colors KEYWORD={ТЕКСТ},{ФОН}\n"
 "\n"
-"{ТЕКСТ} і {ФОН} можна опустити, тоді будуть використані значення за "
-"змовчуванням\n"
+"{ТЕКСТ} і {ФОН} можна опустити, тоді будуть використані значення за змовчуванням\n"
 "\n"
 "Ключові слова:\n"
 " Глобальні: errors, reverse, gauge, viewunderline\n"
@@ -1114,7 +1110,8 @@ msgstr "Порядок сортування"
 msgid "Confirmation"
 msgstr "Підтвердження"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Очистка історії"
@@ -1527,7 +1524,7 @@ msgid "The shell is already running a command"
 msgstr " Інтерпретатор вже зайнятий виконанням команди "
 
 msgid "Screens"
-msgstr ""
+msgstr "Екрани"
 
 msgid "&Dismiss"
 msgstr "&Закрити"
@@ -1651,17 +1648,18 @@ msgstr "ButtonBar|Вихід"
 msgid "Quit"
 msgstr "Вийти"
 
-#, fuzzy
 msgid "File was modified. Save with exit?"
-msgstr "Файл було змінено, зберегти при виході?"
+msgstr "Файл було змінено. Зберегти при виході?"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
+"Виконується вихід із Midnight Commander.\n"
+"Зберегти змінений файл?"
 
 msgid "Diff:"
-msgstr ""
+msgstr "Різниця:"
 
 msgid "Two files are needed to compare"
 msgstr "Для порівняння необхідно два файли"
@@ -2249,9 +2247,8 @@ msgstr "Режим переносу"
 msgid "Editor options"
 msgstr "Параметри редактора"
 
-#, fuzzy
 msgid "Edit: "
-msgstr " Редагування "
+msgstr "Редагування:"
 
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|Відмітити"
@@ -2321,26 +2318,16 @@ msgid " %s%s file error"
 msgstr "%s%s помилка файлу "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при "
-"встановленні. Будь-ласка візьміть свіжу копію із пакету Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при встановленні. Будь-ласка візьміть свіжу копію із пакету Midnight Commander."
 
 #, c-format
 msgid "~/%s file error"
 msgstr "Помилка файлу  ~/%s"
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Формат файлу ~/%s було змінено у версіі 3.0. Ви можете скопіювати його з %"
-"smc.ext чи скористуватися ним як зразком та написати свій."
+msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Формат файлу ~/%s було змінено у версіі 3.0. Ви можете скопіювати його з %smc.ext чи скористуватися ним як зразком та написати свій."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Копіювання"
@@ -3214,8 +3201,8 @@ msgstr "її при допомозі Tab або мишкою і натисніт
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ви маєте %zd відкритий екран. Все одно вийти?"
+msgstr[1] "Ви маєте %zd відкритих екранів. Все одно вийти?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3353,7 +3340,7 @@ msgid "&Background jobs"
 msgstr "Фонові завдання"
 
 msgid "Screen lis&t"
-msgstr ""
+msgstr "Список екранів"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Відновлення файлів (лише ext2fs)"
@@ -3400,9 +3387,8 @@ msgstr "Нижня"
 msgid "&Right"
 msgstr "&Права панель "
 
-#, fuzzy
 msgid "Panels:"
-msgstr "Розбиття панелей"
+msgstr "Панелі:"
 
 msgid "ButtonBar|Menu"
 msgstr "ButtonBar|Меню"
@@ -3999,9 +3985,8 @@ msgstr ""
 "Не вдається зберегти файл:\n"
 "%s"
 
-#, fuzzy
 msgid "View: "
-msgstr "Переглянути"
+msgstr "Перегляд:"
 
 #, c-format
 msgid ""
@@ -4586,11 +4571,8 @@ msgstr "Фоновий процес:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Введіть порядок аргументів заміни, напр. 3,2,1,4 "
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgstr " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Помилка у форматі стрічки заміни "
