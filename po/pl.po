@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-06-22 21:46+0400\n"
-"PO-Revision-Date: 2010-06-10 18:44+0200\n"
+"PO-Revision-Date: 2010-06-27 17:19+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -297,25 +297,22 @@ msgid "Pipe"
 msgstr "Potok"
 
 msgid "Left parenthese"
-msgstr ""
+msgstr "Lewy nawias okrągły"
 
 msgid "Right parenthese"
-msgstr ""
+msgstr "Prawy nawias okrągły"
 
-#, fuzzy
 msgid "Left bracket"
-msgstr "Strzałka w lewo   "
+msgstr "Lewy nawias"
 
-#, fuzzy
 msgid "Right bracket"
-msgstr "Strzałka w prawo  "
+msgstr "Prawy nawias"
 
 msgid "Left brace"
-msgstr ""
+msgstr "Lewy nawias klamrowy"
 
-#, fuzzy
 msgid "Right brace"
-msgstr "Strzałka w prawo  "
+msgstr "Prawy nawias klamrowy"
 
 msgid "Enter"
 msgstr "Enter"
@@ -1521,7 +1518,7 @@ msgid "The shell is already running a command"
 msgstr "Powłoka wykonuje już polecenie"
 
 msgid "Screens"
-msgstr ""
+msgstr "Ekrany"
 
 msgid "&Dismiss"
 msgstr "&Porzuć"
@@ -1645,7 +1642,6 @@ msgstr "Kończ"
 msgid "Quit"
 msgstr "Zakończ"
 
-#, fuzzy
 msgid "File was modified. Save with exit?"
 msgstr "Plik został zmodyfikowany. Zapisać przed zakończeniem?"
 
@@ -1653,9 +1649,11 @@ msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
+"Program Midnight Commander kończy działanie.\n"
+"Zapisać zmodyfikowany plik?"
 
 msgid "Diff:"
-msgstr ""
+msgstr "Różnica:"
 
 msgid "Two files are needed to compare"
 msgstr "Wymagane są dwa pliki do porównania"
@@ -2244,9 +2242,8 @@ msgstr "Tryb zawijania"
 msgid "Editor options"
 msgstr "Opcje edytora"
 
-#, fuzzy
 msgid "Edit: "
-msgstr "Edycja"
+msgstr "Edycja: "
 
 msgid "ButtonBar|Mark"
 msgstr "Zazncz"
@@ -3349,7 +3346,7 @@ msgid "&Background jobs"
 msgstr "Zadania w &tle"
 
 msgid "Screen lis&t"
-msgstr ""
+msgstr "Li&sta ekranów"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Odtwórz pliki (tylko system plików ext2)"
@@ -3396,9 +3393,8 @@ msgstr "&Poniżej"
 msgid "&Right"
 msgstr "P&rawy"
 
-#, fuzzy
 msgid "Panels:"
-msgstr "Podział na panele"
+msgstr "Panele:"
 
 msgid "ButtonBar|Menu"
 msgstr "Menu"
@@ -3992,9 +3988,8 @@ msgstr ""
 "Nie można zapisać pliku:\n"
 "%s"
 
-#, fuzzy
 msgid "View: "
-msgstr "&Podgląd"
+msgstr "Podgląd: "
 
 #, c-format
 msgid ""
@@ -4036,6 +4031,3 @@ msgstr "Wyczyścić tę historię?"
 
 msgid "Background process:"
 msgstr "Proces w tle:"
-
-#~ msgid "File was modified, save with exit?"
-#~ msgstr "Plik został zmodyfikowany. Zapisać przed zakończeniem?"
