@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.7.2\n"
+"Project-Id-Version: 4.7.3\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
-"PO-Revision-Date: 2010-05-08 16:30+0200\n"
+"POT-Creation-Date: 2010-06-27 00:12+0200\n"
+"PO-Revision-Date: 2010-06-27 01:00+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"El archivo \"%s\" está ya siendo editado\n"
+"El archivo \"%s\" está ya siendo editado.\n"
 "Usuario: %s\n"
 "Id. Proceso: %d"
 
@@ -35,21 +35,18 @@ msgstr "tomar &Bloqueo"
 msgid "&Ignore lock"
 msgstr "&Ignorar bloqueo"
 
-#, fuzzy
 msgid "Search string not found"
-msgstr " La cadena buscada no ha sido encontrada "
+msgstr "La cadena buscada no ha sido encontrada"
 
-#, fuzzy
 msgid "Not implemented yet"
-msgstr " No implementado todavía "
+msgstr "No implementado todavía"
 
-#, fuzzy
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr " Número de elementos de reemplazo no coincide "
+msgstr "Número de elementos de reemplazo no coincide"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid token number %d"
-msgstr " El elemento número %d no es válido "
+msgstr "El elemento número %d no es válido"
 
 msgid "Normal"
 msgstr "&Normal"
@@ -299,25 +296,22 @@ msgid "Pipe"
 msgstr "Tubería"
 
 msgid "Left parenthese"
-msgstr ""
+msgstr "Paréntesis izquierdo"
 
 msgid "Right parenthese"
-msgstr ""
+msgstr "Paréntesis derecho"
 
-#, fuzzy
 msgid "Left bracket"
-msgstr "Flecha izquierda"
+msgstr "Corchete izquierdo"
 
-#, fuzzy
 msgid "Right bracket"
-msgstr "Flecha derecha"
+msgstr "Corchete derecho"
 
 msgid "Left brace"
-msgstr ""
+msgstr "Llave izquierda"
 
-#, fuzzy
 msgid "Right brace"
-msgstr "Flecha derecha"
+msgstr "Llave derecha"
 
 msgid "Enter"
 msgstr "Intro"
@@ -385,13 +379,11 @@ msgstr "Presione cualquier tecla para continuar..."
 msgid "Warning"
 msgstr "¡ Atención !"
 
-#, fuzzy
 msgid "Pipe failed"
-msgstr " Fallo en la tubería "
+msgstr "Fallo en la tubería"
 
-#, fuzzy
 msgid "Dup failed"
-msgstr " Dup falló "
+msgstr "Dup falló"
 
 msgid "Error dup'ing old error pipe"
 msgstr "Error duplicando tubería de error"
@@ -487,9 +479,9 @@ msgstr "fish: Esperando línea de inicio..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Lo siento, las conexiones con contraseña aún no son posibles."
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Password is required for %s"
-msgstr " fish: Contraseña requerida para "
+msgstr "fish: Contraseña requerida para %s"
 
 msgid "fish: Sending password..."
 msgstr "fish: Enviando contraseña de usuario"
@@ -549,9 +541,9 @@ msgstr "Abortada transferencia con éxito."
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Desconectando de %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Password required for %s"
-msgstr " FTP: Contraseña requerida para "
+msgstr "FTP: Contraseña requerida para %s"
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: Enviando nombre de usuario"
@@ -648,31 +640,27 @@ msgstr "ftpfs: Falló; no hay dónde replegarse"
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: Guardando archivo %lu (%lu)"
 
-#, fuzzy
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
-"El archivo ~/.netrc contiene una contraseña.\n"
-"Quítela o restrinja los permisos de lectura."
+"Los permisos de ~/.netrc no son los apropiados.\n"
+"Elimine la contraseña o cambie los permisos."
 
-#, fuzzy
 msgid "MCFS"
-msgstr " MCFS "
+msgstr "MCFS"
 
-#, fuzzy
 msgid "The server does not support this version"
-msgstr " El servidor no soporta esta versión "
+msgstr "El servidor no soporta esta versión"
 
-#, fuzzy
 msgid ""
 "The remote server is not running on a system port\n"
 "you need a password to log in, but the information may\n"
 "not be safe on the remote side.  Continue?\n"
 msgstr ""
-" El servidor remoto no está en un puerto que requiera \n"
-" contraseña para conectarse, pero la información puede \n"
-" quedar desprotegida al otro lado. ¿Desea continuar? \n"
+"El servidor remoto no está en un puerto que requiera\n"
+"contraseña para conectarse, pero la información puede\n"
+"quedarse desprotegida al otro lado. ¿Desea continuar?\n"
 
 msgid "&Yes"
 msgstr "&Sí"
@@ -680,29 +668,26 @@ msgstr "&Sí"
 msgid "&No"
 msgstr "&No"
 
-#, fuzzy
 msgid "MCFS Password required"
-msgstr " Contraseña requerida para MCFS "
+msgstr "Contraseña requerida para MCFS"
 
-#, fuzzy
 msgid "Invalid password"
-msgstr " La contraseña es incorrecta "
+msgstr "La contraseña es incorrecta"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot locate hostname: %s"
-msgstr " Máquina ilocalizable: %s "
+msgstr "Máquina ilocalizable: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create socket: %s"
-msgstr " Imposible crear socket: %s "
+msgstr "Imposible crear socket: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot connect to server: %s"
-msgstr " Imposible conectar con servidor: %s "
+msgstr "Imposible conectar con servidor: %s"
 
-#, fuzzy
 msgid "Too many open connections"
-msgstr " Demasiadas conexiones en curso "
+msgstr "Demasiadas conexiones abiertas"
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -724,35 +709,32 @@ msgstr ""
 "Atención: Bandera %c no válida en %s:\n"
 "%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "reconnect to %s failed"
-msgstr ""
-" falló la reconexión con %s\n"
-" "
+msgstr "falló la reconexión con %s"
 
-#, fuzzy
 msgid "Authentication failed"
-msgstr " Autentificación fallida "
+msgstr "Autenticación fallida"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error %s creating directory %s"
-msgstr " %s creando %s "
+msgstr "Error %s creando el directorio %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error %s removing directory %s"
-msgstr " %s eliminando %s "
+msgstr "Eror %s eliminando el directorio %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s opening remote file %s"
-msgstr " %s abriendo archivo remoto %s "
+msgstr "%s abriendo archivo remoto %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s removing remote file %s"
-msgstr " %s eliminando archivo remoto %s "
+msgstr "%s eliminando archivo remoto %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s renaming files\n"
-msgstr " %s renombrando archivos\n"
+msgstr "%s renombrando archivos\n"
 
 #, c-format
 msgid ""
@@ -768,96 +750,87 @@ msgstr "Archivo de tipo tar inconsistente"
 msgid "Unexpected EOF on archive file"
 msgstr "Fin de archivo inesperado"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"Hmm,...\n"
 "%s\n"
 "no parece un archivo de tipo tar."
 
-#, fuzzy
 msgid "undelfs: error"
-msgstr " undelfs: error "
+msgstr "undelfs: error"
 
-#, fuzzy
 msgid "not enough memory"
-msgstr " memoria insuficiente "
+msgstr "memoria insuficiente"
 
-#, fuzzy
 msgid "while allocating block buffer"
-msgstr " al reservar buffer de bloque "
+msgstr "al reservar buffer de bloque"
 
-#, fuzzy, c-format
+#, c-format
 msgid "open_inode_scan: %d"
-msgstr " open_inode_scan: %d "
+msgstr "open_inode_scan: %d"
 
-#, fuzzy, c-format
+#, c-format
 msgid "while starting inode scan %d"
-msgstr " al iniciar rastreo de inodos %d "
+msgstr "al iniciar rastreo de inodos %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: cargando información de archivos eliminados %d inodos"
 
-#, fuzzy, c-format
+#, c-format
 msgid "while calling ext2_block_iterate %d"
-msgstr " al llamar a ext2_block_iterate %d "
+msgstr "al llamar a ext2_block_iterate %d"
 
-#, fuzzy
 msgid "no more memory while reallocating array"
-msgstr " se agotó la memoria mientras se reubicaba la tabla "
+msgstr "se agotó la memoria mientras se reubicaba la tabla"
 
-#, fuzzy, c-format
+#, c-format
 msgid "while doing inode scan %d"
-msgstr " mientras se hacía el rastreo de inodos %d"
+msgstr "mientras se hacía el rastreo de inodos %d"
 
-#, fuzzy
 msgid "Ext2lib error"
-msgstr " error Ext2lib "
+msgstr "error Ext2lib"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open file %s"
-msgstr " Imposible abrir el archivo %s "
+msgstr "Imposible abrir el archivo %s"
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: leyendo mapa de inodos..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
-" Imposible cargar el inodo de: \n"
-"  %s \n"
+"Imposible cargar el inodo de:\n"
+"%s"
 
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: leyendo mapa de bloques..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
 msgstr ""
-" Imposible cargar bloques de: \n"
-"  %s \n"
+"Imposible cargar bloques de:\n"
+"%s"
 
-#, fuzzy
 msgid "vfs_info is not fs!"
-msgstr " ¡vfs_info no es fs! "
+msgstr "¡vfs_info no es fs!"
 
-#, fuzzy
 msgid "You have to chdir to extract files first"
-msgstr " Tiene que ir al directorio antes de extraer archivos "
+msgstr "Tiene que ir al directorio antes de extraer archivos"
 
-#, fuzzy
 msgid "while iterating over blocks"
-msgstr " al iterar entre bloques "
+msgstr "al iterar entre bloques"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open file \"%s\""
-msgstr " Imposible abrir el archivo %s "
+msgstr "Imposible abrir el archivo \"%s\""
 
 msgid "Cannot parse:"
 msgstr "Imposible analizar:"
@@ -908,25 +881,24 @@ msgstr "Modo"
 msgid "%6d of %d"
 msgstr "%6d de %d"
 
-#, fuzzy
 msgid "Chown advanced command"
-msgstr " Cambiar dueño y permisos "
+msgstr "Cambiar dueño y permisos"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible cambiar los permisos de \"%s\" \n"
-" %s "
+"Imposible cambiar los permisos de \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible cambiar el dueño de \"%s\" \n"
-" %s "
+"Imposible cambiar el dueño de \"%s\"\n"
+"%s"
 
 msgid "Displays the current version"
 msgstr "Mostrar el número de versión"
@@ -989,7 +961,6 @@ msgid "Show mc with specified skin"
 msgstr "Mostrar mc con la careta (skin) indicada"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -1010,10 +981,11 @@ msgstr ""
 "{FRENTE} y {FONDO} se pueden omitir y se utilizará el valor estándar\n"
 "\n"
 "Contextos:\n"
-"   Globales:           errors, reverse, gauge, input, viewunderline\n"
+"   Globales:           errors, reverse, gauge, viewunderline\n"
+"                       input, inputmark, inputunchanged, commandlinemark\n"
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
-"                        errdhotnormal, errdhotfocus\n"
+"                       errdhotnormal, errdhotfocus\n"
 "   Menús:              menunormal, menuhot, menusel, menuhotsel, "
 "menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
@@ -1049,14 +1021,13 @@ msgstr "[DIRECTORIO] [SEGUNDO_DIRECTORIO]"
 msgid "Set initial line number for the internal editor"
 msgstr "Línea de comienzo al abrir archivo con editor interno"
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Si detecta algún fallo puede comunicarlo a mc-devel@gnome.org\n"
+"Si detecta algún fallo puede comunicarlo en www.midnight-commander.org\n"
 "incluyendo la descripción obtenida con `mc -V'.\n"
 
 #, c-format
@@ -1064,10 +1035,10 @@ msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
 msgid "No arguments given to the viewer."
-msgstr ""
+msgstr "No se han pasado argumentos al visor."
 
 msgid "There 2 files are required to diffviewer."
-msgstr ""
+msgstr "Se necesitan dos archivos para comparar."
 
 msgid "Main options"
 msgstr "Opciones principales"
@@ -1075,32 +1046,27 @@ msgstr "Opciones principales"
 msgid "Terminal options"
 msgstr "Opciones de terminal"
 
-#, fuzzy
 msgid "Background process error"
-msgstr " Error en un proceso en 2º plano"
+msgstr "Error en un proceso en 2º plano"
 
-#, fuzzy
 msgid "Unknown error in child"
-msgstr " Error desconocido en el proceso hijo "
+msgstr "Error desconocido en el proceso hijo"
 
-#, fuzzy
 msgid "Child died unexpectedly"
-msgstr " El proceso hijo feneció inesperadamente"
+msgstr "El proceso hijo feneció inesperadamente"
 
-#, fuzzy
 msgid "Background protocol error"
-msgstr " Error de protocolo en proceso en 2º plano "
+msgstr "Error de protocolo en proceso en 2º plano"
 
 msgid "Reading failed"
 msgstr "Error en la lectura"
 
-#, fuzzy
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
 msgstr ""
-" El proceso en 2º plano nos envió una petición con más argumentos \n"
-" de los que estamos preparados para manejar. \n"
+"El proceso en 2º plano nos envió una petición de más argumentos\n"
+"que los que estamos preparados para manejar."
 
 msgid "&Full file list"
 msgstr "listado &Completo"
@@ -1117,7 +1083,6 @@ msgstr "&Definido por el usuario:"
 msgid "Listing mode"
 msgstr "Listado"
 
-#, fuzzy
 msgid "User &mini status"
 msgstr "&Mini-estado"
 
@@ -1128,7 +1093,7 @@ msgid "&Reverse"
 msgstr "inve&Rtir"
 
 msgid "Case sensi&tive"
-msgstr "distinguir ma&Yúsculas"
+msgstr "distinguir &May/min"
 
 msgid "Executable &first"
 msgstr "&Ejecutables primero"
@@ -1142,22 +1107,22 @@ msgstr "Confirmación"
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
-msgstr "Confirmation|borrar &Historia"
+msgstr "borrar &Historia"
 
 msgid "Confirmation|&Directory hotlist delete"
-msgstr "Confirmation|borrar &Favoritos"
+msgstr "borrar &Favoritos"
 
 msgid "Confirmation|E&xit"
-msgstr "Confirmation|sali&R"
+msgstr "sali&R"
 
 msgid "Confirmation|&Execute"
-msgstr "Confirmation|e&Jecutar"
+msgstr "e&Jecutar"
 
 msgid "Confirmation|O&verwrite"
-msgstr "Confirmation|s&Obrescribir"
+msgstr "s&Obrescribir"
 
 msgid "Confirmation|&Delete"
-msgstr "Confirmation|&Borrar"
+msgstr "&Borrar"
 
 msgid "UTF-8 output"
 msgstr "salida UTF-8"
@@ -1174,9 +1139,8 @@ msgstr "&7 bits"
 msgid "F&ull 8 bits input"
 msgstr "Aceptar entrada de 8 bits"
 
-#, fuzzy
 msgid "Display bits"
-msgstr " Juego de caracteres "
+msgstr "Juego de caracteres"
 
 msgid "Other 8 bit"
 msgstr "Otro (8 bit)"
@@ -1187,9 +1151,8 @@ msgstr "Juego de caracteres entrada/pantalla:"
 msgid "&Select"
 msgstr "&Seleccionar"
 
-#, fuzzy
 msgid "Directory tree"
-msgstr "árbol de di&Rectorios"
+msgstr "Árbol de directorios"
 
 msgid "Use passive mode over pro&xy"
 msgstr "usar modo pasivo sobre prox&Y"
@@ -1207,23 +1170,22 @@ msgid "sec"
 msgstr "s."
 
 msgid "ftpfs directory cache timeout:"
-msgstr "Descartar el caché de ftpfs tras: "
+msgstr "Descartar el caché de ftpfs tras:"
 
 msgid "ftp anonymous password:"
 msgstr "Contraseña FTP anónimo:"
 
 msgid "Timeout for freeing VFSs:"
-msgstr "Descartar los VFS tras: "
+msgstr "Descartar los VFS tras:"
 
-#, fuzzy
 msgid "Virtual File System Setting"
-msgstr " Sistema de archivos virtual (VFS) "
+msgstr "Sistema de archivos virtual (VFS)"
 
 msgid "cd"
 msgstr "cd"
 
 msgid "Quick cd"
-msgstr " Cambiar directorio "
+msgstr "Cambiar directorio"
 
 msgid "Symbolic link filename:"
 msgstr "Nombre del nuevo enlace simbólico:"
@@ -1232,14 +1194,13 @@ msgid "Existing filename (filename symlink will point to):"
 msgstr "Apuntando a:"
 
 msgid "Symbolic link"
-msgstr " Crear enlace simbólico "
+msgstr "Crear enlace simbólico"
 
-#, fuzzy
 msgid "Running"
-msgstr "Corriendo "
+msgstr "Corriendo"
 
 msgid "Stopped"
-msgstr "Detenido "
+msgstr "Detenido"
 
 msgid "&Stop"
 msgstr "&Detener"
@@ -1251,7 +1212,7 @@ msgid "&Kill"
 msgstr "&Matar"
 
 msgid "Background Jobs"
-msgstr " Procesos en 2º plano "
+msgstr "Procesos en 2º plano"
 
 msgid "Domain:"
 msgstr "Dominio:"
@@ -1261,7 +1222,7 @@ msgstr "Usuario:"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr " Contraseña para \\\\%s\\%s "
+msgstr "Contraseña para \\\\%s\\%s"
 
 msgid "7-bit ASCII"
 msgstr "ASCII (7 bit)"
@@ -1328,23 +1289,22 @@ msgid "Group name"
 msgstr "Grupo"
 
 msgid "Use SPACE to change"
-msgstr " Use las flechas para"
+msgstr "Use las flechas para"
 
 msgid "an option, ARROW KEYS"
-msgstr " moverse, ESPACIO para"
+msgstr "moverse, ESPACIO para"
 
 msgid "to move between options"
-msgstr " cambiar los permisos"
+msgstr "cambiar los permisos"
 
 msgid "and T or INS to mark"
-msgstr " y T o INS para marcar"
+msgstr "y T o INS para marcar"
 
 msgid "Chmod command"
 msgstr "Comando Chmod"
 
-#, fuzzy
 msgid "File"
-msgstr "&Archivo"
+msgstr "Archivo"
 
 msgid "Permission"
 msgstr "Permisos"
@@ -1355,13 +1315,11 @@ msgstr "pon d&Ueños"
 msgid "Set &groups"
 msgstr "pon &Grupos"
 
-#, fuzzy
 msgid "Size"
-msgstr "&Tamaño"
+msgstr "Tamaño"
 
-#, fuzzy
 msgid "Chown command"
-msgstr " Cambiar dueño "
+msgstr "Cambiar dueño"
 
 msgid "<Unknown user>"
 msgstr "<desconocido>"
@@ -1369,46 +1327,38 @@ msgstr "<desconocido>"
 msgid "<Unknown group>"
 msgstr "<desconocido>"
 
-#, fuzzy
 msgid "User name"
-msgstr " Dueño "
+msgstr "Dueño"
 
 msgid "Files tagged, want to cd?"
-msgstr " Hay archivos marcados. ¿Quiere cambiar de directorio?"
+msgstr "Hay archivos marcados. ¿Quiere cambiar de directorio?"
 
 msgid "Cannot change directory"
 msgstr "Imposible cambiar de directorio"
 
-#, fuzzy
 msgid "View file"
-msgstr " Ver archivo "
+msgstr "Ver archivo"
 
-#, fuzzy
 msgid "Filename:"
-msgstr " Nombre de archivo:"
+msgstr "Nombre de archivo:"
 
-#, fuzzy
 msgid "Filtered view"
 msgstr "e&Jecutar y ver..."
 
-#, fuzzy
 msgid "Filter command and arguments:"
-msgstr " Orden a ejecutar y argumentos:"
+msgstr "Orden a ejecutar y argumentos:"
 
 msgid "Create a new Directory"
-msgstr " Crear directorio "
+msgstr "Crear directorio"
 
-#, fuzzy
 msgid "Enter directory name:"
-msgstr " Teclee el nombre del directorio: "
+msgstr "Teclee el nombre del directorio:"
 
-#, fuzzy
 msgid "Filter"
-msgstr " Filtro "
+msgstr "Filtro"
 
-#, fuzzy
 msgid "Set expression for filtering filenames"
-msgstr " Teclee la expresión para filtrar nombres de archivo"
+msgstr "Teclee la expresión para filtrar nombres de archivo"
 
 msgid "&Using shell patterns"
 msgstr "&Usando patrones shell"
@@ -1419,20 +1369,17 @@ msgstr "distinguir &May/min"
 msgid "&Files only"
 msgstr "sólo &Archivos"
 
-#, fuzzy
 msgid "Select"
-msgstr "&Seleccionar"
+msgstr "Seleccionar grupo"
 
-#, fuzzy
 msgid "Unselect"
-msgstr " De-seleccionar grupo "
+msgstr "De-seleccionar grupo"
 
 msgid "Extension file edit"
-msgstr " Editar extensiones "
+msgstr "Editar extensiones"
 
-#, fuzzy
 msgid "Which extension file you want to edit?"
-msgstr " ¿Qué archivo de extensiones desea editar? "
+msgstr "¿Qué archivo de extensiones desea editar?"
 
 msgid "&User"
 msgstr "&Usuario"
@@ -1440,31 +1387,26 @@ msgstr "&Usuario"
 msgid "&System Wide"
 msgstr "&Sistema"
 
-#, fuzzy
 msgid "Menu edit"
-msgstr " Editar archivo de menú "
+msgstr "Editar archivo de menú"
 
-#, fuzzy
 msgid "Which menu file do you want to edit?"
-msgstr " ¿Qué archivo de menú desea editar?"
+msgstr "¿Qué archivo de menú desea editar?"
 
 msgid "&Local"
 msgstr "&Local"
 
 msgid "Highlighting groups file edit"
-msgstr " Editar colores de grupo "
+msgstr "Editar colores de grupo"
 
-#, fuzzy
 msgid "Which highlighting file you want to edit?"
-msgstr " ¿Qué archivo de colores de grupo desea editar? "
+msgstr "¿Qué archivo de colores de grupo desea editar?"
 
-#, fuzzy
 msgid "Compare directories"
-msgstr "&Comparar directorios..."
+msgstr "Comparar directorios"
 
-#, fuzzy
 msgid "Select compare method:"
-msgstr " Seleccione el método de comparación: "
+msgstr "Seleccione el método de comparación:"
 
 msgid "&Quick"
 msgstr "&Rápido"
@@ -1475,118 +1417,106 @@ msgstr "sólo &Tamaño"
 msgid "&Thorough"
 msgstr "&Completo"
 
-#, fuzzy
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
-msgstr " Ambos paneles deben estar en modo listado para usar esta función "
+msgstr ""
+"Ambos paneles deben estar en\n"
+"modo listado para usar esta función"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the panels cannot be toggled."
 msgstr ""
-" No se está usando ni xterm ni la consola Linux; \n"
-" los paneles no pueden ser ocultados. "
+"No se está usando ni xterm ni la consola Linux.\n"
+"Los paneles no pueden ser ocultados."
 
 #, c-format
 msgid "Link %s to:"
 msgstr "Crear enlace a %s como:"
 
-#, fuzzy
 msgid "Link"
-msgstr "crear en&Lace..."
+msgstr "Crear enlace"
 
-#, fuzzy, c-format
+#, c-format
 msgid "link: %s"
-msgstr " enlace: %s"
+msgstr "enlace: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "symlink: %s"
-msgstr " enlace simbólico: %s "
+msgstr "enlace simbólico: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Symlink `%s' points to:"
-msgstr " El enlace simbólico '%s' apunta a: "
+msgstr "El enlace simbólico '%s' apunta a:"
 
-#, fuzzy
 msgid "Edit symlink"
 msgstr "edi&Tar enlace simbólico"
 
-#, fuzzy, c-format
+#, c-format
 msgid "edit symlink, unable to remove %s: %s"
-msgstr " edite enlace simbólico, imposible borrar %s: %s "
+msgstr "edite enlace simbólico, imposible borrar %s: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "edit symlink: %s"
-msgstr " editar enlace simbólico: %s "
+msgstr "editar enlace simbólico: %s"
 
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "'%s' no es un enlace simbólico"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot chdir to %s"
-msgstr " Imposible cambiar al directorio %s "
+msgstr "Imposible cambiar al directorio %s"
 
-#, fuzzy
 msgid "Enter machine name (F1 for details):"
-msgstr " Teclee el nombre de la máquina (F1 para más detalles): "
+msgstr "Teclee el nombre de la máquina (F1 para más detalles):"
 
-#, fuzzy
 msgid "Link to a remote machine"
-msgstr " Conexión por red "
+msgstr "Conexión por red"
 
-#, fuzzy
 msgid "FTP to machine"
-msgstr " Conexión por FTP "
+msgstr "Conexión por FTP"
 
-#, fuzzy
 msgid "Shell link to machine"
-msgstr " Conexión por shell "
+msgstr "Conexión por SSH"
 
-#, fuzzy
 msgid "SMB link to machine"
-msgstr " Conexión por SMB "
+msgstr "Conexión por SMB"
 
-#, fuzzy
 msgid "Undelete files on an ext2 file system"
-msgstr " Recuperar archivos de un sistema de archivos ext2 "
+msgstr "Recuperar archivos de un sistema de archivos ext2"
 
-#, fuzzy
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
 msgstr ""
-" Introduzca el dispositivo (sin /dev/) donde quiere\n"
-"  recuperar archivos: (F1 para más detalles)"
+"Introduzca el dispositivo (sin /dev/) donde quiere\n"
+"recuperar archivos: (F1 para más detalles)"
 
-#, fuzzy
 msgid "Setup"
-msgstr " Configuración "
+msgstr "Configuración"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Setup saved to ~/%s"
-msgstr " Configuración guardada en ~/%s"
+msgstr "Configuración guardada en ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible cambiar al directorio \"%s\" \n"
-" %s "
+"Imposible cambiar al directorio \"%s\"\n"
+"%s"
 
-#, fuzzy
 msgid "Cannot execute commands on non-local filesystems"
-msgstr " Imposible ejecutar comandos desde directorios no locales "
+msgstr "Imposible ejecutar comandos desde directorios no locales"
 
-#, fuzzy
 msgid "The shell is already running a command"
-msgstr " El shell ya está ejecutando un comando "
+msgstr "El shell ya está ejecutando un comando"
 
 msgid "Screens"
-msgstr ""
+msgstr "Pantallas"
 
 msgid "&Dismiss"
 msgstr "&Ignorar"
@@ -1600,46 +1530,43 @@ msgstr "&Palabras completas"
 msgid "&Backwards"
 msgstr "&Hacia atrás"
 
-#, fuzzy
 msgid "Case &sensitive"
-msgstr "distinguir ma&Yúsculas"
+msgstr "distinguir &May/min"
 
-#, fuzzy
 msgid "Enter search string:"
-msgstr " Teclee el texto a buscar:"
+msgstr "Teclee el texto a buscar:"
 
 msgid "Search"
 msgstr "Buscar"
 
-#, fuzzy
 msgid "Search is disabled"
-msgstr " Busquedas deshabilitadas "
+msgstr "Busquedas deshabilitadas"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
 msgstr ""
-" Imposible crear archivo temporal de diferencias \n"
-" %s "
+"Imposible crear archivo temporal de diferencias\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
 msgstr ""
-" Imposible crear archivo de copia \n"
-" %s%s \n"
-" %s "
+"Imposible crear archivo de copia\n"
+"%s%s\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
 msgstr ""
-" Imposible crear archivo temporal de mezcla \n"
-" %s "
+"Imposible crear archivo temporal de mezcla\n"
+"%s"
 
 msgid "&Normal"
 msgstr "&Normal"
@@ -1663,7 +1590,7 @@ msgid "Ignore tab &expansion"
 msgstr "ignorar &Tabulaciones"
 
 msgid "&Ignore case"
-msgstr "ignorar &May/min"
+msgstr "ignorar may/mi&N"
 
 msgid "Diff extra options"
 msgstr "Otras opciones"
@@ -1677,21 +1604,17 @@ msgstr "Opciones"
 msgid "Edit"
 msgstr "Edición"
 
-#, fuzzy
 msgid "Edit is disabled"
-msgstr " Ediciones deshabilitadas "
+msgstr "Ediciones deshabilitadas"
 
-#, fuzzy
 msgid "Goto line (left)"
-msgstr " Ir a la línea "
+msgstr "Ir a la línea (izquierda)"
 
-#, fuzzy
 msgid "Goto line (right)"
-msgstr " Ir a la línea "
+msgstr "Ir a la línea (derecha)"
 
-#, fuzzy
 msgid "Enter line:"
-msgstr " Línea: "
+msgstr "Línea:"
 
 msgid "ButtonBar|Help"
 msgstr "Ayuda"
@@ -1717,17 +1640,18 @@ msgstr "Salir"
 msgid "Quit"
 msgstr "Salir"
 
-#, fuzzy
 msgid "File was modified. Save with exit?"
-msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
+msgstr "El archivo fue modificado. ¿Desea guardarlo al salir?"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
+"Saliendo de Midnight Commander.\n"
+"¿Desea guardar el archivo modificado?"
 
 msgid "Diff:"
-msgstr ""
+msgstr "Diff:"
 
 msgid "Two files are needed to compare"
 msgstr ""
@@ -1737,9 +1661,8 @@ msgstr ""
 msgid "Cannot read directory contents"
 msgstr "Imposible leer directorio"
 
-#, fuzzy
 msgid "Choose syntax highlighting"
-msgstr "Coloreado de Sintaxis"
+msgstr "Coloreado de sintaxis"
 
 msgid "< Auto >"
 msgstr "< Auto >"
@@ -1747,40 +1670,39 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Releer sintaxis >"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open %s for reading"
-msgstr " Imposible abrir %s para lectura "
+msgstr "Imposible abrir %s para lectura"
 
 msgid "Error"
 msgstr "Error"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading %s"
-msgstr " Error al leer %s "
+msgstr "Error al leer %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading from pipe: %s"
-msgstr " Error al leer en tubería: %s "
+msgstr "Error al leer en tubería: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open pipe for reading: %s"
-msgstr " Imposible abrir tubería para lectura: %s "
+msgstr "Imposible abrir tubería para lectura: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot get size/permissions for %s"
-msgstr " Imposible obtener tamaño/permisos para %s "
+msgstr "Imposible obtener tamaño/permisos para %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is not a regular file"
-msgstr " %s no es un archivo ordinario "
+msgstr "\"%s\" no es un archivo ordinario"
 
-#, fuzzy, c-format
+#, c-format
 msgid "File \"%s\" is too large"
-msgstr " El archivo %s es demasiado grande "
+msgstr "El archivo \"%s\" es demasiado grande"
 
-#, fuzzy
 msgid "About"
-msgstr " Acerca de... "
+msgstr "Acerca de..."
 
 msgid ""
 "\n"
@@ -1802,24 +1724,23 @@ msgstr ""
 msgid "Macro recursion is too deep"
 msgstr "La macro es demasiado recursiva"
 
-#, fuzzy
 msgid "File has hard-links. Detach before saving?"
-msgstr " Hay otros enlaces al archivo. ¿Desea separarlo al guardar? "
+msgstr "Hay otros enlaces al archivo. ¿Desea separarlo al guardar?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr "El archivo ha estado siendo modificado por otros. ¿Desea guardar?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing to pipe: %s"
-msgstr " Error al escribir en tubería: "
+msgstr "Error al escribir en tubería: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open pipe for writing: %s"
-msgstr " Imposible abrir tubería para escritura: "
+msgstr "Imposible abrir tubería para escritura: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open file for writing: %s"
-msgstr " Imposible abrir archivo para escritura: %s "
+msgstr "Imposible abrir archivo para escritura: %s"
 
 msgid "&Quick save"
 msgstr "guardar &Rápido"
@@ -1833,9 +1754,8 @@ msgstr "conservar copias con e&Xtensión:"
 msgid "Check &POSIX new line"
 msgstr "verificar salto de línea &POSIX"
 
-#, fuzzy
 msgid "Edit Save Mode"
-msgstr " Modo de guardar "
+msgstr "Modo de guardar"
 
 msgid "The file you are saving is not finished with a newline"
 msgstr "El archivo a guardar no acaba con salto de línea"
@@ -1858,164 +1778,132 @@ msgstr "formato &Macintosh (CR)"
 msgid "Change line breaks to:"
 msgstr "Cambiar saltos de línea por:"
 
-#, fuzzy
 msgid "Enter file name:"
-msgstr " Teclee el nombre del archivo: "
+msgstr "Teclee el nombre del archivo:"
 
-#, fuzzy
 msgid "Save As"
-msgstr " Guardar como "
+msgstr "Guardar como"
 
-#, fuzzy
 msgid "A file already exists with this name"
-msgstr " Ya existe un archivo con ese nombre. "
+msgstr "Ya existe un archivo con ese nombre."
 
 msgid "&Overwrite"
 msgstr "s&Obrescribir"
 
-#, fuzzy
 msgid "Save as"
 msgstr "guar&Dar como..."
 
-#, fuzzy
 msgid "Cannot save file"
-msgstr " Imposible guardar el archivo. "
+msgstr "Imposible guardar el archivo."
 
-#, fuzzy
 msgid "Delete macro"
-msgstr " Eliminar macro "
+msgstr "Eliminar macro"
 
-#, fuzzy
 msgid "Cannot open temp file"
-msgstr " Imposible abrir el archivo temporal "
+msgstr "Imposible abrir el archivo temporal"
 
-#, fuzzy
 msgid "Cannot open macro file"
-msgstr " Imposible abrir el archivo de macros "
+msgstr "Imposible abrir el archivo de macros"
 
-#, fuzzy
 msgid "Cannot overwrite macro file"
-msgstr " Imposible sobrescribir el archivo de macros "
+msgstr "Imposible sobrescribir el archivo de macros"
 
-#, fuzzy
 msgid "Save macro"
-msgstr " Guardar macro "
+msgstr "Guardar macro"
 
-#, fuzzy
 msgid "Press the macro's new hotkey:"
-msgstr " Presione la nueva tecla para el macro: "
+msgstr "Presione la nueva tecla para la macro:"
 
-#, fuzzy
 msgid "Press macro hotkey:"
-msgstr " Pulse la tecla de macro: "
+msgstr "Pulse la tecla de la macro:"
 
-#, fuzzy
 msgid "Load macro"
-msgstr " Cargar macro "
+msgstr "Cargar macro"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Confirm save file: \"%s\""
-msgstr " Guardar el archivo: "
+msgstr "Guardar el archivo: \"%s\""
 
-#, fuzzy
 msgid "Save file"
-msgstr " Guardar archivo "
+msgstr "Guardar archivo"
 
 msgid "&Save"
 msgstr "&Guardar"
 
-#, fuzzy
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes"
 msgstr ""
-" El texto actual ha sido modificado y no ha sido guardado \n"
-" Continuar descartará estos cambios. "
+"El texto actual ha sido modificado y no ha sido guardado\n"
+"Continuar descartará estos cambios."
 
 msgid "Syntax file edit"
-msgstr " Editar archivo de sintaxis "
+msgstr "Editar archivo de sintaxis"
 
-#, fuzzy
 msgid "Which syntax file you want to edit?"
-msgstr " ¿Qué archivo de sintaxis desea editar? "
+msgstr "¿Qué archivo de sintaxis desea editar?"
 
-#, fuzzy
 msgid "Load"
-msgstr " Cargar "
+msgstr "Cargar"
 
-#, fuzzy
 msgid "Block is large, you may not be able to undo this action"
-msgstr " El bloque es enorme, quizás no se pueda deshacer esta acción. "
+msgstr "El bloque es enorme, quizás no se pueda deshacer esta acción."
 
 msgid "Replace"
 msgstr "Reemplazar"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%ld replacements made"
-msgstr " %ld reemplazos hechos. "
+msgstr "%ld reemplazos hechos."
 
 msgid "&Cancel quit"
 msgstr "&Cancelar salida"
 
-#, fuzzy
 msgid "This function is not implemented"
-msgstr " Esa función no está implementada. "
+msgstr "Esa función no está implementada."
 
-#, fuzzy
 msgid "Copy to clipboard"
-msgstr " Copiar al portapapeles "
+msgstr "Copiar al portapapeles"
 
-#, fuzzy
 msgid "Unable to save to file"
-msgstr " No pude guardar el archivo. "
+msgstr "No pude guardar el archivo."
 
-#, fuzzy
 msgid "Cut to clipboard"
-msgstr " Cortar al portapapeles "
+msgstr "Cortar al portapapeles"
 
-#, fuzzy
 msgid "Goto line"
-msgstr " Ir a la línea "
+msgstr "Ir a la línea"
 
-#, fuzzy
 msgid "Save block"
-msgstr " Guardar bloque "
+msgstr "Guardar bloque"
 
-#, fuzzy
 msgid "Insert file"
-msgstr "&Insertar archivo..."
+msgstr "Insertar archivo"
 
-#, fuzzy
 msgid "Cannot insert file"
-msgstr " Imposible insertar el archivo "
+msgstr "Imposible insertar el archivo"
 
-#, fuzzy
 msgid "Sort block"
-msgstr " Ordenar bloque de texto "
+msgstr "Ordenar bloque de texto"
 
-#, fuzzy
 msgid "You must first highlight a block of text"
-msgstr " Es necesario tener un bloque seleccionado "
+msgstr "Es necesario tener un bloque seleccionado"
 
-#, fuzzy
 msgid "Run sort"
-msgstr " Ordenar bloque de texto "
+msgstr "Ordenar bloque de texto"
 
-#, fuzzy
 msgid "Enter sort options (see manpage) separated by whitespace:"
-msgstr " Opciones para \"sort\" (ver manual), separadas por espacios: "
+msgstr "Opciones para \"sort\" (ver manual), separadas por espacios:"
 
-#, fuzzy
 msgid "Sort"
-msgstr " Ordenar "
+msgstr "Ordenar"
 
-#, fuzzy
 msgid "Cannot execute sort command"
-msgstr " Imposible ejecutar \"sort\" "
+msgstr "Imposible ejecutar \"sort\""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Sort returned non-zero: %s"
-msgstr " \"sort\" devolvió un error: "
+msgstr "\"sort\" devolvió un error: %s"
 
 msgid "Paste output of external command"
 msgstr "Pegar desde otro programa"
@@ -2047,52 +1935,42 @@ msgstr "Procesar bloque"
 msgid "Error calling program"
 msgstr "Error al ejecutar el programa"
 
-#, fuzzy
 msgid "Copies to"
-msgstr " Cursar Copias a"
+msgstr "Cursar Copias a"
 
-#, fuzzy
 msgid "Subject"
-msgstr " Tema"
+msgstr "Tema"
 
-#, fuzzy
 msgid "To"
-msgstr " Para"
+msgstr "Para"
 
-#, fuzzy
 msgid "mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <tema> -c <cc> <para>"
+msgstr "mail -s <tema> -c <cc> <para>"
 
-#, fuzzy
 msgid "Mail"
-msgstr " Correo "
+msgstr "Correo"
 
-#, fuzzy
 msgid "Insert literal"
-msgstr "insertar &Literalmente..."
+msgstr "Insertar literalmente"
 
-#, fuzzy
 msgid "Press any key:"
-msgstr " Presione cualquier tecla: "
+msgstr "Presione cualquier tecla:"
 
-#, fuzzy
 msgid "Execute macro"
-msgstr "&Ejecutar macro"
+msgstr "Ejecutar macro"
 
-#, fuzzy
 msgid ""
 "Current text was modified without a file save\n"
 "Continue discards these changes"
 msgstr ""
-" El texto actual ha sido modificado y no ha sido guardado \n"
-" Continuar descartará estos cambios. "
+"El texto actual ha sido modificado y no ha sido guardado\n"
+"Continuar descartará estos cambios."
 
 msgid "In se&lection"
 msgstr "sólo en se&Lección"
 
-#, fuzzy
 msgid "Enter replacement string:"
-msgstr " Teclee el cambio a realizar:"
+msgstr "Teclee el cambio a realizar:"
 
 msgid "&Find all"
 msgstr "buscar &Todos"
@@ -2100,13 +1978,12 @@ msgstr "buscar &Todos"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#, fuzzy
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
 msgstr ""
-" El texto actual ha sido modificado y no ha sido guardado \n"
-" Continuar descartará estos cambios. "
+"El texto actual ha sido modificado y no ha sido guardado \n"
+"Continuar descartará estos cambios."
 
 msgid "&Skip"
 msgstr "&Saltar"
@@ -2117,13 +1994,11 @@ msgstr "&Todos"
 msgid "&Replace"
 msgstr "&Reemplazar"
 
-#, fuzzy
 msgid "Replace with:"
-msgstr " Reemplazar con: "
+msgstr "Reemplazar con:"
 
-#, fuzzy
 msgid "Confirm replace"
-msgstr " Confirmar cambios "
+msgstr "Confirmar cambios"
 
 msgid "&Open file..."
 msgstr "abrir archiv&O..."
@@ -2272,7 +2147,6 @@ msgstr "peg&Ar desde otro programa..."
 msgid "&External formatter"
 msgstr "dar formato e&Xterno"
 
-#, fuzzy
 msgid "&General..."
 msgstr "&General..."
 
@@ -2283,7 +2157,7 @@ msgid "Learn &keys..."
 msgstr "redefinir &Teclas..."
 
 msgid "Syntax &highlighting..."
-msgstr "sinta&Xis coloreada..."
+msgstr "coloreado de sinta&Xis..."
 
 msgid "S&yntax file"
 msgstr "editar archivo de &Sintaxis"
@@ -2321,7 +2195,6 @@ msgstr "Párrafos dinámicos"
 msgid "Type writer wrap"
 msgstr "Máquina de escribir"
 
-#, fuzzy
 msgid "Word wrap line length:"
 msgstr "Ancho del párrafo auto: "
 
@@ -2349,7 +2222,6 @@ msgstr "confir&Mar al guardar"
 msgid "&Return does autoindent"
 msgstr "autoindenta&R"
 
-#, fuzzy
 msgid "Tab spacing:"
 msgstr "Tamaño de tabulaciones: "
 
@@ -2365,13 +2237,11 @@ msgstr "&Fingir medias tabulaciones"
 msgid "Wrap mode"
 msgstr "Autoajuste de párrafo"
 
-#, fuzzy
 msgid "Editor options"
-msgstr " Opciones del editor "
+msgstr "Opciones del editor"
 
-#, fuzzy
 msgid "Edit: "
-msgstr "Edición"
+msgstr "Edición:"
 
 msgid "ButtonBar|Mark"
 msgstr "Marcar"
@@ -2391,51 +2261,48 @@ msgstr "Borrar"
 msgid "ButtonBar|PullDn"
 msgstr "Menú"
 
-#, fuzzy
 msgid "Load syntax file"
-msgstr " Cargar archivo de sintaxis "
+msgstr "Cargar archivo de sintaxis"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file %s\n"
 "%s"
 msgstr ""
-" Imposible abrir el archivo %s \n"
-" %s "
+"Imposible abrir el archivo %s\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error in file %s on line %d"
-msgstr " Error en el archivo %s (línea %d) "
+msgstr "Error en el archivo %s (línea %d)"
 
-#, fuzzy
 msgid ""
 "The Commander can't change to the directory that\n"
 "the subshell claims you are in. Perhaps you have\n"
 "deleted your working directory, or given yourself\n"
 "extra access permissions with the \"su\" command?"
 msgstr ""
-" Midnight Commander no puede cambiar al directorio \n"
-" que el subshell dice que es el directorio actual. \n"
-" ¿Acaso borró usted el directorio o se dio otros \n"
-" permisos con el comando \"su\"?"
+"Midnight Commander no puede cambiar al directorio\n"
+"que el subshell dice que es el directorio actual.\n"
+"¿Acaso borró usted el directorio o se dio otros\n"
+"permisos con el comando \"su\"?"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Teclee \"exit\" para regresar al Midnight Commander"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot fetch a local copy of %s"
-msgstr " Imposible obtener una copia local de \"%s\" "
+msgstr "Imposible obtener una copia local de \"%s\""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr ""
-" Imposible crear el archivo temporal para comandos \n"
-" %s "
+"Imposible crear el archivo temporal para comandos\n"
+"%s"
 
-#, fuzzy
 msgid "Parameter"
 msgstr "Parámetro"
 
@@ -2443,7 +2310,7 @@ msgstr "Parámetro"
 msgid " %s%s file error"
 msgstr " error en el archivo %s%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
 "the installation failed. Please fetch a fresh copy from the Midnight "
@@ -2454,11 +2321,11 @@ msgstr ""
 "de conseguir una copia intacta con el paquete del\n"
 "Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid "~/%s file error"
-msgstr " error en el archivo ~/%s "
+msgstr "error en el archivo ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
@@ -2477,162 +2344,159 @@ msgstr "Mover"
 msgid "DialogTitle|Delete"
 msgstr "Borrar"
 
-#, fuzzy
 msgid "Cannot make the hardlink"
-msgstr " Imposible crear el enlace "
+msgstr "Imposible crear el enlace"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source link \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible leer el enlace original \"%s\" \n"
-" %s "
+"Imposible leer el enlace original \"%s\"\n"
+"%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-" Imposible crear enlaces simbólicos estables si los archivos\n"
-" están en distintos sistemas de archivos: \n"
+"Imposible crear enlaces simbólicos estables si los archivos\n"
+"están en distintos sistemas de archivos:\n"
 "\n"
-" La opción de enlaces simbólicos estables será desactivada "
+"La opción de enlaces simbólicos estables será desactivada"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible crear el enlace simbólico destino \"%s\" \n"
-" %s "
+"Imposible crear el enlace simbólico destino \"%s\"\n"
+"%s"
 
 msgid "&Abort"
 msgstr "&Abortar"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite directory\"%s\"\n"
 "%s"
 msgstr ""
-" Imposible sobrescribir el directorio \"%s\" \n"
-" %s "
+"Imposible sobrescribir el directorio \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible identificar el archivo origen \"%s\" \n"
-" %s "
+"Imposible identificar el archivo origen \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
 "are the same file"
 msgstr ""
-" \"%s\" \n"
-" y \n"
-" \"%s\" \n"
-" son el mismo archivo "
+"\"%s\"\n"
+"y\n"
+"\"%s\"\n"
+"son el mismo archivo"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible crear el archivo especial \"%s\" \n"
-" %s "
+"Imposible crear el archivo especial \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible cambiar el dueño del archivo destino: \"%s\" \n"
-" %s "
+"Imposible cambiar el dueño del archivo destino \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible cambiar los permisos del archivo destino \"%s\" \n"
-" %s "
+"Imposible cambiar los permisos del archivo destino \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible abrir el archivo fuente \"%s\" \n"
-" %s "
+"Imposible abrir el archivo fuente \"%s\"\n"
+"%s"
 
-#, fuzzy
 msgid "Reget failed, about to overwrite file"
-msgstr " Falló el reintento, se va a sobrescribir el archivo "
+msgstr "Falló el reintento, se va a sobrescribir el archivo"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible identificar el archivo origen \"%s\" \n"
-" %s "
+"Imposible identificar el archivo origen \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible crear el archivo destino \"%s\" \n"
-" %s "
+"Imposible crear el archivo destino \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible identificar el archivo destino \"%s\" \n"
-" %s "
+"Imposible identificar el archivo destino \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\"%s\"\n"
 "%s"
 msgstr ""
-" Imposible leer el archivo origen \"%s\" \n"
-" %s "
+"Imposible leer el archivo origen \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible escribir el archivo destino \"%s\" \n"
-" %s "
+"Imposible escribir el archivo destino \"%s\"\n"
+"%s"
 
 msgid "(stalled)"
 msgstr "(bloqueado)"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible cerrar el archivo origen \"%s\" \n"
-" %s "
+"Imposible cerrar el archivo origen \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible cerrar el archivo destino \"%s\" \n"
-" %s "
+"Imposible cerrar el archivo destino \"%s\"\n"
+"%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "El archivo está incompleto. ¿Desea conservarlo?"
@@ -2640,131 +2504,133 @@ msgstr "El archivo está incompleto. ¿Desea conservarlo?"
 msgid "&Keep"
 msgstr "&Mantener"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible identificar el directorio de origen \"%s\" \n"
-" %s "
+"Imposible identificar el directorio de origen \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
 "%s"
 msgstr ""
-" El directorio fuente \"%s\" no es un directorio \n"
-" %s "
+"El directorio fuente \"%s\" no es un directorio\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
 "\"%s\""
 msgstr ""
-" Imposible copiar un enlace simbólico cíclico \n"
-" \"%s\" "
+"Imposible copiar un enlace simbólico cíclico\n"
+"\"%s\""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Destination \"%s\" must be a directory\n"
 "%s"
 msgstr ""
-" El destino \"%s\" debe ser un directorio \n"
-" %s "
+"El destino \"%s\" debe ser un directorio\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible crear el directorio destino \"%s\" \n"
-" %s "
+"Imposible crear el directorio destino \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible cambiar los permisos del directorio destino \"%s\"\n"
-" %s "
+"Imposible cambiar el dueño del directorio destino \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible identificar el archivo \"%s\" \n"
-" %s "
+"Imposible identificar el archivo \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot overwrite directory \"%s\""
-msgstr " Imposible sobrescribir el directorio \"%s\" %s "
+msgstr "Imposible sobrescribir el directorio \"%s\""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible mover el archivo \"%s\" a \"%s\" \n"
-" %s "
+"Imposible mover el archivo \"%s\" a \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible borrar el archivo \"%s\" \n"
-" %s "
+"Imposible borrar el archivo \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
 "are the same directory"
 msgstr ""
-" \"%s\" \n"
-" y \n"
-" \"%s\" \n"
-" son el mismo directorio "
+"\"%s\"\n"
+"y\n"
+"\"%s\"\n"
+"son el mismo directorio"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible sobrescribir el directorio \"%s\" \n"
-" %s "
+"Imposible sobrescribir el directorio \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr " Imposible sobrescribir el archivo \"%s\" %s "
+msgstr ""
+"Imposible sobrescribir el archivo \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible mover el directorio \"%s\" a \"%s\" \n"
-" %s "
+"Imposible mover el directorio \"%s\" a \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible borrar el archivo \"%s\" \n"
-" %s "
+"Imposible borrar el archivo \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible eliminar el directorio \"%s\" \n"
-" %s "
+"Imposible eliminar el directorio \"%s\"\n"
+"%s"
 
 msgid "Directory scanning"
 msgstr "Analizando directorio"
@@ -2809,40 +2675,35 @@ msgstr "a:"
 msgid "%s?"
 msgstr "¿%s?"
 
-#, fuzzy
 msgid "Cannot operate on \"..\"!"
-msgstr " ¡Imposible operar sobre \"..\"! "
+msgstr "¡Imposible operar sobre \"..\"!"
 
-#, fuzzy
 msgid "Sorry, I could not put the job in background"
-msgstr " Lo siento, no pude poner la tarea en 2º plano "
+msgstr "Lo siento, no se pudo poner la tarea en 2º plano"
 
 msgid "&Retry"
 msgstr "&Reintentar"
 
-#, fuzzy
 msgid ""
 "\n"
 "Directory not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "\n"
-" El directorio no está vacío.\n"
-" ¿Desea borrarlo recursivamente? "
+"El directorio no está vacío.\n"
+"¿Desea borrarlo recursivamente?"
 
-#, fuzzy
 msgid ""
 "\n"
 "Background process: Directory not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "\n"
-" Proceso en 2º plano: El directorio no está vacío.\n"
-" ¿Desea borrarlo recursivamente? "
+"Proceso en 2º plano: El directorio no está vacío.\n"
+"¿Desea borrarlo recursivamente?"
 
-#, fuzzy
 msgid "Delete:"
-msgstr " Borrar: "
+msgstr "Borrar:"
 
 msgid "Non&e"
 msgstr "nin&Guno"
@@ -2875,9 +2736,9 @@ msgstr "Archivos procesados: %llu de %llu"
 msgid "Time: %s  %s (%s)"
 msgstr "Tiempo: %s  %s (%s)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Total: %s of %s"
-msgstr " Total: %s de %s "
+msgstr "Total: %s de %s"
 
 msgid "Source"
 msgstr "Origen"
@@ -2925,13 +2786,11 @@ msgstr "aña&Dir"
 msgid "Overwrite this target?"
 msgstr "¿Sobrescribir este archivo?"
 
-#, fuzzy
 msgid "File exists"
-msgstr " El archivo ya existe "
+msgstr "El archivo ya existe"
 
-#, fuzzy
 msgid "Background process: File exists"
-msgstr " Proceso en 2º plano: El archivo ya existe "
+msgstr "Proceso en 2º plano: El archivo ya existe"
 
 msgid "&Background"
 msgstr "en 2º plan&O"
@@ -2939,15 +2798,12 @@ msgstr "en 2º plan&O"
 msgid "&Stable Symlinks"
 msgstr "enlaces simbólicos &Estables"
 
-#, fuzzy
 msgid "Di&ve into subdir if exists"
 msgstr "entrar en sub&Directorios"
 
-#, fuzzy
 msgid "Preserve &attributes"
 msgstr "&Preservar atributos"
 
-#, fuzzy
 msgid "Follow &links"
 msgstr "seguir en&Laces"
 
@@ -2980,9 +2836,8 @@ msgstr "&Editar - F4"
 msgid "Found: %ld"
 msgstr "Encontrado: %ld"
 
-#, fuzzy
 msgid "Malformed regular expression"
-msgstr " La expresión regular es errónea "
+msgstr "La expresión regular es errónea"
 
 msgid "Cas&e sensitive"
 msgstr "distinguir &May/min"
@@ -2997,7 +2852,7 @@ msgid "&All charsets"
 msgstr "cualquier co&Dificación"
 
 msgid "Case sens&itive"
-msgstr "distinguir may/mi&N"
+msgstr "distinguir &May/min"
 
 msgid "Re&gular expression"
 msgstr "e&Xpresión regular"
@@ -3037,17 +2892,15 @@ msgstr "Buscando %s"
 msgid "Searching"
 msgstr "Buscando"
 
-#, fuzzy
 msgid "Help file format error\n"
-msgstr " Error en el formato del archivo de ayuda\n"
+msgstr "Error en el formato del archivo de ayuda\n"
 
-#, fuzzy
 msgid "Internal bug: Double start of link area"
-msgstr " Error interno: Doble inicio de enlace"
+msgstr "Error interno: Doble inicio de enlace"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot find node %s in help file"
-msgstr " Imposible encontrar el nodo %s en el archivo de ayuda "
+msgstr "Imposible encontrar el nodo %s en el archivo de ayuda"
 
 msgid "Help"
 msgstr "Ayuda"
@@ -3070,11 +2923,9 @@ msgstr "&Añadir al final"
 msgid "&Insert"
 msgstr "&Insertar"
 
-#, fuzzy
 msgid "New &entry"
 msgstr "&Nuevo"
 
-#, fuzzy
 msgid "New &group"
 msgstr "nuevo &Grupo"
 
@@ -3090,7 +2941,6 @@ msgstr "actualiza&R"
 msgid "Fr&ee VFSs now"
 msgstr "&Liberar VFS ahora"
 
-#, fuzzy
 msgid "Change &to"
 msgstr "camb&Iar a"
 
@@ -3098,96 +2948,84 @@ msgid "Subgroup - press ENTER to see list"
 msgstr "Subgrupo - presione ENTER para ver la lista"
 
 msgid "Active VFS directories"
-msgstr " Directorios virtuales (VFS) activos "
+msgstr "Directorios virtuales (VFS) activos"
 
 msgid "Directory hotlist"
-msgstr " Favoritos "
+msgstr "Favoritos"
 
 msgid "Directory path"
-msgstr " Ruta:"
+msgstr "Ruta:"
 
 msgid "Directory label"
-msgstr " Etiqueta:"
+msgstr "Etiqueta:"
 
 #, c-format
 msgid "Moving %s"
 msgstr "Moviendo %s"
 
 msgid "New hotlist entry"
-msgstr " Nuevo "
+msgstr "Nuevo"
 
-#, fuzzy
 msgid "Directory label:"
-msgstr " Etiqueta:"
+msgstr "Etiqueta del directorio:"
 
-#, fuzzy
 msgid "Directory path:"
-msgstr " Ruta:"
+msgstr "Ruta:"
 
-#, fuzzy
 msgid "New hotlist group"
-msgstr " Nuevo grupo "
+msgstr "Nuevo grupo"
 
-#, fuzzy
 msgid "Name of new group:"
-msgstr " Nombre del nuevo grupo:"
+msgstr "Nombre del nuevo grupo:"
 
 #, c-format
 msgid "Label for \"%s\":"
-msgstr " Etiqueta para \"%s\":"
+msgstr "Etiqueta para \"%s\":"
 
-#, fuzzy
 msgid "Add to hotlist"
-msgstr " Añadir actual "
+msgstr "Añadir actual"
 
-#, fuzzy
 msgid "Remove:"
-msgstr " Eliminar: "
+msgstr "Eliminar:"
 
-#, fuzzy
 msgid "Are you sure you want to remove this entry?"
-msgstr ""
-"\n"
-" ¿Desea realmente eliminar este elemento?"
+msgstr "¿Desea realmente eliminar este elemento?"
 
-#, fuzzy
 msgid ""
 "Group not empty.\n"
 "Remove it?"
 msgstr ""
-"\n"
 "El grupo no está vacío.\n"
 "¿Desea eliminarlo?"
 
-#, fuzzy
 msgid "Top level group"
-msgstr " Grupo principal "
+msgstr "Grupo principal"
 
-#, fuzzy
 msgid "Hotlist Load"
-msgstr " Cargar favoritos "
+msgstr "Cargar favoritos"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "MC was unable to write ~/%s file,\n"
 "your old hotlist entries were not deleted"
-msgstr "No se pudo escribir ~/%s, la lista de favoritos antigua no fue borrada"
+msgstr ""
+"No se pudo escribir ~/%s,\n"
+"la lista de favoritos antigua no fue borrada"
 
-#, fuzzy
 msgid "Information"
-msgstr " Información "
+msgstr "Información"
 
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "File: %s"
-msgstr "Archivo:     %s"
+msgstr "Archivo: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr " y %d (%d%%) de %d inodos"
+msgstr " y %ld (%ld%%) de %ld inodos"
 
 msgid "No node information"
 msgstr "Sin información sobre inodos"
@@ -3199,7 +3037,7 @@ msgstr "Disponible %s (%d%%) de %s"
 msgid "No space information"
 msgstr "Espacio libre desconocido"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Type:      %s"
 msgstr "  Tipo:     %s"
 
@@ -3263,50 +3101,41 @@ msgstr "&Vertical"
 msgid "&Horizontal"
 msgstr "&Horizontal"
 
-#, fuzzy
 msgid "Show free sp&ace"
 msgstr "mostrar &Espacio libre"
 
-#, fuzzy
 msgid "&XTerm window title"
 msgstr "titular las ventanas &Xterm"
 
-#, fuzzy
 msgid "H&intbar visible"
 msgstr "&Sugerencias visibles"
 
 msgid "&Keybar visible"
 msgstr "&Barra de teclas visible"
 
-#, fuzzy
 msgid "Command &prompt"
 msgstr "&Línea de comandos"
 
-#, fuzzy
 msgid "Show &mini status"
 msgstr "mostrar m&Ini-estado"
 
-#, fuzzy
 msgid "Menu&bar visible"
 msgstr "barra de &Menú visible"
 
 msgid "&Equal split"
 msgstr "simét&Rico"
 
-#, fuzzy
 msgid "Panel split"
-msgstr " Disposición de paneles "
+msgstr "Disposición de paneles"
 
 msgid "Console output"
-msgstr ""
+msgstr "Línea de comandos"
 
-#, fuzzy
 msgid "Other options"
-msgstr " Otras opciones "
+msgstr "Otras opciones"
 
-#, fuzzy
 msgid "Output lines:"
-msgstr "líneas de salida"
+msgstr "líneas de salida:"
 
 msgid "Layout"
 msgstr "Presentación"
@@ -3314,9 +3143,8 @@ msgstr "Presentación"
 msgid "Learn keys"
 msgstr "Redefinir teclas"
 
-#, fuzzy
 msgid "Teach me a key"
-msgstr " Enséñame una tecla "
+msgstr "Enséñame una tecla"
 
 #, c-format
 msgid ""
@@ -3338,13 +3166,12 @@ msgstr ""
 "Si quiere cancelar, presione una vez la tecla Escape\n"
 "y espere."
 
-#, fuzzy
 msgid "Cannot accept this key"
-msgstr " Imposible aceptar esta tecla "
+msgstr "Imposible aceptar esta tecla"
 
-#, fuzzy, c-format
+#, c-format
 msgid "You have entered \"%s\""
-msgstr " Usted tecleó \"%s\" "
+msgstr "Usted tecleó \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3379,20 +3206,17 @@ msgstr "en ella. Use el tabulador para moverse."
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hay %zd pantalla abierta. ¿Desea realmente salir?"
+msgstr[1] "Hay %zd pantallas abiertas. ¿Desea realmente salir?"
 
-#, fuzzy
 msgid "The Midnight Commander"
-msgstr " The Midnight Commander "
+msgstr "The Midnight Commander"
 
-#, fuzzy
 msgid "Do you really want to quit the Midnight Commander?"
-msgstr " ¿Desea realmente salir del Midnight Commander? "
+msgstr "¿Desea realmente salir del Midnight Commander?"
 
-#, fuzzy
 msgid "File listin&g"
-msgstr "listado &Completo"
+msgstr "&Listado"
 
 msgid "&Quick view"
 msgstr "&Vista rápida"
@@ -3401,7 +3225,7 @@ msgid "&Info"
 msgstr "&Información"
 
 msgid "&Listing mode..."
-msgstr "&Listado..."
+msgstr "&Modo de listado..."
 
 msgid "&Sort order..."
 msgstr "&Ordenar..."
@@ -3445,13 +3269,11 @@ msgstr "cambiar &Permisos..."
 msgid "&Link"
 msgstr "crear en&Lace..."
 
-#, fuzzy
 msgid "&Symlink"
-msgstr "crear enlace &Simbólico..."
+msgstr " enlace &Simbólico..."
 
-#, fuzzy
 msgid "Relative symlin&k"
-msgstr "Resolviendo enlace simbólico..."
+msgstr " enlace simbólico &Relativo..."
 
 msgid "Edit s&ymlink"
 msgstr "edi&Tar enlace simbólico"
@@ -3523,7 +3345,7 @@ msgid "&Background jobs"
 msgstr "&Procesos en 2º plano..."
 
 msgid "Screen lis&t"
-msgstr ""
+msgstr "&Lista de pantallas..."
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Recuperar archivos (ext2fs)..."
@@ -3546,9 +3368,8 @@ msgstr "&Configuración..."
 msgid "&Layout..."
 msgstr "&Presentación..."
 
-#, fuzzy
 msgid "&Panel options..."
-msgstr " Opciones de los paneles "
+msgstr "pane&Les..."
 
 msgid "C&onfirmation..."
 msgstr "c&Onfirmación..."
@@ -3571,9 +3392,8 @@ msgstr "a&Bajo"
 msgid "&Right"
 msgstr "&Derecho"
 
-#, fuzzy
 msgid "Panels:"
-msgstr " Disposición de paneles "
+msgstr "Paneles:"
 
 msgid "ButtonBar|Menu"
 msgstr "Menú"
@@ -3597,177 +3417,145 @@ msgstr "Imposible crear directorio %s"
 msgid "&Never"
 msgstr "&Nunca"
 
-#, fuzzy
 msgid "On dum&b terminals"
 msgstr "sólo en terminales &Tontas"
 
 msgid "Alwa&ys"
 msgstr "&Siempre"
 
-#, fuzzy
 msgid "A&uto save setup"
-msgstr "a&Uto-guarda configuración"
+msgstr "auto-guarda con&Figuración"
 
-#, fuzzy
 msgid "Sa&fe delete"
 msgstr "precauciones de &Borrado"
 
-#, fuzzy
 msgid "Cd follows lin&ks"
 msgstr "cd sigue en&Laces"
 
-#, fuzzy
 msgid "Rotating d&ash"
 msgstr "&Hélice de actividad"
 
-#, fuzzy
 msgid "Co&mplete: show all"
 msgstr "completar: mostrar todos"
 
-#, fuzzy
 msgid "Shell &patterns"
 msgstr "&Patrones del shell"
 
 msgid "&Drop down menus"
 msgstr "menús &Desplegables"
 
-#, fuzzy
 msgid "Auto m&enus"
 msgstr "auto &Menús"
 
-#, fuzzy
 msgid "Use internal vie&w"
-msgstr "usar visor &Interno"
+msgstr "usar &Visor interno"
 
-#, fuzzy
 msgid "Use internal edi&t"
 msgstr "usar &Editor interno"
 
-#, fuzzy
 msgid "Pause after run"
-msgstr " Pausa después de ejecutar... "
+msgstr "Pausa después de ejecutar"
 
 msgid "Timeout:"
-msgstr ""
+msgstr "Tiempo:"
 
-#, fuzzy
 msgid "S&ingle press"
-msgstr "&Tipos de archivos"
+msgstr "p&Ulsación única"
 
-#, fuzzy
 msgid "Esc key mode"
-msgstr "Tecla Escape"
+msgstr "Tecla de escape (Esc)"
 
-#, fuzzy
 msgid "Mkdi&r autoname"
 msgstr "proponer nombre m&Kdir"
 
 msgid "Classic pro&gressbar"
-msgstr ""
+msgstr "barra de pr&Ogreso clásica"
 
-#, fuzzy
 msgid "Compute tota&ls"
 msgstr "calcular totales"
 
 msgid "&Verbose operation"
 msgstr "ope&Ración detallada"
 
-#, fuzzy
 msgid "File operation options"
-msgstr "Copiar"
+msgstr "Operaciones con archivos"
 
 msgid "Configure options"
 msgstr "Configuración"
 
-#, fuzzy
 msgid "Case &insensitive"
-msgstr "distinguir ma&Yúsculas"
+msgstr "ignorar may/mi&N"
 
-#, fuzzy
 msgid "Case s&ensitive"
-msgstr "distinguir ma&Yúsculas"
+msgstr "distinguir &May/min"
 
-#, fuzzy
 msgid "Use panel sort mo&de"
-msgstr "usar modo &Pasivo"
+msgstr "usar orden del pane&L"
 
-#, fuzzy
 msgid "Quick search"
-msgstr " Cambiar directorio "
+msgstr "Búsqueda rápida"
 
-#, fuzzy
 msgid "&Permissions"
-msgstr "Permisos"
+msgstr "&Permisos"
 
-#, fuzzy
 msgid "File &types"
 msgstr "&Tipos de archivos"
 
-#, fuzzy
 msgid "File highlight"
-msgstr " Resaltar... "
+msgstr "Resaltar..."
 
 msgid "&Mouse page scrolling"
-msgstr ""
+msgstr "avance de página con &Ratón"
 
 msgid "Pa&ge scrolling"
-msgstr ""
+msgstr "avance de pá&Gina"
 
 msgid "L&ynx-like motion"
-msgstr "navegación al estilo L&ynx"
+msgstr "navegación al estilo Lyn&X"
 
 msgid "Navigation"
-msgstr ""
+msgstr "Navegación"
 
-#, fuzzy
 msgid "A&uto save panels setup"
 msgstr "a&Uto-guarda configuración"
 
-#, fuzzy
 msgid "Re&verse files only"
-msgstr "sólo &Archivos"
+msgstr "&Invertir sólo archivos"
 
-#, fuzzy
 msgid "Ma&rk moves down"
 msgstr "marcar y a&Vanzar"
 
 msgid "&Fast dir reload"
-msgstr "recarga rápida de directorios"
+msgstr "recarga rápida de &Directorios"
 
-#, fuzzy
 msgid "Show &hidden files"
 msgstr "mostrar archivos &Ocultos"
 
-#, fuzzy
 msgid "Show &backup files"
 msgstr "mostrar &Archivos de respaldo"
 
-#, fuzzy
 msgid "Mi&x all files"
 msgstr "me&Zclar archivos y directorios"
 
 msgid "Use SI si&ze units"
 msgstr "tama&Ños en unidades SI"
 
-#, fuzzy
 msgid "Main panel options"
 msgstr "Opciones principales"
 
-#, fuzzy
 msgid "Panel options"
-msgstr " Opciones de los paneles "
+msgstr "Opciones de los paneles"
 
-#, fuzzy
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
 "directory contents. In this case you'll need to do a\n"
 "manual reload of the directory. See the man page for\n"
 "the details."
 msgstr ""
-" El uso del \"cargado rápido\" puede ocasionar que el contenido\n"
-" del panel no siempre refleje el contenido del disco.  En ese\n"
-" caso use C-r para obligar al programa a actualizar los datos.\n"
-" Lea la página de manual para mayor información.             "
+"El uso del \"cargado rápido\" puede ocasionar que el contenido\n"
+"del panel no siempre refleje el contenido del disco.  En ese\n"
+"caso use C-r para obligar al programa a actualizar los datos.\n"
+"Lea la página de manual para mayor información."
 
 msgid "&Add new"
 msgstr "&Añadir nuevo..."
@@ -3781,17 +3569,14 @@ msgstr "Comando"
 msgid "Other command"
 msgstr "Otro comando"
 
-#, fuzzy
 msgid "Add to external panelize"
-msgstr " Añadir nuevo "
+msgstr "Añadir nuevo"
 
-#, fuzzy
 msgid "Enter command label:"
-msgstr " Etiqueta del comando: "
+msgstr "Etiqueta del comando:"
 
-#, fuzzy
 msgid "Cannot run external panelize in a non-local directory"
-msgstr " Imposible ejecutar búsquedas externas en un directorio no local "
+msgstr "Imposible ejecutar búsquedas externas en un directorio no local"
 
 msgid "Find rejects after patching"
 msgstr "Buscar archivos rechazados después de aplicar parches"
@@ -3884,7 +3669,6 @@ msgstr "fecha acce&So"
 msgid "sort|h"
 msgstr "c"
 
-#, fuzzy
 msgid "C&hange time"
 msgstr "fecha cam&Bio"
 
@@ -3929,20 +3713,18 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s en %d archivo"
 msgstr[1] "%s en %d archivos"
 
-#, fuzzy
 msgid "Unknown tag on display format:"
-msgstr "Campo desconocido en el formato de pantalla: "
+msgstr "Campo desconocido en el formato de pantalla:"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Formato no parece válido. Recuperando el predeterminado."
 
-#, fuzzy
 msgid "Do you really want to execute?"
-msgstr " ¿Realmente quiere ejecutar?"
+msgstr "¿Realmente quiere ejecutar?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot chdir to \"%s\""
-msgstr " Imposible cambiar al directorio %s "
+msgstr "Imposible cambiar al directorio \"%s\""
 
 msgid "Choose codepage"
 msgstr "Codificación de caracteres"
@@ -3977,9 +3759,8 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr "Imposible abrir la tubería con nombre %s\n"
 
-#, fuzzy
 msgid "The shell is still active. Quit anyway?"
-msgstr " El shell todavía está activo. ¿Terminar de todas maneras?"
+msgstr "El shell todavía está activo. ¿Terminar de todas maneras?"
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
@@ -4048,17 +3829,17 @@ msgstr " Copiar directorio \"%s\" a: "
 msgid "Move \"%s\" directory to:"
 msgstr " Mover directorio \"%s\" a: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat the destination\n"
 "%s"
 msgstr ""
-" Imposible identificar el destino \n"
-" %s "
+"Imposible identificar el destino\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Delete %s?"
-msgstr "  ¿Borrar %s?  "
+msgstr "¿Borrar %s?"
 
 msgid "ButtonBar|Static"
 msgstr "Estát"
@@ -4083,68 +3864,60 @@ msgstr ""
 "Imposible escribir al archivo %s:\n"
 "%s\n"
 
-#, fuzzy
 msgid "Format error on file Extensions File"
-msgstr " Error de formato en el Archivo de Extensiones "
+msgstr "Error de formato en el Archivo de Extensiones"
 
-#, fuzzy, c-format
+#, c-format
 msgid "The %%var macro has no default"
-msgstr " La macro %%var no tiene valor predeterminado "
+msgstr "La macro %%var no tiene valor predeterminado"
 
-#, fuzzy, c-format
+#, c-format
 msgid "The %%var macro has no variable"
-msgstr " La macro %%var no contiene variables "
+msgstr "La macro %%var no contiene variables"
 
-#, fuzzy
 msgid "Debug"
-msgstr " Depurar "
+msgstr "Depurar"
 
-#, fuzzy
 msgid "ERROR:"
-msgstr " ERROR: "
+msgstr "ERROR:"
 
-#, fuzzy
 msgid "True:"
-msgstr " Verdadero: "
+msgstr "Verdadero:"
 
-#, fuzzy
 msgid "False:"
-msgstr " Falso: "
+msgstr "Falso:"
 
-#, fuzzy
 msgid "Warning -- ignoring file"
-msgstr " Cuidado -- ignorando el archivo "
+msgstr "Cuidado -- ignorando el archivo"
 
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-" El archivo \"%s\" no pertenece a Ud. ni a root, ni tiene permiso\n"
-" global de escritura. Usarlo podría comprometer su seguridad."
+"El archivo \"%s\" no pertenece a Ud. ni a root, ni tiene permiso\n"
+"global de escritura. Usarlo podría comprometer su seguridad."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file%s\n"
 "%s"
 msgstr ""
-" Imposible abrir el archivo %s \n"
-" %s "
+"Imposible abrir el archivo %s\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "No suitable entries found in %s"
-msgstr " No se encuentran entradas apropiadas en %s "
+msgstr "No se encuentran entradas apropiadas en %s"
 
-#, fuzzy
 msgid "User menu"
 msgstr "me&Nú de usuario"
 
 msgid "Invalid value"
 msgstr "Posición incorrecta"
 
-#, fuzzy
 msgid "Cannot spawn child process"
-msgstr " Imposible ejecutar el proceso hijo "
+msgstr "Imposible ejecutar el proceso hijo"
 
 msgid "Empty output from child filter"
 msgstr "Salida del filtro vacía"
@@ -4194,49 +3967,45 @@ msgstr "SinFor"
 msgid "ButtonBar|Format"
 msgstr "Format"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error while closing the file:\n"
 "%s\n"
 "Data may have been written or not"
 msgstr ""
-" Error al cerrar el archivo: \n"
-" %s \n"
-" Puede que se hayan escrito los datos o no. "
+"Error al cerrar el archivo:\n"
+"%s\n"
+"Puede que se hayan escrito los datos o no."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr ""
-"Imposible guardar el archivo %s: \n"
+"Imposible guardar el archivo:\n"
 "%s"
 
-#, fuzzy
 msgid "View: "
-msgstr "&Ver"
+msgstr "Ver:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible abrir \"%s\"\n"
-" %s "
+"Imposible abrir \"%s\"\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat \"%s\"\n"
 "%s"
 msgstr ""
-" Imposible identificar \"%s\"\n"
-" %s "
+"Imposible identificar \"%s\"\n"
+"%s"
 
-#, fuzzy
 msgid "Cannot view: not a regular file"
-msgstr ""
-" Imposible ver: \n"
-" no es un archivo ordinario "
+msgstr "Imposible ver: no es un archivo ordinario"
 
 msgid "Seeking to search result"
 msgstr "Avanzando al resultado de búsqueda"
@@ -4247,9 +4016,8 @@ msgstr "Búsqueda finalizada"
 msgid "Continue from begining?"
 msgstr "¿Continuar desde el principio?"
 
-#, fuzzy
 msgid "History"
-msgstr " Historia "
+msgstr "Historia"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
@@ -4260,86 +4028,3 @@ msgstr "¿Desea borrar esta historia?"
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
-
-#, fuzzy
-#~ msgid "File was modified, save with exit?"
-#~ msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
-
-#~ msgid " Permission "
-#~ msgstr " Permisos "
-
-#~ msgid " File "
-#~ msgstr " Archivo "
-
-#~ msgid " Name "
-#~ msgstr " Nombre "
-
-#~ msgid " Owner name "
-#~ msgstr " Dueño "
-
-#~ msgid " Group name "
-#~ msgstr " Grupo "
-
-#~ msgid " Size "
-#~ msgstr " Tamaño "
-
-#~ msgid " Confirmation "
-#~ msgstr " Confirmación "
-
-#~ msgid " Filtered view "
-#~ msgstr " Ejecutar y ver "
-
-#~ msgid " Select "
-#~ msgstr " Seleccionar grupo "
-
-#~ msgid " Compare directories "
-#~ msgstr " Comparar directorios "
-
-#~ msgid " Link "
-#~ msgstr " Crear enlace "
-
-#~ msgid " Edit symlink "
-#~ msgstr " Editar enlace simbólico "
-
-#~ msgid "case &Sensitive"
-#~ msgstr "distinguir &May/min"
-
-#~ msgid " Replace "
-#~ msgstr " Reemplazar "
-
-#~ msgid " Error "
-#~ msgstr " Error "
-
-#~ msgid " Insert File "
-#~ msgstr " Insertar archivo "
-
-#~ msgid " Insert Literal "
-#~ msgstr " Insertar literalmente "
-
-#~ msgid " Execute Macro "
-#~ msgstr " Ejecutar macro "
-
-#~ msgid " Cannot overwrite directory `%s' "
-#~ msgstr " Imposible sobrescribir el directorio \"%s\" "
-
-#~ msgid " to:"
-#~ msgstr " a: "
-
-#~ msgid " Directory path "
-#~ msgstr " Ruta "
-
-#~ msgid " Directory label "
-#~ msgstr " Etiqueta del directorio "
-
-#~ msgid "pe&Rmissions"
-#~ msgstr "&Permisos"
-
-#~ msgid " User menu "
-#~ msgstr " Menú de usuario "
-
-#~ msgid ""
-#~ " Cannot save file: \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Imposible guardar el archivo: \n"
-#~ " %s "
