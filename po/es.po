@@ -2,7 +2,7 @@
 # Copyright (C) 1998-2010 Free Software Foundation, Inc.
 # David Martín <dmartina@excite.com>, 1998-2010.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
@@ -950,8 +950,7 @@ msgstr ""
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menús:              menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -986,14 +985,13 @@ msgstr "[DIRECTORIO] [SEGUNDO_DIRECTORIO]"
 msgid "Set initial line number for the internal editor"
 msgstr "Línea de comienzo al abrir archivo con editor interno"
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Si detecta algún fallo puede comunicarlo a mc-devel@gnome.org\n"
+"Si detecta algún fallo puede comunicarlo en www.midnight-commander.org\n"
 "incluyendo la descripción obtenida con `mc -V'.\n"
 
 #, c-format
@@ -1103,9 +1101,8 @@ msgstr "Juego de caracteres entrada/pantalla:"
 msgid "&Select"
 msgstr "&Seleccionar"
 
-#, fuzzy
 msgid "Directory tree"
-msgstr "árbol de &Directorios"
+msgstr "Árbol de directorios"
 
 msgid "Use passive mode over pro&xy"
 msgstr "usar modo pasivo sobre prox&Y"
@@ -2162,10 +2159,7 @@ msgid " %s%s file error"
 msgstr " error en el archivo %s%s "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "El archivo %smc.ext ha cambiado con la versión 3.0.\n"
 "Parece que la instalación falló. Por favor, trate\n"
@@ -2177,10 +2171,7 @@ msgid " ~/%s file error "
 msgstr " error en el archivo ~/%s "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 "El archivo ~/%s ha cambiado con la versión 3.0.\n"
 "Puede hacer una copia de %smc.ext o bien emplearlo\n"
@@ -2849,8 +2840,7 @@ msgid " Hotlist Load "
 msgstr " Cargar favoritos "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "No se pudo escribir ~/%s, la lista de favoritos antigua no fue borrada"
 
 #, c-format
