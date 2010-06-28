@@ -3,9 +3,9 @@
    2005, 2006, 2007 Free Software Foundation, Inc.
 
    Authors: 1994, 1995, 1996 Miguel de Icaza
-            1994, 1995 Radek Doulik
-	    1995  Jakub Jelinek
-	    1995  Andrej Borsenkow
+   1994, 1995 Radek Doulik
+   1995  Jakub Jelinek
+   1995  Andrej Borsenkow
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -35,26 +35,25 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"		/* tty_getch() */
-#include "lib/skin.h"		/* INPUT_COLOR */
+#include "lib/tty/key.h"        /* tty_getch() */
+#include "lib/skin.h"           /* INPUT_COLOR */
 #include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "background.h"		/* parent_call */
+#include "background.h"         /* parent_call */
 
 
 Listbox *
 create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
-				const char *title, const char *help)
+                                const char *title, const char *help)
 {
-    const int listbox_colors[DLG_COLOR_NUM] =
-    {
-	MENU_ENTRY_COLOR,
-	MENU_SELECTED_COLOR,
-	MENU_HOT_COLOR,
-	MENU_HOTSEL_COLOR,
+    const int listbox_colors[DLG_COLOR_NUM] = {
+        MENU_ENTRY_COLOR,
+        MENU_SELECTED_COLOR,
+        MENU_HOT_COLOR,
+        MENU_HOTSEL_COLOR,
     };
 
     const int space = 4;
@@ -65,41 +64,44 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
     /* Adjust sizes */
     lines = min (lines, LINES - 6);
 
-    if (title != NULL) {
-	len = str_term_width1 (title) + 4;
-	cols = max (cols, len);
+    if (title != NULL)
+    {
+        len = str_term_width1 (title) + 4;
+        cols = max (cols, len);
     }
 
     cols = min (cols, COLS - 6);
 
     /* adjust position */
-    if ((center_y < 0) || (center_x < 0)) {
-	ypos = LINES/2;
-	xpos = COLS/2;
-    } else {
-	ypos = center_y;
-	xpos = center_x;
+    if ((center_y < 0) || (center_x < 0))
+    {
+        ypos = LINES / 2;
+        xpos = COLS / 2;
+    }
+    else
+    {
+        ypos = center_y;
+        xpos = center_x;
     }
 
-    ypos -= lines/2;
-    xpos -= cols/2;
+    ypos -= lines / 2;
+    xpos -= cols / 2;
 
     if (ypos + lines >= LINES)
-	ypos = LINES - lines - space;
+        ypos = LINES - lines - space;
     if (ypos < 0)
-	ypos = 0;
+        ypos = 0;
 
     if (xpos + cols >= COLS)
-	xpos = COLS - cols - space;
+        xpos = COLS - cols - space;
     if (xpos < 0)
-	xpos = 0;
+        xpos = 0;
 
     listbox = g_new (Listbox, 1);
 
     listbox->dlg =
-	create_dlg (TRUE, ypos, xpos, lines + space, cols + space,
-		    listbox_colors, NULL,
-		    help, title, DLG_REVERSE | DLG_TRYUP);
+        create_dlg (TRUE, ypos, xpos, lines + space, cols + space,
+                    listbox_colors, NULL, help, title, DLG_REVERSE | DLG_TRYUP);
 
     listbox->list = listbox_new (2, 2, lines, cols, FALSE, NULL);
     add_widget (listbox->dlg, listbox->list);
@@ -115,12 +117,12 @@ create_listbox_window (int lines, int cols, const char *title, const char *help)
 
 /* Returns the number of the item selected */
 int
-run_listbox (Listbox *l)
+run_listbox (Listbox * l)
 {
     int val = -1;
 
     if (run_dlg (l->dlg) != B_CANCEL)
-	val = l->list->pos;
+        val = l->list->pos;
     destroy_dlg (l->dlg);
     g_free (l);
     return val;
@@ -128,22 +130,22 @@ run_listbox (Listbox *l)
 
 /* default query callback, used to reposition query */
 static cb_ret_t
-default_query_callback (Dlg_head *h, Widget *sender,
-			dlg_msg_t msg, int parm, void *data)
+default_query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
-    switch (msg) {
-    case DLG_RESIZE:
+    switch (msg)
     {
-	int xpos = COLS / 2 - h->cols / 2;
-	int ypos = LINES / 3 - (h->lines - 3) / 2;
+    case DLG_RESIZE:
+        {
+            int xpos = COLS / 2 - h->cols / 2;
+            int ypos = LINES / 3 - (h->lines - 3) / 2;
 
-	/* set position */
-	dlg_set_position (h, ypos, xpos, ypos + h->lines, xpos + h->cols);
-    }
-	return MSG_HANDLED;
+            /* set position */
+            dlg_set_position (h, ypos, xpos, ypos + h->lines, xpos + h->cols);
+        }
+        return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, sender, msg, parm, data);
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -164,21 +166,22 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     int result = -1;
     int cols, lines;
     char *cur_name;
-    const int *query_colors = (flags & D_ERROR) ?
-				alarm_colors : dialog_colors;
+    const int *query_colors = (flags & D_ERROR) ? alarm_colors : dialog_colors;
 
     if (header == MSG_ERROR)
-	header = _("Error");
+        header = _("Error");
 
-    if (count > 0) {
-	va_start (ap, count);
-	for (i = 0; i < count; i++) {
-	    char *cp = va_arg (ap, char *);
-	    win_len += str_term_width1 (cp) + 6;
-	    if (strchr (cp, '&') != NULL)
-		win_len--;
-	}
-	va_end (ap);
+    if (count > 0)
+    {
+        va_start (ap, count);
+        for (i = 0; i < count; i++)
+        {
+            char *cp = va_arg (ap, char *);
+            win_len += str_term_width1 (cp) + 6;
+            if (strchr (cp, '&') != NULL)
+                win_len--;
+        }
+        va_end (ap);
     }
 
     /* count coordinates */
@@ -188,59 +191,62 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg =
-	create_dlg (TRUE, 0, 0, lines, cols, query_colors, default_query_callback,
-		    "[QueryBox]", header, DLG_NONE);
+        create_dlg (TRUE, 0, 0, lines, cols, query_colors, default_query_callback,
+                    "[QueryBox]", header, DLG_NONE);
 
-    if (count > 0) {
-	cols = (cols - win_len - 2) / 2 + 2;
-	va_start (ap, count);
-	for (i = 0; i < count; i++) {
-	    int xpos;
+    if (count > 0)
+    {
+        cols = (cols - win_len - 2) / 2 + 2;
+        va_start (ap, count);
+        for (i = 0; i < count; i++)
+        {
+            int xpos;
 
-	    cur_name = va_arg (ap, char *);
-	    xpos = str_term_width1 (cur_name) + 6;
-	    if (strchr (cur_name, '&') != NULL)
-		xpos--;
+            cur_name = va_arg (ap, char *);
+            xpos = str_term_width1 (cur_name) + 6;
+            if (strchr (cur_name, '&') != NULL)
+                xpos--;
 
-	    button =
-		button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON,
-			    cur_name, 0);
-	    add_widget (query_dlg, button);
-	    cols += xpos;
-	    if (i == sel_pos)
-		defbutton = button;
-	}
-	va_end (ap);
+            button = button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON, cur_name, 0);
+            add_widget (query_dlg, button);
+            cols += xpos;
+            if (i == sel_pos)
+                defbutton = button;
+        }
+        va_end (ap);
 
-	add_widget (query_dlg, label_new (2, 3, text));
+        add_widget (query_dlg, label_new (2, 3, text));
 
-	/* do resize before running and selecting any widget */
-	default_query_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
+        /* do resize before running and selecting any widget */
+        default_query_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
 
-	if (defbutton)
-	    dlg_select_widget (defbutton);
+        if (defbutton)
+            dlg_select_widget (defbutton);
 
-	/* run dialog and make result */
-	switch (run_dlg (query_dlg)) {
-	case B_CANCEL:
-	    break;
-	default:
-	    result = query_dlg->ret_value - B_USER;
-	}
+        /* run dialog and make result */
+        switch (run_dlg (query_dlg))
+        {
+        case B_CANCEL:
+            break;
+        default:
+            result = query_dlg->ret_value - B_USER;
+        }
 
-	/* free used memory */
-	destroy_dlg (query_dlg);
-    } else {
-	add_widget (query_dlg, label_new (2, 3, text));
-	add_widget (query_dlg,
-		    button_new (0, 0, 0, HIDDEN_BUTTON, "-", 0));
-	last_query_dlg = query_dlg;
+        /* free used memory */
+        destroy_dlg (query_dlg);
+    }
+    else
+    {
+        add_widget (query_dlg, label_new (2, 3, text));
+        add_widget (query_dlg, button_new (0, 0, 0, HIDDEN_BUTTON, "-", 0));
+        last_query_dlg = query_dlg;
     }
     sel_pos = 0;
     return result;
 }
 
-void query_set_sel (int new_sel)
+void
+query_set_sel (int new_sel)
 {
     sel_pos = new_sel;
 }
@@ -316,7 +322,7 @@ bg_message (int dummy, int *flags, char *title, const char *text)
     fg_message (*flags, title, text);
     g_free (title);
 }
-#endif				/* WITH_BACKGROUND */
+#endif /* WITH_BACKGROUND */
 
 
 /* Show message box, background safe */
@@ -325,9 +331,10 @@ message (int flags, const char *title, const char *text, ...)
 {
     char *p;
     va_list ap;
-    union {
-	void *p;
-	void (*f) (int, int *, char *, const char *);
+    union
+    {
+        void *p;
+        void (*f) (int, int *, char *, const char *);
     } func;
 
     va_start (ap, text);
@@ -335,16 +342,17 @@ message (int flags, const char *title, const char *text, ...)
     va_end (ap);
 
     if (title == MSG_ERROR)
-	title = _("Error");
+        title = _("Error");
 
 #ifdef WITH_BACKGROUND
-    if (we_are_background) {
-	func.f = bg_message;
-	parent_call (func.p, NULL, 3, sizeof (flags), &flags,
-		     strlen (title), title, strlen (p), p);
-    } else
-#endif				/* WITH_BACKGROUND */
-	fg_message (flags, title, p);
+    if (we_are_background)
+    {
+        func.f = bg_message;
+        parent_call (func.p, NULL, 3, sizeof (flags), &flags, strlen (title), title, strlen (p), p);
+    }
+    else
+#endif /* WITH_BACKGROUND */
+        fg_message (flags, title, p);
 
     g_free (p);
 }
@@ -354,7 +362,7 @@ message (int flags, const char *title, const char *text, ...)
 
 
 int
-quick_dialog_skip (QuickDialog *qd, int nskip)
+quick_dialog_skip (QuickDialog * qd, int nskip)
 {
 #ifdef ENABLE_NLS
 #define I18N(x) (x = !qd->i18n && x && *x ? _(x): x)
@@ -367,8 +375,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
     WRadio *r;
     int return_val;
 
-    const int input_colors[3] =
-    {
+    const int input_colors[3] = {
         INPUT_COLOR,
         INPUT_UNCHANGED_COLOR,
         INPUT_MARK_COLOR
@@ -377,113 +384,120 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
     I18N (qd->title);
 
     if ((qd->xpos == -1) || (qd->ypos == -1))
-	dd = create_dlg (TRUE, 0, 0, qd->ylen, qd->xlen,
-			    dialog_colors, NULL, qd->help, qd->title,
-			    DLG_CENTER | DLG_TRYUP | DLG_REVERSE);
+        dd = create_dlg (TRUE, 0, 0, qd->ylen, qd->xlen,
+                         dialog_colors, NULL, qd->help, qd->title,
+                         DLG_CENTER | DLG_TRYUP | DLG_REVERSE);
     else
-	dd = create_dlg (TRUE, qd->ypos, qd->xpos, qd->ylen, qd->xlen,
-			    dialog_colors, NULL, qd->help, qd->title,
-			    DLG_REVERSE);
+        dd = create_dlg (TRUE, qd->ypos, qd->xpos, qd->ylen, qd->xlen,
+                         dialog_colors, NULL, qd->help, qd->title, DLG_REVERSE);
 
-    for (qw = qd->widgets; qw->widget_type != quick_end; qw++) {
-	int xpos;
-	int ypos;
+    for (qw = qd->widgets; qw->widget_type != quick_end; qw++)
+    {
+        int xpos;
+        int ypos;
 
-	xpos = (qd->xlen * qw->relative_x) / qw->x_divisions;
-	ypos = (qd->ylen * qw->relative_y) / qw->y_divisions;
+        xpos = (qd->xlen * qw->relative_x) / qw->x_divisions;
+        ypos = (qd->ylen * qw->relative_y) / qw->y_divisions;
 
-	switch (qw->widget_type) {
-	case quick_checkbox:
-	    qw->widget = (Widget *) check_new (ypos, xpos, *qw->u.checkbox.state, I18N (qw->u.checkbox.text));
-	    break;
-
-	case quick_button:
-	    qw->widget = (Widget *) button_new (ypos, xpos, qw->u.button.action,
-			    (qw->u.button.action == B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-			    I18N (qw->u.button.text), qw->u.button.callback);
-	    break;
-
-	case quick_input:
-	    in = input_new (ypos, xpos, (int *) input_colors,
-	                    qw->u.input.len, qw->u.input.text, qw->u.input.histname,
-	                    INPUT_COMPLETE_DEFAULT);
-	    in->is_password = (qw->u.input.flags == 1);
-	    if ((qw->u.input.flags & 2) != 0)
-		in->completion_flags |= INPUT_COMPLETE_CD;
-	    qw->widget = (Widget *) in;
-	    *qw->u.input.result = NULL;
-	    break;
-
-	case quick_label:
-	    qw->widget = (Widget *) label_new (ypos, xpos, I18N (qw->u.label.text));
-	    break;
-
-	case quick_groupbox:
-	    qw->widget = (Widget *) groupbox_new (ypos, xpos,
-						    qw->u.groupbox.height,
-						    qw->u.groupbox.width,
-						    I18N (qw->u.groupbox.title));
+        switch (qw->widget_type)
+        {
+        case quick_checkbox:
+            qw->widget =
+                (Widget *) check_new (ypos, xpos, *qw->u.checkbox.state,
+                                      I18N (qw->u.checkbox.text));
             break;
 
-	case quick_radio:
-	{
-	    int i;
-	    char **items = NULL;
+        case quick_button:
+            qw->widget = (Widget *) button_new (ypos, xpos, qw->u.button.action,
+                                                (qw->u.button.action ==
+                                                 B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
+                                                I18N (qw->u.button.text), qw->u.button.callback);
+            break;
 
-	    /* create the copy of radio_items to avoid mwmory leak */
-	    items = g_new0 (char *, qw->u.radio.count + 1);
+        case quick_input:
+            in = input_new (ypos, xpos, (int *) input_colors,
+                            qw->u.input.len, qw->u.input.text, qw->u.input.histname,
+                            INPUT_COMPLETE_DEFAULT);
+            in->is_password = (qw->u.input.flags == 1);
+            if ((qw->u.input.flags & 2) != 0)
+                in->completion_flags |= INPUT_COMPLETE_CD;
+            qw->widget = (Widget *) in;
+            *qw->u.input.result = NULL;
+            break;
 
-	    if (!qd->i18n)
-		for (i = 0; i < qw->u.radio.count; i++)
-		    items[i] = g_strdup (_(qw->u.radio.items[i]));
-	    else
-		for (i = 0; i < qw->u.radio.count; i++)
-		    items[i] = g_strdup (qw->u.radio.items[i]);
+        case quick_label:
+            qw->widget = (Widget *) label_new (ypos, xpos, I18N (qw->u.label.text));
+            break;
 
-	    r = radio_new (ypos, xpos, qw->u.radio.count, (const char **) items);
-	    r->pos = r->sel = *qw->u.radio.value;
-	    qw->widget = (Widget *) r;
-	    g_strfreev (items);
-	    break;
-	}
+        case quick_groupbox:
+            qw->widget = (Widget *) groupbox_new (ypos, xpos,
+                                                  qw->u.groupbox.height,
+                                                  qw->u.groupbox.width,
+                                                  I18N (qw->u.groupbox.title));
+            break;
 
-	default:
-	    qw->widget = NULL;
-	    fprintf (stderr, "QuickWidget: unknown widget type\n");
-	    break;
-	}
+        case quick_radio:
+            {
+                int i;
+                char **items = NULL;
 
-	add_widget (dd, qw->widget);
+                /* create the copy of radio_items to avoid mwmory leak */
+                items = g_new0 (char *, qw->u.radio.count + 1);
+
+                if (!qd->i18n)
+                    for (i = 0; i < qw->u.radio.count; i++)
+                        items[i] = g_strdup (_(qw->u.radio.items[i]));
+                else
+                    for (i = 0; i < qw->u.radio.count; i++)
+                        items[i] = g_strdup (qw->u.radio.items[i]);
+
+                r = radio_new (ypos, xpos, qw->u.radio.count, (const char **) items);
+                r->pos = r->sel = *qw->u.radio.value;
+                qw->widget = (Widget *) r;
+                g_strfreev (items);
+                break;
+            }
+
+        default:
+            qw->widget = NULL;
+            fprintf (stderr, "QuickWidget: unknown widget type\n");
+            break;
+        }
+
+        add_widget (dd, qw->widget);
     }
 
     while (nskip-- != 0)
-	dd->current = dd->current->next;
+        dd->current = dd->current->next;
 
     return_val = run_dlg (dd);
 
     /* Get the data if we found something interesting */
-    if (return_val != B_CANCEL) {
-	for (qw = qd->widgets; qw->widget_type != quick_end; qw++) {
-	    switch (qw->widget_type) {
-	    case quick_checkbox:
-		*qw->u.checkbox.state = ((WCheck *) qw->widget)->state & C_BOOL;
-		break;
+    if (return_val != B_CANCEL)
+    {
+        for (qw = qd->widgets; qw->widget_type != quick_end; qw++)
+        {
+            switch (qw->widget_type)
+            {
+            case quick_checkbox:
+                *qw->u.checkbox.state = ((WCheck *) qw->widget)->state & C_BOOL;
+                break;
 
-	    case quick_input:
-		if ((qw->u.input.flags & 2) != 0)
-		    *qw->u.input.result = tilde_expand (((WInput *) qw->widget)->buffer);
-		else
-		    *qw->u.input.result = g_strdup (((WInput *) qw->widget)->buffer);
-		break;
+            case quick_input:
+                if ((qw->u.input.flags & 2) != 0)
+                    *qw->u.input.result = tilde_expand (((WInput *) qw->widget)->buffer);
+                else
+                    *qw->u.input.result = g_strdup (((WInput *) qw->widget)->buffer);
+                break;
 
-	    case quick_radio:
-		*qw->u.radio.value = ((WRadio *) qw->widget)->sel;
-		break;
+            case quick_radio:
+                *qw->u.radio.value = ((WRadio *) qw->widget)->sel;
+                break;
 
-	    default:
-		break;
-	    }
-	}
+            default:
+                break;
+            }
+        }
     }
 
     destroy_dlg (dd);
@@ -493,7 +507,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 }
 
 int
-quick_dialog (QuickDialog *qd)
+quick_dialog (QuickDialog * qd)
 {
     return quick_dialog_skip (qd, 0);
 }
@@ -515,20 +529,20 @@ quick_dialog (QuickDialog *qd)
  */
 static char *
 fg_input_dialog_help (const char *header, const char *text, const char *help,
-		      const char *history_name, const char *def_text)
+                      const char *history_name, const char *def_text)
 {
     char *my_str;
 
     QuickWidget quick_widgets[] = {
-	/* 0 */ QUICK_BUTTON (6, 64, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
-	/* 1 */ QUICK_BUTTON (3, 64, 1, 0, N_("&OK"),     B_ENTER,  NULL),
-	/* 2 */ QUICK_INPUT (3, 64, 0, 0, def_text, 58, 0, NULL, &my_str),
-	/* 3 */ QUICK_LABEL (3, 64, 2, 0, ""),
-	QUICK_END
+        /* 0 */ QUICK_BUTTON (6, 64, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
+        /* 1 */ QUICK_BUTTON (3, 64, 1, 0, N_("&OK"), B_ENTER, NULL),
+        /* 2 */ QUICK_INPUT (3, 64, 0, 0, def_text, 58, 0, NULL, &my_str),
+        /* 3 */ QUICK_LABEL (3, 64, 2, 0, ""),
+        QUICK_END
     };
 
     int b0_len, b1_len, b_len, gap;
-    char histname [64] = "inp|";
+    char histname[64] = "inp|";
     int lines, cols;
     int len;
     int i;
@@ -539,24 +553,26 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 #ifdef ENABLE_NLS
     quick_widgets[0].u.button.text = _(quick_widgets[0].u.button.text);
     quick_widgets[1].u.button.text = _(quick_widgets[1].u.button.text);
-#endif				/* ENABLE_NLS */
+#endif /* ENABLE_NLS */
 
     b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
-    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 5; /* default button */
-    b_len = b0_len + b1_len + 2; /* including gap */
+    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 5;      /* default button */
+    b_len = b0_len + b1_len + 2;        /* including gap */
 
     /* input line */
-    if (history_name != NULL && *history_name != '\0') {
-	g_strlcpy (histname + 3, history_name, sizeof (histname) - 3);
-	quick_widgets[2].u.input.histname = histname;
+    if (history_name != NULL && *history_name != '\0')
+    {
+        g_strlcpy (histname + 3, history_name, sizeof (histname) - 3);
+        quick_widgets[2].u.input.histname = histname;
     }
 
     /* The special value of def_text is used to identify password boxes
        and hide characters with "*".  Don't save passwords in history! */
-    if (def_text == INPUT_PASSWORD) {
-	quick_widgets[2].u.input.flags = 1;
-	histname[3] = '\0';
-	quick_widgets[2].u.input.text = "";
+    if (def_text == INPUT_PASSWORD)
+    {
+        quick_widgets[2].u.input.flags = 1;
+        histname[3] = '\0';
+        quick_widgets[2].u.input.text = "";
     }
 
     /* text */
@@ -569,29 +585,29 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     len = min (max (len, b_len + 6), COLS);
 
     /* button locations */
-    gap = (len - 8 - b_len)/3;
+    gap = (len - 8 - b_len) / 3;
     quick_widgets[1].relative_x = 3 + gap;
     quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + gap + 2;
 
     {
-	QuickDialog Quick_input =
-	{
-	    len, lines + 6, -1, -1, header,
-	    help, quick_widgets, TRUE
-	};
+        QuickDialog Quick_input = {
+            len, lines + 6, -1, -1, header,
+            help, quick_widgets, TRUE
+        };
 
-	for (i = 0; i < 4; i++) {
-	    quick_widgets[i].x_divisions = Quick_input.xlen;
-	    quick_widgets[i].y_divisions = Quick_input.ylen;
-	}
+        for (i = 0; i < 4; i++)
+        {
+            quick_widgets[i].x_divisions = Quick_input.xlen;
+            quick_widgets[i].y_divisions = Quick_input.ylen;
+        }
 
-	for (i = 0; i < 3; i++)
-	    quick_widgets[i].relative_y += 2 + lines;
+        for (i = 0; i < 3; i++)
+            quick_widgets[i].relative_y += 2 + lines;
 
-	/* input line length */
-	quick_widgets[2].u.input.len = Quick_input.xlen - 6;
+        /* input line length */
+        quick_widgets[2].u.input.len = Quick_input.xlen - 6;
 
-	ret = quick_dialog (&Quick_input);
+        ret = quick_dialog (&Quick_input);
     }
 
     g_free (p_text);
@@ -607,47 +623,48 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
  */
 char *
 input_dialog_help (const char *header, const char *text, const char *help,
-		   const char *history_name, const char *def_text)
+                   const char *history_name, const char *def_text)
 {
-    union {
-	void *p;
-	char * (*f) (const char *, const char *, const char *,
-		      const char *, const char *);
+    union
+    {
+        void *p;
+        char *(*f) (const char *, const char *, const char *, const char *, const char *);
     } func;
 #ifdef WITH_BACKGROUND
     if (we_are_background)
     {
-	func.f = fg_input_dialog_help;
-	return parent_call_string (func.p, 5,
-				   strlen (header), header, strlen (text),
-				   text, strlen (help), help,
-				   strlen (history_name), history_name,
-				   strlen (def_text), def_text);
+        func.f = fg_input_dialog_help;
+        return parent_call_string (func.p, 5,
+                                   strlen (header), header, strlen (text),
+                                   text, strlen (help), help,
+                                   strlen (history_name), history_name,
+                                   strlen (def_text), def_text);
     }
     else
-#endif				/* WITH_BACKGROUND */
-	return fg_input_dialog_help (header, text, help, history_name, def_text);
+#endif /* WITH_BACKGROUND */
+        return fg_input_dialog_help (header, text, help, history_name, def_text);
 }
 
 /* Show input dialog with default help, background safe */
-char *input_dialog (const char *header, const char *text,
-		    const char *history_name, const char *def_text)
+char *
+input_dialog (const char *header, const char *text, const char *history_name, const char *def_text)
 {
     return input_dialog_help (header, text, "[Input Line Keys]", history_name, def_text);
 }
 
 char *
 input_expand_dialog (const char *header, const char *text,
-		     const char *history_name, const char *def_text)
+                     const char *history_name, const char *def_text)
 {
     char *result;
     char *expanded;
 
     result = input_dialog (header, text, history_name, def_text);
-    if (result) {
-	expanded = tilde_expand (result);
-	g_free (result);
-	return expanded;
+    if (result)
+    {
+        expanded = tilde_expand (result);
+        g_free (result);
+        return expanded;
     }
     return result;
 }
@@ -656,7 +673,7 @@ input_expand_dialog (const char *header, const char *text,
 
 /* }}} */
 /*
-  Cause emacs to enter folding mode for this file:
-  Local variables:
-  end:
-*/
+   Cause emacs to enter folding mode for this file:
+   Local variables:
+   end:
+ */
