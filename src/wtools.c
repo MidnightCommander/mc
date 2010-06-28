@@ -506,13 +506,14 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     char *my_str;
 
     QuickWidget quick_widgets[] = {
-	/* 0 */ QUICK_BUTTON (6, 10, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
-	/* 1 */ QUICK_BUTTON (3, 10, 1, 0, N_("&OK"),     B_ENTER,  NULL),
-	/* 2 */ QUICK_INPUT (3, 80, 0, 0, def_text, 58, 0, NULL, &my_str),
-	/* 3 */ QUICK_LABEL (3, 80, 2, 0, ""),
+	/* 0 */ QUICK_BUTTON (6, 64, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
+	/* 1 */ QUICK_BUTTON (3, 64, 1, 0, N_("&OK"),     B_ENTER,  NULL),
+	/* 2 */ QUICK_INPUT (3, 64, 0, 0, def_text, 58, 0, NULL, &my_str),
+	/* 3 */ QUICK_LABEL (3, 64, 2, 0, ""),
 	QUICK_END
     };
 
+    int b0_len, b1_len, b_len, gap;
     char histname [64] = "inp|";
     int lines, cols;
     int len;
@@ -520,13 +521,21 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     char *p_text;
     int ret;
 
+    /* buttons */
+#ifdef ENABLE_NLS
+    quick_widgets[0].u.button.text = _(quick_widgets[0].u.button.text);
+    quick_widgets[1].u.button.text = _(quick_widgets[1].u.button.text);
+#endif				/* ENABLE_NLS */
+
+    b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
+    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 5; /* default button */
+    b_len = b0_len + b1_len + 2; /* including gap */
+
+    /* input line */
     if (history_name != NULL && *history_name != '\0') {
 	g_strlcpy (histname + 3, history_name, sizeof (histname) - 3);
 	quick_widgets[2].u.input.histname = histname;
     }
-
-    msglen (text, &lines, &cols);
-    len = max (max (str_term_width1 (header), cols) + 4, 64);
 
     /* The special value of def_text is used to identify password boxes
        and hide characters with "*".  Don't save passwords in history! */
@@ -536,21 +545,19 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 	quick_widgets[2].u.input.text = "";
     }
 
-#ifdef ENABLE_NLS
-    /*
-     * An attempt to place buttons symmetrically, based on actual i18n
-     * length of the string. It looks nicer with i18n (IMO) - alex
-     */
-    quick_widgets[0].u.button.text = _(quick_widgets[0].u.button.text);
-    quick_widgets[1].u.button.text = _(quick_widgets[1].u.button.text);
-    quick_widgets[0].relative_x = len / 2 + 4;
-    quick_widgets[1].relative_x =
-	len / 2 - (str_term_width1 (quick_widgets[1].u.button.text) + 9);
-    quick_widgets[0].x_divisions = quick_widgets[1].x_divisions = len;
-#endif				/* ENABLE_NLS */
-
+    /* text */
     p_text = g_strstrip (g_strdup (text));
+    msglen (p_text, &lines, &cols);
     quick_widgets[3].u.label.text = p_text;
+
+    /* dialog width */
+    len = max (max (str_term_width1 (header), cols) + 4, 64);
+    len = min (max (len, b_len + 6), COLS);
+
+    /* button locations */
+    gap = (len - 8 - b_len)/3;
+    quick_widgets[1].relative_x = 3 + gap;
+    quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + gap + 2;
 
     {
 	QuickDialog Quick_input =
