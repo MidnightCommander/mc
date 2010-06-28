@@ -1875,7 +1875,6 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
     char *dp = format_string;
     gboolean build_question = FALSE;
 
-#ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag)
     {
@@ -1884,15 +1883,16 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
         for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
             op_names1[i] = Q_ (op_names1[i]);
 
+#ifdef ENABLE_NLS
         for (i = sizeof (prompt_parts) / sizeof (prompt_parts[0]); i--;)
             prompt_parts[i] = _(prompt_parts[i]);
 
         one_format = _(one_format);
         many_format = _(many_format);
         question_format = _(question_format);
+#endif /* ENABLE_NLS */
         i18n_flag = TRUE;
     }
-#endif /* ENABLE_NLS */
 
     sp = single_source ? one_format : many_format;
 
@@ -2013,7 +2013,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
     gboolean do_bg = FALSE;     /* do background operation? */
 
-#ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag)
     {
@@ -2021,7 +2020,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             op_names[i] = Q_ (op_names[i]);
         i18n_flag = TRUE;
     }
-#endif /* ENABLE_NLS */
 
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
