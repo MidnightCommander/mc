@@ -321,7 +321,7 @@ sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, 
         QuickDialog quick_dlg = {
             dlg_width, dlg_height, -1, -1,
             N_("Sort order"), "[Sort Order...]",
-            quick_widgets, TRUE
+            quick_widgets, NULL, TRUE
         };
 
         quick_widgets[5].u.radio.items = sort_orders_names;
@@ -449,7 +449,7 @@ confirm_box (void)
     {
         QuickDialog confirmation = {
             dlg_width, dlg_height, -1, -1, title,
-            "[Confirmation]", conf_widgets, 1
+            "[Confirmation]", conf_widgets, NULL, TRUE
         };
 
         (void) quick_dialog (&confirmation);
@@ -485,7 +485,7 @@ display_bits_box (void)         /* AB:FIXME: test dialog */
 
     QuickDialog display_bits = {
         DISPX, DISPY, -1, -1, _("Display bits"),
-        "[Display bits]", display_widgets, TRUE
+        "[Display bits]", display_widgets, NULL, TRUE
     };
 
     int i;
@@ -767,7 +767,7 @@ configure_vfs (void)
 
     QuickDialog confvfs_dlg = {
         VFSX, VFSY, -1, -1, N_("Virtual File System Setting"),
-        "[Virtual FS]", confvfs_widgets, FALSE
+        "[Virtual FS]", confvfs_widgets, NULL, FALSE
     };
 
 #ifdef USE_NETCODE
@@ -824,7 +824,7 @@ cd_dialog (void)
 
         QuickDialog Quick_input = {
             xlen, ylen, 2, LINES - 2 - ylen, _("Quick cd"),
-            "[Quick cd]", quick_widgets, TRUE
+            "[Quick cd]", quick_widgets, NULL, TRUE
         };
 
         return (quick_dialog (&Quick_input) != B_CANCEL) ? my_str : NULL;
@@ -847,7 +847,7 @@ symlink_dialog (const char *existing, const char *new, char **ret_existing, char
 
     QuickDialog Quick_input = {
         64, 12, -1, -1, N_("Symbolic link"),
-        "[File Menu]", quick_widgets, FALSE
+        "[File Menu]", quick_widgets, NULL, FALSE
     };
 
     if (quick_dialog (&Quick_input) == B_CANCEL)

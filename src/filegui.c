@@ -1042,7 +1042,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
 
         QuickDialog Quick_input = {
             fmd_xlen, FMDY, -1, -1, op_names[operation],
-            "[Mask Copy/Rename]", fmd_widgets, TRUE
+            "[Mask Copy/Rename]", fmd_widgets, NULL, TRUE
         };
 
       ask_file_mask:

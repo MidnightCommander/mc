@@ -112,7 +112,7 @@ mcview_dialog_search (mcview_t * view)
     QuickDialog Quick_input = {
         SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1,
         N_("Search"), "[Input Line Keys]",
-        quick_widgets, FALSE
+        quick_widgets, NULL, FALSE
     };
 
     qd_result = quick_dialog (&Quick_input);
@@ -201,7 +201,7 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
     QuickDialog Quick_input = {
         goto_dlg_width, goto_dlg_height, -1, -1,
         N_("Goto"), "[Input Line Keys]",
-        quick_widgets, FALSE
+        quick_widgets, NULL, FALSE
     };
 
 #ifdef ENABLE_NLS

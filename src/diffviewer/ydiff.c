@@ -2421,7 +2421,7 @@ dview_diff_options (WDiff * dview)
     QuickDialog diffopt = {
         OPTX, OPTY, -1, -1,
         N_("Diff Options"), "[Diff Options]",
-        diffopt_widgets, 0
+        diffopt_widgets, NULL, FALSE
     };
 
     if (quick_dialog (&diffopt) != B_CANCEL)

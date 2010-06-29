@@ -118,7 +118,7 @@ configure_box (void)
     QuickDialog Quick_input = {
         dlg_width, dlg_height, -1, -1,
         N_("Configure options"), "[Configuration]",
-        quick_widgets, TRUE
+        quick_widgets, NULL, TRUE
     };
 
     int qd_result;
@@ -290,7 +290,7 @@ panel_options_box (void)
     QuickDialog Quick_input = {
         dlg_width, dlg_height, -1, -1,
         N_("Panel options"), "[Panel options]",
-        quick_widgets, TRUE
+        quick_widgets, NULL, TRUE
     };
 
     int qd_result;

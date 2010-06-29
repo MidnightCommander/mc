@@ -973,7 +973,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     {
         QuickDialog Quick_input = {
             len, lines1 + lines2 + 7, -1, -1, header,
-            help, quick_widgets, FALSE
+            help, quick_widgets, NULL, FALSE
         };
 
         for (i = 0; i < 7; i++)
@@ -1060,7 +1060,7 @@ add_new_group_input (const char *header, const char *label, char **result)
     {
         QuickDialog Quick_input = {
             len, lines + 6, -1, -1, header,
-            "[Hotlist]", quick_widgets, FALSE
+            "[Hotlist]", quick_widgets, NULL, FALSE
         };
 
         int relative_y[] = { 1, 1, 1, 0, 2 };   /* the relative_x component from the
