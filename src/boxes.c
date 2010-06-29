@@ -82,14 +82,6 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 {
     switch (msg)
     {
-    case DLG_UNFOCUS:
-        if (dlg_widget_active (display_radio))
-        {
-            assign_text (display_mini_status, displays_status[display_radio->sel]);
-            input_set_point (display_mini_status, 0);
-        }
-        return MSG_HANDLED;
-
     case DLG_KEY:
         if (parm == '\n')
         {
@@ -115,14 +107,42 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
             }
         }
 
-        if (g_ascii_tolower (parm) == display_user_hotkey && dlg_widget_active (display_user_format)
-            && dlg_widget_active (display_mini_status))
+        if (g_ascii_tolower (parm) == display_user_hotkey)
         {
-            display_radio->sel = 3;
+            display_radio->pos = display_radio->sel = 3;
             dlg_select_widget (display_radio);  /* force redraw */
-            dlg_select_widget (display_user_format);
+            h->callback (h, (Widget *) display_radio, DLG_ACTION, 0, NULL);
             return MSG_HANDLED;
         }
+        return MSG_NOT_HANDLED;
+
+    case DLG_ACTION:
+        if (sender == (Widget *) display_radio)
+        {
+            if (!(display_check_status->state & C_BOOL))
+                assign_text (display_mini_status, displays_status[display_radio->sel]);
+            update_input (display_mini_status, 0);
+            update_input (display_user_format, 0);
+            widget_disable (display_user_format->widget, display_radio->sel != 3);
+            return MSG_HANDLED;
+        }
+
+        if (sender == (Widget *) display_check_status)
+        {
+            if (display_check_status->state & C_BOOL)
+            {
+                widget_disable (display_mini_status->widget, FALSE);
+                assign_text (display_mini_status, displays_status[3]);
+            }
+            else
+            {
+                widget_disable (display_mini_status->widget, TRUE);
+                assign_text (display_mini_status, displays_status[display_radio->sel]);
+            }
+            update_input (display_mini_status, 0);
+            return MSG_HANDLED;
+        }
+
         return MSG_NOT_HANDLED;
 
     default:
@@ -164,7 +184,7 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     {
         int i, maxlen = 0;
         const char *cp;
-        int ok_len, cancel_len;
+        int ok_len, cancel_len, b_len, gap;
 
 #ifdef ENABLE_NLS
         display_title = _(display_title);
@@ -186,6 +206,7 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
         ok_len = button_get_len (ok_button);
         cancel_button = button_new (dlg_height - 3, 0, B_CANCEL, NORMAL_BUTTON, cancel_name, 0);
         cancel_len = button_get_len (cancel_button);
+        b_len = ok_len + cancel_len + 2;
 
         dlg_width = max (dlg_width, str_term_width1 (display_title) + 10);
         /* calculate max width of radiobutons */
@@ -195,9 +216,10 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
         dlg_width = max (dlg_width, str_term_width1 (user_mini_status) + 13);
 
         /* buttons */
-        dlg_width = max (dlg_width, ok_len + cancel_len + 8);
-        ok_button->widget.x = dlg_width / 3 - ok_len / 2;
-        cancel_button->widget.x = dlg_width * 2 / 3 - cancel_len / 2;
+        dlg_width = max (dlg_width, b_len + 6);
+        gap = (dlg_width - 6 - b_len) / 3;
+        ok_button->widget.x = 3 + gap;
+        cancel_button->widget.x = ok_button->widget.x + ok_len + gap + 2;
     }
 
     displays_status = _status;
@@ -212,7 +234,6 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     display_mini_status = input_new (10, 8, (int *) input_colors, dlg_width - 12, _status[radio_sel],
                                      "mini-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_mini_status);
-    input_set_point (display_mini_status, 0);
 
     display_check_status = check_new (9, 4, _check_status, user_mini_status);
     add_widget (dd, display_check_status);
@@ -220,7 +241,6 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     display_user_format = input_new (7, 8, (int *) input_colors, dlg_width - 12, init_text,
                                      "user-fmt-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_user_format);
-    input_set_point (display_user_format, 0);
 
     display_radio = radio_new (3, 4, LIST_TYPES, displays);
     display_radio->sel = display_radio->pos = radio_sel;
