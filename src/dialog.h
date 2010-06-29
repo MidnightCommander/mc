@@ -180,7 +180,8 @@ typedef enum
     W_WANT_HOTKEY = (1 << 1),
     W_WANT_CURSOR = (1 << 2),
     W_WANT_IDLE = (1 << 3),
-    W_IS_INPUT = (1 << 4)
+    W_IS_INPUT = (1 << 4),
+    W_DISABLED = (1 << 5)       /* Widget cannot be selected */
 } widget_options_t;
 
 /* Flags for widget repositioning on dialog resize */
@@ -301,10 +302,11 @@ void do_refresh (void);
 
 /* Sets/clear the specified flag in the options field */
 #define widget_option(w,f,i) \
-    w.options = ((i) ? (w.options | (f)) : (w.options & (~(f))))
+    w.options = ((i) ? ((w).options | (f)) : ((w).options & (~(f))))
 
-#define widget_want_cursor(w,i) widget_option(w, W_WANT_CURSOR, i)
-#define widget_want_hotkey(w,i) widget_option(w, W_WANT_HOTKEY, i)
+#define widget_want_cursor(w,i) widget_option((w), W_WANT_CURSOR, (i))
+#define widget_want_hotkey(w,i) widget_option((w), W_WANT_HOTKEY, (i))
+#define widget_disable(w,i) widget_option((w), W_DISABLED, (i))
 
 /* Used in load_prompt() */
 void update_cursor (Dlg_head * h);

@@ -67,11 +67,24 @@ static void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
 {
     Dlg_head *h = w->owner;
+    int color;
 
-    tty_setcolor (hotkey
-                  ? (focused
-                     ? DLG_HOT_FOCUSC (h)
-                     : DLG_HOT_NORMALC (h)) : (focused ? DLG_FOCUSC (h) : DLG_NORMALC (h)));
+    if (hotkey)
+    {
+        if (focused)
+            color = DLG_HOT_FOCUSC (h);
+        else
+            color = DLG_HOT_NORMALC (h);
+    }
+    else
+    {
+        if (focused)
+            color = DLG_FOCUSC (h);
+        else
+            color = DLG_NORMALC (h);
+    }
+
+    tty_setcolor (color);
 }
 
 struct hotkey_t
