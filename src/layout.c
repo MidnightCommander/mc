@@ -158,8 +158,6 @@ static int height;
 #define B_PLUS (B_USER + 2)
 #define B_MINUS (B_USER + 3)
 
-static Dlg_head *layout_dlg;
-
 static const char *s_split_direction[2] = {
     N_("&Vertical"),
     N_("&Horizontal")
@@ -190,12 +188,12 @@ static struct
 #define OTHER_OPTIONS_COUNT   (LAYOUT_OPTIONS_COUNT - 1)
 
 static gsize first_width;
-static const char *output_lines_label = 0;
+static const char *output_lines_label = NULL;
 static int output_lines_label_len;
 
 static WButton *bleft_widget, *bright_widget;
 
-static void
+static inline void
 _check_split (void)
 {
     if (_horizontal_split)
@@ -216,65 +214,44 @@ _check_split (void)
         else if (_first_panel_size > COLS - MINWIDTH)
             _first_panel_size = COLS - MINWIDTH;
     }
+
+    old_first_panel_size = _first_panel_size;
+    old_horizontal_split = _horizontal_split;
 }
 
 static void
-update_split (void)
+update_split (const Dlg_head *h)
 {
     /* Check split has to be done before testing if it changed, since
        it can change due to calling _check_split() as well */
     _check_split ();
 
-    /* To avoid setting the cursor to the wrong place */
-    if ((old_first_panel_size == _first_panel_size) && (old_horizontal_split == _horizontal_split))
-        return;
+    tty_setcolor (check_options[7].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
 
-    old_first_panel_size = _first_panel_size;
-    old_horizontal_split = _horizontal_split;
-
-    tty_setcolor (COLOR_NORMAL);
-    dlg_move (layout_dlg, 6, 6);
+    dlg_move (h, 6, 6);
     tty_printf ("%03d", _first_panel_size);
-    dlg_move (layout_dlg, 6, 18);
+
+    dlg_move (h, 6, 18);
     if (_horizontal_split)
         tty_printf ("%03d", height - _first_panel_size);
     else
         tty_printf ("%03d", COLS - _first_panel_size);
+
+    dlg_move (h, 6, 13);
+    tty_print_char ('=');
 }
 
 static int
-b2left_cback (WButton *button, int action)
+b_left_right_cback (WButton *button, int action)
 {
-    (void) button;
     (void) action;
 
-    if (_equal_split)
-    {
-        /* Turn equal split off */
-        _equal_split = 0;
-        check_options[7].widget->state = check_options[7].widget->state & ~C_BOOL;
-        dlg_select_widget (check_options[7].widget);
-        dlg_select_widget (bleft_widget);
-    }
-    _first_panel_size++;
-    return 0;
-}
+    if (button == bleft_widget)
+        _first_panel_size++;
+    else
+        _first_panel_size--;
 
-static int
-b2right_cback (WButton *button, int action)
-{
-    (void) button;
-    (void) action;
-
-    if (_equal_split)
-    {
-        /* Turn equal split off */
-        _equal_split = 0;
-        check_options[7].widget->state = check_options[7].widget->state & ~C_BOOL;
-        dlg_select_widget (check_options[7].widget);
-        dlg_select_widget (bright_widget);
-    }
-    _first_panel_size--;
+    update_split (button->widget.owner);
     return 0;
 }
 
@@ -314,10 +291,9 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         old_horizontal_split = -1;
         old_output_lines = -1;
 
-        update_split ();
-        dlg_move (h, 6, 13);
-        tty_print_char ('=');
-        if (console_flag)
+        update_split (h);
+
+        if (old_output_lines != _output_lines)
         {
             old_output_lines = _output_lines;
             tty_setcolor (console_flag ? COLOR_NORMAL : DISABLED_COLOR);
@@ -329,13 +305,13 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     case DLG_POST_KEY:
-        _equal_split = check_options[7].widget->state & C_BOOL;
         _menubar_visible = check_options[6].widget->state & C_BOOL;
         _command_prompt = check_options[5].widget->state & C_BOOL;
         _keybar_visible = check_options[3].widget->state & C_BOOL;
         _message_visible = check_options[2].widget->state & C_BOOL;
         _xterm_title = check_options[1].widget->state & C_BOOL;
         _free_space = check_options[0].widget->state & C_BOOL;
+
         if (console_flag)
         {
             int minimum;
@@ -351,20 +327,10 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
             }
         }
         else
-        {
             height = LINES - _keybar_visible - _command_prompt -
                 _menubar_visible - _output_lines - _message_visible;
-        }
-        if (_horizontal_split != radio_widget->sel)
-        {
-            _horizontal_split = radio_widget->sel;
-            if (_horizontal_split)
-                _first_panel_size = height / 2;
-            else
-                _first_panel_size = COLS / 2;
-        }
-        update_split ();
-        if (console_flag)
+
+        if (old_output_lines != _output_lines)
         {
             old_output_lines = _output_lines;
             tty_setcolor (console_flag ? COLOR_NORMAL : DISABLED_COLOR);
@@ -373,21 +339,59 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         }
         return MSG_HANDLED;
 
+    case DLG_ACTION:
+        if (sender == (Widget *) radio_widget)
+        {
+            if (_horizontal_split != radio_widget->sel)
+            {
+                _horizontal_split = radio_widget->sel;
+                if (_equal_split)
+                {
+                    if (_horizontal_split)
+                        _first_panel_size = height / 2;
+                    else
+                        _first_panel_size = COLS / 2;
+                }
+            }
+
+            update_split (h);
+
+            return MSG_HANDLED;
+        }
+
+        if (sender == (Widget *) check_options[7].widget)
+        {
+            _equal_split = check_options[7].widget->state & C_BOOL;
+
+            widget_disable (bleft_widget->widget, _equal_split);
+            send_message ((Widget *) bleft_widget, WIDGET_DRAW, 0);
+            widget_disable (bright_widget->widget, _equal_split);
+            send_message ((Widget *) bright_widget, WIDGET_DRAW, 0);
+
+            update_split (h);
+
+            return MSG_HANDLED;
+        }
+
+        return MSG_NOT_HANDLED;
+
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
-static void
+static Dlg_head *
 init_layout (void)
 {
-    static int i18n_layt_flag = 0;
+    static gboolean i18n_layt_flag = FALSE;
     static int b1, b2, b3;
     size_t i = sizeof (s_split_direction) / sizeof (char *);
     const char *ok_button = _("&OK");
     const char *cancel_button = _("&Cancel");
     const char *save_button = _("&Save");
     static const char *title1, *title2, *title3;
+
+    Dlg_head *layout_dlg;
 
     if (!i18n_layt_flag)
     {
@@ -424,13 +428,10 @@ init_layout (void)
         if (l1 > first_width)
             first_width = l1;
 
-        if (console_flag)
-        {
-            output_lines_label_len = str_term_width1 (output_lines_label);
-            l1 = output_lines_label_len + 12;
-            if (l1 > first_width)
-                first_width = l1;
-        }
+        output_lines_label_len = str_term_width1 (output_lines_label);
+        l1 = output_lines_label_len + 12;
+        if (l1 > first_width)
+            first_width = l1;
 
         /*
          * alex@bcs.zp.ua:
@@ -450,7 +451,7 @@ init_layout (void)
         b2 = b1 + str_term_width1 (ok_button) + i + 6;
         b3 = b2 + str_term_width1 (save_button) + i + 4;
 
-        i18n_layt_flag = 1;
+        i18n_layt_flag = TRUE;
     }
 
     layout_dlg =
@@ -482,21 +483,30 @@ init_layout (void)
     _xterm_title = xterm_title;
     _free_space = free_space;
 
-    if (console_flag)
     {
-        add_widget (layout_dlg, groupbox_new (8, 4, 3, first_width, title2));
+        const int disabled = console_flag ? 0 : W_DISABLED;
+        Widget *w;
 
-        add_widget (layout_dlg,
-                    button_new (9, output_lines_label_len + 6 + 5, B_MINUS,
-                                NARROW_BUTTON, "&-", bminus_cback));
-        add_widget (layout_dlg,
-                    button_new (9, output_lines_label_len + 6, B_PLUS,
-                                NARROW_BUTTON, "&+", bplus_cback));
+        w = (Widget *) groupbox_new (8, 4, 3, first_width, title2);
+        w->options |= disabled;
+        add_widget (layout_dlg, w);
+
+        w = (Widget *) button_new (9, output_lines_label_len + 6 + 5, B_MINUS,
+                                   NARROW_BUTTON, "&-", bminus_cback);
+        w->options |= disabled;
+        add_widget (layout_dlg, w);
+
+        w = (Widget *) button_new (9, output_lines_label_len + 6, B_PLUS,
+                                   NARROW_BUTTON, "&+", bplus_cback);
+        w->options |= disabled;
+        add_widget (layout_dlg, w);
     }
 
-    bright_widget = button_new (6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback);
+    bright_widget = button_new (6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b_left_right_cback);
+    widget_disable (bright_widget->widget, _equal_split);
     add_widget (layout_dlg, bright_widget);
-    bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback);
+    bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b_left_right_cback);
+    widget_disable (bleft_widget->widget, _equal_split);
     add_widget (layout_dlg, bleft_widget);
     check_options[7].widget = check_new (5, 6, XTRACT (7));
 
@@ -511,6 +521,8 @@ init_layout (void)
     radio_widget = radio_new (3, 6, 2, s_split_direction);
     add_widget (layout_dlg, radio_widget);
     radio_widget->sel = horizontal_split;
+
+    return layout_dlg;
 }
 
 void
@@ -528,23 +540,23 @@ layout_change (void)
 void
 layout_box (void)
 {
+    Dlg_head *layout_dlg;
     int result;
-    size_t i;
-    int layout_do_change = 0;
+    gboolean layout_do_change = FALSE;
 
-    init_layout ();
-    run_dlg (layout_dlg);
-    result = layout_dlg->ret_value;
+    layout_dlg = init_layout ();
+    result = run_dlg (layout_dlg);
 
     if (result == B_ENTER || result == B_EXIT)
     {
+        size_t i;
         for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
             if (check_options[i].widget != NULL)
                 *check_options[i].variable = check_options[i].widget->state & C_BOOL;
         horizontal_split = radio_widget->sel;
         first_panel_size = _first_panel_size;
         output_lines = _output_lines;
-        layout_do_change = 1;
+        layout_do_change = TRUE;
     }
     if (result == B_EXIT)
     {
