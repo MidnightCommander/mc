@@ -69,7 +69,9 @@ widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
     Dlg_head *h = w->owner;
     int color;
 
-    if (hotkey)
+    if ((w->options & W_DISABLED) != 0)
+        color = DISABLED_COLOR;
+    else if (hotkey)
     {
         if (focused)
             color = DLG_HOT_FOCUSC (h);
@@ -754,14 +756,15 @@ label_callback (Widget * w, widget_msg_t msg, int parm)
         {
             char *p = l->text, *q, c = 0;
             int y = 0;
+            gboolean disabled = (w->options & W_DISABLED) != 0;
 
             if (!l->text)
                 return MSG_HANDLED;
 
             if (l->transparent)
-                tty_setcolor (DEFAULT_COLOR);
+                tty_setcolor (disabled ? DISABLED_COLOR : DEFAULT_COLOR);
             else
-                tty_setcolor (DLG_NORMALC (h));
+                tty_setcolor (disabled ? DISABLED_COLOR : DLG_NORMALC (h));
 
             for (;;)
             {
@@ -1035,20 +1038,22 @@ static void
 draw_history_button (WInput * in)
 {
     char c;
+    gboolean disabled = (((Widget *) in)->options & W_DISABLED) != 0;
+
     c = in->history->next ? (in->history->prev ? '|' : 'v') : '^';
     widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH);
 #ifdef LARGE_HISTORY_BUTTON
     {
         Dlg_head *h;
         h = in->widget.owner;
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (disabled ? DISABLED_COLOR : NORMAL_COLOR);
         tty_print_string ("[ ]");
         /* Too distracting: tty_setcolor (MARKED_COLOR); */
         widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
         tty_print_char (c);
     }
 #else
-    tty_setcolor (MARKED_COLOR);
+    tty_setcolor (disabled ? DISABLED_COLOR : MARKED_COLOR);
     tty_print_char (c);
 #endif
 }
@@ -1147,7 +1152,9 @@ update_input (WInput * in, int clear_first)
     if (has_history)
         draw_history_button (in);
 
-    if (in->first)
+    if ((((Widget *) in)->options & W_DISABLED) != 0)
+        tty_setcolor (DISABLED_COLOR);
+    else if (in->first)
         tty_setcolor (in->unchanged_color);
     else
         tty_setcolor (in->color);
@@ -2453,8 +2460,9 @@ static void
 listbox_draw (WListbox * l, gboolean focused)
 {
     const Dlg_head *h = l->widget.owner;
-    const int normalc = DLG_NORMALC (h);
-    int selc = focused ? DLG_HOT_FOCUSC (h) : DLG_FOCUSC (h);
+    const gboolean disabled = (((Widget *) l)->options & W_DISABLED) != 0;
+    const int normalc = disabled ? DISABLED_COLOR : DLG_NORMALC (h);
+    int selc = disabled ? DISABLED_COLOR : focused ? DLG_HOT_FOCUSC (h) : DLG_FOCUSC (h);
 
     GList *le;
     int pos;
@@ -3134,7 +3142,12 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
                     break;
 
                 tty_setcolor (BUTTONBAR_HOTKEY_COLOR);
-                tty_printf ("%2d", i + 1);
+                /* don't show num of undefined button */
+                if ((bb->labels[i].text == NULL) || (bb->labels[i].text[0] == '\0'))
+                    tty_print_string (" ");
+                else
+                    tty_printf ("%2d", i + 1);
+
                 tty_setcolor (BUTTONBAR_BUTTON_COLOR);
                 text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
                 tty_print_string (str_fit_to_term (text, width - 2, J_LEFT_FIT));
@@ -3246,15 +3259,18 @@ groupbox_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_NOT_HANDLED;
 
     case WIDGET_DRAW:
-        tty_setcolor (COLOR_NORMAL);
+    {
+        gboolean disabled = (w->options & W_DISABLED) != 0;
+        tty_setcolor (disabled ? DISABLED_COLOR : COLOR_NORMAL);
         draw_box (g->widget.owner, g->widget.y - g->widget.owner->y,
                   g->widget.x - g->widget.owner->x, g->widget.lines, g->widget.cols, TRUE);
 
-        tty_setcolor (COLOR_HOT_NORMAL);
+        tty_setcolor (disabled ? DISABLED_COLOR : COLOR_HOT_NORMAL);
         dlg_move (g->widget.owner, g->widget.y - g->widget.owner->y,
                   g->widget.x - g->widget.owner->x + 1);
         tty_print_string (g->title);
         return MSG_HANDLED;
+    }
 
     case WIDGET_DESTROY:
         g_free (g->title);

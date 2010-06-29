@@ -314,21 +314,17 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         old_horizontal_split = -1;
         old_output_lines = -1;
 
-        tty_setcolor (COLOR_HOT_NORMAL);
         update_split ();
         dlg_move (h, 6, 13);
         tty_print_char ('=');
         if (console_flag)
         {
-            if (old_output_lines != _output_lines)
-            {
-                old_output_lines = _output_lines;
-                tty_setcolor (COLOR_NORMAL);
-                dlg_move (h, 9, 6);
-                tty_print_string (output_lines_label);
-                dlg_move (h, 9, 6 + 3 + output_lines_label_len);
-                tty_printf ("%02d", _output_lines);
-            }
+            old_output_lines = _output_lines;
+            tty_setcolor (console_flag ? COLOR_NORMAL : DISABLED_COLOR);
+            dlg_move (h, 9, 6);
+            tty_print_string (output_lines_label);
+            dlg_move (h, 9, 6 + 3 + output_lines_label_len);
+            tty_printf ("%02d", _output_lines);
         }
         return MSG_HANDLED;
 
@@ -370,13 +366,10 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         update_split ();
         if (console_flag)
         {
-            if (old_output_lines != _output_lines)
-            {
-                old_output_lines = _output_lines;
-                tty_setcolor (COLOR_NORMAL);
-                dlg_move (h, 9, 6 + 3 + output_lines_label_len);
-                tty_printf ("%02d", _output_lines);
-            }
+            old_output_lines = _output_lines;
+            tty_setcolor (console_flag ? COLOR_NORMAL : DISABLED_COLOR);
+            dlg_move (h, 9, 6 + 3 + output_lines_label_len);
+            tty_printf ("%02d", _output_lines);
         }
         return MSG_HANDLED;
 
