@@ -306,8 +306,10 @@ add_name_to_list (const char *path)
 #endif /* !ENABLE_VFS */
 
 static int
-hotlist_button_callback (int action)
+hotlist_button_callback (WButton *button, int action)
 {
+    (void) button;
+
     switch (action)
     {
     case B_MOVE:
@@ -463,7 +465,7 @@ hotlist_handle_key (Dlg_head * h, int key)
     case '\n':
     case KEY_ENTER:
     case KEY_RIGHT:
-        if (hotlist_button_callback (B_ENTER))
+        if (hotlist_button_callback (NULL, B_ENTER))
         {
             h->ret_value = B_ENTER;
             dlg_stop (h);
@@ -472,7 +474,7 @@ hotlist_handle_key (Dlg_head * h, int key)
 
     case KEY_LEFT:
         if (hotlist_state.type != LIST_VFSLIST)
-            return !hotlist_button_callback (B_UP_GROUP);
+            return !hotlist_button_callback (NULL, B_UP_GROUP);
         else
             return MSG_NOT_HANDLED;
 
@@ -481,7 +483,7 @@ hotlist_handle_key (Dlg_head * h, int key)
             return MSG_NOT_HANDLED;
         else
         {
-            hotlist_button_callback (B_REMOVE);
+            hotlist_button_callback (NULL, B_REMOVE);
             return MSG_HANDLED;
         }
 
@@ -574,7 +576,7 @@ l_call (WListbox * list)
             }
             else
             {
-                hotlist_button_callback (B_ENTER);
+                hotlist_button_callback (NULL, B_ENTER);
                 hotlist_callback (dlg, NULL, DLG_POST_KEY, '\n', NULL);
                 return LISTBOX_CONT;
             }
@@ -587,7 +589,7 @@ l_call (WListbox * list)
         }
     }
 
-    hotlist_button_callback (B_UP_GROUP);
+    hotlist_button_callback (NULL, B_UP_GROUP);
     hotlist_callback (dlg, NULL, DLG_POST_KEY, 'u', NULL);
     return LISTBOX_CONT;
 }

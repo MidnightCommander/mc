@@ -558,10 +558,11 @@ static WLabel *cplabel;
 static WCheck *inpcheck;
 
 static int
-sel_charset_button (int action)
+sel_charset_button (WButton *button, int action)
 {
     int new_dcp;
 
+    (void) button;
     (void) action;
 
     new_dcp = select_charset (-1, -1, new_display_codepage, TRUE);
@@ -890,12 +891,14 @@ jobs_fill_listbox (void)
 }
 
 static int
-task_cb (int action)
+task_cb (WButton *button, int action)
 {
     TaskList *tl;
     int sig = 0;
 
-    if (!bg_list->list)
+    (void) button;
+
+    if (bg_list->list == NULL)
         return 0;
 
     /* Get this instance information */
@@ -937,18 +940,16 @@ static struct
     const char *name;
     int xpos;
     int value;
-    int (*callback) (int);
+    bcback callback;
 }
 job_buttons[] =
 {
-    {
-    N_("&Stop"), 3, B_STOP, task_cb},
-    {
-    N_("&Resume"), 12, B_RESUME, task_cb},
-    {
-    N_("&Kill"), 23, B_KILL, task_cb},
-    {
-    N_("&OK"), 35, B_CANCEL, NULL}
+    /* *INDENT-OFF* */
+    { N_("&Stop"), 3, B_STOP, task_cb },
+    { N_("&Resume"), 12, B_RESUME, task_cb },
+    { N_("&Kill"), 23, B_KILL, task_cb },
+    { N_("&OK"), 35, B_CANCEL, NULL }
+    /* *INDENT-ON* */
 };
 
 void

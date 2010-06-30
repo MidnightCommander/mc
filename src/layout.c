@@ -243,8 +243,9 @@ update_split (void)
 }
 
 static int
-b2left_cback (int action)
+b2left_cback (WButton *button, int action)
 {
+    (void) button;
     (void) action;
 
     if (_equal_split)
@@ -260,8 +261,9 @@ b2left_cback (int action)
 }
 
 static int
-b2right_cback (int action)
+b2right_cback (WButton *button, int action)
 {
+    (void) button;
     (void) action;
 
     if (_equal_split)
@@ -277,8 +279,9 @@ b2right_cback (int action)
 }
 
 static int
-bplus_cback (int action)
+bplus_cback (WButton *button, int action)
 {
+    (void) button;
     (void) action;
 
     if (_output_lines < 99)
@@ -287,8 +290,9 @@ bplus_cback (int action)
 }
 
 static int
-bminus_cback (int action)
+bminus_cback (WButton *button, int action)
 {
+    (void) button;
     (void) action;
 
     if (_output_lines > 0)

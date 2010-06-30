@@ -224,7 +224,7 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
             return MSG_NOT_HANDLED;
 
         if (b->callback)
-            stop = (*b->callback) (b->action);
+            stop = (*b->callback) (b, b->action);
         if (!b->callback || stop)
         {
             h->ret_value = b->action;

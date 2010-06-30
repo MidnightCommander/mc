@@ -30,7 +30,8 @@ typedef enum {
 /* widget variable of type Widget.  We abuse this fact everywhere */
 
 /* button callback */
-typedef int (*bcback) (int);
+struct WButton;
+typedef int (*bcback) (struct WButton *button, int action);
 
 /* structure for label (caption) with hotkey, if original text does not contain
  * hotkey, only start is valid and is equal to original text

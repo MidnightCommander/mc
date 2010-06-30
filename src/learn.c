@@ -63,8 +63,10 @@ static struct {
     int ret_cmd, flags, y, x;
     const char *text;
 } learn_but[BUTTONS] = {
+    /* *INDENT-OFF */
     { B_CANCEL, NORMAL_BUTTON, 0, 39, N_("&Cancel") },
     { B_ENTER, DEFPUSH_BUTTON, 0, 25, N_("&Save") }
+    /* *INDENT-ON */
 };
 
 static Dlg_head *learn_dlg;
@@ -81,10 +83,14 @@ static int learnchanged;
 static const char* learn_title = N_("Learn keys");
 
 
-static int learn_button (int action)
+static int learn_button (WButton *button, int action)
 {
+    Dlg_head *d;
     char *seq;
-    Dlg_head *d = create_message (D_ERROR, _("Teach me a key"),
+
+    (void) button;
+
+    d = create_message (D_ERROR, _("Teach me a key"),
 _("Please press the %s\n"
 "and then wait until this message disappears.\n\n"
 "Then, press it again to see if OK appears\n"
