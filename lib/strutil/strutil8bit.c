@@ -577,17 +577,15 @@ str_8bit_release_search_needle (char *needle, int case_sen)
 static char *
 str_8bit_strdown (const char *str)
 {
-    char *rets;
+    char *rets, *p;
 
     rets = g_strdup (str);
     if (rets == NULL)
         return NULL;
 
-    while (*rets != '\0')
-    {
-        *rets = char_tolower (*rets);
-        rets++;
-    }
+    for (p = rets; *p != '\0'; p++)
+        *p = char_tolower (*p);
+
     return rets;
 }
 
