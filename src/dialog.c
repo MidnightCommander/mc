@@ -520,21 +520,32 @@ find_widget_type (const Dlg_head * h, callback_fn callback)
     return (w == NULL) ? NULL : (Widget *) w->data;
 }
 
-/* Find the widget with the given dialog id in the dialog h and select it */
-void
-dlg_select_by_id (const Dlg_head * h, unsigned int id)
+/* Find the widget with the given id */
+Widget *
+dlg_find_by_id (const Dlg_head * h, unsigned int id)
 {
     if (h->widgets != NULL)
     {
-        Widget *w_found;
+        GList *w;
 
-        w_found = (Widget *) g_list_nth_data (h->widgets, id);
-
-        if (w_found != NULL)
-            dlg_select_widget (w_found);
+        for (w = h->widgets; w != NULL; w = g_list_next (w))
+            if (((Widget *) w->data)->id == id)
+                return (Widget *) w->data;
     }
+
+    return NULL;
 }
 
+/* Find the widget with the given id in the dialog h and select it */
+void
+dlg_select_by_id (const Dlg_head * h, unsigned int id)
+{
+    Widget *w;
+
+    w = dlg_find_by_id (h, id);
+    if (w != NULL)
+        dlg_select_widget (w);
+}
 
 /* What to do if the requested widget doesn't take focus */
 typedef enum

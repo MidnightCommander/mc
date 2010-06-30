@@ -295,6 +295,7 @@ void dlg_one_up (Dlg_head * h);
 void dlg_one_down (Dlg_head * h);
 int dlg_focus (Dlg_head * h);
 Widget *find_widget_type (const Dlg_head * h, callback_fn callback);
+Widget *dlg_find_by_id (const Dlg_head * h, unsigned int id);
 void dlg_select_by_id (const Dlg_head * h, unsigned int id);
 
 /* Redraw all dialogs */
