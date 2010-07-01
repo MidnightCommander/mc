@@ -239,7 +239,7 @@ shell/.deba
         View=%view{ascii} apt-cache show `echo %p | sed 's/\([0-9a-z.-]*\).*/\1/'`
 
 # ISO9660
-regex/\.iso$
+regex/\.([iI][sS][oO])$
 	Open=%cd %p#iso9660
 	View=%view{ascii} isoinfo -l -i %f
 
