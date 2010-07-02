@@ -435,10 +435,8 @@ background_attention (int fd, void *closure)
         {
             len = strlen (resstr);
             ret = write (to_child_fd, &len, sizeof (len));
-            if (len)
-            {
-                write (to_child_fd, resstr, len);
-            }
+            if (len != 0)
+                ret = write (to_child_fd, resstr, len);
             g_free (resstr);
         }
         else

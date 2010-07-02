@@ -168,7 +168,7 @@ rewrite_backup_content (const char *from_file_name, const char *to_file_name)
         return FALSE;
     }
 
-    fwrite ((const void *) contents, length, 1, backup_fd);
+    length = fwrite ((const void *) contents, length, 1, backup_fd);
 
     fflush (backup_fd);
     fclose (backup_fd);
