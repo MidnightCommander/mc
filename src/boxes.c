@@ -740,6 +740,32 @@ static char *ret_timeout;
 static char *ret_passwd;
 static char *ret_directory_timeout;
 static char *ret_ftp_proxy;
+
+static cb_ret_t
+confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+        case DLG_ACTION:
+            if (sender->id == 6)
+            {
+                /* message from "Always use ftp proxy" checkbutton */
+                const gboolean not_use = !(((WCheck *) sender)->state & C_BOOL);
+                Widget *w;
+
+                /* input */
+                w = dlg_find_by_id (h, sender->id - 1);
+                widget_disable (*w, not_use);
+                send_message (w, WIDGET_DRAW, 0);
+
+                return MSG_HANDLED;
+            }
+            return MSG_NOT_HANDLED;
+
+        default:
+            return default_dlg_callback (h, sender, msg, parm, data);
+    }
+}
 #endif
 
 void
@@ -787,12 +813,22 @@ configure_vfs (void)
 
     QuickDialog confvfs_dlg = {
         VFSX, VFSY, -1, -1, N_("Virtual File System Setting"),
-        "[Virtual FS]", confvfs_widgets, NULL, FALSE
+        "[Virtual FS]", confvfs_widgets,
+#ifdef USE_NETCODE
+        confvfs_callback,
+#else
+        NULL,
+#endif
+        FALSE
     };
 
 #ifdef USE_NETCODE
     g_snprintf (buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
+
+    if (!ftpfs_always_use_proxy)
+        confvfs_widgets[5].options = W_DISABLED;
 #endif
+
     g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL)
