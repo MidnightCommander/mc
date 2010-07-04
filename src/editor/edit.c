@@ -1386,10 +1386,6 @@ edit_delete (WEdit * edit, const int byte_delete)
     if (!edit->curs2)
         return 0;
 
-    edit->mark1 -= (edit->mark1 > edit->curs1);
-    edit->mark2 -= (edit->mark2 > edit->curs1);
-    edit->last_get_rule -= (edit->last_get_rule > edit->curs1);
-
     cw = 1;
     /* if byte_delete = 1 then delete only one byte not multibyte char */
     if (edit->utf8 && byte_delete == 0)
@@ -1400,6 +1396,10 @@ edit_delete (WEdit * edit, const int byte_delete)
     }
     for (i = 1; i <= cw; i++)
     {
+        edit->mark1 -= (edit->mark1 > edit->curs1);
+        edit->mark2 -= (edit->mark2 > edit->curs1);
+        edit->last_get_rule -= (edit->last_get_rule > edit->curs1);
+
         p = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE -
                                                                  ((edit->curs2 -
                                                                    1) & M_EDIT_BUF_SIZE) - 1];
@@ -1443,11 +1443,8 @@ edit_backspace (WEdit * edit, const int byte_delete)
     if (!edit->curs1)
         return 0;
 
-    edit->mark1 -= (edit->mark1 >= edit->curs1);
-    edit->mark2 -= (edit->mark2 >= edit->curs1);
-    edit->last_get_rule -= (edit->last_get_rule >= edit->curs1);
-
     cw = 1;
+
     if (edit->utf8 && byte_delete == 0)
     {
         edit_get_prev_utf (edit, edit->curs1, &cw);
@@ -1456,6 +1453,10 @@ edit_backspace (WEdit * edit, const int byte_delete)
     }
     for (i = 1; i <= cw; i++)
     {
+        edit->mark1 -= (edit->mark1 >= edit->curs1);
+        edit->mark2 -= (edit->mark2 >= edit->curs1);
+        edit->last_get_rule -= (edit->last_get_rule >= edit->curs1);
+
         p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] +
               ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
         if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE))
