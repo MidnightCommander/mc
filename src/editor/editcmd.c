@@ -1685,9 +1685,9 @@ edit_replace_cmd (WEdit * edit, int again)
     char *input2 = NULL;
     char *disp1 = NULL;
     char *disp2 = NULL;
-    int replace_yes;
-    long times_replaced = 0, last_search;
+    long times_replaced = 0;
     gboolean once_found = FALSE;
+    GString *repl_str = NULL, *tmp_str = NULL;
 
     if (!edit)
     {
@@ -1695,8 +1695,6 @@ edit_replace_cmd (WEdit * edit, int again)
         g_free (saved2), saved2 = NULL;
         return;
     }
-
-    last_search = edit->last_byte;
 
     edit->force |= REDRAW_COMPLETELY;
 
@@ -1750,7 +1748,7 @@ edit_replace_cmd (WEdit * edit, int again)
         if (edit->search == NULL)
         {
             edit->search_start = edit->curs1;
-            return;
+            goto cleanup;
         }
         edit->search->search_type = edit_search_options.type;
         edit->search->is_all_charsets = edit_search_options.all_codepages;
@@ -1770,7 +1768,6 @@ edit_replace_cmd (WEdit * edit, int again)
     do
     {
         gsize len = 0;
-        long new_start;
 
         if (!editcmd_find (edit, &len))
         {
@@ -1782,14 +1779,14 @@ edit_replace_cmd (WEdit * edit, int again)
             break;
         }
         once_found = TRUE;
-        new_start = edit->search->normal_offset;
 
-        edit->search_start = new_start = edit->search->normal_offset;
+        edit->search_start = edit->search->normal_offset;
         /*returns negative on not found or error in pattern */
 
-        if (edit->search_start >= 0)
+        if ((edit->search_start >= 0) && (edit->search_start < edit->last_byte))
         {
-            guint i;
+            gboolean replace_yes;
+            gsize i;
 
             edit->found_start = edit->search_start;
             i = edit->found_len = len;
@@ -1797,7 +1794,7 @@ edit_replace_cmd (WEdit * edit, int again)
             edit_cursor_move (edit, edit->search_start - edit->curs1);
             edit_scroll_screen_over_cursor (edit);
 
-            replace_yes = 1;
+            replace_yes = TRUE;
 
             if (edit->replace_mode == 0)
             {
@@ -1817,82 +1814,94 @@ edit_replace_cmd (WEdit * edit, int again)
                 /* and prompt 2/3 down */
                 disp1 = edit_replace_cmd__conv_to_display (saved1);
                 disp2 = edit_replace_cmd__conv_to_display (saved2);
+
                 switch (editcmd_dialog_replace_prompt_show (edit, disp1, disp2, -1, -1))
                 {
                 case B_ENTER:
-                    replace_yes = 1;
+                    replace_yes = TRUE;
                     break;
                 case B_SKIP_REPLACE:
-                    replace_yes = 0;
+                    replace_yes = FALSE;
                     break;
                 case B_REPLACE_ALL:
                     edit->replace_mode = 1;
                     break;
                 case B_CANCEL:
-                    replace_yes = 0;
+                    replace_yes = FALSE;
                     edit->replace_mode = -1;
                     break;
                 }
                 g_free (disp1);
                 g_free (disp2);
             }
-            if (replace_yes)
-            {                   /* delete then insert new */
-                GString *repl_str, *tmp_str;
-                tmp_str = g_string_new (input2);
 
-                repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
-                g_string_free (tmp_str, TRUE);
-                if (edit->search->error != MC_SEARCH_E_OK)
+            if (replace_yes)
+            {
+                /* don't process string each time */
+                if (tmp_str == NULL)
                 {
-                    edit_error_dialog (_("Replace"), edit->search->error_str);
-                    break;
+                    tmp_str = g_string_new (input2);
+                    repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
+
+                    if (edit->search->error != MC_SEARCH_E_OK)
+                    {
+                        edit_error_dialog (_("Replace"), edit->search->error_str);
+                        break;
+                    }
                 }
 
-                while (i--)
+               /* delete then insert new */
+                for (i = 0; i < len; i++)
                     edit_delete (edit, 1);
 
-                while (++i < repl_str->len)
+                for (i = 0; i < repl_str->len; i++)
                     edit_insert (edit, repl_str->str[i]);
 
-                g_string_free (repl_str, TRUE);
-                edit->found_len = i;
+                edit->found_len = repl_str->len;
+                times_replaced++;
             }
+
             /* so that we don't find the same string again */
             if (edit_search_options.backwards)
-            {
-                last_search = edit->search_start;
                 edit->search_start--;
-            }
             else
             {
-                edit->search_start += i;
-                last_search = edit->last_byte;
+                edit->search_start += repl_str->len;
+
+                if (edit->search_start >= edit->last_byte)
+                    break;
             }
+
             edit_scroll_screen_over_cursor (edit);
         }
         else
         {
-            const char *msg = _("Replace");
             /* try and find from right here for next search */
             edit->search_start = edit->curs1;
             edit_update_curs_col (edit);
 
             edit->force |= REDRAW_PAGE;
             edit_render_keypress (edit);
-            if (times_replaced)
-            {
-                message (D_NORMAL, msg, _("%ld replacements made"), times_replaced);
-            }
-            else
-                query_dialog (msg, _("Search string not found"), D_NORMAL, 1, _("&OK"));
-            edit->replace_mode = -1;
+
+            if (times_replaced == 0)
+                query_dialog (_("Replace"), _("Search string not found"), D_NORMAL, 1, _("&OK"));
+            break;
         }
     }
     while (edit->replace_mode >= 0);
 
-    edit->force = REDRAW_COMPLETELY;
+    if (tmp_str != NULL)
+        g_string_free (tmp_str, TRUE);
+    if (repl_str != NULL)
+        g_string_free (repl_str, TRUE);
+
     edit_scroll_screen_over_cursor (edit);
+    edit->force |= REDRAW_COMPLETELY;
+    edit_render_keypress (edit);
+
+    if ((edit->replace_mode == 1) && (times_replaced != 0))
+        message (D_NORMAL, _("Replace"), _("%ld replacements made"), times_replaced);
+
   cleanup:
     g_free (input1);
     g_free (input2);
