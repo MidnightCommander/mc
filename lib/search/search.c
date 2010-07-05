@@ -282,7 +282,6 @@ mc_search_is_type_avail (mc_search_type_t search_type)
     case MC_SEARCH_T_REGEX:
     case MC_SEARCH_T_HEX:
         return TRUE;
-        break;
     default:
         break;
     }
@@ -359,10 +358,8 @@ mc_search_is_fixed_search_str (mc_search_t * lc_mc_search)
     case MC_SEARCH_T_REGEX:
     case MC_SEARCH_T_GLOB:
         return FALSE;
-        break;
     default:
         return TRUE;
-        break;
     }
 }
 

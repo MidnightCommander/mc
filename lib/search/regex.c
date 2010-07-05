@@ -579,14 +579,12 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
                 *found_len = end_pos - start_pos;
             lc_mc_search->normal_offset = lc_mc_search->start_buffer + start_pos;
             return TRUE;
-            break;
         case COND__NOT_ALL_FOUND:
             break;
         default:
             g_string_free (lc_mc_search->regex_buffer, TRUE);
             lc_mc_search->regex_buffer = NULL;
             return FALSE;
-            break;
         }
         if (( lc_mc_search->update_fn != NULL ) && 
             ( (lc_mc_search->update_fn) (user_data, current_pos) == MC_SEARCH_CB_ABORT))
