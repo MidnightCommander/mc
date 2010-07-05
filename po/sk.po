@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2009-12-03 12:42+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -1661,11 +1661,8 @@ msgstr " Blok je príliš veľký, možno nebude možné stornovať túto akciu.
 msgid "Replace"
 msgstr "Nahradiť"
 
-msgid " Replace "
-msgstr " Nahradiť "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld náhrad urobených. "
 
 msgid "Quit"
@@ -1800,6 +1797,9 @@ msgstr " Zadajte reťazec pre nahradenie:"
 
 msgid " Enter search string:"
 msgstr " Zadajte reťazec pre hľadanie:"
+
+msgid " Replace "
+msgstr " Nahradiť "
 
 msgid "&Find all"
 msgstr "&Nájsť všetky"
@@ -2872,6 +2872,10 @@ msgid ""
 msgstr ""
 "MC nedokázal zapísať súbor ~/%s, vaše staré položky hotlistu neboli zmazané"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informácie "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2880,8 +2884,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Súbor:     %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Voľné uzly %d (%d%%) z %d"
 
 msgid "No node information"

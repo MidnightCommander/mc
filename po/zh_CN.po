@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2010-03-09 14:51+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -1665,11 +1665,8 @@ msgstr " 块过大，您可能无法撤消这个动作。"
 msgid "Replace"
 msgstr "替换"
 
-msgid " Replace "
-msgstr " 替换 "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " 替换了 %ld 处。"
 
 msgid "Quit"
@@ -1803,6 +1800,9 @@ msgstr " 输入替换字符串："
 
 msgid " Enter search string:"
 msgstr " 输入查找字符串："
+
+msgid " Replace "
+msgstr " 替换 "
 
 msgid "&Find all"
 msgstr "查找全部(&F)"
@@ -2855,6 +2855,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC无法写文件~/%s，您的活动列表条目没有被删除"
 
+#, fuzzy
+msgid "Information"
+msgstr " 信息 "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2863,8 +2867,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "文件：      %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "空闲节点：%3$d 中的 %1$d (%2$d%%)"
 
 msgid "No node information"

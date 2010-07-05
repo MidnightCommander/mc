@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2010-02-19 15:10+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -1673,11 +1673,8 @@ msgstr " Il blocco è grande, potresti non riuscire ad annullare l'azione. "
 msgid "Replace"
 msgstr "Sostituisci"
 
-msgid " Replace "
-msgstr " Sostituisci "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " Eseguite %ld sostituzioni. "
 
 msgid "Quit"
@@ -1811,6 +1808,9 @@ msgstr " Inserire stringa di sostituzione:"
 
 msgid " Enter search string:"
 msgstr " Inserire la stringa di ricerca:"
+
+msgid " Replace "
+msgstr " Sostituisci "
 
 msgid "&Find all"
 msgstr "Tro&va tutti"
@@ -2867,6 +2867,10 @@ msgstr ""
 "MC non è stato in grado di scrivere sul file ~/%s, il vecchio elenco di "
 "favorite non è stato eliminato"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informazioni "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2875,8 +2879,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "File:       %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Nodi liberi: %d (%d%%) su %d"
 
 msgid "No node information"

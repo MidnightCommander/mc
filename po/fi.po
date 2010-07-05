@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -1649,11 +1649,8 @@ msgstr " Valinta on suuri; et ehkä kykene peruuttamaan tätä toimintoa. "
 msgid "Replace"
 msgstr "&Korvaa"
 
-msgid " Replace "
-msgstr " Korvaa "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld korvausta tehty. "
 
 msgid "Quit"
@@ -1793,6 +1790,9 @@ msgstr " Anna korvaava merkkijono:"
 
 msgid " Enter search string:"
 msgstr " Anna haettava merkkijono:"
+
+msgid " Replace "
+msgstr " Korvaa "
 
 #, fuzzy
 msgid "&Find all"
@@ -2828,6 +2828,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
+#, fuzzy
+msgid "Information"
+msgstr " Varmistus "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr ""
@@ -2837,7 +2841,7 @@ msgid "File:       %s"
 msgstr ""
 
 #, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr ""
 
 msgid "No node information"

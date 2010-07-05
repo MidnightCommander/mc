@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -1699,11 +1699,8 @@ msgstr "大きなブロックです。この操作はやり直せないかもし
 msgid "Replace"
 msgstr "置換(&R)"
 
-msgid " Replace "
-msgstr " 置換 "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr "%ld 個置換しました"
 
 msgid "Quit"
@@ -1845,6 +1842,9 @@ msgstr "置換文字列を入力してください:"
 
 msgid " Enter search string:"
 msgstr "検索文字列を入力してください:"
+
+msgid " Replace "
+msgstr " 置換 "
 
 #, fuzzy
 msgid "&Find all"
@@ -2950,6 +2950,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "に書き込めませんでした。古いホットリストのエントリは削除されません"
 
+#, fuzzy
+msgid "Information"
+msgstr " 情報 "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2958,8 +2962,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "ファイル:   %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "空きノード: %d (%d%%) of %d"
 
 msgid "No node information"

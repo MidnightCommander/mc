@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -1696,11 +1696,8 @@ msgstr ""
 msgid "Replace"
 msgstr "Remplacer"
 
-msgid " Replace "
-msgstr " Remplacer "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld remplacements effectués. "
 
 msgid "Quit"
@@ -1836,6 +1833,9 @@ msgstr " Saisissez la chaîne de remplacement :"
 
 msgid " Enter search string:"
 msgstr " Saisissez la chaîne à rechercher :"
+
+msgid " Replace "
+msgstr " Remplacer "
 
 msgid "&Find all"
 msgstr "&Rechercher tout"
@@ -2925,6 +2925,10 @@ msgstr ""
 "MC n'a pu écrire dans le fichier ~/%s, les entrées de votre ancienne hotlist "
 "ont été conservées"
 
+#, fuzzy
+msgid "Information"
+msgstr " Information "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2933,8 +2937,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Fichier :   %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Noeuds libres : %d (%d%%) sur %d"
 
 msgid "No node information"

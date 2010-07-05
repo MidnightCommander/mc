@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -1707,11 +1707,8 @@ msgstr " Blok çok büyük, bu eylem geri alınamayabilir. "
 msgid "Replace"
 msgstr "&Yerleştir"
 
-msgid " Replace "
-msgstr " Değiştir"
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld yerleştirme yapıldı. "
 
 msgid "Quit"
@@ -1853,6 +1850,9 @@ msgstr " Yerleştirilecek metni verin:"
 
 msgid " Enter search string:"
 msgstr " Aranacak metni girin:"
+
+msgid " Replace "
+msgstr " Değiştir"
 
 #, fuzzy
 msgid "&Find all"
@@ -2957,6 +2957,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "dosyasına yazamadı, eski listeniz silinmedi"
 
+#, fuzzy
+msgid "Information"
+msgstr " Bilgi       "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2965,8 +2969,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr " Dosya ismi:   %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "%d (%%%d) / %d serbest düğüm"
 
 msgid "No node information"

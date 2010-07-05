@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
@@ -1663,11 +1663,8 @@ msgstr " Li blok est lådje; s' il astcheut, vos n' såroz disfé cist bezogne. 
 msgid "Replace"
 msgstr "&Mete el Plaece"
 
-msgid " Replace "
-msgstr " Mete el plaece "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld discandjes di fwaites. "
 
 msgid "Quit"
@@ -1811,6 +1808,9 @@ msgstr " Dinez li tchinne pol discandje:"
 
 msgid " Enter search string:"
 msgstr " Dinez li tchinne a cweri après:"
+
+msgid " Replace "
+msgstr " Mete el plaece "
 
 #, fuzzy
 msgid "&Find all"
@@ -2916,6 +2916,10 @@ msgid ""
 msgstr ""
 "Do côp, vos vîyès intrêyes el djîvêye rascoûrti n' ont nén stî disfacêyes"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informåcion "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2924,8 +2928,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Fitchî:       %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Nouks libes: %d (%d%%) so %d"
 
 msgid "No node information"

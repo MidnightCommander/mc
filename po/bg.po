@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -1701,11 +1701,8 @@ msgstr ""
 msgid "Replace"
 msgstr "Замести"
 
-msgid " Replace "
-msgstr " Замяна "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld замени направени. "
 
 msgid "Quit"
@@ -1847,6 +1844,9 @@ msgstr " Въведете заместващия низ:"
 
 msgid " Enter search string:"
 msgstr " Въведете търсения низ:"
+
+msgid " Replace "
+msgstr " Замяна "
 
 #, fuzzy
 msgid "&Find all"
@@ -2952,6 +2952,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "Старият ви горещ списък не е изтрит"
 
+#, fuzzy
+msgid "Information"
+msgstr " Информация "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2960,8 +2964,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Файл:          %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Свободни възли: %d (%d%%) от %d"
 
 msgid "No node information"

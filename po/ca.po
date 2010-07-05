@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -1711,11 +1711,8 @@ msgstr " El bloc és gran, potser no podreu desfer aquesta acció "
 msgid "Replace"
 msgstr "&Reemplaça"
 
-msgid " Replace "
-msgstr " Reemplaça "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " S'han fet %ld reemplaçaments. "
 
 msgid "Quit"
@@ -1857,6 +1854,9 @@ msgstr " Introduïu la cadena per reemplaçar:"
 
 msgid " Enter search string:"
 msgstr " Introduïu la cadena de cerca:"
+
+msgid " Replace "
+msgstr " Reemplaça "
 
 #, fuzzy
 msgid "&Find all"
@@ -2964,6 +2964,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " fitxer, i no s'ha pogut suprimir els favorits antics"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informació "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2972,8 +2976,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Fitxer:       %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Nodes lliures: %d (%d%%) of %d"
 
 msgid "No node information"

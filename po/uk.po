@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -1670,11 +1670,8 @@ msgstr " Блок надто великий, ви не зможете відко
 msgid "Replace"
 msgstr "Замінити"
 
-msgid " Replace "
-msgstr " Замінити "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " Виконано %ld замін. "
 
 msgid "Quit"
@@ -1808,6 +1805,9 @@ msgstr " Введіть стрічку для заміни:"
 
 msgid " Enter search string:"
 msgstr " Введіть стрічку для пошуку:"
+
+msgid " Replace "
+msgstr " Замінити "
 
 msgid "&Find all"
 msgstr "Знайти все"
@@ -2865,6 +2865,10 @@ msgid ""
 msgstr ""
 "MC не зміг записати файл ~/%s, Ваш старий список елементів не був видалений"
 
+#, fuzzy
+msgid "Information"
+msgstr " Інформація "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2873,8 +2877,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr " Файл:       %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Віль. вузлів: %d (%d%%) з %d"
 
 msgid "No node information"

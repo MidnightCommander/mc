@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -1598,11 +1598,8 @@ msgstr " தொகுதி மிகப் பெரியது, இந்த 
 msgid "Replace"
 msgstr "&மாற்று"
 
-msgid " Replace "
-msgstr " மாற்று "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld மாற்றங்கள் செய்யப்பட்டன. "
 
 msgid "Quit"
@@ -1740,6 +1737,9 @@ msgstr " மாற்றல் சரத்தை நுழைவிடு:"
 
 msgid " Enter search string:"
 msgstr " தேடுவதட்க்கு சரத்தை நுழைவிடு:"
+
+msgid " Replace "
+msgstr " மாற்று "
 
 msgid "&Find all"
 msgstr ""
@@ -2749,6 +2749,9 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
+msgid "Information"
+msgstr ""
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr ""
@@ -2758,7 +2761,7 @@ msgid "File:       %s"
 msgstr ""
 
 #, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr ""
 
 msgid "No node information"

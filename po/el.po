@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2010-04-10 18:58+0200\n"
 "Last-Translator: Alex-P. Natsios\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -1617,11 +1617,8 @@ msgstr ""
 msgid "Replace"
 msgstr "Αντικατάσταση"
 
-msgid " Replace "
-msgstr " Αντικατάσταση "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " Πραγματοποιήθηκαν %ld αντικαταστάσεις. "
 
 msgid "Quit"
@@ -1757,6 +1754,9 @@ msgstr " Εισαγωγή ακολουθίας αντικατάστασης:"
 
 msgid " Enter search string:"
 msgstr " Εισαγωγή ακολουθίας προς αναζήτηση:"
+
+msgid " Replace "
+msgstr " Αντικατάσταση "
 
 msgid "&Find all"
 msgstr "&Find all"
@@ -2754,6 +2754,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
+#, fuzzy
+msgid "Information"
+msgstr "Πληροφορίες"
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr ""
@@ -2763,7 +2767,7 @@ msgid "File:       %s"
 msgstr "Αρχείο: %s"
 
 #, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr ""
 
 msgid "No node information"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -1691,11 +1691,8 @@ msgstr " Блок завялікі: мажліва, не атрымаецца в
 msgid "Replace"
 msgstr "Замяніць"
 
-msgid " Replace "
-msgstr " Замяніць "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " Здзейснена падстановак: %ld "
 
 msgid "Quit"
@@ -1831,6 +1828,9 @@ msgstr " Увядзіце тэкст для замены: "
 
 msgid " Enter search string:"
 msgstr " Увядзіце радок для пошуку:"
+
+msgid " Replace "
+msgstr " Замяніць "
 
 #, fuzzy
 msgid "&Find all"
@@ -2943,6 +2943,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC не здолеў запісаць файл ~/%s, ваш стары спіс каталогаў не выдалены"
 
+#, fuzzy
+msgid "Information"
+msgstr " Інфармацыя "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2951,8 +2955,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Файл:          %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Вол. інод:     %d (%d%%) з %d"
 
 msgid "No node information"

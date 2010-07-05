@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -1689,11 +1689,8 @@ msgstr " Khối quá lớn, có thể bạn sẽ không hủy bỏ được bư�
 msgid "Replace"
 msgstr "&Thay thế"
 
-msgid " Replace "
-msgstr " Thay thế "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld thay thế được thực hiện. "
 
 msgid "Quit"
@@ -1830,6 +1827,9 @@ msgstr " Nhập chuỗi thay thế:"
 
 msgid " Enter search string:"
 msgstr " Nhập chuỗi tìm kiếm:"
+
+msgid " Replace "
+msgstr " Thay thế "
 
 #, fuzzy
 msgid "&Find all"
@@ -2949,6 +2949,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " tập tin, tra cứu thư mục cũ chưa bị xóa"
 
+#, fuzzy
+msgid "Information"
+msgstr " Thông tin "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2957,8 +2961,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Tập tin:       %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Nút tự do: %d (%d%%) trong tổng số %d"
 
 msgid "No node information"

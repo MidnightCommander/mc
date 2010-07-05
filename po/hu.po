@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2010-02-28 15:59+0100\n"
 "Last-Translator: SZABÓ Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian\n"
@@ -1700,11 +1700,8 @@ msgstr ""
 msgid "Replace"
 msgstr "Csere"
 
-msgid " Replace "
-msgstr " Csere "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld csere történt. "
 
 msgid "Quit"
@@ -1840,6 +1837,9 @@ msgstr " Csereszöveg:"
 
 msgid " Enter search string:"
 msgstr " Keresendő minta:"
+
+msgid " Replace "
+msgstr " Csere "
 
 msgid "&Find all"
 msgstr "Ö&sszes keresése"
@@ -2926,6 +2926,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " A{z} \"~/%s\" fájl nem írható, régi gyorslista-bejegyzések megtartva"
 
+#, fuzzy
+msgid "Information"
+msgstr " Információ "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2934,8 +2938,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Fájl:         %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Szabad node:  %d (%d%%) / %d"
 
 msgid "No node information"

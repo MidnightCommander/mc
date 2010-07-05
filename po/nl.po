@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2010-05-16\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -1668,11 +1668,8 @@ msgstr " Groot blok, wellicht kunt u deze actie niet ongedaan maken. "
 msgid "Replace"
 msgstr "Vervangen"
 
-msgid " Replace "
-msgstr " Vervangen "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld vervangingen doorgevoerd. "
 
 msgid "Quit"
@@ -1806,6 +1803,9 @@ msgstr " Geef de vervangende string:"
 
 msgid " Enter search string:"
 msgstr " Geef de zoekstring:"
+
+msgid " Replace "
+msgstr " Vervangen "
 
 msgid "&Find all"
 msgstr "&Vind allemaal"
@@ -2859,6 +2859,10 @@ msgid ""
 msgstr ""
 "MC kon niet schrijven naar ~/%s bestand, uw oude favolijst is niet verwijderd"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informatie "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2867,8 +2871,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Bestand:      %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Vrije nodes: %d (%d%%) van %d"
 
 msgid "No node information"

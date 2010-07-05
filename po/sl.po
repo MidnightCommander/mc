@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1693,11 +1693,8 @@ msgstr " Blok je velik, tega dejanja ne bo mogoče razveljaviti. "
 msgid "Replace"
 msgstr "&Zamenjaj"
 
-msgid " Replace "
-msgstr " Zamenjaj "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " storjenih je bilo %ld zamenjav. "
 
 msgid "Quit"
@@ -1839,6 +1836,9 @@ msgstr " Vnesite nadomestni niz:"
 
 msgid " Enter search string:"
 msgstr " Vnesite niz za iskanje:"
+
+msgid " Replace "
+msgstr " Zamenjaj "
 
 #, fuzzy
 msgid "&Find all"
@@ -2944,6 +2944,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " datoteke, vaši stari vpisi v vroči seznam niso bili zbrisani"
 
+#, fuzzy
+msgid "Information"
+msgstr " Obvestilo "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Polnočni Poveljnik %s"
@@ -2952,8 +2956,8 @@ msgstr "Polnočni Poveljnik %s"
 msgid "File:       %s"
 msgstr "Datoteka:   %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Prostih nodov %d (%d%%) od %d"
 
 msgid "No node information"

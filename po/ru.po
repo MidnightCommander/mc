@@ -11,15 +11,15 @@
 # Andrew V. Samoilov <sav@bcs.zp.ua>, 1999.
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
 # Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
-# Andrew Borodin <aborodin@vmail.ru>, 2009.
+# Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
 # Ilia Maslakov <il.smind@gmail.com>, 2009.
 # Slava Zanko <slavazanko@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
-"PO-Revision-Date: 2009-10-29  23:37+0300\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"PO-Revision-Date: 2010-07-05  22:37+0400\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: mcedit 4.7.0\n"
+"X-Generator: mcedit 4.7.2\n"
 
 msgid " Search string not found "
 msgstr " Искомая строка не найдена "
@@ -1672,12 +1672,8 @@ msgstr " Блок слишком велик, вам может не удатьс
 msgid "Replace"
 msgstr "&Заменить"
 
-msgid " Replace "
-msgstr " Заменить "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " Осуществлено подстановок: %ld "
+msgid "%ld replacements made"
+msgstr "Осуществлено подстановок: %ld"
 
 msgid "Quit"
 msgstr "Выход"
@@ -1810,6 +1806,9 @@ msgstr " Введите текст для замены: "
 
 msgid " Enter search string:"
 msgstr " Введите строку для поиска:"
+
+msgid " Replace "
+msgstr " Заменить "
 
 msgid "&Find all"
 msgstr "На&йти всё"
@@ -2865,6 +2864,9 @@ msgstr ""
 "MC не смог удалить файл ~/%s, ваши старые элементы быстрого доступа не были "
 "удалены"
 
+msgid "Information"
+msgstr "Информация"
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2873,9 +2875,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Файл:       %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
-msgstr "Своб. узлов: %d (%d%%) из %d"
+msgid "Free nodes: %ld (%ld%%) of %ld"
+msgstr "Своб. узлов: %ld (%ld%%) из %ld"
 
 msgid "No node information"
 msgstr "Нет информации об узле"

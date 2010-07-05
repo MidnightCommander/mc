@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -1697,11 +1697,8 @@ msgstr " Блок том байна, та саяын йлдэлийг буцаа
 msgid "Replace"
 msgstr "&Солих"
 
-msgid " Replace "
-msgstr " Солих "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld нь солигдсон байна"
 
 msgid "Quit"
@@ -1844,6 +1841,9 @@ msgstr " Солигдох текстийг оруул: "
 
 msgid " Enter search string:"
 msgstr " Хайх үгээ оруул:"
+
+msgid " Replace "
+msgstr " Солих "
 
 #, fuzzy
 msgid "&Find all"
@@ -2948,6 +2948,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "Таны хуучин лавлахын жигсаалт файл устгагдаагүй байна "
 
+#, fuzzy
+msgid "Information"
+msgstr " Мэдээлэл "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2956,8 +2960,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Файл:       %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr " %d дэхь чөлөөт. мөчрүүд: %d (%d%%) "
 
 msgid "No node information"

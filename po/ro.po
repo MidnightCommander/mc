@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -1694,11 +1694,8 @@ msgstr " Blocul este mare, s-ar putea să nu puteţi anula această acţiune. "
 msgid "Replace"
 msgstr "&Înlocuieşte"
 
-msgid " Replace "
-msgstr " Înlocuieşte "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld înlocuiri efectuate. "
 
 msgid "Quit"
@@ -1839,6 +1836,9 @@ msgstr " Introduceţi şirul de înlocuire:"
 
 msgid " Enter search string:"
 msgstr " Introduceţi şirul căutat:"
+
+msgid " Replace "
+msgstr " Înlocuieşte "
 
 #, fuzzy
 msgid "&Find all"
@@ -2943,6 +2943,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " fişier, intrările din vechea listă rapidă nu au fost şterse"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informaţii "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Comandant la miezul nopţii %s ;)"
@@ -2951,8 +2955,8 @@ msgstr "Comandant la miezul nopţii %s ;)"
 msgid "File:       %s"
 msgstr "Fişier:     %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "N. libere: %d (%d%%) din %d"
 
 msgid "No node information"

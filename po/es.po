@@ -2,12 +2,12 @@
 # Copyright (C) 1998-2010 Free Software Foundation, Inc.
 # David Martín <dmartina@excite.com>, 1998-2010.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2010-05-08 16:30+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -950,7 +950,8 @@ msgstr ""
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menús:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -1657,11 +1658,8 @@ msgstr " El bloque es enorme, quizás no se pueda deshacer esta acción. "
 msgid "Replace"
 msgstr "Reemplazar"
 
-msgid " Replace "
-msgstr " Reemplazar "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld reemplazos hechos. "
 
 msgid "Quit"
@@ -1795,6 +1793,9 @@ msgstr " Teclee el cambio a realizar:"
 
 msgid " Enter search string:"
 msgstr " Teclee el texto a buscar:"
+
+msgid " Replace "
+msgstr " Reemplazar "
 
 msgid "&Find all"
 msgstr "buscar &Todos"
@@ -2159,7 +2160,10 @@ msgid " %s%s file error"
 msgstr " error en el archivo %s%s "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "El archivo %smc.ext ha cambiado con la versión 3.0.\n"
 "Parece que la instalación falló. Por favor, trate\n"
@@ -2171,7 +2175,10 @@ msgid " ~/%s file error "
 msgstr " error en el archivo ~/%s "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "El archivo ~/%s ha cambiado con la versión 3.0.\n"
 "Puede hacer una copia de %smc.ext o bien emplearlo\n"
@@ -2840,8 +2847,13 @@ msgid " Hotlist Load "
 msgstr " Cargar favoritos "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "No se pudo escribir ~/%s, la lista de favoritos antigua no fue borrada"
+
+#, fuzzy
+msgid "Information"
+msgstr " Información "
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2851,8 +2863,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Archivo:     %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr " y %d (%d%%) de %d inodos"
 
 msgid "No node information"

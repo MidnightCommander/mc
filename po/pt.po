@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -1705,11 +1705,8 @@ msgstr " Bloco demasiado grande, poderá não conseguir desfazer esta acção. "
 msgid "Replace"
 msgstr "&Substituir"
 
-msgid " Replace "
-msgstr " Substituir "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld substituições efectuadas. "
 
 msgid "Quit"
@@ -1851,6 +1848,9 @@ msgstr " Introduza expressão de substituição:"
 
 msgid " Enter search string:"
 msgstr " Introduza expressão de procura:"
+
+msgid " Replace "
+msgstr " Substituir "
 
 #, fuzzy
 msgid "&Find all"
@@ -2957,6 +2957,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " , as suas entradas antigas na lista-top não foram apagadas"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informação "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2965,8 +2969,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Ficheiro:   %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Nós livres: %d (%d%%) de %d"
 
 msgid "No node information"

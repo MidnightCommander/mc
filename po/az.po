@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -1705,11 +1705,8 @@ msgstr " Blok çox böyükdür , bu əməliyyatı geri almayı bacarmaya bilərs
 msgid "Replace"
 msgstr "&Dəyişdir"
 
-msgid " Replace "
-msgstr " Dəyişdir "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld dəyişikliklər edildi. "
 
 msgid "Quit"
@@ -1850,6 +1847,9 @@ msgstr " Dəyişdiriləcək kəliməyi gir:"
 
 msgid " Enter search string:"
 msgstr " Axtarılacaq kəliməyi gir:"
+
+msgid " Replace "
+msgstr " Dəyişdir "
 
 #, fuzzy
 msgid "&Find all"
@@ -2954,6 +2954,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " fayl, sizin köhnə nişanlarım girişləri silinmədi"
 
+#, fuzzy
+msgid "Information"
+msgstr " Mə'lumat       "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2962,8 +2966,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Fayl :     %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Boş düyünlər: %d (%d%%) of %d"
 
 msgid "No node information"

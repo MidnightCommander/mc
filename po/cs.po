@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2010-03-14 14:00+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -1677,11 +1677,8 @@ msgstr " Blok je příliš velký, návrat o krok zpět nebude fungovat. "
 msgid "Replace"
 msgstr "Nahradit"
 
-msgid " Replace "
-msgstr " Nahradit "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " Provedeno %ld nahrazení. "
 
 msgid "Quit"
@@ -1815,6 +1812,9 @@ msgstr " Zadejte náhradní text:"
 
 msgid " Enter search string:"
 msgstr " Zadejte hledaný text:"
+
+msgid " Replace "
+msgstr " Nahradit "
 
 msgid "&Find all"
 msgstr "&Najít všechny"
@@ -2872,6 +2872,10 @@ msgstr ""
 "MC nemohl zapsat soubor ~/%s, vaše staré seznamy pro rychlý přístup nebyly "
 "smazány"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informace "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2880,8 +2884,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Soubor:     %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Volných i-uzlů: %d (%d%%) z %d"
 
 msgid "No node information"

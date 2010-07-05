@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -1686,11 +1686,8 @@ msgstr " 구역이 너무 커서 나중에 무를 수 없습니다. "
 msgid "Replace"
 msgstr "바꿈(&R)"
 
-msgid " Replace "
-msgstr " 바꿈 "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld 개가 바뀌었습니다. "
 
 msgid "Quit"
@@ -1831,6 +1828,9 @@ msgstr " 바꿀 글월 입력:"
 
 msgid " Enter search string:"
 msgstr " 찾을 글월 입력:"
+
+msgid " Replace "
+msgstr " 바꿈 "
 
 #, fuzzy
 msgid "&Find all"
@@ -2935,6 +2935,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " file, your old hotlist entries were not deleted"
 
+#, fuzzy
+msgid "Information"
+msgstr " 정보 "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2943,8 +2947,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "파일:     %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "빈 노드: %d (%d%%) of %d"
 
 msgid "No node information"

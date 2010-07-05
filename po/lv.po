@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -1706,11 +1706,8 @@ msgstr " Bloks ir liels, jūs iespējams nevarēsiet atsaukt šo darbību. "
 msgid "Replace"
 msgstr "&Aizvietot"
 
-msgid " Replace "
-msgstr " Aizvietot "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld aizstāšanas režīms. "
 
 msgid "Quit"
@@ -1852,6 +1849,9 @@ msgstr " Ievadiet aizvietotājvirkni:"
 
 msgid " Enter search string:"
 msgstr " Ievadiet meklējamo virkni:"
+
+msgid " Replace "
+msgstr " Aizvietot "
 
 #, fuzzy
 msgid "&Find all"
@@ -2957,6 +2957,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " fails, tavi vecie karstā saraksta ieraksti netika izdzēsti"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informācija "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Pusnakts Komandieris %s"
@@ -2965,8 +2969,8 @@ msgstr "Pusnakts Komandieris %s"
 msgid "File:       %s"
 msgstr "Fails:       %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Brīvie mezgli: %d (%d%%) no %d"
 
 msgid "No node information"

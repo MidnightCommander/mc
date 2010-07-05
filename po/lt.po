@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -1688,11 +1688,8 @@ msgstr " Blokas didelis, gali nepavykti atšaukti šio veiksmo. "
 msgid "Replace"
 msgstr "Pa&keisti"
 
-msgid " Replace "
-msgstr " Pakeisti "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " Atlikta %ld pakeitimų. "
 
 msgid "Quit"
@@ -1828,6 +1825,9 @@ msgstr " Įveskite pakeitimo eilutę:"
 
 msgid " Enter search string:"
 msgstr " Įveskite ieškomą eilutę:"
+
+msgid " Replace "
+msgstr " Pakeisti "
 
 #, fuzzy
 msgid "&Find all"
@@ -2946,6 +2946,10 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC nesugebėjo įrašyti ~/%s failo, jūsų seni sąrašai nebuvo ištrinti"
 
+#, fuzzy
+msgid "Information"
+msgstr " Informacija "
+
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
@@ -2954,8 +2958,8 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Failas:   %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Laisvi mazgai: %d (%d%%) iš %d"
 
 msgid "No node information"

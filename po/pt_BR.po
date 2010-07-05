@@ -1,13 +1,13 @@
 # Brazilian Portuguese translations of mc
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Sandro Henrique <sandro@conectiva.com.br>, 1999.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-04 23:20+0400\n"
+"POT-Creation-Date: 2010-07-05 22:31+0400\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -970,7 +970,8 @@ msgstr ""
 "   Diálogos    : dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Ajuda:        helpnormal, helpitalic, helplink, helpslink\n"
-"   Tipos de arq.:directory, executable, link, stalelink, device, special, core\n"
+"   Tipos de arq.:directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Cores:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1011,7 +1012,8 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Por favor envie qualquer relatório de problemas (incluindo a saída de 'mn - V')\n"
+"Por favor envie qualquer relatório de problemas (incluindo a saída de 'mn - "
+"V')\n"
 "a mc-devel@gnome.org\n"
 
 #, fuzzy, c-format
@@ -1171,7 +1173,9 @@ msgid "Symbolic link filename:"
 msgstr "Nome do arquivo de ligação simbólica"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Nome do arquivo existente (nome do arquivo para o qual a ligação irá apontar):"
+msgstr ""
+"Nome do arquivo existente (nome do arquivo para o qual a ligação irá "
+"apontar):"
 
 msgid "Symbolic link"
 msgstr "Ligação Simbólica"
@@ -1412,7 +1416,8 @@ msgid "&Thorough"
 msgstr "&Através"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " Ambos os painéis devem estar no modo de lista para se usar este comando. "
+msgstr ""
+" Ambos os painéis devem estar no modo de lista para se usar este comando. "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1703,11 +1708,8 @@ msgstr " Bloco é muito grande, talvez esta ação não possa ser desfeita"
 msgid "Replace"
 msgstr "&Substituir"
 
-msgid " Replace "
-msgstr " Substituir "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld substituições feitas "
 
 msgid "Quit"
@@ -1761,7 +1763,9 @@ msgid " Run Sort "
 msgstr "Ordenar"
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Informe as opções de ordenamento (veja a página de manual)  separas por espaços "
+msgstr ""
+" Informe as opções de ordenamento (veja a página de manual)  separas por "
+"espaços "
 
 msgid " Sort "
 msgstr " Ordenar "
@@ -1848,6 +1852,9 @@ msgstr "Digite a expressão de substituição:"
 
 msgid " Enter search string:"
 msgstr "Digite a expressão a ser pesquisada:"
+
+msgid " Replace "
+msgstr " Substituir "
 
 #, fuzzy
 msgid "&Find all"
@@ -2265,7 +2272,10 @@ msgid " %s%s file error"
 msgstr " erro de arquivo "
 
 #, fuzzy, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "Arquivo mc.ext foi alterado na\n"
 "versão 3.0. Parece que a instalação\n"
@@ -2278,7 +2288,10 @@ msgid " ~/%s file error "
 msgstr " erro de arquivo "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2306,7 +2319,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Impossível fazer ligações simbólicas estáveis  entre sistemas de arquivo não locais: \n"
+" Impossível fazer ligações simbólicas estáveis  entre sistemas de arquivo "
+"não locais: \n"
 "\n"
 " Opção de ligações simbólicas estáveis será desligada. "
 
@@ -2945,8 +2959,13 @@ msgid " Hotlist Load "
 msgstr " Carregar Lista"
 
 #, fuzzy, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " a lista antiga não foi sobrescrita"
+
+#, fuzzy
+msgid "Information"
+msgstr " Informação "
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2957,7 +2976,7 @@ msgid "File:       %s"
 msgstr "Arquivo:   %s"
 
 #, fuzzy, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Liberados %d (%d%%) nós de %d"
 
 msgid "No node information"
@@ -3618,7 +3637,8 @@ msgid "Unknown tag on display format: "
 msgstr "Padrão desconhecido no formato de apresentação:"
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
+msgstr ""
+"Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
 
 msgid " Do you really want to execute? "
 msgstr " Você quer realmente executar? "
@@ -4285,8 +4305,11 @@ msgstr "Processo em segundo plano:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Digite a ordem dos argumentos de substituição ex. 3,2,1,4"
 
-#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
-#~ msgstr "Expressão Regular inválida, ou expreesão scanf com muitas conversões"
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ "Expressão Regular inválida, ou expreesão scanf com muitas conversões"
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Erro na expressão de substituição "
