@@ -1,5 +1,5 @@
 
-		FIles transferred over SHell protocol (V 0.0.2)
+		FIles transferred over SHell protocol (V 0.0.3)
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This protocol was designed for transferring files over a remote shell
@@ -17,6 +17,19 @@ information only and will probably vary from implementation to
 implementation. Fish commands always have priority: server is
 expected to execute fish command if it understands it. If it does not,
 however, it can try the luck and execute shell command.
+
+Since version 4.7.3, the scripts that FISH sends to host machines after
+a command is transmitted are no longer hardwired in the Midnight
+Commander source code.
+
+First, mc looks for system-wide set of scripts, then it checks whether
+current user has host-specific overrides in his per-user mc
+configuration folder. User-defined overrides take priority over
+sytem-wide scripts if they exist. The order in which the folders are
+traversed is as follows:
+
+    /usr/libexec/mc/fish
+    ~/.mc/fish/<hostname>/
 
 Server's reply is multiline, but always ends with
 
@@ -158,6 +171,11 @@ chown user /file/name; echo '### 000'
 #CHGRP group /file/name
 chgrp group /file/name; echo '### 000'
 
+#INFO
+...collect info about host into $result ...
+echo $result
+echo '### 200'
+
 #READ <offset> <size> /path/and/filename
 cat /path/and/filename | ( dd bs=4096 count=<offset/4096> > /dev/null;
 dd bs=<offset%4096> count=1 > /dev/null;
@@ -173,6 +191,27 @@ end at eof.
 Hmm, shall we define these ones if we know our client is not going to
 use them?
 
+you can use follow parameters:
+FISH_FILESIZE
+FISH_FILENAME
+FISH_FILEMODE
+FISH_FILEOWNER
+FISH_FILEGROUPE
+FISH_FILEFROM
+FISH_FILETO
+
+NB:
+'FISH_FILESIZE' used if we operate with single file name in 'unlink', 'rmdir', 'chmod', etc...
+'FISH_FILEFROM','FISH_FILETO'  used if we operate with two files in 'ln', 'hardlink', 'mv' etc...
+'FISH_FILEOWNER', 'FISH_FILEGROUPE' is a new user/group in chown
+
+also flags:
+FISH_HAVE_HEAD
+FISH_HAVE_SED
+FISH_HAVE_AWK
+FISH_HAVE_PERL
+FISH_HAVE_LSQ
+FISH_HAVE_DATE_MDYT
 
 That's all, folks!
 						pavel@ucw.cz

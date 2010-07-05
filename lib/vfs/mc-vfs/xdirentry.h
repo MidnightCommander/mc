@@ -34,48 +34,70 @@
 
 
 /* Single connection or archive */
-struct vfs_s_super {
+struct vfs_s_super
+{
     struct vfs_s_super **prevp, *next;
     struct vfs_class *me;
     struct vfs_s_inode *root;
-    char *name;			/* My name, whatever it means */
-    int fd_usage;		/* Number of open files */
-    int ino_usage;		/* Usage count of this superblock */
-    int want_stale;		/* If set, we do not flush cache properly */
+    char *name;                 /* My name, whatever it means */
+    int fd_usage;               /* Number of open files */
+    int ino_usage;              /* Usage count of this superblock */
+    int want_stale;             /* If set, we do not flush cache properly */
 
-    union {
-	struct {
-	    int sockr, sockw;
-	    char *cwdir;
-	    char *host, *user;
-	    char *password;
-	    int flags;
-	} fish;
-	struct {
-	    int sock;
-	    char *cwdir;
-	    char *host, *user;
-	    char *password;
-	    int port;
+    union
+    {
+        struct
+        {
+            int sockr, sockw;
+            char *cwdir;
+            char *host, *user;
+            char *password;
+            int flags;
+            char *scr_ls;
+            char *scr_chmod;
+            char *scr_exists;
+            char *scr_mkdir;
+            char *scr_unlink;
+            char *scr_chown;
+            char *scr_rmdir;
+            char *scr_ln;
+            char *scr_mv;
+            char *scr_hardlink;
+            char *scr_get;
+            char *scr_send;
+            char *scr_append;
+            char *scr_info;
+            int host_flags;
+            char *scr_env;
+        } fish;
+        struct
+        {
+            int sock;
+            char *cwdir;
+            char *host, *user;
+            char *password;
+            int port;
 
-	    char *proxy;		/* proxy server, NULL if no proxy */
-	    int failed_on_login;	/* used to pass the failure reason to upper levels */
-	    int use_passive_connection;
-	    int remote_is_amiga;	/* No leading slash allowed for AmiTCP (Amiga) */
-	    int isbinary;
-	    int cwd_deferred;	/* current_directory was changed but CWD command hasn't
-				   been sent yet */
-	    int strict;		/* ftp server doesn't understand 
-				   "LIST -la <path>"; use "CWD <path>"/
-				   "LIST" instead */
-	    int ctl_connection_busy;
-	} ftp;
-	struct {
-	    int fd;
-	    struct stat st;
-	    int type;		/* Type of the archive */
-	    struct defer_inode *deferred;	/* List of inodes for which another entries may appear */
-	} arch;
+            char *proxy;                /* proxy server, NULL if no proxy */
+            int failed_on_login;        /* used to pass the failure reason to upper levels */
+            int use_passive_connection;
+            int remote_is_amiga;        /* No leading slash allowed for AmiTCP (Amiga) */
+            int isbinary;
+            int cwd_deferred;           /* current_directory was changed but CWD command hasn't
+                                           been sent yet */
+            int strict;                 /* ftp server doesn't understand
+                                         * "LIST -la <path>"; use "CWD <path>"/
+                                         * "LIST" instead
+                                         */
+            int ctl_connection_busy;
+        } ftp;
+        struct
+        {
+            int fd;
+            struct stat st;
+            int type;                     /* Type of the archive */
+            struct defer_inode *deferred; /* List of inodes for which another entries may appear */
+        } arch;
     } u;
 };
 
@@ -83,42 +105,48 @@ struct vfs_s_super {
  * Single virtual file - directory entry.  The same inode can have many
  * entries (i.e. hard links), but usually has only one.
  */
-struct vfs_s_entry {
-    struct vfs_s_entry **prevp, *next;	/* Pointers in the entry list */
-    struct vfs_s_inode *dir;	/* Directory we are in, i.e. our parent */
-    char *name;			/* Name of this entry */
-    struct vfs_s_inode *ino;	/* ... and its inode */
+struct vfs_s_entry
+{
+    struct vfs_s_entry **prevp, *next;  /* Pointers in the entry list */
+    struct vfs_s_inode *dir;    /* Directory we are in, i.e. our parent */
+    char *name;                 /* Name of this entry */
+    struct vfs_s_inode *ino;    /* ... and its inode */
 };
 
 /* Single virtual file - inode */
-struct vfs_s_inode {
-    struct vfs_s_super *super;	/* Archive the file is on */
-    struct vfs_s_entry *ent;	/* Our entry in the parent directory -
-				   use only for directories because they
-				   cannot be hardlinked */
+struct vfs_s_inode
+{
+    struct vfs_s_super *super;  /* Archive the file is on */
+    struct vfs_s_entry *ent;    /* Our entry in the parent directory -
+                                   use only for directories because they
+                                   cannot be hardlinked */
     struct vfs_s_entry *subdir; /* If this is a directory, its entry */
-    struct stat st;		/* Parameters of this inode */
-    char *linkname;		/* Symlink's contents */
-    char *localname;		/* Filename of local file, if we have one */
-    struct timeval timestamp;	/* Subclass specific */
-    long data_offset;		/* Subclass specific */
+    struct stat st;             /* Parameters of this inode */
+    char *linkname;             /* Symlink's contents */
+    char *localname;            /* Filename of local file, if we have one */
+    struct timeval timestamp;   /* Subclass specific */
+    long data_offset;           /* Subclass specific */
 };
 
 /* Data associated with an open file */
-struct vfs_s_fh {
+struct vfs_s_fh
+{
     struct vfs_s_inode *ino;
-    long pos;			/* This is for module's use */
-    int handle;			/* This is for module's use, but if != -1, will be mc_close()d */
-    int changed;		/* Did this file change? */
-    int linear;			/* Is that file open with O_LINEAR? */
-    union {
-	struct {
-	    off_t got, total;
-	    int append;
-	} fish;
-	struct {
-	    int sock, append;
-	} ftp;
+    long pos;                   /* This is for module's use */
+    int handle;                 /* This is for module's use, but if != -1, will be mc_close()d */
+    int changed;                /* Did this file change? */
+    int linear;                 /* Is that file open with O_LINEAR? */
+    union
+    {
+        struct
+        {
+            off_t got, total;
+            int append;
+        } fish;
+        struct
+        {
+            int sock, append;
+        } ftp;
     } u;
 };
 
@@ -126,82 +154,69 @@ struct vfs_s_fh {
  * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
  * Extends vfs_class.  Stored in the "data" field of vfs_class.
  */
-struct vfs_s_subclass {
+struct vfs_s_subclass
+{
     struct vfs_s_super *supers;
     int inode_counter;
-    int flags;		/* whether the subclass is remove, read-only etc */
+    int flags;                  /* whether the subclass is remove, read-only etc */
     dev_t rdev;
     FILE *logfile;
-    int flush;		/* if set to 1, invalidate directory cache */
+    int flush;                  /* if set to 1, invalidate directory cache */
 
-    int (*init_inode) (struct vfs_class *me, struct vfs_s_inode *ino);	/* optional */
-    void (*free_inode) (struct vfs_class *me, struct vfs_s_inode *ino);	/* optional */
-    int (*init_entry) (struct vfs_class *me, struct vfs_s_entry *entry);	/* optional */
+    int (*init_inode) (struct vfs_class * me, struct vfs_s_inode * ino);        /* optional */
+    void (*free_inode) (struct vfs_class * me, struct vfs_s_inode * ino);       /* optional */
+    int (*init_entry) (struct vfs_class * me, struct vfs_s_entry * entry);      /* optional */
 
-    void *(*archive_check) (struct vfs_class *me, const char *name, char *op);	/* optional */
-    int (*archive_same) (struct vfs_class *me, struct vfs_s_super *psup,
-			 const char *archive_name, char *op, void *cookie);
-    int (*open_archive) (struct vfs_class *me, struct vfs_s_super *psup,
-			 const char *archive_name, char *op);
-    void (*free_archive) (struct vfs_class *me,
-			  struct vfs_s_super *psup);
+    void *(*archive_check) (struct vfs_class * me, const char *name, char *op); /* optional */
+    int (*archive_same) (struct vfs_class * me, struct vfs_s_super * psup,
+                         const char *archive_name, char *op, void *cookie);
+    int (*open_archive) (struct vfs_class * me, struct vfs_s_super * psup,
+                         const char *archive_name, char *op);
+    void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);
 
-    int (*fh_open) (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
-		    int mode);
-    int (*fh_close) (struct vfs_class *me, struct vfs_s_fh *fh);
+    int (*fh_open) (struct vfs_class * me, struct vfs_s_fh * fh, int flags, int mode);
+    int (*fh_close) (struct vfs_class * me, struct vfs_s_fh * fh);
 
-    struct vfs_s_entry *(*find_entry) (struct vfs_class *me,
-				       struct vfs_s_inode *root,
-				       const char *path, int follow, int flags);
-    int (*dir_load) (struct vfs_class *me, struct vfs_s_inode *ino,
-		     char *path);
-    int (*dir_uptodate) (struct vfs_class *me, struct vfs_s_inode *ino);
-    int (*file_store) (struct vfs_class *me, struct vfs_s_fh *fh,
-		       char *path, char *localname);
+    struct vfs_s_entry *(*find_entry) (struct vfs_class * me,
+                                       struct vfs_s_inode * root,
+                                       const char *path, int follow, int flags);
+    int (*dir_load) (struct vfs_class * me, struct vfs_s_inode * ino, char *path);
+    int (*dir_uptodate) (struct vfs_class * me, struct vfs_s_inode * ino);
+    int (*file_store) (struct vfs_class * me, struct vfs_s_fh * fh, char *path, char *localname);
 
-    int (*linear_start) (struct vfs_class *me, struct vfs_s_fh *fh,
-			 off_t from);
-    int (*linear_read) (struct vfs_class *me, struct vfs_s_fh *fh,
-			void *buf, int len);
-    void (*linear_close) (struct vfs_class *me, struct vfs_s_fh *fh);
+    int (*linear_start) (struct vfs_class * me, struct vfs_s_fh * fh, off_t from);
+    int (*linear_read) (struct vfs_class * me, struct vfs_s_fh * fh, void *buf, int len);
+    void (*linear_close) (struct vfs_class * me, struct vfs_s_fh * fh);
 };
 
 
 /* entries and inodes */
 struct vfs_s_inode *vfs_s_new_inode (struct vfs_class *me,
-				     struct vfs_s_super *super,
-				     struct stat *initstat);
+                                     struct vfs_s_super *super, struct stat *initstat);
 struct vfs_s_entry *vfs_s_new_entry (struct vfs_class *me, const char *name,
-				     struct vfs_s_inode *inode);
+                                     struct vfs_s_inode *inode);
 void vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent);
-void vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir,
-			 struct vfs_s_entry *ent);
+void vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_entry *ent);
 struct stat *vfs_s_default_stat (struct vfs_class *me, mode_t mode);
 
 struct vfs_s_entry *vfs_s_generate_entry (struct vfs_class *me, const char *name,
-					  struct vfs_s_inode *parent,
-					  mode_t mode);
+                                          struct vfs_s_inode *parent, mode_t mode);
 struct vfs_s_inode *vfs_s_find_inode (struct vfs_class *me,
-				      const struct vfs_s_super *super,
-				      const char *path, int follow, int flags);
-struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me,
-				     struct vfs_s_entry *entry);
+                                      const struct vfs_s_super *super,
+                                      const char *path, int follow, int flags);
+struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *entry);
 
 /* outside interface */
-void vfs_s_init_class (struct vfs_class *vclass,
-		       struct vfs_s_subclass *sub);
+void vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub);
 const char *vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
-			     struct vfs_s_super **archive, int flags);
+                                   struct vfs_s_super **archive, int flags);
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);
 char *vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino);
 
 /* network filesystems support */
 int vfs_s_select_on_two (int fd1, int fd2);
-int vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len,
-		    char term);
-int vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer,
-				  int size, int fd);
-
+int vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char term);
+int vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int fd);
 /* misc */
 int vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino);
 

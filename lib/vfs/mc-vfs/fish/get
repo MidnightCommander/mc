@@ -1,0 +1,14 @@
+#RETR $FISH_FILENAME
+FILENAME="/${FISH_FILENAME}"
+export LC_TIME=C
+if dd if="${FILENAME}" of=/dev/null bs=1 count=1 2>/dev/null ; then
+    ls -ln "${FILENAME}" 2>/dev/null | (
+       read p l u g s r
+       echo $s
+    )
+    echo "### 100"
+    cat "${FILENAME}"
+    echo "### 200"
+else
+    echo "### 500"
+fi
