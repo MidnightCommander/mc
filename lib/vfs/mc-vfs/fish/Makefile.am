@@ -7,4 +7,4 @@ fish_DATA = $(FISH_MISC)
 fish_SCRIPTS = ls mkdir fexists unlink chown chmod rmdir ln mv hardlink get send append info
 fishconfdir = $(sysconfdir)/@PACKAGE@
 
-EXTRA_DIST = $(FISH_MISC)
+EXTRA_DIST = $(FISH_MISC) $(fish_SCRIPTS)
