@@ -1,3 +1,32 @@
+Version 4.7.0.7
+
+- Core
+
+    * States of all 'Find File' dialog checkboxes are saved in user configuration file (backport form 4.7.1) (#1874)
+    * Interactive help is displayed with dynamically run-time formatting (backport form 4.7.2) (#1561)
+
+- Editor
+
+    * Added highlighting for HTTPS URLs in SPEC files (#1446) 
+
+- Misc
+
+    * Code cleanups (#2255)
+    * Translation updates
+
+Fixes
+
+    * AC_TRY_RUN macro breaks crosscompile (#1959)
+    * Buttonbar mouse clicks are off (#2199)
+    * Incorrect button locations in common input dialogs (#2115)
+    * Info panel is initially filled too late (#2226)
+    * Editor hangup if editor_tab_spacing equals to 0 (#2196)
+    * Viewer segfaults trying open a compressed man page file (#2236)
+    * Editor shows dots instead of letters if source_codepage is set to "No translation" (#2248)
+    * Editor goes to endless loop when trying to replace the \n regexp with any substring (#2231)
+    * Editor: in some cases the copy/move operation in multi-byte text is wrong (#2153)
+
+
 Version 4.7.0.6
 
 - Core
