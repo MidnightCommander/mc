@@ -1396,9 +1396,12 @@ edit_delete (WEdit * edit, const int byte_delete)
     }
     for (i = 1; i <= cw; i++)
     {
-        edit->mark1 -= (edit->mark1 > edit->curs1);
-        edit->mark2 -= (edit->mark2 > edit->curs1);
-        edit->last_get_rule -= (edit->last_get_rule > edit->curs1);
+        if (edit->mark1 > edit->curs1)
+            edit->mark1--;
+        if (edit->mark2 > edit->curs1)
+            edit->mark2--;
+        if (edit->last_get_rule > edit->curs1)
+            edit->last_get_rule--;
 
         p = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE -
                                                                  ((edit->curs2 -
@@ -1453,9 +1456,12 @@ edit_backspace (WEdit * edit, const int byte_delete)
     }
     for (i = 1; i <= cw; i++)
     {
-        edit->mark1 -= (edit->mark1 >= edit->curs1);
-        edit->mark2 -= (edit->mark2 >= edit->curs1);
-        edit->last_get_rule -= (edit->last_get_rule >= edit->curs1);
+        if (edit->mark1 >= edit->curs1)
+            edit->mark1--;
+        if (edit->mark1 >= edit->curs1)
+            edit->mark2--;
+        if (edit->last_get_rule >= edit->curs1)
+            edit->last_get_rule--;
 
         p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] +
               ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
