@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.x\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2010-06-08 12:00-0000\n"
 "Last-Translator: Sebastian Siebert <freespacer@gmx.de>\n"
 "Language-Team: German <freespacer@gmx.de>\n"
@@ -303,11 +303,12 @@ msgstr "Unterstrich"
 msgid "Pipe"
 msgstr "Pipe"
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
-msgstr ""
+#, fuzzy
+msgid "Right parenthesis"
+msgstr "Cursor rechts"
 
 #, fuzzy
 msgid "Left bracket"
@@ -505,6 +506,10 @@ msgstr "fish: Sende erste Zeile..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: Tausche Versionsnummer aus..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Sende erste Zeile..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Stelle aktuelles Verzeichnis ein..."
@@ -1050,7 +1055,8 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr "Keine Argumente an den Viewer übergeben."
 
-msgid "There 2 files are required to diffviewer."
+#, fuzzy
+msgid "Two files are required to evoke the diffviewer."
 msgstr "2 Dateien werden für den Diffviewer benötigt."
 
 msgid "Main options"

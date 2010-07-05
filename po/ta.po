@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -288,10 +288,10 @@ msgstr ""
 msgid "Pipe"
 msgstr ""
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
+msgid "Right parenthesis"
 msgstr ""
 
 msgid "Left bracket"
@@ -470,6 +470,9 @@ msgid "fish: Sending initial line..."
 msgstr ""
 
 msgid "fish: Handshaking version..."
+msgstr ""
+
+msgid "fish: Getting host info..."
 msgstr ""
 
 msgid "fish: Setting up current directory..."
@@ -975,7 +978,7 @@ msgstr "கனூ நள்ளிரவு ஆணையாலர் (GNU Midnigh
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "There 2 files are required to diffviewer."
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 #, fuzzy

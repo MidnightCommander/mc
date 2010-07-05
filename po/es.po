@@ -2,12 +2,12 @@
 # Copyright (C) 1998-2010 Free Software Foundation, Inc.
 # David Martín <dmartina@excite.com>, 1998-2010.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.3\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-27 00:12+0200\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2010-06-27 01:00+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -295,10 +295,12 @@ msgstr "Guión bajo"
 msgid "Pipe"
 msgstr "Tubería"
 
-msgid "Left parenthese"
+#, fuzzy
+msgid "Left parenthesis"
 msgstr "Paréntesis izquierdo"
 
-msgid "Right parenthese"
+#, fuzzy
+msgid "Right parenthesis"
 msgstr "Paréntesis derecho"
 
 msgid "Left bracket"
@@ -491,6 +493,10 @@ msgstr "fish: Enviando línea de inicio..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: Negociando versión..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Enviando línea de inicio..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Preparando directorio actual..."
@@ -986,7 +992,8 @@ msgstr ""
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                       errdhotnormal, errdhotfocus\n"
-"   Menús:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -1036,7 +1043,8 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr "No se han pasado argumentos al visor."
 
-msgid "There 2 files are required to diffviewer."
+#, fuzzy
+msgid "Two files are required to evoke the diffviewer."
 msgstr "Se necesitan dos archivos para comparar."
 
 msgid "Main options"
@@ -1103,8 +1111,7 @@ msgstr "Ordenar"
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "borrar &Historia"
@@ -2311,7 +2318,10 @@ msgid " %s%s file error"
 msgstr " error en el archivo %s%s "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "El archivo %smc.ext ha cambiado con la versión 3.0.\n"
 "Parece que la instalación falló. Por favor, trate\n"
@@ -2323,7 +2333,10 @@ msgid "~/%s file error"
 msgstr "error en el archivo ~/%s"
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0. You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "El archivo ~/%s ha cambiado con la versión 3.0.\n"
 "Puede hacer una copia de %smc.ext o bien emplearlo\n"

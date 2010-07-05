@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2010-04-26 00:31+0900\n"
 "Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
 "Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
@@ -300,11 +300,12 @@ msgstr "아래언더라인키"
 msgid "Pipe"
 msgstr "| 키"
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
-msgstr ""
+#, fuzzy
+msgid "Right parenthesis"
+msgstr "오른쪽 방향키"
 
 #, fuzzy
 msgid "Left bracket"
@@ -500,6 +501,10 @@ msgstr "fish: 초기 라인 전송중..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: 핸드 쉐이킹 버전..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: 초기 라인 전송중..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: 현재 디렉터리의 설정..."
@@ -1066,7 +1071,7 @@ msgstr "GNU 미드나잇 코맨더 %s\n"
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "There 2 files are required to diffviewer."
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Main options"

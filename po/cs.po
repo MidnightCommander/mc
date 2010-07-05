@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2010-03-14 14:00+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -304,11 +304,12 @@ msgstr "Podtržení"
 msgid "Pipe"
 msgstr "Roura"
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
-msgstr ""
+#, fuzzy
+msgid "Right parenthesis"
+msgstr "Šipka vpravo"
 
 #, fuzzy
 msgid "Left bracket"
@@ -506,6 +507,10 @@ msgstr "fish: Počáteční řádka odeslána..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: Domlouvání verze..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Počáteční řádka odeslána..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Nastavování aktuálního adresáře..."
@@ -1075,7 +1080,7 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "There 2 files are required to diffviewer."
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Main options"

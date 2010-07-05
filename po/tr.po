@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -302,11 +302,12 @@ msgstr ""
 msgid "Pipe"
 msgstr ""
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
-msgstr ""
+#, fuzzy
+msgid "Right parenthesis"
+msgstr "Gri sağa ok tuşu"
 
 #, fuzzy
 msgid "Left bracket"
@@ -514,6 +515,10 @@ msgstr "fish: Satır gönderimi..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: Sürüm anlaşması..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Satır gönderimi..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Çalışma dizini belirlenmesi..."
@@ -1086,7 +1091,7 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "There 2 files are required to diffviewer."
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 #, fuzzy

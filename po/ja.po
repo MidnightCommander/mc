@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -301,11 +301,12 @@ msgstr ""
 msgid "Pipe"
 msgstr ""
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
-msgstr ""
+#, fuzzy
+msgid "Right parenthesis"
+msgstr "右矢印"
 
 #, fuzzy
 msgid "Left bracket"
@@ -509,6 +510,10 @@ msgstr "fish: 最初の行を送信..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: バージョンのハンドシェイク..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: 最初の行を送信..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: カレントディレクトリを設定します..."
@@ -1077,7 +1082,7 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "There 2 files are required to diffviewer."
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 #, fuzzy

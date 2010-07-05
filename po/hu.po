@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: SZABO Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -301,11 +301,12 @@ msgstr "Aláhúzás"
 msgid "Pipe"
 msgstr "Cső"
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
-msgstr ""
+#, fuzzy
+msgid "Right parenthesis"
+msgstr "<Jobbra> gomb"
 
 #, fuzzy
 msgid "Left bracket"
@@ -505,6 +506,10 @@ msgstr "Fish: kezdősor küldése..."
 
 msgid "fish: Handshaking version..."
 msgstr "Fish: verzióegyeztetés..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "Fish: kezdősor küldése..."
 
 msgid "fish: Setting up current directory..."
 msgstr "Fish: aktuális könyvtár beállítása..."
@@ -1086,7 +1091,7 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "There 2 files are required to diffviewer."
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Main options"

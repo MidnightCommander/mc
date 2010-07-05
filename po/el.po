@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -296,11 +296,12 @@ msgstr ""
 msgid "Pipe"
 msgstr ""
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
-msgstr ""
+#, fuzzy
+msgid "Right parenthesis"
+msgstr "Δεξί βέλος"
 
 #, fuzzy
 msgid "Left bracket"
@@ -494,6 +495,10 @@ msgstr ""
 
 msgid "fish: Handshaking version..."
 msgstr ""
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
 
 #, fuzzy
 msgid "fish: Setting up current directory..."
@@ -1023,7 +1028,7 @@ msgstr "Η ομάδα του Midnight Commander"
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "There 2 files are required to diffviewer."
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 #, fuzzy

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2010-06-27 17:41+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
@@ -296,10 +296,12 @@ msgstr "Przekreślenie"
 msgid "Pipe"
 msgstr "Potok"
 
-msgid "Left parenthese"
+#, fuzzy
+msgid "Left parenthesis"
 msgstr "Lewy nawias okrągły"
 
-msgid "Right parenthese"
+#, fuzzy
+msgid "Right parenthesis"
 msgstr "Prawy nawias okrągły"
 
 msgid "Left bracket"
@@ -492,6 +494,10 @@ msgstr "fish: wysyłanie wiersza początkowego..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: ustalanie wersji..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: wysyłanie wiersza początkowego..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: ustawianie bieżącego katalogu..."
@@ -1039,7 +1045,8 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr "Nie podano parametrów dla przeglądarki."
 
-msgid "There 2 files are required to diffviewer."
+#, fuzzy
+msgid "Two files are required to evoke the diffviewer."
 msgstr "Program diffviewer wymaga dwóch plików."
 
 msgid "Main options"

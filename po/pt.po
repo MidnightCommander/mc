@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-06-22 21:46+0400\n"
+"POT-Creation-Date: 2010-07-05 21:43+0400\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -300,11 +300,12 @@ msgstr ""
 msgid "Pipe"
 msgstr ""
 
-msgid "Left parenthese"
+msgid "Left parenthesis"
 msgstr ""
 
-msgid "Right parenthese"
-msgstr ""
+#, fuzzy
+msgid "Right parenthesis"
+msgstr "Tecla seta direita"
 
 #, fuzzy
 msgid "Left bracket"
@@ -511,6 +512,10 @@ msgstr "fish: A enviar linha inicial..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: Versão de protocolo (handshacking)..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: A enviar linha inicial..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: A definir directório actual..."
@@ -1084,7 +1089,7 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "There 2 files are required to diffviewer."
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 #, fuzzy
