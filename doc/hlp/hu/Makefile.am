@@ -1,9 +1,9 @@
-LANG=hu
+MANLANG=hu
 MAN2HLP=$(top_builddir)/src/man2hlp/man2hlp
-pkgdata_DATA = mc.hlp.$(LANG)
+pkgdata_DATA = mc.hlp.$(MANLANG)
 
 EXTRA_DIST = xnc.hlp
 CLEANFILES = $(pkgdata_DATA)
 
-mc.hlp.$(LANG): $(top_builddir)/doc/man/$(LANG)/mc.1 $(srcdir)/xnc.hlp $(MAN2HLP)
-	- $(MAN2HLP) $(top_builddir)/doc/man/$(LANG)/mc.1 $(srcdir)/xnc.hlp mc.hlp.$(LANG)
+mc.hlp.$(MANLANG): $(top_builddir)/doc/man/$(MANLANG)/mc.1 $(srcdir)/xnc.hlp $(MAN2HLP)
+	- $(MAN2HLP) $(top_builddir)/doc/man/$(MANLANG)/mc.1 $(srcdir)/xnc.hlp mc.hlp.$(MANLANG)

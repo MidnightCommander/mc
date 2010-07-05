@@ -64,25 +64,20 @@ strutils_escape (const char *src, gsize src_len, const char *escaped_chars,
         src_len = strlen (src);
 
     for (curr_index = 0; curr_index < src_len; curr_index++) {
-
         if (escape_non_printable) {
             switch (src[curr_index]) {
             case '\n':
                 g_string_append (ret, "\\n");
                 continue;
-                break;
             case '\t':
                 g_string_append (ret, "\\t");
                 continue;
-                break;
             case '\b':
                 g_string_append (ret, "\\b");
                 continue;
-                break;
             case '\0':
                 g_string_append (ret, "\\0");
                 continue;
-                break;
             }
         }
 
@@ -124,19 +119,15 @@ strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
             case 'n':
                 g_string_append_c (ret, '\n');
                 continue;
-                break;
             case 't':
                 g_string_append_c (ret, '\t');
                 continue;
-                break;
             case 'b':
                 g_string_append_c (ret, '\b');
                 continue;
-                break;
             case '0':
                 g_string_append (ret, '\0');
                 continue;
-                break;
             }
         }
         if (strchr (unescaped_chars, (int) src[curr_index]) == NULL)

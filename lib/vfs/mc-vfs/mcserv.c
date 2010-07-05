@@ -1397,11 +1397,3 @@ main (int argc, char *argv[])
     }
     exit (return_code);
 }
-
-/* FIXME: This function should not be used in mcserv */
-void
-vfs_die (const char *m)
-{
-    fputs (m, stderr);
-    exit (EXIT_FAILURE);
-}

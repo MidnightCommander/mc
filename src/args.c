@@ -495,7 +495,7 @@ mc_setup_by_args (int argc, char *argv[])
 
         if (argc < 3)
         {
-            fprintf (stderr, "%s\n", _("There 2 files are required to diffviewer."));
+            fprintf (stderr, "%s\n", _("Two files are required to evoke the diffviewer."));
             exit (EXIT_FAILURE);
         }
 

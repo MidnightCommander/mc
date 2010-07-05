@@ -94,10 +94,11 @@ send_contents (char *buffer, unsigned int columns, unsigned int rows)
         end_line = lastline;
 
     lc_index = (end_line - begin_line) * columns;
+    bytes = lc_index;
 
     if (write (1, &bytes, 2) != 2)
         return;
-    if (!bytes)
+    if (bytes == 0)
         return;
 
     p = outbuf;

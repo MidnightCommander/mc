@@ -74,7 +74,6 @@ mc_search__normal_translate_to_regex (gchar * str, gsize * len)
             g_string_append_c (buff, str[loop]);
             loop++;
             continue;
-            break;
         }
         g_string_append_c (buff, str[loop]);
         loop++;
