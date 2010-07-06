@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-07-05 22:31+0400\n"
-"PO-Revision-Date: 2010-06-05 06:35+0200\n"
+"PO-Revision-Date: 2010-07-06 20:16+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -1662,9 +1662,9 @@ msgstr " Z powodu wielkości bloku cofnięcie działania może być niemożliwe.
 msgid "Replace"
 msgstr "Zastąp"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%ld replacements made"
-msgstr " Wykonano %ld zastąpień. "
+msgstr "Wykonano %ld zastąpień"
 
 msgid "Quit"
 msgstr "Zakończ"
@@ -2855,9 +2855,8 @@ msgstr ""
 "Program MC nie może zapisać do pliku ~/%s. Poprzednie wpisy listy "
 "podręcznych katalogów nie zostały usunięte"
 
-#, fuzzy
 msgid "Information"
-msgstr " Informacje "
+msgstr "Informacje"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2867,9 +2866,9 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Plik:       %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Wolne węzły: %d (%d%%) z %d"
+msgstr "Wolne węzły: %ld (%ld%%) z %ld"
 
 msgid "No node information"
 msgstr "Brak informacji o węźle"
