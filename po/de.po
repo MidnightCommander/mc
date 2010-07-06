@@ -304,26 +304,22 @@ msgid "Pipe"
 msgstr "Pipe"
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "Klammer links"
 
-#, fuzzy
 msgid "Right parenthesis"
-msgstr "Cursor rechts"
+msgstr "Klammer rechts"
 
-#, fuzzy
 msgid "Left bracket"
-msgstr "Cursor links"
+msgstr "Eckige Klammer links"
 
-#, fuzzy
 msgid "Right bracket"
-msgstr "Cursor rechts"
+msgstr "Eckige Klammer rechts"
 
 msgid "Left brace"
-msgstr ""
+msgstr "Geschw. Klammer links"
 
-#, fuzzy
 msgid "Right brace"
-msgstr "Cursor rechts"
+msgstr "Geschw. Klammer rechts"
 
 msgid "Enter"
 msgstr "Enter"
@@ -507,9 +503,8 @@ msgstr "fish: Sende erste Zeile..."
 msgid "fish: Handshaking version..."
 msgstr "fish: Tausche Versionsnummer aus..."
 
-#, fuzzy
 msgid "fish: Getting host info..."
-msgstr "fish: Sende erste Zeile..."
+msgstr "fish: Hole Hostinformation..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Stelle aktuelles Verzeichnis ein..."
@@ -1055,9 +1050,8 @@ msgstr "GNU Midnight Commander %s\n"
 msgid "No arguments given to the viewer."
 msgstr "Keine Argumente an den Viewer übergeben."
 
-#, fuzzy
 msgid "Two files are required to evoke the diffviewer."
-msgstr "2 Dateien werden für den Diffviewer benötigt."
+msgstr "2 Dateien werden benötigt, um den Diffviewer aufzurufen."
 
 msgid "Main options"
 msgstr "Hauptoptionen"
@@ -1535,7 +1529,7 @@ msgid "The shell is already running a command"
 msgstr "Die Shell führt bereits einen Befehl aus"
 
 msgid "Screens"
-msgstr ""
+msgstr "Bildschirme"
 
 msgid "&Dismiss"
 msgstr "S&chließen"
@@ -1659,17 +1653,18 @@ msgstr "ButtonBar|Beenden"
 msgid "Quit"
 msgstr "Beenden"
 
-#, fuzzy
 msgid "File was modified. Save with exit?"
-msgstr "Datei wurde geändert, beim Beenden speichern?"
+msgstr "Datei wurde geändert. Beim Beenden speichern?"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
+"Midnight Commander wird beendet.\n"
+"Modifizierte Datei speichern?"
 
 msgid "Diff:"
-msgstr ""
+msgstr "Diff:"
 
 msgid "Two files are needed to compare"
 msgstr "2 Dateien sind zum Vergleichen erforderlich"
@@ -2257,9 +2252,8 @@ msgstr "Automatischer Umbruch"
 msgid "Editor options"
 msgstr "Editoroptionen"
 
-#, fuzzy
 msgid "Edit: "
-msgstr "&Bearbeiten"
+msgstr "Bearbeiten: "
 
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|Markieren"
@@ -3222,8 +3216,8 @@ msgstr "oder arbeiten Sie mit der Maus, um sie zu definieren. "
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Es ist %zd offener Bildschirm. Trotzdem beenden?"
+msgstr[1] "Es sind %zd offene Bildschirme. Trotzdem beenden?"
 
 msgid "The Midnight Commander"
 msgstr "Der Midnight Commander"
@@ -3361,7 +3355,7 @@ msgid "&Background jobs"
 msgstr "Hintergrund-Aufga&ben"
 
 msgid "Screen lis&t"
-msgstr ""
+msgstr "Bildschirm&liste"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "Löschen rückgängig (nur ext2fs)"
@@ -3408,9 +3402,8 @@ msgstr "&Unten"
 msgid "&Right"
 msgstr "&Rechts"
 
-#, fuzzy
 msgid "Panels:"
-msgstr "Panelaufteilung"
+msgstr "Panels:"
 
 msgid "ButtonBar|Menu"
 msgstr "ButtonBar|Menü"
@@ -4003,9 +3996,8 @@ msgstr ""
 "Kann Datei nicht speichern:\n"
 "%s"
 
-#, fuzzy
 msgid "View: "
-msgstr "&Ansicht"
+msgstr "Ansicht: "
 
 #, c-format
 msgid ""
