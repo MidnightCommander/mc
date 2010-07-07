@@ -116,7 +116,7 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
 static GString *
 mc_search__translate_replace_glob_to_regex (gchar *str)
 {
-    GString *buff = g_string_new ("");
+    GString *buff = g_string_sized_new (32);
     int cnt = '0';
 
     gboolean escaped_mode = FALSE;
