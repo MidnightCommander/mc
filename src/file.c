@@ -877,7 +877,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     struct link *lp;
     char *d;
 
-    d = strutils_shell_unescape (_d);
+    d = g_strdup (_d);
 
     /* First get the mode of the source dir */
   retry_src_stat:

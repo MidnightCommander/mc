@@ -136,6 +136,8 @@ mc_search__translate_replace_glob_to_regex (gchar * str)
             {
                 escaped_mode = TRUE;
                 continue;
+            } else {
+                g_string_append_c (buff, c);
             }
             break;
         case '*':
