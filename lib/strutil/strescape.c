@@ -39,7 +39,7 @@
 
 static const char ESCAPE_SHELL_CHARS[] = " !#$%()&{}[]`?|<>;*\\\"'";
 static const char ESCAPE_REGEX_CHARS[] = "^!#$%()&{}[]`?|<>;*.\\";
-static const char ESCAPE_GLOB_CHARS[]  = "$*\\?";
+static const char ESCAPE_GLOB_CHARS[] = "$*\\?";
 
 /*** file scope functions ************************************************************************/
 
@@ -60,12 +60,15 @@ strutils_escape (const char *src, gsize src_len, const char *escaped_chars,
 
     ret = g_string_new ("");
 
-    if (src_len == (gsize)-1)
+    if (src_len == (gsize) - 1)
         src_len = strlen (src);
 
-    for (curr_index = 0; curr_index < src_len; curr_index++) {
-        if (escape_non_printable) {
-            switch (src[curr_index]) {
+    for (curr_index = 0; curr_index < src_len; curr_index++)
+    {
+        if (escape_non_printable)
+        {
+            switch (src[curr_index])
+            {
             case '\n':
                 g_string_append (ret, "\\n");
                 continue;
@@ -92,7 +95,7 @@ strutils_escape (const char *src, gsize src_len, const char *escaped_chars,
 /* --------------------------------------------------------------------------------------------- */
 char *
 strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
-                 gboolean unescape_non_printable)
+                   gboolean unescape_non_printable)
 {
     GString *ret;
     gsize curr_index;
@@ -105,17 +108,21 @@ strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
 
     ret = g_string_new ("");
 
-    if (src_len == (gsize)-1)
+    if (src_len == (gsize) - 1)
         src_len = strlen (src);
 
-    for (curr_index = 0; curr_index < src_len-1; curr_index++) {
-        if (src[curr_index] != '\\'){
+    for (curr_index = 0; curr_index < src_len - 1; curr_index++)
+    {
+        if (src[curr_index] != '\\')
+        {
             g_string_append_c (ret, src[curr_index]);
             continue;
         }
         curr_index++;
-        if (unescape_non_printable) {
-            switch (src[curr_index]) {
+        if (unescape_non_printable)
+        {
+            switch (src[curr_index])
+            {
             case 'n':
                 g_string_append_c (ret, '\n');
                 continue;
@@ -139,6 +146,7 @@ strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
 
     return g_string_free (ret, FALSE);
 }
+
 /* --------------------------------------------------------------------------------------------- */
 
 /** To be compatible with the general posix command lines we have to escape
@@ -228,7 +236,8 @@ strutils_is_char_escaped (const char *start, const char *current)
         return FALSE;
 
     current--;
-    while (current >= start && *current == '\\') {
+    while (current >= start && *current == '\\')
+    {
         num_esc++;
         current--;
     }
