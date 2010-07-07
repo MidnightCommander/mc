@@ -131,6 +131,8 @@ create_command_menu (void)
         g_list_append (entries, menu_entry_create (_("&Toggle line state"), CK_Toggle_Line_State));
     entries =
         g_list_append (entries, menu_entry_create (_("Go to matching &bracket"), CK_Match_Bracket));
+    entries =
+        g_list_append (entries, menu_entry_create (_("Toggle s&yntax highlighting"), CK_Toggle_Syntax));
     entries = g_list_append (entries, menu_separator_create ());
     entries =
         g_list_append (entries, menu_entry_create (_("&Find declaration"), CK_Find_Definition));
