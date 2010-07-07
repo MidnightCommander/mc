@@ -54,31 +54,37 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
     gsize orig_len = *len;
     gsize loop = 0;
     gboolean inside_group = FALSE;
-    while (loop < orig_len) {
-        switch (str[loop]) {
+    while (loop < orig_len)
+    {
+        switch (str[loop])
+        {
         case '*':
-            if (!strutils_is_char_escaped (str, &(str[loop]))) {
+            if (!strutils_is_char_escaped (str, &(str[loop])))
+            {
                 g_string_append (buff, (inside_group) ? ".*" : "(.*)");
                 loop++;
                 continue;
             }
             break;
         case '?':
-            if (!strutils_is_char_escaped (str, &(str[loop]))) {
+            if (!strutils_is_char_escaped (str, &(str[loop])))
+            {
                 g_string_append (buff, (inside_group) ? "." : "(.)");
                 loop++;
                 continue;
             }
             break;
         case ',':
-            if (!strutils_is_char_escaped (str, &(str[loop]))) {
+            if (!strutils_is_char_escaped (str, &(str[loop])))
+            {
                 g_string_append (buff, "|");
                 loop++;
                 continue;
             }
             break;
         case '{':
-            if (!strutils_is_char_escaped (str, &(str[loop]))) {
+            if (!strutils_is_char_escaped (str, &(str[loop])))
+            {
                 g_string_append (buff, "(");
                 inside_group = TRUE;
                 loop++;
@@ -86,7 +92,8 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
             }
             break;
         case '}':
-            if (!strutils_is_char_escaped (str, &(str[loop]))) {
+            if (!strutils_is_char_escaped (str, &(str[loop])))
+            {
                 g_string_append (buff, ")");
                 inside_group = FALSE;
                 loop++;
@@ -114,26 +121,42 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_search__translate_replace_glob_to_regex (gchar *str)
+mc_search__translate_replace_glob_to_regex (gchar * str)
 {
-    GString *buff = g_string_new ("");
+    GString *buff = g_string_sized_new (32);
     int cnt = '0';
-
-    while (*str) {
-	char c = *str++;
-	switch (c) {
-	case '*':
-	case '?':
-	    g_string_append_c (buff, '\\');
-	    c = ++cnt;
-	    break;
-	/* breaks copying: mc uses "\0" internally, it must not be changed */
-	/*case '\\':*/
-	case '&':
-	    g_string_append_c (buff, '\\');
-	    break;
-	}
-	g_string_append_c (buff, c);
+    gboolean escaped_mode = FALSE;
+    while (*str)
+    {
+        char c = *str++;
+        switch (c)
+        {
+        case '\\':
+            if (!escaped_mode)
+            {
+                escaped_mode = TRUE;
+                continue;
+            } else {
+                g_string_append_c (buff, c);
+            }
+            break;
+        case '*':
+        case '?':
+            if (!escaped_mode)
+            {
+                g_string_append_c (buff, '\\');
+                c = ++cnt;
+                continue;
+            }
+            break;
+            /* breaks copying: mc uses "\0" internally, it must not be changed */
+            /*case '\\': */
+        case '&':
+            g_string_append_c (buff, '\\');
+            break;
+        }
+        g_string_append_c (buff, c);
+        escaped_mode = FALSE;
     }
     return buff;
 }
@@ -149,7 +172,8 @@ mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_s
 
     g_string_free (mc_search_cond->str, TRUE);
 
-    if (lc_mc_search->is_entire_line) {
+    if (lc_mc_search->is_entire_line)
+    {
         g_string_prepend_c (tmp, '^');
         g_string_append_c (tmp, '$');
     }
@@ -174,7 +198,7 @@ mc_search__run_glob (mc_search_t * lc_mc_search, const void *user_data,
 GString *
 mc_search_glob_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
 {
-    GString *repl = mc_search__translate_replace_glob_to_regex(replace_str->str);
+    GString *repl = mc_search__translate_replace_glob_to_regex (replace_str->str);
     GString *res = mc_search_regex_prepare_replace_str (lc_mc_search, repl);
     g_string_free (repl, TRUE);
     return res;
