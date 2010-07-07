@@ -365,6 +365,8 @@ A useful hint is to work with as much as possible with the things you
 can do rather than try to do things that this implementation cannot deal
 with.  Also remember that the aim of syntax highlighting is to make
 programming less prone to error, not to make code look pretty.
+.PP
+The syntax highlighting can be toggled using Ctrl\-s shortcut.
 .SH COLORS
 The default colors may be changed by appending to the
 .B MC_COLOR_TABLE
