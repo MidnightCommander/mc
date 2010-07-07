@@ -211,6 +211,7 @@ CmdUserMenu = f2
 CmdView = f3
 CmdViewFile = f13
 CmdEdit = f4
+CmdEditForceInternal =
 CmdCopy = f5
 CmdRename = f6
 CmdMkdir = f7

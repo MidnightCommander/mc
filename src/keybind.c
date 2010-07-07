@@ -336,6 +336,9 @@ static name_keymap_t command_names[] = {
     { "CmdDirsizes",                     CK_DirsizesCmd },
     { "CmdDisplayBitsBox",               CK_DisplayBitsBox },
     { "CmdEdit",                         CK_EditCmd },
+#ifdef USE_INTERNAL_EDIT
+    { "CmdEditForceInternal",            CK_EditForceInternalCmd },
+#endif
     { "CmdEditExtFile",                  CK_EditExtFileCmd },
     { "CmdEditFhlFile",                  CK_EditFhlFileCmd },
     { "CmdEditMcMenu",                   CK_EditMcMenuCmd },

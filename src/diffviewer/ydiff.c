@@ -2766,7 +2766,7 @@ dview_edit (WDiff * dview, int ord)
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
     h->modal = TRUE; /* not allow edit file in several editors */
-    do_edit_at_line (dview->file[ord], linenum);
+    do_edit_at_line (dview->file[ord], use_internal_edit, linenum);
     h->modal = h_modal;
     dview_redo (dview);
     dview_update (dview);
