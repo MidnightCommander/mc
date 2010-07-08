@@ -2067,6 +2067,7 @@ edit_ok_to_exit (WEdit * edit)
         if (!edit_check_newline (edit))
             return FALSE;
 
+        query_set_sel (2);
         act = edit_query_dialog3 (_("Quit"), _("File was modified. Save with exit?"),
                                   _("&Yes"), _("&No"), _("&Cancel quit"));
     }
