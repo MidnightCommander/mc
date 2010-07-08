@@ -225,7 +225,7 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
     struct stat link_stat;
     const char *p;
 
-    if (vfs_file_class_flags (src_name) & VFSF_NOLINKS)
+    if ((vfs_file_class_flags (src_name) & VFSF_NOLINKS) != 0)
         return 0;
 
     for (lp = linklist; lp != NULL; lp = lp->next)

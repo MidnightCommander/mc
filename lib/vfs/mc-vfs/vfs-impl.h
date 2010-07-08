@@ -33,7 +33,7 @@ typedef void (*fill_names_f) (const char *);
 struct vfs_class {
     struct vfs_class *next;
     const char *name;			/* "FIles over SHell" */
-    int flags;
+    vfs_class_flags_t flags;
     const char *prefix;		/* "fish:" */
     void *data;			/* this is for filesystem's own use */
     int verrno;			/* can't use errno because glibc2 might define errno as function */

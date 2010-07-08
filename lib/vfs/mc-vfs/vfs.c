@@ -1157,15 +1157,15 @@ mc_chdir (const char *path)
     }
 }
 
-/* Return 1 is the current VFS class is local */
-int
+/* Return TRUE is the current VFS class is local */
+gboolean
 vfs_current_is_local (void)
 {
     return (current_vfs->flags & VFSF_LOCAL) != 0;
 }
 
 /* Return flags of the VFS class of the given filename */
-int
+vfs_class_flags_t
 vfs_file_class_flags (const char *filename)
 {
     struct vfs_class *vfs;
@@ -1173,7 +1173,7 @@ vfs_file_class_flags (const char *filename)
 
     fname = vfs_canon_and_translate (filename);
     if (fname == NULL)
-        return -1;
+        return VFSF_UNKNOWN;
 
     vfs = vfs_get_class (fname);
     g_free (fname);
@@ -1420,8 +1420,8 @@ vfs_translate_url (const char *url)
     return g_strdup (url);
 }
 
-int
+gboolean
 vfs_file_is_local (const char *filename)
 {
-    return vfs_file_class_flags (filename) & VFSF_LOCAL;
+    return (vfs_file_class_flags (filename) & VFSF_LOCAL) != 0;
 }
