@@ -498,7 +498,7 @@ advanced_chown_callback (Dlg_head *h, Widget *sender,
 	    if (f_pos > 2)
 		break;
 	    flag_pos = f_pos * 3 + i;	/* (strchr(ch_perm,parm)-ch_perm); */
-	    if (((WButton *) h->current)->text.start[(flag_pos % 3)] ==
+	    if (((WButton *) h->current->data)->text.start[(flag_pos % 3)] ==
 		'-')
 		ch_flags[flag_pos] = '+';
 	    else
