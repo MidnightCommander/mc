@@ -320,7 +320,7 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
     gsize loop;
     for (loop = 0; loop < len - 1; loop++)
     {
-        if (str[loop] == '\\' && (str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ )
+        if (str[loop] == '\\' && g_ascii_isdigit(str[loop + 1]) )
         {
             if (strutils_is_char_escaped (str, &str[loop]))
                 continue;
@@ -421,9 +421,9 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
             return -1;
         }
 
-        if ((*(curr_str + 1) & (char) 0xf0) == 0x30)
+        if ( g_ascii_isdigit(*(curr_str + 1)))
         {
-            ret = *(curr_str + 1) - '0';
+            ret = g_ascii_digit_value (*(curr_str + 1));
             *skip_len = 2;      /* \\ and one digit */
             return ret;
         }

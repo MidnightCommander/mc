@@ -135,11 +135,9 @@ mc_search__translate_replace_glob_to_regex (gchar * str)
             if (!escaped_mode)
             {
                 escaped_mode = TRUE;
-                continue;
-            } else {
-                g_string_append_c (buff, c);
             }
-            break;
+            g_string_append_c (buff, c);
+            continue;
         case '*':
         case '?':
             if (!escaped_mode)
@@ -193,7 +191,6 @@ mc_search__run_glob (mc_search_t * lc_mc_search, const void *user_data,
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 
 GString *
 mc_search_glob_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
