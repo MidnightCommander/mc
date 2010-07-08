@@ -149,6 +149,7 @@ mcview_ok_to_quit (mcview_t * view)
 
     if (!midnight_shutdown)
     {
+        query_set_sel (2);
         r = query_dialog (_("Quit"),
                           _("File was modified. Save with exit?"), D_NORMAL, 3,
                           _("&Yes"), _("&No"), _("&Cancel quit"));
