@@ -1,7 +1,7 @@
 # MC Chinese (zh_CN) translation
 # Wang Jian <lark@linux.net.cn>, 2001.
 # Jake Li <gnozil@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Language: Chinese\n"
 "X-Poedit-Country: CHINA\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
@@ -36,19 +36,16 @@ msgstr "获取锁(&G)"
 msgid "&Ignore lock"
 msgstr "忽略锁(&I)"
 
-#, fuzzy
 msgid "Search string not found"
 msgstr "没有找到要搜索的字符串"
 
-#, fuzzy
 msgid "Not implemented yet"
 msgstr "尚未实现"
 
-#, fuzzy
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr "替换的标记与找到的标记个数不相等"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid token number %d"
 msgstr "无效的标记个数%d "
 
@@ -300,26 +297,22 @@ msgid "Pipe"
 msgstr "管道"
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "左括弧"
 
-#, fuzzy
 msgid "Right parenthesis"
-msgstr "右箭头键"
+msgstr "右括弧"
 
-#, fuzzy
 msgid "Left bracket"
-msgstr "左箭头键"
+msgstr "左括号"
 
-#, fuzzy
 msgid "Right bracket"
-msgstr "右箭头键"
+msgstr "右括号"
 
 msgid "Left brace"
-msgstr ""
+msgstr "左大括号"
 
-#, fuzzy
 msgid "Right brace"
-msgstr "右箭头键"
+msgstr "右大括号"
 
 msgid "Enter"
 msgstr "回车"
@@ -387,11 +380,9 @@ msgstr "按任意键继续..."
 msgid "Warning"
 msgstr "警告"
 
-#, fuzzy
 msgid "Pipe failed"
 msgstr "管道失败 "
 
-#, fuzzy
 msgid "Dup failed"
 msgstr "复制失败 "
 
@@ -490,9 +481,9 @@ msgstr "fish：正在等待初始化行..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "抱歉，目前无法创建口令验证连接。"
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Password is required for %s"
-msgstr "fish：需要口令 "
+msgstr "fish：%s 需要口令"
 
 msgid "fish: Sending password..."
 msgstr "fish：正在发送口令..."
@@ -503,9 +494,8 @@ msgstr "fish：正在发送初始化行..."
 msgid "fish: Handshaking version..."
 msgstr "fish：正在握手版本..."
 
-#, fuzzy
 msgid "fish: Getting host info..."
-msgstr "fish：正在发送初始化行..."
+msgstr "fish：获取主机信息..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish：正在设置当前目录..."
@@ -556,9 +546,9 @@ msgstr "被中止的传输可能成功完成了。"
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs：正在断开到 %s 的连接"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Password required for %s"
-msgstr "FTP：需要口令 "
+msgstr "FTP：%s 需要口令 "
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs：正在发送用户登录名"
@@ -655,23 +645,19 @@ msgstr "ftpfs：失败；没有后备"
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs：正在保存文件 %lu (%lu)"
 
-#, fuzzy
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
-"~/.netrc 文件没有正确的权限。\n"
+"~/.netrc 文件权限不正确。\n"
 "删除口令或者改正权限。"
 
-#, fuzzy
 msgid "MCFS"
 msgstr "MCFS "
 
-#, fuzzy
 msgid "The server does not support this version"
 msgstr "服务器不支持该版本 "
 
-#, fuzzy
 msgid ""
 "The remote server is not running on a system port\n"
 "you need a password to log in, but the information may\n"
@@ -687,29 +673,26 @@ msgstr "是(&Y)"
 msgid "&No"
 msgstr "否(&N)"
 
-#, fuzzy
 msgid "MCFS Password required"
-msgstr " 需要 MCFS 口令 "
+msgstr "需要 MCFS 口令"
 
-#, fuzzy
 msgid "Invalid password"
-msgstr " 无效的口令 "
+msgstr "无效的口令"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot locate hostname: %s"
-msgstr " 无法定位主机名：%s "
+msgstr "无法定位主机名：%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create socket: %s"
-msgstr " 无法创建套接字：%s "
+msgstr "无法创建套接字：%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot connect to server: %s"
-msgstr " 无法连接到服务器：%s "
+msgstr "无法连接到服务器：%s"
 
-#, fuzzy
 msgid "Too many open connections"
-msgstr " 太多打开的连接 "
+msgstr "打开的连接太多"
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -731,35 +714,32 @@ msgstr ""
 "警告：%2$s 中有无效的标志 %1$c\n"
 "%3$s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "reconnect to %s failed"
-msgstr ""
-" 重新连接 %s 失败\n"
-" "
+msgstr "重新连接 %s 失败"
 
-#, fuzzy
 msgid "Authentication failed"
-msgstr " 验证失败 "
+msgstr "验证失败"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error %s creating directory %s"
-msgstr " %s 正在创建目录 %s "
+msgstr "创建目录%s时出错%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error %s removing directory %s"
-msgstr " %s 正在删除目录 %s "
+msgstr "删除目录%s时出错%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s opening remote file %s"
-msgstr " %s 正在打开远程文件 %s "
+msgstr "%s 正在打开远程文件 %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s removing remote file %s"
-msgstr " %s 正在删除远程文件 %s "
+msgstr "%s 正在删除远程文件 %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s renaming files\n"
-msgstr " %s 正在重命名文件\n"
+msgstr "%s 正在重命名文件\n"
 
 #, c-format
 msgid ""
@@ -775,96 +755,87 @@ msgstr "不完整的 tar 归档文件"
 msgid "Unexpected EOF on archive file"
 msgstr "归档文件出现异常 EOF"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"嗯,...\n"
 "%s\n"
 "不是一个 tar 归档文件。"
 
-#, fuzzy
 msgid "undelfs: error"
-msgstr "undelfs：错误 "
+msgstr "undelfs：错误"
 
-#, fuzzy
 msgid "not enough memory"
-msgstr "内存不足 "
+msgstr "内存不足"
 
-#, fuzzy
 msgid "while allocating block buffer"
-msgstr " 当分配块缓冲时 "
+msgstr "当分配块缓冲时"
 
-#, fuzzy, c-format
+#, c-format
 msgid "open_inode_scan: %d"
-msgstr " open_inode_scan：%d "
+msgstr "open_inode_scan：%d"
 
-#, fuzzy, c-format
+#, c-format
 msgid "while starting inode scan %d"
-msgstr " 当开始 inode 扫描 %d "
+msgstr "当开始 inode 扫描 %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs：正在载入被删除文件的信息 %d inode"
 
-#, fuzzy, c-format
+#, c-format
 msgid "while calling ext2_block_iterate %d"
-msgstr " 当调用 ext2_block_iterate %d 时 "
+msgstr "当调用 ext2_block_iterate %d 时"
 
-#, fuzzy
 msgid "no more memory while reallocating array"
-msgstr " 当重新分配数组时没有内存时 "
+msgstr "当重新分配数组时没有内存时"
 
-#, fuzzy, c-format
+#, c-format
 msgid "while doing inode scan %d"
-msgstr " 当进行 inode 扫描 %d 时 "
+msgstr "当进行 inode 扫描 %d 时"
 
-#, fuzzy
 msgid "Ext2lib error"
-msgstr " Ext2lib 错误 "
+msgstr "Ext2lib 错误"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open file %s"
-msgstr " 无法打开文件 %s "
+msgstr "无法打开文件 %s"
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs：正在读取 inode bitmap..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
-" 无法载入 inode bitmap 自：\n"
-" %s \n"
+"无法载入 inode位图自：\n"
+" %s"
 
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs：正在读取 block bitmap..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
 msgstr ""
-" 无法载入 block bitmap 自：\n"
-" %s \n"
+"无法载入块位图自：\n"
+" %s"
 
-#, fuzzy
 msgid "vfs_info is not fs!"
-msgstr "vfs_info 不是 fs！ "
+msgstr "vfs_info 不是文件系统！"
 
-#, fuzzy
 msgid "You have to chdir to extract files first"
-msgstr " 您必须先更改目录来解开文件 "
+msgstr "您必须先更改目录来解开文件"
 
-#, fuzzy
 msgid "while iterating over blocks"
-msgstr "正当遍历块时 "
+msgstr "正当遍历块时"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open file \"%s\""
-msgstr " 无法打开文件 %s "
+msgstr "无法打开文件\"%s\""
 
 msgid "Cannot parse:"
 msgstr "无法解析："
@@ -915,25 +886,24 @@ msgstr "模式"
 msgid "%6d of %d"
 msgstr "%6d / %d"
 
-#, fuzzy
 msgid "Chown advanced command"
-msgstr " Chown 高级命令 "
+msgstr "Chown 高级命令"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
 msgstr ""
-" 无法 chmod “%s” \n"
-" %s "
+"无法 chmod \\“%s\\”\n"
+"%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
 msgstr ""
-" 无法 chown “%s” \n"
-" %s "
+"无法 chown \\“%s\\”\n"
+"%s "
 
 msgid "Displays the current version"
 msgstr "显示当前版本"
@@ -996,7 +966,6 @@ msgid "Show mc with specified skin"
 msgstr "用指定的皮肤显示MC"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -1055,25 +1024,24 @@ msgstr "[this_dir] [other_panel_dir]"
 msgid "Set initial line number for the internal editor"
 msgstr "设置内部编辑器的初始行号"
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"请发送错误报告(包含有`mc -V`的输出)\n"
-"到 mc-devel@gnome.org\n"
+"请将错误报告(包含有`mc -V`的输出)\n"
+"发送到www.midnight-commander.org网站\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
 msgid "No arguments given to the viewer."
-msgstr ""
+msgstr "查看器没有指定参数"
 
 msgid "Two files are required to evoke the diffviewer."
-msgstr ""
+msgstr "两个文件需要调用差异查看器"
 
 msgid "Main options"
 msgstr "主要选项"
@@ -1081,17 +1049,14 @@ msgstr "主要选项"
 msgid "Terminal options"
 msgstr "终端选项 "
 
-#, fuzzy
 msgid "Background process error"
-msgstr "后台进程错误 "
+msgstr "后台进程错误"
 
-#, fuzzy
 msgid "Unknown error in child"
-msgstr "子进程未知错误 "
+msgstr "子进程未知错误"
 
-#, fuzzy
 msgid "Child died unexpectedly"
-msgstr " 子进程异常退出 "
+msgstr " 子进程异常退出"
 
 #, fuzzy
 msgid "Background protocol error"
@@ -1143,7 +1108,8 @@ msgstr "排序"
 msgid "Confirmation"
 msgstr "确认"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
@@ -2445,26 +2411,16 @@ msgid " %s%s file error"
 msgstr " %s%s文件错误 "
 
 #, fuzzy, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
-"Commander软件包。"
+msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
 
 #, fuzzy, c-format
 msgid "~/%s file error"
 msgstr " ~/%s文件错误 "
 
 #, fuzzy, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
-"文件的样例。"
+msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
@@ -4255,7 +4211,6 @@ msgstr "你要清除历史"
 msgid "Background process:"
 msgstr "后台进程："
 
-#, fuzzy
 #~ msgid "File was modified, save with exit?"
 #~ msgstr " 文件被修改，保存并退出？"
 
