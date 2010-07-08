@@ -38,10 +38,6 @@
 
 #include "lib/vfs/mc-vfs/vfs.h"
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
-#endif
-
 #ifdef USE_NETCODE
 #include "lib/vfs/mc-vfs/ftpfs.h"
 #include "lib/vfs/mc-vfs/fish.h"

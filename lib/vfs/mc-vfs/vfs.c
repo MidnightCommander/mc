@@ -1399,7 +1399,6 @@ static const struct
 {
     /* *INDENT-OFF* */
     { "ftp://", 6, "/#ftp:" },
-    { "mc://", 5, "/#mc:" },
     { "smb://", 6, "/#smb:" },
     { "sh://", 5, "/#sh:" },
     { "ssh://", 6, "/#sh:" },

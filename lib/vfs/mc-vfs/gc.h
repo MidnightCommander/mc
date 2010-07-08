@@ -20,11 +20,8 @@ struct vfs_stamping
 void vfs_stamp (struct vfs_class *vclass, vfsid id);
 void vfs_rmstamp (struct vfs_class *vclass, vfsid id);
 void vfs_stamp_create (struct vfs_class *vclass, vfsid id);
-void vfs_add_current_stamps (void);
 void vfs_timeout_handler (void);
-void vfs_expire (int now);
 int vfs_timeouts (void);
-void vfs_release_path (const char *dir);
 vfsid vfs_getid (struct vfs_class *vclass, const char *dir);
 void vfs_gc_done (void);
 

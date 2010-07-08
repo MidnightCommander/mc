@@ -14,6 +14,8 @@
 
 #include "lib/global.h"
 
+struct vfs_class;
+
 /* Flags of VFS classes */
 typedef enum
 {
@@ -24,6 +26,14 @@ typedef enum
 
 #ifdef ENABLE_VFS
 
+/**
+ * This is the type of callback function passed to vfs_fill_names.
+ * It gets the name of the virtual file system as its first argument.
+ * See also:
+ *    vfs_fill_names().
+ */
+typedef void (*fill_names_f) (const char *);
+
 extern int vfs_timeout;
 
 #ifdef USE_NETCODE
@@ -32,6 +42,7 @@ extern int use_netrc;
 
 void vfs_init (void);
 void vfs_shut (void);
+void vfs_expire (int now);
 
 gboolean vfs_current_is_local (void);
 gboolean vfs_file_is_local (const char *filename);
@@ -80,6 +91,12 @@ char *vfs_translate_path_n (const char *path);
 /* canonize and translate path, return new string */
 char *vfs_canon_and_translate (const char *path);
 
+void vfs_stamp_path (const char *path);
+
+void vfs_release_path (const char *dir);
+
+void vfs_fill_names (fill_names_f);
+
 #else /* ENABLE_VFS */
 
 /* Only the routines outside of the VFS module need the emulation macros */
@@ -93,7 +110,6 @@ char *vfs_canon_and_translate (const char *path);
 #define vfs_translate_url(s) g_strdup(s)
 #define vfs_file_class_flags(x) (VFSF_LOCAL)
 #define vfs_release_path(x)
-#define vfs_add_current_stamps() do { } while (0)
 #define vfs_timeout_handler() do { } while (0)
 #define vfs_timeouts() 0
 
@@ -261,4 +277,4 @@ enum {
 #define E_PROTO EIO
 #endif
 
-#endif
+#endif /* MC_VFS_VFS_H */

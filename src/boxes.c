@@ -37,18 +37,15 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin.h"           /* INPUT_COLOR */
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
+#include "lib/skin.h"           /* INPUT_COLOR */
 #include "lib/mcconfig.h"       /* Load/save user formats */
 #include "lib/strutil.h"
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/vfs.h" /* vfs_timeout */
-#include "lib/vfs/mc-vfs/vfs-impl.h"
-#endif
-
+#include "lib/vfs/mc-vfs/vfs.h"
 #ifdef USE_NETCODE
 #   include "lib/vfs/mc-vfs/ftpfs.h"
+#   include "lib/vfs/mc-vfs/smbfs.h"
 #endif
 
 #include "dialog.h"             /* The nice dialog manager */
@@ -58,7 +55,6 @@
 #include "command.h"            /* For cmdline */
 #include "dir.h"
 #include "panel.h"              /* LIST_TYPES */
-#include "boxes.h"
 #include "main.h"               /* For the confirm_* variables */
 #include "tree.h"
 #include "layout.h"             /* for get_nth_panel_name proto */
@@ -69,6 +65,7 @@
 #include "selcodepage.h"
 #endif
 
+#include "boxes.h"
 
 static WRadio *display_radio;
 static WInput *display_user_format;
@@ -1068,9 +1065,7 @@ struct smb_authinfo *
 vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, const char *user)
 {
     static int dialog_x = 44;
-    enum
-    { b0 = 3, dialog_y = 12 };
-    struct smb_authinfo *return_value;
+    int b0 = 3, dialog_y = 12;
     static const char *lc_labs[] = { N_("Domain:"), N_("Username:"), N_("Password:") };
     static const char *buts[] = { N_("&OK"), N_("&Cancel") };
     static int ilen = 30, istart = 14;
@@ -1080,6 +1075,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
     WInput *in_user;
     WInput *in_domain;
     Dlg_head *auth_dlg;
+    struct smb_authinfo *return_value = NULL;
 
     const int input_colors[3] =
     {
@@ -1155,24 +1151,9 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
     add_widget (auth_dlg, label_new (5, 3, lc_labs[1]));
     add_widget (auth_dlg, label_new (3, 3, lc_labs[0]));
 
-    run_dlg (auth_dlg);
-
-    switch (auth_dlg->ret_value)
-    {
-    case B_CANCEL:
-        return_value = 0;
-        break;
-    default:
-        return_value = g_try_new (struct smb_authinfo, 1);
-        if (return_value)
-        {
-            return_value->host = g_strdup (host);
-            return_value->share = g_strdup (share);
-            return_value->domain = g_strdup (in_domain->buffer);
-            return_value->user = g_strdup (in_user->buffer);
-            return_value->password = g_strdup (in_password->buffer);
-        }
-    }
+    if (run_dlg (auth_dlg) != B_CANCEL)
+        return_value = vfs_smb_authinfo_new (host, share, in_domain->buffer, in_user->buffer,
+                                             in_password->buffer);
 
     destroy_dlg (auth_dlg);
 

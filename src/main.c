@@ -45,27 +45,18 @@
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"        /* For init_key() */
 #include "lib/tty/win.h"        /* xterm_flag */
-
 #include "lib/skin.h"
-
 #include "lib/mcconfig.h"
 #include "lib/filehighlight.h"
 #include "lib/fileloc.h"        /* MC_USERCONF_DIR */
+#include "lib/strutil.h"
 
 #include "lib/vfs/mc-vfs/vfs.h" /* vfs_translate_url() */
-
 #ifdef ENABLE_VFS_SMB
 #include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debug() */
 #endif /* ENABLE_VFS_SMB */
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
-#endif
-
-#include "lib/strutil.h"
-
-#include "src/args.h"
-
+#include "args.h"
 #include "dir.h"
 #include "dialog.h"
 #include "menu.h"
@@ -1578,7 +1569,18 @@ done_mc (void)
         save_panel_types ();
     }
     done_screen ();
-    vfs_add_current_stamps ();
+
+#ifdef ENABLE_VFS
+    vfs_stamp_path (vfs_get_current_dir ());
+
+    if ((current_panel != NULL)
+        && (get_current_type () == view_listing))
+            vfs_stamp_path (current_panel->cwd);
+
+    if ((other_panel != NULL)
+        && (get_other_type () == view_listing))
+            vfs_stamp_path (other_panel->cwd);
+#endif
 }
 
 static cb_ret_t
