@@ -16,7 +16,6 @@ AC_DEFUN([AC_MC_EXTFS_CHECKS], [
 	HAVE_ZIPINFO=0
     fi
     AC_SUBST([HAVE_ZIPINFO])
-    AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
 ])
 
 
