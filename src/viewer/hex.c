@@ -282,45 +282,39 @@ mcview_display_hex (mcview_t * view)
                           /* boldflag == MARK_CURSOR */
                           view->hexview_in_text ? VIEW_UNDERLINED_COLOR : MARKED_SELECTED_COLOR);
 
+
 #ifdef HAVE_CHARSET
             if (utf8_display)
             {
                 if (!view->utf8)
                 {
-                    ch = convert_from_8bit_to_utf_c ((unsigned char) ch, view->converter);
+                    c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
                 }
-                if (!g_unichar_isprint (ch))
-                    ch = '.';
+                if (!g_unichar_isprint (c))
+                    c = '.';
             }
+            else if (view->utf8)
+                ch = convert_from_utf_to_current_c (ch, view->converter);
             else
+#endif
             {
-                if (view->utf8)
-                {
-                    ch = convert_from_utf_to_current_c (ch, view->converter);
-                }
-                else
-                {
-#endif
-                    ch = convert_to_display_c (ch);
-#ifdef HAVE_CHARSET
-                }
+                c = convert_to_display_c (c);
+
+                if (!is_printable (c))
+                    c = '.';
             }
-#endif
-            c = convert_to_display_c (c);
-            if (!g_ascii_isprint (c))
-                c = '.';
 
             /* Print corresponding character on the text side */
             if (text_start + bytes < width)
             {
                 widget_move (view, top + row, left + text_start + bytes);
-                if (!view->utf8)
+#ifdef HAVE_CHARSET
+                if (view->utf8)
+                    tty_print_anychar (ch);
+                else
+#endif
                 {
                     tty_print_char (c);
-                }
-                else
-                {
-                    tty_print_anychar (ch);
                 }
             }
 
