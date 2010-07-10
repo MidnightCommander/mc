@@ -36,6 +36,9 @@ static const char *const vfs_supported[] = {
     "tarfs",
     "extfs",
     "cpiofs",
+#ifdef ENABLE_VFS_UNDELFS
+    "undelfs",
+#endif
 #ifdef USE_NETCODE
     "ftpfs",
     "fish",
@@ -43,9 +46,6 @@ static const char *const vfs_supported[] = {
     "smbfs",
 #   endif /* ENABLE_VFS_SMB */
 #endif				/* USE_NETCODE */
-#ifdef USE_EXT2FSLIB
-    "undelfs",
-#endif
     NULL
 };
 #endif				/* ENABLE_VFS */

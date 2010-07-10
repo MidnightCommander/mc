@@ -757,7 +757,7 @@ create_command_menu (void)
 #endif
     entries = g_list_append (entries, menu_entry_create (_("Screen lis&t"), CK_DialogListCmd));
     entries = g_list_append (entries, menu_separator_create ());
-#ifdef USE_EXT2FSLIB
+#ifdef ENABLE_VFS_UNDELFS
     entries =
         g_list_append (entries,
                        menu_entry_create (_("&Undelete files (ext2fs only)"), CK_UndeleteCmd));
@@ -766,7 +766,7 @@ create_command_menu (void)
     entries =
         g_list_append (entries, menu_entry_create (_("&Listing format edit"), CK_ListmodeCmd));
 #endif
-#if defined (USE_EXT2FSLIB) || defined (LISTMODE_EDITOR)
+#if defined (ENABLE_VFS_UNDELFS) || defined (LISTMODE_EDITOR)
     entries = g_list_append (entries, menu_separator_create ());
 #endif
     entries =
@@ -1398,7 +1398,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_TreeBoxCmd:
         treebox_cmd ();
         break;
-#ifdef USE_EXT2FSLIB
+#ifdef ENABLE_VFS_UNDELFS
     case CK_UndeleteCmd:
         undelete_cmd ();
         break;

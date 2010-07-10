@@ -1338,9 +1338,9 @@ vfs_init (void)
     init_tarfs ();
     init_cpiofs ();
 
-#ifdef USE_EXT2FSLIB
+#ifdef ENABLE_VFS_UNDELFS
     init_undelfs ();
-#endif /* USE_EXT2FSLIB */
+#endif /* ENABLE_VFS_UNDELFS */
 
 #ifdef USE_NETCODE
     init_ftpfs ();

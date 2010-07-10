@@ -1222,7 +1222,7 @@ get_random_hint (int force)
     return result;
 }
 
-#if defined(USE_NETCODE) || defined(USE_EXT2FSLIB)
+#if defined(USE_NETCODE) || defined(ENABLE_VFS_UNDELFS)
 static void
 nice_cd (const char *text, const char *xtext, const char *help,
          const char *history_name, const char *prefix, int to_home)
@@ -1252,7 +1252,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
     g_free (cd_path);
     g_free (machine);
 }
-#endif /* USE_NETCODE || USE_EXT2FSLIB */
+#endif /* USE_NETCODE || ENABLE_VFS_UNDELFS */
 
 
 #ifdef USE_NETCODE
@@ -1284,7 +1284,7 @@ smblink_cmd (void)
 #endif /* ENABLE_VFS_SMB */
 #endif /* USE_NETCODE */
 
-#ifdef USE_EXT2FSLIB
+#ifdef ENABLE_VFS_UNDELFS
 void
 undelete_cmd (void)
 {
@@ -1292,7 +1292,7 @@ undelete_cmd (void)
              _("Enter device (without /dev/) to undelete\nfiles on: (F1 for details)"),
              "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "/#undel:", 0);
 }
-#endif /* USE_EXT2FSLIB */
+#endif /* ENABLE_VFS_UNDELFS */
 
 void
 quick_cd_cmd (void)

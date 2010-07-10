@@ -116,7 +116,9 @@ void init_extfs (void);
 void init_fish (void);
 void init_sfs (void);
 void init_tarfs (void);
+#ifdef ENABLE_VFS_UNDELFS
 void init_undelfs (void);
+#endif
 
 #endif /* ENABLE_VFS */
 

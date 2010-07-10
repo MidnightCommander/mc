@@ -386,7 +386,7 @@ static name_keymap_t command_names[] = {
     { "CmdSymlink",                      CK_SymlinkCmd },
     { "CmdTree",                         CK_TreeCmd },
     { "CmdTreeBox",                      CK_TreeBoxCmd },
-#ifdef USE_EXT2FSLIB
+#ifdef ENABLE_VFS_UNDELFS
     { "CmdUndelete",                     CK_UndeleteCmd },
 #endif
     { "CmdUnselect",                     CK_UnselectCmd },
