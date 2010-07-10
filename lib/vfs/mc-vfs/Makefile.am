@@ -10,46 +10,39 @@ AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(SAMBA_CFLAGS)
 
 AM_CPPFLAGS = -DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\"
 
-BASICFILES = 			\
+BASICFILES = \
+	vfs.c vfs.h vfs-impl.h	\
+	direntry.c xdirentry.h	\
+	utilvfs.c utilvfs.h	\
+	local.c local.h		\
+	gc.c gc.h		\
 	cpio.c			\
-	direntry.c		\
-	extfs.c			\
-	gc.c			\
-	local.c			\
 	tar.c			\
-	sfs.c			\
-	utilvfs.c		\
-	vfs.c
-
-VFSHDRS = 			\
-	fish.h			\
-	fishdef.h		\
-	ftpfs.h			\
-	gc.h			\
-	local.h			\
-	netutil.h		\
-	smbfs.h			\
-	utilvfs.h		\
-	vfs.h			\
-	vfs-impl.h		\
-	xdirentry.h
-
-SMBFILES = smbfs.c
-if USE_SAMBA_FS
-SMB_NETFILES = $(SMBFILES)
-endif
+	extfs.c			\
+	sfs.c
 
 UNDELFILES = undelfs.c
+
+NETFILES = \
+	netutil.c netutil.h	\
+	fish.c fish.h fishdef.h	\
+	ftpfs.c ftpfs.h
+
+SMBFILES = smbfs.c smbfs.h
+
+libvfs_mc_la_SOURCES = $(BASICFILES)
 if ENABLE_VFS_UNDELFS
-UNDEL_FILES = $(UNDELFILES)
+libvfs_mc_la_SOURCES += $(UNDELFILES)
+endif
+if ENABLE_VFS_NET
+libvfs_mc_la_SOURCES += $(NETFILES)
+endif
+if USE_SAMBA_FS
+libvfs_mc_la_SOURCES += $(SMBFILES)
 endif
 
-NETFILES = netutil.c fish.c ftpfs.c $(SMB_NETFILES)
-
-NONETFILES = $(BASICFILES) $(UNDEL_FILES)
-
 EXTRA_DIST = HACKING README \
-	$(VFSHDRS) $(BASICFILES) $(NETFILES) $(SMBFILES) $(UNDELFILES)
+	$(BASICFILES) $(UNDELFILES) $(NETFILES) $(SMBFILES)
 
 dist-hook:
 	$(mkinstalldirs) $(distdir)/samba
@@ -80,12 +73,6 @@ if ENABLE_VFS
 noinst_LTLIBRARIES = libvfs-mc.la
 else
 noinst_LTLIBRARIES =
-endif
-
-if ENABLE_VFS_NET
-libvfs_mc_la_SOURCES = $(NETFILES) $(NONETFILES)
-else
-libvfs_mc_la_SOURCES = $(NONETFILES)
 endif
 
 SAMBA_DIST =			\
@@ -134,4 +121,3 @@ SAMBA_DIST =			\
 	libsmb/smberr.c		\
 	param/loadparm.c	\
 	param/params.c
-
