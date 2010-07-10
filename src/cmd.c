@@ -1335,7 +1335,8 @@ smart_dirsize_cmd (void)
     file_entry *entry;
 
     entry = &(panel->dir.list[panel->selected]);
-    if ((S_ISDIR (entry->st.st_mode) && (strcmp (entry->fname, "..") == 0)) || panel->dirs_marked)
+    if ((S_ISDIR (entry->st.st_mode) && (strcmp (entry->fname, "..") == 0)) ||
+         S_ISREG (entry->st.st_mode) || panel->dirs_marked)
         dirsizes_cmd ();
     else
         single_dirsize_cmd ();
