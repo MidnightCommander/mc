@@ -27,9 +27,10 @@
 #include <stdlib.h>
 #include <signal.h>
 
+#include "lib/global.h"
 #include "netutil.h"
 
-int got_sigpipe;
+volatile sig_atomic_t got_sigpipe = 0;
 
 static void
 sig_pipe (int unused)
@@ -41,11 +42,11 @@ sig_pipe (int unused)
 void
 tcp_init (void)
 {
+    static gboolean initialized = FALSE;
     struct sigaction sa;
-    static char _initialized = 0;
 
-    if (_initialized)
-	return;
+    if (initialized)
+        return;
 
     got_sigpipe = 0;
     sa.sa_handler = sig_pipe;
@@ -53,5 +54,5 @@ tcp_init (void)
     sigemptyset (&sa.sa_mask);
     sigaction (SIGPIPE, &sa, NULL);
 
-    _initialized = 1;
+    initialized = TRUE;
 }
