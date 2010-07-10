@@ -756,7 +756,7 @@ create_command_menu (void)
         g_list_append (entries, menu_entry_create (_("E&xternal panelize"), CK_ExternalPanelize));
     entries =
         g_list_append (entries,
-                       menu_entry_create (_("Show directory s&izes"), CK_SingleDirsizeCmd));
+                       menu_entry_create (_("Show directory s&ize(s)"), CK_SingleDirsizeCmd));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("Command &history"), CK_HistoryCmd));
     entries =
