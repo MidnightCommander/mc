@@ -1785,7 +1785,6 @@ edit_replace_cmd (WEdit * edit, int again)
 
         if ((edit->search_start >= 0) && (edit->search_start < edit->last_byte))
         {
-            gboolean replace_yes;
             gsize i;
 
             edit->found_start = edit->search_start;
@@ -1794,11 +1793,11 @@ edit_replace_cmd (WEdit * edit, int again)
             edit_cursor_move (edit, edit->search_start - edit->curs1);
             edit_scroll_screen_over_cursor (edit);
 
-            replace_yes = TRUE;
-
             if (edit->replace_mode == 0)
             {
                 int l;
+                int prompt;
+
                 l = edit->curs_row - edit->num_widget_lines / 3;
                 if (l > 0)
                     edit_scroll_downward (edit, l);
@@ -1814,52 +1813,49 @@ edit_replace_cmd (WEdit * edit, int again)
                 /* and prompt 2/3 down */
                 disp1 = edit_replace_cmd__conv_to_display (saved1);
                 disp2 = edit_replace_cmd__conv_to_display (saved2);
-
-                switch (editcmd_dialog_replace_prompt_show (edit, disp1, disp2, -1, -1))
-                {
-                case B_ENTER:
-                    replace_yes = TRUE;
-                    break;
-                case B_SKIP_REPLACE:
-                    replace_yes = FALSE;
-                    break;
-                case B_REPLACE_ALL:
-                    edit->replace_mode = 1;
-                    break;
-                case B_CANCEL:
-                    replace_yes = FALSE;
-                    edit->replace_mode = -1;
-                    break;
-                }
+                prompt = editcmd_dialog_replace_prompt_show (edit, disp1, disp2, -1, -1);
                 g_free (disp1);
                 g_free (disp2);
-            }
 
-            if (replace_yes)
-            {
-                /* don't process string each time */
-                if (tmp_str == NULL)
+                if (prompt == B_REPLACE_ALL)
+                    edit->replace_mode = 1;
+                else if (prompt == B_SKIP_REPLACE)
                 {
-                    tmp_str = g_string_new (input2);
-                    repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
-
-                    if (edit->search->error != MC_SEARCH_E_OK)
-                    {
-                        edit_error_dialog (_("Replace"), edit->search->error_str);
-                        break;
-                    }
+                    if (edit_search_options.backwards)
+                        edit->search_start--;
+                    else
+                        edit->search_start++;
+                    continue; /* loop */
                 }
-
-               /* delete then insert new */
-                for (i = 0; i < len; i++)
-                    edit_delete (edit, 1);
-
-                for (i = 0; i < repl_str->len; i++)
-                    edit_insert (edit, repl_str->str[i]);
-
-                edit->found_len = repl_str->len;
-                times_replaced++;
+                else if (prompt == B_CANCEL)
+                {
+                    edit->replace_mode = -1;
+                    break; /* loop */
+                }
             }
+
+            /* don't process string each time */
+            if (tmp_str == NULL)
+            {
+                tmp_str = g_string_new (input2);
+                repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
+
+                if (edit->search->error != MC_SEARCH_E_OK)
+                {
+                    edit_error_dialog (_("Replace"), edit->search->error_str);
+                    break;
+                }
+            }
+
+              /* delete then insert new */
+            for (i = 0; i < len; i++)
+                edit_delete (edit, 1);
+
+            for (i = 0; i < repl_str->len; i++)
+                edit_insert (edit, repl_str->str[i]);
+
+            edit->found_len = repl_str->len;
+            times_replaced++;
 
             /* so that we don't find the same string again */
             if (edit_search_options.backwards)
