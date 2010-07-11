@@ -3992,21 +3992,21 @@ contents of the selected directory.
 This variable holds the lifetime of a directory cache entry in seconds. The
 default value is 900 seconds.
 .TP
-.I clipbord_store
+.I clipboard_store
 This variable contains path (with options) to the external clipboard
 utility like 'xclip' to read text into X selection from file.
 For example:
 .PP
 .nf
-clipbord_store=xclip \-i
+clipboard_store=xclip \-i
 .TP
-.I clipbord_paste
+.I clipboard_paste
 This variable contains path (with options) to the external clipboard
 utility like 'xclip' to print the selection to standard out.
 For example:
 .PP
 .nf
-clipbord_store=xclip \-o
+clipboard_store=xclip \-o
 .TP
 .I autodetect_codeset
 This option allows use the `enca' command to autodetect codeset of text files

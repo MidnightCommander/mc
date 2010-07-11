@@ -44,11 +44,11 @@ copy_file_to_ext_clip (void)
     int res = 0;
     const char *d = getenv ("DISPLAY");
 
-    if (d == NULL || clipbord_store_path == NULL || clipbord_store_path[0] =='\0')
+    if (d == NULL || clipboard_store_path == NULL || clipboard_store_path[0] =='\0')
         return FALSE;
 
     tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
-    cmd = g_strconcat (clipbord_store_path, " ", tmp, " 2>/dev/null", (char *) NULL);
+    cmd = g_strconcat (clipboard_store_path, " ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)
         res = my_system (EXECUTE_AS_SHELL, shell, cmd);
@@ -65,11 +65,11 @@ paste_to_file_from_ext_clip (void)
     int res = 0;
     const char *d = getenv ("DISPLAY");
 
-    if (d == NULL || clipbord_paste_path == NULL || clipbord_paste_path[0] == '\0')
+    if (d == NULL || clipboard_paste_path == NULL || clipboard_paste_path[0] == '\0')
         return FALSE;
 
     tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
-    cmd = g_strconcat (clipbord_paste_path, " > ", tmp, " 2>/dev/null", (char *) NULL);
+    cmd = g_strconcat (clipboard_paste_path, " > ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)
         res = my_system (EXECUTE_AS_SHELL, shell, cmd);

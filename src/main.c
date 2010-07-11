@@ -255,8 +255,8 @@ int boot_current_is_left = 1;
 int xtree_mode = 0;
 
 /* path to X clipboard utility */
-char* clipbord_store_path = NULL;
-char* clipbord_paste_path = NULL;
+char* clipboard_store_path = NULL;
+char* clipboard_paste_path = NULL;
 
 /* If set, then print to the given file the last directory we were at */
 static char *last_wd_string = NULL;
@@ -2265,8 +2265,8 @@ main (int argc, char *argv[])
     free_codepages_list ();
     g_free (autodetect_codeset);
 #endif
-    g_free (clipbord_store_path);
-    g_free (clipbord_paste_path);
+    g_free (clipboard_store_path);
+    g_free (clipboard_paste_path);
 
     str_uninit_strings ();
 
