@@ -3469,7 +3469,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
 
     case CK_Toggle_Syntax:
-        if ((option_syntax_highlighting ^= 1) == 1)
+        option_syntax_highlighting ^= 1;
+        if (option_syntax_highlighting == 1)
             edit_load_syntax (edit, NULL, edit->syntax_type);
         edit->force |= REDRAW_PAGE;
         break;
