@@ -7,14 +7,14 @@
 # Miloslav Trmac <mitr@volny.cz>, 2003.
 # Jindrich Novy <jnovy@redhat.com>, 2005.
 # Anna Talianova <anickat1@gmail.com>, 2008
-# Martin Zoubek <zoubek@seznam.cz>, 2009
+# Martin Zoubek <zoubek@seznam.cz>, 2009, 2010
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.7.0.2\n"
+"Project-Id-Version: mc 4.7.0.7\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-07-05 22:31+0400\n"
-"PO-Revision-Date: 2010-03-14 14:00+0100\n"
+"PO-Revision-Date: 2010-07-11 11:23+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -437,9 +437,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Poškozený extfs archiv"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Není možné vytvořit adresář %s"
+msgstr "Varování: není možné otevřít adresář %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -936,7 +936,6 @@ msgid "Show mc with specified skin"
 msgstr "Zobrazit mc se zadaným tématem vzhledu"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -961,7 +960,7 @@ msgstr ""
 "   Okna dialogů:      dnormal, dfocus, dhotnormal, dhotfocus, "
 "errdhotnormal,\n"
 "                      errdhotfocus\n"
-"   Menu:              menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menu:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:            editnormal, editbold, editmarked,\n"
 "                      editwhitespace, editlinestate\n"
 
@@ -995,7 +994,6 @@ msgstr "[aktuální_adresář] [druhý_adresář_panelu]"
 msgid "Set initial line number for the internal editor"
 msgstr "Nastavit počáteční číslo řádku pro interní editor"
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -1003,7 +1001,7 @@ msgid ""
 msgstr ""
 "\n"
 "Závady programu oznamujte (včetně výstupu „mc -V“)\n"
-"prosím na mc-devel@gnome.org\n"
+"pomocí tiketů na www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -1113,7 +1111,6 @@ msgstr "Vstupní/zobrazovací codepage:"
 msgid "&Select"
 msgstr "&Výběr"
 
-#, fuzzy
 msgid "Directory tree"
 msgstr "Strom a&dresářů"
 
@@ -1677,9 +1674,9 @@ msgstr " Blok je příliš velký, návrat o krok zpět nebude fungovat. "
 msgid "Replace"
 msgstr "Nahradit"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%ld replacements made"
-msgstr " Provedeno %ld nahrazení. "
+msgstr "Provedeno %ld nahrazení"
 
 msgid "Quit"
 msgstr "Konec"
@@ -2872,9 +2869,8 @@ msgstr ""
 "MC nemohl zapsat soubor ~/%s, vaše staré seznamy pro rychlý přístup nebyly "
 "smazány"
 
-#, fuzzy
 msgid "Information"
-msgstr " Informace "
+msgstr "Informace"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2884,9 +2880,9 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Soubor:     %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Volných i-uzlů: %d (%d%%) z %d"
+msgstr "Volných i-uzlů: %ld (%ld%%) z %ld"
 
 msgid "No node information"
 msgstr "O uzlu nejsou informace"
@@ -2922,9 +2918,9 @@ msgid "Modified:  %s"
 msgstr "Změněn:   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "Z&měnit na"
+msgstr "I-uzel změněn: %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3815,6 +3811,3 @@ msgstr " Historie "
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
-
-#~ msgid "Status:    %s"
-#~ msgstr "Stav:      %s"
