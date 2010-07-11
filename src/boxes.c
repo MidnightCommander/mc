@@ -438,12 +438,12 @@ confirm_box (void)
 
     for (i = 0; i < 2; i++)
         conf_widgets[i].u.button.text = _(conf_widgets[i].u.button.text);
+#endif /* ENABLE_NLS */
 
     for (i = 2; i < w_num; i++)
         conf_widgets[i].u.checkbox.text = Q_ (conf_widgets[i].u.checkbox.text);
-#endif /* ENABLE_NLS */
 
-    /* maximumr length of checkboxes */
+    /* maximum length of checkboxes */
     for (i = 2; i < w_num; i++)
         maxlen = max (maxlen, str_term_width1 (conf_widgets[i].u.checkbox.text) + 4);
 
