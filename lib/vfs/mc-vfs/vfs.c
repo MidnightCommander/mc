@@ -1333,7 +1333,6 @@ vfs_init (void)
     /* fallback value for vfs_get_class() */
     localfs_class = vfs_list;
 
-    init_extfs ();
 #ifdef ENABLE_VFS_CPIO
     init_cpiofs ();
 #endif /* ENABLE_VFS_CPIO */
@@ -1343,6 +1342,9 @@ vfs_init (void)
 #ifdef ENABLE_VFS_SFS
     init_sfs ();
 #endif /* ENABLE_VFS_SFS */
+#ifdef ENABLE_VFS_EXTFS
+    init_extfs ();
+#endif /* ENABLE_VFS_EXTFS */
 #ifdef ENABLE_VFS_UNDELFS
     init_undelfs ();
 #endif /* ENABLE_VFS_UNDELFS */

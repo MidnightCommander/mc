@@ -120,7 +120,9 @@ void init_tarfs (void);
 #ifdef ENABLE_VFS_SFS
 void init_sfs (void);
 #endif
+#ifdef ENABLE_VFS_EXTFS
 void init_extfs (void);
+#endif
 void init_fish (void);
 #ifdef ENABLE_VFS_UNDELFS
 void init_undelfs (void);

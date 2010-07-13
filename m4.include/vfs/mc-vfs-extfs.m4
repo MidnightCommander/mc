@@ -23,8 +23,8 @@ dnl Enable Extfs (classic)
 AC_DEFUN([AC_MC_VFS_EXTFS],
 [
     AC_ARG_ENABLE([vfs-extfs],
-              [  --enable-vfs-extfs      Support for extfs [[yes]]])
-    if test x"$enable_vfs_extfs" != x"no"; then
+		    AC_HELP_STRING([--enable-vfs-extfs], [Support for extfs filesystem [[yes]]]))
+    if test "$enable_vfs" != "no" -a x"$enable_vfs_extfs" != x"no"; then
 	AC_MC_EXTFS_CHECKS
 	enable_vfs_extfs="yes"
 	AC_MC_VFS_ADDNAME([extfs])

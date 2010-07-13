@@ -5,7 +5,11 @@ endif
 
 DIST_SUBDIRS = extfs fish
 
-SUBDIRS   = extfs fish $(SAMBA_SUBDIRS)
+SUBDIRS = fish $(SAMBA_SUBDIRS)
+if ENABLE_VFS_EXTFS
+SUBDIRS += extfs
+endif
+
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(SAMBA_CFLAGS)
 
 AM_CPPFLAGS = -DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\"
@@ -15,8 +19,7 @@ BASICFILES = \
 	direntry.c xdirentry.h	\
 	utilvfs.c utilvfs.h	\
 	local.c local.h		\
-	gc.c gc.h		\
-	extfs.c
+	gc.c gc.h
 
 CPIOFILES = cpio.c
 TARFILES = tar.c
@@ -41,6 +44,9 @@ endif
 if ENABLE_VFS_SFS
 libvfs_mc_la_SOURCES += $(SFSFILES)
 endif
+if ENABLE_VFS_EXTFS
+libvfs_mc_la_SOURCES += $(EXTFSFILES)
+endif
 if ENABLE_VFS_UNDELFS
 libvfs_mc_la_SOURCES += $(UNDELFILES)
 endif
@@ -56,6 +62,7 @@ EXTRA_DIST = HACKING README \
 	$(CPIOFILES) \
 	$(TARFILES) \
 	$(SFSFILES) \
+	$(EXTFSFILES) \
 	$(UNDELFILES) \
 	$(NETFILES) \
 	$(SMBFILES)

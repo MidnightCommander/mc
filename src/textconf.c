@@ -42,7 +42,9 @@ static const char *const vfs_supported[] = {
 #ifdef ENABLE_VFS_SFS
     "sfs",
 #endif
+#ifdef ENABLE_VFS_EXTFS
     "extfs",
+#endif
 #ifdef ENABLE_VFS_UNDELFS
     "undelfs",
 #endif
