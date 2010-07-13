@@ -114,10 +114,12 @@ void *vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode
 #ifdef ENABLE_VFS_CPIO
 void init_cpiofs (void);
 #endif
+#ifdef ENABLE_VFS_TAR
+void init_tarfs (void);
+#endif
 void init_extfs (void);
 void init_fish (void);
 void init_sfs (void);
-void init_tarfs (void);
 #ifdef ENABLE_VFS_UNDELFS
 void init_undelfs (void);
 #endif
