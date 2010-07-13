@@ -117,9 +117,11 @@ void init_cpiofs (void);
 #ifdef ENABLE_VFS_TAR
 void init_tarfs (void);
 #endif
+#ifdef ENABLE_VFS_SFS
+void init_sfs (void);
+#endif
 void init_extfs (void);
 void init_fish (void);
-void init_sfs (void);
 #ifdef ENABLE_VFS_UNDELFS
 void init_undelfs (void);
 #endif

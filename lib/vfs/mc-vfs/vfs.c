@@ -1334,13 +1334,15 @@ vfs_init (void)
     localfs_class = vfs_list;
 
     init_extfs ();
-    init_sfs ();
 #ifdef ENABLE_VFS_CPIO
     init_cpiofs ();
 #endif /* ENABLE_VFS_CPIO */
 #ifdef ENABLE_VFS_TAR
     init_tarfs ();
 #endif /* ENABLE_VFS_TAR */
+#ifdef ENABLE_VFS_SFS
+    init_sfs ();
+#endif /* ENABLE_VFS_SFS */
 #ifdef ENABLE_VFS_UNDELFS
     init_undelfs ();
 #endif /* ENABLE_VFS_UNDELFS */
