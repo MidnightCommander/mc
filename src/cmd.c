@@ -1255,7 +1255,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
 #endif /* USE_NETCODE || ENABLE_VFS_UNDELFS */
 
 
-#ifdef USE_NETCODE
+#if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH) || defined (ENABLE_VFS_SMB)
 
 static const char *machine_str = N_("Enter machine name (F1 for details):");
 
@@ -1268,6 +1268,7 @@ ftplink_cmd (void)
 }
 #endif /* ENABLE_VFS_FTP */
 
+#ifdef ENABLE_VFS_FISH
 void
 fishlink_cmd (void)
 {
@@ -1275,6 +1276,7 @@ fishlink_cmd (void)
              "[FIle transfer over SHell filesystem]", ":fishlink_cmd: Shell link to machine ",
              "/#sh:", 1);
 }
+#endif /* ENABLE_VFS_FISH */
 
 #ifdef ENABLE_VFS_SMB
 void
@@ -1284,7 +1286,7 @@ smblink_cmd (void)
              "[SMB File System]", ":smblink_cmd: SMB link to machine ", "/#smb:", 0);
 }
 #endif /* ENABLE_VFS_SMB */
-#endif /* USE_NETCODE */
+#endif /* ENABLE_VFS_FTP || ENABLE_VFS_FISH || ENABLE_VFS_SMB */
 
 #ifdef ENABLE_VFS_UNDELFS
 void

@@ -5,9 +5,12 @@ endif
 
 DIST_SUBDIRS = extfs fish
 
-SUBDIRS = fish $(SAMBA_SUBDIRS)
+SUBDIRS = $(SAMBA_SUBDIRS)
 if ENABLE_VFS_EXTFS
 SUBDIRS += extfs
+endif
+if ENABLE_VFS_FISH
+SUBDIRS += fish
 endif
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(SAMBA_CFLAGS)
@@ -27,11 +30,10 @@ SFSFILES = sfs.c
 EXTFSFILES = extfs.c
 UNDELFILES = undelfs.c
 
-NETFILES = \
-	netutil.c netutil.h	\
-	fish.c fish.h fishdef.h
+NETFILES = netutil.c netutil.h
 
 FTPFILES = ftpfs.c ftpfs.h
+FISHFILES = fish.c fish.h fishdef.h
 SMBFILES = smbfs.c smbfs.h
 
 libvfs_mc_la_SOURCES = $(BASICFILES)
@@ -56,6 +58,9 @@ endif
 if ENABLE_VFS_FTP
 libvfs_mc_la_SOURCES += $(FTPFILES)
 endif
+if ENABLE_VFS_FISH
+libvfs_mc_la_SOURCES += $(FISHFILES)
+endif
 if USE_SAMBA_FS
 libvfs_mc_la_SOURCES += $(SMBFILES)
 endif
@@ -69,6 +74,7 @@ EXTRA_DIST = HACKING README \
 	$(UNDELFILES) \
 	$(NETFILES) \
 	$(FTPFILES) \
+	$(FISHFILES) \
 	$(SMBFILES)
 
 dist-hook:

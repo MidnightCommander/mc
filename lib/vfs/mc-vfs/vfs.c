@@ -1354,12 +1354,12 @@ vfs_init (void)
 #ifdef ENABLE_VFS_FTP
     init_ftpfs ();
 #endif /* ENABLE_VFS_FTP */
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FISH
     init_fish ();
+#endif /* ENABLE_VFS_FISH */
 #ifdef ENABLE_VFS_SMB
     init_smbfs ();
 #endif /* ENABLE_VFS_SMB */
-#endif /* USE_NETCODE */
 
     vfs_setup_wd ();
 }
@@ -1412,9 +1412,11 @@ static const struct
 #ifdef ENABLE_VFS_FTP
     { "ftp://", 6, "/#ftp:" },
 #endif
-    { "smb://", 6, "/#smb:" },
+#ifdef ENABLE_VFS_FISH
     { "sh://", 5, "/#sh:" },
     { "ssh://", 6, "/#sh:" },
+#endif
+    { "smb://", 6, "/#smb:" },
     { "a:", 2, "/#a" }
     /* *INDENT-ON* */
 };

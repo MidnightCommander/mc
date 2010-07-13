@@ -349,7 +349,7 @@ static name_keymap_t command_names[] = {
     { "CmdFilter",                       CK_FilterCmd },
     { "CmdFilteredView",                 CK_FilteredViewCmd },
     { "CmdFind",                         CK_FindCmd },
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FISH
     { "CmdFishlink",                     CK_FishlinkCmd },
 #endif
 #ifdef ENABLE_VFS_FTP

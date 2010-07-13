@@ -677,7 +677,9 @@ create_panel_menu (void)
 #ifdef ENABLE_VFS_FTP
     entries = g_list_append (entries, menu_entry_create (_("FT&P link..."), CK_FtplinkCmd));
 #endif
+#ifdef ENABLE_VFS_FISH
     entries = g_list_append (entries, menu_entry_create (_("S&hell link..."), CK_FishlinkCmd));
+#endif
 #ifdef ENABLE_VFS_SMB
     entries = g_list_append (entries, menu_entry_create (_("SM&B link..."), CK_SmblinkCmd));
 #endif /* ENABLE_VFS_SMB */
@@ -1259,7 +1261,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_FindCmd:
         find_cmd ();
         break;
-#if defined (USE_NETCODE)
+#ifdef ENABLE_VFS_FISH
     case CK_FishlinkCmd:
         fishlink_cmd ();
         break;

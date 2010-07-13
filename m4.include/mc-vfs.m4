@@ -66,14 +66,9 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
 
 	AC_MSG_NOTICE([Enabling VFS code])
 
-	AC_MC_VFS_FISH
 	AC_MC_VFS_SAMBA
 
 	MC_WITH_VFS
-
-    else
-	vfs_type="Plain OS filesystem"
-	AM_CONDITIONAL(ENABLE_VFS_FISH, [false])
     fi
 
     AC_MC_VFS_CPIOFS
@@ -82,6 +77,7 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
     AC_MC_VFS_EXTFS
     AC_MC_VFS_UNDELFS
     AC_MC_VFS_FTP
+    AC_MC_VFS_FISH
 
     AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])
 ])

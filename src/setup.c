@@ -41,7 +41,7 @@
 #ifdef ENABLE_VFS_FTP
 #include "lib/vfs/mc-vfs/ftpfs.h"
 #endif
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FISH
 #include "lib/vfs/mc-vfs/fish.h"
 #endif
 
@@ -224,9 +224,9 @@ static const struct
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
 #endif /* ENABLE_VFS_FTP */
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FISH
     { "fish_directory_timeout", &fish_directory_timeout },
-#endif
+#endif /* ENABLE_VFS_FISH */
 #endif /* ENABLE_VFS */
     /* option_tab_spacing is used in internal viewer */
     { "editor_tab_spacing", &option_tab_spacing },

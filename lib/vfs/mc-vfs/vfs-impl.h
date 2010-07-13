@@ -123,12 +123,14 @@ void init_sfs (void);
 #ifdef ENABLE_VFS_EXTFS
 void init_extfs (void);
 #endif
-void init_fish (void);
 #ifdef ENABLE_VFS_UNDELFS
 void init_undelfs (void);
 #endif
 #ifdef ENABLE_VFS_FTP
 void init_ftpfs (void);
+#endif
+#ifdef ENABLE_VFS_FISH
+void init_fish (void);
 #endif
 
 #endif /* ENABLE_VFS */
