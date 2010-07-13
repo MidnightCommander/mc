@@ -33,9 +33,11 @@
 
 #ifdef ENABLE_VFS
 static const char *const vfs_supported[] = {
+#ifdef ENABLE_VFS_CPIO
+    "cpiofs",
+#endif
     "tarfs",
     "extfs",
-    "cpiofs",
 #ifdef ENABLE_VFS_UNDELFS
     "undelfs",
 #endif

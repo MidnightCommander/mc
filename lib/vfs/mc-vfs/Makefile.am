@@ -16,11 +16,11 @@ BASICFILES = \
 	utilvfs.c utilvfs.h	\
 	local.c local.h		\
 	gc.c gc.h		\
-	cpio.c			\
 	tar.c			\
 	extfs.c			\
 	sfs.c
 
+CPIOFILES = cpio.c
 UNDELFILES = undelfs.c
 
 NETFILES = \
@@ -31,6 +31,9 @@ NETFILES = \
 SMBFILES = smbfs.c smbfs.h
 
 libvfs_mc_la_SOURCES = $(BASICFILES)
+if ENABLE_VFS_CPIO
+libvfs_mc_la_SOURCES += $(CPIOFILES)
+endif
 if ENABLE_VFS_UNDELFS
 libvfs_mc_la_SOURCES += $(UNDELFILES)
 endif
@@ -42,7 +45,11 @@ libvfs_mc_la_SOURCES += $(SMBFILES)
 endif
 
 EXTRA_DIST = HACKING README \
-	$(BASICFILES) $(UNDELFILES) $(NETFILES) $(SMBFILES)
+	$(BASICFILES) \
+	$(CPIOFILES) \
+	$(UNDELFILES) \
+	$(NETFILES) \
+	$(SMBFILES)
 
 dist-hook:
 	$(mkinstalldirs) $(distdir)/samba

@@ -1336,8 +1336,9 @@ vfs_init (void)
     init_extfs ();
     init_sfs ();
     init_tarfs ();
+#ifdef ENABLE_VFS_CPIO
     init_cpiofs ();
-
+#endif /* ENABLE_VFS_CPIO */
 #ifdef ENABLE_VFS_UNDELFS
     init_undelfs ();
 #endif /* ENABLE_VFS_UNDELFS */

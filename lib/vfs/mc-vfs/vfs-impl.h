@@ -111,7 +111,9 @@ char *vfs_path (const char *path);
 /* vfs/direntry.c: */
 void *vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode);
 
+#ifdef ENABLE_VFS_CPIO
 void init_cpiofs (void);
+#endif
 void init_extfs (void);
 void init_fish (void);
 void init_sfs (void);
