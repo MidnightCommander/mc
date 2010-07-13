@@ -16,7 +16,6 @@ m4_include([m4.include/vfs/mc-vfs-fish.m4])
 m4_include([m4.include/vfs/mc-vfs-undelfs.m4])
 m4_include([m4.include/vfs/mc-vfs-tarfs.m4])
 m4_include([m4.include/vfs/mc-vfs-cpiofs.m4])
-m4_include([m4.include/vfs/mc-vfs-mcfs.m4])
 m4_include([m4.include/vfs/mc-vfs-samba.m4])
 m4_include([m4.include/vfs/mc-mvfs.m4])
 
@@ -75,7 +74,6 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
 	AC_MC_VFS_EXTFS
 	AC_MC_VFS_SFS
 	AC_MC_VFS_UNDELFS
-	AC_MC_VFS_MCFS
 	AC_MC_VFS_SAMBA
 
 	MC_WITH_VFS
@@ -90,8 +88,6 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
 	AM_CONDITIONAL(ENABLE_VFS_SFS, [false])
 	AM_CONDITIONAL(ENABLE_VFS_UNDELFS, [false])
     fi
-
-    MC_MCSERVER_CHECKS
 
     AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])
 ])

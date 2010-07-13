@@ -39,9 +39,6 @@ static const char *const vfs_supported[] = {
 #ifdef USE_NETCODE
     "ftpfs",
     "fish",
-#   ifdef ENABLE_VFS_MCFS
-    "mcfs",
-#   endif
 #   ifdef ENABLE_VFS_SMB
     "smbfs",
 #   endif /* ENABLE_VFS_SMB */

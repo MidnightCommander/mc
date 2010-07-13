@@ -2711,42 +2711,6 @@ Példák:
     /#sh:joe@want.compression.edu:C/private
     /#sh:joe@noncompressed.ssh.edu/private
 .fi
-.\"NODE "  Network File System"
-.SH "  Hálózati fájlrendszer"
-A Midnight Commander fájlrendszere hálózat alapú fájlrendszer, amely
-lehetővé teszi számodra azt, hogy távoli gépeken fájlokkal úgy
-dolgozhass, mintha azok a saját gépeden lennének. Ennek használatához a
-távoli gépnek futtania kell az mcserv(8) szerver programot.
-.PP
-A távoli géphez történő kapcsolódáshoz csak egy speciális nevű
-könyvtárba kell belépned, amelynek a neve a következő:
-.PP
-.I /#mc:[felhasználó@]machine[:port][távoli\-könyvtár]
-.PP
-A
-.I felhasználó, port
-és a
-.I távoli\-könyvtár
-elemek opcionálisak. Ha megadod a
-.I felhasználó
-elemet, akkor a Midnight Commander megpróbál a távoli gépre ilyen
-felhasználói névvel belépni, egyébként pedig a belépett felhasználó
-nevét használja.
-.PP
-A
-.I port
-elemet akkor használható, ha a távoli gép speciális portot használ (lásd
-az mcserv(8) man oldalt a további portokkal kapcsolatos információkért);
-végül, ha a
-.I távoli\-könyvtár
-elem meg van adva, a távoli gép megadott könyvtárára vált át.
-.PP
-Például:
-.PP
-.nf
-    /#mc:ftp.nuclecu.unam.mx/linux/local
-    /#mc:joe@foo.edu:11321/private
-.fi
 .\"NODE "  Undelete File System"
 .SH "  Törlés visszaállítása"
 (csak ext2; second extended filesystem)
@@ -3130,7 +3094,7 @@ sunsite.mff.cuni.cz címen a /GNU/mc könyvtárban és az ftp.teuto.de címen
 az /lmb/mc könyvtárban.
 .\"NODE "SEE ALSO"
 .SH "Lásd még..."
-ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1), tcsh(1),
+ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1), tcsh(1),
 zsh(1).
 .PP
 .nf

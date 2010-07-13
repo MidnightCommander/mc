@@ -27,8 +27,6 @@ VFSHDRS = 			\
 	ftpfs.h			\
 	gc.h			\
 	local.h			\
-	mcfs.h			\
-	mcfsutil.h		\
 	netutil.h		\
 	smbfs.h			\
 	utilvfs.h		\
@@ -46,7 +44,7 @@ if ENABLE_VFS_UNDELFS
 UNDEL_FILES = $(UNDELFILES)
 endif
 
-NETFILES = netutil.c fish.c ftpfs.c mcfs.c mcfsutil.c $(SMB_NETFILES)
+NETFILES = netutil.c fish.c ftpfs.c $(SMB_NETFILES)
 
 NONETFILES = $(BASICFILES) $(UNDEL_FILES)
 
@@ -89,15 +87,6 @@ libvfs_mc_la_SOURCES = $(NETFILES) $(NONETFILES)
 else
 libvfs_mc_la_SOURCES = $(NONETFILES)
 endif
-
-if ENABLE_VFS
-if ENABLE_MCSERVER
-sbin_PROGRAMS = mcserv
-mcserv_SOURCES = mcserv.c
-mcserv_LDADD = $(MCSERVLIBS) $(GLIB_LIBS) libvfs-mc.la
-endif
-endif
-
 
 SAMBA_DIST =			\
 	Makefile.in		\

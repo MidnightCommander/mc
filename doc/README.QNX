@@ -276,11 +276,6 @@ src/
 
 vfs/
 
-  Makefile.in:
-
-    'install' target: 'mcserv' not installed, if net-code not enabled
-    by 'configure'.
-
 <mc-src-root>/
 
   README.QNX:

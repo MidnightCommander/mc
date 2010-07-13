@@ -2810,43 +2810,6 @@ Ejemplos:
     /#sh:pepe@sincomprimir.ssh.edu/privado
 .fi
 
-.\"NODE "  Network File System"
-.SH "  Sistema de archivos en Red"
-El sistema de archivos en red de Midnight Commander es un sistema de
-archivos en red básico que permite manipular archivos en una máquina
-remota como si estuviesen accesibles localmente. Para ello, la máquina
-remota debe estar ejecutando el programa servidor mcserv(8).
-.PP
-Para conectar a una máquina remota, sólo necesitamos hacer el cambio de
-directorio a un directorio especial cuyo nombre tendrá la forma:
-.PP
-.I /#mc:[usuario@]máquina[:puerto][directorio\-remoto]
-.PP
-Los elementos
-.IR usuario ,
-.I puerto
-y
-.I directorio\-remoto
-son opcionales. Si especificamos el elemento
-.I usuario
-entonces Midnight Commander intentará acceder a la
-máquina como ese usuario, si no, usará nuestro login.
-.PP
-El elemento
-.I puerto
-es necesario cuando el servidor remoto se ejecuta en un puerto especial
-(véase la página del manual de mcserv(8) para más información acerca de
-puertos); finalmente, si el elemento
-.I directorio\-remoto
-está presente, nuestro directorio actual en la máquina remota
-será éste.
-.PP
-Ejemplos:
-.PP
-.nf
-    /#mc:ftp.nuclecu.unam.mx/linux/local
-    /#mc:pepe@foo.edu:11321/privado
-.fi
 .\"NODE "  SMB File System"
 .SH "  Sistema de archivos SMB"
 El SMBfs permite manipular archivos en máquinas remotas con el protocolo
@@ -3763,7 +3726,7 @@ La última versión de este programa puede encontrarse en
 ftp://ftp.gnu.org/gnu/mc/.
 .\"NODE "SEE ALSO"
 .SH "VÉASE TAMBIÉN"
-mcedit(1), mcserv(8), sh(1), bash(1), tcsh(1), zsh(1), ed(1), view(1),
+mcedit(1), sh(1), bash(1), tcsh(1), zsh(1), ed(1), view(1),
 terminfo(1), gpm(1).
 .PP
 .nf

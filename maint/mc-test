@@ -48,7 +48,7 @@ mc_cflags=""
 
 mc_ldflags=""
 
-mc_tests="plain glib12 charset no_charset vfs no_vfs mcfs no_mcfs samba "\
+mc_tests="plain glib12 charset no_charset vfs no_vfs samba "\
 "no_samba ext2undel no_ext2undel slang ncurses maintainer "\
 "no_maintainer i18n no_i18n no_features all_features"
 
@@ -151,12 +151,12 @@ renice ${mc_nice_value} $$ 1>/dev/null 2>&1 || true
 configure_args_enable_all="--enable-largefile --enable-nls "\
 "--enable-netcode --enable-background --enable-charset "\
 "--with-mmap --with-included-gettext --with-x "\
-"--with-vfs --with-mcfs --with-samba --with-ext2undel "\
+"--with-vfs --with-samba --with-ext2undel "\
 "--with-gpm-mouse --with-subshell --with-edit"
 configure_args_disable_all="--disable-largefile --disable-nls "\
 "--disable-netcode --disable-background --disable-charset "\
 "--without-mmap --without-included-gettext --without-x "\
-"--without-vfs --without-mcfs --without-samba --without-ext2undel "\
+"--without-vfs --without-samba --without-ext2undel "\
 "--without-gpm-mouse --without-subshell --without-edit"
 
 errors=0
@@ -398,18 +398,6 @@ test_vfs() {
 test_no_vfs() {
 	testname="no_vfs"
 	configure_args="--without-vfs"
-	confbuild
-}
-
-test_mcfs() {
-	testname="mcfs"
-	configure_args="--with-mcfs"
-	confbuild
-}
-
-test_no_mcfs() {
-	testname="no_mcfs"
-	configure_args="--without-mcfs"
 	confbuild
 }
 

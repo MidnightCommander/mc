@@ -178,18 +178,6 @@ VFS options:
      libext2fs library available, this option adds support for
      recovering deleted files (the undel virtual file system).
 
-`--enable-vfs-mcfs'
-     Enable Support MCFS (mc's network filesystem).
-     This option enables mcfs - a non-standard remote filesystem
-     designed specifically for the Midnight Commander.  It also enables
-     a server for that filesystem, mcserv.  Please note that the
-     implementation of mcfs is not optimized for speed.  There may be
-     security issues with mcserv - don't run it if you don't need it.
-
-`--enable-mcserver'
-     (off by default)
-     Support mc-specific networking file system server
-
 `--disable-netcode'
      This option disables support for networked virtual filesystems.
      It's primarily used by developers to make sure that the code would

@@ -683,9 +683,6 @@ create_panel_menu (void)
 #endif
 #ifdef USE_NETCODE
     entries = g_list_append (entries, menu_separator_create ());
-#ifdef ENABLE_VFS_MCFS
-    entries = g_list_append (entries, menu_entry_create (_("&Network link..."), CK_NetlinkCmd));
-#endif
     entries = g_list_append (entries, menu_entry_create (_("FT&P link..."), CK_FtplinkCmd));
     entries = g_list_append (entries, menu_entry_create (_("S&hell link..."), CK_FishlinkCmd));
 #ifdef ENABLE_VFS_SMB
@@ -1320,11 +1317,6 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_MkdirCmd:
         mkdir_cmd ();
         break;
-#if defined (USE_NETCODE) && defined (ENABLE_VFS_MCFS)
-    case CK_NetlinkCmd:
-        netlink_cmd ();
-        break;
-#endif
     case CK_PanelOptionsBox:
         panel_options_box ();
         break;

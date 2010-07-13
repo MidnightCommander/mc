@@ -3073,11 +3073,8 @@ used to manipulate tar and compressed tar files; the
 used to recover deleted files on ext2 file systems (the default file
 system for Linux systems),
 .I fish
-(for manipulating files over shell connections such as rsh and ssh) and
-finally the
-.I mcfs
-(Midnight Commander file system), a network based file system.  If the
-code was compiled with
+(for manipulating files over shell connections such as rsh and ssh).
+If the code was compiled with
 .I smbfs
 support, you can manipulate files on remote systems with the SMB (CIFS)
 protocol.
@@ -3204,42 +3201,6 @@ Examples:
     /#sh:joe@want.compression.edu:C/private
     /#sh:joe@noncompressed.ssh.edu/private
     /#sh:joe@somehost.ssh.edu:2222/private
-.fi
-.\"NODE "  Network File System"
-.SH "  Network File System"
-The Midnight Commander file system is a network base file system that
-allows you to manipulate the files in a remote machine as if they were
-local.  To use this, the remote machine must be running the mcserv(8)
-server program.
-.PP
-To connect to a remote machine, you just need to chdir into a special
-directory which name is in the following format:
-.PP
-.I /#mc:[user@]machine[:port][remote\-dir]
-.PP
-The
-.I user, port
-and
-.I remote\-dir
-elements are optional.  If you specify the
-.I user
-element then the Midnight Commander will try to logon on the remote
-machine as that user, otherwise it will use your login name.
-.PP
-The
-.I port
-element is used when the remote server is running on a special port
-(see the mcserv(8) manual page for more information about ports);
-finally, if the
-.I remote\-dir
-element is present, your current directory on the remote machine will
-be set to this one.
-.PP
-Examples:
-.PP
-.nf
-    /#mc:ftp.nuclecu.unam.mx/linux/local
-    /#mc:joe@foo.edu:11321/private
 .fi
 .\"NODE "  Undelete File System"
 .SH "  Undelete File System"
@@ -4151,7 +4112,7 @@ The latest version of this program can be found at
 ftp://ftp.gnu.org/gnu/mc/.
 .\"NODE "SEE ALSO"
 .SH "SEE ALSO"
-ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
+ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
 .PP
 .nf
