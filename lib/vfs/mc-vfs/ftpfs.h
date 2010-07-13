@@ -7,10 +7,12 @@
 #ifndef MC_VFS_FTPFS_H
 #define MC_VFS_FTPFS_H
 
+extern int ftpfs_use_netrc;
 extern char *ftpfs_anonymous_passwd;
 extern char *ftpfs_proxy_host;
 extern int ftpfs_directory_timeout;
 extern int ftpfs_always_use_proxy;
+extern int ftpfs_ignore_chattr_errors;
 
 extern int ftpfs_retry_seconds;
 extern int ftpfs_use_passive_connections;

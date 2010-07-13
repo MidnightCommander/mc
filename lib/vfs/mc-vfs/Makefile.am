@@ -29,9 +29,9 @@ UNDELFILES = undelfs.c
 
 NETFILES = \
 	netutil.c netutil.h	\
-	fish.c fish.h fishdef.h	\
-	ftpfs.c ftpfs.h
+	fish.c fish.h fishdef.h
 
+FTPFILES = ftpfs.c ftpfs.h
 SMBFILES = smbfs.c smbfs.h
 
 libvfs_mc_la_SOURCES = $(BASICFILES)
@@ -53,6 +53,9 @@ endif
 if ENABLE_VFS_NET
 libvfs_mc_la_SOURCES += $(NETFILES)
 endif
+if ENABLE_VFS_FTP
+libvfs_mc_la_SOURCES += $(FTPFILES)
+endif
 if USE_SAMBA_FS
 libvfs_mc_la_SOURCES += $(SMBFILES)
 endif
@@ -65,6 +68,7 @@ EXTRA_DIST = HACKING README \
 	$(EXTFSFILES) \
 	$(UNDELFILES) \
 	$(NETFILES) \
+	$(FTPFILES) \
 	$(SMBFILES)
 
 dist-hook:

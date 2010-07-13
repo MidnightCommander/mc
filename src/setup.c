@@ -38,8 +38,10 @@
 
 #include "lib/vfs/mc-vfs/vfs.h"
 
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
 #include "lib/vfs/mc-vfs/ftpfs.h"
+#endif
+#ifdef USE_NETCODE
 #include "lib/vfs/mc-vfs/fish.h"
 #endif
 
@@ -212,17 +214,19 @@ static const struct
     { "classic_progressbar", &classic_progressbar},
 #ifdef ENABLE_VFS
     { "vfs_timeout", &vfs_timeout },
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
     { "ftpfs_directory_timeout", &ftpfs_directory_timeout },
-    { "use_netrc", &use_netrc },
+    { "use_netrc", &ftpfs_use_netrc },
     { "ftpfs_retry_seconds", &ftpfs_retry_seconds },
     { "ftpfs_always_use_proxy", &ftpfs_always_use_proxy },
     { "ftpfs_use_passive_connections", &ftpfs_use_passive_connections },
     { "ftpfs_use_passive_connections_over_proxy", &ftpfs_use_passive_connections_over_proxy },
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
+#endif /* ENABLE_VFS_FTP */
+#ifdef USE_NETCODE
     { "fish_directory_timeout", &fish_directory_timeout },
-#endif /* USE_NETCODE */
+#endif
 #endif /* ENABLE_VFS */
     /* option_tab_spacing is used in internal viewer */
     { "editor_tab_spacing", &option_tab_spacing },
@@ -790,9 +794,12 @@ load_setup (void)
         mc_config_get_string (mc_main_config, "Misc", "timeformat_recent", FMTTIME);
     user_old_timeformat = mc_config_get_string (mc_main_config, "Misc", "timeformat_old", FMTYEAR);
 
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
     ftpfs_proxy_host = mc_config_get_string (mc_main_config, "Misc", "ftp_proxy_host", "gate");
-#endif
+    ftpfs_ignore_chattr_errors = mc_config_get_bool (mc_main_config, CONFIG_APP_SECTION,
+                                                     "ignore_ftp_chattr_errors", TRUE);
+    ftpfs_init_passwd ();
+#endif /* ENABLE_VFS_FTP */
 
     /* The default color and the terminal dependent color */
     setup_color_string = mc_config_get_string (mc_main_config, "Colors", "base_color", "");
@@ -802,9 +809,6 @@ load_setup (void)
     /* Load the directory history */
     /*    directory_history_load (); */
     /* Remove the temporal entries */
-#if defined(ENABLE_VFS) && defined (USE_NETCODE)
-    ftpfs_init_passwd ();
-#endif /* ENABLE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
     if (load_codepages_list () > 0)
@@ -855,11 +859,11 @@ save_setup (void)
     save_panel_types ();
     /*     directory_history_save (); */
 
-#if defined(ENABLE_VFS) && defined (USE_NETCODE)
+#ifdef ENABLE_VFS_FTP
     mc_config_set_string (mc_main_config, "Misc", "ftpfs_password", ftpfs_anonymous_passwd);
     if (ftpfs_proxy_host)
         mc_config_set_string (mc_main_config, "Misc", "ftp_proxy_host", ftpfs_proxy_host);
-#endif /* ENABLE_VFS && USE_NETCODE */
+#endif /* ENABLE_VFS_FTP */
 
 #ifdef HAVE_CHARSET
     mc_config_set_string (mc_main_config, "Misc", "display_codepage",
@@ -975,7 +979,7 @@ load_key_defs (void)
     load_keys_from_section (getenv ("TERM"), mc_main_config);
 }
 
-#if defined(ENABLE_VFS) && defined (USE_NETCODE)
+#ifdef ENABLE_VFS_FTP
 char *
 load_anon_passwd (void)
 {
@@ -989,7 +993,7 @@ load_anon_passwd (void)
     g_free (buffer);
     return NULL;
 }
-#endif /* ENABLE_VFS && USE_NETCODE */
+#endif /* ENABLE_VFS_FTP */
 
 void
 load_keymap_defs (void)

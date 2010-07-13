@@ -17,7 +17,9 @@ typedef enum
     LINK_SYMLINK_RELATIVE
 } link_type_t;
 
+#ifdef ENABLE_VFS_FTP
 void ftplink_cmd (void);
+#endif
 void fishlink_cmd (void);
 void smblink_cmd (void);
 void undelete_cmd (void);

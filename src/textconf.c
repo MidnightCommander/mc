@@ -48,8 +48,10 @@ static const char *const vfs_supported[] = {
 #ifdef ENABLE_VFS_UNDELFS
     "undelfs",
 #endif
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
     "ftpfs",
+#endif
+#ifdef USE_NETCODE
     "fish",
 #   ifdef ENABLE_VFS_SMB
     "smbfs",

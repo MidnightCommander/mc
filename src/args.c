@@ -144,13 +144,14 @@ static const GOptionEntry argument_main_table[] = {
 #endif
 
     /* debug options */
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
     {
      "ftplog", 'l', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
      &mc_args__netfs_logfile,
      N_("Log ftp dialog to specified file"),
      "<file>"
     },
+#endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
     {
      "debuglevel", 'D', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_INT,
@@ -159,7 +160,6 @@ static const GOptionEntry argument_main_table[] = {
      "<integer>"
     },
 #endif /* ENABLE_VFS_SMB */
-#endif
 
     /* single file operations */
     {
@@ -389,10 +389,11 @@ mc_setup_by_args (int argc, char *argv[])
     if (mc_args__nomouse)
         use_mouse_p = MOUSE_DISABLED;
 
-#ifdef USE_NETCODE
     if (mc_args__netfs_logfile != NULL)
     {
+#ifdef ENABLE_VFS_FTP
         mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+#endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
         smbfs_set_debugf (mc_args__netfs_logfile);
 #endif /* ENABLE_VFS_SMB */
@@ -402,7 +403,6 @@ mc_setup_by_args (int argc, char *argv[])
     if (mc_args__debug_level != 0)
         smbfs_set_debug (mc_args__debug_level);
 #endif /* ENABLE_VFS_SMB */
-#endif /* USE_NETCODE */
 
     base = x_basename (argv[0]);
     tmp = (argc > 0) ? argv[1] : NULL;

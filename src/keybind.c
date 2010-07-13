@@ -351,6 +351,8 @@ static name_keymap_t command_names[] = {
     { "CmdFind",                         CK_FindCmd },
 #ifdef USE_NETCODE
     { "CmdFishlink",                     CK_FishlinkCmd },
+#endif
+#ifdef ENABLE_VFS_FTP
     { "CmdFtplink",                      CK_FtplinkCmd },
 #endif
     { "CmdHistory",                      CK_HistoryCmd },

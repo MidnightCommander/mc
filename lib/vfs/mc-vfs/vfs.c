@@ -65,7 +65,9 @@
 #ifdef USE_NETCODE
 #   include "netutil.h"
 #endif
+#ifdef ENABLE_VFS_FTP
 #include "ftpfs.h"
+#endif
 #include "smbfs.h"
 #include "local.h"
 
@@ -1349,8 +1351,10 @@ vfs_init (void)
     init_undelfs ();
 #endif /* ENABLE_VFS_UNDELFS */
 
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
     init_ftpfs ();
+#endif /* ENABLE_VFS_FTP */
+#ifdef USE_NETCODE
     init_fish ();
 #ifdef ENABLE_VFS_SMB
     init_smbfs ();
@@ -1405,7 +1409,9 @@ static const struct
 } url_table[] =
 {
     /* *INDENT-OFF* */
+#ifdef ENABLE_VFS_FTP
     { "ftp://", 6, "/#ftp:" },
+#endif
     { "smb://", 6, "/#smb:" },
     { "sh://", 5, "/#sh:" },
     { "ssh://", 6, "/#sh:" },

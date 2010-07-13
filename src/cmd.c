@@ -1259,12 +1259,14 @@ nice_cd (const char *text, const char *xtext, const char *help,
 
 static const char *machine_str = N_("Enter machine name (F1 for details):");
 
+#ifdef ENABLE_VFS_FTP
 void
 ftplink_cmd (void)
 {
     nice_cd (_("FTP to machine"), _(machine_str),
              "[FTP File System]", ":ftplink_cmd: FTP to machine ", "/#ftp:", 1);
 }
+#endif /* ENABLE_VFS_FTP */
 
 void
 fishlink_cmd (void)

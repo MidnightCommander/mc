@@ -39,9 +39,9 @@ void setup_save_config_show_error (const char *filename, GError **error);
 void save_layout (void);
 
 void load_key_defs (void);
-#if defined(ENABLE_VFS) && defined (USE_NETCODE)
+#ifdef ENABLE_VFS_FTP
 char *load_anon_passwd (void);
-#endif /* ENABLE_VFS && defined USE_NETCODE */
+#endif /* ENABLE_VFS_FTP */
 
 void load_keymap_defs (void);
 void free_keymap_defs (void);

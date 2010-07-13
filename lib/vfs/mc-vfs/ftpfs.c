@@ -91,7 +91,6 @@ What to do with this?
 #include "src/main.h"           /* print_vfs_message */
 #include "src/history.h"
 #include "src/setup.h"          /* for load_anon_passwd */
-#include "lib/mcconfig.h"
 
 #include "utilvfs.h"
 #include "xdirentry.h"
@@ -146,7 +145,7 @@ int ftpfs_use_unix_list_options = 1;
 int ftpfs_first_cd_then_ls = 1;
 
 /* Use the ~/.netrc */
-int use_netrc = 1;
+int ftpfs_use_netrc = 1;
 
 /* Anonymous setup */
 char *ftpfs_anonymous_passwd = NULL;
@@ -156,7 +155,9 @@ int ftpfs_directory_timeout = 900;
 char *ftpfs_proxy_host = NULL;
 
 /* wether we have to use proxy by default? */
-int ftpfs_always_use_proxy;
+int ftpfs_always_use_proxy = 0;
+
+int ftpfs_ignore_chattr_errors = 1;
 
 #ifdef FIXME_LATER_ALIGATOR
 static struct linklist *connections_list;
@@ -260,14 +261,14 @@ ftpfs_split_url (char *path, char **host, char **user, int *port, char **pass)
     if (!*user)
     {
         /* Look up user and password in netrc */
-        if (use_netrc)
+        if (ftpfs_use_netrc)
             ftpfs_netrc_lookup (*host, user, pass);
         if (!*user)
             *user = g_strdup ("anonymous");
     }
 
     /* Look up password in netrc for known user */
-    if (use_netrc && *user && pass && !*pass)
+    if (ftpfs_use_netrc && *user && pass && !*pass)
     {
         char *new_user;
 
@@ -1816,12 +1817,7 @@ ftpfs_chmod (struct vfs_class *me, const char *path, int mode)
 
     ret = ftpfs_send_command (me, path, buf, OPT_FLUSH);
 
-    if (mc_config_get_bool (mc_main_config, CONFIG_APP_SECTION, "ignore_ftp_chattr_errors", TRUE))
-    {
-        return 0;
-    }
-
-    return ret;
+    return ftpfs_ignore_chattr_errors ? 0 : ret;
 }
 
 static int

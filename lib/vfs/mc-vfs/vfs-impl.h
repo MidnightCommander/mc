@@ -127,6 +127,9 @@ void init_fish (void);
 #ifdef ENABLE_VFS_UNDELFS
 void init_undelfs (void);
 #endif
+#ifdef ENABLE_VFS_FTP
+void init_ftpfs (void);
+#endif
 
 #endif /* ENABLE_VFS */
 
