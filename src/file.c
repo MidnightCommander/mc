@@ -2066,28 +2066,21 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             dest_dir = other_panel->cwd;
         else
             dest_dir = panel->cwd;
-
         /*
          * Add trailing backslash only when do non-local ops.
          * It saves user from occasional file renames (when destination
          * dir is deleted)
          */
-        if (force_single || dest_dir[0] == '\0')
-        {
-            /* just copy */
-            dest_dir_ = g_strdup (dest_dir);
-        }
-        else if (single_entry)
-        {
-            /* add filename to dest path */
-            dest_dir_ = g_build_filename (dest_dir, source, (char *) NULL);
-        }
-        else
+        if (!force_single && dest_dir[0] != '\0' && dest_dir[strlen (dest_dir) - 1] != PATH_SEP)
         {
             /* add trailing separator */
             dest_dir_ = g_strconcat (dest_dir, PATH_SEP_STR, (char *) NULL);
         }
-
+        else
+        {
+            /* just copy */
+            dest_dir_ = g_strdup (dest_dir);
+        }
         if (dest_dir_ == NULL)
         {
             file_op_total_context_destroy (tctx);
