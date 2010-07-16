@@ -1025,14 +1025,14 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                 int i;
                 GList *e;
 
-                for (i = 0, e = ((WListbox *) h->current)->list;
+                for (i = 0, e = ((WListbox *) h->current->data)->list;
                      e != NULL; i++, e = g_list_next (e))
                 {
                     WLEntry *le = (WLEntry *) e->data;
 
                     if (strncmp (input->buffer + start, le->text, end - start - 1) == 0)
                     {
-                        listbox_select_entry ((WListbox *) h->current, i);
+                        listbox_select_entry ((WListbox *) h->current->data, i);
                         end = str_get_prev_char (&(input->buffer[end])) - input->buffer;
                         handle_char (input, parm);
                         send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
@@ -1077,7 +1077,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                     return MSG_HANDLED;
                 }
 
-                for (i = 0, e = ((WListbox *) h->current)->list;
+                for (i = 0, e = ((WListbox *) h->current->data)->list;
                      e != NULL; i++, e = g_list_next (e))
                 {
                     WLEntry *le = (WLEntry *) e->data;
@@ -1117,7 +1117,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                             else
                             {
                                 need_redraw = 1;
-                                listbox_select_entry ((WListbox *) h->current, i);
+                                listbox_select_entry ((WListbox *) h->current->data, i);
                                 last_text = le->text;
                             }
                         }
