@@ -455,7 +455,6 @@ find_parameters (char **start_dir, char **pattern, char **content)
     if (in_start_dir == NULL)
         in_start_dir = g_strdup (".");
 
-  find_par_start:
     disable = !options.content_use;
 
     find_dlg =
@@ -542,6 +541,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg, in_start);
     add_widget (find_dlg, label_new (2, 3, _("Start at:")));
 
+  find_par_start:
     dlg_select_widget (in_name);
 
     switch (run_dlg (find_dlg))
@@ -552,32 +552,19 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     case B_TREE:
         {
-            char temp_dir[MC_MAXPATHLEN];
-
-            g_strlcpy (temp_dir, in_start->buffer, sizeof (temp_dir));
-#ifdef HAVE_CHARSET
-            options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
-            options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
-#endif
-            options.content_use = content_use_cbox->state & C_BOOL;
-            options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
-            options.content_regexp = content_regexp_cbox->state & C_BOOL;
-            options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
-            options.content_whole_words = content_whole_words_cbox->state & C_BOOL;
-            options.file_pattern = file_pattern_cbox->state & C_BOOL;
-            options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
-            options.find_recurs = recursively_cbox->state & C_BOOL;
-            options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
-            destroy_dlg (find_dlg);
+            const char *temp_dir = in_start->buffer;
 
             if ((temp_dir[0] == '\0') || ((temp_dir[0] == '.') && (temp_dir[1] == '\0')))
-                g_strlcpy (temp_dir, current_panel->cwd, sizeof (temp_dir));
+                temp_dir = current_panel->cwd;
 
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = tree_box (temp_dir);
             if (in_start_dir == NULL)
                 in_start_dir = g_strdup (temp_dir);
+
+            assign_text (in_start, in_start_dir);
+
             /* Warning: Dreadful goto */
             goto find_par_start;
         }
