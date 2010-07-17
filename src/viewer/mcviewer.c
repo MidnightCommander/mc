@@ -412,7 +412,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         off_t new_offset;
 
         canon_fname = vfs_canon (view->filename);
-        load_file_position (canon_fname, &line, &col, &new_offset);
+        load_file_position (canon_fname, &line, &col, &new_offset, &view->saved_bookmarks);
         new_offset = min (new_offset, mcview_get_filesize (view));
         view->dpy_start = mcview_bol (view, new_offset);
         g_free (canon_fname);

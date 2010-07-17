@@ -280,6 +280,8 @@ int book_mark_clear (WEdit * edit, int line, int c);
 void book_mark_flush (WEdit * edit, int c);
 void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
+void book_mark_serialize (WEdit * edit, int color);
+void book_mark_restore (WEdit * edit, int color);
 
 int line_is_blank (WEdit * edit, long line);
 int edit_indent_width (WEdit * edit, long p);

@@ -805,6 +805,8 @@ edit_load_file (WEdit * edit)
     return 0;
 }
 
+#define MAX_SAVED_BOOKMARKS 10
+
 /* Restore saved cursor position in the file */
 static void
 edit_load_position (WEdit * edit)
@@ -817,7 +819,7 @@ edit_load_position (WEdit * edit)
         return;
 
     filename = vfs_canon (edit->filename);
-    load_file_position (filename, &line, &column, &offset);
+    load_file_position (filename, &line, &column, &offset, &edit->serialized_bookmarks);
     g_free (filename);
 
     if (line > 0)
@@ -830,6 +832,9 @@ edit_load_position (WEdit * edit)
         edit_cursor_move (edit, offset);
         line = edit->curs_line;
     }
+
+    book_mark_restore (edit, BOOK_MARK_COLOR);
+
     edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
     edit_move_display (edit, line - (edit->num_widget_lines / 2));
 }
@@ -844,7 +849,12 @@ edit_save_position (WEdit * edit)
         return;
 
     filename = vfs_canon (edit->filename);
-    save_file_position (filename, edit->curs_line + 1, edit->curs_col, edit->curs1);
+
+    book_mark_serialize (edit, BOOK_MARK_COLOR);
+
+    save_file_position (filename, edit->curs_line + 1, edit->curs_col, edit->curs1, edit->serialized_bookmarks);
+    edit->serialized_bookmarks = NULL;
+
     g_free (filename);
 }
 

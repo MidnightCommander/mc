@@ -190,6 +190,8 @@ typedef struct mcview_struct
     struct mcview_nroff_struct *search_nroff_seq;
 
     int search_numNeedSkipChar;
+
+    long *saved_bookmarks;
 } mcview_t;
 
 typedef struct mcview_nroff_struct

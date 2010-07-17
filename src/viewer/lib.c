@@ -233,7 +233,7 @@ mcview_done (mcview_t * view)
     {
         char *canon_fname;
         canon_fname = vfs_canon (view->filename);
-        save_file_position (canon_fname, -1, 0, view->dpy_start);
+        save_file_position (canon_fname, -1, 0, view->dpy_start, view->saved_bookmarks);
         g_free (canon_fname);
     }
 

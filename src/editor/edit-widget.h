@@ -96,6 +96,7 @@ struct WEdit
     long line_offsets[N_LINE_CACHES];
 
     struct _book_mark *book_mark;
+    long *serialized_bookmarks;
 
     /* undo stack and pointers */
     unsigned long stack_pointer;
