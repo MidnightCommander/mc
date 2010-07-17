@@ -357,9 +357,9 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         if (!(file_pattern_cbox->state & C_BOOL)
             && (in_name->buffer[0] != '\0') && !find_check_regexp (in_name->buffer))
         {
+            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_name);
-            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             return MSG_HANDLED;
         }
 
@@ -367,9 +367,9 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         if ((content_regexp_cbox->state & C_BOOL)
             && (in_with->buffer[0] != '\0') && !find_check_regexp (in_with->buffer))
         {
+            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_with);
-            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             return MSG_HANDLED;
         }
 
@@ -740,14 +740,12 @@ get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboole
             /* skip possible leading zero(s) */
             if (i == 0)
                 continue;
-            else
-                break;
+            break;
         }
 
         if (i >= buffer_size - 1)
-        {
             buffer = g_realloc (buffer, buffer_size += 80);
-        }
+
         /* Strip newline */
         if (ch == '\n')
             break;
@@ -908,11 +906,11 @@ do_search (struct Dlg_head *h)
     static int pos = 0;
     static int subdirs_left = 0;
     gsize bytes_found;
-    unsigned long count;        /* Number of files displayed */
+    unsigned short count;
 
-    if (!h)
+    if (h == NULL)
     {                           /* someone forces me to close dirp */
-        if (dirp)
+        if (dirp != NULL)
         {
             mc_closedir (dirp);
             dirp = NULL;
@@ -923,150 +921,119 @@ do_search (struct Dlg_head *h)
         return 1;
     }
 
-    search_content_handle = mc_search_new (content_pattern, -1);
-    if (search_content_handle)
+    for (count = 0; count < 32; count++)
     {
-        search_content_handle->search_type =
-            options.content_regexp ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
-        search_content_handle->is_case_sensitive = options.content_case_sens;
-        search_content_handle->whole_words = options.content_whole_words;
-        search_content_handle->is_all_charsets = options.content_all_charsets;
-    }
-    search_file_handle = mc_search_new (find_pattern, -1);
-    search_file_handle->search_type = options.file_pattern ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
-    search_file_handle->is_case_sensitive = options.file_case_sens;
-    search_file_handle->is_all_charsets = options.file_all_charsets;
-    search_file_handle->is_entire_line = options.file_pattern;
-
-    count = 0;
-
-  do_search_begin:
-    while (!dp)
-    {
-        if (dirp)
+        while (dp == NULL)
         {
-            mc_closedir (dirp);
-            dirp = 0;
-        }
-
-        while (!dirp)
-        {
-            char *tmp = NULL;
-
-            tty_setcolor (REVERSE_COLOR);
-            while (1)
+            if (dirp != NULL)
             {
-                char *temp_dir = NULL;
-                gboolean found;
+                mc_closedir (dirp);
+                dirp = NULL;
+            }
 
-                tmp = pop_directory ();
-                if (tmp == NULL)
+            while (dirp == NULL)
+            {
+                char *tmp = NULL;
+
+                tty_setcolor (REVERSE_COLOR);
+                while (TRUE)
                 {
-                    running = FALSE;
-                    status_update (_("Finished"));
-                    stop_idle (h);
-                    mc_search_free (search_file_handle);
-                    search_file_handle = NULL;
-                    mc_search_free (search_content_handle);
-                    search_content_handle = NULL;
-                    return 0;
+                    char *temp_dir = NULL;
+                    gboolean found;
+
+                    tmp = pop_directory ();
+                    if (tmp == NULL)
+                    {
+                        running = FALSE;
+                        status_update (_("Finished"));
+                        stop_idle (h);
+                        return 0;
+                    }
+
+                    if ((find_ignore_dirs == NULL) || (find_ignore_dirs[0] == '\0'))
+                        break;
+
+                    temp_dir = g_strdup_printf (":%s:", tmp);
+                    found = strstr (find_ignore_dirs, temp_dir) != 0;
+                    g_free (temp_dir);
+
+                    if (!found)
+                        break;
+
+                    g_free (tmp);
                 }
 
-                if ((find_ignore_dirs == NULL) || (find_ignore_dirs[0] == '\0'))
-                    break;
+                g_free (directory);
+                directory = tmp;
 
-                temp_dir = g_strdup_printf (":%s:", tmp);
-                found = strstr (find_ignore_dirs, temp_dir) != 0;
-                g_free (temp_dir);
+                if (verbose)
+                {
+                    char buffer[BUF_SMALL];
 
-                if (!found)
-                    break;
+                    g_snprintf (buffer, sizeof (buffer), _("Searching %s"),
+                                str_trunc (directory, FIND2_X_USE));
+                    status_update (buffer);
+                }
+                /* mc_stat should not be called after mc_opendir
+                   because vfs_s_opendir modifies the st_nlink
+                 */
+                if (mc_stat (directory, &tmp_stat) == 0)
+                    subdirs_left = tmp_stat.st_nlink - 2;
+                else
+                    subdirs_left = 0;
 
-                g_free (tmp);
+                dirp = mc_opendir (directory);
+            }                   /* while (!dirp) */
+
+            /* skip invalid filenames */
+            while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))
+                ;
+        }                       /* while (!dp) */
+
+        if (strcmp (dp->d_name, ".") == 0 || strcmp (dp->d_name, "..") == 0)
+        {
+            dp = mc_readdir (dirp);
+            /* skip invalid filenames */
+            while (dp != NULL && !str_is_valid_string (dp->d_name))
+                dp = mc_readdir (dirp);
+
+            return 1;
+        }
+
+        if (!(options.skip_hidden && (dp->d_name[0] == '.')))
+        {
+            gboolean search_ok;
+
+            if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
+            {                   /* Can directory be NULL ? */
+                char *tmp_name = concat_dir_and_file (directory, dp->d_name);
+                if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
+                {
+                    push_directory (tmp_name);
+                    subdirs_left--;
+                }
+                else
+                    g_free (tmp_name);
             }
 
-            g_free (directory);
-            directory = tmp;
+            search_ok = mc_search_run (search_file_handle, dp->d_name,
+                                       0, strlen (dp->d_name), &bytes_found);
 
-            if (verbose)
+            if (search_ok)
             {
-                char buffer[BUF_SMALL];
-
-                g_snprintf (buffer, sizeof (buffer), _("Searching %s"),
-                            str_trunc (directory, FIND2_X_USE));
-                status_update (buffer);
+                if (content_pattern == NULL)
+                    find_add_match (directory, dp->d_name);
+                else if (search_content (h, directory, dp->d_name))
+                    return 1;
             }
-            /* mc_stat should not be called after mc_opendir
-               because vfs_s_opendir modifies the st_nlink
-             */
-            if (!mc_stat (directory, &tmp_stat))
-                subdirs_left = tmp_stat.st_nlink - 2;
-            else
-                subdirs_left = 0;
-
-            dirp = mc_opendir (directory);
-        }                       /* while (!dirp) */
+        }
 
         /* skip invalid filenames */
         while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))
             ;
-    }                           /* while (!dp) */
-
-    if (strcmp (dp->d_name, ".") == 0 || strcmp (dp->d_name, "..") == 0)
-    {
-        dp = mc_readdir (dirp);
-        /* skip invalid filenames */
-        while (dp != NULL && !str_is_valid_string (dp->d_name))
-            dp = mc_readdir (dirp);
-
-        mc_search_free (search_file_handle);
-        search_file_handle = NULL;
-        mc_search_free (search_content_handle);
-        search_content_handle = NULL;
-        return 1;
-    }
-
-    if (!(options.skip_hidden && (dp->d_name[0] == '.')))
-    {
-        gboolean search_ok;
-
-        if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
-        {                       /* Can directory be NULL ? */
-            char *tmp_name = concat_dir_and_file (directory, dp->d_name);
-            if (!mc_lstat (tmp_name, &tmp_stat) && S_ISDIR (tmp_stat.st_mode))
-            {
-                push_directory (tmp_name);
-                subdirs_left--;
-            }
-            else
-                g_free (tmp_name);
-        }
-
-        search_ok = mc_search_run (search_file_handle, dp->d_name,
-                                   0, strlen (dp->d_name), &bytes_found);
-
-        if (search_ok)
-        {
-            if (content_pattern == NULL)
-                find_add_match (directory, dp->d_name);
-            else if (search_content (h, directory, dp->d_name))
-            {
-                mc_search_free (search_file_handle);
-                search_file_handle = NULL;
-                mc_search_free (search_content_handle);
-                search_content_handle = NULL;
-                return 1;
-            }
-        }
-    }
-
-    /* skip invalid filenames */
-    while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))
-        ;
+    } /* for */
 
     /* Displays the nice dot */
-    count++;
-    if (!(count & 31))
     {
         /* For nice updating */
         const char rotating_dash[] = "|/-\\";
@@ -1080,13 +1047,7 @@ do_search (struct Dlg_head *h)
             mc_refresh ();
         }
     }
-    else
-        goto do_search_begin;
 
-    mc_search_free (search_file_handle);
-    search_file_handle = NULL;
-    mc_search_free (search_content_handle);
-    search_content_handle = NULL;
     return 1;
 }
 
@@ -1303,9 +1264,33 @@ setup_gui (void)
 static int
 run_process (void)
 {
+    int ret;
+
+    search_content_handle = mc_search_new (content_pattern, -1);
+    if (search_content_handle)
+    {
+        search_content_handle->search_type =
+            options.content_regexp ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
+        search_content_handle->is_case_sensitive = options.content_case_sens;
+        search_content_handle->whole_words = options.content_whole_words;
+        search_content_handle->is_all_charsets = options.content_all_charsets;
+    }
+    search_file_handle = mc_search_new (find_pattern, -1);
+    search_file_handle->search_type = options.file_pattern ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
+    search_file_handle->is_case_sensitive = options.file_case_sens;
+    search_file_handle->is_all_charsets = options.file_all_charsets;
+    search_file_handle->is_entire_line = options.file_pattern;
+
     resuming = 0;
     set_idle_proc (find_dlg, 1);
-    return run_dlg (find_dlg);
+    ret = run_dlg (find_dlg);
+
+    mc_search_free (search_file_handle);
+    search_file_handle = NULL;
+    mc_search_free (search_content_handle);
+    search_content_handle = NULL;
+
+    return ret;
 }
 
 static void
