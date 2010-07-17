@@ -66,7 +66,6 @@
 #   include "netutil.h"
 #endif
 #include "ftpfs.h"
-#include "mcfs.h"
 #include "smbfs.h"
 #include "local.h"
 
@@ -1349,9 +1348,6 @@ vfs_init (void)
 #ifdef ENABLE_VFS_SMB
     init_smbfs ();
 #endif /* ENABLE_VFS_SMB */
-#ifdef ENABLE_VFS_MCFS
-    init_mcfs ();
-#endif /* ENABLE_VFS_MCFS */
 #endif /* USE_NETCODE */
 
     vfs_setup_wd ();

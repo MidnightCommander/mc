@@ -544,7 +544,6 @@ AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
 AM_CONDITIONAL(ENABLE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
-AM_CONDITIONAL(ENABLE_MCSERVER, [test x"$enable_mcserver" = "xyes"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
@@ -622,13 +621,13 @@ misc/syntax/Makefile
 
 doc/Makefile
 doc/hints/Makefile
-doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/mcserv.8 doc/man/Makefile
+doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/Makefile
 doc/man/es/mc.1 doc/man/es/Makefile
 doc/man/hu/mc.1 doc/man/hu/Makefile
 doc/man/it/mc.1 doc/man/it/Makefile
 doc/man/pl/mc.1 doc/man/pl/Makefile
 doc/man/ru/mc.1 doc/man/ru/Makefile
-doc/man/sr/mc.1 doc/man/sr/mcserv.8 doc/man/sr/Makefile
+doc/man/sr/mc.1 doc/man/sr/Makefile
 
 doc/hlp/Makefile
 doc/hlp/es/Makefile
@@ -643,10 +642,6 @@ po/Makefile.in
 ])
 
 AC_OUTPUT
-
-if test x$enable_mcserver = x; then
-    enable_mcserver='no'
-fi
 
 echo "
 Configuration:

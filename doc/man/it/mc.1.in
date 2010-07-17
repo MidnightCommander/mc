@@ -2721,42 +2721,6 @@ Esempi:
     /#sh:joe@vuole.lacompressione.edu:C/privato
     /#sh:joe@noncompresso.ssh.edu/privato
 .fi
-.\"NODE "  Network File System"
-.SH "  File system di rete"
-Il file system di rete del Midnight Commander è un file system basato 
-sulla rete che permette di manipolare i file su di una macchina remota
-come se fossero locali. Per usarlo, sulla macchina remota deve essere
-in esecuzione il programma server mcserv(8).
-.PP
-Per connettersi ad una macchina remota, basta solo fare cd
-in una speciale directory il cui nome ha il seguente formato:
-.PP
-.I /#mc:[utente@]macchina[:porta][dir\-remota]
-.PP
-Gli elementi
-.I utente, porta
-e
-.I dir\-remota
-sono opzionali. Se si specifica l'elemento
-.I utente
-alloral il Midnight Commander tenterà di connettersi alla macchina remota
-con quell'utente, altrimenti userà il nome di login.
-.PP
-L'elemento
-.I porta
-viene usato quando la macchina remota usa una porta speciale;
-(vedere la magina man mcserv(8) per ulteriori informazioni sulle porte);
-infine se l'elemento
-.I dir\-remota
-è presente, la directory corrente sulla macchina remota sarà impostata 
-a questo valore.
-.PP
-Esempi:
-.PP
-.nf
-    /#mc:ftp.nuclecu.unam.mx/linux/locale
-    /#mc:joe@foo.edu:11321/privato
-.fi
 .\"NODE "  Undelete File System"
 .SH "  Recupero file cancellati"
 Su sistemi Linux, se si richiede, tramite configure, di usare la
@@ -3152,7 +3116,7 @@ L'ultima versione di questo programma si trova su
 ftp://ftp.gnu.org/gnu/mc/.
 .\"NODE "SEE ALSO"
 .SH "VEDERE ANCHE"
-ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
+ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
 .PP
 .nf

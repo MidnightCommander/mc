@@ -17,7 +17,6 @@ typedef enum
     LINK_SYMLINK_RELATIVE
 } link_type_t;
 
-void netlink_cmd (void);
 void ftplink_cmd (void);
 void fishlink_cmd (void);
 void smblink_cmd (void);

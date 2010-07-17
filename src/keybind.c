@@ -367,9 +367,6 @@ static name_keymap_t command_names[] = {
     { "CmdListmodeCmd",                  CK_ListmodeCmd }.
 #endif
     { "CmdMkdir",                        CK_MkdirCmd },
-#if defined (USE_NETCODE) && defined (ENABLE_VFS_MCFS)
-    { "CmdNetlink",                      CK_NetlinkCmd },
-#endif
     { "CmdPanelOptions",                 CK_PanelOptionsBox },
     { "CmdQuickCd",                      CK_QuickCdCmd },
     { "CmdQuickChdir",                   CK_QuickChdirCmd },

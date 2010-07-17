@@ -42,7 +42,7 @@
 # %% -> % character
 # %p -> name of the current file (without path, but pwd is its path)
 # %f -> name of the current file. Unlike %p, if file is located on a
-#	non-local virtual filesystem, i.e. either tarfs, mcfs or ftpfs,
+#	non-local virtual filesystem, i.e. either tarfs or ftpfs,
 #	then the file will be temporarily copied into a local directory
 #	and %f will be the full path to this local temporal file.
 #	If you don't want to get a local copy and want to get the

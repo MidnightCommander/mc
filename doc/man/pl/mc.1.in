@@ -2344,44 +2344,6 @@ Przykłady:
     /#sh:joe@want.compression.edu:C/private
     /#sh:joe@noncompressed.ssh.edu/private
 .fi
-.\"NODE "  Network File System"
-.SH "  Sieciowe systemy plików"
-Midnight Commander pozwala na obsługę zdalnych systemów i manipulowanie
-na ich dyskach, tak jakby były one lokalne. Żeby to było możliwe
-druga maszyna musi być uruchomiona razem z programem
-.BR mcserv (8).
-.PP
-Żeby podłączyć się do obcego komputera musisz przejść do katalogu w specjalny
-sposób opisany poniżej:
-.PP
-.I mc:[użytkownik@]komputer[:port][katalog]
-.PP
-.IR Użytkownik ,
-.I port
-i
-.I katalog
-są opcjami nieobowiązkowymi. Jeśli podasz
-.I użytkownika
-Midnight Commander spróbuje zalogować się do systemu zdalnego jako
-zadany użytkownik, w przeciwnym wypadku spróbuje użyć twojej aktualnej
-nazwy zgłoszeniowej.
-.PP
-.I Port
-jest używany jeśli zdalny komputer jest odpalony na niestandardowych portach
-(zobacz stronę manuala
-.BR mcserv (8)
-po więcej informacji o portach); i wreszcie
-jeśli
-.I katalog
-jest podany, twoim katalogiem domowym na zdalnym komputerze będzie ten podany.
-.PP
-Przykłady:
-.PP
-.nf
-    mc:ftp.nuclecu.unam.mx/linux/local
-    mc:joe@foo.edu:11321/private
-.fi
-.PP
 .\"NODE "  Undelete File System"
 .SH "  Odzyskiwanie plików"
 Na systemach Linuksowych, jeśli dodałeś w konfiguracji opcję przywracania
@@ -2831,7 +2793,7 @@ katalogu /linux/local i w Europie na serwerze sunsite.mff.cuni.cz w katalogu
 /GNU/mc i na serwerze ftp.teuto.de w katalogu /lmb/mc.
 .\"NODE "SEE ALSO"
 .SH ZOBACZ TAKŻE
-ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
+ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
 .PP
 .nf

@@ -357,8 +357,7 @@ NULL: When you pass NULL as an argument of a varargs function, cast the
 
 	This tip applies at least to catstrs (edit/edit.h), execl(3),
 	execle(3), execlp(3), g_strconcat (glib), parent_call
-	(src/background.h), parent_call_string (src/background.h),
-	rpc_get (vfs/mcfsutil.h), rpc_send (vfs/mcfsutil.h).
+	(src/background.h), parent_call_string (src/background.h).
 
 	example:
 	char *path = g_strconcat("dir", "/", "file", (char *)0);
