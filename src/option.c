@@ -37,6 +37,7 @@
 #include "lib/tty/key.h"        /* old_esc_mode_timeout */
 
 #include "dialog.h"             /* B_ constants */
+#include "widget.h"             /* WCheck */
 #include "setup.h"              /* panels_options */
 #include "main.h"
 #include "file.h"               /* file_op_compute_totals */
@@ -45,6 +46,36 @@
 #include "history.h"            /* MC_HISTORY_ESC_TIMEOUT */
 
 #include "option.h"
+
+static cb_ret_t
+configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+        case DLG_ACTION:
+            if (sender->id == 18)
+            {
+                /* message from "Single press" checkbutton */
+                const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
+                Widget *w;
+
+                /* label */
+                w = dlg_find_by_id (h, sender->id - 1);
+                widget_disable (*w, not_single);
+                send_message (w, WIDGET_DRAW, 0);
+                /* input */
+                w = dlg_find_by_id (h, sender->id - 2);
+                widget_disable (*w, not_single);
+                send_message (w, WIDGET_DRAW, 0);
+
+                return MSG_HANDLED;
+            }
+            return MSG_NOT_HANDLED;
+
+        default:
+            return default_dlg_callback (h, sender, msg, parm, data);
+    }
+}
 
 void
 configure_box (void)
@@ -118,7 +149,7 @@ configure_box (void)
     QuickDialog Quick_input = {
         dlg_width, dlg_height, -1, -1,
         N_("Configure options"), "[Configuration]",
-        quick_widgets, TRUE
+        quick_widgets, configure_callback, TRUE
     };
 
     int qd_result;
@@ -211,6 +242,9 @@ configure_box (void)
 
     g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
 
+    if (!old_esc_mode)
+        quick_widgets[16].options = quick_widgets[17].options = W_DISABLED;
+
     qd_result = quick_dialog (&Quick_input);
 
     if ((qd_result == B_ENTER) || (qd_result == B_EXIT))
@@ -290,7 +324,7 @@ panel_options_box (void)
     QuickDialog Quick_input = {
         dlg_width, dlg_height, -1, -1,
         N_("Panel options"), "[Panel options]",
-        quick_widgets, TRUE
+        quick_widgets, NULL, TRUE
     };
 
     int qd_result;

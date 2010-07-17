@@ -1,6 +1,6 @@
 .\"TOPICS "Разделы помощи:"
 .\" TODO: Перевести раздел EXTernal File System
-.TH MC "15 Июня 2010" "MC Version 4.7.3" "GNU Midnight Commander"
+.TH MC "29 Июня 2010" "MC Version 4.7.4" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "НАИМЕНОВАНИЕ"
 mc \- Визуальная оболочка для Unix\-подобных систем.
@@ -3731,7 +3731,7 @@ xterm=menu=magenta:marked=,magenta:markselect=,red
 .PP
 Цвета не являются обязательными, а в качестве ключевых слов (keywords)
 могут использоваться: для задания цветовой палитры в панелях: normal,
-selected, marked, markselect, errors, input, inputmark, inputunchanged,
+selected, disabled, marked, markselect, errors, input, inputmark, inputunchanged,
 commandlinemark, reverse, gauge. Цвета пунктов меню: menunormal, menusel,
 menuhot, menuhotsel, menuinactive. Цвета в окне диалога: dnormal, dfocus,
 dhotnormal, dhotfocus. Цвета в окне подсказки: helpnormal, helpitalic,
@@ -3759,6 +3759,9 @@ special, core. Цвета в редакторе: editnormal, editbold, editmarke
 определяет цвет заполненной части полоски (progress bar), при
 графическом отображении хода выполнения файловых операций (копирование и
 др.).
+.I disabled
+определяет цвет элемента диалога, который не может по каким-то причинам быть выбран
+для работы с ним.
 .PP
 Диалоговые окна используют следующие цвета:
 .I dnormal

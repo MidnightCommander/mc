@@ -82,14 +82,6 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 {
     switch (msg)
     {
-    case DLG_UNFOCUS:
-        if (dlg_widget_active (display_radio))
-        {
-            assign_text (display_mini_status, displays_status[display_radio->sel]);
-            input_set_point (display_mini_status, 0);
-        }
-        return MSG_HANDLED;
-
     case DLG_KEY:
         if (parm == '\n')
         {
@@ -115,14 +107,42 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
             }
         }
 
-        if (g_ascii_tolower (parm) == display_user_hotkey && dlg_widget_active (display_user_format)
-            && dlg_widget_active (display_mini_status))
+        if (g_ascii_tolower (parm) == display_user_hotkey)
         {
-            display_radio->sel = 3;
+            display_radio->pos = display_radio->sel = 3;
             dlg_select_widget (display_radio);  /* force redraw */
-            dlg_select_widget (display_user_format);
+            h->callback (h, (Widget *) display_radio, DLG_ACTION, 0, NULL);
             return MSG_HANDLED;
         }
+        return MSG_NOT_HANDLED;
+
+    case DLG_ACTION:
+        if (sender == (Widget *) display_radio)
+        {
+            if (!(display_check_status->state & C_BOOL))
+                assign_text (display_mini_status, displays_status[display_radio->sel]);
+            update_input (display_mini_status, 0);
+            update_input (display_user_format, 0);
+            widget_disable (display_user_format->widget, display_radio->sel != 3);
+            return MSG_HANDLED;
+        }
+
+        if (sender == (Widget *) display_check_status)
+        {
+            if (display_check_status->state & C_BOOL)
+            {
+                widget_disable (display_mini_status->widget, FALSE);
+                assign_text (display_mini_status, displays_status[3]);
+            }
+            else
+            {
+                widget_disable (display_mini_status->widget, TRUE);
+                assign_text (display_mini_status, displays_status[display_radio->sel]);
+            }
+            update_input (display_mini_status, 0);
+            return MSG_HANDLED;
+        }
+
         return MSG_NOT_HANDLED;
 
     default:
@@ -164,7 +184,7 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     {
         int i, maxlen = 0;
         const char *cp;
-        int ok_len, cancel_len;
+        int ok_len, cancel_len, b_len, gap;
 
 #ifdef ENABLE_NLS
         display_title = _(display_title);
@@ -186,6 +206,7 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
         ok_len = button_get_len (ok_button);
         cancel_button = button_new (dlg_height - 3, 0, B_CANCEL, NORMAL_BUTTON, cancel_name, 0);
         cancel_len = button_get_len (cancel_button);
+        b_len = ok_len + cancel_len + 2;
 
         dlg_width = max (dlg_width, str_term_width1 (display_title) + 10);
         /* calculate max width of radiobutons */
@@ -195,9 +216,10 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
         dlg_width = max (dlg_width, str_term_width1 (user_mini_status) + 13);
 
         /* buttons */
-        dlg_width = max (dlg_width, ok_len + cancel_len + 8);
-        ok_button->widget.x = dlg_width / 3 - ok_len / 2;
-        cancel_button->widget.x = dlg_width * 2 / 3 - cancel_len / 2;
+        dlg_width = max (dlg_width, b_len + 6);
+        gap = (dlg_width - 6 - b_len) / 3;
+        ok_button->widget.x = 3 + gap;
+        cancel_button->widget.x = ok_button->widget.x + ok_len + gap + 2;
     }
 
     displays_status = _status;
@@ -212,7 +234,6 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     display_mini_status = input_new (10, 8, (int *) input_colors, dlg_width - 12, _status[radio_sel],
                                      "mini-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_mini_status);
-    input_set_point (display_mini_status, 0);
 
     display_check_status = check_new (9, 4, _check_status, user_mini_status);
     add_widget (dd, display_check_status);
@@ -220,7 +241,6 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     display_user_format = input_new (7, 8, (int *) input_colors, dlg_width - 12, init_text,
                                      "user-fmt-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_user_format);
-    input_set_point (display_user_format, 0);
 
     display_radio = radio_new (3, 4, LIST_TYPES, displays);
     display_radio->sel = display_radio->pos = radio_sel;
@@ -321,7 +341,7 @@ sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, 
         QuickDialog quick_dlg = {
             dlg_width, dlg_height, -1, -1,
             N_("Sort order"), "[Sort Order...]",
-            quick_widgets, TRUE
+            quick_widgets, NULL, TRUE
         };
 
         quick_widgets[5].u.radio.items = sort_orders_names;
@@ -449,7 +469,7 @@ confirm_box (void)
     {
         QuickDialog confirmation = {
             dlg_width, dlg_height, -1, -1, title,
-            "[Confirmation]", conf_widgets, 1
+            "[Confirmation]", conf_widgets, NULL, TRUE
         };
 
         (void) quick_dialog (&confirmation);
@@ -485,7 +505,7 @@ display_bits_box (void)         /* AB:FIXME: test dialog */
 
     QuickDialog display_bits = {
         DISPX, DISPY, -1, -1, _("Display bits"),
-        "[Display bits]", display_widgets, TRUE
+        "[Display bits]", display_widgets, NULL, TRUE
     };
 
     int i;
@@ -558,10 +578,11 @@ static WLabel *cplabel;
 static WCheck *inpcheck;
 
 static int
-sel_charset_button (int action)
+sel_charset_button (WButton *button, int action)
 {
     int new_dcp;
 
+    (void) button;
     (void) action;
 
     new_dcp = select_charset (-1, -1, new_display_codepage, TRUE);
@@ -719,6 +740,32 @@ static char *ret_timeout;
 static char *ret_passwd;
 static char *ret_directory_timeout;
 static char *ret_ftp_proxy;
+
+static cb_ret_t
+confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+        case DLG_ACTION:
+            if (sender->id == 6)
+            {
+                /* message from "Always use ftp proxy" checkbutton */
+                const gboolean not_use = !(((WCheck *) sender)->state & C_BOOL);
+                Widget *w;
+
+                /* input */
+                w = dlg_find_by_id (h, sender->id - 1);
+                widget_disable (*w, not_use);
+                send_message (w, WIDGET_DRAW, 0);
+
+                return MSG_HANDLED;
+            }
+            return MSG_NOT_HANDLED;
+
+        default:
+            return default_dlg_callback (h, sender, msg, parm, data);
+    }
+}
 #endif
 
 void
@@ -766,12 +813,22 @@ configure_vfs (void)
 
     QuickDialog confvfs_dlg = {
         VFSX, VFSY, -1, -1, N_("Virtual File System Setting"),
-        "[Virtual FS]", confvfs_widgets, FALSE
+        "[Virtual FS]", confvfs_widgets,
+#ifdef USE_NETCODE
+        confvfs_callback,
+#else
+        NULL,
+#endif
+        FALSE
     };
 
 #ifdef USE_NETCODE
     g_snprintf (buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
+
+    if (!ftpfs_always_use_proxy)
+        confvfs_widgets[5].options = W_DISABLED;
 #endif
+
     g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL)
@@ -823,7 +880,7 @@ cd_dialog (void)
 
         QuickDialog Quick_input = {
             xlen, ylen, 2, LINES - 2 - ylen, _("Quick cd"),
-            "[Quick cd]", quick_widgets, TRUE
+            "[Quick cd]", quick_widgets, NULL, TRUE
         };
 
         return (quick_dialog (&Quick_input) != B_CANCEL) ? my_str : NULL;
@@ -846,7 +903,7 @@ symlink_dialog (const char *existing, const char *new, char **ret_existing, char
 
     QuickDialog Quick_input = {
         64, 12, -1, -1, N_("Symbolic link"),
-        "[File Menu]", quick_widgets, FALSE
+        "[File Menu]", quick_widgets, NULL, FALSE
     };
 
     if (quick_dialog (&Quick_input) == B_CANCEL)
@@ -890,12 +947,14 @@ jobs_fill_listbox (void)
 }
 
 static int
-task_cb (int action)
+task_cb (WButton *button, int action)
 {
     TaskList *tl;
     int sig = 0;
 
-    if (!bg_list->list)
+    (void) button;
+
+    if (bg_list->list == NULL)
         return 0;
 
     /* Get this instance information */
@@ -937,18 +996,16 @@ static struct
     const char *name;
     int xpos;
     int value;
-    int (*callback) (int);
+    bcback callback;
 }
 job_buttons[] =
 {
-    {
-    N_("&Stop"), 3, B_STOP, task_cb},
-    {
-    N_("&Resume"), 12, B_RESUME, task_cb},
-    {
-    N_("&Kill"), 23, B_KILL, task_cb},
-    {
-    N_("&OK"), 35, B_CANCEL, NULL}
+    /* *INDENT-OFF* */
+    { N_("&Stop"), 3, B_STOP, task_cb },
+    { N_("&Resume"), 12, B_RESUME, task_cb },
+    { N_("&Kill"), 23, B_KILL, task_cb },
+    { N_("&OK"), 35, B_CANCEL, NULL }
+    /* *INDENT-ON* */
 };
 
 void

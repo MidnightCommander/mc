@@ -385,11 +385,11 @@ quick_dialog_skip (QuickDialog * qd, int nskip)
 
     if ((qd->xpos == -1) || (qd->ypos == -1))
         dd = create_dlg (TRUE, 0, 0, qd->ylen, qd->xlen,
-                         dialog_colors, NULL, qd->help, qd->title,
+                         dialog_colors, qd->callback, qd->help, qd->title,
                          DLG_CENTER | DLG_TRYUP | DLG_REVERSE);
     else
         dd = create_dlg (TRUE, qd->ypos, qd->xpos, qd->ylen, qd->xlen,
-                         dialog_colors, NULL, qd->help, qd->title, DLG_REVERSE);
+                         dialog_colors, qd->callback, qd->help, qd->title, DLG_REVERSE);
 
     for (qw = qd->widgets; qw->widget_type != quick_end; qw++)
     {
@@ -464,11 +464,19 @@ quick_dialog_skip (QuickDialog * qd, int nskip)
             break;
         }
 
-        add_widget (dd, qw->widget);
+        if (qw->widget != NULL)
+        {
+            qw->widget->options |= qw->options; /* FIXME: cannot reset flags, setup only */
+            add_widget (dd, qw->widget);
+        }
     }
 
     while (nskip-- != 0)
-        dd->current = dd->current->next;
+    {
+        dd->current = g_list_next (dd->current);
+        if (dd->current == NULL)
+            dd->current = dd->widgets;
+    }
 
     return_val = run_dlg (dd);
 
@@ -592,7 +600,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     {
         QuickDialog Quick_input = {
             len, lines + 6, -1, -1, header,
-            help, quick_widgets, TRUE
+            help, quick_widgets, NULL, TRUE
         };
 
         for (i = 0; i < 4; i++)

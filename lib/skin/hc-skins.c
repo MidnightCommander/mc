@@ -54,6 +54,7 @@ mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
     mc_config_set_string (mc_skin->config, "core", "selected", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "core", "marked", "A_BOLD");
     mc_config_set_string (mc_skin->config, "core", "markselect", "A_BOLD_REVERSE");
+    mc_config_set_string (mc_skin->config, "core", "disabled", "default");
     mc_config_set_string (mc_skin->config, "core", "reverse", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "dialog", "_default_", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "dialog", "dfocus", "A_BOLD");

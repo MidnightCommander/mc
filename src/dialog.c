@@ -456,24 +456,39 @@ dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, gboolean reverse)
 int
 dlg_focus (Dlg_head * h)
 {
-    if ((h->current != NULL)
-        && (send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0) == MSG_HANDLED))
+    /* cannot focus disabled widget ... */
+
+    if (h->current != NULL)
     {
-        h->callback (h, (Widget *) h->current->data, DLG_FOCUS, 0, NULL);
-        return 1;
+        Widget *current = (Widget *) h->current->data;
+
+        if (((current->options & W_DISABLED) == 0)
+            && (send_message (current, WIDGET_FOCUS, 0) == MSG_HANDLED))
+        {
+            h->callback (h, current, DLG_FOCUS, 0, NULL);
+            return 1;
+        }
     }
+
     return 0;
 }
 
 static int
 dlg_unfocus (Dlg_head * h)
 {
-    if ((h->current != NULL)
-        && (send_message ((Widget *) h->current->data, WIDGET_UNFOCUS, 0) == MSG_HANDLED))
+    /* ... but can unfocus disabled widget */
+
+    if (h->current != NULL)
     {
-        h->callback (h, (Widget *) h->current->data, DLG_UNFOCUS, 0, NULL);
-        return 1;
+        Widget *current = (Widget *) h->current->data;
+
+        if (send_message (current, WIDGET_UNFOCUS, 0) == MSG_HANDLED)
+        {
+            h->callback (h, current, DLG_UNFOCUS, 0, NULL);
+            return 1;
+        }
     }
+
     return 0;
 }
 
@@ -505,21 +520,32 @@ find_widget_type (const Dlg_head * h, callback_fn callback)
     return (w == NULL) ? NULL : (Widget *) w->data;
 }
 
-/* Find the widget with the given dialog id in the dialog h and select it */
-void
-dlg_select_by_id (const Dlg_head * h, unsigned int id)
+/* Find the widget with the given id */
+Widget *
+dlg_find_by_id (const Dlg_head * h, unsigned int id)
 {
     if (h->widgets != NULL)
     {
-        Widget *w_found;
+        GList *w;
 
-        w_found = (Widget *) g_list_nth_data (h->widgets, id);
-
-        if (w_found != NULL)
-            dlg_select_widget (w_found);
+        for (w = h->widgets; w != NULL; w = g_list_next (w))
+            if (((Widget *) w->data)->id == id)
+                return (Widget *) w->data;
     }
+
+    return NULL;
 }
 
+/* Find the widget with the given id in the dialog h and select it */
+void
+dlg_select_by_id (const Dlg_head * h, unsigned int id)
+{
+    Widget *w;
+
+    w = dlg_find_by_id (h, id);
+    if (w != NULL)
+        dlg_select_widget (w);
+}
 
 /* What to do if the requested widget doesn't take focus */
 typedef enum
@@ -566,7 +592,7 @@ do_select_widget (Dlg_head * h, GList * w, select_dir_t dir)
             return;
         }
     }
-    while (h->current != w);
+    while (h->current != w /* && (((Widget *) h->current->data)->options & W_DISABLED) == 0 */);
 
     if (dlg_overlap (w0, (Widget *) h->current->data))
     {
@@ -625,8 +651,12 @@ update_cursor (Dlg_head * h)
 
     if (p != NULL)
     {
-        if (((Widget *) (p->data))->options & W_WANT_CURSOR)
-            send_message ((Widget *) p->data, WIDGET_CURSOR, 0);
+        Widget *w;
+
+        w = (Widget *) p->data;
+
+        if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
+            send_message (w, WIDGET_CURSOR, 0);
         else
             do
             {
@@ -637,8 +667,10 @@ update_cursor (Dlg_head * h)
                 if (p == h->current)
                     break;
 
-                if (((Widget *) (p->data))->options & W_WANT_CURSOR)
-                    if (send_message ((Widget *) p->data, WIDGET_CURSOR, 0) == MSG_HANDLED)
+                w = (Widget *) p->data;
+
+                if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
+                    if (send_message (w, WIDGET_CURSOR, 0) == MSG_HANDLED)
                         break;
             }
             while (TRUE);
@@ -781,7 +813,8 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
         if (item == NULL)
             item = h->widgets;
 
-        if ((x > widget->x) && (x <= widget->x + widget->cols)
+        if (((widget->options & W_DISABLED) == 0)
+            && (x > widget->x) && (x <= widget->x + widget->cols)
             && (y > widget->y) && (y <= widget->y + widget->lines))
         {
             new_event = *event;
@@ -801,6 +834,7 @@ static cb_ret_t
 dlg_try_hotkey (Dlg_head * h, int d_key)
 {
     GList *hot_cur;
+    Widget *current;
     cb_ret_t handled;
     int c;
 
@@ -815,7 +849,12 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
      * the currently selected widget is an input line
      */
 
-    if (((Widget *) h->current->data)->options & W_IS_INPUT)
+    current = (Widget *) h->current->data;
+
+    if ((current->options & W_DISABLED) != 0)
+        return MSG_NOT_HANDLED;
+
+    if (current->options & W_IS_INPUT)
     {
         /* skip ascii control characters, anything else can valid character in
          * some encoding */
@@ -829,8 +868,8 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
         d_key = g_ascii_tolower (c);
 
     handled = MSG_NOT_HANDLED;
-    if (((Widget *) h->current->data)->options & W_WANT_HOTKEY)
-        handled = send_message ((Widget *) h->current->data, WIDGET_HOTKEY, d_key);
+    if ((current->options & W_WANT_HOTKEY) != 0)
+        handled = send_message (current, WIDGET_HOTKEY, d_key);
 
     /* If not used, send hotkey to other widgets */
     if (handled == MSG_HANDLED)
@@ -843,8 +882,10 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
     /* send it to all widgets */
     while (h->current != hot_cur && handled == MSG_NOT_HANDLED)
     {
-        if (((Widget *) hot_cur->data)->options & W_WANT_HOTKEY)
-            handled = send_message ((Widget *) hot_cur->data, WIDGET_HOTKEY, d_key);
+        current = (Widget *) hot_cur->data;
+
+        if ((current->options & W_WANT_HOTKEY) != 0)
+            handled = send_message (current, WIDGET_HOTKEY, d_key);
 
         if (handled == MSG_NOT_HANDLED)
         {

@@ -48,6 +48,7 @@ typedef struct
     int y_divisions;
 
     Widget *widget;
+    widget_options_t options;
 
     /* widget parameters */
     union
@@ -103,6 +104,7 @@ typedef struct
     .relative_y = y,                                                    \
     .y_divisions = ydiv,                                                \
     .widget = NULL,                                                     \
+    .options = 0,                                                       \
     .u = {                                                              \
         .checkbox = {                                                   \
             .text = txt,                                                \
@@ -119,6 +121,7 @@ typedef struct
     .relative_y = y,                                                    \
     .y_divisions = ydiv,                                                \
     .widget = NULL,                                                     \
+    .options = 0,                                                       \
     .u = {                                                              \
         .button = {                                                     \
             .text = txt,                                                \
@@ -136,6 +139,7 @@ typedef struct
     .relative_y = y,                                                    \
     .y_divisions = ydiv,                                                \
     .widget = NULL,                                                     \
+    .options = 0,                                                       \
     .u = {                                                              \
         .input = {                                                      \
             .text = txt,                                                \
@@ -155,6 +159,7 @@ typedef struct
     .relative_y = y,                                                    \
     .y_divisions = ydiv,                                                \
     .widget = NULL,                                                     \
+    .options = 0,                                                       \
     .u = {                                                              \
         .label = {                                                      \
             .text = txt                                                 \
@@ -170,6 +175,7 @@ typedef struct
     .relative_y = y,                                                    \
     .y_divisions = ydiv,                                                \
     .widget = NULL,                                                     \
+    .options = 0,                                                       \
     .u = {                                                              \
         .radio = {                                                      \
             .count = cnt,                                               \
@@ -187,6 +193,7 @@ typedef struct
     .relative_y = y,                                                    \
     .y_divisions = ydiv,                                                \
     .widget = NULL,                                                     \
+    .options = 0,                                                       \
     .u = {                                                              \
         .groupbox = {                                                   \
             .width = w,                                                 \
@@ -196,7 +203,6 @@ typedef struct
     }                                                                   \
 }
 
-
 #define QUICK_END                                                       \
 {                                                                       \
     .widget_type = quick_end,                                           \
@@ -205,6 +211,7 @@ typedef struct
     .relative_y = 0,                                                    \
     .y_divisions = 0,                                                   \
     .widget = NULL,                                                     \
+    .options = 0,                                                       \
     .u = {                                                              \
         .input = {                                                      \
             .text = NULL,                                               \
@@ -223,6 +230,7 @@ typedef struct
     const char *title;
     const char *help;
     QuickWidget *widgets;
+    dlg_cb_fn callback;
     gboolean i18n;              /* If true, internationalization has happened */
 } QuickDialog;
 

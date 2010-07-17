@@ -3460,7 +3460,7 @@ The format for the color definition is:
   <keyword>=<foregroundcolor>,<backgroundcolor>:<keyword>= ...
 .fi
 .PP
-The colors are optional, and the keywords are: normal, selected, marked,
+The colors are optional, and the keywords are: normal, selected, disabled, marked,
 markselect, errors, input, inputmark, inputunchanged, commandlinemark,
 reverse, gauge.  Menu colors are: menunormal,
 menusel, menuhot, menuhotsel, menuinactive. Dialog colors are: dnormal, dfocus,
@@ -3475,6 +3475,9 @@ determines the color of input lines used in query dialogs.
 determines the color of the filled part of the progress bar (gauge),
 which is used to show the user the progress of file operations, such as
 copying.
+.PP
+.I disabled
+determines the color of the widget that cannot be selected.
 .PP
 The dialog boxes use the following colors:
 .I dnormal

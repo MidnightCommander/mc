@@ -138,7 +138,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 
         QuickDialog Quick_input = {
             REPLACE_DLG_WIDTH, REPLACE_DLG_HEIGHT, -1, -1, N_("Replace"),
-            "[Input Line Keys]", quick_widgets, FALSE
+            "[Input Line Keys]", quick_widgets, NULL, FALSE
         };
 
         if (quick_dialog (&Quick_input) != B_CANCEL)
@@ -218,7 +218,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 
         QuickDialog Quick_input = {
             SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1, N_("Search"),
-            "[Input Line Keys]", quick_widgets, TRUE
+            "[Input Line Keys]", quick_widgets, NULL, TRUE
         };
 
 #ifdef ENABLE_NLS
@@ -612,7 +612,7 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
     {
         QuickDialog Quick_input = {
             dlg_width, dlg_height, 0, 0, N_("Confirm replace"),
-            "[Input Line Keys]", quick_widgets, FALSE
+            "[Input Line Keys]", quick_widgets, NULL, FALSE
         };
 
         /* Sometimes menu can hide replaced text. I don't like it */
