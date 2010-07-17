@@ -93,7 +93,8 @@ char *find_ignore_dirs = NULL;
 /* static variables to remember find parameters */
 static WInput *in_start;        /* Start path */
 static WInput *in_name;         /* Filename */
-static WInput *in_with;         /* Text inside filename */
+static WInput *in_with;         /* Text */
+static WLabel *content_label;   /* 'Content:' label */
 static WCheck *file_case_sens_cbox;     /* "case sensitive" checkbox */
 static WCheck *file_pattern_cbox;       /* File name is glob or regexp */
 static WCheck *recursively_cbox;
@@ -320,6 +321,34 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
 {
     switch (msg)
     {
+    case DLG_ACTION:
+        if (sender == (Widget *) content_use_cbox)
+        {
+            gboolean disable = !(content_use_cbox->state & C_BOOL);
+
+            widget_disable (content_label->widget, disable);
+            send_message ((Widget *) content_label, WIDGET_DRAW, 0);
+            widget_disable (in_with->widget, disable);
+            send_message ((Widget *) in_with, WIDGET_DRAW, 0);
+            widget_disable (content_first_hit_cbox->widget, disable);
+            send_message ((Widget *) content_first_hit_cbox, WIDGET_DRAW, 0);
+            widget_disable (content_regexp_cbox->widget, disable);
+            send_message ((Widget *) content_regexp_cbox, WIDGET_DRAW, 0);
+            widget_disable (content_case_sens_cbox->widget, disable);
+            send_message ((Widget *) content_case_sens_cbox, WIDGET_DRAW, 0);
+#ifdef HAVE_CHARSET
+            widget_disable (content_all_charsets_cbox->widget, disable);
+            send_message ((Widget *) content_all_charsets_cbox, WIDGET_DRAW, 0);
+#endif
+            widget_disable (content_whole_words_cbox->widget, disable);
+            send_message ((Widget *) content_whole_words_cbox, WIDGET_DRAW, 0);
+
+            return MSG_HANDLED;
+        }
+
+        return MSG_NOT_HANDLED;
+
+
     case DLG_VALIDATE:
         if (h->ret_value != B_ENTER)
             return MSG_HANDLED;
@@ -393,6 +422,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     int b0, b1, b2;
 
     int cbox_position;
+    gboolean disable;
 
 #ifdef ENABLE_NLS
     {
@@ -426,6 +456,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
         in_start_dir = g_strdup (".");
 
   find_par_start:
+    disable = !options.content_use;
+
     find_dlg =
         create_dlg (TRUE, 0, 0, FIND_Y, FIND_X, dialog_colors,
                     find_parm_callback, "[Find File]", _("Find File"), DLG_CENTER | DLG_REVERSE);
@@ -445,21 +477,25 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     content_whole_words_cbox =
         check_new (cbox_position--, FIND_X / 2 + 1, options.content_whole_words, content_whole_words_label);
+    widget_disable (content_whole_words_cbox->widget, disable);
     add_widget (find_dlg, content_whole_words_cbox);
 
 #ifdef HAVE_CHARSET
     content_all_charsets_cbox = check_new (cbox_position--, FIND_X / 2 + 1,
                                            options.content_all_charsets,
                                            content_all_charsets_label);
+    widget_disable (content_all_charsets_cbox->widget, disable);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
 
     content_case_sens_cbox =
         check_new (cbox_position--, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
+    widget_disable (content_case_sens_cbox->widget, disable);
     add_widget (find_dlg, content_case_sens_cbox);
 
     content_regexp_cbox =
         check_new (cbox_position--, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
+    widget_disable (content_regexp_cbox->widget, disable);
     add_widget (find_dlg, content_regexp_cbox);
 
     cbox_position = FIND_Y - 6;
@@ -487,8 +523,12 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     in_with = input_new (6, FIND_X / 2 + 1, input_get_default_colors(), FIND_X / 2 - 4, INPUT_LAST_TEXT,
                          MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
+    widget_disable (in_with->widget, disable);
     add_widget (find_dlg, in_with);
-    add_widget (find_dlg, label_new (5, FIND_X / 2 + 1, _("Content:")));
+
+    content_label = label_new (5, FIND_X / 2 + 1, _("Content:"));
+    widget_disable (content_label->widget, disable);
+    add_widget (find_dlg, content_label);
 
     in_name = input_new (6, 3, input_get_default_colors(),
                          FIND_X / 2 - 4, INPUT_LAST_TEXT, "name", INPUT_COMPLETE_DEFAULT);
