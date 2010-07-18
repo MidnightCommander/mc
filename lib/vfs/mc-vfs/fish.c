@@ -885,16 +885,17 @@ fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
 }
 
 static int
-fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
+fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t len)
 {
     struct vfs_s_super *super = FH_SUPER;
-    int n = 0;
-    len = MIN( fh->u.fish.total - fh->u.fish.got, len );
+    ssize_t n = 0;
+    len = MIN ((size_t)(fh->u.fish.total - fh->u.fish.got), len);
     tty_disable_interrupt_key ();
-    while (len && ((n = read (SUP.sockr, buf, len))<0)) {
+    while (len != 0 && ((n = read (SUP.sockr, buf, len)) < 0))
+    {
         if ((errno == EINTR) && !tty_got_interrupt ())
-	    continue;
-	break;
+            continue;
+        break;
     }
     tty_enable_interrupt_key();
 
@@ -1042,7 +1043,7 @@ static int fish_symlink (struct vfs_class *me, const char *setto, const char *pa
 }
 
 static int
-fish_chown (struct vfs_class *me, const char *path, int owner, int group)
+fish_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
     char *sowner, *sgroup;
     struct passwd *pw;
@@ -1151,8 +1152,7 @@ static int fish_rmdir (struct vfs_class *me, const char *path)
 }
 
 static int
-fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
-	      int mode)
+fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
 {
     (void) mode;
 
@@ -1216,7 +1216,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 }
 
 static void *
-fish_open (struct vfs_class *me, const char *file, int flags, int mode)
+fish_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 {
     /*
       sorry, i've places hack here

@@ -30,7 +30,7 @@
 static struct vfs_class vfs_local_ops;
 
 static void *
-local_open (struct vfs_class *me, const char *file, int flags, int mode)
+local_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 {
     int *local_info;
     int fd;
@@ -48,7 +48,7 @@ local_open (struct vfs_class *me, const char *file, int flags, int mode)
 }
 
 ssize_t
-local_read (void *data, char *buffer, int count)
+local_read (void *data, char *buffer, size_t count)
 {
     int n;
 
@@ -157,7 +157,7 @@ local_chmod (struct vfs_class *me, const char *path, int mode)
 }
 
 static int
-local_chown (struct vfs_class *me, const char *path, int owner, int group)
+local_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
     (void) me;
 
@@ -197,14 +197,14 @@ local_symlink (struct vfs_class *me, const char *n1, const char *n2)
 }
 
 static ssize_t
-local_write (void *data, const char *buf, int nbyte)
+local_write (void *data, const char *buf, size_t nbyte)
 {
     int fd;
     int n;
 
     if (!data)
 	return -1;
-    
+
     fd = * (int *) data;
     while ((n = write (fd, buf, nbyte)) == -1){
 #ifdef EAGAIN
@@ -243,7 +243,7 @@ local_lseek (void *data, off_t offset, int whence)
 }
 
 static int
-local_mknod (struct vfs_class *me, const char *path, int mode, int dev)
+local_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
 {
     (void) me;
 

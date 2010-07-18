@@ -204,7 +204,7 @@ sfs_redirect (struct vfs_class *me, const char *name)
 }
 
 static void *
-sfs_open (struct vfs_class *me, const char *path, int flags, int mode)
+sfs_open (struct vfs_class *me, const char *path, int flags, mode_t mode)
 {
     int *sfs_info;
     int fd;
@@ -242,7 +242,7 @@ static int sfs_chmod (struct vfs_class *me, const char *path, int mode)
     return chmod (path, mode);
 }
 
-static int sfs_chown (struct vfs_class *me, const char *path, int owner, int group)
+static int sfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
     path = sfs_redirect (me, path);
     return chown (path, owner, group);

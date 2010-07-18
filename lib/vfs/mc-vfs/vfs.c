@@ -586,8 +586,8 @@ int mc_##name inarg \
 
 MC_NAMEOP (chmod, (const char *path, mode_t mode), (vfs, mpath, mode))
 MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vfs, mpath, owner, group))
-MC_NAMEOP (utime, (const char *path, struct utimbuf *times), (vfs, mpath, times))
-MC_NAMEOP (readlink, (const char *path, char *buf, int bufsiz), (vfs, mpath, buf, bufsiz))
+MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (vfs, mpath, times))
+MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (vfs, mpath, buf, bufsiz))
 MC_NAMEOP (unlink, (const char *path), (vfs, mpath))
 MC_NAMEOP (mkdir, (const char *path, mode_t mode), (vfs, mpath, mode))
 MC_NAMEOP (rmdir, (const char *path), (vfs, mpath))
@@ -639,9 +639,8 @@ ssize_t mc_##name inarg \
     return result; \
 }
 
-MC_HANDLEOP(read,  (int handle, void *buffer,    int count), (vfs_info (handle), buffer, count))
-MC_HANDLEOP(write, (int handle, const void *buf, int nbyte), (vfs_info (handle), buf,    nbyte))
-
+MC_HANDLEOP (read, (int handle, void *buffer, size_t count), (vfs_info (handle), buffer, count))
+MC_HANDLEOP (write, (int handle, const void *buf, size_t nbyte), (vfs_info (handle), buf, nbyte))
 
 #define MC_RENAMEOP(name) \
 int mc_##name (const char *fname1, const char *fname2) \
@@ -655,10 +654,10 @@ int mc_##name (const char *fname1, const char *fname2) \
         if (name2 != NULL) { \
     vfs = vfs_get_class (name1); \
     if (vfs != vfs_get_class (name2)){ \
-    	errno = EXDEV; \
-    	g_free (name1); \
-    	g_free (name2); \
-	return -1; \
+        errno = EXDEV; \
+        g_free (name1); \
+        g_free (name2); \
+        return -1; \
     } \
     result = vfs->name ? (*vfs->name)(vfs, name1, name2) : -1; \
     g_free (name1); \
@@ -675,7 +674,6 @@ int mc_##name (const char *fname1, const char *fname2) \
 
 MC_RENAMEOP (link)
 MC_RENAMEOP (rename)
-
 
 int
 mc_ctl (int handle, int ctlop, void *arg)
@@ -983,7 +981,7 @@ vfs_setup_wd (void)
  * from the OS. Put directory to the provided buffer.
  */
 char *
-mc_get_current_wd (char *buffer, int size)
+mc_get_current_wd (char *buffer, size_t size)
 {
     const char *cwd = _vfs_get_cwd ();
 
@@ -1003,7 +1001,7 @@ vfs_get_current_dir (void)
 off_t mc_lseek (int fd, off_t offset, int whence)
 {
     struct vfs_class *vfs;
-    int result;
+    off_t result;
 
     if (fd == -1)
 	return -1;
@@ -1202,35 +1200,38 @@ static int
 mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
 		       const char *local, int has_changed)
 {
-    int fdin = -1, fdout = -1, i;
-    if (has_changed) {
-	char buffer[8192];
+    int fdin = -1, fdout = -1;
+    if (has_changed)
+    {
+        char buffer[8192];
+        ssize_t i;
 
-	if (!vfs->write)
-	    goto failed;
+        if (!vfs->write)
+            goto failed;
 
-	fdin = open (local, O_RDONLY);
-	if (fdin == -1)
-	    goto failed;
-	fdout = mc_open (filename, O_WRONLY | O_TRUNC);
-	if (fdout == -1)
-	    goto failed;
-	while ((i = read (fdin, buffer, sizeof (buffer))) > 0) {
-	    if (mc_write (fdout, buffer, i) != i)
-		goto failed;
-	}
-	if (i == -1)
-	    goto failed;
+        fdin = open (local, O_RDONLY);
+        if (fdin == -1)
+            goto failed;
+        fdout = mc_open (filename, O_WRONLY | O_TRUNC);
+        if (fdout == -1)
+            goto failed;
+        while ((i = read (fdin, buffer, sizeof (buffer))) > 0)
+            if (mc_write (fdout, buffer, (size_t) i) != i)
+                goto failed;
+        if (i == -1)
+            goto failed;
 
-	if (close (fdin) == -1) {
-	    fdin = -1;
-	    goto failed;
-	}
-	fdin = -1;
-	if (mc_close (fdout) == -1) {
-	    fdout = -1;
-	    goto failed;
-	}
+        if (close (fdin) == -1)
+        {
+            fdin = -1;
+            goto failed;
+        }
+        fdin = -1;
+        if (mc_close (fdout) == -1)
+        {
+            fdout = -1;
+            goto failed;
+        }
     }
     unlink (local);
     return 0;

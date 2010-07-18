@@ -409,12 +409,12 @@ typedef struct
 
     /* Used by undelfs_read: */
     char *dest_buffer;          /* destination buffer */
-    int count;                  /* bytes to read */
+    size_t count;                  /* bytes to read */
 } undelfs_file;
 
 /* We do not support lseek */
 static void *
-undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
+undelfs_open (struct vfs_class *me, const char *fname, int flags, mode_t mode)
 {
     char *file, *f;
     ext2_ino_t inode, i;
@@ -553,7 +553,7 @@ undelfs_dump_read (ext2_filsys param_fs, blk_t * blocknr, int blockcnt, void *pr
 }
 
 static ssize_t
-undelfs_read (void *vfs_info, char *buffer, int count)
+undelfs_read (void *vfs_info, char *buffer, size_t count)
 {
     undelfs_file *p = vfs_info;
     int retval;

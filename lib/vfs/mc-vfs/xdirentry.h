@@ -132,38 +132,32 @@ struct vfs_s_subclass {
     int flags;		/* whether the subclass is remove, read-only etc */
     dev_t rdev;
     FILE *logfile;
-    int flush;		/* if set to 1, invalidate directory cache */
+    int flush;                  /* if set to 1, invalidate directory cache */
 
-    int (*init_inode) (struct vfs_class *me, struct vfs_s_inode *ino);	/* optional */
-    void (*free_inode) (struct vfs_class *me, struct vfs_s_inode *ino);	/* optional */
-    int (*init_entry) (struct vfs_class *me, struct vfs_s_entry *entry);	/* optional */
+    int (*init_inode) (struct vfs_class * me, struct vfs_s_inode * ino);        /* optional */
+    void (*free_inode) (struct vfs_class * me, struct vfs_s_inode * ino);       /* optional */
+    int (*init_entry) (struct vfs_class * me, struct vfs_s_entry * entry);      /* optional */
 
-    void *(*archive_check) (struct vfs_class *me, const char *name, char *op);	/* optional */
-    int (*archive_same) (struct vfs_class *me, struct vfs_s_super *psup,
-			 const char *archive_name, char *op, void *cookie);
-    int (*open_archive) (struct vfs_class *me, struct vfs_s_super *psup,
-			 const char *archive_name, char *op);
-    void (*free_archive) (struct vfs_class *me,
-			  struct vfs_s_super *psup);
+    void *(*archive_check) (struct vfs_class * me, const char *name, char *op); /* optional */
+    int (*archive_same) (struct vfs_class * me, struct vfs_s_super * psup,
+                         const char *archive_name, char *op, void *cookie);
+    int (*open_archive) (struct vfs_class * me, struct vfs_s_super * psup,
+                         const char *archive_name, char *op);
+    void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);
 
-    int (*fh_open) (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
-		    int mode);
-    int (*fh_close) (struct vfs_class *me, struct vfs_s_fh *fh);
+    int (*fh_open) (struct vfs_class * me, struct vfs_s_fh * fh, int flags, mode_t mode);
+    int (*fh_close) (struct vfs_class * me, struct vfs_s_fh * fh);
 
-    struct vfs_s_entry *(*find_entry) (struct vfs_class *me,
-				       struct vfs_s_inode *root,
-				       const char *path, int follow, int flags);
-    int (*dir_load) (struct vfs_class *me, struct vfs_s_inode *ino,
-		     char *path);
-    int (*dir_uptodate) (struct vfs_class *me, struct vfs_s_inode *ino);
-    int (*file_store) (struct vfs_class *me, struct vfs_s_fh *fh,
-		       char *path, char *localname);
+    struct vfs_s_entry *(*find_entry) (struct vfs_class * me,
+                                       struct vfs_s_inode * root,
+                                       const char *path, int follow, int flags);
+    int (*dir_load) (struct vfs_class * me, struct vfs_s_inode * ino, char *path);
+    int (*dir_uptodate) (struct vfs_class * me, struct vfs_s_inode * ino);
+    int (*file_store) (struct vfs_class * me, struct vfs_s_fh * fh, char *path, char *localname);
 
-    int (*linear_start) (struct vfs_class *me, struct vfs_s_fh *fh,
-			 off_t from);
-    int (*linear_read) (struct vfs_class *me, struct vfs_s_fh *fh,
-			void *buf, int len);
-    void (*linear_close) (struct vfs_class *me, struct vfs_s_fh *fh);
+    int (*linear_start) (struct vfs_class * me, struct vfs_s_fh * fh, off_t from);
+    int (*linear_read) (struct vfs_class * me, struct vfs_s_fh * fh, void *buf, size_t len);
+    void (*linear_close) (struct vfs_class * me, struct vfs_s_fh * fh);
 };
 
 
