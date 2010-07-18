@@ -672,7 +672,7 @@ create_panel_menu (void)
 #ifdef HAVE_CHARSET
     entries = g_list_append (entries, menu_entry_create (_("&Encoding..."),     CK_PanelSetPanelEncoding));
 #endif
-#if defined(ENABLE_VFS_FTP) || defined(ENABLE_VFS_FISH) || defined(ENABLE_VFS_SMB)
+#ifdef ENABLE_VFS_NET
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_FTP
     entries = g_list_append (entries, menu_entry_create (_("FT&P link..."), CK_FtplinkCmd));
@@ -682,8 +682,8 @@ create_panel_menu (void)
 #endif
 #ifdef ENABLE_VFS_SMB
     entries = g_list_append (entries, menu_entry_create (_("SM&B link..."), CK_SmblinkCmd));
-#endif /* ENABLE_VFS_SMB */
-#endif /* ENABLE_VFS_FTP || ENABLE_VFS_FISH || ENABLE_VFS_SMB */
+#endif
+#endif /* ENABLE_VFS_NET */
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Rescan"), CK_RereadCmd));
 

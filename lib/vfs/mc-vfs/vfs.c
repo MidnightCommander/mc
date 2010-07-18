@@ -62,8 +62,8 @@
 #include "utilvfs.h"
 #include "gc.h"
 #include "vfs.h"
-#ifdef USE_NETCODE
-#   include "netutil.h"
+#ifdef ENABLE_VFS_NET
+#include "netutil.h"
 #endif
 #ifdef ENABLE_VFS_FTP
 #include "ftpfs.h"

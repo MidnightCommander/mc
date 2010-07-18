@@ -35,7 +35,7 @@
 #ifdef HAVE_MMAP
 #   include <sys/mman.h>
 #endif
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_NET
 #include <netdb.h>
 #endif
 #include <unistd.h>
@@ -1222,7 +1222,7 @@ get_random_hint (int force)
     return result;
 }
 
-#if defined(USE_NETCODE) || defined(ENABLE_VFS_UNDELFS)
+#if defined(ENABLE_VFS_UNDELFS) || defined(ENABLE_VFS_NET)
 static void
 nice_cd (const char *text, const char *xtext, const char *help,
          const char *history_name, const char *prefix, int to_home)
@@ -1252,10 +1252,10 @@ nice_cd (const char *text, const char *xtext, const char *help,
     g_free (cd_path);
     g_free (machine);
 }
-#endif /* USE_NETCODE || ENABLE_VFS_UNDELFS */
+#endif /* ENABLE_VFS_UNDELFS || ENABLE_VFS_NET*/
 
 
-#if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH) || defined (ENABLE_VFS_SMB)
+#ifdef ENABLE_VFS_NET
 
 static const char *machine_str = N_("Enter machine name (F1 for details):");
 
@@ -1286,7 +1286,7 @@ smblink_cmd (void)
              "[SMB File System]", ":smblink_cmd: SMB link to machine ", "/#smb:", 0);
 }
 #endif /* ENABLE_VFS_SMB */
-#endif /* ENABLE_VFS_FTP || ENABLE_VFS_FISH || ENABLE_VFS_SMB */
+#endif /* ENABLE_VFS_NET */
 
 #ifdef ENABLE_VFS_UNDELFS
 void
