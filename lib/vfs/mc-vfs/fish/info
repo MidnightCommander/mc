@@ -5,6 +5,7 @@ export LC_TIME=C
 #FISH_HAVE_PERL         8
 #FISH_HAVE_LSQ         16
 #FISH_HAVE_DATE_MDYT   32
+#FISH_HAVE_TAIL        64
 res=0
 if `echo yes| head -c 1 > /dev/null 2>&1` ; then
     res=`expr $res + 1`
@@ -21,7 +22,7 @@ fi
 if `ls -Q / >/dev/null 2>&1` ; then
     res=`expr $res + 16`
 fi
-dat=`ls -lan / 2>/dev/null | head -n 3|tail -n 1 | (
+dat=`ls -lan / 2>/dev/null | head -n 3 | tail -n 1 | (
     while read p l u g s rec; do
         if [ -n "$g" ]; then
             if [ -n "$l" ]; then
@@ -33,6 +34,9 @@ dat=`ls -lan / 2>/dev/null | head -n 3|tail -n 1 | (
 r=`echo "0123456789"| grep "$dat"`
 if [ -z "$r" ]; then
     res=`expr $res + 32`
+fi
+if `echo yes| tail -c +1 - > /dev/null 2>&1` ; then
+    res=`expr $res + 64`
 fi
 echo $res
 echo "### 200"

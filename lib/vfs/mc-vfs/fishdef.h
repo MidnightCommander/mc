@@ -201,6 +201,7 @@
 "#FISH_HAVE_PERL         8\n"                                             \
 "#FISH_HAVE_LSQ         16\n"                                             \
 "#FISH_HAVE_DATE_MDYT   32\n"                                             \
+"#FISH_HAVE_TAIL        64\n"                                             \
 "res=0\n"                                                                 \
 "if `echo yes| head -c 1 > /dev/null 2>&1` ; then\n"                      \
 "    res=`expr $res + 1`\n"                                               \
@@ -217,7 +218,7 @@
 "if `ls -Q / >/dev/null 2>&1` ; then\n"                                   \
 "    res=`expr $res + 16`\n"                                              \
 "fi\n"                                                                    \
-"dat=`ls -lan / 2>/dev/null | head -n 3|tail -n 1 | (\n"                  \
+"dat=`ls -lan / 2>/dev/null | head -n 3 | tail -n 1 | (\n"                \
 "    while read p l u g s rec; do\n"                                      \
 "        if [ -n \"$g\" ]; then\n"                                        \
 "            if [ -n \"$l\" ]; then\n"                                    \
@@ -225,12 +226,16 @@
 "            fi\n"                                                        \
 "        fi\n"                                                            \
 "    done\n"                                                              \
-") |head -c 1`\n"                                                         \
+") | cut -c1 2>/dev/null`\n"                                              \
 "r=`echo \"0123456789\"| grep \"$dat\"`\n"                                \
 "if [ -z \"$r\" ]; then\n"                                                \
 "    res=`expr $res + 32`\n"                                              \
 "fi\n"                                                                    \
+"if `echo yes| tail -c +1 - > /dev/null 2>&1` ; then\n"                   \
+"    res=`expr $res + 64`\n"                                              \
+"fi\n"                                                                    \
 "echo $res\n"                                                             \
 "echo \"### 200\"\n"
+
 
 #endif
