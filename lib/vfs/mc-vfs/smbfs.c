@@ -359,7 +359,7 @@ smbfs_init (struct vfs_class * me)
 static void
 smbfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
-    int i;
+    size_t i;
     char *path;
 
     (void) me;
@@ -381,12 +381,12 @@ smbfs_fill_names (struct vfs_class *me, fill_names_f func)
 /* does same as do_get() in client.c */
 /* called from vfs.c:1080, count = buffer size */
 static ssize_t
-smbfs_read (void *data, char *buffer, int count)
+smbfs_read (void *data, char *buffer, size_t count)
 {
     smbfs_handle *info = (smbfs_handle *) data;
-	int n;
+    ssize_t n;
 
-	DEBUG(3, ("smbfs_read(fnum:%d, nread:%d, count:%d)\n",
+	DEBUG(3, ("smbfs_read(fnum:%d, nread:%d, count:%zu)\n",
 		info->fnum, (int)info->nread, count));
 	n = cli_read(info->cli, info->fnum, buffer, info->nread, count);
 	if (n > 0)
@@ -395,12 +395,12 @@ smbfs_read (void *data, char *buffer, int count)
 }
 
 static ssize_t
-smbfs_write (void *data, const char *buf, int nbyte)
+smbfs_write (void *data, const char *buf, size_t nbyte)
 {
     smbfs_handle *info = (smbfs_handle *) data;
-	int n;
+    ssize_t n;
 
-	DEBUG(3, ("smbfs_write(fnum:%d, nread:%d, nbyte:%d)\n",
+	DEBUG(3, ("smbfs_write(fnum:%d, nread:%d, nbyte:%zu)\n",
 		info->fnum, (int)info->nread, nbyte));
 	n = cli_write(info->cli, info->fnum, 0, buf, info->nread, nbyte);
 	if (n > 0)
@@ -882,7 +882,7 @@ smbfs_chmod (struct vfs_class *me, const char *path, int mode)
 }
 
 static int
-smbfs_chown (struct vfs_class *me, const char *path, int owner, int group)
+smbfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
 	(void) me;
 
@@ -908,8 +908,7 @@ smbfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 	(void) me;
 
 	DEBUG (3,
-	    ("smbfs_readlink(path:%s, buf:%s, size:%d)\n", path, buf,
-	    (int) size));
+	    ("smbfs_readlink(path:%s, buf:%s, size:%zu)\n", path, buf, size));
 	my_errno = EOPNOTSUPP;
 	return -1;		/* no symlinks on smb filesystem? */
 }
@@ -1673,11 +1672,11 @@ smbfs_lseek (void *data, off_t offset, int whence)
 }
 
 static int
-smbfs_mknod (struct vfs_class *me, const char *path, int mode, int dev)
+smbfs_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
 {
     (void) me;
 
-	DEBUG(3, ("smbfs_mknod(path:%s, mode:%d, dev:%d)\n", path, mode, dev));
+	DEBUG(3, ("smbfs_mknod(path:%s, mode:%d, dev:%zu)\n", path, mode, dev));
 	my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -1759,7 +1758,7 @@ static void
 smbfs_forget (const char *path)
 {
     char *host, *user, *p;
-    int port, i;
+    int port;
 
     if (strncmp (path, URL_HEADER, HEADER_LEN))
 	return;
@@ -1771,7 +1770,10 @@ smbfs_forget (const char *path)
 	path += 2;
 
     if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL))) {
+	size_t i;
+
 	g_free (p);
+
 	for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 	    if (smbfs_connections[i].cli
 		&& (strcmp (host, smbfs_connections[i].host) == 0)
@@ -1808,7 +1810,7 @@ smbfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 
 
 static smbfs_handle *
-smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int mode)
+smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, mode_t mode)
 {
     size_t size;
 
@@ -1863,7 +1865,7 @@ smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int m
 }
 
 static void *
-smbfs_open (struct vfs_class *me, const char *file, int flags, int mode)
+smbfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 {
     char *remote_file;
     void *ret;

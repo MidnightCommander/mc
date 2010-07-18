@@ -174,7 +174,7 @@ struct vfs_s_subclass
                          const char *archive_name, char *op);
     void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);
 
-    int (*fh_open) (struct vfs_class * me, struct vfs_s_fh * fh, int flags, int mode);
+    int (*fh_open) (struct vfs_class * me, struct vfs_s_fh * fh, int flags, mode_t mode);
     int (*fh_close) (struct vfs_class * me, struct vfs_s_fh * fh);
 
     struct vfs_s_entry *(*find_entry) (struct vfs_class * me,
@@ -185,7 +185,7 @@ struct vfs_s_subclass
     int (*file_store) (struct vfs_class * me, struct vfs_s_fh * fh, char *path, char *localname);
 
     int (*linear_start) (struct vfs_class * me, struct vfs_s_fh * fh, off_t from);
-    int (*linear_read) (struct vfs_class * me, struct vfs_s_fh * fh, void *buf, int len);
+    int (*linear_read) (struct vfs_class * me, struct vfs_s_fh * fh, void *buf, size_t len);
     void (*linear_close) (struct vfs_class * me, struct vfs_s_fh * fh);
 };
 

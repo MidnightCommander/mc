@@ -10,6 +10,9 @@
 #ifdef ENABLE_VFS
 
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include <dirent.h>
 #include <stddef.h>
 #include <utime.h>
@@ -51,10 +54,10 @@ struct vfs_class {
     int (*which) (struct vfs_class *me, const char *path);
 
     void *(*open) (struct vfs_class *me, const char *fname, int flags,
-		   int mode);
+		   mode_t mode);
     int (*close) (void *vfs_info);
-    ssize_t (*read) (void *vfs_info, char *buffer, int count);
-    ssize_t (*write) (void *vfs_info, const char *buf, int count);
+    ssize_t (*read) (void *vfs_info, char *buffer, size_t count);
+    ssize_t (*write) (void *vfs_info, const char *buf, size_t count);
 
     void *(*opendir) (struct vfs_class *me, const char *dirname);
     void *(*readdir) (void *vfs_info);
@@ -65,7 +68,7 @@ struct vfs_class {
     int (*fstat) (void *vfs_info, struct stat * buf);
 
     int (*chmod) (struct vfs_class *me, const char *path, int mode);
-    int (*chown) (struct vfs_class *me, const char *path, int owner, int group);
+    int (*chown) (struct vfs_class *me, const char *path, uid_t owner, gid_t group);
     int (*utime) (struct vfs_class *me, const char *path,
 		  struct utimbuf * times);
 
@@ -78,7 +81,7 @@ struct vfs_class {
     int (*chdir) (struct vfs_class *me, const char *path);
     int (*ferrno) (struct vfs_class *me);
     off_t (*lseek) (void *vfs_info, off_t offset, int whence);
-    int (*mknod) (struct vfs_class *me, const char *path, int mode, int dev);
+    int (*mknod) (struct vfs_class *me, const char *path, mode_t mode, dev_t dev);
 
     vfsid (*getid) (struct vfs_class *me, const char *path);
 
@@ -133,7 +136,7 @@ int vfs_file_class_flags (const char *filename);
 void vfs_fill_names (fill_names_f);
 
 /* vfs/direntry.c: */
-void *vfs_s_open (struct vfs_class *, const char *, int, int);
+void *vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode);
 
 void init_cpiofs (void);
 void init_extfs (void);
