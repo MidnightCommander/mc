@@ -1973,7 +1973,7 @@ vfs_smb_authinfo_new (const char *host, const char *share, const char *domain,
 	auth->share = g_strdup (share);
 	auth->domain = g_strdup (domain);
 	auth->user = g_strdup (user);
-	auth->password = g_strdup (password);
+	auth->password = g_strdup (pass);
     }
 
     return auth;

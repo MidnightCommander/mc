@@ -48,7 +48,7 @@ mc_LDADD = \
 	$(MCLIBS) $(SLANGLIB) $(GLIB_LIBS) \
 	$(PCRE_LIBS) $(LIBICONV) $(INTLLIBS)
 
-if USE_SAMBA_FS
+if ENABLE_VFS_SMB
 # this is a hack for linking with own samba library in simple way
 mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
 endif

@@ -65,9 +65,6 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
 	vfs_type="Midnight Commander Virtual Filesystem"
 
 	AC_MSG_NOTICE([Enabling VFS code])
-
-	AC_MC_VFS_SAMBA
-
 	MC_WITH_VFS
     fi
 
@@ -78,6 +75,7 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
     AC_MC_VFS_UNDELFS
     AC_MC_VFS_FTP
     AC_MC_VFS_FISH
+    AC_MC_VFS_SMB
 
     AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])
 ])

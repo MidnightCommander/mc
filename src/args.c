@@ -34,7 +34,9 @@
 #include "lib/tty/mouse.h"
 #include "lib/strutil.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#ifdef ENABLE_VFS_SMB
 #include "lib/vfs/mc-vfs/smbfs.h" /* smbfs_set_debugf()  */
+#endif
 
 #include "src/main.h"
 #include "src/textconf.h"

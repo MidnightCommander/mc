@@ -68,7 +68,9 @@
 #ifdef ENABLE_VFS_FTP
 #include "ftpfs.h"
 #endif
+#ifdef ENABLE_VFS_SMB
 #include "smbfs.h"
+#endif
 #include "local.h"
 
 #if defined(_AIX) && !defined(NAME_MAX)
@@ -1416,7 +1418,9 @@ static const struct
     { "sh://", 5, "/#sh:" },
     { "ssh://", 6, "/#sh:" },
 #endif
+#ifdef ENABLE_VFS_SMB
     { "smb://", 6, "/#smb:" },
+#endif
     { "a:", 2, "/#a" }
     /* *INDENT-ON* */
 };

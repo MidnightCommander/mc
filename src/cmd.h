@@ -23,7 +23,9 @@ void ftplink_cmd (void);
 #ifdef ENABLE_VFS_FISH
 void fishlink_cmd (void);
 #endif
+#ifdef ENABLE_VFS_SMB
 void smblink_cmd (void);
+#endif
 void undelete_cmd (void);
 void help_cmd (void);
 void smart_dirsize_cmd (void);

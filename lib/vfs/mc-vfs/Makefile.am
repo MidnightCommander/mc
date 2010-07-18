@@ -1,4 +1,4 @@
-if USE_SAMBA_FS
+if ENABLE_VFS_SMB
 SAMBA_CFLAGS  = -DCONFIGDIR=\""@configdir@"\"
 SAMBA_SUBDIRS = samba
 endif
@@ -61,7 +61,7 @@ endif
 if ENABLE_VFS_FISH
 libvfs_mc_la_SOURCES += $(FISHFILES)
 endif
-if USE_SAMBA_FS
+if ENABLE_VFS_SMB
 libvfs_mc_la_SOURCES += $(SMBFILES)
 endif
 

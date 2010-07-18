@@ -672,7 +672,7 @@ create_panel_menu (void)
 #ifdef HAVE_CHARSET
     entries = g_list_append (entries, menu_entry_create (_("&Encoding..."),     CK_PanelSetPanelEncoding));
 #endif
-#ifdef USE_NETCODE
+#if defined(ENABLE_VFS_FTP) || defined(ENABLE_VFS_FISH) || defined(ENABLE_VFS_SMB)
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_FTP
     entries = g_list_append (entries, menu_entry_create (_("FT&P link..."), CK_FtplinkCmd));
@@ -683,7 +683,7 @@ create_panel_menu (void)
 #ifdef ENABLE_VFS_SMB
     entries = g_list_append (entries, menu_entry_create (_("SM&B link..."), CK_SmblinkCmd));
 #endif /* ENABLE_VFS_SMB */
-#endif /* USE_NETCODE */
+#endif /* ENABLE_VFS_FTP || ENABLE_VFS_FISH || ENABLE_VFS_SMB */
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Rescan"), CK_RereadCmd));
 
@@ -1369,11 +1369,11 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_SingleDirsizeCmd:
         smart_dirsize_cmd ();
         break;
-#if defined (USE_NETCODE) && defined (ENABLE_VFS_SMB)
+#ifdef ENABLE_VFS_SMB
     case CK_SmblinkCmd:
         smblink_cmd ();
         break;
-#endif /* USE_NETCODE && ENABLE_VFS_SMB */
+#endif /* ENABLE_VFS_SMB */
     case CK_Sort:
         sort_cmd ();
         break;

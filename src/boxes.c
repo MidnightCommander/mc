@@ -46,9 +46,9 @@
 #ifdef ENABLE_VFS_FTP
 #include "lib/vfs/mc-vfs/ftpfs.h"
 #endif /* ENABLE_VFS_FTP */
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_SMB
 #include "lib/vfs/mc-vfs/smbfs.h"
-#endif
+#endif /* ENABLE_VFS_SMB */
 
 #include "dialog.h"             /* The nice dialog manager */
 #include "widget.h"             /* The widgets for the nice dialog manager */
