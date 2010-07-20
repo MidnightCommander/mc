@@ -805,7 +805,7 @@ extfs_run (struct vfs_class *me, const char *file)
 }
 
 static void *
-extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
+extfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 {
     struct pseudofile *extfs_info;
     struct archive *archive = NULL;
@@ -881,7 +881,7 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 }
 
 static ssize_t
-extfs_read (void *data, char *buffer, int count)
+extfs_read (void *data, char *buffer, size_t count)
 {
     struct pseudofile *file = (struct pseudofile *) data;
 
@@ -1091,7 +1091,7 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 }
 
 static int
-extfs_chown (struct vfs_class *me, const char *path, int owner, int group)
+extfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
     (void) me;
     (void) path;
@@ -1110,7 +1110,7 @@ extfs_chmod (struct vfs_class *me, const char *path, int mode)
 }
 
 static ssize_t
-extfs_write (void *data, const char *buf, int nbyte)
+extfs_write (void *data, const char *buf, size_t nbyte)
 {
     struct pseudofile *file = (struct pseudofile *) data;
 

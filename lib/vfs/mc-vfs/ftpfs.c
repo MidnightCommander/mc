@@ -1694,9 +1694,9 @@ ftpfs_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 }
 
 static int
-ftpfs_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
+ftpfs_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t len)
 {
-    int n;
+    ssize_t n;
     struct vfs_s_super *super = FH_SUPER;
 
     while ((n = read (FH_SOCK, buf, len)) < 0)
@@ -1709,7 +1709,7 @@ ftpfs_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len
     if (n < 0)
         ftpfs_linear_abort (me, fh);
 
-    if (!n)
+    if (n == 0)
     {
         SUP.ctl_connection_busy = 0;
         close (FH_SOCK);
@@ -1825,7 +1825,7 @@ ftpfs_chmod (struct vfs_class *me, const char *path, int mode)
 }
 
 static int
-ftpfs_chown (struct vfs_class *me, const char *path, int owner, int group)
+ftpfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
 #if 0
     ftpfs_errno = EPERM;
@@ -1908,7 +1908,7 @@ ftpfs_rmdir (struct vfs_class *me, const char *path)
 }
 
 static int
-ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
+ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
 {
     (void) mode;
 

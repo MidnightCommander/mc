@@ -755,7 +755,7 @@ vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 }
 
 void *
-vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
+vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 {
     int was_changed = 0;
     struct vfs_s_fh *fh;
@@ -848,7 +848,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 }
 
 static ssize_t
-vfs_s_read (void *fh, char *buffer, int count)
+vfs_s_read (void *fh, char *buffer, size_t count)
 {
     int n;
     struct vfs_class *me = FH_SUPER->me;
@@ -877,7 +877,7 @@ vfs_s_read (void *fh, char *buffer, int count)
 }
 
 static ssize_t
-vfs_s_write (void *fh, const char *buffer, int count)
+vfs_s_write (void *fh, const char *buffer, size_t count)
 {
     int n;
     struct vfs_class *me = FH_SUPER->me;
@@ -907,7 +907,7 @@ vfs_s_lseek (void *fh, off_t offset, int whence)
 
     if (FH->handle != -1)
     {                           /* If we have local file opened, we want to work with it */
-        int retval = lseek (FH->handle, offset, whence);
+        off_t retval = lseek (FH->handle, offset, whence);
         if (retval == -1)
             FH->ino->super->me->verrno = errno;
         return retval;

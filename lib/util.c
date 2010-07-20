@@ -899,10 +899,10 @@ strip_ctrl_codes (char *s)
 
 #ifndef ENABLE_VFS
 char *
-get_current_wd (char *buffer, int size)
+get_current_wd (char *buffer, size_t size)
 {
     char *p;
-    int len;
+    size_t len;
 
     p = g_get_current_dir ();
     len = strlen (p) + 1;

@@ -107,7 +107,7 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super);
 static ssize_t cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super);
 static ssize_t cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super);
 static ssize_t cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super);
-static ssize_t cpio_read(void *fh, char *buffer, int count);
+static ssize_t cpio_read(void *fh, char *buffer, size_t count);
 
 #define CPIO_POS(super) cpio_position
 /* If some time reentrancy should be needed change it to */
@@ -663,26 +663,27 @@ cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc,
     return 1;
 }
 
-static ssize_t cpio_read(void *fh, char *buffer, int count)
+static ssize_t cpio_read(void *fh, char *buffer, size_t count)
 {
     off_t begin = FH->ino->data_offset;
     int fd = FH_SUPER->u.arch.fd;
     struct vfs_class *me = FH_SUPER->me;
+    ssize_t res;
 
     if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != 
         begin + FH->pos) ERRNOR (EIO, -1);
 
-    count = MIN(count, FH->ino->st.st_size - FH->pos);
+    count = MIN(count, (size_t)(FH->ino->st.st_size - FH->pos));
 
-    count = mc_read (fd, buffer, count);
-    if (count == -1) 
+    res = mc_read (fd, buffer, count);
+    if (res == -1)
         ERRNOR (errno, -1);
 
-    FH->pos += count;
-    return count;
+    FH->pos += res;
+    return res;
 }
 
-static int cpio_fh_open(struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
+static int cpio_fh_open(struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
 {
     (void) fh;
     (void) mode;
