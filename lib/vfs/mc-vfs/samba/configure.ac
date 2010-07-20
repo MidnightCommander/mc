@@ -528,14 +528,14 @@ AC_ARG_WITH(ssl,
 #################################################
 # set configuration directory location
 configdir="\$(LIBDIR)"
-AC_ARG_WITH(configdir,
-[  --with-configdir=DIR    Where to put configuration files (\$libdir)],
+AC_ARG_WITH(smb-configdir,
+[  --with-smb-configdir=DIR    Where to put configuration files (\$libdir)],
 [ case "$withval" in
   yes|no)
   #
   # Just in case anybody does it
   #
-    AC_MSG_WARN([--with-configdir called without argument - will use default])
+    AC_MSG_WARN([--with-smb-configdir called without argument - will use default])
   ;;
   * )
     configdir="$withval"
@@ -547,14 +547,14 @@ AC_ARG_WITH(configdir,
 #################################################
 # set codepage directory location
 codepagedir="\$(LIBDIR)/codepages"
-AC_ARG_WITH(codepagedir,
-[  --with-codepagedir=DIR  Where to put codepage files (\$libdir/codepages)],
+AC_ARG_WITH(smb-codepagedir,
+[  --with-smb-codepagedir=DIR  Where to put codepage files (\$libdir/codepages)],
 [ case "$withval" in
   yes|no)
   #
   # Just in case anybody does it
   #
-    AC_MSG_WARN([--with-codepagedir called without argument - will use default])
+    AC_MSG_WARN([--with-smb-codepagedir called without argument - will use default])
   ;;
   * )
     codepagedir="$withval"

@@ -40,8 +40,8 @@ AC_DEFUN([AC_MC_VFS_SMB],
 	AC_SUBST(configdir)
 	AC_SUBST(codepagedir)
 
-	AC_CONFIG_SUBDIRS([lib/vfs/mc-vfs/samba])
     fi
+    AC_CONFIG_SUBDIRS([lib/vfs/mc-vfs/samba])
 
     AM_CONDITIONAL([ENABLE_VFS_SMB], [test x"$enable_vfs_smb" = x"yes"])
 ])
