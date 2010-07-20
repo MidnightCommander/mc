@@ -105,6 +105,7 @@ int fish_directory_timeout = 900;
 #define FISH_HAVE_PERL         8
 #define FISH_HAVE_LSQ         16
 #define FISH_HAVE_DATE_MDYT   32
+#define FISH_HAVE_TAIL        64
 
 static char reply_str[80];
 
@@ -293,7 +294,7 @@ fish_set_env (int flags)
 {
     GString *tmp;
 
-    tmp = g_string_sized_new (128);
+    tmp = g_string_sized_new (150);
     g_string_assign (tmp, "export ");
 
     if ((flags & FISH_HAVE_HEAD) != 0)
@@ -313,6 +314,9 @@ fish_set_env (int flags)
 
     if ((flags & FISH_HAVE_DATE_MDYT) != 0)
        g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 ");
+
+    if ((flags & FISH_HAVE_TAIL) != 0)
+       g_string_append (tmp, "FISH_HAVE_TAIL=1 ");
 
     return g_string_free (tmp, FALSE);
 }
@@ -491,19 +495,19 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     if (password)
         SUP.password = password;
     SUP.scr_ls = fish_load_script_from_file (host, FISH_LS_FILE, FISH_LS_DEF_CONTENT);
-    SUP.scr_exists = fish_load_script_from_file (host, FISH_EXISTS_FILE, FISH_EXISTS_FILE);
-    SUP.scr_mkdir = fish_load_script_from_file (host, FISH_MKDIR_FILE, FISH_MKDIR_FILE);
-    SUP.scr_unlink = fish_load_script_from_file (host, FISH_UNLINK_FILE, FISH_UNLINK_FILE);
-    SUP.scr_chown = fish_load_script_from_file (host, FISH_CHOWN_FILE, FISH_CHOWN_FILE);
-    SUP.scr_chmod = fish_load_script_from_file (host, FISH_CHMOD_FILE, FISH_CHMOD_FILE);
-    SUP.scr_rmdir = fish_load_script_from_file (host, FISH_RMDIR_FILE, FISH_RMDIR_FILE);
-    SUP.scr_ln = fish_load_script_from_file (host, FISH_LN_FILE, FISH_LN_FILE);
-    SUP.scr_mv = fish_load_script_from_file (host, FISH_MV_FILE, FISH_MV_FILE);
-    SUP.scr_hardlink = fish_load_script_from_file (host, FISH_HARDLINK_FILE, FISH_HARDLINK_FILE);
-    SUP.scr_get = fish_load_script_from_file (host, FISH_GET_FILE, FISH_GET_FILE);
-    SUP.scr_send = fish_load_script_from_file (host, FISH_SEND_FILE,FISH_SEND_FILE);
-    SUP.scr_append = fish_load_script_from_file (host, FISH_APPEND_FILE, FISH_APPEND_FILE);
-    SUP.scr_info = fish_load_script_from_file (host, FISH_INFO_FILE, FISH_INFO_FILE);
+    SUP.scr_exists = fish_load_script_from_file (host, FISH_EXISTS_FILE, FISH_EXISTS_DEF_CONTENT);
+    SUP.scr_mkdir = fish_load_script_from_file (host, FISH_MKDIR_FILE, FISH_MKDIR_DEF_CONTENT);
+    SUP.scr_unlink = fish_load_script_from_file (host, FISH_UNLINK_FILE, FISH_UNLINK_DEF_CONTENT);
+    SUP.scr_chown = fish_load_script_from_file (host, FISH_CHOWN_FILE, FISH_CHOWN_DEF_CONTENT);
+    SUP.scr_chmod = fish_load_script_from_file (host, FISH_CHMOD_FILE, FISH_CHMOD_DEF_CONTENT);
+    SUP.scr_rmdir = fish_load_script_from_file (host, FISH_RMDIR_FILE, FISH_RMDIR_DEF_CONTENT);
+    SUP.scr_ln = fish_load_script_from_file (host, FISH_LN_FILE, FISH_LN_DEF_CONTENT);
+    SUP.scr_mv = fish_load_script_from_file (host, FISH_MV_FILE, FISH_MV_DEF_CONTENT);
+    SUP.scr_hardlink = fish_load_script_from_file (host, FISH_HARDLINK_FILE, FISH_HARDLINK_DEF_CONTENT);
+    SUP.scr_get = fish_load_script_from_file (host, FISH_GET_FILE, FISH_GET_DEF_CONTENT);
+    SUP.scr_send = fish_load_script_from_file (host, FISH_SEND_FILE,FISH_SEND_DEF_CONTENT);
+    SUP.scr_append = fish_load_script_from_file (host, FISH_APPEND_FILE, FISH_APPEND_DEF_CONTENT);
+    SUP.scr_info = fish_load_script_from_file (host, FISH_INFO_FILE, FISH_INFO_DEF_CONTENT);
     return fish_open_archive_int (me, super);
 }
 
@@ -866,8 +870,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     struct vfs_s_super *super = FH_SUPER;
     char *name;
     char *quoted_name;
-    if (offset)
-        ERRNOR (E_NOTSUPP, 0);
+
     name = vfs_s_fullpath (me, fh->ino);
     if (name == NULL)
         return 0;
@@ -882,8 +885,10 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
      * standard output (i.e. over the network).
      */
 
-    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_get, (char *) NULL);
-    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name);
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_START_OFFSET=%lu;\n",
+                                  SUP.scr_get, (char *) NULL);
+    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name,
+                          (unsigned long) offset);
     g_free (shell_commands);
     g_free (quoted_name);
     if (offset != PRELIM)
