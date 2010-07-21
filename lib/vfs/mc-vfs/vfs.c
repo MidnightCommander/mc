@@ -62,11 +62,15 @@
 #include "utilvfs.h"
 #include "gc.h"
 #include "vfs.h"
-#ifdef USE_NETCODE
-#   include "netutil.h"
+#ifdef ENABLE_VFS_NET
+#include "netutil.h"
 #endif
+#ifdef ENABLE_VFS_FTP
 #include "ftpfs.h"
+#endif
+#ifdef ENABLE_VFS_SMB
 #include "smbfs.h"
+#endif
 #include "local.h"
 
 #if defined(_AIX) && !defined(NAME_MAX)
@@ -1157,15 +1161,15 @@ mc_chdir (const char *path)
     }
 }
 
-/* Return 1 is the current VFS class is local */
-int
+/* Return TRUE is the current VFS class is local */
+gboolean
 vfs_current_is_local (void)
 {
     return (current_vfs->flags & VFSF_LOCAL) != 0;
 }
 
 /* Return flags of the VFS class of the given filename */
-int
+vfs_class_flags_t
 vfs_file_class_flags (const char *filename)
 {
     struct vfs_class *vfs;
@@ -1173,7 +1177,7 @@ vfs_file_class_flags (const char *filename)
 
     fname = vfs_canon_and_translate (filename);
     if (fname == NULL)
-        return -1;
+        return VFSF_UNKNOWN;
 
     vfs = vfs_get_class (fname);
     g_free (fname);
@@ -1333,22 +1337,31 @@ vfs_init (void)
     /* fallback value for vfs_get_class() */
     localfs_class = vfs_list;
 
-    init_extfs ();
-    init_sfs ();
-    init_tarfs ();
+#ifdef ENABLE_VFS_CPIO
     init_cpiofs ();
-
-#ifdef USE_EXT2FSLIB
+#endif /* ENABLE_VFS_CPIO */
+#ifdef ENABLE_VFS_TAR
+    init_tarfs ();
+#endif /* ENABLE_VFS_TAR */
+#ifdef ENABLE_VFS_SFS
+    init_sfs ();
+#endif /* ENABLE_VFS_SFS */
+#ifdef ENABLE_VFS_EXTFS
+    init_extfs ();
+#endif /* ENABLE_VFS_EXTFS */
+#ifdef ENABLE_VFS_UNDELFS
     init_undelfs ();
-#endif /* USE_EXT2FSLIB */
+#endif /* ENABLE_VFS_UNDELFS */
 
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
     init_ftpfs ();
+#endif /* ENABLE_VFS_FTP */
+#ifdef ENABLE_VFS_FISH
     init_fish ();
+#endif /* ENABLE_VFS_FISH */
 #ifdef ENABLE_VFS_SMB
     init_smbfs ();
 #endif /* ENABLE_VFS_SMB */
-#endif /* USE_NETCODE */
 
     vfs_setup_wd ();
 }
@@ -1398,11 +1411,16 @@ static const struct
 } url_table[] =
 {
     /* *INDENT-OFF* */
+#ifdef ENABLE_VFS_FTP
     { "ftp://", 6, "/#ftp:" },
-    { "mc://", 5, "/#mc:" },
-    { "smb://", 6, "/#smb:" },
+#endif
+#ifdef ENABLE_VFS_FISH
     { "sh://", 5, "/#sh:" },
     { "ssh://", 6, "/#sh:" },
+#endif
+#ifdef ENABLE_VFS_SMB
+    { "smb://", 6, "/#smb:" },
+#endif
     { "a:", 2, "/#a" }
     /* *INDENT-ON* */
 };
@@ -1420,8 +1438,8 @@ vfs_translate_url (const char *url)
     return g_strdup (url);
 }
 
-int
+gboolean
 vfs_file_is_local (const char *filename)
 {
-    return vfs_file_class_flags (filename) & VFSF_LOCAL;
+    return (vfs_file_class_flags (filename) & VFSF_LOCAL) != 0;
 }

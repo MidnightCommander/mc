@@ -37,19 +37,18 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin.h"           /* INPUT_COLOR */
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
+#include "lib/skin.h"           /* INPUT_COLOR */
 #include "lib/mcconfig.h"       /* Load/save user formats */
 #include "lib/strutil.h"
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/vfs.h" /* vfs_timeout */
-#include "lib/vfs/mc-vfs/vfs-impl.h"
-#endif
-
-#ifdef USE_NETCODE
-#   include "lib/vfs/mc-vfs/ftpfs.h"
-#endif
+#include "lib/vfs/mc-vfs/vfs.h"
+#ifdef ENABLE_VFS_FTP
+#include "lib/vfs/mc-vfs/ftpfs.h"
+#endif /* ENABLE_VFS_FTP */
+#ifdef ENABLE_VFS_SMB
+#include "lib/vfs/mc-vfs/smbfs.h"
+#endif /* ENABLE_VFS_SMB */
 
 #include "dialog.h"             /* The nice dialog manager */
 #include "widget.h"             /* The widgets for the nice dialog manager */
@@ -58,7 +57,6 @@
 #include "command.h"            /* For cmdline */
 #include "dir.h"
 #include "panel.h"              /* LIST_TYPES */
-#include "boxes.h"
 #include "main.h"               /* For the confirm_* variables */
 #include "tree.h"
 #include "layout.h"             /* for get_nth_panel_name proto */
@@ -69,6 +67,7 @@
 #include "selcodepage.h"
 #endif
 
+#include "boxes.h"
 
 static WRadio *display_radio;
 static WInput *display_user_format;
@@ -736,10 +735,10 @@ tree_box (const char *current_dir)
 
 static char *ret_timeout;
 
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
+static char *ret_ftp_proxy;
 static char *ret_passwd;
 static char *ret_directory_timeout;
-static char *ret_ftp_proxy;
 
 static cb_ret_t
 confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -766,33 +765,33 @@ confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
             return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
-#endif
+#endif /* ENABLE_VFS_FTP */
 
 void
 configure_vfs (void)
 {
 #define VFSX 56
 
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
 #define VFSY 17
 #else
 #define VFSY 8
-#endif
+#endif /* ENABLE_VFS_FTP */
 
     char buffer2[BUF_TINY];
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
     char buffer3[BUF_TINY];
 #endif
 
     QuickWidget confvfs_widgets[] = {
         /*  0 */ QUICK_BUTTON (30, VFSX, VFSY - 3, VFSY, N_("&Cancel"), B_CANCEL, NULL),
         /*  1 */ QUICK_BUTTON (12, VFSX, VFSY - 3, VFSY, N_("&OK"), B_ENTER, NULL),
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
         /*  2 */ QUICK_CHECKBOX (4, VFSX, 12, VFSY, N_("Use passive mode over pro&xy"),
                                  &ftpfs_use_passive_connections_over_proxy),
         /*  3 */ QUICK_CHECKBOX (4, VFSX, 11, VFSY, N_("Use &passive mode"),
                                  &ftpfs_use_passive_connections),
-        /*  4 */ QUICK_CHECKBOX (4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), &use_netrc),
+        /*  4 */ QUICK_CHECKBOX (4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), &ftpfs_use_netrc),
         /*  5 */ QUICK_INPUT (4, VFSX, 9, VFSY, ftpfs_proxy_host, 48, 0, "input-ftp-proxy",
                               &ret_ftp_proxy),
         /*  6 */ QUICK_CHECKBOX (4, VFSX, 8, VFSY, N_("&Always use ftp proxy"),
@@ -804,7 +803,7 @@ configure_vfs (void)
         /* 10 */ QUICK_INPUT (4, VFSX, 6, VFSY, ftpfs_anonymous_passwd, 48, 0, "input-passwd",
                               &ret_passwd),
         /* 11 */ QUICK_LABEL (4, VFSX, 5, VFSY, N_("ftp anonymous password:")),
-#endif
+#endif /* ENABLE_VFS_FTP */
         /* 12 */ QUICK_LABEL (49, VFSX, 3, VFSY, N_("sec")),
         /* 13 */ QUICK_INPUT (38, VFSX, 3, VFSY, buffer2, 10, 0, "input-timo-vfs", &ret_timeout),
         /* 14 */ QUICK_LABEL (4, VFSX, 3, VFSY, N_("Timeout for freeing VFSs:")),
@@ -814,7 +813,7 @@ configure_vfs (void)
     QuickDialog confvfs_dlg = {
         VFSX, VFSY, -1, -1, N_("Virtual File System Setting"),
         "[Virtual FS]", confvfs_widgets,
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
         confvfs_callback,
 #else
         NULL,
@@ -822,7 +821,7 @@ configure_vfs (void)
         FALSE
     };
 
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
     g_snprintf (buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
 
     if (!ftpfs_always_use_proxy)
@@ -838,7 +837,7 @@ configure_vfs (void)
 
         if (vfs_timeout < 0 || vfs_timeout > 10000)
             vfs_timeout = 10;
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FTP
         g_free (ftpfs_anonymous_passwd);
         ftpfs_anonymous_passwd = ret_passwd;
         g_free (ftpfs_proxy_host);
@@ -1068,9 +1067,7 @@ struct smb_authinfo *
 vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, const char *user)
 {
     static int dialog_x = 44;
-    enum
-    { b0 = 3, dialog_y = 12 };
-    struct smb_authinfo *return_value;
+    int b0 = 3, dialog_y = 12;
     static const char *lc_labs[] = { N_("Domain:"), N_("Username:"), N_("Password:") };
     static const char *buts[] = { N_("&OK"), N_("&Cancel") };
     static int ilen = 30, istart = 14;
@@ -1080,6 +1077,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
     WInput *in_user;
     WInput *in_domain;
     Dlg_head *auth_dlg;
+    struct smb_authinfo *return_value = NULL;
 
     const int input_colors[3] =
     {
@@ -1155,24 +1153,9 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
     add_widget (auth_dlg, label_new (5, 3, lc_labs[1]));
     add_widget (auth_dlg, label_new (3, 3, lc_labs[0]));
 
-    run_dlg (auth_dlg);
-
-    switch (auth_dlg->ret_value)
-    {
-    case B_CANCEL:
-        return_value = 0;
-        break;
-    default:
-        return_value = g_try_new (struct smb_authinfo, 1);
-        if (return_value)
-        {
-            return_value->host = g_strdup (host);
-            return_value->share = g_strdup (share);
-            return_value->domain = g_strdup (in_domain->buffer);
-            return_value->user = g_strdup (in_user->buffer);
-            return_value->password = g_strdup (in_password->buffer);
-        }
-    }
+    if (run_dlg (auth_dlg) != B_CANCEL)
+        return_value = vfs_smb_authinfo_new (host, share, in_domain->buffer, in_user->buffer,
+                                             in_password->buffer);
 
     destroy_dlg (auth_dlg);
 

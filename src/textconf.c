@@ -33,19 +33,30 @@
 
 #ifdef ENABLE_VFS
 static const char *const vfs_supported[] = {
-    "tarfs",
-    "extfs",
+#ifdef ENABLE_VFS_CPIO
     "cpiofs",
-#ifdef USE_NETCODE
-    "ftpfs",
-    "fish",
-#   ifdef ENABLE_VFS_SMB
-    "smbfs",
-#   endif /* ENABLE_VFS_SMB */
-#endif				/* USE_NETCODE */
-#ifdef USE_EXT2FSLIB
+#endif
+#ifdef ENABLE_VFS_TAR
+    "tarfs",
+#endif
+#ifdef ENABLE_VFS_SFS
+    "sfs",
+#endif
+#ifdef ENABLE_VFS_EXTFS
+    "extfs",
+#endif
+#ifdef ENABLE_VFS_UNDELFS
     "undelfs",
 #endif
+#ifdef ENABLE_VFS_FTP
+    "ftpfs",
+#endif
+#ifdef ENABLE_VFS_FISH
+    "fish",
+#endif
+#ifdef ENABLE_VFS_SMB
+    "smbfs",
+#endif /* ENABLE_VFS_SMB */
     NULL
 };
 #endif				/* ENABLE_VFS */

@@ -17,30 +17,23 @@
 #include <stddef.h>
 #include <utime.h>
 
+#include "vfs.h"
 #include "lib/fs.h"		/* MC_MAXPATHLEN */
 
 typedef void *vfsid;
 struct vfs_stamping;
 
-/**
- * This is the type of callback function passed to vfs_fill_names.
- * It gets the name of the virtual file system as its first argument.
- * See also:
- *    vfs_fill_names().
- */
-typedef void (*fill_names_f) (const char *);
-
 struct vfs_class {
     struct vfs_class *next;
     const char *name;			/* "FIles over SHell" */
-    int flags;
+    vfs_class_flags_t flags;
     const char *prefix;		/* "fish:" */
     void *data;			/* this is for filesystem's own use */
     int verrno;			/* can't use errno because glibc2 might define errno as function */
 
     int (*init) (struct vfs_class *me);
     void (*done) (struct vfs_class *me);
-    
+
     /**
      * The fill_names method shall call the callback function for every
      * filesystem name that this vfs module supports.
@@ -112,38 +105,33 @@ union vfs_dirent {
 /* Register a file system class */
 int vfs_register_class (struct vfs_class *vfs);
 
-#ifdef ENABLE_VFS_SMB
-/* Interface for requesting SMB credentials.  */
-struct smb_authinfo {
-    char *host;
-    char *share;
-    char *domain;
-    char *user;
-    char *password;
-};
-
-struct smb_authinfo *vfs_smb_get_authinfo (const char *host,
-					   const char *share,
-					   const char *domain,
-					   const char *user);
-#endif				/* ENABLE_VFS_SMB */
-
-struct vfs_class *vfs_get_class (const char *path);
 struct vfs_class *vfs_split (char *path, char **inpath, char **op);
 char *vfs_path (const char *path);
-int vfs_file_class_flags (const char *filename);
-
-void vfs_fill_names (fill_names_f);
 
 /* vfs/direntry.c: */
 void *vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode);
 
+#ifdef ENABLE_VFS_CPIO
 void init_cpiofs (void);
-void init_extfs (void);
-void init_fish (void);
-void init_sfs (void);
+#endif
+#ifdef ENABLE_VFS_TAR
 void init_tarfs (void);
+#endif
+#ifdef ENABLE_VFS_SFS
+void init_sfs (void);
+#endif
+#ifdef ENABLE_VFS_EXTFS
+void init_extfs (void);
+#endif
+#ifdef ENABLE_VFS_UNDELFS
 void init_undelfs (void);
+#endif
+#ifdef ENABLE_VFS_FTP
+void init_ftpfs (void);
+#endif
+#ifdef ENABLE_VFS_FISH
+void init_fish (void);
+#endif
 
 #endif /* ENABLE_VFS */
 

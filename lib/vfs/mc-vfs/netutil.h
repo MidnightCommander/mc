@@ -4,10 +4,12 @@
  * \brief Header: Virtual File System: Network utilities
  */
 
-#ifndef MC_VFS_TCPUTIL_H
-#define MC_VFS_TCPUTIL_H
+#ifndef MC_VFS_NETUTIL_H
+#define MC_VFS_NETUTIL_H
 
-extern int got_sigpipe;
+#include <signal.h>
+
+extern volatile sig_atomic_t got_sigpipe;
 void tcp_init (void);
 
-#endif
+#endif /* MC_VFS_NETUTIL_H */

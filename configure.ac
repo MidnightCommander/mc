@@ -22,6 +22,7 @@ AC_USE_SYSTEM_EXTENSIONS
 
 AC_PROG_LIBTOOL
 PKG_PROG_PKG_CONFIG
+AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
 
 AC_ISC_POSIX
 
@@ -279,14 +280,6 @@ if test x$with_glib_static = xyes; then
     GLIB_LIBS="$new_GLIB_LIBS"
 fi
 
-
-dnl
-dnl Network related functions
-dnl
-
-AC_SEARCH_LIBS([socket], [socket])
-AC_SEARCH_LIBS([gethostbyname], [nsl])
-
 dnl
 dnl Sequent wants getprocessstats
 dnl
@@ -297,12 +290,6 @@ AC_CHECK_LIB(seq, get_process_stats, [
 have to use that instead of gettimeofday])])
 
 AC_MC_VFS_CHECKS
-
-vfs_type="normal"
-if test x$enable_vfs = xyes; then
-	AC_MSG_NOTICE([enabling VFS code])
-	vfs_type="Midnight Commander Virtual File System"
-fi
 
 dnl
 dnl Check for gpm mouse support (Linux only)
@@ -534,16 +521,10 @@ AC_SUBST(LIBS)
 dnl Libraries used only when building the mc binary
 AC_SUBST(MCLIBS)
 
-if test -n "$use_smbfs"; then
-  AC_CONFIG_SUBDIRS([lib/vfs/mc-vfs/samba])
-fi
-
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
-AM_CONDITIONAL(ENABLE_VFS_NET, [test x"$use_net_code" = xtrue])
-AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 

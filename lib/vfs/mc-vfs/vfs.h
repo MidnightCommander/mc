@@ -12,11 +12,27 @@
 #include <utime.h>
 #include <stdio.h>
 
+#include "lib/global.h"
+
+struct vfs_class;
+
 /* Flags of VFS classes */
-#define VFSF_LOCAL 1	/* Class is local (not virtual) filesystem */
-#define VFSF_NOLINKS 2	/* Hard links not supported */
+typedef enum
+{
+    VFSF_UNKNOWN = 0,
+    VFSF_LOCAL   = 1 << 0, /* Class is local (not virtual) filesystem */
+    VFSF_NOLINKS = 1 << 1  /* Hard links not supported */
+} vfs_class_flags_t;
 
 #ifdef ENABLE_VFS
+
+/**
+ * This is the type of callback function passed to vfs_fill_names.
+ * It gets the name of the virtual file system as its first argument.
+ * See also:
+ *    vfs_fill_names().
+ */
+typedef void (*fill_names_f) (const char *);
 
 extern int vfs_timeout;
 
@@ -26,9 +42,10 @@ extern int use_netrc;
 
 void vfs_init (void);
 void vfs_shut (void);
+void vfs_expire (int now);
 
-int vfs_current_is_local (void);
-int vfs_file_is_local (const char *filename);
+gboolean vfs_current_is_local (void);
+gboolean vfs_file_is_local (const char *filename);
 ssize_t mc_read (int handle, void *buffer, size_t count);
 ssize_t mc_write (int handle, const void *buffer, size_t count);
 int mc_utime (const char *path, struct utimbuf *times);
@@ -61,6 +78,9 @@ char *mc_getlocalcopy (const char *pathname);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_translate_url (const char *url);
 
+struct vfs_class *vfs_get_class (const char *path);
+vfs_class_flags_t vfs_file_class_flags (const char *filename);
+
 /* return encoding after last #enc: or NULL, if part does not contain #enc:
  * return static buffer */
 const char *vfs_get_encoding (const char *path);
@@ -71,20 +91,25 @@ char *vfs_translate_path_n (const char *path);
 /* canonize and translate path, return new string */
 char *vfs_canon_and_translate (const char *path);
 
+void vfs_stamp_path (const char *path);
+
+void vfs_release_path (const char *dir);
+
+void vfs_fill_names (fill_names_f);
+
 #else /* ENABLE_VFS */
 
 /* Only the routines outside of the VFS module need the emulation macros */
 
 #define vfs_init() do { } while (0)
 #define vfs_shut() do { } while (0)
-#define vfs_current_is_local() (1)
-#define vfs_file_is_local(x) (1)
+#define vfs_current_is_local() (TRUE)
+#define vfs_file_is_local(x) (TRUE)
 #define vfs_strip_suffix_from_filename(x) g_strdup(x)
 #define vfs_get_class(x) (struct vfs_class *)(NULL)
 #define vfs_translate_url(s) g_strdup(s)
 #define vfs_file_class_flags(x) (VFSF_LOCAL)
 #define vfs_release_path(x)
-#define vfs_add_current_stamps() do { } while (0)
 #define vfs_timeout_handler() do { } while (0)
 #define vfs_timeouts() 0
 
@@ -252,4 +277,4 @@ enum {
 #define E_PROTO EIO
 #endif
 
-#endif
+#endif /* MC_VFS_VFS_H */

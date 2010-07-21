@@ -45,27 +45,18 @@
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"        /* For init_key() */
 #include "lib/tty/win.h"        /* xterm_flag */
-
 #include "lib/skin.h"
-
 #include "lib/mcconfig.h"
 #include "lib/filehighlight.h"
 #include "lib/fileloc.h"        /* MC_USERCONF_DIR */
+#include "lib/strutil.h"
 
 #include "lib/vfs/mc-vfs/vfs.h" /* vfs_translate_url() */
-
 #ifdef ENABLE_VFS_SMB
 #include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debug() */
 #endif /* ENABLE_VFS_SMB */
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
-#endif
-
-#include "lib/strutil.h"
-
-#include "src/args.h"
-
+#include "args.h"
 #include "dir.h"
 #include "dialog.h"
 #include "menu.h"
@@ -681,14 +672,18 @@ create_panel_menu (void)
 #ifdef HAVE_CHARSET
     entries = g_list_append (entries, menu_entry_create (_("&Encoding..."),     CK_PanelSetPanelEncoding));
 #endif
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_NET
     entries = g_list_append (entries, menu_separator_create ());
+#ifdef ENABLE_VFS_FTP
     entries = g_list_append (entries, menu_entry_create (_("FT&P link..."), CK_FtplinkCmd));
+#endif
+#ifdef ENABLE_VFS_FISH
     entries = g_list_append (entries, menu_entry_create (_("S&hell link..."), CK_FishlinkCmd));
+#endif
 #ifdef ENABLE_VFS_SMB
     entries = g_list_append (entries, menu_entry_create (_("SM&B link..."), CK_SmblinkCmd));
-#endif /* ENABLE_VFS_SMB */
-#endif /* USE_NETCODE */
+#endif
+#endif /* ENABLE_VFS_NET */
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Rescan"), CK_RereadCmd));
 
@@ -766,7 +761,7 @@ create_command_menu (void)
 #endif
     entries = g_list_append (entries, menu_entry_create (_("Screen lis&t"), CK_DialogListCmd));
     entries = g_list_append (entries, menu_separator_create ());
-#ifdef USE_EXT2FSLIB
+#ifdef ENABLE_VFS_UNDELFS
     entries =
         g_list_append (entries,
                        menu_entry_create (_("&Undelete files (ext2fs only)"), CK_UndeleteCmd));
@@ -775,7 +770,7 @@ create_command_menu (void)
     entries =
         g_list_append (entries, menu_entry_create (_("&Listing format edit"), CK_ListmodeCmd));
 #endif
-#if defined (USE_EXT2FSLIB) || defined (LISTMODE_EDITOR)
+#if defined (ENABLE_VFS_UNDELFS) || defined (LISTMODE_EDITOR)
     entries = g_list_append (entries, menu_separator_create ());
 #endif
     entries =
@@ -1266,10 +1261,12 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_FindCmd:
         find_cmd ();
         break;
-#if defined (USE_NETCODE)
+#ifdef ENABLE_VFS_FISH
     case CK_FishlinkCmd:
         fishlink_cmd ();
         break;
+#endif
+#ifdef ENABLE_VFS_FTP
     case CK_FtplinkCmd:
         ftplink_cmd ();
         break;
@@ -1372,11 +1369,11 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_SingleDirsizeCmd:
         smart_dirsize_cmd ();
         break;
-#if defined (USE_NETCODE) && defined (ENABLE_VFS_SMB)
+#ifdef ENABLE_VFS_SMB
     case CK_SmblinkCmd:
         smblink_cmd ();
         break;
-#endif /* USE_NETCODE && ENABLE_VFS_SMB */
+#endif /* ENABLE_VFS_SMB */
     case CK_Sort:
         sort_cmd ();
         break;
@@ -1407,7 +1404,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_TreeBoxCmd:
         treebox_cmd ();
         break;
-#ifdef USE_EXT2FSLIB
+#ifdef ENABLE_VFS_UNDELFS
     case CK_UndeleteCmd:
         undelete_cmd ();
         break;
@@ -1578,7 +1575,18 @@ done_mc (void)
         save_panel_types ();
     }
     done_screen ();
-    vfs_add_current_stamps ();
+
+#ifdef ENABLE_VFS
+    vfs_stamp_path (vfs_get_current_dir ());
+
+    if ((current_panel != NULL)
+        && (get_current_type () == view_listing))
+            vfs_stamp_path (current_panel->cwd);
+
+    if ((other_panel != NULL)
+        && (get_other_type () == view_listing))
+            vfs_stamp_path (other_panel->cwd);
+#endif
 }
 
 static cb_ret_t

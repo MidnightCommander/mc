@@ -59,10 +59,9 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/search.h"
-#include "lib/vfs/mc-vfs/vfs-impl.h"
-#include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strescape.h"
 #include "lib/strutil.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "setup.h"
 #include "dialog.h"
@@ -193,17 +192,11 @@ is_in_linklist (struct link *lp, const char *path, struct stat *sb)
 {
     ino_t ino = sb->st_ino;
     dev_t dev = sb->st_dev;
-#ifdef ENABLE_VFS
     struct vfs_class *vfs = vfs_get_class (path);
-#endif /* ENABLE_VFS */
 
-    (void) path;
-
-    while (lp)
+    while (lp != NULL)
     {
-#ifdef ENABLE_VFS
         if (lp->vfs == vfs)
-#endif /* ENABLE_VFS */
             if (lp->ino == ino && lp->dev == dev)
                 return 1;
         lp = lp->next;
@@ -225,7 +218,7 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
     struct stat link_stat;
     const char *p;
 
-    if (vfs_file_class_flags (src_name) & VFSF_NOLINKS)
+    if ((vfs_file_class_flags (src_name) & VFSF_NOLINKS) != 0)
         return 0;
 
     for (lp = linklist; lp != NULL; lp = lp->next)

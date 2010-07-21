@@ -349,8 +349,10 @@ static name_keymap_t command_names[] = {
     { "CmdFilter",                       CK_FilterCmd },
     { "CmdFilteredView",                 CK_FilteredViewCmd },
     { "CmdFind",                         CK_FindCmd },
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_FISH
     { "CmdFishlink",                     CK_FishlinkCmd },
+#endif
+#ifdef ENABLE_VFS_FTP
     { "CmdFtplink",                      CK_FtplinkCmd },
 #endif
     { "CmdHistory",                      CK_HistoryCmd },
@@ -379,14 +381,14 @@ static name_keymap_t command_names[] = {
     { "CmdReverseSelection",             CK_ReverseSelectionCmd },
     { "CmdSaveSetup",                    CK_SaveSetupCmd },
     { "CmdSelect",                       CK_SelectCmd },
-#if defined (USE_NETCODE) && defined (ENABLE_VFS_SMB)
+#ifdef ENABLE_VFS_SMB
     { "CmdSmblinkCmd",                   CK_SmblinkCmd },
-#endif /* USE_NETCODE || ENABLE_VFS_SMB */
+#endif
     { "CmdSwapPanel",                    CK_SwapCmd },
     { "CmdSymlink",                      CK_SymlinkCmd },
     { "CmdTree",                         CK_TreeCmd },
     { "CmdTreeBox",                      CK_TreeBoxCmd },
-#ifdef USE_EXT2FSLIB
+#ifdef ENABLE_VFS_UNDELFS
     { "CmdUndelete",                     CK_UndeleteCmd },
 #endif
     { "CmdUnselect",                     CK_UnselectCmd },

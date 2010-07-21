@@ -36,14 +36,14 @@
 #include <sys/types.h>
 
 #undef USE_NCURSES	/* Don't include *curses.h */
-#undef  USE_NCURSESW
+#undef USE_NCURSESW
+
+#include <string.h>
 
 #include "lib/global.h"
 
 #include "src/wtools.h"	/* message() */
 #include "src/main.h"	/* print_vfs_message */
-
-#include "utilvfs.h"
 
 #undef	PACKAGE_BUGREPORT
 #undef	PACKAGE_NAME
@@ -60,12 +60,10 @@
 
 #include "samba/include/includes.h"
 
-#include <string.h>
-
-#include "vfs.h"
 #include "vfs-impl.h"
-#include "smbfs.h"
 #include "netutil.h"
+#include "utilvfs.h"
+#include "smbfs.h"
 
 #define SMBFS_MAX_CONNECTIONS 16
 static const char * const IPC = "IPC$";
@@ -183,20 +181,14 @@ smbfs_auth_cmp_host (gconstpointer _a, gconstpointer _b)
 
 static void
 smbfs_auth_add (const char *host, const char *share, const char *domain,
-              const char *user, const char *param_password)
+              const char *user, const char *pass)
 {
-    struct smb_authinfo *auth = g_try_new (struct smb_authinfo, 1);
+    struct smb_authinfo *auth;
 
-    if (auth == NULL)
-        return;
+    auth = vfs_smb_authinfo_new (host, share, domain, user, pass);
 
-    /* Don't check for NULL, g_strdup already does. */
-    auth->host = g_strdup (host);
-    auth->share = g_strdup (share);
-    auth->domain = g_strdup (domain);
-    auth->user = g_strdup (user);
-    auth->password = g_strdup (param_password);
-    auth_list = g_slist_prepend (auth_list, auth);
+    if (auth != NULL)
+	auth_list = g_slist_prepend (auth_list, auth);
 }
 
 static void
@@ -1965,6 +1957,26 @@ smbfs_fstat (void *data, struct stat *buf)
 		return -EFAULT;
 	}
 	return 0;
+}
+
+smb_authinfo *
+vfs_smb_authinfo_new (const char *host, const char *share, const char *domain,
+                      const char *user, const char *pass)
+{
+    smb_authinfo *auth;
+
+    auth = g_try_new (struct smb_authinfo, 1);
+
+    if (auth != NULL)
+    {
+	auth->host = g_strdup (host);
+	auth->share = g_strdup (share);
+	auth->domain = g_strdup (domain);
+	auth->user = g_strdup (user);
+	auth->password = g_strdup (pass);
+    }
+
+    return auth;
 }
 
 void

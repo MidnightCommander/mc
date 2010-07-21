@@ -44,21 +44,17 @@
 
 #include "lib/global.h"
 
-#include "src/wtools.h"	/* message() */
-#include "src/main.h"	/* print_vfs_message */
-#include "src/panel.h"	/* get_current_panel() */
-#include "src/layout.h"	/* get_current_type() */
+#include "src/panel.h"		/* current_panel */
+#include "src/layout.h"		/* get_current_type(), get_other_type() */
 
-#include "utilvfs.h"
 #include "vfs-impl.h"
-#include "vfs.h"
 #include "gc.h"
 
+#include "utilvfs.h"
 
 int vfs_timeout = 60;		/* VFS timeout in seconds */
 
 static struct vfs_stamping *stamps;
-
 
 static void
 vfs_addstamp (struct vfs_class *v, vfsid id)
@@ -142,8 +138,8 @@ vfs_getid (struct vfs_class *vclass, const char *dir)
 }
 
 
-static void
-vfs_stamp_path (char *path)
+void
+vfs_stamp_path (const char *path)
 {
     struct vfs_class *vfs;
     vfsid id;
@@ -204,24 +200,6 @@ vfs_stamp_create (struct vfs_class *oldvfs, vfsid oldvfsid)
 
     vfs_addstamp (oldvfs, oldvfsid);
 }
-
-
-void
-vfs_add_current_stamps (void)
-{
-    vfs_stamp_path (vfs_get_current_dir ());
-
-    if (current_panel) {
-	if (get_current_type () == view_listing)
-	    vfs_stamp_path (current_panel->cwd);
-    }
-
-    if (other_panel) {
-	if (get_other_type () == view_listing)
-	    vfs_stamp_path (other_panel->cwd);
-    }
-}
-
 
 /* Compare two timeval structures.  Return 0 is t1 is less than t2. */
 static inline int

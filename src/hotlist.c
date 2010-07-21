@@ -48,6 +48,7 @@
 #include "lib/mcconfig.h"       /* Load/save directories hotlist */
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "dialog.h"
 #include "widget.h"
@@ -78,7 +79,6 @@
 #define B_MOVE		(B_USER + 7)
 
 #ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
 #define B_FREE_ALL_VFS	(B_USER + 8)
 #define B_REFRESH_VFS	(B_USER + 9)
 #endif

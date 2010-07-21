@@ -489,8 +489,6 @@ strip_password (char *p, int has_prefix)
         /* *INDENT-OFF* */
         { "/#ftp:", 6 },
         { "ftp://", 6 },
-        { "/#mc:", 5 },
-        { "mc://", 5 },
         { "/#smb:", 6 },
         { "smb://", 6 },
         { "/#sh:", 5 },
