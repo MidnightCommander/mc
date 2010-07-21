@@ -974,15 +974,15 @@ vfs_s_print_stats (const char *fs_name, const char *action,
 
     if (i18n_percent_transf_format == NULL)
     {
-        i18n_percent_transf_format = _("%s: %s: %s %3d%% (%lu bytes transferred)");
-        i18n_transf_format = _("%s: %s: %s %lu bytes transferred");
+        i18n_percent_transf_format = _("%s: %s: %s %3d%% (%ju bytes transferred)");
+        i18n_transf_format = _("%s: %s: %s %ju bytes transferred");
     }
 
     if (need)
         print_vfs_message (i18n_percent_transf_format, fs_name, action,
-                           file_name, (int) ((double) have * 100 / need), (unsigned long) have);
+                           file_name, (int) ((double) have * 100 / need), have);
     else
-        print_vfs_message (i18n_transf_format, fs_name, action, file_name, (unsigned long) have);
+        print_vfs_message (i18n_transf_format, fs_name, action, file_name, have);
 }
 
 int

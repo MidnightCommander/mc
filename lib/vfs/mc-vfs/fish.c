@@ -802,16 +802,16 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
     /* FIXME: File size is limited to ULONG_MAX */
     if (!fh->u.fish.append)
     {
-        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%lu;\n",
+        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%ju;\n",
                                       SUP.scr_append, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (unsigned long) s.st_size);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, s.st_size);
         g_free (shell_commands);
     }
     else
     {
-        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%lu;\n",
+        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%ju;\n",
                                       SUP.scr_send, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (unsigned long) s.st_size);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, s.st_size);
         g_free (shell_commands);
     }
     if (n != PRELIM)
@@ -848,8 +848,8 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
         }
         tty_disable_interrupt_key ();
         total += n;
-        print_vfs_message (_("fish: storing %s %d (%lu)"),
-                           was_error ? _("zeros") : _("file"), total, (unsigned long) s.st_size);
+        print_vfs_message (_("fish: storing %s %d (%ju)"),
+                           was_error ? _("zeros") : _("file"), total, s.st_size);
     }
     close (h);
     g_free (quoted_name);
@@ -885,10 +885,9 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
      * standard output (i.e. over the network).
      */
 
-    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_START_OFFSET=%lu;\n",
+    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_START_OFFSET=%ju;\n",
                                   SUP.scr_get, (char *) NULL);
-    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name,
-                          (unsigned long) offset);
+    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name, offset);
     g_free (shell_commands);
     g_free (quoted_name);
     if (offset != PRELIM)
@@ -897,9 +896,9 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     fh->u.fish.got = 0;
     errno = 0;
 #if SIZEOF_OFF_T == SIZEOF_LONG
-    fh->u.fish.total = strtol (reply_str, NULL, 10);
+    fh->u.fish.total = (off_t) strtol (reply_str, NULL, 10);
 #else
-    fh->u.fish.total = strtoll (reply_str, NULL, 10);
+    fh->u.fish.total = (off_t) strtoll (reply_str, NULL, 10);
 #endif
     if (errno != 0)
         ERRNOR (E_REMOTE, 0);
@@ -1016,8 +1015,8 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
     crpath = vfs_s_get_path_mangle (me, mpath, &super, 0); \
     if (crpath == NULL) \
     { \
-	g_free (mpath); \
-	return -1; \
+       g_free (mpath); \
+       return -1; \
     } \
     rpath = strutils_shell_escape (crpath); \
     g_free (mpath);
@@ -1064,13 +1063,16 @@ fish_link (struct vfs_class *me, const char *path1, const char *path2)
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2, *mpath1, *mpath2;
     struct vfs_s_super *super, *super2;
-    crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super, 0);
+
+    mpath1 = g_strdup (path1);
+    crpath1 = vfs_s_get_path_mangle (me, mpath1, &super, 0);
     if (crpath1 == NULL)
     {
         g_free (mpath1);
         return -1;
     }
-    crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0);
+    mpath2 = g_strdup (path2);
+    crpath2 = vfs_s_get_path_mangle (me, mpath2, &super2, 0);
     if (crpath2 == NULL)
     {
         g_free (mpath1);
@@ -1097,8 +1099,10 @@ fish_symlink (struct vfs_class *me, const char *setto, const char *path)
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath;
-    char *rpath, *mpath = g_strdup (path);
+    char *rpath, *mpath;
     struct vfs_s_super *super;
+
+    mpath = g_strdup (path);
     crpath = vfs_s_get_path_mangle (me, mpath, &super, 0);
     if (crpath == NULL)
     {
