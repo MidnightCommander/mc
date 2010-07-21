@@ -400,16 +400,16 @@ typedef struct
     int f_index;                /* file index into delarray */
     char *buf;
     int error_code;             /*  */
-    int pos;                    /* file position */
-    int current;                /* used to determine current position in itereate */
-    int finished;
+    off_t pos;                  /* file position */
+    off_t current;              /* used to determine current position in itereate */
+    gboolean finished;
     ext2_ino_t inode;
     int bytes_read;
-    long size;
+    off_t size;
 
     /* Used by undelfs_read: */
     char *dest_buffer;          /* destination buffer */
-    size_t count;                  /* bytes to read */
+    size_t count;               /* bytes to read */
 } undelfs_file;
 
 /* We do not support lseek */
@@ -460,7 +460,7 @@ undelfs_open (struct vfs_class *me, const char *fname, int flags, mode_t mode)
             return 0;
         }
         p->inode = inode;
-        p->finished = 0;
+        p->finished = FALSE;
         p->f_index = i;
         p->error_code = 0;
         p->pos = 0;
@@ -500,12 +500,12 @@ undelfs_dump_read (ext2_filsys param_fs, blk_t * blocknr, int blockcnt, void *pr
     else
         memset (p->buf, 0, param_fs->blocksize);
 
-    if (p->pos + p->count < p->current)
+    if (p->pos + (off_t) p->count < p->current)
     {
-        p->finished = 1;
+        p->finished = TRUE;
         return BLOCK_ABORT;
     }
-    if ((size_t) p->pos > p->current + param_fs->blocksize)
+    if (p->pos > p->current + param_fs->blocksize)
     {
         p->current += param_fs->blocksize;
         return 0;               /* we have not arrived yet */
@@ -516,11 +516,11 @@ undelfs_dump_read (ext2_filsys param_fs, blk_t * blocknr, int blockcnt, void *pr
     {
 
         /* First case: starting pointer inside this block */
-        if ((size_t) (p->pos + p->count) <= p->current + param_fs->blocksize)
+        if (p->pos + (off_t) p->count <= p->current + param_fs->blocksize)
         {
             /* Fully contained */
             copy_count = p->count;
-            p->finished = p->count;
+            p->finished = (p->count != 0);
         }
         else
         {
@@ -532,10 +532,10 @@ undelfs_dump_read (ext2_filsys param_fs, blk_t * blocknr, int blockcnt, void *pr
     else
     {
         /* Second case: we already have passed p->pos */
-        if ((size_t) (p->pos + p->count) < p->current + param_fs->blocksize)
+        if (p->pos + (off_t) p->count < p->current + param_fs->blocksize)
         {
             copy_count = (p->pos + p->count) - p->current;
-            p->finished = p->count;
+            p->finished = (p->count != 0);
         }
         else
         {
@@ -560,10 +560,10 @@ undelfs_read (void *vfs_info, char *buffer, size_t count)
 
     p->dest_buffer = buffer;
     p->current = 0;
-    p->finished = 0;
+    p->finished = FALSE;
     p->count = count;
 
-    if (p->pos + p->count > p->size)
+    if (p->pos + (off_t) p->count > p->size)
     {
         p->count = p->size - p->pos;
     }
