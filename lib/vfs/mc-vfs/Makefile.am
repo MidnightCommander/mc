@@ -21,8 +21,8 @@ BASICFILES = \
 	vfs.c vfs.h vfs-impl.h	\
 	direntry.c xdirentry.h	\
 	utilvfs.c utilvfs.h	\
-	local.c local.h		\
-	gc.c gc.h
+	gc.c gc.h		\
+	local.c local.h
 
 CPIOFILES = cpio.c
 TARFILES = tar.c
@@ -102,11 +102,7 @@ distclean-local:
 	  (cd samba && $(MAKE) distclean) \
 	else :; fi
 
-if ENABLE_VFS
 noinst_LTLIBRARIES = libvfs-mc.la
-else
-noinst_LTLIBRARIES =
-endif
 
 SAMBA_DIST =			\
 	Makefile.in		\

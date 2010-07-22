@@ -121,23 +121,6 @@ vfs_rmstamp (struct vfs_class *v, vfsid id)
 }
 
 
-/* Find VFS id for given directory name */
-vfsid
-vfs_getid (struct vfs_class *vclass, const char *dir)
-{
-    char *dir1;
-    vfsid id = NULL;
-
-    /* append slash if needed */
-    dir1 = concat_dir_and_file (dir, "");
-    if (vclass->getid)
-	id = (*vclass->getid) (vclass, dir1);
-
-    g_free (dir1);
-    return id;
-}
-
-
 void
 vfs_stamp_path (const char *path)
 {

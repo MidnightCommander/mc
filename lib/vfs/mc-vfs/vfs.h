@@ -24,7 +24,8 @@ typedef enum
     VFSF_NOLINKS = 1 << 1  /* Hard links not supported */
 } vfs_class_flags_t;
 
-#ifdef ENABLE_VFS
+void vfs_init (void);
+void vfs_shut (void);
 
 #if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH) || defined (ENABLE_VFS_SMB)
 #define ENABLE_VFS_NET 1
@@ -44,8 +45,6 @@ extern int vfs_timeout;
 extern int use_netrc;
 #endif
 
-void vfs_init (void);
-void vfs_shut (void);
 void vfs_expire (int now);
 
 gboolean vfs_current_is_local (void);
@@ -101,107 +100,6 @@ void vfs_stamp_path (const char *path);
 void vfs_release_path (const char *dir);
 
 void vfs_fill_names (fill_names_f);
-
-#else /* ENABLE_VFS */
-
-/* Only the routines outside of the VFS module need the emulation macros */
-
-#define vfs_init() do { } while (0)
-#define vfs_shut() do { } while (0)
-#define vfs_current_is_local() (TRUE)
-#define vfs_file_is_local(x) (TRUE)
-#define vfs_strip_suffix_from_filename(x) g_strdup(x)
-#define vfs_get_class(x) (struct vfs_class *)(NULL)
-#define vfs_translate_url(s) g_strdup(s)
-#define vfs_file_class_flags(x) (VFSF_LOCAL)
-#define vfs_release_path(x)
-#define vfs_timeout_handler() do { } while (0)
-#define vfs_timeouts() 0
-
-#define mc_getlocalcopy(x) vfs_canon(x)
-#define mc_read read
-#define mc_write write
-#define mc_utime utime
-#define mc_readlink readlink
-#define mc_ungetlocalcopy(x,y,z) do { } while (0)
-#define mc_close close
-#define mc_lseek lseek
-#define mc_opendir opendir
-#define mc_readdir readdir
-#define mc_closedir closedir
-#define mc_stat stat
-#define mc_mknod mknod
-#define mc_link link
-#define mc_mkdir mkdir
-#define mc_rmdir rmdir
-#define mc_fstat fstat
-#define mc_lstat lstat
-#define mc_symlink symlink
-#define mc_rename rename
-#define mc_chmod chmod
-#define mc_chown chown
-#define mc_chdir chdir
-#define mc_unlink unlink
-#define mc_open open
-#define mc_get_current_wd(x,size) get_current_wd (x, size)
-
-static inline int mc_setctl (const char *path, int ctlop, void *arg)
-{
-    (void) path;
-    (void) ctlop;
-    (void) arg;
-    return 0;
-}
-
-static inline int mc_ctl (int fd, int ctlop, void *arg)
-{
-    (void) fd;
-    (void) ctlop;
-    (void) arg;
-    return 0;
-}
-
-static inline const char *vfs_get_encoding (const char *path)
-{
-    (void) path;
-    return NULL;
-}
-
-/* return new string */
-static inline char *vfs_translate_path_n (const char *path)
-{
-    return ((path == NULL) ? g_strdup ("") : g_strdup (path));
-}
-
-static inline char* vfs_canon_and_translate(const char* path)
-{
-    char *ret_str;
-
-    if (path == NULL)
-	return g_strdup("");
-
-    if (path[0] == PATH_SEP)
-    {
-	char *curr_dir = g_get_current_dir();
-	ret_str = g_strdup_printf("%s" PATH_SEP_STR "%s", curr_dir, path);
-	g_free(curr_dir);
-    }
-    else
-	ret_str = g_strdup(path);
-
-    canonicalize_pathname (ret_str);
-    return ret_str;
-}
-
-static inline char *
-vfs_canon (const char *path)
-{
-    char *p = g_strdup (path);
-    canonicalize_pathname(p);
-    return p;
-}
-
-#endif /* ENABLE_VFS */
 
 char *vfs_get_current_dir (void);
 /* translate path back to terminal encoding, remove all #enc:
