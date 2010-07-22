@@ -43,7 +43,6 @@
 #include "lib/global.h"
 
 #include "src/wtools.h"	/* message() */
-#include "src/main.h"	/* print_vfs_message */
 
 #undef	PACKAGE_BUGREPORT
 #undef	PACKAGE_NAME

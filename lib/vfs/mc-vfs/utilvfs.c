@@ -38,10 +38,10 @@
 #include "lib/global.h"
 #include "lib/unixcompat.h"
 
-#include "src/wtools.h"
+#include "src/wtools.h"        /* message() */
 #include "src/history.h"
 
-#include "vfs.h"
+#include "vfs-impl.h"
 #include "utilvfs.h"
 
 /** Get current username

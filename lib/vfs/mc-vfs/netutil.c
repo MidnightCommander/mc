@@ -28,6 +28,7 @@
 #include <signal.h>
 
 #include "lib/global.h"
+
 #include "netutil.h"
 
 volatile sig_atomic_t got_sigpipe = 0;

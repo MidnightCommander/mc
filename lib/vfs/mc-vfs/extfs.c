@@ -50,12 +50,11 @@
 #include "lib/fileloc.h"
 
 #include "src/wtools.h"         /* message() */
-#include "src/main.h"           /* print_vfs_message */
+#include "src/main.h"           /* shell */
 #include "src/execute.h"        /* For shell_execute */
 
-#include "utilvfs.h"
-#include "vfs.h"
 #include "vfs-impl.h"
+#include "utilvfs.h"
 #include "gc.h"                 /* vfs_rmstamp */
 
 #undef ERRNOR

@@ -14,11 +14,9 @@
 
 #include "lib/global.h"
 
-#include "src/wtools.h"	/* message() */
-#include "src/main.h"	/* print_vfs_message */
-
+#include "vfs-impl.h"
 #include "utilvfs.h"
-#include "vfs.h"
+
 #include "local.h"
 
 /**

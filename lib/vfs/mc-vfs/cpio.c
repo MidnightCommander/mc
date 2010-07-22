@@ -32,14 +32,12 @@
 #include "lib/global.h"
 #include "lib/unixcompat.h"
 
-#include "src/wtools.h"	/* message() */
-#include "src/main.h"	/* print_vfs_message */
-#include "vfs.h"
+#include "src/wtools.h"         /* message() */
 
-#include "utilvfs.h"
 #include "vfs-impl.h"
-#include "gc.h"			/* vfs_rmstamp */
+#include "utilvfs.h"
 #include "xdirentry.h"
+#include "gc.h"                 /* vfs_rmstamp */
 
 enum {
     STATUS_START,

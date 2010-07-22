@@ -9,7 +9,6 @@
 #define MC_VFS_XDIRENTRY_H
 
 #include <stdio.h>
-
 #include <sys/types.h>
 
 #define LINK_FOLLOW 15

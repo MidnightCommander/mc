@@ -48,9 +48,9 @@
 #include "src/layout.h"		/* get_current_type(), get_other_type() */
 
 #include "vfs-impl.h"
-#include "gc.h"
-
 #include "utilvfs.h"
+
+#include "gc.h"
 
 int vfs_timeout = 60;		/* VFS timeout in seconds */
 

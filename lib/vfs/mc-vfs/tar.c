@@ -43,12 +43,11 @@
 #include "lib/global.h"
 
 #include "src/wtools.h"	/* message() */
-#include "src/main.h"	/* print_vfs_message */
-#include "vfs.h"
 
+#include "vfs-impl.h"
 #include "utilvfs.h"
-#include "gc.h"		/* vfs_rmstamp */
 #include "xdirentry.h"
+#include "gc.h"		/* vfs_rmstamp */
 
 static struct vfs_class vfs_tarfs_ops;
 

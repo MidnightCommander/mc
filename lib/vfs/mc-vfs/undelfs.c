@@ -57,10 +57,11 @@
 #include <ctype.h>
 
 #include "lib/global.h"
+
 #include "src/wtools.h"         /* message() */
 #include "src/main.h"           /* print_vfs_message */
+
 #include "utilvfs.h"
-#include "vfs.h"
 #include "vfs-impl.h"
 
 struct deleted_info
