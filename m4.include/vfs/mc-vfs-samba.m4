@@ -16,37 +16,6 @@ AC_DEFUN([AC_MC_VFS_SMB],
 	enable_vfs_smb="yes"
 	AC_MC_VFS_ADDNAME([smb])
 	AC_DEFINE([ENABLE_VFS_SMB], [1], [Define to enable VFS over SMB])
-
-	# set Samba configuration directory location
-	configdir="/etc"
-	AC_ARG_WITH([smb-configdir],
-		AC_HELP_STRING([--with-smb-configdir=DIR], [Where the Samba configuration files are [[/etc]]]),
-		[ case "$withval" in
-		    yes|no)
-			# Just in case anybody does it
-			AC_MSG_WARN([--with-smb-configdir called without argument - will use default])
-			;;
-		    *)
-			configdir="$withval"
-			;;
-		esac
-	])
-
-	AC_ARG_WITH([smb-codepagedir],
-		AC_HELP_STRING([--with-smb-codepagedir=DIR], [Where the Samba codepage files are]),
-		[ case "$withval" in
-		    yes|no)
-			# Just in case anybody does it
-			AC_MSG_WARN([--with-smb-codepagedir called without argument - will use default])
-			;;
-		    *)
-			codepagedir="$withval"
-		    ;;
-		esac
-	])
-
-	AC_SUBST(configdir)
-	AC_SUBST(codepagedir)
     fi
 
     AC_CONFIG_SUBDIRS([lib/vfs/mc-vfs/samba])
