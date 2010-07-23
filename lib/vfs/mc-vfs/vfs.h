@@ -26,6 +26,10 @@ typedef enum
 
 #ifdef ENABLE_VFS
 
+#if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH) || defined (ENABLE_VFS_SMB)
+#define ENABLE_VFS_NET 1
+#endif
+
 /**
  * This is the type of callback function passed to vfs_fill_names.
  * It gets the name of the virtual file system as its first argument.
@@ -36,7 +40,7 @@ typedef void (*fill_names_f) (const char *);
 
 extern int vfs_timeout;
 
-#ifdef USE_NETCODE
+#ifdef ENABLE_VFS_NET
 extern int use_netrc;
 #endif
 
