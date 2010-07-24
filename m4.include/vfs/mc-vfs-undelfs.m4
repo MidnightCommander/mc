@@ -58,7 +58,7 @@ AC_DEFUN([AC_MC_VFS_UNDELFS],
 	],
 	[enable_vfs_undelfs="no"])
 
-    if test x"$enable_vfs" != x"no" -a x"$enable_vfs_undelfs" != x"no"; then
+    if test x"$enable_vfs" = x"yes" -a x"$enable_vfs_undelfs" != x"no"; then
 	MC_UNDELFS_CHECKS
 
 	if test x"$ext2fs_undel" = x"yes"; then
@@ -71,5 +71,5 @@ AC_DEFUN([AC_MC_VFS_UNDELFS],
 	    AC_ERROR([Ext2 libraries not found])
 	fi
     fi
-    AM_CONDITIONAL(ENABLE_VFS_UNDELFS, [test x"$enable_vfs_undelfs" = x"yes"])
+    AM_CONDITIONAL(ENABLE_VFS_UNDELFS, [test "$enable_vfs" = "yes" -a x"$enable_vfs_undelfs" = x"yes"])
 ])

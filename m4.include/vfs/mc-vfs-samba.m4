@@ -12,7 +12,7 @@ AC_DEFUN([AC_MC_VFS_SMB],
 		],
 		[enable_vfs_smb=no])
 
-    if test "$enable_vfs" != "no" -a x"$enable_vfs_smb" != x"no"; then
+    if test "$enable_vfs" = "yes" -a x"$enable_vfs_smb" != x"no"; then
 	enable_vfs_smb="yes"
 	AC_MC_VFS_ADDNAME([smb])
 	AC_DEFINE([ENABLE_VFS_SMB], [1], [Define to enable VFS over SMB])
@@ -22,5 +22,5 @@ AC_DEFUN([AC_MC_VFS_SMB],
 	AC_CONFIG_SUBDIRS([lib/vfs/mc-vfs/samba])
     fi
 
-    AM_CONDITIONAL([ENABLE_VFS_SMB], [test x"$enable_vfs_smb" = x"yes"])
+    AM_CONDITIONAL([ENABLE_VFS_SMB], [test "$enable_vfs" = "yes" -a x"$enable_vfs_smb" = x"yes"])
 ])
