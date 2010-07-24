@@ -49,9 +49,14 @@ AC_DEFUN([AC_MC_VFS_UNDELFS],
 [
     AC_ARG_ENABLE([vfs-undelfs],
 	AC_HELP_STRING([--enable-vfs-undelfs], [Support for ext2 undelete filesystem [[no]]]),
-	[enable_vfs_undelfs="$enableval"],
-	[enable_vfs_undelfs="no"]
-    )
+	[
+	    if test "x$enableval" = "xno"; then
+		enable_vfs_undelfs=no
+	    else
+		enable_vfs_undelfs=yes
+	    fi
+	],
+	[enable_vfs_undelfs="no"])
 
     if test x"$enable_vfs" != x"no" -a x"$enable_vfs_undelfs" != x"no"; then
 	MC_UNDELFS_CHECKS

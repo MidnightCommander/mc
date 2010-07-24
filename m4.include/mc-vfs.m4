@@ -73,9 +73,6 @@ AC_DEFUN([AC_MC_VFS_CHECKS],
 
     if test x"$enable_vfs_ftp" = x"yes" -o x"$enable_vfs_fish" = x"yes" -o x"$enable_vfs_smb" = x"yes"; then
 	MC_ENABLE_VFS_NET
-	if test x"$enable_vfs_net" = x"yes"; then
-	    AC_DEFINE([ENABLE_VFS_NET], [1], [Support for network filesystems])
-	fi
     fi
 
     AM_CONDITIONAL([ENABLE_VFS_NET], [test x"$enable_vfs_net" = x"yes"])
