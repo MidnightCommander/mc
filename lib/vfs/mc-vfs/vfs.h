@@ -45,6 +45,8 @@ extern int vfs_timeout;
 extern int use_netrc;
 #endif
 
+void vfs_timeout_handler (void);
+int vfs_timeouts (void);
 void vfs_expire (int now);
 
 gboolean vfs_current_is_local (void);

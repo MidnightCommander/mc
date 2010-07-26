@@ -507,12 +507,8 @@ edit_set_filename (WEdit * edit, const char *f)
     if (!f)
         f = "";
     edit->filename = g_strdup (f);
-    if (edit->dir == NULL && *f != PATH_SEP)
-#ifdef ENABLE_VFS
+    if (edit->dir == NULL && !g_path_is_absolute (f))
         edit->dir = g_strdup (vfs_get_current_dir ());
-#else /* ENABLE_VFS */
-        edit->dir = g_get_current_dir ();
-#endif /* ENABLE_VFS */
 }
 
 static gboolean

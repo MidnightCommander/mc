@@ -119,12 +119,10 @@ do_execute (const char *lc_shell, const char *command, int flags)
     char *new_dir = NULL;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
-#ifdef ENABLE_VFS
     char *old_vfs_dir = 0;
 
     if (!vfs_current_is_local ())
         old_vfs_dir = g_strdup (vfs_get_current_dir ());
-#endif /* ENABLE_VFS */
 
     if (mc_run_mode == MC_RUN_FULL)
         save_cwds_stat ();
@@ -143,11 +141,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
         do_update_prompt ();
 
         /* We don't care if it died, higher level takes care of this */
-#ifdef ENABLE_VFS
         invoke_subshell (command, VISIBLY, old_vfs_dir ? NULL : &new_dir);
-#else
-        invoke_subshell (command, VISIBLY, &new_dir);
-#endif /* !ENABLE_VFS */
     }
     else
 #endif /* HAVE_SUBSHELL_SUPPORT */
@@ -190,13 +184,11 @@ do_execute (const char *lc_shell, const char *command, int flags)
 
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
-#ifdef ENABLE_VFS
     if (old_vfs_dir)
     {
         mc_chdir (old_vfs_dir);
         g_free (old_vfs_dir);
     }
-#endif /* ENABLE_VFS */
 
     if (mc_run_mode == MC_RUN_FULL)
     {

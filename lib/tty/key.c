@@ -42,10 +42,6 @@
 
 #include "lib/vfs/mc-vfs/vfs.h"
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
-#endif /* ENABLE_VFS */
-
 #include "tty.h"
 #include "tty-internal.h" /* mouse_enabled */
 #include "mouse.h"

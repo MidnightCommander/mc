@@ -1426,17 +1426,13 @@ done_mc (void)
     }
     done_screen ();
 
-#ifdef ENABLE_VFS
     vfs_stamp_path (vfs_get_current_dir ());
 
-    if ((current_panel != NULL)
-        && (get_current_type () == view_listing))
-            vfs_stamp_path (current_panel->cwd);
+    if ((current_panel != NULL) && (get_current_type () == view_listing))
+        vfs_stamp_path (current_panel->cwd);
 
-    if ((other_panel != NULL)
-        && (get_other_type () == view_listing))
-            vfs_stamp_path (other_panel->cwd);
-#endif
+    if ((other_panel != NULL) && (get_other_type () == view_listing))
+        vfs_stamp_path (other_panel->cwd);
 }
 
 static cb_ret_t
