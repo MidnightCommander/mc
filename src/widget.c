@@ -2751,9 +2751,7 @@ listbox_key (WListbox * l, int key)
 static inline void
 listbox_destroy (WListbox * l)
 {
-    /* don't delete list in modifable listbox */
-    if (!l->deletable)
-        listbox_remove_list (l);
+    listbox_remove_list (l);
 }
 
 static cb_ret_t
