@@ -1240,11 +1240,11 @@ show_hist (GList **history, Widget *widget)
 	entry->text = NULL;
     }
 
-    destroy_dlg (query_dlg);
-
     /* restore history direction */
     if (query_dlg->y < widget->y)
 	z = g_list_reverse (z);
+
+    destroy_dlg (query_dlg);
 
     g_list_foreach (*history, (GFunc) g_free, NULL);
     g_list_free (*history);
