@@ -1700,9 +1700,9 @@ msgstr ""
 msgid "Replace"
 msgstr "Csere"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%ld replacements made"
-msgstr " %ld csere történt. "
+msgstr "%ld csere történt"
 
 msgid "Quit"
 msgstr "Kilépés"
@@ -2926,9 +2926,8 @@ msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " A{z} \"~/%s\" fájl nem írható, régi gyorslista-bejegyzések megtartva"
 
-#, fuzzy
 msgid "Information"
-msgstr " Információ "
+msgstr "Információ"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2938,9 +2937,9 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Fájl:         %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Szabad node:  %d (%d%%) / %d"
+msgstr "Szabad node: %ld (%ld%%) / %ld"
 
 msgid "No node information"
 msgstr "Nincs node-információ"
