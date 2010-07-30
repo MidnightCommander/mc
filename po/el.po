@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2010-04-10 18:58+0200\n"
 "Last-Translator: Alex-P. Natsios\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -1474,18 +1474,20 @@ msgstr " Το %s δεν είναι σύνηθες αρχείο"
 msgid " File %s is too large "
 msgstr " Υπερβολικό μέγεθος αρχείου %s "
 
-msgid " About "
-msgstr " Περί... "
-
+#, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
+
+#, fuzzy
+msgid "About"
+msgstr " Περί... "
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -1912,6 +1914,10 @@ msgstr ""
 
 msgid "Go to matching &bracket"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr " Επιλογή τονισμού σύνταξης"
 
 msgid "&Find declaration"
 msgstr ""

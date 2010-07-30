@@ -2,12 +2,12 @@
 # Copyright (C) 1998-2010 Free Software Foundation, Inc.
 # David Martín <dmartina@excite.com>, 1998-2010.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2010-05-08 16:30+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -950,7 +950,8 @@ msgstr ""
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menús:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -1509,17 +1510,15 @@ msgstr " %s no es un archivo ordinario "
 msgid " File %s is too large "
 msgstr " El archivo %s es demasiado grande "
 
-msgid " About "
-msgstr " Acerca de... "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -1528,6 +1527,10 @@ msgstr ""
 "\n"
 "       Un editor de texto amigable escrito\n"
 "           para el Midnight Commander.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " Acerca de... "
 
 msgid "Macro recursion is too deep"
 msgstr "La macro es demasiado recursiva"
@@ -1935,6 +1938,10 @@ msgstr "&Numeración de líneas"
 msgid "Go to matching &bracket"
 msgstr "buscar pare&Ja del operador"
 
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Coloreado de Sintaxis"
+
 msgid "&Find declaration"
 msgstr "buscar &Declaración"
 
@@ -2159,7 +2166,10 @@ msgid " %s%s file error"
 msgstr " error en el archivo %s%s "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "El archivo %smc.ext ha cambiado con la versión 3.0.\n"
 "Parece que la instalación falló. Por favor, trate\n"
@@ -2171,7 +2181,10 @@ msgid " ~/%s file error "
 msgstr " error en el archivo ~/%s "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "El archivo ~/%s ha cambiado con la versión 3.0.\n"
 "Puede hacer una copia de %smc.ext o bien emplearlo\n"
@@ -2840,7 +2853,8 @@ msgid " Hotlist Load "
 msgstr " Cargar favoritos "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "No se pudo escribir ~/%s, la lista de favoritos antigua no fue borrada"
 
 msgid "Information"

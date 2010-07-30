@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1539,17 +1539,15 @@ msgstr " Pogled ni mogoč: ni običajna datoteka "
 msgid " File %s is too large "
 msgstr " Datoteka je prevelika: "
 
-msgid " About "
-msgstr " O "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -1559,6 +1557,10 @@ msgstr ""
 "\n"
 "       Uporabniku prijazen urejevalnik besedil\n"
 "           za Polnočnega poveljnika.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " O "
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzija makra je pregloboka"
@@ -2001,6 +2003,10 @@ msgstr "&Preklopi označbo  F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "Pojdi na &zaklepaj        M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Osvetlitev &sintakse"
 
 #, fuzzy
 msgid "&Find declaration"

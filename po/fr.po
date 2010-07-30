@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -1543,17 +1543,15 @@ msgstr " %s n'est pas un fichier régulier "
 msgid " File %s is too large "
 msgstr " Fichier %s trop grand "
 
-msgid " About "
-msgstr " À propos "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                 Cooledit  v3.11.5\n"
@@ -1562,6 +1560,10 @@ msgstr ""
 "\n"
 "       Un éditeur de texte convivial écrit\n"
 "           pour Midnight Commander.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " À propos "
 
 msgid "Macro recursion is too deep"
 msgstr "Profondeur de récursion de la macro trop grande"
@@ -1980,6 +1982,21 @@ msgstr "I&nverser l'état de la ligne"
 
 msgid "Go to matching &bracket"
 msgstr "Aller au &crochet correspondant"
+
+# ###
+# TODO:
+# * Dans ButtonBar|<mot>, seul les 6 1er caractères sont affichés
+# * Signification de msgid_plural msgstr[.] avant d'enleveler le fuzzy l2805
+# * Uniformiser la traduction de "Cannot" : "ne peut pas" ou "Impossible" ou
+#   "Echec"
+# * voir traduction de ftpfs (traduit FTPfs pour l'instant), je pense qu'il
+# faut
+#   plutôt traduire "ftpfs"
+# * Traduction de 'parser' : 'analyser'
+# ###
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Choisissez la coloration syntaxique "
 
 msgid "&Find declaration"
 msgstr "Trouver la declaration"

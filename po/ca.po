@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -1556,17 +1556,15 @@ msgstr " No puc visualitzar-lo perquè no és un fitxer habitual "
 msgid " File %s is too large "
 msgstr " El fitxer és massa gran: "
 
-msgid " About "
-msgstr " Quant a "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                 Cooledit  v3.11.5\n"
@@ -1575,6 +1573,10 @@ msgstr ""
 "\n"
 "        Un editor de text amistós escrit\n"
 "             pel Midnight Commander.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " Quant a "
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2019,6 +2021,10 @@ msgstr "&Canvia inici/fi de marcador    F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "ves al &Claudàtor coincident  M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Ressaltament de la sinta&Xi"
 
 #, fuzzy
 msgid "&Find declaration"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2010-07-06 20:16+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
@@ -1514,17 +1514,15 @@ msgstr " %s nie jest zwykłym plikiem "
 msgid " File %s is too large "
 msgstr " Plik %s jest za duży "
 
-msgid " About "
-msgstr " O programie "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -1533,6 +1531,10 @@ msgstr ""
 "\n"
 "       Przyjazny dla użytkownika edytor tekstu, napisany\n"
 "           dla programu Midnight Commander.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " O programie "
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurencja makr jest za głeboka"
@@ -1941,6 +1943,10 @@ msgstr "Przełącz sta&n wiersza"
 
 msgid "Go to matching &bracket"
 msgstr "Prze&jdź do pasującego nawiasu"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr " Proszę wybrać wyróżnianie składni "
 
 msgid "&Find declaration"
 msgstr "&Znajdź deklarację"

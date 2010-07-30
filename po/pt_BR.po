@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -1553,17 +1553,15 @@ msgstr " Impossível visualizar: não é arquivo regular "
 msgid " File %s is too large "
 msgstr " Arquivo grande demais: "
 
-msgid " About "
-msgstr " Sobre "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                 Cooledit  v3.11.5\n"
@@ -1572,6 +1570,10 @@ msgstr ""
 "\n"
 "       Um editor de texto fácil escrito para o \n"
 "                  Midnight Commander.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " Sobre "
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2018,6 +2020,10 @@ msgstr "&Alternar Marca   F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "ir para o Colchete correspondente   M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Ressaltar sinta&xe"
 
 #, fuzzy
 msgid "&Find declaration"

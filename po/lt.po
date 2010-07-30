@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -1537,17 +1537,15 @@ msgstr " %s nėra įprastinis failas "
 msgid " File %s is too large "
 msgstr " Failas %s yra per didelis "
 
-msgid " About "
-msgstr " Apie "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -1556,6 +1554,10 @@ msgstr ""
 "\n"
 "       Naudotojui draugiškas redaktorius, \n"
 "         parašytas „Midnight Commander“.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " Apie "
 
 msgid "Macro recursion is too deep"
 msgstr "Makrokomandų rekursija yra per gili"
@@ -1993,6 +1995,10 @@ msgstr "Keis&ti žymėjimą       F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "Eiti į porinį skliaustelį M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr " Parinkite sintaksės ryškinimą "
 
 #, fuzzy
 msgid "&Find declaration"

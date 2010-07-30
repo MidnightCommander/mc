@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -1491,18 +1491,15 @@ msgstr "Luo uusi hakemisto"
 msgid " File %s is too large "
 msgstr " Tiedosto on liian suuri: "
 
-msgid " About "
-msgstr " Tietoja "
-
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                 Cooledit  v2.1\n"
@@ -1511,6 +1508,10 @@ msgstr ""
 "\n"
 "       Käyttäjäystävällinen tekstinmuokkain\n"
 "           Midnight Commanderia varten.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " Tietoja "
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -1955,6 +1956,10 @@ msgstr "&Aseta merkki      F3"
 
 msgid "Go to matching &bracket"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "syntaks&Ikorostus"
 
 #, fuzzy
 msgid "&Find declaration"

@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
-"PO-Revision-Date: 2010-07-05  22:37+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"PO-Revision-Date: 2010-07-30 19:37+0400\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: mcedit 4.7.2\n"
+"X-Generator: mcedit 4.7.3\n"
 
 msgid " Search string not found "
 msgstr " Искомая строка не найдена "
@@ -1524,25 +1524,26 @@ msgstr " %s не является обычным файлом "
 msgid " File %s is too large "
 msgstr " Файл %s слишком большой "
 
-msgid " About "
-msgstr " О программе "
-
+#, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
-"                     Cooledit  v3.11.5\n"
+"                    MCEdit %s\n"
 "\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
+"   Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-" Текстовый редактор с дружественным интерфейсом пользователя.\n"
-"               Создан для Midnight Commander.\n"
+"Текстовый редактор с дружественным интерфейсом пользователя,\n"
+"             созданный для Midnight Commander\n"
+
+msgid "About"
+msgstr "О программе"
 
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
@@ -1672,6 +1673,7 @@ msgstr " Блок слишком велик, вам может не удатьс
 msgid "Replace"
 msgstr "&Заменить"
 
+#, c-format
 msgid "%ld replacements made"
 msgstr "Осуществлено подстановок: %ld"
 
@@ -1948,6 +1950,9 @@ msgstr "Отобра&зить/скрыть номера строк"
 
 msgid "Go to matching &bracket"
 msgstr "Перейти к парной ско&бке"
+
+msgid "Toggle s&yntax highlighting"
+msgstr "Включить/выключить &цветовыделения синтаксиса"
 
 msgid "&Find declaration"
 msgstr "Перейти к опре&делению"
@@ -2875,6 +2880,7 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Файл:       %s"
 
+#, c-format
 msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Своб. узлов: %ld (%ld%%) из %ld"
 

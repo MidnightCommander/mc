@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -1541,17 +1541,15 @@ msgstr " Nu poate fi vizualizat: nu este un fişier obişnuit "
 msgid " File %s is too large "
 msgstr " Fişierul este prea mare: "
 
-msgid " About "
-msgstr " Despre "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -1560,6 +1558,10 @@ msgstr ""
 "\n"
 "          Un editor de text scris pentru\n"
 "                Midnight Commander.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " Despre "
 
 msgid "Macro recursion is too deep"
 msgstr "Recursivitatea macro este prea mare"
@@ -2001,6 +2003,10 @@ msgstr "in&Versează selecţia    F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "d&U-te la paranteza pereche      M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "&Evidenţiere sintaxă"
 
 #, fuzzy
 msgid "&Find declaration"

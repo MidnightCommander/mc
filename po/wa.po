@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
@@ -1506,17 +1506,15 @@ msgstr " Dji n' sai håyner ci fitchî ci: ci n' est nén on fitchî normå "
 msgid " File %s is too large "
 msgstr " Li fitchî est trop grand: "
 
-msgid " About "
-msgstr " Å dfait "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "               Cooledit  v3.11.5\n"
@@ -1525,6 +1523,10 @@ msgstr ""
 "\n"
 "       In amiståve aspougneu di tecse sicrit\n"
 "             pol Midnight Commander.\n"
+
+#, fuzzy
+msgid "About"
+msgstr " Å dfait "
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -1972,6 +1974,10 @@ msgstr "&Discandjî Marke        F3"
 
 msgid "Go to matching &bracket"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "mete e &valeur l' emantchaedje"
 
 #, fuzzy
 msgid "&Find declaration"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 22:31+0400\n"
+"POT-Creation-Date: 2010-07-30 19:35+0400\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -1553,17 +1553,15 @@ msgstr " Ezin da ikusi: ez da fitxategi erregularra "
 msgid " File %s is too large "
 msgstr " Fitxategia handiegia da: "
 
-msgid " About "
-msgstr "Honi buruz "
-
+#, fuzzy, c-format
 msgid ""
 "\n"
-"                Cooledit  v3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -1572,6 +1570,10 @@ msgstr ""
 "\n"
 "       Testu-editore lagungarri bat idatzi da\n"
 "           Midnight Commander-entzat.\n"
+
+#, fuzzy
+msgid "About"
+msgstr "Honi buruz "
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2017,6 +2019,10 @@ msgstr "&Txandakatu marka  F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "joan dagokion &kortxetera M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "sinta&xia nabarmentzen"
 
 #, fuzzy
 msgid "&Find declaration"
