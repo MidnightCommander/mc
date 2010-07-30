@@ -167,9 +167,9 @@ my_system (int flags, const char *shell, const char *command)
     if (pid < 0)
     {
         fprintf (stderr, "\n\nfork () = -1\n");
-        return -1;
+        status = -1;
     }
-    if (pid == 0)
+    else if (pid == 0)
     {
         signal (SIGINT, SIG_DFL);
         signal (SIGQUIT, SIG_DFL);
@@ -204,18 +204,25 @@ my_system (int flags, const char *shell, const char *command)
     }
     else
     {
-        while (waitpid (pid, &status, 0) < 0)
+        while (TRUE)
+        {
+            if (waitpid (pid, &status, 0) > 0)
+            {
+                status = WEXITSTATUS(status);
+                break;
+            }
             if (errno != EINTR)
             {
                 status = -1;
                 break;
             }
+        }
     }
     sigaction (SIGINT, &save_intr, NULL);
     sigaction (SIGQUIT, &save_quit, NULL);
     sigaction (SIGTSTP, &save_stop, NULL);
 
-    return WEXITSTATUS (status);
+    return status;
 }
 
 
