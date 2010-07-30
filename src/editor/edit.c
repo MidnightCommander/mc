@@ -3522,11 +3522,16 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         save_setup_cmd ();
         break;
     case CK_About:
-        query_dialog (_("About"),
-                      _("\n                Cooledit  v3.11.5\n\n"
-                        " Copyright (C) 1996 the Free Software Foundation\n\n"
-                        "       A user friendly text editor written\n"
-                        "           for the Midnight Commander.\n"), D_NORMAL, 1, _("&OK"));
+        {
+            char text[BUF_LARGE];
+
+            g_snprintf (text, sizeof (text),
+                        _("\n              MCEdit %s\n\n"
+                            "Copyright (C) 1996-2010 the Free Software Foundation\n\n"
+                            "            A user friendly text editor\n"
+                            "         written for the Midnight Commander"), VERSION);
+            query_dialog (_("About"), text, D_NORMAL, 1, _("&OK"));
+        }
         break;
     case CK_LearnKeys:
         learn_keys ();
