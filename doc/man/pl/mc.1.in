@@ -2705,7 +2705,7 @@ Podświetlenie uprawnień również pracuje w tym trybie.
 Jeśli ta zmienna jest ustawiona (standardowo) próbuje się dostosować
 rozszerzenie pliku do tego wybranego w pliku mc.ext.
 .PP
-.I xterm_mode
+.I xtree_mode
 .IP
 Jeśli ta opcja jest włączona (standardowo tak nie jest) kiedy przeglądasz plik
 w panelu drzewa, będzie on automatycznie przeładowywał drugi panel na

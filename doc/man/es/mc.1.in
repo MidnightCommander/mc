@@ -3618,7 +3618,7 @@ comando "file" para reconocer los tipos de archivo referidos en el archivo
 mc.ext\&.
 .\"Extension File Edit"
 .PP
-.I xterm_mode
+.I xtree_mode
 .IP
 Si esta variable está activada (por defecto no) cuando naveguemos
 por el sistema de archivos en un panel en árbol, se irá actualizando

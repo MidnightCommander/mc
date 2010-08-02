@@ -3737,7 +3737,7 @@ match the file types listed on the
 mc.ext file\&.
 .\"Extension File Edit"
 .TP
-.I xterm_mode
+.I xtree_mode
 If this variable is on (default is off) when you browse the file system
 on a Tree panel, it will automatically reload the other panel with the
 contents of the selected directory.

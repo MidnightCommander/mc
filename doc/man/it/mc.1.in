@@ -3028,7 +3028,7 @@ file per trovare delle corrispondenze sui tipi di file elencati nel
 file mc.ext\&.
 .\"Extension File Edit"
 .TP
-.I xterm_mode
+.I xtree_mode
 Se questa variabile è impostata (il valore predefinito è no) quando
 si naviga il file system su un pannello ad albero, automaticamente
 ricaricherà l'altro pannello con il contenuto della directory 
