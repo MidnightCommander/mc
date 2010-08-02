@@ -2970,7 +2970,7 @@ Társításokban
 .\"Extension File Edit"
 a fájl típusnál egyezőt talált.
 .PP
-.I xterm_mode
+.I xtree_mode
 .IP
 Ha ez a változó be van kapcsolva (alapértelmezésben ki van kapcsolva),
 akkor, amikor a fájlrendszert a Fa panelben böngészed, az automatikusan
