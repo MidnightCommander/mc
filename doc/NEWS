@@ -1,3 +1,28 @@
+Version 4.7.0.8
+
+- VFS
+
+    * Fixed remained plain int types (#171)
+
+- Editor
+
+    * Editor version is synchronized with MC one (#2189)
+    * Added "Toggle syntax highlighting" menu item. Described C-s shortcut in mcedit man page (#2035)
+
+- Misc
+
+    * Translation updates
+
+- Fixes
+
+    * Restore signals even if fork() fails (#2273)
+    * be-tarask.po was renamed to be@tarask.po (#2235)
+    * Bogus strings in 'Confirmation' config dialog (#2271)
+    * Segfault in replace confirmation in editor (#2272)
+    * Viewer doesn't show non-ASCII chars in hex mode (#2263)
+    * Man pages: fixed the title in the section describing xtree_mode variable (#2303)
+
+
 Version 4.7.0.7
 
 - Core
@@ -7,14 +32,14 @@ Version 4.7.0.7
 
 - Editor
 
-    * Added highlighting for HTTPS URLs in SPEC files (#1446) 
+    * Added highlighting for HTTPS URLs in SPEC files (#1446)
 
 - Misc
 
     * Code cleanups (#2255)
     * Translation updates
 
-Fixes
+- Fixes
 
     * AC_TRY_RUN macro breaks crosscompile (#1959)
     * Buttonbar mouse clicks are off (#2199)
