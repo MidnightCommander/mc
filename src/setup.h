@@ -48,6 +48,7 @@ typedef struct
     gboolean filetype_mode;     /* If TRUE then add per file type hilighting */
     gboolean permission_mode;   /* If TRUE, we use permission hilighting */
     qsearch_mode_t qsearch_mode;        /* Quick search mode */
+    gboolean torben_fj_mode;            /* If TRUE, use some usability hacks by Torben */
 } panels_options_t;
 
 /*** global variables defined in .c file *********************************************************/

@@ -73,9 +73,6 @@
 /* If true, show the mini-info on the panel */
 int show_mini_info = 1;
 
-/* If true, use some usability hacks by Torben */
-int torben_fj_mode = 0;
-
 /* The hook list for the select file function */
 hook_t *select_file_hook = NULL;
 
@@ -1956,9 +1953,10 @@ move_home (WPanel * panel)
 {
     if (panel->selected == 0)
         return;
+
     unselect_item (panel);
 
-    if (torben_fj_mode)
+    if (panels_options.torben_fj_mode)
     {
         int middle_pos = panel->top_file + (ITEMS (panel) / 2);
 
@@ -1988,8 +1986,10 @@ move_end (WPanel * panel)
 {
     if (panel->selected == panel->count - 1)
         return;
+
     unselect_item (panel);
-    if (torben_fj_mode)
+
+    if (panels_options.torben_fj_mode)
     {
         int middle_pos = panel->top_file + (ITEMS (panel) / 2);
 
@@ -2870,7 +2870,7 @@ panel_key (WPanel * panel, int key)
         if (key == panel_map[i].key)
             return panel_execute_cmd (panel, panel_map[i].command);
 
-    if (torben_fj_mode && key == ALT ('h'))
+    if (panels_options.torben_fj_mode && key == ALT ('h'))
     {
         goto_middle_file (panel);
         return MSG_HANDLED;

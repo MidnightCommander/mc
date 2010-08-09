@@ -143,7 +143,8 @@ panels_options_t panels_options = {
     .mouse_move_pages = TRUE,
     .filetype_mode = TRUE,
     .permission_mode = FALSE,
-    .qsearch_mode = QSEARCH_PANEL_CASE
+    .qsearch_mode = QSEARCH_PANEL_CASE,
+    .torben_fj_mode = FALSE
 };
 
 int easy_patterns = 1;
@@ -273,7 +274,6 @@ static const struct
     { "cd_symlinks", &cd_symlinks },
     { "show_all_if_ambiguous", &show_all_if_ambiguous },
     { "max_dirt_limit", &mcview_max_dirt_limit },
-    { "torben_fj_mode", &torben_fj_mode },
     { "use_file_to_guess_type", &use_file_to_check_type },
     { "alternate_plus_minus", &alternate_plus_minus },
     { "only_leading_plus_minus", &only_leading_plus_minus },
@@ -363,6 +363,7 @@ static const struct
     { "mouse_move_pages",  &panels_options.mouse_move_pages },
     { "filetype_mode", &panels_options.filetype_mode },
     { "permission_mode", &panels_options.permission_mode },
+    { "torben_fj_mode", &panels_options.torben_fj_mode },
     { NULL, NULL }
 };
 /* *INDENT-ON* */

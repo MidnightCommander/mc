@@ -133,7 +133,6 @@ typedef struct WPanel
 
 extern panel_field_t panel_fields[];
 
-extern int torben_fj_mode;
 extern int show_mini_info;
 
 extern hook_t *select_file_hook;
