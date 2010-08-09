@@ -129,6 +129,7 @@ int option_tab_spacing = DEFAULT_TAB_SPACING;
 int saving_setup;
 
 panels_options_t panels_options = {
+    .show_mini_info = TRUE,
     .kilobyte_si = FALSE,
     .mix_all_files = FALSE,
     .show_backups = TRUE,
@@ -231,7 +232,6 @@ static const struct
     { "output_lines", &output_lines },
     { "command_prompt", &command_prompt },
     { "menubar_visible", &menubar_visible },
-    { "show_mini_info", &show_mini_info },
     { "free_space", &free_space },
     { NULL, NULL }
 };
@@ -349,6 +349,7 @@ static const struct
     const char *opt_name;
     gboolean *opt_addr;
 } panels_ini_options[] = {
+    { "show_mini_info", &panels_options.show_mini_info },
     { "kilobyte_si", &panels_options.kilobyte_si },
     { "mix_all_files", &panels_options.mix_all_files },
     { "show_backups", &panels_options.show_backups },

@@ -31,6 +31,7 @@ typedef enum
 /* panels ini options; [Panels] section */
 typedef struct
 {
+    gboolean show_mini_info;    /* If true, show the mini-info on the panel */
     gboolean kilobyte_si;       /* If TRUE, SI units (1000 based) will be used for larger units
                                  * (kilobyte, megabyte, ...). If FALSE, binary units (1024 based) will be used */
     gboolean mix_all_files;     /* If FALSE then directories are shown separately from files */

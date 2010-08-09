@@ -70,9 +70,6 @@
 
 /*** global variables ****************************************************************************/
 
-/* If true, show the mini-info on the panel */
-int show_mini_info = 1;
-
 /* The hook list for the select file function */
 hook_t *select_file_hook = NULL;
 
@@ -309,7 +306,7 @@ extern int saving_setup;
 #define STATUS          5
 
 /* This macro extracts the number of available lines in a panel */
-#define llines(p) (p->widget.lines-3 - (show_mini_info ? 2 : 0))
+#define llines(p) (p->widget.lines - 3 - (panels_options.show_mini_info ? 2 : 0))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -879,7 +876,7 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
 static void
 display_mini_info (WPanel * panel)
 {
-    if (!show_mini_info)
+    if (!panels_options.show_mini_info)
         return;
 
     widget_move (&panel->widget, llines (panel) + 3, 1);
@@ -998,7 +995,7 @@ display_total_marked_size (WPanel * panel, int y, int x, gboolean size_only)
 static void
 mini_info_separator (WPanel * panel)
 {
-    if (show_mini_info)
+    if (panels_options.show_mini_info)
     {
         const int y = llines (panel) + 2;
 
@@ -1066,7 +1063,7 @@ show_dir (WPanel * panel)
     draw_box (panel->widget.owner,
               panel->widget.y, panel->widget.x, panel->widget.lines, panel->widget.cols, FALSE);
 
-    if (show_mini_info)
+    if (panels_options.show_mini_info)
     {
         widget_move (&panel->widget, llines (panel) + 2, 0);
         tty_print_alt_char (ACS_LTEE, FALSE);
@@ -1095,7 +1092,7 @@ show_dir (WPanel * panel)
                 str_term_trim (strip_home_and_password (panel->cwd),
                                min (max (panel->widget.cols - 12, 0), panel->widget.cols)));
 
-    if (!show_mini_info)
+    if (!panels_options.show_mini_info)
     {
         if (panel->marked == 0)
         {
@@ -3624,7 +3621,7 @@ set_panel_formats (WPanel * p)
         p->format = form;
     }
 
-    if (show_mini_info)
+    if (panels_options.show_mini_info)
     {
         form = use_display_format (p, mini_status_format (p), &err, 1);
 

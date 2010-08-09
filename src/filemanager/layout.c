@@ -190,7 +190,6 @@ static struct
     { N_("H&intbar visible"), &message_visible, NULL},
     { N_("&Keybar visible"), &keybar_visible, NULL},
     { N_("Command &prompt"), &command_prompt, NULL},
-    { N_("Show &mini status"), &show_mini_info, NULL},
     { N_("Menu&bar visible"), &menubar_visible, NULL},
     { N_("&Equal split"), &equal_split, NULL}
     /* *INDENT-ON* */
@@ -242,7 +241,7 @@ update_split (const Dlg_head * h)
        it can change due to calling _check_split() as well */
     _check_split ();
 
-    tty_setcolor (check_options[7].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
+    tty_setcolor (check_options[6].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
 
     dlg_move (h, 6, 6);
     tty_printf ("%03d", _first_panel_size);
@@ -329,8 +328,8 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     case DLG_POST_KEY:
-        _menubar_visible = check_options[6].widget->state & C_BOOL;
-        _command_prompt = check_options[5].widget->state & C_BOOL;
+        _menubar_visible = check_options[5].widget->state & C_BOOL;
+        _command_prompt = check_options[4].widget->state & C_BOOL;
         _keybar_visible = check_options[3].widget->state & C_BOOL;
         _message_visible = check_options[2].widget->state & C_BOOL;
         _xterm_title = check_options[1].widget->state & C_BOOL;
@@ -383,9 +382,9 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
             return MSG_HANDLED;
         }
 
-        if (sender == (Widget *) check_options[7].widget)
+        if (sender == (Widget *) check_options[6].widget)
         {
-            _equal_split = check_options[7].widget->state & C_BOOL;
+            _equal_split = check_options[6].widget->state & C_BOOL;
 
             widget_disable (bleft_widget->widget, _equal_split);
             send_message ((Widget *) bleft_widget, WIDGET_DRAW, 0);
@@ -534,7 +533,7 @@ init_layout (void)
     bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b_left_right_cback);
     widget_disable (bleft_widget->widget, _equal_split);
     add_widget (layout_dlg, bleft_widget);
-    check_options[7].widget = check_new (5, 6, XTRACT (7));
+    check_options[6].widget = check_new (5, 6, XTRACT (6));
 
     old_first_panel_size = -1;
     old_horizontal_split = -1;
@@ -543,7 +542,8 @@ init_layout (void)
     _first_panel_size = first_panel_size;
     _output_lines = output_lines;
 
-    add_widget (layout_dlg, check_options[7].widget);
+    add_widget (layout_dlg, check_options[6].widget);
+
     radio_widget = radio_new (3, 6, 2, s_split_direction);
     add_widget (layout_dlg, radio_widget);
     radio_widget->sel = horizontal_split;

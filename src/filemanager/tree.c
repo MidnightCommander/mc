@@ -51,7 +51,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* confirm_delete */
+#include "src/setup.h"          /* confirm_delete, panels_options */
 #include "src/keybind-defaults.h"
 #include "src/history.h"
 #include "src/help.h"
@@ -79,7 +79,7 @@ int xtree_mode = 0;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define tlines(t) (t->is_panel ? t->widget.lines - 2 - (show_mini_info ? 2 : 0) : t->widget.lines)
+#define tlines(t) (t->is_panel ? t->widget.lines - 2 - (panels_options.show_mini_info ? 2 : 0) : t->widget.lines)
 
 /* Use the color of the parent widget for the unselected entries */
 #define TREE_NORMALC(h) (h->color[DLG_COLOR_NORMAL])
@@ -227,7 +227,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
     /* Show mini info */
     if (tree->is_panel)
     {
-        if (!show_mini_info)
+        if (!panels_options.show_mini_info)
             return;
         line = tree_lines + 2;
     }
@@ -1147,7 +1147,7 @@ tree_frame (Dlg_head * h, WTree * tree)
         widget_move (&tree->widget, 0, (tree->widget.cols - len - 2) / 2);
         tty_printf (" %s ", title);
 
-        if (show_mini_info)
+        if (panels_options.show_mini_info)
             widget_move (&tree->widget, tlines (tree) + 1, 0);
         tty_print_alt_char (ACS_LTEE, FALSE);
         widget_move (&tree->widget, tlines (tree) + 1, tree->widget.cols - 1);
