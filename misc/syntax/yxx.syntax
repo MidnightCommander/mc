@@ -64,10 +64,75 @@ context default
     keyword whole ... yellow
     keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
 
+    keyword whole accept yellow
+    keyword whole code yellow
+    keyword whole debug yellow
+    keyword whole defines yellow
+    keyword whole destructor yellow
+    keyword whole dprec yellow
+    keyword whole end yellow
+    keyword whole error yellow
+    keyword whole error-verbose yellow
+    keyword whole expect yellow
+    keyword whole file-prefix yellow
+    keyword whole glr-parser yellow
+    keyword whole initial-action yellow
+    keyword whole language yellow
     keyword whole left yellow
+    keyword whole lex-param yellow
+    keyword whole locations yellow
+    keyword whole merge yellow
+    keyword whole name-prefix yellow
     keyword whole node yellow
+    keyword whole nonassoc yellow
+    keyword whole no-parser yellow
+    keyword whole no-lines yellow
+    keyword whole output yellow
+    keyword whole parse-param yellow
+    keyword whole prec yellow
+    keyword whole pure-parser yellow
+    keyword whole require yellow
+    keyword whole right yellow
+    keyword whole skeleton yellow
     keyword whole start yellow
     keyword whole token yellow
+    keyword whole token-table yellow
+    keyword whole type yellow
+    keyword whole undefined yellow
+    keyword whole union yellow
+    keyword whole verbose yellow
+    keyword whole yacc yellow
+
+    keyword whole YYABORT brightred
+    keyword whole YYACCEPT brightred
+    keyword whole YYBACKUP brightred
+    keyword whole YYDEBUG brightred
+    keyword whole YYERROR brightred
+    keyword whole YYERROR_VERBOSE brightred
+    keyword whole YYINITDEPTH brightred
+    keyword whole YYLEX_PARAM brightred
+    keyword whole YYLTYPE brightred
+    keyword whole YYMAXDEPTH brightred
+    keyword whole YYPARSE_PARAM brightred
+    keyword whole YYRECOVERING brightred
+    keyword whole YYSTACK_USE_ALLOCA brightred
+    keyword whole YYSTYPE brightred
+
+    keyword whole yychar brightmagenta
+    keyword whole yyclearin brightmagenta
+    keyword whole yydebug brightmagenta
+    keyword whole yyerrok brightmagenta
+    keyword whole yyerror brightmagenta
+    keyword whole yylex brightmagenta
+    keyword whole yylloc brightmagenta
+    keyword whole yylval brightmagenta
+    keyword whole yynerrs brightmagenta
+    keyword whole yyparse brightmagenta
+    keyword whole yypstate_delete brightmagenta
+    keyword whole yypstate_new brightmagenta
+    keyword whole yypull_parse brightmagenta
+    keyword whole yypush_parse brightmagenta
+    keyword whole yywrap brightmagenta
 
     keyword /\* brown
     keyword \*/ brown
@@ -107,6 +172,8 @@ context default
     keyword % yellow
     keyword $$ yellow
     keyword $\[0123456789\] yellow
+    keyword @$ yellow
+    keyword @\[0123456789\] yellow
 
 context exclusive /\* \*/ brown
     spellcheck
