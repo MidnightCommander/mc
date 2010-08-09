@@ -347,24 +347,23 @@ static const struct
 static const struct
 {
     const char *opt_name;
-    const char *opt_old_name;
     gboolean *opt_addr;
 } panels_ini_options[] = {
-    { "kilobyte_si",  NULL, &panels_options.kilobyte_si },
-    { "mix_all_files", NULL, &panels_options.mix_all_files },
-    { "show_backups",  NULL, &panels_options.show_backups },
-    { "show_dot_files",  NULL, &panels_options.show_dot_files },
-    { "fast_reload",  NULL, &panels_options.fast_reload },
-    { "fast_reload_msg_shown",  NULL, &panels_options.fast_reload_msg_shown },
-    { "mark_moves_down",  NULL, &panels_options.mark_moves_down },
-    { "reverse_files_only", NULL, &panels_options.reverse_files_only },
-    { "auto_save_setup_panels", "auto_save_setup", &panels_options.auto_save_setup },
-    { "navigate_with_arrows",  NULL, &panels_options.navigate_with_arrows },
-    { "panel_scroll_pages",  "scroll_pages", &panels_options.scroll_pages },
-    { "mouse_move_pages",  NULL, &panels_options.mouse_move_pages },
-    { "filetype_mode",  NULL, &panels_options.filetype_mode },
-    { "permission_mode",  NULL, &panels_options.permission_mode },
-    { NULL, NULL, NULL }
+    { "kilobyte_si", &panels_options.kilobyte_si },
+    { "mix_all_files", &panels_options.mix_all_files },
+    { "show_backups", &panels_options.show_backups },
+    { "show_dot_files", &panels_options.show_dot_files },
+    { "fast_reload", &panels_options.fast_reload },
+    { "fast_reload_msg_shown", &panels_options.fast_reload_msg_shown },
+    { "mark_moves_down", &panels_options.mark_moves_down },
+    { "reverse_files_only", &panels_options.reverse_files_only },
+    { "auto_save_setup_panels", &panels_options.auto_save_setup },
+    { "navigate_with_arrows", &panels_options.navigate_with_arrows },
+    { "panel_scroll_pages", &panels_options.scroll_pages },
+    { "mouse_move_pages",  &panels_options.mouse_move_pages },
+    { "filetype_mode", &panels_options.filetype_mode },
+    { "permission_mode", &panels_options.permission_mode },
+    { NULL, NULL }
 };
 /* *INDENT-ON* */
 
@@ -1378,29 +1377,11 @@ panel_save_setup (struct WPanel *panel, const char *section)
 void
 panels_load_options (void)
 {
-    size_t i;
-    int qmode;
-
-    /* Backward compatibility: load old parameters */
-    for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
-        *panels_ini_options[i].opt_addr =
-            mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
-                               panels_ini_options[i].opt_old_name != NULL
-                               ? panels_ini_options[i].opt_old_name : panels_ini_options[i].
-                               opt_name, *panels_ini_options[i].opt_addr);
-
-    qmode = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
-                               "quick_search_case_sensitive", (int) panels_options.qsearch_mode);
-    if (qmode < 0)
-        panels_options.qsearch_mode = QSEARCH_CASE_INSENSITIVE;
-    else if (qmode >= QSEARCH_NUM)
-        panels_options.qsearch_mode = QSEARCH_PANEL_CASE;
-    else
-        panels_options.qsearch_mode = (qsearch_mode_t) qmode;
-
-    /* overwrite by new parameters */
     if (mc_config_has_group (mc_main_config, CONFIG_PANELS_SECTION))
     {
+        size_t i;
+        int qmode;
+
         for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
             *panels_ini_options[i].opt_addr =
                 mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
