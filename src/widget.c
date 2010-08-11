@@ -1492,11 +1492,11 @@ show_hist (GList ** history, Widget * widget)
         entry->text = NULL;
     }
 
-    destroy_dlg (query_dlg);
-
     /* restore history direction */
     if (query_dlg->y < widget->y)
         z = g_list_reverse (z);
+
+    destroy_dlg (query_dlg);
 
     g_list_foreach (*history, (GFunc) g_free, NULL);
     g_list_free (*history);
@@ -2751,9 +2751,7 @@ listbox_key (WListbox * l, int key)
 static inline void
 listbox_destroy (WListbox * l)
 {
-    /* don't delete list in modifable listbox */
-    if (!l->deletable)
-        listbox_remove_list (l);
+    listbox_remove_list (l);
 }
 
 static cb_ret_t
