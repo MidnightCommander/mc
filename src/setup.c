@@ -1031,6 +1031,9 @@ load_keymap_defs (void)
         input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("input", input_keymap, mc_global_keymap);
 
+        listbox_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("listbox", listbox_keymap, mc_global_keymap);
+
         tree_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("tree", tree_keymap, mc_global_keymap);
 
@@ -1062,6 +1065,10 @@ load_keymap_defs (void)
     input_map = default_input_keymap;
     if (input_keymap && input_keymap->len > 0)
         input_map = (global_keymap_t *) input_keymap->data;
+
+    listbox_map = default_listbox_keymap;
+    if (listbox_keymap && listbox_keymap->len > 0)
+        listbox_map = (global_keymap_t *) listbox_keymap->data;
 
     tree_map = default_tree_keymap;
     if (tree_keymap && tree_keymap->len > 0)
@@ -1104,6 +1111,8 @@ free_keymap_defs (void)
         g_array_free (panel_keymap, TRUE);
     if (input_keymap != NULL)
         g_array_free (input_keymap, TRUE);
+    if (listbox_keymap != NULL)
+        g_array_free (listbox_keymap, TRUE);
     if (tree_keymap != NULL)
         g_array_free (tree_keymap, TRUE);
     if (help_keymap != NULL)

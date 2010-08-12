@@ -58,6 +58,7 @@ GArray *viewer_keymap = NULL;
 GArray *viewer_hex_keymap = NULL;
 GArray *panel_keymap = NULL;
 GArray *input_keymap = NULL;
+GArray *listbox_keymap = NULL;
 GArray *tree_keymap = NULL;
 GArray *help_keymap = NULL;
 GArray *dialog_keymap = NULL;
@@ -72,6 +73,7 @@ const global_keymap_t *main_map;
 const global_keymap_t *main_x_map;
 const global_keymap_t *panel_map;
 const global_keymap_t *input_map;
+const global_keymap_t *listbox_map;
 const global_keymap_t *tree_map;
 const global_keymap_t *help_map;
 const global_keymap_t *dialog_map;
@@ -483,11 +485,21 @@ static name_keymap_t command_names[] = {
     { "InputXPaste",                     CK_InputPaste },
     { "InputClearLine",                  CK_InputClearLine },
     { "InputLeftHighlight",              CK_InputLeftHighlight },
-    { "InputRightHighlight",             CK_InputRightHighlight},
-    { "InputWordLeftHighlight",          CK_InputWordLeftHighlight},
-    { "InputWordRightHighlight",         CK_InputWordRightHighlight},
-    { "InputBolHighlight",               CK_InputBolHighlight},
-    { "InputEolHighlight",               CK_InputEolHighlight},
+    { "InputRightHighlight",             CK_InputRightHighlight },
+    { "InputWordLeftHighlight",          CK_InputWordLeftHighlight },
+    { "InputWordRightHighlight",         CK_InputWordRightHighlight },
+    { "InputBolHighlight",               CK_InputBolHighlight },
+    { "InputEolHighlight",               CK_InputEolHighlight },
+
+    /* listbox */
+    { "ListboxMoveUp",                   CK_ListboxMoveUp },
+    { "ListboxMoveDown",                 CK_ListboxMoveDown },
+    { "ListboxMoveHome",                 CK_ListboxMoveHome },
+    { "ListboxMoveEnd",                  CK_ListboxMoveEnd },
+    { "ListboxMovePgUp",                 CK_ListboxMovePgUp },
+    { "ListboxMovePgDn",                 CK_ListboxMovePgDn },
+    { "ListboxDeleteItem",               CK_ListboxDeleteItem },
+    { "ListboxDeleteAll",                CK_ListboxDeleteAll },
 
     /* common */
     { "ExtMap1",                         CK_StartExtMap1 },
@@ -504,6 +516,7 @@ static name_keymap_t command_names[] = {
     { "DialogSuspend",                   CK_DialogSuspend },
     { "DialogRefresh",                   CK_DialogRefresh },
 
+#ifdef  USE_DIFF_VIEW
     /* diff viewer */
     { "DiffDisplaySymbols",              CK_DiffDisplaySymbols},
     { "DiffDisplayNumbers",              CK_DiffDisplayNumbers},
@@ -541,6 +554,7 @@ static name_keymap_t command_names[] = {
     { "DiffMergeCurrentHunk",            CK_DiffMergeCurrentHunk},
     { "DiffSave",                        CK_DiffSave},
     { "DiffOptions",                     CK_DiffOptions},
+#endif
 
     { NULL,                              CK_Ignore_Key }
 };
@@ -871,7 +885,7 @@ const global_keymap_t default_help_keymap[] = {
     { 0, CK_Ignore_Key, "" }
 };
 
-/* screen.c */
+/* panel */
 const global_keymap_t default_panel_keymap[] = {
     { ALT ('o'),              CK_PanelChdirOtherPanel,      "M-o" },
     { ALT ('l'),              CK_PanelChdirToReadlink,      "M-l" },
@@ -1033,6 +1047,30 @@ const global_keymap_t default_input_keymap[] = {
     { 0, CK_Ignore_Key, "" }
 };
 
+const global_keymap_t default_listbox_keymap[] = {
+    { KEY_UP,                   CK_ListboxMoveUp,     "Up" },
+    { XCTRL ('p'),              CK_ListboxMoveUp,     "C-p" },
+    { KEY_DOWN,                 CK_ListboxMoveDown,   "Down" },
+    { XCTRL ('n'),              CK_ListboxMoveDown,   "C-n" },
+    { KEY_HOME,                 CK_ListboxMoveHome,   "Home" },
+    { ALT ('<'),                CK_ListboxMoveHome,   "M-<" },
+    { KEY_A1,                   CK_ListboxMoveHome,   "A1" },
+    { KEY_END,                  CK_ListboxMoveEnd,    "End" },
+    { ALT ('>'),                CK_ListboxMoveEnd,    "M->" },
+    { KEY_C1,                   CK_ListboxMoveEnd,    "C1" },
+    { KEY_PPAGE,                CK_ListboxMovePgUp,   "PgUp" },
+    { ALT ('v'),                CK_ListboxMovePgUp,   "M-v" },
+    { KEY_NPAGE,                CK_ListboxMovePgDn,   "PgDn" },
+    { XCTRL ('v'),              CK_ListboxMovePgDn,   "C-v" },
+    { KEY_DC,                   CK_ListboxDeleteItem, "Delete" },
+    { 'd',                      CK_ListboxDeleteItem, "d" },
+    { KEY_M_SHIFT | KEY_DC,     CK_ListboxDeleteAll,  "S-Delete" },
+    { 'D',                      CK_ListboxDeleteAll,  "D" },
+
+    { 0, CK_Ignore_Key, "" }
+};
+
+#ifdef  USE_DIFF_VIEW
 /* diff viewer */
 const global_keymap_t default_diff_keymap[] = {
 
@@ -1081,6 +1119,7 @@ const global_keymap_t default_diff_keymap[] = {
 
     { 0, CK_Ignore_Key, "" }
 };
+#endif
 
 static int
 name_keymap_comparator (const void *p1, const void *p2)

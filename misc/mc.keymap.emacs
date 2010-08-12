@@ -341,6 +341,16 @@ InputWordRightHighlight =
 InputBolHighlight =
 InputEolHighlight =
 
+[listbox]
+ListboxMoveUp = up; ctrl-p
+ListboxMoveDown = down; ctrl-n
+ListboxMoveHome = home; alt-lt; a1
+ListboxMoveEnd = end; alt-gt; c1
+ListboxMovePgUp = pgup; alt-v
+ListboxMovePgDn = pgdn; ctrl-v
+ListboxDeleteItem = delete; d
+ListboxDeleteAll = shift-delete; shift-d
+
 [tree]
 TreeHelp = f1
 TreeForget = f3
