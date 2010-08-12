@@ -153,6 +153,8 @@ const key_code_name_t key_name_conv_tab[] = {
     { KEY_F (22),	"f22",		N_("Function key 22"),		"F22" },
     { KEY_F (23),	"f23",		N_("Function key 23"),		"F23" },
     { KEY_F (24),	"f24",		N_("Function key 24"),		"F24" },
+    { KEY_A1,		"a1",		N_("A1 key"),			"A1" },
+    { KEY_C1,		"c1",		N_("C1 key"),			"C1" },
 
     /* Alternative label */
     { ESC_CHAR,		"esc",		N_("Escape key"),	"Esc" },
