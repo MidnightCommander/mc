@@ -54,9 +54,8 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin.h"
 #include "lib/tty/mouse.h"
-#include "lib/tty/key.h"
+#include "lib/skin.h"
 #include "lib/strutil.h"
 
 #include "dialog.h"             /* For Dlg_head */
@@ -674,36 +673,6 @@ help_back (Dlg_head * h)
 }
 
 static void
-help_cmk_move_backward (void *vp, int lines)
-{
-    (void) &vp;
-    move_backward (lines);
-}
-
-static void
-help_cmk_move_forward (void *vp, int lines)
-{
-    (void) &vp;
-    move_forward (lines);
-}
-
-static void
-help_cmk_moveto_top (void *vp, int lines)
-{
-    (void) &vp;
-    (void) &lines;
-    move_to_top ();
-}
-
-static void
-help_cmk_moveto_bottom (void *vp, int lines)
-{
-    (void) &vp;
-    (void) &lines;
-    move_to_bottom ();
-}
-
-static void
 help_next_link (gboolean move_down)
 {
     const char *new_item;
@@ -833,6 +802,24 @@ help_execute_cmd (unsigned long command)
     case CK_HelpMoveDown:
         help_next_link (TRUE);
         break;
+    case CK_HelpMovePgDn:
+        move_forward (help_lines - 1);
+        break;
+    case CK_HelpMovePgUp:
+        move_backward (help_lines - 1);
+        break;
+    case CK_HelpMoveHalfPgDn:
+        move_forward (help_lines / 2);
+        break;
+    case CK_HelpMoveHalfPgUp:
+        move_backward (help_lines / 2);
+        break;
+    case CK_HelpMoveTop:
+        move_to_top ();
+        break;
+    case CK_HelpMoveBottom:
+        move_to_bottom ();
+        break;
     case CK_HelpSelectLink:
         help_select_link ();
         break;
@@ -861,22 +848,11 @@ help_execute_cmd (unsigned long command)
 static cb_ret_t
 help_handle_key (Dlg_head * h, int c)
 {
-    if (c != KEY_UP && c != KEY_DOWN &&
-        check_movement_keys (c, help_lines, NULL,
-                             help_cmk_move_backward,
-                             help_cmk_move_forward,
-                             help_cmk_moveto_top, help_cmk_moveto_bottom) == MSG_HANDLED)
-    {
-        /* Nothing */ ;
-    }
-    else
-    {
-        unsigned long command;
+    unsigned long command;
 
-        command = lookup_keymap_command (help_map, c);
-        if ((command == CK_Ignore_Key) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
-            return MSG_NOT_HANDLED;
-    }
+    command = lookup_keymap_command (help_map, c);
+    if ((command == CK_Ignore_Key) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
+        return MSG_NOT_HANDLED;
 
     help_callback (h, NULL, DLG_DRAW, 0, NULL);
     return MSG_HANDLED;

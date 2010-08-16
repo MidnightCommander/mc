@@ -212,6 +212,12 @@
 #define CK_HelpPrevLink                 1009
 #define CK_HelpNextNode                 1010
 #define CK_HelpPrevNode                 1011
+#define CK_HelpMovePgDn                 1012
+#define CK_HelpMovePgUp                 1013
+#define CK_HelpMoveHalfPgDn             1014
+#define CK_HelpMoveHalfPgUp             1015
+#define CK_HelpMoveTop                  1016
+#define CK_HelpMoveBottom               1017
 
 /* common */
 #define CK_ShowCommandLine              2001
