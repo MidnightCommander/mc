@@ -144,51 +144,6 @@ mcview_continue_search_cmd (mcview_t * view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Check for left and right arrows, possibly with modifiers */
-static cb_ret_t
-mcview_check_left_right_keys (mcview_t * view, int c)
-{
-    if (c == KEY_LEFT)
-    {
-        mcview_move_left (view, 1);
-        return MSG_HANDLED;
-    }
-
-    if (c == KEY_RIGHT)
-    {
-        mcview_move_right (view, 1);
-        return MSG_HANDLED;
-    }
-
-    /* Ctrl with arrows moves by 10 postions in the unwrap mode */
-    if (view->hex_mode || view->text_wrap_mode)
-        return MSG_NOT_HANDLED;
-
-    if (c == (KEY_M_CTRL | KEY_LEFT))
-    {
-        if (view->dpy_text_column >= 10)
-            view->dpy_text_column -= 10;
-        else
-            view->dpy_text_column = 0;
-        view->dirty++;
-        return MSG_HANDLED;
-    }
-
-    if (c == (KEY_M_CTRL | KEY_RIGHT))
-    {
-        if (view->dpy_text_column <= OFFSETTYPE_MAX - 10)
-            view->dpy_text_column += 10;
-        else
-            view->dpy_text_column = OFFSETTYPE_MAX;
-        view->dirty++;
-        return MSG_HANDLED;
-    }
-
-    return MSG_NOT_HANDLED;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 mcview_cmk_move_up (void *w, int n)
 {
@@ -387,7 +342,14 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     case CK_ViewMoveRight:
         mcview_move_right (view, 1);
         break;
-        /* Continue search */
+    case CK_ViewMoveLeft10:
+        if (!view->hex_mode)
+            mcview_move_left (view, 10);
+        break;
+    case CK_ViewMoveRight10:
+        if (!view->hex_mode)
+            mcview_move_right (view, 10);
+        break;
     case CK_ViewContinueSearch:
         mcview_continue_search_cmd (view);
         break;
@@ -411,6 +373,12 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         break;
     case CK_ViewMovePgDn:
         mcview_move_down (view, view->data_area.height);
+        break;
+    case CK_ViewMoveTop:
+        mcview_moveto_top (view);
+        break;
+    case CK_ViewMoveBottom:
+        mcview_moveto_bottom (view);
         break;
     case CK_ShowCommandLine:
         view_other_cmd ();
@@ -469,9 +437,6 @@ mcview_handle_key (mcview_t * view, int key)
 
     command = lookup_keymap_command (view->plain_map, key);
     if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
-        return MSG_HANDLED;
-
-    if (mcview_check_left_right_keys (view, key) == MSG_HANDLED)
         return MSG_HANDLED;
 
     if (check_movement_keys (key, view->data_area.height + 1, view,

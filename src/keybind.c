@@ -273,12 +273,16 @@ static name_keymap_t command_names[] = {
     { "ViewMoveDown",                    CK_ViewMoveDown },
     { "ViewMoveLeft",                    CK_ViewMoveLeft },
     { "ViewMoveRight",                   CK_ViewMoveRight },
+    { "ViewMoveLeft10",                  CK_ViewMoveLeft10 },
+    { "ViewMoveRight10",                 CK_ViewMoveRight10 },
     { "ViewMovePgDn",                    CK_ViewMovePgDn },
     { "ViewMovePgUp",                    CK_ViewMovePgUp },
     { "ViewMoveHalfPgDn",                CK_ViewMoveHalfPgDn },
     { "ViewMoveHalfPgUp",                CK_ViewMoveHalfPgUp },
     { "ViewMoveToBol",                   CK_ViewMoveToBol },
     { "ViewMoveToEol",                   CK_ViewMoveToEol },
+    { "ViewMoveTop",                     CK_ViewMoveTop },
+    { "ViewMoveBottom",                  CK_ViewMoveBottom },
     { "ViewNextFile",                    CK_ViewNextFile },
     { "ViewPrevFile",                    CK_ViewPrevFile },
     { "ViewToggleRuler",                 CK_ViewToggleRuler },
@@ -593,6 +597,9 @@ const global_keymap_t default_viewer_keymap[] = {
     { 'l',         CK_ViewMoveRight,         "l" },
     { KEY_RIGHT,   CK_ViewMoveRight,         "Right" },
 
+    { KEY_M_CTRL | KEY_LEFT,  CK_ViewMoveLeft10,  "C-Left" },
+    { KEY_M_CTRL | KEY_RIGHT, CK_ViewMoveRight10, "C-Right" },
+
     { 'k',         CK_ViewMoveUp,            "k" },
     { 'y',         CK_ViewMoveUp,            "y" },
     { KEY_IC,      CK_ViewMoveUp,            "Insert" },
@@ -602,6 +609,7 @@ const global_keymap_t default_viewer_keymap[] = {
     { 'e',         CK_ViewMoveDown,          "e" },
     { KEY_DOWN,    CK_ViewMoveDown,          "Down" },
     { KEY_DC,      CK_ViewMoveDown,          "Delete" },
+    { '\n',        CK_ViewMoveDown,          "Endter" },
 
     { ' ',         CK_ViewMovePgDn,          "Space" },
     { 'f',         CK_ViewMovePgDn,          "f" },
@@ -612,6 +620,20 @@ const global_keymap_t default_viewer_keymap[] = {
 
     { 'd',         CK_ViewMoveHalfPgDn,      "d" },
     { 'u',         CK_ViewMoveHalfPgUp,      "u" },
+
+    { KEY_HOME,               CK_ViewMoveTop,    "Home" },
+    { KEY_M_CTRL | KEY_HOME,  CK_ViewMoveTop,    "C-Home" },
+    { KEY_M_CTRL | KEY_PPAGE, CK_ViewMoveTop,    "C-PgUp" },
+    { KEY_A1,                 CK_ViewMoveTop,    "A1" },
+    { ALT ('<'),              CK_ViewMoveTop,    "M-<" },
+    { 'g',                    CK_ViewMoveTop,    "g" },
+
+    { KEY_END,                CK_ViewMoveBottom, "End" },
+    { KEY_M_CTRL | KEY_END,   CK_ViewMoveBottom, "C-End" },
+    { KEY_M_CTRL | KEY_NPAGE, CK_ViewMoveBottom, "C-PgDn" },
+    { KEY_C1,                 CK_ViewMoveBottom, "C1" },
+    { ALT ('>'),              CK_ViewMoveBottom, "M->" },
+    { 'G',                    CK_ViewMoveBottom, "G" },
 
     { 'm',         CK_ViewGotoBookmark,      "m" },
     { 'r',         CK_ViewNewBookmark,       "r" },
@@ -665,6 +687,20 @@ const global_keymap_t default_viewer_hex_keymap[] = {
     { 'j',         CK_ViewMoveDown,          "j" },
     { KEY_DOWN,    CK_ViewMoveDown,          "Down" },
     { KEY_DC,      CK_ViewMoveDown,          "Delete" },
+
+    { KEY_HOME,               CK_ViewMoveTop,    "Home" },
+    { KEY_M_CTRL | KEY_HOME,  CK_ViewMoveTop,    "C-Home" },
+    { KEY_M_CTRL | KEY_PPAGE, CK_ViewMoveTop,    "C-PgUp" },
+    { KEY_A1,                 CK_ViewMoveTop,    "A1" },
+    { ALT ('<'),              CK_ViewMoveTop,    "M-<" },
+    { 'g',                    CK_ViewMoveTop,    "g" },
+
+    { KEY_END,                CK_ViewMoveBottom, "End" },
+    { KEY_M_CTRL | KEY_END,   CK_ViewMoveBottom, "C-End" },
+    { KEY_M_CTRL | KEY_NPAGE, CK_ViewMoveBottom, "C-PgDn" },
+    { KEY_C1,                 CK_ViewMoveBottom, "C1" },
+    { ALT ('>'),              CK_ViewMoveBottom, "M->" },
+    { 'G',                    CK_ViewMoveBottom, "G" },
 
     { 'q',         CK_ViewQuit,              "q" },
     { XCTRL ('g'), CK_ViewQuit,              "C-g" },

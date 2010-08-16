@@ -177,12 +177,16 @@ ViewMoveToBol = ctrl-a
 ViewMoveToEol = ctrl-e
 ViewMoveLeft = h; left
 ViewMoveRight = l; right
+ViewMoveLeft10 = ctrl-left
+ViewMoveRight10 = ctrl-right
 ViewMoveUp = k; y; insert; up
 ViewMoveDown = j; e; delete; down; enter
 ViewMovePgDn = f; space; pgdn
 ViewMovePgUp = b; pgup
 ViewMoveHalfPgDn = d
 ViewMoveHalfPgUp = u
+ViewMoveTop = home; ctrl-home; ctrl-pgup; a1; alt-lt; g
+ViewMoveBottom = end; ctrl-end; ctrl-pgdn; c1; alt-gt; shift-g
 ViewGotoBookmark = m
 ViewNewBookmark = r
 ViewNextFile = ctrl-f
@@ -208,6 +212,8 @@ ViewMoveLeft = b; left
 ViewMoveRight = f; right
 ViewMoveUp = k; y; up
 ViewMoveDown = j; delete; down
+ViewMoveTop = home; ctrl-home; ctrl-pgup; a1; alt-lt; g
+ViewMoveBottom = end; ctrl-end; ctrl-pgdn; c1; alt-gt; shift-g
 
 [main]
 CmdHelp = f1

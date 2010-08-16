@@ -299,6 +299,10 @@
 #define CK_ViewPrevFile                 5025
 #define CK_ViewToggleRuler              5026
 #define CK_ViewToggleHexNavMode         5027
+#define CK_ViewMoveTop                  5028
+#define CK_ViewMoveBottom               5029
+#define CK_ViewMoveLeft10               5030
+#define CK_ViewMoveRight10              5031
 
 /* tree */
 #define CK_TreeHelp                     6001
