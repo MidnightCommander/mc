@@ -280,7 +280,6 @@ mcview_moveto_top (mcview_t * view)
 void
 mcview_moveto_bottom (mcview_t * view)
 {
-    const off_t datalines = view->data_area.height;
     off_t filesize;
 
     mcview_update_filesize (view);
@@ -292,16 +291,13 @@ mcview_moveto_bottom (mcview_t * view)
 
     if (view->hex_mode)
     {
-        off_t lines_up, last_offset;
-
-        lines_up = mcview_offset_doz (datalines, 1);
-        last_offset = mcview_offset_doz (filesize, 1);
-        view->hex_cursor = filesize;
-        mcview_move_up (view, lines_up);
-        view->hex_cursor = last_offset;
+        view->hex_cursor = mcview_offset_doz (filesize, 1);
+        mcview_movement_fixups (view, TRUE);
     }
     else
     {
+        const off_t datalines = view->data_area.height;
+
         view->dpy_start = filesize;
         mcview_move_up (view, datalines);
     }
