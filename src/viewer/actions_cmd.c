@@ -52,7 +52,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"
+#include "lib/tty/key.h"        /* is_idle() */
 #include "lib/lock.h"           /* lock_file() */
 
 #include "src/dialog.h"         /* cb_ret_t */
@@ -140,40 +140,6 @@ mcview_continue_search_cmd (mcview_t * view)
             mcview_search (view);
         }
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-mcview_cmk_move_up (void *w, int n)
-{
-    mcview_move_up ((mcview_t *) w, n);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-mcview_cmk_move_down (void *w, int n)
-{
-    mcview_move_down ((mcview_t *) w, n);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-mcview_cmk_moveto_top (void *w, int n)
-{
-    (void) &n;
-    mcview_moveto_top ((mcview_t *) w);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-mcview_cmk_moveto_bottom (void *w, int n)
-{
-    (void) &n;
-    mcview_moveto_bottom ((mcview_t *) w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -437,11 +403,6 @@ mcview_handle_key (mcview_t * view, int key)
 
     command = lookup_keymap_command (view->plain_map, key);
     if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
-        return MSG_HANDLED;
-
-    if (check_movement_keys (key, view->data_area.height + 1, view,
-                             mcview_cmk_move_up, mcview_cmk_move_down,
-                             mcview_cmk_moveto_top, mcview_cmk_moveto_bottom) == MSG_HANDLED)
         return MSG_HANDLED;
 
 #ifdef MC_ENABLE_DEBUGGING_CODE

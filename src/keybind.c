@@ -602,11 +602,13 @@ const global_keymap_t default_viewer_keymap[] = {
 
     { 'k',         CK_ViewMoveUp,            "k" },
     { 'y',         CK_ViewMoveUp,            "y" },
+    { XCTRL ('p'), CK_ViewMoveUp,            "C-p" },
     { KEY_IC,      CK_ViewMoveUp,            "Insert" },
     { KEY_UP,      CK_ViewMoveUp,            "Up" },
 
     { 'j',         CK_ViewMoveDown,          "j" },
     { 'e',         CK_ViewMoveDown,          "e" },
+    { XCTRL ('n'), CK_ViewMoveUp,            "C-n" },
     { KEY_DOWN,    CK_ViewMoveDown,          "Down" },
     { KEY_DC,      CK_ViewMoveDown,          "Delete" },
     { '\n',        CK_ViewMoveDown,          "Endter" },
@@ -614,9 +616,12 @@ const global_keymap_t default_viewer_keymap[] = {
     { ' ',         CK_ViewMovePgDn,          "Space" },
     { 'f',         CK_ViewMovePgDn,          "f" },
     { KEY_NPAGE,   CK_ViewMovePgDn,          "PgDn" },
+    { XCTRL ('v'), CK_ViewMovePgDn,          "C-v" },
 
-    { 'b',         CK_ViewMovePgUp,          "b" },
-    { KEY_PPAGE,   CK_ViewMovePgUp,          "PgUp" },
+    { 'b',           CK_ViewMovePgUp,        "b" },
+    { KEY_PPAGE,     CK_ViewMovePgUp,        "PgUp" },
+    { ALT ('v'),     CK_ViewMovePgUp,        "M-v" },
+    { KEY_BACKSPACE, CK_ViewMovePgUp,        "BackSpace" },
 
     { 'd',         CK_ViewMoveHalfPgDn,      "d" },
     { 'u',         CK_ViewMoveHalfPgUp,      "u" },
@@ -687,6 +692,12 @@ const global_keymap_t default_viewer_hex_keymap[] = {
     { 'j',         CK_ViewMoveDown,          "j" },
     { KEY_DOWN,    CK_ViewMoveDown,          "Down" },
     { KEY_DC,      CK_ViewMoveDown,          "Delete" },
+
+    { KEY_NPAGE,   CK_ViewMovePgDn,          "PgDn" },
+    { XCTRL ('v'), CK_ViewMovePgDn,          "C-v" },
+
+    { KEY_PPAGE,   CK_ViewMovePgUp,          "PgUp" },
+    { ALT ('v'),   CK_ViewMovePgUp,          "M-v" },
 
     { KEY_HOME,               CK_ViewMoveTop,    "Home" },
     { KEY_M_CTRL | KEY_HOME,  CK_ViewMoveTop,    "C-Home" },
