@@ -1,7 +1,7 @@
 /* Keyboard support routines.
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2009 Free Software Foundation, Inc.
+   2005, 2006, 2007, 2009, 2010 Free Software Foundation, Inc.
 
    Written by: 1994, 1995 Miguel de Icaza.
 	       1994, 1995 Janne Kukonlehto.
@@ -1161,85 +1161,6 @@ channels_down (void)
 {
     disabled_channels++;
 }
-
-/*
- * Common handler for standard movement keys in a text area.  Provided
- * functions are called with the "data" argument.  backfn and forfn also
- * get an argument indicating how many lines to scroll. Return MSG_HANDLED
- * if the key was handled, MSG_NOT_HANDLED otherwise.
- */
-cb_ret_t
-check_movement_keys (int key, int page_size, void *data, move_fn backfn,
-                     move_fn forfn, move_fn topfn, move_fn bottomfn)
-{
-    switch (key) {
-    case KEY_UP:
-    case XCTRL ('p'):
-        (*backfn) (data, 1);
-        break;
-
-    case KEY_DOWN:
-    case XCTRL ('n'):
-        (*forfn) (data, 1);
-        break;
-
-    case KEY_PPAGE:
-    case ALT ('v'):
-        (*backfn) (data, page_size - 1);
-        break;
-
-    case KEY_NPAGE:
-    case XCTRL ('v'):
-        (*forfn) (data, page_size - 1);
-        break;
-
-    case KEY_HOME:
-    case KEY_M_CTRL | KEY_HOME:
-    case KEY_M_CTRL | KEY_PPAGE:
-    case KEY_A1:
-    case ALT ('<'):
-        (*topfn) (data, 0);
-        break;
-
-    case KEY_END:
-    case KEY_M_CTRL | KEY_END:
-    case KEY_M_CTRL | KEY_NPAGE:
-    case KEY_C1:
-    case ALT ('>'):
-        (*bottomfn) (data, 0);
-        break;
-
-    case 'b':
-    case KEY_BACKSPACE:
-        (*backfn) (data, page_size - 1);
-        break;
-
-    case ' ':
-        (*forfn) (data, page_size - 1);
-        break;
-
-    case 'u':
-        (*backfn) (data, page_size / 2);
-        break;
-
-    case 'd':
-        (*forfn) (data, page_size / 2);
-        break;
-
-    case 'g':
-        (*topfn) (data, 0);
-        break;
-
-    case 'G':
-        (*bottomfn) (data, 0);
-        break;
-
-    default:
-        return MSG_NOT_HANDLED;
-    }
-    return MSG_HANDLED;
-}
-
 
 static const size_t key_name_conv_tab_size = sizeof (key_name_conv_tab) /
 						sizeof (key_name_conv_tab[0]) - 1;
