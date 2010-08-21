@@ -1204,7 +1204,7 @@ msgid "Symbolic link filename:"
 msgstr "Name des symbolischen Links:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Vorhandene Datei (Symbolischer Link wird dorthin zeigen):"
+msgstr "Vorhandene Datei (symbolischer Link wird dorthin zeigen):"
 
 msgid "Symbolic link"
 msgstr "Symbolischer Link"
@@ -1461,10 +1461,10 @@ msgstr "symbolischer Link: %s"
 
 #, c-format
 msgid "Symlink `%s' points to:"
-msgstr "symbolischer Link \"%s\" zeigt auf:"
+msgstr "Symbolischer Link \"%s\" zeigt auf:"
 
 msgid "Edit symlink"
-msgstr "S&ymbolischer Link bearbeiten"
+msgstr "Symbolischen Link bearbeiten"
 
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
@@ -1472,7 +1472,7 @@ msgstr "symbolischen Link bearbeiten, kann %s nicht entfernen: %s"
 
 #, c-format
 msgid "edit symlink: %s"
-msgstr "symbolschen Link bearbeiten: %s"
+msgstr "symbolischen Link bearbeiten: %s"
 
 #, c-format
 msgid "`%s' is not a symbolic link"
@@ -3280,13 +3280,13 @@ msgid "&Link"
 msgstr "&Link"
 
 msgid "&Symlink"
-msgstr "&Symbolischer Link erstellen"
+msgstr "&Symbolischen Link erstellen"
 
 msgid "Relative symlin&k"
 msgstr "&Relativer symbolischer Link..."
 
 msgid "Edit s&ymlink"
-msgstr "S&ymbolischer Link bearbeiten"
+msgstr "S&ymbolischen Link bearbeiten"
 
 msgid "Ch&own"
 msgstr "Ch&own"
