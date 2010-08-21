@@ -1548,7 +1548,7 @@ msgstr " \"%s\": speciális fájl "
 msgid " File %s is too large "
 msgstr " A(z) \"%s\" fájl túl nagy "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "              MCEdit %s\n"
@@ -1559,16 +1559,15 @@ msgid ""
 "         written for the Midnight Commander"
 msgstr ""
 "\n"
-"               Cooledit 3.11.5\n"
+"              MCEdit %s\n"
 "\n"
-" Copyright (C) 1996, Free Software Foundation \n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
-"      Könnyen kezelhető szövegszerkesztő\n"
-"           a Midnight Commanderhez.\n"
+"         Könnyen kezelhető szövegszerkesztő\n"
+"              a Midnight Commanderhez"
 
-#, fuzzy
 msgid "About"
-msgstr " Névjegy "
+msgstr "Névjegy"
 
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
@@ -1984,9 +1983,8 @@ msgstr "&Sorszámok ki/be"
 msgid "Go to matching &bracket"
 msgstr "Ugrás a &zárójel párjára"
 
-#, fuzzy
 msgid "Toggle s&yntax highlighting"
-msgstr "Szintaxiskiemelés kiválasztása"
+msgstr "Szinta&xiskiemelés ki/be"
 
 #  Működnek ezek egyáltalán?  Nekem se C++-ban se, meg Perlben se csinál semmit.  Így meg nehéz megtudni, miről is van szó. -- PH
 msgid "&Find declaration"
