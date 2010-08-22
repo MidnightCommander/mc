@@ -2813,62 +2813,6 @@ panel_set_sort_type_by_id (WPanel * panel, const char *name)
     panel_set_sort_order (panel, panel->current_sort_field);
 }
 
-typedef void (*panel_key_callback) (WPanel *);
-
-static void
-cmd_do_enter (WPanel * wp)
-{
-    (void) do_enter (wp);
-}
-static void
-cmd_view_simple (WPanel * wp)
-{
-    (void) wp;
-    view_simple_cmd ();
-}
-static void
-cmd_edit_new (WPanel * wp)
-{
-    (void) wp;
-    edit_cmd_new ();
-}
-static void
-cmd_copy_local (WPanel * wp)
-{
-    (void) wp;
-    copy_cmd_local ();
-}
-static void
-cmd_rename_local (WPanel * wp)
-{
-    (void) wp;
-    rename_cmd_local ();
-}
-static void
-cmd_delete_local (WPanel * wp)
-{
-    (void) wp;
-    delete_cmd_local ();
-}
-static void
-cmd_select (WPanel * wp)
-{
-    (void) wp;
-    select_cmd ();
-}
-static void
-cmd_unselect (WPanel * wp)
-{
-    (void) wp;
-    unselect_cmd ();
-}
-static void
-cmd_reverse_selection (WPanel * wp)
-{
-    (void) wp;
-    reverse_selection_cmd ();
-}
-
 static cb_ret_t
 panel_execute_cmd (WPanel * panel, unsigned long command)
 {
@@ -2886,31 +2830,31 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         chdir_to_readlink (panel);
         break;
     case CK_PanelCmdCopyLocal:
-        cmd_copy_local (panel);
+        copy_cmd_local ();
         break;
     case CK_PanelCmdDeleteLocal:
-        cmd_delete_local (panel);
+        delete_cmd_local ();
         break;
     case CK_PanelCmdDoEnter:
-        cmd_do_enter (panel);
+        do_enter (panel);
         break;
     case CK_PanelCmdViewSimple:
-        cmd_view_simple (panel);
+        view_simple_cmd ();
         break;
     case CK_PanelCmdEditNew:
-        cmd_edit_new (panel);
+        edit_cmd_new ();
         break;
     case CK_PanelCmdRenameLocal:
-        cmd_rename_local (panel);
+        rename_cmd_local ();
         break;
     case CK_PanelCmdReverseSelection:
-        cmd_reverse_selection (panel);
+        reverse_selection_cmd ();
         break;
     case CK_PanelCmdSelect:
-        cmd_select (panel);
+        select_cmd ();
         break;
     case CK_PanelCmdUnselect:
-        cmd_unselect (panel);
+        unselect_cmd ();
         break;
     case CK_PanelNextPage:
         next_page (panel);
