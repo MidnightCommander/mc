@@ -34,10 +34,10 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin.h"
-#include "lib/strescape.h"
 #include "lib/tty/mouse.h"      /* For Gpm_Event */
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
+#include "lib/skin.h"
+#include "lib/strescape.h"
 #include "lib/filehighlight.h"
 #include "lib/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h"
@@ -2813,6 +2813,157 @@ panel_set_sort_type_by_id (WPanel * panel, const char *name)
     panel_set_sort_order (panel, panel->current_sort_field);
 }
 
+/*
+ *  If we moved to the parent directory move the selection pointer to
+ *  the old directory name; If we leave VFS dir, remove FS specificator.
+ *
+ *  You do _NOT_ want to add any vfs aware code here. <pavel@ucw.cz>
+ */
+static const char *
+get_parent_dir_name (const char *cwd, const char *lwd)
+{
+    size_t llen, clen;
+
+    llen = strlen (lwd);
+    clen = strlen (cwd);
+
+    if (llen > clen)
+    {
+        const char *p;
+
+        p = strrchr (lwd, PATH_SEP);
+
+        if ((p != NULL)
+            && (strncmp (cwd, lwd, (size_t) (p - lwd)) == 0)
+            && (clen == (size_t) (p - lwd)
+                || ((p == lwd) && (cwd[0] == PATH_SEP) && (cwd[1] == '\0'))))
+            return (p + 1);
+    }
+
+    return NULL;
+}
+
+/*
+ * Changes the current directory of the panel.
+ * Don't record change in the directory history.
+ */
+static gboolean
+_do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
+{
+    const char *directory;
+    char *olddir;
+    char temp[MC_MAXPATHLEN];
+    char *translated_url;
+
+    if (cd_type == cd_parse_command)
+    {
+        while (*new_dir == ' ')
+            new_dir++;
+    }
+
+    olddir = g_strdup (panel->cwd);
+    new_dir = translated_url = vfs_translate_url (new_dir);
+
+    /* Convert *new_path to a suitable pathname, handle ~user */
+
+    if (cd_type == cd_parse_command)
+    {
+        if (!strcmp (new_dir, "-"))
+        {
+            strcpy (temp, panel->lwd);
+            new_dir = temp;
+        }
+    }
+    directory = *new_dir ? new_dir : home_dir;
+
+    if (mc_chdir (directory) == -1)
+    {
+        strcpy (panel->cwd, olddir);
+        g_free (olddir);
+        g_free (translated_url);
+        return FALSE;
+    }
+    g_free (translated_url);
+
+    /* Success: save previous directory, shutdown status of previous dir */
+    strcpy (panel->lwd, olddir);
+    free_completions (cmdline);
+
+    mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
+
+    vfs_release_path (olddir);
+
+    subshell_chdir (panel->cwd);
+
+    /* Reload current panel */
+    panel_clean_dir (panel);
+    panel->count =
+        do_load_dir (panel->cwd, &panel->dir, panel->current_sort_field->sort_routine,
+                     panel->reverse, panel->case_sensitive, panel->exec_first, panel->filter);
+    try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
+    load_hint (0);
+    panel->dirty = 1;
+    update_xterm_title_path ();
+
+    g_free (olddir);
+
+    return TRUE;
+}
+
+/*
+ * Changes the current directory of the panel.
+ * Record change in the directory history.
+ */
+gboolean
+do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type)
+{
+    gboolean r;
+
+    r = _do_panel_cd (panel, new_dir, cd_type);
+    if (r)
+        directory_history_add (panel, panel->cwd);
+    return r;
+}
+
+static void
+directory_history_next (WPanel * panel)
+{
+    GList *nextdir;
+
+    nextdir = g_list_next (panel->dir_history);
+
+    if ((nextdir != NULL) && (_do_panel_cd (panel, (char *) nextdir->data, cd_exact)))
+        panel->dir_history = nextdir;
+}
+
+static void
+directory_history_prev (WPanel * panel)
+{
+    GList *prevdir;
+
+    prevdir = g_list_previous (panel->dir_history);
+
+    if ((prevdir != NULL) && (_do_panel_cd (panel, (char *) prevdir->data, cd_exact)))
+        panel->dir_history = prevdir;
+}
+
+static void
+directory_history_list (WPanel * panel)
+{
+    char *s;
+
+    s = show_hist (&panel->dir_history, &panel->widget);
+
+    if (s != NULL)
+    {
+        if (_do_panel_cd (panel, s, cd_exact))
+            directory_history_add (panel, panel->cwd);
+        else
+            message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+        g_free (s);
+    }
+}
+
 static cb_ret_t
 panel_execute_cmd (WPanel * panel, unsigned long command)
 {
@@ -3369,7 +3520,7 @@ set_panel_encoding (WPanel * panel)
         /* No translation */
         g_free (init_translation_table (display_codepage, display_codepage));
         cd_path = remove_encoding_from_path (panel->cwd);
-        do_panel_cd (panel, cd_path, 0);
+        do_panel_cd (panel, cd_path, cd_parse_command);
         g_free (cd_path);
         return;
     }
@@ -3389,7 +3540,7 @@ set_panel_encoding (WPanel * panel)
     if (encoding != NULL)
     {
         cd_path = add_encoding_to_path (panel->cwd, encoding);
-        if (!do_panel_cd (panel, cd_path, 0))
+        if (!do_panel_cd (panel, cd_path, cd_parse_command))
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
         g_free (cd_path);
     }
@@ -3515,6 +3666,17 @@ update_panels (int force_update, const char *current_file)
     ret = mc_chdir (panel->cwd);
 }
 
+void
+directory_history_add (struct WPanel *panel, const char *dir)
+{
+    char *tmp;
+
+    tmp = g_strdup (dir);
+    strip_password (tmp, 1);
+
+    panel->dir_history = list_append_unique (panel->dir_history, tmp);
+}
+
 gsize
 panel_get_num_of_sortable_fields (void)
 {
@@ -3525,7 +3687,6 @@ panel_get_num_of_sortable_fields (void)
             ret++;
     return ret;
 }
-
 
 const char **
 panel_get_sortable_fields (gsize * array_size)
