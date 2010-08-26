@@ -47,13 +47,13 @@
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/timefmt.h"        /* time formatting */
 #include "lib/lock.h"
 
 #include "src/widget.h"
 #include "src/cmd.h"            /* view_other_cmd() */
 #include "src/user.h"           /* user_menu_cmd() */
 #include "src/wtools.h"         /* query_dialog() */
-#include "lib/timefmt.h"        /* time formatting */
 #include "src/charsets.h"       /* get_codepage_id */
 #include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* option_tab_spacing */
@@ -124,6 +124,54 @@ const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
  */
 
 static void user_menu (WEdit * edit);
+
+static void
+edit_about (void)
+{
+    const char *header = N_("About");
+    const char *button_name = N_("&OK");
+    const char * const version = "MCEdit " VERSION;
+    char text[BUF_LARGE];
+
+    int win_len, version_len, button_len;
+    int cols, lines;
+
+    Dlg_head *about_dlg;
+
+#ifdef ENABLE_NLS
+    header = _(header);
+    button_name = _(button_name);
+#endif
+
+    button_len = str_term_width1 (button_name) + 5;
+    version_len = str_term_width1 (version);
+
+    g_snprintf (text, sizeof (text),
+                _("Copyright (C) 1996-2010 the Free Software Foundation\n\n"
+                  "            A user friendly text editor\n"
+                  "         written for the Midnight Commander"));
+
+    win_len = str_term_width1 (header);
+    win_len = max (win_len, version_len);
+    win_len = max (win_len, button_len);
+
+    /* count width and height of text */
+    str_msg_term_size (text, &lines, &cols);
+    lines += 9;
+    cols = max (win_len, cols) + 6;
+
+    /* dialog */
+    about_dlg = create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, NULL,
+                            "[Internal File Editor]", header, DLG_CENTER | DLG_TRYUP);
+
+    add_widget (about_dlg, label_new (3, (cols - version_len)/2, version));
+    add_widget (about_dlg, label_new (5, 3, text));
+    add_widget (about_dlg, button_new (lines - 3, (cols - button_len)/2,
+                                       B_ENTER, NORMAL_BUTTON, button_name, NULL));
+
+    run_dlg (about_dlg);
+    destroy_dlg (about_dlg);
+}
 
 int
 edit_get_byte (WEdit * edit, long byte_index)
@@ -3522,16 +3570,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         save_setup_cmd ();
         break;
     case CK_About:
-        {
-            char text[BUF_LARGE];
-
-            g_snprintf (text, sizeof (text),
-                        _("\n              MCEdit %s\n\n"
-                            "Copyright (C) 1996-2010 the Free Software Foundation\n\n"
-                            "            A user friendly text editor\n"
-                            "         written for the Midnight Commander"), VERSION);
-            query_dialog (_("About"), text, D_NORMAL, 1, _("&OK"));
-        }
+        edit_about ();
         break;
     case CK_LearnKeys:
         learn_keys ();
