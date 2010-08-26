@@ -63,6 +63,33 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
 };
 */
 
+static inline int
+key_collate (const char *t1, const char *t2)
+{
+    int dotdot = 0;
+    int ret;
+
+    dotdot = (t1[0] == '.' ? 1 : 0) | ((t2[0] == '.' ? 1 : 0) << 1);
+
+    switch (dotdot)
+    {
+       case 0:
+       case 3:
+           ret = str_key_collate (t1, t2, case_sensitive) * reverse;
+           break;
+       case 1:
+           ret = -1; /* t1 < t2 */
+           break;
+       case 2:
+           ret = 1; /* t1 > t2 */
+           break;
+       default:
+           ret = 0; /* it must not happen */
+    }
+
+    return ret;
+}
+
 int
 unsorted (file_entry *a, file_entry *b)
 {
@@ -84,8 +111,7 @@ sort_name (file_entry *a, file_entry *b)
         if (b->sort_key == NULL)
             b->sort_key = str_create_key_for_filename (b->fname, case_sensitive);
 
-	return str_key_collate (a->sort_key, b->sort_key, case_sensitive) 
-                * reverse;
+	return key_collate (a->sort_key, b->sort_key);
     }
     return bd - ad;
 }
