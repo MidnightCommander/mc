@@ -374,11 +374,8 @@ mc_args_process(void)
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_args__nouse_subshell)
-	use_subshell = 0;
-
-    if (mc_args__nouse_subshell)
-	use_subshell = 0;
-#endif				/* HAVE_SUBSHELL_SUPPORT */
+        use_subshell = 0;
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
     return TRUE;
 }
