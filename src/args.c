@@ -564,9 +564,6 @@ mc_args_process (int argc, char *argv[])
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_args__nouse_subshell)
         use_subshell = 0;
-
-    if (mc_args__nouse_subshell)
-        use_subshell = 0;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
     mc_setup_by_args (argc, argv);
