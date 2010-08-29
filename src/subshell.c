@@ -110,12 +110,10 @@ static const char subshell_switch_key = XCTRL ('o') & 255;
  * INACTIVE: the default state; awaiting a command
  * ACTIVE: remain in the shell until the user hits `subshell_switch_key'
  * RUNNING_COMMAND: return to MC when the current command finishes */
-     enum subshell_state_enum
-         subshell_state;
+enum subshell_state_enum subshell_state;
 
 /* Holds the latest prompt captured from the subshell */
-     char *
-         subshell_prompt = NULL;
+char *subshell_prompt = NULL;
 
 /* Initial length of the buffer for the subshell's prompt */
 #define INITIAL_PROMPT_SIZE 10
@@ -127,62 +125,53 @@ static const char subshell_switch_key = XCTRL ('o') & 255;
 #define PTY_BUFFER_SIZE BUF_SMALL       /* Arbitrary; but keep it >= 80 */
 
 /* For pipes */
-     enum
-     {
-     READ = 0, WRITE = 1 };
+enum
+{
+    READ = 0,
+    WRITE = 1
+};
 
-     static char
-         pty_buffer[PTY_BUFFER_SIZE] = "\0";    /* For reading/writing on the subshell's pty */
-     static int
-         subshell_pipe[2];      /* To pass CWD info from the subshell to MC */
-     static pid_t
-         subshell_pid = 1;      /* The subshell's process ID */
-     static char
-         subshell_cwd[MC_MAXPATHLEN + 1];       /* One extra char for final '\n' */
+static char pty_buffer[PTY_BUFFER_SIZE] = "\0";    /* For reading/writing on the subshell's pty */
+static int subshell_pipe[2];      /* To pass CWD info from the subshell to MC */
+static pid_t subshell_pid = 1;      /* The subshell's process ID */
+static char subshell_cwd[MC_MAXPATHLEN + 1];       /* One extra char for final '\n' */
 
 /* Subshell type (gleaned from the SHELL environment variable, if available) */
-     static enum
-     {
-         BASH,
-         TCSH,
-         ZSH,
-         FISH
-     } subshell_type;
+static enum
+{
+    BASH,
+    TCSH,
+    ZSH,
+    FISH
+} subshell_type;
 
 /* Flag to indicate whether the subshell is ready for next command */
-     static int
-         subshell_ready;
+static int subshell_ready;
 
 /* The following two flags can be changed by the SIGCHLD handler. This is */
 /* OK, because the `int' type is updated atomically on all known machines */
-     static volatile int
-         subshell_alive,
-         subshell_stopped;
+static volatile int subshell_alive, subshell_stopped;
 
 /* We store the terminal's initial mode here so that we can configure
    the pty similarly, and also so we can restore the real terminal to
    sanity if we have to exit abruptly */
-     static struct termios
-         shell_mode;
+static struct termios shell_mode;
 
 /* This is a transparent mode for the terminal where MC is running on */
 /* It is used when the shell is active, so that the control signals */
 /* are delivered to the shell pty */
-     static struct termios
-         raw_mode;
+static struct termios raw_mode;
 
 /* This counter indicates how many characters of prompt we have read */
 /* FIXME: try to figure out why this had to become global */
-     static int
-         prompt_pos;
+static int prompt_pos;
 
 
 /*
  *  Write all data, even if the write() call is interrupted.
  */
-     static
-         ssize_t
-     write_all (int fd, const void *buf, size_t count)
+static ssize_t
+write_all (int fd, const void *buf, size_t count)
 {
     ssize_t ret;
     ssize_t written = 0;
