@@ -77,7 +77,7 @@ widget_erase (Widget *w)
 void
 dlg_erase (Dlg_head *h)
 {
-    if (h != NULL)
+    if ((h != NULL) && h->running)
 	tty_fill_region (h->y, h->x, h->lines, h->cols, ' ');
 }
 
@@ -99,9 +99,12 @@ init_widget (Widget *w, int y, int x, int lines, int cols,
 
 /* Clean the dialog area, draw the frame and the title */
 void
-common_dialog_repaint (struct Dlg_head *h)
+common_dialog_repaint (Dlg_head *h)
 {
     int space;
+
+    if (!h->running)
+	return;
 
     space = (h->flags & DLG_COMPACT) ? 0 : 1;
 
@@ -109,7 +112,7 @@ common_dialog_repaint (struct Dlg_head *h)
     dlg_erase (h);
     draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
 
-    if (h->title) {
+    if (h->title != NULL) {
 	tty_setcolor (DLG_HOT_NORMALC (h));
 	dlg_move (h, space, (h->cols - str_term_width1 (h->title)) / 2);
 	tty_print_string (h->title);
@@ -400,7 +403,7 @@ dlg_broadcast_msg (Dlg_head *h, widget_msg_t message, int reverse)
 int
 dlg_focus (Dlg_head *h)
 {
-    if ((h->current != NULL)
+    if ((h->current != NULL) && h->running
 	&& (send_message (h->current, WIDGET_FOCUS, 0) == MSG_HANDLED)) {
 	    h->callback (h, h->current, DLG_FOCUS, 0, NULL);
 	    return 1;
@@ -411,7 +414,7 @@ dlg_focus (Dlg_head *h)
 static int
 dlg_unfocus (Dlg_head *h)
 {
-    if ((h->current != NULL)
+    if ((h->current != NULL) && h->running
 	&& (send_message (h->current, WIDGET_UNFOCUS, 0) == MSG_HANDLED)) {
 	    h->callback (h, h->current, DLG_UNFOCUS, 0, NULL);
 	    return 1;
@@ -555,7 +558,7 @@ void update_cursor (Dlg_head *h)
 {
     Widget *p = h->current;
 
-    if (p != NULL) {
+    if ((p != NULL) && h->running) {
 	if (p->options & W_WANT_CURSOR)
 	    send_message (p, WIDGET_CURSOR, 0);
 	else
@@ -572,6 +575,9 @@ void update_cursor (Dlg_head *h)
 void
 dlg_redraw (Dlg_head *h)
 {
+    if (!h->running)
+	return;
+
     h->callback (h, NULL, DLG_DRAW, 0, NULL);
     dlg_broadcast_msg (h, WIDGET_DRAW, 1);
     update_cursor (h);
@@ -782,6 +788,7 @@ init_dlg (Dlg_head *h)
 
     h->parent = current_dlg;
     current_dlg = h;
+    h->running = 1;
 
     /* Initialize the mouse status */
     h->mouse_status = MOU_NORMAL;
@@ -794,7 +801,6 @@ init_dlg (Dlg_head *h)
     dlg_redraw (h);
 
     h->ret_value = 0;
-    h->running = 1;
 }
 
 /* Shutdown the run_dlg */
