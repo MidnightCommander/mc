@@ -43,6 +43,7 @@ extern GArray *main_keymap;
 extern GArray *main_x_keymap;
 extern GArray *panel_keymap;
 extern GArray *input_keymap;
+extern GArray *listbox_keymap;
 extern GArray *tree_keymap;
 extern GArray *help_keymap;
 extern GArray *dialog_keymap;
@@ -54,6 +55,7 @@ extern const global_keymap_t *main_map;
 extern const global_keymap_t *main_x_map;
 extern const global_keymap_t *panel_map;
 extern const global_keymap_t *input_map;
+extern const global_keymap_t *listbox_map;
 extern const global_keymap_t *tree_map;
 extern const global_keymap_t *help_map;
 extern const global_keymap_t *dialog_map;
@@ -76,6 +78,7 @@ extern const global_keymap_t default_panel_keymap[];
 
 /* widget.c */
 extern const global_keymap_t default_input_keymap[];
+extern const global_keymap_t default_listbox_keymap[];
 
 /* main.c */
 extern const global_keymap_t default_main_map[];

@@ -297,8 +297,8 @@ PanelGotoMiddleFile = alt-r
 PanelSyncOtherPanel = alt-i
 PanelGotoTopFile = alt-g
 PanelSetPanelEncoding = alt-e
-PanelMoveHome = alt-lt; home
-PanelMoveEnd = alt-gt; end
+PanelMoveHome = alt-lt; home; a1
+PanelMoveEnd = alt-gt; end; c1
 PanelSelectSortOrder=
 PanelToggleSortOrderPrev=
 PanelToggleSortOrderNext=
@@ -309,8 +309,8 @@ PanelSortOrderBySize=
 PanelSortOrderByMTime=
 
 [input]
-InputBol = ctrl-a; alt-lt; home
-InputEol = ctrl-e; alt-gt; end
+InputBol = ctrl-a; alt-lt; home; a1
+InputEol = ctrl-e; alt-gt; end; c1
 InputMoveLeft = left; alt-left
 InputWordLeft = ctrl-left
 InputBackwardChar = ctrl-b
@@ -341,6 +341,16 @@ InputWordRightHighlight =
 InputBolHighlight =
 InputEolHighlight =
 
+[listbox]
+ListboxMoveUp = up; ctrl-p
+ListboxMoveDown = down; ctrl-n
+ListboxMoveHome = home; alt-lt; a1
+ListboxMoveEnd = end; alt-gt; c1
+ListboxMovePgUp = pgup; alt-v
+ListboxMovePgDn = pgdn; ctrl-v
+ListboxDeleteItem = delete; d
+ListboxDeleteAll = shift-delete; shift-d
+
 [tree]
 TreeHelp = f1
 TreeForget = f3
@@ -351,8 +361,8 @@ TreeMoveUp = up; ctrl-p
 TreeMoveDown = down; ctrl-n
 TreeMoveLeft = left
 TreeMoveRight = right
-TreeMoveHome = home; alt-lt
-TreeMoveEnd = end; alt-gt
+TreeMoveHome = home; alt-lt; a1
+TreeMoveEnd = end; alt-gt; c1
 TreeMovePgUp = pgup; alt-v
 TreeMovePgDn = pgdn; ctrl-v
 TreeOpen = enter

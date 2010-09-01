@@ -219,7 +219,7 @@
 #define CK_StartExtMap1                 2021
 #define CK_StartExtMap2                 2022
 
-/* Dialog */
+/* dialog */
 #define CK_DialogOK                    3001
 #define CK_DialogCancel                3002
 #define CK_DialogPrevItem              3003
@@ -228,7 +228,7 @@
 #define CK_DialogSuspend               3006
 #define CK_DialogRefresh               3007
 
-/* text fields*/
+/* text fields */
 #define CK_InputBol                    4001
 #define CK_InputEol                    4002
 #define CK_InputMoveLeft               4003
@@ -254,7 +254,6 @@
 #define CK_InputComplete               4024
 #define CK_InputPaste                  4025
 #define CK_InputClearLine              4026
-
 #define CK_InputLeftHighlight          4027
 #define CK_InputRightHighlight         4028
 #define CK_InputWordLeftHighlight      4029
@@ -262,7 +261,17 @@
 #define CK_InputBolHighlight           4031
 #define CK_InputEolHighlight           4032
 
-/* Viewer */
+/* listbox */
+#define CK_ListboxMoveUp               4500
+#define CK_ListboxMoveDown             4501
+#define CK_ListboxMoveHome             4502
+#define CK_ListboxMoveEnd              4503
+#define CK_ListboxMovePgUp             4504
+#define CK_ListboxMovePgDn             4505
+#define CK_ListboxDeleteItem           4506
+#define CK_ListboxDeleteAll            4507
+
+/* viewer */
 #define CK_ViewHelp                     5001
 #define CK_ViewToggleWrapMode           5002
 #define CK_ViewToggleHexEditMode        5003
@@ -291,7 +300,7 @@
 #define CK_ViewToggleRuler              5026
 #define CK_ViewToggleHexNavMode         5027
 
-/* Tree */
+/* tree */
 #define CK_TreeHelp                     6001
 #define CK_TreeForget                   6003
 #define CK_TreeToggleNav                6004

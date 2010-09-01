@@ -2220,7 +2220,7 @@ handle_char (WInput * in, int key)
             break;
         }
     }
-    if (input_map[i].command == 0)
+    if (input_map[i].command == CK_Ignore_Key)
     {
         if (key > 255)
             return MSG_NOT_HANDLED;
@@ -2649,13 +2649,65 @@ listbox_back (WListbox * l)
         listbox_select_entry (l, l->pos - 1);
 }
 
+static cb_ret_t
+listbox_execute_cmd (WListbox * l, unsigned long command)
+{
+    cb_ret_t ret = MSG_HANDLED;
+    int i;
+
+    switch (command)
+    {
+    case CK_ListboxMoveUp:
+        listbox_back (l);
+        break;
+    case CK_ListboxMoveDown:
+        listbox_fwd (l);
+        break;
+    case CK_ListboxMoveHome:
+        listbox_select_first (l);
+        break;
+    case CK_ListboxMoveEnd:
+        listbox_select_last (l);
+        break;
+    case CK_ListboxMovePgUp:
+        for (i = 0; (i < l->widget.lines - 1) && (l->pos > 0); i++)
+            listbox_back (l);
+        break;
+    case CK_ListboxMovePgDn:
+        for (i = 0; (i < l->widget.lines - 1) && (l->pos < l->count - 1); i++)
+            listbox_fwd (l);
+        break;
+    case CK_ListboxDeleteItem:
+        if (l->deletable)
+        {
+            gboolean is_last = (l->pos + 1 >= l->count);
+            gboolean is_more = (l->top + l->widget.lines >= l->count);
+
+            listbox_remove_current (l);
+            if ((l->top > 0) && (is_last || is_more))
+                l->top--;
+        }
+        break;
+    case CK_ListboxDeleteAll:
+        if (l->deletable && confirm_history_cleanup
+            /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix */
+            && (query_dialog (Q_ ("DialogTitle|History cleanup"),
+                              _("Do you want clean this history?"),
+                              D_ERROR, 2, _("&Yes"), _("&No")) == 0))
+            listbox_remove_list (l);
+        break;
+    default:
+        ret = MSG_NOT_HANDLED;
+    }
+
+    return ret;
+}
+
 /* Return MSG_HANDLED if we want a redraw */
 static cb_ret_t
 listbox_key (WListbox * l, int key)
 {
-    int i;
-
-    cb_ret_t j = MSG_NOT_HANDLED;
+    unsigned long command;
 
     if (l->list == NULL)
         return MSG_NOT_HANDLED;
@@ -2673,79 +2725,10 @@ listbox_key (WListbox * l, int key)
         return MSG_HANDLED;
     }
 
-    switch (key)
-    {
-    case KEY_HOME:
-    case KEY_A1:
-    case ALT ('<'):
-        listbox_select_first (l);
-        return MSG_HANDLED;
-
-    case KEY_END:
-    case KEY_C1:
-    case ALT ('>'):
-        listbox_select_last (l);
-        return MSG_HANDLED;
-
-    case XCTRL ('p'):
-    case KEY_UP:
-        listbox_back (l);
-        return MSG_HANDLED;
-
-    case XCTRL ('n'):
-    case KEY_DOWN:
-        listbox_fwd (l);
-        return MSG_HANDLED;
-
-    case KEY_NPAGE:
-    case XCTRL ('v'):
-        for (i = 0; (i < l->widget.lines - 1) && (l->pos < l->count - 1); i++)
-        {
-            listbox_fwd (l);
-            j = MSG_HANDLED;
-        }
-        break;
-
-    case KEY_PPAGE:
-    case ALT ('v'):
-        for (i = 0; (i < l->widget.lines - 1) && (l->pos > 0); i++)
-        {
-            listbox_back (l);
-            j = MSG_HANDLED;
-        }
-        break;
-
-    case KEY_DC:
-    case 'd':
-        if (l->deletable)
-        {
-            gboolean is_last = (l->pos + 1 >= l->count);
-            gboolean is_more = (l->top + l->widget.lines >= l->count);
-
-            listbox_remove_current (l);
-            if ((l->top > 0) && (is_last || is_more))
-                l->top--;
-        }
-        return MSG_HANDLED;
-
-    case (KEY_M_SHIFT | KEY_DC):
-    case 'D':
-        if (l->deletable && confirm_history_cleanup
-            /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix */
-            && (query_dialog (Q_ ("DialogTitle|History cleanup"),
-                              _("Do you want clean this history?"),
-                              D_ERROR, 2, _("&Yes"), _("&No")) == 0))
-        {
-            listbox_remove_list (l);
-            j = MSG_HANDLED;
-        }
-        break;
-
-    default:
-        break;
-    }
-
-    return j;
+    command = lookup_keymap_command (listbox_map, key);
+    if (command == CK_Ignore_Key)
+        return MSG_NOT_HANDLED;
+    return listbox_execute_cmd (l, command);
 }
 
 static inline void
@@ -2799,6 +2782,9 @@ listbox_callback (Widget * w, widget_msg_t msg, int parm)
             h->callback (h, w, DLG_ACTION, l->pos, NULL);
         }
         return ret_code;
+
+    case WIDGET_COMMAND:
+        return listbox_execute_cmd (l, parm);
 
     case WIDGET_CURSOR:
         widget_move (&l->widget, l->cursor_y, 0);
