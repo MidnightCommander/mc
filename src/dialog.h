@@ -253,7 +253,7 @@ void init_widget (Widget * w, int y, int x, int lines, int cols,
 cb_ret_t default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
 /* Default paint routine for dialogs */
-void common_dialog_repaint (struct Dlg_head *h);
+void common_dialog_repaint (Dlg_head *h);
 
 #define widget_move(w, _y, _x) tty_gotoyx (((Widget *)(w))->y + _y, ((Widget *)(w))->x + _x)
 #define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + _y, ((Dlg_head *)(h))->x + _x)

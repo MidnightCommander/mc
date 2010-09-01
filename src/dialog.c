@@ -106,9 +106,12 @@ widget_erase (Widget * w)
 
 /* Clean the dialog area, draw the frame and the title */
 void
-common_dialog_repaint (struct Dlg_head *h)
+common_dialog_repaint (Dlg_head *h)
 {
     int space;
+
+    if (h->state != DLG_ACTIVE)
+        return;
 
     space = (h->flags & DLG_COMPACT) ? 0 : 1;
 
@@ -116,7 +119,7 @@ common_dialog_repaint (struct Dlg_head *h)
     dlg_erase (h);
     draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space, FALSE);
 
-    if (h->title)
+    if (h->title != NULL)
     {
         tty_setcolor (DLG_HOT_NORMALC (h));
         dlg_move (h, space, (h->cols - str_term_width1 (h->title)) / 2);
@@ -317,7 +320,7 @@ dlg_set_default_colors (void)
 void
 dlg_erase (Dlg_head * h)
 {
-    if (h != NULL)
+    if ((h != NULL) && (h->state == DLG_ACTIVE))
         tty_fill_region (h->y, h->x, h->lines, h->cols, ' ');
 }
 
@@ -458,7 +461,7 @@ dlg_focus (Dlg_head * h)
 {
     /* cannot focus disabled widget ... */
 
-    if (h->current != NULL)
+    if ((h->current != NULL) && (h->state == DLG_ACTIVE))
     {
         Widget *current = (Widget *) h->current->data;
 
@@ -478,7 +481,7 @@ dlg_unfocus (Dlg_head * h)
 {
     /* ... but can unfocus disabled widget */
 
-    if (h->current != NULL)
+    if ((h->current != NULL) && (h->state == DLG_ACTIVE))
     {
         Widget *current = (Widget *) h->current->data;
 
@@ -649,7 +652,7 @@ update_cursor (Dlg_head * h)
 {
     GList *p = h->current;
 
-    if (p != NULL)
+    if ((p != NULL) && (h->state == DLG_ACTIVE))
     {
         Widget *w;
 
@@ -683,6 +686,9 @@ update_cursor (Dlg_head * h)
 void
 dlg_redraw (Dlg_head * h)
 {
+    if (h->state != DLG_ACTIVE)
+        return;
+
     if (h->winch_pending)
     {
         h->winch_pending = FALSE;
