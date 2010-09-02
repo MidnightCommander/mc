@@ -175,17 +175,21 @@ mcdiffview_dialog_search (WDiff * dview)
 static gboolean
 mcdiffview_do_search_backward (WDiff * dview)
 {
-    size_t ind;
+    ssize_t ind;
     DIFFLN *p;
 
-    dview->search.last_accessed_num_line--;
-
     if (dview->search.last_accessed_num_line < 0)
-        return FALSE;
-
-    for (ind = dview->search.last_accessed_num_line; ind > 0; ind--)
     {
-        p = (DIFFLN *) & g_array_index (dview->a[dview->ord], DIFFLN, ind);
+        dview->search.last_accessed_num_line = -1;
+        return FALSE;
+    }
+
+    if ((size_t) dview->search.last_accessed_num_line >= dview->a[dview->ord]->len)
+        dview->search.last_accessed_num_line = (ssize_t) dview->a[dview->ord]->len;
+
+    for (ind = --dview->search.last_accessed_num_line; ind >= 0; ind--)
+    {
+        p = (DIFFLN *) & g_array_index (dview->a[dview->ord], DIFFLN, (size_t) ind);
         if (p->u.len == 0)
             continue;
 
@@ -208,12 +212,15 @@ mcdiffview_do_search_forward (WDiff * dview)
     size_t ind;
     DIFFLN *p;
 
-    dview->search.last_accessed_num_line++;
+    if (dview->search.last_accessed_num_line < 0)
+        dview->search.last_accessed_num_line = -1;
+    else if ((size_t) dview->search.last_accessed_num_line >= dview->a[dview->ord]->len)
+    {
+        dview->search.last_accessed_num_line = (ssize_t) dview->a[dview->ord]->len;
+         return FALSE;
+    }
 
-    if (dview->search.last_accessed_num_line > dview->a[dview->ord]->len)
-        return FALSE;
-
-    for (ind = dview->search.last_accessed_num_line; ind < dview->a[dview->ord]->len; ind++)
+    for (ind = (size_t) ++dview->search.last_accessed_num_line; ind < dview->a[dview->ord]->len; ind++)
     {
         p = (DIFFLN *) & g_array_index (dview->a[dview->ord], DIFFLN, ind);
         if (p->u.len == 0)
@@ -222,7 +229,7 @@ mcdiffview_do_search_forward (WDiff * dview)
         if (mc_search_run (dview->search.handle, p->p, 0, p->u.len, NULL))
         {
             dview->skip_rows = dview->search.last_found_line =
-                dview->search.last_accessed_num_line = ind;
+                dview->search.last_accessed_num_line = (ssize_t) ind;
             return TRUE;
         }
     }
