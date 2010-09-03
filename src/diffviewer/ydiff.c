@@ -1648,15 +1648,15 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, int 
         }
     }
 
-    useful = base - skip;
-    offset = skip - old_base;
-
-    if (useful < 0)
+    if (base < skip)
     {
         memset (dst, ' ', dstsize);
         dst[dstsize] = '\0';
         return 0;
     }
+
+    useful = base - skip;
+    offset = skip - old_base;
 
     if (useful <= dstsize)
     {
@@ -2349,7 +2349,7 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->search.handle = NULL;
     dview->search.last_string = NULL;
     dview->search.last_found_line = -1;
-    dview->search.last_accessed_num_line = 0;
+    dview->search.last_accessed_num_line = -1;
 
     dview->opt.quality = 0;
     dview->opt.strip_trailing_cr = 0;
@@ -2803,7 +2803,7 @@ dview_goto_cmd (WDiff * dview, int ord)
                     }
                 }
             }
-            dview->skip_rows = dview->search.last_accessed_num_line = i;
+            dview->skip_rows = dview->search.last_accessed_num_line = (ssize_t) i;
             g_snprintf (prev, sizeof (prev), "%d", newline);
         }
         g_free (input);
@@ -3071,20 +3071,29 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         dview->skip_rows = dview->search.last_accessed_num_line = dview->a[0]->len - 1;
         break;
     case CK_DiffUp:
-        dview->skip_rows--;
-        dview->search.last_accessed_num_line = dview->skip_rows;
+        if (dview->skip_rows > 0)
+        {
+            dview->skip_rows--;
+            dview->search.last_accessed_num_line = dview->skip_rows;
+        }
         break;
     case CK_DiffDown:
         dview->skip_rows++;
         dview->search.last_accessed_num_line = dview->skip_rows;
         break;
     case CK_DiffPageDown:
-        dview->skip_rows += dview->height - 2;
-        dview->search.last_accessed_num_line = dview->skip_rows;
+        if (dview->height > 2)
+        {
+            dview->skip_rows += dview->height - 2;
+            dview->search.last_accessed_num_line = dview->skip_rows;
+        }
         break;
     case CK_DiffPageUp:
-        dview->skip_rows -= dview->height - 2;
-        dview->search.last_accessed_num_line = dview->skip_rows;
+        if (dview->height > 2)
+        {
+            dview->skip_rows -= dview->height - 2;
+            dview->search.last_accessed_num_line = dview->skip_rows;
+        }
         break;
     case CK_DiffLeft:
         dview->skip_cols--;

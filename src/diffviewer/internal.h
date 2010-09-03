@@ -128,7 +128,7 @@ typedef struct WDiff
         gchar *last_string;
 
         ssize_t last_found_line;
-        size_t last_accessed_num_line;
+        ssize_t last_accessed_num_line;
     } search;
 
 } WDiff;
