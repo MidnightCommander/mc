@@ -7,7 +7,6 @@
 #define MC_KEY_H
 
 #include "lib/global.h"   /* <glib.h> */
-#include "src/dialog.h"   /* cb_ret_t */
 
 #include "tty.h"  /* KEY_F macro */
 
@@ -17,10 +16,6 @@ void init_key (void);
 void init_key_input_fd (void);
 void done_key (void);
 
-/* Keys management */
-typedef void (*move_fn) (void *data, int param);
-cb_ret_t check_movement_keys (int key, int page_size, void *data,
-                              move_fn backfn, move_fn forfn, move_fn topfn, move_fn bottomfn);
 long lookup_key (const char *name, char **label);
 
 typedef struct {
