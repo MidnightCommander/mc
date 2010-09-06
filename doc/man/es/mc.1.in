@@ -5,7 +5,7 @@
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "Octubre de 2009" "MC Versión 4.7.0\-pre3" "GNU Midnight Commander"
+.TH MC 1 "@DATE_OF_MAN_PAGE@" "MC Versión @DISTR_VERSION@" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.
@@ -19,7 +19,7 @@ mc \- Entorno visual para sistemas tipo Unix.
 un navegador de directorios/gestor de archivos para
 sistemas operativos tipo Unix.
 .\"NODE "OPTIONS"
-.\".\"DONT_SPLIT"
+.\"DONT_SPLIT"
 .SH "OPCIONES"
 .TP
 .I \-a, \-\-stickchars
@@ -3633,8 +3633,8 @@ También se pueden usar
 Por ejemplo:
 
 .nf
-    ctrl-alt-right=\\e[[1;6C
-    ctrl-alt-left=\\e[[1;6D
+    ctrl\-alt\-right=\\e[[1;6C
+    ctrl\-alt\-left=\\e[[1;6D
 .fi
 
 .PP

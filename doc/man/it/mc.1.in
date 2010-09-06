@@ -20,7 +20,7 @@
 .\" Prego mantenere la linea di traduzione generale (per quanto possibile).
 .\"
 .\"TOPICS "Indice degli argomenti:"
-.TH MC 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
+.TH MC 1 "@DATE_OF_MAN_PAGE@" "MC Version @DISTR_VERSION@" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOME"
 mc \- interfaccia visuale per sistemi tipo Unix.
@@ -32,7 +32,7 @@ mc \- interfaccia visuale per sistemi tipo Unix.
 .SH "DESCRIZIONE"
 Il Midnight Commander è un file manager per sistemi operativi di tipo Unix.  
 .\"NODE "OPTIONS"
-.\".\"DONT_SPLIT"
+.\"DONT_SPLIT"
 .SH "OPZIONI"
 .TP
 .I "\-a"

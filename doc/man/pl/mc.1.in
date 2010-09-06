@@ -1,5 +1,5 @@
 .\"Przetłumaczone przez by Macieja Wojciechowskiego    wojciech@staszic.waw.pl
-.TH MC 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
+.TH MC 1 "@DATE_OF_MAN_PAGE@" "MC Version @DISTR_VERSION@" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH NAZWA
 mc \- wizualny interpetator poleceń dla systemów Unixopodobnych
@@ -12,7 +12,7 @@ mc \- wizualny interpetator poleceń dla systemów Unixopodobnych
 Midnight Commander jest przeszukiwarką katalogów/menedżerem plików dla systemów
 Unixopodobnych
 .\"NODE "OPTIONS"
-.\".\"DONT_SPLIT"
+.\"DONT_SPLIT"
 .SH OPCJE
 .TP
 .I \-a
