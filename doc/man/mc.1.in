@@ -12,7 +12,7 @@ mc \- Visual shell for Unix\-like systems.
 GNU Midnight Commander is a directory browser/file manager for
 Unix\-like operating systems.
 .\"NODE "OPTIONS"
-.\".\"DONT_SPLIT"
+.\"DONT_SPLIT"
 .SH "OPTIONS"
 .TP
 .I \-a, \-\-stickchars

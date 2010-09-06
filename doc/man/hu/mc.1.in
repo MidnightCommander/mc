@@ -11,7 +11,7 @@ mc \- Fájlkezelő Unix típusú rendszerekhez
 .SH "LEÍRÁS"
 A Midnight Commander Unix típusú operációs rendszerekhez készített
 könyvtár böngésző és filekezelő eszköz
-.\".\"DONT_SPLIT"
+.\"DONT_SPLIT"
 .\"NODE "OPTIONS"
 .SH "OPCIÓK"
 .I "\-a"
