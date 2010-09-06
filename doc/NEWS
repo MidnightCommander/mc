@@ -1,3 +1,19 @@
+Version 4.7.0.9
+
+- Misc
+
+    * Code cleanup (#2316)
+    * Translation updates
+    * Added Galician translation
+
+- Fixes
+
+    * Potential division by zero in Info panel (#2337)
+    * Regexp replace only transforms the first occurence correctly (#2320)
+    * MCEdit version number not centered in about dialog (#2311)
+    * Meta-fixes for manual pages (#2237, #2253)
+
+
 Version 4.7.0.8
 
 - VFS
