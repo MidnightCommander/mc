@@ -19,7 +19,7 @@ mc \- Entorno visual para sistemas tipo Unix.
 un navegador de directorios/gestor de archivos para
 sistemas operativos tipo Unix.
 .\"NODE "OPTIONS"
-.\".\"DONT_SPLIT"
+.\"DONT_SPLIT"
 .SH "OPCIONES"
 .TP
 .I \-a, \-\-stickchars
