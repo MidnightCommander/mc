@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -1523,6 +1523,25 @@ msgstr " Par "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Par "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Kopēšanas tiesības (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Lietotājam draudzīgs teksta redaktors, uzrakstīts\n"
+"           priekš Pusnakts Komandiera.\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " Nevar atvērt programkanālu lasīšanai: "
@@ -1549,28 +1568,6 @@ msgstr " Nevar skatīt: nav regulārs fails "
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " Fails ir par lielu: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Kopēšanas tiesības (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Lietotājam draudzīgs teksta redaktors, uzrakstīts\n"
-"           priekš Pusnakts Komandiera.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Par "
 
 msgid "Macro recursion is too deep"
 msgstr ""

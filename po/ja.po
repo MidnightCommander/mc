@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -1516,6 +1516,25 @@ msgstr " Cooledit について "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Cooledit について "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"             Midnight Commander 用の\n"
+"            ユーザに親切なエディタです\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr "読みだし用のパイプのオープンに失敗しました: "
@@ -1542,28 +1561,6 @@ msgstr " 表示できません: 通常ファイルではありません "
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr "ファイルが大きすぎます: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"             Midnight Commander 用の\n"
-"            ユーザに親切なエディタです\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Cooledit について "
 
 msgid "Macro recursion is too deep"
 msgstr ""

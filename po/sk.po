@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2009-12-03 12:42+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -1486,6 +1486,25 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Znovu načítať aktuálnu syntax >"
 
+#, fuzzy
+msgid "About"
+msgstr " O aplikácii "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"  Používateľsky prívetivý textový editor napísaný\n"
+"           pre Midnight Commander.\n"
+
 #, c-format
 msgid " Cannot open %s for reading "
 msgstr " Nepodarilo sa otvoriť %s na čítanie "
@@ -1512,28 +1531,6 @@ msgstr " %s nie je normálny súbor "
 #, c-format
 msgid " File %s is too large "
 msgstr " Súbor %s je príliš veľký"
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"  Používateľsky prívetivý textový editor napísaný\n"
-"           pre Midnight Commander.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " O aplikácii "
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzia makra je príliš hlboká"

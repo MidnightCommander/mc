@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -1464,6 +1464,25 @@ msgstr " Tietoja "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Tietoja "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                 Cooledit  v2.1\n"
+"\n"
+"   Copyright (C) 1996 Free Software Foundation\n"
+"\n"
+"       Käyttäjäystävällinen tekstinmuokkain\n"
+"           Midnight Commanderia varten.\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " Tiedoston avaaminen lukua varten epäonnistui: "
@@ -1490,28 +1509,6 @@ msgstr "Luo uusi hakemisto"
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " Tiedosto on liian suuri: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-"   Copyright (C) 1996 Free Software Foundation\n"
-"\n"
-"       Käyttäjäystävällinen tekstinmuokkain\n"
-"           Midnight Commanderia varten.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Tietoja "
 
 msgid "Macro recursion is too deep"
 msgstr ""

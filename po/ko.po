@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -1506,6 +1506,25 @@ msgstr " 이 프로그램은 "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " 이 프로그램은 "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"         Midnight Commander를 위해 개발된\n"
+"          사용자와 친근한 텍스트 편집기.\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " 읽을 파이프 열기 실패: "
@@ -1532,28 +1551,6 @@ msgstr " 일반파일이 아니라 볼 수 없습니다 "
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " 파일 크기가 너무 큼: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"         Midnight Commander를 위해 개발된\n"
-"          사용자와 친근한 텍스트 편집기.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " 이 프로그램은 "
 
 msgid "Macro recursion is too deep"
 msgstr "매크로가 너무 많이 반복되어 불려졌습니다"

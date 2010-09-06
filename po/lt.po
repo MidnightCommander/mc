@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -1510,6 +1510,25 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Įkelti esamą sintaksę iš naujo >"
 
+#, fuzzy
+msgid "About"
+msgstr " Apie "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Naudotojui draugiškas redaktorius, \n"
+"         parašytas „Midnight Commander“.\n"
+
 #, c-format
 msgid " Cannot open %s for reading "
 msgstr " Nepavyko atverti %s skaitymui "
@@ -1536,28 +1555,6 @@ msgstr " %s nėra įprastinis failas "
 #, c-format
 msgid " File %s is too large "
 msgstr " Failas %s yra per didelis "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Naudotojui draugiškas redaktorius, \n"
-"         parašytas „Midnight Commander“.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Apie "
 
 msgid "Macro recursion is too deep"
 msgstr "Makrokomandų rekursija yra per gili"

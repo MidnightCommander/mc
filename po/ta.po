@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -1418,6 +1418,25 @@ msgstr " பற்றி "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " பற்றி "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+"நகல் காப்பு (C) 1996 இலவசப் மென்பொருள் நிறுவனம்\n"
+"\n"
+"    Midnight Commanderக்காக எழுதப்பட்ட ஓர்\n"
+"        பயனர் தோழமையான உரை பதிப்பான்.\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr "கோப்பை வாசிப்பதட்கு திறக்க முடியவில்லை: "
@@ -1444,28 +1463,6 @@ msgstr "புதிய முனையம் ஒனறைப் படைக்
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " இந்த கோப்பு மிகப் பெரியது: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-"நகல் காப்பு (C) 1996 இலவசப் மென்பொருள் நிறுவனம்\n"
-"\n"
-"    Midnight Commanderக்காக எழுதப்பட்ட ஓர்\n"
-"        பயனர் தோழமையான உரை பதிப்பான்.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " பற்றி "
 
 msgid "Macro recursion is too deep"
 msgstr ""

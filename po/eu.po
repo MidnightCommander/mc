@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -1526,6 +1526,25 @@ msgstr "Honi buruz "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr "Honi buruz "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 Free Software Foundation\n"
+"\n"
+"       Testu-editore lagungarri bat idatzi da\n"
+"           Midnight Commander-entzat.\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " Huts egin da kanalizazioa irakurtzeko irekitzen saiatzean: "
@@ -1552,28 +1571,6 @@ msgstr " Ezin da ikusi: ez da fitxategi erregularra "
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " Fitxategia handiegia da: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 Free Software Foundation\n"
-"\n"
-"       Testu-editore lagungarri bat idatzi da\n"
-"           Midnight Commander-entzat.\n"
-
-#, fuzzy
-msgid "About"
-msgstr "Honi buruz "
 
 msgid "Macro recursion is too deep"
 msgstr ""

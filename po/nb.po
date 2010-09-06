@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -1516,6 +1516,25 @@ msgstr " Om "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Om "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       En brukervennlig teksteditor skrevet\n"
+"           for Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " Feil under åpning av rør for lesing: "
@@ -1542,28 +1561,6 @@ msgstr " Kan ikke vise: ikke en vanlig fil "
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " Filen er for stor: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       En brukervennlig teksteditor skrevet\n"
-"           for Midnight Commander.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Om "
 
 msgid "Macro recursion is too deep"
 msgstr "For dyp rekursjon i makro"

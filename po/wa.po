@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
@@ -1479,6 +1479,25 @@ msgstr " Å dfait "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Å dfait "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"               Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 li Free Software Foundation\n"
+"\n"
+"       In amiståve aspougneu di tecse sicrit\n"
+"             pol Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po lére: "
@@ -1505,28 +1524,6 @@ msgstr " Dji n' sai håyner ci fitchî ci: ci n' est nén on fitchî normå "
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " Li fitchî est trop grand: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"               Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 li Free Software Foundation\n"
-"\n"
-"       In amiståve aspougneu di tecse sicrit\n"
-"             pol Midnight Commander.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Å dfait "
 
 msgid "Macro recursion is too deep"
 msgstr ""

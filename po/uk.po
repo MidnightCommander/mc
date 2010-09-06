@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -1494,6 +1494,25 @@ msgstr "< Авто >"
 msgid "< Reload Current Syntax >"
 msgstr "< Поновити нагальний синтаксис >"
 
+#, fuzzy
+msgid "About"
+msgstr " Про програму "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Текстовий редактор з дружнім інтерфейсом користувача.\n"
+"               Створено для Midnight Commander.\n"
+
 #, c-format
 msgid " Cannot open %s for reading "
 msgstr " Не вдається відкрити %s для читання "
@@ -1520,28 +1539,6 @@ msgstr " %s не э звичайний файл"
 #, c-format
 msgid " File %s is too large "
 msgstr "файл %s надто великий"
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Текстовий редактор з дружнім інтерфейсом користувача.\n"
-"               Створено для Midnight Commander.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Про програму "
 
 msgid "Macro recursion is too deep"
 msgstr "Занадто глибока рекурсія макросів"

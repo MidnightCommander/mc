@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -1511,6 +1511,25 @@ msgstr "< Tự động >"
 msgid "< Reload Current Syntax >"
 msgstr "< Nạp lại cú pháp hiện thời >"
 
+#, fuzzy
+msgid "About"
+msgstr " Về chương trình "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Trình soạn thảo với giao diện người dùng thân thiện.\n"
+"               Được viết cho Midnight Commander.\n"
+
 #, c-format
 msgid " Cannot open %s for reading "
 msgstr " Không thể mở %s để đọc "
@@ -1537,28 +1556,6 @@ msgstr " %s phải tập tin thông thường "
 #, c-format
 msgid " File %s is too large "
 msgstr " Tập tin %s quá lớn "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Trình soạn thảo với giao diện người dùng thân thiện.\n"
-"               Được viết cho Midnight Commander.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Về chương trình "
 
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"

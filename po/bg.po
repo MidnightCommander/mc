@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -1519,6 +1519,25 @@ msgstr " За "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " За "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Лесен за използване текстов редактор,\n"
+"          написан за Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " Грешка при отваряне на канала за четене: "
@@ -1545,28 +1564,6 @@ msgstr " Не може да се разглежда: не е обикновен 
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " Файлът е прекалено голям: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Лесен за използване текстов редактор,\n"
-"          написан за Midnight Commander.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " За "
 
 msgid "Macro recursion is too deep"
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2010-02-19 15:10+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -1498,6 +1498,25 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Ricarica la sintassi corrente >"
 
+#, fuzzy
+msgid "About"
+msgstr " Informazioni "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+"   Copyright (C) 1996 Free Software Foundation  \n"
+"\n"
+"      Un editor semplice da usare scritto per\n"
+"              il Midnight Commander.\n"
+
 #, c-format
 msgid " Cannot open %s for reading "
 msgstr " Impossibile aprire %s in lettura "
@@ -1524,28 +1543,6 @@ msgstr " %s non è un file regolare "
 #, c-format
 msgid " File %s is too large "
 msgstr " Il file %s è troppo grande "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-"   Copyright (C) 1996 Free Software Foundation  \n"
-"\n"
-"      Un editor semplice da usare scritto per\n"
-"              il Midnight Commander.\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Informazioni "
 
 msgid "Macro recursion is too deep"
 msgstr "La ricorsione macro è troppo profonda"

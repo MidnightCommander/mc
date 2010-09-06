@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-30 19:35+0400\n"
+"POT-Creation-Date: 2010-09-06 21:40+0400\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -1524,6 +1524,25 @@ msgstr " Hakkında "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Hakkında "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"              Cooledit  v3.11.5\n"
+"\n"
+" TelifHakkı (C) 1996 the Free Software Foundation\n"
+"\n"
+"      Kullanıcı dostu bir metin düzenleyici\n"
+"        Midnight Commander için yazıldı\n"
+
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
 msgstr " Veri yolu okumak için açılırken hata oluştu"
@@ -1550,28 +1569,6 @@ msgstr " Gösterilemiyor: normal bir dosya değil "
 #, fuzzy, c-format
 msgid " File %s is too large "
 msgstr " Dosya çok fazla büyük: "
-
-#, fuzzy, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"              Cooledit  v3.11.5\n"
-"\n"
-" TelifHakkı (C) 1996 the Free Software Foundation\n"
-"\n"
-"      Kullanıcı dostu bir metin düzenleyici\n"
-"        Midnight Commander için yazıldı\n"
-
-#, fuzzy
-msgid "About"
-msgstr " Hakkında "
 
 msgid "Macro recursion is too deep"
 msgstr ""
