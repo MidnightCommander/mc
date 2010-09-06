@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -234,6 +234,14 @@ msgstr "Funkcinis klav. 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Funkcinis klav. 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "„End“"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "„End“"
 
 msgid "Plus"
 msgstr ""
@@ -465,12 +473,12 @@ msgstr "Aplanko „%s“ podėlis nebegalioja"
 msgid "Starting linear transfer..."
 msgstr "Pradedamas siuntimas..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu baitų persiųsta)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu baitų persiųsta"
 
 msgid "Getting file"
@@ -544,8 +552,8 @@ msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: vietinis skaitymas nepavyko, siunčiami nuliai"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: siunčiama %s %d (%lu)"
 
 msgid "zeros"
@@ -663,8 +671,8 @@ msgstr "(keičiamas katalogas)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: nepavyko; nėra kur grįžti"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: siunčiamas failas %lu (%lu)"
 
 #, fuzzy
@@ -674,54 +682,6 @@ msgid ""
 msgstr ""
 "~/.netrc yra netinkamo režimo.\n"
 "Pašalinkite slaptažodį arba pataisykite režimą."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Serveris šios versijos nepalaiko "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Serveris paleistas ant neįprastos jungties. \n"
-" Reikia slaptažodžio, bet informacija kitoje pusėje \n"
-" gali būti nesaugi. Tęsti? \n"
-
-msgid "&Yes"
-msgstr "&Taip"
-
-msgid "&No"
-msgstr "&Ne"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " MCFS reikia slaptažodžio "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Neteisingas slaptažodis "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Nepavyko rasti „%s“ adreso "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Nepavyko sukurti lizdo: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Nepavyko prisijungti prie serverio: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Per daug prisijungimų "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1016,7 +976,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1172,7 +1132,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Patvirtinimas "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr " patvirtinti katalogų są&rašo šalinimą "
 
 #, fuzzy
@@ -1407,6 +1367,12 @@ msgstr " Naudotojo vardas "
 msgid "Files tagged, want to cd?"
 msgstr "Failai pažymėti, norite įvykdyti „cd“?"
 
+msgid "&Yes"
+msgstr "&Taip"
+
+msgid "&No"
+msgstr "&Ne"
+
 msgid "Cannot change directory"
 msgstr " Nepavyko pakeisti aplanko "
 
@@ -1565,10 +1531,6 @@ msgstr " Nepavyko įeiti į %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Įveskite adresą (F1 - pagalba): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Ryšys "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1785,6 +1747,25 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Įkelti esamą sintaksę iš naujo >"
 
+#, fuzzy
+msgid "About"
+msgstr " Apie "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Naudotojui draugiškas redaktorius, \n"
+"         parašytas „Midnight Commander“.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Nepavyko atverti %s skaitymui "
@@ -1815,27 +1796,6 @@ msgstr " %s nėra įprastinis failas "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Failas %s yra per didelis "
-
-#, fuzzy
-msgid "About"
-msgstr " Apie "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Naudotojui draugiškas redaktorius, \n"
-"         parašytas „Midnight Commander“.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Makrokomandų rekursija yra per gili"
@@ -2289,6 +2249,10 @@ msgstr "Keis&ti žymėjimą       F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "Eiti į porinį skliaustelį M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr " Parinkite sintaksės ryškinimą "
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3520,9 +3484,6 @@ msgstr "&Filtras..."
 msgid "&Encoding..."
 msgstr "Rikiuo&ti...             M-t"
 
-msgid "&Network link..."
-msgstr "Ti&nklo ryšys..."
-
 msgid "FT&P link..."
 msgstr "FT&P ryšys..."
 
@@ -4414,6 +4375,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Foninis procesas:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Serveris šios versijos nepalaiko "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Serveris paleistas ant neįprastos jungties. \n"
+#~ " Reikia slaptažodžio, bet informacija kitoje pusėje \n"
+#~ " gali būti nesaugi. Tęsti? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " MCFS reikia slaptažodžio "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Neteisingas slaptažodis "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Nepavyko rasti „%s“ adreso "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Nepavyko sukurti lizdo: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Nepavyko prisijungti prie serverio: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Per daug prisijungimų "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Ryšys "
+
+#~ msgid "&Network link..."
+#~ msgstr "Ti&nklo ryšys..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

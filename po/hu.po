@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-08-21 14:39+0200\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: SZABO Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -234,6 +234,14 @@ msgstr "Funkcióbill. F23"
 
 msgid "Function key 24"
 msgstr "Funkcióbill. F24"
+
+#, fuzzy
+msgid "A1 key"
+msgstr " \"End\""
+
+#, fuzzy
+msgid "C1 key"
+msgstr " \"End\""
 
 msgid "Plus"
 msgstr "Plusz"
@@ -1081,7 +1089,8 @@ msgstr "Rákérdezés"
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|&Történet törlés"
 
-msgid "Confirmation|&Directory hotlist delete"
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Confirmation|Könyvtár-&gyorslista törlés"
 
 msgid "Confirmation|E&xit"
@@ -1659,6 +1668,24 @@ msgstr "< Automatikus >"
 msgid "< Reload Current Syntax >"
 msgstr "< Aktuális szintaktika újratöltése >"
 
+msgid "About"
+msgstr "Névjegy"
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"              MCEdit %s\n"
+"\n"
+" Copyright (C) 1996-2010 the Free Software Foundation \n"
+"\n"
+"                a Midnight Commander\n"
+"        könnyen kezelhető szövegszerkesztője"
+
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr "A(z) \"%s\" fájl nem megnyitható olvasásra"
@@ -1689,27 +1716,6 @@ msgstr "\"%s\": speciális fájl"
 #, c-format
 msgid "File \"%s\" is too large"
 msgstr "A(z) \"%s\" fájl túl nagy"
-
-#, c-format
-msgid ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"\n"
-"              MCEdit %s\n"
-"\n"
-" Copyright (C) 1996-2010 the Free Software Foundation \n"
-"\n"
-"                a Midnight Commander\n"
-"        könnyen kezelhető szövegszerkesztője"
-
-msgid "About"
-msgstr "Névjegy"
 
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"

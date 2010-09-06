@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -233,6 +233,14 @@ msgstr "Функциональ товч 2 "
 #, fuzzy
 msgid "Function key 24"
 msgstr "Функциональ товч 2 "
+
+#, fuzzy
+msgid "A1 key"
+msgstr " End товч      "
+
+#, fuzzy
+msgid "C1 key"
+msgstr " End товч      "
 
 msgid "Plus"
 msgstr ""
@@ -464,12 +472,12 @@ msgstr " %s ийн кэш лавлах хугацаа дууссан байна"
 msgid "Starting linear transfer..."
 msgstr "Шугман дамжуулалт эхлэж байна..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байт дамжуулагдлаа)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu байт дамжуулагдлаа"
 
 msgid "Getting file"
@@ -543,8 +551,8 @@ msgstr "fish: %s сэргээх: командыг илгээж байна..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: локал уншилт бүтсэнгүй, тэгийг илгээж байна"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: сэргээж байна %s %d (%lu)"
 
 msgid "zeros"
@@ -664,8 +672,8 @@ msgstr "(эхлэл chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: алдаа; ослын горимд хаашаа ч шилжих боломжгүй"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: файлыг сэргээж байна %lu (%lu)"
 
 #, fuzzy
@@ -675,54 +683,6 @@ msgid ""
 msgstr ""
 "~/.netrc файл нь зөв бус горимд байна.\n"
 "Нууц үгээ устга эсвэл зөв горимд оруулна уу."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Сервер энэ хувилбарт ажиллах боломжгүй "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Алсын сервер системном портд ажиллахгүй байна. \n"
-" танд нэвтрэх нууц үг хэрэгтэй, \n"
-" үргэлжлүүлэх үү?\n"
-
-msgid "&Yes"
-msgstr "&Тийм"
-
-msgid "&No"
-msgstr "&Yгvй"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " Нууц үг шаардлагатай байна MCFS "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Буруу нууц үг "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Машин руу шилжиж чадсангүй: %s"
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Сокет үүсгэж чадсангүй: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr "Сервер рүү холбогдож чадсангүй %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Маш олон холболтууд "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1018,7 +978,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1172,7 +1132,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Баталгаажуулалт "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "&Хавтасны лавлах  C-\\"
 
 #, fuzzy
@@ -1408,6 +1368,12 @@ msgstr " Хэрэглэгчийн нэр "
 msgid "Files tagged, want to cd?"
 msgstr "Файлууд тэмдэглэгдсэн байна, шилжих үү?"
 
+msgid "&Yes"
+msgstr "&Тийм"
+
+msgid "&No"
+msgstr "&Yгvй"
+
 msgid "Cannot change directory"
 msgstr "Хавтас руу шилжиж чадсангүй"
 
@@ -1566,10 +1532,6 @@ msgstr " %s руу шилжиж чадсангүй"
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Машины нэрээ оруул (дэлгэрэнгүйгээр үзвэл F1): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Алсын машин руу холбогдох "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1784,6 +1746,25 @@ msgstr " Бидний тухай "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Бидний тухай "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Хэрэглэгчидэд тааламжтай тект засварлагчыг.\n"
+"               бүтээсэн Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Урсгалыг уншихаар нээж чадсангүй: "
@@ -1814,27 +1795,6 @@ msgstr " Харж чадсангүй: хэвийн бус файл "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Маш том файл: "
-
-#, fuzzy
-msgid "About"
-msgstr " Бидний тухай "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Хэрэглэгчидэд тааламжтай тект засварлагчыг.\n"
-"               бүтээсэн Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
@@ -2294,6 +2254,10 @@ msgstr "Блокыг &тэмдэглэх          F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "Хос &хаалтууд руу очих    M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "&өгүүлбэрзүйг өнгөөр тодотгох"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3517,9 +3481,6 @@ msgstr "&Шүүлт..."
 msgid "&Encoding..."
 msgstr "&Эрэмбэлэлт...              M-t"
 
-msgid "&Network link..."
-msgstr "&Сүлжээний холбоос..."
-
 msgid "FT&P link..."
 msgstr "&FTP-холбоос..."
 
@@ -4391,6 +4352,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Арын процесс:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Сервер энэ хувилбарт ажиллах боломжгүй "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Алсын сервер системном портд ажиллахгүй байна. \n"
+#~ " танд нэвтрэх нууц үг хэрэгтэй, \n"
+#~ " үргэлжлүүлэх үү?\n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " Нууц үг шаардлагатай байна MCFS "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Буруу нууц үг "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Машин руу шилжиж чадсангүй: %s"
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Сокет үүсгэж чадсангүй: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "Сервер рүү холбогдож чадсангүй %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Маш олон холболтууд "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Алсын машин руу холбогдох "
+
+#~ msgid "&Network link..."
+#~ msgstr "&Сүлжээний холбоос..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

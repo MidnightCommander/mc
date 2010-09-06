@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -230,6 +230,14 @@ msgstr "2. funtzio-tekla "
 #, fuzzy
 msgid "Function key 24"
 msgstr "2. funtzio-tekla "
+
+#, fuzzy
+msgid "A1 key"
+msgstr "Bukaera tekla"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Bukaera tekla"
 
 msgid "Plus"
 msgstr ""
@@ -465,12 +473,12 @@ msgstr "%s(r)en dir cache-a iraungi egin da"
 msgid "Starting linear transfer..."
 msgstr "Transferentzia lineala hasten..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu byte transferitu dira)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu byte transferitu dira"
 
 msgid "Getting file"
@@ -544,8 +552,8 @@ msgstr "arraina: gorde %s: komandoa bidaltzen..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "arraina: Irakurketa lokalak huts egin du, zeroak bidaltzen"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "arraina: %s %d gordetzen (%lu)"
 
 msgid "zeros"
@@ -666,7 +674,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: huts egin du; ez dauka nora itzuli"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: %d fitxategia gordetzen (%lu)"
 
 #, fuzzy
@@ -676,54 +684,6 @@ msgid ""
 msgstr ""
 "~/.netrc fitxategiak ez du modu zuzena.\n"
 "Kendu pasahitza edo zuzendu modua."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Zerbitzariak ez du bertsio hau onartzen "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Urruneko zerbitzaria ez da ari sistemako atakan exekutatzen \n"
-" saioa hasteko pasahitza behar duzu, baina informazioa \n"
-" ez da babesturik egongo bestaldean.  Jarraitu nahi duzu? \n"
-
-msgid "&Yes"
-msgstr "&Bai"
-
-msgid "&No"
-msgstr "E&z"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " MCFS Pasahitza behar da "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Baliogabeko pasahitza "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Ezin da ostalari-izena lokalizatu: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Ezin da socket-a sortu: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Ezin da zerbitzariarekin konektatu: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Konexio gehiegi daude irekita "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1020,7 +980,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1174,7 +1134,7 @@ msgid "Confirmation|&History cleanup"
 msgstr "Berrespena "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "&gogokoen direktorioa                C-\\"
 
 #, fuzzy
@@ -1413,6 +1373,12 @@ msgstr "Erabiltzaile-izena "
 msgid "Files tagged, want to cd?"
 msgstr "Fitxategi etiketatuak, direktorioz aldatu nahi?"
 
+msgid "&Yes"
+msgstr "&Bai"
+
+msgid "&No"
+msgstr "E&z"
+
 msgid "Cannot change directory"
 msgstr "Ezin izan da direktorioz aldatu"
 
@@ -1573,10 +1539,6 @@ msgstr "Ezin da %s direktoriora aldatu "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr "Sartu ordenagailuaren izena (F1 xehetasunetarako): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr "Estekatu urruneko ordenagailuari "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1792,6 +1754,25 @@ msgstr "Honi buruz "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr "Honi buruz "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 Free Software Foundation\n"
+"\n"
+"       Testu-editore lagungarri bat idatzi da\n"
+"           Midnight Commander-entzat.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Huts egin da kanalizazioa irakurtzeko irekitzen saiatzean: "
@@ -1822,27 +1803,6 @@ msgstr " Ezin da ikusi: ez da fitxategi erregularra "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Fitxategia handiegia da: "
-
-#, fuzzy
-msgid "About"
-msgstr "Honi buruz "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 Free Software Foundation\n"
-"\n"
-"       Testu-editore lagungarri bat idatzi da\n"
-"           Midnight Commander-entzat.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2302,6 +2262,10 @@ msgstr "&Txandakatu marka  F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "joan dagokion &kortxetera M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "sinta&xia nabarmentzen"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3526,9 +3490,6 @@ msgstr "I&ragazkia..."
 msgid "&Encoding..."
 msgstr "&Ordenatu...                M-t"
 
-msgid "&Network link..."
-msgstr "&Sareko esteka..."
-
 msgid "FT&P link..."
 msgstr "FT&P esteka..."
 
@@ -4405,6 +4366,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Atzeko planoko prozesua:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Zerbitzariak ez du bertsio hau onartzen "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Urruneko zerbitzaria ez da ari sistemako atakan exekutatzen \n"
+#~ " saioa hasteko pasahitza behar duzu, baina informazioa \n"
+#~ " ez da babesturik egongo bestaldean.  Jarraitu nahi duzu? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " MCFS Pasahitza behar da "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Baliogabeko pasahitza "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Ezin da ostalari-izena lokalizatu: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Ezin da socket-a sortu: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Ezin da zerbitzariarekin konektatu: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Konexio gehiegi daude irekita "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr "Estekatu urruneko ordenagailuari "
+
+#~ msgid "&Network link..."
+#~ msgstr "&Sareko esteka..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

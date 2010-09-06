@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -226,6 +226,14 @@ msgstr "F2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "F2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "End"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "End"
 
 msgid "Plus"
 msgstr "Плюс"
@@ -451,12 +459,12 @@ msgstr "Кеша за %s остаря"
 msgid "Starting linear transfer..."
 msgstr "Започвам линеен трансфер..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байта предадени)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu байта предадени"
 
 msgid "Getting file"
@@ -530,8 +538,8 @@ msgstr "fish: запис на %s: изпращам командата..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Локалното четене пропадна, изпращам нули"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: записвам %s %d (%lu)"
 
 msgid "zeros"
@@ -651,8 +659,8 @@ msgstr "(първо cd)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: неуспех; няма къде да се върна"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: записвам файла %lu (%lu)"
 
 #, fuzzy
@@ -662,54 +670,6 @@ msgid ""
 msgstr ""
 "Файлът ~/.netrc няма верен режим.\n"
 "Махнете паролата или поправете режима."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Сървърът не поддържа тази версия "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Далечният сървър не върви на системен порт. \n"
-" Трябва Ви парола, за да се свържете, но информацията може \n"
-" да не е в безопасност от другата страна. Продължавате ли? \n"
-
-msgid "&Yes"
-msgstr "Да"
-
-msgid "&No"
-msgstr "Не"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " Необходима е MCFS парола "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Невалидна парола "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Не мога да открия име на машината: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Не може да се създаде сокет: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Не мога да се свържа със сървъра: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Прекалено много отворени връзки "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1006,7 +966,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1160,7 +1120,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Потвърждение "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Горещи директории       C-\\"
 
 #, fuzzy
@@ -1397,6 +1357,12 @@ msgstr " Име на потребител "
 msgid "Files tagged, want to cd?"
 msgstr "Има маркирани файлове,"
 
+msgid "&Yes"
+msgstr "Да"
+
+msgid "&No"
+msgstr "Не"
+
 msgid "Cannot change directory"
 msgstr "Не може да се смени директорията"
 
@@ -1556,10 +1522,6 @@ msgstr " Не може да се влезе в директория %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Въведете име на машина (F1 за подробности): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Връзка към отдалечена машина "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1775,6 +1737,25 @@ msgstr " За "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " За "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Лесен за използване текстов редактор,\n"
+"          написан за Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Грешка при отваряне на канала за четене: "
@@ -1805,27 +1786,6 @@ msgstr " Не може да се разглежда: не е обикновен 
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Файлът е прекалено голям: "
-
-#, fuzzy
-msgid "About"
-msgstr " За "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Лесен за използване текстов редактор,\n"
-"          написан за Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2285,6 +2245,10 @@ msgstr "Маркирай            F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "При съответстващата скоба  M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Осветяване на синтаксиса"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3507,9 +3471,6 @@ msgstr "Филтър..."
 msgid "&Encoding..."
 msgstr "Сортирай...                M-t"
 
-msgid "&Network link..."
-msgstr "Мрежова връзка..."
-
 msgid "FT&P link..."
 msgstr "FTP връзка..."
 
@@ -4383,6 +4344,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Фонов процес:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Сървърът не поддържа тази версия "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Далечният сървър не върви на системен порт. \n"
+#~ " Трябва Ви парола, за да се свържете, но информацията може \n"
+#~ " да не е в безопасност от другата страна. Продължавате ли? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " Необходима е MCFS парола "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Невалидна парола "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Не мога да открия име на машината: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Не може да се създаде сокет: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Не мога да се свържа със сървъра: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Прекалено много отворени връзки "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Връзка към отдалечена машина "
+
+#~ msgid "&Network link..."
+#~ msgstr "Мрежова връзка..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

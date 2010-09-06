@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2010-03-09\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -237,6 +237,14 @@ msgstr "Functietoets 23"
 msgid "Function key 24"
 msgstr "Functietoets 24"
 
+#, fuzzy
+msgid "A1 key"
+msgstr "End"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "End"
+
 msgid "Plus"
 msgstr "Plus"
 
@@ -456,12 +464,12 @@ msgstr "Dir-cache verlopen voor %s"
 msgid "Starting linear transfer..."
 msgstr "Starten van lineaire overdracht"
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes getransfereerd)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes getransfereerd"
 
 msgid "Getting file"
@@ -535,8 +543,8 @@ msgstr "fish: bewaar %s: opdracht verzenden..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fisch: Lokale leesopdracht mislukt, zend nullen"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: opslaan %s %d (%lu)"
 
 msgid "zeros"
@@ -653,8 +661,8 @@ msgstr "(eerst chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: mislukt; geen terugvalmogelijkheid "
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: opslaan bestand %lu (%lu)"
 
 #, fuzzy
@@ -664,54 +672,6 @@ msgid ""
 msgstr ""
 "~/.netrc heeft een ongeldige bestandsmodus.\n"
 "Verwijder het wachtwoord, of corrigeer de modus."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " De server ondersteunt deze versie niet "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" De remote server luistert niet op een systeempoort \n"
-" u heeft een wachtwoord nodig om in te loggen, maar die informatie \n"
-" onveilig kunnen zijn op de remote server. Doorgaan? \n"
-
-msgid "&Yes"
-msgstr "&Ja"
-
-msgid "&No"
-msgstr "&Nee"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " MCFS wachtwoord vereist "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Ongeldig wachtwoord "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Kan machinenaam niet vinden: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Kan socket niet creëren: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Kan niet verbinden met server: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Teveel open verbindingen "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1005,7 +965,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1157,7 +1117,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Bevestiging "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr " Bevestig verwijderen mappen &Favolijst "
 
 #, fuzzy
@@ -1392,6 +1352,12 @@ msgstr " Gebruikersnaam "
 msgid "Files tagged, want to cd?"
 msgstr "Bestanden gemarkeerd, veranderen van map?"
 
+msgid "&Yes"
+msgstr "&Ja"
+
+msgid "&No"
+msgstr "&Nee"
+
 msgid "Cannot change directory"
 msgstr "Veranderen van map mislukt"
 
@@ -1550,10 +1516,6 @@ msgstr " 'chdir' naar %s mislukt "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Geef machinenaam (F1 voor details): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Link naar een andere machine"
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1769,6 +1731,25 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Herlaadt Huidige Syntax >"
 
+#, fuzzy
+msgid "About"
+msgstr " Info "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                  Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"           Een gebruiksvriendelijk editor\n"
+"            voor de Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Openen van %s voor lezen mislukt "
@@ -1799,27 +1780,6 @@ msgstr " %s is geen normaal bestand "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Bestand %s is te groot "
-
-#, fuzzy
-msgid "About"
-msgstr " Info "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                  Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"           Een gebruiksvriendelijk editor\n"
-"            voor de Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
@@ -2254,6 +2214,10 @@ msgstr "&Inv aan/uit"
 
 msgid "Go to matching &bracket"
 msgstr "Ga naar corresponderend &Haakje"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr " Kies syntax oplichting "
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3452,9 +3416,6 @@ msgstr "&Filter...              "
 msgid "&Encoding..."
 msgstr "&Encodering"
 
-msgid "&Network link..."
-msgstr "&Netwerkverbinding..."
-
 msgid "FT&P link..."
 msgstr "FT&P-Verbinding...      "
 
@@ -4306,6 +4267,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Achtergrondproces:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " De server ondersteunt deze versie niet "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " De remote server luistert niet op een systeempoort \n"
+#~ " u heeft een wachtwoord nodig om in te loggen, maar die informatie \n"
+#~ " onveilig kunnen zijn op de remote server. Doorgaan? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " MCFS wachtwoord vereist "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Ongeldig wachtwoord "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Kan machinenaam niet vinden: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Kan socket niet creëren: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Kan niet verbinden met server: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Teveel open verbindingen "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Link naar een andere machine"
+
+#~ msgid "&Network link..."
+#~ msgstr "&Netwerkverbinding..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

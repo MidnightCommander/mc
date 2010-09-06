@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -232,6 +232,14 @@ msgstr "Πλήκτρο λειτουργίας 23"
 msgid "Function key 24"
 msgstr "Πλήκτρο λειτουργίας 24"
 
+#, fuzzy
+msgid "A1 key"
+msgstr "Πλήκτρο end"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Πλήκτρο end"
+
 msgid "Plus"
 msgstr "Συν"
 
@@ -445,11 +453,11 @@ msgid "Starting linear transfer..."
 msgstr "ftpfs: ακύρωση μεταφοράς."
 
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr ""
 
 msgid "Getting file"
@@ -528,7 +536,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr "ftpfs: αποθήκευση αρχείου %d (%d)"
 
 msgid "zeros"
@@ -649,7 +657,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: αποθήκευση αρχείου %d (%d)"
 
 #, fuzzy
@@ -659,49 +667,6 @@ msgid ""
 msgstr ""
 "Τα δικαιώματα πρόσβασης του αρχείου ~/.netrc δεν είναι σωστά.\n"
 "Μη χρησιμοποιείτε κωδικό ή διορθώστε τα δικαιώματα."
-
-msgid "MCFS"
-msgstr ""
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Ο εξυπηρέτησ δεν υποστηρίζει την παρούσα έκδοση "
-
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-
-msgid "&Yes"
-msgstr "&Ναι"
-
-msgid "&No"
-msgstr "&Όχι"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " Απαιτείται κωδικός MCFS "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Άκυρος κωδικός "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr "Δημηουργία νέου καταλόγου"
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Υπέρβαση ορίου συνδέσεων "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -981,7 +946,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1102,7 +1067,7 @@ msgstr ""
 msgid "Confirmation|&History cleanup"
 msgstr ""
 
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr ""
 
 msgid "Confirmation|E&xit"
@@ -1333,6 +1298,12 @@ msgstr "Χρήστης"
 msgid "Files tagged, want to cd?"
 msgstr ""
 
+msgid "&Yes"
+msgstr "&Ναι"
+
+msgid "&No"
+msgstr "&Όχι"
+
 msgid "Cannot change directory"
 msgstr ""
 
@@ -1474,9 +1445,6 @@ msgid "Cannot chdir to %s"
 msgstr ""
 
 msgid "Enter machine name (F1 for details):"
-msgstr ""
-
-msgid "Link to a remote machine"
 msgstr ""
 
 msgid "FTP to machine"
@@ -1674,6 +1642,17 @@ msgstr " Τέλος "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Τέλος "
+
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
@@ -1704,20 +1683,6 @@ msgstr "Δημηουργία νέου καταλόγου"
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Αρχείο πολύ μεγάλο: "
-
-#, fuzzy
-msgid "About"
-msgstr " Τέλος "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2148,6 +2113,10 @@ msgstr ""
 
 msgid "Go to matching &bracket"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "τονισμός σύντα&ξης"
 
 msgid "&Find declaration"
 msgstr ""
@@ -3222,9 +3191,6 @@ msgstr ""
 msgid "&Encoding..."
 msgstr "&Νέο                    C-n"
 
-msgid "&Network link..."
-msgstr ""
-
 msgid "FT&P link..."
 msgstr ""
 
@@ -4024,6 +3990,34 @@ msgstr ""
 
 msgid "Background process:"
 msgstr ""
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Ο εξυπηρέτησ δεν υποστηρίζει την παρούσα έκδοση "
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " Απαιτείται κωδικός MCFS "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Άκυρος κωδικός "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr "Δημηουργία νέου καταλόγου"
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Υπέρβαση ορίου συνδέσεων "
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

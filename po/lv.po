@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -229,6 +229,14 @@ msgstr "Funkc. taustiņš 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Funkc. taustiņš 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "End taustiņš"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "End taustiņš"
 
 msgid "Plus"
 msgstr ""
@@ -464,12 +472,12 @@ msgstr "Direktorija kešs priekš %s izbeidzās"
 msgid "Starting linear transfer..."
 msgstr "Sākam lineāro pārraidi..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu baiti pārsūtīti)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu baiti pārsūtīti"
 
 msgid "Getting file"
@@ -545,7 +553,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Lokālā lasīšana kļūdaina, sūtam nulles"
 
 #, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: glabājam %s %d (%d)"
 
 msgid "zeros"
@@ -666,7 +674,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: neizdevās; nav kur atkrist"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: glabājam failu %d (%d)"
 
 #, fuzzy
@@ -676,54 +684,6 @@ msgid ""
 msgstr ""
 "~/.netrc failam nav pareizs režīms.\n"
 "Noņem paroli vai izlabo režīmu."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Serveris neatbalsta šo versiju "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Attālinātais serveris nestrādā ar sistēmas portu, \n"
-" uz kuru jūms būtu jāpiesakās, taču informācija \n"
-" var nebūt droša attālinātajā galā.  Turpināt? \n"
-
-msgid "&Yes"
-msgstr "&Jā"
-
-msgid "&No"
-msgstr "&Nē"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " pieprasīta MCFS Parole "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Nepareiza parole "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Nevar atrast resursdatoru: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Nevar izveidot kontaktu: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Nevar savienoties ar serveri: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Par daudz atvērtu konekciju "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1020,7 +980,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1174,7 +1134,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Apstiprināšana "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "di&Rektoriju karstais saraksts    C-\\"
 
 #, fuzzy
@@ -1412,6 +1372,12 @@ msgstr " Lietotāja vārds "
 msgid "Files tagged, want to cd?"
 msgstr "Faili tagoti, gribat cd?"
 
+msgid "&Yes"
+msgstr "&Jā"
+
+msgid "&No"
+msgstr "&Nē"
+
 msgid "Cannot change directory"
 msgstr "Nevar nomainīt direktoriju"
 
@@ -1570,10 +1536,6 @@ msgstr " nevarēja chdir uz %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Ievadiet datora vārdu (F1 detalizētāk): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Saite uz attālināto mašīnu "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1789,6 +1751,25 @@ msgstr " Par "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Par "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Kopēšanas tiesības (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Lietotājam draudzīgs teksta redaktors, uzrakstīts\n"
+"           priekš Pusnakts Komandiera.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Nevar atvērt programkanālu lasīšanai: "
@@ -1819,27 +1800,6 @@ msgstr " Nevar skatīt: nav regulārs fails "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Fails ir par lielu: "
-
-#, fuzzy
-msgid "About"
-msgstr " Par "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Kopēšanas tiesības (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Lietotājam draudzīgs teksta redaktors, uzrakstīts\n"
-"           priekš Pusnakts Komandiera.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2299,6 +2259,10 @@ msgstr "&Ieslēgt Iezīmēšanau       F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "iet uz atbilstošo ie&Kavu M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "sinta&Kses izgaismošana"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3524,9 +3488,6 @@ msgstr "&Filtrs..."
 msgid "&Encoding..."
 msgstr "kārto&T...                 M-t"
 
-msgid "&Network link..."
-msgstr "&Tīkla saite..."
-
 msgid "FT&P link..."
 msgstr "FT&P saite..."
 
@@ -4403,6 +4364,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Fona process:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Serveris neatbalsta šo versiju "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Attālinātais serveris nestrādā ar sistēmas portu, \n"
+#~ " uz kuru jūms būtu jāpiesakās, taču informācija \n"
+#~ " var nebūt droša attālinātajā galā.  Turpināt? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " pieprasīta MCFS Parole "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Nepareiza parole "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Nevar atrast resursdatoru: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Nevar izveidot kontaktu: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Nevar savienoties ar serveri: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Par daudz atvērtu konekciju "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Saite uz attālināto mašīnu "
+
+#~ msgid "&Network link..."
+#~ msgstr "&Tīkla saite..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

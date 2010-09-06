@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -236,6 +236,14 @@ msgstr "Funktionstast 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Funktionstast 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "End-tast"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "End-tast"
 
 msgid "Plus"
 msgstr ""
@@ -470,12 +478,12 @@ msgstr "Katalog-cache udløbet for %s"
 msgid "Starting linear transfer..."
 msgstr "Begynder lineær overførsel..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu byte overført)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu byte overført"
 
 msgid "Getting file"
@@ -549,8 +557,8 @@ msgstr "fisk: gem %s: sender kommando..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fisk: Lokal læsning fejlede, sender nuller"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fisk: gemmer fil %s %d (%lu)"
 
 msgid "zeros"
@@ -671,7 +679,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: gemmer fil %d (%lu)"
 
 #, fuzzy
@@ -681,54 +689,6 @@ msgid ""
 msgstr ""
 "~/.netrc-filen har ikke korrekt modus.\n"
 "Fjern adgangskode eller korriger modus."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Serveren understøtter ikke denne version "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Den fremmede server kører ikke på en systemport, \n"
-" du skal bruge en adgangskode for at logge ind, men informationen \n"
-" er ikke nødvendigvis sikker på den anden side.  Fortsæt? \n"
-
-msgid "&Yes"
-msgstr "&Ja"
-
-msgid "&No"
-msgstr "&Nej"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " MCFS-adgangskode påkrævet"
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Ugyldig adgangskode "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Kan ikke finde værtsnavn: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Kan ikke oprette sokkel %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr "Kan ikke forbinde til server %s"
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " For mange åbne forbindelser "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1025,7 +985,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1179,7 +1139,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Bekræftelse "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "ma&Ppe hurtigliste    C-\\"
 
 #, fuzzy
@@ -1416,6 +1376,12 @@ msgstr " Brugernavn "
 msgid "Files tagged, want to cd?"
 msgstr "Filer mærket, vil du skifte mappe?"
 
+msgid "&Yes"
+msgstr "&Ja"
+
+msgid "&No"
+msgstr "&Nej"
+
 msgid "Cannot change directory"
 msgstr " Kunne ikke skifte mappe"
 
@@ -1575,10 +1541,6 @@ msgstr " Kunne ikke skifte mappe til %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Indtast maskinenavn (F1 for detaljer): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Lænke til en fremmed maskine "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1794,6 +1756,25 @@ msgstr " Om... "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Om... "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+" Ophavsret (C) 1996 the Free Software Foundation\n"
+"\n"
+"       En brugervenlig teksteditor skrevet\n"
+"             til Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Fejl ved forsøg på åbning af rør for læsning: "
@@ -1824,27 +1805,6 @@ msgstr " Kan ikke vise: ikke en normal fil "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Filen er for stor: "
-
-#, fuzzy
-msgid "About"
-msgstr " Om... "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-" Ophavsret (C) 1996 the Free Software Foundation\n"
-"\n"
-"       En brugervenlig teksteditor skrevet\n"
-"             til Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2303,6 +2263,10 @@ msgstr "Slå &Mærke til/fra F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "gå til passende &Klamme  M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "synta&X farvning"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3526,9 +3490,6 @@ msgstr "&Filter..."
 msgid "&Encoding..."
 msgstr "Sor&tér...               M-t"
 
-msgid "&Network link..."
-msgstr "&Netværkslænke..."
-
 msgid "FT&P link..."
 msgstr "FT&P lænke..."
 
@@ -4402,6 +4363,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Baggrundsproces:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Serveren understøtter ikke denne version "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Den fremmede server kører ikke på en systemport, \n"
+#~ " du skal bruge en adgangskode for at logge ind, men informationen \n"
+#~ " er ikke nødvendigvis sikker på den anden side.  Fortsæt? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " MCFS-adgangskode påkrævet"
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Ugyldig adgangskode "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Kan ikke finde værtsnavn: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Kan ikke oprette sokkel %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "Kan ikke forbinde til server %s"
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " For mange åbne forbindelser "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Lænke til en fremmed maskine "
+
+#~ msgid "&Network link..."
+#~ msgstr "&Netværkslænke..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

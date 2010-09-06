@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -230,6 +230,14 @@ msgstr "Tecla de funció 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Tecla de funció 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "Posició final"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Posició final"
 
 msgid "Plus"
 msgstr ""
@@ -465,12 +473,12 @@ msgstr "El directori de la memòria cau ha caducat per %s"
 msgid "Starting linear transfer..."
 msgstr "S'està iniciant la transferència lineal..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferits)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferits"
 
 msgid "Getting file"
@@ -545,7 +553,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Ha fallat la lectura local, s'està enviant zeros"
 
 #, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: s'està emmagatzemant %s %d (%d)"
 
 msgid "zeros"
@@ -666,7 +674,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ha fallat; enlloc per retornar-hi"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: s'està emmagatzemar el fitxer %d (%d)"
 
 #, fuzzy
@@ -676,54 +684,6 @@ msgid ""
 msgstr ""
 "el fitxer ~/.netrc no té els permisos adequats.\n"
 "Suprimiu la contrasenya o corregiu els permisos."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " El servidor no suporta aquesta versió "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" El servidor remot no s'està executant en un port del sistema. \n"
-" Necessiteu una contrasenya per entrar-hi, encara que la informació \n"
-" podria no ser segura a la banda remota.  Voleu continuar? \n"
-
-msgid "&Yes"
-msgstr "&Sí"
-
-msgid "&No"
-msgstr "&No"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " Cal una contrasenya per a MCFS "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " La contrasenya no és vàlida "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " No es pot trobar el nom de l'ordinador central: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " No es pot crear el sòcol: %s"
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " No es pot connectar amb el servidor: %s"
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Hi ha massa connexions obertes "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1023,7 +983,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1180,7 +1140,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Confirmació "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "directoris fa&Vorits     C-\\"
 
 #, fuzzy
@@ -1417,6 +1377,12 @@ msgstr " Nom d'usuari "
 msgid "Files tagged, want to cd?"
 msgstr "Hi ha fitxers seleccionats. Voleu canviar de directori?"
 
+msgid "&Yes"
+msgstr "&Sí"
+
+msgid "&No"
+msgstr "&No"
+
 msgid "Cannot change directory"
 msgstr "No he pogut canviar de directori"
 
@@ -1575,10 +1541,6 @@ msgstr " No s'ha pogut canviar a %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Introduïu el nom de la màquina (F1 per a detalls): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Enllaça amb una màquina remota "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1794,6 +1756,25 @@ msgstr " Quant a "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Quant a "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 Free Software Foundation\n"
+"\n"
+"        Un editor de text amistós escrit\n"
+"             pel Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " No s'ha pogut obrir un conducte per llegir: "
@@ -1824,27 +1805,6 @@ msgstr " No puc visualitzar-lo perquè no és un fitxer habitual "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " El fitxer és massa gran: "
-
-#, fuzzy
-msgid "About"
-msgstr " Quant a "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 Free Software Foundation\n"
-"\n"
-"        Un editor de text amistós escrit\n"
-"             pel Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2304,6 +2264,10 @@ msgstr "&Canvia inici/fi de marcador    F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "ves al &Claudàtor coincident  M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Ressaltament de la sinta&Xi"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3530,9 +3494,6 @@ msgstr "&Filtra..."
 msgid "&Encoding..."
 msgstr "&Ordena...                 M-t"
 
-msgid "&Network link..."
-msgstr "enllaç per a la &Xarxa..."
-
 msgid "FT&P link..."
 msgstr "enllaç per a F&TP..."
 
@@ -4411,6 +4372,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Procés de fons:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " El servidor no suporta aquesta versió "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " El servidor remot no s'està executant en un port del sistema. \n"
+#~ " Necessiteu una contrasenya per entrar-hi, encara que la informació \n"
+#~ " podria no ser segura a la banda remota.  Voleu continuar? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " Cal una contrasenya per a MCFS "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " La contrasenya no és vàlida "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " No es pot trobar el nom de l'ordinador central: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " No es pot crear el sòcol: %s"
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " No es pot connectar amb el servidor: %s"
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Hi ha massa connexions obertes "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Enllaça amb una màquina remota "
+
+#~ msgid "&Network link..."
+#~ msgstr "enllaç per a la &Xarxa..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

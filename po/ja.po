@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -230,6 +230,14 @@ msgstr "Functionキー 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Functionキー 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "Endキー"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Endキー"
 
 msgid "Plus"
 msgstr ""
@@ -462,12 +470,12 @@ msgstr "'%s' の Dir キャッシュが終了しました"
 msgid "Starting linear transfer..."
 msgstr "リニア転送を開始します..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu バイト転送)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu バイト転送しました"
 
 msgid "Getting file"
@@ -541,8 +549,8 @@ msgstr "fish: store %s: コマンドを送信中..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: 局部読み込みに失敗しました。zeroを送信します"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: %s を保存中 %d (%lu)"
 
 msgid "zeros"
@@ -663,7 +671,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 失敗しました。フォールバックできません"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: ファイルの保存中 %d (%lu)"
 
 #, fuzzy
@@ -673,54 +681,6 @@ msgid ""
 msgstr ""
 "~/.netrcファイルが正しいモードではありません.\n"
 "パスワードを削除するかモードを訂正してください."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " サーバはこのバージョンをサポートしていません "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" リモート・サーバはシステムポートで起動していません.\n"
-" パスワードがログインのため必要です, しかしこの情報は\n"
-" 安全な方法で転送されません.  継続しますか? \n"
-
-msgid "&Yes"
-msgstr "はい(&Y)"
-
-msgid "&No"
-msgstr "いいえ(&N)"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " MCFS パスワードの要求 "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " 間違ったパスワード "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr "hostname の場所を見つけられませんでした: %s"
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr "ソケットを作成できませんでした: %s"
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr "サーバに接続できませんでした: %s"
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " 接続が多すぎます "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1013,7 +973,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1167,7 +1127,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " 確認 "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "ディレクトリホットリスト(&R) C-\\"
 
 #, fuzzy
@@ -1404,6 +1364,12 @@ msgstr " ユーザ名 "
 msgid "Files tagged, want to cd?"
 msgstr "ファイルはタグ付られています。cd しますか?"
 
+msgid "&Yes"
+msgstr "はい(&Y)"
+
+msgid "&No"
+msgstr "いいえ(&N)"
+
 msgid "Cannot change directory"
 msgstr "ディレクトリを変更できません"
 
@@ -1563,10 +1529,6 @@ msgstr " ディレクトリを%sへ変更できません "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " マシン名を入力してください(詳細はF1キー): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " リモート・マシンへのリンク "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1782,6 +1744,25 @@ msgstr " Cooledit について "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Cooledit について "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"             Midnight Commander 用の\n"
+"            ユーザに親切なエディタです\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr "読みだし用のパイプのオープンに失敗しました: "
@@ -1812,27 +1793,6 @@ msgstr " 表示できません: 通常ファイルではありません "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr "ファイルが大きすぎます: "
-
-#, fuzzy
-msgid "About"
-msgstr " Cooledit について "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"             Midnight Commander 用の\n"
-"            ユーザに親切なエディタです\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2292,6 +2252,10 @@ msgstr "マークを切替え(&T)       F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "対の括弧へ移動             M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "文法ハイライト(&S)"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3514,9 +3478,6 @@ msgstr "フィルタ(&F)..."
 msgid "&Encoding..."
 msgstr "並べ替え(&T)               M-t"
 
-msgid "&Network link..."
-msgstr "ネットワークリンク(&N)..."
-
 msgid "FT&P link..."
 msgstr "FTP リンク(&P)..."
 
@@ -4390,6 +4351,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "バックグラウンド処理:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " サーバはこのバージョンをサポートしていません "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " リモート・サーバはシステムポートで起動していません.\n"
+#~ " パスワードがログインのため必要です, しかしこの情報は\n"
+#~ " 安全な方法で転送されません.  継続しますか? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " MCFS パスワードの要求 "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " 間違ったパスワード "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr "hostname の場所を見つけられませんでした: %s"
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr "ソケットを作成できませんでした: %s"
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "サーバに接続できませんでした: %s"
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " 接続が多すぎます "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " リモート・マシンへのリンク "
+
+#~ msgid "&Network link..."
+#~ msgstr "ネットワークリンク(&N)..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

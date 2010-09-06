@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
@@ -237,6 +237,14 @@ msgstr "F2"
 msgid "Function key 24"
 msgstr "F2"
 
+#, fuzzy
+msgid "A1 key"
+msgstr "End"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "End"
+
 msgid "Plus"
 msgstr ""
 
@@ -459,11 +467,11 @@ msgid "Starting linear transfer..."
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr ""
 
 msgid "Getting file"
@@ -536,7 +544,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
 #, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr ""
 
 msgid "zeros"
@@ -657,56 +665,12 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
 #, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr ""
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
-msgstr ""
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Li sierveu n' sopoite nén cisse modêye ci "
-
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-
-msgid "&Yes"
-msgstr "&Oyi"
-
-msgid "&No"
-msgstr "&Neni"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " FTP: Secret dmandé po "
-
-# Mask = umask (modele di cogne di fitchî?)??
-#, fuzzy
-msgid "Invalid password"
-msgstr " Li masse såme n' est nén valåbe "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Dji n' sai trover li lodjeu: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Dji n' sai fé on soket: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr "Dji n' pout m' raloyî å sierveu: %s"
-
-msgid "Too many open connections"
 msgstr ""
 
 #, c-format
@@ -984,7 +948,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1115,7 +1079,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Racertinaedje "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "djîvêye rascoûrti des &Ridants    C-\\"
 
 #, fuzzy
@@ -1357,6 +1321,12 @@ msgstr " No di l' ûzeu "
 msgid "Files tagged, want to cd?"
 msgstr "Essegne metowe so les fitchîs, voloz-ve fé on cd?"
 
+msgid "&Yes"
+msgstr "&Oyi"
+
+msgid "&No"
+msgstr "&Neni"
+
 msgid "Cannot change directory"
 msgstr "Dji n' sai candjî di ridant"
 
@@ -1517,10 +1487,6 @@ msgstr " Dji n' a savu fé on chdir viè %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Intrer li no di l' éndjole (F1 po ndè savu did pus): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Loyén après ene éndjole å lon "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1737,6 +1703,25 @@ msgstr " Å dfait "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Å dfait "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"               Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 li Free Software Foundation\n"
+"\n"
+"       In amiståve aspougneu di tecse sicrit\n"
+"             pol Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po lére: "
@@ -1767,27 +1752,6 @@ msgstr " Dji n' sai håyner ci fitchî ci: ci n' est nén on fitchî normå "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Li fitchî est trop grand: "
-
-#, fuzzy
-msgid "About"
-msgstr " Å dfait "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"               Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 li Free Software Foundation\n"
-"\n"
-"       In amiståve aspougneu di tecse sicrit\n"
-"             pol Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2248,6 +2212,10 @@ msgstr "&Discandjî Marke        F3"
 
 msgid "Go to matching &bracket"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "mete e &valeur l' emantchaedje"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3472,9 +3440,6 @@ msgstr "&Passete..."
 msgid "&Encoding..."
 msgstr "re&Lire...                          M-t"
 
-msgid "&Network link..."
-msgstr "&Loyén Rantoele???"
-
 msgid "FT&P link..."
 msgstr "Loyén &FTP..."
 
@@ -4338,6 +4303,42 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Porcessus di fond:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Li sierveu n' sopoite nén cisse modêye ci "
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " FTP: Secret dmandé po "
+
+# Mask = umask (modele di cogne di fitchî?)??
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Li masse såme n' est nén valåbe "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Dji n' sai trover li lodjeu: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Dji n' sai fé on soket: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "Dji n' pout m' raloyî å sierveu: %s"
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Loyén après ene éndjole å lon "
+
+#~ msgid "&Network link..."
+#~ msgstr "&Loyén Rantoele???"
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

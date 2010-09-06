@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2010-07-23 15:04+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -233,6 +233,14 @@ msgstr "F23"
 msgid "Function key 24"
 msgstr "F24"
 
+#, fuzzy
+msgid "A1 key"
+msgstr "末尾键"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "末尾键"
+
 msgid "Plus"
 msgstr "加"
 
@@ -445,12 +453,12 @@ msgstr "%s 的目录缓存已过期"
 msgid "Starting linear transfer..."
 msgstr "正在开始线性传输..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s：%s：%s %3d%% (传输了 %lu 字节)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s：%s：%s 传输了 %lu 字节"
 
 msgid "Getting file"
@@ -523,8 +531,8 @@ msgstr "fish：保存 %s：正在发送命令..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish：本地读取失败，正在发送零"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish：正在保存 %s %d (%lu)"
 
 msgid "zeros"
@@ -641,8 +649,8 @@ msgstr "(先改变目录)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs：失败；没有后备"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs：正在保存文件 %lu (%lu)"
 
 msgid ""
@@ -651,48 +659,6 @@ msgid ""
 msgstr ""
 "~/.netrc 文件权限不正确。\n"
 "删除口令或者改正权限。"
-
-msgid "MCFS"
-msgstr "MCFS "
-
-msgid "The server does not support this version"
-msgstr "服务器不支持该版本 "
-
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" 远程服务器没有运行在系统端口 \n"
-" 您需要口令来登录，但是对端可能不安全。\n"
-" 继续吗？\n"
-
-msgid "&Yes"
-msgstr "是(&Y)"
-
-msgid "&No"
-msgstr "否(&N)"
-
-msgid "MCFS Password required"
-msgstr "需要 MCFS 口令"
-
-msgid "Invalid password"
-msgstr "无效的口令"
-
-#, c-format
-msgid "Cannot locate hostname: %s"
-msgstr "无法定位主机名：%s"
-
-#, c-format
-msgid "Cannot create socket: %s"
-msgstr "无法创建套接字：%s"
-
-#, c-format
-msgid "Cannot connect to server: %s"
-msgstr "无法连接到服务器：%s"
-
-msgid "Too many open connections"
-msgstr "打开的连接太多"
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -966,13 +932,14 @@ msgid "Show mc with specified skin"
 msgstr "用指定的皮肤显示MC"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1067,7 +1034,8 @@ msgstr "读失败"
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr "后台进程请求的参数个数\n"
+msgstr ""
+"后台进程请求的参数个数\n"
 "多于我们能处理的。"
 
 msgid "&Full file list"
@@ -1106,13 +1074,13 @@ msgstr "排序"
 msgid "Confirmation"
 msgstr "确认"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
 
-msgid "Confirmation|&Directory hotlist delete"
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Confirmation|删除目录活动表(&D)"
 
 msgid "Confirmation|E&xit"
@@ -1336,6 +1304,12 @@ msgstr "用户名"
 msgid "Files tagged, want to cd?"
 msgstr "文件已经标记，要更改目录吗？"
 
+msgid "&Yes"
+msgstr "是(&Y)"
+
+msgid "&No"
+msgstr "否(&N)"
+
 msgid "Cannot change directory"
 msgstr "无法改变目录"
 
@@ -1472,9 +1446,6 @@ msgstr "无法进入目录 %s"
 
 msgid "Enter machine name (F1 for details):"
 msgstr "输入机器名(F1 查看细节)："
-
-msgid "Link to a remote machine"
-msgstr "链接到远程机器"
 
 msgid "FTP to machine"
 msgstr "FTP 到机器"
@@ -1669,6 +1640,24 @@ msgstr "<自动>"
 msgid "< Reload Current Syntax >"
 msgstr "<重新加载当前语法>"
 
+msgid "About"
+msgstr "关于"
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"Cooledit  v3.11.5\n"
+"\n"
+" 版权所有 (C) 1996 自由软件基金会(FSF)\n"
+"\n"
+"为 Midnight Commander 开发的\n"
+"       对用户友好的文字编辑器。\n"
+
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr "不能打开%s读"
@@ -1699,26 +1688,6 @@ msgstr "\"%s\"不是一个常规文件"
 #, c-format
 msgid "File \"%s\" is too large"
 msgstr "文件\"%s\"太大"
-
-msgid "About"
-msgstr "关于"
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"Cooledit  v3.11.5\n"
-"\n"
-" 版权所有 (C) 1996 自由软件基金会(FSF)\n"
-"\n"
-"为 Midnight Commander 开发的\n"
-"       对用户友好的文字编辑器。\n"
 
 msgid "Macro recursion is too deep"
 msgstr "宏递归层次太深"
@@ -2095,6 +2064,10 @@ msgstr "翻转行状态(&T)"
 msgid "Go to matching &bracket"
 msgstr "转到匹配的括号(&B)"
 
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "选择语法突出显示"
+
 msgid "&Find declaration"
 msgstr "查找申明(&F)"
 
@@ -2309,16 +2282,26 @@ msgid " %s%s file error"
 msgstr " %s%s文件错误 "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
-msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
+"Commander软件包。"
 
 #, c-format
 msgid "~/%s file error"
 msgstr "~/%s文件错误"
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
+msgid ""
+"The format of the ~/%s file has changed with version 3.0. You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
+"文件的样例。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
@@ -3220,9 +3203,6 @@ msgstr "过滤(&F)..."
 msgid "&Encoding..."
 msgstr "编码(&E)..."
 
-msgid "&Network link..."
-msgstr "网络链接(&N)..."
-
 msgid "FT&P link..."
 msgstr "FTP 链接(&P)..."
 
@@ -4011,6 +3991,45 @@ msgstr "你要清除历史"
 
 msgid "Background process:"
 msgstr "后台进程："
+
+#~ msgid "MCFS"
+#~ msgstr "MCFS "
+
+#~ msgid "The server does not support this version"
+#~ msgstr "服务器不支持该版本 "
+
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " 远程服务器没有运行在系统端口 \n"
+#~ " 您需要口令来登录，但是对端可能不安全。\n"
+#~ " 继续吗？\n"
+
+#~ msgid "MCFS Password required"
+#~ msgstr "需要 MCFS 口令"
+
+#~ msgid "Invalid password"
+#~ msgstr "无效的口令"
+
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr "无法定位主机名：%s"
+
+#~ msgid "Cannot create socket: %s"
+#~ msgstr "无法创建套接字：%s"
+
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "无法连接到服务器：%s"
+
+#~ msgid "Too many open connections"
+#~ msgstr "打开的连接太多"
+
+#~ msgid "Link to a remote machine"
+#~ msgstr "链接到远程机器"
+
+#~ msgid "&Network link..."
+#~ msgstr "网络链接(&N)..."
 
 #~ msgid "File was modified, save with exit?"
 #~ msgstr " 文件被修改，保存并退出？"

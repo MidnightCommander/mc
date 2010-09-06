@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -230,6 +230,14 @@ msgstr "Funksiya Düyməsi 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Funksiya Düyməsi 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "End düyməsi"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "End düyməsi"
 
 msgid "Plus"
 msgstr ""
@@ -464,12 +472,12 @@ msgstr "%s üçün qovluq kaşesinin vaxtı dolub"
 msgid "Starting linear transfer..."
 msgstr "Linear daşıma başladılır... "
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s : %s : %s %3d%% (%lu byte daşındı)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s : %s : %s %lu byte daşındı"
 
 msgid "Getting file"
@@ -544,7 +552,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "balıq: Yerli oxuma bacarılmadı, sıfır göndərilir"
 
 #, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr "balıq: %s %d (%d) göndərilir"
 
 msgid "zeros"
@@ -665,7 +673,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs : müvəffəqiyyətsizlık ..; geriyə dönüləcək nöqtə yoxdur"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs : %d faylını uzaqda qeyd edirəm (%d)"
 
 #, fuzzy
@@ -675,54 +683,6 @@ msgid ""
 msgstr ""
 "~/.netrc faylı doğru modda deyildir .\n"
 "Parolu sil ya da modunu düzəlt."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Verici bu buraxılışı dəstəkləmir "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Uzaqdakı verici bir sistem qapısında işləmir ,\n"
-" girmək üçün bir parol lazımdır , fəqət bu mə'lumat\n"
-" uzaqdakı tərəfdən e'tibarla istifadə edilməyə bilər . Davam edim mi ?\n"
-
-msgid "&Yes"
-msgstr "&Bəli"
-
-msgid "&No"
-msgstr "&Xeyr"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " MCFS parolu lazımdır "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Səhv verilmiş parol "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Verici adını tapa bilmədim : %s"
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Soketi yarada bilmədim : %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Vericiyə bağlana bilmədim : %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Çox miqdarda açıq bağlantı var "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1019,7 +979,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1173,7 +1133,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " İcazə "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "qov&luqlar keçmişi      C-\\"
 
 #, fuzzy
@@ -1410,6 +1370,12 @@ msgstr " İstifadəçi adı "
 msgid "Files tagged, want to cd?"
 msgstr " Fayllar nişan alındı, cd istəyirsən mi?"
 
+msgid "&Yes"
+msgstr "&Bəli"
+
+msgid "&No"
+msgstr "&Xeyr"
+
 msgid "Cannot change directory"
 msgstr "Qovluq dəyişdirilə bilmir"
 
@@ -1569,10 +1535,6 @@ msgstr " %s ə keçə bilmədim "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Bilisayar adını ver (ətraflı mə'lumat üçün F1ə bas) : "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Uzaq bilgisayara bağla "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1788,6 +1750,25 @@ msgstr " Haqqında "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Haqqında "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Oxumaq əqsədi ilə borunu açarkən xəta oldu : "
@@ -1818,27 +1799,6 @@ msgstr " Göstərə bilmirəm : vnormal bir fayl deyildir"
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Fayl çox böyükdür: "
-
-#, fuzzy
-msgid "About"
-msgstr " Haqqında "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2297,6 +2257,10 @@ msgstr "&Toggle Mark       F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "uyğun galan mötərizəyə get   M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "sinta&X seçilməsi"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3519,9 +3483,6 @@ msgstr "&Süzgəc ..."
 msgid "&Encoding..."
 msgstr "sü&z...\t\t\t\tM-t"
 
-msgid "&Network link..."
-msgstr "Ş&əbəkə bağı ..."
-
 msgid "FT&P link..."
 msgstr "FT&P bağı ..."
 
@@ -4395,6 +4356,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Arxaplan gedişatı:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Verici bu buraxılışı dəstəkləmir "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Uzaqdakı verici bir sistem qapısında işləmir ,\n"
+#~ " girmək üçün bir parol lazımdır , fəqət bu mə'lumat\n"
+#~ " uzaqdakı tərəfdən e'tibarla istifadə edilməyə bilər . Davam edim mi ?\n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " MCFS parolu lazımdır "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Səhv verilmiş parol "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Verici adını tapa bilmədim : %s"
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Soketi yarada bilmədim : %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Vericiyə bağlana bilmədim : %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Çox miqdarda açıq bağlantı var "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Uzaq bilgisayara bağla "
+
+#~ msgid "&Network link..."
+#~ msgstr "Ş&əbəkə bağı ..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

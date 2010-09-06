@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -228,6 +228,14 @@ msgstr "Funkcijska tipka 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Funkcijska tipka 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "Tipka End"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Tipka End"
 
 msgid "Plus"
 msgstr ""
@@ -459,12 +467,12 @@ msgstr "Predpomnilnik imenika za %s je potekel"
 msgid "Starting linear transfer..."
 msgstr "Začenjam linearen prenos..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bajtov prenešenih)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bajtov prenešenih"
 
 msgid "Getting file"
@@ -539,8 +547,8 @@ msgstr "fish: shranjujem %s: pošiljnam ukaz..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Krajevno branje ni uspelo, pošiljam nule"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: shranjujem %s %d (%lu)"
 
 msgid "zeros"
@@ -660,8 +668,8 @@ msgstr "(najprej spremeni imenik)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: spodletel; ni več možnih rešitev"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: shranjujem datoteko %lu (%lu)"
 
 #, fuzzy
@@ -671,54 +679,6 @@ msgid ""
 msgstr ""
 "~/.netrc datoteka nima pravilnega načina.\n"
 "Odstranite geslo ali popravite način."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Strežnik ne podpira te različice "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Oddaljeni strežnik ne teče na sistemskih vratih \n"
-" za prijavo potrebujete geslo, a podatki \n"
-" na oddaljeni strani niso nujno varni.  Nadaljuj? \n"
-
-msgid "&Yes"
-msgstr "&Da"
-
-msgid "&No"
-msgstr "&Ne"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " Potrebno je MCFS geslo "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Neveljavno geslo "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Ne morem poizvedeti imena gostitelja: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Ne morem ustvariti vtiča: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Ne morem se povezati s strežnikom: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Preveč odprtih povezav "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1013,7 +973,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1167,7 +1127,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Potrditev"
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "v&Roč seznam imenikov  C-\\"
 
 #, fuzzy
@@ -1403,6 +1363,12 @@ msgstr " Uporabniško ime "
 msgid "Files tagged, want to cd?"
 msgstr "Datoteke označene, želite spremeniti imenik"
 
+msgid "&Yes"
+msgstr "&Da"
+
+msgid "&No"
+msgstr "&Ne"
+
 msgid "Cannot change directory"
 msgstr "Ne morem spremeniti imenika"
 
@@ -1561,10 +1527,6 @@ msgstr " Ne morem spremeniti imenika (chdir) v %s"
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Vnesite ime računalnika (F1 za podrobnosti): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Poveži se z oddaljenim računalnikom "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1779,6 +1741,26 @@ msgstr " O "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " O "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+"       Avtorske pravice pridržane (C) 1996\n"
+"          Fundacija za prosto programje\n"
+"\n"
+"       Uporabniku prijazen urejevalnik besedil\n"
+"           za Polnočnega poveljnika.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Ne morem odpreti cevi za pisanje: "
@@ -1809,28 +1791,6 @@ msgstr " Pogled ni mogoč: ni običajna datoteka "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Datoteka je prevelika: "
-
-#, fuzzy
-msgid "About"
-msgstr " O "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-"       Avtorske pravice pridržane (C) 1996\n"
-"          Fundacija za prosto programje\n"
-"\n"
-"       Uporabniku prijazen urejevalnik besedil\n"
-"           za Polnočnega poveljnika.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzija makra je pregloboka"
@@ -2289,6 +2249,10 @@ msgstr "&Preklopi označbo  F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "Pojdi na &zaklepaj        M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Osvetlitev &sintakse"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3513,9 +3477,6 @@ msgstr "&Filter..."
 msgid "&Encoding..."
 msgstr "Sor&tiraj...             M-t"
 
-msgid "&Network link..."
-msgstr "&Mrežna povezava..."
-
 msgid "FT&P link..."
 msgstr "FT&P povezava..."
 
@@ -4389,6 +4350,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Proces v ozadju:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Strežnik ne podpira te različice "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Oddaljeni strežnik ne teče na sistemskih vratih \n"
+#~ " za prijavo potrebujete geslo, a podatki \n"
+#~ " na oddaljeni strani niso nujno varni.  Nadaljuj? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " Potrebno je MCFS geslo "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Neveljavno geslo "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Ne morem poizvedeti imena gostitelja: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Ne morem ustvariti vtiča: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Ne morem se povezati s strežnikom: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Preveč odprtih povezav "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Poveži se z oddaljenim računalnikom "
+
+#~ msgid "&Network link..."
+#~ msgstr "&Mrežna povezava..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

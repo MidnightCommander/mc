@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -234,6 +234,14 @@ msgstr "Функц. тастер 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Функц. тастер 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "Таст. `End'"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Таст. `End'"
 
 msgid "Plus"
 msgstr ""
@@ -465,12 +473,12 @@ msgstr "Остава директоријума је истекла за %s"
 msgid "Starting linear transfer..."
 msgstr "Покрећем линеарни пренос..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (пренесено %lu бајтова)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s пренесено %lu бајтова"
 
 msgid "Getting file"
@@ -544,8 +552,8 @@ msgstr "fish: складиштење %s: шаљем наредбу..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Локално читање није успело, шаљем нуле"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: складиштим %s %d (%lu)"
 
 msgid "zeros"
@@ -663,8 +671,8 @@ msgstr "(прво постави дир.)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: нисам успео; немам решења"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: складиштим датотеку %lu (%lu)"
 
 #, fuzzy
@@ -674,55 +682,6 @@ msgid ""
 msgstr ""
 "Датотека ~/.netrc нема исправне дозволе.\n"
 "Уклоните лозинку или исправите дозволе."
-
-# Систем датотека Поноћног наредника
-#, fuzzy
-msgid "MCFS"
-msgstr " СДПН "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Сервер не подржава ову верзију "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Удаљени сервер није покренут на системском порту. \n"
-" Неопходна вам је лозинка за пријаву, али подаци можда неће\n"
-" бити безбедни на удаљеној страни. Желите ли да наставим? \n"
-
-msgid "&Yes"
-msgstr "&Да"
-
-msgid "&No"
-msgstr "&Не"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " Неопходна је лозинка за СДПН "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Неисправна лозинка "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Не могу да пронађем домаћина: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Не могу да створим утичницу: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Не могу да се повежем са сервером: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Превише отворених повезивања "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1017,7 +976,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1171,7 +1130,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Потврде "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "брзи с&Писак директоријума  C-\\"
 
 #, fuzzy
@@ -1407,6 +1366,12 @@ msgstr " Име корисника "
 msgid "Files tagged, want to cd?"
 msgstr "Датотеке означене, да пром.дир.?"
 
+msgid "&Yes"
+msgstr "&Да"
+
+msgid "&No"
+msgstr "&Не"
+
 msgid "Cannot change directory"
 msgstr "Не могу да променим директоријум"
 
@@ -1565,10 +1530,6 @@ msgstr " Не могу да поставим дир. на %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Унесите назив машине (F1 за детаље): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Повезивање са удаљеном машином "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1784,6 +1745,25 @@ msgstr " О програму"
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " О програму"
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                    Cooledit  v3.11.5\n"
+"\n"
+" Ауторска права (C) 1996 Задужбина за слободни софтвер\n"
+"\n"
+"     Пријатељски према кориснику уређивач текста написан\n"
+"                  за Поноћног наредника.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Не могу да отворим цев за читање: "
@@ -1814,27 +1794,6 @@ msgstr " Не могу да прегледам: датотека није оби
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Датотека је превелика: "
-
-#, fuzzy
-msgid "About"
-msgstr " О програму"
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                    Cooledit  v3.11.5\n"
-"\n"
-" Ауторска права (C) 1996 Задужбина за слободни софтвер\n"
-"\n"
-"     Пријатељски према кориснику уређивач текста написан\n"
-"                  за Поноћног наредника.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Ниво рекурзије макроа је превисок"
@@ -2289,6 +2248,10 @@ msgstr "&Смени ознаку            F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "Иди на одговарајућу &заграду    M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Исти&цање синтаксе"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3514,9 +3477,6 @@ msgstr "&Филтар..."
 msgid "&Encoding..."
 msgstr "Поре&ђај...                     M-t"
 
-msgid "&Network link..."
-msgstr "&Мрежно повезивање..."
-
 msgid "FT&P link..."
 msgstr "Повезивање FT&P-ом..."
 
@@ -4393,6 +4353,56 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Позадински процес:"
+
+# Систем датотека Поноћног наредника
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " СДПН "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Сервер не подржава ову верзију "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Удаљени сервер није покренут на системском порту. \n"
+#~ " Неопходна вам је лозинка за пријаву, али подаци можда неће\n"
+#~ " бити безбедни на удаљеној страни. Желите ли да наставим? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " Неопходна је лозинка за СДПН "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Неисправна лозинка "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Не могу да пронађем домаћина: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Не могу да створим утичницу: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Не могу да се повежем са сервером: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Превише отворених повезивања "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Повезивање са удаљеном машином "
+
+#~ msgid "&Network link..."
+#~ msgstr "&Мрежно повезивање..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

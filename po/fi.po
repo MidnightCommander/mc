@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -223,6 +223,12 @@ msgstr ""
 msgid "Function key 24"
 msgstr ""
 
+msgid "A1 key"
+msgstr ""
+
+msgid "C1 key"
+msgstr ""
+
 msgid "Plus"
 msgstr ""
 
@@ -431,11 +437,11 @@ msgid "Starting linear transfer..."
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr ""
 
 #, fuzzy
@@ -510,7 +516,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
 #, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr ""
 
 msgid "zeros"
@@ -631,58 +637,12 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
 #, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr ""
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
-msgstr ""
-
-msgid "MCFS"
-msgstr ""
-
-msgid "The server does not support this version"
-msgstr ""
-
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-
-msgid "&Yes"
-msgstr "&Kyllä"
-
-msgid "&No"
-msgstr "&Ei"
-
-msgid "MCFS Password required"
-msgstr ""
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Virheellinen kohdemaski "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr ""
-" Ei voitu saada tietoja %s:sta \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr ""
-" Ei voitu saada tietoja %s:sta \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr ""
-" Ei voitu vaihtaa hakemistoa '%s':ksi \n"
-" %s "
-
-msgid "Too many open connections"
 msgstr ""
 
 #, c-format
@@ -960,7 +920,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1089,7 +1049,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Varmistus "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr " varmista &Poisto "
 
 #, fuzzy
@@ -1333,6 +1293,12 @@ msgstr " Käyttäjän nimi "
 msgid "Files tagged, want to cd?"
 msgstr "Tiedostot merkitty, vaihdetaanko hakemisto?"
 
+msgid "&Yes"
+msgstr "&Kyllä"
+
+msgid "&No"
+msgstr "&Ei"
+
 msgid "Cannot change directory"
 msgstr "Ei voitu vaihtaa hakemistoa"
 
@@ -1492,10 +1458,6 @@ msgstr " Ei voitu vaihtaa hakemistoa %s:ksi "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Anna koneen nimi (F1 antaa ohjeen): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Linkki toiseen koneeseen "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1708,6 +1670,25 @@ msgstr " Tietoja "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Tietoja "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                 Cooledit  v2.1\n"
+"\n"
+"   Copyright (C) 1996 Free Software Foundation\n"
+"\n"
+"       Käyttäjäystävällinen tekstinmuokkain\n"
+"           Midnight Commanderia varten.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Tiedoston avaaminen lukua varten epäonnistui: "
@@ -1738,28 +1719,6 @@ msgstr "Luo uusi hakemisto"
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Tiedosto on liian suuri: "
-
-#, fuzzy
-msgid "About"
-msgstr " Tietoja "
-
-#, fuzzy
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-"   Copyright (C) 1996 Free Software Foundation\n"
-"\n"
-"       Käyttäjäystävällinen tekstinmuokkain\n"
-"           Midnight Commanderia varten.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2216,6 +2175,10 @@ msgstr "&Aseta merkki      F3"
 
 msgid "Go to matching &bracket"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "syntaks&Ikorostus"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3365,9 +3328,6 @@ msgstr ""
 msgid "&Encoding..."
 msgstr "&Järjestä...             M-t"
 
-msgid "&Network link..."
-msgstr ""
-
 msgid "FT&P link..."
 msgstr ""
 
@@ -4194,6 +4154,32 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Taustaprosessi:"
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Virheellinen kohdemaski "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr ""
+#~ " Ei voitu saada tietoja %s:sta \n"
+#~ " %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr ""
+#~ " Ei voitu saada tietoja %s:sta \n"
+#~ " %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr ""
+#~ " Ei voitu vaihtaa hakemistoa '%s':ksi \n"
+#~ " %s "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Linkki toiseen koneeseen "
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -230,6 +230,14 @@ msgstr "Tecla de função 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Tecla de função 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "Tecla de Fim"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Tecla de Fim"
 
 msgid "Plus"
 msgstr ""
@@ -465,12 +473,12 @@ msgstr "Cache de dir expirou para %s"
 msgid "Starting linear transfer..."
 msgstr "Iniciando transferência linear..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
 
 #
@@ -548,7 +556,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "peixe: leitura local falhou, enviando zeros"
 
 #, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr "peixe: guardando %s %d (%d)"
 
 msgid "zeros"
@@ -669,7 +677,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: falha; não é possível voltar"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: guardando arquivo %d (%d)"
 
 #, fuzzy
@@ -679,54 +687,6 @@ msgid ""
 msgstr ""
 "arquivo ~/.netrc não está no modo correto.\n"
 "Remover a senha ou corrigir o modo."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " O servidor não suporta esta versão "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" O servidor remoto não está escutando na porta indicada. \n"
-" É necessária uma senha para acesso, mas a informação pode \n"
-" não estar segura na ponta remota. Continuar? \n"
-
-msgid "&Yes"
-msgstr "&Sim"
-
-msgid "&No"
-msgstr "&Não"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr "Senha MCFS requerida "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Senha inválida "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Impossível localizar máquina: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Impossível criar soquete: %s"
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Impossível conectar ao servidor: %s"
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Muitas conexões abertas "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1024,7 +984,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1180,7 +1140,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Confirmação "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Lista de di&retórios C-\\"
 
 #, fuzzy
@@ -1423,6 +1383,12 @@ msgstr " Nome de usuário "
 msgid "Files tagged, want to cd?"
 msgstr "Arquivos selecionados. Deseja mudar localização?"
 
+msgid "&Yes"
+msgstr "&Sim"
+
+msgid "&No"
+msgstr "&Não"
+
 msgid "Cannot change directory"
 msgstr " Impossível mudar de diretório"
 
@@ -1584,10 +1550,6 @@ msgstr " Não é possível mudar o diretório para %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Informe nome da máquina (F1 para detalhes): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Ligação para um máquina remota "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1803,6 +1765,25 @@ msgstr " Sobre "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Sobre "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Um editor de texto fácil escrito para o \n"
+"                  Midnight Commander.\n"
+
 #
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
@@ -1836,27 +1817,6 @@ msgstr " Impossível visualizar: não é arquivo regular "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Arquivo grande demais: "
-
-#, fuzzy
-msgid "About"
-msgstr " Sobre "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Um editor de texto fácil escrito para o \n"
-"                  Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2323,6 +2283,10 @@ msgstr "&Alternar Marca   F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "ir para o Colchete correspondente   M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Ressaltar sinta&xe"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3549,9 +3513,6 @@ msgstr "&Filtro..."
 msgid "&Encoding..."
 msgstr "orde&Nar                M-t"
 
-msgid "&Network link..."
-msgstr "Ligação de &Rede..."
-
 msgid "FT&P link..."
 msgstr "Ligação FT&P..."
 
@@ -4440,6 +4401,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Processo em segundo plano:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " O servidor não suporta esta versão "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " O servidor remoto não está escutando na porta indicada. \n"
+#~ " É necessária uma senha para acesso, mas a informação pode \n"
+#~ " não estar segura na ponta remota. Continuar? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr "Senha MCFS requerida "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Senha inválida "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Impossível localizar máquina: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Impossível criar soquete: %s"
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Impossível conectar ao servidor: %s"
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Muitas conexões abertas "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Ligação para um máquina remota "
+
+#~ msgid "&Network link..."
+#~ msgstr "Ligação de &Rede..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

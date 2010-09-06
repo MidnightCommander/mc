@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -223,6 +223,12 @@ msgstr ""
 msgid "Function key 24"
 msgstr ""
 
+msgid "A1 key"
+msgstr ""
+
+msgid "C1 key"
+msgstr ""
+
 msgid "Plus"
 msgstr ""
 
@@ -426,11 +432,11 @@ msgid "Starting linear transfer..."
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr ""
 
 msgid "Getting file"
@@ -502,7 +508,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
 #, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr ""
 
 msgid "zeros"
@@ -620,51 +626,12 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
 #, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr ""
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
-msgstr ""
-
-msgid "MCFS"
-msgstr ""
-
-msgid "The server does not support this version"
-msgstr ""
-
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-
-msgid "&Yes"
-msgstr "&ஆம்"
-
-msgid "&No"
-msgstr "&இல்லை"
-
-msgid "MCFS Password required"
-msgstr ""
-
-msgid "Invalid password"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " கோப்பை சேமிக்கும் போது பிழை. "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr "புதிய முனையம் ஒனறைப் படைக்கும்"
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr "கோப்பை வாசிப்பதட்கு திறக்க முடியவில்லை: "
-
-msgid "Too many open connections"
 msgstr ""
 
 #, c-format
@@ -931,7 +898,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1051,7 +1018,7 @@ msgstr ""
 msgid "Confirmation|&History cleanup"
 msgstr ""
 
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr ""
 
 msgid "Confirmation|E&xit"
@@ -1282,6 +1249,12 @@ msgstr "&பயனர் பட்டி...       F11"
 msgid "Files tagged, want to cd?"
 msgstr ""
 
+msgid "&Yes"
+msgstr "&ஆம்"
+
+msgid "&No"
+msgstr "&இல்லை"
+
 msgid "Cannot change directory"
 msgstr ""
 
@@ -1422,9 +1395,6 @@ msgid "Cannot chdir to %s"
 msgstr ""
 
 msgid "Enter machine name (F1 for details):"
-msgstr ""
-
-msgid "Link to a remote machine"
 msgstr ""
 
 msgid "FTP to machine"
@@ -1620,6 +1590,25 @@ msgstr " பற்றி "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " பற்றி "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+"நகல் காப்பு (C) 1996 இலவசப் மென்பொருள் நிறுவனம்\n"
+"\n"
+"    Midnight Commanderக்காக எழுதப்பட்ட ஓர்\n"
+"        பயனர் தோழமையான உரை பதிப்பான்.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr "கோப்பை வாசிப்பதட்கு திறக்க முடியவில்லை: "
@@ -1650,27 +1639,6 @@ msgstr "புதிய முனையம் ஒனறைப் படைக்
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " இந்த கோப்பு மிகப் பெரியது: "
-
-#, fuzzy
-msgid "About"
-msgstr " பற்றி "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-"நகல் காப்பு (C) 1996 இலவசப் மென்பொருள் நிறுவனம்\n"
-"\n"
-"    Midnight Commanderக்காக எழுதப்பட்ட ஓர்\n"
-"        பயனர் தோழமையான உரை பதிப்பான்.\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2119,6 +2087,9 @@ msgid "&Toggle line state"
 msgstr "குறி இருநிலை &மாற்றல் F3"
 
 msgid "Go to matching &bracket"
+msgstr ""
+
+msgid "Toggle s&yntax highlighting"
 msgstr ""
 
 #, fuzzy
@@ -3197,9 +3168,6 @@ msgstr ""
 msgid "&Encoding..."
 msgstr "வாிசை&யாக்கு...          M-t"
 
-msgid "&Network link..."
-msgstr ""
-
 msgid "FT&P link..."
 msgstr ""
 
@@ -3993,6 +3961,18 @@ msgstr ""
 
 msgid "Background process:"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " கோப்பை சேமிக்கும் போது பிழை. "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr "புதிய முனையம் ஒனறைப் படைக்கும்"
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "கோப்பை வாசிப்பதட்கு திறக்க முடியவில்லை: "
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

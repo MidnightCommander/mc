@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -231,6 +231,14 @@ msgstr "İşlev tuşu 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "İşlev tuşu 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "Gri End tuşu"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Gri End tuşu"
 
 msgid "Plus"
 msgstr ""
@@ -466,12 +474,12 @@ msgstr "Dizin arabelleğinde %s için zamanaşımı"
 msgid "Starting linear transfer..."
 msgstr "Doğrusal aktarım başlangıcı..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s : %s : %s %3d%% (%lu bayt aktarıldı)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s : %s : %s %lu bayt aktarıldı"
 
 msgid "Getting file"
@@ -546,8 +554,8 @@ msgstr "fish: %s kaydet: komut gönderiliyor..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Yerel okuma başarısız, sıfırlar gönderiliyor"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: %s %d (%lu) kaydediliyor"
 
 msgid "zeros"
@@ -668,7 +676,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: başarısız; son çare yok"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: %d dosyası kaydediliyor (%lu)"
 
 #, fuzzy
@@ -678,54 +686,6 @@ msgid ""
 msgstr ""
 "~/.netrc dosyası doğru kipte değil .\n"
 "Ya parolayı silin ya da kipi düzeltin."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Sunucu bu sürümü desteklemiyor "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Karşıdaki sunucu bir sistem port'unda çalışmıyor, \n"
-" giriş yapmak için bir parola lazım, fakat bu bilgi \n"
-" karşı tarafta güvenilir olmayabilir. Devam edilsin mi ?\n"
-
-msgid "&Yes"
-msgstr "&Evet"
-
-msgid "&No"
-msgstr "&Hayır"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " MCFS parolası gerekli "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Yanlış parola "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Makina ismi bulunamadı: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Soket oluşturulamadı: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Sunucuya bağlanılamadı: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Çok fazla açık bağlantı var "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1022,7 +982,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1176,7 +1136,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Onaylama "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Di&zin Geçmişi               C-\\"
 
 #, fuzzy
@@ -1413,6 +1373,12 @@ msgstr " Kullanıcı ismi "
 msgid "Files tagged, want to cd?"
 msgstr "Dosyalar işaretli, dizin değişsin mi?"
 
+msgid "&Yes"
+msgstr "&Evet"
+
+msgid "&No"
+msgstr "&Hayır"
+
 msgid "Cannot change directory"
 msgstr "Dizin değiştirilemedi"
 
@@ -1571,10 +1537,6 @@ msgstr " %s dizinine geçilemedi"
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " makina ismi (ayrıntılar için F1): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Bir uzak makinaya bağ "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1790,6 +1752,25 @@ msgstr " Hakkında "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Hakkında "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"              Cooledit  v3.11.5\n"
+"\n"
+" TelifHakkı (C) 1996 the Free Software Foundation\n"
+"\n"
+"      Kullanıcı dostu bir metin düzenleyici\n"
+"        Midnight Commander için yazıldı\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Veri yolu okumak için açılırken hata oluştu"
@@ -1820,27 +1801,6 @@ msgstr " Gösterilemiyor: normal bir dosya değil "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Dosya çok fazla büyük: "
-
-#, fuzzy
-msgid "About"
-msgstr " Hakkında "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"              Cooledit  v3.11.5\n"
-"\n"
-" TelifHakkı (C) 1996 the Free Software Foundation\n"
-"\n"
-"      Kullanıcı dostu bir metin düzenleyici\n"
-"        Midnight Commander için yazıldı\n"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -2300,6 +2260,10 @@ msgstr "&Seçim             F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "Eşleşen &Paranteze Git   M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "&Sözdizimi aydınlatma"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3520,9 +3484,6 @@ msgstr "&Süzgeç..."
 msgid "&Encoding..."
 msgstr "sıra&La...               M-t"
 
-msgid "&Network link..."
-msgstr "&Ağ bağı..."
-
 msgid "FT&P link..."
 msgstr "FT&P bağı..."
 
@@ -4397,6 +4358,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Artalan işlemi:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Sunucu bu sürümü desteklemiyor "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Karşıdaki sunucu bir sistem port'unda çalışmıyor, \n"
+#~ " giriş yapmak için bir parola lazım, fakat bu bilgi \n"
+#~ " karşı tarafta güvenilir olmayabilir. Devam edilsin mi ?\n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " MCFS parolası gerekli "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Yanlış parola "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Makina ismi bulunamadı: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Soket oluşturulamadı: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Sunucuya bağlanılamadı: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Çok fazla açık bağlantı var "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Bir uzak makinaya bağ "
+
+#~ msgid "&Network link..."
+#~ msgstr "&Ağ bağı..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -231,6 +231,14 @@ msgstr "Tasta funcţ. 2"
 #, fuzzy
 msgid "Function key 24"
 msgstr "Tasta funcţ. 2"
+
+#, fuzzy
+msgid "A1 key"
+msgstr "Tasta End"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Tasta End"
 
 msgid "Plus"
 msgstr ""
@@ -461,12 +469,12 @@ msgstr "Cache-ul directorului %s a expirat"
 msgid "Starting linear transfer..."
 msgstr "Pornesc transferul liniar..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferaţi)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferaţi"
 
 msgid "Getting file"
@@ -540,8 +548,8 @@ msgstr "fish: stochează %s: trimit comanda..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Citirea locală a eşuat, trimit zerouri"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: stochez %s %d (%lu)"
 
 msgid "zeros"
@@ -661,8 +669,8 @@ msgstr "(întâi chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: eşec; nu mai există nici o variantă la care să revin"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: stochez fişierul %lu (%lu)"
 
 #, fuzzy
@@ -672,54 +680,6 @@ msgid ""
 msgstr ""
 "Fişierul ~/.netrc nu are permisii corecte.\n"
 "Înlăturaţi parola sau corectaţi drepturile de acces."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Server-ul nu suportă această versiune "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Server-ul nu foloseşte un port sistem pentru mcserv, \n"
-" vă trebuie o parolă pentru a vă conecta, insă informaţia \n"
-" poate să nu fie sigură pe celălalt server. Continuaţi? \n"
-
-msgid "&Yes"
-msgstr "&Da"
-
-msgid "&No"
-msgstr "&Nu"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " Parola MCFS necesară "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Parolă invalidă "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Nu pot localiza gazda: %s "
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Nu pot crea socket-ul: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Nu mă pot conecta la serverul: %s"
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Prea multe conectări "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1014,7 +974,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1169,7 +1129,7 @@ msgid "Confirmation|&History cleanup"
 msgstr " Confirmare "
 
 #, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "lista rapidă de di&Rectoare       C-\\"
 
 #, fuzzy
@@ -1405,6 +1365,12 @@ msgstr " Nume proprietar "
 msgid "Files tagged, want to cd?"
 msgstr "Există fişiere marcate, doriţi să schimbaţi directorul?"
 
+msgid "&Yes"
+msgstr "&Da"
+
+msgid "&No"
+msgstr "&Nu"
+
 msgid "Cannot change directory"
 msgstr "Nu pot deschide directorul %s"
 
@@ -1563,10 +1529,6 @@ msgstr " Nu pot schimba directorul la %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Introduceţi numele serverului (F1 pentru detalii): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Legătură la un server la distanţă "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1781,6 +1743,25 @@ msgstr " Despre "
 msgid "< Reload Current Syntax >"
 msgstr ""
 
+#, fuzzy
+msgid "About"
+msgstr " Despre "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"          Un editor de text scris pentru\n"
+"                Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Nu pot deschide pentru citire filtrul: "
@@ -1811,27 +1792,6 @@ msgstr " Nu poate fi vizualizat: nu este un fişier obişnuit "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Fişierul este prea mare: "
-
-#, fuzzy
-msgid "About"
-msgstr " Despre "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"          Un editor de text scris pentru\n"
-"                Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Recursivitatea macro este prea mare"
@@ -2289,6 +2249,10 @@ msgstr "in&Versează selecţia    F3"
 #, fuzzy
 msgid "Go to matching &bracket"
 msgstr "d&U-te la paranteza pereche      M-b"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "&Evidenţiere sintaxă"
 
 #, fuzzy
 msgid "&Find declaration"
@@ -3510,9 +3474,6 @@ msgstr "&Filtru..."
 msgid "&Encoding..."
 msgstr "Sor&tează...                     M-t"
 
-msgid "&Network link..."
-msgstr "l&Egătură reţea..."
-
 msgid "FT&P link..."
 msgstr "legătură FT&P..."
 
@@ -4387,6 +4348,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Procese în fundal:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Server-ul nu suportă această versiune "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Server-ul nu foloseşte un port sistem pentru mcserv, \n"
+#~ " vă trebuie o parolă pentru a vă conecta, insă informaţia \n"
+#~ " poate să nu fie sigură pe celălalt server. Continuaţi? \n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " Parola MCFS necesară "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Parolă invalidă "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Nu pot localiza gazda: %s "
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Nu pot crea socket-ul: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Nu mă pot conecta la serverul: %s"
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Prea multe conectări "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Legătură la un server la distanţă "
+
+#~ msgid "&Network link..."
+#~ msgstr "l&Egătură reţea..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"

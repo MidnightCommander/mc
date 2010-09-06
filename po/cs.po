@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.3\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2010-07-11 13:41+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -238,6 +238,14 @@ msgstr "Funkční klávesa 23"
 msgid "Function key 24"
 msgstr "Funkční klávesa 24"
 
+#, fuzzy
+msgid "A1 key"
+msgstr "Klávesa End"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Klávesa End"
+
 msgid "Plus"
 msgstr "Plus"
 
@@ -449,12 +457,12 @@ msgstr "Adresářová keš %s vypršela"
 msgid "Starting linear transfer..."
 msgstr "Začíná lineární přenos..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bajtů přeneseno)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bajtů již přeneseno"
 
 msgid "Getting file"
@@ -527,8 +535,8 @@ msgstr "fish: ukládám %s: posílám příkaz..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Selhalo čtení lokálního souboru, posílám nuly"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: ukládá se %s %d (%lu)"
 
 msgid "zeros"
@@ -645,8 +653,8 @@ msgstr "(nejdříve chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: selhání; není jiná možnost"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: ukládá se soubor %lu (%lu)"
 
 msgid ""
@@ -655,48 +663,6 @@ msgid ""
 msgstr ""
 "Soubor ~/.netrc nemá správná přístupová práva\n"
 "Odstraňte heslo nebo změňte práva"
-
-msgid "MCFS"
-msgstr "MCFS"
-
-msgid "The server does not support this version"
-msgstr "Server tuto verzi nepodporuje"
-
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-"Vzdálený server neběží na domluveném portu,\n"
-"k přihlášení budete potřebovat heslo, ale informace může být\n"
-"na vzdálené straně kompromitována.  Pokračovat?\n"
-
-msgid "&Yes"
-msgstr "&Ano"
-
-msgid "&No"
-msgstr "&Ne"
-
-msgid "MCFS Password required"
-msgstr "Pro MCFS vyžadováno heslo"
-
-msgid "Invalid password"
-msgstr "Chybné heslo"
-
-#, c-format
-msgid "Cannot locate hostname: %s"
-msgstr "Nelze určit jméno počítače: %s"
-
-#, c-format
-msgid "Cannot create socket: %s"
-msgstr "Nelze vytvořit soket: %s"
-
-#, c-format
-msgid "Cannot connect to server: %s"
-msgstr "Nelze se připojit k serveru: %s"
-
-msgid "Too many open connections"
-msgstr "Příliš mnoho otevřených spojení"
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -973,13 +939,14 @@ msgid "Show mc with specified skin"
 msgstr "Zobrazit mc se zadaným tématem vzhledu"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -999,7 +966,8 @@ msgstr ""
 "   Okna dialogů:      dnormal, dfocus, dhotnormal, dhotfocus, "
 "errdhotnormal,\n"
 "                      errdhotfocus\n"
-"   Menu:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menu:              menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
 "   Editor:            editnormal, editbold, editmarked,\n"
 "                      editwhitespace, editlinestate\n"
 
@@ -1120,7 +1088,8 @@ msgstr "Potvrzování"
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Smazání &historie"
 
-msgid "Confirmation|&Directory hotlist delete"
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Confirmation|Smazání hotlistu &adresářů"
 
 msgid "Confirmation|E&xit"
@@ -1350,6 +1319,12 @@ msgstr "Jméno uživatele"
 msgid "Files tagged, want to cd?"
 msgstr "Soubory označeny, chcete změnit adresář?"
 
+msgid "&Yes"
+msgstr "&Ano"
+
+msgid "&No"
+msgstr "&Ne"
+
 msgid "Cannot change directory"
 msgstr "Není možné změnit adresář"
 
@@ -1488,9 +1463,6 @@ msgstr "Pracovní adresář nelze změnit na %s"
 
 msgid "Enter machine name (F1 for details):"
 msgstr "Jméno počítače (nápověda F1):"
-
-msgid "Link to a remote machine"
-msgstr "Odkaz na vzdálený počítač"
 
 msgid "FTP to machine"
 msgstr "FTP spojení na počítač"
@@ -1685,6 +1657,25 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Nahraj aktuální syntaxi >"
 
+msgid "About"
+msgstr "O programu"
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Uživatelsky příjemný textový editor\n"
+"       pro program Midnight Commander.\n"
+"\n"
+
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr "Nepodařilo se otevřít %s pro čtení"
@@ -1715,27 +1706,6 @@ msgstr "„%s“ není normální soubor"
 #, c-format
 msgid "File \"%s\" is too large"
 msgstr "Soubor „%s“ je příliš velký"
-
-msgid "About"
-msgstr "O programu"
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Uživatelsky příjemný textový editor\n"
-"       pro program Midnight Commander.\n"
-"\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurze maker je příliš hluboká"
@@ -2112,6 +2082,10 @@ msgstr "Přepnout &zobrazení řádků"
 msgid "Go to matching &bracket"
 msgstr "Přejít na pá&rovou závorku"
 
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Vyber zvýraznění syntaxe"
+
 msgid "&Find declaration"
 msgstr "Najít deklaraci"
 
@@ -2334,8 +2308,7 @@ msgid ""
 "Commander package."
 msgstr ""
 "Formát souboru %smc.ext byl modifikován verzí 3.0. Zdá se, že instalace "
-"selhala. Prosím, nahrajte si novou aktuální kopii balíčku Midnight "
-"Commander."
+"selhala. Prosím, nahrajte si novou aktuální kopii balíčku Midnight Commander."
 
 #, c-format
 msgid "~/%s file error"
@@ -2994,6 +2967,7 @@ msgstr "Nová skupina pro rychlý přístup"
 msgid "Name of new group:"
 msgstr "Jméno nové skupiny:"
 
+#, c-format
 msgid "Label for \"%s\":"
 msgstr "Popis pro „%s“:"
 
@@ -3253,9 +3227,6 @@ msgstr "&Filtr..."
 msgid "&Encoding..."
 msgstr "&Kódování"
 
-msgid "&Network link..."
-msgstr "Síťové spoje&ní..."
-
 msgid "FT&P link..."
 msgstr "F&TP spojení..."
 
@@ -3340,7 +3311,8 @@ msgstr "&Panely ano/ne"
 msgid "&Compare directories"
 msgstr "Porovnat &adresáře"
 
-msgid "View diff files"
+#, fuzzy
+msgid "&View diff files"
 msgstr "Prohlížet změnové soubory"
 
 msgid "E&xternal panelize"
@@ -3594,8 +3566,7 @@ msgstr "Zadejte označení příkazu:"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
-"Pokud nepracujete s lokálním adresářem, není možné provést externí "
-"panelizaci"
+"Pokud nepracujete s lokálním adresářem, není možné provést externí panelizaci"
 
 msgid "Find rejects after patching"
 msgstr "Najít odmítnuté části záplat (*.rej) po záplatování"
@@ -4052,3 +4023,42 @@ msgstr "Chcete smazat tuto historii?"
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
+
+#~ msgid "MCFS"
+#~ msgstr "MCFS"
+
+#~ msgid "The server does not support this version"
+#~ msgstr "Server tuto verzi nepodporuje"
+
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ "Vzdálený server neběží na domluveném portu,\n"
+#~ "k přihlášení budete potřebovat heslo, ale informace může být\n"
+#~ "na vzdálené straně kompromitována.  Pokračovat?\n"
+
+#~ msgid "MCFS Password required"
+#~ msgstr "Pro MCFS vyžadováno heslo"
+
+#~ msgid "Invalid password"
+#~ msgstr "Chybné heslo"
+
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr "Nelze určit jméno počítače: %s"
+
+#~ msgid "Cannot create socket: %s"
+#~ msgstr "Nelze vytvořit soket: %s"
+
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "Nelze se připojit k serveru: %s"
+
+#~ msgid "Too many open connections"
+#~ msgstr "Příliš mnoho otevřených spojení"
+
+#~ msgid "Link to a remote machine"
+#~ msgstr "Odkaz na vzdálený počítač"
+
+#~ msgid "&Network link..."
+#~ msgstr "Síťové spoje&ní..."

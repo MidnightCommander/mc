@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -235,6 +235,14 @@ msgstr "Функціональна клавіша 23"
 msgid "Function key 24"
 msgstr "Функціональна клавіша 24"
 
+#, fuzzy
+msgid "A1 key"
+msgstr "Клавіша End"
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Клавіша End"
+
 msgid "Plus"
 msgstr "Плюс"
 
@@ -446,12 +454,12 @@ msgstr "Кеш каталога застарів для %s"
 msgid "Starting linear transfer..."
 msgstr "Початок лінійного перенесення…"
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu байт перенесено"
 
 msgid "Getting file"
@@ -525,8 +533,8 @@ msgstr "fish: запис %s: відсилаю команду…"
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Збій локального читання, відсилаються нулі"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: збереження %s %d (%lu)"
 
 msgid "zeros"
@@ -645,8 +653,8 @@ msgstr "(спершу chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: збій; нікуди перейти на аварійний режим"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: зберігаю файл %lu (%lu)"
 
 msgid ""
@@ -655,48 +663,6 @@ msgid ""
 msgstr ""
 "Файл ~/.netrc має невірні права.\n"
 "Видаліть пароль або виправте права файлу"
-
-msgid "MCFS"
-msgstr "MCFS"
-
-msgid "The server does not support this version"
-msgstr "Сервер не підтримує дану версію"
-
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-"Віддалений сервер запущений не на системному порті. \n"
-" Необхідний пароль для входу у систему, але інформація з \n"
-" віддаленої сторони може бути недостовірна. Продовжувати?\n"
-
-msgid "&Yes"
-msgstr "&Так"
-
-msgid "&No"
-msgstr "&Ні"
-
-msgid "MCFS Password required"
-msgstr "Вимагається пароль MCFS"
-
-msgid "Invalid password"
-msgstr "Неправильний пароль"
-
-#, c-format
-msgid "Cannot locate hostname: %s"
-msgstr "Не вдається знайти хост: %s"
-
-#, c-format
-msgid "Cannot create socket: %s"
-msgstr "Не вдається створити сокет: %s"
-
-#, c-format
-msgid "Cannot connect to server: %s"
-msgstr "Не вдається з'єднатися із сервером: %s"
-
-msgid "Too many open connections"
-msgstr "Надто багато відкритих з'єднань "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -972,13 +938,14 @@ msgid "Show mc with specified skin"
 msgstr "Показувати mc із обраним скіном"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -989,7 +956,8 @@ msgid ""
 msgstr ""
 "--colors KEYWORD={ТЕКСТ},{ФОН}\n"
 "\n"
-"{ТЕКСТ} і {ФОН} можна опустити, тоді будуть використані значення за змовчуванням\n"
+"{ТЕКСТ} і {ФОН} можна опустити, тоді будуть використані значення за "
+"змовчуванням\n"
 "\n"
 "Ключові слова:\n"
 " Глобальні: errors, reverse, gauge, viewunderline\n"
@@ -1113,13 +1081,13 @@ msgstr "Порядок сортування"
 msgid "Confirmation"
 msgstr "Підтвердження"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Очистка історії"
 
-msgid "Confirmation|&Directory hotlist delete"
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Confirmation|Видалення гарячого списку каталогів"
 
 msgid "Confirmation|E&xit"
@@ -1343,6 +1311,12 @@ msgstr "Ім'я користувача"
 msgid "Files tagged, want to cd?"
 msgstr "Відмічено файли, хочете змінити каталог?"
 
+msgid "&Yes"
+msgstr "&Так"
+
+msgid "&No"
+msgstr "&Ні"
+
 msgid "Cannot change directory"
 msgstr "Не вдалося змінити каталог"
 
@@ -1481,9 +1455,6 @@ msgstr "Не вдалося перейти у каталог %s"
 
 msgid "Enter machine name (F1 for details):"
 msgstr "Введіть назву машини (F1 - подробиці):"
-
-msgid "Link to a remote machine"
-msgstr "З'єднання із віддаленою машиною"
 
 msgid "FTP to machine"
 msgstr "FTP-з'єднання із віддаленою машиною"
@@ -1679,6 +1650,24 @@ msgstr "< Авто >"
 msgid "< Reload Current Syntax >"
 msgstr "< Поновити нагальний синтаксис >"
 
+msgid "About"
+msgstr "Про програму"
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Текстовий редактор з дружнім інтерфейсом користувача.\n"
+"               Створено для Midnight Commander.\n"
+
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr "Не вдається відкрити %s для читання"
@@ -1709,26 +1698,6 @@ msgstr "«%s» не є звичайним файлом"
 #, c-format
 msgid "File \"%s\" is too large"
 msgstr "Файл «%s» надто великий"
-
-msgid "About"
-msgstr "Про програму"
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Текстовий редактор з дружнім інтерфейсом користувача.\n"
-"               Створено для Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Занадто глибока рекурсія макросів"
@@ -2106,6 +2075,10 @@ msgstr "Перемкнути стан рядка"
 msgid "Go to matching &bracket"
 msgstr "Перейти до парної &дужки"
 
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr "Оберіть підсвітку синтаксису"
+
 msgid "&Find declaration"
 msgstr "Знайти об’явлення"
 
@@ -2321,16 +2294,26 @@ msgid " %s%s file error"
 msgstr "%s%s помилка файлу "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
-msgstr "Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при встановленні. Будь-ласка візьміть свіжу копію із пакету Midnight Commander."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при "
+"встановленні. Будь-ласка візьміть свіжу копію із пакету Midnight Commander."
 
 #, c-format
 msgid "~/%s file error"
 msgstr "Помилка файлу  ~/%s"
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "Формат файлу ~/%s було змінено у версіі 3.0. Ви можете скопіювати його з %smc.ext чи скористуватися ним як зразком та написати свій."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0. You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"Формат файлу ~/%s було змінено у версіі 3.0. Ви можете скопіювати його з %"
+"smc.ext чи скористуватися ним як зразком та написати свій."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Копіювання"
@@ -3234,9 +3217,6 @@ msgstr "&Фільтр…"
 msgid "&Encoding..."
 msgstr "Кодування…"
 
-msgid "&Network link..."
-msgstr "Ме&режеве з'єднання…"
-
 msgid "FT&P link..."
 msgstr "&FTP-з'єднання…"
 
@@ -4032,6 +4012,45 @@ msgstr "Ви дійсно хочете очистити цю історію?"
 msgid "Background process:"
 msgstr "Фоновий процес:"
 
+#~ msgid "MCFS"
+#~ msgstr "MCFS"
+
+#~ msgid "The server does not support this version"
+#~ msgstr "Сервер не підтримує дану версію"
+
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ "Віддалений сервер запущений не на системному порті. \n"
+#~ " Необхідний пароль для входу у систему, але інформація з \n"
+#~ " віддаленої сторони може бути недостовірна. Продовжувати?\n"
+
+#~ msgid "MCFS Password required"
+#~ msgstr "Вимагається пароль MCFS"
+
+#~ msgid "Invalid password"
+#~ msgstr "Неправильний пароль"
+
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr "Не вдається знайти хост: %s"
+
+#~ msgid "Cannot create socket: %s"
+#~ msgstr "Не вдається створити сокет: %s"
+
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "Не вдається з'єднатися із сервером: %s"
+
+#~ msgid "Too many open connections"
+#~ msgstr "Надто багато відкритих з'єднань "
+
+#~ msgid "Link to a remote machine"
+#~ msgstr "З'єднання із віддаленою машиною"
+
+#~ msgid "&Network link..."
+#~ msgstr "Ме&режеве з'єднання…"
+
 #~ msgid "File was modified, save with exit?"
 #~ msgstr "Файл було змінено, зберегти при виході?"
 
@@ -4574,8 +4593,11 @@ msgstr "Фоновий процес:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Введіть порядок аргументів заміни, напр. 3,2,1,4 "
 
-#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
-#~ msgstr " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Помилка у форматі стрічки заміни "

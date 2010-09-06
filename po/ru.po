@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
-"PO-Revision-Date: 2010-06-22  22:57+0300\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"PO-Revision-Date: 2010-09-02  22:57+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -246,6 +246,12 @@ msgstr "Функциональная 23"
 msgid "Function key 24"
 msgstr "Функциональная 24"
 
+msgid "A1 key"
+msgstr "Клавиша A1"
+
+msgid "C1 key"
+msgstr "Клавиша C1"
+
 msgid "Plus"
 msgstr "Плюс"
 
@@ -458,12 +464,12 @@ msgid "Starting linear transfer..."
 msgstr "Запуск линейной передачи..."
 
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%ju байт перенесено)"
 
 #, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu байт перенесено"
+msgid "%s: %s: %s %ju bytes transferred"
+msgstr "%s: %s: %s %ju байт перенесено"
 
 msgid "Getting file"
 msgstr "Получение файла"
@@ -536,8 +542,8 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: сбой локального чтения, посылаются нули"
 
 #, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: запись %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
+msgstr "fish: запись %s %d (%ju)"
 
 msgid "zeros"
 msgstr "нули"
@@ -654,8 +660,8 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 
 #, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: запись файла %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
+msgstr "ftpfs: запись файла %ju (%ju)"
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
@@ -663,48 +669,6 @@ msgid ""
 msgstr ""
 "Файл ~/.netrc имеет неверный режим доступа/владения.\n"
 "Удалите пароль или исправьте режим доступа/владения"
-
-msgid "MCFS"
-msgstr "MCFS"
-
-msgid "The server does not support this version"
-msgstr "Сервер не поддерживает данную версию"
-
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-"Удаленный сервер запущен не на системном порту.\n"
-"Требуется пароль для входа в систему, но это может быть\n"
-"небезопасно для информации на удаленной стороне. Продолжать?\n"
-
-msgid "&Yes"
-msgstr "&Да"
-
-msgid "&No"
-msgstr "&Нет"
-
-msgid "MCFS Password required"
-msgstr "Требуется пароль MCFS"
-
-msgid "Invalid password"
-msgstr "Неверный пароль"
-
-#, c-format
-msgid "Cannot locate hostname: %s"
-msgstr "Невозможно определить имя машины: %s"
-
-#, c-format
-msgid "Cannot create socket: %s"
-msgstr "Невозможно создать сокет: %s"
-
-#, c-format
-msgid "Cannot connect to server: %s"
-msgstr "Невозможно соединиться с сервером: %s"
-
-msgid "Too many open connections"
-msgstr "Слишком много открытых соединений"
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -984,7 +948,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -998,7 +962,7 @@ msgstr ""
 "{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
 "\n"
 "Ключевые слова:\n"
-"   Общие:              errors, reverse, gauge, input, viewunderline\n"
+"   Общие:              errors, disabled, reverse, gauge, viewunderline\n"
 "                       input, inputmark, inputunchanged, commandlinemark\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
 "   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
@@ -1126,20 +1090,20 @@ msgstr "Подтверждение"
 msgid "Confirmation|&History cleanup"
 msgstr "&Очистка истории"
 
-msgid "Confirmation|&Directory hotlist delete"
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Удаление списка &каталогов"
 
 msgid "Confirmation|E&xit"
 msgstr "В&ыход"
 
 msgid "Confirmation|&Execute"
-msgstr "&Исполнить"
+msgstr "&Исполнение"
 
 msgid "Confirmation|O&verwrite"
-msgstr "Пере&записать"
+msgstr "Пере&запись"
 
 msgid "Confirmation|&Delete"
-msgstr "&Удалить"
+msgstr "&Удаление"
 
 msgid "UTF-8 output"
 msgstr "UTF-8 вывод"
@@ -1350,6 +1314,12 @@ msgstr "Имя пользователя"
 msgid "Files tagged, want to cd?"
 msgstr "Файлы помечены, сменить каталог?"
 
+msgid "&Yes"
+msgstr "&Да"
+
+msgid "&No"
+msgstr "&Нет"
+
 msgid "Cannot change directory"
 msgstr "Невозможно сменить каталог"
 
@@ -1488,9 +1458,6 @@ msgstr "Невозможно перейти в %s"
 
 msgid "Enter machine name (F1 for details):"
 msgstr "Введите имя машины (детали по F1):"
-
-msgid "Link to a remote machine"
-msgstr "Соединение с удаленной машиной"
 
 msgid "FTP to machine"
 msgstr "FTP-соединение с удаленной машиной"
@@ -1685,6 +1652,20 @@ msgstr "< Автоматически >"
 msgid "< Reload Current Syntax >"
 msgstr "Перезагрузить текущее цветовыделение"
 
+msgid "About"
+msgstr "О программе"
+
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"    Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+" Текстовый редактор с дружественным интерфейсом пользователя.\n"
+"               Создан для Midnight Commander."
+
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr "Невозможно открыть файл %s для чтения"
@@ -1715,26 +1696,6 @@ msgstr "\"%s\" не является обычным файлом"
 #, c-format
 msgid "File \"%s\" is too large"
 msgstr "Файл \"%s\" слишком большой"
-
-msgid "About"
-msgstr "О программе"
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Текстовый редактор с дружественным интерфейсом пользователя.\n"
-"               Создан для Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
@@ -2106,10 +2067,13 @@ msgid "&Go to line..."
 msgstr "Перейти к &строке..."
 
 msgid "&Toggle line state"
-msgstr "Отобра&зить/скрыть номера строк"
+msgstr "Отобразить/скрыть номера с&трок"
 
 msgid "Go to matching &bracket"
 msgstr "Перейти к парной ско&бке"
+
+msgid "Toggle s&yntax highlighting"
+msgstr "Включить/выключить подсветку с&интаксиса"
 
 msgid "&Find declaration"
 msgstr "Перейти к опре&делению"
@@ -3251,9 +3215,6 @@ msgstr "&Фильтр..."
 msgid "&Encoding..."
 msgstr "Выбор &кодировки..."
 
-msgid "&Network link..."
-msgstr "Се&тевое соединение..."
-
 msgid "FT&P link..."
 msgstr "&FTP-соединение..."
 
@@ -4046,3 +4007,42 @@ msgstr "Желаете очистить историю?"
 
 msgid "Background process:"
 msgstr "Фоновый процесс:"
+
+#~ msgid "MCFS"
+#~ msgstr "MCFS"
+
+#~ msgid "The server does not support this version"
+#~ msgstr "Сервер не поддерживает данную версию"
+
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ "Удаленный сервер запущен не на системном порту.\n"
+#~ "Требуется пароль для входа в систему, но это может быть\n"
+#~ "небезопасно для информации на удаленной стороне. Продолжать?\n"
+
+#~ msgid "MCFS Password required"
+#~ msgstr "Требуется пароль MCFS"
+
+#~ msgid "Invalid password"
+#~ msgstr "Неверный пароль"
+
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr "Невозможно определить имя машины: %s"
+
+#~ msgid "Cannot create socket: %s"
+#~ msgstr "Невозможно создать сокет: %s"
+
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr "Невозможно соединиться с сервером: %s"
+
+#~ msgid "Too many open connections"
+#~ msgstr "Слишком много открытых соединений"
+
+#~ msgid "Link to a remote machine"
+#~ msgstr "Соединение с удаленной машиной"
+
+#~ msgid "&Network link..."
+#~ msgstr "Се&тевое соединение..."

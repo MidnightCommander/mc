@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-07-05 21:43+0400\n"
+"POT-Creation-Date: 2010-09-06 20:43+0400\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -234,6 +234,14 @@ msgstr "Функцыянальная 23 "
 msgid "Function key 24"
 msgstr "Функцыянальная 24 "
 
+#, fuzzy
+msgid "A1 key"
+msgstr "Клавіша End      "
+
+#, fuzzy
+msgid "C1 key"
+msgstr "Клавіша End      "
+
 msgid "Plus"
 msgstr "Плюс"
 
@@ -454,12 +462,12 @@ msgstr "Кэш каталога састарэў для %s"
 msgid "Starting linear transfer..."
 msgstr "Запуск лінейнай перадачы..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байтаў перанесена)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu байтаў перанесена"
 
 msgid "Getting file"
@@ -533,8 +541,8 @@ msgstr "fish: запіс %s: дасылаецца каманда..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Збой лакальнага чытання, дасылаюцца нулі"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: запіс %s %d (%lu)"
 
 msgid "zeros"
@@ -651,8 +659,8 @@ msgstr "(спачатку chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: памылка; няма куды перайсці на аварыйны рэжым"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: запіс файла %lu (%lu)"
 
 #, fuzzy
@@ -662,54 +670,6 @@ msgid ""
 msgstr ""
 "Файл ~/.netrc мае памылковы рэжым доступу/уладання.\n"
 "Выдаліце пароль ці выпраўце рэжым доступу/уладання."
-
-#, fuzzy
-msgid "MCFS"
-msgstr " MCFS "
-
-#, fuzzy
-msgid "The server does not support this version"
-msgstr " Сервер не падтрымлівае бягучую версію "
-
-#, fuzzy
-msgid ""
-"The remote server is not running on a system port\n"
-"you need a password to log in, but the information may\n"
-"not be safe on the remote side.  Continue?\n"
-msgstr ""
-" Адлеглы паслужнік запушчаны не на сістэмным порце. \n"
-" Патрабуецца пароль для ўваходу ў сістэму, але гэта можа быць \n"
-" небяспечна для інфармацыі на адлеглым баку. Працягваць?\n"
-
-msgid "&Yes"
-msgstr "&Так"
-
-msgid "&No"
-msgstr "&Не"
-
-#, fuzzy
-msgid "MCFS Password required"
-msgstr " Патрабуецца пароль MCFS "
-
-#, fuzzy
-msgid "Invalid password"
-msgstr " Памылковы пароль "
-
-#, fuzzy, c-format
-msgid "Cannot locate hostname: %s"
-msgstr " Немагчыма вызначыць хост: %s"
-
-#, fuzzy, c-format
-msgid "Cannot create socket: %s"
-msgstr " Немагчыма стварыць сокет: %s "
-
-#, fuzzy, c-format
-msgid "Cannot connect to server: %s"
-msgstr " Немагчыма далучыцца да сервера: %s "
-
-#, fuzzy
-msgid "Too many open connections"
-msgstr " Вельмі шмат адкрытых злучэнняў "
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -1003,7 +963,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
@@ -1163,7 +1123,8 @@ msgstr " Запыт пацверджання"
 msgid "Confirmation|&History cleanup"
 msgstr "Ачыстка &гiсторыi"
 
-msgid "Confirmation|&Directory hotlist delete"
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Выдаленне спiса &каталогаў"
 
 msgid "Confirmation|E&xit"
@@ -1393,6 +1354,12 @@ msgstr " Імя карыстальніка "
 msgid "Files tagged, want to cd?"
 msgstr "Файлы пазначаныя, замяніць каталог?"
 
+msgid "&Yes"
+msgstr "&Так"
+
+msgid "&No"
+msgstr "&Не"
+
 msgid "Cannot change directory"
 msgstr "Немагчыма змяніць каталог"
 
@@ -1549,10 +1516,6 @@ msgstr " Немагчыма перайсці ў %s "
 #, fuzzy
 msgid "Enter machine name (F1 for details):"
 msgstr " Увядзіце назву машыны (дэталі па F1): "
-
-#, fuzzy
-msgid "Link to a remote machine"
-msgstr " Злучэнне з аддаленай машынай "
 
 #, fuzzy
 msgid "FTP to machine"
@@ -1768,6 +1731,25 @@ msgstr "< Аўтаматычна >"
 msgid "< Reload Current Syntax >"
 msgstr "< Перагрузіць бягучы сінтаксіс >"
 
+#, fuzzy
+msgid "About"
+msgstr " Аб праграме "
+
+#, fuzzy
+msgid ""
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Тэкставы рэдактар з сяброўскім інтэрфейсам карыстальніку.\n"
+"               Створаны для Midnight Commander.\n"
+
 #, fuzzy, c-format
 msgid "Cannot open %s for reading"
 msgstr " Памылка адкрыцця %s чытання"
@@ -1798,27 +1780,6 @@ msgstr " %s не звычайны файл "
 #, fuzzy, c-format
 msgid "File \"%s\" is too large"
 msgstr " Файл %s надта вялікі "
-
-#, fuzzy
-msgid "About"
-msgstr " Аб праграме "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Тэкставы рэдактар з сяброўскім інтэрфейсам карыстальніку.\n"
-"               Створаны для Midnight Commander.\n"
 
 msgid "Macro recursion is too deep"
 msgstr "Рэкурсія макрасу надта глыбокая"
@@ -2243,6 +2204,10 @@ msgstr "Пераключэнне статусу &радка"
 
 msgid "Go to matching &bracket"
 msgstr "Ісці да парнай &дужкі"
+
+#, fuzzy
+msgid "Toggle s&yntax highlighting"
+msgstr " Выберыце падсветку сінтаксісу "
 
 msgid "&Find declaration"
 msgstr "&Знайсці  дэкларацыю"
@@ -3449,9 +3414,6 @@ msgstr "&Фільтр"
 msgid "&Encoding..."
 msgstr "&Кадыроўка..."
 
-msgid "&Network link..."
-msgstr "Се&ткавае злучэнне..."
-
 msgid "FT&P link..."
 msgstr "&FTP-злучэнне"
 
@@ -4318,6 +4280,55 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Працэс у тле:"
+
+#, fuzzy
+#~ msgid "MCFS"
+#~ msgstr " MCFS "
+
+#, fuzzy
+#~ msgid "The server does not support this version"
+#~ msgstr " Сервер не падтрымлівае бягучую версію "
+
+#, fuzzy
+#~ msgid ""
+#~ "The remote server is not running on a system port\n"
+#~ "you need a password to log in, but the information may\n"
+#~ "not be safe on the remote side.  Continue?\n"
+#~ msgstr ""
+#~ " Адлеглы паслужнік запушчаны не на сістэмным порце. \n"
+#~ " Патрабуецца пароль для ўваходу ў сістэму, але гэта можа быць \n"
+#~ " небяспечна для інфармацыі на адлеглым баку. Працягваць?\n"
+
+#, fuzzy
+#~ msgid "MCFS Password required"
+#~ msgstr " Патрабуецца пароль MCFS "
+
+#, fuzzy
+#~ msgid "Invalid password"
+#~ msgstr " Памылковы пароль "
+
+#, fuzzy
+#~ msgid "Cannot locate hostname: %s"
+#~ msgstr " Немагчыма вызначыць хост: %s"
+
+#, fuzzy
+#~ msgid "Cannot create socket: %s"
+#~ msgstr " Немагчыма стварыць сокет: %s "
+
+#, fuzzy
+#~ msgid "Cannot connect to server: %s"
+#~ msgstr " Немагчыма далучыцца да сервера: %s "
+
+#, fuzzy
+#~ msgid "Too many open connections"
+#~ msgstr " Вельмі шмат адкрытых злучэнняў "
+
+#, fuzzy
+#~ msgid "Link to a remote machine"
+#~ msgstr " Злучэнне з аддаленай машынай "
+
+#~ msgid "&Network link..."
+#~ msgstr "Се&ткавае злучэнне..."
 
 #, fuzzy
 #~ msgid "File was modified, save with exit?"
