@@ -1369,6 +1369,7 @@ get_first_editor_line (WEdit * edit)
  * Load rules into edit struct.  Either edit or *pnames must be NULL.  If
  * edit is NULL, a list of types will be stored into names.  If type is
  * NULL, then the type will be selected according to the filename.
+ * type must be edit->syntax_type or NULL
  */
 void
 edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
@@ -1379,7 +1380,14 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
     if (option_auto_syntax)
         type = NULL;
 
-    edit_free_syntax_rules (edit);
+    if (edit != NULL)
+    {
+        char *saved_type;
+
+        saved_type = g_strdup (type); /* save edit->syntax_type */
+        edit_free_syntax_rules (edit);
+        edit->syntax_type = saved_type; /* restore edit->syntax_type */
+    }
 
     if (!tty_use_colors ())
         return;
