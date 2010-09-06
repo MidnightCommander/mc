@@ -12,6 +12,7 @@
 
 #include "dir.h"		/* dir_list */
 #include "dialog.h"		/* Widget */
+#include "main.h"		/* cd_enum */
 
 #define selection(p) (&(p->dir.list[p->selected]))
 #define DEFAULT_USER_FORMAT "half type name | size | perm"
@@ -140,9 +141,9 @@ void recalculate_panel_summary (WPanel *panel);
 void file_mark (WPanel *panel, int idx, int val);
 void do_file_mark (WPanel *panel, int idx, int val);
 
-void directory_history_next (WPanel *panel);
-void directory_history_prev (WPanel *panel);
-void directory_history_list (WPanel *panel);
+gboolean do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
+
+void directory_history_add (struct WPanel *panel, const char *dir);
 
 gsize panel_get_num_of_sortable_fields(void);
 const char **panel_get_sortable_fields(gsize *);

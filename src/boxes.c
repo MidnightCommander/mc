@@ -413,7 +413,7 @@ confirm_box (void)
         /* TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix */
         /* 2 */ QUICK_CHECKBOX (3, 46, 8, 13, N_("Confirmation|&History cleanup"),
                                 &confirm_history_cleanup),
-        /* 3 */ QUICK_CHECKBOX (3, 46, 7, 13, N_("Confirmation|&Directory hotlist delete"),
+        /* 3 */ QUICK_CHECKBOX (3, 46, 7, 13, N_("Confirmation|Di&rectory hotlist delete"),
                                 &confirm_directory_hotlist_delete),
         /* 4 */ QUICK_CHECKBOX (3, 46, 6, 13, N_("Confirmation|E&xit"), &confirm_exit),
         /* 5 */ QUICK_CHECKBOX (3, 46, 5, 13, N_("Confirmation|&Execute"), &confirm_execute),

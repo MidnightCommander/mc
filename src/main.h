@@ -110,7 +110,7 @@ enum cd_enum
     cd_exact
 };
 
-int do_cd (const char *new_dir, enum cd_enum cd_type);  /* For find.c */
+int do_cd (const char *new_dir, enum cd_enum cd_type);
 void sort_cmd (void);
 void change_panel (void);
 void save_cwds_stat (void);
@@ -135,10 +135,5 @@ void done_menu (void);
 void init_menu (void);
 
 char *remove_encoding_from_path (const char *);
-
-struct WPanel;
-
-void directory_history_add (struct WPanel *panel, const char *dir);
-int do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
 
 #endif /* MC_MAIN_H */

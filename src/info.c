@@ -127,7 +127,7 @@ info_show_info (struct WInfo *info)
         if (myfs_stats.nfree > 0 || myfs_stats.nodes > 0)
             tty_printf (_("Free nodes: %ld (%ld%%) of %ld"),
                         (size_t) myfs_stats.nfree,
-                        myfs_stats.total != 0
+                        myfs_stats.nodes != 0
                         ? 100 * (size_t) myfs_stats.nfree / (size_t) myfs_stats.nodes : 0,
                         (size_t) myfs_stats.nodes);
         else
