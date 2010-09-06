@@ -1,3 +1,58 @@
+Version 4.7.4
+
+- Core
+
+    * Added unassigned key binding CmdEditForceInternal to forced run the internal editor of MC (#1523)
+    * Implemented keybingings for WListbox widget, reimplemented hardcoded keys in viewer and help viewer (#212)
+    * Added capability to enable/disable widgets interactively (#2257)
+    * Reverted the appending of file/dir name to copy/move destination in copy/move dialog (#2276)
+
+- VFS
+
+    * Fixed remained plain int types (#171)
+    * Refactoring of VFS modules on/off. Unification of configure options (#1818)
+    * MCServer and MCFS support were completely removed (#2279)
+    * FISH: implemented resuming of file downloads (#2267)
+    * Adjusted extfs script modes to installed permissions (#2274)
+
+- Editor
+
+    * Editor version is synchronized with MC one (#2189)
+    * Changed default button in editor quit dialog to "Cancel quit" (#2265)
+    * Added "Toggle syntax highlighting" menu item. Described C-s shortcut in mcedit man page (#2035)
+
+- Viewer
+
+    * Changed default button in hexeditor quit dialog to "Cancel quit" (#2265)
+
+- Misc
+
+    * Code cleanup (#2316)
+    * be-tarask.po was renamed to be@tarask.po (#2235)
+    * Translation updates
+    * Added Galician translation
+    * Fixed the title in the section describing xtree_mode variable (#2303)
+
+- Fixes
+
+    * Crash while copying into directory named "????" (#2123)
+    * Crash while changing permissions using "Advanced chown" dialog (#2264)
+    * Crash in autocompletion engine (#2284)
+    * Restore signals even if fork() fails (#2273)
+    * Bogus strings in 'Confirmation' config dialog (#2271)
+    * History can be shown incorrectly due to access to the invalid pointer (#2299)
+    * Potential division by zero in Info panel (#2337)
+    * Segfault in replace confirmation in editor (#2272)
+    * Regexp replace only transforms the first occurence correctly (#2320)
+    * Broken manually changing syntax definition (#2324)
+    * MCEdit version number not centered in about dialog (#2311)
+    * Typo in the code and the man section describing X clipboard integration (#30)
+    * Viewer doesn't show non-ASCII chars in hex mode (#2263)
+    * Comple warnings in diff viewer (#2277)
+    * 2GB file size limit in fish (#123)
+    * Meta-fixes for manual pages (#2237, #2253)
+
+
 Version 4.7.3
 
 - Core
