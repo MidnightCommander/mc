@@ -1688,7 +1688,6 @@ edit_replace_cmd (WEdit * edit, int again)
     char *disp2 = NULL;
     long times_replaced = 0;
     gboolean once_found = FALSE;
-    GString *repl_str = NULL, *tmp_str = NULL;
 
     if (!edit)
     {
@@ -1787,6 +1786,7 @@ edit_replace_cmd (WEdit * edit, int again)
         if ((edit->search_start >= 0) && (edit->search_start < edit->last_byte))
         {
             gsize i;
+            GString *tmp_str, *repl_str;
 
             edit->found_start = edit->search_start;
             i = edit->found_len = len;
@@ -1836,16 +1836,15 @@ edit_replace_cmd (WEdit * edit, int again)
             }
 
             /* don't process string each time */
-            if (tmp_str == NULL)
-            {
-                tmp_str = g_string_new (input2);
-                repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
+            tmp_str = g_string_new (input2);
+            repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
+            g_string_free (tmp_str, TRUE);
 
-                if (edit->search->error != MC_SEARCH_E_OK)
-                {
-                    edit_error_dialog (_("Replace"), edit->search->error_str);
-                    break;
-                }
+            if (edit->search->error != MC_SEARCH_E_OK)
+            {
+                edit_error_dialog (_("Replace"), edit->search->error_str);
+                g_string_free (repl_str, TRUE);
+                break;
             }
 
               /* delete then insert new */
@@ -1856,6 +1855,7 @@ edit_replace_cmd (WEdit * edit, int again)
                 edit_insert (edit, repl_str->str[i]);
 
             edit->found_len = repl_str->len;
+            g_string_free (repl_str, TRUE);
             times_replaced++;
 
             /* so that we don't find the same string again */
@@ -1863,7 +1863,7 @@ edit_replace_cmd (WEdit * edit, int again)
                 edit->search_start--;
             else
             {
-                edit->search_start += repl_str->len;
+                edit->search_start += edit->found_len;
 
                 if (edit->search_start >= edit->last_byte)
                     break;
@@ -1886,11 +1886,6 @@ edit_replace_cmd (WEdit * edit, int again)
         }
     }
     while (edit->replace_mode >= 0);
-
-    if (tmp_str != NULL)
-        g_string_free (tmp_str, TRUE);
-    if (repl_str != NULL)
-        g_string_free (repl_str, TRUE);
 
     edit_scroll_screen_over_cursor (edit);
     edit->force |= REDRAW_COMPLETELY;
