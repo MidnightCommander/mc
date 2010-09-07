@@ -1455,7 +1455,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
  * If there is no stored data, return line 1 and col 0.
  */
 void
-load_file_position (const char *filename, long *line, long *column, off_t * offset, long **bookmarks)
+load_file_position (const char *filename, long *line, long *column, off_t * offset, GArray **bookmarks)
 {
     char *fn;
     FILE *f;
@@ -1475,9 +1475,7 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
         return;
 
     /* prepare array for serialized bookmarks */
-    (*bookmarks) = (long *) g_malloc ((MAX_SAVED_BOOKMARKS + 1) * sizeof(long));
-    (*bookmarks)[0] = -1;
-    (*bookmarks)[MAX_SAVED_BOOKMARKS] = -2;
+    *bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
 
     while (fgets (buf, sizeof (buf), f) != NULL)
     {
@@ -1523,15 +1521,12 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
 
                     *offset = strtoll (pos_tokens[2], NULL, 10);
 
-                    for (i = 0; i < MAX_SAVED_BOOKMARKS; i++)
+                    for (i = 0; i < MAX_SAVED_BOOKMARKS && pos_tokens[3 + i] != NULL; i++)
                     {
-                        if (pos_tokens[3 + i] != NULL)
-                            (*bookmarks)[i] = strtol (pos_tokens[3 + i], NULL, 10);
-                        else
-                        {
-                            (*bookmarks)[i] = -1;
-                            break;
-                        }
+                        size_t val;
+
+                        val = strtoul (pos_tokens[3 + i], NULL, 10);
+                        g_array_append_val (*bookmarks, val);
                     }
                 }
             }
@@ -1546,13 +1541,13 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
 /* Save position for the given file */
 #define TMP_SUFFIX ".tmp"
 void
-save_file_position (const char *filename, long line, long column, off_t offset, long *bookmarks)
+save_file_position (const char *filename, long line, long column, off_t offset, GArray *bookmarks)
 {
-    static int filepos_max_saved_entries = 0;
+    static size_t filepos_max_saved_entries = 0;
     char *fn, *tmp_fn;
     FILE *f, *tmp_f;
     char buf[MC_MAXPATHLEN + 100];
-    int i;
+    size_t i;
     const size_t len = strlen (filename);
     gboolean src_error = FALSE;
 
@@ -1585,8 +1580,8 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
         if (fprintf (f, "%s %ld;%ld;%ju", filename, line, column, offset) < 0)
             goto write_position_error;
         if (bookmarks != NULL)
-            for (i = 0; bookmarks[i] >= 0 && i < MAX_SAVED_BOOKMARKS; i++)
-                if (fprintf (f, ";%ld", bookmarks[i]) < 0)
+            for (i = 0; i < bookmarks->len && i < MAX_SAVED_BOOKMARKS; i++)
+                if (fprintf (f, ";%zu", g_array_index (bookmarks, size_t, i)) < 0)
                     goto write_position_error;
 
         if (fprintf (f, "\n") < 0)
@@ -1616,7 +1611,7 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
   open_target_error:
     g_free (fn);
   early_error:
-    g_free (bookmarks);
+    g_array_free (bookmarks, TRUE);
 }
 
 #undef TMP_SUFFIX

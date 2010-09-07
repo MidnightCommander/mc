@@ -222,6 +222,8 @@ mcview_init (mcview_t * view)
     view->move_dir = 0;
     view->update_steps = 0;
     view->update_activate = 0;
+
+    view->saved_bookmarks = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -235,6 +237,7 @@ mcview_done (mcview_t * view)
         char *canon_fname;
         canon_fname = vfs_canon (view->filename);
         save_file_position (canon_fname, -1, 0, view->dpy_start, view->saved_bookmarks);
+        view->saved_bookmarks = NULL;
         g_free (canon_fname);
     }
 

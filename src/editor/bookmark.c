@@ -40,6 +40,7 @@
 #include <unistd.h>
 
 #include "lib/global.h"
+#include "lib/util.h"           /* MAX_SAVED_BOOKMARKS */
 
 #include "edit-widget.h"
 
@@ -139,7 +140,7 @@ book_mark_query_color (WEdit * edit, int line, int c)
 
 /* insert a bookmark at this line */
 void
-book_mark_insert (WEdit * edit, int line, int c)
+book_mark_insert (WEdit * edit, size_t line, int c)
 {
     struct _book_mark *p, *q;
 
@@ -159,7 +160,7 @@ book_mark_insert (WEdit * edit, int line, int c)
     edit->force |= REDRAW_LINE;
     /* create list entry */
     q = g_malloc0 (sizeof (struct _book_mark));
-    q->line = line;
+    q->line = (int) line;
     q->c = c;
     q->next = p->next;
     /* insert into list */
@@ -267,14 +268,19 @@ void
 book_mark_serialize (WEdit * edit, int color)
 {
     struct _book_mark *p;
-    long *bookmarks = edit->serialized_bookmarks;
 
-    if (edit->book_mark != NULL && bookmarks != NULL)
+    if (edit->serialized_bookmarks != NULL)
+        g_array_set_size (edit->serialized_bookmarks, 0);
+
+    if (edit->book_mark != NULL)
     {
-        for (p = book_mark_find (edit, 0); p != NULL && *bookmarks != -2; p = p->next)
-            if (p->c == color && p->line != -1)
-                *bookmarks++ = p->line;
-        *bookmarks = -1;
+        if (edit->serialized_bookmarks == NULL)
+            edit->serialized_bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t),
+                                                            MAX_SAVED_BOOKMARKS);
+
+        for (p = book_mark_find (edit, 0); p != NULL; p = p->next)
+            if (p->c == color && p->line >= 0)
+                g_array_append_val (edit->serialized_bookmarks, p->line);
     }
 }
 
@@ -282,9 +288,11 @@ book_mark_serialize (WEdit * edit, int color)
 void
 book_mark_restore (WEdit * edit, int color)
 {
-    long *bookmarks = edit->serialized_bookmarks;
+    if (edit->serialized_bookmarks != NULL)
+    {
+        size_t i;
 
-    if (bookmarks != NULL)
-        for (; *bookmarks >= 0; bookmarks++)
-            book_mark_insert (edit, *bookmarks, color);
+        for (i = 0; i < edit->serialized_bookmarks->len; i++)
+            book_mark_insert (edit, g_array_index (edit->serialized_bookmarks, size_t, i), color);
+    }
 }

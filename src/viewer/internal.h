@@ -191,7 +191,7 @@ typedef struct mcview_struct
 
     int search_numNeedSkipChar;
 
-    long *saved_bookmarks;
+    GArray *saved_bookmarks;
 } mcview_t;
 
 typedef struct mcview_nroff_struct

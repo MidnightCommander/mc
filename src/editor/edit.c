@@ -844,13 +844,12 @@ edit_save_position (WEdit * edit)
 {
     char *filename;
 
-    if (!edit->filename || !*edit->filename)
+    if (edit->filename == NULL || *edit->filename == '\0')
         return;
 
     filename = vfs_canon (edit->filename);
 
     book_mark_serialize (edit, BOOK_MARK_COLOR);
-
     save_file_position (filename, edit->curs_line + 1, edit->curs_col, edit->curs1, edit->serialized_bookmarks);
     edit->serialized_bookmarks = NULL;
 
