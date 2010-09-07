@@ -41,9 +41,7 @@
 
 #include "lib/global.h"
 
-#include "edit-impl.h"
 #include "edit-widget.h"
-
 
 /* note, if there is more than one bookmark on a line, then they are
    appended after each other and the last one is always the one found
@@ -54,7 +52,7 @@ double_marks (WEdit * edit, struct _book_mark *p)
 {
     (void) edit;
 
-    if (p->next)
+    if (p->next != NULL)
         while (p->next->line == p->line)
             p = p->next;
     return p;
@@ -65,42 +63,43 @@ struct _book_mark *
 book_mark_find (WEdit * edit, int line)
 {
     struct _book_mark *p;
-    if (!edit->book_mark)
+
+    if (edit->book_mark == NULL)
     {
         /* must have an imaginary top bookmark at line -1 to make things less complicated  */
         edit->book_mark = g_malloc0 (sizeof (struct _book_mark));
         edit->book_mark->line = -1;
         return edit->book_mark;
     }
-    for (p = edit->book_mark; p; p = p->next)
+
+    for (p = edit->book_mark; p != NULL; p = p->next)
     {
         if (p->line > line)
             break;              /* gone past it going downward */
-        if (p->line <= line)
+
+        if (p->next != NULL)
         {
-            if (p->next)
-            {
-                if (p->next->line > line)
-                {
-                    edit->book_mark = p;
-                    return double_marks (edit, p);
-                }
-            }
-            else
+            if (p->next->line > line)
             {
                 edit->book_mark = p;
                 return double_marks (edit, p);
             }
         }
+        else
+        {
+            edit->book_mark = p;
+            return double_marks (edit, p);
+        }
     }
-    for (p = edit->book_mark; p; p = p->prev)
+
+    for (p = edit->book_mark; p != NULL; p = p->prev)
     {
-        if (p->next)
-            if (p->next->line <= line)
-                break;          /* gone past it going upward */
+        if (p->next != NULL && p->next->line <= line)
+            break;          /* gone past it going upward */
+
         if (p->line <= line)
         {
-            if (p->next)
+            if (p->next != NULL)
             {
                 if (p->next->line > line)
                 {
@@ -115,7 +114,8 @@ book_mark_find (WEdit * edit, int line)
             }
         }
     }
-    return 0;                   /* can't get here */
+
+    return NULL;                   /* can't get here */
 }
 
 /* returns true if a bookmark exists at this line of color c */
@@ -123,9 +123,11 @@ int
 book_mark_query_color (WEdit * edit, int line, int c)
 {
     struct _book_mark *p;
-    if (!edit->book_mark)
+
+    if (edit->book_mark == NULL)
         return 0;
-    for (p = book_mark_find (edit, line); p; p = p->prev)
+
+    for (p = book_mark_find (edit, line); p != NULL; p = p->prev)
     {
         if (p->line != line)
             return 0;
@@ -140,6 +142,7 @@ void
 book_mark_insert (WEdit * edit, int line, int c)
 {
     struct _book_mark *p, *q;
+
     p = book_mark_find (edit, line);
 #if 0
     if (p->line == line)
@@ -147,8 +150,8 @@ book_mark_insert (WEdit * edit, int line, int c)
         /* already exists, so just change the color */
         if (p->c != c)
         {
-            edit->force |= REDRAW_LINE;
             p->c = c;
+            edit->force |= REDRAW_LINE;
         }
         return;
     }
@@ -161,7 +164,7 @@ book_mark_insert (WEdit * edit, int line, int c)
     q->next = p->next;
     /* insert into list */
     q->prev = p;
-    if (p->next)
+    if (p->next != NULL)
         p->next->prev = q;
     p->next = q;
 }
@@ -173,20 +176,22 @@ book_mark_clear (WEdit * edit, int line, int c)
 {
     struct _book_mark *p, *q;
     int r = 1;
-    if (!edit->book_mark)
+
+    if (edit->book_mark == NULL)
         return r;
-    for (p = book_mark_find (edit, line); p; p = q)
+
+    for (p = book_mark_find (edit, line); p != NULL; p = q)
     {
         q = p->prev;
         if (p->line == line && (p->c == c || c == -1))
         {
             r = 0;
-            edit->force |= REDRAW_LINE;
             edit->book_mark = p->prev;
             p->prev->next = p->next;
-            if (p->next)
+            if (p->next != NULL)
                 p->next->prev = p->prev;
             g_free (p);
+            edit->force |= REDRAW_LINE;
             break;
         }
     }
@@ -194,7 +199,7 @@ book_mark_clear (WEdit * edit, int line, int c)
     if (edit->book_mark->line == -1 && !edit->book_mark->next)
     {
         g_free (edit->book_mark);
-        edit->book_mark = 0;
+        edit->book_mark = NULL;
     }
     return r;
 }
@@ -204,27 +209,31 @@ void
 book_mark_flush (WEdit * edit, int c)
 {
     struct _book_mark *p, *q;
-    if (!edit->book_mark)
+
+    if (edit->book_mark == NULL)
         return;
-    edit->force |= REDRAW_PAGE;
-    while (edit->book_mark->prev)
+
+    while (edit->book_mark->prev != NULL)
         edit->book_mark = edit->book_mark->prev;
-    for (q = edit->book_mark->next; q; q = p)
+
+    for (q = edit->book_mark->next; q != NULL; q = p)
     {
         p = q->next;
         if (q->c == c || c == -1)
         {
             q->prev->next = q->next;
-            if (p)
+            if (p != NULL)
                 p->prev = q->prev;
             g_free (q);
         }
     }
-    if (!edit->book_mark->next)
+    if (edit->book_mark->next == NULL)
     {
         g_free (edit->book_mark);
-        edit->book_mark = 0;
+        edit->book_mark = NULL;
     }
+
+    edit->force |= REDRAW_PAGE;
 }
 
 /* shift down bookmarks after this line */
@@ -235,10 +244,8 @@ book_mark_inc (WEdit * edit, int line)
     {
         struct _book_mark *p;
         p = book_mark_find (edit, line);
-        for (p = p->next; p; p = p->next)
-        {
+        for (p = p->next; p != NULL; p = p->next)
             p->line++;
-        }
     }
 }
 
@@ -246,14 +253,12 @@ book_mark_inc (WEdit * edit, int line)
 void
 book_mark_dec (WEdit * edit, int line)
 {
-    if (edit->book_mark)
+    if (edit->book_mark != NULL)
     {
         struct _book_mark *p;
         p = book_mark_find (edit, line);
-        for (p = p->next; p; p = p->next)
-        {
+        for (p = p->next; p != NULL; p = p->next)
             p->line--;
-        }
     }
 }
 
@@ -264,17 +269,13 @@ book_mark_serialize (WEdit * edit, int color)
     struct _book_mark *p;
     long *bookmarks = edit->serialized_bookmarks;
 
-    if (edit->book_mark == NULL || bookmarks == NULL)
-        return;
-
-    for (p = book_mark_find (edit, 0); p != NULL && *bookmarks != -2; p = p->next)
+    if (edit->book_mark != NULL && bookmarks != NULL)
     {
-        if (p->c == color && p->line != -1)
-        {
-            *bookmarks++ = p->line;
-        }
+        for (p = book_mark_find (edit, 0); p != NULL && *bookmarks != -2; p = p->next)
+            if (p->c == color && p->line != -1)
+                *bookmarks++ = p->line;
+        *bookmarks = -1;
     }
-    *bookmarks = -1;
 }
 
 /* restore bookmarks from saved line positions */
@@ -282,9 +283,8 @@ void
 book_mark_restore (WEdit * edit, int color)
 {
     long *bookmarks = edit->serialized_bookmarks;
-    if (bookmarks == NULL)
-        return;
 
-    for (; *bookmarks >= 0; bookmarks++)
-        book_mark_insert (edit, *bookmarks, color);
+    if (bookmarks != NULL)
+        for (; *bookmarks >= 0; bookmarks++)
+            book_mark_insert (edit, *bookmarks, color);
 }

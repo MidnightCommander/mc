@@ -43,10 +43,11 @@
 #include "lib/global.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/util.h"           /* save_file_position() */
+#include "lib/lock.h"           /* unlock_file() */
 
 #include "src/wtools.h"
 #include "src/main.h"
-#include "lib/lock.h"           /* unlock_file() */
 #include "src/charsets.h"
 #include "src/selcodepage.h"
 

@@ -44,6 +44,7 @@
 #include "lib/tty/mouse.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/util.h"           /* load_file_position() */
 
 #include "src/main.h"
 #include "src/charsets.h"

@@ -1450,8 +1450,6 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
     return -1;
 }
 
-#define MAX_SAVED_BOOKMARKS 10
-
 /*
  * Read and restore position for the given filename.
  * If there is no stored data, return line 1 and col 0.
@@ -1462,7 +1460,7 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
     char *fn;
     FILE *f;
     char buf[MC_MAXPATHLEN + 100];
-    int len;
+    const size_t len = strlen (filename);
 
     /* defaults */
     *line = 1;
@@ -1473,17 +1471,15 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
     fn = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
     f = fopen (fn, "r");
     g_free (fn);
-    if (!f)
+    if (f == NULL)
         return;
 
     /* prepare array for serialized bookmarks */
-    (*bookmarks) = (long*) g_malloc ((MAX_SAVED_BOOKMARKS + 1) * sizeof(long));
+    (*bookmarks) = (long *) g_malloc ((MAX_SAVED_BOOKMARKS + 1) * sizeof(long));
     (*bookmarks)[0] = -1;
     (*bookmarks)[MAX_SAVED_BOOKMARKS] = -2;
 
-    len = strlen (filename);
-
-    while (fgets (buf, sizeof (buf), f))
+    while (fgets (buf, sizeof (buf), f) != NULL)
     {
         const char *p;
         gchar **pos_tokens;
@@ -1498,21 +1494,35 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
 
         /* and string without spaces */
         p = &buf[len + 1];
-        if (strchr (p, ' '))
+        if (strchr (p, ' ') != NULL)
             continue;
 
-
-        pos_tokens = g_strsplit_set (p, ";", 3 + MAX_SAVED_BOOKMARKS);
-        if (pos_tokens[0] != NULL)
+        pos_tokens = g_strsplit (p, ";", 3 + MAX_SAVED_BOOKMARKS);
+        if (pos_tokens[0] == NULL)
+        {
+            *line = 1;
+            *column = 0;
+            *offset = 0;
+        }
+        else
         {
             *line = strtol (pos_tokens[0], NULL, 10);
-            if (pos_tokens[1] != NULL)
+            if (pos_tokens[1] == NULL)
+            {
+                *column = 0;
+                *offset = 0;
+            }
+            else
             {
                 *column = strtol (pos_tokens[1], NULL, 10);
-                if (pos_tokens[2] != NULL)
+                if (pos_tokens[2] == NULL)
+                    *offset = 0;
+                else
                 {
-                    int i;
+                    size_t i;
+
                     *offset = strtoll (pos_tokens[2], NULL, 10);
+
                     for (i = 0; i < MAX_SAVED_BOOKMARKS; i++)
                     {
                         if (pos_tokens[3 + i] != NULL)
@@ -1524,23 +1534,12 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
                         }
                     }
                 }
-                else
-                    *offset = 0;
-            }
-            else
-            {
-                *column = 0;
-                *offset = 0;
             }
         }
-        else
-        {
-            *line = 1;
-            *column = 0;
-            *offset = 0;
-        }
+
         g_strfreev (pos_tokens);
     }
+
     fclose (f);
 }
 
@@ -1554,7 +1553,8 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
     FILE *f, *tmp_f;
     char buf[MC_MAXPATHLEN + 100];
     int i;
-    gsize len;
+    const size_t len = strlen (filename);
+    gboolean src_error = FALSE;
 
     if (filepos_max_saved_entries == 0)
         filepos_max_saved_entries = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
@@ -1563,8 +1563,6 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
     fn = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
     if (fn == NULL)
         goto early_error;
-
-    len = strlen (filename);
 
     mc_util_make_backup_if_possible (fn, TMP_SUFFIX);
 
@@ -1576,54 +1574,49 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
     tmp_fn = g_strdup_printf ("%s" TMP_SUFFIX, fn);
     tmp_f = fopen (tmp_fn, "r");
     if (tmp_f == NULL)
+    {
+        src_error = TRUE;
         goto open_source_error;
+    }
 
     /* put the new record */
     if (line != 1 || column != 0 || bookmarks != NULL)
     {
-        if (fprintf (f, "%s %ld;%ld;%llu", filename, line, column, (unsigned long long) offset) < 0)
+        if (fprintf (f, "%s %ld;%ld;%ju", filename, line, column, offset) < 0)
             goto write_position_error;
         if (bookmarks != NULL)
-        {
             for (i = 0; bookmarks[i] >= 0 && i < MAX_SAVED_BOOKMARKS; i++)
-            {
                 if (fprintf (f, ";%ld", bookmarks[i]) < 0)
                     goto write_position_error;
-            }
-        }
+
         if (fprintf (f, "\n") < 0)
             goto write_position_error;
     }
 
     i = 1;
-    while (fgets (buf, sizeof (buf), tmp_f))
+    while (fgets (buf, sizeof (buf), tmp_f) != NULL)
     {
-        if (buf[len] == ' ' && strncmp (buf, filename, len) == 0 && !strchr (&buf[len + 1], ' '))
+        if (buf[len] == ' ' && strncmp (buf, filename, len) == 0 && strchr (&buf[len + 1], ' ') == NULL)
             continue;
 
         fprintf (f, "%s", buf);
         if (++i > filepos_max_saved_entries)
             break;
     }
-    fclose (tmp_f);
-    g_free (tmp_fn);
-    fclose (f);
-    mc_util_unlink_backup_if_possible (fn, TMP_SUFFIX);
-    g_free (fn);
-    return;
 
   write_position_error:
     fclose (tmp_f);
   open_source_error:
     g_free (tmp_fn);
     fclose (f);
-    mc_util_restore_from_backup_if_possible (fn, TMP_SUFFIX);
+    if (src_error)
+        mc_util_restore_from_backup_if_possible (fn, TMP_SUFFIX);
+    else
+        mc_util_unlink_backup_if_possible (fn, TMP_SUFFIX);
   open_target_error:
     g_free (fn);
   early_error:
-    if (bookmarks != NULL)
-        g_free(bookmarks);
-    return;
+    g_free (bookmarks);
 }
 
 #undef TMP_SUFFIX

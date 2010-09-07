@@ -47,6 +47,7 @@
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/util.h"           /* load_file_position(), save_file_position() */
 #include "lib/timefmt.h"        /* time formatting */
 #include "lib/lock.h"
 
@@ -804,8 +805,6 @@ edit_load_file (WEdit * edit)
     edit->lb = LB_ASIS;
     return 0;
 }
-
-#define MAX_SAVED_BOOKMARKS 10
 
 /* Restore saved cursor position in the file */
 static void
