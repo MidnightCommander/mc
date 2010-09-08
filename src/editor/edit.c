@@ -1004,6 +1004,8 @@ edit_clean (WEdit * edit)
     /* save cursor position */
     if (option_save_position)
         edit_save_position (edit);
+    else if (edit->serialized_bookmarks != NULL)
+        edit->serialized_bookmarks = (GArray *) g_array_free (edit->serialized_bookmarks, TRUE);
 
     /* File specified on the mcedit command line and never saved */
     if (edit->delete_file)
