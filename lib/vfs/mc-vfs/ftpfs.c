@@ -1137,8 +1137,6 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
             ERRNOR (EINVAL, -1);
         }
 
-        port = ntohs (port);
-
         addr = g_try_malloc (NI_MAXHOST);
         if (addr == NULL)
             ERRNOR (ENOMEM, -1);
@@ -1151,13 +1149,7 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
             ERRNOR (EIO, -1);
         }
 
-        if (ftpfs_command (me, super, WAIT_REPLY, "EPRT |%u|%s|%hu|", af, addr, port) == COMPLETE)
-        {
-            g_free (addr);
-            return data_sock;
-        }
-        g_free (addr);
-
+        /* If we are talking to an IPV4 server, try PORT, and, only if it fails, go for EPRT */
         if (FTP_INET == af)
         {
             unsigned char *a = (unsigned char *) &((struct sockaddr_in *) &data_addr)->sin_addr;
@@ -1166,8 +1158,28 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
             if (ftpfs_command (me, super, WAIT_REPLY,
                                "PORT %u,%u,%u,%u,%u,%u", a[0], a[1], a[2], a[3],
                                p[0], p[1]) == COMPLETE)
+            {
+                g_free (addr);
                 return data_sock;
+            }
         }
+
+        /*
+         * Converts network MSB first order to host byte order (LSB
+         * first on i386). If we do it earlier, we will run into an
+         * endianness issue, because the server actually expects to see
+         * "PORT A,D,D,R,MSB,LSB" in the PORT command.
+         */
+        port = ntohs (port);
+
+        /* We are talking to an IPV6 server or PORT failed, so we can try EPRT anyway */
+        if (ftpfs_command (me, super, WAIT_REPLY, "EPRT |%u|%s|%hu|", af, addr, port) == COMPLETE)
+        {
+            g_free (addr);
+            return data_sock;
+        }
+        g_free (addr);
+
     }
     close (data_sock);
     ftpfs_errno = EIO;
