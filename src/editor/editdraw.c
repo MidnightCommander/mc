@@ -280,7 +280,7 @@ struct line_s
 
 static inline void
 print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
-                 long end_col, struct line_s line[], char *status)
+                 long end_col, struct line_s line[], char *status, int bookmarked)
 {
     struct line_s *p;
 
@@ -291,6 +291,8 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     int i;
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
+    if (bookmarked != 0)
+        tty_setcolor (bookmarked);
 
     if (!show_right_margin)
     {
@@ -675,7 +677,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
 
     p->ch = '\0';
 
-    print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat);
+    print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat, book_mark);
 }
 
 #define key_pending(x) (!is_idle())
