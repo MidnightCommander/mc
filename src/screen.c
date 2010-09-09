@@ -1323,7 +1323,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     WPanel *panel;
     char *section;
     int i, err;
-    char curdir[MC_MAXPATHLEN];
+    char curdir[MC_MAXPATHLEN] = "\0";
 
     panel = g_new0 (WPanel, 1);
 
@@ -1333,7 +1333,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     /* We do not want the cursor */
     widget_want_cursor (panel->widget, 0);
 
-    if (wpath)
+    if (wpath != NULL)
     {
         g_strlcpy (panel->cwd, wpath, sizeof (panel->cwd));
         mc_get_current_wd (curdir, sizeof (curdir) - 2);
@@ -1371,8 +1371,9 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     for (i = 0; i < LIST_TYPES; i++)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
-    panel->search_buffer[0] = 0;
+    panel->search_buffer[0] = '\0';
     panel->frame_size = frame_half;
+
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
     if (!mc_config_has_group (mc_main_config, section))
     {
@@ -1387,12 +1388,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     if (err != 0)
         set_panel_formats (panel);
 
-    /* Because do_load_dir lists files in current directory */
-    if (wpath)
-    {
-        int ret;
-        ret = mc_chdir (wpath);
-    }
+    err = mc_chdir (panel->cwd);
 
     /* Load the default format */
     panel->count =
@@ -1400,11 +1396,8 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
                      panel->reverse, panel->case_sensitive, panel->exec_first, panel->filter);
 
     /* Restore old right path */
-    if (wpath)
-    {
-        int ret;
-        ret = mc_chdir (curdir);
-    }
+    if (curdir[0] != '\0')
+        err = mc_chdir (curdir);
 
     return panel;
 }
