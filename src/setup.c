@@ -721,6 +721,11 @@ load_setup (void)
     size_t i;
     char *buffer;
     const char *kt;
+#ifdef HAVE_CHARSET
+    int cpages = -1;
+
+    cpages = load_codepages_list ();
+#endif /* HAVE_CHARSET */
 
     profile = setup_init ();
 
@@ -811,7 +816,7 @@ load_setup (void)
     /* Remove the temporal entries */
 
 #ifdef HAVE_CHARSET
-    if (load_codepages_list () > 0)
+    if (cpages > 0)
     {
         buffer = mc_config_get_string (mc_main_config, "Misc", "display_codepage", "");
         if (buffer[0] != '\0')
@@ -824,7 +829,7 @@ load_setup (void)
         if (buffer[0] != '\0')
         {
             default_source_codepage = get_codepage_index (buffer);
-            source_codepage = default_source_codepage;  /* May be source_codepage don't needed this */
+            source_codepage = default_source_codepage;  /* May be source_codepage doesn't need this */
             cp_source = get_codepage_id (source_codepage);
         }
         g_free (buffer);
@@ -839,6 +844,7 @@ load_setup (void)
     if (buffer != NULL)
         utf8_display = str_isutf8 (buffer);
 #endif /* HAVE_CHARSET */
+
     clipboard_store_path = mc_config_get_string (mc_main_config, "Misc", "clipboard_store", "");
     clipboard_paste_path = mc_config_get_string (mc_main_config, "Misc", "clipboard_paste", "");
 }
