@@ -457,9 +457,17 @@ mc_setup_by_args (int argc, char *argv[])
               try_plus_filename:
                 if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1]))
                 {
-                    int start_line;;
+                    int start_line;
 
                     start_line = atoi (tmp);
+
+                    /*
+                     * If start_line is zero, position the cursor at the
+                     * beginning of the file as other editors (vi, nano)
+                     */
+                    if (start_line == 0)
+                        start_line++;
+
                     if (start_line > 0)
                     {
                         char *file;
