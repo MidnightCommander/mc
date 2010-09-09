@@ -3065,7 +3065,7 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         move_home (panel);
         break;
     case CK_PanelSetPanelEncoding:
-        set_panel_encoding (panel);
+        panel_change_encoding (panel);
         break;
     case CK_PanelStartSearch:
         start_search (panel);
@@ -3502,7 +3502,7 @@ panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order)
 }
 
 void
-set_panel_encoding (WPanel * panel)
+panel_change_encoding (WPanel * panel)
 {
     const char *encoding = NULL;
     char *cd_path;

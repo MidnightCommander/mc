@@ -1551,5 +1551,5 @@ void
 encoding_cmd (void)
 {
     if (SELECTED_IS_PANEL)
-        set_panel_encoding (MENU_PANEL);
+        panel_change_encoding (MENU_PANEL);
 }
