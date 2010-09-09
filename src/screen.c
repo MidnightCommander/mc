@@ -60,18 +60,20 @@
 #include "main-widgets.h"
 #include "main.h"
 #include "mountlist.h"          /* my_statfs */
-#include "selcodepage.h"        /* select_charset () */
+#include "selcodepage.h"        /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
+#ifdef HAVE_CHARSET
 #include "charsets.h"           /* get_codepage_id () */
+#endif
 #include "cmddef.h"             /* CK_ cmd name const */
 #include "keybind.h"            /* global_keymap_t */
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
-#define NORMAL		0
-#define SELECTED	1
-#define MARKED		2
-#define MARKED_SELECTED	3
-#define STATUS		5
+#define NORMAL          0
+#define SELECTED        1
+#define MARKED          2
+#define MARKED_SELECTED 3
+#define STATUS          5
 
 typedef enum
 {
@@ -1368,6 +1370,8 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
 
+    panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+
     for (i = 0; i < LIST_TYPES; i++)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
@@ -1388,7 +1392,19 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     if (err != 0)
         set_panel_formats (panel);
 
-    err = mc_chdir (panel->cwd);
+#ifdef HAVE_CHARSET
+    {
+        const char *enc = vfs_get_encoding (panel->cwd);
+        if (enc != NULL)
+            panel->codepage = get_codepage_index (enc);
+    }
+#endif
+
+    if (mc_chdir (panel->cwd) != 0)
+    {
+        panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+        mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
+    }
 
     /* Load the default format */
     panel->count =
@@ -3503,12 +3519,14 @@ panel_change_encoding (WPanel * panel)
     char *errmsg;
     int r;
 
-    r = select_charset (-1, -1, default_source_codepage, FALSE);
+    r = select_charset (-1, -1, panel->codepage, FALSE);
 
     if (r == SELECT_CHARSET_CANCEL)
         return;                 /* Cancel */
 
-    if (r == SELECT_CHARSET_NO_TRANSLATE)
+    panel->codepage = r;
+
+    if (panel->codepage == SELECT_CHARSET_NO_TRANSLATE)
     {
         /* No translation */
         g_free (init_translation_table (display_codepage, display_codepage));
@@ -3518,9 +3536,7 @@ panel_change_encoding (WPanel * panel)
         return;
     }
 
-    source_codepage = r;
-
-    errmsg = init_translation_table (source_codepage, display_codepage);
+    errmsg = init_translation_table (panel->codepage, display_codepage);
     if (errmsg != NULL)
     {
         message (D_ERROR, MSG_ERROR, "%s", errmsg);
@@ -3528,7 +3544,7 @@ panel_change_encoding (WPanel * panel)
         return;
     }
 
-    encoding = get_codepage_id (source_codepage);
+    encoding = get_codepage_id (panel->codepage);
 #endif
     if (encoding != NULL)
     {
