@@ -625,7 +625,13 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 else
                 {
                     /* "token/../foo" -> "foo" */
-                    str_move (s, p + 4);
+#if HAVE_CHARSET
+                    /* special case: remove encoding */
+                    if (strncmp (s, "#enc:", 5) == 0)
+                        str_move (s, p + 1);
+                    else
+#endif /* HAVE_CHARSET */
+                        str_move (s, p + 4);
                 }
                 p = (s > lpath) ? s - 1 : s;
                 continue;
@@ -646,6 +652,24 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 /* "foo/token/.." -> "foo" */
                 if (s == lpath + 1)
                     s[0] = 0;
+#if HAVE_CHARSET
+                else if (strncmp (s, "#enc:", 5) == 0)
+                {
+                    /* special case: remove encoding */
+                    s[0] = '.';
+                    s[1] = '.';
+                    s[2] = '\0';
+
+                    /* search for the previous token */
+                    /* s[-1] == PATH_SEP */
+                    p = s - 1;
+                    while (p >= lpath && *p != PATH_SEP)
+                        p--;
+
+                    if (p != NULL)
+                        continue;
+                }
+#endif /* HAVE_CHARSET */
                 else
                     s[-1] = 0;
                 break;
