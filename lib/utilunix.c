@@ -49,6 +49,8 @@
 #include <grp.h>
 
 #include "lib/global.h"
+#include "lib/vfs/mc-vfs/vfs.h" /* VFS_ENCODING_PREFIX */
+
 #include "src/execute.h"
 #include "src/wtools.h"         /* message() */
 
@@ -591,6 +593,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
     if (flags & CANON_PATH_REMDOUBLEDOTS)
     {
+        const size_t enc_prefix_len = strlen (VFS_ENCODING_PREFIX);
+
         /* Collapse "/.." with the previous part of path */
         p = lpath;
         while (p[0] && p[1] && p[2])
@@ -626,8 +630,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 {
                     /* "token/../foo" -> "foo" */
 #if HAVE_CHARSET
-                    /* special case: remove encoding */
-                    if (strncmp (s, "#enc:", 5) == 0)
+                    if (strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
+                        /* special case: remove encoding */
                         str_move (s, p + 1);
                     else
 #endif /* HAVE_CHARSET */
@@ -653,7 +657,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 if (s == lpath + 1)
                     s[0] = 0;
 #if HAVE_CHARSET
-                else if (strncmp (s, "#enc:", 5) == 0)
+                else if (strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
                 {
                     /* special case: remove encoding */
                     s[0] = '.';

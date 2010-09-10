@@ -1059,7 +1059,7 @@ paint_panel (WPanel * panel)
 
 /* add "#enc:encodning" to end of path */
 /* if path end width a previous #enc:, only encoding is changed no additional 
- * #enc: is appended 
+ * #enc: is appended
  * retun new string
  */
 static char *
@@ -1069,25 +1069,25 @@ add_encoding_to_path (const char *path, const char *encoding)
     char *semi;
     char *slash;
 
-    semi = g_strrstr (path, "#enc:");
+    semi = g_strrstr (path, VFS_ENCODING_PREFIX);
 
     if (semi != NULL)
     {
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL)
         {
-            result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
+            result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
         }
         else
         {
-            *semi = 0;
-            result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
+            *semi = '\0';
+            result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
             *semi = '#';
         }
     }
     else
     {
-        result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
+        result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
     }
 
     return result;
@@ -1107,7 +1107,7 @@ remove_encoding_from_path (const char *path)
 
     tmp_path = g_string_new (path);
 
-    while ((tmp = g_strrstr (tmp_path->str, "/#enc:")) != NULL)
+    while ((tmp = g_strrstr (tmp_path->str, PATH_SEP_STR VFS_ENCODING_PREFIX)) != NULL)
     {
         enc = vfs_get_encoding ((const char *) tmp);
         converter = enc ? str_crt_conv_to (enc) : str_cnv_to_term;
@@ -1115,7 +1115,7 @@ remove_encoding_from_path (const char *path)
             converter = str_cnv_to_term;
 
         tmp2 = tmp + 1;
-        while (*tmp2 && *tmp2 != '/')
+        while (*tmp2 && *tmp2 != PATH_SEP)
             tmp2++;
 
         if (*tmp2)

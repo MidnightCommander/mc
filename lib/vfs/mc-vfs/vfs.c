@@ -373,11 +373,11 @@ vfs_get_encoding (const char *path)
     char *slash;
 
     work = g_strdup (path);
-    semi = g_strrstr (work, "#enc:");
+    semi = g_strrstr (work, VFS_ENCODING_PREFIX);
 
     if (semi != NULL)
     {
-        semi += 5 * sizeof (char);
+        semi += strlen (VFS_ENCODING_PREFIX); /* skip "#enc:" */
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL)
             slash[0] = '\0';
@@ -432,8 +432,8 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
 
     size = (size > 0) ? size : (signed int) strlen (path);
 
-    /* try found #end: */
-    semi = g_strrstr_len (path, size, "#enc:");
+    /* try found #enc: */
+    semi = g_strrstr_len (path, size, VFS_ENCODING_PREFIX);
     if (semi != NULL)
     {
         char encoding[16];
@@ -454,7 +454,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
             return state;
         /* now can be translated part after #enc: */
 
-        semi += 5;
+        semi += strlen (VFS_ENCODING_PREFIX);
         slash = strchr (semi, PATH_SEP);
         /* ignore slashes after size; */
         if (slash - path >= size)
