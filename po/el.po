@@ -445,9 +445,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
-"υποστηρίζονται."
+msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
 
 msgid " fish: Password required for "
 msgstr " fish: Απαιτείται κωδικός για το "
@@ -680,7 +678,6 @@ msgstr ""
 " ανεπιτυχής επανασύνδεση με τον εξυπηρέτη: %s \n"
 " "
 
-#, fuzzy
 msgid " Authentication failed "
 msgstr "Αποτυχία πιστοποίησης"
 
@@ -2146,10 +2143,7 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 
 #, c-format
@@ -2157,10 +2151,7 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2752,8 +2743,7 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, fuzzy
