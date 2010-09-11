@@ -744,6 +744,10 @@ this_try_alloc_color_pair (const char *fg, const char *bg)
         bg = NULL;
     if (fg != NULL && *fg == '\0')
         fg = NULL;
+
+    if ((fg == NULL) && (bg == NULL))
+        return EDITOR_NORMAL_COLOR;
+
     if (fg != NULL)
     {
         g_strlcpy (f, fg, sizeof (f));
@@ -760,6 +764,36 @@ this_try_alloc_color_pair (const char *fg, const char *bg)
             *p = '\0';
         bg = b;
     }
+    if ((fg == NULL) || (bg == NULL))
+    {
+        /* get colors from skin */
+        char *editnormal;
+
+        editnormal = mc_skin_get ("editor", "_default_", "default;default");
+
+        if (fg == NULL)
+        {
+            g_strlcpy (f, editnormal, sizeof (f));
+            p = strchr (f, ';');
+            if (p != NULL)
+                *p = '\0';
+            if (f[0] == '\0')
+                g_strlcpy (f, "default", sizeof (f));
+            fg = f;
+        }
+        if (bg == NULL)
+        {
+            p = strchr (editnormal, ';');
+            if ((p != NULL) && (*(++p) != '\0'))
+                g_strlcpy (b, p, sizeof (b));
+            else
+                g_strlcpy (b, "default", sizeof (b));
+            bg = b;
+        }
+
+        g_free (editnormal);
+    }
+
     return tty_try_alloc_color_pair (fg, bg);
 }
 
