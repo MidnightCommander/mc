@@ -1079,39 +1079,122 @@ ftpfs_setup_passive (struct vfs_class *me, struct vfs_s_super *super,
     return 1;
 }
 
+/* Setup Active PORT or EPRT FTP connection */
 static int
-ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
+ftpfs_setup_active (struct vfs_class *me, struct vfs_s_super *super,
+                    struct sockaddr_storage data_addr, socklen_t data_addrlen)
 {
-    struct sockaddr_storage data_addr;
-    socklen_t data_addrlen;
-    int data_sock, result;
-
-  again:
-    memset (&data_addr, 0, sizeof (struct sockaddr_storage));
-    data_addrlen = sizeof (struct sockaddr_storage);
-
-    if (SUP.use_passive_connection)
-        result = getpeername (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen);
-    else
-        result = getsockname (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen);
-
-    if (result == -1)
-        return -1;
+    unsigned short int port;
+    char *addr;
+    unsigned int af;
 
     switch (data_addr.ss_family)
     {
     case AF_INET:
-        ((struct sockaddr_in *) &data_addr)->sin_port = 0;
+        af = FTP_INET;
+        port = ((struct sockaddr_in *) &data_addr)->sin_port;
         break;
     case AF_INET6:
-        ((struct sockaddr_in6 *) &data_addr)->sin6_port = 0;
+        af = FTP_INET6;
+        port = ((struct sockaddr_in6 *) &data_addr)->sin6_port;
+        break;
+    /* Not implemented */
+    default:
+        return 0;
+    }
+
+    addr = g_try_malloc (NI_MAXHOST);
+    if (addr == NULL)
+        ERRNOR (ENOMEM, -1);
+
+    if (getnameinfo
+        ((struct sockaddr *) &data_addr, data_addrlen, addr, NI_MAXHOST, NULL, 0,
+         NI_NUMERICHOST) != 0)
+    {
+        g_free (addr);
+        ERRNOR (EIO, -1);
+    }
+
+    /* If we are talking to an IPV4 server, try PORT, and, only if it fails, go for EPRT */
+    if (af == FTP_INET)
+    {
+        unsigned char *a = (unsigned char *) &((struct sockaddr_in *) &data_addr)->sin_addr;
+        unsigned char *p = (unsigned char *) &port;
+
+        if (ftpfs_command (me, super, WAIT_REPLY,
+                           "PORT %u,%u,%u,%u,%u,%u", a[0], a[1], a[2], a[3],
+                           p[0], p[1]) == COMPLETE)
+        {
+            g_free (addr);
+            return 1;
+        }
+    }
+
+    /*
+     * Converts network MSB first order to host byte order (LSB
+     * first on i386). If we do it earlier, we will run into an
+     * endianness issue, because the server actually expects to see
+     * "PORT A,D,D,R,MSB,LSB" in the PORT command.
+     */
+    port = ntohs (port);
+
+    /* We are talking to an IPV6 server or PORT failed, so we can try EPRT anyway */
+    if (ftpfs_command (me, super, WAIT_REPLY, "EPRT |%u|%s|%hu|", af, addr, port) == COMPLETE)
+    {
+        g_free (addr);
+        return 1;
+    }
+
+    g_free (addr);
+    return 0;
+}
+
+/* Initialize a socket for FTP DATA connection */
+static int
+ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
+                        struct sockaddr_storage *data_addr, socklen_t *data_addrlen)
+{
+    int result;
+
+    memset (data_addr, 0, sizeof (struct sockaddr_storage));
+    *data_addrlen = sizeof (struct sockaddr_storage);
+
+    if (SUP.use_passive_connection)
+        result = getpeername (SUP.sock, (struct sockaddr *) data_addr, data_addrlen);
+    else
+        result = getsockname (SUP.sock, (struct sockaddr *) data_addr, data_addrlen);
+
+    if (result == -1)
+        return -1;
+
+    switch (data_addr->ss_family)
+    {
+    case AF_INET:
+        ((struct sockaddr_in *) data_addr)->sin_port = 0;
+        break;
+    case AF_INET6:
+        ((struct sockaddr_in6 *) data_addr)->sin6_port = 0;
         break;
     default:
         print_vfs_message (_("ftpfs: invalid address family"));
         ERRNOR (EINVAL, -1);
     }
 
-    data_sock = socket (data_addr.ss_family, SOCK_STREAM, IPPROTO_TCP);
+    return socket (data_addr->ss_family, SOCK_STREAM, IPPROTO_TCP);
+}
+
+/* Initialize FTP DATA connection */
+static int
+ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
+{
+    struct sockaddr_storage data_addr;
+    socklen_t data_addrlen;
+    int data_sock;
+
+  again:
+
+    data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
+
     if (data_sock < 0)
     {
         if (SUP.use_passive_connection)
@@ -1140,74 +1223,14 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
     }
 
     /* If passive setup fails, fallback to active connections */
-    /* Active FTP connection */
     if ((bind (data_sock, (struct sockaddr *) &data_addr, data_addrlen) == 0) &&
         (getsockname (data_sock, (struct sockaddr *) &data_addr, &data_addrlen) == 0) &&
         (listen (data_sock, 1) == 0))
     {
-        unsigned short int port;
-        char *addr;
-        unsigned int af;
-
-        switch (data_addr.ss_family)
-        {
-        case AF_INET:
-            af = FTP_INET;
-            port = ((struct sockaddr_in *) &data_addr)->sin_port;
-            break;
-        case AF_INET6:
-            af = FTP_INET6;
-            port = ((struct sockaddr_in6 *) &data_addr)->sin6_port;
-            break;
-        default:
-            print_vfs_message (_("ftpfs: invalid address family"));
-            ERRNOR (EINVAL, -1);
-        }
-
-        addr = g_try_malloc (NI_MAXHOST);
-        if (addr == NULL)
-            ERRNOR (ENOMEM, -1);
-
-        if (getnameinfo
-            ((struct sockaddr *) &data_addr, data_addrlen, addr, NI_MAXHOST, NULL, 0,
-             NI_NUMERICHOST) != 0)
-        {
-            g_free (addr);
-            ERRNOR (EIO, -1);
-        }
-
-        /* If we are talking to an IPV4 server, try PORT, and, only if it fails, go for EPRT */
-        if (FTP_INET == af)
-        {
-            unsigned char *a = (unsigned char *) &((struct sockaddr_in *) &data_addr)->sin_addr;
-            unsigned char *p = (unsigned char *) &port;
-
-            if (ftpfs_command (me, super, WAIT_REPLY,
-                               "PORT %u,%u,%u,%u,%u,%u", a[0], a[1], a[2], a[3],
-                               p[0], p[1]) == COMPLETE)
-            {
-                g_free (addr);
-                return data_sock;
-            }
-        }
-
-        /*
-         * Converts network MSB first order to host byte order (LSB
-         * first on i386). If we do it earlier, we will run into an
-         * endianness issue, because the server actually expects to see
-         * "PORT A,D,D,R,MSB,LSB" in the PORT command.
-         */
-        port = ntohs (port);
-
-        /* We are talking to an IPV6 server or PORT failed, so we can try EPRT anyway */
-        if (ftpfs_command (me, super, WAIT_REPLY, "EPRT |%u|%s|%hu|", af, addr, port) == COMPLETE)
-        {
-            g_free (addr);
+        if (ftpfs_setup_active (me, super, data_addr, data_addrlen))
             return data_sock;
-        }
-        g_free (addr);
-
     }
+
     close (data_sock);
     ftpfs_errno = EIO;
     return -1;
