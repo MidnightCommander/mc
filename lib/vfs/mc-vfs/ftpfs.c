@@ -977,77 +977,104 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
     return NULL;
 }
 
+/* Setup Passive PASV FTP connection */
+static int
+ftpfs_setup_passive_pasv (struct vfs_class *me, struct vfs_s_super *super,
+                          int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
+{
+    char *c;
+    char n[6];
+    int xa, xb, xc, xd, xe, xf;
+
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
+        return 0;
+
+    /* Parse remote parameters */
+    for (c = reply_str + 4; (*c) && (!isdigit ((unsigned char) *c)); c++);
+
+    if (!*c)
+        return 0;
+    if (!isdigit ((unsigned char) *c))
+        return 0;
+    if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
+        return 0;
+
+    n[0] = (unsigned char) xa;
+    n[1] = (unsigned char) xb;
+    n[2] = (unsigned char) xc;
+    n[3] = (unsigned char) xd;
+    n[4] = (unsigned char) xe;
+    n[5] = (unsigned char) xf;
+
+    memcpy (&(((struct sockaddr_in *) sa)->sin_addr.s_addr), (void *) n, 4);
+    memcpy (&(((struct sockaddr_in *) sa)->sin_port), (void *) &n[4], 2);
+
+    if (connect (my_socket, (struct sockaddr *) sa, *salen) < 0)
+        return 0;
+
+    return 1;
+}
+
+/* Setup Passive EPSV FTP connection */
+static int
+ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
+                          int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
+{
+    char *c;
+    int port;
+
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "EPSV") != COMPLETE)
+        return 0;
+
+    /* (|||<port>|) */
+    c = strchr (reply_str, '|');
+    if (c == NULL)
+        return 0;
+    if (strlen (c) > 3)
+        c += 3;
+    else
+        return 0;
+
+    port = atoi (c);
+    if (port < 0 || port > 65535)
+        return 0;
+    port = htons (port);
+
+    switch (sa->ss_family)
+    {
+    case AF_INET:
+        ((struct sockaddr_in *) sa)->sin_port = port;
+        break;
+    case AF_INET6:
+        ((struct sockaddr_in6 *) sa)->sin6_port = port;
+        break;
+    }
+
+    if (connect (my_socket, (struct sockaddr *) sa, *salen) < 0)
+        return 0;
+
+    return 1;
+}
 
 /* Setup Passive ftp connection, we use it for source routed connections */
 static int
 ftpfs_setup_passive (struct vfs_class *me, struct vfs_s_super *super,
-                     int my_socket, struct sockaddr_storage *sa, socklen_t * salen)
+                     int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
 {
-    char *c;
-
-    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "EPSV") == COMPLETE)
+    /* It's IPV4, so try PASV first, some servers and ALGs get confused by EPSV */
+    if (sa->ss_family == AF_INET)
     {
-        int port;
-        /* (|||<port>|) */
-        c = strchr (reply_str, '|');
-        if (c == NULL)
-            return 0;
-        if (strlen (c) > 3)
-            c += 3;
-        else
-            return 0;
-
-        port = atoi (c);
-        if (port < 0 || port > 65535)
-            return 0;
-        port = htons (port);
-
-        switch (sa->ss_family)
-        {
-        case AF_INET:
-            ((struct sockaddr_in *) sa)->sin_port = port;
-            break;
-        case AF_INET6:
-            ((struct sockaddr_in6 *) sa)->sin6_port = port;
-            break;
-        default:
-            print_vfs_message (_("ftpfs: invalid address family"));
-            ERRNOR (EINVAL, -1);
-        }
+        if (!ftpfs_setup_passive_pasv (me, super, my_socket, sa, salen))
+            /* An IPV4 FTP server might support EPSV, so if PASV fails we can try EPSV anyway */
+            if (!ftpfs_setup_passive_epsv (me, super, my_socket, sa, salen))
+                return 0;
     }
-    else if (sa->ss_family == AF_INET)
-    {
-        int xa, xb, xc, xd, xe, xf;
-        char n[6];
-
-        if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
-            return 0;
-
-        /* Parse remote parameters */
-        for (c = reply_str + 4; (*c) && (!isdigit ((unsigned char) *c)); c++);
-
-        if (!*c)
-            return 0;
-        if (!isdigit ((unsigned char) *c))
-            return 0;
-        if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
-            return 0;
-
-        n[0] = (unsigned char) xa;
-        n[1] = (unsigned char) xb;
-        n[2] = (unsigned char) xc;
-        n[3] = (unsigned char) xd;
-        n[4] = (unsigned char) xe;
-        n[5] = (unsigned char) xf;
-
-        memcpy (&(((struct sockaddr_in *) sa)->sin_addr.s_addr), (void *) n, 4);
-        memcpy (&(((struct sockaddr_in *) sa)->sin_port), (void *) &n[4], 2);
-    }
+    /* It's IPV6, so EPSV is our only hope */
     else
-        return 0;
-
-    if (connect (my_socket, (struct sockaddr *) sa, *salen) < 0)
-        return 0;
+    {
+        if (!ftpfs_setup_passive_epsv (me, super, my_socket, sa, salen))
+            return 0;
+    }
 
     return 1;
 }
