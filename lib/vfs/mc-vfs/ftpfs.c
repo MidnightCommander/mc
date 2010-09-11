@@ -2,11 +2,13 @@
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
    2006, 2007 Free Software Foundation, Inc.
 
-   Written by: 1995 Ching Hui
-   1995 Jakub Jelinek
-   1995, 1996, 1997 Miguel de Icaza
-   1997 Norbert Warmuth
-   1998 Pavel Machek
+   Written by:
+       1995 Ching Hui
+       1995 Jakub Jelinek
+       1995, 1996, 1997 Miguel de Icaza
+       1997 Norbert Warmuth
+       1998 Pavel Machek
+       2010 Yury V. Zaytsev
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -54,12 +56,12 @@ What to do with this?
     \verbatim
     {
         int f = !strcmp( remote_path, "/~" );
-	if (f || !strncmp( remote_path, "/~/", 3 )) {
-	    char *s;
-	    s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
-	    g_free (remote_path);
-	    remote_path = s;
-	}
+        if (f || !strncmp( remote_path, "/~/", 3 )) {
+            char *s;
+            s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
+            g_free (remote_path);
+            remote_path = s;
+        }
     }
     \endverbatim
  */
