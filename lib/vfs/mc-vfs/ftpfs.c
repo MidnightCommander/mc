@@ -1166,7 +1166,14 @@ ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
         ERRNOR (EINVAL, -1);
     }
 
-    return socket (data_addr->ss_family, SOCK_STREAM, IPPROTO_TCP);
+    result = socket (data_addr->ss_family, SOCK_STREAM, IPPROTO_TCP);
+
+    if (result < 0)
+    {
+        print_vfs_message (_("ftpfs: could not create socket: %s"), unix_error_string (errno));
+        return -1;
+    } else
+        return result;
 }
 
 /* Initialize FTP DATA connection */
@@ -1175,49 +1182,55 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
 {
     struct sockaddr_storage data_addr;
     socklen_t data_addrlen;
-    int data_sock;
 
-  again:
+    /*
+     * Don't factor socket initialization out of these conditionals,
+     * because ftpfs_init_data_socket initializes it in different way
+     * depending on use_passive_connection flag.
+     */
 
-    data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
-
-    if (data_sock < 0)
-    {
-        if (SUP.use_passive_connection)
-        {
-            print_vfs_message (_("ftpfs: could not setup passive mode: %s"),
-                               unix_error_string (errno));
-            SUP.use_passive_connection = 0;
-            goto again;
-        }
-
-        print_vfs_message (_("ftpfs: could not create socket: %s"), unix_error_string (errno));
-        return -1;
-    }
-
+    /* Try to establish a passive connection first (if requested) */
     if (SUP.use_passive_connection)
     {
+        int data_sock;
+        data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
+
+        if (data_sock < 0)
+            return -1;
 
         if (ftpfs_setup_passive (me, super, data_sock, &data_addr, &data_addrlen))
             return data_sock;
 
-        SUP.use_passive_connection = 0;
         print_vfs_message (_("ftpfs: could not setup passive mode"));
+        SUP.use_passive_connection = 0;
 
         close (data_sock);
-        goto again;
     }
 
-    /* If passive setup fails, fallback to active connections */
-    if ((bind (data_sock, (struct sockaddr *) &data_addr, data_addrlen) == 0) &&
-        (getsockname (data_sock, (struct sockaddr *) &data_addr, &data_addrlen) == 0) &&
-        (listen (data_sock, 1) == 0))
+    /* If passive setup is diabled or failed, fallback to active connections */
+    if (!SUP.use_passive_connection)
     {
-        if (ftpfs_setup_active (me, super, data_addr, data_addrlen))
-            return data_sock;
+        int data_sock;
+        data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
+
+        if (data_sock < 0)
+            return -1;
+
+        if ((bind (data_sock, (struct sockaddr *) &data_addr, data_addrlen) == 0) &&
+            (getsockname (data_sock, (struct sockaddr *) &data_addr, &data_addrlen) == 0) &&
+            (listen (data_sock, 1) == 0))
+        {
+            if (ftpfs_setup_active (me, super, data_addr, data_addrlen))
+                return data_sock;
+        }
+
+        close (data_sock);
     }
 
-    close (data_sock);
+    /* Restore the initial value of use_passive_connection (for subsequent retries) */
+    SUP.use_passive_connection = SUP.proxy ? ftpfs_use_passive_connections_over_proxy :
+                                             ftpfs_use_passive_connections;
+
     ftpfs_errno = EIO;
     return -1;
 }
