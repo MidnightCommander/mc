@@ -1,10 +1,15 @@
+# Updated by Mikhail S. Pobolovets on 2010.09.12
 context default
+#   -moz-...
+    keyword whole \-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] lightgray
+#   class
+    keyword whole \.\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] green
+
     keyword whole body white
     keyword whole div white
     keyword whole p white
     keyword whole a white
     keyword whole h1 white
-    keyword whole h2 white
     keyword whole h2 white
     keyword whole h3 white
     keyword whole h4 white
@@ -79,7 +84,6 @@ context default
     keyword  \:focus brightmagenta
     keyword  \:lang brightmagenta
     keyword  \:link brightmagenta
-    keyword  \:active brightmagenta
     keyword  \:adjoins-item brightmagenta
     keyword  \:alternate brightmagenta
     keyword  \:bottom brightmagenta
@@ -95,7 +99,6 @@ context default
     keyword  \:first brightmagenta
     keyword  \:flat brightmagenta
     keyword  \:floatable brightmagenta
-    keyword  \:focus brightmagenta
     keyword  \:has-children brightmagenta
     keyword  \:has-siblings brightmagenta
     keyword  \:horizontal brightmagenta
@@ -123,6 +126,8 @@ context default
     keyword  \:unchecked brightmagenta
     keyword  \:vertical brightmagenta
     keyword  \:window brightmagenta
+
+    keyword whole \!important brightred
 
     keyword whole background-attachment lightgray
     keyword whole background-color lightgray
@@ -170,7 +175,6 @@ context default
     keyword whole font-stretch lightgray
     keyword whole font-family lightgray
     keyword whole font-size lightgray
-    keyword whole font-family lightgray
     keyword whole font-style lightgray
     keyword whole font-variant lightgray
     keyword whole font-weight lightgray
@@ -209,7 +213,6 @@ context default
     keyword whole right lightgray
     keyword whole subcontrol-origin lightgray
     keyword whole subcontrol-position lightgray
-    keyword whole table-caption lightgray
     keyword whole table-layout lightgray
     keyword whole text-align lightgray
     keyword whole text-decoration lightgray
@@ -223,18 +226,15 @@ context default
     keyword whole white-space lightgray
     keyword whole width lightgray
     keyword whole word-spacing lightgray
+    keyword whole opacity lightgray
+    keyword whole filter lightgray
 
     keyword whole qconicalgradient brightgreen
     keyword whole qlineargradient brightgreen
     keyword whole qradialgradient brightgreen
 
-    keyword whole left brightgreen
-    keyword whole right brightgreen
     keyword whole center brightgreen
-    keyword whole top brightgreen
-    keyword whole bottom brightgreen
     keyword whole bold brightgreen
-    keyword whole small brightgreen
     keyword whole smaller brightgreen
     keyword whole italic brightgreen
     keyword whole bolder brightgreen
@@ -249,6 +249,7 @@ context default
     keyword whole thin brightgreen
     keyword whole medium brightgreen
     keyword whole thick brightgreen
+
 
     keyword whole disc brightgreen
     keyword whole circle brightgreen
@@ -293,7 +294,6 @@ context default
     keyword whole inset brightgreen
     keyword whole outset brightgreen
 
-    keyword whole auto brightgreen
     keyword whole crosshair brightgreen
     keyword whole default brightgreen
     keyword whole pointer brightgreen
@@ -316,7 +316,6 @@ context default
     keyword whole run-in brightgreen
     keyword whole compact brightgreen
     keyword whole marker brightgreen
-    keyword whole table brightgreen
     keyword whole inline-table brightgreen
     keyword whole table-row-group brightgreen
     keyword whole table-header-group brightgreen
@@ -327,36 +326,19 @@ context default
     keyword whole table-cell brightgreen
     keyword whole table-caption brightgreen
 
-    keyword whole small brightgreen
-    keyword whole medium brightgreen
     keyword whole large brightgreen
 
     keyword whole normal brightgreen
-    keyword whole bold brightgreen
-    keyword whole bolder brightgreen
     keyword whole lighter brightgreen
 
     keyword whole open-quote brightgreen
     keyword whole close-quote brightgreen
     keyword whole no-open-quote brightgreen
-    keyword whole no-close-quote brightgreen
-
-    keyword whole dotted brightgreen
-    keyword whole dashed brightgreen
-    keyword whole solid brightgreen
-    keyword whole double brightgreen
-    keyword whole groove brightgreen
-    keyword whole ridge brightgreen
-    keyword whole inset brightgreen
-    keyword whole outset brightgreen
 
     keyword whole baseline brightgreen
-    keyword whole sub brightgreen
     keyword whole super brightgreen
-    keyword whole top brightgreen
     keyword whole text-top brightgreen
     keyword whole middle brightgreen
-    keyword whole bottom brightgreen
     keyword whole text-bottom brightgreen
 
     keyword whole collapse brightgreen
@@ -367,7 +349,6 @@ context default
     keyword whole lowercase brightgreen
 
     keyword whole pre brightgreen
-    keyword whole nowrap brightgreen
 
     keyword whole aliceblue brightgreen
     keyword whole antiquewhite brightgreen
@@ -513,23 +494,11 @@ context default
     keyword whole yellow brightgreen
     keyword whole yellowgreen brightgreen
 
-
-
-
-    keyword counter(\{*\}*) magenta
-    keyword counters(\{*\}*) magenta
-    keyword url(\{*\}*) magenta
-    keyword rgb(\{*\}*) magenta
-
     keyword { yellow
     keyword } yellow
 
-    keyword whole '.' white
-
     keyword /\* brown
     keyword \*/ brown
-
-
 
     keyword whole Arial brightgreen
     keyword whole arial brightgreen
@@ -546,17 +515,23 @@ context default
     keyword whole Helvetica brightgreen
     keyword whole helvetica brightgreen
 
-    keyword #\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
+#   #1234BEAF
+    keyword #\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} red
 
-    keyword \{0123456789\}*px brightgreen
-    keyword \{0123456789\}*em brightgreen
-    keyword \{0123456789\}*cm brightgreen
-    keyword \{0123456789\}*mm brightgreen
-    keyword \{0123456789\}*ex brightgreen
-    keyword \{0123456789\}*pt brightgreen
-    keyword \{0123456789\}*pc brightgreen
-    keyword \{0123456789\}*% brightred
-    keyword \{0123456789\} brightgreen
+    keyword whole \[\-\.0123456789\]px brightgreen
+    keyword whole \[\-\.0123456789\]em brightgreen
+    keyword whole \[\-\.0123456789\]cm brightgreen
+    keyword whole \[\-\.0123456789\]mm brightgreen
+    keyword whole \[\-\.0123456789\]ex brightgreen
+    keyword whole \[\-\.0123456789\]pt brightgreen
+    keyword whole \[\-\.0123456789\]pc brightgreen
+    keyword whole \[\-\.0123456789\]%  brightred
+
+    keyword whole \{0123456789\} brightgreen
+    keyword whole \.\[0123456789\] brightgreen
+    keyword whole \-\{0123456789\} brightgreen
+
+    keyword whole '.' white
 
     keyword { brightcyan
     keyword } brightcyan
@@ -568,3 +543,8 @@ context default
 
 context exclusive /\* \*/ brown
     spellcheck
+
+context exclusive counter( ) magenta
+context exclusive counters( ) magenta
+context exclusive rgb( ) magenta
+context exclusive url( ) magenta
