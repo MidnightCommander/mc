@@ -82,12 +82,14 @@ mc_tty_color_table_t const color_table[] = {
 const char *
 tty_color_get_valid_name (const char *color_name)
 {
-    int i;
 
     if (color_name != NULL)
+    {
+        size_t i;
         for (i = 0; color_table[i].name != NULL; i++)
             if (strcmp (color_name, color_table[i].name) == 0)
                 return color_table[i].name;
+    }
     return NULL;
 }
 
@@ -96,12 +98,14 @@ tty_color_get_valid_name (const char *color_name)
 int
 tty_color_get_index_by_name (const char *color_name)
 {
-    int i;
 
     if (color_name != NULL)
+    {
+        size_t i;
         for (i = 0; color_table[i].name != NULL; i++)
             if (strcmp (color_name, color_table[i].name) == 0)
                 return color_table[i].value;
+    }
     return -1;
 }
 
