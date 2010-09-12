@@ -36,10 +36,8 @@ context default
 
 #System variables
 
-#Please note that in regular expressions the final $/ is not correctly
-#highlighted as a system variable. This is not right but I actually do
-#not know any way to avoid it. Any idea is welcome.
-
+# hack for regexps
+    keyword $/ yellow
     keyword $\{!@&\+`'=~/\\,.;<>_\*"$:F?\} red
     keyword $\{\0123456789\} red
     keyword $-+ red
@@ -140,7 +138,8 @@ context default
     keyword whole superclass yellow
 
 #Class module
-
+#   exclusion
+    keyword whole include\? green
     keyword whole include magenta
     keyword whole require magenta
 #    keyword whole where magenta
@@ -214,9 +213,11 @@ context default
 
 context # \n brown
     spellcheck
+
 context " " green
     keyword \\" brightgreen
     keyword \\\\ brightgreen
+
 context ' ' brightgreen
     keyword \\' green
     keyword \\\\ green
