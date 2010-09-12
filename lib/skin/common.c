@@ -48,14 +48,6 @@ static gboolean mc_skin_is_init = FALSE;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
-mc_skin_hash_destroy_key (gpointer data)
-{
-    g_free (data);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 mc_skin_hash_destroy_value (gpointer data)
 {
@@ -93,7 +85,7 @@ mc_skin_reinit (void)
     mc_skin_deinit ();
     mc_skin__default.name = mc_skin_get_default_name ();
     mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     mc_skin_hash_destroy_key,
+                                                     g_free,
                                                      mc_skin_hash_destroy_value);
 }
 
@@ -124,7 +116,7 @@ mc_skin_init (GError ** error)
     mc_skin__default.name = mc_skin_get_default_name ();
 
     mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     mc_skin_hash_destroy_key,
+                                                     g_free,
                                                      mc_skin_hash_destroy_value);
 
     if (!mc_skin_ini_file_load (&mc_skin__default)) {
