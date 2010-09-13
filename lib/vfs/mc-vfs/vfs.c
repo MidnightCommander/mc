@@ -393,24 +393,6 @@ vfs_get_encoding (const char *path)
     }
 }
 
-/* return if encoding can by used in vfs (is ascci full compactible) */
-/* contains only a few encoding now */
-static gboolean
-vfs_supported_enconding (const char *encoding)
-{
-    gboolean result = FALSE;
-
-#ifdef HAVE_CHARSET
-    int t;
-
-    for (t = 0; t < n_codepages; t++)
-        result |= (g_ascii_strncasecmp (encoding, codepages[t].id,
-                                        strlen (codepages[t].id)) == 0);
-#endif
-
-    return result;
-}
-
 /* now used only by vfs_translate_path, but could be used in other vfs 
  * plugin to automatic detect encoding
  * path - path to translate
@@ -468,8 +450,10 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
         memcpy (encoding, semi, ms);
         encoding[ms] = '\0';
 
-        if (vfs_supported_enconding (encoding))
+#if HAVE_CHARSET
+        if (is_supported_encoding (encoding))
             coder = str_crt_conv_to (encoding);
+#endif
 
         if (coder != INVALID_CONV)
         {
