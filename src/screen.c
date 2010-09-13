@@ -3548,10 +3548,18 @@ panel_change_encoding (WPanel * panel)
 #endif
     if (encoding != NULL)
     {
-        cd_path = add_encoding_to_path (panel->cwd, encoding);
-        if (!do_panel_cd (panel, cd_path, cd_parse_command))
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
-        g_free (cd_path);
+        const char *enc;
+
+        enc = vfs_get_encoding (panel->cwd);
+
+        /* don't add current encoding */
+        if ((enc == NULL) || (strcmp (encoding, enc) != 0))
+        {
+            cd_path = add_encoding_to_path (panel->cwd, encoding);
+            if (!do_panel_cd (panel, cd_path, cd_parse_command))
+                message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
+            g_free (cd_path);
+        }
     }
 }
 
