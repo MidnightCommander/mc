@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-09-06 20:43+0400\n"
-"PO-Revision-Date: 2010-07-06 20:22+0200\n"
+"PO-Revision-Date: 2010-09-13 15:35+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -233,13 +233,11 @@ msgstr "23 klaw. funkcyjny"
 msgid "Function key 24"
 msgstr "24 klaw. funkcyjny"
 
-#, fuzzy
 msgid "A1 key"
-msgstr "Klawisz End       "
+msgstr "Klawisz A1"
 
-#, fuzzy
 msgid "C1 key"
-msgstr "Klawisz End       "
+msgstr "Klawisz C1"
 
 msgid "Plus"
 msgstr "Plus"
@@ -452,13 +450,13 @@ msgstr "Pamięć podręczna katalogu dla %s wygasła"
 msgid "Starting linear transfer..."
 msgstr "Rozpoczynanie przesyłu liniowego..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu przesłanych bajtów)"
+msgstr "%s: %s: %s %3d%% (%ju przesłanych bajtów)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s: %s %ju bytes transferred"
-msgstr "%s: %s: %s %lu przesłanych bajtów"
+msgstr "%s: %s: %s %ju przesłanych bajtów"
 
 msgid "Getting file"
 msgstr "Pobieranie pliku"
@@ -530,9 +528,9 @@ msgstr "fish: zapis %s: wysyłanie polecenia..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: lokalny odczyt się nie powiódł, wysyłanie zer"
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%ju)"
-msgstr "fish: zapisywanie %s %d (%lu)"
+msgstr "fish: zapisywanie %s %d (%ju)"
 
 msgid "zeros"
 msgstr "zera"
@@ -648,9 +646,9 @@ msgstr "(najpierw chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: niepowodzenie; brak możliwości wycofania"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: storing file %ju (%ju)"
-msgstr "ftpfs: zapisywanie pliku %lu (%lu)"
+msgstr "ftpfs: zapisywanie pliku %ju (%ju)"
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
@@ -931,7 +929,6 @@ msgid "Show mc with specified skin"
 msgstr "Wyświetla program mc za pomocą podanej skórki"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -952,7 +949,7 @@ msgstr ""
 "{TEKST} i {TŁO} mogą zostać pominięte, zostaną wówczas użyte domyślne\n"
 "\n"
 "Słowa kluczowe:\n"
-"   Globalne:            errors, reverse, gauge, input, viewunderline,\n"
+"   Globalne:            errors, disabled, reverse, gauge, viewunderline\n"
 "                        input, inputmark, inputunchanged, commandlinemark\n"
 "   Wyświetlanie plików: normal, selected, marked, markselect\n"
 "   Pola dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus,\n"
@@ -1081,7 +1078,6 @@ msgstr "Potwierdzenia"
 msgid "Confirmation|&History cleanup"
 msgstr "Wyczyszczenie &historii"
 
-#, fuzzy
 msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Usunięcie listy po&dręcznych katalogów"
 
@@ -1647,20 +1643,16 @@ msgstr "< Ponownie wczytaj składnię >"
 msgid "About"
 msgstr "O programie"
 
-#, fuzzy
 msgid ""
 "Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "            A user friendly text editor\n"
 "         written for the Midnight Commander"
 msgstr ""
+" Copyright (C) 1996-2010 Free Software Foundation\n"
 "\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 Free Software Foundation\n"
-"\n"
-"       Przyjazny dla użytkownika edytor tekstu, napisany\n"
-"           dla programu Midnight Commander.\n"
+"    Przyjazny dla użytkownika edytor tekstu, napisany\n"
+"         dla programu Midnight Commander"
 
 #, c-format
 msgid "Cannot open %s for reading"
@@ -2070,9 +2062,8 @@ msgstr "Przełącz sta&n wiersza"
 msgid "Go to matching &bracket"
 msgstr "Prze&jdź do pasującego nawiasu"
 
-#, fuzzy
 msgid "Toggle s&yntax highlighting"
-msgstr "Proszę wybrać wyróżnianie składni"
+msgstr "Przełącz w&yróżnianie składni"
 
 msgid "&Find declaration"
 msgstr "&Znajdź deklarację"
@@ -4004,42 +3995,3 @@ msgstr "Wyczyścić tę historię?"
 
 msgid "Background process:"
 msgstr "Proces w tle:"
-
-#~ msgid "MCFS"
-#~ msgstr "MCFS"
-
-#~ msgid "The server does not support this version"
-#~ msgstr "Serwer nie obsługuje tej wersji"
-
-#~ msgid ""
-#~ "The remote server is not running on a system port\n"
-#~ "you need a password to log in, but the information may\n"
-#~ "not be safe on the remote side.  Continue?\n"
-#~ msgstr ""
-#~ "Zdalny serwer nie jest uruchomiony na porcie systemowym.\n"
-#~ "Aby się zalogować, wymagane jest hasło, jednak informacja\n"
-#~ "może nie być bezpieczna na zdalnej maszynie. Kontynuować?\n"
-
-#~ msgid "MCFS Password required"
-#~ msgstr "Wymagane jest hasło MCFS"
-
-#~ msgid "Invalid password"
-#~ msgstr "Nieprawidłowe hasło"
-
-#~ msgid "Cannot locate hostname: %s"
-#~ msgstr "Nie można odnaleźć nazwy komputera: %s"
-
-#~ msgid "Cannot create socket: %s"
-#~ msgstr "Nie można utworzyć gniazda: %s"
-
-#~ msgid "Cannot connect to server: %s"
-#~ msgstr "Nie można połączyć się z serwerem: %s"
-
-#~ msgid "Too many open connections"
-#~ msgstr "Za dużo otwartych połączeń"
-
-#~ msgid "Link to a remote machine"
-#~ msgstr "Połączenie ze zdalnym komputerem"
-
-#~ msgid "&Network link..."
-#~ msgstr "Połącze&nie sieciowe..."
