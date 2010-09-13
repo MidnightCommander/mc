@@ -11,6 +11,9 @@ context default
     keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
     keyword whole linestart #!\[\s\]/bin/ruby brightcyan black
 
+# Symbols :bla-bla
+    keyword whole \:\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+
 #Operators
 
     keyword > yellow
