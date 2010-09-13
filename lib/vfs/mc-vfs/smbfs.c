@@ -1667,7 +1667,7 @@ smbfs_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
 {
     (void) me;
 
-	DEBUG(3, ("smbfs_mknod(path:%s, mode:%d, dev:%zu)\n", path, mode, dev));
+	DEBUG(3, ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path, mode, (unsigned int)dev));
 	my_errno = EOPNOTSUPP;
     return -1;
 }
