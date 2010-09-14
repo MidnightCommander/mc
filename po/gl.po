@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander 4.7.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-07-09 22:11+0200\n"
-"PO-Revision-Date: 2010-09-13 17:05+0100\n"
+"PO-Revision-Date: 2010-09-14 10:48+0100\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
 "Language-Team: GALICIAN <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -385,9 +385,8 @@ msgstr "Fallo na canalización"
 msgid "Dup failed"
 msgstr "Fallou «Dup»"
 
-#, fuzzy
 msgid "Error dup'ing old error pipe"
-msgstr " Erro ao ler da canalización: %s"
+msgstr "Produciuse un erro duplicando un erro de canalización"
 
 #, c-format
 msgid ""
@@ -1002,6 +1001,13 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"   Axuda:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"\n"
+"Cores:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
 
 msgid "Color options"
 msgstr "Opcións de cor"
@@ -1392,7 +1398,7 @@ msgid "&Local"
 msgstr "&Local"
 
 msgid "Highlighting groups file edit"
-msgstr ""
+msgstr "Editar resaltes de cor do grupo"
 
 msgid "Which highlighting file you want to edit?"
 msgstr "Que ficheiro de resaltes desexa editar?"
@@ -1579,22 +1585,22 @@ msgid "Ignore all &whitespace"
 msgstr "Ignora os espa&Zos en branco"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "Ignorar cambios en e&Spazos"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "gnorar &Tabulacións"
 
 msgid "&Ignore case"
 msgstr "&Ignorar maiúsculas/minúsculas"
 
 msgid "Diff extra options"
-msgstr "Outras opcións «diff»"
+msgstr "Outras opcións de comparación"
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Algoritmo de comparación"
 
 msgid "Diff Options"
-msgstr "Opcións «diff»"
+msgstr "Opcións de comparación"
 
 msgid "Edit"
 msgstr "Editar"
@@ -1642,6 +1648,8 @@ msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
+"Saíndo de Midnight Commander.\n"
+"Gardar o ficheiro modificado?"
 
 msgid "Diff:"
 msgstr "Diferenza:"
@@ -1663,7 +1671,7 @@ msgstr "< Recargar a sintaxe actual >"
 
 #, c-format
 msgid "Cannot open %s for reading"
-msgstr "Non é posible abrir %s para lectura"
+msgstr "Non é posíbel abrir %s para lectura"
 
 msgid "Error"
 msgstr "Erro"
@@ -1716,10 +1724,10 @@ msgid "Macro recursion is too deep"
 msgstr "A macro é demasiado recursiva"
 
 msgid "File has hard-links. Detach before saving?"
-msgstr ""
+msgstr "Hai outras ligazóns duras ao ficheiro. Desexa separalas ao gardar?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
+msgstr "O ficheiro esta a ser modificado por outros. Desexa gardar aínda así?"
 
 #, c-format
 msgid "Error writing to pipe: %s"
@@ -1740,16 +1748,16 @@ msgid "&Safe save"
 msgstr "Gardar &Seguro "
 
 msgid "&Do backups with following extension:"
-msgstr ""
+msgstr "&Facer copias de seguranza coa seguinte extensión:"
 
 msgid "Check &POSIX new line"
-msgstr ""
+msgstr "Verificar salto de líña &POSIX"
 
 msgid "Edit Save Mode"
 msgstr "Editar modo de gardar"
 
 msgid "The file you are saving is not finished with a newline"
-msgstr ""
+msgstr "O ficheiro a gardar non remata cun salto de liña"
 
 msgid "C&ontinue"
 msgstr "c&Ontinuar"
@@ -2076,7 +2084,7 @@ msgid "&Prev bookmark"
 msgstr "Marcador ante&Rior"
 
 msgid "&Flush bookmark"
-msgstr ""
+msgstr "Borra&R marcadores"
 
 msgid "&Go to line..."
 msgstr "&Ir á liña "
@@ -2088,13 +2096,13 @@ msgid "Go to matching &bracket"
 msgstr "Ir á coincidencia do &paréntese"
 
 msgid "&Find declaration"
-msgstr ""
+msgstr "Buscar &Declaración"
 
 msgid "Back from &declaration"
-msgstr ""
+msgstr "&Volver á declaración"
 
 msgid "For&ward to declaration"
-msgstr ""
+msgstr "Ava&Nzar á declaración"
 
 msgid "Encod&ing..."
 msgstr "Cod&Ificando..."
@@ -2190,7 +2198,7 @@ msgid "Word wrap line length:"
 msgstr "Lonxitude do axuste de liña:"
 
 msgid "Cursor beyond end of line"
-msgstr ""
+msgstr "Cursor vai ata á fin da &Liña"
 
 msgid "Pers&istent selection"
 msgstr "Selecció&N persistente"
@@ -2202,7 +2210,7 @@ msgid "Visible tabs"
 msgstr "Lapelas visíbeis"
 
 msgid "Visible trailing spaces"
-msgstr ""
+msgstr "&Espazos finais visíbeis"
 
 msgid "Save file &position"
 msgstr "Gardar &Posición no ficheiro"
@@ -2708,7 +2716,7 @@ msgstr "%ld B/s"
 
 #, c-format
 msgid "Files processed: %llu of %llu"
-msgstr ""
+msgstr "Ficheiros procesados : %llu de %llu"
 
 #, c-format
 msgid "Time: %s  %s (%s)"
@@ -2836,7 +2844,7 @@ msgid "Re&gular expression"
 msgstr "Expresión &Regular"
 
 msgid "Fir&st hit"
-msgstr ""
+msgstr "&Primeira coincidencia"
 
 msgid "All cha&rsets"
 msgstr "Todos os xogos de ca&Racteres"
@@ -3293,7 +3301,7 @@ msgid "&Find file"
 msgstr "Buscar &Ficheiro"
 
 msgid "S&wap panels"
-msgstr ""
+msgstr "&Intercambiar paneis"
 
 msgid "Switch &panels on/off"
 msgstr "Activar/desactivar &Paneis"
@@ -3323,7 +3331,7 @@ msgid "&Background jobs"
 msgstr "&Procesos en 2º plano"
 
 msgid "Screen lis&t"
-msgstr ""
+msgstr "&Lista de pantallas"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "Rec&Uperar ficheiros (só ext2fs)"
@@ -3338,7 +3346,7 @@ msgid "Edit &menu file"
 msgstr "Editar ficheiro de &Menu"
 
 msgid "Edit hi&ghlighting group file"
-msgstr ""
+msgstr "Editar resaltado de &Grupos de ficheiros"
 
 msgid "&Configuration..."
 msgstr "&Configuración..."
@@ -3390,7 +3398,7 @@ msgstr "A variábel de contorno TERM está sen definir!\n"
 
 #, c-format
 msgid "Cannot create %s directory"
-msgstr "Non é posible ccrear o directorio %s"
+msgstr "Non é posíbel crear o directorio %s"
 
 msgid "&Never"
 msgstr "&Nunca"
@@ -3444,7 +3452,7 @@ msgid "Esc key mode"
 msgstr "Tecla «Escape»"
 
 msgid "Mkdi&r autoname"
-msgstr ""
+msgstr "Nomear automaticamente ao crear di&Rectorio"
 
 msgid "Classic pro&gressbar"
 msgstr "Barra de pro&Greso clásica"
@@ -3467,9 +3475,8 @@ msgstr "Dis&Tinguir maiúsculas"
 msgid "Case s&ensitive"
 msgstr "Dis&Tinguir maiúsculas"
 
-#, fuzzy
 msgid "Use panel sort mo&de"
-msgstr "usar modo &Pasivo"
+msgstr "Usar modo o m&Odo de orde do panel"
 
 msgid "Quick search"
 msgstr "Busca rápida"
@@ -3484,10 +3491,10 @@ msgid "File highlight"
 msgstr "Resaltar ficheiro"
 
 msgid "&Mouse page scrolling"
-msgstr ""
+msgstr "Avance de páxina co &Rato"
 
 msgid "Pa&ge scrolling"
-msgstr ""
+msgstr "Avance de pá&Xina"
 
 msgid "L&ynx-like motion"
 msgstr "Navegación ao estilo L&Ynx"
@@ -3517,7 +3524,7 @@ msgid "Mi&x all files"
 msgstr "Me&Sturar todos os ficheiros"
 
 msgid "Use SI si&ze units"
-msgstr ""
+msgstr "Tama&Ños en unidades SI"
 
 msgid "Main panel options"
 msgstr "Opcións do panel principal"
@@ -3525,17 +3532,16 @@ msgstr "Opcións do panel principal"
 msgid "Panel options"
 msgstr "Opcións dos paneis "
 
-#, fuzzy
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
 "directory contents. In this case you'll need to do a\n"
 "manual reload of the directory. See the man page for\n"
 "the details."
 msgstr ""
-"O uso do «cargado rapido» pode ocasionar que o contido\n"
-"do panel non sempre reflicta o contido do disco.  Nese\n"
-" caso use C-r para obrigar ao programa a actualizar os datos.\n"
-" Lea a páxina do manual para maior informacion.             "
+"O uso do «cargado rápido» pode ocasionar que o contido\n"
+"do panel non sempre reflicta o contido do directorio.  Nese\n"
+"caso terá que recargar manualmente o directorio.\n"
+"Vexa a páxina do manual para obter máis información.             "
 
 msgid "&Add new"
 msgstr "&Engadir novo"
@@ -3723,7 +3729,7 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr ""
-"Non é posible gardar o ficheiro %s:\n"
+"Non é posíbel gardar o ficheiro %s:\n"
 "%s"
 
 msgid ""
@@ -3834,7 +3840,7 @@ msgid "ButtonBar|Forget"
 msgstr "ButtonBar|Esquecer"
 
 msgid "ButtonBar|Rmdir"
-msgstr "ButtonBar|Eliminar directorio"
+msgstr "ButtonBar|EliminarDirectorio"
 
 #, c-format
 msgid ""
@@ -3921,13 +3927,13 @@ msgid "ButtonBar|Ascii"
 msgstr "ButtonBar|Ascii"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "ButtonBar|BuscaHexa"
 
 msgid "ButtonBar|UnWrap"
-msgstr "ButtonBar|Desenpaquetar"
+msgstr "ButtonBar|Despregar"
 
 msgid "ButtonBar|Wrap"
-msgstr "ButtonBar|Enpaquetar"
+msgstr "ButtonBar|Pregar"
 
 msgid "ButtonBar|Hex"
 msgstr "ButtonBar|Hexa"
@@ -3942,7 +3948,7 @@ msgid "ButtonBar|Parse"
 msgstr "ButtonBar|Analizar"
 
 msgid "ButtonBar|Unform"
-msgstr "ButtonBar|Sen formato"
+msgstr "ButtonBar|SenFormato"
 
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Formato"
@@ -3953,13 +3959,16 @@ msgid ""
 "%s\n"
 "Data may have been written or not"
 msgstr ""
+"Produciuse un erro ao pechar o ficheiro:\n"
+"%s\n"
+"É probábel que os datos non se escribiran"
 
 #, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr ""
-"Non é posible gardar o ficheiro:\n"
+"Non é posíbel gardar o ficheiro:\n"
 "%s"
 
 msgid "View: "
@@ -3985,13 +3994,13 @@ msgid "Cannot view: not a regular file"
 msgstr "Non é posíbel ver: non é un ficheiro regular "
 
 msgid "Seeking to search result"
-msgstr ""
+msgstr "Avanzando ao resultado da busca"
 
 msgid "Search done"
 msgstr "Busca rematada"
 
 msgid "Continue from begining?"
-msgstr ""
+msgstr "Continuar desde o principio?"
 
 msgid "History"
 msgstr "Historial"
@@ -4001,7 +4010,7 @@ msgid "DialogTitle|History cleanup"
 msgstr "DialogTitle|Limpar historial"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "Desexa eliminar este historial?"
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
