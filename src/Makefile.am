@@ -1,3 +1,8 @@
+
+if ENABLE_STATIC_BUILD
+AM_LDFLAGS = -all-static
+endif
+
 SUBDIRS = man2hlp viewer
 
 if USE_EDIT

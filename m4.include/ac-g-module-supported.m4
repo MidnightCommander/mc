@@ -14,7 +14,9 @@ AC_DEFUN([AC_G_MODULE_SUPPORTED], [
         fi
     ])
 
-    if test x"$mc_cv_g_module_supported" = "xyes"; then
+    if test "$enable_static_build" = "yes" ; then
+        AC_WARN([Static build enabled ... cannot use gmodule])
+    elif test x"$mc_cv_g_module_supported" = "xyes"; then
         if test x`$PKG_CONFIG --variable=gmodule_supported gmodule-2.0` = xtrue; then
             GLIB_LIBS="$GMODULE_LIBS $GLIB_LIBS"
             CFLAGS="$GMODULE_CFLAGS $CFLAGS"

@@ -41,6 +41,14 @@ DX_PDF_FEATURE(OFF)
 DX_PS_FEATURE(OFF)
 DX_INIT_DOXYGEN(mc,doxygen.cfg,devel)
 
+dnl
+dnl Static build of the mc executable
+dnl (must come before glib checks)
+dnl
+AC_ARG_ENABLE([static-build],
+              [  --enable-static-build   Build statically linked mc executable])
+AM_CONDITIONAL(ENABLE_STATIC_BUILD, [test "$enable_static_build" = "yes"])
+
 dnl PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
 
 dnl
