@@ -810,22 +810,19 @@ open_include_file (const char *filename)
         return fopen (filename, "r");
 
     g_free (error_file_name);
-    error_file_name = g_strconcat (home_dir, PATH_SEP_STR EDIT_DIR PATH_SEP_STR,
-                                   filename, (char *) NULL);
+    error_file_name = g_build_filename (home_dir, EDIT_DIR, filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f != NULL)
         return f;
 
     g_free (error_file_name);
-    error_file_name = g_strconcat (mc_home, PATH_SEP_STR, "syntax", PATH_SEP_STR,
-                                   filename, (char *) NULL);
+    error_file_name = g_build_filename (mc_home, "syntax", filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f != NULL)
         return f;
 
     g_free (error_file_name);
-    error_file_name = g_strconcat (mc_home_alt, PATH_SEP_STR "syntax" PATH_SEP_STR,
-                                   filename, (char *) NULL);
+    error_file_name = g_build_filename (mc_home_alt, "syntax", filename, (char *) NULL);
 
     return fopen (error_file_name, "r");
 }
@@ -1259,7 +1256,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     f = fopen (syntax_file, "r");
     if (f == NULL)
     {
-        lib_file = g_build_filename (mc_home, "Syntax", (char *) NULL);
+        lib_file = g_build_filename (mc_home_alt, "syntax", "Syntax", (char *) NULL);
         f = fopen (lib_file, "r");
         g_free (lib_file);
         if (f == NULL)

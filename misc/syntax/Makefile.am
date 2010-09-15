@@ -1,4 +1,5 @@
 SYNTAXFILES =			\
+	Syntax			\
 	PKGBUILD.syntax		\
 	ada95.syntax		\
 	aspx.syntax		\
@@ -69,15 +70,9 @@ SYNTAXFILES =			\
 	yum-repo.syntax		\
 	yxx.syntax
 
-SYNTAXCONFFILES =		\
-	Syntax
-
 if USE_EDIT
 syntaxdir =		$(pkgdatadir)/syntax
 syntax_DATA =		$(SYNTAXFILES)
-
-syntaxconfdir =		$(sysconfdir)/@PACKAGE@
-syntaxconf_DATA =	$(SYNTAXCONFFILES)
 endif
 
-EXTRA_DIST =		$(SYNTAXFILES) $(SYNTAXCONFFILES)
+EXTRA_DIST =		$(SYNTAXFILES)
