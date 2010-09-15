@@ -2,11 +2,13 @@
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
    2006, 2007 Free Software Foundation, Inc.
 
-   Written by: 1995 Ching Hui
-   1995 Jakub Jelinek
-   1995, 1996, 1997 Miguel de Icaza
-   1997 Norbert Warmuth
-   1998 Pavel Machek
+   Written by:
+       1995 Ching Hui
+       1995 Jakub Jelinek
+       1995, 1996, 1997 Miguel de Icaza
+       1997 Norbert Warmuth
+       1998 Pavel Machek
+       2010 Yury V. Zaytsev
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -54,12 +56,12 @@ What to do with this?
     \verbatim
     {
         int f = !strcmp( remote_path, "/~" );
-	if (f || !strncmp( remote_path, "/~/", 3 )) {
-	    char *s;
-	    s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
-	    g_free (remote_path);
-	    remote_path = s;
-	}
+        if (f || !strncmp( remote_path, "/~/", 3 )) {
+            char *s;
+            s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
+            g_free (remote_path);
+            remote_path = s;
+        }
     }
     \endverbatim
  */
@@ -977,74 +979,37 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
     return NULL;
 }
 
-
-/* Setup Passive ftp connection, we use it for source routed connections */
+/* Setup Passive PASV FTP connection */
 static int
-ftpfs_setup_passive (struct vfs_class *me, struct vfs_s_super *super,
-                     int my_socket, struct sockaddr_storage *sa, socklen_t * salen)
+ftpfs_setup_passive_pasv (struct vfs_class *me, struct vfs_s_super *super,
+                          int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
 {
     char *c;
+    char n[6];
+    int xa, xb, xc, xd, xe, xf;
 
-    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "EPSV") == COMPLETE)
-    {
-        int port;
-        /* (|||<port>|) */
-        c = strchr (reply_str, '|');
-        if (c == NULL)
-            return 0;
-        if (strlen (c) > 3)
-            c += 3;
-        else
-            return 0;
-
-        port = atoi (c);
-        if (port < 0 || port > 65535)
-            return 0;
-        port = htons (port);
-
-        switch (sa->ss_family)
-        {
-        case AF_INET:
-            ((struct sockaddr_in *) sa)->sin_port = port;
-            break;
-        case AF_INET6:
-            ((struct sockaddr_in6 *) sa)->sin6_port = port;
-            break;
-        default:
-            print_vfs_message (_("ftpfs: invalid address family"));
-            ERRNOR (EINVAL, -1);
-        }
-    }
-    else if (sa->ss_family == AF_INET)
-    {
-        int xa, xb, xc, xd, xe, xf;
-        char n[6];
-
-        if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
-            return 0;
-
-        /* Parse remote parameters */
-        for (c = reply_str + 4; (*c) && (!isdigit ((unsigned char) *c)); c++);
-
-        if (!*c)
-            return 0;
-        if (!isdigit ((unsigned char) *c))
-            return 0;
-        if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
-            return 0;
-
-        n[0] = (unsigned char) xa;
-        n[1] = (unsigned char) xb;
-        n[2] = (unsigned char) xc;
-        n[3] = (unsigned char) xd;
-        n[4] = (unsigned char) xe;
-        n[5] = (unsigned char) xf;
-
-        memcpy (&(((struct sockaddr_in *) sa)->sin_addr.s_addr), (void *) n, 4);
-        memcpy (&(((struct sockaddr_in *) sa)->sin_port), (void *) &n[4], 2);
-    }
-    else
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
         return 0;
+
+    /* Parse remote parameters */
+    for (c = reply_str + 4; (*c) && (!isdigit ((unsigned char) *c)); c++);
+
+    if (!*c)
+        return 0;
+    if (!isdigit ((unsigned char) *c))
+        return 0;
+    if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
+        return 0;
+
+    n[0] = (unsigned char) xa;
+    n[1] = (unsigned char) xb;
+    n[2] = (unsigned char) xc;
+    n[3] = (unsigned char) xd;
+    n[4] = (unsigned char) xe;
+    n[5] = (unsigned char) xf;
+
+    memcpy (&(((struct sockaddr_in *) sa)->sin_addr.s_addr), (void *) n, 4);
+    memcpy (&(((struct sockaddr_in *) sa)->sin_port), (void *) &n[4], 2);
 
     if (connect (my_socket, (struct sockaddr *) sa, *salen) < 0)
         return 0;
@@ -1052,124 +1017,236 @@ ftpfs_setup_passive (struct vfs_class *me, struct vfs_s_super *super,
     return 1;
 }
 
+/* Setup Passive EPSV FTP connection */
 static int
-ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
+ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
+                          int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
 {
-    struct sockaddr_storage data_addr;
-    socklen_t data_addrlen;
-    int data_sock, result;
+    char *c;
+    int port;
 
-  again:
-    memset (&data_addr, 0, sizeof (struct sockaddr_storage));
-    data_addrlen = sizeof (struct sockaddr_storage);
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "EPSV") != COMPLETE)
+        return 0;
 
-    if (SUP.use_passive_connection)
-        result = getpeername (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen);
+    /* (|||<port>|) */
+    c = strchr (reply_str, '|');
+    if (c == NULL)
+        return 0;
+    if (strlen (c) > 3)
+        c += 3;
     else
-        result = getsockname (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen);
+        return 0;
 
-    if (result == -1)
-        return -1;
+    port = atoi (c);
+    if (port < 0 || port > 65535)
+        return 0;
+    port = htons (port);
+
+    switch (sa->ss_family)
+    {
+    case AF_INET:
+        ((struct sockaddr_in *) sa)->sin_port = port;
+        break;
+    case AF_INET6:
+        ((struct sockaddr_in6 *) sa)->sin6_port = port;
+        break;
+    }
+
+    if (connect (my_socket, (struct sockaddr *) sa, *salen) < 0)
+        return 0;
+
+    return 1;
+}
+
+/* Setup Passive ftp connection, we use it for source routed connections */
+static int
+ftpfs_setup_passive (struct vfs_class *me, struct vfs_s_super *super,
+                     int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
+{
+    /* It's IPV4, so try PASV first, some servers and ALGs get confused by EPSV */
+    if (sa->ss_family == AF_INET)
+    {
+        if (!ftpfs_setup_passive_pasv (me, super, my_socket, sa, salen))
+            /* An IPV4 FTP server might support EPSV, so if PASV fails we can try EPSV anyway */
+            if (!ftpfs_setup_passive_epsv (me, super, my_socket, sa, salen))
+                return 0;
+    }
+    /* It's IPV6, so EPSV is our only hope */
+    else
+    {
+        if (!ftpfs_setup_passive_epsv (me, super, my_socket, sa, salen))
+            return 0;
+    }
+
+    return 1;
+}
+
+/* Setup Active PORT or EPRT FTP connection */
+static int
+ftpfs_setup_active (struct vfs_class *me, struct vfs_s_super *super,
+                    struct sockaddr_storage data_addr, socklen_t data_addrlen)
+{
+    unsigned short int port;
+    char *addr;
+    unsigned int af;
 
     switch (data_addr.ss_family)
     {
     case AF_INET:
-        ((struct sockaddr_in *) &data_addr)->sin_port = 0;
+        af = FTP_INET;
+        port = ((struct sockaddr_in *) &data_addr)->sin_port;
         break;
     case AF_INET6:
-        ((struct sockaddr_in6 *) &data_addr)->sin6_port = 0;
+        af = FTP_INET6;
+        port = ((struct sockaddr_in6 *) &data_addr)->sin6_port;
+        break;
+    /* Not implemented */
+    default:
+        return 0;
+    }
+
+    addr = g_try_malloc (NI_MAXHOST);
+    if (addr == NULL)
+        ERRNOR (ENOMEM, -1);
+
+    if (getnameinfo
+        ((struct sockaddr *) &data_addr, data_addrlen, addr, NI_MAXHOST, NULL, 0,
+         NI_NUMERICHOST) != 0)
+    {
+        g_free (addr);
+        ERRNOR (EIO, -1);
+    }
+
+    /* If we are talking to an IPV4 server, try PORT, and, only if it fails, go for EPRT */
+    if (af == FTP_INET)
+    {
+        unsigned char *a = (unsigned char *) &((struct sockaddr_in *) &data_addr)->sin_addr;
+        unsigned char *p = (unsigned char *) &port;
+
+        if (ftpfs_command (me, super, WAIT_REPLY,
+                           "PORT %u,%u,%u,%u,%u,%u", a[0], a[1], a[2], a[3],
+                           p[0], p[1]) == COMPLETE)
+        {
+            g_free (addr);
+            return 1;
+        }
+    }
+
+    /*
+     * Converts network MSB first order to host byte order (LSB
+     * first on i386). If we do it earlier, we will run into an
+     * endianness issue, because the server actually expects to see
+     * "PORT A,D,D,R,MSB,LSB" in the PORT command.
+     */
+    port = ntohs (port);
+
+    /* We are talking to an IPV6 server or PORT failed, so we can try EPRT anyway */
+    if (ftpfs_command (me, super, WAIT_REPLY, "EPRT |%u|%s|%hu|", af, addr, port) == COMPLETE)
+    {
+        g_free (addr);
+        return 1;
+    }
+
+    g_free (addr);
+    return 0;
+}
+
+/* Initialize a socket for FTP DATA connection */
+static int
+ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
+                        struct sockaddr_storage *data_addr, socklen_t *data_addrlen)
+{
+    int result;
+
+    memset (data_addr, 0, sizeof (struct sockaddr_storage));
+    *data_addrlen = sizeof (struct sockaddr_storage);
+
+    if (SUP.use_passive_connection)
+        result = getpeername (SUP.sock, (struct sockaddr *) data_addr, data_addrlen);
+    else
+        result = getsockname (SUP.sock, (struct sockaddr *) data_addr, data_addrlen);
+
+    if (result == -1)
+        return -1;
+
+    switch (data_addr->ss_family)
+    {
+    case AF_INET:
+        ((struct sockaddr_in *) data_addr)->sin_port = 0;
+        break;
+    case AF_INET6:
+        ((struct sockaddr_in6 *) data_addr)->sin6_port = 0;
         break;
     default:
         print_vfs_message (_("ftpfs: invalid address family"));
         ERRNOR (EINVAL, -1);
     }
 
-    data_sock = socket (data_addr.ss_family, SOCK_STREAM, IPPROTO_TCP);
-    if (data_sock < 0)
-    {
-        if (SUP.use_passive_connection)
-        {
-            print_vfs_message (_("ftpfs: could not setup passive mode: %s"),
-                               unix_error_string (errno));
-            SUP.use_passive_connection = 0;
-            goto again;
-        }
+    result = socket (data_addr->ss_family, SOCK_STREAM, IPPROTO_TCP);
 
+    if (result < 0)
+    {
         print_vfs_message (_("ftpfs: could not create socket: %s"), unix_error_string (errno));
         return -1;
-    }
+    } else
+        return result;
+}
 
+/* Initialize FTP DATA connection */
+static int
+ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
+{
+    struct sockaddr_storage data_addr;
+    socklen_t data_addrlen;
+
+    /*
+     * Don't factor socket initialization out of these conditionals,
+     * because ftpfs_init_data_socket initializes it in different way
+     * depending on use_passive_connection flag.
+     */
+
+    /* Try to establish a passive connection first (if requested) */
     if (SUP.use_passive_connection)
     {
+        int data_sock;
+        data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
+
+        if (data_sock < 0)
+            return -1;
 
         if (ftpfs_setup_passive (me, super, data_sock, &data_addr, &data_addrlen))
             return data_sock;
 
-        SUP.use_passive_connection = 0;
         print_vfs_message (_("ftpfs: could not setup passive mode"));
+        SUP.use_passive_connection = 0;
 
         close (data_sock);
-        goto again;
     }
 
-    /* If passive setup fails, fallback to active connections */
-    /* Active FTP connection */
-    if ((bind (data_sock, (struct sockaddr *) &data_addr, data_addrlen) == 0) &&
-        (getsockname (data_sock, (struct sockaddr *) &data_addr, &data_addrlen) == 0) &&
-        (listen (data_sock, 1) == 0))
+    /* If passive setup is diabled or failed, fallback to active connections */
+    if (!SUP.use_passive_connection)
     {
-        unsigned short int port;
-        char *addr;
-        unsigned int af;
+        int data_sock;
+        data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
 
-        switch (data_addr.ss_family)
+        if (data_sock < 0)
+            return -1;
+
+        if ((bind (data_sock, (struct sockaddr *) &data_addr, data_addrlen) == 0) &&
+            (getsockname (data_sock, (struct sockaddr *) &data_addr, &data_addrlen) == 0) &&
+            (listen (data_sock, 1) == 0))
         {
-        case AF_INET:
-            af = FTP_INET;
-            port = ((struct sockaddr_in *) &data_addr)->sin_port;
-            break;
-        case AF_INET6:
-            af = FTP_INET6;
-            port = ((struct sockaddr_in6 *) &data_addr)->sin6_port;
-            break;
-        default:
-            print_vfs_message (_("ftpfs: invalid address family"));
-            ERRNOR (EINVAL, -1);
-        }
-
-        port = ntohs (port);
-
-        addr = g_try_malloc (NI_MAXHOST);
-        if (addr == NULL)
-            ERRNOR (ENOMEM, -1);
-
-        if (getnameinfo
-            ((struct sockaddr *) &data_addr, data_addrlen, addr, NI_MAXHOST, NULL, 0,
-             NI_NUMERICHOST) != 0)
-        {
-            g_free (addr);
-            ERRNOR (EIO, -1);
-        }
-
-        if (ftpfs_command (me, super, WAIT_REPLY, "EPRT |%u|%s|%hu|", af, addr, port) == COMPLETE)
-        {
-            g_free (addr);
-            return data_sock;
-        }
-        g_free (addr);
-
-        if (FTP_INET == af)
-        {
-            unsigned char *a = (unsigned char *) &((struct sockaddr_in *) &data_addr)->sin_addr;
-            unsigned char *p = (unsigned char *) &port;
-
-            if (ftpfs_command (me, super, WAIT_REPLY,
-                               "PORT %u,%u,%u,%u,%u,%u", a[0], a[1], a[2], a[3],
-                               p[0], p[1]) == COMPLETE)
+            if (ftpfs_setup_active (me, super, data_addr, data_addrlen))
                 return data_sock;
         }
+
+        close (data_sock);
     }
-    close (data_sock);
+
+    /* Restore the initial value of use_passive_connection (for subsequent retries) */
+    SUP.use_passive_connection = SUP.proxy ? ftpfs_use_passive_connections_over_proxy :
+                                             ftpfs_use_passive_connections;
+
     ftpfs_errno = EIO;
     return -1;
 }
