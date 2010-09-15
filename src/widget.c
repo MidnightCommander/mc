@@ -3126,11 +3126,7 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
                     break;
 
                 tty_setcolor (BUTTONBAR_HOTKEY_COLOR);
-                /* don't show num of undefined button */
-                if ((bb->labels[i].text == NULL) || (bb->labels[i].text[0] == '\0'))
-                    tty_print_string (" ");
-                else
-                    tty_printf ("%2d", i + 1);
+                tty_printf ("%2d", i + 1);
 
                 tty_setcolor (BUTTONBAR_BUTTON_COLOR);
                 text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
