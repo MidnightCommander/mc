@@ -94,7 +94,7 @@ PKG_CONFIG_PATH="$RESULT_DIR/usr/%{_lib}/pkgconfig:$PKG_CONFIG_PATH" ; export PK
         %{_with_screen} \
         %{?_with_glib_static} \
         --enable-charset \
-        --with-samba \
+        --enable-vfs-smb \
         --without-x \
         --with-gpm-mouse \
         --disable-doxygen-doc
@@ -140,9 +140,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_sysconfdir}/profile.d/*
 
-%config %{_sysconfdir}/mc/Syntax
-%config %{_sysconfdir}/mc/mc.charsets
-%config %{_sysconfdir}/mc/mc.lib
 %config(noreplace) %{_sysconfdir}/mc/filehighlight.ini
 %config(noreplace) %{_sysconfdir}/mc/*edit*
 %config(noreplace) %{_sysconfdir}/mc/mc.ext
@@ -155,8 +152,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/mc
 %{_datadir}/mc/*
 
-
 %changelog
+* Thu Sep 16 2010 Andrew Borodin <aborodin@vmail.ru>
+- Some files are installed now into %%{_datadir}/mc instead of %%{_sysconfdir}/mc.
+
 * Wed Apr 28 2010 Yury V. Zaytsev <yury@shurup.com>
 - Added mcdiff to the list of packaged files.
 
