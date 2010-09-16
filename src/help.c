@@ -966,7 +966,7 @@ interactive_display (const char *filename, const char *node)
     if (filename != NULL)
         filedata = load_file (filename);
     else
-        filedata = load_mc_home_file (mc_home_alt, "mc.hlp", &hlpfile);
+        filedata = load_mc_home_file (mc_home_alt, MC_HELP, &hlpfile);
 
     if (filedata == NULL)
         message (D_ERROR, MSG_ERROR, _("Cannot open file %s\n%s"),

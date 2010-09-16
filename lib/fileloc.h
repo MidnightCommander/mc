@@ -25,6 +25,7 @@
 #define MC_GLOBAL_MENU		"mc.menu"
 #define MC_LOCAL_MENU		".mc.menu"
 #define MC_HINT			"hints" PATH_SEP_STR "mc.hint"
+#define MC_HELP			"help" PATH_SEP_STR "mc.hlp"
 #define GLOBAL_KEYMAP_FILE	"mc.keymap"
 #define CHARSETS_LIST		"mc.charsets"
 #define MC_LIB_EXT		"mc.ext"

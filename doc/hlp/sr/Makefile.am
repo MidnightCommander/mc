@@ -1,9 +1,3 @@
 HLP_LANG=sr
-MAN2HLP=$(top_builddir)/src/man2hlp/man2hlp
-pkgdata_DATA = mc.hlp.$(HLP_LANG)
 
-EXTRA_DIST = xnc.hlp
-CLEANFILES = $(pkgdata_DATA)
-
-mc.hlp.$(HLP_LANG): $(top_builddir)/doc/man/$(HLP_LANG)/mc.1 $(srcdir)/xnc.hlp $(MAN2HLP)
-	- $(MAN2HLP) $(top_builddir)/doc/man/$(HLP_LANG)/mc.1 $(srcdir)/xnc.hlp mc.hlp.$(HLP_LANG)
+include ../hlp-lang-include.am
