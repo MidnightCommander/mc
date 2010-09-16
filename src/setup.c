@@ -731,11 +731,11 @@ load_setup (void)
 
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = concat_dir_and_file (mc_home, MC_GLOBAL_CONFIG_FILE);
+    global_profile_name = g_build_filename (mc_home, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     if (!exist_file (global_profile_name))
     {
         g_free (global_profile_name);
-        global_profile_name = concat_dir_and_file (mc_home_alt, MC_GLOBAL_CONFIG_FILE);
+        global_profile_name = g_build_filename (mc_home_alt, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
     panels_profile_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_PANELS_FILE, NULL);

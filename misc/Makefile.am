@@ -12,13 +12,13 @@ LIBFILES_OUT = mc.ext
 
 noinst_DATA = xterm.ad
 
-pkgdata_DATA =
+pkgdata_DATA = \
+	mc.lib
 
 LIBFILES_CONST = \
 	cedit.menu      \
 	edit.indent.rc \
 	edit.spell.rc \
-	mc.lib \
 	filehighlight.ini \
 	mc.keymap \
 	mc.keymap.default \
