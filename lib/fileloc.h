@@ -26,7 +26,7 @@
 #define MC_LOCAL_MENU		".mc.menu"
 #define MC_HINT			"mc.hint"
 #define GLOBAL_KEYMAP_FILE	"mc.keymap"
-#define CHARSETS_INDEX		"mc.charsets"
+#define CHARSETS_LIST		"mc.charsets"
 #define MC_LIB_EXT		"mc.ext"
 
 #define FISH_PREFIX		"fish"

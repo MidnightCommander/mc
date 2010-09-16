@@ -56,13 +56,15 @@ load_codepages_list (void)
     char buf[BUF_MEDIUM];
     char *default_codepage = NULL;
 
-    fname = concat_dir_and_file (mc_home, CHARSETS_INDEX);
+    /* 1: try /usr/share/mc/mc.charsets */
+    fname = g_build_filename (mc_home_alt, CHARSETS_LIST, (char *) NULL);
     f = fopen (fname, "r");
     if (f == NULL) {
 	fprintf (stderr, _("Warning: file %s not found\n"), fname);
 	g_free (fname);
 
-	fname = concat_dir_and_file (mc_home_alt, CHARSETS_INDEX);
+	/* 2: try /etc/mc/mc.charsets */
+	fname = g_build_filename (mc_home, CHARSETS_LIST, (char *) NULL);
 	f = fopen (fname, "r");
 	if (f == NULL) {
 	    fprintf (stderr, _("Warning: file %s not found\n"), fname);
