@@ -188,8 +188,9 @@ mc_search_prepare (mc_search_t * lc_mc_search)
     if (lc_mc_search->is_all_charsets) {
         gsize loop1, recoded_str_len;
         gchar *buffer;
-        for (loop1 = 0; loop1 < (gsize) n_codepages; loop1++) {
-            if (!g_ascii_strcasecmp (codepages[loop1].id, cp_source)) {
+        for (loop1 = 0; loop1 < codepages->len; loop1++) {
+            const char *id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
+            if (!g_ascii_strcasecmp (id, cp_source)) {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
                                                              lc_mc_search->original_len, cp_source));
@@ -198,11 +199,11 @@ mc_search_prepare (mc_search_t * lc_mc_search)
 
             buffer =
                 mc_search__recode_str (lc_mc_search->original, lc_mc_search->original_len, cp_source,
-                                       codepages[loop1].id, &recoded_str_len);
+                                       id, &recoded_str_len);
 
             g_ptr_array_add (ret,
                              mc_search__cond_struct_new (lc_mc_search, buffer,
-                                                         recoded_str_len, codepages[loop1].id));
+                                                         recoded_str_len, id));
             g_free (buffer);
         }
     } else {

@@ -6,27 +6,28 @@
 #ifndef MC_CHARSETS_H
 #define MC_CHARSETS_H
 
+#include "lib/global.h"
+
 #ifdef HAVE_CHARSET
 
 #define UNKNCHAR '\001'
 
-extern int n_codepages;
-
 extern unsigned char conv_displ[256];
 extern unsigned char conv_input[256];
 
-struct codepage_desc {
+typedef struct
+{
     char *id;
     char *name;
-};
+} codepage_desc;
 
 extern const char *cp_display;
 extern const char *cp_source;
-extern struct codepage_desc *codepages;
+extern GPtrArray *codepages;
 
 const char *get_codepage_id (const int n);
 int get_codepage_index (const char *id);
-int load_codepages_list (void);
+void load_codepages_list (void);
 void free_codepages_list (void);
 gboolean is_supported_encoding (const char *encoding);
 char *init_translation_table (int cpsource, int cpdisplay);
@@ -90,4 +91,4 @@ convert_from_input_c (int c)
 
 #endif /* HAVE_CHARSET */
 
-#endif
+#endif /* MC_CHARSETS_H */

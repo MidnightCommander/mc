@@ -721,10 +721,9 @@ load_setup (void)
     size_t i;
     char *buffer;
     const char *kt;
-#ifdef HAVE_CHARSET
-    int cpages = -1;
 
-    cpages = load_codepages_list ();
+#ifdef HAVE_CHARSET
+    load_codepages_list ();
 #endif /* HAVE_CHARSET */
 
     profile = setup_init ();
@@ -816,7 +815,7 @@ load_setup (void)
     /* Remove the temporal entries */
 
 #ifdef HAVE_CHARSET
-    if (cpages > 0)
+    if (codepages->len > 1)
     {
         buffer = mc_config_get_string (mc_main_config, "Misc", "display_codepage", "");
         if (buffer[0] != '\0')

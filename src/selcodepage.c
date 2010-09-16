@@ -65,7 +65,7 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
 
     /* Create listbox */
     Listbox *listbox = create_listbox_window_centered (center_y, center_x,
-					      n_codepages + 1, ENTRY_LEN + 2,
+					      codepages->len + 1, ENTRY_LEN + 2,
 					      _("Choose codepage"),
 					      "[Codepages Translation]");
 
@@ -74,22 +74,21 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
 			     NULL);
 
     /* insert all the items found */
-    for (i = 0; i < n_codepages; i++) {
-	char *name = codepages[i].name;
+    for (i = 0; i < codepages->len; i++) {
+	const char *name = ((codepage_desc *) g_ptr_array_index (codepages, i))->name;
 	g_snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey (i),
 		    name);
 	LISTBOX_APPEND_TEXT (listbox, get_hotkey (i), buffer, NULL);
     }
     if (seldisplay) {
-	g_snprintf (buffer, sizeof (buffer), "%c  %s",
-		    get_hotkey (n_codepages), _("Other 8 bit"));
-	LISTBOX_APPEND_TEXT (listbox, get_hotkey (n_codepages), buffer,
-			     NULL);
+        unsigned char hotkey = get_hotkey (codepages->len);
+	g_snprintf (buffer, sizeof (buffer), "%c  %s", hotkey, _("Other 8 bit"));
+	LISTBOX_APPEND_TEXT (listbox, hotkey, buffer, NULL);
     }
 
     /* Select the default entry */
     i = (seldisplay)
-	? ((current_charset < 0) ? n_codepages : current_charset)
+	? ((current_charset < 0) ? codepages->len : current_charset)
 	: (current_charset + 1);
 
     listbox_select_entry (listbox->list, i);
@@ -103,7 +102,7 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
 	/* some charset has been selected */
 	if (seldisplay) {
 	    /* charset list is finished with "Other 8 bit" item */
-	    return (i >= n_codepages) ? SELECT_CHARSET_OTHER_8BIT : i;
+	    return ((guint) i >= codepages->len) ? SELECT_CHARSET_OTHER_8BIT : i;
 	} else {
 	    /* charset list is began with "-  < No translation >" item */
 	    return (i - 1);
