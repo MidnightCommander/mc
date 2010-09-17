@@ -9,55 +9,38 @@
 
 /* default 'ls' script */
 #define FISH_LS_DEF_CONTENT ""                                            \
-"#LIST /${FISH_DIR}\n"                                                    \
+"#LIST /${FISH_FILENAME}\n"                                               \
 "export LC_TIME=C\n"                                                      \
-"FISH_DIR=\"/${FISH_PARAM1}\"\n"                                          \
-"ls -lan \"${FISH_DIR}\" 2>/dev/null | grep '^[^cbt]' | (\n"              \
-"while read p l u g s m d y n n2 n3; do\n"                                \
-"    if [ -n \"$g\" ]; then\n"                                            \
-"        if [ \"$m\" = \"0\" ]; then\n"                                   \
-"            s=$d; m=$y; d=$n; y=$n2; n=$n3\n"                            \
-"        else\n"                                                          \
-"            n=$n\" \"$n2\" \"$n3\n"                                      \
-"        fi\n"                                                            \
-"        echo \"P$p $u $g\"\n"                                            \
-"        echo \"S$s\"\n"                                                  \
-"        echo \"d$m $d $y\"\n"                                            \
-"        echo \":\"$n\n"                                                  \
-"        echo\n"                                                          \
-"    fi\n"                                                                \
+"ls -Qlan \"/${FISH_FILENAME}\" 2>/dev/null | grep '^[^cbt]' | (\n"       \
+"while read p l u g s m d y n; do\n"                                      \
+"    echo \"P$p $u.$g\"\n"                                                \
+"    echo \"S$s\"\n"                                                      \
+"    echo \"d$m $d $y\"\n"                                                \
+"    echo \":$n\"\n"                                                      \
+"    echo\n"                                                              \
 "done\n"                                                                  \
 ")\n"                                                                     \
-"ls -lan \"${FISH_DIR}\" 2>/dev/null | grep '^[cb]' | (\n"                \
-"while read p l u g a i m d y n n2 n3; do\n"                              \
-"    if [ -n \"$g\" ]; then\n"                                            \
-"        if [ \"$a\" = \"0\" ]; then\n"                                   \
-"            a=$m; i=$d; m=$y; d=$n; y=$n2; n=$n3\n"                      \
-"        else\n"                                                          \
-"            n=$n\" \"$n2\" \"$n3\n"                                      \
-"        fi\n"                                                            \
-"        echo \"P$p $u $g\"\n"                                            \
-"        echo \"S$s\"\n"                                                  \
-"        echo \"d$m $d $y\"\n"                                            \
-"        echo \":\"$n\n"                                                  \
-"        echo\n"                                                          \
-"    fi\n"                                                                \
+"ls -Qlan \"/${FISH_FILENAME}\" 2>/dev/null | grep '^[cb]' | (\n"         \
+"while read p l u g a i m d y n; do\n"                                    \
+"    echo \"P$p $u.$g\"\n"                                                \
+"    echo \"E$a$i\"\n"                                                    \
+"    echo \"d$m $d $y\"\n"                                                \
+"    echo \":$n\"\n"                                                      \
+"    echo\n"                                                              \
 "done\n"                                                                  \
 ")\n"                                                                     \
 "echo \"### 200\"\n"
 
 /* default file exisits script */
 #define FISH_EXISTS_DEF_CONTENT ""                                        \
-"FILENAME=\"/${FISH_PARAM1}\"\n"                                          \
-"#ISEXISTS $FILENAME\n"                                                   \
-"ls -l \"${FILENAME}\" >/dev/null 2>/dev/null\n"                          \
+"#ISEXISTS $FISH_FILENAME\n"                                              \
+"ls -l \"/${FISH_FILENAME}\" >/dev/null 2>/dev/null\n"                    \
 "echo '### '$?\n"
 
 /* default 'mkdir' script */
 #define FISH_MKDIR_DEF_CONTENT ""                                         \
-"FILENAME=/${FISH_PARAM1}\n"                                              \
-"#MKD $FILENAME\n"                                                        \
-"if mkdir \"$FILENAME\" 2>/dev/null; then\n"                              \
+"#MKD $FISH_FILENAME\n"                                                   \
+"if mkdir \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                      \
 "    echo \"### 000\"\n"                                                  \
 "else\n"                                                                  \
 "    echo \"### 500\"\n"                                                  \
@@ -65,101 +48,86 @@
 
 /* default 'unlink' script */
 #define FISH_UNLINK_DEF_CONTENT ""                                        \
-"FILENAME=\"/${FISH_PARAM1}\"\n"                                          \
-"#DELE $FILENAME\n"                                                       \
-"if rm -f \"${FILENAME}\" 2>/dev/null; then\n"                            \
+"#DELE $FISH_FILENAME\n"                                                  \
+"if rm -f \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                      \
 "    echo \"### 000\"\n"                                                  \
 "else\n"                                                                  \
 "    echo \"### 500\"\n"                                                  \
 "fi\n"
-
 /* default 'chown' script */
-#define FISH_CHOWN_DEF_CONTENT ""                                         \
-"FILENAME=\"/${FISH_PARAM1}\"\n"                                          \
-"NEWUSER=\"${FISH_PARAM2}\"\n"                                            \
-"NEWGROUP=\"${FISH_PARAM3}\"\n"                                           \
-"#CHOWN $NEWUSER:$NEWGROUP $FILENAME\n"                                   \
-"if chown ${NEWUSER}:${NEWGROUP} \"${FILENAME}\" ; then\n"                \
-"    echo \"### 000\"\n"                                                  \
-"else\n"                                                                  \
-"    echo \"### 500\"\n"                                                  \
+#define FISH_CHOWN_DEF_CONTENT ""                                           \
+"#CHOWN $FISH_FILEOWNER:$FISH_FILEGROUP $FISH_FILENAME\n"                   \
+"if chown ${FISH_FILEOWNER}:${FISH_FILEGROUP} \"/${FISH_FILENAME}\"; then\n"\
+"    echo \"### 000\"\n"                                                    \
+"else\n"                                                                    \
+"    echo \"### 500\"\n"                                                    \
 "fi\n"
 
 /* default 'chmod' script */
-#define FISH_CHMOD_DEF_CONTENT ""                                         \
-"FISH_FILENAME=\"/${FISH_PARAM1}\"\n"                                     \
-"FISH_MODE=\"${FISH_PARAM2}\"\n"                                          \
-"#CHMOD $FISH_MODE $FISH_FILENAME\n"                                      \
-"if chmod ${FISH_MODE} \"${FISH_FILENAME} 2>/dev/null; then\n"            \
-"    echo \"### 000\"\n"                                                  \
-"else\n"                                                                  \
-"    echo \"### 500\"\n"                                                  \
+#define FISH_CHMOD_DEF_CONTENT ""                                           \
+"#CHMOD $FISH_FILEMODE $FISH_FILENAME\n"                                    \
+"if chmod ${FISH_FILEMODE} \"/${FISH_FILENAME}\" 2>/dev/null; then\n"       \
+"    echo \"### 000\"\n"                                                    \
+"else\n"                                                                    \
+"    echo \"### 500\"\n"                                                    \
 "fi\n"
 
 /* default 'rmdir' script */
-#define FISH_RMDIR_DEF_CONTENT ""                                         \
-"FILENAME=\"/${FISH_PARAM1}\"\n"                                          \
-"#RMD $FILENAME\n"                                                        \
-"if rmdir \"${FILENAME}\" 2>/dev/null; then\n"                            \
-"   echo \"### 000\"\n"                                                   \
-"else\n"                                                                  \
-"   echo \"### 500\"\n"                                                   \
+#define FISH_RMDIR_DEF_CONTENT ""                                           \
+"#RMD $FISH_FILENAME\n"                                                     \
+"if rmdir \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                        \
+"   echo \"### 000\"\n"                                                     \
+"else\n"                                                                    \
+"   echo \"### 500\"\n"                                                     \
 "fi\n"
 
 /* default 'ln -s' symlink script */
-#define FISH_LN_DEF_CONTENT ""                                            \
-"FILEFROM=\"${FISH_PARAM1}\"\n"                                           \
-"FILETO=\"/${FISH_PARAM2}\"\n"                                            \
-"#SYMLINK $FILEFROM $FILETO\n"                                            \
-"if ln -s \"${FILEFROM}\" \"${FILETO}\" 2>/dev/null; then\n"              \
-"   echo \"### 000\"\n"                                                   \
-"else\n"                                                                  \
-"   echo \"### 500\"\n"                                                   \
+#define FISH_LN_DEF_CONTENT ""                                              \
+"#SYMLINK $FISH_FILEFROM $FISH_FILETO\n"                                    \
+"if ln -s \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"    \
+"   echo \"### 000\"\n"                                                     \
+"else\n"                                                                    \
+"   echo \"### 500\"\n"                                                     \
 "fi\n"
 
 /* default 'mv' script */
-#define FISH_MV_DEF_CONTENT ""                                            \
-"FILEFROM=\"/${FISH_PARAM1}\"\n"                                          \
-"FILETO=\"/${FISH_PARAM2}\"\n"                                            \
-"#RENAME $FILEFROM $FILETO\n"                                             \
-"if mv \"${FILEFROM}\" \"${FILETO}\" 2>/dev/null; then\n"                 \
-"   echo \"### 000\"\n"                                                   \
-"else\n"                                                                  \
-"   echo \"### 500\"\n"                                                   \
+#define FISH_MV_DEF_CONTENT ""                                              \
+"#RENAME $FISH_FILEFROM $FISH_FILETO\n"                                     \
+"if mv \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"       \
+"   echo \"### 000\"\n"                                                     \
+"else\n"                                                                    \
+"   echo \"### 500\"\n"                                                     \
 "fi\n"
 
 /* default 'ln' hardlink script */
-#define FISH_HARDLINK_DEF_CONTENT ""                                      \
-"FILEFROM=\"/${FISH_PARAM1}\"\n"                                          \
-"FILETO=\"/${FISH_PARAM2}\"\n"                                            \
-"#LINK $FILEFROM $FILETO\n"                                               \
-"if ln \"${FILEFROM}\" \"${FILETO}\" 2>/dev/null; then\n"                 \
-"   echo \"### 000\"\n"                                                   \
-"else\n"                                                                  \
-"   echo \"### 500\"\n"                                                   \
+#define FISH_HARDLINK_DEF_CONTENT ""                                        \
+"#LINK $FISH_FILEFROM $FISH_FILETO\n"                                       \
+"if ln \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"       \
+"   echo \"### 000\"\n"                                                     \
+"else\n"                                                                    \
+"   echo \"### 500\"\n"                                                     \
 "fi\n"
 
 /* default 'retr'  script */
-#define FISH_GET_DEF_CONTENT ""                                           \
-"FILENAME=\"/${FISH_PARAM1}\"\n"                                          \
-"export LC_TIME=C\n"                                                      \
-"#RETR $FILENAME\n"                                                       \
-"if dd if=\"${FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n" \
-"    ls -ln \"${FILENAME}\" 2>/dev/null | (\n"                            \
-"       read p l u g s r\n"                                               \
-"       echo $s\n"                                                        \
-"    )\n"                                                                 \
-"    echo \"### 100\"\n"                                                  \
-"    cat \"${FILENAME}\"\n"                                               \
-"    echo \"### 200\"\n"                                                  \
-"else\n"                                                                  \
-"    echo \"### 500\"\n"                                                  \
+#define FISH_GET_DEF_CONTENT ""                                                 \
+"export LC_TIME=C\n"                                                            \
+"#RETR $FISH_FILENAME\n"                                                        \
+"if dd if=\"/${FISH_FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n" \
+"    ls -ln \"/${FISH_FILENAME}\" 2>/dev/null | (\n"                            \
+"       read p l u g s r\n"                                                     \
+"       echo $s\n"                                                              \
+"    )\n"                                                                       \
+"    echo \"### 100\"\n"                                                        \
+"    cat \"/${FISH_FILENAME}\"\n"                                               \
+"    echo \"### 200\"\n"                                                        \
+"else\n"                                                                        \
+"    echo \"### 500\"\n"                                                        \
 "fi\n"
 
 /* default 'stor'  script */
 #define FISH_SEND_DEF_CONTENT ""                                          \
-"FILENAME=\"/${FISH_PARAM1}\"\n"                                          \
-"FILESIZE=${FISH_PARAM2}\n"                                               \
+"FILENAME=\"/${FISH_FILENAME}\"\n"                                        \
+"FILESIZE=${FISH_FILESIZE}\n"                                             \
 "#STOR $FILESIZE $FILENAME\n"                                             \
 "echo \"### 001\"\n"                                                      \
 "{\n"                                                                     \
@@ -172,8 +140,8 @@
 
 /* default 'appe'  script */
 #define FISH_APPEND_DEF_CONTENT ""                                        \
-"FILENAME=\"/${FISH_PARAM1}\"\n"                                          \
-"FILESIZE=${FISH_PARAM2}\n"                                               \
+"FILENAME=\"/${FISH_FILENAME}\"\n"                                        \
+"FILESIZE=${FISH_FILESIZE}\n"                                             \
 "#APPE $FILESIZE $FILENAME\n"                                             \
 "echo \"### 001\"\n"                                                      \
 "res=`exec 3>&1\n"                                                        \
