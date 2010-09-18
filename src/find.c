@@ -3,7 +3,7 @@
    2006, 2007 Free Software Foundation, Inc.
    Written 1995 by Miguel de Icaza
 
-   Complete rewrote.
+   Complete rewrite.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -615,7 +615,7 @@ pop_directory (void)
     return (char *) g_queue_pop_tail (&dir_queue);
 }
 
-/* Remove all the items in the stack */
+/* Remove all the items from the stack */
 static void
 clear_stack (void)
 {
@@ -623,7 +623,7 @@ clear_stack (void)
     g_queue_clear (&dir_queue);
 }
 
-#else /* GLIB_CHAECK_VERSION */
+#else /* GLIB_CHECK_VERSION */
 
 static void
 push_directory (const char *dir)
@@ -653,7 +653,7 @@ pop_directory (void)
     return name;
 }
 
-/* Remove all the items in the stack */
+/* Remove all the items from the stack */
 static void
 clear_stack (void)
 {
@@ -662,7 +662,7 @@ clear_stack (void)
         g_free (dir);
 }
 
-#endif /* GLIB_CHAECK_VERSION */
+#endif /* GLIB_CHECK_VERSION */
 
 static void
 insert_file (const char *dir, const char *file)
@@ -1058,7 +1058,7 @@ init_find_vars (void)
     old_dir = NULL;
     matches = 0;
 
-    /* Remove all the items in the stack */
+    /* Remove all the items from the stack */
     clear_stack ();
 }
 
@@ -1321,7 +1321,7 @@ find_file (const char *start_dir, const char *pattern, const char *content,
 
     return_value = run_process ();
 
-    /* Remove all the items in the stack */
+    /* Remove all the items from the stack */
     clear_stack ();
 
     get_list_info (&file_tmp, &dir_tmp);
