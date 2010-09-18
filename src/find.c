@@ -99,7 +99,7 @@ static WCheck *file_case_sens_cbox;     /* "case sensitive" checkbox */
 static WCheck *file_pattern_cbox;       /* File name is glob or regexp */
 static WCheck *recursively_cbox;
 static WCheck *skip_hidden_cbox;
-static WCheck *content_use_cbox; /* Take into account the Content field */
+static WCheck *content_use_cbox;        /* Take into account the Content field */
 static WCheck *content_case_sens_cbox;  /* "case sensitive" checkbox */
 static WCheck *content_regexp_cbox;     /* "find regular expression" checkbox */
 static WCheck *content_first_hit_cbox;  /* "First hit" checkbox" */
@@ -229,8 +229,7 @@ find_load_options (void)
         mc_config_get_bool (mc_main_config, "FindFile", "file_skip_hidden", FALSE);
     options.file_all_charsets =
         mc_config_get_bool (mc_main_config, "FindFile", "file_all_charsets", FALSE);
-    options.content_use =
-        mc_config_get_bool (mc_main_config, "FindFile", "content_use", FALSE);
+    options.content_use = mc_config_get_bool (mc_main_config, "FindFile", "content_use", FALSE);
     options.content_case_sens =
         mc_config_get_bool (mc_main_config, "FindFile", "content_case_sens", TRUE);
     options.content_regexp =
@@ -470,12 +469,14 @@ find_parameters (char **start_dir, char **pattern, char **content)
     cbox_position = FIND_Y - 5;
 
     content_first_hit_cbox =
-        check_new (cbox_position--, FIND_X / 2 + 1, options.content_first_hit, content_first_hit_label);
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_first_hit,
+                   content_first_hit_label);
     widget_disable (content_first_hit_cbox->widget, disable);
     add_widget (find_dlg, content_first_hit_cbox);
 
     content_whole_words_cbox =
-        check_new (cbox_position--, FIND_X / 2 + 1, options.content_whole_words, content_whole_words_label);
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_whole_words,
+                   content_whole_words_label);
     widget_disable (content_whole_words_cbox->widget, disable);
     add_widget (find_dlg, content_whole_words_cbox);
 
@@ -503,7 +504,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg, skip_hidden_cbox);
 
 #ifdef HAVE_CHARSET
-    file_all_charsets_cbox = check_new (cbox_position--, 3, options.file_all_charsets, file_all_charsets_label);
+    file_all_charsets_cbox =
+        check_new (cbox_position--, 3, options.file_all_charsets, file_all_charsets_label);
     add_widget (find_dlg, file_all_charsets_cbox);
 #endif
 
@@ -517,11 +519,13 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg, recursively_cbox);
 
     /* This checkbox is located in the second column */
-    content_use_cbox = check_new (cbox_position, FIND_X / 2 + 1, options.content_use, content_use_label);
+    content_use_cbox =
+        check_new (cbox_position, FIND_X / 2 + 1, options.content_use, content_use_label);
     add_widget (find_dlg, content_use_cbox);
 
-    in_with = input_new (6, FIND_X / 2 + 1, input_get_default_colors(), FIND_X / 2 - 4, INPUT_LAST_TEXT,
-                         MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
+    in_with =
+        input_new (6, FIND_X / 2 + 1, input_get_default_colors (), FIND_X / 2 - 4, INPUT_LAST_TEXT,
+                   MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
     widget_disable (in_with->widget, disable);
     add_widget (find_dlg, in_with);
 
@@ -529,14 +533,14 @@ find_parameters (char **start_dir, char **pattern, char **content)
     widget_disable (content_label->widget, disable);
     add_widget (find_dlg, content_label);
 
-    in_name = input_new (6, 3, input_get_default_colors(),
+    in_name = input_new (6, 3, input_get_default_colors (),
                          FIND_X / 2 - 4, INPUT_LAST_TEXT, "name", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_name);
     add_widget (find_dlg, label_new (5, 3, _("File name:")));
 
     add_widget (find_dlg, button_new (3, FIND_X - b2 - 2, B_TREE, NORMAL_BUTTON, buts[2], 0));
 
-    in_start = input_new (3, 3, input_get_default_colors(),
+    in_start = input_new (3, 3, input_get_default_colors (),
                           FIND_X - b2 - 6, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_start);
     add_widget (find_dlg, label_new (2, 3, _("Start at:")));
@@ -1031,7 +1035,7 @@ do_search (struct Dlg_head *h)
         /* skip invalid filenames */
         while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))
             ;
-    } /* for */
+    }                           /* for */
 
     /* Displays the nice dot */
     {
@@ -1142,7 +1146,7 @@ find_callback (struct Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, voi
 
 /* Handles the Stop/Start button in the find window */
 static int
-start_stop (WButton *button, int action)
+start_stop (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -1159,7 +1163,7 @@ start_stop (WButton *button, int action)
 
 /* Handle view command, when invoked as a button */
 static int
-find_do_view_file (WButton *button, int action)
+find_do_view_file (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -1170,7 +1174,7 @@ find_do_view_file (WButton *button, int action)
 
 /* Handle edit command, when invoked as a button */
 static int
-find_do_edit_file (WButton *button, int action)
+find_do_edit_file (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -1239,7 +1243,8 @@ setup_gui (void)
                 button_new (FIND2_Y - 3, fbuts[6].x, B_VIEW, NORMAL_BUTTON,
                             fbuts[6].text, find_do_view_file));
     add_widget (find_dlg,
-                button_new (FIND2_Y - 3, fbuts[5].x, B_PANELIZE, NORMAL_BUTTON, fbuts[5].text, NULL));
+                button_new (FIND2_Y - 3, fbuts[5].x, B_PANELIZE, NORMAL_BUTTON, fbuts[5].text,
+                            NULL));
 
     add_widget (find_dlg,
                 button_new (FIND2_Y - 4, fbuts[4].x, B_CANCEL, NORMAL_BUTTON, fbuts[4].text, NULL));
