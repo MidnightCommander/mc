@@ -119,14 +119,13 @@ dialog_switch_remove (Dlg_head *h)
     else
         this = g_list_find (mc_dialogs, h);
 
-    if (this != NULL)
-    {
-        GList *next;
+    mc_dialogs = g_list_delete_link (mc_dialogs, this);
 
-        next = g_list_next (this);
-        mc_dialogs = g_list_delete_link (mc_dialogs, this);
-        mc_current = next == NULL ? mc_dialogs : next;
-    }
+    /* adjust current dialog */
+    if (top_dlg != NULL)
+        mc_current = g_list_find (mc_dialogs, (Dlg_head *) top_dlg->data);
+    else
+        mc_current = mc_dialogs;
 }
 
 size_t
