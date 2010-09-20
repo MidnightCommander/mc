@@ -1059,6 +1059,8 @@ frontend_run_dlg (Dlg_head * h)
 void
 dlg_run_done (Dlg_head * h)
 {
+    top_dlg = g_list_remove (top_dlg, h);
+
     if (h->state == DLG_CLOSED)
     {
         h->callback (h, (Widget *) h->current->data, DLG_END, 0, NULL);
@@ -1066,7 +1068,6 @@ dlg_run_done (Dlg_head * h)
             dialog_switch_remove (h);
     }
 
-    top_dlg = g_list_remove (top_dlg, h);
 }
 
 /* Standard run dialog routine
