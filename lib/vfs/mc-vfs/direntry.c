@@ -35,6 +35,7 @@
                                 /* includes fcntl.h see IEEE Std 1003.1-2008 */
 #include <time.h>
 #include <sys/time.h>           /* gettimeofday() */
+#include <stdint.h>             /* uintmax_t */
 
 #include "lib/global.h"
 
@@ -980,9 +981,9 @@ vfs_s_print_stats (const char *fs_name, const char *action,
 
     if (need)
         print_vfs_message (i18n_percent_transf_format, fs_name, action,
-                           file_name, (int) ((double) have * 100 / need), have);
+                           file_name, (int) ((double) have * 100 / need), (uintmax_t) have);
     else
-        print_vfs_message (i18n_transf_format, fs_name, action, file_name, have);
+        print_vfs_message (i18n_transf_format, fs_name, action, file_name, (uintmax_t) have);
 }
 
 int
