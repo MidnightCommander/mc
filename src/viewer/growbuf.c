@@ -177,7 +177,7 @@ mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
     off_t pageno;
     off_t pageindex;
 
-    if (retval)
+    if (retval != NULL)
         *retval = -1;
 
     pageno = byte_index / VIEW_PAGE_SIZE;
@@ -191,15 +191,16 @@ mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
     mcview_growbuf_read_until (view, byte_index + 1);
     if (view->growbuf_blockptr->len == 0)
         return FALSE;
-    if (pageno < view->growbuf_blockptr->len - 1)
+    if (pageno < (off_t) view->growbuf_blockptr->len - 1)
     {
-        if (retval)
+        if (retval != NULL)
             *retval = *((byte *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex));
         return TRUE;
     }
-    if (pageno == view->growbuf_blockptr->len - 1 && pageindex < (off_t) view->growbuf_lastindex)
+    if (pageno == (off_t) view->growbuf_blockptr->len - 1
+        && pageindex < (off_t) view->growbuf_lastindex)
     {
-        if (retval)
+        if (retval != NULL)
             *retval = *((byte *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex));
         return TRUE;
     }
@@ -222,9 +223,10 @@ mcview_get_ptr_growing_buffer (mcview_t * view, off_t byte_index)
     mcview_growbuf_read_until (view, byte_index + 1);
     if (view->growbuf_blockptr->len == 0)
         return NULL;
-    if (pageno < view->growbuf_blockptr->len - 1)
+    if (pageno < (off_t) view->growbuf_blockptr->len - 1)
         return (char *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex);
-    if (pageno == view->growbuf_blockptr->len - 1 && pageindex < (off_t) view->growbuf_lastindex)
+    if (pageno == (off_t) view->growbuf_blockptr->len - 1
+        && pageindex < (off_t) view->growbuf_lastindex)
         return (char *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex);
     return NULL;
 }
