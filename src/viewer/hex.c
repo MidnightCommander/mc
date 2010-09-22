@@ -39,6 +39,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <stdint.h>     /* uintmax_t */
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -159,8 +160,7 @@ mcview_display_hex (mcview_t * view)
         col = 0;
 
         /* Print the hex offset */
-        g_snprintf (hex_buff, sizeof (hex_buff), "%08" OFFSETTYPE_PRIX " ",
-                    (long unsigned int) from);
+        g_snprintf (hex_buff, sizeof (hex_buff), "%08jX ", (uintmax_t) from);
         widget_move (view, top + row, left);
         tty_setcolor (MARKED_COLOR);
         for (i = 0; col < width && hex_buff[i] != '\0'; i++)

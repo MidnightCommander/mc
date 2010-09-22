@@ -36,6 +36,7 @@
  */
 
 #include <config.h>
+#include <stdint.h>             /* uintmax_t */
 
 #include "lib/global.h"
 #include "lib/skin.h"
@@ -148,13 +149,11 @@ mcview_display_status (mcview_t * view)
         char buffer[BUF_TINY];
         widget_move (view, top, width - 32);
         if (view->hex_mode)
-        {
-            tty_printf ("0x%08lx", (unsigned long) view->hex_cursor);
-        }
+            tty_printf ("0x%08jx", (uintmax_t) view->hex_cursor);
         else
         {
             size_trunc_len (buffer, 5, mcview_get_filesize (view), 0, panels_options.kilobyte_si);
-            tty_printf ("%9lli/%s%s %s", view->dpy_end,
+            tty_printf ("%9ju/%s%s %s", (uintmax_t) view->dpy_end,
                         buffer, mcview_may_still_grow (view) ? "+" : " ",
 #ifdef HAVE_CHARSET
                         source_codepage >= 0 ? get_codepage_id (source_codepage) : ""
@@ -377,7 +376,7 @@ mcview_display_ruler (mcview_t * view)
 
         if ((cl != 0) && (cl % 10) == 0)
         {
-            g_snprintf (r_buff, sizeof (r_buff), "%" OFFSETTYPE_PRId, (long unsigned int) cl);
+            g_snprintf (r_buff, sizeof (r_buff), "%ju", (uintmax_t) cl);
             if (nums_row < height)
             {
                 widget_move (view, top + nums_row, left + c - 1);
