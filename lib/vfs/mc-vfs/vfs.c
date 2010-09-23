@@ -373,11 +373,12 @@ vfs_get_encoding (const char *path)
     char *slash;
 
     work = g_strdup (path);
-    semi = g_strrstr (work, VFS_ENCODING_PREFIX);
+    /* try found /#enc: */
+    semi = g_strrstr (work, PATH_SEP_STR VFS_ENCODING_PREFIX);
 
     if (semi != NULL)
     {
-        semi += strlen (VFS_ENCODING_PREFIX); /* skip "#enc:" */
+        semi += strlen (VFS_ENCODING_PREFIX) + 1; /* skip "/#enc:" */
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL)
             slash[0] = '\0';
@@ -405,7 +406,6 @@ static estr_t
 _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer)
 {
     const char *semi;
-    const char *ps;
     const char *slash;
     estr_t state = ESTR_SUCCESS;
 
@@ -414,29 +414,24 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
 
     size = (size > 0) ? size : (signed int) strlen (path);
 
-    /* try found #enc: */
-    semi = g_strrstr_len (path, size, VFS_ENCODING_PREFIX);
+    /* try found /#enc: */
+    semi = g_strrstr_len (path, size, PATH_SEP_STR VFS_ENCODING_PREFIX);
     if (semi != NULL)
     {
         char encoding[16];
         GIConv coder = INVALID_CONV;
         int ms;
 
-        /* first must be translated part before #enc: */
+        /* first must be translated part before /#enc: */
         ms = semi - path;
-
-        /* remove '/' before #enc */
-        ps = str_cget_prev_char (semi);
-        if (ps[0] == PATH_SEP)
-            ms = ps - path;
 
         state = _vfs_translate_path (path, ms, defcnv, buffer);
 
         if (state != ESTR_SUCCESS)
             return state;
-        /* now can be translated part after #enc: */
 
-        semi += strlen (VFS_ENCODING_PREFIX);
+        /* now can be translated part after #enc: */
+        semi += strlen (VFS_ENCODING_PREFIX) + 1; /* skip "/#enc:" */
         slash = strchr (semi, PATH_SEP);
         /* ignore slashes after size; */
         if (slash - path >= size)
@@ -459,11 +454,8 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
         {
             if (slash != NULL)
                 state = str_vfs_convert_to (coder, slash, path + size - slash, buffer);
-            else if (buffer->str[0] == '\0')
-            {
-                /* exmaple "/#enc:utf-8" */
+            else if (buffer->len == 0)
                 g_string_append_c (buffer, PATH_SEP);
-            }
             str_close_conv (coder);
             return state;
         }
