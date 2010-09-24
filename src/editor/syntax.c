@@ -1259,7 +1259,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     f = fopen (syntax_file, "r");
     if (f == NULL)
     {
-        lib_file = concat_dir_and_file (mc_home, "Syntax");
+        lib_file = g_build_filename (mc_home, "Syntax", (char *) NULL);
         f = fopen (lib_file, "r");
         g_free (lib_file);
         if (f == NULL)
@@ -1352,7 +1352,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
                 }
                 else
                 {
-                    MC_PTR_FREE (edit->syntax_type);
+                    g_free (edit->syntax_type);
                     edit->syntax_type = g_strdup (syntax_type);
                     /* if there are no rules then turn off syntax highlighting for speed */
                     if (!g && !edit->rules[1])
@@ -1371,7 +1371,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
             }
         }
     }
-    MC_PTR_FREE (l);
+    g_free (l);
     fclose (f);
     return result;
 }
@@ -1429,16 +1429,20 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
     if (!option_syntax_highlighting && (!pnames || !*pnames))
         return;
 
-    if (edit)
+    if (edit != NULL)
     {
         if (!edit->filename)
             return;
         if (!*edit->filename && !type)
             return;
     }
-    f = concat_dir_and_file (home_dir, EDIT_SYNTAX_FILE);
-    r = edit_read_syntax_file (edit, pnames, f, edit ? edit->filename : 0,
-                               get_first_editor_line (edit), type);
+    f = g_build_filename (home_dir, EDIT_SYNTAX_FILE, (char *) NULL);
+    if (edit != NULL)
+        r = edit_read_syntax_file (edit, pnames, f, edit->filename,
+                                   get_first_editor_line (edit),
+                                   option_auto_syntax ? NULL : edit->syntax_type);
+    else
+        r = edit_read_syntax_file (NULL, pnames, f, NULL, "", NULL);
     if (r == -1)
     {
         edit_free_syntax_rules (edit);

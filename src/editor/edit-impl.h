@@ -287,7 +287,7 @@ int line_is_blank (WEdit * edit, long line);
 int edit_indent_width (WEdit * edit, long p);
 void edit_insert_indent (WEdit * edit, int indent);
 void edit_options_dialog (WEdit * edit);
-void edit_syntax_dialog (WEdit * edit, const char *current_syntax);
+void edit_syntax_dialog (WEdit * edit);
 void edit_mail_dialog (WEdit * edit);
 void format_paragraph (WEdit * edit, int force);
 

@@ -64,13 +64,16 @@ exec_edit_syntax_dialog (const char **names, const char *current_syntax)
 }
 
 void
-edit_syntax_dialog (WEdit * edit, const char *current_syntax)
+edit_syntax_dialog (WEdit * edit)
 {
-    char *old_syntax_type;
+    char *current_syntax;
     int old_auto_syntax, syntax;
     char **names;
     gboolean force_reload = FALSE;
     size_t count;
+
+    current_syntax = g_strdup (edit->syntax_type);
+    old_auto_syntax = option_auto_syntax;
 
     names = g_new0 (char *, 1);
 
@@ -82,35 +85,30 @@ edit_syntax_dialog (WEdit * edit, const char *current_syntax)
     qsort (names, count, sizeof (char *), pstrcmp);
 
     syntax = exec_edit_syntax_dialog ((const char **) names, current_syntax);
-    if (syntax < 0)
+    if (syntax >= 0)
     {
-        g_strfreev (names);
-        return;
+        switch (syntax)
+        {
+        case 0:                /* auto syntax */
+            option_auto_syntax = 1;
+            break;
+        case 1:                /* reload current syntax */
+            force_reload = TRUE;
+            break;
+        default:
+            option_auto_syntax = 0;
+            g_free (edit->syntax_type);
+            edit->syntax_type = g_strdup (names[syntax - N_DFLT_ENTRIES]);
+        }
+
+        /* Load or unload syntax rules if the option has changed */
+        if ((option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
+            (current_syntax && edit->syntax_type &&
+             (strcmp (current_syntax, edit->syntax_type) != 0)) || force_reload)
+            edit_load_syntax (edit, NULL, edit->syntax_type);
+
+        g_free (current_syntax);
     }
-
-    old_auto_syntax = option_auto_syntax;
-    old_syntax_type = g_strdup (current_syntax);
-
-    switch (syntax)
-    {
-    case 0:                    /* auto syntax */
-        option_auto_syntax = 1;
-        break;
-    case 1:                    /* reload current syntax */
-        force_reload = TRUE;
-        break;
-    default:
-        option_auto_syntax = 0;
-        g_free (edit->syntax_type);
-        edit->syntax_type = g_strdup (names[syntax - N_DFLT_ENTRIES]);
-    }
-
-    /* Load or unload syntax rules if the option has changed */
-    if ((option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
-        (old_syntax_type && edit->syntax_type &&
-         (strcmp (old_syntax_type, edit->syntax_type) != 0)) || force_reload)
-        edit_load_syntax (edit, NULL, edit->syntax_type);
 
     g_strfreev (names);
-    g_free (old_syntax_type);
 }
