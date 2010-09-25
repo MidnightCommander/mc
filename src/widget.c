@@ -461,6 +461,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
             const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
             widget_selectcolor (w, focused, FALSE);
             widget_move (&r->widget, i, 0);
+            tty_draw_hline (r->widget.y + i, r->widget.x, ' ', r->widget.cols);
             tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
             draw_hotkey (w, r->texts[i], focused);
         }
