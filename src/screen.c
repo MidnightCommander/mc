@@ -1379,6 +1379,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
     panel->search_buffer[0] = '\0';
+    panel->prev_search_buffer[0] = '\0';
     panel->frame_size = frame_half;
 
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
@@ -2415,7 +2416,7 @@ do_search (WPanel * panel, int c_code)
                 {
                     memcpy (panel->search_buffer + l, panel->search_char, panel->search_chpoint);
                     l += panel->search_chpoint;
-                    (panel->search_buffer + l)[0] = '\0';
+                    *(panel->search_buffer + l) = '\0';
                     panel->search_chpoint = 0;
                 }
             }
@@ -2483,6 +2484,13 @@ start_search (WPanel * panel)
             panel->selected = 0;
         else
             move_down (panel);
+
+        /* in case if there was no search string we need to recall
+           previous string, with which we ended previous searching */
+        if (panel->search_buffer[0] == '\0')
+            g_strlcpy (panel->search_buffer, panel->prev_search_buffer,
+                       sizeof (panel->search_buffer));
+
         do_search (panel, 0);
     }
     else
@@ -2500,6 +2508,13 @@ static void
 stop_search (WPanel * panel)
 {
     panel->searching = FALSE;
+
+    /* if user had overrdied search string, we need to store it
+       to the previous_search_buffer */
+    if (panel->search_buffer[0] != '\0')
+        g_strlcpy (panel->prev_search_buffer, panel->search_buffer,
+                   sizeof (panel->prev_search_buffer));
+
     display_mini_info (panel);
 }
 

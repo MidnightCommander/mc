@@ -99,6 +99,7 @@ typedef struct WPanel {
 
     gboolean searching;
     char     search_buffer [256];
+    char     prev_search_buffer [256];
     char     search_char [MB_LEN_MAX]; /*buffer for multibytes characters*/
     int      search_chpoint;           /*point after last characters in search_char*/
 } WPanel;
