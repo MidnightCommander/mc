@@ -48,7 +48,7 @@ is_logging_enabled(void)
 	static gboolean logging_enabled = FALSE;
 
 	if (!logging_initialized) {
-		logging_enabled = mc_config_get_int (mc_main_config,
+		logging_enabled = mc_config_get_bool (mc_main_config,
 		        CONFIG_APP_SECTION, "development.enable_logging", FALSE);
 		logging_initialized = TRUE;
 	}
