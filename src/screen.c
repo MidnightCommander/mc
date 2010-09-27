@@ -1307,18 +1307,21 @@ panel_format_modified (WPanel * panel)
     panel->format_modified = 1;
 }
 
-/* Panel creation */
-/* The parameter specifies the name of the panel for setup retieving */
+/** Panel creation.
+ * @param panel_name the name of the panel for setup retieving
+ * @returns new instance of WPanel
+ */
 WPanel *
 panel_new (const char *panel_name)
 {
     return panel_new_with_dir (panel_name, NULL);
 }
 
-/* Panel creation for specified directory */
-/* The parameter specifies the name of the panel for setup retieving */
-/* and the path of working panel directory. If path is NULL then */
-/* panel will be created for current directory */
+/** Panel creation for specified directory.
+ * @param panel_name the name of the panel for setup retieving
+ * @param the path of working panel directory. If path is NULL then panel will be created for current directory
+ * @returns new instance of WPanel
+ */
 WPanel *
 panel_new_with_dir (const char *panel_name, const char *wpath)
 {
@@ -3510,6 +3513,10 @@ panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order)
     panel_re_sort (panel);
 }
 
+/**
+ * Change panel encoding.
+ * @param panel WPanel object
+ */
 void
 panel_change_encoding (WPanel * panel)
 {

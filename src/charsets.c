@@ -162,7 +162,10 @@ get_codepage_index (const char *id)
     return -1;
 }
 
-/* return if encoding can by used in mc */
+/** Check if specified encoding can be used in mc.
+ * @param encoding name of encoding
+ * @returns TRUE if encoding has supported by mc, FALSE otherwise
+ */
 gboolean
 is_supported_encoding (const char *encoding)
 {
