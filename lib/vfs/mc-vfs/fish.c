@@ -63,12 +63,13 @@
 
 #include "src/wtools.h"         /* message() */
 #include "src/main.h"           /* print_vfs_message */
-#include "utilvfs.h"
-#include "xdirentry.h"
-#include "vfs.h"
+
 #include "vfs-impl.h"
-#include "gc.h"                 /* vfs_stamp_create */
+#include "utilvfs.h"
 #include "netutil.h"
+#include "xdirentry.h"
+#include "gc.h"                 /* vfs_stamp_create */
+
 #include "fish.h"
 #include "fishdef.h"
 

@@ -48,13 +48,19 @@ AC_DEFUN([MC_ENABLE_VFS_NET],
 AC_DEFUN([AC_MC_VFS_CHECKS],
 [
     vfs_type="normal"
-    enable_vfs_net=no
 
     AC_ARG_ENABLE([vfs],
-		AC_HELP_STRING([--disable-vfs], [Disable VFS]))
+	AC_HELP_STRING([--disable-vfs], [Disable VFS]),
+	[
+	    if test "x$enableval" = "xno"; then
+		enable_vfs=no
+	    else
+		enable_vfs=yes
+	    fi
+	],
+	[enable_vfs=yes])
 
-    if test x"$enable_vfs" != x"no" ; then
-	enable_vfs="yes"
+    if test x"$enable_vfs" = x"yes" ; then
 	vfs_type="Midnight Commander Virtual Filesystem"
 	AC_MSG_NOTICE([Enabling VFS code])
 	AC_DEFINE(ENABLE_VFS, [1], [Define to enable VFS support])

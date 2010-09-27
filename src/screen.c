@@ -2540,7 +2540,7 @@ do_enter_on_file_entry (file_entry * fe)
              _("Do you really want to execute?"), D_NORMAL, 2, _("&Yes"), _("&No")) != 0)
             return 1;
     }
-#ifdef ENABLE_VFS
+
     if (!vfs_current_is_local ())
     {
         char *tmp;
@@ -2553,7 +2553,6 @@ do_enter_on_file_entry (file_entry * fe)
          * was successful */
         return confirm_execute || (ret == 0);
     }
-#endif
 
     {
         char *tmp = name_quote (fe->fname, 0);

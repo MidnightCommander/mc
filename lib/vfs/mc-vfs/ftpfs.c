@@ -94,13 +94,14 @@ What to do with this?
 #include "src/history.h"
 #include "src/setup.h"          /* for load_anon_passwd */
 
-#include "utilvfs.h"
-#include "xdirentry.h"
-#include "vfs.h"
 #include "vfs-impl.h"
-#include "gc.h"                 /* vfs_stamp_create */
+#include "utilvfs.h"
 #include "netutil.h"
+#include "xdirentry.h"
+#include "gc.h"                 /* vfs_stamp_create */
+
 #include "ftpfs.h"
+
 #ifndef MAXHOSTNAMELEN
 #    define MAXHOSTNAMELEN 64
 #endif

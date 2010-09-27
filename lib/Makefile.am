@@ -39,9 +39,5 @@ libmc_la_LIBADD = \
 	search/libsearch.la \
 	strutil/libmcstrutil.la \
 	skin/libmcskin.la \
-	tty/libmctty.la
-
-if ENABLE_VFS
-libmc_la_LIBADD += vfs/mc-vfs/libvfs-mc.la
-endif
-
+	tty/libmctty.la \
+	vfs/mc-vfs/libvfs-mc.la

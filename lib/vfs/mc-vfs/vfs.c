@@ -52,16 +52,17 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+
 #ifdef HAVE_CHARSET
 #include "src/charsets.h"
 #endif
-
 #include "src/wtools.h"         /* message() */
-#include "src/main.h"           /* print_vfs_message */
+#include "src/main.h"           /* cd_symlinks */
 
+#include "vfs-impl.h"
 #include "utilvfs.h"
 #include "gc.h"
-#include "vfs.h"
+
 #ifdef ENABLE_VFS_NET
 #include "netutil.h"
 #endif
@@ -71,6 +72,7 @@
 #ifdef ENABLE_VFS_SMB
 #include "smbfs.h"
 #endif
+
 #include "local.h"
 
 #if defined(_AIX) && !defined(NAME_MAX)

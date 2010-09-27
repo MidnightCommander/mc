@@ -43,15 +43,14 @@
 
 #include "lib/global.h"
 
-#include "src/wtools.h"	/* message() */
-#include "src/main.h"	/* print_vfs_message */
+#include "src/wtools.h"		/* D_ERROR, D_NORMAL */
+#include "src/main.h"		/* mc_home */
 #include "src/execute.h"	/* EXECUTE_AS_SHELL */
 
-#include "utilvfs.h"
-#include "vfs.h"
 #include "vfs-impl.h"
-#include "gc.h"		/* vfs_stamp_create */
+#include "utilvfs.h"
 #include "local.h"
+#include "gc.h"		/* vfs_stamp_create */
 
 struct cachedfile {
     char *name, *cache;

@@ -894,30 +894,6 @@ strip_ctrl_codes (char *s)
     return s;
 }
 
-
-#ifndef ENABLE_VFS
-char *
-get_current_wd (char *buffer, size_t size)
-{
-    char *p;
-    size_t len;
-
-    p = g_get_current_dir ();
-    len = strlen (p) + 1;
-
-    if (len > size)
-    {
-        g_free (p);
-        return NULL;
-    }
-
-    memcpy (buffer, p, len);
-    g_free (p);
-
-    return buffer;
-}
-#endif /* !ENABLE_VFS */
-
 enum compression_type
 get_compression_type (int fd, const char *name)
 {

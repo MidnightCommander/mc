@@ -9,7 +9,6 @@
 #define MC_VFS_XDIRENTRY_H
 
 #include <stdio.h>
-
 #include <sys/types.h>
 
 #define LINK_FOLLOW 15
@@ -46,6 +45,7 @@ struct vfs_s_super
 
     union
     {
+#ifdef ENABLE_VFS_FISH
         struct
         {
             int sockr, sockw;
@@ -70,6 +70,8 @@ struct vfs_s_super
             int host_flags;
             char *scr_env;
         } fish;
+#endif /* ENABLE_VFS_FISH */
+#ifdef ENABLE_VFS_FTP
         struct
         {
             int sock;
@@ -91,6 +93,8 @@ struct vfs_s_super
                                          */
             int ctl_connection_busy;
         } ftp;
+#endif /* ENABLE_VFS_FTP */
+#if defined(ENABLE_VFS_CPIO) || defined(ENABLE_VFS_TAR)
         struct
         {
             int fd;
@@ -98,6 +102,7 @@ struct vfs_s_super
             int type;                     /* Type of the archive */
             struct defer_inode *deferred; /* List of inodes for which another entries may appear */
         } arch;
+#endif /* ENABLE_VFS_CPIO || ENABLE_VFS_TAR */
     } u;
 };
 
@@ -138,15 +143,19 @@ struct vfs_s_fh
     int linear;                 /* Is that file open with O_LINEAR? */
     union
     {
+#ifdef ENABLE_VFS_FISH
         struct
         {
             off_t got, total;
             int append;
         } fish;
+#endif /* ENABLE_VFS_FISH */
+#ifdef ENABLE_VFS_FTP
         struct
         {
             int sock, append;
         } ftp;
+#endif /* ENABLE_VFS_FTP */
     } u;
 };
 

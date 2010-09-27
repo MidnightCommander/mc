@@ -7,8 +7,6 @@
 #ifndef MC_VFS_IMPL_H
 #define MC_VFS_IMPL_H
 
-#ifdef ENABLE_VFS
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -111,6 +109,8 @@ char *vfs_path (const char *path);
 /* vfs/direntry.c: */
 void *vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode);
 
+vfsid vfs_getid (struct vfs_class *vclass, const char *dir);
+
 #ifdef ENABLE_VFS_CPIO
 void init_cpiofs (void);
 #endif
@@ -132,7 +132,5 @@ void init_ftpfs (void);
 #ifdef ENABLE_VFS_FISH
 void init_fish (void);
 #endif
-
-#endif /* ENABLE_VFS */
 
 #endif /* MC_VFS_IMPL_H */

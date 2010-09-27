@@ -295,13 +295,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     if ((view->workdir == NULL) && (file != NULL))
     {
         if (!g_path_is_absolute (file))
-        {
-#ifdef ENABLE_VFS
             view->workdir = g_strdup (vfs_get_current_dir ());
-#else /* ENABLE_VFS */
-            view->workdir = g_get_current_dir ();
-#endif /* ENABLE_VFS */
-        }
         else
         {
             /* try extract path form filename */
@@ -313,11 +307,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             else
             {
                 g_free (dirname);
-#ifdef ENABLE_VFS
                 view->workdir = g_strdup (vfs_get_current_dir ());
-#else /* ENABLE_VFS */
-                view->workdir = g_get_current_dir ();
-#endif /* ENABLE_VFS */
             }
         }
     }

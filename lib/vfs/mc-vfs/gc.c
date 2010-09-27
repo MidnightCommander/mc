@@ -48,9 +48,9 @@
 #include "src/layout.h"		/* get_current_type(), get_other_type() */
 
 #include "vfs-impl.h"
-#include "gc.h"
-
 #include "utilvfs.h"
+
+#include "gc.h"
 
 int vfs_timeout = 60;		/* VFS timeout in seconds */
 
@@ -118,23 +118,6 @@ vfs_rmstamp (struct vfs_class *v, vfsid id)
 
 	    return;
 	}
-}
-
-
-/* Find VFS id for given directory name */
-vfsid
-vfs_getid (struct vfs_class *vclass, const char *dir)
-{
-    char *dir1;
-    vfsid id = NULL;
-
-    /* append slash if needed */
-    dir1 = concat_dir_and_file (dir, "");
-    if (vclass->getid)
-	id = (*vclass->getid) (vclass, dir1);
-
-    g_free (dir1);
-    return id;
 }
 
 

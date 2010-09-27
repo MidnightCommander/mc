@@ -24,11 +24,11 @@ AC_DEFUN([AC_MC_VFS_EXTFS],
 [
     AC_ARG_ENABLE([vfs-extfs],
 		    AC_HELP_STRING([--enable-vfs-extfs], [Support for extfs filesystem [[yes]]]))
-    if test "$enable_vfs" != "no" -a x"$enable_vfs_extfs" != x"no"; then
+    if test "$enable_vfs" = "yes" -a x"$enable_vfs_extfs" != x"no"; then
 	AC_MC_EXTFS_CHECKS
 	enable_vfs_extfs="yes"
 	AC_MC_VFS_ADDNAME([extfs])
 	AC_DEFINE([ENABLE_VFS_EXTFS], [1], [Support for extfs])
     fi
-    AM_CONDITIONAL(ENABLE_VFS_EXTFS, [test x"$enable_vfs_extfs" = x"yes"])
+    AM_CONDITIONAL(ENABLE_VFS_EXTFS, [test "$enable_vfs" = "yes" -a x"$enable_vfs_extfs" = x"yes"])
 ])

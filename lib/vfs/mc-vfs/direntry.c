@@ -39,15 +39,15 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
+#include "lib/util.h"           /* concat_dir_and_file */
 
 #include "src/wtools.h"         /* message() */
 #include "src/main.h"           /* print_vfs_message */
-#include "vfs.h"
 
-#include "utilvfs.h"
 #include "vfs-impl.h"
-#include "gc.h"                 /* vfs_rmstamp */
+#include "utilvfs.h"
 #include "xdirentry.h"
+#include "gc.h"                 /* vfs_rmstamp */
 
 #define CALL(x) if (MEDATA->x) MEDATA->x
 
@@ -1228,6 +1228,22 @@ vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
     }
     vclass->setctl = vfs_s_setctl;
     sub->dir_uptodate = vfs_s_dir_uptodate;
+}
+
+/* Find VFS id for given directory name */
+vfsid
+vfs_getid (struct vfs_class *vclass, const char *dir)
+{
+    char *dir1;
+    vfsid id = NULL;
+
+    /* append slash if needed */
+    dir1 = concat_dir_and_file (dir, "");
+    if (vclass->getid)
+        id = (*vclass->getid) (vclass, dir1);
+
+    g_free (dir1);
+    return id;
 }
 
 /* ----------- Utility functions for networked filesystems  -------------- */

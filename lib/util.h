@@ -164,7 +164,6 @@ void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
 void canonicalize_pathname (char *);
 
 /* Misc Unix functions */
-char *get_current_wd (char *buffer, size_t size);
 int my_mkdir (const char *s, mode_t mode);
 int my_rmdir (const char *s);
 
