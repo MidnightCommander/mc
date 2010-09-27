@@ -128,7 +128,6 @@ fish_load_script_from_file (const char *hostname, const char *script_name, const
     /* 2nd: scan system dir */
     if (scr_content == NULL)
     {
-        g_free (scr_content);
         scr_filename = g_build_path (PATH_SEP_STR, LIBEXECDIR, FISH_PREFIX, script_name, (char *) NULL);
         g_file_get_contents (scr_filename, &scr_content, &scr_len, NULL);
         g_free (scr_filename);
@@ -137,7 +136,6 @@ fish_load_script_from_file (const char *hostname, const char *script_name, const
     if (scr_content != NULL)
         return scr_content;
 
-    g_free (scr_content);
     return g_strdup (def_content);
 }
 
