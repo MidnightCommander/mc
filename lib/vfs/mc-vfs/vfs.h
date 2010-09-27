@@ -85,6 +85,7 @@ char *vfs_translate_url (const char *url);
 struct vfs_class *vfs_get_class (const char *path);
 vfs_class_flags_t vfs_file_class_flags (const char *filename);
 
+#define VFS_ENCODING_PREFIX "#enc:"
 /* return encoding after last #enc: or NULL, if part does not contain #enc:
  * return static buffer */
 const char *vfs_get_encoding (const char *path);
@@ -203,7 +204,7 @@ vfs_canon (const char *path)
 #endif /* ENABLE_VFS */
 
 char *vfs_get_current_dir (void);
-/* translate path back to terminal encoding, remove all #enc: 
+/* translate path back to terminal encoding, remove all #enc:
  * every invalid character is replaced with question mark
  * return static buffer */
 char *vfs_translate_path (const char *path);

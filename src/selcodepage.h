@@ -6,8 +6,6 @@
 #ifndef MC_SELCODEPAGE_H
 #define MC_SELCODEPAGE_H
 
-#ifdef HAVE_CHARSET
-
 #include "lib/global.h"
 
 int select_charset (int center_y, int center_x, int current_charset, gboolean seldisplay);
@@ -25,7 +23,5 @@ gboolean do_select_codepage (void);
  * and the 1st item has been selected. 1st item is "No translation" */
 /* In other cases select_charset() returns non-negative value
  * which is number of codepage in codepage list */
-
-#endif				/* HAVE_CHARSET */
 
 #endif				/* MC_SELCODEPAGE_H */

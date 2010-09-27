@@ -49,8 +49,13 @@
 #include <grp.h>
 
 #include "lib/global.h"
+#include "lib/vfs/mc-vfs/vfs.h" /* VFS_ENCODING_PREFIX */
+
 #include "src/execute.h"
 #include "src/wtools.h"         /* message() */
+#ifdef HAVE_CHARSET
+#include "src/charsets.h"
+#endif
 
 struct sigaction startup_handler;
 
@@ -591,6 +596,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
     if (flags & CANON_PATH_REMDOUBLEDOTS)
     {
+        const size_t enc_prefix_len = strlen (VFS_ENCODING_PREFIX);
+
         /* Collapse "/.." with the previous part of path */
         p = lpath;
         while (p[0] && p[1] && p[2])
@@ -625,7 +632,14 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 else
                 {
                     /* "token/../foo" -> "foo" */
-                    str_move (s, p + 4);
+#if HAVE_CHARSET
+                    if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
+                        && (is_supported_encoding (s + enc_prefix_len)))
+                        /* special case: remove encoding */
+                        str_move (s, p + 1);
+                    else
+#endif /* HAVE_CHARSET */
+                        str_move (s, p + 4);
                 }
                 p = (s > lpath) ? s - 1 : s;
                 continue;
@@ -646,6 +660,25 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 /* "foo/token/.." -> "foo" */
                 if (s == lpath + 1)
                     s[0] = 0;
+#if HAVE_CHARSET
+                else if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
+                        && (is_supported_encoding (s + enc_prefix_len)))
+                {
+                    /* special case: remove encoding */
+                    s[0] = '.';
+                    s[1] = '.';
+                    s[2] = '\0';
+
+                    /* search for the previous token */
+                    /* s[-1] == PATH_SEP */
+                    p = s - 1;
+                    while (p >= lpath && *p != PATH_SEP)
+                        p--;
+
+                    if (p != NULL)
+                        continue;
+                }
+#endif /* HAVE_CHARSET */
                 else
                     s[-1] = 0;
                 break;

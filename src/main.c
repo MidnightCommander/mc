@@ -99,7 +99,8 @@
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
-#endif				/* HAVE_CHARSET */
+#include "selcodepage.h"
+#endif /* HAVE_CHARSET */
 
 
 #include "keybind.h"            /* type global_keymap_t */
@@ -392,7 +393,24 @@ subshell_chdir (const char *directory)
 int
 do_cd (const char *new_dir, enum cd_enum exact)
 {
-    return (do_panel_cd (current_panel, new_dir, exact));
+    gboolean res;
+
+    res = do_panel_cd (current_panel, new_dir, exact);
+
+#if HAVE_CHARSET
+    if (res)
+    {
+        const char *enc_name;
+
+        enc_name = vfs_get_encoding (current_panel->cwd);
+        if (enc_name != NULL)
+            current_panel->codepage = get_codepage_index (enc_name);
+        else
+            current_panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+    }
+#endif /* HAVE_CHARSET */
+
+    return res ? 1 : 0;
 }
 
 #ifdef HAVE_SUBSHELL_SUPPORT

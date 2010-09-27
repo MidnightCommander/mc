@@ -1245,10 +1245,8 @@ nice_cd (const char *text, const char *xtext, const char *help,
     else
         cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
 
-    if (do_panel_cd (MENU_PANEL, cd_path, cd_parse_command))
-        directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
-    else
-        message (D_ERROR, MSG_ERROR, _("Cannot chdir to %s"), cd_path);
+    if (!do_panel_cd (MENU_PANEL, cd_path, cd_parse_command))
+        message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
     g_free (cd_path);
     g_free (machine);
 }
@@ -1551,5 +1549,5 @@ void
 encoding_cmd (void)
 {
     if (SELECTED_IS_PANEL)
-        set_panel_encoding (MENU_PANEL);
+        panel_change_encoding (MENU_PANEL);
 }

@@ -162,6 +162,23 @@ get_codepage_index (const char *id)
     return -1;
 }
 
+/** Check if specified encoding can be used in mc.
+ * @param encoding name of encoding
+ * @returns TRUE if encoding has supported by mc, FALSE otherwise
+ */
+gboolean
+is_supported_encoding (const char *encoding)
+{
+    gboolean result = FALSE;
+    size_t t;
+
+    for (t = 0; t < (size_t) n_codepages; t++)
+        result |= (g_ascii_strncasecmp (encoding, codepages[t].id,
+                                        strlen (codepages[t].id)) == 0);
+
+    return result;
+}
+
 static char
 translate_character (GIConv cd, char c)
 {

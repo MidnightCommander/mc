@@ -60,18 +60,20 @@
 #include "main-widgets.h"
 #include "main.h"
 #include "mountlist.h"          /* my_statfs */
-#include "selcodepage.h"        /* select_charset () */
+#include "selcodepage.h"        /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
+#ifdef HAVE_CHARSET
 #include "charsets.h"           /* get_codepage_id () */
+#endif
 #include "cmddef.h"             /* CK_ cmd name const */
 #include "keybind.h"            /* global_keymap_t */
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
-#define NORMAL		0
-#define SELECTED	1
-#define MARKED		2
-#define MARKED_SELECTED	3
-#define STATUS		5
+#define NORMAL          0
+#define SELECTED        1
+#define MARKED          2
+#define MARKED_SELECTED 3
+#define STATUS          5
 
 typedef enum
 {
@@ -1057,7 +1059,7 @@ paint_panel (WPanel * panel)
 
 /* add "#enc:encodning" to end of path */
 /* if path end width a previous #enc:, only encoding is changed no additional 
- * #enc: is appended 
+ * #enc: is appended
  * retun new string
  */
 static char *
@@ -1067,25 +1069,25 @@ add_encoding_to_path (const char *path, const char *encoding)
     char *semi;
     char *slash;
 
-    semi = g_strrstr (path, "#enc:");
+    semi = g_strrstr (path, VFS_ENCODING_PREFIX);
 
     if (semi != NULL)
     {
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL)
         {
-            result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
+            result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
         }
         else
         {
-            *semi = 0;
-            result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
+            *semi = '\0';
+            result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
             *semi = '#';
         }
     }
     else
     {
-        result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
+        result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
     }
 
     return result;
@@ -1105,7 +1107,7 @@ remove_encoding_from_path (const char *path)
 
     tmp_path = g_string_new (path);
 
-    while ((tmp = g_strrstr (tmp_path->str, "/#enc:")) != NULL)
+    while ((tmp = g_strrstr (tmp_path->str, PATH_SEP_STR VFS_ENCODING_PREFIX)) != NULL)
     {
         enc = vfs_get_encoding ((const char *) tmp);
         converter = enc ? str_crt_conv_to (enc) : str_cnv_to_term;
@@ -1113,7 +1115,7 @@ remove_encoding_from_path (const char *path)
             converter = str_cnv_to_term;
 
         tmp2 = tmp + 1;
-        while (*tmp2 && *tmp2 != '/')
+        while (*tmp2 && *tmp2 != PATH_SEP)
             tmp2++;
 
         if (*tmp2)
@@ -1305,25 +1307,28 @@ panel_format_modified (WPanel * panel)
     panel->format_modified = 1;
 }
 
-/* Panel creation */
-/* The parameter specifies the name of the panel for setup retieving */
+/** Panel creation.
+ * @param panel_name the name of the panel for setup retieving
+ * @returns new instance of WPanel
+ */
 WPanel *
 panel_new (const char *panel_name)
 {
     return panel_new_with_dir (panel_name, NULL);
 }
 
-/* Panel creation for specified directory */
-/* The parameter specifies the name of the panel for setup retieving */
-/* and the path of working panel directory. If path is NULL then */
-/* panel will be created for current directory */
+/** Panel creation for specified directory.
+ * @param panel_name the name of the panel for setup retieving
+ * @param the path of working panel directory. If path is NULL then panel will be created for current directory
+ * @returns new instance of WPanel
+ */
 WPanel *
 panel_new_with_dir (const char *panel_name, const char *wpath)
 {
     WPanel *panel;
     char *section;
     int i, err;
-    char curdir[MC_MAXPATHLEN];
+    char curdir[MC_MAXPATHLEN] = "\0";
 
     panel = g_new0 (WPanel, 1);
 
@@ -1333,7 +1338,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     /* We do not want the cursor */
     widget_want_cursor (panel->widget, 0);
 
-    if (wpath)
+    if (wpath != NULL)
     {
         g_strlcpy (panel->cwd, wpath, sizeof (panel->cwd));
         mc_get_current_wd (curdir, sizeof (curdir) - 2);
@@ -1368,11 +1373,14 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
 
+    panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+
     for (i = 0; i < LIST_TYPES; i++)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
-    panel->search_buffer[0] = 0;
+    panel->search_buffer[0] = '\0';
     panel->frame_size = frame_half;
+
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
     if (!mc_config_has_group (mc_main_config, section))
     {
@@ -1387,11 +1395,18 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     if (err != 0)
         set_panel_formats (panel);
 
-    /* Because do_load_dir lists files in current directory */
-    if (wpath)
+#ifdef HAVE_CHARSET
     {
-        int ret;
-        ret = mc_chdir (wpath);
+        const char *enc = vfs_get_encoding (panel->cwd);
+        if (enc != NULL)
+            panel->codepage = get_codepage_index (enc);
+    }
+#endif
+
+    if (mc_chdir (panel->cwd) != 0)
+    {
+        panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+        mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
     }
 
     /* Load the default format */
@@ -1400,11 +1415,8 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
                      panel->reverse, panel->case_sensitive, panel->exec_first, panel->filter);
 
     /* Restore old right path */
-    if (wpath)
-    {
-        int ret;
-        ret = mc_chdir (curdir);
-    }
+    if (curdir[0] != '\0')
+        err = mc_chdir (curdir);
 
     return panel;
 }
@@ -3065,7 +3077,7 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         move_home (panel);
         break;
     case CK_PanelSetPanelEncoding:
-        set_panel_encoding (panel);
+        panel_change_encoding (panel);
         break;
     case CK_PanelStartSearch:
         start_search (panel);
@@ -3501,8 +3513,12 @@ panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order)
     panel_re_sort (panel);
 }
 
+/**
+ * Change panel encoding.
+ * @param panel WPanel object
+ */
 void
-set_panel_encoding (WPanel * panel)
+panel_change_encoding (WPanel * panel)
 {
     const char *encoding = NULL;
     char *cd_path;
@@ -3510,12 +3526,14 @@ set_panel_encoding (WPanel * panel)
     char *errmsg;
     int r;
 
-    r = select_charset (-1, -1, default_source_codepage, FALSE);
+    r = select_charset (-1, -1, panel->codepage, FALSE);
 
     if (r == SELECT_CHARSET_CANCEL)
         return;                 /* Cancel */
 
-    if (r == SELECT_CHARSET_NO_TRANSLATE)
+    panel->codepage = r;
+
+    if (panel->codepage == SELECT_CHARSET_NO_TRANSLATE)
     {
         /* No translation */
         g_free (init_translation_table (display_codepage, display_codepage));
@@ -3525,9 +3543,7 @@ set_panel_encoding (WPanel * panel)
         return;
     }
 
-    source_codepage = r;
-
-    errmsg = init_translation_table (source_codepage, display_codepage);
+    errmsg = init_translation_table (panel->codepage, display_codepage);
     if (errmsg != NULL)
     {
         message (D_ERROR, MSG_ERROR, "%s", errmsg);
@@ -3535,14 +3551,22 @@ set_panel_encoding (WPanel * panel)
         return;
     }
 
-    encoding = get_codepage_id (source_codepage);
+    encoding = get_codepage_id (panel->codepage);
 #endif
     if (encoding != NULL)
     {
-        cd_path = add_encoding_to_path (panel->cwd, encoding);
-        if (!do_panel_cd (panel, cd_path, cd_parse_command))
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
-        g_free (cd_path);
+        const char *enc;
+
+        enc = vfs_get_encoding (panel->cwd);
+
+        /* don't add current encoding */
+        if ((enc == NULL) || (strcmp (encoding, enc) != 0))
+        {
+            cd_path = add_encoding_to_path (panel->cwd, encoding);
+            if (!do_panel_cd (panel, cd_path, cd_parse_command))
+                message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
+            g_free (cd_path);
+        }
     }
 }
 

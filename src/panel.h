@@ -6,7 +6,7 @@
 #ifndef MC_PANEL_H
 #define MC_PANEL_H
 
-#include "lib/global.h"
+#include "lib/global.h"                 /* gboolean */
 #include "lib/fs.h"			/* MC_MAXPATHLEN */
 #include "lib/strutil.h"
 
@@ -95,6 +95,8 @@ typedef struct WPanel {
     char     *panel_name;	/* The panel name */
     struct   stat dir_stat;	/* Stat of current dir: used by execute () */
 
+    int codepage;               /* panel codepage */
+
     gboolean searching;
     char     search_buffer [256];
     char     search_char [MB_LEN_MAX]; /*buffer for multibytes characters*/
@@ -111,7 +113,7 @@ extern int show_mini_info;
 void panel_reload         (WPanel *panel);
 void panel_set_sort_order (WPanel *panel, const panel_field_t *sort_order);
 void panel_re_sort        (WPanel *panel);
-void set_panel_encoding (WPanel *);
+void panel_change_encoding (WPanel * panel);
 
 #define UP_OPTIMIZE		0
 #define UP_RELOAD		1
