@@ -461,6 +461,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
             const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
             widget_selectcolor (w, focused, FALSE);
             widget_move (&r->widget, i, 0);
+            tty_draw_hline (r->widget.y + i, r->widget.x, ' ', r->widget.cols);
             tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
             draw_hotkey (w, r->texts[i], focused);
         }
@@ -520,7 +521,8 @@ radio_new (int y, int x, int count, const char **texts)
             max = m;
     }
 
-    init_widget (&result->widget, y, x, count, max, radio_callback, radio_event);
+    init_widget (&result->widget, y, x, count, 4 + max, radio_callback, radio_event);
+    /* 4 is width of "(*) " */
     result->state = 1;
     result->pos = 0;
     result->sel = 0;
@@ -615,7 +617,8 @@ check_new (int y, int x, int state, const char *text)
 
     c->text = parse_hotkey (text);
 
-    init_widget (&c->widget, y, x, 1, hotkey_width (c->text), check_callback, check_event);
+    init_widget (&c->widget, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_event);
+    /* 4 is width of "[X] " */
     c->state = state ? C_BOOL : 0;
     widget_want_hotkey (c->widget, 1);
 
