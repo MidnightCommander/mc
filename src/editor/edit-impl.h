@@ -272,7 +272,7 @@ void edit_load_syntax (WEdit * edit, char ***pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color);
 
-void book_mark_insert (WEdit * edit, int line, int c);
+void book_mark_insert (WEdit * edit, size_t line, int c);
 int book_mark_query_color (WEdit * edit, int line, int c);
 int book_mark_query_all (WEdit * edit, int line, int *c);
 struct _book_mark *book_mark_find (WEdit * edit, int line);
@@ -280,6 +280,8 @@ int book_mark_clear (WEdit * edit, int line, int c);
 void book_mark_flush (WEdit * edit, int c);
 void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
+void book_mark_serialize (WEdit * edit, int color);
+void book_mark_restore (WEdit * edit, int color);
 
 int line_is_blank (WEdit * edit, long line);
 int edit_indent_width (WEdit * edit, long p);

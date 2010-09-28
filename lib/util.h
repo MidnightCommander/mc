@@ -229,11 +229,13 @@ int hook_present (Hook * hook_list, void (*hook_fn) (void *));
 GList *list_append_unique (GList * list, char *text);
 
 /* Position saving and restoring */
-
+#define MAX_SAVED_BOOKMARKS 10
 /* Load position for the given filename */
-void load_file_position (const char *filename, long *line, long *column, off_t * offset);
+void load_file_position (const char *filename, long *line, long *column, off_t * offset,
+                         GArray **bookmarks);
 /* Save position for the given filename */
-void save_file_position (const char *filename, long line, long column, off_t offset);
+void save_file_position (const char *filename, long line, long column, off_t offset,
+                         GArray *bookmarks);
 
 
 /* OS specific defines */
