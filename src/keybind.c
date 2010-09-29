@@ -1056,6 +1056,9 @@ const global_keymap_t default_main_map[] = {
 
 const global_keymap_t default_main_x_map[] = {
     { 'd',         CK_CompareDirsCmd,      "d" },
+#ifdef USE_DIFF_VIEW
+    { XCTRL ('d'), CK_DiffViewCmd,         "C-d" },
+#endif				/* USE_DIFF_VIEW */
 #ifdef ENABLE_VFS
     { 'a',         CK_ReselectVfs,         "a"},
 #endif				/* ENABLE_VFS */
