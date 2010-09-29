@@ -58,118 +58,118 @@ msgstr ""
 "Εναλλακτικά φορτώθηκε το προεπιλεγμένο"
 
 msgid "Function key 1"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 1"
 
 msgid "Function key 2"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 2"
 
 msgid "Function key 3"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 3"
 
 msgid "Function key 4"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 4"
 
 msgid "Function key 5"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 5"
 
 msgid "Function key 6"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 6"
 
 msgid "Function key 7"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 7"
 
 msgid "Function key 8"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 8"
 
 msgid "Function key 9"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 9"
 
 msgid "Function key 10"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 10"
 
 msgid "Function key 11"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 11"
 
 msgid "Function key 12"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 12"
 
 msgid "Function key 13"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 13"
 
 msgid "Function key 14"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 14"
 
 msgid "Function key 15"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 15"
 
 msgid "Function key 16"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 16"
 
 msgid "Function key 17"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 17"
 
 msgid "Function key 18"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 18"
 
 msgid "Function key 19"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 19"
 
 msgid "Function key 20"
-msgstr ""
+msgstr "Πλήκτρο συνάρτησης 20"
 
 msgid "Backspace key"
-msgstr ""
+msgstr "Πλήκτρο backspace"
 
 msgid "End key"
-msgstr ""
+msgstr "Πλήκτρο End"
 
 msgid "Up arrow key"
-msgstr ""
+msgstr "Πλήκτρο άνω βέλος"
 
 msgid "Down arrow key"
-msgstr ""
+msgstr "Πλήκτρο κάτω βέλος"
 
 msgid "Left arrow key"
-msgstr ""
+msgstr "Πλήκτρο αριστερό βέλος"
 
 msgid "Right arrow key"
-msgstr ""
+msgstr "Πλήκτρο δεξί βέλος"
 
 msgid "Home key"
-msgstr ""
+msgstr "Πλήκτρο Home"
 
 msgid "Page Down key"
-msgstr ""
+msgstr "Πλήκτρο Σελίδα Κάτω"
 
 msgid "Page Up key"
-msgstr ""
+msgstr "Πλήκτρο Σελίδα Πάνω"
 
 msgid "Insert key"
-msgstr ""
+msgstr "Πλήκτρο Εισαγωγή"
 
 msgid "Delete key"
-msgstr ""
+msgstr "Πλήκτρο Διαγραφή"
 
 msgid "Completion/M-tab"
 msgstr ""
 
 msgid "+ on keypad"
-msgstr ""
+msgstr "+ στο νουμερικό"
 
 msgid "- on keypad"
-msgstr ""
+msgstr "- στο νουμερικό"
 
 msgid "Slash on keypad"
-msgstr ""
+msgstr "\\ στο νουμερικό"
 
 msgid "* on keypad"
-msgstr ""
+msgstr "* στο νουμερικό"
 
 msgid "Escape key"
-msgstr ""
+msgstr "Πλήκτρο Escape"
 
 msgid "Left arrow keypad"
-msgstr ""
+msgstr "Αριστερό βέλος στο νουμερικό"
 
 msgid "Right arrow keypad"
 msgstr ""
