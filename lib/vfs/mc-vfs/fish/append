@@ -1,0 +1,18 @@
+#APPE $FISH_FILESIZE $FISH_FILENAME
+echo "### 001"
+FILENAME="/$FISH_FILENAME"
+res=`exec 3>&1
+(
+    head -c $FISH_FILESIZE -q - || echo DD >&3
+) 2>/dev/null | (
+    cat > "${FILENAME}"
+    cat > /dev/null
+)`; [ "$res" = DD ] && {
+    > "${FILENAME}"
+    while [ $FISH_FILESIZE -gt 0 ]
+    do
+       cnt=`expr \\( $FISH_FILESIZE + 255 \\) / 256`
+       n=`dd bs=256 count=$cnt | tee -a "${FILENAME}" | wc -c`
+       FISH_FILESIZE=`expr $FISH_FILESIZE - $n`
+    done
+}; echo "### 200"
