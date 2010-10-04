@@ -2077,9 +2077,8 @@ msgstr "&Zeilennummern an/aus"
 msgid "Go to matching &bracket"
 msgstr "Zur entsprechenden &Klammer"
 
-#, fuzzy
 msgid "Toggle s&yntax highlighting"
-msgstr "Syntaxhervorhebung auswählen"
+msgstr "S&yntaxhervorhebung umschalten"
 
 msgid "&Find declaration"
 msgstr "&Deklaration suchen"
