@@ -1655,20 +1655,16 @@ msgstr "< Aktuelle Hervorhebung neu laden >"
 msgid "About"
 msgstr "Über"
 
-#, fuzzy
 msgid ""
 "Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "            A user friendly text editor\n"
 "         written for the Midnight Commander"
 msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-"Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "        Ein benutzerfreundlicher Texteditor,\n"
-"       geschrieben für den Midnight Commander.\n"
+"       geschrieben für den Midnight Commander."
 
 #, c-format
 msgid "Cannot open %s for reading"
