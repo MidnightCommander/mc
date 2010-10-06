@@ -61,6 +61,7 @@ static int
 mc_tty_color_save_attr_lib (int color_pair, int color_attr)
 {
     int *attr, *key;
+
     attr = g_try_new0 (int, 1);
     if (attr == NULL)
         return color_attr;

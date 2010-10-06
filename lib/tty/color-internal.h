@@ -25,7 +25,7 @@ typedef struct mc_color_pair_struct
     const char *cbg;
     int ifg;
     int ibg;
-    size_t pair_index;
+    int pair_index;
     gboolean is_temp;
 } tty_color_pair_t;
 

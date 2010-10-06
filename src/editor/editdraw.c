@@ -207,7 +207,6 @@ edit_status (WEdit * edit)
         widget_move (edit, 0, edit->widget.cols - 5);
         tty_printf (" %3d%%", percent);
     }
-    tty_setcolor (EDITOR_NORMAL_COLOR);
 
     g_free (status);
 }
