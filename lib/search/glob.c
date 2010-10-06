@@ -119,21 +119,29 @@ mc_search__translate_replace_glob_to_regex (gchar *str)
     GString *buff = g_string_new ("");
     int cnt = '0';
 
+    gboolean escaped_mode = FALSE;
     while (*str) {
 	char c = *str++;
 	switch (c) {
+	case '\\':
+	    if (!escaped_mode) {
+		escaped_mode = TRUE;
+	    }
+	    g_string_append_c (buff, c);
+	    continue;
 	case '*':
 	case '?':
-	    g_string_append_c (buff, '\\');
-	    c = ++cnt;
+	    if (!escaped_mode) {
+		g_string_append_c (buff, '\\');
+		c = ++cnt;
+	    }
 	    break;
-	/* breaks copying: mc uses "\0" internally, it must not be changed */
-	/*case '\\':*/
 	case '&':
 	    g_string_append_c (buff, '\\');
 	    break;
 	}
 	g_string_append_c (buff, c);
+	escaped_mode = FALSE;
     }
     return buff;
 }
