@@ -82,7 +82,7 @@ struct WTree
     Widget widget;
     struct TreeStore *store;
     tree_entry *selected_ptr;   /* The selected directory */
-    char search_buffer[256];    /* Current search string */
+    char search_buffer[MC_MAXFILENAMELEN];    /* Current search string */
     tree_entry **tree_shown;    /* Entries currently on screen */
     int is_panel;               /* panel or plain widget flag */
     int active;                 /* if it's currently selected */

@@ -98,8 +98,8 @@ typedef struct WPanel {
     int codepage;               /* panel codepage */
 
     gboolean searching;
-    char     search_buffer [256];
-    char     prev_search_buffer [256];
+    char     search_buffer [MC_MAXFILENAMELEN];
+    char     prev_search_buffer [MC_MAXFILENAMELEN];
     char     search_char [MB_LEN_MAX]; /*buffer for multibytes characters*/
     int      search_chpoint;           /*point after last characters in search_char*/
 } WPanel;

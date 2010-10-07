@@ -56,6 +56,12 @@
 #define NLENGTH(dirent) (strlen ((dirent)->d_name))
 #define DIRENT_LENGTH_COMPUTED 1
 
+#ifndef MAXNAMLEN
+#   define MC_MAXFILENAMELEN 256
+#else
+#   define MC_MAXFILENAMELEN MAXNAMLEN
+#endif
+
 static inline void
 compute_namelen (struct dirent *dent __attribute__ ((unused)))
 {
