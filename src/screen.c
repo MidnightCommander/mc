@@ -1318,7 +1318,7 @@ panel_new (const char *panel_name)
 }
 
 /** Panel creation for specified directory.
- * @param panel_name the name of the panel for setup retieving
+ * @param panel_name specifies the name of the panel for setup retieving
  * @param the path of working panel directory. If path is NULL then panel will be created for current directory
  * @returns new instance of WPanel
  */
@@ -2371,7 +2371,10 @@ mark_file_down (WPanel * panel)
     do_mark_file (panel, MARK_FORCE_DOWN);
 }
 
-/* Incremental search of a file name in the panel */
+/** Incremental search of a file name in the panel.
+  * @param panel instance of WPanel structure
+  * @param c_code key code
+  */
 static void
 do_search (WPanel * panel, int c_code)
 {
@@ -2475,6 +2478,9 @@ do_search (WPanel * panel, int c_code)
     g_free (esc_str);
 }
 
+/** Start new search.
+  * @param panel instance of WPanel structure
+  */
 static void
 start_search (WPanel * panel)
 {
