@@ -323,7 +323,7 @@ or
 3) In config file parameter
 .BR keymap
 in section
-.BR [Midnight Commander]
+.BR [Midnight\-Commander]
 .BR
 4) File
 .BR ~/.mc/mc.keymap
@@ -2987,7 +2987,7 @@ to 7 bits in the options menu to keep the spacing clean.
 .SH "Options of editor in ini\-file"
 
 Some editor options of ini\-file are described in this section.
-Options are placed in '[Midnight Commander]' section
+Options are placed in [Midnight\-Commander] section
 .TP
 .I editor_wordcompletion_collect_entire_file
 Search autocomplete candidates in entire of file or just from
@@ -3506,7 +3506,7 @@ or
 3) In config file parameter
 .B skin
 in section
-.B [Midnight Commander]
+.B [Midnight\-Commander]
 .br
 4) File
 .B @sysconfdir@/mc/skins/default.ini

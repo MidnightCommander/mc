@@ -319,7 +319,7 @@ S\-<символ> означает, что нужно держать в нажа
 3) В конфигурационном файле параметр
 .BR keymap
 в секции
-.BR [Midnight Commander]
+.BR [Midnight\-Commander]
 .br
 4) Файл
 .BR ~/.mc/mc.keymap
@@ -3281,7 +3281,7 @@ pipe text blocks through shell commands like indent).
 .SH "Опции в ини-файле для редактора"
 .PP
 В данном разделе кратко описаны опции ini\-файла, относящиеся к редактору.
-Опции записываются в секцию '[Midnight Commander]'
+Опции записываются в секцию [Midnight\-Commander].
 .TP
 .I editor_wordcompletion_collect_entire_file
 При автодополнении для сбора похожих слов слов просматривать весь файл(1)
@@ -3787,7 +3787,7 @@ base_color=normal=white,default:marked=magenta,default
 3) В конфигурационном файле параметр
 .BR skin
 в секции
-.BR [Midnight Commander]
+.BR [Midnight\-Commander]
 .br
 4) Файл
 .BR @sysconfdir@/mc/skins/default.ini
