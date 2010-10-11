@@ -1318,7 +1318,7 @@ panel_new (const char *panel_name)
 }
 
 /** Panel creation for specified directory.
- * @param panel_name the name of the panel for setup retieving
+ * @param panel_name specifies the name of the panel for setup retieving
  * @param the path of working panel directory. If path is NULL then panel will be created for current directory
  * @returns new instance of WPanel
  */
@@ -1379,6 +1379,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
     panel->search_buffer[0] = '\0';
+    panel->prev_search_buffer[0] = '\0';
     panel->frame_size = frame_half;
 
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
@@ -2370,7 +2371,10 @@ mark_file_down (WPanel * panel)
     do_mark_file (panel, MARK_FORCE_DOWN);
 }
 
-/* Incremental search of a file name in the panel */
+/** Incremental search of a file name in the panel.
+  * @param panel instance of WPanel structure
+  * @param c_code key code
+  */
 static void
 do_search (WPanel * panel, int c_code)
 {
@@ -2415,7 +2419,7 @@ do_search (WPanel * panel, int c_code)
                 {
                     memcpy (panel->search_buffer + l, panel->search_char, panel->search_chpoint);
                     l += panel->search_chpoint;
-                    (panel->search_buffer + l)[0] = '\0';
+                    *(panel->search_buffer + l) = '\0';
                     panel->search_chpoint = 0;
                 }
             }
@@ -2474,6 +2478,9 @@ do_search (WPanel * panel, int c_code)
     g_free (esc_str);
 }
 
+/** Start new search.
+  * @param panel instance of WPanel structure
+  */
 static void
 start_search (WPanel * panel)
 {
@@ -2483,6 +2490,13 @@ start_search (WPanel * panel)
             panel->selected = 0;
         else
             move_down (panel);
+
+        /* in case if there was no search string we need to recall
+           previous string, with which we ended previous searching */
+        if (panel->search_buffer[0] == '\0')
+            g_strlcpy (panel->search_buffer, panel->prev_search_buffer,
+                       sizeof (panel->search_buffer));
+
         do_search (panel, 0);
     }
     else
@@ -2500,6 +2514,13 @@ static void
 stop_search (WPanel * panel)
 {
     panel->searching = FALSE;
+
+    /* if user had overrdied search string, we need to store it
+       to the previous_search_buffer */
+    if (panel->search_buffer[0] != '\0')
+        g_strlcpy (panel->prev_search_buffer, panel->search_buffer,
+                   sizeof (panel->prev_search_buffer));
+
     display_mini_info (panel);
 }
 

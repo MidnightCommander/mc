@@ -586,6 +586,9 @@ or
 keys can be used to correct typing mistakes. If C\-s is pressed
 again, the next match is searched for.
 .P
+If quick search is started with double pressing of C\-s, the previous quick
+search pattern will be used for current search.
+.P
 Besides the filename characters, you can also use wildcard
 characters '*' and '?'.
 .\"NODE "  Shell Command Line"
