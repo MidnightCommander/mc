@@ -152,9 +152,10 @@ mcview_display_text (mcview_t * view)
         if (view->search_start <= from && from < view->search_end)
             tty_setcolor (SELECTED_COLOR);
 
-        if ((col >= view->dpy_text_column) && (col - view->dpy_text_column < width))
+        if (((off_t) col >= view->dpy_text_column)
+            && ((off_t) col - view->dpy_text_column < (off_t) width))
         {
-            widget_move (view, top + row, left + (col - view->dpy_text_column));
+            widget_move (view, top + row, left + ((off_t) col - view->dpy_text_column));
 #ifdef HAVE_CHARSET
             if (utf8_display)
             {

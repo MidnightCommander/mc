@@ -121,7 +121,7 @@ mcview_move_up (mcview_t * view, off_t lines)
                 if (last_row_length != 0 && cur_bol == view->dpy_start)
                     new_offset = max (new_offset, (off_t) (view->dpy_start - last_row_length));
                 else
-                    new_offset = max (new_offset, view->dpy_start - view->data_area.width);
+                    new_offset = max (new_offset, view->dpy_start - (off_t) view->data_area.width);
             }
             view->dpy_start = new_offset;
         }
@@ -164,12 +164,12 @@ mcview_move_down (mcview_t * view, off_t lines)
             {
                 new_offset = mcview_eol (view, view->dpy_end);
                 if (view->text_wrap_mode)
-                    new_offset = min (new_offset, view->dpy_end + view->data_area.width);
+                    new_offset = min (new_offset, view->dpy_end + (off_t) view->data_area.width);
                 view->dpy_end = new_offset;
 
                 new_offset = mcview_eol (view, view->dpy_start);
                 if (view->text_wrap_mode)
-                    new_offset = min (new_offset, view->dpy_start + view->data_area.width);
+                    new_offset = min (new_offset, view->dpy_start + (off_t) view->data_area.width);
                 view->dpy_start = new_offset;
             }
             view->dpy_end = last_byte;
@@ -181,7 +181,7 @@ mcview_move_down (mcview_t * view, off_t lines)
             {
                 new_offset = mcview_eol (view, view->dpy_start);
                 if (view->text_wrap_mode)
-                    new_offset = min (new_offset, view->dpy_start + view->data_area.width);
+                    new_offset = min (new_offset, view->dpy_start + (off_t) view->data_area.width);
                 view->dpy_start = new_offset;
             }
         }

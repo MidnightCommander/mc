@@ -52,6 +52,9 @@
 #include <config.h>
 
 #include <string.h>             /* for g_memmove() */
+#ifdef MC_ENABLE_DEBUGGING_CODE
+#include <stdint.h>             /* uintmax_t */
+#endif
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -217,16 +220,15 @@ mcview_ccache_dump (mcview_t * view)
     (void) setvbuf (f, NULL, _IONBF, 0);
 
     /* cache entries */
-    for (i = 0; i < view->coord_cache->size; i++)
+    for (i = 0; i < cache->size; i++)
     {
         (void) fprintf (f,
-                        "entry %8u  "
-                        "offset %8" OFFSETTYPE_PRId "  "
-                        "line %8" OFFSETTYPE_PRId "  "
-                        "column %8" OFFSETTYPE_PRId "  "
-                        "nroff_column %8" OFFSETTYPE_PRId "\n",
-                        (unsigned int) i, cache->cache[i].cc_offset, cache[i]->cache.cc_line,
-                        cache->cache[i].cc_column, cache->cache[i].cc_nroff_column);
+                        "entry %8u  offset %8ju  line %8ju  column %8ju  nroff_column %8ju\n",
+                        (unsigned int) i,
+                        (uintmax_t) cache->cache[i]->cc_offset,
+                        (uintmax_t) cache->cache[i]->cc_line,
+                        (uintmax_t) cache->cache[i]->cc_column,
+                        (uintmax_t) cache->cache[i]->cc_nroff_column);
     }
     (void) fprintf (f, "\n");
 
@@ -235,16 +237,15 @@ mcview_ccache_dump (mcview_t * view)
     {
         mcview_offset_to_coord (view, &line, &column, offset);
         (void) fprintf (f,
-                        "offset %8" OFFSETTYPE_PRId "  "
-                        "line %8" OFFSETTYPE_PRId "  "
-                        "column %8" OFFSETTYPE_PRId "\n", offset, line, column);
+                        "offset %8ju  line %8ju  column %8ju\n",
+                        (uintmax_t) offset, (uintmax_t) line, (uintmax_t) column);
     }
 
     /* line/column -> offset translation */
     for (line = 0; TRUE; line++)
     {
         mcview_coord_to_offset (view, &nextline_offset, line + 1, 0);
-        (void) fprintf (f, "nextline_offset %8" OFFSETTYPE_PRId "\n", nextline_offset);
+        (void) fprintf (f, "nextline_offset %8ju\n", (uintmax_t) nextline_offset);
 
         for (column = 0; TRUE; column++)
         {
@@ -253,8 +254,8 @@ mcview_ccache_dump (mcview_t * view)
                 break;
 
             (void) fprintf (f,
-                            "line %8" OFFSETTYPE_PRId "  column %8" OFFSETTYPE_PRId "  offset %8"
-                            OFFSETTYPE_PRId "\n", line, column, offset);
+                            "line %8ju  column %8ju  offset %8ju\n",
+                            (uintmax_t) line, (uintmax_t) column, (uintmax_t) offset);
         }
 
         if (nextline_offset >= filesize - 1)

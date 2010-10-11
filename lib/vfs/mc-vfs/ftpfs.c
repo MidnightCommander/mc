@@ -84,6 +84,7 @@ What to do with this?
 #include <ctype.h>
 #include <fcntl.h>
 #include <sys/time.h>           /* gettimeofday() */
+#include <stdint.h>             /* uintmax_t */
 
 #include "lib/global.h"
 
@@ -1738,7 +1739,8 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *l
             w_buf += n_written;
             n_read -= n_written;
         }
-        print_vfs_message (_("ftpfs: storing file %ju (%ju)"), n_stored, s.st_size);
+        print_vfs_message (_("ftpfs: storing file %ju (%ju)"),
+                            (uintmax_t) n_stored, (uintmax_t) s.st_size);
     }
     tty_disable_interrupt_key ();
     close (sock);
