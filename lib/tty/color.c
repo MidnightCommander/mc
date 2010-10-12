@@ -103,7 +103,7 @@ static int
 tty_color_get_next__color_pair_number (void)
 {
     const size_t cp_count = g_hash_table_size (mc_tty_color__hashtable);
-    int cp;
+    size_t cp;
 
     for (cp = 0; cp < cp_count; cp++)
         if (g_hash_table_find (mc_tty_color__hashtable, tty_color_get_next_cpn_cb,

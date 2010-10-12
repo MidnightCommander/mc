@@ -71,8 +71,8 @@
 #define tlines(t) (t->is_panel ? t->widget.lines - 2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
 /* Use the color of the parent widget for the unselected entries */
-#define TREE_NORMALC(h) (DLG_NORMALC (h))
-#define TREE_CURRENTC(h) (DLG_FOCUSC (h))
+#define TREE_NORMALC(h) (h->color[DLG_COLOR_NORMAL])
+#define TREE_CURRENTC(h) (h->color[DLG_COLOR_FOCUS])
 
 /* Specifies the display mode: 1d or 2d */
 static gboolean tree_navigation_flag = FALSE;

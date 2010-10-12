@@ -155,13 +155,6 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     int dlg_width = 48, dlg_height = 15;
     Dlg_head *dd;
 
-    const int input_colors[3] =
-    {
-        INPUT_COLOR,
-        INPUT_UNCHANGED_COLOR,
-        INPUT_MARK_COLOR
-    };
-
     /* Controls whether the array strings have been translated */
     const char *displays[LIST_TYPES] = {
         N_("&Full file list"),
@@ -230,14 +223,14 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     add_widget (dd, cancel_button);
     add_widget (dd, ok_button);
 
-    display_mini_status = input_new (10, 8, (int *) input_colors, dlg_width - 12, _status[radio_sel],
+    display_mini_status = input_new (10, 8, input_get_default_colors(), dlg_width - 12, _status[radio_sel],
                                      "mini-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_mini_status);
 
     display_check_status = check_new (9, 4, _check_status, user_mini_status);
     add_widget (dd, display_check_status);
 
-    display_user_format = input_new (7, 8, (int *) input_colors, dlg_width - 12, init_text,
+    display_user_format = input_new (7, 8, input_get_default_colors(), dlg_width - 12, init_text,
                                      "user-fmt-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_user_format);
 
@@ -1134,16 +1127,18 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
 
     g_free (title);
 
-    in_user = input_new (5, istart, (int *) input_colors, ilen, user, "auth_name", INPUT_COMPLETE_DEFAULT);
+    in_user = input_new (5, istart, input_get_default_colors(), ilen, user, "auth_name", INPUT_COMPLETE_DEFAULT);
     add_widget (auth_dlg, in_user);
 
-    in_domain = input_new (3, istart, (int *) input_colors, ilen, domain, "auth_domain", INPUT_COMPLETE_DEFAULT);
+    in_domain =
+        input_new (3, istart, input_get_default_colors(), ilen, domain, "auth_domain", INPUT_COMPLETE_DEFAULT);
 
     add_widget (auth_dlg, in_domain);
     add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON, buts[1], 0));
     add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
-    in_password  = input_new (7, istart, (int *) input_colors, ilen, "", "auth_password", INPUT_COMPLETE_DEFAULT);
+    in_password  =
+            input_new (7, istart, input_get_default_colors(), ilen, "", "auth_password", INPUT_COMPLETE_DEFAULT);
 
     in_password->completion_flags = 0;
     in_password->is_password = 1;

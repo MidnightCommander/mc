@@ -1785,11 +1785,12 @@ mc_maybe_editor_or_viewer (void)
 static void
 do_nc (void)
 {
-    int midnight_colors[DLG_COLOR_NUM];
-    midnight_colors[0] = mc_skin_color_get ("dialog", "_default_");
-    midnight_colors[1] = mc_skin_color_get ("dialog", "focus");
-    midnight_colors[2] = mc_skin_color_get ("dialog", "hotnormal");
-    midnight_colors[3] = mc_skin_color_get ("dialog", "hotfocus");
+    dlg_colors_t midnight_colors;
+    midnight_colors[DLG_COLOR_NORMAL] = mc_skin_color_get ("dialog", "_default_");
+    midnight_colors[DLG_COLOR_FOCUS] = mc_skin_color_get ("dialog", "focus");
+    midnight_colors[DLG_COLOR_HOT_NORMAL] = mc_skin_color_get ("dialog", "hotnormal");
+    midnight_colors[DLG_COLOR_HOT_FOCUS] = mc_skin_color_get ("dialog", "hotfocus");
+    midnight_colors[DLG_COLOR_TITLE] = mc_skin_color_get ("dialog", "title");
 
     panel_init ();
 

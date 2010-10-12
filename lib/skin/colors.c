@@ -204,16 +204,20 @@ mc_skin_color_cache_init (void)
     MARKED_SELECTED_COLOR = mc_skin_color_get ("core", "markselect");
     DISABLED_COLOR =  mc_skin_color_get ("core", "disabled");
     REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
+    HEADER_COLOR = mc_skin_color_get ("core", "header");
     COMMAND_MARK_COLOR = mc_skin_color_get ("core", "commandlinemark");
 
     COLOR_NORMAL = mc_skin_color_get ("dialog", "_default_");
     COLOR_FOCUS = mc_skin_color_get ("dialog", "dfocus");
     COLOR_HOT_NORMAL = mc_skin_color_get ("dialog", "dhotnormal");
     COLOR_HOT_FOCUS = mc_skin_color_get ("dialog", "dhotfocus");
+    COLOR_TITLE = mc_skin_color_get ("dialog", "dtitle");
 
     ERROR_COLOR = mc_skin_color_get ("error", "_default_");
+    ERROR_FOCUS = mc_skin_color_get ("error", "errdfocus");
     ERROR_HOT_NORMAL = mc_skin_color_get ("error", "errdhotnormal");
     ERROR_HOT_FOCUS = mc_skin_color_get ("error", "errdhotfocus");
+    ERROR_TITLE = mc_skin_color_get ("error", "errdtitle");
 
     MENU_ENTRY_COLOR = mc_skin_color_get ("menu", "_default_");
     MENU_SELECTED_COLOR = mc_skin_color_get ("menu", "menusel");
@@ -223,6 +227,8 @@ mc_skin_color_cache_init (void)
 
     GAUGE_COLOR = mc_skin_color_get ("core", "gauge");
     INPUT_COLOR = mc_skin_color_get ("core", "input");
+    INPUT_HISTORY_COLOR = mc_skin_color_get ("core", "inputhistory");
+    COMMAND_HISTORY_COLOR = mc_skin_color_get ("core", "commandhistory");
     INPUT_MARK_COLOR = mc_skin_color_get ("core", "inputmark");
     INPUT_UNCHANGED_COLOR = mc_skin_color_get ("core", "inputunchanged");
 
@@ -231,8 +237,11 @@ mc_skin_color_cache_init (void)
     HELP_BOLD_COLOR = mc_skin_color_get ("help", "helpbold");
     HELP_LINK_COLOR = mc_skin_color_get ("help", "helplink");
     HELP_SLINK_COLOR = mc_skin_color_get ("help", "helpslink");
+    HELP_TITLE_COLOR = mc_skin_color_get ("help", "helptitle");
 
+    VIEW_BOLD_COLOR = mc_skin_color_get ("viewer", "viewbold");
     VIEW_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewunderline");
+    VIEW_SELECTED_COLOR = mc_skin_color_get ("viewer", "viewselected");
 
     EDITOR_NORMAL_COLOR = mc_skin_color_get ("editor", "_default_");
     EDITOR_BOLD_COLOR = mc_skin_color_get ("editor", "editbold");
