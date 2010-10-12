@@ -267,7 +267,7 @@ CmdCopyCurrentPathname = p
 CmdCopyOtherPathname = ctrl-p
 CmdCopyCurrentTagged = t
 CmdCopyOtherTagged = ctrl-t
-CmdDiffView = ctrl-y
+CmdDiffView = ctrl-d
 
 [panel]
 PanelStartSearch = ctrl-s; alt-s
