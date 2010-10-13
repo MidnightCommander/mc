@@ -6,7 +6,8 @@
 
    Written by: 1998 Pavel Machek
    Spaces fix: 2000 Michal Svec
-               2010 Andrew Borobin
+               2010 Andrew Borodin
+               2010 Slava Zanko
                2010 Ilia Maslakov
 
    Derived from ftpfs.c.
@@ -73,6 +74,7 @@
 
 #include "fish.h"
 #include "fishdef.h"
+#include "src/execute.h"        /* pre_exec, post_exec */
 
 int fish_directory_timeout = 900;
 
@@ -355,6 +357,9 @@ fish_getcwd (struct vfs_class *me, struct vfs_s_super *super)
 static int
 fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
+
+    /* hide panels */
+    pre_exec ();
     {
         char gbuf[10];
         const char *argv[10];   /* All of 10 is used now */
@@ -440,6 +445,10 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
      * Run `start_fish_server'. If it doesn't exist - no problem,
      * we'll talk directly to the shell.
      */
+
+    /* show panels */
+    post_exec ();
+
     if (fish_command
         (me, super, WAIT_REPLY,
          "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") != COMPLETE)

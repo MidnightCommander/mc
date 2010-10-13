@@ -91,11 +91,19 @@ edition_pre_exec (void)
 
 
 /* Set up the terminal before executing a program */
-static void
+void
 pre_exec (void)
 {
-    use_dash (0);
+    use_dash (FALSE);
     edition_pre_exec ();
+}
+
+/* Hide the terminal after executing a program */
+void
+post_exec (void)
+{
+    edition_post_exec ();
+    use_dash (TRUE);
 }
 
 
