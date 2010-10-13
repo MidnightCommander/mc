@@ -132,13 +132,6 @@ panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 static void
 init_panelize (void)
 {
-    const int input_colors[3] =
-    {
-        INPUT_COLOR,
-        INPUT_UNCHANGED_COLOR,
-        INPUT_MARK_COLOR
-    };
-
     int i, panelize_cols = COLS - 6;
     struct panelize *current = panelize;
 
@@ -183,7 +176,7 @@ init_panelize (void)
                                 panelize_but[i].flags, panelize_but[i].text, 0));
 
     pname =
-        input_new (UY + 14, UX, (int *) input_colors,
+        input_new (UY + 14, UX, input_get_default_colors(),
                    panelize_dlg->cols - 10, "", "in", INPUT_COMPLETE_DEFAULT);
     add_widget (panelize_dlg, pname);
 

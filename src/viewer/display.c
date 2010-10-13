@@ -364,7 +364,7 @@ mcview_display_ruler (mcview_t * view)
     if (ruler == RULER_NONE || height < 1)
         return;
 
-    tty_setcolor (MARKED_COLOR);
+    tty_setcolor (VIEW_BOLD_COLOR);
     for (c = 0; c < width; c++)
     {
         cl = view->dpy_text_column + c;

@@ -74,16 +74,16 @@ widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
     else if (hotkey)
     {
         if (focused)
-            color = DLG_HOT_FOCUSC (h);
+            color = h->color[DLG_COLOR_HOT_FOCUS];
         else
-            color = DLG_HOT_NORMALC (h);
+            color = h->color[DLG_COLOR_HOT_NORMAL];
     }
     else
     {
         if (focused)
-            color = DLG_FOCUSC (h);
+            color = h->color[DLG_COLOR_FOCUS];
         else
-            color = DLG_NORMALC (h);
+            color = h->color[DLG_COLOR_NORMAL];
     }
 
     tty_setcolor (color);
@@ -767,7 +767,7 @@ label_callback (Widget * w, widget_msg_t msg, int parm)
             if (l->transparent)
                 tty_setcolor (disabled ? DISABLED_COLOR : DEFAULT_COLOR);
             else
-                tty_setcolor (disabled ? DISABLED_COLOR : DLG_NORMALC (h));
+                tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
 
             for (;;)
             {
@@ -883,7 +883,7 @@ hline_callback (Widget * w, widget_msg_t msg, int parm)
         if (l->transparent)
             tty_setcolor (DEFAULT_COLOR);
         else
-            tty_setcolor (DLG_NORMALC (h));
+            tty_setcolor (h->color[DLG_COLOR_NORMAL]);
 
         tty_draw_hline (w->y, w->x + 1, ACS_HLINE, w->cols - 2);
 
@@ -937,7 +937,7 @@ gauge_callback (Widget * w, widget_msg_t msg, int parm)
     if (msg == WIDGET_DRAW)
     {
         widget_move (&g->widget, 0, 0);
-        tty_setcolor (DLG_NORMALC (h));
+        tty_setcolor (h->color[DLG_COLOR_NORMAL]);
         if (!g->shown)
             tty_printf ("%*s", gauge_len, "");
         else
@@ -964,16 +964,16 @@ gauge_callback (Widget * w, widget_msg_t msg, int parm)
             {
                 tty_setcolor (GAUGE_COLOR);
                 tty_printf ("%*s", (int) columns, "");
-                tty_setcolor (DLG_NORMALC (h));
+                tty_setcolor (h->color[DLG_COLOR_NORMAL]);
                 tty_printf ("%*s] %3d%%", (int) (gauge_len - 7 - columns), "", (int) percentage);
             }
             else
             {
-                tty_setcolor (DLG_NORMALC (h));
+                tty_setcolor (h->color[DLG_COLOR_NORMAL]);
                 tty_printf ("%*s", gauge_len - columns - 7, "");
                 tty_setcolor (GAUGE_COLOR);
                 tty_printf ("%*s", columns, "");
-                tty_setcolor (DLG_NORMALC (h));
+                tty_setcolor (h->color[DLG_COLOR_NORMAL]);
                 tty_printf ("] %3d%%", 100 * columns / (gauge_len - 7), percentage);
             }
         }
@@ -1029,9 +1029,9 @@ gauge_new (int y, int x, int shown, int max, int current)
 #define LARGE_HISTORY_BUTTON 1
 
 #ifdef LARGE_HISTORY_BUTTON
-#  define HISTORY_BUTTON_WIDTH 3
+#define HISTORY_BUTTON_WIDTH 3
 #else
-#  define HISTORY_BUTTON_WIDTH 1
+#define HISTORY_BUTTON_WIDTH 1
 #endif
 
 #define should_show_history_button(in) \
@@ -1045,20 +1045,16 @@ draw_history_button (WInput * in)
 
     c = in->history->next ? (in->history->prev ? '|' : 'v') : '^';
     widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH);
+    tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 #ifdef LARGE_HISTORY_BUTTON
     {
         Dlg_head *h;
         h = in->widget.owner;
-        tty_setcolor (disabled ? DISABLED_COLOR : NORMAL_COLOR);
         tty_print_string ("[ ]");
-        /* Too distracting: tty_setcolor (MARKED_COLOR); */
         widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
-        tty_print_char (c);
     }
-#else
-    tty_setcolor (disabled ? DISABLED_COLOR : MARKED_COLOR);
-    tty_print_char (c);
 #endif
+    tty_print_char (c);
 }
 
 /* }}} history button */
@@ -1158,9 +1154,9 @@ update_input (WInput * in, int clear_first)
     if ((((Widget *) in)->options & W_DISABLED) != 0)
         tty_setcolor (DISABLED_COLOR);
     else if (in->first)
-        tty_setcolor (in->unchanged_color);
+        tty_setcolor (in->color[WINPUTC_UNCHANGED]);
     else
-        tty_setcolor (in->color);
+        tty_setcolor (in->color[WINPUTC_MAIN]);
 
     widget_move (&in->widget, 0, 0);
 
@@ -1176,20 +1172,26 @@ update_input (WInput * in, int clear_first)
             long m1, m2;
             if (input_eval_marks (in, &m1, &m2))
             {
-                tty_setcolor (in->color);
-                cp = str_term_substring (in->buffer, in->term_first_shown, in->field_width - has_history);
+                tty_setcolor (in->color[WINPUTC_MAIN]);
+                cp = str_term_substring (in->buffer, in->term_first_shown,
+                                         in->field_width - has_history);
                 tty_print_string (cp);
-                tty_setcolor (in->mark_color);
+                tty_setcolor (in->color[WINPUTC_MARK]);
                 if (m1 < in->term_first_shown)
                 {
                     widget_move (&in->widget, 0, 0);
-                    tty_print_string (str_term_substring (in->buffer, in->term_first_shown, m2 - in->term_first_shown));
+                    tty_print_string (str_term_substring
+                                      (in->buffer, in->term_first_shown,
+                                       m2 - in->term_first_shown));
                 }
                 else
                 {
                     int sel_width;
                     widget_move (&in->widget, 0, m1 - in->term_first_shown);
-                    sel_width = min (m2 - m1, (in->field_width - has_history) - (str_term_width2 (in->buffer, m1) - in->term_first_shown));
+                    sel_width =
+                        min (m2 - m1,
+                             (in->field_width - has_history) - (str_term_width2 (in->buffer, m1) -
+                                                                in->term_first_shown));
                     tty_print_string (str_term_substring (in->buffer, m1, sel_width));
                 }
             }
@@ -1202,7 +1204,7 @@ update_input (WInput * in, int clear_first)
         {
             if (i >= 0)
             {
-                tty_setcolor (in->color);
+                tty_setcolor (in->color[WINPUTC_MAIN]);
                 tty_print_char ((cp[0] != '\0') ? '*' : ' ');
             }
             if (cp[0] != '\0')
@@ -1809,6 +1811,7 @@ key_ctrl_right (WInput * in)
 {
     forward_word (in);
 }
+
 static void
 backward_delete (WInput * in)
 {
@@ -2041,13 +2044,12 @@ input_execute_cmd (WInput * in, unsigned long command)
         command == CK_InputRightHighlight ||
         command == CK_InputWordLeftHighlight ||
         command == CK_InputWordRightHighlight ||
-        command == CK_InputBolHighlight ||
-        command == CK_InputEolHighlight)
+        command == CK_InputBolHighlight || command == CK_InputEolHighlight)
     {
         if (!in->highlight)
         {
-            input_mark_cmd (in, FALSE);     /* clear */
-            input_mark_cmd (in, TRUE);      /* marking on */
+            input_mark_cmd (in, FALSE); /* clear */
+            input_mark_cmd (in, TRUE);  /* marking on */
         }
     }
 
@@ -2170,8 +2172,7 @@ input_execute_cmd (WInput * in, unsigned long command)
         command != CK_InputRightHighlight &&
         command != CK_InputWordLeftHighlight &&
         command != CK_InputWordRightHighlight &&
-        command != CK_InputBolHighlight &&
-        command != CK_InputEolHighlight)
+        command != CK_InputBolHighlight && command != CK_InputEolHighlight)
     {
         in->highlight = FALSE;
     }
@@ -2356,6 +2357,32 @@ input_event (Gpm_Event * event, void *data)
     return MOU_NORMAL;
 }
 
+/** Get default colors for WInput widget.
+  * @returns default colors
+  */
+int *
+input_get_default_colors (void)
+{
+    static input_colors_t standart_colors;
+
+    standart_colors[WINPUTC_MAIN] = INPUT_COLOR;
+    standart_colors[WINPUTC_MARK] = INPUT_MARK_COLOR;
+    standart_colors[WINPUTC_UNCHANGED] = INPUT_UNCHANGED_COLOR;
+    standart_colors[WINPUTC_HISTORY] = INPUT_HISTORY_COLOR;
+
+    return standart_colors;
+}
+
+/** Create new instance of WInput object.
+  * @param y                    Y coordinate
+  * @param x                    X coordinate
+  * @param input_colors         Array of used colors
+  * @param width                Widget width
+  * @param def_text             Default text filled in widget
+  * @param histname             Name of history
+  * @param completion_flags     Flags for specify type of completions
+  * @returns                    WInput object
+  */
 WInput *
 input_new (int y, int x, int *input_colors, int width, const char *def_text,
            const char *histname, INPUT_COMPLETE_FLAGS completion_flags)
@@ -2390,9 +2417,9 @@ input_new (int y, int x, int *input_colors, int width, const char *def_text,
     in->completion_flags = completion_flags;
     in->current_max_size = initial_buffer_len;
     in->buffer = g_new (char, initial_buffer_len);
-    in->color = input_colors[0];
-    in->unchanged_color = input_colors[1];
-    in->mark_color = input_colors[2];
+
+    memmove (in->color, input_colors, sizeof (input_colors_t));
+
     in->field_width = width;
     in->first = TRUE;
     in->highlight = FALSE;
@@ -2464,8 +2491,8 @@ listbox_draw (WListbox * l, gboolean focused)
 {
     const Dlg_head *h = l->widget.owner;
     const gboolean disabled = (((Widget *) l)->options & W_DISABLED) != 0;
-    const int normalc = disabled ? DISABLED_COLOR : DLG_NORMALC (h);
-    int selc = disabled ? DISABLED_COLOR : focused ? DLG_HOT_FOCUSC (h) : DLG_FOCUSC (h);
+    const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
+    int selc = disabled ? DISABLED_COLOR : focused ? h->color[DLG_COLOR_HOT_FOCUS] : h->color[DLG_COLOR_FOCUS];
 
     GList *le;
     int pos;
@@ -3027,7 +3054,7 @@ buttonbar_call (WButtonBar * bb, int i)
 
 /* calculate positions of buttons; width is never less than 7 */
 static void
-buttonbar_init_button_positions (WButtonBar *bb)
+buttonbar_init_button_positions (WButtonBar * bb)
 {
     int i;
     int pos = 0;
@@ -3074,7 +3101,7 @@ buttonbar_init_button_positions (WButtonBar *bb)
 
 /* return width of one button */
 static int
-buttonbar_get_button_width (const WButtonBar *bb, int i)
+buttonbar_get_button_width (const WButtonBar * bb, int i)
 {
     if (i == 0)
         return bb->labels[0].end_coord;
@@ -3082,7 +3109,7 @@ buttonbar_get_button_width (const WButtonBar *bb, int i)
 }
 
 static int
-buttonbar_get_button_by_x_coord (const WButtonBar *bb, int x)
+buttonbar_get_button_by_x_coord (const WButtonBar * bb, int x)
 {
     int i;
 
@@ -3242,18 +3269,21 @@ groupbox_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_NOT_HANDLED;
 
     case WIDGET_DRAW:
-    {
-        gboolean disabled = (w->options & W_DISABLED) != 0;
-        tty_setcolor (disabled ? DISABLED_COLOR : COLOR_NORMAL);
-        draw_box (g->widget.owner, g->widget.y - g->widget.owner->y,
-                  g->widget.x - g->widget.owner->x, g->widget.lines, g->widget.cols, TRUE);
+        {
+            gboolean disabled = (w->options & W_DISABLED) != 0;
+            tty_setcolor (disabled ? DISABLED_COLOR : COLOR_NORMAL);
+            draw_box (g->widget.owner, g->widget.y - g->widget.owner->y,
+                      g->widget.x - g->widget.owner->x, g->widget.lines, g->widget.cols, TRUE);
 
-        tty_setcolor (disabled ? DISABLED_COLOR : COLOR_HOT_NORMAL);
-        dlg_move (g->widget.owner, g->widget.y - g->widget.owner->y,
-                  g->widget.x - g->widget.owner->x + 1);
-        tty_print_string (g->title);
-        return MSG_HANDLED;
-    }
+            if (g->title != NULL)
+            {
+                tty_setcolor (disabled ? DISABLED_COLOR : COLOR_TITLE);
+                dlg_move (g->widget.owner, g->widget.y - g->widget.owner->y,
+                          g->widget.x - g->widget.owner->x + 1);
+                tty_print_string (g->title);
+            }
+            return MSG_HANDLED;
+        }
 
     case WIDGET_DESTROY:
         g_free (g->title);

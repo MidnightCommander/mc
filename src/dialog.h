@@ -127,11 +127,16 @@ typedef char *(*dlg_shortcut_str) (unsigned long command);
 typedef char *(*dlg_title_str) (const Dlg_head * h, size_t len);
 
 /* Dialog color constants */
-#define DLG_COLOR_NUM       4
-#define DLG_NORMALC(h)      ((h)->color[0])
-#define DLG_FOCUSC(h)       ((h)->color[1])
-#define DLG_HOT_NORMALC(h)  ((h)->color[2])
-#define DLG_HOT_FOCUSC(h)   ((h)->color[3])
+typedef enum {
+    DLG_COLOR_NORMAL,
+    DLG_COLOR_FOCUS,
+    DLG_COLOR_HOT_NORMAL,
+    DLG_COLOR_HOT_FOCUS,
+    DLG_COLOR_TITLE,
+    DLG_COLOR_COUNT
+} dlg_colors_enum_t;
+
+typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
 struct Dlg_head
 {
@@ -139,7 +144,7 @@ struct Dlg_head
     gboolean modal;             /* type of dialog: modal or not */
     dlg_flags_t flags;          /* User flags */
     const char *help_ctx;       /* Name of the help entry */
-    int *color;                 /* Color set. Unused in viewer and editor */
+    dlg_colors_t color;        /* Color set. Unused in viewer and editor */
     char *title;                /* Title of the dialog */
 
     /* Set and received by the user */
@@ -168,8 +173,8 @@ struct Dlg_head
 };
 
 /* Color styles for normal and error dialogs */
-extern int dialog_colors[4];
-extern int alarm_colors[4];
+extern dlg_colors_t dialog_colors;
+extern dlg_colors_t alarm_colors;
 
 /* Widget callback */
 typedef cb_ret_t (*callback_fn) (Widget * widget, widget_msg_t msg, int parm);

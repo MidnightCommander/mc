@@ -949,11 +949,12 @@ mousedispatch_new (int y, int x, int yl, int xl)
 void
 interactive_display (const char *filename, const char *node)
 {
-    const int help_colors[DLG_COLOR_NUM] = {
+    const dlg_colors_t help_colors = {
         HELP_NORMAL_COLOR,      /* common text color */
         0,                      /* unused in help */
-        HELP_BOLD_COLOR,        /* title color */
-        0                       /* unused in help */
+        HELP_BOLD_COLOR,        /* bold text color */
+        0,                      /* unused in help */
+        HELP_TITLE_COLOR        /* title color */
     };
 
     WButtonBar *help_bar;

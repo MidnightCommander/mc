@@ -134,7 +134,7 @@ mcview_display_nroff (mcview_t * view)
                     && (c_next != '_' || mcview_count_backspaces (view, from + 1) == 1))
                     tty_setcolor (VIEW_UNDERLINED_COLOR);
                 else
-                    tty_setcolor (MARKED_COLOR);
+                    tty_setcolor (VIEW_BOLD_COLOR);
                 continue;
             }
         }

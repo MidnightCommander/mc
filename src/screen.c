@@ -1548,7 +1548,7 @@ paint_frame (WPanel * panel)
                     g_string_append (format_txt, "]");
                 }
 
-                tty_setcolor (MARKED_COLOR);
+                tty_setcolor (HEADER_COLOR);
                 tty_print_string (str_fit_to_term (format_txt->str, format->field_len,
                                                    J_CENTER_LEFT));
                 width -= format->field_len;

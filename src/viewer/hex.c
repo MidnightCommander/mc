@@ -162,7 +162,7 @@ mcview_display_hex (mcview_t * view)
         /* Print the hex offset */
         g_snprintf (hex_buff, sizeof (hex_buff), "%08jX ", (uintmax_t) from);
         widget_move (view, top + row, left);
-        tty_setcolor (MARKED_COLOR);
+        tty_setcolor (VIEW_BOLD_COLOR);
         for (i = 0; col < width && hex_buff[i] != '\0'; i++)
         {
             tty_print_char (hex_buff[i]);
@@ -230,10 +230,10 @@ mcview_display_hex (mcview_t * view)
 
             /* Select the color for the hex number */
             tty_setcolor (boldflag == MARK_NORMAL ? NORMAL_COLOR :
-                          boldflag == MARK_SELECTED ? MARKED_COLOR :
+                          boldflag == MARK_SELECTED ? VIEW_BOLD_COLOR :
                           boldflag == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
                           /* boldflag == MARK_CURSOR */
-                          view->hexview_in_text ? MARKED_SELECTED_COLOR : VIEW_UNDERLINED_COLOR);
+                          view->hexview_in_text ? VIEW_SELECTED_COLOR : VIEW_UNDERLINED_COLOR);
 
             /* Print the hex number */
             widget_move (view, top + row, left + col);
@@ -277,10 +277,10 @@ mcview_display_hex (mcview_t * view)
             /* Select the color for the character; this differs from the
              * hex color when boldflag == MARK_CURSOR */
             tty_setcolor (boldflag == MARK_NORMAL ? NORMAL_COLOR :
-                          boldflag == MARK_SELECTED ? MARKED_COLOR :
+                          boldflag == MARK_SELECTED ? VIEW_BOLD_COLOR :
                           boldflag == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
                           /* boldflag == MARK_CURSOR */
-                          view->hexview_in_text ? VIEW_UNDERLINED_COLOR : MARKED_SELECTED_COLOR);
+                          view->hexview_in_text ? VIEW_SELECTED_COLOR : MARKED_SELECTED_COLOR);
 
 
 #ifdef HAVE_CHARSET

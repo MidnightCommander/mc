@@ -49,8 +49,8 @@
 #include "dialog-switch.h"
 
 /* Color styles for normal and error dialogs */
-int dialog_colors[4];
-int alarm_colors[4];
+dlg_colors_t dialog_colors;
+dlg_colors_t alarm_colors;
 
 /* Primitive way to check if the the current dialog is our dialog */
 /* This is needed by async routines like load_prompt */
@@ -115,13 +115,13 @@ common_dialog_repaint (Dlg_head *h)
 
     space = (h->flags & DLG_COMPACT) ? 0 : 1;
 
-    tty_setcolor (DLG_NORMALC (h));
+    tty_setcolor (h->color[DLG_COLOR_NORMAL]);
     dlg_erase (h);
     draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space, FALSE);
 
     if (h->title != NULL)
     {
-        tty_setcolor (DLG_HOT_NORMALC (h));
+        tty_setcolor (h->color[DLG_COLOR_TITLE]);
         dlg_move (h, space, (h->cols - str_term_width1 (h->title)) / 2);
         tty_print_string (h->title);
     }
@@ -273,8 +273,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
     new_d->modal = modal;
     if (colors != NULL)
     {
-        new_d->color = g_new (int, DLG_COLOR_NUM);
-        memmove (new_d->color, colors, sizeof (int) * DLG_COLOR_NUM);
+        memmove (new_d->color, colors, sizeof (dlg_colors_t));
     }
     new_d->help_ctx = help_ctx;
     new_d->callback = (callback != NULL) ? callback : default_dlg_callback;
@@ -306,15 +305,17 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
 void
 dlg_set_default_colors (void)
 {
-    dialog_colors[0] = COLOR_NORMAL;
-    dialog_colors[1] = COLOR_FOCUS;
-    dialog_colors[2] = COLOR_HOT_NORMAL;
-    dialog_colors[3] = COLOR_HOT_FOCUS;
+    dialog_colors[DLG_COLOR_NORMAL] = COLOR_NORMAL;
+    dialog_colors[DLG_COLOR_FOCUS] = COLOR_FOCUS;
+    dialog_colors[DLG_COLOR_HOT_NORMAL] = COLOR_HOT_NORMAL;
+    dialog_colors[DLG_COLOR_HOT_FOCUS] = COLOR_HOT_FOCUS;
+    dialog_colors[DLG_COLOR_TITLE] = COLOR_TITLE;
 
-    alarm_colors[0] = ERROR_COLOR;
-    alarm_colors[1] = REVERSE_COLOR;
-    alarm_colors[2] = ERROR_HOT_NORMAL;
-    alarm_colors[3] = ERROR_HOT_FOCUS;
+    alarm_colors[DLG_COLOR_NORMAL] = ERROR_COLOR;
+    alarm_colors[DLG_COLOR_FOCUS] = ERROR_FOCUS;
+    alarm_colors[DLG_COLOR_HOT_NORMAL] = ERROR_HOT_NORMAL;
+    alarm_colors[DLG_COLOR_HOT_FOCUS] = ERROR_HOT_FOCUS;
+    alarm_colors[DLG_COLOR_TITLE] = ERROR_TITLE;
 }
 
 void
@@ -1090,7 +1091,6 @@ destroy_dlg (Dlg_head * h)
     dlg_broadcast_msg (h, WIDGET_DESTROY, FALSE);
     g_list_foreach (h->widgets, (GFunc) g_free, NULL);
     g_list_free (h->widgets);
-    g_free (h->color);
     g_free (h->title);
     g_free (h);
 

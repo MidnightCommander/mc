@@ -49,11 +49,12 @@ Listbox *
 create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
                                 const char *title, const char *help)
 {
-    const int listbox_colors[DLG_COLOR_NUM] = {
+    const dlg_colors_t listbox_colors = {
         MENU_ENTRY_COLOR,
         MENU_SELECTED_COLOR,
         MENU_HOT_COLOR,
         MENU_HOTSEL_COLOR,
+        COLOR_TITLE
     };
 
     const int space = 4;
@@ -375,12 +376,6 @@ quick_dialog_skip (QuickDialog * qd, int nskip)
     WRadio *r;
     int return_val;
 
-    const int input_colors[3] = {
-        INPUT_COLOR,
-        INPUT_UNCHANGED_COLOR,
-        INPUT_MARK_COLOR
-    };
-
     I18N (qd->title);
 
     if ((qd->xpos == -1) || (qd->ypos == -1))
@@ -415,7 +410,7 @@ quick_dialog_skip (QuickDialog * qd, int nskip)
             break;
 
         case quick_input:
-            in = input_new (ypos, xpos, (int *) input_colors,
+            in = input_new (ypos, xpos, input_get_default_colors(),
                             qw->u.input.len, qw->u.input.text, qw->u.input.histname,
                             INPUT_COMPLETE_DEFAULT);
             in->is_password = (qw->u.input.flags == 1);

@@ -99,17 +99,25 @@ void history_put (const char *input_name, GList *h);
  * function, as position of history dialog depends on widget's position */
 char *show_hist (GList **history, Widget *widget);
 
+typedef enum {
+    WINPUTC_MAIN,          /* color used */
+    WINPUTC_MARK,          /* color for marked text */
+    WINPUTC_UNCHANGED,     /* color for inactive text (Is first keystroke) */
+    WINPUTC_HISTORY,       /* color for history list */
+    WINPUTC_COUNT_COLORS   /* count of used colors */
+} input_colors_enum_t;
+
+typedef int input_colors_t[WINPUTC_COUNT_COLORS];
+
 typedef struct {
     Widget widget;
-    int  point;		   /* cursor position in the input line in characters */
+    int  point;			/* cursor position in the input line in characters */
     int  mark;			/* The mark position in characters */
     gboolean highlight;         /* There is a selected block */
     int  term_first_shown;	/* column of the first shown character */
     size_t current_max_size;	/* Maximum length of input line (bytes) */
     int  field_width;		/* width of the editing field */
-    int  color;			/* color used */
-    int  mark_color;		/* color for marked text */
-    int  unchanged_color;	/* color for inactive text (Is first keystroke) */
+    input_colors_t color;
     gboolean first;		/* Is first keystroke? */
     int  disable_update;	/* Do we want to skip updates? */
     int  is_password;		/* Is this a password input line? */
@@ -208,6 +216,7 @@ WButtonBar *buttonbar_new (gboolean visible);
 WGroupbox *groupbox_new (int y, int x, int height, int width, const char *title);
 
 /* Input lines */
+int *input_get_default_colors (void);
 void winput_set_origin (WInput *i, int x, int field_width);
 cb_ret_t handle_char (WInput *in, int c_code);
 int is_in_input_map (WInput *in, int c_code);
