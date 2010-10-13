@@ -1038,8 +1038,9 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
 #define PREFIX \
     char buf[BUF_LARGE]; \
     const char *crpath; \
-    char *rpath, *mpath = g_strdup (path); \
+    char *rpath, *mpath; \
     struct vfs_s_super *super; \
+    mpath = g_strdup (path); \
     crpath = vfs_s_get_path_mangle (me, mpath, &super, 0); \
     if (crpath == NULL) \
     { \
@@ -1057,13 +1058,16 @@ fish_rename (struct vfs_class *me, const char *path1, const char *path2)
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2, *mpath1, *mpath2;
     struct vfs_s_super *super, *super2;
-    crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super, 0);
+
+    mpath1 = g_strdup (path1);
+    crpath1 = vfs_s_get_path_mangle (me, mpath1, &super, 0);
     if (crpath1 == NULL)
     {
         g_free (mpath1);
         return -1;
     }
-    crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0);
+    mpath2 = g_strdup (path2);
+    crpath2 = vfs_s_get_path_mangle (me, mpath2, &super2, 0);
     if (crpath2 == NULL)
     {
         g_free (mpath1);
