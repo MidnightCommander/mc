@@ -802,7 +802,7 @@ change_screen_size (void)
 static int ok_to_refresh = 1;
 
 void
-use_dash (int flag)
+use_dash (gboolean flag)
 {
     if (flag)
         ok_to_refresh++;
