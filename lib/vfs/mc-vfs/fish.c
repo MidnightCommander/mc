@@ -6,7 +6,7 @@
    
    Written by: 1998 Pavel Machek
    Spaces fix: 2000 Michal Svec
-               2010 Andrew Borobin
+               2010 Andrew Borodin
                2010 Ilia Maslakov
 
    Derived from ftpfs.c.
@@ -250,8 +250,10 @@ fish_pipeopen(struct vfs_s_super *super, const char *path, const char *argv[])
     if ((pipe(fileset1)<0) || (pipe(fileset2)<0)) 
 	vfs_die("Cannot pipe(): %m.");
     
-    if ((res = fork())) {
-        if (res<0) vfs_die("Cannot fork(): %m.");
+    res = fork();
+    if (res != 0) {
+        if (res < 0)
+	    vfs_die("Cannot fork(): %m.");
 	/* We are the parent */
 	close(fileset1[0]);
 	SUP.sockw = fileset1[1];
@@ -794,7 +796,8 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 	}
 	if (n == 0)
 	    break;
-    	if ((t = write (SUP.sockw, buffer, n)) != n) {
+	t = write (SUP.sockw, buffer, n);
+	if (t != n) {
 	    if (t == -1) {
 		me->verrno = errno;
 	    } else { 
@@ -871,12 +874,13 @@ fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
     print_vfs_message( _("Aborting transfer...") );
     do {
 	n = MIN(8192, fh->u.fish.total - fh->u.fish.got);
-	if (n) {
-	    if ((n = read(SUP.sockr, buffer, n)) < 0)
+	if (n != 0) {
+	    n = read(SUP.sockr, buffer, n);
+	    if (n < 0)
 	        return;
 	    fh->u.fish.got += n;
 	}
-    } while (n);
+    } while (n != 0);
 
     if (fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
         print_vfs_message( _("Error reported after abort.") );
@@ -901,7 +905,7 @@ fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t l
 
     if (n>0) fh->u.fish.got += n;
     if (n<0) fish_linear_abort(me, fh);
-    if ((!n) && ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)))
+    if ((n == 0) && ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)))
         ERRNOR (E_REMOTE, -1);
     ERRNOR (errno, n);
 }
@@ -958,9 +962,11 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
 #define PREFIX \
     char buf[BUF_LARGE]; \
     const char *crpath; \
-    char *rpath, *mpath = g_strdup (path); \
+    char *rpath, *mpath; \
     struct vfs_s_super *super; \
-    if (!(crpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) { \
+    mpath = g_strdup (path); \
+    crpath = vfs_s_get_path_mangle (me, mpath, &super, 0); \
+    if (crpath == NULL) { \
 	g_free (mpath); \
 	return -1; \
     } \
@@ -975,13 +981,16 @@ fish_rename (struct vfs_class *me, const char *path1, const char *path2)
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2, *mpath1, *mpath2;
     struct vfs_s_super *super, *super2;
-    crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super, 0);
+
+    mpath1 = g_strdup (path1);
+    crpath1 = vfs_s_get_path_mangle (me, mpath1, &super, 0);
     if (crpath1 == NULL)
     {
         g_free (mpath1);
         return -1;
     }
-    crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0);
+    mpath2 = g_strdup (path2);
+    crpath2 = vfs_s_get_path_mangle (me, mpath2, &super2, 0);
     if (crpath2 == NULL)
     {
         g_free (mpath1);
