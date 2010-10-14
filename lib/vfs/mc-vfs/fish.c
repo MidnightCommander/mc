@@ -355,82 +355,109 @@ fish_getcwd (struct vfs_class *me, struct vfs_s_super *super)
     ERRNOR (EIO, NULL);
 }
 
+
+static void
+fish_open_archive_pipeopen (struct vfs_s_super *super)
+{
+    char gbuf[10];
+    const char *argv[10];       /* All of 10 is used now */
+    const char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
+    int i = 0;
+
+    argv[i++] = xsh;
+    if (SUP.flags == FISH_FLAG_COMPRESSED)
+        argv[i++] = "-C";
+
+    if (SUP.flags > FISH_FLAG_RSH)
+    {
+        argv[i++] = "-p";
+        g_snprintf (gbuf, sizeof (gbuf), "%d", SUP.flags);
+        argv[i++] = gbuf;
+    }
+
+    /*
+     * Add the user name to the ssh command line only if it was explicitly
+     * set in vfs URL. rsh/ssh will get current user by default
+     * plus we can set convenient overrides in  ~/.ssh/config (explicit -l
+     * option breaks it for some)
+     */
+
+    if (SUP.user)
+    {
+        argv[i++] = "-l";
+        argv[i++] = SUP.user;
+    }
+    else
+    {
+        /* The rest of the code assumes it to be a valid username */
+        SUP.user = vfs_get_local_username ();
+    }
+
+    argv[i++] = SUP.host;
+    argv[i++] = "echo FISH:; /bin/sh";
+    argv[i++] = NULL;
+
+    fish_pipeopen (super, xsh, argv);
+}
+
+static gboolean
+fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
+{
+    char answer[2048];
+
+    print_vfs_message (_("fish: Waiting for initial line..."));
+
+    if (!vfs_s_get_line (me, SUP.sockr, answer, sizeof (answer), ':'))
+        return FALSE;
+
+    print_vfs_message ("%s", answer);
+    if (strstr (answer, "assword"))
+    {
+        /* Currently, this does not work. ssh reads passwords from
+           /dev/tty, not from stdin :-(. */
+
+        message (D_ERROR, MSG_ERROR,
+                 _("Sorry, we cannot do password authenticated connections for now."));
+        return FALSE;
+#if 0
+        if (!SUP.password)
+        {
+            char *p, *op;
+            p = g_strdup_printf (_("fish: Password is required for %s"), SUP.user);
+            op = vfs_get_password (p);
+            g_free (p);
+            if (op == NULL)
+                return FALSE;
+            SUP.password = op;
+        }
+        print_vfs_message (_("fish: Sending password..."));
+        {
+            size_t str_len;
+            str_len = strlen (SUP.password);
+            if ((write (SUP.sockw, SUP.password, str_len) != (ssize_t) str_len)
+                || (write (SUP.sockw, "\n", 1) != 1))
+            {
+                return FALSE;
+            }
+        }
+#endif
+    }
+    return TRUE;
+}
+
 static int
 fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
-
     /* hide panels */
     pre_exec ();
+
+    /* open pipe */
+    fish_open_archive_pipeopen (super);
+
+    /* Start talk with ssh-server (password prompt, etc ) */
+    if (!fish_open_archive_talk (me, super))
     {
-        char gbuf[10];
-        const char *argv[10];   /* All of 10 is used now */
-        const char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
-        int i = 0;
-
-        argv[i++] = xsh;
-        if (SUP.flags == FISH_FLAG_COMPRESSED)
-            argv[i++] = "-C";
-
-        if (SUP.flags > FISH_FLAG_RSH)
-        {
-            argv[i++] = "-p";
-            g_snprintf (gbuf, sizeof (gbuf), "%d", SUP.flags);
-            argv[i++] = gbuf;
-        }
-
-        /*
-         * Add the user name to the ssh command line only if it was explicitly
-         * set in vfs URL. rsh/ssh will get current user by default
-         * plus we can set convenient overrides in  ~/.ssh/config (explicit -l
-         * option breaks it for some)
-         */
-
-        if (SUP.user)
-        {
-            argv[i++] = "-l";
-            argv[i++] = SUP.user;
-        }
-        else
-        {
-            /* The rest of the code assumes it to be a valid username */
-            SUP.user = vfs_get_local_username ();
-        }
-
-        argv[i++] = SUP.host;
-        argv[i++] = "echo FISH:; /bin/sh";
-        argv[i++] = NULL;
-
-        fish_pipeopen (super, xsh, argv);
-    }
-    {
-        char answer[2048];
-        print_vfs_message (_("fish: Waiting for initial line..."));
-        if (!vfs_s_get_line (me, SUP.sockr, answer, sizeof (answer), ':'))
-            ERRNOR (E_PROTO, -1);
-        print_vfs_message ("%s", answer);
-        if (strstr (answer, "assword"))
-        {
-
-            /* Currently, this does not work. ssh reads passwords from
-               /dev/tty, not from stdin :-(. */
-
-            message (D_ERROR, MSG_ERROR,
-                     _("Sorry, we cannot do password authenticated connections for now."));
-            ERRNOR (EPERM, -1);
-            if (!SUP.password)
-            {
-                char *p, *op;
-                p = g_strconcat (_(" fish: Password required for "), SUP.user, " ", (char *) NULL);
-                op = vfs_get_password (p);
-                g_free (p);
-                if (op == NULL)
-                    ERRNOR (EPERM, -1);
-                SUP.password = op;
-            }
-            print_vfs_message (_("fish: Sending password..."));
-            write (SUP.sockw, SUP.password, strlen (SUP.password));
-            write (SUP.sockw, "\n", 1);
-        }
+        ERRNOR (E_PROTO, -1);
     }
 
     print_vfs_message (_("fish: Sending initial line..."));
