@@ -300,25 +300,25 @@ fish_set_env (int flags)
     g_string_assign (tmp, "export ");
 
     if ((flags & FISH_HAVE_HEAD) != 0)
-       g_string_append (tmp, "FISH_HAVE_HEAD=1 ");
+        g_string_append (tmp, "FISH_HAVE_HEAD=1 ");
 
     if ((flags & FISH_HAVE_SED) != 0)
-       g_string_append (tmp, "FISH_HAVE_SED=1 ");
+        g_string_append (tmp, "FISH_HAVE_SED=1 ");
 
     if ((flags & FISH_HAVE_AWK) != 0)
-       g_string_append (tmp, "FISH_HAVE_AWK=1 ");
+        g_string_append (tmp, "FISH_HAVE_AWK=1 ");
 
     if ((flags & FISH_HAVE_PERL) != 0)
-       g_string_append (tmp, "FISH_HAVE_PERL=1 ");
+        g_string_append (tmp, "FISH_HAVE_PERL=1 ");
 
     if ((flags & FISH_HAVE_LSQ) != 0)
-       g_string_append (tmp, "FISH_HAVE_LSQ=1 ");
+        g_string_append (tmp, "FISH_HAVE_LSQ=1 ");
 
     if ((flags & FISH_HAVE_DATE_MDYT) != 0)
-       g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 ");
+        g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 ");
 
     if ((flags & FISH_HAVE_TAIL) != 0)
-       g_string_append (tmp, "FISH_HAVE_TAIL=1 ");
+        g_string_append (tmp, "FISH_HAVE_TAIL=1 ");
 
     return g_string_free (tmp, FALSE);
 }
@@ -480,8 +480,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command
         (me, super, WAIT_REPLY,
-         "export LANG=C LC_ALL=C LC_TIME=C\n"
-         "echo '### 200'\n") != COMPLETE)
+         "export LANG=C LC_ALL=C LC_TIME=C\n" "echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     print_vfs_message (_("fish: Getting host info..."));
@@ -533,7 +532,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     SUP.scr_mv = fish_load_script_from_file (host, FISH_MV_FILE, FISH_MV_DEF_CONTENT);
     SUP.scr_hardlink = fish_load_script_from_file (host, FISH_HARDLINK_FILE, FISH_HARDLINK_DEF_CONTENT);
     SUP.scr_get = fish_load_script_from_file (host, FISH_GET_FILE, FISH_GET_DEF_CONTENT);
-    SUP.scr_send = fish_load_script_from_file (host, FISH_SEND_FILE,FISH_SEND_DEF_CONTENT);
+    SUP.scr_send = fish_load_script_from_file (host, FISH_SEND_FILE, FISH_SEND_DEF_CONTENT);
     SUP.scr_append = fish_load_script_from_file (host, FISH_APPEND_FILE, FISH_APPEND_DEF_CONTENT);
     SUP.scr_info = fish_load_script_from_file (host, FISH_INFO_FILE, FISH_INFO_DEF_CONTENT);
     return fish_open_archive_int (me, super);
@@ -832,14 +831,16 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
     {
         shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%ju;\n",
                                       SUP.scr_append, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (uintmax_t) s.st_size);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
+                          (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
     else
     {
         shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%ju;\n",
                                       SUP.scr_send, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (uintmax_t) s.st_size);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
+                          (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
     if (n != PRELIM)
@@ -965,7 +966,7 @@ fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t l
 {
     struct vfs_s_super *super = FH_SUPER;
     ssize_t n = 0;
-    len = MIN ((size_t)(fh->u.fish.total - fh->u.fish.got), len);
+    len = MIN ((size_t) (fh->u.fish.total - fh->u.fish.got), len);
     tty_disable_interrupt_key ();
     while (len != 0 && ((n = read (SUP.sockr, buf, len)) < 0))
     {
@@ -1121,8 +1122,9 @@ fish_link (struct vfs_class *me, const char *path1, const char *path2)
     g_free (shell_commands);
     g_free (rpath1);
     g_free (rpath2);
-    return fish_send_command(me, super2, buf, OPT_FLUSH);
+    return fish_send_command (me, super2, buf, OPT_FLUSH);
 }
+
 
 static int
 fish_symlink (struct vfs_class *me, const char *setto, const char *path)
@@ -1159,7 +1161,6 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
 {
     gchar *shell_commands = NULL;
     PREFIX
-
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n",
                                   SUP.scr_chmod, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath, mode & 07777);
@@ -1189,8 +1190,8 @@ fish_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
         gchar *shell_commands = NULL;
 
         PREFIX
-
-        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
+        shell_commands = g_strconcat (SUP.scr_env,
+                                      "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
                                       SUP.scr_chown, (char *) NULL);
         g_snprintf (buf, sizeof (buf), shell_commands, rpath, sowner, sgroup);
         g_free (shell_commands);
@@ -1207,8 +1208,8 @@ fish_unlink (struct vfs_class *me, const char *path)
 {
     gchar *shell_commands = NULL;
     PREFIX
-
-    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_unlink, (char *) NULL);
+    shell_commands =
+        g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_unlink, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
     g_free (shell_commands);
     g_free (rpath);
@@ -1220,7 +1221,6 @@ fish_exists (struct vfs_class *me, const char *path)
 {
     gchar *shell_commands = NULL;
     PREFIX
-
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_exists, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
     g_free (shell_commands);
@@ -1236,7 +1236,8 @@ fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
     gchar *shell_commands = NULL;
     int ret_code;
 
-    PREFIX (void) mode;
+    PREFIX
+    (void) mode;
 
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_mkdir, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
@@ -1260,7 +1261,6 @@ fish_rmdir (struct vfs_class *me, const char *path)
 {
     gchar *shell_commands = NULL;
     PREFIX
-
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_rmdir, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
     g_free (shell_commands);
@@ -1342,7 +1342,6 @@ fish_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     flags &= ~O_EXCL;
     return vfs_s_open (me, file, flags, mode);
 }
-
 
 void
 init_fish (void)

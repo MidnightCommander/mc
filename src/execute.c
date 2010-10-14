@@ -273,7 +273,7 @@ toggle_panels (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
     {
-        new_dir_p = vfs_current_is_local () ? &new_dir : NULL;
+        new_dir_p = vfs_current_is_local ()? &new_dir : NULL;
         invoke_subshell (NULL, VISIBLY, new_dir_p);
     }
     else
