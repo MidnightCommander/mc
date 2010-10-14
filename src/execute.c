@@ -34,7 +34,7 @@
 #include "main.h"
 #include "consaver/cons.saver.h"
 #include "subshell.h"
-#include "layout.h"
+#include "layout.h"             /* use_dash() */
 #include "dialog.h"
 #include "wtools.h"
 #include "panel.h"		/* update_panels() */

@@ -6,6 +6,7 @@
 #ifndef MC_LAYOUT_H
 #define MC_LAYOUT_H
 
+#include "lib/global.h"
 #include "panel.h"
 #include "widget.h"
 
@@ -32,6 +33,10 @@ Widget *restore_into_right_dir_panel (int idx, Widget *from_widget);
 const char *get_panel_dir_for (const WPanel *widget);
 
 void set_hintbar (const char *str);
+
+/* Rotating dash routines */
+void use_dash (gboolean flag);  /* Disable/Enable rotate_dash routines */
+void rotate_dash (void);
 
 /* Clear screen */
 void clr_scr (void);

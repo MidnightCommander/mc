@@ -164,10 +164,6 @@ char *get_current_wd (char *buffer, size_t size);
 int my_mkdir (const char *s, mode_t mode);
 int my_rmdir (const char *s);
 
-/* Rotating dash routines */
-void use_dash (int flag); /* Disable/Enable rotate_dash routines */
-void rotate_dash (void);
-
 /* Creating temporary files safely */
 const char *mc_tmpdir (void);
 int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
