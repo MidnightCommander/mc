@@ -566,6 +566,7 @@ lib/strutil/Makefile
 lib/tty/Makefile
 lib/vfs/Makefile
 lib/vfs/mc-vfs/Makefile
+lib/vfs/mc-vfs/fish/Makefile
 lib/vfs/mc-vfs/extfs/Makefile
 lib/vfs/mc-vfs/extfs/a+
 lib/vfs/mc-vfs/extfs/apt+
