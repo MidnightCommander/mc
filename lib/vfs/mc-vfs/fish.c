@@ -405,19 +405,18 @@ fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
 {
     char answer[2048];
 
-    print_vfs_message (_("fish: Waiting for initial line..."));
+    printf ("\n%s\n", _("fish: Waiting for initial line..."));
 
     if (!vfs_s_get_line (me, SUP.sockr, answer, sizeof (answer), ':'))
         return FALSE;
 
-    print_vfs_message ("%s", answer);
     if (strstr (answer, "assword"))
     {
         /* Currently, this does not work. ssh reads passwords from
            /dev/tty, not from stdin :-(. */
 
-        message (D_ERROR, MSG_ERROR,
-                 _("Sorry, we cannot do password authenticated connections for now."));
+        printf ("\n%s\n", _("Sorry, we cannot do password authenticated connections for now."));
+
         return FALSE;
 #if 0
         if (!SUP.password)
@@ -430,7 +429,7 @@ fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
                 return FALSE;
             SUP.password = op;
         }
-        print_vfs_message (_("fish: Sending password..."));
+        printf ("\n%s\n", _("fish: Sending password..."));
         {
             size_t str_len;
             str_len = strlen (SUP.password);
@@ -448,6 +447,7 @@ fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
 static int
 fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
+    gboolean ftalk;
     /* hide panels */
     pre_exec ();
 
@@ -455,19 +455,19 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     fish_open_archive_pipeopen (super);
 
     /* Start talk with ssh-server (password prompt, etc ) */
-    if (!fish_open_archive_talk (me, super))
-    {
+    ftalk = fish_open_archive_talk (me, super);
+
+    /* show panels */
+    post_exec ();
+
+    if (!ftalk)
         ERRNOR (E_PROTO, -1);
-    }
 
     print_vfs_message (_("fish: Sending initial line..."));
     /*
      * Run `start_fish_server'. If it doesn't exist - no problem,
      * we'll talk directly to the shell.
      */
-
-    /* show panels */
-    post_exec ();
 
     if (fish_command
         (me, super, WAIT_REPLY,
