@@ -120,13 +120,13 @@ struct vfs_s_inode {
     char *linkname;		/* Symlink's contents */
     char *localname;		/* Filename of local file, if we have one */
     struct timeval timestamp;	/* Subclass specific */
-    long data_offset;		/* Subclass specific */
+    off_t data_offset;		/* Subclass specific */
 };
 
 /* Data associated with an open file */
 struct vfs_s_fh {
     struct vfs_s_inode *ino;
-    long pos;			/* This is for module's use */
+    off_t pos;			/* This is for module's use */
     int handle;			/* This is for module's use, but if != -1, will be mc_close()d */
     int changed;		/* Did this file change? */
     int linear;			/* Is that file open with O_LINEAR? */

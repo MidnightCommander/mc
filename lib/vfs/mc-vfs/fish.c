@@ -53,6 +53,7 @@
 #include <sys/time.h>           /* gettimeofday() */
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>             /* uintmax_t */
 
 #include "lib/global.h"
 #include "lib/fs.h"
@@ -792,14 +793,14 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
     {
         shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%ju;\n",
                                       SUP.scr_append, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, s.st_size);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
     else
     {
         shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%ju;\n",
                                       SUP.scr_send, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, s.st_size);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
     if (n != PRELIM)
@@ -834,8 +835,8 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
         }
         tty_disable_interrupt_key ();
         total += n;
-        print_vfs_message (_("fish: storing %s %d (%lu)"),
-                           was_error ? _("zeros") : _("file"), total, (unsigned long) s.st_size);
+        print_vfs_message (_("fish: storing %s %d (%ju)"),
+                           was_error ? _("zeros") : _("file"), total, (uintmax_t) s.st_size);
     }
     close (h);
     g_free (quoted_name);
@@ -873,7 +874,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_START_OFFSET=%ju;\n",
                                   SUP.scr_get, (char *) NULL);
-    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name, offset);
+    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name, (uintmax_t) offset);
     g_free (shell_commands);
     g_free (quoted_name);
     if (offset != PRELIM)
