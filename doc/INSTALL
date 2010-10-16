@@ -173,19 +173,14 @@ VFS options:
      Support for sfs
 
 `--enable-vfs-undelfs'
+     (off by default)
      Support for ext2 undelete filesystem.
      On systems that use the ext2 or ext3 file system and have the
      libext2fs library available, this option adds support for
      recovering deleted files (the undel virtual file system).
 
-`--disable-netcode'
-     This option disables support for networked virtual filesystems.
-     It's primarily used by developers to make sure that the code would
-     compile and run on operating systems that lack POSIX compatible
-     network support.  But you can use it is you know that you won't be
-     accessing remote filesystems from GNU Midnight Commander.
-
-`--with-samba'
+`--with-vfs-smb'
+     (off by default)
      This option enables remote VFS over the SMB protocol.  A stripped
      down version of samba distributed with the sources is compiled and
      linked with the mc executable.  It is recommended that you install
@@ -206,11 +201,8 @@ ncurses):
 `--with-screen={slang|ncurses}'
      Choose the library used to manage interaction with the terminal.
      `slang' means S-Lang library already installed on the system,
-     `mcslang' means S-Lang library included with the sources of
-     GNU Midnight Commander, `ncurses' means ncurses library already
-     installed on the system.  The installed S-Lang library is used
-     by default if found, otherwise the included S-Lang library is
-     used.
+     `ncurses' means ncurses library already installed on the system.
+     The S-Lang library is used by default if found.
 
 `--with-slang-includes=[DIR]'
      Set path to SLANG includes [default=/usr/include]; make sense
@@ -219,11 +211,6 @@ ncurses):
 `--with-slang-libs=[DIR]'
      Set path to SLANG library [default=/usr/lib]; mke sense only
      if --with-screen=slang is used.
-
-`--with-termcap'
-     If the included S-Lang library is used, this option forces it to
-     use the termcap database, as opposed to the default terminfo
-     database.
 
 `--with-ncurses-includes=[DIR]'
      Set path to ncurses includes [default=/usr/include]; make
