@@ -48,7 +48,7 @@ mc_cflags=""
 
 mc_ldflags=""
 
-mc_tests="plain glib12 charset no_charset vfs no_vfs mcfs no_mcfs samba "\
+mc_tests="plain charset no_charset vfs no_vfs mcfs no_mcfs samba "\
 "no_samba ext2undel no_ext2undel slang ncurses maintainer "\
 "no_maintainer i18n no_i18n no_features all_features"
 
@@ -151,12 +151,12 @@ renice ${mc_nice_value} $$ 1>/dev/null 2>&1 || true
 configure_args_enable_all="--enable-largefile --enable-nls "\
 "--enable-netcode --enable-background --enable-charset "\
 "--with-mmap --with-included-gettext --with-x "\
-"--with-vfs --with-mcfs --with-samba --with-ext2undel "\
+"--enable-vfs --enable-vfs-mcfs --with-samba --enable-vfs-undelfs "\
 "--with-gpm-mouse --with-subshell --with-edit"
 configure_args_disable_all="--disable-largefile --disable-nls "\
 "--disable-netcode --disable-background --disable-charset "\
 "--without-mmap --without-included-gettext --without-x "\
-"--without-vfs --without-mcfs --without-samba --without-ext2undel "\
+"--disable-vfs --disable-vfs-mcfs --without-samba --disable-vfs-undelfs "\
 "--without-gpm-mouse --without-subshell --without-edit"
 
 errors=0
@@ -359,12 +359,6 @@ test_plain() {
 	confbuild
 }
 
-test_glib12() {
-	testname="glib12"
-	configure_args="--with-glib12"
-	confbuild
-}
-
 test_charset() {
 	testname="charset"
 	configure_args="--enable-charset"
@@ -391,25 +385,25 @@ test_no_X11() {
 
 test_vfs() {
 	testname="vfs"
-	configure_args="--with-vfs"
+	configure_args="--enable-vfs"
 	confbuild
 }
 
 test_no_vfs() {
 	testname="no_vfs"
-	configure_args="--without-vfs"
+	configure_args="--disable-vfs"
 	confbuild
 }
 
 test_mcfs() {
 	testname="mcfs"
-	configure_args="--with-mcfs"
+	configure_args="--enable-vfs-mcfs"
 	confbuild
 }
 
 test_no_mcfs() {
 	testname="no_mcfs"
-	configure_args="--without-mcfs"
+	configure_args="--disable-vfs-mcfs"
 	confbuild
 }
 
@@ -427,13 +421,13 @@ test_no_samba() {
 
 test_ext2undel() {
 	testname="ext2undel"
-	configure_args="--with-ext2undel"
+	configure_args="--enable-vfs-undelfs"
 	confbuild
 }
 
 test_no_ext2undel() {
 	testname="no_ext2undel"
-	configure_args="--without-ext2undel"
+	configure_args="--disable-vfs-undelfs"
 	confbuild
 }
 
