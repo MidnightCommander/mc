@@ -48,7 +48,7 @@ Version 4.7.4
     * MCEdit version number not centered in about dialog (#2311)
     * Typo in the code and the man section describing X clipboard integration (#30)
     * Viewer doesn't show non-ASCII chars in hex mode (#2263)
-    * Comple warnings in diff viewer (#2277)
+    * Compilation warnings in diff viewer (#2277)
     * 2GB file size limit in fish (#123)
     * Meta-fixes for manual pages (#2237, #2253)
 
@@ -103,7 +103,7 @@ Version 4.7.3
     * Segfault in standalone editor and viewer (#2178)
     * Broken codeset autodetection in editor and viewer (#1838)
     * Viewer segfaults trying open a compressed man page file (#2236)
-    * Edit crashes while opening some incorrect files (#2183)
+    * Editor crashes while opening some incorrect files (#2183)
     * Editor hangup if editor_tab_spacing equals to 0 (#2196)
     * Editor shows dots instead of letters if source_codepage is set to "No translation" (#2248)
     * Editor goes to endless loop when trying to replace the \n regexp with any substring (#2231)
@@ -192,7 +192,7 @@ Version 4.7.1
     * New file type bindings:
           o viewing .lyx with lyxcat, opening with lyx (#1693)
     * Added shortcut (Meta-,) to toggle panels split (#1991)
-    * Capability to remove history items. !WListbox widget was fully reimplemented (#1445)
+    * Capability to remove history items. WListbox widget was fully reimplemented (#1445)
     * Autodetect codepages of edited/viewed files with enca program (#1838)
     * Custom/locale-based date format (#1767)
     * New quick search behavior, allow wildcard characters - '*' and '?'(#2022)
