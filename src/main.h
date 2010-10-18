@@ -52,7 +52,6 @@ extern int full_eight_bits;
 
 extern int utf8_display;
 
-extern int confirm_view_dir;
 extern int fast_refresh;
 extern int navigate_with_arrows;
 extern int drop_menus;
@@ -65,6 +64,8 @@ extern int confirm_directory_hotlist_delete;
 extern int confirm_execute;
 extern int confirm_exit;
 extern int confirm_overwrite;
+extern int confirm_history_cleanup;
+extern int confirm_view_dir;
 extern int boot_current_is_left;
 extern int use_file_to_check_type;
 extern int vfs_use_limit;

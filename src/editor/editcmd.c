@@ -51,11 +51,12 @@
 #include "lib/mcconfig.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "src/history.h"
 #include "src/widget.h"         /* listbox_new() */
 #include "src/layout.h"         /* clr_scr() */
-#include "src/main.h"           /* mc_home */
+#include "src/main.h"           /* mc_home source_codepage */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
 #include "src/wtools.h"         /* message() */
@@ -63,10 +64,7 @@
 #include "src/selcodepage.h"
 #include "src/cmddef.h"
 
-#include "lib/vfs/mc-vfs/vfs.h"
-
 #include "src/editor/edit-impl.h"
-#include "src/editor/edit.h"
 #include "src/editor/editlock.h"
 #include "src/editor/edit-widget.h"
 #include "src/editor/editcmd_dialogs.h"
