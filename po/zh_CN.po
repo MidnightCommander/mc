@@ -1,7 +1,7 @@
 # MC Chinese (zh_CN) translation
 # Wang Jian <lark@linux.net.cn>, 2001.
 # Jake Li <gnozil@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
@@ -233,13 +233,11 @@ msgstr "F23"
 msgid "Function key 24"
 msgstr "F24"
 
-#, fuzzy
 msgid "A1 key"
-msgstr "末尾键"
+msgstr "A1键"
 
-#, fuzzy
 msgid "C1 key"
-msgstr "末尾键"
+msgstr "C1键"
 
 msgid "Plus"
 msgstr "加"
@@ -453,13 +451,13 @@ msgstr "%s 的目录缓存已过期"
 msgid "Starting linear transfer..."
 msgstr "正在开始线性传输..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
-msgstr "%s：%s：%s %3d%% (传输了 %lu 字节)"
+msgstr "%s：%s：%s %3d%% (传输了 %ju 字节)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s: %s %ju bytes transferred"
-msgstr "%s：%s：%s 传输了 %lu 字节"
+msgstr "%s：%s：%s 传输了 %ju 字节"
 
 msgid "Getting file"
 msgstr "正在获取文件"
@@ -531,9 +529,9 @@ msgstr "fish：保存 %s：正在发送命令..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish：本地读取失败，正在发送零"
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%ju)"
-msgstr "fish：正在保存 %s %d (%lu)"
+msgstr "fish：正在保存 %s %d (%ju)"
 
 msgid "zeros"
 msgstr "零"
@@ -649,9 +647,9 @@ msgstr "(先改变目录)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs：失败；没有后备"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: storing file %ju (%ju)"
-msgstr "ftpfs：正在保存文件 %lu (%lu)"
+msgstr "ftpfs：正在保存文件 %ju (%ju)"
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
@@ -1074,14 +1072,14 @@ msgstr "排序"
 msgid "Confirmation"
 msgstr "确认"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
 
-#, fuzzy
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "Confirmation|删除目录活动表(&D)"
+msgstr "Confirmation|删除目录活动表(&R)"
 
 msgid "Confirmation|E&xit"
 msgstr "Confirmation|退出(&X)"
@@ -2282,26 +2280,16 @@ msgid " %s%s file error"
 msgstr " %s%s文件错误 "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
-"Commander软件包。"
+msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
 
 #, c-format
 msgid "~/%s file error"
 msgstr "~/%s文件错误"
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
-"文件的样例。"
+msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
