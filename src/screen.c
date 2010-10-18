@@ -3436,9 +3436,6 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
         if (!is_active)
             change_panel ();
 
-        if (event->y > lines)
-            return MOU_NORMAL;
-
         if (panel->top_file + event->y > panel->count)
             my_index = panel->count - 1;
         else
