@@ -3519,7 +3519,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_load_cmd (edit, EDIT_FILE_SYNTAX);
         break;
     case CK_Choose_Syntax:
-        edit_syntax_dialog (edit, edit->syntax_type);
+        edit_syntax_dialog (edit);
         break;
 
     case CK_Load_Menu_File:
