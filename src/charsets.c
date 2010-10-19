@@ -36,9 +36,7 @@
 #include "charsets.h"
 #include "main.h"
 
-int n_codepages = 0;
-
-struct codepage_desc *codepages;
+GPtrArray *codepages = NULL;
 
 unsigned char conv_displ[256];
 unsigned char conv_input[256];
@@ -46,98 +44,144 @@ unsigned char conv_input[256];
 const char *cp_display = NULL;
 const char *cp_source = NULL;
 
-
-int
-load_codepages_list (void)
+static codepage_desc *
+new_codepage_desc (const char *id, const char *name)
 {
-    int result = -1;
+    codepage_desc *desc;
+
+    desc = g_new (codepage_desc, 1);
+    desc->id = g_strdup (id);
+    desc->name = g_strdup (name);
+
+    return desc;
+}
+
+static void
+free_codepage_desc (gpointer data, gpointer user_data)
+{
+    codepage_desc *desc = (codepage_desc *) data;
+    (void) user_data;
+
+    g_free (desc->id);
+    g_free (desc->name);
+    g_free (desc);
+}
+
+/* returns display codepage */
+static void
+load_codepages_list_from_file (GPtrArray **list, const char *fname)
+{
     FILE *f;
-    char *fname;
+    guint i;
     char buf[BUF_MEDIUM];
     char *default_codepage = NULL;
 
-    fname = concat_dir_and_file (mc_home, CHARSETS_INDEX);
     f = fopen (fname, "r");
-    if (f == NULL) {
-	fprintf (stderr, _("Warning: file %s not found\n"), fname);
-	g_free (fname);
+    if (f == NULL)
+        return;
 
-	fname = concat_dir_and_file (mc_home_alt, CHARSETS_INDEX);
-	f = fopen (fname, "r");
-	if (f == NULL) {
-	    fprintf (stderr, _("Warning: file %s not found\n"), fname);
-	    g_free (fname);
+    for (i = 0; fgets (buf, sizeof buf, f) != NULL; )
+    {
+        /* split string into id and cpname */
+        char *p = buf;
+        size_t buflen = strlen (buf);
 
-	    /* file is not found, add defaullt codepage */
-	    n_codepages = 1;
-	    codepages = g_new0 (struct codepage_desc, n_codepages + 1);
-	    codepages[0].id = g_strdup ("ASCII");
-	    codepages[0].name = g_strdup (_("7-bit ASCII"));
-	    return n_codepages;
-	}
+        if (*p == '\n' || *p == '\0' || *p == '#')
+            continue;
+
+        if (buflen > 0 && buf[buflen - 1] == '\n')
+            buf[buflen - 1] = '\0';
+        while (*p != '\t' && *p != ' ' && *p != '\0')
+            ++p;
+        if (*p == '\0')
+            goto fail;
+
+        *p++ = '\0';
+        g_strstrip (p);
+        if (*p == '\0')
+            goto fail;
+
+        if (strcmp (buf, "default") == 0)
+            default_codepage = g_strdup (p);
+        else
+        {
+            const char *id = buf;
+
+            if (*list == NULL)
+            {
+                *list = g_ptr_array_sized_new (16);
+                g_ptr_array_add (*list, new_codepage_desc (id, p));
+            }
+            else
+            {
+                guint i;
+                codepage_desc *desc;
+
+                /* whether id is already present in list */
+                /* if yes, overwrite description */
+                for (i = 0; i < (*list)->len; i++)
+                {
+                    codepage_desc *desc;
+
+                    desc = (codepage_desc *) g_ptr_array_index (*list, i);
+
+                    if (strcmp (id, desc->id) == 0)
+                    {
+                        /* found */
+                        g_free (desc->name);
+                        desc->name = g_strdup (p);
+                        break;
+                    }
+                }
+
+                /* not found */
+                if (i == (*list)->len)
+                    g_ptr_array_add (*list, new_codepage_desc (id, p));
+            }
+        }
     }
-    g_free (fname);
 
-    for (n_codepages = 0; fgets (buf, sizeof (buf), f);)
-	if (buf[0] != '\n' && buf[0] != '\0' && buf[0] != '#')
-	    ++n_codepages;
-    rewind (f);
-
-    codepages = g_new0 (struct codepage_desc, n_codepages + 1);
-
-    for (n_codepages = 0; fgets (buf, sizeof buf, f);) {
-	/* split string into id and cpname */
-	char *p = buf;
-	size_t buflen = strlen (buf);
-
-	if (*p == '\n' || *p == '\0' || *p == '#')
-	    continue;
-
-	if (buflen > 0 && buf[buflen - 1] == '\n')
-	    buf[buflen - 1] = '\0';
-	while (*p != '\t' && *p != ' ' && *p != '\0')
-	    ++p;
-	if (*p == '\0')
-	    goto fail;
-
-	*p++ = '\0';
-	g_strstrip (p);
-	if (*p == '\0')
-	    goto fail;
-
-	if (strcmp (buf, "default") == 0)
-	    default_codepage = g_strdup (p);
-	else {
-	    codepages[n_codepages].id = g_strdup (buf);
-	    codepages[n_codepages].name = g_strdup (p);
-	    ++n_codepages;
-	}
+    if (default_codepage != NULL)
+    {
+        display_codepage = get_codepage_index (default_codepage);
+        g_free (default_codepage);
     }
 
-    if (default_codepage != NULL) {
-	display_codepage = get_codepage_index (default_codepage);
-	g_free (default_codepage);
-    }
-
-    result = n_codepages;
   fail:
     fclose (f);
-    return result;
+}
+
+void
+load_codepages_list (void)
+{
+    int result = -1;
+    char *fname;
+
+    /* 1: try load /usr/share/mc/mc.charsets */
+    fname = g_build_filename (mc_home_alt, CHARSETS_LIST, (char *) NULL);
+    load_codepages_list_from_file (&codepages, fname);
+    g_free (fname);
+
+    /* 2: try load /etc/mc/mc.charsets */
+    fname = g_build_filename (mc_home, CHARSETS_LIST, (char *) NULL);
+    load_codepages_list_from_file (&codepages, fname);
+    g_free (fname);
+
+    if (codepages == NULL)
+    {
+        /* files are not found, add defaullt codepage */
+        fprintf (stderr, "%s\n", _("Warning: cannot load codepages list"));
+
+        codepages = g_ptr_array_new ();
+        g_ptr_array_add (codepages, new_codepage_desc ("ASCII", _("7-bit ASCII")));
+    }
 }
 
 void
 free_codepages_list (void)
 {
-    if (n_codepages > 0) {
-	int i;
-	for (i = 0; i < n_codepages; i++) {
-	    g_free (codepages[i].id);
-	    g_free (codepages[i].name);
-	}
-	n_codepages = 0;
-	g_free (codepages);
-	codepages = 0;
-    }
+    g_ptr_array_foreach (codepages, free_codepage_desc, NULL);
+    g_ptr_array_free (codepages, TRUE);
 }
 
 #define OTHER_8BIT "Other_8_bit"
@@ -145,7 +189,7 @@ free_codepages_list (void)
 const char *
 get_codepage_id (const int n)
 {
-    return (n < 0) ? OTHER_8BIT : codepages[n].id;
+    return (n < 0) ? OTHER_8BIT : ((codepage_desc *) g_ptr_array_index (codepages, n))->id;
 }
 
 int
@@ -156,8 +200,8 @@ get_codepage_index (const char *id)
 	return -1;
     if (codepages == NULL)
 	return -1;
-    for (i = 0; i < n_codepages; i++)
-	if (strcmp (id, codepages[i].id) == 0)
+    for (i = 0; i < codepages->len; i++)
+	if (strcmp (id, ((codepage_desc *) g_ptr_array_index (codepages, i))->id) == 0)
 	    return i;
     return -1;
 }
@@ -170,11 +214,13 @@ gboolean
 is_supported_encoding (const char *encoding)
 {
     gboolean result = FALSE;
-    size_t t;
+    guint t;
 
-    for (t = 0; t < (size_t) n_codepages; t++)
-        result |= (g_ascii_strncasecmp (encoding, codepages[t].id,
-                                        strlen (codepages[t].id)) == 0);
+    for (t = 0; t < codepages->len; t++)
+    {
+        const char *id = ((codepage_desc *) g_ptr_array_index (codepages, t))->id;
+        result |= (g_ascii_strncasecmp (encoding, id, strlen (id)) == 0);
+    }
 
     return result;
 }
@@ -223,8 +269,8 @@ init_translation_table (int cpsource, int cpdisplay)
 	conv_displ[i] = i;
 	conv_input[i] = i;
     }
-    cp_source = (char *) codepages[cpsource].id;
-    cp_display = (char *) codepages[cpdisplay].id;
+    cp_source = ((codepage_desc *) g_ptr_array_index (codepages, cpsource))->id;
+    cp_display = ((codepage_desc *) g_ptr_array_index (codepages, cpdisplay))->id;
 
     /* display <- inpit table */
 

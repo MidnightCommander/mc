@@ -1008,11 +1008,11 @@ edit_load_syntax_file (WEdit * edit)
                             _("&User"), _("&System Wide"));
     }
 
-    extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+    extdir = g_build_filename (mc_home, "syntax", "Syntax", (char *) NULL);
     if (!exist_file (extdir))
     {
         g_free (extdir);
-        extdir = concat_dir_and_file (mc_home_alt, "syntax" PATH_SEP_STR "Syntax");
+        extdir = g_build_filename (mc_home_alt, "syntax", "Syntax", (char *) NULL);
     }
 
     if (dir == 0)

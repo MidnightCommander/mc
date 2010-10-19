@@ -1183,26 +1183,25 @@ get_random_hint (int force)
         return g_strdup ("");
     last_sec = tv.tv_sec;
 
-    data = load_mc_home_file (mc_home, mc_home_alt, MC_HINT, NULL);
-    if (!data)
-        return 0;
+    data = load_mc_home_file (mc_home_alt, MC_HINT, NULL);
+    if (data == NULL)
+        return NULL;
 
     /* get a random entry */
     srand (tv.tv_sec);
     len = strlen (data);
     start = rand () % len;
 
-    for (; start; start--)
-    {
+    for (; start != 0; start--)
         if (data[start] == '\n')
         {
             start++;
             break;
         }
-    }
-    eol = strchr (&data[start], '\n');
-    if (eol)
-        *eol = 0;
+
+    eol = strchr (data + start, '\n');
+    if (eol != NULL)
+        *eol = '\0';
 
     /* hint files are stored in utf-8 */
     /* try convert hint file from utf-8 to terminal encoding */
@@ -1211,9 +1210,7 @@ get_random_hint (int force)
     {
         buffer = g_string_new ("");
         if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE)
-        {
             result = g_strdup (buffer->str);
-        }
         g_string_free (buffer, TRUE);
         str_close_conv (conv);
     }

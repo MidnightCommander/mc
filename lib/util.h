@@ -100,8 +100,7 @@ char *diff_two_paths (const char *first, const char *second);
 const char *x_basename (const char *fname);
 
 char *load_file (const char *filename);
-char *load_mc_home_file (const char *, const char *, const char *filename,
-                         char **allocated_filename);
+char *load_mc_home_file (const char *from, const char *filename, char **allocated_filename);
 
 /* uid/gid managing */
 void init_groups (void);

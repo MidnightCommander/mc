@@ -733,8 +733,8 @@ void
 tree_store_end_check (void)
 {
     tree_entry *current, *old;
-    int len;
-    GList *the_queue, *l;
+    size_t len;
+    GList *the_queue;
 
     if (!ts.loaded)
         return;
@@ -762,11 +762,7 @@ tree_store_end_check (void)
     g_free (ts.check_name);
     ts.check_name = NULL;
 
-    for (l = the_queue; l; l = l->next)
-    {
-        g_free (l->data);
-    }
-
+    g_list_foreach (the_queue, (GFunc) g_free, NULL);
     g_list_free (the_queue);
 }
 
@@ -782,41 +778,38 @@ process_special_dirs (GList ** special_dirs, char *file)
         return;
 
     start_buff = buffers = mc_config_get_string_list (cfg, "Special dirs", "list", &buffers_len);
-    if (buffers == NULL)
+    if (buffers != NULL)
     {
-        mc_config_deinit (cfg);
-        return;
+        while (*buffers != NULL)
+        {
+            *special_dirs = g_list_prepend (*special_dirs, *buffers);
+            *buffers = NULL;
+            buffers++;
+        }
+        g_strfreev (start_buff);
     }
-
-    while (*buffers)
-    {
-        *special_dirs = g_list_prepend (*special_dirs, g_strdup (*buffers));
-        buffers++;
-    }
-    g_strfreev (start_buff);
     mc_config_deinit (cfg);
 }
 
 static gboolean
 should_skip_directory (const char *dir)
 {
-    static GList *special_dirs;
+    static GList *special_dirs = NULL;
     GList *l;
-    static int loaded;
+    static gboolean loaded = FALSE;
 
-    if (loaded == 0)
+    if (!loaded)
     {
-        loaded = 1;
+        loaded = TRUE;
         setup_init ();
         process_special_dirs (&special_dirs, profile_name);
         process_special_dirs (&special_dirs, global_profile_name);
     }
 
-    for (l = special_dirs; l; l = l->next)
-    {
+    for (l = special_dirs; l != NULL; l = g_list_next (l))
         if (strncmp (dir, l->data, strlen (l->data)) == 0)
             return TRUE;
-    }
+
     return FALSE;
 }
 

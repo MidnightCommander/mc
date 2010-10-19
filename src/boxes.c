@@ -586,7 +586,8 @@ sel_charset_button (WButton *button, int action)
 
         new_display_codepage = new_dcp;
         cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT) ?
-            _("Other 8 bit") : codepages[new_display_codepage].name;
+            _("Other 8 bit") :
+            ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
         if (cpname != NULL)
             utf8_display = str_isutf8 (cpname);
         /* avoid strange bug with label repainting */
@@ -615,7 +616,8 @@ init_disp_bits_box (void)
 
     add_widget (dbits_dlg, label_new (3, 4, _("Input / display codepage:")));
 
-    cpname = (new_display_codepage < 0) ? _("Other 8 bit") : codepages[new_display_codepage].name;
+    cpname = (new_display_codepage < 0) ? _("Other 8 bit")
+             : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
     cplabel = label_new (4, 4, cpname);
     add_widget (dbits_dlg, cplabel);
 

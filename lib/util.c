@@ -628,43 +628,32 @@ load_file (const char *filename)
 }
 
 char *
-load_mc_home_file (const char *_mc_home, const char *_mc_home_alt, const char *filename,
-                   char **allocated_filename)
+load_mc_home_file (const char *from, const char *filename, char **allocated_filename)
 {
     char *hintfile_base, *hintfile;
     char *lang;
     char *data;
 
-    hintfile_base = concat_dir_and_file (_mc_home, filename);
+    hintfile_base = g_build_filename (from, filename, (char *) NULL);
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
     data = load_file (hintfile);
 
-    if (!data)
+    if (data == NULL)
     {
+        /* Fall back to the two-letter language code */
+        if (lang[0] != '\0' && lang[1] != '\0')
+            lang[2] = '\0';
         g_free (hintfile);
-        g_free (hintfile_base);
-        hintfile_base = concat_dir_and_file (_mc_home_alt, filename);
-
         hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
         data = load_file (hintfile);
 
-        if (!data)
+        if (data == NULL)
         {
-            /* Fall back to the two-letter language code */
-            if (lang[0] && lang[1])
-                lang[2] = 0;
             g_free (hintfile);
-            hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
-            data = load_file (hintfile);
-
-            if (!data)
-            {
-                g_free (hintfile);
-                hintfile = hintfile_base;
-                data = load_file (hintfile_base);
-            }
+            hintfile = hintfile_base;
+            data = load_file (hintfile_base);
         }
     }
 
@@ -673,7 +662,7 @@ load_mc_home_file (const char *_mc_home, const char *_mc_home_alt, const char *f
     if (hintfile != hintfile_base)
         g_free (hintfile_base);
 
-    if (allocated_filename)
+    if (allocated_filename != NULL)
         *allocated_filename = hintfile;
     else
         g_free (hintfile);

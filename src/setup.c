@@ -721,21 +721,20 @@ load_setup (void)
     size_t i;
     char *buffer;
     const char *kt;
-#ifdef HAVE_CHARSET
-    int cpages = -1;
 
-    cpages = load_codepages_list ();
+#ifdef HAVE_CHARSET
+    load_codepages_list ();
 #endif /* HAVE_CHARSET */
 
     profile = setup_init ();
 
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = concat_dir_and_file (mc_home, MC_GLOBAL_CONFIG_FILE);
+    global_profile_name = g_build_filename (mc_home, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     if (!exist_file (global_profile_name))
     {
         g_free (global_profile_name);
-        global_profile_name = concat_dir_and_file (mc_home_alt, MC_GLOBAL_CONFIG_FILE);
+        global_profile_name = g_build_filename (mc_home_alt, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
     panels_profile_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_PANELS_FILE, NULL);
@@ -816,7 +815,7 @@ load_setup (void)
     /* Remove the temporal entries */
 
 #ifdef HAVE_CHARSET
-    if (cpages > 0)
+    if (codepages->len > 1)
     {
         buffer = mc_config_get_string (mc_main_config, "Misc", "display_codepage", "");
         if (buffer[0] != '\0')
