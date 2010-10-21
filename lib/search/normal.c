@@ -50,12 +50,13 @@ mc_search__normal_translate_to_regex (const GString * astr)
 {
     const char *str = astr->str;
     GString *buff;
-    gsize loop = 0;
+    gsize loop;
 
     buff = g_string_sized_new (32);
 
-    while (loop < astr->len) {
-        switch (str[loop]) {
+    for (loop = 0; loop < astr->len; loop++)
+        switch (str[loop])
+        {
         case '*':
         case '?':
         case ',':
@@ -73,13 +74,11 @@ mc_search__normal_translate_to_regex (const GString * astr)
         case '-':
         case '|':
             g_string_append_c (buff, '\\');
+            /* fall through */
+        default:
             g_string_append_c (buff, str[loop]);
-            loop++;
-            continue;
+            break;
         }
-        g_string_append_c (buff, str[loop]);
-        loop++;
-    }
 
     return buff;
 }

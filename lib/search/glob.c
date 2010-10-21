@@ -52,55 +52,38 @@ mc_search__glob_translate_to_regex (const GString * astr)
 {
     const char *str = astr->str;
     GString *buff;
-    gsize loop = 0;
+    gsize loop;
     gboolean inside_group = FALSE;
 
     buff = g_string_sized_new (32);
 
-    while (loop < astr->len)
-    {
+    for (loop = 0; loop < astr->len; loop++)
         switch (str[loop])
         {
         case '*':
             if (!strutils_is_char_escaped (str, &(str[loop])))
-            {
-                g_string_append (buff, (inside_group) ? ".*" : "(.*)");
-                loop++;
-                continue;
-            }
+                g_string_append (buff, inside_group ? ".*" : "(.*)");
             break;
         case '?':
             if (!strutils_is_char_escaped (str, &(str[loop])))
-            {
-                g_string_append (buff, (inside_group) ? "." : "(.)");
-                loop++;
-                continue;
-            }
+                g_string_append (buff, inside_group ? "." : "(.)");
             break;
         case ',':
             if (!strutils_is_char_escaped (str, &(str[loop])))
-            {
-                g_string_append (buff, "|");
-                loop++;
-                continue;
-            }
+                g_string_append_c (buff, '|');
             break;
         case '{':
             if (!strutils_is_char_escaped (str, &(str[loop])))
             {
-                g_string_append (buff, "(");
+                g_string_append_c (buff, '(');
                 inside_group = TRUE;
-                loop++;
-                continue;
             }
             break;
         case '}':
             if (!strutils_is_char_escaped (str, &(str[loop])))
             {
-                g_string_append (buff, ")");
+                g_string_append_c (buff, ')');
                 inside_group = FALSE;
-                loop++;
-                continue;
             }
             break;
         case '+':
@@ -110,13 +93,11 @@ mc_search__glob_translate_to_regex (const GString * astr)
         case ')':
         case '^':
             g_string_append_c (buff, '\\');
+            /* fall through */
+        default:
             g_string_append_c (buff, str[loop]);
-            loop++;
-            continue;
+            break;
         }
-        g_string_append_c (buff, str[loop]);
-        loop++;
-    }
 
     return buff;
 }
