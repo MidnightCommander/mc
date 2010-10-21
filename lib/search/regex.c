@@ -196,12 +196,8 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
 static GString *
 mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString *astr)
 {
-    const char *str = astr->str;
     GString *accumulator, *spec_char, *ret_str;
     gsize loop;
-    GString *tmp;
-    tmp = g_string_new_len (str, astr->len);
-
 
     ret_str = g_string_new ("");
     accumulator = g_string_new ("");
@@ -210,7 +206,7 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString *ast
 
     while (loop <= astr->len)
     {
-        if (mc_search__regex_str_append_if_special (spec_char, tmp, &loop))
+        if (mc_search__regex_str_append_if_special (spec_char, astr, &loop))
         {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
             g_string_append_len (ret_str, spec_char->str, spec_char->len);
@@ -218,32 +214,32 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString *ast
             continue;
         }
 
-        if (tmp->str[loop] == '[' && !strutils_is_char_escaped (tmp->str, &(tmp->str[loop])))
+        if (astr->str[loop] == '[' && !strutils_is_char_escaped (astr->str, &(astr->str[loop])))
         {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
-            while (loop < astr->len && !(tmp->str[loop] == ']'
-                                       && !strutils_is_char_escaped (tmp->str, &(tmp->str[loop]))))
+            while (loop < astr->len && !(astr->str[loop] == ']'
+                                       && !strutils_is_char_escaped (astr->str, &(astr->str[loop]))))
             {
-                g_string_append_c (ret_str, tmp->str[loop]);
+                g_string_append_c (ret_str, astr->str[loop]);
                 loop++;
             }
 
-            g_string_append_c (ret_str, tmp->str[loop]);
+            g_string_append_c (ret_str, astr->str[loop]);
             loop++;
             continue;
         }
         /*
            TODO: handle [ and ]
          */
-        g_string_append_c (accumulator, tmp->str[loop]);
+        g_string_append_c (accumulator, astr->str[loop]);
         loop++;
     }
     mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
     g_string_free (accumulator, TRUE);
     g_string_free (spec_char, TRUE);
-    g_string_free (tmp, TRUE);
+
     return ret_str;
 }
 
