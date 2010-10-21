@@ -487,8 +487,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
 #endif /* SEARCH_TYPE_GLIB */
 
     if (!lc_mc_search->is_case_sensitive) {
-        tmp = g_string_new_len (mc_search_cond->str->str, mc_search_cond->str->len);
-        g_string_free (mc_search_cond->str, TRUE);
+        tmp = mc_search_cond->str;
         mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp->str, tmp->len);
         g_string_free (tmp, TRUE);
     }
