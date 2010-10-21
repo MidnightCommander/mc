@@ -478,7 +478,7 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
         char_len = strlen (tmp_str);
         if (*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR)
         {
-            *replace_flags &= !REPLACE_T_UPP_TRANSFORM_CHAR;
+            *replace_flags &= ~REPLACE_T_UPP_TRANSFORM_CHAR;
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
             g_string_append (dest_str, tmp_string->str);
             g_string_free (tmp_string, TRUE);
@@ -486,7 +486,7 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
         }
         else if (*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR)
         {
-            *replace_flags &= !REPLACE_T_LOW_TRANSFORM_CHAR;
+            *replace_flags &= ~REPLACE_T_LOW_TRANSFORM_CHAR;
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
             g_string_append (dest_str, tmp_string->str);
             g_string_free (tmp_string, TRUE);
