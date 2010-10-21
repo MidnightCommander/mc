@@ -194,12 +194,13 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, gsize str_len)
+mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString *astr)
 {
+    const char *str = astr->str;
     GString *accumulator, *spec_char, *ret_str;
     gsize loop;
     GString *tmp;
-    tmp = g_string_new_len (str, str_len);
+    tmp = g_string_new_len (str, astr->len);
 
 
     ret_str = g_string_new ("");
@@ -207,7 +208,7 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
     spec_char = g_string_new ("");
     loop = 0;
 
-    while (loop <= str_len)
+    while (loop <= astr->len)
     {
         if (mc_search__regex_str_append_if_special (spec_char, tmp, &loop))
         {
@@ -221,13 +222,13 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
         {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
-            while (loop < str_len && !(tmp->str[loop] == ']'
+            while (loop < astr->len && !(tmp->str[loop] == ']'
                                        && !strutils_is_char_escaped (tmp->str, &(tmp->str[loop]))))
             {
                 g_string_append_c (ret_str, tmp->str[loop]);
                 loop++;
-
             }
+
             g_string_append_c (ret_str, tmp->str[loop]);
             loop++;
             continue;
@@ -522,7 +523,6 @@ void
 mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_search,
                                        mc_search_cond_t * mc_search_cond)
 {
-    GString *tmp = NULL;
 #ifdef SEARCH_TYPE_GLIB
     GError *error = NULL;
 #else /* SEARCH_TYPE_GLIB */
@@ -532,8 +532,10 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
 
     if (!lc_mc_search->is_case_sensitive)
     {
+        GString *tmp;
+
         tmp = mc_search_cond->str;
-        mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp->str, tmp->len);
+        mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
         g_string_free (tmp, TRUE);
     }
 #ifdef SEARCH_TYPE_GLIB

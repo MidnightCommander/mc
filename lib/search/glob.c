@@ -48,13 +48,14 @@
 /*** file scope functions ************************************************************************/
 
 static GString *
-mc_search__glob_translate_to_regex (gchar * str, gsize * len)
+mc_search__glob_translate_to_regex (const GString * astr)
 {
+    const char *str = astr->str;
     GString *buff = g_string_new ("");
-    gsize orig_len = *len;
     gsize loop = 0;
     gboolean inside_group = FALSE;
-    while (loop < orig_len)
+
+    while (loop < astr->len)
     {
         switch (str[loop])
         {
@@ -114,7 +115,7 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
         g_string_append_c (buff, str[loop]);
         loop++;
     }
-    *len = buff->len;
+
     return buff;
 }
 
@@ -162,9 +163,9 @@ void
 mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_search,
                                       mc_search_cond_t * mc_search_cond)
 {
-    GString *tmp =
-        mc_search__glob_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->str->len);
+    GString *tmp;
 
+    tmp = mc_search__glob_translate_to_regex (mc_search_cond->str);
     g_string_free (mc_search_cond->str, TRUE);
 
     if (lc_mc_search->is_entire_line)
@@ -175,7 +176,6 @@ mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_s
     mc_search_cond->str = tmp;
 
     mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
