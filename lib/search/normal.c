@@ -49,8 +49,10 @@ static GString *
 mc_search__normal_translate_to_regex (const GString * astr)
 {
     const char *str = astr->str;
-    GString *buff = g_string_new ("");
+    GString *buff;
     gsize loop = 0;
+
+    buff = g_string_sized_new (32);
 
     while (loop < astr->len) {
         switch (str[loop]) {

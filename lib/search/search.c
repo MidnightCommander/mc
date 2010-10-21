@@ -339,12 +339,12 @@ char *
 mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, char *replace_str)
 {
     GString *ret;
-    GString *replace_str2 = g_string_new (replace_str);
+    GString *replace_str2;
+
+    replace_str2 = g_string_new (replace_str);
     ret = mc_search_prepare_replace_str (lc_mc_search, replace_str2);
     g_string_free (replace_str2, TRUE);
-    if (ret)
-        return g_string_free (ret, FALSE);
-    return NULL;
+    return (ret != NULL) ? g_string_free (ret, FALSE) : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

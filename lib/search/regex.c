@@ -199,9 +199,9 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString *ast
     GString *accumulator, *spec_char, *ret_str;
     gsize loop;
 
-    ret_str = g_string_new ("");
-    accumulator = g_string_new ("");
-    spec_char = g_string_new ("");
+    ret_str = g_string_sized_new (64);
+    accumulator = g_string_sized_new (64);
+    spec_char = g_string_sized_new (64);
     loop = 0;
 
     while (loop <= astr->len)
@@ -584,7 +584,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
     if (lc_mc_search->regex_buffer != NULL)
         g_string_free (lc_mc_search->regex_buffer, TRUE);
 
-    lc_mc_search->regex_buffer = g_string_new ("");
+    lc_mc_search->regex_buffer = g_string_sized_new (64);
 
     virtual_pos = current_pos = start_search;
     while (virtual_pos <= end_search)
@@ -696,8 +696,9 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
         return NULL;
     }
 
-    ret = g_string_new ("");
+    ret = g_string_sized_new (64);
     prev_str = replace_str->str;
+
     for (loop = 0; loop < replace_str->len - 1; loop++)
     {
         lc_index = mc_search_regex__process_replace_str (replace_str, loop, &len, &replace_flags);

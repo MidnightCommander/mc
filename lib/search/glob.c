@@ -51,9 +51,11 @@ static GString *
 mc_search__glob_translate_to_regex (const GString * astr)
 {
     const char *str = astr->str;
-    GString *buff = g_string_new ("");
+    GString *buff;
     gsize loop = 0;
     gboolean inside_group = FALSE;
+
+    buff = g_string_sized_new (32);
 
     while (loop < astr->len)
     {
@@ -124,9 +126,12 @@ mc_search__glob_translate_to_regex (const GString * astr)
 static GString *
 mc_search__translate_replace_glob_to_regex (gchar * str)
 {
-    GString *buff = g_string_sized_new (32);
+    GString *buff;
     int cnt = '0';
     gboolean escaped_mode = FALSE;
+
+    buff = g_string_sized_new (32);
+
     while (*str)
     {
         char c = *str++;

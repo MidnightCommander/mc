@@ -52,12 +52,13 @@ static GString *
 mc_search__hex_translate_to_regex (const GString * astr)
 {
     const char *str = astr->str;
-    GString *buff = g_string_new ("");
-    gchar *tmp_str = g_strndup (str, astr->len);
-    gchar *tmp_str2;
+    GString *buff;
+    gchar *tmp_str, *tmp_str2;
     gsize loop = 0;
     int val, ptr;
 
+    buff = g_string_sized_new (64);
+    tmp_str = g_strndup (str, astr->len);
     g_strchug (tmp_str);        /* trim leadind whitespaces */
 
     while (loop < astr->len) {
