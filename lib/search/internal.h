@@ -27,7 +27,6 @@ typedef struct mc_search_cond_struct {
     GString *upper;
     GString *lower;
     mc_search_regex_t *regex_handle;
-    gsize len;
     gchar *charset;
 } mc_search_cond_t;
 

@@ -64,7 +64,6 @@ mc_search__cond_struct_new (mc_search_t * lc_mc_search, const char *str,
     mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
 
     mc_search_cond->str = g_string_new_len (str, str_len);
-    mc_search_cond->len = str_len;
     mc_search_cond->charset = g_strdup (charset);
 
     switch (lc_mc_search->search_type) {

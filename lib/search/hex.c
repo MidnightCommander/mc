@@ -101,7 +101,7 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_se
                                      mc_search_cond_t * mc_search_cond)
 {
     GString *tmp =
-        mc_search__hex_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->len);
+        mc_search__hex_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->str->len);
 
     g_string_free (mc_search_cond->str, TRUE);
     mc_search_cond->str = tmp;
