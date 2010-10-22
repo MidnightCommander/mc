@@ -502,13 +502,15 @@ menu_save_mode_cmd (void)
 }
 
 void
-edit_set_filename (WEdit * edit, const char *f)
+edit_set_filename (WEdit * edit, const char *name)
 {
     g_free (edit->filename);
-    if (!f)
-        f = "";
-    edit->filename = g_strdup (f);
-    if (edit->dir == NULL && !g_path_is_absolute (f))
+
+    if (name == NULL)
+        name = "";
+
+    edit->filename = tilde_expand (name);
+    if (edit->dir == NULL && !g_path_is_absolute (name))
         edit->dir = g_strdup (vfs_get_current_dir ());
 }
 
