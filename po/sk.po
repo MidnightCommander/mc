@@ -3,19 +3,20 @@
 # Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2001,2002.
 # Marcel Telka <marcel@telka.sk>, 2002, 2003.
 # Ivan Masár <helix84@centrum.sk>, 2009.
+# Slavko <linux@slavino.sk>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-09-06 21:40+0400\n"
-"PO-Revision-Date: 2009-12-03 12:42+0100\n"
-"Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"PO-Revision-Date: 2010-10-22 18:42+0200\n"
+"Last-Translator: Slavko <linux@slavino.sk>\n"
+"Language-Team: Slovak\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 msgid " Search string not found "
 msgstr " Hľadaný reťazec nebol nájdený "
@@ -166,9 +167,8 @@ msgstr "Lomka na kláves."
 msgid "* on keypad"
 msgstr "* na num. kláves."
 
-#, fuzzy
 msgid "Escape key"
-msgstr "Lomka na kláves."
+msgstr "Esc na kláves."
 
 msgid "Left arrow keypad"
 msgstr "Ľava šípka na kláv."
@@ -433,9 +433,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Neúplný extfs archív"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Nepodarilo sa vytvoriť adresár %s"
+msgstr "Upozornenie: Nemožno otvoriť adresár %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -929,7 +929,6 @@ msgid "Show mc with specified skin"
 msgstr "Zobraziť mc s uvedenou témou vzhľadu"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -946,16 +945,16 @@ msgid ""
 msgstr ""
 "--colors KĽÚČ={POPR},{POZA}\n"
 "\n"
-"{POPR} a {POZA} je možné vynechať a bude použitá štandardná hodnota\n"
+"{POPR} a {POZA} možno vynechať a bude použitá štandardná hodnota\n"
 "\n"
 "Kľúčové slová:\n"
-"   Globálne:          errors, reverse, gauge, input, viewunderline\n"
-"   Zobrazenie súboru: normal, selected, marked, markselect\n"
-"   Dialógy:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
-"                      errdhotnormal, errdhotfocus\n"
-"   Menu:              menu, menuhot, menusel, menuhotsel\n"
-"   Editor:            editnormal, editbold, editmarked,\n"
-"                      editwhitespace, editlinestate\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
@@ -987,15 +986,14 @@ msgstr "[tento_adresár] [adresár_v_druhom_paneli]"
 msgid "Set initial line number for the internal editor"
 msgstr "Nastaviť počiatočné číslo riadka pre interný editor"
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Správy o chybách posielajte (vrátane výpisu `mc -V')\n"
-"na adresu mc-devel@gnome.org\n"
+"Správy o chybách prosím podávajte (vrátane výstupu `mc -V')\n"
+"ako tiket na www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -1104,9 +1102,8 @@ msgstr "Vstupná/Zobrazovacia znaková sada:"
 msgid "&Select"
 msgstr "&Vybrať"
 
-#, fuzzy
 msgid "Directory tree"
-msgstr "adr&Esárový strom"
+msgstr "Adresárový strom"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Použiť pasívny režim pri pro&xy"
@@ -1486,24 +1483,19 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Znovu načítať aktuálnu syntax >"
 
-#, fuzzy
 msgid "About"
-msgstr " O aplikácii "
+msgstr "O aplikácii"
 
-#, fuzzy
 msgid ""
 "Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "            A user friendly text editor\n"
 "         written for the Midnight Commander"
 msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "  Používateľsky prívetivý textový editor napísaný\n"
-"           pre Midnight Commander.\n"
+"           pre Midnight Commander"
 
 #, c-format
 msgid " Cannot open %s for reading "
@@ -1660,9 +1652,9 @@ msgstr " Blok je príliš veľký, možno nebude možné stornovať túto akciu.
 msgid "Replace"
 msgstr "Nahradiť"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%ld replacements made"
-msgstr " %ld náhrad urobených. "
+msgstr "Urobených %ld náhrad"
 
 msgid "Quit"
 msgstr "Skončiť"
@@ -1870,44 +1862,36 @@ msgstr "&Ukončiť"
 msgid "&Undo"
 msgstr "&Späť"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
-msgstr "Prepnúť &vklad/pre"
+msgstr "Prepnúť &vklad/prepis"
 
-#, fuzzy
 msgid "To&ggle mark"
 msgstr "&Prepnúť označ."
 
 msgid "&Mark columns"
 msgstr "&Označiť stĺpce"
 
-#, fuzzy
 msgid "Mark &all"
 msgstr "&Označiť všetko"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "Odznačiť"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Kopírovať"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "Presunúť"
 
 msgid "&Delete"
 msgstr "&Zmazať"
 
-#, fuzzy
 msgid "Co&py to clipfile"
 msgstr "K&Opírovať do ústrižku"
 
-#, fuzzy
 msgid "&Cut to clipfile"
 msgstr "&Vystrihnúť do ústrižku"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
 msgstr "&Vložiť z ústrižku"
 
@@ -1926,14 +1910,12 @@ msgstr "Hľ&Adať znova"
 msgid "&Replace..."
 msgstr "&Nahradiť..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "Prepnúť zálož&Ku"
 
 msgid "&Next bookmark"
 msgstr "Ď&Alšia záložka"
 
-#, fuzzy
 msgid "&Prev bookmark"
 msgstr "&Predošlá záložka"
 
@@ -1943,26 +1925,21 @@ msgstr "&Zrušiť záložku"
 msgid "&Go to line..."
 msgstr "&Prejsť na riadok..."
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "&Prepnúť stav riadka"
 
 msgid "Go to matching &bracket"
 msgstr "Prejsť na odpovedajúcu &zátvorku"
 
-#, fuzzy
 msgid "Toggle s&yntax highlighting"
-msgstr " Vyberte zvýraznenie syntaxe"
+msgstr "Prepnúť zvýraznenie syntaxe"
 
-#, fuzzy
 msgid "&Find declaration"
 msgstr "Nájsť deklaráciu"
 
-#, fuzzy
 msgid "Back from &declaration"
 msgstr "Späť z deklarácie"
 
-#, fuzzy
 msgid "For&ward to declaration"
 msgstr "Vpred na deklaráciu"
 
@@ -1975,9 +1952,8 @@ msgstr "Obnoviť ob&Razovku"
 msgid "&Start record macro"
 msgstr "&Začať nahrávať makro"
 
-#, fuzzy
 msgid "Finis&h record macro..."
-msgstr "&Skončiť nahrávať makra..."
+msgstr "&Skončiť nahrávanie makra..."
 
 msgid "&Execute macro..."
 msgstr "&Vykonať makro..."
@@ -1997,19 +1973,15 @@ msgstr "V&Ložiť znak..."
 msgid "Insert &date/time"
 msgstr "Vložiť &Dátum/čas"
 
-#, fuzzy
 msgid "&Format paragraph"
-msgstr "Formátovať odst&Avec"
+msgstr "Formátov&Ať odsek"
 
-#, fuzzy
 msgid "&Sort..."
-msgstr "&Poradie výpisu..."
+msgstr "&Radiť..."
 
-#, fuzzy
 msgid "&Paste output of..."
 msgstr "Vložiť výst&Up..."
 
-#, fuzzy
 msgid "&External formatter"
 msgstr "E&Xterný formátovač"
 
@@ -2875,9 +2847,8 @@ msgid ""
 msgstr ""
 "MC nedokázal zapísať súbor ~/%s, vaše staré položky hotlistu neboli zmazané"
 
-#, fuzzy
 msgid "Information"
-msgstr " Informácie "
+msgstr "Informácie"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2887,9 +2858,9 @@ msgstr "Midnight Commander %s"
 msgid "File:       %s"
 msgstr "Súbor:     %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Voľné uzly %d (%d%%) z %d"
+msgstr "Voľné uzly: %ld (%ld%%) z %ld"
 
 msgid "No node information"
 msgstr "Žiadne informácie o uzle"
@@ -2925,9 +2896,9 @@ msgid "Modified:  %s"
 msgstr "Zmenený:  %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "Zmeniť &Do"
+msgstr "Zmenené:   %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3279,7 +3250,7 @@ msgid "Cannot create %s directory"
 msgstr "Nepodarilo sa vytvoriť adresár %s"
 
 msgid "safe de&Lete"
-msgstr "bezpečn&É mazanie"
+msgstr "&Bezpečné mazanie"
 
 msgid "cd follows lin&Ks"
 msgstr "c&D nasleduje odkazy"
@@ -3294,13 +3265,13 @@ msgid "co&Mplete: show all"
 msgstr "ukončené: &Zobraziť všetko"
 
 msgid "&Use internal view"
-msgstr "po&Užiť vstavaný prehliadač"
+msgstr "Po&Užiť vstavaný prehliadač"
 
 msgid "use internal ed&It"
-msgstr "použiť vstavaný ed&Itor"
+msgstr "&Použiť vstavaný editor"
 
 msgid "auto m&Enus"
-msgstr "Automatické m&Enu"
+msgstr "aut&Omatické menu"
 
 msgid "&Auto save setup"
 msgstr "&Autom. ukladanie nastav."
@@ -3309,13 +3280,13 @@ msgid "shell &Patterns"
 msgstr "shel&L vzorov"
 
 msgid "Compute &Totals"
-msgstr "vypočí&Tať súčty"
+msgstr "v&Ypočítať súčty"
 
 msgid "&Verbose operation"
-msgstr "&Výrečná prevádzka"
+msgstr "výrečn&Á prevádzka"
 
 msgid "Mkdir autoname"
-msgstr "Mkdir autonázov"
+msgstr "&Mkdir autonázov"
 
 msgid "&Fast dir reload"
 msgstr "rýc&Hle načítanie adresára"
@@ -3330,7 +3301,7 @@ msgid "ma&Rk moves down"
 msgstr "z&Načiť pohybom dole"
 
 msgid "show &Hidden files"
-msgstr "ukázať &Skryté súbory"
+msgstr "ukázať sk&Ryté súbory"
 
 msgid "show &Backup files"
 msgstr "u&Kázať zálohované súbory"
@@ -3354,7 +3325,7 @@ msgid " Pause after run... "
 msgstr " Pauza po spustení..."
 
 msgid "Configure options"
-msgstr "Nastavovateľne voľby"
+msgstr "Voľby nastavenia"
 
 msgid "&Add new"
 msgstr "&Pridať nové"
