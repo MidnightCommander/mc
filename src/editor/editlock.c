@@ -54,8 +54,7 @@
 
 #include "lib/global.h"
 #include "lib/vfs/mc-vfs/vfs.h"
-#include "lib/strutil.h"	/* utf string functions */
-
+#include "lib/util.h"           /* tilde_expand() */
 
 #include "edit-impl.h"
 #include "editlock.h"
@@ -168,29 +167,37 @@ edit_lock_file (const char *fname)
     char *lockfname, *newlock, *msg, *lock;
     struct stat statbuf;
     struct lock_s *lockinfo;
+    gboolean symlink_ok;
 
     /* Just to be sure (and don't lock new file) */
-    if (!fname || !*fname)
+    if (fname == NULL || *fname == '\0')
 	return 0;
+
+    fname = tilde_expand (fname);
 
     /* Locking on VFS is not supported */
     if (!vfs_file_is_local (fname))
+    {
+        g_free (fname);
 	return 0;
+    }
 
     /* Check if already locked */
     lockfname = lock_build_symlink_name (fname);
+    g_free (fname);
     if (lockfname == NULL)
 	return 0;
+
     if (lstat (lockfname, &statbuf) == 0) {
 	lock = lock_get_info (lockfname);
-	if (!lock) {
+	if (lock == NULL) {
 	    g_free (lockfname);
 	    return 0;
 	}
 	lockinfo = lock_extract_info (lock);
 
 	/* Check if locking process alive, ask user if required */
-	if (!lockinfo->pid
+	if (lockinfo->pid == 0
 	    || !(kill (lockinfo->pid, 0) == -1 && errno == ESRCH)) {
 	    msg =
 		g_strdup_printf (_
@@ -216,15 +223,11 @@ edit_lock_file (const char *fname)
 
     /* Create lock symlink */
     newlock = lock_build_name ();
-    if (symlink (newlock, lockfname) == -1) {
-	g_free (lockfname);
-	g_free (newlock);
-	return 0;
-    }
-
-    g_free (lockfname);
+    symlink_ok = (symlink (newlock, lockfname) != -1);
     g_free (newlock);
-    return 1;
+    g_free (lockfname);
+
+    return symlink_ok ? 1 : 0;
 }
 
 /* Lowers file lock if possible
@@ -236,10 +239,13 @@ edit_unlock_file (const char *fname)
     struct stat statbuf;
 
     /* Just to be sure */
-    if (!fname || !*fname)
+    if (fname == NULL || *fname == '\0')
 	return 0;
 
+    fname = tilde_expand (fname);
     lockfname = lock_build_symlink_name (fname);
+    g_free (fname);
+
     if (lockfname == NULL)
 	return 0;
 
@@ -250,7 +256,7 @@ edit_unlock_file (const char *fname)
     }
 
     lock = lock_get_info (lockfname);
-    if (lock) {
+    if (lock != NULL) {
 	/* Don't touch if lock is not ours */
 	if (lock_extract_info (lock)->pid != getpid ()) {
 	    g_free (lockfname);
