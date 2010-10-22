@@ -52,6 +52,7 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/lock.h"
+#include "lib/util.h"           /* tilde_expand() */
 #include "lib/vfs/mc-vfs/vfs.h"
 
 #include "src/history.h"
@@ -557,8 +558,12 @@ edit_get_save_file_as (WEdit * edit)
 
     if (quick_dialog (&Quick_options) != B_CANCEL)
     {
+        char *fname;
+
         edit->lb = cur_lb;
-        return filename;
+        fname = tilde_expand (filename);
+        g_free (filename);
+        return fname;
     }
 
     return NULL;
