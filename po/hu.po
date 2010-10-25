@@ -6,7 +6,7 @@
 # SZABÓ Gergely <szg@subogero.com>, 2009-2010
 # Páder Rezső <rezso@rezso.net>, 2009-2010
 # Pauli Henrik <henrik.pauli@uhusystems.com>, 2010
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
@@ -351,7 +351,6 @@ msgstr "Ideiglenes fájlok nem jönnek létre\n"
 msgid "Press any key to continue..."
 msgstr "Nyomjon meg egy billentyűt..."
 
-#
 msgid "Warning"
 msgstr "Figyelem"
 
@@ -821,7 +820,6 @@ msgstr "Jelszó:"
 msgid "Changes to file lost"
 msgstr "A fájl módosításai elvesztek"
 
-#
 msgid "&Cancel"
 msgstr "&Mégsem"
 
@@ -960,8 +958,7 @@ msgstr ""
 "{ELŐTÉR} és {HÁTTÉR} elhagyható, ekkor az alapértékek lesznek érvényesek.\n"
 "\n"
 "Kulcsszavak:\n"
-"   Globális:         errors (hibák), reverse (inverz), gauge "
-"(folyamatjelző),\n"
+"   Globális:         errors (hibák), reverse (inverz), gauge (folyamatjelző),\n"
 "                     input (bevitel), viewunderline (aláhúzottak a\n"
 "                     megjelenítőben)\n"
 "   Fájllista:        normal, selected (kurzor), marked (kijelölt),\n"
@@ -990,8 +987,7 @@ msgstr ""
 "Színek:\n"
 "   black (fekete), gray (szürke), red (piros), brightred (élénkpiros),\n"
 "   green (zöld), brightgreen (élénkzöld), brown (barna), yellow (sárga),\n"
-"   blue (kék), brightblue (azúr), magenta (lila), brightmagenta "
-"(élénklila),\n"
+"   blue (kék), brightblue (azúr), magenta (lila), brightmagenta (élénklila),\n"
 "   cyan (türkiz), brightcyan (élénktürkiz), lightgray (világosszürke),\n"
 "   white (fehér)\n"
 "\n"
@@ -1355,7 +1351,8 @@ msgstr " Adja meg a fájlnevekre vonatkozó szűrőkifejezést:"
 msgid "&Using shell patterns"
 msgstr "&Shell-minta"
 
-#  REPORT -- We need a much wider window here.  "Kis- és nagybetűre érzékeny" would be the translation that makes sense.
+#  REPORT -- We need a much wider window here.  "Kis- és nagybetűre érzékeny"
+# would be the translation that makes sense.
 msgid "&Case sensitive"
 msgstr "&Kis- és nagybetű"
 
@@ -1476,7 +1473,7 @@ msgid " SMB link to machine "
 msgstr " SMB-kapcsolat "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " Törölt fájlok visszaállítása Ext2 fájlrendszeren "
+msgstr " Törölt fájlok visszaállítása ext2 fájlrendszeren "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
@@ -1538,7 +1535,6 @@ msgstr ""
 msgid " Cannot open %s for reading "
 msgstr " Nem sikerült megnyitni a(z) \"%s\" fájlt olvasásra "
 
-#
 msgid "Error"
 msgstr "Hiba"
 
@@ -1707,7 +1703,6 @@ msgstr " A fájl módosult. Kívánja menteni kilépéskor? "
 msgid "&Cancel quit"
 msgstr "&Mégse legyen kilépés"
 
-#
 msgid " Error "
 msgstr " Hiba "
 
@@ -1979,7 +1974,8 @@ msgstr "Ugrás a &zárójel párjára"
 msgid "Toggle s&yntax highlighting"
 msgstr "Szinta&xiskiemelés ki/be"
 
-#  Működnek ezek egyáltalán?  Nekem se C++-ban se, meg Perlben se csinál semmit.  Így meg nehéz megtudni, miről is van szó. -- PH
+#  Működnek ezek egyáltalán?  Nekem se C++-ban se, meg Perlben se csinál
+# semmit.  Így meg nehéz megtudni, miről is van szó. -- PH
 msgid "&Find declaration"
 msgstr "&Deklaráció keresése"
 
@@ -2207,27 +2203,16 @@ msgid " %s%s file error"
 msgstr " %s%s fájlhiba"
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"A(z) \"%smc.ext\" fájl formátuma a 3.0-s verzióval módosult. Úgy tűnik, hogy "
-"a Midnight Commander telepítésekor hiba történt. Szerezzen be egy friss "
-"verziót a Midnight Commander csomagból."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "A(z) \"%smc.ext\" fájl formátuma a 3.0-s verzióval módosult. Úgy tűnik, hogy a Midnight Commander telepítésekor hiba történt. Szerezzen be egy friss verziót a Midnight Commander csomagból."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s fájlhiba "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"A \"~/%s\" fájl formátuma a 3.0-s verzióval módosult. Lemásolhatja azt a(z) "
-"\"%smc.ext\" fájlból, vagy elkészítheti az alapján."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "A \"~/%s\" fájl formátuma a 3.0-s verzióval módosult. Lemásolhatja azt a(z) \"%smc.ext\" fájlból, vagy elkészítheti az alapján."
 
 msgid "DialogTitle|Copy"
 msgstr "Másolás"
@@ -2254,8 +2239,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Távoli fájlrendszerek között nem hozhatók létre stabil szimbolikus "
-"linkek. \n"
+" Távoli fájlrendszerek között nem hozhatók létre stabil szimbolikus linkek. \n"
 "\n"
 " A \"Stabil szimbolikus linkek\" opció ki lesz kapcsolva. "
 
@@ -2675,7 +2659,8 @@ msgstr "Ha &régebbi"
 msgid "Overwrite all targets?"
 msgstr "Minden célfájlt felülír?"
 
-# figyelni rá (shortcut-ütközésileg), mert ritkábban jön elő (ha már létezik a célfájl
+# figyelni rá (shortcut-ütközésileg), mert ritkábban jön elő (ha már létezik a
+# célfájl
 # és a forrás mérete nagyobb a cél méreténél)
 msgid "&Reget"
 msgstr "&Kiegészítés"
@@ -2919,8 +2904,7 @@ msgid " Hotlist Load "
 msgstr " Gyorslista betöltése "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " A{z} \"~/%s\" fájl nem írható, régi gyorslista-bejegyzések megtartva"
 
 msgid "Information"
@@ -3427,8 +3411,7 @@ msgid " Enter command label: "
 msgstr " A parancshoz tartozó leírás: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" Távoli és virtuális könyvtáron nem lehet külső panel-parancsot futtatni "
+msgstr " Távoli és virtuális könyvtáron nem lehet külső panel-parancsot futtatni "
 
 msgid "Find rejects after patching"
 msgstr "\"patch\" parancs utáni problémajegyzékek (*.rej) keresése"
