@@ -432,7 +432,7 @@ msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"%s-archívum nem megnyitható\n"
+"%s archívum nem nyitható meg\n"
 "%s"
 
 msgid "Inconsistent extfs archive"
@@ -566,14 +566,14 @@ msgstr "Ftpfs: hibás gépnév/-cím"
 
 #, c-format
 msgid "ftpfs: could not setup passive mode: %s"
-msgstr "Ftpfs: passzív mód nem beállítható: %s"
+msgstr "Ftpfs: passzív mód nem állítható be: %s"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "Ftpfs: a socket nem hozható létre: %s "
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "Ftpfs: passzív mód állítható be"
+msgstr "Ftpfs: passzív mód nem állítható be"
 
 msgid "ftpfs: aborting transfer."
 msgstr "Ftpfs: átvitel megszakítása..."
@@ -1740,19 +1740,19 @@ msgid " You must first highlight a block of text. "
 msgstr " Előbb ki kell jelölni egy szövegrészt. "
 
 msgid " Run Sort "
-msgstr " A \"Sort\" program futtatása "
+msgstr " A \"sort\" program futtatása "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " A \"Sort\" paraméterei (infó: man sort), szóközzel elválasztva: "
+msgstr " A \"sort\" paraméterei (infó: man sort), szóközzel elválasztva: "
 
 msgid " Sort "
 msgstr " Rendezés "
 
 msgid " Cannot execute sort command "
-msgstr " Nem sikerült végrehajtani a \"Sort\" programot "
+msgstr " Nem sikerült végrehajtani a \"sort\" programot "
 
 msgid " Sort returned non-zero: "
-msgstr " A \"Sort\" programtól kapott hibakód: "
+msgstr " A \"sort\" programtól kapott hibakód: "
 
 msgid "Paste output of external command"
 msgstr "Külső parancs kimenetének beillesztése"
@@ -2497,7 +2497,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" A(z) \"%s\" fájl nem sikerült törölni \n"
+" A(z) \"%s\" fájlt nem sikerült törölni \n"
 " %s "
 
 #, c-format
@@ -2905,7 +2905,7 @@ msgstr " Gyorslista betöltése "
 
 #, c-format
 msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " A{z} \"~/%s\" fájl nem írható, régi gyorslista-bejegyzések megtartva"
+msgstr " A(z) \"~/%s\" fájl nem írható, régi gyorslista-bejegyzések megtartva"
 
 msgid "Information"
 msgstr "Információ"
