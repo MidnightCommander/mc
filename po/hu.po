@@ -4304,7 +4304,7 @@ msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Zsír! A terminál-adatbázis teljes.\n"
+"A terminál-adatbázis teljes.\n"
 "Az összes billentyű jól működik."
 
 #: ../src/learn.c:301
