@@ -144,11 +144,8 @@ mc_search__translate_replace_glob_to_regex (gchar * str)
             {
                 g_string_append_c (buff, '\\');
                 c = ++cnt;
-                continue;
             }
             break;
-            /* breaks copying: mc uses "\0" internally, it must not be changed */
-            /*case '\\': */
         case '&':
             g_string_append_c (buff, '\\');
             break;
