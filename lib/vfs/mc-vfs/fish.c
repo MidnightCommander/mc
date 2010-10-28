@@ -6,7 +6,8 @@
 
    Written by: 1998 Pavel Machek
    Spaces fix: 2000 Michal Svec
-               2010 Andrew Borobin
+               2010 Andrew Borodin
+               2010 Slava Zanko
                2010 Ilia Maslakov
 
    Derived from ftpfs.c.
@@ -73,6 +74,7 @@
 
 #include "fish.h"
 #include "fishdef.h"
+#include "src/execute.h"        /* pre_exec, post_exec */
 
 int fish_directory_timeout = 900;
 
@@ -298,25 +300,25 @@ fish_set_env (int flags)
     g_string_assign (tmp, "export ");
 
     if ((flags & FISH_HAVE_HEAD) != 0)
-       g_string_append (tmp, "FISH_HAVE_HEAD=1 ");
+        g_string_append (tmp, "FISH_HAVE_HEAD=1 ");
 
     if ((flags & FISH_HAVE_SED) != 0)
-       g_string_append (tmp, "FISH_HAVE_SED=1 ");
+        g_string_append (tmp, "FISH_HAVE_SED=1 ");
 
     if ((flags & FISH_HAVE_AWK) != 0)
-       g_string_append (tmp, "FISH_HAVE_AWK=1 ");
+        g_string_append (tmp, "FISH_HAVE_AWK=1 ");
 
     if ((flags & FISH_HAVE_PERL) != 0)
-       g_string_append (tmp, "FISH_HAVE_PERL=1 ");
+        g_string_append (tmp, "FISH_HAVE_PERL=1 ");
 
     if ((flags & FISH_HAVE_LSQ) != 0)
-       g_string_append (tmp, "FISH_HAVE_LSQ=1 ");
+        g_string_append (tmp, "FISH_HAVE_LSQ=1 ");
 
     if ((flags & FISH_HAVE_DATE_MDYT) != 0)
-       g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 ");
+        g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 ");
 
     if ((flags & FISH_HAVE_TAIL) != 0)
-       g_string_append (tmp, "FISH_HAVE_TAIL=1 ");
+        g_string_append (tmp, "FISH_HAVE_TAIL=1 ");
 
     return g_string_free (tmp, FALSE);
 }
@@ -352,94 +354,120 @@ fish_getcwd (struct vfs_class *me, struct vfs_s_super *super)
     ERRNOR (EIO, NULL);
 }
 
+
+static void
+fish_open_archive_pipeopen (struct vfs_s_super *super)
+{
+    char gbuf[10];
+    const char *argv[10];       /* All of 10 is used now */
+    const char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
+    int i = 0;
+
+    argv[i++] = xsh;
+    if (SUP.flags == FISH_FLAG_COMPRESSED)
+        argv[i++] = "-C";
+
+    if (SUP.flags > FISH_FLAG_RSH)
+    {
+        argv[i++] = "-p";
+        g_snprintf (gbuf, sizeof (gbuf), "%d", SUP.flags);
+        argv[i++] = gbuf;
+    }
+
+    /*
+     * Add the user name to the ssh command line only if it was explicitly
+     * set in vfs URL. rsh/ssh will get current user by default
+     * plus we can set convenient overrides in  ~/.ssh/config (explicit -l
+     * option breaks it for some)
+     */
+
+    if (SUP.user)
+    {
+        argv[i++] = "-l";
+        argv[i++] = SUP.user;
+    }
+    else
+    {
+        /* The rest of the code assumes it to be a valid username */
+        SUP.user = vfs_get_local_username ();
+    }
+
+    argv[i++] = SUP.host;
+    argv[i++] = "echo FISH:; /bin/sh";
+    argv[i++] = NULL;
+
+    fish_pipeopen (super, xsh, argv);
+}
+
+static gboolean
+fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
+{
+    char answer[2048];
+
+    printf ("\n%s\n", _("fish: Waiting for initial line..."));
+
+    if (!vfs_s_get_line (me, SUP.sockr, answer, sizeof (answer), ':'))
+        return FALSE;
+
+    if (strstr (answer, "assword"))
+    {
+        /* Currently, this does not work. ssh reads passwords from
+           /dev/tty, not from stdin :-(. */
+
+        printf ("\n%s\n", _("Sorry, we cannot do password authenticated connections for now."));
+
+        return FALSE;
+#if 0
+        if (!SUP.password)
+        {
+            char *p, *op;
+            p = g_strdup_printf (_("fish: Password is required for %s"), SUP.user);
+            op = vfs_get_password (p);
+            g_free (p);
+            if (op == NULL)
+                return FALSE;
+            SUP.password = op;
+        }
+        printf ("\n%s\n", _("fish: Sending password..."));
+        {
+            size_t str_len;
+            str_len = strlen (SUP.password);
+            if ((write (SUP.sockw, SUP.password, str_len) != (ssize_t) str_len)
+                || (write (SUP.sockw, "\n", 1) != 1))
+            {
+                return FALSE;
+            }
+        }
+#endif
+    }
+    return TRUE;
+}
+
 static int
 fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
-    {
-        char gbuf[10];
-        const char *argv[10];   /* All of 10 is used now */
-        const char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
-        int i = 0;
+    gboolean ftalk;
+    /* hide panels */
+    pre_exec ();
 
-        argv[i++] = xsh;
-        if (SUP.flags == FISH_FLAG_COMPRESSED)
-            argv[i++] = "-C";
+    /* open pipe */
+    fish_open_archive_pipeopen (super);
 
-        if (SUP.flags > FISH_FLAG_RSH)
-        {
-            argv[i++] = "-p";
-            g_snprintf (gbuf, sizeof (gbuf), "%d", SUP.flags);
-            argv[i++] = gbuf;
-        }
+    /* Start talk with ssh-server (password prompt, etc ) */
+    ftalk = fish_open_archive_talk (me, super);
 
-        /*
-         * Add the user name to the ssh command line only if it was explicitly
-         * set in vfs URL. rsh/ssh will get current user by default
-         * plus we can set convenient overrides in  ~/.ssh/config (explicit -l
-         * option breaks it for some)
-         */
+    /* show panels */
+    post_exec ();
 
-        if (SUP.user)
-        {
-            argv[i++] = "-l";
-            argv[i++] = SUP.user;
-        }
-        else
-        {
-            /* The rest of the code assumes it to be a valid username */
-            SUP.user = vfs_get_local_username ();
-        }
-
-        argv[i++] = SUP.host;
-        argv[i++] = "echo FISH:; /bin/sh";
-        argv[i++] = NULL;
-
-        fish_pipeopen (super, xsh, argv);
-    }
-    {
-        char answer[2048];
-        print_vfs_message (_("fish: Waiting for initial line..."));
-        if (!vfs_s_get_line (me, SUP.sockr, answer, sizeof (answer), ':'))
-            ERRNOR (E_PROTO, -1);
-        print_vfs_message ("%s", answer);
-        if (strstr (answer, "assword"))
-        {
-            /* Currently, this does not work. ssh reads passwords from
-               /dev/tty, not from stdin :-(. */
-
-            message (D_ERROR, MSG_ERROR,
-                     _("Sorry, we cannot do password authenticated connections for now."));
-            ERRNOR (EPERM, -1);
-            if (!SUP.password)
-            {
-                char *p, *op;
-                p = g_strdup_printf (_("fish: Password is required for %s"), SUP.user);
-                op = vfs_get_password (p);
-                g_free (p);
-                if (op == NULL)
-                    ERRNOR (EPERM, -1);
-                SUP.password = op;
-            }
-
-            print_vfs_message (_("fish: Sending password..."));
-
-            {
-                size_t str_len;
-                str_len = strlen (SUP.password);
-                if ((write (SUP.sockw, SUP.password, str_len) != (ssize_t) str_len)
-                    || (write (SUP.sockw, "\n", 1) != 1))
-                {
-                    ERRNOR (EIO, -1);
-                }
-            }
-        }
-    }
+    if (!ftalk)
+        ERRNOR (E_PROTO, -1);
 
     print_vfs_message (_("fish: Sending initial line..."));
     /*
      * Run `start_fish_server'. If it doesn't exist - no problem,
      * we'll talk directly to the shell.
      */
+
     if (fish_command
         (me, super, WAIT_REPLY,
          "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") != COMPLETE)
@@ -452,8 +480,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command
         (me, super, WAIT_REPLY,
-         "export LANG=C LC_ALL=C LC_TIME=C\n"
-         "echo '### 200'\n") != COMPLETE)
+         "export LANG=C LC_ALL=C LC_TIME=C\n" "echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     print_vfs_message (_("fish: Getting host info..."));
@@ -505,7 +532,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     SUP.scr_mv = fish_load_script_from_file (host, FISH_MV_FILE, FISH_MV_DEF_CONTENT);
     SUP.scr_hardlink = fish_load_script_from_file (host, FISH_HARDLINK_FILE, FISH_HARDLINK_DEF_CONTENT);
     SUP.scr_get = fish_load_script_from_file (host, FISH_GET_FILE, FISH_GET_DEF_CONTENT);
-    SUP.scr_send = fish_load_script_from_file (host, FISH_SEND_FILE,FISH_SEND_DEF_CONTENT);
+    SUP.scr_send = fish_load_script_from_file (host, FISH_SEND_FILE, FISH_SEND_DEF_CONTENT);
     SUP.scr_append = fish_load_script_from_file (host, FISH_APPEND_FILE, FISH_APPEND_DEF_CONTENT);
     SUP.scr_info = fish_load_script_from_file (host, FISH_INFO_FILE, FISH_INFO_DEF_CONTENT);
     return fish_open_archive_int (me, super);
@@ -804,14 +831,16 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
     {
         shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%ju;\n",
                                       SUP.scr_append, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (uintmax_t) s.st_size);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
+                          (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
     else
     {
         shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%ju;\n",
                                       SUP.scr_send, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (uintmax_t) s.st_size);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
+                          (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
     if (n != PRELIM)
@@ -937,7 +966,7 @@ fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t l
 {
     struct vfs_s_super *super = FH_SUPER;
     ssize_t n = 0;
-    len = MIN ((size_t)(fh->u.fish.total - fh->u.fish.got), len);
+    len = MIN ((size_t) (fh->u.fish.total - fh->u.fish.got), len);
     tty_disable_interrupt_key ();
     while (len != 0 && ((n = read (SUP.sockr, buf, len)) < 0))
     {
@@ -1010,8 +1039,9 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
 #define PREFIX \
     char buf[BUF_LARGE]; \
     const char *crpath; \
-    char *rpath, *mpath = g_strdup (path); \
+    char *rpath, *mpath; \
     struct vfs_s_super *super; \
+    mpath = g_strdup (path); \
     crpath = vfs_s_get_path_mangle (me, mpath, &super, 0); \
     if (crpath == NULL) \
     { \
@@ -1029,13 +1059,16 @@ fish_rename (struct vfs_class *me, const char *path1, const char *path2)
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2, *mpath1, *mpath2;
     struct vfs_s_super *super, *super2;
-    crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super, 0);
+
+    mpath1 = g_strdup (path1);
+    crpath1 = vfs_s_get_path_mangle (me, mpath1, &super, 0);
     if (crpath1 == NULL)
     {
         g_free (mpath1);
         return -1;
     }
-    crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0);
+    mpath2 = g_strdup (path2);
+    crpath2 = vfs_s_get_path_mangle (me, mpath2, &super2, 0);
     if (crpath2 == NULL)
     {
         g_free (mpath1);
@@ -1089,8 +1122,9 @@ fish_link (struct vfs_class *me, const char *path1, const char *path2)
     g_free (shell_commands);
     g_free (rpath1);
     g_free (rpath2);
-    return fish_send_command(me, super2, buf, OPT_FLUSH);
+    return fish_send_command (me, super2, buf, OPT_FLUSH);
 }
+
 
 static int
 fish_symlink (struct vfs_class *me, const char *setto, const char *path)
@@ -1127,7 +1161,6 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
 {
     gchar *shell_commands = NULL;
     PREFIX
-
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n",
                                   SUP.scr_chmod, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath, mode & 07777);
@@ -1157,8 +1190,8 @@ fish_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
         gchar *shell_commands = NULL;
 
         PREFIX
-
-        shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
+        shell_commands = g_strconcat (SUP.scr_env,
+                                      "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
                                       SUP.scr_chown, (char *) NULL);
         g_snprintf (buf, sizeof (buf), shell_commands, rpath, sowner, sgroup);
         g_free (shell_commands);
@@ -1175,8 +1208,8 @@ fish_unlink (struct vfs_class *me, const char *path)
 {
     gchar *shell_commands = NULL;
     PREFIX
-
-    shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_unlink, (char *) NULL);
+    shell_commands =
+        g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_unlink, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
     g_free (shell_commands);
     g_free (rpath);
@@ -1188,7 +1221,6 @@ fish_exists (struct vfs_class *me, const char *path)
 {
     gchar *shell_commands = NULL;
     PREFIX
-
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_exists, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
     g_free (shell_commands);
@@ -1204,7 +1236,8 @@ fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
     gchar *shell_commands = NULL;
     int ret_code;
 
-    PREFIX (void) mode;
+    PREFIX
+    (void) mode;
 
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_mkdir, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
@@ -1228,7 +1261,6 @@ fish_rmdir (struct vfs_class *me, const char *path)
 {
     gchar *shell_commands = NULL;
     PREFIX
-
     shell_commands = g_strconcat (SUP.scr_env, "FISH_FILENAME=%s;\n", SUP.scr_rmdir, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
     g_free (shell_commands);
@@ -1310,7 +1342,6 @@ fish_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     flags &= ~O_EXCL;
     return vfs_s_open (me, file, flags, mode);
 }
-
 
 void
 init_fish (void)

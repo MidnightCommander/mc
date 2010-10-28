@@ -67,7 +67,7 @@
 #include "dialog.h"
 #include "widget.h"
 #include "main.h"
-#include "layout.h"
+#include "layout.h"             /* rotate_dash() */
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"         /* we_are_background */

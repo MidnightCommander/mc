@@ -34,7 +34,7 @@
 #include "main.h"
 #include "consaver/cons.saver.h"
 #include "subshell.h"
-#include "layout.h"
+#include "layout.h"             /* use_dash() */
 #include "dialog.h"
 #include "wtools.h"
 #include "panel.h"              /* update_panels() */
@@ -91,11 +91,19 @@ edition_pre_exec (void)
 
 
 /* Set up the terminal before executing a program */
-static void
+void
 pre_exec (void)
 {
-    use_dash (0);
+    use_dash (FALSE);
     edition_pre_exec ();
+}
+
+/* Hide the terminal after executing a program */
+void
+post_exec (void)
+{
+    edition_post_exec ();
+    use_dash (TRUE);
 }
 
 
@@ -265,7 +273,7 @@ toggle_panels (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
     {
-        new_dir_p = vfs_current_is_local () ? &new_dir : NULL;
+        new_dir_p = vfs_current_is_local ()? &new_dir : NULL;
         invoke_subshell (NULL, VISIBLY, new_dir_p);
     }
     else

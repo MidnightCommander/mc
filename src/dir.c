@@ -38,6 +38,7 @@
 #include "treestore.h"
 #include "dir.h"
 #include "setup.h"              /* panels_options */
+#include "layout.h"             /* rotate_dash() */
 
 /* Reverse flag */
 static int reverse = 1;
