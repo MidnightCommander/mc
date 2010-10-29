@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-09-06 21:40+0400\n"
-"PO-Revision-Date: 2001-09-29 17:41+0200\n"
-"Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
+"PO-Revision-Date: 2010-10-30 01:42+0100\n"
+"Last-Translator: el_libre - - www.catmidia.cat <el.libre@gmail.com>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,24 +19,23 @@ msgid " Search string not found "
 msgstr " No s'ha trobat la cadena "
 
 msgid " Not implemented yet "
-msgstr ""
+msgstr "No s'ha implementat encara"
 
 msgid " Num of replace tokens not equal to num of found tokens "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid " Invalid token number %d "
-msgstr " La màscara objectiu no és vàlida "
+msgstr ""
 
-#, fuzzy
 msgid "Normal"
-msgstr "Formata"
+msgstr "Normal"
 
 msgid "&Regular expression"
 msgstr "Expressió &Habitual"
 
 msgid "Hexadecimal"
-msgstr ""
+msgstr "Hexadecimal"
 
 msgid "Wildcard search"
 msgstr ""
@@ -161,9 +160,8 @@ msgstr "Barra teclat numèric"
 msgid "* on keypad"
 msgstr "* teclat numèric"
 
-#, fuzzy
 msgid "Escape key"
-msgstr "Barra teclat numèric"
+msgstr ""
 
 msgid "Left arrow keypad"
 msgstr "Cursor esquerra teclat numèric"
@@ -198,64 +196,56 @@ msgstr "Suprimir teclat numèric"
 msgid "Enter on keypad"
 msgstr "Tecla de retorn teclat numèric"
 
-#, fuzzy
 msgid "Function key 21"
-msgstr "Tecla de funció 1"
+msgstr "Tecla de funció 21"
 
-#, fuzzy
 msgid "Function key 22"
-msgstr "Tecla de funció 2"
+msgstr "Tecla de funció 22"
 
-#, fuzzy
 msgid "Function key 23"
-msgstr "Tecla de funció 2"
+msgstr "Tecla de funció 23"
 
-#, fuzzy
 msgid "Function key 24"
-msgstr "Tecla de funció 2"
+msgstr "Tecla de funció 24"
 
 msgid "Plus"
-msgstr ""
+msgstr "Més"
 
-#, fuzzy
 msgid "Minus"
-msgstr "Menú"
+msgstr "Menys"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Asterisc"
 
 msgid "Dot"
-msgstr ""
+msgstr "Punt"
 
 msgid "Less than"
-msgstr ""
+msgstr "Menys que"
 
 msgid "Great than"
 msgstr ""
 
 msgid "Equal"
-msgstr ""
+msgstr "Igual"
 
-#, fuzzy
 msgid "Comma"
-msgstr "Ordre"
+msgstr "Coma"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "Apòstrof"
 
-#, fuzzy
 msgid "Colon"
-msgstr "Compta"
+msgstr "Punt"
 
 msgid "Exclamation mark"
 msgstr ""
 
 msgid "Question mark"
-msgstr ""
+msgstr "Signe d'interrogació ?"
 
-#, fuzzy
 msgid "Ampersand"
-msgstr "afe&Geix"
+msgstr ""
 
 msgid "Dollar sign"
 msgstr ""
@@ -263,44 +253,36 @@ msgstr ""
 msgid "Quotation mark"
 msgstr ""
 
-#, fuzzy
 msgid "Caret"
-msgstr "Objectiu/Destí"
+msgstr ""
 
 msgid "Tilda"
 msgstr ""
 
-#, fuzzy
 msgid "Prime"
-msgstr "Anterior"
+msgstr ""
 
-#, fuzzy
 msgid "Underline"
-msgstr " Introduïu la línia: "
+msgstr "Subratllat"
 
 msgid "Understrike"
 msgstr ""
 
 msgid "Pipe"
+msgstr "Conducte"
+
+msgid "Enter"
+msgstr "Retorn"
+
+msgid "Tab key"
+msgstr "Tecla de tabulació"
+
+msgid "Space key"
+msgstr "Barra espaidora"
+
+msgid "Slash key"
 msgstr ""
 
-#, fuzzy
-msgid "Enter"
-msgstr "propietari"
-
-#, fuzzy
-msgid "Tab key"
-msgstr "+ teclat numèric"
-
-#, fuzzy
-msgid "Space key"
-msgstr "Barra teclat numèric"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "Barra teclat numèric"
-
-#, fuzzy
 msgid "Backslash key"
 msgstr "Tecla de retrocés"
 
@@ -308,13 +290,13 @@ msgid "Number sign #"
 msgstr ""
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Majúscula"
 
 #, c-format
 msgid ""
@@ -330,25 +312,21 @@ msgstr "%b %e %Y"
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "Crea un directori nou"
+msgstr ""
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr ""
-" No puc crear el directori objectiu \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr ""
-" No puc crear el directori objectiu \"%s\" \n"
-" %s "
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -448,9 +426,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "L'arxiu extfs no és consistent"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "No he pogut canviar de directori"
+msgstr ""
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -500,9 +478,9 @@ msgstr "fish: desa %s: està enviant l'ordre..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Ha fallat la lectura local, s'està enviant zeros"
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: s'està emmagatzemant %s %d (%d)"
+msgstr ""
 
 msgid "zeros"
 msgstr "zeros"
@@ -532,17 +510,15 @@ msgstr "ftpfs: s'està enviant la identificació"
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: s'està enviant la contrasenya"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP: Cal una contrasenya per a"
+msgstr " FTP: Cal una contrasenya per a %s"
 
-#, fuzzy
 msgid "Account:"
-msgstr "Compta"
+msgstr "Compte:"
 
-#, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: s'està enviant la contrasenya"
+msgstr ""
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs: connectat"
@@ -556,7 +532,7 @@ msgstr "ftpfs: El nom de l'ordinador central no és vàlid."
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -573,17 +549,16 @@ msgstr "ftpfs: ha fallat la connexió amb el servidor: %s"
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Està esperant per reintentar... %d (Ctrl-C per cancel·lar)"
 
-#, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: L'adreça de l'ordinador central no és vàlida."
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: no s'ha pogut establir el mode passiu"
+msgstr "ftpfs: no s'ha pogut establir el mode passiu: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr " No es pot crear el sòcol: %s"
+msgstr "ftpfs: nNo es pot crear el sòcol: %s"
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: no s'ha pogut establir el mode passiu"
@@ -620,9 +595,9 @@ msgstr "(primer canvia de directori)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ha fallat; enlloc per retornar-hi"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: s'està emmagatzemar el fitxer %d (%d)"
+msgstr "ftpfs: s'està emmagatzemar el fitxer %lu (%lu)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
@@ -768,8 +743,7 @@ msgstr " mentre començava l'escaneig del inode %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-"undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
+msgstr "undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
@@ -892,13 +866,11 @@ msgstr ""
 msgid "Displays the current version"
 msgstr "Mostra la versió actual"
 
-#, fuzzy
 msgid "Print data directory"
-msgstr "Crea un directori nou"
+msgstr ""
 
-#, fuzzy
 msgid "Print last working directory to specified file"
-msgstr "Imprimeix el directori de treball en sortir"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Habilita el suport de subintèrprets (per defecte)"
@@ -936,9 +908,8 @@ msgstr "Utilitza el caràcters de línies per fer marcs"
 msgid "Resets soft keys on HP terminals"
 msgstr "Reinicia les tecles programades als terminals HP"
 
-#, fuzzy
 msgid "Load definitions of key bindings from specified file"
-msgstr "Enregistra el quadre ftp a un fitxer"
+msgstr ""
 
 msgid "Requests to run in black and white"
 msgstr "Demana que s'utilitzi el mode blanc i negre"
@@ -953,7 +924,6 @@ msgid "Show mc with specified skin"
 msgstr ""
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -973,14 +943,11 @@ msgstr ""
 "{FORE} i {BACK} es poden ometre, i s'utilitzarà l'opció per defecte\n"
 "Paraules clau:\n"
 "   Global:\t            errors, invertir, marcador, entrada\n"
-"   Visualització de fitxers: normal, seleccionat, marcat, selecció de "
-"marca \n"
+"   Visualització de fitxers: normal, seleccionat, marcat, selecció de marca \n"
 "   Quadres de diàleg:  dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menús:              menú, menuhot, menusel, menuhotsel\n"
-"   Ajuda:              ajuda normal, ajuda cursiva, ajuda enllaç, enllaç "
-"d'ajuda\n"
-"   Tipus de fitxers:   directori, executable, enllaç, dispositiu, especial, "
-"core\n"
+"   Ajuda:              ajuda normal, ajuda cursiva, ajuda enllaç, enllaç d'ajuda\n"
+"   Tipus de fitxers:   directori, executable, enllaç, dispositiu, especial, core\n"
 "\n"
 "Colors:\n"
 "   negre, gris, vermell, vermell clar, verd, verd clar, marró,\n"
@@ -999,43 +966,36 @@ msgid ""
 "\n"
 msgstr ""
 
-#, fuzzy
 msgid "Color options"
-msgstr "Opcions de configuració"
+msgstr "Opcions de color"
 
-#, fuzzy
 msgid "+number"
-msgstr "Número de l'inode"
+msgstr ""
 
-#, fuzzy
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[opcions] [aquest_dir] [dir_d'altre_quadre]\n"
+msgstr ""
 
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Si us plau envieu qualsevol informació sobre errors (incloent la sortida de "
-"'mc -V')\n"
-"a mc-devel@gnome.org\n"
+"Si us plau enviaqualsevol informació sobre errors (incloent la sortida de 'mc -V')\n"
+"com a tiquet a a www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#, fuzzy
 msgid "Main options"
-msgstr " Opcions del quadre "
+msgstr ""
 
-#, fuzzy
 msgid "Terminal options"
-msgstr " Altres opcions "
+msgstr "Opcions de terminal"
 
 msgid " Background process error "
 msgstr " S'ha produït un error al procés de fons "
@@ -1080,9 +1040,8 @@ msgstr "&D'acord"
 msgid "&Reverse"
 msgstr "in&Verteix"
 
-#, fuzzy
 msgid "Case sensi&tive"
-msgstr "distingeix entre majú&Scules/minúscules"
+msgstr "Considera &diferents les majúscules i les minúscules"
 
 msgid "Executable &first"
 msgstr ""
@@ -1093,9 +1052,8 @@ msgstr "Ordre de classificació"
 msgid " Confirmation "
 msgstr " Confirmació "
 
-#, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr "directoris fa&Vorits     C-\\"
+msgstr ""
 
 msgid " confirm &Exit "
 msgstr " confirma la &Sortida "
@@ -1109,9 +1067,8 @@ msgstr " confirma la s&Obreescriptura "
 msgid " confirm &Delete "
 msgstr " confirma la &Supressió "
 
-#, fuzzy
 msgid "UTF-8 output"
-msgstr "Mostra una sortida de 8 bits purs"
+msgstr ""
 
 msgid "Full 8 bits output"
 msgstr "Mostra una sortida de 8 bits purs"
@@ -1137,20 +1094,17 @@ msgstr "Pàgina de codis d'entrada / visualització:"
 msgid "&Select"
 msgstr "&Seleccioneu"
 
-#, fuzzy
 msgid "Directory tree"
-msgstr "arbre de &Directoris"
+msgstr "Arbre de directoris"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "&Mode de desar..."
+msgstr ""
 
-#, fuzzy
 msgid "Use &passive mode"
-msgstr "&Mode de desar..."
+msgstr ""
 
 msgid "&Use ~/.netrc"
-msgstr ""
+msgstr "&Usa ~/.netrc"
 
 msgid "&Always use ftp proxy"
 msgstr "usa sempre un servidor in&Termediari de ftp"
@@ -1362,13 +1316,11 @@ msgstr " Introduïu una expressió per filtrar els noms de fitxer"
 msgid "&Using shell patterns"
 msgstr "amb patrons d'&Intèrpret"
 
-#, fuzzy
 msgid "&Case sensitive"
-msgstr "distingeix entre majú&Scules/minúscules"
+msgstr "&Diferencia majúscules"
 
-#, fuzzy
 msgid "&Files only"
-msgstr "només &Mida"
+msgstr "Només &fitxers"
 
 msgid " Select "
 msgstr " Selecciona "
@@ -1400,9 +1352,8 @@ msgstr "&Local"
 msgid "Highlighting groups file edit"
 msgstr ""
 
-#, fuzzy
 msgid " Which highlighting file you want to edit? "
-msgstr " Quin fitxer d'extensions voleu editar? "
+msgstr ""
 
 msgid " Compare directories "
 msgstr " Compara els directoris "
@@ -1429,9 +1380,9 @@ msgstr ""
 " No es poden commutar els quadres si no sou \n"
 " a un xterm o a una consola Linux. "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Link %s to:"
-msgstr " enllaç: %s "
+msgstr ""
 
 msgid " Link "
 msgstr " Enllaç "
@@ -1476,9 +1427,8 @@ msgstr " Enllaça amb una màquina remota "
 msgid " FTP to machine "
 msgstr " Fes FTP a màquina "
 
-#, fuzzy
 msgid " Shell link to machine "
-msgstr " Enllaç SMB a màquina "
+msgstr ""
 
 msgid " SMB link to machine "
 msgstr " Enllaç SMB a màquina "
@@ -1496,9 +1446,9 @@ msgstr ""
 msgid " Setup "
 msgstr " Configuració "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Setup saved to ~/%s"
-msgstr " S'ha desat la configuració a ~/"
+msgstr " S'ha desat la configuració a ~/%s"
 
 #, c-format
 msgid ""
@@ -1514,66 +1464,58 @@ msgstr " No podeu executar ordres a sistemes de fitxers no-locals"
 msgid " The shell is already running a command "
 msgstr " L'intèrpret ja esta executant una comanda "
 
-#, fuzzy
 msgid "Cannot read directory contents"
-msgstr "No he pogut canviar de directori"
+msgstr ""
 
-#, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "Ressaltament de la sinta&Xi"
+msgstr ""
 
-#, fuzzy
 msgid "< Auto >"
-msgstr " Quant a "
+msgstr "< Auto >"
 
 msgid "< Reload Current Syntax >"
 msgstr ""
 
-#, fuzzy
 msgid "About"
-msgstr " Quant a "
+msgstr "Quant a"
 
-#, fuzzy
 msgid ""
 "Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "            A user friendly text editor\n"
 "         written for the Midnight Commander"
 msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "        Un editor de text amistós escrit\n"
-"             pel Midnight Commander.\n"
+"             pel Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open %s for reading "
-msgstr " No s'ha pogut obrir un conducte per llegir: "
+msgstr " No s'ha pogut obrir %s per llegir-lo"
 
 msgid "Error"
 msgstr "S'ha produït un error"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading from pipe: %s "
-msgstr " S'ha produït un error en llegir del conducte: "
+msgstr " S'ha produït un error en llegir del conducte: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " No s'ha pogut obrir un conducte per llegir: "
+msgstr " No s'ha pogut obrir un conducte per llegir:  %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " No puc obtenir mida/permisos del fitxer: "
+msgstr " No puc obtenir mida/permisos del fitxer %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s is not a regular file "
-msgstr " No puc visualitzar-lo perquè no és un fitxer habitual "
+msgstr "%s no és un fitxer normal"
 
-#, fuzzy, c-format
+#, c-format
 msgid " File %s is too large "
-msgstr " El fitxer és massa gran: "
+msgstr "El fitxer %s és massa gran"
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -1593,17 +1535,15 @@ msgstr " S'ha produït un error en escriure al conducte: "
 msgid " Cannot open pipe for writing: "
 msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open file for writing: %s "
-msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
+msgstr ""
 
-#, fuzzy
 msgid "&Quick save"
-msgstr "Desat ràpid "
+msgstr "&Desat ràpid "
 
-#, fuzzy
 msgid "&Safe save"
-msgstr "Desat segur "
+msgstr "Desat &segur "
 
 msgid "&Do backups with following extension:"
 msgstr ""
@@ -1617,9 +1557,8 @@ msgstr " Edita la manera de desar "
 msgid "The file you are saving is not finished with a newline"
 msgstr ""
 
-#, fuzzy
 msgid "C&ontinue"
-msgstr "Continua"
+msgstr "C&ontinua"
 
 msgid "&Do not change"
 msgstr ""
@@ -1645,9 +1584,8 @@ msgstr " Desa com a"
 msgid " A file already exists with this name. "
 msgstr " Ja existeix un fitxer amb aquest nom. "
 
-#, fuzzy
 msgid "&Overwrite"
-msgstr "Sobreescriu"
+msgstr "S&obreescriu"
 
 msgid " Cannot save file. "
 msgstr " S'ha produït un error en intentar desar el fitxer. "
@@ -1692,13 +1630,11 @@ msgstr ""
 " El text actual s'ha modificat, però no s'ha desat. \n"
 " 'Continua' descartarà aquests canvis. "
 
-#, fuzzy
 msgid "Syntax file edit"
-msgstr "edita el fitxer de &Menús"
+msgstr ""
 
-#, fuzzy
 msgid " Which syntax file you want to edit? "
-msgstr " Quin fitxer d'extensions voleu editar? "
+msgstr ""
 
 msgid " Load "
 msgstr " Carrega "
@@ -1706,13 +1642,12 @@ msgstr " Carrega "
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " El bloc és gran, potser no podreu desfer aquesta acció "
 
-#, fuzzy
 msgid "Replace"
-msgstr "&Reemplaça"
+msgstr "Reemplaça"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%ld replacements made"
-msgstr " S'han fet %ld reemplaçaments. "
+msgstr " S'han fet %ld reemplaçaments"
 
 msgid "Quit"
 msgstr "Surt"
@@ -1720,13 +1655,11 @@ msgstr "Surt"
 msgid " File was modified, Save with exit? "
 msgstr " El fitxer s'ha modificat. El deso en sortir? "
 
-#, fuzzy
 msgid "&Cancel quit"
-msgstr "Cancel·la la sortida"
+msgstr "&Cancel·la la sortida"
 
-#, fuzzy
 msgid " Error "
-msgstr "S'ha produït un error"
+msgstr "Error"
 
 msgid " This function is not implemented. "
 msgstr ""
@@ -1765,8 +1698,7 @@ msgid " Run Sort "
 msgstr " Executa \"Ordenar\" "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-" Introduïu les opcions per \"ordenar\" (vegeu manual) separades per espais: "
+msgstr " Introduïu les opcions per \"ordenar\" (vegeu manual) separades per espais: "
 
 msgid " Sort "
 msgstr " Ordena "
@@ -1780,17 +1712,14 @@ msgstr " \"Ordena\" ha retornat \"non-zero\": "
 msgid "Paste output of external command"
 msgstr ""
 
-#, fuzzy
 msgid "Enter shell command(s):"
-msgstr " Introduïu l'etiqueta de l'ordre: "
+msgstr ""
 
-#, fuzzy
 msgid "External command"
-msgstr "Una altre ordre"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot execute command"
-msgstr " S'ha produït un error en executar la comanda \"ordena\" "
+msgstr "No es pot executar l'ordre"
 
 msgid "Error creating script:"
 msgstr "S'ha produït un error en crear la seqüència:"
@@ -1834,13 +1763,11 @@ msgstr " Executa la macro "
 msgid "All charsets"
 msgstr ""
 
-#, fuzzy
 msgid "&Whole words"
-msgstr "Només paraules com&Pletes"
+msgstr "Paraules com&pletes"
 
-#, fuzzy
 msgid "In se&lection"
-msgstr "&Inverteix la selecció        M-*"
+msgstr ""
 
 msgid "&Backwards"
 msgstr "Cap &Enrere"
@@ -1857,9 +1784,8 @@ msgstr " Introduïu la cadena de cerca:"
 msgid " Replace "
 msgstr " Reemplaça "
 
-#, fuzzy
 msgid "&Find all"
-msgstr "Cerca Fitxer"
+msgstr "C&erca'ls tots"
 
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -1901,171 +1827,135 @@ msgstr ""
 msgid "&Open file..."
 msgstr "&Obre el fitxer..."
 
-#, fuzzy
 msgid "&New"
-msgstr "&Nom"
+msgstr "&Nou"
 
-#, fuzzy
 msgid "Save &as..."
-msgstr "&Desa la configuració"
+msgstr "&Anomena i desa..."
 
-#, fuzzy
 msgid "&Insert file..."
-msgstr "&Insereix el fitxer...    F15"
+msgstr "&Insereix un fitxer..."
 
-#, fuzzy
 msgid "Cop&y to file..."
-msgstr "copia al &Fitxer...   C-f"
+msgstr ""
 
-#, fuzzy
 msgid "&User menu..."
-msgstr "Menú d'&usuari...     F11"
+msgstr "Menú d'&usuari..."
 
-#, fuzzy
 msgid "A&bout..."
-msgstr "&Format..."
+msgstr "&Quant a..."
 
 msgid "&Quit"
 msgstr "&Surt"
 
 msgid "&Undo"
-msgstr ""
+msgstr "&Desfés"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
 msgstr "Canvia entre &Insereix/sobreescriu Ins"
 
-#, fuzzy
 msgid "To&ggle mark"
-msgstr "&Esborra els marcats"
+msgstr ""
 
 msgid "&Mark columns"
 msgstr ""
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "&Marca'ls tots"
+msgstr "Marc&a'ls tots"
 
 msgid "Unmar&k"
 msgstr ""
 
-#, fuzzy
 msgid "Cop&y"
-msgstr "Copia"
+msgstr "Cop&ia"
 
-#, fuzzy
 msgid "Mo&ve"
-msgstr "Mou"
+msgstr "Mo&u"
 
 msgid "&Delete"
 msgstr "&Suprimeix"
 
-#, fuzzy
 msgid "Co&py to clipfile"
-msgstr "copia al &Fitxer...      "
+msgstr "    "
 
-#, fuzzy
 msgid "&Cut to clipfile"
-msgstr "&Vés a la línia...          M-l"
+msgstr ""
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
-msgstr "&Vés a la línia...          M-l"
+msgstr ""
 
 msgid "&Beginning"
 msgstr ""
 
-#, fuzzy
 msgid "&End"
-msgstr "node-&I"
+msgstr "&Fi"
 
-#, fuzzy
 msgid "&Search..."
-msgstr "Cerca"
+msgstr "&Cerca..."
 
-#, fuzzy
 msgid "Search &again"
-msgstr "cerca &de nou   F17"
+msgstr "&Cerca de nou"
 
-#, fuzzy
 msgid "&Replace..."
-msgstr "&Reemplaça"
+msgstr "&Reemplaça..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
-msgstr "&Canvia inici/fi de marcador    F3"
+msgstr "&Activa/desactiva Marcador"
 
-#, fuzzy
 msgid "&Next bookmark"
-msgstr "&Posa els marcats"
+msgstr "Adreça d'interès &següent"
 
-#, fuzzy
 msgid "&Prev bookmark"
-msgstr "&Ordena...                 M-t"
+msgstr "&Favorit Anterior"
 
-#, fuzzy
 msgid "&Flush bookmark"
-msgstr "envia per co&Rreu...          "
+msgstr ""
 
-#, fuzzy
 msgid "&Go to line..."
-msgstr " Vés a la línia "
+msgstr "Vés a la &línia..."
 
-#, fuzzy
 msgid "&Toggle line state"
-msgstr "&Canvia inici/fi de marcador    F3"
+msgstr ""
 
-#, fuzzy
 msgid "Go to matching &bracket"
-msgstr "ves al &Claudàtor coincident  M-b"
+msgstr "Ves al &Claudàtor coincident "
 
-#, fuzzy
 msgid "Toggle s&yntax highlighting"
-msgstr "Ressaltament de la sinta&Xi"
+msgstr "Ressaltament de la sinta&xi"
 
-#, fuzzy
 msgid "&Find declaration"
-msgstr "Troba els fitxers rebutjats després d'apedaçar"
+msgstr ""
 
-#, fuzzy
 msgid "Back from &declaration"
-msgstr "Troba els fitxers rebutjats després d'apedaçar"
+msgstr ""
 
-#, fuzzy
 msgid "For&ward to declaration"
-msgstr "Troba els fitxers rebutjats després d'apedaçar"
+msgstr ""
 
-#, fuzzy
 msgid "Encod&ing..."
-msgstr "&Ordena...                 M-t"
+msgstr ""
 
-#, fuzzy
 msgid "&Refresh screen"
-msgstr "Actualit&za la pantalla    C-l"
+msgstr "Actualit&za la pantalla"
 
-#, fuzzy
 msgid "&Start record macro"
-msgstr "Comença a &enregistrar la macro    C-r"
+msgstr "Comença a &enregistrar la macro"
 
-#, fuzzy
 msgid "Finis&h record macro..."
-msgstr "&Finalitza l'enregistrament de la macro...  C-r"
+msgstr "&Finalitza l'enregistrament de la macro..."
 
-#, fuzzy
 msgid "&Execute macro..."
-msgstr "e&Xecuta la macro...   C-a, TECLA"
+msgstr "&Executa una macroinstrucció"
 
-#, fuzzy
 msgid "Delete macr&o..."
-msgstr " Suprimeix la macro "
+msgstr " Suprimeix la macr&o "
 
-#, fuzzy
 msgid "'ispell' s&pell check"
-msgstr "comprova l'or&Tografia: ispell  C-p"
+msgstr ""
 
 #, fuzzy
 msgid "&Mail..."
-msgstr "&Filtra..."
+msgstr "Correu electrò_nic"
 
 #, fuzzy
 msgid "Insert &literal..."
@@ -2073,7 +1963,7 @@ msgstr "insereix &Literal...         C-q"
 
 #, fuzzy
 msgid "Insert &date/time"
-msgstr "insereix &Data/hora             "
+msgstr "Insereix la data/hora"
 
 #, fuzzy
 msgid "&Format paragraph"
@@ -2081,7 +1971,7 @@ msgstr "&Formateja el paràgraf          M-p"
 
 #, fuzzy
 msgid "&Sort..."
-msgstr "&Ordenació..."
+msgstr "Ordena"
 
 msgid "&Paste output of..."
 msgstr ""
@@ -2103,7 +1993,7 @@ msgstr "defineix &Tecles..."
 
 #, fuzzy
 msgid "Syntax &highlighting..."
-msgstr "Ressaltament de la sinta&Xi"
+msgstr "<b>Ressaltat de la sintaxi</b>"
 
 #, fuzzy
 msgid "S&yntax file"
@@ -2111,22 +2001,22 @@ msgstr "edita el fitxer de &Menús"
 
 #, fuzzy
 msgid "&Menu file"
-msgstr "edita el fitxer de &Menús"
+msgstr "Fitxer de menú"
 
 msgid "&Save setup"
 msgstr "&Desa la configuració"
 
 #, fuzzy
 msgid "&File"
-msgstr "Fitxer"
+msgstr "&Fitxer"
 
 #, fuzzy
 msgid "&Edit"
-msgstr "Edita"
+msgstr "&Edita"
 
 #, fuzzy
 msgid "&Search"
-msgstr "Cerca"
+msgstr "Ce&rca"
 
 #, fuzzy
 msgid "&Command"
@@ -2134,11 +2024,11 @@ msgstr "Ordre"
 
 #, fuzzy
 msgid "For&mat"
-msgstr "Formata"
+msgstr "For_mat"
 
 #, fuzzy
 msgid "&Options"
-msgstr " &Opcions "
+msgstr "&Opcions"
 
 msgid "None"
 msgstr "Cap"
@@ -2273,13 +2163,10 @@ msgstr " Paràmetre "
 
 #, fuzzy, c-format
 msgid " %s%s file error"
-msgstr " s'ha produït un error de fitxer "
+msgstr "Error en el fitxer"
 
 #, fuzzy, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "El fitxer mc.ext ha canviat\n"
 "amb la versió 3.0. Sembla que la instal·lació\n"
@@ -2288,13 +2175,10 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " ~/%s file error "
-msgstr " s'ha produït un error de fitxer "
+msgstr "Error en el fitxer"
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2322,8 +2206,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" No puc crear enllaços simbòlics estables entre els sistemes de fitxers no "
-"locals: \n"
+" No puc crear enllaços simbòlics estables entre els sistemes de fitxers no locals: \n"
 "\n"
 " S'inhabilitarà l'opció \"enllaços simbòlics estables\" "
 
@@ -2619,7 +2502,7 @@ msgstr " cap a:"
 
 #, c-format
 msgid "%s?"
-msgstr ""
+msgstr "%s?"
 
 msgid " Cannot operate on \"..\"! "
 msgstr " No puc treballar sobre \"..\"! "
@@ -2658,17 +2541,17 @@ msgstr "ca&P"
 msgid "ETA %d:%02d.%02d"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid "%.2f MB/s"
-msgstr ""
+msgstr "%.2f mb"
 
-#, c-format
+#, fuzzy, c-format
 msgid "%.2f KB/s"
-msgstr ""
+msgstr "%.2f KB/s"
 
-#, c-format
+#, fuzzy, c-format
 msgid "%ld B/s"
-msgstr ""
+msgstr "imprimeix l'ajuda d'un mòdul específic (es pot combinar amb --advanced i --help-verbose). Afegiu el prefix = al nom del mòdul per una coincidència exacta."
 
 msgid "File"
 msgstr "Fitxer"
@@ -2690,7 +2573,7 @@ msgstr "Suprimint"
 
 #, fuzzy
 msgid "Target file already exists!"
-msgstr "El fitxer de destí \"%s\" ja existeix!"
+msgstr "Ja existeix el fitxer de destinació"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %llu"
@@ -2805,7 +2688,7 @@ msgstr "distingeix entre majú&Scules/minúscules"
 
 #, fuzzy
 msgid "Re&gular expression"
-msgstr "Expressió &Habitual"
+msgstr "Expressió re_gular"
 
 msgid "Fir&st hit"
 msgstr ""
@@ -2890,7 +2773,7 @@ msgstr "Afe&geix l'actual"
 
 #, fuzzy
 msgid "&Refresh"
-msgstr "in&Verteix"
+msgstr "&Refresca"
 
 msgid "Fr&ee VFSs now"
 msgstr "Allib&era els VFSs ara"
@@ -2963,13 +2846,12 @@ msgid " Hotlist Load "
 msgstr " Càrrega de favorits "
 
 #, fuzzy, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " fitxer, i no s'ha pogut suprimir els favorits antics"
 
 #, fuzzy
 msgid "Information"
-msgstr " Informació "
+msgstr "Informació"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3020,7 +2902,7 @@ msgstr "Modificat:  %s"
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
 msgid "Changed:   %s"
-msgstr "Can&via a"
+msgstr "Modificat"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3162,8 +3044,7 @@ msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Premeu totes les tecles esmentades. Quan ho hagueu fet, comproveu"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
+msgstr "a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "l'espai o feu-hi clic. Per desplaçar-vos, utilitzeu el tabulador."
@@ -3183,7 +3064,7 @@ msgstr "Desat ràpid "
 
 #, fuzzy
 msgid "&Info"
-msgstr "node-&I"
+msgstr "INFO"
 
 msgid "&Sort order..."
 msgstr "&Ordenació..."
@@ -3193,7 +3074,7 @@ msgstr "&Filtra..."
 
 #, fuzzy
 msgid "&Encoding..."
-msgstr "&Ordena...                 M-t"
+msgstr "_Codificació:"
 
 msgid "&Network link..."
 msgstr "enllaç per a la &Xarxa..."
@@ -3210,11 +3091,11 @@ msgstr "Enllaç SM&B..."
 
 #, fuzzy
 msgid "&Rescan"
-msgstr "Rellegeix"
+msgstr "_Torna a analitzar"
 
 #, fuzzy
 msgid "&View"
-msgstr "Vista"
+msgstr "&Visualitza"
 
 #, fuzzy
 msgid "Vie&w file..."
@@ -3226,14 +3107,14 @@ msgstr " Vista filtrada "
 
 #, fuzzy
 msgid "&Copy"
-msgstr "Copia"
+msgstr "&Copia"
 
 msgid "C&hmod"
-msgstr ""
+msgstr "C&hmod"
 
 #, fuzzy
 msgid "&Link"
-msgstr "en&Llaços"
+msgstr "Enllaça"
 
 #, fuzzy
 msgid "&SymLink"
@@ -3244,7 +3125,7 @@ msgid "Edit s&ymlink"
 msgstr " Edita l'enllaç simbòlic "
 
 msgid "Ch&own"
-msgstr ""
+msgstr "Ch&own"
 
 #, fuzzy
 msgid "&Advanced chown"
@@ -3256,7 +3137,7 @@ msgstr "&Suprimeix"
 
 #, fuzzy
 msgid "&Mkdir"
-msgstr "FerDir"
+msgstr "mkdir"
 
 #, fuzzy
 msgid "&Quick cd"
@@ -3264,7 +3145,7 @@ msgstr "Canvi ràpid de directori"
 
 #, fuzzy
 msgid "Select &group"
-msgstr "Estableix els &grups"
+msgstr "Selecciona un grup"
 
 #, fuzzy
 msgid "U&nselect group"
@@ -3276,7 +3157,7 @@ msgstr "&Inverteix la selecció        M-*"
 
 #, fuzzy
 msgid "E&xit"
-msgstr "Edita"
+msgstr "S&urt"
 
 #, fuzzy
 msgid "&User menu"
@@ -3357,19 +3238,19 @@ msgstr "Sistemes de fitxers &Virtuals..."
 
 #, fuzzy
 msgid "&Above"
-msgstr " a dal&T "
+msgstr "a sobre"
 
 #, fuzzy
 msgid "&Left"
-msgstr " &Esquerra "
+msgstr "&Esquerra"
 
 #, fuzzy
 msgid "&Below"
-msgstr " a bai&X "
+msgstr "a sota"
 
 #, fuzzy
 msgid "&Right"
-msgstr " &Dreta "
+msgstr "&Dreta"
 
 msgid " Information "
 msgstr " Informació "
@@ -3405,7 +3286,7 @@ msgstr "La variable d'entorn TERM no esta definida!\n"
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
-msgstr "No he pogut canviar de directori"
+msgstr "No s'ha pogut crear el directori «%s»: %s."
 
 msgid "safe de&Lete"
 msgstr "&Supressió segura"
@@ -3504,9 +3385,7 @@ msgid " Enter command label: "
 msgstr " Introduïu l'etiqueta de l'ordre: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" No puc executar un quadre de cerca externa mentre estigui connectat a un "
-"directori no-local "
+msgstr " No puc executar un quadre de cerca externa mentre estigui connectat a un directori no-local "
 
 msgid "Find rejects after patching"
 msgstr "Troba els fitxers rebutjats després d'apedaçar"
@@ -3524,7 +3403,7 @@ msgid "Pipe close failed"
 msgstr "Ha fallat el tancament del conducte"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[dev]"
 
 msgid "UP--DIR"
 msgstr "UP--DIR"
@@ -3537,16 +3416,18 @@ msgstr "SUB-DIR"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
 msgid "sort|u"
-msgstr ""
+msgstr "Ordena"
 
 msgid "&Unsorted"
 msgstr "sense &Ordre"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
 msgid "sort|n"
-msgstr ""
+msgstr "Ordena"
 
 msgid "&Name"
 msgstr "&Nom"
@@ -3555,43 +3436,47 @@ msgstr "&Nom"
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
 msgid "sort|e"
-msgstr "sense &Ordre"
+msgstr "Ordena"
 
 msgid "&Extension"
 msgstr "&Extensió"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
 msgid "sort|s"
-msgstr ""
+msgstr "Ordena"
 
 msgid "&Size"
 msgstr "Mi&da"
 
 #, fuzzy
 msgid "Block Size"
-msgstr " Mida"
+msgstr "Mida del bloc"
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
 msgid "sort|m"
-msgstr ""
+msgstr "Ordena"
 
 msgid "&Modify time"
 msgstr "data de &Modificació"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
 msgid "sort|a"
-msgstr ""
+msgstr "Ordena"
 
 msgid "&Access time"
 msgstr "data d'&Accés"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
 msgid "sort|h"
-msgstr ""
+msgstr "Ordena"
 
 msgid "C&Hange time"
 msgstr "data de &Canvi"
@@ -3607,8 +3492,9 @@ msgstr "N1"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
 msgid "sort|i"
-msgstr ""
+msgstr "Ordena"
 
 msgid "&Inode"
 msgstr "node-&I"
@@ -3631,7 +3517,7 @@ msgstr "<S'ha produït una fallida en llegir l'enllaç>"
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s bytes"
+msgstr[0] "%s byte"
 msgstr[1] "%s bytes"
 
 #, fuzzy, c-format
@@ -3644,9 +3530,7 @@ msgid "Unknown tag on display format: "
 msgstr "Marcador desconegut al format de pantalla: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"El format facilitat per l'usuari sembla que és invàlid, s'està tornant al "
-"format per defecte."
+msgstr "El format facilitat per l'usuari sembla que és invàlid, s'està tornant al format per defecte."
 
 msgid " Do you really want to execute? "
 msgstr " Realment ho voleu executar? "
@@ -3662,7 +3546,7 @@ msgstr "-  < Cap traducció >"
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr " S'ha produït un error en intentar desar el fitxer. "
+msgstr "No es pot desar el fitxer «{0}»."
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -3707,8 +3591,7 @@ msgid "With support for background operations\n"
 msgstr "Amb suport per a operacions en segon pla\n"
 
 msgid "With mouse support on xterm and Linux console\n"
-msgstr ""
-"Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
+msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
 
 msgid "With mouse support on xterm\n"
 msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm.\n"
@@ -3839,7 +3722,7 @@ msgstr " Vés a l'adreça "
 
 #, fuzzy
 msgid " Invalid address "
-msgstr " La contrasenya no és vàlida "
+msgstr "Adreça invàlida"
 
 #, fuzzy
 msgid " Cannot spawn child process "
@@ -3899,7 +3782,7 @@ msgstr "%s bytes"
 
 #, fuzzy, c-format
 msgid ">= %s bytes"
-msgstr "%s bytes"
+msgstr "%s (%s bytes)"
 
 #, c-format
 msgid ""
@@ -3912,7 +3795,7 @@ msgstr ""
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " S'ha produït un error en intentar desar el fitxer. "
+msgstr "No es pot desar el fitxer «{0}»."
 
 #, c-format
 msgid ""
@@ -4517,16 +4400,12 @@ msgstr "Procés de fons:"
 # Si té a veure amb SO_DONTROUTE amb això seria suficient  iv
 #~ msgid " Socket source routing setup "
 #~ msgstr " Configuració del camí origen del sòcol "
-
 #~ msgid " Enter host name to use as a source routing hop: "
 #~ msgstr " Introduïu l'ordinador central  que s'utilitzarà com a mitjancer: "
-
 #~ msgid " Host name "
 #~ msgstr " Nom de l'ordinador central "
-
 #~ msgid " Error while looking up IP address "
 #~ msgstr " S'ha produït un error en cercar l'adreça IP "
-
 #~ msgid ""
 #~ "\n"
 #~ "\n"
@@ -4541,19 +4420,14 @@ msgstr "Procés de fons:"
 #~ "desbordament de la pila d'actualització!\n"
 #~ "\n"
 #~ "\n"
-
 #~ msgid " Listing format edit "
 #~ msgstr " Edició del format de llista "
-
 #~ msgid " New mode is \"%s\" "
 #~ msgstr " El nou mode és \"%s\" "
-
 #~ msgid "&Drive...       M-d"
 #~ msgstr "&Unitat...     M-d"
-
 #~ msgid "Use to debug the background code"
 #~ msgstr "S'utilitza per depurar el codi de fons"
-
 #, fuzzy
 #~ msgid "Force subshell execution"
 #~ msgstr "executa amb l'ID del propietari"
