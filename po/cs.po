@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.7.3\n"
+"Project-Id-Version: mc 4.7.4\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-09-06 20:43+0400\n"
-"PO-Revision-Date: 2010-07-11 13:41+0100\n"
+"PO-Revision-Date: 2010-10-31 10:14+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -238,13 +238,11 @@ msgstr "Funkční klávesa 23"
 msgid "Function key 24"
 msgstr "Funkční klávesa 24"
 
-#, fuzzy
 msgid "A1 key"
-msgstr "Klávesa End"
+msgstr "Klávesa A1"
 
-#, fuzzy
 msgid "C1 key"
-msgstr "Klávesa End"
+msgstr "Klávesa C1"
 
 msgid "Plus"
 msgstr "Plus"
@@ -457,13 +455,13 @@ msgstr "Adresářová keš %s vypršela"
 msgid "Starting linear transfer..."
 msgstr "Začíná lineární přenos..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu bajtů přeneseno)"
+msgstr "%s: %s: %s %3d%% (%ju bajtů přeneseno)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s: %s %ju bytes transferred"
-msgstr "%s: %s: %s %lu bajtů již přeneseno"
+msgstr "%s: %s: %s %ju bajtů již přeneseno"
 
 msgid "Getting file"
 msgstr "Získává se soubor"
@@ -535,9 +533,9 @@ msgstr "fish: ukládám %s: posílám příkaz..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Selhalo čtení lokálního souboru, posílám nuly"
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%ju)"
-msgstr "fish: ukládá se %s %d (%lu)"
+msgstr "fish: ukládá se %s %d (%ju)"
 
 msgid "zeros"
 msgstr "nuly"
@@ -653,9 +651,9 @@ msgstr "(nejdříve chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: selhání; není jiná možnost"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: storing file %ju (%ju)"
-msgstr "ftpfs: ukládá se soubor %lu (%lu)"
+msgstr "ftpfs: ukládá se soubor %ju (%ju)"
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
@@ -939,7 +937,6 @@ msgid "Show mc with specified skin"
 msgstr "Zobrazit mc se zadaným tématem vzhledu"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -960,7 +957,7 @@ msgstr ""
 "{POPŘEDÍ} a {POZADÍ} lze vynechat a bude použita standardní hodnota\n"
 "\n"
 "Klíče (anglicky):\n"
-"   Globální:          errors, reverse, gauge, viewunderline\n"
+"   Globální:          errors, disabled, reverse, gauge, viewunderline\n"
 "                      input, inputmark, inputunchanged, commandlinemark\n"
 "   Zobrazení souborů: normal, selected, marked, markselect\n"
 "   Okna dialogů:      dnormal, dfocus, dhotnormal, dhotfocus, "
@@ -1088,7 +1085,6 @@ msgstr "Potvrzování"
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Smazání &historie"
 
-#, fuzzy
 msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Confirmation|Smazání hotlistu &adresářů"
 
@@ -1660,21 +1656,16 @@ msgstr "< Nahraj aktuální syntaxi >"
 msgid "About"
 msgstr "O programu"
 
-#, fuzzy
 msgid ""
 "Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "            A user friendly text editor\n"
 "         written for the Midnight Commander"
 msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
+"Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "       Uživatelsky příjemný textový editor\n"
-"       pro program Midnight Commander.\n"
-"\n"
+"         pro program Midnight Commander"
 
 #, c-format
 msgid "Cannot open %s for reading"
@@ -2082,9 +2073,8 @@ msgstr "Přepnout &zobrazení řádků"
 msgid "Go to matching &bracket"
 msgstr "Přejít na pá&rovou závorku"
 
-#, fuzzy
 msgid "Toggle s&yntax highlighting"
-msgstr "Vyber zvýraznění syntaxe"
+msgstr "Přepnout zvýraznění syntaxe"
 
 msgid "&Find declaration"
 msgstr "Najít deklaraci"
@@ -3311,7 +3301,6 @@ msgstr "&Panely ano/ne"
 msgid "&Compare directories"
 msgstr "Porovnat &adresáře"
 
-#, fuzzy
 msgid "&View diff files"
 msgstr "Prohlížet změnové soubory"
 
@@ -4023,42 +4012,3 @@ msgstr "Chcete smazat tuto historii?"
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
-
-#~ msgid "MCFS"
-#~ msgstr "MCFS"
-
-#~ msgid "The server does not support this version"
-#~ msgstr "Server tuto verzi nepodporuje"
-
-#~ msgid ""
-#~ "The remote server is not running on a system port\n"
-#~ "you need a password to log in, but the information may\n"
-#~ "not be safe on the remote side.  Continue?\n"
-#~ msgstr ""
-#~ "Vzdálený server neběží na domluveném portu,\n"
-#~ "k přihlášení budete potřebovat heslo, ale informace může být\n"
-#~ "na vzdálené straně kompromitována.  Pokračovat?\n"
-
-#~ msgid "MCFS Password required"
-#~ msgstr "Pro MCFS vyžadováno heslo"
-
-#~ msgid "Invalid password"
-#~ msgstr "Chybné heslo"
-
-#~ msgid "Cannot locate hostname: %s"
-#~ msgstr "Nelze určit jméno počítače: %s"
-
-#~ msgid "Cannot create socket: %s"
-#~ msgstr "Nelze vytvořit soket: %s"
-
-#~ msgid "Cannot connect to server: %s"
-#~ msgstr "Nelze se připojit k serveru: %s"
-
-#~ msgid "Too many open connections"
-#~ msgstr "Příliš mnoho otevřených spojení"
-
-#~ msgid "Link to a remote machine"
-#~ msgstr "Odkaz na vzdálený počítač"
-
-#~ msgid "&Network link..."
-#~ msgstr "Síťové spoje&ní..."
