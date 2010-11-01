@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -622,10 +623,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: mwaijhe adresse di lodjeu."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: dj' a fwait berwete come dji m' raloyîve å sierveu: %s"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Dji n' sai fé on soket: %s "
 
@@ -1208,6 +1205,10 @@ msgstr "No di l' ûzeu:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Mot di passe po \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Dji n' sai candjî di ridant"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1481,7 +1482,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "«%s» n' est nén on loyén simbolike"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Dji n' a savu fé on chdir viè %s "
 
 #, fuzzy
@@ -3987,10 +3988,6 @@ msgstr ""
 msgid "Do you really want to execute?"
 msgstr " Voloz-ve enonder po do bon? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Dji n' a savu fé on chdir viè %s "
-
 msgid "Choose codepage"
 msgstr ""
 
@@ -4303,6 +4300,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Porcessus di fond:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: dj' a fwait berwete come dji m' raloyîve å sierveu: %s"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Dji n' a savu fé on chdir viè %s "
 
 #, fuzzy
 #~ msgid "MCFS"

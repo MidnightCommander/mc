@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2010-04-26 00:31+0900\n"
 "Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
 "Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -614,10 +615,6 @@ msgstr "재시도를 기다리는 중 ... %d  (Contro-C로 취소)"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 잘못된 주소 목록"
-
-#, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: 패시브 모드 설정 불가: %s"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1229,6 +1226,10 @@ msgstr "사용자 이름:"
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s의 암호"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "경고: %s 디렉터리을 바꿀 수 없습니다\n"
+
 msgid "7-bit ASCII"
 msgstr "7-bit ASCII"
 
@@ -1498,7 +1499,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s'은(는) 심볼릭링크가 아닙니다"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " %s으(로) 디렉터리을 바꿀 수 없습니다 "
 
 #, fuzzy
@@ -3897,10 +3898,6 @@ msgstr "사용자가 제공한 형식은 잘못되었습니다. 기본값 사용
 msgid "Do you really want to execute?"
 msgstr " 정말로 실행하시겠읍니까? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " %s으(로) 디렉터리을 바꿀 수 없습니다 "
-
 msgid "Choose codepage"
 msgstr "입력 코드페이지 선택 "
 
@@ -4215,6 +4212,13 @@ msgstr "기록을 삭제하기를 원하십니까?"
 
 msgid "Background process:"
 msgstr "배경 프로세스:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: 패시브 모드 설정 불가: %s"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " %s으(로) 디렉터리을 바꿀 수 없습니다 "
 
 #, fuzzy
 #~ msgid "MCFS"

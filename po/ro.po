@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -625,10 +626,6 @@ msgstr "Aştept să reîncerc... %d (Control-C pentru a renunţa)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Adresă invalidă a gazdei."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nu pot seta modul pasiv"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1254,6 +1251,10 @@ msgstr "Nume proprietar:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Parola pentru \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Nu pot deschide directorul %s"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1523,7 +1524,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' nu este o legătură simbolică"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Nu pot schimba directorul la %s "
 
 #, fuzzy
@@ -4036,10 +4037,6 @@ msgstr "Formatul furnizat de utilizator pare invalid, revin la cel implicit"
 msgid "Do you really want to execute?"
 msgstr " Chiar doriţi să executaţi? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Nu pot schimba directorul la %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Alegeţi codul de intrare "
@@ -4348,6 +4345,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Procese în fundal:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: nu pot seta modul pasiv"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Nu pot schimba directorul la %s "
 
 #, fuzzy
 #~ msgid "MCFS"

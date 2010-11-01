@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -629,10 +630,6 @@ msgstr "Està esperant per reintentar... %d (Ctrl-C per cancel·lar)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: L'adreça de l'ordinador central no és vàlida."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: no s'ha pogut establir el mode passiu"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1266,6 +1263,10 @@ msgstr "Nom d'usuari:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Contrasenya per a \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "No he pogut canviar de directori"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1535,7 +1536,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' no és un enllaç simbòlic"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " No s'ha pogut canviar a %s "
 
 #, fuzzy
@@ -4059,10 +4060,6 @@ msgstr ""
 msgid "Do you really want to execute?"
 msgstr " Realment ho voleu executar? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " No s'ha pogut canviar a %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Escolliu la pàgina de codis d'entrada "
@@ -4372,6 +4369,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Procés de fons:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: no s'ha pogut establir el mode passiu"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " No s'ha pogut canviar a %s "
 
 #, fuzzy
 #~ msgid "MCFS"

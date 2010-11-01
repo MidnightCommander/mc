@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2009-12-03 12:42+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -616,10 +617,6 @@ msgstr "Vyčkávam na zopakovanie... %d (Control-C pre zrušenie)"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: neplatná rodina adries"
-
-#, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nepodarilo sa nastaviť pasívny režim: %s"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1237,6 +1234,10 @@ msgstr "Meno použivateľa:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Heslo pre \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Nepodarilo sa vytvoriť adresár %s"
+
 msgid "7-bit ASCII"
 msgstr "7-bitový ASCII"
 
@@ -1504,7 +1505,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' nie je symbolický odkaz"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Nemohol som chdir do %s "
 
 #, fuzzy
@@ -3945,10 +3946,6 @@ msgstr "Používateľom dodaný formát výzerá neplatný, vraciam sa k predvol
 msgid "Do you really want to execute?"
 msgstr " Naozaj chcete spustiť? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Nemohol som chdir do %s "
-
 msgid "Choose codepage"
 msgstr "Zvoľte kódovú stránku"
 
@@ -4267,6 +4264,13 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Proces v pozadí:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: nepodarilo sa nastaviť pasívny režim: %s"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Nemohol som chdir do %s "
 
 #, fuzzy
 #~ msgid "MCFS"

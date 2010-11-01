@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -631,10 +632,6 @@ msgstr "Yinelemek için bekleniyor... %d (iptal etmek için Ctrl-C)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Makina adresi geçersiz."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: pasif kip ayarlanamadı"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1262,6 +1259,10 @@ msgstr "Kullanıcı: "
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s için parola"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Dizin değiştirilemedi"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1531,7 +1532,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' bir sembolik bağ değil"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " %s dizinine geçilemedi"
 
 #, fuzzy
@@ -4046,10 +4047,6 @@ msgstr "Kullanıcı tanımlı biçim geçersiz: öntanımlısı kullanılacak."
 msgid "Do you really want to execute?"
 msgstr "Gerçekten çalıştırmak istiyor musunuz?"
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " %s dizinine geçilemedi"
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Girdi karakter kümesini seçin "
@@ -4358,6 +4355,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Artalan işlemi:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: pasif kip ayarlanamadı"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " %s dizinine geçilemedi"
 
 #, fuzzy
 #~ msgid "MCFS"

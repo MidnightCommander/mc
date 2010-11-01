@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
@@ -590,10 +591,6 @@ msgstr ""
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr " Virheellinen kohdemaski "
-
-#, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1179,6 +1176,10 @@ msgstr " Käyttäjän nimi "
 msgid "Password for \\\\%s\\%s"
 msgstr ""
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Ei voitu vaihtaa hakemistoa"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1452,7 +1453,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "Symbolinen linkki"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Ei voitu vaihtaa hakemistoa %s:ksi "
 
 #, fuzzy
@@ -3855,10 +3856,6 @@ msgstr ""
 msgid "Do you really want to execute?"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Ei voitu vaihtaa hakemistoa %s:ksi "
-
 msgid "Choose codepage"
 msgstr ""
 
@@ -4154,6 +4151,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Taustaprosessi:"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Ei voitu vaihtaa hakemistoa %s:ksi "
 
 #, fuzzy
 #~ msgid "Invalid password"

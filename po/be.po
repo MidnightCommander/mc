@@ -4,15 +4,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
+"Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #, fuzzy, c-format
@@ -615,10 +616,6 @@ msgstr "Чаканне паўтору спробы... %d (Control-C для ад�
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Памылковы тып адрасу"
-
-#, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: немагчыма ўсталяваць пасіўны рэжым: %s"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1243,6 +1240,10 @@ msgstr "Імя карыстальніка:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Пароль для \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Папярэджанне:  немагчыма адкрыць каталог '%s'\n"
+
 msgid "7-bit ASCII"
 msgstr "7-бiтны ASCII"
 
@@ -1510,7 +1511,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' не сімвалічная спасылка"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Немагчыма перайсці ў %s "
 
 #, fuzzy
@@ -3961,10 +3962,6 @@ msgstr "Фармат карыстальніка выглядае памылко�
 msgid "Do you really want to execute?"
 msgstr " Вы сапраўды жадаеце выканаць гэта? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Немагчыма перайсці ў %s "
-
 msgid "Choose codepage"
 msgstr "Выбар кадыроўкі"
 
@@ -4280,6 +4277,13 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Працэс у тле:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: немагчыма ўсталяваць пасіўны рэжым: %s"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Немагчыма перайсці ў %s "
 
 #, fuzzy
 #~ msgid "MCFS"

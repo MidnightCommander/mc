@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -629,10 +630,6 @@ msgstr "Gaidam atbildi... %d (Control-C lai atsauktu)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Nepareiza resursdatora adrese."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nevar uzstādīt pasīvo režīmu"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1261,6 +1258,10 @@ msgstr "Lietotājvārds:"
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s Parole"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Nevar nomainīt direktoriju"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1530,7 +1531,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' nav simbolsaite"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " nevarēja chdir uz %s "
 
 #, fuzzy
@@ -4052,10 +4053,6 @@ msgstr ""
 msgid "Do you really want to execute?"
 msgstr " Vai tu patiešām vēlies palaist? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " nevarēja chdir uz %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Izvēlies ievades kodu tabulu "
@@ -4364,6 +4361,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Fona process:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: nevar uzstādīt pasīvo režīmu"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " nevarēja chdir uz %s "
 
 #, fuzzy
 #~ msgid "MCFS"

@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -628,10 +629,6 @@ msgstr "A aguardar nova tentativa... %d (Ctrl-C para cancelar)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Endereço de servidor inválido."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: incapaz de definir modo passivo"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1260,6 +1257,10 @@ msgstr "Utilizador:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Senha para \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Incapaz de mudar de directório"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1531,7 +1532,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' não é um atalho"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Incapaz de chdir para %s "
 
 #, fuzzy
@@ -4050,10 +4051,6 @@ msgstr ""
 msgid "Do you really want to execute?"
 msgstr " Deseja mesmo executar? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Incapaz de chdir para %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Seleccionar página de códigos "
@@ -4362,6 +4359,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Processo de fundo:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: incapaz de definir modo passivo"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Incapaz de chdir para %s "
 
 #, fuzzy
 #~ msgid "MCFS"

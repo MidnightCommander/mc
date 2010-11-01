@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese Traditional <zh-l10n@linux.org.tw>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
@@ -629,10 +630,6 @@ msgstr "等候重試... %d (Control-C 結束)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 無效的主機位址。"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: 無法設定 passive mode"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1261,6 +1258,10 @@ msgstr "使用者名稱: "
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s 的密碼"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "無法改變目錄"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1530,7 +1531,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' 不是符號連結"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " 無法將目錄改變至 %s "
 
 #, fuzzy
@@ -4045,10 +4046,6 @@ msgstr "使用者提供的格式似乎是錯誤的, 回復到預設值."
 msgid "Do you really want to execute?"
 msgstr "您確定要執行？ "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " 無法將目錄改變至 %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " 選擇輸入頁碼 "
@@ -4358,6 +4355,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "背景程序："
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: 無法設定 passive mode"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " 無法將目錄改變至 %s "
 
 #, fuzzy
 #~ msgid "MCFS"

@@ -10,10 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2010-07-11 01:18+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -608,10 +609,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: famiglia di indirizzi non valida"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: impossibile impostare la modalità passiva: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: impossibile creare il socket: %s"
 
@@ -1196,6 +1193,10 @@ msgstr "Nome utente:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Password per \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Attenzione: impossibile aprire la directory %s\n"
+
 msgid "7-bit ASCII"
 msgstr "7-bit ASCII"
 
@@ -1444,8 +1445,8 @@ msgid "`%s' is not a symbolic link"
 msgstr "\"%s\" non è un collegamento simbolico"
 
 #, c-format
-msgid "Cannot chdir to %s"
-msgstr "Impossibile entrare in %s"
+msgid "Cannot chdir to \"%s\""
+msgstr "Impossibile entrare in \"%s\""
 
 msgid "Enter machine name (F1 for details):"
 msgstr "Inserire il nome macchina (F1 per i dettagli):"
@@ -3692,10 +3693,6 @@ msgstr "Il formato utente fornito è errato, uso il default."
 msgid "Do you really want to execute?"
 msgstr "Vuoi veramente eseguirlo?"
 
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Impossibile entrare in \"%s\""
-
 msgid "Choose codepage"
 msgstr "Scegli la codepage"
 
@@ -3998,6 +3995,12 @@ msgstr "Cancellare questa cronologia?"
 
 msgid "Background process:"
 msgstr "Processo in background:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: impossibile impostare la modalità passiva: %s"
+
+#~ msgid "Cannot chdir to %s"
+#~ msgstr "Impossibile entrare in %s"
 
 #~ msgid "MCFS"
 #~ msgstr "MCFS"

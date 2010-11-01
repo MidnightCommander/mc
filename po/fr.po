@@ -10,10 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -618,10 +619,6 @@ msgstr "Attente avant de réessayer... %d (Control-C pour annuler)"
 
 msgid "ftpfs: invalid address family"
 msgstr "FTPfs : famille d'adresse"
-
-#, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "FTPfs : ne peut configurer le mode passif : %s"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1239,6 +1236,10 @@ msgstr "Nom d'utilisateur : "
 msgid "Password for \\\\%s\\%s"
 msgstr "Mot de passe pour \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Avertissement : impossible d'ouvrir le répertoire %s\n"
+
 msgid "7-bit ASCII"
 msgstr "ASCII 7 bits"
 
@@ -1510,7 +1511,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "« %s » n'est pas un lien symbolique"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Impossible d'aller dans le répertoire %s "
 
 #, fuzzy
@@ -4000,10 +4001,6 @@ msgstr ""
 msgid "Do you really want to execute?"
 msgstr " Voulez-vous vraiment exécuter ? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Impossible d'aller dans le répertoire %s "
-
 # XXX: trad codepage
 msgid "Choose codepage"
 msgstr "Choisissez un encodage"
@@ -4323,6 +4320,13 @@ msgstr "Voulez-vous supprimer cet historique"
 
 msgid "Background process:"
 msgstr "Processus en tâche de fond :"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "FTPfs : ne peut configurer le mode passif : %s"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Impossible d'aller dans le répertoire %s "
 
 #~ msgid "MCFS"
 #~ msgstr " MCFS "

@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -613,10 +614,6 @@ msgstr "Αναμονή επανάληψης... %d (Control-C για ακύρωσ
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Άκυρη διεύθυνση συστήματος."
 
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
-
 #, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr ""
@@ -1186,6 +1183,10 @@ msgstr "Χρήστης"
 msgid "Password for \\\\%s\\%s"
 msgstr ""
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Δημηουργία νέου καταλόγου"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1441,7 +1442,7 @@ msgid "`%s' is not a symbolic link"
 msgstr ""
 
 #, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr ""
 
 msgid "Enter machine name (F1 for details):"
@@ -3694,10 +3695,6 @@ msgstr ""
 msgid "Do you really want to execute?"
 msgstr ""
 
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr ""
-
 msgid "Choose codepage"
 msgstr ""
 
@@ -3990,6 +3987,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr ""
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
 
 #, fuzzy
 #~ msgid "The server does not support this version"

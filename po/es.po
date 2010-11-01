@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.4\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2010-07-09 11:00+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -605,10 +606,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Familia de direcciones incorrecta"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: Imposible aplicar el \"modo pasivo\": %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: Imposible crear socket: %s"
 
@@ -1195,6 +1192,10 @@ msgstr "Usuario:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Contraseña para \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Atención: imposible abrir el directorio %s\n"
+
 msgid "7-bit ASCII"
 msgstr "ASCII (7 bit)"
 
@@ -1443,8 +1444,8 @@ msgid "`%s' is not a symbolic link"
 msgstr "'%s' no es un enlace simbólico"
 
 #, c-format
-msgid "Cannot chdir to %s"
-msgstr "Imposible cambiar al directorio %s"
+msgid "Cannot chdir to \"%s\""
+msgstr "Imposible cambiar al directorio \"%s\""
 
 msgid "Enter machine name (F1 for details):"
 msgstr "Teclee el nombre de la máquina (F1 para más detalles):"
@@ -3695,10 +3696,6 @@ msgstr "Formato no parece válido. Recuperando el predeterminado."
 msgid "Do you really want to execute?"
 msgstr "¿Realmente quiere ejecutar?"
 
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Imposible cambiar al directorio \"%s\""
-
 msgid "Choose codepage"
 msgstr "Codificación de caracteres"
 
@@ -4001,6 +3998,12 @@ msgstr "¿Desea borrar esta historia?"
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: Imposible aplicar el \"modo pasivo\": %s"
+
+#~ msgid "Cannot chdir to %s"
+#~ msgstr "Imposible cambiar al directorio %s"
 
 #~ msgid "MCFS"
 #~ msgstr "MCFS"

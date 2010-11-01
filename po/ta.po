@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
+"Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -583,10 +584,6 @@ msgid "ftpfs: invalid address family"
 msgstr ""
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr ""
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr ""
 
@@ -1137,6 +1134,10 @@ msgstr ""
 msgid "Password for \\\\%s\\%s"
 msgstr ""
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "புதிய முனையம் ஒனறைப் படைக்கும்"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1391,7 +1392,7 @@ msgid "`%s' is not a symbolic link"
 msgstr ""
 
 #, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr ""
 
 msgid "Enter machine name (F1 for details):"
@@ -3670,10 +3671,6 @@ msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 
 msgid "Do you really want to execute?"
-msgstr ""
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
 msgstr ""
 
 msgid "Choose codepage"

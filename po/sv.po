@@ -12,10 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -633,11 +634,6 @@ msgstr "Försöker igen... %d (Control-C för att avbryta)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ogiltig värdadress."
-
-# incomplete
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: kan inte sätta upp passivt läge"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1270,6 +1266,10 @@ msgstr "Användarnamn:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Lösenord för \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Kan inte byta katalog"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1541,7 +1541,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "\"%s\" är inte en symbolisk länk"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Kunde inte byta katalog till %s "
 
 #, fuzzy
@@ -4083,10 +4083,6 @@ msgstr "Det angivna formatet ser ogiltigt ut, faller tillbaka till standard."
 msgid "Do you really want to execute?"
 msgstr " Vill du verkligen exekvera? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Kunde inte byta katalog till %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Välj teckentabell för inmatning "
@@ -4395,6 +4391,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Bakgrundsprocess:"
+
+# incomplete
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: kan inte sätta upp passivt läge"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Kunde inte byta katalog till %s "
 
 #, fuzzy
 #~ msgid "MCFS"

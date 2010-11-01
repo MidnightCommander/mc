@@ -7,11 +7,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
 "Language-Team: Serbian (српски) <sr@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -627,10 +628,6 @@ msgstr "Чекам на поновно повезивање... %d (Control-C п�
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Неисправна адреса домаћина."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: нисам могао да подесим пасивни режим"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1255,6 +1252,10 @@ msgstr "Корисн. име:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Лозинка за \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Не могу да променим директоријум"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1524,7 +1525,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' није симболичка веза"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Не могу да поставим дир. на %s "
 
 #, fuzzy
@@ -4038,10 +4039,6 @@ msgstr "Кориснички формат не изгледа исправно, 
 msgid "Do you really want to execute?"
 msgstr " Да ли заиста желите да извршим? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Не могу да поставим дир. на %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Изаберите кодну страну улаза "
@@ -4353,6 +4350,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Позадински процес:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: нисам могао да подесим пасивни режим"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Не могу да поставим дир. на %s "
 
 # Систем датотека Поноћног наредника
 #, fuzzy

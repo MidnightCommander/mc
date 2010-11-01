@@ -12,10 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.x\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2010-06-08 12:00-0000\n"
 "Last-Translator: Sebastian Siebert <freespacer@gmx.de>\n"
 "Language-Team: German <freespacer@gmx.de>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -616,10 +617,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ungültige Rechneradresse."
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: konnte passiven Modus nicht einstellen: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: konnte Socket %s nicht anlegen "
 
@@ -1205,6 +1202,10 @@ msgstr "Benutzername:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Passwort für \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Warnung: Kann Verzeichnis \"%s\" nicht öffnen\n"
+
 msgid "7-bit ASCII"
 msgstr "7-bit ASCII"
 
@@ -1453,8 +1454,8 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' ist kein symbolischer Link"
 
 #, c-format
-msgid "Cannot chdir to %s"
-msgstr "Kann nicht ins Verzeichnis %s wechseln"
+msgid "Cannot chdir to \"%s\""
+msgstr "Kann nicht ins Verzeichnis \"%s\" wechseln"
 
 msgid "Enter machine name (F1 for details):"
 msgstr "Namen der Maschine eingeben (Details mit F1):"
@@ -3697,10 +3698,6 @@ msgstr "Benutzerdefiniertes Format sieht ungültig aus, benutze Standard."
 msgid "Do you really want to execute?"
 msgstr "Möchten Sie wirklich ausführen?"
 
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Kann nicht ins Verzeichnis \"%s\" wechseln"
-
 msgid "Choose codepage"
 msgstr "Wählen Sie die Eingabe-Codepage"
 
@@ -4004,6 +4001,12 @@ msgstr "Möchten Sie wirklich die Chronik löschen?"
 
 msgid "Background process:"
 msgstr "Hintergrundprozess:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: konnte passiven Modus nicht einstellen: %s"
+
+#~ msgid "Cannot chdir to %s"
+#~ msgstr "Kann nicht ins Verzeichnis %s wechseln"
 
 #~ msgid "MCFS"
 #~ msgstr "MCFS"

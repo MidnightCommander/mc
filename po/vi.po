@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -626,10 +627,6 @@ msgstr "Chờ thử lại... %d (Control-C để hủy bỏ)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Địa chỉ không đúng."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: không đặt được chế độ bị động (passive)"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1256,6 +1253,10 @@ msgstr "Tên người dùng:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Mật khẩu cho \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Không thay đổi được thư mục"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1525,7 +1526,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' không phải là một liên kết mềm"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Không thể chdir vào %s "
 
 #, fuzzy
@@ -4044,10 +4045,6 @@ msgstr ""
 msgid "Do you really want to execute?"
 msgstr " Thực sự muốn thực hiện? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Không thể chdir vào %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Chọn bảng mã dữ liệu vào "
@@ -4373,6 +4370,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Tiến trình nền sau:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: không đặt được chế độ bị động (passive)"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Không thể chdir vào %s "
 
 #, fuzzy
 #~ msgid "MCFS"

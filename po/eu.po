@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -629,10 +630,6 @@ msgstr "Berriro saiatzeko zain... %d (Control-C uzteko)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ostalari-helbide baliogabea."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: ezin izan da modu pasiboa konfiguratu"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1262,6 +1259,10 @@ msgstr "Erabiltzaile-izena:"
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s(r)en pasahitza"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Ezin izan da direktorioz aldatu"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1533,7 +1534,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' ez da esteka sinbolikoa"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr "Ezin da %s direktoriora aldatu "
 
 #, fuzzy
@@ -4053,10 +4054,6 @@ msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
 msgid "Do you really want to execute?"
 msgstr "Ziur zaude exekutatu nahi duzula? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Ezin da %s direktoriora aldatu "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Aukeratu sarrerako kode-orria "
@@ -4366,6 +4363,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Atzeko planoko prozesua:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: ezin izan da modu pasiboa konfiguratu"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr "Ezin da %s direktoriora aldatu "
 
 #, fuzzy
 #~ msgid "MCFS"

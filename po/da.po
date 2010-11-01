@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -634,10 +635,6 @@ msgstr "Venter på at forsøge igen... %d (Ctrl-C annullerer)"
 #, fuzzy
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ugyldig værtsadresse."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: kunne ikke indstille passiv måde"
 
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -1265,6 +1262,10 @@ msgstr "Brugernavn:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Adgangskode for \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr " Kunne ikke skifte mappe"
+
 msgid "7-bit ASCII"
 msgstr ""
 
@@ -1535,7 +1536,7 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' er ikke en symbolsk lænke"
 
 #, fuzzy, c-format
-msgid "Cannot chdir to %s"
+msgid "Cannot chdir to \"%s\""
 msgstr " Kunne ikke skifte mappe til %s "
 
 #, fuzzy
@@ -4051,10 +4052,6 @@ msgstr "Brugerdefineret format ser ugyldigt ud, bruger standard."
 msgid "Do you really want to execute?"
 msgstr " Vil du virkelig køre? "
 
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Kunne ikke skifte mappe til %s "
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Vælg kodning for inddata "
@@ -4363,6 +4360,14 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Baggrundsproces:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: kunne ikke indstille passiv måde"
+
+#, fuzzy
+#~ msgid "Cannot chdir to %s"
+#~ msgstr " Kunne ikke skifte mappe til %s "
 
 #, fuzzy
 #~ msgid "MCFS"

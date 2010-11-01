@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.4\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 20:43+0400\n"
+"POT-Creation-Date: 2010-11-01 15:58+0200\n"
 "PO-Revision-Date: 2010-10-31 10:14+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -609,10 +610,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: chybná rodina adres"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nelze nastavit pasivní režim: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: nelze vytvořit soket: %s"
 
@@ -1201,6 +1198,10 @@ msgstr "Jméno uživatele:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Heslo pro \\\\%s\\%s"
 
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Varování: není možné otevřít adresář %s\n"
+
 msgid "7-bit ASCII"
 msgstr "7-bit ASCII"
 
@@ -1454,8 +1455,8 @@ msgid "`%s' is not a symbolic link"
 msgstr "„%s“ není symbolický odkaz"
 
 #, c-format
-msgid "Cannot chdir to %s"
-msgstr "Pracovní adresář nelze změnit na %s"
+msgid "Cannot chdir to \"%s\""
+msgstr "Pracovní adresář nelze změnit na „%s“"
 
 msgid "Enter machine name (F1 for details):"
 msgstr "Jméno počítače (nápověda F1):"
@@ -2311,8 +2312,8 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
-"Formát souboru ~/%s byl modifikován verzí 3.0. Můžete ho buď zkopírovat ze %"
-"smc.ext nebo použít tento soubor jako příklad jak jej napsat."
+"Formát souboru ~/%s byl modifikován verzí 3.0. Můžete ho buď zkopírovat ze "
+"%smc.ext nebo použít tento soubor jako příklad jak jej napsat."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopírovat"
@@ -3704,10 +3705,6 @@ msgstr "Chybný formát zadaný uživatelem, bude použit standardní."
 msgid "Do you really want to execute?"
 msgstr "Opravdu spustit?"
 
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Pracovní adresář nelze změnit na „%s“"
-
 msgid "Choose codepage"
 msgstr "Zvolte znakovou sadu"
 
@@ -4012,3 +4009,9 @@ msgstr "Chcete smazat tuto historii?"
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: nelze nastavit pasivní režim: %s"
+
+#~ msgid "Cannot chdir to %s"
+#~ msgstr "Pracovní adresář nelze změnit na %s"
