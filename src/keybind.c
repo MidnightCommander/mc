@@ -613,7 +613,9 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_M_CTRL | KEY_UP,                  CK_Scroll_Up,                   "C-Up" },
     { KEY_M_CTRL | KEY_DOWN,                CK_Scroll_Down,                 "C-Down" },
     { KEY_M_CTRL | KEY_LEFT,                CK_Word_Left,                   "C-Left" },
+    { XCTRL ('z'),                          CK_Word_Left,                   "C-z" },
     { KEY_M_CTRL | KEY_RIGHT,               CK_Word_Right,                  "C-Right" },
+    { XCTRL ('x'),                          CK_Word_Right,                  "C-x" },
     { KEY_M_CTRL | KEY_IC,                  CK_XStore,                      "C-Insert" },
     { KEY_M_CTRL | KEY_DC,                  CK_Remove,                      "C-Delete" },
 
@@ -629,6 +631,10 @@ const global_keymap_t default_editor_keymap[] = {
     { XCTRL ('r'),                          CK_Begin_Record_Macro,          "C-r" },
     { XCTRL ('r'),                          CK_End_Record_Macro,            "C-r" },
     { XCTRL ('a'),                          CK_Execute_Macro,               "C-a" },
+    { XCTRL ('f'),                          CK_Save_Block,                  "C-f" },
+    /* Spell check */
+    { XCTRL ('p'),                          CK_Pipe_Block (1),              "C-p" },
+    { XCTRL ('y'),                          CK_Delete_Line,                 "C-y" },
 
     /* Shift */
     { KEY_M_SHIFT | KEY_NPAGE,              CK_Page_Down_Highlight,         "S-PgDn" },
@@ -681,6 +687,8 @@ const global_keymap_t default_editor_keymap[] = {
     { ALT ('i'),                            CK_Prev_Bookmark,               "M-i" },
     { ALT ('j'),                            CK_Next_Bookmark,               "M-j" },
     { ALT ('o'),                            CK_Flush_Bookmarks,             "M-o" },
+    { ALT ('b'),                            CK_Match_Bracket,               "M-b" },
+    { ALT ('m'),                            CK_Mail,                        "M-m" },
 
     { XCTRL ('x'),                          CK_Ext_Mode,                    "C-x" },
 

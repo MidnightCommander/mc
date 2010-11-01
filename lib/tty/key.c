@@ -187,6 +187,7 @@ const key_code_name_t key_name_conv_tab[] = {
     { (int) '\\',	"backslash",	N_("Backslash key"),	"\\" },
     { (int) '#',	"number",	N_("Number sign #"),	"#" },
     { (int) '#',	"hash",		N_("Number sign #"),	"#" },
+    { (int) '@',	"at",		N_("At"),		"@" },
 
     /* meta keys */
     { KEY_M_CTRL,	"control",	N_("Ctrl"),	"C" },
