@@ -1220,18 +1220,29 @@ str_utf8_caseprefix (const char *text, const char *prefix)
 
 static char *
 str_utf8_create_key_gen (const char *text, int case_sen,
-			 gchar * (*keygen) (const gchar *, gssize size))
+			 gchar * (*keygen) (const gchar *text, gssize size))
 {
     char *result;
     
     if (case_sen) {
         result = str_utf8_normalize (text);
     } else {
+        gboolean dot;
+        GString *fixed;
         const char *start, *end;
         char *fold, *key;
-        GString *fixed = g_string_new ("");
 
-        start = text;
+        dot = text[0] == '.';
+        fixed = g_string_sized_new (16);
+
+        if (!dot)
+            start = text;
+        else
+        {
+            start = text + 1;
+            g_string_append_c (fixed, '.');
+        }
+
         while (!g_utf8_validate (start, -1, &end) && start[0] != '\0')
         {
             if (start != end)
@@ -1248,9 +1259,19 @@ str_utf8_create_key_gen (const char *text, int case_sen,
 
         if (start == text)
         {
-            fold = g_utf8_casefold (text, -1);
+            fold = g_utf8_casefold (start, -1);
             result = keygen (fold, -1);
             g_free (fold);
+            g_string_free (fixed, TRUE);
+        }
+        else if (dot && (start == text + 1))
+        {
+            fold = g_utf8_casefold (start, -1);
+            key = keygen (fold, -1);
+            g_string_append (fixed, key);
+            g_free (key);
+            g_free (fold);
+            result = g_string_free (fixed, FALSE);
         }
         else
         {
@@ -1262,9 +1283,8 @@ str_utf8_create_key_gen (const char *text, int case_sen,
                 g_free (key);
                 g_free (fold);
             }
-            result = g_strdup (fixed->str);
+            result = g_string_free (fixed, FALSE);
         }
-        g_string_free (fixed, TRUE);
     }
     return result;
 }
