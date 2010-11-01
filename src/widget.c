@@ -1789,30 +1789,6 @@ backward_word (WInput * in)
 }
 
 static void
-key_left (WInput * in)
-{
-    backward_char (in);
-}
-
-static void
-key_ctrl_left (WInput * in)
-{
-    backward_word (in);
-}
-
-static void
-key_right (WInput * in)
-{
-    forward_char (in);
-}
-
-static void
-key_ctrl_right (WInput * in)
-{
-    forward_word (in);
-}
-
-static void
 backward_delete (WInput * in)
 {
     const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
@@ -1878,7 +1854,6 @@ kill_word (WInput * in)
     new_point = in->point;
     in->point = old_point;
 
-    copy_region (in, old_point, new_point);
     delete_region (in, old_point, new_point);
     in->need_push = 1;
     in->charpoint = 0;
@@ -1895,34 +1870,8 @@ back_kill_word (WInput * in)
     new_point = in->point;
     in->point = old_point;
 
-    copy_region (in, old_point, new_point);
     delete_region (in, old_point, new_point);
     in->need_push = 1;
-}
-
-static void
-set_mark (WInput * in)
-{
-    input_mark_cmd (in, TRUE);
-}
-
-static void
-kill_save (WInput * in)
-{
-    copy_region (in, in->mark, in->point);
-}
-
-static void
-kill_region (WInput * in)
-{
-    kill_save (in);
-    delete_region (in, in->point, in->mark);
-}
-
-static void
-clear_region (WInput * in)
-{
-    delete_region (in, in->point, in->mark);
 }
 
 static void
@@ -1946,6 +1895,17 @@ kill_line (WInput * in)
     g_free (kill_buffer);
     kill_buffer = g_strdup (&in->buffer[chp]);
     in->buffer[chp] = '\0';
+    in->charpoint = 0;
+}
+
+static void
+clear_line (WInput * in)
+{
+    in->need_push = 1;
+    in->buffer[0] = '\0';
+    in->point = 0;
+    in->mark = 0;
+    in->highlight = FALSE;
     in->charpoint = 0;
 }
 
@@ -2075,19 +2035,19 @@ input_execute_cmd (WInput * in, unsigned long command)
         break;
     case CK_InputMoveLeft:
     case CK_InputLeftHighlight:
-        key_left (in);
+        backward_char (in);
         break;
     case CK_InputWordLeft:
     case CK_InputWordLeftHighlight:
-        key_ctrl_left (in);
+        backward_word (in);
         break;
     case CK_InputMoveRight:
     case CK_InputRightHighlight:
-        key_right (in);
+        forward_char (in);
         break;
     case CK_InputWordRight:
     case CK_InputWordRightHighlight:
-        key_ctrl_right (in);
+        forward_word (in);
         break;
     case CK_InputBackwardChar:
         backward_char (in);
@@ -2132,25 +2092,31 @@ input_execute_cmd (WInput * in, unsigned long command)
         back_kill_word (in);
         break;
     case CK_InputSetMark:
-        set_mark (in);
+        input_mark_cmd (in, TRUE);
         break;
     case CK_InputKillRegion:
-        kill_region (in);
+        delete_region (in, in->point, in->mark);
+        break;
+    case CK_InputKillLine:
+        /* clear command line from cursor to the EOL */
+        kill_line (in);
         break;
     case CK_InputClearLine:
-        clear_region (in);
+        /* clear command line */
+        clear_line (in);
+        break;
+    case CK_InputCopyRegion:
+        copy_region (in, in->mark, in->point);
         break;
     case CK_InputKillSave:
-        kill_save (in);
+        copy_region (in, in->mark, in->point);
+        delete_region (in, in->point, in->mark);
         break;
     case CK_InputYank:
         yank (in);
         break;
     case CK_InputPaste:
         ins_from_clip (in);
-        break;
-    case CK_InputKillLine:
-        kill_line (in);
         break;
     case CK_InputHistoryPrev:
         hist_prev (in);

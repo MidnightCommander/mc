@@ -253,6 +253,7 @@
 #define CK_InputKillRegion             4016
 #define CK_InputKillSave               4017
 #define CK_InputYank                   4018
+#define CK_InputCopyRegion             4019
 #define CK_InputKillLine               4020
 #define CK_InputHistoryPrev            4021
 #define CK_InputHistoryNext            4022
