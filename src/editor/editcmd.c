@@ -52,6 +52,7 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/lock.h"
+#include "lib/util.h"           /* tilde_expand() */
 #include "lib/vfs/mc-vfs/vfs.h"
 
 #include "src/history.h"
@@ -501,13 +502,15 @@ menu_save_mode_cmd (void)
 }
 
 void
-edit_set_filename (WEdit * edit, const char *f)
+edit_set_filename (WEdit * edit, const char *name)
 {
     g_free (edit->filename);
-    if (!f)
-        f = "";
-    edit->filename = g_strdup (f);
-    if (edit->dir == NULL && !g_path_is_absolute (f))
+
+    if (name == NULL)
+        name = "";
+
+    edit->filename = tilde_expand (name);
+    if (edit->dir == NULL && !g_path_is_absolute (name))
         edit->dir = g_strdup (vfs_get_current_dir ());
 }
 
@@ -557,8 +560,12 @@ edit_get_save_file_as (WEdit * edit)
 
     if (quick_dialog (&Quick_options) != B_CANCEL)
     {
+        char *fname;
+
         edit->lb = cur_lb;
-        return filename;
+        fname = tilde_expand (filename);
+        g_free (filename);
+        return fname;
     }
 
     return NULL;
