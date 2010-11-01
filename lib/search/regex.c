@@ -58,7 +58,7 @@ typedef enum
 /*** file scope functions ************************************************************************/
 
 static gboolean
-mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, gsize * offset)
+mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex_str, gsize * offset)
 {
     char *tmp_regex_str;
     gsize spec_chr_len;
@@ -194,22 +194,19 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, gsize str_len)
+mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString *astr)
 {
     GString *accumulator, *spec_char, *ret_str;
     gsize loop;
-    GString *tmp;
-    tmp = g_string_new_len (str, str_len);
 
-
-    ret_str = g_string_new ("");
-    accumulator = g_string_new ("");
-    spec_char = g_string_new ("");
+    ret_str = g_string_sized_new (64);
+    accumulator = g_string_sized_new (64);
+    spec_char = g_string_sized_new (64);
     loop = 0;
 
-    while (loop <= str_len)
+    while (loop <= astr->len)
     {
-        if (mc_search__regex_str_append_if_special (spec_char, tmp, &loop))
+        if (mc_search__regex_str_append_if_special (spec_char, astr, &loop))
         {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
             g_string_append_len (ret_str, spec_char->str, spec_char->len);
@@ -217,32 +214,32 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
             continue;
         }
 
-        if (tmp->str[loop] == '[' && !strutils_is_char_escaped (tmp->str, &(tmp->str[loop])))
+        if (astr->str[loop] == '[' && !strutils_is_char_escaped (astr->str, &(astr->str[loop])))
         {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
-            while (loop < str_len && !(tmp->str[loop] == ']'
-                                       && !strutils_is_char_escaped (tmp->str, &(tmp->str[loop]))))
+            while (loop < astr->len && !(astr->str[loop] == ']'
+                                       && !strutils_is_char_escaped (astr->str, &(astr->str[loop]))))
             {
-                g_string_append_c (ret_str, tmp->str[loop]);
+                g_string_append_c (ret_str, astr->str[loop]);
                 loop++;
-
             }
-            g_string_append_c (ret_str, tmp->str[loop]);
+
+            g_string_append_c (ret_str, astr->str[loop]);
             loop++;
             continue;
         }
         /*
            TODO: handle [ and ]
          */
-        g_string_append_c (accumulator, tmp->str[loop]);
+        g_string_append_c (accumulator, astr->str[loop]);
         loop++;
     }
     mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
     g_string_free (accumulator, TRUE);
     g_string_free (spec_char, TRUE);
-    g_string_free (tmp, TRUE);
+
     return ret_str;
 }
 
@@ -478,7 +475,7 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
         char_len = strlen (tmp_str);
         if (*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR)
         {
-            *replace_flags &= !REPLACE_T_UPP_TRANSFORM_CHAR;
+            *replace_flags &= ~REPLACE_T_UPP_TRANSFORM_CHAR;
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
             g_string_append (dest_str, tmp_string->str);
             g_string_free (tmp_string, TRUE);
@@ -486,7 +483,7 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
         }
         else if (*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR)
         {
-            *replace_flags &= !REPLACE_T_LOW_TRANSFORM_CHAR;
+            *replace_flags &= ~REPLACE_T_LOW_TRANSFORM_CHAR;
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
             g_string_append (dest_str, tmp_string->str);
             g_string_free (tmp_string, TRUE);
@@ -522,7 +519,6 @@ void
 mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_search,
                                        mc_search_cond_t * mc_search_cond)
 {
-    GString *tmp = NULL;
 #ifdef SEARCH_TYPE_GLIB
     GError *error = NULL;
 #else /* SEARCH_TYPE_GLIB */
@@ -532,9 +528,10 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
 
     if (!lc_mc_search->is_case_sensitive)
     {
-        tmp = g_string_new_len (mc_search_cond->str->str, mc_search_cond->str->len);
-        g_string_free (mc_search_cond->str, TRUE);
-        mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp->str, tmp->len);
+        GString *tmp;
+
+        tmp = mc_search_cond->str;
+        mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
         g_string_free (tmp, TRUE);
     }
 #ifdef SEARCH_TYPE_GLIB
@@ -587,7 +584,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
     if (lc_mc_search->regex_buffer != NULL)
         g_string_free (lc_mc_search->regex_buffer, TRUE);
 
-    lc_mc_search->regex_buffer = g_string_new ("");
+    lc_mc_search->regex_buffer = g_string_sized_new (64);
 
     virtual_pos = current_pos = start_search;
     while (virtual_pos <= end_search)
@@ -622,10 +619,25 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
         {
         case COND__FOUND_OK:
 #ifdef SEARCH_TYPE_GLIB
-            g_match_info_fetch_pos (lc_mc_search->regex_match_info, 0, &start_pos, &end_pos);
+            if (lc_mc_search->whole_words)
+            {
+                g_match_info_fetch_pos (lc_mc_search->regex_match_info, 2, &start_pos, &end_pos);
+            }
+            else
+            {
+                g_match_info_fetch_pos (lc_mc_search->regex_match_info, 0, &start_pos, &end_pos);
+            }
 #else /* SEARCH_TYPE_GLIB */
-            start_pos = lc_mc_search->iovector[0];
-            end_pos = lc_mc_search->iovector[1];
+            if (lc_mc_search->whole_words)
+            {
+                start_pos = lc_mc_search->iovector[4];
+                end_pos = lc_mc_search->iovector[5];
+            }
+            else
+            {
+                start_pos = lc_mc_search->iovector[0];
+                end_pos = lc_mc_search->iovector[1];
+            }
 #endif /* SEARCH_TYPE_GLIB */
             if (found_len)
                 *found_len = end_pos - start_pos;
@@ -684,8 +696,9 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
         return NULL;
     }
 
-    ret = g_string_new ("");
+    ret = g_string_sized_new (64);
     prev_str = replace_str->str;
+
     for (loop = 0; loop < replace_str->len - 1; loop++)
     {
         lc_index = mc_search_regex__process_replace_str (replace_str, loop, &len, &replace_flags);

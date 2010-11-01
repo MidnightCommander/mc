@@ -114,9 +114,6 @@ load_codepages_list_from_file (GPtrArray **list, const char *fname)
             }
             else
             {
-                guint i;
-                codepage_desc *desc;
-
                 /* whether id is already present in list */
                 /* if yes, overwrite description */
                 for (i = 0; i < (*list)->len; i++)
@@ -154,7 +151,6 @@ load_codepages_list_from_file (GPtrArray **list, const char *fname)
 void
 load_codepages_list (void)
 {
-    int result = -1;
     char *fname;
 
     /* 1: try load /usr/share/mc/mc.charsets */
@@ -195,7 +191,7 @@ get_codepage_id (const int n)
 int
 get_codepage_index (const char *id)
 {
-    int i;
+    size_t i;
     if (strcmp (id, OTHER_8BIT) == 0)
 	return -1;
     if (codepages == NULL)

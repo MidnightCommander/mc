@@ -60,7 +60,8 @@ get_hotkey (int n)
 int
 select_charset (int center_y, int center_x, int current_charset, gboolean seldisplay)
 {
-    int i;
+    size_t i;
+    int listbox_result;
     char buffer[255];
 
     /* Create listbox */
@@ -88,24 +89,26 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
 
     /* Select the default entry */
     i = (seldisplay)
-	? ((current_charset < 0) ? codepages->len : current_charset)
-	: (current_charset + 1);
+	? ((current_charset < 0) ? codepages->len : (size_t) current_charset)
+	: ((size_t)current_charset + 1);
 
     listbox_select_entry (listbox->list, i);
 
-    i = run_listbox (listbox);
+    listbox_result = run_listbox (listbox);
 
-    if (i < 0) {
+    if (listbox_result < 0) {
 	/* Cancel dialog */
 	return SELECT_CHARSET_CANCEL;
     } else {
 	/* some charset has been selected */
 	if (seldisplay) {
 	    /* charset list is finished with "Other 8 bit" item */
-	    return ((guint) i >= codepages->len) ? SELECT_CHARSET_OTHER_8BIT : i;
+	    return (listbox_result >= (int) codepages->len)
+	        ? SELECT_CHARSET_OTHER_8BIT
+	        : listbox_result;
 	} else {
 	    /* charset list is began with "-  < No translation >" item */
-	    return (i - 1);
+	    return (listbox_result - 1);
 	}
     }
 }

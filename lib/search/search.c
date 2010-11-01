@@ -64,7 +64,6 @@ mc_search__cond_struct_new (mc_search_t * lc_mc_search, const char *str,
     mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
 
     mc_search_cond->str = g_string_new_len (str, str_len);
-    mc_search_cond->len = str_len;
     mc_search_cond->charset = g_strdup (charset);
 
     switch (lc_mc_search->search_type) {
@@ -340,12 +339,12 @@ char *
 mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, char *replace_str)
 {
     GString *ret;
-    GString *replace_str2 = g_string_new (replace_str);
+    GString *replace_str2;
+
+    replace_str2 = g_string_new (replace_str);
     ret = mc_search_prepare_replace_str (lc_mc_search, replace_str2);
     g_string_free (replace_str2, TRUE);
-    if (ret)
-        return g_string_free (ret, FALSE);
-    return NULL;
+    return (ret != NULL) ? g_string_free (ret, FALSE) : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

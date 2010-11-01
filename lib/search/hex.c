@@ -49,48 +49,57 @@
 /*** file scope functions ************************************************************************/
 
 static GString *
-mc_search__hex_translate_to_regex (gchar * str, gsize * len)
+mc_search__hex_translate_to_regex (const GString * astr)
 {
-    GString *buff = g_string_new ("");
-    gchar *tmp_str = g_strndup (str, *len);
-    gchar *tmp_str2;
+    const char *str = astr->str;
+    GString *buff;
+    gchar *tmp_str;
     gsize loop = 0;
     int val, ptr;
 
+    buff = g_string_sized_new (64);
+    tmp_str = g_strndup (str, astr->len);
     g_strchug (tmp_str);        /* trim leadind whitespaces */
 
-    while (loop < *len) {
-        if (sscanf (tmp_str + loop, "%i%n", &val, &ptr)) {
-            if (val < -128 || val > 255) {
+    while (loop < astr->len)
+    {
+        if (sscanf (tmp_str + loop, "%i%n", &val, &ptr))
+        {
+            gchar *tmp_str2;
+
+            if (val < -128 || val > 255)
+            {
                 loop++;
                 continue;
             }
+
             tmp_str2 = g_strdup_printf ("\\x%02X", (unsigned char) val);
             g_string_append (buff, tmp_str2);
             g_free (tmp_str2);
             loop += ptr;
-            continue;
         }
-
-        if (*(tmp_str + loop) == '"') {
+        else if (*(tmp_str + loop) == '"')
+        {
             gsize loop2 = 0;
+
             loop++;
-            while (loop + loop2 < *len) {
+            while (loop + loop2 < astr->len)
+            {
                 if (*(tmp_str + loop + loop2) == '"' &&
                     !strutils_is_char_escaped (tmp_str, tmp_str + loop + loop2))
                     break;
                 loop2++;
             }
+
             g_string_append_len (buff, tmp_str + loop, loop2 - 1);
             loop += loop2;
-            continue;
         }
-        loop++;
+        else
+            loop++;
     }
 
     g_free (tmp_str);
 
-    *len = buff->len;
     return buff;
 }
 
@@ -100,14 +109,13 @@ void
 mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_search,
                                      mc_search_cond_t * mc_search_cond)
 {
-    GString *tmp =
-        mc_search__hex_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->len);
+    GString *tmp;
 
+    tmp = mc_search__hex_translate_to_regex (mc_search_cond->str);
     g_string_free (mc_search_cond->str, TRUE);
     mc_search_cond->str = tmp;
 
     mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */

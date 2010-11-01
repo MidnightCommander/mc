@@ -48,56 +48,42 @@
 /*** file scope functions ************************************************************************/
 
 static GString *
-mc_search__glob_translate_to_regex (gchar * str, gsize * len)
+mc_search__glob_translate_to_regex (const GString * astr)
 {
-    GString *buff = g_string_new ("");
-    gsize orig_len = *len;
-    gsize loop = 0;
+    const char *str = astr->str;
+    GString *buff;
+    gsize loop;
     gboolean inside_group = FALSE;
-    while (loop < orig_len)
-    {
+
+    buff = g_string_sized_new (32);
+
+    for (loop = 0; loop < astr->len; loop++)
         switch (str[loop])
         {
         case '*':
             if (!strutils_is_char_escaped (str, &(str[loop])))
-            {
-                g_string_append (buff, (inside_group) ? ".*" : "(.*)");
-                loop++;
-                continue;
-            }
+                g_string_append (buff, inside_group ? ".*" : "(.*)");
             break;
         case '?':
             if (!strutils_is_char_escaped (str, &(str[loop])))
-            {
-                g_string_append (buff, (inside_group) ? "." : "(.)");
-                loop++;
-                continue;
-            }
+                g_string_append (buff, inside_group ? "." : "(.)");
             break;
         case ',':
             if (!strutils_is_char_escaped (str, &(str[loop])))
-            {
-                g_string_append (buff, "|");
-                loop++;
-                continue;
-            }
+                g_string_append_c (buff, '|');
             break;
         case '{':
             if (!strutils_is_char_escaped (str, &(str[loop])))
             {
-                g_string_append (buff, "(");
+                g_string_append_c (buff, '(');
                 inside_group = TRUE;
-                loop++;
-                continue;
             }
             break;
         case '}':
             if (!strutils_is_char_escaped (str, &(str[loop])))
             {
-                g_string_append (buff, ")");
+                g_string_append_c (buff, ')');
                 inside_group = FALSE;
-                loop++;
-                continue;
             }
             break;
         case '+':
@@ -107,14 +93,12 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
         case ')':
         case '^':
             g_string_append_c (buff, '\\');
+            /* fall through */
+        default:
             g_string_append_c (buff, str[loop]);
-            loop++;
-            continue;
+            break;
         }
-        g_string_append_c (buff, str[loop]);
-        loop++;
-    }
-    *len = buff->len;
+
     return buff;
 }
 
@@ -123,9 +107,12 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
 static GString *
 mc_search__translate_replace_glob_to_regex (gchar * str)
 {
-    GString *buff = g_string_sized_new (32);
+    GString *buff;
     int cnt = '0';
     gboolean escaped_mode = FALSE;
+
+    buff = g_string_sized_new (32);
+
     while (*str)
     {
         char c = *str++;
@@ -162,9 +149,9 @@ void
 mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_search,
                                       mc_search_cond_t * mc_search_cond)
 {
-    GString *tmp =
-        mc_search__glob_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->len);
+    GString *tmp;
 
+    tmp = mc_search__glob_translate_to_regex (mc_search_cond->str);
     g_string_free (mc_search_cond->str, TRUE);
 
     if (lc_mc_search->is_entire_line)
@@ -175,7 +162,6 @@ mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_s
     mc_search_cond->str = tmp;
 
     mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -46,14 +46,17 @@
 /*** file scope functions ************************************************************************/
 
 static GString *
-mc_search__normal_translate_to_regex (gchar * str, gsize * len)
+mc_search__normal_translate_to_regex (const GString * astr)
 {
-    GString *buff = g_string_new ("");
-    gsize orig_len = *len;
-    gsize loop = 0;
+    const char *str = astr->str;
+    GString *buff;
+    gsize loop;
 
-    while (loop < orig_len) {
-        switch (str[loop]) {
+    buff = g_string_sized_new (32);
+
+    for (loop = 0; loop < astr->len; loop++)
+        switch (str[loop])
+        {
         case '*':
         case '?':
         case ',':
@@ -71,14 +74,12 @@ mc_search__normal_translate_to_regex (gchar * str, gsize * len)
         case '-':
         case '|':
             g_string_append_c (buff, '\\');
+            /* fall through */
+        default:
             g_string_append_c (buff, str[loop]);
-            loop++;
-            continue;
+            break;
         }
-        g_string_append_c (buff, str[loop]);
-        loop++;
-    }
-    *len = buff->len;
+
     return buff;
 }
 
@@ -88,18 +89,21 @@ void
 mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t * lc_mc_search,
                                         mc_search_cond_t * mc_search_cond)
 {
-    GString *tmp =
-        mc_search__normal_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->len);
+    GString *tmp;
 
+    tmp = mc_search__normal_translate_to_regex (mc_search_cond->str);
     g_string_free (mc_search_cond->str, TRUE);
-    if (lc_mc_search->whole_words) {
-        g_string_prepend (tmp, "\\b");
-        g_string_append (tmp, "\\b");
+
+    if (lc_mc_search->whole_words)
+    {
+        /* NOTE: \b as word boundary doesn't allow search
+         * whole words with non-ASCII symbols */
+        g_string_prepend (tmp, "(^|[^\\p{L}\\p{N}_])(");
+        g_string_append (tmp, ")([^\\p{L}\\p{N}_]|$)");
     }
+
     mc_search_cond->str = tmp;
-
     mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
