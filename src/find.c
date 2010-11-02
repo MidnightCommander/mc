@@ -3,7 +3,7 @@
    2006, 2007 Free Software Foundation, Inc.
    Written 1995 by Miguel de Icaza
 
-   Complete rewrote.
+   Complete rewrite.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -58,9 +58,9 @@
 
 /* Size of the find parameters window */
 #if HAVE_CHARSET
-static int FIND_Y = 16;
+static int FIND_Y = 17;
 #else
-static int FIND_Y = 15;
+static int FIND_Y = 16;
 #endif
 static int FIND_X = 68;
 
@@ -93,11 +93,13 @@ char *find_ignore_dirs = NULL;
 /* static variables to remember find parameters */
 static WInput *in_start;        /* Start path */
 static WInput *in_name;         /* Filename */
-static WInput *in_with;         /* Text inside filename */
+static WInput *in_with;         /* Text */
+static WLabel *content_label;   /* 'Content:' label */
 static WCheck *file_case_sens_cbox;     /* "case sensitive" checkbox */
 static WCheck *file_pattern_cbox;       /* File name is glob or regexp */
 static WCheck *recursively_cbox;
 static WCheck *skip_hidden_cbox;
+static WCheck *content_use_cbox;        /* Take into account the Content field */
 static WCheck *content_case_sens_cbox;  /* "case sensitive" checkbox */
 static WCheck *content_regexp_cbox;     /* "find regular expression" checkbox */
 static WCheck *content_first_hit_cbox;  /* "First hit" checkbox" */
@@ -170,6 +172,7 @@ typedef struct
     gboolean file_all_charsets;
 
     /* file content options */
+    gboolean content_use;
     gboolean content_case_sens;
     gboolean content_regexp;
     gboolean content_first_hit;
@@ -179,7 +182,7 @@ typedef struct
 
 static find_file_options_t options = {
     TRUE, TRUE, TRUE, FALSE, FALSE,
-    TRUE, FALSE, FALSE, FALSE, FALSE
+    FALSE, TRUE, FALSE, FALSE, FALSE, FALSE
 };
 
 static char *in_start_dir = INPUT_LAST_TEXT;
@@ -226,6 +229,7 @@ find_load_options (void)
         mc_config_get_bool (mc_main_config, "FindFile", "file_skip_hidden", FALSE);
     options.file_all_charsets =
         mc_config_get_bool (mc_main_config, "FindFile", "file_all_charsets", FALSE);
+    options.content_use = mc_config_get_bool (mc_main_config, "FindFile", "content_use", FALSE);
     options.content_case_sens =
         mc_config_get_bool (mc_main_config, "FindFile", "content_case_sens", TRUE);
     options.content_regexp =
@@ -246,6 +250,7 @@ find_save_options (void)
     mc_config_set_bool (mc_main_config, "FindFile", "file_find_recurs", options.find_recurs);
     mc_config_set_bool (mc_main_config, "FindFile", "file_skip_hidden", options.skip_hidden);
     mc_config_set_bool (mc_main_config, "FindFile", "file_all_charsets", options.file_all_charsets);
+    mc_config_set_bool (mc_main_config, "FindFile", "content_use", options.content_use);
     mc_config_set_bool (mc_main_config, "FindFile", "content_case_sens", options.content_case_sens);
     mc_config_set_bool (mc_main_config, "FindFile", "content_regexp", options.content_regexp);
     mc_config_set_bool (mc_main_config, "FindFile", "content_first_hit", options.content_first_hit);
@@ -315,6 +320,34 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
 {
     switch (msg)
     {
+    case DLG_ACTION:
+        if (sender == (Widget *) content_use_cbox)
+        {
+            gboolean disable = !(content_use_cbox->state & C_BOOL);
+
+            widget_disable (content_label->widget, disable);
+            send_message ((Widget *) content_label, WIDGET_DRAW, 0);
+            widget_disable (in_with->widget, disable);
+            send_message ((Widget *) in_with, WIDGET_DRAW, 0);
+            widget_disable (content_first_hit_cbox->widget, disable);
+            send_message ((Widget *) content_first_hit_cbox, WIDGET_DRAW, 0);
+            widget_disable (content_regexp_cbox->widget, disable);
+            send_message ((Widget *) content_regexp_cbox, WIDGET_DRAW, 0);
+            widget_disable (content_case_sens_cbox->widget, disable);
+            send_message ((Widget *) content_case_sens_cbox, WIDGET_DRAW, 0);
+#ifdef HAVE_CHARSET
+            widget_disable (content_all_charsets_cbox->widget, disable);
+            send_message ((Widget *) content_all_charsets_cbox, WIDGET_DRAW, 0);
+#endif
+            widget_disable (content_whole_words_cbox->widget, disable);
+            send_message ((Widget *) content_whole_words_cbox, WIDGET_DRAW, 0);
+
+            return MSG_HANDLED;
+        }
+
+        return MSG_NOT_HANDLED;
+
+
     case DLG_VALIDATE:
         if (h->ret_value != B_ENTER)
             return MSG_HANDLED;
@@ -323,9 +356,9 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         if (!(file_pattern_cbox->state & C_BOOL)
             && (in_name->buffer[0] != '\0') && !find_check_regexp (in_name->buffer))
         {
+            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_name);
-            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             return MSG_HANDLED;
         }
 
@@ -333,9 +366,9 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         if ((content_regexp_cbox->state & C_BOOL)
             && (in_with->buffer[0] != '\0') && !find_check_regexp (in_with->buffer))
         {
+            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_with);
-            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             return MSG_HANDLED;
         }
 
@@ -374,6 +407,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 #endif
 
     /* file content */
+    const char *content_use_label = N_("Searc&h for content");
     const char *content_case_label = N_("Case sens&itive");
     const char *content_regexp_label = N_("Re&gular expression");
     const char *content_first_hit_label = N_("Fir&st hit");
@@ -385,6 +419,9 @@ find_parameters (char **start_dir, char **pattern, char **content)
     const char *buts[] = { N_("&OK"), N_("&Cancel"), N_("&Tree") };
 
     int b0, b1, b2;
+
+    int cbox_position;
+    gboolean disable;
 
 #ifdef ENABLE_NLS
     {
@@ -400,6 +437,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
         file_all_charsets_label = _(file_all_charsets_label);
         content_all_charsets_label = _(content_all_charsets_label);
 #endif
+        content_use_label = _(content_use_label);
         content_case_label = _(content_case_label);
         content_regexp_label = _(content_regexp_label);
         content_first_hit_label = _(content_first_hit_label);
@@ -416,7 +454,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
     if (in_start_dir == NULL)
         in_start_dir = g_strdup (".");
 
-  find_par_start:
+    disable = !options.content_use;
+
     find_dlg =
         create_dlg (TRUE, 0, 0, FIND_Y, FIND_X, dialog_colors,
                     find_parm_callback, "[Find File]", _("Find File"), DLG_CENTER | DLG_REVERSE);
@@ -427,63 +466,86 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg,
                 button_new (FIND_Y - 3, FIND_X / 4 - b0 / 2, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
+    cbox_position = FIND_Y - 5;
+
+    content_first_hit_cbox =
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_first_hit,
+                   content_first_hit_label);
+    widget_disable (content_first_hit_cbox->widget, disable);
+    add_widget (find_dlg, content_first_hit_cbox);
+
+    content_whole_words_cbox =
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_whole_words,
+                   content_whole_words_label);
+    widget_disable (content_whole_words_cbox->widget, disable);
+    add_widget (find_dlg, content_whole_words_cbox);
+
 #ifdef HAVE_CHARSET
-    content_all_charsets_cbox = check_new (11, FIND_X / 2 + 1,
+    content_all_charsets_cbox = check_new (cbox_position--, FIND_X / 2 + 1,
                                            options.content_all_charsets,
                                            content_all_charsets_label);
+    widget_disable (content_all_charsets_cbox->widget, disable);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
 
-    content_whole_words_cbox =
-        check_new (10, FIND_X / 2 + 1, options.content_whole_words, content_whole_words_label);
-    add_widget (find_dlg, content_whole_words_cbox);
-
-    content_first_hit_cbox =
-        check_new (9, FIND_X / 2 + 1, options.content_first_hit, content_first_hit_label);
-    add_widget (find_dlg, content_first_hit_cbox);
-
-    content_regexp_cbox =
-        check_new (8, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
-    add_widget (find_dlg, content_regexp_cbox);
-
     content_case_sens_cbox =
-        check_new (7, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
+    widget_disable (content_case_sens_cbox->widget, disable);
     add_widget (find_dlg, content_case_sens_cbox);
 
+    content_regexp_cbox =
+        check_new (cbox_position--, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
+    widget_disable (content_regexp_cbox->widget, disable);
+    add_widget (find_dlg, content_regexp_cbox);
+
+    cbox_position = FIND_Y - 6;
+
+    skip_hidden_cbox = check_new (cbox_position--, 3, options.skip_hidden, file_skip_hidden_label);
+    add_widget (find_dlg, skip_hidden_cbox);
+
 #ifdef HAVE_CHARSET
-    file_all_charsets_cbox = check_new (11, 3, options.file_all_charsets, file_all_charsets_label);
+    file_all_charsets_cbox =
+        check_new (cbox_position--, 3, options.file_all_charsets, file_all_charsets_label);
     add_widget (find_dlg, file_all_charsets_cbox);
 #endif
 
-    skip_hidden_cbox = check_new (10, 3, options.skip_hidden, file_skip_hidden_label);
-    add_widget (find_dlg, skip_hidden_cbox);
-
-    recursively_cbox = check_new (9, 3, options.find_recurs, file_recurs_label);
-    add_widget (find_dlg, recursively_cbox);
-
-    file_pattern_cbox = check_new (8, 3, options.file_pattern, file_pattern_label);
-    add_widget (find_dlg, file_pattern_cbox);
-
-    file_case_sens_cbox = check_new (7, 3, options.file_case_sens, file_case_label);
+    file_case_sens_cbox = check_new (cbox_position--, 3, options.file_case_sens, file_case_label);
     add_widget (find_dlg, file_case_sens_cbox);
 
-    in_with = input_new (6, FIND_X / 2 + 1, input_get_default_colors(), FIND_X / 2 - 4, INPUT_LAST_TEXT,
-                         MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
-    add_widget (find_dlg, in_with);
-    add_widget (find_dlg, label_new (5, FIND_X / 2 + 1, _("Content:")));
+    file_pattern_cbox = check_new (cbox_position--, 3, options.file_pattern, file_pattern_label);
+    add_widget (find_dlg, file_pattern_cbox);
 
-    in_name = input_new (6, 3, input_get_default_colors(),
+    recursively_cbox = check_new (cbox_position, 3, options.find_recurs, file_recurs_label);
+    add_widget (find_dlg, recursively_cbox);
+
+    /* This checkbox is located in the second column */
+    content_use_cbox =
+        check_new (cbox_position, FIND_X / 2 + 1, options.content_use, content_use_label);
+    add_widget (find_dlg, content_use_cbox);
+
+    in_with =
+        input_new (6, FIND_X / 2 + 1, input_get_default_colors (), FIND_X / 2 - 4, INPUT_LAST_TEXT,
+                   MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
+    widget_disable (in_with->widget, disable);
+    add_widget (find_dlg, in_with);
+
+    content_label = label_new (5, FIND_X / 2 + 1, _("Content:"));
+    widget_disable (content_label->widget, disable);
+    add_widget (find_dlg, content_label);
+
+    in_name = input_new (6, 3, input_get_default_colors (),
                          FIND_X / 2 - 4, INPUT_LAST_TEXT, "name", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_name);
     add_widget (find_dlg, label_new (5, 3, _("File name:")));
 
     add_widget (find_dlg, button_new (3, FIND_X - b2 - 2, B_TREE, NORMAL_BUTTON, buts[2], 0));
 
-    in_start = input_new (3, 3, input_get_default_colors(),
+    in_start = input_new (3, 3, input_get_default_colors (),
                           FIND_X - b2 - 6, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_start);
     add_widget (find_dlg, label_new (2, 3, _("Start at:")));
 
+  find_par_start:
     dlg_select_widget (in_name);
 
     switch (run_dlg (find_dlg))
@@ -494,34 +556,21 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     case B_TREE:
         {
-            char temp_dir[MC_MAXPATHLEN];
-
-            g_strlcpy (temp_dir, in_start->buffer, sizeof (temp_dir));
-#ifdef HAVE_CHARSET
-            options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
-            options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
-#endif
-            options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
-            options.content_regexp = content_regexp_cbox->state & C_BOOL;
-            options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
-            options.content_whole_words = content_whole_words_cbox->state & C_BOOL;
-            options.file_pattern = file_pattern_cbox->state & C_BOOL;
-            options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
-            options.find_recurs = recursively_cbox->state & C_BOOL;
-            options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
-            destroy_dlg (find_dlg);
+            const char *temp_dir = in_start->buffer;
 
             if ((temp_dir[0] == '\0') || ((temp_dir[0] == '.') && (temp_dir[1] == '\0')))
-                g_strlcpy (temp_dir, current_panel->cwd, sizeof (temp_dir));
+                temp_dir = current_panel->cwd;
 
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = tree_box (temp_dir);
             if (in_start_dir == NULL)
                 in_start_dir = g_strdup (temp_dir);
+
+            assign_text (in_start, in_start_dir);
+
             /* Warning: Dreadful goto */
             goto find_par_start;
-            break;
         }
 
     default:
@@ -529,6 +578,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
         options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
         options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
 #endif
+        options.content_use = content_use_cbox->state & C_BOOL;
         options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
         options.content_regexp = content_regexp_cbox->state & C_BOOL;
         options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
@@ -569,7 +619,7 @@ pop_directory (void)
     return (char *) g_queue_pop_tail (&dir_queue);
 }
 
-/* Remove all the items in the stack */
+/* Remove all the items from the stack */
 static void
 clear_stack (void)
 {
@@ -577,7 +627,7 @@ clear_stack (void)
     g_queue_clear (&dir_queue);
 }
 
-#else /* GLIB_CHAECK_VERSION */
+#else /* GLIB_CHECK_VERSION */
 
 static void
 push_directory (const char *dir)
@@ -607,7 +657,7 @@ pop_directory (void)
     return name;
 }
 
-/* Remove all the items in the stack */
+/* Remove all the items from the stack */
 static void
 clear_stack (void)
 {
@@ -616,7 +666,7 @@ clear_stack (void)
         g_free (dir);
 }
 
-#endif /* GLIB_CHAECK_VERSION */
+#endif /* GLIB_CHECK_VERSION */
 
 static void
 insert_file (const char *dir, const char *file)
@@ -694,14 +744,12 @@ get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboole
             /* skip possible leading zero(s) */
             if (i == 0)
                 continue;
-            else
-                break;
+            break;
         }
 
         if (i >= buffer_size - 1)
-        {
             buffer = g_realloc (buffer, buffer_size += 80);
-        }
+
         /* Strip newline */
         if (ch == '\n')
             break;
@@ -862,11 +910,11 @@ do_search (struct Dlg_head *h)
     static int pos = 0;
     static int subdirs_left = 0;
     gsize bytes_found;
-    unsigned long count;        /* Number of files displayed */
+    unsigned short count;
 
-    if (!h)
+    if (h == NULL)
     {                           /* someone forces me to close dirp */
-        if (dirp)
+        if (dirp != NULL)
         {
             mc_closedir (dirp);
             dirp = NULL;
@@ -877,150 +925,119 @@ do_search (struct Dlg_head *h)
         return 1;
     }
 
-    search_content_handle = mc_search_new (content_pattern, -1);
-    if (search_content_handle)
+    for (count = 0; count < 32; count++)
     {
-        search_content_handle->search_type =
-            options.content_regexp ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
-        search_content_handle->is_case_sensitive = options.content_case_sens;
-        search_content_handle->whole_words = options.content_whole_words;
-        search_content_handle->is_all_charsets = options.content_all_charsets;
-    }
-    search_file_handle = mc_search_new (find_pattern, -1);
-    search_file_handle->search_type = options.file_pattern ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
-    search_file_handle->is_case_sensitive = options.file_case_sens;
-    search_file_handle->is_all_charsets = options.file_all_charsets;
-    search_file_handle->is_entire_line = options.file_pattern;
-
-    count = 0;
-
-  do_search_begin:
-    while (!dp)
-    {
-        if (dirp)
+        while (dp == NULL)
         {
-            mc_closedir (dirp);
-            dirp = 0;
-        }
-
-        while (!dirp)
-        {
-            char *tmp = NULL;
-
-            tty_setcolor (REVERSE_COLOR);
-            while (1)
+            if (dirp != NULL)
             {
-                char *temp_dir = NULL;
-                gboolean found;
+                mc_closedir (dirp);
+                dirp = NULL;
+            }
 
-                tmp = pop_directory ();
-                if (tmp == NULL)
+            while (dirp == NULL)
+            {
+                char *tmp = NULL;
+
+                tty_setcolor (REVERSE_COLOR);
+                while (TRUE)
                 {
-                    running = FALSE;
-                    status_update (_("Finished"));
-                    stop_idle (h);
-                    mc_search_free (search_file_handle);
-                    search_file_handle = NULL;
-                    mc_search_free (search_content_handle);
-                    search_content_handle = NULL;
-                    return 0;
+                    char *temp_dir = NULL;
+                    gboolean found;
+
+                    tmp = pop_directory ();
+                    if (tmp == NULL)
+                    {
+                        running = FALSE;
+                        status_update (_("Finished"));
+                        stop_idle (h);
+                        return 0;
+                    }
+
+                    if ((find_ignore_dirs == NULL) || (find_ignore_dirs[0] == '\0'))
+                        break;
+
+                    temp_dir = g_strdup_printf (":%s:", tmp);
+                    found = strstr (find_ignore_dirs, temp_dir) != 0;
+                    g_free (temp_dir);
+
+                    if (!found)
+                        break;
+
+                    g_free (tmp);
                 }
 
-                if ((find_ignore_dirs == NULL) || (find_ignore_dirs[0] == '\0'))
-                    break;
+                g_free (directory);
+                directory = tmp;
 
-                temp_dir = g_strdup_printf (":%s:", tmp);
-                found = strstr (find_ignore_dirs, temp_dir) != 0;
-                g_free (temp_dir);
+                if (verbose)
+                {
+                    char buffer[BUF_SMALL];
 
-                if (!found)
-                    break;
+                    g_snprintf (buffer, sizeof (buffer), _("Searching %s"),
+                                str_trunc (directory, FIND2_X_USE));
+                    status_update (buffer);
+                }
+                /* mc_stat should not be called after mc_opendir
+                   because vfs_s_opendir modifies the st_nlink
+                 */
+                if (mc_stat (directory, &tmp_stat) == 0)
+                    subdirs_left = tmp_stat.st_nlink - 2;
+                else
+                    subdirs_left = 0;
 
-                g_free (tmp);
+                dirp = mc_opendir (directory);
+            }                   /* while (!dirp) */
+
+            /* skip invalid filenames */
+            while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))
+                ;
+        }                       /* while (!dp) */
+
+        if (strcmp (dp->d_name, ".") == 0 || strcmp (dp->d_name, "..") == 0)
+        {
+            dp = mc_readdir (dirp);
+            /* skip invalid filenames */
+            while (dp != NULL && !str_is_valid_string (dp->d_name))
+                dp = mc_readdir (dirp);
+
+            return 1;
+        }
+
+        if (!(options.skip_hidden && (dp->d_name[0] == '.')))
+        {
+            gboolean search_ok;
+
+            if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
+            {                   /* Can directory be NULL ? */
+                char *tmp_name = concat_dir_and_file (directory, dp->d_name);
+                if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
+                {
+                    push_directory (tmp_name);
+                    subdirs_left--;
+                }
+                else
+                    g_free (tmp_name);
             }
 
-            g_free (directory);
-            directory = tmp;
+            search_ok = mc_search_run (search_file_handle, dp->d_name,
+                                       0, strlen (dp->d_name), &bytes_found);
 
-            if (verbose)
+            if (search_ok)
             {
-                char buffer[BUF_SMALL];
-
-                g_snprintf (buffer, sizeof (buffer), _("Searching %s"),
-                            str_trunc (directory, FIND2_X_USE));
-                status_update (buffer);
+                if (content_pattern == NULL)
+                    find_add_match (directory, dp->d_name);
+                else if (search_content (h, directory, dp->d_name))
+                    return 1;
             }
-            /* mc_stat should not be called after mc_opendir
-               because vfs_s_opendir modifies the st_nlink
-             */
-            if (!mc_stat (directory, &tmp_stat))
-                subdirs_left = tmp_stat.st_nlink - 2;
-            else
-                subdirs_left = 0;
-
-            dirp = mc_opendir (directory);
-        }                       /* while (!dirp) */
+        }
 
         /* skip invalid filenames */
         while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))
             ;
-    }                           /* while (!dp) */
-
-    if (strcmp (dp->d_name, ".") == 0 || strcmp (dp->d_name, "..") == 0)
-    {
-        dp = mc_readdir (dirp);
-        /* skip invalid filenames */
-        while (dp != NULL && !str_is_valid_string (dp->d_name))
-            dp = mc_readdir (dirp);
-
-        mc_search_free (search_file_handle);
-        search_file_handle = NULL;
-        mc_search_free (search_content_handle);
-        search_content_handle = NULL;
-        return 1;
-    }
-
-    if (!(options.skip_hidden && (dp->d_name[0] == '.')))
-    {
-        gboolean search_ok;
-
-        if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
-        {                       /* Can directory be NULL ? */
-            char *tmp_name = concat_dir_and_file (directory, dp->d_name);
-            if (!mc_lstat (tmp_name, &tmp_stat) && S_ISDIR (tmp_stat.st_mode))
-            {
-                push_directory (tmp_name);
-                subdirs_left--;
-            }
-            else
-                g_free (tmp_name);
-        }
-
-        search_ok = mc_search_run (search_file_handle, dp->d_name,
-                                   0, strlen (dp->d_name), &bytes_found);
-
-        if (search_ok)
-        {
-            if (content_pattern == NULL)
-                find_add_match (directory, dp->d_name);
-            else if (search_content (h, directory, dp->d_name))
-            {
-                mc_search_free (search_file_handle);
-                search_file_handle = NULL;
-                mc_search_free (search_content_handle);
-                search_content_handle = NULL;
-                return 1;
-            }
-        }
-    }
-
-    /* skip invalid filenames */
-    while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))
-        ;
+    }                           /* for */
 
     /* Displays the nice dot */
-    count++;
-    if (!(count & 31))
     {
         /* For nice updating */
         const char rotating_dash[] = "|/-\\";
@@ -1034,13 +1051,7 @@ do_search (struct Dlg_head *h)
             mc_refresh ();
         }
     }
-    else
-        goto do_search_begin;
 
-    mc_search_free (search_file_handle);
-    search_file_handle = NULL;
-    mc_search_free (search_content_handle);
-    search_content_handle = NULL;
     return 1;
 }
 
@@ -1051,7 +1062,7 @@ init_find_vars (void)
     old_dir = NULL;
     matches = 0;
 
-    /* Remove all the items in the stack */
+    /* Remove all the items from the stack */
     clear_stack ();
 }
 
@@ -1135,7 +1146,7 @@ find_callback (struct Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, voi
 
 /* Handles the Stop/Start button in the find window */
 static int
-start_stop (WButton *button, int action)
+start_stop (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -1152,7 +1163,7 @@ start_stop (WButton *button, int action)
 
 /* Handle view command, when invoked as a button */
 static int
-find_do_view_file (WButton *button, int action)
+find_do_view_file (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -1163,7 +1174,7 @@ find_do_view_file (WButton *button, int action)
 
 /* Handle edit command, when invoked as a button */
 static int
-find_do_edit_file (WButton *button, int action)
+find_do_edit_file (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -1232,7 +1243,8 @@ setup_gui (void)
                 button_new (FIND2_Y - 3, fbuts[6].x, B_VIEW, NORMAL_BUTTON,
                             fbuts[6].text, find_do_view_file));
     add_widget (find_dlg,
-                button_new (FIND2_Y - 3, fbuts[5].x, B_PANELIZE, NORMAL_BUTTON, fbuts[5].text, NULL));
+                button_new (FIND2_Y - 3, fbuts[5].x, B_PANELIZE, NORMAL_BUTTON, fbuts[5].text,
+                            NULL));
 
     add_widget (find_dlg,
                 button_new (FIND2_Y - 4, fbuts[4].x, B_CANCEL, NORMAL_BUTTON, fbuts[4].text, NULL));
@@ -1257,9 +1269,33 @@ setup_gui (void)
 static int
 run_process (void)
 {
+    int ret;
+
+    search_content_handle = mc_search_new (content_pattern, -1);
+    if (search_content_handle)
+    {
+        search_content_handle->search_type =
+            options.content_regexp ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
+        search_content_handle->is_case_sensitive = options.content_case_sens;
+        search_content_handle->whole_words = options.content_whole_words;
+        search_content_handle->is_all_charsets = options.content_all_charsets;
+    }
+    search_file_handle = mc_search_new (find_pattern, -1);
+    search_file_handle->search_type = options.file_pattern ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
+    search_file_handle->is_case_sensitive = options.file_case_sens;
+    search_file_handle->is_all_charsets = options.file_all_charsets;
+    search_file_handle->is_entire_line = options.file_pattern;
+
     resuming = 0;
     set_idle_proc (find_dlg, 1);
-    return run_dlg (find_dlg);
+    ret = run_dlg (find_dlg);
+
+    mc_search_free (search_file_handle);
+    search_file_handle = NULL;
+    mc_search_free (search_content_handle);
+    search_content_handle = NULL;
+
+    return ret;
 }
 
 static void
@@ -1280,15 +1316,17 @@ find_file (const char *start_dir, const char *pattern, const char *content,
 
     /* FIXME: Need to cleanup this, this ought to be passed non-globaly */
     find_pattern = str_unconst (pattern);
-    content_pattern = (content != NULL && str_is_valid_string (content))
-        ? g_strdup (content) : NULL;
+
+    content_pattern = NULL;
+    if (options.content_use && content != NULL && str_is_valid_string (content))
+        content_pattern = g_strdup (content);
 
     init_find_vars ();
     push_directory (start_dir);
 
     return_value = run_process ();
 
-    /* Remove all the items in the stack */
+    /* Remove all the items from the stack */
     clear_stack ();
 
     get_list_info (&file_tmp, &dir_tmp);
