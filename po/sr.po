@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -462,7 +462,8 @@ msgstr "fish: Чекам почетни ред..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Извините, али за сад не можемо да се повезујемо уз потврду лозинке."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Неопходна је лозинка за "
 
 msgid "fish: Sending password..."

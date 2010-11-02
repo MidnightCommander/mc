@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-09-06 12:37+0400\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -464,7 +464,8 @@ msgstr "fish: ожидается начальная строка..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: требуется пароль для "
 
 msgid "fish: Sending password..."

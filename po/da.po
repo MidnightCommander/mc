@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -470,7 +470,8 @@ msgstr "fisk: Venter på begyndelseslinie..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fisk: Behøver adgangskode til"
 
 msgid "fish: Sending password..."

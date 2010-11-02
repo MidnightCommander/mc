@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -465,7 +465,8 @@ msgstr "arraina: Hasierako lerroaren zain..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Oraingoz ezin dugu pasahitzaren bidezko konexiorik egin."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " arraina: honentzat pasahitza behar da: "
 
 msgid "fish: Sending password..."

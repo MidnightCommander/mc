@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-05-16\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -455,7 +455,8 @@ msgstr "fish: Wachten op initiële lijn..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Helaas, wachtwoordbeveiligde verbindingen niet mogelijk."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Wachtwoord vereist voor "
 
 msgid "fish: Sending password..."

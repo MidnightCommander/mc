@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-02-28 15:59+0100\n"
 "Last-Translator: SZABÓ Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian\n"
@@ -456,7 +456,8 @@ msgstr "Fish: várakozás kezdősorra..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Jelszavas azonosítás egyelőre nem lehetséges."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " Fish: jelszó szükséges az azonosításhoz: "
 
 msgid "fish: Sending password..."

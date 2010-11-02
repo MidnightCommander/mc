@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-03-09 14:51+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -451,7 +451,8 @@ msgstr "fish：正在等待初始化行..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "抱歉，目前无法创建口令验证连接。"
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish：需要口令 "
 
 msgid "fish: Sending password..."

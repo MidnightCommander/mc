@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.x\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-03-03 12:00-0000\n"
 "Last-Translator: Sebastian Siebert <freespacer@gmx.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -459,7 +459,8 @@ msgstr ""
 "Entschuldigung, aber wir können momentan noch keine passwortgesicherten\n"
 "Verbindungen benutzen."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Passwort benötigt für "
 
 msgid "fish: Sending password..."

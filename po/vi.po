@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -461,7 +461,8 @@ msgstr "fish: Đang chời dòng đầu tiên..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Xin lỗi, bây giờ không thể tạo kết nối xác thực theo mật khẩu."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: yêu cầu mật khẩu cho "
 
 msgid "fish: Sending password..."

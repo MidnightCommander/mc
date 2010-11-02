@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.9\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-09-07 20:08+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -455,7 +455,8 @@ msgstr "fish: Čekání na počáteční linku..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Bohužel, nyní nelze provést heslem autentizované spojení."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: Heslo je vyžadováno pro "
 
 msgid "fish: Sending password..."

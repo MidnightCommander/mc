@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-04-10 18:58+0200\n"
 "Last-Translator: Alex-P. Natsios\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -453,7 +453,8 @@ msgstr ""
 "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
 "υποστηρίζονται."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Απαιτείται κωδικός για το "
 
 msgid "fish: Sending password..."

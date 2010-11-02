@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -453,7 +453,8 @@ msgstr "fish: чекаю початковий рядок..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Вибачте, зараз неможливо створювати з'єднання, авторизовані паролем."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: вимагається пароль для "
 
 msgid "fish: Sending password..."

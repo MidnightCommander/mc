@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-09-07 10:27+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
@@ -450,7 +450,8 @@ msgstr "fish: oczekiwanie na wiersz początkowy..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Połączenia uwierzytelniane hasłem nie są na razie obsługiwane."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: wymagane hasło dla "
 
 msgid "fish: Sending password..."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -461,7 +461,8 @@ msgstr "fish: Чакам начален ред..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Съжалявам, не можем да правим връзки с парола засега."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Необходима е парола за "
 
 msgid "fish: Sending password..."

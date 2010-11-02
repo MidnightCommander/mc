@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-10-30 10:23+0100\n"
 "Last-Translator: el_libre - - www.catmidia.cat <el.libre@gmail.com>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -445,7 +445,8 @@ msgstr "fish: Està esperant a la línia inicial..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Ho sento, però de moment no es poden fer connexions autenticades."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Cal una contrasenya per a "
 
 msgid "fish: Sending password..."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -464,7 +464,8 @@ msgstr "fish: Эхлэл мөрийг хүлээж байна..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Уучлаарай, Бид энэ холболтод нууц үг ашиглаж чадахгүй байна."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: Нууц үг шаардлагатай "
 
 msgid "fish: Sending password..."

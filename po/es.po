@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-05-08 16:30+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -449,7 +449,8 @@ msgstr "fish: Esperando línea de inicio..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Lo siento, las conexiones con contraseña aún no son posibles."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Contraseña requerida para "
 
 msgid "fish: Sending password..."

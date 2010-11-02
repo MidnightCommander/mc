@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -462,7 +462,8 @@ msgstr "fish: Чакаецца радок ініцыялізацыі..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Выбачайце, немагчыма стварыць аўтарызаваныя паролем злучэньні зараз."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: Патрабуецца пароль для "
 
 msgid "fish: Sending password..."

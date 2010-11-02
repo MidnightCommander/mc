@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -467,7 +467,8 @@ msgstr "fish: Väntar på första raden..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Kan inte göra lösenords autenticerade anslutningar för närvarande."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Lösenord behövs för "
 
 msgid "fish: Sending password..."

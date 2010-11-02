@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander 4.70\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-09-14 11:03+0100\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
 "Language-Team: GALICIAN <proxecto@trasno.net>\n"
@@ -451,7 +451,8 @@ msgstr "fish: esperando liña de inicio..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Síntoo, as conexións con contrasinal aínda non son posíbeis."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: precisase contrasinal para "
 
 msgid "fish: Sending password..."

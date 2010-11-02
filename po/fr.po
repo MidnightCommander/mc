@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -460,7 +460,8 @@ msgstr ""
 "Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe "
 "pour l'instant."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish : mot de passe requis "
 
 msgid "fish: Sending password..."

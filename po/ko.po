@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-02 10:42+0100\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -455,7 +455,8 @@ msgstr "fish: 초기 라인을 기다리는 중..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "미안합니다. 아직 비밀번호 인증 연결은 할 수 없습니다."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Password required for "
 
 msgid "fish: Sending password..."
