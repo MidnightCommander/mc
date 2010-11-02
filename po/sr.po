@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -308,6 +308,9 @@ msgstr "Таст. `Backspace'"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -423,12 +426,12 @@ msgstr "Остава директоријума је истекла за %s"
 msgid "Starting linear transfer..."
 msgstr "Покрећем линеарни пренос..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (пренесено %lu бајтова)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s пренесено %lu бајтова"
 
 msgid "Getting file"
@@ -471,6 +474,10 @@ msgstr "fish: Шаљем почетни ред..."
 msgid "fish: Handshaking version..."
 msgstr "fish: Преговарам о верзији..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Шаљем почетни ред..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: Постављам текући директоријум..."
 
@@ -497,8 +504,8 @@ msgstr "fish: складиштење %s: шаљем наредбу..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Локално читање није успело, шаљем нуле"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: складиштим %s %d (%lu)"
 
 msgid "zeros"
@@ -573,10 +580,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Неисправна адреса домаћина."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: нисам могао да подесим пасивни режим"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Не могу да створим утичницу: %s "
 
@@ -615,8 +618,8 @@ msgstr "(прво постави дир.)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: нисам успео; немам решења"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: складиштим датотеку %lu (%lu)"
 
 msgid ""
@@ -1078,24 +1081,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Поредак ређања"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Потврде "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Потврде "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "брзи с&Писак директоријума  C-\\"
 
-msgid " confirm &Exit "
-msgstr " потврда &Излаза "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Потврде "
 
-msgid " confirm e&Xecute "
-msgstr " потврда и&Звршавања "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Потврде "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " потврда &Преписивања "
 
-msgid " confirm &Delete "
-msgstr " потврда &Брисања "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Потврде "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1314,6 +1328,9 @@ msgstr "<Непознат корисник>"
 
 msgid "<Unknown group>"
 msgstr "<Непозната група>"
+
+msgid " Confirmation "
+msgstr " Потврде "
 
 msgid "Files tagged, want to cd?"
 msgstr "Датотеке означене, да пром.дир.?"
@@ -3916,8 +3933,28 @@ msgstr ""
 msgid " History "
 msgstr " Историја "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Позадински процес:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: нисам могао да подесим пасивни режим"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " потврда &Излаза "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " потврда и&Звршавања "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " потврда &Брисања "
 
 #, fuzzy
 #~ msgid "Status:    %s"

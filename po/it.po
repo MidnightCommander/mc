@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2010-02-19 15:10+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -297,6 +297,10 @@ msgstr "Canc. a sinista"
 msgid "Number sign #"
 msgstr "Cancelletto"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -412,12 +416,12 @@ msgstr "Cache dir scaduta per %s"
 msgid "Starting linear transfer..."
 msgstr "Inizio trasferimento lineare..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu byte trasferiti"
 
 msgid "Getting file"
@@ -460,6 +464,10 @@ msgstr "fish: spedizione riga iniziale..."
 msgid "fish: Handshaking version..."
 msgstr "fish: versione handshaking..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: spedizione riga iniziale..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: impostazione directory corrente..."
 
@@ -486,8 +494,8 @@ msgstr "fish: memorizza %s: spedizione comando..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: lettura locale fallita, spedizione zeri"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: memorizzazione %s %d (%lu)"
 
 msgid "zeros"
@@ -561,10 +569,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: famiglia di indirizzi non valida"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: impossibile impostare la modalità passiva: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: impossibile creare il socket: %s"
 
@@ -603,8 +607,8 @@ msgstr "(antepone chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fallito; non so dove rileggere"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: memorizzazione file %lu (%lu)"
 
 msgid ""
@@ -1060,28 +1064,30 @@ msgstr "Eseguibili &prima"
 msgid "Sort order"
 msgstr "Modalità di ordinamento"
 
-msgid " Confirmation "
-msgstr " Conferme "
+msgid "Confirmation"
+msgstr "Conferma"
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+msgid "Confirmation|&History cleanup"
+msgstr "Cancellazione &cronologia"
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "Cancellazione &dir favorite"
 
-#, fuzzy
-msgid " confirm &Exit "
-msgstr " Conferme "
+msgid "Confirmation|E&xit"
+msgstr "E&sci"
+
+msgid "Confirmation|&Execute"
+msgstr "&Esegui"
 
 #, fuzzy
-msgid " confirm e&Xecute "
-msgstr " Conferma sostituzione"
+msgid "Confirmation|O&verwrite"
+msgstr "E&limina"
 
-#, fuzzy
-msgid " confirm o&Verwrite "
-msgstr "So&vrascrivi"
-
-#, fuzzy
-msgid " confirm &Delete "
-msgstr " Conferma sostituzione"
+msgid "Confirmation|&Delete"
+msgstr "E&limina"
 
 msgid "UTF-8 output"
 msgstr "Uscita UTF-8"
@@ -1298,6 +1304,9 @@ msgstr "<Utente ignoto>"
 
 msgid "<Unknown group>"
 msgstr "<Gruppo ignoto>"
+
+msgid " Confirmation "
+msgstr " Conferme "
 
 msgid "Files tagged, want to cd?"
 msgstr " File selezionati, cambio directory?"
@@ -3804,26 +3813,37 @@ msgstr "In fase di ricerca"
 msgid " History "
 msgstr " Cronologia "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr "Cancellazione cronologia"
+
+msgid "Do you want clean this history?"
+msgstr "Cancellare questa cronologia?"
+
 msgid "Background process:"
 msgstr "Processo in background:"
 
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: impossibile impostare la modalità passiva: %s"
+
+#, fuzzy
+#~ msgid " confirm &Exit "
+#~ msgstr " Conferme "
+
+#, fuzzy
+#~ msgid " confirm e&Xecute "
+#~ msgstr " Conferma sostituzione"
+
+#, fuzzy
+#~ msgid " confirm o&Verwrite "
+#~ msgstr "So&vrascrivi"
+
+#, fuzzy
+#~ msgid " confirm &Delete "
+#~ msgstr " Conferma sostituzione"
+
 #~ msgid "Status:    %s"
 #~ msgstr "Stato:      %s"
-
-#~ msgid "Confirmation"
-#~ msgstr "Conferma"
-
-#~ msgid "Confirmation|&History cleanup"
-#~ msgstr "Cancellazione &cronologia"
-
-#~ msgid "Confirmation|E&xit"
-#~ msgstr "E&sci"
-
-#~ msgid "Confirmation|&Execute"
-#~ msgstr "&Esegui"
-
-#~ msgid "Confirmation|&Delete"
-#~ msgstr "E&limina"
 
 #, fuzzy
 #~ msgid "Time: %s  %s (%s)"
@@ -3860,9 +3880,3 @@ msgstr "Processo in background:"
 
 #~ msgid "Continue from begining?"
 #~ msgstr "Continuare dall'inizio?"
-
-#~ msgid "DialogTitle|History cleanup"
-#~ msgstr "Cancellazione cronologia"
-
-#~ msgid "Do you want clean this history?"
-#~ msgstr "Cancellare questa cronologia?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -307,6 +307,10 @@ msgstr "Retrocesso"
 msgid "Number sign #"
 msgstr ""
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Control"
 
@@ -422,12 +426,12 @@ msgstr "Cache de dir expirou para %s"
 msgid "Starting linear transfer..."
 msgstr "Iniciando transferência linear..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
 
 msgid "Getting file"
@@ -470,6 +474,10 @@ msgstr "peixe: Enviando linha inicial..."
 msgid "fish: Handshaking version..."
 msgstr "peixe: versão de handshake..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "peixe: Enviando linha inicial..."
+
 msgid "fish: Setting up current directory..."
 msgstr "peixe: Configura o diretório corrente..."
 
@@ -496,8 +504,8 @@ msgstr "peixe: armazenar %s: enviando comando..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "peixe: leitura local falhou, enviando zeros"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: armazenando %s %d (%lu)"
 
 msgid "zeros"
@@ -573,10 +581,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Endereço de host inválido."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: não foi possível configurar modo passivo"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Impossível criar soquete: %s"
 
@@ -616,7 +620,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: falha; não é possível voltar"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: guardando arquivo %d (%d)"
 
 msgid ""
@@ -1081,24 +1085,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Parâmetros de ordenamento"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Confirmação "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Confirmação "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "Lista de di&retórios C-\\"
 
-msgid " confirm &Exit "
-msgstr " confirmar &Saída"
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Confirmação "
 
-msgid " confirm e&Xecute "
-msgstr "confirmar e&Xecução "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Confirmação "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " confirmar &Sobrescrita"
 
-msgid " confirm &Delete "
-msgstr " confirmar &Exclusão "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Confirmação "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1324,6 +1339,9 @@ msgstr "<Usuário desconheciso>"
 
 msgid "<Unknown group>"
 msgstr "<Grupo desconhecido>"
+
+msgid " Confirmation "
+msgstr " Confirmação "
 
 msgid "Files tagged, want to cd?"
 msgstr "Arquivos selecionados. Deseja mudar localização?"
@@ -3940,8 +3958,28 @@ msgstr ""
 msgid " History "
 msgstr " Histórico de comandos"
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Processo em segundo plano:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: não foi possível configurar modo passivo"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " confirmar &Saída"
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr "confirmar e&Xecução "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " confirmar &Exclusão "
 
 #~ msgid "Status:    %s"
 #~ msgstr "Criado: %s"

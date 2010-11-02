@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -306,6 +306,9 @@ msgstr "Tecla de apagar"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -425,12 +428,12 @@ msgstr "Cache de dir expirou para %s"
 msgid "Starting linear transfer..."
 msgstr "A iniciar transferência linear..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
 
 msgid "Getting file"
@@ -473,6 +476,10 @@ msgstr "fish: A enviar linha inicial..."
 msgid "fish: Handshaking version..."
 msgstr "fish: Versão de protocolo (handshacking)..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: A enviar linha inicial..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: A definir directório actual..."
 
@@ -499,8 +506,8 @@ msgstr "fish: armazenar %s: a enviar comando..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Leitura local falhou, a enviar zeros"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: a armazenar %s %d (%lu)"
 
 msgid "zeros"
@@ -577,10 +584,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Endereço de servidor inválido."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: incapaz de definir modo passivo"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Incapaz de criar socket: %s "
 
@@ -619,8 +622,8 @@ msgstr "(chdir primeiro)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: falhou; nenhum local para onde ir"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: a armazenar ficheiro %lu (%lu)"
 
 msgid ""
@@ -1084,24 +1087,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Ordem de ordenação"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Confirmação "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Confirmação "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "lista-top de di&rectórios C-\\"
 
-msgid " confirm &Exit "
-msgstr " confirmar Saí&da "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Confirmação "
 
-msgid " confirm e&Xecute "
-msgstr " confirmar e&Xecução "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Confirmação "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " confirmar so&Brepor "
 
-msgid " confirm &Delete "
-msgstr " confirmar &Apagar "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Confirmação "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1321,6 +1335,9 @@ msgstr "<Utilizador desconhecido>"
 
 msgid "<Unknown group>"
 msgstr "<Grupo desconhecido>"
+
+msgid " Confirmation "
+msgstr " Confirmação "
 
 msgid "Files tagged, want to cd?"
 msgstr "Ficheiros marcados, quer executar cd?"
@@ -3928,8 +3945,28 @@ msgstr ""
 msgid " History "
 msgstr " Histórico "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Processo de fundo:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: incapaz de definir modo passivo"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " confirmar Saí&da "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " confirmar e&Xecução "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " confirmar &Apagar "
 
 #, fuzzy
 #~ msgid "Status:    %s"

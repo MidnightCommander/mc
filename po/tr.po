@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -308,6 +308,9 @@ msgstr "Geriye silme tuşu "
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -427,12 +430,12 @@ msgstr "Dizin arabelleğinde %s için zamanaşımı"
 msgid "Starting linear transfer..."
 msgstr "Doğrusal aktarım başlangıcı..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s : %s : %s %3d%% (%lu bayt aktarıldı)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s : %s : %s %lu bayt aktarıldı"
 
 msgid "Getting file"
@@ -476,6 +479,10 @@ msgstr "fish: Satır gönderimi..."
 msgid "fish: Handshaking version..."
 msgstr "fish: Sürüm anlaşması..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Satır gönderimi..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: Çalışma dizini belirlenmesi..."
 
@@ -502,8 +509,8 @@ msgstr "fish: %s kaydet: komut gönderiliyor..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Yerel okuma başarısız, sıfırlar gönderiliyor"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: %s %d (%lu) kaydediliyor"
 
 msgid "zeros"
@@ -580,10 +587,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Makina adresi geçersiz."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: pasif kip ayarlanamadı"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Soket oluşturulamadı: %s "
 
@@ -623,7 +626,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: başarısız; son çare yok"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: %d dosyası kaydediliyor (%lu)"
 
 msgid ""
@@ -1086,24 +1089,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Sıralama türü"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Onaylama "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Onaylama "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "Di&zin Geçmişi               C-\\"
 
-msgid " confirm &Exit "
-msgstr " Çı&kışta onay iste"
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Onaylama "
 
-msgid " confirm e&Xecute "
-msgstr " çalıştırma o&nayı iste "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Onaylama "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " ü&stüne yazma onayı iste "
 
-msgid " confirm &Delete "
-msgstr " sil&me onayı iste "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Onaylama "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1323,6 +1337,9 @@ msgstr "<Bilinmeyen>"
 
 msgid "<Unknown group>"
 msgstr "<Bilinmeyen>"
+
+msgid " Confirmation "
+msgstr " Onaylama "
 
 msgid "Files tagged, want to cd?"
 msgstr "Dosyalar işaretli, dizin değişsin mi?"
@@ -3926,8 +3943,28 @@ msgstr ""
 msgid " History "
 msgstr " Geçmiş "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Artalan işlemi:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: pasif kip ayarlanamadı"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " Çı&kışta onay iste"
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " çalıştırma o&nayı iste "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " sil&me onayı iste "
 
 #, fuzzy
 #~ msgid "Status:    %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2010-10-30 10:23+0100\n"
 "Last-Translator: el_libre - - www.catmidia.cat <el.libre@gmail.com>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -290,6 +290,10 @@ msgstr "Tecla de retrocés"
 msgid "Number sign #"
 msgstr ""
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -405,12 +409,12 @@ msgstr "El directori de la memòria cau ha caducat per %s"
 msgid "Starting linear transfer..."
 msgstr "S'està iniciant la transferència lineal..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferits)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferits"
 
 msgid "Getting file"
@@ -453,6 +457,10 @@ msgstr "fish: S'està enviant la línia inicial..."
 msgid "fish: Handshaking version..."
 msgstr "fish: S'està intercanviant la versió..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: S'està enviant la línia inicial..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: S'està definint el directori actual..."
 
@@ -479,9 +487,9 @@ msgstr "fish: desa %s: està enviant l'ordre..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Ha fallat la lectura local, s'està enviant zeros"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr ""
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
+msgstr "ftpfs: s'està emmagatzemar el fitxer %lu (%lu)"
 
 msgid "zeros"
 msgstr "zeros"
@@ -554,10 +562,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: L'adreça de l'ordinador central no és vàlida."
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: no s'ha pogut establir el mode passiu: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: nNo es pot crear el sòcol: %s"
 
@@ -596,8 +600,8 @@ msgstr "(primer canvia de directori)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ha fallat; enlloc per retornar-hi"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: s'està emmagatzemar el fitxer %lu (%lu)"
 
 msgid ""
@@ -744,7 +748,8 @@ msgstr " mentre començava l'escaneig del inode %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
+msgstr ""
+"undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
@@ -944,11 +949,14 @@ msgstr ""
 "{FORE} i {BACK} es poden ometre, i s'utilitzarà l'opció per defecte\n"
 "Paraules clau:\n"
 "   Global:\t            errors, invertir, marcador, entrada\n"
-"   Visualització de fitxers: normal, seleccionat, marcat, selecció de marca \n"
+"   Visualització de fitxers: normal, seleccionat, marcat, selecció de "
+"marca \n"
 "   Quadres de diàleg:  dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menús:              menú, menuhot, menusel, menuhotsel\n"
-"   Ajuda:              ajuda normal, ajuda cursiva, ajuda enllaç, enllaç d'ajuda\n"
-"   Tipus de fitxers:   directori, executable, enllaç, dispositiu, especial, core\n"
+"   Ajuda:              ajuda normal, ajuda cursiva, ajuda enllaç, enllaç "
+"d'ajuda\n"
+"   Tipus de fitxers:   directori, executable, enllaç, dispositiu, especial, "
+"core\n"
 "\n"
 "Colors:\n"
 "   negre, gris, vermell, vermell clar, verd, verd clar, marró,\n"
@@ -985,7 +993,8 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Si us plau enviaqualsevol informació sobre errors (incloent la sortida de 'mc -V')\n"
+"Si us plau enviaqualsevol informació sobre errors (incloent la sortida de "
+"'mc -V')\n"
 "com a tiquet a a www.midnight-commander.org\n"
 
 #, c-format
@@ -1050,23 +1059,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Ordre de classificació"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Confirmació "
 
-msgid " confirm di&Rectory hotlist delete "
-msgstr ""
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Confirmació "
 
-msgid " confirm &Exit "
-msgstr " confirma la &Sortida "
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
+msgstr "Directori favorits"
 
-msgid " confirm e&Xecute "
-msgstr " confirma l'e&Xecució "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Confirmació "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Confirmació "
+
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " confirma la s&Obreescriptura "
 
-msgid " confirm &Delete "
-msgstr " confirma la &Supressió "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Confirmació "
 
 msgid "UTF-8 output"
 msgstr "Sortida UTF-8"
@@ -1283,6 +1304,9 @@ msgstr "<Usuari desconegut>"
 
 msgid "<Unknown group>"
 msgstr "<Grup desconegut>"
+
+msgid " Confirmation "
+msgstr " Confirmació "
 
 msgid "Files tagged, want to cd?"
 msgstr "Hi ha fitxers seleccionats. Voleu canviar de directori?"
@@ -1699,7 +1723,8 @@ msgid " Run Sort "
 msgstr " Executa \"Ordenar\" "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Introduïu les opcions per \"ordenar\" (vegeu manual) separades per espais: "
+msgstr ""
+" Introduïu les opcions per \"ordenar\" (vegeu manual) separades per espais: "
 
 msgid " Sort "
 msgstr " Ordena "
@@ -2148,15 +2173,24 @@ msgid " %s%s file error"
 msgstr "Error d'arxiu  %s%s"
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "El format de l'arxiu %smc.ext ha canviat amb la versió 3.0. Sembla que la instal·lació ha fallat. Si us plau, agafa una còpia nova del paquet Midnight Commander."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"El format de l'arxiu %smc.ext ha canviat amb la versió 3.0. Sembla que la "
+"instal·lació ha fallat. Si us plau, agafa una còpia nova del paquet Midnight "
+"Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr "Error d'arxiu  ~/%s"
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2184,7 +2218,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" No puc crear enllaços simbòlics estables entre els sistemes de fitxers no locals: \n"
+" No puc crear enllaços simbòlics estables entre els sistemes de fitxers no "
+"locals: \n"
 "\n"
 " S'inhabilitarà l'opció \"enllaços simbòlics estables\" "
 
@@ -2812,7 +2847,8 @@ msgid " Hotlist Load "
 msgstr " Càrrega de favorits "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 msgid "Information"
@@ -3008,7 +3044,8 @@ msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Premeu totes les tecles esmentades. Quan ho hagueu fet, comproveu"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
+msgstr ""
+"a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "l'espai o feu-hi clic. Per desplaçar-vos, utilitzeu el tabulador."
@@ -3321,7 +3358,9 @@ msgid " Enter command label: "
 msgstr " Introduïu l'etiqueta de l'ordre: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " No puc executar un quadre de cerca externa mentre estigui connectat a un directori no-local "
+msgstr ""
+" No puc executar un quadre de cerca externa mentre estigui connectat a un "
+"directori no-local "
 
 msgid "Find rejects after patching"
 msgstr "Troba els fitxers rebutjats després d'apedaçar"
@@ -3457,7 +3496,9 @@ msgid "Unknown tag on display format: "
 msgstr "Marcador desconegut al format de pantalla: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "El format facilitat per l'usuari sembla que és invàlid, s'està tornant al format per defecte."
+msgstr ""
+"El format facilitat per l'usuari sembla que és invàlid, s'està tornant al "
+"format per defecte."
 
 msgid " Do you really want to execute? "
 msgstr " Realment ho voleu executar? "
@@ -3518,7 +3559,8 @@ msgid "With support for background operations\n"
 msgstr "Amb suport per a operacions en segon pla\n"
 
 msgid "With mouse support on xterm and Linux console\n"
-msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
+msgstr ""
+"Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
 
 msgid "With mouse support on xterm\n"
 msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm.\n"
@@ -3747,8 +3789,27 @@ msgstr ""
 msgid " History "
 msgstr " Historial "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Procés de fons:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: no s'ha pogut establir el mode passiu: %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " confirma la &Sortida "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " confirma l'e&Xecució "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " confirma la &Supressió "
 
 #, fuzzy
 #~ msgid "Status:    %s"
@@ -4325,12 +4386,16 @@ msgstr "Procés de fons:"
 # Si té a veure amb SO_DONTROUTE amb això seria suficient  iv
 #~ msgid " Socket source routing setup "
 #~ msgstr " Configuració del camí origen del sòcol "
+
 #~ msgid " Enter host name to use as a source routing hop: "
 #~ msgstr " Introduïu l'ordinador central  que s'utilitzarà com a mitjancer: "
+
 #~ msgid " Host name "
 #~ msgstr " Nom de l'ordinador central "
+
 #~ msgid " Error while looking up IP address "
 #~ msgstr " S'ha produït un error en cercar l'adreça IP "
+
 #~ msgid ""
 #~ "\n"
 #~ "\n"
@@ -4345,14 +4410,19 @@ msgstr "Procés de fons:"
 #~ "desbordament de la pila d'actualització!\n"
 #~ "\n"
 #~ "\n"
+
 #~ msgid " Listing format edit "
 #~ msgstr " Edició del format de llista "
+
 #~ msgid " New mode is \"%s\" "
 #~ msgstr " El nou mode és \"%s\" "
+
 #~ msgid "&Drive...       M-d"
 #~ msgstr "&Unitat...     M-d"
+
 #~ msgid "Use to debug the background code"
 #~ msgstr "S'utilitza per depurar el codi de fons"
+
 #, fuzzy
 #~ msgid "Force subshell execution"
 #~ msgstr "executa amb l'ID del propietari"

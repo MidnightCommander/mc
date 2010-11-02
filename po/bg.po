@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -303,6 +303,9 @@ msgstr "Backspace"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -422,12 +425,12 @@ msgstr "Кеша за %s остаря"
 msgid "Starting linear transfer..."
 msgstr "Започвам линеен трансфер..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байта предадени)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu байта предадени"
 
 msgid "Getting file"
@@ -470,6 +473,10 @@ msgstr "fish: Изпращам начален ред..."
 msgid "fish: Handshaking version..."
 msgstr "fish: Потвърждавм версията..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Изпращам начален ред..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: Установявам текуща директория..."
 
@@ -496,8 +503,8 @@ msgstr "fish: запис на %s: изпращам командата..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Локалното четене пропадна, изпращам нули"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: записвам %s %d (%lu)"
 
 msgid "zeros"
@@ -574,10 +581,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Невалиден адрес на машина"
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: не може да се установи пасивен режим"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Не може да се създаде сокет: %s "
 
@@ -616,8 +619,8 @@ msgstr "(първо cd)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: неуспех; няма къде да се върна"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: записвам файла %lu (%lu)"
 
 msgid ""
@@ -1080,24 +1083,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Ред на сортиране"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Потвърждение "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Потвърждение "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "Горещи директории       C-\\"
 
-msgid " confirm &Exit "
-msgstr " Потвърждавай изход "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Потвърждение "
 
-msgid " confirm e&Xecute "
-msgstr " Потвърждавай изпълнение "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Потвърждение "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " Потвърждавай презапис "
 
-msgid " confirm &Delete "
-msgstr " Потвърждавай изтриване "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Потвърждение "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1317,6 +1331,9 @@ msgstr "<Неизвестен>"
 
 msgid "<Unknown group>"
 msgstr "<Неизвестна>"
+
+msgid " Confirmation "
+msgstr " Потвърждение "
 
 msgid "Files tagged, want to cd?"
 msgstr "Има маркирани файлове,"
@@ -3920,8 +3937,28 @@ msgstr ""
 msgid " History "
 msgstr " История "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Фонов процес:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: не може да се установи пасивен режим"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " Потвърждавай изход "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " Потвърждавай изпълнение "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " Потвърждавай изтриване "
 
 #, fuzzy
 #~ msgid "Status:    %s"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -307,6 +307,9 @@ msgstr "Backspace düyməsi"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -425,12 +428,12 @@ msgstr "%s üçün qovluq kaşesinin vaxtı dolub"
 msgid "Starting linear transfer..."
 msgstr "Linear daşıma başladılır... "
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s : %s : %s %3d%% (%lu byte daşındı)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s : %s : %s %lu byte daşındı"
 
 msgid "Getting file"
@@ -473,6 +476,10 @@ msgstr "balıq: Birinci xətt göndərilir..."
 msgid "fish: Handshaking version..."
 msgstr "balıq: Əl sıxışmalı yol..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "balıq: Birinci xətt göndərilir..."
+
 msgid "fish: Setting up current directory..."
 msgstr "balıq: Hazırkı qovluq hazırlanır..."
 
@@ -500,7 +507,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "balıq: Yerli oxuma bacarılmadı, sıfır göndərilir"
 
 #, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr "balıq: %s %d (%d) göndərilir"
 
 msgid "zeros"
@@ -577,10 +584,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs : Keçərsiz ev sahibi ünvanı."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs : passiv mod qurula bilmir"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Soketi yarada bilmədim : %s "
 
@@ -620,7 +623,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs : müvəffəqiyyətsizlık ..; geriyə dönüləcək nöqtə yoxdur"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs : %d faylını uzaqda qeyd edirəm (%d)"
 
 msgid ""
@@ -1083,24 +1086,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Süzmə əmri"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " İcazə "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " İcazə "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "qov&luqlar keçmişi      C-\\"
 
-msgid " confirm &Exit "
-msgstr " &Çıxış üçün icazə istə "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " İcazə "
 
-msgid " confirm e&Xecute "
-msgstr " i&şə salmaq üçün icazə istə "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " İcazə "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " ü&stünə yazmaq üçün icazə istə "
 
-msgid " confirm &Delete "
-msgstr " sil&mək üçün icazə istə "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " İcazə "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1320,6 +1334,9 @@ msgstr "<Namə'lum istifadəçi>"
 
 msgid "<Unknown group>"
 msgstr "<Namə'lum qrup>"
+
+msgid " Confirmation "
+msgstr " İcazə "
 
 msgid "Files tagged, want to cd?"
 msgstr " Fayllar nişan alındı, cd istəyirsən mi?"
@@ -3923,8 +3940,28 @@ msgstr ""
 msgid " History "
 msgstr " Tarix "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Arxaplan gedişatı:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs : passiv mod qurula bilmir"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " &Çıxış üçün icazə istə "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " i&şə salmaq üçün icazə istə "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " sil&mək üçün icazə istə "
 
 #, fuzzy
 #~ msgid "Status:    %s"

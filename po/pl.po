@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2010-09-07 10:27+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
@@ -295,6 +295,10 @@ msgstr "Klawisz odwrotnego ukośnika"
 msgid "Number sign #"
 msgstr "Znak liczby #"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -410,12 +414,12 @@ msgstr "Pamięć podręczna katalogu dla %s wygasła"
 msgid "Starting linear transfer..."
 msgstr "Rozpoczynanie przesyłu liniowego..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu przesłanych bajtów)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu przesłanych bajtów"
 
 msgid "Getting file"
@@ -458,6 +462,10 @@ msgstr "fish: wysyłanie wiersza początkowego..."
 msgid "fish: Handshaking version..."
 msgstr "fish: ustalanie wersji..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: wysyłanie wiersza początkowego..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: ustawianie bieżącego katalogu..."
 
@@ -484,8 +492,8 @@ msgstr "fish: zapis %s: wysyłanie polecenia..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: lokalny odczyt nie powiódł się, wysyłanie zer"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: zapisywanie %s %d (%lu)"
 
 msgid "zeros"
@@ -559,10 +567,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: nieprawidłowa rodzina adresów"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nie można ustawić trybu pasywnego: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: nie można utworzyć gniazda: %s"
 
@@ -601,8 +605,8 @@ msgstr "(najpierw chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: niepowodzenie; brak możliwości wycofania"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: zapisywanie pliku %lu (%lu)"
 
 msgid ""
@@ -1059,23 +1063,35 @@ msgstr "Najpierw &pliki wykonywalne"
 msgid "Sort order"
 msgstr "Porządek sortowania"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Potwierdzenia "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Potwierdzenia "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " Potwierdź usunięcie listy podręcznych &katalogów "
 
-msgid " confirm &Exit "
-msgstr " Potwi&erdź zakończenie "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Potwierdzenia "
 
-msgid " confirm e&Xecute "
-msgstr " Potwierdź w&ykonanie "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Potwierdzenia "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " Pot&wierdź zastąpienie "
 
-msgid " confirm &Delete "
-msgstr " Potwierdź &usunięcie "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Potwierdzenia "
 
 msgid "UTF-8 output"
 msgstr "Wyjście UTF-8"
@@ -1291,6 +1307,9 @@ msgstr "<Nieznany użytkownik>"
 
 msgid "<Unknown group>"
 msgstr "<Nieznana grupa>"
+
+msgid " Confirmation "
+msgstr " Potwierdzenia "
 
 msgid "Files tagged, want to cd?"
 msgstr "Zaznaczono pliki, zmienić katalog?"
@@ -3787,5 +3806,25 @@ msgstr "Przechodzenie do wyników wyszukiwania"
 msgid " History "
 msgstr " Historia "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+#, fuzzy
+msgid "DialogTitle|History cleanup"
+msgstr "Skopiowanie"
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Proces w tle:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: nie można ustawić trybu pasywnego: %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " Potwi&erdź zakończenie "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " Potwierdź w&ykonanie "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " Potwierdź &usunięcie "

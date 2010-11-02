@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -308,6 +308,9 @@ msgstr "„Backspace“"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -423,12 +426,12 @@ msgstr "Aplanko „%s“ podėlis nebegalioja"
 msgid "Starting linear transfer..."
 msgstr "Pradedamas siuntimas..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu baitų persiųsta)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu baitų persiųsta"
 
 msgid "Getting file"
@@ -471,6 +474,10 @@ msgstr "fish: siunčiama pradinė linija..."
 msgid "fish: Handshaking version..."
 msgstr "fish: derinamos versijos..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: siunčiama pradinė linija..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: nustatomas esamas aplankas..."
 
@@ -497,8 +504,8 @@ msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: vietinis skaitymas nepavyko, siunčiami nuliai"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: siunčiama %s %d (%lu)"
 
 msgid "zeros"
@@ -573,10 +580,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Neteisingas adresas."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Nepavyko sukurti lizdo: %s "
 
@@ -615,8 +618,8 @@ msgstr "(keičiamas katalogas)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: nepavyko; nėra kur grįžti"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: siunčiamas failas %lu (%lu)"
 
 msgid ""
@@ -1079,23 +1082,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Rikiavimo tvarka"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Patvirtinimas "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Patvirtinimas "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " patvirtinti katalogų są&rašo šalinimą "
 
-msgid " confirm &Exit "
-msgstr " patvirtinti išė&jimą "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Patvirtinimas "
 
-msgid " confirm e&Xecute "
-msgstr " patvirtinti &vykdymą "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Patvirtinimas "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " patvirtinti perrašy&mą "
 
-msgid " confirm &Delete "
-msgstr " patvirtinti ša&linimą "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Patvirtinimas "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1313,6 +1328,9 @@ msgstr "<Nežinomas naud.>"
 
 msgid "<Unknown group>"
 msgstr "<Nežnoma grupė>"
+
+msgid " Confirmation "
+msgstr " Patvirtinimas "
 
 msgid "Files tagged, want to cd?"
 msgstr "Failai pažymėti, norite įvykdyti „cd“?"
@@ -3930,8 +3948,28 @@ msgstr ""
 msgid " History "
 msgstr " Istorija "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Foninis procesas:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " patvirtinti išė&jimą "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " patvirtinti &vykdymą "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " patvirtinti ša&linimą "
 
 #~ msgid "Status:    %s"
 #~ msgstr "Būklė:     %s"

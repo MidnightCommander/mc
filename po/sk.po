@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2010-10-22 20:06+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak\n"
@@ -296,6 +296,10 @@ msgstr "Spät. lomka"
 msgid "Number sign #"
 msgstr "Krížik"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -411,12 +415,12 @@ msgstr "Vyrovnávacia pamäť adresárov vypršala pre %s"
 msgid "Starting linear transfer..."
 msgstr "Začína sa lineárny prenos..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bajtov prenesených)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bajtov prenesených"
 
 msgid "Getting file"
@@ -459,6 +463,10 @@ msgstr "fish: Posiela sa inicializačný riadok..."
 msgid "fish: Handshaking version..."
 msgstr "fish: Preberá sa verzia..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Posiela sa inicializačný riadok..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: Nastavenie aktuálneho adresár..."
 
@@ -485,8 +493,8 @@ msgstr "fish: store %s: posiela sa príkaz..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Miestne čítanie zlyhalo, posielajú sa nuly"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: skladám %s %d (%lu)"
 
 msgid "zeros"
@@ -560,10 +568,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: neplatná rodina adries"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nepodarilo sa nastaviť pasívny režim: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: nepodarilo sa vytvoriť socket: %s "
 
@@ -602,8 +606,8 @@ msgstr "(naprv cd)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: zlyhanie; niet kam sa vrátiť"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: ukladá sa súbor %lu (%lu)"
 
 msgid ""
@@ -1057,23 +1061,35 @@ msgstr "Najprv &Spustiteľné"
 msgid "Sort order"
 msgstr "Poradie triedenia"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Potvrdenie "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Potvrdenie "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " potvrdiť zmazanie hotlistu ad&Resára "
 
-msgid " confirm &Exit "
-msgstr " potvrdiť &Koniec "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Potvrdenie "
 
-msgid " confirm e&Xecute "
-msgstr " potvrdiť v&Ykonanie "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Potvrdenie "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " potvrdiť p&Repísanie "
 
-msgid " confirm &Delete "
-msgstr " potvrdiť z&Mazanie "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Potvrdenie "
 
 msgid "UTF-8 output"
 msgstr "Výstup v UTF-8"
@@ -1289,6 +1305,9 @@ msgstr "<Neznámy použ.>"
 
 msgid "<Unknown group>"
 msgstr "<Neznáma skupina>"
+
+msgid " Confirmation "
+msgstr " Potvrdenie "
 
 msgid "Files tagged, want to cd?"
 msgstr "Označené súbory chcú cd?"
@@ -3783,8 +3802,28 @@ msgstr "Presúva sa na pozíciu výsledku vyhľadávania"
 msgid " History "
 msgstr " História "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+#, fuzzy
+msgid "DialogTitle|History cleanup"
+msgstr "DialogTitle|Kopírovať"
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Proces v pozadí:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: nepodarilo sa nastaviť pasívny režim: %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " potvrdiť &Koniec "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " potvrdiť v&Ykonanie "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " potvrdiť z&Mazanie "
 
 #~ msgid "Status:    %s"
 #~ msgstr "Stav:      %s"

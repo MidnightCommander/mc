@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese Traditional <zh-l10n@linux.org.tw>\n"
@@ -307,6 +307,9 @@ msgstr "Backspace 鍵"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -426,12 +429,12 @@ msgstr "%s 的路徑快取過期"
 msgid "Starting linear transfer..."
 msgstr "開始線性傳輸...."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (已傳送 %lu 位元組)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s 已傳送 %lu 位元組"
 
 msgid "Getting file"
@@ -474,6 +477,10 @@ msgstr "fish: 送出起始化訊息"
 msgid "fish: Handshaking version..."
 msgstr "fish: 交握版本"
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: 送出起始化訊息"
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: 設定讀取目錄內容"
 
@@ -501,7 +508,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: 本地端讀取錯誤, 沒有送出"
 
 #, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: 儲存%s %d(%d)"
 
 msgid "zeros"
@@ -578,10 +585,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 無效的主機位址。"
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: 無法設定 passive mode"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " 無法建立插座: %s"
 
@@ -621,7 +624,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 失敗; 無法轉移到其它目錄"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: 儲存檔案 %d (%d)"
 
 msgid ""
@@ -1085,24 +1088,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "排序的順序"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " 確認 "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " 確認 "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "目錄熱門列表            C-\\"
 
-msgid " confirm &Exit "
-msgstr " 確定離開 "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " 確認 "
 
-msgid " confirm e&Xecute "
-msgstr " 確定執行 "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " 確認 "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " 確定蓋寫 "
 
-msgid " confirm &Delete "
-msgstr " 確定刪除 "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " 確認 "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1322,6 +1336,9 @@ msgstr "<不明的使用者>"
 
 msgid "<Unknown group>"
 msgstr "<不明的群組>"
+
+msgid " Confirmation "
+msgstr " 確認 "
 
 msgid "Files tagged, want to cd?"
 msgstr "有檔案貼上標籤了，還是要改變目錄？"
@@ -3925,8 +3942,28 @@ msgstr ""
 msgid " History "
 msgstr " 歷史紀錄 "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "背景程序："
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: 無法設定 passive mode"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " 確定離開 "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " 確定執行 "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " 確定刪除 "
 
 #, fuzzy
 #~ msgid "Status:    %s"

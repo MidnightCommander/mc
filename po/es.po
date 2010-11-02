@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2010-05-08 16:30+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -294,6 +294,10 @@ msgstr "Contrabarra"
 msgid "Number sign #"
 msgstr "Sostenido"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -409,12 +413,12 @@ msgstr "El cache para %s ha expirado"
 msgid "Starting linear transfer..."
 msgstr "Iniciando transferencia en línea..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
 
 msgid "Getting file"
@@ -457,6 +461,10 @@ msgstr "fish: Enviando línea de inicio..."
 msgid "fish: Handshaking version..."
 msgstr "fish: Negociando versión..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Enviando línea de inicio..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: Preparando directorio actual..."
 
@@ -483,8 +491,8 @@ msgstr "fish: guardar %s: enviando comando..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Fallo de lectura local, enviando ceros"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: guardando %s %d (%lu)"
 
 msgid "zeros"
@@ -558,10 +566,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Familia de direcciones incorrecta"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: Imposible aplicar el \"modo pasivo\": %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: Imposible crear socket: %s"
 
@@ -600,8 +604,8 @@ msgstr "(chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: Falló; no hay dónde replegarse"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: Guardando archivo %lu (%lu)"
 
 msgid ""
@@ -1057,23 +1061,35 @@ msgstr "&Ejecutables primero"
 msgid "Sort order"
 msgstr " Ordenar "
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Confirmación "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Confirmación "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " confirmar eliminación de &Favoritos "
 
-msgid " confirm &Exit "
-msgstr " confirmar &Salida "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Confirmación "
 
-msgid " confirm e&Xecute "
-msgstr " confirmar &Ejecución "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Confirmación "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " confirmar s&Obrescritura "
 
-msgid " confirm &Delete "
-msgstr " confirmar e&Liminación "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Confirmación "
 
 msgid "UTF-8 output"
 msgstr "salida UTF-8"
@@ -1289,6 +1305,9 @@ msgstr "<desconocido>"
 
 msgid "<Unknown group>"
 msgstr "<desconocido>"
+
+msgid " Confirmation "
+msgstr " Confirmación "
 
 msgid "Files tagged, want to cd?"
 msgstr " Hay archivos marcados. ¿Quiere cambiar de directorio?"
@@ -3788,5 +3807,25 @@ msgstr "Avanzando al resultado de búsqueda"
 msgid " History "
 msgstr " Historia "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+#, fuzzy
+msgid "DialogTitle|History cleanup"
+msgstr "Copiar"
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: Imposible aplicar el \"modo pasivo\": %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " confirmar &Salida "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " confirmar &Ejecución "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " confirmar e&Liminación "

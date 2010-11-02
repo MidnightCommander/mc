@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -308,6 +308,9 @@ msgstr "Tasta Backspace"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -422,12 +425,12 @@ msgstr "Cache-ul directorului %s a expirat"
 msgid "Starting linear transfer..."
 msgstr "Pornesc transferul liniar..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferaţi)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferaţi"
 
 msgid "Getting file"
@@ -470,6 +473,10 @@ msgstr "fish: Trimit linia iniţială..."
 msgid "fish: Handshaking version..."
 msgstr "fish: Compar versiunile..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Trimit linia iniţială..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: Setez directorul curent..."
 
@@ -496,8 +503,8 @@ msgstr "fish: stochează %s: trimit comanda..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Citirea locală a eşuat, trimit zerouri"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: stochez %s %d (%lu)"
 
 msgid "zeros"
@@ -574,10 +581,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Adresă invalidă a gazdei."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nu pot seta modul pasiv"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Nu pot crea socket-ul: %s "
 
@@ -616,8 +619,8 @@ msgstr "(întâi chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: eşec; nu mai există nici o variantă la care să revin"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: stochez fişierul %lu (%lu)"
 
 msgid ""
@@ -1079,24 +1082,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Ordinea de sortare"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Confirmare "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Confirmare "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "lista rapidă de di&Rectoare       C-\\"
 
-msgid " confirm &Exit "
-msgstr " confirmă i&Eşirea "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Confirmare "
 
-msgid " confirm e&Xecute "
-msgstr " confirmă e&Xecuţia "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Confirmare "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " confirmă &Suprascrierea "
 
-msgid " confirm &Delete "
-msgstr " confirmă ş&Tergerea "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Confirmare "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1315,6 +1329,9 @@ msgstr "<Utiliz. necun.>"
 
 msgid "<Unknown group>"
 msgstr "<Grup necun.>"
+
+msgid " Confirmation "
+msgstr " Confirmare "
 
 msgid "Files tagged, want to cd?"
 msgstr "Există fişiere marcate, doriţi să schimbaţi directorul?"
@@ -3911,8 +3928,28 @@ msgstr ""
 msgid " History "
 msgstr " Istoric "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Procese în fundal:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: nu pot seta modul pasiv"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " confirmă i&Eşirea "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " confirmă e&Xecuţia "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " confirmă ş&Tergerea "
 
 #, fuzzy
 #~ msgid "Status:    %s"

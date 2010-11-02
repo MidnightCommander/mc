@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -307,6 +307,9 @@ msgstr "Atzera tekla"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -426,12 +429,12 @@ msgstr "%s(r)en dir cache-a iraungi egin da"
 msgid "Starting linear transfer..."
 msgstr "Transferentzia lineala hasten..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu byte transferitu dira)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu byte transferitu dira"
 
 msgid "Getting file"
@@ -474,6 +477,10 @@ msgstr "arraina: Hasierako lerroa bidaltzen..."
 msgid "fish: Handshaking version..."
 msgstr "arraina: Handshaking bertsioa..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "arraina: Hasierako lerroa bidaltzen..."
+
 msgid "fish: Setting up current directory..."
 msgstr "arraina: Uneko direktorioa konfiguratzen..."
 
@@ -500,8 +507,8 @@ msgstr "arraina: gorde %s: komandoa bidaltzen..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "arraina: Irakurketa lokalak huts egin du, zeroak bidaltzen"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "arraina: %s %d gordetzen (%lu)"
 
 msgid "zeros"
@@ -578,10 +585,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ostalari-helbide baliogabea."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: ezin izan da modu pasiboa konfiguratu"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Ezin da socket-a sortu: %s "
 
@@ -621,7 +624,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: huts egin du; ez dauka nora itzuli"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: %d fitxategia gordetzen (%lu)"
 
 msgid ""
@@ -1084,24 +1087,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Ordenazioa"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr "Berrespena "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr "Berrespena "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "&gogokoen direktorioa                C-\\"
 
-msgid " confirm &Exit "
-msgstr "berretsi &Irten "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr "Berrespena "
 
-msgid " confirm e&Xecute "
-msgstr "berretsi e&xekutatu "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr "Berrespena "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr "berretsi &gainidatzi "
 
-msgid " confirm &Delete "
-msgstr "berretsi e&zabatu "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr "Berrespena "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1323,6 +1337,9 @@ msgstr "<Erabiltzaile ezezaguna>"
 
 msgid "<Unknown group>"
 msgstr "<Talde ezezaguna>"
+
+msgid " Confirmation "
+msgstr "Berrespena "
 
 msgid "Files tagged, want to cd?"
 msgstr "Fitxategi etiketatuak, direktorioz aldatu nahi?"
@@ -3933,8 +3950,28 @@ msgstr ""
 msgid " History "
 msgstr " Historia "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Atzeko planoko prozesua:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: ezin izan da modu pasiboa konfiguratu"
+
+#~ msgid " confirm &Exit "
+#~ msgstr "berretsi &Irten "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr "berretsi e&xekutatu "
+
+#~ msgid " confirm &Delete "
+#~ msgstr "berretsi e&zabatu "
 
 #, fuzzy
 #~ msgid "Status:    %s"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2010-03-09 14:51+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -295,6 +295,10 @@ msgstr "反斜线键"
 msgid "Number sign #"
 msgstr "井号键#"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -411,12 +415,12 @@ msgstr "%s 的目录缓存已过期"
 msgid "Starting linear transfer..."
 msgstr "正在开始线性传输..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s：%s：%s %3d%% (传输了 %lu 字节)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s：%s：%s 传输了 %lu 字节"
 
 msgid "Getting file"
@@ -459,6 +463,10 @@ msgstr "fish：正在发送初始化行..."
 msgid "fish: Handshaking version..."
 msgstr "fish：正在握手版本..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish：正在发送初始化行..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish：正在设置当前目录..."
 
@@ -485,8 +493,8 @@ msgstr "fish：保存 %s：正在发送命令..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish：本地读取失败，正在发送零"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish：正在保存 %s %d (%lu)"
 
 msgid "zeros"
@@ -560,10 +568,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs：无效的地址族"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs：无法设置为被动模式：%s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: 无法创建套接字：%s "
 
@@ -602,8 +606,8 @@ msgstr "(先改变目录)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs：失败；没有后备"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs：正在保存文件 %lu (%lu)"
 
 msgid ""
@@ -1058,28 +1062,30 @@ msgstr "可执行文件优先(&f)"
 msgid "Sort order"
 msgstr "排序"
 
-msgid " Confirmation "
-msgstr "确认 "
+msgid "Confirmation"
+msgstr "确认"
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+msgid "Confirmation|&History cleanup"
+msgstr "Confirmation|清除历史(&H)"
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "Confirmation|删除目录活动表(&D)"
 
-#, fuzzy
-msgid " confirm &Exit "
-msgstr "确认 "
+msgid "Confirmation|E&xit"
+msgstr "Confirmation|退出(&X)"
+
+msgid "Confirmation|&Execute"
+msgstr "Confirmation|执行(&E)"
 
 #, fuzzy
-msgid " confirm e&Xecute "
-msgstr " 确认替换 "
+msgid "Confirmation|O&verwrite"
+msgstr "Confirmation|删除(&D)"
 
-#, fuzzy
-msgid " confirm o&Verwrite "
-msgstr "Confirmation|覆盖时(&V) "
-
-#, fuzzy
-msgid " confirm &Delete "
-msgstr " 确认替换 "
+msgid "Confirmation|&Delete"
+msgstr "Confirmation|删除(&D)"
 
 msgid "UTF-8 output"
 msgstr "UTF-8输出"
@@ -1296,6 +1302,9 @@ msgstr "<未知用户>"
 
 msgid "<Unknown group>"
 msgstr "<未知群组>"
+
+msgid " Confirmation "
+msgstr "确认 "
 
 msgid "Files tagged, want to cd?"
 msgstr "文件已经标记，要更改目录吗？"
@@ -3789,26 +3798,37 @@ msgstr "查询搜索结果"
 msgid " History "
 msgstr "历史"
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr "DialogTitle|清除历史"
+
+msgid "Do you want clean this history?"
+msgstr "你要清除历史"
+
 msgid "Background process:"
 msgstr "后台进程："
 
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs：无法设置为被动模式：%s"
+
+#, fuzzy
+#~ msgid " confirm &Exit "
+#~ msgstr "确认 "
+
+#, fuzzy
+#~ msgid " confirm e&Xecute "
+#~ msgstr " 确认替换 "
+
+#, fuzzy
+#~ msgid " confirm o&Verwrite "
+#~ msgstr "Confirmation|覆盖时(&V) "
+
+#, fuzzy
+#~ msgid " confirm &Delete "
+#~ msgstr " 确认替换 "
+
 #~ msgid "Status:    %s"
 #~ msgstr "状态： %s"
-
-#~ msgid "Confirmation"
-#~ msgstr "确认"
-
-#~ msgid "Confirmation|&History cleanup"
-#~ msgstr "Confirmation|清除历史(&H)"
-
-#~ msgid "Confirmation|E&xit"
-#~ msgstr "Confirmation|退出(&X)"
-
-#~ msgid "Confirmation|&Execute"
-#~ msgstr "Confirmation|执行(&E)"
-
-#~ msgid "Confirmation|&Delete"
-#~ msgstr "Confirmation|删除(&D)"
 
 #~ msgid "ETA %s"
 #~ msgstr "估计%s"
@@ -3851,9 +3871,3 @@ msgstr "后台进程："
 
 #~ msgid "Continue from begining?"
 #~ msgstr "从起始处继续吗？"
-
-#~ msgid "DialogTitle|History cleanup"
-#~ msgstr "DialogTitle|清除历史"
-
-#~ msgid "Do you want clean this history?"
-#~ msgstr "你要清除历史"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 10:42+0100\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -305,6 +305,9 @@ msgstr "Backspace key"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -416,12 +419,12 @@ msgstr "%s의 디렉토리 캐쉬 만료됨"
 msgid "Starting linear transfer..."
 msgstr "Linear 전송 시작함..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu 바이트 송신)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu 바이트 송신됨"
 
 msgid "Getting file"
@@ -464,6 +467,10 @@ msgstr "fish: 초기 라인 보냄..."
 msgid "fish: Handshaking version..."
 msgstr "fish: 핸드쉐이킹 버젼..."
 
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: 초기 라인 보냄..."
+
 msgid "fish: Setting up current directory..."
 msgstr "fish: 현재 디렉토리 설정중..."
 
@@ -490,8 +497,8 @@ msgstr "fish: %s 저장: 명령 보냄..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: 로컬 읽기 실패. 0을 보냄"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: %s %d 저장 (%lu)"
 
 msgid "zeros"
@@ -568,10 +575,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 유효하지 않은 호스트 주소."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " 소켓을 만들 수 없음: %s "
 
@@ -610,8 +613,8 @@ msgstr "(chdir first)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 실패; nowhere to fallback to"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: 파일 %lu 저장 (%lu)"
 
 msgid ""
@@ -1072,24 +1075,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "정렬 순서"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " 확인 "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " 확인 "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "디렉토리 단축목록(&R)        C-\\"
 
-msgid " confirm &Exit "
-msgstr " 끝내기 확인(&E) "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " 확인 "
 
-msgid " confirm e&Xecute "
-msgstr " 실행 확인(&X) "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " 확인 "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " 덮어쓰기 확인(&V) "
 
-msgid " confirm &Delete "
-msgstr " 지우기 확인(&D) "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " 확인 "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1308,6 +1322,9 @@ msgstr "<모르는 사용자>"
 
 msgid "<Unknown group>"
 msgstr "<모르는 집단>"
+
+msgid " Confirmation "
+msgstr " 확인 "
 
 msgid "Files tagged, want to cd?"
 msgstr "선택된 파일이 있는 데, 그래도 디렉토리을 바꿀까요?"
@@ -3901,8 +3918,28 @@ msgstr ""
 msgid " History "
 msgstr " 히스토리 "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Background 프로세스:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " 끝내기 확인(&E) "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " 실행 확인(&X) "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " 지우기 확인(&D) "
 
 #, fuzzy
 #~ msgid "Status:    %s"
