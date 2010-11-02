@@ -106,7 +106,8 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
             }
         }
 
-        if (g_ascii_tolower (parm) == display_user_hotkey)
+        if ((g_ascii_tolower (parm) == display_user_hotkey)
+            && dlg_widget_active (display_user_format) && dlg_widget_active (display_mini_status))
         {
             display_radio->pos = display_radio->sel = 3;
             dlg_select_widget (display_radio);  /* force redraw */
