@@ -88,7 +88,7 @@ typedef enum
 } FindProgressStatus;
 
 /* List of directories to be ignored, separated by ':' */
-char *find_ignore_dirs = NULL;
+char **find_ignore_dirs = NULL;
 
 /* static variables to remember find parameters */
 static WInput *in_start;        /* Start path */
@@ -190,6 +190,12 @@ static char *in_start_dir = INPUT_LAST_TEXT;
 static mc_search_t *search_file_handle = NULL;
 static mc_search_t *search_content_handle = NULL;
 
+static int
+find_ignore_dirs_cmp (const void *d1, const void *d2)
+{
+    return strcmp (*(const char **) d1, *(const char **) d2);
+}
+
 static void
 find_load_options (void)
 {
@@ -205,7 +211,7 @@ find_load_options (void)
     ignore_dirs = mc_config_get_string (mc_main_config, "Misc", "find_ignore_dirs", "");
     if (ignore_dirs[0] != '\0')
     {
-        find_ignore_dirs = g_strconcat (":", ignore_dirs, ":", (char *) NULL);
+        find_ignore_dirs = g_strsplit (ignore_dirs, ":", -1);
         mc_config_set_string (mc_main_config, "FindFile", "ignore_dirs", ignore_dirs);
     }
     g_free (ignore_dirs);
@@ -215,10 +221,48 @@ find_load_options (void)
     ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");
     if (ignore_dirs[0] != '\0')
     {
-        g_free (find_ignore_dirs);
-        find_ignore_dirs = g_strconcat (":", ignore_dirs, ":", (char *) NULL);
+        g_strfreev (find_ignore_dirs);
+        find_ignore_dirs = g_strsplit (ignore_dirs, ":", -1);
     }
     g_free (ignore_dirs);
+
+    if (find_ignore_dirs != NULL)
+    {
+        /* Values like '/foo::/bar: produce holes in list.
+           Find and remove them */
+        size_t r = 0, w = 0; /* read and write iterators */
+
+        for (; find_ignore_dirs[r] != NULL; r++)
+        {
+            if (find_ignore_dirs [r][0] == '\0')
+            {
+                /* empty entry -- skip it */
+                g_free (find_ignore_dirs [r]);
+                find_ignore_dirs [r] = NULL;
+                continue;
+            }
+
+            if (r != w)
+            {
+                /* copy entry to the previous free array cell */
+                find_ignore_dirs [w] = find_ignore_dirs [r];
+                find_ignore_dirs [r] = NULL;
+            }
+
+            canonicalize_pathname (find_ignore_dirs [w]);
+            w++;
+        }
+
+        /* sort array */
+        if (find_ignore_dirs[0] != NULL)
+            qsort (find_ignore_dirs, g_strv_length (find_ignore_dirs),
+                   sizeof (find_ignore_dirs[0]), &find_ignore_dirs_cmp);
+        else
+        {
+            g_strfreev (find_ignore_dirs);
+            find_ignore_dirs = NULL;
+        }
+    }
 
     options.file_case_sens =
         mc_config_get_bool (mc_main_config, "FindFile", "file_case_sens", TRUE);
@@ -893,12 +937,26 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
                     break;
                 }
             }
-
         }
     }
     tty_disable_interrupt_key ();
     mc_close (file_fd);
     return ret_val;
+}
+
+static inline gboolean
+find_ignore_dir_search (const char *dir)
+{
+    if (find_ignore_dirs != NULL)
+    {
+        char **ignore_dir;
+
+        for (ignore_dir = find_ignore_dirs; *ignore_dir != NULL; ignore_dir++)
+            if (strcmp (*ignore_dir, dir) == 0)
+                return TRUE;
+    }
+
+    return FALSE;
 }
 
 static int
@@ -941,11 +999,9 @@ do_search (struct Dlg_head *h)
                 char *tmp = NULL;
 
                 tty_setcolor (REVERSE_COLOR);
+
                 while (TRUE)
                 {
-                    char *temp_dir = NULL;
-                    gboolean found;
-
                     tmp = pop_directory ();
                     if (tmp == NULL)
                     {
@@ -955,14 +1011,7 @@ do_search (struct Dlg_head *h)
                         return 0;
                     }
 
-                    if ((find_ignore_dirs == NULL) || (find_ignore_dirs[0] == '\0'))
-                        break;
-
-                    temp_dir = g_strdup_printf (":%s:", tmp);
-                    found = strstr (find_ignore_dirs, temp_dir) != 0;
-                    g_free (temp_dir);
-
-                    if (!found)
+                    if (!find_ignore_dir_search (tmp))
                         break;
 
                     g_free (tmp);
