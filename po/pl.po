@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-11-01 15:58+0200\n"
-"PO-Revision-Date: 2010-09-13 15:35+0200\n"
+"PO-Revision-Date: 2010-11-03 01:16+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "Language: pl\n"
@@ -1190,9 +1190,8 @@ msgstr "Nazwa użytkownika:"
 msgid "Password for \\\\%s\\%s"
 msgstr "Hasło dla \\\\%s\\%s"
 
-#, fuzzy
 msgid "Warning: cannot load codepages list"
-msgstr "Ostrzeżenie: nie można utworzyć katalogu %s\n"
+msgstr "Ostrzeżenie: nie można wczytać listy stron kodowych"
 
 msgid "7-bit ASCII"
 msgstr "7 bitowe ASCII"
@@ -3992,9 +3991,3 @@ msgstr "Wyczyścić tę historię?"
 
 msgid "Background process:"
 msgstr "Proces w tle:"
-
-#~ msgid "ftpfs: could not setup passive mode: %s"
-#~ msgstr "ftpfs: nie można ustawić trybu pasywnego: %s"
-
-#~ msgid "Cannot chdir to %s"
-#~ msgstr "Nie można zmienić katalogu na %s"
