@@ -132,35 +132,33 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar **exts, **exts_orig;
-    gchar *esc_ext;
     gsize exts_size;
-    GString *buf = g_string_new ("");
+    GString *buf;
 
     exts_orig = exts =
         mc_config_get_string_list (fhl->config, group_name, "extensions", &exts_size);
 
-    if (exts_orig == NULL)
-        return FALSE;
-
-    if (exts_orig[0] == NULL) {
+    if (exts_orig == NULL || exts_orig[0] == NULL)
+    {
         g_strfreev (exts_orig);
         return FALSE;
     }
 
-    while (*exts != NULL) {
+    buf = g_string_sized_new (64);
+    for (exts = exts_orig; *exts != NULL; exts++)
+    {
+        char *esc_ext;
+
         esc_ext = strutils_regex_escape (*exts);
         if (buf->len != 0)
             g_string_append_c (buf, '|');
         g_string_append (buf, esc_ext);
         g_free (esc_ext);
-        exts++;
     }
     g_strfreev (exts_orig);
-    esc_ext = g_string_free (buf, FALSE);
-    buf = g_string_new (".*\\.(");
-    g_string_append (buf, esc_ext);
+
+    g_string_prepend (buf, ".*\\.(");
     g_string_append (buf, ")$");
-    g_free (esc_ext);
 
     mc_filter = g_new0 (mc_fhl_filter_t, 1);
     mc_filter->type = MC_FLHGH_T_FREGEXP;
