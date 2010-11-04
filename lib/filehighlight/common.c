@@ -84,7 +84,7 @@ mc_fhl_new (gboolean need_auto_fill)
     if (!need_auto_fill)
         return fhl;
 
-    if (!mc_fhl_init_from_standart_files (fhl)) {
+    if (!mc_fhl_init_from_standard_files (fhl)) {
         g_free (fhl);
         return NULL;
     }

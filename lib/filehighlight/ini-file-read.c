@@ -204,7 +204,7 @@ mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
+mc_fhl_init_from_standard_files (mc_fhl_t * fhl)
 {
     gchar *name;
 
