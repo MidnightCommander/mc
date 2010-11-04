@@ -41,27 +41,28 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+
+static void
+mc_fhl_filter_free (void *data)
+{
+    mc_fhl_filter_t *filter = (mc_fhl_filter_t *) data;
+
+    g_free (filter->fgcolor);
+    g_free (filter->bgcolor);
+    mc_search_free (filter->search_condition);
+    g_free (filter);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 void
 mc_fhl_array_free (mc_fhl_t * fhl)
 {
-    guint i;
-    mc_fhl_filter_t *mc_filter;
-
-    if (fhl->filters == NULL)
-        return;
-
-    for (i = 0; i < fhl->filters->len; i++) {
-        mc_filter = (mc_fhl_filter_t *) g_ptr_array_index (fhl->filters, i);
-
-        g_free (mc_filter->fgcolor);
-        g_free (mc_filter->bgcolor);
-        mc_search_free (mc_filter->search_condition);
-        g_free (mc_filter);
+    if (fhl->filters != NULL)
+    {
+        g_ptr_array_foreach (fhl->filters, (GFunc) mc_fhl_filter_free, NULL);
+        fhl->filters = (GPtrArray *) g_ptr_array_free (fhl->filters, TRUE);
     }
-    g_ptr_array_free (fhl->filters, TRUE);
-    fhl->filters = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
