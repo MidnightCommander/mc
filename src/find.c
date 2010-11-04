@@ -588,7 +588,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
         options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
         options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
 
-        *content = (in_with->buffer[0] != '\0') ? g_strdup (in_with->buffer) : NULL;
+        *content = (options.content_use && in_with->buffer[0] != '\0')
+                    ? g_strdup (in_with->buffer) : NULL;
         *start_dir = g_strdup ((in_start->buffer[0] != '\0') ? in_start->buffer : ".");
         *pattern = g_strdup (in_name->buffer);
         if (in_start_dir != INPUT_LAST_TEXT)
