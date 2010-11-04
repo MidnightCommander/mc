@@ -333,6 +333,7 @@ InputKillWord = alt-d
 InputBackwardKillWord = alt-backspace
 InputSetMark =
 InputKillRegion = ctrl-w
+InputXCut =
 InputXStore = alt-w
 InputXPaste =
 InputYank = ctrl-y
