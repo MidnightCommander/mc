@@ -407,13 +407,13 @@ find_parameters (char **start_dir, char **pattern, char **content)
 #endif
 
     /* file content */
-    const char *content_use_label = N_("Searc&h for content");
+    const char *content_use_label = N_("Sea&rch for content");
     const char *content_case_label = N_("Case sens&itive");
     const char *content_regexp_label = N_("Re&gular expression");
     const char *content_first_hit_label = N_("Fir&st hit");
     const char *content_whole_words_label = N_("&Whole words");
 #ifdef HAVE_CHARSET
-    const char *content_all_charsets_label = N_("All cha&rsets");
+    const char *content_all_charsets_label = N_("A&ll charsets");
 #endif
 
     const char *buts[] = { N_("&OK"), N_("&Cancel"), N_("&Tree") };
