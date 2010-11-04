@@ -131,13 +131,12 @@ mc_config_init (const gchar * ini_path)
 void
 mc_config_deinit (mc_config_t * mc_config)
 {
-    if (!mc_config)
-        return;
-
-    g_free (mc_config->ini_path);
-    g_key_file_free (mc_config->handle);
-    g_free (mc_config);
-
+    if (mc_config != NULL)
+    {
+        g_free (mc_config->ini_path);
+        g_key_file_free (mc_config->handle);
+        g_free (mc_config);
+    }
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

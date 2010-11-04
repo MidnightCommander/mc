@@ -149,7 +149,6 @@ mc_skin_init (GError ** error)
 void
 mc_skin_deinit (void)
 {
-
     g_free (mc_skin__default.name);
     mc_skin__default.name = NULL;
     g_hash_table_destroy (mc_skin__default.colors);
@@ -158,10 +157,8 @@ mc_skin_deinit (void)
     g_free (mc_skin__default.description);
     mc_skin__default.description = NULL;
 
-    if (mc_skin__default.config) {
-        mc_config_deinit (mc_skin__default.config);
-        mc_skin__default.config = NULL;
-    }
+    mc_config_deinit (mc_skin__default.config);
+    mc_skin__default.config = NULL;
 
     mc_skin_is_init = FALSE;
 }

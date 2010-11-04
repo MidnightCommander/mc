@@ -116,13 +116,11 @@ mc_fhl_free (mc_fhl_t ** fhl)
 void
 mc_fhl_clear (mc_fhl_t * fhl)
 {
-    if (fhl == NULL)
-        return;
-
-    if (fhl->config)
+    if (fhl != NULL)
+    {
         mc_config_deinit (fhl->config);
-
-    mc_fhl_array_free (fhl);
+        mc_fhl_array_free (fhl);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
