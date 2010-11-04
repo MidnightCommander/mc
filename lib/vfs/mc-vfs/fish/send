@@ -1,0 +1,10 @@
+#STOR $FISH_FILESIZE $FISH_FILENAME
+FILENAME="/${FISH_FILENAME}"
+echo "### 001"
+{
+    while [ $FISH_FILESIZE -gt 0 ]; do
+        cnt=`expr \\( $FISH_FILESIZE + 255 \\) / 256`
+        n=`dd bs=256 count=$cnt | tee -a "${FILENAME}" | wc -c`
+        FISH_FILESIZE=`expr $FISH_FILESIZE - $n`
+    done
+}; echo "### 200"

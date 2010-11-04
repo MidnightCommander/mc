@@ -3148,7 +3148,7 @@ al ejecutar mc.
 3) El parámetro
 .B skin
 en la sección
-.B [Midnight Commander]
+.B [Midnight\-Commander]
 del archivo de configuración.
 .br
 4) El archivo

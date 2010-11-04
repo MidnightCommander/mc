@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-05-16\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -300,6 +300,10 @@ msgstr "Backslash \\"
 msgid "Number sign #"
 msgstr "Hekje"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -415,12 +419,12 @@ msgstr "Dir-cache verlopen voor %s"
 msgid "Starting linear transfer..."
 msgstr "Starten van lineaire overdracht"
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes getransfereerd)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes getransfereerd"
 
 msgid "Getting file"
@@ -451,7 +455,8 @@ msgstr "fish: Wachten op initiële lijn..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Helaas, wachtwoordbeveiligde verbindingen niet mogelijk."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Wachtwoord vereist voor "
 
 msgid "fish: Sending password..."
@@ -462,6 +467,10 @@ msgstr "fish: initiële lijn wordt verstuurd..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: versie handshaking..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: initiële lijn wordt verstuurd..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: huidige map opzetten..."
@@ -489,8 +498,8 @@ msgstr "fish: bewaar %s: opdracht verzenden..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fisch: Lokale leesopdracht mislukt, zend nullen"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: opslaan %s %d (%lu)"
 
 msgid "zeros"
@@ -564,10 +573,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ongeldige adres familie"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: instellen passieve modus mislukt: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: Kan socket niet creëren: %s"
 
@@ -606,8 +611,8 @@ msgstr "(eerst chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: mislukt; geen terugvalmogelijkheid "
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: opslaan bestand %lu (%lu)"
 
 msgid ""
@@ -1064,23 +1069,35 @@ msgstr "&Uitvoerbare bestanden eerst"
 msgid "Sort order"
 msgstr "Sortering"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Bevestiging "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Bevestiging "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " Bevestig verwijderen mappen &Favolijst "
 
-msgid " confirm &Exit "
-msgstr " B&Evestig afsluiten "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Bevestiging "
 
-msgid " confirm e&Xecute "
-msgstr " Bevestig &Uitvoeren "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Bevestiging "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " Bevestig o&Verschrijven "
 
-msgid " confirm &Delete "
-msgstr " Bevestig verwij&Deren "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Bevestiging "
 
 msgid "UTF-8 output"
 msgstr "UTF-8 uitvoer"
@@ -1297,6 +1314,9 @@ msgstr "<onbekende gebruiker>"
 
 msgid "<Unknown group>"
 msgstr "<onbekende groep>"
+
+msgid " Confirmation "
+msgstr " Bevestiging "
 
 msgid "Files tagged, want to cd?"
 msgstr "Bestanden gemarkeerd, veranderen van map?"
@@ -3796,8 +3816,28 @@ msgstr "Zoekresultaten doorzoeken"
 msgid " History "
 msgstr " Opdrachthistorie "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+#, fuzzy
+msgid "DialogTitle|History cleanup"
+msgstr "Kopie"
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Achtergrondproces:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: instellen passieve modus mislukt: %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " B&Evestig afsluiten "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " Bevestig &Uitvoeren "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " Bevestig verwij&Deren "
 
 #~ msgid "Status:    %s"
 #~ msgstr "Status:    %s"

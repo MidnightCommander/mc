@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -291,6 +291,9 @@ msgstr ""
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -397,11 +400,11 @@ msgid "Starting linear transfer..."
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr ""
 
 #, fuzzy
@@ -431,7 +434,8 @@ msgstr ""
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 
-msgid " fish: Password required for "
+#, c-format
+msgid "fish: Password is required for %s"
 msgstr ""
 
 msgid "fish: Sending password..."
@@ -442,6 +446,10 @@ msgstr ""
 
 msgid "fish: Handshaking version..."
 msgstr ""
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "Virkistä hakemistonäkymä"
 
 #, fuzzy
 msgid "fish: Setting up current directory..."
@@ -471,7 +479,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
 #, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr ""
 
 msgid "zeros"
@@ -545,10 +553,6 @@ msgstr ""
 msgid "ftpfs: invalid address family"
 msgstr " Virheellinen kohdemaski "
 
-#, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr ""
-
 #, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr ""
@@ -591,7 +595,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
 #, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr ""
 
 msgid ""
@@ -1018,24 +1022,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Järjestys"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Varmistus "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Varmistus "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " varmista &Poisto "
 
-msgid " confirm &Exit "
-msgstr " varmista &Lopetus "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Varmistus "
 
-msgid " confirm e&Xecute "
-msgstr " varmista &Suoritus "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Varmistus "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " vamista &Ylikirjoitus "
 
-msgid " confirm &Delete "
-msgstr " varmista &Poisto "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Varmistus "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1261,6 +1276,9 @@ msgstr "<Tuntematon käyttäjä>"
 
 msgid "<Unknown group>"
 msgstr "<Tuntematon ryhmä>"
+
+msgid " Confirmation "
+msgstr " Varmistus "
 
 msgid "Files tagged, want to cd?"
 msgstr "Tiedostot merkitty, vaihdetaanko hakemisto?"
@@ -3761,8 +3779,24 @@ msgstr ""
 msgid " History "
 msgstr " Komentohistoria "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Taustaprosessi:"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " varmista &Lopetus "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " varmista &Suoritus "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " varmista &Poisto "
 
 #~ msgid "Do backups -->"
 #~ msgstr "Tee varmuuskopioita -->"

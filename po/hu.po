@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-02-28 15:59+0100\n"
 "Last-Translator: SZABÓ Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian\n"
@@ -300,6 +300,10 @@ msgstr "Fordított törtvonal"
 msgid "Number sign #"
 msgstr "Kettőskereszt"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -351,7 +355,6 @@ msgstr "Ideiglenes fájlok nem jönnek létre\n"
 msgid "Press any key to continue..."
 msgstr "Nyomjon meg egy billentyűt..."
 
-#
 msgid "Warning"
 msgstr "Figyelem"
 
@@ -417,12 +420,12 @@ msgstr "A könyvtár gyorstárának adatai elévültek: %s"
 msgid "Starting linear transfer..."
 msgstr "Lineáris átvitel indítása..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bájt átküldve)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bájt átküldve"
 
 msgid "Getting file"
@@ -433,7 +436,7 @@ msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"%s-archívum nem megnyitható\n"
+"%s archívum nem nyitható meg\n"
 "%s"
 
 msgid "Inconsistent extfs archive"
@@ -453,7 +456,8 @@ msgstr "Fish: várakozás kezdősorra..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Jelszavas azonosítás egyelőre nem lehetséges."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " Fish: jelszó szükséges az azonosításhoz: "
 
 msgid "fish: Sending password..."
@@ -464,6 +468,10 @@ msgstr "Fish: kezdősor küldése..."
 
 msgid "fish: Handshaking version..."
 msgstr "Fish: verzióegyeztetés..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "Fish: kezdősor küldése..."
 
 msgid "fish: Setting up current directory..."
 msgstr "Fish: aktuális könyvtár beállítása..."
@@ -491,8 +499,8 @@ msgstr "Fish: \"%s\" tárolása: parancs küldése..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "Fish: nem sikerült a helyi olvasás; nullák küldése..."
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "Fish: tárolás: %s %d (%lu)"
 
 msgid "zeros"
@@ -566,15 +574,11 @@ msgid "ftpfs: invalid address family"
 msgstr "Ftpfs: hibás gépnév/-cím"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "Ftpfs: passzív mód nem beállítható: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "Ftpfs: a socket nem hozható létre: %s "
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "Ftpfs: passzív mód állítható be"
+msgstr "Ftpfs: passzív mód nem állítható be"
 
 msgid "ftpfs: aborting transfer."
 msgstr "Ftpfs: átvitel megszakítása..."
@@ -608,8 +612,8 @@ msgstr "(először könyvtárváltás végzendő)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "Ftpfs: hiba; nincs több lehetőség"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "Ftpfs: fájl tárolása: %lu (%lu)"
 
 msgid ""
@@ -821,7 +825,6 @@ msgstr "Jelszó:"
 msgid "Changes to file lost"
 msgstr "A fájl módosításai elvesztek"
 
-#
 msgid "&Cancel"
 msgstr "&Mégsem"
 
@@ -1079,23 +1082,35 @@ msgstr "Futtatható fájlok előre"
 msgid "Sort order"
 msgstr "Rendezési mód"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Megerősítés "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Megerősítés "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " Könyvtár-&gyorslista törlése előtt "
 
-msgid " confirm &Exit "
-msgstr " &Kilépés előtt "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Megerősítés "
 
-msgid " confirm e&Xecute "
-msgstr " Futtatá&s előtt "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Megerősítés "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " &Felülírás előtt "
 
-msgid " confirm &Delete "
-msgstr " &Törlés előtt "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Megerősítés "
 
 msgid "UTF-8 output"
 msgstr "UTF-8 kijelzés"
@@ -1320,6 +1335,9 @@ msgstr "<ismeretlen>"
 msgid "<Unknown group>"
 msgstr "<ismeretlen>"
 
+msgid " Confirmation "
+msgstr " Megerősítés "
+
 # "ini" fájlbeli opció van rá
 msgid "Files tagged, want to cd?"
 msgstr "A fájlkijelölések elvesznek, folytatja?"
@@ -1355,7 +1373,8 @@ msgstr " Adja meg a fájlnevekre vonatkozó szűrőkifejezést:"
 msgid "&Using shell patterns"
 msgstr "&Shell-minta"
 
-#  REPORT -- We need a much wider window here.  "Kis- és nagybetűre érzékeny" would be the translation that makes sense.
+#  REPORT -- We need a much wider window here.  "Kis- és nagybetűre érzékeny"
+# would be the translation that makes sense.
 msgid "&Case sensitive"
 msgstr "&Kis- és nagybetű"
 
@@ -1476,7 +1495,7 @@ msgid " SMB link to machine "
 msgstr " SMB-kapcsolat "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " Törölt fájlok visszaállítása Ext2 fájlrendszeren "
+msgstr " Törölt fájlok visszaállítása ext2 fájlrendszeren "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
@@ -1538,7 +1557,6 @@ msgstr ""
 msgid " Cannot open %s for reading "
 msgstr " Nem sikerült megnyitni a(z) \"%s\" fájlt olvasásra "
 
-#
 msgid "Error"
 msgstr "Hiba"
 
@@ -1707,7 +1725,6 @@ msgstr " A fájl módosult. Kívánja menteni kilépéskor? "
 msgid "&Cancel quit"
 msgstr "&Mégse legyen kilépés"
 
-#
 msgid " Error "
 msgstr " Hiba "
 
@@ -1745,19 +1762,19 @@ msgid " You must first highlight a block of text. "
 msgstr " Előbb ki kell jelölni egy szövegrészt. "
 
 msgid " Run Sort "
-msgstr " A \"Sort\" program futtatása "
+msgstr " A \"sort\" program futtatása "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " A \"Sort\" paraméterei (infó: man sort), szóközzel elválasztva: "
+msgstr " A \"sort\" paraméterei (infó: man sort), szóközzel elválasztva: "
 
 msgid " Sort "
 msgstr " Rendezés "
 
 msgid " Cannot execute sort command "
-msgstr " Nem sikerült végrehajtani a \"Sort\" programot "
+msgstr " Nem sikerült végrehajtani a \"sort\" programot "
 
 msgid " Sort returned non-zero: "
-msgstr " A \"Sort\" programtól kapott hibakód: "
+msgstr " A \"sort\" programtól kapott hibakód: "
 
 msgid "Paste output of external command"
 msgstr "Külső parancs kimenetének beillesztése"
@@ -1979,7 +1996,8 @@ msgstr "Ugrás a &zárójel párjára"
 msgid "Toggle s&yntax highlighting"
 msgstr "Szinta&xiskiemelés ki/be"
 
-#  Működnek ezek egyáltalán?  Nekem se C++-ban se, meg Perlben se csinál semmit.  Így meg nehéz megtudni, miről is van szó. -- PH
+#  Működnek ezek egyáltalán?  Nekem se C++-ban se, meg Perlben se csinál
+# semmit.  Így meg nehéz megtudni, miről is van szó. -- PH
 msgid "&Find declaration"
 msgstr "&Deklaráció keresése"
 
@@ -2513,7 +2531,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" A(z) \"%s\" fájl nem sikerült törölni \n"
+" A(z) \"%s\" fájlt nem sikerült törölni \n"
 " %s "
 
 #, c-format
@@ -2675,7 +2693,8 @@ msgstr "Ha &régebbi"
 msgid "Overwrite all targets?"
 msgstr "Minden célfájlt felülír?"
 
-# figyelni rá (shortcut-ütközésileg), mert ritkábban jön elő (ha már létezik a célfájl
+# figyelni rá (shortcut-ütközésileg), mert ritkábban jön elő (ha már létezik a
+# célfájl
 # és a forrás mérete nagyobb a cél méreténél)
 msgid "&Reget"
 msgstr "&Kiegészítés"
@@ -2921,7 +2940,7 @@ msgstr " Gyorslista betöltése "
 #, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " A{z} \"~/%s\" fájl nem írható, régi gyorslista-bejegyzések megtartva"
+msgstr " A(z) \"~/%s\" fájl nem írható, régi gyorslista-bejegyzések megtartva"
 
 msgid "Information"
 msgstr "Információ"
@@ -3869,5 +3888,25 @@ msgstr "Találat keresése"
 msgid " History "
 msgstr " Előzmények "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+#, fuzzy
+msgid "DialogTitle|History cleanup"
+msgstr "Másolás"
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Háttérfolyamat:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "Ftpfs: passzív mód nem állítható be: %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " &Kilépés előtt "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " Futtatá&s előtt "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " &Törlés előtt "

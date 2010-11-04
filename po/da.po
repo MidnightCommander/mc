@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -313,6 +313,9 @@ msgstr "Backspace-tast"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -431,12 +434,12 @@ msgstr "Katalog-cache udløbet for %s"
 msgid "Starting linear transfer..."
 msgstr "Begynder lineær overførsel..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu byte overført)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu byte overført"
 
 msgid "Getting file"
@@ -467,7 +470,8 @@ msgstr "fisk: Venter på begyndelseslinie..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fisk: Behøver adgangskode til"
 
 msgid "fish: Sending password..."
@@ -478,6 +482,10 @@ msgstr "fisk: Sender begyndelseslinie..."
 
 msgid "fish: Handshaking version..."
 msgstr "fisk: Håndrystende version..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fisk: Sender begyndelseslinie..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fisk: Indstiller den aktive mappe..."
@@ -505,8 +513,8 @@ msgstr "fisk: gem %s: sender kommando..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fisk: Lokal læsning fejlede, sender nuller"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fisk: gemmer fil %s %d (%lu)"
 
 msgid "zeros"
@@ -583,10 +591,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ugyldig værtsadresse."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: kunne ikke indstille passiv måde"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Kan ikke oprette sokkel %s "
 
@@ -626,7 +630,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: gemmer fil %d (%lu)"
 
 msgid ""
@@ -1089,24 +1093,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Sorteringsrækkefølge"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Bekræftelse "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Bekræftelse "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "ma&Ppe hurtigliste    C-\\"
 
-msgid " confirm &Exit "
-msgstr " bekræft &Afslut "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Bekræftelse "
 
-msgid " confirm e&Xecute "
-msgstr " bekræft &Kør "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Bekræftelse "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " bekræft o&Verskriv "
 
-msgid " confirm &Delete "
-msgstr " bekræft &slet "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Bekræftelse "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1326,6 +1341,9 @@ msgstr "<Ukendt bruger>"
 
 msgid "<Unknown group>"
 msgstr "<Ukendt gruppe>"
+
+msgid " Confirmation "
+msgstr " Bekræftelse "
 
 msgid "Files tagged, want to cd?"
 msgstr "Filer mærket, vil du skifte mappe?"
@@ -3930,8 +3948,28 @@ msgstr ""
 msgid " History "
 msgstr " Historie "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Baggrundsproces:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: kunne ikke indstille passiv måde"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " bekræft &Afslut "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " bekræft &Kør "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " bekræft &slet "
 
 #, fuzzy
 #~ msgid "Status:    %s"

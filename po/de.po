@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.x\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-03-03 12:00-0000\n"
 "Last-Translator: Sebastian Siebert <freespacer@gmx.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -301,6 +301,10 @@ msgstr "Backslash"
 msgid "Number sign #"
 msgstr "Nummer Zeichen #"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "STRG"
 
@@ -417,12 +421,12 @@ msgstr "Verzeichniscache abgelaufen für %s"
 msgid "Starting linear transfer..."
 msgstr "Starte linearen Transfer..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu Bytes übertragen)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu Bytes übertragen"
 
 msgid "Getting file"
@@ -455,7 +459,8 @@ msgstr ""
 "Entschuldigung, aber wir können momentan noch keine passwortgesicherten\n"
 "Verbindungen benutzen."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Passwort benötigt für "
 
 msgid "fish: Sending password..."
@@ -466,6 +471,10 @@ msgstr "fish: Sende erste Zeile..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: Tausche Versionsnummer aus..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Sende erste Zeile..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Stelle aktuelles Verzeichnis ein..."
@@ -493,8 +502,8 @@ msgstr "fish: Speichere %s: Sende Befehl..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Lokales Lesen fehlgeschlagen, sende Nullen"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: speichere %s %d (%lu)"
 
 msgid "zeros"
@@ -568,10 +577,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ungültige Rechneradresse."
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: konnte passiven Modus nicht einstellen: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: konnte Socket %s nicht anlegen "
 
@@ -610,8 +615,8 @@ msgstr "(zuerst chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fehlgeschlagen; alle Stricke gerissen"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: speichere Datei %lu (%lu)"
 
 msgid ""
@@ -1067,23 +1072,29 @@ msgstr "Ausführbare Dateien zuerst"
 msgid "Sort order"
 msgstr "Sortierreihenfolge"
 
-msgid " Confirmation "
-msgstr " Bestätigung "
+msgid "Confirmation"
+msgstr "Bestätigung"
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+msgid "Confirmation|&History cleanup"
+msgstr "Confirmation|C&hronik löschen"
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " Ve&rzeichnis-Hotlist löschen "
 
-msgid " confirm &Exit "
-msgstr " bestätige &Beenden "
+msgid "Confirmation|E&xit"
+msgstr "Confirmation|&Beenden"
 
-msgid " confirm e&Xecute "
-msgstr " bestätige &Ausführen "
+msgid "Confirmation|&Execute"
+msgstr "Confirmation|Aus&führen"
 
-msgid " confirm o&Verwrite "
-msgstr " bestätige &Überschreiben "
+msgid "Confirmation|O&verwrite"
+msgstr "Confirmation|&Überschreiben"
 
-msgid " confirm &Delete "
-msgstr " bestätige &Löschen "
+msgid "Confirmation|&Delete"
+msgstr "Confirmation|&Löschen"
 
 msgid "UTF-8 output"
 msgstr "UTF-8 A&usgabe"
@@ -1300,6 +1311,9 @@ msgstr "<unbekannter Benutzer>"
 
 msgid "<Unknown group>"
 msgstr "<unbekannte Gruppe>"
+
+msgid " Confirmation "
+msgstr " Bestätigung "
 
 msgid "Files tagged, want to cd?"
 msgstr "Dateien markiert, Verzeichnis wechseln?"
@@ -3796,29 +3810,33 @@ msgstr "Suchergebnis durchsuchen"
 msgid " History "
 msgstr " Chronik "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr "DialogTitle|Chronik löschen"
+
+msgid "Do you want clean this history?"
+msgstr "Möchten Sie wirklich die Chronik löschen?"
+
 msgid "Background process:"
 msgstr "Hintergrundprozess:"
 
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: konnte passiven Modus nicht einstellen: %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " bestätige &Beenden "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " bestätige &Ausführen "
+
+#~ msgid " confirm o&Verwrite "
+#~ msgstr " bestätige &Überschreiben "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " bestätige &Löschen "
+
 #~ msgid "Status:    %s"
 #~ msgstr "Status:       %s"
-
-#~ msgid "Confirmation"
-#~ msgstr "Bestätigung"
-
-#~ msgid "Confirmation|&History cleanup"
-#~ msgstr "Confirmation|C&hronik löschen"
-
-#~ msgid "Confirmation|E&xit"
-#~ msgstr "Confirmation|&Beenden"
-
-#~ msgid "Confirmation|&Execute"
-#~ msgstr "Confirmation|Aus&führen"
-
-#~ msgid "Confirmation|O&verwrite"
-#~ msgstr "Confirmation|&Überschreiben"
-
-#~ msgid "Confirmation|&Delete"
-#~ msgstr "Confirmation|&Löschen"
 
 #~ msgid "ETA %s"
 #~ msgstr "noch %s"
@@ -3861,12 +3879,6 @@ msgstr "Hintergrundprozess:"
 
 #~ msgid "Continue from begining?"
 #~ msgstr "Zum Anfang springen?"
-
-#~ msgid "DialogTitle|History cleanup"
-#~ msgstr "DialogTitle|Chronik löschen"
-
-#~ msgid "Do you want clean this history?"
-#~ msgstr "Möchten Sie wirklich die Chronik löschen?"
 
 #~ msgid "File:       None"
 #~ msgstr "Datei:      Keine"

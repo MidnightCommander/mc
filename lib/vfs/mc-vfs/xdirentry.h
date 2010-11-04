@@ -44,13 +44,32 @@ struct vfs_s_super {
     int want_stale;		/* If set, we do not flush cache properly */
 
     union {
-	struct {
-	    int sockr, sockw;
-	    char *cwdir;
-	    char *host, *user;
-	    char *password;
-	    int flags;
-	} fish;
+#ifdef ENABLE_VFS_FISH
+        struct
+        {
+            int sockr, sockw;
+            char *cwdir;
+            char *host, *user;
+            char *password;
+            int flags;
+            char *scr_ls;
+            char *scr_chmod;
+            char *scr_exists;
+            char *scr_mkdir;
+            char *scr_unlink;
+            char *scr_chown;
+            char *scr_rmdir;
+            char *scr_ln;
+            char *scr_mv;
+            char *scr_hardlink;
+            char *scr_get;
+            char *scr_send;
+            char *scr_append;
+            char *scr_info;
+            int host_flags;
+            char *scr_env;
+        } fish;
+#endif /* ENABLE_VFS_FISH */
 	struct {
 	    int sock;
 	    char *cwdir;
@@ -101,13 +120,13 @@ struct vfs_s_inode {
     char *linkname;		/* Symlink's contents */
     char *localname;		/* Filename of local file, if we have one */
     struct timeval timestamp;	/* Subclass specific */
-    long data_offset;		/* Subclass specific */
+    off_t data_offset;		/* Subclass specific */
 };
 
 /* Data associated with an open file */
 struct vfs_s_fh {
     struct vfs_s_inode *ino;
-    long pos;			/* This is for module's use */
+    off_t pos;			/* This is for module's use */
     int handle;			/* This is for module's use, but if != -1, will be mc_close()d */
     int changed;		/* Did this file change? */
     int linear;			/* Is that file open with O_LINEAR? */

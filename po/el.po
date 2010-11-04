@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2010-04-10 18:58+0200\n"
 "Last-Translator: Alex-P. Natsios\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -294,6 +294,10 @@ msgstr ""
 msgid "Number sign #"
 msgstr "Σύμβολο #"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -411,12 +415,12 @@ msgstr "Η λανθάνουσα μνήμη καταλόγου έληξε για 
 msgid "Starting linear transfer..."
 msgstr "Εκκίνηση γραμμικής μεταφοράς..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes μεταφέρθηκαν)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes μεταφέρθηκαν"
 
 msgid "Getting file"
@@ -445,9 +449,12 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
+msgstr ""
+"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
+"υποστηρίζονται."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Απαιτείται κωδικός για το "
 
 msgid "fish: Sending password..."
@@ -458,6 +465,10 @@ msgstr ""
 
 msgid "fish: Handshaking version..."
 msgstr ""
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Προσαρμογή τρέχοντος καταλόγου..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Προσαρμογή τρέχοντος καταλόγου..."
@@ -485,8 +496,8 @@ msgstr ""
 msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: αποθήκευση %s %d (%lu)"
 
 msgid "zeros"
@@ -560,10 +571,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Άκυρη οικογένεια διευθύνσεων."
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: αδυναμία προσαρμογής passive mode: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr ""
 
@@ -602,8 +609,8 @@ msgstr ""
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: αποθήκευση αρχείου %lu (%lu)"
 
 msgid ""
@@ -1021,23 +1028,34 @@ msgstr ""
 msgid "Sort order"
 msgstr ""
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr "Επιβεβαίωση"
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr "Επιβεβαίωση"
+
+msgid "Confirmation|&Directory hotlist delete"
 msgstr ""
 
-msgid " confirm &Exit "
-msgstr "Επιβεβαίωση και &έξοδος"
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr "Επιβεβαίωση"
 
-msgid " confirm e&Xecute "
-msgstr "Επιβεβαίωση και ε&κτέλεση"
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr "Επιβεβαίωση"
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr "Επιβεβαίωση και &αντικατάσταση"
 
-msgid " confirm &Delete "
-msgstr "Επιβεβαίωση και &διαγραφή"
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr "Επιβεβαίωση"
 
 msgid "UTF-8 output"
 msgstr ""
@@ -1254,6 +1272,9 @@ msgstr ""
 
 msgid "<Unknown group>"
 msgstr ""
+
+msgid " Confirmation "
+msgstr "Επιβεβαίωση"
 
 msgid "Files tagged, want to cd?"
 msgstr ""
@@ -2143,7 +2164,10 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 
 #, c-format
@@ -2151,7 +2175,10 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2743,7 +2770,8 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, fuzzy
@@ -3646,8 +3674,27 @@ msgstr ""
 msgid " History "
 msgstr "Ιστορικό"
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr ""
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: αδυναμία προσαρμογής passive mode: %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr "Επιβεβαίωση και &έξοδος"
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr "Επιβεβαίωση και ε&κτέλεση"
+
+#~ msgid " confirm &Delete "
+#~ msgstr "Επιβεβαίωση και &διαγραφή"
 
 #~ msgid "Status:    %s"
 #~ msgstr "Κατάσταση:     %s"

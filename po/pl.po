@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
-"PO-Revision-Date: 2010-09-07 10:27+0200\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
+"PO-Revision-Date: 2010-11-03 01:26+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -295,6 +295,9 @@ msgstr "Klawisz odwrotnego ukośnika"
 msgid "Number sign #"
 msgstr "Znak liczby #"
 
+msgid "At"
+msgstr "At"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -411,12 +414,12 @@ msgid "Starting linear transfer..."
 msgstr "Rozpoczynanie przesyłu liniowego..."
 
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu przesłanych bajtów)"
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%ju przesłanych bajtów)"
 
 #, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu przesłanych bajtów"
+msgid "%s: %s: %s %ju bytes transferred"
+msgstr "%s: %s: %s %ju przesłanych bajtów"
 
 msgid "Getting file"
 msgstr "Pobieranie pliku"
@@ -446,8 +449,9 @@ msgstr "fish: oczekiwanie na wiersz początkowy..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Połączenia uwierzytelniane hasłem nie są na razie obsługiwane."
 
-msgid " fish: Password required for "
-msgstr " fish: wymagane hasło dla "
+#, c-format
+msgid "fish: Password is required for %s"
+msgstr "fish: wymagane jest hasło dla %s"
 
 msgid "fish: Sending password..."
 msgstr "fish: wysyłanie hasła..."
@@ -457,6 +461,9 @@ msgstr "fish: wysyłanie wiersza początkowego..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: ustalanie wersji..."
+
+msgid "fish: Getting host info..."
+msgstr "fish: pobieranie informacji o komputerze..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: ustawianie bieżącego katalogu..."
@@ -485,8 +492,8 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: lokalny odczyt nie powiódł się, wysyłanie zer"
 
 #, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: zapisywanie %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
+msgstr "fish: zapisywanie %s %d (%ju)"
 
 msgid "zeros"
 msgstr "zera"
@@ -559,10 +566,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: nieprawidłowa rodzina adresów"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nie można ustawić trybu pasywnego: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: nie można utworzyć gniazda: %s"
 
@@ -602,8 +605,8 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: niepowodzenie; brak możliwości wycofania"
 
 #, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: zapisywanie pliku %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
+msgstr "ftpfs: zapisywanie pliku %ju (%ju)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
@@ -1059,23 +1062,28 @@ msgstr "Najpierw &pliki wykonywalne"
 msgid "Sort order"
 msgstr "Porządek sortowania"
 
-msgid " Confirmation "
-msgstr " Potwierdzenia "
+msgid "Confirmation"
+msgstr "Potwierdzenia"
 
-msgid " confirm di&Rectory hotlist delete "
-msgstr " Potwierdź usunięcie listy podręcznych &katalogów "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+msgid "Confirmation|&History cleanup"
+msgstr "Wyczyszczenie &historii"
 
-msgid " confirm &Exit "
-msgstr " Potwi&erdź zakończenie "
+msgid "Confirmation|&Directory hotlist delete"
+msgstr "Usunięcie listy po&dręcznych katalogów"
 
-msgid " confirm e&Xecute "
-msgstr " Potwierdź w&ykonanie "
+msgid "Confirmation|E&xit"
+msgstr "&Zakończenie"
 
-msgid " confirm o&Verwrite "
-msgstr " Pot&wierdź zastąpienie "
+msgid "Confirmation|&Execute"
+msgstr "Wykonani&e"
 
-msgid " confirm &Delete "
-msgstr " Potwierdź &usunięcie "
+msgid "Confirmation|O&verwrite"
+msgstr "Za&stąpienie"
+
+msgid "Confirmation|&Delete"
+msgstr "&Usunięcie"
 
 msgid "UTF-8 output"
 msgstr "Wyjście UTF-8"
@@ -1291,6 +1299,9 @@ msgstr "<Nieznany użytkownik>"
 
 msgid "<Unknown group>"
 msgstr "<Nieznana grupa>"
+
+msgid " Confirmation "
+msgstr " Potwierdzenia "
 
 msgid "Files tagged, want to cd?"
 msgstr "Zaznaczono pliki, zmienić katalog?"
@@ -3786,6 +3797,13 @@ msgstr "Przechodzenie do wyników wyszukiwania"
 
 msgid " History "
 msgstr " Historia "
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr "Czyszczenie historii"
+
+msgid "Do you want clean this history?"
+msgstr "Wyczyścić tę historię?"
 
 msgid "Background process:"
 msgstr "Proces w tle:"

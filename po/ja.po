@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -307,6 +307,9 @@ msgstr "Backspaeceキー"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -423,12 +426,12 @@ msgstr "'%s' の Dir キャッシュが終了しました"
 msgid "Starting linear transfer..."
 msgstr "リニア転送を開始します..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu バイト転送)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu バイト転送しました"
 
 msgid "Getting file"
@@ -459,7 +462,8 @@ msgstr "fish: 最初の行を待っています..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "すいませんが，今のところパスワードを証明することが出来ません"
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: パスワードが必要です "
 
 msgid "fish: Sending password..."
@@ -470,6 +474,10 @@ msgstr "fish: 最初の行を送信..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: バージョンのハンドシェイク..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: 最初の行を送信..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: カレントディレクトリを設定します..."
@@ -497,8 +505,8 @@ msgstr "fish: store %s: コマンドを送信中..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: 局部読み込みに失敗しました。zeroを送信します"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: %s を保存中 %d (%lu)"
 
 msgid "zeros"
@@ -575,10 +583,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 不正なホストのアドレスです"
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: パッシブモードに失敗しました"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ソケットを作成できませんでした: %s"
 
@@ -618,7 +622,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 失敗しました。フォールバックできません"
 
 #, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: ファイルの保存中 %d (%lu)"
 
 msgid ""
@@ -1077,24 +1081,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "並び変える"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " 確認 "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " 確認 "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "ディレクトリホットリスト(&R) C-\\"
 
-msgid " confirm &Exit "
-msgstr " 終了を確認(&E) "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " 確認 "
 
-msgid " confirm e&Xecute "
-msgstr " 実行を確認(&X) "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " 確認 "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " 上書きを確認(&V) "
 
-msgid " confirm &Delete "
-msgstr " 削除を確認(&D) "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " 確認 "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1314,6 +1329,9 @@ msgstr "<不明なユーザ>"
 
 msgid "<Unknown group>"
 msgstr "<不明なグループ>"
+
+msgid " Confirmation "
+msgstr " 確認 "
 
 msgid "Files tagged, want to cd?"
 msgstr "ファイルはタグ付られています。cd しますか?"
@@ -3918,8 +3936,28 @@ msgstr ""
 msgid " History "
 msgstr "履歴"
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "バックグラウンド処理:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: パッシブモードに失敗しました"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " 終了を確認(&E) "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " 実行を確認(&X) "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " 削除を確認(&D) "
 
 #, fuzzy
 #~ msgid "Status:    %s"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -310,6 +310,9 @@ msgstr "Backspace товч"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -425,12 +428,12 @@ msgstr " %s ийн кэш лавлах хугацаа дууссан байна"
 msgid "Starting linear transfer..."
 msgstr "Шугман дамжуулалт эхлэж байна..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байт дамжуулагдлаа)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu байт дамжуулагдлаа"
 
 msgid "Getting file"
@@ -461,7 +464,8 @@ msgstr "fish: Эхлэл мөрийг хүлээж байна..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Уучлаарай, Бид энэ холболтод нууц үг ашиглаж чадахгүй байна."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: Нууц үг шаардлагатай "
 
 msgid "fish: Sending password..."
@@ -472,6 +476,10 @@ msgstr "fish: эхлэл мөрийг илгээж байна..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: Handshaking version..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: эхлэл мөрийг илгээж байна..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Одоогийн лавлахыг тохируулж байна..."
@@ -499,8 +507,8 @@ msgstr "fish: %s сэргээх: командыг илгээж байна..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: локал уншилт бүтсэнгүй, тэгийг илгээж байна"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: сэргээж байна %s %d (%lu)"
 
 msgid "zeros"
@@ -577,10 +585,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: буруу хост хаяг."
 
 #, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: пассив горимыг тохируулж чадсангүй"
-
-#, fuzzy, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr " Сокет үүсгэж чадсангүй: %s "
 
@@ -619,8 +623,8 @@ msgstr "(эхлэл chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: алдаа; ослын горимд хаашаа ч шилжих боломжгүй"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: файлыг сэргээж байна %lu (%lu)"
 
 msgid ""
@@ -1082,24 +1086,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Эрэмбэлэх дараалал"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Баталгаажуулалт "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Баталгаажуулалт "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "&Хавтасны лавлах  C-\\"
 
-msgid " confirm &Exit "
-msgstr " Баталгаажуулж &гарах "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Баталгаажуулалт "
 
-msgid " confirm e&Xecute "
-msgstr " Баталгаажуулж &гүйцэтгэх "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Баталгаажуулалт "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " Баталгаажуулж &дарж бичих "
 
-msgid " confirm &Delete "
-msgstr " Баталгаажуулж &устгах "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Баталгаажуулалт "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1318,6 +1333,9 @@ msgstr "<Тодорхойгүй хэрэглэгч>"
 
 msgid "<Unknown group>"
 msgstr "<Тодорхойгүй бүлэг>"
+
+msgid " Confirmation "
+msgstr " Баталгаажуулалт "
 
 msgid "Files tagged, want to cd?"
 msgstr "Файлууд тэмдэглэгдсэн байна, шилжих үү?"
@@ -3915,8 +3933,28 @@ msgstr ""
 msgid " History "
 msgstr "Бүртгэл"
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Арын процесс:"
+
+#, fuzzy
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: пассив горимыг тохируулж чадсангүй"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " Баталгаажуулж &гарах "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " Баталгаажуулж &гүйцэтгэх "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " Баталгаажуулж &устгах "
 
 #, fuzzy
 #~ msgid "Status:    %s"

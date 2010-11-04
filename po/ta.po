@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -291,6 +291,9 @@ msgstr ""
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -393,11 +396,11 @@ msgid "Starting linear transfer..."
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr ""
 
 #, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr ""
 
 msgid "Getting file"
@@ -426,7 +429,8 @@ msgstr ""
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 
-msgid " fish: Password required for "
+#, c-format
+msgid "fish: Password is required for %s"
 msgstr ""
 
 msgid "fish: Sending password..."
@@ -436,6 +440,9 @@ msgid "fish: Sending initial line..."
 msgstr ""
 
 msgid "fish: Handshaking version..."
+msgstr ""
+
+msgid "fish: Getting host info..."
 msgstr ""
 
 msgid "fish: Setting up current directory..."
@@ -465,7 +472,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
 #, c-format
-msgid "fish: storing %s %d (%lu)"
+msgid "fish: storing %s %d (%ju)"
 msgstr ""
 
 msgid "zeros"
@@ -539,10 +546,6 @@ msgid "ftpfs: invalid address family"
 msgstr ""
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr ""
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr ""
 
@@ -582,7 +585,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
 #, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr ""
 
 msgid ""
@@ -992,22 +995,27 @@ msgstr ""
 msgid "Sort order"
 msgstr ""
 
-msgid " Confirmation "
+msgid "Confirmation"
 msgstr ""
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+msgid "Confirmation|&History cleanup"
 msgstr ""
 
-msgid " confirm &Exit "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr ""
 
-msgid " confirm e&Xecute "
+msgid "Confirmation|E&xit"
 msgstr ""
 
-msgid " confirm o&Verwrite "
+msgid "Confirmation|&Execute"
 msgstr ""
 
-msgid " confirm &Delete "
+msgid "Confirmation|O&verwrite"
+msgstr ""
+
+msgid "Confirmation|&Delete"
 msgstr ""
 
 msgid "UTF-8 output"
@@ -1227,6 +1235,9 @@ msgid "<Unknown user>"
 msgstr ""
 
 msgid "<Unknown group>"
+msgstr ""
+
+msgid " Confirmation "
 msgstr ""
 
 msgid "Files tagged, want to cd?"
@@ -3657,6 +3668,13 @@ msgid "Seeking to search result"
 msgstr ""
 
 msgid " History "
+msgstr ""
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
 msgstr ""
 
 msgid "Background process:"

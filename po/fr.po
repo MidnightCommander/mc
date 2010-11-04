@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -303,6 +303,10 @@ msgstr "Barre oblique inversée"
 msgid "Number sign #"
 msgstr "Croisillon"
 
+#, fuzzy
+msgid "At"
+msgstr "Alt"
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -418,12 +422,12 @@ msgstr "Répertoire de cache expiré pour %s"
 msgid "Starting linear transfer..."
 msgstr "Démarrage du transfert linéaire..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu octets transférés)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu octets transférés"
 
 msgid "Getting file"
@@ -456,7 +460,8 @@ msgstr ""
 "Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe "
 "pour l'instant."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish : mot de passe requis "
 
 msgid "fish: Sending password..."
@@ -467,6 +472,10 @@ msgstr "fish : envoie de la ligne initiale..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish : vérification des numéros de version..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish : envoie de la ligne initiale..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: configuration du répertoire courant..."
@@ -494,8 +503,8 @@ msgstr "fish : store %s : envoie de la commande..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish : Échec de la lecture locale, envoie de zéros"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish : stockage %s %d (%lu)"
 
 msgid "zeros"
@@ -569,10 +578,6 @@ msgid "ftpfs: invalid address family"
 msgstr "FTPfs : famille d'adresse"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "FTPfs : ne peut configurer le mode passif : %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "FTPfs : Ne peut créer une socket : %s "
 
@@ -611,8 +616,8 @@ msgstr "(chdir d'abord)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "FTPfs : échec ; nulle part où retomber"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs : stockage du fichier %lu (%lu)"
 
 msgid ""
@@ -1075,23 +1080,35 @@ msgstr "Exécutable en &premier"
 msgid "Sort order"
 msgstr "Ordre de tri"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Confirmation "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Confirmation "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "Confirmer la suppression du &Répertoire hotlist"
 
-msgid " confirm &Exit "
-msgstr " confirmer &Quitter "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Confirmation "
 
-msgid " confirm e&Xecute "
-msgstr " confirmer l'e&Xécution "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Confirmation "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " confirmer l'é&Crasement "
 
-msgid " confirm &Delete "
-msgstr " confirmer l'e&Ffacement "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Confirmation "
 
 msgid "UTF-8 output"
 msgstr "Sortie UTF-8"
@@ -1308,6 +1325,9 @@ msgstr "<Utilisateur inconnu>"
 
 msgid "<Unknown group>"
 msgstr "<Groupe inconnu>"
+
+msgid " Confirmation "
+msgstr " Confirmation "
 
 msgid "Files tagged, want to cd?"
 msgstr "Fichiers marqués, voulez-vous changer de répertoire?"
@@ -3883,8 +3903,28 @@ msgstr "Aller au résultat de la recherche"
 msgid " History "
 msgstr " Historique "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+#, fuzzy
+msgid "DialogTitle|History cleanup"
+msgstr "TitreDialog|Copie"
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Processus en tâche de fond :"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "FTPfs : ne peut configurer le mode passif : %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " confirmer &Quitter "
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " confirmer l'e&Xécution "
+
+#~ msgid " confirm &Delete "
+#~ msgstr " confirmer l'e&Ffacement "
 
 #~ msgid "Status:    %s"
 #~ msgstr "Status :     %s"

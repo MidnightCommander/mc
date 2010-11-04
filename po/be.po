@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-09-06 21:40+0400\n"
+"POT-Creation-Date: 2010-11-02 21:38+0300\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -306,6 +306,9 @@ msgstr "Клявіша Backspace"
 msgid "Number sign #"
 msgstr ""
 
+msgid "At"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -423,12 +426,12 @@ msgstr "Кэш каталога састарэў для %s"
 msgid "Starting linear transfer..."
 msgstr "Запуск лінейнай перадачы..."
 
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+#, fuzzy, c-format
+msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байтаў перанесена)"
 
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
+#, fuzzy, c-format
+msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu байтаў перанесена"
 
 msgid "Getting file"
@@ -459,7 +462,8 @@ msgstr "fish: Чакаецца радок ініцыялізацыі..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Выбачайце, немагчыма стварыць аўтарызаваныя паролем злучэнні зараз."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: Патрабуецца пароль для "
 
 msgid "fish: Sending password..."
@@ -470,6 +474,10 @@ msgstr "fish: Дасылаецца радок ініцыялізацыі..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: Версія пацверджання сувязі..."
+
+#, fuzzy
+msgid "fish: Getting host info..."
+msgstr "fish: Дасылаецца радок ініцыялізацыі..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Усталёўваецца бягучы каталог..."
@@ -497,8 +505,8 @@ msgstr "fish: запіс %s: дасылаецца каманда..."
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Збой лакальнага чытання, дасылаюцца нулі"
 
-#, c-format
-msgid "fish: storing %s %d (%lu)"
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%ju)"
 msgstr "fish: запіс %s %d (%lu)"
 
 msgid "zeros"
@@ -572,10 +580,6 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Памылковы тып адрасу"
 
 #, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: немагчыма ўсталяваць пасіўны рэжым: %s"
-
-#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: Немагчыма стварыць сокет: %s "
 
@@ -614,8 +618,8 @@ msgstr "(спачатку chdir)"
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: памылка; няма куды перайсці на аварыйны рэжым"
 
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
+#, fuzzy, c-format
+msgid "ftpfs: storing file %ju (%ju)"
 msgstr "ftpfs: запіс файла %lu (%lu)"
 
 msgid ""
@@ -1080,23 +1084,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Парадак сартавання"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Запыт пацверджання"
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Запыт пацверджання"
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " пацверджанне выдалення &спісу каталогаў "
 
-msgid " confirm &Exit "
-msgstr " пацверджанне &выхаду"
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Запыт пацверджання"
 
-msgid " confirm e&Xecute "
-msgstr " пацверджанне вы&канання"
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Запыт пацверджання"
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " пацверджанне &Перазапісу"
 
-msgid " confirm &Delete "
-msgstr " пацверджанне &Выдалення"
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Запыт пацверджання"
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1317,6 +1333,9 @@ msgstr "<Невядомы карыстальнік>"
 
 msgid "<Unknown group>"
 msgstr "<Невядомая група>"
+
+msgid " Confirmation "
+msgstr " Запыт пацверджання"
 
 msgid "Files tagged, want to cd?"
 msgstr "Файлы пазначаныя, замяніць каталог?"
@@ -3921,8 +3940,27 @@ msgstr ""
 msgid " History "
 msgstr " Гісторыя "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Працэс у тле:"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: немагчыма ўсталяваць пасіўны рэжым: %s"
+
+#~ msgid " confirm &Exit "
+#~ msgstr " пацверджанне &выхаду"
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr " пацверджанне вы&канання"
+
+#~ msgid " confirm &Delete "
+#~ msgstr " пацверджанне &Выдалення"
 
 #~ msgid "Status:    %s"
 #~ msgstr "Статус:        %s"

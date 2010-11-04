@@ -36,6 +36,7 @@
 
 #include "wtools.h"
 #include "treestore.h"
+#include "layout.h"             /* rotate_dash() */
 #include "dir.h"
 
 /* If true show files starting with a dot */
