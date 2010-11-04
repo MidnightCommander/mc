@@ -154,7 +154,7 @@ mc_search_new (const gchar * original, gsize str_len)
 void
 mc_search_free (mc_search_t * lc_mc_search)
 {
-    if (!lc_mc_search)
+    if (lc_mc_search == NULL)
         return;
 
     g_free (lc_mc_search->original);

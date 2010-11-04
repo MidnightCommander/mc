@@ -120,7 +120,7 @@ typedef struct mc_search_type_str_struct {
 
 mc_search_t *mc_search_new (const gchar * original, gsize original_len);
 
-void mc_search_free (mc_search_t * mc_search);
+void mc_search_free (mc_search_t * lc_mc_search);
 
 gboolean mc_search_prepare (mc_search_t * mc_search);
 

@@ -57,10 +57,7 @@ mc_fhl_array_free (mc_fhl_t * fhl)
 
         g_free (mc_filter->fgcolor);
         g_free (mc_filter->bgcolor);
-
-        if (mc_filter->search_condition != NULL)
-            mc_search_free (mc_filter->search_condition);
-
+        mc_search_free (mc_filter->search_condition);
         g_free (mc_filter);
     }
     g_ptr_array_free (fhl->filters, TRUE);
