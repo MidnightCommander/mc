@@ -34,6 +34,7 @@
 
 #include "lib/global.h"
 
+#include "lib/util.h"           /* canonicalize_pathname() */
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/skin.h"
@@ -634,11 +635,19 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
         *content = (options.content_use && in_with->buffer[0] != '\0')
                     ? g_strdup (in_with->buffer) : NULL;
-        *start_dir = g_strdup ((in_start->buffer[0] != '\0') ? in_start->buffer : ".");
+        *start_dir = in_start->buffer[0] != '\0' ? in_start->buffer : ".";
         *pattern = g_strdup (in_name->buffer);
         if (in_start_dir != INPUT_LAST_TEXT)
             g_free (in_start_dir);
         in_start_dir = g_strdup (*start_dir);
+        if ((*start_dir)[0] == '.' && (*start_dir)[1] == '\0')
+            *start_dir = g_strdup (current_panel->cwd);
+        else if (g_path_is_absolute (*start_dir))
+            *start_dir = g_strdup (*start_dir);
+        else
+            *start_dir = g_build_filename (current_panel->cwd, *start_dir, (char *) NULL);
+
+        canonicalize_pathname (*start_dir);
 
         find_save_options ();
 
@@ -949,11 +958,24 @@ find_ignore_dir_search (const char *dir)
 {
     if (find_ignore_dirs != NULL)
     {
+        const size_t dlen = strlen (dir);
         char **ignore_dir;
 
         for (ignore_dir = find_ignore_dirs; *ignore_dir != NULL; ignore_dir++)
-            if (strcmp (*ignore_dir, dir) == 0)
+        {
+            const size_t ilen = strlen (*ignore_dir);
+
+            if (dlen < ilen)
+                continue; /* ignore dir is too long -- skip it */
+
+            if (strncmp (dir, *ignore_dir, ilen) != 0)
+                continue; /* strings are different -- skip ignore_dir */
+
+            /* be sure than ignore_dir is not a part of dir like:
+               ignore_dir is "/h", dir is "/home" */
+            if (dir[ilen] == PATH_SEP || dir[ilen] == '\0')
                 return TRUE;
+        }
     }
 
     return FALSE;
