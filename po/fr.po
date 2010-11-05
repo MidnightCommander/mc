@@ -1914,41 +1914,33 @@ msgstr " Aller à la ligne "
 msgid "Save block"
 msgstr " Enregistrer le bloc "
 
-#, fuzzy
 msgid "Insert file"
-msgstr "&Insérer fichier..."
+msgstr "Insérer fichier"
 
-#, fuzzy
 msgid "Cannot insert file"
-msgstr " Impossible d'insérer le fichier. "
+msgstr "Impossible d'insérer le fichier"
 
-#, fuzzy
 msgid "Sort block"
-msgstr " Trier le bloc "
+msgstr "Trier le bloc"
 
-#, fuzzy
 msgid "You must first highlight a block of text"
-msgstr " You devez d'abord sélectionner un bloc de texte. "
+msgstr "Vous devez d'abord sélectionner un bloc de texte"
 
-#, fuzzy
 msgid "Run sort"
-msgstr " Lancer le tri "
+msgstr " Lancer le tri"
 
-#, fuzzy
 msgid "Enter sort options (see manpage) separated by whitespace:"
-msgstr " Saisissez les options de tri (cf page de manuel sort(1)) séparées par des espaces : "
+msgstr " Saisissez les options de tri (cf page de manuel) séparées par des espaces :"
 
-#, fuzzy
 msgid "Sort"
-msgstr " Trier "
+msgstr " Trier"
 
-#, fuzzy
 msgid "Cannot execute sort command"
-msgstr " Erreur lors de l'exécution de la commande de tri "
+msgstr "Impossible d'exécuter de la commande de tri "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Sort returned non-zero: %s"
-msgstr " Le code de retour du tri est non nul : "
+msgstr " Le code de retour du tri est non nul : %s"
 
 msgid "Paste output of external command"
 msgstr "Coller la sortie d'une commande externe"
@@ -1977,49 +1969,40 @@ msgstr "Script créé :"
 msgid "Process block"
 msgstr "Traitement du bloc"
 
-#, fuzzy
 msgid "Error calling program"
-msgstr "Erreur à la fermeture du script :"
+msgstr "Erreur au lancement du programme"
 
-#, fuzzy
 msgid "Copies to"
-msgstr " Copier vers"
+msgstr "Copier vers"
 
-#, fuzzy
 msgid "Subject"
-msgstr " Sujet"
+msgstr "Sujet"
 
-#, fuzzy
 msgid "To"
-msgstr " Vers"
+msgstr "A"
 
 #, fuzzy
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <sujet> -c <cc> <destinataire>"
 
-#, fuzzy
 msgid "Mail"
-msgstr " Courriel "
+msgstr " Courriel"
 
-#, fuzzy
 msgid "Insert literal"
-msgstr "Insérer un &littéral..."
+msgstr "Insérer un littéral"
 
-#, fuzzy
 msgid "Press any key:"
-msgstr " Appuyez sur une touche : "
+msgstr " Appuyez sur une touche :"
 
-#, fuzzy
 msgid "Execute macro"
-msgstr "&Exécuter une macro..."
+msgstr "Exécuter une macro"
 
-#, fuzzy
 msgid ""
 "Current text was modified without a file save\n"
 "Continue discards these changes"
 msgstr ""
-" Le fichier courant a été modifié mais pas enregistré. \n"
-" Les changements seront perdus si vous continuez. "
+" Le fichier courant a été modifié mais pas enregistré\n"
+" Les changements seront perdus si vous continuez"
 
 msgid "In se&lection"
 msgstr "Dans la sé&lection"
@@ -2051,13 +2034,11 @@ msgstr "&Tous"
 msgid "&Replace"
 msgstr "&Remplacer"
 
-#, fuzzy
 msgid "Replace with:"
-msgstr " Remplacer par : "
+msgstr "Remplacer par : "
 
-#, fuzzy
 msgid "Confirm replace"
-msgstr " Confirmer le remplacement "
+msgstr "Confirmer le remplacement"
 
 msgid "&Open file..."
 msgstr "&Ouvrir un fichier..."
@@ -2111,9 +2092,8 @@ msgid "&Delete"
 msgstr "&Effacer"
 
 # FIXME : translation clipfile
-#, fuzzy
 msgid "Co&py to clipfile"
-msgstr "Copier vers le &fichier..."
+msgstr "Copier vers le &fichier"
 
 #, fuzzy
 msgid "&Cut to clipfile"
@@ -2380,9 +2360,9 @@ msgstr ""
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Tapez « exit » pour retourner à Midnight Commander"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot fetch a local copy of %s"
-msgstr " Ne peut récupérer une copie locale de %s "
+msgstr "Impossible de récupérer une copie locale de %s "
 
 #, fuzzy, c-format
 msgid ""
@@ -2392,9 +2372,8 @@ msgstr ""
 " Ne peut créer un fichier de commandes temporaire \n"
 " %s "
 
-#, fuzzy
 msgid "Parameter"
-msgstr " Paramètre "
+msgstr "Paramètre"
 
 #, c-format
 msgid " %s%s file error"
