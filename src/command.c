@@ -311,7 +311,7 @@ command_new (int y, int x, int cols)
     const input_colors_t command_colors =
     {
         DEFAULT_COLOR,
-        DEFAULT_COLOR,
+        COMMAND_MARK_COLOR,
         DEFAULT_COLOR,
         COMMAND_HISTORY_COLOR
     };
