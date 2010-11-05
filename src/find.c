@@ -1511,27 +1511,24 @@ do_find (void)
 
         if (v == B_ENTER)
         {
-            if (dirname || filename)
+            if (dirname != NULL)
             {
-                if (dirname)
-                {
-                    do_cd (dirname, cd_exact);
-                    if (filename)
-                        try_to_select (current_panel, filename + (content ?
-                                                                  (strchr (filename + 4, ':') -
-                                                                   filename + 1) : 4));
-                }
-                else if (filename)
-                    do_cd (filename, cd_exact);
-                select_item (current_panel);
+                do_cd (dirname, cd_exact);
+                if (filename != NULL)
+                    try_to_select (current_panel,
+                                   filename + (content != NULL
+                                               ? strchr (filename + 4, ':') - filename + 1 : 4));
             }
+            else if (filename != NULL)
+                do_cd (filename, cd_exact);
+
             g_free (dirname);
             g_free (filename);
             break;
         }
 
         g_free (content);
-        dir_and_file_set = dirname && filename;
+        dir_and_file_set = (dirname != NULL) && (filename != NULL);
         g_free (dirname);
         g_free (filename);
 
