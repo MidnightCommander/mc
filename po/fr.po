@@ -3873,7 +3873,6 @@ msgid " History "
 msgstr " Historique "
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-#, fuzzy
 msgid "DialogTitle|History cleanup"
 msgstr "TitreDialog|Copie"
 
