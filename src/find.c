@@ -981,14 +981,29 @@ find_ignore_dir_search (const char *dir)
     return FALSE;
 }
 
+static void
+find_rotate_dash (const Dlg_head *h, gboolean finish)
+{
+    static const char rotating_dash[] = "|/-\\";
+    static unsigned int pos = 0;
+
+    if (verbose)
+    {
+        pos = (pos + 1) % 4;
+        tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+        dlg_move (h, FIND2_Y - 7, FIND2_X - 4);
+        tty_print_char (finish ? ' ' : rotating_dash[pos]);
+        mc_refresh ();
+    }
+}
+
 static int
-do_search (struct Dlg_head *h)
+do_search (Dlg_head *h)
 {
     static struct dirent *dp = NULL;
     static DIR *dirp = NULL;
     static char *directory = NULL;
     struct stat tmp_stat;
-    static int pos = 0;
     static int subdirs_left = 0;
     gsize bytes_found;
     unsigned short count;
@@ -1029,6 +1044,7 @@ do_search (struct Dlg_head *h)
                     {
                         running = FALSE;
                         status_update (_("Finished"));
+                        find_rotate_dash (h, TRUE);
                         stop_idle (h);
                         return 0;
                     }
@@ -1108,20 +1124,7 @@ do_search (struct Dlg_head *h)
             ;
     }                           /* for */
 
-    /* Displays the nice dot */
-    {
-        /* For nice updating */
-        const char rotating_dash[] = "|/-\\";
-
-        if (verbose)
-        {
-            pos = (pos + 1) % 4;
-            tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-            dlg_move (h, FIND2_Y - 7, FIND2_X - 4);
-            tty_print_char (rotating_dash[pos]);
-            mc_refresh ();
-        }
-    }
+    find_rotate_dash (h, FALSE);
 
     return 1;
 }
@@ -1190,7 +1193,7 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
 }
 
 static cb_ret_t
-find_callback (struct Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+find_callback (Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
