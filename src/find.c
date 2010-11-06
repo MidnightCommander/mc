@@ -1068,10 +1068,9 @@ do_search (struct Dlg_head *h)
 
         if (strcmp (dp->d_name, ".") == 0 || strcmp (dp->d_name, "..") == 0)
         {
-            dp = mc_readdir (dirp);
             /* skip invalid filenames */
-            while (dp != NULL && !str_is_valid_string (dp->d_name))
-                dp = mc_readdir (dirp);
+            while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))
+                ;
 
             return 1;
         }
