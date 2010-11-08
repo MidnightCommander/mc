@@ -201,36 +201,27 @@ gboolean
 mc_fhl_init_from_standard_files (mc_fhl_t * fhl)
 {
     gchar *name;
-
-    /* ${datadir}/mc/filehighlight.ini  */
-    name = concat_dir_and_file (mc_home_alt, MC_FHL_INI_FILE);
-    if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name)))
-    {
-        g_free (name);
-        return FALSE;
-    }
-    g_free (name);
-
-    /* ${sysconfdir}/mc/filehighlight.ini  */
-    name = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
-    if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name)))
-    {
-        g_free (name);
-        return FALSE;
-    }
-    g_free (name);
+    gboolean ok;
 
     /* ~/.mc/filehighlight.ini */
-    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, NULL);
-
-    if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name)))
-    {
-        g_free (name);
-        return FALSE;
-    }
+    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, (char *) NULL);
+    ok = mc_fhl_read_ini_file (fhl, name);
     g_free (name);
+    if (ok)
+        return TRUE;
 
-    return TRUE;
+    /* ${sysconfdir}/mc/filehighlight.ini  */
+    name = g_build_filename (mc_home, MC_FHL_INI_FILE, (char *) NULL);
+    ok = mc_fhl_read_ini_file (fhl, name);
+    g_free (name);
+    if (ok)
+        return TRUE;
+
+    /* ${datadir}/mc/filehighlight.ini  */
+    name = g_build_filename (mc_home_alt, MC_FHL_INI_FILE, (char *) NULL);
+    ok = mc_fhl_read_ini_file (fhl, name);
+    g_free (name);
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
