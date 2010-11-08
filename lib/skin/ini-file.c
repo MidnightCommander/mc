@@ -81,6 +81,7 @@ gboolean
 mc_skin_ini_file_load (mc_skin_t * mc_skin)
 {
     char *file_name, *user_home_dir;
+    gboolean ok;
 
     file_name = g_path_get_basename (mc_skin->name);
     if (file_name == NULL)
@@ -97,13 +98,11 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
     g_free (file_name);
 
     /* ~/.mc/skins/ */
-    user_home_dir = concat_dir_and_file (home_dir, MC_USERCONF_DIR);
-    if (mc_skin_ini_file_load_search_in_dir (mc_skin, user_home_dir))
-    {
-        g_free (user_home_dir);
-        return TRUE;
-    }
+    user_home_dir = g_build_filename (home_dir, MC_USERCONF_DIR, (char *) NULL);
+    ok = mc_skin_ini_file_load_search_in_dir (mc_skin, user_home_dir);
     g_free (user_home_dir);
+    if (ok)
+        return TRUE;
 
     /* /etc/mc/skins/ */
     if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_home))
