@@ -120,8 +120,6 @@ typedef struct hook
 extern char *user_recent_timeformat;    /* time format string for recent dates */
 extern char *user_old_timeformat;       /* time format string for older dates */
 
-extern int easy_patterns;
-
 extern struct sigaction startup_handler;
 
 /*** declarations of public functions ************************************************************/

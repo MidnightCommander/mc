@@ -57,8 +57,6 @@
 
 /*** global variables ****************************************************************************/
 
-int easy_patterns = 1;
-
 char *user_recent_timeformat = NULL;    /* time format string for recent dates */
 char *user_old_timeformat = NULL;       /* time format string for older dates */
 

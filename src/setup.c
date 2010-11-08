@@ -110,6 +110,8 @@ panels_options_t panels_options = {
     .qsearch_mode = QSEARCH_PANEL_CASE
 };
 
+int easy_patterns = 1;
+
 /*** file scope macro definitions **************************************/
 
 /* In order to use everywhere the same setup for the locale we use defines */
