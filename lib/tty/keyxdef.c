@@ -5,12 +5,12 @@
    Copyright (C) 1998, 2000, 2001, 2005, 2007 Free Software Foundation, Inc.
 
    Written by: 1998, Gyorgy Tamasi
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -44,7 +44,7 @@
 #include "lib/global.h"
 
 #include "tty.h"
-#include "mouse.h"        /* required before key.h */
+#include "mouse.h"              /* required before key.h */
 #include "key.h"
 
 #if defined (__QNX__) && !defined (__QNXNTO__)
@@ -90,6 +90,11 @@
  *   index in the terminfo string table (ncurses),
  *   field name in the QNX terminfo strings struct
  */
+
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 
 #define Key_backspace   __TK("kbs",   "kb",  55, _ky_backspace )
 #define Key_catab       __TK("ktbc",  "ka",  56, _ky_catab )
@@ -283,26 +288,43 @@
 #define Key_alt_enter   Key_ctl_enter   /* map ALT-ENTER to CTRL-ENTER */
 
 #ifdef __USE_QNX_TI
-
-/* OS/implementation specific key-define struct */
-typedef const struct qnx_key_define_s {
-    int mc_code;
-    int str_idx;
-} qnx_key_define_t;
-
 /* define current xtra_key_define_t (enable OS/implementation) */
 #define xtra_key_define_t qnx_key_define_t
-
 #endif /* __USE_QNX_TI */
-
 #endif /* HAVE_QNX_KEYS */
 
 
 #ifdef xtra_key_define_t
-
 #ifndef FORCE_BASE_KEY_DEFS
 #define FORCE_BASE_KEY_DEFS 0
 #endif
+#endif /* xtra_key_define_t */
+
+#ifdef HAVE_QNX_KEYS
+#ifdef __USE_QNX_TI
+#define __CT               (__cur_term)
+#define __QTISOFFS(_qtisx) (((charoffset*)(&__CT->_strs))[_qtisx])
+#define __QTISSTR(_qtisx)  (&__CT->_strtab[0]+__QTISOFFS(_qtisx))
+#endif /* __USE_QNX_TI */
+#endif /* HAVE_QNX_KEYS */
+
+/*** file scope type declarations ****************************************************************/
+
+#ifdef HAVE_QNX_KEYS
+#ifdef __USE_QNX_TI
+/* OS/implementation specific key-define struct */
+typedef const struct qnx_key_define_s
+{
+    int mc_code;
+    int str_idx;
+} qnx_key_define_t;
+#endif /* __USE_QNX_TI */
+#endif /* HAVE_QNX_KEYS */
+
+/*** file scope variables ************************************************************************/
+
+
+#ifdef xtra_key_define_t
 
 /* general key define table */
 xtra_key_define_t xtra_key_defines[] = {
@@ -372,21 +394,22 @@ xtra_key_define_t xtra_key_defines[] = {
 
 #endif /* xtra_key_define_t */
 
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 #ifdef HAVE_QNX_KEYS
-
 #ifdef __USE_QNX_TI
-
-#define __CT               (__cur_term)
-#define __QTISOFFS(_qtisx) (((charoffset*)(&__CT->_strs))[_qtisx])
-#define __QTISSTR(_qtisx)  (&__CT->_strtab[0]+__QTISOFFS(_qtisx))
-
 void
 load_qnx_key_defines (void)
 {
     static int _qnx_keys_defined = 0;
 
-    if (!_qnx_keys_defined) {
+    if (!_qnx_keys_defined)
+    {
         int idx, str_idx;
         int term_setup_ok;
 
@@ -394,10 +417,13 @@ load_qnx_key_defines (void)
         if (term_setup_ok != 1)
             return;
 
-        for (idx = 0; idx < sizeof (xtra_key_defines) / sizeof (xtra_key_defines[0]); idx++) {
+        for (idx = 0; idx < sizeof (xtra_key_defines) / sizeof (xtra_key_defines[0]); idx++)
+        {
             str_idx = xtra_key_defines[idx].str_idx;
-            if (__QTISOFFS (str_idx)) {
-                if (*__QTISSTR (str_idx)) {
+            if (__QTISOFFS (str_idx))
+            {
+                if (*__QTISSTR (str_idx))
+                {
                     define_sequence (xtra_key_defines[idx].mc_code,
                                      __QTISSTR (str_idx), MCKEY_NOACTION);
                 }
@@ -406,13 +432,12 @@ load_qnx_key_defines (void)
         _qnx_keys_defined = 1;
     }
 }
-
 #endif /* __USE_QNX_TI */
-
 #endif /* HAVE_QNX_KEYS */
 
-
+/* --------------------------------------------------------------------------------------------- */
 /* called from key.c/init_key() */
+
 void
 load_xtra_key_defines (void)
 {
@@ -420,3 +445,5 @@ load_xtra_key_defines (void)
     load_qnx_key_defines ();
 #endif
 }
+
+/* --------------------------------------------------------------------------------------------- */

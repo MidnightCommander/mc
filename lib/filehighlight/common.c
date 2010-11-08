@@ -82,12 +82,14 @@ mc_fhl_new (gboolean need_auto_fill)
     if (!need_auto_fill)
         return fhl;
 
-    if (!mc_fhl_init_from_standard_files (fhl)) {
+    if (!mc_fhl_init_from_standard_files (fhl))
+    {
         g_free (fhl);
         return NULL;
     }
 
-    if (!mc_fhl_parse_ini_file (fhl)) {
+    if (!mc_fhl_parse_ini_file (fhl))
+    {
         mc_fhl_free (&fhl);
         return NULL;
     }

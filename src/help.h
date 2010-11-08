@@ -30,7 +30,7 @@
 #define MC_HELP_H
 
 /* Markers used in the help files */
-#define CHAR_LINK_START	        '\01'   /* Ctrl-A */
+#define CHAR_LINK_START         '\01'   /* Ctrl-A */
 #define CHAR_LINK_POINTER       '\02'   /* Ctrl-B */
 #define CHAR_LINK_END           '\03'   /* Ctrl-C */
 #define CHAR_NODE_END           '\04'   /* Ctrl-D */

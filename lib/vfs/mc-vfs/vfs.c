@@ -75,13 +75,19 @@
 
 #include "local.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #if defined(_AIX) && !defined(NAME_MAX)
-#  define NAME_MAX FILENAME_MAX
+#define NAME_MAX FILENAME_MAX
 #endif
 
-/** They keep track of the current directory */
-static struct vfs_class *current_vfs;
-static char *current_dir;
+#define VFS_FIRST_HANDLE 100
+
+#define ISSLASH(a) (!a || (a == '/'))
+
+/*** file scope type declarations ****************************************************************/
 
 struct vfs_openfile
 {
@@ -96,15 +102,50 @@ struct vfs_dirinfo
     GIConv converter;
 };
 
+/*** file scope variables ************************************************************************/
+
+/** They keep track of the current directory */
+static struct vfs_class *current_vfs;
+static char *current_dir;
 
 static GPtrArray *vfs_openfiles;
 static long vfs_free_handle_list = -1;
-#define VFS_FIRST_HANDLE 100
 
 static struct vfs_class *localfs_class;
 static GString *vfs_str_buffer;
 
-/** Create new VFS handle and put it to the list */
+static struct vfs_class *vfs_list;
+
+static struct dirent *mc_readdir_result = NULL;
+
+static const struct
+{
+    const char *name;
+    size_t name_len;
+    const char *substitute;
+} url_table[] =
+{
+    /* *INDENT-OFF* */
+#ifdef ENABLE_VFS_FTP
+    { "ftp://", 6, "/#ftp:" },
+#endif
+#ifdef ENABLE_VFS_FISH
+    { "sh://", 5, "/#sh:" },
+    { "ssh://", 6, "/#sh:" },
+#endif
+#ifdef ENABLE_VFS_SMB
+    { "smb://", 6, "/#smb:" },
+#endif
+    { "a:", 2, "/#a" }
+    /* *INDENT-ON* */
+};
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Create new VFS handle and put it to the list
+ */
+
 static int
 vfs_new_handle (struct vfs_class *vclass, void *fsinfo)
 {
@@ -132,7 +173,9 @@ vfs_new_handle (struct vfs_class *vclass, void *fsinfo)
     return h->handle;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /** Find VFS class by file handle */
+
 static struct vfs_class *
 vfs_op (int handle)
 {
@@ -150,7 +193,9 @@ vfs_op (int handle)
     return h->vclass;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /** Find private file data by file handle */
+
 static void *
 vfs_info (int handle)
 {
@@ -168,7 +213,9 @@ vfs_info (int handle)
     return h->fsinfo;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /** Free open file data for given file handle */
+
 static void
 vfs_free_handle (int handle)
 {
@@ -185,20 +232,8 @@ vfs_free_handle (int handle)
     }
 }
 
-static struct vfs_class *vfs_list;
 
-int
-vfs_register_class (struct vfs_class *vfs)
-{
-    if (vfs->init != NULL)              /* vfs has own initialization function */
-        if (!(*vfs->init) (vfs))        /* but it failed */
-            return 0;
-
-    vfs->next = vfs_list;
-    vfs_list = vfs;
-
-    return 1;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 /** Return VFS class for the given prefix */
 static struct vfs_class *
@@ -221,10 +256,330 @@ vfs_prefix_to_class (char *prefix)
     return NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+path_magic (const char *path)
+{
+    struct stat buf;
+
+    return (stat (path, &buf) != 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_class *
+_vfs_get_class (char *path)
+{
+    char *semi;
+    char *slash;
+    struct vfs_class *ret;
+
+    g_return_val_if_fail (path, NULL);
+
+    semi = strrchr (path, '#');
+    if (semi == NULL || !path_magic (path))
+        return NULL;
+
+    slash = strchr (semi, PATH_SEP);
+    *semi = '\0';
+    if (slash != NULL)
+        *slash = '\0';
+
+    ret = vfs_prefix_to_class (semi + 1);
+
+    if (slash != NULL)
+        *slash = PATH_SEP;
+    if (ret == NULL)
+        ret = _vfs_get_class (path);
+
+    *semi = '#';
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* now used only by vfs_translate_path, but could be used in other vfs 
+ * plugin to automatic detect encoding
+ * path - path to translate
+ * size - how many bytes from path translate
+ * defcnv - convertor, that is used as default, when path does not contain any
+ *          #enc: subtring
+ * buffer - used to store result of translation
+ */
+
+static estr_t
+_vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer)
+{
+    const char *semi;
+    const char *slash;
+    estr_t state = ESTR_SUCCESS;
+
+    if (size == 0)
+        return ESTR_SUCCESS;
+
+    size = (size > 0) ? size : (signed int) strlen (path);
+
+    /* try found /#enc: */
+    semi = g_strrstr_len (path, size, PATH_SEP_STR VFS_ENCODING_PREFIX);
+    if (semi != NULL)
+    {
+        char encoding[16];
+        GIConv coder = INVALID_CONV;
+        int ms;
+
+        /* first must be translated part before /#enc: */
+        ms = semi - path;
+
+        state = _vfs_translate_path (path, ms, defcnv, buffer);
+
+        if (state != ESTR_SUCCESS)
+            return state;
+
+        /* now can be translated part after #enc: */
+        semi += strlen (VFS_ENCODING_PREFIX) + 1;       /* skip "/#enc:" */
+        slash = strchr (semi, PATH_SEP);
+        /* ignore slashes after size; */
+        if (slash - path >= size)
+            slash = NULL;
+
+        ms = (slash != NULL) ? slash - semi : (int) strlen (semi);
+        ms = min ((unsigned int) ms, sizeof (encoding) - 1);
+        /* limit encoding size (ms) to path size (size) */
+        if (semi + ms > path + size)
+            ms = path + size - semi;
+        memcpy (encoding, semi, ms);
+        encoding[ms] = '\0';
+
+#if HAVE_CHARSET
+        if (is_supported_encoding (encoding))
+            coder = str_crt_conv_to (encoding);
+#endif
+
+        if (coder != INVALID_CONV)
+        {
+            if (slash != NULL)
+                state = str_vfs_convert_to (coder, slash, path + size - slash, buffer);
+            else if (buffer->len == 0)
+                g_string_append_c (buffer, PATH_SEP);
+            str_close_conv (coder);
+            return state;
+        }
+
+        errno = EINVAL;
+        state = ESTR_FAILURE;
+    }
+    else
+    {
+        /* path can be translated whole at once */
+        state = str_vfs_convert_to (defcnv, path, size, buffer);
+    }
+
+    return state;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+ferrno (struct vfs_class *vfs)
+{
+    return vfs->ferrno ? (*vfs->ferrno) (vfs) : E_UNKNOWN;
+    /* Hope that error message is obscure enough ;-) */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Return current directory.  If it's local, reread the current directory
+ * from the OS.  You must g_strdup() whatever this function returns.
+ */
+
+static const char *
+_vfs_get_cwd (void)
+{
+    char *trans;
+
+    trans = vfs_translate_path_n (current_dir);
+
+    if (_vfs_get_class (trans) == NULL)
+    {
+        const char *encoding = vfs_get_encoding (current_dir);
+
+        if (encoding == NULL)
+        {
+            char *tmp;
+
+            tmp = g_get_current_dir ();
+            if (tmp != NULL)
+            {                   /* One of the directories in the path is not readable */
+                estr_t state;
+                char *sys_cwd;
+
+                g_string_set_size (vfs_str_buffer, 0);
+                state = str_vfs_convert_from (str_cnv_from_term, tmp, vfs_str_buffer);
+                g_free (tmp);
+
+                sys_cwd = (state == ESTR_SUCCESS) ? g_strdup (vfs_str_buffer->str) : NULL;
+                if (sys_cwd != NULL)
+                {
+                    struct stat my_stat, my_stat2;
+                    /* Check if it is O.K. to use the current_dir */
+                    if (cd_symlinks
+                        && mc_stat (sys_cwd, &my_stat) == 0
+                        && mc_stat (current_dir, &my_stat2) == 0
+                        && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev)
+                        g_free (sys_cwd);
+                    else
+                    {
+                        g_free (current_dir);
+                        current_dir = sys_cwd;
+                    }
+                }
+            }
+        }
+    }
+
+    g_free (trans);
+    return current_dir;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+vfs_setup_wd (void)
+{
+    current_dir = g_strdup (PATH_SEP_STR);
+    _vfs_get_cwd ();
+
+    if (strlen (current_dir) > MC_MAXPATHLEN - 2)
+        vfs_die ("Current dir too long.\n");
+
+    current_vfs = vfs_get_class (current_dir);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+mc_def_getlocalcopy (const char *filename)
+{
+    char *tmp;
+    int fdin, fdout;
+    ssize_t i;
+    char buffer[8192];
+    struct stat mystat;
+
+    fdin = mc_open (filename, O_RDONLY | O_LINEAR);
+    if (fdin == -1)
+        return NULL;
+
+    fdout = vfs_mkstemps (&tmp, "vfs", filename);
+
+    if (fdout == -1)
+        goto fail;
+    while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0)
+    {
+        if (write (fdout, buffer, i) != i)
+            goto fail;
+    }
+    if (i == -1)
+        goto fail;
+    i = mc_close (fdin);
+    fdin = -1;
+    if (i == -1)
+        goto fail;
+    if (close (fdout) == -1)
+    {
+        fdout = -1;
+        goto fail;
+    }
+
+    if (mc_stat (filename, &mystat) != -1)
+        chmod (tmp, mystat.st_mode);
+
+    return tmp;
+
+  fail:
+    if (fdout != -1)
+        close (fdout);
+    if (fdin != -1)
+        mc_close (fdin);
+    g_free (tmp);
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
+                       const char *local, int has_changed)
+{
+    int fdin = -1, fdout = -1;
+    if (has_changed)
+    {
+        char buffer[8192];
+        ssize_t i;
+
+        if (!vfs->write)
+            goto failed;
+
+        fdin = open (local, O_RDONLY);
+        if (fdin == -1)
+            goto failed;
+        fdout = mc_open (filename, O_WRONLY | O_TRUNC);
+        if (fdout == -1)
+            goto failed;
+        while ((i = read (fdin, buffer, sizeof (buffer))) > 0)
+            if (mc_write (fdout, buffer, (size_t) i) != i)
+                goto failed;
+        if (i == -1)
+            goto failed;
+
+        if (close (fdin) == -1)
+        {
+            fdin = -1;
+            goto failed;
+        }
+        fdin = -1;
+        if (mc_close (fdout) == -1)
+        {
+            fdout = -1;
+            goto failed;
+        }
+    }
+    unlink (local);
+    return 0;
+
+  failed:
+    message (D_ERROR, _("Changes to file lost"), "%s", filename);
+    if (fdout != -1)
+        mc_close (fdout);
+    if (fdin != -1)
+        close (fdin);
+    unlink (local);
+    return -1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_register_class (struct vfs_class *vfs)
+{
+    if (vfs->init != NULL)      /* vfs has own initialization function */
+        if (!(*vfs->init) (vfs))        /* but it failed */
+            return 0;
+
+    vfs->next = vfs_list;
+    vfs_list = vfs;
+
+    return 1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Strip known vfs suffixes from a filename (possible improvement: strip
  *  suffix from last path component).
  *  \return a malloced string which has to be freed.
  */
+
 char *
 vfs_strip_suffix_from_filename (const char *filename)
 {
@@ -259,13 +614,7 @@ vfs_strip_suffix_from_filename (const char *filename)
     return p;
 }
 
-static gboolean
-path_magic (const char *path)
-{
-    struct stat buf;
-
-    return (stat (path, &buf) != 0);
-}
+/* --------------------------------------------------------------------------------------------- */
 
 /**
  * Splits path extracting vfs part.
@@ -278,6 +627,7 @@ path_magic (const char *path)
  * What is left in path is p1. You still want to g_free(path), you DON'T
  * want to free neither *inpath nor *op
  */
+
 struct vfs_class *
 vfs_split (char *path, char **inpath, char **op)
 {
@@ -322,34 +672,7 @@ vfs_split (char *path, char **inpath, char **op)
     return ret;
 }
 
-static struct vfs_class *
-_vfs_get_class (char *path)
-{
-    char *semi;
-    char *slash;
-    struct vfs_class *ret;
-
-    g_return_val_if_fail (path, NULL);
-
-    semi = strrchr (path, '#');
-    if (semi == NULL || !path_magic (path))
-        return NULL;
-
-    slash = strchr (semi, PATH_SEP);
-    *semi = '\0';
-    if (slash != NULL)
-        *slash = '\0';
-
-    ret = vfs_prefix_to_class (semi + 1);
-
-    if (slash != NULL)
-        *slash = PATH_SEP;
-    if (ret == NULL)
-        ret = _vfs_get_class (path);
-
-    *semi = '#';
-    return ret;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 struct vfs_class *
 vfs_get_class (const char *pathname)
@@ -366,6 +689,8 @@ vfs_get_class (const char *pathname)
     return vfs;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 const char *
 vfs_get_encoding (const char *path)
 {
@@ -380,7 +705,7 @@ vfs_get_encoding (const char *path)
 
     if (semi != NULL)
     {
-        semi += strlen (VFS_ENCODING_PREFIX) + 1; /* skip "/#enc:" */
+        semi += strlen (VFS_ENCODING_PREFIX) + 1;       /* skip "/#enc:" */
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL)
             slash[0] = '\0';
@@ -396,83 +721,7 @@ vfs_get_encoding (const char *path)
     }
 }
 
-/* now used only by vfs_translate_path, but could be used in other vfs 
- * plugin to automatic detect encoding
- * path - path to translate
- * size - how many bytes from path translate
- * defcnv - convertor, that is used as default, when path does not contain any
- *          #enc: subtring
- * buffer - used to store result of translation
- */
-static estr_t
-_vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer)
-{
-    const char *semi;
-    const char *slash;
-    estr_t state = ESTR_SUCCESS;
-
-    if (size == 0)
-        return ESTR_SUCCESS;
-
-    size = (size > 0) ? size : (signed int) strlen (path);
-
-    /* try found /#enc: */
-    semi = g_strrstr_len (path, size, PATH_SEP_STR VFS_ENCODING_PREFIX);
-    if (semi != NULL)
-    {
-        char encoding[16];
-        GIConv coder = INVALID_CONV;
-        int ms;
-
-        /* first must be translated part before /#enc: */
-        ms = semi - path;
-
-        state = _vfs_translate_path (path, ms, defcnv, buffer);
-
-        if (state != ESTR_SUCCESS)
-            return state;
-
-        /* now can be translated part after #enc: */
-        semi += strlen (VFS_ENCODING_PREFIX) + 1; /* skip "/#enc:" */
-        slash = strchr (semi, PATH_SEP);
-        /* ignore slashes after size; */
-        if (slash - path >= size)
-            slash = NULL;
-
-        ms = (slash != NULL) ? slash - semi : (int) strlen (semi);
-        ms = min ((unsigned int) ms, sizeof (encoding) - 1);
-        /* limit encoding size (ms) to path size (size) */
-        if (semi + ms > path + size)
-            ms = path + size - semi;
-        memcpy (encoding, semi, ms);
-        encoding[ms] = '\0';
-
-#if HAVE_CHARSET
-        if (is_supported_encoding (encoding))
-            coder = str_crt_conv_to (encoding);
-#endif
-
-        if (coder != INVALID_CONV)
-        {
-            if (slash != NULL)
-                state = str_vfs_convert_to (coder, slash, path + size - slash, buffer);
-            else if (buffer->len == 0)
-                g_string_append_c (buffer, PATH_SEP);
-            str_close_conv (coder);
-            return state;
-        }
-
-        errno = EINVAL;
-        state = ESTR_FAILURE;
-    }
-    else
-    {
-        /* path can be translated whole at once */
-        state = str_vfs_convert_to (defcnv, path, size, buffer);
-    }
-
-    return state;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 vfs_translate_path (const char *path)
@@ -488,6 +737,8 @@ vfs_translate_path (const char *path)
     return (state != ESTR_FAILURE) ? vfs_str_buffer->str : NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 vfs_translate_path_n (const char *path)
 {
@@ -496,6 +747,8 @@ vfs_translate_path_n (const char *path)
     result = vfs_translate_path (path);
     return (result != NULL) ? g_strdup (result) : NULL;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 vfs_canon_and_translate (const char *path)
@@ -511,12 +764,7 @@ vfs_canon_and_translate (const char *path)
     return result;
 }
 
-static int
-ferrno (struct vfs_class *vfs)
-{
-    return vfs->ferrno ? (*vfs->ferrno) (vfs) : E_UNKNOWN;
-    /* Hope that error message is obscure enough ;-) */
-}
+/* --------------------------------------------------------------------------------------------- */
 
 int
 mc_open (const char *filename, int flags, ...)
@@ -548,7 +796,7 @@ mc_open (const char *filename, int flags, ...)
         return -1;
     }
 
-    info = vfs->open (vfs, file, flags, mode);   /* open must be supported */
+    info = vfs->open (vfs, file, flags, mode);  /* open must be supported */
     g_free (file);
     if (info == NULL)
     {
@@ -559,6 +807,7 @@ mc_open (const char *filename, int flags, ...)
     return vfs_new_handle (vfs, info);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 #define MC_NAMEOP(name, inarg, callarg) \
 int mc_##name inarg \
@@ -580,14 +829,16 @@ int mc_##name inarg \
     return result; \
 }
 
-MC_NAMEOP (chmod, (const char *path, mode_t mode), (vfs, mpath, mode))
-MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vfs, mpath, owner, group))
-MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (vfs, mpath, times))
-MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (vfs, mpath, buf, bufsiz))
-MC_NAMEOP (unlink, (const char *path), (vfs, mpath))
-MC_NAMEOP (mkdir, (const char *path, mode_t mode), (vfs, mpath, mode))
-MC_NAMEOP (rmdir, (const char *path), (vfs, mpath))
-MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vfs, mpath, mode, dev))
+MC_NAMEOP (chmod, (const char *path, mode_t mode), (vfs, mpath, mode));
+MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vfs, mpath, owner, group));
+MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (vfs, mpath, times));
+MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (vfs, mpath, buf, bufsiz));
+MC_NAMEOP (unlink, (const char *path), (vfs, mpath));
+MC_NAMEOP (mkdir, (const char *path, mode_t mode), (vfs, mpath, mode));
+MC_NAMEOP (rmdir, (const char *path), (vfs, mpath));
+MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vfs, mpath, mode, dev));
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 mc_symlink (const char *name1, const char *path)
@@ -623,6 +874,8 @@ mc_symlink (const char *name1, const char *path)
     return -1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 #define MC_HANDLEOP(name, inarg, callarg) \
 ssize_t mc_##name inarg \
 { \
@@ -639,8 +892,10 @@ ssize_t mc_##name inarg \
     return result; \
 }
 
-MC_HANDLEOP (read, (int handle, void *buffer, size_t count), (vfs_info (handle), buffer, count))
-MC_HANDLEOP (write, (int handle, const void *buf, size_t nbyte), (vfs_info (handle), buf, nbyte))
+MC_HANDLEOP (read, (int handle, void *buffer, size_t count), (vfs_info (handle), buffer, count));
+MC_HANDLEOP (write, (int handle, const void *buf, size_t nbyte), (vfs_info (handle), buf, nbyte));
+
+/* --------------------------------------------------------------------------------------------- */
 
 #define MC_RENAMEOP(name) \
 int mc_##name (const char *fname1, const char *fname2) \
@@ -672,11 +927,11 @@ int mc_##name (const char *fname1, const char *fname2) \
     return result; \
 }
 
-MC_RENAMEOP (link)
-MC_RENAMEOP (rename)
+MC_RENAMEOP (link) MC_RENAMEOP (rename);
+/* --------------------------------------------------------------------------------------------- */
 
-int
-mc_ctl (int handle, int ctlop, void *arg)
+     int
+     mc_ctl (int handle, int ctlop, void *arg)
 {
     struct vfs_class *vfs = vfs_op (handle);
 
@@ -685,6 +940,8 @@ mc_ctl (int handle, int ctlop, void *arg)
 
     return vfs->ctl ? (*vfs->ctl) (vfs_info (handle), ctlop, arg) : 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 mc_setctl (const char *path, int ctlop, void *arg)
@@ -706,6 +963,8 @@ mc_setctl (const char *path, int ctlop, void *arg)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 mc_close (int handle)
@@ -732,6 +991,8 @@ mc_close (int handle)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 DIR *
 mc_opendir (const char *dirname)
@@ -782,7 +1043,7 @@ mc_opendir (const char *dirname)
     }
 }
 
-static struct dirent *mc_readdir_result = NULL;
+/* --------------------------------------------------------------------------------------------- */
 
 struct dirent *
 mc_readdir (DIR * dirp)
@@ -835,6 +1096,8 @@ mc_readdir (DIR * dirp)
     return (entry != NULL) ? mc_readdir_result : NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 mc_closedir (DIR * dirp)
 {
@@ -858,6 +1121,8 @@ mc_closedir (DIR * dirp)
     g_free (dirp);
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 mc_stat (const char *filename, struct stat *buf)
@@ -888,6 +1153,8 @@ mc_stat (const char *filename, struct stat *buf)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 mc_lstat (const char *filename, struct stat *buf)
 {
@@ -914,6 +1181,8 @@ mc_lstat (const char *filename, struct stat *buf)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 mc_fstat (int handle, struct stat *buf)
 {
@@ -933,75 +1202,12 @@ mc_fstat (int handle, struct stat *buf)
     return result;
 }
 
-/**
- * Return current directory.  If it's local, reread the current directory
- * from the OS.  You must g_strdup() whatever this function returns.
- */
-static const char *
-_vfs_get_cwd (void)
-{
-    char *trans;
-
-    trans = vfs_translate_path_n (current_dir);
-
-    if (_vfs_get_class (trans) == NULL)
-    {
-        const char *encoding = vfs_get_encoding (current_dir);
-
-        if (encoding == NULL)
-        {
-            char *tmp;
-
-            tmp = g_get_current_dir ();
-            if (tmp != NULL)
-            {                   /* One of the directories in the path is not readable */
-                estr_t state;
-                char *sys_cwd;
-
-                g_string_set_size (vfs_str_buffer, 0);
-                state = str_vfs_convert_from (str_cnv_from_term, tmp, vfs_str_buffer);
-                g_free (tmp);
-
-                sys_cwd = (state == ESTR_SUCCESS) ? g_strdup (vfs_str_buffer->str) : NULL;
-                if (sys_cwd != NULL)
-                {
-                    struct stat my_stat, my_stat2;
-                    /* Check if it is O.K. to use the current_dir */
-                    if (cd_symlinks
-                        && mc_stat (sys_cwd, &my_stat) == 0
-                        && mc_stat (current_dir, &my_stat2) == 0
-                        && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev)
-                        g_free (sys_cwd);
-                    else
-                    {
-                        g_free (current_dir);
-                        current_dir = sys_cwd;
-                    }
-                }
-            }
-        }
-    }
-
-    g_free (trans);
-    return current_dir;
-}
-
-static void
-vfs_setup_wd (void)
-{
-    current_dir = g_strdup (PATH_SEP_STR);
-    _vfs_get_cwd ();
-
-    if (strlen (current_dir) > MC_MAXPATHLEN - 2)
-        vfs_die ("Current dir too long.\n");
-
-    current_vfs = vfs_get_class (current_dir);
-}
-
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Return current directory. If it's local, reread the current directory
  * from the OS. Put directory to the provided buffer.
  */
+
 char *
 mc_get_current_wd (char *buffer, size_t size)
 {
@@ -1011,14 +1217,18 @@ mc_get_current_wd (char *buffer, size_t size)
     return buffer;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Return current directory without any OS calls.
  */
+
 char *
 vfs_get_current_dir (void)
 {
     return current_dir;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 off_t
 mc_lseek (int fd, off_t offset, int whence)
@@ -1039,11 +1249,10 @@ mc_lseek (int fd, off_t offset, int whence)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /**
  * remove //, /./ and /../
  */
-
-#define ISSLASH(a) (!a || (a == '/'))
 
 char *
 vfs_canon (const char *path)
@@ -1074,10 +1283,12 @@ vfs_canon (const char *path)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /**
  * VFS chdir.
  * Return 0 on success, -1 on failure.
  */
+
 int
 mc_chdir (const char *path)
 {
@@ -1139,14 +1350,18 @@ mc_chdir (const char *path)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Return TRUE is the current VFS class is local */
+
 gboolean
 vfs_current_is_local (void)
 {
     return (current_vfs->flags & VFSF_LOCAL) != 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Return flags of the VFS class of the given filename */
+
 vfs_class_flags_t
 vfs_file_class_flags (const char *filename)
 {
@@ -1162,53 +1377,7 @@ vfs_file_class_flags (const char *filename)
     return vfs->flags;
 }
 
-static char *
-mc_def_getlocalcopy (const char *filename)
-{
-    char *tmp;
-    int fdin, fdout;
-    ssize_t i;
-    char buffer[8192];
-    struct stat mystat;
-
-    fdin = mc_open (filename, O_RDONLY | O_LINEAR);
-    if (fdin == -1)
-        return NULL;
-
-    fdout = vfs_mkstemps (&tmp, "vfs", filename);
-
-    if (fdout == -1)
-        goto fail;
-    while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0)
-    {
-        if (write (fdout, buffer, i) != i)
-            goto fail;
-    }
-    if (i == -1)
-        goto fail;
-    i = mc_close (fdin);
-    fdin = -1;
-    if (i == -1)
-        goto fail;
-    if (close (fdout) == -1)
-    {
-        fdout = -1;
-        goto fail;
-    }
-
-    if (mc_stat (filename, &mystat) != -1)
-        chmod (tmp, mystat.st_mode);
-
-    return tmp;
-
-  fail:
-    if (fdout != -1)
-        close (fdout);
-    if (fdin != -1)
-        mc_close (fdin);
-    g_free (tmp);
-    return NULL;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 mc_getlocalcopy (const char *pathname)
@@ -1222,8 +1391,7 @@ mc_getlocalcopy (const char *pathname)
         struct vfs_class *vfs = vfs_get_class (path);
 
         result = vfs->getlocalcopy != NULL ?
-                    vfs->getlocalcopy (vfs, path) :
-                    mc_def_getlocalcopy (path);
+            vfs->getlocalcopy (vfs, path) : mc_def_getlocalcopy (path);
         g_free (path);
         if (result == NULL)
             errno = ferrno (vfs);
@@ -1232,55 +1400,7 @@ mc_getlocalcopy (const char *pathname)
     return result;
 }
 
-static int
-mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
-                       const char *local, int has_changed)
-{
-    int fdin = -1, fdout = -1;
-    if (has_changed)
-    {
-        char buffer[8192];
-        ssize_t i;
-
-        if (!vfs->write)
-            goto failed;
-
-        fdin = open (local, O_RDONLY);
-        if (fdin == -1)
-            goto failed;
-        fdout = mc_open (filename, O_WRONLY | O_TRUNC);
-        if (fdout == -1)
-            goto failed;
-        while ((i = read (fdin, buffer, sizeof (buffer))) > 0)
-            if (mc_write (fdout, buffer, (size_t) i) != i)
-                goto failed;
-        if (i == -1)
-            goto failed;
-
-        if (close (fdin) == -1)
-        {
-            fdin = -1;
-            goto failed;
-        }
-        fdin = -1;
-        if (mc_close (fdout) == -1)
-        {
-            fdout = -1;
-            goto failed;
-        }
-    }
-    unlink (local);
-    return 0;
-
-  failed:
-    message (D_ERROR, _("Changes to file lost"), "%s", filename);
-    if (fdout != -1)
-        mc_close (fdout);
-    if (fdin != -1)
-        close (fdin);
-    unlink (local);
-    return -1;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 int
 mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
@@ -1302,6 +1422,7 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
     return return_value;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 void
 vfs_init (void)
@@ -1344,6 +1465,8 @@ vfs_init (void)
     vfs_setup_wd ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 vfs_shut (void)
 {
@@ -1362,10 +1485,12 @@ vfs_shut (void)
     g_free (mc_readdir_result);
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * These ones grab information from the VFS
  *  and handles them to an upper layer
  */
+
 void
 vfs_fill_names (fill_names_f func)
 {
@@ -1376,32 +1501,11 @@ vfs_fill_names (fill_names_f func)
             (*vfs->fill_names) (vfs, func);
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Returns vfs path corresponding to given url. If passed string is
  * not recognized as url, g_strdup(url) is returned.
  */
-
-static const struct
-{
-    const char *name;
-    size_t name_len;
-    const char *substitute;
-} url_table[] =
-{
-    /* *INDENT-OFF* */
-#ifdef ENABLE_VFS_FTP
-    { "ftp://", 6, "/#ftp:" },
-#endif
-#ifdef ENABLE_VFS_FISH
-    { "sh://", 5, "/#sh:" },
-    { "ssh://", 6, "/#sh:" },
-#endif
-#ifdef ENABLE_VFS_SMB
-    { "smb://", 6, "/#smb:" },
-#endif
-    { "a:", 2, "/#a" }
-    /* *INDENT-ON* */
-};
 
 char *
 vfs_translate_url (const char *url)
@@ -1416,8 +1520,12 @@ vfs_translate_url (const char *url)
     return g_strdup (url);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 gboolean
 vfs_file_is_local (const char *filename)
 {
     return (vfs_file_class_flags (filename) & VFSF_LOCAL) != 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */

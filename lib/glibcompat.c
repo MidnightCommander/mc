@@ -21,7 +21,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
    MA 02110-1301, USA.
-*/
+ */
 
 /** \file glibcompat.c
  *  \brief Source: compatibility with older versions of glib
@@ -50,10 +50,10 @@
 
 #if ! GLIB_CHECK_VERSION (2, 13, 0)
 /*
-    This is incomplete copy of same glib-function.
-    For older glib (less than 2.13) functional is enought.
-    For full version of glib welcome to glib update.
-*/
+   This is incomplete copy of same glib-function.
+   For older glib (less than 2.13) functional is enought.
+   For full version of glib welcome to glib update.
+ */
 gboolean
 g_unichar_iszerowidth (gunichar c)
 {

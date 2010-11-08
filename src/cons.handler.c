@@ -264,9 +264,11 @@ set_attr (unsigned attr)
             color_map[tc & 7], color_map[bc & 7]);
 }
 
-#define cursor_to(x, y) do {				\
-	printf("\x1B[%d;%df", (y) + 1, (x) + 1);	\
-	fflush(stdout);					\
+#define cursor_to(x, y) \
+do \
+{ \
+    printf("\x1B[%d;%df", (y) + 1, (x) + 1); \
+    fflush(stdout); \
 } while (0)
 
 static void

@@ -95,26 +95,26 @@
 #define START_STACK_SIZE 32
 
 /* Some codes that may be pushed onto or returned from the undo stack */
-#define CURS_LEFT	601
-#define CURS_RIGHT	602
-#define DELCHAR		603
-#define BACKSPACE	604
-#define STACK_BOTTOM	605
-#define CURS_LEFT_LOTS	606
-#define CURS_RIGHT_LOTS	607
-#define COLUMN_ON	608
-#define COLUMN_OFF	609
-#define MARK_1		1000
-#define MARK_2		700000000
-#define KEY_PRESS	1400000000
+#define CURS_LEFT       601
+#define CURS_RIGHT      602
+#define DELCHAR         603
+#define BACKSPACE       604
+#define STACK_BOTTOM    605
+#define CURS_LEFT_LOTS  606
+#define CURS_RIGHT_LOTS 607
+#define COLUMN_ON       608
+#define COLUMN_OFF      609
+#define MARK_1          1000
+#define MARK_2          700000000
+#define KEY_PRESS       1400000000
 
 /* Tabs spaces: (sofar only HALF_TAB_SIZE is used: */
-#define TAB_SIZE		option_tab_spacing
-#define HALF_TAB_SIZE		((int) option_tab_spacing / 2)
+#define TAB_SIZE      option_tab_spacing
+#define HALF_TAB_SIZE ((int) option_tab_spacing / 2)
 
 /* max count stack files */
 #define MAX_HISTORY_MOVETO     50
-#define LINE_STATE_WIDTH	8
+#define LINE_STATE_WIDTH 8
 
 /* search/replace options */
 typedef struct edit_search_options_t

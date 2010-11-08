@@ -58,10 +58,10 @@ typedef struct WButton {
     int action;			/* what to do when pressed */
     int selected;		/* button state */
 
-#define HIDDEN_BUTTON		0
-#define NARROW_BUTTON		1
-#define NORMAL_BUTTON		2
-#define DEFPUSH_BUTTON		3
+#define HIDDEN_BUTTON  0
+#define NARROW_BUTTON  1
+#define NORMAL_BUTTON  2
+#define DEFPUSH_BUTTON 3
     unsigned int flags;		/* button flags */
     struct hotkey_t text;	/* text of button, contain hotkey too */
     int hotpos;			/* offset hot KEY char in text */
@@ -79,8 +79,8 @@ typedef struct WRadio {
 typedef struct WCheck {
     Widget widget;
 
-#define C_BOOL			0x0001
-#define C_CHANGE		0x0002
+#define C_BOOL   0x0001
+#define C_CHANGE 0x0002
     unsigned int state;		/* check button state */
     struct hotkey_t text;		/* text of check button */
 } WCheck;
@@ -177,7 +177,7 @@ struct WListbox {
 };
 
 /* number of bttons in buttonbar */
-#define BUTTONBAR_LABELS_NUM	10
+#define BUTTONBAR_LABELS_NUM 10
 
 typedef struct WButtonBar {
     Widget widget;

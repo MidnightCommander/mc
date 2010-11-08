@@ -4,8 +4,8 @@
  * \brief Header: Virtual File System switch code
  */
 
-#ifndef MC_VFS_VFS_H
-#define MC_VFS_VFS_H
+#ifndef MC__VFS_VFS_H
+#define MC__VFS_VFS_H
 
 #include <sys/types.h>
 #include <dirent.h>
@@ -14,18 +14,7 @@
 
 #include "lib/global.h"
 
-struct vfs_class;
-
-/* Flags of VFS classes */
-typedef enum
-{
-    VFSF_UNKNOWN = 0,
-    VFSF_LOCAL   = 1 << 0, /* Class is local (not virtual) filesystem */
-    VFSF_NOLINKS = 1 << 1  /* Hard links not supported */
-} vfs_class_flags_t;
-
-void vfs_init (void);
-void vfs_shut (void);
+/*** typedefs(not structures) and defined constants **********************************************/
 
 #if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH) || defined (ENABLE_VFS_SMB)
 #define ENABLE_VFS_NET 1
@@ -37,13 +26,113 @@ void vfs_shut (void);
  * See also:
  *    vfs_fill_names().
  */
+
+#define VFS_ENCODING_PREFIX "#enc:"
+
+#define O_ALL (O_CREAT | O_EXCL | O_NOCTTY | O_NDELAY | O_SYNC | O_WRONLY | O_RDWR | O_RDONLY)
+/* Midnight commander code should _not_ use other flags than those
+   listed above and O_APPEND */
+
+#if (O_ALL & O_APPEND)
+#warning "Unexpected problem with flags, O_LINEAR disabled, contact pavel@ucw.cz"
+#define O_LINEAR 0
+#define IS_LINEAR(a) 0
+#define NO_LINEAR(a) a
+#else
+#define O_LINEAR O_APPEND
+#define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))     /* Return only 0 and 1 ! */
+#define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
+#endif
+
+/* O_LINEAR is strange beast, be careful. If you open file asserting
+ * O_RDONLY | O_LINEAR, you promise:
+ *
+ *      a) to read file linearly from beginning to the end
+ *      b) not to open another file before you close this one
+ *              (this will likely go away in future)
+ *      as a special gift, you may
+ *      c) lseek() immediately after open(), giving ftpfs chance to
+ *         reget. Be warned that this lseek() can fail, and you _have_
+ *         to handle that gratefully.
+ *
+ * O_LINEAR allows filesystems not to create temporary file in some
+ * cases (ftp transfer).                                -- pavel@ucw.cz
+ */
+
+/* And now some defines for our errors. */
+
+#ifdef ENOSYS
+#define E_NOTSUPP ENOSYS        /* for use in vfs when module does not provide function */
+#else
+#define E_NOTSUPP EFAULT        /* Does this happen? */
+#endif
+
+#ifdef ENOMSG
+#define E_UNKNOWN ENOMSG        /* if we do not know what error happened */
+#else
+#define E_UNKNOWN EIO           /* if we do not know what error happened */
+#endif
+
+#ifdef EREMOTEIO
+#define E_REMOTE EREMOTEIO      /* if other side of ftp/fish reports error */
+#else
+#define E_REMOTE ENETUNREACH    /* :-( there's no EREMOTEIO on some systems */
+#endif
+
+#ifdef EPROTO
+#define E_PROTO EPROTO          /* if other side fails to follow protocol */
+#else
+#define E_PROTO EIO
+#endif
+
 typedef void (*fill_names_f) (const char *);
+
+/*** enums ***************************************************************************************/
+
+/* Flags of VFS classes */
+typedef enum
+{
+    VFSF_UNKNOWN = 0,
+    VFSF_LOCAL = 1 << 0,        /* Class is local (not virtual) filesystem */
+    VFSF_NOLINKS = 1 << 1       /* Hard links not supported */
+} vfs_class_flags_t;
+
+/* Operations for mc_ctl - on open file */
+enum
+{
+    VFS_CTL_IS_NOTREADY
+};
+
+/* Operations for mc_setctl - on path */
+enum
+{
+    VFS_SETCTL_FORGET,
+    VFS_SETCTL_RUN,
+    VFS_SETCTL_LOGFILE,
+    VFS_SETCTL_FLUSH,           /* invalidate directory cache */
+
+    /* Setting this makes vfs layer give out potentially incorrect data,
+       but it also makes some operations much faster. Use with caution. */
+    VFS_SETCTL_STALE_DATA
+};
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+struct vfs_class;
+
+/*** global variables defined in .c file *********************************************************/
 
 extern int vfs_timeout;
 
 #ifdef ENABLE_VFS_NET
 extern int use_netrc;
 #endif
+
+/*** declarations of public functions ************************************************************/
+
+void vfs_init (void);
+void vfs_shut (void);
+
 
 void vfs_timeout_handler (void);
 int vfs_timeouts (void);
@@ -86,7 +175,6 @@ char *vfs_translate_url (const char *url);
 struct vfs_class *vfs_get_class (const char *path);
 vfs_class_flags_t vfs_file_class_flags (const char *filename);
 
-#define VFS_ENCODING_PREFIX "#enc:"
 /* return encoding after last #enc: or NULL, if part does not contain #enc:
  * return static buffer */
 const char *vfs_get_encoding (const char *path);
@@ -109,77 +197,5 @@ char *vfs_get_current_dir (void);
  * return static buffer */
 char *vfs_translate_path (const char *path);
 
-/* Operations for mc_ctl - on open file */
-enum {
-    VFS_CTL_IS_NOTREADY
-};
-
-/* Operations for mc_setctl - on path */
-enum {
-    VFS_SETCTL_FORGET,
-    VFS_SETCTL_RUN,
-    VFS_SETCTL_LOGFILE,
-    VFS_SETCTL_FLUSH,	/* invalidate directory cache */
-
-    /* Setting this makes vfs layer give out potentially incorrect data,
-       but it also makes some operations much faster. Use with caution. */
-    VFS_SETCTL_STALE_DATA
-};
-
-#define O_ALL (O_CREAT | O_EXCL | O_NOCTTY | O_NDELAY | O_SYNC | O_WRONLY | O_RDWR | O_RDONLY)
-/* Midnight commander code should _not_ use other flags than those
-   listed above and O_APPEND */
-
-#if (O_ALL & O_APPEND)
- #warning "Unexpected problem with flags, O_LINEAR disabled, contact pavel@ucw.cz"
-#define O_LINEAR 0
-#define IS_LINEAR(a) 0
-#define NO_LINEAR(a) a
-#else
-#define O_LINEAR O_APPEND
-#define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))	/* Return only 0 and 1 ! */
-#define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
-#endif
-
-/* O_LINEAR is strange beast, be careful. If you open file asserting
- * O_RDONLY | O_LINEAR, you promise:
- *
- *     	a) to read file linearly from beginning to the end
- *	b) not to open another file before you close this one
- *		(this will likely go away in future)
- *	as a special gift, you may
- *	c) lseek() immediately after open(), giving ftpfs chance to
- *	   reget. Be warned that this lseek() can fail, and you _have_
- *         to handle that gratefully.
- *
- * O_LINEAR allows filesystems not to create temporary file in some
- * cases (ftp transfer).				-- pavel@ucw.cz
- */
-
-/* And now some defines for our errors. */
-
-#ifdef ENOSYS
-#define E_NOTSUPP ENOSYS	/* for use in vfs when module does not provide function */
-#else
-#define E_NOTSUPP EFAULT	/* Does this happen? */
-#endif
-
-#ifdef ENOMSG
-#define E_UNKNOWN ENOMSG	/* if we do not know what error happened */
-#else
-#define E_UNKNOWN EIO		/* if we do not know what error happened */
-#endif
-
-#ifdef EREMOTEIO
-#define E_REMOTE EREMOTEIO	/* if other side of ftp/fish reports error */
-#else
-#define E_REMOTE ENETUNREACH	/* :-( there's no EREMOTEIO on some systems */
-#endif
-
-#ifdef EPROTO
-#define E_PROTO EPROTO		/* if other side fails to follow protocol */
-#else
-#define E_PROTO EIO
-#endif
-
+/*** inline functions ****************************************************************************/
 #endif /* MC_VFS_VFS_H */

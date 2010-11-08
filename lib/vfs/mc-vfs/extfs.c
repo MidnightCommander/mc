@@ -57,8 +57,18 @@
 #include "utilvfs.h"
 #include "gc.h"                 /* vfs_rmstamp */
 
+/*** global variables ****************************************************************************/
+
+GArray *extfs_plugins = NULL;
+
+/*** file scope macro definitions ****************************************************************/
+
 #undef ERRNOR
 #define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
+
+#define RECORDSIZE 512
+
+/*** file scope type declarations ****************************************************************/
 
 struct inode
 {
@@ -116,19 +126,24 @@ typedef struct
     gboolean need_archive;
 } extfs_plugin_info_t;
 
+/*** file scope variables ************************************************************************/
+
 static gboolean errloop;
 static gboolean notadir;
+
+static struct vfs_class vfs_extfs_ops;
+static struct archive *first_archive = NULL;
+static int my_errno = 0;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void extfs_remove_entry (struct entry *e);
 static void extfs_free (vfsid id);
 static void extfs_free_entry (struct entry *e);
 static struct entry *extfs_resolve_symlinks_int (struct entry *entry, GSList * list);
 
-static struct vfs_class vfs_extfs_ops;
-static struct archive *first_archive = NULL;
-static int my_errno = 0;
-
-GArray *extfs_plugins = NULL;
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 extfs_make_dots (struct entry *ent)
@@ -163,6 +178,8 @@ extfs_make_dots (struct entry *ent)
         inode->nlink++;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static struct entry *
 extfs_generate_entry (struct archive *archive,
@@ -207,6 +224,8 @@ extfs_generate_entry (struct archive *archive,
         extfs_make_dots (entry);
     return entry;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static struct entry *
 extfs_find_entry_int (struct entry *dir, char *name, GSList * list,
@@ -291,6 +310,8 @@ extfs_find_entry_int (struct entry *dir, char *name, GSList * list,
     return pent;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static struct entry *
 extfs_find_entry (struct entry *dir, char *name, gboolean make_dirs, gboolean make_file)
 {
@@ -309,6 +330,8 @@ extfs_find_entry (struct entry *dir, char *name, gboolean make_dirs, gboolean ma
     }
     return res;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 extfs_fill_names (struct vfs_class *me, fill_names_f func)
@@ -330,6 +353,8 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 extfs_free_archive (struct archive *archive)
 {
@@ -346,6 +371,8 @@ extfs_free_archive (struct archive *archive)
     g_free (archive->name);
     g_free (archive);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static FILE *
 extfs_open_archive (int fstype, const char *name, struct archive **pparc)
@@ -432,10 +459,12 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     return result;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Main loop for reading an archive.
  * Return 0 on success, -1 on error.
  */
+
 static int
 extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 {
@@ -579,6 +608,8 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_which (struct vfs_class *me, const char *path)
 {
@@ -602,10 +633,12 @@ extfs_which (struct vfs_class *me, const char *path)
     return -1;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Dissect the path and create corresponding superblock.  Note that inname
  * can be changed and the result may point inside the original string.
  */
+
 static char *
 extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **archive,
                        gboolean do_not_open)
@@ -649,10 +682,12 @@ extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **arch
     return local;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Dissect the path and create corresponding superblock.
  * The result should be freed.
  */
+
 static char *
 extfs_get_path (struct vfs_class *me, const char *inname,
                 struct archive **archive, gboolean do_not_open)
@@ -666,7 +701,9 @@ extfs_get_path (struct vfs_class *me, const char *inname,
     return res2;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Return allocated path (without leading slash) inside the archive  */
+
 static char *
 extfs_get_path_from_entry (struct entry *entry)
 {
@@ -684,6 +721,8 @@ extfs_get_path_from_entry (struct entry *entry)
 
     return g_string_free (localpath, FALSE);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static struct entry *
 extfs_resolve_symlinks_int (struct entry *entry, GSList * list)
@@ -713,6 +752,8 @@ extfs_resolve_symlinks_int (struct entry *entry, GSList * list)
     return pent;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static struct entry *
 extfs_resolve_symlinks (struct entry *entry)
 {
@@ -731,6 +772,8 @@ extfs_resolve_symlinks (struct entry *entry)
     return res;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 extfs_get_archive_name (struct archive *archive)
 {
@@ -747,7 +790,9 @@ extfs_get_archive_name (struct archive *archive)
         return archive_name;
 }
 
-/* Don't pass localname as NULL */
+/* --------------------------------------------------------------------------------------------- */
+/** Don't pass localname as NULL */
+
 static int
 extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
            struct entry *entry, const char *localname)
@@ -780,6 +825,8 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     return retval;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 extfs_run (struct vfs_class *me, const char *file)
 {
@@ -802,6 +849,8 @@ extfs_run (struct vfs_class *me, const char *file)
     shell_execute (cmd, 0);
     g_free (cmd);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void *
 extfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
@@ -879,6 +928,8 @@ extfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     return extfs_info;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static ssize_t
 extfs_read (void *data, char *buffer, size_t count)
 {
@@ -886,6 +937,8 @@ extfs_read (void *data, char *buffer, size_t count)
 
     return read (file->local_handle, buffer, count);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 extfs_close (void *data)
@@ -921,12 +974,16 @@ extfs_close (void *data)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_errno (struct vfs_class *me)
 {
     (void) me;
     return my_errno;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void *
 extfs_opendir (struct vfs_class *me, const char *dirname)
@@ -956,6 +1013,8 @@ extfs_opendir (struct vfs_class *me, const char *dirname)
     return info;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void *
 extfs_readdir (void *data)
 {
@@ -973,6 +1032,8 @@ extfs_readdir (void *data)
     return (void *) &dir;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_closedir (void *data)
 {
@@ -980,7 +1041,7 @@ extfs_closedir (void *data)
     return 0;
 }
 
-#define RECORDSIZE 512
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 extfs_stat_move (struct stat *buf, const struct inode *inode)
@@ -1005,6 +1066,8 @@ extfs_stat_move (struct stat *buf, const struct inode *inode)
     buf->st_mtime = inode->mtime;
     buf->st_ctime = inode->ctime;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, gboolean resolve)
@@ -1035,17 +1098,23 @@ extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, g
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     return extfs_internal_stat (me, path, buf, TRUE);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     return extfs_internal_stat (me, path, buf, FALSE);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 extfs_fstat (void *data, struct stat *buf)
@@ -1055,6 +1124,8 @@ extfs_fstat (void *data, struct stat *buf)
     extfs_stat_move (buf, file->entry->inode);
     return 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
@@ -1089,6 +1160,8 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
@@ -1099,6 +1172,8 @@ extfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
@@ -1108,6 +1183,8 @@ extfs_chmod (struct vfs_class *me, const char *path, int mode)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static ssize_t
 extfs_write (void *data, const char *buf, size_t nbyte)
 {
@@ -1116,6 +1193,8 @@ extfs_write (void *data, const char *buf, size_t nbyte)
     file->has_changed = TRUE;
     return write (file->local_handle, buf, nbyte);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 extfs_unlink (struct vfs_class *me, const char *file)
@@ -1152,6 +1231,8 @@ extfs_unlink (struct vfs_class *me, const char *file)
     g_free (mpath);
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 extfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
@@ -1198,6 +1279,8 @@ extfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_rmdir (struct vfs_class *me, const char *path)
 {
@@ -1235,6 +1318,8 @@ extfs_rmdir (struct vfs_class *me, const char *path)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_chdir (struct vfs_class *me, const char *path)
 {
@@ -1257,6 +1342,8 @@ extfs_chdir (struct vfs_class *me, const char *path)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static off_t
 extfs_lseek (void *data, off_t offset, int whence)
 {
@@ -1264,6 +1351,8 @@ extfs_lseek (void *data, off_t offset, int whence)
 
     return lseek (file->local_handle, offset, whence);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static vfsid
 extfs_getid (struct vfs_class *me, const char *path)
@@ -1278,11 +1367,15 @@ extfs_getid (struct vfs_class *me, const char *path)
     return (vfsid) archive;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_nothingisopen (vfsid id)
 {
     return (((struct archive *) id)->fd_usage <= 0);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 extfs_remove_entry (struct entry *e)
@@ -1327,6 +1420,8 @@ extfs_remove_entry (struct entry *e)
     g_free (e);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 extfs_free_entry (struct entry *e)
 {
@@ -1355,6 +1450,8 @@ extfs_free_entry (struct entry *e)
     g_free (e);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 extfs_free (vfsid id)
 {
@@ -1377,6 +1474,8 @@ extfs_free (vfsid id)
     extfs_free_archive (archive);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 extfs_getlocalcopy (struct vfs_class *me, const char *path)
 {
@@ -1396,6 +1495,8 @@ extfs_getlocalcopy (struct vfs_class *me, const char *path)
     extfs_close ((void *) fp);
     return p;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 extfs_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
@@ -1421,6 +1522,8 @@ extfs_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local,
         return 0;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 extfs_get_plugins (const char *where, gboolean silent)
@@ -1520,6 +1623,7 @@ extfs_get_plugins (const char *where, gboolean silent)
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 extfs_init (struct vfs_class *me)
@@ -1538,6 +1642,8 @@ extfs_init (struct vfs_class *me)
 
     return (d1 || d2 ? 1 : 0);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 extfs_done (struct vfs_class *me)
@@ -1564,6 +1670,8 @@ extfs_done (struct vfs_class *me)
     g_array_free (extfs_plugins, TRUE);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 extfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 {
@@ -1576,6 +1684,10 @@ extfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
     }
     return 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 init_extfs (void)
@@ -1612,3 +1724,5 @@ init_extfs (void)
     vfs_extfs_ops.setctl = extfs_setctl;
     vfs_register_class (&vfs_extfs_ops);
 }
+
+/* --------------------------------------------------------------------------------------------- */

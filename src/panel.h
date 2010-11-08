@@ -17,7 +17,7 @@
 #define selection(p) (&(p->dir.list[p->selected]))
 #define DEFAULT_USER_FORMAT "half type name | size | perm"
 
-#define LIST_TYPES	4
+#define LIST_TYPES 4
 
 enum list_types {
     list_full,			/* Name, size, perm/date */
@@ -116,9 +116,9 @@ void panel_set_sort_order (WPanel *panel, const panel_field_t *sort_order);
 void panel_re_sort        (WPanel *panel);
 void panel_change_encoding (WPanel * panel);
 
-#define UP_OPTIMIZE		0
-#define UP_RELOAD		1
-#define UP_ONLY_CURRENT		2
+#define UP_OPTIMIZE     0
+#define UP_RELOAD       1
+#define UP_ONLY_CURRENT 2
 
 #define UP_KEEPSEL ((char *) -1)
 

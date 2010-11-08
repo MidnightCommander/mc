@@ -19,13 +19,27 @@
 
 #include "local.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+static struct vfs_class vfs_local_ops;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 /**
  * Note: Some of this functions are not static. This has rather good
  * reason: exactly same functions would have to appear in sfs.c. This
  * saves both computer's memory and my work.  <pavel@ucw.cz>
  */
 
-static struct vfs_class vfs_local_ops;
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void *
 local_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
@@ -37,7 +51,7 @@ local_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 
     fd = open (file, NO_LINEAR (flags), mode);
     if (fd == -1)
-	return 0;
+        return 0;
 
     local_info = g_new (int, 1);
     *local_info = fd;
@@ -45,45 +59,7 @@ local_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     return local_info;
 }
 
-ssize_t
-local_read (void *data, char *buffer, size_t count)
-{
-    int n;
-
-    if (!data)
-	return -1;
-    
-    while ((n = read (*((int *) data), buffer, count)) == -1){
-#ifdef EAGAIN
-	if (errno == EAGAIN) continue;
-#endif
-#ifdef EINTR
-	if (errno == EINTR) continue;
-#endif
-	return -1;
-    }
-    return n;
-}
-
-int
-local_close (void *data)
-{
-    int fd;
-
-    if (!data)
-	return -1;
-    
-    fd =  *(int *) data;
-    g_free (data);
-    return close (fd);
-}
-
-int
-local_errno (struct vfs_class *me)
-{
-    (void) me;
-    return errno;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static void *
 local_opendir (struct vfs_class *me, const char *dirname)
@@ -95,13 +71,15 @@ local_opendir (struct vfs_class *me, const char *dirname)
 
     dir = opendir (dirname);
     if (!dir)
-	return 0;
+        return 0;
 
     local_info = (DIR **) g_new (DIR *, 1);
     *local_info = dir;
-    
+
     return local_info;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void *
 local_readdir (void *data)
@@ -109,15 +87,19 @@ local_readdir (void *data)
     return readdir (*(DIR **) data);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_closedir (void *data)
 {
     int i;
 
-    i = closedir (* (DIR **) data);
+    i = closedir (*(DIR **) data);
     g_free (data);
     return i;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 local_stat (struct vfs_class *me, const char *path, struct stat *buf)
@@ -127,24 +109,21 @@ local_stat (struct vfs_class *me, const char *path, struct stat *buf)
     return stat (path, buf);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     (void) me;
 
 #ifndef HAVE_STATLSTAT
-    return lstat (path,buf);
+    return lstat (path, buf);
 #else
     return statlstat (path, buf);
 #endif
 }
 
-int
-local_fstat (void *data, struct stat *buf)
-{
-    /* FIXME: avoid type cast */
-    return fstat (*((int *) data), buf);
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 local_chmod (struct vfs_class *me, const char *path, int mode)
@@ -154,6 +133,8 @@ local_chmod (struct vfs_class *me, const char *path, int mode)
     return chmod (path, mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
@@ -161,6 +142,8 @@ local_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 
     return chown (path, owner, group);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 local_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
@@ -170,6 +153,8 @@ local_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
     return utime (path, times);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
@@ -177,6 +162,8 @@ local_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 
     return readlink (path, buf, size);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 local_unlink (struct vfs_class *me, const char *path)
@@ -186,6 +173,8 @@ local_unlink (struct vfs_class *me, const char *path)
     return unlink (path);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_symlink (struct vfs_class *me, const char *n1, const char *n2)
 {
@@ -194,6 +183,8 @@ local_symlink (struct vfs_class *me, const char *n1, const char *n2)
     return symlink (n1, n2);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static ssize_t
 local_write (void *data, const char *buf, size_t nbyte)
 {
@@ -201,20 +192,25 @@ local_write (void *data, const char *buf, size_t nbyte)
     int n;
 
     if (!data)
-	return -1;
+        return -1;
 
-    fd = * (int *) data;
-    while ((n = write (fd, buf, nbyte)) == -1){
+    fd = *(int *) data;
+    while ((n = write (fd, buf, nbyte)) == -1)
+    {
 #ifdef EAGAIN
-	if (errno == EAGAIN) continue;
+        if (errno == EAGAIN)
+            continue;
 #endif
 #ifdef EINTR
-	if (errno == EINTR) continue;
+        if (errno == EINTR)
+            continue;
 #endif
-	break;
+        break;
     }
     return n;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 local_rename (struct vfs_class *me, const char *a, const char *b)
@@ -224,6 +220,8 @@ local_rename (struct vfs_class *me, const char *a, const char *b)
     return rename (a, b);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_chdir (struct vfs_class *me, const char *path)
 {
@@ -232,13 +230,7 @@ local_chdir (struct vfs_class *me, const char *path)
     return chdir (path);
 }
 
-off_t
-local_lseek (void *data, off_t offset, int whence)
-{
-    int fd = * (int *) data;
-
-    return lseek (fd, offset, whence);
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 local_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
@@ -248,6 +240,8 @@ local_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
     return mknod (path, mode, dev);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_link (struct vfs_class *me, const char *p1, const char *p2)
 {
@@ -255,6 +249,8 @@ local_link (struct vfs_class *me, const char *p1, const char *p2)
 
     return link (p1, p2);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 local_mkdir (struct vfs_class *me, const char *path, mode_t mode)
@@ -264,6 +260,8 @@ local_mkdir (struct vfs_class *me, const char *path, mode_t mode)
     return mkdir (path, mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_rmdir (struct vfs_class *me, const char *path)
 {
@@ -271,6 +269,8 @@ local_rmdir (struct vfs_class *me, const char *path)
 
     return rmdir (path);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 local_getlocalcopy (struct vfs_class *me, const char *path)
@@ -280,9 +280,10 @@ local_getlocalcopy (struct vfs_class *me, const char *path)
     return g_strdup (path);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
-local_ungetlocalcopy (struct vfs_class *me, const char *path,
-		      const char *local, int has_changed)
+local_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
 {
     (void) me;
     (void) path;
@@ -292,14 +293,88 @@ local_ungetlocalcopy (struct vfs_class *me, const char *path,
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 local_which (struct vfs_class *me, const char *path)
 {
     (void) me;
     (void) path;
 
-    return 0;		/* Every path which other systems do not like is expected to be ours */
+    return 0;                   /* Every path which other systems do not like is expected to be ours */
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+ssize_t
+local_read (void *data, char *buffer, size_t count)
+{
+    int n;
+
+    if (!data)
+        return -1;
+
+    while ((n = read (*((int *) data), buffer, count)) == -1)
+    {
+#ifdef EAGAIN
+        if (errno == EAGAIN)
+            continue;
+#endif
+#ifdef EINTR
+        if (errno == EINTR)
+            continue;
+#endif
+        return -1;
+    }
+    return n;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+local_close (void *data)
+{
+    int fd;
+
+    if (!data)
+        return -1;
+
+    fd = *(int *) data;
+    g_free (data);
+    return close (fd);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+local_errno (struct vfs_class *me)
+{
+    (void) me;
+    return errno;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+local_fstat (void *data, struct stat *buf)
+{
+    /* FIXME: avoid type cast */
+    return fstat (*((int *) data), buf);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+off_t
+local_lseek (void *data, off_t offset, int whence)
+{
+    int fd = *(int *) data;
+
+    return lseek (fd, offset, whence);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 init_localfs (void)
@@ -335,3 +410,5 @@ init_localfs (void)
     vfs_local_ops.rmdir = local_rmdir;
     vfs_register_class (&vfs_local_ops);
 }
+
+/* --------------------------------------------------------------------------------------------- */

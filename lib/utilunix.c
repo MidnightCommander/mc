@@ -42,7 +42,10 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #ifdef HAVE_SYS_IOCTL_H
-#   include <sys/ioctl.h>
+#include <sys/ioctl.h>
+#endif
+#ifdef HAVE_GET_PROCESS_STATS
+#include <sys/procstats.h>
 #endif
 #include <unistd.h>
 #include <pwd.h>
@@ -57,10 +60,20 @@
 #include "src/charsets.h"
 #endif
 
+/*** global variables ****************************************************************************/
+
 struct sigaction startup_handler;
+
+/*** file scope macro definitions ****************************************************************/
 
 #define UID_CACHE_SIZE 200
 #define GID_CACHE_SIZE 30
+
+/* Pipes are guaranteed to be able to hold at least 4096 bytes */
+/* More than that would be unportable */
+#define MAX_PIPE_SIZE 4096
+
+/*** file scope type declarations ****************************************************************/
 
 typedef struct
 {
@@ -68,8 +81,16 @@ typedef struct
     char *string;
 } int_cache;
 
+/*** file scope variables ************************************************************************/
+
 static int_cache uid_cache[UID_CACHE_SIZE];
 static int_cache gid_cache[GID_CACHE_SIZE];
+
+static int error_pipe[2];       /* File descriptors of error pipe */
+static int old_error;           /* File descriptor of old standard error */
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 i_cache_match (int id, int_cache * cache, int size)
@@ -82,6 +103,8 @@ i_cache_match (int id, int_cache * cache, int size)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 i_cache_add (int id, int_cache * cache, int size, char *text, int *last)
 {
@@ -90,6 +113,10 @@ i_cache_add (int id, int_cache * cache, int size, char *text, int *last)
     cache[*last].index = id;
     *last = ((*last) + 1) % size;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 get_owner (int uid)
@@ -116,6 +143,8 @@ get_owner (int uid)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 get_group (int gid)
 {
@@ -141,14 +170,18 @@ get_group (int gid)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Since ncurses uses a handler that automatically refreshes the */
 /* screen after a SIGCONT, and we don't want this behavior when */
 /* spawning a child, we save the original handler here */
+
 void
 save_stop_handler (void)
 {
     sigaction (SIGTSTP, NULL, &startup_handler);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 my_system (int flags, const char *shell, const char *command)
@@ -213,7 +246,7 @@ my_system (int flags, const char *shell, const char *command)
         {
             if (waitpid (pid, &status, 0) > 0)
             {
-                status = WEXITSTATUS(status);
+                status = WEXITSTATUS (status);
                 break;
             }
             if (errno != EINTR)
@@ -231,10 +264,12 @@ my_system (int flags, const char *shell, const char *command)
 }
 
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Perform tilde expansion if possible.
  * Always return a newly allocated string, even if it's unchanged.
  */
+
 char *
 tilde_expand (const char *directory)
 {
@@ -276,13 +311,15 @@ tilde_expand (const char *directory)
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, (char *) NULL);
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Return the directory where mc should keep its temporary files.
  * This directory is (in Bourne shell terms) "${TMPDIR=/tmp}/mc-$USER"
  * When called the first time, the directory is created if needed.
  * The first call should be done early, since we are using fprintf()
  * and not message() to report possible problems.
  */
+
 const char *
 mc_tmpdir (void)
 {
@@ -384,17 +421,13 @@ mc_tmpdir (void)
     return tmpdir;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Creates a pipe to hold standard error for a later analysis.
+ * The pipe can hold 4096 bytes. Make sure no more is written
+ * or a deadlock might occur.
+ */
 
-/* Pipes are guaranteed to be able to hold at least 4096 bytes */
-/* More than that would be unportable */
-#define MAX_PIPE_SIZE 4096
-
-static int error_pipe[2];       /* File descriptors of error pipe */
-static int old_error;           /* File descriptor of old standard error */
-
-/* Creates a pipe to hold standard error for a later analysis. */
-/* The pipe can hold 4096 bytes. Make sure no more is written */
-/* or a deadlock might occur. */
 void
 open_error_pipe (void)
 {
@@ -436,11 +469,13 @@ open_error_pipe (void)
     error_pipe[1] = -1;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Returns true if an error was displayed
  * error: -1 - ignore errors, 0 - display warning, 1 - display error
  * text is prepended to the error message from the pipe
  */
+
 int
 close_error_pipe (int error, const char *text)
 {
@@ -489,7 +524,8 @@ close_error_pipe (int error, const char *text)
     return 1;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Canonicalize path, and return a new path.  Do everything in place.
  * The new path differs from path in:
  *      Multiple `/'s are collapsed to a single `/'.
@@ -499,6 +535,7 @@ close_error_pipe (int error, const char *text)
  *      portions of the path.
  * Well formed UNC paths are modified only in the local part.
  */
+
 void
 custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 {
@@ -662,7 +699,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     s[0] = 0;
 #if HAVE_CHARSET
                 else if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
-                        && (is_supported_encoding (s + enc_prefix_len)))
+                         && (is_supported_encoding (s + enc_prefix_len)))
                 {
                     /* special case: remove encoding */
                     s[0] = '.';
@@ -689,21 +726,25 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 canonicalize_pathname (char *path)
 {
     custom_canonicalize_pathname (path, CANON_PATH_ALL);
 }
 
-#ifdef HAVE_GET_PROCESS_STATS
-#    include <sys/procstats.h>
+/* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_GET_PROCESS_STATS
 int
 gettimeofday (struct timeval *tp, void *tzp)
 {
     return get_process_stats (tp, PS_SELF, 0, 0);
 }
 #endif /* HAVE_GET_PROCESS_STATS */
+
+/* --------------------------------------------------------------------------------------------- */
 
 #ifndef HAVE_REALPATH
 char *
@@ -847,7 +888,12 @@ mc_realpath (const char *path, char *resolved_path)
 }
 #endif /* HAVE_REALPATH */
 
-/* Return the index of the permissions triplet */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Return the index of the permissions triplet
+ *
+ */
+
 int
 get_user_permissions (struct stat *st)
 {
@@ -894,3 +940,5 @@ get_user_permissions (struct stat *st)
 
     return 2;
 }
+
+/* --------------------------------------------------------------------------------------------- */

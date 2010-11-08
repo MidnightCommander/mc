@@ -4,12 +4,23 @@
  * \brief Header: Virtual File System: Network utilities
  */
 
-#ifndef MC_VFS_NETUTIL_H
-#define MC_VFS_NETUTIL_H
+#ifndef MC__VFS_NETUTIL_H
+#define MC__VFS_NETUTIL_H
 
 #include <signal.h>
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
 
 extern volatile sig_atomic_t got_sigpipe;
+
+/*** declarations of public functions ************************************************************/
+
 void tcp_init (void);
 
+/*** inline functions ****************************************************************************/
 #endif /* MC_VFS_NETUTIL_H */

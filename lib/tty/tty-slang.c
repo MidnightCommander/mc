@@ -51,14 +51,14 @@
 #include "win.h"
 
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
 extern int reset_hp_softkeys;
 
-/*** file scope macro definitions **************************************/
+/*** file scope macro definitions ****************************************************************/
 
 #ifndef SA_RESTART
-#   define SA_RESTART 0
+#define SA_RESTART 0
 #endif
 
 #ifndef SLTT_MAX_SCREEN_COLS
@@ -69,9 +69,9 @@ extern int reset_hp_softkeys;
 #define SLTT_MAX_SCREEN_ROWS 512
 #endif
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
 /* Various saved termios settings that we control here */
 static struct termios boot_mode;
@@ -126,7 +126,8 @@ static const struct
     /* *INDENT-ON* */
 };
 
-/*** file scope functions **********************************************/
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* HP Terminals have capabilities (pfkey, pfloc, pfx) to program function keys.
    elm 2.4pl15 invoked with the -K option utilizes these softkeys and the
@@ -164,6 +165,8 @@ slang_reset_softkeys (void)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 do_define_key (int code, const char *strcap)
 {
@@ -173,6 +176,8 @@ do_define_key (int code, const char *strcap)
     if (seq != NULL)
         define_sequence (code, seq, MCKEY_NOACTION);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 load_terminfo_keys (void)
@@ -184,7 +189,7 @@ load_terminfo_keys (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions **************************************************/
+/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -233,6 +238,7 @@ mc_tty_normalize_lines_char (const char *str)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 void
 tty_init (gboolean slow, gboolean ugly_lines)
 {
@@ -297,6 +303,8 @@ tty_init (gboolean slow, gboolean ugly_lines)
     tty_nodelay (FALSE);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_shutdown (void)
 {
@@ -318,7 +326,9 @@ tty_shutdown (void)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Done each time we come back from done mode */
+
 void
 tty_reset_prog_mode (void)
 {
@@ -327,12 +337,16 @@ tty_reset_prog_mode (void)
     SLsmg_touch_lines (0, LINES);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Called each time we want to shutdown slang screen manager */
+
 void
 tty_reset_shell_mode (void)
 {
     tcsetattr (SLang_TT_Read_FD, TCSANOW, &boot_mode);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_raw_mode (void)
@@ -340,21 +354,29 @@ tty_raw_mode (void)
     tcsetattr (SLang_TT_Read_FD, TCSANOW, &new_mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_noraw_mode (void)
 {
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_noecho (void)
 {
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 tty_flush_input (void)
 {
     return 0;                   /* OK */
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_keypad (gboolean set)
@@ -368,17 +390,23 @@ tty_keypad (gboolean set)
         slang_reset_softkeys ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_nodelay (gboolean set)
 {
     no_slang_delay = set;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 tty_baudrate (void)
 {
     return SLang_TT_Baud_Rate;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 tty_lowlevel_getch (void)
@@ -400,6 +428,8 @@ tty_lowlevel_getch (void)
     return c;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 tty_reset_screen (void)
 {
@@ -407,17 +437,23 @@ tty_reset_screen (void)
     return 0;                   /* OK */
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_touch_screen (void)
 {
     SLsmg_touch_lines (0, LINES);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_gotoyx (int y, int x)
 {
     SLsmg_gotorc (y, x);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_getyx (int *py, int *px)
@@ -426,7 +462,9 @@ tty_getyx (int *py, int *px)
     *px = SLsmg_get_column ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* if x < 0 or y < 0, draw line staring from current position */
+
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
@@ -453,7 +491,9 @@ tty_draw_hline (int y, int x, int ch, int len)
     SLsmg_gotorc (y, x);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* if x < 0 or y < 0, draw line staring from current position */
+
 void
 tty_draw_vline (int y, int x, int ch, int len)
 {
@@ -488,11 +528,15 @@ tty_draw_vline (int y, int x, int ch, int len)
     SLsmg_gotorc (y, x);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 {
     SLsmg_fill_region (y, x, rows, cols, ch);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_set_alt_charset (gboolean alt_charset)
@@ -500,17 +544,23 @@ tty_set_alt_charset (gboolean alt_charset)
     SLsmg_set_char_set ((int) alt_charset);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_display_8bit (gboolean what)
 {
     SLsmg_Display_Eight_Bit = what ? 128 : 160;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_print_char (int c)
 {
     SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_print_alt_char (int c, gboolean single)
@@ -553,6 +603,8 @@ tty_print_alt_char (int c, gboolean single)
 #undef DRAW
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_print_anychar (int c)
 {
@@ -578,11 +630,15 @@ tty_print_anychar (int c)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_print_string (const char *s)
 {
     SLsmg_write_string ((char *) str_term_form (s));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_printf (const char *fmt, ...)
@@ -594,17 +650,23 @@ tty_printf (const char *fmt, ...)
     va_end (args);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 tty_tgetstr (const char *cap)
 {
     return SLtt_tgetstr ((char *) cap);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_refresh (void)
 {
     SLsmg_refresh ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_setup_sigwinch (void (*handler) (int))
@@ -621,8 +683,12 @@ tty_setup_sigwinch (void (*handler) (int))
 #endif /* SIGWINCH */
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_beep (void)
 {
     SLtt_beep ();
 }
+
+/* --------------------------------------------------------------------------------------------- */

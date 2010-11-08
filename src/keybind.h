@@ -17,7 +17,7 @@ typedef struct key_config_t {
 } key_config_t;
 
 /* The global keymaps are of this type */
-#define KEYMAP_SHORTCUT_LENGTH		32 /* FIXME: is 32 bytes enough for shortcut? */
+#define KEYMAP_SHORTCUT_LENGTH 32 /* FIXME: is 32 bytes enough for shortcut? */
 typedef struct global_keymap_t {
     long key;
     unsigned long command;

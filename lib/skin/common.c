@@ -85,8 +85,7 @@ mc_skin_reinit (void)
     mc_skin_deinit ();
     mc_skin__default.name = mc_skin_get_default_name ();
     mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     g_free,
-                                                     mc_skin_hash_destroy_value);
+                                                     g_free, mc_skin_hash_destroy_value);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -97,7 +96,8 @@ mc_skin_try_to_load_default (void)
     mc_skin_reinit ();
     g_free (mc_skin__default.name);
     mc_skin__default.name = g_strdup ("default");
-    if (!mc_skin_ini_file_load (&mc_skin__default)) {
+    if (!mc_skin_ini_file_load (&mc_skin__default))
+    {
         mc_skin_reinit ();
         mc_skin_set_hardcoded_skin (&mc_skin__default);
     }
@@ -116,10 +116,10 @@ mc_skin_init (GError ** error)
     mc_skin__default.name = mc_skin_get_default_name ();
 
     mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     g_free,
-                                                     mc_skin_hash_destroy_value);
+                                                     g_free, mc_skin_hash_destroy_value);
 
-    if (!mc_skin_ini_file_load (&mc_skin__default)) {
+    if (!mc_skin_ini_file_load (&mc_skin__default))
+    {
         *error = g_error_new (MC_ERROR, 0,
                               _("Unable to load '%s' skin.\nDefault skin has been loaded"),
                               mc_skin__default.name);
@@ -129,7 +129,8 @@ mc_skin_init (GError ** error)
     }
     mc_skin_colors_old_configure (&mc_skin__default);
 
-    if (!mc_skin_ini_file_parse (&mc_skin__default)) {
+    if (!mc_skin_ini_file_parse (&mc_skin__default))
+    {
         if (*error == NULL)
             *error = g_error_new (MC_ERROR, 0,
                                   _("Unable to parse '%s' skin.\nDefault skin has been loaded"),
@@ -166,12 +167,13 @@ mc_skin_deinit (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gchar *
-mc_skin_get(const gchar *group, const gchar *key, const gchar *default_value)
+mc_skin_get (const gchar * group, const gchar * key, const gchar * default_value)
 {
-    if (mc_args__ugly_line_drawing) {
-	return g_strdup(default_value);
+    if (mc_args__ugly_line_drawing)
+    {
+        return g_strdup (default_value);
     }
-    return mc_config_get_string(mc_skin__default.config, group, key, default_value);
+    return mc_config_get_string (mc_skin__default.config, group, key, default_value);
 }
 
 /* --------------------------------------------------------------------------------------------- */

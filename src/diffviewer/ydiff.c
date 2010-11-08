@@ -72,27 +72,28 @@ do { \
     } \
 } while (0)
 
-#define FILE_READ_BUF	4096
-#define FILE_FLAG_TEMP	(1 << 0)
+#define FILE_READ_BUF 4096
+#define FILE_FLAG_TEMP (1 << 0)
 
 #define OPTX 56
 #define OPTY 17
 
-#define ADD_CH		'+'
-#define DEL_CH		'-'
-#define CHG_CH		'*'
-#define EQU_CH		' '
+#define ADD_CH '+'
+#define DEL_CH '-'
+#define CHG_CH '*'
+#define EQU_CH ' '
 
-#define HDIFF_ENABLE	1
-#define HDIFF_MINCTX	5
-#define HDIFF_DEPTH	10
+#define HDIFF_ENABLE 1
+#define HDIFF_MINCTX 5
+#define HDIFF_DEPTH 10
 
-#define FILE_DIRTY(fs)	\
-    do {		\
-	(fs)->pos = 0;	\
-	(fs)->len = 0;	\
-    } while (0)
-
+#define FILE_DIRTY(fs) \
+do \
+{ \
+    (fs)->pos = 0; \
+    (fs)->len = 0;  \
+} \
+while (0)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -3306,34 +3307,42 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define GET_FILE_AND_STAMP(n)					\
-    do {							\
-	use_copy##n = 0;					\
-	real_file##n = file##n;					\
-	if (!vfs_file_is_local(file##n)) {			\
-	    real_file##n = mc_getlocalcopy(file##n);		\
-	    if (real_file##n != NULL) {				\
-		use_copy##n = 1;				\
-		if (mc_stat(real_file##n, &st##n) != 0) {	\
-		    use_copy##n = -1;				\
-		}						\
-	    }							\
-	}							\
-    } while (0)
-#define UNGET_FILE(n)						\
-    do {							\
-	if (use_copy##n) {					\
-	    int changed = 0;					\
-	    if (use_copy##n > 0) {				\
-		time_t mtime = st##n.st_mtime;			\
-		if (mc_stat(real_file##n, &st##n) == 0) {	\
-		    changed = (mtime != st##n.st_mtime);	\
-		}						\
-	    }							\
-	    mc_ungetlocalcopy(file##n, real_file##n, changed);	\
-	    g_free(real_file##n);				\
-	}							\
-    } while (0)
+#define GET_FILE_AND_STAMP(n) \
+do \
+{ \
+    use_copy##n = 0; \
+    real_file##n = file##n; \
+    if (!vfs_file_is_local (file##n)) \
+    { \
+        real_file##n = mc_getlocalcopy (file##n); \
+        if (real_file##n != NULL) \
+        { \
+            use_copy##n = 1; \
+            if (mc_stat (real_file##n, &st##n) != 0) \
+                use_copy##n = -1; \
+        } \
+    } \
+} \
+while (0)
+
+#define UNGET_FILE(n) \
+do \
+{ \
+    if (use_copy##n) \
+    { \
+        int changed = 0; \
+        if (use_copy##n > 0) \
+        { \
+            time_t mtime; \
+            mtime = st##n.st_mtime; \
+            if (mc_stat (real_file##n, &st##n) == 0) \
+                changed = (mtime != st##n.st_mtime); \
+        } \
+        mc_ungetlocalcopy (file##n, real_file##n, changed); \
+        g_free (real_file##n); \
+    } \
+} \
+while (0)
 
 void
 dview_diff_cmd (void)

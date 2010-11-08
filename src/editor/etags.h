@@ -4,8 +4,8 @@
 #include <sys/types.h>		/* size_t */
 #include "lib/global.h"	/* include <glib.h> */
 
-#define MAX_WIDTH_DEF_DIALOG 60	/* max width def dialog */
-#define MAX_DEFINITIONS 60	/* count found entries show */
+#define MAX_WIDTH_DEF_DIALOG 60 /* max width def dialog */
+#define MAX_DEFINITIONS 60 /* count found entries show */
 #define SHORT_DEF_LEN   30
 #define LONG_DEF_LEN    40
 #define LINE_DEF_LEN    16

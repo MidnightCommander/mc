@@ -1,4 +1,3 @@
-
 /** \file util.h
  *  \brief Header: various utilities
  */
@@ -14,8 +13,118 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+#define MAX_I18NTIMELENGTH 20
+#define MIN_I18NTIMELENGTH 10
+#define STD_I18NTIMELENGTH 12
+
+#ifndef PATH_MAX
+#ifdef _POSIX_VERSION
+#define PATH_MAX _POSIX_PATH_MAX
+#else
+#ifdef MAXPATHLEN
+#define PATH_MAX MAXPATHLEN
+#else
+#define PATH_MAX 1024
+#endif
+#endif
+#endif
+
+#ifndef MAXSYMLINKS
+#define MAXSYMLINKS 32
+#endif
+
+#define MAX_SAVED_BOOKMARKS 10
+
+/* OS specific defines */
+#define PATH_SEP '/'
+#define PATH_SEP_STR "/"
+#define PATH_ENV_SEP ':'
+#define TMPDIR_DEFAULT "/tmp"
+#define SCRIPT_SUFFIX ""
+#define get_default_editor() "vi"
+#define OS_SORT_CASE_SENSITIVE_DEFAULT 1
+#define STRCOMP strcmp
+#define STRNCOMP strncmp
+#define MC_ARCH_FLAGS 0
+
+/* taken from regex.c: */
+/* Jim Meyering writes:
+
+   "... Some ctype macros are valid only for character codes that
+   isascii says are ASCII (SGI's IRIX-4.0.5 is one such system --when
+   using /bin/cc or gcc but without giving an ansi option).  So, all
+   ctype uses should be through macros like ISPRINT...  If
+   STDC_HEADERS is defined, then autoconf has verified that the ctype
+   macros don't need to be guarded with references to isascii. ...
+   Defining isascii to 1 should let any compiler worth its salt
+   eliminate the && through constant folding."  */
+
+#if defined (STDC_HEADERS) || (!defined (isascii) && !defined (HAVE_ISASCII))
+#define ISASCII(c) 1
+#else
+#define ISASCII(c) isascii(c)
+#endif
+
+/* usage: str_cmp ("foo", !=, "bar") */
+#define str_cmp(a,rel,b) (strcmp ((a), (b)) rel 0)
+
+#define str_dup_range(s_start, s_bound) (g_strndup(s_start, s_bound - s_start))
+
+#define MC_PTR_FREE(ptr) do { g_free (ptr); (ptr) = NULL; } while (0)
+
+/*** enums ***************************************************************************************/
+
+/* Matching */
+enum
+{
+    match_file,                 /* match a filename, use easy_patterns */
+    match_normal,               /* match pattern, use easy_patterns */
+    match_regex                 /* match pattern, force using regex */
+};
+
+/* Pathname canonicalization */
+typedef enum
+{
+    CANON_PATH_JOINSLASHES = 1L << 0,   /* Multiple `/'s are collapsed to a single `/'. */
+    CANON_PATH_REMSLASHDOTS = 1L << 1,  /* Leading `./'s, `/'s and trailing `/.'s are removed. */
+    CANON_PATH_REMDOUBLEDOTS = 1L << 3, /* Non-leading `../'s and trailing `..'s are handled by removing */
+    CANON_PATH_GUARDUNC = 1L << 4,      /* Detect and preserve UNC paths: //server/... */
+    CANON_PATH_ALL = CANON_PATH_JOINSLASHES
+        | CANON_PATH_REMSLASHDOTS | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC
+} CANON_PATH_FLAGS;
+
+enum compression_type
+{
+    COMPRESSION_NONE,
+    COMPRESSION_GZIP,
+    COMPRESSION_BZIP,
+    COMPRESSION_BZIP2,
+    COMPRESSION_LZMA,
+    COMPRESSION_XZ
+};
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct hook
+{
+    void (*hook_fn) (void *);
+    void *hook_data;
+    struct hook *next;
+} Hook;
+
+/*** global variables defined in .c file *********************************************************/
+
 extern char *user_recent_timeformat;    /* time format string for recent dates */
 extern char *user_old_timeformat;       /* time format string for older dates */
+
+extern int easy_patterns;
+
+extern struct sigaction startup_handler;
+
+/*** declarations of public functions ************************************************************/
 
 /* Returns its argument as a "modifiable" string. This function is
  * intended to pass strings to legacy libraries that don't know yet
@@ -111,9 +220,6 @@ void init_uid_gid_cache (void);
 char *get_group (int);
 char *get_owner (int);
 
-#define MAX_I18NTIMELENGTH 20
-#define MIN_I18NTIMELENGTH 10
-#define STD_I18NTIMELENGTH 12
 
 size_t i18n_checktimelength (void);
 const char *file_date (time_t);
@@ -126,16 +232,6 @@ int check_for_default (const char *default_file, const char *file);
 /* Returns a copy of *s until a \n is found and is below top */
 const char *extract_line (const char *s, const char *top);
 
-/* Matching */
-enum
-{
-    match_file,                 /* match a filename, use easy_patterns */
-    match_normal,               /* match pattern, use easy_patterns */
-    match_regex                 /* match pattern, force using regex */
-};
-
-extern int easy_patterns;
-
 /* Error pipes */
 void open_error_pipe (void);
 void check_error_pipe (void);
@@ -144,21 +240,10 @@ int close_error_pipe (int error, const char *text);
 /* Process spawning */
 int my_system (int flags, const char *shell, const char *command);
 void save_stop_handler (void);
-extern struct sigaction startup_handler;
 
 /* Tilde expansion */
 char *tilde_expand (const char *);
 
-/* Pathname canonicalization */
-typedef enum
-{
-    CANON_PATH_JOINSLASHES = 1L << 0,   /* Multiple `/'s are collapsed to a single `/'. */
-    CANON_PATH_REMSLASHDOTS = 1L << 1,  /* Leading `./'s, `/'s and trailing `/.'s are removed. */
-    CANON_PATH_REMDOUBLEDOTS = 1L << 3, /* Non-leading `../'s and trailing `..'s are handled by removing */
-    CANON_PATH_GUARDUNC = 1L << 4,      /* Detect and preserve UNC paths: //server/... */
-    CANON_PATH_ALL = CANON_PATH_JOINSLASHES
-        | CANON_PATH_REMSLASHDOTS | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC
-} CANON_PATH_FLAGS;
 void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
 void canonicalize_pathname (char *);
 
@@ -170,37 +255,11 @@ int my_rmdir (const char *s);
 const char *mc_tmpdir (void);
 int mc_mkstemps (char **pname, const char *prefix, const char *suffix);
 
-#ifndef PATH_MAX
-#ifdef _POSIX_VERSION
-#define PATH_MAX _POSIX_PATH_MAX
-#else
-#ifdef MAXPATHLEN
-#define PATH_MAX MAXPATHLEN
-#else
-#define PATH_MAX 1024
-#endif
-#endif
-#endif
-
-#ifndef MAXSYMLINKS
-#define MAXSYMLINKS 32
-#endif
-
 #ifdef HAVE_REALPATH
 #define mc_realpath realpath
 #else
 char *mc_realpath (const char *path, char *resolved_path);
 #endif
-
-enum compression_type
-{
-    COMPRESSION_NONE,
-    COMPRESSION_GZIP,
-    COMPRESSION_BZIP,
-    COMPRESSION_BZIP2,
-    COMPRESSION_LZMA,
-    COMPRESSION_XZ
-};
 
 /* Looks for ``magic'' bytes at the start of the VFS file to guess the
  * compression type. Side effect: modifies the file position. */
@@ -209,12 +268,6 @@ const char *decompress_extension (int type);
 
 /* Hook functions */
 
-typedef struct hook
-{
-    void (*hook_fn) (void *);
-    void *hook_data;
-    struct hook *next;
-} Hook;
 
 void add_hook (Hook ** hook_list, void (*hook_fn) (void *), void *data);
 void execute_hooks (Hook * hook_list);
@@ -224,7 +277,6 @@ int hook_present (Hook * hook_list, void (*hook_fn) (void *));
 GList *list_append_unique (GList * list, char *text);
 
 /* Position saving and restoring */
-#define MAX_SAVED_BOOKMARKS 10
 /* Load position for the given filename */
 void load_file_position (const char *filename, long *line, long *column, off_t * offset,
                          GArray **bookmarks);
@@ -233,39 +285,6 @@ void save_file_position (const char *filename, long line, long column, off_t off
                          GArray *bookmarks);
 
 
-/* OS specific defines */
-#define PATH_SEP '/'
-#define PATH_SEP_STR "/"
-#define PATH_ENV_SEP ':'
-#define TMPDIR_DEFAULT "/tmp"
-#define SCRIPT_SUFFIX ""
-#define get_default_editor() "vi"
-#define OS_SORT_CASE_SENSITIVE_DEFAULT 1
-#define STRCOMP strcmp
-#define STRNCOMP strncmp
-#define MC_ARCH_FLAGS 0
-
-/* taken from regex.c: */
-/* Jim Meyering writes:
-
-   "... Some ctype macros are valid only for character codes that
-   isascii says are ASCII (SGI's IRIX-4.0.5 is one such system --when
-   using /bin/cc or gcc but without giving an ansi option).  So, all
-   ctype uses should be through macros like ISPRINT...  If
-   STDC_HEADERS is defined, then autoconf has verified that the ctype
-   macros don't need to be guarded with references to isascii. ...
-   Defining isascii to 1 should let any compiler worth its salt
-   eliminate the && through constant folding."  */
-
-#if defined (STDC_HEADERS) || (!defined (isascii) && !defined (HAVE_ISASCII))
-#define ISASCII(c) 1
-#else
-#define ISASCII(c) isascii(c)
-#endif
-
-/* usage: str_cmp ("foo", !=, "bar") */
-#define str_cmp(a,rel,b) (strcmp ((a), (b)) rel 0)
-
 /* if ch is in [A-Za-z], returns the corresponding control character,
  * else returns the argument. */
 extern int ascii_alpha_to_cntrl (int ch);
@@ -273,7 +292,14 @@ extern int ascii_alpha_to_cntrl (int ch);
 #undef Q_
 const char *Q_ (const char *s);
 
-#define str_dup_range(s_start, s_bound) (g_strndup(s_start, s_bound - s_start))
+gboolean mc_util_make_backup_if_possible (const char *, const char *);
+gboolean mc_util_restore_from_backup_if_possible (const char *, const char *);
+gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
+
+char *guess_message_value (void);
+
+
+/*** inline functions **************************************************/
 
 /*
  * strcpy is unsafe on overlapping memory areas, so define memmove-alike
@@ -298,12 +324,5 @@ str_move (char *dest, const char *src)
     return (char *) memmove (dest, src, n);
 }
 
-gboolean mc_util_make_backup_if_possible (const char *, const char *);
-gboolean mc_util_restore_from_backup_if_possible (const char *, const char *);
-gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
-
-char *guess_message_value (void);
-
-#define MC_PTR_FREE(ptr) do { g_free (ptr); (ptr) = NULL; } while (0)
 
 #endif /* MC_UTIL_H */

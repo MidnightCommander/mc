@@ -1,10 +1,10 @@
 /* Color setup for NCurses screen library
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
    2007, 2008, 2009 Free Software Foundation, Inc.
-   
+
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2009.
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -33,7 +33,7 @@
 #include "lib/global.h"
 
 #include "tty-ncurses.h"
-#include "color.h"        /* variables */
+#include "color.h"              /* variables */
 #include "color-internal.h"
 
 /*** global variables ****************************************************************************/
@@ -67,7 +67,8 @@ mc_tty_color_save_attr_lib (int color_pair, int color_attr)
         return color_attr;
 
     key = g_try_new (int, 1);
-    if (key == NULL) {
+    if (key == NULL)
+    {
         g_free (attr);
         return color_attr;
     }
@@ -88,7 +89,7 @@ color_get_attr (int color_pair)
     int *fnd = NULL;
 
     if (mc_tty_color_color_pair_attrs != NULL)
-	fnd = (int *) g_hash_table_lookup (mc_tty_color_color_pair_attrs, (gpointer) & color_pair);
+        fnd = (int *) g_hash_table_lookup (mc_tty_color_color_pair_attrs, (gpointer) & color_pair);
     return (fnd != NULL) ? *fnd : 0;
 }
 
@@ -100,10 +101,10 @@ mc_tty_color_pair_init_special (tty_color_pair_t * mc_color_pair,
 {
     if (has_colors () && !mc_tty_color_disable)
         init_pair (mc_color_pair->pair_index,
-                    mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg1 | mask), bg1);
+                   mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg1 | mask), bg1);
     else
         init_pair (mc_color_pair->pair_index,
-                    mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg2 | mask), bg2);
+                   mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg2 | mask), bg2);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -115,7 +116,8 @@ tty_color_init_lib (gboolean disable, gboolean force)
 {
     (void) force;
 
-    if (has_colors () && !disable) {
+    if (has_colors () && !disable)
+    {
         use_colors = TRUE;
         start_color ();
         use_default_colors ();
@@ -139,8 +141,10 @@ tty_color_deinit_lib (void)
 void
 tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
 {
-    if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE) {
-        switch (mc_color_pair->ifg) {
+    if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
+    {
+        switch (mc_color_pair->ifg)
+        {
         case SPEC_A_REVERSE:
             mc_tty_color_pair_init_special (mc_color_pair,
                                             COLOR_BLACK, COLOR_WHITE,
@@ -162,7 +166,9 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
                                             COLOR_WHITE, COLOR_BLACK, A_UNDERLINE);
             break;
         }
-    } else {
+    }
+    else
+    {
         int mask_fg = (mc_color_pair->ifg == -1) ? mc_color_pair->ifg : 0xff;
         int mask_bg = (mc_color_pair->ibg == -1) ? mc_color_pair->ibg : 0xff;
 

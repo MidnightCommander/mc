@@ -4,9 +4,9 @@
    2005, 2006, 2007, 2009, 2010 Free Software Foundation, Inc.
 
    Written by: 1994, 1995 Miguel de Icaza.
-	       1994, 1995 Janne Kukonlehto.
-	       1995  Jakub Jelinek.
-	       1997  Norbert Warmuth
+   1994, 1995 Janne Kukonlehto.
+   1995  Jakub Jelinek.
+   1997  Norbert Warmuth
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -38,18 +38,18 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"  /* str_casecmp */
+#include "lib/strutil.h"        /* str_casecmp */
 
 #include "lib/vfs/mc-vfs/vfs.h"
 
 #include "tty.h"
-#include "tty-internal.h" /* mouse_enabled */
+#include "tty-internal.h"       /* mouse_enabled */
 #include "mouse.h"
 #include "key.h"
-#include "win.h"  /* xterm_flag */
+#include "win.h"                /* xterm_flag */
 
 #include "src/main.h"
-#include "src/layout.h"   /* winch_flag, mc_refresh() */
+#include "src/layout.h"         /* winch_flag, mc_refresh() */
 #include "src/consaver/cons.saver.h"
 
 
@@ -59,9 +59,9 @@
 
 #ifdef __linux__
 #if defined(__GLIBC__) && (__GLIBC__ < 2)
-#   include <linux/termios.h>   /* TIOCLINUX */
+#include <linux/termios.h>      /* TIOCLINUX */
 #else
-#   include <termios.h>
+#include <termios.h>
 #endif
 #include <sys/ioctl.h>
 #endif /* __linux__ */
@@ -77,7 +77,7 @@
 #include <sys/dcmd_chr.h>
 #endif /* __QNXNTO__ */
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
 /* If true, use + and \ keys normally and select/unselect do if M-+ / M-\.
    and M-- and keypad + / - */
@@ -94,137 +94,138 @@ int use_8th_bit_as_meta = 0;
  */
 const key_code_name_t key_name_conv_tab[] = {
     /* KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
-	to define f0 as well. Also, it makes Learn keys a bunch of problems :( */
-    { KEY_F (1),	"f1",		N_("Function key 1"),	"F1" },
-    { KEY_F (2),	"f2",		N_("Function key 2"),	"F2" },
-    { KEY_F (3),	"f3",		N_("Function key 3"),	"F3" },
-    { KEY_F (4),	"f4",		N_("Function key 4"),	"F4" },
-    { KEY_F (5),	"f5",		N_("Function key 5"),	"F5" },
-    { KEY_F (6),	"f6",		N_("Function key 6"),	"F6" },
-    { KEY_F (7),	"f7",		N_("Function key 7"),	"F7" },
-    { KEY_F (8),	"f8",		N_("Function key 8"),	"F8" },
-    { KEY_F (9),	"f9",		N_("Function key 9"),	"F9" },
-    { KEY_F (10),	"f10",		N_("Function key 10"),	"F10" },
-    { KEY_F (11),	"f11",		N_("Function key 11"),	"F11" },
-    { KEY_F (12),	"f12",		N_("Function key 12"),	"F12" },
-    { KEY_F (13),	"f13",		N_("Function key 13"),	"F13" },
-    { KEY_F (14),	"f14",		N_("Function key 14"),	"F14" },
-    { KEY_F (15),	"f15",		N_("Function key 15"),	"F15" },
-    { KEY_F (16),	"f16",		N_("Function key 16"),	"F16" },
-    { KEY_F (17),	"f17",		N_("Function key 17"),	"F17" },
-    { KEY_F (18),	"f18",		N_("Function key 18"),	"F18" },
-    { KEY_F (19),	"f19",		N_("Function key 19"),	"F19" },
-    { KEY_F (20),	"f20",		N_("Function key 20"),	"F20" },
-    { KEY_BACKSPACE,	"backspace",	N_("Backspace key"),	"Backspace" },
-    { KEY_END,		"end",		N_("End key"),		"End" },
-    { KEY_UP,		"up",		N_("Up arrow key"),	"Up" },
-    { KEY_DOWN,		"down",		N_("Down arrow key"),	"Down" },
-    { KEY_LEFT,		"left",		N_("Left arrow key"),	"Left" },
-    { KEY_RIGHT,	"right",	N_("Right arrow key"),	"Right" },
-    { KEY_HOME,		"home",		N_("Home key"),		"Home" },
-    { KEY_NPAGE,	"pgdn",		N_("Page Down key"),	"PgDn" },
-    { KEY_PPAGE,	"pgup",		N_("Page Up key"),	"PgUp" },
-    { KEY_IC,		"insert",	N_("Insert key"),	"Ins" },
-    { KEY_DC,		"delete",	N_("Delete key"),	"Del" },
-    { ALT ('\t'),	"complete",	N_("Completion/M-tab"),	"Meta-Tab" },
-    { KEY_KP_ADD,	"kpplus",	N_("+ on keypad"),	"+" },
-    { KEY_KP_SUBTRACT,	"kpminus",	N_("- on keypad"),	"-" },
-    { (int) '/',	"kpslash",	N_("Slash on keypad"),	"/" },
-    { KEY_KP_MULTIPLY,	"kpasterisk",	N_("* on keypad"),	"*" },
+       to define f0 as well. Also, it makes Learn keys a bunch of problems :( */
+    {KEY_F (1), "f1", N_("Function key 1"), "F1"},
+    {KEY_F (2), "f2", N_("Function key 2"), "F2"},
+    {KEY_F (3), "f3", N_("Function key 3"), "F3"},
+    {KEY_F (4), "f4", N_("Function key 4"), "F4"},
+    {KEY_F (5), "f5", N_("Function key 5"), "F5"},
+    {KEY_F (6), "f6", N_("Function key 6"), "F6"},
+    {KEY_F (7), "f7", N_("Function key 7"), "F7"},
+    {KEY_F (8), "f8", N_("Function key 8"), "F8"},
+    {KEY_F (9), "f9", N_("Function key 9"), "F9"},
+    {KEY_F (10), "f10", N_("Function key 10"), "F10"},
+    {KEY_F (11), "f11", N_("Function key 11"), "F11"},
+    {KEY_F (12), "f12", N_("Function key 12"), "F12"},
+    {KEY_F (13), "f13", N_("Function key 13"), "F13"},
+    {KEY_F (14), "f14", N_("Function key 14"), "F14"},
+    {KEY_F (15), "f15", N_("Function key 15"), "F15"},
+    {KEY_F (16), "f16", N_("Function key 16"), "F16"},
+    {KEY_F (17), "f17", N_("Function key 17"), "F17"},
+    {KEY_F (18), "f18", N_("Function key 18"), "F18"},
+    {KEY_F (19), "f19", N_("Function key 19"), "F19"},
+    {KEY_F (20), "f20", N_("Function key 20"), "F20"},
+    {KEY_BACKSPACE, "backspace", N_("Backspace key"), "Backspace"},
+    {KEY_END, "end", N_("End key"), "End"},
+    {KEY_UP, "up", N_("Up arrow key"), "Up"},
+    {KEY_DOWN, "down", N_("Down arrow key"), "Down"},
+    {KEY_LEFT, "left", N_("Left arrow key"), "Left"},
+    {KEY_RIGHT, "right", N_("Right arrow key"), "Right"},
+    {KEY_HOME, "home", N_("Home key"), "Home"},
+    {KEY_NPAGE, "pgdn", N_("Page Down key"), "PgDn"},
+    {KEY_PPAGE, "pgup", N_("Page Up key"), "PgUp"},
+    {KEY_IC, "insert", N_("Insert key"), "Ins"},
+    {KEY_DC, "delete", N_("Delete key"), "Del"},
+    {ALT ('\t'), "complete", N_("Completion/M-tab"), "Meta-Tab"},
+    {KEY_KP_ADD, "kpplus", N_("+ on keypad"), "+"},
+    {KEY_KP_SUBTRACT, "kpminus", N_("- on keypad"), "-"},
+    {(int) '/', "kpslash", N_("Slash on keypad"), "/"},
+    {KEY_KP_MULTIPLY, "kpasterisk", N_("* on keypad"), "*"},
 
     /* From here on, these won't be shown in Learn keys (no space) */
-    { ESC_CHAR,		"escape",	N_("Escape key"),		"Esc" },
-    { KEY_LEFT,		"kpleft",	N_("Left arrow keypad"),	"Left" },
-    { KEY_RIGHT,	"kpright",	N_("Right arrow keypad"),	"Right" },
-    { KEY_UP,		"kpup",		N_("Up arrow keypad"),		"Up" },
-    { KEY_DOWN,		"kpdown",	N_("Down arrow keypad"),	"Down" },
-    { KEY_HOME,		"kphome",	N_("Home on keypad"),		"Home" },
-    { KEY_END,		"kpend",	N_("End on keypad"),		"End" },
-    { KEY_NPAGE,	"kpnpage",	N_("Page Down keypad"),		"PgDn" },
-    { KEY_PPAGE,	"kpppage",	N_("Page Up keypad"),		"PgUp" },
-    { KEY_IC,		"kpinsert",	N_("Insert on keypad"),		"Ins" },
-    { KEY_DC,		"kpdelete",	N_("Delete on keypad"),		"Del" },
-    { (int) '\n',	"kpenter",	N_("Enter on keypad"),		"Enter" },
-    { KEY_F (21),	"f21",		N_("Function key 21"),		"F21" },
-    { KEY_F (22),	"f22",		N_("Function key 22"),		"F22" },
-    { KEY_F (23),	"f23",		N_("Function key 23"),		"F23" },
-    { KEY_F (24),	"f24",		N_("Function key 24"),		"F24" },
-    { KEY_A1,		"a1",		N_("A1 key"),			"A1" },
-    { KEY_C1,		"c1",		N_("C1 key"),			"C1" },
+    {ESC_CHAR, "escape", N_("Escape key"), "Esc"},
+    {KEY_LEFT, "kpleft", N_("Left arrow keypad"), "Left"},
+    {KEY_RIGHT, "kpright", N_("Right arrow keypad"), "Right"},
+    {KEY_UP, "kpup", N_("Up arrow keypad"), "Up"},
+    {KEY_DOWN, "kpdown", N_("Down arrow keypad"), "Down"},
+    {KEY_HOME, "kphome", N_("Home on keypad"), "Home"},
+    {KEY_END, "kpend", N_("End on keypad"), "End"},
+    {KEY_NPAGE, "kpnpage", N_("Page Down keypad"), "PgDn"},
+    {KEY_PPAGE, "kpppage", N_("Page Up keypad"), "PgUp"},
+    {KEY_IC, "kpinsert", N_("Insert on keypad"), "Ins"},
+    {KEY_DC, "kpdelete", N_("Delete on keypad"), "Del"},
+    {(int) '\n', "kpenter", N_("Enter on keypad"), "Enter"},
+    {KEY_F (21), "f21", N_("Function key 21"), "F21"},
+    {KEY_F (22), "f22", N_("Function key 22"), "F22"},
+    {KEY_F (23), "f23", N_("Function key 23"), "F23"},
+    {KEY_F (24), "f24", N_("Function key 24"), "F24"},
+    {KEY_A1, "a1", N_("A1 key"), "A1"},
+    {KEY_C1, "c1", N_("C1 key"), "C1"},
 
     /* Alternative label */
-    { ESC_CHAR,		"esc",		N_("Escape key"),	"Esc" },
-    { KEY_BACKSPACE,	"bs",		N_("Backspace key"),	"Bakspace" },
-    { KEY_IC,		"ins",		N_("Insert key"),	"Ins" },
-    { KEY_DC,		"del",		N_("Delete key"),	"Del" },
-    { (int) '+',	"plus",		N_("Plus"),		"+" },
-    { (int) '-',	"minus",	N_("Minus"),		"-" },
-    { (int) '*',	"asterisk",	N_("Asterisk"),		"*" },
-    { (int) '.',	"dot",		N_("Dot"),		"." },
-    { (int) '<',	"lt",		N_("Less than"),	"<" },
-    { (int) '>',	"gt",		N_("Great than"),	">" },
-    { (int) '=',	"equal",	N_("Equal"),		"=" },
-    { (int) ',',	"comma",	N_("Comma"),		"," },
-    { (int) '\'',	"apostrophe",	N_("Apostrophe"),	"\'" },
-    { (int) ':',	"colon",	N_("Colon"),		":" },
-    { (int) '!',	"exclamation",	N_("Exclamation mark"),	"!" },
-    { (int) '?',	"question",	N_("Question mark"),	"?" },
-    { (int) '&',	"ampersand",	N_("Ampersand"),	"&" },
-    { (int) '$',	"dollar",	N_("Dollar sign"),	"$" },
-    { (int) '"',	"quota",	N_("Quotation mark"),	"\"" },
-    { (int) '^',	"caret",	N_("Caret"),		"^" },
-    { (int) '~',	"tilda",	N_("Tilda"),		"~" },
-    { (int) '`',	"prime",	N_("Prime"),		"`" },
-    { (int) '_',	"underline",	N_("Underline"),	"_" },
-    { (int) '_',	"understrike",	N_("Understrike"),	"_" },
-    { (int) '|',	"pipe",		N_("Pipe"),		"|" },
-    { (int) '(',	"lparenthesis",	N_("Left parenthesis"),	"(" },
-    { (int) ')',	"rparenthesis",	N_("Right parenthesis"),	")" },
-    { (int) '[',	"lbracket",	N_("Left bracket"),	"[" },
-    { (int) ']',	"rbracket",	N_("Right bracket"),	"]" },
-    { (int) '{',	"lbrace",	N_("Left brace"),	"{" },
-    { (int) '}',	"rbrace",	N_("Right brace"),	"}" },
-    { (int) '\n',	"enter",	N_("Enter"),		"Enter" },
-    { (int) '\t',	"tab",		N_("Tab key"),		"Tab" },
-    { (int) ' ',	"space",	N_("Space key"),	"Space" },
-    { (int) '/',	"slash",	N_("Slash key"),	"/" },
-    { (int) '\\',	"backslash",	N_("Backslash key"),	"\\" },
-    { (int) '#',	"number",	N_("Number sign #"),	"#" },
-    { (int) '#',	"hash",		N_("Number sign #"),	"#" },
+    {ESC_CHAR, "esc", N_("Escape key"), "Esc"},
+    {KEY_BACKSPACE, "bs", N_("Backspace key"), "Bakspace"},
+    {KEY_IC, "ins", N_("Insert key"), "Ins"},
+    {KEY_DC, "del", N_("Delete key"), "Del"},
+    {(int) '+', "plus", N_("Plus"), "+"},
+    {(int) '-', "minus", N_("Minus"), "-"},
+    {(int) '*', "asterisk", N_("Asterisk"), "*"},
+    {(int) '.', "dot", N_("Dot"), "."},
+    {(int) '<', "lt", N_("Less than"), "<"},
+    {(int) '>', "gt", N_("Great than"), ">"},
+    {(int) '=', "equal", N_("Equal"), "="},
+    {(int) ',', "comma", N_("Comma"), ","},
+    {(int) '\'', "apostrophe", N_("Apostrophe"), "\'"},
+    {(int) ':', "colon", N_("Colon"), ":"},
+    {(int) '!', "exclamation", N_("Exclamation mark"), "!"},
+    {(int) '?', "question", N_("Question mark"), "?"},
+    {(int) '&', "ampersand", N_("Ampersand"), "&"},
+    {(int) '$', "dollar", N_("Dollar sign"), "$"},
+    {(int) '"', "quota", N_("Quotation mark"), "\""},
+    {(int) '^', "caret", N_("Caret"), "^"},
+    {(int) '~', "tilda", N_("Tilda"), "~"},
+    {(int) '`', "prime", N_("Prime"), "`"},
+    {(int) '_', "underline", N_("Underline"), "_"},
+    {(int) '_', "understrike", N_("Understrike"), "_"},
+    {(int) '|', "pipe", N_("Pipe"), "|"},
+    {(int) '(', "lparenthesis", N_("Left parenthesis"), "("},
+    {(int) ')', "rparenthesis", N_("Right parenthesis"), ")"},
+    {(int) '[', "lbracket", N_("Left bracket"), "["},
+    {(int) ']', "rbracket", N_("Right bracket"), "]"},
+    {(int) '{', "lbrace", N_("Left brace"), "{"},
+    {(int) '}', "rbrace", N_("Right brace"), "}"},
+    {(int) '\n', "enter", N_("Enter"), "Enter"},
+    {(int) '\t', "tab", N_("Tab key"), "Tab"},
+    {(int) ' ', "space", N_("Space key"), "Space"},
+    {(int) '/', "slash", N_("Slash key"), "/"},
+    {(int) '\\', "backslash", N_("Backslash key"), "\\"},
+    {(int) '#', "number", N_("Number sign #"), "#"},
+    {(int) '#', "hash", N_("Number sign #"), "#"},
     /* TRANSLATORS: Please translate as in "at sign" (@). */
-    { (int) '@',	"at",		N_("At sign"),		"@" },
+    {(int) '@', "at", N_("At sign"), "@"},
 
     /* meta keys */
-    { KEY_M_CTRL,	"control",	N_("Ctrl"),	"C" },
-    { KEY_M_CTRL,	"ctrl",		N_("Ctrl"),	"C" },
-    { KEY_M_ALT,	"meta",		N_("Alt"),	"M" },
-    { KEY_M_ALT,	"alt",		N_("Alt"),	"M" },
-    { KEY_M_ALT,	"ralt",		N_("Alt"),	"M" },
-    { KEY_M_SHIFT,	"shift",	N_("Shift"),	"S" },
+    {KEY_M_CTRL, "control", N_("Ctrl"), "C"},
+    {KEY_M_CTRL, "ctrl", N_("Ctrl"), "C"},
+    {KEY_M_ALT, "meta", N_("Alt"), "M"},
+    {KEY_M_ALT, "alt", N_("Alt"), "M"},
+    {KEY_M_ALT, "ralt", N_("Alt"), "M"},
+    {KEY_M_SHIFT, "shift", N_("Shift"), "S"},
 
-    { 0, NULL, NULL, NULL }
+    {0, NULL, NULL, NULL}
 };
 
+/*** file scope macro definitions ****************************************************************/
 
-/*** file scope macro definitions **************************************/
-
-#define GET_TIME(tv)		(gettimeofday(&tv, (struct timezone *) NULL))
-#define DIF_TIME(t1, t2)	((t2.tv_sec  - t1.tv_sec) * 1000 + (t2.tv_usec - t1.tv_usec)/1000)
+#define GET_TIME(tv)     (gettimeofday(&tv, (struct timezone *) NULL))
+#define DIF_TIME(t1, t2) ((t2.tv_sec  - t1.tv_sec) * 1000 + (t2.tv_usec - t1.tv_usec)/1000)
 
 /* The maximum sequence length (32 + null terminator) */
 #define SEQ_BUFFER_LEN 33
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
 /* Linux console keyboard modifiers */
-typedef enum {
+typedef enum
+{
     SHIFT_PRESSED = (1 << 0),
     ALTR_PRESSED = (1 << 1),
     CONTROL_PRESSED = (1 << 2),
     ALTL_PRESSED = (1 << 3)
 } mod_pressed_t;
 
-typedef struct key_def {
+typedef struct key_def
+{
     char ch;                    /* Holds the matching char code */
     int code;                   /* The code returned, valid if child == NULL */
     struct key_def *next;
@@ -234,14 +235,16 @@ typedef struct key_def {
                                    Escape */
 } key_def;
 
-typedef struct {
+typedef struct
+{
     int code;
     const char *seq;
     int action;
 } key_define_t;
 
 /* File descriptor monitoring add/remove routines */
-typedef struct SelectList {
+typedef struct SelectList
+{
     int fd;
     select_fn callback;
     void *info;
@@ -254,7 +257,7 @@ typedef int (*ph_ov_f) (void *);
 typedef int (*ph_pqc_f) (unsigned short, PhCursorInfo_t *);
 #endif
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
 static key_define_t mc_default_keys[] = {
     {ESC_CHAR, ESC_STR, MCKEY_ESCAPE},
@@ -495,7 +498,7 @@ static key_define_t qansi_key_defines[] = {
 };
 
 /* timeout for old_esc_mode in usec */
-int old_esc_mode_timeout = 1000000;      /* settable via env */
+int old_esc_mode_timeout = 1000000;     /* settable via env */
 
 /* This holds all the key definitions */
 static key_def *keys = NULL;
@@ -521,17 +524,26 @@ static Display *x11_display;
 static Window x11_window;
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */
 
-/*** file scope functions **********************************************/
+static const size_t key_name_conv_tab_size = sizeof (key_name_conv_tab) /
+    sizeof (key_name_conv_tab[0]) - 1;
+
+static const key_code_name_t *key_name_conv_tab_sorted[sizeof (key_name_conv_tab) /
+                                                       sizeof (key_name_conv_tab[0]) - 1];
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 add_selects (fd_set * select_set)
 {
     int top_fd = 0;
 
-    if (disabled_channels == 0) {
+    if (disabled_channels == 0)
+    {
         SelectList *p;
 
-        for (p = select_list; p != NULL; p = p->next) {
+        for (p = select_list; p != NULL; p = p->next)
+        {
             FD_SET (p->fd, select_set);
             if (p->fd > top_fd)
                 top_fd = p->fd;
@@ -541,28 +553,36 @@ add_selects (fd_set * select_set)
     return top_fd;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 check_selects (fd_set * select_set)
 {
-    if (disabled_channels == 0) {
+    if (disabled_channels == 0)
+    {
         gboolean retry;
 
-        do {
+        do
+        {
             SelectList *p;
 
             retry = FALSE;
             for (p = select_list; p; p = p->next)
-                if (FD_ISSET (p->fd, select_set)) {
+                if (FD_ISSET (p->fd, select_set))
+                {
                     FD_CLR (p->fd, select_set);
                     (*p->callback) (p->fd, p->info);
                     retry = TRUE;
                     break;
                 }
-        } while (retry);
+        }
+        while (retry);
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* If set timeout is set, then we wait 0.1 seconds, else, we block */
+
 static void
 try_channels (int set_timeout)
 {
@@ -572,20 +592,23 @@ try_channels (int set_timeout)
     int v;
     int maxfdp;
 
-    while (1) {
+    while (1)
+    {
         FD_ZERO (&select_set);
         FD_SET (input_fd, &select_set); /* Add stdin */
         maxfdp = max (add_selects (&select_set), input_fd);
 
         timeptr = NULL;
-        if (set_timeout) {
+        if (set_timeout)
+        {
             time_out.tv_sec = 0;
             time_out.tv_usec = 100000;
             timeptr = &time_out;
         }
 
         v = select (maxfdp + 1, &select_set, NULL, NULL, timeptr);
-        if (v > 0) {
+        if (v > 0)
+        {
             check_selects (&select_set);
             if (FD_ISSET (input_fd, &select_set))
                 break;
@@ -593,12 +616,15 @@ try_channels (int set_timeout)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static key_def *
 create_sequence (const char *seq, int code, int action)
 {
     key_def *base, *p, *attach;
 
-    for (base = attach = NULL; *seq; seq++) {
+    for (base = attach = NULL; *seq; seq++)
+    {
         p = g_new (key_def, 1);
         if (base == NULL)
             base = p;
@@ -617,6 +643,8 @@ create_sequence (const char *seq, int code, int action)
     return base;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 define_sequences (const key_define_t * kd)
 {
@@ -626,11 +654,14 @@ define_sequences (const key_define_t * kd)
         define_sequence (kd[i].code, kd[i].seq, kd[i].action);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 init_key_x11 (void)
 {
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (getenv ("DISPLAY") != NULL) {
+    if (getenv ("DISPLAY") != NULL)
+    {
         x11_display = mc_XOpenDisplay (0);
 
         if (x11_display != NULL)
@@ -639,7 +670,9 @@ init_key_x11 (void)
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Workaround for System V Curses vt100 bug */
+
 static int
 getch_with_delay (void)
 {
@@ -647,7 +680,8 @@ getch_with_delay (void)
 
     /* This routine could be used on systems without mouse support,
        so we need to do the select check :-( */
-    while (1) {
+    while (1)
+    {
         if (pending_keys == NULL)
             try_channels (0);
 
@@ -661,6 +695,8 @@ getch_with_delay (void)
     /* Success -> return the character */
     return c;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 xmouse_get_event (Gpm_Event * ev)
@@ -680,41 +716,55 @@ xmouse_get_event (Gpm_Event * ev)
     /* There seems to be no way of knowing which button was released */
     /* So we assume all the buttons were released */
 
-    if (btn == 3) {
-        if (last_btn != 0) {
-            if ((last_btn & (GPM_B_UP | GPM_B_DOWN)) != 0) {
+    if (btn == 3)
+    {
+        if (last_btn != 0)
+        {
+            if ((last_btn & (GPM_B_UP | GPM_B_DOWN)) != 0)
+            {
                 /* FIXME: DIRTY HACK */
                 /* don't generate GPM_UP after mouse wheel */
                 /* need for menu event handling */
                 ev->type = 0;
                 tv1.tv_sec = 0;
                 tv1.tv_usec = 0;
-            } else {
+            }
+            else
+            {
                 ev->type = GPM_UP | (GPM_SINGLE << clicks);
                 GET_TIME (tv1);
             }
             ev->buttons = 0;
             last_btn = 0;
             clicks = 0;
-        } else {
+        }
+        else
+        {
             /* Bogus event, maybe mouse wheel */
             ev->type = 0;
         }
-    } else {
-        if (btn >= 32 && btn <= 34) {
+    }
+    else
+    {
+        if (btn >= 32 && btn <= 34)
+        {
             btn -= 32;
             ev->type = GPM_DRAG;
-        } else
+        }
+        else
             ev->type = GPM_DOWN;
 
         GET_TIME (tv2);
-        if (tv1.tv_sec && (DIF_TIME (tv1, tv2) < double_click_speed)) {
+        if (tv1.tv_sec && (DIF_TIME (tv1, tv2) < double_click_speed))
+        {
             clicks++;
             clicks %= 3;
-        } else
+        }
+        else
             clicks = 0;
 
-        switch (btn) {
+        switch (btn)
+        {
         case 0:
             ev->buttons = GPM_B_LEFT;
             break;
@@ -746,13 +796,15 @@ xmouse_get_event (Gpm_Event * ev)
     ev->y = tty_lowlevel_getch () - 32;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Get modifier state (shift, alt, ctrl) for the last key pressed.
  * We are assuming that the state didn't change since the key press.
  * This is only correct if get_modifier() is called very fast after
  * the input was received, so that the user didn't release the
  * modifier keys yet.
  */
+
 static int
 get_modifier (void)
 {
@@ -765,7 +817,8 @@ get_modifier (void)
 #endif /* __QNXNTO__ */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (x11_window != 0) {
+    if (x11_window != 0)
+    {
         Window root, child;
         int root_x, root_y;
         int win_x, win_y;
@@ -783,20 +836,24 @@ get_modifier (void)
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */
 #ifdef __QNXNTO__
 
-    if (in_photon == 0) {
+    if (in_photon == 0)
+    {
         /* First time here, let's load Photon library and attach
            to Photon */
         in_photon = -1;
-        if (getenv ("PHOTON2_PATH") != NULL) {
+        if (getenv ("PHOTON2_PATH") != NULL)
+        {
             /* QNX 6.x has no support for RTLD_LAZY */
             void *ph_handle = dlopen ("/usr/lib/libph.so", RTLD_NOW);
-            if (ph_handle != NULL) {
+            if (ph_handle != NULL)
+            {
                 ph_attach = (ph_dv_f) dlsym (ph_handle, "PhAttach");
                 ph_input_group = (ph_ov_f) dlsym (ph_handle, "PhInputGroup");
                 ph_query_cursor = (ph_pqc_f) dlsym (ph_handle, "PhQueryCursor");
-                if ((ph_attach != NULL) && (ph_input_group != NULL)
-                    && (ph_query_cursor != NULL)) {
-                    if ((*ph_attach) (0, 0)) {  /* Attached */
+                if ((ph_attach != NULL) && (ph_input_group != NULL) && (ph_query_cursor != NULL))
+                {
+                    if ((*ph_attach) (0, 0))
+                    {           /* Attached */
                         ph_ig = (*ph_input_group) (0);
                         in_photon = 1;
                     }
@@ -806,7 +863,8 @@ get_modifier (void)
     }
     /* We do not have Photon running. Assume we are in text
        console or xterm */
-    if (in_photon == -1) {
+    if (in_photon == -1)
+    {
         if (devctl (fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (int), NULL) == -1)
             return 0;
         shift_ext_status = mod_status & 0xffffff00UL;
@@ -815,10 +873,11 @@ get_modifier (void)
             result |= KEY_M_ALT;
         if (mod_status & _LINESTATUS_CON_CTRL)
             result |= KEY_M_CTRL;
-        if ((mod_status & _LINESTATUS_CON_SHIFT)
-            || (shift_ext_status & 0x00000800UL))
+        if ((mod_status & _LINESTATUS_CON_SHIFT) || (shift_ext_status & 0x00000800UL))
             result |= KEY_M_SHIFT;
-    } else {
+    }
+    else
+    {
         (*ph_query_cursor) (ph_ig, &cursor_info);
         if (cursor_info.key_mods & 0x04)
             result |= KEY_M_ALT;
@@ -848,6 +907,8 @@ get_modifier (void)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 push_char (int c)
 {
@@ -856,7 +917,8 @@ push_char (int c)
     if (seq_append == NULL)
         seq_append = seq_buffer;
 
-    if (seq_append != &(seq_buffer[SEQ_BUFFER_LEN - 2])) {
+    if (seq_append != &(seq_buffer[SEQ_BUFFER_LEN - 2]))
+    {
         *(seq_append++) = c;
         *seq_append = 0;
         ret = TRUE;
@@ -865,7 +927,9 @@ push_char (int c)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Apply corrections for the keycode generated in get_key_code() */
+
 static int
 correct_key_code (int code)
 {
@@ -880,7 +944,8 @@ correct_key_code (int code)
      * Add key modifiers directly from X11 or OS.
      * Ordinary characters only get modifiers from sequences.
      */
-    if (c < 32 || c >= 256) {
+    if (c < 32 || c >= 256)
+    {
         mod |= get_modifier ();
     }
 
@@ -893,7 +958,8 @@ correct_key_code (int code)
         c = '\t';
 
     /* Convert Shift+Tab and Ctrl+Tab to Back Tab */
-    if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL))) {
+    if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL)))
+    {
         c = KEY_BTAB;
         mod = 0;
     }
@@ -908,26 +974,32 @@ correct_key_code (int code)
      * XCTRL macro should be used.  In some cases, we are interested,
      * e.g. to distinguish Ctrl-Enter from Enter.
      */
-    if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n') {
+    if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n')
+    {
         mod |= KEY_M_CTRL;
     }
 #ifdef __QNXNTO__
     qmod = get_modifier ();
 
-    if ((c == 127) && (mod == 0)) {     /* Add Ctrl/Alt/Shift-BackSpace */
+    if ((c == 127) && (mod == 0))
+    {                           /* Add Ctrl/Alt/Shift-BackSpace */
         mod |= get_modifier ();
         c = KEY_BACKSPACE;
     }
 
-    if ((c == '0') && (mod == 0)) {     /* Add Shift-Insert on key pad */
-        if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT) {
+    if ((c == '0') && (mod == 0))
+    {                           /* Add Shift-Insert on key pad */
+        if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
+        {
             mod = KEY_M_SHIFT;
             c = KEY_IC;
         }
     }
 
-    if ((c == '.') && (mod == 0)) {     /* Add Shift-Del on key pad */
-        if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT) {
+    if ((c == '.') && (mod == 0))
+    {                           /* Add Shift-Del on key pad */
+        if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
+        {
             mod = KEY_M_SHIFT;
             c = KEY_DC;
         }
@@ -935,39 +1007,46 @@ correct_key_code (int code)
 #endif /* __QNXNTO__ */
 
     /* Unrecognized 0177 is delete (preserve Ctrl) */
-    if (c == 0177) {
+    if (c == 0177)
+    {
         c = KEY_BACKSPACE;
     }
 
     /* Unrecognized Ctrl-d is delete */
-    if (c == (31 & 'd')) {
+    if (c == (31 & 'd'))
+    {
         c = KEY_DC;
         mod &= ~KEY_M_CTRL;
     }
 
     /* Unrecognized Ctrl-h is backspace */
-    if (c == (31 & 'h')) {
+    if (c == (31 & 'h'))
+    {
         c = KEY_BACKSPACE;
         mod &= ~KEY_M_CTRL;
     }
 
     /* Shift+BackSpace is backspace */
-    if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT)) {
+    if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT))
+    {
         mod &= ~KEY_M_SHIFT;
     }
 
     /* Convert Shift+Fn to F(n+10) */
-    if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT)) {
+    if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT))
+    {
         c += 10;
     }
 
     /* Remove Shift information from function keys */
-    if (c >= KEY_F (1) && c <= KEY_F (20)) {
+    if (c >= KEY_F (1) && c <= KEY_F (20))
+    {
         mod &= ~KEY_M_SHIFT;
     }
 
     if (!alternate_plus_minus)
-        switch (c) {
+        switch (c)
+        {
         case KEY_KP_ADD:
             c = '+';
             break;
@@ -981,6 +1060,8 @@ correct_key_code (int code)
 
     return (mod | c);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 xgetch_second (void)
@@ -1000,47 +1081,128 @@ xgetch_second (void)
     return c;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 learn_store_key (char *buffer, char **p, int c)
 {
     if (*p - buffer > 253)
         return;
-    if (c == ESC_CHAR) {
+    if (c == ESC_CHAR)
+    {
         *(*p)++ = '\\';
         *(*p)++ = 'e';
-    } else if (c < ' ') {
+    }
+    else if (c < ' ')
+    {
         *(*p)++ = '^';
         *(*p)++ = c + 'a' - 1;
-    } else if (c == '^') {
+    }
+    else if (c == '^')
+    {
         *(*p)++ = '^';
         *(*p)++ = '^';
-    } else
+    }
+    else
         *(*p)++ = (char) c;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 k_dispose (key_def * k)
 {
-    if (k != NULL) {
+    if (k != NULL)
+    {
         k_dispose (k->child);
         k_dispose (k->next);
         g_free (k);
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 s_dispose (SelectList * sel)
 {
-    if (sel != NULL) {
+    if (sel != NULL)
+    {
         s_dispose (sel->next);
         g_free (sel);
     }
 }
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
+static int
+key_code_name_comparator (const void *p1, const void *p2)
+{
+    const key_code_name_t *n1 = *(const key_code_name_t **) p1;
+    const key_code_name_t *n2 = *(const key_code_name_t **) p2;
+
+    return str_casecmp (n1->name, n2->name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+sort_key_name_conv_tab (void)
+{
+    static gboolean has_been_sorted = FALSE;
+
+    if (!has_been_sorted)
+    {
+        size_t i;
+        for (i = 0; i < key_name_conv_tab_size; i++)
+            key_name_conv_tab_sorted[i] = &key_name_conv_tab[i];
+
+        qsort (key_name_conv_tab_sorted,
+               key_name_conv_tab_size, sizeof (key_name_conv_tab_sorted[0]),
+               &key_code_name_comparator);
+        has_been_sorted = TRUE;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+lookup_keyname (const char *name, int *idx)
+{
+    if (name[0] != '\0')
+    {
+        const key_code_name_t key = { 0, name, NULL, NULL };
+        const key_code_name_t *keyp = &key;
+        key_code_name_t **res;
+
+        if (name[1] == '\0')
+        {
+            *idx = -1;
+            return (int) name[0];
+        }
+
+        sort_key_name_conv_tab ();
+
+        res = bsearch (&keyp, key_name_conv_tab_sorted,
+                       key_name_conv_tab_size,
+                       sizeof (key_name_conv_tab_sorted[0]), key_code_name_comparator);
+
+        if (res != NULL)
+        {
+            *idx = (int) (res - (key_code_name_t **) key_name_conv_tab_sorted);
+            return (*res)->code;
+        }
+    }
+
+    *idx = -1;
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 /* This has to be called before init_slang or whatever routine
    calls any define_sequence */
+
 void
 init_key (void)
 {
@@ -1062,7 +1224,8 @@ init_key (void)
     load_xtra_key_defines ();
 
 #ifdef __QNX__
-    if ((term != NULL) && (strncmp (term, "qnx", 3) == 0)) {
+    if ((term != NULL) && (strncmp (term, "qnx", 3) == 0))
+    {
         /* Modify the default value of use_8th_bit_as_meta: we would
          * like to provide a working mc for a newbie who knows nothing
          * about [Options|Display bits|Full 8 bits input]...
@@ -1088,7 +1251,11 @@ init_key (void)
         define_sequences (qansi_key_defines);
 }
 
-/* This has to be called after SLang_init_tty/slint_init */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * This has to be called after SLang_init_tty/slint_init
+ */
+
 void
 init_key_input_fd (void)
 {
@@ -1096,6 +1263,8 @@ init_key_input_fd (void)
     input_fd = SLang_TT_Read_FD;
 #endif
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 done_key (void)
@@ -1108,6 +1277,8 @@ done_key (void)
         mc_XCloseDisplay (x11_display);
 #endif
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 add_select_channel (int fd, select_fn callback, void *info)
@@ -1122,6 +1293,8 @@ add_select_channel (int fd, select_fn callback, void *info)
     select_list = new;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 delete_select_channel (int fd)
 {
@@ -1130,7 +1303,8 @@ delete_select_channel (int fd)
     SelectList *p_next;
 
     while (p != NULL)
-        if (p->fd == fd) {
+        if (p->fd == fd)
+        {
             p_next = p->next;
 
             if (p_prev != NULL)
@@ -1140,11 +1314,15 @@ delete_select_channel (int fd)
 
             g_free (p);
             p = p_next;
-        } else {
+        }
+        else
+        {
             p_prev = p;
             p = p->next;
         }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 channels_up (void)
@@ -1154,74 +1332,19 @@ channels_up (void)
     disabled_channels--;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 channels_down (void)
 {
     disabled_channels++;
 }
 
-static const size_t key_name_conv_tab_size = sizeof (key_name_conv_tab) /
-						sizeof (key_name_conv_tab[0]) - 1;
-static const key_code_name_t *key_name_conv_tab_sorted[sizeof (key_name_conv_tab) /
-						sizeof (key_name_conv_tab[0]) - 1];
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Return the code associated with the symbolic name keyname
+ */
 
-static int
-key_code_name_comparator (const void *p1, const void *p2)
-{
-    const key_code_name_t *n1 = *(const key_code_name_t **) p1;
-    const key_code_name_t *n2 = *(const key_code_name_t **) p2;
-
-    return str_casecmp (n1->name, n2->name);
-}
-
-static inline void
-sort_key_name_conv_tab (void)
-{
-    static gboolean has_been_sorted = FALSE;
-
-    if (!has_been_sorted) {
-	size_t i;
-	for (i = 0; i < key_name_conv_tab_size; i++)
-	    key_name_conv_tab_sorted[i] = &key_name_conv_tab[i];
-
-	qsort (key_name_conv_tab_sorted,
-		key_name_conv_tab_size, sizeof (key_name_conv_tab_sorted[0]),
-		&key_code_name_comparator);
-	has_been_sorted = TRUE;
-    }
-}
-
-static int
-lookup_keyname (const char *name, int *idx)
-{
-    if (name[0] != '\0') {
-	const key_code_name_t key = { 0, name, NULL, NULL };
-	const key_code_name_t *keyp = &key;
-	key_code_name_t **res;
-
-	if (name[1] == '\0') {
-	    *idx = -1;
-	    return (int) name[0];
-	}
-
-	sort_key_name_conv_tab ();
-
-	res = bsearch (&keyp, key_name_conv_tab_sorted,
-			    key_name_conv_tab_size,
-			    sizeof (key_name_conv_tab_sorted[0]),
-			    key_code_name_comparator);
-
-	if (res != NULL) {
-	    *idx = (int) (res - (key_code_name_t **) key_name_conv_tab_sorted);
-	    return (*res)->code;
-	}
-    }
-
-    *idx = -1;
-    return 0;
-}
-
-/* Return the code associated with the symbolic name keyname */
 long
 lookup_key (const char *name, char **label)
 {
@@ -1235,84 +1358,97 @@ lookup_key (const char *name, char **label)
     int use_shift = -1;
 
     if (name == NULL)
-	return 0;
+        return 0;
 
     name = g_strstrip (g_strdup (name));
     p = lc_keys = g_strsplit_set (name, "-+ ", -1);
     g_free ((char *) name);
 
-    while ((p != NULL) && (*p != NULL)) {
-	if ((*p)[0] != '\0') {
-	    int idx;
+    while ((p != NULL) && (*p != NULL))
+    {
+        if ((*p)[0] != '\0')
+        {
+            int idx;
 
-	    key = lookup_keyname (g_strstrip (*p), &idx);
+            key = lookup_keyname (g_strstrip (*p), &idx);
 
-	    if (key == KEY_M_ALT)
-		use_meta = idx;
-	    else if (key == KEY_M_CTRL)
-		use_ctrl = idx;
-	    else if (key == KEY_M_SHIFT)
-		use_shift = idx;
-	    else {
-		k = key;
-		lc_index = idx;
-		break;
-	    }
-	}
+            if (key == KEY_M_ALT)
+                use_meta = idx;
+            else if (key == KEY_M_CTRL)
+                use_ctrl = idx;
+            else if (key == KEY_M_SHIFT)
+                use_shift = idx;
+            else
+            {
+                k = key;
+                lc_index = idx;
+                break;
+            }
+        }
 
-	p++;
+        p++;
     }
 
     g_strfreev (lc_keys);
 
     /* output */
     if (k <= 0)
-	return 0;
+        return 0;
 
 
-    if (label != NULL) {
-	GString *s;
+    if (label != NULL)
+    {
+        GString *s;
 
-	s = g_string_new ("");
+        s = g_string_new ("");
 
-	if (use_meta != -1) {
-	    g_string_append (s, key_name_conv_tab_sorted[use_meta]->shortcut);
-	    g_string_append_c (s, '-');
-	}
-	if (use_ctrl != -1) {
-	    g_string_append (s, key_name_conv_tab_sorted[use_ctrl]->shortcut);
-	    g_string_append_c (s, '-');
-	}
-	if (use_shift != -1) {
-	    if (k < 127)
-		g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
-	    else {
-		g_string_append (s, key_name_conv_tab_sorted[use_shift]->shortcut);
-		g_string_append_c (s, '-');
-		g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
-	    }
-	} else if (k < 128) {
-	    if ((k >= 'A') || (lc_index < 0)
-		|| (key_name_conv_tab_sorted[lc_index]->shortcut == NULL))
-		g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) k));
-	    else
-		g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
-	} else if ((lc_index != -1) && (key_name_conv_tab_sorted[lc_index]->shortcut != NULL))
-	    g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
-	else
-	    g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) key));
+        if (use_meta != -1)
+        {
+            g_string_append (s, key_name_conv_tab_sorted[use_meta]->shortcut);
+            g_string_append_c (s, '-');
+        }
+        if (use_ctrl != -1)
+        {
+            g_string_append (s, key_name_conv_tab_sorted[use_ctrl]->shortcut);
+            g_string_append_c (s, '-');
+        }
+        if (use_shift != -1)
+        {
+            if (k < 127)
+                g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
+            else
+            {
+                g_string_append (s, key_name_conv_tab_sorted[use_shift]->shortcut);
+                g_string_append_c (s, '-');
+                g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
+            }
+        }
+        else if (k < 128)
+        {
+            if ((k >= 'A') || (lc_index < 0)
+                || (key_name_conv_tab_sorted[lc_index]->shortcut == NULL))
+                g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) k));
+            else
+                g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
+        }
+        else if ((lc_index != -1) && (key_name_conv_tab_sorted[lc_index]->shortcut != NULL))
+            g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
+        else
+            g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) key));
 
-	*label = g_string_free (s, FALSE);
+        *label = g_string_free (s, FALSE);
     }
 
-    if (use_shift != -1) {
-	if (k < 127 && k > 31 )
-	    k = g_ascii_toupper ((gchar) k);
-	else
-	    k |= KEY_M_SHIFT;
+    if (use_shift != -1)
+    {
+        if (k < 127 && k > 31)
+            k = g_ascii_toupper ((gchar) k);
+        else
+            k |= KEY_M_SHIFT;
     }
 
-    if (use_ctrl != -1) {
+    if (use_ctrl != -1)
+    {
         if (k < 256)
             k = XCTRL (k);
         else
@@ -1325,10 +1461,12 @@ lookup_key (const char *name, char **label)
     return (long) k;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Return TRUE on success, FALSE on error.
  * An error happens if SEQ is a beginning of an existing longer sequence.
  */
+
 gboolean
 define_sequence (int code, const char *seq, int action)
 {
@@ -1338,11 +1476,14 @@ define_sequence (int code, const char *seq, int action)
         return FALSE;
 
     for (base = keys; (base != NULL) && (*seq != '\0');)
-        if (*seq == base->ch) {
-            if (base->child == 0) {
+        if (*seq == base->ch)
+        {
+            if (base->child == 0)
+            {
                 if (*(seq + 1) != '\0')
                     base->child = create_sequence (seq + 1, code, action);
-                else {
+                else
+                {
                     /* The sequence matches an existing one.  */
                     base->code = code;
                     base->action = action;
@@ -1352,16 +1493,20 @@ define_sequence (int code, const char *seq, int action)
 
             base = base->child;
             seq++;
-        } else {
+        }
+        else
+        {
             if (base->next)
                 base = base->next;
-            else {
+            else
+            {
                 base->next = create_sequence (seq, code, action);
                 return TRUE;
             }
         }
 
-    if (*seq == '\0') {
+    if (*seq == '\0')
+    {
         /* Attempt to redefine a sequence with a shorter sequence.  */
         return FALSE;
     }
@@ -1370,7 +1515,8 @@ define_sequence (int code, const char *seq, int action)
     return TRUE;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Check if we are idle, i.e. there are no pending keyboard or mouse
  * events.  Return 1 is idle, 0 is there are pending events.
  */
@@ -1385,7 +1531,8 @@ is_idle (void)
     FD_SET (input_fd, &select_set);
     maxfdp = input_fd;
 #ifdef HAVE_LIBGPM
-    if (mouse_enabled && (use_mouse_p == MOUSE_GPM) && (gpm_fd > 0)) {
+    if (mouse_enabled && (use_mouse_p == MOUSE_GPM) && (gpm_fd > 0))
+    {
         FD_SET (gpm_fd, &select_set);
         maxfdp = max (maxfdp, gpm_fd);
     }
@@ -1395,6 +1542,8 @@ is_idle (void)
     return (select (maxfdp + 1, &select_set, 0, 0, &time_out) <= 0);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 get_key_code (int no_delay)
 {
@@ -1403,20 +1552,24 @@ get_key_code (int no_delay)
     static struct timeval esctime = { -1, -1 };
     static int lastnodelay = -1;
 
-    if (no_delay != lastnodelay) {
+    if (no_delay != lastnodelay)
+    {
         this = NULL;
         lastnodelay = no_delay;
     }
 
   pend_send:
-    if (pending_keys != NULL) {
+    if (pending_keys != NULL)
+    {
         int d = *pending_keys++;
       check_pend:
-        if (*pending_keys == 0) {
+        if (*pending_keys == 0)
+        {
             pending_keys = NULL;
             seq_append = NULL;
         }
-        if ((d == ESC_CHAR) && (pending_keys != NULL)) {
+        if ((d == ESC_CHAR) && (pending_keys != NULL))
+        {
             d = ALT (*pending_keys++);
             goto check_pend;
         }
@@ -1435,10 +1588,13 @@ get_key_code (int no_delay)
     if (c == KEY_RESIZE)
         goto nodelay_try_again;
 #endif
-    if (no_delay) {
+    if (no_delay)
+    {
         tty_nodelay (FALSE);
-        if (c == -1) {
-            if (this != NULL && parent != NULL && parent->action == MCKEY_ESCAPE && old_esc_mode) {
+        if (c == -1)
+        {
+            if (this != NULL && parent != NULL && parent->action == MCKEY_ESCAPE && old_esc_mode)
+            {
                 struct timeval current, time_out;
 
                 if (esctime.tv_sec == -1)
@@ -1446,7 +1602,8 @@ get_key_code (int no_delay)
                 GET_TIME (current);
                 time_out.tv_sec = old_esc_mode_timeout / 1000000 + esctime.tv_sec;
                 time_out.tv_usec = old_esc_mode_timeout % 1000000 + esctime.tv_usec;
-                if (time_out.tv_usec > 1000000) {
+                if (time_out.tv_usec > 1000000)
+                {
                     time_out.tv_usec -= 1000000;
                     time_out.tv_sec++;
                 }
@@ -1460,11 +1617,14 @@ get_key_code (int no_delay)
             }
             return -1;
         }
-    } else if (c == -1) {
+    }
+    else if (c == -1)
+    {
         /* Maybe we got an incomplete match.
            This we do only in delay mode, since otherwise
            tty_lowlevel_getch can return -1 at any time. */
-        if (seq_append != NULL) {
+        if (seq_append != NULL)
+        {
             pending_keys = seq_buffer;
             goto pend_send;
         }
@@ -1473,11 +1633,13 @@ get_key_code (int no_delay)
     }
 
     /* Search the key on the root */
-    if (!no_delay || this == NULL) {
+    if (!no_delay || this == NULL)
+    {
         this = keys;
         parent = NULL;
 
-        if ((c > 127 && c < 256) && use_8th_bit_as_meta) {
+        if ((c > 127 && c < 256) && use_8th_bit_as_meta)
+        {
             c &= 0x7f;
 
             /* The first sequence defined starts with esc */
@@ -1485,19 +1647,26 @@ get_key_code (int no_delay)
             this = keys->child;
         }
     }
-    while (this != NULL) {
-        if (c == this->ch) {
-            if (this->child) {
-                if (!push_char (c)) {
+    while (this != NULL)
+    {
+        if (c == this->ch)
+        {
+            if (this->child)
+            {
+                if (!push_char (c))
+                {
                     pending_keys = seq_buffer;
                     goto pend_send;
                 }
                 parent = this;
                 this = this->child;
-                if (parent->action == MCKEY_ESCAPE && old_esc_mode) {
-                    if (no_delay) {
+                if (parent->action == MCKEY_ESCAPE && old_esc_mode)
+                {
+                    if (no_delay)
+                    {
                         GET_TIME (esctime);
-                        if (this == NULL) {
+                        if (this == NULL)
+                        {
                             /* Shouldn't happen */
                             fputs ("Internal error\n", stderr);
                             exit (EXIT_FAILURE);
@@ -1506,17 +1675,22 @@ get_key_code (int no_delay)
                     }
                     esctime.tv_sec = -1;
                     c = xgetch_second ();
-                    if (c == -1) {
+                    if (c == -1)
+                    {
                         pending_keys = seq_append = NULL;
                         this = NULL;
                         return ESC_CHAR;
                     }
-                } else {
+                }
+                else
+                {
                     if (no_delay)
                         goto nodelay_try_again;
                     c = tty_lowlevel_getch ();
                 }
-            } else {
+            }
+            else
+            {
                 /* We got a complete match, return and reset search */
                 int code;
 
@@ -1525,11 +1699,15 @@ get_key_code (int no_delay)
                 this = NULL;
                 return correct_key_code (code);
             }
-        } else {
+        }
+        else
+        {
             if (this->next != NULL)
                 this = this->next;
-            else {
-                if ((parent != NULL) && (parent->action == MCKEY_ESCAPE)) {
+            else
+            {
+                if ((parent != NULL) && (parent->action == MCKEY_ESCAPE))
+                {
                     /* Convert escape-digits to F-keys */
                     if (g_ascii_isdigit (c))
                         c = KEY_F (c - '0');
@@ -1555,10 +1733,12 @@ get_key_code (int no_delay)
     return correct_key_code (c);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Returns a character read from stdin with appropriate interpretation */
 /* Also takes care of generated mouse events */
 /* Returns EV_MOUSE if it is a mouse event */
 /* Returns EV_NONE  if non-blocking or interrupt set and nothing was done */
+
 int
 tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 {
@@ -1571,10 +1751,12 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     struct timeval *time_addr = NULL;
     static int dirty = 3;
 
-    if ((dirty == 3) || is_idle ()) {
+    if ((dirty == 3) || is_idle ())
+    {
         mc_refresh ();
         dirty = 1;
-    } else
+    }
+    else
         dirty++;
 
     vfs_timeout_handler ();
@@ -1583,14 +1765,16 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
        a suitable position for the mouse, so we can't use show_mouse_pointer
        on it.
      */
-    if (event->x > 0) {
+    if (event->x > 0)
+    {
         show_mouse_pointer (event->x, event->y);
         if (!redo_event)
             event->x = -1;
     }
 
     /* Repeat if using mouse */
-    while (pending_keys == NULL) {
+    while (pending_keys == NULL)
+    {
         int maxfdp;
         fd_set select_set;
 
@@ -1599,8 +1783,10 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
         maxfdp = max (add_selects (&select_set), input_fd);
 
 #ifdef HAVE_LIBGPM
-        if (mouse_enabled && (use_mouse_p == MOUSE_GPM)) {
-            if (gpm_fd < 0) {
+        if (mouse_enabled && (use_mouse_p == MOUSE_GPM))
+        {
+            if (gpm_fd < 0)
+            {
                 /* Connection to gpm broken, possibly gpm has died */
                 mouse_enabled = FALSE;
                 use_mouse_p = MOUSE_NONE;
@@ -1612,18 +1798,22 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
         }
 #endif
 
-        if (redo_event) {
+        if (redo_event)
+        {
             time_out.tv_usec = mou_auto_repeat * 1000;
             time_out.tv_sec = 0;
 
             time_addr = &time_out;
-        } else {
+        }
+        else
+        {
             int seconds;
 
             seconds = vfs_timeouts ();
             time_addr = NULL;
 
-            if (seconds != 0) {
+            if (seconds != 0)
+            {
                 /* the timeout could be improved and actually be
                  * the number of seconds until the next vfs entry
                  * timeouts in the stamp list.
@@ -1635,7 +1825,8 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
             }
         }
 
-        if (!block || winch_flag) {
+        if (!block || winch_flag)
+        {
             time_addr = &time_out;
             time_out.tv_sec = 0;
             time_out.tv_usec = 0;
@@ -1650,7 +1841,8 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
          * !block     -> we did not block in the select call
          * else       -> 10 second timeout to check the vfs status.
          */
-        if (flag == 0) {
+        if (flag == 0)
+        {
             if (redo_event)
                 return EV_MOUSE;
             if (!block || winch_flag)
@@ -1666,7 +1858,8 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
             break;
 #ifdef HAVE_LIBGPM
         if (mouse_enabled && use_mouse_p == MOUSE_GPM
-            && gpm_fd > 0 && FD_ISSET (gpm_fd, &select_set)) {
+            && gpm_fd > 0 && FD_ISSET (gpm_fd, &select_set))
+        {
             Gpm_GetEvent (&ev);
             Gpm_FitEvent (&ev);
             *event = ev;
@@ -1690,7 +1883,8 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 #ifdef KEY_MOUSE
                           || c == KEY_MOUSE
 #endif /* KEY_MOUSE */
-        )) {
+        ))
+    {
         /* Mouse event */
         xmouse_get_event (event);
         return (event->type != 0) ? EV_MOUSE : EV_NONE;
@@ -1699,7 +1893,9 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     return c;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Returns a key press, mouse events are discarded */
+
 int
 tty_getch (void)
 {
@@ -1711,10 +1907,12 @@ tty_getch (void)
     return key;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 learn_key (void)
 {
-/* LEARN_TIMEOUT in usec */
+    /* LEARN_TIMEOUT in usec */
 #define LEARN_TIMEOUT 200000
 
     fd_set Read_FD_Set;
@@ -1731,23 +1929,28 @@ learn_key (void)
     learn_store_key (buffer, &p, c);
     GET_TIME (endtime);
     endtime.tv_usec += LEARN_TIMEOUT;
-    if (endtime.tv_usec > 1000000) {
+    if (endtime.tv_usec > 1000000)
+    {
         endtime.tv_usec -= 1000000;
         endtime.tv_sec++;
     }
     tty_nodelay (TRUE);
-    for (;;) {
-        while ((c = tty_lowlevel_getch ()) == -1) {
+    for (;;)
+    {
+        while ((c = tty_lowlevel_getch ()) == -1)
+        {
             GET_TIME (time_out);
             time_out.tv_usec = endtime.tv_usec - time_out.tv_usec;
             if (time_out.tv_usec < 0)
                 time_out.tv_sec++;
             time_out.tv_sec = endtime.tv_sec - time_out.tv_sec;
-            if (time_out.tv_sec >= 0 && time_out.tv_usec > 0) {
+            if (time_out.tv_sec >= 0 && time_out.tv_usec > 0)
+            {
                 FD_ZERO (&Read_FD_Set);
                 FD_SET (input_fd, &Read_FD_Set);
                 select (input_fd + 1, &Read_FD_Set, NULL, NULL, &time_out);
-            } else
+            }
+            else
                 break;
         }
         if (c == -1)
@@ -1761,23 +1964,31 @@ learn_key (void)
 #undef LEARN_TIMEOUT
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* xterm and linux console only: set keypad to numeric or application
    mode. Only in application keypad mode it's possible to distinguish
-   the '+' key and the '+' on the keypad ('*' and '-' ditto)*/
+   the '+' key and the '+' on the keypad ('*' and '-' ditto) */
+
 void
 numeric_keypad_mode (void)
 {
-    if (console_flag || xterm_flag) {
+    if (console_flag || xterm_flag)
+    {
         fputs ("\033>", stdout);
         fflush (stdout);
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 application_keypad_mode (void)
 {
-    if (console_flag || xterm_flag) {
+    if (console_flag || xterm_flag)
+    {
         fputs ("\033=", stdout);
         fflush (stdout);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */

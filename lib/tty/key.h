@@ -1,39 +1,14 @@
-
 /** \file key.h
  *  \brief Header: keyboard support routines
  */
 
-#ifndef MC_KEY_H
-#define MC_KEY_H
+#ifndef MC__KEY_H
+#define MC__KEY_H
 
-#include "lib/global.h"   /* <glib.h> */
+#include "lib/global.h"         /* <glib.h> */
+#include "tty.h"                /* KEY_F macro */
 
-#include "tty.h"  /* KEY_F macro */
-
-gboolean define_sequence (int code, const char *seq, int action);
-
-void init_key (void);
-void init_key_input_fd (void);
-void done_key (void);
-
-long lookup_key (const char *name, char **label);
-
-typedef struct {
-    int code;
-    const char *name;
-    const char *longname;
-    const char *shortcut;
-} key_code_name_t;
-
-extern const key_code_name_t key_name_conv_tab[];
-
-extern int old_esc_mode_timeout;
-
-/* mouse support */
-struct Gpm_Event;
-int tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block);
-gboolean is_idle (void);
-int tty_getch (void);
+/*** typedefs(not structures) and defined constants **********************************************/
 
 /* Possible return values from tty_get_event: */
 #define EV_MOUSE   -2
@@ -48,11 +23,56 @@ int tty_getch (void);
 #define KEY_M_CTRL  0x4000
 #define KEY_M_MASK  0x7000
 
+#define XCTRL(x) (KEY_M_CTRL | ((x) & 0x1F))
+#define ALT(x) (KEY_M_ALT | (unsigned int)(x))
+
+/* To define sequences and return codes */
+#define MCKEY_NOACTION  0
+#define MCKEY_ESCAPE    1
+
+/* Return code for the mouse sequence */
+#define MCKEY_MOUSE     -2
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct
+{
+    int code;
+    const char *name;
+    const char *longname;
+    const char *shortcut;
+} key_code_name_t;
+
+struct Gpm_Event;
+
+/*** global variables defined in .c file *********************************************************/
+
+extern const key_code_name_t key_name_conv_tab[];
+
+extern int old_esc_mode_timeout;
+
 extern int alternate_plus_minus;
 extern int double_click_speed;
 extern int old_esc_mode;
 extern int use_8th_bit_as_meta;
 extern int mou_auto_repeat;
+
+/*** declarations of public functions ************************************************************/
+
+gboolean define_sequence (int code, const char *seq, int action);
+
+void init_key (void);
+void init_key_input_fd (void);
+void done_key (void);
+
+long lookup_key (const char *name, char **label);
+
+/* mouse support */
+int tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block);
+gboolean is_idle (void);
+int tty_getch (void);
 
 /* While waiting for input, the program can select on more than one file */
 typedef int (*select_fn) (int fd, void *info);
@@ -66,23 +86,6 @@ void remove_select_channel (int fd);
 void channels_up (void);
 void channels_down (void);
 
-#define XCTRL(x) (KEY_M_CTRL | ((x) & 0x1F))
-#define ALT(x) (KEY_M_ALT | (unsigned int)(x))
-
-static inline gboolean
-is_abort_char (int c)
-{
-    return ((c == ESC_CHAR) || (c == KEY_F (10)));
-}
-
-/* To define sequences and return codes */
-#define MCKEY_NOACTION	0
-#define MCKEY_ESCAPE	1
-
-/* Return code for the mouse sequence */
-#define MCKEY_MOUSE     -2
-
-
 /* internally used in key.c, defined in keyxtra.c */
 void load_xtra_key_defines (void);
 
@@ -95,5 +98,13 @@ int get_key_code (int nodelay);
 /* Set keypad mode (xterm and linux console only) */
 void numeric_keypad_mode (void);
 void application_keypad_mode (void);
+
+/*** inline functions ****************************************************************************/
+
+static inline gboolean
+is_abort_char (int c)
+{
+    return ((c == ESC_CHAR) || (c == KEY_F (10)));
+}
 
 #endif /* MC_KEY_H */

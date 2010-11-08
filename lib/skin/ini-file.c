@@ -51,7 +51,8 @@ mc_skin_ini_file_load_search_in_dir (mc_skin_t * mc_skin, const gchar * base_dir
     char *file_name, *file_name2;
 
     file_name = g_build_filename (base_dir, MC_SKINS_SUBDIR, mc_skin->name, NULL);
-    if (exist_file (file_name)) {
+    if (exist_file (file_name))
+    {
         mc_skin->config = mc_config_init (file_name);
         g_free (file_name);
         return (mc_skin->config != NULL);
@@ -62,7 +63,8 @@ mc_skin_ini_file_load_search_in_dir (mc_skin_t * mc_skin, const gchar * base_dir
     file_name = g_build_filename (base_dir, MC_SKINS_SUBDIR, file_name2, NULL);
     g_free (file_name2);
 
-    if (exist_file (file_name)) {
+    if (exist_file (file_name))
+    {
         mc_skin->config = mc_config_init (file_name);
         g_free (file_name);
         return (mc_skin->config != NULL);
@@ -84,7 +86,8 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
     if (file_name == NULL)
         return FALSE;
 
-    if (strcmp (file_name, mc_skin->name) != 0) {
+    if (strcmp (file_name, mc_skin->name) != 0)
+    {
         g_free (file_name);
         if (!g_path_is_absolute (mc_skin->name))
             return FALSE;
@@ -95,7 +98,8 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
 
     /* ~/.mc/skins/ */
     user_home_dir = concat_dir_and_file (home_dir, MC_USERCONF_DIR);
-    if (mc_skin_ini_file_load_search_in_dir (mc_skin, user_home_dir)) {
+    if (mc_skin_ini_file_load_search_in_dir (mc_skin, user_home_dir))
+    {
         g_free (user_home_dir);
         return TRUE;
     }

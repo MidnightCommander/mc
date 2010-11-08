@@ -46,7 +46,7 @@
 #include "internal.h"
 
 /* Block size for reading files in parts */
-#define VIEW_PAGE_SIZE		((size_t) 8192)
+#define VIEW_PAGE_SIZE ((size_t) 8192)
 
 /*** global variables ****************************************************************************/
 

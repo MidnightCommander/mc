@@ -49,15 +49,15 @@
 #include "learn.h"
 #include "wtools.h"
 
-#define UX		4
-#define UY		3
+#define UX 4
+#define UY 3
 
-#define BY		UY + 17
+#define BY UY + 17
 
-#define ROWS		13
-#define COLSHIFT	23
+#define ROWS     13
+#define COLSHIFT 23
 
-#define BUTTONS 	2
+#define BUTTONS 2
 
 static struct {
     int ret_cmd, flags, y, x;

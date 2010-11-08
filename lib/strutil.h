@@ -1,7 +1,7 @@
 #ifndef MC_STRUTIL_H
 #define MC_STRUTIL_H
 
-#include "lib/global.h"	/* include glib.h */
+#include "lib/global.h"         /* include glib.h */
 
 /* Header file for strutil.c, strutilascii.c, strutil8bit.c, strutilutf8.c.
  * There are two sort of functions:
@@ -12,7 +12,7 @@
  *    (implemented separately in strutilascii.c, strutil8bit.c, strutilutf8.c)
  * documentation is made for UTF-8 version of functions.
  */
- 
+
 /* invalid strings
  * function, that works with invalid strings are marked with "I" 
  * in documentation
@@ -20,7 +20,7 @@
  * are displayed as questionmarks, I-maked comparing functions try to keep 
  * the original value of these bytes.
  */
- 
+
 /* combining characters
  * displaynig: all handled as zero with characters, expect combing character 
  * at the begin of string, this character has with one (space add before), 
@@ -36,43 +36,107 @@
  * decompose form. (used in do_search (screen.c))
  */
 
+/*** typedefs(not structures) and defined constants **********************************************/
+
+#define IS_FIT(x) ((x) & 0x0010)
+#define MAKE_FIT(x) ((x) | 0x0010)
+#define HIDE_FIT(x) ((x) & 0x000f)
+
+#define INVALID_CONV ((GIConv) (-1))
+
+/*** enums ***************************************************************************************/
+
 /* results of conversion function
  */
-typedef enum {
-/* success means, that convertion has been finished successully
- */
+typedef enum
+{
+    /* success means, that convertion has been finished successully
+     */
     ESTR_SUCCESS = 0,
-/* problem means, that not every characters was successfully converted (They are
- * replaced with questionmark). So is impossible convert string back. 
- */
+    /* problem means, that not every characters was successfully converted (They are
+     * replaced with questionmark). So is impossible convert string back. 
+     */
     ESTR_PROBLEM = 1,
-/* failure means, that conversion is not possible (example: wrong encoding 
- * of input string)
- */
+    /* failure means, that conversion is not possible (example: wrong encoding 
+     * of input string)
+     */
     ESTR_FAILURE = 2
 } estr_t;
 
 /* alignment strings on terminal
  */
-typedef enum {
-    J_LEFT		= 0x01,
-    J_RIGHT		= 0x02,
-    J_CENTER		= 0x03,
+typedef enum
+{
+    J_LEFT = 0x01,
+    J_RIGHT = 0x02,
+    J_CENTER = 0x03,
     /* if there is enough space for string on terminal,
      * string is centered otherwise is aligned to left */
-    J_CENTER_LEFT	= 0x04,
+    J_CENTER_LEFT = 0x04,
     /* fit alignment, if string is to long, is truncated with '~' */
-    J_LEFT_FIT		= 0x11,
-    J_RIGHT_FIT		= 0x12,
-    J_CENTER_FIT	= 0x13,
-    J_CENTER_LEFT_FIT	= 0x14
+    J_LEFT_FIT = 0x11,
+    J_RIGHT_FIT = 0x12,
+    J_CENTER_FIT = 0x13,
+    J_CENTER_LEFT_FIT = 0x14
 } align_crt_t;
 
-#define IS_FIT(x)	((x) & 0x0010)
-#define MAKE_FIT(x)	((x) | 0x0010)
-#define HIDE_FIT(x)	((x) & 0x000f)
 
-#define INVALID_CONV	((GIConv) (-1))
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/* all functions in str_class must be defined for every encoding */
+struct str_class
+{
+    gchar *(*conv_gerror_message) (GError * error, const char *def_msg);
+      /*I*/ estr_t (*vfs_convert_to) (GIConv coder, const char *string, int size, GString * buffer);
+      /*I*/ void (*insert_replace_char) (GString * buffer);
+    int (*is_valid_string) (const char *);
+      /*I*/ int (*is_valid_char) (const char *, size_t);
+      /*I*/ void (*cnext_char) (const char **);
+    void (*cprev_char) (const char **);
+    void (*cnext_char_safe) (const char **);
+      /*I*/ void (*cprev_char_safe) (const char **);
+      /*I*/ int (*cnext_noncomb_char) (const char **text);
+      /*I*/ int (*cprev_noncomb_char) (const char **text, const char *begin);
+      /*I*/ int (*isspace) (const char *);
+      /*I*/ int (*ispunct) (const char *);
+      /*I*/ int (*isalnum) (const char *);
+      /*I*/ int (*isdigit) (const char *);
+      /*I*/ int (*isprint) (const char *);
+      /*I*/ int (*iscombiningmark) (const char *);
+      /*I*/ int (*length) (const char *);
+      /*I*/ int (*length2) (const char *, int);
+      /*I*/ int (*length_noncomb) (const char *);
+      /*I*/ int (*toupper) (const char *, char **, size_t *);
+    int (*tolower) (const char *, char **, size_t *);
+    void (*fix_string) (char *);
+      /*I*/ const char *(*term_form) (const char *);
+      /*I*/ const char *(*fit_to_term) (const char *, int, align_crt_t);
+      /*I*/ const char *(*term_trim) (const char *text, int width);
+      /*I*/ void (*msg_term_size) (const char *, int *, int *);
+      /*I*/ const char *(*term_substring) (const char *, int, int);
+      /*I*/ int (*term_width1) (const char *);
+      /*I*/ int (*term_width2) (const char *, size_t);
+      /*I*/ int (*term_char_width) (const char *);
+      /*I*/ const char *(*trunc) (const char *, int);
+      /*I*/ int (*offset_to_pos) (const char *, size_t);
+      /*I*/ int (*column_to_pos) (const char *, size_t);
+      /*I*/ char *(*create_search_needle) (const char *, int);
+    void (*release_search_needle) (char *, int);
+    const char *(*search_first) (const char *, const char *, int);
+    const char *(*search_last) (const char *, const char *, int);
+    int (*compare) (const char *, const char *);
+      /*I*/ int (*ncompare) (const char *, const char *);
+      /*I*/ int (*casecmp) (const char *, const char *);
+      /*I*/ int (*ncasecmp) (const char *, const char *);
+      /*I*/ int (*prefix) (const char *, const char *);
+      /*I*/ int (*caseprefix) (const char *, const char *);
+      /*I*/ char *(*create_key) (const char *text, int case_sen);
+      /*I*/ char *(*create_key_for_filename) (const char *text, int case_sen);
+      /*I*/ int (*key_collate) (const char *t1, const char *t2, int case_sen);
+      /*I*/ void (*release_key) (char *key, int case_sen);
+  /*I*/};
+
+/*** global variables defined in .c file *********************************************************/
 
 /* standard convertors */
 extern GIConv str_cnv_to_term;
@@ -80,58 +144,7 @@ extern GIConv str_cnv_from_term;
 /* from terminal encoding to terminal encoding */
 extern GIConv str_cnv_not_convert;
 
-/* all functions in str_class must be defined for every encoding */
-struct str_class {
-    gchar *(*conv_gerror_message) (GError *error, const char *def_msg); /*I*/
-    estr_t (*vfs_convert_to) (GIConv coder, const char *string, 
-                        int size, GString *buffer);                     /*I*/
-    void (*insert_replace_char) (GString *buffer);
-    int (*is_valid_string) (const char *);                              /*I*/
-    int (*is_valid_char) (const char *, size_t);                        /*I*/
-    void (*cnext_char) (const char **);
-    void (*cprev_char) (const char **);
-    void (*cnext_char_safe) (const char **);                            /*I*/
-    void (*cprev_char_safe) (const char **);                            /*I*/
-    int (*cnext_noncomb_char) (const char **text);                      /*I*/
-    int (*cprev_noncomb_char) (const char **text, const char *begin);   /*I*/
-    int (*isspace) (const char *);                                      /*I*/
-    int (*ispunct) (const char *);                                      /*I*/
-    int (*isalnum) (const char *);                                      /*I*/
-    int (*isdigit) (const char *);                                      /*I*/
-    int (*isprint) (const char *);                                      /*I*/
-    int (*iscombiningmark) (const char *);                              /*I*/
-    int (*length) (const char *);                                       /*I*/
-    int (*length2) (const char *, int);                                 /*I*/
-    int (*length_noncomb) (const char *);                               /*I*/
-    int (*toupper) (const char *, char **, size_t *);
-    int (*tolower) (const char *, char **, size_t *);
-    void (*fix_string) (char *);                                        /*I*/
-    const char *(*term_form) (const char *);                            /*I*/
-    const char *(*fit_to_term) (const char *, int, align_crt_t);        /*I*/
-    const char *(*term_trim) (const char *text, int width);             /*I*/
-    void (*msg_term_size) (const char *, int *, int *);                 /*I*/
-    const char *(*term_substring) (const char *, int, int);             /*I*/
-    int (*term_width1) (const char *);                                  /*I*/
-    int (*term_width2) (const char *, size_t);                          /*I*/
-    int (*term_char_width) (const char *);                              /*I*/
-    const char *(*trunc) (const char *, int);                           /*I*/
-    int (*offset_to_pos) (const char *, size_t);                        /*I*/
-    int (*column_to_pos) (const char *, size_t);                        /*I*/
-    char *(*create_search_needle) (const char *, int);
-    void (*release_search_needle) (char *, int);
-    const char *(*search_first) (const char *, const char *, int);
-    const char *(*search_last) (const char *, const char *, int);
-    int (*compare) (const char *, const char *);                        /*I*/
-    int (*ncompare) (const char *, const char *);                       /*I*/
-    int (*casecmp) (const char *, const char *);                        /*I*/
-    int (*ncasecmp) (const char *, const char *);                       /*I*/
-    int (*prefix) (const char *, const char *);                         /*I*/
-    int (*caseprefix) (const char *, const char *);                     /*I*/
-    char *(*create_key) (const char *text, int case_sen);               /*I*/
-    char *(*create_key_for_filename) (const char *text, int case_sen);  /*I*/
-    int (*key_collate) (const char *t1, const char *t2, int case_sen);  /*I*/
-    void (*release_key) (char *key, int case_sen);                      /*I*/
-};
+/*** declarations of public functions ************************************************************/
 
 struct str_class str_utf8_init (void);
 struct str_class str_8bit_init (void);
@@ -159,7 +172,7 @@ void str_close_conv (GIConv);
 /* convert string using coder, result of conversion is appended at end of buffer
  * return ESTR_SUCCESS if there was no problem.
  * otherwise return  ESTR_PROBLEM or ESTR_FAILURE
- */ 
+ */
 estr_t str_convert (GIConv, const char *, GString *);
 estr_t str_nconvert (GIConv, const char *, int, GString *);
 
@@ -168,7 +181,7 @@ estr_t str_nconvert (GIConv, const char *, int, GString *);
  * return new allocated null-terminated string, which is need to be freed
  * I
  */
-gchar *str_conv_gerror_message (GError *error, const char *def_msg);
+gchar *str_conv_gerror_message (GError * error, const char *def_msg);
 
 /* return only ESTR_SUCCESS or ESTR_FAILURE, because vfs must be able to convert
  * result to original string. (so no replace with questionmark)
@@ -185,8 +198,7 @@ estr_t str_vfs_convert_to (GIConv, const char *, int, GString *);
 
 /* printf functin for str_buffer, append result of printf at the end of buffer
  */
-void
-str_printf (GString *, const char *, ...);
+void str_printf (GString *, const char *, ...);
 
 /* add standard replacement character in terminal encoding
  */
@@ -209,8 +221,8 @@ void str_uninit_strings (void);
  * ESTR_PROBLEM if ch contains only part of characters,
  * ESTR_FAILURE if conversion is not possible
  */
-estr_t str_translate_char (GIConv conv, const char *ch, size_t ch_size, 
-                        char *output, size_t out_size);
+estr_t str_translate_char (GIConv conv, const char *ch, size_t ch_size,
+                           char *output, size_t out_size);
 
 /* test, if text is valid in terminal encoding
  * I
@@ -223,7 +235,7 @@ int str_is_valid_string (const char *text);
  * multibyte character 
  * I
  */
-int str_is_valid_char (const char *ch, size_t size); 
+int str_is_valid_char (const char *ch, size_t size);
 
 /* return next characters after text, do not call on the end of string
  */
@@ -324,23 +336,23 @@ int str_iscombiningmark (const char *ch);
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
-int str_toupper (const char *ch, char **out, size_t *remain);
+int str_toupper (const char *ch, char **out, size_t * remain);
 
 /* write upper from of fisrt characters in ch into out
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
-int str_tolower (const char *ch, char **out, size_t *remain);
+int str_tolower (const char *ch, char **out, size_t * remain);
 
 /* return length of text in characters
  * I
  */
-int str_length (const char* text);
+int str_length (const char *text);
 
 /* return length of text in characters, limit to size
  * I
  */
-int str_length2 (const char* text, int size);
+int str_length2 (const char *text, int size);
 
 /* return length of one char
  * I
@@ -350,13 +362,13 @@ int str_length_char (const char *);
 /* return length of text in characters, count only noncombining characters
  * I
  */
-int str_length_noncomb (const char* text);
+int str_length_noncomb (const char *text);
 
 /* replace all invalid characters in text with questionmark
  * after return, text is valid string in terminal encoding
  * I
  */
-void str_fix_string (char* text);
+void str_fix_string (char *text);
 
 /* replace all invalid characters in text with questionmark
  * replace all unprintable characters with '.'
@@ -364,7 +376,7 @@ void str_fix_string (char* text);
  * returned string do not need to be freed
  * I
  */
-const char *str_term_form (const char *text); 
+const char *str_term_form (const char *text);
 
 /* like str_term_form, but text can be alignment to width
  * alignment is specified in just_mode (J_LEFT, J_LEFT_FIT, ...)
@@ -389,7 +401,7 @@ void str_msg_term_size (const char *text, int *lines, int *columns);
  * start - column (position) on terminal, where substring begin
  * result is completed with spaces to width
  * I
- */ 
+ */
 const char *str_term_substring (const char *text, int start, int width);
 
 /* return width, that will be text occupied on terminal
@@ -412,7 +424,7 @@ int str_term_char_width (const char *text);
 /* convert position in characters to position in bytes 
  * I
  */
-int str_offset_to_pos (const char* text, size_t length);
+int str_offset_to_pos (const char *text, size_t length);
 
 /* convert position on terminal to position in characters
  * I
@@ -508,5 +520,8 @@ int str_isutf8 (const char *codeset_name);
 
 const char *str_detect_termencoding (void);
 
-int str_verscmp(const char *s1, const char *s2);
-#endif				/* MC_STRUTIL_H*/
+int str_verscmp (const char *s1, const char *s2);
+
+/*** inline functions ****************************************************************************/
+
+#endif /* MC_STRUTIL_H */

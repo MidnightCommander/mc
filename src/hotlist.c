@@ -65,22 +65,22 @@
 #define UY 2
 
 #define BX UX
-#define BY		(LINES - 6)
+#define BY (LINES - 6)
 
-#define BUTTONS		(sizeof(hotlist_but)/sizeof(struct _hotlist_but))
+#define BUTTONS (sizeof(hotlist_but)/sizeof(struct _hotlist_but))
 #define LABELS          3
-#define B_ADD_CURRENT	B_USER
+#define B_ADD_CURRENT   B_USER
 #define B_REMOVE        (B_USER + 1)
-#define B_NEW_GROUP	(B_USER + 2)
-#define B_NEW_ENTRY	(B_USER + 3)
-#define B_UP_GROUP	(B_USER + 4)
-#define B_INSERT	(B_USER + 5)
-#define B_APPEND	(B_USER + 6)
-#define B_MOVE		(B_USER + 7)
+#define B_NEW_GROUP     (B_USER + 2)
+#define B_NEW_ENTRY     (B_USER + 3)
+#define B_UP_GROUP      (B_USER + 4)
+#define B_INSERT        (B_USER + 5)
+#define B_APPEND        (B_USER + 6)
+#define B_MOVE          (B_USER + 7)
 
 #ifdef ENABLE_VFS
-#define B_FREE_ALL_VFS	(B_USER + 8)
-#define B_REFRESH_VFS	(B_USER + 9)
+#define B_FREE_ALL_VFS (B_USER + 8)
+#define B_REFRESH_VFS (B_USER + 9)
 #endif
 
 int hotlist_has_dot_dot = 1;
@@ -232,13 +232,15 @@ update_path_name (void)
     dlg_redraw (dlg);
 }
 
-#define CHECK_BUFFER  \
-do { \
-    int               i; \
-\
-    if ((i = strlen (current->label) + 3) > buflen) { \
+#define CHECK_BUFFER \
+do \
+{ \
+    size_t i; \
+    i = strlen (current->label); \
+    if (i + 3 > buflen) { \
       g_free (buf); \
-      buf = g_malloc (buflen = 1024 * (i/1024 + 1)); \
+      buflen = 1024 * (i/1024 + 1); \
+      buf = g_malloc (buflen); \
     } \
     buf[0] = '\0'; \
 } while (0)
@@ -933,9 +935,9 @@ static int
 add_new_entry_input (const char *header, const char *text1, const char *text2,
                      const char *help, char **r1, char **r2)
 {
-#define RELATIVE_Y_BUTTONS	4
-#define RELATIVE_Y_LABEL_PTH	3
-#define RELATIVE_Y_INPUT_PTH	4
+#define RELATIVE_Y_BUTTONS   4
+#define RELATIVE_Y_LABEL_PTH 3
+#define RELATIVE_Y_INPUT_PTH 4
 
     QuickWidget quick_widgets[] = {
         /* 0 */ QUICK_BUTTON (55, 80, RELATIVE_Y_BUTTONS, 0, N_("&Cancel"), B_CANCEL, NULL),
@@ -1278,11 +1280,11 @@ load_group (struct hotlist *grp)
 #define TKN_ENTRY   1
 #define TKN_STRING  2
 #define TKN_URL     3
-#define TKN_ENDGROUP	4
-#define TKN_COMMENT	5
-#define TKN_EOL		125
-#define TKN_EOF		126
-#define TKN_UNKNOWN	127
+#define TKN_ENDGROUP 4
+#define TKN_COMMENT  5
+#define TKN_EOL      125
+#define TKN_EOF      126
+#define TKN_UNKNOWN  127
 
 static GString *tkn_buf = NULL;
 
@@ -1384,19 +1386,21 @@ hot_next_token (void)
     return ret;
 }
 
-#define SKIP_TO_EOL	{ \
-int _tkn; \
-while ((_tkn = hot_next_token ()) != TKN_EOF && _tkn != TKN_EOL) ; \
+#define SKIP_TO_EOL \
+{ \
+    int _tkn; \
+    while ((_tkn = hot_next_token ()) != TKN_EOF && _tkn != TKN_EOL) ; \
 }
 
 #define CHECK_TOKEN(_TKN_) \
 tkn = hot_next_token (); \
-if (tkn != _TKN_) { \
+if (tkn != _TKN_) \
+{ \
     hotlist_state.readonly = 1; \
     hotlist_state.file_error = 1; \
     while (tkn != TKN_EOL && tkn != TKN_EOF) \
         tkn = hot_next_token (); \
-break; \
+    break; \
 }
 
 static void

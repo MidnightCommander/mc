@@ -50,51 +50,26 @@
 #include "xdirentry.h"
 #include "gc.h"                 /* vfs_rmstamp */
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define CALL(x) if (MEDATA->x) MEDATA->x
+
+/*** file scope type declarations ****************************************************************/
+
+struct dirhandle
+{
+    struct vfs_s_entry *cur;
+    struct vfs_s_inode *dir;
+};
+
+/*** file scope variables ************************************************************************/
 
 static volatile int total_inodes = 0, total_entries = 0;
 
-struct vfs_s_inode *
-vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *initstat)
-{
-    struct vfs_s_inode *ino;
-
-    ino = g_try_new0 (struct vfs_s_inode, 1);
-    if (ino == NULL)
-        return NULL;
-
-    if (initstat)
-        ino->st = *initstat;
-    ino->super = super;
-    ino->st.st_nlink = 0;
-    ino->st.st_ino = MEDATA->inode_counter++;
-    ino->st.st_dev = MEDATA->rdev;
-
-    super->ino_usage++;
-    total_inodes++;
-
-    CALL (init_inode) (me, ino);
-
-    return ino;
-}
-
-struct vfs_s_entry *
-vfs_s_new_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *inode)
-{
-    struct vfs_s_entry *entry;
-
-    entry = g_new0 (struct vfs_s_entry, 1);
-    total_entries++;
-
-    if (name)
-        entry->name = g_strdup (name);
-
-    entry->ino = inode;
-    entry->ino->ent = entry;
-    CALL (init_entry) (me, entry);
-
-    return entry;
-}
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
@@ -125,86 +100,9 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
         ino->st.st_nlink--;
 }
 
-void
-vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
-{
-    if (ent->prevp)
-    {
-        /* It is possible that we are deleting freshly created entry */
-        *ent->prevp = ent->next;
-        if (ent->next)
-            ent->next->prevp = ent->prevp;
-    }
-
-    g_free (ent->name);
-    ent->name = NULL;
-
-    if (ent->ino)
-    {
-        ent->ino->ent = NULL;
-        vfs_s_free_inode (me, ent->ino);
-        ent->ino = NULL;
-    }
-
-    total_entries--;
-    g_free (ent);
-}
-
-void
-vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_entry *ent)
-{
-    struct vfs_s_entry **ep;
-
-    (void) me;
-
-    for (ep = &dir->subdir; *ep != NULL; ep = &((*ep)->next))
-        ;
-    ent->prevp = ep;
-    ent->next = NULL;
-    ent->dir = dir;
-    *ep = ent;
-
-    ent->ino->st.st_nlink++;
-}
-
-struct stat *
-vfs_s_default_stat (struct vfs_class *me, mode_t mode)
-{
-    static struct stat st;
-    int myumask;
-
-    (void) me;
-
-    myumask = umask (022);
-    umask (myumask);
-    mode &= ~myumask;
-
-    st.st_mode = mode;
-    st.st_ino = 0;
-    st.st_dev = 0;
-    st.st_rdev = 0;
-    st.st_uid = getuid ();
-    st.st_gid = getgid ();
-    st.st_size = 0;
-    st.st_mtime = st.st_atime = st.st_ctime = time (NULL);
-
-    return &st;
-}
-
-struct vfs_s_entry *
-vfs_s_generate_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *parent,
-                      mode_t mode)
-{
-    struct vfs_s_inode *inode;
-    struct stat *st;
-
-    st = vfs_s_default_stat (me, mode);
-    inode = vfs_s_new_inode (me, parent->super, st);
-
-    return vfs_s_new_entry (me, name, inode);
-}
-
+/* --------------------------------------------------------------------------------------------- */
 /* We were asked to create entries automagically */
+
 static struct vfs_s_entry *
 vfs_s_automake (struct vfs_class *me, struct vfs_s_inode *dir, char *path, int flags)
 {
@@ -222,7 +120,9 @@ vfs_s_automake (struct vfs_class *me, struct vfs_s_inode *dir, char *path, int f
     return res;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* If the entry is a symlink, find the entry for its target */
+
 static struct vfs_s_entry *
 vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry, int follow)
 {
@@ -260,10 +160,12 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry, int foll
     return target;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /*
  * Follow > 0: follow links, serves as loop protect,
  *       == -1: do not follow links
  */
+
 static struct vfs_s_entry *
 vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
                        const char *a_path, int follow, int flags)
@@ -314,6 +216,8 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
     return NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 split_dir_name (struct vfs_class *me, char *path, char **dir, char **name, char **save)
 {
@@ -336,6 +240,8 @@ split_dir_name (struct vfs_class *me, char *path, char **dir, char **name, char 
         *name = s;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static struct vfs_s_entry *
 vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
@@ -409,19 +315,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
     return ent;
 }
 
-struct vfs_s_inode *
-vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
-                  const char *path, int follow, int flags)
-{
-    struct vfs_s_entry *ent;
-
-    if (((MEDATA->flags & VFS_S_REMOTE) == 0) && (*path == '\0'))
-        return super->root;
-
-    ent = (MEDATA->find_entry) (me, super->root, path, follow, flags);
-    return (ent != NULL) ? ent->ino : NULL;
-}
-
+/* --------------------------------------------------------------------------------------------- */
 /* Ook, these were functions around directory entries / inodes */
 /* -------------------------------- superblock games -------------------------- */
 
@@ -435,6 +329,8 @@ vfs_s_new_super (struct vfs_class *me)
     return super;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 vfs_s_insert_super (struct vfs_class *me, struct vfs_s_super *super)
 {
@@ -445,6 +341,8 @@ vfs_s_insert_super (struct vfs_class *me, struct vfs_s_super *super)
         MEDATA->supers->prevp = &super->next;
     MEDATA->supers = super;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
@@ -477,6 +375,651 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
     g_free (super);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Dissect the path and create corresponding superblock.
+ * The result should be freed.
+ */
+
+static char *
+vfs_s_get_path (struct vfs_class *me, const char *inname, struct vfs_s_super **archive, int flags)
+{
+    char *buf, *retval;
+
+    buf = g_strdup (inname);
+    retval = g_strdup (vfs_s_get_path_mangle (me, buf, archive, flags));
+    g_free (buf);
+    return retval;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Support of archives */
+/* ------------------------ readdir & friends ----------------------------- */
+
+static struct vfs_s_inode *
+vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
+{
+    struct vfs_s_super *super;
+    struct vfs_s_inode *ino;
+    char *q;
+
+    if (!(q = vfs_s_get_path (me, name, &super, 0)))
+        return NULL;
+
+    ino =
+        vfs_s_find_inode (me, super, q,
+                          flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
+    if ((!ino) && (!*q))
+        /* We are asking about / directory of ftp server: assume it exists */
+        ino =
+            vfs_s_find_inode (me, super, q,
+                              flags & FL_FOLLOW ? LINK_FOLLOW :
+                              LINK_NO_FOLLOW, FL_DIR | (flags & ~FL_FOLLOW));
+    g_free (q);
+    return ino;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void *
+vfs_s_opendir (struct vfs_class *me, const char *dirname)
+{
+    struct vfs_s_inode *dir;
+    struct dirhandle *info;
+
+    dir = vfs_s_inode_from_path (me, dirname, FL_DIR | FL_FOLLOW);
+    if (!dir)
+        return NULL;
+    if (!S_ISDIR (dir->st.st_mode))
+        ERRNOR (ENOTDIR, NULL);
+
+    dir->st.st_nlink++;
+#if 0
+    if (!dir->subdir)           /* This can actually happen if we allow empty directories */
+        ERRNOR (EAGAIN, NULL);
+#endif
+    info = g_new (struct dirhandle, 1);
+    info->cur = dir->subdir;
+    info->dir = dir;
+
+    return info;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void *
+vfs_s_readdir (void *data)
+{
+    static union vfs_dirent dir;
+    struct dirhandle *info = (struct dirhandle *) data;
+
+    if (!(info->cur))
+        return NULL;
+
+    if (info->cur->name)
+    {
+        g_strlcpy (dir.dent.d_name, info->cur->name, MC_MAXPATHLEN);
+    }
+    else
+    {
+        vfs_die ("Null in structure-cannot happen");
+    }
+
+    compute_namelen (&dir.dent);
+    info->cur = info->cur->next;
+
+    return (void *) &dir;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_closedir (void *data)
+{
+    struct dirhandle *info = (struct dirhandle *) data;
+    struct vfs_s_inode *dir = info->dir;
+
+    vfs_s_free_inode (dir->super->me, dir);
+    g_free (data);
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_chdir (struct vfs_class *me, const char *path)
+{
+    void *data;
+
+    data = vfs_s_opendir (me, path);
+    if (data == NULL)
+        return -1;
+    vfs_s_closedir (data);
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* --------------------------- stat and friends ---------------------------- */
+
+static int
+vfs_s_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, int flag)
+{
+    struct vfs_s_inode *ino;
+
+    ino = vfs_s_inode_from_path (me, path, flag);
+    if (ino == NULL)
+        return -1;
+    *buf = ino->st;
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_stat (struct vfs_class *me, const char *path, struct stat *buf)
+{
+    return vfs_s_internal_stat (me, path, buf, FL_FOLLOW);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+{
+    return vfs_s_internal_stat (me, path, buf, FL_NONE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_fstat (void *fh, struct stat *buf)
+{
+    *buf = FH->ino->st;
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+{
+    struct vfs_s_inode *ino;
+    size_t len;
+
+    ino = vfs_s_inode_from_path (me, path, 0);
+    if (!ino)
+        return -1;
+
+    if (!S_ISLNK (ino->st.st_mode))
+        ERRNOR (EINVAL, -1);
+
+    if (ino->linkname == NULL)
+        ERRNOR (EFAULT, -1);
+
+    len = strlen (ino->linkname);
+    if (size < len)
+        len = size;
+    /* readlink() does not append a NUL character to buf */
+    memcpy (buf, ino->linkname, len);
+    return len;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static ssize_t
+vfs_s_read (void *fh, char *buffer, size_t count)
+{
+    int n;
+    struct vfs_class *me = FH_SUPER->me;
+
+    if (FH->linear == LS_LINEAR_PREOPEN)
+    {
+        if (!MEDATA->linear_start (me, FH, FH->pos))
+            return -1;
+    }
+
+    if (FH->linear == LS_LINEAR_CLOSED)
+        vfs_die ("linear_start() did not set linear_state!");
+
+    if (FH->linear == LS_LINEAR_OPEN)
+        return MEDATA->linear_read (me, FH, buffer, count);
+
+    if (FH->handle != -1)
+    {
+        n = read (FH->handle, buffer, count);
+        if (n < 0)
+            me->verrno = errno;
+        return n;
+    }
+    vfs_die ("vfs_s_read: This should not happen\n");
+    return -1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static ssize_t
+vfs_s_write (void *fh, const char *buffer, size_t count)
+{
+    int n;
+    struct vfs_class *me = FH_SUPER->me;
+
+    if (FH->linear)
+        vfs_die ("no writing to linear files, please");
+
+    FH->changed = 1;
+    if (FH->handle != -1)
+    {
+        n = write (FH->handle, buffer, count);
+        if (n < 0)
+            me->verrno = errno;
+        return n;
+    }
+    vfs_die ("vfs_s_write: This should not happen\n");
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static off_t
+vfs_s_lseek (void *fh, off_t offset, int whence)
+{
+    off_t size = FH->ino->st.st_size;
+
+    if (FH->linear == LS_LINEAR_OPEN)
+        vfs_die ("cannot lseek() after linear_read!");
+
+    if (FH->handle != -1)
+    {                           /* If we have local file opened, we want to work with it */
+        off_t retval = lseek (FH->handle, offset, whence);
+        if (retval == -1)
+            FH->ino->super->me->verrno = errno;
+        return retval;
+    }
+
+    switch (whence)
+    {
+    case SEEK_CUR:
+        offset += FH->pos;
+        break;
+    case SEEK_END:
+        offset += size;
+        break;
+    }
+    if (offset < 0)
+        FH->pos = 0;
+    else if (offset < size)
+        FH->pos = offset;
+    else
+        FH->pos = size;
+    return FH->pos;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_close (void *fh)
+{
+    int res = 0;
+    struct vfs_class *me = FH_SUPER->me;
+
+    FH_SUPER->fd_usage--;
+    if (!FH_SUPER->fd_usage)
+        vfs_stamp_create (me, FH_SUPER);
+
+    if (FH->linear == LS_LINEAR_OPEN)
+        MEDATA->linear_close (me, fh);
+    if (MEDATA->fh_close)
+        res = MEDATA->fh_close (me, fh);
+    if (FH->changed && MEDATA->file_store)
+    {
+        char *s = vfs_s_fullpath (me, FH->ino);
+        if (!s)
+            res = -1;
+        else
+        {
+            res = MEDATA->file_store (me, fh, s, FH->ino->localname);
+            g_free (s);
+        }
+        vfs_s_invalidate (me, FH_SUPER);
+    }
+    if (FH->handle != -1)
+        close (FH->handle);
+
+    vfs_s_free_inode (me, FH->ino);
+    g_free (fh);
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+vfs_s_print_stats (const char *fs_name, const char *action,
+                   const char *file_name, off_t have, off_t need)
+{
+    static const char *i18n_percent_transf_format = NULL;
+    static const char *i18n_transf_format = NULL;
+
+    if (i18n_percent_transf_format == NULL)
+    {
+        i18n_percent_transf_format = _("%s: %s: %s %3d%% (%ju bytes transferred)");
+        i18n_transf_format = _("%s: %s: %s %ju bytes transferred");
+    }
+
+    if (need)
+        print_vfs_message (i18n_percent_transf_format, fs_name, action,
+                           file_name, (int) ((double) have * 100 / need), (uintmax_t) have);
+    else
+        print_vfs_message (i18n_transf_format, fs_name, action, file_name, (uintmax_t) have);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------- mc support ---------------------------- */
+
+static void
+vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
+{
+    struct vfs_s_super *a = MEDATA->supers;
+    char *name;
+
+    while (a)
+    {
+        name = g_strconcat (a->name, "#", me->prefix, "/",
+                            /* a->current_dir->name, */ (char *) NULL);
+        (*func) (name);
+        g_free (name);
+        a = a->next;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_ferrno (struct vfs_class *me)
+{
+    return me->verrno;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get local copy of the given file.  We reuse the existing file cache
+ * for remote filesystems.  Archives use standard VFS facilities.
+ */
+
+static char *
+vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
+{
+    struct vfs_s_fh *fh;
+    char *local = NULL;
+
+    fh = vfs_s_open (me, path, O_RDONLY, 0);
+
+    if (fh != NULL)
+    {
+        if ((fh->ino != NULL) && (fh->ino->localname != NULL))
+            local = g_strdup (fh->ino->localname);
+
+        vfs_s_close (fh);
+    }
+
+    return local;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Return the local copy.  Since we are using our cache, we do nothing -
+ * the cache will be removed when the archive is closed.
+ */
+
+static int
+vfs_s_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
+{
+    (void) me;
+    (void) path;
+    (void) local;
+    (void) has_changed;
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
+{
+    switch (ctlop)
+    {
+    case VFS_SETCTL_STALE_DATA:
+        {
+            struct vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
+
+            if (ino == NULL)
+                return 0;
+            if (arg)
+                ino->super->want_stale = 1;
+            else
+            {
+                ino->super->want_stale = 0;
+                vfs_s_invalidate (me, ino->super);
+            }
+            return 1;
+        }
+    case VFS_SETCTL_LOGFILE:
+        MEDATA->logfile = fopen ((char *) arg, "w");
+        return 1;
+    case VFS_SETCTL_FLUSH:
+        MEDATA->flush = 1;
+        return 1;
+    }
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* ----------------------------- Stamping support -------------------------- */
+
+static vfsid
+vfs_s_getid (struct vfs_class *me, const char *path)
+{
+    struct vfs_s_super *archive = NULL;
+    char *p;
+
+    p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN);
+    if (p == NULL)
+        return NULL;
+    g_free (p);
+    return (vfsid) archive;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_nothingisopen (vfsid id)
+{
+    (void) id;
+    /* Our data structures should survive free of superblock at any time */
+    return 1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+vfs_s_free (vfsid id)
+{
+    vfs_s_free_super (((struct vfs_s_super *) id)->me, (struct vfs_s_super *) id);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
+{
+    struct timeval tim;
+
+    if (MEDATA->flush)
+    {
+        MEDATA->flush = 0;
+        return 0;
+    }
+
+    gettimeofday (&tim, NULL);
+    if (tim.tv_sec < ino->timestamp.tv_sec)
+        return 1;
+    return 0;
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+struct vfs_s_inode *
+vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *initstat)
+{
+    struct vfs_s_inode *ino;
+
+    ino = g_try_new0 (struct vfs_s_inode, 1);
+    if (ino == NULL)
+        return NULL;
+
+    if (initstat)
+        ino->st = *initstat;
+    ino->super = super;
+    ino->st.st_nlink = 0;
+    ino->st.st_ino = MEDATA->inode_counter++;
+    ino->st.st_dev = MEDATA->rdev;
+
+    super->ino_usage++;
+    total_inodes++;
+
+    CALL (init_inode) (me, ino);
+
+    return ino;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+struct vfs_s_entry *
+vfs_s_new_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *inode)
+{
+    struct vfs_s_entry *entry;
+
+    entry = g_new0 (struct vfs_s_entry, 1);
+    total_entries++;
+
+    if (name)
+        entry->name = g_strdup (name);
+
+    entry->ino = inode;
+    entry->ino->ent = entry;
+    CALL (init_entry) (me, entry);
+
+    return entry;
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
+{
+    if (ent->prevp)
+    {
+        /* It is possible that we are deleting freshly created entry */
+        *ent->prevp = ent->next;
+        if (ent->next)
+            ent->next->prevp = ent->prevp;
+    }
+
+    g_free (ent->name);
+    ent->name = NULL;
+
+    if (ent->ino)
+    {
+        ent->ino->ent = NULL;
+        vfs_s_free_inode (me, ent->ino);
+        ent->ino = NULL;
+    }
+
+    total_entries--;
+    g_free (ent);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_entry *ent)
+{
+    struct vfs_s_entry **ep;
+
+    (void) me;
+
+    for (ep = &dir->subdir; *ep != NULL; ep = &((*ep)->next))
+        ;
+    ent->prevp = ep;
+    ent->next = NULL;
+    ent->dir = dir;
+    *ep = ent;
+
+    ent->ino->st.st_nlink++;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+struct stat *
+vfs_s_default_stat (struct vfs_class *me, mode_t mode)
+{
+    static struct stat st;
+    int myumask;
+
+    (void) me;
+
+    myumask = umask (022);
+    umask (myumask);
+    mode &= ~myumask;
+
+    st.st_mode = mode;
+    st.st_ino = 0;
+    st.st_dev = 0;
+    st.st_rdev = 0;
+    st.st_uid = getuid ();
+    st.st_gid = getgid ();
+    st.st_size = 0;
+    st.st_mtime = st.st_atime = st.st_ctime = time (NULL);
+
+    return &st;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+struct vfs_s_entry *
+vfs_s_generate_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *parent,
+                      mode_t mode)
+{
+    struct vfs_s_inode *inode;
+    struct stat *st;
+
+    st = vfs_s_default_stat (me, mode);
+    inode = vfs_s_new_inode (me, parent->super, st);
+
+    return vfs_s_new_entry (me, name, inode);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+struct vfs_s_inode *
+vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
+                  const char *path, int follow, int flags)
+{
+    struct vfs_s_entry *ent;
+
+    if (((MEDATA->flags & VFS_S_REMOTE) == 0) && (*path == '\0'))
+        return super->root;
+
+    ent = (MEDATA->find_entry) (me, super->root, path, follow, flags);
+    return (ent != NULL) ? ent->ino : NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Ook, these were functions around directory entries / inodes */
+/* -------------------------------- superblock games -------------------------- */
 
 /*
  * Dissect the path and create corresponding superblock.  Note that inname
@@ -539,21 +1082,7 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **
     return retval;
 }
 
-
-/*
- * Dissect the path and create corresponding superblock.
- * The result should be freed.
- */
-static char *
-vfs_s_get_path (struct vfs_class *me, const char *inname, struct vfs_s_super **archive, int flags)
-{
-    char *buf, *retval;
-
-    buf = g_strdup (inname);
-    retval = g_strdup (vfs_s_get_path_mangle (me, buf, archive, flags));
-    g_free (buf);
-    return retval;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 void
 vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super)
@@ -564,6 +1093,8 @@ vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super)
         super->root = vfs_s_new_inode (me, super, vfs_s_default_stat (me, S_IFDIR | 0755));
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
@@ -595,165 +1126,8 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
     return g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR, ino->ent->name, (char *) NULL);
 }
 
-/* Support of archives */
-/* ------------------------ readdir & friends ----------------------------- */
-
-static struct vfs_s_inode *
-vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
-{
-    struct vfs_s_super *super;
-    struct vfs_s_inode *ino;
-    char *q;
-
-    if (!(q = vfs_s_get_path (me, name, &super, 0)))
-        return NULL;
-
-    ino =
-        vfs_s_find_inode (me, super, q,
-                          flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
-    if ((!ino) && (!*q))
-        /* We are asking about / directory of ftp server: assume it exists */
-        ino =
-            vfs_s_find_inode (me, super, q,
-                              flags & FL_FOLLOW ? LINK_FOLLOW :
-                              LINK_NO_FOLLOW, FL_DIR | (flags & ~FL_FOLLOW));
-    g_free (q);
-    return ino;
-}
-
-struct dirhandle
-{
-    struct vfs_s_entry *cur;
-    struct vfs_s_inode *dir;
-};
-
-static void *
-vfs_s_opendir (struct vfs_class *me, const char *dirname)
-{
-    struct vfs_s_inode *dir;
-    struct dirhandle *info;
-
-    dir = vfs_s_inode_from_path (me, dirname, FL_DIR | FL_FOLLOW);
-    if (!dir)
-        return NULL;
-    if (!S_ISDIR (dir->st.st_mode))
-        ERRNOR (ENOTDIR, NULL);
-
-    dir->st.st_nlink++;
-#if 0
-    if (!dir->subdir)           /* This can actually happen if we allow empty directories */
-        ERRNOR (EAGAIN, NULL);
-#endif
-    info = g_new (struct dirhandle, 1);
-    info->cur = dir->subdir;
-    info->dir = dir;
-
-    return info;
-}
-
-static void *
-vfs_s_readdir (void *data)
-{
-    static union vfs_dirent dir;
-    struct dirhandle *info = (struct dirhandle *) data;
-
-    if (!(info->cur))
-        return NULL;
-
-    if (info->cur->name)
-    {
-        g_strlcpy (dir.dent.d_name, info->cur->name, MC_MAXPATHLEN);
-    }
-    else
-    {
-        vfs_die ("Null in structure-cannot happen");
-    }
-
-    compute_namelen (&dir.dent);
-    info->cur = info->cur->next;
-
-    return (void *) &dir;
-}
-
-static int
-vfs_s_closedir (void *data)
-{
-    struct dirhandle *info = (struct dirhandle *) data;
-    struct vfs_s_inode *dir = info->dir;
-
-    vfs_s_free_inode (dir->super->me, dir);
-    g_free (data);
-    return 0;
-}
-
-static int
-vfs_s_chdir (struct vfs_class *me, const char *path)
-{
-    void *data;
-
-    data = vfs_s_opendir (me, path);
-    if (data == NULL)
-        return -1;
-    vfs_s_closedir (data);
-    return 0;
-}
-
+/* --------------------------------------------------------------------------------------------- */
 /* --------------------------- stat and friends ---------------------------- */
-
-static int
-vfs_s_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, int flag)
-{
-    struct vfs_s_inode *ino;
-
-    ino = vfs_s_inode_from_path (me, path, flag);
-    if (ino == NULL)
-        return -1;
-    *buf = ino->st;
-    return 0;
-}
-
-static int
-vfs_s_stat (struct vfs_class *me, const char *path, struct stat *buf)
-{
-    return vfs_s_internal_stat (me, path, buf, FL_FOLLOW);
-}
-
-static int
-vfs_s_lstat (struct vfs_class *me, const char *path, struct stat *buf)
-{
-    return vfs_s_internal_stat (me, path, buf, FL_NONE);
-}
-
-static int
-vfs_s_fstat (void *fh, struct stat *buf)
-{
-    *buf = FH->ino->st;
-    return 0;
-}
-
-static int
-vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
-{
-    struct vfs_s_inode *ino;
-    size_t len;
-
-    ino = vfs_s_inode_from_path (me, path, 0);
-    if (!ino)
-        return -1;
-
-    if (!S_ISLNK (ino->st.st_mode))
-        ERRNOR (EINVAL, -1);
-
-    if (ino->linkname == NULL)
-        ERRNOR (EFAULT, -1);
-
-    len = strlen (ino->linkname);
-    if (size < len)
-        len = size;
-    /* readlink() does not append a NUL character to buf */
-    memcpy (buf, ino->linkname, len);
-    return len;
-}
 
 void *
 vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
@@ -848,143 +1222,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     return fh;
 }
 
-static ssize_t
-vfs_s_read (void *fh, char *buffer, size_t count)
-{
-    int n;
-    struct vfs_class *me = FH_SUPER->me;
-
-    if (FH->linear == LS_LINEAR_PREOPEN)
-    {
-        if (!MEDATA->linear_start (me, FH, FH->pos))
-            return -1;
-    }
-
-    if (FH->linear == LS_LINEAR_CLOSED)
-        vfs_die ("linear_start() did not set linear_state!");
-
-    if (FH->linear == LS_LINEAR_OPEN)
-        return MEDATA->linear_read (me, FH, buffer, count);
-
-    if (FH->handle != -1)
-    {
-        n = read (FH->handle, buffer, count);
-        if (n < 0)
-            me->verrno = errno;
-        return n;
-    }
-    vfs_die ("vfs_s_read: This should not happen\n");
-    return -1;
-}
-
-static ssize_t
-vfs_s_write (void *fh, const char *buffer, size_t count)
-{
-    int n;
-    struct vfs_class *me = FH_SUPER->me;
-
-    if (FH->linear)
-        vfs_die ("no writing to linear files, please");
-
-    FH->changed = 1;
-    if (FH->handle != -1)
-    {
-        n = write (FH->handle, buffer, count);
-        if (n < 0)
-            me->verrno = errno;
-        return n;
-    }
-    vfs_die ("vfs_s_write: This should not happen\n");
-    return 0;
-}
-
-static off_t
-vfs_s_lseek (void *fh, off_t offset, int whence)
-{
-    off_t size = FH->ino->st.st_size;
-
-    if (FH->linear == LS_LINEAR_OPEN)
-        vfs_die ("cannot lseek() after linear_read!");
-
-    if (FH->handle != -1)
-    {                           /* If we have local file opened, we want to work with it */
-        off_t retval = lseek (FH->handle, offset, whence);
-        if (retval == -1)
-            FH->ino->super->me->verrno = errno;
-        return retval;
-    }
-
-    switch (whence)
-    {
-    case SEEK_CUR:
-        offset += FH->pos;
-        break;
-    case SEEK_END:
-        offset += size;
-        break;
-    }
-    if (offset < 0)
-        FH->pos = 0;
-    else if (offset < size)
-        FH->pos = offset;
-    else
-        FH->pos = size;
-    return FH->pos;
-}
-
-static int
-vfs_s_close (void *fh)
-{
-    int res = 0;
-    struct vfs_class *me = FH_SUPER->me;
-
-    FH_SUPER->fd_usage--;
-    if (!FH_SUPER->fd_usage)
-        vfs_stamp_create (me, FH_SUPER);
-
-    if (FH->linear == LS_LINEAR_OPEN)
-        MEDATA->linear_close (me, fh);
-    if (MEDATA->fh_close)
-        res = MEDATA->fh_close (me, fh);
-    if (FH->changed && MEDATA->file_store)
-    {
-        char *s = vfs_s_fullpath (me, FH->ino);
-        if (!s)
-            res = -1;
-        else
-        {
-            res = MEDATA->file_store (me, fh, s, FH->ino->localname);
-            g_free (s);
-        }
-        vfs_s_invalidate (me, FH_SUPER);
-    }
-    if (FH->handle != -1)
-        close (FH->handle);
-
-    vfs_s_free_inode (me, FH->ino);
-    g_free (fh);
-    return res;
-}
-
-static void
-vfs_s_print_stats (const char *fs_name, const char *action,
-                   const char *file_name, off_t have, off_t need)
-{
-    static const char *i18n_percent_transf_format = NULL;
-    static const char *i18n_transf_format = NULL;
-
-    if (i18n_percent_transf_format == NULL)
-    {
-        i18n_percent_transf_format = _("%s: %s: %s %3d%% (%ju bytes transferred)");
-        i18n_transf_format = _("%s: %s: %s %ju bytes transferred");
-    }
-
-    if (need)
-        print_vfs_message (i18n_percent_transf_format, fs_name, action,
-                           file_name, (int) ((double) have * 100 / need), (uintmax_t) have);
-    else
-        print_vfs_message (i18n_transf_format, fs_name, action, file_name, (uintmax_t) have);
-}
+/* --------------------------------------------------------------------------------------------- */
 
 int
 vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
@@ -1053,143 +1291,8 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     return -1;
 }
 
-/* ------------------------------- mc support ---------------------------- */
-
-static void
-vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
-{
-    struct vfs_s_super *a = MEDATA->supers;
-    char *name;
-
-    while (a)
-    {
-        name = g_strconcat (a->name, "#", me->prefix, "/",
-                            /* a->current_dir->name, */ (char *) NULL);
-        (*func) (name);
-        g_free (name);
-        a = a->next;
-    }
-}
-
-static int
-vfs_s_ferrno (struct vfs_class *me)
-{
-    return me->verrno;
-}
-
-/*
- * Get local copy of the given file.  We reuse the existing file cache
- * for remote filesystems.  Archives use standard VFS facilities.
- */
-static char *
-vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
-{
-    struct vfs_s_fh *fh;
-    char *local = NULL;
-
-    fh = vfs_s_open (me, path, O_RDONLY, 0);
-
-    if (fh != NULL)
-    {
-        if ((fh->ino != NULL) && (fh->ino->localname != NULL))
-            local = g_strdup (fh->ino->localname);
-
-        vfs_s_close (fh);
-    }
-
-    return local;
-}
-
-/*
- * Return the local copy.  Since we are using our cache, we do nothing -
- * the cache will be removed when the archive is closed.
- */
-static int
-vfs_s_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
-{
-    (void) me;
-    (void) path;
-    (void) local;
-    (void) has_changed;
-    return 0;
-}
-
-static int
-vfs_s_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
-{
-    switch (ctlop)
-    {
-    case VFS_SETCTL_STALE_DATA:
-        {
-            struct vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
-
-            if (ino == NULL)
-                return 0;
-            if (arg)
-                ino->super->want_stale = 1;
-            else
-            {
-                ino->super->want_stale = 0;
-                vfs_s_invalidate (me, ino->super);
-            }
-            return 1;
-        }
-    case VFS_SETCTL_LOGFILE:
-        MEDATA->logfile = fopen ((char *) arg, "w");
-        return 1;
-    case VFS_SETCTL_FLUSH:
-        MEDATA->flush = 1;
-        return 1;
-    }
-    return 0;
-}
-
-
+/* --------------------------------------------------------------------------------------------- */
 /* ----------------------------- Stamping support -------------------------- */
-
-static vfsid
-vfs_s_getid (struct vfs_class *me, const char *path)
-{
-    struct vfs_s_super *archive = NULL;
-    char *p;
-
-    p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN);
-    if (p == NULL)
-        return NULL;
-    g_free (p);
-    return (vfsid) archive;
-}
-
-static int
-vfs_s_nothingisopen (vfsid id)
-{
-    (void) id;
-    /* Our data structures should survive free of superblock at any time */
-    return 1;
-}
-
-static void
-vfs_s_free (vfsid id)
-{
-    vfs_s_free_super (((struct vfs_s_super *) id)->me, (struct vfs_s_super *) id);
-}
-
-static int
-vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
-{
-    struct timeval tim;
-
-    if (MEDATA->flush)
-    {
-        MEDATA->flush = 0;
-        return 0;
-    }
-
-    gettimeofday (&tim, NULL);
-    if (tim.tv_sec < ino->timestamp.tv_sec)
-        return 1;
-    return 0;
-}
 
 /* Initialize one of our subclasses - fill common functions */
 void
@@ -1231,7 +1334,9 @@ vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
     sub->dir_uptodate = vfs_s_dir_uptodate;
 }
 
-/* Find VFS id for given directory name */
+/* --------------------------------------------------------------------------------------------- */
+/** Find VFS id for given directory name */
+
 vfsid
 vfs_getid (struct vfs_class *vclass, const char *dir)
 {
@@ -1247,6 +1352,7 @@ vfs_getid (struct vfs_class *vclass, const char *dir)
     return id;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* ----------- Utility functions for networked filesystems  -------------- */
 
 #ifdef ENABLE_VFS_NET
@@ -1272,6 +1378,8 @@ vfs_s_select_on_two (int fd1, int fd2)
         return 2;
     return -1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char term)
@@ -1315,6 +1423,8 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int fd)
 {
@@ -1348,3 +1458,5 @@ vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int 
     return 0;
 }
 #endif /* ENABLE_VFS_NET */
+
+/* --------------------------------------------------------------------------------------------- */

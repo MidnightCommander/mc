@@ -11,7 +11,8 @@
 
 /*** enums ***************************************************************************************/
 
-typedef enum {
+typedef enum
+{
     COND__NOT_FOUND,
     COND__NOT_ALL_FOUND,
     COND__FOUND_CHAR,
@@ -22,7 +23,8 @@ typedef enum {
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_search_cond_struct {
+typedef struct mc_search_cond_struct
+{
     GString *str;
     GString *upper;
     GString *lower;
@@ -32,12 +34,12 @@ typedef struct mc_search_cond_struct {
 
 /*** global variables defined in .c file *********************************************************/
 
-extern const char * STR_E_NOTFOUND;
-extern const char * STR_E_UNKNOWN_TYPE;
-extern const char * STR_E_RPL_NOT_EQ_TO_FOUND;
-extern const char * STR_E_RPL_INVALID_TOKEN;
-/*** declarations of public functions ************************************************************/
+extern const char *STR_E_NOTFOUND;
+extern const char *STR_E_UNKNOWN_TYPE;
+extern const char *STR_E_RPL_NOT_EQ_TO_FOUND;
+extern const char *STR_E_RPL_INVALID_TOKEN;
 
+/*** declarations of public functions ************************************************************/
 
 /* search/lib.c : */
 
@@ -82,5 +84,7 @@ void mc_search__cond_struct_new_init_hex (const char *, mc_search_t *, mc_search
 gboolean mc_search__run_hex (mc_search_t *, const void *, gsize, gsize, gsize *);
 
 GString *mc_search_hex_prepare_replace_str (mc_search_t *, GString *);
+
+/*** inline functions ****************************************************************************/
 
 #endif

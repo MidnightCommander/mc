@@ -51,14 +51,14 @@
 #include "main.h"
 #include "listmode.h"
 
-#define UX		5
-#define UY		2
+#define UX 5
+#define UY 2
 
-#define BX		5
-#define BY		18
+#define BX 5
+#define BY 18
 
-#define B_ADD		B_USER
-#define B_REMOVE        (B_USER + 1)
+#define B_ADD    B_USER
+#define B_REMOVE (B_USER + 1)
 
 static WListbox *l_listmode;
 

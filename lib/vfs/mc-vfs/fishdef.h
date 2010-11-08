@@ -4,8 +4,10 @@
  * \brief Header: FISH script defaults
  */
 
-#ifndef MC_FISH_DEF_H
-#define MC_FISH_DEF_H
+#ifndef MC__FISH_DEF_H
+#define MC__FISH_DEF_H
+
+/*** typedefs(not structures) and defined constants **********************************************/
 
 /* default 'ls' script */
 #define FISH_LS_DEF_CONTENT ""                                            \
@@ -205,5 +207,13 @@
 "echo $res\n"                                                             \
 "echo \"### 200\"\n"
 
+/*** enums ***************************************************************************************/
 
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
+/*** inline functions ****************************************************************************/
 #endif

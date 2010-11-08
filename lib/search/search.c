@@ -66,7 +66,8 @@ mc_search__cond_struct_new (mc_search_t * lc_mc_search, const char *str,
     mc_search_cond->str = g_string_new_len (str, str_len);
     mc_search_cond->charset = g_strdup (charset);
 
-    switch (lc_mc_search->search_type) {
+    switch (lc_mc_search->search_type)
+    {
     case MC_SEARCH_T_GLOB:
         mc_search__cond_struct_new_init_glob (charset, lc_mc_search, mc_search_cond);
         break;
@@ -117,7 +118,8 @@ mc_search__conditions_free (GPtrArray * array)
     gsize loop1;
     mc_search_cond_t *lc_mc_search;
 
-    for (loop1 = 0; loop1 < array->len; loop1++) {
+    for (loop1 = 0; loop1 < array->len; loop1++)
+    {
         lc_mc_search = (mc_search_cond_t *) g_ptr_array_index (array, loop1);
         mc_search__cond_struct_free (lc_mc_search);
     }
@@ -137,7 +139,8 @@ mc_search_new (const gchar * original, gsize str_len)
     if (!original)
         return NULL;
 
-    if ((gssize) str_len == -1) {
+    if ((gssize) str_len == -1)
+    {
         str_len = strlen (original);
         if (str_len == 0)
             return NULL;
@@ -184,30 +187,37 @@ mc_search_prepare (mc_search_t * lc_mc_search)
     GPtrArray *ret;
     ret = g_ptr_array_new ();
 #ifdef HAVE_CHARSET
-    if (lc_mc_search->is_all_charsets) {
+    if (lc_mc_search->is_all_charsets)
+    {
         gsize loop1, recoded_str_len;
         gchar *buffer;
-        for (loop1 = 0; loop1 < codepages->len; loop1++) {
+        for (loop1 = 0; loop1 < codepages->len; loop1++)
+        {
             const char *id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
-            if (!g_ascii_strcasecmp (id, cp_source)) {
+            if (!g_ascii_strcasecmp (id, cp_source))
+            {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
-                                                             lc_mc_search->original_len, cp_source));
+                                                             lc_mc_search->original_len,
+                                                             cp_source));
                 continue;
             }
 
             buffer =
-                mc_search__recode_str (lc_mc_search->original, lc_mc_search->original_len, cp_source,
-                                       id, &recoded_str_len);
+                mc_search__recode_str (lc_mc_search->original, lc_mc_search->original_len,
+                                       cp_source, id, &recoded_str_len);
 
             g_ptr_array_add (ret,
                              mc_search__cond_struct_new (lc_mc_search, buffer,
                                                          recoded_str_len, id));
             g_free (buffer);
         }
-    } else {
+    }
+    else
+    {
         g_ptr_array_add (ret,
-                         (gpointer) mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
+                         (gpointer) mc_search__cond_struct_new (lc_mc_search,
+                                                                lc_mc_search->original,
                                                                 lc_mc_search->original_len,
                                                                 cp_source));
     }
@@ -232,13 +242,15 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
 
     if (!lc_mc_search)
         return FALSE;
-    if (!mc_search_is_type_avail (lc_mc_search->search_type)) {
+    if (!mc_search_is_type_avail (lc_mc_search->search_type))
+    {
         lc_mc_search->error = MC_SEARCH_E_INPUT;
         lc_mc_search->error_str = g_strdup (_(STR_E_UNKNOWN_TYPE));
         return FALSE;
     }
 #ifdef SEARCH_TYPE_GLIB
-    if (lc_mc_search->regex_match_info) {
+    if (lc_mc_search->regex_match_info)
+    {
         g_match_info_free (lc_mc_search->regex_match_info);
         lc_mc_search->regex_match_info = NULL;
     }
@@ -252,7 +264,8 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
         return FALSE;
 
 
-    switch (lc_mc_search->search_type) {
+    switch (lc_mc_search->search_type)
+    {
     case MC_SEARCH_T_NORMAL:
         ret = mc_search__run_normal (lc_mc_search, user_data, start_search, end_search, found_len);
         break;
@@ -276,7 +289,8 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
 gboolean
 mc_search_is_type_avail (mc_search_type_t search_type)
 {
-    switch (search_type) {
+    switch (search_type)
+    {
     case MC_SEARCH_T_GLOB:
     case MC_SEARCH_T_NORMAL:
     case MC_SEARCH_T_REGEX:
@@ -291,11 +305,11 @@ mc_search_is_type_avail (mc_search_type_t search_type)
 /* --------------------------------------------------------------------------------------------- */
 
 const mc_search_type_str_t *
-mc_search_types_list_get (size_t *num)
+mc_search_types_list_get (size_t * num)
 {
     /* don't count last NULL item */
     if (num != NULL)
-	*num = sizeof (mc_search__list_types) / sizeof (mc_search__list_types[0]) - 1;
+        *num = sizeof (mc_search__list_types) / sizeof (mc_search__list_types[0]) - 1;
 
     return mc_search__list_types;
 }
@@ -313,7 +327,8 @@ mc_search_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str
     if (replace_str == NULL || replace_str->str == NULL || replace_str->len == 0)
         return g_string_new ("");
 
-    switch (lc_mc_search->search_type) {
+    switch (lc_mc_search->search_type)
+    {
     case MC_SEARCH_T_REGEX:
         ret = mc_search_regex_prepare_replace_str (lc_mc_search, replace_str);
         break;
@@ -354,7 +369,8 @@ mc_search_is_fixed_search_str (mc_search_t * lc_mc_search)
 {
     if (lc_mc_search == NULL)
         return FALSE;
-    switch (lc_mc_search->search_type) {
+    switch (lc_mc_search->search_type)
+    {
     case MC_SEARCH_T_REGEX:
     case MC_SEARCH_T_GLOB:
         return FALSE;

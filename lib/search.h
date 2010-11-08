@@ -3,12 +3,12 @@
 
 #include <config.h>
 
-#include "lib/global.h"      /* <glib.h> */
+#include "lib/global.h"         /* <glib.h> */
 
 #include <sys/types.h>
 
 #ifdef SEARCH_TYPE_PCRE
-#	include <pcre.h>
+#include <pcre.h>
 #endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -18,14 +18,15 @@ typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
 #define MC_SEARCH__NUM_REPLACE_ARGS 64
 
 #ifdef SEARCH_TYPE_GLIB
-#	define mc_search_matchinfo_t GMatchInfo
+#define mc_search_matchinfo_t GMatchInfo
 #else
-#	define mc_search_matchinfo_t pcre_extra
+#define mc_search_matchinfo_t pcre_extra
 #endif
 
 /*** enums ***************************************************************************************/
 
-typedef enum {
+typedef enum
+{
     MC_SEARCH_E_OK,
     MC_SEARCH_E_INPUT,
     MC_SEARCH_E_REGEX_COMPILE,
@@ -34,14 +35,16 @@ typedef enum {
     MC_SEARCH_E_NOTFOUND
 } mc_search_error_t;
 
-typedef enum {
+typedef enum
+{
     MC_SEARCH_T_NORMAL,
     MC_SEARCH_T_REGEX,
     MC_SEARCH_T_HEX,
     MC_SEARCH_T_GLOB
 } mc_search_type_t;
 
-typedef enum {
+typedef enum
+{
     MC_SEARCH_CB_OK = 0,
     MC_SEARCH_CB_INVALID = -1,
     MC_SEARCH_CB_ABORT = -2,
@@ -51,9 +54,10 @@ typedef enum {
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_search_struct {
+typedef struct mc_search_struct
+{
 
-/* public input data */
+    /* public input data */
 
     /* search in all charsets */
     gboolean is_all_charsets;
@@ -80,7 +84,7 @@ typedef struct mc_search_struct {
     mc_search_type_t search_type;
 
 
-/* public output data */
+    /* public output data */
 
     /* some data for normal */
     off_t normal_offset;
@@ -94,7 +98,7 @@ typedef struct mc_search_struct {
     int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];
 #endif                          /* SEARCH_TYPE_PCRE */
 
-/* private data */
+    /* private data */
 
     /* prepared conditions */
     GPtrArray *conditions;
@@ -109,7 +113,8 @@ typedef struct mc_search_struct {
 
 } mc_search_t;
 
-typedef struct mc_search_type_str_struct {
+typedef struct mc_search_type_str_struct
+{
     const char *str;
     mc_search_type_t type;
 } mc_search_type_str_t;
@@ -129,14 +134,14 @@ gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize st
 
 gboolean mc_search_is_type_avail (mc_search_type_t);
 
-const mc_search_type_str_t *mc_search_types_list_get (size_t *num);
+const mc_search_type_str_t *mc_search_types_list_get (size_t * num);
 
 GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str);
 char *mc_search_prepare_replace_str2 (mc_search_t *, char *);
 
 gboolean mc_search_is_fixed_search_str (mc_search_t *);
 
-gchar **mc_search_get_types_strings_array (size_t *num);
+gchar **mc_search_get_types_strings_array (size_t * num);
 
 gboolean mc_search (const gchar *, const gchar *, mc_search_type_t);
 

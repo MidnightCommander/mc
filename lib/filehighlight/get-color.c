@@ -44,7 +44,7 @@
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-/*inline functions*/
+/*inline functions */
 inline static gboolean
 mc_fhl_is_file (file_entry * fe)
 {
@@ -141,8 +141,8 @@ inline static gboolean
 mc_fhl_is_special (file_entry * fe)
 {
     return
-        (mc_fhl_is_special_socket (fe) || mc_fhl_is_special_fifo (fe) || mc_fhl_is_special_door (fe)
-        );
+        (mc_fhl_is_special_socket (fe) || mc_fhl_is_special_fifo (fe)
+         || mc_fhl_is_special_door (fe));
 }
 
 
@@ -154,7 +154,8 @@ mc_fhl_get_color_filetype (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_ent
     gboolean my_color = FALSE;
     (void) fhl;
 
-    switch (mc_filter->file_type) {
+    switch (mc_filter->file_type)
+    {
     case MC_FLHGH_FTYPE_T_FILE:
         if (mc_fhl_is_file (fe))
             my_color = TRUE;
@@ -254,9 +255,11 @@ mc_fhl_get_color (mc_fhl_t * fhl, file_entry * fe)
     if (fhl == NULL)
         return NORMAL_COLOR;
 
-    for (i = 0; i < fhl->filters->len; i++) {
+    for (i = 0; i < fhl->filters->len; i++)
+    {
         mc_filter = (mc_fhl_filter_t *) g_ptr_array_index (fhl->filters, i);
-        switch (mc_filter->type) {
+        switch (mc_filter->type)
+        {
         case MC_FLHGH_T_FTYPE:
             ret = mc_fhl_get_color_filetype (mc_filter, fhl, fe);
             if (ret > 0)

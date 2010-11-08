@@ -1,4 +1,3 @@
-
 /** \file fs.h
  *  \brief Header: fs compatibility definitions
  */
@@ -11,7 +10,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
+/*** typedefs(not structures) and defined constants **********************************************/
 
 /* Replacement for permission bits missing in sys/stat.h */
 #ifndef S_ISLNK
@@ -52,7 +53,6 @@
 #endif
 
 /* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
-#include <dirent.h>
 #define NLENGTH(dirent) (strlen ((dirent)->d_name))
 #define DIRENT_LENGTH_COMPUTED 1
 
@@ -61,6 +61,16 @@
 #else
 #   define MC_MAXFILENAMELEN MAXNAMLEN
 #endif
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
+/*** inline functions ****************************************************************************/
 
 static inline void
 compute_namelen (struct dirent *dent __attribute__ ((unused)))

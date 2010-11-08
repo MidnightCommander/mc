@@ -42,7 +42,7 @@
 #include "src/main.h"
 
 #ifndef WANT_TERM_H
-#   define WANT_TERM_H
+#define WANT_TERM_H
 #endif
 
 #include "tty-internal.h"       /* slow_tty */
@@ -53,30 +53,31 @@
 /* include at last !!! */
 #ifdef WANT_TERM_H
 #ifdef HAVE_NCURSES_TERM_H
-#   include <ncurses/term.h>
+#include <ncurses/term.h>
 #else
-#   include <term.h>
+#include <term.h>
 #endif /* HAVE_NCURSES_TERM_H */
 #endif /* WANT_TERM_H */
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
-/*** file scope macro definitions **************************************/
+/*** file scope macro definitions ****************************************************************/
 
 #if defined(_AIX) && !defined(CTRL)
-#   define CTRL(x) ((x) & 0x1f)
+#define CTRL(x) ((x) & 0x1f)
 #endif
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
-/*** file scope functions **********************************************/
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions **************************************************/
+/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -137,7 +138,6 @@ mc_tty_normalize_lines_char (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-
 void
 tty_init (gboolean slow, gboolean ugly_lines)
 {
@@ -174,11 +174,15 @@ tty_init (gboolean slow, gboolean ugly_lines)
     nodelay (stdscr, FALSE);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_shutdown (void)
 {
     endwin ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_reset_prog_mode (void)
@@ -186,11 +190,15 @@ tty_reset_prog_mode (void)
     reset_prog_mode ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_reset_shell_mode (void)
 {
     reset_shell_mode ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_raw_mode (void)
@@ -199,6 +207,8 @@ tty_raw_mode (void)
     cbreak ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_noraw_mode (void)
 {
@@ -206,11 +216,15 @@ tty_noraw_mode (void)
     noraw ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_noecho (void)
 {
     noecho ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 tty_flush_input (void)
@@ -218,11 +232,15 @@ tty_flush_input (void)
     return flushinp ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_keypad (gboolean set)
 {
     keypad (stdscr, (bool) set);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_nodelay (gboolean set)
@@ -230,11 +248,15 @@ tty_nodelay (gboolean set)
     nodelay (stdscr, (bool) set);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 tty_baudrate (void)
 {
     return baudrate ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 tty_lowlevel_getch (void)
@@ -242,11 +264,15 @@ tty_lowlevel_getch (void)
     return getch ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 tty_reset_screen (void)
 {
     return endwin ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_touch_screen (void)
@@ -254,11 +280,15 @@ tty_touch_screen (void)
     touchwin (stdscr);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_gotoyx (int y, int x)
 {
     move (y, x);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_getyx (int *py, int *px)
@@ -266,7 +296,9 @@ tty_getyx (int *py, int *px)
     getyx (stdscr, *py, *px);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* if x < 0 or y < 0, draw line starting from current position */
+
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
@@ -278,7 +310,9 @@ tty_draw_hline (int y, int x, int ch, int len)
     hline (ch, len);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* if x < 0 or y < 0, draw line starting from current position */
+
 void
 tty_draw_vline (int y, int x, int ch, int len)
 {
@@ -289,6 +323,8 @@ tty_draw_vline (int y, int x, int ch, int len)
         move (y, x);
     vline (ch, len);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
@@ -329,11 +365,15 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
     move (y, x);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_set_alt_charset (gboolean alt_charset)
 {
     (void) alt_charset;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_display_8bit (gboolean what)
@@ -341,11 +381,15 @@ tty_display_8bit (gboolean what)
     meta (stdscr, (int) what);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_print_char (int c)
 {
     addch (c);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_print_anychar (int c)
@@ -368,6 +412,8 @@ tty_print_anychar (int c)
         addch (c);
 
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_print_alt_char (int c, gboolean single)
@@ -394,11 +440,15 @@ tty_print_alt_char (int c, gboolean single)
     addch (c);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_print_string (const char *s)
 {
     addstr (str_term_form (s));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_printf (const char *fmt, ...)
@@ -410,6 +460,8 @@ tty_printf (const char *fmt, ...)
     va_end (args);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 tty_tgetstr (const char *cap)
 {
@@ -417,12 +469,16 @@ tty_tgetstr (const char *cap)
     return tgetstr ((char *) cap, &unused);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_refresh (void)
 {
     refresh ();
     doupdate ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_setup_sigwinch (void (*handler) (int))
@@ -439,8 +495,12 @@ tty_setup_sigwinch (void (*handler) (int))
 #endif /* SIGWINCH */
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_beep (void)
 {
     beep ();
 }
+
+/* --------------------------------------------------------------------------------------------- */

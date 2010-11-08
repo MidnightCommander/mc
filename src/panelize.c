@@ -51,16 +51,16 @@
 #include "panelize.h"
 #include "history.h"
 
-#define UX		5
-#define UY		2
+#define UX 5
+#define UY 2
 
-#define BX		5
-#define BY		18
+#define BX 5
+#define BY 18
 
-#define BUTTONS		4
-#define LABELS          3
-#define B_ADD		B_USER
-#define B_REMOVE        (B_USER + 1)
+#define BUTTONS  4
+#define LABELS   3
+#define B_ADD    B_USER
+#define B_REMOVE (B_USER + 1)
 
 static WListbox *l_panelize;
 static Dlg_head *panelize_dlg;

@@ -6,9 +6,21 @@
  */
 
 
-#ifndef MC_VFS_FISH_H
-#define MC_VFS_FISH_H
+#ifndef MC__VFS_FISH_H
+#define MC__VFS_FISH_H
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
 
 extern int fish_directory_timeout;
+
+/*** declarations of public functions ************************************************************/
+
+/*** inline functions ****************************************************************************/
 
 #endif
