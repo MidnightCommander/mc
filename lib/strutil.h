@@ -80,7 +80,6 @@ typedef enum
     J_CENTER_LEFT_FIT = 0x14
 } align_crt_t;
 
-
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /* all functions in str_class must be defined for every encoding */

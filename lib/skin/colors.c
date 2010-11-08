@@ -81,6 +81,7 @@ mc_skin_color_remove_from_hash (mc_skin_t * mc_skin, const gchar * group, const 
     g_hash_table_remove (mc_skin->colors, (gpointer) kname);
 }
 #endif
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void

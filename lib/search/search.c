@@ -128,8 +128,6 @@ mc_search__conditions_free (GPtrArray * array)
 
 /* --------------------------------------------------------------------------------------------- */
 
-
-
 /*** public functions ****************************************************************************/
 
 mc_search_t *
@@ -262,7 +260,6 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
 
     if ((lc_mc_search->conditions == NULL) && !mc_search_prepare (lc_mc_search))
         return FALSE;
-
 
     switch (lc_mc_search->search_type)
     {
@@ -418,7 +415,6 @@ mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 #else /* SEARCH_TYPE_GLIB */
     return lc_mc_search->iovector[lc_index * 2];
 #endif /* SEARCH_TYPE_GLIB */
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -440,7 +436,6 @@ mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 #else /* SEARCH_TYPE_GLIB */
     return lc_mc_search->iovector[lc_index * 2 + 1];
 #endif /* SEARCH_TYPE_GLIB */
-
 }
 
 /* --------------------------------------------------------------------------------------------- */

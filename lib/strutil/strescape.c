@@ -26,8 +26,8 @@
  */
 
 #include <config.h>
-#include "lib/strescape.h"
 
+#include "lib/strescape.h"
 
 /*** global variables ****************************************************************************/
 
@@ -243,6 +243,5 @@ strutils_is_char_escaped (const char *start, const char *current)
     }
     return (gboolean) num_esc % 2;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */

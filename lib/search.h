@@ -56,7 +56,6 @@ typedef enum
 
 typedef struct mc_search_struct
 {
-
     /* public input data */
 
     /* search in all charsets */
@@ -110,7 +109,6 @@ typedef struct mc_search_struct
     /* error code after search */
     mc_search_error_t error;
     gchar *error_str;
-
 } mc_search_t;
 
 typedef struct mc_search_type_str_struct

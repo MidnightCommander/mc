@@ -125,7 +125,6 @@ mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     g_free (regexp);
     return TRUE;
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -180,7 +179,6 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-
 gboolean
 mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename)
 {
@@ -193,7 +191,6 @@ mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename)
     fhl->config = mc_config_init (filename);
     return (fhl->config != NULL);
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 

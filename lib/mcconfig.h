@@ -22,7 +22,6 @@ extern mc_config_t *mc_panels_config;
 
 /*** declarations of public functions **********************************/
 
-
 /* mcconfig/common.c: */
 
 mc_config_t *mc_config_init (const gchar *);
@@ -39,6 +38,7 @@ gboolean mc_config_read_file (mc_config_t *, const gchar *);
 gboolean mc_config_save_file (mc_config_t * config, GError ** error);
 
 gboolean mc_config_save_to_file (mc_config_t * config, const gchar * filename, GError ** error);
+
 
 /* mcconfig/get.c: */
 
@@ -84,6 +84,5 @@ void mc_config_set_int_list (mc_config_t *, const gchar *, const gchar *, int[],
 /* mcconfig/dialog.c: */
 
 void mc_config_show_dialog (void);
-
 
 #endif

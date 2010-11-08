@@ -373,6 +373,7 @@ mc_search_regex__get_token_by_num (const mc_search_t * lc_mc_search, gsize lc_in
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 static int
 mc_search_regex__process_replace_str (const GString * replace_str, const gsize current_pos,
                                       gsize * skip_len, replace_transform_type_t * replace_flags)
@@ -673,6 +674,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 GString *
 mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
 {

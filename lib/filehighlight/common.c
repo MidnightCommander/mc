@@ -27,7 +27,6 @@
 
 #include <config.h>
 
-
 #include "lib/global.h"
 #include "lib/filehighlight.h"
 #include "internal.h"
@@ -72,7 +71,6 @@ mc_fhl_array_free (mc_fhl_t * fhl)
 mc_fhl_t *
 mc_fhl_new (gboolean need_auto_fill)
 {
-
     mc_fhl_t *fhl;
 
     fhl = g_try_new0 (mc_fhl_t, 1);

@@ -28,7 +28,6 @@
 #include <config.h>
 #include <string.h>
 
-
 #include "lib/global.h"
 #include "lib/skin.h"
 #include "lib/filehighlight.h"
@@ -43,7 +42,9 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+
 /* --------------------------------------------------------------------------------------------- */
+
 /*inline functions */
 inline static gboolean
 mc_fhl_is_file (file_entry * fe)
@@ -243,7 +244,6 @@ mc_fhl_get_color_regexp (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_entry
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
 
 int
 mc_fhl_get_color (mc_fhl_t * fhl, file_entry * fe)

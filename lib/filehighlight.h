@@ -31,4 +31,5 @@ gboolean mc_fhl_parse_ini_file (mc_fhl_t *);
 void mc_fhl_clear (mc_fhl_t *);
 
 /*** inline functions ****************************************************************************/
-#endif
+
+#endif /* MC__FILEHIGHLIGHT_H */

@@ -163,7 +163,6 @@ mc_config_has_group (mc_config_t * mc_config, const char *group)
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-
 gboolean
 mc_config_del_param (mc_config_t * mc_config, const char *group, const gchar * param)
 {

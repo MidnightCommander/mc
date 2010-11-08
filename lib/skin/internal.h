@@ -37,4 +37,5 @@ void mc_skin_hardcoded_blackwhite_colors (mc_skin_t *);
 void mc_skin_colors_old_configure (mc_skin_t *);
 
 /*** inline functions ****************************************************************************/
-#endif
+
+#endif /* MC__SKIN_INTERNAL_H */

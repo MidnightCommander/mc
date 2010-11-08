@@ -27,7 +27,6 @@
 
 #include <config.h>
 
-
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"

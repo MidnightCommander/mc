@@ -94,7 +94,6 @@ gchar *
 mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
                            gboolean * just_letters)
 {
-
     gchar *converted_str, *next_char;
 
     gsize tmp_len;
@@ -138,6 +137,7 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 int
 mc_search__get_char (mc_search_t * lc_mc_search, const void *user_data, gsize current_pos)
 {
@@ -150,7 +150,6 @@ mc_search__get_char (mc_search_t * lc_mc_search, const void *user_data, gsize cu
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 
 GString *
 mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len)
