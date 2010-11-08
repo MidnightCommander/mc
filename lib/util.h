@@ -77,14 +77,6 @@
 
 /*** enums ***************************************************************************************/
 
-/* Matching */
-enum
-{
-    match_file,                 /* match a filename, use easy_patterns */
-    match_normal,               /* match pattern, use easy_patterns */
-    match_regex                 /* match pattern, force using regex */
-};
-
 /* Pathname canonicalization */
 typedef enum
 {
