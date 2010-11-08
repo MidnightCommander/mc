@@ -1,3 +1,40 @@
+Version 4.7.0.10
+
+- Core
+
+    * Capability to remove history items. WListbox widget was fully reimplemented (#1445 with #2068 and #2299 fixes)
+
+- VFS
+
+    * All hardcoded FISH scripts are moved out from fish.c to external scripts:
+        + backport from master branch (see README.fish for more info) (#2367)
+        + resuming of file downloads (#2267)
+    * Hide panels before connect to the FISH server (#2268)
+
+- Editor
+
+    * Added forgotten shortcuts from 4.6 branch (#2404)
+
+- Misc
+
+    * Doc updates
+    * Translation updates
+    * Added new translations: Estonian, Indonesian
+
+- Fixes
+
+    * Hang up after exit on FreeBSD (#2333)
+    * Incorrect initial value of WCheck and WRadio widgets width (#2362)
+    * Quick search is not correctly interrupted in some cases (#2174)
+    * Panel contents isn't scrolled down by mouse dragging (#2395)
+    * "Whole words" search bug (#2396)
+    * Incorrect line jump when started as editor (#2344)
+    * ~ is not treated properly is editor's "Save As" dialog (#2398)
+    * 2GB file size limit in fish (#123)
+    * Broken IPv4 FTP connection scheme (#121)
+    * Lost transparency colors in mcedit [editnormal] background depends on [normal] (#1785)
+
+
 Version 4.7.0.9
 
 - Misc
