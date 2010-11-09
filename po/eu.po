@@ -2,13 +2,13 @@
 #
 # Josu Waliño <josu@elhuyar.com>, 2001.
 # mari susperregi <mari@elhuyar.com>, 2002.
-# Ignigo Salvador Azurmendi <xalba@euskalnet.net>, 2010.
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-11-01 15:58+0200\n"
-"PO-Revision-Date: 2010-11-07 20:23+0100\n"
+"PO-Revision-Date: 2010-11-09 23:52+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "Language: eu\n"
@@ -421,22 +421,22 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"%s(r)en estekak ez dira\n"
-"kontsistenteak\n"
+"%s(r)en\n"
+"esteka inkoherenteak\n"
 "cpio artxiboan\n"
 "%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s(e)k sarrera bikoiztuak ditu! Saltatzen!"
+msgstr "%s(e)k sarrera bikoiztuak ditu! Baztertzen!"
 
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"cpio-ren goiburukoa hondatuta aurkitu da\n"
-"%s(e)n"
+"cpio-ren goiburua hondatuta aurkitu zaio\n"
+"%s-ri"
 
 #, c-format
 msgid ""
@@ -448,7 +448,7 @@ msgstr ""
 
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr "%s(r)en dir cache-a iraungi egin da"
+msgstr "%s(r)en direktorio cache-a iraungi egin da"
 
 msgid "Starting linear transfer..."
 msgstr "Transferentzia lineala hasten..."
@@ -469,15 +469,15 @@ msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Ezin %s artxiboa ireki\n"
+"%s artxiboa ezin ireki\n"
 "%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "extfs artxibo inkontsistentea"
+msgstr "extfs artxibo inkoherentea"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Abisua: Ezin %s direktorioa ireki\n"
+msgstr "Abisua: %s direktorioa ezin ireki\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -492,7 +492,7 @@ msgstr ""
 
 #, c-format
 msgid "fish: Password is required for %s"
-msgstr "fish: Pasahitza beharrezko da %s-(a)rentzako"
+msgstr "fish: %s(a)rentzako pasahitza behar da"
 
 msgid "fish: Sending password..."
 msgstr "fish: Pasahitza bidaltzen..."
@@ -527,7 +527,7 @@ msgstr "%s: akatsa"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: biltegiratu %s: komandoa bidaltzen..."
+msgstr "fish: %s biltegiratu: komandoa bidaltzen..."
 
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Irakurketa lokalak huts egin du, zeroak bidaltzen"
@@ -543,11 +543,12 @@ msgid "file"
 msgstr "fitxategia"
 
 msgid "Aborting transfer..."
-msgstr "Transferentzia bertan behera uzten..."
+msgstr "Transferentzia galarazten..."
 
 msgid "Error reported after abort."
-msgstr "Errorearen berri eman da abortatu ondoren."
+msgstr "Akatsaren berri eman da galarazi ondoren."
 
+#, fuzzy
 msgid "Aborted transfer would be successful."
 msgstr "Transferentzia bertan behera utziko da."
 
@@ -555,96 +556,93 @@ msgstr "Transferentzia bertan behera utziko da."
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: %s(e)tik deskonektatzen"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Password required for %s"
-msgstr " FTP: honentzat pasahitza behar da: "
+msgstr "FTP: %s(a)rentzako pasahitza behar da"
 
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: erabiltzaile-izena bidaltzen"
+msgstr "ftpfs: saio hasteko izena bidaltzen"
 
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: erabiltzailearen pasahitza bidaltzen"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP: honentzat pasahitza behar da: "
+msgstr "FTP: %s erabiltzailearentzako kontua behar da"
 
-#, fuzzy
 msgid "Account:"
-msgstr "Kontaketa"
+msgstr "Kontua:"
 
-#, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: erabiltzailearen pasahitza bidaltzen"
+msgstr "ftpfs: erabiltzailearen kontua bidaltzen"
 
 msgid "ftpfs: logged in"
-msgstr "ftpfs: saioa hasita"
+msgstr "ftpfs: saio hasita"
 
-#, c-format
+#, fuzzy, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: %s erabiltzailearen erabiltzaile-izena ez da zuzena "
 
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Ostalari-izen baliogabea."
+msgstr "ftpfs: Ostalari izen baliogabea."
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: %s(r)ekin konektatzen"
+msgstr "ftpfs: %s(e)ra koneksioa egiten"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: konexioa erabiltzaileak moztu du"
+msgstr "ftpfs: konexioa erabiltzaileak eten du"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: zerbitzariarekiko konexioak huts egin du: %s"
+msgstr "ftpfs: zerbitzarirako konexioak huts egin du: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Berriro saiatzeko zain... %d (Control-C uzteko)"
+msgstr "Berriro saiatzeko zain... %d (Kontrol-C uzteko)"
 
-#, fuzzy
 msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Ostalari-helbide baliogabea."
+msgstr "ftpfs: baliogabeko helbide familia"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr " Ezin da socket-a sortu: %s "
+msgstr "ftpfs: ezin izan da socket sortu: %s"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: ezin izan da modu pasiboa konfiguratu"
+msgstr "ftpfs: ezin izan da modu pasiboa ezarri"
 
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: transferentzia abortatzen."
+msgstr "ftpfs: transferentzia galarazten."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: abortatze-errorea: %s"
+msgstr "ftpfs: galarazte akatsa: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: abortatzeak huts egin du"
+msgstr "ftpfs: galarazteak huts egin du"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWDk huts egin du."
+msgstr "ftpfs: CWD-k huts egin du."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: ezin izan da esteka sinbolikoa konpondu"
+msgstr "ftpfs: ezin izan da esteka sinbolikoa ebatzi"
 
 msgid "Resolving symlink..."
-msgstr "Esteka sinbolikoa konpontzen..."
+msgstr "Esteka sinbolikoa ebazten..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: FTP direktorioa irakurtzen %s... %s%s "
+msgstr "ftpfs: %s FTP direktorioa irakurtzen... %s%s "
 
 msgid "(strict rfc959)"
-msgstr "(rfc959 ertsia)"
+msgstr "(rfc959 hertsia)"
 
 msgid "(chdir first)"
-msgstr "(chdir aurrena)"
+msgstr "(aurrena chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: huts egin du; ez dauka nora itzuli"
@@ -658,7 +656,7 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 "~/.netrc fitxategiak modu okerra dauka.\n"
-"Kendu pasahitza edo zuzendu modua."
+"Kendu pasahitza edo zuzendu modua"
 
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -669,7 +667,7 @@ msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Abisua: Baliogabeko lerroa %s-n:\n"
+"Abisua: Baliogabeko lerroa %s(e)n:\n"
 "%s\n"
 
 #, c-format
@@ -680,23 +678,20 @@ msgstr ""
 "Abisua: Baliogabeko %c bandera %s-n:\n"
 "%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "reconnect to %s failed"
-msgstr ""
-" huts egin da %s(r)ekin berriro konektatzean\n"
-" "
+msgstr "%s(e)ra birkonektatzeak huts egin du"
 
-#, fuzzy
 msgid "Authentication failed"
-msgstr " Autentifikatzean huts egin du. "
+msgstr "Autentifikatzeak huts egin du"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error %s creating directory %s"
-msgstr " %s %s direktorioa sortzen "
+msgstr "%s akatsa %s direktorioa sortzerakoan"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Error %s removing directory %s"
-msgstr " %s %s direktorioa kentzen "
+msgstr "%s akatsa %s direktorioa ezabatzerakoan"
 
 #, c-format
 msgid "%s opening remote file %s"
@@ -704,7 +699,7 @@ msgstr "%s urruneko %s fitxategia irekitzen"
 
 #, c-format
 msgid "%s removing remote file %s"
-msgstr "%s urruneko %s fitxategia kentzen"
+msgstr "%s urruneko %s fitxategia ezabatzen"
 
 #, c-format
 msgid "%s renaming files\n"
@@ -715,92 +710,87 @@ msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Ezin izan da tar artxiboa ireki\n"
+"Ezin tar artxiboa ireki\n"
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "tar artxibo inkontsistentea"
+msgstr "tar artxibo inkoherentea"
 
 msgid "Unexpected EOF on archive file"
 msgstr "Ustekabeko EOF artxibo fitxategian"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"Hmm,...\n"
-"%s(e)k\n"
-"ez du tar artxiboaren itxurarik."
+"%s\n"
+"ez dirudi tar artxiboa denik."
 
-#, fuzzy
 msgid "undelfs: error"
-msgstr " undelfs: errorea "
+msgstr "undelfs: akatsa"
 
-#, fuzzy
 msgid "not enough memory"
-msgstr " ez dago memoria nahikorik "
+msgstr "ez dago behar adina memoria"
 
-#, fuzzy
 msgid "while allocating block buffer"
-msgstr " bloke-bufferra esleitzean "
+msgstr "bloke bufferra alokatzerakoan"
 
-#, fuzzy, c-format
+#, c-format
 msgid "open_inode_scan: %d"
-msgstr " open_inode_scan: %d "
+msgstr "open_inode_scan: %d"
 
-#, fuzzy, c-format
+#, c-format
 msgid "while starting inode scan %d"
-msgstr " %d inodoen eskaneatzea hastean "
+msgstr "%d inodoen azterketa hasi bitartean"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: ezabatutako fitxategien informazioa kargatzen, %d inodo"
+msgstr "undelfs: ezabatutako fitxategien informazioa zamatzen, %d inodo"
 
-#, fuzzy, c-format
+#, c-format
 msgid "while calling ext2_block_iterate %d"
-msgstr " ext2_block_iterate %d deitzean "
+msgstr "ext2_block_iterate %d deitzerakoan"
 
 #, fuzzy
 msgid "no more memory while reallocating array"
 msgstr " memoriarik gabe geratu da taula berriro esleitzean "
 
-#, fuzzy, c-format
+#, c-format
 msgid "while doing inode scan %d"
-msgstr "%d inodo eskaneatzean "
+msgstr "%d inodo azterketa egin bitartean"
 
 msgid "Ext2lib error"
 msgstr "Ext2lib akatsa"
 
 #, c-format
 msgid "Cannot open file %s"
-msgstr "Ezin %s fitxategia ireki"
+msgstr "%s fitxategia ezin ireki"
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: inodoen bit-mapa irakurtzen..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
-" Ezin izan da inodoen bit-mapa kargatu: \n"
-" %s \n"
+"Inode bit-mapa hemendik ezin zamatu:\n"
+"%s"
 
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: blokeen bit-mapa irakurtzen..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
 msgstr ""
-" Ezin izan da blokeen bit-mapa kargatu: \n"
-" %s \n"
+"Blokeen bit-mapa hemendik ezin zamatu:\n"
+"%s"
 
-#, fuzzy
 msgid "vfs_info is not fs!"
-msgstr " vfs_info ez da fs! "
+msgstr "vfs_info ez da fs!"
 
 #, fuzzy
 msgid "You have to chdir to extract files first"
@@ -1097,39 +1087,31 @@ msgstr ""
 msgid "Sort order"
 msgstr "Ordenazioa"
 
-#, fuzzy
 msgid "Confirmation"
-msgstr "Berrespena "
+msgstr "Berrespena"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
-#, fuzzy
 msgid "Confirmation|&History cleanup"
-msgstr "Berrespena "
+msgstr "&Historia garbitu"
 
-#, fuzzy
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "&gogokoen direktorioa                C-\\"
+msgstr "&Gogokoen direktorioa ezabatu"
 
-#, fuzzy
 msgid "Confirmation|E&xit"
-msgstr "Berrespena "
+msgstr "&Irten"
 
-#, fuzzy
 msgid "Confirmation|&Execute"
-msgstr "Berrespena "
+msgstr "&Exekutatu"
 
-#, fuzzy
 msgid "Confirmation|O&verwrite"
-msgstr "berretsi &gainidatzi "
+msgstr "Gai&nidatzi"
 
-#, fuzzy
 msgid "Confirmation|&Delete"
-msgstr "Berrespena "
+msgstr "E&zabatu"
 
-#, fuzzy
 msgid "UTF-8 output"
-msgstr "8 biteko irteera"
+msgstr "UTF-8 irteera"
 
 msgid "Full 8 bits output"
 msgstr "8 biteko irteera"
@@ -1141,7 +1123,7 @@ msgid "7 bits"
 msgstr "7 bit"
 
 msgid "F&ull 8 bits input"
-msgstr "Sartu 8 bit"
+msgstr "8 bit-eko sarrera"
 
 #, fuzzy
 msgid "Display bits"
@@ -1151,22 +1133,19 @@ msgid "Other 8 bit"
 msgstr "Beste 8 bit"
 
 msgid "Input / display codepage:"
-msgstr "Sartu / bistaratu kode-orria:"
+msgstr "Sartu / bistaratu kode-orrialdea:"
 
 msgid "&Select"
 msgstr "&Hautatu"
 
-#, fuzzy
 msgid "Directory tree"
-msgstr "&Direktorio-zuhaitza"
+msgstr "Direktorio zuhaitza"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "&Gorde modua..."
+msgstr "Erabili modu pasiboa proxy-arekin"
 
-#, fuzzy
 msgid "Use &passive mode"
-msgstr "&Gorde modua..."
+msgstr "Erabili modu &pasiboa"
 
 msgid "&Use ~/.netrc"
 msgstr ""
@@ -1184,32 +1163,30 @@ msgid "ftp anonymous password:"
 msgstr "ftp anonimoaren pasahitza:"
 
 msgid "Timeout for freeing VFSs:"
-msgstr "VFSak libratzeko denbora-muga:"
+msgstr "VFSak askatzeko denbora-muga:"
 
-#, fuzzy
 msgid "Virtual File System Setting"
-msgstr "Fitxategi-sistema birtualaren konfigurazioa "
+msgstr "Alegiazko Fitxategi Sistemaren (VFS) ezarpena"
 
 msgid "cd"
 msgstr "cd"
 
 msgid "Quick cd"
-msgstr "Cd bizkorra"
+msgstr "cd bizkorra"
 
 msgid "Symbolic link filename:"
-msgstr "Esteka sinbolikoaren fitxategi-izena:"
+msgstr "Esteka sinbolikoaren fitxategi izena:"
 
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
-"Lehendik dagoen fitxategi-izena (esteka sinbolikoek seinalatzen duten "
-"fitxategi-izena):"
+"Existitzen den fitxategi izena (esteka sinbolikoak erakutsiko duen fitxategi "
+"izena):"
 
 msgid "Symbolic link"
 msgstr "Esteka sinbolikoa"
 
-#, fuzzy
 msgid "Running"
-msgstr "Exekutatzen "
+msgstr "Martxan"
 
 msgid "Stopped"
 msgstr "Geldituta"
@@ -1218,37 +1195,36 @@ msgid "&Stop"
 msgstr "&Gelditu"
 
 msgid "&Resume"
-msgstr "&Laburpena"
+msgstr "&Berrekin"
 
 msgid "&Kill"
 msgstr "&Hil"
 
 msgid "Background Jobs"
-msgstr "Atzeko planoko lanak"
+msgstr "Hondoko lanak"
 
 msgid "Domain:"
 msgstr "Domeinua:"
 
 msgid "Username:"
-msgstr "Erabiltzaile-izena:"
+msgstr "Erabiltzaile izena:"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s(r)en pasahitza"
+msgstr "\\\\%s\\%s(r)entzako pasahitza"
 
-#, fuzzy
 msgid "Warning: cannot load codepages list"
-msgstr "Ezin izan da direktorioz aldatu"
+msgstr "Abisua: kode-orrialde zerrenda ezin zamatu"
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-bit ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "Ezin da %s(e)tik %s(e)ra itzuli"
+msgstr "%s(e)tik %s(e)ra ezin itzuli"
 
 msgid "execute/search by others"
-msgstr "beste batzuek exekutatu/bilatu "
+msgstr "beste batzuek exekutatu/bilatu"
 
 msgid "write by others"
 msgstr "beste batzuek idatzi"
@@ -1275,22 +1251,22 @@ msgid "read by owner"
 msgstr "jabeak irakurri"
 
 msgid "sticky bit"
-msgstr "bit itsaskorrak"
+msgstr "bit itsaskorra"
 
 msgid "set group ID on execution"
-msgstr "konfiguratu taldearen IDa exekutatzerakoan"
+msgstr "ezarri taldearen ID-a exekutatzerakoan"
 
 msgid "set user ID on execution"
-msgstr "konfiguratu erabiltzailearen IDa exekutatzerakoan"
+msgstr "ezarri erabiltzailearen ID-a exekutatzerakoan"
 
 msgid "C&lear marked"
 msgstr "&Garbitu markatutakoa"
 
 msgid "S&et marked"
-msgstr "&Konfiguratu markatutakoa"
+msgstr "&Ezarri markatutakoa"
 
 msgid "&Marked all"
-msgstr "Dena &markatuta "
+msgstr "Guztiak &markatuta"
 
 msgid "Name"
 msgstr "Izena"
@@ -1305,10 +1281,10 @@ msgid "Group name"
 msgstr "Taldearen izena"
 
 msgid "Use SPACE to change"
-msgstr "Erabili TARTEA aldatzeko"
+msgstr "Erabili ZURIUNEA aldatzeko"
 
 msgid "an option, ARROW KEYS"
-msgstr "aukera bat, GEZI-TEKLAK"
+msgstr "aukera bat, GEZI TEKLAK"
 
 msgid "to move between options"
 msgstr "aukeren artean mugitzeko"
@@ -1326,17 +1302,16 @@ msgid "Permission"
 msgstr "Baimena"
 
 msgid "Set &users"
-msgstr "Konfiguratu &erabiltzaileak"
+msgstr "Ezarri &erabiltzaileak"
 
 msgid "Set &groups"
-msgstr "Konfiguratu &taldeak"
+msgstr "Ezarri &taldeak"
 
 msgid "Size"
-msgstr "Tamaina"
+msgstr "Neurria"
 
-#, fuzzy
 msgid "Chown command"
-msgstr "Chown komandoa "
+msgstr "Chown komandoa"
 
 msgid "<Unknown user>"
 msgstr "<Erabiltzaile ezezaguna>"
@@ -1344,12 +1319,11 @@ msgstr "<Erabiltzaile ezezaguna>"
 msgid "<Unknown group>"
 msgstr "<Talde ezezaguna>"
 
-#, fuzzy
 msgid "User name"
-msgstr "Erabiltzaile-izena "
+msgstr "Erabiltzaile izena"
 
 msgid "Files tagged, want to cd?"
-msgstr "Fitxategi etiketatuak, direktorioz aldatu nahi?"
+msgstr "Fitxategiak hautatuta, direktoria aldatu nahi?"
 
 msgid "&Yes"
 msgstr "&Bai"
@@ -1358,78 +1332,64 @@ msgid "&No"
 msgstr "E&z"
 
 msgid "Cannot change directory"
-msgstr "Ezin izan da direktorioz aldatu"
+msgstr "Direktorioa ezin aldatu"
 
-#, fuzzy
 msgid "View file"
-msgstr "Ikusi fitxategia "
+msgstr "Ikusi fitxategia"
 
-#, fuzzy
 msgid "Filename:"
-msgstr "Fitxategi-izena:"
+msgstr "Fitxategi izena:"
 
-#, fuzzy
 msgid "Filtered view"
-msgstr " Ikuspegi iragazia "
+msgstr "Iragazitako ikuspegia"
 
-#, fuzzy
 msgid "Filter command and arguments:"
-msgstr "Iragazi komandoa eta argumentuak:"
+msgstr "Iragazteko komandoa eta argumentuak:"
 
 msgid "Create a new Directory"
 msgstr "Sortu direktorio berria"
 
-#, fuzzy
 msgid "Enter directory name:"
-msgstr "Sartu direktorio-izena:"
+msgstr "Sartu direktorio izena:"
 
-#, fuzzy
 msgid "Filter"
-msgstr "Iragazkia "
+msgstr "Iragazi"
 
-#, fuzzy
 msgid "Set expression for filtering filenames"
-msgstr "Konfiguratu fitxategi-izenak iragazteko adierazpenak"
+msgstr "Ezarri fitxategi izenak iragazteko adierazpena"
 
 msgid "&Using shell patterns"
-msgstr "&Shell-ereduak erabiltzen"
+msgstr "&Shell ereduak erabiltzen"
 
-#, fuzzy
 msgid "&Case sensitive"
-msgstr "maiuskulak eta minuskulak bereizten ditu"
+msgstr "&Maius/minus bereiztu"
 
-#, fuzzy
 msgid "&Files only"
-msgstr "&Tamaina bakarrik"
+msgstr "&Fitxategiak soilik"
 
-#, fuzzy
 msgid "Select"
-msgstr "&Hautatu"
+msgstr "Hautatu"
 
-#, fuzzy
 msgid "Unselect"
-msgstr "Desautatu "
+msgstr "Deshautatu"
 
 msgid "Extension file edit"
-msgstr "Editatu luzapen-fitxategia"
+msgstr "Editatu luzapen fitxategia"
 
-#, fuzzy
 msgid "Which extension file you want to edit?"
-msgstr "Zer luzapen-fitxategi nahi duzu editatu? "
+msgstr "Zein luzapen fitxategi editatu nahi duzu?"
 
 msgid "&User"
 msgstr "&Erabiltzailea"
 
 msgid "&System Wide"
-msgstr "&Sistema guztientzat"
+msgstr "&Sistema osorako\t"
 
-#, fuzzy
 msgid "Menu edit"
-msgstr "Edizioa menua "
+msgstr "Menua editatu"
 
-#, fuzzy
 msgid "Which menu file do you want to edit?"
-msgstr "Menuko zer fitxategi editatuko duzu ? "
+msgstr "Zein menu fitxategi editatuko nahi duzu?"
 
 msgid "&Local"
 msgstr "&Lokala"
@@ -2839,9 +2799,8 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr " Ezin da hemen erabili: \"..\"! "
 
-#, fuzzy
 msgid "Sorry, I could not put the job in background"
-msgstr "Ezin izan dut lana atzeko planoan ipini "
+msgstr "Barkatu, ezin izan dut lana hondoan ipini"
 
 msgid "&Retry"
 msgstr "&Saiatu berriz"
