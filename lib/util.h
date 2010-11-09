@@ -100,13 +100,6 @@ enum compression_type
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct hook
-{
-    void (*hook_fn) (void *);
-    void *hook_data;
-    struct hook *next;
-} Hook;
-
 /*** global variables defined in .c file *********************************************************/
 
 extern char *user_recent_timeformat;    /* time format string for recent dates */
@@ -255,14 +248,6 @@ char *mc_realpath (const char *path, char *resolved_path);
  * compression type. Side effect: modifies the file position. */
 enum compression_type get_compression_type (int fd, const char *);
 const char *decompress_extension (int type);
-
-/* Hook functions */
-
-
-void add_hook (Hook ** hook_list, void (*hook_fn) (void *), void *data);
-void execute_hooks (Hook * hook_list);
-void delete_hook (Hook ** hook_list, void (*hook_fn) (void *));
-int hook_present (Hook * hook_list, void (*hook_fn) (void *));
 
 GList *list_append_unique (GList * list, char *text);
 

@@ -31,7 +31,7 @@
 
 #include "lib/global.h"
 #include "lib/tty/mouse.h"
-#include "lib/util.h"           /* Hook */
+#include "lib/hook.h"           /* hook_t */
 
 /* Common return values */
 #define B_EXIT          0
@@ -266,7 +266,7 @@ void common_dialog_repaint (Dlg_head *h);
 extern GList *top_dlg;
 
 /* A hook list for idle events */
-extern Hook *idle_hook;
+extern hook_t *idle_hook;
 
 static inline cb_ret_t
 send_message (Widget * w, widget_msg_t msg, int parm)

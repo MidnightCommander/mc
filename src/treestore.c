@@ -51,6 +51,7 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
+#include "lib/hook.h"
 
 #include "treestore.h"
 #include "setup.h"
@@ -60,6 +61,8 @@
 static struct TreeStore ts;
 
 static tree_entry *tree_store_add_entry (const char *name);
+
+static hook_t *remove_entry_hooks;
 
 static void
 tree_store_dirty (int state)
@@ -527,8 +530,6 @@ tree_store_add_entry (const char *name)
     return new;
 }
 
-static Hook *remove_entry_hooks;
-
 void
 tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data)
 {
@@ -544,10 +545,10 @@ tree_store_remove_entry_remove_hook (tree_store_remove_fn callback)
 static void
 tree_store_notify_remove (tree_entry * entry)
 {
-    Hook *p = remove_entry_hooks;
+    hook_t *p = remove_entry_hooks;
     tree_store_remove_fn r;
 
-    while (p)
+    while (p != NULL)
     {
         r = (tree_store_remove_fn) p->hook_fn;
         r (entry, p->hook_data);

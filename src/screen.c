@@ -106,7 +106,7 @@ int show_mini_info = 1;
 int torben_fj_mode = 0;
 
 /* The hook list for the select file function */
-Hook *select_file_hook = 0;
+hook_t *select_file_hook = NULL;
 
 static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
 static int panel_event (Gpm_Event * event, void *);

@@ -21,6 +21,7 @@ libmc_la_SOURCES = \
 	$(SRC_mc_utils) \
 	fileloc.h \
 	fs.h \
+	hook.c hook.h \
 	glibcompat.c glibcompat.h \
 	global.h \
 	lock.c lock.h \

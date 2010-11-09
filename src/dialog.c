@@ -57,7 +57,7 @@ dlg_colors_t alarm_colors;
 GList *top_dlg = NULL;
 
 /* A hook list for idle events */
-Hook *idle_hook = NULL;
+hook_t *idle_hook = NULL;
 
 /* left click outside of dialog closes it */
 int mouse_close_dialog = 0;

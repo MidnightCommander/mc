@@ -138,7 +138,7 @@ void try_to_select (WPanel *panel, const char *name);
 void unmark_files (WPanel *panel);
 void select_item (WPanel *panel);
 
-extern Hook *select_file_hook;
+extern hook_t *select_file_hook;
 
 void recalculate_panel_summary (WPanel *panel);
 void file_mark (WPanel *panel, int idx, int val);
