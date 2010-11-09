@@ -1969,10 +1969,6 @@ main (int argc, char *argv[])
     edit_stack_init ();
 #endif
 
-#ifdef HAVE_SLANG
-    SLtt_Ignore_Beep = 1;
-#endif
-
     if (!mc_args_handle (argc, argv, "mc"))
         exit (EXIT_FAILURE);
 

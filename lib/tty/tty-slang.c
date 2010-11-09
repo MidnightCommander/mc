@@ -245,6 +245,7 @@ tty_init (gboolean slow, gboolean ugly_lines)
     slow_tty = slow;
     ugly_line_drawing = ugly_lines;
 
+    SLtt_Ignore_Beep = 1;
     SLtt_get_terminfo ();
     SLutf8_enable (-1);
     /*
