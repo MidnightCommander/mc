@@ -1619,7 +1619,8 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
   open_target_error:
     g_free (fn);
   early_error:
-    g_array_free (bookmarks, TRUE);
+    if (bookmarks != NULL)
+        g_array_free (bookmarks, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

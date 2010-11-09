@@ -1667,7 +1667,9 @@ extfs_done (struct vfs_class *me)
         g_free (info->path);
         g_free (info->prefix);
     }
-    g_array_free (extfs_plugins, TRUE);
+
+    if (extfs_plugins != NULL)
+        g_array_free (extfs_plugins, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -1196,7 +1196,7 @@ hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArra
 
         len = lcsubstr (s + bracket[0].off, bracket[0].len,
                         t + bracket[1].off, bracket[1].len, ret, min);
-        if (ret->len)
+        if (ret->len != 0)
         {
             size_t k = 0;
             const PAIR *data = (const PAIR *) &g_array_index (ret, PAIR, 0);
@@ -1830,7 +1830,8 @@ redo_diff (WDiff * dview)
     ndiff = dff_execute (dview->args, extra, dview->file[0], dview->file[1], ops);
     if (ndiff < 0)
     {
-        g_array_free (ops, TRUE);
+        if (ops != NULL)
+            g_array_free (ops, TRUE);
         return -1;
     }
 
@@ -1845,7 +1846,8 @@ redo_diff (WDiff * dview)
     ctx.f = f[1];
     rv |= dff_reparse (1, dview->file[1], ops, printer, &ctx);
 
-    g_array_free (ops, TRUE);
+    if (ops != NULL)
+        g_array_free (ops, TRUE);
 
     if (rv != 0 || dview->a[0]->len != dview->a[1]->len)
         return -1;
@@ -1904,9 +1906,7 @@ destroy_hdiff (WDiff * dview)
         {
             GArray *h = (GArray *) g_ptr_array_index (dview->hdiff, i);
             if (h != NULL)
-            {
                 g_array_free (h, TRUE);
-            }
         }
         g_ptr_array_free (dview->hdiff, TRUE);
         dview->hdiff = NULL;
@@ -2370,21 +2370,25 @@ static void
 dview_reread (WDiff * dview)
 {
     int ndiff = dview->ndiff;
-    destroy_hdiff (dview);
 
-    g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
-    g_array_free (dview->a[0], TRUE);
-    g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
-    g_array_free (dview->a[1], TRUE);
+    destroy_hdiff (dview);
+    if (dview->a[0] != NULL)
+    {
+        g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[0], TRUE);
+    }
+    if (dview->a[1] != NULL)
+    {
+        g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[1], TRUE);
+    }
 
     dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
 
     ndiff = redo_diff (dview);
     if (ndiff >= 0)
-    {
         dview->ndiff = ndiff;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2446,16 +2450,22 @@ dview_fini (WDiff * dview)
         str_close_conv (dview->converter);
 
     destroy_hdiff (dview);
-    g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
-    g_array_free (dview->a[0], TRUE);
-    g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
-    g_array_free (dview->a[1], TRUE);
+    if (dview->a[0] != NULL)
+    {
+        g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[0], TRUE);
+        dview->a[0] = NULL;
+    }
+    if (dview->a[1] != NULL)
+    {
+        g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[1], TRUE);
+        dview->a[1] = NULL;
+    }
 
     g_free (dview->label[0]);
     g_free (dview->label[1]);
 
-    dview->a[1] = NULL;
-    dview->a[0] = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
