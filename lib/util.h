@@ -20,18 +20,6 @@
 #define MIN_I18NTIMELENGTH 10
 #define STD_I18NTIMELENGTH 12
 
-#ifndef PATH_MAX
-#ifdef _POSIX_VERSION
-#define PATH_MAX _POSIX_PATH_MAX
-#else
-#ifdef MAXPATHLEN
-#define PATH_MAX MAXPATHLEN
-#else
-#define PATH_MAX 1024
-#endif
-#endif
-#endif
-
 #ifndef MAXSYMLINKS
 #define MAXSYMLINKS 32
 #endif
