@@ -46,7 +46,9 @@
 #include "layout.h"             /* repaint_screen() */
 #include "chmod.h"
 
-static int single_set;
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
 
 #define PX 5
 #define PY 2
@@ -67,6 +69,12 @@ static int single_set;
 #define B_ALL    (B_USER+1)
 #define B_SETMRK (B_USER+2)
 #define B_CLRMRK (B_USER+3)
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+static int single_set;
 
 static int mode_change, need_update;
 static int c_file, end_chmod;
@@ -121,6 +129,9 @@ static struct
     /* *INDENT-ON* */
 };
 
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 chmod_toggle_select (Dlg_head * h, int Id)
 {
@@ -131,6 +142,8 @@ chmod_toggle_select (Dlg_head * h, int Id)
     tty_print_char ((check_perm[Id].selected) ? '*' : ' ');
     dlg_move (h, PY + PERMISSIONS - Id, PX + 3);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 chmod_refresh (Dlg_head * h)
@@ -157,6 +170,8 @@ chmod_refresh (Dlg_head * h)
     dlg_move (h, TY + 3, TX);
     tty_print_string (_("and T or INS to mark"));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -196,6 +211,8 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static Dlg_head *
 init_chmod (void)
 {
@@ -230,10 +247,12 @@ init_chmod (void)
         add_widget (ch_dlg, check_perm[i].check);
     }
 
-    add_widget (ch_dlg, groupbox_new ( PY, PX, PERMISSIONS + 2, 33, _("Permission")));
+    add_widget (ch_dlg, groupbox_new (PY, PX, PERMISSIONS + 2, 33, _("Permission")));
 
     return ch_dlg;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 chmod_done (void)
@@ -243,6 +262,8 @@ chmod_done (void)
     repaint_screen ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 next_file (void)
 {
@@ -251,6 +272,8 @@ next_file (void)
 
     return current_panel->dir.list[c_file].fname;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 do_chmod (struct stat *sf)
@@ -263,6 +286,8 @@ do_chmod (struct stat *sf)
 
     do_file_mark (current_panel, c_file, 0);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 apply_mask (struct stat *sf)
@@ -283,6 +308,10 @@ apply_mask (struct stat *sf)
     }
     while (current_panel->marked);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 chmod_cmd (void)
@@ -403,3 +432,5 @@ chmod_cmd (void)
 
     chmod_done ();
 }
+
+/* --------------------------------------------------------------------------------------------- */

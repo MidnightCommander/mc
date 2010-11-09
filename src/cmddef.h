@@ -1,14 +1,15 @@
-
 /** \file
  *  \brief Header: editor constants
  */
 
-#ifndef MC_CMD_DEF_H
-#define MC_CMD_DEF_H
+#ifndef MC__CMD_DEF_H
+#define MC__CMD_DEF_H
 
 /** \todo In the distant future, keyboards will be invented with a
  *  separate key for each one of these commands *sigh*
  */
+
+/*** typedefs(not structures) and defined constants **********************************************/
 
 /* special commands */
 #define CK_Insert_Char -1
@@ -514,4 +515,13 @@
 #define CK_Macro(i)         ((i) | (1 << 17))
 #define IS_MACRO_COMMAND(i) ((i) & (1 << 17))
 
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
+/*** inline functions ****************************************************************************/
 #endif /* MC_CMD_DEF_H */

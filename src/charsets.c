@@ -30,11 +30,13 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"		/* utf-8 functions */
+#include "lib/strutil.h"        /* utf-8 functions */
 #include "lib/fileloc.h"
 
 #include "charsets.h"
 #include "main.h"
+
+/*** global variables ****************************************************************************/
 
 GPtrArray *codepages = NULL;
 
@@ -43,6 +45,23 @@ unsigned char conv_input[256];
 
 const char *cp_display = NULL;
 const char *cp_source = NULL;
+
+/*** file scope macro definitions ****************************************************************/
+
+#define OTHER_8BIT "Other_8_bit"
+
+/*
+ * FIXME: This assumes that ASCII is always the first encoding
+ * in mc.charsets
+ */
+#define CP_ASCII 0
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static codepage_desc *
 new_codepage_desc (const char *id, const char *name)
@@ -56,6 +75,8 @@ new_codepage_desc (const char *id, const char *name)
     return desc;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 free_codepage_desc (gpointer data, gpointer user_data)
 {
@@ -67,9 +88,11 @@ free_codepage_desc (gpointer data, gpointer user_data)
     g_free (desc);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* returns display codepage */
+
 static void
-load_codepages_list_from_file (GPtrArray **list, const char *fname)
+load_codepages_list_from_file (GPtrArray ** list, const char *fname)
 {
     FILE *f;
     guint i;
@@ -80,7 +103,7 @@ load_codepages_list_from_file (GPtrArray **list, const char *fname)
     if (f == NULL)
         return;
 
-    for (i = 0; fgets (buf, sizeof buf, f) != NULL; )
+    for (i = 0; fgets (buf, sizeof buf, f) != NULL;)
     {
         /* split string into id and cpname */
         char *p = buf;
@@ -148,6 +171,29 @@ load_codepages_list_from_file (GPtrArray **list, const char *fname)
     fclose (f);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static char
+translate_character (GIConv cd, char c)
+{
+    gchar *tmp_buff = NULL;
+    gsize bytes_read, bytes_written = 0;
+    const char *ibuf = &c;
+    char ch = UNKNCHAR;
+
+    int ibuflen = 1;
+
+    tmp_buff = g_convert_with_iconv (ibuf, ibuflen, cd, &bytes_read, &bytes_written, NULL);
+    if (tmp_buff)
+        ch = tmp_buff[0];
+    g_free (tmp_buff);
+    return ch;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
 load_codepages_list (void)
 {
@@ -173,6 +219,8 @@ load_codepages_list (void)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 free_codepages_list (void)
 {
@@ -180,7 +228,7 @@ free_codepages_list (void)
     g_ptr_array_free (codepages, TRUE);
 }
 
-#define OTHER_8BIT "Other_8_bit"
+/* --------------------------------------------------------------------------------------------- */
 
 const char *
 get_codepage_id (const int n)
@@ -188,24 +236,28 @@ get_codepage_id (const int n)
     return (n < 0) ? OTHER_8BIT : ((codepage_desc *) g_ptr_array_index (codepages, n))->id;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 get_codepage_index (const char *id)
 {
     size_t i;
     if (strcmp (id, OTHER_8BIT) == 0)
-	return -1;
+        return -1;
     if (codepages == NULL)
-	return -1;
+        return -1;
     for (i = 0; i < codepages->len; i++)
-	if (strcmp (id, ((codepage_desc *) g_ptr_array_index (codepages, i))->id) == 0)
-	    return i;
+        if (strcmp (id, ((codepage_desc *) g_ptr_array_index (codepages, i))->id) == 0)
+            return i;
     return -1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /** Check if specified encoding can be used in mc.
  * @param encoding name of encoding
  * @returns TRUE if encoding has supported by mc, FALSE otherwise
  */
+
 gboolean
 is_supported_encoding (const char *encoding)
 {
@@ -221,28 +273,7 @@ is_supported_encoding (const char *encoding)
     return result;
 }
 
-static char
-translate_character (GIConv cd, char c)
-{
-    gchar *tmp_buff = NULL;
-    gsize bytes_read, bytes_written = 0;
-    const char *ibuf = &c;
-    char ch = UNKNCHAR;
-
-    int ibuflen = 1;
-
-    tmp_buff = g_convert_with_iconv (ibuf, ibuflen, cd, &bytes_read, &bytes_written, NULL);
-    if ( tmp_buff )
-        ch = tmp_buff[0];
-    g_free (tmp_buff);
-    return ch;
-}
-
-/*
- * FIXME: This assumes that ASCII is always the first encoding
- * in mc.charsets
- */
-#define CP_ASCII 0
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 init_translation_table (int cpsource, int cpdisplay)
@@ -252,18 +283,21 @@ init_translation_table (int cpsource, int cpdisplay)
 
     /* Fill inpit <-> display tables */
 
-    if (cpsource < 0 || cpdisplay < 0 || cpsource == cpdisplay) {
-	for (i = 0; i <= 255; ++i) {
-	    conv_displ[i] = i;
-	    conv_input[i] = i;
-	    cp_source = cp_display;
-	}
-	return NULL;
+    if (cpsource < 0 || cpdisplay < 0 || cpsource == cpdisplay)
+    {
+        for (i = 0; i <= 255; ++i)
+        {
+            conv_displ[i] = i;
+            conv_input[i] = i;
+            cp_source = cp_display;
+        }
+        return NULL;
     }
 
-    for (i = 0; i <= 127; ++i) {
-	conv_displ[i] = i;
-	conv_input[i] = i;
+    for (i = 0; i <= 127; ++i)
+    {
+        conv_displ[i] = i;
+        conv_input[i] = i;
     }
     cp_source = ((codepage_desc *) g_ptr_array_index (codepages, cpsource))->id;
     cp_display = ((codepage_desc *) g_ptr_array_index (codepages, cpdisplay))->id;
@@ -272,10 +306,10 @@ init_translation_table (int cpsource, int cpdisplay)
 
     cd = g_iconv_open (cp_display, cp_source);
     if (cd == INVALID_CONV)
-	return g_strdup_printf (_("Cannot translate from %s to %s"), cp_source, cp_display);
+        return g_strdup_printf (_("Cannot translate from %s to %s"), cp_source, cp_display);
 
     for (i = 128; i <= 255; ++i)
-	conv_displ[i] = translate_character (cd, i);
+        conv_displ[i] = translate_character (cd, i);
 
     g_iconv_close (cd);
 
@@ -283,12 +317,13 @@ init_translation_table (int cpsource, int cpdisplay)
 
     cd = g_iconv_open (cp_source, cp_display);
     if (cd == INVALID_CONV)
-	return g_strdup_printf (_("Cannot translate from %s to %s"), cp_display, cp_source);
+        return g_strdup_printf (_("Cannot translate from %s to %s"), cp_display, cp_source);
 
-    for (i = 128; i <= 255; ++i) {
-	unsigned char ch;
-	ch = translate_character (cd, i);
-	conv_input[i] = (ch == UNKNCHAR) ? i : ch;
+    for (i = 128; i <= 255; ++i)
+    {
+        unsigned char ch;
+        ch = translate_character (cd, i);
+        conv_input[i] = (ch == UNKNCHAR) ? i : ch;
     }
 
     g_iconv_close (cd);
@@ -296,17 +331,22 @@ init_translation_table (int cpsource, int cpdisplay)
     return NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 convert_to_display (char *str)
 {
     if (!str)
-	return;
+        return;
 
-    while (*str) {
-	*str = conv_displ[(unsigned char) *str];
-	str++;
+    while (*str)
+    {
+        *str = conv_displ[(unsigned char) *str];
+        str++;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 GString *
 str_convert_to_display (char *str)
@@ -315,6 +355,8 @@ str_convert_to_display (char *str)
 
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 GString *
 str_nconvert_to_display (char *str, int len)
 {
@@ -322,36 +364,43 @@ str_nconvert_to_display (char *str, int len)
     GIConv conv;
 
     if (!str)
-	return g_string_new("");
+        return g_string_new ("");
 
     if (cp_display == cp_source)
-	return g_string_new(str);
+        return g_string_new (str);
 
     conv = str_crt_conv_from (cp_source);
 
-    buff = g_string_new("");
+    buff = g_string_new ("");
     str_nconvert (conv, str, len, buff);
     str_close_conv (conv);
     return buff;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 convert_from_input (char *str)
 {
     if (!str)
-	return;
+        return;
 
-    while (*str) {
-	*str = conv_input[(unsigned char) *str];
-	str++;
+    while (*str)
+    {
+        *str = conv_input[(unsigned char) *str];
+        str++;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 GString *
 str_convert_to_input (char *str)
 {
     return str_nconvert_to_input (str, -1);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 GString *
 str_nconvert_to_input (char *str, int len)
@@ -360,18 +409,20 @@ str_nconvert_to_input (char *str, int len)
     GIConv conv;
 
     if (!str)
-	return g_string_new("");
+        return g_string_new ("");
 
     if (cp_display == cp_source)
-	return g_string_new(str);
+        return g_string_new (str);
 
     conv = str_crt_conv_to (cp_source);
 
-    buff = g_string_new("");
+    buff = g_string_new ("");
     str_nconvert (conv, str, len, buff);
     str_close_conv (conv);
     return buff;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 unsigned char
 convert_from_utf_to_current (const char *str)
@@ -384,11 +435,13 @@ convert_from_utf_to_current (const char *str)
     if (!str)
         return '.';
 
-    cp_to =  get_codepage_id ( source_codepage );
-    conv = str_crt_conv_to ( cp_to );
+    cp_to = get_codepage_id (source_codepage);
+    conv = str_crt_conv_to (cp_to);
 
-    if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, str, -1, (char *)buf_ch, sizeof(buf_ch))) {
+    if (conv != INVALID_CONV)
+    {
+        switch (str_translate_char (conv, str, -1, (char *) buf_ch, sizeof (buf_ch)))
+        {
         case ESTR_SUCCESS:
             ch = buf_ch[0];
             break;
@@ -404,6 +457,8 @@ convert_from_utf_to_current (const char *str)
 
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 unsigned char
 convert_from_utf_to_current_c (const int input_char, GIConv conv)
 {
@@ -413,13 +468,15 @@ convert_from_utf_to_current_c (const int input_char, GIConv conv)
 
     int res = 0;
 
-    res = g_unichar_to_utf8 (input_char, (char *)str);
-    if ( res == 0 ) {
+    res = g_unichar_to_utf8 (input_char, (char *) str);
+    if (res == 0)
+    {
         return ch;
     }
     str[res] = '\0';
 
-    switch (str_translate_char (conv, (char *)str, -1, (char *)buf_ch, sizeof(buf_ch))) {
+    switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof (buf_ch)))
+    {
     case ESTR_SUCCESS:
         ch = buf_ch[0];
         break;
@@ -430,6 +487,8 @@ convert_from_utf_to_current_c (const int input_char, GIConv conv)
     }
     return ch;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 convert_from_8bit_to_utf_c (const char input_char, GIConv conv)
@@ -442,12 +501,16 @@ convert_from_8bit_to_utf_c (const char input_char, GIConv conv)
     str[0] = (unsigned char) input_char;
     str[1] = '\0';
 
-    switch (str_translate_char (conv, (char *)str, -1, (char *)buf_ch, sizeof(buf_ch))) {
+    switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof (buf_ch)))
+    {
     case ESTR_SUCCESS:
-        res = g_utf8_get_char_validated ((char *)buf_ch, -1);
-        if ( res < 0 ) {
+        res = g_utf8_get_char_validated ((char *) buf_ch, -1);
+        if (res < 0)
+        {
             ch = buf_ch[0];
-        } else {
+        }
+        else
+        {
             ch = res;
         }
         break;
@@ -458,6 +521,8 @@ convert_from_8bit_to_utf_c (const char input_char, GIConv conv)
     }
     return ch;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 convert_from_8bit_to_utf_c2 (const char input_char)
@@ -472,16 +537,21 @@ convert_from_8bit_to_utf_c2 (const char input_char)
     str[0] = (unsigned char) input_char;
     str[1] = '\0';
 
-    cp_from = get_codepage_id ( source_codepage );
+    cp_from = get_codepage_id (source_codepage);
     conv = str_crt_conv_to (cp_from);
 
-    if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof(buf_ch))) {
+    if (conv != INVALID_CONV)
+    {
+        switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof (buf_ch)))
+        {
         case ESTR_SUCCESS:
             res = g_utf8_get_char_validated ((char *) buf_ch, -1);
-            if ( res < 0 ) {
+            if (res < 0)
+            {
                 ch = buf_ch[0];
-            } else {
+            }
+            else
+            {
                 ch = res;
             }
             break;
@@ -495,4 +565,7 @@ convert_from_8bit_to_utf_c2 (const char input_char)
     return ch;
 
 }
-#endif				/* HAVE_CHARSET */
+
+/* --------------------------------------------------------------------------------------------- */
+
+#endif /* HAVE_CHARSET */

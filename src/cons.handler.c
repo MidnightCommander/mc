@@ -29,8 +29,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #ifdef __FreeBSD__
-#  include <sys/consio.h>
-#  include <sys/ioctl.h>
+#include <sys/consio.h>
+#include <sys/ioctl.h>
 #endif
 #include <unistd.h>
 
@@ -42,17 +42,44 @@
 
 #include "consaver/cons.saver.h"
 
+/*** global variables ****************************************************************************/
+
 signed char console_flag = 0;
 
 #ifdef __linux__
+int cons_saver_pid = 1;
+#endif /* __linux__ */
 
+/*** file scope macro definitions ****************************************************************/
+
+#if defined(__FreeBSD__)
+#define FD_OUT 1
+#define cursor_to(x, y) \
+do \
+{ \
+    printf("\x1B[%d;%df", (y) + 1, (x) + 1); \
+    fflush(stdout); \
+} while (0)
+#endif /* __linux__ */
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+#ifdef __linux__
 /* The cons saver can't have a pid of 1, used to prevent bunches of
  * #ifdef linux */
-
-int cons_saver_pid = 1;
 static int pipefd1[2] = { -1, -1 };
 static int pipefd2[2] = { -1, -1 };
+#elif defined(__FreeBSD__)
+static struct scrshot screen_shot;
+static struct vid_info screen_info;
+#endif /* __linux__ */
 
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef __linux__
 static void
 show_console_contents_linux (int starty, unsigned char begin_line, unsigned char end_line)
 {
@@ -98,6 +125,8 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
     /* Read the value of the console_flag */
     ret = read (pipefd2[0], &message, 1);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 handle_console_linux (unsigned char action)
@@ -219,15 +248,11 @@ handle_console_linux (unsigned char action)
 
 #elif defined(__FreeBSD__)
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * FreeBSD support copyright (C) 2003 Alexander Serkov <serkov@ukrpost.net>.
  * Support for screenmaps by Max Khon <fjoe@FreeBSD.org>
  */
-
-#define FD_OUT 1
-
-static struct scrshot screen_shot;
-static struct vid_info screen_info;
 
 static void
 console_init (void)
@@ -247,6 +272,8 @@ console_init (void)
         console_flag = 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 set_attr (unsigned attr)
 {
@@ -264,12 +291,7 @@ set_attr (unsigned attr)
             color_map[tc & 7], color_map[bc & 7]);
 }
 
-#define cursor_to(x, y) \
-do \
-{ \
-    printf("\x1B[%d;%df", (y) + 1, (x) + 1); \
-    fflush(stdout); \
-} while (0)
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 console_restore (void)
@@ -295,6 +317,8 @@ console_restore (void)
     fflush (stdout);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 console_shutdown (void)
 {
@@ -305,6 +329,8 @@ console_shutdown (void)
 
     console_flag = 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 console_save (void)
@@ -351,10 +377,12 @@ console_save (void)
     for (i = 0; i < screen_shot.xsize * screen_shot.ysize; i++)
     {
         screen_shot.buf[i] =
-            (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.
-            scrmap[screen_shot.buf[i] & 0xff];
+            (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.scrmap[screen_shot.
+                                                                          buf[i] & 0xff];
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 show_console_contents_freebsd (int starty, unsigned char begin_line, unsigned char end_line)
@@ -375,6 +403,8 @@ show_console_contents_freebsd (int starty, unsigned char begin_line, unsigned ch
         }
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 handle_console_freebsd (unsigned char action)
@@ -400,6 +430,10 @@ handle_console_freebsd (unsigned char action)
 }
 #endif /* __FreeBSD__ */
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
 show_console_contents (int starty, unsigned char begin_line, unsigned char end_line)
 {
@@ -419,6 +453,8 @@ show_console_contents (int starty, unsigned char begin_line, unsigned char end_l
 #endif
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 handle_console (unsigned char action)
 {
@@ -433,3 +469,5 @@ handle_console (unsigned char action)
     handle_console_freebsd (action);
 #endif
 }
+
+/* --------------------------------------------------------------------------------------------- */

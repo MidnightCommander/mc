@@ -1,7 +1,7 @@
 #ifndef MC__ARGS_H
 #define MC__ARGS_H
 
-#include "lib/global.h" /* gboolean */
+#include "lib/global.h"         /* gboolean */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -27,6 +27,7 @@ extern int mc_args__debug_level;
 
 /*** declarations of public functions ************************************************************/
 
-gboolean mc_args_handle(int argc, char **argv, const char *translation_domain);
+gboolean mc_args_handle (int argc, char **argv, const char *translation_domain);
 
+/*** inline functions ****************************************************************************/
 #endif /* MC__ARGS_H */

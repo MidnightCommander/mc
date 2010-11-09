@@ -35,7 +35,7 @@
 #include "lib/strutil.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #ifdef ENABLE_VFS_SMB
-#include "lib/vfs/mc-vfs/smbfs.h" /* smbfs_set_debugf()  */
+#include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debugf()  */
 #endif
 
 #include "src/main.h"
@@ -92,10 +92,10 @@ int mc_args__debug_level = 0;
 /*** file scope variables ************************************************************************/
 
 /* forward declarations */
-static gboolean parse_mc_e_argument (const gchar *option_name, const gchar *value,
-                              gpointer data, GError **error);
-static gboolean parse_mc_v_argument (const gchar *option_name, const gchar *value,
-                              gpointer data, GError **error);
+static gboolean parse_mc_e_argument (const gchar * option_name, const gchar * value,
+                                     gpointer data, GError ** error);
+static gboolean parse_mc_v_argument (const gchar * option_name, const gchar * value,
+                                     gpointer data, GError ** error);
 
 static GOptionContext *context;
 
@@ -425,7 +425,7 @@ mc_setup_by_args (int argc, char *argv[])
              */
             char *end, *p;
 
-            end = tmp + strlen (tmp);\
+            end = tmp + strlen (tmp);
             p = end;
 
             if (p > tmp && p[-1] == ':')
@@ -601,8 +601,7 @@ mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-parse_mc_e_argument (const gchar *option_name, const gchar *value,
-                     gpointer data, GError **error)
+parse_mc_e_argument (const gchar * option_name, const gchar * value, gpointer data, GError ** error)
 {
     (void) option_name;
     (void) data;
@@ -617,8 +616,7 @@ parse_mc_e_argument (const gchar *option_name, const gchar *value,
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-parse_mc_v_argument (const gchar *option_name, const gchar *value,
-                     gpointer data, GError **error)
+parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer data, GError ** error)
 {
     (void) option_name;
     (void) data;

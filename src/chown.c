@@ -50,6 +50,10 @@
 #include "wtools.h"             /* init_box_colors() */
 #include "setup.h"              /* panels_options */
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define UX 5
 #define UY 2
 
@@ -67,6 +71,14 @@
 #define B_SETALL        B_USER
 #define B_SETUSR        (B_USER + 1)
 #define B_SETGRP        (B_USER + 2)
+
+#define LABELS 5
+
+#define chown_label(n,txt) label_set_text (chown_label [n].l, txt)
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
 
 static int need_update, end_chown;
 static int current_file;
@@ -86,7 +98,6 @@ static struct
     { B_SETALL, NORMAL_BUTTON,  0, 0,  N_("Set &all") },
 };
 
-#define LABELS 5 
 static struct {
     int y, x;
     WLabel *l;
@@ -98,6 +109,9 @@ static struct {
     { TY + 10, TX + 2, NULL }
 };
 /* *INDENT-ON* */
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 chown_refresh (Dlg_head * h)
@@ -118,6 +132,8 @@ chown_refresh (Dlg_head * h)
     tty_print_string (_("Permission"));
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 next_file (void)
 {
@@ -126,6 +142,8 @@ next_file (void)
 
     return current_panel->dir.list[current_file].fname;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -140,6 +158,8 @@ chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
         return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static Dlg_head *
 init_chown (void)
@@ -204,6 +224,8 @@ init_chown (void)
     return ch_dlg;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 chown_done (void)
 {
@@ -211,6 +233,8 @@ chown_done (void)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 do_chown (uid_t u, gid_t g)
@@ -221,6 +245,8 @@ do_chown (uid_t u, gid_t g)
 
     do_file_mark (current_panel, current_file, 0);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 apply_chowns (uid_t u, gid_t g)
@@ -239,7 +265,9 @@ apply_chowns (uid_t u, gid_t g)
     while (current_panel->marked);
 }
 
-#define chown_label(n,txt) label_set_text (chown_label [n].l, txt)
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 chown_cmd (void)
@@ -354,3 +382,5 @@ chown_cmd (void)
 
     chown_done ();
 }
+
+/* --------------------------------------------------------------------------------------------- */

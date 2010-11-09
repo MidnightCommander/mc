@@ -69,12 +69,81 @@
 
 #include "boxes.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+#ifdef ENABLE_VFS
+#define VFSX 56
+
+#ifdef ENABLE_VFS_FTP
+#define VFSY 17
+#else
+#define VFSY 8
+#endif /* ENABLE_VFS_FTP */
+#endif /* ENABLE_VFS */
+
+#ifdef WITH_BACKGROUND
+#define B_STOP   (B_USER+1)
+#define B_RESUME (B_USER+2)
+#define B_KILL   (B_USER+3)
+#define JOBS_Y 15
+#endif /* WITH_BACKGROUND */
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
 static WRadio *display_radio;
 static WInput *display_user_format;
 static WInput *display_mini_status;
 static WCheck *display_check_status;
 static char **displays_status;
 static int display_user_hotkey = 'u';
+
+#ifdef HAVE_CHARSET
+static int new_display_codepage;
+static WLabel *cplabel;
+static WCheck *inpcheck;
+#endif /* HAVE_CHARSET */
+
+#ifdef ENABLE_VFS
+static char *ret_timeout;
+#ifdef ENABLE_VFS_FTP
+static char *ret_ftp_proxy;
+static char *ret_passwd;
+static char *ret_directory_timeout;
+#endif /* ENABLE_VFS_FTP */
+#endif /* ENABLE_VFS */
+
+#ifdef WITH_BACKGROUND
+static int JOBS_X = 60;
+static WListbox *bg_list;
+static Dlg_head *jobs_dlg;
+
+static int task_cb (WButton * button, int action);
+
+static struct
+{
+    const char *name;
+    int xpos;
+    int value;
+    bcback callback;
+}
+job_buttons[] =
+{
+    /* *INDENT-OFF* */
+    { N_("&Stop"), 3, B_STOP, task_cb },
+    { N_("&Resume"), 12, B_RESUME, task_cb },
+    { N_("&Kill"), 23, B_KILL, task_cb },
+    { N_("&OK"), 35, B_CANCEL, NULL }
+    /* *INDENT-ON* */
+};
+
+#endif /* WITH_BACKGROUND */
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -150,6 +219,8 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static Dlg_head *
 display_init (int radio_sel, char *init_text, int _check_status, char **_status)
 {
@@ -224,14 +295,15 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     add_widget (dd, cancel_button);
     add_widget (dd, ok_button);
 
-    display_mini_status = input_new (10, 8, input_get_default_colors(), dlg_width - 12, _status[radio_sel],
-                                     "mini-input", INPUT_COMPLETE_DEFAULT);
+    display_mini_status =
+        input_new (10, 8, input_get_default_colors (), dlg_width - 12, _status[radio_sel],
+                   "mini-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_mini_status);
 
     display_check_status = check_new (9, 4, _check_status, user_mini_status);
     add_widget (dd, display_check_status);
 
-    display_user_format = input_new (7, 8, input_get_default_colors(), dlg_width - 12, init_text,
+    display_user_format = input_new (7, 8, input_get_default_colors (), dlg_width - 12, init_text,
                                      "user-fmt-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_user_format);
 
@@ -241,6 +313,213 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
 
     return dd;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+#ifdef HAVE_CHARSET
+
+static int
+sel_charset_button (WButton * button, int action)
+{
+    int new_dcp;
+
+    (void) button;
+    (void) action;
+
+    new_dcp = select_charset (-1, -1, new_display_codepage, TRUE);
+
+    if (new_dcp != SELECT_CHARSET_CANCEL)
+    {
+        const char *cpname;
+        char buf[BUF_TINY];
+
+        new_display_codepage = new_dcp;
+        cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT) ?
+            _("Other 8 bit") :
+            ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
+        if (cpname != NULL)
+            utf8_display = str_isutf8 (cpname);
+        /* avoid strange bug with label repainting */
+        g_snprintf (buf, sizeof (buf), "%-27s", cpname);
+        label_set_text (cplabel, buf);
+    }
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static Dlg_head *
+init_disp_bits_box (void)
+{
+    /* dialog sizes */
+    const int DISPY = 11;
+    const int DISPX = 46;
+
+    const char *cpname;
+    Dlg_head *dbits_dlg;
+
+    do_refresh ();
+
+    dbits_dlg =
+        create_dlg (TRUE, 0, 0, DISPY, DISPX, dialog_colors, NULL,
+                    "[Display bits]", _("Display bits"), DLG_CENTER | DLG_REVERSE);
+
+    add_widget (dbits_dlg, label_new (3, 4, _("Input / display codepage:")));
+
+    cpname = (new_display_codepage < 0) ? _("Other 8 bit")
+        : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
+    cplabel = label_new (4, 4, cpname);
+    add_widget (dbits_dlg, cplabel);
+
+    add_widget (dbits_dlg,
+                button_new (DISPY - 3, DISPX / 2 + 3, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0));
+    add_widget (dbits_dlg, button_new (DISPY - 3, 7, B_ENTER, NORMAL_BUTTON, _("&OK"), 0));
+
+    inpcheck = check_new (6, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"));
+    add_widget (dbits_dlg, inpcheck);
+
+    cpname = _("&Select");
+    add_widget (dbits_dlg,
+                button_new (4, DISPX - 7 - str_term_width1 (cpname), B_USER,
+                            NORMAL_BUTTON, cpname, sel_charset_button));
+
+    return dbits_dlg;
+}
+#endif /* HAVE_CHARSET */
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case DLG_POST_KEY:
+        /* The enter key will be processed by the tree widget */
+        if (parm == '\n')
+        {
+            h->ret_value = B_ENTER;
+            dlg_stop (h);
+        }
+        return MSG_HANDLED;
+
+    case DLG_ACTION:
+        /* command from buttonbar */
+        return send_message ((Widget *) find_tree (h), WIDGET_COMMAND, parm);
+
+    default:
+        return default_dlg_callback (h, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef ENABLE_VFS
+#ifdef ENABLE_VFS_FTP
+
+static cb_ret_t
+confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case DLG_ACTION:
+        if (sender->id == 6)
+        {
+            /* message from "Always use ftp proxy" checkbutton */
+            const gboolean not_use = !(((WCheck *) sender)->state & C_BOOL);
+            Widget *w;
+
+            /* input */
+            w = dlg_find_by_id (h, sender->id - 1);
+            widget_disable (*w, not_use);
+            send_message (w, WIDGET_DRAW, 0);
+
+            return MSG_HANDLED;
+        }
+        return MSG_NOT_HANDLED;
+
+    default:
+        return default_dlg_callback (h, sender, msg, parm, data);
+    }
+}
+#endif /* ENABLE_VFS_FTP */
+#endif /* ENABLE_VFS */
+
+#ifdef WITH_BACKGROUND
+static void
+jobs_fill_listbox (void)
+{
+    static const char *state_str[2];
+    TaskList *tl = task_list;
+
+    if (!state_str[0])
+    {
+        state_str[0] = _("Running");
+        state_str[1] = _("Stopped");
+    }
+
+    while (tl)
+    {
+        char *s;
+
+        s = g_strconcat (state_str[tl->state], " ", tl->info, (char *) NULL);
+        listbox_add_item (bg_list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl);
+        g_free (s);
+        tl = tl->next;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+task_cb (WButton * button, int action)
+{
+    TaskList *tl;
+    int sig = 0;
+
+    (void) button;
+
+    if (bg_list->list == NULL)
+        return 0;
+
+    /* Get this instance information */
+    listbox_get_current (bg_list, NULL, (void **) &tl);
+
+#ifdef SIGTSTP
+    if (action == B_STOP)
+    {
+        sig = SIGSTOP;
+        tl->state = Task_Stopped;
+    }
+    else if (action == B_RESUME)
+    {
+        sig = SIGCONT;
+        tl->state = Task_Running;
+    }
+    else
+#endif
+    if (action == B_KILL)
+    {
+        sig = SIGKILL;
+    }
+
+    if (sig == SIGKILL)
+        unregister_task_running (tl->pid, tl->fd);
+
+    kill (tl->pid, sig);
+    listbox_remove_list (bg_list);
+    jobs_fill_listbox ();
+
+    /* This can be optimized to just redraw this widget :-) */
+    dlg_redraw (jobs_dlg);
+
+    return 0;
+}
+#endif /* WITH_BACKGROUND */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* return list type */
 int
@@ -293,6 +572,8 @@ display_box (WPanel * panel, char **userp, char **minip, int *use_msformat, int 
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 const panel_field_t *
 sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, int *exec_first)
@@ -395,6 +676,7 @@ sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, 
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 void
 confirm_box (void)
@@ -469,6 +751,7 @@ confirm_box (void)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 #ifndef HAVE_CHARSET
 void
@@ -563,79 +846,8 @@ display_bits_box (void)         /* AB:FIXME: test dialog */
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 #else /* HAVE_CHARSET */
-
-static int new_display_codepage;
-
-static WLabel *cplabel;
-static WCheck *inpcheck;
-
-static int
-sel_charset_button (WButton *button, int action)
-{
-    int new_dcp;
-
-    (void) button;
-    (void) action;
-
-    new_dcp = select_charset (-1, -1, new_display_codepage, TRUE);
-
-    if (new_dcp != SELECT_CHARSET_CANCEL)
-    {
-        const char *cpname;
-        char buf[BUF_TINY];
-
-        new_display_codepage = new_dcp;
-        cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT) ?
-            _("Other 8 bit") :
-            ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
-        if (cpname != NULL)
-            utf8_display = str_isutf8 (cpname);
-        /* avoid strange bug with label repainting */
-        g_snprintf (buf, sizeof (buf), "%-27s", cpname);
-        label_set_text (cplabel, buf);
-    }
-
-    return 0;
-}
-
-static Dlg_head *
-init_disp_bits_box (void)
-{
-    /* dialog sizes */
-    const int DISPY = 11;
-    const int DISPX = 46;
-
-    const char *cpname;
-    Dlg_head *dbits_dlg;
-
-    do_refresh ();
-
-    dbits_dlg =
-        create_dlg (TRUE, 0, 0, DISPY, DISPX, dialog_colors, NULL,
-                    "[Display bits]", _("Display bits"), DLG_CENTER | DLG_REVERSE);
-
-    add_widget (dbits_dlg, label_new (3, 4, _("Input / display codepage:")));
-
-    cpname = (new_display_codepage < 0) ? _("Other 8 bit")
-             : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
-    cplabel = label_new (4, 4, cpname);
-    add_widget (dbits_dlg, cplabel);
-
-    add_widget (dbits_dlg,
-                button_new (DISPY - 3, DISPX / 2 + 3, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0));
-    add_widget (dbits_dlg, button_new (DISPY - 3, 7, B_ENTER, NORMAL_BUTTON, _("&OK"), 0));
-
-    inpcheck = check_new (6, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"));
-    add_widget (dbits_dlg, inpcheck);
-
-    cpname = _("&Select");
-    add_widget (dbits_dlg,
-                button_new (4, DISPX - 7 - str_term_width1 (cpname), B_USER,
-                            NORMAL_BUTTON, cpname, sel_charset_button));
-
-    return dbits_dlg;
-}
 
 void
 display_bits_box (void)
@@ -669,33 +881,11 @@ display_bits_box (void)
     destroy_dlg (dbits_dlg);
     repaint_screen ();
 }
-
 #endif /* HAVE_CHARSET */
 
-static cb_ret_t
-tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
-{
-    switch (msg)
-    {
-    case DLG_POST_KEY:
-        /* The enter key will be processed by the tree widget */
-        if (parm == '\n')
-        {
-            h->ret_value = B_ENTER;
-            dlg_stop (h);
-        }
-        return MSG_HANDLED;
+/* --------------------------------------------------------------------------------------------- */
+/** Show tree in a box, not on a panel */
 
-    case DLG_ACTION:
-        /* command from buttonbar */
-        return send_message ((Widget *) find_tree (h), WIDGET_COMMAND, parm);
-
-    default:
-        return default_dlg_callback (h, sender, msg, parm, data);
-    }
-}
-
-/* Show tree in a box, not on a panel */
 char *
 tree_box (const char *current_dir)
 {
@@ -727,53 +917,12 @@ tree_box (const char *current_dir)
     return val;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 #ifdef ENABLE_VFS
-
-static char *ret_timeout;
-
-#ifdef ENABLE_VFS_FTP
-static char *ret_ftp_proxy;
-static char *ret_passwd;
-static char *ret_directory_timeout;
-
-static cb_ret_t
-confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
-{
-    switch (msg)
-    {
-        case DLG_ACTION:
-            if (sender->id == 6)
-            {
-                /* message from "Always use ftp proxy" checkbutton */
-                const gboolean not_use = !(((WCheck *) sender)->state & C_BOOL);
-                Widget *w;
-
-                /* input */
-                w = dlg_find_by_id (h, sender->id - 1);
-                widget_disable (*w, not_use);
-                send_message (w, WIDGET_DRAW, 0);
-
-                return MSG_HANDLED;
-            }
-            return MSG_NOT_HANDLED;
-
-        default:
-            return default_dlg_callback (h, sender, msg, parm, data);
-    }
-}
-#endif /* ENABLE_VFS_FTP */
-
 void
 configure_vfs (void)
 {
-#define VFSX 56
-
-#ifdef ENABLE_VFS_FTP
-#define VFSY 17
-#else
-#define VFSY 8
-#endif /* ENABLE_VFS_FTP */
-
     char buffer2[BUF_TINY];
 #ifdef ENABLE_VFS_FTP
     char buffer3[BUF_TINY];
@@ -849,6 +998,8 @@ configure_vfs (void)
 
 #endif /* ENABLE_VFS */
 
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 cd_dialog (void)
 {
@@ -882,6 +1033,8 @@ cd_dialog (void)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 symlink_dialog (const char *existing, const char *new, char **ret_existing, char **ret_new)
 {
@@ -908,101 +1061,9 @@ symlink_dialog (const char *existing, const char *new, char **ret_existing, char
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 #ifdef WITH_BACKGROUND
-#define B_STOP   (B_USER+1)
-#define B_RESUME (B_USER+2)
-#define B_KILL   (B_USER+3)
-
-static int JOBS_X = 60;
-#define JOBS_Y 15
-static WListbox *bg_list;
-static Dlg_head *jobs_dlg;
-
-static void
-jobs_fill_listbox (void)
-{
-    static const char *state_str[2];
-    TaskList *tl = task_list;
-
-    if (!state_str[0])
-    {
-        state_str[0] = _("Running");
-        state_str[1] = _("Stopped");
-    }
-
-    while (tl)
-    {
-        char *s;
-
-        s = g_strconcat (state_str[tl->state], " ", tl->info, (char *) NULL);
-        listbox_add_item (bg_list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl);
-        g_free (s);
-        tl = tl->next;
-    }
-}
-
-static int
-task_cb (WButton *button, int action)
-{
-    TaskList *tl;
-    int sig = 0;
-
-    (void) button;
-
-    if (bg_list->list == NULL)
-        return 0;
-
-    /* Get this instance information */
-    listbox_get_current (bg_list, NULL, (void **) &tl);
-
-#  ifdef SIGTSTP
-    if (action == B_STOP)
-    {
-        sig = SIGSTOP;
-        tl->state = Task_Stopped;
-    }
-    else if (action == B_RESUME)
-    {
-        sig = SIGCONT;
-        tl->state = Task_Running;
-    }
-    else
-#  endif
-    if (action == B_KILL)
-    {
-        sig = SIGKILL;
-    }
-
-    if (sig == SIGKILL)
-        unregister_task_running (tl->pid, tl->fd);
-
-    kill (tl->pid, sig);
-    listbox_remove_list (bg_list);
-    jobs_fill_listbox ();
-
-    /* This can be optimized to just redraw this widget :-) */
-    dlg_redraw (jobs_dlg);
-
-    return 0;
-}
-
-static struct
-{
-    const char *name;
-    int xpos;
-    int value;
-    bcback callback;
-}
-job_buttons[] =
-{
-    /* *INDENT-OFF* */
-    { N_("&Stop"), 3, B_STOP, task_cb },
-    { N_("&Resume"), 12, B_RESUME, task_cb },
-    { N_("&Kill"), 23, B_KILL, task_cb },
-    { N_("&OK"), 35, B_CANCEL, NULL }
-    /* *INDENT-ON* */
-};
-
 void
 jobs_cmd (void)
 {
@@ -1058,6 +1119,8 @@ jobs_cmd (void)
 }
 #endif /* WITH_BACKGROUND */
 
+/* --------------------------------------------------------------------------------------------- */
+
 #ifdef ENABLE_VFS_SMB
 struct smb_authinfo *
 vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, const char *user)
@@ -1075,8 +1138,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
     Dlg_head *auth_dlg;
     struct smb_authinfo *return_value = NULL;
 
-    const int input_colors[3] =
-    {
+    const int input_colors[3] = {
         INPUT_COLOR,
         INPUT_UNCHANGED_COLOR,
         INPUT_MARK_COLOR
@@ -1130,18 +1192,22 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
 
     g_free (title);
 
-    in_user = input_new (5, istart, input_get_default_colors(), ilen, user, "auth_name", INPUT_COMPLETE_DEFAULT);
+    in_user =
+        input_new (5, istart, input_get_default_colors (), ilen, user, "auth_name",
+                   INPUT_COMPLETE_DEFAULT);
     add_widget (auth_dlg, in_user);
 
     in_domain =
-        input_new (3, istart, input_get_default_colors(), ilen, domain, "auth_domain", INPUT_COMPLETE_DEFAULT);
+        input_new (3, istart, input_get_default_colors (), ilen, domain, "auth_domain",
+                   INPUT_COMPLETE_DEFAULT);
 
     add_widget (auth_dlg, in_domain);
     add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON, buts[1], 0));
     add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
-    in_password  =
-            input_new (7, istart, input_get_default_colors(), ilen, "", "auth_password", INPUT_COMPLETE_DEFAULT);
+    in_password =
+        input_new (7, istart, input_get_default_colors (), ilen, "", "auth_password",
+                   INPUT_COMPLETE_DEFAULT);
 
     in_password->completion_flags = 0;
     in_password->is_password = 1;
@@ -1160,3 +1226,5 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
     return return_value;
 }
 #endif /* ENABLE_VFS_SMB */
+
+/* --------------------------------------------------------------------------------------------- */

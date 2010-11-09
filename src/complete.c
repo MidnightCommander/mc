@@ -49,11 +49,48 @@
 #include "wtools.h"
 #include "main.h"               /* show_all_if_ambiguous */
 
-typedef char *CompletionFunction (const char *text, int state, INPUT_COMPLETE_FLAGS flags);
+/*** global variables ****************************************************************************/
+
+/* Linux declares environ in <unistd.h>, so don't repeat it here. */
+#if (!(defined(__linux__) && defined (__USE_GNU)) && !defined(__CYGWIN__))
+extern char **environ;
+#endif
+
+/*** file scope macro definitions ****************************************************************/
 
 /* #define DO_COMPLETION_DEBUG */
 #ifdef DO_COMPLETION_DEBUG
-/*
+#define SHOW_C_CTX(func) fprintf(stderr, "%s: text='%s' flags=%s\n", func, text, show_c_flags(flags))
+#else
+#define SHOW_C_CTX(func)
+#endif /* DO_CMPLETION_DEBUG */
+
+#define whitespace(c) ((c) == ' ' || (c) == '\t')
+#define cr_whitespace(c) (whitespace (c) || (c) == '\n' || (c) == '\r')
+
+#define DO_INSERTION 1
+#define DO_QUERY     2
+
+/*** file scope type declarations ****************************************************************/
+
+typedef char *CompletionFunction (const char *text, int state, INPUT_COMPLETE_FLAGS flags);
+
+/*** file scope variables ************************************************************************/
+
+static char **hosts = NULL;
+static char **hosts_p = NULL;
+static int hosts_alloclen = 0;
+
+static int query_height, query_width;
+static WInput *input;
+static int min_end;
+static int start, end;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef DO_COMPLETION_DEBUG
+/**
  * Useful to print/debug completion flags
  */
 static const char *
@@ -71,11 +108,9 @@ show_c_flags (INPUT_COMPLETE_FLAGS flags)
 
     return s_cf;
 }
-
-#define SHOW_C_CTX(func) fprintf(stderr, "%s: text='%s' flags=%s\n", func, text, show_c_flags(flags))
-#else
-#define SHOW_C_CTX(func)
 #endif /* DO_CMPLETION_DEBUG */
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 filename_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
@@ -249,8 +284,10 @@ filename_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
     }
 }
 
-/* We assume here that text[0] == '~' , if you want to call it in another way,
+/* --------------------------------------------------------------------------------------------- */
+/** We assume here that text[0] == '~' , if you want to call it in another way,
    you have to change the code */
+
 static char *
 username_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
@@ -283,13 +320,10 @@ username_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
     return NULL;
 }
 
-/* Linux declares environ in <unistd.h>, so don't repeat it here. */
-#if (!(defined(__linux__) && defined (__USE_GNU)) && !defined(__CYGWIN__))
-extern char **environ;
-#endif
-
-/* We assume text [0] == '$' and want to have a look at text [1], if it is
+/* --------------------------------------------------------------------------------------------- */
+/** We assume text [0] == '$' and want to have a look at text [1], if it is
    equal to '{', so that we should append '}' at the end */
+
 static char *
 variable_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
@@ -334,12 +368,8 @@ variable_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
     }
 }
 
-#define whitespace(c) ((c) == ' ' || (c) == '\t')
-#define cr_whitespace(c) (whitespace (c) || (c) == '\n' || (c) == '\r')
+/* --------------------------------------------------------------------------------------------- */
 
-static char **hosts = NULL;
-static char **hosts_p = NULL;
-static int hosts_alloclen = 0;
 static void
 fetch_hosts (const char *filename)
 {
@@ -423,6 +453,8 @@ fetch_hosts (const char *filename)
     fclose (file);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 hostname_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
@@ -480,12 +512,14 @@ hostname_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
     }
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * This is the function to call when the word to complete is in a position
  * where a command word can be found. It looks around $PATH, looking for
  * commands that match. It also scans aliases, function names, and the
  * table of shell built-ins.
  */
+
 static char *
 command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS flags)
 {
@@ -637,19 +671,23 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
     return found;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 match_compare (const void *a, const void *b)
 {
     return strcmp (*(char **) a, *(char **) b);
 }
 
-/* Returns an array of char * matches with the longest common denominator
+/* --------------------------------------------------------------------------------------------- */
+/** Returns an array of char * matches with the longest common denominator
    in the 1st entry. Then a NULL terminated list of different possible
    completions follows.
    You have to supply your own CompletionFunction with the word you
    want to complete as the first argument and an count of previous matches
    as the second. 
    In case no matches were found we return NULL. */
+
 static char **
 completion_matches (const char *text, CompletionFunction entry_function, INPUT_COMPLETE_FLAGS flags)
 {
@@ -748,7 +786,8 @@ completion_matches (const char *text, CompletionFunction entry_function, INPUT_C
     return match_list;
 }
 
-/* Check if directory completion is needed */
+/* --------------------------------------------------------------------------------------------- */
+/** Check if directory completion is needed */
 static int
 check_is_cd (const char *text, int start, INPUT_COMPLETE_FLAGS flags)
 {
@@ -777,7 +816,8 @@ check_is_cd (const char *text, int start, INPUT_COMPLETE_FLAGS flags)
     return 0;
 }
 
-/* Returns an array of matches, or NULL if none. */
+/* --------------------------------------------------------------------------------------------- */
+/** Returns an array of matches, or NULL if none. */
 static char **
 try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
 {
@@ -938,23 +978,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
     return matches;
 }
 
-void
-free_completions (WInput * in)
-{
-    char **p;
-
-    if (!in->completions)
-        return;
-    for (p = in->completions; *p; p++)
-        g_free (*p);
-    g_free (in->completions);
-    in->completions = NULL;
-}
-
-static int query_height, query_width;
-static WInput *input;
-static int min_end;
-static int start, end;
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 insert_text (WInput * in, char *text, ssize_t size)
@@ -994,6 +1018,8 @@ insert_text (WInput * in, char *text, ssize_t size)
     }
     return size != 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -1145,9 +1171,9 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
     }
 }
 
-#define DO_INSERTION 1
-#define DO_QUERY     2
-/* Returns 1 if the user would like to see us again */
+/* --------------------------------------------------------------------------------------------- */
+/** Returns 1 if the user would like to see us again */
+
 static int
 complete_engine (WInput * in, int what_to_do)
 {
@@ -1264,6 +1290,25 @@ complete_engine (WInput * in, int what_to_do)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
+free_completions (WInput * in)
+{
+    char **p;
+
+    if (!in->completions)
+        return;
+    for (p = in->completions; *p; p++)
+        g_free (*p);
+    g_free (in->completions);
+    in->completions = NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 complete (WInput * in)
 {
@@ -1284,3 +1329,5 @@ complete (WInput * in)
 
     while (complete_engine (in, engine_flags));
 }
+
+/* --------------------------------------------------------------------------------------------- */

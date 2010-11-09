@@ -52,6 +52,10 @@
 #include "layout.h"             /* repaint_screen() */
 #include "achown.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define BX              5
 #define BY              6
 
@@ -68,6 +72,10 @@
 #define B_OTH           (B_USER + 5)
 #define B_OUSER         (B_USER + 6)
 #define B_OGROUP        (B_USER + 7)
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
 
 static struct Dlg_head *ch_dlg;
 
@@ -106,6 +114,9 @@ static int current_file;
 static int single_set;
 static char *fname;
 
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 update_ownership (void)
 {
@@ -113,6 +124,7 @@ update_ownership (void)
     button_set_text (b_group, get_group (sf_stat->st_gid));
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 inc_flag_pos (int f_pos)
@@ -128,6 +140,8 @@ inc_flag_pos (int f_pos)
     return MSG_HANDLED;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 dec_flag_pos (int f_pos)
 {
@@ -141,6 +155,8 @@ dec_flag_pos (int f_pos)
         return MSG_NOT_HANDLED;
     return MSG_HANDLED;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 set_perm_by_flags (char *s, int f_p)
@@ -158,6 +174,8 @@ set_perm_by_flags (char *s, int f_p)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 update_permissions (void)
 {
@@ -165,6 +183,8 @@ update_permissions (void)
     set_perm_by_flags (b_att[1]->text.start, 3);
     set_perm_by_flags (b_att[2]->text.start, 6);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static mode_t
 get_perm (char *s, int base)
@@ -183,6 +203,8 @@ get_perm (char *s, int base)
     return m;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static mode_t
 get_mode (void)
 {
@@ -195,6 +217,8 @@ get_mode (void)
 
     return m;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 print_flags (void)
@@ -235,6 +259,8 @@ print_flags (void)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 update_mode (Dlg_head * h)
 {
@@ -244,6 +270,8 @@ update_mode (Dlg_head * h)
     tty_printf ("%12o", get_mode ());
     send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 chl_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -263,6 +291,8 @@ chl_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data
         return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 do_enter_key (Dlg_head * h, int f_pos)
@@ -377,6 +407,8 @@ do_enter_key (Dlg_head * h, int f_pos)
     while (chl_end);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 chown_refresh (void)
 {
@@ -412,6 +444,8 @@ chown_refresh (void)
     print_flags ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 chown_info_update (void)
 {
@@ -428,6 +462,8 @@ chown_info_update (void)
     update_permissions ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 b_setpos (int f_pos)
 {
@@ -436,6 +472,8 @@ b_setpos (int f_pos)
     b_att[2]->hotpos = -1;
     b_att[f_pos]->hotpos = (flag_pos % 3);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -583,6 +621,8 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 init_chown_advanced (void)
 {
@@ -646,6 +686,8 @@ init_chown_advanced (void)
     add_widget (ch_dlg, b_att[0]);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 chown_advanced_done (void)
 {
@@ -654,6 +696,8 @@ chown_advanced_done (void)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #if 0
 static void
@@ -664,6 +708,8 @@ do_chown (uid_t u, gid_t g)
 }
 #endif
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 next_file (void)
 {
@@ -672,6 +718,8 @@ next_file (void)
 
     return current_panel->dir.list[current_file].fname;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 apply_advanced_chowns (struct stat *sf)
@@ -712,6 +760,10 @@ apply_advanced_chowns (struct stat *sf)
     }
     while (current_panel->marked);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 chown_advanced_cmd (void)
@@ -779,3 +831,5 @@ chown_advanced_cmd (void)
 
     chown_advanced_done ();
 }
+
+/* --------------------------------------------------------------------------------------------- */

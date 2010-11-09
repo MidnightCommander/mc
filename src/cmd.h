@@ -1,14 +1,17 @@
-
 /** \file cmd.h
  *  \brief Header: routines invoked by a function key
  *
  *  They normally operate on the current panel.
  */
 
-#ifndef MC_CMD_H
-#define MC_CMD_H
+#ifndef MC__CMD_H
+#define MC__CMD_H
 
 #include "lib/global.h"
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
 
 typedef enum
 {
@@ -16,6 +19,21 @@ typedef enum
     LINK_SYMLINK_ABSOLUTE,
     LINK_SYMLINK_RELATIVE
 } link_type_t;
+
+/* selection flags */
+typedef enum
+{
+    SELECT_FILES_ONLY = 1 << 0,
+    SELECT_MATCH_CASE = 1 << 1,
+    SELECT_SHELL_PATTERNS = 1 << 2
+} select_flags_t;
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
 
 #ifdef ENABLE_VFS_FTP
 void ftplink_cmd (void);
@@ -31,8 +49,7 @@ void help_cmd (void);
 void smart_dirsize_cmd (void);
 void single_dirsize_cmd (void);
 void dirsizes_cmd (void);
-int view_file_at_line (const char *filename, int plain_view, int internal,
-		       int start_line);
+int view_file_at_line (const char *filename, int plain_view, int internal, int start_line);
 int view_file (const char *filename, int normal, int internal);
 void view_cmd (void);
 void view_file_cmd (void);
@@ -83,4 +100,5 @@ void quick_view_cmd (void);
 void toggle_listing_cmd (void);
 void encoding_cmd (void);
 
+/*** inline functions ****************************************************************************/
 #endif

@@ -1,11 +1,21 @@
-
 /** \file achown.h
  *  \brief Header: Contains functions for advanced chowning
  */
 
-#ifndef MC_ACHOWN_H
-#define MC_ACHOWN_H
+#ifndef MC__ACHOWN_H
+#define MC__ACHOWN_H
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
 
 void chown_advanced_cmd (void);
 
+/*** inline functions ****************************************************************************/
 #endif
