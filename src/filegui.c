@@ -84,6 +84,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strescape.h"
 #include "lib/strutil.h"
+#include "lib/timefmt.h"        /* file_date() */
 
 #include "setup.h"              /* verbose */
 #include "dialog.h"             /* do_refresh() */

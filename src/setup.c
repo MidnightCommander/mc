@@ -34,7 +34,7 @@
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
-#include "lib/util.h"           /* time formats */
+#include "lib/timefmt.h"
 
 #include "lib/vfs/mc-vfs/vfs.h"
 

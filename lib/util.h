@@ -13,12 +13,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-
 /*** typedefs(not structures) and defined constants **********************************************/
-
-#define MAX_I18NTIMELENGTH 20
-#define MIN_I18NTIMELENGTH 10
-#define STD_I18NTIMELENGTH 12
 
 #ifndef MAXSYMLINKS
 #define MAXSYMLINKS 32
@@ -87,9 +82,6 @@ enum compression_type
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /*** global variables defined in .c file *********************************************************/
-
-extern char *user_recent_timeformat;    /* time format string for recent dates */
-extern char *user_old_timeformat;       /* time format string for older dates */
 
 extern struct sigaction startup_handler;
 
@@ -188,10 +180,6 @@ int get_user_permissions (struct stat *buf);
 void init_uid_gid_cache (void);
 char *get_group (int);
 char *get_owner (int);
-
-
-size_t i18n_checktimelength (void);
-const char *file_date (time_t);
 
 int exist_file (const char *name);
 

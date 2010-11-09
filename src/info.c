@@ -32,6 +32,7 @@
 #include "lib/tty/mouse.h"      /* Gpm_Event */
 #include "lib/skin.h"
 #include "lib/strutil.h"
+#include "lib/timefmt.h"        /* file_date() */
 
 #include "dialog.h"
 #include "widget.h"             /* default_proc */

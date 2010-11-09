@@ -25,7 +25,7 @@ libmc_la_SOURCES = \
 	glibcompat.c glibcompat.h \
 	global.h \
 	lock.c lock.h \
-	timefmt.h
+	timefmt.c timefmt.h
 
 if USE_MAINTAINER_MODE
 libmc_la_SOURCES += logging.c logging.h

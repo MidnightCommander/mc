@@ -57,9 +57,6 @@
 
 /*** global variables ****************************************************************************/
 
-char *user_recent_timeformat = NULL;    /* time format string for recent dates */
-char *user_old_timeformat = NULL;       /* time format string for older dates */
-
 /*** file scope macro definitions ****************************************************************/
 
 #define ismode(n,m) ((n & m) == m)
@@ -79,13 +76,6 @@ char *user_old_timeformat = NULL;       /* time format string for older dates */
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
-
-/*
- * Cache variable for the i18n_checktimelength function,
- * initially set to a clearly invalid value to show that
- * it hasn't been initialized yet.
- */
-static size_t i18n_timelength_cache = MAX_I18NTIMELENGTH + 1;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -840,82 +830,6 @@ load_mc_home_file (const char *from, const char *filename, char **allocated_file
         g_free (hintfile);
 
     return data;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Check strftime() results. Some systems (i.e. Solaris) have different
- *  short-month and month name sizes for different locales
- */
-size_t
-i18n_checktimelength (void)
-{
-    size_t length = 0;
-    const time_t testtime = time (NULL);
-    struct tm *lt = localtime (&testtime);
-
-    if (i18n_timelength_cache <= MAX_I18NTIMELENGTH)
-        return i18n_timelength_cache;
-
-    if (lt == NULL)
-    {
-        /* huh, localtime() doesnt seem to work ... falling back to "(invalid)" */
-        length = str_term_width1 (_(INVALID_TIME_TEXT));
-    }
-    else
-    {
-        char buf[MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
-
-        /* We are interested in the longest possible date */
-        lt->tm_sec = lt->tm_min = lt->tm_hour = lt->tm_mday = 10;
-
-        /* Loop through all months to find out the longest one */
-        for (lt->tm_mon = 0; lt->tm_mon < 12; lt->tm_mon++)
-        {
-            strftime (buf, sizeof (buf) - 1, user_recent_timeformat, lt);
-            length = max ((size_t) str_term_width1 (buf), length);
-            strftime (buf, sizeof (buf) - 1, user_old_timeformat, lt);
-            length = max ((size_t) str_term_width1 (buf), length);
-        }
-
-        length = max ((size_t) str_term_width1 (_(INVALID_TIME_TEXT)), length);
-    }
-
-    /* Don't handle big differences. Use standard value (email bug, please) */
-    if (length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH)
-        length = STD_I18NTIMELENGTH;
-
-    /* Save obtained value to the cache */
-    i18n_timelength_cache = length;
-
-    return i18n_timelength_cache;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-const char *
-file_date (time_t when)
-{
-    static char timebuf[MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
-    time_t current_time = time ((time_t) 0);
-    const char *fmt;
-
-    if (current_time > when + 6L * 30L * 24L * 60L * 60L        /* Old. */
-        || current_time < when - 60L * 60L)     /* In the future. */
-        /* The file is fairly old or in the future.
-           POSIX says the cutoff is 6 months old;
-           approximate this by 6*30 days.
-           Allow a 1 hour slop factor for what is considered "the future",
-           to allow for NFS server/client clock disagreement.
-           Show the year instead of the time of day.  */
-
-        fmt = user_old_timeformat;
-    else
-        fmt = user_recent_timeformat;
-
-    FMT_LOCALTIME (timebuf, sizeof (timebuf), fmt, when);
-
-    return timebuf;
 }
 
 /* --------------------------------------------------------------------------------------------- */

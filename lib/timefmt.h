@@ -1,6 +1,6 @@
 
 /** \file timefmt.h
- *  \brief Header: time formating macroses
+ *  \brief Header: time formating functions
  */
 
 #ifndef MC__UTIL_TIMEFMT_H
@@ -11,6 +11,9 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define MAX_I18NTIMELENGTH 20
+#define MIN_I18NTIMELENGTH 10
+#define STD_I18NTIMELENGTH 12
 
 #define INVALID_TIME_TEXT "(invalid)"
 
@@ -43,8 +46,14 @@
 
 /*** global variables defined in .c file *********************************************************/
 
+extern char *user_recent_timeformat;    /* time format string for recent dates */
+extern char *user_old_timeformat;       /* time format string for older dates */
+
 /*** declarations of public functions ************************************************************/
+
+size_t i18n_checktimelength (void);
+const char *file_date (time_t);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* !__UTIL_H */
+#endif /* MC__UTIL_TIMEFMT_H */
