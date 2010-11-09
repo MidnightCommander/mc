@@ -81,7 +81,7 @@ static int c_file, end_chmod;
 
 static mode_t and_mask, or_mask, c_stat;
 
-/* FIXME: these variables are superfluous, aren't they? (hint: name_trunc
+/* FIXME: these variables are superfluous, aren't they? (hint: str_trunc
  * returns a pointer to a static buffer, and label_new creates its own copy
  * of its argument)
  * --rillig, 2004-08-29 */

@@ -115,12 +115,7 @@ char *name_quote (const char *c, int quote_percent);
 /* returns a duplicate of c. */
 char *fake_name_quote (const char *c, int quote_percent);
 
-/* Remove the middle part of the string to fit given length.
- * Use "~" to show where the string was truncated.
- * Return static buffer, no need to free() it. */
-const char *name_trunc (const char *txt, size_t trunc_len);
-
-/* path_trunc() is the same as name_trunc() above but
+/* path_trunc() is the same as str_trunc() but
  * it deletes possible password from path for security
  * reasons. */
 const char *path_trunc (const char *path, size_t trunc_len);
