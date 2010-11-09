@@ -59,8 +59,6 @@
 /* usage: str_cmp ("foo", !=, "bar") */
 #define str_cmp(a,rel,b) (strcmp ((a), (b)) rel 0)
 
-#define str_dup_range(s_start, s_bound) (g_strndup(s_start, s_bound - s_start))
-
 #define MC_PTR_FREE(ptr) do { g_free (ptr); (ptr) = NULL; } while (0)
 
 /*** enums ***************************************************************************************/

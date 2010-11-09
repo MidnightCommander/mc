@@ -721,12 +721,12 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                             --linkname_bound;   /* skip trailing " */
                     }
 
-                    ent->name = str_dup_range (filename, filename_bound);
+                    ent->name = g_strndup (filename, filename_bound - filename);
                     temp = ent->name;
                     ent->name = strutils_shell_unescape (ent->name);
                     g_free (temp);
 
-                    ent->ino->linkname = str_dup_range (linkname, linkname_bound);
+                    ent->ino->linkname = g_strndup (linkname, linkname_bound - linkname);
                     temp = ent->ino->linkname;
                     ent->ino->linkname = strutils_shell_unescape (ent->ino->linkname);
                     g_free (temp);
@@ -745,7 +745,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                         if (*(filename_bound - 1) == '"')
                             --filename_bound;
                     }
-                    ent->name = str_dup_range (filename, filename_bound);
+                    ent->name = g_strndup (filename, filename_bound - filename);
                     temp = ent->name;
                     ent->name = strutils_shell_unescape (ent->name);
                     g_free (temp);
