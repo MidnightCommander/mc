@@ -2710,37 +2710,25 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
 static void
 dview_status (const WDiff * dview, int ord, int width, int c)
 {
-    int skip_rows = dview->skip_rows;
-    int skip_cols = dview->skip_cols;
-
-    char buf[BUFSIZ];
+    const char *buf;
     int filename_width;
     int linenum, lineofs;
 
     tty_setcolor (STATUSBAR_COLOR);
 
     tty_gotoyx (0, c);
-    get_line_numbers (dview->a[ord], skip_rows, &linenum, &lineofs);
+    get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
 
     filename_width = width - 22;
     if (filename_width < 8)
-    {
         filename_width = 8;
-    }
-    if (filename_width >= (int) sizeof (buf))
-    {
-        /* abnormal, but avoid buffer overflow */
-        filename_width = sizeof (buf) - 1;
-    }
-    trim (strip_home_and_password (dview->label[ord]), buf, filename_width);
+
+    buf = str_term_trim (strip_home_and_password (dview->label[ord]), filename_width);
     if (ord == 0)
-    {
-        tty_printf ("%-*s %6d+%-4d Col %-4d ", filename_width, buf, linenum, lineofs, skip_cols);
-    }
+        tty_printf ("%-*s %6d+%-4d Col %-4d ", filename_width, buf, linenum, lineofs,
+                    dview->skip_cols);
     else
-    {
         tty_printf ("%-*s %6d+%-4d Dif %-4d ", filename_width, buf, linenum, lineofs, dview->ndiff);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3264,13 +3252,18 @@ dview_get_title (const Dlg_head *h, size_t len)
     const WDiff *dview = (const WDiff *) find_widget_type (h, dview_callback);
     const char *modified = dview->merged ? " (*) " : "     ";
     size_t len1;
+    GString *title;
 
-    len -=  (size_t) str_term_width1 (_("Diff:")) + strlen (modified);
-    len1 = (len - 3)/2;
+    len1 = (len - str_term_width1 (_("Diff:")) - strlen (modified) - 3) / 2;
 
-    return g_strconcat (_("Diff:"), modified,
-                        str_term_trim (dview->label[0], len1), " | ",
-                        str_term_trim (dview->label[1], len - len1), (char *) NULL);
+    title = g_string_sized_new (len);
+    g_string_append (title, _("Diff:"));
+    g_string_append (title, modified);
+    g_string_append (title, str_term_trim (dview->label[0], len1));
+    g_string_append (title, " | ");
+    g_string_append (title, str_term_trim (dview->label[1], len1));
+
+    return g_string_free (title, FALSE);
 }
 
 /*** public functions ****************************************************************************/
