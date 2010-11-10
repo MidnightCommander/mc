@@ -85,10 +85,10 @@ char *mcview_show_eof = NULL;
 
 
 /*** file scope functions ************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
-/* Both views */
+/** Both views */
+
 static int
 mcview_event (mcview_t * view, Gpm_Event * event, int *result)
 {
@@ -172,8 +172,8 @@ mcview_event (mcview_t * view, Gpm_Event * event, int *result)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** Real view only */
 
-/* Real view only */
 static int
 mcview_real_event (Gpm_Event * event, void *x)
 {
@@ -184,6 +184,8 @@ mcview_real_event (Gpm_Event * event, void *x)
         mcview_update (view);
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 mcview_set_keymap (mcview_t * view)
@@ -198,9 +200,7 @@ mcview_set_keymap (mcview_t * view)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 mcview_t *
@@ -238,8 +238,8 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** Real view only */
 
-/* Real view only */
 mcview_ret_t
 mcview_viewer (const char *command, const char *file, int start_line)
 {

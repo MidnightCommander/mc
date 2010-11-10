@@ -80,6 +80,7 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* Both views */
 static void
@@ -220,8 +221,7 @@ mcview_handle_editkey (mcview_t * view, int key)
             return MSG_NOT_HANDLED;
     }
 
-    if ((view->filename != NULL) && (view->filename[0] != '\0')
-        && (view->change_list == NULL))
+    if ((view->filename != NULL) && (view->filename[0] != '\0') && (view->change_list == NULL))
         view->locked = mcview_lock_file (view);
 
     if (node == NULL)
@@ -383,7 +383,8 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     return res;
 }
 
-/* Both views */
+/* --------------------------------------------------------------------------------------------- */
+/** Both views */
 static cb_ret_t
 mcview_handle_key (mcview_t * view, int key)
 {
@@ -441,9 +442,7 @@ mcview_adjust_size (Dlg_head * h)
 
 
 /* --------------------------------------------------------------------------------------------- */
-
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t

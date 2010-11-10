@@ -66,6 +66,7 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 mcview_movement_fixups (mcview_t * view, gboolean reset_search)
@@ -80,9 +81,7 @@ mcview_movement_fixups (mcview_t * view, gboolean reset_search)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -478,10 +477,10 @@ mcview_place_cursor (mcview_t * view)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-/* we have set view->search_start and view->search_end and must set 
+/** we have set view->search_start and view->search_end and must set
  * view->dpy_text_column and view->dpy_start
  * try to display maximum of match */
+
 void
 mcview_moveto_match (mcview_t * view)
 {

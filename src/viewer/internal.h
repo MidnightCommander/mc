@@ -1,6 +1,5 @@
-
-#ifndef MC_VIEWER_INTERNAL_H
-#define MC_VIEWER_INTERNAL_H
+#ifndef MC__VIEWER_INTERNAL_H
+#define MC__VIEWER_INTERNAL_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,7 +13,7 @@
 #include "src/widget.h"
 #include "src/keybind.h"        /* global_keymap_t */
 
-/*** typedefs(not structures) and defined constants ********************/
+/*** typedefs(not structures) and defined constants **********************************************/
 
 typedef unsigned char byte;
 
@@ -24,7 +23,7 @@ typedef unsigned int screen_dimen;
 extern const off_t INVALID_OFFSET;
 extern const off_t OFFSETTYPE_MAX;
 
-/*** enums *************************************************************/
+/*** enums ***************************************************************************************/
 
 /* data sources of the view */
 enum view_ds
@@ -49,7 +48,7 @@ typedef enum
     NROFF_TYPE_UNDERLINE = 2
 } nroff_type_t;
 
-/*** structures declarations (and typedefs of structures)***************/
+/*** structures declarations (and typedefs of structures)*****************************************/
 
 /* A node for building a change list on change_list */
 struct hexedit_change_node
@@ -210,11 +209,11 @@ typedef struct mcview_search_options_t
     gboolean all_codepages;
 } mcview_search_options_t;
 
-/*** global variables defined in .c file *******************************/
+/*** global variables defined in .c file *********************************************************/
 
 extern mcview_search_options_t mcview_search_options;
 
-/*** declarations of public functions **********************************/
+/*** declarations of public functions ************************************************************/
 
 /* actions_cmd.c:  */
 cb_ret_t mcview_callback (Widget * w, widget_msg_t msg, int parm);
@@ -330,9 +329,8 @@ int mcview_search_cmd_callback (const void *user_data, gsize char_offset);
 int mcview_search_update_cmd_callback (const void *, gsize);
 void mcview_do_search (mcview_t * view);
 
-
 /*** inline functions ****************************************************************************/
 
 #include "inlines.h"
 
-#endif /* MC_VIEWER_INTERNAL_H */
+#endif /* MC__VIEWER_INTERNAL_H */

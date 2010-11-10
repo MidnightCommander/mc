@@ -39,7 +39,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
-#include <stdint.h>     /* uintmax_t */
+#include <stdint.h>             /* uintmax_t */
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
