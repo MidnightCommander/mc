@@ -282,45 +282,6 @@ msglen (const char *text, int *lines, int *columns)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Copy from s to d, and trim the beginning if necessary, and prepend
- * "..." in this case.  The destination string can have at most len
- * bytes, not counting trailing 0.
- */
-
-char *
-trim (const char *s, char *d, int len)
-{
-    int source_len;
-
-    /* Sanity check */
-    len = max (len, 0);
-
-    source_len = strlen (s);
-    if (source_len > len)
-    {
-        /* Cannot fit the whole line */
-        if (len <= 3)
-        {
-            /* We only have room for the dots */
-            memset (d, '.', len);
-            d[len] = 0;
-            return d;
-        }
-        else
-        {
-            /* Begin with ... and add the rest of the source string */
-            memset (d, '.', 3);
-            strcpy (d + 3, s + 3 + source_len - len);
-        }
-    }
-    else
-        /* We can copy the whole line */
-        strcpy (d, s);
-    return d;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Quote the filename for the purpose of inserting it into the command
  * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
  * processed by the mc command line.
@@ -1522,33 +1483,6 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
   early_error:
     if (bookmarks != NULL)
         g_array_free (bookmarks, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-extern const char *
-cstrcasestr (const char *haystack, const char *needle)
-{
-    char *nee = str_create_search_needle (needle, 0);
-    const char *result = str_search_first (haystack, nee, 0);
-    str_release_search_needle (nee, 0);
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-const char *
-cstrstr (const char *haystack, const char *needle)
-{
-    return strstr (haystack, needle);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-extern char *
-str_unconst (const char *s)
-{
-    return (char *) s;
 }
 
 /* --------------------------------------------------------------------------------------------- */

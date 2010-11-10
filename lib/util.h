@@ -87,25 +87,9 @@ extern struct sigaction startup_handler;
 
 /*** declarations of public functions ************************************************************/
 
-/* Returns its argument as a "modifiable" string. This function is
- * intended to pass strings to legacy libraries that don't know yet
- * about the "const" modifier. The return value of this function
- * MUST NOT be modified. */
-extern char *str_unconst (const char *);
-
-/* String managing functions */
-
-extern const char *cstrcasestr (const char *haystack, const char *needle);
-extern const char *cstrstr (const char *haystack, const char *needle);
-
 void str_replace (char *s, char from, char to);
 int is_printable (int c);
 void msglen (const char *text, /*@out@ */ int *lines, /*@out@ */ int *columns);
-
-/* Copy from s to d, and trim the beginning if necessary, and prepend
- * "..." in this case.  The destination string can have at most len
- * bytes, not counting trailing 0. */
-char *trim (const char *s, char *d, int len);
 
 /* Quote the filename for the purpose of inserting it into the command
  * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
