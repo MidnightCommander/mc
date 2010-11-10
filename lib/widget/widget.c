@@ -56,12 +56,13 @@
 #include "widget.h"
 #include "wtools.h"
 
-#include "cmddef.h"             /* CK_ cmd name const */
-#include "keybind.h"            /* global_keymap_t */
-#include "panel.h"              /* current_panel */
-#include "main.h"               /* confirm_history_cleanup */
-#include "setup.h"              /* num_history_items_recorded */
-#include "clipboard.h"          /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
+/* TODO: these includes should be removed! */
+#include "src/cmddef.h"             /* CK_ cmd name const */
+#include "src/keybind.h"            /* global_keymap_t */
+#include "src/panel.h"              /* current_panel */
+#include "src/main.h"               /* confirm_history_cleanup */
+#include "src/setup.h"              /* num_history_items_recorded */
+#include "src/clipboard.h"          /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 
 static void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)

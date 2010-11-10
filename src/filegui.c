@@ -85,13 +85,13 @@
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
+#include "lib/widget/dialog.h"             /* do_refresh() */
+#include "lib/widget/widget.h"             /* WLabel */
+#include "lib/widget/wtools.h"             /* QuickDialog */
 
 #include "setup.h"              /* verbose */
-#include "dialog.h"             /* do_refresh() */
-#include "widget.h"             /* WLabel */
 #include "main-widgets.h"
 #include "main.h"               /* the_hint */
-#include "wtools.h"             /* QuickDialog */
 #include "panel.h"              /* current_panel */
 #include "fileopctx.h"          /* FILE_CONT */
 #include "filegui.h"

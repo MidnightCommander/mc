@@ -53,9 +53,9 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/fileloc.h"
+#include "lib/widget/wtools.h"  /* query_dialog() */
 
 #include "panel.h"              /* current_panel */
-#include "wtools.h"             /* query_dialog() */
 #include "main.h"               /* do_update_prompt() */
 #include "consaver/cons.saver.h"        /* handle_console() */
 #include "subshell.h"

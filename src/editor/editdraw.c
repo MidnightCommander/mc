@@ -43,8 +43,8 @@
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/widget/widget.h"  /* buttonbar_redraw() */
 
-#include "src/widget.h"         /* buttonbar_redraw() */
 #include "src/charsets.h"
 #include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* edit_tab_spacing */

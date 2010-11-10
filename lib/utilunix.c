@@ -54,9 +54,9 @@
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_move() */
 #include "lib/vfs/mc-vfs/vfs.h" /* VFS_ENCODING_PREFIX */
+#include "lib/widget/wtools.h"  /* message() */
 
 #include "src/execute.h"
-#include "src/wtools.h"         /* message() */
 #ifdef HAVE_CHARSET
 #include "src/charsets.h"
 #endif

@@ -54,11 +54,11 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/lock.h"           /* lock_file() */
+#include "lib/widget/dialog.h"  /* cb_ret_t */
+#include "lib/widget/wtools.h"
 
-#include "src/dialog.h"         /* cb_ret_t */
 #include "src/panel.h"
 #include "src/layout.h"
-#include "src/wtools.h"
 #include "src/history.h"
 #include "src/charsets.h"
 #include "src/cmd.h"

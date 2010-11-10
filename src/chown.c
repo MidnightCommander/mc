@@ -38,16 +38,15 @@
 #include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
-
-#include "dialog.h"
-#include "widget.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"  /* init_box_colors() */
 
 /* Needed for the extern declarations of integer parameters */
 #include "chmod.h"
 #include "main.h"               /* update_panels() */
 #include "layout.h"             /* repaint_screen() */
 #include "chown.h"
-#include "wtools.h"             /* init_box_colors() */
 #include "setup.h"              /* panels_options */
 
 /*** global variables ****************************************************************************/

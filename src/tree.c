@@ -48,15 +48,15 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
+#include "lib/widget/wtools.h"  /* message() */
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/menu.h"    /* menubar_visible */
 
-#include "wtools.h"             /* message() */
 #include "dir.h"
-#include "dialog.h"
-#include "widget.h"
 #include "panel.h"
 #include "main.h"
 #include "main-widgets.h"       /* the_menubar */
-#include "menu.h"               /* menubar_visible */
 #include "file.h"               /* copy_dir_dir(), move_dir_dir(), erase_dir() */
 #include "layout.h"             /* command_prompt */
 #include "help.h"

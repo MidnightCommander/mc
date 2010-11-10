@@ -41,13 +41,13 @@
 #include "lib/mcconfig.h"       /* Save profile */
 #include "lib/strescape.h"
 #include "lib/strutil.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"
 
-#include "dialog.h"
-#include "widget.h"
 #include "setup.h"
 #include "layout.h"             /* repaint_screen() */
 #include "learn.h"
-#include "wtools.h"
 
 /*** global variables ****************************************************************************/
 

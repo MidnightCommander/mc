@@ -39,10 +39,10 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/mcconfig.h"       /* Load/save directories panelize */
 #include "lib/strutil.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"  /* For common_dialog_repaint() */
 
-#include "dialog.h"
-#include "widget.h"
-#include "wtools.h"             /* For common_dialog_repaint() */
 #include "setup.h"              /* For profile_bname */
 #include "dir.h"
 #include "panel.h"              /* current_panel */

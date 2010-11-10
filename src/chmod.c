@@ -37,10 +37,10 @@
 #include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/widget/dialog.h"  /* add_widget() */
+#include "lib/widget/widget.h"  /* NORMAL_BUTTON */
+#include "lib/widget/wtools.h"  /* message() */
 
-#include "dialog.h"             /* add_widget() */
-#include "widget.h"             /* NORMAL_BUTTON */
-#include "wtools.h"             /* message() */
 #include "panel.h"              /* do_file_mark() */
 #include "main.h"               /* update_panels() */
 #include "layout.h"             /* repaint_screen() */

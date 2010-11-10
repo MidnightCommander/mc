@@ -36,12 +36,13 @@
 #include <unistd.h>
 
 #include "lib/global.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"
+
 #include "tty.h"
 #include "key.h"
 #include "color.h"
-#include "dialog.h"
-#include "widget.h"
-#include "wtools.h"
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"

@@ -42,7 +42,9 @@
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "background.h"         /* parent_call */
+
+/* TODO: these includes should be removed! */
+#include "src/background.h"         /* parent_call */
 
 /*** global variables ****************************************************************************/
 

@@ -56,10 +56,14 @@
 #include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debug() */
 #endif /* ENABLE_VFS_SMB */
 
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"
+#include "lib/widget/menu.h"
+#include "lib/widget/dialog-switch.h"
+
 #include "args.h"
 #include "dir.h"
-#include "dialog.h"
-#include "menu.h"
 #include "panel.h"
 #include "option.h"
 #include "tree.h"
@@ -76,12 +80,9 @@
 #include "listmode.h"
 #include "execute.h"
 #include "ext.h"                /* For flush_extension_file() */
-#include "widget.h"
 #include "command.h"
-#include "wtools.h"
 #include "cmddef.h"             /* CK_ cmd name const */
 #include "user.h"               /* user_file_menu_cmd() */
-#include "dialog-switch.h"
 
 #include "chmod.h"
 #include "chown.h"

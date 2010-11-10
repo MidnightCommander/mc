@@ -49,11 +49,11 @@
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"  /* QuickDialog */
 
-#include "dialog.h"
-#include "widget.h"
 #include "setup.h"              /* For profile_bname */
-#include "wtools.h"             /* QuickDialog */
 #include "panel.h"              /* current_panel */
 #include "main.h"               /* update_panels() */
 #include "layout.h"             /* repaint_screen() */

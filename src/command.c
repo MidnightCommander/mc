@@ -36,17 +36,17 @@
 #include "lib/tty/tty.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strescape.h"
+#include "lib/skin.h"           /* DEFAULT_COLOR */
+#include "lib/widget/widget.h"  /* WInput */
+#include "lib/widget/wtools.h"  /* message () */
 
-#include "widget.h"             /* WInput */
 #include "command.h"
-#include "wtools.h"             /* message () */
 #include "panel.h"              /* view_tree enum. Also, needed by main.h */
 #include "main.h"               /* do_cd */
 #include "layout.h"             /* for command_prompt variable */
 #include "user.h"               /* expand_format */
 #include "subshell.h"           /* SUBSHELL_EXIT */
 #include "tree.h"               /* for tree_chdir */
-#include "lib/skin.h"           /* DEFAULT_COLOR */
 #include "execute.h"            /* shell_execute */
 
 /*** global variables ****************************************************************************/

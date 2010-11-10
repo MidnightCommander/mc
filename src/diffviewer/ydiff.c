@@ -37,16 +37,15 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"
 #include "lib/tty/key.h"
-
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
 #include "lib/vfs/mc-vfs/vfs.h" /* mc_opendir, mc_readdir, mc_closedir, */
+#include "lib/widget/dialog.h"
+#include "lib/widget/wtools.h"
 
 #include "src/cmddef.h"
 #include "src/keybind.h"
 #include "src/cmd.h"
-#include "src/dialog.h"
 #include "src/help.h"
-#include "src/wtools.h"
 #include "src/charsets.h"
 #include "src/history.h"
 #include "src/panel.h"          /* Needed for current_panel and other_panel */

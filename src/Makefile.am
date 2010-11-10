@@ -54,13 +54,8 @@ mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
 endif
 
 SRC_mc_widgets = \
-	dialog.c dialog.h \
-	dialog-switch.c dialog-switch.h \
-	menu.c menu.h \
-	screen.c panel.h \
 	tree.c tree.h \
-	widget.c widget.h \
-	wtools.c wtools.h
+	screen.c panel.h
 
 SRC_mc_conssaver = \
 	cons.handler.c consaver/cons.saver.h

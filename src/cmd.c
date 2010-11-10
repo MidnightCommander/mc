@@ -57,6 +57,9 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
+#include "lib/widget/dialog.h"  /* Widget */
+#include "lib/widget/dialog-switch.h"
+#include "lib/widget/wtools.h"  /* message() */
 
 #include "cmd.h"                /* Our definitions */
 #include "fileopctx.h"
@@ -66,9 +69,6 @@
 #include "tree.h"               /* tree_chdir() */
 #include "subshell.h"           /* use_subshell */
 #include "consaver/cons.saver.h"        /* console_flag */
-#include "dialog.h"             /* Widget */
-#include "dialog-switch.h"
-#include "wtools.h"             /* message() */
 #include "main.h"               /* change_panel() */
 #include "panel.h"              /* current_panel */
 #include "help.h"               /* interactive_display() */

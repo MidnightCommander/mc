@@ -32,11 +32,11 @@
 #include <stdlib.h>             /* atoi(), NULL */
 
 #include "lib/global.h"
+#include "lib/widget/dialog.h"  /* B_CANCEL */
+#include "lib/widget/wtools.h"  /* QuickDialog */
 
 #include "edit-widget.h"
 #include "edit-impl.h"
-#include "src/dialog.h"         /* B_CANCEL */
-#include "src/wtools.h"         /* QuickDialog */
 #include "src/setup.h"          /* option_tab_spacing */
 
 /*** global variables ****************************************************************************/

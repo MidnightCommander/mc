@@ -33,8 +33,8 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fs.h"
 #include "lib/strutil.h"
+#include "lib/widget/wtools.h"
 
-#include "wtools.h"
 #include "treestore.h"
 #include "dir.h"
 #include "setup.h"              /* panels_options */

@@ -57,7 +57,7 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "src/wtools.h"
+#include "lib/widget/wtools.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 
 #include "internal.h"

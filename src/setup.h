@@ -8,7 +8,7 @@
 #include <config.h>
 
 #include "lib/global.h"         /* GError */
-#include "panel.h"              /* WPanel, panel_view_mode_t */
+#include "panel.h"  /* WPanel, panel_view_mode_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

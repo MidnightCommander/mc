@@ -31,11 +31,13 @@
 
 #include "dialog.h"
 #include "widget.h"
-#include "layout.h"             /* repaint_screen() */
-#include "main-widgets.h"       /* midnight_dlg */
-#include "main.h"               /* midnight_shutdown */
 #include "wtools.h"             /* Listbox */
 #include "dialog-switch.h"
+
+/* TODO: these includes should be removed! */
+#include "src/layout.h"             /* repaint_screen() */
+#include "src/main-widgets.h"       /* midnight_dlg */
+#include "src/main.h"               /* midnight_shutdown */
 
 
 /*** global variables ****************************************************************************/

@@ -41,10 +41,11 @@
 #include "viewer/mcviewer.h"
 
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/widget/wtools.h"
+#include "lib/widget/dialog-switch.h"
 
 #include "user.h"
 #include "main.h"
-#include "wtools.h"
 #include "execute.h"
 #include "history.h"
 #include "layout.h"
@@ -52,7 +53,6 @@
 #include "charsets.h"           /* get_codepage_index */
 #include "selcodepage.h"        /* do_set_codepage */
 #endif
-#include "dialog-switch.h"
 #include "ext.h"
 
 /*** global variables ****************************************************************************/

@@ -5,7 +5,7 @@
 #ifndef MC__EDIT_WIDGET_H
 #define MC__EDIT_WIDGET_H
 
-#include "src/dialog.h"         /* Widget */
+#include "lib/widget/dialog.h"  /* Widget */
 #include "lib/search.h"         /* mc_search_t */
 
 #include "edit-impl.h"

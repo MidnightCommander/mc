@@ -9,8 +9,9 @@
 #include <sys/time.h>
 
 #include "lib/global.h"
-#include "dialog.h"             /* Dlg_head */
-#include "widget.h"             /* WLabel */
+#include "lib/widget/dialog.h"  /* Dlg_head */
+#include "lib/widget/widget.h"  /* WLabel */
+
 #include "fileopctx.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/

@@ -62,14 +62,13 @@
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"
 
 #include "setup.h"
-#include "dialog.h"
-#include "widget.h"
 #include "main.h"
 #include "layout.h"             /* rotate_dash() */
-#include "widget.h"
-#include "wtools.h"
 #include "background.h"         /* we_are_background */
 
 /* Needed for current_panel, other_panel and WTree */

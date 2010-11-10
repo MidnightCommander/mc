@@ -8,9 +8,9 @@
 #include "lib/global.h"
 
 #include "lib/search.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
 
-#include "src/dialog.h"
-#include "src/widget.h"
 #include "src/keybind.h"        /* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/

@@ -30,13 +30,13 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/tty/win.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/wtools.h"
 
 #include "main.h"
 #include "consaver/cons.saver.h"
 #include "subshell.h"
 #include "layout.h"             /* use_dash() */
-#include "dialog.h"
-#include "wtools.h"
 #include "panel.h"              /* update_panels() */
 #include "execute.h"
 #include "lib/vfs/mc-vfs/vfs.h"

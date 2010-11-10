@@ -43,6 +43,9 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/unixcompat.h"
 #include "lib/timefmt.h"
+#include "lib/widget/wtools.h"  /* for message (...) */
+#include "lib/widget/widget.h"
+#include "lib/widget/menu.h"    /* menubar_visible */
 
 #include "dir.h"
 #include "panel.h"
@@ -50,14 +53,11 @@
 #include "tree.h"
 #include "ext.h"                /* regexp_command */
 #include "layout.h"             /* Most layout variables are here */
-#include "wtools.h"             /* for message (...) */
 #include "cmd.h"
 #include "command.h"            /* cmdline */
 #include "setup.h"              /* For loading/saving panel options */
 #include "user.h"
 #include "execute.h"
-#include "widget.h"
-#include "menu.h"               /* menubar_visible */
 #include "main-widgets.h"
 #include "main.h"
 #include "mountlist.h"          /* my_statfs */

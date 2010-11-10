@@ -33,12 +33,12 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"  /* default_proc */
+#include "lib/widget/menu.h"    /* menubar_visible */
 
-#include "dialog.h"
-#include "widget.h"             /* default_proc */
 #include "main-widgets.h"       /* the_menubar */
 #include "panel.h"              /* for the panel structure */
-#include "menu.h"               /* menubar_visible */
 #include "layout.h"
 #include "mountlist.h"
 #include "setup.h"              /* panels_options */

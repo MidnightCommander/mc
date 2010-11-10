@@ -29,9 +29,10 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-#include "dialog.h"
-#include "widget.h"
-#include "wtools.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"
+
 #include "charsets.h"
 #include "selcodepage.h"
 #include "main.h"

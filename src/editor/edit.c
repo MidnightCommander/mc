@@ -50,11 +50,11 @@
 #include "lib/util.h"           /* load_file_position(), save_file_position() */
 #include "lib/timefmt.h"        /* time formatting */
 #include "lib/lock.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"  /* query_dialog() */
 
-#include "src/widget.h"
 #include "src/cmd.h"            /* view_other_cmd() */
 #include "src/user.h"           /* user_menu_cmd() */
-#include "src/wtools.h"         /* query_dialog() */
 #include "src/charsets.h"       /* get_codepage_id */
 #include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* option_tab_spacing */

@@ -58,10 +58,10 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/fileloc.h"
+#include "lib/widget/dialog.h"  /* For Dlg_head */
+#include "lib/widget/widget.h"  /* For Widget */
+#include "lib/widget/wtools.h"  /* For common_dialog_repaint() */
 
-#include "dialog.h"             /* For Dlg_head */
-#include "widget.h"             /* For Widget */
-#include "wtools.h"             /* For common_dialog_repaint() */
 #include "cmddef.h"
 #include "keybind.h"
 #include "help.h"

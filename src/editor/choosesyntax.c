@@ -28,7 +28,7 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "src/wtools.h"
+#include "lib/widget/wtools.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"

@@ -53,16 +53,16 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h" /* For vfs_translate_url() */
 #include "lib/strutil.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/dialog-switch.h"   /* dialog_switch_got_winch() */
+#include "lib/widget/widget.h"
+#include "lib/widget/menu.h"
 
-#include "dialog.h"
-#include "dialog-switch.h"      /* dialog_switch_got_winch() */
-#include "widget.h"
 #include "command.h"
 #include "main-widgets.h"
 #include "main.h"
 #include "subshell.h"           /* For use_subshell and resize_subshell() */
 #include "tree.h"
-#include "menu.h"
 #include "background.h"         /* we_are_background */
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"

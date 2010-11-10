@@ -45,9 +45,9 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/widget/wtools.h"
 
 #include "src/main.h"
-#include "src/wtools.h"
 #include "src/charsets.h"
 
 #include "internal.h"

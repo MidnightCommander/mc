@@ -43,10 +43,10 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strescape.h"
 #include "lib/strutil.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"
 
-#include "dialog.h"
-#include "widget.h"
-#include "wtools.h"
 #include "main.h"               /* show_all_if_ambiguous */
 
 /*** global variables ****************************************************************************/

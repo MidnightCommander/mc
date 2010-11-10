@@ -35,14 +35,14 @@
 #include "lib/mcconfig.h"       /* mc_config_save_file() */
 #include "lib/strutil.h"        /* str_term_width1() */
 #include "lib/tty/key.h"        /* old_esc_mode_timeout */
+#include "lib/widget/dialog.h" /* B_ constants */
+#include "lib/widget/widget.h" /* WCheck */
+#include "lib/widget/wtools.h" /* QuickDialog */
 
-#include "dialog.h"             /* B_ constants */
-#include "widget.h"             /* WCheck */
 #include "setup.h"              /* panels_options */
 #include "main.h"
 #include "file.h"               /* file_op_compute_totals */
 #include "layout.h"             /* nice_rotating_dash */
-#include "wtools.h"             /* QuickDialog */
 #include "history.h"            /* MC_HISTORY_ESC_TIMEOUT */
 
 #include "option.h"

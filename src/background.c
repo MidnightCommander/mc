@@ -44,8 +44,9 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
+#include "lib/widget/wtools.h"
+
 #include "background.h"
-#include "wtools.h"
 #include "layout.h"             /* repaint_screen() */
 #include "fileopctx.h"          /* FileOpContext */
 #include "lib/tty/key.h"        /* add_select_channel(), delete_select_channel() */

@@ -31,8 +31,7 @@
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
-
-#include "src/wtools.h"         /* message() */
+#include "lib/widget/wtools.h"  /* message() */
 
 #include "vfs-impl.h"
 #include "utilvfs.h"

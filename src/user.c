@@ -34,6 +34,10 @@
 #include "lib/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/dialog-switch.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"
 
 #include "src/editor/edit.h"    /* WEdit, BLOCK_FILE */
 #include "src/viewer/mcviewer.h"        /* for default_* externs */
@@ -46,11 +50,6 @@
 #include "execute.h"
 #include "setup.h"
 #include "history.h"
-
-#include "dialog.h"
-#include "dialog-switch.h"
-#include "widget.h"
-#include "wtools.h"
 
 /*** global variables ****************************************************************************/
 

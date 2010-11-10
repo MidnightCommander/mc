@@ -34,12 +34,14 @@
 #include "lib/tty/key.h"        /* key macros */
 #include "lib/strutil.h"
 
-#include "cmddef.h"             /* CK_Ignore_Key */
-#include "help.h"
 #include "dialog.h"
 #include "widget.h"
-#include "main.h"               /* is_right */
 #include "menu.h"
+
+/* TODO: these includes should be removed! */
+#include "src/cmddef.h"             /* CK_Ignore_Key */
+#include "src/help.h"
+#include "src/main.h"               /* is_right */
 
 /*** global variables ****************************************************************************/
 

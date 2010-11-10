@@ -5,8 +5,8 @@
 #ifndef MC__MAIN_WIDGETS_H
 #define MC__MAIN_WIDGETS_H
 
-#include "widget.h"
-#include "dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/dialog.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

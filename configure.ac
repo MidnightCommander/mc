@@ -598,8 +598,8 @@ lib/vfs/mc-vfs/extfs/ulha
 lib/vfs/mc-vfs/extfs/urar
 lib/vfs/mc-vfs/extfs/uzip
 lib/vfs/mc-vfs/extfs/uzoo
-
 lib/vfs/mc-vfs/fish/Makefile
+lib/widget/Makefile
 
 misc/syntax/Makefile
 

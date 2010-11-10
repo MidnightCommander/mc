@@ -37,14 +37,16 @@
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
 
-#include "help.h"               /* interactive_display() */
-#include "layout.h"
-#include "execute.h"            /* suspend_cmd() */
-#include "cmddef.h"
-#include "keybind.h"
-#include "main.h"               /* fast_refresh */
-#include "setup.h"              /* mouse_close_dialog */
 #include "dialog.h"
+
+/* TODO: these includes should be removed! */
+#include "src/help.h"               /* interactive_display() */
+#include "src/layout.h"
+#include "src/execute.h"            /* suspend_cmd() */
+#include "src/cmddef.h"
+#include "src/keybind.h"
+#include "src/main.h"               /* fast_refresh */
+#include "src/setup.h"              /* mouse_close_dialog */
 
 #include "dialog-switch.h"
 

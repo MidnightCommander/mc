@@ -45,6 +45,9 @@
 #include "lib/vfs/mc-vfs/fish.h"
 #endif
 
+#include "lib/widget/wtools.h"
+#include "lib/widget/menu.h"    /* menubar_visible declaration */
+
 #include "args.h"
 #include "dir.h"
 #include "panel.h"
@@ -53,11 +56,9 @@
 #include "hotlist.h"            /* load/save/done hotlist */
 #include "panelize.h"           /* load/save/done panelize */
 #include "layout.h"
-#include "menu.h"               /* menubar_visible declaration */
 #include "cmd.h"
 #include "file.h"               /* safe_delete */
 #include "keybind.h"            /* lookup_action */
-#include "wtools.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"

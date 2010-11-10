@@ -62,8 +62,8 @@
 #include "lib/strescape.h"
 #include "lib/unixcompat.h"
 #include "lib/fileloc.h"
+#include "lib/widget/wtools.h"  /* message() */
 
-#include "src/wtools.h"         /* message() */
 #include "src/main.h"           /* print_vfs_message */
 
 #include "vfs-impl.h"

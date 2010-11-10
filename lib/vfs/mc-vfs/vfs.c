@@ -52,11 +52,11 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+#include "lib/widget/wtools.h"  /* message() */
 
 #ifdef HAVE_CHARSET
 #include "src/charsets.h"
 #endif
-#include "src/wtools.h"         /* message() */
 #include "src/main.h"           /* cd_symlinks */
 
 #include "vfs-impl.h"

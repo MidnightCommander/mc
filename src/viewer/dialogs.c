@@ -43,8 +43,8 @@
 #include "lib/global.h"
 #include "lib/search.h"
 #include "lib/strutil.h"
+#include "lib/widget/wtools.h"
 
-#include "src/wtools.h"
 #include "src/history.h"
 #include "src/charsets.h"
 

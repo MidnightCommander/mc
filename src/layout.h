@@ -6,8 +6,9 @@
 #define MC__LAYOUT_H
 
 #include "lib/global.h"
+#include "lib/widget/widget.h"
+
 #include "panel.h"
-#include "widget.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

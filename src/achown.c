@@ -40,10 +40,9 @@
 #include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
-
-#include "dialog.h"
-#include "widget.h"
-#include "wtools.h"             /* For init_box_colors() */
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"  /* For init_box_colors() */
 
 #include "dir.h"
 #include "panel.h"              /* Needed for the externs */

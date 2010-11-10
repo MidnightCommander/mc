@@ -42,8 +42,8 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
+#include "lib/widget/wtools.h"  /* D_ERROR, D_NORMAL */
 
-#include "src/wtools.h"         /* D_ERROR, D_NORMAL */
 #include "src/main.h"           /* mc_home */
 #include "src/execute.h"        /* EXECUTE_AS_SHELL */
 

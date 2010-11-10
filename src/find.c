@@ -42,14 +42,14 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/widget/dialog.h"
+#include "lib/widget/widget.h"
+#include "lib/widget/wtools.h"
 
 #include "setup.h"              /* verbose */
-#include "dialog.h"
-#include "widget.h"
 #include "dir.h"
 #include "panel.h"              /* current_panel */
 #include "main.h"               /* do_cd, try_to_select */
-#include "wtools.h"
 #include "cmd.h"                /* view_file_at_line */
 #include "boxes.h"
 #include "history.h"            /* MC_HISTORY_SHARED_SEARCH */

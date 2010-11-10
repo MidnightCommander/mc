@@ -48,8 +48,8 @@
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
+#include "lib/widget/wtools.h"  /* message() */
 
-#include "src/wtools.h"         /* message() */
 #include "src/main.h"           /* shell */
 #include "src/execute.h"        /* For shell_execute */
 

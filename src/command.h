@@ -5,7 +5,7 @@
 #ifndef MC__COMMAND_H
 #define MC__COMMAND_H
 
-#include "widget.h"
+#include "lib/widget/widget.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

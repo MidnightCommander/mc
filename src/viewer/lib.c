@@ -45,8 +45,8 @@
 #include "lib/strutil.h"
 #include "lib/util.h"           /* save_file_position() */
 #include "lib/lock.h"           /* unlock_file() */
+#include "lib/widget/wtools.h"
 
-#include "src/wtools.h"
 #include "src/main.h"
 #include "src/charsets.h"
 #include "src/selcodepage.h"
