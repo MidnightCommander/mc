@@ -726,7 +726,7 @@ push_directory (const char *dir)
     dir_stack *new;
 
     new = g_new (dir_stack, 1);
-    new->name = str_unconst (dir);
+    new->name = (char *) dir;
     new->prev = dir_stack_base;
     dir_stack_base = new;
 }
@@ -1469,7 +1469,7 @@ find_file (const char *start_dir, const char *pattern, const char *content,
     setup_gui ();
 
     /* FIXME: Need to cleanup this, this ought to be passed non-globaly */
-    find_pattern = str_unconst (pattern);
+    find_pattern = (char *) pattern;
 
     content_pattern = NULL;
     if (options.content_use && content != NULL && str_is_valid_string (content))

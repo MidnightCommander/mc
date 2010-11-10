@@ -737,7 +737,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     }
 #ifdef USE_INTERNAL_EDIT
     else if (mc_run_mode == MC_RUN_EDITOR)
-        fname = str_unconst (edit_get_file_name (edit_widget));
+        fname = (char *) edit_get_file_name (edit_widget);
 #endif
 
     if (do_quote)
