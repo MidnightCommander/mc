@@ -208,13 +208,13 @@ lock_file (const char *fname)
     /* Locking on VFS is not supported */
     if (!vfs_file_is_local (fname))
     {
-        g_free (fname);
+        g_free ((gpointer) fname);
         return 0;
     }
 
     /* Check if already locked */
     lockfname = lock_build_symlink_name (fname);
-    g_free (fname);
+    g_free ((gpointer) fname);
     if (lockfname == NULL)
         return 0;
 
@@ -280,7 +280,7 @@ unlock_file (const char *fname)
 
     fname = tilde_expand (fname);
     lockfname = lock_build_symlink_name (fname);
-    g_free (fname);
+    g_free ((gpointer) fname);
 
     if (lockfname == NULL)
         return 0;

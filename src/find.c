@@ -635,7 +635,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
         *content = (options.content_use && in_with->buffer[0] != '\0')
                     ? g_strdup (in_with->buffer) : NULL;
-        *start_dir = in_start->buffer[0] != '\0' ? in_start->buffer : ".";
+        *start_dir = in_start->buffer[0] != '\0' ? in_start->buffer : (char *) ".";
         *pattern = g_strdup (in_name->buffer);
         if (in_start_dir != INPUT_LAST_TEXT)
             g_free (in_start_dir);

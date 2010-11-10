@@ -1629,7 +1629,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
     int sock, num_entries = 0;
-    char buffer[BUF_8K];
+    char lc_buffer[BUF_8K];
     int cd_first;
 
     cd_first = ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT)
@@ -1677,7 +1677,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     while (1)
     {
         int i;
-        int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer),
+        int res = vfs_s_get_line_interruptible (me, lc_buffer, sizeof (lc_buffer),
                                                 sock);
         if (!res)
             break;
@@ -1694,14 +1694,14 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 
         if (MEDATA->logfile)
         {
-            fputs (buffer, MEDATA->logfile);
+            fputs (lc_buffer, MEDATA->logfile);
             fputs ("\n", MEDATA->logfile);
             fflush (MEDATA->logfile);
         }
 
         ent = vfs_s_generate_entry (me, NULL, dir, 0);
         i = ent->ino->st.st_nlink;
-        if (!vfs_parse_ls_lga (buffer, &ent->ino->st, &ent->name, &ent->ino->linkname))
+        if (!vfs_parse_ls_lga (lc_buffer, &ent->ino->st, &ent->name, &ent->ino->linkname))
         {
             vfs_s_free_entry (me, ent);
             continue;
@@ -1765,7 +1765,7 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *l
 #else
     int flag_one = 1;
 #endif
-    char buffer[8192];
+    char lc_buffer[8192];
     struct stat s;
     char *w_buf;
     struct vfs_s_super *super = FH_SUPER;
@@ -1793,7 +1793,7 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *l
     tty_enable_interrupt_key ();
     while (1)
     {
-        while ((n_read = read (h, buffer, sizeof (buffer))) == -1)
+        while ((n_read = read (h, lc_buffer, sizeof (lc_buffer))) == -1)
         {
             if (errno == EINTR)
             {
@@ -1811,7 +1811,7 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *l
         if (n_read == 0)
             break;
         n_stored += n_read;
-        w_buf = buffer;
+        w_buf = lc_buffer;
         while ((n_written = write (sock, w_buf, n_read)) != n_read)
         {
             if (n_written == -1)

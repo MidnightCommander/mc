@@ -375,7 +375,7 @@ fetch_hosts (const char *filename)
 {
     FILE *file = fopen (filename, "r");
     char buffer[256], *name;
-    char *start;
+    char *lc_start;
     char *bi;
 
     if (!file)
@@ -420,12 +420,12 @@ fetch_hosts (const char *filename)
                 str_next_char (&bi);
             if (bi[0] == '#')
                 continue;
-            for (start = bi; bi[0] != '\0' && !str_isspace (bi); str_next_char (&bi));
+            for (lc_start = bi; bi[0] != '\0' && !str_isspace (bi); str_next_char (&bi));
 
-            if (bi - start == 0)
+            if (bi - lc_start == 0)
                 continue;
 
-            name = g_strndup (start, bi - start);
+            name = g_strndup (lc_start, bi - lc_start);
             {
                 char **host_p;
 
@@ -789,7 +789,7 @@ completion_matches (const char *text, CompletionFunction entry_function, INPUT_C
 /* --------------------------------------------------------------------------------------------- */
 /** Check if directory completion is needed */
 static int
-check_is_cd (const char *text, int start, INPUT_COMPLETE_FLAGS flags)
+check_is_cd (const char *text, int lc_start, INPUT_COMPLETE_FLAGS flags)
 {
     char *p, *q;
     int test = 0;
@@ -800,7 +800,7 @@ check_is_cd (const char *text, int start, INPUT_COMPLETE_FLAGS flags)
 
     /* Skip initial spaces */
     p = (char *) text;
-    q = (char *) text + start;
+    q = (char *) text + lc_start;
     while (p < q && p[0] != '\0' && str_isspace (p))
         str_next_char (&p);
 
@@ -819,18 +819,18 @@ check_is_cd (const char *text, int start, INPUT_COMPLETE_FLAGS flags)
 /* --------------------------------------------------------------------------------------------- */
 /** Returns an array of matches, or NULL if none. */
 static char **
-try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
+try_complete (char *text, int *lc_start, int *lc_end, INPUT_COMPLETE_FLAGS flags)
 {
     int in_command_position = 0;
     char *word;
     char **matches = NULL;
     const char *command_separator_chars = ";|&{(`";
     char *p = NULL, *q = NULL, *r = NULL;
-    int is_cd = check_is_cd (text, *start, flags);
+    int is_cd = check_is_cd (text, *lc_start, flags);
     char *ti;
 
     SHOW_C_CTX ("try_complete");
-    word = g_strndup (text + *start, *end - *start);
+    word = g_strndup (text + *lc_start, *lc_end - *lc_start);
 
     /* Determine if this could be a command word. It is if it appears at
        the start of the line (ignoring preceding whitespace), or if it
@@ -838,7 +838,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
        be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
     if (!is_cd && (flags & INPUT_COMPLETE_COMMANDS))
     {
-        ti = str_get_prev_char (&text[*start]);
+        ti = str_get_prev_char (&text[*lc_start]);
         while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
             str_prev_char (&ti);
         if (ti <= text && (ti[0] == ' ' || ti[0] == '\t'))
@@ -887,7 +887,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
                                       command_completion_function,
                                       flags & (~INPUT_COMPLETE_FILENAMES));
         if (matches)
-            *start += str_get_next_char (p) - word;
+            *lc_start += str_get_next_char (p) - word;
     }
 
     /* Variable name? */
@@ -896,7 +896,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
         SHOW_C_CTX ("try_complete:var_subst");
         matches = completion_matches (q, variable_completion_function, flags);
         if (matches)
-            *start += q - word;
+            *lc_start += q - word;
     }
 
     /* Starts with '@', then look through the known hostnames for 
@@ -906,7 +906,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
         SHOW_C_CTX ("try_complete:host_subst");
         matches = completion_matches (r, hostname_completion_function, flags);
         if (matches)
-            *start += r - word;
+            *lc_start += r - word;
     }
 
     /* Starts with `~' and there is no slash in the word, then
@@ -937,7 +937,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
         matches = completion_matches (word, filename_completion_function, flags);
         if (!matches && is_cd && *word != PATH_SEP && *word != '~')
         {
-            q = text + *start;
+            q = text + *lc_start;
             for (p = text; *p && p < q && (*p == ' ' || *p == '\t'); str_next_char (&p));
             if (!strncmp (p, "cd", 2))
                 for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); str_next_char (&p));
