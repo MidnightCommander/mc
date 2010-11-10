@@ -1,6 +1,8 @@
 #ifndef MC__VIEWER_INLINES_H
 #define MC__VIEWER_INLINES_H
 
+#include <assert.h>
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/

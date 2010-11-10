@@ -3,6 +3,10 @@
 
 #include "lib/global.h"         /* include glib.h */
 
+#include <sys/types.h>
+#include <string.h>
+#include <assert.h>             /* assert() */
+
 /* Header file for strutil.c, strutilascii.c, strutil8bit.c, strutilutf8.c.
  * There are two sort of functions:
  * 1. functions for working with growing strings and conversion strings between
@@ -522,5 +526,38 @@ const char *str_detect_termencoding (void);
 int str_verscmp (const char *s1, const char *s2);
 
 /*** inline functions ****************************************************************************/
+
+static inline void
+str_replace (char *s, char from, char to)
+{
+    for (; *s != '\0'; s++)
+    {
+        if (*s == from)
+            *s = to;
+    }
+}
+
+/*
+ * strcpy is unsafe on overlapping memory areas, so define memmove-alike
+ * string function.
+ * Have sense only when:
+ *  * dest <= src
+ *   AND
+ *  * dest and str are pointers to one object (as Roland Illig pointed).
+ *
+ * We can't use str*cpy funs here:
+ * http://kerneltrap.org/mailarchive/openbsd-misc/2008/5/27/1951294
+ */
+static inline char *
+str_move (char *dest, const char *src)
+{
+    size_t n;
+
+    assert (dest <= src);
+
+    n = strlen (src) + 1;       /* + '\0' */
+
+    return (char *) memmove (dest, src, n);
+}
 
 #endif /* MC_STRUTIL_H */

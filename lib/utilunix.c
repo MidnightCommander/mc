@@ -52,6 +52,7 @@
 #include <grp.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"        /* str_move() */
 #include "lib/vfs/mc-vfs/vfs.h" /* VFS_ENCODING_PREFIX */
 
 #include "src/execute.h"

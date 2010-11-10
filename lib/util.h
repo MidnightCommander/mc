@@ -7,8 +7,6 @@
 
 #include "lib/global.h"         /* include <glib.h> */
 
-#include <string.h>
-#include <assert.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -87,7 +85,6 @@ extern struct sigaction startup_handler;
 
 /*** declarations of public functions ************************************************************/
 
-void str_replace (char *s, char from, char to);
 int is_printable (int c);
 void msglen (const char *text, /*@out@ */ int *lines, /*@out@ */ int *columns);
 
@@ -226,31 +223,6 @@ gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
 
 char *guess_message_value (void);
 
-
 /*** inline functions **************************************************/
-
-/*
- * strcpy is unsafe on overlapping memory areas, so define memmove-alike
- * string function.
- * Have sense only when:
- *  * dest <= src
- *   AND
- *  * dest and str are pointers to one object (as Roland Illig pointed).
- *
- * We can't use str*cpy funs here:
- * http://kerneltrap.org/mailarchive/openbsd-misc/2008/5/27/1951294
- */
-static inline char *
-str_move (char *dest, const char *src)
-{
-    size_t n;
-
-    assert (dest <= src);
-
-    n = strlen (src) + 1;       /* + '\0' */
-
-    return (char *) memmove (dest, src, n);
-}
-
 
 #endif /* MC_UTIL_H */
