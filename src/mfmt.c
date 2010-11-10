@@ -22,7 +22,14 @@
 
 #include <stdio.h>
 
-enum states {
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+enum states
+{
     header,
     definition,
     plain,
@@ -34,104 +41,130 @@ enum states {
     seen_m
 };
 
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
     int c;
     int state = newline;
     int space_seen = 0;
-    
-    while ((c = getchar ()) != EOF){
-	switch (state){
-	case plain:
-	    if (c == '\n')
-		state = newline;
-	    putchar (c);
-	    break;
-	    
-	case newline:
-	    if (c == 'F')
-		state = seen_f;
+
+    while ((c = getchar ()) != EOF)
+    {
+        switch (state)
+        {
+        case plain:
+            if (c == '\n')
+                state = newline;
+            putchar (c);
+            break;
+
+        case newline:
+            if (c == 'F')
+                state = seen_f;
             else if (c == '\n')
                 putchar ('\n');
- 	    else {
-		state = plain;
-		putchar (c);
-	    }
-	    break;
-	    
-	case seen_f:
-	    if (c == 'r')
-		state = seen_r;
-	    else {
-		printf ("F%c", c);
-		state = plain;
-	    }
-	    break;
+            else
+            {
+                state = plain;
+                putchar (c);
+            }
+            break;
 
-	case seen_r:
-	    if (c == 'o')
-		state = seen_o;
-	    else {
-		state = plain;
-		printf ("Fr%c", c);
-	    } 
-	    break;
+        case seen_f:
+            if (c == 'r')
+                state = seen_r;
+            else
+            {
+                printf ("F%c", c);
+                state = plain;
+            }
+            break;
 
-	case seen_o:
-	    if (c == 'm'){
-		state = seen_m;
-	    } else {
-		state = plain;
-		printf ("Fro%c", c);
-	    }
-	    break;
+        case seen_r:
+            if (c == 'o')
+                state = seen_o;
+            else
+            {
+                state = plain;
+                printf ("Fr%c", c);
+            }
+            break;
 
-	case seen_m:
-	    if (c == ' '){
-		state = definition;
-		printf ("_\bF_\br_\bo_\bm ");
-	    } else {
-		state = plain;
-		printf ("From%c", c);
-	    }
-	    break;
-		
-	case header_new:
-	    space_seen = 0;
-            if (c == ' ' || c == '\t') {
+        case seen_o:
+            if (c == 'm')
+            {
+                state = seen_m;
+            }
+            else
+            {
+                state = plain;
+                printf ("Fro%c", c);
+            }
+            break;
+
+        case seen_m:
+            if (c == ' ')
+            {
+                state = definition;
+                printf ("_\bF_\br_\bo_\bm ");
+            }
+            else
+            {
+                state = plain;
+                printf ("From%c", c);
+            }
+            break;
+
+        case header_new:
+            space_seen = 0;
+            if (c == ' ' || c == '\t')
+            {
                 state = definition;
                 putchar (c);
                 break;
             }
-	    if (c == '\n'){
-		state = plain;
-		putchar (c);
-		break;
-	    }
-	    
-	case header:
-	    if (c == '\n'){
-		putchar (c);
-		state = header_new;
-		break;
-	    }
-	    printf ("_\b%c", c);
-	    if (c == ' ')
-		space_seen = 1;
-	    if (c == ':' && !space_seen)
-		state = definition;
-	    break;
+            if (c == '\n')
+            {
+                state = plain;
+                putchar (c);
+                break;
+            }
 
-	case definition:
-	    if (c == '\n'){
-		putchar (c);
-		state = header_new;
-		break;
-	    }
-	    printf ("%c\b%c", c, c);
-	    break;
-	}
+        case header:
+            if (c == '\n')
+            {
+                putchar (c);
+                state = header_new;
+                break;
+            }
+            printf ("_\b%c", c);
+            if (c == ' ')
+                space_seen = 1;
+            if (c == ':' && !space_seen)
+                state = definition;
+            break;
+
+        case definition:
+            if (c == '\n')
+            {
+                putchar (c);
+                state = header_new;
+                break;
+            }
+            printf ("%c\b%c", c, c);
+            break;
+        }
     }
     return (0);
 }
+
+/* --------------------------------------------------------------------------------------------- */

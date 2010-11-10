@@ -52,12 +52,535 @@
 #include "widget.h"
 #include "wtools.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
 
 static int debug_flag = 0;
 static int debug_error = 0;
 static char *menu = NULL;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/** strip file's extension */
+static char *
+strip_ext (char *ss)
+{
+    register char *s = ss;
+    char *e = NULL;
+    while (*s)
+    {
+        if (*s == '.')
+            e = s;
+        if (*s == PATH_SEP && e)
+            e = NULL;           /* '.' in *directory* name */
+        s++;
+    }
+    if (e)
+        *e = 0;
+    return ss;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Check for the "shell_patterns" directive.  If it's found and valid,
+ * interpret it and move the pointer past the directive.  Return the
+ * current pointer.
+ */
+
+static char *
+check_patterns (char *p)
+{
+    static const char def_name[] = "shell_patterns=";
+    char *p0 = p;
+
+    if (strncmp (p, def_name, sizeof (def_name) - 1) != 0)
+        return p0;
+
+    p += sizeof (def_name) - 1;
+    if (*p == '1')
+        easy_patterns = 1;
+    else if (*p == '0')
+        easy_patterns = 0;
+    else
+        return p0;
+
+    /* Skip spaces */
+    p++;
+    while (*p == '\n' || *p == '\t' || *p == ' ')
+        p++;
+    return p;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Copies a whitespace separated argument from p to arg. Returns the
+   point after argument. */
+
+static char *
+extract_arg (char *p, char *arg, int size)
+{
+    char *np;
+
+    while (*p && (*p == ' ' || *p == '\t' || *p == '\n'))
+        p++;
+    /* support quote space .mnu */
+    while (*p && (*p != ' ' || *(p - 1) == '\\') && *p != '\t' && *p != '\n')
+    {
+        np = str_get_next_char (p);
+        if (np - p >= size)
+            break;
+        memcpy (arg, p, np - p);
+        arg += np - p;
+        size -= np - p;
+        p = np;
+    }
+    *arg = 0;
+    if (!*p || *p == '\n')
+        str_prev_char (&p);
+    return p;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Tests whether the selected file in the panel is of any of the types
+   specified in argument. */
+
+static int
+test_type (WPanel * panel, char *arg)
+{
+    int result = 0;             /* False by default */
+    int st_mode = panel->dir.list[panel->selected].st.st_mode;
+
+    for (; *arg != 0; arg++)
+    {
+        switch (*arg)
+        {
+        case 'n':              /* Not a directory */
+            result |= !S_ISDIR (st_mode);
+            break;
+        case 'r':              /* Regular file */
+            result |= S_ISREG (st_mode);
+            break;
+        case 'd':              /* Directory */
+            result |= S_ISDIR (st_mode);
+            break;
+        case 'l':              /* Link */
+            result |= S_ISLNK (st_mode);
+            break;
+        case 'c':              /* Character special */
+            result |= S_ISCHR (st_mode);
+            break;
+        case 'b':              /* Block special */
+            result |= S_ISBLK (st_mode);
+            break;
+        case 'f':              /* Fifo (named pipe) */
+            result |= S_ISFIFO (st_mode);
+            break;
+        case 's':              /* Socket */
+            result |= S_ISSOCK (st_mode);
+            break;
+        case 'x':              /* Executable */
+            result |= (st_mode & 0111) ? 1 : 0;
+            break;
+        case 't':
+            result |= panel->marked ? 1 : 0;
+            break;
+        default:
+            debug_error = 1;
+            break;
+        }
+    }
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Calculates the truth value of the next condition starting from
+   p. Returns the point after condition. */
+
+static char *
+test_condition (WEdit * edit_widget, char *p, int *condition)
+{
+    WPanel *panel;
+    char arg[256];
+    mc_search_type_t search_type;
+
+    if (easy_patterns)
+    {
+        search_type = MC_SEARCH_T_GLOB;
+    }
+    else
+    {
+        search_type = MC_SEARCH_T_REGEX;
+    }
+
+    /* Handle one condition */
+    for (; *p != '\n' && *p != '&' && *p != '|'; p++)
+    {
+        /* support quote space .mnu */
+        if ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
+            continue;
+        if (*p >= 'a')
+            panel = current_panel;
+        else
+        {
+            if (get_other_type () == view_listing)
+                panel = other_panel;
+            else
+                panel = NULL;
+        }
+        *p |= 0x20;
+
+        switch (*p++)
+        {
+        case '!':
+            p = test_condition (edit_widget, p, condition);
+            *condition = !*condition;
+            str_prev_char (&p);
+            break;
+        case 'f':              /* file name pattern */
+            p = extract_arg (p, arg, sizeof (arg));
+            *condition = panel
+                && mc_search (arg, panel->dir.list[panel->selected].fname, search_type);
+            break;
+        case 'y':              /* syntax pattern */
+#ifdef USE_INTERNAL_EDIT
+            if (edit_widget)
+            {
+                const char *syntax_type = edit_get_syntax_type (edit_widget);
+                if (syntax_type != NULL)
+                {
+                    p = extract_arg (p, arg, sizeof (arg));
+                    *condition = panel && mc_search (arg, syntax_type, MC_SEARCH_T_NORMAL);
+                }
+            }
+#endif
+            break;
+        case 'd':
+            p = extract_arg (p, arg, sizeof (arg));
+            *condition = panel && mc_search (arg, panel->cwd, search_type);
+            break;
+        case 't':
+            p = extract_arg (p, arg, sizeof (arg));
+            *condition = panel && test_type (panel, arg);
+            break;
+        case 'x':              /* executable */
+            {
+                struct stat status;
+
+                p = extract_arg (p, arg, sizeof (arg));
+                if (stat (arg, &status) == 0)
+                    *condition = is_exe (status.st_mode);
+                else
+                    *condition = 0;
+                break;
+            }
+        default:
+            debug_error = 1;
+            break;
+        }                       /* switch */
+
+    }                           /* while */
+    return p;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** General purpose condition debug output handler */
+
+static void
+debug_out (char *start, char *end, int cond)
+{
+    static char *msg;
+    int len;
+
+    if (start == NULL && end == NULL)
+    {
+        /* Show output */
+        if (debug_flag && msg)
+        {
+            len = strlen (msg);
+            if (len)
+                msg[len - 1] = 0;
+            message (D_NORMAL, _("Debug"), "%s", msg);
+
+        }
+        debug_flag = 0;
+        g_free (msg);
+        msg = NULL;
+    }
+    else
+    {
+        const char *type;
+        char *p;
+
+        /* Save debug info for later output */
+        if (!debug_flag)
+            return;
+        /* Save the result of the condition */
+        if (debug_error)
+        {
+            type = _("ERROR:");
+            debug_error = 0;
+        }
+        else if (cond)
+            type = _("True:");
+        else
+            type = _("False:");
+        /* This is for debugging, don't need to be super efficient.  */
+        if (end == NULL)
+            p = g_strdup_printf ("%s %s %c \n", msg ? msg : "", type, *start);
+        else
+            p = g_strdup_printf ("%s %s %.*s \n", msg ? msg : "", type, (int) (end - start), start);
+        g_free (msg);
+        msg = p;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Calculates the truth value of one lineful of conditions. Returns
+   the point just before the end of line. */
+
+static char *
+test_line (WEdit * edit_widget, char *p, int *result)
+{
+    int condition;
+    char operator;
+    char *debug_start, *debug_end;
+
+    /* Repeat till end of line */
+    while (*p && *p != '\n')
+    {
+        /* support quote space .mnu */
+        while ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
+            p++;
+        if (!*p || *p == '\n')
+            break;
+        operator = *p++;
+        if (*p == '?')
+        {
+            debug_flag = 1;
+            p++;
+        }
+        /* support quote space .mnu */
+        while ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
+            p++;
+        if (!*p || *p == '\n')
+            break;
+        condition = 1;          /* True by default */
+
+        debug_start = p;
+        p = test_condition (edit_widget, p, &condition);
+        debug_end = p;
+        /* Add one debug statement */
+        debug_out (debug_start, debug_end, condition);
+
+        switch (operator)
+        {
+        case '+':
+        case '=':
+            /* Assignment */
+            *result = condition;
+            break;
+        case '&':              /* Logical and */
+            *result &= condition;
+            break;
+        case '|':              /* Logical or */
+            *result |= condition;
+            break;
+        default:
+            debug_error = 1;
+            break;
+        }                       /* switch */
+        /* Add one debug statement */
+        debug_out (&operator, NULL, *result);
+
+    }                           /* while (*p != '\n') */
+    /* Report debug message */
+    debug_out (NULL, NULL, 1);
+
+    if (!*p || *p == '\n')
+        str_prev_char (&p);
+    return p;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** FIXME: recode this routine on version 3.0, it could be cleaner */
+
+static void
+execute_menu_command (WEdit * edit_widget, const char *commands)
+{
+    FILE *cmd_file;
+    int cmd_file_fd;
+    int expand_prefix_found = 0;
+    char *parameter = 0;
+    gboolean do_quote = FALSE;
+    char lc_prompt[80];
+    int col;
+    char *file_name;
+    int run_view = 0;
+
+    /* Skip menu entry title line */
+    commands = strchr (commands, '\n');
+    if (!commands)
+    {
+        return;
+    }
+
+    cmd_file_fd = mc_mkstemps (&file_name, "mcusr", SCRIPT_SUFFIX);
+
+    if (cmd_file_fd == -1)
+    {
+        message (D_ERROR, MSG_ERROR, _("Cannot create temporary command file\n%s"),
+                 unix_error_string (errno));
+        return;
+    }
+    cmd_file = fdopen (cmd_file_fd, "w");
+    fputs ("#! /bin/sh\n", cmd_file);
+    commands++;
+
+    for (col = 0; *commands; commands++)
+    {
+        if (col == 0)
+        {
+            if (*commands != ' ' && *commands != '\t')
+                break;
+            while (*commands == ' ' || *commands == '\t')
+                commands++;
+            if (*commands == 0)
+                break;
+        }
+        col++;
+        if (*commands == '\n')
+            col = 0;
+        if (parameter)
+        {
+            if (*commands == '}')
+            {
+                char *tmp;
+                *parameter = 0;
+                parameter =
+                    input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "");
+                if (!parameter || !*parameter)
+                {
+                    /* User canceled */
+                    fclose (cmd_file);
+                    unlink (file_name);
+                    g_free (file_name);
+                    return;
+                }
+                if (do_quote)
+                {
+                    tmp = name_quote (parameter, 0);
+                    fputs (tmp, cmd_file);
+                    g_free (tmp);
+                }
+                else
+                    fputs (parameter, cmd_file);
+                g_free (parameter);
+                parameter = 0;
+            }
+            else
+            {
+                if (parameter < &lc_prompt[sizeof (lc_prompt) - 1])
+                {
+                    *parameter++ = *commands;
+                }
+            }
+        }
+        else if (expand_prefix_found)
+        {
+            expand_prefix_found = 0;
+            if (g_ascii_isdigit ((gchar) * commands))
+            {
+                do_quote = (atoi (commands) != 0);
+                while (g_ascii_isdigit ((gchar) * commands))
+                    commands++;
+            }
+            if (*commands == '{')
+                parameter = lc_prompt;
+            else
+            {
+                char *text = expand_format (edit_widget, *commands, do_quote);
+                fputs (text, cmd_file);
+                g_free (text);
+            }
+        }
+        else
+        {
+            if (*commands == '%')
+            {
+                int i = check_format_view (commands + 1);
+                if (i)
+                {
+                    commands += i;
+                    run_view = 1;
+                }
+                else
+                {
+                    do_quote = TRUE;    /* Default: Quote expanded macro */
+                    expand_prefix_found = 1;
+                }
+            }
+            else
+                fputc (*commands, cmd_file);
+        }
+    }
+    fclose (cmd_file);
+    chmod (file_name, S_IRWXU);
+    if (run_view)
+    {
+        mcview_viewer (file_name, NULL, 0);
+        dialog_switch_process_pending ();
+    }
+    else
+    {
+        /* execute the command indirectly to allow execution even
+         * on no-exec filesystems. */
+        char *cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
+        shell_execute (cmd, EXECUTE_HIDE);
+        g_free (cmd);
+    }
+    unlink (file_name);
+    g_free (file_name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ **     Check owner of the menu file. Using menu file is allowed, if
+ **     owner of the menu is root or the actual user. In either case
+ **     file should not be group and word-writable.
+ **
+ **     Q. Should we apply this routine to system and home menu (and .ext files)?
+ */
+
+static int
+menu_file_own (char *path)
+{
+    struct stat st;
+
+    if (stat (path, &st) == 0
+        && (!st.st_uid || (st.st_uid == geteuid ())) && ((st.st_mode & (S_IWGRP | S_IWOTH)) == 0))
+    {
+        return 1;
+    }
+    if (verbose)
+    {
+        message (D_NORMAL, _("Warning -- ignoring file"),
+                 _("File %s is not owned by root or you or is world writable.\n"
+                   "Using it may compromise your security"), path);
+    }
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* Formats defined:
    %%  The % character
@@ -124,15 +647,19 @@ check_format_view (const char *p)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 check_format_cd (const char *p)
 {
     return (strncmp (p, "cd", 2)) ? 0 : 3;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Check if p has a "^var\{var-name\}" */
 /* Returns the number of skipped characters (zero on not found) */
 /* V will be set to the expanded variable name */
+
 int
 check_format_var (const char *p, char **v)
 {
@@ -178,24 +705,7 @@ check_format_var (const char *p, char **v)
     return 0;
 }
 
-/* strip file's extension */
-static char *
-strip_ext (char *ss)
-{
-    register char *s = ss;
-    char *e = NULL;
-    while (*s)
-    {
-        if (*s == '.')
-            e = s;
-        if (*s == PATH_SEP && e)
-            e = NULL;           /* '.' in *directory* name */
-        s++;
-    }
-    if (e)
-        *e = 0;
-    return ss;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
@@ -343,483 +853,12 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     return result;
 }
 
-/*
- * Check for the "shell_patterns" directive.  If it's found and valid,
- * interpret it and move the pointer past the directive.  Return the
- * current pointer.
- */
-static char *
-check_patterns (char *p)
-{
-    static const char def_name[] = "shell_patterns=";
-    char *p0 = p;
-
-    if (strncmp (p, def_name, sizeof (def_name) - 1) != 0)
-        return p0;
-
-    p += sizeof (def_name) - 1;
-    if (*p == '1')
-        easy_patterns = 1;
-    else if (*p == '0')
-        easy_patterns = 0;
-    else
-        return p0;
-
-    /* Skip spaces */
-    p++;
-    while (*p == '\n' || *p == '\t' || *p == ' ')
-        p++;
-    return p;
-}
-
-/* Copies a whitespace separated argument from p to arg. Returns the
-   point after argument. */
-static char *
-extract_arg (char *p, char *arg, int size)
-{
-    char *np;
-
-    while (*p && (*p == ' ' || *p == '\t' || *p == '\n'))
-        p++;
-    /* support quote space .mnu */
-    while (*p && (*p != ' ' || *(p - 1) == '\\') && *p != '\t' && *p != '\n')
-    {
-        np = str_get_next_char (p);
-        if (np - p >= size)
-            break;
-        memcpy (arg, p, np - p);
-        arg += np - p;
-        size -= np - p;
-        p = np;
-    }
-    *arg = 0;
-    if (!*p || *p == '\n')
-        str_prev_char (&p);
-    return p;
-}
-
-/* Tests whether the selected file in the panel is of any of the types
-   specified in argument. */
-static int
-test_type (WPanel * panel, char *arg)
-{
-    int result = 0;             /* False by default */
-    int st_mode = panel->dir.list[panel->selected].st.st_mode;
-
-    for (; *arg != 0; arg++)
-    {
-        switch (*arg)
-        {
-        case 'n':              /* Not a directory */
-            result |= !S_ISDIR (st_mode);
-            break;
-        case 'r':              /* Regular file */
-            result |= S_ISREG (st_mode);
-            break;
-        case 'd':              /* Directory */
-            result |= S_ISDIR (st_mode);
-            break;
-        case 'l':              /* Link */
-            result |= S_ISLNK (st_mode);
-            break;
-        case 'c':              /* Character special */
-            result |= S_ISCHR (st_mode);
-            break;
-        case 'b':              /* Block special */
-            result |= S_ISBLK (st_mode);
-            break;
-        case 'f':              /* Fifo (named pipe) */
-            result |= S_ISFIFO (st_mode);
-            break;
-        case 's':              /* Socket */
-            result |= S_ISSOCK (st_mode);
-            break;
-        case 'x':              /* Executable */
-            result |= (st_mode & 0111) ? 1 : 0;
-            break;
-        case 't':
-            result |= panel->marked ? 1 : 0;
-            break;
-        default:
-            debug_error = 1;
-            break;
-        }
-    }
-    return result;
-}
-
-/* Calculates the truth value of the next condition starting from
-   p. Returns the point after condition. */
-static char *
-test_condition (WEdit * edit_widget, char *p, int *condition)
-{
-    WPanel *panel;
-    char arg[256];
-    mc_search_type_t search_type;
-
-    if (easy_patterns)
-    {
-        search_type = MC_SEARCH_T_GLOB;
-    }
-    else
-    {
-        search_type = MC_SEARCH_T_REGEX;
-    }
-
-    /* Handle one condition */
-    for (; *p != '\n' && *p != '&' && *p != '|'; p++)
-    {
-        /* support quote space .mnu */
-        if ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
-            continue;
-        if (*p >= 'a')
-            panel = current_panel;
-        else
-        {
-            if (get_other_type () == view_listing)
-                panel = other_panel;
-            else
-                panel = NULL;
-        }
-        *p |= 0x20;
-
-        switch (*p++)
-        {
-        case '!':
-            p = test_condition (edit_widget, p, condition);
-            *condition = !*condition;
-            str_prev_char (&p);
-            break;
-        case 'f':              /* file name pattern */
-            p = extract_arg (p, arg, sizeof (arg));
-            *condition = panel
-                && mc_search (arg, panel->dir.list[panel->selected].fname, search_type);
-            break;
-        case 'y':              /* syntax pattern */
-#ifdef USE_INTERNAL_EDIT
-            if (edit_widget)
-            {
-                const char *syntax_type = edit_get_syntax_type (edit_widget);
-                if (syntax_type != NULL)
-                {
-                    p = extract_arg (p, arg, sizeof (arg));
-                    *condition = panel && mc_search (arg, syntax_type, MC_SEARCH_T_NORMAL);
-                }
-            }
-#endif
-            break;
-        case 'd':
-            p = extract_arg (p, arg, sizeof (arg));
-            *condition = panel && mc_search (arg, panel->cwd, search_type);
-            break;
-        case 't':
-            p = extract_arg (p, arg, sizeof (arg));
-            *condition = panel && test_type (panel, arg);
-            break;
-        case 'x':              /* executable */
-            {
-                struct stat status;
-
-                p = extract_arg (p, arg, sizeof (arg));
-                if (stat (arg, &status) == 0)
-                    *condition = is_exe (status.st_mode);
-                else
-                    *condition = 0;
-                break;
-            }
-        default:
-            debug_error = 1;
-            break;
-        }                       /* switch */
-
-    }                           /* while */
-    return p;
-}
-
-/* General purpose condition debug output handler */
-static void
-debug_out (char *start, char *end, int cond)
-{
-    static char *msg;
-    int len;
-
-    if (start == NULL && end == NULL)
-    {
-        /* Show output */
-        if (debug_flag && msg)
-        {
-            len = strlen (msg);
-            if (len)
-                msg[len - 1] = 0;
-            message (D_NORMAL, _("Debug"), "%s", msg);
-
-        }
-        debug_flag = 0;
-        g_free (msg);
-        msg = NULL;
-    }
-    else
-    {
-        const char *type;
-        char *p;
-
-        /* Save debug info for later output */
-        if (!debug_flag)
-            return;
-        /* Save the result of the condition */
-        if (debug_error)
-        {
-            type = _("ERROR:");
-            debug_error = 0;
-        }
-        else if (cond)
-            type = _("True:");
-        else
-            type = _("False:");
-        /* This is for debugging, don't need to be super efficient.  */
-        if (end == NULL)
-            p = g_strdup_printf ("%s %s %c \n", msg ? msg : "", type, *start);
-        else
-            p = g_strdup_printf ("%s %s %.*s \n", msg ? msg : "", type, (int) (end - start), start);
-        g_free (msg);
-        msg = p;
-    }
-}
-
-/* Calculates the truth value of one lineful of conditions. Returns
-   the point just before the end of line. */
-static char *
-test_line (WEdit * edit_widget, char *p, int *result)
-{
-    int condition;
-    char operator;
-    char *debug_start, *debug_end;
-
-    /* Repeat till end of line */
-    while (*p && *p != '\n')
-    {
-        /* support quote space .mnu */
-        while ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
-            p++;
-        if (!*p || *p == '\n')
-            break;
-        operator = *p++;
-        if (*p == '?')
-        {
-            debug_flag = 1;
-            p++;
-        }
-        /* support quote space .mnu */
-        while ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
-            p++;
-        if (!*p || *p == '\n')
-            break;
-        condition = 1;          /* True by default */
-
-        debug_start = p;
-        p = test_condition (edit_widget, p, &condition);
-        debug_end = p;
-        /* Add one debug statement */
-        debug_out (debug_start, debug_end, condition);
-
-        switch (operator)
-        {
-        case '+':
-        case '=':
-            /* Assignment */
-            *result = condition;
-            break;
-        case '&':              /* Logical and */
-            *result &= condition;
-            break;
-        case '|':              /* Logical or */
-            *result |= condition;
-            break;
-        default:
-            debug_error = 1;
-            break;
-        }                       /* switch */
-        /* Add one debug statement */
-        debug_out (&operator, NULL, *result);
-
-    }                           /* while (*p != '\n') */
-    /* Report debug message */
-    debug_out (NULL, NULL, 1);
-
-    if (!*p || *p == '\n')
-        str_prev_char (&p);
-    return p;
-}
-
-/* FIXME: recode this routine on version 3.0, it could be cleaner */
-static void
-execute_menu_command (WEdit * edit_widget, const char *commands)
-{
-    FILE *cmd_file;
-    int cmd_file_fd;
-    int expand_prefix_found = 0;
-    char *parameter = 0;
-    gboolean do_quote = FALSE;
-    char lc_prompt[80];
-    int col;
-    char *file_name;
-    int run_view = 0;
-
-    /* Skip menu entry title line */
-    commands = strchr (commands, '\n');
-    if (!commands)
-    {
-        return;
-    }
-
-    cmd_file_fd = mc_mkstemps (&file_name, "mcusr", SCRIPT_SUFFIX);
-
-    if (cmd_file_fd == -1)
-    {
-        message (D_ERROR, MSG_ERROR, _("Cannot create temporary command file\n%s"),
-                 unix_error_string (errno));
-        return;
-    }
-    cmd_file = fdopen (cmd_file_fd, "w");
-    fputs ("#! /bin/sh\n", cmd_file);
-    commands++;
-
-    for (col = 0; *commands; commands++)
-    {
-        if (col == 0)
-        {
-            if (*commands != ' ' && *commands != '\t')
-                break;
-            while (*commands == ' ' || *commands == '\t')
-                commands++;
-            if (*commands == 0)
-                break;
-        }
-        col++;
-        if (*commands == '\n')
-            col = 0;
-        if (parameter)
-        {
-            if (*commands == '}')
-            {
-                char *tmp;
-                *parameter = 0;
-                parameter =
-                    input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "");
-                if (!parameter || !*parameter)
-                {
-                    /* User canceled */
-                    fclose (cmd_file);
-                    unlink (file_name);
-                    g_free (file_name);
-                    return;
-                }
-                if (do_quote)
-                {
-                    tmp = name_quote (parameter, 0);
-                    fputs (tmp, cmd_file);
-                    g_free (tmp);
-                }
-                else
-                    fputs (parameter, cmd_file);
-                g_free (parameter);
-                parameter = 0;
-            }
-            else
-            {
-                if (parameter < &lc_prompt[sizeof (lc_prompt) - 1])
-                {
-                    *parameter++ = *commands;
-                }
-            }
-        }
-        else if (expand_prefix_found)
-        {
-            expand_prefix_found = 0;
-            if (g_ascii_isdigit ((gchar) * commands))
-            {
-                do_quote = (atoi (commands) != 0);
-                while (g_ascii_isdigit ((gchar) * commands))
-                    commands++;
-            }
-            if (*commands == '{')
-                parameter = lc_prompt;
-            else
-            {
-                char *text = expand_format (edit_widget, *commands, do_quote);
-                fputs (text, cmd_file);
-                g_free (text);
-            }
-        }
-        else
-        {
-            if (*commands == '%')
-            {
-                int i = check_format_view (commands + 1);
-                if (i)
-                {
-                    commands += i;
-                    run_view = 1;
-                }
-                else
-                {
-                    do_quote = TRUE;    /* Default: Quote expanded macro */
-                    expand_prefix_found = 1;
-                }
-            }
-            else
-                fputc (*commands, cmd_file);
-        }
-    }
-    fclose (cmd_file);
-    chmod (file_name, S_IRWXU);
-    if (run_view)
-    {
-        mcview_viewer (file_name, NULL, 0);
-        dialog_switch_process_pending ();
-    }
-    else
-    {
-        /* execute the command indirectly to allow execution even
-         * on no-exec filesystems. */
-        char *cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
-        shell_execute (cmd, EXECUTE_HIDE);
-        g_free (cmd);
-    }
-    unlink (file_name);
-    g_free (file_name);
-}
-
-/* 
- **     Check owner of the menu file. Using menu file is allowed, if
- **     owner of the menu is root or the actual user. In either case
- **     file should not be group and word-writable.
- **     
- **     Q. Should we apply this routine to system and home menu (and .ext files)?
- */
-static int
-menu_file_own (char *path)
-{
-    struct stat st;
-
-    if (stat (path, &st) == 0
-        && (!st.st_uid || (st.st_uid == geteuid ())) && ((st.st_mode & (S_IWGRP | S_IWOTH)) == 0))
-    {
-        return 1;
-    }
-    if (verbose)
-    {
-        message (D_NORMAL, _("Warning -- ignoring file"),
-                 _("File %s is not owned by root or you or is world writable.\n"
-                   "Using it may compromise your security"), path);
-    }
-    return 0;
-}
-
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * If edit_widget is NULL then we are called from the mc menu,
  * otherwise we are called from the mcedit menu.
  */
+
 void
 user_menu_cmd (struct WEdit *edit_widget)
 {
@@ -992,3 +1031,5 @@ user_menu_cmd (struct WEdit *edit_widget)
     g_free (entries);
     g_free (data);
 }
+
+/* --------------------------------------------------------------------------------------------- */

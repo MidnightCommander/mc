@@ -55,8 +55,24 @@
 #include "dialog-switch.h"
 #include "ext.h"
 
+/*** global variables ****************************************************************************/
+
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;
+
+/*** file scope macro definitions ****************************************************************/
+
+#ifdef FILE_L
+#define FILE_CMD "file -L "
+#else
+#define FILE_CMD "file "
+#endif
+
+/*** file scope type declarations ****************************************************************/
+
+typedef char *(*quote_func_t) (const char *name, int quote_percent);
+
+/*** file scope variables ************************************************************************/
 
 /* This variable points to a copy of the mc.ext file in memory
  * With this we avoid loading/parsing the file each time we
@@ -64,14 +80,8 @@ int use_file_to_check_type = 1;
  */
 static char *data = NULL;
 
-void
-flush_extension_file (void)
-{
-    g_free (data);
-    data = NULL;
-}
-
-typedef char *(*quote_func_t) (const char *name, int quote_percent);
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 exec_extension (const char *filename, const char *lc_data, int *move_dir, int start_line)
@@ -134,8 +144,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                 char *parameter;
 
                 parameter_found = 0;
-                parameter =
-                    input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_EXT_PARAMETER, "");
+                parameter = input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_EXT_PARAMETER, "");
                 if (parameter == NULL)
                 {
                     /* User canceled */
@@ -364,19 +373,15 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     }
 }
 
-#ifdef FILE_L
-#   define FILE_CMD "file -L "
-#else
-#   define FILE_CMD "file "
-#endif
-
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Run cmd_file with args, put result into buf.
  * If error, put '\0' into buf[0]
  * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  *
  * NOTES: buf is null-terminated string.
  */
+
 static int
 get_popen_information (const char *cmd_file, const char *args, char *buf, int buflen)
 {
@@ -413,10 +418,12 @@ get_popen_information (const char *cmd_file, const char *args, char *buf, int bu
     return read_bytes ? 1 : 0;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Run the "file" command on the local file.
  * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  */
+
 static int
 get_file_type_local (const char *filename, char *buf, int buflen)
 {
@@ -430,11 +437,13 @@ get_file_type_local (const char *filename, char *buf, int buflen)
     return ret;
 }
 
-#ifdef HAVE_CHARSET
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Run the "enca" command on the local file.
  * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  */
+
+#ifdef HAVE_CHARSET
 static int
 get_file_encoding_local (const char *filename, char *buf, int buflen)
 {
@@ -455,12 +464,14 @@ get_file_encoding_local (const char *filename, char *buf, int buflen)
 }
 #endif /* HAVE_CHARSET */
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Invoke the "file" command on the file and match its output against PTR.
  * have_type is a flag that is set if we already have tried to determine
  * the type of that file.
  * Return 1 for match, 0 for no match, -1 errors.
  */
+
 static int
 regex_check_type (const char *filename, const char *ptr, int *have_type)
 {
@@ -563,8 +574,20 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
     return found;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
-/* The second argument is action, i.e. Open, View or Edit
+void
+flush_extension_file (void)
+{
+    g_free (data);
+    data = NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * The second argument is action, i.e. Open, View or Edit
  *
  * This function returns:
  *
@@ -575,6 +598,7 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
  * If action == "View" then a parameter is checked in the form of "View:%d",
  * if the value for %d exists, then the viewer is started up at that line number.
  */
+
 int
 regex_command (const char *filename, const char *action, int *move_dir)
 {
@@ -651,9 +675,8 @@ regex_command (const char *filename, const char *action, int *move_dir)
         }
         if (home_error)
         {
-            char *title =
-                g_strdup_printf (_("~/%s file error"),
-                                 MC_USERCONF_DIR PATH_SEP_STR MC_FILEBIND_FILE);
+            char *title = g_strdup_printf (_("~/%s file error"),
+                                           MC_USERCONF_DIR PATH_SEP_STR MC_FILEBIND_FILE);
             message (D_ERROR, title,
                      _("The format of the ~/%s file has "
                        "changed with version 3.0. You may either want to copy "
@@ -812,3 +835,4 @@ regex_command (const char *filename, const char *action, int *move_dir)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */

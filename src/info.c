@@ -44,9 +44,15 @@
 #include "setup.h"              /* panels_options */
 #include "info.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #ifndef VERSION
-#   define VERSION "undefined"
+#define VERSION "undefined"
 #endif
+
+/*** file scope type declarations ****************************************************************/
 
 struct WInfo
 {
@@ -54,7 +60,12 @@ struct WInfo
     int ready;
 };
 
+/*** file scope variables ************************************************************************/
+
 static struct my_statfs myfs_stats;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 info_box (struct WInfo *info)
@@ -68,7 +79,7 @@ info_box (struct WInfo *info)
     draw_box (info->widget.owner, info->widget.y, info->widget.x,
               info->widget.lines, info->widget.cols, FALSE);
 
-    widget_move (&info->widget, 0, (info->widget.cols - len - 2)/2);
+    widget_move (&info->widget, 0, (info->widget.cols - len - 2) / 2);
     tty_printf (" %s ", title);
 
     widget_move (&info->widget, 2, 0);
@@ -77,6 +88,8 @@ info_box (struct WInfo *info)
     tty_print_alt_char (ACS_RTEE, FALSE);
     tty_draw_hline (info->widget.y + 2, info->widget.x + 1, ACS_HLINE, info->widget.cols - 2);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 info_show_info (struct WInfo *info)
@@ -238,6 +251,8 @@ info_show_info (struct WInfo *info)
     g_string_free (buff, TRUE);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 info_hook (void *data)
 {
@@ -253,6 +268,8 @@ info_hook (void *data)
     info->ready = 1;
     info_show_info (info);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 info_callback (Widget * w, widget_msg_t msg, int parm)
@@ -285,6 +302,8 @@ info_callback (Widget * w, widget_msg_t msg, int parm)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 info_event (Gpm_Event * event, void *data)
 {
@@ -300,6 +319,10 @@ info_event (Gpm_Event * event, void *data)
     return MOU_NORMAL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 WInfo *
 info_new (int y, int x, int lines, int cols)
 {
@@ -312,3 +335,5 @@ info_new (int y, int x, int lines, int cols)
 
     return info;
 }
+
+/* --------------------------------------------------------------------------------------------- */

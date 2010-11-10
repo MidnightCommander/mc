@@ -1,4 +1,3 @@
-
 /* Header file for pulldown menu engine for Midnignt Commander
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
    2007, 2009 Free Software Foundation, Inc.
@@ -21,56 +20,70 @@
  *  \brief Header: pulldown menu code
  */
 
-#ifndef MC_MENU_H
-#define MC_MENU_H
+#ifndef MC__MENU_H
+#define MC__MENU_H
 
 #include "lib/global.h"
 #include "widget.h"
 
-extern int menubar_visible;
+/*** typedefs(not structures) and defined constants **********************************************/
 
-typedef struct menu_entry_t {
+#define menu_separator_create() NULL
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct menu_entry_t
+{
     unsigned char first_letter;
     struct hotkey_t text;
     unsigned long command;
     char *shortcut;
 } menu_entry_t;
 
-menu_entry_t *menu_entry_create (const char *name, unsigned long command);
-void menu_entry_free (menu_entry_t *me);
-#define menu_separator_create() NULL
-
-typedef struct Menu {
-    int start_x;		/* position relative to menubar start */
+typedef struct Menu
+{
+    int start_x;                /* position relative to menubar start */
     struct hotkey_t text;
     GList *entries;
-    size_t max_entry_len;	/* cached max length of entry texts (text + shortcut) */
-    size_t max_hotkey_len;	/* cached max length of shortcuts */
-    unsigned int selected;	/* pointer to current menu entry */
+    size_t max_entry_len;       /* cached max length of entry texts (text + shortcut) */
+    size_t max_hotkey_len;      /* cached max length of shortcuts */
+    unsigned int selected;      /* pointer to current menu entry */
     char *help_node;
 } Menu;
 
-Menu *create_menu (const char *name, GList *entries,
-		    const char *help_node);
-
-void destroy_menu (Menu *menu);
-
 /* The button bar menu */
-typedef struct WMenuBar {
+typedef struct WMenuBar
+{
     Widget widget;
 
-    gboolean is_active;		/* If the menubar is in use */
-    gboolean is_dropped;	/* If the menubar has dropped */
-    GList *menu;		/* The actual menus */
-    size_t selected;		/* Selected menu on the top bar */
-    int previous_widget;	/* Selected widget ID before activating menu */
+    gboolean is_active;         /* If the menubar is in use */
+    gboolean is_dropped;        /* If the menubar has dropped */
+    GList *menu;                /* The actual menus */
+    size_t selected;            /* Selected menu on the top bar */
+    int previous_widget;        /* Selected widget ID before activating menu */
 } WMenuBar;
 
-WMenuBar *menubar_new (int y, int x, int cols, GList *menu);
-void menubar_set_menu (WMenuBar *menubar, GList *menu);
-void menubar_add_menu (WMenuBar *menubar, Menu *menu);
-void menubar_arrange (WMenuBar *menubar);
+/*** global variables defined in .c file *********************************************************/
 
-WMenuBar *find_menubar (const Dlg_head *h);
+extern int menubar_visible;
 
-#endif					/* MC_MENU_H */
+/*** declarations of public functions ************************************************************/
+
+menu_entry_t *menu_entry_create (const char *name, unsigned long command);
+void menu_entry_free (menu_entry_t * me);
+
+Menu *create_menu (const char *name, GList * entries, const char *help_node);
+
+void destroy_menu (Menu * menu);
+
+WMenuBar *menubar_new (int y, int x, int cols, GList * menu);
+void menubar_set_menu (WMenuBar * menubar, GList * menu);
+void menubar_add_menu (WMenuBar * menubar, Menu * menu);
+void menubar_arrange (WMenuBar * menubar);
+
+WMenuBar *find_menubar (const Dlg_head * h);
+
+/*** inline functions ****************************************************************************/
+#endif /* MC__MENU_H */

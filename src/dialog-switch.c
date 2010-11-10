@@ -37,13 +37,15 @@
 #include "wtools.h"             /* Listbox */
 #include "dialog-switch.h"
 
-/*** global variables **************************************************/
 
-/*** file scope macro definitions **************************************/
+/*** global variables ****************************************************************************/
 
-/*** file scope type declarations **************************************/
+/*** file scope macro definitions ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
 
 /* List of dialogs: filemanagers, editors, viewers */
 static GList *mc_dialogs = NULL;
@@ -52,7 +54,8 @@ static GList *mc_current = NULL;
 /* Is there any dialogs that we have to run after returning to the manager from another dialog */
 static gboolean dialog_switch_pending = FALSE;
 
-/*** file scope functions **********************************************/
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static unsigned char
 get_hotkey (int n)
@@ -60,8 +63,10 @@ get_hotkey (int n)
     return (n <= 9) ? '0' + n : 'a' + n - 10;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
-dialog_switch_goto (GList *dlg)
+dialog_switch_goto (GList * dlg)
 {
     if (mc_current != dlg)
     {
@@ -91,10 +96,12 @@ dialog_switch_goto (GList *dlg)
     }
 }
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
-dialog_switch_add (Dlg_head *h)
+dialog_switch_add (Dlg_head * h)
 {
     GList *dlg;
 
@@ -109,8 +116,10 @@ dialog_switch_add (Dlg_head *h)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
-dialog_switch_remove (Dlg_head *h)
+dialog_switch_remove (Dlg_head * h)
 {
     GList *this;
 
@@ -128,11 +137,15 @@ dialog_switch_remove (Dlg_head *h)
         mc_current = mc_dialogs;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 size_t
 dialog_switch_num (void)
 {
     return g_list_length (mc_dialogs);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 dialog_switch_next (void)
@@ -149,6 +162,8 @@ dialog_switch_next (void)
     dialog_switch_goto (next);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 dialog_switch_prev (void)
 {
@@ -164,6 +179,8 @@ dialog_switch_prev (void)
     dialog_switch_goto (prev);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 dialog_switch_list (void)
 {
@@ -177,8 +194,8 @@ dialog_switch_list (void)
     if (midnight_shutdown || mc_current == NULL)
         return;
 
-    lines = min ((size_t) (LINES * 2/3), dlg_num);
-    cols = COLS * 2/3;
+    lines = min ((size_t) (LINES * 2 / 3), dlg_num);
+    cols = COLS * 2 / 3;
 
     listbox = create_listbox_window (lines, cols, _("Screens"), "[Screen selector]");
 
@@ -190,7 +207,7 @@ dialog_switch_list (void)
         dlg = (Dlg_head *) h->data;
 
         if ((dlg != NULL) && (dlg->get_title != NULL))
-            title = dlg->get_title (dlg, listbox->list->widget.cols - 2); /* FIXME! */
+            title = dlg->get_title (dlg, listbox->list->widget.cols - 2);       /* FIXME! */
         else
             title = g_strdup ("");
 
@@ -208,6 +225,8 @@ dialog_switch_list (void)
         dialog_switch_goto (h);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 dialog_switch_process_pending (void)
@@ -238,6 +257,8 @@ dialog_switch_process_pending (void)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 dialog_switch_got_winch (void)
 {
@@ -247,6 +268,8 @@ dialog_switch_got_winch (void)
         if (dlg != mc_current)
             ((Dlg_head *) dlg->data)->winch_pending = TRUE;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 dialog_switch_shutdown (void)
@@ -259,3 +282,5 @@ dialog_switch_shutdown (void)
         destroy_dlg (dlg);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */

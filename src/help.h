@@ -1,4 +1,3 @@
-
 /** \file help.h
  *  \brief Header: hypertext file browser
  *
@@ -26,8 +25,10 @@
  *  This file is included by help.c and man2hlp.c
  */
 
-#ifndef MC_HELP_H
-#define MC_HELP_H
+#ifndef MC__HELP_H
+#define MC__HELP_H
+
+/*** typedefs(not structures) and defined constants **********************************************/
 
 /* Markers used in the help files */
 #define CHAR_LINK_START         '\01'   /* Ctrl-A */
@@ -41,6 +42,15 @@
 #define CHAR_FONT_NORMAL        '\013'  /* Ctrl-K */
 #define CHAR_FONT_ITALIC        '\024'  /* Ctrl-T */
 
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
 void interactive_display (const char *filename, const char *node);
 
-#endif /* MC_HELP_H */
+/*** inline functions ****************************************************************************/
+#endif /* MC__HELP_H */

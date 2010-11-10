@@ -47,35 +47,50 @@
 
 #include "option.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-        case DLG_ACTION:
-            if (sender->id == 18)
-            {
-                /* message from "Single press" checkbutton */
-                const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
-                Widget *w;
+    case DLG_ACTION:
+        if (sender->id == 18)
+        {
+            /* message from "Single press" checkbutton */
+            const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
+            Widget *w;
 
-                /* label */
-                w = dlg_find_by_id (h, sender->id - 1);
-                widget_disable (*w, not_single);
-                send_message (w, WIDGET_DRAW, 0);
-                /* input */
-                w = dlg_find_by_id (h, sender->id - 2);
-                widget_disable (*w, not_single);
-                send_message (w, WIDGET_DRAW, 0);
+            /* label */
+            w = dlg_find_by_id (h, sender->id - 1);
+            widget_disable (*w, not_single);
+            send_message (w, WIDGET_DRAW, 0);
+            /* input */
+            w = dlg_find_by_id (h, sender->id - 2);
+            widget_disable (*w, not_single);
+            send_message (w, WIDGET_DRAW, 0);
 
-                return MSG_HANDLED;
-            }
-            return MSG_NOT_HANDLED;
+            return MSG_HANDLED;
+        }
+        return MSG_NOT_HANDLED;
 
-        default:
-            return default_dlg_callback (h, sender, msg, parm, data);
+    default:
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 configure_box (void)
@@ -128,14 +143,15 @@ configure_box (void)
 
         /* Esc key mode */
         QUICK_INPUT (10, dlg_width, 10, dlg_height, (const char *) time_out, 8, 0,
-                        MC_HISTORY_ESC_TIMEOUT, &time_out_new),
+                     MC_HISTORY_ESC_TIMEOUT, &time_out_new),
         QUICK_LABEL (5, dlg_width, 10, dlg_height, N_("Timeout:")),
         QUICK_CHECKBOX (5, dlg_width, 9, dlg_height, N_("S&ingle press"), &old_esc_mode),
         QUICK_GROUPBOX (3, dlg_width, 8, dlg_height, dlg_width / 2 - 4, 4, N_("Esc key mode")),
 
         /* file operation options */
         QUICK_CHECKBOX (5, dlg_width, 6, dlg_height, N_("Mkdi&r autoname"), &auto_fill_mkdir_name),
-        QUICK_CHECKBOX (5, dlg_width, 5, dlg_height, N_("Classic pro&gressbar"), &classic_progressbar),
+        QUICK_CHECKBOX (5, dlg_width, 5, dlg_height, N_("Classic pro&gressbar"),
+                        &classic_progressbar),
         QUICK_CHECKBOX (5, dlg_width, 4, dlg_height, N_("Compute tota&ls"),
                         &file_op_compute_totals),
         QUICK_CHECKBOX (5, dlg_width, 3, dlg_height, N_("&Verbose operation"), &verbose),
@@ -260,6 +276,8 @@ configure_box (void)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 panel_options_box (void)
 {
@@ -280,7 +298,8 @@ panel_options_box (void)
         /* quick search */
         QUICK_RADIO (dlg_width / 2 + 2, dlg_width, 12, dlg_height, QSEARCH_NUM, qsearch_options,
                      (int *) &panels_options.qsearch_mode),
-        QUICK_GROUPBOX (dlg_width / 2, dlg_width, 11, dlg_height, dlg_width / 2 - 4, QSEARCH_NUM + 2,
+        QUICK_GROUPBOX (dlg_width / 2, dlg_width, 11, dlg_height, dlg_width / 2 - 4,
+                        QSEARCH_NUM + 2,
                         N_("Quick search")),
         /* file highlighting */
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 9, dlg_height, N_("&Permissions"),
@@ -315,7 +334,8 @@ panel_options_box (void)
                         &panels_options.mix_all_files),
         QUICK_CHECKBOX (5, dlg_width, 3, dlg_height, N_("Use SI si&ze units"),
                         &panels_options.kilobyte_si),
-        QUICK_GROUPBOX (3, dlg_width, 2, dlg_height, dlg_width / 2 - 4, 14, N_("Main panel options")),
+        QUICK_GROUPBOX (3, dlg_width, 2, dlg_height, dlg_width / 2 - 4, 14,
+                        N_("Main panel options")),
         QUICK_END
     };
 
@@ -377,7 +397,7 @@ panel_options_box (void)
         c_len = max (c_len, str_term_width1 (qsearch_options[i]) + 3);
     /* groupboxes */
     g_len = max (c_len + 2, str_term_width1 (quick_widgets[4].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[ 7].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[7].u.groupbox.title) + 4);
     g_len = max (g_len, str_term_width1 (quick_widgets[11].u.groupbox.title) + 4);
     g_len = max (g_len, str_term_width1 (quick_widgets[20].u.groupbox.title) + 4);
     /* dialog width */
@@ -392,14 +412,13 @@ panel_options_box (void)
 
     /* groupboxes */
     quick_widgets[4].u.groupbox.width =
-        quick_widgets[ 7].u.groupbox.width =
+        quick_widgets[7].u.groupbox.width =
         quick_widgets[11].u.groupbox.width = Quick_input.xlen / 2 - 3;
     quick_widgets[20].u.groupbox.width = Quick_input.xlen / 2 - 4;
 
     /* right column */
     quick_widgets[4].relative_x =
-        quick_widgets[ 7].relative_x =
-        quick_widgets[11].relative_x = Quick_input.xlen / 2;
+        quick_widgets[7].relative_x = quick_widgets[11].relative_x = Quick_input.xlen / 2;
     for (i = 3; i < 11; i++)
         if ((i != 4) && (i != 7))
             quick_widgets[i].relative_x = quick_widgets[4].relative_x + 2;
@@ -418,8 +437,7 @@ panel_options_box (void)
             message (D_NORMAL, _("Information"),
                      _("Using the fast reload option may not reflect the exact\n"
                        "directory contents. In this case you'll need to do a\n"
-                       "manual reload of the directory. See the man page for\n"
-                       "the details."));
+                       "manual reload of the directory. See the man page for\n" "the details."));
             panels_options.fast_reload_msg_shown = TRUE;
         }
         update_panels (UP_RELOAD, UP_KEEPSEL);
@@ -432,3 +450,5 @@ panel_options_box (void)
         mc_config_save_file (mc_main_config, NULL);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */

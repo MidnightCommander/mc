@@ -38,6 +38,21 @@
 #include "lib/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 /**
  * \fn FileOpContext * file_op_context_new (FileOperation op)
  * \param op file operation struct
@@ -46,6 +61,7 @@
  * Creates a new file operation context with the default values.  If you later want
  * to have a user interface for this, call file_op_context_create_ui().
  */
+
 FileOpContext *
 file_op_context_new (FileOperation op)
 {
@@ -66,7 +82,7 @@ file_op_context_new (FileOperation op)
     return ctx;
 }
 
-
+/* --------------------------------------------------------------------------------------------- */
 /**
  * \fn void file_op_context_destroy (FileOpContext *ctx)
  * \param ctx The file operation context to destroy.
@@ -74,6 +90,7 @@ file_op_context_new (FileOperation op)
  * Destroys the specified file operation context and its associated UI data, if
  * it exists.
  */
+
 void
 file_op_context_destroy (FileOpContext * ctx)
 {
@@ -89,6 +106,8 @@ file_op_context_destroy (FileOpContext * ctx)
     g_free (ctx);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 FileOpTotalContext *
 file_op_total_context_new (void)
 {
@@ -99,9 +118,13 @@ file_op_total_context_new (void)
     return tctx;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 file_op_total_context_destroy (FileOpTotalContext * tctx)
 {
     g_return_if_fail (tctx != NULL);
     g_free (tctx);
 }
+
+/* --------------------------------------------------------------------------------------------- */

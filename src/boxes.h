@@ -30,4 +30,4 @@ void symlink_dialog (const char *existing, const char *new, char **ret_existing,
 char *tree_box (const char *current_dir);
 
 /*** inline functions ****************************************************************************/
-#endif
+#endif /* MC__BOXES_H */

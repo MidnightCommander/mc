@@ -57,19 +57,19 @@
 
 #include "find.h"
 
-/* Size of the find parameters window */
-#if HAVE_CHARSET
-static int FIND_Y = 17;
-#else
-static int FIND_Y = 16;
-#endif
-static int FIND_X = 68;
+/*** global variables ****************************************************************************/
+
+/* List of directories to be ignored, separated by ':' */
+char **find_ignore_dirs = NULL;
+
+/*** file scope macro definitions ****************************************************************/
 
 /* Size of the find window */
 #define FIND2_Y (LINES - 4)
 
-static int FIND2_X = 64;
 #define FIND2_X_USE (FIND2_X - 20)
+
+/*** file scope type declarations ****************************************************************/
 
 /* A couple of extra messages we need */
 enum
@@ -88,8 +88,36 @@ typedef enum
     FIND_ABORT
 } FindProgressStatus;
 
-/* List of directories to be ignored, separated by ':' */
-char **find_ignore_dirs = NULL;
+/* find file options */
+typedef struct
+{
+    /* file name options */
+    gboolean file_case_sens;
+    gboolean file_pattern;
+    gboolean find_recurs;
+    gboolean skip_hidden;
+    gboolean file_all_charsets;
+
+    /* file content options */
+    gboolean content_use;
+    gboolean content_case_sens;
+    gboolean content_regexp;
+    gboolean content_first_hit;
+    gboolean content_whole_words;
+    gboolean content_all_charsets;
+} find_file_options_t;
+
+/*** file scope variables ************************************************************************/
+
+/* Size of the find parameters window */
+#if HAVE_CHARSET
+static int FIND_Y = 17;
+#else
+static int FIND_Y = 16;
+#endif
+static int FIND_X = 68;
+
+static int FIND2_X = 64;
 
 /* static variables to remember find parameters */
 static WInput *in_start;        /* Start path */
@@ -162,25 +190,6 @@ static struct
 };
 /* *INDENT-ON* */
 
-/* find file options */
-typedef struct
-{
-    /* file name options */
-    gboolean file_case_sens;
-    gboolean file_pattern;
-    gboolean find_recurs;
-    gboolean skip_hidden;
-    gboolean file_all_charsets;
-
-    /* file content options */
-    gboolean content_use;
-    gboolean content_case_sens;
-    gboolean content_regexp;
-    gboolean content_first_hit;
-    gboolean content_whole_words;
-    gboolean content_all_charsets;
-} find_file_options_t;
-
 static find_file_options_t options = {
     TRUE, TRUE, TRUE, FALSE, FALSE,
     FALSE, TRUE, FALSE, FALSE, FALSE, FALSE
@@ -191,11 +200,15 @@ static char *in_start_dir = INPUT_LAST_TEXT;
 static mc_search_t *search_file_handle = NULL;
 static mc_search_t *search_content_handle = NULL;
 
+/*** file scope functions ************************************************************************/
+
 static int
 find_ignore_dirs_cmp (const void *d1, const void *d2)
 {
     return strcmp (*(const char **) d1, *(const char **) d2);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 find_load_options (void)
@@ -287,6 +300,8 @@ find_load_options (void)
         mc_config_get_bool (mc_main_config, "FindFile", "content_all_charsets", FALSE);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 find_save_options (void)
 {
@@ -305,11 +320,15 @@ find_save_options (void)
                         options.content_all_charsets);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline char *
 add_to_list (const char *text, void *data)
 {
     return listbox_add_item (find_list, LISTBOX_APPEND_AT_END, 0, text, data);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 stop_idle (void *data)
@@ -317,11 +336,15 @@ stop_idle (void *data)
     set_idle_proc (data, 0);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 status_update (const char *text)
 {
     label_set_text (status_label, text);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 found_num_update (void)
@@ -331,13 +354,17 @@ found_num_update (void)
     label_set_text (found_num_label, buffer);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 get_list_info (char **file, char **dir)
 {
     listbox_get_current (find_list, file, (void **) dir);
 }
 
-/* check regular expression */
+/* --------------------------------------------------------------------------------------------- */
+/** check regular expression */
+
 static gboolean
 find_check_regexp (const char *r)
 {
@@ -356,10 +383,12 @@ find_check_regexp (const char *r)
     return regexp_ok;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Callback for the parameter dialog.
  * Validate regex, prevent closing the dialog if it's invalid.
  */
+
 static cb_ret_t
 find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
@@ -424,7 +453,8 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
     }
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * find_parameters: gets information from the user
  *
  * If the return value is TRUE, then the following holds:
@@ -437,6 +467,7 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
  * behavior for the other two parameters.
  *
  */
+
 static gboolean
 find_parameters (char **start_dir, char **pattern, char **content)
 {
@@ -659,13 +690,16 @@ find_parameters (char **start_dir, char **pattern, char **content)
     return return_value;
 }
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
+/* --------------------------------------------------------------------------------------------- */
 
+#if GLIB_CHECK_VERSION (2, 14, 0)
 static inline void
 push_directory (const char *dir)
 {
     g_queue_push_head (&dir_queue, (void *) dir);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline char *
 pop_directory (void)
@@ -673,7 +707,9 @@ pop_directory (void)
     return (char *) g_queue_pop_tail (&dir_queue);
 }
 
-/* Remove all the items from the stack */
+/* --------------------------------------------------------------------------------------------- */
+/** Remove all the items from the stack */
+
 static void
 clear_stack (void)
 {
@@ -681,8 +717,9 @@ clear_stack (void)
     g_queue_clear (&dir_queue);
 }
 
-#else /* GLIB_CHECK_VERSION */
+/* --------------------------------------------------------------------------------------------- */
 
+#else /* GLIB_CHECK_VERSION */
 static void
 push_directory (const char *dir)
 {
@@ -693,6 +730,8 @@ push_directory (const char *dir)
     new->prev = dir_stack_base;
     dir_stack_base = new;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 pop_directory (void)
@@ -711,7 +750,9 @@ pop_directory (void)
     return name;
 }
 
-/* Remove all the items from the stack */
+/* --------------------------------------------------------------------------------------------- */
+/** Remove all the items from the stack */
+
 static void
 clear_stack (void)
 {
@@ -719,8 +760,9 @@ clear_stack (void)
     while ((dir = pop_directory ()) != NULL)
         g_free (dir);
 }
-
 #endif /* GLIB_CHECK_VERSION */
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 insert_file (const char *dir, const char *file)
@@ -751,6 +793,8 @@ insert_file (const char *dir, const char *file)
     g_free (tmp_name);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 find_add_match (const char *dir, const char *file)
 {
@@ -765,7 +809,8 @@ find_add_match (const char *dir, const char *file)
     found_num_update ();
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * get_line_at:
  *
  * Returns malloced null-terminated line from file file_fd.
@@ -774,6 +819,7 @@ find_add_match (const char *dir, const char *file)
  * n_read - number of read chars.
  * has_newline - is there newline ?
  */
+
 static char *
 get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboolean * has_newline)
 {
@@ -819,6 +865,8 @@ get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboole
     return buffer;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static FindProgressStatus
 check_find_events (Dlg_head * h)
 {
@@ -846,7 +894,8 @@ check_find_events (Dlg_head * h)
     return FIND_CONT;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * search_content:
  *
  * Search the content_pattern string in the DIRECTORY/FILE.
@@ -855,6 +904,7 @@ check_find_events (Dlg_head * h)
  * returns FALSE if do_search should look for another file
  *         TRUE if do_search should exit and proceed to the event handler
  */
+
 static gboolean
 search_content (Dlg_head * h, const char *directory, const char *filename)
 {
@@ -953,6 +1003,8 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
     return ret_val;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline gboolean
 find_ignore_dir_search (const char *dir)
 {
@@ -981,6 +1033,8 @@ find_ignore_dir_search (const char *dir)
     return FALSE;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 find_rotate_dash (const Dlg_head *h, gboolean finish)
 {
@@ -996,6 +1050,8 @@ find_rotate_dash (const Dlg_head *h, gboolean finish)
         mc_refresh ();
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 do_search (Dlg_head *h)
@@ -1129,6 +1185,8 @@ do_search (Dlg_head *h)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 init_find_vars (void)
 {
@@ -1140,6 +1198,8 @@ init_find_vars (void)
     clear_stack ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 make_fullname (const char *dirname, const char *filename)
 {
@@ -1150,6 +1210,8 @@ make_fullname (const char *dirname, const char *filename)
         return concat_dir_and_file (dirname + 2, filename);
     return concat_dir_and_file (dirname, filename);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
@@ -1177,6 +1239,8 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
     g_free (fullname);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 view_edit_currently_selected_file (int unparsed_view, int edit)
 {
@@ -1191,6 +1255,8 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
     find_do_view_edit (unparsed_view, edit, dir, text);
     return MSG_HANDLED;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 find_callback (Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -1218,7 +1284,9 @@ find_callback (Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, void *data
     }
 }
 
-/* Handles the Stop/Start button in the find window */
+/* --------------------------------------------------------------------------------------------- */
+/** Handles the Stop/Start button in the find window */
+
 static int
 start_stop (WButton * button, int action)
 {
@@ -1235,7 +1303,9 @@ start_stop (WButton * button, int action)
     return 0;
 }
 
-/* Handle view command, when invoked as a button */
+/* --------------------------------------------------------------------------------------------- */
+/** Handle view command, when invoked as a button */
+
 static int
 find_do_view_file (WButton * button, int action)
 {
@@ -1246,7 +1316,9 @@ find_do_view_file (WButton * button, int action)
     return 0;
 }
 
-/* Handle edit command, when invoked as a button */
+/* --------------------------------------------------------------------------------------------- */
+/** Handle edit command, when invoked as a button */
+
 static int
 find_do_edit_file (WButton * button, int action)
 {
@@ -1256,6 +1328,8 @@ find_do_edit_file (WButton * button, int action)
     view_edit_currently_selected_file (0, 1);
     return 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 setup_gui (void)
@@ -1340,6 +1414,8 @@ setup_gui (void)
     add_widget (find_dlg, find_list);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 run_process (void)
 {
@@ -1372,12 +1448,16 @@ run_process (void)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 kill_gui (void)
 {
     set_idle_proc (find_dlg, 0);
     destroy_dlg (find_dlg);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 find_file (const char *start_dir, const char *pattern, const char *content,
@@ -1493,6 +1573,10 @@ find_file (const char *start_dir, const char *pattern, const char *content,
     return return_value;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
 do_find (void)
 {
@@ -1549,3 +1633,5 @@ do_find (void)
         }
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */

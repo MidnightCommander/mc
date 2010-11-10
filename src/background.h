@@ -52,4 +52,4 @@ void unregister_task_with_pid (pid_t pid);
 
 #endif /* !WITH_BACKGROUND */
 
-#endif /* MC_BACKGROUND_H */
+#endif /* MC__BACKGROUND_H */

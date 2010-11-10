@@ -1,13 +1,20 @@
-
 /** \file main.h
  *  \brief Header: this is a main module header
  */
 
-#ifndef MC_MAIN_H
-#define MC_MAIN_H
+#ifndef MC__MAIN_H
+#define MC__MAIN_H
 
 #include "lib/global.h"
 #include "keybind.h"
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+#define MENU_PANEL (is_right ? right_panel : left_panel)
+#define MENU_PANEL_IDX  (is_right ? 1 : 0)
+#define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
+
+/*** enums ***************************************************************************************/
 
 /* run mode and params */
 typedef enum
@@ -17,6 +24,25 @@ typedef enum
     MC_RUN_VIEWER,
     MC_RUN_DIFFVIEWER
 } mc_run_mode_t;
+
+/* If true, after executing a command, wait for a keystroke */
+enum
+{ pause_never, pause_on_dumb_terminals, pause_always };
+
+enum cd_enum
+{
+    cd_parse_command,
+    cd_exact
+};
+
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+struct WButtonBar;
+
+struct mc_fhl_struct;
+
+/*** global variables defined in .c file *********************************************************/
 
 extern mc_run_mode_t mc_run_mode;
 /*
@@ -34,19 +60,8 @@ extern char *mc_run_param0;
  */
 extern char *mc_run_param1;
 
-void toggle_show_hidden (void);
-
 extern int quote;
 extern volatile int quit;
-
-/* If true, after executing a command, wait for a keystroke */
-enum { pause_never, pause_on_dumb_terminals, pause_always };
-
-void subshell_chdir (const char *command);
-
-struct WButtonBar;
-
-void midnight_set_buttonbar (struct WButtonBar *b);
 
 /* See main.c for details on these variables */
 extern int auto_menu;
@@ -95,39 +110,37 @@ extern char *shell;
 extern int auto_fill_mkdir_name;
 /* Ugly hack in order to distinguish between left and right panel in menubar */
 extern int is_right;            /* If the selected menu was the right */
-#define MENU_PANEL (is_right ? right_panel : left_panel)
-#define MENU_PANEL_IDX  (is_right ? 1 : 0)
-#define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
+
+extern const char *mc_prompt;
+extern char *mc_home;
+extern char *mc_home_alt;
+
+extern struct mc_fhl_struct *mc_filehighlight;
+
+/*** declarations of public functions ************************************************************/
+
+void toggle_show_hidden (void);
+
+void subshell_chdir (const char *command);
+
+void midnight_set_buttonbar (struct WButtonBar *b);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 void do_update_prompt (void);
 int load_prompt (int fd, void *unused);
 #endif
 
-enum cd_enum
-{
-    cd_parse_command,
-    cd_exact
-};
-
 int do_cd (const char *new_dir, enum cd_enum cd_type);
 void sort_cmd (void);
 void change_panel (void);
 void save_cwds_stat (void);
-gboolean quiet_quit_cmd (void);     /* For cmd.c and command.c */
+gboolean quiet_quit_cmd (void); /* For cmd.c and command.c */
 
 void touch_bar (void);
 void update_xterm_title_path (void);
 void load_hint (int force);
 
 void print_vfs_message (const char *msg, ...) __attribute__ ((format (__printf__, 1, 2)));
-
-extern const char *mc_prompt;
-extern char *mc_home;
-extern char *mc_home_alt;
-
-struct mc_fhl_struct;
-extern struct mc_fhl_struct *mc_filehighlight;
 
 char *get_mc_lib_dir (void);
 
@@ -136,4 +149,5 @@ void init_menu (void);
 
 char *remove_encoding_from_path (const char *);
 
-#endif /* MC_MAIN_H */
+/*** inline functions ****************************************************************************/
+#endif /* MC__MAIN_H */

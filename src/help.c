@@ -67,6 +67,10 @@
 #include "help.h"
 #include "main.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
 #define HELP_WINDOW_WIDTH min(80, COLS - 16)
@@ -76,6 +80,16 @@
 #define STRING_LINK_END         "\03"
 #define STRING_NODE_END         "\04"
 
+/*** file scope type declarations ****************************************************************/
+
+/* Link areas for the mouse */
+typedef struct Link_Area
+{
+    int x1, y1, x2, y2;
+    const char *link_name;
+} Link_Area;
+
+/*** file scope variables ************************************************************************/
 
 static char *fdata = NULL;      /* Pointer to the loaded data file */
 static int help_lines;          /* Lines in help viewer */
@@ -95,20 +109,17 @@ static struct
     const char *link;           /* Pointer to the selected link */
 } history[HISTORY_SIZE];
 
-/* Link areas for the mouse */
-typedef struct Link_Area
-{
-    int x1, y1, x2, y2;
-    const char *link_name;
-} Link_Area;
-
 static GSList *link_area = NULL;
 static gboolean inside_link_area = FALSE;
 
 static cb_ret_t help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
-/* returns the position where text was found in the start buffer */
-/* or 0 if not found */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/** returns the position where text was found in the start buffer 
+ * or 0 if not found
+ */
 static const char *
 search_string (const char *start, const char *text)
 {
@@ -144,8 +155,12 @@ search_string (const char *start, const char *text)
     return result;
 }
 
-/* Searches text in the buffer pointed by start.  Search ends */
-/* if the CHAR_NODE_END is found in the text.  Returns 0 on failure */
+/* --------------------------------------------------------------------------------------------- */
+/** Searches text in the buffer pointed by start.  Search ends
+ * if the CHAR_NODE_END is found in the text.
+ * @returns 0 on failure
+ */
+
 static const char *
 search_string_node (const char *start, const char *text)
 {
@@ -166,8 +181,11 @@ search_string_node (const char *start, const char *text)
     return NULL;
 }
 
-/* Searches the_char in the buffer pointer by start and searches */
-/* it can search forward (direction = 1) or backward (direction = -1) */
+/* --------------------------------------------------------------------------------------------- */
+/** Searches the_char in the buffer pointer by start and searches
+ * it can search forward (direction = 1) or backward (direction = -1)
+ */
+
 static const char *
 search_char_node (const char *start, char the_char, int direction)
 {
@@ -180,7 +198,9 @@ search_char_node (const char *start, char the_char, int direction)
     return NULL;
 }
 
-/* Returns the new current pointer when moved lines lines */
+/* --------------------------------------------------------------------------------------------- */
+/** Returns the new current pointer when moved lines lines */
+
 static const char *
 move_forward2 (const char *c, int lines)
 {
@@ -198,6 +218,8 @@ move_forward2 (const char *c, int lines)
     }
     return currentpoint = c;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 move_backward2 (const char *c, int lines)
@@ -225,6 +247,8 @@ move_backward2 (const char *c, int lines)
     return currentpoint = c;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 move_forward (int i)
 {
@@ -232,11 +256,15 @@ move_forward (int i)
         currentpoint = move_forward2 (currentpoint, i);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 move_backward (int i)
 {
     currentpoint = move_backward2 (currentpoint, ++i);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 move_to_top (void)
@@ -250,6 +278,8 @@ move_to_top (void)
     selected_item = NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 move_to_bottom (void)
 {
@@ -258,6 +288,8 @@ move_to_bottom (void)
     currentpoint--;
     move_backward (1);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 help_follow_link (const char *start, const char *lc_selected_item)
@@ -290,6 +322,8 @@ help_follow_link (const char *start, const char *lc_selected_item)
     return _("Help file format error\n");
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 select_next_link (const char *current_link)
 {
@@ -307,11 +341,15 @@ select_next_link (const char *current_link)
     return p - 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 select_prev_link (const char *current_link)
 {
     return current_link == NULL ? NULL : search_char_node (current_link - 1, CHAR_LINK_START, -1);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 start_link_area (int x, int y, const char *link_name)
@@ -333,6 +371,8 @@ start_link_area (int x, int y, const char *link_name)
     inside_link_area = TRUE;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 end_link_area (int x, int y)
 {
@@ -346,6 +386,8 @@ end_link_area (int x, int y)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 clear_link_areas (void)
 {
@@ -354,6 +396,8 @@ clear_link_areas (void)
     link_area = NULL;
     inside_link_area = FALSE;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 help_print_word (Dlg_head * h, GString * word, int *col, int *line, gboolean add_space)
@@ -396,6 +440,8 @@ help_print_word (Dlg_head * h, GString * word, int *col, int *line, gboolean add
         }
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 help_show (Dlg_head * h, const char *paint_start)
@@ -549,6 +595,8 @@ help_show (Dlg_head * h, const char *paint_start)
         dlg_move (h, active_line, active_col);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 help_event (Gpm_Event * event, void *vp)
 {
@@ -621,7 +669,9 @@ help_event (Gpm_Event * event, void *vp)
     return 0;
 }
 
-/* show help */
+/* --------------------------------------------------------------------------------------------- */
+/** show help */
+
 static void
 help_help (Dlg_head * h)
 {
@@ -639,6 +689,8 @@ help_help (Dlg_head * h)
         help_callback (h, NULL, DLG_DRAW, 0, NULL);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 help_index (Dlg_head * h)
@@ -661,6 +713,8 @@ help_index (Dlg_head * h)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 help_back (Dlg_head * h)
 {
@@ -672,6 +726,8 @@ help_back (Dlg_head * h)
 
     help_callback (h, NULL, DLG_DRAW, 0, NULL); /* FIXME: unneeded? */
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 help_next_link (gboolean move_down)
@@ -696,6 +752,8 @@ help_next_link (gboolean move_down)
         selected_item = NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 help_prev_link (gboolean move_up)
 {
@@ -713,6 +771,8 @@ help_prev_link (gboolean move_up)
             selected_item = NULL;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 help_next_node (void)
@@ -733,6 +793,8 @@ help_next_node (void)
             }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 help_prev_node (void)
 {
@@ -749,6 +811,8 @@ help_prev_node (void)
     currentpoint = new_item + 2;
     selected_item = NULL;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 help_select_link (void)
@@ -780,6 +844,8 @@ help_select_link (void)
 
     selected_item = NULL;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 help_execute_cmd (unsigned long command)
@@ -846,6 +912,8 @@ help_execute_cmd (unsigned long command)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 help_handle_key (Dlg_head * h, int c)
 {
@@ -858,6 +926,8 @@ help_handle_key (Dlg_head * h, int c)
     help_callback (h, NULL, DLG_DRAW, 0, NULL);
     return MSG_HANDLED;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -890,13 +960,17 @@ help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 interactive_display_finish (void)
 {
     clear_link_areas ();
 }
 
-/* translate help file into terminal encoding */
+/* --------------------------------------------------------------------------------------------- */
+/** translate help file into terminal encoding */
+
 static void
 translate_file (char *filedata)
 {
@@ -925,6 +999,8 @@ translate_file (char *filedata)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 md_callback (Widget * w, widget_msg_t msg, int parm)
 {
@@ -939,6 +1015,8 @@ md_callback (Widget * w, widget_msg_t msg, int parm)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static Widget *
 mousedispatch_new (int y, int x, int yl, int xl)
 {
@@ -946,6 +1024,10 @@ mousedispatch_new (int y, int x, int yl, int xl)
     init_widget (w, y, x, yl, xl, md_callback, help_event);
     return w;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 interactive_display (const char *filename, const char *node)
@@ -1043,3 +1125,5 @@ interactive_display (const char *filename, const char *node)
     interactive_display_finish ();
     destroy_dlg (whelp);
 }
+
+/* --------------------------------------------------------------------------------------------- */

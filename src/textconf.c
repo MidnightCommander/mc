@@ -31,6 +31,14 @@
 #include "lib/global.h"
 #include "src/textconf.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
 #ifdef ENABLE_VFS
 static const char *const vfs_supported[] = {
 #ifdef ENABLE_VFS_CPIO
@@ -59,8 +67,7 @@ static const char *const vfs_supported[] = {
 #endif /* ENABLE_VFS_SMB */
     NULL
 };
-#endif				/* ENABLE_VFS */
-
+#endif /* ENABLE_VFS */
 
 static const char *const features[] = {
 #ifdef USE_INTERNAL_EDIT
@@ -81,18 +88,18 @@ static const char *const features[] = {
     N_("Using the ncursesw library"),
 #else
 #error "Cannot compile mc without S-Lang or ncurses"
-#endif				/* !HAVE_SLANG && !USE_NCURSES */
+#endif /* !HAVE_SLANG && !USE_NCURSES */
 
     "\n",
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-#   ifdef SUBSHELL_OPTIONAL
+#ifdef SUBSHELL_OPTIONAL
     N_("With optional subshell support"),
-#   else
+#else
     N_("With subshell support as default"),
-#   endif
+#endif
     "\n",
-#endif				/* !HAVE_SUBSHELL_SUPPORT */
+#endif /* !HAVE_SUBSHELL_SUPPORT */
 
 #ifdef WITH_BACKGROUND
     N_("With support for background operations\n"),
@@ -119,6 +126,13 @@ static const char *const features[] = {
     NULL
 };
 
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
 show_version (void)
 {
@@ -129,23 +143,25 @@ show_version (void)
 #ifdef ENABLE_VFS
     printf (_("Virtual File Systems:"));
     for (i = 0; vfs_supported[i] != NULL; i++)
-	printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
+        printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
 
     printf ("\n");
-#endif				/* ENABLE_VFS */
+#endif /* ENABLE_VFS */
 
     for (i = 0; features[i] != NULL; i++)
-	printf ("%s", _(features[i]));
+        printf ("%s", _(features[i]));
 
-    (void)printf(_("Data types:"));
+    (void) printf (_("Data types:"));
 #define TYPE_INFO(T) \
     (void)printf(" %s: %d;", #T, (int) (CHAR_BIT * sizeof(T)))
-    TYPE_INFO(char);
-    TYPE_INFO(int);
-    TYPE_INFO(long);
-    TYPE_INFO(void *);
-    TYPE_INFO(size_t);
-    TYPE_INFO(off_t);
+    TYPE_INFO (char);
+    TYPE_INFO (int);
+    TYPE_INFO (long);
+    TYPE_INFO (void *);
+    TYPE_INFO (size_t);
+    TYPE_INFO (off_t);
 #undef TYPE_INFO
-    (void)printf("\n");
+    (void) printf ("\n");
 }
+
+/* --------------------------------------------------------------------------------------------- */

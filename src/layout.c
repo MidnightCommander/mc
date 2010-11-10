@@ -39,7 +39,7 @@
       * resizing code depends on it...
       */
 #ifdef HAVE_SYS_IOCTL_H
-#   include <sys/ioctl.h>
+#include <sys/ioctl.h>
 #endif
 #include <termios.h>
 #include <unistd.h>
@@ -73,6 +73,8 @@
 #include "src/viewer/mcviewer.h"        /* The view widget */
 
 #include "setup.h"              /* For save_setup() */
+
+/*** global variables ****************************************************************************/
 
 /* Controls the display of the rotating dash on the verbose mode */
 int nice_rotating_dash = 1;
@@ -110,10 +112,29 @@ int free_space = 1;
 /* The starting line for the output of the subprogram */
 int output_start_y = 0;
 
+/*** file scope macro definitions ****************************************************************/
+
 /* The maximum number of views managed by the set_display_type routine */
 /* Must be at least two (for current and other).  Please note that until */
 /* Janne gets around this, we will only manage two of them :-) */
 #define MAX_VIEWS 2
+
+/* Width 12 for a wee Quick (Hex) View */
+#define MINWIDTH 12
+#define MINHEIGHT 5
+
+#define B_2LEFT B_USER
+#define B_2RIGHT (B_USER + 1)
+#define B_PLUS (B_USER + 2)
+#define B_MINUS (B_USER + 3)
+
+
+#define LAYOUT_OPTIONS_COUNT  (sizeof (check_options) / sizeof (check_options[0]))
+#define OTHER_OPTIONS_COUNT   (LAYOUT_OPTIONS_COUNT - 1)
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
 
 static struct
 {
@@ -149,15 +170,6 @@ static int _free_space;
 
 static int height;
 
-/* Width 12 for a wee Quick (Hex) View */
-#define MINWIDTH 12
-#define MINHEIGHT 5
-
-#define B_2LEFT B_USER
-#define B_2RIGHT (B_USER + 1)
-#define B_PLUS (B_USER + 2)
-#define B_MINUS (B_USER + 3)
-
 static const char *s_split_direction[2] = {
     N_("&Vertical"),
     N_("&Horizontal")
@@ -184,14 +196,16 @@ static struct
     /* *INDENT-ON* */
 };
 
-#define LAYOUT_OPTIONS_COUNT  (sizeof (check_options) / sizeof (check_options[0]))
-#define OTHER_OPTIONS_COUNT   (LAYOUT_OPTIONS_COUNT - 1)
-
 static gsize first_width;
 static const char *output_lines_label = NULL;
 static int output_lines_label_len;
 
 static WButton *bleft_widget, *bright_widget;
+
+static int ok_to_refresh = 1;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 _check_split (void)
@@ -219,8 +233,10 @@ _check_split (void)
     old_horizontal_split = _horizontal_split;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
-update_split (const Dlg_head *h)
+update_split (const Dlg_head * h)
 {
     /* Check split has to be done before testing if it changed, since
        it can change due to calling _check_split() as well */
@@ -241,8 +257,10 @@ update_split (const Dlg_head *h)
     tty_print_char ('=');
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
-b_left_right_cback (WButton *button, int action)
+b_left_right_cback (WButton * button, int action)
 {
     (void) action;
 
@@ -255,8 +273,10 @@ b_left_right_cback (WButton *button, int action)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
-bplus_cback (WButton *button, int action)
+bplus_cback (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -266,8 +286,10 @@ bplus_cback (WButton *button, int action)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
-bminus_cback (WButton *button, int action)
+bminus_cback (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -276,6 +298,8 @@ bminus_cback (WButton *button, int action)
         _output_lines--;
     return 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -379,6 +403,8 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static Dlg_head *
 init_layout (void)
@@ -525,6 +551,86 @@ init_layout (void)
     return layout_dlg;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+check_split (void)
+{
+    if (horizontal_split)
+    {
+        if (equal_split)
+            first_panel_size = height / 2;
+        else if (first_panel_size < MINHEIGHT)
+            first_panel_size = MINHEIGHT;
+        else if (first_panel_size > height - MINHEIGHT)
+            first_panel_size = height - MINHEIGHT;
+    }
+    else
+    {
+        if (equal_split)
+            first_panel_size = COLS / 2;
+        else if (first_panel_size < MINWIDTH)
+            first_panel_size = MINWIDTH;
+        else if (first_panel_size > COLS - MINWIDTH)
+            first_panel_size = COLS - MINWIDTH;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_do_cols (int idx)
+{
+    if (get_display_type (idx) == view_listing)
+        set_panel_formats ((WPanel *) panels[idx].widget);
+    else
+        panel_update_cols (panels[idx].widget, frame_half);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+low_level_change_screen_size (void)
+{
+#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
+#if defined TIOCGWINSZ
+    struct winsize winsz;
+
+    winsz.ws_col = winsz.ws_row = 0;
+    /* Ioctl on the STDIN_FILENO */
+    ioctl (0, TIOCGWINSZ, &winsz);
+    if (winsz.ws_col && winsz.ws_row)
+    {
+#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
+        resizeterm (winsz.ws_row, winsz.ws_col);
+        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
+#else
+        COLS = winsz.ws_col;
+        LINES = winsz.ws_row;
+#endif
+#ifdef HAVE_SUBSHELL_SUPPORT
+        resize_subshell ();
+#endif
+    }
+#endif /* TIOCGWINSZ */
+#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+dlg_resize_cb (void *data, void *user_data)
+{
+    Dlg_head *d = data;
+
+    (void) user_data;
+    d->callback (d, NULL, DLG_RESIZE, 0, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
 layout_change (void)
 {
@@ -536,6 +642,8 @@ layout_change (void)
     menubar_arrange (the_menubar);
     load_hint (1);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 layout_box (void)
@@ -569,28 +677,7 @@ layout_box (void)
         layout_change ();
 }
 
-static void
-check_split (void)
-{
-    if (horizontal_split)
-    {
-        if (equal_split)
-            first_panel_size = height / 2;
-        else if (first_panel_size < MINHEIGHT)
-            first_panel_size = MINHEIGHT;
-        else if (first_panel_size > height - MINHEIGHT)
-            first_panel_size = height - MINHEIGHT;
-    }
-    else
-    {
-        if (equal_split)
-            first_panel_size = COLS / 2;
-        else if (first_panel_size < MINWIDTH)
-            first_panel_size = MINWIDTH;
-        else if (first_panel_size > COLS - MINWIDTH)
-            first_panel_size = COLS - MINWIDTH;
-    }
-}
+/* --------------------------------------------------------------------------------------------- */
 
 void
 clr_scr (void)
@@ -600,12 +687,16 @@ clr_scr (void)
     tty_refresh ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 repaint_screen (void)
 {
     do_refresh ();
     tty_refresh ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 mc_refresh (void)
@@ -624,14 +715,7 @@ mc_refresh (void)
     }
 }
 
-static void
-panel_do_cols (int idx)
-{
-    if (get_display_type (idx) == view_listing)
-        set_panel_formats ((WPanel *) panels[idx].widget);
-    else
-        panel_update_cols (panels[idx].widget, frame_half);
-}
+/* --------------------------------------------------------------------------------------------- */
 
 void
 setup_panels (void)
@@ -717,41 +801,7 @@ setup_panels (void)
     update_xterm_title_path ();
 }
 
-static inline void
-low_level_change_screen_size (void)
-{
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ
-    struct winsize winsz;
-
-    winsz.ws_col = winsz.ws_row = 0;
-    /* Ioctl on the STDIN_FILENO */
-    ioctl (0, TIOCGWINSZ, &winsz);
-    if (winsz.ws_col && winsz.ws_row)
-    {
-#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
-        resizeterm (winsz.ws_row, winsz.ws_col);
-        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
-#else
-        COLS = winsz.ws_col;
-        LINES = winsz.ws_row;
-#endif
-#ifdef HAVE_SUBSHELL_SUPPORT
-        resize_subshell ();
-#endif
-    }
-#endif /* TIOCGWINSZ */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
-}
-
-static void
-dlg_resize_cb (void *data, void *user_data)
-{
-    Dlg_head *d = data;
-
-    (void) user_data;
-    d->callback (d, NULL, DLG_RESIZE, 0, NULL);
-}
+/* --------------------------------------------------------------------------------------------- */
 
 void
 sigwinch_handler (int dummy)
@@ -762,6 +812,8 @@ sigwinch_handler (int dummy)
 #endif
     winch_flag = 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 change_screen_size (void)
@@ -799,7 +851,8 @@ change_screen_size (void)
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
-static int ok_to_refresh = 1;
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 use_dash (gboolean flag)
@@ -810,6 +863,8 @@ use_dash (gboolean flag)
         ok_to_refresh--;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 set_hintbar (const char *str)
 {
@@ -817,6 +872,8 @@ set_hintbar (const char *str)
     if (ok_to_refresh > 0)
         mc_refresh ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 print_vfs_message (const char *msg, ...)
@@ -855,6 +912,8 @@ print_vfs_message (const char *msg, ...)
         set_hintbar (str);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 rotate_dash (void)
 {
@@ -873,6 +932,8 @@ rotate_dash (void)
     pos++;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 const char *
 get_nth_panel_name (int num)
 {
@@ -889,6 +950,7 @@ get_nth_panel_name (int num)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* I wonder if I should start to use the folding mode than Dugan uses */
 /*                                                                     */
 /* This is the centralized managing of the panel display types         */
@@ -900,6 +962,7 @@ get_nth_panel_name (int num)
 /* Set the num-th panel to the view type: type */
 /* This routine also keeps at least one WPanel object in the screen */
 /* since a lot of routines depend on the current_panel variable */
+
 void
 set_display_type (int num, panel_view_mode_t type)
 {
@@ -965,7 +1028,7 @@ set_display_type (int num, panel_view_mode_t type)
 
     case view_info:
         new_widget = (Widget *) info_new (y, x, lines, cols);
-    break;
+        break;
 
     case view_tree:
         new_widget = (Widget *) tree_new (y, x, lines, cols, TRUE);
@@ -973,7 +1036,7 @@ set_display_type (int num, panel_view_mode_t type)
 
     case view_quick:
         new_widget = (Widget *) mcview_new (y, x, lines, cols, TRUE);
-        the_other_panel = (WPanel *) panels [the_other].widget;
+        the_other_panel = (WPanel *) panels[the_other].widget;
         if (the_other_panel != NULL)
             file_name = the_other_panel->dir.list[the_other_panel->selected].fname;
         else
@@ -1022,9 +1085,11 @@ set_display_type (int num, panel_view_mode_t type)
     g_free (old_widget);
 }
 
-/* This routine is deeply sticked to the two panels idea.
+/* --------------------------------------------------------------------------------------------- */
+/** This routine is deeply sticked to the two panels idea.
    What should it do in more panels. ANSWER - don't use it
    in any multiple panels environment. */
+
 void
 swap_panels (void)
 {
@@ -1118,17 +1183,23 @@ swap_panels (void)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 panel_view_mode_t
 get_display_type (int idx)
 {
     return panels[idx].type;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 struct Widget *
 get_panel_widget (int idx)
 {
     return panels[idx].widget;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 get_current_index (void)
@@ -1139,11 +1210,15 @@ get_current_index (void)
         return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 get_other_index (void)
 {
     return !get_current_index ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 struct WPanel *
 get_other_panel (void)
@@ -1151,7 +1226,9 @@ get_other_panel (void)
     return (struct WPanel *) get_panel_widget (get_other_index ());
 }
 
-/* Returns the view type for the current panel/view */
+/* --------------------------------------------------------------------------------------------- */
+/** Returns the view type for the current panel/view */
+
 panel_view_mode_t
 get_current_type (void)
 {
@@ -1161,7 +1238,9 @@ get_current_type (void)
         return panels[1].type;
 }
 
-/* Returns the view type of the unselected panel */
+/* --------------------------------------------------------------------------------------------- */
+/** Returns the view type of the unselected panel */
+
 panel_view_mode_t
 get_other_type (void)
 {
@@ -1171,7 +1250,9 @@ get_other_type (void)
         return panels[0].type;
 }
 
-/* Save current list_view widget directory into panel */
+/* --------------------------------------------------------------------------------------------- */
+/** Save current list_view widget directory into panel */
+
 void
 save_panel_dir (int idx)
 {
@@ -1189,7 +1270,9 @@ save_panel_dir (int idx)
     }
 }
 
-/* Save current list_view widget directory into panel */
+/* --------------------------------------------------------------------------------------------- */
+/** Save current list_view widget directory into panel */
+
 Widget *
 restore_into_right_dir_panel (int idx, Widget * from_widget)
 {
@@ -1206,8 +1289,10 @@ restore_into_right_dir_panel (int idx, Widget * from_widget)
     return new_widget;
 }
 
-/* Return working dir, if it's view_listing - cwd,
+/* --------------------------------------------------------------------------------------------- */
+/** Return working dir, if it's view_listing - cwd,
    but for other types - last_saved_dir */
+
 const char *
 get_panel_dir_for (const WPanel * widget)
 {
@@ -1225,3 +1310,5 @@ get_panel_dir_for (const WPanel * widget)
 
     return panels[i].last_saved_dir;
 }
+
+/* --------------------------------------------------------------------------------------------- */

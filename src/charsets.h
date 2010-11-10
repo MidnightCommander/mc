@@ -106,4 +106,4 @@ convert_from_input_c (int c)
 
 #endif /* HAVE_CHARSET */
 
-#endif /* MC_CHARSETS_H */
+#endif /* MC__CHARSETS_H */

@@ -68,21 +68,24 @@
 #include "tree.h"
 #include "filegui.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define tlines(t) (t->is_panel ? t->widget.lines - 2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
 /* Use the color of the parent widget for the unselected entries */
 #define TREE_NORMALC(h) (h->color[DLG_COLOR_NORMAL])
 #define TREE_CURRENTC(h) (h->color[DLG_COLOR_FOCUS])
 
-/* Specifies the display mode: 1d or 2d */
-static gboolean tree_navigation_flag = FALSE;
+/*** file scope type declarations ****************************************************************/
 
 struct WTree
 {
     Widget widget;
     struct TreeStore *store;
     tree_entry *selected_ptr;   /* The selected directory */
-    char search_buffer[MC_MAXFILENAMELEN];    /* Current search string */
+    char search_buffer[MC_MAXFILENAMELEN];      /* Current search string */
     tree_entry **tree_shown;    /* Entries currently on screen */
     int is_panel;               /* panel or plain widget flag */
     int active;                 /* if it's currently selected */
@@ -91,8 +94,17 @@ struct WTree
                                    shown and the selected */
 };
 
-/* Forwards */
+/*** file scope variables ************************************************************************/
+
+/* Specifies the display mode: 1d or 2d */
+static gboolean tree_navigation_flag = FALSE;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static void tree_rescan (void *data);
+
+/* --------------------------------------------------------------------------------------------- */
 
 static tree_entry *
 back_ptr (tree_entry * ptr, int *count)
@@ -108,6 +120,8 @@ back_ptr (tree_entry * ptr, int *count)
     return ptr;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static tree_entry *
 forw_ptr (tree_entry * ptr, int *count)
 {
@@ -121,6 +135,8 @@ forw_ptr (tree_entry * ptr, int *count)
     *count = i;
     return ptr;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 remove_callback (tree_entry * entry, void *data)
@@ -136,7 +152,9 @@ remove_callback (tree_entry * entry, void *data)
     }
 }
 
-/* Save the ~/.mc/Tree file */
+/* --------------------------------------------------------------------------------------------- */
+/** Save the ~/.mc/Tree file */
+
 static void
 save_tree (WTree * tree)
 {
@@ -156,12 +174,16 @@ save_tree (WTree * tree)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_remove_entry (WTree * tree, char *name)
 {
     (void) tree;
     tree_store_remove_entry (name);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_destroy (WTree * tree)
@@ -174,7 +196,9 @@ tree_destroy (WTree * tree)
     tree->selected_ptr = NULL;
 }
 
-/* Loads the .mc.tree file */
+/* --------------------------------------------------------------------------------------------- */
+/** Loads the .mc.tree file */
+
 static void
 load_tree (WTree * tree)
 {
@@ -183,6 +207,8 @@ load_tree (WTree * tree)
     tree->selected_ptr = tree->store->tree_first;
     tree_chdir (tree, home_dir);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
@@ -219,6 +245,8 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
         tty_print_string (str_fit_to_term (tree->selected_ptr->name, tree_cols, J_LEFT_FIT));
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 show_tree (WTree * tree)
@@ -298,7 +326,7 @@ show_tree (WTree * tree)
 
         if (tree->is_panel)
             tty_setcolor (tree->active && current == tree->selected_ptr
-                            ? SELECTED_COLOR : NORMAL_COLOR);
+                          ? SELECTED_COLOR : NORMAL_COLOR);
         else
             tty_setcolor (current == tree->selected_ptr ? TREE_CURRENTC (h) : TREE_NORMALC (h));
 
@@ -306,7 +334,8 @@ show_tree (WTree * tree)
         if (current->sublevel == topsublevel)
         {
             /* Show full name */
-            tty_print_string (str_fit_to_term (current->name, tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
+            tty_print_string (str_fit_to_term
+                              (current->name, tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
         }
         else
         {
@@ -336,7 +365,8 @@ show_tree (WTree * tree)
 
             /* Show sub-name */
             tty_print_char (' ');
-            tty_print_string (str_fit_to_term (current->subname, tree_cols - x - 3 * j, J_LEFT_FIT));
+            tty_print_string (str_fit_to_term
+                              (current->subname, tree_cols - x - 3 * j, J_LEFT_FIT));
         }
 
         /* Calculate the next value for current */
@@ -373,6 +403,8 @@ show_tree (WTree * tree)
     tree_show_mini_info (tree, tree_lines, tree_cols);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_check_focus (WTree * tree)
 {
@@ -381,6 +413,8 @@ tree_check_focus (WTree * tree)
     else if (tree->topdiff >= tlines (tree) - 3)
         tree->topdiff = tlines (tree) - 3 - 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_move_backward (WTree * tree, int i)
@@ -409,6 +443,8 @@ tree_move_backward (WTree * tree, int i)
     tree_check_focus (tree);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_move_forward (WTree * tree, int i)
 {
@@ -435,6 +471,8 @@ tree_move_forward (WTree * tree, int i)
     tree->topdiff += i;
     tree_check_focus (tree);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_move_to_child (WTree * tree)
@@ -468,6 +506,8 @@ tree_move_to_child (WTree * tree)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 tree_move_to_parent (WTree * tree)
 {
@@ -491,12 +531,16 @@ tree_move_to_parent (WTree * tree)
     return tree->selected_ptr != old;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_move_to_top (WTree * tree)
 {
     tree->selected_ptr = tree->store->tree_first;
     tree->topdiff = 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_move_to_bottom (WTree * tree)
@@ -505,7 +549,9 @@ tree_move_to_bottom (WTree * tree)
     tree->topdiff = tlines (tree) - 3 - 1;
 }
 
-/* Handle mouse click */
+/* --------------------------------------------------------------------------------------------- */
+/** Handle mouse click */
+
 static void
 tree_event (WTree * tree, int y)
 {
@@ -516,6 +562,8 @@ tree_event (WTree * tree, int y)
     }
     show_tree (tree);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_chdir_sel (WTree * tree)
@@ -535,6 +583,8 @@ tree_chdir_sel (WTree * tree)
     show_tree (tree);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 maybe_chdir (WTree * tree)
 {
@@ -542,7 +592,9 @@ maybe_chdir (WTree * tree)
         tree_chdir_sel (tree);
 }
 
-/* Mouse callback */
+/* --------------------------------------------------------------------------------------------- */
+/** Mouse callback */
+
 static int
 event_callback (Gpm_Event * event, void *data)
 {
@@ -587,7 +639,9 @@ event_callback (Gpm_Event * event, void *data)
     return MOU_NORMAL;
 }
 
-/* Search tree for text */
+/* --------------------------------------------------------------------------------------------- */
+/** Search tree for text */
+
 static int
 search_tree (WTree * tree, char *text)
 {
@@ -619,6 +673,8 @@ search_tree (WTree * tree, char *text)
     return found;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_do_search (WTree * tree, int key)
 {
@@ -640,6 +696,8 @@ tree_do_search (WTree * tree, int key)
     maybe_chdir (tree);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_rescan (void *data)
 {
@@ -655,6 +713,8 @@ tree_rescan (void *data)
     ret = mc_chdir (old_dir);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_forget (void *data)
 {
@@ -662,6 +722,8 @@ tree_forget (void *data)
     if (tree->selected_ptr)
         tree_remove_entry (tree, tree->selected_ptr->name);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_copy (WTree * tree, const char *default_dest)
@@ -694,6 +756,8 @@ tree_copy (WTree * tree, const char *default_dest)
 
     g_free (dest);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_move (WTree * tree, const char *default_dest)
@@ -743,6 +807,8 @@ tree_move (WTree * tree, const char *default_dest)
     g_free (dest);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 #if 0
 static void
 tree_mkdir (WTree * tree)
@@ -762,6 +828,8 @@ tree_mkdir (WTree * tree)
     chdir (old_dir);
 }
 #endif
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_rmdir (void *data)
@@ -795,6 +863,8 @@ tree_rmdir (void *data)
     file_op_context_destroy (ctx);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 tree_move_up (WTree * tree)
 {
@@ -802,6 +872,8 @@ tree_move_up (WTree * tree)
     show_tree (tree);
     maybe_chdir (tree);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 tree_move_down (WTree * tree)
@@ -811,6 +883,8 @@ tree_move_down (WTree * tree)
     maybe_chdir (tree);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 tree_move_home (WTree * tree)
 {
@@ -818,6 +892,8 @@ tree_move_home (WTree * tree)
     show_tree (tree);
     maybe_chdir (tree);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 tree_move_end (WTree * tree)
@@ -827,6 +903,8 @@ tree_move_end (WTree * tree)
     maybe_chdir (tree);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_move_pgup (WTree * tree)
 {
@@ -835,6 +913,8 @@ tree_move_pgup (WTree * tree)
     maybe_chdir (tree);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_move_pgdn (WTree * tree)
 {
@@ -842,6 +922,8 @@ tree_move_pgdn (WTree * tree)
     show_tree (tree);
     maybe_chdir (tree);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 tree_move_left (WTree * tree)
@@ -858,6 +940,8 @@ tree_move_left (WTree * tree)
     return v;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 tree_move_right (WTree * tree)
 {
@@ -873,6 +957,8 @@ tree_move_right (WTree * tree)
 
     return v;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_start_search (WTree * tree)
@@ -904,6 +990,8 @@ tree_start_search (WTree * tree)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_toggle_navig (WTree * tree)
 {
@@ -912,6 +1000,8 @@ tree_toggle_navig (WTree * tree)
                          tree_navigation_flag ? Q_ ("ButtonBar|Static")
                          : Q_ ("ButtonBar|Dynamc"), tree_map, (Widget *) tree);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 tree_execute_cmd (WTree * tree, unsigned long command)
@@ -977,6 +1067,8 @@ tree_execute_cmd (WTree * tree, unsigned long command)
     return res;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 tree_key (WTree * tree, int key)
 {
@@ -1030,6 +1122,8 @@ tree_key (WTree * tree, int key)
     return MSG_NOT_HANDLED;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tree_frame (Dlg_head * h, WTree * tree)
 {
@@ -1042,18 +1136,20 @@ tree_frame (Dlg_head * h, WTree * tree)
 
         draw_box (h, tree->widget.y, tree->widget.x, tree->widget.lines, tree->widget.cols, FALSE);
 
-        widget_move (&tree->widget, 0, (tree->widget.cols - len - 2)/2);
+        widget_move (&tree->widget, 0, (tree->widget.cols - len - 2) / 2);
         tty_printf (" %s ", title);
 
         if (show_mini_info)
             widget_move (&tree->widget, tlines (tree) + 1, 0);
-            tty_print_alt_char (ACS_LTEE, FALSE);
-            widget_move (&tree->widget, tlines (tree) + 1, tree->widget.cols - 1);
-            tty_print_alt_char (ACS_RTEE, FALSE);
-            tty_draw_hline (tree->widget.y + tlines (tree) + 1,
-                            tree->widget.x + 1, ACS_HLINE, tree->widget.cols - 2);
+        tty_print_alt_char (ACS_LTEE, FALSE);
+        widget_move (&tree->widget, tlines (tree) + 1, tree->widget.cols - 1);
+        tty_print_alt_char (ACS_RTEE, FALSE);
+        tty_draw_hline (tree->widget.y + tlines (tree) + 1,
+                        tree->widget.x + 1, ACS_HLINE, tree->widget.cols - 2);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 tree_callback (Widget * w, widget_msg_t msg, int parm)
@@ -1117,6 +1213,10 @@ tree_callback (Widget * w, widget_msg_t msg, int parm)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 WTree *
 tree_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
@@ -1140,6 +1240,8 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     return tree;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tree_chdir (WTree * tree, const char *dir)
 {
@@ -1154,12 +1256,16 @@ tree_chdir (WTree * tree, const char *dir)
     }
 }
 
-/* Return name of the currently selected entry */
+/* --------------------------------------------------------------------------------------------- */
+/** Return name of the currently selected entry */
+
 char *
 tree_selected_name (const WTree * tree)
 {
     return tree->selected_ptr->name;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 sync_tree (const char *path)
@@ -1167,8 +1273,12 @@ sync_tree (const char *path)
     tree_chdir (the_tree, path);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 WTree *
 find_tree (struct Dlg_head *h)
 {
     return (WTree *) find_widget_type (h, tree_callback);
 }
+
+/* --------------------------------------------------------------------------------------------- */

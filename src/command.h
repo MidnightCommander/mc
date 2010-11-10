@@ -24,4 +24,4 @@ void do_cd_command (char *cmd);
 void command_insert (WInput * in, const char *text, int insert_extra_space);
 
 /*** inline functions ****************************************************************************/
-#endif
+#endif /* MC__COMMAND_H */

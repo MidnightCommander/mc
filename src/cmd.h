@@ -101,4 +101,4 @@ void toggle_listing_cmd (void);
 void encoding_cmd (void);
 
 /*** inline functions ****************************************************************************/
-#endif
+#endif /* MC__CMD_H */

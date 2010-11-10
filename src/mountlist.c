@@ -113,6 +113,10 @@
 #include "lib/global.h"
 #include "mountlist.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #ifdef DOLPHIN
 /* So special that it's not worth putting this in autoconf.  */
 #undef MOUNTED_FREAD_FSTYP
@@ -120,12 +124,14 @@
 #endif
 
 #if defined (__QNX__) && !defined(__QNXNTO__) && !defined (HAVE_INFOMOUNT_LIST)
-#    define HAVE_INFOMOUNT_QNX
+#define HAVE_INFOMOUNT_QNX
 #endif
 
 #if defined(HAVE_INFOMOUNT_LIST) || defined(HAVE_INFOMOUNT_QNX)
-#    define HAVE_INFOMOUNT
+#define HAVE_INFOMOUNT
 #endif
+
+/*** file scope type declarations ****************************************************************/
 
 /* A mount table entry. */
 struct mount_entry
@@ -146,12 +152,18 @@ struct fs_usage
     fsfilcnt_t fsu_ffree;       /* Free file nodes. */
 };
 
+/*** file scope variables ************************************************************************/
+
 static int get_fs_usage (char *path, struct fs_usage *fsp);
 
 #ifdef HAVE_INFOMOUNT_LIST
-
 static struct mount_entry *mount_list = NULL;
+#endif /* HAVE_INFOMOUNT_LIST */
 
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef HAVE_INFOMOUNT_LIST
 static void
 free_mount_entry (struct mount_entry *me)
 {
@@ -167,6 +179,8 @@ free_mount_entry (struct mount_entry *me)
 }
 
 #ifdef MOUNTED_GETMNTENT1       /* 4.3BSD, SunOS, HP-UX, Dynix, Irix.  */
+
+/* --------------------------------------------------------------------------------------------- */
 /* Return the value of the hexadecimal number represented by CP.
    No prefix (like '0x') or suffix (like 'h') is expected to be
    part of CP. */
@@ -194,6 +208,8 @@ xatoi (const char *cp)
 #endif /* MOUNTED_GETMNTENT1 */
 
 #ifdef MOUNTED_GETMNTINFO
+
+/* --------------------------------------------------------------------------------------------- */
 
 #ifndef HAVE_STRUCT_STATFS_F_FSTYPENAME
 static char *
@@ -293,6 +309,8 @@ fstype_to_string (short t)
 
 #endif /* MOUNTED_GETMNTINFO */
 
+/* --------------------------------------------------------------------------------------------- */
+
 #ifdef MOUNTED_VMOUNT           /* AIX.  */
 static char *
 fstype_to_string (int t)
@@ -307,7 +325,8 @@ fstype_to_string (int t)
 }
 #endif /* MOUNTED_VMOUNT */
 
-/* Return a list of the currently mounted filesystems, or NULL on error.
+/* --------------------------------------------------------------------------------------------- */
+/** Return a list of the currently mounted filesystems, or NULL on error.
    Add each entry to the tail of the list so that they stay in order.
    If NEED_FS_TYPE is nonzero, ensure that the filesystem type fields in
    the returned list are valid.  Otherwise, they might not be.
@@ -612,8 +631,10 @@ read_filesystem_list (int need_fs_type, int all_fs)
 }
 #endif /* HAVE_INFOMOUNT_LIST */
 
+/* --------------------------------------------------------------------------------------------- */
+
 #ifdef HAVE_INFOMOUNT_QNX
-/*
+/**
  ** QNX has no [gs]etmnt*(), [gs]etfs*(), or /etc/mnttab, but can do
  ** this via the following code.
  ** Note that, as this is based on CWD, it only fills one mount_entry
@@ -707,109 +728,8 @@ read_filesystem_list (int need_fs_type, int all_fs)
 }
 #endif /* HAVE_INFOMOUNT_QNX */
 
-void
-free_my_statfs (void)
-{
-#ifdef HAVE_INFOMOUNT_LIST
-    while (mount_list)
-    {
-        struct mount_entry *next = mount_list->me_next;
-        free_mount_entry (mount_list);
-        mount_list = next;
-    }
-    mount_list = NULL;
-#endif /* HAVE_INFOMOUNT_LIST */
-}
-
-
-void
-init_my_statfs (void)
-{
-#ifdef HAVE_INFOMOUNT_LIST
-    free_my_statfs ();
-    mount_list = read_filesystem_list (1, 1);
-#endif /* HAVE_INFOMOUNT_LIST */
-}
-
-void
-my_statfs (struct my_statfs *myfs_stats, const char *path)
-{
-#ifdef HAVE_INFOMOUNT_LIST
-    size_t i, len = 0;
-    struct mount_entry *entry = NULL;
-    struct mount_entry *temp = mount_list;
-    struct fs_usage fs_use;
-
-    while (temp)
-    {
-        i = strlen (temp->me_mountdir);
-        if (i > len && (strncmp (path, temp->me_mountdir, i) == 0))
-            if (!entry || (path[i] == PATH_SEP || path[i] == '\0'))
-            {
-                len = i;
-                entry = temp;
-            }
-        temp = temp->me_next;
-    }
-
-    if (entry)
-    {
-        memset (&fs_use, 0, sizeof (struct fs_usage));
-        get_fs_usage (entry->me_mountdir, &fs_use);
-
-        myfs_stats->type = entry->me_dev;
-        myfs_stats->typename = entry->me_type;
-        myfs_stats->mpoint = entry->me_mountdir;
-        myfs_stats->device = entry->me_devname;
-        myfs_stats->avail = getuid ()? fs_use.fsu_bavail / 2 : fs_use.fsu_bfree / 2;
-        myfs_stats->total = fs_use.fsu_blocks / 2;
-        myfs_stats->nfree = fs_use.fsu_ffree;
-        myfs_stats->nodes = fs_use.fsu_files;
-    }
-    else
-#endif /* HAVE_INFOMOUNT_LIST */
-
-#ifdef HAVE_INFOMOUNT_QNX
-        /*
-         ** This is the "other side" of the hack to read_filesystem_list() in
-         ** mountlist.c.
-         ** It's not the most efficient approach, but consumes less memory. It
-         ** also accomodates QNX's ability to mount filesystems on the fly.
-         */
-        struct mount_entry *entry;
-    struct fs_usage fs_use;
-
-    entry = read_filesystem_list (0, 0);
-    if (entry != NULL)
-    {
-        get_fs_usage (entry->me_mountdir, &fs_use);
-
-        myfs_stats->type = entry->me_dev;
-        myfs_stats->typename = entry->me_type;
-        myfs_stats->mpoint = entry->me_mountdir;
-        myfs_stats->device = entry->me_devname;
-
-        myfs_stats->avail = fs_use.fsu_bfree / 2;
-        myfs_stats->total = fs_use.fsu_blocks / 2;
-        myfs_stats->nfree = fs_use.fsu_ffree;
-        myfs_stats->nodes = fs_use.fsu_files;
-    }
-    else
-#endif /* HAVE_INFOMOUNT_QNX */
-    {
-        myfs_stats->type = 0;
-        myfs_stats->mpoint = "unknown";
-        myfs_stats->device = "unknown";
-        myfs_stats->avail = 0;
-        myfs_stats->total = 0;
-        myfs_stats->nfree = 0;
-        myfs_stats->nodes = 0;
-    }
-}
-
 #ifdef HAVE_INFOMOUNT
-
-/* Return the number of TOSIZE-byte blocks used by
+/** Return the number of TOSIZE-byte blocks used by
    BLOCKS FROMSIZE-byte blocks, rounding away from zero.
    TOSIZE must be positive.  Return -1 if FROMSIZE is not positive.  */
 
@@ -829,6 +749,7 @@ fs_adjust_blocks (fsblkcnt_t blocks, int fromsize, int tosize)
         return blocks / (tosize / fromsize);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 #if defined(_AIX) && defined(_I386)
 /* AIX PS/2 does not supply statfs.  */
 static int
@@ -860,6 +781,7 @@ aix_statfs (char *path, struct statfs *fsb)
    the filesystem on which PATH resides.
    Return 0 if successful, -1 if not. */
 
+/* --------------------------------------------------------------------------------------------- */
 static int
 get_fs_usage (char *path, struct fs_usage *fsp)
 {
@@ -942,3 +864,112 @@ get_fs_usage (char *path, struct fs_usage *fsp)
 }
 
 #endif /* HAVE_INFOMOUNT */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
+free_my_statfs (void)
+{
+#ifdef HAVE_INFOMOUNT_LIST
+    while (mount_list)
+    {
+        struct mount_entry *next = mount_list->me_next;
+        free_mount_entry (mount_list);
+        mount_list = next;
+    }
+    mount_list = NULL;
+#endif /* HAVE_INFOMOUNT_LIST */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+init_my_statfs (void)
+{
+#ifdef HAVE_INFOMOUNT_LIST
+    free_my_statfs ();
+    mount_list = read_filesystem_list (1, 1);
+#endif /* HAVE_INFOMOUNT_LIST */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+my_statfs (struct my_statfs *myfs_stats, const char *path)
+{
+#ifdef HAVE_INFOMOUNT_LIST
+    size_t i, len = 0;
+    struct mount_entry *entry = NULL;
+    struct mount_entry *temp = mount_list;
+    struct fs_usage fs_use;
+
+    while (temp)
+    {
+        i = strlen (temp->me_mountdir);
+        if (i > len && (strncmp (path, temp->me_mountdir, i) == 0))
+            if (!entry || (path[i] == PATH_SEP || path[i] == '\0'))
+            {
+                len = i;
+                entry = temp;
+            }
+        temp = temp->me_next;
+    }
+
+    if (entry)
+    {
+        memset (&fs_use, 0, sizeof (struct fs_usage));
+        get_fs_usage (entry->me_mountdir, &fs_use);
+
+        myfs_stats->type = entry->me_dev;
+        myfs_stats->typename = entry->me_type;
+        myfs_stats->mpoint = entry->me_mountdir;
+        myfs_stats->device = entry->me_devname;
+        myfs_stats->avail = getuid ()? fs_use.fsu_bavail / 2 : fs_use.fsu_bfree / 2;
+        myfs_stats->total = fs_use.fsu_blocks / 2;
+        myfs_stats->nfree = fs_use.fsu_ffree;
+        myfs_stats->nodes = fs_use.fsu_files;
+    }
+    else
+#endif /* HAVE_INFOMOUNT_LIST */
+
+#ifdef HAVE_INFOMOUNT_QNX
+        /*
+         ** This is the "other side" of the hack to read_filesystem_list() in
+         ** mountlist.c.
+         ** It's not the most efficient approach, but consumes less memory. It
+         ** also accomodates QNX's ability to mount filesystems on the fly.
+         */
+        struct mount_entry *entry;
+    struct fs_usage fs_use;
+
+    entry = read_filesystem_list (0, 0);
+    if (entry != NULL)
+    {
+        get_fs_usage (entry->me_mountdir, &fs_use);
+
+        myfs_stats->type = entry->me_dev;
+        myfs_stats->typename = entry->me_type;
+        myfs_stats->mpoint = entry->me_mountdir;
+        myfs_stats->device = entry->me_devname;
+
+        myfs_stats->avail = fs_use.fsu_bfree / 2;
+        myfs_stats->total = fs_use.fsu_blocks / 2;
+        myfs_stats->nfree = fs_use.fsu_ffree;
+        myfs_stats->nodes = fs_use.fsu_files;
+    }
+    else
+#endif /* HAVE_INFOMOUNT_QNX */
+    {
+        myfs_stats->type = 0;
+        myfs_stats->mpoint = "unknown";
+        myfs_stats->device = "unknown";
+        myfs_stats->avail = 0;
+        myfs_stats->total = 0;
+        myfs_stats->nfree = 0;
+        myfs_stats->nodes = 0;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */

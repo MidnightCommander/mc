@@ -56,13 +56,26 @@
 #include "treestore.h"
 #include "setup.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define TREE_SIGNATURE "Midnight Commander TreeStore v 2.0"
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
 
 static struct TreeStore ts;
 
+static hook_t *remove_entry_hooks;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static tree_entry *tree_store_add_entry (const char *name);
 
-static hook_t *remove_entry_hooks;
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_store_dirty (int state)
@@ -70,7 +83,9 @@ tree_store_dirty (int state)
     ts.dirty = state;
 }
 
-/* Returns the number of common bytes in the strings. */
+/* --------------------------------------------------------------------------------------------- */
+/** Returns the number of common bytes in the strings. */
+
 static size_t
 str_common (const char *s1, const char *s2)
 {
@@ -81,6 +96,7 @@ str_common (const char *s1, const char *s2)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* The directory names are arranged in a single linked list in the same
    order as they are displayed. When the tree is displayed the expected
    order is like this:
@@ -102,6 +118,7 @@ str_common (const char *s1, const char *s2)
    greater than zero if p1 is found to be less than, to match, or be greater 
    than p2.
  */
+
 static int
 pathcmp (const char *p1, const char *p2)
 {
@@ -120,27 +137,7 @@ pathcmp (const char *p1, const char *p2)
     return (*p1 - *p2);
 }
 
-/* Searches for specified directory */
-tree_entry *
-tree_store_whereis (const char *name)
-{
-    tree_entry *current = ts.tree_first;
-    int flag = -1;
-
-    while (current && (flag = pathcmp (current->name, name)) < 0)
-        current = current->next;
-
-    if (flag == 0)
-        return current;
-    else
-        return NULL;
-}
-
-struct TreeStore *
-tree_store_get (void)
-{
-    return &ts;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 decode (char *buffer)
@@ -179,7 +176,9 @@ decode (char *buffer)
     return res;
 }
 
-/* Loads the tree store from the specified filename */
+/* --------------------------------------------------------------------------------------------- */
+/** Loads the tree store from the specified filename */
+
 static int
 tree_store_load_from (char *name)
 {
@@ -283,23 +282,7 @@ tree_store_load_from (char *name)
     return TRUE;
 }
 
-/**
- * \fn int tree_store_load(void)
- * \brief Loads the tree from the default location
- * \return 1 if success (true), 0 otherwise (false)
- */
-int
-tree_store_load (void)
-{
-    char *name;
-    int retval;
-
-    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, NULL);
-    retval = tree_store_load_from (name);
-    g_free (name);
-
-    return retval;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 encode (const char *string)
@@ -341,7 +324,9 @@ encode (const char *string)
     return res;
 }
 
-/* Saves the tree to the specified filename */
+/* --------------------------------------------------------------------------------------------- */
+/** Saves the tree to the specified filename */
+
 static int
 tree_store_save_to (char *name)
 {
@@ -392,32 +377,7 @@ tree_store_save_to (char *name)
     return 0;
 }
 
-/**
- * \fn int tree_store_save(void)
- * \brief Saves the tree to the default file in an atomic fashion
- * \return 0 if success, errno on error
- */
-int
-tree_store_save (void)
-{
-    char *name;
-    int retval;
-
-    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, NULL);
-    mc_util_make_backup_if_possible (name, ".tmp");
-
-    retval = tree_store_save_to (name);
-    if (retval != 0)
-    {
-        mc_util_restore_from_backup_if_possible (name, ".tmp");
-        g_free (name);
-        return retval;
-    }
-
-    mc_util_unlink_backup_if_possible (name, ".tmp");
-    g_free (name);
-    return 0;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static tree_entry *
 tree_store_add_entry (const char *name)
@@ -530,17 +490,7 @@ tree_store_add_entry (const char *name)
     return new;
 }
 
-void
-tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data)
-{
-    add_hook (&remove_entry_hooks, (void (*)(void *)) callback, data);
-}
-
-void
-tree_store_remove_entry_remove_hook (tree_store_remove_fn callback)
-{
-    delete_hook (&remove_entry_hooks, (void (*)(void *)) callback);
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 tree_store_notify_remove (tree_entry * entry)
@@ -555,6 +505,8 @@ tree_store_notify_remove (tree_entry * entry)
         p = p->next;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static tree_entry *
 remove_entry (tree_entry * entry)
@@ -594,6 +546,153 @@ remove_entry (tree_entry * entry)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+process_special_dirs (GList ** special_dirs, char *file)
+{
+    gchar **buffers, **start_buff;
+    mc_config_t *cfg;
+    gsize buffers_len;
+
+    cfg = mc_config_init (file);
+    if (cfg == NULL)
+        return;
+
+    start_buff = buffers = mc_config_get_string_list (cfg, "Special dirs", "list", &buffers_len);
+    if (buffers != NULL)
+    {
+        while (*buffers != NULL)
+        {
+            *special_dirs = g_list_prepend (*special_dirs, *buffers);
+            *buffers = NULL;
+            buffers++;
+        }
+        g_strfreev (start_buff);
+    }
+    mc_config_deinit (cfg);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+should_skip_directory (const char *dir)
+{
+    static GList *special_dirs = NULL;
+    GList *l;
+    static gboolean loaded = FALSE;
+
+    if (!loaded)
+    {
+        loaded = TRUE;
+        setup_init ();
+        process_special_dirs (&special_dirs, profile_name);
+        process_special_dirs (&special_dirs, global_profile_name);
+    }
+
+    for (l = special_dirs; l != NULL; l = g_list_next (l))
+        if (strncmp (dir, l->data, strlen (l->data)) == 0)
+            return TRUE;
+
+    return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* Searches for specified directory */
+tree_entry *
+tree_store_whereis (const char *name)
+{
+    tree_entry *current = ts.tree_first;
+    int flag = -1;
+
+    while (current && (flag = pathcmp (current->name, name)) < 0)
+        current = current->next;
+
+    if (flag == 0)
+        return current;
+    else
+        return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+struct TreeStore *
+tree_store_get (void)
+{
+    return &ts;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * \fn int tree_store_load(void)
+ * \brief Loads the tree from the default location
+ * \return 1 if success (true), 0 otherwise (false)
+ */
+
+int
+tree_store_load (void)
+{
+    char *name;
+    int retval;
+
+    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, NULL);
+    retval = tree_store_load_from (name);
+    g_free (name);
+
+    return retval;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * \fn int tree_store_save(void)
+ * \brief Saves the tree to the default file in an atomic fashion
+ * \return 0 if success, errno on error
+ */
+
+int
+tree_store_save (void)
+{
+    char *name;
+    int retval;
+
+    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, NULL);
+    mc_util_make_backup_if_possible (name, ".tmp");
+
+    retval = tree_store_save_to (name);
+    if (retval != 0)
+    {
+        mc_util_restore_from_backup_if_possible (name, ".tmp");
+        g_free (name);
+        return retval;
+    }
+
+    mc_util_unlink_backup_if_possible (name, ".tmp");
+    g_free (name);
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data)
+{
+    add_hook (&remove_entry_hooks, (void (*)(void *)) callback, data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tree_store_remove_entry_remove_hook (tree_store_remove_fn callback)
+{
+    delete_hook (&remove_entry_hooks, (void (*)(void *)) callback);
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tree_store_remove_entry (const char *name)
 {
@@ -627,7 +726,9 @@ tree_store_remove_entry (const char *name)
     return;
 }
 
-/* This subdirectory exists -> clear deletion mark */
+/* --------------------------------------------------------------------------------------------- */
+/** This subdirectory exists -> clear deletion mark */
+
 void
 tree_store_mark_checked (const char *subname)
 {
@@ -678,7 +779,9 @@ tree_store_mark_checked (const char *subname)
     }
 }
 
-/* Mark the subdirectories of the current directory for delete */
+/* --------------------------------------------------------------------------------------------- */
+/** Mark the subdirectories of the current directory for delete */
+
 tree_entry *
 tree_store_start_check (const char *path)
 {
@@ -729,7 +832,9 @@ tree_store_start_check (const char *path)
     return retval;
 }
 
-/* Delete subdirectories which still have the deletion mark */
+/* --------------------------------------------------------------------------------------------- */
+/** Delete subdirectories which still have the deletion mark */
+
 void
 tree_store_end_check (void)
 {
@@ -767,52 +872,7 @@ tree_store_end_check (void)
     g_list_free (the_queue);
 }
 
-static void
-process_special_dirs (GList ** special_dirs, char *file)
-{
-    gchar **buffers, **start_buff;
-    mc_config_t *cfg;
-    gsize buffers_len;
-
-    cfg = mc_config_init (file);
-    if (cfg == NULL)
-        return;
-
-    start_buff = buffers = mc_config_get_string_list (cfg, "Special dirs", "list", &buffers_len);
-    if (buffers != NULL)
-    {
-        while (*buffers != NULL)
-        {
-            *special_dirs = g_list_prepend (*special_dirs, *buffers);
-            *buffers = NULL;
-            buffers++;
-        }
-        g_strfreev (start_buff);
-    }
-    mc_config_deinit (cfg);
-}
-
-static gboolean
-should_skip_directory (const char *dir)
-{
-    static GList *special_dirs = NULL;
-    GList *l;
-    static gboolean loaded = FALSE;
-
-    if (!loaded)
-    {
-        loaded = TRUE;
-        setup_init ();
-        process_special_dirs (&special_dirs, profile_name);
-        process_special_dirs (&special_dirs, global_profile_name);
-    }
-
-    for (l = special_dirs; l != NULL; l = g_list_next (l))
-        if (strncmp (dir, l->data, strlen (l->data)) == 0)
-            return TRUE;
-
-    return FALSE;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 tree_entry *
 tree_store_rescan (const char *dir)
@@ -863,3 +923,5 @@ tree_store_rescan (const char *dir)
 
     return entry;
 }
+
+/* --------------------------------------------------------------------------------------------- */

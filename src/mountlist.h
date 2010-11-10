@@ -19,8 +19,14 @@
  *  \brief Header: list of mounted filesystems
  */
 
-#ifndef MC_MOUNTLIST_H
-#define MC_MOUNTLIST_H
+#ifndef MC__MOUNTLIST_H
+#define MC__MOUNTLIST_H
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
 
 /* Filesystem status */
 struct my_statfs
@@ -35,8 +41,14 @@ struct my_statfs
     int nodes;
 };
 
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
+/*** inline functions ****************************************************************************/
+
 void init_my_statfs (void);
 void my_statfs (struct my_statfs *myfs_stats, const char *path);
 void free_my_statfs (void);
 
-#endif
+#endif /* MC__MOUNTLIST_H */

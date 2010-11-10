@@ -51,6 +51,10 @@
 #include "panelize.h"
 #include "history.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define UX 5
 #define UY 2
 
@@ -61,6 +65,10 @@
 #define LABELS   3
 #define B_ADD    B_USER
 #define B_REMOVE (B_USER + 1)
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
 
 static WListbox *l_panelize;
 static Dlg_head *panelize_dlg;
@@ -82,7 +90,6 @@ static struct
 };
 
 static const char *panelize_section = "Panelize";
-static void do_external_panelize (char *command);
 
 /* Directory panelize */
 static struct panelize
@@ -91,6 +98,13 @@ static struct panelize
     char *label;
     struct panelize *next;
 } *panelize = NULL;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void do_external_panelize (char *command);
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 update_command (void)
@@ -106,6 +120,8 @@ update_command (void)
         update_input (pname, 1);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
@@ -128,6 +144,8 @@ panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 init_panelize (void)
@@ -176,7 +194,7 @@ init_panelize (void)
                                 panelize_but[i].flags, panelize_but[i].text, 0));
 
     pname =
-        input_new (UY + 14, UX, input_get_default_colors(),
+        input_new (UY + 14, UX, input_get_default_colors (),
                    panelize_dlg->cols - 10, "", "in", INPUT_COMPLETE_DEFAULT);
     add_widget (panelize_dlg, pname);
 
@@ -197,12 +215,16 @@ init_panelize (void)
     listbox_select_entry (l_panelize, listbox_search_text (l_panelize, _("Other command")));
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 panelize_done (void)
 {
     destroy_dlg (panelize_dlg);
     repaint_screen ();
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 add2panelize (char *label, char *command)
@@ -235,6 +257,8 @@ add2panelize (char *label, char *command)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 add2panelize_cmd (void)
 {
@@ -255,6 +279,8 @@ add2panelize_cmd (void)
         add2panelize (label, g_strdup (pname->buffer));
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 remove_from_panelize (struct panelize *entry)
@@ -282,139 +308,7 @@ remove_from_panelize (struct panelize *entry)
     }
 }
 
-void
-external_panelize (void)
-{
-    char *target = NULL;
-
-    if (!vfs_current_is_local ())
-    {
-        message (D_ERROR, MSG_ERROR, _("Cannot run external panelize in a non-local directory"));
-        return;
-    }
-
-    init_panelize ();
-
-    /* display file info */
-    tty_setcolor (SELECTED_COLOR);
-
-    run_dlg (panelize_dlg);
-
-    switch (panelize_dlg->ret_value)
-    {
-    case B_CANCEL:
-        break;
-
-    case B_ADD:
-        add2panelize_cmd ();
-        break;
-
-    case B_REMOVE:
-        {
-            struct panelize *entry;
-
-            listbox_get_current (l_panelize, NULL, (void **) &entry);
-            remove_from_panelize (entry);
-            break;
-        }
-
-    case B_ENTER:
-        target = pname->buffer;
-        if (target != NULL && *target)
-        {
-            char *cmd = g_strdup (target);
-            destroy_dlg (panelize_dlg);
-            do_external_panelize (cmd);
-            g_free (cmd);
-            repaint_screen ();
-            return;
-        }
-        break;
-    }
-
-    panelize_done ();
-}
-
-void
-load_panelize (void)
-{
-    gchar **profile_keys, **keys;
-    gsize len;
-    GIConv conv;
-    GString *buffer;
-
-    conv = str_crt_conv_from ("UTF-8");
-
-    profile_keys = keys = mc_config_get_keys (mc_main_config, panelize_section, &len);
-
-    add2panelize (g_strdup (_("Other command")), g_strdup (""));
-
-    if (!profile_keys || *profile_keys == NULL)
-    {
-        add2panelize (g_strdup (_("Find rejects after patching")),
-                      g_strdup ("find . -name \\*.rej -print"));
-        add2panelize (g_strdup (_("Find *.orig after patching")),
-                      g_strdup ("find . -name \\*.orig -print"));
-        add2panelize (g_strdup (_("Find SUID and SGID programs")),
-                      g_strdup
-                      ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
-        return;
-    }
-
-    while (*profile_keys)
-    {
-
-        if (utf8_display || conv == INVALID_CONV)
-        {
-            buffer = g_string_new (*profile_keys);
-        }
-        else
-        {
-            buffer = g_string_new ("");
-            if (str_convert (conv, *profile_keys, buffer) == ESTR_FAILURE)
-            {
-                g_string_free (buffer, TRUE);
-                buffer = g_string_new (*profile_keys);
-            }
-        }
-
-        add2panelize (g_string_free (buffer, FALSE),
-                      mc_config_get_string (mc_main_config, panelize_section, *profile_keys, ""));
-        profile_keys++;
-    }
-    g_strfreev (keys);
-    str_close_conv (conv);
-}
-
-void
-save_panelize (void)
-{
-    struct panelize *current = panelize;
-
-    mc_config_del_group (mc_main_config, panelize_section);
-    for (; current; current = current->next)
-    {
-        if (strcmp (current->label, _("Other command")))
-            mc_config_set_string (mc_main_config,
-                                  panelize_section, current->label, current->command);
-    }
-    mc_config_save_file (mc_main_config, NULL);
-}
-
-void
-done_panelize (void)
-{
-    struct panelize *current = panelize;
-    struct panelize *next;
-
-    for (; current; current = next)
-    {
-        next = current->next;
-        g_free (current->label);
-        g_free (current->command);
-        g_free (current);
-    }
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 do_external_panelize (char *command)
@@ -495,3 +389,149 @@ do_external_panelize (char *command)
     try_to_select (current_panel, NULL);
     panel_re_sort (current_panel);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
+external_panelize (void)
+{
+    char *target = NULL;
+
+    if (!vfs_current_is_local ())
+    {
+        message (D_ERROR, MSG_ERROR, _("Cannot run external panelize in a non-local directory"));
+        return;
+    }
+
+    init_panelize ();
+
+    /* display file info */
+    tty_setcolor (SELECTED_COLOR);
+
+    run_dlg (panelize_dlg);
+
+    switch (panelize_dlg->ret_value)
+    {
+    case B_CANCEL:
+        break;
+
+    case B_ADD:
+        add2panelize_cmd ();
+        break;
+
+    case B_REMOVE:
+        {
+            struct panelize *entry;
+
+            listbox_get_current (l_panelize, NULL, (void **) &entry);
+            remove_from_panelize (entry);
+            break;
+        }
+
+    case B_ENTER:
+        target = pname->buffer;
+        if (target != NULL && *target)
+        {
+            char *cmd = g_strdup (target);
+            destroy_dlg (panelize_dlg);
+            do_external_panelize (cmd);
+            g_free (cmd);
+            repaint_screen ();
+            return;
+        }
+        break;
+    }
+
+    panelize_done ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+load_panelize (void)
+{
+    gchar **profile_keys, **keys;
+    gsize len;
+    GIConv conv;
+    GString *buffer;
+
+    conv = str_crt_conv_from ("UTF-8");
+
+    profile_keys = keys = mc_config_get_keys (mc_main_config, panelize_section, &len);
+
+    add2panelize (g_strdup (_("Other command")), g_strdup (""));
+
+    if (!profile_keys || *profile_keys == NULL)
+    {
+        add2panelize (g_strdup (_("Find rejects after patching")),
+                      g_strdup ("find . -name \\*.rej -print"));
+        add2panelize (g_strdup (_("Find *.orig after patching")),
+                      g_strdup ("find . -name \\*.orig -print"));
+        add2panelize (g_strdup (_("Find SUID and SGID programs")),
+                      g_strdup
+                      ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
+        return;
+    }
+
+    while (*profile_keys)
+    {
+
+        if (utf8_display || conv == INVALID_CONV)
+        {
+            buffer = g_string_new (*profile_keys);
+        }
+        else
+        {
+            buffer = g_string_new ("");
+            if (str_convert (conv, *profile_keys, buffer) == ESTR_FAILURE)
+            {
+                g_string_free (buffer, TRUE);
+                buffer = g_string_new (*profile_keys);
+            }
+        }
+
+        add2panelize (g_string_free (buffer, FALSE),
+                      mc_config_get_string (mc_main_config, panelize_section, *profile_keys, ""));
+        profile_keys++;
+    }
+    g_strfreev (keys);
+    str_close_conv (conv);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+save_panelize (void)
+{
+    struct panelize *current = panelize;
+
+    mc_config_del_group (mc_main_config, panelize_section);
+    for (; current; current = current->next)
+    {
+        if (strcmp (current->label, _("Other command")))
+            mc_config_set_string (mc_main_config,
+                                  panelize_section, current->label, current->command);
+    }
+    mc_config_save_file (mc_main_config, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+done_panelize (void)
+{
+    struct panelize *current = panelize;
+    struct panelize *next;
+
+    for (; current; current = next)
+    {
+        next = current->next;
+        g_free (current->label);
+        g_free (current->command);
+        g_free (current);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */

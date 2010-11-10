@@ -19,4 +19,4 @@ gboolean copy_file_to_ext_clip (void);
 gboolean paste_to_file_from_ext_clip (void);
 
 /*** inline functions ****************************************************************************/
-#endif
+#endif /* MC__CLIPBOARD_H */

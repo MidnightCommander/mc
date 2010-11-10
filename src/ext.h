@@ -1,10 +1,18 @@
-
 /** \file  ext.h
  *  \brief Header: extension dependent execution
  */
 
-#ifndef MC_EXT_H
-#define MC_EXT_H
+#ifndef MC__EXT_H
+#define MC__EXT_H
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
 
 int regex_command (const char *filename, const char *action, int *move_dir);
 
@@ -13,4 +21,5 @@ int regex_command (const char *filename, const char *action, int *move_dir);
  */
 void flush_extension_file (void);
 
-#endif
+/*** inline functions ****************************************************************************/
+#endif /* MC__EXT_H */

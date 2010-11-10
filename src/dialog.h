@@ -3,7 +3,7 @@
    2005, 2007, 2009, 2010 Free Software Foundation
 
    Authors: 1994, 1995 Radek Doulik, Miguel de Icaza
-            2009, 2010 Andrew Borodin
+   2009, 2010 Andrew Borodin
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,14 +24,16 @@
  *  \brief Header: dialog box features module
  */
 
-#ifndef MC_DIALOG_H
-#define MC_DIALOG_H
+#ifndef MC__DIALOG_H
+#define MC__DIALOG_H
 
 #include <sys/types.h>          /* size_t */
 
 #include "lib/global.h"
 #include "lib/tty/mouse.h"
 #include "lib/hook.h"           /* hook_t */
+
+/*** defined constants ***************************************************************************/
 
 /* Common return values */
 #define B_EXIT          0
@@ -40,7 +42,19 @@
 #define B_HELP          3
 #define B_USER          100
 
-typedef struct Widget Widget;
+#define widget_move(w, _y, _x) tty_gotoyx (((Widget *)(w))->y + _y, ((Widget *)(w))->x + _x)
+#define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + _y, ((Dlg_head *)(h))->x + _x)
+
+/* Sets/clear the specified flag in the options field */
+#define widget_option(w,f,i) \
+    w.options = ((i) ? ((w).options | (f)) : ((w).options & (~(f))))
+
+#define widget_want_cursor(w,i) widget_option((w), W_WANT_CURSOR, (i))
+#define widget_want_hotkey(w,i) widget_option((w), W_WANT_HOTKEY, (i))
+#define widget_disable(w,i) widget_option((w), W_DISABLED, (i))
+
+
+/*** enums ***************************************************************************************/
 
 /* Widget messages */
 typedef enum
@@ -111,23 +125,9 @@ typedef enum
     DLG_CLOSED = 2              /* Dialog is closed */
 } dlg_state_t;
 
-/* Dialog callback */
-typedef struct Dlg_head Dlg_head;
-typedef cb_ret_t (*dlg_cb_fn) (Dlg_head * h, Widget * sender,
-                               dlg_msg_t msg, int parm, void *data);
-
-/* menu command execution */
-typedef cb_ret_t (*menu_exec_fn) (int command);
-
-/* get string representation of shortcut assigned  with command */
-/* as menu is a widget of dialog, ask dialog about shortcut string */
-typedef char *(*dlg_shortcut_str) (unsigned long command);
-
-/* get dialog name to show in dialog list */
-typedef char *(*dlg_title_str) (const Dlg_head * h, size_t len);
-
 /* Dialog color constants */
-typedef enum {
+typedef enum
+{
     DLG_COLOR_NORMAL,
     DLG_COLOR_FOCUS,
     DLG_COLOR_HOT_NORMAL,
@@ -136,7 +136,53 @@ typedef enum {
     DLG_COLOR_COUNT
 } dlg_colors_enum_t;
 
+/* widget options */
+typedef enum
+{
+    W_WANT_HOTKEY = (1 << 1),
+    W_WANT_CURSOR = (1 << 2),
+    W_WANT_IDLE = (1 << 3),
+    W_IS_INPUT = (1 << 4),
+    W_DISABLED = (1 << 5)       /* Widget cannot be selected */
+} widget_options_t;
+
+/* Flags for widget repositioning on dialog resize */
+typedef enum
+{
+    WPOS_KEEP_LEFT = (1 << 0),  /* keep widget distance to left border of dialog */
+    WPOS_KEEP_RIGHT = (1 << 1), /* keep widget distance to right border of dialog */
+    WPOS_KEEP_TOP = (1 << 2),   /* keep widget distance to top border of dialog */
+    WPOS_KEEP_BOTTOM = (1 << 3),        /* keep widget distance to bottom border of dialog */
+    WPOS_KEEP_HORZ = WPOS_KEEP_LEFT | WPOS_KEEP_RIGHT,
+    WPOS_KEEP_VERT = WPOS_KEEP_TOP | WPOS_KEEP_BOTTOM,
+    WPOS_KEEP_ALL = WPOS_KEEP_HORZ | WPOS_KEEP_VERT
+} widget_pos_flags_t;
+
+/*** typedefs(not structures) ********************************************************************/
+
+typedef struct Widget Widget;
+
+/* Dialog callback */
+typedef struct Dlg_head Dlg_head;
+
+/* get string representation of shortcut assigned  with command */
+/* as menu is a widget of dialog, ask dialog about shortcut string */
+typedef char *(*dlg_shortcut_str) (unsigned long command);
+
+/* get dialog name to show in dialog list */
+typedef char *(*dlg_title_str) (const Dlg_head * h, size_t len);
+
 typedef int dlg_colors_t[DLG_COLOR_COUNT];
+
+/* Widget callback */
+typedef cb_ret_t (*callback_fn) (Widget * widget, widget_msg_t msg, int parm);
+
+typedef cb_ret_t (*dlg_cb_fn) (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
+
+/* menu command execution */
+typedef cb_ret_t (*menu_exec_fn) (int command);
+
+/*** structures declarations (and typedefs of structures)*****************************************/
 
 struct Dlg_head
 {
@@ -144,7 +190,7 @@ struct Dlg_head
     gboolean modal;             /* type of dialog: modal or not */
     dlg_flags_t flags;          /* User flags */
     const char *help_ctx;       /* Name of the help entry */
-    dlg_colors_t color;        /* Color set. Unused in viewer and editor */
+    dlg_colors_t color;         /* Color set. Unused in viewer and editor */
     char *title;                /* Title of the dialog */
 
     /* Set and received by the user */
@@ -172,35 +218,6 @@ struct Dlg_head
     struct Dlg_head *parent;    /* Parent dialog */
 };
 
-/* Color styles for normal and error dialogs */
-extern dlg_colors_t dialog_colors;
-extern dlg_colors_t alarm_colors;
-
-/* Widget callback */
-typedef cb_ret_t (*callback_fn) (Widget * widget, widget_msg_t msg, int parm);
-
-/* widget options */
-typedef enum
-{
-    W_WANT_HOTKEY = (1 << 1),
-    W_WANT_CURSOR = (1 << 2),
-    W_WANT_IDLE = (1 << 3),
-    W_IS_INPUT = (1 << 4),
-    W_DISABLED = (1 << 5)       /* Widget cannot be selected */
-} widget_options_t;
-
-/* Flags for widget repositioning on dialog resize */
-typedef enum
-{
-    WPOS_KEEP_LEFT = (1 << 0),  /* keep widget distance to left border of dialog */
-    WPOS_KEEP_RIGHT = (1 << 1), /* keep widget distance to right border of dialog */
-    WPOS_KEEP_TOP = (1 << 2),   /* keep widget distance to top border of dialog */
-    WPOS_KEEP_BOTTOM = (1 << 3),        /* keep widget distance to bottom border of dialog */
-    WPOS_KEEP_HORZ = WPOS_KEEP_LEFT | WPOS_KEEP_RIGHT,
-    WPOS_KEEP_VERT = WPOS_KEEP_TOP | WPOS_KEEP_BOTTOM,
-    WPOS_KEEP_ALL = WPOS_KEEP_HORZ | WPOS_KEEP_VERT
-} widget_pos_flags_t;
-
 /* Every Widget must have this as its first element */
 struct Widget
 {
@@ -208,11 +225,24 @@ struct Widget
     int cols, lines;
     widget_options_t options;
     widget_pos_flags_t pos_flags;       /* repositioning flags */
-    unsigned int id;                    /* Number of the widget, starting with 0 */
+    unsigned int id;            /* Number of the widget, starting with 0 */
     callback_fn callback;
     mouse_h mouse;
     struct Dlg_head *owner;
 };
+
+/*** global variables defined in .c file *********************************************************/
+
+/* Color styles for normal and error dialogs */
+extern dlg_colors_t dialog_colors;
+extern dlg_colors_t alarm_colors;
+
+extern GList *top_dlg;
+
+/* A hook list for idle events */
+extern hook_t *idle_hook;
+
+/*** declarations of public functions ************************************************************/
 
 /* draw box in window */
 void draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single);
@@ -240,7 +270,7 @@ void destroy_dlg (Dlg_head * h);
 void dlg_run_done (Dlg_head * h);
 void dlg_process_event (Dlg_head * h, int key, Gpm_Event * event);
 
-char *dlg_get_title (const Dlg_head *h, size_t len);
+char *dlg_get_title (const Dlg_head * h, size_t len);
 
 /* To activate/deactivate the idle message generation */
 void set_idle_proc (Dlg_head * d, int enable);
@@ -258,15 +288,30 @@ void init_widget (Widget * w, int y, int x, int lines, int cols,
 cb_ret_t default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
 /* Default paint routine for dialogs */
-void common_dialog_repaint (Dlg_head *h);
+void common_dialog_repaint (Dlg_head * h);
 
-#define widget_move(w, _y, _x) tty_gotoyx (((Widget *)(w))->y + _y, ((Widget *)(w))->x + _x)
-#define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + _y, ((Dlg_head *)(h))->x + _x)
+void dlg_replace_widget (Widget * old, Widget * new);
+int dlg_overlap (Widget * a, Widget * b);
+void widget_erase (Widget *);
+void dlg_erase (Dlg_head * h);
+void dlg_stop (Dlg_head * h);
 
-extern GList *top_dlg;
+/* Widget selection */
+void dlg_select_widget (void *widget);
+void dlg_one_up (Dlg_head * h);
+void dlg_one_down (Dlg_head * h);
+int dlg_focus (Dlg_head * h);
+Widget *find_widget_type (const Dlg_head * h, callback_fn callback);
+Widget *dlg_find_by_id (const Dlg_head * h, unsigned int id);
+void dlg_select_by_id (const Dlg_head * h, unsigned int id);
 
-/* A hook list for idle events */
-extern hook_t *idle_hook;
+/* Redraw all dialogs */
+void do_refresh (void);
+
+/* Used in load_prompt() */
+void update_cursor (Dlg_head * h);
+
+/*** inline functions ****************************************************************************/
 
 static inline cb_ret_t
 send_message (Widget * w, widget_msg_t msg, int parm)
@@ -288,33 +333,4 @@ dlg_get_current_widget_id (const Dlg_head * h)
     return ((Widget *) h->current->data)->id;
 }
 
-void dlg_replace_widget (Widget * old, Widget * new);
-int dlg_overlap (Widget * a, Widget * b);
-void widget_erase (Widget *);
-void dlg_erase (Dlg_head * h);
-void dlg_stop (Dlg_head * h);
-
-/* Widget selection */
-void dlg_select_widget (void *widget);
-void dlg_one_up (Dlg_head * h);
-void dlg_one_down (Dlg_head * h);
-int dlg_focus (Dlg_head * h);
-Widget *find_widget_type (const Dlg_head * h, callback_fn callback);
-Widget *dlg_find_by_id (const Dlg_head * h, unsigned int id);
-void dlg_select_by_id (const Dlg_head * h, unsigned int id);
-
-/* Redraw all dialogs */
-void do_refresh (void);
-
-/* Sets/clear the specified flag in the options field */
-#define widget_option(w,f,i) \
-    w.options = ((i) ? ((w).options | (f)) : ((w).options & (~(f))))
-
-#define widget_want_cursor(w,i) widget_option((w), W_WANT_CURSOR, (i))
-#define widget_want_hotkey(w,i) widget_option((w), W_WANT_HOTKEY, (i))
-#define widget_disable(w,i) widget_option((w), W_DISABLED, (i))
-
-/* Used in load_prompt() */
-void update_cursor (Dlg_head * h);
-
-#endif /* MC_DIALOG_H */
+#endif /* MC__DIALOG_H */

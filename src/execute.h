@@ -1,15 +1,24 @@
-
 /** \file  execute.h
  *  \brief Header: execution routines
  */
 
-#ifndef MC_EXECUTE_H
-#define MC_EXECUTE_H
+#ifndef MC__EXECUTE_H
+#define MC__EXECUTE_H
+
+/*** typedefs(not structures) and defined constants **********************************************/
 
 /* flags for shell_execute */
 #define EXECUTE_INTERNAL (1 << 0)
 #define EXECUTE_AS_SHELL (1 << 2)
 #define EXECUTE_HIDE     (1 << 3)
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
 
 /* Execute functions that use the shell to execute */
 void shell_execute (const char *command, int flags);
@@ -29,4 +38,5 @@ void execute_with_vfs_arg (const char *command, const char *filename);
 void post_exec (void);
 void pre_exec (void);
 
-#endif /* MC_EXECUTE_H */
+/*** inline functions ****************************************************************************/
+#endif /* MC__EXECUTE_H */

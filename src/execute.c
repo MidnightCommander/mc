@@ -41,6 +41,16 @@
 #include "execute.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 edition_post_exec (void)
@@ -59,6 +69,7 @@ edition_post_exec (void)
         application_keypad_mode ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 edition_pre_exec (void)
@@ -89,23 +100,7 @@ edition_pre_exec (void)
     do_exit_ca_mode ();
 }
 
-
-/* Set up the terminal before executing a program */
-void
-pre_exec (void)
-{
-    use_dash (FALSE);
-    edition_pre_exec ();
-}
-
-/* Hide the terminal after executing a program */
-void
-post_exec (void)
-{
-    edition_post_exec ();
-    use_dash (TRUE);
-}
-
+/* --------------------------------------------------------------------------------------------- */
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 static void
@@ -119,6 +114,8 @@ do_possible_cd (const char *new_dir)
                    "extra access permissions with the \"su\" command?"));
 }
 #endif /* HAVE_SUBSHELL_SUPPORT */
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 do_execute (const char *lc_shell, const char *command, int flags)
@@ -208,8 +205,63 @@ do_execute (const char *lc_shell, const char *command, int flags)
     use_dash (TRUE);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
+static void
+do_suspend_cmd (void)
+{
+    pre_exec ();
+
+    if (console_flag && !use_subshell)
+        handle_console (CONSOLE_RESTORE);
+
+#ifdef SIGTSTP
+    {
+        struct sigaction sigtstp_action;
+
+        /* Make sure that the SIGTSTP below will suspend us directly,
+           without calling ncurses' SIGTSTP handler; we *don't* want
+           ncurses to redraw the screen immediately after the SIGCONT */
+        sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
+
+        kill (getpid (), SIGTSTP);
+
+        /* Restore previous SIGTSTP action */
+        sigaction (SIGTSTP, &sigtstp_action, NULL);
+    }
+#endif /* SIGTSTP */
+
+    if (console_flag && !use_subshell)
+        handle_console (CONSOLE_SAVE);
+
+    edition_post_exec ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/** Set up the terminal before executing a program */
+
+void
+pre_exec (void)
+{
+    use_dash (FALSE);
+    edition_pre_exec ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Hide the terminal after executing a program */
+void
+post_exec (void)
+{
+    edition_post_exec ();
+    use_dash (TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /* Executes a command */
+
 void
 shell_execute (const char *command, int flags)
 {
@@ -234,6 +286,7 @@ shell_execute (const char *command, int flags)
     g_free (cmd);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 void
 exec_shell (void)
@@ -241,6 +294,7 @@ exec_shell (void)
     do_execute (shell, 0, 0);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 void
 toggle_panels (void)
@@ -340,37 +394,7 @@ toggle_panels (void)
     repaint_screen ();
 }
 
-
-static void
-do_suspend_cmd (void)
-{
-    pre_exec ();
-
-    if (console_flag && !use_subshell)
-        handle_console (CONSOLE_RESTORE);
-
-#ifdef SIGTSTP
-    {
-        struct sigaction sigtstp_action;
-
-        /* Make sure that the SIGTSTP below will suspend us directly,
-           without calling ncurses' SIGTSTP handler; we *don't* want
-           ncurses to redraw the screen immediately after the SIGCONT */
-        sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
-
-        kill (getpid (), SIGTSTP);
-
-        /* Restore previous SIGTSTP action */
-        sigaction (SIGTSTP, &sigtstp_action, NULL);
-    }
-#endif /* SIGTSTP */
-
-    if (console_flag && !use_subshell)
-        handle_console (CONSOLE_SAVE);
-
-    edition_post_exec ();
-}
-
+/* --------------------------------------------------------------------------------------------- */
 
 void
 suspend_cmd (void)
@@ -383,11 +407,12 @@ suspend_cmd (void)
     do_refresh ();
 }
 
-
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Execute command on a filename that can be on VFS.
  * Errors are reported to the user.
  */
+
 void
 execute_with_vfs_arg (const char *command, const char *filename)
 {
@@ -430,3 +455,5 @@ execute_with_vfs_arg (const char *command, const char *filename)
     g_free (localcopy);
     g_free (fn);
 }
+
+/* --------------------------------------------------------------------------------------------- */

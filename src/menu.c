@@ -41,34 +41,20 @@
 #include "main.h"               /* is_right */
 #include "menu.h"
 
+/*** global variables ****************************************************************************/
+
 int menubar_visible = 1;        /* This is the new default */
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
 
 static cb_ret_t menubar_callback (Widget * w, widget_msg_t msg, int parm);
 
-menu_entry_t *
-menu_entry_create (const char *name, unsigned long command)
-{
-    menu_entry_t *entry;
-
-    entry = g_new (menu_entry_t, 1);
-    entry->first_letter = ' ';
-    entry->text = parse_hotkey (name);
-    entry->command = command;
-    entry->shortcut = NULL;
-
-    return entry;
-}
-
-void
-menu_entry_free (menu_entry_t * entry)
-{
-    if (entry != NULL)
-    {
-        release_hotkey (entry->text);
-        g_free (entry->shortcut);
-        g_free (entry);
-    }
-}
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menu_arrange (Menu * menu, dlg_shortcut_str get_shortcut)
@@ -107,32 +93,7 @@ menu_arrange (Menu * menu, dlg_shortcut_str get_shortcut)
     }
 }
 
-Menu *
-create_menu (const char *name, GList * entries, const char *help_node)
-{
-    Menu *menu;
-
-    menu = g_new (Menu, 1);
-    menu->start_x = 0;
-    menu->text = parse_hotkey (name);
-    menu->entries = entries;
-    menu->max_entry_len = 1;
-    menu->max_hotkey_len = 0;
-    menu->selected = 0;
-    menu->help_node = g_strdup (help_node);
-
-    return menu;
-}
-
-void
-destroy_menu (Menu * menu)
-{
-    release_hotkey (menu->text);
-    g_list_foreach (menu->entries, (GFunc) menu_entry_free, NULL);
-    g_list_free (menu->entries);
-    g_free (menu->help_node);
-    g_free (menu);
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
@@ -189,6 +150,8 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 menubar_draw_drop (WMenuBar * menubar)
 {
@@ -210,6 +173,8 @@ menubar_draw_drop (WMenuBar * menubar)
                            i == menu->selected ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
 {
@@ -220,6 +185,8 @@ menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
     else
         tty_setcolor (hotkey ? MENU_HOT_COLOR : MENU_ENTRY_COLOR);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menubar_draw (WMenuBar * menubar)
@@ -262,6 +229,8 @@ menubar_draw (WMenuBar * menubar)
                      ((Menu *) g_list_nth_data (menubar->menu, menubar->selected))->start_x);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 menubar_remove (WMenuBar * menubar)
 {
@@ -272,6 +241,8 @@ menubar_remove (WMenuBar * menubar)
         menubar->is_dropped = TRUE;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menubar_left (WMenuBar * menubar)
@@ -284,6 +255,8 @@ menubar_left (WMenuBar * menubar)
     menubar_draw (menubar);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 menubar_right (WMenuBar * menubar)
 {
@@ -291,6 +264,8 @@ menubar_right (WMenuBar * menubar)
     menubar->selected = (menubar->selected + 1) % g_list_length (menubar->menu);
     menubar_draw (menubar);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menubar_finish (WMenuBar * menubar)
@@ -304,6 +279,8 @@ menubar_finish (WMenuBar * menubar)
     do_refresh ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 menubar_drop (WMenuBar * menubar, unsigned int selected)
 {
@@ -311,6 +288,8 @@ menubar_drop (WMenuBar * menubar, unsigned int selected)
     menubar->selected = selected;
     menubar_draw (menubar);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menubar_execute (WMenuBar * menubar)
@@ -327,6 +306,8 @@ menubar_execute (WMenuBar * menubar)
         do_refresh ();
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menubar_down (WMenuBar * menubar)
@@ -346,6 +327,8 @@ menubar_down (WMenuBar * menubar)
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menubar_up (WMenuBar * menubar)
@@ -368,6 +351,8 @@ menubar_up (WMenuBar * menubar)
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 menubar_first (WMenuBar * menubar)
@@ -395,6 +380,8 @@ menubar_first (WMenuBar * menubar)
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 menubar_last (WMenuBar * menubar)
 {
@@ -418,6 +405,8 @@ menubar_last (WMenuBar * menubar)
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 menubar_handle_key (WMenuBar * menubar, int key)
@@ -530,6 +519,8 @@ menubar_handle_key (WMenuBar * menubar, int key)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 menubar_callback (Widget * w, widget_msg_t msg, int parm)
 {
@@ -589,6 +580,8 @@ menubar_callback (Widget * w, widget_msg_t msg, int parm)
         return default_proc (msg, parm);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 menubar_event (Gpm_Event * event, void *data)
@@ -714,6 +707,70 @@ menubar_event (Gpm_Event * event, void *data)
     return MOU_NORMAL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+menu_entry_t *
+menu_entry_create (const char *name, unsigned long command)
+{
+    menu_entry_t *entry;
+
+    entry = g_new (menu_entry_t, 1);
+    entry->first_letter = ' ';
+    entry->text = parse_hotkey (name);
+    entry->command = command;
+    entry->shortcut = NULL;
+
+    return entry;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+menu_entry_free (menu_entry_t * entry)
+{
+    if (entry != NULL)
+    {
+        release_hotkey (entry->text);
+        g_free (entry->shortcut);
+        g_free (entry);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+Menu *
+create_menu (const char *name, GList * entries, const char *help_node)
+{
+    Menu *menu;
+
+    menu = g_new (Menu, 1);
+    menu->start_x = 0;
+    menu->text = parse_hotkey (name);
+    menu->entries = entries;
+    menu->max_entry_len = 1;
+    menu->max_hotkey_len = 0;
+    menu->selected = 0;
+    menu->help_node = g_strdup (help_node);
+
+    return menu;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+destroy_menu (Menu * menu)
+{
+    release_hotkey (menu->text);
+    g_list_foreach (menu->entries, (GFunc) menu_entry_free, NULL);
+    g_list_free (menu->entries);
+    g_free (menu->help_node);
+    g_free (menu);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 WMenuBar *
 menubar_new (int y, int x, int cols, GList * menu)
 {
@@ -724,6 +781,8 @@ menubar_new (int y, int x, int cols, GList * menu)
     menubar_set_menu (menubar, menu);
     return menubar;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 menubar_set_menu (WMenuBar * menubar, GList * menu)
@@ -742,6 +801,8 @@ menubar_set_menu (WMenuBar * menubar, GList * menu)
     menubar_arrange (menubar);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 menubar_add_menu (WMenuBar * menubar, Menu * menu)
 {
@@ -754,10 +815,12 @@ menubar_add_menu (WMenuBar * menubar, Menu * menu)
     menubar_arrange (menubar);
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Properly space menubar items. Should be called when menubar is created
  * and also when widget width is changed (i.e. upon xterm resize).
  */
+
 void
 menubar_arrange (WMenuBar * menubar)
 {
@@ -811,9 +874,13 @@ menubar_arrange (WMenuBar * menubar)
 #endif /* RESIZABLE_MENUBAR */
 }
 
-/* Find MenuBar widget in the dialog */
+/* --------------------------------------------------------------------------------------------- */
+/** Find MenuBar widget in the dialog */
+
 WMenuBar *
 find_menubar (const Dlg_head * h)
 {
     return (WMenuBar *) find_widget_type (h, menubar_callback);
 }
+
+/* --------------------------------------------------------------------------------------------- */

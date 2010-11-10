@@ -81,11 +81,7 @@
 
 /* }}} */
 
-/* Hack: the vfs code should not rely on this */
-#define WITH_FULL_PATHS 1
-
-#define FILEOP_UPDATE_INTERVAL 2
-#define FILEOP_STALLING_INTERVAL 4
+/*** global variables ****************************************************************************/
 
 int verbose = 1;
 
@@ -95,6 +91,23 @@ int verbose = 1;
  * at the expense of some speed
  */
 int file_op_compute_totals = 1;
+
+/* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix  */
+const char *op_names[3] = {
+    N_("DialogTitle|Copy"),
+    N_("DialogTitle|Move"),
+    N_("DialogTitle|Delete")
+};
+
+/*** file scope macro definitions ****************************************************************/
+
+/* Hack: the vfs code should not rely on this */
+#define WITH_FULL_PATHS 1
+
+#define FILEOP_UPDATE_INTERVAL 2
+#define FILEOP_STALLING_INTERVAL 4
+
+/*** file scope type declarations ****************************************************************/
 
 /* This is a hard link cache */
 struct link
@@ -107,6 +120,58 @@ struct link
     mode_t st_mode;
     char name[1];
 };
+
+/* Status of the destination file */
+typedef enum
+{
+    DEST_NONE = 0,              /* Not created */
+    DEST_SHORT = 1,             /* Created, not fully copied */
+    DEST_FULL = 2               /* Created, fully copied */
+} dest_status_t;
+
+/*
+ * This array introduced to avoid translation problems. The former (op_names)
+ * is assumed to be nouns, suitable in dialog box titles; this one should
+ * contain whatever is used in prompt itself (i.e. in russian, it's verb).
+ * (I don't use spaces around the words, because someday they could be
+ * dropped, when widgets get smarter)
+ */
+
+/* TRANSLATORS: no need to translate 'FileOperation', it's just a context prefix  */
+static const char *op_names1[] = {
+    N_("FileOperation|Copy"),
+    N_("FileOperation|Move"),
+    N_("FileOperation|Delete")
+};
+
+/*
+ * These are formats for building a prompt. Parts encoded as follows:
+ * %o - operation from op_names1
+ * %f - file/files or files/directories, as appropriate
+ * %m - "with source mask" or question mark for delete
+ * %s - source name (truncated)
+ * %d - number of marked files
+ * %e - "to:" or question mark for delete
+ *
+ * xgettext:no-c-format */
+static const char *one_format = N_("%o %f \"%s\"%m");
+/* xgettext:no-c-format */
+static const char *many_format = N_("%o %d %f%m");
+
+static const char *prompt_parts[] = {
+    N_("file"),
+    N_("files"),
+    N_("directory"),
+    N_("directories"),
+    N_("files/directories"),
+    /* TRANSLATORS: keep leading space here to split words in Copy/Move dialog */
+    N_(" with source mask:"),
+    N_("to:")
+};
+
+static const char *question_format = N_("%s?");
+
+/*** file scope variables ************************************************************************/
 
 /* the hard link cache */
 static struct link *linklist = NULL;
@@ -126,14 +191,10 @@ static struct link *erase_list;
  */
 static struct link *dest_dirs = NULL;
 
-/* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix  */
-const char *op_names[3] = {
-    N_("DialogTitle|Copy"),
-    N_("DialogTitle|Move"),
-    N_("DialogTitle|Delete")
-};
+static FileProgressStatus transform_error = FILE_CONT;
 
-/* }}} */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus query_replace (FileOpContext * ctx, const char *destname,
                                          struct stat *_s_stat, struct stat *_d_stat);
@@ -144,7 +205,7 @@ static FileProgressStatus erase_file (FileOpTotalContext * tctx, FileOpContext *
                                       const char *s, gboolean is_toplevel_file);
 static FileProgressStatus files_error (const char *format, const char *file1, const char *file2);
 
-static FileProgressStatus transform_error = FILE_CONT;
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 transform_source (FileOpContext * ctx, const char *source)
@@ -174,6 +235,8 @@ transform_source (FileOpContext * ctx, const char *source)
     return q;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 free_linklist (struct link **lc_linklist)
 {
@@ -186,6 +249,8 @@ free_linklist (struct link **lc_linklist)
     }
     *lc_linklist = NULL;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 is_in_linklist (struct link *lp, const char *path, struct stat *sb)
@@ -204,10 +269,12 @@ is_in_linklist (struct link *lp, const char *path, struct stat *sb)
     return 0;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Returns 0 if the inode wasn't found in the cache and 1 if it was found
  * and a hardlink was succesfully made
  */
+
 static int
 check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 {
@@ -258,13 +325,15 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
     return 0;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Duplicate the contents of the symbolic link src_path in dst_path.
  * Try to make a stable symlink if the option "stable symlink" was
  * set in the file mask dialog.
  * If dst_path is an existing symlink it will be deleted silently
  * (upper levels take already care of existing files at dst_path).
  */
+
 static FileProgressStatus
 make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
 {
@@ -350,6 +419,8 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
     return return_status;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static FileProgressStatus
 progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add,
                      gboolean is_toplevel_file)
@@ -377,13 +448,7 @@ progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add,
     return check_progress_buttons (ctx);
 }
 
-/* Status of the destination file */
-typedef enum
-{
-    DEST_NONE = 0,              /* Not created */
-    DEST_SHORT = 1,             /* Created, not fully copied */
-    DEST_FULL = 2               /* Created, fully copied */
-} dest_status_t;
+/* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
 real_warn_same_file (enum OperationMode mode, const char *fmt, const char *a, const char *b)
@@ -401,6 +466,8 @@ real_warn_same_file (enum OperationMode mode, const char *fmt, const char *a, co
 
     return (result == 1) ? FILE_ABORT : FILE_SKIP;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #ifdef WITH_BACKGROUND
 static FileProgressStatus
@@ -426,6 +493,8 @@ warn_same_file (const char *fmt, const char *a, const char *b)
     return real_warn_same_file (Foreground, fmt, a, b);
 }
 #endif
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
@@ -477,6 +546,710 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
 #endif
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+
+/* {{{ Move routines */
+static FileProgressStatus
+move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *d)
+{
+    struct stat src_stats, dst_stats;
+    FileProgressStatus return_status = FILE_CONT;
+    gboolean copy_done = FALSE;
+    gboolean old_ask_overwrite;
+
+    file_progress_show_source (ctx, s);
+    file_progress_show_target (ctx, d);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
+        return FILE_ABORT;
+
+    mc_refresh ();
+
+    while (mc_lstat (s, &src_stats) != 0)
+    {
+        /* Source doesn't exist */
+        return_status = file_error (_("Cannot stat file \"%s\"\n%s"), s);
+        if (return_status != FILE_RETRY)
+            return return_status;
+    }
+
+    if (mc_lstat (d, &dst_stats) == 0)
+    {
+        if (src_stats.st_dev == dst_stats.st_dev && src_stats.st_ino == dst_stats.st_ino)
+            return warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same file"), s, d);
+
+        if (S_ISDIR (dst_stats.st_mode))
+        {
+            message (D_ERROR, MSG_ERROR, _("Cannot overwrite directory \"%s\""), d);
+            do_refresh ();
+            return FILE_SKIP;
+        }
+
+        if (confirm_overwrite)
+        {
+            return_status = query_replace (ctx, d, &src_stats, &dst_stats);
+            if (return_status != FILE_CONT)
+                return return_status;
+        }
+        /* Ok to overwrite */
+    }
+
+    if (!ctx->do_append)
+    {
+        if (S_ISLNK (src_stats.st_mode) && ctx->stable_symlinks)
+        {
+            return_status = make_symlink (ctx, s, d);
+            if (return_status == FILE_CONT)
+                goto retry_src_remove;
+            else
+                return return_status;
+        }
+
+        if (mc_rename (s, d) == 0)
+            return progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
+    }
+#if 0
+    /* Comparison to EXDEV seems not to work in nfs if you're moving from
+       one nfs to the same, but on the server it is on two different
+       filesystems. Then nfs returns EIO instead of EXDEV.
+       Hope it will not hurt if we always in case of error try to copy/delete. */
+    else
+        errno = EXDEV;          /* Hack to copy (append) the file and then delete it */
+
+    if (errno != EXDEV)
+    {
+        return_status = files_error (_("Cannot move file \"%s\" to \"%s\"\n%s"), s, d);
+        if (return_status == FILE_RETRY)
+            goto retry_rename;
+        return return_status;
+    }
+#endif
+
+    /* Failed because filesystem boundary -> copy the file instead */
+    old_ask_overwrite = tctx->ask_overwrite;
+    tctx->ask_overwrite = FALSE;
+    return_status = copy_file_file (tctx, ctx, s, d);
+    tctx->ask_overwrite = old_ask_overwrite;
+    if (return_status != FILE_CONT)
+        return return_status;
+
+    copy_done = TRUE;
+
+    file_progress_show_source (ctx, NULL);
+    file_progress_show (ctx, 0, 0, "", FALSE);
+
+    return_status = check_progress_buttons (ctx);
+    if (return_status != FILE_CONT)
+        return return_status;
+
+    mc_refresh ();
+
+  retry_src_remove:
+    if (mc_unlink (s))
+    {
+        return_status = file_error (_("Cannot remove file \"%s\"\n%s"), s);
+        if (return_status == FILE_RETRY)
+            goto retry_src_remove;
+        return return_status;
+    }
+
+    if (!copy_done)
+        return_status = progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
+
+    return return_status;
+}
+
+/* }}} */
+
+/* --------------------------------------------------------------------------------------------- */
+/* {{{ Erase routines */
+/** Don't update progress status if progress_count==NULL */
+
+static FileProgressStatus
+erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
+            gboolean is_toplevel_file)
+{
+    int return_status;
+    struct stat buf;
+
+    file_progress_show_deleting (ctx, s);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
+        return FILE_ABORT;
+    mc_refresh ();
+
+    if (tctx->progress_count && mc_lstat (s, &buf))
+    {
+        /* ignore, most likely the mc_unlink fails, too */
+        buf.st_size = 0;
+    }
+
+    while (mc_unlink (s))
+    {
+        return_status = file_error (_("Cannot delete file \"%s\"\n%s"), s);
+        if (return_status != FILE_RETRY)
+            return return_status;
+    }
+
+    if (tctx->progress_count)
+        return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
+    else
+        return FILE_CONT;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
+{
+    struct dirent *next;
+    struct stat buf;
+    DIR *reading;
+    char *path;
+    FileProgressStatus return_status = FILE_CONT;
+
+    if (!strcmp (s, ".."))
+        return FILE_RETRY;
+
+    reading = mc_opendir (s);
+
+    if (!reading)
+        return FILE_RETRY;
+
+    while ((next = mc_readdir (reading)) && return_status == FILE_CONT)
+    {
+        if (!strcmp (next->d_name, "."))
+            continue;
+        if (!strcmp (next->d_name, ".."))
+            continue;
+        path = concat_dir_and_file (s, next->d_name);
+        if (mc_lstat (path, &buf))
+        {
+            g_free (path);
+            mc_closedir (reading);
+            return FILE_RETRY;
+        }
+        if (S_ISDIR (buf.st_mode))
+            return_status =
+                (recursive_erase (tctx, ctx, path) != FILE_CONT) ? FILE_RETRY : FILE_CONT;
+        else
+            return_status = erase_file (tctx, ctx, path, 0);
+        g_free (path);
+    }
+    mc_closedir (reading);
+    if (return_status != FILE_CONT)
+        return return_status;
+    file_progress_show_deleting (ctx, s);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
+        return FILE_ABORT;
+    mc_refresh ();
+
+    while (my_rmdir (s))
+    {
+        return_status = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
+        if (return_status != FILE_RETRY)
+            return return_status;
+    }
+
+    return FILE_CONT;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Return -1 on error, 1 if there are no entries besides "." and ".." 
+   in the directory path points to, 0 else. */
+
+static int
+check_dir_is_empty (const char *path)
+{
+    DIR *dir;
+    struct dirent *d;
+    int i;
+
+    dir = mc_opendir (path);
+    if (!dir)
+        return -1;
+
+    for (i = 1, d = mc_readdir (dir); d; d = mc_readdir (dir))
+    {
+        if (d->d_name[0] == '.' && (d->d_name[1] == '\0' ||
+                                    (d->d_name[1] == '.' && d->d_name[2] == '\0')))
+            continue;           /* "." or ".." */
+        i = 0;
+        break;
+    }
+
+    mc_closedir (dir);
+    return i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+erase_dir_iff_empty (FileOpContext * ctx, const char *s)
+{
+    FileProgressStatus error;
+
+    if (strcmp (s, "..") == 0)
+        return FILE_SKIP;
+
+    if (strcmp (s, ".") == 0)
+        return FILE_SKIP;
+
+    file_progress_show_deleting (ctx, s);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
+        return FILE_ABORT;
+    mc_refresh ();
+
+    if (1 != check_dir_is_empty (s))    /* not empty or error */
+        return FILE_CONT;
+
+    while (my_rmdir (s))
+    {
+        error = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
+        if (error != FILE_RETRY)
+            return error;
+    }
+
+    return FILE_CONT;
+}
+
+/* }}} */
+
+/* --------------------------------------------------------------------------------------------- */
+/* {{{ Panel operate routines */
+
+/**
+ * Return currently selected entry name or the name of the first marked
+ * entry if there is one.
+ */
+
+static char *
+panel_get_file (WPanel * panel, struct stat *stat_buf)
+{
+    int i;
+
+    if (get_current_type () == view_tree)
+    {
+        WTree *tree = (WTree *) get_panel_widget (get_current_index ());
+        char *tree_name = tree_selected_name (tree);
+
+        mc_stat (tree_name, stat_buf);
+        return tree_name;
+    }
+
+    if (panel->marked)
+    {
+        for (i = 0; i < panel->count; i++)
+            if (panel->dir.list[i].f.marked)
+            {
+                *stat_buf = panel->dir.list[i].st;
+                return panel->dir.list[i].fname;
+            }
+    }
+    else
+    {
+        *stat_buf = panel->dir.list[panel->selected].st;
+        return panel->dir.list[panel->selected].fname;
+    }
+    g_assert_not_reached ();
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * panel_compute_totals:
+ *
+ * compute the number of files and the number of bytes
+ * used up by the whole selection, recursing directories
+ * as required.  In addition, it checks to see if it will
+ * overwrite any files by doing the copy.
+ */
+
+static FileProgressStatus
+panel_compute_totals (const WPanel * panel, const void *ui,
+                      compute_dir_size_callback cback,
+                      off_t * ret_marked, double *ret_total, gboolean compute_symlinks)
+{
+    int i;
+
+    *ret_marked = 0;
+    *ret_total = 0.0;
+
+    for (i = 0; i < panel->count; i++)
+    {
+        struct stat *s;
+
+        if (!panel->dir.list[i].f.marked)
+            continue;
+
+        s = &panel->dir.list[i].st;
+
+        if (S_ISDIR (s->st_mode))
+        {
+            char *dir_name;
+            off_t subdir_count = 0;
+            double subdir_bytes = 0;
+            FileProgressStatus status;
+
+            dir_name = concat_dir_and_file (panel->cwd, panel->dir.list[i].fname);
+
+            status = compute_dir_size (dir_name, ui, cback,
+                                       &subdir_count, &subdir_bytes, compute_symlinks);
+            g_free (dir_name);
+
+            if (status != FILE_CONT)
+                return FILE_ABORT;
+
+            *ret_marked += subdir_count;
+            *ret_total += subdir_bytes;
+        }
+        else
+        {
+            (*ret_marked)++;
+            *ret_total += s->st_size;
+        }
+    }
+
+    return FILE_CONT;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Initialize variables for progress bars */
+static FileProgressStatus
+panel_operate_init_totals (FileOperation operation,
+                           const WPanel * panel, const char *source, FileOpContext * ctx)
+{
+    FileProgressStatus status;
+
+    if (operation != OP_MOVE && verbose && file_op_compute_totals)
+    {
+        ComputeDirSizeUI *ui;
+
+        ui = compute_dir_size_create_ui ();
+
+        if (source != NULL)
+            status = compute_dir_size (source, ui, compute_dir_size_update_ui,
+                                       &ctx->progress_count, &ctx->progress_bytes,
+                                       ctx->follow_links);
+        else
+            status = panel_compute_totals (panel, ui, compute_dir_size_update_ui,
+                                           &ctx->progress_count, &ctx->progress_bytes,
+                                           ctx->follow_links);
+
+        compute_dir_size_destroy_ui (ui);
+
+        ctx->progress_totals_computed = (status == FILE_CONT);
+    }
+    else
+    {
+        status = FILE_CONT;
+        ctx->progress_count = panel->marked;
+        ctx->progress_bytes = panel->total;
+        ctx->progress_totals_computed = FALSE;
+    }
+
+    return status;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Generate user prompt for panel operation.
+ * single_source is the name if the source entry or NULL for multiple
+ * entries.
+ * src_stat is only used when single_source is not NULL.
+ */
+
+static char *
+panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
+                               gboolean single_source, const struct stat *src_stat)
+{
+    const char *sp, *cp;
+    char format_string[BUF_MEDIUM];
+    char *dp = format_string;
+    gboolean build_question = FALSE;
+
+    static gboolean i18n_flag = FALSE;
+    if (!i18n_flag)
+    {
+        size_t i;
+
+        for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
+            op_names1[i] = Q_ (op_names1[i]);
+
+#ifdef ENABLE_NLS
+        for (i = sizeof (prompt_parts) / sizeof (prompt_parts[0]); i--;)
+            prompt_parts[i] = _(prompt_parts[i]);
+
+        one_format = _(one_format);
+        many_format = _(many_format);
+        question_format = _(question_format);
+#endif /* ENABLE_NLS */
+        i18n_flag = TRUE;
+    }
+
+    sp = single_source ? one_format : many_format;
+
+    while (*sp != '\0')
+    {
+        switch (*sp)
+        {
+        case '%':
+            cp = NULL;
+            switch (sp[1])
+            {
+            case 'o':
+                cp = op_names1[operation];
+                break;
+            case 'm':
+                if (operation == OP_DELETE)
+                {
+                    cp = "";
+                    build_question = TRUE;
+                }
+                else
+                    cp = prompt_parts[5];
+                break;
+            case 'e':
+                if (operation == OP_DELETE)
+                {
+                    cp = "";
+                    build_question = TRUE;
+                }
+                else
+                    cp = prompt_parts[6];
+                break;
+            case 'f':
+                if (single_source)
+                    cp = S_ISDIR (src_stat->st_mode) ? prompt_parts[2] : prompt_parts[0];
+                else
+                    cp = (panel->marked == panel->dirs_marked)
+                        ? prompt_parts[3]
+                        : (panel->dirs_marked ? prompt_parts[4] : prompt_parts[1]);
+                break;
+            default:
+                *dp++ = *sp++;
+            }
+
+            if (cp != NULL)
+            {
+                sp += 2;
+                while (*cp != '\0')
+                    *dp++ = *cp++;
+            }
+            break;
+        default:
+            *dp++ = *sp++;
+        }
+    }
+    *dp = '\0';
+
+    if (build_question)
+    {
+        char tmp[BUF_MEDIUM];
+
+        memmove (tmp, format_string, sizeof (tmp));
+        g_snprintf (format_string, sizeof (format_string), question_format, tmp);
+    }
+
+    return g_strdup (format_string);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef WITH_BACKGROUND
+static int
+end_bg_process (FileOpContext * ctx, enum OperationMode mode)
+{
+    int pid = ctx->pid;
+
+    (void) mode;
+    ctx->pid = 0;
+
+    unregister_task_with_pid (pid);
+    /*     file_op_context_destroy(ctx); */
+    return 1;
+}
+#endif
+/* }}} */
+
+/* --------------------------------------------------------------------------------------------- */
+/* {{{ Query/status report routines */
+
+static FileProgressStatus
+real_do_file_error (enum OperationMode mode, const char *error)
+{
+    int result;
+    const char *msg;
+
+    msg = mode == Foreground ? MSG_ERROR : _("Background process error");
+    result = query_dialog (msg, error, D_ERROR, 3, _("&Skip"), _("&Retry"), _("&Abort"));
+
+    switch (result)
+    {
+    case 0:
+        do_refresh ();
+        return FILE_SKIP;
+
+    case 1:
+        do_refresh ();
+        return FILE_RETRY;
+
+    case 2:
+    default:
+        return FILE_ABORT;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Report error with two files */
+
+static FileProgressStatus
+files_error (const char *format, const char *file1, const char *file2)
+{
+    char buf[BUF_MEDIUM];
+    char *nfile1 = g_strdup (path_trunc (file1, 15));
+    char *nfile2 = g_strdup (path_trunc (file2, 15));
+
+    g_snprintf (buf, sizeof (buf), format, nfile1, nfile2, unix_error_string (errno));
+
+    g_free (nfile1);
+    g_free (nfile2);
+
+    return do_file_error (buf);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+real_query_recursive (FileOpContext * ctx, enum OperationMode mode, const char *s)
+{
+    gchar *text;
+
+    if (ctx->recursive_result < RECURSIVE_ALWAYS)
+    {
+        const char *msg = mode == Foreground
+            ? _("\nDirectory not empty.\nDelete it recursively?")
+            : _("\nBackground process: Directory not empty.\nDelete it recursively?");
+        text = g_strconcat (_("Delete:"), " ", path_trunc (s, 30), (char *) NULL);
+
+        if (safe_delete)
+            query_set_sel (1);
+
+        ctx->recursive_result =
+            (FileCopyMode) query_dialog (text, msg, D_ERROR, 5,
+                                         _("&Yes"), _("&No"), _("A&ll"), _("Non&e"), _("&Abort"));
+
+        if (ctx->recursive_result != RECURSIVE_ABORT)
+            do_refresh ();
+        g_free (text);
+    }
+
+    switch (ctx->recursive_result)
+    {
+    case RECURSIVE_YES:
+    case RECURSIVE_ALWAYS:
+        return FILE_CONT;
+
+    case RECURSIVE_NO:
+    case RECURSIVE_NEVER:
+        return FILE_SKIP;
+
+    case RECURSIVE_ABORT:
+    default:
+        return FILE_ABORT;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef WITH_BACKGROUND
+static FileProgressStatus
+do_file_error (const char *str)
+{
+    union
+    {
+        void *p;
+          FileProgressStatus (*f) (enum OperationMode, const char *);
+    } pntr;
+    pntr.f = real_do_file_error;
+
+    if (we_are_background)
+        return parent_call (pntr.p, NULL, 1, strlen (str), str);
+    else
+        return real_do_file_error (Foreground, str);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+query_recursive (FileOpContext * ctx, const char *s)
+{
+    union
+    {
+        void *p;
+          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *);
+    } pntr;
+    pntr.f = real_query_recursive;
+
+    if (we_are_background)
+        return parent_call (pntr.p, ctx, 1, strlen (s), s);
+    else
+        return real_query_recursive (ctx, Foreground, s);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
+               struct stat *_d_stat)
+{
+    union
+    {
+        void *p;
+          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
+                                   struct stat *, struct stat *);
+    } pntr;
+    pntr.f = file_progress_real_query_replace;
+
+    if (we_are_background)
+        return parent_call (pntr.p, ctx, 3, strlen (destname), destname,
+                            sizeof (struct stat), _s_stat, sizeof (struct stat), _d_stat);
+    else
+        return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
+}
+
+#else
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+do_file_error (const char *str)
+{
+    return real_do_file_error (Foreground, str);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+query_recursive (FileOpContext * ctx, const char *s)
+{
+    return real_query_recursive (ctx, Foreground, s);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
+               struct stat *_d_stat)
+{
+    return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
+}
+
+#endif /* !WITH_BACKGROUND */
+/* }}} */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
 copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
@@ -533,8 +1306,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     {
         /* Destination already exists */
         if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino)
-            return warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same file"),
-                                   src_path, dst_path);
+            return warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same file"), src_path, dst_path);
         /* Should we replace destination? */
         if (tctx->ask_overwrite)
         {
@@ -562,8 +1334,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         {
             while (mc_mknod (dst_path, sb.st_mode & ctx->umask_kill, sb.st_rdev) < 0)
             {
-                return_status =
-                    file_error (_("Cannot create special file \"%s\"\n%s"), dst_path);
+                return_status = file_error (_("Cannot create special file \"%s\"\n%s"), dst_path);
                 if (return_status == FILE_RETRY)
                     continue;
                 return return_status;
@@ -692,8 +1463,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
             else
                 while ((n_read = mc_read (src_desc, buf, sizeof (buf))) < 0)
                 {
-                    return_status =
-                        file_error (_("Cannot read source file\"%s\"\n%s"), src_path);
+                    return_status = file_error (_("Cannot read source file\"%s\"\n%s"), src_path);
                     if (return_status == FILE_RETRY)
                         continue;
                     goto ret;
@@ -725,8 +1495,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                         t += n_written;
                         continue;
                     }
-                    return_status =
-                        file_error (_("Cannot write target file \"%s\"\n%s"), dst_path);
+                    return_status = file_error (_("Cannot write target file \"%s\"\n%s"), dst_path);
                     if (return_status != FILE_RETRY)
                         goto ret;
                 }
@@ -825,8 +1594,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
             {
                 while (mc_chmod (dst_path, (src_mode & ctx->umask_kill)))
                 {
-                    temp_status =
-                        file_error (_("Cannot chmod target file \"%s\"\n%s"), dst_path);
+                    temp_status = file_error (_("Cannot chmod target file \"%s\"\n%s"), dst_path);
                     if (temp_status != FILE_RETRY)
                     {
                         return_status = temp_status;
@@ -851,12 +1619,14 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     return return_status;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * I think these copy_*_* functions should have a return type.
  * anyway, this function *must* have two directories as arguments.
  */
 /* FIXME: This function needs to check the return values of the
    function calls */
+
 FileProgressStatus
 copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *_d,
               gboolean toplevel, gboolean move_over, gboolean do_delete, struct link * parent_dirs)
@@ -988,8 +1758,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     {
         while (mc_chown (dest_dir, cbuf.st_uid, cbuf.st_gid))
         {
-            return_status =
-                file_error (_("Cannot chown target directory \"%s\"\n%s"), dest_dir);
+            return_status = file_error (_("Cannot chown target directory \"%s\"\n%s"), dest_dir);
             if (return_status != FILE_RETRY)
                 goto ret;
         }
@@ -1096,116 +1865,8 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
 /* }}} */
 
+/* --------------------------------------------------------------------------------------------- */
 /* {{{ Move routines */
-
-static FileProgressStatus
-move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *d)
-{
-    struct stat src_stats, dst_stats;
-    FileProgressStatus return_status = FILE_CONT;
-    gboolean copy_done = FALSE;
-    gboolean old_ask_overwrite;
-
-    file_progress_show_source (ctx, s);
-    file_progress_show_target (ctx, d);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
-        return FILE_ABORT;
-
-    mc_refresh ();
-
-    while (mc_lstat (s, &src_stats) != 0)
-    {
-        /* Source doesn't exist */
-        return_status = file_error (_("Cannot stat file \"%s\"\n%s"), s);
-        if (return_status != FILE_RETRY)
-            return return_status;
-    }
-
-    if (mc_lstat (d, &dst_stats) == 0)
-    {
-        if (src_stats.st_dev == dst_stats.st_dev && src_stats.st_ino == dst_stats.st_ino)
-            return warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same file"), s, d);
-
-        if (S_ISDIR (dst_stats.st_mode))
-        {
-            message (D_ERROR, MSG_ERROR, _("Cannot overwrite directory \"%s\""), d);
-            do_refresh ();
-            return FILE_SKIP;
-        }
-
-        if (confirm_overwrite)
-        {
-            return_status = query_replace (ctx, d, &src_stats, &dst_stats);
-            if (return_status != FILE_CONT)
-                return return_status;
-        }
-        /* Ok to overwrite */
-    }
-
-    if (!ctx->do_append)
-    {
-        if (S_ISLNK (src_stats.st_mode) && ctx->stable_symlinks)
-        {
-            return_status = make_symlink (ctx, s, d);
-            if (return_status == FILE_CONT)
-                goto retry_src_remove;
-            else
-                return return_status;
-        }
-
-        if (mc_rename (s, d) == 0)
-            return progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
-    }
-#if 0
-    /* Comparison to EXDEV seems not to work in nfs if you're moving from
-       one nfs to the same, but on the server it is on two different
-       filesystems. Then nfs returns EIO instead of EXDEV.
-       Hope it will not hurt if we always in case of error try to copy/delete. */
-    else
-        errno = EXDEV;          /* Hack to copy (append) the file and then delete it */
-
-    if (errno != EXDEV)
-    {
-        return_status = files_error (_("Cannot move file \"%s\" to \"%s\"\n%s"), s, d);
-        if (return_status == FILE_RETRY)
-            goto retry_rename;
-        return return_status;
-    }
-#endif
-
-    /* Failed because filesystem boundary -> copy the file instead */
-    old_ask_overwrite = tctx->ask_overwrite;
-    tctx->ask_overwrite = FALSE;
-    return_status = copy_file_file (tctx, ctx, s, d);
-    tctx->ask_overwrite = old_ask_overwrite;
-    if (return_status != FILE_CONT)
-        return return_status;
-
-    copy_done = TRUE;
-
-    file_progress_show_source (ctx, NULL);
-    file_progress_show (ctx, 0, 0, "", FALSE);
-
-    return_status = check_progress_buttons (ctx);
-    if (return_status != FILE_CONT)
-        return return_status;
-
-    mc_refresh ();
-
-  retry_src_remove:
-    if (mc_unlink (s))
-    {
-        return_status = file_error (_("Cannot remove file \"%s\"\n%s"), s);
-        if (return_status == FILE_RETRY)
-            goto retry_src_remove;
-        return return_status;
-    }
-
-    if (!copy_done)
-        return_status = progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
-
-    return return_status;
-}
 
 FileProgressStatus
 move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *d)
@@ -1323,119 +1984,8 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
 /* }}} */
 
+/* --------------------------------------------------------------------------------------------- */
 /* {{{ Erase routines */
-/* Don't update progress status if progress_count==NULL */
-static FileProgressStatus
-erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
-            gboolean is_toplevel_file)
-{
-    int return_status;
-    struct stat buf;
-
-    file_progress_show_deleting (ctx, s);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
-        return FILE_ABORT;
-    mc_refresh ();
-
-    if (tctx->progress_count && mc_lstat (s, &buf))
-    {
-        /* ignore, most likely the mc_unlink fails, too */
-        buf.st_size = 0;
-    }
-
-    while (mc_unlink (s))
-    {
-        return_status = file_error (_("Cannot delete file \"%s\"\n%s"), s);
-        if (return_status != FILE_RETRY)
-            return return_status;
-    }
-
-    if (tctx->progress_count)
-        return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
-    else
-        return FILE_CONT;
-}
-
-static FileProgressStatus
-recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
-{
-    struct dirent *next;
-    struct stat buf;
-    DIR *reading;
-    char *path;
-    FileProgressStatus return_status = FILE_CONT;
-
-    if (!strcmp (s, ".."))
-        return FILE_RETRY;
-
-    reading = mc_opendir (s);
-
-    if (!reading)
-        return FILE_RETRY;
-
-    while ((next = mc_readdir (reading)) && return_status == FILE_CONT)
-    {
-        if (!strcmp (next->d_name, "."))
-            continue;
-        if (!strcmp (next->d_name, ".."))
-            continue;
-        path = concat_dir_and_file (s, next->d_name);
-        if (mc_lstat (path, &buf))
-        {
-            g_free (path);
-            mc_closedir (reading);
-            return FILE_RETRY;
-        }
-        if (S_ISDIR (buf.st_mode))
-            return_status =
-                (recursive_erase (tctx, ctx, path) != FILE_CONT) ? FILE_RETRY : FILE_CONT;
-        else
-            return_status = erase_file (tctx, ctx, path, 0);
-        g_free (path);
-    }
-    mc_closedir (reading);
-    if (return_status != FILE_CONT)
-        return return_status;
-    file_progress_show_deleting (ctx, s);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
-        return FILE_ABORT;
-    mc_refresh ();
-
-    while (my_rmdir (s))
-    {
-        return_status = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
-        if (return_status != FILE_RETRY)
-            return return_status;
-    }
-
-    return FILE_CONT;
-}
-
-/* Return -1 on error, 1 if there are no entries besides "." and ".." 
-   in the directory path points to, 0 else. */
-static int
-check_dir_is_empty (const char *path)
-{
-    DIR *dir;
-    struct dirent *d;
-    int i;
-
-    dir = mc_opendir (path);
-    if (!dir)
-        return -1;
-
-    for (i = 1, d = mc_readdir (dir); d; d = mc_readdir (dir))
-    {
-        if (d->d_name[0] == '.' && (d->d_name[1] == '\0' ||
-                                    (d->d_name[1] == '.' && d->d_name[2] == '\0')))
-            continue;           /* "." or ".." */
-        i = 0;
-        break;
-    }
-
-    mc_closedir (dir);
-    return i;
-}
 
 FileProgressStatus
 erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
@@ -1480,75 +2030,10 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
     return FILE_CONT;
 }
 
-static FileProgressStatus
-erase_dir_iff_empty (FileOpContext * ctx, const char *s)
-{
-    FileProgressStatus error;
-
-    if (strcmp (s, "..") == 0)
-        return FILE_SKIP;
-
-    if (strcmp (s, ".") == 0)
-        return FILE_SKIP;
-
-    file_progress_show_deleting (ctx, s);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
-        return FILE_ABORT;
-    mc_refresh ();
-
-    if (1 != check_dir_is_empty (s))    /* not empty or error */
-        return FILE_CONT;
-
-    while (my_rmdir (s))
-    {
-        error = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
-        if (error != FILE_RETRY)
-            return error;
-    }
-
-    return FILE_CONT;
-}
-
 /* }}} */
 
+/* --------------------------------------------------------------------------------------------- */
 /* {{{ Panel operate routines */
-
-/*
- * Return currently selected entry name or the name of the first marked
- * entry if there is one.
- */
-static char *
-panel_get_file (WPanel * panel, struct stat *stat_buf)
-{
-    int i;
-
-    if (get_current_type () == view_tree)
-    {
-        WTree *tree = (WTree *) get_panel_widget (get_current_index ());
-        char *tree_name = tree_selected_name (tree);
-
-        mc_stat (tree_name, stat_buf);
-        return tree_name;
-    }
-
-    if (panel->marked)
-    {
-        for (i = 0; i < panel->count; i++)
-            if (panel->dir.list[i].f.marked)
-            {
-                *stat_buf = panel->dir.list[i].st;
-                return panel->dir.list[i].fname;
-            }
-    }
-    else
-    {
-        *stat_buf = panel->dir.list[panel->selected].st;
-        return panel->dir.list[panel->selected].fname;
-    }
-    g_assert_not_reached ();
-    return NULL;
-}
-
 
 ComputeDirSizeUI *
 compute_dir_size_create_ui (void)
@@ -1579,6 +2064,8 @@ compute_dir_size_create_ui (void)
     return ui;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 compute_dir_size_destroy_ui (ComputeDirSizeUI * ui)
 {
@@ -1593,6 +2080,8 @@ compute_dir_size_destroy_ui (ComputeDirSizeUI * ui)
         g_free (ui);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
 compute_dir_size_update_ui (const void *ui, const char *dirname)
@@ -1627,11 +2116,13 @@ compute_dir_size_update_ui (const void *ui, const char *dirname)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /**
  * compute_dir_size:
  *
  * Computes the number of bytes used by the files in a directory
  */
+
 FileProgressStatus
 compute_dir_size (const char *dirname, const void *ui,
                   compute_dir_size_callback cback,
@@ -1718,257 +2209,7 @@ compute_dir_size (const char *dirname, const void *ui,
     return ret;
 }
 
-/**
- * panel_compute_totals:
- *
- * compute the number of files and the number of bytes
- * used up by the whole selection, recursing directories
- * as required.  In addition, it checks to see if it will
- * overwrite any files by doing the copy.
- */
-static FileProgressStatus
-panel_compute_totals (const WPanel * panel, const void *ui,
-                      compute_dir_size_callback cback,
-                      off_t * ret_marked, double *ret_total, gboolean compute_symlinks)
-{
-    int i;
-
-    *ret_marked = 0;
-    *ret_total = 0.0;
-
-    for (i = 0; i < panel->count; i++)
-    {
-        struct stat *s;
-
-        if (!panel->dir.list[i].f.marked)
-            continue;
-
-        s = &panel->dir.list[i].st;
-
-        if (S_ISDIR (s->st_mode))
-        {
-            char *dir_name;
-            off_t subdir_count = 0;
-            double subdir_bytes = 0;
-            FileProgressStatus status;
-
-            dir_name = concat_dir_and_file (panel->cwd, panel->dir.list[i].fname);
-
-            status = compute_dir_size (dir_name, ui, cback,
-                                       &subdir_count, &subdir_bytes, compute_symlinks);
-            g_free (dir_name);
-
-            if (status != FILE_CONT)
-                return FILE_ABORT;
-
-            *ret_marked += subdir_count;
-            *ret_total += subdir_bytes;
-        }
-        else
-        {
-            (*ret_marked)++;
-            *ret_total += s->st_size;
-        }
-    }
-
-    return FILE_CONT;
-}
-
-/* Initialize variables for progress bars */
-static FileProgressStatus
-panel_operate_init_totals (FileOperation operation,
-                           const WPanel * panel, const char *source, FileOpContext * ctx)
-{
-    FileProgressStatus status;
-
-    if (operation != OP_MOVE && verbose && file_op_compute_totals)
-    {
-        ComputeDirSizeUI *ui;
-
-        ui = compute_dir_size_create_ui ();
-
-        if (source != NULL)
-            status = compute_dir_size (source, ui, compute_dir_size_update_ui,
-                                       &ctx->progress_count, &ctx->progress_bytes,
-                                       ctx->follow_links);
-        else
-            status = panel_compute_totals (panel, ui, compute_dir_size_update_ui,
-                                           &ctx->progress_count, &ctx->progress_bytes,
-                                           ctx->follow_links);
-
-        compute_dir_size_destroy_ui (ui);
-
-        ctx->progress_totals_computed = (status == FILE_CONT);
-    }
-    else
-    {
-        status = FILE_CONT;
-        ctx->progress_count = panel->marked;
-        ctx->progress_bytes = panel->total;
-        ctx->progress_totals_computed = FALSE;
-    }
-
-    return status;
-}
-
-/*
- * This array introduced to avoid translation problems. The former (op_names)
- * is assumed to be nouns, suitable in dialog box titles; this one should
- * contain whatever is used in prompt itself (i.e. in russian, it's verb).
- * (I don't use spaces around the words, because someday they could be
- * dropped, when widgets get smarter)
- */
-
-/* TRANSLATORS: no need to translate 'FileOperation', it's just a context prefix  */
-static const char *op_names1[] = {
-    N_("FileOperation|Copy"),
-    N_("FileOperation|Move"),
-    N_("FileOperation|Delete")
-};
-
-/*
- * These are formats for building a prompt. Parts encoded as follows:
- * %o - operation from op_names1
- * %f - file/files or files/directories, as appropriate
- * %m - "with source mask" or question mark for delete
- * %s - source name (truncated)
- * %d - number of marked files
- * %e - "to:" or question mark for delete
- *
- * xgettext:no-c-format */
-static const char *one_format = N_("%o %f \"%s\"%m");
-/* xgettext:no-c-format */
-static const char *many_format = N_("%o %d %f%m");
-
-static const char *prompt_parts[] = {
-    N_("file"),
-    N_("files"),
-    N_("directory"),
-    N_("directories"),
-    N_("files/directories"),
-/* TRANSLATORS: keep leading space here to split words in Copy/Move dialog */
-    N_(" with source mask:"),
-    N_("to:")
-};
-
-static const char *question_format = N_("%s?");
-
-/*
- * Generate user prompt for panel operation.
- * single_source is the name if the source entry or NULL for multiple
- * entries.
- * src_stat is only used when single_source is not NULL.
- */
-static char *
-panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
-                               gboolean single_source, const struct stat *src_stat)
-{
-    const char *sp, *cp;
-    char format_string[BUF_MEDIUM];
-    char *dp = format_string;
-    gboolean build_question = FALSE;
-
-    static gboolean i18n_flag = FALSE;
-    if (!i18n_flag)
-    {
-        size_t i;
-
-        for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
-            op_names1[i] = Q_ (op_names1[i]);
-
-#ifdef ENABLE_NLS
-        for (i = sizeof (prompt_parts) / sizeof (prompt_parts[0]); i--;)
-            prompt_parts[i] = _(prompt_parts[i]);
-
-        one_format = _(one_format);
-        many_format = _(many_format);
-        question_format = _(question_format);
-#endif /* ENABLE_NLS */
-        i18n_flag = TRUE;
-    }
-
-    sp = single_source ? one_format : many_format;
-
-    while (*sp != '\0')
-    {
-        switch (*sp)
-        {
-        case '%':
-            cp = NULL;
-            switch (sp[1])
-            {
-            case 'o':
-                cp = op_names1[operation];
-                break;
-            case 'm':
-                if (operation == OP_DELETE)
-                {
-                    cp = "";
-                    build_question = TRUE;
-                }
-                else
-                    cp = prompt_parts[5];
-                break;
-            case 'e':
-                if (operation == OP_DELETE)
-                {
-                    cp = "";
-                    build_question = TRUE;
-                }
-                else
-                    cp = prompt_parts[6];
-                break;
-            case 'f':
-                if (single_source)
-                    cp = S_ISDIR (src_stat->st_mode) ? prompt_parts[2] : prompt_parts[0];
-                else
-                    cp = (panel->marked == panel->dirs_marked)
-                        ? prompt_parts[3]
-                        : (panel->dirs_marked ? prompt_parts[4] : prompt_parts[1]);
-                break;
-            default:
-                *dp++ = *sp++;
-            }
-
-            if (cp != NULL)
-            {
-                sp += 2;
-                while (*cp != '\0')
-                    *dp++ = *cp++;
-            }
-            break;
-        default:
-            *dp++ = *sp++;
-        }
-    }
-    *dp = '\0';
-
-    if (build_question)
-    {
-        char tmp[BUF_MEDIUM];
-
-        memmove (tmp, format_string, sizeof (tmp));
-        g_snprintf (format_string, sizeof (format_string), question_format, tmp);
-    }
-
-    return g_strdup (format_string);
-}
-
-#ifdef WITH_BACKGROUND
-static int
-end_bg_process (FileOpContext * ctx, enum OperationMode mode)
-{
-    int pid = ctx->pid;
-
-    (void) mode;
-    ctx->pid = 0;
-
-    unregister_task_with_pid (pid);
-    /*     file_op_context_destroy(ctx); */
-    return 1;
-}
-#endif
-
+/* --------------------------------------------------------------------------------------------- */
 /**
  * panel_operate:
  *
@@ -1981,6 +2222,7 @@ end_bg_process (FileOpContext * ctx, enum OperationMode mode)
  * force_single forces operation on the current entry and affects
  * default destination.  Current filename is used as default.
  */
+
 gboolean
 panel_operate (void *source_panel, FileOperation operation, gboolean force_single)
 {
@@ -1992,7 +2234,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 #ifdef WITH_FULL_PATHS
     char *source_with_path = NULL;
 #else
-#   define source_with_path source
+#define source_with_path source
 #endif /* !WITH_FULL_PATHS */
     char *dest = NULL;
     char *temp = NULL;
@@ -2274,8 +2516,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             if ((dst_result != 0) || S_ISDIR (dst_stat.st_mode))
                 break;
 
-            if (file_error (_("Destination \"%s\" must be a directory\n%s"),
-                            dest) != FILE_RETRY)
+            if (file_error (_("Destination \"%s\" must be a directory\n%s"), dest) != FILE_RETRY)
                 goto clean_up;
         }
 
@@ -2422,34 +2663,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
 /* }}} */
 
+/* --------------------------------------------------------------------------------------------- */
 /* {{{ Query/status report routines */
-
-static FileProgressStatus
-real_do_file_error (enum OperationMode mode, const char *error)
-{
-    int result;
-    const char *msg;
-
-    msg = mode == Foreground ? MSG_ERROR : _("Background process error");
-    result = query_dialog (msg, error, D_ERROR, 3, _("&Skip"), _("&Retry"), _("&Abort"));
-
-    switch (result)
-    {
-    case 0:
-        do_refresh ();
-        return FILE_SKIP;
-
-    case 1:
-        do_refresh ();
-        return FILE_RETRY;
-
-    case 2:
-    default:
-        return FILE_ABORT;
-    }
-}
-
-/* Report error with one file */
+/** Report error with one file */
 FileProgressStatus
 file_error (const char *format, const char *file)
 {
@@ -2460,135 +2676,7 @@ file_error (const char *format, const char *file)
     return do_file_error (buf);
 }
 
-/* Report error with two files */
-static FileProgressStatus
-files_error (const char *format, const char *file1, const char *file2)
-{
-    char buf[BUF_MEDIUM];
-    char *nfile1 = g_strdup (path_trunc (file1, 15));
-    char *nfile2 = g_strdup (path_trunc (file2, 15));
-
-    g_snprintf (buf, sizeof (buf), format, nfile1, nfile2, unix_error_string (errno));
-
-    g_free (nfile1);
-    g_free (nfile2);
-
-    return do_file_error (buf);
-}
-
-static FileProgressStatus
-real_query_recursive (FileOpContext * ctx, enum OperationMode mode, const char *s)
-{
-    gchar *text;
-
-    if (ctx->recursive_result < RECURSIVE_ALWAYS)
-    {
-        const char *msg = mode == Foreground
-            ? _("\nDirectory not empty.\nDelete it recursively?")
-            : _("\nBackground process: Directory not empty.\nDelete it recursively?");
-        text = g_strconcat (_("Delete:"), " ", path_trunc (s, 30), (char *) NULL);
-
-        if (safe_delete)
-            query_set_sel (1);
-
-        ctx->recursive_result =
-            (FileCopyMode) query_dialog (text, msg, D_ERROR, 5,
-                                         _("&Yes"), _("&No"), _("A&ll"), _("Non&e"), _("&Abort"));
-
-        if (ctx->recursive_result != RECURSIVE_ABORT)
-            do_refresh ();
-        g_free (text);
-    }
-
-    switch (ctx->recursive_result)
-    {
-    case RECURSIVE_YES:
-    case RECURSIVE_ALWAYS:
-        return FILE_CONT;
-
-    case RECURSIVE_NO:
-    case RECURSIVE_NEVER:
-        return FILE_SKIP;
-
-    case RECURSIVE_ABORT:
-    default:
-        return FILE_ABORT;
-    }
-}
-
-#ifdef WITH_BACKGROUND
-static FileProgressStatus
-do_file_error (const char *str)
-{
-    union
-    {
-        void *p;
-          FileProgressStatus (*f) (enum OperationMode, const char *);
-    } pntr;
-    pntr.f = real_do_file_error;
-
-    if (we_are_background)
-        return parent_call (pntr.p, NULL, 1, strlen (str), str);
-    else
-        return real_do_file_error (Foreground, str);
-}
-
-static FileProgressStatus
-query_recursive (FileOpContext * ctx, const char *s)
-{
-    union
-    {
-        void *p;
-          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *);
-    } pntr;
-    pntr.f = real_query_recursive;
-
-    if (we_are_background)
-        return parent_call (pntr.p, ctx, 1, strlen (s), s);
-    else
-        return real_query_recursive (ctx, Foreground, s);
-}
-
-static FileProgressStatus
-query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
-               struct stat *_d_stat)
-{
-    union
-    {
-        void *p;
-          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
-                                   struct stat *, struct stat *);
-    } pntr;
-    pntr.f = file_progress_real_query_replace;
-
-    if (we_are_background)
-        return parent_call (pntr.p, ctx, 3, strlen (destname), destname,
-                            sizeof (struct stat), _s_stat, sizeof (struct stat), _d_stat);
-    else
-        return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
-}
-
-#else
-static FileProgressStatus
-do_file_error (const char *str)
-{
-    return real_do_file_error (Foreground, str);
-}
-
-static FileProgressStatus
-query_recursive (FileOpContext * ctx, const char *s)
-{
-    return real_query_recursive (ctx, Foreground, s);
-}
-
-static FileProgressStatus
-query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
-               struct stat *_d_stat)
-{
-    return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
-}
-
-#endif /* !WITH_BACKGROUND */
+/* --------------------------------------------------------------------------------------------- */
 
 /*
    Cause emacs to enter folding mode for this file:

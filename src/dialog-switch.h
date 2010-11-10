@@ -1,10 +1,21 @@
 
-#ifndef MC_DIALOG_SWITCH_H
-#define MC_DIALOG_SWITCH_H
+#ifndef MC__DIALOG_SWITCH_H
+#define MC__DIALOG_SWITCH_H
 
 #include <sys/types.h>
 
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
 struct Dlg_head;
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
 
 void dialog_switch_add (struct Dlg_head *h);
 void dialog_switch_remove (struct Dlg_head *h);
@@ -18,4 +29,5 @@ int dialog_switch_process_pending (void);
 void dialog_switch_got_winch (void);
 void dialog_switch_shutdown (void);
 
-#endif /* MC_DIALOG_SWITCH_H */
+/*** inline functions ****************************************************************************/
+#endif /* MC__DIALOG_SWITCH_H */

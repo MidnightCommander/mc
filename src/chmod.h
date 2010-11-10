@@ -18,4 +18,4 @@
 void chmod_cmd (void);
 
 /*** inline functions ****************************************************************************/
-#endif
+#endif /* MC__CHMOD_H */

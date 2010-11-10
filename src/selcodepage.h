@@ -3,14 +3,12 @@
  *  \brief Header: user %interface for charset %selection
  */
 
-#ifndef MC_SELCODEPAGE_H
-#define MC_SELCODEPAGE_H
+#ifndef MC__SELCODEPAGE_H
+#define MC__SELCODEPAGE_H
 
 #include "lib/global.h"
 
-int select_charset (int center_y, int center_x, int current_charset, gboolean seldisplay);
-gboolean do_set_codepage (int);
-gboolean do_select_codepage (void);
+/*** typedefs(not structures) and defined constants **********************************************/
 
 /* some results of select_charset() */
 #define SELECT_CHARSET_CANCEL -2
@@ -24,4 +22,18 @@ gboolean do_select_codepage (void);
 /* In other cases select_charset() returns non-negative value
  * which is number of codepage in codepage list */
 
-#endif /* MC_SELCODEPAGE_H */
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
+/*** inline functions ****************************************************************************/
+
+int select_charset (int center_y, int center_x, int current_charset, gboolean seldisplay);
+gboolean do_set_codepage (int);
+gboolean do_select_codepage (void);
+
+#endif /* MC__SELCODEPAGE_H */

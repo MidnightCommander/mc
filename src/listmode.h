@@ -1,13 +1,22 @@
-
 /** \file listmode.h
  *  \brief Header: directory panel listing format editor
  */
 
-#ifndef MC_LISTMODE_H
-#define MC_LISTMODE_H
+#ifndef MC__LISTMODE_H
+#define MC__LISTMODE_H
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
 
 #ifdef LISTMODE_EDITOR
-char *listmode_edit (char*);
+char *listmode_edit (char *);
 #endif /* LISTMODE_EDITOR */
 
-#endif
+/*** inline functions ****************************************************************************/
+#endif /* MC__LISTMODE_H */

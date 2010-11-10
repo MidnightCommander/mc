@@ -18,4 +18,4 @@
 void chown_cmd (void);
 
 /*** inline functions ****************************************************************************/
-#endif
+#endif /* MC__CHOWN_H */
