@@ -52,6 +52,15 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
+/*** global variables ****************************************************************************/
+
+/* Toggles statusbar draw style */
+int simple_statusbar = 0;
+
+int visible_tabs = 1, visible_tws = 1;
+
+/*** file scope macro definitions ****************************************************************/
+
 #define MAX_LINE_LEN 1024
 
 /* Text styles */
@@ -67,8 +76,23 @@
 #define FONT_PIX_PER_LINE 1
 #define FONT_MEAN_WIDTH 1
 
-/* Toggles statusbar draw style */
-int simple_statusbar = 0;
+#define edit_move(x,y) widget_move(edit, y, x);
+
+#define key_pending(x) (!is_idle())
+
+
+/*** file scope type declarations ****************************************************************/
+
+struct line_s
+{
+    unsigned int ch;
+    unsigned int style;
+};
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 status_string (WEdit * edit, char *s, int w)
@@ -151,6 +175,8 @@ status_string (WEdit * edit, char *s, int w)
             );
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 printwstr (const char *s, int len)
 {
@@ -158,124 +184,7 @@ printwstr (const char *s, int len)
         tty_printf ("%-*.*s", len, len, s);
 }
 
-/* Draw the status line at the top of the widget. The size of the filename
- * field varies depending on the width of the screen and the length of
- * the filename. */
-void
-edit_status (WEdit * edit)
-{
-    const int w = edit->widget.cols;
-    const size_t status_size = w + 1;
-    char *const status = g_malloc (status_size);
-    int status_len;
-    const char *fname = "";
-    int fname_len;
-    const int gap = 3;          /* between the filename and the status */
-    const int right_gap = 5;    /* at the right end of the screen */
-    const int preferred_fname_len = 16;
-
-    status_string (edit, status, status_size);
-    status_len = (int) str_term_width1 (status);
-
-    if (edit->filename)
-        fname = edit->filename;
-    fname_len = str_term_width1 (fname);
-    if (fname_len < preferred_fname_len)
-        fname_len = preferred_fname_len;
-
-    if (fname_len + gap + status_len + right_gap >= w)
-    {
-        if (preferred_fname_len + gap + status_len + right_gap >= w)
-            fname_len = preferred_fname_len;
-        else
-            fname_len = w - (gap + status_len + right_gap);
-        fname = str_trunc (fname, fname_len);
-    }
-
-    widget_move (edit, 0, 0);
-    tty_setcolor (STATUSBAR_COLOR);
-    printwstr (fname, fname_len + gap);
-    printwstr (status, w - (fname_len + gap));
-
-    if (simple_statusbar && edit->widget.cols > 30)
-    {
-        size_t percent;
-        if (edit->total_lines + 1 != 0)
-            percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
-        else
-            percent = 100;
-        widget_move (edit, 0, edit->widget.cols - 5);
-        tty_printf (" %3d%%", percent);
-    }
-
-    g_free (status);
-}
-
-/* this scrolls the text so that cursor is on the screen */
-void
-edit_scroll_screen_over_cursor (WEdit * edit)
-{
-    int p;
-    int outby;
-    int b_extreme, t_extreme, l_extreme, r_extreme;
-
-    if (edit->num_widget_lines <= 0 || edit->num_widget_columns <= 0)
-        return;
-
-    edit->num_widget_columns -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    edit->num_widget_lines -= EDIT_TEXT_VERTICAL_OFFSET - 1;
-
-    r_extreme = EDIT_RIGHT_EXTREME;
-    l_extreme = EDIT_LEFT_EXTREME;
-    b_extreme = EDIT_BOTTOM_EXTREME;
-    t_extreme = EDIT_TOP_EXTREME;
-    if (edit->found_len)
-    {
-        b_extreme = max (edit->num_widget_lines / 4, b_extreme);
-        t_extreme = max (edit->num_widget_lines / 4, t_extreme);
-    }
-    if (b_extreme + t_extreme + 1 > edit->num_widget_lines)
-    {
-        int n;
-        n = b_extreme + t_extreme;
-        b_extreme = (b_extreme * (edit->num_widget_lines - 1)) / n;
-        t_extreme = (t_extreme * (edit->num_widget_lines - 1)) / n;
-    }
-    if (l_extreme + r_extreme + 1 > edit->num_widget_columns)
-    {
-        int n;
-        n = l_extreme + t_extreme;
-        l_extreme = (l_extreme * (edit->num_widget_columns - 1)) / n;
-        r_extreme = (r_extreme * (edit->num_widget_columns - 1)) / n;
-    }
-    p = edit_get_col (edit) + edit->over_col;
-    edit_update_curs_row (edit);
-    outby = p + edit->start_col - edit->num_widget_columns + 1 + (r_extreme + edit->found_len);
-    if (outby > 0)
-        edit_scroll_right (edit, outby);
-    outby = l_extreme - p - edit->start_col;
-    if (outby > 0)
-        edit_scroll_left (edit, outby);
-    p = edit->curs_row;
-    outby = p - edit->num_widget_lines + 1 + b_extreme;
-    if (outby > 0)
-        edit_scroll_downward (edit, outby);
-    outby = t_extreme - p;
-    if (outby > 0)
-        edit_scroll_upward (edit, outby);
-    edit_update_curs_row (edit);
-
-    edit->num_widget_lines += EDIT_TEXT_VERTICAL_OFFSET - 1;
-    edit->num_widget_columns += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-}
-
-#define edit_move(x,y) widget_move(edit, y, x);
-
-struct line_s
-{
-    unsigned int ch;
-    unsigned int style;
-};
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
@@ -391,9 +300,9 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     }
 }
 
-int visible_tabs = 1, visible_tws = 1;
+/* --------------------------------------------------------------------------------------------- */
+/** b is a pointer to the beginning of the line */
 
-/* b is a pointer to the beginning of the line */
 static void
 edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_col)
 {
@@ -679,7 +588,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat, book_mark);
 }
 
-#define key_pending(x) (!is_idle())
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 edit_draw_this_char (WEdit * edit, long curs, long row)
@@ -688,7 +597,9 @@ edit_draw_this_char (WEdit * edit, long curs, long row)
     edit_draw_this_line (edit, b, row, 0, edit->num_widget_columns - 1);
 }
 
-/* cursor must be in screen for other than REDRAW_PAGE passed in force */
+/* --------------------------------------------------------------------------------------------- */
+/** cursor must be in screen for other than REDRAW_PAGE passed in force */
+
 static inline void
 render_edit_text (WEdit * edit, long start_row, long start_column, long end_row, long end_column)
 {
@@ -817,6 +728,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     edit->screen_modified = 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
@@ -835,8 +748,128 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
         edit->force |= REDRAW_PAGE;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/** Draw the status line at the top of the widget. The size of the filename
+ * field varies depending on the width of the screen and the length of
+ * the filename. */
+void
+edit_status (WEdit * edit)
+{
+    const int w = edit->widget.cols;
+    const size_t status_size = w + 1;
+    char *const status = g_malloc (status_size);
+    int status_len;
+    const char *fname = "";
+    int fname_len;
+    const int gap = 3;          /* between the filename and the status */
+    const int right_gap = 5;    /* at the right end of the screen */
+    const int preferred_fname_len = 16;
+
+    status_string (edit, status, status_size);
+    status_len = (int) str_term_width1 (status);
+
+    if (edit->filename)
+        fname = edit->filename;
+    fname_len = str_term_width1 (fname);
+    if (fname_len < preferred_fname_len)
+        fname_len = preferred_fname_len;
+
+    if (fname_len + gap + status_len + right_gap >= w)
+    {
+        if (preferred_fname_len + gap + status_len + right_gap >= w)
+            fname_len = preferred_fname_len;
+        else
+            fname_len = w - (gap + status_len + right_gap);
+        fname = str_trunc (fname, fname_len);
+    }
+
+    widget_move (edit, 0, 0);
+    tty_setcolor (STATUSBAR_COLOR);
+    printwstr (fname, fname_len + gap);
+    printwstr (status, w - (fname_len + gap));
+
+    if (simple_statusbar && edit->widget.cols > 30)
+    {
+        size_t percent;
+        if (edit->total_lines + 1 != 0)
+            percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
+        else
+            percent = 100;
+        widget_move (edit, 0, edit->widget.cols - 5);
+        tty_printf (" %3d%%", percent);
+    }
+
+    g_free (status);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** this scrolls the text so that cursor is on the screen */
+void
+edit_scroll_screen_over_cursor (WEdit * edit)
+{
+    int p;
+    int outby;
+    int b_extreme, t_extreme, l_extreme, r_extreme;
+
+    if (edit->num_widget_lines <= 0 || edit->num_widget_columns <= 0)
+        return;
+
+    edit->num_widget_columns -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    edit->num_widget_lines -= EDIT_TEXT_VERTICAL_OFFSET - 1;
+
+    r_extreme = EDIT_RIGHT_EXTREME;
+    l_extreme = EDIT_LEFT_EXTREME;
+    b_extreme = EDIT_BOTTOM_EXTREME;
+    t_extreme = EDIT_TOP_EXTREME;
+    if (edit->found_len)
+    {
+        b_extreme = max (edit->num_widget_lines / 4, b_extreme);
+        t_extreme = max (edit->num_widget_lines / 4, t_extreme);
+    }
+    if (b_extreme + t_extreme + 1 > edit->num_widget_lines)
+    {
+        int n;
+        n = b_extreme + t_extreme;
+        b_extreme = (b_extreme * (edit->num_widget_lines - 1)) / n;
+        t_extreme = (t_extreme * (edit->num_widget_lines - 1)) / n;
+    }
+    if (l_extreme + r_extreme + 1 > edit->num_widget_columns)
+    {
+        int n;
+        n = l_extreme + t_extreme;
+        l_extreme = (l_extreme * (edit->num_widget_columns - 1)) / n;
+        r_extreme = (r_extreme * (edit->num_widget_columns - 1)) / n;
+    }
+    p = edit_get_col (edit) + edit->over_col;
+    edit_update_curs_row (edit);
+    outby = p + edit->start_col - edit->num_widget_columns + 1 + (r_extreme + edit->found_len);
+    if (outby > 0)
+        edit_scroll_right (edit, outby);
+    outby = l_extreme - p - edit->start_col;
+    if (outby > 0)
+        edit_scroll_left (edit, outby);
+    p = edit->curs_row;
+    outby = p - edit->num_widget_lines + 1 + b_extreme;
+    if (outby > 0)
+        edit_scroll_downward (edit, outby);
+    outby = t_extreme - p;
+    if (outby > 0)
+        edit_scroll_upward (edit, outby);
+    edit_update_curs_row (edit);
+
+    edit->num_widget_lines += EDIT_TEXT_VERTICAL_OFFSET - 1;
+    edit->num_widget_columns += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 edit_render_keypress (WEdit * edit)
 {
     edit_render (edit, 0, 0, 0, 0, 0);
 }
+
+/* --------------------------------------------------------------------------------------------- */

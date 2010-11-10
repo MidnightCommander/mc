@@ -59,6 +59,12 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
+/*** global variables ****************************************************************************/
+
+int option_syntax_highlighting = 1;
+int option_auto_syntax = 1;
+
+/*** file scope macro definitions ****************************************************************/
 
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512
@@ -77,6 +83,15 @@
 #define SYNTAX_TOKEN_PLUS       '\002'
 #define SYNTAX_TOKEN_BRACKET    '\003'
 #define SYNTAX_TOKEN_BRACE      '\004'
+
+#define whiteness(x) ((x) == '\t' || (x) == '\n' || (x) == ' ')
+
+#define free_args(x)
+#define break_a {result=line;break;}
+#define check_a {if(!*a){result=line;break;}}
+#define check_not_a {if(*a){result=line;break;}}
+
+/*** file scope type declarations ****************************************************************/
 
 struct key_word
 {
@@ -112,8 +127,12 @@ struct _syntax_marker
     struct _syntax_marker *next;
 };
 
-int option_syntax_highlighting = 1;
-int option_auto_syntax = 1;
+/*** file scope variables ************************************************************************/
+
+static char *error_file_name = NULL;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static gint
 mc_defines_destroy (gpointer key, gpointer value, gpointer data)
@@ -130,7 +149,9 @@ mc_defines_destroy (gpointer key, gpointer value, gpointer data)
     return FALSE;
 }
 
-/* Completely destroys the defines tree */
+/* --------------------------------------------------------------------------------------------- */
+/** Completely destroys the defines tree */
+
 static void
 destroy_defines (GTree ** defines)
 {
@@ -139,12 +160,16 @@ destroy_defines (GTree ** defines)
     *defines = NULL;
 }
 
-/* Wrapper for case insensitive mode */
+/* --------------------------------------------------------------------------------------------- */
+
+/** Wrapper for case insensitive mode */
 inline static int
 xx_tolower (WEdit * edit, int c)
 {
     return edit->is_case_insensitive ? tolower (c) : c;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 subst_defines (GTree * defines, char **argv, char **argv_end)
@@ -184,6 +209,8 @@ subst_defines (GTree * defines, char **argv, char **argv_end)
         argv++;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static long
 compare_word_to_right (WEdit * edit, long i, const char *text,
@@ -230,7 +257,7 @@ compare_word_to_right (WEdit * edit, long i, const char *text,
                 if (c == *p)
                 {
                     j = i;
-                    if (*p == *text && p[1] == '\0')   /* handle eg '+' and @+@ keywords properly */
+                    if (*p == *text && p[1] == '\0')    /* handle eg '+' and @+@ keywords properly */
                         break;
                 }
                 if (j && strchr ((char *) p + 1, c))    /* c exists further down, so it will get matched later */
@@ -302,10 +329,13 @@ compare_word_to_right (WEdit * edit, long i, const char *text,
                 return -1;
         }
     }
-    if (whole_right != NULL && strchr (whole_right, xx_tolower (edit, edit_get_byte (edit, i))) != NULL)
+    if (whole_right != NULL
+        && strchr (whole_right, xx_tolower (edit, edit_get_byte (edit, i))) != NULL)
         return -1;
     return i;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 xx_strchr (WEdit * edit, const unsigned char *s, int char_byte)
@@ -315,6 +345,8 @@ xx_strchr (WEdit * edit, const unsigned char *s, int char_byte)
 
     return (const char *) s;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static struct syntax_rule
 apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
@@ -435,9 +467,8 @@ apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
                     {
                         long e;
 
-                        e =  compare_word_to_right (edit, i, r->right, r->whole_word_chars_left,
-                                                   r->whole_word_chars_right,
-                                                   r->line_start_right);
+                        e = compare_word_to_right (edit, i, r->right, r->whole_word_chars_left,
+                                                   r->whole_word_chars_right, r->line_start_right);
                         if (e >= end)
                         {
                             _rule.end = e;
@@ -512,6 +543,8 @@ apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
     return _rule;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static struct syntax_rule
 edit_get_rule (WEdit * edit, long byte_index)
 {
@@ -565,29 +598,22 @@ edit_get_rule (WEdit * edit, long byte_index)
     return edit->rule;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
 {
     *color = edit->rules[rule.context]->keyword[rule.keyword]->color;
 }
 
-void
-edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
-{
-    if (!tty_use_colors ())
-        *color = 0;
-    else if (edit->rules && byte_index < edit->last_byte && option_syntax_highlighting)
-        translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
-    else
-        *color = EDITOR_NORMAL_COLOR;
-}
 
-
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
    Returns 0 on error/eof or a count of the number of bytes read
    including the newline. Result must be free'd.
    In case of an error, *line will not be modified.
  */
+
 static size_t
 read_one_line (char **line, FILE * f)
 {
@@ -636,6 +662,8 @@ read_one_line (char **line, FILE * f)
 
     return r;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 convert (char *s)
@@ -706,7 +734,7 @@ convert (char *s)
     return r;
 }
 
-#define whiteness(x) ((x) == '\t' || (x) == '\n' || (x) == ' ')
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 get_args (char *l, char **args, int args_size)
@@ -730,10 +758,7 @@ get_args (char *l, char **args, int args_size)
     return argc;
 }
 
-#define free_args(x)
-#define break_a {result=line;break;}
-#define check_a {if(!*a){result=line;break;}}
-#define check_not_a {if(*a){result=line;break;}}
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 this_try_alloc_color_pair (const char *fg, const char *bg)
@@ -797,7 +822,7 @@ this_try_alloc_color_pair (const char *fg, const char *bg)
     return tty_try_alloc_color_pair (fg, bg);
 }
 
-static char *error_file_name = NULL;
+/* --------------------------------------------------------------------------------------------- */
 
 static FILE *
 open_include_file (const char *filename)
@@ -827,6 +852,8 @@ open_include_file (const char *filename)
     return fopen (error_file_name, "r");
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 inline static void
 xx_lowerize_line (WEdit * edit, char *line, size_t len)
 {
@@ -838,7 +865,9 @@ xx_lowerize_line (WEdit * edit, char *line, size_t len)
     }
 }
 
-/* returns line number on error */
+/* --------------------------------------------------------------------------------------------- */
+/** returns line number on error */
+
 static int
 edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 {
@@ -1191,52 +1220,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
     return result;
 }
 
-void
-edit_free_syntax_rules (WEdit * edit)
-{
-    size_t i, j;
-
-    if (!edit)
-        return;
-    if (edit->defines)
-        destroy_defines (&edit->defines);
-    if (!edit->rules)
-        return;
-
-    edit_get_rule (edit, -1);
-    MC_PTR_FREE (edit->syntax_type);
-
-    for (i = 0; edit->rules[i]; i++)
-    {
-        if (edit->rules[i]->keyword)
-        {
-            for (j = 0; edit->rules[i]->keyword[j]; j++)
-            {
-                MC_PTR_FREE (edit->rules[i]->keyword[j]->keyword);
-                MC_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_left);
-                MC_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_right);
-                MC_PTR_FREE (edit->rules[i]->keyword[j]);
-            }
-        }
-        MC_PTR_FREE (edit->rules[i]->left);
-        MC_PTR_FREE (edit->rules[i]->right);
-        MC_PTR_FREE (edit->rules[i]->whole_word_chars_left);
-        MC_PTR_FREE (edit->rules[i]->whole_word_chars_right);
-        MC_PTR_FREE (edit->rules[i]->keyword);
-        MC_PTR_FREE (edit->rules[i]->keyword_first_chars);
-        MC_PTR_FREE (edit->rules[i]);
-    }
-
-    while (edit->syntax_marker)
-    {
-        struct _syntax_marker *s = edit->syntax_marker->next;
-        g_free (edit->syntax_marker);
-        edit->syntax_marker = s;
-    }
-
-    MC_PTR_FREE (edit->rules);
-    tty_color_free_all_tmp ();
-}
+/* --------------------------------------------------------------------------------------------- */
 
 /* returns -1 on file error, line number on error in file syntax */
 static int
@@ -1373,6 +1357,8 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 get_first_editor_line (WEdit * edit)
 {
@@ -1396,7 +1382,72 @@ get_first_editor_line (WEdit * edit)
     return s;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
+{
+    if (!tty_use_colors ())
+        *color = 0;
+    else if (edit->rules && byte_index < edit->last_byte && option_syntax_highlighting)
+        translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
+    else
+        *color = EDITOR_NORMAL_COLOR;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_free_syntax_rules (WEdit * edit)
+{
+    size_t i, j;
+
+    if (!edit)
+        return;
+    if (edit->defines)
+        destroy_defines (&edit->defines);
+    if (!edit->rules)
+        return;
+
+    edit_get_rule (edit, -1);
+    MC_PTR_FREE (edit->syntax_type);
+
+    for (i = 0; edit->rules[i]; i++)
+    {
+        if (edit->rules[i]->keyword)
+        {
+            for (j = 0; edit->rules[i]->keyword[j]; j++)
+            {
+                MC_PTR_FREE (edit->rules[i]->keyword[j]->keyword);
+                MC_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_left);
+                MC_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_right);
+                MC_PTR_FREE (edit->rules[i]->keyword[j]);
+            }
+        }
+        MC_PTR_FREE (edit->rules[i]->left);
+        MC_PTR_FREE (edit->rules[i]->right);
+        MC_PTR_FREE (edit->rules[i]->whole_word_chars_left);
+        MC_PTR_FREE (edit->rules[i]->whole_word_chars_right);
+        MC_PTR_FREE (edit->rules[i]->keyword);
+        MC_PTR_FREE (edit->rules[i]->keyword_first_chars);
+        MC_PTR_FREE (edit->rules[i]);
+    }
+
+    while (edit->syntax_marker)
+    {
+        struct _syntax_marker *s = edit->syntax_marker->next;
+        g_free (edit->syntax_marker);
+        edit->syntax_marker = s;
+    }
+
+    MC_PTR_FREE (edit->rules);
+    tty_color_free_all_tmp ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Load rules into edit struct.  Either edit or *pnames must be NULL.  If
  * edit is NULL, a list of types will be stored into names.  If type is
  * NULL, then the type will be selected according to the filename.
@@ -1415,7 +1466,7 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
     {
         char *saved_type;
 
-        saved_type = g_strdup (type); /* save edit->syntax_type */
+        saved_type = g_strdup (type);   /* save edit->syntax_type */
         edit_free_syntax_rules (edit);
         edit->syntax_type = saved_type; /* restore edit->syntax_type */
     }
@@ -1457,8 +1508,12 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
     g_free (f);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 const char *
 edit_get_syntax_type (const WEdit * edit)
 {
     return edit->syntax_type;
 }
+
+/* --------------------------------------------------------------------------------------------- */

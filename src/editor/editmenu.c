@@ -52,6 +52,17 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static GList *
 create_file_menu (void)
 {
@@ -74,6 +85,8 @@ create_file_menu (void)
 
     return entries;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static GList *
 create_edit_menu (void)
@@ -103,6 +116,8 @@ create_edit_menu (void)
     return entries;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static GList *
 create_search_replace_menu (void)
 {
@@ -121,6 +136,8 @@ create_search_replace_menu (void)
     return entries;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static GList *
 create_command_menu (void)
 {
@@ -132,7 +149,8 @@ create_command_menu (void)
     entries =
         g_list_append (entries, menu_entry_create (_("Go to matching &bracket"), CK_Match_Bracket));
     entries =
-        g_list_append (entries, menu_entry_create (_("Toggle s&yntax highlighting"), CK_Toggle_Syntax));
+        g_list_append (entries,
+                       menu_entry_create (_("Toggle s&yntax highlighting"), CK_Toggle_Syntax));
     entries = g_list_append (entries, menu_separator_create ());
     entries =
         g_list_append (entries, menu_entry_create (_("&Find declaration"), CK_Find_Definition));
@@ -164,6 +182,8 @@ create_command_menu (void)
     return entries;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static GList *
 create_format_menu (void)
 {
@@ -183,6 +203,8 @@ create_format_menu (void)
     return entries;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static GList *
 create_options_menu (void)
 {
@@ -201,6 +223,31 @@ create_options_menu (void)
 
     return entries;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_drop_menu_cmd (WEdit * e, int which)
+{
+    WMenuBar *menubar;
+
+    menubar = find_menubar (e->widget.owner);
+
+    if (!menubar->is_active)
+    {
+        menubar->is_active = TRUE;
+        menubar->is_dropped = (drop_menus != 0);
+        if (which >= 0)
+            menubar->selected = which;
+
+        menubar->previous_widget = dlg_get_current_widget_id (e->widget.owner);
+        dlg_select_widget (menubar);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_init_menu (struct WMenuBar *menubar)
@@ -222,30 +269,15 @@ edit_init_menu (struct WMenuBar *menubar)
                                    "[Internal File Editor]"));
 }
 
-static void
-edit_drop_menu_cmd (WEdit * e, int which)
-{
-    WMenuBar *menubar;
-
-    menubar = find_menubar (e->widget.owner);
-
-    if (!menubar->is_active)
-    {
-        menubar->is_active = TRUE;
-        menubar->is_dropped = (drop_menus != 0);
-        if (which >= 0)
-            menubar->selected = which;
-
-        menubar->previous_widget = dlg_get_current_widget_id (e->widget.owner);
-        dlg_select_widget (menubar);
-    }
-}
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_menu_cmd (WEdit * e)
 {
     edit_drop_menu_cmd (e, -1);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 edit_drop_hotkey_menu (WEdit * e, int key)
@@ -278,3 +310,5 @@ edit_drop_hotkey_menu (WEdit * e, int key)
     edit_drop_menu_cmd (e, m);
     return 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */

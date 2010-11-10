@@ -44,8 +44,7 @@
 #include "src/editor/etags.h"
 #include "src/editor/editcmd_dialogs.h"
 
-
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
 edit_search_options_t edit_search_options = {
     .type = MC_SEARCH_T_NORMAL,
@@ -56,7 +55,7 @@ edit_search_options_t edit_search_options = {
     .all_codepages = FALSE
 };
 
-/*** file scope macro definitions **************************************/
+/*** file scope macro definitions ****************************************************************/
 
 #define SEARCH_DLG_WIDTH 58
 #define SEARCH_DLG_MIN_HEIGHT 13
@@ -66,11 +65,12 @@ edit_search_options_t edit_search_options = {
 #define REPLACE_DLG_MIN_HEIGHT 17
 #define REPLACE_DLG_HEIGHT_SUPPLY 5
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
-/*** file scope functions **********************************************/
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, Widget * sender,
@@ -87,7 +87,9 @@ editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, Widget * sender,
     }
 }
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const char *replace_default,
@@ -330,7 +332,6 @@ editcmd_dialog_search_show (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /* gets a raw key from the keyboard. Passing cancel = 1 draws
    a cancel button thus allowing c-c etc.  Alternatively, cancel = 0
    will return the next key pressed.  ctrl-a (=B_CANCEL), ctrl-g, ctrl-c,
@@ -344,7 +345,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel
     struct Dlg_head *raw_dlg =
         create_dlg (TRUE, 0, 0, 7, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
                     NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
-    add_widget (raw_dlg, input_new (3 - cancel, w - 5, input_get_default_colors(),
+    add_widget (raw_dlg, input_new (3 - cancel, w - 5, input_get_default_colors (),
                                     2, "", 0, INPUT_COMPLETE_DEFAULT));
     add_widget (raw_dlg, label_new (3 - cancel, 2, query));
     if (cancel)
@@ -361,8 +362,8 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /* let the user select its preferred completion */
+
 void
 editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
                                 struct selection *compl, int num_compl)
@@ -447,8 +448,8 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /* let the user select where function definition */
+
 void
 editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_len, int word_len,
                                        etags_hash_t * def_hash, int num_lines)

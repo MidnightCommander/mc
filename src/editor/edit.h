@@ -3,7 +3,7 @@
    Copyright (C) 1996, 1997, 2009 Free Software Foundation, Inc.
 
    Authors: 1996, 1997 Paul Sheer
-            2009 Andrew Borodin
+   2009 Andrew Borodin
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301, USA.
-*/
+ */
 
 /** \file edit.h
  *  \brief Header: editor public API
@@ -29,17 +29,25 @@
  *  \date 2009
  */
 
-#ifndef MC_EDIT_H
-#define MC_EDIT_H
+#ifndef MC__EDIT_H
+#define MC__EDIT_H
 
-#include "lib/global.h"	/* PATH_SEP_STR */
+#include "lib/global.h"         /* PATH_SEP_STR */
 #include "lib/fileloc.h"
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+#define DEFAULT_WRAP_LINE_LENGTH 72
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
 
 /* Editor widget */
 struct WEdit;
 typedef struct WEdit WEdit;
 
-#define DEFAULT_WRAP_LINE_LENGTH 72
+/*** global variables defined in .c file *********************************************************/
 
 extern int option_word_wrap_line_length;
 extern int option_typewriter_wrap;
@@ -65,14 +73,17 @@ extern int simple_statusbar;
 extern int option_check_nl_at_eof;
 extern int show_right_margin;
 
+/*** declarations of public functions ************************************************************/
+
 /* used in main() */
 void edit_stack_init (void);
 void edit_stack_free (void);
 
 int edit_file (const char *_file, int line);
 
-const char *edit_get_file_name (const WEdit *edit);
-int edit_get_curs_col (const WEdit *edit);
-const char *edit_get_syntax_type (const WEdit *edit);
+const char *edit_get_file_name (const WEdit * edit);
+int edit_get_curs_col (const WEdit * edit);
+const char *edit_get_syntax_type (const WEdit * edit);
 
-#endif				/* MC_EDIT_H */
+/*** inline functions ****************************************************************************/
+#endif /* MC__EDIT_H */

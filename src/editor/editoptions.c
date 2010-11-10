@@ -39,8 +39,16 @@
 #include "src/wtools.h"         /* QuickDialog */
 #include "src/setup.h"          /* option_tab_spacing */
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define OPT_DLG_H 16
 #define OPT_DLG_W 74
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
 
 static const char *wrap_str[] = {
     N_("None"),
@@ -48,6 +56,9 @@ static const char *wrap_str[] = {
     N_("Type writer wrap"),
     NULL
 };
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 #ifdef ENABLE_NLS
 static void
@@ -60,6 +71,10 @@ i18n_translate_array (const char *array[])
     }
 }
 #endif /* ENABLE_NLS */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_options_dialog (WEdit * edit)
@@ -174,3 +189,5 @@ edit_options_dialog (WEdit * edit)
     if (option_syntax_highlighting != old_syntax_hl)
         edit_load_syntax (edit, NULL, edit->syntax_type);
 }
+
+/* --------------------------------------------------------------------------------------------- */
