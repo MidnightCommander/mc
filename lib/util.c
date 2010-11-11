@@ -488,16 +488,6 @@ size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean 
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-is_exe (mode_t mode)
-{
-    if ((S_IXUSR & mode) || (S_IXGRP & mode) || (S_IXOTH & mode))
-        return 1;
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 const char *
 string_perm (mode_t mode_bits)
 {

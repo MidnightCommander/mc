@@ -116,7 +116,6 @@ const char *size_trunc_sep (double size, gboolean use_si);
  *
  * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
 void size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean use_si);
-int is_exe (mode_t mode);
 const char *string_perm (mode_t mode_bits);
 
 /* @modifies path. @returns pointer into path. */
@@ -226,6 +225,12 @@ static inline gboolean
 exist_file (const char *name)
 {
     return (access (name, R_OK) == 0);
+}
+
+static inline gboolean
+is_exe (mode_t mode)
+{
+    return (gboolean) ((S_IXUSR & mode) || (S_IXGRP & mode) || (S_IXOTH & mode));
 }
 
 #endif /* MC_UTIL_H */
