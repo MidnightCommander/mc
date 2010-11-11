@@ -87,6 +87,7 @@ What to do with this?
 #include <stdint.h>             /* uintmax_t */
 
 #include "lib/global.h"
+#include "lib/util.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
 #include "lib/widget/wtools.h"  /* message() */

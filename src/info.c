@@ -33,6 +33,7 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
+#include "lib/util.h"
 #include "lib/widget/dialog.h"
 #include "lib/widget/widget.h"  /* default_proc */
 #include "lib/widget/menu.h"    /* menubar_visible */

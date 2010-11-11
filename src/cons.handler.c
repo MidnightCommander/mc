@@ -39,6 +39,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"           /* tty_set_normal_attrs */
 #include "lib/tty/win.h"
+#include "lib/util.h"           /* concat_dir_and_file() */
 
 #include "consaver/cons.saver.h"
 

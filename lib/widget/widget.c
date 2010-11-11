@@ -51,6 +51,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
 
 #include "dialog.h"
 #include "widget.h"

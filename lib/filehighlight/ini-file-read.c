@@ -32,6 +32,7 @@
 #include "lib/fileloc.h"
 #include "lib/strescape.h"
 #include "lib/skin.h"
+#include "lib/util.h"           /* exist_file() */
 #include "lib/filehighlight.h"
 
 #include "src/main.h"

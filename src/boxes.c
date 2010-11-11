@@ -50,6 +50,7 @@
 #include "lib/vfs/mc-vfs/smbfs.h"
 #endif /* ENABLE_VFS_SMB */
 
+#include "lib/util.h"           /* Q_() */
 #include "lib/widget/dialog.h"  /* The nice dialog manager */
 #include "lib/widget/widget.h"  /* The widgets for the nice dialog manager */
 #include "lib/widget/wtools.h"

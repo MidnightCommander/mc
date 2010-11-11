@@ -42,12 +42,11 @@
 
 #include "lib/global.h"
 #include "lib/tty/win.h"        /* xterm_flag */
-#include "lib/search.h"
 #include "lib/mcconfig.h"
-#include "lib/timefmt.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
 
 #include "src/filegui.h"
 #include "src/file.h"           /* copy_file_file() */

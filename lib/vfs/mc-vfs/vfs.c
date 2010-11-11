@@ -52,6 +52,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
 #include "lib/widget/wtools.h"  /* message() */
 
 #ifdef HAVE_CHARSET

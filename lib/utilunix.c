@@ -52,8 +52,9 @@
 #include <grp.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"        /* str_move() */
 #include "lib/vfs/mc-vfs/vfs.h" /* VFS_ENCODING_PREFIX */
+#include "lib/strutil.h"        /* str_move() */
+#include "lib/util.h"
 #include "lib/widget/wtools.h"  /* message() */
 
 #include "src/execute.h"

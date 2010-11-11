@@ -39,6 +39,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/mcconfig.h"       /* Load/save directories panelize */
 #include "lib/strutil.h"
+#include "lib/util.h"
 #include "lib/widget/dialog.h"
 #include "lib/widget/widget.h"
 #include "lib/widget/wtools.h"  /* For common_dialog_repaint() */

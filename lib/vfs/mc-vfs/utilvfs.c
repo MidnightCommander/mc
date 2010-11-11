@@ -37,6 +37,7 @@
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
+#include "lib/util.h"           /* mc_mkstemps() */
 #include "lib/widget/wtools.h"  /* message() */
 
 #include "src/history.h"

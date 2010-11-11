@@ -52,6 +52,7 @@
 #include "lib/search.h"         /* search engine */
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/util.h"
 #include "lib/widget/wtools.h"  /* message() */
 
 #include "src/main.h"           /* mc_home */

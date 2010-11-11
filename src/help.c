@@ -58,6 +58,7 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/fileloc.h"
+#include "lib/util.h"
 #include "lib/widget/dialog.h"  /* For Dlg_head */
 #include "lib/widget/widget.h"  /* For Widget */
 #include "lib/widget/wtools.h"  /* For common_dialog_repaint() */

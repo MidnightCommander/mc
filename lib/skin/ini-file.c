@@ -30,6 +30,7 @@
 
 #include "internal.h"
 #include "lib/fileloc.h"
+#include "lib/util.h"           /* exist_file() */
 
 #include "src/main.h"
 

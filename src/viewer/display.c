@@ -43,6 +43,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
 #include "lib/widget/dialog.h"  /* Dlg_head */
 #include "lib/widget/widget.h"  /* WButtonBar */
 

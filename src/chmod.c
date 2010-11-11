@@ -37,6 +37,7 @@
 #include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
 #include "lib/widget/dialog.h"  /* add_widget() */
 #include "lib/widget/widget.h"  /* NORMAL_BUTTON */
 #include "lib/widget/wtools.h"  /* message() */

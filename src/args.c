@@ -37,6 +37,7 @@
 #ifdef ENABLE_VFS_SMB
 #include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debugf()  */
 #endif
+#include "lib/util.h"           /* x_basename() */
 
 #include "src/main.h"
 #include "src/textconf.h"

@@ -56,6 +56,7 @@
 #include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debug() */
 #endif /* ENABLE_VFS_SMB */
 
+#include "lib/util.h"
 #include "lib/widget/dialog.h"
 #include "lib/widget/widget.h"
 #include "lib/widget/wtools.h"

@@ -48,6 +48,7 @@
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
+#include "lib/util.h"
 #include "lib/widget/wtools.h"  /* message() */
 
 #include "src/main.h"           /* shell */

@@ -31,6 +31,7 @@
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
+#include "lib/util.h"
 
 #include "main.h"
 #include "src/execute.h"

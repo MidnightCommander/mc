@@ -41,6 +41,7 @@
 #endif
 
 #include "lib/global.h"
+#include "lib/util.h"
 #include "lib/widget/wtools.h"  /* message() */
 
 #include "vfs-impl.h"

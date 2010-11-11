@@ -38,6 +38,7 @@
 #include "lib/tty/key.h"        /* tty_getch() */
 #include "lib/skin.h"           /* INPUT_COLOR */
 #include "lib/strutil.h"
+#include "lib/util.h"
 
 #include "dialog.h"
 #include "widget.h"

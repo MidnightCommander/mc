@@ -41,6 +41,7 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
+#include "lib/util.h"           /* is_printable() */
 
 #include "src/main.h"           /* utf8_display */
 #include "src/setup.h"          /* option_tab_spacing */

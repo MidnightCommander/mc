@@ -85,6 +85,7 @@
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
+#include "lib/util.h"
 #include "lib/widget/dialog.h"             /* do_refresh() */
 #include "lib/widget/widget.h"             /* WLabel */
 #include "lib/widget/wtools.h"             /* QuickDialog */

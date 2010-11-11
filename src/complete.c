@@ -43,6 +43,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strescape.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
 #include "lib/widget/dialog.h"
 #include "lib/widget/widget.h"
 #include "lib/widget/wtools.h"

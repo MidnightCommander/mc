@@ -43,6 +43,7 @@
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/util.h"           /* is_printable() */
 #include "lib/widget/widget.h"  /* buttonbar_redraw() */
 
 #include "src/charsets.h"

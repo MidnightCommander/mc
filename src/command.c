@@ -37,6 +37,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strescape.h"
 #include "lib/skin.h"           /* DEFAULT_COLOR */
+#include "lib/util.h"
 #include "lib/widget/widget.h"  /* WInput */
 #include "lib/widget/wtools.h"  /* message () */
 

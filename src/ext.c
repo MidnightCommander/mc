@@ -36,13 +36,13 @@
 #include "lib/tty/tty.h"
 #include "lib/search.h"
 #include "lib/fileloc.h"
-
-#include "consaver/cons.saver.h"
-#include "viewer/mcviewer.h"
-
+#include "lib/util.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/widget/wtools.h"
 #include "lib/widget/dialog-switch.h"
+
+#include "consaver/cons.saver.h"
+#include "viewer/mcviewer.h"
 
 #include "user.h"
 #include "main.h"

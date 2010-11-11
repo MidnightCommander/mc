@@ -45,6 +45,7 @@
 #include "lib/vfs/mc-vfs/fish.h"
 #endif
 
+#include "lib/util.h"
 #include "lib/widget/wtools.h"
 #include "lib/widget/menu.h"    /* menubar_visible declaration */
 

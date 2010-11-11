@@ -43,6 +43,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/unixcompat.h"
 #include "lib/timefmt.h"
+#include "lib/util.h"
 #include "lib/widget/wtools.h"  /* for message (...) */
 #include "lib/widget/widget.h"
 #include "lib/widget/menu.h"    /* menubar_visible */

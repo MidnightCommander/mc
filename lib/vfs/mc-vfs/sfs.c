@@ -42,6 +42,7 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
+#include "lib/util.h"
 #include "lib/widget/wtools.h"  /* D_ERROR, D_NORMAL */
 
 #include "src/main.h"           /* mc_home */

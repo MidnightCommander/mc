@@ -52,11 +52,11 @@
 #include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #include "lib/mcconfig.h"
 #include "lib/search.h"
-#include "src/viewer/mcviewer.h"
 #include "lib/filehighlight.h"  /* MC_FHL_INI_FILE */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
 #include "lib/widget/dialog.h"  /* Widget */
 #include "lib/widget/dialog-switch.h"
 #include "lib/widget/wtools.h"  /* message() */
@@ -82,6 +82,7 @@
 #include "history.h"
 #include "dir.h"
 #include "cmddef.h"             /* CK_InputHistoryShow */
+#include "viewer/mcviewer.h"
 
 
 #ifdef USE_INTERNAL_EDIT

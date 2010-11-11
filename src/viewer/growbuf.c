@@ -39,8 +39,9 @@
 #include <errno.h>
 
 #include "lib/global.h"
-#include "lib/widget/wtools.h"
+#include "lib/util.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/widget/wtools.h"
 
 #include "internal.h"
 

@@ -33,6 +33,7 @@
 #include <unistd.h>
 
 #include "lib/global.h"
+#include "lib/util.h"           /* is_printable() */
 #include "tty.h"                /* tty_gotoyx, tty_print_char */
 #include "win.h"
 #include "src/consaver/cons.saver.h"    /* console_flag */
