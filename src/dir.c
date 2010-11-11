@@ -573,30 +573,17 @@ do_load_dir (const char *path, dir_list * list, sortfn * sort, int lc_reverse,
     return next_free;
 }
 
-/* --------------------------------------------------------------------------------------------- */
-
-int
-link_isdir (const file_entry * file)
-{
-    if (file->f.link_to_dir)
-        return 1;
-    else
-        return 0;
-}
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 if_link_is_exe (const char *full_name, const file_entry * file)
 {
     struct stat b;
 
-    if (S_ISLNK (file->st.st_mode) && !mc_stat (full_name, &b))
-    {
+    if (S_ISLNK (file->st.st_mode) && mc_stat (full_name, &b) == 0)
         return is_exe (b.st_mode);
-    }
-    else
-        return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
