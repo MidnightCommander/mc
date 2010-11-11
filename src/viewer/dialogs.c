@@ -280,7 +280,7 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
             default:
                 break;
             }
-            *offset = mcview_bol (view, *offset);
+            *offset = mcview_bol (view, *offset, 0);
         }
     }
 
