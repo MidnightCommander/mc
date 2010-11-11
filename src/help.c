@@ -1046,7 +1046,7 @@ interactive_display (const char *filename, const char *node)
     char *filedata;
 
     if (filename != NULL)
-        filedata = load_file (filename);
+        g_file_get_contents (filename, &filedata, NULL, NULL);
     else
         filedata = load_mc_home_file (mc_home_alt, MC_HELP, &hlpfile);
 

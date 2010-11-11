@@ -897,8 +897,7 @@ user_menu_cmd (struct WEdit *edit_widget)
         }
     }
 
-    data = load_file (menu);
-    if (data == NULL)
+    if (!g_file_get_contents (menu, &data, NULL, NULL))
     {
         message (D_ERROR, MSG_ERROR, _("Cannot open file%s\n%s"), menu, unix_error_string (errno));
         g_free (menu);

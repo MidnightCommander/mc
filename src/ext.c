@@ -643,7 +643,8 @@ regex_command (const char *filename, const char *action, int *move_dir)
             }
             mc_user_ext = 0;
         }
-        data = load_file (extension_file);
+
+        g_file_get_contents (extension_file, &data, NULL, NULL);
         g_free (extension_file);
         if (data == NULL)
             return 0;

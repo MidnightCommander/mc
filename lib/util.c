@@ -692,40 +692,6 @@ check_for_default (const char *default_file, const char *file)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-load_file (const char *filename)
-{
-    FILE *data_file;
-    struct stat s;
-    char *data;
-    long read_size;
-
-    data_file = fopen (filename, "r");
-    if (data_file == NULL)
-    {
-        return 0;
-    }
-    if (fstat (fileno (data_file), &s) != 0)
-    {
-        fclose (data_file);
-        return 0;
-    }
-    data = g_malloc (s.st_size + 1);
-    read_size = fread (data, 1, s.st_size, data_file);
-    data[read_size] = 0;
-    fclose (data_file);
-
-    if (read_size > 0)
-        return data;
-    else
-    {
-        g_free (data);
-        return 0;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-char *
 load_mc_home_file (const char *from, const char *filename, char **allocated_filename)
 {
     char *hintfile_base, *hintfile;
@@ -736,22 +702,18 @@ load_mc_home_file (const char *from, const char *filename, char **allocated_file
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
-    data = load_file (hintfile);
-
-    if (data == NULL)
+    if (!g_file_get_contents (hintfile, &data, NULL, NULL))
     {
         /* Fall back to the two-letter language code */
         if (lang[0] != '\0' && lang[1] != '\0')
             lang[2] = '\0';
         g_free (hintfile);
         hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
-        data = load_file (hintfile);
-
-        if (data == NULL)
+        if (!g_file_get_contents (hintfile, &data, NULL, NULL))
         {
             g_free (hintfile);
             hintfile = hintfile_base;
-            data = load_file (hintfile_base);
+            g_file_get_contents (hintfile_base, &data, NULL, NULL);
         }
     }
 

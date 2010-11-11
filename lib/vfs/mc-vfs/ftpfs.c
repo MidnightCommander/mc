@@ -2387,13 +2387,14 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     }
 
     /* Load current .netrc */
-    netrcname = concat_dir_and_file (home_dir, ".netrc");
-    netrcp = netrc = load_file (netrcname);
-    if (netrc == NULL)
+    netrcname = g_build_filename (home_dir, ".netrc", (char *) NULL);
+    if (!g_file_get_contents (netrcname, &netrc, NULL, NULL))
     {
         g_free (netrcname);
         return 0;
     }
+
+    netrcp = netrc;
 
     /* Find our own domain name */
     if (gethostname (hostname, sizeof (hostname)) < 0)
