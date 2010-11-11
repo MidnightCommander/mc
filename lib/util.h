@@ -19,18 +19,6 @@
 
 #define MAX_SAVED_BOOKMARKS 10
 
-/* OS specific defines */
-#define PATH_SEP '/'
-#define PATH_SEP_STR "/"
-#define PATH_ENV_SEP ':'
-#define TMPDIR_DEFAULT "/tmp"
-#define SCRIPT_SUFFIX ""
-#define get_default_editor() "vi"
-#define OS_SORT_CASE_SENSITIVE_DEFAULT 1
-#define STRCOMP strcmp
-#define STRNCOMP strncmp
-#define MC_ARCH_FLAGS 0
-
 /* taken from regex.c: */
 /* Jim Meyering writes:
 

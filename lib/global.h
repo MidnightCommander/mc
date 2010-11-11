@@ -116,6 +116,15 @@
 #define ESC_CHAR '\033'
 #define ESC_STR  "\033"
 
+/* OS specific defines */
+#define PATH_SEP '/'
+#define PATH_SEP_STR "/"
+#define PATH_ENV_SEP ':'
+#define TMPDIR_DEFAULT "/tmp"
+#define SCRIPT_SUFFIX ""
+#define get_default_editor() "vi"
+#define OS_SORT_CASE_SENSITIVE_DEFAULT 1
+
 /* C++ style type casts */
 #define const_cast(m_type, m_expr) ((m_type) (m_expr))
 
