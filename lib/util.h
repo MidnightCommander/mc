@@ -156,8 +156,6 @@ void init_uid_gid_cache (void);
 char *get_group (int);
 char *get_owner (int);
 
-int exist_file (const char *name);
-
 /* Check if the file exists. If not copy the default */
 int check_for_default (const char *default_file, const char *file);
 
@@ -223,5 +221,11 @@ gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
 char *guess_message_value (void);
 
 /*** inline functions **************************************************/
+
+static inline gboolean
+exist_file (const char *name)
+{
+    return (access (name, R_OK) == 0);
+}
 
 #endif /* MC_UTIL_H */

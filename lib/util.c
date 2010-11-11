@@ -660,14 +660,6 @@ extension (const char *filename)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-exist_file (const char *name)
-{
-    return access (name, R_OK) == 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
 check_for_default (const char *default_file, const char *file)
 {
     if (!exist_file (file))
