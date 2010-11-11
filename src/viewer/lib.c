@@ -97,7 +97,7 @@ void
 mcview_toggle_wrap_mode (mcview_t * view)
 {
     if (view->text_wrap_mode)
-        view->dpy_start = mcview_bol (view, view->dpy_start);
+        view->dpy_start = mcview_bol (view, view->dpy_start, 0);
     view->text_wrap_mode = !view->text_wrap_mode;
     view->dpy_bbar_dirty = TRUE;
     view->dirty++;
@@ -343,7 +343,7 @@ mcview_show_error (mcview_t * view, const char *msg)
 /* returns index of the first char in the line */
 /* it is constant for all line characters */
 off_t
-mcview_bol (mcview_t * view, off_t current)
+mcview_bol (mcview_t * view, off_t current, off_t limit)
 {
     int c;
     off_t filesize;
@@ -361,7 +361,7 @@ mcview_bol (mcview_t * view, off_t current)
         if (c == '\r')
             current--;
     }
-    while (current > 0)
+    while (current > 0 && current >= limit)
     {
         if (!mcview_get_byte (view, current - 1, &c))
             break;
@@ -377,7 +377,7 @@ mcview_bol (mcview_t * view, off_t current)
 /* returns index of last char on line + width EOL */
 /* mcview_eol of the current line == mcview_bol next line */
 off_t
-mcview_eol (mcview_t * view, off_t current)
+mcview_eol (mcview_t * view, off_t current, off_t limit)
 {
     int c, prev_ch = 0;
     off_t filesize;
@@ -386,7 +386,7 @@ mcview_eol (mcview_t * view, off_t current)
         return 0;
     if (current >= filesize)
         return filesize;
-    while (current < filesize)
+    while (current < filesize && current < limit)
     {
         if (!mcview_get_byte (view, current, &c))
             break;

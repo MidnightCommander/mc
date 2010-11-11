@@ -89,6 +89,7 @@ void
 mcview_move_up (mcview_t * view, off_t lines)
 {
     off_t new_offset;
+
     if (view->hex_mode)
     {
         off_t bytes = lines * view->bytes_per_line;
@@ -106,24 +107,44 @@ mcview_move_up (mcview_t * view, off_t lines)
     else
     {
         off_t i;
+
         for (i = 0; i < lines; i++)
         {
-            off_t cur_bol;
-            cur_bol = new_offset = mcview_bol (view, view->dpy_start);
-            if (new_offset > 0)
-                new_offset--;
-            new_offset = mcview_bol (view, new_offset);
-            if (new_offset < 0)
-                new_offset = 0;
+            if (view->dpy_start == 0)
+                break;
             if (view->text_wrap_mode)
             {
-                size_t last_row_length = (view->dpy_start - new_offset) % view->data_area.width;
-                if (last_row_length != 0 && cur_bol == view->dpy_start)
-                    new_offset = max (new_offset, (off_t) (view->dpy_start - last_row_length));
+                new_offset = mcview_bol (view, view->dpy_start, view->dpy_start - (off_t) 1);
+                /* check if dpy_start == BOL or not (then new_offset = dpy_start - 1,
+                 * no need to check more) */
+                if (new_offset == view->dpy_start)
+                {
+                    size_t last_row_length;
+
+                    new_offset = mcview_bol (view, new_offset - 1, 0);
+                    last_row_length = (view->dpy_start - new_offset) % view->data_area.width;
+                    if (last_row_length != 0)
+                    {
+                        /* if dpy_start == BOL in wrapped mode, find BOL of previous line
+                         * and move down all but the last rows */
+                        new_offset = view->dpy_start - (off_t) last_row_length;
+                    }
+                }
                 else
-                    new_offset = max (new_offset, view->dpy_start - (off_t) view->data_area.width);
+                {
+                    /* if dpy_start != BOL in wrapped mode, just move one row up;
+                     * no need to check if > 0 as there is at least exactly one wrap
+                     * between dpy_start and BOL */
+                    new_offset = view->dpy_start - (off_t) view->data_area.width;
+                }
+                view->dpy_start = new_offset;
             }
-            view->dpy_start = new_offset;
+            else
+            {
+                /* if unwrapped -> current BOL equals dpy_start, just find BOL of previous line */
+                new_offset = view->dpy_start - 1;
+                view->dpy_start = mcview_bol (view, new_offset, 0);
+            }
         }
     }
     mcview_movement_fixups (view, TRUE);
@@ -153,21 +174,25 @@ mcview_move_down (mcview_t * view, off_t lines)
     }
     else
     {
-        off_t i;
         off_t new_offset = 0;
 
         if (view->dpy_end - view->dpy_start > last_byte - view->dpy_end)
         {
             while (lines-- > 0)
             {
-                new_offset = mcview_eol (view, view->dpy_end);
                 if (view->text_wrap_mode)
-                    new_offset = min (new_offset, view->dpy_end + (off_t) view->data_area.width);
-                view->dpy_end = new_offset;
+                    view->dpy_end =
+                        mcview_eol (view, view->dpy_end,
+                                    view->dpy_end + (off_t) view->data_area.width);
+                else
+                    view->dpy_end = mcview_eol (view, view->dpy_end, last_byte);
 
-                new_offset = mcview_eol (view, view->dpy_start);
                 if (view->text_wrap_mode)
-                    new_offset = min (new_offset, view->dpy_start + (off_t) view->data_area.width);
+                    new_offset =
+                        mcview_eol (view, view->dpy_start,
+                                    view->dpy_start + (off_t) view->data_area.width);
+                else
+                    new_offset = mcview_eol (view, view->dpy_start, last_byte);
                 if (new_offset < last_byte)
                     view->dpy_start = new_offset;
                 if (view->dpy_end >= last_byte)
@@ -176,11 +201,15 @@ mcview_move_down (mcview_t * view, off_t lines)
         }
         else
         {
+            off_t i;
             for (i = 0; i < lines && new_offset < last_byte; i++)
             {
-                new_offset = mcview_eol (view, view->dpy_start);
                 if (view->text_wrap_mode)
-                    new_offset = min (new_offset, view->dpy_start + (off_t) view->data_area.width);
+                    new_offset =
+                        mcview_eol (view, view->dpy_start,
+                                    view->dpy_start + (off_t) view->data_area.width);
+                else
+                    new_offset = mcview_eol (view, view->dpy_start, last_byte);
                 if (new_offset < last_byte)
                     view->dpy_start = new_offset;
             }
@@ -314,7 +343,7 @@ mcview_moveto_bol (mcview_t * view)
     }
     else if (!view->text_wrap_mode)
     {
-        view->dpy_start = mcview_bol (view, view->dpy_start);
+        view->dpy_start = mcview_bol (view, view->dpy_start, 0);
     }
     view->dpy_text_column = 0;
     mcview_movement_fixups (view, TRUE);
@@ -344,8 +373,8 @@ mcview_moveto_eol (mcview_t * view)
     else
     {
         off_t eol;
-        bol = mcview_bol (view, view->dpy_start);
-        eol = mcview_eol (view, view->dpy_start);
+        bol = mcview_bol (view, view->dpy_start, 0);
+        eol = mcview_eol (view, view->dpy_start, mcview_get_filesize (view));
         if (!view->utf8)
         {
             if (eol > bol)
@@ -467,7 +496,7 @@ mcview_moveto_match (mcview_t * view)
     }
     else
     {
-        view->dpy_start = mcview_bol (view, offset);
+        view->dpy_start = mcview_bol (view, offset, 0);
     }
 
     mcview_scroll_to_cursor (view);
