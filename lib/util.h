@@ -19,27 +19,6 @@
 
 #define MAX_SAVED_BOOKMARKS 10
 
-/* taken from regex.c: */
-/* Jim Meyering writes:
-
-   "... Some ctype macros are valid only for character codes that
-   isascii says are ASCII (SGI's IRIX-4.0.5 is one such system --when
-   using /bin/cc or gcc but without giving an ansi option).  So, all
-   ctype uses should be through macros like ISPRINT...  If
-   STDC_HEADERS is defined, then autoconf has verified that the ctype
-   macros don't need to be guarded with references to isascii. ...
-   Defining isascii to 1 should let any compiler worth its salt
-   eliminate the && through constant folding."  */
-
-#if defined (STDC_HEADERS) || (!defined (isascii) && !defined (HAVE_ISASCII))
-#define ISASCII(c) 1
-#else
-#define ISASCII(c) isascii(c)
-#endif
-
-/* usage: str_cmp ("foo", !=, "bar") */
-#define str_cmp(a,rel,b) (strcmp ((a), (b)) rel 0)
-
 #define MC_PTR_FREE(ptr) do { g_free (ptr); (ptr) = NULL; } while (0)
 
 /*** enums ***************************************************************************************/
