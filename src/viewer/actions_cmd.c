@@ -524,13 +524,11 @@ mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
 
     case DLG_VALIDATE:
         view = (mcview_t *) find_widget_type (h, mcview_callback);
+        h->state = DLG_ACTIVE; /* don't stop the dialog before final decision */
         if (mcview_ok_to_quit (view))
             h->state = DLG_CLOSED;
         else
-        {
-            h->state = DLG_ACTIVE;
             mcview_update (view);
-        }
         return MSG_HANDLED;
 
     default:
