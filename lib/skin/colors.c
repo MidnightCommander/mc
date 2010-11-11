@@ -29,6 +29,7 @@
 #include <string.h>
 
 #include "internal.h"
+
 #include "lib/tty/color.h"
 
 #include "src/args.h"
@@ -225,6 +226,11 @@ mc_skin_color_cache_init (void)
     MENU_HOTSEL_COLOR = mc_skin_color_get ("menu", "menuhotsel");
     MENU_INACTIVE_COLOR = mc_skin_color_get ("menu", "menuinactive");
 
+    BUTTONBAR_HOTKEY_COLOR = mc_skin_color_get ("buttonbar", "hotkey");
+    BUTTONBAR_BUTTON_COLOR = mc_skin_color_get ("buttonbar", "button");
+
+    STATUSBAR_COLOR = mc_skin_color_get ("statusbar", "_default_");
+
     GAUGE_COLOR = mc_skin_color_get ("core", "gauge");
     INPUT_COLOR = mc_skin_color_get ("core", "input");
     INPUT_HISTORY_COLOR = mc_skin_color_get ("core", "inputhistory");
@@ -252,8 +258,6 @@ mc_skin_color_cache_init (void)
 
     BOOK_MARK_COLOR = mc_skin_color_get ("editor", "bookmark");
     BOOK_MARK_FOUND_COLOR = mc_skin_color_get ("editor", "bookmarkfound");
-    BUTTONBAR_HOTKEY_COLOR = mc_skin_color_get ("buttonbar", "hotkey");
-    BUTTONBAR_BUTTON_COLOR = mc_skin_color_get ("buttonbar", "button");
 
     DFF_ADD_COLOR = mc_skin_color_get ("diffviewer", "added");
     DFF_CHG_COLOR = mc_skin_color_get ("diffviewer", "changedline");

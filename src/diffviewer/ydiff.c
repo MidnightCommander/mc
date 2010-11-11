@@ -2706,7 +2706,7 @@ dview_status (const WDiff * dview, int ord, int width, int c)
     int filename_width;
     int linenum, lineofs;
 
-    tty_setcolor (SELECTED_COLOR);
+    tty_setcolor (STATUSBAR_COLOR);
 
     tty_gotoyx (0, c);
     get_line_numbers (dview->a[ord], skip_rows, &linenum, &lineofs);

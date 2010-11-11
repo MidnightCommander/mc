@@ -3681,12 +3681,15 @@ xterm=menu=magenta:marked=,magenta:markselect=,red
 Цвета не являются обязательными, а в качестве ключевых слов (keywords)
 могут использоваться: для задания цветовой палитры в панелях: normal,
 selected, disabled, marked, markselect, errors, input, inputmark, inputunchanged,
-commandlinemark, reverse, gauge. Цвета пунктов меню: menunormal, menusel,
-menuhot, menuhotsel, menuinactive. Цвета в окне диалога: dnormal, dfocus,
-dhotnormal, dhotfocus. Цвета в окне подсказки: helpnormal, helpitalic,
-helpbold, helplink, helpslink. Цвета в окне программы просмотра:
-viewunderline. Специальные подсветки: executable, directory, link, device,
-special, core. Цвета в редакторе: editnormal, editbold, editmarked.
+commandlinemark, reverse, gauge, header, inputhistory, commandhistory. Цвета
+строки горячих клавиш F1\-F10: bbarhotkey, bbarbutton. Цвет строки статуса
+редактора и программ просмотра и сравнения файлов: statusbar. Цвета пунктов меню:
+menunormal, menusel, menuhot, menuhotsel, menuinactive. Цвета в окне диалога:
+dnormal, dfocus, dhotnormal, dhotfocus. Цвета в диалоге\-сообщении об ошибке:
+errdfocus, errdhotnormal, errdhotfocus, errdtitle. Цвета в окне встроенной
+помощи: helpnormal, helpitalic, helpbold, helplink, helpslink. Цвета в окне
+программы просмотра: viewbold, viewunderline, viewselected. Цвета в редакторе:
+editnormal, editbold, editmarked, editwhitespace, editlinestate.
 .PP
 Цвета задавать не обязательно. Цвет какого именно поля определяется
 каждым ключевым словом, можно понять из перевода этого ключевого слова.
@@ -3893,7 +3896,7 @@ base_color=normal=white,default:marked=magenta,default
 .PP
 Секция
 .BR [error]
-содержит описания элементов диалога об ошибках.
+содержит описания элементов диалога\-сообщения об ошибках.
 .TP
 .I _default_
 Цвет по умолчанию для данной секции. Если не указан, то используется [core]._default_

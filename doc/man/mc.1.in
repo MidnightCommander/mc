@@ -3422,12 +3422,13 @@ The format for the color definition is:
 .PP
 The colors are optional, and the keywords are: normal, selected, disabled, marked,
 markselect, errors, input, inputmark, inputunchanged, commandlinemark,
-reverse, gauge, header, inputhistory, commandhistory.  Menu colors are: menunormal,
+reverse, gauge, header, inputhistory, commandhistory. Button bar colors are:
+bbarhotkey, bbarbutton. Status bar color: statusbar. Menu colors are: menunormal,
 menusel, menuhot, menuhotsel, menuinactive. Dialog colors are: dnormal, dfocus,
 dhotnormal, dhotfocus, dtitle. Error dialog colors are: errdfocus, errdhotnormal,
 errdhotfocus, errdtitle.  Help colors are: helpnormal, helpitalic, helpbold,
 helplink, helpslink, helptitle.  Viewer color are: viewbold, viewunderline, viewselected.
-Editor colors are: editnormal, editbold, editmarked.
+Editor colors are: editnormal, editbold, editmarked, editwhitespace, editlinestate.
 .PP
 .I input
 determines the color of input lines used in query dialogs.
