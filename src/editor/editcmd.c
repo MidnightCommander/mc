@@ -54,8 +54,7 @@
 #include "lib/lock.h"
 #include "lib/util.h"           /* tilde_expand() */
 #include "lib/vfs/mc-vfs/vfs.h"
-#include "lib/widget/widget.h"         /* listbox_new() */
-#include "lib/widget/wtools.h"         /* message() */
+#include "lib/widget.h"
 
 #include "src/history.h"
 #include "src/layout.h"         /* clr_scr() */
@@ -67,10 +66,10 @@
 #include "src/cmddef.h"
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 
-#include "src/editor/edit-impl.h"
-#include "src/editor/edit-widget.h"
-#include "src/editor/editcmd_dialogs.h"
-#include "src/editor/etags.h"
+#include "edit-impl.h"
+#include "edit-widget.h"
+#include "editcmd_dialogs.h"
+#include "etags.h"
 
 /*** global variables ****************************************************************************/
 

@@ -54,7 +54,7 @@
 #include "lib/strutil.h"
 #include "lib/fileloc.h"
 #include "lib/util.h"
-#include "lib/widget/wtools.h"  /* query_dialog() */
+#include "lib/widget.h"
 
 #include "panel.h"              /* current_panel */
 #include "main.h"               /* do_update_prompt() */

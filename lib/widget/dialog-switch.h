@@ -10,8 +10,6 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct Dlg_head;
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/

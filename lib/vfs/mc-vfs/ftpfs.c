@@ -90,7 +90,7 @@ What to do with this?
 #include "lib/util.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
-#include "lib/widget/wtools.h"  /* message() */
+#include "lib/widget.h"         /* message() */
 
 #include "src/main.h"           /* print_vfs_message */
 #include "src/history.h"

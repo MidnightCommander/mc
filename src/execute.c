@@ -32,8 +32,7 @@
 #include "lib/tty/win.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/util.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "main.h"
 #include "consaver/cons.saver.h"

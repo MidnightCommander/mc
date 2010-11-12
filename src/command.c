@@ -38,8 +38,7 @@
 #include "lib/strescape.h"
 #include "lib/skin.h"           /* DEFAULT_COLOR */
 #include "lib/util.h"
-#include "lib/widget/widget.h"  /* WInput */
-#include "lib/widget/wtools.h"  /* message () */
+#include "lib/widget.h"
 
 #include "command.h"
 #include "panel.h"              /* view_tree enum. Also, needed by main.h */
@@ -192,12 +191,12 @@ enter (WInput * lc_cmdline)
     if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0)
     {
         do_cd_command (cmd);
-        new_input (lc_cmdline);
+        input_clean (lc_cmdline);
         return MSG_HANDLED;
     }
     else if (strcmp (cmd, "exit") == 0)
     {
-        assign_text (lc_cmdline, "");
+        input_assign_text (lc_cmdline, "");
         if (!quiet_quit_cmd ())
             return MSG_NOT_HANDLED;
     }
@@ -241,7 +240,7 @@ enter (WInput * lc_cmdline)
             }
             command[j] = 0;
         }
-        new_input (lc_cmdline);
+        input_clean (lc_cmdline);
         shell_execute (command, 0);
         g_free (command);
 
@@ -389,12 +388,12 @@ command_new (int y, int x, int cols)
  */
 
 void
-command_insert (WInput * in, const char *text, int insert_extra_space)
+command_insert (WInput * in, const char *text, gboolean insert_extra_space)
 {
     char *quoted_text;
 
     quoted_text = name_quote (text, 1);
-    stuff (in, quoted_text, insert_extra_space);
+    input_insert (in, quoted_text, insert_extra_space);
     g_free (quoted_text);
 }
 

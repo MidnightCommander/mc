@@ -35,9 +35,7 @@
 #include "lib/mcconfig.h"       /* mc_config_save_file() */
 #include "lib/strutil.h"        /* str_term_width1() */
 #include "lib/tty/key.h"        /* old_esc_mode_timeout */
-#include "lib/widget/dialog.h" /* B_ constants */
-#include "lib/widget/widget.h" /* WCheck */
-#include "lib/widget/wtools.h" /* QuickDialog */
+#include "lib/widget.h"
 
 #include "setup.h"              /* panels_options */
 #include "main.h"

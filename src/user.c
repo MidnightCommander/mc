@@ -35,10 +35,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/dialog-switch.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "src/editor/edit.h"    /* WEdit, BLOCK_FILE */
 #include "src/viewer/mcviewer.h"        /* for default_* externs */

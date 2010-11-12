@@ -53,10 +53,7 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h" /* For vfs_translate_url() */
 #include "lib/strutil.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/dialog-switch.h"   /* dialog_switch_got_winch() */
-#include "lib/widget/widget.h"
-#include "lib/widget/menu.h"
+#include "lib/widget.h"
 
 #include "command.h"
 #include "main-widgets.h"
@@ -772,13 +769,13 @@ setup_panels (void)
     if (command_prompt)
     {
         widget_set_size (&cmdline->widget, LINES - 1 - keybar_visible, promptl, 1, COLS - promptl);
-        winput_set_origin (cmdline, promptl, COLS - promptl);
+        input_set_origin (cmdline, promptl, COLS - promptl);
         widget_set_size (&the_prompt->widget, LINES - 1 - keybar_visible, 0, 1, promptl);
     }
     else
     {
         widget_set_size (&cmdline->widget, 0, 0, 0, 0);
-        winput_set_origin (cmdline, 0, 0);
+        input_set_origin (cmdline, 0, 0);
         widget_set_size (&the_prompt->widget, LINES, COLS, 0, 0);
     }
 

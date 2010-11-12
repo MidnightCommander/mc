@@ -46,7 +46,7 @@
 #include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/util.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "src/main.h"
 #include "src/charsets.h"

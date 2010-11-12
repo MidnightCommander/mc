@@ -1,7 +1,7 @@
 /* Some misc dialog boxes for the program.
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2009 Free Software Foundation, Inc.
+   2005, 2006, 2009, 2010 Free Software Foundation, Inc.
 
    Authors: 1994, 1995 Miguel de Icaza
    1995 Jakub Jelinek
@@ -51,9 +51,7 @@
 #endif /* ENABLE_VFS_SMB */
 
 #include "lib/util.h"           /* Q_() */
-#include "lib/widget/dialog.h"  /* The nice dialog manager */
-#include "lib/widget/widget.h"  /* The widgets for the nice dialog manager */
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "setup.h"              /* For profile_name */
 #include "command.h"            /* For cmdline */
@@ -130,7 +128,7 @@ static struct
     const char *name;
     int xpos;
     int value;
-    bcback callback;
+    bcback_fn callback;
 }
 job_buttons[] =
 {
@@ -157,7 +155,7 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
         {
             if (dlg_widget_active (display_radio))
             {
-                assign_text (display_mini_status, displays_status[display_radio->sel]);
+                input_assign_text (display_mini_status, displays_status[display_radio->sel]);
                 dlg_stop (h);
                 return MSG_HANDLED;
             }
@@ -191,9 +189,9 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
         if (sender == (Widget *) display_radio)
         {
             if (!(display_check_status->state & C_BOOL))
-                assign_text (display_mini_status, displays_status[display_radio->sel]);
-            update_input (display_mini_status, 0);
-            update_input (display_user_format, 0);
+                input_assign_text (display_mini_status, displays_status[display_radio->sel]);
+            input_update (display_mini_status, FALSE);
+            input_update (display_user_format, FALSE);
             widget_disable (display_user_format->widget, display_radio->sel != 3);
             return MSG_HANDLED;
         }
@@ -203,14 +201,14 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
             if (display_check_status->state & C_BOOL)
             {
                 widget_disable (display_mini_status->widget, FALSE);
-                assign_text (display_mini_status, displays_status[3]);
+                input_assign_text (display_mini_status, displays_status[3]);
             }
             else
             {
                 widget_disable (display_mini_status->widget, TRUE);
-                assign_text (display_mini_status, displays_status[display_radio->sel]);
+                input_assign_text (display_mini_status, displays_status[display_radio->sel]);
             }
-            update_input (display_mini_status, 0);
+            input_update (display_mini_status, FALSE);
             return MSG_HANDLED;
         }
 

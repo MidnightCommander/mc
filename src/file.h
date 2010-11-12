@@ -9,8 +9,7 @@
 #include <sys/time.h>
 
 #include "lib/global.h"
-#include "lib/widget/dialog.h"  /* Dlg_head */
-#include "lib/widget/widget.h"  /* WLabel */
+#include "lib/widget.h"
 
 #include "fileopctx.h"
 

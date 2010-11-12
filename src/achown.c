@@ -41,9 +41,7 @@
 #include "lib/strutil.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/util.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"  /* For init_box_colors() */
+#include "lib/widget.h"
 
 #include "dir.h"
 #include "panel.h"              /* Needed for the externs */

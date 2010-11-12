@@ -20,11 +20,8 @@
  *  \brief Header: pulldown menu code
  */
 
-#ifndef MC__MENU_H
-#define MC__MENU_H
-
-#include "lib/global.h"
-#include "widget.h"
+#ifndef MC__WIDGET_MENU_H
+#define MC__WIDGET_MENU_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -86,4 +83,5 @@ void menubar_arrange (WMenuBar * menubar);
 WMenuBar *find_menubar (const Dlg_head * h);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__MENU_H */
+
+#endif /* MC__WIDGET_MENU_H */

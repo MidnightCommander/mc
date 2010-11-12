@@ -5,7 +5,7 @@
 #ifndef MC__COMMAND_H
 #define MC__COMMAND_H
 
-#include "lib/widget/widget.h"
+#include "lib/widget.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -21,7 +21,7 @@ extern WInput *cmdline;
 
 WInput *command_new (int y, int x, int len);
 void do_cd_command (char *cmd);
-void command_insert (WInput * in, const char *text, int insert_extra_space);
+void command_insert (WInput * in, const char *text, gboolean insert_extra_space);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__COMMAND_H */

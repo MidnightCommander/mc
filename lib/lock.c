@@ -56,7 +56,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/util.h"           /* tilde_expand() */
 #include "lib/lock.h"
-#include "lib/widget/wtools.h"         /* query_dialog() */
+#include "lib/widget.h"         /* query_dialog() */
 
 /*** global variables ****************************************************************************/
 

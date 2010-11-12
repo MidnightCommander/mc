@@ -33,10 +33,7 @@
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"        /* key macros */
 #include "lib/strutil.h"
-
-#include "dialog.h"
-#include "widget.h"
-#include "menu.h"
+#include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
 #include "src/cmddef.h"             /* CK_Ignore_Key */

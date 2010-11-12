@@ -1,11 +1,12 @@
 /* Widget based utility functions.
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007 Free Software Foundation, Inc.
+   2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 
    Authors: 1994, 1995, 1996 Miguel de Icaza
    1994, 1995 Radek Doulik
    1995  Jakub Jelinek
    1995  Andrej Borsenkow
+   2009, 2010 Andrew Borodin
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,19 +31,14 @@
 #include <config.h>
 
 #include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* tty_getch() */
-#include "lib/skin.h"           /* INPUT_COLOR */
 #include "lib/strutil.h"
-#include "lib/util.h"
-
-#include "dialog.h"
-#include "widget.h"
-#include "wtools.h"
+#include "lib/util.h"           /* tilde_expand() */
+#include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
 #include "src/background.h"         /* parent_call */
@@ -138,8 +134,6 @@ bg_message (int dummy, int *flags, char *title, const char *text)
     g_free (title);
 }
 #endif /* WITH_BACKGROUND */
-
-/* {{{ Input routines */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -242,103 +236,11 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     return (ret != B_CANCEL) ? my_str : NULL;
 }
 
-/* }}} */
-
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-Listbox *
-create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
-                                const char *title, const char *help)
-{
-    const dlg_colors_t listbox_colors = {
-        MENU_ENTRY_COLOR,
-        MENU_SELECTED_COLOR,
-        MENU_HOT_COLOR,
-        MENU_HOTSEL_COLOR,
-        COLOR_TITLE
-    };
-
-    const int space = 4;
-
-    int xpos, ypos, len;
-    Listbox *listbox;
-
-    /* Adjust sizes */
-    lines = min (lines, LINES - 6);
-
-    if (title != NULL)
-    {
-        len = str_term_width1 (title) + 4;
-        cols = max (cols, len);
-    }
-
-    cols = min (cols, COLS - 6);
-
-    /* adjust position */
-    if ((center_y < 0) || (center_x < 0))
-    {
-        ypos = LINES / 2;
-        xpos = COLS / 2;
-    }
-    else
-    {
-        ypos = center_y;
-        xpos = center_x;
-    }
-
-    ypos -= lines / 2;
-    xpos -= cols / 2;
-
-    if (ypos + lines >= LINES)
-        ypos = LINES - lines - space;
-    if (ypos < 0)
-        ypos = 0;
-
-    if (xpos + cols >= COLS)
-        xpos = COLS - cols - space;
-    if (xpos < 0)
-        xpos = 0;
-
-    listbox = g_new (Listbox, 1);
-
-    listbox->dlg =
-        create_dlg (TRUE, ypos, xpos, lines + space, cols + space,
-                    listbox_colors, NULL, help, title, DLG_REVERSE | DLG_TRYUP);
-
-    listbox->list = listbox_new (2, 2, lines, cols, FALSE, NULL);
-    add_widget (listbox->dlg, listbox->list);
-
-    return listbox;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-Listbox *
-create_listbox_window (int lines, int cols, const char *title, const char *help)
-{
-    return create_listbox_window_centered (-1, -1, lines, cols, title, help);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Returns the number of the item selected */
-
-int
-run_listbox (Listbox * l)
-{
-    int val = -1;
-
-    if (run_dlg (l->dlg) != B_CANCEL)
-        val = l->list->pos;
-    destroy_dlg (l->dlg);
-    g_free (l);
-    return val;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Used to ask questions to the user */
-
 int
 query_dialog (const char *header, const char *text, int flags, int count, ...)
 {
@@ -495,171 +397,6 @@ message (int flags, const char *title, const char *text, ...)
     g_free (p);
 }
 
-
-/* {{{ Quick dialog routines */
-
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
-quick_dialog_skip (QuickDialog * qd, int nskip)
-{
-#ifdef ENABLE_NLS
-#define I18N(x) (x = !qd->i18n && x && *x ? _(x): x)
-#else
-#define I18N(x) (x = x)
-#endif
-    Dlg_head *dd;
-    QuickWidget *qw;
-    WInput *in;
-    WRadio *r;
-    int return_val;
-
-    I18N (qd->title);
-
-    if ((qd->xpos == -1) || (qd->ypos == -1))
-        dd = create_dlg (TRUE, 0, 0, qd->ylen, qd->xlen,
-                         dialog_colors, qd->callback, qd->help, qd->title,
-                         DLG_CENTER | DLG_TRYUP | DLG_REVERSE);
-    else
-        dd = create_dlg (TRUE, qd->ypos, qd->xpos, qd->ylen, qd->xlen,
-                         dialog_colors, qd->callback, qd->help, qd->title, DLG_REVERSE);
-
-    for (qw = qd->widgets; qw->widget_type != quick_end; qw++)
-    {
-        int xpos;
-        int ypos;
-
-        xpos = (qd->xlen * qw->relative_x) / qw->x_divisions;
-        ypos = (qd->ylen * qw->relative_y) / qw->y_divisions;
-
-        switch (qw->widget_type)
-        {
-        case quick_checkbox:
-            qw->widget =
-                (Widget *) check_new (ypos, xpos, *qw->u.checkbox.state,
-                                      I18N (qw->u.checkbox.text));
-            break;
-
-        case quick_button:
-            qw->widget = (Widget *) button_new (ypos, xpos, qw->u.button.action,
-                                                (qw->u.button.action ==
-                                                 B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-                                                I18N (qw->u.button.text), qw->u.button.callback);
-            break;
-
-        case quick_input:
-            in = input_new (ypos, xpos, input_get_default_colors (),
-                            qw->u.input.len, qw->u.input.text, qw->u.input.histname,
-                            INPUT_COMPLETE_DEFAULT);
-            in->is_password = (qw->u.input.flags == 1);
-            if ((qw->u.input.flags & 2) != 0)
-                in->completion_flags |= INPUT_COMPLETE_CD;
-            qw->widget = (Widget *) in;
-            *qw->u.input.result = NULL;
-            break;
-
-        case quick_label:
-            qw->widget = (Widget *) label_new (ypos, xpos, I18N (qw->u.label.text));
-            break;
-
-        case quick_groupbox:
-            qw->widget = (Widget *) groupbox_new (ypos, xpos,
-                                                  qw->u.groupbox.height,
-                                                  qw->u.groupbox.width,
-                                                  I18N (qw->u.groupbox.title));
-            break;
-
-        case quick_radio:
-            {
-                int i;
-                char **items = NULL;
-
-                /* create the copy of radio_items to avoid mwmory leak */
-                items = g_new0 (char *, qw->u.radio.count + 1);
-
-                if (!qd->i18n)
-                    for (i = 0; i < qw->u.radio.count; i++)
-                        items[i] = g_strdup (_(qw->u.radio.items[i]));
-                else
-                    for (i = 0; i < qw->u.radio.count; i++)
-                        items[i] = g_strdup (qw->u.radio.items[i]);
-
-                r = radio_new (ypos, xpos, qw->u.radio.count, (const char **) items);
-                r->pos = r->sel = *qw->u.radio.value;
-                qw->widget = (Widget *) r;
-                g_strfreev (items);
-                break;
-            }
-
-        default:
-            qw->widget = NULL;
-            fprintf (stderr, "QuickWidget: unknown widget type\n");
-            break;
-        }
-
-        if (qw->widget != NULL)
-        {
-            qw->widget->options |= qw->options; /* FIXME: cannot reset flags, setup only */
-            add_widget (dd, qw->widget);
-        }
-    }
-
-    while (nskip-- != 0)
-    {
-        dd->current = g_list_next (dd->current);
-        if (dd->current == NULL)
-            dd->current = dd->widgets;
-    }
-
-    return_val = run_dlg (dd);
-
-    /* Get the data if we found something interesting */
-    if (return_val != B_CANCEL)
-    {
-        for (qw = qd->widgets; qw->widget_type != quick_end; qw++)
-        {
-            switch (qw->widget_type)
-            {
-            case quick_checkbox:
-                *qw->u.checkbox.state = ((WCheck *) qw->widget)->state & C_BOOL;
-                break;
-
-            case quick_input:
-                if ((qw->u.input.flags & 2) != 0)
-                    *qw->u.input.result = tilde_expand (((WInput *) qw->widget)->buffer);
-                else
-                    *qw->u.input.result = g_strdup (((WInput *) qw->widget)->buffer);
-                break;
-
-            case quick_radio:
-                *qw->u.radio.value = ((WRadio *) qw->widget)->sel;
-                break;
-
-            default:
-                break;
-            }
-        }
-    }
-
-    destroy_dlg (dd);
-
-    return return_val;
-#undef I18N
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
-quick_dialog (QuickDialog * qd)
-{
-    return quick_dialog_skip (qd, 0);
-}
-
-/* }}} */
-
-/* {{{ Input routines */
-
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Show input dialog, background safe.
@@ -721,12 +458,3 @@ input_expand_dialog (const char *header, const char *text,
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-/* }}} */
-
-/* }}} */
-/*
-   Cause emacs to enter folding mode for this file:
-   Local variables:
-   end:
- */

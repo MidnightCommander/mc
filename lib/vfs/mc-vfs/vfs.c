@@ -53,7 +53,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget/wtools.h"  /* message() */
+#include "lib/widget.h"         /* message() */
 
 #ifdef HAVE_CHARSET
 #include "src/charsets.h"

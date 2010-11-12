@@ -32,7 +32,7 @@
 #include "lib/global.h"
 #include "lib/unixcompat.h"
 #include "lib/util.h"
-#include "lib/widget/wtools.h"  /* message() */
+#include "lib/widget.h"         /* message() */
 
 #include "vfs-impl.h"
 #include "utilvfs.h"

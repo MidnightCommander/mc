@@ -31,8 +31,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/tty/key.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "src/history.h"
 #include "src/charsets.h"

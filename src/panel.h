@@ -8,7 +8,7 @@
 #include "lib/global.h"         /* gboolean */
 #include "lib/fs.h"             /* MC_MAXPATHLEN */
 #include "lib/strutil.h"
-#include "lib/widget/dialog.h"  /* Widget */
+#include "lib/widget.h"         /* Widget */
 
 #include "dir.h"                /* dir_list */
 #include "main.h"               /* cd_enum */

@@ -32,8 +32,7 @@
 #include <stdlib.h>             /* atoi(), NULL */
 
 #include "lib/global.h"
-#include "lib/widget/dialog.h"  /* B_CANCEL */
-#include "lib/widget/wtools.h"  /* QuickDialog */
+#include "lib/widget.h"
 
 #include "edit-widget.h"
 #include "edit-impl.h"

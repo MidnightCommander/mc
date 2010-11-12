@@ -44,9 +44,7 @@
 #include "lib/unixcompat.h"
 #include "lib/timefmt.h"
 #include "lib/util.h"
-#include "lib/widget/wtools.h"  /* for message (...) */
-#include "lib/widget/widget.h"
-#include "lib/widget/menu.h"    /* menubar_visible */
+#include "lib/widget.h"
 
 #include "dir.h"
 #include "panel.h"
@@ -2626,7 +2624,7 @@ _do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);
-    free_completions (cmdline);
+    input_free_completions (cmdline);
 
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
 
@@ -2682,7 +2680,7 @@ directory_history_list (WPanel * panel)
 {
     char *s;
 
-    s = show_hist (&panel->dir_history, &panel->widget);
+    s = history_show (&panel->dir_history, &panel->widget);
 
     if (s != NULL)
     {

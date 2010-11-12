@@ -43,9 +43,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "setup.h"              /* verbose */
 #include "dir.h"
@@ -644,7 +642,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
             if (in_start_dir == NULL)
                 in_start_dir = g_strdup (temp_dir);
 
-            assign_text (in_start, in_start_dir);
+            input_assign_text (in_start, in_start_dir);
 
             /* Warning: Dreadful goto */
             goto find_par_start;

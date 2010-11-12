@@ -57,11 +57,7 @@
 #endif /* ENABLE_VFS_SMB */
 
 #include "lib/util.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"
-#include "lib/widget/menu.h"
-#include "lib/widget/dialog-switch.h"
+#include "lib/widget.h"
 
 #include "args.h"
 #include "dir.h"
@@ -748,10 +744,10 @@ copy_current_pathname (void)
         return;
 
     cwd_path = remove_encoding_from_path (current_panel->cwd);
-    command_insert (cmdline, cwd_path, 0);
+    command_insert (cmdline, cwd_path, FALSE);
 
     if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
-        command_insert (cmdline, PATH_SEP_STR, 0);
+        command_insert (cmdline, PATH_SEP_STR, FALSE);
     g_free (cwd_path);
 }
 
@@ -769,10 +765,10 @@ copy_other_pathname (void)
         return;
 
     cwd_path = remove_encoding_from_path (other_panel->cwd);
-    command_insert (cmdline, cwd_path, 0);
+    command_insert (cmdline, cwd_path, FALSE);
 
     if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
-        command_insert (cmdline, PATH_SEP_STR, 0);
+        command_insert (cmdline, PATH_SEP_STR, FALSE);
     g_free (cwd_path);
 }
 
@@ -794,7 +790,7 @@ copy_readlink (WPanel * panel)
         if (i > 0)
         {
             buffer[i] = 0;
-            command_insert (cmdline, buffer, 1);
+            command_insert (cmdline, buffer, TRUE);
         }
     }
 }
@@ -834,7 +830,7 @@ copy_prog_name (void)
     else
         tmp = selection (current_panel)->fname;
 
-    command_insert (cmdline, tmp, 1);
+    command_insert (cmdline, tmp, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -852,12 +848,12 @@ copy_tagged (WPanel * panel)
         for (i = 0; i < panel->count; i++)
         {
             if (panel->dir.list[i].f.marked)
-                command_insert (cmdline, panel->dir.list[i].fname, 1);
+                command_insert (cmdline, panel->dir.list[i].fname, TRUE);
         }
     }
     else
     {
-        command_insert (cmdline, panel->dir.list[panel->selected].fname, 1);
+        command_insert (cmdline, panel->dir.list[panel->selected].fname, TRUE);
     }
     input_enable_update (cmdline);
 }
@@ -1387,21 +1383,23 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
             return MSG_NOT_HANDLED;
 
         if (parm == '\t')
-            free_completions (cmdline);
+            input_free_completions (cmdline);
 
         if (parm == '\n')
         {
             size_t i;
 
-            for (i = 0; cmdline->buffer[i] && (cmdline->buffer[i] == ' ' ||
-                                               cmdline->buffer[i] == '\t'); i++)
+            for (i = 0; cmdline->buffer[i] != '\0' &&
+                        (cmdline->buffer[i] == ' ' || cmdline->buffer[i] == '\t'); i++)
                 ;
-            if (cmdline->buffer[i])
+
+            if (cmdline->buffer[i] != '\0')
             {
                 send_message ((Widget *) cmdline, WIDGET_KEY, parm);
                 return MSG_HANDLED;
             }
-            stuff (cmdline, "", 0);
+
+            input_insert (cmdline, "", FALSE);
             cmdline->point = 0;
         }
 
@@ -1825,7 +1823,7 @@ do_update_prompt (void)
 void
 change_panel (void)
 {
-    free_completions (cmdline);
+    input_free_completions (cmdline);
     dlg_one_down (midnight_dlg);
 }
 
@@ -1907,7 +1905,7 @@ load_prompt (int fd, void *unused)
         }
         mc_prompt = tmp_prompt;
         label_set_text (the_prompt, mc_prompt);
-        winput_set_origin ((WInput *) cmdline, prompt_len, COLS - prompt_len);
+        input_set_origin ((WInput *) cmdline, prompt_len, COLS - prompt_len);
 
         /* since the prompt has changed, and we are called from one of the
          * tty_get_event channels, the prompt updating does not take place

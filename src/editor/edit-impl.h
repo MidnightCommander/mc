@@ -33,8 +33,9 @@
 #include <stdio.h>
 
 #include "lib/search.h"         /* mc_search_type_t */
-#include "lib/widget/dialog.h"  /* cb_ret_t */
-#include "src/editor/edit.h"
+#include "lib/widget.h"         /* cb_ret_t */
+
+#include "edit.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

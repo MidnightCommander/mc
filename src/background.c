@@ -44,12 +44,12 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
-#include "lib/widget/wtools.h"
+#include "lib/tty/key.h"        /* add_select_channel(), delete_select_channel() */
+#include "lib/widget.h"         /* message() */
 
-#include "background.h"
 #include "layout.h"             /* repaint_screen() */
 #include "fileopctx.h"          /* FileOpContext */
-#include "lib/tty/key.h"        /* add_select_channel(), delete_select_channel() */
+#include "background.h"
 
 /*** global variables ****************************************************************************/
 

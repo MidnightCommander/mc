@@ -36,8 +36,7 @@
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
-
-#include "dialog.h"
+#include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
 #include "src/help.h"               /* interactive_display() */
@@ -47,8 +46,6 @@
 #include "src/keybind.h"
 #include "src/main.h"               /* fast_refresh */
 #include "src/setup.h"              /* mouse_close_dialog */
-
-#include "dialog-switch.h"
 
 /*** global variables ****************************************************************************/
 
@@ -83,7 +80,7 @@ typedef enum
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message, gboolean reverse, int flags);
+static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flags);
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -93,7 +90,7 @@ static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message, gboolean r
  */
 
 static void
-dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message, gboolean reverse, int flags)
+dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flags)
 {
     GList *p, *first;
 
@@ -140,7 +137,7 @@ dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message, gboolean reverse, int 
         }
 
         if ((flags == 0) || ((flags & w->options) != 0))
-            send_message (w, message, 0);
+            send_message (w, msg, 0);
     }
     while (first != p);
 }
@@ -548,46 +545,7 @@ draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-init_widget (Widget * w, int y, int x, int lines, int cols,
-             callback_fn callback, mouse_h mouse_handler)
-{
-    w->x = x;
-    w->y = y;
-    w->cols = cols;
-    w->lines = lines;
-    w->callback = callback;
-    w->mouse = mouse_handler;
-    w->owner = NULL;
-
-    /* Almost all widgets want to put the cursor in a suitable place */
-    w->options = W_WANT_CURSOR;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-widget_set_size (Widget * widget, int y, int x, int lines, int cols)
-{
-    widget->x = x;
-    widget->y = y;
-    widget->cols = cols;
-    widget->lines = lines;
-    send_message (widget, WIDGET_RESIZED, 0 /* unused */ );
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-widget_erase (Widget * w)
-{
-    if (w != NULL)
-        tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Clean the dialog area, draw the frame and the title */
-
 void
 common_dialog_repaint (Dlg_head * h)
 {
@@ -900,9 +858,9 @@ do_refresh (void)
 /** broadcast a message to all the widgets in a dialog */
 
 void
-dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, gboolean reverse)
+dlg_broadcast_msg (Dlg_head * h, widget_msg_t msg, gboolean reverse)
 {
-    dlg_broadcast_msg_to (h, message, reverse, 0);
+    dlg_broadcast_msg_to (h, msg, reverse, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */

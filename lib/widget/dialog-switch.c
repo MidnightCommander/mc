@@ -28,11 +28,7 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"        /* LINES, COLS */
-
-#include "dialog.h"
-#include "widget.h"
-#include "wtools.h"             /* Listbox */
-#include "dialog-switch.h"
+#include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
 #include "src/layout.h"             /* repaint_screen() */

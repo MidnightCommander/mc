@@ -28,7 +28,7 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"         /* Listbox */
 
 #include "edit-impl.h"
 #include "edit-widget.h"

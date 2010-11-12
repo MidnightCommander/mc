@@ -34,7 +34,7 @@
 #include "lib/fs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"         /* message() */
 
 #include "treestore.h"
 #include "dir.h"

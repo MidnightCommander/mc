@@ -39,7 +39,6 @@
 #include "lib/tty/key.h"        /* KEY_M_ */
 #include "lib/tty/tty.h"        /* keys */
 #include "lib/strutil.h"
-#include "lib/widget/wtools.h"
 
 #include "cmddef.h"             /* CK_ cmd name const */
 #include "keybind.h"

@@ -41,8 +41,7 @@
 #include <string.h>
 
 #include "lib/global.h"
-
-#include "src/wtools.h"         /* message() */
+#include "lib/widget.h"         /* message() */
 
 #undef  PACKAGE_BUGREPORT
 #undef  PACKAGE_NAME

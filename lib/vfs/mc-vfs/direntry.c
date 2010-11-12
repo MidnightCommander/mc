@@ -41,7 +41,9 @@
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
 #include "lib/util.h"           /* concat_dir_and_file */
-#include "lib/widget/wtools.h"  /* message() */
+#if 0
+#include "lib/widget.h"         /* message() */
+#endif
 
 #include "src/main.h"           /* print_vfs_message */
 

@@ -45,9 +45,7 @@
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/strutil.h"        /* str_term_trim() */
 #include "lib/util.h"           /* concat_dir_and_file() */
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"  /* ButtonBar */
-#include "lib/widget/menu.h"    /* menubar_new() */
+#include "lib/widget.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"

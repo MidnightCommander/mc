@@ -32,9 +32,7 @@
 #include "lib/tty/key.h"
 #include "lib/search.h"
 #include "lib/strutil.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "src/main.h"
 #include "src/history.h"

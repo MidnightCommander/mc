@@ -50,9 +50,7 @@
 #include "lib/strutil.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/util.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"  /* QuickDialog */
+#include "lib/widget.h"
 
 #include "setup.h"              /* For profile_bname */
 #include "panel.h"              /* current_panel */
@@ -570,7 +568,7 @@ hotlist_handle_key (Dlg_head * h, int key)
                     char *tmp;
 
                     tmp = g_strconcat ("cd ", hlp->directory, (char *) NULL);
-                    stuff (cmdline, tmp, 0);
+                    input_insert (cmdline, tmp, FALSE);
                     g_free (tmp);
                     h->ret_value = B_CANCEL;
                     dlg_stop (h);
@@ -623,7 +621,7 @@ hotlist_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static lcback_ret_t
 l_call (WListbox * list)
 {
     Dlg_head *dlg = list->widget.owner;

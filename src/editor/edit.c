@@ -50,8 +50,7 @@
 #include "lib/util.h"           /* load_file_position(), save_file_position() */
 #include "lib/timefmt.h"        /* time formatting */
 #include "lib/lock.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"  /* query_dialog() */
+#include "lib/widget.h"
 
 #include "src/cmd.h"            /* view_other_cmd() */
 #include "src/user.h"           /* user_menu_cmd() */

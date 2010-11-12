@@ -46,8 +46,7 @@
 #endif
 
 #include "lib/util.h"
-#include "lib/widget/wtools.h"
-#include "lib/widget/menu.h"    /* menubar_visible declaration */
+#include "lib/widget.h"
 
 #include "args.h"
 #include "dir.h"

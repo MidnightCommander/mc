@@ -44,7 +44,7 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"           /* is_printable() */
-#include "lib/widget/widget.h"  /* buttonbar_redraw() */
+#include "lib/widget.h"         /* buttonbar_redraw() */
 
 #include "src/charsets.h"
 #include "src/main.h"           /* source_codepage */

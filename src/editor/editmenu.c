@@ -43,8 +43,7 @@
 
 #include "lib/tty/tty.h"        /* KEY_F */
 #include "lib/tty/key.h"        /* XCTRL */
-#include "lib/widget/dialog.h"  /* cb_ret_t */
-#include "lib/widget/menu.h"    /* menu_entry */
+#include "lib/widget.h"
 
 #include "src/main.h"           /* drop_menus */
 #include "src/cmddef.h"

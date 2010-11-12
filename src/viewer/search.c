@@ -38,8 +38,8 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/widget/wtools.h"
 #include "lib/tty/tty.h"
+#include "lib/widget.h"
 
 #include "src/setup.h"
 

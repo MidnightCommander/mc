@@ -30,7 +30,6 @@
 #include <sys/types.h>          /* size_t */
 
 #include "lib/global.h"
-#include "lib/tty/mouse.h"
 #include "lib/hook.h"           /* hook_t */
 
 /*** defined constants ***************************************************************************/
@@ -42,49 +41,9 @@
 #define B_HELP          3
 #define B_USER          100
 
-#define widget_move(w, _y, _x) tty_gotoyx (((Widget *)(w))->y + _y, ((Widget *)(w))->x + _x)
 #define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + _y, ((Dlg_head *)(h))->x + _x)
 
-/* Sets/clear the specified flag in the options field */
-#define widget_option(w,f,i) \
-    w.options = ((i) ? ((w).options | (f)) : ((w).options & (~(f))))
-
-#define widget_want_cursor(w,i) widget_option((w), W_WANT_CURSOR, (i))
-#define widget_want_hotkey(w,i) widget_option((w), W_WANT_HOTKEY, (i))
-#define widget_disable(w,i) widget_option((w), W_DISABLED, (i))
-
-
 /*** enums ***************************************************************************************/
-
-/* Widget messages */
-typedef enum
-{
-    WIDGET_INIT,                /* Initialize widget */
-    WIDGET_FOCUS,               /* Draw widget in focused state */
-    WIDGET_UNFOCUS,             /* Draw widget in unfocused state */
-    WIDGET_DRAW,                /* Sent to widget to draw themselves */
-    WIDGET_KEY,                 /* Sent to widgets on key press */
-    WIDGET_HOTKEY,              /* Sent to widget to catch preprocess key */
-    WIDGET_COMMAND,             /* Send to widget to handle command */
-    WIDGET_DESTROY,             /* Sent to widget at destruction time */
-    WIDGET_CURSOR,              /* Sent to widget to position the cursor */
-    WIDGET_IDLE,                /* Sent to widgets with options & W_WANT_IDLE */
-    WIDGET_RESIZED              /* Sent after a widget has been resized */
-} widget_msg_t;
-
-typedef enum
-{
-    MSG_NOT_HANDLED = 0,
-    MSG_HANDLED = 1
-} cb_ret_t;
-
-/* Widgets are expected to answer to the following messages:
-
-   WIDGET_FOCUS:   1 if the accept the focus, 0 if they do not.
-   WIDGET_UNFOCUS: 1 if they accept to release the focus, 0 if they don't.
-   WIDGET_KEY:     1 if they actually used the key, 0 if not.
-   WIDGET_HOTKEY:  1 if they actually used the key, 0 if not.
- */
 
 /* Dialog messages */
 typedef enum
@@ -136,34 +95,7 @@ typedef enum
     DLG_COLOR_COUNT
 } dlg_colors_enum_t;
 
-/* widget options */
-typedef enum
-{
-    W_WANT_HOTKEY = (1 << 1),
-    W_WANT_CURSOR = (1 << 2),
-    W_WANT_IDLE = (1 << 3),
-    W_IS_INPUT = (1 << 4),
-    W_DISABLED = (1 << 5)       /* Widget cannot be selected */
-} widget_options_t;
-
-/* Flags for widget repositioning on dialog resize */
-typedef enum
-{
-    WPOS_KEEP_LEFT = (1 << 0),  /* keep widget distance to left border of dialog */
-    WPOS_KEEP_RIGHT = (1 << 1), /* keep widget distance to right border of dialog */
-    WPOS_KEEP_TOP = (1 << 2),   /* keep widget distance to top border of dialog */
-    WPOS_KEEP_BOTTOM = (1 << 3),        /* keep widget distance to bottom border of dialog */
-    WPOS_KEEP_HORZ = WPOS_KEEP_LEFT | WPOS_KEEP_RIGHT,
-    WPOS_KEEP_VERT = WPOS_KEEP_TOP | WPOS_KEEP_BOTTOM,
-    WPOS_KEEP_ALL = WPOS_KEEP_HORZ | WPOS_KEEP_VERT
-} widget_pos_flags_t;
-
 /*** typedefs(not structures) ********************************************************************/
-
-typedef struct Widget Widget;
-
-/* Dialog callback */
-typedef struct Dlg_head Dlg_head;
 
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
@@ -174,9 +106,7 @@ typedef char *(*dlg_title_str) (const Dlg_head * h, size_t len);
 
 typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
-/* Widget callback */
-typedef cb_ret_t (*callback_fn) (Widget * widget, widget_msg_t msg, int parm);
-
+/* Dialog callback */
 typedef cb_ret_t (*dlg_cb_fn) (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
 /* menu command execution */
@@ -216,19 +146,6 @@ struct Dlg_head
     dlg_title_str get_title;    /* useless for modal dialogs */
 
     struct Dlg_head *parent;    /* Parent dialog */
-};
-
-/* Every Widget must have this as its first element */
-struct Widget
-{
-    int x, y;
-    int cols, lines;
-    widget_options_t options;
-    widget_pos_flags_t pos_flags;       /* repositioning flags */
-    unsigned int id;            /* Number of the widget, starting with 0 */
-    callback_fn callback;
-    mouse_h mouse;
-    struct Dlg_head *owner;
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -277,12 +194,7 @@ void set_idle_proc (Dlg_head * d, int enable);
 
 void dlg_redraw (Dlg_head * h);
 
-void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
-
 void dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, gboolean reverse);
-
-void init_widget (Widget * w, int y, int x, int lines, int cols,
-                  callback_fn callback, mouse_h mouse_handler);
 
 /* Default callback for dialogs */
 cb_ret_t default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
@@ -292,7 +204,6 @@ void common_dialog_repaint (Dlg_head * h);
 
 void dlg_replace_widget (Widget * old, Widget * new);
 int dlg_overlap (Widget * a, Widget * b);
-void widget_erase (Widget *);
 void dlg_erase (Dlg_head * h);
 void dlg_stop (Dlg_head * h);
 
@@ -313,22 +224,17 @@ void update_cursor (Dlg_head * h);
 
 /*** inline functions ****************************************************************************/
 
-static inline cb_ret_t
-send_message (Widget * w, widget_msg_t msg, int parm)
-{
-    return w->callback (w, msg, parm);
-}
-
-/* Return 1 if the widget is active, 0 otherwise */
-static inline int
+/* Return TRUE if the widget is active, FALSE otherwise */
+static inline gboolean
 dlg_widget_active (void *w)
 {
     Widget *w1 = (Widget *) w;
     return ((Widget *) w1->owner->current->data == w1);
 }
 
+
 static inline unsigned int
-dlg_get_current_widget_id (const Dlg_head * h)
+dlg_get_current_widget_id (const struct Dlg_head * h)
 {
     return ((Widget *) h->current->data)->id;
 }

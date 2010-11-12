@@ -40,9 +40,7 @@
 #include "lib/mcconfig.h"       /* Load/save directories panelize */
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"  /* For common_dialog_repaint() */
+#include "lib/widget.h"
 
 #include "setup.h"              /* For profile_bname */
 #include "dir.h"
@@ -78,7 +76,9 @@ static WInput *pname;
 
 static struct
 {
-    int ret_cmd, flags, y, x;
+    int ret_cmd;
+    button_flags_t flags;
+    int y, x;
     const char *text;
 } panelize_but[BUTTONS] =
 {
@@ -116,9 +116,9 @@ update_command (void)
 
         last_listitem = l_panelize->pos;
         listbox_get_current (l_panelize, NULL, (void **) &data);
-        assign_text (pname, data->command);
+        input_assign_text (pname, data->command);
         pname->point = 0;
-        update_input (pname, 1);
+        input_update (pname, TRUE);
     }
 }
 

@@ -57,9 +57,7 @@
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget/dialog.h"  /* Widget */
-#include "lib/widget/dialog-switch.h"
-#include "lib/widget/wtools.h"  /* message() */
+#include "lib/widget.h"
 
 #include "cmd.h"                /* Our definitions */
 #include "fileopctx.h"

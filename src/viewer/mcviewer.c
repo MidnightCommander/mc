@@ -45,8 +45,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* load_file_position() */
-#include "lib/widget/widget.h"
-#include "lib/widget/menu.h"    /* menubar_visible */
+#include "lib/widget.h"
 
 #include "src/main.h"
 #include "src/charsets.h"

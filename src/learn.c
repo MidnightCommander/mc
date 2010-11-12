@@ -42,9 +42,7 @@
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* convert_controls() */
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "setup.h"
 #include "layout.h"             /* repaint_screen() */

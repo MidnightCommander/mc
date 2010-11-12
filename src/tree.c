@@ -42,17 +42,14 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"
+#include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget/wtools.h"  /* message() */
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/menu.h"    /* menubar_visible */
+#include "lib/widget.h"
 
 #include "dir.h"
 #include "panel.h"

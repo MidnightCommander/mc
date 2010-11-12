@@ -55,8 +55,7 @@
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/lock.h"           /* lock_file() */
 #include "lib/util.h"
-#include "lib/widget/dialog.h"  /* cb_ret_t */
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "src/panel.h"
 #include "src/layout.h"

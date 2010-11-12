@@ -44,9 +44,7 @@
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
-#include "lib/widget/wtools.h"
+#include "lib/widget.h"
 
 #include "main.h"               /* show_all_if_ambiguous */
 
@@ -74,7 +72,7 @@ extern char **environ;
 
 /*** file scope type declarations ****************************************************************/
 
-typedef char *CompletionFunction (const char *text, int state, INPUT_COMPLETE_FLAGS flags);
+typedef char *CompletionFunction (const char *text, int state, input_complete_t flags);
 
 /*** file scope variables ************************************************************************/
 
@@ -95,7 +93,7 @@ static int start, end;
  * Useful to print/debug completion flags
  */
 static const char *
-show_c_flags (INPUT_COMPLETE_FLAGS flags)
+show_c_flags (input_complete_t flags)
 {
     static char s_cf[] = "FHCVUDS";
 
@@ -114,7 +112,7 @@ show_c_flags (INPUT_COMPLETE_FLAGS flags)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-filename_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
+filename_completion_function (const char *text, int state, input_complete_t flags)
 {
     static DIR *directory;
     static char *filename = NULL;
@@ -290,7 +288,7 @@ filename_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
    you have to change the code */
 
 static char *
-username_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
+username_completion_function (const char *text, int state, input_complete_t flags)
 {
     static struct passwd *entry;
     static size_t userlen;
@@ -326,7 +324,7 @@ username_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
    equal to '{', so that we should append '}' at the end */
 
 static char *
-variable_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
+variable_completion_function (const char *text, int state, input_complete_t flags)
 {
     static char **env_p;
     static int varlen, isbrace;
@@ -457,7 +455,7 @@ fetch_hosts (const char *filename)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-hostname_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
+hostname_completion_function (const char *text, int state, input_complete_t flags)
 {
     static char **host_p;
     static int textstart, textlen;
@@ -522,7 +520,7 @@ hostname_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
  */
 
 static char *
-command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS flags)
+command_completion_function (const char *_text, int state, input_complete_t flags)
 {
     char *text;
     static const char *path_end;
@@ -690,7 +688,7 @@ match_compare (const void *a, const void *b)
    In case no matches were found we return NULL. */
 
 static char **
-completion_matches (const char *text, CompletionFunction entry_function, INPUT_COMPLETE_FLAGS flags)
+completion_matches (const char *text, CompletionFunction entry_function, input_complete_t flags)
 {
     /* Number of slots in match_list. */
     int match_list_size;
@@ -790,7 +788,7 @@ completion_matches (const char *text, CompletionFunction entry_function, INPUT_C
 /* --------------------------------------------------------------------------------------------- */
 /** Check if directory completion is needed */
 static int
-check_is_cd (const char *text, int lc_start, INPUT_COMPLETE_FLAGS flags)
+check_is_cd (const char *text, int lc_start, input_complete_t flags)
 {
     char *p, *q;
     int test = 0;
@@ -820,7 +818,7 @@ check_is_cd (const char *text, int lc_start, INPUT_COMPLETE_FLAGS flags)
 /* --------------------------------------------------------------------------------------------- */
 /** Returns an array of matches, or NULL if none. */
 static char **
-try_complete (char *text, int *lc_start, int *lc_end, INPUT_COMPLETE_FLAGS flags)
+try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
 {
     int in_command_position = 0;
     char *word;
@@ -1014,7 +1012,7 @@ insert_text (WInput * in, char *text, ssize_t size)
         }
         memcpy (in->buffer + start, text, size - start + end);
         in->point += str_length (in->buffer) - buff_len;
-        update_input (in, 1);
+        input_update (in, TRUE);
         end += size;
     }
     return size != 0;
@@ -1061,7 +1059,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                     {
                         listbox_select_entry ((WListbox *) h->current->data, i);
                         end = str_get_prev_char (&(input->buffer[end])) - input->buffer;
-                        handle_char (input, parm);
+                        input_handle_char (input, parm);
                         send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
                         break;
                     }
@@ -1073,7 +1071,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
             if (parm < 32 || parm > 256)
             {
                 bl = 0;
-                if (is_in_input_map (input, parm) == 2)
+                if (input_key_is_in_map (input, parm) == 2)
                 {
                     if (end == min_end)
                         return MSG_HANDLED;
@@ -1181,7 +1179,7 @@ complete_engine (WInput * in, int what_to_do)
     int s;
 
     if (in->completions && (str_offset_to_pos (in->buffer, in->point)) != end)
-        free_completions (in);
+        input_free_completions (in);
     if (!in->completions)
     {
         end = str_offset_to_pos (in->buffer, in->point);
@@ -1201,7 +1199,7 @@ complete_engine (WInput * in, int what_to_do)
         in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
     }
 
-    if (in->completions)
+    if (in->completions != NULL)
     {
         if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1]))
         {
@@ -1211,7 +1209,7 @@ complete_engine (WInput * in, int what_to_do)
                 if (in->completions[1])
                     tty_beep ();
                 else
-                    free_completions (in);
+                    input_free_completions (in);
             }
             else
                 tty_beep ();
@@ -1279,7 +1277,7 @@ complete_engine (WInput * in, int what_to_do)
                     insert_text (in, q, strlen (q));
             }
             if (q || end != min_end)
-                free_completions (in);
+                input_free_completions (in);
             i = query_dlg->ret_value;   /* B_USER if user wants to start over again */
             destroy_dlg (query_dlg);
             if (i == B_USER)
@@ -1295,21 +1293,7 @@ complete_engine (WInput * in, int what_to_do)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-void
-free_completions (WInput * in)
-{
-    char **p;
-
-    if (!in->completions)
-        return;
-    for (p = in->completions; *p; p++)
-        g_free (*p);
-    g_free (in->completions);
-    in->completions = NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
+/* declared in lib/widget/input.h */
 void
 complete (WInput * in)
 {
@@ -1318,7 +1302,7 @@ complete (WInput * in)
     if (!str_is_valid_string (in->buffer))
         return;
 
-    if (in->completions)
+    if (in->completions != NULL)
         engine_flags = DO_QUERY;
     else
     {
@@ -1328,7 +1312,8 @@ complete (WInput * in)
             engine_flags |= DO_QUERY;
     }
 
-    while (complete_engine (in, engine_flags));
+    while (complete_engine (in, engine_flags))
+        ;
 }
 
 /* --------------------------------------------------------------------------------------------- */

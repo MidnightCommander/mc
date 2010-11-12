@@ -8,8 +8,7 @@
 #include "lib/global.h"
 
 #include "lib/search.h"
-#include "lib/widget/dialog.h"
-#include "lib/widget/widget.h"
+#include "lib/widget.h"
 
 #include "src/keybind.h"        /* global_keymap_t */
 
