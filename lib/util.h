@@ -53,7 +53,6 @@ extern struct sigaction startup_handler;
 /*** declarations of public functions ************************************************************/
 
 int is_printable (int c);
-void msglen (const char *text, /*@out@ */ int *lines, /*@out@ */ int *columns);
 
 /* Quote the filename for the purpose of inserting it into the command
  * line.  If quote_percent is 1, replace "%" with "%%" - the percent is

@@ -237,38 +237,6 @@ is_printable (int c)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Calculates the message dimensions (lines and columns)
- *
- */
-
-void
-msglen (const char *text, int *lines, int *columns)
-{
-    int nlines = 1;             /* even the empty string takes one line */
-    int ncolumns = 0;
-    int colindex = 0;
-
-    for (; *text != '\0'; text++)
-    {
-        if (*text == '\n')
-        {
-            nlines++;
-            colindex = 0;
-        }
-        else
-        {
-            colindex++;
-            if (colindex > ncolumns)
-                ncolumns = colindex;
-        }
-    }
-
-    *lines = nlines;
-    *columns = ncolumns;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Quote the filename for the purpose of inserting it into the command
  * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
  * processed by the mc command line.

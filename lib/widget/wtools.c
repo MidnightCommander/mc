@@ -198,11 +198,12 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
     /* text */
     p_text = g_strstrip (g_strdup (text));
-    msglen (p_text, &lines, &cols);
+    str_msg_term_size (p_text, &lines, &cols);
     quick_widgets[3].u.label.text = p_text;
 
     /* dialog width */
-    len = max (max (str_term_width1 (header), cols) + 4, 64);
+    len = str_term_width1 (header);
+    len = max (max (len, cols) + 4, 64);
     len = min (max (len, b_len + 6), COLS);
 
     /* button locations */

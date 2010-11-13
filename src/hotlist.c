@@ -1040,9 +1040,10 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     static gboolean i18n_flag = FALSE;
 #endif /* ENABLE_NLS */
 
-    msglen (text1, &lines1, &cols1);
-    msglen (text2, &lines2, &cols2);
-    len = max (str_term_width1 (header), cols1);
+    len = str_term_width1 (header);
+    str_msg_term_size (text1, &lines1, &cols1);
+    str_msg_term_size (text2, &lines2, &cols2);
+    len = max (len, cols1);
     len = max (max (len, cols2) + 4, 64);
 
 #ifdef ENABLE_NLS
@@ -1133,8 +1134,9 @@ add_new_group_input (const char *header, const char *label, char **result)
     static gboolean i18n_flag = FALSE;
 #endif /* ENABLE_NLS */
 
-    msglen (label, &lines, &cols);
-    len = max (max (str_term_width1 (header), cols) + 4, 64);
+    len = str_term_width1 (header);
+    str_msg_term_size (label, &lines, &cols);
+    len = max (max (len, cols) + 4, 64);
 
 #ifdef ENABLE_NLS
     if (!i18n_flag)
