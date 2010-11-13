@@ -420,12 +420,6 @@ str_term_trim (const char *text, int width)
     return used_class.term_trim (text, width);
 }
 
-void
-str_msg_term_size (const char *text, int *lines, int *columns)
-{
-    used_class.msg_term_size (text, lines, columns);
-}
-
 const char *
 str_term_substring (const char *text, int start, int width)
 {
@@ -770,4 +764,42 @@ void
 str_release_key (char *key, int case_sen)
 {
     used_class.release_key (key, case_sen);
+}
+
+void
+str_msg_term_size (const char *text, int *lines, int *columns)
+{
+    char *p, *tmp;
+    char *q;
+    char c = '\0';
+    int width;
+
+    *lines = 1;
+    *columns = 0;
+
+    tmp = g_strdup (text);
+    p = tmp;
+
+    while (TRUE)
+    {
+        q = strchr (p, '\n');
+        if (q != NULL)
+        {
+            c = q[0];
+            q[0] = '\0';
+        }
+
+        width = str_term_width1 (p);
+        if (width > *columns)
+            *columns = width;
+
+        if (q == NULL)
+            break;
+
+        q[0] = c;
+        p = q + 1;
+        (*lines)++;
+    }
+
+    g_free (tmp);
 }

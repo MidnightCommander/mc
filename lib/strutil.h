@@ -115,7 +115,6 @@ struct str_class
       /*I*/ const char *(*term_form) (const char *);
       /*I*/ const char *(*fit_to_term) (const char *, int, align_crt_t);
       /*I*/ const char *(*term_trim) (const char *text, int width);
-      /*I*/ void (*msg_term_size) (const char *, int *, int *);
       /*I*/ const char *(*term_substring) (const char *, int, int);
       /*I*/ int (*term_width1) (const char *);
       /*I*/ int (*term_width2) (const char *, size_t);
@@ -395,10 +394,6 @@ const char *str_fit_to_term (const char *text, int width, align_crt_t just_mode)
  */
 const char *str_term_trim (const char *text, int width);
 
-/* return how many lines and columns will text occupy on terminal
- * I
- */
-void str_msg_term_size (const char *text, int *lines, int *columns);
 
 /* like str_term_form, but return only specified substring
  * start - column (position) on terminal, where substring begin
@@ -524,6 +519,10 @@ int str_isutf8 (const char *codeset_name);
 const char *str_detect_termencoding (void);
 
 int str_verscmp (const char *s1, const char *s2);
+
+/* return how many lines and columns will text occupy on terminal
+ */
+void str_msg_term_size (const char *text, int *lines, int *columns);
 
 /*** inline functions ****************************************************************************/
 

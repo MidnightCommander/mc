@@ -429,41 +429,6 @@ str_8bit_term_char_width (const char *text)
     return 1;
 }
 
-static void
-str_8bit_msg_term_size (const char *text, int *lines, int *columns)
-{
-
-    char *p, *tmp;
-    char *q;
-    char c = '\0';
-    int width;
-
-    (*lines) = 1;
-    (*columns) = 0;
-    tmp = g_strdup ((char *) text);
-    p = tmp;
-    for (;;)
-    {
-        q = strchr (p, '\n');
-        if (q != NULL)
-        {
-            c = q[0];
-            q[0] = '\0';
-        }
-
-        width = str_8bit_term_width1 (p);
-        if (width > (*columns))
-            (*columns) = width;
-
-        if (q == NULL)
-            break;
-        q[0] = c;
-        p = q + 1;
-        (*lines)++;
-    }
-    g_free (tmp);
-}
-
 static const char *
 str_8bit_term_substring (const char *text, int start, int width)
 {
@@ -805,7 +770,6 @@ str_8bit_init (void)
     result.term_width2 = str_8bit_term_width2;
     result.term_width1 = str_8bit_term_width1;
     result.term_char_width = str_8bit_term_char_width;
-    result.msg_term_size = str_8bit_msg_term_size;
     result.term_substring = str_8bit_term_substring;
     result.trunc = str_8bit_trunc;
     result.offset_to_pos = str_8bit_offset_to_pos;
