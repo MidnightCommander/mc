@@ -120,6 +120,7 @@ WTree *the_tree = NULL;
 
 /* The Menubar */
 struct WMenuBar *the_menubar = NULL;
+static Menu *left_menu, *right_menu;
 
 /* Pointers to the selected and unselected panel */
 WPanel *current_panel = NULL;
@@ -543,6 +544,24 @@ create_options_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("&Save setup"), CK_SaveSetupCmd));
 
     return entries;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+init_menu (void)
+{
+    left_menu = create_menu ("", create_panel_menu (), "[Left and Right Menus]");
+    menubar_add_menu (the_menubar, left_menu);
+    menubar_add_menu (the_menubar, create_menu (_("&File"), create_file_menu (), "[File Menu]"));
+    menubar_add_menu (the_menubar,
+                      create_menu (_("&Command"), create_command_menu (), "[Command Menu]"));
+    menubar_add_menu (the_menubar,
+                      create_menu (_("&Options"), create_options_menu (), "[Options Menu]"));
+    right_menu = create_menu ("", create_panel_menu (), "[Left and Right Menus]");
+    menubar_add_menu (the_menubar, right_menu);
+    update_menu ();
+    menubar_set_visible (the_menubar, menubar_visible);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1829,6 +1848,16 @@ change_panel (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+update_menu (void)
+{
+    menu_set_name (left_menu,  horizontal_split ? _("&Above") : _("&Left"));
+    menu_set_name (right_menu, horizontal_split ? _("&Below") : _("&Right"));
+    menubar_arrange (the_menubar);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 gboolean
 quiet_quit_cmd (void)
 {
@@ -1935,32 +1964,6 @@ sort_cmd (void)
 
     panel_set_sort_order (p, sort_order);
 
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-init_menu (void)
-{
-    menubar_add_menu (the_menubar,
-                      create_menu (horizontal_split ? _("&Above") : _("&Left"),
-                                   create_panel_menu (), "[Left and Right Menus]"));
-    menubar_add_menu (the_menubar, create_menu (_("&File"), create_file_menu (), "[File Menu]"));
-    menubar_add_menu (the_menubar,
-                      create_menu (_("&Command"), create_command_menu (), "[Command Menu]"));
-    menubar_add_menu (the_menubar,
-                      create_menu (_("&Options"), create_options_menu (), "[Options Menu]"));
-    menubar_add_menu (the_menubar,
-                      create_menu (horizontal_split ? _("&Below") : _("&Right"),
-                                   create_panel_menu (), "[Left and Right Menus]"));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-done_menu (void)
-{
-    menubar_set_menu (the_menubar, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

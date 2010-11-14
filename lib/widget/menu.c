@@ -42,8 +42,6 @@
 
 /*** global variables ****************************************************************************/
 
-int menubar_visible = 1;        /* This is the new default */
-
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -558,7 +556,7 @@ menubar_callback (Widget * w, widget_msg_t msg, int parm)
         return menubar->is_active ? MSG_NOT_HANDLED : MSG_HANDLED;
 
     case WIDGET_DRAW:
-        if (menubar_visible)
+        if (menubar->is_visible)
         {
             menubar_draw (menubar);
             return MSG_HANDLED;
@@ -759,6 +757,15 @@ create_menu (const char *name, GList * entries, const char *help_node)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+menu_set_name (Menu * menu, const char *name)
+{
+    release_hotkey (menu->text);
+    menu->text = parse_hotkey (name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 destroy_menu (Menu * menu)
 {
     release_hotkey (menu->text);
@@ -773,11 +780,14 @@ destroy_menu (Menu * menu)
 WMenuBar *
 menubar_new (int y, int x, int cols, GList * menu)
 {
-    WMenuBar *menubar = g_new0 (WMenuBar, 1);
+    WMenuBar *menubar;
 
+    menubar = g_new0 (WMenuBar, 1);
     init_widget (&menubar->widget, y, x, 1, cols, menubar_callback, menubar_event);
-    widget_want_cursor (menubar->widget, 0);
+    widget_want_cursor (menubar->widget, FALSE);
+    menubar->is_visible = TRUE; /* by default */
     menubar_set_menu (menubar, menu);
+
     return menubar;
 }
 

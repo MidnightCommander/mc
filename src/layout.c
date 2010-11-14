@@ -94,6 +94,9 @@ int output_lines = 0;
 /* Set if the command prompt is to be displayed */
 int command_prompt = 1;
 
+/* Set if the main menu is visible */
+int menubar_visible = 1;
+
 /* Set if the nice and useful keybar is visible */
 int keybar_visible = 1;
 
@@ -632,11 +635,9 @@ void
 layout_change (void)
 {
     setup_panels ();
-    /* re-init the menu, because perhaps there was a change in the way 
+    /* re-init the menu, because perhaps there was a change in the way
        how the panel are split (horizontal/vertical). */
-    done_menu ();
-    init_menu ();
-    menubar_arrange (the_menubar);
+    update_menu ();
     load_hint (1);
 }
 

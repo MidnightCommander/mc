@@ -23,6 +23,7 @@ extern int equal_split;
 extern int first_panel_size;
 extern int output_lines;
 extern int command_prompt;
+extern int menubar_visible;
 extern int keybar_visible;
 extern int output_start_y;
 extern int message_visible;

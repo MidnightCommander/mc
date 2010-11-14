@@ -144,8 +144,7 @@ void print_vfs_message (const char *msg, ...) __attribute__ ((format (__printf__
 
 char *get_mc_lib_dir (void);
 
-void done_menu (void);
-void init_menu (void);
+void update_menu (void);
 
 char *remove_encoding_from_path (const char *);
 
