@@ -88,38 +88,37 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
     GIConv conv;
     GString *buffer;
     gchar *ret;
-    const char *_system_codepage = str_detect_termencoding ();
+    estr_t conv_res;
 
     if (!mc_config || !group || !param)
-        return def ? g_strdup (def) : NULL;
+        return g_strdup (def);
 
     if (!mc_config_has_param (mc_config, group, param))
     {
         mc_config_set_string (mc_config, group, param, def ? def : "");
-        return def ? g_strdup (def) : NULL;
+        return g_strdup (def);
     }
 
     ret = g_key_file_get_string (mc_config->handle, group, param, NULL);
+    if (ret == NULL)
+        ret = g_strdup (def);
 
-    if (!ret)
-        ret = def ? g_strdup (def) : NULL;
-
-    if (str_isutf8 (_system_codepage))
+    if (utf8_display)
         return ret;
 
-    conv = g_iconv_open (_system_codepage, "UTF-8");
+    conv = str_crt_conv_from ("UTF-8");
     if (conv == INVALID_CONV)
         return ret;
 
     buffer = g_string_new ("");
+    conv_res = str_convert (conv, ret, buffer);
+    str_close_conv (conv);
 
-    if (str_convert (conv, ret, buffer) == ESTR_FAILURE)
+    if (conv_res == ESTR_FAILURE)
     {
         g_string_free (buffer, TRUE);
-        str_close_conv (conv);
         return ret;
     }
-    str_close_conv (conv);
 
     g_free (ret);
 
@@ -135,20 +134,17 @@ mc_config_get_string_raw (mc_config_t * mc_config, const gchar * group,
     gchar *ret;
 
     if (!mc_config || !group || !param)
-        return def ? g_strdup (def) : NULL;
+        return g_strdup (def);
 
     if (!mc_config_has_param (mc_config, group, param))
     {
         mc_config_set_string (mc_config, group, param, def ? def : "");
-        return def ? g_strdup (def) : NULL;
+        return g_strdup (def);
     }
 
     ret = g_key_file_get_string (mc_config->handle, group, param, NULL);
 
-    if (!ret)
-        ret = def ? g_strdup (def) : NULL;
-
-    return ret;
+    return ret != NULL ? ret : g_strdup (def);
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

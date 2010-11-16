@@ -43,26 +43,21 @@ mc_config_normalize_before_save (const gchar * value)
     GString *buffer;
 
     if (utf8_display)
+        return g_strdup (value);
+
+    conv = str_crt_conv_to ("UTF-8");
+    if (conv == INVALID_CONV)
+        return g_strdup (value);
+
+    buffer = g_string_new ("");
+
+    if (str_convert (conv, value, buffer) == ESTR_FAILURE)
     {
-        buffer = g_string_new (value);
-    }
-    else
-    {
-        conv = str_crt_conv_to ("UTF-8");
-        if (conv == INVALID_CONV)
-            return g_strdup (value);
-
-        buffer = g_string_new ("");
-
-        if (str_convert (conv, value, buffer) == ESTR_FAILURE)
-        {
-            g_string_free (buffer, TRUE);
-            buffer = g_string_new (value);
-        }
-
-        str_close_conv (conv);
+        g_string_free (buffer, TRUE);
+        return g_strdup (value);
     }
 
+    str_close_conv (conv);
     return g_string_free (buffer, FALSE);
 }
 
