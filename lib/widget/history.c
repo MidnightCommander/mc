@@ -146,7 +146,8 @@ history_get (const char *input_name)
     mc_config_t *cfg;
     char **keys;
     size_t keys_num = 0;
-    char *this_entry;
+    GIConv conv = INVALID_CONV;
+    GString *buffer;
 
     if (num_history_items_recorded == 0)        /* this is how to disable */
         return NULL;
@@ -160,16 +161,42 @@ history_get (const char *input_name)
     keys = mc_config_get_keys (cfg, input_name, &keys_num);
     g_strfreev (keys);
 
+    /* create charset conversion handler to convert strings
+       from utf-8 to system codepage */
+    if (!utf8_display)
+        conv = str_crt_conv_from ("UTF-8");
+
+    buffer = g_string_sized_new (64);
+
     for (i = 0; i < keys_num; i++)
     {
         char key[BUF_TINY];
-        g_snprintf (key, sizeof (key), "%lu", (unsigned long) i);
-        this_entry = mc_config_get_string (cfg, input_name, key, "");
+        char *this_entry;
 
-        if (this_entry != NULL)
+        g_snprintf (key, sizeof (key), "%lu", (unsigned long) i);
+        this_entry = mc_config_get_string_raw (cfg, input_name, key, "");
+
+        if (this_entry == NULL)
+            continue;
+
+        if (conv == INVALID_CONV)
             hist = list_append_unique (hist, this_entry);
+        else
+        {
+            g_string_set_size (buffer, 0);
+            if (str_convert (conv, this_entry, buffer) == ESTR_FAILURE)
+                hist = list_append_unique (hist, this_entry);
+            else
+            {
+                hist = list_append_unique (hist, g_strdup (buffer->str));
+                g_free (this_entry);
+            }
+        }
     }
 
+    g_string_free (buffer, TRUE);
+    if (conv != INVALID_CONV)
+        str_close_conv (conv);
     mc_config_deinit (cfg);
     g_free (profile);
 
@@ -190,6 +217,8 @@ history_put (const char *input_name, GList * h)
     int i;
     char *profile;
     mc_config_t *cfg;
+    GIConv conv = INVALID_CONV;
+    GString *buffer;
 
     if (num_history_items_recorded == 0)        /* this is how to disable */
         return;
@@ -223,20 +252,39 @@ history_put (const char *input_name, GList * h)
     if (input_name != NULL)
         mc_config_del_group (cfg, input_name);
 
+    /* create charset conversion handler to convert strings
+       from system codepage to UTF-8 */
+    if (!utf8_display)
+        conv = str_crt_conv_to ("UTF-8");
+
+    buffer = g_string_sized_new (64);
     /* dump history into profile */
     for (i = 0; h != NULL; h = g_list_next (h))
     {
+        char key[BUF_TINY];
         char *text = (char *) h->data;
 
         /* We shouldn't have null entries, but let's be sure */
-        if (text != NULL)
+        if (text == NULL)
+            continue;
+
+        g_snprintf (key, sizeof (key), "%d", i++);
+
+        if (conv == INVALID_CONV)
+            mc_config_set_string_raw (cfg, input_name, key, text);
+        else
         {
-            char key[BUF_TINY];
-            g_snprintf (key, sizeof (key), "%d", i++);
-            mc_config_set_string (cfg, input_name, key, text);
+            g_string_set_size (buffer, 0);
+            if (str_convert (conv, text, buffer) == ESTR_FAILURE)
+                mc_config_set_string_raw (cfg, input_name, key, text);
+            else
+                mc_config_set_string_raw (cfg, input_name, key, buffer->str);
         }
     }
 
+    g_string_free (buffer, TRUE);
+    if (conv != INVALID_CONV)
+        str_close_conv (conv);
     mc_config_save_file (cfg, NULL);
     mc_config_deinit (cfg);
     g_free (profile);
