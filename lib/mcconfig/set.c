@@ -66,19 +66,15 @@ mc_config_normalize_before_save (const gchar * value)
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 void
-mc_config_direct_set_string (mc_config_t * mc_config, const gchar * group,
-                             const gchar * param, const gchar * value)
+mc_config_set_string_raw (mc_config_t * mc_config, const gchar * group,
+                          const gchar * param, const gchar * value)
 {
     gchar *buffer;
 
     if (!mc_config || !group || !param || !value)
         return;
 
-    buffer = mc_config_normalize_before_save (value);
-
-    g_key_file_set_value (mc_config->handle, group, param, buffer);
-
-    g_free (buffer);
+    g_key_file_set_value (mc_config->handle, group, param, value);
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

@@ -367,8 +367,8 @@ learn_save (void)
 
             esc_str = strutils_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
 
-            mc_config_direct_set_string (mc_main_config, section,
-                                         key_name_conv_tab[i].name, esc_str);
+            mc_config_set_string_raw (mc_main_config, section,
+                                      key_name_conv_tab[i].name, esc_str);
 
             g_free (esc_str);
         }
