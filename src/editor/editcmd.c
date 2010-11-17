@@ -83,46 +83,7 @@ int edit_confirm_save = 1;
 static int edit_save_cmd (WEdit * edit);
 static unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l);
 
-static void
-edit_search_cmd_search_create_bookmark (WEdit * edit)
-{
-    int found = 0, books = 0;
-    long l = 0, l_last = -1;
-    long q = 0;
-    gsize len = 0;
-
-    search_create_bookmark = FALSE;
-    book_mark_flush (edit, -1);
-
-    for (;;)
-    {
-        if (!mc_search_run (edit->search, (void *) edit, q, edit->last_byte, &len))
-            break;
-        if (found == 0)
-            edit->search_start = edit->search->normal_offset;
-        found++;
-        l += edit_count_lines (edit, q, edit->search->normal_offset);
-        if (l != l_last)
-        {
-            book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
-            books++;
-        }
-        l_last = l;
-        q = edit->search->normal_offset + 1;
-    }
-
-    if (found == 0)
-    {
-        edit_error_dialog (_("Search"), _("Search string not found"));
-    }
-    else
-    {
-        edit_cursor_move (edit, edit->search_start - edit->curs1);
-        edit_scroll_screen_over_cursor (edit);
-    }
-}
-
-static int
+int
 edit_search_cmd_callback (const void *user_data, gsize char_offset)
 {
     return edit_get_byte ((WEdit *) user_data, (long) char_offset);
@@ -1901,112 +1862,47 @@ edit_replace_cmd (WEdit * edit, int again)
     g_free (input2);
 }
 
-
-void
-edit_search_cmd (WEdit * edit, gboolean again)
+static void
+edit_do_search (WEdit * edit)
 {
-    char *search_string = NULL, *search_string_dup = NULL;
     gsize len = 0;
 
-    if (edit == NULL)
-        return;
-
-    if (edit->search != NULL)
-    {
-        search_string = g_strndup (edit->search->original, edit->search->original_len);
-        search_string_dup = search_string;
-    }
-    else
-    {
-        GList *history;
-        history = history_get (MC_HISTORY_SHARED_SEARCH);
-        if (history != NULL && history->data != NULL)
-        {
-            search_string_dup = search_string = (char *) g_strdup (history->data);
-            history = g_list_first (history);
-            g_list_foreach (history, (GFunc) g_free, NULL);
-            g_list_free (history);
-        }
-        edit->search_start = edit->curs1;
-    }
-
-    if (!again)
-    {
-#ifdef HAVE_CHARSET
-        GString *tmp;
-
-        if (search_string != NULL && *search_string != '\0')
-        {
-            tmp = str_convert_to_display (search_string);
-            if (tmp != NULL)
-            {
-                if (tmp->len == 0)
-                    g_string_free (tmp, TRUE);
-                else
-                {
-                    g_free (search_string);
-                    search_string = search_string_dup = g_string_free (tmp, FALSE);
-                }
-            }
-        }
-#endif /* HAVE_CHARSET */
-        editcmd_dialog_search_show (edit, &search_string);
-        g_free (search_string_dup);
-        search_string_dup = NULL;
-#ifdef HAVE_CHARSET
-        if (search_string != NULL && *search_string != '\0')
-        {
-            tmp = str_convert_to_input (search_string);
-            if (tmp != NULL)
-            {
-                if (tmp->len == 0)
-                    g_string_free (tmp, TRUE);
-                else
-                {
-                    g_free (search_string);
-                    search_string = g_string_free (tmp, FALSE);
-                }
-            }
-        }
-#endif /* HAVE_CHARSET */
-
-        edit_push_action (edit, KEY_PRESS + edit->start_display);
-
-        if (search_string == NULL)
-        {
-            edit->force |= REDRAW_COMPLETELY;
-            edit_scroll_screen_over_cursor (edit);
-            return;
-        }
-
-        if (edit->search != NULL)
-        {
-            mc_search_free (edit->search);
-            edit->search = NULL;
-        }
-    }
-
     if (edit->search == NULL)
-    {
-        edit->search = mc_search_new (search_string, -1);
-        if (edit->search == NULL)
-        {
-            edit->search_start = edit->curs1;
-            g_free (search_string);
-            return;
-        }
+        edit->search_start = edit->curs1;
 
-        edit->search->search_type = edit_search_options.type;
-        edit->search->is_all_charsets = edit_search_options.all_codepages;
-        edit->search->is_case_sensitive = edit_search_options.case_sens;
-        edit->search->whole_words = edit_search_options.whole_words;
-        edit->search->search_fn = edit_search_cmd_callback;
-    }
-
-    g_free (search_string);
+    edit_push_action (edit, KEY_PRESS + edit->start_display);
 
     if (search_create_bookmark)
-        edit_search_cmd_search_create_bookmark (edit);
+    {
+        int found = 0, books = 0;
+        long l = 0, l_last = -1;
+        long q = 0;
+
+        search_create_bookmark = FALSE;
+        book_mark_flush (edit, -1);
+
+        while (TRUE)
+        {
+            if (!mc_search_run (edit->search, (void *) edit, q, edit->last_byte, &len))
+                break;
+            if (found == 0)
+                edit->search_start = edit->search->normal_offset;
+            found++;
+            l += edit_count_lines (edit, q, edit->search->normal_offset);
+            if (l != l_last)
+            {
+                book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
+                books++;
+            }
+            l_last = l;
+            q = edit->search->normal_offset + 1;
+        }
+
+        if (found == 0)
+            edit_error_dialog (_("Search"), _("Search string not found"));
+        else
+            edit_cursor_move (edit, edit->search_start - edit->curs1);
+    }
     else
     {
         if (edit->found_len != 0 && edit->search_start == edit->found_start + 1
@@ -2039,6 +1935,65 @@ edit_search_cmd (WEdit * edit, gboolean again)
 
     edit->force |= REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
+}
+
+static void
+edit_search (WEdit *edit)
+{
+    if (editcmd_dialog_search_show (edit))
+        edit_do_search (edit);
+}
+
+void
+edit_search_cmd (WEdit * edit, gboolean again)
+{
+    if (edit == NULL)
+        return;
+
+    if (!again)
+        edit_search (edit);
+    else if (edit->last_search_string != NULL)
+        edit_do_search (edit);
+    else
+    {
+        /* find last search string in history */
+        GList *history;
+
+        history = history_get (MC_HISTORY_SHARED_SEARCH);
+        if (history != NULL && history->data != NULL)
+        {
+            edit->last_search_string = (char *) history->data;
+            history->data = NULL;
+            history = g_list_first (history);
+            g_list_foreach (history, (GFunc) g_free, NULL);
+            g_list_free (history);
+
+            edit->search = mc_search_new (edit->last_search_string, -1);
+            if (edit->search == NULL)
+            {
+                /* if not... then ask for an expression */
+                g_free (edit->last_search_string);
+                edit->last_search_string = NULL;
+                edit_search (edit);
+            }
+            else
+            {
+                edit->search->search_type = edit_search_options.type;
+                edit->search->is_all_charsets = edit_search_options.all_codepages;
+                edit->search->is_case_sensitive = edit_search_options.case_sens;
+                edit->search->whole_words = edit_search_options.whole_words;
+                edit->search->search_fn = edit_search_cmd_callback;
+                edit_do_search (edit);
+            }
+        }
+        else
+        {
+            /* if not... then ask for an expression */
+            g_free (edit->last_search_string);
+            edit->last_search_string = NULL;
+            edit_search (edit);
+        }
+    }
 }
 
 

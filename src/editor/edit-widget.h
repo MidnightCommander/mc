@@ -55,6 +55,7 @@ struct WEdit
     mc_search_t *search;
     int replace_mode;
 
+    char *last_search_string;   /* String that have been searched */
     long search_start;          /* First character to start searching from */
     int found_len;              /* Length of found string or 0 if none was found */
     long found_start;           /* the found word from a search - start position */

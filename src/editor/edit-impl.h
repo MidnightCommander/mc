@@ -225,6 +225,7 @@ void edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2);
 void edit_push_markers (WEdit * edit);
 void edit_replace_cmd (WEdit * edit, int again);
 void edit_search_cmd (WEdit * edit, gboolean again);
+int edit_search_cmd_callback (const void *user_data, gsize char_offset);
 void edit_complete_word_cmd (WEdit * edit);
 void edit_get_match_keyword_cmd (WEdit * edit);
 int edit_save_block (WEdit * edit, const char *filename, long start, long finish);

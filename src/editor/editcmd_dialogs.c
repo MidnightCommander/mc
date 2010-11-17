@@ -157,148 +157,176 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-editcmd_dialog_search_show (WEdit * edit, char **search_text)
+gboolean
+editcmd_dialog_search_show (WEdit * edit)
 {
-    (void) edit;
+    char *search_text;
 
-    if (*search_text == NULL)
-        *search_text = INPUT_LAST_TEXT;
+    size_t num_of_types;
+    gchar **list_of_types = mc_search_get_types_strings_array (&num_of_types);
+    int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + num_of_types - SEARCH_DLG_HEIGHT_SUPPLY;
+    size_t i;
 
-    {
-        size_t num_of_types;
-        gchar **list_of_types = mc_search_get_types_strings_array (&num_of_types);
-        int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + num_of_types - SEARCH_DLG_HEIGHT_SUPPLY;
-        size_t i;
+    int dialog_result;
 
-        int dialog_result;
-
-        QuickWidget quick_widgets[] = {
-            /* 0 */
-            QUICK_BUTTON (6, 10, 11, SEARCH_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
-            /* 1 */
-            QUICK_BUTTON (4, 10, 11, SEARCH_DLG_HEIGHT, N_("&Find all"), B_USER, NULL),
-            /* 2 */
-            QUICK_BUTTON (2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
+    QuickWidget quick_widgets[] = {
+        /* 0 */
+        QUICK_BUTTON (6, 10, 11, SEARCH_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
+        /* 1 */
+        QUICK_BUTTON (4, 10, 11, SEARCH_DLG_HEIGHT, N_("&Find all"), B_USER, NULL),
+        /* 2 */
+        QUICK_BUTTON (2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
 #ifdef HAVE_CHARSET
-            /* 3 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("All charsets"),
-                            &edit_search_options.all_codepages),
+        /* 3 */
+        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("All charsets"),
+                        &edit_search_options.all_codepages),
 #endif
-            /* 4 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"),
-                            &edit_search_options.whole_words),
-            /* 5 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"),
-                            &edit_search_options.only_in_selection),
-            /* 6 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"),
-                            &edit_search_options.backwards),
-            /* 7 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("Case &sensitive"),
-                            &edit_search_options.case_sens),
-            /* 8 */
-            QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-                         num_of_types, (const char **) list_of_types,
-                         (int *) &edit_search_options.type),
-            /* 9 */
-            QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
-                         *search_text, SEARCH_DLG_WIDTH - 6, 0,
-                         MC_HISTORY_SHARED_SEARCH, search_text),
-            /* 10 */
-            QUICK_LABEL (3, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_("Enter search string:")),
-            QUICK_END
-        };
+        /* 4 */
+        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"),
+                        &edit_search_options.whole_words),
+        /* 5 */
+        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"),
+                        &edit_search_options.only_in_selection),
+        /* 6 */
+        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"),
+                        &edit_search_options.backwards),
+        /* 7 */
+        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("Case &sensitive"),
+                        &edit_search_options.case_sens),
+        /* 8 */
+        QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
+                     num_of_types, (const char **) list_of_types,
+                     (int *) &edit_search_options.type),
+        /* 9 */
+        QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
+                     INPUT_LAST_TEXT, SEARCH_DLG_WIDTH - 6, 0,
+                     MC_HISTORY_SHARED_SEARCH, &search_text),
+        /* 10 */
+        QUICK_LABEL (3, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_("Enter search string:")),
+        QUICK_END
+    };
 
 #ifdef HAVE_CHARSET
-        size_t last_checkbox = 7;
+    size_t last_checkbox = 7;
 #else
-        size_t last_checkbox = 6;
+    size_t last_checkbox = 6;
 #endif
 
-        QuickDialog Quick_input = {
-            SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1, N_("Search"),
-            "[Input Line Keys]", quick_widgets, NULL, TRUE
-        };
+    QuickDialog Quick_input = {
+        SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1, N_("Search"),
+        "[Input Line Keys]", quick_widgets, NULL, TRUE
+    };
 
 #ifdef ENABLE_NLS
-        char **list_of_types_nls;
+    char **list_of_types_nls;
 
-        /* header title */
-        Quick_input.title = _(Quick_input.title);
-        /* buttons */
-        for (i = 0; i < 3; i++)
-            quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
-        /* checkboxes */
-        for (i = 3; i <= last_checkbox; i++)
-            quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
-        /* label */
-        quick_widgets[10].u.label.text = _(quick_widgets[10].u.label.text);
+    /* header title */
+    Quick_input.title = _(Quick_input.title);
+    /* buttons */
+    for (i = 0; i < 3; i++)
+        quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
+    /* checkboxes */
+    for (i = 3; i <= last_checkbox; i++)
+        quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+    /* label */
+    quick_widgets[10].u.label.text = _(quick_widgets[10].u.label.text);
 
-        /* radiobuttons */
-        /* create copy of radio items to avoid memory leak */
-        list_of_types_nls = g_new0 (char *, num_of_types + 1);
-        for (i = 0; i < num_of_types; i++)
-            list_of_types_nls[i] = g_strdup (_(list_of_types[i]));
-        g_strfreev (list_of_types);
-        list_of_types = list_of_types_nls;
-        quick_widgets[last_checkbox + 1].u.radio.items = (const char **) list_of_types;
+    /* radiobuttons */
+    /* create copy of radio items to avoid memory leak */
+    list_of_types_nls = g_new0 (char *, num_of_types + 1);
+    for (i = 0; i < num_of_types; i++)
+        list_of_types_nls[i] = g_strdup (_(list_of_types[i]));
+    g_strfreev (list_of_types);
+    list_of_types = list_of_types_nls;
+    quick_widgets[last_checkbox + 1].u.radio.items = (const char **) list_of_types;
 #endif
 
-        /* calculate widget coordinates */
+    /* calculate widget coordinates */
+    {
+        int len = 0;
+        int dlg_width;
+        gchar **radio = list_of_types;
+        int b0_len, b1_len, b2_len;
+        const int button_gap = 2;
+
+        /* length of radiobuttons */
+        while (*radio != NULL)
         {
-            int len = 0;
-            int dlg_width;
-            gchar **radio = list_of_types;
-            int b0_len, b1_len, b2_len;
-            const int button_gap = 2;
-
-            /* length of radiobuttons */
-            while (*radio != NULL)
-            {
-                len = max (len, str_term_width1 (*radio));
-                radio++;
-            }
-            /* length of checkboxes */
-            for (i = 3; i <= last_checkbox; i++)
-                len = max (len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
-
-            /* preliminary dialog width */
-            dlg_width = max (len * 2, str_term_width1 (Quick_input.title)) + 4;
-
-            /* length of buttons */
-            b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
-            b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 3;
-            b2_len = str_term_width1 (quick_widgets[2].u.button.text) + 5;      /* default button */
-            len = b0_len + b1_len + b2_len + button_gap * 2;
-
-            /* dialog width */
-            Quick_input.xlen = max (SEARCH_DLG_WIDTH, max (dlg_width, len + 6));
-
-            /* correct widget coordinates */
-            for (i = 0; i < sizeof (quick_widgets) / sizeof (quick_widgets[0]); i++)
-                quick_widgets[i].x_divisions = Quick_input.xlen;
-
-            /* checkbox positions */
-            for (i = 3; i <= last_checkbox; i++)
-                quick_widgets[i].relative_x = Quick_input.xlen / 2 + 2;
-            /* input length */
-            quick_widgets[last_checkbox + 2].u.input.len = Quick_input.xlen - 6;
-            /* button positions */
-            quick_widgets[2].relative_x = Quick_input.xlen / 2 - len / 2;
-            quick_widgets[1].relative_x = quick_widgets[2].relative_x + b2_len + button_gap;
-            quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + button_gap;
+            len = max (len, str_term_width1 (*radio));
+            radio++;
         }
+        /* length of checkboxes */
+        for (i = 3; i <= last_checkbox; i++)
+            len = max (len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
 
-        dialog_result = quick_dialog (&Quick_input);
+        /* preliminary dialog width */
+        dlg_width = max (len * 2, str_term_width1 (Quick_input.title)) + 4;
 
-        g_strfreev (list_of_types);
+        /* length of buttons */
+        b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
+        b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 3;
+        b2_len = str_term_width1 (quick_widgets[2].u.button.text) + 5;      /* default button */
+        len = b0_len + b1_len + b2_len + button_gap * 2;
 
-        if (dialog_result == B_CANCEL)
-            *search_text = NULL;
-        else if (dialog_result == B_USER)
-            search_create_bookmark = TRUE;
+        /* dialog width */
+        Quick_input.xlen = max (SEARCH_DLG_WIDTH, max (dlg_width, len + 6));
+
+        /* correct widget coordinates */
+        for (i = 0; i < sizeof (quick_widgets) / sizeof (quick_widgets[0]); i++)
+            quick_widgets[i].x_divisions = Quick_input.xlen;
+
+        /* checkbox positions */
+        for (i = 3; i <= last_checkbox; i++)
+            quick_widgets[i].relative_x = Quick_input.xlen / 2 + 2;
+        /* input length */
+        quick_widgets[last_checkbox + 2].u.input.len = Quick_input.xlen - 6;
+        /* button positions */
+        quick_widgets[2].relative_x = Quick_input.xlen / 2 - len / 2;
+        quick_widgets[1].relative_x = quick_widgets[2].relative_x + b2_len + button_gap;
+        quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + button_gap;
     }
+
+    dialog_result = quick_dialog (&Quick_input);
+
+    g_strfreev (list_of_types);
+
+    if ((dialog_result == B_CANCEL) || (search_text == NULL) || (search_text[0] == '\0'))
+    {
+        g_free (search_text);
+        return FALSE;
+    }
+
+    if (dialog_result == B_USER)
+        search_create_bookmark = TRUE;
+
+#ifdef HAVE_CHARSET
+    {
+        GString *tmp;
+
+        tmp = str_convert_to_input (search_text);
+        if (tmp != NULL)
+        {
+            g_free (search_text);
+            search_text = g_string_free (tmp, FALSE);
+        }
+    }
+#endif
+
+    g_free (edit->last_search_string);
+    edit->last_search_string = search_text;
+    mc_search_free (edit->search);
+
+    edit->search = mc_search_new (edit->last_search_string, -1);
+    if (edit->search != NULL)
+    {
+        edit->search->search_type = edit_search_options.type;
+        edit->search->is_all_charsets = edit_search_options.all_codepages;
+        edit->search->is_case_sensitive = edit_search_options.case_sens;
+        edit->search->whole_words = edit_search_options.whole_words;
+        edit->search->search_fn = edit_search_cmd_callback;
+    }
+
+    return (edit->search != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
