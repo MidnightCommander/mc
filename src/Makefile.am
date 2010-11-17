@@ -23,9 +23,7 @@ AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 localedir = $(datadir)/locale
 pkglibexecdir =		$(libexecdir)/@PACKAGE@
 
-bin_PROGRAMS = mc mcmfmt
-
-mcmfmt_SOURCES = mfmt.c
+bin_PROGRAMS = mc
 
 if USE_EDIT
 EDITLIB = editor/libedit.la
