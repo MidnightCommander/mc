@@ -3539,10 +3539,10 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
 
     case CK_Find:
-        edit_search_cmd (edit, 0);
+        edit_search_cmd (edit, FALSE);
         break;
     case CK_Find_Again:
-        edit_search_cmd (edit, 1);
+        edit_search_cmd (edit, TRUE);
         break;
     case CK_Replace:
         edit_replace_cmd (edit, 0);

@@ -297,7 +297,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
         if (dialog_result == B_CANCEL)
             *search_text = NULL;
         else if (dialog_result == B_USER)
-            search_create_bookmark = 1;
+            search_create_bookmark = TRUE;
     }
 }
 

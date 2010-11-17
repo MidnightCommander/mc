@@ -75,8 +75,7 @@
 /* globals: */
 
 /* search and replace: */
-int search_create_bookmark = 0;
-/* static int search_in_all_charsets = 0; */
+int search_create_bookmark = FALSE;
 
 /* queries on a save */
 int edit_confirm_save = 1;
@@ -92,7 +91,7 @@ edit_search_cmd_search_create_bookmark (WEdit * edit)
     long q = 0;
     gsize len = 0;
 
-    search_create_bookmark = 0;
+    search_create_bookmark = FALSE;
     book_mark_flush (edit, -1);
 
     for (;;)
@@ -1904,12 +1903,12 @@ edit_replace_cmd (WEdit * edit, int again)
 
 
 void
-edit_search_cmd (WEdit * edit, int again)
+edit_search_cmd (WEdit * edit, gboolean again)
 {
     char *search_string = NULL, *search_string_dup = NULL;
     gsize len = 0;
 
-    if (!edit)
+    if (edit == NULL)
         return;
 
     if (edit->search != NULL)
@@ -1936,7 +1935,7 @@ edit_search_cmd (WEdit * edit, int again)
 #ifdef HAVE_CHARSET
         GString *tmp;
 
-        if (search_string && *search_string)
+        if (search_string != NULL && *search_string != '\0')
         {
             tmp = str_convert_to_display (search_string);
             if (tmp != NULL)
@@ -1955,7 +1954,7 @@ edit_search_cmd (WEdit * edit, int again)
         g_free (search_string_dup);
         search_string_dup = NULL;
 #ifdef HAVE_CHARSET
-        if (search_string && *search_string)
+        if (search_string != NULL && *search_string != '\0')
         {
             tmp = str_convert_to_input (search_string);
             if (tmp != NULL)
@@ -1980,14 +1979,14 @@ edit_search_cmd (WEdit * edit, int again)
             return;
         }
 
-        if (edit->search)
+        if (edit->search != NULL)
         {
             mc_search_free (edit->search);
             edit->search = NULL;
         }
     }
 
-    if (!edit->search)
+    if (edit->search == NULL)
     {
         edit->search = mc_search_new (search_string, -1);
         if (edit->search == NULL)
@@ -2007,16 +2006,14 @@ edit_search_cmd (WEdit * edit, int again)
     g_free (search_string);
 
     if (search_create_bookmark)
-    {
         edit_search_cmd_search_create_bookmark (edit);
-    }
     else
     {
-        if (edit->found_len && edit->search_start == edit->found_start + 1
+        if (edit->found_len != 0 && edit->search_start == edit->found_start + 1
             && edit_search_options.backwards)
             edit->search_start--;
 
-        if (edit->found_len && edit->search_start == edit->found_start - 1
+        if (edit->found_len != 0 && edit->search_start == edit->found_start - 1
             && !edit_search_options.backwards)
             edit->search_start++;
 
@@ -2035,7 +2032,7 @@ edit_search_cmd (WEdit * edit, int again)
         else
         {
             edit->search_start = edit->curs1;
-            if (edit->search->error_str)
+            if (edit->search->error_str != NULL)
                 edit_error_dialog (_("Search"), edit->search->error_str);
         }
     }
