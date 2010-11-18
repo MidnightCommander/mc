@@ -32,6 +32,9 @@ if USE_MAINTAINER_MODE
 libmc_la_SOURCES += logging.c logging.h
 endif
 
+if CHARSET
+libmc_la_SOURCES += charsets.c charsets.h
+endif
 
 libmc_la_CFLAGS= $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 

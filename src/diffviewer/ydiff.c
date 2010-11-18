@@ -41,12 +41,12 @@
 #include "lib/vfs/mc-vfs/vfs.h" /* mc_opendir, mc_readdir, mc_closedir, */
 #include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/charsets.h"
 
 #include "src/cmddef.h"
 #include "src/keybind.h"
 #include "src/cmd.h"
 #include "src/help.h"
-#include "src/charsets.h"
 #include "src/history.h"
 #include "src/panel.h"          /* Needed for current_panel and other_panel */
 #include "src/layout.h"         /* Needed for get_current_index and get_other_panel */

@@ -35,7 +35,7 @@
 #include "lib/search.h"
 
 #include "internal.h"
-#include "src/charsets.h"
+#include "lib/charsets.h"
 
 /*** global variables ****************************************************************************/
 

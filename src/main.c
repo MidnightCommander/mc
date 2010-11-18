@@ -96,7 +96,7 @@
 #endif
 
 #ifdef HAVE_CHARSET
-#include "charsets.h"
+#include "lib/charsets.h"
 #include "selcodepage.h"
 #endif /* HAVE_CHARSET */
 

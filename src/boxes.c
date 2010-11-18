@@ -63,7 +63,7 @@
 #include "background.h"         /* task_list */
 
 #ifdef HAVE_CHARSET
-#include "charsets.h"
+#include "lib/charsets.h"
 #include "selcodepage.h"
 #endif
 

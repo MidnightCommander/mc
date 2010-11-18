@@ -33,10 +33,10 @@
 #include "lib/search.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
+#include "lib/charsets.h"
 
 #include "src/main.h"
 #include "src/history.h"
-#include "src/charsets.h"
 
 #include "src/editor/edit-widget.h"
 #include "src/editor/etags.h"

@@ -46,9 +46,9 @@
 #include "lib/strutil.h"
 #include "lib/util.h"           /* load_file_position() */
 #include "lib/widget.h"
+#include "lib/charsets.h"
 
 #include "src/main.h"
-#include "src/charsets.h"
 #include "src/layout.h"         /* menubar_visible */
 #include "src/main-widgets.h"   /* the_menubar */
 

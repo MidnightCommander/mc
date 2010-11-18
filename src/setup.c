@@ -47,6 +47,9 @@
 
 #include "lib/util.h"
 #include "lib/widget.h"
+#ifdef HAVE_CHARSET
+#include "lib/charsets.h"
+#endif
 
 #include "args.h"
 #include "dir.h"
@@ -60,9 +63,6 @@
 #include "file.h"               /* safe_delete */
 #include "keybind.h"            /* lookup_action */
 
-#ifdef HAVE_CHARSET
-#include "charsets.h"
-#endif
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"

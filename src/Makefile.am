@@ -33,7 +33,7 @@ if USE_DIFF
 DIFFLIB = diffviewer/libdiffviewer.la
 endif
 
-SRC_charset = charsets.c charsets.h selcodepage.c selcodepage.h
+SRC_charset = selcodepage.c selcodepage.h
 
 if CHARSET
     SRC_USE_charset=$(SRC_charset)

@@ -32,7 +32,7 @@
 #include "lib/search.h"
 #include "lib/strescape.h"
 
-#include "src/charsets.h"
+#include "lib/charsets.h"
 
 #include "internal.h"
 

@@ -45,8 +45,8 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/charsets.h"
 
-#include "src/charsets.h"
 #include "src/setup.h"          /* panels_options */
 #include "src/main.h"           /* source_codepage */
 

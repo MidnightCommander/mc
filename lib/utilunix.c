@@ -59,7 +59,7 @@
 
 #include "src/execute.h"
 #ifdef HAVE_CHARSET
-#include "src/charsets.h"
+#include "charsets.h"
 #endif
 
 /*** global variables ****************************************************************************/

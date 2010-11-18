@@ -56,11 +56,11 @@
 #include "lib/lock.h"           /* lock_file() */
 #include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/charsets.h"
 
 #include "src/panel.h"
 #include "src/layout.h"
 #include "src/history.h"
-#include "src/charsets.h"
 #include "src/cmd.h"
 #include "src/execute.h"
 #include "src/help.h"

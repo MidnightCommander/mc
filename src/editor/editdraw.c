@@ -45,8 +45,8 @@
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"           /* is_printable() */
 #include "lib/widget.h"         /* buttonbar_redraw() */
+#include "lib/charsets.h"
 
-#include "src/charsets.h"
 #include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* edit_tab_spacing */
 

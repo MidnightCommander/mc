@@ -32,9 +32,9 @@
 #include "lib/global.h"
 #include "lib/strutil.h"        /* utf-8 functions */
 #include "lib/fileloc.h"
+#include "lib/charsets.h"
 
-#include "charsets.h"
-#include "main.h"
+#include "src/main.h"
 
 /*** global variables ****************************************************************************/
 

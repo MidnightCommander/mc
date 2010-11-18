@@ -44,6 +44,7 @@
 #include "lib/tty/key.h"        /* KEY_M_SHIFT */
 #include "lib/strutil.h"        /* str_isutf8 () */
 #include "lib/util.h"           /* is_printable() */
+#include "lib/charsets.h"       /* convert_from_input_c() */
 
 #include "edit-impl.h"
 #include "edit-widget.h"        /* edit->macro_i */
@@ -51,7 +52,6 @@
 
 #include "src/cmddef.h"         /* list of commands */
 #include "src/keybind.h"        /* lookup_keymap_command() */
-#include "src/charsets.h"       /* convert_from_input_c() */
 #include "src/main.h"           /* display_codepage */
 
 /*** global variables ****************************************************************************/

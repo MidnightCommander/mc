@@ -30,8 +30,8 @@
 
 #include "lib/global.h"
 #include "lib/widget.h"
+#include "lib/charsets.h"
 
-#include "charsets.h"
 #include "selcodepage.h"
 #include "main.h"
 

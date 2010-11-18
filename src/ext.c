@@ -39,6 +39,7 @@
 #include "lib/util.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/widget.h"
+#include "lib/charsets.h"           /* get_codepage_index */
 
 #include "consaver/cons.saver.h"
 #include "viewer/mcviewer.h"
@@ -49,7 +50,6 @@
 #include "history.h"
 #include "layout.h"
 #ifdef HAVE_CHARSET
-#include "charsets.h"           /* get_codepage_index */
 #include "selcodepage.h"        /* do_set_codepage */
 #endif
 #include "ext.h"

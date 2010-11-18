@@ -56,7 +56,7 @@
 #include "lib/widget.h"         /* message() */
 
 #ifdef HAVE_CHARSET
-#include "src/charsets.h"
+#include "lib/charsets.h"
 #endif
 #include "src/main.h"           /* cd_symlinks */
 
