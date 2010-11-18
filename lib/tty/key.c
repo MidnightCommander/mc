@@ -1012,6 +1012,7 @@ correct_key_code (int code)
         c = KEY_BACKSPACE;
     }
 
+#if 0
     /* Unrecognized Ctrl-d is delete */
     if (c == (31 & 'd'))
     {
@@ -1025,6 +1026,7 @@ correct_key_code (int code)
         c = KEY_BACKSPACE;
         mod &= ~KEY_M_CTRL;
     }
+#endif
 
     /* Shift+BackSpace is backspace */
     if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT))
