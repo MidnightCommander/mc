@@ -64,8 +64,7 @@
 #include "main.h"
 #include "mountlist.h"          /* my_statfs */
 #include "selcodepage.h"        /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
-#include "cmddef.h"             /* CK_ cmd name const */
-#include "keybind.h"            /* global_keymap_t */
+#include "keybind-defaults.h"   /* global_keymap_t */
 
 /*** global variables ****************************************************************************/
 

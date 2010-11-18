@@ -43,8 +43,7 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
-#include "src/cmddef.h"
-#include "src/keybind.h"
+#include "src/keybind-defaults.h"
 #include "src/cmd.h"
 #include "src/help.h"
 #include "src/history.h"

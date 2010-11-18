@@ -25,6 +25,7 @@ libmc_la_SOURCES = \
 	hook.c hook.h \
 	glibcompat.c glibcompat.h \
 	global.h \
+	keybind.c keybind.h \
 	lock.c lock.h \
 	timefmt.c timefmt.h
 

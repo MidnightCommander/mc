@@ -61,7 +61,7 @@
 #include "layout.h"
 #include "cmd.h"
 #include "file.h"               /* safe_delete */
-#include "keybind.h"            /* keybind_lookup_action */
+#include "keybind-defaults.h"   /* keybind_lookup_action */
 
 
 #ifdef USE_INTERNAL_EDIT

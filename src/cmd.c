@@ -79,7 +79,7 @@
 #include "execute.h"            /* toggle_panels() */
 #include "history.h"
 #include "dir.h"
-#include "cmddef.h"             /* CK_InputHistoryShow */
+#include "keybind-defaults.h"             /* CK_InputHistoryShow */
 #include "viewer/mcviewer.h"
 
 

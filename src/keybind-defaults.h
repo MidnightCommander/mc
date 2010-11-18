@@ -1,37 +1,14 @@
-#ifndef MC__KEYBIND_H
-#define MC__KEYBIND_H
+#ifndef MC__KEYBIND_DEFAULTS_H
+#define MC__KEYBIND_DEFAULTS_H
 
 #include "lib/global.h"
+#include "lib/keybind.h"        /* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
-
-#define KEYMAP_SHORTCUT_LENGTH 32       /* FIXME: is 32 bytes enough for shortcut? */
 
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
-
-typedef struct name_keymap_t
-{
-    const char *name;
-    unsigned long val;
-} name_keymap_t;
-
-typedef struct key_config_t
-{
-    time_t mtime;               /* mtime at the moment we read config file */
-    GArray *keymap;
-    GArray *ext_keymap;
-    gchar *labels[10];
-} key_config_t;
-
-/* The global keymaps are of this type */
-typedef struct global_keymap_t
-{
-    long key;
-    unsigned long command;
-    char caption[KEYMAP_SHORTCUT_LENGTH];
-} global_keymap_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -106,10 +83,6 @@ extern const global_keymap_t default_diff_keymap[];
 
 /*** declarations of public functions ************************************************************/
 
-void keybind_cmd_bind (GArray * keymap, const char *keybind, unsigned long action);
-unsigned long keybind_lookup_action (const char *name);
-const char *keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action);
-unsigned long keybind_lookup_keymap_command (const global_keymap_t * keymap, long key);
-
 /*** inline functions ****************************************************************************/
-#endif /* MC__KEYBIND_H */
+
+#endif /* MC__KEYBIND_DEFAULTS_H */

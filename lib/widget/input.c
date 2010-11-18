@@ -47,13 +47,13 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
+#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/cmddef.h"             /* CK_ cmd name const */
-#include "src/keybind.h"            /* global_keymap_t */
 #include "src/panel.h"              /* current_panel */
 #include "src/clipboard.h"          /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
+#include "src/keybind-defaults.h"   /* input_map */
 
 /*** global variables ****************************************************************************/
 

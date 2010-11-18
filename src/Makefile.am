@@ -63,16 +63,11 @@ SRC_mc_options = \
 	option.c option.h \
 	setup.c setup.h
 
-SRC_mc_keybind = \
-	keybind.c keybind.h \
-	cmddef.h
-
 mc_SOURCES = \
 	$(SRC_USE_charset) \
 	$(SRC_mc_widgets) \
 	$(SRC_mc_conssaver) \
 	$(SRC_mc_options) \
-	$(SRC_mc_keybind) \
 	achown.c achown.h \
 	args.c args.h \
 	background.c background.h \
@@ -95,6 +90,7 @@ mc_SOURCES = \
 	history.h \
 	hotlist.c hotlist.h \
 	info.c info.h \
+	keybind-defaults.c keybind-defaults.h \
 	layout.c layout.h \
 	listmode.c listmode.h \
 	main.c main.h \

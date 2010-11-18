@@ -50,8 +50,7 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-#include "src/cmddef.h"
-#include "src/keybind.h"
+#include "src/keybind-defaults.h"
 
 /*** global variables ****************************************************************************/
 

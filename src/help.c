@@ -61,8 +61,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "cmddef.h"
-#include "keybind.h"
+#include "keybind-defaults.h"
+#include "keybind-defaults.h"
 #include "help.h"
 #include "main.h"
 

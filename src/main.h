@@ -6,7 +6,7 @@
 #define MC__MAIN_H
 
 #include "lib/global.h"
-#include "keybind.h"
+#include "keybind-defaults.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

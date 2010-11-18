@@ -64,8 +64,7 @@
 #include "src/cmd.h"
 #include "src/execute.h"
 #include "src/help.h"
-#include "src/keybind.h"
-#include "src/cmddef.h"         /* CK_ cmd name const */
+#include "src/keybind-defaults.h"
 #include "src/main.h"           /* midnight_shutdown */
 
 #include "internal.h"

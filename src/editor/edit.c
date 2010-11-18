@@ -58,8 +58,7 @@
 #include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/learn.h"          /* learn_keys */
-#include "src/cmddef.h"
-#include "src/keybind.h"
+#include "src/keybind-defaults.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"

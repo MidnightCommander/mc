@@ -50,9 +50,8 @@
 #include "edit-widget.h"        /* edit->macro_i */
 #include "editcmd_dialogs.h"
 
-#include "src/cmddef.h"         /* list of commands */
-#include "src/keybind.h"        /* keybind_lookup_keymap_command() */
-#include "src/main.h"           /* display_codepage */
+#include "src/keybind-defaults.h"/* keybind_lookup_keymap_command() */
+#include "src/main.h"            /* display_codepage */
 
 /*** global variables ****************************************************************************/
 

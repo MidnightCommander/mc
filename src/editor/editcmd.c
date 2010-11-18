@@ -63,7 +63,7 @@
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
 #include "src/selcodepage.h"
-#include "src/cmddef.h"
+#include "src/keybind-defaults.h"
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 
 #include "edit-impl.h"

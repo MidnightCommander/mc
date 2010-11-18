@@ -36,7 +36,7 @@
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/cmddef.h"             /* CK_Ignore_Key */
+#include "src/keybind-defaults.h"             /* CK_Ignore_Key */
 #include "src/help.h"
 #include "src/main.h"               /* is_right */
 

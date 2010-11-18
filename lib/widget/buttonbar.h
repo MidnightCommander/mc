@@ -17,6 +17,8 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
+struct global_keymap_t;
+
 typedef struct WButtonBar
 {
     Widget widget;

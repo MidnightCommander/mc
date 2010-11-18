@@ -42,8 +42,7 @@
 #include "src/help.h"               /* interactive_display() */
 #include "src/layout.h"
 #include "src/execute.h"            /* suspend_cmd() */
-#include "src/cmddef.h"
-#include "src/keybind.h"
+#include "src/keybind-defaults.h"
 #include "src/main.h"               /* fast_refresh */
 #include "src/setup.h"              /* mouse_close_dialog */
 

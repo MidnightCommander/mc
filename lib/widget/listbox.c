@@ -40,13 +40,13 @@
 #include "lib/tty/mouse.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
-#include "lib/util.h"                   /* Q_() */
+#include "lib/util.h"           /* Q_() */
+#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/cmddef.h"                 /* CK_ cmd name const */
-#include "src/keybind.h"                /* global_keymap_t */
-#include "src/main.h"                   /* confirm_history_cleanup */
+#include "src/keybind-defaults.h"       /* listbox_map */
+#include "src/main.h"           /* confirm_history_cleanup */
 
 /*** global variables ****************************************************************************/
 

@@ -78,7 +78,6 @@
 #include "execute.h"
 #include "ext.h"                /* For flush_extension_file() */
 #include "command.h"
-#include "cmddef.h"             /* CK_ cmd name const */
 #include "user.h"               /* user_file_menu_cmd() */
 
 #include "chmod.h"
@@ -100,7 +99,7 @@
 #include "selcodepage.h"
 #endif /* HAVE_CHARSET */
 
-#include "keybind.h"            /* type global_keymap_t */
+#include "keybind-defaults.h"   /* type global_keymap_t */
 
 /*** global variables ****************************************************************************/
 
