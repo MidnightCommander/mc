@@ -69,8 +69,6 @@ void
 mc_config_set_string_raw (mc_config_t * mc_config, const gchar * group,
                           const gchar * param, const gchar * value)
 {
-    gchar *buffer;
-
     if (!mc_config || !group || !param || !value)
         return;
 
