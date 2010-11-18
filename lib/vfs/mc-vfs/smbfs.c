@@ -41,6 +41,8 @@
 #include <string.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"
+#include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 
 #undef  PACKAGE_BUGREPORT
@@ -54,7 +56,7 @@
    conflicts with definitions in other includes */
 #undef HAVE_LIBREADLINE
 #define NO_CONFIG_H
-#undef	VERSION
+#undef VERSION
 
 #include "samba/include/includes.h"
 

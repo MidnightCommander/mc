@@ -1138,12 +1138,6 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
     Dlg_head *auth_dlg;
     struct smb_authinfo *return_value = NULL;
 
-    const int input_colors[3] = {
-        INPUT_COLOR,
-        INPUT_UNCHANGED_COLOR,
-        INPUT_MARK_COLOR
-    };
-
 #ifdef ENABLE_NLS
     static int i18n_flag = 0;
 
