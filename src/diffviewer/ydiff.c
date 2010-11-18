@@ -3141,7 +3141,7 @@ dview_handle_key (WDiff * dview, int key)
 
     key = convert_from_input_c (key);
 
-    command = lookup_keymap_command (diff_map, key);
+    command = keybind_lookup_keymap_command (diff_map, key);
     if ((command != CK_Ignore_Key) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
         return MSG_HANDLED;
 

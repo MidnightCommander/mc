@@ -61,7 +61,7 @@
 #include "layout.h"
 #include "cmd.h"
 #include "file.h"               /* safe_delete */
-#include "keybind.h"            /* lookup_action */
+#include "keybind.h"            /* keybind_lookup_action */
 
 
 #ifdef USE_INTERNAL_EDIT
@@ -569,7 +569,7 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
         curr_values = values =
             mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 
-        action = lookup_action (*profile_keys);
+        action = keybind_lookup_action (*profile_keys);
 
         if (action > 0)
         {

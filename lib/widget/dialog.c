@@ -306,7 +306,7 @@ static cb_ret_t
 dlg_handle_key (Dlg_head * h, int d_key)
 {
     unsigned long command;
-    command = lookup_keymap_command (dialog_map, d_key);
+    command = keybind_lookup_keymap_command (dialog_map, d_key);
     if ((command == CK_Ignore_Key) || (dlg_execute_cmd (h, command) == MSG_NOT_HANDLED))
         return MSG_NOT_HANDLED;
     else

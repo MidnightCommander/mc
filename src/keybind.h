@@ -107,9 +107,9 @@ extern const global_keymap_t default_diff_keymap[];
 /*** declarations of public functions ************************************************************/
 
 void keybind_cmd_bind (GArray * keymap, const char *keybind, unsigned long action);
-unsigned long lookup_action (const char *name);
-const char *lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action);
-unsigned long lookup_keymap_command (const global_keymap_t * keymap, long key);
+unsigned long keybind_lookup_action (const char *name);
+const char *keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action);
+unsigned long keybind_lookup_keymap_command (const global_keymap_t * keymap, long key);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__KEYBIND_H */

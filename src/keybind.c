@@ -1277,7 +1277,7 @@ keybind_cmd_bind (GArray * keymap, const char *keybind, unsigned long action)
 /* --------------------------------------------------------------------------------------------- */
 
 unsigned long
-lookup_action (const char *name)
+keybind_lookup_action (const char *name)
 {
     const name_keymap_t key = { name, 0 };
     name_keymap_t *res;
@@ -1293,7 +1293,7 @@ lookup_action (const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action)
+keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action)
 {
     size_t i;
 
@@ -1307,7 +1307,7 @@ lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action)
 /* --------------------------------------------------------------------------------------------- */
 
 unsigned long
-lookup_keymap_command (const global_keymap_t * keymap, long key)
+keybind_lookup_keymap_command (const global_keymap_t * keymap, long key)
 {
     size_t i;
 

@@ -598,17 +598,17 @@ midnight_get_shortcut (unsigned long command)
     const char *ext_map;
     const char *shortcut = NULL;
 
-    shortcut = lookup_keymap_shortcut (main_map, command);
+    shortcut = keybind_lookup_keymap_shortcut (main_map, command);
     if (shortcut != NULL)
         return g_strdup (shortcut);
 
-    shortcut = lookup_keymap_shortcut (panel_map, command);
+    shortcut = keybind_lookup_keymap_shortcut (panel_map, command);
     if (shortcut != NULL)
         return g_strdup (shortcut);
 
-    ext_map = lookup_keymap_shortcut (main_map, CK_StartExtMap1);
+    ext_map = keybind_lookup_keymap_shortcut (main_map, CK_StartExtMap1);
     if (ext_map != NULL)
-        shortcut = lookup_keymap_shortcut (main_x_map, command);
+        shortcut = keybind_lookup_keymap_shortcut (main_x_map, command);
     if (shortcut != NULL)
         return g_strdup_printf ("%s %s", ext_map, shortcut);
 
@@ -1392,7 +1392,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         if (ctl_x_map_enabled)
         {
             ctl_x_map_enabled = FALSE;
-            command = lookup_keymap_command (main_x_map, parm);
+            command = keybind_lookup_keymap_command (main_x_map, parm);
             if (command != CK_Ignore_Key)
                 return midnight_execute_cmd (NULL, command);
         }
@@ -1509,10 +1509,10 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         if (ctl_x_map_enabled)
         {
             ctl_x_map_enabled = FALSE;
-            command = lookup_keymap_command (main_x_map, parm);
+            command = keybind_lookup_keymap_command (main_x_map, parm);
         }
         else
-            command = lookup_keymap_command (main_map, parm);
+            command = keybind_lookup_keymap_command (main_map, parm);
 
         return (command == CK_Ignore_Key) ? MSG_NOT_HANDLED : midnight_execute_cmd (NULL, command);
 

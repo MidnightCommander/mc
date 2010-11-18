@@ -262,7 +262,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
         unsigned long command = CK_Ignore_Key;
 
         if (keymap != NULL)
-            command = lookup_keymap_command (keymap, KEY_F (idx));
+            command = keybind_lookup_keymap_command (keymap, KEY_F (idx));
 
         if ((text == NULL) || (text[0] == '\0'))
             set_label_text (bb, idx, "");

@@ -918,7 +918,7 @@ help_handle_key (Dlg_head * h, int c)
 {
     unsigned long command;
 
-    command = lookup_keymap_command (help_map, c);
+    command = keybind_lookup_keymap_command (help_map, c);
     if ((command == CK_Ignore_Key) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
         return MSG_NOT_HANDLED;
 

@@ -51,7 +51,7 @@
 #include "editcmd_dialogs.h"
 
 #include "src/cmddef.h"         /* list of commands */
-#include "src/keybind.h"        /* lookup_keymap_command() */
+#include "src/keybind.h"        /* keybind_lookup_keymap_command() */
 #include "src/main.h"           /* display_codepage */
 
 /*** global variables ****************************************************************************/
@@ -186,10 +186,10 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
     if (edit->extmod)
     {
         edit->extmod = 0;
-        command = lookup_keymap_command (editor_x_map, x_key);
+        command = keybind_lookup_keymap_command (editor_x_map, x_key);
     }
     else
-        command = lookup_keymap_command (editor_map, x_key);
+        command = keybind_lookup_keymap_command (editor_map, x_key);
 
     if (command == CK_Ignore_Key)
         command = CK_Insert_Char;

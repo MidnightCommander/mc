@@ -1131,7 +1131,7 @@ input_handle_char (WInput * in, int key)
         return v;
     }
 
-    command = lookup_keymap_command (input_map, key);
+    command = keybind_lookup_keymap_command (input_map, key);
 
     if (command == CK_Ignore_Key)
     {
@@ -1166,7 +1166,7 @@ input_key_is_in_map (WInput * in, int key)
 {
     unsigned long command;
 
-    command = lookup_keymap_command (input_map, key);
+    command = keybind_lookup_keymap_command (input_map, key);
     if (command == CK_Ignore_Key)
         return 0;
 
