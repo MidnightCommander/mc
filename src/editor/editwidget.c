@@ -243,9 +243,8 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_HANDLED;
 
     case DLG_VALIDATE:
-        if (!edit_ok_to_exit (edit))
-            h->state = DLG_ACTIVE;
-        else
+        h->state = DLG_ACTIVE; /* don't stop the dialog before final decision */
+        if (edit_ok_to_exit (edit))
             h->state = DLG_CLOSED;
         return MSG_HANDLED;
 
