@@ -315,6 +315,7 @@ PanelSortOrderByName=
 PanelSortOrderByExt=
 PanelSortOrderBySize=
 PanelSortOrderByMTime=
+PanelSmartJumpUp=
 
 [input]
 InputBol = ctrl-a; alt-lt; home; a1

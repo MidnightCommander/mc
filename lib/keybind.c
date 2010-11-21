@@ -431,6 +431,7 @@ static name_keymap_t command_names[] = {
     {"PanelSortOrderByExt", CK_PanelSortOrderByExt},
     {"PanelSortOrderBySize", CK_PanelSortOrderBySize},
     {"PanelSortOrderByMTime", CK_PanelSortOrderByMTime},
+    {"PanelSmartJumpUp", CK_PanelSmartJumpUp},
 
     /* input line */
     {"InputBol", CK_InputBol},

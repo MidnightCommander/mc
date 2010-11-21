@@ -454,6 +454,7 @@
 #define CK_PanelSortOrderByExt          8040
 #define CK_PanelSortOrderBySize         8041
 #define CK_PanelSortOrderByMTime        8042
+#define CK_PanelSmartJumpUp             8043
 
 /* diff viewer */
 #define CK_DiffDisplaySymbols           9001

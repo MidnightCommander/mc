@@ -1720,8 +1720,22 @@ maybe_cd (int move_up_dir)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Returns the number of items in the given panel */
 
+/* if command line is empty then do 'cd ..' */
+static cb_ret_t
+force_maybe_cd ()
+{
+    if (cmdline->buffer[0] == '\0')
+    {
+        do_cd ("..", cd_exact);
+        return MSG_HANDLED;
+    }
+    return MSG_NOT_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Returns the number of items in the given panel */
 static int
 ITEMS (WPanel * p)
 {
@@ -2792,6 +2806,9 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         break;
     case CK_PanelMarkFileDown:
         mark_file_down (panel);
+        break;
+    case CK_PanelSmartJumpUp:
+        res = force_maybe_cd ();
         break;
     case CK_PanelMoveUp:
         move_up (panel);
