@@ -44,6 +44,7 @@
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* For init_key() */
+#include "lib/tty/mouse.h"
 #include "lib/tty/win.h"        /* xterm_flag */
 #include "lib/skin.h"
 #include "lib/util.h"
@@ -821,7 +822,6 @@ done_screen (void)
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);
-    tty_colors_done ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -934,7 +934,6 @@ mc_maybe_editor_or_viewer (void)
     default:
         break;
     }
-    midnight_shutdown = 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1284,6 +1283,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
     switch (msg)
     {
     case DLG_INIT:
+        panel_init ();
         setup_panels ();
         return MSG_HANDLED;
 
@@ -1464,6 +1464,10 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         }
         return MSG_HANDLED;
 
+    case DLG_END:
+        panel_deinit ();
+        return MSG_HANDLED;
+
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
     }
@@ -1574,13 +1578,16 @@ void
 do_nc (void)
 {
     dlg_colors_t midnight_colors;
+
     midnight_colors[DLG_COLOR_NORMAL] = mc_skin_color_get ("dialog", "_default_");
     midnight_colors[DLG_COLOR_FOCUS] = mc_skin_color_get ("dialog", "focus");
     midnight_colors[DLG_COLOR_HOT_NORMAL] = mc_skin_color_get ("dialog", "hotnormal");
     midnight_colors[DLG_COLOR_HOT_FOCUS] = mc_skin_color_get ("dialog", "hotfocus");
     midnight_colors[DLG_COLOR_TITLE] = mc_skin_color_get ("dialog", "title");
 
-    panel_init ();
+#ifdef USE_INTERNAL_EDIT
+    edit_stack_init ();
+#endif
 
     midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
                                "[main]", NULL, DLG_WANT_IDLE);
@@ -1597,20 +1604,21 @@ do_nc (void)
     {
         create_panels_and_run_mc ();
 
-        /* Program end */
-        midnight_shutdown = 1;
-
         /* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
             last_wd_string = g_strdup (current_panel->cwd);
     }
 
+    /* Program end */
+    midnight_shutdown = 1;
     dialog_switch_shutdown ();
     done_mc ();
     destroy_dlg (midnight_dlg);
-    panel_deinit ();
-    current_panel = 0;
-    done_setup ();
+    current_panel = NULL;
+
+#ifdef USE_INTERNAL_EDIT
+    edit_stack_free ();
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

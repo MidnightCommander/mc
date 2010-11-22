@@ -46,9 +46,10 @@
 #include "lib/tty/win.h"        /* xterm_flag */
 #include "lib/skin.h"
 #include "lib/filehighlight.h"
+#include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/vfs/mc-vfs/vfs.h" /* vfs_translate_url() */
+#include "lib/vfs/mc-vfs/vfs.h" /* vfs_init(), vfs_shut() */
 
 #include "args.h"
 #include "midnight.h"           /* current_panel */
@@ -58,11 +59,6 @@
 #include "layout.h"             /* command_prompt */
 #include "ext.h"                /* flush_extension_file() */
 #include "command.h"            /* cmdline */
-#include "clipboard.h"          /* clipboard_store_path, clipboard_store_path */
-
-#ifdef USE_INTERNAL_EDIT
-#include "src/editor/edit.h"    /* edit_stack_init(), edit_stack_free() */
-#endif
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -213,7 +209,7 @@ OS_Setup (void)
     /* This variable is used by the subshell */
     home_dir = getenv ("HOME");
 
-    if (!home_dir)
+    if (home_dir == NULL)
         home_dir = mc_home;
 }
 
@@ -440,10 +436,6 @@ main (int argc, char *argv[])
 
     vfs_init ();
 
-#ifdef USE_INTERNAL_EDIT
-    edit_stack_init ();
-#endif
-
     if (!mc_args_handle (argc, argv, "mc"))
         exit (EXIT_FAILURE);
 
@@ -484,11 +476,8 @@ main (int argc, char *argv[])
     load_keymap_defs ();
 
     tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
-
     isInitialized = mc_skin_init (&error);
-
     mc_filehighlight = mc_fhl_new (TRUE);
-
     dlg_set_default_colors ();
 
     if (!isInitialized)
@@ -500,7 +489,7 @@ main (int argc, char *argv[])
 
     /* create home directory */
     /* do it after the screen library initialization to show the error message */
-    mc_dir = concat_dir_and_file (home_dir, MC_USERCONF_DIR);
+    mc_dir = g_build_filename (home_dir, MC_USERCONF_DIR, (char *) NULL);
     canonicalize_pathname (mc_dir);
     if ((stat (mc_dir, &s) != 0) && (errno == ENOENT) && mkdir (mc_dir, 0700) != 0)
         message (D_ERROR, _("Warning"), _("Cannot create %s directory"), mc_dir);
@@ -548,8 +537,11 @@ main (int argc, char *argv[])
 
     mc_fhl_free (&mc_filehighlight);
     mc_skin_deinit ();
+    tty_colors_done ();
 
     tty_shutdown ();
+
+    done_setup ();
 
     if (console_flag && (quit & SUBSHELL_EXIT) == 0)
         handle_console (CONSOLE_RESTORE);
@@ -560,7 +552,6 @@ main (int argc, char *argv[])
 
     if (console_flag)
         handle_console (CONSOLE_DONE);
-    putchar ('\n');             /* Hack to make shell's prompt start at left of screen */
 
     if (mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file != NULL
         && last_wd_string != NULL && !print_last_revert)
@@ -584,21 +575,13 @@ main (int argc, char *argv[])
     g_free (shell);
 
     done_key ();
-#ifdef HAVE_CHARSET
-    free_codepages_list ();
-    g_free (autodetect_codeset);
-#endif
-    g_free (clipboard_store_path);
-    g_free (clipboard_paste_path);
 
     str_uninit_strings ();
 
     g_free (mc_run_param0);
     g_free (mc_run_param1);
 
-#ifdef USE_INTERNAL_EDIT
-    edit_stack_free ();
-#endif
+    putchar ('\n');             /* Hack to make shell's prompt start at left of screen */
 
     return 0;
 }

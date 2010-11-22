@@ -990,6 +990,8 @@ done_setup (void)
 {
     size_t i;
 
+    g_free (clipboard_store_path);
+    g_free (clipboard_paste_path);
     g_free (profile_name);
     g_free (global_profile_name);
     g_free (color_terminal_string);
@@ -1008,6 +1010,11 @@ done_setup (void)
     done_hotlist ();
     done_panelize ();
     /*    directory_history_free (); */
+
+#ifdef HAVE_CHARSET
+    g_free (autodetect_codeset);
+    free_codepages_list ();
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
