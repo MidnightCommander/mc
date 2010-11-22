@@ -931,7 +931,6 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
         }
 #endif /* ENABLE_NLS */
         edit = g_malloc0 (sizeof (WEdit));
-        edit->search = NULL;
         to_free = 1;
     }
     edit_purge_widget (edit);
@@ -1025,6 +1024,8 @@ edit_clean (WEdit * edit)
 
     mc_search_free (edit->search);
     edit->search = NULL;
+    g_free (edit->last_search_string);
+    edit->last_search_string = NULL;
 
     if (edit->converter != str_cnv_from_term)
         str_close_conv (edit->converter);
@@ -3539,10 +3540,10 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
 
     case CK_Find:
-        edit_search_cmd (edit, 0);
+        edit_search_cmd (edit, FALSE);
         break;
     case CK_Find_Again:
-        edit_search_cmd (edit, 1);
+        edit_search_cmd (edit, TRUE);
         break;
     case CK_Replace:
         edit_replace_cmd (edit, 0);
