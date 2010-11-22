@@ -53,16 +53,19 @@
 
 #include "args.h"
 #include "dir.h"
-#include "panel.h"
-#include "main.h"
+#include "midnight.h"
 #include "tree.h"               /* xtree_mode */
 #include "hotlist.h"            /* load/save/done hotlist */
 #include "panelize.h"           /* load/save/done panelize */
 #include "layout.h"
 #include "cmd.h"
-#include "file.h"               /* safe_delete */
+#include "execute.h"            /* pause_after_run */
+#include "clipboard.h"
 #include "keybind-defaults.h"   /* keybind_lookup_action */
 
+#ifdef HAVE_CHARSET
+#include "selcodepage.h"
+#endif
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
@@ -73,12 +76,44 @@
 #include "setup.h"
 
 /*** global variables ****************************************************************************/
+
 char *profile_name;             /* .mc/ini */
 char *global_profile_name;      /* mc.lib */
+
+/* Only used at program boot */
+gboolean boot_current_is_left = TRUE;
 
 char *setup_color_string;
 char *term_color_string;
 char *color_terminal_string;
+
+/* If on, default for "No" in delete operations */
+int safe_delete = 0;
+
+/* Controls screen clearing before an exec */
+int clear_before_exec = 1;
+
+/* Asks for confirmation before deleting a file */
+int confirm_delete = 1;
+/* Asks for confirmation before deleting a hotlist entry */
+int confirm_directory_hotlist_delete = 1;
+/* Asks for confirmation before overwriting a file */
+int confirm_overwrite = 1;
+/* Asks for confirmation before executing a program by pressing enter */
+int confirm_execute = 0;
+/* Asks for confirmation before leaving the program */
+int confirm_exit = 1;
+/* Asks for confirmation before clean up of history */
+int confirm_history_cleanup = 1;
+
+/* If true, at startup the user-menu is invoked */
+int auto_menu = 0;
+/* This flag indicates if the pull down menus by default drop down */
+int drop_menus = 0;
+
+/* Asks for confirmation when using F3 to view a directory and there
+   are tagged files */
+int confirm_view_dir = 0;
 
 panel_view_mode_t startup_left_mode;
 panel_view_mode_t startup_right_mode;
@@ -111,6 +146,38 @@ panels_options_t panels_options = {
 };
 
 int easy_patterns = 1;
+
+/* It true saves the setup when quitting */
+int auto_save_setup = 1;
+
+/* If true, then the +, - and \ keys have their special meaning only if the
+ * command line is emtpy, otherwise they behave like regular letters
+ */
+int only_leading_plus_minus = 1;
+
+/* Set when cd symlink following is desirable (bash mode) */
+int cd_symlinks = 1;
+
+/* Set if you want the possible completions dialog for the first time */
+int show_all_if_ambiguous = 0;
+
+/* Automatically fills name with current selected item name on mkdir */
+int auto_fill_mkdir_name = 1;
+
+/* If set and you don't have subshell support,then C-o will give you a shell */
+int output_starts_shell = 0;
+
+/* If set, we execute the file command to check the file type */
+int use_file_to_check_type = 1;
+
+int verbose = 1;
+
+/*
+ * Whether the Midnight Commander tries to provide more
+ * information about copy/move sizes and bytes transfered
+ * at the expense of some speed
+ */
+int file_op_compute_totals = 1;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -817,7 +884,7 @@ load_setup (void)
             g_free (buffer);
     }
 
-    boot_current_is_left = mc_config_get_int (mc_panels_config, "Dirs", "current_is_left", 1);
+    boot_current_is_left = mc_config_get_bool (mc_panels_config, "Dirs", "current_is_left", TRUE);
 
     /* Load time formats */
     user_recent_timeformat =

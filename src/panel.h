@@ -26,8 +26,6 @@
 
 #define UP_KEEPSEL ((char *) -1)
 
-#define other_panel get_other_panel()
-
 /*** enums ***************************************************************************************/
 
 enum list_types
@@ -127,10 +125,6 @@ extern panel_field_t panel_fields[];
 extern int torben_fj_mode;
 extern int show_mini_info;
 
-extern WPanel *left_panel;
-extern WPanel *right_panel;
-extern WPanel *current_panel;
-
 extern hook_t *select_file_hook;
 
 /*** declarations of public functions ************************************************************/
@@ -161,6 +155,8 @@ void do_file_mark (WPanel * panel, int idx, int val);
 gboolean do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
 
 void directory_history_add (struct WPanel *panel, const char *dir);
+
+char *remove_encoding_from_path (const char *path);
 
 gsize panel_get_num_of_sortable_fields (void);
 const char **panel_get_sortable_fields (gsize *);

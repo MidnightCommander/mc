@@ -43,10 +43,11 @@
 
 /* Needed for the extern declarations of integer parameters */
 #include "chmod.h"
-#include "main.h"               /* update_panels() */
+#include "midnight.h"           /* current_panel */
 #include "layout.h"             /* repaint_screen() */
-#include "chown.h"
 #include "setup.h"              /* panels_options */
+
+#include "chown.h"
 
 /*** global variables ****************************************************************************/
 

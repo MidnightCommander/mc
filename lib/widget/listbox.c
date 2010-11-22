@@ -46,7 +46,7 @@
 
 /* TODO: these includes should be removed! */
 #include "src/keybind-defaults.h"       /* listbox_map */
-#include "src/main.h"           /* confirm_history_cleanup */
+#include "src/setup.h"          /* confirm_history_cleanup */
 
 /*** global variables ****************************************************************************/
 

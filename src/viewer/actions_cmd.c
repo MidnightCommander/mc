@@ -58,7 +58,6 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
-#include "src/panel.h"
 #include "src/layout.h"
 #include "src/history.h"
 #include "src/cmd.h"
@@ -66,6 +65,7 @@
 #include "src/help.h"
 #include "src/keybind-defaults.h"
 #include "src/main.h"           /* midnight_shutdown */
+#include "src/midnight.h"       /* current_panel */
 
 #include "internal.h"
 #include "mcviewer.h"

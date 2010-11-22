@@ -89,10 +89,9 @@
 #include "lib/widget.h"
 
 #include "setup.h"              /* verbose */
-#include "main-widgets.h"
-#include "main.h"               /* the_hint */
-#include "panel.h"              /* current_panel */
+#include "midnight.h"
 #include "fileopctx.h"          /* FILE_CONT */
+
 #include "filegui.h"
 
 /* }}} */

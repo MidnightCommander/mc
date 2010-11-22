@@ -40,6 +40,10 @@
 
 /*** global variables ****************************************************************************/
 
+/* path to X clipboard utility */
+char *clipboard_store_path = NULL;
+char *clipboard_paste_path = NULL;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/

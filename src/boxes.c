@@ -57,7 +57,6 @@
 #include "command.h"            /* For cmdline */
 #include "dir.h"
 #include "panel.h"              /* LIST_TYPES */
-#include "main.h"               /* For the confirm_* variables */
 #include "tree.h"
 #include "layout.h"             /* for get_nth_panel_name proto */
 #include "background.h"         /* task_list */

@@ -144,8 +144,6 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern const char *home_dir;
-
 /*** declarations of public functions ************************************************************/
 
 void refresh_screen (void *);

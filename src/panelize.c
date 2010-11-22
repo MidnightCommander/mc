@@ -44,11 +44,12 @@
 
 #include "setup.h"              /* For profile_bname */
 #include "dir.h"
-#include "panel.h"              /* current_panel */
+#include "midnight.h"           /* current_panel */
 #include "layout.h"             /* repaint_screen() */
 #include "main.h"
-#include "panelize.h"
 #include "history.h"
+
+#include "panelize.h"
 
 /*** global variables ****************************************************************************/
 

@@ -41,13 +41,13 @@
 #include "src/viewer/mcviewer.h"        /* for default_* externs */
 
 #include "dir.h"
-#include "panel.h"
-#include "main.h"
-#include "user.h"
+#include "midnight.h"
 #include "layout.h"
 #include "execute.h"
 #include "setup.h"
 #include "history.h"
+
+#include "user.h"
 
 /*** global variables ****************************************************************************/
 

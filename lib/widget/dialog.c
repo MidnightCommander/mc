@@ -43,8 +43,6 @@
 #include "src/layout.h"
 #include "src/execute.h"            /* suspend_cmd() */
 #include "src/keybind-defaults.h"
-#include "src/main.h"               /* fast_refresh */
-#include "src/setup.h"              /* mouse_close_dialog */
 
 /*** global variables ****************************************************************************/
 
@@ -58,6 +56,10 @@ GList *top_dlg = NULL;
 
 /* A hook list for idle events */
 hook_t *idle_hook = NULL;
+
+/* If set then dialogs just clean the screen when refreshing, else */
+/* they do a complete refresh, refreshing all the parts of the program */
+int fast_refresh = 0;
 
 /* left click outside of dialog closes it */
 int mouse_close_dialog = 0;

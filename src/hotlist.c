@@ -53,12 +53,12 @@
 #include "lib/widget.h"
 
 #include "setup.h"              /* For profile_bname */
-#include "panel.h"              /* current_panel */
-#include "main.h"               /* update_panels() */
+#include "midnight.h"           /* current_panel */
 #include "layout.h"             /* repaint_screen() */
-#include "hotlist.h"
 #include "command.h"            /* cmdline */
 #include "history.h"
+
+#include "hotlist.h"
 
 /*** global variables ****************************************************************************/
 

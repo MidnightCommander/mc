@@ -45,7 +45,7 @@
 #include "lib/widget.h"         /* message() */
 #endif
 
-#include "src/main.h"           /* print_vfs_message */
+#include "src/layout.h"           /* print_vfs_message */
 
 #include "vfs-impl.h"
 #include "utilvfs.h"

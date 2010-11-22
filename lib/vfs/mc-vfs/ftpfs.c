@@ -92,7 +92,7 @@ What to do with this?
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
 #include "lib/widget.h"         /* message() */
 
-#include "src/main.h"           /* print_vfs_message */
+#include "src/layout.h"         /* print_vfs_message */
 #include "src/history.h"
 #include "src/setup.h"          /* for load_anon_passwd */
 

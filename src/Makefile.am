@@ -94,7 +94,7 @@ mc_SOURCES = \
 	layout.c layout.h \
 	listmode.c listmode.h \
 	main.c main.h \
-	main-widgets.h \
+	midnight.h midnight.c \
 	panelize.c panelize.h \
 	subshell.c subshell.h \
 	textconf.c textconf.h \

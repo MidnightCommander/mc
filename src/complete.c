@@ -46,7 +46,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "main.h"               /* show_all_if_ambiguous */
+#include "setup.h"              /* show_all_if_ambiguous */
 
 /*** global variables ****************************************************************************/
 

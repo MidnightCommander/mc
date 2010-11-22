@@ -45,7 +45,7 @@
 #include "viewer/mcviewer.h"
 
 #include "user.h"
-#include "main.h"
+#include "setup.h"              /* use_file_to_check_type */
 #include "execute.h"
 #include "history.h"
 #include "layout.h"
@@ -55,9 +55,6 @@
 #include "ext.h"
 
 /*** global variables ****************************************************************************/
-
-/* If set, we execute the file command to check the file type */
-int use_file_to_check_type = 1;
 
 /*** file scope macro definitions ****************************************************************/
 

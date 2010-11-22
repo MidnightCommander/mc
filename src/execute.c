@@ -34,14 +34,17 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "main.h"
+#include "midnight.h"
 #include "consaver/cons.saver.h"
 #include "subshell.h"
 #include "layout.h"             /* use_dash() */
-#include "panel.h"              /* update_panels() */
+#include "setup.h"              /* clear_before_exec */
+
 #include "execute.h"
 
 /*** global variables ****************************************************************************/
+
+int pause_after_run = pause_on_dumb_terminals;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -156,7 +159,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
     {
         if ((pause_after_run == pause_always
              || (pause_after_run == pause_on_dumb_terminals && !xterm_flag
-                 && !console_flag)) && !quit
+                 && !console_flag)) && quit == 0
 #ifdef HAVE_SUBSHELL_SUPPORT
             && subshell_state != RUNNING_COMMAND
 #endif /* HAVE_SUBSHELL_SUPPORT */
@@ -376,7 +379,7 @@ toggle_panels (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
     {
-        load_prompt (0, 0);
+        load_prompt (0, NULL);
         if (new_dir)
             do_possible_cd (new_dir);
         if (console_flag && output_lines)

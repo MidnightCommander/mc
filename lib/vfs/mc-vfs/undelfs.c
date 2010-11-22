@@ -59,8 +59,7 @@
 #include "lib/global.h"
 
 #include "lib/widget.h"         /* message() */
-#include "src/main.h"           /* print_vfs_message */
-
+#include "src/layout.h"         /* print_vfs_message */
 #include "utilvfs.h"
 #include "vfs-impl.h"
 

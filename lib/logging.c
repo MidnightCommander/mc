@@ -33,12 +33,12 @@
 #include <stdio.h>
 
 #include "lib/global.h"
-#include "logging.h"
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
 
-#include "src/setup.h"
+#include "src/main.h"           /* home_dir */
 
+#include "logging.h"
 
 /*** global variables ****************************************************************************/
 

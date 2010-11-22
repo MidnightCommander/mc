@@ -44,7 +44,7 @@
 
 #include "lib/global.h"
 
-#include "src/panel.h"          /* current_panel */
+#include "src/midnight.h"       /* current_panel */
 #include "src/layout.h"         /* get_current_type(), get_other_type() */
 
 #include "vfs-impl.h"
@@ -184,7 +184,7 @@ vfs_stamp_create (struct vfs_class *oldvfs, vfsid oldvfsid)
        current_dir and current_panel->cwd or current_dir and other_panel->cwd are the
        same, it's possible that all three are different -- Norbert */
 
-    if (!current_panel)
+    if (current_panel == NULL)
         return;
 
     nvfs = vfs_get_class (vfs_get_current_dir ());

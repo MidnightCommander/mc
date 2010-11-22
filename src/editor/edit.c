@@ -51,7 +51,10 @@
 #include "lib/timefmt.h"        /* time formatting */
 #include "lib/lock.h"
 #include "lib/widget.h"
+
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"       /* get_codepage_id */
+#endif
 
 #include "src/cmd.h"            /* view_other_cmd() */
 #include "src/user.h"           /* user_menu_cmd() */

@@ -18,11 +18,18 @@
 /* State of the subshell; see subshell.c for an explanation */
 
 enum subshell_state_enum
-{ INACTIVE, ACTIVE, RUNNING_COMMAND };
+{
+    INACTIVE,
+    ACTIVE,
+    RUNNING_COMMAND
+};
 
 /* For the `how' argument to various functions */
 enum
-{ QUIETLY, VISIBLY };
+{
+    QUIETLY,
+    VISIBLY
+};
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -39,20 +46,24 @@ extern enum subshell_state_enum subshell_state;
 /* Holds the latest prompt captured from the subshell */
 extern char *subshell_prompt;
 
+extern gboolean update_subshell_prompt;
+
 /*** declarations of public functions ************************************************************/
 
 void init_subshell (void);
 int invoke_subshell (const char *command, int how, char **new_dir);
 int read_subshell_prompt (void);
+void do_update_prompt (void);
 void resize_subshell (void);
 int exit_subshell (void);
-void do_subshell_chdir (const char *directory, int update_prompt, int reset_prompt);
+void do_subshell_chdir (const char *directory, gboolean update_prompt, gboolean reset_prompt);
 void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
 
 #else /* not HAVE_SUBSHELL_SUPPORT */
 #define use_subshell 0
-#endif /* not HAVE_SUBSHELL_SUPPORT */
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
 /*** inline functions ****************************************************************************/
+
 #endif /* MC__SUBSHELL_H */

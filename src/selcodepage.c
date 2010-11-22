@@ -32,17 +32,11 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
-#include "selcodepage.h"
 #include "main.h"
 
-/*** global variables ****************************************************************************/
+#include "selcodepage.h"
 
-/* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
-int source_codepage = -1;
-int default_source_codepage = -1;
-int display_codepage = -1;
-char *autodetect_codeset = NULL;
-gboolean is_autodetect_codeset_enabled = FALSE;
+/*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 

@@ -40,14 +40,15 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "command.h"
-#include "panel.h"              /* view_tree enum. Also, needed by main.h */
+#include "midnight.h"           /* current_panel */
 #include "main.h"               /* do_cd */
 #include "layout.h"             /* for command_prompt variable */
 #include "user.h"               /* expand_format */
 #include "subshell.h"           /* SUBSHELL_EXIT */
 #include "tree.h"               /* for tree_chdir */
 #include "execute.h"            /* shell_execute */
+
+#include "command.h"
 
 /*** global variables ****************************************************************************/
 
@@ -257,7 +258,7 @@ enter (WInput * lc_cmdline)
         }
 
         if (use_subshell)
-            load_prompt (0, 0);
+            load_prompt (0, NULL);
 #endif
     }
     return MSG_HANDLED;

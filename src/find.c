@@ -47,9 +47,9 @@
 
 #include "setup.h"              /* verbose */
 #include "dir.h"
-#include "panel.h"              /* current_panel */
-#include "main.h"               /* do_cd, try_to_select */
 #include "cmd.h"                /* view_file_at_line */
+#include "midnight.h"           /* current_panel */
+#include "main.h"               /* do_cd */
 #include "boxes.h"
 #include "history.h"            /* MC_HISTORY_SHARED_SEARCH */
 #include "layout.h"             /* mc_refresh() */

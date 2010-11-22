@@ -40,8 +40,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "panel.h"              /* do_file_mark() */
-#include "main.h"               /* update_panels() */
+#include "midnight.h"           /* current_panel */
 #include "layout.h"             /* repaint_screen() */
 #include "chmod.h"
 

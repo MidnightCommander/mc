@@ -47,10 +47,11 @@
 #include "lib/util.h"           /* concat_dir_and_file() */
 #include "lib/widget.h"
 
+#include "src/keybind-defaults.h"
+#include "src/main.h"           /* home_dir */
+
 #include "edit-impl.h"
 #include "edit-widget.h"
-
-#include "src/keybind-defaults.h"
 
 /*** global variables ****************************************************************************/
 

@@ -159,6 +159,9 @@ extern GList *top_dlg;
 /* A hook list for idle events */
 extern hook_t *idle_hook;
 
+extern int fast_refresh;
+extern int mouse_close_dialog;
+
 /*** declarations of public functions ************************************************************/
 
 /* draw box in window */

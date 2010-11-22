@@ -52,9 +52,8 @@
 #include "lib/widget.h"
 
 #include "dir.h"
-#include "panel.h"
-#include "main.h"
-#include "main-widgets.h"       /* the_menubar */
+#include "setup.h"              /* confirm_delete */
+#include "midnight.h"           /* the_menubar */
 #include "file.h"               /* copy_dir_dir(), move_dir_dir(), erase_dir() */
 #include "layout.h"             /* command_prompt */
 #include "help.h"
@@ -62,10 +61,20 @@
 #include "cmd.h"
 #include "keybind-defaults.h"
 #include "history.h"
-#include "tree.h"
 #include "filegui.h"
 
+#include "tree.h"
+
 /*** global variables ****************************************************************************/
+
+/* The pointer to the tree */
+WTree *the_tree = NULL;
+
+/* If this is true, then when browsing the tree the other window will
+ * automatically reload it's directory with the contents of the currently
+ * selected directory.
+ */
+int xtree_mode = 0;
 
 /*** file scope macro definitions ****************************************************************/
 

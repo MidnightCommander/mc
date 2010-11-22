@@ -32,9 +32,8 @@
 
 /* TODO: these includes should be removed! */
 #include "src/layout.h"             /* repaint_screen() */
-#include "src/main-widgets.h"       /* midnight_dlg */
+#include "src/midnight.h"           /* midnight_dlg */
 #include "src/main.h"               /* midnight_shutdown */
-
 
 /*** global variables ****************************************************************************/
 
@@ -43,7 +42,6 @@
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
-
 
 /* List of dialogs: filemanagers, editors, viewers */
 static GList *mc_dialogs = NULL;

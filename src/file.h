@@ -34,8 +34,6 @@ typedef struct
 
 /*** global variables defined in .c file *********************************************************/
 
-extern int file_op_compute_totals;
-
 /*** declarations of public functions ************************************************************/
 
 FileProgressStatus copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,

@@ -62,7 +62,8 @@
 #include "lib/unixcompat.h"
 #include "lib/fileloc.h"
 
-#include "src/main.h"           /* print_vfs_message */
+#include "src/layout.h"         /* print_vfs_message */
+#include "src/execute.h"        /* pre_exec, post_exec */
 
 #include "vfs-impl.h"
 #include "utilvfs.h"
@@ -72,7 +73,6 @@
 
 #include "fish.h"
 #include "fishdef.h"
-#include "src/execute.h"        /* pre_exec, post_exec */
 
 /*** global variables ****************************************************************************/
 

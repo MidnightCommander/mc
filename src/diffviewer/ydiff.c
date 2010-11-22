@@ -47,7 +47,7 @@
 #include "src/cmd.h"
 #include "src/help.h"
 #include "src/history.h"
-#include "src/panel.h"          /* Needed for current_panel and other_panel */
+#include "src/midnight.h"       /* Needed for current_panel and other_panel */
 #include "src/layout.h"         /* Needed for get_current_index and get_other_panel */
 #include "src/main.h"           /* mc_run_mode, midnight_shutdown */
 #include "src/selcodepage.h"

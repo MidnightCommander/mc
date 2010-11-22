@@ -66,29 +66,20 @@
 #include "lib/widget.h"
 
 #include "setup.h"
-#include "main.h"
 #include "layout.h"             /* rotate_dash() */
 #include "background.h"         /* we_are_background */
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
-#include "panel.h"
-#include "file.h"
 #include "filegui.h"
 #include "tree.h"
+#include "midnight.h"           /* current_panel */
+
+#include "file.h"
 
 /* }}} */
 
 /*** global variables ****************************************************************************/
-
-int verbose = 1;
-
-/*
- * Whether the Midnight Commander tries to provide more
- * information about copy/move sizes and bytes transfered
- * at the expense of some speed
- */
-int file_op_compute_totals = 1;
 
 /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix  */
 const char *op_names[3] = {

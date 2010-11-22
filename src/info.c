@@ -36,8 +36,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "main-widgets.h"       /* the_menubar */
-#include "panel.h"              /* for the panel structure */
+#include "midnight.h"           /* the_menubar */
 #include "layout.h"
 #include "mountlist.h"
 #include "setup.h"              /* panels_options */

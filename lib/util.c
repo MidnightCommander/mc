@@ -50,9 +50,7 @@
 
 #include "src/filegui.h"
 #include "src/file.h"           /* copy_file_file() */
-#ifndef HAVE_CHARSET
-#include "src/main.h"           /* eight_bit_clean */
-#endif
+#include "src/main.h"           /* home_dir, eight_bit_clean */
 
 /*** global variables ****************************************************************************/
 

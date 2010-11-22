@@ -14,9 +14,19 @@
 
 /*** enums ***************************************************************************************/
 
+/* If true, after executing a command, wait for a keystroke */
+enum
+{
+    pause_never,
+    pause_on_dumb_terminals,
+    pause_always
+};
+
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /*** global variables defined in .c file *********************************************************/
+
+extern int pause_after_run;
 
 /*** declarations of public functions ************************************************************/
 

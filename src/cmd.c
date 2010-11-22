@@ -67,8 +67,7 @@
 #include "tree.h"               /* tree_chdir() */
 #include "subshell.h"           /* use_subshell */
 #include "consaver/cons.saver.h"        /* console_flag */
-#include "main.h"               /* change_panel() */
-#include "panel.h"              /* current_panel */
+#include "midnight.h"           /* change_panel() */
 #include "help.h"               /* interactive_display() */
 #include "user.h"               /* MC_GLOBAL_MENU */
 #include "command.h"            /* cmdline */
@@ -92,15 +91,6 @@
 #endif
 
 /*** global variables ****************************************************************************/
-
-/* If set and you don't have subshell support,then C-o will give you a shell */
-int output_starts_shell = 0;
-
-/* If set, use the builtin editor */
-int use_internal_edit = 1;
-
-/* Automatically fills name with current selected item name on mkdir */
-int auto_fill_mkdir_name = 1;
 
 int select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS;
 

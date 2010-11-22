@@ -44,10 +44,10 @@
 #include "lib/widget.h"
 
 #include "dir.h"
-#include "panel.h"              /* Needed for the externs */
+#include "midnight.h"           /* current_panel */
 #include "chmod.h"
-#include "main.h"               /* update_panels() */
 #include "layout.h"             /* repaint_screen() */
+
 #include "achown.h"
 
 /*** global variables ****************************************************************************/

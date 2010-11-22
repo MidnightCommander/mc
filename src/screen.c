@@ -50,7 +50,6 @@
 #endif
 
 #include "dir.h"
-#include "panel.h"
 #include "boxes.h"
 #include "tree.h"
 #include "ext.h"                /* regexp_command */
@@ -60,11 +59,13 @@
 #include "setup.h"              /* For loading/saving panel options */
 #include "user.h"
 #include "execute.h"
-#include "main-widgets.h"
-#include "main.h"
+#include "midnight.h"
+#include "subshell.h"           /* use_subshell */
 #include "mountlist.h"          /* my_statfs */
 #include "selcodepage.h"        /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
 #include "keybind-defaults.h"   /* global_keymap_t */
+
+#include "panel.h"
 
 /*** global variables ****************************************************************************/
 
@@ -2578,6 +2579,18 @@ get_parent_dir_name (const char *cwd, const char *lwd)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** Wrapper for do_subshell_chdir, check for availability of subshell */
+
+static void
+subshell_chdir (const char *directory)
+{
+#ifdef HAVE_SUBSHELL_SUPPORT
+    if (use_subshell && vfs_current_is_local ())
+        do_subshell_chdir (directory, FALSE, TRUE);
+#endif /* HAVE_SUBSHELL_SUPPORT */
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Changes the current directory of the panel.
  * Don't record change in the directory history.
@@ -3062,7 +3075,8 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
         /* "." button show/hide hidden files */
         if (event->x == panel->widget.cols - 5)
         {
-            toggle_show_hidden ();
+            panel->widget.owner->callback (panel->widget.owner, NULL,
+                                           DLG_ACTION, CK_ToggleShowHidden, NULL);
             repaint_screen ();
             return MOU_NORMAL;
         }
@@ -3288,42 +3302,43 @@ remove_encoding_from_path (const char *path)
 {
     GString *ret;
     GString *tmp_path, *tmp_conv;
-    char *tmp, *tmp2;
-    const char *enc;
-    GIConv converter;
+    char *tmp;
 
     ret = g_string_new ("");
     tmp_conv = g_string_new ("");
-
     tmp_path = g_string_new (path);
 
     while ((tmp = g_strrstr (tmp_path->str, PATH_SEP_STR VFS_ENCODING_PREFIX)) != NULL)
     {
+        const char *enc;
+        GIConv converter;
+        char *tmp2;
+
         enc = vfs_get_encoding ((const char *) tmp);
-        converter = enc ? str_crt_conv_to (enc) : str_cnv_to_term;
+        converter = enc != NULL ? str_crt_conv_to (enc) : str_cnv_to_term;
         if (converter == INVALID_CONV)
             converter = str_cnv_to_term;
 
         tmp2 = tmp + 1;
-        while (*tmp2 && *tmp2 != PATH_SEP)
+        while (*tmp2 != '\0' && *tmp2 != PATH_SEP)
             tmp2++;
 
-        if (*tmp2)
+        if (*tmp2 != '\0')
         {
             str_vfs_convert_from (converter, tmp2, tmp_conv);
             g_string_prepend (ret, tmp_conv->str);
             g_string_set_size (tmp_conv, 0);
         }
+
         g_string_set_size (tmp_path, tmp - tmp_path->str);
         str_close_conv (converter);
     }
+
     g_string_prepend (ret, tmp_path->str);
     g_string_free (tmp_path, TRUE);
     g_string_free (tmp_conv, TRUE);
 
-    tmp = ret->str;
-    g_string_free (ret, FALSE);
-    return tmp;
+    return g_string_free (ret, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

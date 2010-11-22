@@ -56,14 +56,13 @@
 #include "lib/widget.h"
 
 #include "command.h"
-#include "main-widgets.h"
+#include "midnight.h"
 #include "main.h"
 #include "subshell.h"           /* For use_subshell and resize_subshell() */
 #include "tree.h"
 #include "background.h"         /* we_are_background */
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
-#include "panel.h"              /* The Panel widget */
 #include "consaver/cons.saver.h"
 #include "layout.h"
 #include "info.h"               /* The Info widget */

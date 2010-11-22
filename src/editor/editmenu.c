@@ -45,7 +45,7 @@
 #include "lib/tty/key.h"        /* XCTRL */
 #include "lib/widget.h"
 
-#include "src/main.h"           /* drop_menus */
+#include "src/setup.h"          /* drop_menus */
 #include "src/keybind-defaults.h"
 
 #include "edit-impl.h"

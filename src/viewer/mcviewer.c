@@ -50,7 +50,7 @@
 
 #include "src/main.h"
 #include "src/layout.h"         /* menubar_visible */
-#include "src/main-widgets.h"   /* the_menubar */
+#include "src/midnight.h"       /* the_menubar */
 
 #include "internal.h"
 #include "mcviewer.h"

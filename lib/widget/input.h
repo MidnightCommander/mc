@@ -66,6 +66,8 @@ typedef struct
 
 /*** global variables defined in .c file *********************************************************/
 
+extern int quote;
+
 /*** declarations of public functions ************************************************************/
 
 WInput *input_new (int y, int x, const int *input_colors,

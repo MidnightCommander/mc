@@ -48,6 +48,7 @@
 #endif /* HAVE_STROPTS_H */
 
 #include "lib/global.h"
+
 #include "lib/tty/tty.h"        /* LINES */
 #include "lib/tty/key.h"        /* XCTRL */
 #include "lib/vfs/mc-vfs/vfs.h"
@@ -56,8 +57,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "panel.h"              /* current_panel */
-#include "main.h"               /* do_update_prompt() */
+#include "midnight.h"                   /* current_panel */
+#include "main.h"                       /* home_dir */
 #include "consaver/cons.saver.h"        /* handle_console() */
 #include "subshell.h"
 
@@ -82,6 +83,10 @@ enum subshell_state_enum subshell_state;
 
 /* Holds the latest prompt captured from the subshell */
 char *subshell_prompt = NULL;
+
+/* Subshell: if set, then the prompt was not saved on CONSOLE_SAVE */
+/* We need to paint it after CONSOLE_RESTORE, see: load_prompt */
+gboolean update_subshell_prompt = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -921,8 +926,8 @@ invoke_subshell (const char *command, int how, char **new_dir)
     tcsetattr (STDOUT_FILENO, TCSANOW, &raw_mode);
 
     /* Make the subshell change to MC's working directory */
-    if (new_dir)
-        do_subshell_chdir (current_panel->cwd, TRUE, 1);
+    if (new_dir != NULL)
+        do_subshell_chdir (current_panel->cwd, TRUE, TRUE);
 
     if (command == NULL)        /* The user has done "C-o" from MC */
     {
@@ -954,7 +959,7 @@ invoke_subshell (const char *command, int how, char **new_dir)
     g_free (pcwd);
 
     /* Restart the subshell if it has died by SIGHUP, SIGQUIT, etc. */
-    while (!subshell_alive && !quit && use_subshell)
+    while (!subshell_alive && quit == 0 && use_subshell)
         init_subshell ();
 
     prompt_pos = 0;
@@ -1024,8 +1029,21 @@ read_subshell_prompt (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Resize given terminal using TIOCSWINSZ, return ioctl() result */
 
+void
+do_update_prompt (void)
+{
+    if (update_subshell_prompt)
+    {
+        printf ("\r\n%s", subshell_prompt);
+        fflush (stdout);
+        update_subshell_prompt = FALSE;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Resize given terminal using TIOCSWINSZ, return ioctl() result */
 static int
 resize_tty (int fd)
 {
@@ -1171,10 +1189,10 @@ subshell_name_quote (const char *s)
 
 
 /* --------------------------------------------------------------------------------------------- */
-/** If it actually changed the directory it returns true */
 
+/** If it actually changed the directory it returns true */
 void
-do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
+do_subshell_chdir (const char *directory, gboolean update_prompt, gboolean reset_prompt)
 {
     char *pcwd;
     char *temp;
@@ -1182,13 +1200,13 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 
     pcwd = vfs_translate_path_n (current_panel->cwd);
 
-    if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd)))
+    if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
     {
         /* We have to repaint the subshell prompt if we read it from
          * the main program.  Please note that in the code after this
          * if, the cd command that is sent will make the subshell
          * repaint the prompt, so we don't have to paint it. */
-        if (do_update)
+        if (update_prompt)
             do_update_prompt ();
         g_free (pcwd);
         return;
@@ -1259,7 +1277,7 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 
     if (reset_prompt)
         prompt_pos = 0;
-    update_prompt = FALSE;
+    update_subshell_prompt = FALSE;
 
     g_free (pcwd);
     /* Make sure that MC never stores the CWD in a silly format */
