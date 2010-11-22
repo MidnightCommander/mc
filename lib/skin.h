@@ -44,57 +44,59 @@
 #define MENU_HOTSEL_COLOR         mc_skin_color__cache[22]
 #define MENU_INACTIVE_COLOR       mc_skin_color__cache[23]
 
+#define BUTTONBAR_HOTKEY_COLOR    mc_skin_color__cache[24]
+#define BUTTONBAR_BUTTON_COLOR    mc_skin_color__cache[25]
+
+#define STATUSBAR_COLOR           mc_skin_color__cache[26]
+
 /*
  * This should be selectable independently. Default has to be black background
  * foreground does not matter at all.
  */
-#define GAUGE_COLOR               mc_skin_color__cache[24]
-#define INPUT_COLOR               mc_skin_color__cache[25]
-#define INPUT_UNCHANGED_COLOR     mc_skin_color__cache[26]
-#define INPUT_MARK_COLOR          mc_skin_color__cache[27]
-#define INPUT_HISTORY_COLOR       mc_skin_color__cache[28]
-#define COMMAND_HISTORY_COLOR     mc_skin_color__cache[29]
+#define GAUGE_COLOR               mc_skin_color__cache[27]
+#define INPUT_COLOR               mc_skin_color__cache[28]
+#define INPUT_UNCHANGED_COLOR     mc_skin_color__cache[29]
+#define INPUT_MARK_COLOR          mc_skin_color__cache[30]
+#define INPUT_HISTORY_COLOR       mc_skin_color__cache[31]
+#define COMMAND_HISTORY_COLOR     mc_skin_color__cache[32]
 
-#define HELP_NORMAL_COLOR         mc_skin_color__cache[30]
-#define HELP_ITALIC_COLOR         mc_skin_color__cache[31]
-#define HELP_BOLD_COLOR           mc_skin_color__cache[32]
-#define HELP_LINK_COLOR           mc_skin_color__cache[33]
-#define HELP_SLINK_COLOR          mc_skin_color__cache[34]
-#define HELP_TITLE_COLOR          mc_skin_color__cache[35]
+#define HELP_NORMAL_COLOR         mc_skin_color__cache[33]
+#define HELP_ITALIC_COLOR         mc_skin_color__cache[34]
+#define HELP_BOLD_COLOR           mc_skin_color__cache[35]
+#define HELP_LINK_COLOR           mc_skin_color__cache[36]
+#define HELP_SLINK_COLOR          mc_skin_color__cache[37]
+#define HELP_TITLE_COLOR          mc_skin_color__cache[38]
 
 
-#define VIEW_BOLD_COLOR           mc_skin_color__cache[36]
-#define VIEW_UNDERLINED_COLOR     mc_skin_color__cache[37]
-#define VIEW_SELECTED_COLOR       mc_skin_color__cache[38]
+#define VIEW_BOLD_COLOR           mc_skin_color__cache[39]
+#define VIEW_UNDERLINED_COLOR     mc_skin_color__cache[40]
+#define VIEW_SELECTED_COLOR       mc_skin_color__cache[41]
 
 /*
  * editor colors - only 4 for normal, search->found, select, and whitespace
  * respectively
  * Last is defined to view color.
  */
-#define EDITOR_NORMAL_COLOR       mc_skin_color__cache[39]
-#define EDITOR_BOLD_COLOR         mc_skin_color__cache[40]
-#define EDITOR_MARKED_COLOR       mc_skin_color__cache[41]
-#define EDITOR_WHITESPACE_COLOR   mc_skin_color__cache[42]
-#define EDITOR_RIGHT_MARGIN_COLOR mc_skin_color__cache[43]
+#define EDITOR_NORMAL_COLOR       mc_skin_color__cache[42]
+#define EDITOR_BOLD_COLOR         mc_skin_color__cache[43]
+#define EDITOR_MARKED_COLOR       mc_skin_color__cache[44]
+#define EDITOR_WHITESPACE_COLOR   mc_skin_color__cache[45]
+#define EDITOR_RIGHT_MARGIN_COLOR mc_skin_color__cache[46]
 /* color of left 8 char status per line */
-#define LINE_STATE_COLOR          mc_skin_color__cache[44]
-#define BOOK_MARK_COLOR           mc_skin_color__cache[45]
-#define BOOK_MARK_FOUND_COLOR     mc_skin_color__cache[46]
-
-#define BUTTONBAR_HOTKEY_COLOR    mc_skin_color__cache[47]
-#define BUTTONBAR_BUTTON_COLOR    mc_skin_color__cache[48]
+#define LINE_STATE_COLOR          mc_skin_color__cache[47]
+#define BOOK_MARK_COLOR           mc_skin_color__cache[48]
+#define BOOK_MARK_FOUND_COLOR     mc_skin_color__cache[49]
 
 /* Diff colors */
-#define DFF_ADD_COLOR             mc_skin_color__cache[49]
-#define DFF_CHG_COLOR             mc_skin_color__cache[50]
-#define DFF_CHH_COLOR             mc_skin_color__cache[51]
-#define DFF_CHD_COLOR             mc_skin_color__cache[52]
-#define DFF_DEL_COLOR             mc_skin_color__cache[53]
-#define DFF_FOLDER_COLOR          mc_skin_color__cache[54]
-#define DFF_ERROR_COLOR           mc_skin_color__cache[55]
+#define DFF_ADD_COLOR             mc_skin_color__cache[50]
+#define DFF_CHG_COLOR             mc_skin_color__cache[51]
+#define DFF_CHH_COLOR             mc_skin_color__cache[52]
+#define DFF_CHD_COLOR             mc_skin_color__cache[53]
+#define DFF_DEL_COLOR             mc_skin_color__cache[54]
+#define DFF_FOLDER_COLOR          mc_skin_color__cache[55]
+#define DFF_ERROR_COLOR           mc_skin_color__cache[56]
 
-#define MC_SKIN_COLOR_CACHE_COUNT 56
+#define MC_SKIN_COLOR_CACHE_COUNT 57
 
 /*** enums ***************************************************************************************/
 

@@ -138,7 +138,7 @@ mcview_display_status (mcview_t * view)
     if (height < 1)
         return;
 
-    tty_setcolor (SELECTED_COLOR);
+    tty_setcolor (STATUSBAR_COLOR);
     widget_move (view, top, left);
     tty_draw_hline (-1, -1, ' ', width);
 

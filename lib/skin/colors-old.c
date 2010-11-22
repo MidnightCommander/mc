@@ -28,12 +28,12 @@
 #include <config.h>
 #include <stdlib.h>
 #include <sys/types.h>          /* size_t */
-#include "lib/tty/color.h"
 
 #include "internal.h"
 
-#include "src/setup.h"
+#include "lib/tty/color.h"
 
+#include "src/setup.h"
 
 /*** global variables ****************************************************************************/
 
@@ -69,6 +69,9 @@ static const mc_skin_colors_old_t old_colors[] = {
     {"menusel", "menu", "menusel"},
     {"menuhotsel", "menu", "menuhotsel"},
     {"menuinactive", "menu", "menuinactive"},
+    {"bbarhotkey", "buttonbar", "hotkey"},
+    {"bbarbutton", "buttonbar", "button"},
+    {"statusbar", "statusbar", "_default_"},
     {"gauge", "core", "gauge"},
     {"input", "core", "input"},
     {"inputmark", "core", "inputmark"},

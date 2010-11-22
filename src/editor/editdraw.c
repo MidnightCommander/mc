@@ -193,7 +193,7 @@ edit_status (WEdit * edit)
     }
 
     widget_move (edit, 0, 0);
-    tty_setcolor (SELECTED_COLOR);
+    tty_setcolor (STATUSBAR_COLOR);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
 

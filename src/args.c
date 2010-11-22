@@ -329,6 +329,7 @@ mc_args_new_color_group (void)
                                                      "\n" "Keywords:\n"
                                                      "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
                                                      "                 input, inputmark, inputunchanged, commandlinemark\n"
+                                                     "                 bbarhotkey, bbarbutton, statusbar\n"
                                                      "   File display: normal, selected, marked, markselect\n"
                                                      "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
                                                      "                 errdhotfocus\n"
