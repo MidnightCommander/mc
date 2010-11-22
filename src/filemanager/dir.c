@@ -36,9 +36,10 @@
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 
+#include "src/setup.h"          /* panels_options */
+
 #include "treestore.h"
 #include "dir.h"
-#include "setup.h"              /* panels_options */
 #include "layout.h"             /* rotate_dash() */
 
 /*** global variables ****************************************************************************/

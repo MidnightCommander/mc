@@ -561,6 +561,7 @@ src/editor/Makefile
 src/man2hlp/Makefile
 src/viewer/Makefile
 src/diffviewer/Makefile
+src/filemanager/Makefile
 
 lib/Makefile
 lib/filehighlight/Makefile

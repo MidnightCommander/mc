@@ -112,7 +112,7 @@ void release_hotkey (const hotkey_t hotkey);
 /* return width on terminal of hotkey */
 int hotkey_width (const hotkey_t hotkey);
 /* draw hotkey of widget */
-void hotkey_draw (struct Widget * w, const hotkey_t hotkey, gboolean focused);
+void hotkey_draw (struct Widget *w, const hotkey_t hotkey, gboolean focused);
 
 /* widget initialization */
 void init_widget (Widget * w, int y, int x, int lines, int cols,
@@ -121,7 +121,7 @@ void init_widget (Widget * w, int y, int x, int lines, int cols,
 cb_ret_t default_proc (widget_msg_t msg, int parm);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
-void widget_selectcolor (struct Widget * w, gboolean focused, gboolean hotkey);
+void widget_selectcolor (struct Widget *w, gboolean focused, gboolean hotkey);
 void widget_erase (Widget * w);
 
 /*** inline functions ****************************************************************************/

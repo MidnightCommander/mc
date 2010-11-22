@@ -19,7 +19,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-/** \file screen.c
+/** \file panel.c
  *  \brief Source: panel managin module
  */
 
@@ -46,8 +46,14 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"           /* get_codepage_id () */
+#include "lib/charsets.h"       /* get_codepage_id () */
 #endif
+
+#include "src/setup.h"          /* For loading/saving panel options */
+#include "src/execute.h"
+#include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
+#include "src/keybind-defaults.h"       /* global_keymap_t */
+#include "src/subshell.h"       /* use_subshell */
 
 #include "dir.h"
 #include "boxes.h"
@@ -56,14 +62,9 @@
 #include "layout.h"             /* Most layout variables are here */
 #include "cmd.h"
 #include "command.h"            /* cmdline */
-#include "setup.h"              /* For loading/saving panel options */
-#include "user.h"
-#include "execute.h"
+#include "usermenu.h"
 #include "midnight.h"
-#include "subshell.h"           /* use_subshell */
 #include "mountlist.h"          /* my_statfs */
-#include "selcodepage.h"        /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
-#include "keybind-defaults.h"   /* global_keymap_t */
 
 #include "panel.h"
 

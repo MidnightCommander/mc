@@ -18,9 +18,9 @@ typedef int (*bcback_fn) (struct WButton * button, int action);
 
 typedef enum
 {
-    HIDDEN_BUTTON  = 0,
-    NARROW_BUTTON  = 1,
-    NORMAL_BUTTON  = 2,
+    HIDDEN_BUTTON = 0,
+    NARROW_BUTTON = 1,
+    NORMAL_BUTTON = 2,
     DEFPUSH_BUTTON = 3
 } button_flags_t;
 

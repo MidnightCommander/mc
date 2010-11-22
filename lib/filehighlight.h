@@ -3,7 +3,8 @@
 
 #include "lib/mcconfig.h"
 #include "lib/search.h"
-#include "src/dir.h"
+
+#include "src/filemanager/dir.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

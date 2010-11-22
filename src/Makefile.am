@@ -1,4 +1,4 @@
-SUBDIRS = man2hlp viewer
+SUBDIRS = filemanager man2hlp viewer
 
 if USE_EDIT
 SUBDIRS += editor
@@ -33,14 +33,9 @@ if USE_DIFF
 DIFFLIB = diffviewer/libdiffviewer.la
 endif
 
-SRC_charset = selcodepage.c selcodepage.h
-
-if CHARSET
-    SRC_USE_charset=$(SRC_charset)
-endif
-
 mc_LDADD = \
 	viewer/libmcviewer.la \
+	filemanager/libmcfilemanager.la \
 	$(DIFFLIB) $(EDITLIB) \
 	../lib/libmc.la \
 	$(MCLIBS) $(SLANGLIB) $(GLIB_LIBS) \
@@ -51,59 +46,27 @@ if ENABLE_VFS_SMB
 mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
 endif
 
-SRC_mc_widgets = \
-	tree.c tree.h \
-	screen.c panel.h
-
 SRC_mc_conssaver = \
 	cons.handler.c consaver/cons.saver.h
 
-SRC_mc_options = \
-	learn.c learn.h \
-	option.c option.h \
-	setup.c setup.h
-
 mc_SOURCES = \
-	$(SRC_USE_charset) \
-	$(SRC_mc_widgets) \
 	$(SRC_mc_conssaver) \
-	$(SRC_mc_options) \
-	achown.c achown.h \
 	args.c args.h \
 	background.c background.h \
-	boxes.c boxes.h \
-	chmod.c chmod.h \
-	chown.c chown.h \
 	clipboard.c clipboard.h \
-	cmd.c cmd.h \
-	command.c command.h \
-	complete.c \
-	dir.c dir.h \
 	execute.c execute.h \
-	ext.c ext.h \
-	file.c file.h \
-	filegui.c filegui.h \
-	filenot.c \
-	fileopctx.c fileopctx.h \
-	find.c find.h \
 	help.c help.h \
 	history.h \
-	hotlist.c hotlist.h \
-	info.c info.h \
 	keybind-defaults.c keybind-defaults.h \
-	layout.c layout.h \
-	listmode.c listmode.h \
+	learn.c learn.h \
 	main.c main.h \
-	midnight.h midnight.c \
-	panelize.c panelize.h \
+	setup.c setup.h \
 	subshell.c subshell.h \
-	textconf.c textconf.h \
-	treestore.c treestore.h \
-	user.c user.h
+	textconf.c textconf.h
 
-#if USE_MOUNTLIST
-mc_SOURCES += mountlist.c mountlist.h
-#endif
+if CHARSET
+    mc_SOURCES += selcodepage.c selcodepage.h
+endif
 
 EXTRA_DIST = $(SRC_maintainer) $(SRC_charset)
 

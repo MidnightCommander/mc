@@ -12,11 +12,12 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct {
+typedef struct
+{
     Widget widget;
-    gboolean auto_adjust_cols;	/* compute widget.cols from strlen(text)? */
+    gboolean auto_adjust_cols;  /* compute widget.cols from strlen(text)? */
     char *text;
-    gboolean transparent;		/* Paint in the default color fg/bg */
+    gboolean transparent;       /* Paint in the default color fg/bg */
 } WLabel;
 
 /*** global variables defined in .c file *********************************************************/
@@ -24,8 +25,8 @@ typedef struct {
 /*** declarations of public functions ************************************************************/
 
 WLabel *label_new (int y, int x, const char *text);
-void label_set_text (WLabel *label, const char *text);
+void label_set_text (WLabel * label, const char *text);
 
 /*** inline functions ****************************************************************************/
 
-#endif  /* MC__WIDGET_LABEL_H */
+#endif /* MC__WIDGET_LABEL_H */

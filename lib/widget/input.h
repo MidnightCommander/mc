@@ -44,24 +44,24 @@ typedef int input_colors_t[WINPUTC_COUNT_COLORS];
 typedef struct
 {
     Widget widget;
-    int point;                          /* cursor position in the input line in characters */
-    int mark;                           /* the mark position in characters */
-    gboolean highlight;                 /* there is a selected block */
-    int term_first_shown;               /* column of the first shown character */
-    size_t current_max_size;            /* maximum length of input line (bytes) */
-    int field_width;                    /* width of the editing field */
+    int point;                  /* cursor position in the input line in characters */
+    int mark;                   /* the mark position in characters */
+    gboolean highlight;         /* there is a selected block */
+    int term_first_shown;       /* column of the first shown character */
+    size_t current_max_size;    /* maximum length of input line (bytes) */
+    int field_width;            /* width of the editing field */
     input_colors_t color;
-    gboolean first;                     /* is first keystroke? */
-    int disable_update;                 /* do we want to skip updates? */
-    gboolean is_password;               /* is this a password input line? */
-    char *buffer;                       /* pointer to editing buffer */
-    GList *history;                     /* the history */
-    gboolean need_push;                      /* need to push the current Input on hist? */
-    char **completions;                 /* possible completions array */
+    gboolean first;             /* is first keystroke? */
+    int disable_update;         /* do we want to skip updates? */
+    gboolean is_password;       /* is this a password input line? */
+    char *buffer;               /* pointer to editing buffer */
+    GList *history;             /* the history */
+    gboolean need_push;         /* need to push the current Input on hist? */
+    char **completions;         /* possible completions array */
     input_complete_t completion_flags;
-    char *history_name;                 /* name of history for loading and saving */
-    char charbuf[MB_LEN_MAX];           /* buffer for multibytes characters */
-    size_t charpoint;                   /* point to end of mulibyte sequence in charbuf */
+    char *history_name;         /* name of history for loading and saving */
+    char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
+    size_t charpoint;           /* point to end of mulibyte sequence in charbuf */
 } WInput;
 
 /*** global variables defined in .c file *********************************************************/
@@ -74,7 +74,7 @@ WInput *input_new (int y, int x, const int *input_colors,
                    int len, const char *text, const char *histname,
                    input_complete_t completion_flags);
 /* callbac is public; needed for command line */
-cb_ret_t input_callback (Widget *w, widget_msg_t msg, int parm);
+cb_ret_t input_callback (Widget * w, widget_msg_t msg, int parm);
 const int *input_get_default_colors (void);
 void input_set_origin (WInput * i, int x, int field_width);
 cb_ret_t input_handle_char (WInput * in, int key);

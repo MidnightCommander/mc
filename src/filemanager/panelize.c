@@ -42,12 +42,13 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "setup.h"              /* For profile_bname */
+#include "src/setup.h"          /* For profile_bname */
+#include "src/main.h"
+#include "src/history.h"
+
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
 #include "layout.h"             /* repaint_screen() */
-#include "main.h"
-#include "history.h"
 
 #include "panelize.h"
 

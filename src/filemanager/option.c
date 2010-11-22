@@ -37,10 +37,11 @@
 #include "lib/tty/key.h"        /* old_esc_mode_timeout */
 #include "lib/widget.h"
 
-#include "setup.h"              /* variables */
+#include "src/setup.h"          /* variables */
+#include "src/history.h"        /* MC_HISTORY_ESC_TIMEOUT */
+#include "src/execute.h"        /* pause_after_run */
+
 #include "layout.h"             /* nice_rotating_dash */
-#include "history.h"            /* MC_HISTORY_ESC_TIMEOUT */
-#include "execute.h"            /* pause_after_run */
 #include "panel.h"              /* update_panels() */
 
 #include "option.h"

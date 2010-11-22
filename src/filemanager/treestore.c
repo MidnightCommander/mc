@@ -54,8 +54,9 @@
 #include "lib/hook.h"
 #include "lib/util.h"
 
+#include "src/setup.h"
+
 #include "treestore.h"
-#include "setup.h"
 
 /*** global variables ****************************************************************************/
 

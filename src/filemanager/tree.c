@@ -51,16 +51,17 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/setup.h"          /* confirm_delete */
+#include "src/keybind-defaults.h"
+#include "src/history.h"
+#include "src/help.h"
+
 #include "dir.h"
-#include "setup.h"              /* confirm_delete */
 #include "midnight.h"           /* the_menubar */
 #include "file.h"               /* copy_dir_dir(), move_dir_dir(), erase_dir() */
 #include "layout.h"             /* command_prompt */
-#include "help.h"
 #include "treestore.h"
 #include "cmd.h"
-#include "keybind-defaults.h"
-#include "history.h"
 #include "filegui.h"
 
 #include "tree.h"

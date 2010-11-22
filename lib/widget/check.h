@@ -18,8 +18,8 @@
 typedef struct WCheck
 {
     Widget widget;
-    unsigned int state;  /* check button state */
-    hotkey_t text;       /* text of check button */
+    unsigned int state;         /* check button state */
+    hotkey_t text;              /* text of check button */
 } WCheck;
 
 /*** global variables defined in .c file *********************************************************/

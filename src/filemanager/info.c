@@ -36,10 +36,11 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/setup.h"          /* panels_options */
+
 #include "midnight.h"           /* the_menubar */
 #include "layout.h"
 #include "mountlist.h"
-#include "setup.h"              /* panels_options */
 #include "info.h"
 
 /*** global variables ****************************************************************************/

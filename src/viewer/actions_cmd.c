@@ -58,14 +58,15 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
-#include "src/layout.h"
+#include "src/filemanager/layout.h"
+#include "src/filemanager/cmd.h"
+#include "src/filemanager/midnight.h"   /* current_panel */
+
 #include "src/history.h"
-#include "src/cmd.h"
 #include "src/execute.h"
 #include "src/help.h"
 #include "src/keybind-defaults.h"
 #include "src/main.h"           /* midnight_shutdown */
-#include "src/midnight.h"       /* current_panel */
 
 #include "internal.h"
 #include "mcviewer.h"

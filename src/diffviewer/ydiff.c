@@ -43,12 +43,13 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
+#include "src/filemanager/cmd.h"
+#include "src/filemanager/midnight.h"   /* Needed for current_panel and other_panel */
+#include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
+
 #include "src/keybind-defaults.h"
-#include "src/cmd.h"
 #include "src/help.h"
 #include "src/history.h"
-#include "src/midnight.h"       /* Needed for current_panel and other_panel */
-#include "src/layout.h"         /* Needed for get_current_index and get_other_panel */
 #include "src/main.h"           /* mc_run_mode, midnight_shutdown */
 #include "src/selcodepage.h"
 
@@ -2762,7 +2763,7 @@ dview_edit (WDiff * dview, int ord)
     h_modal = h->modal;
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
-    h->modal = TRUE; /* not allow edit file in several editors */
+    h->modal = TRUE;            /* not allow edit file in several editors */
     do_edit_at_line (dview->file[ord], use_internal_edit, linenum);
     h->modal = h_modal;
     dview_redo (dview);
@@ -2943,9 +2944,9 @@ dview_ok_to_exit (WDiff * dview)
         return res;
 
     act = query_dialog (_("Quit"), !midnight_shutdown ?
-                                _("File was modified. Save with exit?") :
-                                _("Midnight Commander is being shut down.\nSave modified file?"),
-                          D_NORMAL, 2, _("&Yes"), _("&No"));
+                        _("File was modified. Save with exit?") :
+                        _("Midnight Commander is being shut down.\nSave modified file?"),
+                        D_NORMAL, 2, _("&Yes"), _("&No"));
 
     /* Esc is No */
     if (midnight_shutdown || (act == -1))
@@ -2953,14 +2954,14 @@ dview_ok_to_exit (WDiff * dview)
 
     switch (act)
     {
-    case -1: /* Esc */
+    case -1:                   /* Esc */
         res = FALSE;
         break;
-    case 0: /* Yes */
+    case 0:                    /* Yes */
         (void) dview_save (dview);
         res = TRUE;
         break;
-    case 1: /* No */
+    case 1:                    /* No */
         if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
         /* fall through */
@@ -3245,7 +3246,7 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-dview_get_title (const Dlg_head *h, size_t len)
+dview_get_title (const Dlg_head * h, size_t len)
 {
     const WDiff *dview = (const WDiff *) find_widget_type (h, dview_callback);
     const char *modified = dview->merged ? " (*) " : "     ";

@@ -48,8 +48,8 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 
-#include "src/filegui.h"
-#include "src/file.h"           /* copy_file_file() */
+#include "src/filemanager/filegui.h"
+#include "src/filemanager/file.h"       /* copy_file_file() */
 #include "src/main.h"           /* home_dir, eight_bit_clean */
 
 /*** global variables ****************************************************************************/

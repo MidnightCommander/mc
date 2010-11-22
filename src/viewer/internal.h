@@ -10,7 +10,7 @@
 #include "lib/search.h"
 #include "lib/widget.h"
 
-#include "src/keybind-defaults.h" /* global_keymap_t */
+#include "src/keybind-defaults.h"       /* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

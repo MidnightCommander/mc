@@ -58,7 +58,7 @@
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
-#include "src/setup.h"           /* cd_symlinks */
+#include "src/setup.h"          /* cd_symlinks */
 
 #include "vfs-impl.h"
 #include "utilvfs.h"

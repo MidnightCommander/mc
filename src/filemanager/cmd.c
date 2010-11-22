@@ -59,28 +59,14 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "cmd.h"                /* Our definitions */
-#include "fileopctx.h"
-#include "file.h"               /* file operation routines */
-#include "find.h"               /* do_find() */
-#include "hotlist.h"            /* hotlist_cmd() */
-#include "tree.h"               /* tree_chdir() */
-#include "subshell.h"           /* use_subshell */
-#include "consaver/cons.saver.h"        /* console_flag */
-#include "midnight.h"           /* change_panel() */
-#include "help.h"               /* interactive_display() */
-#include "user.h"               /* MC_GLOBAL_MENU */
-#include "command.h"            /* cmdline */
-#include "layout.h"             /* get_current_type() */
-#include "ext.h"                /* regex_command() */
-#include "boxes.h"              /* cd_dialog() */
-#include "setup.h"
-#include "execute.h"            /* toggle_panels() */
-#include "history.h"
-#include "dir.h"
-#include "keybind-defaults.h"             /* CK_InputHistoryShow */
-#include "viewer/mcviewer.h"
-
+#include "src/subshell.h"       /* use_subshell */
+#include "src/consaver/cons.saver.h"    /* console_flag */
+#include "src/viewer/mcviewer.h"
+#include "src/help.h"           /* interactive_display() */
+#include "src/setup.h"
+#include "src/execute.h"        /* toggle_panels() */
+#include "src/history.h"
+#include "src/keybind-defaults.h"       /* CK_InputHistoryShow */
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
@@ -89,6 +75,21 @@
 #ifdef USE_DIFF_VIEW
 #include "src/diffviewer/ydiff.h"
 #endif
+
+#include "fileopctx.h"
+#include "file.h"               /* file operation routines */
+#include "find.h"               /* do_find() */
+#include "hotlist.h"            /* hotlist_cmd() */
+#include "tree.h"               /* tree_chdir() */
+#include "midnight.h"           /* change_panel() */
+#include "usermenu.h"           /* MC_GLOBAL_MENU */
+#include "command.h"            /* cmdline */
+#include "layout.h"             /* get_current_type() */
+#include "ext.h"                /* regex_command() */
+#include "boxes.h"              /* cd_dialog() */
+#include "dir.h"
+
+#include "cmd.h"                /* Our definitions */
 
 /*** global variables ****************************************************************************/
 

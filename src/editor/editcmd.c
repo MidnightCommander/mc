@@ -57,8 +57,9 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
+#include "src/filemanager/layout.h"     /* clr_scr() */
+
 #include "src/history.h"
-#include "src/layout.h"         /* clr_scr() */
 #include "src/main.h"           /* mc_home, midnight_shutdown */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */

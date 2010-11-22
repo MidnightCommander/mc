@@ -51,7 +51,7 @@
 #include "lib/widget.h"
 
 #include "src/main.h"           /* home_dir */
-#include "src/midnight.h"       /* current_panel */
+#include "src/filemanager/midnight.h"   /* current_panel */
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 #include "src/keybind-defaults.h"   /* input_map */
 
@@ -1149,7 +1149,7 @@ input_handle_char (WInput * in, int key)
         input_execute_cmd (in, command);
         v = MSG_HANDLED;
         if (in->first)
-            input_update (in, TRUE); /* needed to clear in->first */
+            input_update (in, TRUE);    /* needed to clear in->first */
     }
 
     input_update (in, TRUE);
@@ -1197,7 +1197,7 @@ input_insert (WInput * in, const char *text, gboolean insert_extra_space)
 {
     input_disable_update (in);
     while (*text != '\0')
-        input_handle_char (in, (unsigned char) *text++);      /* unsigned extension char->int */
+        input_handle_char (in, (unsigned char) *text++);        /* unsigned extension char->int */
     if (insert_extra_space)
         input_handle_char (in, ' ');
     input_enable_update (in);

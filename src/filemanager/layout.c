@@ -55,20 +55,21 @@
 #include "lib/strutil.h"
 #include "lib/widget.h"
 
+#include "src/main.h"
+#include "src/consaver/cons.saver.h"
+#include "src/viewer/mcviewer.h"        /* The view widget */
+#include "src/setup.h"          /* For save_setup() */
+#include "src/subshell.h"       /* For use_subshell and resize_subshell() */
+#include "src/background.h"     /* we_are_background */
+
 #include "command.h"
 #include "midnight.h"
-#include "main.h"
-#include "subshell.h"           /* For use_subshell and resize_subshell() */
 #include "tree.h"
-#include "background.h"         /* we_are_background */
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
-#include "consaver/cons.saver.h"
 #include "layout.h"
 #include "info.h"               /* The Info widget */
-#include "src/viewer/mcviewer.h"        /* The view widget */
 
-#include "setup.h"              /* For save_setup() */
 
 /*** global variables ****************************************************************************/
 

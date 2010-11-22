@@ -166,10 +166,10 @@ GList *list_append_unique (GList * list, char *text);
 /* Position saving and restoring */
 /* Load position for the given filename */
 void load_file_position (const char *filename, long *line, long *column, off_t * offset,
-                         GArray **bookmarks);
+                         GArray ** bookmarks);
 /* Save position for the given filename */
 void save_file_position (const char *filename, long line, long column, off_t offset,
-                         GArray *bookmarks);
+                         GArray * bookmarks);
 
 
 /* if ch is in [A-Za-z], returns the corresponding control character,

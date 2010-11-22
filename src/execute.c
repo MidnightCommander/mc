@@ -34,10 +34,10 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "midnight.h"
+#include "filemanager/midnight.h"
+#include "filemanager/layout.h" /* use_dash() */
 #include "consaver/cons.saver.h"
 #include "subshell.h"
-#include "layout.h"             /* use_dash() */
 #include "setup.h"              /* clear_before_exec */
 
 #include "execute.h"

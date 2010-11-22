@@ -79,7 +79,7 @@ gboolean if_link_is_exe (const char *full_name, const file_entry * file);
 /*** inline functions ****************************************************************************/
 
 static inline gboolean
-link_isdir (const file_entry *file)
+link_isdir (const file_entry * file)
 {
     return (gboolean) file->f.link_to_dir;
 }

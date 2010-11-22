@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-/** \file user.c
+/** \file usermenu.c
  *  \brief Source: user menu implementation
  */
 
@@ -40,14 +40,15 @@
 #include "src/editor/edit.h"    /* WEdit, BLOCK_FILE */
 #include "src/viewer/mcviewer.h"        /* for default_* externs */
 
+#include "src/execute.h"
+#include "src/setup.h"
+#include "src/history.h"
+
 #include "dir.h"
 #include "midnight.h"
 #include "layout.h"
-#include "execute.h"
-#include "setup.h"
-#include "history.h"
 
-#include "user.h"
+#include "usermenu.h"
 
 /*** global variables ****************************************************************************/
 

@@ -31,9 +31,9 @@
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/layout.h"             /* repaint_screen() */
-#include "src/midnight.h"           /* midnight_dlg */
-#include "src/main.h"               /* midnight_shutdown */
+#include "src/filemanager/layout.h"     /* repaint_screen() */
+#include "src/filemanager/midnight.h"   /* midnight_dlg */
+#include "src/main.h"           /* midnight_shutdown */
 
 /*** global variables ****************************************************************************/
 

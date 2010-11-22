@@ -385,12 +385,12 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
     case TAR_GNU:
         st->st_uid =
             *header->header.uname ? vfs_finduid (header->header.uname) : tar_from_oct (8,
-                                                                                       header->header.
-                                                                                       uid);
+                                                                                       header->
+                                                                                       header.uid);
         st->st_gid =
             *header->header.gname ? vfs_findgid (header->header.gname) : tar_from_oct (8,
-                                                                                       header->header.
-                                                                                       gid);
+                                                                                       header->
+                                                                                       header.gid);
         switch (header->header.linkflag)
         {
         case LF_BLK:

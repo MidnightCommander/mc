@@ -88,7 +88,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "setup.h"              /* verbose */
+#include "src/setup.h"          /* verbose */
+
 #include "midnight.h"
 #include "fileopctx.h"          /* FILE_CONT */
 

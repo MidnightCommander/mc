@@ -50,7 +50,7 @@
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/setup.h"              /* num_history_items_recorded */
+#include "src/setup.h"          /* num_history_items_recorded */
 
 /*** global variables ****************************************************************************/
 

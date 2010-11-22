@@ -49,7 +49,7 @@
 #include "win.h"                /* xterm_flag */
 
 #include "src/main.h"
-#include "src/layout.h"         /* winch_flag, mc_refresh() */
+#include "src/filemanager/layout.h"     /* winch_flag, mc_refresh() */
 #include "src/consaver/cons.saver.h"
 
 

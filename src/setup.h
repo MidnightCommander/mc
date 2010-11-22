@@ -8,7 +8,8 @@
 #include <config.h>
 
 #include "lib/global.h"         /* GError */
-#include "panel.h"  /* WPanel, panel_view_mode_t */
+
+#include "filemanager/panel.h"  /* WPanel, panel_view_mode_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -109,8 +110,8 @@ char *load_anon_passwd (void);
 void load_keymap_defs (void);
 void free_keymap_defs (void);
 
-void panel_load_setup (WPanel *panel, const char *section);
-void panel_save_setup (WPanel *panel, const char *section);
+void panel_load_setup (WPanel * panel, const char *section);
+void panel_save_setup (WPanel * panel, const char *section);
 void save_panel_types (void);
 
 void panels_load_options (void);

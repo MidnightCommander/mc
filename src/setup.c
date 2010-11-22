@@ -51,14 +51,15 @@
 #include "lib/charsets.h"
 #endif
 
+#include "filemanager/dir.h"
+#include "filemanager/midnight.h"
+#include "filemanager/tree.h"   /* xtree_mode */
+#include "filemanager/hotlist.h"        /* load/save/done hotlist */
+#include "filemanager/panelize.h"       /* load/save/done panelize */
+#include "filemanager/layout.h"
+#include "filemanager/cmd.h"
+
 #include "args.h"
-#include "dir.h"
-#include "midnight.h"
-#include "tree.h"               /* xtree_mode */
-#include "hotlist.h"            /* load/save/done hotlist */
-#include "panelize.h"           /* load/save/done panelize */
-#include "layout.h"
-#include "cmd.h"
 #include "execute.h"            /* pause_after_run */
 #include "clipboard.h"
 #include "keybind-defaults.h"   /* keybind_lookup_action */
@@ -1382,9 +1383,8 @@ panels_load_options (void)
         *panels_ini_options[i].opt_addr =
             mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
                                panels_ini_options[i].opt_old_name != NULL
-                               ? panels_ini_options[i].
-                               opt_old_name : panels_ini_options[i].opt_name,
-                               *panels_ini_options[i].opt_addr);
+                               ? panels_ini_options[i].opt_old_name : panels_ini_options[i].
+                               opt_name, *panels_ini_options[i].opt_addr);
 
     qmode = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
                                "quick_search_case_sensitive", (int) panels_options.qsearch_mode);

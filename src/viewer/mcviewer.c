@@ -49,8 +49,9 @@
 #include "lib/charsets.h"
 
 #include "src/main.h"
-#include "src/layout.h"         /* menubar_visible */
-#include "src/midnight.h"       /* the_menubar */
+
+#include "src/filemanager/layout.h"     /* menubar_visible */
+#include "src/filemanager/midnight.h"   /* the_menubar */
 
 #include "internal.h"
 #include "mcviewer.h"

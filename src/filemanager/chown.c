@@ -41,11 +41,12 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/setup.h"          /* panels_options */
+
 /* Needed for the extern declarations of integer parameters */
 #include "chmod.h"
 #include "midnight.h"           /* current_panel */
 #include "layout.h"             /* repaint_screen() */
-#include "setup.h"              /* panels_options */
 
 #include "chown.h"
 

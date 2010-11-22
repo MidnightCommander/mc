@@ -10,8 +10,9 @@
 #include "lib/strutil.h"
 #include "lib/widget.h"         /* Widget */
 
+#include "src/main.h"           /* cd_enum */
+
 #include "dir.h"                /* dir_list */
-#include "main.h"               /* cd_enum */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

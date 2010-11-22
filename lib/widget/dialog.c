@@ -39,9 +39,9 @@
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/help.h"               /* interactive_display() */
-#include "src/layout.h"
-#include "src/execute.h"            /* suspend_cmd() */
+#include "src/help.h"           /* interactive_display() */
+#include "src/filemanager/layout.h"
+#include "src/execute.h"        /* suspend_cmd() */
 #include "src/keybind-defaults.h"
 
 /*** global variables ****************************************************************************/

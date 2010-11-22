@@ -65,9 +65,10 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/widget.h"
 
-#include "setup.h"
+#include "src/setup.h"
+#include "src/background.h"     /* we_are_background */
+
 #include "layout.h"             /* rotate_dash() */
-#include "background.h"         /* we_are_background */
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"

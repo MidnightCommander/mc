@@ -51,22 +51,23 @@
 
 #include "lib/vfs/mc-vfs/vfs.h" /* vfs_translate_url() */
 
-#include "args.h"
+#include "src/args.h"
+#include "src/subshell.h"
+#include "src/setup.h"          /* variables */
+#include "src/learn.h"          /* learn_keys() */
+#include "src/execute.h"        /* suspend_cmd() */
+#include "src/keybind-defaults.h"
+#include "src/main.h"           /* quit */
+
 #include "option.h"             /* configure_box() */
 #include "tree.h"
-#include "subshell.h"
-#include "setup.h"              /* variables */
 #include "boxes.h"              /* sort_box(), tree_box() */
 #include "layout.h"
 #include "cmd.h"                /* commands */
 #include "hotlist.h"
 #include "panelize.h"
-#include "learn.h"              /* learn_keys() */
-#include "execute.h"            /* suspend_cmd() */
 #include "command.h"            /* cmdline */
-#include "keybind-defaults.h"
 #include "lib/keybind.h"
-#include "main.h"               /* quit */
 
 #include "chmod.h"
 #include "chown.h"
@@ -80,7 +81,7 @@
 #include "src/diffviewer/ydiff.h"
 #endif
 
-#include "consaver/cons.saver.h" /* console_flag */
+#include "src/consaver/cons.saver.h"    /* console_flag */
 
 #include "midnight.h"
 
@@ -1335,7 +1336,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
             size_t i;
 
             for (i = 0; cmdline->buffer[i] != '\0' &&
-                        (cmdline->buffer[i] == ' ' || cmdline->buffer[i] == '\t'); i++)
+                 (cmdline->buffer[i] == ' ' || cmdline->buffer[i] == '\t'); i++)
                 ;
 
             if (cmdline->buffer[i] != '\0')
@@ -1480,7 +1481,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 void
 update_menu (void)
 {
-    menu_set_name (left_menu,  horizontal_split ? _("&Above") : _("&Left"));
+    menu_set_name (left_menu, horizontal_split ? _("&Above") : _("&Left"));
     menu_set_name (right_menu, horizontal_split ? _("&Below") : _("&Right"));
     menubar_arrange (the_menubar);
 }

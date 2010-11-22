@@ -45,13 +45,14 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "setup.h"              /* verbose */
+#include "src/setup.h"          /* verbose */
+#include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
+#include "src/main.h"           /* do_cd */
+
 #include "dir.h"
 #include "cmd.h"                /* view_file_at_line */
 #include "midnight.h"           /* current_panel */
-#include "main.h"               /* do_cd */
 #include "boxes.h"
-#include "history.h"            /* MC_HISTORY_SHARED_SEARCH */
 #include "layout.h"             /* mc_refresh() */
 
 #include "find.h"
@@ -243,26 +244,26 @@ find_load_options (void)
     {
         /* Values like '/foo::/bar: produce holes in list.
            Find and remove them */
-        size_t r = 0, w = 0; /* read and write iterators */
+        size_t r = 0, w = 0;    /* read and write iterators */
 
         for (; find_ignore_dirs[r] != NULL; r++)
         {
-            if (find_ignore_dirs [r][0] == '\0')
+            if (find_ignore_dirs[r][0] == '\0')
             {
                 /* empty entry -- skip it */
-                g_free (find_ignore_dirs [r]);
-                find_ignore_dirs [r] = NULL;
+                g_free (find_ignore_dirs[r]);
+                find_ignore_dirs[r] = NULL;
                 continue;
             }
 
             if (r != w)
             {
                 /* copy entry to the previous free array cell */
-                find_ignore_dirs [w] = find_ignore_dirs [r];
-                find_ignore_dirs [r] = NULL;
+                find_ignore_dirs[w] = find_ignore_dirs[r];
+                find_ignore_dirs[r] = NULL;
             }
 
-            canonicalize_pathname (find_ignore_dirs [w]);
+            canonicalize_pathname (find_ignore_dirs[w]);
             w++;
         }
 
@@ -664,7 +665,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
         options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
 
         *content = (options.content_use && in_with->buffer[0] != '\0')
-                    ? g_strdup (in_with->buffer) : NULL;
+            ? g_strdup (in_with->buffer) : NULL;
         *start_dir = in_start->buffer[0] != '\0' ? in_start->buffer : (char *) ".";
         *pattern = g_strdup (in_name->buffer);
         if (in_start_dir != INPUT_LAST_TEXT)
@@ -1017,10 +1018,10 @@ find_ignore_dir_search (const char *dir)
             const size_t ilen = strlen (*ignore_dir);
 
             if (dlen < ilen)
-                continue; /* ignore dir is too long -- skip it */
+                continue;       /* ignore dir is too long -- skip it */
 
             if (strncmp (dir, *ignore_dir, ilen) != 0)
-                continue; /* strings are different -- skip ignore_dir */
+                continue;       /* strings are different -- skip ignore_dir */
 
             /* be sure than ignore_dir is not a part of dir like:
                ignore_dir is "/h", dir is "/home" */
@@ -1035,7 +1036,7 @@ find_ignore_dir_search (const char *dir)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_rotate_dash (const Dlg_head *h, gboolean finish)
+find_rotate_dash (const Dlg_head * h, gboolean finish)
 {
     static const char rotating_dash[] = "|/-\\";
     static unsigned int pos = 0;
@@ -1053,7 +1054,7 @@ find_rotate_dash (const Dlg_head *h, gboolean finish)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-do_search (Dlg_head *h)
+do_search (Dlg_head * h)
 {
     static struct dirent *dp = NULL;
     static DIR *dirp = NULL;
@@ -1258,7 +1259,7 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-find_callback (Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+find_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {

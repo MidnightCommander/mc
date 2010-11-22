@@ -52,11 +52,12 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "setup.h"              /* For profile_bname */
+#include "src/setup.h"          /* For profile_bname */
+#include "src/history.h"
+
 #include "midnight.h"           /* current_panel */
 #include "layout.h"             /* repaint_screen() */
 #include "command.h"            /* cmdline */
-#include "history.h"
 
 #include "hotlist.h"
 

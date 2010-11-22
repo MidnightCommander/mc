@@ -36,9 +36,9 @@
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/keybind-defaults.h"             /* CK_Ignore_Key */
+#include "src/keybind-defaults.h"       /* CK_Ignore_Key */
 #include "src/help.h"
-#include "src/midnight.h"           /* is_right */
+#include "src/filemanager/midnight.h"   /* is_right */
 
 /*** global variables ****************************************************************************/
 

@@ -40,13 +40,14 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/main.h"           /* do_cd */
+#include "src/subshell.h"       /* SUBSHELL_EXIT */
+#include "src/execute.h"        /* shell_execute */
+
 #include "midnight.h"           /* current_panel */
-#include "main.h"               /* do_cd */
 #include "layout.h"             /* for command_prompt variable */
-#include "user.h"               /* expand_format */
-#include "subshell.h"           /* SUBSHELL_EXIT */
+#include "usermenu.h"           /* expand_format */
 #include "tree.h"               /* for tree_chdir */
-#include "execute.h"            /* shell_execute */
 
 #include "command.h"
 

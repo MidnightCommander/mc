@@ -41,7 +41,7 @@
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/background.h"         /* parent_call */
+#include "src/background.h"     /* parent_call */
 
 /*** global variables ****************************************************************************/
 

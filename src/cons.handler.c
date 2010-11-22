@@ -378,8 +378,8 @@ console_save (void)
     for (i = 0; i < screen_shot.xsize * screen_shot.ysize; i++)
     {
         screen_shot.buf[i] =
-            (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.scrmap[screen_shot.
-                                                                          buf[i] & 0xff];
+            (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.
+            scrmap[screen_shot.buf[i] & 0xff];
     }
 }
 

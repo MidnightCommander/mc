@@ -47,8 +47,9 @@
 #include "lib/tty/key.h"        /* add_select_channel(), delete_select_channel() */
 #include "lib/widget.h"         /* message() */
 
-#include "layout.h"             /* repaint_screen() */
-#include "fileopctx.h"          /* FileOpContext */
+#include "filemanager/layout.h" /* repaint_screen() */
+#include "filemanager/fileopctx.h"      /* FileOpContext */
+
 #include "background.h"
 
 /*** global variables ****************************************************************************/

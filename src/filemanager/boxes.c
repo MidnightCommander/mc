@@ -53,18 +53,19 @@
 #include "lib/util.h"           /* Q_() */
 #include "lib/widget.h"
 
-#include "setup.h"              /* For profile_name */
+#include "src/setup.h"          /* For profile_name */
+#include "src/background.h"     /* task_list */
+
+#ifdef HAVE_CHARSET
+#include "lib/charsets.h"
+#include "src/selcodepage.h"
+#endif
+
 #include "command.h"            /* For cmdline */
 #include "dir.h"
 #include "panel.h"              /* LIST_TYPES */
 #include "tree.h"
 #include "layout.h"             /* for get_nth_panel_name proto */
-#include "background.h"         /* task_list */
-
-#ifdef HAVE_CHARSET
-#include "lib/charsets.h"
-#include "selcodepage.h"
-#endif
 
 #include "boxes.h"
 

@@ -57,8 +57,9 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "midnight.h"                   /* current_panel */
-#include "main.h"                       /* home_dir */
+#include "filemanager/midnight.h"       /* current_panel */
+
+#include "main.h"               /* home_dir */
 #include "consaver/cons.saver.h"        /* handle_console() */
 #include "subshell.h"
 

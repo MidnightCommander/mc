@@ -1,9 +1,9 @@
-/** \file user.h
+/** \file usermenu.h
  *  \brief Header: user menu implementation
  */
 
-#ifndef MC__USER_H
-#define MC__USER_H
+#ifndef MC__USERMENU_H
+#define MC__USERMENU_H
 
 #include "lib/global.h"
 
@@ -26,4 +26,5 @@ int check_format_var (const char *, char **);
 int check_format_cd (const char *);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__USER_H */
+
+#endif /* MC__USERMENU_H */

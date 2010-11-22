@@ -56,8 +56,9 @@
 #include "lib/charsets.h"       /* get_codepage_id */
 #endif
 
-#include "src/cmd.h"            /* view_other_cmd() */
-#include "src/user.h"           /* user_menu_cmd() */
+#include "src/filemanager/cmd.h"        /* view_other_cmd() */
+#include "src/filemanager/usermenu.h"       /* user_menu_cmd() */
+
 #include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/learn.h"          /* learn_keys */

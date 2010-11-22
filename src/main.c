@@ -51,14 +51,15 @@
 #include "lib/util.h"
 #include "lib/vfs/mc-vfs/vfs.h" /* vfs_init(), vfs_shut() */
 
+#include "filemanager/midnight.h"       /* current_panel */
+#include "filemanager/treestore.h"      /* tree_store_save */
+#include "filemanager/layout.h" /* command_prompt */
+#include "filemanager/ext.h"    /* flush_extension_file() */
+#include "filemanager/command.h"        /* cmdline */
+
 #include "args.h"
-#include "midnight.h"           /* current_panel */
-#include "treestore.h"          /* tree_store_save */
 #include "subshell.h"
 #include "setup.h"              /* save_setup() */
-#include "layout.h"             /* command_prompt */
-#include "ext.h"                /* flush_extension_file() */
-#include "command.h"            /* cmdline */
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -560,7 +561,7 @@ main (int argc, char *argv[])
 
         last_wd_fd = open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC | O_EXCL,
                            S_IRUSR | S_IWUSR);
-         if (last_wd_fd != -1)
+        if (last_wd_fd != -1)
         {
             ssize_t ret1;
             int ret2;

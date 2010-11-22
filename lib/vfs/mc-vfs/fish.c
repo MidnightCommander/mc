@@ -62,7 +62,7 @@
 #include "lib/unixcompat.h"
 #include "lib/fileloc.h"
 
-#include "src/layout.h"         /* print_vfs_message */
+#include "src/filemanager/layout.h"     /* print_vfs_message */
 #include "src/execute.h"        /* pre_exec, post_exec */
 
 #include "vfs-impl.h"

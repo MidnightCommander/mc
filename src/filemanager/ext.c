@@ -39,19 +39,22 @@
 #include "lib/util.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/widget.h"
-#include "lib/charsets.h"           /* get_codepage_index */
+#include "lib/charsets.h"       /* get_codepage_index */
 
-#include "consaver/cons.saver.h"
-#include "viewer/mcviewer.h"
+#include "src/setup.h"          /* use_file_to_check_type */
+#include "src/execute.h"
+#include "src/history.h"
 
-#include "user.h"
-#include "setup.h"              /* use_file_to_check_type */
-#include "execute.h"
-#include "history.h"
-#include "layout.h"
+#include "src/consaver/cons.saver.h"
+#include "src/viewer/mcviewer.h"
+
 #ifdef HAVE_CHARSET
-#include "selcodepage.h"        /* do_set_codepage */
+#include "src/selcodepage.h"    /* do_set_codepage */
 #endif
+
+#include "usermenu.h"
+#include "layout.h"
+
 #include "ext.h"
 
 /*** global variables ****************************************************************************/

@@ -17,10 +17,10 @@
 /*** declarations of public functions ************************************************************/
 
 GList *history_get (const char *input_name);
-void history_put (const char *input_name, GList *h);
+void history_put (const char *input_name, GList * h);
 /* for repositioning of history dialog we should pass widget to this
  * function, as position of history dialog depends on widget's position */
-char *history_show (GList **history, Widget *widget);
+char *history_show (GList ** history, Widget * widget);
 
 /*** inline functions ****************************************************************************/
 

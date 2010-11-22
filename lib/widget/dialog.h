@@ -237,7 +237,7 @@ dlg_widget_active (void *w)
 
 
 static inline unsigned int
-dlg_get_current_widget_id (const struct Dlg_head * h)
+dlg_get_current_widget_id (const struct Dlg_head *h)
 {
     return ((Widget *) h->current->data)->id;
 }

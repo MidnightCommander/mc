@@ -44,8 +44,9 @@
 #include "lib/util.h"           /* convert_controls() */
 #include "lib/widget.h"
 
+#include "filemanager/layout.h" /* repaint_screen() */
+
 #include "setup.h"
-#include "layout.h"             /* repaint_screen() */
 #include "learn.h"
 
 /*** global variables ****************************************************************************/
@@ -367,8 +368,7 @@ learn_save (void)
 
             esc_str = strutils_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
 
-            mc_config_set_string_raw (mc_main_config, section,
-                                      key_name_conv_tab[i].name, esc_str);
+            mc_config_set_string_raw (mc_main_config, section, key_name_conv_tab[i].name, esc_str);
 
             g_free (esc_str);
         }

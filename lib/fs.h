@@ -16,33 +16,33 @@
 
 /* Replacement for permission bits missing in sys/stat.h */
 #ifndef S_ISLNK
-#   define S_ISLNK(x) 0
+#define S_ISLNK(x) 0
 #endif
 
 #ifndef S_ISSOCK
-#   define S_ISSOCK(x) 0
+#define S_ISSOCK(x) 0
 #endif
 
 #ifndef S_ISFIFO
-#   define S_ISFIFO(x) 0
+#define S_ISFIFO(x) 0
 #endif
 
 #ifndef S_ISCHR
-#   define S_ISCHR(x) 0
+#define S_ISCHR(x) 0
 #endif
 
 #ifndef S_ISBLK
-#   define S_ISBLK(x) 0
+#define S_ISBLK(x) 0
 #endif
 
 /* Door is something that only exists on Solaris */
 #ifndef S_ISDOOR
-#   define S_ISDOOR(x) 0
+#define S_ISDOOR(x) 0
 #endif
 
 /* Special named files are widely used in QNX6 */
 #ifndef S_ISNAM
-#   define S_ISNAM(x) 0
+#define S_ISNAM(x) 0
 #endif
 
 #ifndef PATH_MAX
@@ -58,9 +58,9 @@
 #endif
 
 #ifndef MAXPATHLEN
-#   define MC_MAXPATHLEN 4096
+#define MC_MAXPATHLEN 4096
 #else
-#   define MC_MAXPATHLEN MAXPATHLEN
+#define MC_MAXPATHLEN MAXPATHLEN
 #endif
 
 /* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
@@ -68,9 +68,9 @@
 #define DIRENT_LENGTH_COMPUTED 1
 
 #ifndef MAXNAMLEN
-#   define MC_MAXFILENAMELEN 256
+#define MC_MAXFILENAMELEN 256
 #else
-#   define MC_MAXFILENAMELEN MAXNAMLEN
+#define MC_MAXFILENAMELEN MAXNAMLEN
 #endif
 
 /*** enums ***************************************************************************************/
