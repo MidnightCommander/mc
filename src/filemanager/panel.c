@@ -1723,7 +1723,7 @@ maybe_cd (int move_up_dir)
 
 /* if command line is empty then do 'cd ..' */
 static cb_ret_t
-force_maybe_cd ()
+force_maybe_cd (void)
 {
     if (cmdline->buffer[0] == '\0')
     {
@@ -1891,7 +1891,7 @@ prev_page (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ctrl_prev_page (WPanel * panel)
+goto_parent_dir (WPanel * panel)
 {
     (void) panel;
     do_cd ("..", cd_exact);
@@ -1925,7 +1925,7 @@ next_page (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ctrl_next_page (WPanel * panel)
+goto_child_dir (WPanel * panel)
 {
     if ((S_ISDIR (selection (panel)->st.st_mode) || link_isdir (selection (panel))))
     {
@@ -2774,11 +2774,11 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
     case CK_PanelPrevPage:
         prev_page (panel);
         break;
-    case CK_PanelCtrlNextPage:
-        ctrl_next_page (panel);
+    case CK_PanelGotoChildDir:
+        goto_child_dir (panel);
         break;
-    case CK_PanelCtrlPrevPage:
-        ctrl_prev_page (panel);
+    case CK_PanelGotoParentDir:
+        goto_parent_dir (panel);
         break;
     case CK_PanelDirectoryHistoryList:
         directory_history_list (panel);
@@ -2807,7 +2807,7 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
     case CK_PanelMarkFileDown:
         mark_file_down (panel);
         break;
-    case CK_PanelSmartJumpUp:
+    case CK_PanelSmartGotoParentDir:
         res = force_maybe_cd ();
         break;
     case CK_PanelMoveUp:

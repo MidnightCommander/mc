@@ -423,8 +423,8 @@
 #define CK_PanelCmdSelect               8009
 #define CK_PanelCmdUnselect             8010
 #define CK_PanelCmdViewSimple           8011
-#define CK_PanelCtrlNextPage            8012
-#define CK_PanelCtrlPrevPage            8013
+#define CK_PanelGotoChildDir            8012
+#define CK_PanelGotoParentDir           8013
 #define CK_PanelDirectoryHistoryList    8014
 #define CK_PanelDirectoryHistoryNext    8015
 #define CK_PanelDirectoryHistoryPrev    8016
@@ -454,7 +454,7 @@
 #define CK_PanelSortOrderByExt          8040
 #define CK_PanelSortOrderBySize         8041
 #define CK_PanelSortOrderByMTime        8042
-#define CK_PanelSmartJumpUp             8043
+#define CK_PanelSmartGotoParentDir      8043
 
 /* diff viewer */
 #define CK_DiffDisplaySymbols           9001

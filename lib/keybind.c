@@ -399,8 +399,8 @@ static name_keymap_t command_names[] = {
     {"PanelSelect", CK_PanelCmdSelect},
     {"PanelUnselect", CK_PanelCmdUnselect},
     {"PanelViewSimple", CK_PanelCmdViewSimple},
-    {"PanelCtrlNextPage", CK_PanelCtrlNextPage},
-    {"PanelCtrlPrevPage", CK_PanelCtrlPrevPage},
+    {"PanelGotoParentDir", CK_PanelGotoParentDir},
+    {"PanelGotoChildDir", CK_PanelGotoChildDir},
     {"PanelDirectoryHistoryList", CK_PanelDirectoryHistoryList},
     {"PanelDirectoryHistoryNext", CK_PanelDirectoryHistoryNext},
     {"PanelDirectoryHistoryPrev", CK_PanelDirectoryHistoryPrev},
@@ -431,7 +431,7 @@ static name_keymap_t command_names[] = {
     {"PanelSortOrderByExt", CK_PanelSortOrderByExt},
     {"PanelSortOrderBySize", CK_PanelSortOrderBySize},
     {"PanelSortOrderByMTime", CK_PanelSortOrderByMTime},
-    {"PanelSmartJumpUp", CK_PanelSmartJumpUp},
+    {"PanelSmartGotoParentDir", CK_PanelSmartGotoParentDir},
 
     /* input line */
     {"InputBol", CK_InputBol},
