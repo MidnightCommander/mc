@@ -613,6 +613,18 @@ try_channels (int set_timeout)
             if (FD_ISSET (input_fd, &select_set))
                 break;
         }
+        if (v == -1)
+        {
+            if (errno == EINTR) continue; /* nothing strange, just a signal */
+
+            /*
+             * Something nasty happened with our FDs.
+             * We need to recover (which is hard when
+             * your terminal is dead) or die. Die for now.
+             */
+            fprintf (stderr, "mc/lib/tty/key.c:try_channels() killed me!\n");
+            exit (EXIT_FAILURE);
+        }
     }
 }
 
