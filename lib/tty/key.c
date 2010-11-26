@@ -615,7 +615,8 @@ try_channels (int set_timeout)
         }
         if (v == -1)
         {
-            if (errno == EINTR) continue; /* nothing strange, just a signal */
+            if (errno == EINTR)
+                continue;       /* nothing strange, just a signal */
 
             /*
              * Something nasty happened with our FDs.
