@@ -1,5 +1,5 @@
 if ENABLE_VFS_SMB
-SAMBA_CFLAGS  = -DCONFIGDIR=\""@configdir@"\"
+SAMBA_CFLAGS  = -DCONFIGDIR=\""@smbconfigdir@"\"
 SAMBA_SUBDIRS = samba
 endif
 

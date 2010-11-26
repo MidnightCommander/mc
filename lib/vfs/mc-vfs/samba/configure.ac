@@ -524,42 +524,23 @@ AC_ARG_WITH(ssl,
   AC_MSG_RESULT(no)
 )
 
-
-#################################################
+####################################################
+# get variables from parent process (main configure)
 # set configuration directory location
-configdir="\$(LIBDIR)"
-AC_ARG_WITH(smb-configdir,
-[  --with-smb-configdir=DIR    Where to put configuration files (\$libdir)],
-[ case "$withval" in
-  yes|no)
-  #
-  # Just in case anybody does it
-  #
-    AC_MSG_WARN([--with-smb-configdir called without argument - will use default])
-  ;;
-  * )
-    configdir="$withval"
-    ;;
-  esac]
-)
-
-
-#################################################
+if test -n "$SMBCONFIGDIR"; then
+    configdir="$SMBCONFIGDIR"
+else
+    configdir="\$(LIBDIR)"
+fi
 # set codepage directory location
-codepagedir="\$(LIBDIR)/codepages"
-AC_ARG_WITH(smb-codepagedir,
-[  --with-smb-codepagedir=DIR  Where to put codepage files (\$libdir/codepages)],
-[ case "$withval" in
-  yes|no)
-  #
-  # Just in case anybody does it
-  #
-    AC_MSG_WARN([--with-smb-codepagedir called without argument - will use default])
-  ;;
-  * )
-    codepagedir="$withval"
-    ;;
-  esac])
+if test -n "$SMBCODEPAGEDIR"; then
+    codepagedir="$SMBCODEPAGEDIR"
+elif test -n "$SMBCONFIGDIR"; then
+    codepagedir="$SMBCONFIGDIR/codepages"
+else
+    codepagedir="\$(LIBDIR)/codepages"
+fi
+####################################################
 
 AC_MSG_CHECKING([configure summary])
 AC_TRY_RUN([

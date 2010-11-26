@@ -20,7 +20,42 @@ AC_DEFUN([AC_MC_VFS_SMB],
 
     if test "$enable_vfs_smb" = "yes"; then
 	AC_CONFIG_SUBDIRS([lib/vfs/mc-vfs/samba])
-    fi
 
-    AM_CONDITIONAL([ENABLE_VFS_SMB], [test "$enable_vfs" = "yes" -a x"$enable_vfs_smb" = x"yes"])
+	AM_CONDITIONAL([ENABLE_VFS_SMB], [test "1" = "1"])
+
+	# set configuration directory location
+	smbconfigdir="/etc"
+	AC_ARG_WITH(smb-configdir,
+		    [  --with-smb-configdir=DIR    Where to put configuration files],
+		    [ case "$withval" in
+			    yes|no)
+				# Just in case anybody does it
+				AC_MSG_WARN([--with-smb-configdir called without argument - will use default])
+				;;
+			    *)
+				smbconfigdir="$withval"
+				;;
+		    esac])
+
+	AC_SUBST(smbconfigdir)
+
+	# set codepage directory location
+	AC_ARG_WITH(smb-codepagedir,
+		    [  --with-smb-codepagedir=DIR  Where to put codepage files],
+		    [ case "$withval" in
+			yes|no)
+			    # Just in case anybody does it
+			    AC_MSG_WARN([--with-smb-codepagedir called without argument - will use default])
+			    ;;
+			*)
+			    smbcodepagedir="$withval"
+			    ;;
+		 esac])
+
+	# export variable for child process (configure of samba)
+	export SMBCONFIGDIR="$smbconfigdir"
+	export SMBCODEPAGEDIR="$smbcodepagedir"
+    else
+	AM_CONDITIONAL([ENABLE_VFS_SMB], [test "1" = "2"])
+    fi
 ])
