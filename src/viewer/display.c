@@ -36,19 +36,21 @@
  */
 
 #include <config.h>
-#include <stdint.h>             /* uintmax_t */
+#include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
 #include "lib/skin.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
+#include "lib/widget.h"
+#ifdef HAVE_CHARSET
+#include "lib/charsets.h"
+#endif
 
-#include "src/dialog.h"         /* Dlg_head */
-#include "src/widget.h"         /* WButtonBar */
-#include "src/charsets.h"
 #include "src/setup.h"          /* panels_options */
-#include "src/main.h"           /* source_codepage */
+#include "src/main.h"
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -70,10 +72,10 @@ static enum ruler_type
 } ruler = RULER_NONE;
 
 /*** file scope functions ************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
-/* Define labels and handlers for functional keys */
+/** Define labels and handlers for functional keys */
+
 static void
 mcview_set_buttonbar (mcview_t * view)
 {
@@ -124,7 +126,6 @@ mcview_set_buttonbar (mcview_t * view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-
 static void
 mcview_display_status (mcview_t * view)
 {
@@ -173,9 +174,7 @@ mcview_display_status (mcview_t * view)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -222,8 +221,8 @@ mcview_update (mcview_t * view)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** Displays as much data from view->dpy_start as fits on the screen */
 
-/* Displays as much data from view->dpy_start as fits on the screen */
 void
 mcview_display (mcview_t * view)
 {

@@ -9,7 +9,8 @@
 
 /*** structures declarations (and typedefs of structures)***************/
 
-typedef struct mc_config_struct {
+typedef struct mc_config_struct
+{
     GKeyFile *handle;
     gchar *ini_path;
 } mc_config_t;
@@ -20,7 +21,6 @@ extern mc_config_t *mc_main_config;
 extern mc_config_t *mc_panels_config;
 
 /*** declarations of public functions **********************************/
-
 
 /* mcconfig/common.c: */
 
@@ -35,10 +35,10 @@ gboolean mc_config_has_group (mc_config_t *, const char *);
 
 gboolean mc_config_read_file (mc_config_t *, const gchar *);
 
-gboolean mc_config_save_file (mc_config_t * config, GError **error);
+gboolean mc_config_save_file (mc_config_t * config, GError ** error);
 
-gboolean mc_config_save_to_file (mc_config_t * config, const gchar * filename,
-                                 GError **error);
+gboolean mc_config_save_to_file (mc_config_t * config, const gchar * filename, GError ** error);
+
 
 /* mcconfig/get.c: */
 
@@ -64,31 +64,25 @@ int *mc_config_get_int_list (mc_config_t *, const gchar *, const gchar *, gsize 
 
 /* mcconfig/set.c: */
 
-void
-  mc_config_direct_set_string (mc_config_t *, const gchar *, const gchar *, const gchar *);
+void mc_config_set_string_raw (mc_config_t *, const gchar *, const gchar *, const gchar *);
 
-void
-  mc_config_set_string (mc_config_t *, const gchar *, const gchar *, const gchar *);
+void mc_config_set_string (mc_config_t *, const gchar *, const gchar *, const gchar *);
 
-void
-  mc_config_set_bool (mc_config_t *, const gchar *, const gchar *, gboolean);
+void mc_config_set_bool (mc_config_t *, const gchar *, const gchar *, gboolean);
 
 void mc_config_set_int (mc_config_t *, const gchar *, const gchar *, int);
 
 void
-  mc_config_set_string_list (mc_config_t *, const gchar *,
-                             const gchar *, const gchar * const[], gsize);
+mc_config_set_string_list (mc_config_t *, const gchar *,
+                           const gchar *, const gchar * const[], gsize);
 
-void
-  mc_config_set_bool_list (mc_config_t *, const gchar *, const gchar *, gboolean[], gsize);
+void mc_config_set_bool_list (mc_config_t *, const gchar *, const gchar *, gboolean[], gsize);
 
-void
-  mc_config_set_int_list (mc_config_t *, const gchar *, const gchar *, int[], gsize);
+void mc_config_set_int_list (mc_config_t *, const gchar *, const gchar *, int[], gsize);
 
 
 /* mcconfig/dialog.c: */
 
 void mc_config_show_dialog (void);
-
 
 #endif

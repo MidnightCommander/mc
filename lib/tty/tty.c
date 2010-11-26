@@ -41,7 +41,7 @@
 #include "tty-internal.h"
 
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
 /* If true program softkeys (HP terminals only) on startup and after every
    command ran in the subshell to the description found in the termcap/terminfo
@@ -56,15 +56,16 @@ gboolean ugly_line_drawing = FALSE;
 
 int mc_tty_frm[MC_TTY_FRM_MAX];
 
-/*** file scope macro definitions **************************************/
+/*** file scope macro definitions ****************************************************************/
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
 static volatile sig_atomic_t got_interrupt = 0;
 
-/*** file scope functions **********************************************/
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 sigintr_handler (int signo)
@@ -73,13 +74,17 @@ sigintr_handler (int signo)
     got_interrupt = 1;
 }
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 extern gboolean
 tty_is_slow (void)
 {
     return slow_tty;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 extern void
 tty_start_interrupt_key (void)
@@ -91,6 +96,8 @@ tty_start_interrupt_key (void)
     act.sa_flags = SA_RESTART;
     sigaction (SIGINT, &act, NULL);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 extern void
 tty_enable_interrupt_key (void)
@@ -104,6 +111,8 @@ tty_enable_interrupt_key (void)
     got_interrupt = 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 extern void
 tty_disable_interrupt_key (void)
 {
@@ -115,6 +124,8 @@ tty_disable_interrupt_key (void)
     sigaction (SIGINT, &act, NULL);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 extern gboolean
 tty_got_interrupt (void)
 {
@@ -125,17 +136,23 @@ tty_got_interrupt (void)
     return rv;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_print_one_hline (gboolean single)
 {
     tty_print_alt_char (ACS_HLINE, single);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_print_one_vline (gboolean single)
 {
     tty_print_alt_char (ACS_VLINE, single);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_draw_box (int y, int x, int ys, int xs, gboolean single)
@@ -156,6 +173,8 @@ tty_draw_box (int y, int x, int ys, int xs, gboolean single)
     tty_gotoyx (y + ys, x + xs);
     tty_print_alt_char (ACS_LRCORNER, single);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 mc_tty_normalize_from_utf8 (const char *str)
@@ -183,3 +202,5 @@ mc_tty_normalize_from_utf8 (const char *str)
 
     return g_string_free (buffer, FALSE);
 }
+
+/* --------------------------------------------------------------------------------------------- */

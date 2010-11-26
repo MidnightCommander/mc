@@ -33,48 +33,67 @@
 #include <stdio.h>
 
 #include "lib/global.h"
-#include "logging.h"
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
 
-#include "src/setup.h"
+#include "src/main.h"           /* home_dir */
 
-/*** file scope functions **********************************************/
+#include "logging.h"
+
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-is_logging_enabled(void)
+is_logging_enabled (void)
 {
-	static gboolean logging_initialized = FALSE;
-	static gboolean logging_enabled = FALSE;
+    static gboolean logging_initialized = FALSE;
+    static gboolean logging_enabled = FALSE;
 
-	if (!logging_initialized) {
-		logging_enabled = mc_config_get_bool (mc_main_config,
-		        CONFIG_APP_SECTION, "development.enable_logging", FALSE);
-		logging_initialized = TRUE;
-	}
-	return logging_enabled;
+    if (!logging_initialized)
+    {
+        logging_enabled = mc_config_get_bool (mc_main_config,
+                                              CONFIG_APP_SECTION, "development.enable_logging",
+                                              FALSE);
+        logging_initialized = TRUE;
+    }
+    return logging_enabled;
 }
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
-mc_log(const char *fmt, ...)
+mc_log (const char *fmt, ...)
 {
-	va_list args;
-	FILE *f;
-	char *logfilename;
+    va_list args;
+    FILE *f;
+    char *logfilename;
 
-	if (is_logging_enabled()) {
-		va_start(args, fmt);
-		logfilename = g_strdup_printf("%s/%s/log", home_dir, MC_USERCONF_DIR);
-		if (logfilename != NULL) {
-		    f = fopen (logfilename, "a");
-		    if (f != NULL) {
-			(void)vfprintf(f, fmt, args);
-			(void)fclose(f);
-		    }
-		    g_free(logfilename);
-		    va_end(args);
-		}
-	}
+    if (is_logging_enabled ())
+    {
+        va_start (args, fmt);
+        logfilename = g_strdup_printf ("%s/%s/log", home_dir, MC_USERCONF_DIR);
+        if (logfilename != NULL)
+        {
+            f = fopen (logfilename, "a");
+            if (f != NULL)
+            {
+                (void) vfprintf (f, fmt, args);
+                (void) fclose (f);
+            }
+            g_free (logfilename);
+            va_end (args);
+        }
+    }
 }
+
+/* --------------------------------------------------------------------------------------------- */

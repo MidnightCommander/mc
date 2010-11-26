@@ -54,18 +54,18 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/lock.h"           /* lock_file() */
+#include "lib/util.h"
+#include "lib/widget.h"
+#include "lib/charsets.h"
 
-#include "src/dialog.h"         /* cb_ret_t */
-#include "src/panel.h"
-#include "src/layout.h"
-#include "src/wtools.h"
+#include "src/filemanager/layout.h"
+#include "src/filemanager/cmd.h"
+#include "src/filemanager/midnight.h"   /* current_panel */
+
 #include "src/history.h"
-#include "src/charsets.h"
-#include "src/cmd.h"
 #include "src/execute.h"
 #include "src/help.h"
-#include "src/keybind.h"
-#include "src/cmddef.h"         /* CK_ cmd name const */
+#include "src/keybind-defaults.h"
 #include "src/main.h"           /* midnight_shutdown */
 
 #include "internal.h"
@@ -80,6 +80,7 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* Both views */
 static void
@@ -220,8 +221,7 @@ mcview_handle_editkey (mcview_t * view, int key)
             return MSG_NOT_HANDLED;
     }
 
-    if ((view->filename != NULL) && (view->filename[0] != '\0')
-        && (view->change_list == NULL))
+    if ((view->filename != NULL) && (view->filename[0] != '\0') && (view->change_list == NULL))
         view->locked = mcview_lock_file (view);
 
     if (node == NULL)
@@ -383,7 +383,8 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     return res;
 }
 
-/* Both views */
+/* --------------------------------------------------------------------------------------------- */
+/** Both views */
 static cb_ret_t
 mcview_handle_key (mcview_t * view, int key)
 {
@@ -396,12 +397,12 @@ mcview_handle_key (mcview_t * view, int key)
         if (view->hexedit_mode && (mcview_handle_editkey (view, key) == MSG_HANDLED))
             return MSG_HANDLED;
 
-        command = lookup_keymap_command (view->hex_map, key);
+        command = keybind_lookup_keymap_command (view->hex_map, key);
         if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
             return MSG_HANDLED;
     }
 
-    command = lookup_keymap_command (view->plain_map, key);
+    command = keybind_lookup_keymap_command (view->plain_map, key);
     if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
         return MSG_HANDLED;
 
@@ -441,9 +442,7 @@ mcview_adjust_size (Dlg_head * h)
 
 
 /* --------------------------------------------------------------------------------------------- */
-
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t

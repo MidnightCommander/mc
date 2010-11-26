@@ -1,18 +1,23 @@
-
 /** \file
  *  \brief Header: editor widget WEdit
  */
 
-#ifndef MC_EDIT_WIDGET_H
-#define MC_EDIT_WIDGET_H
+#ifndef MC__EDIT_WIDGET_H
+#define MC__EDIT_WIDGET_H
 
-#include "src/dialog.h"         /* Widget */
 #include "lib/search.h"         /* mc_search_t */
+#include "lib/widget.h"         /* Widget */
 
 #include "edit-impl.h"
 
+/*** typedefs(not structures) and defined constants **********************************************/
+
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
 
 struct _book_mark
 {
@@ -107,7 +112,7 @@ struct WEdit
     unsigned long stack_bottom;
     unsigned int stack_disable:1;       /* If not 0, don't save events in the undo stack */
 
-    struct stat stat1;                  /* Result of mc_fstat() on the file */
+    struct stat stat1;          /* Result of mc_fstat() on the file */
     unsigned int skip_detach_prompt:1;  /* Do not prompt whether to detach a file anymore */
 
     /* syntax higlighting */
@@ -115,13 +120,13 @@ struct WEdit
     struct context_rule **rules;
     long last_get_rule;
     struct syntax_rule rule;
-    char *syntax_type;                  /* description of syntax highlighting type being used */
-    GTree *defines;                     /* List of defines */
+    char *syntax_type;          /* description of syntax highlighting type being used */
+    GTree *defines;             /* List of defines */
     gboolean is_case_insensitive;       /* selects language case sensitivity */
 
     /* macro stuff */
-    int macro_i;                        /* index to macro[], -1 if not recording a macro */
-    int macro_depth;                    /* depth of the macro recursion */
+    int macro_i;                /* index to macro[], -1 if not recording a macro */
+    int macro_depth;            /* depth of the macro recursion */
     struct macro macro[MAX_MACRO_LENGTH];
 
     /* user map stuff */
@@ -135,4 +140,9 @@ struct WEdit
 
 };
 
-#endif /* MC_EDIT_WIDGET_H */
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
+/*** inline functions ****************************************************************************/
+#endif /* MC__EDIT_WIDGET_H */

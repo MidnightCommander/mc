@@ -53,7 +53,7 @@
 
 #include <string.h>             /* for g_memmove() */
 #ifdef MC_ENABLE_DEBUGGING_CODE
-#include <stdint.h>             /* uintmax_t */
+#include <inttypes.h>           /* uintmax_t */
 #endif
 
 #include "lib/global.h"
@@ -74,7 +74,6 @@ typedef gboolean (*cmp_func_t) (const coord_cache_entry_t * a, const coord_cache
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 /* insert new cache entry into the cache */
@@ -101,11 +100,15 @@ mcview_ccache_add_entry (coord_cache_t * cache, size_t pos, const coord_cache_en
     cache->size++;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 mcview_coord_cache_entry_less_offset (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
 {
     return (a->cc_offset < b->cc_offset);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 mcview_coord_cache_entry_less_plain (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
@@ -120,6 +123,8 @@ mcview_coord_cache_entry_less_plain (const coord_cache_entry_t * a, const coord_
 }
 
 
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
 {
@@ -133,8 +138,10 @@ mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t * a, const coord_
 }
 
 
-/* Find and return the index of the last cache entry that is
+/* --------------------------------------------------------------------------------------------- */
+/** Find and return the index of the last cache entry that is
  * smaller than ''coord'', according to the criterion ''sort_by''. */
+
 static inline size_t
 mcview_ccache_find (mcview_t * view, const coord_cache_entry_t * coord, cmp_func_t cmp_func)
 {
@@ -163,9 +170,7 @@ mcview_ccache_find (mcview_t * view, const coord_cache_entry_t * coord, cmp_func
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 coord_cache_t *
@@ -267,12 +272,11 @@ mcview_ccache_dump (mcview_t * view)
 #endif
 
 /* --------------------------------------------------------------------------------------------- */
-
-
-/* Look up the missing components of ''coord'', which are given by
+/** Look up the missing components of ''coord'', which are given by
  * ''lookup_what''. The function returns the smallest value that
  * matches the existing components of ''coord''.
  */
+
 void
 mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t * coord, enum ccache_type lookup_what)
 {

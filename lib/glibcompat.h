@@ -19,5 +19,6 @@ gboolean g_unichar_iszerowidth (gunichar);
 gboolean g_file_set_contents (const gchar *, const gchar *, gssize, GError **);
 #endif /* ! GLIB_CHECK_VERSION (2, 7, 0) */
 
+/*** inline functions ****************************************************************************/
 
 #endif /* MC_GLIBCOMPAT_H */

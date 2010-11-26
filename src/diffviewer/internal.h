@@ -5,8 +5,7 @@
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/tty/color.h"
-
-#include "src/widget.h"
+#include "lib/widget.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

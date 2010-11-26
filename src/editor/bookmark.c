@@ -44,7 +44,18 @@
 
 #include "edit-widget.h"
 
-/* note, if there is more than one bookmark on a line, then they are
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/** note, if there is more than one bookmark on a line, then they are
    appended after each other and the last one is always the one found
    by book_mark_found() i.e. last in is the one seen */
 
@@ -59,7 +70,9 @@ double_marks (WEdit * edit, struct _book_mark *p)
     return p;
 }
 
-/* returns the first bookmark on or before this line */
+/* --------------------------------------------------------------------------------------------- */
+/** returns the first bookmark on or before this line */
+
 struct _book_mark *
 book_mark_find (WEdit * edit, int line)
 {
@@ -96,7 +109,7 @@ book_mark_find (WEdit * edit, int line)
     for (p = edit->book_mark; p != NULL; p = p->prev)
     {
         if (p->next != NULL && p->next->line <= line)
-            break;          /* gone past it going upward */
+            break;              /* gone past it going upward */
 
         if (p->line <= line)
         {
@@ -116,10 +129,15 @@ book_mark_find (WEdit * edit, int line)
         }
     }
 
-    return NULL;                   /* can't get here */
+    return NULL;                /* can't get here */
 }
 
-/* returns true if a bookmark exists at this line of color c */
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/** returns true if a bookmark exists at this line of color c */
+
 int
 book_mark_query_color (WEdit * edit, int line, int c)
 {
@@ -138,7 +156,9 @@ book_mark_query_color (WEdit * edit, int line, int c)
     return 0;
 }
 
-/* insert a bookmark at this line */
+/* --------------------------------------------------------------------------------------------- */
+/** insert a bookmark at this line */
+
 void
 book_mark_insert (WEdit * edit, size_t line, int c)
 {
@@ -170,8 +190,11 @@ book_mark_insert (WEdit * edit, size_t line, int c)
     p->next = q;
 }
 
-/* remove a bookmark if there is one at this line matching this color - c of -1 clear all */
-/* returns non-zero on not-found */
+/* --------------------------------------------------------------------------------------------- */
+/** remove a bookmark if there is one at this line matching this color - c of -1 clear all
+ * @returns non-zero on not-found
+ */
+
 int
 book_mark_clear (WEdit * edit, int line, int c)
 {
@@ -205,7 +228,9 @@ book_mark_clear (WEdit * edit, int line, int c)
     return r;
 }
 
-/* clear all bookmarks matching this color, if c is -1 clears all */
+/* --------------------------------------------------------------------------------------------- */
+/** clear all bookmarks matching this color, if c is -1 clears all */
+
 void
 book_mark_flush (WEdit * edit, int c)
 {
@@ -237,7 +262,9 @@ book_mark_flush (WEdit * edit, int c)
     edit->force |= REDRAW_PAGE;
 }
 
-/* shift down bookmarks after this line */
+/* --------------------------------------------------------------------------------------------- */
+/** shift down bookmarks after this line */
+
 void
 book_mark_inc (WEdit * edit, int line)
 {
@@ -250,7 +277,9 @@ book_mark_inc (WEdit * edit, int line)
     }
 }
 
-/* shift up bookmarks after this line */
+/* --------------------------------------------------------------------------------------------- */
+/** shift up bookmarks after this line */
+
 void
 book_mark_dec (WEdit * edit, int line)
 {
@@ -263,7 +292,9 @@ book_mark_dec (WEdit * edit, int line)
     }
 }
 
-/* prepare line positions of bookmarks to be saved to file */
+/* --------------------------------------------------------------------------------------------- */
+/** prepare line positions of bookmarks to be saved to file */
+
 void
 book_mark_serialize (WEdit * edit, int color)
 {
@@ -284,7 +315,9 @@ book_mark_serialize (WEdit * edit, int color)
     }
 }
 
-/* restore bookmarks from saved line positions */
+/* --------------------------------------------------------------------------------------------- */
+/** restore bookmarks from saved line positions */
+
 void
 book_mark_restore (WEdit * edit, int color)
 {
@@ -296,3 +329,5 @@ book_mark_restore (WEdit * edit, int color)
             book_mark_insert (edit, g_array_index (edit->serialized_bookmarks, size_t, i), color);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */

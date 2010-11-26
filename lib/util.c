@@ -42,40 +42,40 @@
 
 #include "lib/global.h"
 #include "lib/tty/win.h"        /* xterm_flag */
-#include "lib/search.h"
 #include "lib/mcconfig.h"
-#include "lib/timefmt.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/util.h"
 
-#include "src/filegui.h"
-#include "src/file.h"           /* copy_file_file() */
-#ifndef HAVE_CHARSET
-#include "src/main.h"           /* eight_bit_clean */
-#endif
+#include "src/filemanager/filegui.h"
+#include "src/filemanager/file.h"       /* copy_file_file() */
+#include "src/main.h"           /* home_dir, eight_bit_clean */
 
-int easy_patterns = 1;
+/*** global variables ****************************************************************************/
 
-char *user_recent_timeformat = NULL;    /* time format string for recent dates */
-char *user_old_timeformat = NULL;       /* time format string for older dates */
+/*** file scope macro definitions ****************************************************************/
 
-/*
- * Cache variable for the i18n_checktimelength function,
- * initially set to a clearly invalid value to show that
- * it hasn't been initialized yet.
- */
-static size_t i18n_timelength_cache = MAX_I18NTIMELENGTH + 1;
+#define ismode(n,m) ((n & m) == m)
 
-extern void
-str_replace (char *s, char from, char to)
-{
-    for (; *s != '\0'; s++)
-    {
-        if (*s == from)
-            *s = to;
-    }
-}
+/* Number of attempts to create a temporary file */
+#ifndef TMP_MAX
+#define TMP_MAX 16384
+#endif /* !TMP_MAX */
+
+#define TMP_SUFFIX ".tmp"
+
+#define ASCII_A (0x40 + 1)
+#define ASCII_Z (0x40 + 26)
+#define ASCII_a (0x60 + 1)
+#define ASCII_z (0x60 + 26)
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static inline int
 is_7bit_printable (unsigned char c)
@@ -83,11 +83,15 @@ is_7bit_printable (unsigned char c)
     return (c > 31 && c < 127);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline int
 is_iso_printable (unsigned char c)
 {
     return ((c > 31 && c < 127) || c >= 160);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline int
 is_8bit_printable (unsigned char c)
@@ -98,6 +102,114 @@ is_8bit_printable (unsigned char c)
 
     return (c > 31 && c != 127 && c != 155);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+resolve_symlinks (const char *path)
+{
+    char *buf, *buf2, *q, *r, c;
+    int len;
+    struct stat mybuf;
+    const char *p;
+
+    if (*path != PATH_SEP)
+        return NULL;
+    r = buf = g_malloc (MC_MAXPATHLEN);
+    buf2 = g_malloc (MC_MAXPATHLEN);
+    *r++ = PATH_SEP;
+    *r = 0;
+    p = path;
+    for (;;)
+    {
+        q = strchr (p + 1, PATH_SEP);
+        if (!q)
+        {
+            q = strchr (p + 1, 0);
+            if (q == p + 1)
+                break;
+        }
+        c = *q;
+        *q = 0;
+        if (mc_lstat (path, &mybuf) < 0)
+        {
+            g_free (buf);
+            g_free (buf2);
+            *q = c;
+            return NULL;
+        }
+        if (!S_ISLNK (mybuf.st_mode))
+            strcpy (r, p + 1);
+        else
+        {
+            len = mc_readlink (path, buf2, MC_MAXPATHLEN - 1);
+            if (len < 0)
+            {
+                g_free (buf);
+                g_free (buf2);
+                *q = c;
+                return NULL;
+            }
+            buf2[len] = 0;
+            if (*buf2 == PATH_SEP)
+                strcpy (buf, buf2);
+            else
+                strcpy (r, buf2);
+        }
+        canonicalize_pathname (buf);
+        r = strchr (buf, 0);
+        if (!*r || *(r - 1) != PATH_SEP)
+        {
+            *r++ = PATH_SEP;
+            *r = 0;
+        }
+        *q = c;
+        p = q;
+        if (!c)
+            break;
+    }
+    if (!*buf)
+        strcpy (buf, PATH_SEP_STR);
+    else if (*(r - 1) == PATH_SEP && r != buf + 1)
+        *(r - 1) = 0;
+    g_free (buf2);
+    return buf;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+mc_util_write_backup_content (const char *from_file_name, const char *to_file_name)
+{
+    FILE *backup_fd;
+    char *contents;
+    gsize length;
+    gboolean ret1 = TRUE;
+
+    if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
+        return FALSE;
+
+    backup_fd = fopen (to_file_name, "w");
+    if (backup_fd == NULL)
+    {
+        g_free (contents);
+        return FALSE;
+    }
+
+    if (fwrite ((const void *) contents, 1, length, backup_fd) != length)
+        ret1 = FALSE;
+    {
+        int ret2;
+        ret2 = fflush (backup_fd);
+        ret2 = fclose (backup_fd);
+    }
+    g_free (contents);
+    return ret1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 int
 is_printable (int c)
@@ -121,71 +233,8 @@ is_printable (int c)
 #endif /* !HAVE_CHARSET */
 }
 
-/* Calculates the message dimensions (lines and columns) */
-void
-msglen (const char *text, int *lines, int *columns)
-{
-    int nlines = 1;             /* even the empty string takes one line */
-    int ncolumns = 0;
-    int colindex = 0;
-
-    for (; *text != '\0'; text++)
-    {
-        if (*text == '\n')
-        {
-            nlines++;
-            colindex = 0;
-        }
-        else
-        {
-            colindex++;
-            if (colindex > ncolumns)
-                ncolumns = colindex;
-        }
-    }
-
-    *lines = nlines;
-    *columns = ncolumns;
-}
-
-/*
- * Copy from s to d, and trim the beginning if necessary, and prepend
- * "..." in this case.  The destination string can have at most len
- * bytes, not counting trailing 0.
- */
-char *
-trim (const char *s, char *d, int len)
-{
-    int source_len;
-
-    /* Sanity check */
-    len = max (len, 0);
-
-    source_len = strlen (s);
-    if (source_len > len)
-    {
-        /* Cannot fit the whole line */
-        if (len <= 3)
-        {
-            /* We only have room for the dots */
-            memset (d, '.', len);
-            d[len] = 0;
-            return d;
-        }
-        else
-        {
-            /* Begin with ... and add the rest of the source string */
-            memset (d, '.', 3);
-            strcpy (d + 3, s + 3 + source_len - len);
-        }
-    }
-    else
-        /* We can copy the whole line */
-        strcpy (d, s);
-    return d;
-}
-
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Quote the filename for the purpose of inserting it into the command
  * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
  * processed by the mc command line.
@@ -247,6 +296,8 @@ name_quote (const char *s, int quote_percent)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 fake_name_quote (const char *s, int quote_percent)
 {
@@ -254,22 +305,13 @@ fake_name_quote (const char *s, int quote_percent)
     return g_strdup (s);
 }
 
-/*
- * Remove the middle part of the string to fit given length.
- * Use "~" to show where the string was truncated.
- * Return static buffer, no need to free() it.
- */
-const char *
-name_trunc (const char *txt, size_t trunc_len)
-{
-    return str_trunc (txt, trunc_len);
-}
-
-/*
- * path_trunc() is the same as name_trunc() above but
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * path_trunc() is the same as str_trunc() but
  * it deletes possible password from path for security
  * reasons.
  */
+
 const char *
 path_trunc (const char *path, size_t trunc_len)
 {
@@ -280,6 +322,8 @@ path_trunc (const char *path, size_t trunc_len)
 
     return ret;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 const char *
 size_trunc (double size, gboolean use_si)
@@ -301,6 +345,8 @@ size_trunc (double size, gboolean use_si)
     g_snprintf (x, sizeof (x), "%.0f%s", (size / divisor), xtra);
     return x;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 const char *
 size_trunc_sep (double size, gboolean use_si)
@@ -331,7 +377,8 @@ size_trunc_sep (double size, gboolean use_si)
     return d;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Print file SIZE to BUFFER, but don't exceed LEN characters,
  * not including trailing 0. BUFFER should be at least LEN+1 long.
  * This function is called for every file on panels, so avoid
@@ -340,6 +387,7 @@ size_trunc_sep (double size, gboolean use_si)
  * Units: size units (filesystem sizes are 1K blocks)
  *    0=bytes, 1=Kbytes, 2=Mbytes, etc.
  */
+
 void
 size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean use_si)
 {
@@ -403,15 +451,7 @@ size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean 
     }
 }
 
-int
-is_exe (mode_t mode)
-{
-    if ((S_IXUSR & mode) || (S_IXGRP & mode) || (S_IXOTH & mode))
-        return 1;
-    return 0;
-}
-
-#define ismode(n,m) ((n & m) == m)
+/* --------------------------------------------------------------------------------------------- */
 
 const char *
 string_perm (mode_t mode_bits)
@@ -468,15 +508,18 @@ string_perm (mode_t mode_bits)
     return mode;
 }
 
-/* p: string which might contain an url with a password (this parameter is
-   modified in place).
-   has_prefix = 0: The first parameter is an url without a prefix
-   (user[:pass]@]machine[:port][remote-dir). Delete
-   the password.
-   has_prefix = 1: Search p for known url prefixes. If found delete
-   the password from the url. 
-   Caveat: only the first url is found
+/* --------------------------------------------------------------------------------------------- */
+/**
+ *  p: string which might contain an url with a password (this parameter is
+ *  modified in place).
+ *  has_prefix = 0: The first parameter is an url without a prefix
+ *  (user[:pass]@]machine[:port][remote-dir). Delete
+ *  the password.
+ *  has_prefix = 1: Search p for known url prefixes. If found delete
+ *  the password from the url.
+ *  Caveat: only the first url is found
  */
+
 char *
 strip_password (char *p, int has_prefix)
 {
@@ -536,6 +579,8 @@ strip_password (char *p, int has_prefix)
     return (result);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 const char *
 strip_home_and_password (const char *dir)
 {
@@ -558,6 +603,8 @@ strip_home_and_password (const char *dir)
     return newdir;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 const char *
 extension (const char *filename)
 {
@@ -565,11 +612,7 @@ extension (const char *filename)
     return (d != NULL) ? d + 1 : "";
 }
 
-int
-exist_file (const char *name)
-{
-    return access (name, R_OK) == 0;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 int
 check_for_default (const char *default_file, const char *file)
@@ -593,39 +636,7 @@ check_for_default (const char *default_file, const char *file)
     return 0;
 }
 
-
-
-char *
-load_file (const char *filename)
-{
-    FILE *data_file;
-    struct stat s;
-    char *data;
-    long read_size;
-
-    data_file = fopen (filename, "r");
-    if (data_file == NULL)
-    {
-        return 0;
-    }
-    if (fstat (fileno (data_file), &s) != 0)
-    {
-        fclose (data_file);
-        return 0;
-    }
-    data = g_malloc (s.st_size + 1);
-    read_size = fread (data, 1, s.st_size, data_file);
-    data[read_size] = 0;
-    fclose (data_file);
-
-    if (read_size > 0)
-        return data;
-    else
-    {
-        g_free (data);
-        return 0;
-    }
-}
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 load_mc_home_file (const char *from, const char *filename, char **allocated_filename)
@@ -638,22 +649,18 @@ load_mc_home_file (const char *from, const char *filename, char **allocated_file
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
-    data = load_file (hintfile);
-
-    if (data == NULL)
+    if (!g_file_get_contents (hintfile, &data, NULL, NULL))
     {
         /* Fall back to the two-letter language code */
         if (lang[0] != '\0' && lang[1] != '\0')
             lang[2] = '\0';
         g_free (hintfile);
         hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
-        data = load_file (hintfile);
-
-        if (data == NULL)
+        if (!g_file_get_contents (hintfile, &data, NULL, NULL))
         {
             g_free (hintfile);
             hintfile = hintfile_base;
-            data = load_file (hintfile_base);
+            g_file_get_contents (hintfile_base, &data, NULL, NULL);
         }
     }
 
@@ -670,75 +677,7 @@ load_mc_home_file (const char *from, const char *filename, char **allocated_file
     return data;
 }
 
-/* Check strftime() results. Some systems (i.e. Solaris) have different
-   short-month and month name sizes for different locales */
-size_t
-i18n_checktimelength (void)
-{
-    size_t length = 0;
-    const time_t testtime = time (NULL);
-    struct tm *lt = localtime (&testtime);
-
-    if (i18n_timelength_cache <= MAX_I18NTIMELENGTH)
-        return i18n_timelength_cache;
-
-    if (lt == NULL)
-    {
-        /* huh, localtime() doesnt seem to work ... falling back to "(invalid)" */
-        length = str_term_width1 (_(INVALID_TIME_TEXT));
-    }
-    else
-    {
-        char buf[MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
-
-        /* We are interested in the longest possible date */
-        lt->tm_sec = lt->tm_min = lt->tm_hour = lt->tm_mday = 10;
-
-        /* Loop through all months to find out the longest one */
-        for (lt->tm_mon = 0; lt->tm_mon < 12; lt->tm_mon++) {
-            strftime (buf, sizeof(buf) - 1, user_recent_timeformat, lt);
-            length = max ((size_t) str_term_width1 (buf), length);
-            strftime (buf, sizeof(buf) - 1, user_old_timeformat, lt);
-            length = max ((size_t) str_term_width1 (buf), length);
-        }
-
-        length = max ((size_t) str_term_width1 (_(INVALID_TIME_TEXT)), length);
-    }
-
-    /* Don't handle big differences. Use standard value (email bug, please) */
-    if (length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH)
-        length = STD_I18NTIMELENGTH;
-
-    /* Save obtained value to the cache */
-    i18n_timelength_cache = length;
-
-    return i18n_timelength_cache;
-}
-
-const char *
-file_date (time_t when)
-{
-    static char timebuf[MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
-    time_t current_time = time ((time_t) 0);
-    const char *fmt;
-
-    if (current_time > when + 6L * 30L * 24L * 60L * 60L        /* Old. */
-        || current_time < when - 60L * 60L)     /* In the future. */
-        /* The file is fairly old or in the future.
-           POSIX says the cutoff is 6 months old;
-           approximate this by 6*30 days.
-           Allow a 1 hour slop factor for what is considered "the future",
-           to allow for NFS server/client clock disagreement.
-           Show the year instead of the time of day.  */
-
-        fmt = user_old_timeformat;
-    else
-        fmt = user_recent_timeformat;
-
-    FMT_LOCALTIME (timebuf, sizeof (timebuf), fmt, when);
-
-    return timebuf;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 const char *
 extract_line (const char *s, const char *top)
@@ -752,7 +691,11 @@ extract_line (const char *s, const char *top)
     return tmp_line;
 }
 
-/* The basename routine */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * The basename routine
+ */
+
 const char *
 x_basename (const char *s)
 {
@@ -760,6 +703,7 @@ x_basename (const char *s)
     return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 const char *
 unix_error_string (int error_num)
@@ -774,6 +718,8 @@ unix_error_string (int error_num)
     return buffer;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 const char *
 skip_separators (const char *s)
 {
@@ -785,6 +731,8 @@ skip_separators (const char *s)
 
     return su;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 const char *
 skip_numbers (const char *s)
@@ -798,7 +746,9 @@ skip_numbers (const char *s)
     return su;
 }
 
-/* Remove all control sequences from the argument string.  We define
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Remove all control sequences from the argument string.  We define
  * "control sequence", in a sort of pidgin BNF, as follows:
  *
  * control-seq = Esc non-'['
@@ -883,6 +833,8 @@ strip_ctrl_codes (char *s)
     return s;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 enum compression_type
 get_compression_type (int fd, const char *name)
 {
@@ -961,6 +913,8 @@ get_compression_type (int fd, const char *name)
     return COMPRESSION_NONE;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 const char *
 decompress_extension (int type)
 {
@@ -982,78 +936,7 @@ decompress_extension (int type)
     return 0;
 }
 
-/* Hooks */
-void
-add_hook (Hook ** hook_list, void (*hook_fn) (void *), void *data)
-{
-    Hook *new_hook = g_new (Hook, 1);
-
-    new_hook->hook_fn = hook_fn;
-    new_hook->next = *hook_list;
-    new_hook->hook_data = data;
-
-    *hook_list = new_hook;
-}
-
-void
-execute_hooks (Hook * hook_list)
-{
-    Hook *new_hook = 0;
-    Hook *p;
-
-    /* We copy the hook list first so tahat we let the hook
-     * function call delete_hook
-     */
-
-    while (hook_list)
-    {
-        add_hook (&new_hook, hook_list->hook_fn, hook_list->hook_data);
-        hook_list = hook_list->next;
-    }
-    p = new_hook;
-
-    while (new_hook)
-    {
-        (*new_hook->hook_fn) (new_hook->hook_data);
-        new_hook = new_hook->next;
-    }
-
-    for (hook_list = p; hook_list;)
-    {
-        p = hook_list;
-        hook_list = hook_list->next;
-        g_free (p);
-    }
-}
-
-void
-delete_hook (Hook ** hook_list, void (*hook_fn) (void *))
-{
-    Hook *current, *new_list, *next;
-
-    new_list = 0;
-
-    for (current = *hook_list; current; current = next)
-    {
-        next = current->next;
-        if (current->hook_fn == hook_fn)
-            g_free (current);
-        else
-            add_hook (&new_list, current->hook_fn, current->hook_data);
-    }
-    *hook_list = new_list;
-}
-
-int
-hook_present (Hook * hook_list, void (*hook_fn) (void *))
-{
-    Hook *p;
-
-    for (p = hook_list; p; p = p->next)
-        if (p->hook_fn == hook_fn)
-            return 1;
-    return 0;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 void
 wipe_password (char *passwd)
@@ -1067,8 +950,12 @@ wipe_password (char *passwd)
     g_free (passwd);
 }
 
-/* Convert "\E" -> esc character and ^x to control-x key and ^^ to ^ key */
-/* Returns a newly allocated string */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Convert "\E" -> esc character and ^x to control-x key and ^^ to ^ key
+ * @returns a newly allocated string
+ */
+
 char *
 convert_controls (const char *p)
 {
@@ -1114,108 +1001,12 @@ convert_controls (const char *p)
     return valcopy;
 }
 
-static char *
-resolve_symlinks (const char *path)
-{
-    char *buf, *buf2, *q, *r, c;
-    int len;
-    struct stat mybuf;
-    const char *p;
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Finds out a relative path from first to second, i.e. goes as many ..
+ * as needed up in first and then goes down using second
+ */
 
-    if (*path != PATH_SEP)
-        return NULL;
-    r = buf = g_malloc (MC_MAXPATHLEN);
-    buf2 = g_malloc (MC_MAXPATHLEN);
-    *r++ = PATH_SEP;
-    *r = 0;
-    p = path;
-    for (;;)
-    {
-        q = strchr (p + 1, PATH_SEP);
-        if (!q)
-        {
-            q = strchr (p + 1, 0);
-            if (q == p + 1)
-                break;
-        }
-        c = *q;
-        *q = 0;
-        if (mc_lstat (path, &mybuf) < 0)
-        {
-            g_free (buf);
-            g_free (buf2);
-            *q = c;
-            return NULL;
-        }
-        if (!S_ISLNK (mybuf.st_mode))
-            strcpy (r, p + 1);
-        else
-        {
-            len = mc_readlink (path, buf2, MC_MAXPATHLEN - 1);
-            if (len < 0)
-            {
-                g_free (buf);
-                g_free (buf2);
-                *q = c;
-                return NULL;
-            }
-            buf2[len] = 0;
-            if (*buf2 == PATH_SEP)
-                strcpy (buf, buf2);
-            else
-                strcpy (r, buf2);
-        }
-        canonicalize_pathname (buf);
-        r = strchr (buf, 0);
-        if (!*r || *(r - 1) != PATH_SEP)
-        {
-            *r++ = PATH_SEP;
-            *r = 0;
-        }
-        *q = c;
-        p = q;
-        if (!c)
-            break;
-    }
-    if (!*buf)
-        strcpy (buf, PATH_SEP_STR);
-    else if (*(r - 1) == PATH_SEP && r != buf + 1)
-        *(r - 1) = 0;
-    g_free (buf2);
-    return buf;
-}
-
-static gboolean
-mc_util_write_backup_content (const char *from_file_name, const char *to_file_name)
-{
-    FILE *backup_fd;
-    char *contents;
-    gsize length;
-    gboolean ret1 = TRUE;
-
-    if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
-        return FALSE;
-
-    backup_fd = fopen (to_file_name, "w");
-    if (backup_fd == NULL)
-    {
-        g_free (contents);
-        return FALSE;
-    }
-
-    if (fwrite ((const void *) contents, 1, length, backup_fd) != length)
-        ret1 = FALSE;
-    {
-        int ret2;
-        ret2 = fflush (backup_fd);
-        ret2 = fclose (backup_fd);
-    }
-    g_free (contents);
-    return ret1;
-}
-
-/* Finds out a relative path from first to second, i.e. goes as many ..
- * as needed up in first and then goes down using second */
 char *
 diff_two_paths (const char *first, const char *second)
 {
@@ -1283,7 +1074,11 @@ diff_two_paths (const char *first, const char *second)
     return buf;
 }
 
-/* If filename is NULL, then we just append PATH_SEP to the dir */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * If filename is NULL, then we just append PATH_SEP to the dir
+ */
+
 char *
 concat_dir_and_file (const char *dir, const char *file)
 {
@@ -1295,7 +1090,11 @@ concat_dir_and_file (const char *dir, const char *file)
         return g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
 }
 
-/* Append text to GList, remove all entries with the same text */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Append text to GList, remove all entries with the same text
+ */
+
 GList *
 list_append_unique (GList * list, char *text)
 {
@@ -1329,13 +1128,8 @@ list_append_unique (GList * list, char *text)
     return list;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /* Following code heavily borrows from libiberty, mkstemps.c */
-
-/* Number of attempts to create a temporary file */
-#ifndef TMP_MAX
-#define TMP_MAX 16384
-#endif /* !TMP_MAX */
-
 /*
  * Arguments:
  * pname (output) - pointer to the name of the temp file (needs g_free).
@@ -1347,6 +1141,7 @@ list_append_unique (GList * list, char *text)
  * Result:
  * handle of the open file or -1 if couldn't open any.
  */
+
 int
 mc_mkstemps (char **pname, const char *prefix, const char *suffix)
 {
@@ -1415,12 +1210,15 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
     return -1;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Read and restore position for the given filename.
  * If there is no stored data, return line 1 and col 0.
  */
+
 void
-load_file_position (const char *filename, long *line, long *column, off_t * offset, GArray **bookmarks)
+load_file_position (const char *filename, long *line, long *column, off_t * offset,
+                    GArray ** bookmarks)
 {
     char *fn;
     FILE *f;
@@ -1503,10 +1301,13 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
     fclose (f);
 }
 
-/* Save position for the given file */
-#define TMP_SUFFIX ".tmp"
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Save position for the given file
+ */
+
 void
-save_file_position (const char *filename, long line, long column, off_t offset, GArray *bookmarks)
+save_file_position (const char *filename, long line, long column, off_t offset, GArray * bookmarks)
 {
     static size_t filepos_max_saved_entries = 0;
     char *fn, *tmp_fn;
@@ -1556,7 +1357,8 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
     i = 1;
     while (fgets (buf, sizeof (buf), tmp_f) != NULL)
     {
-        if (buf[len] == ' ' && strncmp (buf, filename, len) == 0 && strchr (&buf[len + 1], ' ') == NULL)
+        if (buf[len] == ' ' && strncmp (buf, filename, len) == 0
+            && strchr (&buf[len + 1], ' ') == NULL)
             continue;
 
         fprintf (f, "%s", buf);
@@ -1576,35 +1378,11 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
   open_target_error:
     g_free (fn);
   early_error:
-    g_array_free (bookmarks, TRUE);
+    if (bookmarks != NULL)
+        g_array_free (bookmarks, TRUE);
 }
 
-#undef TMP_SUFFIX
-extern const char *
-cstrcasestr (const char *haystack, const char *needle)
-{
-    char *nee = str_create_search_needle (needle, 0);
-    const char *result = str_search_first (haystack, nee, 0);
-    str_release_search_needle (nee, 0);
-    return result;
-}
-
-const char *
-cstrstr (const char *haystack, const char *needle)
-{
-    return strstr (haystack, needle);
-}
-
-extern char *
-str_unconst (const char *s)
-{
-    return (char *) s;
-}
-
-#define ASCII_A		(0x40 + 1)
-#define ASCII_Z		(0x40 + 26)
-#define ASCII_a		(0x60 + 1)
-#define ASCII_z		(0x60 + 26)
+/* --------------------------------------------------------------------------------------------- */
 
 extern int
 ascii_alpha_to_cntrl (int ch)
@@ -1616,6 +1394,8 @@ ascii_alpha_to_cntrl (int ch)
     return ch;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 const char *
 Q_ (const char *s)
 {
@@ -1626,6 +1406,7 @@ Q_ (const char *s)
     return (sep != NULL) ? sep + 1 : result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_util_make_backup_if_possible (const char *file_name, const char *backup_suffix)
@@ -1657,6 +1438,8 @@ mc_util_make_backup_if_possible (const char *file_name, const char *backup_suffi
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 gboolean
 mc_util_restore_from_backup_if_possible (const char *file_name, const char *backup_suffix)
 {
@@ -1672,6 +1455,8 @@ mc_util_restore_from_backup_if_possible (const char *file_name, const char *back
 
     return ret;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suffix)
@@ -1689,8 +1474,12 @@ mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suf
     return TRUE;
 }
 
-/* partly taken from dcigettext.c, returns "" for default locale */
-/* value should be freed by calling function g_free() */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * partly taken from dcigettext.c, returns "" for default locale
+ * value should be freed by calling function g_free()
+ */
+
 char *
 guess_message_value (void)
 {
@@ -1722,3 +1511,5 @@ guess_message_value (void)
 
     return g_strdup (locale);
 }
+
+/* --------------------------------------------------------------------------------------------- */

@@ -44,17 +44,29 @@
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/strutil.h"        /* str_term_trim() */
+#include "lib/util.h"           /* concat_dir_and_file() */
+#include "lib/widget.h"
+
+#include "src/keybind-defaults.h"
+#include "src/main.h"           /* home_dir */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-#include "src/dialog.h"
-#include "src/widget.h"         /* ButtonBar */
-#include "src/menu.h"           /* menubar_new() */
-#include "src/cmddef.h"
-#include "src/keybind.h"
+/*** global variables ****************************************************************************/
 
-static cb_ret_t edit_callback (Widget *, widget_msg_t msg, int parm);
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+
+static cb_ret_t edit_callback (Widget * w, widget_msg_t msg, int parm);
+
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 edit_get_shortcut (unsigned long command)
@@ -62,21 +74,23 @@ edit_get_shortcut (unsigned long command)
     const char *ext_map;
     const char *shortcut = NULL;
 
-    shortcut = lookup_keymap_shortcut (editor_map, command);
+    shortcut = keybind_lookup_keymap_shortcut (editor_map, command);
     if (shortcut != NULL)
         return g_strdup (shortcut);
 
-    ext_map = lookup_keymap_shortcut (editor_map, CK_Ext_Mode);
+    ext_map = keybind_lookup_keymap_shortcut (editor_map, CK_Ext_Mode);
     if (ext_map != NULL)
-        shortcut = lookup_keymap_shortcut (editor_x_map, command);
+        shortcut = keybind_lookup_keymap_shortcut (editor_x_map, command);
     if (shortcut != NULL)
         return g_strdup_printf ("%s %s", ext_map, shortcut);
 
     return NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
-edit_get_title (const Dlg_head *h, size_t len)
+edit_get_title (const Dlg_head * h, size_t len)
 {
     const WEdit *edit = (const WEdit *) find_widget_type (h, edit_callback);
     const char *modified = edit->modified ? "(*) " : "    ";
@@ -88,6 +102,8 @@ edit_get_title (const Dlg_head *h, size_t len)
 
     return g_strconcat (_("Edit: "), modified, file_label, (char *) NULL);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 edit_event (Gpm_Event * event, void *data)
@@ -182,6 +198,8 @@ edit_event (Gpm_Event * event, void *data)
     return MOU_NORMAL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 edit_command_execute (WEdit * edit, unsigned long command)
 {
@@ -194,6 +212,8 @@ edit_command_execute (WEdit * edit, unsigned long command)
     }
     return MSG_HANDLED;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 edit_set_buttonbar (WEdit * edit, WButtonBar * bb)
@@ -210,7 +230,9 @@ edit_set_buttonbar (WEdit * edit, WButtonBar * bb)
     buttonbar_set_label (bb, 10, Q_ ("ButtonBar|Quit"), editor_map, (Widget *) edit);
 }
 
-/* Callback for the edit dialog */
+/* --------------------------------------------------------------------------------------------- */
+/** Callback for the edit dialog */
+
 static cb_ret_t
 edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
@@ -253,77 +275,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
     }
 }
 
-int
-edit_file (const char *_file, int line)
-{
-    static gboolean made_directory = FALSE;
-    Dlg_head *edit_dlg;
-    WEdit *wedit;
-    WMenuBar *menubar;
-
-    if (!made_directory)
-    {
-        char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
-        made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
-        g_free (dir);
-    }
-
-    wedit = edit_init (NULL, LINES - 2, COLS, _file, line);
-
-    if (wedit == NULL)
-        return 0;
-
-    /* Create a new dialog and add it widgets to it */
-    edit_dlg =
-        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback,
-                    "[Internal File Editor]", NULL, DLG_WANT_TAB);
-
-    edit_dlg->get_shortcut = edit_get_shortcut;
-    edit_dlg->get_title = edit_get_title;
-
-    menubar = menubar_new (0, 0, COLS, NULL);
-    add_widget (edit_dlg, menubar);
-    edit_init_menu (menubar);
-
-    init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS, edit_callback, edit_event);
-    widget_want_cursor (wedit->widget, 1);
-
-    add_widget (edit_dlg, wedit);
-
-    add_widget (edit_dlg, buttonbar_new (TRUE));
-
-    run_dlg (edit_dlg);
-
-    if (edit_dlg->state == DLG_CLOSED)
-        destroy_dlg (edit_dlg);
-
-    return 1;
-}
-
-const char *
-edit_get_file_name (const WEdit * edit)
-{
-    return edit->filename;
-}
-
-void
-edit_update_screen (WEdit * e)
-{
-    edit_scroll_screen_over_cursor (e);
-
-    edit_update_curs_col (e);
-    edit_status (e);
-
-    /* pop all events for this window for internal handling */
-    if (!is_idle ())
-        e->force |= REDRAW_PAGE;
-    else
-    {
-        if (e->force & REDRAW_COMPLETELY)
-            e->force |= REDRAW_PAGE;
-        edit_render_keypress (e);
-    }
-}
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 edit_callback (Widget * w, widget_msg_t msg, int parm)
@@ -378,3 +330,85 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
         return default_proc (msg, parm);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+int
+edit_file (const char *_file, int line)
+{
+    static gboolean made_directory = FALSE;
+    Dlg_head *edit_dlg;
+    WEdit *wedit;
+    WMenuBar *menubar;
+
+    if (!made_directory)
+    {
+        char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
+        made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
+        g_free (dir);
+    }
+
+    wedit = edit_init (NULL, LINES - 2, COLS, _file, line);
+
+    if (wedit == NULL)
+        return 0;
+
+    /* Create a new dialog and add it widgets to it */
+    edit_dlg =
+        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback,
+                    "[Internal File Editor]", NULL, DLG_WANT_TAB);
+
+    edit_dlg->get_shortcut = edit_get_shortcut;
+    edit_dlg->get_title = edit_get_title;
+
+    menubar = menubar_new (0, 0, COLS, NULL);
+    add_widget (edit_dlg, menubar);
+    edit_init_menu (menubar);
+
+    init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS, edit_callback, edit_event);
+    widget_want_cursor (wedit->widget, 1);
+
+    add_widget (edit_dlg, wedit);
+
+    add_widget (edit_dlg, buttonbar_new (TRUE));
+
+    run_dlg (edit_dlg);
+
+    if (edit_dlg->state == DLG_CLOSED)
+        destroy_dlg (edit_dlg);
+
+    return 1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+const char *
+edit_get_file_name (const WEdit * edit)
+{
+    return edit->filename;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_update_screen (WEdit * e)
+{
+    edit_scroll_screen_over_cursor (e);
+
+    edit_update_curs_col (e);
+    edit_status (e);
+
+    /* pop all events for this window for internal handling */
+    if (!is_idle ())
+        e->force |= REDRAW_PAGE;
+    else
+    {
+        if (e->force & REDRAW_COMPLETELY)
+            e->force |= REDRAW_PAGE;
+        edit_render_keypress (e);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */

@@ -1,13 +1,22 @@
-
 /**
  * \file
  * \brief Header: local FS
  */
 
-#ifndef MC_VFS_LOCAL_H
-#define MC_VFS_LOCAL_H
+#ifndef MC__VFS_LOCAL_H
+#define MC__VFS_LOCAL_H
 
 #include "vfs-impl.h"
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
 
 extern void init_localfs (void);
 
@@ -19,4 +28,5 @@ extern int local_fstat (void *data, struct stat *buf);
 extern int local_errno (struct vfs_class *me);
 extern off_t local_lseek (void *data, off_t offset, int whence);
 
+/*** inline functions ****************************************************************************/
 #endif

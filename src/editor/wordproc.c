@@ -1,5 +1,5 @@
 /* wordproc.c - word-processor mode for the editor: does dynamic
-		paragraph formatting.
+   paragraph formatting.
    Copyright (C) 1996 Paul Sheer
 
    This program is free software; you can redistribute it and/or modify
@@ -39,18 +39,29 @@
 
 #include "lib/global.h"
 
-#include "src/setup.h"	/* option_tab_spacing */
+#include "src/setup.h"          /* option_tab_spacing */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
+
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
 
 #define tab_width option_tab_spacing
 
 #define NO_FORMAT_CHARS_START "-+*\\,.;:&>"
 #define FONT_MEAN_WIDTH 1
 
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static long
-line_start (WEdit *edit, long line)
+line_start (WEdit * edit, long line)
 {
     long p, l;
 
@@ -58,152 +69,180 @@ line_start (WEdit *edit, long line)
     p = edit->curs1;
 
     if (line < l)
-	p = edit_move_backward (edit, p, l - line);
+        p = edit_move_backward (edit, p, l - line);
     else if (line > l)
-	p = edit_move_forward (edit, p, line - l, 0);
+        p = edit_move_forward (edit, p, line - l, 0);
 
     p = edit_bol (edit, p);
     while (strchr ("\t ", edit_get_byte (edit, p)))
-	p++;
+        p++;
     return p;
 }
 
-static int bad_line_start (WEdit * edit, long p)
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+bad_line_start (WEdit * edit, long p)
 {
     int c;
     c = edit_get_byte (edit, p);
-    if (c == '.') {		/* `...' is acceptable */
-	if (edit_get_byte (edit, p + 1) == '.')
-	    if (edit_get_byte (edit, p + 2) == '.')
-		return 0;
-	return 1;
+    if (c == '.')
+    {                           /* `...' is acceptable */
+        if (edit_get_byte (edit, p + 1) == '.')
+            if (edit_get_byte (edit, p + 2) == '.')
+                return 0;
+        return 1;
     }
-    if (c == '-') {
-	if (edit_get_byte (edit, p + 1) == '-')
-	    if (edit_get_byte (edit, p + 2) == '-')
-		return 0;	/* `---' is acceptable */
-	return 1;
+    if (c == '-')
+    {
+        if (edit_get_byte (edit, p + 1) == '-')
+            if (edit_get_byte (edit, p + 2) == '-')
+                return 0;       /* `---' is acceptable */
+        return 1;
     }
     if (strchr (NO_FORMAT_CHARS_START, c))
-	return 1;
+        return 1;
     return 0;
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Find the start of the current paragraph for the purpose of formatting.
  * Return position in the file.
  */
+
 static long
-begin_paragraph (WEdit *edit, int force)
+begin_paragraph (WEdit * edit, int force)
 {
     long i;
-    for (i = edit->curs_line - 1; i >= 0; i--) {
-	if (line_is_blank (edit, i)) {
-	    i++;
-	    break;
-	}
-	if (force) {
-	    if (bad_line_start (edit, line_start (edit, i))) {
-		i++;
-		break;
-	    }
-	}
+    for (i = edit->curs_line - 1; i >= 0; i--)
+    {
+        if (line_is_blank (edit, i))
+        {
+            i++;
+            break;
+        }
+        if (force)
+        {
+            if (bad_line_start (edit, line_start (edit, i)))
+            {
+                i++;
+                break;
+            }
+        }
     }
-    return edit_move_backward (edit, edit_bol (edit, edit->curs1),
-			       edit->curs_line - i);
+    return edit_move_backward (edit, edit_bol (edit, edit->curs1), edit->curs_line - i);
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Find the end of the current paragraph for the purpose of formatting.
  * Return position in the file.
  */
+
 static long
-end_paragraph (WEdit *edit, int force)
+end_paragraph (WEdit * edit, int force)
 {
     int i;
-    for (i = edit->curs_line + 1; i <= edit->total_lines; i++) {
-	if (line_is_blank (edit, i)) {
-	    i--;
-	    break;
-	}
-	if (force)
-	    if (bad_line_start (edit, line_start (edit, i))) {
-		i--;
-		break;
-	    }
+    for (i = edit->curs_line + 1; i <= edit->total_lines; i++)
+    {
+        if (line_is_blank (edit, i))
+        {
+            i--;
+            break;
+        }
+        if (force)
+            if (bad_line_start (edit, line_start (edit, i)))
+            {
+                i--;
+                break;
+            }
     }
     return edit_eol (edit,
-		     edit_move_forward (edit, edit_bol (edit, edit->curs1),
-					i - edit->curs_line, 0));
+                     edit_move_forward (edit, edit_bol (edit, edit->curs1),
+                                        i - edit->curs_line, 0));
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static unsigned char *
-get_paragraph (WEdit *edit, long p, long q, int indent, int *size)
+get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
 {
     unsigned char *s, *t;
 #if 0
-    t = g_try_malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length +
-		  10);
+    t = g_try_malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length + 10);
 #else
     t = g_try_malloc (2 * (q - p) + 100);
 #endif
     if (t == NULL)
-	return NULL;
-    for (s = t; p < q; p++, s++) {
-	if (indent)
-	    if (edit_get_byte (edit, p - 1) == '\n')
-		while (strchr ("\t ", edit_get_byte (edit, p)))
-		    p++;
-	*s = edit_get_byte (edit, p);
+        return NULL;
+    for (s = t; p < q; p++, s++)
+    {
+        if (indent)
+            if (edit_get_byte (edit, p - 1) == '\n')
+                while (strchr ("\t ", edit_get_byte (edit, p)))
+                    p++;
+        *s = edit_get_byte (edit, p);
     }
     *size = (unsigned long) s - (unsigned long) t;
     t[*size] = '\n';
     return t;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 strip_newlines (unsigned char *t, int size)
 {
     unsigned char *p = t;
-    while (size-- != 0) {
-	if (*p == '\n')
-	    *p = ' ';
-	p++;
+    while (size-- != 0)
+    {
+        if (*p == '\n')
+            *p = ' ';
+        p++;
     }
 }
 
-/*
+/* --------------------------------------------------------------------------------------------- */
+/**
    This function calculates the number of chars in a line specified to length l in pixels
  */
+
 static inline int
 next_tab_pos (int x)
 {
     return x += tab_width - x % tab_width;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline int
 line_pixel_length (unsigned char *t, long b, int l)
 {
     int x = 0, c, xn = 0;
-    for (;;) {
-	c = t[b];
-	switch (c) {
-	case '\n':
-	    return b;
-	case '\t':
-	    xn = next_tab_pos (x);
-	    break;
-	default:
-	    xn = x + 1;
-	    break;
-	}
-	if (xn > l)
-	    break;
-	x = xn;
-	b++;
+    for (;;)
+    {
+        c = t[b];
+        switch (c)
+        {
+        case '\n':
+            return b;
+        case '\t':
+            xn = next_tab_pos (x);
+            break;
+        default:
+            xn = x + 1;
+            break;
+        }
+        if (xn > l)
+            break;
+        x = xn;
+        b++;
     }
     return b;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 next_word_start (unsigned char *t, int q, int size)
@@ -211,44 +250,51 @@ next_word_start (unsigned char *t, int q, int size)
     int i;
     int saw_ws = 0;
 
-    for (i = q; i < size; i++) {
-	switch (t[i]) {
-	case '\n':
-	    return -1;
-	case '\t':
-	case ' ':
-	    saw_ws = 1;
-	    break;
-	default:
-	    if (saw_ws != 0)
-		return i;
-	    break;
-	}
+    for (i = q; i < size; i++)
+    {
+        switch (t[i])
+        {
+        case '\n':
+            return -1;
+        case '\t':
+        case ' ':
+            saw_ws = 1;
+            break;
+        default:
+            if (saw_ws != 0)
+                return i;
+            break;
+        }
     }
     return -1;
 }
 
-/* find the start of a word */
+/* --------------------------------------------------------------------------------------------- */
+/** find the start of a word */
+
 static inline int
 word_start (unsigned char *t, int q, int size)
 {
     int i = q;
     if (t[q] == ' ' || t[q] == '\t')
-	return next_word_start (t, q, size);
-    for (;;) {
-	int c;
-	if (!i)
-	    return -1;
-	c = t[i - 1];
-	if (c == '\n')
-	    return -1;
-	if (c == ' ' || c == '\t')
-	    return i;
-	i--;
+        return next_word_start (t, q, size);
+    for (;;)
+    {
+        int c;
+        if (!i)
+            return -1;
+        c = t[i - 1];
+        if (c == '\n')
+            return -1;
+        if (c == ' ' || c == '\t')
+            return i;
+        i--;
     }
 }
 
-/* replaces ' ' with '\n' to properly format a paragraph */
+/* --------------------------------------------------------------------------------------------- */
+/** replaces ' ' with '\n' to properly format a paragraph */
+
 static inline void
 format_this (unsigned char *t, int size, int indent)
 {
@@ -256,27 +302,30 @@ format_this (unsigned char *t, int size, int indent)
     strip_newlines (t, size);
     ww = option_word_wrap_line_length * FONT_MEAN_WIDTH - indent;
     if (ww < FONT_MEAN_WIDTH * 2)
-	ww = FONT_MEAN_WIDTH * 2;
-    for (;;) {
-	int p;
-	q = line_pixel_length (t, q, ww);
-	if (q > size)
-	    break;
-	if (t[q] == '\n')
-	    break;
-	p = word_start (t, q, size);
-	if (p == -1)
-	    q = next_word_start (t, q, size);	/* Return the end of the word if the beginning
-						   of the word is at the beginning of a line
-						   (i.e. a very long word) */
-	else
-	    q = p;
-	if (q == -1)	/* end of paragraph */
-	    break;
-	if (q)
-	    t[q - 1] = '\n';
+        ww = FONT_MEAN_WIDTH * 2;
+    for (;;)
+    {
+        int p;
+        q = line_pixel_length (t, q, ww);
+        if (q > size)
+            break;
+        if (t[q] == '\n')
+            break;
+        p = word_start (t, q, size);
+        if (p == -1)
+            q = next_word_start (t, q, size);   /* Return the end of the word if the beginning
+                                                   of the word is at the beginning of a line
+                                                   (i.e. a very long word) */
+        else
+            q = p;
+        if (q == -1)            /* end of paragraph */
+            break;
+        if (q)
+            t[q - 1] = '\n';
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 replace_at (WEdit * edit, long q, int c)
@@ -286,7 +335,9 @@ replace_at (WEdit * edit, long q, int c)
     edit_insert_ahead (edit, c);
 }
 
-/* replaces a block of text */
+/* --------------------------------------------------------------------------------------------- */
+/** replaces a block of text */
+
 static inline void
 put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
 {
@@ -294,37 +345,47 @@ put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
     int i, c = 0;
     cursor = edit->curs1;
     if (indent)
-	while (strchr ("\t ", edit_get_byte (edit, p)))
-	    p++;
-    for (i = 0; i < size; i++, p++) {
-	if (i && indent) {
-	    if (t[i - 1] == '\n' && c == '\n') {
-		while (strchr ("\t ", edit_get_byte (edit, p)))
-		    p++;
-	    } else if (t[i - 1] == '\n') {
-		long curs;
-		edit_cursor_move (edit, p - edit->curs1);
-		curs = edit->curs1;
-		edit_insert_indent (edit, indent);
-		if (cursor >= curs)
-		    cursor += edit->curs1 - p;
-		p = edit->curs1;
-	    } else if (c == '\n') {
-		edit_cursor_move (edit, p - edit->curs1);
-		while (strchr ("\t ", edit_get_byte (edit, p))) {
-		    edit_delete (edit, 1);
-		    if (cursor > edit->curs1)
-			cursor--;
-		}
-		p = edit->curs1;
-	    }
-	}
-	c = edit_get_byte (edit, p);
-	if (c != t[i])
-	    replace_at (edit, p, t[i]);
+        while (strchr ("\t ", edit_get_byte (edit, p)))
+            p++;
+    for (i = 0; i < size; i++, p++)
+    {
+        if (i && indent)
+        {
+            if (t[i - 1] == '\n' && c == '\n')
+            {
+                while (strchr ("\t ", edit_get_byte (edit, p)))
+                    p++;
+            }
+            else if (t[i - 1] == '\n')
+            {
+                long curs;
+                edit_cursor_move (edit, p - edit->curs1);
+                curs = edit->curs1;
+                edit_insert_indent (edit, indent);
+                if (cursor >= curs)
+                    cursor += edit->curs1 - p;
+                p = edit->curs1;
+            }
+            else if (c == '\n')
+            {
+                edit_cursor_move (edit, p - edit->curs1);
+                while (strchr ("\t ", edit_get_byte (edit, p)))
+                {
+                    edit_delete (edit, 1);
+                    if (cursor > edit->curs1)
+                        cursor--;
+                }
+                p = edit->curs1;
+            }
+        }
+        c = edit_get_byte (edit, p);
+        if (c != t[i])
+            replace_at (edit, p, t[i]);
     }
-    edit_cursor_move (edit, cursor - edit->curs1);	/* restore cursor position */
+    edit_cursor_move (edit, cursor - edit->curs1);      /* restore cursor position */
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline int
 test_indent (WEdit * edit, long p, long q)
@@ -332,45 +393,54 @@ test_indent (WEdit * edit, long p, long q)
     int indent;
     indent = edit_indent_width (edit, p++);
     if (!indent)
-	return 0;
+        return 0;
     for (; p < q; p++)
-	if (edit_get_byte (edit, p - 1) == '\n')
-	    if (indent != edit_indent_width (edit, p))
-		return 0;
+        if (edit_get_byte (edit, p - 1) == '\n')
+            if (indent != edit_indent_width (edit, p))
+                return 0;
     return indent;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
-format_paragraph (WEdit *edit, int force)
+format_paragraph (WEdit * edit, int force)
 {
     long p, q;
     int size;
     unsigned char *t;
     int indent = 0;
     if (option_word_wrap_line_length < 2)
-	return;
+        return;
     if (line_is_blank (edit, edit->curs_line))
-	return;
+        return;
     p = begin_paragraph (edit, force);
     q = end_paragraph (edit, force);
     indent = test_indent (edit, p, q);
     t = get_paragraph (edit, p, q, indent, &size);
     if (!t)
-	return;
-    if (!force) {
-	int i;
-	if (strchr (NO_FORMAT_CHARS_START, *t)) {
-	    g_free (t);
-	    return;
-	}
-	for (i = 0; i < size - 1; i++) {
-	    if (t[i] == '\n') {
-		if (strchr (NO_FORMAT_CHARS_START "\t ", t[i + 1])) {
-		    g_free (t);
-		    return;
-		}
-	    }
-	}
+        return;
+    if (!force)
+    {
+        int i;
+        if (strchr (NO_FORMAT_CHARS_START, *t))
+        {
+            g_free (t);
+            return;
+        }
+        for (i = 0; i < size - 1; i++)
+        {
+            if (t[i] == '\n')
+            {
+                if (strchr (NO_FORMAT_CHARS_START "\t ", t[i + 1]))
+                {
+                    g_free (t);
+                    return;
+                }
+            }
+        }
     }
     format_this (t, q - p, indent);
     put_paragraph (edit, t, p, indent, size);
@@ -379,3 +449,5 @@ format_paragraph (WEdit *edit, int force)
     /* Scroll left as much as possible to show the formatted paragraph */
     edit_scroll_left (edit, -edit->start_col);
 }
+
+/* --------------------------------------------------------------------------------------------- */

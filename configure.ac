@@ -548,7 +548,6 @@ contrib/dist/debian/Makefile
 contrib/dist/gentoo/Makefile
 contrib/dist/redhat/Makefile
 contrib/dist/redhat/mc.spec
-contrib/dist/mc.qpg
 contrib/dist/pkginfo
 contrib/dist/prototype
 
@@ -562,6 +561,7 @@ src/editor/Makefile
 src/man2hlp/Makefile
 src/viewer/Makefile
 src/diffviewer/Makefile
+src/filemanager/Makefile
 
 lib/Makefile
 lib/filehighlight/Makefile
@@ -598,8 +598,8 @@ lib/vfs/mc-vfs/extfs/ulha
 lib/vfs/mc-vfs/extfs/urar
 lib/vfs/mc-vfs/extfs/uzip
 lib/vfs/mc-vfs/extfs/uzoo
-
 lib/vfs/mc-vfs/fish/Makefile
+lib/widget/Makefile
 
 misc/syntax/Makefile
 

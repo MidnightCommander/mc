@@ -31,6 +31,14 @@
 #include "lib/global.h"
 #include "src/textconf.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
 #ifdef ENABLE_VFS
 static const char *const vfs_supported[] = {
 #ifdef ENABLE_VFS_CPIO
@@ -46,7 +54,7 @@ static const char *const vfs_supported[] = {
     "extfs",
 #endif
 #ifdef ENABLE_VFS_UNDELFS
-    "undelfs",
+    "ext2undelfs",
 #endif
 #ifdef ENABLE_VFS_FTP
     "ftpfs",
@@ -59,40 +67,30 @@ static const char *const vfs_supported[] = {
 #endif /* ENABLE_VFS_SMB */
     NULL
 };
-#endif				/* ENABLE_VFS */
-
+#endif /* ENABLE_VFS */
 
 static const char *const features[] = {
+#ifdef HAVE_SLANG
+    N_("Using the S-Lang library with terminfo database\n"),
+#elif defined(USE_NCURSES)
+    N_("Using the ncurses library\n"),
+#elif defined(USE_NCURSESW)
+    N_("Using the ncursesw library\n"),
+#else
+#error "Cannot compile mc without S-Lang or ncurses"
+#endif /* !HAVE_SLANG && !USE_NCURSES */
+
 #ifdef USE_INTERNAL_EDIT
     N_("With builtin Editor\n"),
 #endif
 
-#ifdef HAVE_SLANG
-
-    N_("Using system-installed S-Lang library"),
-
-    " ",
-
-    N_("with terminfo database"),
-
-#elif defined(USE_NCURSES)
-    N_("Using the ncurses library"),
-#elif defined(USE_NCURSESW)
-    N_("Using the ncursesw library"),
-#else
-#error "Cannot compile mc without S-Lang or ncurses"
-#endif				/* !HAVE_SLANG && !USE_NCURSES */
-
-    "\n",
-
 #ifdef HAVE_SUBSHELL_SUPPORT
-#   ifdef SUBSHELL_OPTIONAL
-    N_("With optional subshell support"),
-#   else
-    N_("With subshell support as default"),
-#   endif
-    "\n",
-#endif				/* !HAVE_SUBSHELL_SUPPORT */
+#ifdef SUBSHELL_OPTIONAL
+    N_("With optional subshell support\n"),
+#else
+    N_("With subshell support as default\n"),
+#endif
+#endif /* !HAVE_SUBSHELL_SUPPORT */
 
 #ifdef WITH_BACKGROUND
     N_("With support for background operations\n"),
@@ -119,6 +117,13 @@ static const char *const features[] = {
     NULL
 };
 
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
 show_version (void)
 {
@@ -126,26 +131,30 @@ show_version (void)
 
     printf (_("GNU Midnight Commander %s\n"), VERSION);
 
+    printf (_("Built with GLib %d.%d.%d\n"),
+            GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION, GLIB_MICRO_VERSION);
+
+    for (i = 0; features[i] != NULL; i++)
+        printf ("%s", _(features[i]));
+
 #ifdef ENABLE_VFS
     printf (_("Virtual File Systems:"));
     for (i = 0; vfs_supported[i] != NULL; i++)
-	printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
-
+        printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
     printf ("\n");
-#endif				/* ENABLE_VFS */
+#endif /* ENABLE_VFS */
 
-    for (i = 0; features[i] != NULL; i++)
-	printf ("%s", _(features[i]));
-
-    (void)printf(_("Data types:"));
+    (void) printf (_("Data types:"));
 #define TYPE_INFO(T) \
     (void)printf(" %s: %d;", #T, (int) (CHAR_BIT * sizeof(T)))
-    TYPE_INFO(char);
-    TYPE_INFO(int);
-    TYPE_INFO(long);
-    TYPE_INFO(void *);
-    TYPE_INFO(size_t);
-    TYPE_INFO(off_t);
+    TYPE_INFO (char);
+    TYPE_INFO (int);
+    TYPE_INFO (long);
+    TYPE_INFO (void *);
+    TYPE_INFO (size_t);
+    TYPE_INFO (off_t);
 #undef TYPE_INFO
-    (void)printf("\n");
+    (void) printf ("\n");
 }
+
+/* --------------------------------------------------------------------------------------------- */

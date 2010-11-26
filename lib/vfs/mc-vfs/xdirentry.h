@@ -5,11 +5,13 @@
  */
 
 
-#ifndef MC_VFS_XDIRENTRY_H
-#define MC_VFS_XDIRENTRY_H
+#ifndef MC__VFS_XDIRENTRY_H
+#define MC__VFS_XDIRENTRY_H
 
 #include <stdio.h>
 #include <sys/types.h>
+
+/*** typedefs(not structures) and defined constants **********************************************/
 
 #define LINK_FOLLOW 15
 #define LINK_NO_FOLLOW -1
@@ -31,6 +33,21 @@
 #define VFS_S_REMOTE 1
 #define VFS_S_READONLY 2
 
+#define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
+
+#define MEDATA ((struct vfs_s_subclass *) me->data)
+
+#define FH ((struct vfs_s_fh *) fh)
+#define FH_SUPER FH->ino->super
+
+#define LS_NOT_LINEAR 0
+#define LS_LINEAR_CLOSED 1
+#define LS_LINEAR_OPEN 2
+#define LS_LINEAR_PREOPEN 3
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
 
 /* Single connection or archive */
 struct vfs_s_super
@@ -70,7 +87,7 @@ struct vfs_s_super
             int host_flags;
             char *scr_env;
         } fish;
-#endif /* ENABLE_VFS_FISH */
+#endif                          /* ENABLE_VFS_FISH */
 #ifdef ENABLE_VFS_FTP
         struct
         {
@@ -80,29 +97,29 @@ struct vfs_s_super
             char *password;
             int port;
 
-            char *proxy;                /* proxy server, NULL if no proxy */
+            char *proxy;        /* proxy server, NULL if no proxy */
             int failed_on_login;        /* used to pass the failure reason to upper levels */
             int use_passive_connection;
             int remote_is_amiga;        /* No leading slash allowed for AmiTCP (Amiga) */
             int isbinary;
-            int cwd_deferred;           /* current_directory was changed but CWD command hasn't
-                                           been sent yet */
-            int strict;                 /* ftp server doesn't understand
-                                         * "LIST -la <path>"; use "CWD <path>"/
-                                         * "LIST" instead
-                                         */
+            int cwd_deferred;   /* current_directory was changed but CWD command hasn't
+                                   been sent yet */
+            int strict;         /* ftp server doesn't understand
+                                 * "LIST -la <path>"; use "CWD <path>"/
+                                 * "LIST" instead
+                                 */
             int ctl_connection_busy;
         } ftp;
-#endif /* ENABLE_VFS_FTP */
+#endif                          /* ENABLE_VFS_FTP */
 #if defined(ENABLE_VFS_CPIO) || defined(ENABLE_VFS_TAR)
         struct
         {
             int fd;
             struct stat st;
-            int type;                     /* Type of the archive */
-            struct defer_inode *deferred; /* List of inodes for which another entries may appear */
+            int type;           /* Type of the archive */
+            struct defer_inode *deferred;       /* List of inodes for which another entries may appear */
         } arch;
-#endif /* ENABLE_VFS_CPIO || ENABLE_VFS_TAR */
+#endif                          /* ENABLE_VFS_CPIO || ENABLE_VFS_TAR */
     } u;
 };
 
@@ -149,13 +166,13 @@ struct vfs_s_fh
             off_t got, total;
             int append;
         } fish;
-#endif /* ENABLE_VFS_FISH */
+#endif                          /* ENABLE_VFS_FISH */
 #ifdef ENABLE_VFS_FTP
         struct
         {
             int sock, append;
         } ftp;
-#endif /* ENABLE_VFS_FTP */
+#endif                          /* ENABLE_VFS_FTP */
     } u;
 };
 
@@ -198,6 +215,9 @@ struct vfs_s_subclass
     void (*linear_close) (struct vfs_class * me, struct vfs_s_fh * fh);
 };
 
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
 
 /* entries and inodes */
 struct vfs_s_inode *vfs_s_new_inode (struct vfs_class *me,
@@ -229,16 +249,5 @@ int vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, 
 /* misc */
 int vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino);
 
-#define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
-
-#define MEDATA ((struct vfs_s_subclass *) me->data)
-
-#define FH ((struct vfs_s_fh *) fh)
-#define FH_SUPER FH->ino->super
-
-#define LS_NOT_LINEAR 0
-#define LS_LINEAR_CLOSED 1
-#define LS_LINEAR_OPEN 2
-#define LS_LINEAR_PREOPEN 3
-
+/*** inline functions ****************************************************************************/
 #endif

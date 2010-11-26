@@ -12,7 +12,7 @@
 /* Beware! When using Slang with color, not all the indexes are free.
    See color-slang.h (A_*) */
 
-/* cache often used colors*/
+/* cache often used colors */
 #define DEFAULT_COLOR             mc_skin_color__cache[0]
 #define NORMAL_COLOR              mc_skin_color__cache[1]
 #define MARKED_COLOR              mc_skin_color__cache[2]
@@ -102,7 +102,8 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_skin_struct {
+typedef struct mc_skin_struct
+{
     gchar *name;
     gchar *description;
     mc_config_t *config;
@@ -123,6 +124,6 @@ int mc_skin_color_get (const gchar *, const gchar *);
 
 void mc_skin_lines_parse_ini_file (mc_skin_t *);
 
-gchar *mc_skin_get(const gchar *, const gchar *, const gchar *);
+gchar *mc_skin_get (const gchar *, const gchar *, const gchar *);
 
 #endif /* MC_SKIN_H */

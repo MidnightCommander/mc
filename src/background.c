@@ -44,11 +44,24 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
-#include "background.h"
-#include "wtools.h"
-#include "layout.h"             /* repaint_screen() */
-#include "fileopctx.h"          /* FileOpContext */
 #include "lib/tty/key.h"        /* add_select_channel(), delete_select_channel() */
+#include "lib/widget.h"         /* message() */
+
+#include "filemanager/layout.h" /* repaint_screen() */
+#include "filemanager/fileopctx.h"      /* FileOpContext */
+
+#include "background.h"
+
+/*** global variables ****************************************************************************/
+
+#define MAXCALLARGS 4           /* Number of arguments supported */
+
+/* If true, this is a background process */
+int we_are_background = 0;
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
 
 enum ReturnType
 {
@@ -56,8 +69,7 @@ enum ReturnType
     Return_Integer
 };
 
-/* If true, this is a background process */
-int we_are_background = 0;
+/*** file scope variables ************************************************************************/
 
 /* File descriptor for talking to our parent */
 static int parent_fd;
@@ -65,11 +77,12 @@ static int parent_fd;
 /* File descriptor for messages from our parent */
 static int from_parent_fd;
 
-#define MAXCALLARGS 4           /* Number of arguments supported */
-
 struct TaskList *task_list = NULL;
 
 static int background_attention (int fd, void *closure);
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 register_task_running (FileOpContext * ctx, pid_t pid, int fd, int to_child, char *info)
@@ -87,6 +100,8 @@ register_task_running (FileOpContext * ctx, pid_t pid, int fd, int to_child, cha
 
     add_select_channel (fd, background_attention, ctx);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 destroy_task_and_return_fd (pid_t pid)
@@ -114,91 +129,7 @@ destroy_task_and_return_fd (pid_t pid)
     return -1;
 }
 
-void
-unregister_task_running (pid_t pid, int fd)
-{
-    destroy_task_and_return_fd (pid);
-    delete_select_channel (fd);
-}
-
-void
-unregister_task_with_pid (pid_t pid)
-{
-    int fd = destroy_task_and_return_fd (pid);
-    if (fd != -1)
-        delete_select_channel (fd);
-}
-
-/*
- * Try to make the Midnight Commander a background job
- *
- * Returns:
- *  1 for parent
- *  0 for child
- * -1 on failure
- */
-int
-do_background (struct FileOpContext *ctx, char *info)
-{
-    int comm[2];                /* control connection stream */
-    int back_comm[2];           /* back connection */
-    pid_t pid;
-
-    if (pipe (comm) == -1)
-        return -1;
-
-    if (pipe (back_comm) == -1)
-        return -1;
-
-    pid = fork ();
-    if (pid == -1)
-    {
-        int saved_errno = errno;
-
-        (void) close (comm[0]);
-        (void) close (comm[1]);
-        (void) close (back_comm[0]);
-        (void) close (back_comm[1]);
-        errno = saved_errno;
-        return -1;
-    }
-
-    if (pid == 0)
-    {
-        int nullfd;
-
-        parent_fd = comm[1];
-        from_parent_fd = back_comm[0];
-
-        we_are_background = 1;
-        top_dlg = NULL;
-
-        /* Make stdin/stdout/stderr point somewhere */
-        close (0);
-        close (1);
-        close (2);
-
-        nullfd = open ("/dev/null", O_RDWR);
-        if (nullfd != -1)
-        {
-            while (dup2 (nullfd, 0) == -1 && errno == EINTR)
-                ;
-            while (dup2 (nullfd, 1) == -1 && errno == EINTR)
-                ;
-            while (dup2 (nullfd, 2) == -1 && errno == EINTR)
-                ;
-        }
-
-        return 0;
-    }
-    else
-    {
-        ctx->pid = pid;
-        register_task_running (ctx, pid, comm[0], back_comm[1], info);
-        return 1;
-    }
-}
-
+/* --------------------------------------------------------------------------------------------- */
 /* {{{ Parent handlers */
 
 /* Parent/child protocol
@@ -236,7 +167,7 @@ do_background (struct FileOpContext *ctx, char *info)
  */
 /*
  * Receive requests from background process and invoke the
- * specified routine 
+ * specified routine
  */
 
 static int
@@ -453,6 +384,7 @@ background_attention (int fd, void *closure)
 }
 
 
+/* --------------------------------------------------------------------------------------------- */
 /* }}} */
 
 /* {{{ client RPC routines */
@@ -461,6 +393,7 @@ background_attention (int fd, void *closure)
  * operation context is not NULL, then it requests that the first parameter of
  * the call be a file operation context.
  */
+
 static void
 parent_call_header (void *routine, int argc, enum ReturnType type, FileOpContext * ctx)
 {
@@ -477,6 +410,101 @@ parent_call_header (void *routine, int argc, enum ReturnType type, FileOpContext
     if (have_ctx)
         ret = write (parent_fd, ctx, sizeof (FileOpContext));
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
+unregister_task_running (pid_t pid, int fd)
+{
+    destroy_task_and_return_fd (pid);
+    delete_select_channel (fd);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+unregister_task_with_pid (pid_t pid)
+{
+    int fd = destroy_task_and_return_fd (pid);
+    if (fd != -1)
+        delete_select_channel (fd);
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Try to make the Midnight Commander a background job
+ *
+ * Returns:
+ *  1 for parent
+ *  0 for child
+ * -1 on failure
+ */
+int
+do_background (struct FileOpContext *ctx, char *info)
+{
+    int comm[2];                /* control connection stream */
+    int back_comm[2];           /* back connection */
+    pid_t pid;
+
+    if (pipe (comm) == -1)
+        return -1;
+
+    if (pipe (back_comm) == -1)
+        return -1;
+
+    pid = fork ();
+    if (pid == -1)
+    {
+        int saved_errno = errno;
+
+        (void) close (comm[0]);
+        (void) close (comm[1]);
+        (void) close (back_comm[0]);
+        (void) close (back_comm[1]);
+        errno = saved_errno;
+        return -1;
+    }
+
+    if (pid == 0)
+    {
+        int nullfd;
+
+        parent_fd = comm[1];
+        from_parent_fd = back_comm[0];
+
+        we_are_background = 1;
+        top_dlg = NULL;
+
+        /* Make stdin/stdout/stderr point somewhere */
+        close (0);
+        close (1);
+        close (2);
+
+        nullfd = open ("/dev/null", O_RDWR);
+        if (nullfd != -1)
+        {
+            while (dup2 (nullfd, 0) == -1 && errno == EINTR)
+                ;
+            while (dup2 (nullfd, 1) == -1 && errno == EINTR)
+                ;
+            while (dup2 (nullfd, 2) == -1 && errno == EINTR)
+                ;
+        }
+
+        return 0;
+    }
+    else
+    {
+        ctx->pid = pid;
+        register_task_running (ctx, pid, comm[0], back_comm[1], info);
+        return 1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
@@ -504,6 +532,8 @@ parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
 
     return i;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 parent_call_string (void *routine, int argc, ...)
@@ -538,5 +568,7 @@ parent_call_string (void *routine, int argc, ...)
     str[i] = 0;
     return str;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif /* WITH_BACKGROUND */

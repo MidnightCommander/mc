@@ -1,15 +1,17 @@
-#ifndef MC_VIEWER_INLINES_H
-#define MC_VIEWER_INLINES_H
+#ifndef MC__VIEWER_INLINES_H
+#define MC__VIEWER_INLINES_H
 
-/*** typedefs(not structures) and defined constants ********************/
+#include <assert.h>
 
-/*** enums *************************************************************/
+/*** typedefs(not structures) and defined constants **********************************************/
 
-/*** structures declarations (and typedefs of structures)***************/
+/*** enums ***************************************************************************************/
 
-/*** global variables defined in .c file *******************************/
+/*** structures declarations (and typedefs of structures)*****************************************/
 
-/*** declarations of public functions **********************************/
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
 
 /*** inline functions ****************************************************************************/
 
@@ -163,4 +165,4 @@ mcview_is_nroff_sequence (mcview_t * view, off_t offset)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif
+#endif /* MC__VIEWER_INLINES_H */

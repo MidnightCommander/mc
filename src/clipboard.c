@@ -31,11 +31,31 @@
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
+#include "lib/util.h"
 
 #include "main.h"
 #include "src/execute.h"
 
 #include "clipboard.h"
+
+/*** global variables ****************************************************************************/
+
+/* path to X clipboard utility */
+char *clipboard_store_path = NULL;
+char *clipboard_paste_path = NULL;
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 copy_file_to_ext_clip (void)
@@ -44,7 +64,7 @@ copy_file_to_ext_clip (void)
     int res = 0;
     const char *d = getenv ("DISPLAY");
 
-    if (d == NULL || clipboard_store_path == NULL || clipboard_store_path[0] =='\0')
+    if (d == NULL || clipboard_store_path == NULL || clipboard_store_path[0] == '\0')
         return FALSE;
 
     tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
@@ -57,6 +77,8 @@ copy_file_to_ext_clip (void)
     g_free (tmp);
     return TRUE;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 paste_to_file_from_ext_clip (void)
@@ -78,3 +100,5 @@ paste_to_file_from_ext_clip (void)
     g_free (tmp);
     return TRUE;
 }
+
+/* --------------------------------------------------------------------------------------------- */

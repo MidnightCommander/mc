@@ -81,6 +81,7 @@ mc_skin_color_remove_from_hash (mc_skin_t * mc_skin, const gchar * group, const 
     g_hash_table_remove (mc_skin->colors, (gpointer) kname);
 }
 #endif
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -203,7 +204,7 @@ mc_skin_color_cache_init (void)
     MARKED_COLOR = mc_skin_color_get ("core", "marked");
     SELECTED_COLOR = mc_skin_color_get ("core", "selected");
     MARKED_SELECTED_COLOR = mc_skin_color_get ("core", "markselect");
-    DISABLED_COLOR =  mc_skin_color_get ("core", "disabled");
+    DISABLED_COLOR = mc_skin_color_get ("core", "disabled");
     REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
     HEADER_COLOR = mc_skin_color_get ("core", "header");
     COMMAND_MARK_COLOR = mc_skin_color_get ("core", "commandlinemark");

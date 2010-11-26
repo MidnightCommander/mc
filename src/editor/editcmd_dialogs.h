@@ -15,7 +15,8 @@ struct etags_hash_struct;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct selection {
+struct selection
+{
     gchar *text;
     gsize len;
 };
@@ -36,4 +37,5 @@ void editcmd_dialog_select_definition_show (WEdit *, char *, int, int, struct et
                                             int);
 
 int editcmd_dialog_replace_prompt_show (WEdit *, char *, char *, int, int);
-#endif
+/*** inline functions ****************************************************************************/
+#endif /* MC__EDITCMD_DIALOGS_H */

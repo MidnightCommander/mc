@@ -56,11 +56,16 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/util.h"           /* tilde_expand() */
 #include "lib/lock.h"
+#include "lib/widget.h"         /* query_dialog() */
 
-#include "src/wtools.h"         /* query_dialog() */
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
 
 #define BUF_SIZE 255
 #define PID_BUF_SIZE 10
+
+/*** file scope type declarations ****************************************************************/
 
 struct lock_s
 {
@@ -68,10 +73,15 @@ struct lock_s
     pid_t pid;
 };
 
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 /** \fn static char * lock_build_name (void)
  *  \brief builds user@host.domain.pid string (need to be freed)
  *  \return a pointer to lock filename
  */
+
 static char *
 lock_build_name (void)
 {
@@ -98,6 +108,8 @@ lock_build_name (void)
     return g_strdup_printf ("%s@%s.%d", user, host, (int) getpid ());
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 lock_build_symlink_name (const char *fname)
 {
@@ -116,7 +128,11 @@ lock_build_symlink_name (const char *fname)
     return symlink_name;
 }
 
-/* Extract pid from user@host.domain.pid string */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Extract pid from user@host.domain.pid string
+ */
+
 static struct lock_s *
 lock_extract_info (const char *str)
 {
@@ -148,7 +164,11 @@ lock_extract_info (const char *str)
     return &lock;
 }
 
-/* Extract user@host.domain.pid from lock file (static string)  */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Extract user@host.domain.pid from lock file (static string)
+ */
+
 static char *
 lock_get_info (const char *lockfname)
 {
@@ -162,10 +182,14 @@ lock_get_info (const char *lockfname)
     return buf;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* Tries to raise file lock
    Returns 1 on success,  0 on failure, -1 if abort
    Warning: Might do screen refresh and lose edit->force */
+
 int
 lock_file (const char *fname)
 {
@@ -183,13 +207,13 @@ lock_file (const char *fname)
     /* Locking on VFS is not supported */
     if (!vfs_file_is_local (fname))
     {
-        g_free (fname);
+        g_free ((gpointer) fname);
         return 0;
     }
 
     /* Check if already locked */
     lockfname = lock_build_symlink_name (fname);
-    g_free (fname);
+    g_free ((gpointer) fname);
     if (lockfname == NULL)
         return 0;
 
@@ -237,8 +261,12 @@ lock_file (const char *fname)
     return symlink_ok ? 1 : 0;
 }
 
-/* Lowers file lock if possible
-   Always returns 0 */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Lowers file lock if possible
+ * @returns  Always 0
+ */
+
 int
 unlock_file (const char *fname)
 {
@@ -251,7 +279,7 @@ unlock_file (const char *fname)
 
     fname = tilde_expand (fname);
     lockfname = lock_build_symlink_name (fname);
-    g_free (fname);
+    g_free ((gpointer) fname);
 
     if (lockfname == NULL)
         return 0;
@@ -279,3 +307,5 @@ unlock_file (const char *fname)
     g_free (lockfname);
     return 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */

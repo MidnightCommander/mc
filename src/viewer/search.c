@@ -38,9 +38,11 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "src/setup.h"
-#include "src/wtools.h"
 #include "lib/tty/tty.h"
+#include "lib/widget.h"
+
+#include "src/setup.h"
+
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
@@ -52,9 +54,8 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
-
-
 /* --------------------------------------------------------------------------------------------- */
+
 static void
 mcview_search_update_steps (mcview_t * view)
 {
@@ -143,9 +144,7 @@ mcview_search_show_result (mcview_t * view, Dlg_head ** d, size_t match_len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -277,7 +276,8 @@ mcview_do_search (mcview_t * view)
     }
     while (mcview_may_still_grow (view));
 
-    if (view->search_start != 0 && !isFound && need_search_again && !mcview_search_options.backwards)
+    if (view->search_start != 0 && !isFound && need_search_again
+        && !mcview_search_options.backwards)
     {
         int result;
         mcview_update (view);

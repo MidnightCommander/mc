@@ -27,14 +27,17 @@
  *  \date 1996, 1997
  */
 
-#ifndef MC_EDIT_IMPL_H
-#define MC_EDIT_IMPL_H
+#ifndef MC__EDIT_IMPL_H
+#define MC__EDIT_IMPL_H
 
 #include <stdio.h>
 
 #include "lib/search.h"         /* mc_search_type_t */
-#include "src/dialog.h"         /* cb_ret_t */
-#include "src/editor/edit.h"
+#include "lib/widget.h"         /* cb_ret_t */
+
+#include "edit.h"
+
+/*** typedefs(not structures) and defined constants **********************************************/
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF   (1 << 0)
 #define SEARCH_DIALOG_OPTION_NO_REGEX   (1 << 1)
@@ -95,26 +98,71 @@
 #define START_STACK_SIZE 32
 
 /* Some codes that may be pushed onto or returned from the undo stack */
-#define CURS_LEFT	601
-#define CURS_RIGHT	602
-#define DELCHAR		603
-#define BACKSPACE	604
-#define STACK_BOTTOM	605
-#define CURS_LEFT_LOTS	606
-#define CURS_RIGHT_LOTS	607
-#define COLUMN_ON	608
-#define COLUMN_OFF	609
-#define MARK_1		1000
-#define MARK_2		700000000
-#define KEY_PRESS	1400000000
+#define CURS_LEFT       601
+#define CURS_RIGHT      602
+#define DELCHAR         603
+#define BACKSPACE       604
+#define STACK_BOTTOM    605
+#define CURS_LEFT_LOTS  606
+#define CURS_RIGHT_LOTS 607
+#define COLUMN_ON       608
+#define COLUMN_OFF      609
+#define MARK_1          1000
+#define MARK_2          700000000
+#define KEY_PRESS       1400000000
 
 /* Tabs spaces: (sofar only HALF_TAB_SIZE is used: */
-#define TAB_SIZE		option_tab_spacing
-#define HALF_TAB_SIZE		((int) option_tab_spacing / 2)
+#define TAB_SIZE      option_tab_spacing
+#define HALF_TAB_SIZE ((int) option_tab_spacing / 2)
 
 /* max count stack files */
 #define MAX_HISTORY_MOVETO     50
-#define LINE_STATE_WIDTH	8
+#define LINE_STATE_WIDTH 8
+
+#define LB_NAMES (LB_MAC + 1)
+
+#define get_sys_error(s) (s)
+
+#define edit_error_dialog(h,s) query_dialog (h, s, D_ERROR, 1, _("&Dismiss"))
+
+#define edit_query_dialog2(h,t,a,b) query_dialog (h, t, D_NORMAL, 2, a, b)
+#define edit_query_dialog3(h,t,a,b,c) query_dialog (h, t, D_NORMAL, 3, a, b, c)
+
+#ifndef MAX_PATH_LEN
+#ifdef PATH_MAX
+#define MAX_PATH_LEN PATH_MAX
+#else
+#define MAX_PATH_LEN 1024
+#endif
+#endif
+
+/*** enums ***************************************************************************************/
+
+/* type for file which is currently being edited */
+typedef enum
+{
+    EDIT_FILE_COMMON = 0,
+    EDIT_FILE_SYNTAX = 1,
+    EDIT_FILE_MENU = 2
+} edit_current_file_t;
+
+/* line breaks */
+typedef enum
+{
+    LB_ASIS = 0,
+    LB_UNIX,
+    LB_WIN,
+    LB_MAC
+} LineBreaks;
+
+typedef enum
+{
+    EDIT_QUICK_SAVE = 0,
+    EDIT_SAFE_SAVE,
+    EDIT_DO_BACKUP
+} edit_save_mode_t;
+
+/*** structures declarations (and typedefs of structures)*****************************************/
 
 /* search/replace options */
 typedef struct edit_search_options_t
@@ -139,30 +187,35 @@ struct macro
     int ch;
 };
 
-/* type for file which is currently being edited */
-typedef enum
-{
-    EDIT_FILE_COMMON = 0,
-    EDIT_FILE_SYNTAX = 1,
-    EDIT_FILE_MENU = 2
-} edit_current_file_t;
-
-/* line breaks */
-typedef enum
-{
-    LB_ASIS = 0,
-    LB_UNIX,
-    LB_WIN,
-    LB_MAC
-} LineBreaks;
-#define LB_NAMES (LB_MAC + 1)
-
 struct Widget;
 struct WMenuBar;
+
+/*** global variables defined in .c file *********************************************************/
 
 extern const char VERTICAL_MAGIC[5];
 /* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
 extern int enable_show_tabs_tws;
+
+extern edit_search_options_t edit_search_options;
+
+extern int edit_stack_iterator;
+extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
+
+extern int option_line_state_width;
+
+extern int option_max_undo;
+extern int option_auto_syntax;
+
+extern int option_edit_right_extreme;
+extern int option_edit_left_extreme;
+extern int option_edit_top_extreme;
+extern int option_edit_bottom_extreme;
+
+extern const char *option_whole_chars_search;
+extern gboolean search_create_bookmark;
+
+/*** declarations of public functions ************************************************************/
+
 int edit_drop_hotkey_menu (WEdit * e, int key);
 void edit_menu_cmd (WEdit * e);
 void edit_init_menu (struct WMenuBar *menubar);
@@ -193,7 +246,7 @@ void edit_update_curs_row (WEdit * edit);
 void edit_update_curs_col (WEdit * edit);
 void edit_find_bracket (WEdit * edit);
 int edit_reload_line (WEdit * edit, const char *filename, long line);
-void edit_set_codeset (WEdit *edit);
+void edit_set_codeset (WEdit * edit);
 
 void edit_block_copy_cmd (WEdit * edit);
 void edit_block_move_cmd (WEdit * edit);
@@ -298,44 +351,6 @@ unsigned int edit_lock_file (WEdit * edit);
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);
 
-#define get_sys_error(s) (s)
+/*** inline functions ****************************************************************************/
 
-#define edit_error_dialog(h,s) query_dialog (h, s, D_ERROR, 1, _("&Dismiss"))
-
-#define edit_query_dialog2(h,t,a,b) query_dialog (h, t, D_NORMAL, 2, a, b)
-#define edit_query_dialog3(h,t,a,b,c) query_dialog (h, t, D_NORMAL, 3, a, b, c)
-
-#ifndef MAX_PATH_LEN
-#ifdef PATH_MAX
-#define MAX_PATH_LEN PATH_MAX
-#else
-#define MAX_PATH_LEN 1024
-#endif
-#endif
-
-extern edit_search_options_t edit_search_options;
-
-extern int edit_stack_iterator;
-extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
-
-extern int option_line_state_width;
-
-typedef enum
-{
-    EDIT_QUICK_SAVE = 0,
-    EDIT_SAFE_SAVE,
-    EDIT_DO_BACKUP
-} edit_save_mode_t;
-
-extern int option_max_undo;
-extern int option_auto_syntax;
-
-extern int option_edit_right_extreme;
-extern int option_edit_left_extreme;
-extern int option_edit_top_extreme;
-extern int option_edit_bottom_extreme;
-
-extern const char *option_whole_chars_search;
-extern gboolean search_create_bookmark;
-
-#endif /* MC_EDIT_IMPL_H */
+#endif /* MC__EDIT_IMPL_H */

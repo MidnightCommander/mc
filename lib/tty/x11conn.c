@@ -36,40 +36,39 @@ typedef int dummy;              /* C99 forbids empty compilation unit */
 #include <setjmp.h>
 #include <X11/Xlib.h>
 #ifdef HAVE_GMODULE
-#  include <gmodule.h>
+#include <gmodule.h>
 #endif
 
 #include "lib/global.h"
 #include "x11conn.h"
 
-/*** file scope type declarations **************************************/
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+#ifndef HAVE_GMODULE
+#define func_XOpenDisplay       XOpenDisplay
+#define func_XCloseDisplay      XCloseDisplay
+#define func_XSetErrorHandler   XSetErrorHandler
+#define func_XSetIOErrorHandler XSetIOErrorHandler
+#define func_XQueryPointer      XQueryPointer
+#endif
+
+/*** file scope type declarations ****************************************************************/
 
 typedef int (*mc_XErrorHandler_callback) (Display *, XErrorEvent *);
 typedef int (*mc_XIOErrorHandler_callback) (Display *);
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
 #ifdef HAVE_GMODULE
-
 static Display *(*func_XOpenDisplay) (_Xconst char *);
 static int (*func_XCloseDisplay) (Display *);
-static mc_XErrorHandler_callback (*func_XSetErrorHandler)
-  (mc_XErrorHandler_callback);
-static mc_XIOErrorHandler_callback (*func_XSetIOErrorHandler)
-  (mc_XIOErrorHandler_callback);
+static mc_XErrorHandler_callback (*func_XSetErrorHandler) (mc_XErrorHandler_callback);
+static mc_XIOErrorHandler_callback (*func_XSetIOErrorHandler) (mc_XIOErrorHandler_callback);
 static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *,
                                    int *, int *, int *, int *, unsigned int *);
-
 static GModule *x11_module;
-
-#else
-
-#define func_XOpenDisplay	XOpenDisplay
-#define func_XCloseDisplay	XCloseDisplay
-#define func_XSetErrorHandler	XSetErrorHandler
-#define func_XSetIOErrorHandler	XSetIOErrorHandler
-#define func_XQueryPointer	XQueryPointer
-
 #endif
 
 static gboolean handlers_installed = FALSE;
@@ -82,7 +81,8 @@ static gboolean lost_connection = FALSE;
 static jmp_buf x11_exception;   /* FIXME: get a better name */
 static gboolean longjmp_allowed = FALSE;
 
-/*** file private functions ********************************************/
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 x_io_error_handler (Display * dpy)
@@ -90,12 +90,15 @@ x_io_error_handler (Display * dpy)
     (void) dpy;
 
     lost_connection = TRUE;
-    if (longjmp_allowed) {
+    if (longjmp_allowed)
+    {
         longjmp_allowed = FALSE;
         longjmp (x11_exception, 1);
     }
     return 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 x_error_handler (Display * dpy, XErrorEvent * ee)
@@ -104,6 +107,8 @@ x_error_handler (Display * dpy, XErrorEvent * ee)
     (void) func_XCloseDisplay (dpy);
     return x_io_error_handler (dpy);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 install_error_handlers (void)
@@ -115,6 +120,8 @@ install_error_handlers (void)
     (void) func_XSetIOErrorHandler (x_io_error_handler);
     handlers_installed = TRUE;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 x11_available (void)
@@ -167,15 +174,19 @@ x11_available (void)
 #endif
 }
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 Display *
 mc_XOpenDisplay (const char *displayname)
 {
     Display *retval;
 
-    if (x11_available ()) {
-        if (setjmp (x11_exception) == 0) {
+    if (x11_available ())
+    {
+        if (setjmp (x11_exception) == 0)
+        {
             longjmp_allowed = TRUE;
             retval = func_XOpenDisplay (displayname);
             longjmp_allowed = FALSE;
@@ -185,13 +196,17 @@ mc_XOpenDisplay (const char *displayname)
     return NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 mc_XCloseDisplay (Display * display)
 {
     int retval;
 
-    if (x11_available ()) {
-        if (setjmp (x11_exception) == 0) {
+    if (x11_available ())
+    {
+        if (setjmp (x11_exception) == 0)
+        {
             longjmp_allowed = TRUE;
             retval = func_XCloseDisplay (display);
             longjmp_allowed = FALSE;
@@ -201,6 +216,8 @@ mc_XCloseDisplay (Display * display)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 Bool
 mc_XQueryPointer (Display * display, Window win, Window * root_return,
                   Window * child_return, int *root_x_return, int *root_y_return,
@@ -208,8 +225,10 @@ mc_XQueryPointer (Display * display, Window win, Window * root_return,
 {
     Bool retval;
 
-    if (x11_available ()) {
-        if (setjmp (x11_exception) == 0) {
+    if (x11_available ())
+    {
+        if (setjmp (x11_exception) == 0)
+        {
             longjmp_allowed = TRUE;
             retval = func_XQueryPointer (display, win, root_return,
                                          child_return, root_x_return, root_y_return,
@@ -227,5 +246,7 @@ mc_XQueryPointer (Display * display, Window win, Window * root_return,
     *mask_return = 0;
     return False;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */

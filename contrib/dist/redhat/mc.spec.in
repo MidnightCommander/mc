@@ -121,7 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mc
 %{_bindir}/mcedit
 %{_bindir}/mcview
-%{_bindir}/mcmfmt
 %{_bindir}/mcdiff
 
 %dir %{_libexecdir}/mc

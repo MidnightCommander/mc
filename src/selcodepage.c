@@ -29,27 +29,36 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-#include "dialog.h"
-#include "widget.h"
-#include "wtools.h"
-#include "charsets.h"
-#include "selcodepage.h"
+#include "lib/widget.h"
+#include "lib/charsets.h"
+
 #include "main.h"
+
+#include "selcodepage.h"
+
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
 
 #define ENTRY_LEN 30
 
-/* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
-int source_codepage = -1;
-int default_source_codepage = -1;
-int display_codepage = -1;
-char* autodetect_codeset = NULL;
-gboolean is_autodetect_codeset_enabled = FALSE;
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 
 static unsigned char
 get_hotkey (int n)
 {
     return (n <= 9) ? '0' + n : 'a' + n - 10;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* Return value:
  *   -2 (SELECT_CHARSET_CANCEL)       : Cancel
@@ -66,54 +75,61 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
 
     /* Create listbox */
     Listbox *listbox = create_listbox_window_centered (center_y, center_x,
-					      codepages->len + 1, ENTRY_LEN + 2,
-					      _("Choose codepage"),
-					      "[Codepages Translation]");
+                                                       codepages->len + 1, ENTRY_LEN + 2,
+                                                       _("Choose codepage"),
+                                                       "[Codepages Translation]");
 
     if (!seldisplay)
-	LISTBOX_APPEND_TEXT (listbox, '-', _("-  < No translation >"),
-			     NULL);
+        LISTBOX_APPEND_TEXT (listbox, '-', _("-  < No translation >"), NULL);
 
     /* insert all the items found */
-    for (i = 0; i < codepages->len; i++) {
-	const char *name = ((codepage_desc *) g_ptr_array_index (codepages, i))->name;
-	g_snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey (i),
-		    name);
-	LISTBOX_APPEND_TEXT (listbox, get_hotkey (i), buffer, NULL);
+    for (i = 0; i < codepages->len; i++)
+    {
+        const char *name = ((codepage_desc *) g_ptr_array_index (codepages, i))->name;
+        g_snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey (i), name);
+        LISTBOX_APPEND_TEXT (listbox, get_hotkey (i), buffer, NULL);
     }
-    if (seldisplay) {
+    if (seldisplay)
+    {
         unsigned char hotkey = get_hotkey (codepages->len);
-	g_snprintf (buffer, sizeof (buffer), "%c  %s", hotkey, _("Other 8 bit"));
-	LISTBOX_APPEND_TEXT (listbox, hotkey, buffer, NULL);
+        g_snprintf (buffer, sizeof (buffer), "%c  %s", hotkey, _("Other 8 bit"));
+        LISTBOX_APPEND_TEXT (listbox, hotkey, buffer, NULL);
     }
 
     /* Select the default entry */
     i = (seldisplay)
-	? ((current_charset < 0) ? codepages->len : (size_t) current_charset)
-	: ((size_t)current_charset + 1);
+        ? ((current_charset < 0) ? codepages->len : (size_t) current_charset)
+        : ((size_t) current_charset + 1);
 
     listbox_select_entry (listbox->list, i);
 
     listbox_result = run_listbox (listbox);
 
-    if (listbox_result < 0) {
-	/* Cancel dialog */
-	return SELECT_CHARSET_CANCEL;
-    } else {
-	/* some charset has been selected */
-	if (seldisplay) {
-	    /* charset list is finished with "Other 8 bit" item */
-	    return (listbox_result >= (int) codepages->len)
-	        ? SELECT_CHARSET_OTHER_8BIT
-	        : listbox_result;
-	} else {
-	    /* charset list is began with "-  < No translation >" item */
-	    return (listbox_result - 1);
-	}
+    if (listbox_result < 0)
+    {
+        /* Cancel dialog */
+        return SELECT_CHARSET_CANCEL;
+    }
+    else
+    {
+        /* some charset has been selected */
+        if (seldisplay)
+        {
+            /* charset list is finished with "Other 8 bit" item */
+            return (listbox_result >= (int) codepages->len)
+                ? SELECT_CHARSET_OTHER_8BIT : listbox_result;
+        }
+        else
+        {
+            /* charset list is began with "-  < No translation >" item */
+            return (listbox_result - 1);
+        }
     }
 }
 
-/* Set codepage */
+
+/* --------------------------------------------------------------------------------------------- */
+/** Set codepage */
 gboolean
 do_set_codepage (int codepage)
 {
@@ -122,19 +138,20 @@ do_set_codepage (int codepage)
 
     source_codepage = codepage;
     errmsg = init_translation_table (codepage == SELECT_CHARSET_NO_TRANSLATE ?
-					display_codepage : source_codepage,
-					display_codepage);
+                                     display_codepage : source_codepage, display_codepage);
     ret = errmsg == NULL;
 
-    if (!ret) {
-	message (D_ERROR, MSG_ERROR, "%s", errmsg);
-	g_free (errmsg);
+    if (!ret)
+    {
+        message (D_ERROR, MSG_ERROR, "%s", errmsg);
+        g_free (errmsg);
     }
 
     return ret;
 }
 
-/* Show menu selecting codepage */
+/* --------------------------------------------------------------------------------------------- */
+/** Show menu selecting codepage */
 
 gboolean
 do_select_codepage (void)
@@ -143,10 +160,12 @@ do_select_codepage (void)
 
     r = select_charset (-1, -1, default_source_codepage, FALSE);
     if (r == SELECT_CHARSET_CANCEL)
-	return FALSE;
+        return FALSE;
 
     default_source_codepage = r;
     return do_set_codepage (default_source_codepage);
 }
 
-#endif				/* HAVE_CHARSET */
+/* --------------------------------------------------------------------------------------------- */
+
+#endif /* HAVE_CHARSET */

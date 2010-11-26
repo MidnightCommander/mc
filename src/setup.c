@@ -34,7 +34,7 @@
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
-#include "lib/util.h"           /* time formats */
+#include "lib/timefmt.h"
 
 #include "lib/vfs/mc-vfs/vfs.h"
 
@@ -45,22 +45,27 @@
 #include "lib/vfs/mc-vfs/fish.h"
 #endif
 
+#include "lib/util.h"
+#include "lib/widget.h"
+#ifdef HAVE_CHARSET
+#include "lib/charsets.h"
+#endif
+
+#include "filemanager/dir.h"
+#include "filemanager/midnight.h"
+#include "filemanager/tree.h"   /* xtree_mode */
+#include "filemanager/hotlist.h"        /* load/save/done hotlist */
+#include "filemanager/panelize.h"       /* load/save/done panelize */
+#include "filemanager/layout.h"
+#include "filemanager/cmd.h"
+
 #include "args.h"
-#include "dir.h"
-#include "panel.h"
-#include "main.h"
-#include "tree.h"               /* xtree_mode */
-#include "hotlist.h"            /* load/save/done hotlist */
-#include "panelize.h"           /* load/save/done panelize */
-#include "layout.h"
-#include "menu.h"               /* menubar_visible declaration */
-#include "cmd.h"
-#include "file.h"               /* safe_delete */
-#include "keybind.h"            /* lookup_action */
-#include "wtools.h"
+#include "execute.h"            /* pause_after_run */
+#include "clipboard.h"
+#include "keybind-defaults.h"   /* keybind_lookup_action */
 
 #ifdef HAVE_CHARSET
-#include "charsets.h"
+#include "selcodepage.h"
 #endif
 
 #ifdef USE_INTERNAL_EDIT
@@ -71,14 +76,45 @@
 
 #include "setup.h"
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
 char *profile_name;             /* .mc/ini */
 char *global_profile_name;      /* mc.lib */
 
+/* Only used at program boot */
+gboolean boot_current_is_left = TRUE;
+
 char *setup_color_string;
 char *term_color_string;
 char *color_terminal_string;
+
+/* If on, default for "No" in delete operations */
+int safe_delete = 0;
+
+/* Controls screen clearing before an exec */
+int clear_before_exec = 1;
+
+/* Asks for confirmation before deleting a file */
+int confirm_delete = 1;
+/* Asks for confirmation before deleting a hotlist entry */
+int confirm_directory_hotlist_delete = 1;
+/* Asks for confirmation before overwriting a file */
+int confirm_overwrite = 1;
+/* Asks for confirmation before executing a program by pressing enter */
+int confirm_execute = 0;
+/* Asks for confirmation before leaving the program */
+int confirm_exit = 1;
+/* Asks for confirmation before clean up of history */
+int confirm_history_cleanup = 1;
+
+/* If true, at startup the user-menu is invoked */
+int auto_menu = 0;
+/* This flag indicates if the pull down menus by default drop down */
+int drop_menus = 0;
+
+/* Asks for confirmation when using F3 to view a directory and there
+   are tagged files */
+int confirm_view_dir = 0;
 
 panel_view_mode_t startup_left_mode;
 panel_view_mode_t startup_right_mode;
@@ -110,15 +146,49 @@ panels_options_t panels_options = {
     .qsearch_mode = QSEARCH_PANEL_CASE
 };
 
-/*** file scope macro definitions **************************************/
+int easy_patterns = 1;
+
+/* It true saves the setup when quitting */
+int auto_save_setup = 1;
+
+/* If true, then the +, - and \ keys have their special meaning only if the
+ * command line is emtpy, otherwise they behave like regular letters
+ */
+int only_leading_plus_minus = 1;
+
+/* Set when cd symlink following is desirable (bash mode) */
+int cd_symlinks = 1;
+
+/* Set if you want the possible completions dialog for the first time */
+int show_all_if_ambiguous = 0;
+
+/* Automatically fills name with current selected item name on mkdir */
+int auto_fill_mkdir_name = 1;
+
+/* If set and you don't have subshell support,then C-o will give you a shell */
+int output_starts_shell = 0;
+
+/* If set, we execute the file command to check the file type */
+int use_file_to_check_type = 1;
+
+int verbose = 1;
+
+/*
+ * Whether the Midnight Commander tries to provide more
+ * information about copy/move sizes and bytes transfered
+ * at the expense of some speed
+ */
+int file_op_compute_totals = 1;
+
+/*** file scope macro definitions ****************************************************************/
 
 /* In order to use everywhere the same setup for the locale we use defines */
 #define FMTYEAR _("%b %e  %Y")
 #define FMTTIME _("%b %e %H:%M")
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
 static char *panels_profile_name = NULL;        /* .mc/panels.ini */
 
@@ -299,7 +369,9 @@ static const struct
 
 static const char *panels_section = "Panels";
 
-/*** file scope functions **********************************************/
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 
 /**
   Get name of config file.
@@ -375,6 +447,8 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
 
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 setup__is_cfg_group_must_panel_config (const char *grp)
 {
@@ -384,6 +458,8 @@ setup__is_cfg_group_must_panel_config (const char *grp)
             !strcasecmp ("New Left Panel", grp) || !strcasecmp ("New Right Panel", grp))
         ? grp : NULL;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 setup__move_panels_config_into_separate_file (const char *profile)
@@ -440,11 +516,13 @@ setup__move_panels_config_into_separate_file (const char *profile)
     mc_config_deinit (tmp_cfg);
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /**
   Create new mc_config object from specified ini-file or
   append data to existing mc_config object from ini-file
 
 */
+
 static void
 load_setup_init_config_from_file (mc_config_t ** config, const char *fname)
 {
@@ -460,6 +538,8 @@ load_setup_init_config_from_file (mc_config_t ** config, const char *fname)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 load_layout (void)
 {
@@ -469,6 +549,8 @@ load_layout (void)
         *layout[i].opt_addr = mc_config_get_int (mc_main_config, "Layout",
                                                  layout[i].opt_name, *layout[i].opt_addr);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 load_keys_from_section (const char *terminal, mc_config_t * cfg)
@@ -534,6 +616,8 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
     g_free (section_name);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t * cfg)
 {
@@ -553,7 +637,7 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
         curr_values = values =
             mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 
-        action = lookup_action (*profile_keys);
+        action = keybind_lookup_action (*profile_keys);
 
         if (action > 0)
         {
@@ -584,6 +668,8 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
     }
     g_strfreev (keys);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static mc_config_t *
 load_setup_get_keymap_profile_config (void)
@@ -640,6 +726,8 @@ load_setup_get_keymap_profile_config (void)
     return keymap_config;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static panel_view_mode_t
 setup__load_panel_state (const char *section)
 {
@@ -662,6 +750,8 @@ setup__load_panel_state (const char *section)
     return mode;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 panel_save_type (const char *section, panel_view_mode_t type)
 {
@@ -675,7 +765,9 @@ panel_save_type (const char *section, panel_view_mode_t type)
         }
 }
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 char *
 setup_init (void)
@@ -713,6 +805,8 @@ setup_init (void)
 
     return profile;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 load_setup (void)
@@ -791,7 +885,7 @@ load_setup (void)
             g_free (buffer);
     }
 
-    boot_current_is_left = mc_config_get_int (mc_panels_config, "Dirs", "current_is_left", 1);
+    boot_current_is_left = mc_config_get_bool (mc_panels_config, "Dirs", "current_is_left", TRUE);
 
     /* Load time formats */
     user_recent_timeformat =
@@ -848,6 +942,8 @@ load_setup (void)
     clipboard_paste_path = mc_config_get_string (mc_main_config, "Misc", "clipboard_paste", "");
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 gboolean
 save_setup (void)
 {
@@ -888,11 +984,15 @@ save_setup (void)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 done_setup (void)
 {
     size_t i;
 
+    g_free (clipboard_store_path);
+    g_free (clipboard_paste_path);
     g_free (profile_name);
     g_free (global_profile_name);
     g_free (color_terminal_string);
@@ -911,7 +1011,14 @@ done_setup (void)
     done_hotlist ();
     done_panelize ();
     /*    directory_history_free (); */
+
+#ifdef HAVE_CHARSET
+    g_free (autodetect_codeset);
+    free_codepages_list ();
+#endif
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 save_config (void)
@@ -938,6 +1045,8 @@ save_config (void)
     g_free (profile);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 setup_save_config_show_error (const char *filename, GError ** error)
 {
@@ -948,6 +1057,8 @@ setup_save_config_show_error (const char *filename, GError ** error)
         *error = NULL;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 save_layout (void)
@@ -962,6 +1073,8 @@ save_layout (void)
     mc_config_save_to_file (mc_main_config, profile, NULL);
     g_free (profile);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 load_key_defs (void)
@@ -984,6 +1097,8 @@ load_key_defs (void)
     load_keys_from_section (getenv ("TERM"), mc_main_config);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 #ifdef ENABLE_VFS_FTP
 char *
 load_anon_passwd (void)
@@ -999,6 +1114,8 @@ load_anon_passwd (void)
     return NULL;
 }
 #endif /* ENABLE_VFS_FTP */
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 load_keymap_defs (void)
@@ -1095,6 +1212,8 @@ load_keymap_defs (void)
 
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 free_keymap_defs (void)
 {
@@ -1129,6 +1248,8 @@ free_keymap_defs (void)
         g_array_free (diff_keymap, TRUE);
 #endif
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 panel_load_setup (WPanel * panel, const char *section)
@@ -1177,6 +1298,8 @@ panel_load_setup (WPanel * panel, const char *section)
     panel->user_mini_status = mc_config_get_int (mc_panels_config, section, "user_mini_status", 0);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 panel_save_setup (struct WPanel *panel, const char *section)
 {
@@ -1206,6 +1329,8 @@ panel_save_setup (struct WPanel *panel, const char *section)
 
     mc_config_set_int (mc_panels_config, section, "user_mini_status", panel->user_mini_status);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 save_panel_types (void)
@@ -1242,6 +1367,8 @@ save_panel_types (void)
     mc_config_save_file (mc_panels_config, NULL);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 /**
   Load panels options from [Panels] section.
 */
@@ -1256,11 +1383,11 @@ panels_load_options (void)
         *panels_ini_options[i].opt_addr =
             mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
                                panels_ini_options[i].opt_old_name != NULL
-                               ? panels_ini_options[i].opt_old_name : panels_ini_options[i].opt_name,
-                               *panels_ini_options[i].opt_addr);
+                               ? panels_ini_options[i].opt_old_name : panels_ini_options[i].
+                               opt_name, *panels_ini_options[i].opt_addr);
 
     qmode = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
-                                "quick_search_case_sensitive", (int) panels_options.qsearch_mode);
+                               "quick_search_case_sensitive", (int) panels_options.qsearch_mode);
     if (qmode < 0)
         panels_options.qsearch_mode = QSEARCH_CASE_INSENSITIVE;
     else if (qmode >= QSEARCH_NUM)
@@ -1278,7 +1405,7 @@ panels_load_options (void)
                                     *panels_ini_options[i].opt_addr);
 
         qmode = mc_config_get_int (mc_main_config, panels_section,
-                                    "quick_search_mode", (int) panels_options.qsearch_mode);
+                                   "quick_search_mode", (int) panels_options.qsearch_mode);
         if (qmode < 0)
             panels_options.qsearch_mode = QSEARCH_CASE_INSENSITIVE;
         else if (qmode >= QSEARCH_NUM)
@@ -1287,6 +1414,8 @@ panels_load_options (void)
             panels_options.qsearch_mode = (qsearch_mode_t) qmode;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 /**
   Save panels options in [Panels] section.
@@ -1301,5 +1430,7 @@ panels_save_options (void)
                             panels_ini_options[i].opt_name, *panels_ini_options[i].opt_addr);
 
     mc_config_set_int (mc_main_config, panels_section,
-                        "quick_search_mode", (int) panels_options.qsearch_mode);
+                       "quick_search_mode", (int) panels_options.qsearch_mode);
 }
+
+/* --------------------------------------------------------------------------------------------- */

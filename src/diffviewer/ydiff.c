@@ -37,20 +37,19 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"
 #include "lib/tty/key.h"
-
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
 #include "lib/vfs/mc-vfs/vfs.h" /* mc_opendir, mc_readdir, mc_closedir, */
+#include "lib/util.h"
+#include "lib/widget.h"
+#include "lib/charsets.h"
 
-#include "src/cmddef.h"
-#include "src/keybind.h"
-#include "src/cmd.h"
-#include "src/dialog.h"
+#include "src/filemanager/cmd.h"
+#include "src/filemanager/midnight.h"   /* Needed for current_panel and other_panel */
+#include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
+
+#include "src/keybind-defaults.h"
 #include "src/help.h"
-#include "src/wtools.h"
-#include "src/charsets.h"
 #include "src/history.h"
-#include "src/panel.h"          /* Needed for current_panel and other_panel */
-#include "src/layout.h"         /* Needed for get_current_index and get_other_panel */
 #include "src/main.h"           /* mc_run_mode, midnight_shutdown */
 #include "src/selcodepage.h"
 
@@ -72,27 +71,28 @@ do { \
     } \
 } while (0)
 
-#define FILE_READ_BUF	4096
-#define FILE_FLAG_TEMP	(1 << 0)
+#define FILE_READ_BUF 4096
+#define FILE_FLAG_TEMP (1 << 0)
 
 #define OPTX 56
 #define OPTY 17
 
-#define ADD_CH		'+'
-#define DEL_CH		'-'
-#define CHG_CH		'*'
-#define EQU_CH		' '
+#define ADD_CH '+'
+#define DEL_CH '-'
+#define CHG_CH '*'
+#define EQU_CH ' '
 
-#define HDIFF_ENABLE	1
-#define HDIFF_MINCTX	5
-#define HDIFF_DEPTH	10
+#define HDIFF_ENABLE 1
+#define HDIFF_MINCTX 5
+#define HDIFF_DEPTH 10
 
-#define FILE_DIRTY(fs)	\
-    do {		\
-	(fs)->pos = 0;	\
-	(fs)->len = 0;	\
-    } while (0)
-
+#define FILE_DIRTY(fs) \
+do \
+{ \
+    (fs)->pos = 0; \
+    (fs)->len = 0;  \
+} \
+while (0)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -1195,7 +1195,7 @@ hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArra
 
         len = lcsubstr (s + bracket[0].off, bracket[0].len,
                         t + bracket[1].off, bracket[1].len, ret, min);
-        if (ret->len)
+        if (ret->len != 0)
         {
             size_t k = 0;
             const PAIR *data = (const PAIR *) &g_array_index (ret, PAIR, 0);
@@ -1829,7 +1829,8 @@ redo_diff (WDiff * dview)
     ndiff = dff_execute (dview->args, extra, dview->file[0], dview->file[1], ops);
     if (ndiff < 0)
     {
-        g_array_free (ops, TRUE);
+        if (ops != NULL)
+            g_array_free (ops, TRUE);
         return -1;
     }
 
@@ -1844,7 +1845,8 @@ redo_diff (WDiff * dview)
     ctx.f = f[1];
     rv |= dff_reparse (1, dview->file[1], ops, printer, &ctx);
 
-    g_array_free (ops, TRUE);
+    if (ops != NULL)
+        g_array_free (ops, TRUE);
 
     if (rv != 0 || dview->a[0]->len != dview->a[1]->len)
         return -1;
@@ -1903,9 +1905,7 @@ destroy_hdiff (WDiff * dview)
         {
             GArray *h = (GArray *) g_ptr_array_index (dview->hdiff, i);
             if (h != NULL)
-            {
                 g_array_free (h, TRUE);
-            }
         }
         g_ptr_array_free (dview->hdiff, TRUE);
         dview->hdiff = NULL;
@@ -2369,21 +2369,25 @@ static void
 dview_reread (WDiff * dview)
 {
     int ndiff = dview->ndiff;
-    destroy_hdiff (dview);
 
-    g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
-    g_array_free (dview->a[0], TRUE);
-    g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
-    g_array_free (dview->a[1], TRUE);
+    destroy_hdiff (dview);
+    if (dview->a[0] != NULL)
+    {
+        g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[0], TRUE);
+    }
+    if (dview->a[1] != NULL)
+    {
+        g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[1], TRUE);
+    }
 
     dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
 
     ndiff = redo_diff (dview);
     if (ndiff >= 0)
-    {
         dview->ndiff = ndiff;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2445,16 +2449,22 @@ dview_fini (WDiff * dview)
         str_close_conv (dview->converter);
 
     destroy_hdiff (dview);
-    g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
-    g_array_free (dview->a[0], TRUE);
-    g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
-    g_array_free (dview->a[1], TRUE);
+    if (dview->a[0] != NULL)
+    {
+        g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[0], TRUE);
+        dview->a[0] = NULL;
+    }
+    if (dview->a[1] != NULL)
+    {
+        g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[1], TRUE);
+        dview->a[1] = NULL;
+    }
 
     g_free (dview->label[0]);
     g_free (dview->label[1]);
 
-    dview->a[1] = NULL;
-    dview->a[0] = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2699,37 +2709,25 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
 static void
 dview_status (const WDiff * dview, int ord, int width, int c)
 {
-    int skip_rows = dview->skip_rows;
-    int skip_cols = dview->skip_cols;
-
-    char buf[BUFSIZ];
+    const char *buf;
     int filename_width;
     int linenum, lineofs;
 
     tty_setcolor (STATUSBAR_COLOR);
 
     tty_gotoyx (0, c);
-    get_line_numbers (dview->a[ord], skip_rows, &linenum, &lineofs);
+    get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
 
     filename_width = width - 22;
     if (filename_width < 8)
-    {
         filename_width = 8;
-    }
-    if (filename_width >= (int) sizeof (buf))
-    {
-        /* abnormal, but avoid buffer overflow */
-        filename_width = sizeof (buf) - 1;
-    }
-    trim (strip_home_and_password (dview->label[ord]), buf, filename_width);
+
+    buf = str_term_trim (strip_home_and_password (dview->label[ord]), filename_width);
     if (ord == 0)
-    {
-        tty_printf ("%-*s %6d+%-4d Col %-4d ", filename_width, buf, linenum, lineofs, skip_cols);
-    }
+        tty_printf ("%-*s %6d+%-4d Col %-4d ", filename_width, buf, linenum, lineofs,
+                    dview->skip_cols);
     else
-    {
         tty_printf ("%-*s %6d+%-4d Dif %-4d ", filename_width, buf, linenum, lineofs, dview->ndiff);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2765,7 +2763,7 @@ dview_edit (WDiff * dview, int ord)
     h_modal = h->modal;
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
-    h->modal = TRUE; /* not allow edit file in several editors */
+    h->modal = TRUE;            /* not allow edit file in several editors */
     do_edit_at_line (dview->file[ord], use_internal_edit, linenum);
     h->modal = h_modal;
     dview_redo (dview);
@@ -2946,9 +2944,9 @@ dview_ok_to_exit (WDiff * dview)
         return res;
 
     act = query_dialog (_("Quit"), !midnight_shutdown ?
-                                _("File was modified. Save with exit?") :
-                                _("Midnight Commander is being shut down.\nSave modified file?"),
-                          D_NORMAL, 2, _("&Yes"), _("&No"));
+                        _("File was modified. Save with exit?") :
+                        _("Midnight Commander is being shut down.\nSave modified file?"),
+                        D_NORMAL, 2, _("&Yes"), _("&No"));
 
     /* Esc is No */
     if (midnight_shutdown || (act == -1))
@@ -2956,14 +2954,14 @@ dview_ok_to_exit (WDiff * dview)
 
     switch (act)
     {
-    case -1: /* Esc */
+    case -1:                   /* Esc */
         res = FALSE;
         break;
-    case 0: /* Yes */
+    case 0:                    /* Yes */
         (void) dview_save (dview);
         res = TRUE;
         break;
-    case 1: /* No */
+    case 1:                    /* No */
         if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
         /* fall through */
@@ -3143,7 +3141,7 @@ dview_handle_key (WDiff * dview, int key)
 
     key = convert_from_input_c (key);
 
-    command = lookup_keymap_command (diff_map, key);
+    command = keybind_lookup_keymap_command (diff_map, key);
     if ((command != CK_Ignore_Key) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
         return MSG_HANDLED;
 
@@ -3248,18 +3246,23 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-dview_get_title (const Dlg_head *h, size_t len)
+dview_get_title (const Dlg_head * h, size_t len)
 {
     const WDiff *dview = (const WDiff *) find_widget_type (h, dview_callback);
     const char *modified = dview->merged ? " (*) " : "     ";
     size_t len1;
+    GString *title;
 
-    len -=  (size_t) str_term_width1 (_("Diff:")) + strlen (modified);
-    len1 = (len - 3)/2;
+    len1 = (len - str_term_width1 (_("Diff:")) - strlen (modified) - 3) / 2;
 
-    return g_strconcat (_("Diff:"), modified,
-                        str_term_trim (dview->label[0], len1), " | ",
-                        str_term_trim (dview->label[1], len - len1), (char *) NULL);
+    title = g_string_sized_new (len);
+    g_string_append (title, _("Diff:"));
+    g_string_append (title, modified);
+    g_string_append (title, str_term_trim (dview->label[0], len1));
+    g_string_append (title, " | ");
+    g_string_append (title, str_term_trim (dview->label[1], len1));
+
+    return g_string_free (title, FALSE);
 }
 
 /*** public functions ****************************************************************************/
@@ -3306,34 +3309,42 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define GET_FILE_AND_STAMP(n)					\
-    do {							\
-	use_copy##n = 0;					\
-	real_file##n = file##n;					\
-	if (!vfs_file_is_local(file##n)) {			\
-	    real_file##n = mc_getlocalcopy(file##n);		\
-	    if (real_file##n != NULL) {				\
-		use_copy##n = 1;				\
-		if (mc_stat(real_file##n, &st##n) != 0) {	\
-		    use_copy##n = -1;				\
-		}						\
-	    }							\
-	}							\
-    } while (0)
-#define UNGET_FILE(n)						\
-    do {							\
-	if (use_copy##n) {					\
-	    int changed = 0;					\
-	    if (use_copy##n > 0) {				\
-		time_t mtime = st##n.st_mtime;			\
-		if (mc_stat(real_file##n, &st##n) == 0) {	\
-		    changed = (mtime != st##n.st_mtime);	\
-		}						\
-	    }							\
-	    mc_ungetlocalcopy(file##n, real_file##n, changed);	\
-	    g_free(real_file##n);				\
-	}							\
-    } while (0)
+#define GET_FILE_AND_STAMP(n) \
+do \
+{ \
+    use_copy##n = 0; \
+    real_file##n = file##n; \
+    if (!vfs_file_is_local (file##n)) \
+    { \
+        real_file##n = mc_getlocalcopy (file##n); \
+        if (real_file##n != NULL) \
+        { \
+            use_copy##n = 1; \
+            if (mc_stat (real_file##n, &st##n) != 0) \
+                use_copy##n = -1; \
+        } \
+    } \
+} \
+while (0)
+
+#define UNGET_FILE(n) \
+do \
+{ \
+    if (use_copy##n) \
+    { \
+        int changed = 0; \
+        if (use_copy##n > 0) \
+        { \
+            time_t mtime; \
+            mtime = st##n.st_mtime; \
+            if (mc_stat (real_file##n, &st##n) == 0) \
+                changed = (mtime != st##n.st_mtime); \
+        } \
+        mc_ungetlocalcopy (file##n, real_file##n, changed); \
+        g_free (real_file##n); \
+    } \
+} \
+while (0)
 
 void
 dview_diff_cmd (void)

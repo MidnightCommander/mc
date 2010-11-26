@@ -28,20 +28,33 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "src/wtools.h"
+#include "lib/widget.h"         /* Listbox */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
 #define MAX_ENTRY_LEN 40
 #define LIST_LINES 14
 #define N_DFLT_ENTRIES 2
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 pstrcmp (const void *p1, const void *p2)
 {
     return strcmp (*(char **) p1, *(char **) p2);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 exec_edit_syntax_dialog (const char **names, const char *current_syntax)
@@ -62,6 +75,10 @@ exec_edit_syntax_dialog (const char **names, const char *current_syntax)
 
     return run_listbox (syntaxlist);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_syntax_dialog (WEdit * edit)
@@ -112,3 +129,5 @@ edit_syntax_dialog (WEdit * edit)
 
     g_strfreev (names);
 }
+
+/* --------------------------------------------------------------------------------------------- */

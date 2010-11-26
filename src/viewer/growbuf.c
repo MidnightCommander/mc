@@ -39,14 +39,14 @@
 #include <errno.h>
 
 #include "lib/global.h"
-#include "src/wtools.h"
-
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/util.h"
+#include "lib/widget.h"         /* D_NORMAL */
 
 #include "internal.h"
 
 /* Block size for reading files in parts */
-#define VIEW_PAGE_SIZE		((size_t) 8192)
+#define VIEW_PAGE_SIZE ((size_t) 8192)
 
 /*** global variables ****************************************************************************/
 
@@ -57,9 +57,10 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -100,10 +101,11 @@ mcview_growbuf_filesize (mcview_t * view)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-/* Copies the output from the pipe to the growing buffer, until either
+/** Copies the output from the pipe to the growing buffer, until either
  * the end-of-pipe is reached or the interval [0..ofs) of the growing
- * buffer is completely filled. */
+ * buffer is completely filled.
+ */
+
 void
 mcview_growbuf_read_until (mcview_t * view, off_t ofs)
 {

@@ -42,33 +42,65 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
+#include "lib/util.h"
+#include "lib/widget.h"         /* D_ERROR, D_NORMAL */
 
-#include "src/wtools.h"		/* D_ERROR, D_NORMAL */
-#include "src/main.h"		/* mc_home */
-#include "src/execute.h"	/* EXECUTE_AS_SHELL */
+#include "src/main.h"           /* mc_home */
+#include "src/execute.h"        /* EXECUTE_AS_SHELL */
 
 #include "vfs-impl.h"
 #include "utilvfs.h"
 #include "local.h"
-#include "gc.h"		/* vfs_stamp_create */
+#include "gc.h"                 /* vfs_stamp_create */
 
-struct cachedfile {
-    char *name, *cache;
-    struct cachedfile *next;
-};
+/*** global variables ****************************************************************************/
 
-static struct cachedfile *head;
-static struct vfs_class vfs_sfs_ops;
+/*** file scope macro definitions ****************************************************************/
 
 #define MAXFS 32
-static int sfs_no = 0;
-static char *sfs_prefix[ MAXFS ];
-static char *sfs_command[ MAXFS ];
-static int sfs_flags[ MAXFS ];
+
 #define F_1 1
 #define F_2 2
 #define F_NOLOCALCOPY 4
 #define F_FULLMATCH 8
+
+#define COPY_CHAR \
+    if ((size_t) (t-pad) > sizeof(pad)) { \
+        g_free (pqname); \
+        return -1; \
+    } \
+    else \
+        *t++ = *s;
+
+#define COPY_STRING(a) \
+    if ((t-pad)+strlen(a)>sizeof(pad)) { \
+        g_free (pqname); \
+        return -1; \
+    } else { \
+        strcpy (t, a); \
+        t+= strlen(a); \
+    }
+
+/*** file scope type declarations ****************************************************************/
+
+struct cachedfile
+{
+    char *name, *cache;
+    struct cachedfile *next;
+};
+
+/*** file scope variables ************************************************************************/
+
+static struct cachedfile *head;
+static struct vfs_class vfs_sfs_ops;
+
+static int sfs_no = 0;
+static char *sfs_prefix[MAXFS];
+static char *sfs_command[MAXFS];
+static int sfs_flags[MAXFS];
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
@@ -78,90 +110,87 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
     char pad[10240];
     char *s, *t = pad;
     int was_percent = 0;
-    char *pname;	/* name of parent archive */
-    char *pqname;	/* name of parent archive, quoted */
+    char *pname;                /* name of parent archive */
+    char *pqname;               /* name of parent archive, quoted */
 
     pname = g_strdup (name);
     vfs_split (pname, &inpath, &op);
     w = (*me->which) (me, op);
     if (w == -1)
-	vfs_die ("This cannot happen... Hopefully.\n");
+        vfs_die ("This cannot happen... Hopefully.\n");
 
-    if (!(sfs_flags[w] & F_1) && strcmp (pname, "/")) {
-	g_free (pname);
-	return -1;
+    if (!(sfs_flags[w] & F_1) && strcmp (pname, "/"))
+    {
+        g_free (pname);
+        return -1;
     }
 
     /*    if ((sfs_flags[w] & F_2) || (!inpath) || (!*inpath)); else return -1; */
-    if (!(sfs_flags[w] & F_NOLOCALCOPY)) {
-	s = mc_getlocalcopy (pname);
-	if (!s) {
-	    g_free (pname);
-	    return -1;
-	}
-	pqname = name_quote (s, 0);
-	g_free (s);
-    } else {
-	pqname = name_quote (pname, 0);
+    if (!(sfs_flags[w] & F_NOLOCALCOPY))
+    {
+        s = mc_getlocalcopy (pname);
+        if (!s)
+        {
+            g_free (pname);
+            return -1;
+        }
+        pqname = name_quote (s, 0);
+        g_free (s);
+    }
+    else
+    {
+        pqname = name_quote (pname, 0);
     }
     g_free (pname);
 
-#define COPY_CHAR \
-    if ((size_t) (t-pad) > sizeof(pad)) { \
-	g_free (pqname); \
-	return -1; \
-    } \
-    else \
-	*t++ = *s;
 
-#define COPY_STRING(a) \
-    if ((t-pad)+strlen(a)>sizeof(pad)) { \
-	g_free (pqname); \
-	return -1; \
-    } else { \
-	strcpy (t, a); \
-	t+= strlen(a); \
-    }
+    for (s = sfs_command[w]; *s; s++)
+    {
+        if (was_percent)
+        {
 
-    for (s = sfs_command[w]; *s; s++) {
-	if (was_percent) {
+            const char *ptr = NULL;
+            was_percent = 0;
 
-	    const char *ptr = NULL;
-	    was_percent = 0;
-
-	    switch (*s) {
-	    case '1':
-		ptr = pqname;
-		break;
-	    case '2':
-		ptr = op + strlen (sfs_prefix[w]);
-		break;
-	    case '3':
-		ptr = cache;
-		break;
-	    case '%':
-		COPY_CHAR;
-		continue;
-	    }
-	    COPY_STRING (ptr);
-	} else {
-	    if (*s == '%')
-		was_percent = 1;
-	    else
-		COPY_CHAR;
-	}
+            switch (*s)
+            {
+            case '1':
+                ptr = pqname;
+                break;
+            case '2':
+                ptr = op + strlen (sfs_prefix[w]);
+                break;
+            case '3':
+                ptr = cache;
+                break;
+            case '%':
+                COPY_CHAR;
+                continue;
+            }
+            COPY_STRING (ptr);
+        }
+        else
+        {
+            if (*s == '%')
+                was_percent = 1;
+            else
+                COPY_CHAR;
+        }
     }
 
     g_free (pqname);
     open_error_pipe ();
-    if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad)) {
-	close_error_pipe (D_ERROR, NULL);
-	return -1;
+    if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad))
+    {
+        close_error_pipe (D_ERROR, NULL);
+        return -1;
     }
 
     close_error_pipe (D_NORMAL, NULL);
-    return 0;			/* OK */
+    return 0;                   /* OK */
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 sfs_redirect (struct vfs_class *me, const char *name)
@@ -170,38 +199,44 @@ sfs_redirect (struct vfs_class *me, const char *name)
     char *cache;
     int handle;
 
-    while (cur) {
-	if (!strcmp (name, cur->name)) {
-	    vfs_stamp (&vfs_sfs_ops, cur);
-	    return cur->cache;
-	}
-	cur = cur->next;
+    while (cur)
+    {
+        if (!strcmp (name, cur->name))
+        {
+            vfs_stamp (&vfs_sfs_ops, cur);
+            return cur->cache;
+        }
+        cur = cur->next;
     }
 
     handle = vfs_mkstemps (&cache, "sfs", name);
 
-    if (handle == -1) {
-	return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
+    if (handle == -1)
+    {
+        return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
     }
 
     close (handle);
 
-    if (!sfs_vfmake (me, name, cache)) {
-	cur = g_new (struct cachedfile, 1);
-	cur->name = g_strdup (name);
-	cur->cache = cache;
-	cur->next = head;
-	head = cur;
+    if (!sfs_vfmake (me, name, cache))
+    {
+        cur = g_new (struct cachedfile, 1);
+        cur->name = g_strdup (name);
+        cur->cache = cache;
+        cur->next = head;
+        head = cur;
 
-	vfs_stamp_create (&vfs_sfs_ops, head);
+        vfs_stamp_create (&vfs_sfs_ops, head);
 
-	return cache;
+        return cache;
     }
 
     unlink (cache);
     g_free (cache);
     return "/I_MUST_NOT_EXIST";
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void *
 sfs_open (struct vfs_class *me, const char *path, int flags, mode_t mode)
@@ -212,7 +247,7 @@ sfs_open (struct vfs_class *me, const char *path, int flags, mode_t mode)
     path = sfs_redirect (me, path);
     fd = open (path, NO_LINEAR (flags), mode);
     if (fd == -1)
-	return 0;
+        return 0;
 
     sfs_info = g_new (int, 1);
     *sfs_info = fd;
@@ -220,13 +255,19 @@ sfs_open (struct vfs_class *me, const char *path, int flags, mode_t mode)
     return sfs_info;
 }
 
-static int sfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     path = sfs_redirect (me, path);
     return stat (path, buf);
 }
 
-static int sfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     path = sfs_redirect (me, path);
 #ifndef HAVE_STATLSTAT
@@ -236,23 +277,34 @@ static int sfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 #endif
 }
 
-static int sfs_chmod (struct vfs_class *me, const char *path, int mode)
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
     path = sfs_redirect (me, path);
     return chmod (path, mode);
 }
 
-static int sfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 {
     path = sfs_redirect (me, path);
     return chown (path, owner, group);
 }
 
-static int sfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 {
     path = sfs_redirect (me, path);
     return utime (path, times);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 sfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
@@ -261,6 +313,8 @@ sfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
     return readlink (path, buf, size);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static vfsid
 sfs_getid (struct vfs_class *me, const char *path)
 {
@@ -268,55 +322,68 @@ sfs_getid (struct vfs_class *me, const char *path)
 
     (void) me;
 
-    while (cur) {
-	if (!strcmp (path, cur->name))
-	    break;
-	cur = cur->next;
+    while (cur)
+    {
+        if (!strcmp (path, cur->name))
+            break;
+        cur = cur->next;
     }
 
     return (vfsid) cur;
 }
 
-static void sfs_free (vfsid id)
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+sfs_free (vfsid id)
 {
     struct cachedfile *which = (struct cachedfile *) id;
     struct cachedfile *cur, *prev;
 
     for (cur = head, prev = 0; cur && cur != which; prev = cur, cur = cur->next)
-	;
+        ;
     if (!cur)
-    	vfs_die( "Free of thing which is unknown to me\n" );
+        vfs_die ("Free of thing which is unknown to me\n");
     unlink (cur->cache);
 
     if (prev)
-	prev->next = cur->next;
+        prev->next = cur->next;
     else
-	head = cur->next;
+        head = cur->next;
 
     g_free (cur->cache);
     g_free (cur->name);
     g_free (cur);
 }
 
-static void sfs_fill_names (struct vfs_class *me, fill_names_f func)
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+sfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct cachedfile *cur = head;
 
     (void) me;
 
-    while (cur){
-	(*func)(cur->name);
-	cur = cur->next;
+    while (cur)
+    {
+        (*func) (cur->name);
+        cur = cur->next;
     }
 }
 
-static int sfs_nothingisopen (vfsid id)
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sfs_nothingisopen (vfsid id)
 {
     /* FIXME: Investigate whether have to guard this like in
        the other VFSs (see fd_usage in extfs) -- Norbert */
     (void) id;
     return 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 sfs_getlocalcopy (struct vfs_class *me, const char *path)
@@ -325,9 +392,10 @@ sfs_getlocalcopy (struct vfs_class *me, const char *path)
     return g_strdup (path);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
-sfs_ungetlocalcopy (struct vfs_class *me, const char *path,
-		    const char *local, int has_changed)
+sfs_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
 {
     (void) me;
     (void) path;
@@ -336,7 +404,10 @@ sfs_ungetlocalcopy (struct vfs_class *me, const char *path,
     return 0;
 }
 
-static int sfs_init (struct vfs_class *me)
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sfs_init (struct vfs_class *me)
 {
     char *mc_sfsini;
     FILE *cfg;
@@ -347,66 +418,79 @@ static int sfs_init (struct vfs_class *me)
     mc_sfsini = g_build_filename (mc_home, "sfs.ini", (char *) NULL);
     cfg = fopen (mc_sfsini, "r");
 
-    if (cfg == NULL) {
-	fprintf (stderr, _("Warning: file %s not found\n"), mc_sfsini);
-	g_free (mc_sfsini);
-	return 0;
+    if (cfg == NULL)
+    {
+        fprintf (stderr, _("Warning: file %s not found\n"), mc_sfsini);
+        g_free (mc_sfsini);
+        return 0;
     }
     g_free (mc_sfsini);
 
     sfs_no = 0;
-    while (sfs_no < MAXFS && fgets (key, sizeof (key), cfg)) {
-	char *c, *semi = NULL, flags = 0;
+    while (sfs_no < MAXFS && fgets (key, sizeof (key), cfg))
+    {
+        char *c, *semi = NULL, flags = 0;
 
-	if (*key == '#' || *key == '\n')
-	    continue;
+        if (*key == '#' || *key == '\n')
+            continue;
 
-	for (c = key; *c; c++)
-	    if ((*c == ':') || (*c == '/')){
-		semi = c;
-		if (*c == '/'){
-		    *c = 0;
-		    flags |= F_FULLMATCH;
-		}
-		break;
-	    }
+        for (c = key; *c; c++)
+            if ((*c == ':') || (*c == '/'))
+            {
+                semi = c;
+                if (*c == '/')
+                {
+                    *c = 0;
+                    flags |= F_FULLMATCH;
+                }
+                break;
+            }
 
-	if (!semi){
-	invalid_line:
-	    fprintf (stderr, _("Warning: Invalid line in %s:\n%s\n"),
-		     "sfs.ini", key);
-	    continue;
-	}
+        if (!semi)
+        {
+          invalid_line:
+            fprintf (stderr, _("Warning: Invalid line in %s:\n%s\n"), "sfs.ini", key);
+            continue;
+        }
 
-	c = semi + 1;
-	while (*c && (*c != ' ') && (*c != '\t')) {
-	    switch (*c) {
-	    case '1': flags |= F_1; break;
-	    case '2': flags |= F_2; break;
-	    case 'R': flags |= F_NOLOCALCOPY; break;
-	    default:
-		fprintf (stderr, _("Warning: Invalid flag %c in %s:\n%s\n"),
-			 *c, "sfs.ini", key);
-	    }	    
-	    c++;
-	}
-	if (!*c)
-	    goto invalid_line;
+        c = semi + 1;
+        while (*c && (*c != ' ') && (*c != '\t'))
+        {
+            switch (*c)
+            {
+            case '1':
+                flags |= F_1;
+                break;
+            case '2':
+                flags |= F_2;
+                break;
+            case 'R':
+                flags |= F_NOLOCALCOPY;
+                break;
+            default:
+                fprintf (stderr, _("Warning: Invalid flag %c in %s:\n%s\n"), *c, "sfs.ini", key);
+            }
+            c++;
+        }
+        if (!*c)
+            goto invalid_line;
 
-	c++;
-	*(semi+1) = 0;
-	semi = strchr (c, '\n');
-	if (semi != NULL)
-	    *semi = 0;
+        c++;
+        *(semi + 1) = 0;
+        semi = strchr (c, '\n');
+        if (semi != NULL)
+            *semi = 0;
 
-	sfs_prefix [sfs_no] = g_strdup (key);
-	sfs_command [sfs_no] = g_strdup (c);
-	sfs_flags [sfs_no] = flags;
-	sfs_no++;
+        sfs_prefix[sfs_no] = g_strdup (key);
+        sfs_command[sfs_no] = g_strdup (c);
+        sfs_flags[sfs_no] = flags;
+        sfs_no++;
     }
     fclose (cfg);
     return 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 sfs_done (struct vfs_class *me)
@@ -415,13 +499,16 @@ sfs_done (struct vfs_class *me)
 
     (void) me;
 
-    for (i = 0; i < sfs_no; i++){
-        g_free (sfs_prefix [i]);
-	g_free (sfs_command [i]);
-	sfs_prefix [i] = sfs_command [i] = NULL;
+    for (i = 0; i < sfs_no; i++)
+    {
+        g_free (sfs_prefix[i]);
+        g_free (sfs_command[i]);
+        sfs_prefix[i] = sfs_command[i] = NULL;
     }
     sfs_no = 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 sfs_which (struct vfs_class *me, const char *path)
@@ -431,15 +518,20 @@ sfs_which (struct vfs_class *me, const char *path)
     (void) me;
 
     for (i = 0; i < sfs_no; i++)
-        if (sfs_flags [i] & F_FULLMATCH) {
-	    if (!strcmp (path, sfs_prefix [i]))
-	        return i;
-	} else
-	    if (!strncmp (path, sfs_prefix [i], strlen (sfs_prefix [i])))
-	        return i;
+        if (sfs_flags[i] & F_FULLMATCH)
+        {
+            if (!strcmp (path, sfs_prefix[i]))
+                return i;
+        }
+        else if (!strncmp (path, sfs_prefix[i], strlen (sfs_prefix[i])))
+            return i;
 
     return -1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 init_sfs (void)
@@ -468,3 +560,5 @@ init_sfs (void)
     vfs_sfs_ops.ungetlocalcopy = sfs_ungetlocalcopy;
     vfs_register_class (&vfs_sfs_ops);
 }
+
+/* --------------------------------------------------------------------------------------------- */

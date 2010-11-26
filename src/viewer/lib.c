@@ -45,10 +45,10 @@
 #include "lib/strutil.h"
 #include "lib/util.h"           /* save_file_position() */
 #include "lib/lock.h"           /* unlock_file() */
+#include "lib/widget.h"
+#include "lib/charsets.h"
 
-#include "src/wtools.h"
 #include "src/main.h"
-#include "src/charsets.h"
 #include "src/selcodepage.h"
 
 #include "internal.h"
@@ -57,7 +57,7 @@
 /*** global variables ****************************************************************************/
 
 #define OFF_T_BITWIDTH (unsigned int) (sizeof (off_t) * CHAR_BIT - 1)
-const off_t INVALID_OFFSET = (off_t) -1;
+const off_t INVALID_OFFSET = (off_t) - 1;
 const off_t OFFSETTYPE_MAX = ((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1;
 
 /*** file scope macro definitions ****************************************************************/
@@ -67,9 +67,10 @@ const off_t OFFSETTYPE_MAX = ((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1;
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -339,9 +340,10 @@ mcview_show_error (mcview_t * view, const char *msg)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** returns index of the first char in the line
+ * it is constant for all line characters
+ */
 
-/* returns index of the first char in the line */
-/* it is constant for all line characters */
 off_t
 mcview_bol (mcview_t * view, off_t current, off_t limit)
 {
@@ -373,9 +375,10 @@ mcview_bol (mcview_t * view, off_t current, off_t limit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** returns index of last char on line + width EOL
+ * mcview_eol of the current line == mcview_bol next line
+ */
 
-/* returns index of last char on line + width EOL */
-/* mcview_eol of the current line == mcview_bol next line */
 off_t
 mcview_eol (mcview_t * view, off_t current, off_t limit)
 {
@@ -422,6 +425,7 @@ mcview_get_title (const Dlg_head * h, size_t len)
 
     return g_strconcat (_("View: "), modified, file_label, (char *) NULL);
 }
+
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean

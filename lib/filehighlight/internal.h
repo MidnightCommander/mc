@@ -5,13 +5,15 @@
 
 /*** enums ***************************************************************************************/
 
-typedef enum {
+typedef enum
+{
     MC_FLHGH_T_FTYPE,
     MC_FLHGH_T_EXT,
     MC_FLHGH_T_FREGEXP
 } mc_flhgh_filter_type;
 
-typedef enum {
+typedef enum
+{
     MC_FLHGH_FTYPE_T_FILE,
     MC_FLHGH_FTYPE_T_FILE_EXE,
     MC_FLHGH_FTYPE_T_DIR,
@@ -31,7 +33,8 @@ typedef enum {
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_fhl_filter_struct {
+typedef struct mc_fhl_filter_struct
+{
 
     int color_pair_index;
     gchar *fgcolor;
@@ -46,10 +49,10 @@ typedef struct mc_fhl_filter_struct {
 
 /*** declarations of public functions ************************************************************/
 
-
 void mc_fhl_array_free (mc_fhl_t *);
 
-gboolean mc_fhl_init_from_standart_files (mc_fhl_t *);
+gboolean mc_fhl_init_from_standard_files (mc_fhl_t *);
 
+/*** inline functions ****************************************************************************/
 
-#endif
+#endif /* MC__FILEHIGHLIGHT_INTERNAL_H */

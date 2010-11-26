@@ -8,16 +8,67 @@
  *  files small.
  */
 
-#ifndef MC_TTY_H
-#define MC_TTY_H
+#ifndef MC__TTY_H
+#define MC__TTY_H
 
 #include "lib/global.h"         /* include <glib.h> */
 
 #ifdef HAVE_SLANG
-#   include "tty-slang.h"
+#include "tty-slang.h"
 #else
-#   include "tty-ncurses.h"
+#include "tty-ncurses.h"
 #endif
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+#define KEY_KP_ADD      4001
+#define KEY_KP_SUBTRACT 4002
+#define KEY_KP_MULTIPLY 4003
+
+/*** enums ***************************************************************************************/
+
+typedef enum
+{
+    /* single lines */
+    MC_TTY_FRM_VERT,
+    MC_TTY_FRM_HORIZ,
+    MC_TTY_FRM_LEFTTOP,
+    MC_TTY_FRM_RIGHTTOP,
+    MC_TTY_FRM_LEFTBOTTOM,
+    MC_TTY_FRM_RIGHTBOTTOM,
+    MC_TTY_FRM_TOPMIDDLE,
+    MC_TTY_FRM_BOTTOMMIDDLE,
+    MC_TTY_FRM_LEFTMIDDLE,
+    MC_TTY_FRM_RIGHTMIDDLE,
+    MC_TTY_FRM_CROSS,
+
+    /* double lines */
+    MC_TTY_FRM_DVERT,
+    MC_TTY_FRM_DHORIZ,
+    MC_TTY_FRM_DLEFTTOP,
+    MC_TTY_FRM_DRIGHTTOP,
+    MC_TTY_FRM_DLEFTBOTTOM,
+    MC_TTY_FRM_DRIGHTBOTTOM,
+    MC_TTY_FRM_DTOPMIDDLE,
+    MC_TTY_FRM_DBOTTOMMIDDLE,
+    MC_TTY_FRM_DLEFTMIDDLE,
+    MC_TTY_FRM_DRIGHTMIDDLE,
+
+    MC_TTY_FRM_MAX
+} mc_tty_frm_t;
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+extern int mc_tty_frm[];
+
+extern char *tty_tgetstr (const char *name);
+
+extern void tty_beep (void);
+
+/*** declarations of public functions ************************************************************/
+
 
 /* {{{ Input }}} */
 
@@ -78,49 +129,10 @@ extern void tty_draw_vline (int y, int x, int ch, int len);
 extern void tty_draw_box (int y, int x, int rows, int cols, gboolean single);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
-extern int mc_tty_frm[];
-
-typedef enum
-{
-    /* single lines */
-    MC_TTY_FRM_VERT,
-    MC_TTY_FRM_HORIZ,
-    MC_TTY_FRM_LEFTTOP,
-    MC_TTY_FRM_RIGHTTOP,
-    MC_TTY_FRM_LEFTBOTTOM,
-    MC_TTY_FRM_RIGHTBOTTOM,
-    MC_TTY_FRM_TOPMIDDLE,
-    MC_TTY_FRM_BOTTOMMIDDLE,
-    MC_TTY_FRM_LEFTMIDDLE,
-    MC_TTY_FRM_RIGHTMIDDLE,
-    MC_TTY_FRM_CROSS,
-
-    /* double lines */
-    MC_TTY_FRM_DVERT,
-    MC_TTY_FRM_DHORIZ,
-    MC_TTY_FRM_DLEFTTOP,
-    MC_TTY_FRM_DRIGHTTOP,
-    MC_TTY_FRM_DLEFTBOTTOM,
-    MC_TTY_FRM_DRIGHTBOTTOM,
-    MC_TTY_FRM_DTOPMIDDLE,
-    MC_TTY_FRM_DBOTTOMMIDDLE,
-    MC_TTY_FRM_DLEFTMIDDLE,
-    MC_TTY_FRM_DRIGHTMIDDLE,
-
-    MC_TTY_FRM_MAX
-} mc_tty_frm_t;
-
-extern char *tty_tgetstr (const char *name);
-
-extern void tty_beep (void);
-
-#define KEY_KP_ADD	4001
-#define KEY_KP_SUBTRACT	4002
-#define KEY_KP_MULTIPLY	4003
-
 extern void tty_refresh (void);
 extern void tty_setup_sigwinch (void (*handler) (int));
 
 extern int mc_tty_normalize_lines_char (const char *);
 
+/*** inline functions ****************************************************************************/
 #endif /* MC_TTY_H */

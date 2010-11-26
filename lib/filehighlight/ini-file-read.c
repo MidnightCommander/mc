@@ -32,6 +32,7 @@
 #include "lib/fileloc.h"
 #include "lib/strescape.h"
 #include "lib/skin.h"
+#include "lib/util.h"           /* exist_file() */
 #include "lib/filehighlight.h"
 
 #include "src/main.h"
@@ -77,12 +78,14 @@ mc_fhl_parse_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
     int i;
     gchar *param_type = mc_config_get_string (fhl->config, group_name, "type", "");
 
-    if (*param_type == '\0') {
+    if (*param_type == '\0')
+    {
         g_free (param_type);
         return FALSE;
     }
 
-    for (i = 0; types[i] != NULL; i++) {
+    for (i = 0; types[i] != NULL; i++)
+    {
         if (strcmp (types[i], param_type) == 0)
             break;
     }
@@ -107,7 +110,8 @@ mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
     mc_fhl_filter_t *mc_filter;
     gchar *regexp = mc_config_get_string (fhl->config, group_name, "regexp", "");
 
-    if (*regexp == '\0') {
+    if (*regexp == '\0')
+    {
         g_free (regexp);
         return FALSE;
     }
@@ -122,7 +126,6 @@ mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     g_free (regexp);
     return TRUE;
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -132,35 +135,33 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar **exts, **exts_orig;
-    gchar *esc_ext;
     gsize exts_size;
-    GString *buf = g_string_new ("");
+    GString *buf;
 
     exts_orig = exts =
         mc_config_get_string_list (fhl->config, group_name, "extensions", &exts_size);
 
-    if (exts_orig == NULL)
-        return FALSE;
-
-    if (exts_orig[0] == NULL) {
+    if (exts_orig == NULL || exts_orig[0] == NULL)
+    {
         g_strfreev (exts_orig);
         return FALSE;
     }
 
-    while (*exts != NULL) {
+    buf = g_string_sized_new (64);
+    for (exts = exts_orig; *exts != NULL; exts++)
+    {
+        char *esc_ext;
+
         esc_ext = strutils_regex_escape (*exts);
         if (buf->len != 0)
             g_string_append_c (buf, '|');
         g_string_append (buf, esc_ext);
         g_free (esc_ext);
-        exts++;
     }
     g_strfreev (exts_orig);
-    esc_ext = g_string_free (buf, FALSE);
-    buf = g_string_new (".*\\.(");
-    g_string_append (buf, esc_ext);
+
+    g_string_prepend (buf, ".*\\.(");
     g_string_append (buf, ")$");
-    g_free (esc_ext);
 
     mc_filter = g_new0 (mc_fhl_filter_t, 1);
     mc_filter->type = MC_FLHGH_T_FREGEXP;
@@ -179,63 +180,46 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-
 gboolean
 mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename)
 {
     if (fhl == NULL || filename == NULL || !exist_file (filename))
         return FALSE;
 
-    if (fhl->config) {
-
-        if (!mc_config_read_file (fhl->config, filename))
-            return FALSE;
-
-        return TRUE;
-    }
+    if (fhl->config != NULL)
+        return mc_config_read_file (fhl->config, filename);
 
     fhl->config = mc_config_init (filename);
-
-    if (fhl->config == NULL)
-        return FALSE;
-
-    return TRUE;
+    return (fhl->config != NULL);
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
+mc_fhl_init_from_standard_files (mc_fhl_t * fhl)
 {
     gchar *name;
-
-    /* ${datadir}/mc/filehighlight.ini  */
-    name = concat_dir_and_file (mc_home_alt, MC_FHL_INI_FILE);
-    if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
-        g_free (name);
-        return FALSE;
-    }
-    g_free (name);
-
-    /* ${sysconfdir}/mc/filehighlight.ini  */
-    name = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
-    if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
-        g_free (name);
-        return FALSE;
-    }
-    g_free (name);
+    gboolean ok;
 
     /* ~/.mc/filehighlight.ini */
-    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, NULL);
-
-    if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
-        g_free (name);
-        return FALSE;
-    }
+    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, (char *) NULL);
+    ok = mc_fhl_read_ini_file (fhl, name);
     g_free (name);
+    if (ok)
+        return TRUE;
 
-    return TRUE;
+    /* ${sysconfdir}/mc/filehighlight.ini  */
+    name = g_build_filename (mc_home, MC_FHL_INI_FILE, (char *) NULL);
+    ok = mc_fhl_read_ini_file (fhl, name);
+    g_free (name);
+    if (ok)
+        return TRUE;
+
+    /* ${datadir}/mc/filehighlight.ini  */
+    name = g_build_filename (mc_home_alt, MC_FHL_INI_FILE, (char *) NULL);
+    ok = mc_fhl_read_ini_file (fhl, name);
+    g_free (name);
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -253,17 +237,21 @@ mc_fhl_parse_ini_file (mc_fhl_t * fhl)
     if (group_names == NULL)
         return FALSE;
 
-    while (*group_names) {
+    while (*group_names)
+    {
 
-        if (mc_config_has_param (fhl->config, *group_names, "type")) {
+        if (mc_config_has_param (fhl->config, *group_names, "type"))
+        {
             /* parse filetype filter */
             mc_fhl_parse_get_file_type_id (fhl, *group_names);
         }
-        if (mc_config_has_param (fhl->config, *group_names, "regexp")) {
+        if (mc_config_has_param (fhl->config, *group_names, "regexp"))
+        {
             /* parse regexp filter */
             mc_fhl_parse_get_regexp (fhl, *group_names);
         }
-        if (mc_config_has_param (fhl->config, *group_names, "extensions")) {
+        if (mc_config_has_param (fhl->config, *group_names, "extensions"))
+        {
             /* parse extensions filter */
             mc_fhl_parse_get_extensions (fhl, *group_names);
         }

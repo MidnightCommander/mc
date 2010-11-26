@@ -1,0 +1,53 @@
+
+/** \file button.h
+ *  \brief Header: WButton widget
+ */
+
+#ifndef MC__WIDGET_BUTTON_H
+#define MC__WIDGET_BUTTON_H
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+
+struct WButton;
+
+/* button callback */
+typedef int (*bcback_fn) (struct WButton * button, int action);
+
+/*** enums ***************************************************************************************/
+
+typedef enum
+{
+    HIDDEN_BUTTON = 0,
+    NARROW_BUTTON = 1,
+    NORMAL_BUTTON = 2,
+    DEFPUSH_BUTTON = 3
+} button_flags_t;
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct WButton
+{
+    Widget widget;
+    int action;                 /* what to do when pressed */
+    gboolean selected;          /* button state */
+
+    button_flags_t flags;       /* button flags */
+    hotkey_t text;              /* text of button, contain hotkey too */
+    int hotpos;                 /* offset hot KEY char in text */
+    bcback_fn callback;         /* callback function */
+} WButton;
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
+WButton *button_new (int y, int x, int action, button_flags_t flags, const char *text,
+                     bcback_fn callback);
+const char *button_get_text (const WButton * b);
+void button_set_text (WButton * b, const char *text);
+int button_get_len (const WButton * b);
+
+/*** inline functions ****************************************************************************/
+
+#endif /* MC__WIDGET_BUTTON_H */

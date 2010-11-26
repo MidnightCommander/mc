@@ -31,11 +31,10 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/tty/key.h"
+#include "lib/widget.h"
+#include "lib/charsets.h"
 
-#include "src/dialog.h"
-#include "src/wtools.h"
 #include "src/history.h"
-#include "src/charsets.h"
 
 #include "internal.h"
 
@@ -217,10 +216,11 @@ mcdiffview_do_search_forward (WDiff * dview)
     else if ((size_t) dview->search.last_accessed_num_line >= dview->a[dview->ord]->len)
     {
         dview->search.last_accessed_num_line = (ssize_t) dview->a[dview->ord]->len;
-         return FALSE;
+        return FALSE;
     }
 
-    for (ind = (size_t) ++dview->search.last_accessed_num_line; ind < dview->a[dview->ord]->len; ind++)
+    for (ind = (size_t)++ dview->search.last_accessed_num_line; ind < dview->a[dview->ord]->len;
+         ind++)
     {
         p = (DIFFLN *) & g_array_index (dview->a[dview->ord], DIFFLN, ind);
         if (p->u.len == 0)

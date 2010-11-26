@@ -39,16 +39,17 @@
 
 #include <errno.h>
 #include <fcntl.h>
-#include <stdint.h>     /* uintmax_t */
+#include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/util.h"
+#include "lib/widget.h"
+#include "lib/charsets.h"
 
 #include "src/main.h"
-#include "src/wtools.h"
-#include "src/charsets.h"
 
 #include "internal.h"
 

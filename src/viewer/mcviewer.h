@@ -2,12 +2,12 @@
  *  \brief Header: internal file viewer
  */
 
-#ifndef MC_VIEWER_H
-#define MC_VIEWER_H
+#ifndef MC__VIEWER_H
+#define MC__VIEWER_H
 
 #include "lib/global.h"
 
-/*** typedefs(not structures) and defined constants ********************/
+/*** typedefs(not structures) and defined constants **********************************************/
 
 struct mcview_struct;
 
@@ -19,11 +19,11 @@ typedef enum
     MCVIEW_WANT_PREV
 } mcview_ret_t;
 
-/*** enums *************************************************************/
+/*** enums ***************************************************************************************/
 
-/*** structures declarations (and typedefs of structures)***************/
+/*** structures declarations (and typedefs of structures)*****************************************/
 
-/*** global variables defined in .c file *******************************/
+/*** global variables defined in .c file *********************************************************/
 
 extern int mcview_default_hex_mode;
 extern int mcview_default_nroff_flag;
@@ -40,8 +40,7 @@ extern int mcview_max_dirt_limit;
 extern int mcview_mouse_move_pages;
 extern char *mcview_show_eof;
 
-/*** declarations of public functions **********************************/
-
+/*** declarations of public functions ************************************************************/
 
 /* Creates a new mcview_t object with the given properties. Caveat: the
  * origin is in y-x order, while the extent is in x-y order. */
@@ -55,4 +54,5 @@ extern mcview_ret_t mcview_viewer (const char *command, const char *file, int st
 
 extern gboolean mcview_load (struct mcview_struct *, const char *, const char *, int);
 
-#endif
+/*** inline functions ****************************************************************************/
+#endif /* MC__VIEWER_H */

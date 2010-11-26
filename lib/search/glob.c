@@ -27,13 +27,12 @@
 
 #include <config.h>
 
-
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
 #include "lib/strescape.h"
 
-#include "src/charsets.h"
+#include "lib/charsets.h"
 
 #include "internal.h"
 

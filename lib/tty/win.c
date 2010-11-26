@@ -1,10 +1,10 @@
 /* Terminal management xterm and rxvt support
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
    2007, 2009 Free Software Foundation, Inc.
-   
+
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2009.
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -33,11 +33,12 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-#include "tty.h"  /* tty_gotoyx, tty_print_char */
+#include "lib/util.h"           /* is_printable() */
+#include "tty.h"                /* tty_gotoyx, tty_print_char */
 #include "win.h"
-#include "src/consaver/cons.saver.h"       /* console_flag */
+#include "src/consaver/cons.saver.h"    /* console_flag */
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
 /* This flag is set by xterm detection routine in function main() */
 /* It is used by function view_other_cmd() */
@@ -45,15 +46,16 @@ int xterm_flag = 0;
 
 extern int keybar_visible;
 
-/*** file scope macro definitions **************************************/
+/*** file scope macro definitions ****************************************************************/
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
 static gboolean rxvt_extensions = FALSE;
 
-/*** file scope functions **********************************************/
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* my own wierd protocol base 16 - paul */
 static int
@@ -71,6 +73,8 @@ rxvt_getc (void)
     return r;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 anything_ready (void)
 {
@@ -84,25 +88,33 @@ anything_ready (void)
     return select (1, &fds, 0, 0, &tv);
 }
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 do_enter_ca_mode (void)
 {
-    if (xterm_flag) {
+    if (xterm_flag)
+    {
         fprintf (stdout, /* ESC_STR ")0" */ ESC_STR "7" ESC_STR "[?47h");
         fflush (stdout);
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 void
 do_exit_ca_mode (void)
 {
-    if (xterm_flag) {
+    if (xterm_flag)
+    {
         fprintf (stdout, ESC_STR "[?47l" ESC_STR "8" ESC_STR "[m");
         fflush (stdout);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
@@ -115,20 +127,22 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     while (anything_ready ())
         tty_lowlevel_getch ();
 
-/* my own wierd protocol base 26 - paul */
+    /* my own wierd protocol base 26 - paul */
     printf ("\033CL%c%c%c%c\n", (y1 / 26) + 'A', (y1 % 26) + 'A', (y2 / 26) + 'A', (y2 % 26) + 'A');
 
     bytes = (y2 - y1) * (COLS + 1) + 1; /* *should* be the number of bytes read */
     j = 0;
     k = g_malloc (bytes);
-    for (;;) {
+    for (;;)
+    {
         int c;
         c = rxvt_getc ();
         if (c < 0)
             break;
         if (j < bytes)
             k[j++] = c;
-        for (cols = 1;; cols++) {
+        for (cols = 1;; cols++)
+        {
             c = rxvt_getc ();
             if (c < 0)
                 break;
@@ -136,7 +150,8 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
                 k[j++] = c;
         }
     }
-    for (i = 0; i < j; i++) {
+    for (i = 0; i < j; i++)
+    {
         if ((i % cols) == 0)
             tty_gotoyx (starty + (i / cols), 0);
         tty_print_char (is_printable (k[i]) ? k[i] : ' ');
@@ -144,12 +159,15 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     g_free (k);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 gboolean
 look_for_rxvt_extensions (void)
 {
     static gboolean been_called = FALSE;
 
-    if (!been_called) {
+    if (!been_called)
+    {
         const char *e = getenv ("RXVT_EXT");
         rxvt_extensions = ((e != NULL) && (strcmp (e, "1.0") == 0));
         been_called = TRUE;
@@ -160,3 +178,5 @@ look_for_rxvt_extensions (void)
 
     return rxvt_extensions;
 }
+
+/* --------------------------------------------------------------------------------------------- */
