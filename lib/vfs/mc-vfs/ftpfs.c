@@ -84,7 +84,7 @@ What to do with this?
 #include <ctype.h>
 #include <fcntl.h>
 #include <sys/time.h>           /* gettimeofday() */
-#include <stdint.h>             /* uintmax_t */
+#include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
 #include "lib/util.h"

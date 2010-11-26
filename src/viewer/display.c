@@ -36,7 +36,7 @@
  */
 
 #include <config.h>
-#include <stdint.h>             /* uintmax_t */
+#include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
 #include "lib/skin.h"

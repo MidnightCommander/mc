@@ -53,7 +53,7 @@
 
 #include <string.h>             /* for g_memmove() */
 #ifdef MC_ENABLE_DEBUGGING_CODE
-#include <stdint.h>             /* uintmax_t */
+#include <inttypes.h>           /* uintmax_t */
 #endif
 
 #include "lib/global.h"
