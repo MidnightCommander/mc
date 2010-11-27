@@ -96,13 +96,9 @@ file_op_context_destroy (FileOpContext * ctx)
 {
     g_return_if_fail (ctx != NULL);
 
-    if (ctx->ui)
-        file_op_context_destroy_ui (ctx);
-
+    file_op_context_destroy_ui (ctx);
     mc_search_free (ctx->search_handle);
-
     /** \todo FIXME: do we need to free ctx->dest_mask? */
-
     g_free (ctx);
 }
 
@@ -123,7 +119,6 @@ file_op_total_context_new (void)
 void
 file_op_total_context_destroy (FileOpTotalContext * tctx)
 {
-    g_return_if_fail (tctx != NULL);
     g_free (tctx);
 }
 

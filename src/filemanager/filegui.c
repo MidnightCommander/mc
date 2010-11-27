@@ -655,22 +655,19 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 void
 file_op_context_destroy_ui (FileOpContext * ctx)
 {
-    FileOpContextUI *ui;
-
     g_return_if_fail (ctx != NULL);
 
-    if (ctx->ui)
+    if (ctx->ui != NULL)
     {
-        ui = ctx->ui;
+        FileOpContextUI *ui = (FileOpContextUI *) ctx->ui;
 
         dlg_run_done (ui->op_dlg);
         destroy_dlg (ui->op_dlg);
         g_free (ui);
+        ctx->ui = NULL;
     }
 
     the_hint->widget.y = last_hint_line;
-
-    ctx->ui = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
