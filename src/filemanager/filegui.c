@@ -283,15 +283,14 @@ file_bps_prepare_for_show (char *buffer, long bps)
 static replace_action_t
 overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 {
-#define ADD_RD_BUTTON(i)\
-	add_widget (ui->replace_dlg,\
-		button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value,\
-		NORMAL_BUTTON, rd_widgets [i].text, 0))
+#define ADD_RD_BUTTON(i) \
+    add_widget (ui->replace_dlg, \
+            button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value, \
+                        NORMAL_BUTTON, rd_widgets [i].text, 0))
 
-#define ADD_RD_LABEL(i, p1, p2)\
-	g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2);\
-	add_widget (ui->replace_dlg,\
-		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
+#define ADD_RD_LABEL(i, p1, p2) \
+    g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2); \
+    add_widget (ui->replace_dlg, label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
 
     /* dialog sizes */
     const int rd_ylen = 17;
@@ -309,17 +308,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
         { N_("Target file already exists!"), 3, 4, 0 },
         /*  1 */
         { "%s", 4, 4, 0 },
-#if (defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64) || (defined _LARGE_FILES && _LARGE_FILES)
         /*  2 */
-        { N_("Source date: %s, size %llu"), 6, 4, 0 },
+        { N_("Source date: %s, size %ju"), 6, 4, 0 },
         /*  3 */
-        { N_("Target date: %s, size %llu"), 7, 4, 0 },
-#else
-        /*  2 */
-        { N_("Source date: %s, size %u"), 6, 4, 0 },
-        /*  3 */
-        { N_("Target date: %s, size %u"), 7, 4, 0 },
-#endif
+        { N_("Target date: %s, size %ju"), 7, 4, 0 },
         /*  4 */
         { N_("&Abort"), 14, 25, REPLACE_ABORT },
         /*  5 */
@@ -436,10 +428,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     add_widget (ui->replace_dlg,
                 label_new (rd_widgets[1].ypos, (rd_xlen - stripped_name_len) / 2, stripped_name));
 
-    /* source date */
-    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (off_t) ui->s_stat->st_size);
-    /* destination date */
-    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (off_t) ui->d_stat->st_size);
+    /* source date and size */
+    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (uintmax_t) ui->s_stat->st_size);
+    /* destination date and size */
+    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (uintmax_t) ui->d_stat->st_size);
 
     ADD_RD_BUTTON (4);          /* Abort */
     ADD_RD_BUTTON (5);          /* If size differs */
