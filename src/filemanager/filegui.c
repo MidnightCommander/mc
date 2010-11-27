@@ -497,8 +497,7 @@ check_progress_buttons (FileOpContext * ctx)
     Gpm_Event event;
     FileOpContextUI *ui;
 
-    if (ctx->ui == NULL)
-        return FILE_CONT;
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
 
     ui = ctx->ui;
 
@@ -688,9 +687,7 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
         return;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
@@ -729,12 +726,9 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
-
     g_snprintf (buffer, BUF_TINY, _("Files processed: %zu of %zu"), done, total);
     label_set_text (ui->total_files_processed_label, buffer);
 }
@@ -752,8 +746,8 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     struct timeval tv_current;
     FileOpContextUI *ui;
 
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx != NULL);
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
@@ -795,23 +789,21 @@ file_progress_show_source (FileOpContext * ctx, const char *s)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
     if (s != NULL)
     {
 #ifdef WITH_FULL_PATHS
-        int i = strlen (current_panel->cwd);
+        size_t i;
+
+        i = strlen (current_panel->cwd);
 
         /* We remove the full path we have added before */
-        if (!strncmp (s, current_panel->cwd, i))
-        {
+        if (strncmp (s, current_panel->cwd, i) == 0)
             if (s[i] == PATH_SEP)
                 s += i + 1;
-        }
 #endif /* WITH_FULL_PATHS */
 
         label_set_text (ui->file_label[0], _("Source"));
@@ -832,9 +824,7 @@ file_progress_show_target (FileOpContext * ctx, const char *s)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
@@ -858,9 +848,7 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
     label_set_text (ui->file_label[0], _("Deleting"));
