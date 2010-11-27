@@ -55,7 +55,7 @@ FileProgressStatus file_error (const char *format, const char *file);
 /* return value is FILE_CONT or FILE_ABORT */
 FileProgressStatus compute_dir_size (const char *dirname, const void *ui,
                                      compute_dir_size_callback cback,
-                                     off_t * ret_marked, uintmax_t *ret_total,
+                                     size_t * ret_marked, uintmax_t *ret_total,
                                      gboolean compute_symlinks);
 
 ComputeDirSizeUI *compute_dir_size_create_ui (void);

@@ -40,7 +40,7 @@ FileProgressStatus check_progress_buttons (FileOpContext * ctx);
 
 void file_progress_show (FileOpContext * ctx, off_t done, off_t total,
                          const char *stalled_msg, gboolean force_update);
-void file_progress_show_count (FileOpContext * ctx, off_t done, off_t total);
+void file_progress_show_count (FileOpContext * ctx, size_t done, size_t total);
 void file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx,
                                uintmax_t copyed_bytes, gboolean need_show_total_summary);
 void file_progress_show_source (FileOpContext * ctx, const char *path);

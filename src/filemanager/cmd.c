@@ -1496,7 +1496,7 @@ single_dirsize_cmd (void)
     entry = &(panel->dir.list[panel->selected]);
     if (S_ISDIR (entry->st.st_mode) && strcmp (entry->fname, "..") != 0)
     {
-        off_t marked;
+        size_t marked = 0;
         uintmax_t total = 0;
         ComputeDirSizeUI *ui;
 
@@ -1539,7 +1539,7 @@ dirsizes_cmd (void)
             && ((panel->dirs_marked && panel->dir.list[i].f.marked)
                 || !panel->dirs_marked) && strcmp (panel->dir.list[i].fname, "..") != 0)
         {
-            off_t marked;
+            size_t marked = 0;
             uintmax_t total = 0;
 
             if (compute_dir_size (panel->dir.list[i].fname,

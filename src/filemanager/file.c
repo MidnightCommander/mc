@@ -668,23 +668,22 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
         return FILE_ABORT;
     mc_refresh ();
 
-    if (tctx->progress_count && mc_lstat (s, &buf))
+    if (tctx->progress_count != 0 && mc_lstat (s, &buf) != 0)
     {
         /* ignore, most likely the mc_unlink fails, too */
         buf.st_size = 0;
     }
 
-    while (mc_unlink (s))
+    while (mc_unlink (s) != 0)
     {
         return_status = file_error (_("Cannot delete file \"%s\"\n%s"), s);
         if (return_status != FILE_RETRY)
             return return_status;
     }
 
-    if (tctx->progress_count)
-        return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
-    else
+    if (tctx->progress_count == 0)
         return FILE_CONT;
+    return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -858,7 +857,7 @@ panel_get_file (WPanel * panel, struct stat *stat_buf)
 static FileProgressStatus
 panel_compute_totals (const WPanel * panel, const void *ui,
                       compute_dir_size_callback cback,
-                      off_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
+                      size_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
 {
     int i;
 
@@ -877,7 +876,7 @@ panel_compute_totals (const WPanel * panel, const void *ui,
         if (S_ISDIR (s->st_mode))
         {
             char *dir_name;
-            off_t subdir_count = 0;
+            size_t subdir_count = 0;
             uintmax_t subdir_bytes = 0;
             FileProgressStatus status;
 
@@ -2116,7 +2115,7 @@ compute_dir_size_update_ui (const void *ui, const char *dirname)
 FileProgressStatus
 compute_dir_size (const char *dirname, const void *ui,
                   compute_dir_size_callback cback,
-                  off_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
+                  size_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
 {
     int res;
     struct stat s;
@@ -2169,7 +2168,7 @@ compute_dir_size (const char *dirname, const void *ui,
 
         if (S_ISDIR (s.st_mode))
         {
-            off_t subdir_count = 0;
+            size_t subdir_count = 0;
             uintmax_t subdir_bytes = 0;
 
             ret =

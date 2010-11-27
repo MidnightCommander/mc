@@ -85,7 +85,7 @@ typedef struct FileOpContext
     int dialog_type;
 
     /* Counters for progress indicators */
-    off_t progress_count;
+    size_t progress_count;
     uintmax_t progress_bytes;
 
     /* The value of the "preserve Attributes" checkbox in the copy file dialog.
@@ -154,7 +154,7 @@ typedef struct FileOpContext
 
 typedef struct
 {
-    off_t progress_count;
+    size_t progress_count;
     uintmax_t progress_bytes;
     uintmax_t copyed_bytes;
     size_t bps;

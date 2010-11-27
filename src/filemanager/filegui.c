@@ -726,7 +726,7 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_count (FileOpContext * ctx, off_t done, off_t total)
+file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
 {
     char buffer[BUF_TINY];
     FileOpContextUI *ui;
@@ -741,9 +741,7 @@ file_progress_show_count (FileOpContext * ctx, off_t done, off_t total)
     if (!verbose)
         return;
 
-    g_snprintf (buffer, BUF_TINY, _("Files processed: %llu of %llu"),
-                (unsigned long long) done, (unsigned long long) total);
-
+    g_snprintf (buffer, BUF_TINY, _("Files processed: %zu of %zu"), done, total);
     label_set_text (ui->total_files_processed_label, buffer);
 }
 
