@@ -430,8 +430,11 @@ progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add,
     gettimeofday (&tv_current, (struct timezone *) NULL);
     if ((tv_current.tv_sec - tv_start.tv_sec) > FILEOP_UPDATE_INTERVAL)
     {
-        file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-        file_progress_show_total (tctx, ctx, tctx->progress_bytes, TRUE);
+        if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+        {
+            file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+            file_progress_show_total (tctx, ctx, tctx->progress_bytes, TRUE);
+        }
         tv_start.tv_sec = tv_current.tv_sec;
     }
 
@@ -1507,13 +1510,18 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
             }
 
             {
-                gboolean force_update =
-                    (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL;
-                file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-                file_progress_show_total (tctx, ctx,
-                                          tctx->progress_bytes + n_read_total + ctx->do_reget,
-                                          force_update);
+                gboolean force_update;
 
+                force_update =
+                    (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL;
+
+                if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+                {
+                    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+                    file_progress_show_total (tctx, ctx,
+                                              tctx->progress_bytes + n_read_total + ctx->do_reget,
+                                              force_update);
+                }
 
                 file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
                                     force_update);
@@ -2588,15 +2596,14 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 if (value == FILE_CONT)
                     do_file_mark (panel, i, 0);
 
-                file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-
-                if (verbose)
+                if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
+                    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
                     file_progress_show_total (tctx, ctx, tctx->progress_bytes, FALSE);
-
-                    if (operation != OP_DELETE)
-                        file_progress_show (ctx, 0, 0, "", FALSE);
                 }
+
+                if (operation != OP_DELETE)
+                    file_progress_show (ctx, 0, 0, "", FALSE);
 
                 if (check_progress_buttons (ctx) == FILE_ABORT)
                     break;

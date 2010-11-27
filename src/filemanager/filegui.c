@@ -687,15 +687,15 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
 
+    if (!verbose)
+        return;
+
     g_return_if_fail (ctx != NULL);
 
     if (ctx->ui == NULL)
         return;
 
     ui = ctx->ui;
-
-    if (!verbose)
-        return;
 
     if (total == 0)
     {
@@ -733,13 +733,10 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
 
     g_return_if_fail (ctx != NULL);
 
-    if (ctx->dialog_type != FILEGUI_DIALOG_MULTI_ITEM || ctx->ui == NULL)
+    if (ctx->ui == NULL)
         return;
 
     ui = ctx->ui;
-
-    if (!verbose)
-        return;
 
     g_snprintf (buffer, BUF_TINY, _("Files processed: %zu of %zu"), done, total);
     label_set_text (ui->total_files_processed_label, buffer);
@@ -749,7 +746,7 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
 
 void
 file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintmax_t copyed_bytes,
-                          gboolean need_show_total_summary)
+                          gboolean show_summary)
 {
     char buffer[BUF_TINY];
     char buffer2[BUF_TINY];
@@ -758,10 +755,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     struct timeval tv_current;
     FileOpContextUI *ui;
 
-    if (!verbose)
-        return;
-
-    if (ctx->dialog_type != FILEGUI_DIALOG_MULTI_ITEM || ctx->ui == NULL)
+    if (ctx->ui == NULL)
         return;
 
     ui = ctx->ui;
@@ -775,8 +769,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     else
         gauge_show (ui->progress_total_gauge, 0);
 
-
-    if (!need_show_total_summary && tctx->bps == 0)
+    if (!show_summary && tctx->bps == 0)
         return;
 
     gettimeofday (&tv_current, NULL);

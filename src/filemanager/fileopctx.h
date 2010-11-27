@@ -30,6 +30,13 @@ typedef int (*mc_stat_fn) (const char *filename, struct stat * buf);
 
 typedef enum
 {
+    FILEGUI_DIALOG_ONE_ITEM,
+    FILEGUI_DIALOG_MULTI_ITEM,
+    FILEGUI_DIALOG_DELETE_ITEM
+} filegui_dialog_type_t;
+
+typedef enum
+{
     OP_COPY = 0,
     OP_MOVE = 1,
     OP_DELETE = 2
@@ -82,7 +89,7 @@ typedef struct FileOpContext
 
     /* Whether the panel total has been computed */
     gboolean progress_totals_computed;
-    int dialog_type;
+    filegui_dialog_type_t dialog_type;
 
     /* Counters for progress indicators */
     size_t progress_count;
