@@ -421,7 +421,7 @@ progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add,
     if (is_toplevel_file || ctx->progress_totals_computed)
     {
         tctx->progress_count++;
-        tctx->progress_bytes += add;
+        tctx->progress_bytes += (uintmax_t) add;
     }
     if (tv_start.tv_sec == 0)
     {
@@ -516,7 +516,7 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
     /* 5. Compute total ETA and BPS */
     if (ctx->progress_bytes != 0)
     {
-        double remain_bytes;
+        uintmax_t remain_bytes;
         tctx->copyed_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
         remain_bytes = ctx->progress_bytes - tctx->copyed_bytes;
 #if 1
@@ -858,12 +858,12 @@ panel_get_file (WPanel * panel, struct stat *stat_buf)
 static FileProgressStatus
 panel_compute_totals (const WPanel * panel, const void *ui,
                       compute_dir_size_callback cback,
-                      off_t * ret_marked, double *ret_total, gboolean compute_symlinks)
+                      off_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
 {
     int i;
 
     *ret_marked = 0;
-    *ret_total = 0.0;
+    *ret_total = 0;
 
     for (i = 0; i < panel->count; i++)
     {
@@ -878,7 +878,7 @@ panel_compute_totals (const WPanel * panel, const void *ui,
         {
             char *dir_name;
             off_t subdir_count = 0;
-            double subdir_bytes = 0;
+            uintmax_t subdir_bytes = 0;
             FileProgressStatus status;
 
             dir_name = concat_dir_and_file (panel->cwd, panel->dir.list[i].fname);
@@ -896,7 +896,7 @@ panel_compute_totals (const WPanel * panel, const void *ui,
         else
         {
             (*ret_marked)++;
-            *ret_total += s->st_size;
+            *ret_total += (uintmax_t) s->st_size;
         }
     }
 
@@ -2116,7 +2116,7 @@ compute_dir_size_update_ui (const void *ui, const char *dirname)
 FileProgressStatus
 compute_dir_size (const char *dirname, const void *ui,
                   compute_dir_size_callback cback,
-                  off_t * ret_marked, double *ret_total, gboolean compute_symlinks)
+                  off_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
 {
     int res;
     struct stat s;
@@ -2134,7 +2134,7 @@ compute_dir_size (const char *dirname, const void *ui,
         if (S_ISLNK (s.st_mode))
         {
             (*ret_marked)++;
-            *ret_total += s.st_size;
+            *ret_total += (uintmax_t) s.st_size;
             return ret;
         }
     }
@@ -2170,7 +2170,7 @@ compute_dir_size (const char *dirname, const void *ui,
         if (S_ISDIR (s.st_mode))
         {
             off_t subdir_count = 0;
-            double subdir_bytes = 0;
+            uintmax_t subdir_bytes = 0;
 
             ret =
                 compute_dir_size (fullname, ui, cback, &subdir_count, &subdir_bytes,
@@ -2188,7 +2188,7 @@ compute_dir_size (const char *dirname, const void *ui,
         else
         {
             (*ret_marked)++;
-            *ret_total += s.st_size;
+            *ret_total += (uintmax_t) s.st_size;
         }
 
         g_free (fullname);

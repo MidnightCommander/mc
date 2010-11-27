@@ -17,6 +17,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/time.h>
+#include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
 
@@ -85,7 +86,7 @@ typedef struct FileOpContext
 
     /* Counters for progress indicators */
     off_t progress_count;
-    double progress_bytes;
+    uintmax_t progress_bytes;
 
     /* The value of the "preserve Attributes" checkbox in the copy file dialog.
      * We can't use the value of "ctx->preserve" because it can change in order
@@ -154,8 +155,8 @@ typedef struct FileOpContext
 typedef struct
 {
     off_t progress_count;
-    double progress_bytes;
-    double copyed_bytes;
+    uintmax_t progress_bytes;
+    uintmax_t copyed_bytes;
     size_t bps;
     size_t bps_count;
     struct timeval transfer_start;
@@ -163,7 +164,6 @@ typedef struct
 
     gboolean ask_overwrite;
     gboolean is_toplevel_file;
-
 } FileOpTotalContext;
 
 /*** global variables defined in .c file *********************************************************/

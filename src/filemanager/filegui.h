@@ -31,7 +31,6 @@ void file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_
                                              filegui_dialog_type_t dialog_type);
 void file_op_context_destroy_ui (FileOpContext * ctx);
 
-
 char *file_mask_dialog (FileOpContext * ctx, FileOperation operation,
                         gboolean only_one,
                         const char *format, const void *text,
@@ -43,7 +42,7 @@ void file_progress_show (FileOpContext * ctx, off_t done, off_t total,
                          const char *stalled_msg, gboolean force_update);
 void file_progress_show_count (FileOpContext * ctx, off_t done, off_t total);
 void file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx,
-                               double copyed_bytes, gboolean need_show_total_summary);
+                               uintmax_t copyed_bytes, gboolean need_show_total_summary);
 void file_progress_show_source (FileOpContext * ctx, const char *path);
 void file_progress_show_target (FileOpContext * ctx, const char *path);
 void file_progress_show_deleting (FileOpContext * ctx, const char *path);

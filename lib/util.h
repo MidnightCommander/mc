@@ -9,6 +9,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <inttypes.h>           /* uintmax_t */
 #include <unistd.h>
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -70,18 +71,18 @@ const char *path_trunc (const char *path, size_t trunc_len);
 /* return a static string representing size, appending "K" or "M" for
  * big sizes.
  * NOTE: uses the same static buffer as size_trunc_sep. */
-const char *size_trunc (double size, gboolean use_si);
+const char *size_trunc (uintmax_t size, gboolean use_si);
 
 /* return a static string representing size, appending "K" or "M" for
  * big sizes. Separates every three digits by ",".
  * NOTE: uses the same static buffer as size_trunc. */
-const char *size_trunc_sep (double size, gboolean use_si);
+const char *size_trunc_sep (uintmax_t size, gboolean use_si);
 
 /* Print file SIZE to BUFFER, but don't exceed LEN characters,
  * not including trailing 0. BUFFER should be at least LEN+1 long.
  *
  * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
-void size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean use_si);
+void size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si);
 const char *string_perm (mode_t mode_bits);
 
 /* @modifies path. @returns pointer into path. */

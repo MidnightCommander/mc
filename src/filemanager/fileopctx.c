@@ -70,7 +70,7 @@ file_op_context_new (FileOperation op)
     ctx = g_new0 (FileOpContext, 1);
     ctx->operation = op;
     ctx->eta_secs = 0.0;
-    ctx->progress_bytes = 0.0;
+    ctx->progress_bytes = 0;
     ctx->op_preserve = TRUE;
     ctx->do_reget = 1;
     ctx->stat_func = mc_lstat;
