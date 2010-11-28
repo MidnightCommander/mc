@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-01 15:58+0200\n"
+"POT-Creation-Date: 2010-11-28 23:42+0200\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -14,6 +14,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Nevar nomainīt direktoriju"
+
+msgid "7-bit ASCII"
+msgstr ""
+
+#, c-format
+msgid "Cannot translate from %s to %s"
+msgstr "Nevar tulkot %s uz %s"
 
 #, c-format
 msgid ""
@@ -354,6 +365,10 @@ msgstr "Backspace taustiņš"
 msgid "Number sign #"
 msgstr ""
 
+#. TRANSLATORS: Please translate as in "at sign" (@).
+msgid "At sign"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -470,9 +485,6 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr "Direktorija kešs priekš %s izbeidzās"
 
-msgid "Starting linear transfer..."
-msgstr "Sākam lineāro pārraidi..."
-
 #, fuzzy, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu baiti pārsūtīti)"
@@ -480,6 +492,9 @@ msgstr "%s: %s: %s %3d%% (%lu baiti pārsūtīti)"
 #, fuzzy, c-format
 msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu baiti pārsūtīti"
+
+msgid "Starting linear transfer..."
+msgstr "Sākam lineāro pārraidi..."
 
 msgid "Getting file"
 msgstr "Dabūjam failu"
@@ -791,10 +806,6 @@ msgstr " nav vairāk atmiņas kamēr piešķir ietērpus "
 msgid "while doing inode scan %d"
 msgstr " veicot inode skenēšanu %d "
 
-#, fuzzy
-msgid "Ext2lib error"
-msgstr " Ext2lib kļūda "
-
 #, fuzzy, c-format
 msgid "Cannot open file %s"
 msgstr " Nevar atvērt failu %s "
@@ -837,6 +848,10 @@ msgstr " kamēr atkārto blokus"
 msgid "Cannot open file \"%s\""
 msgstr " Nevar atvērt failu %s "
 
+#, fuzzy
+msgid "Ext2lib error"
+msgstr " Ext2lib kļūda "
+
 msgid "Cannot parse:"
 msgstr "Nevar izanalizēt:"
 
@@ -852,59 +867,37 @@ msgstr "Parole:"
 msgid "Changes to file lost"
 msgstr "Izmaiņas failā pazudušas"
 
+msgid "Screens"
+msgstr ""
+
+#, fuzzy
+msgid "History"
+msgstr " Vēsture "
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Jā"
+
+msgid "&No"
+msgstr "&Nē"
+
+msgid "Background process:"
+msgstr "Fona process:"
+
 msgid "&Cancel"
 msgstr "&Atsaukt"
 
-msgid "&Set"
-msgstr "&Uzstādīt"
+msgid "&OK"
+msgstr "&Labi"
 
-msgid "S&kip"
-msgstr "Iz&laist"
-
-msgid "Set &all"
-msgstr "Uzstādīt &visus"
-
-msgid "owner"
-msgstr "īpašnieks"
-
-msgid "group"
-msgstr "grupa"
-
-msgid "other"
-msgstr "citi"
-
-msgid "On"
-msgstr "Ieslēgts"
-
-msgid "Flag"
-msgstr "Karogs"
-
-msgid "Mode"
-msgstr "Režīms"
-
-#, c-format
-msgid "%6d of %d"
-msgstr "%6d no %d"
-
-#, fuzzy
-msgid "Chown advanced command"
-msgstr " Paplašinātā chown komanda "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
-msgstr ""
-" Nevarēja chmod \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chown \"%s\"\n"
-"%s"
-msgstr ""
-" Nevarēja chown \"%s\" \n"
-" %s "
+msgid "Error"
+msgstr "Kļūda"
 
 msgid "Displays the current version"
 msgstr "Parāda pašreizējo versiju"
@@ -979,6 +972,7 @@ msgid ""
 "Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1084,510 +1078,6 @@ msgid ""
 msgstr ""
 " Fona process atsūtīja pieprasījumu pēc vairāk argumentiem, \n"
 " kā mēs varam norīkot. \n"
-
-msgid "&Full file list"
-msgstr "Pi&lns failu saraksts"
-
-msgid "&Brief file list"
-msgstr "&Īss failu saraksts"
-
-msgid "&Long file list"
-msgstr "&Garšs failu saraksts"
-
-msgid "&User defined:"
-msgstr "Li&etotāja definēts:"
-
-msgid "Listing mode"
-msgstr "Saraksta režīms"
-
-#, fuzzy
-msgid "User &mini status"
-msgstr "lietotāja &Mini statuss"
-
-msgid "&OK"
-msgstr "&Labi"
-
-msgid "&Reverse"
-msgstr "&Pretēji"
-
-#, fuzzy
-msgid "Case sensi&tive"
-msgstr "lielo/ma&zo burtu jūtīgs"
-
-msgid "Executable &first"
-msgstr ""
-
-msgid "Sort order"
-msgstr "Kārtošanas secība"
-
-#, fuzzy
-msgid "Confirmation"
-msgstr " Apstiprināšana "
-
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#. 2
-#, fuzzy
-msgid "Confirmation|&History cleanup"
-msgstr " Apstiprināšana "
-
-#, fuzzy
-msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "di&Rektoriju karstais saraksts    C-\\"
-
-#, fuzzy
-msgid "Confirmation|E&xit"
-msgstr " Apstiprināšana "
-
-#, fuzzy
-msgid "Confirmation|&Execute"
-msgstr " Apstiprināšana "
-
-#, fuzzy
-msgid "Confirmation|O&verwrite"
-msgstr " apstiprināt pā&Rrakstīšanu "
-
-#, fuzzy
-msgid "Confirmation|&Delete"
-msgstr " Apstiprināšana "
-
-#, fuzzy
-msgid "UTF-8 output"
-msgstr "Pilna 8 bitu izvade"
-
-msgid "Full 8 bits output"
-msgstr "Pilna 8 bitu izvade"
-
-msgid "ISO 8859-1"
-msgstr "ISO 8859-1"
-
-msgid "7 bits"
-msgstr "7 biti"
-
-msgid "F&ull 8 bits input"
-msgstr "P&ilna 8 bitu ievade"
-
-#, fuzzy
-msgid "Display bits"
-msgstr " Displeja biti "
-
-msgid "Other 8 bit"
-msgstr "Citi 8 bitu"
-
-msgid "Input / display codepage:"
-msgstr "Ievades / displeja kodu tabula:"
-
-msgid "&Select"
-msgstr "a&tlasīt"
-
-#, fuzzy
-msgid "Directory tree"
-msgstr "&Direktoriju koks"
-
-#, fuzzy
-msgid "Use passive mode over pro&xy"
-msgstr "&Saglabāt veidu..."
-
-#, fuzzy
-msgid "Use &passive mode"
-msgstr "&Saglabāt veidu..."
-
-msgid "&Use ~/.netrc"
-msgstr ""
-
-msgid "&Always use ftp proxy"
-msgstr "&Vienmēr lietot ftp proxy"
-
-msgid "sec"
-msgstr "sek"
-
-msgid "ftpfs directory cache timeout:"
-msgstr "ftpfs direktorija keša taimauts:"
-
-msgid "ftp anonymous password:"
-msgstr "anonīmā ftp parole:"
-
-msgid "Timeout for freeing VFSs:"
-msgstr "Taimauts atbrīvojot VFSas:"
-
-#, fuzzy
-msgid "Virtual File System Setting"
-msgstr " Virtuālo Failsistēmas Uzstādījumi "
-
-msgid "cd"
-msgstr "cd"
-
-msgid "Quick cd"
-msgstr "Ātrs cd"
-
-msgid "Symbolic link filename:"
-msgstr "Simbolsaites faila nosaukums:"
-
-msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-"Eksistējošs faila nosaukums (faila nosaukums, uz kuru simbolsaite norādīs):"
-
-msgid "Symbolic link"
-msgstr "Simbolsaite"
-
-#, fuzzy
-msgid "Running"
-msgstr "Darbojas"
-
-msgid "Stopped"
-msgstr "Apstādīnāts"
-
-msgid "&Stop"
-msgstr "&Stop"
-
-msgid "&Resume"
-msgstr "&Rezumēt"
-
-msgid "&Kill"
-msgstr "&Nokaut"
-
-msgid "Background Jobs"
-msgstr "Fona Darbi"
-
-msgid "Domain:"
-msgstr "Domēns:"
-
-msgid "Username:"
-msgstr "Lietotājvārds:"
-
-#, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s Parole"
-
-#, fuzzy
-msgid "Warning: cannot load codepages list"
-msgstr "Nevar nomainīt direktoriju"
-
-msgid "7-bit ASCII"
-msgstr ""
-
-#, c-format
-msgid "Cannot translate from %s to %s"
-msgstr "Nevar tulkot %s uz %s"
-
-msgid "execute/search by others"
-msgstr "palaist/meklēt citiem"
-
-msgid "write by others"
-msgstr "rakstīt citiem"
-
-msgid "read by others"
-msgstr "lasīt citiem"
-
-msgid "execute/search by group"
-msgstr "palaist/meklēt grupai"
-
-msgid "write by group"
-msgstr "rakstīt grupai"
-
-msgid "read by group"
-msgstr "lasīt grupai"
-
-msgid "execute/search by owner"
-msgstr "palaist/meklēt īpašniekam"
-
-msgid "write by owner"
-msgstr "rakstīt īpašniekam"
-
-msgid "read by owner"
-msgstr "lasīt īpašniekam"
-
-msgid "sticky bit"
-msgstr "lipīgs"
-
-msgid "set group ID on execution"
-msgstr "uzstād. grup. ID pie izpildes"
-
-msgid "set user ID on execution"
-msgstr "uzstād. liet. ID pie izpildes"
-
-msgid "C&lear marked"
-msgstr "A&ttīrīt izvēlēto"
-
-msgid "S&et marked"
-msgstr "U&zstādīt izvēlēto"
-
-msgid "&Marked all"
-msgstr "&Izvēlēti visi"
-
-msgid "Name"
-msgstr "Nosaukums"
-
-msgid "Permissions (Octal)"
-msgstr "Atļaujas (Octal)"
-
-msgid "Owner name"
-msgstr "Īpašnieka vārds"
-
-msgid "Group name"
-msgstr "Grupas vārds"
-
-msgid "Use SPACE to change"
-msgstr "Lietojiet SPACE, lai mainītu"
-
-msgid "an option, ARROW KEYS"
-msgstr "opcija, PULIŅU TAUSTIŅI"
-
-msgid "to move between options"
-msgstr ", lai kustētos starp opcijām"
-
-msgid "and T or INS to mark"
-msgstr "un T vai INS, lai atzīmētu"
-
-msgid "Chmod command"
-msgstr "Komanda chmod"
-
-msgid "File"
-msgstr "Fails"
-
-msgid "Permission"
-msgstr "Atļauja"
-
-msgid "Set &users"
-msgstr "Uzstādīt &lietotājus"
-
-msgid "Set &groups"
-msgstr "Uzstādīt &grupas"
-
-msgid "Size"
-msgstr "Lielums"
-
-#, fuzzy
-msgid "Chown command"
-msgstr " Komanda chown "
-
-msgid "<Unknown user>"
-msgstr "<Nezināms lietotājs>"
-
-msgid "<Unknown group>"
-msgstr "<Nezināma grupa>"
-
-#, fuzzy
-msgid "User name"
-msgstr " Lietotāja vārds "
-
-msgid "Files tagged, want to cd?"
-msgstr "Faili tagoti, gribat cd?"
-
-msgid "&Yes"
-msgstr "&Jā"
-
-msgid "&No"
-msgstr "&Nē"
-
-msgid "Cannot change directory"
-msgstr "Nevar nomainīt direktoriju"
-
-#, fuzzy
-msgid "View file"
-msgstr " Skatīt failu "
-
-#, fuzzy
-msgid "Filename:"
-msgstr " Faila Nosaukums:"
-
-#, fuzzy
-msgid "Filtered view"
-msgstr " Filtrēts skatījums "
-
-#, fuzzy
-msgid "Filter command and arguments:"
-msgstr " Filtrēšanas komanda un argumenti:"
-
-msgid "Create a new Directory"
-msgstr "Izveidot Jaunu Direktoriju"
-
-#, fuzzy
-msgid "Enter directory name:"
-msgstr " Ievadiet direktorijas nosaukumu:"
-
-#, fuzzy
-msgid "Filter"
-msgstr " Filtrs "
-
-#, fuzzy
-msgid "Set expression for filtering filenames"
-msgstr " Iestatīt izteiksmi failu nosaukumu filtrēšanai"
-
-msgid "&Using shell patterns"
-msgstr "&Lietoj"
-
-#, fuzzy
-msgid "&Case sensitive"
-msgstr "lielo/ma&zo burtu jūtīgs"
-
-#, fuzzy
-msgid "&Files only"
-msgstr "&Tikai izmērs"
-
-#, fuzzy
-msgid "Select"
-msgstr "a&tlasīt"
-
-#, fuzzy
-msgid "Unselect"
-msgstr " Neatlasīt "
-
-msgid "Extension file edit"
-msgstr "Paplašinājuma faila rediģēšana"
-
-#, fuzzy
-msgid "Which extension file you want to edit?"
-msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
-
-msgid "&User"
-msgstr "&Lietotājs"
-
-msgid "&System Wide"
-msgstr "&Sistēmas Mēroga"
-
-#, fuzzy
-msgid "Menu edit"
-msgstr " Izvēlņu rediģēšana "
-
-#, fuzzy
-msgid "Which menu file do you want to edit?"
-msgstr " Kuru izvēlnes failu jūs rediģēsiet ? "
-
-msgid "&Local"
-msgstr "&Vietēji"
-
-msgid "Highlighting groups file edit"
-msgstr ""
-
-#, fuzzy
-msgid "Which highlighting file you want to edit?"
-msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
-
-#, fuzzy
-msgid "Compare directories"
-msgstr " Salīdzināt direktorijas "
-
-#, fuzzy
-msgid "Select compare method:"
-msgstr " Izvēlēties salīdzināšanas metodi: "
-
-msgid "&Quick"
-msgstr "&Ātri"
-
-msgid "&Size only"
-msgstr "&Tikai izmērs"
-
-msgid "&Thorough"
-msgstr "&Pamatīgi"
-
-#, fuzzy
-msgid ""
-"Both panels should be in the listing mode\n"
-"to use this command"
-msgstr " Abiem paneļiem jābūt saraksta skata režīmā, lai lietotu šo komandu "
-
-#, fuzzy
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-" Ne xterm vai Linux konsole; \n"
-" paneļi nevar tikt slēdzelēti. "
-
-#, fuzzy, c-format
-msgid "Link %s to:"
-msgstr " saite: %s "
-
-#, fuzzy
-msgid "Link"
-msgstr "&Saites"
-
-#, fuzzy, c-format
-msgid "link: %s"
-msgstr " saite: %s "
-
-#, fuzzy, c-format
-msgid "symlink: %s"
-msgstr " simbolsaite: %s "
-
-#, fuzzy, c-format
-msgid "Symlink `%s' points to:"
-msgstr " Simbolsaite '%s' norāda uz: "
-
-#, fuzzy
-msgid "Edit symlink"
-msgstr " Rediģēt simbolsaiti "
-
-#, fuzzy, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr " rediģēt simbolsaiti, nevarēja izņemt %s: %s "
-
-#, fuzzy, c-format
-msgid "edit symlink: %s"
-msgstr " rediģēt simbolsaiti: %s "
-
-#, c-format
-msgid "`%s' is not a symbolic link"
-msgstr "`%s' nav simbolsaite"
-
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " nevarēja chdir uz %s "
-
-#, fuzzy
-msgid "Enter machine name (F1 for details):"
-msgstr " Ievadiet datora vārdu (F1 detalizētāk): "
-
-#, fuzzy
-msgid "FTP to machine"
-msgstr " FTP uz datoru "
-
-#, fuzzy
-msgid "Shell link to machine"
-msgstr " SMB saite uz datoru "
-
-#, fuzzy
-msgid "SMB link to machine"
-msgstr " SMB saite uz datoru "
-
-#, fuzzy
-msgid "Undelete files on an ext2 file system"
-msgstr " Atjaunot failus uz ext2 failsistēmas "
-
-#, fuzzy
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-" Ievadi iekārtu (bez /dev/), no kuras\n"
-"   atjaunot failus: (F1 detalizētāk)"
-
-#, fuzzy
-msgid "Setup"
-msgstr " Uzstādīšana "
-
-#, fuzzy, c-format
-msgid "Setup saved to ~/%s"
-msgstr " Uzstādījumi saglabāti iekš ~/"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-" Nevar chdir uz \"%s\" \n"
-" %s "
-
-#, fuzzy
-msgid "Cannot execute commands on non-local filesystems"
-msgstr " Tu nevari palaist komandas uz ne-vietējām failsistēmām"
-
-#, fuzzy
-msgid "The shell is already running a command"
-msgstr " Čaulā jau ir palaista komanda "
-
-msgid "Screens"
-msgstr ""
 
 msgid "&Dismiss"
 msgstr "&Atcelt"
@@ -1738,10 +1228,6 @@ msgid "Two files are needed to compare"
 msgstr ""
 
 #, fuzzy
-msgid "Cannot read directory contents"
-msgstr "Nevar nomainīt direktoriju"
-
-#, fuzzy
 msgid "Choose syntax highlighting"
 msgstr "sinta&Kses izgaismošana"
 
@@ -1775,20 +1261,9 @@ msgstr ""
 msgid "Cannot open %s for reading"
 msgstr " Nevar atvērt programkanālu lasīšanai: "
 
-msgid "Error"
-msgstr "Kļūda"
-
 #, fuzzy, c-format
 msgid "Error reading %s"
 msgstr "Kļūda lasot skriptu:"
-
-#, fuzzy, c-format
-msgid "Error reading from pipe: %s"
-msgstr " Kļūda lasot no programkanāla: "
-
-#, fuzzy, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr " Nevar atvērt programkanālu lasīšanai: "
 
 #, fuzzy, c-format
 msgid "Cannot get size/permissions for %s"
@@ -1804,6 +1279,14 @@ msgstr " Fails ir par lielu: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "Error reading from pipe: %s"
+msgstr " Kļūda lasot no programkanāla: "
+
+#, fuzzy, c-format
+msgid "Cannot open pipe for reading: %s"
+msgstr " Nevar atvērt programkanālu lasīšanai: "
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1822,24 +1305,6 @@ msgstr " Nevar atvērt programkanālu ierkastīšanai: "
 #, fuzzy, c-format
 msgid "Cannot open file for writing: %s"
 msgstr " Nevar atvērt programkanālu ierkastīšanai: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Ātra saglabāšana "
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Droša saglabāšana "
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-#, fuzzy
-msgid "Edit Save Mode"
-msgstr " Rediģēt Glabāšanas Režīmu "
 
 msgid "The file you are saving is not finished with a newline"
 msgstr ""
@@ -1872,22 +1337,6 @@ msgid "Save As"
 msgstr " Glabāt Kā "
 
 #, fuzzy
-msgid "A file already exists with this name"
-msgstr " Fails ar tādu nosaukumu jau eksistē. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Pārrakstīt"
-
-#, fuzzy
-msgid "Save as"
-msgstr "&Saglabāt uzstādījumus"
-
-#, fuzzy
-msgid "Cannot save file"
-msgstr " Kļūda mēģinot saglabāt failu. "
-
-#, fuzzy
 msgid "Delete macro"
 msgstr " Dzēst makro "
 
@@ -1902,6 +1351,69 @@ msgstr " Kļūda mēģinot atvērt makro failu "
 #, fuzzy
 msgid "Cannot overwrite macro file"
 msgstr " Kļūda mēģinot pārrakstīt makro failu "
+
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "&Izvēlnes faila rediģēšana"
+
+#, fuzzy
+msgid "Which syntax file you want to edit?"
+msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
+
+msgid "&User"
+msgstr "&Lietotājs"
+
+msgid "&System Wide"
+msgstr "&Sistēmas Mēroga"
+
+#, fuzzy
+msgid "Menu edit"
+msgstr " Izvēlņu rediģēšana "
+
+#, fuzzy
+msgid "Which menu file do you want to edit?"
+msgstr " Kuru izvēlnes failu jūs rediģēsiet ? "
+
+msgid "&Local"
+msgstr "&Vietēji"
+
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
+msgstr " Bloks ir liels, jūs iespējams nevarēsiet atsaukt šo darbību. "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Ātra saglabāšana "
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Droša saglabāšana "
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+#, fuzzy
+msgid "Edit Save Mode"
+msgstr " Rediģēt Glabāšanas Režīmu "
+
+#, fuzzy
+msgid "A file already exists with this name"
+msgstr " Fails ar tādu nosaukumu jau eksistē. "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Pārrakstīt"
+
+#, fuzzy
+msgid "Save as"
+msgstr "&Saglabāt uzstādījumus"
+
+#, fuzzy
+msgid "Cannot save file"
+msgstr " Kļūda mēģinot saglabāt failu. "
 
 #, fuzzy
 msgid "Save macro"
@@ -1939,20 +1451,8 @@ msgstr ""
 " Ja turpināsiet, izmaiņs tiks atsauktas. "
 
 #, fuzzy
-msgid "Syntax file edit"
-msgstr "&Izvēlnes faila rediģēšana"
-
-#, fuzzy
-msgid "Which syntax file you want to edit?"
-msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
-
-#, fuzzy
 msgid "Load"
 msgstr " Ielādēt "
-
-#, fuzzy
-msgid "Block is large, you may not be able to undo this action"
-msgstr " Bloks ir liels, jūs iespējams nevarēsiet atsaukt šo darbību. "
 
 #, fuzzy
 msgid "Replace"
@@ -2492,6 +1992,10 @@ msgstr ""
 "izdzēsis savu darba direktoriju vai arī esat iedevis sev \n"
 "papildus pieejas atļaujas ar \"su\" komandu? "
 
+#, fuzzy
+msgid "The shell is already running a command"
+msgstr " Čaulā jau ir palaista komanda "
+
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Ievadiet 'exit', lai atgrieztos Pusnakts Komandierī"
@@ -2499,6 +2003,521 @@ msgstr "Ievadiet 'exit', lai atgrieztos Pusnakts Komandierī"
 #, fuzzy, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr " Nevaru dabūt vietējo %s kopiju "
+
+msgid "&Set"
+msgstr "&Uzstādīt"
+
+msgid "S&kip"
+msgstr "Iz&laist"
+
+msgid "Set &all"
+msgstr "Uzstādīt &visus"
+
+msgid "owner"
+msgstr "īpašnieks"
+
+msgid "group"
+msgstr "grupa"
+
+msgid "other"
+msgstr "citi"
+
+msgid "On"
+msgstr "Ieslēgts"
+
+msgid "Flag"
+msgstr "Karogs"
+
+msgid "Mode"
+msgstr "Režīms"
+
+#, c-format
+msgid "%6d of %d"
+msgstr "%6d no %d"
+
+#, fuzzy
+msgid "Chown advanced command"
+msgstr " Paplašinātā chown komanda "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod \"%s\"\n"
+"%s"
+msgstr ""
+" Nevarēja chmod \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown \"%s\"\n"
+"%s"
+msgstr ""
+" Nevarēja chown \"%s\" \n"
+" %s "
+
+msgid "&Stop"
+msgstr "&Stop"
+
+msgid "&Resume"
+msgstr "&Rezumēt"
+
+msgid "&Kill"
+msgstr "&Nokaut"
+
+msgid "&Full file list"
+msgstr "Pi&lns failu saraksts"
+
+msgid "&Brief file list"
+msgstr "&Īss failu saraksts"
+
+msgid "&Long file list"
+msgstr "&Garšs failu saraksts"
+
+msgid "&User defined:"
+msgstr "Li&etotāja definēts:"
+
+msgid "Listing mode"
+msgstr "Saraksta režīms"
+
+#, fuzzy
+msgid "User &mini status"
+msgstr "lietotāja &Mini statuss"
+
+msgid "Other 8 bit"
+msgstr "Citi 8 bitu"
+
+#, fuzzy
+msgid "Display bits"
+msgstr " Displeja biti "
+
+msgid "Input / display codepage:"
+msgstr "Ievades / displeja kodu tabula:"
+
+msgid "F&ull 8 bits input"
+msgstr "P&ilna 8 bitu ievade"
+
+msgid "&Select"
+msgstr "a&tlasīt"
+
+#, fuzzy
+msgid "Running"
+msgstr "Darbojas"
+
+msgid "Stopped"
+msgstr "Apstādīnāts"
+
+msgid "&Reverse"
+msgstr "&Pretēji"
+
+#, fuzzy
+msgid "Case sensi&tive"
+msgstr "lielo/ma&zo burtu jūtīgs"
+
+msgid "Executable &first"
+msgstr ""
+
+msgid "Sort order"
+msgstr "Kārtošanas secība"
+
+#, fuzzy
+msgid "Confirmation"
+msgstr " Apstiprināšana "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Apstiprināšana "
+
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
+msgstr "di&Rektoriju karstais saraksts    C-\\"
+
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Apstiprināšana "
+
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Apstiprināšana "
+
+#, fuzzy
+msgid "Confirmation|O&verwrite"
+msgstr " apstiprināt pā&Rrakstīšanu "
+
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Apstiprināšana "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Pilna 8 bitu izvade"
+
+msgid "Full 8 bits output"
+msgstr "Pilna 8 bitu izvade"
+
+msgid "ISO 8859-1"
+msgstr "ISO 8859-1"
+
+msgid "7 bits"
+msgstr "7 biti"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Direktoriju koks"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "&Saglabāt veidu..."
+
+#, fuzzy
+msgid "Use &passive mode"
+msgstr "&Saglabāt veidu..."
+
+msgid "&Use ~/.netrc"
+msgstr ""
+
+msgid "&Always use ftp proxy"
+msgstr "&Vienmēr lietot ftp proxy"
+
+msgid "sec"
+msgstr "sek"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "ftpfs direktorija keša taimauts:"
+
+msgid "ftp anonymous password:"
+msgstr "anonīmā ftp parole:"
+
+msgid "Timeout for freeing VFSs:"
+msgstr "Taimauts atbrīvojot VFSas:"
+
+#, fuzzy
+msgid "Virtual File System Setting"
+msgstr " Virtuālo Failsistēmas Uzstādījumi "
+
+msgid "cd"
+msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Ātrs cd"
+
+msgid "Symbolic link filename:"
+msgstr "Simbolsaites faila nosaukums:"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr ""
+"Eksistējošs faila nosaukums (faila nosaukums, uz kuru simbolsaite norādīs):"
+
+msgid "Symbolic link"
+msgstr "Simbolsaite"
+
+msgid "Background Jobs"
+msgstr "Fona Darbi"
+
+msgid "Domain:"
+msgstr "Domēns:"
+
+msgid "Username:"
+msgstr "Lietotājvārds:"
+
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "\\\\%s\\%s Parole"
+
+msgid "execute/search by others"
+msgstr "palaist/meklēt citiem"
+
+msgid "write by others"
+msgstr "rakstīt citiem"
+
+msgid "read by others"
+msgstr "lasīt citiem"
+
+msgid "execute/search by group"
+msgstr "palaist/meklēt grupai"
+
+msgid "write by group"
+msgstr "rakstīt grupai"
+
+msgid "read by group"
+msgstr "lasīt grupai"
+
+msgid "execute/search by owner"
+msgstr "palaist/meklēt īpašniekam"
+
+msgid "write by owner"
+msgstr "rakstīt īpašniekam"
+
+msgid "read by owner"
+msgstr "lasīt īpašniekam"
+
+msgid "sticky bit"
+msgstr "lipīgs"
+
+msgid "set group ID on execution"
+msgstr "uzstād. grup. ID pie izpildes"
+
+msgid "set user ID on execution"
+msgstr "uzstād. liet. ID pie izpildes"
+
+msgid "C&lear marked"
+msgstr "A&ttīrīt izvēlēto"
+
+msgid "S&et marked"
+msgstr "U&zstādīt izvēlēto"
+
+msgid "&Marked all"
+msgstr "&Izvēlēti visi"
+
+msgid "Name"
+msgstr "Nosaukums"
+
+msgid "Permissions (Octal)"
+msgstr "Atļaujas (Octal)"
+
+msgid "Owner name"
+msgstr "Īpašnieka vārds"
+
+msgid "Group name"
+msgstr "Grupas vārds"
+
+msgid "Use SPACE to change"
+msgstr "Lietojiet SPACE, lai mainītu"
+
+msgid "an option, ARROW KEYS"
+msgstr "opcija, PULIŅU TAUSTIŅI"
+
+msgid "to move between options"
+msgstr ", lai kustētos starp opcijām"
+
+msgid "and T or INS to mark"
+msgstr "un T vai INS, lai atzīmētu"
+
+msgid "Chmod command"
+msgstr "Komanda chmod"
+
+msgid "File"
+msgstr "Fails"
+
+msgid "Permission"
+msgstr "Atļauja"
+
+msgid "Set &users"
+msgstr "Uzstādīt &lietotājus"
+
+msgid "Set &groups"
+msgstr "Uzstādīt &grupas"
+
+msgid "Size"
+msgstr "Lielums"
+
+#, fuzzy
+msgid "Chown command"
+msgstr " Komanda chown "
+
+msgid "<Unknown user>"
+msgstr "<Nezināms lietotājs>"
+
+msgid "<Unknown group>"
+msgstr "<Nezināma grupa>"
+
+#, fuzzy
+msgid "User name"
+msgstr " Lietotāja vārds "
+
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
+msgstr " Ievadiet datora vārdu (F1 detalizētāk): "
+
+msgid "Files tagged, want to cd?"
+msgstr "Faili tagoti, gribat cd?"
+
+msgid "Cannot change directory"
+msgstr "Nevar nomainīt direktoriju"
+
+#, fuzzy
+msgid "Filter"
+msgstr " Filtrs "
+
+#, fuzzy
+msgid "Set expression for filtering filenames"
+msgstr " Iestatīt izteiksmi failu nosaukumu filtrēšanai"
+
+msgid "&Using shell patterns"
+msgstr "&Lietoj"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "lielo/ma&zo burtu jūtīgs"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "&Tikai izmērs"
+
+#, fuzzy, c-format
+msgid "Link %s to:"
+msgstr " saite: %s "
+
+#, fuzzy
+msgid "Link"
+msgstr "&Saites"
+
+#, fuzzy, c-format
+msgid "link: %s"
+msgstr " saite: %s "
+
+#, fuzzy, c-format
+msgid "symlink: %s"
+msgstr " simbolsaite: %s "
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " nevarēja chdir uz %s "
+
+#, fuzzy
+msgid "View file"
+msgstr " Skatīt failu "
+
+#, fuzzy
+msgid "Filename:"
+msgstr " Faila Nosaukums:"
+
+#, fuzzy
+msgid "Filtered view"
+msgstr " Filtrēts skatījums "
+
+#, fuzzy
+msgid "Filter command and arguments:"
+msgstr " Filtrēšanas komanda un argumenti:"
+
+msgid "Create a new Directory"
+msgstr "Izveidot Jaunu Direktoriju"
+
+#, fuzzy
+msgid "Enter directory name:"
+msgstr " Ievadiet direktorijas nosaukumu:"
+
+#, fuzzy
+msgid "Select"
+msgstr "a&tlasīt"
+
+#, fuzzy
+msgid "Unselect"
+msgstr " Neatlasīt "
+
+msgid "Extension file edit"
+msgstr "Paplašinājuma faila rediģēšana"
+
+#, fuzzy
+msgid "Which extension file you want to edit?"
+msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid "Which highlighting file you want to edit?"
+msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
+
+#, fuzzy
+msgid "Compare directories"
+msgstr " Salīdzināt direktorijas "
+
+#, fuzzy
+msgid "Select compare method:"
+msgstr " Izvēlēties salīdzināšanas metodi: "
+
+msgid "&Quick"
+msgstr "&Ātri"
+
+msgid "&Size only"
+msgstr "&Tikai izmērs"
+
+msgid "&Thorough"
+msgstr "&Pamatīgi"
+
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
+msgstr " Abiem paneļiem jābūt saraksta skata režīmā, lai lietotu šo komandu "
+
+#, fuzzy
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+" Ne xterm vai Linux konsole; \n"
+" paneļi nevar tikt slēdzelēti. "
+
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
+msgstr " Simbolsaite '%s' norāda uz: "
+
+#, fuzzy
+msgid "Edit symlink"
+msgstr " Rediģēt simbolsaiti "
+
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
+msgstr " rediģēt simbolsaiti, nevarēja izņemt %s: %s "
+
+#, fuzzy, c-format
+msgid "edit symlink: %s"
+msgstr " rediģēt simbolsaiti: %s "
+
+#, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "`%s' nav simbolsaite"
+
+#, fuzzy
+msgid "FTP to machine"
+msgstr " FTP uz datoru "
+
+#, fuzzy
+msgid "Shell link to machine"
+msgstr " SMB saite uz datoru "
+
+#, fuzzy
+msgid "SMB link to machine"
+msgstr " SMB saite uz datoru "
+
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
+msgstr " Atjaunot failus uz ext2 failsistēmas "
+
+#, fuzzy
+msgid ""
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
+msgstr ""
+" Ievadi iekārtu (bez /dev/), no kuras\n"
+"   atjaunot failus: (F1 detalizētāk)"
+
+#, fuzzy
+msgid "Setup"
+msgstr " Uzstādīšana "
+
+#, fuzzy, c-format
+msgid "Setup saved to ~/%s"
+msgstr " Uzstādījumi saglabāti iekš ~/"
+
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
+msgstr " Tu nevari palaist komandas uz ne-vietējām failsistēmām"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+" Nevar chdir uz \"%s\" \n"
+" %s "
+
+#, fuzzy
+msgid "Cannot read directory contents"
+msgstr "Nevar nomainīt direktoriju"
 
 #, fuzzy, c-format
 msgid ""
@@ -2551,6 +2570,46 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
+msgid "FileOperation|Copy"
+msgstr ""
+
+msgid "FileOperation|Move"
+msgstr ""
+
+msgid "FileOperation|Delete"
+msgstr ""
+
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "%o %f \"%s\"%m"
+
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr "%o %d %f%m"
+
+msgid "files"
+msgstr "failus"
+
+msgid "directory"
+msgstr "direktoriju"
+
+msgid "directories"
+msgstr "direktoriji"
+
+msgid "files/directories"
+msgstr "failus/direktorijas"
+
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
+msgid " with source mask:"
+msgstr " ar avota masku:"
+
+msgid "to:"
+msgstr "uz:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot make the hardlink"
 msgstr " Nevarēja izveidot cietsaiti "
@@ -2586,6 +2645,88 @@ msgstr "&Atsaukt"
 
 #, fuzzy, c-format
 msgid ""
+"Cannot stat file \"%s\"\n"
+"%s"
+msgstr ""
+" Nevar sāknēt failu \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr " `%s' un `%s' ir tas pats fails "
+
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr " Nevar pārrakstīt direktoriju \"%s\" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+" Nevar pārvietot failu \"%s\" to \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+" Nevar izdzēst failu \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot delete file \"%s\"\n"
+"%s"
+msgstr ""
+" Nevar izdzēst failu \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove directory \"%s\"\n"
+"%s"
+msgstr ""
+" Nevar izdzēst direktoriju \"%s\" \n"
+" %s "
+
+msgid "&Retry"
+msgstr "&Vēlreiz"
+
+#, fuzzy
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"   Direktorija nav tukša.   \n"
+"   Dzēst to rekursīvi? "
+
+#, fuzzy
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"   Fona process: Direktorija nav tukša \n"
+"   Dzēst to rekursīvi? "
+
+#, fuzzy
+msgid "Delete:"
+msgstr "Dzēst"
+
+msgid "Non&e"
+msgstr "n&Evienu"
+
+#, fuzzy, c-format
+msgid ""
 "Cannot overwrite directory\"%s\"\n"
 "%s"
 msgstr ""
@@ -2599,14 +2740,6 @@ msgid ""
 msgstr ""
 " Nevar sāknēt avota failu \"%s\" \n"
 " %s "
-
-#, fuzzy, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr " `%s' un `%s' ir tas pats fails "
 
 #, fuzzy, c-format
 msgid ""
@@ -2759,34 +2892,6 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
-"%s"
-msgstr ""
-" Nevar sāknēt failu \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr " Nevar pārrakstīt direktoriju \"%s\" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-" Nevar pārvietot failu \"%s\" to \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-" Nevar izdzēst failu \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
@@ -2815,65 +2920,9 @@ msgstr ""
 " Nevar pārvietot direktoriju \"%s\" uz \"%s\" \n"
 " %s "
 
-#, fuzzy, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-" Nevar izdzēst failu \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr ""
-" Nevar izdzēst direktoriju \"%s\" \n"
-" %s "
-
 #, fuzzy
 msgid "Directory scanning"
 msgstr "Direktorija ceļš"
-
-msgid "FileOperation|Copy"
-msgstr ""
-
-msgid "FileOperation|Move"
-msgstr ""
-
-msgid "FileOperation|Delete"
-msgstr ""
-
-#, no-c-format
-msgid "%o %f \"%s\"%m"
-msgstr "%o %f \"%s\"%m"
-
-#, no-c-format
-msgid "%o %d %f%m"
-msgstr "%o %d %f%m"
-
-msgid "files"
-msgstr "failus"
-
-msgid "directory"
-msgstr "direktoriju"
-
-msgid "directories"
-msgstr "direktoriji"
-
-msgid "files/directories"
-msgstr "failus/direktorijas"
-
-#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-msgid " with source mask:"
-msgstr " ar avota masku:"
-
-msgid "to:"
-msgstr "uz:"
-
-#, c-format
-msgid "%s?"
-msgstr ""
 
 #, fuzzy
 msgid "Cannot operate on \"..\"!"
@@ -2882,36 +2931,6 @@ msgstr " Nevar operēt uz \"..\"! "
 #, fuzzy
 msgid "Sorry, I could not put the job in background"
 msgstr " Atvaino, bet nevarēju darbu nosūtīt fonā "
-
-msgid "&Retry"
-msgstr "&Vēlreiz"
-
-#, fuzzy
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"   Direktorija nav tukša.   \n"
-"   Dzēst to rekursīvi? "
-
-#, fuzzy
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"   Fona process: Direktorija nav tukša \n"
-"   Dzēst to rekursīvi? "
-
-#, fuzzy
-msgid "Delete:"
-msgstr "Dzēst"
-
-msgid "Non&e"
-msgstr "n&Evienu"
 
 #, c-format
 msgid "%d:%02d.%02d"
@@ -2932,27 +2951,6 @@ msgstr ""
 #, c-format
 msgid "%ld B/s"
 msgstr ""
-
-#, c-format
-msgid "Files processed: %llu of %llu"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Time: %s  %s (%s)"
-msgstr "Lielums:      %s"
-
-#, c-format
-msgid "Total: %s of %s"
-msgstr ""
-
-msgid "Source"
-msgstr "Avots"
-
-msgid "Target"
-msgstr "Mērķis"
-
-msgid "Deleting"
-msgstr "Dzēšana"
 
 #, fuzzy
 msgid "Target file already exists!"
@@ -2999,6 +2997,27 @@ msgstr " Fails eksistē "
 #, fuzzy
 msgid "Background process: File exists"
 msgstr " Fona darbs: Fails eksistē "
+
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Lielums:      %s"
+
+#, c-format
+msgid "Total: %s of %s"
+msgstr ""
+
+msgid "Source"
+msgstr "Avots"
+
+msgid "Target"
+msgstr "Mērķis"
+
+msgid "Deleting"
+msgstr "Dzēšana"
 
 msgid "&Background"
 msgstr "&Fonā"
@@ -3067,6 +3086,10 @@ msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
+msgid "Sea&rch for content"
+msgstr "Meklēt"
+
+#, fuzzy
 msgid "Case sens&itive"
 msgstr "lielo/ma&zo burtu jūtīgs"
 
@@ -3077,7 +3100,7 @@ msgstr "&Regulāra izteiksme"
 msgid "Fir&st hit"
 msgstr ""
 
-msgid "All cha&rsets"
+msgid "A&ll charsets"
 msgstr ""
 
 msgid "&Tree"
@@ -3110,27 +3133,6 @@ msgstr "Meklēju %s"
 
 msgid "Searching"
 msgstr "Meklēju"
-
-#, fuzzy
-msgid "Help file format error\n"
-msgstr " Palīdzības faila formāta kļūda\n"
-
-#, fuzzy
-msgid "Internal bug: Double start of link area"
-msgstr " Iekšēja kļūda: Dubultsāknējums saites apvidū "
-
-#, fuzzy, c-format
-msgid "Cannot find node %s in help file"
-msgstr " Nevarēja atrast mezglpunktu %s palīdzības failā "
-
-msgid "Help"
-msgstr "Palīdzība"
-
-msgid "ButtonBar|Index"
-msgstr ""
-
-msgid "ButtonBar|Prev"
-msgstr ""
 
 msgid "&Move"
 msgstr "&Pārvietot"
@@ -3207,14 +3209,6 @@ msgstr " Jauna karstā saraksta grupa "
 msgid "Name of new group:"
 msgstr "Jaunās grupas nosaukums"
 
-#, c-format
-msgid "Label for \"%s\":"
-msgstr "Nosaukums priekš \"%s\":"
-
-#, fuzzy
-msgid "Add to hotlist"
-msgstr "Pievienot karstajam sarakstam"
-
 #, fuzzy
 msgid "Remove:"
 msgstr " Izņemt: "
@@ -3244,6 +3238,14 @@ msgid ""
 "MC was unable to write ~/%s file,\n"
 "your old hotlist entries were not deleted"
 msgstr " fails, tavi vecie karstā saraksta ieraksti netika izdzēsti"
+
+#, c-format
+msgid "Label for \"%s\":"
+msgstr "Nosaukums priekš \"%s\":"
+
+#, fuzzy
+msgid "Add to hotlist"
+msgstr "Pievienot karstajam sarakstam"
 
 #, fuzzy
 msgid "Information"
@@ -3381,88 +3383,6 @@ msgstr "izvades līnijas"
 
 msgid "Layout"
 msgstr "Izkārtojums"
-
-msgid "Learn keys"
-msgstr "Mācību taustiņi"
-
-#, fuzzy
-msgid "Teach me a key"
-msgstr " Iemāci man taustiņu "
-
-#, c-format
-msgid ""
-"Please press the %s\n"
-"and then wait until this message disappears.\n"
-"\n"
-"Then, press it again to see if OK appears\n"
-"next to its button.\n"
-"\n"
-"If you want to escape, press a single Escape key\n"
-"and wait as well."
-msgstr ""
-"Lūdzu nospied %s\n"
-"un tad gaidi līdz šis ziņojums pazūd.\n"
-"\n"
-"Tad nospied to vēlreiz, lai redzētu, vai parādās OK\n"
-"blakus šai pogai.\n"
-"\n"
-"Ja tu vēlies iziet, vienreiz nospied Escape taustiņu\n"
-"un uzgaidil."
-
-#, fuzzy
-msgid "Cannot accept this key"
-msgstr " Šis taustiņš nav pieejams "
-
-#, fuzzy, c-format
-msgid "You have entered \"%s\""
-msgstr " Jūs esat ievadījuši \"%s\""
-
-#. TRANSLATORS: This label appears near learned keys.  Keep it short.
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"It seems that all your keys already\n"
-"work fine. That's great."
-msgstr ""
-"Izskatās, ka visi tavi taustiņi\n"
-"jau strādā labi. Tas ir lieliski."
-
-msgid "&Discard"
-msgstr "&Atsaukt"
-
-msgid ""
-"Great! You have a complete terminal database!\n"
-"All your keys work well."
-msgstr ""
-"Lieliski! Jums ir pilnīga termināļa datubāze!\n"
-"Visi jūsu taustiņi strādā labi."
-
-msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Nospied visus šeit minētos taustiņus. Kad tas ir izdarīts, pārbaudi"
-
-msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"kuri taustiņi nav atzīmēti kā OK. Nospiediet atstarpes taustiņu pie "
-"trūkstošajiem"
-
-msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr ""
-"taustiņu, vai klikšķini ar peli, lai to definētu. Kosties apkārt ar Tab."
-
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-#, fuzzy
-msgid "The Midnight Commander"
-msgstr " Pusnakts Komandieris "
-
-#, fuzzy
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr " Vai patiesi vēlaties iziet no Pusnakts Komandiera? "
 
 #, fuzzy
 msgid "File listin&g"
@@ -3662,6 +3582,27 @@ msgid "&Virtual FS..."
 msgstr "&Virtuālā FS..."
 
 #, fuzzy
+msgid "Panels:"
+msgstr "Paneļu sadalījums"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM mainīgais nav ieslēgts!\n"
+
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+msgid "The Midnight Commander"
+msgstr " Pusnakts Komandieris "
+
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr " Vai patiesi vēlaties iziet no Pusnakts Komandiera? "
+
+#, fuzzy
 msgid "&Above"
 msgstr " &Virs "
 
@@ -3677,10 +3618,6 @@ msgstr " &Zem "
 msgid "&Right"
 msgstr " &Labais "
 
-#, fuzzy
-msgid "Panels:"
-msgstr "Paneļu sadalījums"
-
 msgid "ButtonBar|Menu"
 msgstr ""
 
@@ -3692,13 +3629,6 @@ msgstr ""
 
 msgid "ButtonBar|Mkdir"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM mainīgais nav ieslēgts!\n"
-
-#, fuzzy, c-format
-msgid "Cannot create %s directory"
-msgstr "Nevar nomainīt direktoriju"
 
 msgid "&Never"
 msgstr "&Nekad"
@@ -3876,58 +3806,6 @@ msgstr ""
 "man lapās.  \n"
 "                                        "
 
-msgid "&Add new"
-msgstr "&Pievienot jaunu"
-
-msgid "External panelize"
-msgstr "Ārējā panelēšana"
-
-msgid "Command"
-msgstr "Komanda"
-
-msgid "Other command"
-msgstr "Cita omanda"
-
-#, fuzzy
-msgid "Add to external panelize"
-msgstr " Pievienot ārējai panelēšanai "
-
-#, fuzzy
-msgid "Enter command label:"
-msgstr " Ievadi komandas nosaukumu: "
-
-#, fuzzy
-msgid "Cannot run external panelize in a non-local directory"
-msgstr ""
-" Nevar palaist ārējo panelēšanu kamēr ielogojoes ne-vietējā direktorijā "
-
-msgid "Find rejects after patching"
-msgstr "Atrast atraidījumus pēc ielāpošanas"
-
-msgid "Find *.orig after patching"
-msgstr "Atrast *.orig pēc ielāpošanas"
-
-msgid "Find SUID and SGID programs"
-msgstr "Atrast SUID un SGID programmas"
-
-msgid "Cannot invoke command."
-msgstr "Nevar palais komandu."
-
-msgid "Pipe close failed"
-msgstr "Kanāla aizvēršana neizdevās"
-
-msgid "[dev]"
-msgstr ""
-
-msgid "UP--DIR"
-msgstr "AUGŠ--DIR"
-
-msgid "SYMLINK"
-msgstr ""
-
-msgid "SUB-DIR"
-msgstr "ZEM-DIR"
-
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
@@ -4026,6 +3904,18 @@ msgstr "Īpašnieks"
 msgid "Group"
 msgstr "Grupa"
 
+msgid "[dev]"
+msgstr ""
+
+msgid "UP--DIR"
+msgstr "AUGŠ--DIR"
+
+msgid "SYMLINK"
+msgstr ""
+
+msgid "SUB-DIR"
+msgstr "ZEM-DIR"
+
 msgid "<readlink failed>"
 msgstr "<lasītsaiti neveiksme>"
 
@@ -4045,98 +3935,53 @@ msgstr[1] "%s baiti %d failā"
 msgid "Unknown tag on display format:"
 msgstr "Nezināma zime displeja formātā: "
 
-msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Lietotāja piedāvātais formāts izskatās nepareizs, atgriežamies pie noklusētā."
-
 #, fuzzy
 msgid "Do you really want to execute?"
 msgstr " Vai tu patiešām vēlies palaist? "
 
-#, fuzzy
-msgid "Choose codepage"
-msgstr " Izvēlies ievades kodu tabulu "
-
-msgid "-  < No translation >"
-msgstr "-  < Nav tulkojuma >"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot save file %s:\n"
-"%s"
-msgstr " Kļūda mēģinot saglabāt failu. "
-
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
+"Lietotāja piedāvātais formāts izskatās nepareizs, atgriežamies pie noklusētā."
 
-#, c-format
-msgid "Cannot open named pipe %s\n"
-msgstr "Nevarēja atvērt nosaukto kanālu %s\n"
+msgid "&Add new"
+msgstr "&Pievienot jaunu"
 
-#, fuzzy
-msgid "The shell is still active. Quit anyway?"
-msgstr " Čaula joprojām aktīva. Vienalga iziet? "
+msgid "External panelize"
+msgstr "Ārējā panelēšana"
 
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Brīdinājums: Nevarēja pārmainīt uz %s.\n"
+msgid "Command"
+msgstr "Komanda"
 
-msgid "With builtin Editor\n"
-msgstr "Ar iebūvēto Redaktoru\n"
-
-msgid "Using system-installed S-Lang library"
-msgstr "Lietoju sistēmā uzinstalēto S-Land bibliotēku"
-
-msgid "with terminfo database"
-msgstr "ar terminfo datubāzi"
-
-msgid "Using the ncurses library"
-msgstr "Lietoju ncurses bibliotēku"
+msgid "Other command"
+msgstr "Cita omanda"
 
 #, fuzzy
-msgid "Using the ncursesw library"
-msgstr "Lietoju ncurses bibliotēku"
+msgid "Add to external panelize"
+msgstr " Pievienot ārējai panelēšanai "
 
-msgid "With optional subshell support"
-msgstr "Ar zemčaulas atbalstu pēc izvēles"
+#, fuzzy
+msgid "Enter command label:"
+msgstr " Ievadi komandas nosaukumu: "
 
-msgid "With subshell support as default"
-msgstr "Ar zemčaulas atbalstu kā noklusēto"
+msgid "Cannot invoke command."
+msgstr "Nevar palais komandu."
 
-msgid "With support for background operations\n"
-msgstr "Ar atbalstu fona operācijām\n"
+msgid "Pipe close failed"
+msgstr "Kanāla aizvēršana neizdevās"
 
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "Ar peles atbalstu xterm un Linux konsolei\n"
-
-msgid "With mouse support on xterm\n"
-msgstr "Ar peles atbalstu xterm\n"
-
-msgid "With support for X11 events\n"
-msgstr "Ar atbalstu X11 operācijām\n"
-
-msgid "With internationalization support\n"
-msgstr "ar internacionalizācijas atbalstu\n"
-
-msgid "With multiple codepages support\n"
-msgstr "Ar vairāku kodu tabulu atbalstu\n"
-
-#, fuzzy, c-format
-msgid "Virtual File Systems:"
-msgstr "Virtuālā Failsistēma:"
-
-#, c-format
-msgid "Data types:"
+#, fuzzy
+msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
+" Nevar palaist ārējo panelēšanu kamēr ielogojoes ne-vietējā direktorijā "
+
+msgid "Find rejects after patching"
+msgstr "Atrast atraidījumus pēc ielāpošanas"
+
+msgid "Find *.orig after patching"
+msgstr "Atrast *.orig pēc ielāpošanas"
+
+msgid "Find SUID and SGID programs"
+msgstr "Atrast SUID un SGID programmas"
 
 #, c-format
 msgid ""
@@ -4190,18 +4035,6 @@ msgstr ""
 "%s\n"
 
 #, fuzzy
-msgid "Format error on file Extensions File"
-msgstr " Formatējuma kļūda Paplašinājumu Failā "
-
-#, fuzzy, c-format
-msgid "The %%var macro has no default"
-msgstr " %%var makro nav noklusētā "
-
-#, fuzzy, c-format
-msgid "The %%var macro has no variable"
-msgstr " %%var makro nav mainīgā "
-
-#, fuzzy
 msgid "Debug"
 msgstr " Atkļūdošana "
 
@@ -4229,6 +4062,18 @@ msgstr ""
 "Faila %s īpašnieks nav root vai jūs, vai arī tai ir visiem-rakstīt atļauja.\n"
 "Tā lietošana var kompromitēt jūsu drošību"
 
+#, fuzzy
+msgid "Format error on file Extensions File"
+msgstr " Formatējuma kļūda Paplašinājumu Failā "
+
+#, fuzzy, c-format
+msgid "The %%var macro has no default"
+msgstr " %%var makro nav noklusētā "
+
+#, fuzzy, c-format
+msgid "The %%var macro has no variable"
+msgstr " %%var makro nav mainīgā "
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open file%s\n"
@@ -4244,6 +4089,189 @@ msgstr " Neviens atbilstošs ieraksts netika atrasts iekš %s "
 #, fuzzy
 msgid "User menu"
 msgstr " Lietotāja izvēlne "
+
+#, fuzzy
+msgid "Help file format error\n"
+msgstr " Palīdzības faila formāta kļūda\n"
+
+#, fuzzy
+msgid "Internal bug: Double start of link area"
+msgstr " Iekšēja kļūda: Dubultsāknējums saites apvidū "
+
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
+msgstr " Nevarēja atrast mezglpunktu %s palīdzības failā "
+
+msgid "Help"
+msgstr "Palīdzība"
+
+msgid "ButtonBar|Index"
+msgstr ""
+
+msgid "ButtonBar|Prev"
+msgstr ""
+
+msgid "Learn keys"
+msgstr "Mācību taustiņi"
+
+#, fuzzy
+msgid "Teach me a key"
+msgstr " Iemāci man taustiņu "
+
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Lūdzu nospied %s\n"
+"un tad gaidi līdz šis ziņojums pazūd.\n"
+"\n"
+"Tad nospied to vēlreiz, lai redzētu, vai parādās OK\n"
+"blakus šai pogai.\n"
+"\n"
+"Ja tu vēlies iziet, vienreiz nospied Escape taustiņu\n"
+"un uzgaidil."
+
+#, fuzzy
+msgid "Cannot accept this key"
+msgstr " Šis taustiņš nav pieejams "
+
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
+msgstr " Jūs esat ievadījuši \"%s\""
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Izskatās, ka visi tavi taustiņi\n"
+"jau strādā labi. Tas ir lieliski."
+
+msgid "&Discard"
+msgstr "&Atsaukt"
+
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"Lieliski! Jums ir pilnīga termināļa datubāze!\n"
+"Visi jūsu taustiņi strādā labi."
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Nospied visus šeit minētos taustiņus. Kad tas ir izdarīts, pārbaudi"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr ""
+"kuri taustiņi nav atzīmēti kā OK. Nospiediet atstarpes taustiņu pie "
+"trūkstošajiem"
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr ""
+"taustiņu, vai klikšķini ar peli, lai to definētu. Kosties apkārt ar Tab."
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Nevar nomainīt direktoriju"
+
+#, fuzzy
+msgid "Choose codepage"
+msgstr " Izvēlies ievades kodu tabulu "
+
+msgid "-  < No translation >"
+msgstr "-  < Nav tulkojuma >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Kļūda mēģinot saglabāt failu. "
+
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr "Nevarēja atvērt nosaukto kanālu %s\n"
+
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
+msgstr " Čaula joprojām aktīva. Vienalga iziet? "
+
+#, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Brīdinājums: Nevarēja pārmainīt uz %s.\n"
+
+#, fuzzy
+msgid "Using the S-Lang library with terminfo database\n"
+msgstr "ar terminfo datubāzi"
+
+#, fuzzy
+msgid "Using the ncurses library\n"
+msgstr "Lietoju ncurses bibliotēku"
+
+#, fuzzy
+msgid "Using the ncursesw library\n"
+msgstr "Lietoju ncurses bibliotēku"
+
+msgid "With builtin Editor\n"
+msgstr "Ar iebūvēto Redaktoru\n"
+
+#, fuzzy
+msgid "With optional subshell support\n"
+msgstr "Ar zemčaulas atbalstu pēc izvēles"
+
+#, fuzzy
+msgid "With subshell support as default\n"
+msgstr "Ar zemčaulas atbalstu kā noklusēto"
+
+msgid "With support for background operations\n"
+msgstr "Ar atbalstu fona operācijām\n"
+
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "Ar peles atbalstu xterm un Linux konsolei\n"
+
+msgid "With mouse support on xterm\n"
+msgstr "Ar peles atbalstu xterm\n"
+
+msgid "With support for X11 events\n"
+msgstr "Ar atbalstu X11 operācijām\n"
+
+msgid "With internationalization support\n"
+msgstr "ar internacionalizācijas atbalstu\n"
+
+msgid "With multiple codepages support\n"
+msgstr "Ar vairāku kodu tabulu atbalstu\n"
+
+#, c-format
+msgid "Built with GLib %d.%d.%d\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
+msgstr "Virtuālā Failsistēma:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, fuzzy
 msgid "Invalid value"
@@ -4348,19 +4376,8 @@ msgstr "Meklēt"
 msgid "Continue from begining?"
 msgstr ""
 
-#, fuzzy
-msgid "History"
-msgstr " Vēsture "
-
-#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-msgid "DialogTitle|History cleanup"
-msgstr ""
-
-msgid "Do you want clean this history?"
-msgstr ""
-
-msgid "Background process:"
-msgstr "Fona process:"
+#~ msgid "Using system-installed S-Lang library"
+#~ msgstr "Lietoju sistēmā uzinstalēto S-Land bibliotēku"
 
 #, fuzzy
 #~ msgid "ftpfs: could not setup passive mode: %s"

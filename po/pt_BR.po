@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-01 15:58+0200\n"
+"POT-Creation-Date: 2010-11-28 23:42+0200\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -15,6 +15,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr " Impossível mudar de diretório"
+
+msgid "7-bit ASCII"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot translate from %s to %s"
+msgstr ""
+" Impossível testar arquivo \"%s\" \n"
+" %s "
 
 #, c-format
 msgid ""
@@ -355,6 +368,10 @@ msgstr "Retrocesso"
 msgid "Number sign #"
 msgstr ""
 
+#. TRANSLATORS: Please translate as in "at sign" (@).
+msgid "At sign"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -470,10 +487,6 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr "Cache de dir expirou para %s"
 
-#
-msgid "Starting linear transfer..."
-msgstr "Iniciando transferência linear..."
-
 #, fuzzy, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
@@ -481,6 +494,10 @@ msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
 #, fuzzy, c-format
 msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
+
+#
+msgid "Starting linear transfer..."
+msgstr "Iniciando transferência linear..."
 
 #
 msgid "Getting file"
@@ -791,11 +808,6 @@ msgstr " sem memória durante a realocação do vetor "
 msgid "while doing inode scan %d"
 msgstr " executando a varredura do inode %d"
 
-#
-#, fuzzy
-msgid "Ext2lib error"
-msgstr " Erro Ext2lib"
-
 #, fuzzy, c-format
 msgid "Cannot open file %s"
 msgstr " Impossível abrir arquivo %s"
@@ -839,6 +851,11 @@ msgid "Cannot open file \"%s\""
 msgstr " Impossível abrir arquivo %s"
 
 #
+#, fuzzy
+msgid "Ext2lib error"
+msgstr " Erro Ext2lib"
+
+#
 msgid "Cannot parse:"
 msgstr "Não foi possível verificar:"
 
@@ -856,59 +873,37 @@ msgstr "Senha:"
 msgid "Changes to file lost"
 msgstr "Alterações no arquivo perdidas"
 
+msgid "Screens"
+msgstr ""
+
+#, fuzzy
+msgid "History"
+msgstr " Histórico de comandos"
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Sim"
+
+msgid "&No"
+msgstr "&Não"
+
+msgid "Background process:"
+msgstr "Processo em segundo plano:"
+
 msgid "&Cancel"
 msgstr "&Cancelar"
 
-msgid "&Set"
-msgstr "&Configurar"
+msgid "&OK"
+msgstr "&OK"
 
-msgid "S&kip"
-msgstr "&Ignorar"
-
-msgid "Set &all"
-msgstr "Configurar &tudo"
-
-msgid "owner"
-msgstr "Dono"
-
-msgid "group"
-msgstr "grupo"
-
-msgid "other"
-msgstr "outro"
-
-msgid "On"
-msgstr "Ligado"
-
-msgid "Flag"
-msgstr "Parâmetro"
-
-msgid "Mode"
-msgstr "Modo"
-
-#, c-format
-msgid "%6d of %d"
-msgstr "%6d de %d"
-
-#, fuzzy
-msgid "Chown advanced command"
-msgstr " Comando Chown avançado"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
-msgstr ""
-"Impossível executar chmod \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chown \"%s\"\n"
-"%s"
-msgstr ""
-"Impossível executar chmod \"%s\" \n"
-" %s "
+msgid "Error"
+msgstr "Erro"
 
 msgid "Displays the current version"
 msgstr "Mostra a versão atual"
@@ -983,6 +978,7 @@ msgid ""
 "Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1090,518 +1086,6 @@ msgid ""
 msgstr ""
 " O processo de segundo plano enviou mais requisições do que \n"
 " é possível administrar. \n"
-
-msgid "&Full file list"
-msgstr "Lista &Completa"
-
-msgid "&Brief file list"
-msgstr "Lista &Breve"
-
-msgid "&Long file list"
-msgstr "Lista &Longa"
-
-msgid "&User defined:"
-msgstr "&Personalizada:"
-
-msgid "Listing mode"
-msgstr "Modo de Listagem"
-
-#, fuzzy
-msgid "User &mini status"
-msgstr "&Mini status de usuário"
-
-msgid "&OK"
-msgstr "&OK"
-
-msgid "&Reverse"
-msgstr "&Reversa"
-
-#, fuzzy
-msgid "Case sensi&tive"
-msgstr "sensível à &caixa (minúsc/maiusc)"
-
-msgid "Executable &first"
-msgstr ""
-
-msgid "Sort order"
-msgstr "Parâmetros de ordenamento"
-
-#, fuzzy
-msgid "Confirmation"
-msgstr " Confirmação "
-
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#. 2
-#, fuzzy
-msgid "Confirmation|&History cleanup"
-msgstr " Confirmação "
-
-#, fuzzy
-msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "Lista de di&retórios C-\\"
-
-#, fuzzy
-msgid "Confirmation|E&xit"
-msgstr " Confirmação "
-
-#, fuzzy
-msgid "Confirmation|&Execute"
-msgstr " Confirmação "
-
-#, fuzzy
-msgid "Confirmation|O&verwrite"
-msgstr " confirmar &Sobrescrita"
-
-#, fuzzy
-msgid "Confirmation|&Delete"
-msgstr " Confirmação "
-
-#, fuzzy
-msgid "UTF-8 output"
-msgstr " Saída completa de 8 bits "
-
-msgid "Full 8 bits output"
-msgstr " Saída completa de 8 bits "
-
-msgid "ISO 8859-1"
-msgstr "ISO 8859-1"
-
-msgid "7 bits"
-msgstr "7 bits"
-
-msgid "F&ull 8 bits input"
-msgstr " Entrada completa de 8 bits "
-
-#, fuzzy
-msgid "Display bits"
-msgstr " Mostrar bits "
-
-#, fuzzy
-msgid "Other 8 bit"
-msgstr "Outro"
-
-msgid "Input / display codepage:"
-msgstr ""
-
-#, fuzzy
-msgid "&Select"
-msgstr " Selecionar "
-
-#, fuzzy
-msgid "Directory tree"
-msgstr "Arvore de &Diretórios"
-
-#, fuzzy
-msgid "Use passive mode over pro&xy"
-msgstr "Modo de &gravação..."
-
-#, fuzzy
-msgid "Use &passive mode"
-msgstr "Modo de &gravação..."
-
-msgid "&Use ~/.netrc"
-msgstr ""
-
-msgid "&Always use ftp proxy"
-msgstr "&Sempre utilizar proxy ftp"
-
-msgid "sec"
-msgstr "seg"
-
-msgid "ftpfs directory cache timeout:"
-msgstr "tempo limite do cache do diretório ftpfs"
-
-msgid "ftp anonymous password:"
-msgstr "Senha de ftp anônimo:"
-
-msgid "Timeout for freeing VFSs:"
-msgstr "Tempo limite para liberar VFS:"
-
-#, fuzzy
-msgid "Virtual File System Setting"
-msgstr " Configuração do Sistema de arquivos virtual "
-
-msgid "cd"
-msgstr "cd"
-
-msgid "Quick cd"
-msgstr " cd rápido "
-
-msgid "Symbolic link filename:"
-msgstr "Nome do arquivo de ligação simbólica"
-
-msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-"Nome do arquivo existente (nome do arquivo para o qual a ligação irá "
-"apontar):"
-
-msgid "Symbolic link"
-msgstr "Ligação Simbólica"
-
-#, fuzzy
-msgid "Running"
-msgstr "Executando "
-
-msgid "Stopped"
-msgstr "Parado"
-
-msgid "&Stop"
-msgstr "&Parar"
-
-msgid "&Resume"
-msgstr "&Reiniciar"
-
-msgid "&Kill"
-msgstr "&Finalizar"
-
-msgid "Background Jobs"
-msgstr "Processos em segundo plano"
-
-msgid "Domain:"
-msgstr "Domínio:"
-
-msgid "Username:"
-msgstr " Nome de usuário:"
-
-#, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Senha para \\\\%s\\%s"
-
-#, fuzzy
-msgid "Warning: cannot load codepages list"
-msgstr " Impossível mudar de diretório"
-
-msgid "7-bit ASCII"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot translate from %s to %s"
-msgstr ""
-" Impossível testar arquivo \"%s\" \n"
-" %s "
-
-msgid "execute/search by others"
-msgstr "execução/procura por outros"
-
-msgid "write by others"
-msgstr "escrita por outros"
-
-msgid "read by others"
-msgstr "leitura por outros"
-
-msgid "execute/search by group"
-msgstr "execução/procura por grupo"
-
-msgid "write by group"
-msgstr "escrita por grupo"
-
-msgid "read by group"
-msgstr "leitura por grupo"
-
-msgid "execute/search by owner"
-msgstr "execução/procura pelo dono"
-
-msgid "write by owner"
-msgstr "escrita pelo dono"
-
-msgid "read by owner"
-msgstr "leitura pelo dono"
-
-msgid "sticky bit"
-msgstr "bit de propriedade"
-
-msgid "set group ID on execution"
-msgstr "configurar identificação do grupo para execução"
-
-msgid "set user ID on execution"
-msgstr "configurar identificação do usuário para execução"
-
-msgid "C&lear marked"
-msgstr "Lim&peza marcada"
-
-msgid "S&et marked"
-msgstr "Configurar &Marcado"
-
-msgid "&Marked all"
-msgstr "Marcar &todos"
-
-msgid "Name"
-msgstr "Nome"
-
-msgid "Permissions (Octal)"
-msgstr "Permissões (Formato Octal)"
-
-msgid "Owner name"
-msgstr "Nome do dono"
-
-msgid "Group name"
-msgstr "Nome do grupo"
-
-msgid "Use SPACE to change"
-msgstr "Use ESPAÇO para mudar "
-
-msgid "an option, ARROW KEYS"
-msgstr " uma opção, SETAS"
-
-msgid "to move between options"
-msgstr "para mover entre opções"
-
-msgid "and T or INS to mark"
-msgstr "e T ou INS para marcar"
-
-msgid "Chmod command"
-msgstr "Comando chmod"
-
-msgid "File"
-msgstr "Arquivo"
-
-msgid "Permission"
-msgstr "Permissão"
-
-msgid "Set &users"
-msgstr "Configurar usuários"
-
-msgid "Set &groups"
-msgstr "COnfigurar &grupos"
-
-msgid "Size"
-msgstr "Tamanho"
-
-#, fuzzy
-msgid "Chown command"
-msgstr " Comando chown "
-
-msgid "<Unknown user>"
-msgstr "<Usuário desconheciso>"
-
-msgid "<Unknown group>"
-msgstr "<Grupo desconhecido>"
-
-#, fuzzy
-msgid "User name"
-msgstr " Nome de usuário "
-
-msgid "Files tagged, want to cd?"
-msgstr "Arquivos selecionados. Deseja mudar localização?"
-
-msgid "&Yes"
-msgstr "&Sim"
-
-msgid "&No"
-msgstr "&Não"
-
-msgid "Cannot change directory"
-msgstr " Impossível mudar de diretório"
-
-#, fuzzy
-msgid "View file"
-msgstr " Ver arquivo "
-
-#, fuzzy
-msgid "Filename:"
-msgstr " Nome do arquivo: "
-
-#, fuzzy
-msgid "Filtered view"
-msgstr " Visualização filtrada"
-
-#, fuzzy
-msgid "Filter command and arguments:"
-msgstr "Comando de filtro e argumentos:"
-
-msgid "Create a new Directory"
-msgstr "Criar um novo diretório"
-
-#, fuzzy
-msgid "Enter directory name:"
-msgstr " Entre com o nome do diretório:"
-
-#, fuzzy
-msgid "Filter"
-msgstr " Filtro "
-
-#, fuzzy
-msgid "Set expression for filtering filenames"
-msgstr " Informe expressão para os filtros"
-
-msgid "&Using shell patterns"
-msgstr "&Usando máscaras de ambiente de trabalho"
-
-#, fuzzy
-msgid "&Case sensitive"
-msgstr "sensível à &caixa (minúsc/maiusc)"
-
-#, fuzzy
-msgid "&Files only"
-msgstr "Apenas &tamanho"
-
-#, fuzzy
-msgid "Select"
-msgstr " Selecionar "
-
-#, fuzzy
-msgid "Unselect"
-msgstr " Cancelar seleção "
-
-msgid "Extension file edit"
-msgstr "Editar extensão de arquivos"
-
-#, fuzzy
-msgid "Which extension file you want to edit?"
-msgstr " Que extensão de arquivo você quer editar? "
-
-msgid "&User"
-msgstr "&Usuário"
-
-msgid "&System Wide"
-msgstr "&Todo o sistema"
-
-#
-#, fuzzy
-msgid "Menu edit"
-msgstr " Editar menu"
-
-#
-#, fuzzy
-msgid "Which menu file do you want to edit?"
-msgstr " Que arquivo de menu quer editar? "
-
-msgid "&Local"
-msgstr "&Local"
-
-msgid "Highlighting groups file edit"
-msgstr ""
-
-#, fuzzy
-msgid "Which highlighting file you want to edit?"
-msgstr " Que extensão de arquivo você quer editar? "
-
-#, fuzzy
-msgid "Compare directories"
-msgstr " Comparar diretórios"
-
-#, fuzzy
-msgid "Select compare method:"
-msgstr " Selecionar método de comparação: "
-
-msgid "&Quick"
-msgstr "&Rápido"
-
-msgid "&Size only"
-msgstr "Apenas &tamanho"
-
-msgid "&Thorough"
-msgstr "&Através"
-
-#, fuzzy
-msgid ""
-"Both panels should be in the listing mode\n"
-"to use this command"
-msgstr ""
-" Ambos os painéis devem estar no modo de lista para se usar este comando. "
-
-#, fuzzy
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-" Não é um xterm ou uma console Linux; \n"
-" os painéis não podem ser acionados. "
-
-#, fuzzy, c-format
-msgid "Link %s to:"
-msgstr "ligar: %s"
-
-#, fuzzy
-msgid "Link"
-msgstr "&Ligações"
-
-#, fuzzy, c-format
-msgid "link: %s"
-msgstr "ligar: %s"
-
-#, fuzzy, c-format
-msgid "symlink: %s"
-msgstr " Ligação simbólica: %s"
-
-#, fuzzy, c-format
-msgid "Symlink `%s' points to:"
-msgstr " Ligação simbólica `%s' aponta para:"
-
-#, fuzzy
-msgid "Edit symlink"
-msgstr " Editar ligação simbólica "
-
-#, fuzzy, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr " edição de ligação simbólica, impossível remover %s: %s"
-
-#, fuzzy, c-format
-msgid "edit symlink: %s"
-msgstr " editar ligação simbólica: %s"
-
-#, fuzzy, c-format
-msgid "`%s' is not a symbolic link"
-msgstr "Ligação Simbólica"
-
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Não é possível mudar o diretório para %s "
-
-#, fuzzy
-msgid "Enter machine name (F1 for details):"
-msgstr " Informe nome da máquina (F1 para detalhes): "
-
-#, fuzzy
-msgid "FTP to machine"
-msgstr " FTP para máquina "
-
-#, fuzzy
-msgid "Shell link to machine"
-msgstr " Ligação SMB para máquina "
-
-#, fuzzy
-msgid "SMB link to machine"
-msgstr " Ligação SMB para máquina "
-
-#, fuzzy
-msgid "Undelete files on an ext2 file system"
-msgstr " Recupera arquivos em um sistema ext2 "
-
-#, fuzzy
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-" Informe dispositivo (sem /dev/) para recuperar\n"
-"   arquivo: (F1 para detalhes)"
-
-#, fuzzy
-msgid "Setup"
-msgstr " Configuração "
-
-#, fuzzy, c-format
-msgid "Setup saved to ~/%s"
-msgstr "Configuração salva em ~/"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-" Impossível mudar diretório para \"%s\" \n"
-" %s "
-
-#, fuzzy
-msgid "Cannot execute commands on non-local filesystems"
-msgstr " Não é possível executar comandos em um sistema de arquivos remoto"
-
-#, fuzzy
-msgid "The shell is already running a command"
-msgstr " O interpretador de comandos já está executando um comando"
-
-msgid "Screens"
-msgstr ""
 
 msgid "&Dismiss"
 msgstr "&Dispensar"
@@ -1752,10 +1236,6 @@ msgid "Two files are needed to compare"
 msgstr ""
 
 #, fuzzy
-msgid "Cannot read directory contents"
-msgstr " Impossível mudar de diretório"
-
-#, fuzzy
 msgid "Choose syntax highlighting"
 msgstr "Ressaltar sinta&xe"
 
@@ -1790,22 +1270,9 @@ msgstr ""
 msgid "Cannot open %s for reading"
 msgstr " Falha ao abrir pipe para leitura: "
 
-msgid "Error"
-msgstr "Erro"
-
 #, fuzzy, c-format
 msgid "Error reading %s"
 msgstr "Erro ao ler script:"
-
-#
-#, fuzzy, c-format
-msgid "Error reading from pipe: %s"
-msgstr " Problema lendo do pipe:"
-
-#
-#, fuzzy, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr " Falha ao abrir pipe para leitura: "
 
 #, fuzzy, c-format
 msgid "Cannot get size/permissions for %s"
@@ -1821,6 +1288,16 @@ msgstr " Arquivo grande demais: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+#
+#, fuzzy, c-format
+msgid "Error reading from pipe: %s"
+msgstr " Problema lendo do pipe:"
+
+#
+#, fuzzy, c-format
+msgid "Cannot open pipe for reading: %s"
+msgstr " Falha ao abrir pipe para leitura: "
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1842,24 +1319,6 @@ msgstr " Falha ao abrir apipe para escrita:"
 #, fuzzy, c-format
 msgid "Cannot open file for writing: %s"
 msgstr " Falha ao abrir apipe para escrita:"
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Salvar rapidamente"
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Salvar com segurança"
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-#, fuzzy
-msgid "Edit Save Mode"
-msgstr " Editar modo de salvamento "
 
 msgid "The file you are saving is not finished with a newline"
 msgstr ""
@@ -1892,22 +1351,6 @@ msgid "Save As"
 msgstr " Salvar Como "
 
 #, fuzzy
-msgid "A file already exists with this name"
-msgstr " Um arquivo com esse nome já existe. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Sobrescrever"
-
-#, fuzzy
-msgid "Save as"
-msgstr "&Gravar configuração"
-
-#, fuzzy
-msgid "Cannot save file"
-msgstr " Erro ao tentar gravar arquivo. "
-
-#, fuzzy
 msgid "Delete macro"
 msgstr " Apagar macro "
 
@@ -1922,6 +1365,71 @@ msgstr " Erro ao tentar abrir arquivo de macros "
 #, fuzzy
 msgid "Cannot overwrite macro file"
 msgstr " Erro ao sobrescrever arquivo de macro "
+
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "Editar &Menu de arquivo"
+
+#, fuzzy
+msgid "Which syntax file you want to edit?"
+msgstr " Que extensão de arquivo você quer editar? "
+
+msgid "&User"
+msgstr "&Usuário"
+
+msgid "&System Wide"
+msgstr "&Todo o sistema"
+
+#
+#, fuzzy
+msgid "Menu edit"
+msgstr " Editar menu"
+
+#
+#, fuzzy
+msgid "Which menu file do you want to edit?"
+msgstr " Que arquivo de menu quer editar? "
+
+msgid "&Local"
+msgstr "&Local"
+
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
+msgstr " Bloco é muito grande, talvez esta ação não possa ser desfeita"
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Salvar rapidamente"
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Salvar com segurança"
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+#, fuzzy
+msgid "Edit Save Mode"
+msgstr " Editar modo de salvamento "
+
+#, fuzzy
+msgid "A file already exists with this name"
+msgstr " Um arquivo com esse nome já existe. "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Sobrescrever"
+
+#, fuzzy
+msgid "Save as"
+msgstr "&Gravar configuração"
+
+#, fuzzy
+msgid "Cannot save file"
+msgstr " Erro ao tentar gravar arquivo. "
 
 #, fuzzy
 msgid "Save macro"
@@ -1959,20 +1467,8 @@ msgstr ""
 " Continuar descartará as modificações. "
 
 #, fuzzy
-msgid "Syntax file edit"
-msgstr "Editar &Menu de arquivo"
-
-#, fuzzy
-msgid "Which syntax file you want to edit?"
-msgstr " Que extensão de arquivo você quer editar? "
-
-#, fuzzy
 msgid "Load"
 msgstr " Carregar "
-
-#, fuzzy
-msgid "Block is large, you may not be able to undo this action"
-msgstr " Bloco é muito grande, talvez esta ação não possa ser desfeita"
 
 #, fuzzy
 msgid "Replace"
@@ -2517,6 +2013,10 @@ msgstr ""
 " sido pagado, ou um comando de\n"
 " permissões extras foi executado, como \"su\" ? "
 
+#, fuzzy
+msgid "The shell is already running a command"
+msgstr " O interpretador de comandos já está executando um comando"
+
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "digite 'exit' para retornar ao Midnight commander "
@@ -2524,6 +2024,525 @@ msgstr "digite 'exit' para retornar ao Midnight commander "
 #, fuzzy, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr " Não foi possível editar uma cópia local de %s "
+
+msgid "&Set"
+msgstr "&Configurar"
+
+msgid "S&kip"
+msgstr "&Ignorar"
+
+msgid "Set &all"
+msgstr "Configurar &tudo"
+
+msgid "owner"
+msgstr "Dono"
+
+msgid "group"
+msgstr "grupo"
+
+msgid "other"
+msgstr "outro"
+
+msgid "On"
+msgstr "Ligado"
+
+msgid "Flag"
+msgstr "Parâmetro"
+
+msgid "Mode"
+msgstr "Modo"
+
+#, c-format
+msgid "%6d of %d"
+msgstr "%6d de %d"
+
+#, fuzzy
+msgid "Chown advanced command"
+msgstr " Comando Chown avançado"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod \"%s\"\n"
+"%s"
+msgstr ""
+"Impossível executar chmod \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown \"%s\"\n"
+"%s"
+msgstr ""
+"Impossível executar chmod \"%s\" \n"
+" %s "
+
+msgid "&Stop"
+msgstr "&Parar"
+
+msgid "&Resume"
+msgstr "&Reiniciar"
+
+msgid "&Kill"
+msgstr "&Finalizar"
+
+msgid "&Full file list"
+msgstr "Lista &Completa"
+
+msgid "&Brief file list"
+msgstr "Lista &Breve"
+
+msgid "&Long file list"
+msgstr "Lista &Longa"
+
+msgid "&User defined:"
+msgstr "&Personalizada:"
+
+msgid "Listing mode"
+msgstr "Modo de Listagem"
+
+#, fuzzy
+msgid "User &mini status"
+msgstr "&Mini status de usuário"
+
+#, fuzzy
+msgid "Other 8 bit"
+msgstr "Outro"
+
+#, fuzzy
+msgid "Display bits"
+msgstr " Mostrar bits "
+
+msgid "Input / display codepage:"
+msgstr ""
+
+msgid "F&ull 8 bits input"
+msgstr " Entrada completa de 8 bits "
+
+#, fuzzy
+msgid "&Select"
+msgstr " Selecionar "
+
+#, fuzzy
+msgid "Running"
+msgstr "Executando "
+
+msgid "Stopped"
+msgstr "Parado"
+
+msgid "&Reverse"
+msgstr "&Reversa"
+
+#, fuzzy
+msgid "Case sensi&tive"
+msgstr "sensível à &caixa (minúsc/maiusc)"
+
+msgid "Executable &first"
+msgstr ""
+
+msgid "Sort order"
+msgstr "Parâmetros de ordenamento"
+
+#, fuzzy
+msgid "Confirmation"
+msgstr " Confirmação "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Confirmação "
+
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
+msgstr "Lista de di&retórios C-\\"
+
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Confirmação "
+
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Confirmação "
+
+#, fuzzy
+msgid "Confirmation|O&verwrite"
+msgstr " confirmar &Sobrescrita"
+
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Confirmação "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr " Saída completa de 8 bits "
+
+msgid "Full 8 bits output"
+msgstr " Saída completa de 8 bits "
+
+msgid "ISO 8859-1"
+msgstr "ISO 8859-1"
+
+msgid "7 bits"
+msgstr "7 bits"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "Arvore de &Diretórios"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "Modo de &gravação..."
+
+#, fuzzy
+msgid "Use &passive mode"
+msgstr "Modo de &gravação..."
+
+msgid "&Use ~/.netrc"
+msgstr ""
+
+msgid "&Always use ftp proxy"
+msgstr "&Sempre utilizar proxy ftp"
+
+msgid "sec"
+msgstr "seg"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "tempo limite do cache do diretório ftpfs"
+
+msgid "ftp anonymous password:"
+msgstr "Senha de ftp anônimo:"
+
+msgid "Timeout for freeing VFSs:"
+msgstr "Tempo limite para liberar VFS:"
+
+#, fuzzy
+msgid "Virtual File System Setting"
+msgstr " Configuração do Sistema de arquivos virtual "
+
+msgid "cd"
+msgstr "cd"
+
+msgid "Quick cd"
+msgstr " cd rápido "
+
+msgid "Symbolic link filename:"
+msgstr "Nome do arquivo de ligação simbólica"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr ""
+"Nome do arquivo existente (nome do arquivo para o qual a ligação irá "
+"apontar):"
+
+msgid "Symbolic link"
+msgstr "Ligação Simbólica"
+
+msgid "Background Jobs"
+msgstr "Processos em segundo plano"
+
+msgid "Domain:"
+msgstr "Domínio:"
+
+msgid "Username:"
+msgstr " Nome de usuário:"
+
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "Senha para \\\\%s\\%s"
+
+msgid "execute/search by others"
+msgstr "execução/procura por outros"
+
+msgid "write by others"
+msgstr "escrita por outros"
+
+msgid "read by others"
+msgstr "leitura por outros"
+
+msgid "execute/search by group"
+msgstr "execução/procura por grupo"
+
+msgid "write by group"
+msgstr "escrita por grupo"
+
+msgid "read by group"
+msgstr "leitura por grupo"
+
+msgid "execute/search by owner"
+msgstr "execução/procura pelo dono"
+
+msgid "write by owner"
+msgstr "escrita pelo dono"
+
+msgid "read by owner"
+msgstr "leitura pelo dono"
+
+msgid "sticky bit"
+msgstr "bit de propriedade"
+
+msgid "set group ID on execution"
+msgstr "configurar identificação do grupo para execução"
+
+msgid "set user ID on execution"
+msgstr "configurar identificação do usuário para execução"
+
+msgid "C&lear marked"
+msgstr "Lim&peza marcada"
+
+msgid "S&et marked"
+msgstr "Configurar &Marcado"
+
+msgid "&Marked all"
+msgstr "Marcar &todos"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Permissions (Octal)"
+msgstr "Permissões (Formato Octal)"
+
+msgid "Owner name"
+msgstr "Nome do dono"
+
+msgid "Group name"
+msgstr "Nome do grupo"
+
+msgid "Use SPACE to change"
+msgstr "Use ESPAÇO para mudar "
+
+msgid "an option, ARROW KEYS"
+msgstr " uma opção, SETAS"
+
+msgid "to move between options"
+msgstr "para mover entre opções"
+
+msgid "and T or INS to mark"
+msgstr "e T ou INS para marcar"
+
+msgid "Chmod command"
+msgstr "Comando chmod"
+
+msgid "File"
+msgstr "Arquivo"
+
+msgid "Permission"
+msgstr "Permissão"
+
+msgid "Set &users"
+msgstr "Configurar usuários"
+
+msgid "Set &groups"
+msgstr "COnfigurar &grupos"
+
+msgid "Size"
+msgstr "Tamanho"
+
+#, fuzzy
+msgid "Chown command"
+msgstr " Comando chown "
+
+msgid "<Unknown user>"
+msgstr "<Usuário desconheciso>"
+
+msgid "<Unknown group>"
+msgstr "<Grupo desconhecido>"
+
+#, fuzzy
+msgid "User name"
+msgstr " Nome de usuário "
+
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
+msgstr " Informe nome da máquina (F1 para detalhes): "
+
+msgid "Files tagged, want to cd?"
+msgstr "Arquivos selecionados. Deseja mudar localização?"
+
+msgid "Cannot change directory"
+msgstr " Impossível mudar de diretório"
+
+#, fuzzy
+msgid "Filter"
+msgstr " Filtro "
+
+#, fuzzy
+msgid "Set expression for filtering filenames"
+msgstr " Informe expressão para os filtros"
+
+msgid "&Using shell patterns"
+msgstr "&Usando máscaras de ambiente de trabalho"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "sensível à &caixa (minúsc/maiusc)"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Apenas &tamanho"
+
+#, fuzzy, c-format
+msgid "Link %s to:"
+msgstr "ligar: %s"
+
+#, fuzzy
+msgid "Link"
+msgstr "&Ligações"
+
+#, fuzzy, c-format
+msgid "link: %s"
+msgstr "ligar: %s"
+
+#, fuzzy, c-format
+msgid "symlink: %s"
+msgstr " Ligação simbólica: %s"
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " Não é possível mudar o diretório para %s "
+
+#, fuzzy
+msgid "View file"
+msgstr " Ver arquivo "
+
+#, fuzzy
+msgid "Filename:"
+msgstr " Nome do arquivo: "
+
+#, fuzzy
+msgid "Filtered view"
+msgstr " Visualização filtrada"
+
+#, fuzzy
+msgid "Filter command and arguments:"
+msgstr "Comando de filtro e argumentos:"
+
+msgid "Create a new Directory"
+msgstr "Criar um novo diretório"
+
+#, fuzzy
+msgid "Enter directory name:"
+msgstr " Entre com o nome do diretório:"
+
+#, fuzzy
+msgid "Select"
+msgstr " Selecionar "
+
+#, fuzzy
+msgid "Unselect"
+msgstr " Cancelar seleção "
+
+msgid "Extension file edit"
+msgstr "Editar extensão de arquivos"
+
+#, fuzzy
+msgid "Which extension file you want to edit?"
+msgstr " Que extensão de arquivo você quer editar? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid "Which highlighting file you want to edit?"
+msgstr " Que extensão de arquivo você quer editar? "
+
+#, fuzzy
+msgid "Compare directories"
+msgstr " Comparar diretórios"
+
+#, fuzzy
+msgid "Select compare method:"
+msgstr " Selecionar método de comparação: "
+
+msgid "&Quick"
+msgstr "&Rápido"
+
+msgid "&Size only"
+msgstr "Apenas &tamanho"
+
+msgid "&Thorough"
+msgstr "&Através"
+
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
+msgstr ""
+" Ambos os painéis devem estar no modo de lista para se usar este comando. "
+
+#, fuzzy
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+" Não é um xterm ou uma console Linux; \n"
+" os painéis não podem ser acionados. "
+
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
+msgstr " Ligação simbólica `%s' aponta para:"
+
+#, fuzzy
+msgid "Edit symlink"
+msgstr " Editar ligação simbólica "
+
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
+msgstr " edição de ligação simbólica, impossível remover %s: %s"
+
+#, fuzzy, c-format
+msgid "edit symlink: %s"
+msgstr " editar ligação simbólica: %s"
+
+#, fuzzy, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "Ligação Simbólica"
+
+#, fuzzy
+msgid "FTP to machine"
+msgstr " FTP para máquina "
+
+#, fuzzy
+msgid "Shell link to machine"
+msgstr " Ligação SMB para máquina "
+
+#, fuzzy
+msgid "SMB link to machine"
+msgstr " Ligação SMB para máquina "
+
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
+msgstr " Recupera arquivos em um sistema ext2 "
+
+#, fuzzy
+msgid ""
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
+msgstr ""
+" Informe dispositivo (sem /dev/) para recuperar\n"
+"   arquivo: (F1 para detalhes)"
+
+#, fuzzy
+msgid "Setup"
+msgstr " Configuração "
+
+#, fuzzy, c-format
+msgid "Setup saved to ~/%s"
+msgstr "Configuração salva em ~/"
+
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
+msgstr " Não é possível executar comandos em um sistema de arquivos remoto"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+" Impossível mudar diretório para \"%s\" \n"
+" %s "
+
+#, fuzzy
+msgid "Cannot read directory contents"
+msgstr " Impossível mudar de diretório"
 
 #, fuzzy, c-format
 msgid ""
@@ -2578,6 +2597,46 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
+msgid "FileOperation|Copy"
+msgstr ""
+
+msgid "FileOperation|Move"
+msgstr ""
+
+msgid "FileOperation|Delete"
+msgstr ""
+
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "%o %f \"%s\"%m"
+
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr "%o %d %f%m"
+
+msgid "files"
+msgstr "arquivos"
+
+msgid "directory"
+msgstr "diretório"
+
+msgid "directories"
+msgstr "diretórios"
+
+msgid "files/directories"
+msgstr "arquivos/diretórios"
+
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
+msgid " with source mask:"
+msgstr " com máscara de origem:"
+
+msgid "to:"
+msgstr "para:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot make the hardlink"
 msgstr " Impossível fazer a ligação (direta) "
@@ -2614,6 +2673,88 @@ msgstr "C&Ancelar"
 
 #, fuzzy, c-format
 msgid ""
+"Cannot stat file \"%s\"\n"
+"%s"
+msgstr ""
+" Impossível testar arquivo \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr " '%s' e '%s' são o mesmo arquivo"
+
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr " Impossível sobrescrever diretório \"%s\" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+" Impossível mover arquivo \"%s\" de \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+" Impossível apagar arquivo \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot delete file \"%s\"\n"
+"%s"
+msgstr ""
+" Impossível apagar arquivo \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove directory \"%s\"\n"
+"%s"
+msgstr ""
+" Impossível remover diretório \"%s\" \n"
+" %s "
+
+msgid "&Retry"
+msgstr "&Tentar Novamente"
+
+#, fuzzy
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"   Diretório não está vazio.   \n"
+"   Apagar recursivamente? "
+
+#, fuzzy
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"   Segundo plano: Diretório não está vazio \n"
+"   Apagar recursivamente? "
+
+#, fuzzy
+msgid "Delete:"
+msgstr "Excluir"
+
+msgid "Non&e"
+msgstr "&Nenhum"
+
+#, fuzzy, c-format
+msgid ""
 "Cannot overwrite directory\"%s\"\n"
 "%s"
 msgstr ""
@@ -2627,14 +2768,6 @@ msgid ""
 msgstr ""
 " Não é possível testar arquivo de origem \"%s\" \n"
 " %s "
-
-#, fuzzy, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr " '%s' e '%s' são o mesmo arquivo"
 
 #, fuzzy, c-format
 msgid ""
@@ -2787,34 +2920,6 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
-"%s"
-msgstr ""
-" Impossível testar arquivo \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr " Impossível sobrescrever diretório \"%s\" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-" Impossível mover arquivo \"%s\" de \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-" Impossível apagar arquivo \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
@@ -2843,65 +2948,9 @@ msgstr ""
 " Impossível mover diretório \"%s\" para \"%s\" \n"
 " %s "
 
-#, fuzzy, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-" Impossível apagar arquivo \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr ""
-" Impossível remover diretório \"%s\" \n"
-" %s "
-
 #, fuzzy
 msgid "Directory scanning"
 msgstr "Caminho do diretório"
-
-msgid "FileOperation|Copy"
-msgstr ""
-
-msgid "FileOperation|Move"
-msgstr ""
-
-msgid "FileOperation|Delete"
-msgstr ""
-
-#, no-c-format
-msgid "%o %f \"%s\"%m"
-msgstr "%o %f \"%s\"%m"
-
-#, no-c-format
-msgid "%o %d %f%m"
-msgstr "%o %d %f%m"
-
-msgid "files"
-msgstr "arquivos"
-
-msgid "directory"
-msgstr "diretório"
-
-msgid "directories"
-msgstr "diretórios"
-
-msgid "files/directories"
-msgstr "arquivos/diretórios"
-
-#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-msgid " with source mask:"
-msgstr " com máscara de origem:"
-
-msgid "to:"
-msgstr "para:"
-
-#, c-format
-msgid "%s?"
-msgstr ""
 
 #, fuzzy
 msgid "Cannot operate on \"..\"!"
@@ -2910,36 +2959,6 @@ msgstr "Impossível operar em \"..\"! "
 #, fuzzy
 msgid "Sorry, I could not put the job in background"
 msgstr "Desculpe, mas não posso colocar a tarefa em segundo plano"
-
-msgid "&Retry"
-msgstr "&Tentar Novamente"
-
-#, fuzzy
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"   Diretório não está vazio.   \n"
-"   Apagar recursivamente? "
-
-#, fuzzy
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"   Segundo plano: Diretório não está vazio \n"
-"   Apagar recursivamente? "
-
-#, fuzzy
-msgid "Delete:"
-msgstr "Excluir"
-
-msgid "Non&e"
-msgstr "&Nenhum"
 
 #, c-format
 msgid "%d:%02d.%02d"
@@ -2960,27 +2979,6 @@ msgstr ""
 #, c-format
 msgid "%ld B/s"
 msgstr ""
-
-#, c-format
-msgid "Files processed: %llu of %llu"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Time: %s  %s (%s)"
-msgstr "Tamanho:   "
-
-#, c-format
-msgid "Total: %s of %s"
-msgstr ""
-
-msgid "Source"
-msgstr "Origem"
-
-msgid "Target"
-msgstr "Destino"
-
-msgid "Deleting"
-msgstr "Apagando"
 
 #, fuzzy
 msgid "Target file already exists!"
@@ -3027,6 +3025,27 @@ msgstr " O arquivo existe "
 #, fuzzy
 msgid "Background process: File exists"
 msgstr " Segundo plano: O arquivo existe"
+
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Tamanho:   "
+
+#, c-format
+msgid "Total: %s of %s"
+msgstr ""
+
+msgid "Source"
+msgstr "Origem"
+
+msgid "Target"
+msgstr "Destino"
+
+msgid "Deleting"
+msgstr "Apagando"
 
 msgid "&Background"
 msgstr "&Segundo plano"
@@ -3095,6 +3114,10 @@ msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
+msgid "Sea&rch for content"
+msgstr "Procurar"
+
+#, fuzzy
 msgid "Case sens&itive"
 msgstr "sensível à &caixa (minúsc/maiusc)"
 
@@ -3105,7 +3128,7 @@ msgstr "E&xpressão Regular"
 msgid "Fir&st hit"
 msgstr ""
 
-msgid "All cha&rsets"
+msgid "A&ll charsets"
 msgstr ""
 
 msgid "&Tree"
@@ -3138,27 +3161,6 @@ msgstr "Examinando %s"
 
 msgid "Searching"
 msgstr "Procurando"
-
-#, fuzzy
-msgid "Help file format error\n"
-msgstr " Erro no formato de arquivo de ajuda\n"
-
-#, fuzzy
-msgid "Internal bug: Double start of link area"
-msgstr " Problema interno: início duplo de área de ligação"
-
-#, fuzzy, c-format
-msgid "Cannot find node %s in help file"
-msgstr " Impossível achar nó %s no arquivo de ajuda"
-
-msgid "Help"
-msgstr "Ajuda"
-
-msgid "ButtonBar|Index"
-msgstr ""
-
-msgid "ButtonBar|Prev"
-msgstr ""
 
 msgid "&Move"
 msgstr "&Mover"
@@ -3235,14 +3237,6 @@ msgstr " Novo grupo de listas "
 msgid "Name of new group:"
 msgstr "Nome do novo grupo"
 
-#, c-format
-msgid "Label for \"%s\":"
-msgstr "Descrição para \"%s\": "
-
-#, fuzzy
-msgid "Add to hotlist"
-msgstr " Adicionar à lista "
-
 #, fuzzy
 msgid "Remove:"
 msgstr " Remover: "
@@ -3272,6 +3266,14 @@ msgid ""
 "MC was unable to write ~/%s file,\n"
 "your old hotlist entries were not deleted"
 msgstr " a lista antiga não foi sobrescrita"
+
+#, c-format
+msgid "Label for \"%s\":"
+msgstr "Descrição para \"%s\": "
+
+#, fuzzy
+msgid "Add to hotlist"
+msgstr " Adicionar à lista "
 
 #, fuzzy
 msgid "Information"
@@ -3409,85 +3411,6 @@ msgstr "linhas de saída"
 
 msgid "Layout"
 msgstr "Disposição"
-
-msgid "Learn keys"
-msgstr "Aprender teclas"
-
-#, fuzzy
-msgid "Teach me a key"
-msgstr " Ensinar uma tecla "
-
-#, c-format
-msgid ""
-"Please press the %s\n"
-"and then wait until this message disappears.\n"
-"\n"
-"Then, press it again to see if OK appears\n"
-"next to its button.\n"
-"\n"
-"If you want to escape, press a single Escape key\n"
-"and wait as well."
-msgstr ""
-"Por favor, pressione %s\n"
-"e espere até essa mensagem sumir.\n"
-"\n"
-"então, pressione ela de novo para ver se OK aparece\n"
-"próximo ao botão.\n"
-"\n"
-"Se quiser desistir, pressione um ESC simples\n"
-"e aguarde."
-
-#, fuzzy
-msgid "Cannot accept this key"
-msgstr " Não posso aceitar esta tecla"
-
-#, fuzzy, c-format
-msgid "You have entered \"%s\""
-msgstr " Você digitou \"%s\""
-
-#. TRANSLATORS: This label appears near learned keys.  Keep it short.
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"It seems that all your keys already\n"
-"work fine. That's great."
-msgstr ""
-"Parece que todas as teclas já estão funcionando \n"
-"adequadamente. OK!"
-
-msgid "&Discard"
-msgstr "&Descartar"
-
-msgid ""
-"Great! You have a complete terminal database!\n"
-"All your keys work well."
-msgstr ""
-"Ótimo! Já temos um mapeamento de teclas completo!\n"
-"todas as teclas funcionam bem."
-
-msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Pressione todas as teclas mencionadas, após terminar, verifique"
-
-msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "que teclas não estão marcadas com OK. Pressione espaço na "
-
-msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "tecla para definir. Para mover-se entre elas use Tab"
-
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-#, fuzzy
-msgid "The Midnight Commander"
-msgstr " O Midnight Commander"
-
-#, fuzzy
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr " Deseja realmente encerrar o Midnight Commander? "
 
 #, fuzzy
 msgid "File listin&g"
@@ -3687,6 +3610,27 @@ msgid "&Virtual FS..."
 msgstr "Sistema de Arquivos &Virtual..."
 
 #, fuzzy
+msgid "Panels:"
+msgstr " Dividir painel "
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variável de ambiente TERM não foi definida!\n"
+
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+msgid "The Midnight Commander"
+msgstr " O Midnight Commander"
+
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr " Deseja realmente encerrar o Midnight Commander? "
+
+#, fuzzy
 msgid "&Above"
 msgstr " &Acima "
 
@@ -3702,10 +3646,6 @@ msgstr " &Abaixo "
 msgid "&Right"
 msgstr " &Direita "
 
-#, fuzzy
-msgid "Panels:"
-msgstr " Dividir painel "
-
 msgid "ButtonBar|Menu"
 msgstr ""
 
@@ -3717,13 +3657,6 @@ msgstr ""
 
 msgid "ButtonBar|Mkdir"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variável de ambiente TERM não foi definida!\n"
-
-#, fuzzy, c-format
-msgid "Cannot create %s directory"
-msgstr " Impossível mudar de diretório"
 
 msgid "&Never"
 msgstr "&Nunca"
@@ -3900,57 +3833,6 @@ msgstr ""
 " fazer uma recarga manual do Diretório. Leia as página de \n"
 " manual para ver os detalhes.                             "
 
-msgid "&Add new"
-msgstr "&Adicionar Novo"
-
-msgid "External panelize"
-msgstr "Painéis externos"
-
-msgid "Command"
-msgstr "Comando"
-
-msgid "Other command"
-msgstr "Outro comando"
-
-#, fuzzy
-msgid "Add to external panelize"
-msgstr " Adicionar aos painéis externos "
-
-#, fuzzy
-msgid "Enter command label:"
-msgstr " Informe o título do comando: "
-
-#, fuzzy
-msgid "Cannot run external panelize in a non-local directory"
-msgstr " Impossível executar painéis externos quando  em um diretório local"
-
-msgid "Find rejects after patching"
-msgstr "A busca foi rejeitada após a atualização"
-
-msgid "Find *.orig after patching"
-msgstr " Procurar *.orig após atualização"
-
-msgid "Find SUID and SGID programs"
-msgstr "Procurar programas SUID e SGID"
-
-msgid "Cannot invoke command."
-msgstr "Impossível executar comando"
-
-msgid "Pipe close failed"
-msgstr "Falha ao fechar conector"
-
-msgid "[dev]"
-msgstr ""
-
-msgid "UP--DIR"
-msgstr "UP--DIR"
-
-msgid "SYMLINK"
-msgstr ""
-
-msgid "SUB-DIR"
-msgstr "SUB-DIR"
-
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
@@ -4049,6 +3931,18 @@ msgstr "Dono"
 msgid "Group"
 msgstr "Grupo"
 
+msgid "[dev]"
+msgstr ""
+
+msgid "UP--DIR"
+msgstr "UP--DIR"
+
+msgid "SYMLINK"
+msgstr ""
+
+msgid "SUB-DIR"
+msgstr "SUB-DIR"
+
 msgid "<readlink failed>"
 msgstr "<erro ao ler ligação>"
 
@@ -4068,111 +3962,52 @@ msgstr[1] "%s bytes em %d arquivo"
 msgid "Unknown tag on display format:"
 msgstr "Padrão desconhecido no formato de apresentação:"
 
-msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
-
 #, fuzzy
 msgid "Do you really want to execute?"
 msgstr " Você quer realmente executar? "
 
-msgid "Choose codepage"
+msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
+"Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
 
-msgid "-  < No translation >"
-msgstr ""
+msgid "&Add new"
+msgstr "&Adicionar Novo"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
+msgid "External panelize"
+msgstr "Painéis externos"
 
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
+msgid "Command"
+msgstr "Comando"
 
-#, fuzzy, c-format
-msgid ""
-"Cannot save file %s:\n"
-"%s"
-msgstr " Erro ao tentar gravar arquivo. "
-
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-
-#, c-format
-msgid "Cannot open named pipe %s\n"
-msgstr "Não foi possível abrir conexão denominada %s\n"
+msgid "Other command"
+msgstr "Outro comando"
 
 #, fuzzy
-msgid "The shell is still active. Quit anyway?"
-msgstr " O interpretador de comandos ainda está ativo.  Encerrar mesmo assim? "
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Alerta: Impossível mudar para %s.\n"
-
-msgid "With builtin Editor\n"
-msgstr "Com Editor embutido\n"
+msgid "Add to external panelize"
+msgstr " Adicionar aos painéis externos "
 
 #, fuzzy
-msgid "Using system-installed S-Lang library"
-msgstr "instalado no sistema"
+msgid "Enter command label:"
+msgstr " Informe o título do comando: "
 
-msgid "with terminfo database"
-msgstr ""
+msgid "Cannot invoke command."
+msgstr "Impossível executar comando"
+
+msgid "Pipe close failed"
+msgstr "Falha ao fechar conector"
 
 #, fuzzy
-msgid "Using the ncurses library"
-msgstr "a biblioteca ncurses"
+msgid "Cannot run external panelize in a non-local directory"
+msgstr " Impossível executar painéis externos quando  em um diretório local"
 
-#, fuzzy
-msgid "Using the ncursesw library"
-msgstr "a biblioteca ncurses"
+msgid "Find rejects after patching"
+msgstr "A busca foi rejeitada após a atualização"
 
-#
-#, fuzzy
-msgid "With optional subshell support"
-msgstr "Com suporte à subinterpretadores de comandos"
+msgid "Find *.orig after patching"
+msgstr " Procurar *.orig após atualização"
 
-#
-#, fuzzy
-msgid "With subshell support as default"
-msgstr "Com suporte à subinterpretadores de comandos"
-
-#
-msgid "With support for background operations\n"
-msgstr "Com suporte a operações em segundo plano\n"
-
-#
-#, fuzzy
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "com suporte à mouse no xterm e no console Linux.\n"
-
-#
-#, fuzzy
-msgid "With mouse support on xterm\n"
-msgstr "com suporte a mouse no xterm.\n"
-
-#
-#, fuzzy
-msgid "With support for X11 events\n"
-msgstr "Com suporte a operações em segundo plano\n"
-
-msgid "With internationalization support\n"
-msgstr ""
-
-msgid "With multiple codepages support\n"
-msgstr ""
-
-#
-#, fuzzy, c-format
-msgid "Virtual File Systems:"
-msgstr "Sistema de arquivos virtual:"
-
-#, c-format
-msgid "Data types:"
-msgstr ""
+msgid "Find SUID and SGID programs"
+msgstr "Procurar programas SUID e SGID"
 
 #, c-format
 msgid ""
@@ -4226,18 +4061,6 @@ msgstr ""
 "%s\n"
 
 #, fuzzy
-msgid "Format error on file Extensions File"
-msgstr " Erro no formato do arquivo de extensões"
-
-#, fuzzy, c-format
-msgid "The %%var macro has no default"
-msgstr " A macro %%var não tem um padrão"
-
-#, fuzzy, c-format
-msgid "The %%var macro has no variable"
-msgstr " A macro %%var não tem uma variável"
-
-#, fuzzy
 msgid "Debug"
 msgstr " Depurar "
 
@@ -4266,6 +4089,18 @@ msgstr ""
 "ser escrito por todos.\n"
 "O seu uso pode comprometer a segurança"
 
+#, fuzzy
+msgid "Format error on file Extensions File"
+msgstr " Erro no formato do arquivo de extensões"
+
+#, fuzzy, c-format
+msgid "The %%var macro has no default"
+msgstr " A macro %%var não tem um padrão"
+
+#, fuzzy, c-format
+msgid "The %%var macro has no variable"
+msgstr " A macro %%var não tem uma variável"
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open file%s\n"
@@ -4281,6 +4116,194 @@ msgstr " Nenhuma entrada apropriada encontrada em %s "
 #, fuzzy
 msgid "User menu"
 msgstr " Menu de usuário "
+
+#, fuzzy
+msgid "Help file format error\n"
+msgstr " Erro no formato de arquivo de ajuda\n"
+
+#, fuzzy
+msgid "Internal bug: Double start of link area"
+msgstr " Problema interno: início duplo de área de ligação"
+
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
+msgstr " Impossível achar nó %s no arquivo de ajuda"
+
+msgid "Help"
+msgstr "Ajuda"
+
+msgid "ButtonBar|Index"
+msgstr ""
+
+msgid "ButtonBar|Prev"
+msgstr ""
+
+msgid "Learn keys"
+msgstr "Aprender teclas"
+
+#, fuzzy
+msgid "Teach me a key"
+msgstr " Ensinar uma tecla "
+
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Por favor, pressione %s\n"
+"e espere até essa mensagem sumir.\n"
+"\n"
+"então, pressione ela de novo para ver se OK aparece\n"
+"próximo ao botão.\n"
+"\n"
+"Se quiser desistir, pressione um ESC simples\n"
+"e aguarde."
+
+#, fuzzy
+msgid "Cannot accept this key"
+msgstr " Não posso aceitar esta tecla"
+
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
+msgstr " Você digitou \"%s\""
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Parece que todas as teclas já estão funcionando \n"
+"adequadamente. OK!"
+
+msgid "&Discard"
+msgstr "&Descartar"
+
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"Ótimo! Já temos um mapeamento de teclas completo!\n"
+"todas as teclas funcionam bem."
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Pressione todas as teclas mencionadas, após terminar, verifique"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "que teclas não estão marcadas com OK. Pressione espaço na "
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "tecla para definir. Para mover-se entre elas use Tab"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr " Impossível mudar de diretório"
+
+msgid "Choose codepage"
+msgstr ""
+
+msgid "-  < No translation >"
+msgstr ""
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Erro ao tentar gravar arquivo. "
+
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr "Não foi possível abrir conexão denominada %s\n"
+
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
+msgstr " O interpretador de comandos ainda está ativo.  Encerrar mesmo assim? "
+
+#, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Alerta: Impossível mudar para %s.\n"
+
+msgid "Using the S-Lang library with terminfo database\n"
+msgstr ""
+
+#, fuzzy
+msgid "Using the ncurses library\n"
+msgstr "a biblioteca ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library\n"
+msgstr "a biblioteca ncurses"
+
+msgid "With builtin Editor\n"
+msgstr "Com Editor embutido\n"
+
+#
+#, fuzzy
+msgid "With optional subshell support\n"
+msgstr "Com suporte à subinterpretadores de comandos"
+
+#
+#, fuzzy
+msgid "With subshell support as default\n"
+msgstr "Com suporte à subinterpretadores de comandos"
+
+#
+msgid "With support for background operations\n"
+msgstr "Com suporte a operações em segundo plano\n"
+
+#
+#, fuzzy
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "com suporte à mouse no xterm e no console Linux.\n"
+
+#
+#, fuzzy
+msgid "With mouse support on xterm\n"
+msgstr "com suporte a mouse no xterm.\n"
+
+#
+#, fuzzy
+msgid "With support for X11 events\n"
+msgstr "Com suporte a operações em segundo plano\n"
+
+msgid "With internationalization support\n"
+msgstr ""
+
+msgid "With multiple codepages support\n"
+msgstr ""
+
+#, c-format
+msgid "Built with GLib %d.%d.%d\n"
+msgstr ""
+
+#
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
+msgstr "Sistema de arquivos virtual:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, fuzzy
 msgid "Invalid value"
@@ -4386,18 +4409,8 @@ msgid "Continue from begining?"
 msgstr ""
 
 #, fuzzy
-msgid "History"
-msgstr " Histórico de comandos"
-
-#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-msgid "DialogTitle|History cleanup"
-msgstr ""
-
-msgid "Do you want clean this history?"
-msgstr ""
-
-msgid "Background process:"
-msgstr "Processo em segundo plano:"
+#~ msgid "Using system-installed S-Lang library"
+#~ msgstr "instalado no sistema"
 
 #, fuzzy
 #~ msgid "ftpfs: could not setup passive mode: %s"

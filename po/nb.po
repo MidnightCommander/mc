@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-01 15:58+0200\n"
+"POT-Creation-Date: 2010-11-28 23:42+0200\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -13,6 +13,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
+
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr " Kunne ikke skifte katalog"
+
+msgid "7-bit ASCII"
+msgstr ""
+
+#, c-format
+msgid "Cannot translate from %s to %s"
+msgstr "Kan ikke oversette fra %s til %s"
 
 #, c-format
 msgid ""
@@ -353,6 +364,10 @@ msgstr "Tilbake"
 msgid "Number sign #"
 msgstr ""
 
+#. TRANSLATORS: Please translate as in "at sign" (@).
+msgid "At sign"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -465,9 +480,6 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr "Katalog-cache utgått for %s"
 
-msgid "Starting linear transfer..."
-msgstr "Starter lineær overføring..."
-
 #, fuzzy, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes overført)"
@@ -475,6 +487,9 @@ msgstr "%s: %s: %s %3d%% (%lu bytes overført)"
 #, fuzzy, c-format
 msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu bytes overført"
+
+msgid "Starting linear transfer..."
+msgstr "Starter lineær overføring..."
 
 msgid "Getting file"
 msgstr "Henter fil"
@@ -785,10 +800,6 @@ msgstr " ikke mer minne under reallokasjon av matrise "
 msgid "while doing inode scan %d"
 msgstr " under skanning av inode %d "
 
-#, fuzzy
-msgid "Ext2lib error"
-msgstr " Ext2lib feil "
-
 #, fuzzy, c-format
 msgid "Cannot open file %s"
 msgstr " Kunne ikke åpne filen %s "
@@ -831,6 +842,10 @@ msgstr " under iterasjon over blokker "
 msgid "Cannot open file \"%s\""
 msgstr " Kunne ikke åpne filen %s "
 
+#, fuzzy
+msgid "Ext2lib error"
+msgstr " Ext2lib feil "
+
 msgid "Cannot parse:"
 msgstr "Kunne ikke fortolke:"
 
@@ -846,59 +861,37 @@ msgstr "Passord:"
 msgid "Changes to file lost"
 msgstr "Endringer i filen tapt"
 
+msgid "Screens"
+msgstr ""
+
+#, fuzzy
+msgid "History"
+msgstr " Historikk "
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Ja"
+
+msgid "&No"
+msgstr "&Nei"
+
+msgid "Background process:"
+msgstr "Bakgrunnsprosess:"
+
 msgid "&Cancel"
 msgstr "&Avbryt"
 
-msgid "&Set"
-msgstr "&Sett"
+msgid "&OK"
+msgstr "&OK"
 
-msgid "S&kip"
-msgstr "&Hopp over"
-
-msgid "Set &all"
-msgstr "Sett &alle"
-
-msgid "owner"
-msgstr "eier"
-
-msgid "group"
-msgstr "gruppe"
-
-msgid "other"
-msgstr "andre"
-
-msgid "On"
-msgstr "På"
-
-msgid "Flag"
-msgstr "Flagg"
-
-msgid "Mode"
-msgstr "Modus"
-
-#, c-format
-msgid "%6d of %d"
-msgstr "%6d av %d"
-
-#, fuzzy
-msgid "Chown advanced command"
-msgstr " Chown avansere kommandoer "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
-msgstr ""
-" Kunne ikke kjøre chmod på \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chown \"%s\"\n"
-"%s"
-msgstr ""
-" Kunne ikke kjøre chown på \"%s\" \n"
-" %s "
+msgid "Error"
+msgstr "Feil"
 
 msgid "Displays the current version"
 msgstr "Viser nåværende versjon"
@@ -972,6 +965,7 @@ msgid ""
 "Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1077,511 +1071,6 @@ msgid ""
 msgstr ""
 " Bakgrunnsprosessen sendte oss en forespørsel etter flere \n"
 " argumenter enn vi kan takle. \n"
-
-msgid "&Full file list"
-msgstr "&Full filliste"
-
-msgid "&Brief file list"
-msgstr "&Kort filliste"
-
-msgid "&Long file list"
-msgstr "&Lang filliste"
-
-msgid "&User defined:"
-msgstr "&Brukerdefinert:"
-
-msgid "Listing mode"
-msgstr "Listemodus"
-
-#, fuzzy
-msgid "User &mini status"
-msgstr "brukers &Ministatus"
-
-msgid "&OK"
-msgstr "&OK"
-
-msgid "&Reverse"
-msgstr "&Reversert"
-
-#, fuzzy
-msgid "Case sensi&tive"
-msgstr "skill mellom s&tore/små tegn"
-
-msgid "Executable &first"
-msgstr ""
-
-msgid "Sort order"
-msgstr "Sorteringsrekkefølge"
-
-#, fuzzy
-msgid "Confirmation"
-msgstr " Bekreftelse "
-
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#. 2
-#, fuzzy
-msgid "Confirmation|&History cleanup"
-msgstr " Bekreftelse "
-
-#, fuzzy
-msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "kataloghurtigliste    C-\\"
-
-#, fuzzy
-msgid "Confirmation|E&xit"
-msgstr " Bekreftelse "
-
-#, fuzzy
-msgid "Confirmation|&Execute"
-msgstr " Bekreftelse "
-
-#, fuzzy
-msgid "Confirmation|O&verwrite"
-msgstr " bekreft o&Verskriv "
-
-#, fuzzy
-msgid "Confirmation|&Delete"
-msgstr " Bekreftelse "
-
-#, fuzzy
-msgid "UTF-8 output"
-msgstr "Full 8-bits utskrift"
-
-msgid "Full 8 bits output"
-msgstr "Full 8-bits utskrift"
-
-msgid "ISO 8859-1"
-msgstr "ISO 8859-1"
-
-msgid "7 bits"
-msgstr "7-bits"
-
-msgid "F&ull 8 bits input"
-msgstr "F&ull 8-bits input"
-
-#, fuzzy
-msgid "Display bits"
-msgstr " Visning i bits "
-
-msgid "Other 8 bit"
-msgstr "Andre 8-bit"
-
-msgid "Input / display codepage:"
-msgstr "Koding for inndata /visning:"
-
-msgid "&Select"
-msgstr "&Velg"
-
-#, fuzzy
-msgid "Directory tree"
-msgstr "Katalogtre"
-
-#, fuzzy
-msgid "Use passive mode over pro&xy"
-msgstr "Lagringsmodus..."
-
-#, fuzzy
-msgid "Use &passive mode"
-msgstr "Lagringsmodus..."
-
-msgid "&Use ~/.netrc"
-msgstr "Br&uk ~/.netrc"
-
-msgid "&Always use ftp proxy"
-msgstr "&Alltid bruk ftp-stedfortreder"
-
-msgid "sec"
-msgstr "sek"
-
-msgid "ftpfs directory cache timeout:"
-msgstr "ftpfs katalog cache tidsavbrudd:"
-
-msgid "ftp anonymous password:"
-msgstr "ftp anonymt passord:"
-
-msgid "Timeout for freeing VFSs:"
-msgstr "Tidsavbrudd for frigjøring av VFS'er:"
-
-#, fuzzy
-msgid "Virtual File System Setting"
-msgstr " Innstillinger for virtuelt filsystem "
-
-msgid "cd"
-msgstr "cd"
-
-msgid "Quick cd"
-msgstr "Rask katalogskift"
-
-msgid "Symbolic link filename:"
-msgstr "Filnavn for symbolsk lenke:"
-
-msgid "Existing filename (filename symlink will point to):"
-msgstr "Eksisterende filnavn (filnavnet symlinken skal peke til):"
-
-msgid "Symbolic link"
-msgstr "Symbolsk lenke"
-
-#, fuzzy
-msgid "Running"
-msgstr "Kjører"
-
-msgid "Stopped"
-msgstr "Stoppet"
-
-msgid "&Stop"
-msgstr "&Stopp"
-
-msgid "&Resume"
-msgstr "&Gjenoppta"
-
-msgid "&Kill"
-msgstr "&Drep"
-
-msgid "Background Jobs"
-msgstr "Bakgrunnsjobber"
-
-msgid "Domain:"
-msgstr "Domene:"
-
-msgid "Username:"
-msgstr "Brukernavn:"
-
-#, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Passord for \\\\%s\\%s"
-
-#, fuzzy
-msgid "Warning: cannot load codepages list"
-msgstr " Kunne ikke skifte katalog"
-
-msgid "7-bit ASCII"
-msgstr ""
-
-#, c-format
-msgid "Cannot translate from %s to %s"
-msgstr "Kan ikke oversette fra %s til %s"
-
-msgid "execute/search by others"
-msgstr "kjøre/søke av andre"
-
-msgid "write by others"
-msgstr "skrive av andre"
-
-msgid "read by others"
-msgstr "lese av andre"
-
-msgid "execute/search by group"
-msgstr "kjøre/søke av gruppen"
-
-msgid "write by group"
-msgstr "skrive av gruppen"
-
-msgid "read by group"
-msgstr "lese av gruppen"
-
-msgid "execute/search by owner"
-msgstr "kjøre/søke av eier"
-
-msgid "write by owner"
-msgstr "skrive av eier"
-
-msgid "read by owner"
-msgstr "lese av eier"
-
-msgid "sticky bit"
-msgstr "sticky bit"
-
-msgid "set group ID on execution"
-msgstr "sett gruppe ID ved kjøring"
-
-msgid "set user ID on execution"
-msgstr "sett bruker ID ved kjøring"
-
-msgid "C&lear marked"
-msgstr "B&lank ut markerte"
-
-msgid "S&et marked"
-msgstr "S&ett markerte"
-
-msgid "&Marked all"
-msgstr "&Markert alle"
-
-msgid "Name"
-msgstr "Navn"
-
-msgid "Permissions (Octal)"
-msgstr "Rettigheter (Octal)"
-
-msgid "Owner name"
-msgstr "Eiers navn"
-
-msgid "Group name"
-msgstr "Gruppenavn"
-
-msgid "Use SPACE to change"
-msgstr "Bruk SPACE for å endre"
-
-msgid "an option, ARROW KEYS"
-msgstr "et alternativ, PILTASTER"
-
-msgid "to move between options"
-msgstr "for å flytte mellom alternativene"
-
-msgid "and T or INS to mark"
-msgstr "og T eller INS for å markere"
-
-msgid "Chmod command"
-msgstr "Chmod kommando"
-
-msgid "File"
-msgstr "Fil"
-
-msgid "Permission"
-msgstr "Rettighet"
-
-msgid "Set &users"
-msgstr "Sett br&ukere"
-
-msgid "Set &groups"
-msgstr "Sett &grupper"
-
-msgid "Size"
-msgstr "Størrelse"
-
-#, fuzzy
-msgid "Chown command"
-msgstr " Chown kommando "
-
-msgid "<Unknown user>"
-msgstr "<Ukjent bruker>"
-
-msgid "<Unknown group>"
-msgstr "<Ukjent gruppe>"
-
-#, fuzzy
-msgid "User name"
-msgstr " Brukernavn "
-
-msgid "Files tagged, want to cd?"
-msgstr "Filer merket, vil du skifte katalog?"
-
-msgid "&Yes"
-msgstr "&Ja"
-
-msgid "&No"
-msgstr "&Nei"
-
-msgid "Cannot change directory"
-msgstr " Kunne ikke skifte katalog"
-
-#, fuzzy
-msgid "View file"
-msgstr " Se på fil "
-
-#, fuzzy
-msgid "Filename:"
-msgstr " Filnavn:"
-
-#, fuzzy
-msgid "Filtered view"
-msgstr " Filtrert visning "
-
-#, fuzzy
-msgid "Filter command and arguments:"
-msgstr " Filterkommando og argumenter:"
-
-msgid "Create a new Directory"
-msgstr "Opprett en ny katalog"
-
-#, fuzzy
-msgid "Enter directory name:"
-msgstr " Skriv inn katalognavnet:"
-
-#, fuzzy
-msgid "Filter"
-msgstr " Filter "
-
-#, fuzzy
-msgid "Set expression for filtering filenames"
-msgstr " Sett uttrykk for filtrering av filnavn"
-
-msgid "&Using shell patterns"
-msgstr "bruker skallmønstre"
-
-#, fuzzy
-msgid "&Case sensitive"
-msgstr "skill mellom s&tore/små tegn"
-
-#, fuzzy
-msgid "&Files only"
-msgstr "Bare &Størrelse"
-
-#, fuzzy
-msgid "Select"
-msgstr "&Velg"
-
-#, fuzzy
-msgid "Unselect"
-msgstr " Velg bort "
-
-msgid "Extension file edit"
-msgstr "Rediger utvidelsesfil"
-
-#, fuzzy
-msgid "Which extension file you want to edit?"
-msgstr " Hvilken utvidelsesfil vil du redigere? "
-
-msgid "&User"
-msgstr "&Bruker"
-
-msgid "&System Wide"
-msgstr "&System"
-
-#, fuzzy
-msgid "Menu edit"
-msgstr " Menyredigering "
-
-#, fuzzy
-msgid "Which menu file do you want to edit?"
-msgstr " Hvilken menyfil vil du redigere? "
-
-msgid "&Local"
-msgstr "&Lokal"
-
-msgid "Highlighting groups file edit"
-msgstr ""
-
-#, fuzzy
-msgid "Which highlighting file you want to edit?"
-msgstr " Hvilken utvidelsesfil vil du redigere? "
-
-#, fuzzy
-msgid "Compare directories"
-msgstr " Sammenlign kataloger "
-
-#, fuzzy
-msgid "Select compare method:"
-msgstr " Velg metode for sammenligning: "
-
-msgid "&Quick"
-msgstr "&Rask"
-
-msgid "&Size only"
-msgstr "Bare &Størrelse"
-
-msgid "&Thorough"
-msgstr "&Grundig"
-
-#, fuzzy
-msgid ""
-"Both panels should be in the listing mode\n"
-"to use this command"
-msgstr ""
-" Begge panelene bør være i visningsmodus for liste for å bruke denne "
-"kommandoen "
-
-#, fuzzy
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-" Ikke en xterm eller Linux konsoll; \n"
-" panelene kan ikke slås av og på. "
-
-#, c-format
-msgid "Link %s to:"
-msgstr "Lag lenke fra %s til:"
-
-#, fuzzy
-msgid "Link"
-msgstr "&Lenker"
-
-#, fuzzy, c-format
-msgid "link: %s"
-msgstr " lenke: %s "
-
-#, fuzzy, c-format
-msgid "symlink: %s"
-msgstr " symlink: %s "
-
-#, fuzzy, c-format
-msgid "Symlink `%s' points to:"
-msgstr " Lenken `%s' peker til: "
-
-#, fuzzy
-msgid "Edit symlink"
-msgstr " Rediger symlink "
-
-#, fuzzy, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr " rediger symlink, kan ikke fjerne %s: %s "
-
-#, fuzzy, c-format
-msgid "edit symlink: %s"
-msgstr " rediger symlink: %s "
-
-#, c-format
-msgid "`%s' is not a symbolic link"
-msgstr "`%s' er ikke en symbolsk lenke"
-
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " Kunne ikke skifte katalog til %s "
-
-#, fuzzy
-msgid "Enter machine name (F1 for details):"
-msgstr " Skriv inn maskinnavn (F1 for detaljer): "
-
-#, fuzzy
-msgid "FTP to machine"
-msgstr " FTP til maskin "
-
-#, fuzzy
-msgid "Shell link to machine"
-msgstr "  Skall-tilkobling til maskin "
-
-#, fuzzy
-msgid "SMB link to machine"
-msgstr " SMB-tilkobling til maskin "
-
-#, fuzzy
-msgid "Undelete files on an ext2 file system"
-msgstr " Gjenopprett filer på et ext2 filsystem "
-
-#, fuzzy
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-" Skriv inn enhet (uten /dev/) som det skal gjenopprettes\n"
-"   filer på: (F1 for detaljer)"
-
-#, fuzzy
-msgid "Setup"
-msgstr " Oppsett "
-
-#, fuzzy, c-format
-msgid "Setup saved to ~/%s"
-msgstr " Oppsett lagret til ~/"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Kan ikke skifte katalog til \"%s\" \n"
-" %s "
-
-#, fuzzy
-msgid "Cannot execute commands on non-local filesystems"
-msgstr " Kan ikke kjøre kommandoer på ikke-lokale filsystemer"
-
-#, fuzzy
-msgid "The shell is already running a command"
-msgstr " Skallet kjører allerede en kommando "
-
-msgid "Screens"
-msgstr ""
 
 msgid "&Dismiss"
 msgstr "Forkast"
@@ -1732,10 +1221,6 @@ msgid "Two files are needed to compare"
 msgstr ""
 
 #, fuzzy
-msgid "Cannot read directory contents"
-msgstr " Kunne ikke skifte katalog"
-
-#, fuzzy
 msgid "Choose syntax highlighting"
 msgstr "syntaksutheving"
 
@@ -1769,20 +1254,9 @@ msgstr ""
 msgid "Cannot open %s for reading"
 msgstr " Feil under åpning av rør for lesing: "
 
-msgid "Error"
-msgstr "Feil"
-
 #, fuzzy, c-format
 msgid "Error reading %s"
 msgstr "Feil under lesing av skript:"
-
-#, fuzzy, c-format
-msgid "Error reading from pipe: %s"
-msgstr " Feil under lesing fra rør: "
-
-#, fuzzy, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr " Feil under åpning av rør for lesing: "
 
 #, fuzzy, c-format
 msgid "Cannot get size/permissions for %s"
@@ -1798,6 +1272,14 @@ msgstr " Filen er for stor: "
 
 msgid "Macro recursion is too deep"
 msgstr "For dyp rekursjon i makro"
+
+#, fuzzy, c-format
+msgid "Error reading from pipe: %s"
+msgstr " Feil under lesing fra rør: "
+
+#, fuzzy, c-format
+msgid "Cannot open pipe for reading: %s"
+msgstr " Feil under åpning av rør for lesing: "
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1816,24 +1298,6 @@ msgstr " Feil under åpning av rør for skriving: "
 #, fuzzy, c-format
 msgid "Cannot open file for writing: %s"
 msgstr " Feil under åpning av rør for skriving: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Hurtiglagring"
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Trygg lagring"
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-#, fuzzy
-msgid "Edit Save Mode"
-msgstr " Rediger lagringsmodus "
 
 msgid "The file you are saving is not finished with a newline"
 msgstr ""
@@ -1866,22 +1330,6 @@ msgid "Save As"
 msgstr " Lagre som "
 
 #, fuzzy
-msgid "A file already exists with this name"
-msgstr " En fil med dette navnet eksisterer allerede. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Overskriv"
-
-#, fuzzy
-msgid "Save as"
-msgstr "Lagre oppsett"
-
-#, fuzzy
-msgid "Cannot save file"
-msgstr " Feil under lagring av fil. "
-
-#, fuzzy
 msgid "Delete macro"
 msgstr " Slett makro "
 
@@ -1896,6 +1344,68 @@ msgstr " Feil under åpning av makrofil "
 #, fuzzy
 msgid "Cannot overwrite macro file"
 msgstr " Feil under overskriving av makrofil "
+
+msgid "Syntax file edit"
+msgstr "Redigering av syntaksfil"
+
+#, fuzzy
+msgid "Which syntax file you want to edit?"
+msgstr " Hvilken syntaksfil vil du redigere? "
+
+msgid "&User"
+msgstr "&Bruker"
+
+msgid "&System Wide"
+msgstr "&System"
+
+#, fuzzy
+msgid "Menu edit"
+msgstr " Menyredigering "
+
+#, fuzzy
+msgid "Which menu file do you want to edit?"
+msgstr " Hvilken menyfil vil du redigere? "
+
+msgid "&Local"
+msgstr "&Lokal"
+
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
+msgstr " Blokken er for stor, du kan kanskje ikke angre denne handlingen. "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Hurtiglagring"
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Trygg lagring"
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+#, fuzzy
+msgid "Edit Save Mode"
+msgstr " Rediger lagringsmodus "
+
+#, fuzzy
+msgid "A file already exists with this name"
+msgstr " En fil med dette navnet eksisterer allerede. "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Overskriv"
+
+#, fuzzy
+msgid "Save as"
+msgstr "Lagre oppsett"
+
+#, fuzzy
+msgid "Cannot save file"
+msgstr " Feil under lagring av fil. "
 
 #, fuzzy
 msgid "Save macro"
@@ -1932,20 +1442,9 @@ msgstr ""
 " Teksten er endret uten å ha vært lagret. \n"
 " Fortsett forkaster disse endringene. "
 
-msgid "Syntax file edit"
-msgstr "Redigering av syntaksfil"
-
-#, fuzzy
-msgid "Which syntax file you want to edit?"
-msgstr " Hvilken syntaksfil vil du redigere? "
-
 #, fuzzy
 msgid "Load"
 msgstr " Last "
-
-#, fuzzy
-msgid "Block is large, you may not be able to undo this action"
-msgstr " Blokken er for stor, du kan kanskje ikke angre denne handlingen. "
 
 #, fuzzy
 msgid "Replace"
@@ -2484,6 +1983,10 @@ msgstr ""
 " arbeidskatalogen, eller gitt deg selv ekstra tilgangs- \n"
 " rettigheter med \"su\" kommandoen? "
 
+#, fuzzy
+msgid "The shell is already running a command"
+msgstr " Skallet kjører allerede en kommando "
+
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Skriv `exit' for å gå tilbake til Midnight Commander"
@@ -2491,6 +1994,522 @@ msgstr "Skriv `exit' for å gå tilbake til Midnight Commander"
 #, fuzzy, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr " Kan ikke hente en lokal kopi av %s "
+
+msgid "&Set"
+msgstr "&Sett"
+
+msgid "S&kip"
+msgstr "&Hopp over"
+
+msgid "Set &all"
+msgstr "Sett &alle"
+
+msgid "owner"
+msgstr "eier"
+
+msgid "group"
+msgstr "gruppe"
+
+msgid "other"
+msgstr "andre"
+
+msgid "On"
+msgstr "På"
+
+msgid "Flag"
+msgstr "Flagg"
+
+msgid "Mode"
+msgstr "Modus"
+
+#, c-format
+msgid "%6d of %d"
+msgstr "%6d av %d"
+
+#, fuzzy
+msgid "Chown advanced command"
+msgstr " Chown avansere kommandoer "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod \"%s\"\n"
+"%s"
+msgstr ""
+" Kunne ikke kjøre chmod på \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown \"%s\"\n"
+"%s"
+msgstr ""
+" Kunne ikke kjøre chown på \"%s\" \n"
+" %s "
+
+msgid "&Stop"
+msgstr "&Stopp"
+
+msgid "&Resume"
+msgstr "&Gjenoppta"
+
+msgid "&Kill"
+msgstr "&Drep"
+
+msgid "&Full file list"
+msgstr "&Full filliste"
+
+msgid "&Brief file list"
+msgstr "&Kort filliste"
+
+msgid "&Long file list"
+msgstr "&Lang filliste"
+
+msgid "&User defined:"
+msgstr "&Brukerdefinert:"
+
+msgid "Listing mode"
+msgstr "Listemodus"
+
+#, fuzzy
+msgid "User &mini status"
+msgstr "brukers &Ministatus"
+
+msgid "Other 8 bit"
+msgstr "Andre 8-bit"
+
+#, fuzzy
+msgid "Display bits"
+msgstr " Visning i bits "
+
+msgid "Input / display codepage:"
+msgstr "Koding for inndata /visning:"
+
+msgid "F&ull 8 bits input"
+msgstr "F&ull 8-bits input"
+
+msgid "&Select"
+msgstr "&Velg"
+
+#, fuzzy
+msgid "Running"
+msgstr "Kjører"
+
+msgid "Stopped"
+msgstr "Stoppet"
+
+msgid "&Reverse"
+msgstr "&Reversert"
+
+#, fuzzy
+msgid "Case sensi&tive"
+msgstr "skill mellom s&tore/små tegn"
+
+msgid "Executable &first"
+msgstr ""
+
+msgid "Sort order"
+msgstr "Sorteringsrekkefølge"
+
+#, fuzzy
+msgid "Confirmation"
+msgstr " Bekreftelse "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Bekreftelse "
+
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
+msgstr "kataloghurtigliste    C-\\"
+
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Bekreftelse "
+
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Bekreftelse "
+
+#, fuzzy
+msgid "Confirmation|O&verwrite"
+msgstr " bekreft o&Verskriv "
+
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Bekreftelse "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Full 8-bits utskrift"
+
+msgid "Full 8 bits output"
+msgstr "Full 8-bits utskrift"
+
+msgid "ISO 8859-1"
+msgstr "ISO 8859-1"
+
+msgid "7 bits"
+msgstr "7-bits"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "Katalogtre"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "Lagringsmodus..."
+
+#, fuzzy
+msgid "Use &passive mode"
+msgstr "Lagringsmodus..."
+
+msgid "&Use ~/.netrc"
+msgstr "Br&uk ~/.netrc"
+
+msgid "&Always use ftp proxy"
+msgstr "&Alltid bruk ftp-stedfortreder"
+
+msgid "sec"
+msgstr "sek"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "ftpfs katalog cache tidsavbrudd:"
+
+msgid "ftp anonymous password:"
+msgstr "ftp anonymt passord:"
+
+msgid "Timeout for freeing VFSs:"
+msgstr "Tidsavbrudd for frigjøring av VFS'er:"
+
+#, fuzzy
+msgid "Virtual File System Setting"
+msgstr " Innstillinger for virtuelt filsystem "
+
+msgid "cd"
+msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Rask katalogskift"
+
+msgid "Symbolic link filename:"
+msgstr "Filnavn for symbolsk lenke:"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr "Eksisterende filnavn (filnavnet symlinken skal peke til):"
+
+msgid "Symbolic link"
+msgstr "Symbolsk lenke"
+
+msgid "Background Jobs"
+msgstr "Bakgrunnsjobber"
+
+msgid "Domain:"
+msgstr "Domene:"
+
+msgid "Username:"
+msgstr "Brukernavn:"
+
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "Passord for \\\\%s\\%s"
+
+msgid "execute/search by others"
+msgstr "kjøre/søke av andre"
+
+msgid "write by others"
+msgstr "skrive av andre"
+
+msgid "read by others"
+msgstr "lese av andre"
+
+msgid "execute/search by group"
+msgstr "kjøre/søke av gruppen"
+
+msgid "write by group"
+msgstr "skrive av gruppen"
+
+msgid "read by group"
+msgstr "lese av gruppen"
+
+msgid "execute/search by owner"
+msgstr "kjøre/søke av eier"
+
+msgid "write by owner"
+msgstr "skrive av eier"
+
+msgid "read by owner"
+msgstr "lese av eier"
+
+msgid "sticky bit"
+msgstr "sticky bit"
+
+msgid "set group ID on execution"
+msgstr "sett gruppe ID ved kjøring"
+
+msgid "set user ID on execution"
+msgstr "sett bruker ID ved kjøring"
+
+msgid "C&lear marked"
+msgstr "B&lank ut markerte"
+
+msgid "S&et marked"
+msgstr "S&ett markerte"
+
+msgid "&Marked all"
+msgstr "&Markert alle"
+
+msgid "Name"
+msgstr "Navn"
+
+msgid "Permissions (Octal)"
+msgstr "Rettigheter (Octal)"
+
+msgid "Owner name"
+msgstr "Eiers navn"
+
+msgid "Group name"
+msgstr "Gruppenavn"
+
+msgid "Use SPACE to change"
+msgstr "Bruk SPACE for å endre"
+
+msgid "an option, ARROW KEYS"
+msgstr "et alternativ, PILTASTER"
+
+msgid "to move between options"
+msgstr "for å flytte mellom alternativene"
+
+msgid "and T or INS to mark"
+msgstr "og T eller INS for å markere"
+
+msgid "Chmod command"
+msgstr "Chmod kommando"
+
+msgid "File"
+msgstr "Fil"
+
+msgid "Permission"
+msgstr "Rettighet"
+
+msgid "Set &users"
+msgstr "Sett br&ukere"
+
+msgid "Set &groups"
+msgstr "Sett &grupper"
+
+msgid "Size"
+msgstr "Størrelse"
+
+#, fuzzy
+msgid "Chown command"
+msgstr " Chown kommando "
+
+msgid "<Unknown user>"
+msgstr "<Ukjent bruker>"
+
+msgid "<Unknown group>"
+msgstr "<Ukjent gruppe>"
+
+#, fuzzy
+msgid "User name"
+msgstr " Brukernavn "
+
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
+msgstr " Skriv inn maskinnavn (F1 for detaljer): "
+
+msgid "Files tagged, want to cd?"
+msgstr "Filer merket, vil du skifte katalog?"
+
+msgid "Cannot change directory"
+msgstr " Kunne ikke skifte katalog"
+
+#, fuzzy
+msgid "Filter"
+msgstr " Filter "
+
+#, fuzzy
+msgid "Set expression for filtering filenames"
+msgstr " Sett uttrykk for filtrering av filnavn"
+
+msgid "&Using shell patterns"
+msgstr "bruker skallmønstre"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "skill mellom s&tore/små tegn"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Bare &Størrelse"
+
+#, c-format
+msgid "Link %s to:"
+msgstr "Lag lenke fra %s til:"
+
+#, fuzzy
+msgid "Link"
+msgstr "&Lenker"
+
+#, fuzzy, c-format
+msgid "link: %s"
+msgstr " lenke: %s "
+
+#, fuzzy, c-format
+msgid "symlink: %s"
+msgstr " symlink: %s "
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " Kunne ikke skifte katalog til %s "
+
+#, fuzzy
+msgid "View file"
+msgstr " Se på fil "
+
+#, fuzzy
+msgid "Filename:"
+msgstr " Filnavn:"
+
+#, fuzzy
+msgid "Filtered view"
+msgstr " Filtrert visning "
+
+#, fuzzy
+msgid "Filter command and arguments:"
+msgstr " Filterkommando og argumenter:"
+
+msgid "Create a new Directory"
+msgstr "Opprett en ny katalog"
+
+#, fuzzy
+msgid "Enter directory name:"
+msgstr " Skriv inn katalognavnet:"
+
+#, fuzzy
+msgid "Select"
+msgstr "&Velg"
+
+#, fuzzy
+msgid "Unselect"
+msgstr " Velg bort "
+
+msgid "Extension file edit"
+msgstr "Rediger utvidelsesfil"
+
+#, fuzzy
+msgid "Which extension file you want to edit?"
+msgstr " Hvilken utvidelsesfil vil du redigere? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid "Which highlighting file you want to edit?"
+msgstr " Hvilken utvidelsesfil vil du redigere? "
+
+#, fuzzy
+msgid "Compare directories"
+msgstr " Sammenlign kataloger "
+
+#, fuzzy
+msgid "Select compare method:"
+msgstr " Velg metode for sammenligning: "
+
+msgid "&Quick"
+msgstr "&Rask"
+
+msgid "&Size only"
+msgstr "Bare &Størrelse"
+
+msgid "&Thorough"
+msgstr "&Grundig"
+
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
+msgstr ""
+" Begge panelene bør være i visningsmodus for liste for å bruke denne "
+"kommandoen "
+
+#, fuzzy
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+" Ikke en xterm eller Linux konsoll; \n"
+" panelene kan ikke slås av og på. "
+
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
+msgstr " Lenken `%s' peker til: "
+
+#, fuzzy
+msgid "Edit symlink"
+msgstr " Rediger symlink "
+
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
+msgstr " rediger symlink, kan ikke fjerne %s: %s "
+
+#, fuzzy, c-format
+msgid "edit symlink: %s"
+msgstr " rediger symlink: %s "
+
+#, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "`%s' er ikke en symbolsk lenke"
+
+#, fuzzy
+msgid "FTP to machine"
+msgstr " FTP til maskin "
+
+#, fuzzy
+msgid "Shell link to machine"
+msgstr "  Skall-tilkobling til maskin "
+
+#, fuzzy
+msgid "SMB link to machine"
+msgstr " SMB-tilkobling til maskin "
+
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
+msgstr " Gjenopprett filer på et ext2 filsystem "
+
+#, fuzzy
+msgid ""
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
+msgstr ""
+" Skriv inn enhet (uten /dev/) som det skal gjenopprettes\n"
+"   filer på: (F1 for detaljer)"
+
+#, fuzzy
+msgid "Setup"
+msgstr " Oppsett "
+
+#, fuzzy, c-format
+msgid "Setup saved to ~/%s"
+msgstr " Oppsett lagret til ~/"
+
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
+msgstr " Kan ikke kjøre kommandoer på ikke-lokale filsystemer"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke skifte katalog til \"%s\" \n"
+" %s "
+
+#, fuzzy
+msgid "Cannot read directory contents"
+msgstr " Kunne ikke skifte katalog"
 
 #, fuzzy, c-format
 msgid ""
@@ -2543,6 +2562,46 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
+msgid "FileOperation|Copy"
+msgstr ""
+
+msgid "FileOperation|Move"
+msgstr ""
+
+msgid "FileOperation|Delete"
+msgstr ""
+
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "%o %f \"%s\"%m"
+
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr "%o %d %f%m"
+
+msgid "files"
+msgstr "filer"
+
+msgid "directory"
+msgstr "katalog"
+
+msgid "directories"
+msgstr "kataloger"
+
+msgid "files/directories"
+msgstr "filer/kataloger"
+
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
+msgid " with source mask:"
+msgstr " med kildemaske:"
+
+msgid "to:"
+msgstr "til:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot make the hardlink"
 msgstr " Kunne ikke lage den faste lenken "
@@ -2578,6 +2637,88 @@ msgstr "&Avbryt"
 
 #, fuzzy, c-format
 msgid ""
+"Cannot stat file \"%s\"\n"
+"%s"
+msgstr ""
+" Kan ikke kjøre stat på filen \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr " `%s' og `%s' er samme fil "
+
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr " Kan ikke overskrive katalogen \"%s\" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+" Kan ikke flytte filen \"%s\" til \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+" Kan ikke fjerne filen \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot delete file \"%s\"\n"
+"%s"
+msgstr ""
+" Kan ikke slette filen \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove directory \"%s\"\n"
+"%s"
+msgstr ""
+" Kan ikke fjerne katalogen \"%s\" \n"
+" %s "
+
+msgid "&Retry"
+msgstr "&Prøv igjen"
+
+#, fuzzy
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"   Katalogen er ikke tom. \n"
+"   Slett den rekursivt? "
+
+#, fuzzy
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"   Bakgrunnsprosess: Katalogen er ikke tom. \n"
+"   Slett den rekursivt? "
+
+#, fuzzy
+msgid "Delete:"
+msgstr "Slett"
+
+msgid "Non&e"
+msgstr "ing&En"
+
+#, fuzzy, c-format
+msgid ""
 "Cannot overwrite directory\"%s\"\n"
 "%s"
 msgstr ""
@@ -2591,14 +2732,6 @@ msgid ""
 msgstr ""
 " Kan ikke kjøre stat på kildefilen \"%s\" \n"
 " %s "
-
-#, fuzzy, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr " `%s' og `%s' er samme fil "
 
 #, fuzzy, c-format
 msgid ""
@@ -2751,34 +2884,6 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
-"%s"
-msgstr ""
-" Kan ikke kjøre stat på filen \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr " Kan ikke overskrive katalogen \"%s\" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-" Kan ikke flytte filen \"%s\" til \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-" Kan ikke fjerne filen \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
@@ -2807,65 +2912,9 @@ msgstr ""
 " Kan ikke flytte  katalogen \"%s\" til \"%s\" \n"
 " %s "
 
-#, fuzzy, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-" Kan ikke slette filen \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr ""
-" Kan ikke fjerne katalogen \"%s\" \n"
-" %s "
-
 #, fuzzy
 msgid "Directory scanning"
 msgstr "Katalogsti"
-
-msgid "FileOperation|Copy"
-msgstr ""
-
-msgid "FileOperation|Move"
-msgstr ""
-
-msgid "FileOperation|Delete"
-msgstr ""
-
-#, no-c-format
-msgid "%o %f \"%s\"%m"
-msgstr "%o %f \"%s\"%m"
-
-#, no-c-format
-msgid "%o %d %f%m"
-msgstr "%o %d %f%m"
-
-msgid "files"
-msgstr "filer"
-
-msgid "directory"
-msgstr "katalog"
-
-msgid "directories"
-msgstr "kataloger"
-
-msgid "files/directories"
-msgstr "filer/kataloger"
-
-#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-msgid " with source mask:"
-msgstr " med kildemaske:"
-
-msgid "to:"
-msgstr "til:"
-
-#, c-format
-msgid "%s?"
-msgstr ""
 
 #, fuzzy
 msgid "Cannot operate on \"..\"!"
@@ -2874,36 +2923,6 @@ msgstr " Kan ikke arbeide på \"..\"! "
 #, fuzzy
 msgid "Sorry, I could not put the job in background"
 msgstr " Beklager, Jeg kunne ikke plassere jobben i bakgrunnen "
-
-msgid "&Retry"
-msgstr "&Prøv igjen"
-
-#, fuzzy
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"   Katalogen er ikke tom. \n"
-"   Slett den rekursivt? "
-
-#, fuzzy
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"   Bakgrunnsprosess: Katalogen er ikke tom. \n"
-"   Slett den rekursivt? "
-
-#, fuzzy
-msgid "Delete:"
-msgstr "Slett"
-
-msgid "Non&e"
-msgstr "ing&En"
 
 #, fuzzy, c-format
 msgid "%d:%02d.%02d"
@@ -2924,27 +2943,6 @@ msgstr "%.2f KB/s"
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld B/s"
-
-#, c-format
-msgid "Files processed: %llu of %llu"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Time: %s  %s (%s)"
-msgstr "Størrelse: %s"
-
-#, c-format
-msgid "Total: %s of %s"
-msgstr ""
-
-msgid "Source"
-msgstr "Kilde"
-
-msgid "Target"
-msgstr "Mål"
-
-msgid "Deleting"
-msgstr "Sletter"
 
 #, fuzzy
 msgid "Target file already exists!"
@@ -2991,6 +2989,27 @@ msgstr " Filen eksisterer "
 #, fuzzy
 msgid "Background process: File exists"
 msgstr " Bakgrunnsprosess: Filen eksisterer "
+
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Størrelse: %s"
+
+#, c-format
+msgid "Total: %s of %s"
+msgstr ""
+
+msgid "Source"
+msgstr "Kilde"
+
+msgid "Target"
+msgstr "Mål"
+
+msgid "Deleting"
+msgstr "Sletter"
 
 msgid "&Background"
 msgstr "Bakgrunn"
@@ -3059,6 +3078,10 @@ msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
+msgid "Sea&rch for content"
+msgstr "Søk"
+
+#, fuzzy
 msgid "Case sens&itive"
 msgstr "skill mellom s&tore/små tegn"
 
@@ -3069,7 +3092,7 @@ msgstr "Vanlig uttrykk"
 msgid "Fir&st hit"
 msgstr ""
 
-msgid "All cha&rsets"
+msgid "A&ll charsets"
 msgstr ""
 
 msgid "&Tree"
@@ -3102,27 +3125,6 @@ msgstr "Søker etter %s"
 
 msgid "Searching"
 msgstr "Søker"
-
-#, fuzzy
-msgid "Help file format error\n"
-msgstr " Feil i formatet til hjelpefilen\n"
-
-#, fuzzy
-msgid "Internal bug: Double start of link area"
-msgstr " Intern feil: Double start of link area "
-
-#, fuzzy, c-format
-msgid "Cannot find node %s in help file"
-msgstr " Kan ikke finne noden %s i hjelpefilen "
-
-msgid "Help"
-msgstr "Hjelp"
-
-msgid "ButtonBar|Index"
-msgstr ""
-
-msgid "ButtonBar|Prev"
-msgstr ""
 
 msgid "&Move"
 msgstr "&Flytt"
@@ -3199,14 +3201,6 @@ msgstr " Ny favorittgruppe "
 msgid "Name of new group:"
 msgstr "Navn på den nye gruppen"
 
-#, c-format
-msgid "Label for \"%s\":"
-msgstr "Etikett for \"%s\":"
-
-#, fuzzy
-msgid "Add to hotlist"
-msgstr " Legg til i favoritter "
-
 #, fuzzy
 msgid "Remove:"
 msgstr " Fjern: "
@@ -3236,6 +3230,14 @@ msgid ""
 "MC was unable to write ~/%s file,\n"
 "your old hotlist entries were not deleted"
 msgstr " filen, dine gamle favorittlisteoppføringer ble ikke slettet"
+
+#, c-format
+msgid "Label for \"%s\":"
+msgstr "Etikett for \"%s\":"
+
+#, fuzzy
+msgid "Add to hotlist"
+msgstr " Legg til i favoritter "
 
 #, fuzzy
 msgid "Information"
@@ -3373,85 +3375,6 @@ msgstr "utskriftslinjer"
 
 msgid "Layout"
 msgstr "Utseende"
-
-msgid "Learn keys"
-msgstr "Lær taster"
-
-#, fuzzy
-msgid "Teach me a key"
-msgstr " Lær meg en tast "
-
-#, c-format
-msgid ""
-"Please press the %s\n"
-"and then wait until this message disappears.\n"
-"\n"
-"Then, press it again to see if OK appears\n"
-"next to its button.\n"
-"\n"
-"If you want to escape, press a single Escape key\n"
-"and wait as well."
-msgstr ""
-"Vær snill og trykk %s\n"
-"og vent til denne meldingen forsvinner.\n"
-"\n"
-"Trykk så igjen fpr å se om OK kommer opp\n"
-"ved siden av knappen.\n"
-"\n"
-"Hvis du vil gå ut igjen, trykk en enkelt Escape tast\n"
-"og vent da også."
-
-#, fuzzy
-msgid "Cannot accept this key"
-msgstr " Kan ikke akseptere denne tasten "
-
-#, fuzzy, c-format
-msgid "You have entered \"%s\""
-msgstr " Du har skrevet \"%s\""
-
-#. TRANSLATORS: This label appears near learned keys.  Keep it short.
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"It seems that all your keys already\n"
-"work fine. That's great."
-msgstr ""
-"Det ser ut til at alle tastene dine \n"
-"allerede virker fint. Det er bra."
-
-msgid "&Discard"
-msgstr "forkast"
-
-msgid ""
-"Great! You have a complete terminal database!\n"
-"All your keys work well."
-msgstr ""
-"Flott! Du har en komplett terminaldatabase!\n"
-"Alle tastene virker fint."
-
-msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Trykk ned alle tastene som vises her. Sjekk siden"
-
-msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "hvilke taster som ikke er markert med OK. Trykk mellomrom på manglende"
-
-msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "tast, eller klikk med musen for å definere den. Flytt med Tab."
-
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-#, fuzzy
-msgid "The Midnight Commander"
-msgstr " Midnight Commander "
-
-#, fuzzy
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr " Vil du virkelig avslutte Midnight Commander? "
 
 #, fuzzy
 msgid "File listin&g"
@@ -3650,6 +3573,27 @@ msgid "&Virtual FS..."
 msgstr "Virtuelt FS..."
 
 #, fuzzy
+msgid "Panels:"
+msgstr " Del panel "
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM miljøvariabelen er ikke satt!\n"
+
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+msgid "The Midnight Commander"
+msgstr " Midnight Commander "
+
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr " Vil du virkelig avslutte Midnight Commander? "
+
+#, fuzzy
 msgid "&Above"
 msgstr " Over "
 
@@ -3665,10 +3609,6 @@ msgstr " Under "
 msgid "&Right"
 msgstr " Høyre "
 
-#, fuzzy
-msgid "Panels:"
-msgstr " Del panel "
-
 msgid "ButtonBar|Menu"
 msgstr ""
 
@@ -3680,13 +3620,6 @@ msgstr ""
 
 msgid "ButtonBar|Mkdir"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM miljøvariabelen er ikke satt!\n"
-
-#, fuzzy, c-format
-msgid "Cannot create %s directory"
-msgstr " Kunne ikke skifte katalog"
 
 msgid "&Never"
 msgstr "aldri"
@@ -3863,57 +3796,6 @@ msgstr ""
 " du utføre en manuell gjenlesing av katalogen. Se manualsiden for \n"
 " detaljene."
 
-msgid "&Add new"
-msgstr "Legg til ny"
-
-msgid "External panelize"
-msgstr "Eksternt panel"
-
-msgid "Command"
-msgstr "Kommando"
-
-msgid "Other command"
-msgstr "Andre kommandoer"
-
-#, fuzzy
-msgid "Add to external panelize"
-msgstr " Legg til i eksternt panel "
-
-#, fuzzy
-msgid "Enter command label:"
-msgstr " Skriv inn kommandomerkelapp: "
-
-#, fuzzy
-msgid "Cannot run external panelize in a non-local directory"
-msgstr " Kan ikke kjøre eksternt panel på en ikke-lokal katalog "
-
-msgid "Find rejects after patching"
-msgstr "Finn avviste etter patching"
-
-msgid "Find *.orig after patching"
-msgstr "Finn *.orig etter patching"
-
-msgid "Find SUID and SGID programs"
-msgstr "Finn SUID og SGID programmer"
-
-msgid "Cannot invoke command."
-msgstr "Kan ikke utføre kommando."
-
-msgid "Pipe close failed"
-msgstr "Feil under lukking av rør"
-
-msgid "[dev]"
-msgstr ""
-
-msgid "UP--DIR"
-msgstr "UP--DIR"
-
-msgid "SYMLINK"
-msgstr "SYMLENKE"
-
-msgid "SUB-DIR"
-msgstr "SUB-DIR"
-
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
@@ -4012,6 +3894,18 @@ msgstr "Eier"
 msgid "Group"
 msgstr "Gruppe"
 
+msgid "[dev]"
+msgstr ""
+
+msgid "UP--DIR"
+msgstr "UP--DIR"
+
+msgid "SYMLINK"
+msgstr "SYMLENKE"
+
+msgid "SUB-DIR"
+msgstr "SUB-DIR"
+
 msgid "<readlink failed>"
 msgstr "<readlink feilet>"
 
@@ -4031,97 +3925,51 @@ msgstr[1] "%s bytes i %d fil"
 msgid "Unknown tag on display format:"
 msgstr "Ukjent tag på skjermformat: "
 
-msgid "User supplied format looks invalid, reverting to default."
-msgstr "Oppgitt format ser ut til å være ugyldig. Går tilbake til standard."
-
 #, fuzzy
 msgid "Do you really want to execute?"
 msgstr " Vil du virkelig kjøre? "
 
-#, fuzzy
-msgid "Choose codepage"
-msgstr " Velg koding for inndata "
+msgid "User supplied format looks invalid, reverting to default."
+msgstr "Oppgitt format ser ut til å være ugyldig. Går tilbake til standard."
 
-msgid "-  < No translation >"
-msgstr "- < Ingen oversettelse >"
+msgid "&Add new"
+msgstr "Legg til ny"
 
-msgid "%b %e  %Y"
-msgstr "%b %e %Y"
+msgid "External panelize"
+msgstr "Eksternt panel"
 
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
+msgid "Command"
+msgstr "Kommando"
 
-#, fuzzy, c-format
-msgid ""
-"Cannot save file %s:\n"
-"%s"
-msgstr " Feil under lagring av fil. "
-
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-
-#, c-format
-msgid "Cannot open named pipe %s\n"
-msgstr "Kunne ikke åpne navngitt rør %s\n"
+msgid "Other command"
+msgstr "Andre kommandoer"
 
 #, fuzzy
-msgid "The shell is still active. Quit anyway?"
-msgstr " Skallet er fremdeles aktivt. Avslutt likevel?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Advarsel: Kunne ikke skifte til %s.\n"
-
-msgid "With builtin Editor\n"
-msgstr "Med innebygget editor\n"
-
-msgid "Using system-installed S-Lang library"
-msgstr "Bruker system-installert S-Lang bibliotek"
-
-msgid "with terminfo database"
-msgstr "med terminfo-database"
-
-msgid "Using the ncurses library"
-msgstr "Bruker ncurses biblioteket"
+msgid "Add to external panelize"
+msgstr " Legg til i eksternt panel "
 
 #, fuzzy
-msgid "Using the ncursesw library"
-msgstr "Bruker ncurses biblioteket"
+msgid "Enter command label:"
+msgstr " Skriv inn kommandomerkelapp: "
 
-msgid "With optional subshell support"
-msgstr "Med valgfri støtte for underskall"
+msgid "Cannot invoke command."
+msgstr "Kan ikke utføre kommando."
 
-msgid "With subshell support as default"
-msgstr "Med forvalgt støtte for underskall"
+msgid "Pipe close failed"
+msgstr "Feil under lukking av rør"
 
-msgid "With support for background operations\n"
-msgstr "Med støtte for bakgrunnsoperasjoner\n"
+#, fuzzy
+msgid "Cannot run external panelize in a non-local directory"
+msgstr " Kan ikke kjøre eksternt panel på en ikke-lokal katalog "
 
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "Med musstøtte i xterm og på Linux konsollet\n"
+msgid "Find rejects after patching"
+msgstr "Finn avviste etter patching"
 
-msgid "With mouse support on xterm\n"
-msgstr "Med musstøtte i xterm\n"
+msgid "Find *.orig after patching"
+msgstr "Finn *.orig etter patching"
 
-msgid "With support for X11 events\n"
-msgstr "Med støtte for X11-hendelser\n"
-
-msgid "With internationalization support\n"
-msgstr "Med støtte for internasjonalisering\n"
-
-msgid "With multiple codepages support\n"
-msgstr "Med støtte for flere kodinger\n"
-
-#, fuzzy, c-format
-msgid "Virtual File Systems:"
-msgstr "Virtuelt filsystem:"
-
-#, c-format
-msgid "Data types:"
-msgstr ""
+msgid "Find SUID and SGID programs"
+msgstr "Finn SUID og SGID programmer"
 
 #, c-format
 msgid ""
@@ -4175,18 +4023,6 @@ msgstr ""
 "%s\n"
 
 #, fuzzy
-msgid "Format error on file Extensions File"
-msgstr " Formatfeil på filtypefilen "
-
-#, fuzzy, c-format
-msgid "The %%var macro has no default"
-msgstr " %%var makroen har ingen standardverdi "
-
-#, fuzzy, c-format
-msgid "The %%var macro has no variable"
-msgstr " %%var makroen har ingen variabel "
-
-#, fuzzy
 msgid "Debug"
 msgstr " Avlus "
 
@@ -4214,6 +4050,18 @@ msgstr ""
 "Filen %s er ikke eid av root eller er skrivbar for alle.\n"
 "Bruk av den kan kompromittere sikkerheten"
 
+#, fuzzy
+msgid "Format error on file Extensions File"
+msgstr " Formatfeil på filtypefilen "
+
+#, fuzzy, c-format
+msgid "The %%var macro has no default"
+msgstr " %%var makroen har ingen standardverdi "
+
+#, fuzzy, c-format
+msgid "The %%var macro has no variable"
+msgstr " %%var makroen har ingen variabel "
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open file%s\n"
@@ -4229,6 +4077,186 @@ msgstr " Ingen passende oppføringer funnet i %s "
 #, fuzzy
 msgid "User menu"
 msgstr " Brukermeny "
+
+#, fuzzy
+msgid "Help file format error\n"
+msgstr " Feil i formatet til hjelpefilen\n"
+
+#, fuzzy
+msgid "Internal bug: Double start of link area"
+msgstr " Intern feil: Double start of link area "
+
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
+msgstr " Kan ikke finne noden %s i hjelpefilen "
+
+msgid "Help"
+msgstr "Hjelp"
+
+msgid "ButtonBar|Index"
+msgstr ""
+
+msgid "ButtonBar|Prev"
+msgstr ""
+
+msgid "Learn keys"
+msgstr "Lær taster"
+
+#, fuzzy
+msgid "Teach me a key"
+msgstr " Lær meg en tast "
+
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Vær snill og trykk %s\n"
+"og vent til denne meldingen forsvinner.\n"
+"\n"
+"Trykk så igjen fpr å se om OK kommer opp\n"
+"ved siden av knappen.\n"
+"\n"
+"Hvis du vil gå ut igjen, trykk en enkelt Escape tast\n"
+"og vent da også."
+
+#, fuzzy
+msgid "Cannot accept this key"
+msgstr " Kan ikke akseptere denne tasten "
+
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
+msgstr " Du har skrevet \"%s\""
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Det ser ut til at alle tastene dine \n"
+"allerede virker fint. Det er bra."
+
+msgid "&Discard"
+msgstr "forkast"
+
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"Flott! Du har en komplett terminaldatabase!\n"
+"Alle tastene virker fint."
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Trykk ned alle tastene som vises her. Sjekk siden"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "hvilke taster som ikke er markert med OK. Trykk mellomrom på manglende"
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "tast, eller klikk med musen for å definere den. Flytt med Tab."
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr " Kunne ikke skifte katalog"
+
+#, fuzzy
+msgid "Choose codepage"
+msgstr " Velg koding for inndata "
+
+msgid "-  < No translation >"
+msgstr "- < Ingen oversettelse >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Feil under lagring av fil. "
+
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr "Kunne ikke åpne navngitt rør %s\n"
+
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
+msgstr " Skallet er fremdeles aktivt. Avslutt likevel?"
+
+#, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Advarsel: Kunne ikke skifte til %s.\n"
+
+#, fuzzy
+msgid "Using the S-Lang library with terminfo database\n"
+msgstr "med terminfo-database"
+
+#, fuzzy
+msgid "Using the ncurses library\n"
+msgstr "Bruker ncurses biblioteket"
+
+#, fuzzy
+msgid "Using the ncursesw library\n"
+msgstr "Bruker ncurses biblioteket"
+
+msgid "With builtin Editor\n"
+msgstr "Med innebygget editor\n"
+
+#, fuzzy
+msgid "With optional subshell support\n"
+msgstr "Med valgfri støtte for underskall"
+
+#, fuzzy
+msgid "With subshell support as default\n"
+msgstr "Med forvalgt støtte for underskall"
+
+msgid "With support for background operations\n"
+msgstr "Med støtte for bakgrunnsoperasjoner\n"
+
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "Med musstøtte i xterm og på Linux konsollet\n"
+
+msgid "With mouse support on xterm\n"
+msgstr "Med musstøtte i xterm\n"
+
+msgid "With support for X11 events\n"
+msgstr "Med støtte for X11-hendelser\n"
+
+msgid "With internationalization support\n"
+msgstr "Med støtte for internasjonalisering\n"
+
+msgid "With multiple codepages support\n"
+msgstr "Med støtte for flere kodinger\n"
+
+#, c-format
+msgid "Built with GLib %d.%d.%d\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
+msgstr "Virtuelt filsystem:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, fuzzy
 msgid "Invalid value"
@@ -4333,19 +4361,8 @@ msgstr "Søk"
 msgid "Continue from begining?"
 msgstr ""
 
-#, fuzzy
-msgid "History"
-msgstr " Historikk "
-
-#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-msgid "DialogTitle|History cleanup"
-msgstr ""
-
-msgid "Do you want clean this history?"
-msgstr ""
-
-msgid "Background process:"
-msgstr "Bakgrunnsprosess:"
+#~ msgid "Using system-installed S-Lang library"
+#~ msgstr "Bruker system-installert S-Lang bibliotek"
 
 #, fuzzy
 #~ msgid "ftpfs: could not setup passive mode: %s"

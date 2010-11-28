@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-01 15:58+0200\n"
+"POT-Creation-Date: 2010-11-28 23:42+0200\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -14,6 +14,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Δημηουργία νέου καταλόγου"
+
+msgid "7-bit ASCII"
+msgstr ""
+
+#, c-format
+msgid "Cannot translate from %s to %s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -349,6 +360,10 @@ msgstr "Πλήκτρο ανάποδης καθέτου"
 msgid "Number sign #"
 msgstr ""
 
+#. TRANSLATORS: Please translate as in "at sign" (@).
+msgid "At sign"
+msgstr ""
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -449,10 +464,6 @@ msgstr "Απρόσμενο τέλος αρχείου tar"
 msgid "Directory cache expired for %s"
 msgstr ""
 
-#, fuzzy
-msgid "Starting linear transfer..."
-msgstr "ftpfs: ακύρωση μεταφοράς."
-
 #, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr ""
@@ -460,6 +471,10 @@ msgstr ""
 #, c-format
 msgid "%s: %s: %s %ju bytes transferred"
 msgstr ""
+
+#, fuzzy
+msgid "Starting linear transfer..."
+msgstr "ftpfs: ακύρωση μεταφοράς."
 
 msgid "Getting file"
 msgstr "Γίνεται λήψη αρχείου"
@@ -764,10 +779,6 @@ msgstr ""
 msgid "while doing inode scan %d"
 msgstr ""
 
-#, fuzzy
-msgid "Ext2lib error"
-msgstr " Σφάλμα "
-
 #, fuzzy, c-format
 msgid "Cannot open file %s"
 msgstr ""
@@ -807,6 +818,10 @@ msgstr ""
 "Άνοιγμα αρχείου %s ανεπιτυχές\n"
 "%s"
 
+#, fuzzy
+msgid "Ext2lib error"
+msgstr " Σφάλμα "
+
 msgid "Cannot parse:"
 msgstr ""
 
@@ -822,58 +837,36 @@ msgstr "Κωδικός:"
 msgid "Changes to file lost"
 msgstr ""
 
+msgid "Screens"
+msgstr ""
+
+msgid "History"
+msgstr ""
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Ναι"
+
+msgid "&No"
+msgstr "&Όχι"
+
+msgid "Background process:"
+msgstr ""
+
 msgid "&Cancel"
 msgstr "&Άκυρο"
 
-msgid "&Set"
-msgstr ""
+msgid "&OK"
+msgstr "&Εντάξει"
 
-msgid "S&kip"
-msgstr ""
-
-msgid "Set &all"
-msgstr ""
-
-msgid "owner"
-msgstr ""
-
-msgid "group"
-msgstr ""
-
-msgid "other"
-msgstr ""
-
-msgid "On"
-msgstr ""
-
-msgid "Flag"
-msgstr ""
-
-msgid "Mode"
-msgstr ""
-
-#, c-format
-msgid "%6d of %d"
-msgstr ""
-
-msgid "Chown advanced command"
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
-msgstr ""
-"Άνοιγμα αρχείου %s ανεπιτυχές\n"
-"%s"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chown \"%s\"\n"
-"%s"
-msgstr ""
-"Άνοιγμα αρχείου %s ανεπιτυχές\n"
-"%s"
+msgid "Error"
+msgstr "Σφάλμα"
 
 msgid "Displays the current version"
 msgstr ""
@@ -945,6 +938,7 @@ msgid ""
 "Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1020,473 +1014,6 @@ msgstr "Γίνεται λήψη αρχείου"
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr ""
-
-msgid "&Full file list"
-msgstr ""
-
-msgid "&Brief file list"
-msgstr ""
-
-msgid "&Long file list"
-msgstr ""
-
-msgid "&User defined:"
-msgstr ""
-
-msgid "Listing mode"
-msgstr ""
-
-msgid "User &mini status"
-msgstr ""
-
-msgid "&OK"
-msgstr "&Εντάξει"
-
-msgid "&Reverse"
-msgstr ""
-
-#, fuzzy
-msgid "Case sensi&tive"
-msgstr "κεφαλαία/πε&ζά"
-
-msgid "Executable &first"
-msgstr ""
-
-msgid "Sort order"
-msgstr ""
-
-msgid "Confirmation"
-msgstr ""
-
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#. 2
-msgid "Confirmation|&History cleanup"
-msgstr ""
-
-msgid "Confirmation|Di&rectory hotlist delete"
-msgstr ""
-
-msgid "Confirmation|E&xit"
-msgstr ""
-
-msgid "Confirmation|&Execute"
-msgstr ""
-
-msgid "Confirmation|O&verwrite"
-msgstr ""
-
-msgid "Confirmation|&Delete"
-msgstr ""
-
-msgid "UTF-8 output"
-msgstr ""
-
-msgid "Full 8 bits output"
-msgstr ""
-
-msgid "ISO 8859-1"
-msgstr ""
-
-msgid "7 bits"
-msgstr ""
-
-msgid "F&ull 8 bits input"
-msgstr ""
-
-msgid "Display bits"
-msgstr ""
-
-#, fuzzy
-msgid "Other 8 bit"
-msgstr "Λοιποί"
-
-msgid "Input / display codepage:"
-msgstr ""
-
-#, fuzzy
-msgid "&Select"
-msgstr "Επιλογή εικονιδίου"
-
-msgid "Directory tree"
-msgstr ""
-
-msgid "Use passive mode over pro&xy"
-msgstr ""
-
-msgid "Use &passive mode"
-msgstr ""
-
-msgid "&Use ~/.netrc"
-msgstr ""
-
-msgid "&Always use ftp proxy"
-msgstr ""
-
-msgid "sec"
-msgstr ""
-
-msgid "ftpfs directory cache timeout:"
-msgstr ""
-
-msgid "ftp anonymous password:"
-msgstr ""
-
-msgid "Timeout for freeing VFSs:"
-msgstr ""
-
-msgid "Virtual File System Setting"
-msgstr ""
-
-msgid "cd"
-msgstr ""
-
-msgid "Quick cd"
-msgstr ""
-
-msgid "Symbolic link filename:"
-msgstr ""
-
-msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-
-msgid "Symbolic link"
-msgstr ""
-
-msgid "Running"
-msgstr ""
-
-msgid "Stopped"
-msgstr ""
-
-msgid "&Stop"
-msgstr ""
-
-msgid "&Resume"
-msgstr ""
-
-msgid "&Kill"
-msgstr ""
-
-msgid "Background Jobs"
-msgstr ""
-
-#, fuzzy
-msgid "Domain:"
-msgstr "Εντολή:"
-
-#, fuzzy
-msgid "Username:"
-msgstr "Χρήστης"
-
-#, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr ""
-
-#, fuzzy
-msgid "Warning: cannot load codepages list"
-msgstr "Δημηουργία νέου καταλόγου"
-
-msgid "7-bit ASCII"
-msgstr ""
-
-#, c-format
-msgid "Cannot translate from %s to %s"
-msgstr ""
-
-msgid "execute/search by others"
-msgstr ""
-
-msgid "write by others"
-msgstr ""
-
-msgid "read by others"
-msgstr ""
-
-msgid "execute/search by group"
-msgstr ""
-
-msgid "write by group"
-msgstr ""
-
-msgid "read by group"
-msgstr ""
-
-msgid "execute/search by owner"
-msgstr ""
-
-msgid "write by owner"
-msgstr ""
-
-msgid "read by owner"
-msgstr ""
-
-msgid "sticky bit"
-msgstr ""
-
-msgid "set group ID on execution"
-msgstr ""
-
-msgid "set user ID on execution"
-msgstr ""
-
-msgid "C&lear marked"
-msgstr ""
-
-msgid "S&et marked"
-msgstr ""
-
-msgid "&Marked all"
-msgstr ""
-
-msgid "Name"
-msgstr "Όνομα"
-
-msgid "Permissions (Octal)"
-msgstr ""
-
-msgid "Owner name"
-msgstr ""
-
-msgid "Group name"
-msgstr ""
-
-msgid "Use SPACE to change"
-msgstr ""
-
-msgid "an option, ARROW KEYS"
-msgstr ""
-
-msgid "to move between options"
-msgstr ""
-
-msgid "and T or INS to mark"
-msgstr ""
-
-msgid "Chmod command"
-msgstr ""
-
-#, fuzzy
-msgid "File"
-msgstr " Αρχείο "
-
-msgid "Permission"
-msgstr "Δικαιώματα"
-
-msgid "Set &users"
-msgstr ""
-
-msgid "Set &groups"
-msgstr ""
-
-msgid "Size"
-msgstr "Μέγεθος"
-
-#, fuzzy
-msgid "Chown command"
-msgstr "Εντολή"
-
-msgid "<Unknown user>"
-msgstr ""
-
-msgid "<Unknown group>"
-msgstr ""
-
-#, fuzzy
-msgid "User name"
-msgstr "Χρήστης"
-
-msgid "Files tagged, want to cd?"
-msgstr ""
-
-msgid "&Yes"
-msgstr "&Ναι"
-
-msgid "&No"
-msgstr "&Όχι"
-
-msgid "Cannot change directory"
-msgstr ""
-
-#, fuzzy
-msgid "View file"
-msgstr "Άνοιγμα με..."
-
-#, fuzzy
-msgid "Filename:"
-msgstr "Χρήστης"
-
-msgid "Filtered view"
-msgstr ""
-
-msgid "Filter command and arguments:"
-msgstr ""
-
-msgid "Create a new Directory"
-msgstr ""
-
-msgid "Enter directory name:"
-msgstr ""
-
-#, fuzzy
-msgid "Filter"
-msgstr " Αρχείο "
-
-msgid "Set expression for filtering filenames"
-msgstr ""
-
-msgid "&Using shell patterns"
-msgstr ""
-
-#, fuzzy
-msgid "&Case sensitive"
-msgstr "κεφαλαία/πε&ζά"
-
-#, fuzzy
-msgid "&Files only"
-msgstr "Μόνο πλή&ρεις λέξεις"
-
-#, fuzzy
-msgid "Select"
-msgstr "Επιλογή εικονιδίου"
-
-#, fuzzy
-msgid "Unselect"
-msgstr "Επιλογή εικονιδίου"
-
-msgid "Extension file edit"
-msgstr ""
-
-msgid "Which extension file you want to edit?"
-msgstr ""
-
-msgid "&User"
-msgstr ""
-
-msgid "&System Wide"
-msgstr ""
-
-#, fuzzy
-msgid "Menu edit"
-msgstr "Άνοιγμα με..."
-
-msgid "Which menu file do you want to edit?"
-msgstr ""
-
-msgid "&Local"
-msgstr ""
-
-msgid "Highlighting groups file edit"
-msgstr ""
-
-msgid "Which highlighting file you want to edit?"
-msgstr ""
-
-msgid "Compare directories"
-msgstr ""
-
-msgid "Select compare method:"
-msgstr ""
-
-msgid "&Quick"
-msgstr ""
-
-msgid "&Size only"
-msgstr ""
-
-msgid "&Thorough"
-msgstr ""
-
-msgid ""
-"Both panels should be in the listing mode\n"
-"to use this command"
-msgstr ""
-
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-
-#, c-format
-msgid "Link %s to:"
-msgstr ""
-
-msgid "Link"
-msgstr ""
-
-#, c-format
-msgid "link: %s"
-msgstr ""
-
-#, c-format
-msgid "symlink: %s"
-msgstr ""
-
-#, c-format
-msgid "Symlink `%s' points to:"
-msgstr ""
-
-msgid "Edit symlink"
-msgstr ""
-
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr ""
-
-#, c-format
-msgid "edit symlink: %s"
-msgstr ""
-
-#, c-format
-msgid "`%s' is not a symbolic link"
-msgstr ""
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr ""
-
-msgid "Enter machine name (F1 for details):"
-msgstr ""
-
-msgid "FTP to machine"
-msgstr ""
-
-msgid "Shell link to machine"
-msgstr ""
-
-msgid "SMB link to machine"
-msgstr ""
-
-msgid "Undelete files on an ext2 file system"
-msgstr ""
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-
-#, fuzzy
-msgid "Setup"
-msgstr " Αποθήκευση ως "
-
-#, c-format
-msgid "Setup saved to ~/%s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
-#, fuzzy
-msgid "Cannot execute commands on non-local filesystems"
-msgstr " Εκτέλεση εντολής `sort' ανεπιτυχής "
-
-msgid "The shell is already running a command"
-msgstr ""
-
-msgid "Screens"
 msgstr ""
 
 msgid "&Dismiss"
@@ -1629,9 +1156,6 @@ msgstr ""
 msgid "Two files are needed to compare"
 msgstr ""
 
-msgid "Cannot read directory contents"
-msgstr ""
-
 #, fuzzy
 msgid "Choose syntax highlighting"
 msgstr "τονισμός σύντα&ξης"
@@ -1658,20 +1182,9 @@ msgstr ""
 msgid "Cannot open %s for reading"
 msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
 
-msgid "Error"
-msgstr "Σφάλμα"
-
 #, fuzzy, c-format
 msgid "Error reading %s"
 msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
-#, fuzzy, c-format
-msgid "Error reading from pipe: %s"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
-#, fuzzy, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
 
 #, c-format
 msgid "Cannot get size/permissions for %s"
@@ -1687,6 +1200,14 @@ msgstr " Αρχείο πολύ μεγάλο: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "Error reading from pipe: %s"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+#, fuzzy, c-format
+msgid "Cannot open pipe for reading: %s"
+msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1705,23 +1226,6 @@ msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυ�
 #, fuzzy, c-format
 msgid "Cannot open file for writing: %s"
 msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Ταχεία αποθήκευση "
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Ασφαλής αποθήκευση "
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid "Edit Save Mode"
-msgstr ""
 
 msgid "The file you are saving is not finished with a newline"
 msgstr ""
@@ -1753,21 +1257,6 @@ msgstr "Χρήστης"
 msgid "Save As"
 msgstr " Αποθήκευση ως "
 
-msgid "A file already exists with this name"
-msgstr ""
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Επικάλυψη"
-
-#, fuzzy
-msgid "Save as"
-msgstr "Αποθήκευση &ως...       F12"
-
-#, fuzzy
-msgid "Cannot save file"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
 #, fuzzy
 msgid "Delete macro"
 msgstr " Διαγραφή μακροεντολής "
@@ -1783,6 +1272,63 @@ msgstr " Άνοιγμα αρχείου μακροεντολών ανεπιτυχ
 #, fuzzy
 msgid "Cannot overwrite macro file"
 msgstr " Άνοιγμα αρχείου μακροεντολών ανεπιτυχές "
+
+msgid "Syntax file edit"
+msgstr ""
+
+msgid "Which syntax file you want to edit?"
+msgstr ""
+
+msgid "&User"
+msgstr ""
+
+msgid "&System Wide"
+msgstr ""
+
+#, fuzzy
+msgid "Menu edit"
+msgstr "Άνοιγμα με..."
+
+msgid "Which menu file do you want to edit?"
+msgstr ""
+
+msgid "&Local"
+msgstr ""
+
+msgid "Block is large, you may not be able to undo this action"
+msgstr ""
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Ταχεία αποθήκευση "
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Ασφαλής αποθήκευση "
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid "Edit Save Mode"
+msgstr ""
+
+msgid "A file already exists with this name"
+msgstr ""
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Επικάλυψη"
+
+#, fuzzy
+msgid "Save as"
+msgstr "Αποθήκευση &ως...       F12"
+
+#, fuzzy
+msgid "Cannot save file"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
 
 #, fuzzy
 msgid "Save macro"
@@ -1816,18 +1362,9 @@ msgid ""
 "Continue discards these changes"
 msgstr ""
 
-msgid "Syntax file edit"
-msgstr ""
-
-msgid "Which syntax file you want to edit?"
-msgstr ""
-
 #, fuzzy
 msgid "Load"
 msgstr " Ανάγνωση "
-
-msgid "Block is large, you may not be able to undo this action"
-msgstr ""
 
 #, fuzzy
 msgid "Replace"
@@ -2326,12 +1863,493 @@ msgid ""
 "extra access permissions with the \"su\" command?"
 msgstr ""
 
+msgid "The shell is already running a command"
+msgstr ""
+
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr ""
 
 #, c-format
 msgid "Cannot fetch a local copy of %s"
+msgstr ""
+
+msgid "&Set"
+msgstr ""
+
+msgid "S&kip"
+msgstr ""
+
+msgid "Set &all"
+msgstr ""
+
+msgid "owner"
+msgstr ""
+
+msgid "group"
+msgstr ""
+
+msgid "other"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Flag"
+msgstr ""
+
+msgid "Mode"
+msgstr ""
+
+#, c-format
+msgid "%6d of %d"
+msgstr ""
+
+msgid "Chown advanced command"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod \"%s\"\n"
+"%s"
+msgstr ""
+"Άνοιγμα αρχείου %s ανεπιτυχές\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown \"%s\"\n"
+"%s"
+msgstr ""
+"Άνοιγμα αρχείου %s ανεπιτυχές\n"
+"%s"
+
+msgid "&Stop"
+msgstr ""
+
+msgid "&Resume"
+msgstr ""
+
+msgid "&Kill"
+msgstr ""
+
+msgid "&Full file list"
+msgstr ""
+
+msgid "&Brief file list"
+msgstr ""
+
+msgid "&Long file list"
+msgstr ""
+
+msgid "&User defined:"
+msgstr ""
+
+msgid "Listing mode"
+msgstr ""
+
+msgid "User &mini status"
+msgstr ""
+
+#, fuzzy
+msgid "Other 8 bit"
+msgstr "Λοιποί"
+
+msgid "Display bits"
+msgstr ""
+
+msgid "Input / display codepage:"
+msgstr ""
+
+msgid "F&ull 8 bits input"
+msgstr ""
+
+#, fuzzy
+msgid "&Select"
+msgstr "Επιλογή εικονιδίου"
+
+msgid "Running"
+msgstr ""
+
+msgid "Stopped"
+msgstr ""
+
+msgid "&Reverse"
+msgstr ""
+
+#, fuzzy
+msgid "Case sensi&tive"
+msgstr "κεφαλαία/πε&ζά"
+
+msgid "Executable &first"
+msgstr ""
+
+msgid "Sort order"
+msgstr ""
+
+msgid "Confirmation"
+msgstr ""
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+msgid "Confirmation|&History cleanup"
+msgstr ""
+
+msgid "Confirmation|Di&rectory hotlist delete"
+msgstr ""
+
+msgid "Confirmation|E&xit"
+msgstr ""
+
+msgid "Confirmation|&Execute"
+msgstr ""
+
+msgid "Confirmation|O&verwrite"
+msgstr ""
+
+msgid "Confirmation|&Delete"
+msgstr ""
+
+msgid "UTF-8 output"
+msgstr ""
+
+msgid "Full 8 bits output"
+msgstr ""
+
+msgid "ISO 8859-1"
+msgstr ""
+
+msgid "7 bits"
+msgstr ""
+
+msgid "Directory tree"
+msgstr ""
+
+msgid "Use passive mode over pro&xy"
+msgstr ""
+
+msgid "Use &passive mode"
+msgstr ""
+
+msgid "&Use ~/.netrc"
+msgstr ""
+
+msgid "&Always use ftp proxy"
+msgstr ""
+
+msgid "sec"
+msgstr ""
+
+msgid "ftpfs directory cache timeout:"
+msgstr ""
+
+msgid "ftp anonymous password:"
+msgstr ""
+
+msgid "Timeout for freeing VFSs:"
+msgstr ""
+
+msgid "Virtual File System Setting"
+msgstr ""
+
+msgid "cd"
+msgstr ""
+
+msgid "Quick cd"
+msgstr ""
+
+msgid "Symbolic link filename:"
+msgstr ""
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr ""
+
+msgid "Symbolic link"
+msgstr ""
+
+msgid "Background Jobs"
+msgstr ""
+
+#, fuzzy
+msgid "Domain:"
+msgstr "Εντολή:"
+
+#, fuzzy
+msgid "Username:"
+msgstr "Χρήστης"
+
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr ""
+
+msgid "execute/search by others"
+msgstr ""
+
+msgid "write by others"
+msgstr ""
+
+msgid "read by others"
+msgstr ""
+
+msgid "execute/search by group"
+msgstr ""
+
+msgid "write by group"
+msgstr ""
+
+msgid "read by group"
+msgstr ""
+
+msgid "execute/search by owner"
+msgstr ""
+
+msgid "write by owner"
+msgstr ""
+
+msgid "read by owner"
+msgstr ""
+
+msgid "sticky bit"
+msgstr ""
+
+msgid "set group ID on execution"
+msgstr ""
+
+msgid "set user ID on execution"
+msgstr ""
+
+msgid "C&lear marked"
+msgstr ""
+
+msgid "S&et marked"
+msgstr ""
+
+msgid "&Marked all"
+msgstr ""
+
+msgid "Name"
+msgstr "Όνομα"
+
+msgid "Permissions (Octal)"
+msgstr ""
+
+msgid "Owner name"
+msgstr ""
+
+msgid "Group name"
+msgstr ""
+
+msgid "Use SPACE to change"
+msgstr ""
+
+msgid "an option, ARROW KEYS"
+msgstr ""
+
+msgid "to move between options"
+msgstr ""
+
+msgid "and T or INS to mark"
+msgstr ""
+
+msgid "Chmod command"
+msgstr ""
+
+#, fuzzy
+msgid "File"
+msgstr " Αρχείο "
+
+msgid "Permission"
+msgstr "Δικαιώματα"
+
+msgid "Set &users"
+msgstr ""
+
+msgid "Set &groups"
+msgstr ""
+
+msgid "Size"
+msgstr "Μέγεθος"
+
+#, fuzzy
+msgid "Chown command"
+msgstr "Εντολή"
+
+msgid "<Unknown user>"
+msgstr ""
+
+msgid "<Unknown group>"
+msgstr ""
+
+#, fuzzy
+msgid "User name"
+msgstr "Χρήστης"
+
+msgid "Enter machine name (F1 for details):"
+msgstr ""
+
+msgid "Files tagged, want to cd?"
+msgstr ""
+
+msgid "Cannot change directory"
+msgstr ""
+
+#, fuzzy
+msgid "Filter"
+msgstr " Αρχείο "
+
+msgid "Set expression for filtering filenames"
+msgstr ""
+
+msgid "&Using shell patterns"
+msgstr ""
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "κεφαλαία/πε&ζά"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Μόνο πλή&ρεις λέξεις"
+
+#, c-format
+msgid "Link %s to:"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
+#, c-format
+msgid "link: %s"
+msgstr ""
+
+#, c-format
+msgid "symlink: %s"
+msgstr ""
+
+#, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr ""
+
+#, fuzzy
+msgid "View file"
+msgstr "Άνοιγμα με..."
+
+#, fuzzy
+msgid "Filename:"
+msgstr "Χρήστης"
+
+msgid "Filtered view"
+msgstr ""
+
+msgid "Filter command and arguments:"
+msgstr ""
+
+msgid "Create a new Directory"
+msgstr ""
+
+msgid "Enter directory name:"
+msgstr ""
+
+#, fuzzy
+msgid "Select"
+msgstr "Επιλογή εικονιδίου"
+
+#, fuzzy
+msgid "Unselect"
+msgstr "Επιλογή εικονιδίου"
+
+msgid "Extension file edit"
+msgstr ""
+
+msgid "Which extension file you want to edit?"
+msgstr ""
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+msgid "Which highlighting file you want to edit?"
+msgstr ""
+
+msgid "Compare directories"
+msgstr ""
+
+msgid "Select compare method:"
+msgstr ""
+
+msgid "&Quick"
+msgstr ""
+
+msgid "&Size only"
+msgstr ""
+
+msgid "&Thorough"
+msgstr ""
+
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
+msgstr ""
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+
+#, c-format
+msgid "Symlink `%s' points to:"
+msgstr ""
+
+msgid "Edit symlink"
+msgstr ""
+
+#, c-format
+msgid "edit symlink, unable to remove %s: %s"
+msgstr ""
+
+#, c-format
+msgid "edit symlink: %s"
+msgstr ""
+
+#, c-format
+msgid "`%s' is not a symbolic link"
+msgstr ""
+
+msgid "FTP to machine"
+msgstr ""
+
+msgid "Shell link to machine"
+msgstr ""
+
+msgid "SMB link to machine"
+msgstr ""
+
+msgid "Undelete files on an ext2 file system"
+msgstr ""
+
+msgid ""
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
+msgstr ""
+
+#, fuzzy
+msgid "Setup"
+msgstr " Αποθήκευση ως "
+
+#, c-format
+msgid "Setup saved to ~/%s"
+msgstr ""
+
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
+msgstr " Εκτέλεση εντολής `sort' ανεπιτυχής "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+msgid "Cannot read directory contents"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2374,6 +2392,46 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
+msgid "FileOperation|Copy"
+msgstr ""
+
+msgid "FileOperation|Move"
+msgstr ""
+
+msgid "FileOperation|Delete"
+msgstr ""
+
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr ""
+
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr ""
+
+msgid "files"
+msgstr ""
+
+msgid "directory"
+msgstr ""
+
+msgid "directories"
+msgstr ""
+
+msgid "files/directories"
+msgstr ""
+
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
+msgid " with source mask:"
+msgstr ""
+
+msgid "to:"
+msgstr ""
+
+#, c-format
+msgid "%s?"
+msgstr ""
+
 msgid "Cannot make the hardlink"
 msgstr ""
 
@@ -2400,13 +2458,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory\"%s\"\n"
-"%s"
-msgstr "Δημηουργία νέου καταλόγου"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat file \"%s\"\n"
 "%s"
 msgstr " Σφάλμα αποθήκευσης αρχείου. "
 
@@ -2417,6 +2469,68 @@ msgid ""
 "\"%s\"\n"
 "are the same file"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr "Δημηουργία νέου καταλόγου"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot delete file \"%s\"\n"
+"%s"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove directory \"%s\"\n"
+"%s"
+msgstr "Δημηουργία νέου καταλόγου"
+
+msgid "&Retry"
+msgstr ""
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+#, fuzzy
+msgid "Delete:"
+msgstr "Διαγραφή"
+
+msgid "Non&e"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite directory\"%s\"\n"
+"%s"
+msgstr "Δημηουργία νέου καταλόγου"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot stat source file \"%s\"\n"
+"%s"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
 
 #, fuzzy, c-format
 msgid ""
@@ -2532,28 +2646,6 @@ msgid ""
 "%s"
 msgstr "Δημηουργία νέου καταλόγου"
 
-#, fuzzy, c-format
-msgid ""
-"Cannot stat file \"%s\"\n"
-"%s"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
-#, fuzzy, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr "Δημηουργία νέου καταλόγου"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -2580,59 +2672,7 @@ msgid ""
 "%s"
 msgstr " Σφάλμα αποθήκευσης αρχείου. "
 
-#, fuzzy, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr "Δημηουργία νέου καταλόγου"
-
 msgid "Directory scanning"
-msgstr ""
-
-msgid "FileOperation|Copy"
-msgstr ""
-
-msgid "FileOperation|Move"
-msgstr ""
-
-msgid "FileOperation|Delete"
-msgstr ""
-
-#, no-c-format
-msgid "%o %f \"%s\"%m"
-msgstr ""
-
-#, no-c-format
-msgid "%o %d %f%m"
-msgstr ""
-
-msgid "files"
-msgstr ""
-
-msgid "directory"
-msgstr ""
-
-msgid "directories"
-msgstr ""
-
-msgid "files/directories"
-msgstr ""
-
-#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-msgid " with source mask:"
-msgstr ""
-
-msgid "to:"
-msgstr ""
-
-#, c-format
-msgid "%s?"
 msgstr ""
 
 #, fuzzy
@@ -2640,28 +2680,6 @@ msgid "Cannot operate on \"..\"!"
 msgstr " Άνοιγμα προσωρινού αρχείου ανεπιτυχές "
 
 msgid "Sorry, I could not put the job in background"
-msgstr ""
-
-msgid "&Retry"
-msgstr ""
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-#, fuzzy
-msgid "Delete:"
-msgstr "Διαγραφή"
-
-msgid "Non&e"
 msgstr ""
 
 #, c-format
@@ -2682,27 +2700,6 @@ msgstr ""
 
 #, c-format
 msgid "%ld B/s"
-msgstr ""
-
-#, c-format
-msgid "Files processed: %llu of %llu"
-msgstr ""
-
-#, c-format
-msgid "Time: %s  %s (%s)"
-msgstr ""
-
-#, c-format
-msgid "Total: %s of %s"
-msgstr ""
-
-msgid "Source"
-msgstr ""
-
-msgid "Target"
-msgstr ""
-
-msgid "Deleting"
 msgstr ""
 
 msgid "Target file already exists!"
@@ -2746,6 +2743,27 @@ msgid "File exists"
 msgstr ""
 
 msgid "Background process: File exists"
+msgstr ""
+
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
+
+#, c-format
+msgid "Time: %s  %s (%s)"
+msgstr ""
+
+#, c-format
+msgid "Total: %s of %s"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid "Target"
+msgstr ""
+
+msgid "Deleting"
 msgstr ""
 
 msgid "&Background"
@@ -2810,6 +2828,10 @@ msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
+msgid "Sea&rch for content"
+msgstr "Αναζήτηση"
+
+#, fuzzy
 msgid "Case sens&itive"
 msgstr "κεφαλαία/πε&ζά"
 
@@ -2820,7 +2842,7 @@ msgstr "&Κανονική έκφραση"
 msgid "Fir&st hit"
 msgstr ""
 
-msgid "All cha&rsets"
+msgid "A&ll charsets"
 msgstr ""
 
 msgid "&Tree"
@@ -2851,25 +2873,6 @@ msgid "Searching %s"
 msgstr ""
 
 msgid "Searching"
-msgstr ""
-
-msgid "Help file format error\n"
-msgstr ""
-
-msgid "Internal bug: Double start of link area"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot find node %s in help file"
-msgstr " Άνοιγμα προσωρινού αρχείου ανεπιτυχές "
-
-msgid "Help"
-msgstr "Βοήθεια"
-
-msgid "ButtonBar|Index"
-msgstr ""
-
-msgid "ButtonBar|Prev"
 msgstr ""
 
 msgid "&Move"
@@ -2941,13 +2944,6 @@ msgstr "Επιλογή εικονιδίου"
 msgid "Name of new group:"
 msgstr ""
 
-#, c-format
-msgid "Label for \"%s\":"
-msgstr ""
-
-msgid "Add to hotlist"
-msgstr ""
-
 msgid "Remove:"
 msgstr ""
 
@@ -2969,6 +2965,13 @@ msgstr ""
 msgid ""
 "MC was unable to write ~/%s file,\n"
 "your old hotlist entries were not deleted"
+msgstr ""
+
+#, c-format
+msgid "Label for \"%s\":"
+msgstr ""
+
+msgid "Add to hotlist"
 msgstr ""
 
 msgid "Information"
@@ -3101,72 +3104,6 @@ msgid "Output lines:"
 msgstr ""
 
 msgid "Layout"
-msgstr ""
-
-msgid "Learn keys"
-msgstr ""
-
-#, fuzzy
-msgid "Teach me a key"
-msgstr "Πλήκτρο διαστήματος"
-
-#, c-format
-msgid ""
-"Please press the %s\n"
-"and then wait until this message disappears.\n"
-"\n"
-"Then, press it again to see if OK appears\n"
-"next to its button.\n"
-"\n"
-"If you want to escape, press a single Escape key\n"
-"and wait as well."
-msgstr ""
-
-#, fuzzy
-msgid "Cannot accept this key"
-msgstr "Δημηουργία νέου καταλόγου"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr ""
-
-#. TRANSLATORS: This label appears near learned keys.  Keep it short.
-msgid "OK"
-msgstr ""
-
-msgid ""
-"It seems that all your keys already\n"
-"work fine. That's great."
-msgstr ""
-
-msgid "&Discard"
-msgstr ""
-
-msgid ""
-"Great! You have a complete terminal database!\n"
-"All your keys work well."
-msgstr ""
-
-msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-
-msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-
-msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr ""
-
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-#, fuzzy
-msgid "The Midnight Commander"
-msgstr "Η ομάδα του Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
 msgstr ""
 
 msgid "File listin&g"
@@ -3346,6 +3283,26 @@ msgid "&Virtual FS..."
 msgstr ""
 
 #, fuzzy
+msgid "Panels:"
+msgstr "Ακύρωση τέλους"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+msgid "The Midnight Commander"
+msgstr "Η ομάδα του Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr ""
+
+#, fuzzy
 msgid "&Above"
 msgstr "Μετακίνηση"
 
@@ -3358,10 +3315,6 @@ msgstr ""
 msgid "&Right"
 msgstr ""
 
-#, fuzzy
-msgid "Panels:"
-msgstr "Ακύρωση τέλους"
-
 msgid "ButtonBar|Menu"
 msgstr ""
 
@@ -3373,13 +3326,6 @@ msgstr ""
 
 msgid "ButtonBar|Mkdir"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot create %s directory"
-msgstr "Δημηουργία νέου καταλόγου"
 
 msgid "&Never"
 msgstr ""
@@ -3529,54 +3475,6 @@ msgid ""
 "the details."
 msgstr ""
 
-msgid "&Add new"
-msgstr ""
-
-msgid "External panelize"
-msgstr ""
-
-msgid "Command"
-msgstr "Εντολή"
-
-msgid "Other command"
-msgstr ""
-
-msgid "Add to external panelize"
-msgstr ""
-
-msgid "Enter command label:"
-msgstr ""
-
-msgid "Cannot run external panelize in a non-local directory"
-msgstr ""
-
-msgid "Find rejects after patching"
-msgstr ""
-
-msgid "Find *.orig after patching"
-msgstr ""
-
-msgid "Find SUID and SGID programs"
-msgstr ""
-
-msgid "Cannot invoke command."
-msgstr ""
-
-msgid "Pipe close failed"
-msgstr ""
-
-msgid "[dev]"
-msgstr ""
-
-msgid "UP--DIR"
-msgstr ""
-
-msgid "SYMLINK"
-msgstr ""
-
-msgid "SUB-DIR"
-msgstr ""
-
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
@@ -3671,6 +3569,18 @@ msgstr "Ιδιοκτήτης"
 msgid "Group"
 msgstr "Ομάδα"
 
+msgid "[dev]"
+msgstr ""
+
+msgid "UP--DIR"
+msgstr ""
+
+msgid "SYMLINK"
+msgstr ""
+
+msgid "SUB-DIR"
+msgstr ""
+
 msgid "<readlink failed>"
 msgstr ""
 
@@ -3689,94 +3599,46 @@ msgstr[1] "%s byte se %d αρχείο"
 msgid "Unknown tag on display format:"
 msgstr ""
 
-msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-
 msgid "Do you really want to execute?"
 msgstr ""
 
-msgid "Choose codepage"
+msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 
-msgid "-  < No translation >"
+msgid "&Add new"
 msgstr ""
 
-msgid "%b %e  %Y"
+msgid "External panelize"
 msgstr ""
 
-msgid "%b %e %H:%M"
+msgid "Command"
+msgstr "Εντολή"
+
+msgid "Other command"
 msgstr ""
 
-#, fuzzy, c-format
-msgid ""
-"Cannot save file %s:\n"
-"%s"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
-
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
+msgid "Add to external panelize"
 msgstr ""
 
-#, c-format
-msgid "Cannot open named pipe %s\n"
+msgid "Enter command label:"
 msgstr ""
 
-msgid "The shell is still active. Quit anyway?"
+msgid "Cannot invoke command."
 msgstr ""
 
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
+msgid "Pipe close failed"
 msgstr ""
 
-msgid "With builtin Editor\n"
+msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
-msgid "Using system-installed S-Lang library"
+msgid "Find rejects after patching"
 msgstr ""
 
-msgid "with terminfo database"
+msgid "Find *.orig after patching"
 msgstr ""
 
-msgid "Using the ncurses library"
-msgstr ""
-
-msgid "Using the ncursesw library"
-msgstr ""
-
-msgid "With optional subshell support"
-msgstr ""
-
-msgid "With subshell support as default"
-msgstr ""
-
-#, fuzzy
-msgid "With support for background operations\n"
-msgstr "Κατάλογος εργασιών παρασκηνίου"
-
-msgid "With mouse support on xterm and Linux console\n"
-msgstr ""
-
-msgid "With mouse support on xterm\n"
-msgstr ""
-
-#, fuzzy
-msgid "With support for X11 events\n"
-msgstr "Κατάλογος εργασιών παρασκηνίου"
-
-msgid "With internationalization support\n"
-msgstr ""
-
-msgid "With multiple codepages support\n"
-msgstr ""
-
-#, c-format
-msgid "Virtual File Systems:"
-msgstr ""
-
-#, c-format
-msgid "Data types:"
+msgid "Find SUID and SGID programs"
 msgstr ""
 
 #, c-format
@@ -3824,17 +3686,6 @@ msgid ""
 "%s\n"
 msgstr ""
 
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
 msgid "Debug"
 msgstr ""
 
@@ -3856,6 +3707,17 @@ msgid ""
 "Using it may compromise your security"
 msgstr ""
 
+msgid "Format error on file Extensions File"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open file%s\n"
@@ -3871,6 +3733,167 @@ msgstr ""
 #, fuzzy
 msgid "User menu"
 msgstr "&Παρεμβολή αρχείου...   F15"
+
+msgid "Help file format error\n"
+msgstr ""
+
+msgid "Internal bug: Double start of link area"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
+msgstr " Άνοιγμα προσωρινού αρχείου ανεπιτυχές "
+
+msgid "Help"
+msgstr "Βοήθεια"
+
+msgid "ButtonBar|Index"
+msgstr ""
+
+msgid "ButtonBar|Prev"
+msgstr ""
+
+msgid "Learn keys"
+msgstr ""
+
+#, fuzzy
+msgid "Teach me a key"
+msgstr "Πλήκτρο διαστήματος"
+
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+
+#, fuzzy
+msgid "Cannot accept this key"
+msgstr "Δημηουργία νέου καταλόγου"
+
+#, c-format
+msgid "You have entered \"%s\""
+msgstr ""
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+msgid "OK"
+msgstr ""
+
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+
+msgid "&Discard"
+msgstr ""
+
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr ""
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr ""
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Δημηουργία νέου καταλόγου"
+
+msgid "Choose codepage"
+msgstr ""
+
+msgid "-  < No translation >"
+msgstr ""
+
+msgid "%b %e  %Y"
+msgstr ""
+
+msgid "%b %e %H:%M"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr ""
+
+msgid "The shell is still active. Quit anyway?"
+msgstr ""
+
+#, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr ""
+
+msgid "Using the S-Lang library with terminfo database\n"
+msgstr ""
+
+msgid "Using the ncurses library\n"
+msgstr ""
+
+msgid "Using the ncursesw library\n"
+msgstr ""
+
+msgid "With builtin Editor\n"
+msgstr ""
+
+msgid "With optional subshell support\n"
+msgstr ""
+
+msgid "With subshell support as default\n"
+msgstr ""
+
+#, fuzzy
+msgid "With support for background operations\n"
+msgstr "Κατάλογος εργασιών παρασκηνίου"
+
+msgid "With mouse support on xterm and Linux console\n"
+msgstr ""
+
+msgid "With mouse support on xterm\n"
+msgstr ""
+
+#, fuzzy
+msgid "With support for X11 events\n"
+msgstr "Κατάλογος εργασιών παρασκηνίου"
+
+msgid "With internationalization support\n"
+msgstr ""
+
+msgid "With multiple codepages support\n"
+msgstr ""
+
+#, c-format
+msgid "Built with GLib %d.%d.%d\n"
+msgstr ""
+
+#, c-format
+msgid "Virtual File Systems:"
+msgstr ""
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, fuzzy
 msgid "Invalid value"
@@ -3973,19 +3996,6 @@ msgid "Search done"
 msgstr "Αναζήτηση"
 
 msgid "Continue from begining?"
-msgstr ""
-
-msgid "History"
-msgstr ""
-
-#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-msgid "DialogTitle|History cleanup"
-msgstr ""
-
-msgid "Do you want clean this history?"
-msgstr ""
-
-msgid "Background process:"
 msgstr ""
 
 #, fuzzy

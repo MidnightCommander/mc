@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-01 15:58+0200\n"
+"POT-Creation-Date: 2010-11-28 23:42+0200\n"
 "PO-Revision-Date: 2010-10-25 12:42+0100\n"
 "Last-Translator: rezso <rezso@rezso.net>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -19,6 +19,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.9.1\n"
+
+msgid "Warning: cannot load codepages list"
+msgstr "Figyelem: A kódlapok listája nem tölthető be"
+
+msgid "7-bit ASCII"
+msgstr "7-bit ASCII"
+
+#, c-format
+msgid "Cannot translate from %s to %s"
+msgstr "Nem lehetséges a konvertálás erről: \"%s\" erre: \"%s\""
 
 #, c-format
 msgid ""
@@ -341,6 +351,10 @@ msgstr "Fordított törtvonal"
 msgid "Number sign #"
 msgstr "Kettőskereszt"
 
+#. TRANSLATORS: Please translate as in "at sign" (@).
+msgid "At sign"
+msgstr ""
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -451,9 +465,6 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr "A könyvtár gyorstárának adatai elévültek: %s"
 
-msgid "Starting linear transfer..."
-msgstr "Lineáris átvitel indítása..."
-
 #, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%ju bájt átküldve)"
@@ -461,6 +472,9 @@ msgstr "%s: %s: %s %3d%% (%ju bájt átküldve)"
 #, c-format
 msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %ju bájt átküldve"
+
+msgid "Starting linear transfer..."
+msgstr "Lineáris átvitel indítása..."
 
 msgid "Getting file"
 msgstr "Fájlletöltés"
@@ -758,9 +772,6 @@ msgstr "nincs elég memória a tömb újraallokálásakor"
 msgid "while doing inode scan %d"
 msgstr "inode-keresés közben: %d"
 
-msgid "Ext2lib error"
-msgstr "Ext2lib-hiba"
-
 #, c-format
 msgid "Cannot open file %s"
 msgstr "A(z) %s fájl nem megnyitható"
@@ -800,6 +811,9 @@ msgstr "a blokkokon való végighaladás közben"
 msgid "Cannot open file \"%s\""
 msgstr "A(z) %s fájl nem megnyitható"
 
+msgid "Ext2lib error"
+msgstr "Ext2lib-hiba"
+
 msgid "Cannot parse:"
 msgstr "Nem sikerült értelmezni:"
 
@@ -815,62 +829,36 @@ msgstr "Jelszó:"
 msgid "Changes to file lost"
 msgstr "A fájl módosításai elvesztek"
 
+msgid "Screens"
+msgstr "Képernyők"
+
+msgid "History"
+msgstr "Előzmények"
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr "DialogTitle|Előzmények törlése"
+
+msgid "Do you want clean this history?"
+msgstr "Előzmények törlése?"
+
+msgid "&Yes"
+msgstr "&Igen"
+
+msgid "&No"
+msgstr "&Nem"
+
+msgid "Background process:"
+msgstr "Háttérfolyamat:"
+
 msgid "&Cancel"
 msgstr "&Mégsem"
 
-msgid "&Set"
-msgstr "&Beállít"
+msgid "&OK"
+msgstr "&OK"
 
-msgid "S&kip"
-msgstr "&Kihagy"
-
-msgid "Set &all"
-msgstr "Min&det"
-
-msgid "owner"
-msgstr "Tulaj"
-
-msgid "group"
-msgstr "Csoport"
-
-msgid "other"
-msgstr "Mások"
-
-msgid "On"
-msgstr "Be"
-
-# nem nagyon van ertelmes rovid forditas ide... (l. a chown dialogot)
-msgid "Flag"
-msgstr "Jel"
-
-# fajl-jogok, oktalisan
-msgid "Mode"
-msgstr "Mód"
-
-#, c-format
-msgid "%6d of %d"
-msgstr "%6d / %d"
-
-msgid "Chown advanced command"
-msgstr "Chmod-Chown parancs"
-
-# 2. %s: unixos hibaüzenet
-#, c-format
-msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" jogai nem állíthatók\n"
-"%s"
-
-# 2. %s: unixos hibaüzenet
-#, c-format
-msgid ""
-"Cannot chown \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" tulaja nem állítható\n"
-"%s"
+msgid "Error"
+msgstr "Hiba"
 
 msgid "Displays the current version"
 msgstr "Verzióinformáció megjelenítése"
@@ -934,6 +922,7 @@ msgid "Show mc with specified skin"
 msgstr "MC a megadott borítással"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -942,6 +931,7 @@ msgid ""
 "Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1041,474 +1031,6 @@ msgid ""
 msgstr ""
 "A háttérfolyamat több paramétert kért,\n"
 "mint amennyit kezelni tudunk."
-
-msgid "&Full file list"
-msgstr "&Teljes"
-
-msgid "&Brief file list"
-msgstr "Tömö&r"
-
-msgid "&Long file list"
-msgstr "&Duplaszéles"
-
-msgid "&User defined:"
-msgstr "Sa&ját:"
-
-msgid "Listing mode"
-msgstr "Listázási mód"
-
-msgid "User &mini status"
-msgstr "Saját extra adat&sor"
-
-msgid "&OK"
-msgstr "&OK"
-
-msgid "&Reverse"
-msgstr "&Fordított sorrend"
-
-msgid "Case sensi&tive"
-msgstr "&Kis/nagybetű számít"
-
-msgid "Executable &first"
-msgstr "Futtatható fent"
-
-msgid "Sort order"
-msgstr "Rendezési mód"
-
-msgid "Confirmation"
-msgstr "Rákérdezés"
-
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#. 2
-msgid "Confirmation|&History cleanup"
-msgstr "Confirmation|&Történet törlés"
-
-msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "Confirmation|Könyvtár-&gyorslista törlés"
-
-msgid "Confirmation|E&xit"
-msgstr "Confirmation|&Kilépés"
-
-msgid "Confirmation|&Execute"
-msgstr "Confirmation|&Futtatás"
-
-msgid "Confirmation|O&verwrite"
-msgstr "Confirmation|Felül&írás"
-
-msgid "Confirmation|&Delete"
-msgstr "Confirmation|Tö&rlés"
-
-msgid "UTF-8 output"
-msgstr "UTF-8 kijelzés"
-
-msgid "Full 8 bits output"
-msgstr "8 bites kijelzés"
-
-msgid "ISO 8859-1"
-msgstr "ISO 8859-1"
-
-msgid "7 bits"
-msgstr "7 bites kijelzés"
-
-msgid "F&ull 8 bits input"
-msgstr "&8 bites bevitel"
-
-msgid "Display bits"
-msgstr "Kivitel és bevitel"
-
-msgid "Other 8 bit"
-msgstr "Egyéb 8 bites"
-
-# "./configure --enable-charset" esetén jelenik meg
-msgid "Input / display codepage:"
-msgstr "Beviteli/kijelzési kódlap:"
-
-msgid "&Select"
-msgstr "&Kiválaszt"
-
-msgid "Directory tree"
-msgstr "Könyvtárfa"
-
-msgid "Use passive mode over pro&xy"
-msgstr "Passzív mód használata pro&xy-n"
-
-msgid "Use &passive mode"
-msgstr "Passzí&v mód használata"
-
-msgid "&Use ~/.netrc"
-msgstr "~/.&netrc használata"
-
-msgid "&Always use ftp proxy"
-msgstr "FTP-&proxy állandó használata"
-
-msgid "sec"
-msgstr "s"
-
-msgid "ftpfs directory cache timeout:"
-msgstr "Ftpfs-könyvtárgyorstár elévülése:"
-
-msgid "ftp anonymous password:"
-msgstr "Anonymous FTP jelszava:"
-
-msgid "Timeout for freeing VFSs:"
-msgstr "VFS-felszabadítási idő:"
-
-msgid "Virtual File System Setting"
-msgstr "Virtuális fájlrendszer (VFS) beállítások"
-
-msgid "cd"
-msgstr "cd"
-
-msgid "Quick cd"
-msgstr "Gyors könyvtárváltás (\"cd\")"
-
-msgid "Symbolic link filename:"
-msgstr "Szimbolikus link neve:"
-
-msgid "Existing filename (filename symlink will point to):"
-msgstr "Létező fájlnév (amire a link mutatni fog):"
-
-msgid "Symbolic link"
-msgstr "Szimbolikus link"
-
-msgid "Running"
-msgstr "Futtatás:"
-
-msgid "Stopped"
-msgstr "Megállítva"
-
-msgid "&Stop"
-msgstr "&Megállít"
-
-msgid "&Resume"
-msgstr "&Folytat"
-
-msgid "&Kill"
-msgstr "&Töröl"
-
-msgid "Background Jobs"
-msgstr "Háttérfolyamatok"
-
-msgid "Domain:"
-msgstr "Tartomány:"
-
-msgid "Username:"
-msgstr "Felhasználónév:"
-
-#, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s jelszava:"
-
-msgid "Warning: cannot load codepages list"
-msgstr "Figyelem: A kódlapok listája nem tölthető be"
-
-msgid "7-bit ASCII"
-msgstr "7-bit ASCII"
-
-#, c-format
-msgid "Cannot translate from %s to %s"
-msgstr "Nem lehetséges a konvertálás erről: \"%s\" erre: \"%s\""
-
-msgid "execute/search by others"
-msgstr "mások     : futtat/belép"
-
-msgid "write by others"
-msgstr "mások     : ír"
-
-msgid "read by others"
-msgstr "mások     : olvas"
-
-msgid "execute/search by group"
-msgstr "csoport   : futtat/belép"
-
-msgid "write by group"
-msgstr "csoport   : ír"
-
-msgid "read by group"
-msgstr "csoport   : olvas"
-
-msgid "execute/search by owner"
-msgstr "tulajdonos: futtat/belép"
-
-msgid "write by owner"
-msgstr "tulajdonos: ír"
-
-msgid "read by owner"
-msgstr "tulajdonos: olvas"
-
-msgid "sticky bit"
-msgstr "\"Sticky\"  bit (ragadós)"
-
-msgid "set group ID on execution"
-msgstr "\"Set-GID\" bit (más GID)"
-
-msgid "set user ID on execution"
-msgstr "\"Set-UID\" bit (más UID)"
-
-# több fájl kijelölése esetén jelenik meg
-msgid "C&lear marked"
-msgstr "Jel. &ki"
-
-msgid "S&et marked"
-msgstr "Jel. b&e"
-
-msgid "&Marked all"
-msgstr "&Jelölteket"
-
-msgid "Name"
-msgstr "Fájlnév"
-
-msgid "Permissions (Octal)"
-msgstr "Jogok (oktálisan):"
-
-# nem mindig _nev_: lehet az ID is
-msgid "Owner name"
-msgstr "Tulajdonos:"
-
-# nem mindig _nev_: lehet az ID is
-msgid "Group name"
-msgstr "Csoport:"
-
-msgid "Use SPACE to change"
-msgstr "Szóközzel váltható át"
-
-msgid "an option, ARROW KEYS"
-msgstr "egy-egy opció, a nyilakkal"
-
-msgid "to move between options"
-msgstr "lehet mozogni és \"T\" vagy"
-
-msgid "and T or INS to mark"
-msgstr "\"Insert\" a kijelölés."
-
-msgid "Chmod command"
-msgstr "Jogosultságok beállítása (Chmod)"
-
-msgid "File"
-msgstr "Fájl"
-
-# jogok, mnemonikkal
-msgid "Permission"
-msgstr "Jogok"
-
-# több fájl kijelölése esetén jelenik meg
-msgid "Set &users"
-msgstr "&Tulajdonost"
-
-msgid "Set &groups"
-msgstr "&Csoportot"
-
-msgid "Size"
-msgstr "Méret"
-
-msgid "Chown command"
-msgstr "Chown parancs (Tulaj)"
-
-# a kontextusbol szerencsere kiderul, hogy ez az owner
-msgid "<Unknown user>"
-msgstr "<ismeretlen>"
-
-# a kontextusbol szerencsere kiderul, hogy ez a group
-msgid "<Unknown group>"
-msgstr "<ismeretlen>"
-
-msgid "User name"
-msgstr "Tulajdonos"
-
-# "ini" fájlbeli opció van rá
-msgid "Files tagged, want to cd?"
-msgstr "A fájlkijelölések elvesznek, folytatja?"
-
-msgid "&Yes"
-msgstr "&Igen"
-
-msgid "&No"
-msgstr "&Nem"
-
-msgid "Cannot change directory"
-msgstr "Nem sikerült könyvtárt váltani"
-
-msgid "View file"
-msgstr "Fájl megjelenítése"
-
-msgid "Filename:"
-msgstr "Fájlnév:"
-
-msgid "Filtered view"
-msgstr "Szűrt nézet"
-
-msgid "Filter command and arguments:"
-msgstr "Szűrőprogram és paraméterei:"
-
-msgid "Create a new Directory"
-msgstr "Új könyvtár létrehozása"
-
-msgid "Enter directory name:"
-msgstr "Könyvtár neve:"
-
-msgid "Filter"
-msgstr "Szűrő"
-
-msgid "Set expression for filtering filenames"
-msgstr "Adja meg a fájlnevekre vonatkozó szűrőkifejezést"
-
-# checkbox a copy/move/del dialogban (nem kell a tobbes szam)
-msgid "&Using shell patterns"
-msgstr "&Shell-minta"
-
-msgid "&Case sensitive"
-msgstr "&Kis-/nagybetű számít"
-
-msgid "&Files only"
-msgstr "Csak &fájlokat"
-
-msgid "Select"
-msgstr "Kiválaszt"
-
-msgid "Unselect"
-msgstr "Kijelölések megszüntetése"
-
-msgid "Extension file edit"
-msgstr "Kiterjesztésfájl szerkesztése"
-
-msgid "Which extension file you want to edit?"
-msgstr "Melyik kiterjesztésfájlt kívánja szerkeszteni?"
-
-msgid "&User"
-msgstr "&Sajátomat"
-
-msgid "&System Wide"
-msgstr "&Rendszerszintűt"
-
-msgid "Menu edit"
-msgstr "Menüszerkesztés"
-
-msgid "Which menu file do you want to edit?"
-msgstr "Melyik menüfájlt kívánja szerkeszteni?"
-
-msgid "&Local"
-msgstr "&Könyvtárét (helyi)"
-
-msgid "Highlighting groups file edit"
-msgstr "Színkiemelés fájl szerkesztéses"
-
-msgid "Which highlighting file you want to edit?"
-msgstr "Melyik színkiemelés fájlt kívánja szerkeszteni?"
-
-msgid "Compare directories"
-msgstr "Könyvtárak összehasonlítása"
-
-msgid "Select compare method:"
-msgstr "Összehasonlítási mód:"
-
-msgid "&Quick"
-msgstr "&Gyors (dátumok)"
-
-msgid "&Size only"
-msgstr "&Méretek alapján"
-
-msgid "&Thorough"
-msgstr "&Alapos (tartalom)"
-
-msgid ""
-"Both panels should be in the listing mode\n"
-"to use this command"
-msgstr ""
-"Mindkét panelnak fájllista-módban kell lennie\n"
-"ehhez a művelethez"
-
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Nem Xterm vagy Linux-konzol;\n"
-"a paneleket nem lehet kikapcsolni."
-
-#, c-format
-msgid "Link %s to:"
-msgstr "\"%s\" linkelése ide:"
-
-msgid "Link"
-msgstr "Link"
-
-#, c-format
-msgid "link: %s"
-msgstr "link: %s"
-
-#, c-format
-msgid "symlink: %s"
-msgstr "szimbolikus link: %s"
-
-#, c-format
-msgid "Symlink `%s' points to:"
-msgstr "A(z) \"%s\" szimbolikus link ide mutasson:"
-
-msgid "Edit symlink"
-msgstr "Szimb. link módosítása"
-
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr "\"%s\" törlése nem sikerült: %s"
-
-#, c-format
-msgid "edit symlink: %s"
-msgstr "szimbolikus link módosítása: %s"
-
-#, c-format
-msgid "`%s' is not a symbolic link"
-msgstr "\"%s\" nem szimbolikus link"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba"
-
-msgid "Enter machine name (F1 for details):"
-msgstr "Gépnév (részletek: F1 billentyű):"
-
-msgid "FTP to machine"
-msgstr "FTP-kapcsolat"
-
-msgid "Shell link to machine"
-msgstr "Shell-kapcsolat egy másik géppel"
-
-msgid "SMB link to machine"
-msgstr "SMB-kapcsolat"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Törölt fájlok visszaállítása Ext2 fájlrendszeren"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"A visszaállítandó fájlokat tároló eszköz neve\n"
-"(/dev/ nélkül) (részletek: F1 billentyű):"
-
-msgid "Setup"
-msgstr "Beállítások"
-
-#, c-format
-msgid "Setup saved to ~/%s"
-msgstr "Beállítások elmentve ide: ~/%s"
-
-# 2. %s: unixos hibaüzenet
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
-"%s"
-
-# error boxban, például FTP-nél vagy zip-fájlban
-msgid "Cannot execute commands on non-local filesystems"
-msgstr "Távoli fájlrendszeren nem lehet végrehajtani a parancsokat"
-
-msgid "The shell is already running a command"
-msgstr "A parancsértelmező már futtat egy parancsot."
-
-msgid "Screens"
-msgstr "Képernyők"
 
 msgid "&Dismiss"
 msgstr "&Tovább"
@@ -1652,9 +1174,6 @@ msgstr "Diff:"
 msgid "Two files are needed to compare"
 msgstr "Két fájl kell az összehasonlításhoz"
 
-msgid "Cannot read directory contents"
-msgstr "Könyvtár tartalma nem olvasható"
-
 msgid "Choose syntax highlighting"
 msgstr "Válasszon szintaktikus szövegkiemelést"
 
@@ -1682,20 +1201,9 @@ msgstr ""
 msgid "Cannot open %s for reading"
 msgstr "A(z) \"%s\" fájl nem megnyitható olvasásra"
 
-msgid "Error"
-msgstr "Hiba"
-
 #, c-format
 msgid "Error reading %s"
 msgstr "%s nem olvasható:"
-
-#, c-format
-msgid "Error reading from pipe: %s"
-msgstr "Hiba a cső olvasásakor: %s"
-
-#, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr "A cső nem megnyitható olvasásra: %s"
 
 #, c-format
 msgid "Cannot get size/permissions for %s"
@@ -1711,6 +1219,14 @@ msgstr "A(z) \"%s\" fájl túl nagy"
 
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
+
+#, c-format
+msgid "Error reading from pipe: %s"
+msgstr "Hiba a cső olvasásakor: %s"
+
+#, c-format
+msgid "Cannot open pipe for reading: %s"
+msgstr "A cső nem megnyitható olvasásra: %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "A fájlban \"hard-link\" van. Leválaszt mentés előtt?"
@@ -1729,21 +1245,6 @@ msgstr "A cső nem megnyitható írásra: %s"
 #, c-format
 msgid "Cannot open file for writing: %s"
 msgstr "A(z) \"%s\" fájl nem megnyitható írásra."
-
-msgid "&Quick save"
-msgstr "Gyors mentés"
-
-msgid "&Safe save"
-msgstr "Biztonságos mentés"
-
-msgid "&Do backups with following extension:"
-msgstr "Biztonsági másolatok az alábbi kiterjesztéssel:"
-
-msgid "Check &POSIX new line"
-msgstr "&POSIX soremelés vizsgálata"
-
-msgid "Edit Save Mode"
-msgstr "Mentési mód"
 
 msgid "The file you are saving is not finished with a newline"
 msgstr "A file nem soremeléssel ér véget"
@@ -1772,18 +1273,6 @@ msgstr "Fájlnév:"
 msgid "Save As"
 msgstr "Mentés másként"
 
-msgid "A file already exists with this name"
-msgstr "Már létezik ilyen nevű fájl."
-
-msgid "&Overwrite"
-msgstr "&Felülírás"
-
-msgid "Save as"
-msgstr "Mentés másként"
-
-msgid "Cannot save file"
-msgstr "Nem sikerült a mentés."
-
 msgid "Delete macro"
 msgstr "Makró törlése"
 
@@ -1795,6 +1284,58 @@ msgstr "A makrófájl nem megnyitható"
 
 msgid "Cannot overwrite macro file"
 msgstr "A makrófájl nem felülírható"
+
+msgid "Syntax file edit"
+msgstr "Szintaxisfájl szerkesztése"
+
+msgid "Which syntax file you want to edit?"
+msgstr "Melyik szintaxisfájlt kívánja szerkeszteni?"
+
+msgid "&User"
+msgstr "&Sajátomat"
+
+msgid "&System Wide"
+msgstr "&Rendszerszintűt"
+
+msgid "Menu edit"
+msgstr "Menüszerkesztés"
+
+msgid "Which menu file do you want to edit?"
+msgstr "Melyik menüfájlt kívánja szerkeszteni?"
+
+msgid "&Local"
+msgstr "&Könyvtárét (helyi)"
+
+# hosszra ügyelni
+msgid "Block is large, you may not be able to undo this action"
+msgstr "Nagy blokk, a művelet nem biztos hogy visszavonható."
+
+msgid "&Quick save"
+msgstr "Gyors mentés"
+
+msgid "&Safe save"
+msgstr "Biztonságos mentés"
+
+msgid "&Do backups with following extension:"
+msgstr "Biztonsági másolatok az alábbi kiterjesztéssel:"
+
+msgid "Check &POSIX new line"
+msgstr "&POSIX soremelés vizsgálata"
+
+msgid "Edit Save Mode"
+msgstr "Mentési mód"
+
+msgid "A file already exists with this name"
+msgstr "Már létezik ilyen nevű fájl."
+
+msgid "&Overwrite"
+msgstr "&Felülírás"
+
+msgid "Save as"
+msgstr "Mentés másként"
+
+msgid "Cannot save file"
+msgstr "Nem sikerült a mentés."
 
 msgid "Save macro"
 msgstr "Makró mentése"
@@ -1825,18 +1366,8 @@ msgstr ""
 "A szöveg módosult a legutóbbi mentés óta.\n"
 "Ha továbblép, ezek a változások elvesznek."
 
-msgid "Syntax file edit"
-msgstr "Szintaxisfájl szerkesztése"
-
-msgid "Which syntax file you want to edit?"
-msgstr "Melyik szintaxisfájlt kívánja szerkeszteni?"
-
 msgid "Load"
 msgstr "Betöltés"
-
-# hosszra ügyelni
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Nagy blokk, a művelet nem biztos hogy visszavonható."
 
 msgid "Replace"
 msgstr "Csere"
@@ -2288,6 +1819,9 @@ msgstr ""
 "Elképzelhető, hogy törölte az aktuális könyvtárat,\n"
 "vagy módosította a jogosultságait a \"su\" programmal?"
 
+msgid "The shell is already running a command"
+msgstr "A parancsértelmező már futtat egy parancsot."
+
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Írjon \"exit\"-et a Midnight Commanderbe való visszatéréshez."
@@ -2295,6 +1829,491 @@ msgstr "Írjon \"exit\"-et a Midnight Commanderbe való visszatéréshez."
 #, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr "Nem sikerült behozni \"%s\" helyi másolatát"
+
+msgid "&Set"
+msgstr "&Beállít"
+
+msgid "S&kip"
+msgstr "&Kihagy"
+
+msgid "Set &all"
+msgstr "Min&det"
+
+msgid "owner"
+msgstr "Tulaj"
+
+msgid "group"
+msgstr "Csoport"
+
+msgid "other"
+msgstr "Mások"
+
+msgid "On"
+msgstr "Be"
+
+# nem nagyon van ertelmes rovid forditas ide... (l. a chown dialogot)
+msgid "Flag"
+msgstr "Jel"
+
+# fajl-jogok, oktalisan
+msgid "Mode"
+msgstr "Mód"
+
+#, c-format
+msgid "%6d of %d"
+msgstr "%6d / %d"
+
+msgid "Chown advanced command"
+msgstr "Chmod-Chown parancs"
+
+# 2. %s: unixos hibaüzenet
+#, c-format
+msgid ""
+"Cannot chmod \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" jogai nem állíthatók\n"
+"%s"
+
+# 2. %s: unixos hibaüzenet
+#, c-format
+msgid ""
+"Cannot chown \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" tulaja nem állítható\n"
+"%s"
+
+msgid "&Stop"
+msgstr "&Megállít"
+
+msgid "&Resume"
+msgstr "&Folytat"
+
+msgid "&Kill"
+msgstr "&Töröl"
+
+msgid "&Full file list"
+msgstr "&Teljes"
+
+msgid "&Brief file list"
+msgstr "Tömö&r"
+
+msgid "&Long file list"
+msgstr "&Duplaszéles"
+
+msgid "&User defined:"
+msgstr "Sa&ját:"
+
+msgid "Listing mode"
+msgstr "Listázási mód"
+
+msgid "User &mini status"
+msgstr "Saját extra adat&sor"
+
+msgid "Other 8 bit"
+msgstr "Egyéb 8 bites"
+
+msgid "Display bits"
+msgstr "Kivitel és bevitel"
+
+# "./configure --enable-charset" esetén jelenik meg
+msgid "Input / display codepage:"
+msgstr "Beviteli/kijelzési kódlap:"
+
+msgid "F&ull 8 bits input"
+msgstr "&8 bites bevitel"
+
+msgid "&Select"
+msgstr "&Kiválaszt"
+
+msgid "Running"
+msgstr "Futtatás:"
+
+msgid "Stopped"
+msgstr "Megállítva"
+
+msgid "&Reverse"
+msgstr "&Fordított sorrend"
+
+msgid "Case sensi&tive"
+msgstr "&Kis/nagybetű számít"
+
+msgid "Executable &first"
+msgstr "Futtatható fent"
+
+msgid "Sort order"
+msgstr "Rendezési mód"
+
+msgid "Confirmation"
+msgstr "Rákérdezés"
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+msgid "Confirmation|&History cleanup"
+msgstr "Confirmation|&Történet törlés"
+
+msgid "Confirmation|Di&rectory hotlist delete"
+msgstr "Confirmation|Könyvtár-&gyorslista törlés"
+
+msgid "Confirmation|E&xit"
+msgstr "Confirmation|&Kilépés"
+
+msgid "Confirmation|&Execute"
+msgstr "Confirmation|&Futtatás"
+
+msgid "Confirmation|O&verwrite"
+msgstr "Confirmation|Felül&írás"
+
+msgid "Confirmation|&Delete"
+msgstr "Confirmation|Tö&rlés"
+
+msgid "UTF-8 output"
+msgstr "UTF-8 kijelzés"
+
+msgid "Full 8 bits output"
+msgstr "8 bites kijelzés"
+
+msgid "ISO 8859-1"
+msgstr "ISO 8859-1"
+
+msgid "7 bits"
+msgstr "7 bites kijelzés"
+
+msgid "Directory tree"
+msgstr "Könyvtárfa"
+
+msgid "Use passive mode over pro&xy"
+msgstr "Passzív mód használata pro&xy-n"
+
+msgid "Use &passive mode"
+msgstr "Passzí&v mód használata"
+
+msgid "&Use ~/.netrc"
+msgstr "~/.&netrc használata"
+
+msgid "&Always use ftp proxy"
+msgstr "FTP-&proxy állandó használata"
+
+msgid "sec"
+msgstr "s"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "Ftpfs-könyvtárgyorstár elévülése:"
+
+msgid "ftp anonymous password:"
+msgstr "Anonymous FTP jelszava:"
+
+msgid "Timeout for freeing VFSs:"
+msgstr "VFS-felszabadítási idő:"
+
+msgid "Virtual File System Setting"
+msgstr "Virtuális fájlrendszer (VFS) beállítások"
+
+msgid "cd"
+msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Gyors könyvtárváltás (\"cd\")"
+
+msgid "Symbolic link filename:"
+msgstr "Szimbolikus link neve:"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr "Létező fájlnév (amire a link mutatni fog):"
+
+msgid "Symbolic link"
+msgstr "Szimbolikus link"
+
+msgid "Background Jobs"
+msgstr "Háttérfolyamatok"
+
+msgid "Domain:"
+msgstr "Tartomány:"
+
+msgid "Username:"
+msgstr "Felhasználónév:"
+
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "\\\\%s\\%s jelszava:"
+
+msgid "execute/search by others"
+msgstr "mások     : futtat/belép"
+
+msgid "write by others"
+msgstr "mások     : ír"
+
+msgid "read by others"
+msgstr "mások     : olvas"
+
+msgid "execute/search by group"
+msgstr "csoport   : futtat/belép"
+
+msgid "write by group"
+msgstr "csoport   : ír"
+
+msgid "read by group"
+msgstr "csoport   : olvas"
+
+msgid "execute/search by owner"
+msgstr "tulajdonos: futtat/belép"
+
+msgid "write by owner"
+msgstr "tulajdonos: ír"
+
+msgid "read by owner"
+msgstr "tulajdonos: olvas"
+
+msgid "sticky bit"
+msgstr "\"Sticky\"  bit (ragadós)"
+
+msgid "set group ID on execution"
+msgstr "\"Set-GID\" bit (más GID)"
+
+msgid "set user ID on execution"
+msgstr "\"Set-UID\" bit (más UID)"
+
+# több fájl kijelölése esetén jelenik meg
+msgid "C&lear marked"
+msgstr "Jel. &ki"
+
+msgid "S&et marked"
+msgstr "Jel. b&e"
+
+msgid "&Marked all"
+msgstr "&Jelölteket"
+
+msgid "Name"
+msgstr "Fájlnév"
+
+msgid "Permissions (Octal)"
+msgstr "Jogok (oktálisan):"
+
+# nem mindig _nev_: lehet az ID is
+msgid "Owner name"
+msgstr "Tulajdonos:"
+
+# nem mindig _nev_: lehet az ID is
+msgid "Group name"
+msgstr "Csoport:"
+
+msgid "Use SPACE to change"
+msgstr "Szóközzel váltható át"
+
+msgid "an option, ARROW KEYS"
+msgstr "egy-egy opció, a nyilakkal"
+
+msgid "to move between options"
+msgstr "lehet mozogni és \"T\" vagy"
+
+msgid "and T or INS to mark"
+msgstr "\"Insert\" a kijelölés."
+
+msgid "Chmod command"
+msgstr "Jogosultságok beállítása (Chmod)"
+
+msgid "File"
+msgstr "Fájl"
+
+# jogok, mnemonikkal
+msgid "Permission"
+msgstr "Jogok"
+
+# több fájl kijelölése esetén jelenik meg
+msgid "Set &users"
+msgstr "&Tulajdonost"
+
+msgid "Set &groups"
+msgstr "&Csoportot"
+
+msgid "Size"
+msgstr "Méret"
+
+msgid "Chown command"
+msgstr "Chown parancs (Tulaj)"
+
+# a kontextusbol szerencsere kiderul, hogy ez az owner
+msgid "<Unknown user>"
+msgstr "<ismeretlen>"
+
+# a kontextusbol szerencsere kiderul, hogy ez a group
+msgid "<Unknown group>"
+msgstr "<ismeretlen>"
+
+msgid "User name"
+msgstr "Tulajdonos"
+
+msgid "Enter machine name (F1 for details):"
+msgstr "Gépnév (részletek: F1 billentyű):"
+
+# "ini" fájlbeli opció van rá
+msgid "Files tagged, want to cd?"
+msgstr "A fájlkijelölések elvesznek, folytatja?"
+
+msgid "Cannot change directory"
+msgstr "Nem sikerült könyvtárt váltani"
+
+msgid "Filter"
+msgstr "Szűrő"
+
+msgid "Set expression for filtering filenames"
+msgstr "Adja meg a fájlnevekre vonatkozó szűrőkifejezést"
+
+# checkbox a copy/move/del dialogban (nem kell a tobbes szam)
+msgid "&Using shell patterns"
+msgstr "&Shell-minta"
+
+msgid "&Case sensitive"
+msgstr "&Kis-/nagybetű számít"
+
+msgid "&Files only"
+msgstr "Csak &fájlokat"
+
+#, c-format
+msgid "Link %s to:"
+msgstr "\"%s\" linkelése ide:"
+
+msgid "Link"
+msgstr "Link"
+
+#, c-format
+msgid "link: %s"
+msgstr "link: %s"
+
+#, c-format
+msgid "symlink: %s"
+msgstr "szimbolikus link: %s"
+
+#, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba"
+
+msgid "View file"
+msgstr "Fájl megjelenítése"
+
+msgid "Filename:"
+msgstr "Fájlnév:"
+
+msgid "Filtered view"
+msgstr "Szűrt nézet"
+
+msgid "Filter command and arguments:"
+msgstr "Szűrőprogram és paraméterei:"
+
+msgid "Create a new Directory"
+msgstr "Új könyvtár létrehozása"
+
+msgid "Enter directory name:"
+msgstr "Könyvtár neve:"
+
+msgid "Select"
+msgstr "Kiválaszt"
+
+msgid "Unselect"
+msgstr "Kijelölések megszüntetése"
+
+msgid "Extension file edit"
+msgstr "Kiterjesztésfájl szerkesztése"
+
+msgid "Which extension file you want to edit?"
+msgstr "Melyik kiterjesztésfájlt kívánja szerkeszteni?"
+
+msgid "Highlighting groups file edit"
+msgstr "Színkiemelés fájl szerkesztéses"
+
+msgid "Which highlighting file you want to edit?"
+msgstr "Melyik színkiemelés fájlt kívánja szerkeszteni?"
+
+msgid "Compare directories"
+msgstr "Könyvtárak összehasonlítása"
+
+msgid "Select compare method:"
+msgstr "Összehasonlítási mód:"
+
+msgid "&Quick"
+msgstr "&Gyors (dátumok)"
+
+msgid "&Size only"
+msgstr "&Méretek alapján"
+
+msgid "&Thorough"
+msgstr "&Alapos (tartalom)"
+
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
+msgstr ""
+"Mindkét panelnak fájllista-módban kell lennie\n"
+"ehhez a művelethez"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Nem Xterm vagy Linux-konzol;\n"
+"a paneleket nem lehet kikapcsolni."
+
+#, c-format
+msgid "Symlink `%s' points to:"
+msgstr "A(z) \"%s\" szimbolikus link ide mutasson:"
+
+msgid "Edit symlink"
+msgstr "Szimb. link módosítása"
+
+#, c-format
+msgid "edit symlink, unable to remove %s: %s"
+msgstr "\"%s\" törlése nem sikerült: %s"
+
+#, c-format
+msgid "edit symlink: %s"
+msgstr "szimbolikus link módosítása: %s"
+
+#, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "\"%s\" nem szimbolikus link"
+
+msgid "FTP to machine"
+msgstr "FTP-kapcsolat"
+
+msgid "Shell link to machine"
+msgstr "Shell-kapcsolat egy másik géppel"
+
+msgid "SMB link to machine"
+msgstr "SMB-kapcsolat"
+
+msgid "Undelete files on an ext2 file system"
+msgstr "Törölt fájlok visszaállítása Ext2 fájlrendszeren"
+
+msgid ""
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
+msgstr ""
+"A visszaállítandó fájlokat tároló eszköz neve\n"
+"(/dev/ nélkül) (részletek: F1 billentyű):"
+
+msgid "Setup"
+msgstr "Beállítások"
+
+#, c-format
+msgid "Setup saved to ~/%s"
+msgstr "Beállítások elmentve ide: ~/%s"
+
+# error boxban, például FTP-nél vagy zip-fájlban
+msgid "Cannot execute commands on non-local filesystems"
+msgstr "Távoli fájlrendszeren nem lehet végrehajtani a parancsokat"
+
+# 2. %s: unixos hibaüzenet
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
+"%s"
+
+msgid "Cannot read directory contents"
+msgstr "Könyvtár tartalma nem olvasható"
 
 # %s: unixos hibaüzenet
 #, c-format
@@ -2344,6 +2363,53 @@ msgstr "Áthelyez"
 msgid "DialogTitle|Delete"
 msgstr "Töröl"
 
+msgid "FileOperation|Copy"
+msgstr "Másol"
+
+msgid "FileOperation|Move"
+msgstr "Áthelyez"
+
+msgid "FileOperation|Delete"
+msgstr "Töröl"
+
+# pl.: "dfdsfds" nevű fájl törlése?
+# (Copy, Move, Delete)
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "\"%s\" nevű %f %o%m"
+
+# pl.: "44 kijelolt konyvtar torlese?"
+# (Copy, Move, Delete)
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr "%d kijelölt %f %o%m"
+
+# tobb kijelolt dolog eseten hasznalatos ("4 files")
+msgid "files"
+msgstr "fájl"
+
+msgid "directory"
+msgstr "könyvtár"
+
+# tobb kijelolt dolog eseten hasznalatos
+msgid "directories"
+msgstr "könyvtár"
+
+# tobb kijelolt dolog eseten hasznalatos
+msgid "files/directories"
+msgstr "fájl/könyvtár"
+
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
+msgid " with source mask:"
+msgstr " az alábbi maszkkal:"
+
+msgid "to:"
+msgstr "Cél:"
+
+#, c-format
+msgid "%s?"
+msgstr "%s?"
+
 msgid "Cannot make the hardlink"
 msgstr "Nem sikerült létrehozni a hard linket"
 
@@ -2375,6 +2441,88 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Megszakítás"
 
+#, c-format
+msgid ""
+"Cannot stat file \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" fájl adatai nem lekérdezhetők \n"
+"%s"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"  és \n"
+"\"%s\" \n"
+"ugyanaz a fájl"
+
+#, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr "A(z) \"%s\" könyvtár nem felülírható"
+
+#, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" fájl nem átnevezhető/mozgatható erre: \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" fájl nem törölhető \n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot delete file \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" fájl nem törölhető \n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot remove directory \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" könyvtár nem törölhető \n"
+"%s"
+
+msgid "&Retry"
+msgstr "Új&ra"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Nem üres a könyvtár.   \n"
+"Törölni kívánja a tartalmával együtt?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Háttérfolyamat: nem üres a könyvtár. \n"
+"Törölni kívánja a tartalmával együtt?"
+
+msgid "Delete:"
+msgstr "Törlés:"
+
+msgid "Non&e"
+msgstr "&Egyiket sem"
+
 # 2. %s: hibaüzenet
 #, c-format
 msgid ""
@@ -2391,17 +2539,6 @@ msgid ""
 msgstr ""
 "A(z) \"%s\" forrásfájl adatai nem elérhetők \n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"  és \n"
-"\"%s\" \n"
-"ugyanaz a fájl"
 
 #, c-format
 msgid ""
@@ -2558,34 +2695,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
-"%s"
-msgstr ""
-"A(z) \"%s\" fájl adatai nem lekérdezhetők \n"
-"%s"
-
-#, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr "A(z) \"%s\" könyvtár nem felülírható"
-
-#, c-format
-msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"A(z) \"%s\" fájl nem átnevezhető/mozgatható erre: \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"A(z) \"%s\" fájl nem törölhető \n"
-"%s"
-
-#, c-format
-msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
@@ -2621,104 +2730,14 @@ msgstr ""
 "A(z) \"%s\" könyvtár nem átnevezhető/mozgatható erre: \"%s\" \n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"A(z) \"%s\" fájl nem törölhető \n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr ""
-"A(z) \"%s\" könyvtár nem törölhető \n"
-"%s"
-
 msgid "Directory scanning"
 msgstr "Könyvtárak átfésülése"
-
-msgid "FileOperation|Copy"
-msgstr "Másol"
-
-msgid "FileOperation|Move"
-msgstr "Áthelyez"
-
-msgid "FileOperation|Delete"
-msgstr "Töröl"
-
-# pl.: "dfdsfds" nevű fájl törlése?
-# (Copy, Move, Delete)
-#, no-c-format
-msgid "%o %f \"%s\"%m"
-msgstr "\"%s\" nevű %f %o%m"
-
-# pl.: "44 kijelolt konyvtar torlese?"
-# (Copy, Move, Delete)
-#, no-c-format
-msgid "%o %d %f%m"
-msgstr "%d kijelölt %f %o%m"
-
-# tobb kijelolt dolog eseten hasznalatos ("4 files")
-msgid "files"
-msgstr "fájl"
-
-msgid "directory"
-msgstr "könyvtár"
-
-# tobb kijelolt dolog eseten hasznalatos
-msgid "directories"
-msgstr "könyvtár"
-
-# tobb kijelolt dolog eseten hasznalatos
-msgid "files/directories"
-msgstr "fájl/könyvtár"
-
-#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-msgid " with source mask:"
-msgstr " az alábbi maszkkal:"
-
-msgid "to:"
-msgstr "Cél:"
-
-#, c-format
-msgid "%s?"
-msgstr "%s?"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "A \"..\" könyvtárral ez nem lehetséges!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Nem tudtam a feladatot a háttérben végezni"
-
-msgid "&Retry"
-msgstr "Új&ra"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Nem üres a könyvtár.   \n"
-"Törölni kívánja a tartalmával együtt?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Háttérfolyamat: nem üres a könyvtár. \n"
-"Törölni kívánja a tartalmával együtt?"
-
-msgid "Delete:"
-msgstr "Törlés:"
-
-msgid "Non&e"
-msgstr "&Egyiket sem"
 
 # ETA: Estimated time of arrival
 # a hátralevő időt jelzi: óra, perc, másodperc
@@ -2741,27 +2760,6 @@ msgstr "%.2f KB/s"
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld B/s"
-
-#, c-format
-msgid "Files processed: %llu of %llu"
-msgstr "Feldolgozott fájlok: %llu / %llu"
-
-#, c-format
-msgid "Time: %s  %s (%s)"
-msgstr "Idő: %s  %s (%s)"
-
-#, c-format
-msgid "Total: %s of %s"
-msgstr "Összesen: %s / %s"
-
-msgid "Source"
-msgstr "Forrás"
-
-msgid "Target"
-msgstr "Cél"
-
-msgid "Deleting"
-msgstr "Törlés"
 
 msgid "Target file already exists!"
 msgstr "A célfájl már létezik!"
@@ -2811,6 +2809,27 @@ msgstr "A fájl már létezik"
 
 msgid "Background process: File exists"
 msgstr "Háttérfolyamat: a fájl már létezik"
+
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr "Feldolgozott fájlok: %llu / %llu"
+
+#, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Idő: %s  %s (%s)"
+
+#, c-format
+msgid "Total: %s of %s"
+msgstr "Összesen: %s / %s"
+
+msgid "Source"
+msgstr "Forrás"
+
+msgid "Target"
+msgstr "Cél"
+
+msgid "Deleting"
+msgstr "Törlés"
 
 # A "h" shortcut kerülendő, mert Alt+h = előzmények
 msgid "&Background"
@@ -2872,6 +2891,11 @@ msgstr "&Rejtettek kihagyása"
 msgid "&All charsets"
 msgstr "&Minden karakterkészlet"
 
+# a gombsorban is szerepel (F7)
+#, fuzzy
+msgid "Sea&rch for content"
+msgstr "Keresés kész"
+
 msgid "Case sens&itive"
 msgstr "&Kis-/nagybetű számít"
 
@@ -2881,8 +2905,9 @@ msgstr "&Reguláris kifejezés"
 msgid "Fir&st hit"
 msgstr "Első találat"
 
-msgid "All cha&rsets"
-msgstr "&Minden karakterkészlet"
+#, fuzzy
+msgid "A&ll charsets"
+msgstr "Összes kar.készlet"
 
 msgid "&Tree"
 msgstr "Köny&vtárfa"
@@ -2912,26 +2937,6 @@ msgstr "\"%s\" keresése"
 
 msgid "Searching"
 msgstr "Keresés"
-
-msgid "Help file format error\n"
-msgstr "Hibás súgófájl formátum\n"
-
-msgid "Internal bug: Double start of link area"
-msgstr "Belső programhiba: linkterület duplán kezdve"
-
-#, c-format
-msgid "Cannot find node %s in help file"
-msgstr "Nem található \"%s\" bejegyzés a súgóban"
-
-# "Segítség" nem mindenhol férne ki, lásd funkciógomb-sor
-msgid "Help"
-msgstr "Súgó"
-
-msgid "ButtonBar|Index"
-msgstr "Tartalom"
-
-msgid "ButtonBar|Prev"
-msgstr "Előző"
 
 msgid "&Move"
 msgstr "Át&helyezés"
@@ -3001,13 +3006,6 @@ msgstr "Új gyorslista-csoport"
 msgid "Name of new group:"
 msgstr "Az új csoport neve:"
 
-#, c-format
-msgid "Label for \"%s\":"
-msgstr "\"%s\" címkéje:"
-
-msgid "Add to hotlist"
-msgstr "Felvétel a gyorslistára"
-
 msgid "Remove:"
 msgstr "Törlés:"
 
@@ -3034,6 +3032,13 @@ msgid ""
 msgstr ""
 "A{z} \"~/%s\" fájl nem írható,\n"
 "régi gyorslista-bejegyzések megtartva"
+
+#, c-format
+msgid "Label for \"%s\":"
+msgstr "\"%s\" címkéje:"
+
+msgid "Add to hotlist"
+msgstr "Felvétel a gyorslistára"
 
 msgid "Information"
 msgstr "Információ"
@@ -3166,81 +3171,6 @@ msgstr "Sorok:"
 
 msgid "Layout"
 msgstr "Megjelenés"
-
-msgid "Learn keys"
-msgstr "Billentyűk beállítása"
-
-msgid "Teach me a key"
-msgstr "Billentyűkód betanítása"
-
-#, c-format
-msgid ""
-"Please press the %s\n"
-"and then wait until this message disappears.\n"
-"\n"
-"Then, press it again to see if OK appears\n"
-"next to its button.\n"
-"\n"
-"If you want to escape, press a single Escape key\n"
-"and wait as well."
-msgstr ""
-"Nyomja meg a(z) \"%s\" billentyűt,\n"
-"majd várjon amíg ez az üzenet eltűnik.\n"
-"\n"
-"Ez után nyomja meg újra a billentyűt - ha az \"OK\"\n"
-"szöveg jelenik meg a billentyű neve mellett, akkor\n"
-"a billentyű a kívánt módon lett beállítva.\n"
-"\n"
-"Kilépéshez használja az \"Escape\" billentyűt."
-
-msgid "Cannot accept this key"
-msgstr "Ez a billentyű nem használható erre"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Ezt adta meg: \"%s\""
-
-#. TRANSLATORS: This label appears near learned keys.  Keep it short.
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"It seems that all your keys already\n"
-"work fine. That's great."
-msgstr ""
-"Úgy tűnik, hogy már minden billentyű\n"
-"jól működik."
-
-msgid "&Discard"
-msgstr "E&ldobás"
-
-msgid ""
-"Great! You have a complete terminal database!\n"
-"All your keys work well."
-msgstr ""
-"A terminál-adatbázis teljes.\n"
-"Az összes billentyű jól működik."
-
-msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Nyomja meg egyenként a felsorolt billentyűket, majd nézze meg, hogy"
-
-msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "melyek nem lettek \"OK\"-val megjelölve. Ezek beállításához használja"
-
-msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "a Szóközt vagy kattintson a billentyűnévre. Ugrás: \"Tab\" billentyű."
-
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] "%zd megnyitott képernyője van. Biztosan kilép?"
-msgstr[1] "%zd megnyitott képernyője van. Biztosan kilép?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Valóban ki szeretne lépni a Midnight Commanderből?"
 
 msgid "File listin&g"
 msgstr "&Teljes"
@@ -3405,6 +3335,24 @@ msgstr "&Kivitel és bevitel..."
 msgid "&Virtual FS..."
 msgstr "&Virtuális fájlrendszer..."
 
+msgid "Panels:"
+msgstr "Panelek:"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Nincs beállítva a TERM környezeti változó.\n"
+
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] "%zd megnyitott képernyője van. Biztosan kilép?"
+msgstr[1] "%zd megnyitott képernyője van. Biztosan kilép?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Valóban ki szeretne lépni a Midnight Commanderből?"
+
 msgid "&Above"
 msgstr "Fe&nt"
 
@@ -3417,9 +3365,6 @@ msgstr "&Lent"
 msgid "&Right"
 msgstr "&Jobb"
 
-msgid "Panels:"
-msgstr "Panelek:"
-
 msgid "ButtonBar|Menu"
 msgstr "Menü"
 
@@ -3431,13 +3376,6 @@ msgstr "Áthelyez"
 
 msgid "ButtonBar|Mkdir"
 msgstr "ÚjKvt"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Nincs beállítva a TERM környezeti változó.\n"
-
-#, c-format
-msgid "Cannot create %s directory"
-msgstr "A(z) %s könyvtár nem létrehozható"
 
 msgid "&Never"
 msgstr "So&ha"
@@ -3584,56 +3522,6 @@ msgstr ""
 "nem tükrözi pontosan a könyvtár tartalmát - ilyenkor kézi\n"
 "frissítést kell végezni. Részletek a kézikönyvben (man mc)."
 
-msgid "&Add new"
-msgstr "Ú&j"
-
-msgid "External panelize"
-msgstr "Külső panel-parancs"
-
-# ez is egy prompt (azert a ":")
-msgid "Command"
-msgstr "Parancs:"
-
-msgid "Other command"
-msgstr "más parancs"
-
-msgid "Add to external panelize"
-msgstr "Külső panel-parancs hozzáadása"
-
-msgid "Enter command label:"
-msgstr "A parancshoz tartozó leírás:"
-
-msgid "Cannot run external panelize in a non-local directory"
-msgstr "Távoli/virtuális könyvtáron nem megy a  külső panel-parancsot"
-
-msgid "Find rejects after patching"
-msgstr "\"patch\" parancs utáni problémajegyzékek (*.rej) keresése"
-
-msgid "Find *.orig after patching"
-msgstr "\"patch\" parancs utáni másolatfájlok (*.orig) keresése"
-
-msgid "Find SUID and SGID programs"
-msgstr "SUID és SGID programok keresése"
-
-msgid "Cannot invoke command."
-msgstr "A parancs nem hívható meg."
-
-msgid "Pipe close failed"
-msgstr "Nem sikerült lezárni a csövet."
-
-msgid "[dev]"
-msgstr "[eszk]"
-
-# szülőkönyvtár
-msgid "UP--DIR"
-msgstr "SZ-KVTR"
-
-msgid "SYMLINK"
-msgstr "SZ.LINK"
-
-msgid "SUB-DIR"
-msgstr "AL-KVTR"
-
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
@@ -3732,6 +3620,19 @@ msgstr "Tulaj"
 msgid "Group"
 msgstr "Csoport"
 
+msgid "[dev]"
+msgstr "[eszk]"
+
+# szülőkönyvtár
+msgid "UP--DIR"
+msgstr "SZ-KVTR"
+
+msgid "SYMLINK"
+msgstr "SZ.LINK"
+
+msgid "SUB-DIR"
+msgstr "AL-KVTR"
+
 msgid "<readlink failed>"
 msgstr "<hibás szim. link>"
 
@@ -3751,98 +3652,48 @@ msgstr[1] "%s %d fájlban"
 msgid "Unknown tag on display format:"
 msgstr "Ismeretlen címke a megjelenítési formátumban:"
 
-msgid "User supplied format looks invalid, reverting to default."
-msgstr "A beállított formátum hibás; az alapértelmezés lép életbe."
-
 msgid "Do you really want to execute?"
 msgstr "Biztosan futtatni kívánja a programot?"
 
-msgid "Choose codepage"
-msgstr "Válasszon kódlapot"
+msgid "User supplied format looks invalid, reverting to default."
+msgstr "A beállított formátum hibás; az alapértelmezés lép életbe."
 
-msgid "-  < No translation >"
-msgstr "-  < Nincs konverzió >"
+msgid "&Add new"
+msgstr "Ú&j"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
+msgid "External panelize"
+msgstr "Külső panel-parancs"
 
-msgid "%b %e %H:%M"
-msgstr "%b %e %H.%M"
+# ez is egy prompt (azert a ":")
+msgid "Command"
+msgstr "Parancs:"
 
-#, c-format
-msgid ""
-"Cannot save file %s:\n"
-"%s"
-msgstr ""
-"Az %s fájl nem menthető:\n"
-"%s"
+msgid "Other command"
+msgstr "más parancs"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"A Midnight Commander már fut ezen\n"
-"a terminálon.\n"
-"Háttér-shell használata nem lesz lehetséges."
+msgid "Add to external panelize"
+msgstr "Külső panel-parancs hozzáadása"
 
-#, c-format
-msgid "Cannot open named pipe %s\n"
-msgstr "Nem sikerült megnyitni a(z) \"%s\" csőfájlt.\n"
+msgid "Enter command label:"
+msgstr "A parancshoz tartozó leírás:"
 
-msgid "The shell is still active. Quit anyway?"
-msgstr "A háttér-shell még aktív. Mégis kilép?"
+msgid "Cannot invoke command."
+msgstr "A parancs nem hívható meg."
 
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
+msgid "Pipe close failed"
+msgstr "Nem sikerült lezárni a csövet."
 
-msgid "With builtin Editor\n"
-msgstr "Beépített szövegszerkesztővel\n"
+msgid "Cannot run external panelize in a non-local directory"
+msgstr "Távoli/virtuális könyvtáron nem megy a  külső panel-parancsot"
 
-msgid "Using system-installed S-Lang library"
-msgstr "A korábban telepített S-Lang könyvtár használata"
+msgid "Find rejects after patching"
+msgstr "\"patch\" parancs utáni problémajegyzékek (*.rej) keresése"
 
-msgid "with terminfo database"
-msgstr "Terminfo adatbázissal"
+msgid "Find *.orig after patching"
+msgstr "\"patch\" parancs utáni másolatfájlok (*.orig) keresése"
 
-msgid "Using the ncurses library"
-msgstr "Az Ncurses könyvtár használata"
-
-msgid "Using the ncursesw library"
-msgstr "Az Ncurses könyvtár használata"
-
-msgid "With optional subshell support"
-msgstr "Opcionális háttér-shell-támogatással"
-
-msgid "With subshell support as default"
-msgstr "Alapértelmezésben háttér-shell-támogatással"
-
-msgid "With support for background operations\n"
-msgstr "Háttérműveletek támogatása\n"
-
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "Egérhasználat Xterm alatt és Linux-konzolon\n"
-
-msgid "With mouse support on xterm\n"
-msgstr "Egérhasználat Xterm alatt\n"
-
-msgid "With support for X11 events\n"
-msgstr "X11-események támogatása\n"
-
-msgid "With internationalization support\n"
-msgstr "Nyelvi lokalizálás támogatása\n"
-
-msgid "With multiple codepages support\n"
-msgstr "Több kódlap támogatása\n"
-
-#, c-format
-msgid "Virtual File Systems:"
-msgstr "Virtuális fájlrendszerek:"
-
-#, c-format
-msgid "Data types:"
-msgstr "Adattípusok:"
+msgid "Find SUID and SGID programs"
+msgstr "SUID és SGID programok keresése"
 
 #, c-format
 msgid ""
@@ -3895,17 +3746,6 @@ msgstr ""
 "Nem sikerült írni a(z) \"%s\" fájlba:\n"
 "%s\n"
 
-msgid "Format error on file Extensions File"
-msgstr "Formátumhiba a kiterjesztésfájlban"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "A %%var makrónak nincs alapértéke"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "A %%var makrónak nincs változója"
-
 msgid "Debug"
 msgstr "Nyomkövetés"
 
@@ -3929,6 +3769,17 @@ msgstr ""
 "A(z) \"%s\" fájl sem a rendszergazdáé, sem az Öné,\n"
 "vagy mindenki által írható. Használata gyengítheti a biztonságot."
 
+msgid "Format error on file Extensions File"
+msgstr "Formátumhiba a kiterjesztésfájlban"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "A %%var makrónak nincs alapértéke"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "A %%var makrónak nincs változója"
+
 # 2. %s: unixos hibaüzenet
 #, c-format
 msgid ""
@@ -3944,6 +3795,186 @@ msgstr "Nincsenek megfelelő bejegyzések ebben: %s"
 
 msgid "User menu"
 msgstr "Felhasználói menü"
+
+msgid "Help file format error\n"
+msgstr "Hibás súgófájl formátum\n"
+
+msgid "Internal bug: Double start of link area"
+msgstr "Belső programhiba: linkterület duplán kezdve"
+
+#, c-format
+msgid "Cannot find node %s in help file"
+msgstr "Nem található \"%s\" bejegyzés a súgóban"
+
+# "Segítség" nem mindenhol férne ki, lásd funkciógomb-sor
+msgid "Help"
+msgstr "Súgó"
+
+msgid "ButtonBar|Index"
+msgstr "Tartalom"
+
+msgid "ButtonBar|Prev"
+msgstr "Előző"
+
+msgid "Learn keys"
+msgstr "Billentyűk beállítása"
+
+msgid "Teach me a key"
+msgstr "Billentyűkód betanítása"
+
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Nyomja meg a(z) \"%s\" billentyűt,\n"
+"majd várjon amíg ez az üzenet eltűnik.\n"
+"\n"
+"Ez után nyomja meg újra a billentyűt - ha az \"OK\"\n"
+"szöveg jelenik meg a billentyű neve mellett, akkor\n"
+"a billentyű a kívánt módon lett beállítva.\n"
+"\n"
+"Kilépéshez használja az \"Escape\" billentyűt."
+
+msgid "Cannot accept this key"
+msgstr "Ez a billentyű nem használható erre"
+
+#, c-format
+msgid "You have entered \"%s\""
+msgstr "Ezt adta meg: \"%s\""
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Úgy tűnik, hogy már minden billentyű\n"
+"jól működik."
+
+msgid "&Discard"
+msgstr "E&ldobás"
+
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"A terminál-adatbázis teljes.\n"
+"Az összes billentyű jól működik."
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Nyomja meg egyenként a felsorolt billentyűket, majd nézze meg, hogy"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "melyek nem lettek \"OK\"-val megjelölve. Ezek beállításához használja"
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "a Szóközt vagy kattintson a billentyűnévre. Ugrás: \"Tab\" billentyű."
+
+#, c-format
+msgid "Cannot create %s directory"
+msgstr "A(z) %s könyvtár nem létrehozható"
+
+msgid "Choose codepage"
+msgstr "Válasszon kódlapot"
+
+msgid "-  < No translation >"
+msgstr "-  < Nincs konverzió >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H.%M"
+
+#, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr ""
+"Az %s fájl nem menthető:\n"
+"%s"
+
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"A Midnight Commander már fut ezen\n"
+"a terminálon.\n"
+"Háttér-shell használata nem lesz lehetséges."
+
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr "Nem sikerült megnyitni a(z) \"%s\" csőfájlt.\n"
+
+msgid "The shell is still active. Quit anyway?"
+msgstr "A háttér-shell még aktív. Mégis kilép?"
+
+#, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
+
+#, fuzzy
+msgid "Using the S-Lang library with terminfo database\n"
+msgstr "Terminfo adatbázissal"
+
+#, fuzzy
+msgid "Using the ncurses library\n"
+msgstr "Az Ncurses könyvtár használata"
+
+#, fuzzy
+msgid "Using the ncursesw library\n"
+msgstr "Az Ncurses könyvtár használata"
+
+msgid "With builtin Editor\n"
+msgstr "Beépített szövegszerkesztővel\n"
+
+#, fuzzy
+msgid "With optional subshell support\n"
+msgstr "Opcionális háttér-shell-támogatással"
+
+#, fuzzy
+msgid "With subshell support as default\n"
+msgstr "Alapértelmezésben háttér-shell-támogatással"
+
+msgid "With support for background operations\n"
+msgstr "Háttérműveletek támogatása\n"
+
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "Egérhasználat Xterm alatt és Linux-konzolon\n"
+
+msgid "With mouse support on xterm\n"
+msgstr "Egérhasználat Xterm alatt\n"
+
+msgid "With support for X11 events\n"
+msgstr "X11-események támogatása\n"
+
+msgid "With internationalization support\n"
+msgstr "Nyelvi lokalizálás támogatása\n"
+
+msgid "With multiple codepages support\n"
+msgstr "Több kódlap támogatása\n"
+
+#, c-format
+msgid "Built with GLib %d.%d.%d\n"
+msgstr ""
+
+#, c-format
+msgid "Virtual File Systems:"
+msgstr "Virtuális fájlrendszerek:"
+
+#, c-format
+msgid "Data types:"
+msgstr "Adattípusok:"
 
 msgid "Invalid value"
 msgstr "Érvénytelen érték"
@@ -4049,15 +4080,8 @@ msgstr "Keresés kész"
 msgid "Continue from begining?"
 msgstr "Folytatás az elejéről?"
 
-msgid "History"
-msgstr "Előzmények"
+#~ msgid "All cha&rsets"
+#~ msgstr "&Minden karakterkészlet"
 
-#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-msgid "DialogTitle|History cleanup"
-msgstr "DialogTitle|Előzmények törlése"
-
-msgid "Do you want clean this history?"
-msgstr "Előzmények törlése?"
-
-msgid "Background process:"
-msgstr "Háttérfolyamat:"
+#~ msgid "Using system-installed S-Lang library"
+#~ msgstr "A korábban telepített S-Lang könyvtár használata"

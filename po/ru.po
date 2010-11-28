@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-01 15:58+0200\n"
+"POT-Creation-Date: 2010-11-28 23:42+0200\n"
 "PO-Revision-Date: 2010-09-02  22:57+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -29,6 +29,17 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: mcedit 4.7.0\n"
+
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Внимание: невозможно открыть каталог %s\n"
+
+msgid "7-bit ASCII"
+msgstr "7-битный ASCII"
+
+#, c-format
+msgid "Cannot translate from %s to %s"
+msgstr "Невозможно перекодировать из %s в %s"
 
 #, c-format
 msgid ""
@@ -352,6 +363,10 @@ msgstr "Клавиша Backspace"
 msgid "Number sign #"
 msgstr "Знак номера"
 
+#. TRANSLATORS: Please translate as in "at sign" (@).
+msgid "At sign"
+msgstr ""
+
 msgid "Ctrl"
 msgstr "Ctrl"
 
@@ -461,9 +476,6 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr "Кэш каталога устарел для %s"
 
-msgid "Starting linear transfer..."
-msgstr "Запуск линейной передачи..."
-
 #, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%ju байт перенесено)"
@@ -471,6 +483,9 @@ msgstr "%s: %s: %s %3d%% (%ju байт перенесено)"
 #, c-format
 msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %ju байт перенесено"
+
+msgid "Starting linear transfer..."
+msgstr "Запуск линейной передачи..."
 
 msgid "Getting file"
 msgstr "Получение файла"
@@ -768,9 +783,6 @@ msgstr "не хватило памяти при переоткрытии мас�
 msgid "while doing inode scan %d"
 msgstr "при сканировании узла %d"
 
-msgid "Ext2lib error"
-msgstr "Сбой Ext2lib"
-
 #, c-format
 msgid "Cannot open file %s"
 msgstr "Невозможно открыть файл %s"
@@ -810,6 +822,9 @@ msgstr "при переборе блоков"
 msgid "Cannot open file \"%s\""
 msgstr "Невозможно открыть файл %s"
 
+msgid "Ext2lib error"
+msgstr "Сбой Ext2lib"
+
 msgid "Cannot parse:"
 msgstr "Невозможно проанализировать:"
 
@@ -825,58 +840,36 @@ msgstr "Пароль:"
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
 
+msgid "Screens"
+msgstr "Экраны"
+
+msgid "History"
+msgstr "История"
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr "Очистка истории"
+
+msgid "Do you want clean this history?"
+msgstr "Желаете очистить историю?"
+
+msgid "&Yes"
+msgstr "&Да"
+
+msgid "&No"
+msgstr "&Нет"
+
+msgid "Background process:"
+msgstr "Фоновый процесс:"
+
 msgid "&Cancel"
 msgstr "&Прервать"
 
-msgid "&Set"
-msgstr "&Установить"
+msgid "&OK"
+msgstr "&Дальше"
 
-msgid "S&kip"
-msgstr "П&ропустить"
-
-msgid "Set &all"
-msgstr "Ус&тановить всё"
-
-msgid "owner"
-msgstr "хозяин"
-
-msgid "group"
-msgstr "группа"
-
-msgid "other"
-msgstr "другие"
-
-msgid "On"
-msgstr "На"
-
-msgid "Flag"
-msgstr "Флаг"
-
-msgid "Mode"
-msgstr "Режим"
-
-#, c-format
-msgid "%6d of %d"
-msgstr "%6d из %d"
-
-msgid "Chown advanced command"
-msgstr "Расширенная команда chown"
-
-#, c-format
-msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно изменить доступ \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot chown \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно изменить владельца \"%s\"\n"
-"%s"
+msgid "Error"
+msgstr "Ошибка"
 
 msgid "Displays the current version"
 msgstr "Показать текущую версию"
@@ -939,6 +932,7 @@ msgid "Show mc with specified skin"
 msgstr "Отобразить mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -947,6 +941,7 @@ msgid ""
 "Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1045,463 +1040,6 @@ msgid ""
 msgstr ""
 "Фоновый процесс запрашивает больше аргументов,\n"
 "чем мы можем контролировать."
-
-msgid "&Full file list"
-msgstr "&Стандартный"
-
-msgid "&Brief file list"
-msgstr "&Укороченный"
-
-msgid "&Long file list"
-msgstr "&Расширенный"
-
-msgid "&User defined:"
-msgstr "&Определенный пользователем"
-
-msgid "Listing mode"
-msgstr "Формат списка файлов"
-
-msgid "User &mini status"
-msgstr "Строка &мини-статуса в формате пользователя"
-
-msgid "&OK"
-msgstr "&Дальше"
-
-msgid "&Reverse"
-msgstr "&Обратный"
-
-msgid "Case sensi&tive"
-msgstr "Учет ре&гистра"
-
-msgid "Executable &first"
-msgstr "Исполняемые &вначале"
-
-msgid "Sort order"
-msgstr "Порядок сортировки"
-
-msgid "Confirmation"
-msgstr "Подтверждение"
-
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#. 2
-msgid "Confirmation|&History cleanup"
-msgstr "&Очистка истории"
-
-msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "Удаление списка &каталогов"
-
-msgid "Confirmation|E&xit"
-msgstr "В&ыход"
-
-msgid "Confirmation|&Execute"
-msgstr "&Исполнение"
-
-msgid "Confirmation|O&verwrite"
-msgstr "Пере&запись"
-
-msgid "Confirmation|&Delete"
-msgstr "&Удаление"
-
-msgid "UTF-8 output"
-msgstr "UTF-8 вывод"
-
-msgid "Full 8 bits output"
-msgstr "Полный &8-битный вывод"
-
-msgid "ISO 8859-1"
-msgstr "ISO 8859-1"
-
-msgid "7 bits"
-msgstr "&7 бит"
-
-msgid "F&ull 8 bits input"
-msgstr "Полный 8-битный &ввод"
-
-msgid "Display bits"
-msgstr "Отображение символов"
-
-msgid "Other 8 bit"
-msgstr "Другая 8-битная"
-
-msgid "Input / display codepage:"
-msgstr "Кодировка ввода/вывода:"
-
-msgid "&Select"
-msgstr "Выбрать"
-
-msgid "Directory tree"
-msgstr "Дерево каталогов"
-
-msgid "Use passive mode over pro&xy"
-msgstr "Использовать пассивный режим через прокси"
-
-msgid "Use &passive mode"
-msgstr "Использовать пассивный режим"
-
-msgid "&Use ~/.netrc"
-msgstr "&Использовать ~/.netrc"
-
-msgid "&Always use ftp proxy"
-msgstr "&Всегда использовать FTP-прокси"
-
-msgid "sec"
-msgstr "с"
-
-msgid "ftpfs directory cache timeout:"
-msgstr "Тайм-аут кэша каталога FTP:"
-
-msgid "ftp anonymous password:"
-msgstr "Пароль анонимного FTP:"
-
-msgid "Timeout for freeing VFSs:"
-msgstr "Тайм-аут высвобождения ВФС:"
-
-msgid "Virtual File System Setting"
-msgstr "Настройки виртуальной файловой системы"
-
-msgid "cd"
-msgstr "Перейти в"
-
-msgid "Quick cd"
-msgstr "Смена рабочего каталога"
-
-msgid "Symbolic link filename:"
-msgstr "Имя символической ссылки:"
-
-msgid "Existing filename (filename symlink will point to):"
-msgstr "Имя существующего файла (для ссылки):"
-
-msgid "Symbolic link"
-msgstr "Символическая ссылка"
-
-msgid "Running"
-msgstr "Выполняется"
-
-msgid "Stopped"
-msgstr "Остановлен"
-
-msgid "&Stop"
-msgstr "&Остановить"
-
-msgid "&Resume"
-msgstr "&Возобновить"
-
-msgid "&Kill"
-msgstr "&Снять"
-
-msgid "Background Jobs"
-msgstr "Фоновые задания"
-
-msgid "Domain:"
-msgstr "Домен:"
-
-msgid "Username:"
-msgstr "Имя пользователя:"
-
-#, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Пароль для \\\\%s\\%s"
-
-#, fuzzy
-msgid "Warning: cannot load codepages list"
-msgstr "Внимание: невозможно открыть каталог %s\n"
-
-msgid "7-bit ASCII"
-msgstr "7-битный ASCII"
-
-#, c-format
-msgid "Cannot translate from %s to %s"
-msgstr "Невозможно перекодировать из %s в %s"
-
-msgid "execute/search by others"
-msgstr "запуск/поиск для других"
-
-msgid "write by others"
-msgstr "запись для других"
-
-msgid "read by others"
-msgstr "чтение для других"
-
-msgid "execute/search by group"
-msgstr "запуск/поиск для группы"
-
-msgid "write by group"
-msgstr "запись для группы"
-
-msgid "read by group"
-msgstr "чтение для группы"
-
-msgid "execute/search by owner"
-msgstr "запуск/поиск для владельца"
-
-msgid "write by owner"
-msgstr "запись для владельца"
-
-msgid "read by owner"
-msgstr "чтение для владельца"
-
-msgid "sticky bit"
-msgstr "закрепляющий бит"
-
-msgid "set group ID on execution"
-msgstr "присв. GID при выполнении"
-
-msgid "set user ID on execution"
-msgstr "присв. UID при выполнении"
-
-msgid "C&lear marked"
-msgstr "&Очистить помеченное"
-
-msgid "S&et marked"
-msgstr "Уста&новить помеченное"
-
-msgid "&Marked all"
-msgstr "Отметить &всё"
-
-msgid "Name"
-msgstr "Имя"
-
-msgid "Permissions (Octal)"
-msgstr "Доступ (восьмеричный)"
-
-msgid "Owner name"
-msgstr "Имя владельца"
-
-msgid "Group name"
-msgstr "Имя группы"
-
-msgid "Use SPACE to change"
-msgstr "ПРОБЕЛ - для изменений"
-
-msgid "an option, ARROW KEYS"
-msgstr "опций, КЛАВИШИ-СТРЕЛКИ -"
-
-msgid "to move between options"
-msgstr "перемещения между настройками"
-
-msgid "and T or INS to mark"
-msgstr "и T или INS для пометки"
-
-msgid "Chmod command"
-msgstr "Команда chmod"
-
-msgid "File"
-msgstr "Файл"
-
-msgid "Permission"
-msgstr "Права доступа"
-
-msgid "Set &users"
-msgstr "Установить поль&зователей"
-
-msgid "Set &groups"
-msgstr "Установить &группы"
-
-msgid "Size"
-msgstr "Размер"
-
-msgid "Chown command"
-msgstr "Команда chown"
-
-msgid "<Unknown user>"
-msgstr "<Неизвестный>"
-
-msgid "<Unknown group>"
-msgstr "<Неизвестная>"
-
-msgid "User name"
-msgstr "Имя пользователя"
-
-msgid "Files tagged, want to cd?"
-msgstr "Файлы помечены, сменить каталог?"
-
-msgid "&Yes"
-msgstr "&Да"
-
-msgid "&No"
-msgstr "&Нет"
-
-msgid "Cannot change directory"
-msgstr "Невозможно сменить каталог"
-
-msgid "View file"
-msgstr "Просмотр файла"
-
-msgid "Filename:"
-msgstr "Имя файла:"
-
-msgid "Filtered view"
-msgstr "Просмотр вывода команды"
-
-msgid "Filter command and arguments:"
-msgstr "Введите команду и ее аргументы:"
-
-msgid "Create a new Directory"
-msgstr "Создать новый каталог"
-
-msgid "Enter directory name:"
-msgstr "Введите имя каталога:"
-
-msgid "Filter"
-msgstr "Фильтр"
-
-msgid "Set expression for filtering filenames"
-msgstr "Задайте выражение для выбора имен файлов"
-
-msgid "&Using shell patterns"
-msgstr "&Метасимволы shell"
-
-msgid "&Case sensitive"
-msgstr "Учет ре&гистра"
-
-msgid "&Files only"
-msgstr "Только файлы"
-
-msgid "Select"
-msgstr "отметить группу"
-
-msgid "Unselect"
-msgstr "Снять отметку"
-
-msgid "Extension file edit"
-msgstr "Редактирование файла расширений"
-
-msgid "Which extension file you want to edit?"
-msgstr "Какой файл расширений Вы хотите редактировать?"
-
-msgid "&User"
-msgstr "&Пользовательский"
-
-msgid "&System Wide"
-msgstr "&Общесистемный"
-
-msgid "Menu edit"
-msgstr "Редактирование файла меню"
-
-msgid "Which menu file do you want to edit?"
-msgstr "Какой файл меню Вы хотите редактировать?"
-
-msgid "&Local"
-msgstr "&Местный"
-
-msgid "Highlighting groups file edit"
-msgstr "Редактирование файла подсветки имён"
-
-msgid "Which highlighting file you want to edit?"
-msgstr "Какой файл расцветки имён Вы хотите редактировать?"
-
-msgid "Compare directories"
-msgstr "Сравнить каталоги"
-
-msgid "Select compare method:"
-msgstr "Выберите метод сравнения:"
-
-msgid "&Quick"
-msgstr "&Быстрый"
-
-msgid "&Size only"
-msgstr "По &размеру"
-
-msgid "&Thorough"
-msgstr "По&байтный"
-
-msgid ""
-"Both panels should be in the listing mode\n"
-"to use this command"
-msgstr ""
-"Для выполнения этой команды\n"
-"обе панели должны быть в режиме списка"
-
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Это не xterm и не консоль Linux;\n"
-"панели не могут быть отключены."
-
-#, c-format
-msgid "Link %s to:"
-msgstr "Создать ссылку с %s на:"
-
-msgid "Link"
-msgstr "Жесткая ссылка"
-
-#, c-format
-msgid "link: %s"
-msgstr "ссылка: %s"
-
-#, c-format
-msgid "symlink: %s"
-msgstr "символическая ссылка: %s"
-
-#, c-format
-msgid "Symlink `%s' points to:"
-msgstr "Символическая ссылка %s указывает на:"
-
-msgid "Edit symlink"
-msgstr "Правка ссылки"
-
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr "правка символической ссылки, невозможно удалить %s: %s"
-
-#, c-format
-msgid "edit symlink: %s"
-msgstr "правка символической ссылки: %s"
-
-#, c-format
-msgid "`%s' is not a symbolic link"
-msgstr "%s не является символической ссылкой"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Невозможно перейти в \"%s\""
-
-msgid "Enter machine name (F1 for details):"
-msgstr "Введите имя машины (детали по F1):"
-
-msgid "FTP to machine"
-msgstr "FTP-соединение с удаленной машиной"
-
-msgid "Shell link to machine"
-msgstr "Shell-соединение с удаленной машиной"
-
-msgid "SMB link to machine"
-msgstr "SMB-соединение с удаленной с машиной"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Восстановление файлов на файловой системе ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Введите имя устройства (без /dev/), на котором\n"
-"восстанавливать файлы после удаления (детали по F1):"
-
-msgid "Setup"
-msgstr "Настройка"
-
-#, c-format
-msgid "Setup saved to ~/%s"
-msgstr "Параметры сохранены в ~/%s"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно перейти в \"%s\"\n"
-"%s"
-
-msgid "Cannot execute commands on non-local filesystems"
-msgstr "Невозможно выполнять команды на нелокальных файловых системах"
-
-msgid "The shell is already running a command"
-msgstr "Интерпретатор занят выполнением команды"
-
-msgid "Screens"
-msgstr "Экраны"
 
 msgid "&Dismiss"
 msgstr "&Закрыть"
@@ -1641,9 +1179,6 @@ msgstr "Различия:"
 msgid "Two files are needed to compare"
 msgstr "Для сравнения необходимы два файла"
 
-msgid "Cannot read directory contents"
-msgstr "Невозможно прочесть содержимое каталога"
-
 msgid "Choose syntax highlighting"
 msgstr "Выбор цветовыделения синтаксиса"
 
@@ -1671,20 +1206,9 @@ msgstr ""
 msgid "Cannot open %s for reading"
 msgstr "Невозможно открыть файл %s для чтения"
 
-msgid "Error"
-msgstr "Ошибка"
-
 #, c-format
 msgid "Error reading %s"
 msgstr "Ошибка чтения %s:"
-
-#, c-format
-msgid "Error reading from pipe: %s"
-msgstr "Ошибка чтения из канала: %s"
-
-#, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr "Невозможно открыть канал для чтения: %s"
 
 #, c-format
 msgid "Cannot get size/permissions for %s"
@@ -1700,6 +1224,14 @@ msgstr "Файл \"%s\" слишком большой"
 
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
+
+#, c-format
+msgid "Error reading from pipe: %s"
+msgstr "Ошибка чтения из канала: %s"
+
+#, c-format
+msgid "Cannot open pipe for reading: %s"
+msgstr "Невозможно открыть канал для чтения: %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Файл имеет жесткие ссылки. Отсоединить перед сохранением?"
@@ -1718,21 +1250,6 @@ msgstr "Невозможно открыть канал для записи: %s"
 #, c-format
 msgid "Cannot open file for writing: %s"
 msgstr "Невозможно открыть файл для записи: %s"
-
-msgid "&Quick save"
-msgstr "&Быстрое сохранение"
-
-msgid "&Safe save"
-msgstr "Бе&зопасное сохранение"
-
-msgid "&Do backups with following extension:"
-msgstr "Д&елать резервные копии с расширением:"
-
-msgid "Check &POSIX new line"
-msgstr "П&роверка перевода строки в конце файла"
-
-msgid "Edit Save Mode"
-msgstr "Режим сохранения"
 
 msgid "The file you are saving is not finished with a newline"
 msgstr "Сохраняемый файл не имеет символа перевода строки в конце файла"
@@ -1761,18 +1278,6 @@ msgstr "Введите имя файла:"
 msgid "Save As"
 msgstr "Сохранить как"
 
-msgid "A file already exists with this name"
-msgstr "Файл с таким именем уже существует"
-
-msgid "&Overwrite"
-msgstr "Пе&реписать"
-
-msgid "Save as"
-msgstr "Сохранить как"
-
-msgid "Cannot save file"
-msgstr "Невозможно сохранить файл"
-
 msgid "Delete macro"
 msgstr "Удалить макрос"
 
@@ -1784,6 +1289,57 @@ msgstr "Невозможно открыть файл макросов"
 
 msgid "Cannot overwrite macro file"
 msgstr "Невозможно перезаписать файл макросов"
+
+msgid "Syntax file edit"
+msgstr "Редактирование файла синтаксиса"
+
+msgid "Which syntax file you want to edit?"
+msgstr "Какой файл синтаксиса Вы хотите редактировать?"
+
+msgid "&User"
+msgstr "&Пользовательский"
+
+msgid "&System Wide"
+msgstr "&Общесистемный"
+
+msgid "Menu edit"
+msgstr "Редактирование файла меню"
+
+msgid "Which menu file do you want to edit?"
+msgstr "Какой файл меню Вы хотите редактировать?"
+
+msgid "&Local"
+msgstr "&Местный"
+
+msgid "Block is large, you may not be able to undo this action"
+msgstr "Блок слишком велик, вам может не удаться отменить эту операцию."
+
+msgid "&Quick save"
+msgstr "&Быстрое сохранение"
+
+msgid "&Safe save"
+msgstr "Бе&зопасное сохранение"
+
+msgid "&Do backups with following extension:"
+msgstr "Д&елать резервные копии с расширением:"
+
+msgid "Check &POSIX new line"
+msgstr "П&роверка перевода строки в конце файла"
+
+msgid "Edit Save Mode"
+msgstr "Режим сохранения"
+
+msgid "A file already exists with this name"
+msgstr "Файл с таким именем уже существует"
+
+msgid "&Overwrite"
+msgstr "Пе&реписать"
+
+msgid "Save as"
+msgstr "Сохранить как"
+
+msgid "Cannot save file"
+msgstr "Невозможно сохранить файл"
 
 msgid "Save macro"
 msgstr "Сохранить макрос"
@@ -1814,17 +1370,8 @@ msgstr ""
 "Текущий текст был модифицирован и не сохранен.\n"
 "Продолжение операции приведет к потере изменений."
 
-msgid "Syntax file edit"
-msgstr "Редактирование файла синтаксиса"
-
-msgid "Which syntax file you want to edit?"
-msgstr "Какой файл синтаксиса Вы хотите редактировать?"
-
 msgid "Load"
 msgstr "Загрузить"
-
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Блок слишком велик, вам может не удаться отменить эту операцию."
 
 msgid "Replace"
 msgstr "&Заменить"
@@ -2267,6 +1814,9 @@ msgstr ""
 "удалили рабочий каталог или дали себе дополнительные\n"
 "привилегии доступа при помощи команды \"su\"?"
 
+msgid "The shell is already running a command"
+msgstr "Интерпретатор занят выполнением команды"
+
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Введите \"exit\" для возврата в Midnight Commander"
@@ -2274,6 +1824,475 @@ msgstr "Введите \"exit\" для возврата в Midnight Commander"
 #, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr "Невозможно получить локальную копию %s"
+
+msgid "&Set"
+msgstr "&Установить"
+
+msgid "S&kip"
+msgstr "П&ропустить"
+
+msgid "Set &all"
+msgstr "Ус&тановить всё"
+
+msgid "owner"
+msgstr "хозяин"
+
+msgid "group"
+msgstr "группа"
+
+msgid "other"
+msgstr "другие"
+
+msgid "On"
+msgstr "На"
+
+msgid "Flag"
+msgstr "Флаг"
+
+msgid "Mode"
+msgstr "Режим"
+
+#, c-format
+msgid "%6d of %d"
+msgstr "%6d из %d"
+
+msgid "Chown advanced command"
+msgstr "Расширенная команда chown"
+
+#, c-format
+msgid ""
+"Cannot chmod \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно изменить доступ \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot chown \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно изменить владельца \"%s\"\n"
+"%s"
+
+msgid "&Stop"
+msgstr "&Остановить"
+
+msgid "&Resume"
+msgstr "&Возобновить"
+
+msgid "&Kill"
+msgstr "&Снять"
+
+msgid "&Full file list"
+msgstr "&Стандартный"
+
+msgid "&Brief file list"
+msgstr "&Укороченный"
+
+msgid "&Long file list"
+msgstr "&Расширенный"
+
+msgid "&User defined:"
+msgstr "&Определенный пользователем"
+
+msgid "Listing mode"
+msgstr "Формат списка файлов"
+
+msgid "User &mini status"
+msgstr "Строка &мини-статуса в формате пользователя"
+
+msgid "Other 8 bit"
+msgstr "Другая 8-битная"
+
+msgid "Display bits"
+msgstr "Отображение символов"
+
+msgid "Input / display codepage:"
+msgstr "Кодировка ввода/вывода:"
+
+msgid "F&ull 8 bits input"
+msgstr "Полный 8-битный &ввод"
+
+msgid "&Select"
+msgstr "Выбрать"
+
+msgid "Running"
+msgstr "Выполняется"
+
+msgid "Stopped"
+msgstr "Остановлен"
+
+msgid "&Reverse"
+msgstr "&Обратный"
+
+msgid "Case sensi&tive"
+msgstr "Учет ре&гистра"
+
+msgid "Executable &first"
+msgstr "Исполняемые &вначале"
+
+msgid "Sort order"
+msgstr "Порядок сортировки"
+
+msgid "Confirmation"
+msgstr "Подтверждение"
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+msgid "Confirmation|&History cleanup"
+msgstr "&Очистка истории"
+
+msgid "Confirmation|Di&rectory hotlist delete"
+msgstr "Удаление списка &каталогов"
+
+msgid "Confirmation|E&xit"
+msgstr "В&ыход"
+
+msgid "Confirmation|&Execute"
+msgstr "&Исполнение"
+
+msgid "Confirmation|O&verwrite"
+msgstr "Пере&запись"
+
+msgid "Confirmation|&Delete"
+msgstr "&Удаление"
+
+msgid "UTF-8 output"
+msgstr "UTF-8 вывод"
+
+msgid "Full 8 bits output"
+msgstr "Полный &8-битный вывод"
+
+msgid "ISO 8859-1"
+msgstr "ISO 8859-1"
+
+msgid "7 bits"
+msgstr "&7 бит"
+
+msgid "Directory tree"
+msgstr "Дерево каталогов"
+
+msgid "Use passive mode over pro&xy"
+msgstr "Использовать пассивный режим через прокси"
+
+msgid "Use &passive mode"
+msgstr "Использовать пассивный режим"
+
+msgid "&Use ~/.netrc"
+msgstr "&Использовать ~/.netrc"
+
+msgid "&Always use ftp proxy"
+msgstr "&Всегда использовать FTP-прокси"
+
+msgid "sec"
+msgstr "с"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "Тайм-аут кэша каталога FTP:"
+
+msgid "ftp anonymous password:"
+msgstr "Пароль анонимного FTP:"
+
+msgid "Timeout for freeing VFSs:"
+msgstr "Тайм-аут высвобождения ВФС:"
+
+msgid "Virtual File System Setting"
+msgstr "Настройки виртуальной файловой системы"
+
+msgid "cd"
+msgstr "Перейти в"
+
+msgid "Quick cd"
+msgstr "Смена рабочего каталога"
+
+msgid "Symbolic link filename:"
+msgstr "Имя символической ссылки:"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr "Имя существующего файла (для ссылки):"
+
+msgid "Symbolic link"
+msgstr "Символическая ссылка"
+
+msgid "Background Jobs"
+msgstr "Фоновые задания"
+
+msgid "Domain:"
+msgstr "Домен:"
+
+msgid "Username:"
+msgstr "Имя пользователя:"
+
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "Пароль для \\\\%s\\%s"
+
+msgid "execute/search by others"
+msgstr "запуск/поиск для других"
+
+msgid "write by others"
+msgstr "запись для других"
+
+msgid "read by others"
+msgstr "чтение для других"
+
+msgid "execute/search by group"
+msgstr "запуск/поиск для группы"
+
+msgid "write by group"
+msgstr "запись для группы"
+
+msgid "read by group"
+msgstr "чтение для группы"
+
+msgid "execute/search by owner"
+msgstr "запуск/поиск для владельца"
+
+msgid "write by owner"
+msgstr "запись для владельца"
+
+msgid "read by owner"
+msgstr "чтение для владельца"
+
+msgid "sticky bit"
+msgstr "закрепляющий бит"
+
+msgid "set group ID on execution"
+msgstr "присв. GID при выполнении"
+
+msgid "set user ID on execution"
+msgstr "присв. UID при выполнении"
+
+msgid "C&lear marked"
+msgstr "&Очистить помеченное"
+
+msgid "S&et marked"
+msgstr "Уста&новить помеченное"
+
+msgid "&Marked all"
+msgstr "Отметить &всё"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Permissions (Octal)"
+msgstr "Доступ (восьмеричный)"
+
+msgid "Owner name"
+msgstr "Имя владельца"
+
+msgid "Group name"
+msgstr "Имя группы"
+
+msgid "Use SPACE to change"
+msgstr "ПРОБЕЛ - для изменений"
+
+msgid "an option, ARROW KEYS"
+msgstr "опций, КЛАВИШИ-СТРЕЛКИ -"
+
+msgid "to move between options"
+msgstr "перемещения между настройками"
+
+msgid "and T or INS to mark"
+msgstr "и T или INS для пометки"
+
+msgid "Chmod command"
+msgstr "Команда chmod"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Permission"
+msgstr "Права доступа"
+
+msgid "Set &users"
+msgstr "Установить поль&зователей"
+
+msgid "Set &groups"
+msgstr "Установить &группы"
+
+msgid "Size"
+msgstr "Размер"
+
+msgid "Chown command"
+msgstr "Команда chown"
+
+msgid "<Unknown user>"
+msgstr "<Неизвестный>"
+
+msgid "<Unknown group>"
+msgstr "<Неизвестная>"
+
+msgid "User name"
+msgstr "Имя пользователя"
+
+msgid "Enter machine name (F1 for details):"
+msgstr "Введите имя машины (детали по F1):"
+
+msgid "Files tagged, want to cd?"
+msgstr "Файлы помечены, сменить каталог?"
+
+msgid "Cannot change directory"
+msgstr "Невозможно сменить каталог"
+
+msgid "Filter"
+msgstr "Фильтр"
+
+msgid "Set expression for filtering filenames"
+msgstr "Задайте выражение для выбора имен файлов"
+
+msgid "&Using shell patterns"
+msgstr "&Метасимволы shell"
+
+msgid "&Case sensitive"
+msgstr "Учет ре&гистра"
+
+msgid "&Files only"
+msgstr "Только файлы"
+
+#, c-format
+msgid "Link %s to:"
+msgstr "Создать ссылку с %s на:"
+
+msgid "Link"
+msgstr "Жесткая ссылка"
+
+#, c-format
+msgid "link: %s"
+msgstr "ссылка: %s"
+
+#, c-format
+msgid "symlink: %s"
+msgstr "символическая ссылка: %s"
+
+#, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr "Невозможно перейти в \"%s\""
+
+msgid "View file"
+msgstr "Просмотр файла"
+
+msgid "Filename:"
+msgstr "Имя файла:"
+
+msgid "Filtered view"
+msgstr "Просмотр вывода команды"
+
+msgid "Filter command and arguments:"
+msgstr "Введите команду и ее аргументы:"
+
+msgid "Create a new Directory"
+msgstr "Создать новый каталог"
+
+msgid "Enter directory name:"
+msgstr "Введите имя каталога:"
+
+msgid "Select"
+msgstr "отметить группу"
+
+msgid "Unselect"
+msgstr "Снять отметку"
+
+msgid "Extension file edit"
+msgstr "Редактирование файла расширений"
+
+msgid "Which extension file you want to edit?"
+msgstr "Какой файл расширений Вы хотите редактировать?"
+
+msgid "Highlighting groups file edit"
+msgstr "Редактирование файла подсветки имён"
+
+msgid "Which highlighting file you want to edit?"
+msgstr "Какой файл расцветки имён Вы хотите редактировать?"
+
+msgid "Compare directories"
+msgstr "Сравнить каталоги"
+
+msgid "Select compare method:"
+msgstr "Выберите метод сравнения:"
+
+msgid "&Quick"
+msgstr "&Быстрый"
+
+msgid "&Size only"
+msgstr "По &размеру"
+
+msgid "&Thorough"
+msgstr "По&байтный"
+
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
+msgstr ""
+"Для выполнения этой команды\n"
+"обе панели должны быть в режиме списка"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Это не xterm и не консоль Linux;\n"
+"панели не могут быть отключены."
+
+#, c-format
+msgid "Symlink `%s' points to:"
+msgstr "Символическая ссылка %s указывает на:"
+
+msgid "Edit symlink"
+msgstr "Правка ссылки"
+
+#, c-format
+msgid "edit symlink, unable to remove %s: %s"
+msgstr "правка символической ссылки, невозможно удалить %s: %s"
+
+#, c-format
+msgid "edit symlink: %s"
+msgstr "правка символической ссылки: %s"
+
+#, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "%s не является символической ссылкой"
+
+msgid "FTP to machine"
+msgstr "FTP-соединение с удаленной машиной"
+
+msgid "Shell link to machine"
+msgstr "Shell-соединение с удаленной машиной"
+
+msgid "SMB link to machine"
+msgstr "SMB-соединение с удаленной с машиной"
+
+msgid "Undelete files on an ext2 file system"
+msgstr "Восстановление файлов на файловой системе ext2"
+
+msgid ""
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
+msgstr ""
+"Введите имя устройства (без /dev/), на котором\n"
+"восстанавливать файлы после удаления (детали по F1):"
+
+msgid "Setup"
+msgstr "Настройка"
+
+#, c-format
+msgid "Setup saved to ~/%s"
+msgstr "Параметры сохранены в ~/%s"
+
+msgid "Cannot execute commands on non-local filesystems"
+msgstr "Невозможно выполнять команды на нелокальных файловых системах"
+
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно перейти в \"%s\"\n"
+"%s"
+
+msgid "Cannot read directory contents"
+msgstr "Невозможно прочесть содержимое каталога"
 
 #, c-format
 msgid ""
@@ -2321,6 +2340,47 @@ msgstr "Перемещение"
 msgid "DialogTitle|Delete"
 msgstr "Удаление"
 
+msgid "FileOperation|Copy"
+msgstr "Копировать"
+
+msgid "FileOperation|Move"
+msgstr "Переместить"
+
+msgid "FileOperation|Delete"
+msgstr "Удалить"
+
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "%o %f \"%s\"%m"
+
+# msgfmt warnings/errors must be ignored. mc parse this pattern itself.
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr "%o эти %f (%d шт.)%m"
+
+msgid "files"
+msgstr "файлы"
+
+msgid "directory"
+msgstr "каталог"
+
+msgid "directories"
+msgstr "каталоги"
+
+msgid "files/directories"
+msgstr "файлы/каталоги"
+
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
+msgid " with source mask:"
+msgstr " с исходным шаблоном:"
+
+msgid "to:"
+msgstr "в:"
+
+#, c-format
+msgid "%s?"
+msgstr "%s?"
+
 msgid "Cannot make the hardlink"
 msgstr "Невозможно создать жесткую ссылку"
 
@@ -2355,18 +2415,10 @@ msgstr "&Прервать"
 
 #, c-format
 msgid ""
-"Cannot overwrite directory\"%s\"\n"
+"Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
-"Невозможно переписать каталог \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot stat source file \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно получить свойства исходного файла \"%s\"\n"
+"Невозможно получить свойства файла \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2380,6 +2432,85 @@ msgstr ""
 "и\n"
 "\"%s\"\n"
 "один и тот же файл"
+
+#, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr "Невозможно переписать каталог \"%s\""
+
+#, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно переместить файл \"%s\" в \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно удалить файл \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot delete file \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно удалить файл \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot remove directory \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно удалить каталог \"%s\"\n"
+"%s"
+
+msgid "&Retry"
+msgstr "По&вторить"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Каталог не пуст.\n"
+"Удалить рекурсивно?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Фоновый процесс: каталог не пуст.\n"
+"Удалить рекурсивно?"
+
+msgid "Delete:"
+msgstr "Удалить:"
+
+msgid "Non&e"
+msgstr "ни &Одного"
+
+#, c-format
+msgid ""
+"Cannot overwrite directory\"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно переписать каталог \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot stat source file \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно получить свойства исходного файла \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2531,34 +2662,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно получить свойства файла \"%s\"\n"
-"%s"
-
-#, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr "Невозможно переписать каталог \"%s\""
-
-#, c-format
-msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно переместить файл \"%s\" в \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно удалить файл \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
@@ -2593,98 +2696,14 @@ msgstr ""
 "Невозможно переместить каталог \"%s\" в \"%s\"\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно удалить файл \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно удалить каталог \"%s\"\n"
-"%s"
-
 msgid "Directory scanning"
 msgstr "Путь к каталогу"
-
-msgid "FileOperation|Copy"
-msgstr "Копировать"
-
-msgid "FileOperation|Move"
-msgstr "Переместить"
-
-msgid "FileOperation|Delete"
-msgstr "Удалить"
-
-#, no-c-format
-msgid "%o %f \"%s\"%m"
-msgstr "%o %f \"%s\"%m"
-
-# msgfmt warnings/errors must be ignored. mc parse this pattern itself.
-#, no-c-format
-msgid "%o %d %f%m"
-msgstr "%o эти %f (%d шт.)%m"
-
-msgid "files"
-msgstr "файлы"
-
-msgid "directory"
-msgstr "каталог"
-
-msgid "directories"
-msgstr "каталоги"
-
-msgid "files/directories"
-msgstr "файлы/каталоги"
-
-#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-msgid " with source mask:"
-msgstr " с исходным шаблоном:"
-
-msgid "to:"
-msgstr "в:"
-
-#, c-format
-msgid "%s?"
-msgstr "%s?"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Эту операцию невозможно выполнить на \"..\"!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Извините, сделать это в фоновом режиме невозможно"
-
-msgid "&Retry"
-msgstr "По&вторить"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Каталог не пуст.\n"
-"Удалить рекурсивно?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Фоновый процесс: каталог не пуст.\n"
-"Удалить рекурсивно?"
-
-msgid "Delete:"
-msgstr "Удалить:"
-
-msgid "Non&e"
-msgstr "ни &Одного"
 
 #, c-format
 msgid "%d:%02d.%02d"
@@ -2705,27 +2724,6 @@ msgstr "%.2f кб/с"
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld б/с"
-
-#, c-format
-msgid "Files processed: %llu of %llu"
-msgstr "Обработано файлов: %llu из %llu"
-
-#, c-format
-msgid "Time: %s  %s (%s)"
-msgstr "Время: %s  %s (%s)"
-
-#, c-format
-msgid "Total: %s of %s"
-msgstr "Всего: %s из %s"
-
-msgid "Source"
-msgstr "Источник"
-
-msgid "Target"
-msgstr "Приемник"
-
-msgid "Deleting"
-msgstr "Удаляем"
 
 msgid "Target file already exists!"
 msgstr "Целевой файл уже существует!"
@@ -2769,6 +2767,27 @@ msgstr "Файл существует"
 
 msgid "Background process: File exists"
 msgstr "Фоновый процесс: файл существует"
+
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr "Обработано файлов: %llu из %llu"
+
+#, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Время: %s  %s (%s)"
+
+#, c-format
+msgid "Total: %s of %s"
+msgstr "Всего: %s из %s"
+
+msgid "Source"
+msgstr "Источник"
+
+msgid "Target"
+msgstr "Приемник"
+
+msgid "Deleting"
+msgstr "Удаляем"
 
 msgid "&Background"
 msgstr "В &фоне"
@@ -2829,6 +2848,10 @@ msgstr "Пропускать скр&ытые"
 msgid "&All charsets"
 msgstr "&Все кодировки"
 
+#, fuzzy
+msgid "Sea&rch for content"
+msgstr "Поиск закончен"
+
 msgid "Case sens&itive"
 msgstr "Учет ре&гистра"
 
@@ -2838,8 +2861,9 @@ msgstr "&Регулярное выражение"
 msgid "Fir&st hit"
 msgstr "До &первого вхождения"
 
-msgid "All cha&rsets"
-msgstr "Все коди&ровки"
+#, fuzzy
+msgid "A&ll charsets"
+msgstr "Все кодировки"
 
 msgid "&Tree"
 msgstr "&Дерево"
@@ -2869,25 +2893,6 @@ msgstr "Ищем %s"
 
 msgid "Searching"
 msgstr "Ищем"
-
-msgid "Help file format error\n"
-msgstr "Ошибка в формате файла помощи\n"
-
-msgid "Internal bug: Double start of link area"
-msgstr "Внутренняя ошибка: двойное начало области ссылки"
-
-#, c-format
-msgid "Cannot find node %s in help file"
-msgstr "Невозможно найти узел %s в файле помощи"
-
-msgid "Help"
-msgstr "Помощь"
-
-msgid "ButtonBar|Index"
-msgstr "Разделы"
-
-msgid "ButtonBar|Prev"
-msgstr "Пред"
 
 msgid "&Move"
 msgstr "Пере&местить блок"
@@ -2956,13 +2961,6 @@ msgstr "Новая группа быстрого доступа"
 msgid "Name of new group:"
 msgstr "Имя новой группы:"
 
-#, c-format
-msgid "Label for \"%s\":"
-msgstr "Метка для \"%s\":"
-
-msgid "Add to hotlist"
-msgstr "Добавить быстрый доступ к каталогу"
-
 msgid "Remove:"
 msgstr "Удалить:"
 
@@ -2989,6 +2987,13 @@ msgid ""
 msgstr ""
 "MC не смог удалить файл ~/%s,\n"
 "ваши старые элементы быстрого доступа не были удалены"
+
+#, c-format
+msgid "Label for \"%s\":"
+msgstr "Метка для \"%s\":"
+
+msgid "Add to hotlist"
+msgstr "Добавить быстрый доступ к каталогу"
 
 msgid "Information"
 msgstr "Информация"
@@ -3118,82 +3123,6 @@ msgstr "Строки вывода:"
 
 msgid "Layout"
 msgstr "Внешний вид"
-
-msgid "Learn keys"
-msgstr "Распознавание клавиш"
-
-msgid "Teach me a key"
-msgstr "Обучите меня клавише"
-
-#, c-format
-msgid ""
-"Please press the %s\n"
-"and then wait until this message disappears.\n"
-"\n"
-"Then, press it again to see if OK appears\n"
-"next to its button.\n"
-"\n"
-"If you want to escape, press a single Escape key\n"
-"and wait as well."
-msgstr ""
-"Пожалуйста, нажмите клавишу %s\n"
-"и подождите, пока это сообщение пропадет.\n"
-"\n"
-"Затем нажмите ее еще раз, чтобы убедиться,\n"
-"что справа от ее названия появилось \"OK\".\n"
-"\n"
-"Если вы хотите прервать обучение, нажмите\n"
-"клавишу Esc и тоже немного подождите."
-
-msgid "Cannot accept this key"
-msgstr "Невозможно принять эту клавишу"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Вы ввели \"%s\""
-
-#. TRANSLATORS: This label appears near learned keys.  Keep it short.
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"It seems that all your keys already\n"
-"work fine. That's great."
-msgstr ""
-"Похоже, что все Ваши клавиши теперь\n"
-"работают нормально. Просто здорово!"
-
-msgid "&Discard"
-msgstr "Отменить"
-
-msgid ""
-"Great! You have a complete terminal database!\n"
-"All your keys work well."
-msgstr ""
-"Отлично! У вас есть полная база описаний терминалов!\n"
-"Все ваши клавиши работают хорошо."
-
-msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Нажмите все перечисленные выше клавиши. После нажатий найдите,"
-
-msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "какие клавиши не имеют пометки \"OK\". Для обучения клавише выберите"
-
-msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "ее при помощи Tab или мышкой и нажмите пробел."
-
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] "У вас %zd открытый экран. Всё равно выйти?"
-msgstr[1] "У вас %zd открытых экрана. Всё равно выйти?"
-msgstr[2] "У вас %zd открытый экранов. Всё равно выйти?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Вы действительно хотите выйти из Midnight Commander?"
 
 msgid "File listin&g"
 msgstr "&Список файлов"
@@ -3357,6 +3286,25 @@ msgstr "&Биты символов..."
 msgid "&Virtual FS..."
 msgstr "Виртуальные &ФС..."
 
+msgid "Panels:"
+msgstr "Панели:"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Переменная среды TERM не определена!\n"
+
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] "У вас %zd открытый экран. Всё равно выйти?"
+msgstr[1] "У вас %zd открытых экрана. Всё равно выйти?"
+msgstr[2] "У вас %zd открытый экранов. Всё равно выйти?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Вы действительно хотите выйти из Midnight Commander?"
+
 msgid "&Above"
 msgstr "&Верхняя"
 
@@ -3369,9 +3317,6 @@ msgstr "&Нижняя"
 msgid "&Right"
 msgstr "&Правая панель"
 
-msgid "Panels:"
-msgstr "Панели:"
-
 msgid "ButtonBar|Menu"
 msgstr "Меню"
 
@@ -3383,13 +3328,6 @@ msgstr "Перенос"
 
 msgid "ButtonBar|Mkdir"
 msgstr "НвКтлог"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Переменная среды TERM не определена!\n"
-
-#, c-format
-msgid "Cannot create %s directory"
-msgstr "Невозможно создать каталог \"%s\""
 
 msgid "&Never"
 msgstr "&Никогда"
@@ -3534,54 +3472,6 @@ msgstr ""
 "перезагрузить каталог. Для дополнительной информации смотрите\n"
 "руководство (man)."
 
-msgid "&Add new"
-msgstr "&Добавить"
-
-msgid "External panelize"
-msgstr "Внешняя панелизация"
-
-msgid "Command"
-msgstr "Команда"
-
-msgid "Other command"
-msgstr "Новая команда"
-
-msgid "Add to external panelize"
-msgstr "Добавить в список команд"
-
-msgid "Enter command label:"
-msgstr "Введите название команды:"
-
-msgid "Cannot run external panelize in a non-local directory"
-msgstr "Невозможно выполнить эту команду, находясь не в локальном каталоге"
-
-msgid "Find rejects after patching"
-msgstr "Найти корректуры, отвергнутые командой patch"
-
-msgid "Find *.orig after patching"
-msgstr "Найти оригиналы (*.orig) после команды patch"
-
-msgid "Find SUID and SGID programs"
-msgstr "Найти программы с установленными SUID/SGID битами"
-
-msgid "Cannot invoke command."
-msgstr "Невозможно выполнить команду."
-
-msgid "Pipe close failed"
-msgstr "Сбой закрытия канала"
-
-msgid "[dev]"
-msgstr "[dev]"
-
-msgid "UP--DIR"
-msgstr "-ВВЕРХ-"
-
-msgid "SYMLINK"
-msgstr "ССЫЛКА"
-
-msgid "SUB-DIR"
-msgstr "ПОД-КАТ"
-
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
@@ -3675,6 +3565,18 @@ msgstr "Владелец"
 msgid "Group"
 msgstr "Группа"
 
+msgid "[dev]"
+msgstr "[dev]"
+
+msgid "UP--DIR"
+msgstr "-ВВЕРХ-"
+
+msgid "SYMLINK"
+msgstr "ССЫЛКА"
+
+msgid "SUB-DIR"
+msgstr "ПОД-КАТ"
+
 msgid "<readlink failed>"
 msgstr "<сбой чтения ссылки>"
 
@@ -3695,98 +3597,47 @@ msgstr[2] "%s в %d файлах"
 msgid "Unknown tag on display format:"
 msgstr "Неизвестный тег в формате отображения:"
 
-msgid "User supplied format looks invalid, reverting to default."
-msgstr "Пользовательский формат выглядит неверным, возвращаю к стандартному."
-
 msgid "Do you really want to execute?"
 msgstr "Вы действительно хотите выполнить это?"
 
-msgid "Choose codepage"
-msgstr "Выберите кодировку"
+msgid "User supplied format looks invalid, reverting to default."
+msgstr "Пользовательский формат выглядит неверным, возвращаю к стандартному."
 
-msgid "-  < No translation >"
-msgstr "-  < Без перекодировки >"
+msgid "&Add new"
+msgstr "&Добавить"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
+msgid "External panelize"
+msgstr "Внешняя панелизация"
 
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
+msgid "Command"
+msgstr "Команда"
 
-#, c-format
-msgid ""
-"Cannot save file %s:\n"
-"%s"
-msgstr ""
-"Невозможно сохранить файл %s:\n"
-"%s"
+msgid "Other command"
+msgstr "Новая команда"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"Другой Midnight Commander уже работает\n"
-"на этом терминале. Встроенная командная\n"
-"оболочка будет выключена."
+msgid "Add to external panelize"
+msgstr "Добавить в список команд"
 
-#, c-format
-msgid "Cannot open named pipe %s\n"
-msgstr "Невозможно открыть именованный канал %s\n"
+msgid "Enter command label:"
+msgstr "Введите название команды:"
 
-msgid "The shell is still active. Quit anyway?"
-msgstr "Оболочка всё еще активна. Всё равно выйти?"
+msgid "Cannot invoke command."
+msgstr "Невозможно выполнить команду."
 
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Внимание: невозможно перейти в %s. \n"
+msgid "Pipe close failed"
+msgstr "Сбой закрытия канала"
 
-msgid "With builtin Editor\n"
-msgstr "Со встроенным редактором\n"
+msgid "Cannot run external panelize in a non-local directory"
+msgstr "Невозможно выполнить эту команду, находясь не в локальном каталоге"
 
-msgid "Using system-installed S-Lang library"
-msgstr "С установленной в системе библиотекой S-Lang"
+msgid "Find rejects after patching"
+msgstr "Найти корректуры, отвергнутые командой patch"
 
-msgid "with terminfo database"
-msgstr "с базой данных terminfo"
+msgid "Find *.orig after patching"
+msgstr "Найти оригиналы (*.orig) после команды patch"
 
-msgid "Using the ncurses library"
-msgstr "С библиотекой ncurses"
-
-msgid "Using the ncursesw library"
-msgstr "С библиотекой ncursesw"
-
-msgid "With optional subshell support"
-msgstr "С опциональной поддержкой внутренней командной оболочки"
-
-msgid "With subshell support as default"
-msgstr "C поддержкой внутренней командной оболочки"
-
-msgid "With support for background operations\n"
-msgstr "С поддержкой фоновых операций\n"
-
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "С поддержкой мыши в xterm и консоли Linux\n"
-
-msgid "With mouse support on xterm\n"
-msgstr "С поддержкой мыши в xterm\n"
-
-msgid "With support for X11 events\n"
-msgstr "С поддержкой событий X11\n"
-
-msgid "With internationalization support\n"
-msgstr "С поддержкой интернационализации\n"
-
-msgid "With multiple codepages support\n"
-msgstr "С поддержкой многих кодировок\n"
-
-#, c-format
-msgid "Virtual File Systems:"
-msgstr "Виртуальная файловая система:"
-
-#, c-format
-msgid "Data types:"
-msgstr "Тип данных:"
+msgid "Find SUID and SGID programs"
+msgstr "Найти программы с установленными SUID/SGID битами"
 
 #, c-format
 msgid ""
@@ -3839,17 +3690,6 @@ msgstr ""
 "Невозможно писать в файл %s:\n"
 "%s\n"
 
-msgid "Format error on file Extensions File"
-msgstr "Ошибка в формате файла Расширений файлов"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Макрос %%var не имеет значения по умолчанию"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Макрос %%var не имеет переменной"
-
 msgid "Debug"
 msgstr "Отладка"
 
@@ -3874,6 +3714,17 @@ msgstr ""
 "или доступен другим на запись. Использование такого файла неприемлемо\n"
 "c точки зрения безопасности."
 
+msgid "Format error on file Extensions File"
+msgstr "Ошибка в формате файла Расширений файлов"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Макрос %%var не имеет значения по умолчанию"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Макрос %%var не имеет переменной"
+
 #, c-format
 msgid ""
 "Cannot open file%s\n"
@@ -3888,6 +3739,185 @@ msgstr "Не найдено подходящих элементов в %s"
 
 msgid "User menu"
 msgstr "Меню пользователя"
+
+msgid "Help file format error\n"
+msgstr "Ошибка в формате файла помощи\n"
+
+msgid "Internal bug: Double start of link area"
+msgstr "Внутренняя ошибка: двойное начало области ссылки"
+
+#, c-format
+msgid "Cannot find node %s in help file"
+msgstr "Невозможно найти узел %s в файле помощи"
+
+msgid "Help"
+msgstr "Помощь"
+
+msgid "ButtonBar|Index"
+msgstr "Разделы"
+
+msgid "ButtonBar|Prev"
+msgstr "Пред"
+
+msgid "Learn keys"
+msgstr "Распознавание клавиш"
+
+msgid "Teach me a key"
+msgstr "Обучите меня клавише"
+
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Пожалуйста, нажмите клавишу %s\n"
+"и подождите, пока это сообщение пропадет.\n"
+"\n"
+"Затем нажмите ее еще раз, чтобы убедиться,\n"
+"что справа от ее названия появилось \"OK\".\n"
+"\n"
+"Если вы хотите прервать обучение, нажмите\n"
+"клавишу Esc и тоже немного подождите."
+
+msgid "Cannot accept this key"
+msgstr "Невозможно принять эту клавишу"
+
+#, c-format
+msgid "You have entered \"%s\""
+msgstr "Вы ввели \"%s\""
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Похоже, что все Ваши клавиши теперь\n"
+"работают нормально. Просто здорово!"
+
+msgid "&Discard"
+msgstr "Отменить"
+
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"Отлично! У вас есть полная база описаний терминалов!\n"
+"Все ваши клавиши работают хорошо."
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Нажмите все перечисленные выше клавиши. После нажатий найдите,"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "какие клавиши не имеют пометки \"OK\". Для обучения клавише выберите"
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "ее при помощи Tab или мышкой и нажмите пробел."
+
+#, c-format
+msgid "Cannot create %s directory"
+msgstr "Невозможно создать каталог \"%s\""
+
+msgid "Choose codepage"
+msgstr "Выберите кодировку"
+
+msgid "-  < No translation >"
+msgstr "-  < Без перекодировки >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr ""
+"Невозможно сохранить файл %s:\n"
+"%s"
+
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"Другой Midnight Commander уже работает\n"
+"на этом терминале. Встроенная командная\n"
+"оболочка будет выключена."
+
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr "Невозможно открыть именованный канал %s\n"
+
+msgid "The shell is still active. Quit anyway?"
+msgstr "Оболочка всё еще активна. Всё равно выйти?"
+
+#, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Внимание: невозможно перейти в %s. \n"
+
+#, fuzzy
+msgid "Using the S-Lang library with terminfo database\n"
+msgstr "с базой данных terminfo"
+
+#, fuzzy
+msgid "Using the ncurses library\n"
+msgstr "С библиотекой ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library\n"
+msgstr "С библиотекой ncursesw"
+
+msgid "With builtin Editor\n"
+msgstr "Со встроенным редактором\n"
+
+#, fuzzy
+msgid "With optional subshell support\n"
+msgstr "С опциональной поддержкой внутренней командной оболочки"
+
+#, fuzzy
+msgid "With subshell support as default\n"
+msgstr "C поддержкой внутренней командной оболочки"
+
+msgid "With support for background operations\n"
+msgstr "С поддержкой фоновых операций\n"
+
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "С поддержкой мыши в xterm и консоли Linux\n"
+
+msgid "With mouse support on xterm\n"
+msgstr "С поддержкой мыши в xterm\n"
+
+msgid "With support for X11 events\n"
+msgstr "С поддержкой событий X11\n"
+
+msgid "With internationalization support\n"
+msgstr "С поддержкой интернационализации\n"
+
+msgid "With multiple codepages support\n"
+msgstr "С поддержкой многих кодировок\n"
+
+#, c-format
+msgid "Built with GLib %d.%d.%d\n"
+msgstr ""
+
+#, c-format
+msgid "Virtual File Systems:"
+msgstr "Виртуальная файловая система:"
+
+#, c-format
+msgid "Data types:"
+msgstr "Тип данных:"
 
 msgid "Invalid value"
 msgstr "Неверный адрес"
@@ -3992,18 +4022,11 @@ msgstr "Поиск закончен"
 msgid "Continue from begining?"
 msgstr "Продолжить с начала?"
 
-msgid "History"
-msgstr "История"
+#~ msgid "All cha&rsets"
+#~ msgstr "Все коди&ровки"
 
-#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-msgid "DialogTitle|History cleanup"
-msgstr "Очистка истории"
-
-msgid "Do you want clean this history?"
-msgstr "Желаете очистить историю?"
-
-msgid "Background process:"
-msgstr "Фоновый процесс:"
+#~ msgid "Using system-installed S-Lang library"
+#~ msgstr "С установленной в системе библиотекой S-Lang"
 
 #~ msgid "ftpfs: could not setup passive mode: %s"
 #~ msgstr "ftpfs: невозможно установить пассивный режим: %s"

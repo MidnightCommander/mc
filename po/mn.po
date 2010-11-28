@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-01 15:58+0200\n"
+"POT-Creation-Date: 2010-11-28 23:42+0200\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -18,6 +18,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
+
+#, fuzzy
+msgid "Warning: cannot load codepages list"
+msgstr "Хавтас руу шилжиж чадсангүй"
+
+msgid "7-bit ASCII"
+msgstr ""
+
+#, c-format
+msgid "Cannot translate from %s to %s"
+msgstr "%s аас %s руу хөрвүүлж чадсангүй"
 
 #, c-format
 msgid ""
@@ -358,6 +369,10 @@ msgstr "Backspace товч"
 msgid "Number sign #"
 msgstr ""
 
+#. TRANSLATORS: Please translate as in "at sign" (@).
+msgid "At sign"
+msgstr ""
+
 msgid "Ctrl"
 msgstr ""
 
@@ -470,9 +485,6 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr " %s ийн кэш лавлах хугацаа дууссан байна"
 
-msgid "Starting linear transfer..."
-msgstr "Шугман дамжуулалт эхлэж байна..."
-
 #, fuzzy, c-format
 msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байт дамжуулагдлаа)"
@@ -480,6 +492,9 @@ msgstr "%s: %s: %s %3d%% (%lu байт дамжуулагдлаа)"
 #, fuzzy, c-format
 msgid "%s: %s: %s %ju bytes transferred"
 msgstr "%s: %s: %s %lu байт дамжуулагдлаа"
+
+msgid "Starting linear transfer..."
+msgstr "Шугман дамжуулалт эхлэж байна..."
 
 msgid "Getting file"
 msgstr "Файл хүлээн авч байна"
@@ -791,10 +806,6 @@ msgstr " массивыг байршуулах санах ой хүрэлцэх�
 msgid "while doing inode scan %d"
 msgstr " %d зангилааг гүйцэтгэж байна "
 
-#, fuzzy
-msgid "Ext2lib error"
-msgstr " Ext2lib алдаа "
-
 #, fuzzy, c-format
 msgid "Cannot open file %s"
 msgstr " %s файлыг нээж чадсангүй "
@@ -837,6 +848,10 @@ msgstr " блокуудаа дахин сонгох хэрэгтэй "
 msgid "Cannot open file \"%s\""
 msgstr " %s файлыг нээж чадсангүй "
 
+#, fuzzy
+msgid "Ext2lib error"
+msgstr " Ext2lib алдаа "
+
 msgid "Cannot parse:"
 msgstr "Анализ хийж чадсангүй:"
 
@@ -852,59 +867,37 @@ msgstr "Нууц үг:"
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
 
+msgid "Screens"
+msgstr ""
+
+#, fuzzy
+msgid "History"
+msgstr "Бүртгэл"
+
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Тийм"
+
+msgid "&No"
+msgstr "&Yгvй"
+
+msgid "Background process:"
+msgstr "Арын процесс:"
+
 msgid "&Cancel"
 msgstr "&Болих"
 
-msgid "&Set"
-msgstr "&Оноох"
+msgid "&OK"
+msgstr "&ОК"
 
-msgid "S&kip"
-msgstr "Алга&сах"
-
-msgid "Set &all"
-msgstr "Бүгдэд о&ноох"
-
-msgid "owner"
-msgstr "эзэмшигч"
-
-msgid "group"
-msgstr "бүлэг"
-
-msgid "other"
-msgstr "бусад"
-
-msgid "On"
-msgstr "Дээр"
-
-msgid "Flag"
-msgstr "Флаг"
-
-msgid "Mode"
-msgstr "Горим"
-
-#, c-format
-msgid "%6d of %d"
-msgstr "%6d ийн %d"
-
-#, fuzzy
-msgid "Chown advanced command"
-msgstr " chown команд "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
-msgstr ""
-" Алдаа chmod \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chown \"%s\"\n"
-"%s"
-msgstr ""
-" Алдаа chown \"%s\" \n"
-" %s "
+msgid "Error"
+msgstr "Алдаа"
 
 msgid "Displays the current version"
 msgstr "Одоогийн хувилбарыг харуулах"
@@ -977,6 +970,7 @@ msgid ""
 "Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1082,508 +1076,6 @@ msgid ""
 msgstr ""
 " Арын процесс нь бидний хянаж чадахаас илүү олон утгыг, \n"
 "  шаардаж байна. \n"
-
-msgid "&Full file list"
-msgstr "&Бүх файлын жагсаалт"
-
-msgid "&Brief file list"
-msgstr "&Файлын багассан жасгаалт"
-
-msgid "&Long file list"
-msgstr "&Файлын урт жагсаалт"
-
-msgid "&User defined:"
-msgstr "&Хэрэглэгч тодорхойлсон"
-
-msgid "Listing mode"
-msgstr "Жасгаалтын горим"
-
-#, fuzzy
-msgid "User &mini status"
-msgstr "Хэрэглэгч &мини-статус"
-
-msgid "&OK"
-msgstr "&ОК"
-
-msgid "&Reverse"
-msgstr "&Эсрэг"
-
-#, fuzzy
-msgid "Case sensi&tive"
-msgstr "Учет ре&гистра"
-
-msgid "Executable &first"
-msgstr ""
-
-msgid "Sort order"
-msgstr "Эрэмбэлэх дараалал"
-
-#, fuzzy
-msgid "Confirmation"
-msgstr " Баталгаажуулалт "
-
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#. 2
-#, fuzzy
-msgid "Confirmation|&History cleanup"
-msgstr " Баталгаажуулалт "
-
-#, fuzzy
-msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "&Хавтасны лавлах  C-\\"
-
-#, fuzzy
-msgid "Confirmation|E&xit"
-msgstr " Баталгаажуулалт "
-
-#, fuzzy
-msgid "Confirmation|&Execute"
-msgstr " Баталгаажуулалт "
-
-#, fuzzy
-msgid "Confirmation|O&verwrite"
-msgstr " Баталгаажуулж &дарж бичих "
-
-#, fuzzy
-msgid "Confirmation|&Delete"
-msgstr " Баталгаажуулалт "
-
-#, fuzzy
-msgid "UTF-8 output"
-msgstr "Гүйцэт 8-бит гаралт"
-
-msgid "Full 8 bits output"
-msgstr "Гүйцэт 8-бит гаралт"
-
-msgid "ISO 8859-1"
-msgstr "ISO 8859-1"
-
-msgid "7 bits"
-msgstr "7 бит"
-
-msgid "F&ull 8 bits input"
-msgstr "Гүйцэт 8-бит &оролт"
-
-#, fuzzy
-msgid "Display bits"
-msgstr " Битүүдийг дүрслэх "
-
-msgid "Other 8 bit"
-msgstr "Бусад 8-бит"
-
-msgid "Input / display codepage:"
-msgstr "Кодлогдсон оролт/гаралт: "
-
-msgid "&Select"
-msgstr "&Сонгох"
-
-#, fuzzy
-msgid "Directory tree"
-msgstr "&Хавтас мод"
-
-#, fuzzy
-msgid "Use passive mode over pro&xy"
-msgstr "&Пассив горим ашиглах"
-
-msgid "Use &passive mode"
-msgstr "&Пассив горим ашиглах"
-
-msgid "&Use ~/.netrc"
-msgstr "~/.netrc &ашиглах"
-
-msgid "&Always use ftp proxy"
-msgstr "&үргэлж FTP-прокси ашиглах"
-
-msgid "sec"
-msgstr "с"
-
-msgid "ftpfs directory cache timeout:"
-msgstr "FTP лавлахын кэш дуусах хугацаа:"
-
-msgid "ftp anonymous password:"
-msgstr "FTP зочины нэвтрэх үг:"
-
-msgid "Timeout for freeing VFSs:"
-msgstr "VFS г чөлөөлөх хугацаа:"
-
-#, fuzzy
-msgid "Virtual File System Setting"
-msgstr " Виртуаль файл системын тохиргоо "
-
-msgid "cd"
-msgstr "шилжилт"
-
-msgid "Quick cd"
-msgstr " Хурдан шилжилт "
-
-msgid "Symbolic link filename:"
-msgstr "Тэмдэгт холбоос файлын нэр:"
-
-msgid "Existing filename (filename symlink will point to):"
-msgstr "үүссэн файлын нэр (холболт нь заагдсан):"
-
-msgid "Symbolic link"
-msgstr " Тэмдэгт холбоос "
-
-#, fuzzy
-msgid "Running"
-msgstr "Ажиллаж байна "
-
-msgid "Stopped"
-msgstr "Зогссон"
-
-msgid "&Stop"
-msgstr "&Зогсоох"
-
-msgid "&Resume"
-msgstr "&Сэргээх"
-
-msgid "&Kill"
-msgstr "&Устгах"
-
-msgid "Background Jobs"
-msgstr " Арын ажилууд "
-
-msgid "Domain:"
-msgstr "Домен:"
-
-msgid "Username:"
-msgstr "Хэрэглэгчийн нэр:"
-
-#, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s ийн Нууц үг"
-
-#, fuzzy
-msgid "Warning: cannot load codepages list"
-msgstr "Хавтас руу шилжиж чадсангүй"
-
-msgid "7-bit ASCII"
-msgstr ""
-
-#, c-format
-msgid "Cannot translate from %s to %s"
-msgstr "%s аас %s руу хөрвүүлж чадсангүй"
-
-msgid "execute/search by others"
-msgstr "бусдаар гүйцэтгэх/хайх"
-
-msgid "write by others"
-msgstr "бусдаар бичүүлэх"
-
-msgid "read by others"
-msgstr "бусдаар уншуулах"
-
-msgid "execute/search by group"
-msgstr "бүлэгчилэн гүйцэтгэх/хайх"
-
-msgid "write by group"
-msgstr "бүлэгчилэн бичүүлэх"
-
-msgid "read by group"
-msgstr "бүлэгчилэн уншуулах"
-
-msgid "execute/search by owner"
-msgstr "эзэмшигчээр гүйцэтгэх/хайх"
-
-msgid "write by owner"
-msgstr "эзэмшигчээр бичүүлэх"
-
-msgid "read by owner"
-msgstr "эзэмшигчээр уншуулах"
-
-msgid "sticky bit"
-msgstr "бэхлэгдсэн бит"
-
-msgid "set group ID on execution"
-msgstr "гүйцэтгэх GID-г оноох"
-
-msgid "set user ID on execution"
-msgstr "гүйцэтгэх UID-г оноох"
-
-msgid "C&lear marked"
-msgstr "Тэмдэглэгдсэнг &устгах"
-
-msgid "S&et marked"
-msgstr "Тэмдэглэгдсэнг &оноох"
-
-msgid "&Marked all"
-msgstr "Бүгдийг &тэмдэглэх"
-
-msgid "Name"
-msgstr "Нэр"
-
-msgid "Permissions (Octal)"
-msgstr "Зөвшөөрөл (наймтын тоолол)"
-
-msgid "Owner name"
-msgstr "Эзэмшигчийн нэр"
-
-msgid "Group name"
-msgstr "Бүлгийн нэр"
-
-msgid "Use SPACE to change"
-msgstr "өөрчилөлт хийхдээ ХООСОН ЗАЙ ашигла"
-
-msgid "an option, ARROW KEYS"
-msgstr "тохиргоонд, СУМТАЙ ТОВЧЛУУР "
-
-msgid "to move between options"
-msgstr "тохиргоо хооронд шилжих"
-
-msgid "and T or INS to mark"
-msgstr "ба T эсвэл INS -р тэмдэглэнэ"
-
-msgid "Chmod command"
-msgstr " Команд chmod "
-
-msgid "File"
-msgstr "Файл"
-
-msgid "Permission"
-msgstr "Зөвшөөрөл"
-
-msgid "Set &users"
-msgstr "&Хэрэглэгчдийг тодорхойлох"
-
-msgid "Set &groups"
-msgstr "&Бүлгүүдийг тодорхойлох"
-
-msgid "Size"
-msgstr "Хэмжээ"
-
-#, fuzzy
-msgid "Chown command"
-msgstr " Команд chown "
-
-msgid "<Unknown user>"
-msgstr "<Тодорхойгүй хэрэглэгч>"
-
-msgid "<Unknown group>"
-msgstr "<Тодорхойгүй бүлэг>"
-
-#, fuzzy
-msgid "User name"
-msgstr " Хэрэглэгчийн нэр "
-
-msgid "Files tagged, want to cd?"
-msgstr "Файлууд тэмдэглэгдсэн байна, шилжих үү?"
-
-msgid "&Yes"
-msgstr "&Тийм"
-
-msgid "&No"
-msgstr "&Yгvй"
-
-msgid "Cannot change directory"
-msgstr "Хавтас руу шилжиж чадсангүй"
-
-#, fuzzy
-msgid "View file"
-msgstr " Файлыг харах "
-
-#, fuzzy
-msgid "Filename:"
-msgstr " Файлын нэр:"
-
-#, fuzzy
-msgid "Filtered view"
-msgstr " Шүүлтүүртэйгээр харах "
-
-#, fuzzy
-msgid "Filter command and arguments:"
-msgstr " Шүүлтүүр команд ба утгууд: "
-
-msgid "Create a new Directory"
-msgstr " Шинэ лавлах үүсгэх "
-
-#, fuzzy
-msgid "Enter directory name:"
-msgstr " Хавтасны нэрийг оруулна уу:"
-
-#, fuzzy
-msgid "Filter"
-msgstr " Шүүлтүүр "
-
-#, fuzzy
-msgid "Set expression for filtering filenames"
-msgstr " Шүүж буй файлын нэрүүдийн илэрхийлэлийг өгнө үү "
-
-msgid "&Using shell patterns"
-msgstr "&Метатэмдэгт shell г хэрэглэх"
-
-#, fuzzy
-msgid "&Case sensitive"
-msgstr "Учет ре&гистра"
-
-#, fuzzy
-msgid "&Files only"
-msgstr "Зөвхөн &хэмжээ"
-
-#, fuzzy
-msgid "Select"
-msgstr "&Сонгох"
-
-#, fuzzy
-msgid "Unselect"
-msgstr " Сонголтыг буцаах "
-
-msgid "Extension file edit"
-msgstr " Засварлагдах файлын өргөтгөл "
-
-#, fuzzy
-msgid "Which extension file you want to edit?"
-msgstr " Ямар өргөтөлтэй файлыг засварлахыг хүсч байна вэ? "
-
-msgid "&User"
-msgstr "&Хэрэглэгч"
-
-msgid "&System Wide"
-msgstr "&Систем"
-
-#, fuzzy
-msgid "Menu edit"
-msgstr " Файл засварлагч Цэс "
-
-#, fuzzy
-msgid "Which menu file do you want to edit?"
-msgstr " Ямар файл цэсийг засварлахыг хүсч байна вэ? "
-
-msgid "&Local"
-msgstr "&Локал"
-
-msgid "Highlighting groups file edit"
-msgstr ""
-
-#, fuzzy
-msgid "Which highlighting file you want to edit?"
-msgstr " Ямар өргөтөлтэй файлыг засварлахыг хүсч байна вэ? "
-
-#, fuzzy
-msgid "Compare directories"
-msgstr " Хавтасуудыг харьцуулах "
-
-#, fuzzy
-msgid "Select compare method:"
-msgstr " Харьцуулах хэлбэрийг сонгох: "
-
-msgid "&Quick"
-msgstr "&Хурдан"
-
-msgid "&Size only"
-msgstr "Зөвхөн &хэмжээ"
-
-msgid "&Thorough"
-msgstr "&Хагас байтын"
-
-#, fuzzy
-msgid ""
-"Both panels should be in the listing mode\n"
-"to use this command"
-msgstr "Энэ коммандыг 2 панелийг жагсаалтын горимд оруулахад хэрэглэнэ "
-
-#, fuzzy
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-" Энэ бол xterm эсвэл консол ч биш байна; \n"
-"    панелууд салгагдахгүй. "
-
-#, c-format
-msgid "Link %s to:"
-msgstr "%s руу холбох:"
-
-#, fuzzy
-msgid "Link"
-msgstr "&Холбоосууд"
-
-#, fuzzy, c-format
-msgid "link: %s"
-msgstr " холбоос: %s "
-
-#, fuzzy, c-format
-msgid "symlink: %s"
-msgstr " тэмдэгт холбоос: %s "
-
-#, fuzzy, c-format
-msgid "Symlink `%s' points to:"
-msgstr " Тэмдэгт холбоос %s ийг руу заах: "
-
-#, fuzzy
-msgid "Edit symlink"
-msgstr " Тэмдэгт холбоосийг засах "
-
-#, fuzzy, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr " %s: %s Тэмдэгт холбоосыг устгаж чадсангүй "
-
-#, fuzzy, c-format
-msgid "edit symlink: %s"
-msgstr " Тэмдэгт холбоос: %s ийг засварлах "
-
-#, c-format
-msgid "`%s' is not a symbolic link"
-msgstr "%s нь тэмдэгт холбоос биш байна"
-
-#, fuzzy, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr " %s руу шилжиж чадсангүй"
-
-#, fuzzy
-msgid "Enter machine name (F1 for details):"
-msgstr " Машины нэрээ оруул (дэлгэрэнгүйгээр үзвэл F1): "
-
-#, fuzzy
-msgid "FTP to machine"
-msgstr " FTP-ээр машин руу холбогдох "
-
-#, fuzzy
-msgid "Shell link to machine"
-msgstr " Shell-ээр машин руу холбогдох "
-
-#, fuzzy
-msgid "SMB link to machine"
-msgstr " SMB-аар машин руу холбогдох"
-
-#, fuzzy
-msgid "Undelete files on an ext2 file system"
-msgstr " ext2 файл систем дэхь сэргээгдсэн файлууд "
-
-#, fuzzy
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-" Сэргээх төхөөрөмжийг (/dev/ биш), өгнө үү\n"
-" (дэлгэрэнгүйгээр F1)"
-
-#, fuzzy
-msgid "Setup"
-msgstr " Тохируулга "
-
-#, fuzzy, c-format
-msgid "Setup saved to ~/%s"
-msgstr " Хадгалах утгууд ~/"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-" \"%s\" руу шилжиж чадсангүй \n"
-" %s "
-
-#, fuzzy
-msgid "Cannot execute commands on non-local filesystems"
-msgstr " Локал бус файл систем дэх командуудыг гүйцэтгэж чадсангүй"
-
-#, fuzzy
-msgid "The shell is already running a command"
-msgstr " shell коммандыг аль хэдийнэ биелүүлж байна "
-
-msgid "Screens"
-msgstr ""
 
 msgid "&Dismiss"
 msgstr "&Хаах"
@@ -1733,9 +1225,6 @@ msgstr ""
 msgid "Two files are needed to compare"
 msgstr ""
 
-msgid "Cannot read directory contents"
-msgstr "Хавтасны доторхыг уншиж чадсангүй"
-
 #, fuzzy
 msgid "Choose syntax highlighting"
 msgstr "&өгүүлбэрзүйг өнгөөр тодотгох"
@@ -1770,20 +1259,9 @@ msgstr ""
 msgid "Cannot open %s for reading"
 msgstr " Урсгалыг уншихаар нээж чадсангүй: "
 
-msgid "Error"
-msgstr "Алдаа"
-
 #, fuzzy, c-format
 msgid "Error reading %s"
 msgstr "Скрипт уншихад алдаа гарлаа:"
-
-#, fuzzy, c-format
-msgid "Error reading from pipe: %s"
-msgstr " Урсгалаас уншихад алдаа гарав: "
-
-#, fuzzy, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr " Урсгалыг уншихаар нээж чадсангүй: "
 
 #, fuzzy, c-format
 msgid "Cannot get size/permissions for %s"
@@ -1799,6 +1277,14 @@ msgstr " Маш том файл: "
 
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
+
+#, fuzzy, c-format
+msgid "Error reading from pipe: %s"
+msgstr " Урсгалаас уншихад алдаа гарав: "
+
+#, fuzzy, c-format
+msgid "Cannot open pipe for reading: %s"
+msgstr " Урсгалыг уншихаар нээж чадсангүй: "
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1817,24 +1303,6 @@ msgstr " Бичих урсгалыг нээж чадсангүй: "
 #, fuzzy, c-format
 msgid "Cannot open file for writing: %s"
 msgstr " Бичих урсгалыг нээж чадсангүй: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Хурдан хадгалалт"
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Аваарын хадгалалт"
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-#, fuzzy
-msgid "Edit Save Mode"
-msgstr " Хадгалах гормыг засварлах "
 
 msgid "The file you are saving is not finished with a newline"
 msgstr ""
@@ -1867,22 +1335,6 @@ msgid "Save As"
 msgstr " Гэж хадгалах "
 
 #, fuzzy
-msgid "A file already exists with this name"
-msgstr " Файл аль хэдийнэ ийм нэрээр үүссэн байна. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Дарж бичих"
-
-#, fuzzy
-msgid "Save as"
-msgstr "&Тохиргоо хадгалах"
-
-#, fuzzy
-msgid "Cannot save file"
-msgstr " Файлыг хадгалж чадсангүй "
-
-#, fuzzy
 msgid "Delete macro"
 msgstr " Макрог устгах "
 
@@ -1897,6 +1349,68 @@ msgstr " Макро файлыг нээж чадсангүй"
 #, fuzzy
 msgid "Cannot overwrite macro file"
 msgstr " Макро файлыг дарж бичиж чадсангүй"
+
+msgid "Syntax file edit"
+msgstr "Файлын синтаксийг засварлах"
+
+#, fuzzy
+msgid "Which syntax file you want to edit?"
+msgstr " Ямар файл синтаксийг засварлахыг хүсч байна вэ? "
+
+msgid "&User"
+msgstr "&Хэрэглэгч"
+
+msgid "&System Wide"
+msgstr "&Систем"
+
+#, fuzzy
+msgid "Menu edit"
+msgstr " Файл засварлагч Цэс "
+
+#, fuzzy
+msgid "Which menu file do you want to edit?"
+msgstr " Ямар файл цэсийг засварлахыг хүсч байна вэ? "
+
+msgid "&Local"
+msgstr "&Локал"
+
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
+msgstr " Блок том байна, та саяын йлдэлийг буцаахад биелэхгүй байж болох юм. "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Хурдан хадгалалт"
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Аваарын хадгалалт"
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+#, fuzzy
+msgid "Edit Save Mode"
+msgstr " Хадгалах гормыг засварлах "
+
+#, fuzzy
+msgid "A file already exists with this name"
+msgstr " Файл аль хэдийнэ ийм нэрээр үүссэн байна. "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Дарж бичих"
+
+#, fuzzy
+msgid "Save as"
+msgstr "&Тохиргоо хадгалах"
+
+#, fuzzy
+msgid "Cannot save file"
+msgstr " Файлыг хадгалж чадсангүй "
 
 #, fuzzy
 msgid "Save macro"
@@ -1933,20 +1447,9 @@ msgstr ""
 " Одоогийн энэ текст нь файлд хадгалагдалгүйгээр өөрчлөгдсөн байна. \n"
 " үүнийг үргэлжлүүлвэл өөрчлөлт нь алдагдахад хүргэнэ. "
 
-msgid "Syntax file edit"
-msgstr "Файлын синтаксийг засварлах"
-
-#, fuzzy
-msgid "Which syntax file you want to edit?"
-msgstr " Ямар файл синтаксийг засварлахыг хүсч байна вэ? "
-
 #, fuzzy
 msgid "Load"
 msgstr " Ачаалах "
-
-#, fuzzy
-msgid "Block is large, you may not be able to undo this action"
-msgstr " Блок том байна, та саяын йлдэлийг буцаахад биелэхгүй байж болох юм. "
 
 #, fuzzy
 msgid "Replace"
@@ -2485,6 +1988,10 @@ msgstr ""
 " Учир нь таны ажиллаж байгаа лавлах устгагдсан эсвэл \n"
 " \"su\" командаар өөртөө нэмэлт зөвшөөрөл өгсөн байна? "
 
+#, fuzzy
+msgid "The shell is already running a command"
+msgstr " shell коммандыг аль хэдийнэ биелүүлж байна "
+
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr " \"exit\" гэж бичиж Midnight Commander руу буцна"
@@ -2492,6 +1999,518 @@ msgstr " \"exit\" гэж бичиж Midnight Commander руу буцна"
 #, fuzzy, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr " %s ийн локаль хуулбарыг авч чадсангүй "
+
+msgid "&Set"
+msgstr "&Оноох"
+
+msgid "S&kip"
+msgstr "Алга&сах"
+
+msgid "Set &all"
+msgstr "Бүгдэд о&ноох"
+
+msgid "owner"
+msgstr "эзэмшигч"
+
+msgid "group"
+msgstr "бүлэг"
+
+msgid "other"
+msgstr "бусад"
+
+msgid "On"
+msgstr "Дээр"
+
+msgid "Flag"
+msgstr "Флаг"
+
+msgid "Mode"
+msgstr "Горим"
+
+#, c-format
+msgid "%6d of %d"
+msgstr "%6d ийн %d"
+
+#, fuzzy
+msgid "Chown advanced command"
+msgstr " chown команд "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod \"%s\"\n"
+"%s"
+msgstr ""
+" Алдаа chmod \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown \"%s\"\n"
+"%s"
+msgstr ""
+" Алдаа chown \"%s\" \n"
+" %s "
+
+msgid "&Stop"
+msgstr "&Зогсоох"
+
+msgid "&Resume"
+msgstr "&Сэргээх"
+
+msgid "&Kill"
+msgstr "&Устгах"
+
+msgid "&Full file list"
+msgstr "&Бүх файлын жагсаалт"
+
+msgid "&Brief file list"
+msgstr "&Файлын багассан жасгаалт"
+
+msgid "&Long file list"
+msgstr "&Файлын урт жагсаалт"
+
+msgid "&User defined:"
+msgstr "&Хэрэглэгч тодорхойлсон"
+
+msgid "Listing mode"
+msgstr "Жасгаалтын горим"
+
+#, fuzzy
+msgid "User &mini status"
+msgstr "Хэрэглэгч &мини-статус"
+
+msgid "Other 8 bit"
+msgstr "Бусад 8-бит"
+
+#, fuzzy
+msgid "Display bits"
+msgstr " Битүүдийг дүрслэх "
+
+msgid "Input / display codepage:"
+msgstr "Кодлогдсон оролт/гаралт: "
+
+msgid "F&ull 8 bits input"
+msgstr "Гүйцэт 8-бит &оролт"
+
+msgid "&Select"
+msgstr "&Сонгох"
+
+#, fuzzy
+msgid "Running"
+msgstr "Ажиллаж байна "
+
+msgid "Stopped"
+msgstr "Зогссон"
+
+msgid "&Reverse"
+msgstr "&Эсрэг"
+
+#, fuzzy
+msgid "Case sensi&tive"
+msgstr "Учет ре&гистра"
+
+msgid "Executable &first"
+msgstr ""
+
+msgid "Sort order"
+msgstr "Эрэмбэлэх дараалал"
+
+#, fuzzy
+msgid "Confirmation"
+msgstr " Баталгаажуулалт "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Баталгаажуулалт "
+
+#, fuzzy
+msgid "Confirmation|Di&rectory hotlist delete"
+msgstr "&Хавтасны лавлах  C-\\"
+
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Баталгаажуулалт "
+
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Баталгаажуулалт "
+
+#, fuzzy
+msgid "Confirmation|O&verwrite"
+msgstr " Баталгаажуулж &дарж бичих "
+
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Баталгаажуулалт "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Гүйцэт 8-бит гаралт"
+
+msgid "Full 8 bits output"
+msgstr "Гүйцэт 8-бит гаралт"
+
+msgid "ISO 8859-1"
+msgstr "ISO 8859-1"
+
+msgid "7 bits"
+msgstr "7 бит"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Хавтас мод"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "&Пассив горим ашиглах"
+
+msgid "Use &passive mode"
+msgstr "&Пассив горим ашиглах"
+
+msgid "&Use ~/.netrc"
+msgstr "~/.netrc &ашиглах"
+
+msgid "&Always use ftp proxy"
+msgstr "&үргэлж FTP-прокси ашиглах"
+
+msgid "sec"
+msgstr "с"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "FTP лавлахын кэш дуусах хугацаа:"
+
+msgid "ftp anonymous password:"
+msgstr "FTP зочины нэвтрэх үг:"
+
+msgid "Timeout for freeing VFSs:"
+msgstr "VFS г чөлөөлөх хугацаа:"
+
+#, fuzzy
+msgid "Virtual File System Setting"
+msgstr " Виртуаль файл системын тохиргоо "
+
+msgid "cd"
+msgstr "шилжилт"
+
+msgid "Quick cd"
+msgstr " Хурдан шилжилт "
+
+msgid "Symbolic link filename:"
+msgstr "Тэмдэгт холбоос файлын нэр:"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr "үүссэн файлын нэр (холболт нь заагдсан):"
+
+msgid "Symbolic link"
+msgstr " Тэмдэгт холбоос "
+
+msgid "Background Jobs"
+msgstr " Арын ажилууд "
+
+msgid "Domain:"
+msgstr "Домен:"
+
+msgid "Username:"
+msgstr "Хэрэглэгчийн нэр:"
+
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "\\\\%s\\%s ийн Нууц үг"
+
+msgid "execute/search by others"
+msgstr "бусдаар гүйцэтгэх/хайх"
+
+msgid "write by others"
+msgstr "бусдаар бичүүлэх"
+
+msgid "read by others"
+msgstr "бусдаар уншуулах"
+
+msgid "execute/search by group"
+msgstr "бүлэгчилэн гүйцэтгэх/хайх"
+
+msgid "write by group"
+msgstr "бүлэгчилэн бичүүлэх"
+
+msgid "read by group"
+msgstr "бүлэгчилэн уншуулах"
+
+msgid "execute/search by owner"
+msgstr "эзэмшигчээр гүйцэтгэх/хайх"
+
+msgid "write by owner"
+msgstr "эзэмшигчээр бичүүлэх"
+
+msgid "read by owner"
+msgstr "эзэмшигчээр уншуулах"
+
+msgid "sticky bit"
+msgstr "бэхлэгдсэн бит"
+
+msgid "set group ID on execution"
+msgstr "гүйцэтгэх GID-г оноох"
+
+msgid "set user ID on execution"
+msgstr "гүйцэтгэх UID-г оноох"
+
+msgid "C&lear marked"
+msgstr "Тэмдэглэгдсэнг &устгах"
+
+msgid "S&et marked"
+msgstr "Тэмдэглэгдсэнг &оноох"
+
+msgid "&Marked all"
+msgstr "Бүгдийг &тэмдэглэх"
+
+msgid "Name"
+msgstr "Нэр"
+
+msgid "Permissions (Octal)"
+msgstr "Зөвшөөрөл (наймтын тоолол)"
+
+msgid "Owner name"
+msgstr "Эзэмшигчийн нэр"
+
+msgid "Group name"
+msgstr "Бүлгийн нэр"
+
+msgid "Use SPACE to change"
+msgstr "өөрчилөлт хийхдээ ХООСОН ЗАЙ ашигла"
+
+msgid "an option, ARROW KEYS"
+msgstr "тохиргоонд, СУМТАЙ ТОВЧЛУУР "
+
+msgid "to move between options"
+msgstr "тохиргоо хооронд шилжих"
+
+msgid "and T or INS to mark"
+msgstr "ба T эсвэл INS -р тэмдэглэнэ"
+
+msgid "Chmod command"
+msgstr " Команд chmod "
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Permission"
+msgstr "Зөвшөөрөл"
+
+msgid "Set &users"
+msgstr "&Хэрэглэгчдийг тодорхойлох"
+
+msgid "Set &groups"
+msgstr "&Бүлгүүдийг тодорхойлох"
+
+msgid "Size"
+msgstr "Хэмжээ"
+
+#, fuzzy
+msgid "Chown command"
+msgstr " Команд chown "
+
+msgid "<Unknown user>"
+msgstr "<Тодорхойгүй хэрэглэгч>"
+
+msgid "<Unknown group>"
+msgstr "<Тодорхойгүй бүлэг>"
+
+#, fuzzy
+msgid "User name"
+msgstr " Хэрэглэгчийн нэр "
+
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
+msgstr " Машины нэрээ оруул (дэлгэрэнгүйгээр үзвэл F1): "
+
+msgid "Files tagged, want to cd?"
+msgstr "Файлууд тэмдэглэгдсэн байна, шилжих үү?"
+
+msgid "Cannot change directory"
+msgstr "Хавтас руу шилжиж чадсангүй"
+
+#, fuzzy
+msgid "Filter"
+msgstr " Шүүлтүүр "
+
+#, fuzzy
+msgid "Set expression for filtering filenames"
+msgstr " Шүүж буй файлын нэрүүдийн илэрхийлэлийг өгнө үү "
+
+msgid "&Using shell patterns"
+msgstr "&Метатэмдэгт shell г хэрэглэх"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "Учет ре&гистра"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Зөвхөн &хэмжээ"
+
+#, c-format
+msgid "Link %s to:"
+msgstr "%s руу холбох:"
+
+#, fuzzy
+msgid "Link"
+msgstr "&Холбоосууд"
+
+#, fuzzy, c-format
+msgid "link: %s"
+msgstr " холбоос: %s "
+
+#, fuzzy, c-format
+msgid "symlink: %s"
+msgstr " тэмдэгт холбоос: %s "
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " %s руу шилжиж чадсангүй"
+
+#, fuzzy
+msgid "View file"
+msgstr " Файлыг харах "
+
+#, fuzzy
+msgid "Filename:"
+msgstr " Файлын нэр:"
+
+#, fuzzy
+msgid "Filtered view"
+msgstr " Шүүлтүүртэйгээр харах "
+
+#, fuzzy
+msgid "Filter command and arguments:"
+msgstr " Шүүлтүүр команд ба утгууд: "
+
+msgid "Create a new Directory"
+msgstr " Шинэ лавлах үүсгэх "
+
+#, fuzzy
+msgid "Enter directory name:"
+msgstr " Хавтасны нэрийг оруулна уу:"
+
+#, fuzzy
+msgid "Select"
+msgstr "&Сонгох"
+
+#, fuzzy
+msgid "Unselect"
+msgstr " Сонголтыг буцаах "
+
+msgid "Extension file edit"
+msgstr " Засварлагдах файлын өргөтгөл "
+
+#, fuzzy
+msgid "Which extension file you want to edit?"
+msgstr " Ямар өргөтөлтэй файлыг засварлахыг хүсч байна вэ? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid "Which highlighting file you want to edit?"
+msgstr " Ямар өргөтөлтэй файлыг засварлахыг хүсч байна вэ? "
+
+#, fuzzy
+msgid "Compare directories"
+msgstr " Хавтасуудыг харьцуулах "
+
+#, fuzzy
+msgid "Select compare method:"
+msgstr " Харьцуулах хэлбэрийг сонгох: "
+
+msgid "&Quick"
+msgstr "&Хурдан"
+
+msgid "&Size only"
+msgstr "Зөвхөн &хэмжээ"
+
+msgid "&Thorough"
+msgstr "&Хагас байтын"
+
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
+msgstr "Энэ коммандыг 2 панелийг жагсаалтын горимд оруулахад хэрэглэнэ "
+
+#, fuzzy
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+" Энэ бол xterm эсвэл консол ч биш байна; \n"
+"    панелууд салгагдахгүй. "
+
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
+msgstr " Тэмдэгт холбоос %s ийг руу заах: "
+
+#, fuzzy
+msgid "Edit symlink"
+msgstr " Тэмдэгт холбоосийг засах "
+
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
+msgstr " %s: %s Тэмдэгт холбоосыг устгаж чадсангүй "
+
+#, fuzzy, c-format
+msgid "edit symlink: %s"
+msgstr " Тэмдэгт холбоос: %s ийг засварлах "
+
+#, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "%s нь тэмдэгт холбоос биш байна"
+
+#, fuzzy
+msgid "FTP to machine"
+msgstr " FTP-ээр машин руу холбогдох "
+
+#, fuzzy
+msgid "Shell link to machine"
+msgstr " Shell-ээр машин руу холбогдох "
+
+#, fuzzy
+msgid "SMB link to machine"
+msgstr " SMB-аар машин руу холбогдох"
+
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
+msgstr " ext2 файл систем дэхь сэргээгдсэн файлууд "
+
+#, fuzzy
+msgid ""
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
+msgstr ""
+" Сэргээх төхөөрөмжийг (/dev/ биш), өгнө үү\n"
+" (дэлгэрэнгүйгээр F1)"
+
+#, fuzzy
+msgid "Setup"
+msgstr " Тохируулга "
+
+#, fuzzy, c-format
+msgid "Setup saved to ~/%s"
+msgstr " Хадгалах утгууд ~/"
+
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
+msgstr " Локал бус файл систем дэх командуудыг гүйцэтгэж чадсангүй"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+" \"%s\" руу шилжиж чадсангүй \n"
+" %s "
+
+msgid "Cannot read directory contents"
+msgstr "Хавтасны доторхыг уншиж чадсангүй"
 
 #, fuzzy, c-format
 msgid ""
@@ -2544,6 +2563,47 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
+msgid "FileOperation|Copy"
+msgstr ""
+
+msgid "FileOperation|Move"
+msgstr ""
+
+msgid "FileOperation|Delete"
+msgstr ""
+
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "%o %f \"%s\"%m"
+
+# msgfmt warnings/errors must be ignored. mc parse this pattern itself.
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr "%o энэ %f (%d шт.)%m"
+
+msgid "files"
+msgstr "файлууд"
+
+msgid "directory"
+msgstr "лавлах"
+
+msgid "directories"
+msgstr "лавлахууд"
+
+msgid "files/directories"
+msgstr "файлууд/лавлахууд"
+
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
+msgid " with source mask:"
+msgstr " эх маскийн хамт:"
+
+msgid "to:"
+msgstr "руу:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot make the hardlink"
 msgstr " Хард холбоосыг үүсгэж чадсангүй "
@@ -2579,6 +2639,88 @@ msgstr "&Таслах"
 
 #, fuzzy, c-format
 msgid ""
+"Cannot stat file \"%s\"\n"
+"%s"
+msgstr ""
+" Файлын stat ийг авч чадсангүй\"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr " `%s' ба `%s' ууд нь адил файл байна "
+
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr "\"%s\" Хавтасыг дарж бичиж чадсангүй %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+" \"%s\" файлыг \"%s\" руу зөөж чадсангүй \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+" \"%s\" файлыг устгаж чадсангүй \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot delete file \"%s\"\n"
+"%s"
+msgstr ""
+" \"%s\" файлыг устгаж чадахгүй \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+"Cannot remove directory \"%s\"\n"
+"%s"
+msgstr ""
+" \"%s\" лавлахыг устгаж чадахгүй \n"
+" %s "
+
+msgid "&Retry"
+msgstr "&Дахих"
+
+#, fuzzy
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"   Хавтас хоосон биш байна.    \n"
+"   Рекурсивээр устгах уу? "
+
+#, fuzzy
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"   Арын процесс: Хавтас хоосон биш байна \n"
+"   Рекурсивээр устгах уу? "
+
+#, fuzzy
+msgid "Delete:"
+msgstr "Устгах"
+
+msgid "Non&e"
+msgstr "&үгүй"
+
+#, fuzzy, c-format
+msgid ""
 "Cannot overwrite directory\"%s\"\n"
 "%s"
 msgstr ""
@@ -2592,14 +2734,6 @@ msgid ""
 msgstr ""
 " Эх файлыг байрлуулж чадсангүй \"%s\" \n"
 " %s "
-
-#, fuzzy, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr " `%s' ба `%s' ууд нь адил файл байна "
 
 #, fuzzy, c-format
 msgid ""
@@ -2752,34 +2886,6 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
-"%s"
-msgstr ""
-" Файлын stat ийг авч чадсангүй\"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr "\"%s\" Хавтасыг дарж бичиж чадсангүй %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-" \"%s\" файлыг \"%s\" руу зөөж чадсангүй \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-" \"%s\" файлыг устгаж чадсангүй \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
@@ -2808,66 +2914,9 @@ msgstr ""
 " \"%s\" лавлахыг \"%s\" руу зөөж чадсангүй \n"
 " %s "
 
-#, fuzzy, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-" \"%s\" файлыг устгаж чадахгүй \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr ""
-" \"%s\" лавлахыг устгаж чадахгүй \n"
-" %s "
-
 #, fuzzy
 msgid "Directory scanning"
 msgstr " Лавлахын зам"
-
-msgid "FileOperation|Copy"
-msgstr ""
-
-msgid "FileOperation|Move"
-msgstr ""
-
-msgid "FileOperation|Delete"
-msgstr ""
-
-#, no-c-format
-msgid "%o %f \"%s\"%m"
-msgstr "%o %f \"%s\"%m"
-
-# msgfmt warnings/errors must be ignored. mc parse this pattern itself.
-#, no-c-format
-msgid "%o %d %f%m"
-msgstr "%o энэ %f (%d шт.)%m"
-
-msgid "files"
-msgstr "файлууд"
-
-msgid "directory"
-msgstr "лавлах"
-
-msgid "directories"
-msgstr "лавлахууд"
-
-msgid "files/directories"
-msgstr "файлууд/лавлахууд"
-
-#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-msgid " with source mask:"
-msgstr " эх маскийн хамт:"
-
-msgid "to:"
-msgstr "руу:"
-
-#, c-format
-msgid "%s?"
-msgstr ""
 
 #, fuzzy
 msgid "Cannot operate on \"..\"!"
@@ -2876,36 +2925,6 @@ msgstr " \"..\" г гүйцэтгэж чадсангүй! "
 #, fuzzy
 msgid "Sorry, I could not put the job in background"
 msgstr " Уучлаарай, арын фонд ажилыг оруулж чадсангүй "
-
-msgid "&Retry"
-msgstr "&Дахих"
-
-#, fuzzy
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"   Хавтас хоосон биш байна.    \n"
-"   Рекурсивээр устгах уу? "
-
-#, fuzzy
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"   Арын процесс: Хавтас хоосон биш байна \n"
-"   Рекурсивээр устгах уу? "
-
-#, fuzzy
-msgid "Delete:"
-msgstr "Устгах"
-
-msgid "Non&e"
-msgstr "&үгүй"
 
 #, fuzzy, c-format
 msgid "%d:%02d.%02d"
@@ -2926,27 +2945,6 @@ msgstr "%.2f кб/с"
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld б/с"
-
-#, c-format
-msgid "Files processed: %llu of %llu"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Time: %s  %s (%s)"
-msgstr "Хэмжээ:    %s"
-
-#, c-format
-msgid "Total: %s of %s"
-msgstr ""
-
-msgid "Source"
-msgstr "Эх"
-
-msgid "Target"
-msgstr "Бай"
-
-msgid "Deleting"
-msgstr "Устгаж байна"
 
 #, fuzzy
 msgid "Target file already exists!"
@@ -2993,6 +2991,27 @@ msgstr " Файл үүссэн байна "
 #, fuzzy
 msgid "Background process: File exists"
 msgstr " Арын процесс: Файл үүссэн байна "
+
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Хэмжээ:    %s"
+
+#, c-format
+msgid "Total: %s of %s"
+msgstr ""
+
+msgid "Source"
+msgstr "Эх"
+
+msgid "Target"
+msgstr "Бай"
+
+msgid "Deleting"
+msgstr "Устгаж байна"
 
 msgid "&Background"
 msgstr " &Ар тал"
@@ -3061,6 +3080,10 @@ msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
+msgid "Sea&rch for content"
+msgstr "Хайх"
+
+#, fuzzy
 msgid "Case sens&itive"
 msgstr "Учет ре&гистра"
 
@@ -3071,7 +3094,7 @@ msgstr "&Тогтмол илэрхийлэл"
 msgid "Fir&st hit"
 msgstr ""
 
-msgid "All cha&rsets"
+msgid "A&ll charsets"
 msgstr ""
 
 msgid "&Tree"
@@ -3104,27 +3127,6 @@ msgstr "Хайж байна %s"
 
 msgid "Searching"
 msgstr "Хайж байна"
-
-#, fuzzy
-msgid "Help file format error\n"
-msgstr " Тусламжын файлын бүтцэд алдаа гарлаа\n"
-
-#, fuzzy
-msgid "Internal bug: Double start of link area"
-msgstr " Дотоод алдаа: Холбоос хэсгийн хос эхлэл "
-
-#, fuzzy, c-format
-msgid "Cannot find node %s in help file"
-msgstr " Тусламжын файл дахь %s мөчрийг олсонгүй "
-
-msgid "Help"
-msgstr "Тусламж"
-
-msgid "ButtonBar|Index"
-msgstr ""
-
-msgid "ButtonBar|Prev"
-msgstr ""
 
 msgid "&Move"
 msgstr "&Зөөх"
@@ -3201,14 +3203,6 @@ msgstr " Шинэ бүлгүүдийн лавлах"
 msgid "Name of new group:"
 msgstr " Шинэ бүлгийн нэр"
 
-#, c-format
-msgid "Label for \"%s\":"
-msgstr " \"%s\" ийн тайлбар: "
-
-#, fuzzy
-msgid "Add to hotlist"
-msgstr " Лавлахын лавлах руу нэмэх "
-
 #, fuzzy
 msgid "Remove:"
 msgstr " Устгах: "
@@ -3238,6 +3232,14 @@ msgid ""
 "MC was unable to write ~/%s file,\n"
 "your old hotlist entries were not deleted"
 msgstr "Таны хуучин лавлахын жигсаалт файл устгагдаагүй байна "
+
+#, c-format
+msgid "Label for \"%s\":"
+msgstr " \"%s\" ийн тайлбар: "
+
+#, fuzzy
+msgid "Add to hotlist"
+msgstr " Лавлахын лавлах руу нэмэх "
 
 #, fuzzy
 msgid "Information"
@@ -3375,87 +3377,6 @@ msgstr "гаралтын мөрүүд"
 
 msgid "Layout"
 msgstr "Гадаад төрх"
-
-msgid "Learn keys"
-msgstr "Товчлуурыг судлах"
-
-#, fuzzy
-msgid "Teach me a key"
-msgstr " Надад товчлуур заагаач"
-
-#, c-format
-msgid ""
-"Please press the %s\n"
-"and then wait until this message disappears.\n"
-"\n"
-"Then, press it again to see if OK appears\n"
-"next to its button.\n"
-"\n"
-"If you want to escape, press a single Escape key\n"
-"and wait as well."
-msgstr ""
-"Та товчлуураа дараад %s\n"
-"энэ мэдээллийг гарч иртэл түр хүлээнэ үү.\n"
-"\n"
-"Дараа нь ОК гэж гарч иртэл ,\n"
-"дахин дараад түр хүлээнэ үү.\n"
-"\n"
-"Хэрвээ та сургалтаа зогсоохыг хүсвэл\n"
-" Esc товчоо дараад түр хүлээнэ үү."
-
-#, fuzzy
-msgid "Cannot accept this key"
-msgstr " Уг товчруурыг хүлээн авч чадахгүй "
-
-#, fuzzy, c-format
-msgid "You have entered \"%s\""
-msgstr " Таны оруулсан нь \"%s\""
-
-#. TRANSLATORS: This label appears near learned keys.  Keep it short.
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"It seems that all your keys already\n"
-"work fine. That's great."
-msgstr ""
-"Таны бүх товчруурууд хэвийн ажиллаж байна.\n"
-"Баяр хүргэе!"
-
-msgid "&Discard"
-msgstr "&Хаах"
-
-msgid ""
-"Great! You have a complete terminal database!\n"
-"All your keys work well."
-msgstr ""
-"Сайн! Та бүх баазыг дуусгалаа.\n"
-"Таны бүх товчлуурууд дажгүй ажиллаж байна."
-
-msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Бүх товчлууруудаа дарж үзнэ үү. Дараа нь та аль товчлуур"
-
-msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-" \"OK\" гэж тэмдэглээдээгүй байгааг шалгаарай. Хоосон зай дарахыг хүлээж "
-"байна"
-
-msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "товчлуур эсвэл хулганаар дарж үүнийг тодорхойлно. Табын хамт зөөнө."
-
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-#, fuzzy
-msgid "The Midnight Commander"
-msgstr " Midnight Commander "
-
-#, fuzzy
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr " Та Midnight Commander аас гарах гэж байна уу? "
 
 #, fuzzy
 msgid "File listin&g"
@@ -3654,6 +3575,27 @@ msgid "&Virtual FS..."
 msgstr "Виртуаль &FS..."
 
 #, fuzzy
+msgid "Panels:"
+msgstr " Панелийг хуваах "
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM хувьсагч утга аваагүй байна!\n"
+
+#, c-format
+msgid "You have %zd opened screen. Quit anyway?"
+msgid_plural "You have %zd opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+msgid "The Midnight Commander"
+msgstr " Midnight Commander "
+
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr " Та Midnight Commander аас гарах гэж байна уу? "
+
+#, fuzzy
 msgid "&Above"
 msgstr " &Above "
 
@@ -3669,10 +3611,6 @@ msgstr " &Доод "
 msgid "&Right"
 msgstr " &Баруун "
 
-#, fuzzy
-msgid "Panels:"
-msgstr " Панелийг хуваах "
-
 msgid "ButtonBar|Menu"
 msgstr ""
 
@@ -3684,13 +3622,6 @@ msgstr ""
 
 msgid "ButtonBar|Mkdir"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM хувьсагч утга аваагүй байна!\n"
-
-#, fuzzy, c-format
-msgid "Cannot create %s directory"
-msgstr "Хавтас руу шилжиж чадсангүй"
 
 msgid "&Never"
 msgstr "&Хэзээч"
@@ -3866,57 +3797,6 @@ msgstr ""
 " тохиргоо хэрэглэж болсонгүй. Энэ тохиолдолд та лавлахыг гар аргаар ачаалах "
 "хэрэгтэй.  Дэлгэрэнгүй мэдээллийг лавлахаас (man) харна уу."
 
-msgid "&Add new"
-msgstr "&Шинийг нэмэх"
-
-msgid "External panelize"
-msgstr "Гадаад панелиз хийх"
-
-msgid "Command"
-msgstr "Команд"
-
-msgid "Other command"
-msgstr "Бусад команд"
-
-#, fuzzy
-msgid "Add to external panelize"
-msgstr " Гадаад панелиз руу нэмэх"
-
-#, fuzzy
-msgid "Enter command label:"
-msgstr " Командын тайлбарыг оруул: "
-
-#, fuzzy
-msgid "Cannot run external panelize in a non-local directory"
-msgstr " Локал биш лавлах дахь гадаад панелизыг ажиллуулж чадсангүй"
-
-msgid "Find rejects after patching"
-msgstr "Рatch-ээр гүйцэтгэгдээгүй шалтгааныг олох"
-
-msgid "Find *.orig after patching"
-msgstr "Patch командын дараа эх хувийг (*.orig) хайх"
-
-msgid "Find SUID and SGID programs"
-msgstr " SUID/SGID программуудыг хайх"
-
-msgid "Cannot invoke command."
-msgstr "Командыг биелүүлэх боломжгүй."
-
-msgid "Pipe close failed"
-msgstr "Урсгалыг хаахад алдаа гарлаа"
-
-msgid "[dev]"
-msgstr ""
-
-msgid "UP--DIR"
-msgstr "-ДЭЭШ-"
-
-msgid "SYMLINK"
-msgstr "ХОЛБООС"
-
-msgid "SUB-DIR"
-msgstr "ДЭД-ХАВТ"
-
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
@@ -4015,6 +3895,18 @@ msgstr "Эзэмшигч"
 msgid "Group"
 msgstr "Бүлэг"
 
+msgid "[dev]"
+msgstr ""
+
+msgid "UP--DIR"
+msgstr "-ДЭЭШ-"
+
+msgid "SYMLINK"
+msgstr "ХОЛБООС"
+
+msgid "SUB-DIR"
+msgstr "ДЭД-ХАВТ"
+
 msgid "<readlink failed>"
 msgstr "<унших холбоох алдаатай>"
 
@@ -4034,97 +3926,51 @@ msgstr[1] "%2$d файлд %1$s байт"
 msgid "Unknown tag on display format:"
 msgstr "Дүрслэх хэлбэрт тодорхойгүй tag байна: "
 
-msgid "User supplied format looks invalid, reverting to default."
-msgstr "Хэрэглэж байгаа формат буруу байна, тиймээс стандарт руугаа буцлаа."
-
 #, fuzzy
 msgid "Do you really want to execute?"
 msgstr " Та үүнийг ажиллуулахдаа итгэлтэй байна уу? "
 
-#, fuzzy
-msgid "Choose codepage"
-msgstr " Оролтын кодлогч хуудасаа сонгоно уу "
+msgid "User supplied format looks invalid, reverting to default."
+msgstr "Хэрэглэж байгаа формат буруу байна, тиймээс стандарт руугаа буцлаа."
 
-msgid "-  < No translation >"
-msgstr "-  < Хөрвүүлэгдэхгүй >"
+msgid "&Add new"
+msgstr "&Шинийг нэмэх"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
+msgid "External panelize"
+msgstr "Гадаад панелиз хийх"
 
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
+msgid "Command"
+msgstr "Команд"
 
-#, fuzzy, c-format
-msgid ""
-"Cannot save file %s:\n"
-"%s"
-msgstr " Файлыг хадгалж чадсангүй "
-
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-
-#, c-format
-msgid "Cannot open named pipe %s\n"
-msgstr "%s гэж нэрлэгдсэн урсгалыг нээж чадсангүй\n"
+msgid "Other command"
+msgstr "Бусад команд"
 
 #, fuzzy
-msgid "The shell is still active. Quit anyway?"
-msgstr " Shell идэвхтэй байна. Гарах уу? "
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Анхааруулга: %s руу өөрчилж чадсангүй. \n"
-
-msgid "With builtin Editor\n"
-msgstr "Байгуулан засварлагчын хамт\n"
-
-msgid "Using system-installed S-Lang library"
-msgstr " S-Lang санг суулгасан системийг ашиглах"
-
-msgid "with terminfo database"
-msgstr " terminfo баазын хамт"
-
-msgid "Using the ncurses library"
-msgstr " ncurses санг хэрэглэх"
+msgid "Add to external panelize"
+msgstr " Гадаад панелиз руу нэмэх"
 
 #, fuzzy
-msgid "Using the ncursesw library"
-msgstr " ncurses санг хэрэглэх"
+msgid "Enter command label:"
+msgstr " Командын тайлбарыг оруул: "
 
-msgid "With optional subshell support"
-msgstr "Опциональ subshell боломжтойгоор "
+msgid "Cannot invoke command."
+msgstr "Командыг биелүүлэх боломжгүй."
 
-msgid "With subshell support as default"
-msgstr "subshell нь анхны утгынхаа боломжтой байна"
+msgid "Pipe close failed"
+msgstr "Урсгалыг хаахад алдаа гарлаа"
 
-msgid "With support for background operations\n"
-msgstr "Арын үйл ажиллагааны боломжтойгоор\n"
+#, fuzzy
+msgid "Cannot run external panelize in a non-local directory"
+msgstr " Локал биш лавлах дахь гадаад панелизыг ажиллуулж чадсангүй"
 
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "xterm ба Linux консол дээр хулганы боломжтойгоор\n"
+msgid "Find rejects after patching"
+msgstr "Рatch-ээр гүйцэтгэгдээгүй шалтгааныг олох"
 
-msgid "With mouse support on xterm\n"
-msgstr " xterm дээр хулганы боломжтойгоор\n"
+msgid "Find *.orig after patching"
+msgstr "Patch командын дараа эх хувийг (*.orig) хайх"
 
-msgid "With support for X11 events\n"
-msgstr " X11 ажиллагааны боломжтойгоор\n"
-
-msgid "With internationalization support\n"
-msgstr "Олон улсын боломжтойгоор\n"
-
-msgid "With multiple codepages support\n"
-msgstr "Олон кодлогч хуудасны боломжтойгоор\n"
-
-#, fuzzy, c-format
-msgid "Virtual File Systems:"
-msgstr "Виртуаль файл систем:"
-
-#, c-format
-msgid "Data types:"
-msgstr ""
+msgid "Find SUID and SGID programs"
+msgstr " SUID/SGID программуудыг хайх"
 
 #, c-format
 msgid ""
@@ -4178,18 +4024,6 @@ msgstr ""
 "%s\n"
 
 #, fuzzy
-msgid "Format error on file Extensions File"
-msgstr " өргөтгөл файл дээрхи бүтцийн алдаа "
-
-#, fuzzy, c-format
-msgid "The %%var macro has no default"
-msgstr " %%var макро нь анхны утга биш байна "
-
-#, fuzzy, c-format
-msgid "The %%var macro has no variable"
-msgstr " %%var макро нь хувьсагч биш байна "
-
-#, fuzzy
 msgid "Debug"
 msgstr " Дебаг "
 
@@ -4217,6 +4051,18 @@ msgstr ""
 "Файл %s нь таны эсвэл root ийн эзэмшил биш,\n"
 "Аюулгүй байдлын үүднээс хэрэглэдэг"
 
+#, fuzzy
+msgid "Format error on file Extensions File"
+msgstr " өргөтгөл файл дээрхи бүтцийн алдаа "
+
+#, fuzzy, c-format
+msgid "The %%var macro has no default"
+msgstr " %%var макро нь анхны утга биш байна "
+
+#, fuzzy, c-format
+msgid "The %%var macro has no variable"
+msgstr " %%var макро нь хувьсагч биш байна "
+
 #, fuzzy, c-format
 msgid ""
 "Cannot open file%s\n"
@@ -4232,6 +4078,188 @@ msgstr " Тохирох бичлэг олдсонгүй %s"
 #, fuzzy
 msgid "User menu"
 msgstr " Хэрэглэгчийн цэс "
+
+#, fuzzy
+msgid "Help file format error\n"
+msgstr " Тусламжын файлын бүтцэд алдаа гарлаа\n"
+
+#, fuzzy
+msgid "Internal bug: Double start of link area"
+msgstr " Дотоод алдаа: Холбоос хэсгийн хос эхлэл "
+
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
+msgstr " Тусламжын файл дахь %s мөчрийг олсонгүй "
+
+msgid "Help"
+msgstr "Тусламж"
+
+msgid "ButtonBar|Index"
+msgstr ""
+
+msgid "ButtonBar|Prev"
+msgstr ""
+
+msgid "Learn keys"
+msgstr "Товчлуурыг судлах"
+
+#, fuzzy
+msgid "Teach me a key"
+msgstr " Надад товчлуур заагаач"
+
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Та товчлуураа дараад %s\n"
+"энэ мэдээллийг гарч иртэл түр хүлээнэ үү.\n"
+"\n"
+"Дараа нь ОК гэж гарч иртэл ,\n"
+"дахин дараад түр хүлээнэ үү.\n"
+"\n"
+"Хэрвээ та сургалтаа зогсоохыг хүсвэл\n"
+" Esc товчоо дараад түр хүлээнэ үү."
+
+#, fuzzy
+msgid "Cannot accept this key"
+msgstr " Уг товчруурыг хүлээн авч чадахгүй "
+
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
+msgstr " Таны оруулсан нь \"%s\""
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Таны бүх товчруурууд хэвийн ажиллаж байна.\n"
+"Баяр хүргэе!"
+
+msgid "&Discard"
+msgstr "&Хаах"
+
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"Сайн! Та бүх баазыг дуусгалаа.\n"
+"Таны бүх товчлуурууд дажгүй ажиллаж байна."
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Бүх товчлууруудаа дарж үзнэ үү. Дараа нь та аль товчлуур"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr ""
+" \"OK\" гэж тэмдэглээдээгүй байгааг шалгаарай. Хоосон зай дарахыг хүлээж "
+"байна"
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "товчлуур эсвэл хулганаар дарж үүнийг тодорхойлно. Табын хамт зөөнө."
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Хавтас руу шилжиж чадсангүй"
+
+#, fuzzy
+msgid "Choose codepage"
+msgstr " Оролтын кодлогч хуудасаа сонгоно уу "
+
+msgid "-  < No translation >"
+msgstr "-  < Хөрвүүлэгдэхгүй >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Файлыг хадгалж чадсангүй "
+
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr "%s гэж нэрлэгдсэн урсгалыг нээж чадсангүй\n"
+
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
+msgstr " Shell идэвхтэй байна. Гарах уу? "
+
+#, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Анхааруулга: %s руу өөрчилж чадсангүй. \n"
+
+#, fuzzy
+msgid "Using the S-Lang library with terminfo database\n"
+msgstr " terminfo баазын хамт"
+
+#, fuzzy
+msgid "Using the ncurses library\n"
+msgstr " ncurses санг хэрэглэх"
+
+#, fuzzy
+msgid "Using the ncursesw library\n"
+msgstr " ncurses санг хэрэглэх"
+
+msgid "With builtin Editor\n"
+msgstr "Байгуулан засварлагчын хамт\n"
+
+#, fuzzy
+msgid "With optional subshell support\n"
+msgstr "Опциональ subshell боломжтойгоор "
+
+#, fuzzy
+msgid "With subshell support as default\n"
+msgstr "subshell нь анхны утгынхаа боломжтой байна"
+
+msgid "With support for background operations\n"
+msgstr "Арын үйл ажиллагааны боломжтойгоор\n"
+
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "xterm ба Linux консол дээр хулганы боломжтойгоор\n"
+
+msgid "With mouse support on xterm\n"
+msgstr " xterm дээр хулганы боломжтойгоор\n"
+
+msgid "With support for X11 events\n"
+msgstr " X11 ажиллагааны боломжтойгоор\n"
+
+msgid "With internationalization support\n"
+msgstr "Олон улсын боломжтойгоор\n"
+
+msgid "With multiple codepages support\n"
+msgstr "Олон кодлогч хуудасны боломжтойгоор\n"
+
+#, c-format
+msgid "Built with GLib %d.%d.%d\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
+msgstr "Виртуаль файл систем:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, fuzzy
 msgid "Invalid value"
@@ -4336,19 +4364,8 @@ msgstr "Хайх"
 msgid "Continue from begining?"
 msgstr ""
 
-#, fuzzy
-msgid "History"
-msgstr "Бүртгэл"
-
-#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-msgid "DialogTitle|History cleanup"
-msgstr ""
-
-msgid "Do you want clean this history?"
-msgstr ""
-
-msgid "Background process:"
-msgstr "Арын процесс:"
+#~ msgid "Using system-installed S-Lang library"
+#~ msgstr " S-Lang санг суулгасан системийг ашиглах"
 
 #, fuzzy
 #~ msgid "ftpfs: could not setup passive mode: %s"
