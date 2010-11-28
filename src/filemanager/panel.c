@@ -1215,13 +1215,19 @@ panel_destroy (WPanel * p)
 {
     size_t i;
 
-    char *name = panel_save_name (p);
+    if (panels_options.auto_save_setup)
+    {
+        char *name;
 
-    panel_save_setup (p, name);
+        name = panel_save_name (p);
+        panel_save_setup (p, name);
+        g_free (name);
+    }
+
     panel_clean_dir (p);
 
     /* save and clean history */
-    if (p->dir_history)
+    if (p->dir_history != NULL)
     {
         history_put (p->hist_name, p->dir_history);
 
@@ -1229,7 +1235,6 @@ panel_destroy (WPanel * p)
         g_list_foreach (p->dir_history, (GFunc) g_free, NULL);
         g_list_free (p->dir_history);
     }
-
     g_free (p->hist_name);
 
     delete_format (p->format);
@@ -1240,7 +1245,6 @@ panel_destroy (WPanel * p)
         g_free (p->user_status_format[i]);
     g_free (p->dir.list);
     g_free (p->panel_name);
-    g_free (name);
 }
 
 /* --------------------------------------------------------------------------------------------- */

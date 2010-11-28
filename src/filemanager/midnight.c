@@ -838,13 +838,7 @@ done_mc (void)
      * we only change the setup data if we have the auto save feature set
      */
 
-    if (auto_save_setup)
-        save_setup ();          /* does also call save_hotlist */
-    else
-    {
-        save_hotlist ();
-        save_panel_types ();
-    }
+    save_setup (auto_save_setup, panels_options.auto_save_setup);
     done_screen ();
 
     vfs_stamp_path (vfs_get_current_dir ());

@@ -95,7 +95,7 @@ extern gboolean boot_current_is_left;
 
 char *setup_init (void);
 void load_setup (void);
-gboolean save_setup (void);
+gboolean save_setup (gboolean save_options, gboolean save_panel_options);
 void done_setup (void);
 void save_config (void);
 void setup_save_config_show_error (const char *filename, GError ** error);
@@ -112,7 +112,6 @@ void free_keymap_defs (void);
 
 void panel_load_setup (WPanel * panel, const char *section);
 void panel_save_setup (WPanel * panel, const char *section);
-void save_panel_types (void);
 
 void panels_load_options (void);
 void panels_save_options (void);

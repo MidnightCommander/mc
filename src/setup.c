@@ -766,6 +766,41 @@ panel_save_type (const char *section, panel_view_mode_t type)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/* save panels.ini */
+static void
+save_panel_types (void)
+{
+    panel_view_mode_t type;
+
+    if (mc_run_mode != MC_RUN_FULL)
+        return;
+
+    type = get_display_type (0);
+    panel_save_type ("New Left Panel", type);
+    if (type == view_listing)
+        panel_save_setup (left_panel, left_panel->panel_name);
+    type = get_display_type (1);
+    panel_save_type ("New Right Panel", type);
+    if (type == view_listing)
+        panel_save_setup (right_panel, right_panel->panel_name);
+
+    mc_config_set_string (mc_panels_config, "Dirs", "other_dir", get_panel_dir_for (other_panel));
+
+    if (current_panel != NULL)
+        mc_config_set_string (mc_panels_config, "Dirs", "current_is_left",
+                              get_current_index () == 0 ? "1" : "0");
+
+    if (mc_panels_config->ini_path == NULL)
+        mc_panels_config->ini_path = g_strdup (panels_profile_name);
+
+    mc_config_del_group (mc_panels_config, "Temporal:New Left Panel");
+    mc_config_del_group (mc_panels_config, "Temporal:New Right Panel");
+
+    mc_config_save_file (mc_panels_config, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -945,42 +980,51 @@ load_setup (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-save_setup (void)
+save_setup (gboolean save_options, gboolean save_panel_options)
 {
-    char *tmp_profile;
-    gboolean ret;
+    gboolean ret = TRUE;
 
     saving_setup = 1;
 
-    save_config ();
-    save_layout ();
-    panels_save_options ();
     save_hotlist ();
-    save_panelize ();
-    save_panel_types ();
-    /*     directory_history_save (); */
+
+    if (save_panel_options)
+        save_panel_types ();
+
+    if (save_options)
+    {
+        char *tmp_profile;
+
+        save_config ();
+        save_layout ();
+        panels_save_options ();
+        save_panelize ();
+        /* directory_history_save (); */
 
 #ifdef ENABLE_VFS_FTP
-    mc_config_set_string (mc_main_config, "Misc", "ftpfs_password", ftpfs_anonymous_passwd);
-    if (ftpfs_proxy_host)
-        mc_config_set_string (mc_main_config, "Misc", "ftp_proxy_host", ftpfs_proxy_host);
+        mc_config_set_string (mc_main_config, "Misc", "ftpfs_password", ftpfs_anonymous_passwd);
+        if (ftpfs_proxy_host)
+            mc_config_set_string (mc_main_config, "Misc", "ftp_proxy_host", ftpfs_proxy_host);
 #endif /* ENABLE_VFS_FTP */
 
 #ifdef HAVE_CHARSET
-    mc_config_set_string (mc_main_config, "Misc", "display_codepage",
-                          get_codepage_id (display_codepage));
-    mc_config_set_string (mc_main_config, "Misc", "source_codepage",
-                          get_codepage_id (default_source_codepage));
-    mc_config_set_string (mc_main_config, "Misc", "autodetect_codeset", autodetect_codeset);
+        mc_config_set_string (mc_main_config, "Misc", "display_codepage",
+                              get_codepage_id (display_codepage));
+        mc_config_set_string (mc_main_config, "Misc", "source_codepage",
+                              get_codepage_id (default_source_codepage));
+        mc_config_set_string (mc_main_config, "Misc", "autodetect_codeset", autodetect_codeset);
 #endif /* HAVE_CHARSET */
-    mc_config_set_string (mc_main_config, "Misc", "clipboard_store", clipboard_store_path);
-    mc_config_set_string (mc_main_config, "Misc", "clipboard_paste", clipboard_paste_path);
+        mc_config_set_string (mc_main_config, "Misc", "clipboard_store", clipboard_store_path);
+        mc_config_set_string (mc_main_config, "Misc", "clipboard_paste", clipboard_paste_path);
 
-    tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
-    ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
+        tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+        ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
 
-    g_free (tmp_profile);
+        g_free (tmp_profile);
+    }
+
     saving_setup = 0;
+
     return ret;
 }
 
@@ -1328,43 +1372,6 @@ panel_save_setup (struct WPanel *panel, const char *section)
     }
 
     mc_config_set_int (mc_panels_config, section, "user_mini_status", panel->user_mini_status);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-save_panel_types (void)
-{
-    panel_view_mode_t type;
-
-    if (mc_run_mode != MC_RUN_FULL)
-        return;
-
-    if (!panels_options.auto_save_setup)
-        return;
-
-    type = get_display_type (0);
-    panel_save_type ("New Left Panel", type);
-    if (type == view_listing)
-        panel_save_setup (left_panel, left_panel->panel_name);
-    type = get_display_type (1);
-    panel_save_type ("New Right Panel", type);
-    if (type == view_listing)
-        panel_save_setup (right_panel, right_panel->panel_name);
-
-    mc_config_set_string (mc_panels_config, "Dirs", "other_dir", get_panel_dir_for (other_panel));
-
-    if (current_panel != NULL)
-        mc_config_set_string (mc_panels_config, "Dirs", "current_is_left",
-                              get_current_index () == 0 ? "1" : "0");
-
-    if (mc_panels_config->ini_path == NULL)
-        mc_panels_config->ini_path = g_strdup (panels_profile_name);
-
-    mc_config_del_group (mc_panels_config, "Temporal:New Left Panel");
-    mc_config_del_group (mc_panels_config, "Temporal:New Right Panel");
-
-    mc_config_save_file (mc_panels_config, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
