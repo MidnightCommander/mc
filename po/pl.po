@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-11-28 23:42+0200\n"
-"PO-Revision-Date: 2010-11-03 01:16+0200\n"
+"PO-Revision-Date: 2010-11-28 23:17+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "Language: pl\n"
@@ -351,7 +351,7 @@ msgstr "Znak liczby #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr ""
+msgstr "Znak at"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -918,7 +918,6 @@ msgid "Show mc with specified skin"
 msgstr "Wyświetla program mc za pomocą podanej skórki"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -942,10 +941,11 @@ msgstr ""
 "Słowa kluczowe:\n"
 "   Globalne:            errors, disabled, reverse, gauge, viewunderline\n"
 "                        input, inputmark, inputunchanged, commandlinemark\n"
+"                        bbarhotkey, bbarbutton, statusbar\n"
 "   Wyświetlanie plików: normal, selected, marked, markselect\n"
-"   Pola dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus,\n"
+"   Pola dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menu:                menunormal, menuhot, menusel, menuhotsel,\n"
+"   Menu:                menunormal, menuhot, menusel, menuhotsel\n"
 "                        menuinactive\n"
 "   Edytor:              editnormal, editbold, editmarked, editwhitespace,\n"
 "                        editlinestate\n"
@@ -2835,9 +2835,8 @@ msgstr "Pomiń u&kryte"
 msgid "&All charsets"
 msgstr "W&szystkie zestawy znaków"
 
-#, fuzzy
 msgid "Sea&rch for content"
-msgstr "Ukończono wyszukiwanie"
+msgstr "Wyszukiwanie &treści"
 
 msgid "Case sens&itive"
 msgstr "Rozróżn&ianie wielkości"
@@ -2848,9 +2847,8 @@ msgstr "Wyrażenie re&gularne"
 msgid "Fir&st hit"
 msgstr "Pier&wsze trafienie"
 
-#, fuzzy
 msgid "A&ll charsets"
-msgstr "Wszystkie zest. znaków"
+msgstr "Wszystkie &zest. znaków"
 
 msgid "&Tree"
 msgstr "&Drzewo"
@@ -3853,28 +3851,23 @@ msgstr "Powłoka jest wciąż aktywna. Zakończyć mimo to?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Ostrzeżenie: nie można zmienić katalogu na %s.\n"
 
-#, fuzzy
 msgid "Using the S-Lang library with terminfo database\n"
-msgstr "z bazą danych terminfo"
+msgstr "Używanie biblioteki S-Lang z bazą danych terminfo\n"
 
-#, fuzzy
 msgid "Using the ncurses library\n"
-msgstr "Używanie biblioteki ncurses"
+msgstr "Używanie biblioteki ncurses\n"
 
-#, fuzzy
 msgid "Using the ncursesw library\n"
-msgstr "Używanie biblioteki ncursesw"
+msgstr "Używanie biblioteki ncursesw\n"
 
 msgid "With builtin Editor\n"
 msgstr "Z wbudowanym edytorem\n"
 
-#, fuzzy
 msgid "With optional subshell support\n"
-msgstr "Z opcjonalną obsługą podpowłoki"
+msgstr "Z opcjonalną obsługą podpowłoki\n"
 
-#, fuzzy
 msgid "With subshell support as default\n"
-msgstr "Z domyślną obsługą podpowłoki"
+msgstr "Z domyślną obsługą podpowłoki\n"
 
 msgid "With support for background operations\n"
 msgstr "Z obsługą wykonywania działań w tle\n"
@@ -3896,7 +3889,7 @@ msgstr "Z obsługą wielu stron kodowych\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
-msgstr ""
+msgstr "Zbudowano za pomocą biblioteki GLib %d.%d.%d\n"
 
 #, c-format
 msgid "Virtual File Systems:"
@@ -4008,9 +4001,3 @@ msgstr "Ukończono wyszukiwanie"
 
 msgid "Continue from begining?"
 msgstr "Kontynuować od początku?"
-
-#~ msgid "All cha&rsets"
-#~ msgstr "Wszystkie zestawy &znaków"
-
-#~ msgid "Using system-installed S-Lang library"
-#~ msgstr "Używanie biblioteki S-Lang zainstalowanej w systemie"
