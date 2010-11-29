@@ -3690,6 +3690,7 @@ errdfocus, errdhotnormal, errdhotfocus, errdtitle. Цвета в окне вст
 помощи: helpnormal, helpitalic, helpbold, helplink, helpslink. Цвета в окне
 программы просмотра: viewbold, viewunderline, viewselected. Цвета в редакторе:
 editnormal, editbold, editmarked, editwhitespace, editlinestate.
+Цвета окна всплывающего меню: pmenunormal, pmenusel, pmenutitle.
 .PP
 Цвета задавать не обязательно. Цвет какого именно поля определяется
 каждым ключевым словом, можно понять из перевода этого ключевого слова.
@@ -3742,6 +3743,14 @@ editnormal, editbold, editmarked, editwhitespace, editlinestate.
 \- для выделения неактивных гиперссылок,
 .I helpslink
 \- для выделения активной в данный момент гиперссылки.
+.PP
+Во всплывающем меню используются следующие цвета:
+.I pmenunormal
+\- для невыбранных пунктов меню и как основной цвет окна,
+.I pmenusel
+\- для выбранного пункта меню,
+.I pmenutitle
+\- для заголовка окна меню.
 .PP
 Возможные цвета: black, gray, red, brightred, green, brightgreen, brown,
 yellow, blue, brightblue, magenta, brightmagenta, cyan, brightcyan,

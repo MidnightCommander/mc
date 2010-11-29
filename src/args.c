@@ -319,15 +319,12 @@ mc_args_clean_temp_help_strings (void)
 static GOptionGroup *
 mc_args_new_color_group (void)
 {
-    /*
-     * FIXME: undocumented keywords: viewunderline, editnormal, editbold,
-     * and editmarked.  To preserve translations, lines should be split.
-     */
-    mc_args__loc__colors_string = g_strdup_printf ("%s%s",
-                                                   /* TRANSLATORS: don't translate keywords and names of colors */
+    /* FIXME: to preserve translations, lines should be split. */
+    mc_args__loc__colors_string = g_strdup_printf ("%s\n%s",
+                                                   /* TRANSLATORS: don't translate keywords */
                                                    _("--colors KEYWORD={FORE},{BACK}\n\n"
                                                      "{FORE} and {BACK} can be omitted, and the default will be used\n"
-                                                     "\n" "Keywords:\n"
+                                                     "\n Keywords:\n"
                                                      "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
                                                      "                 input, inputmark, inputunchanged, commandlinemark\n"
                                                      "                 bbarhotkey, bbarbutton, statusbar\n"
@@ -335,12 +332,13 @@ mc_args_new_color_group (void)
                                                      "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
                                                      "                 errdhotfocus\n"
                                                      "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+                                                     "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
                                                      "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-                                                     "                 editlinestate\n"),
-                                                   /* TRANSLATORS: don't translate keywords and names of colors */
-                                                   _
-                                                   ("   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-                                                    "\n" "Colors:\n"
+                                                     "                 editlinestate\n"
+                                                     "   Viewer:       viewunderline\n"
+                                                     "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"),
+                                                   /* TRANSLATORS: don't translate color names */
+                                                   _("Colors:\n"
                                                     "   black, gray, red, brightred, green, brightgreen, brown,\n"
                                                     "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
                                                     "   brightcyan, lightgray and white\n\n"));

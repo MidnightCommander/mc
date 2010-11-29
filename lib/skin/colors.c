@@ -227,6 +227,10 @@ mc_skin_color_cache_init (void)
     MENU_HOTSEL_COLOR = mc_skin_color_get ("menu", "menuhotsel");
     MENU_INACTIVE_COLOR = mc_skin_color_get ("menu", "menuinactive");
 
+    PMENU_ENTRY_COLOR = mc_skin_color_get ("popupmenu", "_default_");
+    PMENU_SELECTED_COLOR = mc_skin_color_get ("popupmenu", "menusel");
+    PMENU_TITLE_COLOR = mc_skin_color_get ("popupmenu", "menutitle");
+
     BUTTONBAR_HOTKEY_COLOR = mc_skin_color_get ("buttonbar", "hotkey");
     BUTTONBAR_BUTTON_COLOR = mc_skin_color_get ("buttonbar", "button");
 
