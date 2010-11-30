@@ -59,13 +59,6 @@ if test x"$glib_found" = xno; then
     AC_MSG_ERROR([glib-2.0 not found or version too old (must be >= 2.8)])
 fi
 
-PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
-GLIB_LIBDIR="`$PKG_CONFIG --variable=libdir glib-2.0`"
-
-if test "x$gmodule_found" = "xyes" ; then
-	dnl Check if the gmodule functionality supported on this system.
-	AC_G_MODULE_SUPPORTED
-fi
 
 AC_HEADER_MAJOR
 AC_C_CONST
@@ -225,27 +218,10 @@ AC_FUNC_STRCOLL
 dnl
 dnl X11 support.
 dnl Used to read keyboard modifiers when running under X11.
-dnl
-
 AC_PATH_XTRA
-if test "x$no_x" = xyes; then
-    textmode_x11_support="no"
-else
-    CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-    if test "x$mc_cv_g_module_supported" = "xyes" ; then
-	dnl Replace the contents of GLIB_CFLAGS and GLIB_LIBS with those of
-	dnl GMODULE_CFLAGS and GMODULE_LIBS, only if X is available and gmodule
-	dnl functionality is supported on the system.  This way, mc will be
-	dnl linked against the gmodule library only when it's really required.
-	GLIB_CFLAGS="$GMODULE_CFLAGS"
-	GLIB_LIBS="$GMODULE_LIBS"
-    else
-        MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
-    fi
-    AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT, 1,
-	      [Define to enable getting events from X Window System])
-    textmode_x11_support="yes"
-fi
+dnl
+dnl Check if the gmodule functionality supported on this system.
+AC_G_MODULE_SUPPORTED
 
 dnl
 dnl Try to find static libraries for glib and gmodule.

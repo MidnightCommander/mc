@@ -21,7 +21,7 @@ endif
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
 localedir = $(datadir)/locale
-pkglibexecdir =		$(libexecdir)/@PACKAGE@
+pkglibexecdir = $(libexecdir)/@PACKAGE@
 
 bin_PROGRAMS = mc
 
@@ -37,14 +37,22 @@ mc_LDADD = \
 	viewer/libmcviewer.la \
 	filemanager/libmcfilemanager.la \
 	$(DIFFLIB) $(EDITLIB) \
-	../lib/libmc.la \
-	$(MCLIBS) $(SLANGLIB) $(GLIB_LIBS) \
-	$(PCRE_LIBS) $(LIBICONV) $(INTLLIBS)
+	../lib/libmc.la
 
 if ENABLE_VFS_SMB
 # this is a hack for linking with own samba library in simple way
 mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
 endif
+
+mc_LDADD += $(MCLIBS) $(SLANGLIB)
+
+if HAVE_GMODULE
+mc_LDADD += $(GMODULE_LIBS)
+else
+mc_LDADD += $(GLIB_LIBS)
+endif
+
+mc_LDADD += $(PCRE_LIBS) $(LIBICONV) $(INTLLIBS)
 
 SRC_mc_conssaver = \
 	cons.handler.c consaver/cons.saver.h
