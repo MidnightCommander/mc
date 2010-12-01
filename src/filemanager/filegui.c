@@ -912,7 +912,7 @@ char *
 file_mask_dialog (FileOpContext * ctx, FileOperation operation,
                   gboolean only_one,
                   const char *format, const void *text,
-                  const char *def_text, gboolean * do_background)
+                  const char *def_text, gboolean * do_bg)
 {
     const size_t FMDY = 13;
     const size_t FMDX = 68;
@@ -1049,7 +1049,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
     fmd_widgets[7 - OFFSET].u.input.text = def_text_secure;
 
     ctx->stable_symlinks = FALSE;
-    *do_background = FALSE;
+    *do_bg = FALSE;
 
     {
         struct stat buf;
@@ -1143,7 +1143,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
             dest_dir = g_strdup ("./");
         }
         if (val == B_USER)
-            *do_background = TRUE;
+            *do_bg = TRUE;
     }
 
     return dest_dir;
