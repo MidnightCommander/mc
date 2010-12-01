@@ -37,9 +37,6 @@
 #define GPM_B_UP        (1 << 4)
 #endif
 
-/* Mouse callback */
-typedef int (*mouse_h) (Gpm_Event *, void *);
-
 /*** enums ***************************************************************************************/
 
 #ifndef HAVE_LIBGPM
@@ -65,7 +62,10 @@ enum Gpm_Etype
 
 /* Constants returned from the mouse callback */
 enum
-{ MOU_NORMAL, MOU_REPEAT };
+{
+    MOU_NORMAL,
+    MOU_REPEAT
+};
 
 /* Type of mouse support */
 typedef enum
@@ -88,6 +88,8 @@ typedef struct Gpm_Event
 } Gpm_Event;
 #endif /* !HAVE_LIBGPM */
 
+/* Mouse callback */
+typedef int (*mouse_h) (Gpm_Event *, void *);
 
 /*** global variables defined in .c file *********************************************************/
 
