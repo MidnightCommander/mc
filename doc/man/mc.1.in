@@ -3429,6 +3429,7 @@ dhotnormal, dhotfocus, dtitle. Error dialog colors are: errdfocus, errdhotnormal
 errdhotfocus, errdtitle.  Help colors are: helpnormal, helpitalic, helpbold,
 helplink, helpslink, helptitle.  Viewer color are: viewbold, viewunderline, viewselected.
 Editor colors are: editnormal, editbold, editmarked, editwhitespace, editlinestate.
+Popup menu colors are: pmenunormal, pmenusel, pmenutitle.
 .PP
 .I input
 determines the color of input lines used in query dialogs.
@@ -3467,6 +3468,14 @@ is used for text which is emphasized in bold in the manual page,
 is used for not selected hyperlinks and
 .I helpslink
 is used for selected hyperlink.
+.PP
+Popup menu uses following colors:
+.I pmenunormal
+is used for non-selected menu items and as a main color of popup menu window,
+.I pmenusel
+is used for selected menu item,
+.I pmenutitle
+is used for popup menu title.
 .PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,

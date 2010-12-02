@@ -65,6 +65,9 @@ mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
     mc_config_set_string (mc_skin->config, "menu", "menusel", "default");
     mc_config_set_string (mc_skin->config, "menu", "menuhotsel", "A_UNDERLINE");
     mc_config_set_string (mc_skin->config, "menu", "menuinactive", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "popupmenu", "_default_", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "popupmenu", "menusel", "default");
+    mc_config_set_string (mc_skin->config, "popupmenu", "menutitle", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "statusbar", "_default_", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "help", "_default_", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "help", "helpitalic", "A_REVERSE");
