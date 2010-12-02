@@ -437,7 +437,7 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
 
         if (size < power10[len - (j > 0)])
         {
-            g_snprintf (buffer, len + 1, "%ju%s", size, use_si ? suffix_lc[j] : suffix[j]);
+            g_snprintf (buffer, len + 1, "%" PRIuMAX "%s", size, use_si ? suffix_lc[j] : suffix[j]);
             break;
         }
 
@@ -1341,7 +1341,7 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
     /* put the new record */
     if (line != 1 || column != 0 || bookmarks != NULL)
     {
-        if (fprintf (f, "%s %ld;%ld;%ju", filename, line, column, offset) < 0)
+        if (fprintf (f, "%s %ld;%ld;%" PRIuMAX, filename, line, column, (uintmax_t) offset) < 0)
             goto write_position_error;
         if (bookmarks != NULL)
             for (i = 0; i < bookmarks->len && i < MAX_SAVED_BOOKMARKS; i++)

@@ -703,15 +703,17 @@ vfs_s_print_stats (const char *fs_name, const char *action,
 
     if (i18n_percent_transf_format == NULL)
     {
-        i18n_percent_transf_format = _("%s: %s: %s %3d%% (%ju bytes transferred)");
-        i18n_transf_format = _("%s: %s: %s %ju bytes transferred");
+        i18n_percent_transf_format = "%s: %s: %s %3d%% (%" PRIuMAX " %s";
+        i18n_transf_format = "%s: %s: %s %" PRIuMAX " %s";
     }
 
     if (need)
         print_vfs_message (i18n_percent_transf_format, fs_name, action,
-                           file_name, (int) ((double) have * 100 / need), (uintmax_t) have);
+                           file_name, (int) ((double) have * 100 / need), (uintmax_t) have,
+                           _("bytes transferred"));
     else
-        print_vfs_message (i18n_transf_format, fs_name, action, file_name, (uintmax_t) have);
+        print_vfs_message (i18n_transf_format, fs_name, action, file_name, (uintmax_t) have,
+                           _("bytes transferred"));
 }
 
 /* --------------------------------------------------------------------------------------------- */

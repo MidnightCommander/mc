@@ -64,6 +64,11 @@
 #define __attribute__(x)
 #endif
 
+/* Solaris9 doesn't have PRIXMAX */
+#ifndef PRIXMAX
+#define PRIXMAX PRIxMAX
+#endif
+
 #ifdef ENABLE_NLS
 #include <libintl.h>
 #define _(String) gettext (String)

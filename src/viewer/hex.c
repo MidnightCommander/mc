@@ -161,7 +161,7 @@ mcview_display_hex (mcview_t * view)
         col = 0;
 
         /* Print the hex offset */
-        g_snprintf (hex_buff, sizeof (hex_buff), "%08jX ", (uintmax_t) from);
+        g_snprintf (hex_buff, sizeof (hex_buff), "%08" PRIXMAX, (uintmax_t) from);
         widget_move (view, top + row, left);
         tty_setcolor (VIEW_BOLD_COLOR);
         for (i = 0; col < width && hex_buff[i] != '\0'; i++)

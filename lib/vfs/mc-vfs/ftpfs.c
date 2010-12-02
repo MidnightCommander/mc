@@ -1827,8 +1827,8 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *l
             w_buf += n_written;
             n_read -= n_written;
         }
-        print_vfs_message (_("ftpfs: storing file %ju (%ju)"),
-                           (uintmax_t) n_stored, (uintmax_t) s.st_size);
+        print_vfs_message ("%s: %" PRIuMAX  "/%" PRIuMAX,
+                           _("ftpfs: storing file"), (uintmax_t) n_stored, (uintmax_t) s.st_size);
     }
     tty_disable_interrupt_key ();
     close (sock);
