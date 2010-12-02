@@ -59,7 +59,7 @@
 
 #include "args.h"
 #include "subshell.h"
-#include "setup.h"              /* save_setup() */
+#include "setup.h"              /* load_setup() */
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"

@@ -58,7 +58,7 @@
 #include "src/main.h"
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
-#include "src/setup.h"          /* For save_setup() */
+#include "src/setup.h"
 #include "src/subshell.h"       /* For use_subshell and resize_subshell() */
 #include "src/background.h"     /* we_are_background */
 
