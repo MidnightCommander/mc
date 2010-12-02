@@ -17,6 +17,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/time.h>
+#include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
 
@@ -26,6 +27,13 @@
 typedef int (*mc_stat_fn) (const char *filename, struct stat * buf);
 
 /*** enums ***************************************************************************************/
+
+typedef enum
+{
+    FILEGUI_DIALOG_ONE_ITEM,
+    FILEGUI_DIALOG_MULTI_ITEM,
+    FILEGUI_DIALOG_DELETE_ITEM
+} filegui_dialog_type_t;
 
 typedef enum
 {
@@ -81,11 +89,11 @@ typedef struct FileOpContext
 
     /* Whether the panel total has been computed */
     gboolean progress_totals_computed;
-    int dialog_type;
+    filegui_dialog_type_t dialog_type;
 
     /* Counters for progress indicators */
-    off_t progress_count;
-    double progress_bytes;
+    size_t progress_count;
+    uintmax_t progress_bytes;
 
     /* The value of the "preserve Attributes" checkbox in the copy file dialog.
      * We can't use the value of "ctx->preserve" because it can change in order
@@ -153,9 +161,9 @@ typedef struct FileOpContext
 
 typedef struct
 {
-    off_t progress_count;
-    double progress_bytes;
-    double copyed_bytes;
+    size_t progress_count;
+    uintmax_t progress_bytes;
+    uintmax_t copyed_bytes;
     size_t bps;
     size_t bps_count;
     struct timeval transfer_start;
@@ -163,7 +171,6 @@ typedef struct
 
     gboolean ask_overwrite;
     gboolean is_toplevel_file;
-
 } FileOpTotalContext;
 
 /*** global variables defined in .c file *********************************************************/

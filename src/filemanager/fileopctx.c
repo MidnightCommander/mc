@@ -70,7 +70,7 @@ file_op_context_new (FileOperation op)
     ctx = g_new0 (FileOpContext, 1);
     ctx->operation = op;
     ctx->eta_secs = 0.0;
-    ctx->progress_bytes = 0.0;
+    ctx->progress_bytes = 0;
     ctx->op_preserve = TRUE;
     ctx->do_reget = 1;
     ctx->stat_func = mc_lstat;
@@ -96,13 +96,9 @@ file_op_context_destroy (FileOpContext * ctx)
 {
     g_return_if_fail (ctx != NULL);
 
-    if (ctx->ui)
-        file_op_context_destroy_ui (ctx);
-
+    file_op_context_destroy_ui (ctx);
     mc_search_free (ctx->search_handle);
-
     /** \todo FIXME: do we need to free ctx->dest_mask? */
-
     g_free (ctx);
 }
 
@@ -123,7 +119,6 @@ file_op_total_context_new (void)
 void
 file_op_total_context_destroy (FileOpTotalContext * tctx)
 {
-    g_return_if_fail (tctx != NULL);
     g_free (tctx);
 }
 

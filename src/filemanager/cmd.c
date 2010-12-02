@@ -1492,16 +1492,15 @@ single_dirsize_cmd (void)
 {
     WPanel *panel = current_panel;
     file_entry *entry;
-    off_t marked;
-    double total;
-    ComputeDirSizeUI *ui;
 
     entry = &(panel->dir.list[panel->selected]);
     if (S_ISDIR (entry->st.st_mode) && strcmp (entry->fname, "..") != 0)
     {
-        ui = compute_dir_size_create_ui ();
+        size_t marked = 0;
+        uintmax_t total = 0;
+        ComputeDirSizeUI *ui;
 
-        total = 0.0;
+        ui = compute_dir_size_create_ui ();
 
         if (compute_dir_size (entry->fname, ui, compute_dir_size_update_ui,
                               &marked, &total, TRUE) == FILE_CONT)
@@ -1531,8 +1530,6 @@ dirsizes_cmd (void)
 {
     WPanel *panel = current_panel;
     int i;
-    off_t marked;
-    double total;
     ComputeDirSizeUI *ui;
 
     ui = compute_dir_size_create_ui ();
@@ -1542,7 +1539,8 @@ dirsizes_cmd (void)
             && ((panel->dirs_marked && panel->dir.list[i].f.marked)
                 || !panel->dirs_marked) && strcmp (panel->dir.list[i].fname, "..") != 0)
         {
-            total = 0.0l;
+            size_t marked = 0;
+            uintmax_t total = 0;
 
             if (compute_dir_size (panel->dir.list[i].fname,
                                   ui, compute_dir_size_update_ui, &marked, &total,

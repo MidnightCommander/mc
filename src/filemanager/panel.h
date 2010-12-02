@@ -5,6 +5,8 @@
 #ifndef MC__PANEL_H
 #define MC__PANEL_H
 
+#include <inttypes.h>           /* uintmax_t */
+
 #include "lib/global.h"         /* gboolean */
 #include "lib/fs.h"             /* MC_MAXPATHLEN */
 #include "lib/strutil.h"
@@ -84,7 +86,7 @@ typedef struct WPanel
     int count;                  /* Number of files in dir structure */
     int marked;                 /* Count of marked files */
     int dirs_marked;            /* Count of marked directories */
-    double total;               /* Bytes in marked files */
+    uintmax_t total;            /* Bytes in marked files */
     int top_file;               /* The file showed on the top of the panel */
     int selected;               /* Index to the selected file */
     int reverse;                /* Show listing in reverse? */

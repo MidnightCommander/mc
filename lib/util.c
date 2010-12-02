@@ -326,30 +326,30 @@ path_trunc (const char *path, size_t trunc_len)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-size_trunc (double size, gboolean use_si)
+size_trunc (uintmax_t size, gboolean use_si)
 {
     static char x[BUF_TINY];
-    long int divisor = 1;
+    uintmax_t divisor = 1;
     const char *xtra = "";
 
-    if (size > 999999999L)
+    if (size > 999999999UL)
     {
         divisor = use_si ? 1000 : 1024;
         xtra = use_si ? "k" : "K";
-        if (size / divisor > 999999999L)
+        if (size / divisor > 999999999UL)
         {
             divisor = use_si ? (1000 * 1000) : (1024 * 1024);
             xtra = use_si ? "m" : "M";
         }
     }
-    g_snprintf (x, sizeof (x), "%.0f%s", (size / divisor), xtra);
+    g_snprintf (x, sizeof (x), "%.0f%s", 1.0 * size / divisor, xtra);
     return x;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-size_trunc_sep (double size, gboolean use_si)
+size_trunc_sep (uintmax_t size, gboolean use_si)
 {
     static char x[60];
     int count;
@@ -359,7 +359,7 @@ size_trunc_sep (double size, gboolean use_si)
     p = y = size_trunc (size, use_si);
     p += strlen (p) - 1;
     d = x + sizeof (x) - 1;
-    *d-- = 0;
+    *d-- = '\0';
     while (p >= y && isalpha ((unsigned char) *p))
         *d-- = *p--;
     for (count = 0; p >= y; count++)
@@ -389,11 +389,12 @@ size_trunc_sep (double size, gboolean use_si)
  */
 
 void
-size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean use_si)
+size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si)
 {
     /* Avoid taking power for every file.  */
-    static const off_t power10[] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000,
-        1000000000
+    static const uintmax_t power10[] =
+    {
+        1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
     };
     static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
     static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
@@ -408,8 +409,7 @@ size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean 
      * We can't just multiply by 1024 - that might cause overflow
      * if off_t type is too small
      */
-    if (units && use_si)
-    {
+    if (use_si)
         for (j = 0; j < units; j++)
         {
             size_remain = ((size % 125) * 1024) / 1000; /* size mod 125, recalculated */
@@ -417,7 +417,6 @@ size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean 
             size = size * 128;  /* This will convert size from multiple of 1024 to multiple of 1000 */
             size += size_remain;        /* Re-add remainder lost by division/multiplication */
         }
-    }
 
     for (j = units; suffix[j] != NULL; j++)
     {
@@ -438,8 +437,7 @@ size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean 
 
         if (size < power10[len - (j > 0)])
         {
-            g_snprintf (buffer, len + 1, "%lu%s", (unsigned long) size,
-                        use_si ? suffix_lc[j] : suffix[j]);
+            g_snprintf (buffer, len + 1, "%ju%s", size, use_si ? suffix_lc[j] : suffix[j]);
             break;
         }
 

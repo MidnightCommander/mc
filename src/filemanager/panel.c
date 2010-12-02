@@ -975,7 +975,7 @@ display_total_marked_size (WPanel * panel, int y, int x, gboolean size_only)
      * First make "N bytes", then insert it into "X in M files".
      */
     g_snprintf (b_bytes, sizeof (b_bytes),
-                ngettext ("%s byte", "%s bytes", (unsigned long) panel->total),
+                ngettext ("%s byte", "%s bytes", panel->total),
                 size_trunc_sep (panel->total, panels_options.kilobyte_si));
     if (!size_only)
         g_snprintf (buffer, sizeof (buffer),
@@ -3791,7 +3791,7 @@ do_file_mark (WPanel * panel, int idx, int mark)
         return;
 
     /* Only '..' can't be marked, '.' isn't visible */
-    if (!strcmp (panel->dir.list[idx].fname, ".."))
+    if (strcmp (panel->dir.list[idx].fname, "..") == 0)
         return;
 
     file_mark (panel, idx, mark);
@@ -3801,11 +3801,11 @@ do_file_mark (WPanel * panel, int idx, int mark)
         if (S_ISDIR (panel->dir.list[idx].st.st_mode))
         {
             if (panel->dir.list[idx].f.dir_size_computed)
-                panel->total += panel->dir.list[idx].st.st_size;
+                panel->total += (uintmax_t) panel->dir.list[idx].st.st_size;
             panel->dirs_marked++;
         }
         else
-            panel->total += panel->dir.list[idx].st.st_size;
+            panel->total += (uintmax_t) panel->dir.list[idx].st.st_size;
         set_colors (panel);
     }
     else
@@ -3813,11 +3813,11 @@ do_file_mark (WPanel * panel, int idx, int mark)
         if (S_ISDIR (panel->dir.list[idx].st.st_mode))
         {
             if (panel->dir.list[idx].f.dir_size_computed)
-                panel->total -= panel->dir.list[idx].st.st_size;
+                panel->total -= (uintmax_t) panel->dir.list[idx].st.st_size;
             panel->dirs_marked--;
         }
         else
-            panel->total -= panel->dir.list[idx].st.st_size;
+            panel->total -= (uintmax_t) panel->dir.list[idx].st.st_size;
         panel->marked--;
     }
 }

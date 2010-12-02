@@ -421,7 +421,7 @@ progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add,
     if (is_toplevel_file || ctx->progress_totals_computed)
     {
         tctx->progress_count++;
-        tctx->progress_bytes += add;
+        tctx->progress_bytes += (uintmax_t) add;
     }
     if (tv_start.tv_sec == 0)
     {
@@ -430,8 +430,11 @@ progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add,
     gettimeofday (&tv_current, (struct timezone *) NULL);
     if ((tv_current.tv_sec - tv_start.tv_sec) > FILEOP_UPDATE_INTERVAL)
     {
-        file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-        file_progress_show_total (tctx, ctx, tctx->progress_bytes, TRUE);
+        if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+        {
+            file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+            file_progress_show_total (tctx, ctx, tctx->progress_bytes, TRUE);
+        }
         tv_start.tv_sec = tv_current.tv_sec;
     }
 
@@ -516,7 +519,7 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
     /* 5. Compute total ETA and BPS */
     if (ctx->progress_bytes != 0)
     {
-        double remain_bytes;
+        uintmax_t remain_bytes;
         tctx->copyed_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
         remain_bytes = ctx->progress_bytes - tctx->copyed_bytes;
 #if 1
@@ -668,23 +671,22 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
         return FILE_ABORT;
     mc_refresh ();
 
-    if (tctx->progress_count && mc_lstat (s, &buf))
+    if (tctx->progress_count != 0 && mc_lstat (s, &buf) != 0)
     {
         /* ignore, most likely the mc_unlink fails, too */
         buf.st_size = 0;
     }
 
-    while (mc_unlink (s))
+    while (mc_unlink (s) != 0)
     {
         return_status = file_error (_("Cannot delete file \"%s\"\n%s"), s);
         if (return_status != FILE_RETRY)
             return return_status;
     }
 
-    if (tctx->progress_count)
-        return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
-    else
+    if (tctx->progress_count == 0)
         return FILE_CONT;
+    return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -858,12 +860,12 @@ panel_get_file (WPanel * panel, struct stat *stat_buf)
 static FileProgressStatus
 panel_compute_totals (const WPanel * panel, const void *ui,
                       compute_dir_size_callback cback,
-                      off_t * ret_marked, double *ret_total, gboolean compute_symlinks)
+                      size_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
 {
     int i;
 
     *ret_marked = 0;
-    *ret_total = 0.0;
+    *ret_total = 0;
 
     for (i = 0; i < panel->count; i++)
     {
@@ -877,8 +879,8 @@ panel_compute_totals (const WPanel * panel, const void *ui,
         if (S_ISDIR (s->st_mode))
         {
             char *dir_name;
-            off_t subdir_count = 0;
-            double subdir_bytes = 0;
+            size_t subdir_count = 0;
+            uintmax_t subdir_bytes = 0;
             FileProgressStatus status;
 
             dir_name = concat_dir_and_file (panel->cwd, panel->dir.list[i].fname);
@@ -896,7 +898,7 @@ panel_compute_totals (const WPanel * panel, const void *ui,
         else
         {
             (*ret_marked)++;
-            *ret_total += s->st_size;
+            *ret_total += (uintmax_t) s->st_size;
         }
     }
 
@@ -1508,13 +1510,18 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
             }
 
             {
-                gboolean force_update =
-                    (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL;
-                file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-                file_progress_show_total (tctx, ctx,
-                                          tctx->progress_bytes + n_read_total + ctx->do_reget,
-                                          force_update);
+                gboolean force_update;
 
+                force_update =
+                    (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL;
+
+                if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+                {
+                    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+                    file_progress_show_total (tctx, ctx,
+                                              tctx->progress_bytes + n_read_total + ctx->do_reget,
+                                              force_update);
+                }
 
                 file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
                                     force_update);
@@ -2116,7 +2123,7 @@ compute_dir_size_update_ui (const void *ui, const char *dirname)
 FileProgressStatus
 compute_dir_size (const char *dirname, const void *ui,
                   compute_dir_size_callback cback,
-                  off_t * ret_marked, double *ret_total, gboolean compute_symlinks)
+                  size_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
 {
     int res;
     struct stat s;
@@ -2134,7 +2141,7 @@ compute_dir_size (const char *dirname, const void *ui,
         if (S_ISLNK (s.st_mode))
         {
             (*ret_marked)++;
-            *ret_total += s.st_size;
+            *ret_total += (uintmax_t) s.st_size;
             return ret;
         }
     }
@@ -2169,8 +2176,8 @@ compute_dir_size (const char *dirname, const void *ui,
 
         if (S_ISDIR (s.st_mode))
         {
-            off_t subdir_count = 0;
-            double subdir_bytes = 0;
+            size_t subdir_count = 0;
+            uintmax_t subdir_bytes = 0;
 
             ret =
                 compute_dir_size (fullname, ui, cback, &subdir_count, &subdir_bytes,
@@ -2188,7 +2195,7 @@ compute_dir_size (const char *dirname, const void *ui,
         else
         {
             (*ret_marked)++;
-            *ret_total += s.st_size;
+            *ret_total += (uintmax_t) s.st_size;
         }
 
         g_free (fullname);
@@ -2589,15 +2596,14 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 if (value == FILE_CONT)
                     do_file_mark (panel, i, 0);
 
-                file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-
-                if (verbose)
+                if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
+                    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
                     file_progress_show_total (tctx, ctx, tctx->progress_bytes, FALSE);
-
-                    if (operation != OP_DELETE)
-                        file_progress_show (ctx, 0, 0, "", FALSE);
                 }
+
+                if (operation != OP_DELETE)
+                    file_progress_show (ctx, 0, 0, "", FALSE);
 
                 if (check_progress_buttons (ctx) == FILE_ABORT)
                     break;

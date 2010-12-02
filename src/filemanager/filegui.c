@@ -283,15 +283,14 @@ file_bps_prepare_for_show (char *buffer, long bps)
 static replace_action_t
 overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 {
-#define ADD_RD_BUTTON(i)\
-	add_widget (ui->replace_dlg,\
-		button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value,\
-		NORMAL_BUTTON, rd_widgets [i].text, 0))
+#define ADD_RD_BUTTON(i) \
+    add_widget (ui->replace_dlg, \
+            button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value, \
+                        NORMAL_BUTTON, rd_widgets [i].text, 0))
 
-#define ADD_RD_LABEL(i, p1, p2)\
-	g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2);\
-	add_widget (ui->replace_dlg,\
-		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
+#define ADD_RD_LABEL(i, p1, p2) \
+    g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2); \
+    add_widget (ui->replace_dlg, label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
 
     /* dialog sizes */
     const int rd_ylen = 17;
@@ -309,17 +308,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
         { N_("Target file already exists!"), 3, 4, 0 },
         /*  1 */
         { "%s", 4, 4, 0 },
-#if (defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64) || (defined _LARGE_FILES && _LARGE_FILES)
         /*  2 */
-        { N_("Source date: %s, size %llu"), 6, 4, 0 },
+        { N_("Source date: %s, size %ju"), 6, 4, 0 },
         /*  3 */
-        { N_("Target date: %s, size %llu"), 7, 4, 0 },
-#else
-        /*  2 */
-        { N_("Source date: %s, size %u"), 6, 4, 0 },
-        /*  3 */
-        { N_("Target date: %s, size %u"), 7, 4, 0 },
-#endif
+        { N_("Target date: %s, size %ju"), 7, 4, 0 },
         /*  4 */
         { N_("&Abort"), 14, 25, REPLACE_ABORT },
         /*  5 */
@@ -436,10 +428,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     add_widget (ui->replace_dlg,
                 label_new (rd_widgets[1].ypos, (rd_xlen - stripped_name_len) / 2, stripped_name));
 
-    /* source date */
-    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (off_t) ui->s_stat->st_size);
-    /* destination date */
-    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (off_t) ui->d_stat->st_size);
+    /* source date and size */
+    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (uintmax_t) ui->s_stat->st_size);
+    /* destination date and size */
+    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (uintmax_t) ui->d_stat->st_size);
 
     ADD_RD_BUTTON (4);          /* Abort */
     ADD_RD_BUTTON (5);          /* If size differs */
@@ -497,8 +489,7 @@ check_progress_buttons (FileOpContext * ctx)
     Gpm_Event event;
     FileOpContextUI *ui;
 
-    if (ctx->ui == NULL)
-        return FILE_CONT;
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
 
     ui = ctx->ui;
 
@@ -655,22 +646,19 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 void
 file_op_context_destroy_ui (FileOpContext * ctx)
 {
-    FileOpContextUI *ui;
-
     g_return_if_fail (ctx != NULL);
 
-    if (ctx->ui)
+    if (ctx->ui != NULL)
     {
-        ui = ctx->ui;
+        FileOpContextUI *ui = (FileOpContextUI *) ctx->ui;
 
         dlg_run_done (ui->op_dlg);
         destroy_dlg (ui->op_dlg);
         g_free (ui);
+        ctx->ui = NULL;
     }
 
     the_hint->widget.y = last_hint_line;
-
-    ctx->ui = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -687,15 +675,13 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
 
-    g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
-
-    ui = ctx->ui;
-
     if (!verbose)
         return;
+
+    g_return_if_fail (ctx != NULL);
+    g_return_if_fail (ctx->ui != NULL);
+
+    ui = ctx->ui;
 
     if (total == 0)
     {
@@ -726,32 +712,24 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_count (FileOpContext * ctx, off_t done, off_t total)
+file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
 {
     char buffer[BUF_TINY];
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->dialog_type != FILEGUI_DIALOG_MULTI_ITEM || ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
-
-    if (!verbose)
-        return;
-
-    g_snprintf (buffer, BUF_TINY, _("Files processed: %llu of %llu"),
-                (unsigned long long) done, (unsigned long long) total);
-
+    g_snprintf (buffer, BUF_TINY, _("Files processed: %zu of %zu"), done, total);
     label_set_text (ui->total_files_processed_label, buffer);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, double copyed_bytes,
-                          gboolean need_show_total_summary)
+file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintmax_t copyed_bytes,
+                          gboolean show_summary)
 {
     char buffer[BUF_TINY];
     char buffer2[BUF_TINY];
@@ -760,15 +738,12 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, double
     struct timeval tv_current;
     FileOpContextUI *ui;
 
-    if (!verbose)
-        return;
-
-    if (ctx->dialog_type != FILEGUI_DIALOG_MULTI_ITEM || ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx != NULL);
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
-    if (ctx->progress_bytes > 0)
+    if (ctx->progress_bytes != 0)
     {
         gauge_set_value (ui->progress_total_gauge, 1024,
                          (int) (1024 * copyed_bytes / ctx->progress_bytes));
@@ -777,8 +752,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, double
     else
         gauge_show (ui->progress_total_gauge, 0);
 
-
-    if (!need_show_total_summary && tctx->bps == 0)
+    if (!show_summary && tctx->bps == 0)
         return;
 
     gettimeofday (&tv_current, NULL);
@@ -795,7 +769,6 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, double
     g_snprintf (buffer, BUF_TINY, _("Total: %s of %s"), buffer2, buffer3);
 
     label_set_text (ui->total_bytes_label, buffer);
-
 }
 
 /* }}} */
@@ -808,23 +781,21 @@ file_progress_show_source (FileOpContext * ctx, const char *s)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
     if (s != NULL)
     {
 #ifdef WITH_FULL_PATHS
-        int i = strlen (current_panel->cwd);
+        size_t i;
+
+        i = strlen (current_panel->cwd);
 
         /* We remove the full path we have added before */
-        if (!strncmp (s, current_panel->cwd, i))
-        {
+        if (strncmp (s, current_panel->cwd, i) == 0)
             if (s[i] == PATH_SEP)
                 s += i + 1;
-        }
 #endif /* WITH_FULL_PATHS */
 
         label_set_text (ui->file_label[0], _("Source"));
@@ -845,9 +816,7 @@ file_progress_show_target (FileOpContext * ctx, const char *s)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
@@ -871,9 +840,7 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-        return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
     label_set_text (ui->file_label[0], _("Deleting"));
