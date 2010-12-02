@@ -250,7 +250,9 @@ const global_keymap_t default_editor_keymap[] = {
 
     {ESC_CHAR, CK_Quit, "Esc"},
     {KEY_BACKSPACE, CK_BackSpace, "BackSpace"},
+    {KEY_BACKSPACE, CK_BackSpace, "C-h"},
     {KEY_DC, CK_Delete, "Delete"},
+    {KEY_DC, CK_Delete, "C-d"},
     {KEY_DOWN, CK_Down, "Down"},
     {KEY_END, CK_End, "End"},
     {KEY_HOME, CK_Home, "Home"},
@@ -607,7 +609,9 @@ const global_keymap_t default_input_keymap[] = {
 
     /* Editing */
     {KEY_BACKSPACE, CK_InputBackwardDelete, "BackSpace"},
+    {KEY_BACKSPACE, CK_InputBackwardDelete, "C-h"},
     {KEY_DC, CK_InputDeleteChar, "Delete"},
+    {KEY_DC, CK_InputDeleteChar, "C-d"},
     {ALT ('d'), CK_InputKillWord, "M-d"},
     {ALT (KEY_BACKSPACE), CK_InputBackwardKillWord, "M-BackSpace"},
 
