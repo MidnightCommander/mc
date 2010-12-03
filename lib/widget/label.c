@@ -85,7 +85,7 @@ label_callback (Widget * w, widget_msg_t msg, int parm)
             while (TRUE)
             {
                 char *q;
-                char c;
+                char c = '\0';
 
                 q = strchr (p, '\n');
                 if (q != NULL)
@@ -99,6 +99,7 @@ label_callback (Widget * w, widget_msg_t msg, int parm)
 
                 if (q == NULL)
                     break;
+
                 q[0] = c;
                 p = q + 1;
                 y++;

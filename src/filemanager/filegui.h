@@ -27,7 +27,7 @@ void file_op_context_destroy_ui (FileOpContext * ctx);
 char *file_mask_dialog (FileOpContext * ctx, FileOperation operation,
                         gboolean only_one,
                         const char *format, const void *text,
-                        const char *def_text, gboolean * do_background);
+                        const char *def_text, gboolean * do_bg);
 
 FileProgressStatus check_progress_buttons (FileOpContext * ctx);
 

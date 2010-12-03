@@ -228,7 +228,9 @@ mcview_ccache_dump (mcview_t * view)
     for (i = 0; i < cache->size; i++)
     {
         (void) fprintf (f,
-                        "entry %8u  offset %8ju  line %8ju  column %8ju  nroff_column %8ju\n",
+                        "entry %8u  offset %8" PRIuMAX
+                        "  line %8" PRIuMAX "  column %8" PRIuMAX
+                        "  nroff_column %8" PRIuMAX "\n",
                         (unsigned int) i,
                         (uintmax_t) cache->cache[i]->cc_offset,
                         (uintmax_t) cache->cache[i]->cc_line,
@@ -242,7 +244,7 @@ mcview_ccache_dump (mcview_t * view)
     {
         mcview_offset_to_coord (view, &line, &column, offset);
         (void) fprintf (f,
-                        "offset %8ju  line %8ju  column %8ju\n",
+                        "offset %8" PRIuMAX "  line %8" PRIuMAX "  column %8" PRIuMAX "\n",
                         (uintmax_t) offset, (uintmax_t) line, (uintmax_t) column);
     }
 
@@ -250,7 +252,7 @@ mcview_ccache_dump (mcview_t * view)
     for (line = 0; TRUE; line++)
     {
         mcview_coord_to_offset (view, &nextline_offset, line + 1, 0);
-        (void) fprintf (f, "nextline_offset %8ju\n", (uintmax_t) nextline_offset);
+        (void) fprintf (f, "nextline_offset %8" PRIuMAX "\n", (uintmax_t) nextline_offset);
 
         for (column = 0; TRUE; column++)
         {
@@ -259,7 +261,7 @@ mcview_ccache_dump (mcview_t * view)
                 break;
 
             (void) fprintf (f,
-                            "line %8ju  column %8ju  offset %8ju\n",
+                            "line %8" PRIuMAX "  column %8" PRIuMAX "  offset %8" PRIuMAX "\n",
                             (uintmax_t) line, (uintmax_t) column, (uintmax_t) offset);
         }
 

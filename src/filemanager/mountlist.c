@@ -549,7 +549,7 @@ read_filesystem_list (int need_fs_type, int all_fs)
 #ifdef MOUNTED_GETMNTENT2       /* SVR4.  */
     {
         struct mnttab mnt;
-        char *table = MNTTAB;
+        const char *table = MNTTAB;
         FILE *fp;
         int ret;
 

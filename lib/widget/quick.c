@@ -31,6 +31,7 @@
 #include <config.h>
 
 #include <stdlib.h>
+#include <stdio.h>              /* fprintf() */
 
 #include "lib/global.h"
 #include "lib/util.h"           /* tilde_expand() */
