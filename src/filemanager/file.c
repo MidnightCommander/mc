@@ -2439,7 +2439,10 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
         /* The source and src_stat variables have been initialized before */
 #ifdef WITH_FULL_PATHS
-        source_with_path = concat_dir_and_file (panel->cwd, source);
+        if (g_path_is_absolute (source))
+            source_with_path = g_strdup (source);
+        else
+            source_with_path = g_build_filename (panel->cwd, source, (char *) NULL);
 #endif /* WITH_FULL_PATHS */
 
         if (panel_operate_init_totals (operation, panel, source_with_path, ctx) == FILE_CONT)
@@ -2530,7 +2533,10 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
 #ifdef WITH_FULL_PATHS
                 g_free (source_with_path);
-                source_with_path = concat_dir_and_file (panel->cwd, source);
+                if (g_path_is_absolute (source))
+                    source_with_path = g_strdup (source);
+                else
+                    source_with_path = g_build_filename (panel->cwd, source, (char *) NULL);
 #endif /* WITH_FULL_PATHS */
 
                 if (operation == OP_DELETE)
