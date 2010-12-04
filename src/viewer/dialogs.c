@@ -266,22 +266,31 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
             {
             case MC_VIEW_GOTO_LINENUM:
                 mcview_coord_to_offset (view, offset, addr, 0);
+                *offset = mcview_bol (view, *offset, 0);
                 break;
             case MC_VIEW_GOTO_PERCENT:
                 if (addr > 100)
                     addr = 100;
                 *offset = addr * mcview_get_filesize (view) / 100;
+                if (!view->hex_mode)
+                    *offset = mcview_bol (view, *offset, 0);
                 break;
             case MC_VIEW_GOTO_OFFSET_DEC:
-                *offset = addr;
-                break;
             case MC_VIEW_GOTO_OFFSET_HEX:
                 *offset = addr;
+                if (!view->hex_mode)
+                    *offset = mcview_bol (view, *offset, 0);
+                else
+                {
+                    addr = mcview_get_filesize (view);
+                    if (*offset > addr)
+                        *offset = addr;
+                }
                 break;
             default:
+                *offset = 0;
                 break;
             }
-            *offset = mcview_bol (view, *offset, 0);
         }
     }
 
