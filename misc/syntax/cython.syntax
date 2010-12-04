@@ -1,0 +1,304 @@
+context default
+    keyword : brightred
+    keyword . white/Orange
+    keyword > yellow
+    keyword < yellow
+    keyword \+ yellow
+    keyword - yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword % yellow
+    keyword = yellow
+    keyword != yellow
+    keyword == yellow
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword ; brightmagenta
+    keyword whole self brightred
+    keyword whole and yellow
+    keyword whole as yellow
+    keyword whole assert yellow
+    keyword whole break yellow
+    keyword whole class yellow
+    keyword whole continue yellow
+    keyword whole def yellow
+    keyword whole del yellow
+    keyword whole elif yellow
+    keyword whole else yellow
+    keyword whole except? yellow
+    keyword whole except yellow
+    keyword whole exec yellow
+    keyword whole finally yellow
+    keyword whole for yellow
+    keyword whole from yellow
+    keyword whole global yellow
+    keyword whole if yellow
+    keyword whole import yellow
+    keyword whole in yellow
+    keyword whole is yellow
+    keyword whole lambda yellow
+    keyword whole not yellow
+    keyword whole or yellow
+    keyword whole pass yellow
+    keyword whole print yellow
+    keyword whole raise yellow
+    keyword whole return yellow
+    keyword whole try yellow
+    keyword whole while yellow
+    keyword whole with yellow
+    keyword whole yield yellow
+    keyword whole by yellow
+    keyword whole cdef yellow
+    keyword whole cimport yellow
+    keyword whole cpdef yellow
+    keyword whole ctypedef yellow
+    keyword whole enum yellow
+    keyword whole extern yellow
+    keyword whole public yellow
+    keyword whole sizeof yellow
+    keyword whole struct yellow
+    keyword whole union yellow
+    keyword whole DEF yellow
+    keyword whole IF yellow
+    keyword whole ELIF yellow
+    keyword whole ELSE yellow
+
+    keyword whole abs brightcyan
+    keyword whole all brightcyan
+    keyword whole any brightcyan
+    keyword whole basestring brightcyan
+    keyword whole bin brightcyan
+    keyword whole bool brightcyan
+    keyword whole callable brightcyan
+    keyword whole chr brightcyan
+    keyword whole classmethod brightcyan
+    keyword whole cmp brightcyan
+    keyword whole coerce brightcyan
+    keyword whole compile brightcyan
+    keyword whole complex brightcyan
+    keyword whole delattr brightcyan
+    keyword whole dict brightcyan
+    keyword whole dir brightcyan
+    keyword whole divmod brightcyan
+    keyword whole enumerate brightcyan
+    keyword whole eval brightcyan
+    keyword whole execfile brightcyan
+    keyword whole file brightcyan
+    keyword whole filter brightcyan
+    keyword whole float brightcyan
+    keyword whole frozenset brightcyan
+    keyword whole getattr brightcyan
+    keyword whole globals brightcyan
+    keyword whole hasattr brightcyan
+    keyword whole hash brightcyan
+    keyword whole help brightcyan
+    keyword whole hex brightcyan
+    keyword whole id brightcyan
+    keyword whole input brightcyan
+    keyword whole int brightcyan
+    keyword whole isinstance brightcyan
+    keyword whole issubclass brightcyan
+    keyword whole iter brightcyan
+    keyword whole len brightcyan
+    keyword whole list brightcyan
+    keyword whole locals brightcyan
+    keyword whole long brightcyan
+    keyword whole map brightcyan
+    keyword whole max brightcyan
+    keyword whole min brightcyan
+    keyword whole next brightcyan
+    keyword whole object brightcyan
+    keyword whole oct brightcyan
+    keyword whole open brightcyan
+    keyword whole ord brightcyan
+    keyword whole pow brightcyan
+    keyword whole print brightcyan
+    keyword whole property brightcyan
+    keyword whole range brightcyan
+    keyword whole raw_input brightcyan
+    keyword whole reduce brightcyan
+    keyword whole reload brightcyan
+    keyword whole repr brightcyan
+    keyword whole reversed brightcyan
+    keyword whole round brightcyan
+    keyword whole setattr brightcyan
+    keyword whole slice brightcyan
+    keyword whole sorted brightcyan
+    keyword whole staticmethod brightcyan
+    keyword whole str brightcyan
+    keyword whole sum brightcyan
+    keyword whole super brightcyan
+    keyword whole tuple brightcyan
+    keyword whole type brightcyan
+    keyword whole unichr brightcyan
+    keyword whole unicode brightcyan
+    keyword whole vars brightcyan
+    keyword whole xrange brightcyan
+    keyword whole zip brightcyan
+    keyword whole NULL brightcyan
+    keyword whole void brightcyan
+    keyword whole bint brightcyan
+    keyword whole char brightcyan
+    keyword whole short brightcyan
+    keyword whole double brightcyan
+    keyword whole Py_ssize_t brightcyan
+    keyword whole size_t brightcyan
+
+    keyword whole atof magenta
+    keyword whole atoi magenta
+    keyword whole atol magenta
+    keyword whole expandtabs magenta
+    keyword whole find magenta
+    keyword whole rfind magenta
+    keyword whole index magenta
+    keyword whole rindex magenta
+    keyword whole count magenta
+    keyword whole split magenta
+    keyword whole splitfields magenta
+    keyword whole join magenta
+    keyword whole joinfields magenta
+    keyword whole strip magenta
+    keyword whole lstrip magenta
+    keyword whole rstrip magenta
+    keyword whole swapcase magenta
+    keyword whole upper magenta
+    keyword whole lower magenta
+    keyword whole ljust magenta
+    keyword whole rjust magenta
+    keyword whole center magenta
+    keyword whole zfill magenta
+
+    keyword whole include brightmagenta
+    keyword whole gil red
+    keyword whole nogil red
+    keyword whole readonly red
+
+    keyword whole __init__ lightgray
+    keyword whole __del__ lightgray
+    keyword whole __repr__ lightgray
+    keyword whole __str__ lightgray
+    keyword whole __cmp__ lightgray
+    keyword whole __hash__ lightgray
+    keyword whole __call__ lightgray
+    keyword whole __getattr__ lightgray
+    keyword whole __setattr__ lightgray
+    keyword whole __delattr__ lightgray
+    keyword whole __len__ lightgray
+    keyword whole __getitem__ lightgray
+    keyword whole __setitem__ lightgray
+    keyword whole __delitem__ lightgray
+    keyword whole __getslice__ lightgray
+    keyword whole __setslice__ lightgray
+    keyword whole __delslice__ lightgray
+    keyword whole __add__ lightgray
+    keyword whole __sub__ lightgray
+    keyword whole __mul__ lightgray
+    keyword whole __div__ lightgray
+    keyword whole __mod__ lightgray
+    keyword whole __divmod__ lightgray
+    keyword whole __pow__ lightgray
+    keyword whole __lshift__ lightgray
+    keyword whole __rshift__ lightgray
+    keyword whole __and__ lightgray
+    keyword whole __xor__ lightgray
+    keyword whole __or__ lightgray
+    keyword whole __neg__ lightgray
+    keyword whole __pos__ lightgray
+    keyword whole __abs__ lightgray
+    keyword whole __invert__ lightgray
+    keyword whole __nonzero__ lightgray
+    keyword whole __coerce__ lightgray
+    keyword whole __int__ lightgray
+    keyword whole __long__ lightgray
+    keyword whole __float__ lightgray
+    keyword whole __oct__ lightgray
+    keyword whole __hex__ lightgray
+
+    keyword whole __radd__ lightgray
+    keyword whole __rsub__ lightgray
+    keyword whole __rmul__ lightgray
+    keyword whole __rdiv__ lightgray
+    keyword whole __rmod__ lightgray
+    keyword whole __rdivmod__ lightgray
+    keyword whole __rpow__ lightgray
+    keyword whole __rlshift__ lightgray
+    keyword whole __rrshift__ lightgray
+    keyword whole __rand__ lightgray
+    keyword whole __rxor__ lightgray
+    keyword whole __ror__ lightgray
+
+    keyword whole __+__ brightred
+
+context """ """ green
+    keyword \\" brightgreen
+    keyword \\\n brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[.\]\[0123456789\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\{01234567\}\{01234567\} brightgreen
+    keyword \\\\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
+
+context ''' ''' green
+    keyword \\" brightgreen
+    keyword \\\n brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[.\]\[0123456789\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\{01234567\}\{01234567\} brightgreen
+    keyword \\\\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
+
+context # \n brown
+    keyword coding\{=:\}\[\s\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightmagenta
+    keyword vim:fileencoding=\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightmagenta
+    keyword -\*-\[\s\]coding:\[\s\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]\[\s\]-\*- brightmagenta
+    spellcheck
+
+context " " green
+    keyword \\" brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[.\]\[0123456789\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
+
+context ' ' green
+    keyword \\" brightgreen
+    keyword \\\n brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[.\]\[0123456789\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
