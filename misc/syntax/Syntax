@@ -46,6 +46,9 @@ include perl.syntax
 file ..\*\\.(py|PY)$ Python\sProgram ^#!.\*([\s/]python|@PYTHON@)
 include python.syntax
 
+file ..\*\\.(pyx|pxd|pxi)$ Cython\sor\sPyrex\sProgram
+include cython.syntax
+
 file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
 include ruby.syntax
 

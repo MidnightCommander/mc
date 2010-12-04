@@ -51,6 +51,7 @@ SYNTAXFILES =			\
 	procmail.syntax		\
 	properties.syntax	\
 	python.syntax		\
+	cython.syntax		\
 	ruby.syntax		\
 	sh.syntax		\
 	slang.syntax		\
