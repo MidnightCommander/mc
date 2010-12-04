@@ -295,8 +295,8 @@ PanelDeleteLocal = F18
 PanelReverseSelection = alt-asterisk
 PanelSelect = alt-plus
 PanelUnselect = alt-minus
-PanelCtrlNextPage = ctrl-pgdn
-PanelCtrlPrevPage = ctrl-pgup
+PanelGotoChildDir = ctrl-pgdn
+PanelGotoParentDir = ctrl-pgup
 PanelDirectoryHistoryList = alt-shift-h
 PanelDirectoryHistoryNext = alt-u
 PanelDirectoryHistoryPrev = alt-y
@@ -315,6 +315,7 @@ PanelSortOrderByName=
 PanelSortOrderByExt=
 PanelSortOrderBySize=
 PanelSortOrderByMTime=
+PanelSmartGotoParentDir=
 
 [input]
 InputBol = ctrl-a; alt-lt; home; a1
