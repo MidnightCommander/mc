@@ -1,7 +1,7 @@
-#LIST /${FISH_DIR }
+#LIST /${FISH_DIR}
 LC_TIME=C
 export LC_TIME
-
+perl_res="1"
 fish_list_lsq ()
 {
 FISH_DIR="$1"
@@ -149,14 +149,18 @@ while((my $filename = readdir (DIR))){
 }
 exit 0
 ' "/${FISH_DIR}"
+perl_res=$?
 }
 
 if [ -n "${FISH_HAVE_PERL}" ]; then
     fish_list_perl "/${FISH_FILENAME}"
-elif [ -n "${FISH_HAVE_LSQ}" ]; then
-    fish_list_lsq "/${FISH_FILENAME}"
-elif [ -n "${FISH_HAVE_SED}" ]; then
-    fish_list_sed "/${FISH_FILENAME}"
-else
-    fish_list_poor_ls "/${FISH_FILENAME}"
+fi
+if [ "${perl_res}" != "0" ]; then
+    if [ -n "${FISH_HAVE_LSQ}" ]; then
+        fish_list_lsq "/${FISH_FILENAME}"
+    elif [ -n "${FISH_HAVE_SED}" ]; then
+        fish_list_sed "/${FISH_FILENAME}"
+    else
+        fish_list_poor_ls "/${FISH_FILENAME}"
+    fi
 fi
