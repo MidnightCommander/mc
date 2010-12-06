@@ -205,34 +205,22 @@ test_type (WPanel * panel, char *arg)
 static char *
 test_condition (WEdit * edit_widget, char *p, int *condition)
 {
-    WPanel *panel;
     char arg[256];
-    mc_search_type_t search_type;
-
-    if (easy_patterns)
-    {
-        search_type = MC_SEARCH_T_GLOB;
-    }
-    else
-    {
-        search_type = MC_SEARCH_T_REGEX;
-    }
+    const mc_search_type_t search_type = easy_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
 
     /* Handle one condition */
     for (; *p != '\n' && *p != '&' && *p != '|'; p++)
     {
+        WPanel *panel = NULL;
+
         /* support quote space .mnu */
         if ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
             continue;
         if (*p >= 'a')
             panel = current_panel;
-        else
-        {
-            if (get_other_type () == view_listing)
-                panel = other_panel;
-            else
-                panel = NULL;
-        }
+        else if (get_other_type () == view_listing)
+            panel = other_panel;
+
         *p |= 0x20;
 
         switch (*p++)
@@ -244,29 +232,34 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
             break;
         case 'f':              /* file name pattern */
             p = extract_arg (p, arg, sizeof (arg));
-            *condition = panel
-                && mc_search (arg, panel->dir.list[panel->selected].fname, search_type);
+#ifdef USE_INTERNAL_EDIT
+            if (edit_widget != NULL)
+                *condition = mc_search (arg, edit_get_file_name (edit_widget), search_type) ? 1 : 0;
+            else
+#endif
+                *condition = panel != NULL &&
+                    mc_search (arg, panel->dir.list[panel->selected].fname, search_type) ? 1 : 0;
             break;
         case 'y':              /* syntax pattern */
 #ifdef USE_INTERNAL_EDIT
-            if (edit_widget)
+            if (edit_widget != NULL)
             {
                 const char *syntax_type = edit_get_syntax_type (edit_widget);
                 if (syntax_type != NULL)
                 {
                     p = extract_arg (p, arg, sizeof (arg));
-                    *condition = panel && mc_search (arg, syntax_type, MC_SEARCH_T_NORMAL);
+                    *condition = mc_search (arg, syntax_type, MC_SEARCH_T_NORMAL) ? 1 : 0;
                 }
             }
 #endif
             break;
         case 'd':
             p = extract_arg (p, arg, sizeof (arg));
-            *condition = panel && mc_search (arg, panel->cwd, search_type);
+            *condition = panel != NULL && mc_search (arg, panel->cwd, search_type) ? 1 : 0;
             break;
         case 't':
             p = extract_arg (p, arg, sizeof (arg));
-            *condition = panel && test_type (panel, arg);
+            *condition = panel != NULL && test_type (panel, arg) ? 1 : 0;
             break;
         case 'x':              /* executable */
             {
@@ -274,7 +267,7 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
 
                 p = extract_arg (p, arg, sizeof (arg));
                 if (stat (arg, &status) == 0)
-                    *condition = is_exe (status.st_mode);
+                    *condition = is_exe (status.st_mode) ? 1 : 0;
                 else
                     *condition = 0;
                 break;
