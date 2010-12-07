@@ -1,0 +1,12 @@
+
+update-po: Makefile
+	$(MAKE) $(DOMAIN).pot-update && \
+	sed \
+	    -e '/#, fuzzy/d' \
+	    -e 's/Project-Id-Version: PACKAGE VERSION/Project-Id-Version: $(PACKAGE) $(VERSION)/' \
+	    -e 's/^"Plural-Forms: nplurals=INTEGER;/#"Plural-Forms: nplurals=INTEGER;/' \
+	    -e 's@Content-Type: text/plain; charset=CHARSET@Content-Type: text/plain; charset=utf-8@' \
+	    < $(srcdir)/$(DOMAIN).pot > $(DOMAIN).1po && \
+	mv -f $(DOMAIN).1po $(srcdir)/$(DOMAIN).pot
+	test -z "$(UPDATEPOFILES)" || $(MAKE) $(UPDATEPOFILES)
+	$(MAKE) update-gmo
