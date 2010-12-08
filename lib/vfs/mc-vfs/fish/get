@@ -1,5 +1,6 @@
 #RETR $FISH_FILENAME $FISH_START_OFFSET
-export LC_TIME=C
+LC_TIME=C
+export LC_TIME
 fish_get_perl ()
 {
 FILENAME=$1
@@ -38,7 +39,8 @@ fish_get_tail ()
 {
 FILENAME=$1
 OFFSET=$2
-export LC_TIME=C
+LC_TIME=C
+export LC_TIME
 if dd if="${FILENAME}" of=/dev/null bs=1 count=1 2>/dev/null ; then
     file_size=`ls -ln "${FILENAME}" 2>/dev/null | (
        read p l u g s r
@@ -69,7 +71,8 @@ fish_get_dd ()
 {
 FILENAME=$1
 OFFSET=$2
-export LC_TIME=C
+LC_TIME=C
+export LC_TIME
 if dd if="${FILENAME}" of=/dev/null bs=1 count=1 2>/dev/null ; then
     file_size=`ls -ln "${FILENAME}" 2>/dev/null | (
        read p l u g s r

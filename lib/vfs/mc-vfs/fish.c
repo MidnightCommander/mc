@@ -332,29 +332,29 @@ fish_set_env (int flags)
 {
     GString *tmp;
 
-    tmp = g_string_sized_new (150);
-    g_string_assign (tmp, "export ");
+    tmp = g_string_sized_new (250);
+    g_string_assign (tmp, "");
 
     if ((flags & FISH_HAVE_HEAD) != 0)
-        g_string_append (tmp, "FISH_HAVE_HEAD=1 ");
+        g_string_append (tmp, "FISH_HAVE_HEAD=1 export FISH_HAVE_HEAD; ");
 
     if ((flags & FISH_HAVE_SED) != 0)
-        g_string_append (tmp, "FISH_HAVE_SED=1 ");
+        g_string_append (tmp, "FISH_HAVE_SED=1 export FISH_HAVE_SED; ");
 
     if ((flags & FISH_HAVE_AWK) != 0)
-        g_string_append (tmp, "FISH_HAVE_AWK=1 ");
+        g_string_append (tmp, "FISH_HAVE_AWK=1 export FISH_HAVE_AWK; ");
 
     if ((flags & FISH_HAVE_PERL) != 0)
-        g_string_append (tmp, "FISH_HAVE_PERL=1 ");
+        g_string_append (tmp, "FISH_HAVE_PERL=1 export FISH_HAVE_PERL; ");
 
     if ((flags & FISH_HAVE_LSQ) != 0)
-        g_string_append (tmp, "FISH_HAVE_LSQ=1 ");
+        g_string_append (tmp, "FISH_HAVE_LSQ=1 export FISH_HAVE_LSQ; ");
 
     if ((flags & FISH_HAVE_DATE_MDYT) != 0)
-        g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 ");
+        g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 export FISH_HAVE_DATE_MDYT; ");
 
     if ((flags & FISH_HAVE_TAIL) != 0)
-        g_string_append (tmp, "FISH_HAVE_TAIL=1 ");
+        g_string_append (tmp, "FISH_HAVE_TAIL=1 export FISH_HAVE_TAIL; ");
 
     return g_string_free (tmp, FALSE);
 }
@@ -526,7 +526,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command
         (me, super, WAIT_REPLY,
-         "export LANG=C LC_ALL=C LC_TIME=C\n" "echo '### 200'\n") != COMPLETE)
+         "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     print_vfs_message (_("fish: Getting host info..."));
