@@ -664,7 +664,7 @@ edit_backspace (WEdit * edit, const int byte_delete)
     {
         if (edit->mark1 >= edit->curs1)
             edit->mark1--;
-        if (edit->mark1 >= edit->curs1)
+        if (edit->mark2 >= edit->curs1)
             edit->mark2--;
         if (edit->last_get_rule >= edit->curs1)
             edit->last_get_rule--;
