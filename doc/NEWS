@@ -1,3 +1,77 @@
+Version 4.7.5-pre1
+
+- Core
+
+    * Case insensitive sort order of files does not mix dot-files with others (#1894)
+    * Repeat previous quicksearch on C-s C-s (without entering text) (#2365)
+    * Added new colors for dialogs and status bars (#2170, #2171, #2197)
+    * Added new action PanelSmartGotoParentDir. Not defined by default. This keybinding maybe used
+      for bind 'Backspace' as hotkey for 'cd ..' (only if command line is empty)(#2375)
+
+- VFS
+
+    * Hide panels before connect to the FISH (#2268)
+
+- Editor
+
+    * Internal editor's bookmarks are persistent now and not lost after exit from the editor.
+      They are saved in ~/.mc/filepos file (#2287)
+    * Added forgotten shortcuts from 4.6 branch (#2404)
+    * Added cython syntax highlighting (#2427)
+
+- Viewer
+
+    * Speed up of up/down moving (#2229) 
+
+- Misc
+
+    * Changed installation destination for some files (#1424):
+        - /etc/mc/Syntax -> /usr/share/mc/syntax/Syntax;
+        - /etc/mc/mc.lib -> /usr/share/mc/mc.lib;
+        - /etc/mc/mc.charsets -> /usr/share/mc/mc.charsets. Added capability to load codepage list
+          from /usr/share/mc/mc.charsets and /etc/mc/mc.charsets and merge them then;
+        - hint files are installed into /usr/share/mc/hints instead of /usr/share/mc;
+        - help files are installed into /usr/share/mc/help instead of /usr/share/mc.
+    * Massive reorganizing of source code tree and total indentation in according with mc policy (#2409)
+    * Doc updates
+    * Translation updates
+    * Added new translations: Basque, Estonian, Georgian, Indonesian
+    * Extended list of GCC warning flags (#2409)
+    * Split GLib and GModule compiler and linker options (#2409)
+    * Added dark skin
+
+- Fixes
+
+    * Hang up after exit on FreeBSD (#2333, #2415)
+    * Segfault on NetBSD >= 3.0 on startup (#2425)
+    * Multi-screen engine doesn't handle correctly some cases (#1490)
+    * Overflow of file operation counters (#2429)
+    * Fx key numbers were not displayed for disabled keys (#2350)
+    * Can't put char '?' into a new name (#2327)
+    * Incorrect initial value of WCheck and WRadio widgets width (#2362)
+    * Panel encoding is not shown correctly in "Choose codepage" dialog (#1512)
+    * Cannot change panel encoding without VFS support (#2137)
+    * Panel contents isn't scrolled down by mouse dragging (#2395)
+    * Panel states are saved in panels.ini at quit only if "Auto save panels setup" option is set (#1939)
+    * Incorrect key event handling in "Listing mode" dialog (#2045)
+    * Usability of field history in "Find file" dialog (#2046, #2407)
+    * Find "Whole words" search bug (#2396)
+    * Directory ignorance does't work in file find (#2366, #2434)
+    * Incorrect line jump when started as editor (#2344)
+    * User menu in standalone mcedit doesn't show filetype-specific items (#1651)
+    * Configure script doesn't set samba configdir (#2419)
+    * Lost transparency colors in mcedit [editnormal] background depends on [normal] (#1785)
+    * Syntax highlighting is lost after manual change (#2324)
+    * ~ is not treated properly in editor's "Save As" dialog (#2398)
+    * Broken action 'cursor beyond EOL' (#2135, #2411)
+    * Incorrect charset encoding in search in editor (#2417)
+    * Segmentation fault in mcviewer on ARM architecture (#2356)
+    * Viewer 'Goto' dialog doesn't allow go to the specified offset exactly (#2435)
+    * Broken IPv4 FTP connection scheme (#121)
+    * Default internal FISH scripts are broken (#2347)
+    * Permission denied while connecting to Sun host via ssh (#2031)
+
+
 Version 4.7.4
 
 - Core
