@@ -1166,8 +1166,12 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
         }
 
         split_dir_name (me, q, &dirname, &name, &save);
-        /* FIXME: check if vfs_s_find_inode returns NULL */
         dir = vfs_s_find_inode (me, super, dirname, LINK_FOLLOW, FL_DIR);
+        if (dir == NULL)
+        {
+            g_free (q);
+            return NULL;
+        }
         if (save)
             *save = PATH_SEP;
         ent = vfs_s_generate_entry (me, name, dir, 0755);
