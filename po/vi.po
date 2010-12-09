@@ -1,387 +1,470 @@
-# Vietnamese translation of Midnight Commander
-# Copyright (C) 1998-2003, 2005, 2006 Free Software Foundation, Inc.
-# Phan Vĩnh Thịnh <teppi82@gmail.com>, 2006.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2010-11-28 23:42+0200\n"
-"PO-Revision-Date: 2006-08-16 16:20+0400\n"
-"Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
-"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
-"Language: vi\n"
+"Project-Id-Version: Midnight Commander\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
+"POT-Creation-Date: 2010-12-08 12:27+0200\n"
+"PO-Revision-Date: 2010-12-09 08:31+0000\n"
+"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-#, fuzzy
+#: lib/charsets.c:215
 msgid "Warning: cannot load codepages list"
-msgstr "Không thay đổi được thư mục"
+msgstr ""
 
+#: lib/charsets.c:218
 msgid "7-bit ASCII"
 msgstr ""
 
+#: lib/charsets.c:309 lib/charsets.c:320
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Không chuyển được bảng mã từ %s thành %s"
 
-#, fuzzy, c-format
+#: lib/lock.c:235
+#, c-format
 msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"Tập tin \"%s\" đang được soạn thảo\n"
-"Ngưòi dùng: %s\n"
-"ID tiến trình: %d"
 
+#: lib/lock.c:240
 msgid "File locked"
 msgstr "Tập tin bị khóa"
 
+#: lib/lock.c:240
 msgid "&Grab lock"
 msgstr "&Chiếm đoạt khóa"
 
+#: lib/lock.c:240
 msgid "&Ignore lock"
 msgstr "&Lời đi khóa"
 
-#, fuzzy
+#: lib/search/lib.c:42 src/diffviewer/search.c:262 src/editor/editcmd.c:843
+#: src/editor/editcmd.c:883 src/editor/editcmd.c:969 src/editor/editcmd.c:2251
+#: src/viewer/search.c:100
 msgid "Search string not found"
-msgstr " Không tìm thấy chuỗi tìm kiếm "
+msgstr ""
 
+#: lib/search/lib.c:43
 msgid "Not implemented yet"
 msgstr ""
 
+#: lib/search/lib.c:45
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
 
-#, fuzzy, c-format
+#: lib/search/lib.c:46
+#, c-format
 msgid "Invalid token number %d"
-msgstr " Dấu hiệu đích đến không đúng "
+msgstr ""
 
+#: lib/search/search.c:50
 msgid "Normal"
 msgstr ""
 
+#: lib/search/search.c:51
 msgid "&Regular expression"
 msgstr "&Biểu thức chính quy"
 
+#: lib/search/search.c:52
 msgid "Hexadecimal"
 msgstr ""
 
+#: lib/search/search.c:53
 msgid "Wildcard search"
 msgstr ""
 
+#: lib/skin/common.c:124
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
 
+#: lib/skin/common.c:136
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
 
+#: lib/tty/key.c:98
 msgid "Function key 1"
 msgstr "Phím chức năng 1"
 
+#: lib/tty/key.c:99
 msgid "Function key 2"
 msgstr "Phím chức năng 2"
 
+#: lib/tty/key.c:100
 msgid "Function key 3"
 msgstr "Phím chức năng 3"
 
+#: lib/tty/key.c:101
 msgid "Function key 4"
 msgstr "Phím chức năng 4"
 
+#: lib/tty/key.c:102
 msgid "Function key 5"
 msgstr "Phím chức năng 5"
 
+#: lib/tty/key.c:103
 msgid "Function key 6"
 msgstr "Phím chức năng 6"
 
+#: lib/tty/key.c:104
 msgid "Function key 7"
 msgstr "Phím chức năng 7"
 
+#: lib/tty/key.c:105
 msgid "Function key 8"
 msgstr "Phím chức năng 8"
 
+#: lib/tty/key.c:106
 msgid "Function key 9"
 msgstr "Phím chức năng 9"
 
+#: lib/tty/key.c:107
 msgid "Function key 10"
 msgstr "Phím chức năng 10"
 
+#: lib/tty/key.c:108
 msgid "Function key 11"
 msgstr "Phím chức năng 11"
 
+#: lib/tty/key.c:109
 msgid "Function key 12"
 msgstr "Phím chức năng 12"
 
+#: lib/tty/key.c:110
 msgid "Function key 13"
 msgstr "Phím chức năng 13"
 
+#: lib/tty/key.c:111
 msgid "Function key 14"
 msgstr "Phím chức năng 14"
 
+#: lib/tty/key.c:112
 msgid "Function key 15"
 msgstr "Phím chức năng 15"
 
+#: lib/tty/key.c:113
 msgid "Function key 16"
 msgstr "Phím chức năng 16"
 
+#: lib/tty/key.c:114
 msgid "Function key 17"
 msgstr "Phím chức năng 17"
 
+#: lib/tty/key.c:115
 msgid "Function key 18"
 msgstr "Phím chức năng 18"
 
+#: lib/tty/key.c:116
 msgid "Function key 19"
 msgstr "Phím chức năng 19"
 
+#: lib/tty/key.c:117
 msgid "Function key 20"
 msgstr "Phím chức năng 20"
 
+#: lib/tty/key.c:118 lib/tty/key.c:157
 msgid "Backspace key"
 msgstr "Phím Backspace"
 
+#: lib/tty/key.c:119
 msgid "End key"
 msgstr "Phím End"
 
+#: lib/tty/key.c:120
 msgid "Up arrow key"
 msgstr "Phím mũi tên lên"
 
+#: lib/tty/key.c:121
 msgid "Down arrow key"
 msgstr "Phím mũi tên xuống"
 
+#: lib/tty/key.c:122
 msgid "Left arrow key"
 msgstr "Phím mũi tên sang trái"
 
+#: lib/tty/key.c:123
 msgid "Right arrow key"
 msgstr "Phím mũi tên sang phải"
 
+#: lib/tty/key.c:124
 msgid "Home key"
 msgstr "Phím Home"
 
+#: lib/tty/key.c:125
 msgid "Page Down key"
 msgstr "Phím Page Down"
 
+#: lib/tty/key.c:126
 msgid "Page Up key"
 msgstr "Phím Page Up"
 
+#: lib/tty/key.c:127 lib/tty/key.c:158
 msgid "Insert key"
 msgstr "Phím Insert"
 
+#: lib/tty/key.c:128 lib/tty/key.c:159
 msgid "Delete key"
 msgstr "Phím Delete"
 
+#: lib/tty/key.c:129
 msgid "Completion/M-tab"
 msgstr "Hoàn thành/M-Tab"
 
+#: lib/tty/key.c:130
 msgid "+ on keypad"
 msgstr "+ trên phần keypad"
 
+#: lib/tty/key.c:131
 msgid "- on keypad"
 msgstr "- trên phần keypad"
 
+#: lib/tty/key.c:132
 msgid "Slash on keypad"
 msgstr "Slash trên keypad"
 
+#: lib/tty/key.c:133
 msgid "* on keypad"
 msgstr "* trên phần keypad"
 
-#, fuzzy
+#: lib/tty/key.c:136 lib/tty/key.c:156
 msgid "Escape key"
-msgstr "Slash trên keypad"
+msgstr ""
 
+#: lib/tty/key.c:137
 msgid "Left arrow keypad"
 msgstr "Mũi tên sang trái trên phần keypad"
 
+#: lib/tty/key.c:138
 msgid "Right arrow keypad"
 msgstr "Mũi tên sang phải trên phần keypad"
 
+#: lib/tty/key.c:139
 msgid "Up arrow keypad"
 msgstr "Mũi tên lên trên của phần keypad"
 
+#: lib/tty/key.c:140
 msgid "Down arrow keypad"
 msgstr "Mũi tên xuống dưới của phần keypad"
 
+#: lib/tty/key.c:141
 msgid "Home on keypad"
 msgstr "Home trên keypad"
 
+#: lib/tty/key.c:142
 msgid "End on keypad"
 msgstr "End trên keypad"
 
+#: lib/tty/key.c:143
 msgid "Page Down keypad"
 msgstr "Page Down trên keypad"
 
+#: lib/tty/key.c:144
 msgid "Page Up keypad"
 msgstr "Page Up trên keypad"
 
+#: lib/tty/key.c:145
 msgid "Insert on keypad"
 msgstr "Insert trên keypad"
 
+#: lib/tty/key.c:146
 msgid "Delete on keypad"
 msgstr "Delete trên keypad"
 
+#: lib/tty/key.c:147
 msgid "Enter on keypad"
 msgstr "Enter trên keypad"
 
-#, fuzzy
+#: lib/tty/key.c:148
 msgid "Function key 21"
-msgstr "Phím chức năng 1"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:149
 msgid "Function key 22"
-msgstr "Phím chức năng 2"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:150
 msgid "Function key 23"
-msgstr "Phím chức năng 2"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:151
 msgid "Function key 24"
-msgstr "Phím chức năng 2"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:152
 msgid "A1 key"
-msgstr "Phím End"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:153
 msgid "C1 key"
-msgstr "Phím End"
+msgstr ""
 
+#: lib/tty/key.c:160
 msgid "Plus"
 msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:161
 msgid "Minus"
-msgstr "Trđơn "
+msgstr ""
 
+#: lib/tty/key.c:162
 msgid "Asterisk"
 msgstr ""
 
+#: lib/tty/key.c:163
 msgid "Dot"
 msgstr ""
 
+#: lib/tty/key.c:164
 msgid "Less than"
 msgstr ""
 
+#: lib/tty/key.c:165
 msgid "Great than"
 msgstr ""
 
+#: lib/tty/key.c:166
 msgid "Equal"
 msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:167
 msgid "Comma"
-msgstr "Câu lệnh"
+msgstr ""
 
+#: lib/tty/key.c:168
 msgid "Apostrophe"
 msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:169
 msgid "Colon"
-msgstr "Đếm"
+msgstr ""
 
+#: lib/tty/key.c:170
 msgid "Exclamation mark"
 msgstr ""
 
+#: lib/tty/key.c:171
 msgid "Question mark"
 msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:172
 msgid "Ampersand"
-msgstr "&Thêm vào cuối"
+msgstr ""
 
+#: lib/tty/key.c:173
 msgid "Dollar sign"
 msgstr ""
 
+#: lib/tty/key.c:174
 msgid "Quotation mark"
 msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:175
 msgid "Caret"
-msgstr "Đích"
+msgstr ""
 
+#: lib/tty/key.c:176
 msgid "Tilda"
 msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:177
 msgid "Prime"
-msgstr "Quay lại"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:178
 msgid "Underline"
-msgstr "Hãy nhập số thứ tự dòng: "
+msgstr ""
 
+#: lib/tty/key.c:179
 msgid "Understrike"
 msgstr ""
 
+#: lib/tty/key.c:180
 msgid "Pipe"
 msgstr ""
 
+#: lib/tty/key.c:181
 msgid "Left parenthesis"
 msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:182
 msgid "Right parenthesis"
-msgstr "Phím mũi tên sang phải"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:183
 msgid "Left bracket"
-msgstr "Phím mũi tên sang trái"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:184
 msgid "Right bracket"
-msgstr "Phím mũi tên sang phải"
+msgstr ""
 
+#: lib/tty/key.c:185
 msgid "Left brace"
 msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:186
 msgid "Right brace"
-msgstr "Phím mũi tên sang phải"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:187
 msgid "Enter"
-msgstr "sở hữu"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:188
 msgid "Tab key"
-msgstr "+ trên phần keypad"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:189
 msgid "Space key"
-msgstr "Slash trên keypad"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:190
 msgid "Slash key"
-msgstr "Slash trên keypad"
+msgstr ""
 
-#, fuzzy
+#: lib/tty/key.c:191
 msgid "Backslash key"
-msgstr "Phím Backspace"
+msgstr ""
 
+#: lib/tty/key.c:192 lib/tty/key.c:193
 msgid "Number sign #"
 msgstr ""
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
+#: lib/tty/key.c:195
 msgid "At sign"
 msgstr ""
 
+#: lib/tty/key.c:198 lib/tty/key.c:199
 msgid "Ctrl"
 msgstr ""
 
+#: lib/tty/key.c:200 lib/tty/key.c:201 lib/tty/key.c:202
 msgid "Alt"
 msgstr ""
 
+#: lib/tty/key.c:203
 msgid "Shift"
 msgstr ""
 
+#: lib/tty/tty-slang.c:262
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -390,49 +473,66 @@ msgstr ""
 "Kích thước màn hình %dx%d không được hỗ trợ.\n"
 "Hãy kiểm tra biến môi trường TERM.\n"
 
+#: lib/utilunix.c:359
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s không phải là một thư mục\n"
 
+#: lib/utilunix.c:361
 #, c-format
 msgid "Directory %s is not owned by you\n"
 msgstr "Bạn không sở hữu thư mục %s\n"
 
+#: lib/utilunix.c:363
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr "Không đặt được quyền hạn đúng cho thư mục %s\n"
 
+#: lib/utilunix.c:371
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr "Không tạo được thư mục tạm thời %s: %s\n"
 
+#: lib/utilunix.c:404
 #, c-format
 msgid "Temporary files will be created in %s\n"
 msgstr "Tập tin tạm thời sẽ được tạo trong thư mục %s\n"
 
+#: lib/utilunix.c:410
 #, c-format
 msgid "Temporary files will not be created\n"
 msgstr "Tập tin tạm thời sẽ không được tạo ra\n"
 
+#: lib/utilunix.c:414 src/execute.c:168
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Để tiếp tục nhấn phím bất kỳ..."
 
+#: lib/utilunix.c:438 lib/utilunix.c:443 lib/utilunix.c:495
+#: src/editor/editcmd.c:168 src/editor/editcmd.c:192 src/editor/editcmd.c:391
+#: src/editor/editcmd.c:771 src/editor/editcmd.c:1424
+#: src/editor/editcmd.c:1647 src/editor/editcmd.c:1670
+#: src/editor/editcmd.c:1962 src/editor/editcmd.c:3050
+#: src/editor/editcmd.c:3090 src/editor/editcmd_dialogs.c:518
+#: src/execute.c:113 src/filemanager/file.c:1369 src/filemanager/panel.c:3706
+#: src/help.c:359 src/main.c:486 src/main.c:496 src/subshell.c:392
+#: src/subshell.c:1085 src/viewer/actions_cmd.c:277
 msgid "Warning"
 msgstr "Cảnh báo"
 
-#, fuzzy
+#: lib/utilunix.c:438
 msgid "Pipe failed"
-msgstr " Lỗi đường ống "
+msgstr ""
 
-#, fuzzy
+#: lib/utilunix.c:443
 msgid "Dup failed"
-msgstr " Lỗi lặp lại "
+msgstr ""
 
-#, fuzzy
+#: lib/utilunix.c:500
 msgid "Error dup'ing old error pipe"
-msgstr " Lỗi đọc từ đường ống (pipe): %s "
+msgstr ""
 
+#: lib/vfs/mc-vfs/cpio.c:201 lib/vfs/mc-vfs/cpio.c:220
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
@@ -441,6 +541,7 @@ msgstr ""
 "Không mở được tập tin nén cpio\n"
 "%s"
 
+#: lib/vfs/mc-vfs/cpio.c:294
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -449,6 +550,7 @@ msgstr ""
 "Phần cuối của tập tin nén cpio bị hỏng\n"
 "%s"
 
+#: lib/vfs/mc-vfs/cpio.c:380
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -461,10 +563,14 @@ msgstr ""
 "trong tập tin nén cpio\n"
 "%s"
 
+#: lib/vfs/mc-vfs/cpio.c:421
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s chứa mục lặp lại! Nhảy qua!"
 
+#: lib/vfs/mc-vfs/cpio.c:510 lib/vfs/mc-vfs/cpio.c:570
+#: lib/vfs/mc-vfs/cpio.c:576 lib/vfs/mc-vfs/cpio.c:639
+#: lib/vfs/mc-vfs/cpio.c:649
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
@@ -473,6 +579,7 @@ msgstr ""
 "Lỗi phần đầu cpio phát hiện trong\n"
 "%s"
 
+#: lib/vfs/mc-vfs/cpio.c:704
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -481,24 +588,24 @@ msgstr ""
 "Kết thúc tập tin không mong đợi\n"
 "%s"
 
+#: lib/vfs/mc-vfs/direntry.c:282
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr "Cache thư mục hết hạn cho %s"
 
-#, fuzzy, c-format
-msgid "%s: %s: %s %3d%% (%ju bytes transferred)"
-msgstr "%s: %s: %s %3d%% (đã truyền tải %lu byte)"
+#: lib/vfs/mc-vfs/direntry.c:713 lib/vfs/mc-vfs/direntry.c:716
+msgid "bytes transferred"
+msgstr ""
 
-#, fuzzy, c-format
-msgid "%s: %s: %s %ju bytes transferred"
-msgstr "%s: %s: %s đã truyền tải %lu byte"
-
+#: lib/vfs/mc-vfs/direntry.c:1202
 msgid "Starting linear transfer..."
 msgstr "Chạy truyền tải theo đường thẳng..."
 
+#: lib/vfs/mc-vfs/direntry.c:1267
 msgid "Getting file"
 msgstr "Nhận tập tin"
 
+#: lib/vfs/mc-vfs/extfs.c:484
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -507,197 +614,244 @@ msgstr ""
 "Không mở được tập tin nén %s\n"
 "%s"
 
+#: lib/vfs/mc-vfs/extfs.c:526 lib/vfs/mc-vfs/extfs.c:547
+#: lib/vfs/mc-vfs/extfs.c:603
 msgid "Inconsistent extfs archive"
 msgstr "Tập tin nén extfs không thích hợp"
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/extfs.c:1545
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Không thay đổi được thư mục"
+msgstr ""
 
+#: lib/vfs/mc-vfs/fish.c:262
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Ngừng kết nối từ %s"
 
+#: lib/vfs/mc-vfs/fish.c:451
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Đang chời dòng đầu tiên..."
 
+#: lib/vfs/mc-vfs/fish.c:461
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Xin lỗi, bây giờ không thể tạo kết nối xác thực theo mật khẩu."
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/fish.c:468
+#, c-format
 msgid "fish: Password is required for %s"
-msgstr "fish: yêu cầu mật khẩu cho "
+msgstr ""
 
+#: lib/vfs/mc-vfs/fish.c:475
 msgid "fish: Sending password..."
 msgstr "fish: Đang gửi mật khẩu..."
 
+#: lib/vfs/mc-vfs/fish.c:511
 msgid "fish: Sending initial line..."
 msgstr "fish: Đang gửi dòng đầu tiên..."
 
+#: lib/vfs/mc-vfs/fish.c:522
 msgid "fish: Handshaking version..."
 msgstr "fish: Đang xác nhận phiên bản..."
 
-#, fuzzy
+#: lib/vfs/mc-vfs/fish.c:532
 msgid "fish: Getting host info..."
-msgstr "fish: Đang gửi dòng đầu tiên..."
+msgstr ""
 
+#: lib/vfs/mc-vfs/fish.c:536
 msgid "fish: Setting up current directory..."
 msgstr "fish: Đang đặt thư mục hiện thời..."
 
+#: lib/vfs/mc-vfs/fish.c:538
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Kết nối thành công, thư mục cá nhân %s."
 
+#: lib/vfs/mc-vfs/fish.c:645
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Đọc thư mục %s..."
 
+#: lib/vfs/mc-vfs/fish.c:811 lib/vfs/mc-vfs/ftpfs.c:1739
+#: lib/vfs/mc-vfs/undelfs.c:376
 #, c-format
 msgid "%s: done."
 msgstr "%s: xong."
 
+#: lib/vfs/mc-vfs/fish.c:824 lib/vfs/mc-vfs/ftpfs.c:1692
+#: lib/vfs/mc-vfs/undelfs.c:379
 #, c-format
 msgid "%s: failure"
 msgstr "%s: lỗi"
 
+#: lib/vfs/mc-vfs/fish.c:882
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: bản ghi %s: đang gửi câu lệnh..."
 
+#: lib/vfs/mc-vfs/fish.c:916
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Lỗi đọc nội bộ, đang gửi các số không"
 
-#, fuzzy, c-format
-msgid "fish: storing %s %d (%ju)"
-msgstr "fish: ghi %s %d (%lu)"
+#: lib/vfs/mc-vfs/fish.c:936
+msgid "fish: storing zeros"
+msgstr ""
 
-msgid "zeros"
-msgstr "các số không"
+#: lib/vfs/mc-vfs/fish.c:936
+msgid "fish: storing file"
+msgstr ""
 
-msgid "file"
-msgstr "tập tin"
-
+#: lib/vfs/mc-vfs/fish.c:1004
 msgid "Aborting transfer..."
 msgstr "Dừng truyền tải..."
 
+#: lib/vfs/mc-vfs/fish.c:1019
 msgid "Error reported after abort."
 msgstr "Có lỗi báo cáo sau khi dừng."
 
+#: lib/vfs/mc-vfs/fish.c:1021
 msgid "Aborted transfer would be successful."
 msgstr "Dừng truyền tải thành công."
 
+#: lib/vfs/mc-vfs/ftpfs.c:514
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Ngắt kết nối từ %s"
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/ftpfs.c:567
+#, c-format
 msgid "FTP: Password required for %s"
-msgstr " FTP: Cần mật khẩu cho "
+msgstr ""
 
+#: lib/vfs/mc-vfs/ftpfs.c:607
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: đang gửi tên đăng nhập"
 
+#: lib/vfs/mc-vfs/ftpfs.c:612
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: đang gửi mật khẩu người dùng"
 
+#: lib/vfs/mc-vfs/ftpfs.c:618
 #, c-format
 msgid "FTP: Account required for user %s"
 msgstr "FTP: Yêu cầu tài khoản cho người dùng %s"
 
+#: lib/vfs/mc-vfs/ftpfs.c:619
 msgid "Account:"
 msgstr "Tài khoản:"
 
+#: lib/vfs/mc-vfs/ftpfs.c:623
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: đang gửi tài khoản người dùng"
 
+#: lib/vfs/mc-vfs/ftpfs.c:632
 msgid "ftpfs: logged in"
 msgstr "ftpfs: đã đăng nhập"
 
+#: lib/vfs/mc-vfs/ftpfs.c:646
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: lỗi đăng nhập cho người dùng %s "
 
+#: lib/vfs/mc-vfs/ftpfs.c:782
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Tên máy không đúng."
 
+#: lib/vfs/mc-vfs/ftpfs.c:818 lib/vfs/mc-vfs/ftpfs.c:836
 #, c-format
 msgid "ftpfs: %s"
 msgstr ""
 
+#: lib/vfs/mc-vfs/ftpfs.c:843
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: Thực hiện kết nối với %s"
 
+#: lib/vfs/mc-vfs/ftpfs.c:855
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: người dùng dừng kết nối giữa chừng"
 
+#: lib/vfs/mc-vfs/ftpfs.c:859
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: kết nối tới máy chủ không thành công: %s"
 
+#: lib/vfs/mc-vfs/ftpfs.c:919
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Chờ thử lại... %d (Control-C để hủy bỏ)"
 
-#, fuzzy
+#: lib/vfs/mc-vfs/ftpfs.c:1255
 msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Địa chỉ không đúng."
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/ftpfs.c:1263
+#, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr " Không tạo được socket: %s "
+msgstr ""
 
+#: lib/vfs/mc-vfs/ftpfs.c:1297
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: không đặt được chế độ bị động (passive)"
 
+#: lib/vfs/mc-vfs/ftpfs.c:1397
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: dừng truyền tải."
 
+#: lib/vfs/mc-vfs/ftpfs.c:1400
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: lỗi thoát: %s"
 
+#: lib/vfs/mc-vfs/ftpfs.c:1408
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: sự cố thoát"
 
+#: lib/vfs/mc-vfs/ftpfs.c:1537 lib/vfs/mc-vfs/ftpfs.c:1650
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD (thay đổi thư mục) không thành công."
 
+#: lib/vfs/mc-vfs/ftpfs.c:1547 lib/vfs/mc-vfs/ftpfs.c:1555
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: không tìm được liên kết mềm"
 
+#: lib/vfs/mc-vfs/ftpfs.c:1616
 msgid "Resolving symlink..."
 msgstr "Đang tìm liên kết mềm..."
 
+#: lib/vfs/mc-vfs/ftpfs.c:1640
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Đọc thư mục FTP %s... %s%s"
 
+#: lib/vfs/mc-vfs/ftpfs.c:1643
 msgid "(strict rfc959)"
 msgstr "(hạn chế rfc959)"
 
+#: lib/vfs/mc-vfs/ftpfs.c:1643
 msgid "(chdir first)"
 msgstr "(đầu tiên chdir)"
 
+#: lib/vfs/mc-vfs/ftpfs.c:1753
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: lỗi; không có nơi nào để quay lại về"
 
-#, fuzzy, c-format
-msgid "ftpfs: storing file %ju (%ju)"
-msgstr "ftpfs: ghi tập tin %lu (%lu)"
+#: lib/vfs/mc-vfs/ftpfs.c:1831
+msgid "ftpfs: storing file"
+msgstr ""
 
-#, fuzzy
+#: lib/vfs/mc-vfs/ftpfs.c:2275
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
-"Tập tin ~/.netrc có chế độ truy cập/sở hữu không đúng.\n"
-"Hãy xóa mật khẩu hoặc sửa lại chế độ cho đúng."
 
+#: lib/vfs/mc-vfs/sfs.c:423
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Cảnh báo: không tìm thấy tập tin %s\n"
 
+#: lib/vfs/mc-vfs/sfs.c:452
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -706,6 +860,7 @@ msgstr ""
 "Cảnh báo: dòng không đúng trong %s:\n"
 "%s\n"
 
+#: lib/vfs/mc-vfs/sfs.c:471
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -714,36 +869,41 @@ msgstr ""
 "Cảnh báo: Cờ không đúng %c trong %s:\n"
 "%s\n"
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/smbfs.c:691
+#, c-format
 msgid "reconnect to %s failed"
 msgstr ""
-" kết nối lại tới %s không thành công\n"
-" "
 
-#, fuzzy
+#: lib/vfs/mc-vfs/smbfs.c:1307
 msgid "Authentication failed"
-msgstr " Xác thực không thành công "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/smbfs.c:1876
+#, c-format
 msgid "Error %s creating directory %s"
-msgstr " Lỗi %s khi tạo thư mục %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/smbfs.c:1905
+#, c-format
 msgid "Error %s removing directory %s"
-msgstr " Lỗi %s khi xóa thư mục %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/smbfs.c:2023
+#, c-format
 msgid "%s opening remote file %s"
-msgstr " %s khi mở tập tin ở xa %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/smbfs.c:2105
+#, c-format
 msgid "%s removing remote file %s"
-msgstr " %s khi xoá tập tin ở xa %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/smbfs.c:2144
+#, c-format
 msgid "%s renaming files\n"
-msgstr " %s khi đổi tên các tập tin\n"
+msgstr ""
 
+#: lib/vfs/mc-vfs/tar.c:272 lib/vfs/mc-vfs/tar.c:291
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -752,220 +912,313 @@ msgstr ""
 "Không mở được tập tin nén tar\n"
 "%s"
 
+#: lib/vfs/mc-vfs/tar.c:545 lib/vfs/mc-vfs/tar.c:576 lib/vfs/mc-vfs/tar.c:656
+#: lib/vfs/mc-vfs/tar.c:665
 msgid "Inconsistent tar archive"
 msgstr "Tập tin tar không thích hợp"
 
+#: lib/vfs/mc-vfs/tar.c:561
 msgid "Unexpected EOF on archive file"
 msgstr "Kết thúc tập tin EOF nén không mong đợi"
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/tar.c:758
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"Hừm,...\n"
-"%s\n"
-"không giống tập tin tar."
 
-#, fuzzy
+#: lib/vfs/mc-vfs/undelfs.c:123
 msgid "undelfs: error"
-msgstr " undelfs: lỗi "
+msgstr ""
 
-#, fuzzy
+#: lib/vfs/mc-vfs/undelfs.c:236
 msgid "not enough memory"
-msgstr " không đủ bộ nhớ "
+msgstr ""
 
-#, fuzzy
+#: lib/vfs/mc-vfs/undelfs.c:242
 msgid "while allocating block buffer"
-msgstr " khi phân phối bộ đệm khối "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/undelfs.c:248
+#, c-format
 msgid "open_inode_scan: %d"
-msgstr " open_inode_scan: %d "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/undelfs.c:254
+#, c-format
 msgid "while starting inode scan %d"
-msgstr " khi bắt đầu quét chỉ mục nút inode %d "
+msgstr ""
 
+#: lib/vfs/mc-vfs/undelfs.c:261
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: nạp thông tin về những tập tin bị xóa %d inode"
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/undelfs.c:276
+#, c-format
 msgid "while calling ext2_block_iterate %d"
-msgstr " khi gọi ext2_block_iterate %d "
+msgstr ""
 
-#, fuzzy
+#: lib/vfs/mc-vfs/undelfs.c:288
 msgid "no more memory while reallocating array"
-msgstr " không đủ bộ nhớ khi phân phối lại chuỗi "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/undelfs.c:310
+#, c-format
 msgid "while doing inode scan %d"
-msgstr " khi quét chỉ mục nút inode %d "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/undelfs.c:358
+#, c-format
 msgid "Cannot open file %s"
-msgstr " Không mở được tập tin %s "
+msgstr ""
 
+#: lib/vfs/mc-vfs/undelfs.c:361
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: đọc sơ đồ bit của nút inode..."
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/undelfs.c:364
+#, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
-" Không nạp được sơ đồ bit của nút inode từ:\n"
-" %s \n"
 
+#: lib/vfs/mc-vfs/undelfs.c:367
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: đọc sơ đồ bit của khối..."
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/undelfs.c:370
+#, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
 msgstr ""
-"  Không nạp được sơ đồ bit của khối từ:\n"
-" %s \n"
 
-#, fuzzy
+#: lib/vfs/mc-vfs/undelfs.c:395
 msgid "vfs_info is not fs!"
-msgstr " vfs_info không phải là hệ thống tập tin! "
+msgstr ""
 
-#, fuzzy
+#: lib/vfs/mc-vfs/undelfs.c:441 lib/vfs/mc-vfs/undelfs.c:658
 msgid "You have to chdir to extract files first"
 msgstr ""
-" Đầu tiên bạn phải chdir để chuyển tới thư mục chứa tập tin cần giản nén "
 
-#, fuzzy
+#: lib/vfs/mc-vfs/undelfs.c:587
 msgid "while iterating over blocks"
-msgstr " khi lặp lại khối "
+msgstr ""
 
-#, fuzzy, c-format
+#: lib/vfs/mc-vfs/undelfs.c:702
+#, c-format
 msgid "Cannot open file \"%s\""
-msgstr " Không mở được tập tin %s "
+msgstr ""
 
-#, fuzzy
+#: lib/vfs/mc-vfs/undelfs.c:796
 msgid "Ext2lib error"
-msgstr " Lỗi Ext2lib "
+msgstr ""
 
+#: lib/vfs/mc-vfs/utilvfs.c:1118
 msgid "Cannot parse:"
 msgstr "Không thể phân tích:"
 
+#: lib/vfs/mc-vfs/utilvfs.c:1121
 msgid "More parsing errors will be ignored."
 msgstr "Sẽ lờ đi các lỗi phân tích tiếp theo."
 
+#: lib/vfs/mc-vfs/utilvfs.c:1133
 msgid "Internal error:"
 msgstr "Lỗi nội bộ:"
 
+#: lib/vfs/mc-vfs/utilvfs.c:1142 src/filemanager/boxes.c:1130
 msgid "Password:"
 msgstr "Mật khẩu:"
 
+#: lib/vfs/mc-vfs/vfs.c:552
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
 
+#: lib/widget/dialog-switch.c:196
 msgid "Screens"
 msgstr ""
 
-#, fuzzy
+#: lib/widget/history.c:308 lib/widget/history.c:330
 msgid "History"
-msgstr " Lịch sử"
+msgstr ""
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+#: lib/widget/listbox.c:274
 msgid "DialogTitle|History cleanup"
 msgstr ""
 
+#: lib/widget/listbox.c:275
 msgid "Do you want clean this history?"
 msgstr ""
 
+#: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
+#: src/editor/editcmd.c:170 src/editor/editcmd.c:194 src/editor/editcmd.c:2353
+#: src/editor/editcmd.c:2360 src/filemanager/cmd.c:161
+#: src/filemanager/file.c:1132 src/filemanager/file.c:2363
+#: src/filemanager/filegui.c:334 src/filemanager/hotlist.c:1236
+#: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:951
+#: src/filemanager/midnight.c:959 src/filemanager/panel.c:2258
+#: src/filemanager/tree.c:857 src/subshell.c:1087 src/viewer/lib.c:157
+#: src/viewer/lib.c:163 src/viewer/search.c:286
 msgid "&Yes"
 msgstr "&Có"
 
+#: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
+#: src/editor/editcmd.c:170 src/editor/editcmd.c:2353
+#: src/editor/editcmd.c:2360 src/filemanager/cmd.c:161
+#: src/filemanager/file.c:1132 src/filemanager/file.c:2363
+#: src/filemanager/filegui.c:332 src/filemanager/hotlist.c:1236
+#: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:951
+#: src/filemanager/midnight.c:959 src/filemanager/panel.c:2258
+#: src/filemanager/tree.c:857 src/subshell.c:1087 src/viewer/lib.c:157
+#: src/viewer/lib.c:163 src/viewer/search.c:287
 msgid "&No"
 msgstr "&Không"
 
+#: lib/widget/wtools.c:132
 msgid "Background process:"
 msgstr "Tiến trình nền sau:"
 
+#: lib/widget/wtools.c:158 src/diffviewer/search.c:72
+#: src/diffviewer/ydiff.c:2404 src/editor/editcmd.c:170
+#: src/editor/editcmd.c:194 src/editor/editcmd.c:393 src/editor/editcmd.c:416
+#: src/editor/editcmd.c:774 src/editor/editcmd.c:1312
+#: src/editor/editcmd.c:1425 src/editor/editcmd.c:1627
+#: src/editor/editcmd.c:1650 src/editor/editcmd.c:1672
+#: src/editor/editcmd.c:1965 src/editor/editcmd.c:2888
+#: src/editor/editcmd.c:3052 src/editor/editcmd.c:3092
+#: src/editor/editcmd_dialogs.c:105 src/editor/editcmd_dialogs.c:174
+#: src/editor/editcmd_dialogs.c:520 src/editor/editcmd_dialogs.c:586
+#: src/editor/editoptions.c:86 src/filemanager/achown.c:87
+#: src/filemanager/boxes.c:244 src/filemanager/boxes.c:375
+#: src/filemanager/boxes.c:600 src/filemanager/boxes.c:687
+#: src/filemanager/boxes.c:775 src/filemanager/boxes.c:932
+#: src/filemanager/boxes.c:1042 src/filemanager/boxes.c:1131
+#: src/filemanager/chmod.c:121 src/filemanager/chown.c:94
+#: src/filemanager/cmd.c:1186 src/filemanager/filegui.c:934
+#: src/filemanager/find.c:495 src/filemanager/hotlist.c:206
+#: src/filemanager/hotlist.c:679 src/filemanager/hotlist.c:1025
+#: src/filemanager/hotlist.c:1121 src/filemanager/layout.c:416
+#: src/filemanager/option.c:113 src/filemanager/option.c:294
+#: src/filemanager/panelize.c:88 src/learn.c:86 src/viewer/dialogs.c:91
+#: src/viewer/dialogs.c:193 src/viewer/hex.c:392
 msgid "&Cancel"
 msgstr "Đóng hộp thoại &]"
 
+#: lib/widget/wtools.c:159 src/diffviewer/search.c:73
+#: src/diffviewer/ydiff.c:2405 src/editor/edit.c:178 src/editor/editcmd.c:417
+#: src/editor/editcmd.c:1314 src/editor/editcmd.c:2251
+#: src/editor/editcmd.c:2889 src/editor/editcmd_dialogs.c:106
+#: src/editor/editcmd_dialogs.c:178 src/editor/editoptions.c:87
+#: src/filemanager/boxes.c:139 src/filemanager/boxes.c:243
+#: src/filemanager/boxes.c:376 src/filemanager/boxes.c:602
+#: src/filemanager/boxes.c:688 src/filemanager/boxes.c:776
+#: src/filemanager/boxes.c:933 src/filemanager/boxes.c:1043
+#: src/filemanager/boxes.c:1131 src/filemanager/filegui.c:942
+#: src/filemanager/find.c:495 src/filemanager/layout.c:415
+#: src/filemanager/option.c:115 src/filemanager/option.c:296
+#: src/subshell.c:395 src/viewer/dialogs.c:93 src/viewer/dialogs.c:194
 msgid "&OK"
 msgstr "Đồng ý &="
 
+#: lib/widget/wtools.c:260 lib/widget/wtools.c:386 src/editor/edit.c:265
+#: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1531
+#: src/editor/edit.c:1909 src/editor/edit.c:1919 src/editor/editcmd.c:261
+#: src/editor/editcmd.c:271 src/editor/editcmd.c:348 src/editor/editcmd.c:2445
 msgid "Error"
 msgstr "Lỗi"
 
+#: src/args.c:114
 msgid "Displays the current version"
 msgstr "Hiển thị số phiên bản hiện thời"
 
+#: src/args.c:122
 msgid "Print data directory"
 msgstr "In ra tên thư mục dữ liệu"
 
+#: src/args.c:129
 msgid "Print last working directory to specified file"
 msgstr "Ghi thư mục làm việc cuối cùng vào tập tin chỉ ra"
 
+#: src/args.c:137
 msgid "Enables subshell support (default)"
 msgstr "Bật hỗ trợ shell con (mặc định)"
 
+#: src/args.c:144
 msgid "Disables subshell support"
 msgstr "Tắt hỗ trợ shell con"
 
+#: src/args.c:154
 msgid "Log ftp dialog to specified file"
 msgstr "Ghi hội thoại FTP vào một tập tin"
 
+#: src/args.c:162
 msgid "Set debug level"
 msgstr "Đặt mức độ tìm sửa lỗi (debug)"
 
+#: src/args.c:171
 msgid "Launches the file viewer on a file"
 msgstr "Xem tập tin"
 
+#: src/args.c:178
 msgid "Edits one file"
 msgstr "Soạn thảo tập tin"
 
+#: src/args.c:195
 msgid "Forces xterm features"
 msgstr "Bắt buộc dùng tính năng của xterm"
 
+#: src/args.c:202
 msgid "Disable mouse support in text version"
 msgstr "Bỏ hỗ trợ chuột trong phiên bản văn bản (text)"
 
+#: src/args.c:210
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Thử sử dụng termcap thay cho terminfo"
 
+#: src/args.c:218
 msgid "To run on slow terminals"
 msgstr "Để chạy trên các terminal chậm"
 
+#: src/args.c:225
 msgid "Use stickchars to draw"
 msgstr "Sử dụng ký tự thẳng đứng để vẽ"
 
+#: src/args.c:232
 msgid "Resets soft keys on HP terminals"
 msgstr "Đặt lại phím phần mềm trên các terminal HP"
 
-#, fuzzy
+#: src/args.c:239
 msgid "Load definitions of key bindings from specified file"
-msgstr "Ghi hội thoại FTP vào một tập tin"
+msgstr ""
 
+#: src/args.c:260
 msgid "Requests to run in black and white"
 msgstr "Yêu cầu chạy trong chế độ đen trắng"
 
+#: src/args.c:267
 msgid "Request to run in color mode"
 msgstr "Yêu cầu chạy trong chế độ màu"
 
+#: src/args.c:274
 msgid "Specifies a color configuration"
 msgstr "Xác định cấu hình màu sắc"
 
+#: src/args.c:281
 msgid "Show mc with specified skin"
 msgstr ""
 
-#. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
+#. TRANSLATORS: don't translate keywords
+#: src/args.c:325
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
-"Keywords:\n"
+" Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "                 bbarhotkey, bbarbutton, statusbar\n"
@@ -973,33 +1226,16 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
-msgstr ""
-"--colors TỪ_KHÓA={VĂN BẢN},{NỀN}\n"
-"\n"
-"có thể bỏ qua {VĂN BẢN} và {NỀN}, và sử dụng giá trị theo mặc định\n"
-"\n"
-"Từ khóa:\n"
-"   Toàn cầu:         errors, reverse, gauge, input, viewunderline\n"
-"   Hiển thị tập tin: normal, selected, marked, markselect\n"
-"   Hộp thoại:        dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Trình đơn:        menu, menuhot, menusel, menuhotsel\n"
-"   Soạn thảo:       editnormal, editbold, editmarked\n"
-"   Trợ giúp:         helpnormal, helpitalic, helplink, helpslink\n"
-"   Dạng tập tin:     directory, executable, link, stalelink, device, "
-"special, core\n"
-"\n"
-"Màu sắc:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray, và white\n"
-"\n"
-
-msgid ""
+"   Viewer:       viewunderline\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"\n"
+msgstr ""
+
+#. TRANSLATORS: don't translate color names
+#: src/args.c:341
+msgid ""
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
@@ -1007,2973 +1243,3318 @@ msgid ""
 "\n"
 msgstr ""
 
-#, fuzzy
+#: src/args.c:347
 msgid "Color options"
-msgstr "Tùy chọn cấu hình"
+msgstr ""
 
+#: src/args.c:357 src/args.c:359
 msgid "+number"
 msgstr "+số"
 
-#, fuzzy
+#: src/args.c:358
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[cờ] [thư_mục_này] [thư_mục_bảng_còn_lại]\n"
+msgstr ""
 
+#: src/args.c:361
 msgid "Set initial line number for the internal editor"
 msgstr "Đặt số dòng ban đầu cho trình soạn thảo nội bộ"
 
-#, fuzzy
+#: src/args.c:372
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
-"\n"
-"Xin hãy gửi bất kỳ báo cáo lỗi bug nào (gồm cả kết quả của lệnh\n"
-"`mc -V') tới mc-devel@gnome.org\n"
 
+#: src/args.c:375 src/filemanager/midnight.c:1530 src/textconf.c:132
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
+#: src/args.c:496
 msgid "No arguments given to the viewer."
 msgstr ""
 
+#: src/args.c:508
 msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
-#, fuzzy
+#: src/args.c:653
 msgid "Main options"
-msgstr " Cấu hình bảng "
+msgstr ""
 
-#, fuzzy
+#: src/args.c:659 src/args.c:660
 msgid "Terminal options"
-msgstr " Cấu hình khác "
+msgstr ""
 
-#, fuzzy
+#: src/background.c:213 src/background.c:287 src/filemanager/file.c:453
+#: src/filemanager/file.c:1076
 msgid "Background process error"
-msgstr " Lỗi của tiến trình nền sau "
+msgstr ""
 
-#, fuzzy
+#: src/background.c:220 src/background.c:287
 msgid "Unknown error in child"
-msgstr " Lỗi không rõ trong tiến trình con "
+msgstr ""
 
-#, fuzzy
+#: src/background.c:228
 msgid "Child died unexpectedly"
-msgstr " Tiến trình con bất đắc kỳ tử "
+msgstr ""
 
-#, fuzzy
+#: src/background.c:237 src/background.c:243 src/background.c:252
+#: src/background.c:263 src/background.c:269
 msgid "Background protocol error"
-msgstr " Lỗi giao thức nền sau "
+msgstr ""
 
-#, fuzzy
+#: src/background.c:237 src/background.c:252 src/background.c:263
+#: src/background.c:269
 msgid "Reading failed"
-msgstr "<đọc liên kết không thành công>"
+msgstr ""
 
-#, fuzzy
+#: src/background.c:244
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
 msgstr ""
-" Tiến trình nền sau yêu cầu nhiều tham số hơn, \n"
-" số chúng ta có thể điều khiển. \n"
 
+#: src/diffviewer/internal.h:15 src/editor/edit-impl.h:126
 msgid "&Dismiss"
 msgstr "Đó&ng"
 
+#: src/diffviewer/search.c:110 src/editor/editcmd_dialogs.c:109
+#: src/editor/editcmd_dialogs.c:181 src/viewer/dialogs.c:96
 msgid "All charsets"
 msgstr ""
 
-#, fuzzy
+#: src/diffviewer/search.c:114 src/editor/editcmd_dialogs.c:113
+#: src/editor/editcmd_dialogs.c:185 src/filemanager/find.c:490
+#: src/viewer/dialogs.c:99
 msgid "&Whole words"
-msgstr "&Chỉ những từ đầy đủ"
+msgstr ""
 
+#: src/diffviewer/search.c:117 src/editor/editcmd_dialogs.c:118
+#: src/editor/editcmd_dialogs.c:191 src/viewer/dialogs.c:101
 msgid "&Backwards"
 msgstr "&Tìm ngược lại"
 
-#, fuzzy
+#: src/diffviewer/search.c:120 src/editor/editcmd_dialogs.c:121
+#: src/editor/editcmd_dialogs.c:194 src/viewer/dialogs.c:103
 msgid "Case &sensitive"
-msgstr "tính đến kiể&U chữ"
+msgstr ""
 
-#, fuzzy
+#: src/diffviewer/search.c:132 src/editor/editcmd_dialogs.c:132
+#: src/editor/editcmd_dialogs.c:205 src/viewer/dialogs.c:109
 msgid "Enter search string:"
-msgstr " Nhập chuỗi tìm kiếm:"
+msgstr ""
 
+#: src/diffviewer/search.c:138 src/diffviewer/search.c:262
+#: src/diffviewer/search.c:275 src/diffviewer/search.c:302
+#: src/editor/editcmd.c:969 src/editor/editcmd.c:999 src/editor/editcmd.c:2144
+#: src/editor/editcmd_dialogs.c:216 src/viewer/dialogs.c:115
+#: src/viewer/search.c:139 src/viewer/search.c:223 src/viewer/search.c:308
 msgid "Search"
 msgstr "Tìm"
 
-#, fuzzy
+#: src/diffviewer/search.c:275 src/diffviewer/search.c:302
 msgid "Search is disabled"
-msgstr "Tìm"
+msgstr ""
 
-#, fuzzy, c-format
+#: src/diffviewer/ydiff.c:201
+#, c-format
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
 msgstr ""
-" Không tạo được tập tin câu lệnh tạm thời\n"
-" %s "
 
-#, fuzzy, c-format
+#: src/diffviewer/ydiff.c:2207
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
 msgstr ""
-" Không tạo được tập tin đích \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/diffviewer/ydiff.c:2217
+#, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
 msgstr ""
-" Không tạo được tập tin câu lệnh tạm thời\n"
-" %s "
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2398
 msgid "&Normal"
-msgstr "&Nội bộ máy"
+msgstr ""
 
+#: src/diffviewer/ydiff.c:2399
 msgid "&Fastest (Assume large files)"
 msgstr ""
 
+#: src/diffviewer/ydiff.c:2400
 msgid "&Minimal (Find a smaller set of change)"
 msgstr ""
 
+#: src/diffviewer/ydiff.c:2408
 msgid "Strip &trailing carriage return"
 msgstr ""
 
+#: src/diffviewer/ydiff.c:2410
 msgid "Ignore all &whitespace"
 msgstr ""
 
+#: src/diffviewer/ydiff.c:2412
 msgid "Ignore &space change"
 msgstr ""
 
+#: src/diffviewer/ydiff.c:2414
 msgid "Ignore tab &expansion"
 msgstr ""
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2416
 msgid "&Ignore case"
-msgstr "&Lời đi khóa"
+msgstr ""
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2417
 msgid "Diff extra options"
-msgstr " Cấu hình khác "
+msgstr ""
 
+#: src/diffviewer/ydiff.c:2420
 msgid "Diff algorithm"
 msgstr ""
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2427
 msgid "Diff Options"
-msgstr " Tùy chọn "
+msgstr ""
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2758
 msgid "Edit"
-msgstr "Soạn  "
+msgstr ""
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2758
 msgid "Edit is disabled"
-msgstr "sửa tập tin cú &Pháp"
+msgstr ""
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2778
 msgid "Goto line (left)"
-msgstr "Chuyển tới dòng "
+msgstr ""
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2778
 msgid "Goto line (right)"
-msgstr "Chuyển tới dòng "
+msgstr ""
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2785 src/editor/editcmd.c:2519
 msgid "Enter line:"
-msgstr "Hãy nhập số thứ tự dòng: "
+msgstr ""
 
+#: src/diffviewer/ydiff.c:2819 src/editor/editwidget.c:221
+#: src/filemanager/midnight.c:1486 src/filemanager/tree.c:1177 src/help.c:1112
+#: src/viewer/display.c:86
 msgid "ButtonBar|Help"
 msgstr "Trợ giúp"
 
+#: src/diffviewer/ydiff.c:2820 src/editor/editwidget.c:222
+#: src/viewer/display.c:98
 msgid "ButtonBar|Save"
 msgstr "Lưu"
 
+#: src/diffviewer/ydiff.c:2821 src/filemanager/midnight.c:1489
+#: src/viewer/display.c:93
 msgid "ButtonBar|Edit"
 msgstr "Sửa"
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2822
 msgid "ButtonBar|Merge"
-msgstr "Định dạng"
+msgstr ""
 
+#: src/diffviewer/ydiff.c:2823 src/editor/editwidget.c:227
+#: src/viewer/display.c:108
 msgid "ButtonBar|Search"
 msgstr "Tìm kiếm"
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2824
 msgid "ButtonBar|Options"
-msgstr "Dòng"
+msgstr ""
 
+#: src/diffviewer/ydiff.c:2825 src/editor/editwidget.c:230
+#: src/filemanager/midnight.c:1495 src/help.c:1121 src/viewer/display.c:120
+#: src/viewer/display.c:123
 msgid "ButtonBar|Quit"
 msgstr "Thoát"
 
+#: src/diffviewer/ydiff.c:2946 src/editor/editcmd.c:2352
+#: src/editor/editcmd.c:2358 src/viewer/lib.c:155 src/viewer/lib.c:161
 msgid "Quit"
 msgstr "Thoát"
 
-#, fuzzy
+#: src/diffviewer/ydiff.c:2947 src/editor/editcmd.c:2352 src/viewer/lib.c:156
 msgid "File was modified. Save with exit?"
-msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
+msgstr ""
 
+#: src/diffviewer/ydiff.c:2948 src/editor/editcmd.c:2359 src/viewer/lib.c:162
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
 
+#: src/diffviewer/ydiff.c:3256 src/diffviewer/ydiff.c:3259
 msgid "Diff:"
 msgstr ""
 
+#: src/diffviewer/ydiff.c:3399
 msgid "Two files are needed to compare"
 msgstr ""
 
-#, fuzzy
+#: src/editor/choosesyntax.c:65
 msgid "Choose syntax highlighting"
-msgstr "Chọn chiếu sáng cú pháp "
+msgstr ""
 
+#: src/editor/choosesyntax.c:66
 msgid "< Auto >"
 msgstr "< Tự động >"
 
+#: src/editor/choosesyntax.c:67
 msgid "< Reload Current Syntax >"
 msgstr "< Nạp lại cú pháp hiện thời >"
 
-#, fuzzy
+#: src/editor/edit.c:177
 msgid "About"
-msgstr " Về chương trình "
+msgstr ""
 
-#, fuzzy
+#: src/editor/edit.c:196
 msgid ""
 "Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
 "            A user friendly text editor\n"
 "         written for the Midnight Commander"
 msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Trình soạn thảo với giao diện người dùng thân thiện.\n"
-"               Được viết cho Midnight Commander.\n"
 
-#, fuzzy, c-format
+#: src/editor/edit.c:264 src/editor/edit.c:377
+#, c-format
 msgid "Cannot open %s for reading"
-msgstr " Không thể mở %s để đọc "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/edit.c:293
+#, c-format
 msgid "Error reading %s"
-msgstr "Lỗi đọc script:"
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/edit.c:390
+#, c-format
 msgid "Cannot get size/permissions for %s"
-msgstr " Không lấy được kích thước/quyền hạn cho %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/edit.c:397
+#, c-format
 msgid "\"%s\" is not a regular file"
-msgstr " %s phải tập tin thông thường "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/edit.c:409
+#, c-format
 msgid "File \"%s\" is too large"
-msgstr " Tập tin %s quá lớn "
+msgstr ""
 
+#: src/editor/edit.c:1531
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
 
-#, fuzzy, c-format
+#: src/editor/edit.c:1908
+#, c-format
 msgid "Error reading from pipe: %s"
-msgstr " Lỗi đọc từ đường ống (pipe): %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/edit.c:1918
+#, c-format
 msgid "Cannot open pipe for reading: %s"
-msgstr " Không thể mở đường ống để đọc: %s "
+msgstr ""
 
+#: src/editor/editcmd.c:169
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
+#: src/editor/editcmd.c:193
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/editcmd.c:260
+#, c-format
 msgid "Error writing to pipe: %s"
-msgstr " Lỗi ghi vào đường ống: "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/editcmd.c:270
+#, c-format
 msgid "Cannot open pipe for writing: %s"
-msgstr " Không thể mở đường ống để ghi: "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/editcmd.c:347
+#, c-format
 msgid "Cannot open file for writing: %s"
-msgstr " Không thể mở đường ống để ghi: "
+msgstr ""
 
+#: src/editor/editcmd.c:392
 msgid "The file you are saving is not finished with a newline"
 msgstr ""
 
+#: src/editor/editcmd.c:393 src/editor/editcmd.c:774 src/editor/editcmd.c:1650
+#: src/editor/editcmd.c:1672 src/editor/editcmd.c:1965
+#: src/editor/editcmd.c:3052 src/editor/editcmd.c:3092
+#: src/editor/editcmd_dialogs.c:520
 msgid "C&ontinue"
 msgstr "&Tiếp tục"
 
+#: src/editor/editcmd.c:409
 msgid "&Do not change"
 msgstr ""
 
+#: src/editor/editcmd.c:410
 msgid "&Unix format (LF)"
 msgstr ""
 
+#: src/editor/editcmd.c:411
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
+#: src/editor/editcmd.c:412
 msgid "&Macintosh format (CR)"
 msgstr ""
 
+#: src/editor/editcmd.c:419
 msgid "Change line breaks to:"
 msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:422 src/editor/editcmd.c:1681
+#: src/editor/editcmd.c:2560 src/editor/editcmd.c:2601
 msgid "Enter file name:"
-msgstr " Hãy nhập tên tập tin: "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:428
 msgid "Save As"
-msgstr " Ghi như "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:516 src/editor/editcmd.c:522 src/editor/editcmd.c:552
+#: src/editor/editcmd.c:1546
 msgid "Delete macro"
-msgstr " Xóa macro "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:516
 msgid "Cannot open temp file"
-msgstr " Không thể mở tập tin tạm thời "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:522 src/editor/editcmd.c:1534
+#: src/editor/editcmd.c:1607
 msgid "Cannot open macro file"
-msgstr " Không thể mở tập tin chứa các macro "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:552
 msgid "Cannot overwrite macro file"
-msgstr " Không thể ghi chèn lên tập tin chứa các macro "
+msgstr ""
 
+#: src/editor/editcmd.c:633
 msgid "Syntax file edit"
 msgstr "Soạn thảo tập tin cú pháp"
 
-#, fuzzy
+#: src/editor/editcmd.c:634
 msgid "Which syntax file you want to edit?"
-msgstr " Soạn thảo tập tin cú pháp nào? "
+msgstr ""
 
+#: src/editor/editcmd.c:635 src/editor/editcmd.c:671
+#: src/filemanager/cmd.c:1016 src/filemanager/cmd.c:1052
+#: src/filemanager/cmd.c:1110
 msgid "&User"
 msgstr "&Người dùng"
 
+#: src/editor/editcmd.c:635 src/editor/editcmd.c:671
+#: src/filemanager/cmd.c:1016 src/filemanager/cmd.c:1052
+#: src/filemanager/cmd.c:1110
 msgid "&System Wide"
 msgstr "&Hệ thống"
 
-#, fuzzy
+#: src/editor/editcmd.c:669 src/filemanager/cmd.c:1050
 msgid "Menu edit"
-msgstr " Soạn thảo tập tin trình đơn "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:670 src/filemanager/cmd.c:1051
 msgid "Which menu file do you want to edit?"
-msgstr " Soạn thảo tập tin trình đơn nào? "
+msgstr ""
 
+#: src/editor/editcmd.c:671 src/filemanager/cmd.c:1052
 msgid "&Local"
 msgstr "&Nội bộ máy"
 
-#, fuzzy
+#: src/editor/editcmd.c:773 src/editor/editcmd.c:1964
 msgid "Block is large, you may not be able to undo this action"
-msgstr " Khối quá lớn, có thể bạn sẽ không hủy bỏ được bước này. "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1305
 msgid "&Quick save"
-msgstr "&Lưu nhanh"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1306
 msgid "&Safe save"
-msgstr "Lưu &an toàn"
+msgstr ""
 
+#: src/editor/editcmd.c:1307
 msgid "&Do backups with following extension:"
 msgstr ""
 
+#: src/editor/editcmd.c:1316
 msgid "Check &POSIX new line"
 msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1325
 msgid "Edit Save Mode"
-msgstr " Chế độ ghi nhớ "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1425
 msgid "A file already exists with this name"
-msgstr " Tập tin có tên như vậy đã tồn tại. "
+msgstr ""
 
+#: src/editor/editcmd.c:1425
 msgid "&Overwrite"
 msgstr "&Ghi chèn"
 
-#, fuzzy
+#: src/editor/editcmd.c:1483
 msgid "Save as"
-msgstr "&Ghi nhớ cấu hình..."
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1483 src/editor/editcmd.c:2582
 msgid "Cannot save file"
-msgstr " Không thể ghi nhớ tập tin. "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1512 src/editor/editcmd.c:1534
 msgid "Save macro"
-msgstr " Ghi nhớ macro "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1512
 msgid "Press the macro's new hotkey:"
-msgstr " Hãy nhấn phím tắt mới của macro: "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1546 src/editor/editcmd.c:3021
 msgid "Press macro hotkey:"
-msgstr " Hãy nhấn phím tắt của macro: "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1607
 msgid "Load macro"
-msgstr " Nạp macro "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/editcmd.c:1626
+#, c-format
 msgid "Confirm save file: \"%s\""
-msgstr " Phê chuẩn việc ghi nhớ tập tin?: "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:1627 src/viewer/hex.c:380 src/viewer/hex.c:392
 msgid "Save file"
-msgstr " Ghi nhớ tập tin "
+msgstr ""
 
+#: src/editor/editcmd.c:1627 src/editor/editmenu.c:73
+#: src/filemanager/layout.c:417 src/filemanager/option.c:114
+#: src/filemanager/option.c:295 src/learn.c:88 src/learn.c:214
 msgid "&Save"
 msgstr "Ghi nhớ &+"
 
-#, fuzzy
+#: src/editor/editcmd.c:1649 src/editor/editcmd.c:1671
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes"
 msgstr ""
-" Văn bản hiện thời đã thay đổi và chưa được ghi nhớ. \n"
-" Tiếp tục thao tác sẽ làm mất những thay đổi này. "
 
-#, fuzzy
+#: src/editor/editcmd.c:1681
 msgid "Load"
-msgstr " Nạp "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2212 src/editor/editcmd.c:2251
+#: src/editor/editcmd.c:2262 src/editor/editcmd_dialogs.c:140
 msgid "Replace"
-msgstr "&Thay thế"
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/editcmd.c:2262
+#, c-format
 msgid "%ld replacements made"
-msgstr " %ld thay thế được thực hiện. "
+msgstr ""
 
+#: src/editor/editcmd.c:2353 src/viewer/lib.c:157
 msgid "&Cancel quit"
 msgstr "&Dừng thoát"
 
-#, fuzzy
+#: src/editor/editcmd.c:2445
 msgid "This function is not implemented"
-msgstr " Tính năng này chưa được phát triển. "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2458
 msgid "Copy to clipboard"
-msgstr "Sao chép vào bộ đệm "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2458 src/editor/editcmd.c:2478
 msgid "Unable to save to file"
-msgstr "Không ghi nhớ được tập tin. "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2478
 msgid "Cut to clipboard"
-msgstr "Cắt vào bộ đệm "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2519
 msgid "Goto line"
-msgstr "Chuyển tới dòng "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2560 src/editor/editcmd.c:2582
 msgid "Save block"
-msgstr "Ghi nhớ khối "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2601 src/editor/editcmd.c:2623
 msgid "Insert file"
-msgstr "&Chèn tập tin...         F15"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2623
 msgid "Cannot insert file"
-msgstr "Không chèn được tập tin. "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2644
 msgid "Sort block"
-msgstr "Sắp xếp khối "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2644 src/editor/editcmd.c:2799
 msgid "You must first highlight a block of text"
-msgstr "Đầu tiên bạn phải chọn một khối văn bản. "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2652
 msgid "Run sort"
-msgstr "Thực hiện sắp xếp "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2653
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
-"Nhập tùy chọn sắp xếp (xem trang man), phân cách nhau bởi khoảng trắng: "
 
-#, fuzzy
+#: src/editor/editcmd.c:2668 src/editor/editcmd.c:2675
 msgid "Sort"
-msgstr "Sắp xếp "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2668
 msgid "Cannot execute sort command"
-msgstr "Không thể thực hiện câu lệnh sort "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/editcmd.c:2674
+#, c-format
 msgid "Sort returned non-zero: %s"
-msgstr "Sắp xếp trả lại giá trị khác không: "
+msgstr ""
 
+#: src/editor/editcmd.c:2704
 msgid "Paste output of external command"
 msgstr "Dán kết quả của lệnh ngoại trú"
 
+#: src/editor/editcmd.c:2705
 msgid "Enter shell command(s):"
 msgstr "Nhập (các) câu lệnh shell:"
 
+#: src/editor/editcmd.c:2717
 msgid "External command"
 msgstr "Lệnh ngoại trú"
 
+#: src/editor/editcmd.c:2717
 msgid "Cannot execute command"
 msgstr "Không thực hiện được câu lệnh"
 
+#: src/editor/editcmd.c:2755
 msgid "Error creating script:"
 msgstr "Lỗi tạo script:"
 
+#: src/editor/editcmd.c:2770
 msgid "Error reading script:"
 msgstr "Lỗi đọc script:"
 
+#: src/editor/editcmd.c:2782
 msgid "Error closing script:"
 msgstr "Lỗi đóng script:"
 
+#: src/editor/editcmd.c:2788
 msgid "Script created:"
 msgstr "Đã tạo script:"
 
+#: src/editor/editcmd.c:2799 src/editor/editcmd.c:2829
 msgid "Process block"
 msgstr "Xử lý khối"
 
-#, fuzzy
+#: src/editor/editcmd.c:2829
 msgid "Error calling program"
-msgstr "Lỗi đóng script:"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2891
 msgid "Copies to"
-msgstr " Sao chép tới"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2894
 msgid "Subject"
-msgstr " Tên thư"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2896
 msgid "To"
-msgstr " Người nhận"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2897
 msgid "mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <Tên thư> -c <cc> <Người nhận>"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:2902
 msgid "Mail"
-msgstr " Thư "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:3010
 msgid "Insert literal"
-msgstr "Chèn &văn bản thuần túy...       C-q"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:3011
 msgid "Press any key:"
-msgstr " Nhấn phím bất kỳ: "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:3021
 msgid "Execute macro"
-msgstr "Chạy &macro...              C-a, KEY"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd.c:3051 src/editor/editcmd.c:3091
 msgid ""
 "Current text was modified without a file save\n"
 "Continue discards these changes"
 msgstr ""
-" Văn bản hiện thời đã thay đổi và chưa được ghi nhớ. \n"
-" Tiếp tục thao tác sẽ làm mất những thay đổi này. "
 
-#, fuzzy
+#: src/editor/editcmd_dialogs.c:116 src/editor/editcmd_dialogs.c:188
 msgid "In se&lection"
-msgstr "Chọn ngược lạ&I        M-*"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd_dialogs.c:127
 msgid "Enter replacement string:"
-msgstr " Nhập chuỗi thay thế:"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd_dialogs.c:176
 msgid "&Find all"
-msgstr "Tìm tập tin"
+msgstr ""
 
+#: src/editor/editcmd_dialogs.c:350
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
-#, fuzzy
+#: src/editor/editcmd_dialogs.c:519
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
 msgstr ""
-" Văn bản hiện thời đã thay đổi và chưa được ghi nhớ. \n"
-" Tiếp tục thao tác sẽ làm mất những thay đổi này. "
 
+#: src/editor/editcmd_dialogs.c:587 src/filemanager/file.c:456
+#: src/filemanager/file.c:1077 src/filemanager/filegui.c:529
 msgid "&Skip"
 msgstr "&Bỏ qua"
 
+#: src/editor/editcmd_dialogs.c:588 src/filemanager/file.c:1132
+#: src/filemanager/filegui.c:324
 msgid "A&ll"
 msgstr "&Tất cả"
 
+#: src/editor/editcmd_dialogs.c:589
 msgid "&Replace"
 msgstr "&Thay thế"
 
-#, fuzzy
+#: src/editor/editcmd_dialogs.c:591
 msgid "Replace with:"
-msgstr " Thay thế bằng: "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editcmd_dialogs.c:635
 msgid "Confirm replace"
-msgstr " Phê chuẩn thay thế "
+msgstr ""
 
+#: src/editor/editmenu.c:70
 msgid "&Open file..."
 msgstr "&Mở tập tin..."
 
-#, fuzzy
+#: src/editor/editmenu.c:71
 msgid "&New"
-msgstr "th&Eo tên"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:74
 msgid "Save &as..."
-msgstr "&Ghi nhớ cấu hình..."
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:76
 msgid "&Insert file..."
-msgstr "&Chèn tập tin...         F15"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:77
 msgid "Cop&y to file..."
-msgstr "Ché&p vào tập tin...    C-f"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:79
 msgid "&User menu..."
-msgstr "Trình đơn người &dùng... F11"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:81
 msgid "A&bout..."
-msgstr "&Vẻ ngoài..."
+msgstr ""
 
+#: src/editor/editmenu.c:83 src/filemanager/find.c:186 src/subshell.c:395
 msgid "&Quit"
 msgstr "&Thoát"
 
+#: src/editor/editmenu.c:95
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:97
 msgid "&Toggle ins/overw"
-msgstr "Chế độ chèn/&thay thế     Ins"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:99
 msgid "To&ggle mark"
-msgstr "&Xóa đánh dấu"
+msgstr ""
 
+#: src/editor/editmenu.c:100
 msgid "&Mark columns"
 msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:101
 msgid "Mark &all"
-msgstr "Đánh &dấu tất cả"
+msgstr ""
 
+#: src/editor/editmenu.c:102
 msgid "Unmar&k"
 msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:104
 msgid "Cop&y"
-msgstr "Cópi  "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:105
 msgid "Mo&ve"
-msgstr "Chuyển"
+msgstr ""
 
+#: src/editor/editmenu.c:106 src/filemanager/file.c:1569
+#: src/filemanager/midnight.c:253
 msgid "&Delete"
 msgstr "&Xóa"
 
-#, fuzzy
+#: src/editor/editmenu.c:108
 msgid "Co&py to clipfile"
-msgstr "S&ao chép vào tập tin...    "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:109
 msgid "&Cut to clipfile"
-msgstr "&Chuyển tới dòng...             M-l"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:110
 msgid "Pa&ste from clipfile"
-msgstr "&Chuyển tới dòng...             M-l"
+msgstr ""
 
+#: src/editor/editmenu.c:112
 msgid "&Beginning"
 msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:113
 msgid "&End"
-msgstr "&Chỉ mục inode"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:125
 msgid "&Search..."
-msgstr "Tìm"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:126
 msgid "Search &again"
-msgstr "&Tìm kiếm lại lần nữa     F17"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:127
 msgid "&Replace..."
-msgstr "&Thay thế"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:130
 msgid "&Toggle bookmark"
-msgstr "&Bật/tắt bôi đen           F3"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:131
 msgid "&Next bookmark"
-msgstr "Đá&nh dấu"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:132
 msgid "&Prev bookmark"
-msgstr "&Sắp xếp...                      M-t"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:133
 msgid "&Flush bookmark"
-msgstr "T&hư điện tử...                     "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:145
 msgid "&Go to line..."
-msgstr "Chuyển tới dòng "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:147
 msgid "&Toggle line state"
-msgstr "&Bật/tắt bôi đen           F3"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:149
 msgid "Go to matching &bracket"
-msgstr "Chuyển &tới dấu ngoặc tạo cặp    M-b"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:152
 msgid "Toggle s&yntax highlighting"
-msgstr "Chọn chiếu sáng cú pháp "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:155
 msgid "&Find declaration"
-msgstr "Tìm những loại bỏ sau khi vá lỗi (patch)"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:157
 msgid "Back from &declaration"
-msgstr "Tìm những loại bỏ sau khi vá lỗi (patch)"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:160
 msgid "For&ward to declaration"
-msgstr "Tìm những loại bỏ sau khi vá lỗi (patch)"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:163
 msgid "Encod&ing..."
-msgstr "&Sắp xếp...                      M-t"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:166
 msgid "&Refresh screen"
-msgstr "&Làm mới màn hình                C-l"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:170
 msgid "&Start record macro"
-msgstr "&Bắt đầu ghi macro               C-r"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:173
 msgid "Finis&h record macro..."
-msgstr "&Kết thúc ghi macro...           C-r"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:174
 msgid "&Execute macro..."
-msgstr "Chạy &macro...              C-a, KEY"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:175
 msgid "Delete macr&o..."
-msgstr " Xóa macro "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:178
 msgid "'ispell' s&pell check"
-msgstr "Kiểm tra chính tả '&ispell'      C-p"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:179
 msgid "&Mail..."
-msgstr "&Lọc tập tin..."
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:192
 msgid "Insert &literal..."
-msgstr "Chèn &văn bản thuần túy...       C-q"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:193
 msgid "Insert &date/time"
-msgstr "Chèn &ngày/giờ                      "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:196
 msgid "&Format paragraph"
-msgstr "Định &dạng đoạn văn              M-p"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:197
 msgid "&Sort..."
-msgstr "t&Hứ tự sắp xếp..."
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:198
 msgid "&Paste output of..."
-msgstr "Dán &kết quả của lệnh...         M-u"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:200
 msgid "&External formatter"
-msgstr "T&rình định dạng ngoài           F19"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:212
 msgid "&General..."
-msgstr "Ch&ung...         "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:213
 msgid "Save &mode..."
-msgstr "&Chế độ ghi nhớ..."
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:214 src/filemanager/midnight.c:341
 msgid "Learn &keys..."
-msgstr "&Tạo phím tắt..."
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:216
 msgid "Syntax &highlighting..."
-msgstr "&Chiếu sáng cú pháp..."
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:218
 msgid "S&yntax file"
-msgstr "Soạn thảo tập tin cú pháp"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:219
 msgid "&Menu file"
-msgstr "soạ&N thảo tập tin trình đơn"
+msgstr ""
 
+#: src/editor/editmenu.c:221 src/filemanager/midnight.c:346
 msgid "&Save setup"
 msgstr "&Ghi nhớ cấu hình"
 
-#, fuzzy
+#: src/editor/editmenu.c:255 src/filemanager/midnight.c:358
 msgid "&File"
-msgstr "Tập tin"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:257 src/filemanager/midnight.c:240
 msgid "&Edit"
-msgstr "Soạn  "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:259
 msgid "&Search"
-msgstr "Tìm"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:262 src/filemanager/midnight.c:360
 msgid "&Command"
-msgstr "Câu lệnh"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:265
 msgid "For&mat"
-msgstr "Quên"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editmenu.c:267 src/filemanager/midnight.c:362
 msgid "&Options"
-msgstr " &Cấu hình "
+msgstr ""
 
+#: src/editor/editoptions.c:53
 msgid "None"
 msgstr "&Không"
 
+#: src/editor/editoptions.c:54
 msgid "Dynamic paragraphing"
 msgstr "Định &dạng đoạn văn động"
 
+#: src/editor/editoptions.c:55
 msgid "Type writer wrap"
 msgstr "Tự độ&ng chuyển dòng"
 
-#, fuzzy
+#: src/editor/editoptions.c:89
 msgid "Word wrap line length:"
-msgstr "Vị trí chuyển dòng: "
+msgstr ""
 
+#: src/editor/editoptions.c:93
 msgid "Cursor beyond end of line"
 msgstr ""
 
-#, fuzzy
+#: src/editor/editoptions.c:95
 msgid "Pers&istent selection"
-msgstr "Chọn ngược lạ&I        M-*"
+msgstr ""
 
+#: src/editor/editoptions.c:97
 msgid "Synta&x highlighting"
 msgstr "&Chiếu sáng cú pháp"
 
+#: src/editor/editoptions.c:99
 msgid "Visible tabs"
 msgstr ""
 
+#: src/editor/editoptions.c:101
 msgid "Visible trailing spaces"
 msgstr ""
 
+#: src/editor/editoptions.c:103
 msgid "Save file &position"
 msgstr "&Ghi nhớ vị trí trong tập tin"
 
+#: src/editor/editoptions.c:105
 msgid "Confir&m before saving"
 msgstr "&Hỏi lại trước khi ghi nhớ"
 
+#: src/editor/editoptions.c:107
 msgid "&Return does autoindent"
 msgstr "&Enter tự động thụt dòng"
 
-#, fuzzy
+#: src/editor/editoptions.c:108
 msgid "Tab spacing:"
-msgstr "Độ rộng tab: "
+msgstr ""
 
+#: src/editor/editoptions.c:112
 msgid "Fill tabs with &spaces"
 msgstr "&Làm đầy tab bằng khoảng trắng"
 
+#: src/editor/editoptions.c:114
 msgid "&Backspace through tabs"
 msgstr "&Backpace xóa hết tab"
 
+#: src/editor/editoptions.c:116
 msgid "&Fake half tabs"
 msgstr "&Tạo một nửa tab"
 
+#: src/editor/editoptions.c:118
 msgid "Wrap mode"
 msgstr "Chế độ chuyển dòng"
 
-#, fuzzy
+#: src/editor/editoptions.c:123
 msgid "Editor options"
-msgstr " Cấu hình trình soạn thảo "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editwidget.c:101 src/editor/editwidget.c:103
 msgid "Edit: "
-msgstr " Soạn thảo "
+msgstr ""
 
-#, fuzzy
+#: src/editor/editwidget.c:223
 msgid "ButtonBar|Mark"
-msgstr "Phân tích"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editwidget.c:224
 msgid "ButtonBar|Replac"
-msgstr "Thô"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editwidget.c:225 src/filemanager/midnight.c:1490
+#: src/filemanager/tree.c:1182
 msgid "ButtonBar|Copy"
-msgstr "Trợ giúp"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editwidget.c:226
 msgid "ButtonBar|Move"
-msgstr "Lưu"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editwidget.c:228 src/filemanager/midnight.c:1493
 msgid "ButtonBar|Delete"
-msgstr "Trợ giúp"
+msgstr ""
 
-#, fuzzy
+#: src/editor/editwidget.c:229 src/filemanager/midnight.c:1494
 msgid "ButtonBar|PullDn"
-msgstr "Trợ giúp"
+msgstr ""
 
-#, fuzzy
+#: src/editor/syntax.c:1498 src/editor/syntax.c:1504
 msgid "Load syntax file"
-msgstr " Nạp tập tin cú pháp "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/editor/syntax.c:1499 src/help.c:1053
+#, c-format
 msgid ""
 "Cannot open file %s\n"
 "%s"
 msgstr ""
-" Không mở được tập tin %s \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/editor/syntax.c:1505
+#, c-format
 msgid "Error in file %s on line %d"
-msgstr " Lỗi trong tập tin %s trên dòng %d "
+msgstr ""
 
-#, fuzzy
+#: src/execute.c:114
 msgid ""
 "The Commander can't change to the directory that\n"
 "the subshell claims you are in. Perhaps you have\n"
 "deleted your working directory, or given yourself\n"
 "extra access permissions with the \"su\" command?"
 msgstr ""
-" MC không thể chuyển vào thư mục, mà tiến trình shell \n"
-" con thông báo. Rất có thể, bạn đã xóa thư mục làm việc \n"
-" hoặc thêm cho mình quyền truy cập mở rộng bằng câu \n"
-" lệnh \"su\"? "
 
-#, fuzzy
+#: src/execute.c:284 src/filemanager/command.c:220
 msgid "The shell is already running a command"
-msgstr " shell đang chạy một câu lệnh"
+msgstr ""
 
+#: src/execute.c:341
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Hãy gõ \"exit\" để quay trở lại Midnight Commander"
 
-#, fuzzy, c-format
+#: src/execute.c:443
+#, c-format
 msgid "Cannot fetch a local copy of %s"
-msgstr " Không thể lấy được bản sao nội bộ của %s "
+msgstr ""
 
+#: src/filemanager/achown.c:88 src/filemanager/chmod.c:122
+#: src/filemanager/chown.c:95
 msgid "&Set"
 msgstr "Đồ&ng ý"
 
+#: src/filemanager/achown.c:89
 msgid "S&kip"
 msgstr "&Bỏ qua"
 
+#: src/filemanager/achown.c:90 src/filemanager/chmod.c:126
+#: src/filemanager/chown.c:98
 msgid "Set &all"
 msgstr "Đặt &tất cả"
 
+#: src/filemanager/achown.c:310 src/filemanager/achown.c:418
+#: src/filemanager/achown.c:425
 msgid "owner"
 msgstr "sở hữu"
 
+#: src/filemanager/achown.c:310 src/filemanager/achown.c:420
+#: src/filemanager/achown.c:427
 msgid "group"
 msgstr "nhóm"
 
+#: src/filemanager/achown.c:422
 msgid "other"
 msgstr "khác"
 
+#: src/filemanager/achown.c:430
 msgid "On"
 msgstr "Trên"
 
+#: src/filemanager/achown.c:432
 msgid "Flag"
 msgstr "Cờ"
 
+#: src/filemanager/achown.c:434
 msgid "Mode"
 msgstr "Chếđộ"
 
+#: src/filemanager/achown.c:439
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d của %d"
 
-#, fuzzy
+#: src/filemanager/achown.c:664
 msgid "Chown advanced command"
-msgstr " Câu lệnh chown mở rộng"
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/achown.c:732 src/filemanager/achown.c:749
+#: src/filemanager/achown.c:804 src/filemanager/chmod.c:282
+#: src/filemanager/chmod.c:366
+#, c-format
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
 msgstr ""
-" Không chmod được \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/achown.c:737 src/filemanager/achown.c:754
+#: src/filemanager/achown.c:809 src/filemanager/chown.c:243
+#: src/filemanager/chown.c:364
+#, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
 msgstr ""
-" Không thay thế được chủ sở hữu \"%s\" \n"
-" %s "
 
+#: src/filemanager/boxes.c:136
 msgid "&Stop"
 msgstr "&Dừng"
 
+#: src/filemanager/boxes.c:137
 msgid "&Resume"
 msgstr "&Phục hồi"
 
+#: src/filemanager/boxes.c:138
 msgid "&Kill"
 msgstr "&Diệt"
 
+#: src/filemanager/boxes.c:232
 msgid "&Full file list"
 msgstr "&Đầy đủ"
 
+#: src/filemanager/boxes.c:233
 msgid "&Brief file list"
 msgstr "&Thu gọn"
 
+#: src/filemanager/boxes.c:234
 msgid "&Long file list"
 msgstr "&Mở rộng"
 
+#: src/filemanager/boxes.c:235
 msgid "&User defined:"
 msgstr "&Người dùng tự xác định:"
 
+#: src/filemanager/boxes.c:241
 msgid "Listing mode"
 msgstr "Dạng danh sách"
 
-#, fuzzy
+#: src/filemanager/boxes.c:242
 msgid "User &mini status"
-msgstr "dòng t&Rạng thái nhỏ"
+msgstr ""
 
+#: src/filemanager/boxes.c:337 src/filemanager/boxes.c:369
+#: src/selcodepage.c:95
 msgid "Other 8 bit"
 msgstr "8 bit khác"
 
-#, fuzzy
+#: src/filemanager/boxes.c:365 src/filemanager/boxes.c:783
 msgid "Display bits"
-msgstr " Ký tự hiển thị "
+msgstr ""
 
+#: src/filemanager/boxes.c:367
 msgid "Input / display codepage:"
 msgstr "Bảng mã đầu vào / hiển thị:"
 
+#: src/filemanager/boxes.c:378 src/filemanager/boxes.c:777
 msgid "F&ull 8 bits input"
 msgstr "Đầ&u vào 8 bit đầy đủ"
 
+#: src/filemanager/boxes.c:381
 msgid "&Select"
 msgstr "&Lựa chọn"
 
-#, fuzzy
+#: src/filemanager/boxes.c:457
 msgid "Running"
-msgstr "Đang chạy "
+msgstr ""
 
+#: src/filemanager/boxes.c:458 src/filemanager/find.c:1300
 msgid "Stopped"
 msgstr "Đã dừng"
 
+#: src/filemanager/boxes.c:604
 msgid "&Reverse"
 msgstr "&Ngược lại"
 
-#, fuzzy
+#: src/filemanager/boxes.c:606
 msgid "Case sensi&tive"
-msgstr "tính đến kiể&U chữ"
+msgstr ""
 
+#: src/filemanager/boxes.c:608
 msgid "Executable &first"
 msgstr ""
 
+#: src/filemanager/boxes.c:617
 msgid "Sort order"
 msgstr "Thứ tự sắp xếp"
 
-#, fuzzy
+#: src/filemanager/boxes.c:684 src/filemanager/cmd.c:160
 msgid "Confirmation"
-msgstr " Hỏi xác nhận "
+msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
-#, fuzzy
+#: src/filemanager/boxes.c:690
 msgid "Confirmation|&History cleanup"
-msgstr " Hỏi xác nhận "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/boxes.c:692
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "Thư mục thường dùng &*         C-\\"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/boxes.c:694
 msgid "Confirmation|E&xit"
-msgstr " Hỏi xác nhận "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/boxes.c:695
 msgid "Confirmation|&Execute"
-msgstr " Hỏi xác nhận "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/boxes.c:696
 msgid "Confirmation|O&verwrite"
-msgstr " &Trước khi ghi chèn "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/boxes.c:697
 msgid "Confirmation|&Delete"
-msgstr " Hỏi xác nhận "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/boxes.c:768
 msgid "UTF-8 output"
-msgstr "Đầu ra 8 bit đầy đủ"
+msgstr ""
 
+#: src/filemanager/boxes.c:769
 msgid "Full 8 bits output"
 msgstr "Đầu ra 8 bit đầy đủ"
 
+#: src/filemanager/boxes.c:770
 msgid "ISO 8859-1"
 msgstr "ISO.8859-1"
 
+#: src/filemanager/boxes.c:771
 msgid "7 bits"
 msgstr "7 bit"
 
-#, fuzzy
+#: src/filemanager/boxes.c:902 src/filemanager/tree.c:1141
 msgid "Directory tree"
-msgstr "cây thư &Mục"
+msgstr ""
 
+#: src/filemanager/boxes.c:935
 msgid "Use passive mode over pro&xy"
 msgstr "Sử &dụng chế độ thụ động qua proxy"
 
+#: src/filemanager/boxes.c:937
 msgid "Use &passive mode"
 msgstr "Sử &dụng chế độ thụ động"
 
+#: src/filemanager/boxes.c:939
 msgid "&Use ~/.netrc"
 msgstr "&Sử dụng ~/.netrc"
 
+#: src/filemanager/boxes.c:942
 msgid "&Always use ftp proxy"
 msgstr "&Luôn luôn sử dụng ftp proxy"
 
+#: src/filemanager/boxes.c:944 src/filemanager/boxes.c:952
 msgid "sec"
 msgstr "giây"
 
+#: src/filemanager/boxes.c:947
 msgid "ftpfs directory cache timeout:"
 msgstr "Thời gian chờ của cache thư mục ftp:"
 
+#: src/filemanager/boxes.c:950
 msgid "ftp anonymous password:"
 msgstr "Mật khẩu ftp nặc danh:"
 
+#: src/filemanager/boxes.c:954
 msgid "Timeout for freeing VFSs:"
 msgstr "Thời gian chờ giải phóng VFS:"
 
-#, fuzzy
+#: src/filemanager/boxes.c:959
 msgid "Virtual File System Setting"
-msgstr " Thiết lập hệ thống tập tin ảo "
+msgstr ""
 
+#: src/filemanager/boxes.c:1006
 msgid "cd"
 msgstr "cd"
 
+#: src/filemanager/boxes.c:1028
 msgid "Quick cd"
 msgstr "cd nhanh"
 
+#: src/filemanager/boxes.c:1045
 msgid "Symbolic link filename:"
 msgstr "Tên của liên kết mềm:"
 
+#: src/filemanager/boxes.c:1048
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Tên tập tin đã có (liên kết mềm sẽ chỉ đến):"
 
+#: src/filemanager/boxes.c:1053
 msgid "Symbolic link"
 msgstr "Liên kết mềm"
 
+#: src/filemanager/boxes.c:1100
 msgid "Background Jobs"
 msgstr " Công việc nền sau"
 
+#: src/filemanager/boxes.c:1130
 msgid "Domain:"
 msgstr "Miền (domain):"
 
+#: src/filemanager/boxes.c:1130
 msgid "Username:"
 msgstr "Tên người dùng:"
 
+#: src/filemanager/boxes.c:1182
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Mật khẩu cho \\\\%s\\%s"
 
+#: src/filemanager/chmod.c:99
 msgid "execute/search by others"
 msgstr "người khác có quyền chạy/tìm"
 
+#: src/filemanager/chmod.c:100
 msgid "write by others"
 msgstr "người khác có quyền ghi nhớ"
 
+#: src/filemanager/chmod.c:101
 msgid "read by others"
 msgstr "người khác có quyền đọc"
 
+#: src/filemanager/chmod.c:102
 msgid "execute/search by group"
 msgstr "nhóm có quyền chạy/tìm kiếm"
 
+#: src/filemanager/chmod.c:103
 msgid "write by group"
 msgstr "nhóm có quyền ghi nhớ"
 
+#: src/filemanager/chmod.c:104
 msgid "read by group"
 msgstr "nhóm có quyền đọc"
 
+#: src/filemanager/chmod.c:105
 msgid "execute/search by owner"
 msgstr "chủ sở hữu có quyền chạy/tìm"
 
+#: src/filemanager/chmod.c:106
 msgid "write by owner"
 msgstr "chủ sở hữu có quyền ghi nhớ"
 
+#: src/filemanager/chmod.c:107
 msgid "read by owner"
 msgstr "chủ sở hữu có quyền đọc"
 
+#: src/filemanager/chmod.c:108
 msgid "sticky bit"
 msgstr "bit dính (sticky)"
 
+#: src/filemanager/chmod.c:109
 msgid "set group ID on execution"
 msgstr "đặt ID nhóm khi chạy"
 
+#: src/filemanager/chmod.c:110
 msgid "set user ID on execution"
 msgstr "đặt ID người dùng khi chạy"
 
+#: src/filemanager/chmod.c:123
 msgid "C&lear marked"
 msgstr "&Xóa đánh dấu"
 
+#: src/filemanager/chmod.c:124
 msgid "S&et marked"
 msgstr "Đá&nh dấu"
 
+#: src/filemanager/chmod.c:125
 msgid "&Marked all"
 msgstr "Đánh &dấu tất cả"
 
+#: src/filemanager/chmod.c:154 src/filemanager/chown.c:124
 msgid "Name"
 msgstr "Tên"
 
+#: src/filemanager/chmod.c:156
 msgid "Permissions (Octal)"
 msgstr "Quyền hạn (Hệ tám)"
 
+#: src/filemanager/chmod.c:158 src/filemanager/chown.c:126
 msgid "Owner name"
 msgstr "Tên chủ sở hữu"
 
+#: src/filemanager/chmod.c:160 src/filemanager/chown.c:128
+#: src/filemanager/chown.c:220
 msgid "Group name"
 msgstr "Tên nhóm"
 
+#: src/filemanager/chmod.c:163
 msgid "Use SPACE to change"
 msgstr "Dùng PHÍM TRẮNG để thay đổi"
 
+#: src/filemanager/chmod.c:165
 msgid "an option, ARROW KEYS"
 msgstr "tùy chọn, PHÍM MŨI TÊN"
 
+#: src/filemanager/chmod.c:167
 msgid "to move between options"
 msgstr "để di chuyển giữa các tùy chọn"
 
+#: src/filemanager/chmod.c:169
 msgid "and T or INS to mark"
 msgstr "và T hoặc INS để đánh dấu"
 
+#: src/filemanager/chmod.c:226
 msgid "Chmod command"
 msgstr " Câu lệnh chmod "
 
+#: src/filemanager/chmod.c:240 src/filemanager/chown.c:216
 msgid "File"
 msgstr "Tập tin"
 
+#: src/filemanager/chmod.c:248 src/filemanager/chown.c:132
+#: src/filemanager/panel.c:204
 msgid "Permission"
 msgstr "Quyền hạn"
 
+#: src/filemanager/chown.c:96
 msgid "Set &users"
 msgstr "Đặt &người dùng"
 
+#: src/filemanager/chown.c:97
 msgid "Set &groups"
 msgstr "Đặt &nhóm"
 
+#: src/filemanager/chown.c:130
 msgid "Size"
 msgstr "Kích cỡ"
 
-#, fuzzy
+#: src/filemanager/chown.c:178
 msgid "Chown command"
-msgstr " Câu lệnh chown "
+msgstr ""
 
+#: src/filemanager/chown.c:197
 msgid "<Unknown user>"
 msgstr "<không rõ người dùng>"
 
+#: src/filemanager/chown.c:198
 msgid "<Unknown group>"
 msgstr "<không rõ nhóm>"
 
-#, fuzzy
+#: src/filemanager/chown.c:222
 msgid "User name"
-msgstr " Tên người dùng "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:114
 msgid "Enter machine name (F1 for details):"
-msgstr " Hãy nhập tên máy (nhấn F1 để biết chi tiết): "
+msgstr ""
 
+#: src/filemanager/cmd.c:160
 msgid "Files tagged, want to cd?"
 msgstr "Đã đánh dấu các tập tin, chuyển thư mục?"
 
+#: src/filemanager/cmd.c:167 src/filemanager/cmd.c:1170
+#: src/filemanager/panel.c:2237 src/filemanager/panel.c:2721
 msgid "Cannot change directory"
 msgstr "Không thay đổi được thư mục"
 
-#, fuzzy
+#: src/filemanager/cmd.c:223
 msgid "Filter"
-msgstr " Đầu lọc "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:224
 msgid "Set expression for filtering filenames"
-msgstr " Đặt biểu thức để lọc tên tập tin (nhấn F1 để xem trợ giúp)"
+msgstr ""
 
+#: src/filemanager/cmd.c:249 src/filemanager/filegui.c:957
+#: src/filemanager/find.c:478
 msgid "&Using shell patterns"
 msgstr "&Sử dụng mẫu (pattern) của shell"
 
-#, fuzzy
+#: src/filemanager/cmd.c:250
 msgid "&Case sensitive"
-msgstr "tính đến kiể&U chữ"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:251
 msgid "&Files only"
-msgstr "&Chỉ theo kích thước"
+msgstr ""
 
+#: src/filemanager/cmd.c:440
 #, c-format
 msgid "Link %s to:"
 msgstr "Tạo liên kết tới %s:"
 
-#, fuzzy
+#: src/filemanager/cmd.c:441
 msgid "Link"
-msgstr "&Liên kết"
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/cmd.c:446
+#, c-format
 msgid "link: %s"
-msgstr " liên kết: %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/cmd.c:473
+#, c-format
 msgid "symlink: %s"
-msgstr " liên kết mềm: %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/cmd.c:510 src/filemanager/panel.c:3980
+#, c-format
 msgid "Cannot chdir to \"%s\""
-msgstr " Không thể chdir vào %s "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:701
 msgid "View file"
-msgstr " Xem tập tin "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:701
 msgid "Filename:"
-msgstr " Tên tập tin:"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:726
 msgid "Filtered view"
-msgstr " Lọc rồi xem "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:727
 msgid "Filter command and arguments:"
-msgstr " Lệnh lọc và tham số:"
+msgstr ""
 
+#: src/filemanager/cmd.c:873
 msgid "Create a new Directory"
 msgstr "Tạo thư mục mới"
 
-#, fuzzy
+#: src/filemanager/cmd.c:874
 msgid "Enter directory name:"
-msgstr " Hãy nhập tên thư mục:"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:991
 msgid "Select"
-msgstr "&Lựa chọn"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:999
 msgid "Unselect"
-msgstr " Bỏ chọn "
+msgstr ""
 
+#: src/filemanager/cmd.c:1014
 msgid "Extension file edit"
 msgstr "Soạn thảo phần mở rộng tập tin"
 
-#, fuzzy
+#: src/filemanager/cmd.c:1015
 msgid "Which extension file you want to edit?"
-msgstr " Soạn thảo phần mở rộng tập tin nào? "
+msgstr ""
 
+#: src/filemanager/cmd.c:1108
 msgid "Highlighting groups file edit"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1109
 msgid "Which highlighting file you want to edit?"
-msgstr " Soạn thảo phần mở rộng tập tin nào? "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1184
 msgid "Compare directories"
-msgstr " So sánh thư mục "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1185
 msgid "Select compare method:"
-msgstr " Chọn phương pháp so sánh: "
+msgstr ""
 
+#: src/filemanager/cmd.c:1186
 msgid "&Quick"
 msgstr "&Nhanh"
 
+#: src/filemanager/cmd.c:1186
 msgid "&Size only"
 msgstr "&Chỉ theo kích thước"
 
+#: src/filemanager/cmd.c:1186
 msgid "&Thorough"
 msgstr "&Theo từng byte"
 
-#, fuzzy
+#: src/filemanager/cmd.c:1201
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
-msgstr "Để thực hiện câu lệnh này cả hai bảng phải ở trong chế độ danh sách "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1250
 msgid ""
 "Not an xterm or Linux console;\n"
 "the panels cannot be toggled."
 msgstr ""
-" Đây không phải là xterm hay kênh giao tác Linux; \n"
-" bảng sẽ không thể bị tắt. "
 
-#, fuzzy, c-format
+#: src/filemanager/cmd.c:1284
+#, c-format
 msgid "Symlink `%s' points to:"
-msgstr " Liên kết mềm %s chỉ tới: "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1290
 msgid "Edit symlink"
-msgstr " Sửa liên kết mềm "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/cmd.c:1298
+#, c-format
 msgid "edit symlink, unable to remove %s: %s"
-msgstr " sửa liên kết mềm, không thể xóa %s: %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/cmd.c:1304
+#, c-format
 msgid "edit symlink: %s"
-msgstr " sửa liên kết mềm: %s "
+msgstr ""
 
+#: src/filemanager/cmd.c:1317
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' không phải là một liên kết mềm"
 
-#, fuzzy
+#: src/filemanager/cmd.c:1406
 msgid "FTP to machine"
-msgstr " FTP tới máy ở xa "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1417
 msgid "Shell link to machine"
-msgstr " Kết nối shell tới máy ở xa"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1429
 msgid "SMB link to machine"
-msgstr " Kết nối SMB tới máy ở xa"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1441
 msgid "Undelete files on an ext2 file system"
-msgstr " Phục hồi tập tin trên hệ thống tập tin ext2 sau khi xóa "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/cmd.c:1442
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
 msgstr ""
-" Nhập tên thiết bị (không có /dev/), để\n"
-" phục hồi tập tin của nó: (nhấn F1 để biết chi tiết)"
 
-#, fuzzy
+#: src/filemanager/cmd.c:1570
 msgid "Setup"
-msgstr " Cấu hình "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/cmd.c:1570
+#, c-format
 msgid "Setup saved to ~/%s"
-msgstr " Tham số ghi nhớ trong ~/"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/command.c:212 src/filemanager/usermenu.c:865
 msgid "Cannot execute commands on non-local filesystems"
-msgstr " Chỉ có thể thực hiện câu lệnh trên hệ thống tập tin nội bộ"
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/command.c:357 src/filemanager/panel.c:2934
+#: src/filemanager/tree.c:586
+#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
 msgstr ""
-" Không chdir được tới \"%s\" \n"
-" %s "
 
+#: src/filemanager/dir.c:534 src/filemanager/dir.c:609
 msgid "Cannot read directory contents"
 msgstr "Không đọc được nội dung thư mục"
 
-#, fuzzy, c-format
+#: src/filemanager/ext.c:129 src/filemanager/usermenu.c:430
+#, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr ""
-" Không tạo được tập tin câu lệnh tạm thời\n"
-" %s "
 
-#, fuzzy
+#: src/filemanager/ext.c:146 src/filemanager/usermenu.c:459
 msgid "Parameter"
-msgstr " Tham số "
+msgstr ""
 
+#: src/filemanager/ext.c:664
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s lỗi tập tin "
 
-#, fuzzy, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
+#: src/filemanager/ext.c:666
+#, c-format
+msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"Định dạng của tập tin %smc.ext đã thay đổi từ phiên bản 3.0. Rất có thể có "
-"sự cố khi cài đặt. Xin hãy lấy bản sao mới nhất từ gói Midnight Commander."
 
-#, fuzzy, c-format
+#: src/filemanager/ext.c:678
+#, c-format
 msgid "~/%s file error"
-msgstr " ~/%s lỗi tập tin "
-
-#, fuzzy, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
 msgstr ""
-"Định dạng của tập tin ~/%s đã thay đổi từ phiên bản 3.0. Có thể bạn cần sao "
-"chép nó từ %smc.ext hoặc sử dụng tập tin đó làm ví dụ để viết tập tin của "
-"mình."
 
+#: src/filemanager/ext.c:681
+#, c-format
+msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr ""
+
+#: src/filemanager/file.c:87 src/filemanager/file.c:1567
+#: src/filemanager/tree.c:746
 msgid "DialogTitle|Copy"
 msgstr ""
 
+#: src/filemanager/file.c:88 src/filemanager/tree.c:784
 msgid "DialogTitle|Move"
 msgstr ""
 
+#: src/filemanager/file.c:89 src/filemanager/tree.c:857
 msgid "DialogTitle|Delete"
 msgstr ""
 
+#: src/filemanager/file.c:132
 msgid "FileOperation|Copy"
 msgstr ""
 
+#: src/filemanager/file.c:133
 msgid "FileOperation|Move"
 msgstr ""
 
+#: src/filemanager/file.c:134
 msgid "FileOperation|Delete"
 msgstr ""
 
+#: src/filemanager/file.c:147
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-# msgfmt warnings/errors must be ignored. mc parse this pattern itself.
+#: src/filemanager/file.c:149
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o (%d cái) %f%m"
 
+#: src/filemanager/file.c:152
+msgid "file"
+msgstr "tập tin"
+
+#: src/filemanager/file.c:153
 msgid "files"
 msgstr "các tập tin"
 
+#: src/filemanager/file.c:154
 msgid "directory"
 msgstr "thư mục"
 
+#: src/filemanager/file.c:155
 msgid "directories"
 msgstr "Các thư mục"
 
+#: src/filemanager/file.c:156
 msgid "files/directories"
 msgstr "tập tin/thư mục"
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
+#: src/filemanager/file.c:158
 msgid " with source mask:"
 msgstr " với nhãn ban đầu:"
 
+#: src/filemanager/file.c:159 src/filemanager/filegui.c:955
 msgid "to:"
 msgstr "vào:"
 
+#: src/filemanager/file.c:162
 #, c-format
 msgid "%s?"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/file.c:298
 msgid "Cannot make the hardlink"
-msgstr " Không thể tạo liên kết cứng "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:342
+#, c-format
 msgid ""
 "Cannot read source link \"%s\"\n"
 "%s"
 msgstr ""
-" Không thể đọc liên kết nguồn \"%s\" \n"
-" %s "
 
-#, fuzzy
+#: src/filemanager/file.c:353
 msgid ""
 "Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-" Không tạo được liên kết mềm bền vững giữa các hệ thống tập tin không phải "
-"nội bộ:\n"
-"\n"
-" Tùy chọn \"Liên kết mềm Bền vững\" sẽ bị tắt "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:406
+#, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-" Khônt tạo được liên kết mềm đích \"%s\" \n"
-" %s "
 
+#: src/filemanager/file.c:456 src/filemanager/file.c:1077
+#: src/filemanager/file.c:1132 src/filemanager/file.c:2040
+#: src/filemanager/filegui.c:316 src/filemanager/filegui.c:528
 msgid "&Abort"
 msgstr "&Dừng"
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:565
+#, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
-" Không nhận được tính chất (stat) của tập tin \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:573 src/filemanager/file.c:1301
+#, c-format
 msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
 "are the same file"
-msgstr " `%s' và `%s' là một tập tin "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:577
+#, c-format
 msgid "Cannot overwrite directory \"%s\""
-msgstr " Không thể ghi đè lên thư mục \"%s\" %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:615
+#, c-format
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
 "%s"
 msgstr ""
-" Không thể di chuyển tập tin \"%s\" vào \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:644
+#, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
-" Không thể xóa tập tin \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:682
+#, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
 msgstr ""
-" Không thể xóa tập tin \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:741 src/filemanager/file.c:800
+#: src/filemanager/file.c:2022
+#, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-" Không thể xóa thư mục \"%s\" \n"
-" %s "
 
+#: src/filemanager/file.c:1077 src/viewer/hex.c:392
 msgid "&Retry"
 msgstr "&Thử lại"
 
-#, fuzzy
+#: src/filemanager/file.c:1123
 msgid ""
 "\n"
 "Directory not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"   Thư mục không rỗng.    \n"
-"   Xóa toàn bộ (đệ quy)? "
 
-#, fuzzy
+#: src/filemanager/file.c:1124
 msgid ""
 "\n"
 "Background process: Directory not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"   Tiến trình nền sau: Thư mục không rỗng \n"
-"   Xóa toàn bộ (đệ quy)? "
 
-#, fuzzy
+#: src/filemanager/file.c:1125
 msgid "Delete:"
-msgstr "Xóa   "
+msgstr ""
 
+#: src/filemanager/file.c:1132 src/filemanager/filegui.c:320
 msgid "Non&e"
 msgstr "&Không"
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1281
+#, c-format
 msgid ""
 "Cannot overwrite directory\"%s\"\n"
 "%s"
 msgstr ""
-" Không thể ghi chèn lên thư mục \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1292
+#, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 msgstr ""
-" Không lấy được tính chất (stat) của tập tin nguồn \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1329
+#, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
 msgstr ""
-" Không tạo được tập tin đặc biệt \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1338 src/filemanager/file.c:1580
+#, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
 msgstr ""
-" Không thay đổi được chủ sở hữu của tập tin đích đến \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1345 src/filemanager/file.c:1594
+#, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
 msgstr ""
-" Không thay đổi được quyền hạn (chmod) của tập tin đích đến \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1358
+#, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
 msgstr ""
-" Không mở được tập tin nguồn \"%s\" \n"
-" %s "
 
-#, fuzzy
+#: src/filemanager/file.c:1369
 msgid "Reget failed, about to overwrite file"
-msgstr " Lấy phần còn lại của tập tin không thành công, tập tin sẽ bị ghi đè "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1377
+#, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
 msgstr ""
-" Không lấy được tính chất (fstat) tập tin nguồn \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1408
+#, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
 msgstr ""
-" Không tạo được tập tin đích \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1422
+#, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
 msgstr ""
-" Không lấy được tính chất (fstat) tập tin đích \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1458
+#, c-format
 msgid ""
 "Cannot read source file\"%s\"\n"
 "%s"
 msgstr ""
-" Không đọc được tập tin nguồn \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1490
+#, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
 msgstr ""
-" Không ghi nhớ được tập tin nguồn \"%s\" \n"
-" %s "
 
+#: src/filemanager/file.c:1509
 msgid "(stalled)"
 msgstr "(bị nhốt)"
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1546
+#, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
 msgstr ""
-" Không đóng được tập tin nguồn \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1556
+#, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-" Không đóng được tập tin đính \"%s\" \n"
-" %s "
 
+#: src/filemanager/file.c:1568
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Nhận được tập tin không đầy đủ. Giữ tập tin?"
 
+#: src/filemanager/file.c:1569
 msgid "&Keep"
 msgstr "&Giữ"
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1646
+#, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
-" Không lấy được thông tin (stat) thư mục nguồn \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1673
+#, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
 "%s"
 msgstr ""
-" Nguồn \"%s\" không phải là một thư mục \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1682
+#, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
 "\"%s\""
 msgstr ""
-" Không sao chép được liên kết mềm vòng lặp \n"
-" `%s' "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1722 src/filemanager/file.c:2519
+#: src/filemanager/tree.c:802
+#, c-format
 msgid ""
 "Destination \"%s\" must be a directory\n"
 "%s"
 msgstr ""
-" Nơi đến \"%s\" phải là một thư mục \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1741
+#, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
 "%s"
 msgstr ""
-" Không tạo được thư mục đích đến \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1758
+#, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
 msgstr ""
-" Không thay đổi được chủ sở hữu (chown) của thư mục đích đến \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1889
+#, c-format
 msgid ""
 "\"%s\"\n"
 "and\n"
 "\"%s\"\n"
 "are the same directory"
-msgstr " %s và %s - là một thư mục "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1916
+#, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
-" Không thể ghi chèn lên thư mục \"%s\" \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1918
+#, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr " Không thể ghi đè tập tin \"%s\" %s "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/file.c:1935
+#, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
 "%s"
 msgstr ""
-" Không thể di chuyển thư mục \"%s\" vào \"%s\" \n"
-" %s "
 
-#, fuzzy
+#: src/filemanager/file.c:2049
 msgid "Directory scanning"
-msgstr " Đường dẫn tới thư mục"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/file.c:2278
 msgid "Cannot operate on \"..\"!"
-msgstr " Không thể thao tác trên \"..\"! "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/file.c:2402
 msgid "Sorry, I could not put the job in background"
-msgstr " Xin lỗi, không thể đặt công việc nào vào chế độ nền sau "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/filegui.c:236
+#, c-format
 msgid "%d:%02d.%02d"
-msgstr "Còn lại %d:%02d.%02d"
+msgstr ""
 
+#: src/filemanager/filegui.c:253
 #, c-format
 msgid "ETA %s"
 msgstr ""
 
+#: src/filemanager/filegui.c:263
 #, c-format
 msgid "%.2f MB/s"
 msgstr "%.2f МB/giây"
 
+#: src/filemanager/filegui.c:267
 #, c-format
 msgid "%.2f KB/s"
 msgstr "%.2f KB/giây"
 
+#: src/filemanager/filegui.c:271
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld B/giây"
 
-#, fuzzy
+#: src/filemanager/filegui.c:308
 msgid "Target file already exists!"
-msgstr "Tập tin đích \"%s\" đã tồn tại!"
+msgstr ""
 
+#: src/filemanager/filegui.c:312
 #, c-format
 msgid "Source date: %s, size %llu"
 msgstr "Ngày nguồn: %s, kích thước %llu"
 
+#: src/filemanager/filegui.c:314
 #, c-format
 msgid "Target date: %s, size %llu"
 msgstr "Ngày đích: %s, kích thước %llu"
 
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Ngày nguồn: %s, kích thước %u"
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Ngày đích: %s, kích thước %u"
-
+#: src/filemanager/filegui.c:318
 msgid "If &size differs"
 msgstr "&Nếu kích thước khác nhau"
 
+#: src/filemanager/filegui.c:322
 msgid "&Update"
 msgstr "&Cập nhật"
 
+#: src/filemanager/filegui.c:326
 msgid "Overwrite all targets?"
 msgstr "Khi đè lên mọi tập tin đích?"
 
+#: src/filemanager/filegui.c:328
 msgid "&Reget"
 msgstr "&Lấy lại"
 
+#: src/filemanager/filegui.c:330
 msgid "A&ppend"
 msgstr "&Thêm vào cuối"
 
+#: src/filemanager/filegui.c:336
 msgid "Overwrite this target?"
 msgstr "Khi đè lên tập tin này?"
 
-#, fuzzy
+#: src/filemanager/filegui.c:355
 msgid "File exists"
-msgstr " Tập tin tồn tại "
-
-#, fuzzy
-msgid "Background process: File exists"
-msgstr " Tiến trình nền sau: tập tin tồn tại "
-
-#, c-format
-msgid "Files processed: %llu of %llu"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "Time: %s  %s (%s)"
-msgstr "Kích thước:   %s"
+#: src/filemanager/filegui.c:357
+msgid "Background process: File exists"
+msgstr ""
 
+#: src/filemanager/filegui.c:724
+#, c-format
+msgid "Files processed: %zu of %zu"
+msgstr ""
+
+#: src/filemanager/filegui.c:763
+#, c-format
+msgid "Time: %s  %s (%s)"
+msgstr ""
+
+#: src/filemanager/filegui.c:769
 #, c-format
 msgid "Total: %s of %s"
 msgstr ""
 
+#: src/filemanager/filegui.c:801
 msgid "Source"
 msgstr "Nguồn"
 
+#: src/filemanager/filegui.c:825
 msgid "Target"
 msgstr "Đích"
 
+#: src/filemanager/filegui.c:846
 msgid "Deleting"
 msgstr "Đang xóa"
 
+#: src/filemanager/filegui.c:936
 msgid "&Background"
 msgstr "Trong nền sa&u"
 
+#: src/filemanager/filegui.c:944
 msgid "&Stable Symlinks"
 msgstr "liên kết &Bền vững"
 
-#, fuzzy
+#: src/filemanager/filegui.c:946
 msgid "Di&ve into subdir if exists"
-msgstr "&Vào thư mục con, nếu có"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/filegui.c:949
 msgid "Preserve &attributes"
-msgstr "&Ghi nhớ thuộc tính"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/filegui.c:951
 msgid "Follow &links"
-msgstr "đi theo &Liên kết"
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/filegui.c:1102
+#, c-format
 msgid "Invalid source pattern `%s'"
 msgstr ""
-"Mẫu không đúng `%s' \n"
-" %s "
 
+#: src/filemanager/find.c:182
 msgid "&Suspend"
 msgstr "&Hoãn"
 
+#: src/filemanager/find.c:183
 msgid "Con&tinue"
 msgstr "&Tiếp tục"
 
+#: src/filemanager/find.c:184
 msgid "&Chdir"
 msgstr "&Chuyển thư mục"
 
+#: src/filemanager/find.c:185
 msgid "&Again"
 msgstr "&Lặp lại"
 
+#: src/filemanager/find.c:187 src/filemanager/panelize.c:91
 msgid "Pane&lize"
 msgstr "&Bảng"
 
+#: src/filemanager/find.c:188
 msgid "&View - F3"
 msgstr "X&em - F3"
 
+#: src/filemanager/find.c:189
 msgid "&Edit - F4"
 msgstr "&Soạn thảo - F4"
 
+#: src/filemanager/find.c:353
 #, c-format
 msgid "Found: %ld"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/find.c:434 src/filemanager/find.c:444
 msgid "Malformed regular expression"
-msgstr "  Biểu thức chính quy không đúng  "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/find.c:477
 msgid "Cas&e sensitive"
-msgstr "tính đến kiể&U chữ"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/find.c:479
 msgid "&Find recursively"
-msgstr "Tìm kiếm toàn bộ (đệ qu&y)"
+msgstr ""
 
+#: src/filemanager/find.c:480
 msgid "S&kip hidden"
 msgstr ""
 
+#: src/filemanager/find.c:482
 msgid "&All charsets"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/find.c:486
 msgid "Sea&rch for content"
-msgstr "Tìm"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/find.c:487
 msgid "Case sens&itive"
-msgstr "tính đến kiể&U chữ"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/find.c:488
 msgid "Re&gular expression"
-msgstr "&Biểu thức chính quy"
+msgstr ""
 
+#: src/filemanager/find.c:489
 msgid "Fir&st hit"
 msgstr ""
 
+#: src/filemanager/find.c:492
 msgid "A&ll charsets"
 msgstr ""
 
+#: src/filemanager/find.c:495 src/filemanager/midnight.c:202
 msgid "&Tree"
 msgstr "&Cây thư mục"
 
+#: src/filemanager/find.c:537 src/filemanager/find.c:1385
 msgid "Find File"
 msgstr "Tìm tập tin"
 
-#, fuzzy
+#: src/filemanager/find.c:608
 msgid "Content:"
-msgstr "Nội dung: "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/find.c:615
 msgid "File name:"
-msgstr "Tên tập tin:"
+msgstr ""
 
+#: src/filemanager/find.c:622
 msgid "Start at:"
 msgstr "Bắt đầu từ:"
 
+#: src/filemanager/find.c:931
 #, c-format
 msgid "Grepping in %s"
 msgstr "Tìm trong %s"
 
+#: src/filemanager/find.c:1102
 msgid "Finished"
 msgstr "Kết thúc"
 
+#: src/filemanager/find.c:1121 src/viewer/search.c:223
 #, c-format
 msgid "Searching %s"
 msgstr "Tìm %s"
 
+#: src/filemanager/find.c:1300 src/filemanager/find.c:1407
 msgid "Searching"
 msgstr "Tìm"
 
+#: src/filemanager/hotlist.c:195
 msgid "&Move"
 msgstr "&Di chuyển"
 
+#: src/filemanager/hotlist.c:196 src/filemanager/panelize.c:90
 msgid "&Remove"
 msgstr "&Xóa"
 
+#: src/filemanager/hotlist.c:198 src/filemanager/hotlist.c:1027
+#: src/filemanager/hotlist.c:1123
 msgid "&Append"
 msgstr "&Thêm vào"
 
+#: src/filemanager/hotlist.c:200 src/filemanager/hotlist.c:1026
+#: src/filemanager/hotlist.c:1122
 msgid "&Insert"
 msgstr "c&Hèn"
 
-#, fuzzy
+#: src/filemanager/hotlist.c:202
 msgid "New &entry"
-msgstr "tạo &Mục mới"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/hotlist.c:204
 msgid "New &group"
-msgstr "&Nhóm mới"
+msgstr ""
 
+#: src/filemanager/hotlist.c:208
 msgid "&Up"
 msgstr "&Lên"
 
+#: src/filemanager/hotlist.c:210
 msgid "&Add current"
 msgstr "&Thêm hiện thời"
 
+#: src/filemanager/hotlist.c:213
 msgid "&Refresh"
 msgstr "&Làm mới"
 
+#: src/filemanager/hotlist.c:215
 msgid "Fr&ee VFSs now"
 msgstr "&Giải phóng"
 
-#, fuzzy
+#: src/filemanager/hotlist.c:218
 msgid "Change &to"
-msgstr "&Chuyển tới"
+msgstr ""
 
+#: src/filemanager/hotlist.c:284
 msgid "Subgroup - press ENTER to see list"
 msgstr "Nhóm con - nhấn ENTER để xem danh sách"
 
+#: src/filemanager/hotlist.c:766
 msgid "Active VFS directories"
 msgstr "Thư mục VFS hoạt động"
 
+#: src/filemanager/hotlist.c:771
 msgid "Directory hotlist"
 msgstr "Danh sách thư mục thường dùng"
 
+#: src/filemanager/hotlist.c:801
 msgid "Directory path"
 msgstr " Đường dẫn tới thư mục"
 
+#: src/filemanager/hotlist.c:807 src/filemanager/hotlist.c:858
 msgid "Directory label"
 msgstr " Tên nhãn thư mục"
 
+#: src/filemanager/hotlist.c:834
 #, c-format
 msgid "Moving %s"
 msgstr "Di chuyển %s"
 
+#: src/filemanager/hotlist.c:1094
 msgid "New hotlist entry"
 msgstr " Thêm bản ghi vào tra cứu"
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1094
 msgid "Directory label:"
-msgstr " Tên nhãn thư mục"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1095
 msgid "Directory path:"
-msgstr " Đường dẫn tới thư mục"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1179
 msgid "New hotlist group"
-msgstr " Thêm nhóm vào tra cứu "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1179
 msgid "Name of new group:"
-msgstr " Tên nhóm mới"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1230 src/filemanager/hotlist.c:1251
 msgid "Remove:"
-msgstr " Xóa: "
+msgstr ""
 
+#: src/filemanager/hotlist.c:1235
 msgid "Are you sure you want to remove this entry?"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1252
 msgid ""
 "Group not empty.\n"
 "Remove it?"
 msgstr ""
-"\n"
-" Nhóm không rỗng.\n"
-" Xóa nó?"
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1558
 msgid "Top level group"
-msgstr "Nhóm cấp độ cao nhất "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1581
 msgid "Hotlist Load"
-msgstr " Nạp tra cứu "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/hotlist.c:1583
+#, c-format
 msgid ""
 "MC was unable to write ~/%s file,\n"
 "your old hotlist entries were not deleted"
-msgstr " tập tin, tra cứu thư mục cũ chưa bị xóa"
+msgstr ""
 
+#: src/filemanager/hotlist.c:1687
 #, c-format
 msgid "Label for \"%s\":"
 msgstr " Tên nhãn cho \"%s\":"
 
-#, fuzzy
+#: src/filemanager/hotlist.c:1694
 msgid "Add to hotlist"
-msgstr " Thêm vào tra cứu "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/info.c:72 src/filemanager/option.c:436
 msgid "Information"
-msgstr " Thông tin "
+msgstr ""
 
+#: src/filemanager/info.c:108
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
+#: src/filemanager/info.c:124
 #, c-format
 msgid "File: %s"
 msgstr "Tập tin: %s"
 
-#, fuzzy, c-format
+#: src/filemanager/info.c:141
+#, c-format
 msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Nút tự do: %d (%d%%) trong tổng số %d"
+msgstr ""
 
+#: src/filemanager/info.c:147
 msgid "No node information"
 msgstr "Không có thông tin về nút (node)"
 
+#: src/filemanager/info.c:156
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
 msgstr "Chỗ trống:    %s (%d%%) của %s"
 
+#: src/filemanager/info.c:160
 msgid "No space information"
 msgstr "Không có thông tin về khoảng trống"
 
-#, fuzzy, c-format
+#: src/filemanager/info.c:164
+#, c-format
 msgid "Type:      %s"
-msgstr "Loại:         %s "
+msgstr ""
 
+#: src/filemanager/info.c:165
 msgid "non-local vfs"
 msgstr "không phải vfs cục bộ"
 
+#: src/filemanager/info.c:171
 #, c-format
 msgid "Device:    %s"
 msgstr "Thiết bị:     %s"
 
+#: src/filemanager/info.c:177
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Hệ thống tập tin: %s"
 
+#: src/filemanager/info.c:183
 #, c-format
 msgid "Accessed:  %s"
 msgstr "Truy cập:     %s"
 
+#: src/filemanager/info.c:188
 #, c-format
 msgid "Modified:  %s"
 msgstr "Sửa đổi:      %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#: src/filemanager/info.c:196
+#, c-format
 msgid "Changed:   %s"
-msgstr "&Chuyển tới"
+msgstr ""
 
+#: src/filemanager/info.c:204
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr "Dạng thiết bị: major %lu, minor %lu"
 
+#: src/filemanager/info.c:211
 #, c-format
 msgid "Size:      %s"
 msgstr "Kích thước:   %s"
 
+#: src/filemanager/info.c:213
 #, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] " (%ld khối)"
 
+#: src/filemanager/info.c:220
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "Chủ sở hữu:   %s/%s"
 
+#: src/filemanager/info.c:224
 #, c-format
 msgid "Links:     %d"
 msgstr "Liên kết:     %d"
 
+#: src/filemanager/info.c:228
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "Quyền hạn:    %s (%04o)"
 
+#: src/filemanager/info.c:233
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Vị trí:       %Xh:%Xh"
 
+#: src/filemanager/layout.c:174
 msgid "&Vertical"
 msgstr "&Thẳng đứng"
 
+#: src/filemanager/layout.c:175
 msgid "&Horizontal"
 msgstr "&Nằm ngang"
 
+#: src/filemanager/layout.c:188
 msgid "Show free sp&ace"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/layout.c:189
 msgid "&XTerm window title"
-msgstr "tiê&U đề cửa sổ xterm"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/layout.c:190
 msgid "H&intbar visible"
-msgstr "dòng &Gợi ý"
+msgstr ""
 
+#: src/filemanager/layout.c:191
 msgid "&Keybar visible"
 msgstr "&Hiển thị thanh phím tắt"
 
-#, fuzzy
+#: src/filemanager/layout.c:192
 msgid "Command &prompt"
-msgstr "&Dòng lệnh"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/layout.c:193
 msgid "Show &mini status"
-msgstr "hiện trạng thái m&Ini"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/layout.c:194
 msgid "Menu&bar visible"
-msgstr "thAnh trình đơn"
+msgstr ""
 
+#: src/filemanager/layout.c:195
 msgid "&Equal split"
 msgstr "&Kích thước bằng nhau"
 
-#, fuzzy
+#: src/filemanager/layout.c:428
 msgid "Panel split"
-msgstr " Chia bảng "
+msgstr ""
 
+#: src/filemanager/layout.c:429
 msgid "Console output"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/layout.c:430 src/filemanager/option.c:137
 msgid "Other options"
-msgstr " Cấu hình khác "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/layout.c:431
 msgid "Output lines:"
-msgstr "dòng kết quả"
+msgstr ""
 
+#: src/filemanager/layout.c:486
 msgid "Layout"
 msgstr "Vẻ ngoài"
 
-#, fuzzy
+#: src/filemanager/midnight.c:199
 msgid "File listin&g"
-msgstr "&Đầy đủ"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:200
 msgid "&Quick view"
-msgstr "&Lưu nhanh"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:201
 msgid "&Info"
-msgstr "&Chỉ mục inode"
+msgstr ""
 
+#: src/filemanager/midnight.c:205
 msgid "&Listing mode..."
 msgstr "&Dạng danh sách..."
 
+#: src/filemanager/midnight.c:206
 msgid "&Sort order..."
 msgstr "t&Hứ tự sắp xếp..."
 
+#: src/filemanager/midnight.c:207
 msgid "&Filter..."
 msgstr "&Lọc tập tin..."
 
-#, fuzzy
+#: src/filemanager/midnight.c:210
 msgid "&Encoding..."
-msgstr "&Sắp xếp...                      M-t"
+msgstr ""
 
+#: src/filemanager/midnight.c:215
 msgid "FT&P link..."
 msgstr "kết nối &FTP..."
 
+#: src/filemanager/midnight.c:218
 msgid "S&hell link..."
 msgstr "kết nối &Shell..."
 
+#: src/filemanager/midnight.c:221
 msgid "SM&B link..."
 msgstr "kết nối SM&B..."
 
-#, fuzzy
+#: src/filemanager/midnight.c:225
 msgid "&Rescan"
-msgstr "Quét lại"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:237
 msgid "&View"
-msgstr "Xem   "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:238
 msgid "Vie&w file..."
-msgstr " Xem tập tin "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:239
 msgid "&Filtered view"
-msgstr " Lọc rồi xem "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:241
 msgid "&Copy"
-msgstr "Cópi  "
+msgstr ""
 
+#: src/filemanager/midnight.c:242
 msgid "C&hmod"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:243
 msgid "&Link"
-msgstr "&Liên kết"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:244
 msgid "&Symlink"
-msgstr "&Liên kết"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:246
 msgid "Relative symlin&k"
-msgstr "Đang tìm liên kết mềm..."
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:247
 msgid "Edit s&ymlink"
-msgstr " Sửa liên kết mềm "
+msgstr ""
 
+#: src/filemanager/midnight.c:248
 msgid "Ch&own"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:250
 msgid "&Advanced chown"
-msgstr "chown &Nâng cao      "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:251
 msgid "&Rename/Move"
-msgstr "&Xóa"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:252
 msgid "&Mkdir"
-msgstr "Tạotm "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:254
 msgid "&Quick cd"
-msgstr "cd nhanh"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:256
 msgid "Select &group"
-msgstr "Đặt &nhóm"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:257
 msgid "U&nselect group"
-msgstr " Bỏ chọn "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:260
 msgid "Reverse selec&tion"
-msgstr "Chọn ngược lạ&I        M-*"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:262
 msgid "E&xit"
-msgstr "Soạn  "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:278
 msgid "&User menu"
-msgstr " Trình đơn người dùng "
+msgstr ""
 
+#: src/filemanager/midnight.c:279
 msgid "&Directory tree"
 msgstr "cây thư &Mục"
 
-#, fuzzy
+#: src/filemanager/midnight.c:280
 msgid "&Find file"
-msgstr "Tìm tập tin"
+msgstr ""
 
+#: src/filemanager/midnight.c:281
 msgid "S&wap panels"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:283
 msgid "Switch &panels on/off"
-msgstr "&Bật/tắt bảng                  C-o"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:285
 msgid "&Compare directories"
-msgstr " So sánh thư mục "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:287
 msgid "&View diff files"
-msgstr " Xem tập tin "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:290
 msgid "E&xternal panelize"
-msgstr "Bảng ngoài"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:293
 msgid "Show directory s&izes"
-msgstr "&Hiển thị kích thước thư mục"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:295
 msgid "Command &history"
-msgstr "&Lịch sử câu lệnh"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:297
 msgid "Di&rectory hotlist"
-msgstr "Danh sách thư mục thường dùng"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:299
 msgid "&Active VFS list"
-msgstr "&Danh sách VFS hoạt động     C-x a"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:302
 msgid "&Background jobs"
-msgstr " Công việc nền sau"
+msgstr ""
 
+#: src/filemanager/midnight.c:304
 msgid "Screen lis&t"
 msgstr ""
 
+#: src/filemanager/midnight.c:309
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Phục hồi tập tin đã xóa (chỉ ext2fs)"
 
+#: src/filemanager/midnight.c:313
 msgid "&Listing format edit"
 msgstr "&Soạn thảo định dạng danh sách"
 
+#: src/filemanager/midnight.c:319
 msgid "Edit &extension file"
 msgstr "soạn thảo tập tin phần mở &Rộng"
 
+#: src/filemanager/midnight.c:320
 msgid "Edit &menu file"
 msgstr "soạ&N thảo tập tin trình đơn"
 
+#: src/filemanager/midnight.c:323
 msgid "Edit hi&ghlighting group file"
 msgstr ""
 
+#: src/filemanager/midnight.c:335
 msgid "&Configuration..."
 msgstr "&Cấu hình..."
 
+#: src/filemanager/midnight.c:336
 msgid "&Layout..."
 msgstr "&Vẻ ngoài..."
 
-#, fuzzy
+#: src/filemanager/midnight.c:338
 msgid "&Panel options..."
-msgstr " Cấu hình bảng "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:339
 msgid "C&onfirmation..."
-msgstr "&Xác nhận..."
+msgstr ""
 
+#: src/filemanager/midnight.c:340
 msgid "&Display bits..."
 msgstr "bit &Hiển thị..."
 
+#: src/filemanager/midnight.c:343
 msgid "&Virtual FS..."
 msgstr "&FS ảo..."
 
-#, fuzzy
+#: src/filemanager/midnight.c:466
 msgid "Panels:"
-msgstr " Chia bảng "
+msgstr ""
 
+#: src/filemanager/midnight.c:734
 msgid "The TERM environment variable is unset!\n"
 msgstr "Biến môi trườn TERM chưa được xác định!\n"
 
+#: src/filemanager/midnight.c:948
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:951 src/filemanager/midnight.c:957
+#: src/filemanager/panel.c:2257
 msgid "The Midnight Commander"
-msgstr " Midnight Commander "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:958
 msgid "Do you really want to quit the Midnight Commander?"
-msgstr " Thực sự muốn thoát Midnight Commander? "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:1478
 msgid "&Above"
-msgstr " Ở &trên "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:1478
 msgid "&Left"
-msgstr " &Bảng trái "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:1479
 msgid "&Below"
-msgstr " Ở &dưới "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:1479
 msgid "&Right"
-msgstr " Bảng &phải "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:1487
 msgid "ButtonBar|Menu"
-msgstr "Hex"
+msgstr ""
 
+#: src/filemanager/midnight.c:1488 src/viewer/display.c:91
 msgid "ButtonBar|View"
 msgstr "Xem"
 
-#, fuzzy
+#: src/filemanager/midnight.c:1491 src/filemanager/tree.c:1183
 msgid "ButtonBar|RenMov"
-msgstr "Hex"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/midnight.c:1492 src/filemanager/tree.c:1186
 msgid "ButtonBar|Mkdir"
-msgstr "Sửa"
+msgstr ""
 
+#: src/filemanager/option.c:104
 msgid "&Never"
 msgstr "&Không bao giờ"
 
-#, fuzzy
+#: src/filemanager/option.c:105
 msgid "On dum&b terminals"
-msgstr "&Trên terminal ngu"
+msgstr ""
 
+#: src/filemanager/option.c:106
 msgid "Alwa&ys"
 msgstr "&Luôn luôn"
 
-#, fuzzy
+#: src/filemanager/option.c:117
 msgid "A&uto save setup"
-msgstr "tự động gh&I nhớ cấu hình"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:119
 msgid "Sa&fe delete"
-msgstr "Xóa một cách &An toàn"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:121
 msgid "Cd follows lin&ks"
-msgstr "cd th&Eo liên kết"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:123
 msgid "Rotating d&ash"
-msgstr "cái chỉ &Quay"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:125
 msgid "Co&mplete: show all"
-msgstr "tự động hoàn thành: hiện tất cả"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:127
 msgid "Shell &patterns"
-msgstr "&Mẫu dạng shell"
+msgstr ""
 
+#: src/filemanager/option.c:129
 msgid "&Drop down menus"
 msgstr "đẩy &Xuống trình đơn"
 
-#, fuzzy
+#: src/filemanager/option.c:131
 msgid "Auto m&enus"
-msgstr "t&Rình đơn tự động"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:132
 msgid "Use internal vie&w"
-msgstr "trình xem nội &Bộ"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:134
 msgid "Use internal edi&t"
-msgstr "sử dụng s&Oạn thảo nội bộ"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:141
 msgid "Pause after run"
-msgstr " Tạm ngừng sau khi chạy... "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:146
 msgid "Timeout:"
-msgstr "Thời gian sửa"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:147
 msgid "S&ingle press"
-msgstr "&Loại tập tin"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:148
 msgid "Esc key mode"
-msgstr "Slash trên keypad"
+msgstr ""
 
+#: src/filemanager/option.c:151
 msgid "Mkdi&r autoname"
 msgstr ""
 
+#: src/filemanager/option.c:152
 msgid "Classic pro&gressbar"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:154
 msgid "Compute tota&ls"
-msgstr "tính tổn&G kích thước"
+msgstr ""
 
+#: src/filemanager/option.c:156
 msgid "&Verbose operation"
 msgstr "thao tác với thông báo &Dài dòng"
 
-#, fuzzy
+#: src/filemanager/option.c:158
 msgid "File operation options"
-msgstr " Cấu hình khác "
+msgstr ""
 
+#: src/filemanager/option.c:166
 msgid "Configure options"
 msgstr "Tùy chọn cấu hình"
 
-#, fuzzy
+#: src/filemanager/option.c:287
 msgid "Case &insensitive"
-msgstr "tính đến kiể&U chữ"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:288
 msgid "Case s&ensitive"
-msgstr "tính đến kiể&U chữ"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:289
 msgid "Use panel sort mo&de"
-msgstr "Sử &dụng chế độ thụ động"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:302
 msgid "Quick search"
-msgstr "cd nhanh"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:304
 msgid "&Permissions"
-msgstr "Quyền hạn"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:306
 msgid "File &types"
-msgstr "&Loại tập tin"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:309
 msgid "File highlight"
-msgstr " Chiếu sáng... "
+msgstr ""
 
+#: src/filemanager/option.c:311
 msgid "&Mouse page scrolling"
 msgstr ""
 
+#: src/filemanager/option.c:313
 msgid "Pa&ge scrolling"
 msgstr ""
 
+#: src/filemanager/option.c:315
 msgid "L&ynx-like motion"
 msgstr "di chuyển giống trong l&Ynx"
 
+#: src/filemanager/option.c:318
 msgid "Navigation"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:320
 msgid "A&uto save panels setup"
-msgstr "tự động gh&I nhớ cấu hình"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:322
 msgid "Re&verse files only"
-msgstr "&Chỉ theo kích thước"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:324
 msgid "Ma&rk moves down"
-msgstr "&Nhãn di chuyển xuống"
+msgstr ""
 
+#: src/filemanager/option.c:326
 msgid "&Fast dir reload"
 msgstr "nạ&P nhanh thư mục"
 
-#, fuzzy
+#: src/filemanager/option.c:328
 msgid "Show &hidden files"
-msgstr "&Hiển thị tập tin ẩn"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:330
 msgid "Show &backup files"
-msgstr "hiển thị tập tin sao &Lưu"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:332
 msgid "Mi&x all files"
-msgstr "trộn lẫn tất &Cả tập tin"
+msgstr ""
 
+#: src/filemanager/option.c:334
 msgid "Use SI si&ze units"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:337
 msgid "Main panel options"
-msgstr " Cấu hình bảng "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:345
 msgid "Panel options"
-msgstr " Cấu hình bảng "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/option.c:437
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
 "directory contents. In this case you'll need to do a\n"
 "manual reload of the directory. See the man page for\n"
 "the details."
 msgstr ""
-" Sử dụng tùy chọn nạp lại nhanh có thể không phản ánh   \n"
-" đúng nội dung hiện thời của thư mục. Trong trường hợp  \n"
-" này cần nạp lại thư mục một cách thủ công. Hãy xem     \n"
-" trang hướng dẫn sử dụng man để biết them chi tiết.     "
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#: src/filemanager/panel.c:109
 msgid "sort|u"
 msgstr ""
 
+#: src/filemanager/panel.c:110
 msgid "&Unsorted"
 msgstr "không &Sắp xếp"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#: src/filemanager/panel.c:119
 msgid "sort|n"
 msgstr ""
 
+#: src/filemanager/panel.c:120
 msgid "&Name"
 msgstr "th&Eo tên"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
+#: src/filemanager/panel.c:129
 msgid "sort|v"
-msgstr "không &Sắp xếp"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/panel.c:130
 msgid "&Version"
-msgstr "Quyền hạn"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
+#: src/filemanager/panel.c:139
 msgid "sort|e"
-msgstr "không &Sắp xếp"
+msgstr ""
 
+#: src/filemanager/panel.c:140
 msgid "&Extension"
 msgstr "&Phần mở rộng"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#: src/filemanager/panel.c:149
 msgid "sort|s"
 msgstr ""
 
+#: src/filemanager/panel.c:150
 msgid "&Size"
 msgstr "&Kích thước"
 
-#, fuzzy
+#: src/filemanager/panel.c:158
 msgid "Block Size"
-msgstr " Kích thước "
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#: src/filemanager/panel.c:175
 msgid "sort|m"
 msgstr ""
 
+#: src/filemanager/panel.c:176
 msgid "&Modify time"
 msgstr "&Thời gian sửa đổi"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#: src/filemanager/panel.c:185
 msgid "sort|a"
 msgstr ""
 
+#: src/filemanager/panel.c:186
 msgid "&Access time"
 msgstr "thời &Gian truy cập"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#: src/filemanager/panel.c:195
 msgid "sort|h"
 msgstr ""
 
-#, fuzzy
+#: src/filemanager/panel.c:196
 msgid "C&hange time"
-msgstr "thời gi&An thay đổi"
+msgstr ""
 
+#: src/filemanager/panel.c:212
 msgid "Perm"
 msgstr "Quyền"
 
+#: src/filemanager/panel.c:220
 msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#: src/filemanager/panel.c:228
 msgid "sort|i"
 msgstr ""
 
+#: src/filemanager/panel.c:229
 msgid "&Inode"
 msgstr "&Chỉ mục inode"
 
+#: src/filemanager/panel.c:237
 msgid "UID"
 msgstr "UID"
 
+#: src/filemanager/panel.c:245
 msgid "GID"
 msgstr "GID"
 
+#: src/filemanager/panel.c:253
 msgid "Owner"
 msgstr "Chủ sở hữu"
 
+#: src/filemanager/panel.c:261
 msgid "Group"
 msgstr "Nhóm"
 
+#: src/filemanager/panel.c:475
 msgid "[dev]"
 msgstr "[thiết bị]"
 
+#: src/filemanager/panel.c:490 src/filemanager/panel.c:927
 msgid "UP--DIR"
 msgstr "LÊNTRÊN"
 
+#: src/filemanager/panel.c:512
 msgid "SYMLINK"
 msgstr "LIÊNKẾTMỀM"
 
+#: src/filemanager/panel.c:517
 msgid "SUB-DIR"
 msgstr "THƯMỤCCON"
 
+#: src/filemanager/panel.c:918
 msgid "<readlink failed>"
 msgstr "<đọc liên kết không thành công>"
 
+#: src/filemanager/panel.c:978
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] "%s byte"
 
+#: src/filemanager/panel.c:982
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s trong %d tập tin"
 
-#, fuzzy
+#: src/filemanager/panel.c:1557
 msgid "Unknown tag on display format:"
-msgstr "Thẻ ghi không rõ trong định dạng hiển thị: "
-
-#, fuzzy
-msgid "Do you really want to execute?"
-msgstr " Thực sự muốn thực hiện? "
-
-msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
-"Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
 
+#: src/filemanager/panel.c:2258
+msgid "Do you really want to execute?"
+msgstr ""
+
+#: src/filemanager/panel.c:3707
+msgid "User supplied format looks invalid, reverting to default."
+msgstr "Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
+
+#: src/filemanager/panelize.c:89
 msgid "&Add new"
 msgstr "&Thêm mới"
 
+#: src/filemanager/panelize.c:190 src/filemanager/panelize.c:390
 msgid "External panelize"
 msgstr "Bảng ngoài"
 
+#: src/filemanager/panelize.c:204
 msgid "Command"
 msgstr "Câu lệnh"
 
+#: src/filemanager/panelize.c:218 src/filemanager/panelize.c:291
+#: src/filemanager/panelize.c:467 src/filemanager/panelize.c:516
 msgid "Other command"
 msgstr "Lệnh khác"
 
-#, fuzzy
+#: src/filemanager/panelize.c:272
 msgid "Add to external panelize"
-msgstr " Thêm vào bảng ngoài "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/panelize.c:273
 msgid "Enter command label:"
-msgstr " Nhập tên câu lệnh: "
+msgstr ""
 
+#: src/filemanager/panelize.c:331
 msgid "Cannot invoke command."
 msgstr "Không thực hiện được câu lệnh."
 
+#: src/filemanager/panelize.c:390
 msgid "Pipe close failed"
 msgstr "Đóng đường ống không thành công"
 
-#, fuzzy
+#: src/filemanager/panelize.c:407
 msgid "Cannot run external panelize in a non-local directory"
-msgstr " Không thể chạy câu lệnh này trên một thư mục không phải nội bộ "
+msgstr ""
 
+#: src/filemanager/panelize.c:471
 msgid "Find rejects after patching"
 msgstr "Tìm những loại bỏ sau khi vá lỗi (patch)"
 
+#: src/filemanager/panelize.c:473
 msgid "Find *.orig after patching"
 msgstr "Tìm *.orig) sau khi vá lỗi (patch)"
 
+#: src/filemanager/panelize.c:475
 msgid "Find SUID and SGID programs"
 msgstr "Tìm chương trình có các bit SUID/SGID"
 
+#: src/filemanager/tree.c:178
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
@@ -3982,46 +4563,49 @@ msgstr ""
 "Không mở được tập tin %s để ghi nhớ:\n"
 "%s\n"
 
+#: src/filemanager/tree.c:744
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr " Sao chép thư mục \"%s\" vào:"
 
+#: src/filemanager/tree.c:781
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr " Di chuyển thư mục \"%s\" vào:"
 
-#, fuzzy, c-format
+#: src/filemanager/tree.c:794
+#, c-format
 msgid ""
 "Cannot stat the destination\n"
 "%s"
 msgstr ""
-" Không lấy (stat) được thuộc tính của đích đến \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/tree.c:856
+#, c-format
 msgid "Delete %s?"
-msgstr "  Xóa %s?  "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/tree.c:1007 src/filemanager/tree.c:1180
 msgid "ButtonBar|Static"
-msgstr "Tìm kiếm"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/tree.c:1008 src/filemanager/tree.c:1181
 msgid "ButtonBar|Dynamc"
-msgstr "Thô"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/tree.c:1178
 msgid "ButtonBar|Rescan"
-msgstr "Thô"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/tree.c:1179
 msgid "ButtonBar|Forget"
-msgstr "Định dạng"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/tree.c:1190
 msgid "ButtonBar|Rmdir"
-msgstr "Sửa"
+msgstr ""
 
+#: src/filemanager/treestore.c:369
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -4030,26 +4614,27 @@ msgstr ""
 "Không ghi nhớ được vào tập tin %s:\n"
 "%s\n"
 
-#, fuzzy
+#: src/filemanager/usermenu.c:301
 msgid "Debug"
-msgstr " Sửa lỗi "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/usermenu.c:319
 msgid "ERROR:"
-msgstr " LỖI: "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/usermenu.c:323
 msgid "True:"
-msgstr " Đúng: "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/usermenu.c:325
 msgid "False:"
-msgstr " Sai: "
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/usermenu.c:565
 msgid "Warning -- ignoring file"
-msgstr " Cảnh báo - tập tin bị lờ đi "
+msgstr ""
 
+#: src/filemanager/usermenu.c:566
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -4058,64 +4643,70 @@ msgstr ""
 "Tập tin %s không thuộc quyền sở hữu của root, hay của bạn,\n"
 "hoặc ai cũng có thể ghi. Sử dụng tập tin này có thể không an toàn"
 
-#, fuzzy
+#: src/filemanager/usermenu.c:676
 msgid "Format error on file Extensions File"
-msgstr " Lỗi định dạng tập tin \"Phần mở rộng của tập tin\" "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/usermenu.c:677
+#, c-format
 msgid "The %%var macro has no default"
-msgstr " Macro %%var không có giá trị mặc định "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/usermenu.c:678
+#, c-format
 msgid "The %%var macro has no variable"
-msgstr " Macro %%var không có giá trị biến "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/filemanager/usermenu.c:894
+#, c-format
 msgid ""
 "Cannot open file%s\n"
 "%s"
 msgstr ""
-" Không mở được tập tin %s \n"
-" %s "
 
-#, fuzzy, c-format
+#: src/filemanager/usermenu.c:993
+#, c-format
 msgid "No suitable entries found in %s"
-msgstr " Không tìm thấy mục thích hợp trong %s"
+msgstr ""
 
-#, fuzzy
+#: src/filemanager/usermenu.c:999
 msgid "User menu"
-msgstr " Trình đơn người dùng "
+msgstr ""
 
-#, fuzzy
+#: src/help.c:321
 msgid "Help file format error\n"
-msgstr " Lỗi định dạng tập tin trợ giúp\n"
+msgstr ""
 
-#, fuzzy
+#: src/help.c:359
 msgid "Internal bug: Double start of link area"
-msgstr " Lỗi (bug) nội bộ: vùng liên kết có hai đầu "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/help.c:702 src/help.c:1075
+#, c-format
 msgid "Cannot find node %s in help file"
-msgstr " Không tìm thấy nút %s trong tập tin trợ giúp "
+msgstr ""
 
+#: src/help.c:1090
 msgid "Help"
 msgstr "Giúpđỡ"
 
-#, fuzzy
+#: src/help.c:1113
 msgid "ButtonBar|Index"
-msgstr "Hex"
+msgstr ""
 
-#, fuzzy
+#: src/help.c:1114
 msgid "ButtonBar|Prev"
-msgstr "Phân tích"
+msgstr ""
 
+#: src/learn.c:98
 msgid "Learn keys"
 msgstr "Tạo phím tắt"
 
-#, fuzzy
+#: src/learn.c:111
 msgid "Teach me a key"
-msgstr " Dạy tôi một phím "
+msgstr ""
 
+#: src/learn.c:112
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -4136,18 +4727,21 @@ msgstr ""
 "Nếu bạn muốn dừng việc dạy phím, thì hãy nhấn\n"
 "phím Esc và cũng cần đợi một chút."
 
-#, fuzzy
+#: src/learn.c:144
 msgid "Cannot accept this key"
-msgstr " Không thể chấp nhận phím này "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/learn.c:144
+#, c-format
 msgid "You have entered \"%s\""
-msgstr " Đã nhập vào \"%s\""
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
+#: src/learn.c:202
 msgid "OK"
 msgstr "OK"
 
+#: src/learn.c:212
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -4155,9 +4749,11 @@ msgstr ""
 "Có vẻ như tất cả các phím của bạn\n"
 "làm việc tốt. Thật là tuyệt."
 
+#: src/learn.c:214
 msgid "&Discard"
 msgstr "&Vứt bỏ"
 
+#: src/learn.c:221
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -4165,42 +4761,47 @@ msgstr ""
 "Tuyệt! Chúng ta có một cơ sở dữ liệu mô tả terminal đầy đủ!\n"
 "Tất cả các phím đều làm việc tốt."
 
+#: src/learn.c:335
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-"Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
+msgstr "Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
 
+#: src/learn.c:338
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
+msgstr "xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
 
+#: src/learn.c:341
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."
 
-#, fuzzy, c-format
+#: src/main.c:496
+#, c-format
 msgid "Cannot create %s directory"
-msgstr "Không thay đổi được thư mục"
+msgstr ""
 
-#, fuzzy
+#: src/selcodepage.c:79
 msgid "Choose codepage"
-msgstr " Chọn bảng mã dữ liệu vào "
+msgstr ""
 
+#: src/selcodepage.c:83
 msgid "-  < No translation >"
 msgstr "-  < Không có dịch >"
 
+#: src/setup.c:186
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+#: src/setup.c:187
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#, fuzzy, c-format
+#: src/setup.c:1099
+#, c-format
 msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr ""
-" Không thể lưu tập tin. \n"
-" %s "
 
+#: src/subshell.c:393
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -4210,865 +4811,200 @@ msgstr ""
 "trên terminal này. Sẽ không có hỗ trợ\n"
 "shell con."
 
+#: src/subshell.c:844
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Không mở được đường ống tên (named pipe) %s\n"
 
-#, fuzzy
+#: src/subshell.c:1086
 msgid "The shell is still active. Quit anyway?"
-msgstr " Shell vẫn còn hoạt động. Vẫn thoát? "
+msgstr ""
 
+#: src/subshell.c:1274
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Cảnh báo: Không chuyển được vào %s.\n"
 
-#, fuzzy
+#: src/textconf.c:74
 msgid "Using the S-Lang library with terminfo database\n"
-msgstr "với cơ sở dữ liệu terminfo"
+msgstr ""
 
-#, fuzzy
+#: src/textconf.c:76
 msgid "Using the ncurses library\n"
-msgstr "Dùng thư viện ncurses"
+msgstr ""
 
-#, fuzzy
+#: src/textconf.c:78
 msgid "Using the ncursesw library\n"
-msgstr "Dùng thư viện ncurses"
+msgstr ""
 
+#: src/textconf.c:84
 msgid "With builtin Editor\n"
 msgstr "Với Trình soạn thảo nội trú\n"
 
-#, fuzzy
+#: src/textconf.c:89
 msgid "With optional subshell support\n"
-msgstr "Với hỗ trợ shell con không bắt buộc"
+msgstr ""
 
-#, fuzzy
+#: src/textconf.c:91
 msgid "With subshell support as default\n"
-msgstr "Với hỗ trợ shell con mặc định"
+msgstr ""
 
+#: src/textconf.c:96
 msgid "With support for background operations\n"
 msgstr "Với hỗ trợ thao tác nền sau\n"
 
+#: src/textconf.c:100
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "Với hỗ trợ chuột trong xterm và kênh giao tác Linux\n"
 
+#: src/textconf.c:102
 msgid "With mouse support on xterm\n"
 msgstr "Với hỗ trợ chuột trong xterm\n"
 
+#: src/textconf.c:106
 msgid "With support for X11 events\n"
 msgstr "Với hỗ trợ sự kiện X11\n"
 
+#: src/textconf.c:110
 msgid "With internationalization support\n"
 msgstr "Với hỗ trợ các ngôn ngữ khác\n"
 
+#: src/textconf.c:114
 msgid "With multiple codepages support\n"
 msgstr "Với hỗ trợ nhiều bảng mã\n"
 
+#: src/textconf.c:134
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr ""
 
-#, fuzzy, c-format
+#: src/textconf.c:141
+#, c-format
 msgid "Virtual File Systems:"
-msgstr "Hệ thống tập tin ảo:"
+msgstr ""
 
+#: src/textconf.c:147
 #, c-format
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
+#: src/viewer/actions_cmd.c:277
 msgid "Invalid value"
-msgstr "giá trị số không thích hợp"
+msgstr ""
 
-#, fuzzy
+#: src/viewer/datasource.c:384
 msgid "Cannot spawn child process"
-msgstr " Không sinh ra được tiến trình con "
+msgstr ""
 
+#: src/viewer/datasource.c:397
 msgid "Empty output from child filter"
 msgstr "Bộ lọc con trả lại kết quả rỗng"
 
+#: src/viewer/dialogs.c:174
 msgid "&Line number (decimal)"
 msgstr ""
 
+#: src/viewer/dialogs.c:175
 msgid "Pe&rcents"
 msgstr ""
 
+#: src/viewer/dialogs.c:176
 msgid "&Decimal offset"
 msgstr ""
 
+#: src/viewer/dialogs.c:177
 msgid "He&xadecimal offset"
 msgstr ""
 
+#: src/viewer/dialogs.c:204
 msgid "Goto"
 msgstr ""
 
+#: src/viewer/display.c:97
 msgid "ButtonBar|Ascii"
 msgstr "Ascii"
 
+#: src/viewer/display.c:99
 msgid "ButtonBar|HxSrch"
 msgstr "Tìm hx"
 
+#: src/viewer/display.c:104
 msgid "ButtonBar|UnWrap"
 msgstr "Bỏ chuyển dòng"
 
+#: src/viewer/display.c:105
 msgid "ButtonBar|Wrap"
 msgstr "Chuyển dòng"
 
+#: src/viewer/display.c:106
 msgid "ButtonBar|Hex"
 msgstr "Hex"
 
+#: src/viewer/display.c:111
 msgid "ButtonBar|Goto"
 msgstr "Đi tới"
 
+#: src/viewer/display.c:112
 msgid "ButtonBar|Raw"
 msgstr "Thô"
 
+#: src/viewer/display.c:113
 msgid "ButtonBar|Parse"
 msgstr "Phân tích"
 
+#: src/viewer/display.c:121
 msgid "ButtonBar|Unform"
 msgstr "Bỏ định dạng"
 
+#: src/viewer/display.c:122
 msgid "ButtonBar|Format"
 msgstr "Định dạng"
 
-#, fuzzy, c-format
+#: src/viewer/hex.c:381
+#, c-format
 msgid ""
 "Error while closing the file:\n"
 "%s\n"
 "Data may have been written or not"
 msgstr ""
-" Lỗi khi đóng tập tin: \n"
-" %s \n"
-" Dữ liệu chưa chắc đã được khi. "
 
-#, fuzzy, c-format
+#: src/viewer/hex.c:389
+#, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr ""
-" Không thể lưu tập tin. \n"
-" %s "
 
-#, fuzzy
+#: src/viewer/lib.c:424 src/viewer/lib.c:426
 msgid "View: "
-msgstr "Xem   "
+msgstr ""
 
-#, fuzzy, c-format
+#: src/viewer/mcviewer.c:334
+#, c-format
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
 msgstr ""
-" Không mở được \"%s\"\n"
-" %s "
 
-#, fuzzy, c-format
+#: src/viewer/mcviewer.c:348
+#, c-format
 msgid ""
 "Cannot stat \"%s\"\n"
 "%s"
 msgstr ""
-" Không lấy (stat) được thuộc tính \"%s\"\n"
-" %s "
 
-#, fuzzy
+#: src/viewer/mcviewer.c:361
 msgid "Cannot view: not a regular file"
 msgstr ""
-" Không xem được vì lý do: không\n"
-" phải tập tin thông thường "
 
+#: src/viewer/search.c:139
 msgid "Seeking to search result"
 msgstr ""
 
-#, fuzzy
+#: src/viewer/search.c:286
 msgid "Search done"
-msgstr "Tìm"
-
-msgid "Continue from begining?"
 msgstr ""
 
-#~ msgid "Using system-installed S-Lang library"
-#~ msgstr "Sử dụng thư việc của S-Lang hệ thống"
-
-#, fuzzy
-#~ msgid "ftpfs: could not setup passive mode: %s"
-#~ msgstr "ftpfs: không đặt được chế độ bị động (passive)"
-
-#, fuzzy
-#~ msgid "Cannot chdir to %s"
-#~ msgstr " Không thể chdir vào %s "
-
-#, fuzzy
-#~ msgid "MCFS"
-#~ msgstr " MCFS "
-
-#, fuzzy
-#~ msgid "The server does not support this version"
-#~ msgstr " Máy chủ không hỗ trợ phiên bản này "
-
-#, fuzzy
-#~ msgid ""
-#~ "The remote server is not running on a system port\n"
-#~ "you need a password to log in, but the information may\n"
-#~ "not be safe on the remote side.  Continue?\n"
-#~ msgstr ""
-#~ " Máy chủ ở xa không chạy trên một cổng hệ thống. Cần \n"
-#~ " mật khẩu để đăng nhập vào, nhưng điều này có thể \n"
-#~ " không an toàn cho thông tin phía ở xa. Tiếp tục?\n"
-
-#, fuzzy
-#~ msgid "MCFS Password required"
-#~ msgstr " Yêu cầu mật khẩu MCFS "
-
-#, fuzzy
-#~ msgid "Invalid password"
-#~ msgstr " Mật khẩu không đúng "
-
-#, fuzzy
-#~ msgid "Cannot locate hostname: %s"
-#~ msgstr " Không xác định được tên máy ở xa: %s"
-
-#, fuzzy
-#~ msgid "Cannot create socket: %s"
-#~ msgstr " Không tạo được socket: %s "
-
-#, fuzzy
-#~ msgid "Cannot connect to server: %s"
-#~ msgstr " Không kết nối được tới máy chủ: %s "
-
-#, fuzzy
-#~ msgid "Too many open connections"
-#~ msgstr " Quá nhiều kết nối mở "
-
-#, fuzzy
-#~ msgid "Link to a remote machine"
-#~ msgstr " Kiết nối tới máy ở xa "
-
-#~ msgid "&Network link..."
-#~ msgstr "&Kết nối mạng..."
-
-#, fuzzy
-#~ msgid "File was modified, save with exit?"
-#~ msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
-
-#~ msgid " Permission "
-#~ msgstr " Quyền truy cập "
-
-#~ msgid " File "
-#~ msgstr " Tập tin "
-
-#~ msgid " Name "
-#~ msgstr " Tên "
-
-#~ msgid " Owner name "
-#~ msgstr " Tên chủ sở hữu "
-
-#~ msgid " Group name "
-#~ msgstr " Tên nhóm "
-
-#~ msgid " Size "
-#~ msgstr " Kích thước "
-
-#~ msgid " Confirmation "
-#~ msgstr " Hỏi xác nhận "
-
-#~ msgid " Filtered view "
-#~ msgstr " Lọc rồi xem "
-
-#~ msgid " Select "
-#~ msgstr " Chọn "
-
-#~ msgid " Compare directories "
-#~ msgstr " So sánh thư mục "
-
-#~ msgid " Link "
-#~ msgstr " Liên kết "
-
-#~ msgid " Edit symlink "
-#~ msgstr " Sửa liên kết mềm "
-
-#~ msgid "case &Sensitive"
-#~ msgstr "có tính &Kiểu chữ"
-
-#~ msgid " Replace "
-#~ msgstr " Thay thế "
-
-#~ msgid " Error "
-#~ msgstr " Lỗi "
-
-#~ msgid " Insert File "
-#~ msgstr "Chèn tập tin "
-
-#~ msgid " Insert Literal "
-#~ msgstr " Chèn văn bản thuần túy "
-
-#~ msgid " Execute Macro "
-#~ msgstr "Thực hiện Macro "
-
-#~ msgid " Cannot overwrite directory `%s' "
-#~ msgstr " Không thể ghi đè lên thư mục `%s' "
-
-#~ msgid " to:"
-#~ msgstr " vào:"
-
-#~ msgid " Delete: "
-#~ msgstr " Xóa: "
-
-#~ msgid " Directory path "
-#~ msgstr " Đường dẫn tới thư mục "
-
-#~ msgid " Directory label "
-#~ msgstr " Nhãn thư mục"
-
-#~ msgid "File:       %s"
-#~ msgstr "Tập tin:       %s"
-
-#~ msgid "pe&Rmissions"
-#~ msgstr "&Quyền truy cập"
-
-#~ msgid " User menu "
-#~ msgstr " Trình đơn người dùng "
-
-#~ msgid ""
-#~ " Cannot save file: \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Không thể lưu tập tin. \n"
-#~ " %s "
-
-#~ msgid "Status:    %s"
-#~ msgstr "Trạng thái:  %s"
-
-#~ msgid "Count"
-#~ msgstr "Đếm"
-
-#~ msgid "Bytes"
-#~ msgstr "Byte"
-
-#~ msgid " confirm &Exit "
-#~ msgstr " trước khi th&Oát "
-
-#~ msgid " confirm e&Xecute "
-#~ msgstr " trước &Khi thực hiện "
-
-#~ msgid " confirm &Delete "
-#~ msgstr " hỏi lại trước khi &Xóa "
-
-#, fuzzy
-#~ msgid ""
-#~ " The current line number is %lld.\n"
-#~ " Enter the new line number:"
-#~ msgstr ""
-#~ " Số thứ tự dòng hiện thời %d.\n"
-#~ " Hãy nhập số thứ tự dòng muốn chuyển đến:"
-
-#, fuzzy
-#~ msgid ""
-#~ " The current address is %s.\n"
-#~ " Enter the new address:"
-#~ msgstr ""
-#~ " Số thứ tự dòng hiện thời %d.\n"
-#~ " Hãy nhập số thứ tự dòng muốn chuyển đến:"
-
-#~ msgid " Goto Address "
-#~ msgstr " Đi tới địa chỉ "
-
-#, fuzzy
-#~ msgid " Invalid address "
-#~ msgstr " Mật khẩu không đúng "
-
-#~ msgid "Offset 0x%08lx"
-#~ msgstr "Bộ offset 0x%08lx"
-
-#~ msgid "Line %lu Col %lu"
-#~ msgstr "Dòng %lu Cột %lu"
-
-#~ msgid "%s bytes"
-#~ msgstr "%s byte"
-
-#~ msgid ">= %s bytes"
-#~ msgstr ">= %s byte"
-
-#~ msgid "File:       None"
-#~ msgstr "Tập tin:      Không có"
-
-#~ msgid "Do backups -->"
-#~ msgstr "&Sao lưu -->"
-
-#~ msgid "Extension:"
-#~ msgstr "&Mở rộng:"
-
-#~ msgid "&New              C-n"
-#~ msgstr "&Tập tin mới             C-n"
-
-#~ msgid "&Save              F2"
-#~ msgstr "&Ghi nhớ                  F2"
-
-#~ msgid "Save &as...       F12"
-#~ msgstr "Ghi &như...              F12"
-
-#~ msgid "A&bout...            "
-#~ msgstr "&Về chương trình...         "
-
-#~ msgid "&Quit             F10"
-#~ msgstr "T&hoát                   F10"
-
-#~ msgid "&New            C-x k"
-#~ msgstr "&Tập tin mới           C-x k"
-
-#~ msgid "Copy to &file...     "
-#~ msgstr "S&ao chép vào tập tin...    "
-
-#, fuzzy
-#~ msgid "&Toggle mark                 F3"
-#~ msgstr "&Bật/tắt bôi đen           F3"
-
-#, fuzzy
-#~ msgid "Mar&k columns              S-F3"
-#~ msgstr "Bôi đen &cột             S-F3"
-
-#, fuzzy
-#~ msgid "&Copy                        F5"
-#~ msgstr "sao &Chép               F5"
-
-#, fuzzy
-#~ msgid "&Move                        F6"
-#~ msgstr "&Di chuyển                 F6"
-
-#, fuzzy
-#~ msgid "&Delete                      F8"
-#~ msgstr "xó&A                    F8"
-
-#, fuzzy
-#~ msgid "&Next bookmark              M-j"
-#~ msgstr "&Tập tin mới             C-n"
-
-#, fuzzy
-#~ msgid "&Undo                       C-u"
-#~ msgstr "&Hủy bước                 C-u"
-
-#, fuzzy
-#~ msgid "&Beginning               C-PgUp"
-#~ msgstr "Đầ&u tập tin           C-PgUp"
-
-#, fuzzy
-#~ msgid "&End                     C-PgDn"
-#~ msgstr "Cuố&i tập tin          C-PgDn"
-
-#, fuzzy
-#~ msgid "C&opy to clipfile           M-w"
-#~ msgstr "&Chuyển tới dòng...             M-l"
-
-#, fuzzy
-#~ msgid "C&ut to clipfile            C-w"
-#~ msgstr "&Chuyển tới dòng...             M-l"
-
-#, fuzzy
-#~ msgid "Toggle bookmar&k               "
-#~ msgstr "&Bật/tắt bôi đen           F3"
-
-#, fuzzy
-#~ msgid "&Next bookmark                 "
-#~ msgstr "&Tập tin mới             C-n"
-
-#, fuzzy
-#~ msgid "Pre&v bookmark                 "
-#~ msgstr "&Sắp xếp...                      M-t"
-
-#, fuzzy
-#~ msgid "&Flush bookmark                "
-#~ msgstr "T&hư điện tử...                     "
-
-#~ msgid "&Search...         F7"
-#~ msgstr "Tìm &kiếm...               F7"
-
-#~ msgid "&Replace...        F4"
-#~ msgstr "Th&ay thế...               F4"
-
-#~ msgid "&Go to line...            M-l"
-#~ msgstr "&Chuyển tới dòng...             M-l"
-
-#, fuzzy
-#~ msgid "Encod&ing...             M-e"
-#~ msgstr "&Sắp xếp...                      M-t"
-
-#~ msgid "Delete macr&o...            "
-#~ msgstr "&Xóa macro...                       "
-
-#~ msgid "Sor&t...                 M-t"
-#~ msgstr "&Sắp xếp...                      M-t"
-
-#~ msgid "&Mail...                    "
-#~ msgstr "T&hư điện tử...                     "
-
-#~ msgid "&Execute macro... C-x e, KEY"
-#~ msgstr "Thực hiện &macro...       C-x e, KEY"
-
-#~ msgid "'ispell' s&pell check    M-$"
-#~ msgstr "Kiểm tra chính tả '&ispell'      M-$"
-
-#, fuzzy
-#~ msgid "Save setu&p"
-#~ msgstr "&Ghi nhớ cấu hình"
-
-#~ msgid " Sear/Repl "
-#~ msgstr " Tìm kiếm/Thay thế "
-
-#~ msgid " Command "
-#~ msgstr " Câu lệnh "
-
-#~ msgid "Intuitive"
-#~ msgstr "T&rực giác"
-
-#~ msgid "Emacs"
-#~ msgstr "&Emacs"
-
-#~ msgid "User-defined"
-#~ msgstr "Người dùng xác định"
-
-#~ msgid "Key emulation"
-#~ msgstr "Giả tạo phím"
-
-#~ msgid "Save"
-#~ msgstr "Ghinhớ"
-
-#~ msgid "Mark"
-#~ msgstr "Bôiđen"
-
-#~ msgid "Replac"
-#~ msgstr "Thayth"
-
-#~ msgid "PullDn"
-#~ msgstr "GọiTĐ "
-
-#~ msgid " Copy "
-#~ msgstr " Sao chép "
-
-#~ msgid " Move "
-#~ msgstr " Di chuyển "
-
-#~ msgid " Delete "
-#~ msgstr " Xóa "
-
-#~ msgid "1Copy"
-#~ msgstr "1Sao chép"
-
-#~ msgid "1Move"
-#~ msgstr "1Di chuyển"
-
-#~ msgid "1Delete"
-#~ msgstr "1Xóa"
-
-#~ msgid "Index"
-#~ msgstr "Chỉ mục"
-
-#~ msgid "Prev"
-#~ msgstr "Quay lại"
-
-#~ msgid "&Quick view     C-x q"
-#~ msgstr "&Xem nhanh     C-x q"
-
-#~ msgid "&Info           C-x i"
-#~ msgstr "&Thông tin     C-x i"
-
-#~ msgid "&Rescan         C-r"
-#~ msgstr "&Quét lại        C-r"
-
-#~ msgid "&View               F3"
-#~ msgstr "&Xem                    F3"
-
-#~ msgid "Vie&w file...         "
-#~ msgstr "x&Em tập tin...       "
-
-#~ msgid "&Filtered view     M-!"
-#~ msgstr "xe&M kết quả lệnh      M-!"
-
-#~ msgid "&Edit               F4"
-#~ msgstr "&Soạn thảo              F4"
-
-#~ msgid "&Copy               F5"
-#~ msgstr "sao &Chép               F5"
-
-#~ msgid "c&Hmod           C-x c"
-#~ msgstr "c&Hmod               C-x c"
-
-#~ msgid "&Link            C-x l"
-#~ msgstr "&Liên kết cứng       C-x l"
-
-#~ msgid "&SymLink         C-x s"
-#~ msgstr "liên &Kết mềm        C-x s"
-
-#~ msgid "edit s&Ymlink  C-x C-s"
-#~ msgstr "sử&A liên kết mềm  C-x C-s"
-
-#~ msgid "ch&Own           C-x o"
-#~ msgstr "cho&Wn               C-x o"
-
-#~ msgid "&Rename/Move        F6"
-#~ msgstr "Đổi tên/&Di chuyển      F6"
-
-#~ msgid "&Mkdir              F7"
-#~ msgstr "mkdi&R                  F7"
-
-#~ msgid "&Delete             F8"
-#~ msgstr "xó&A                    F8"
-
-#~ msgid "&Quick cd          M-c"
-#~ msgstr "cd nhanh &>             M-c"
-
-#~ msgid "select &Group      M-+"
-#~ msgstr "Chọn Nhóm &+           M-+"
-
-#~ msgid "u&Nselect group    M-\\"
-#~ msgstr "&Bỏ chọn nhóm          M-\\"
-
-#~ msgid "e&Xit              F10"
-#~ msgstr "Th&Oát                 F10"
-
-#~ msgid "&User menu          F2"
-#~ msgstr "&Trình đơn người dùng   F2"
-
-#~ msgid "&Find file            M-?"
-#~ msgstr "&Tìm tập tin                   M-?"
-
-#~ msgid "s&Wap panels          C-u"
-#~ msgstr "đổi chỗ h&Ai bảng              C-u"
-
-#~ msgid "&Compare directories  C-x d"
-#~ msgstr "&So sánh thư mục             C-x d"
-
-#~ msgid "e&Xternal panelize    C-x !"
-#~ msgstr "bản&G ngoài                  C-x !"
-
-#, fuzzy
-#~ msgid "Command &history      M-h"
-#~ msgstr " Lịch sử dòng lệnh "
-
-#~ msgid "di&Rectory hotlist    C-\\"
-#~ msgstr "Thư mục thường dùng &*         C-\\"
-
-#~ msgid "&Background jobs      C-x j"
-#~ msgstr "&Công việc nền sau           C-x j"
-
-#~ msgid "learn &Keys..."
-#~ msgstr "&Tạo phím tắt...  "
-
-#~ msgid " &File "
-#~ msgstr " &Tập tin "
-
-#~ msgid " &Command "
-#~ msgstr " &Câu lệnh "
-
-#~ msgid "Menu"
-#~ msgstr "Trđơn "
-
-#, fuzzy
-#~ msgid "n"
-#~ msgstr "Trên"
-
-#, fuzzy
-#~ msgid "Extension"
-#~ msgstr "&Mở rộng:"
-
-#~ msgid "ATime"
-#~ msgstr "Truy cập cuối cùng"
-
-#~ msgid "CTime"
-#~ msgstr "Thời gian thay đổi"
-
-#~ msgid "Inode"
-#~ msgstr "Nút"
-
-#~ msgid "RenMov"
-#~ msgstr "Chuyển"
-
-#~ msgid "Static"
-#~ msgstr "Tĩnh"
-
-#~ msgid "Dynamc"
-#~ msgstr "Động"
-
-#~ msgid "Rmdir"
-#~ msgstr "Xóa thư mục"
-
-#~ msgid "bind: Wrong argument number, bind <key> <command>"
-#~ msgstr "bind: Sai số của tham số, bind <key> <command>"
-
-#~ msgid "bind: Bad key value `%s'"
-#~ msgstr "bind: Giá trị chìa khóa xấu `%s'"
-
-#~ msgid "bind: Ehh...no key?"
-#~ msgstr "bind: E hèm... không có chìa khóa?"
-
-#~ msgid "bind: Unknown key: `%s'"
-#~ msgstr "bind: Chìa khóa không biết: `%s'"
-
-#~ msgid "bind: Unknown command: `%s'"
-#~ msgstr "bind: Câu lệnh không rõ: `%s'"
-
-#~ msgid "%s: Syntax: %s <n> <command> <label>"
-#~ msgstr "%s: Cú pháp: %s <n> <command> <label>"
-
-#~ msgid "%s: Unknown command: `%s'"
-#~ msgstr "%s: Câu lệnh không biết: `%s'"
-
-#~ msgid "%s: fn should be 1-10"
-#~ msgstr "%s: fn phải là 1-10"
-
-#~ msgid "%s: fopen(): %s"
-#~ msgstr "%s: fopen(): %s"
-
-#~ msgid "%s:%d: unknown command `%s'"
-#~ msgstr "%s:%d: câu lệnh không rõ `%s'"
-
-#~ msgid "%s:%d: %s"
-#~ msgstr "%s:%d: %s"
-
-#~ msgid "%s not found!"
-#~ msgstr "Không tìm thấy %s!"
-
-#~ msgid "NumLock on keypad"
-#~ msgstr "NumLock trên keypad"
-
-#~ msgid " Emacs key: "
-#~ msgstr "Phím Emacs: "
-
-#~ msgid " %d items found, %d bookmarks added "
-#~ msgstr " tìm thấy %d mục, đã thêm %d đánh dấu (bookmark) "
-
-#~ msgid "Displays this help message"
-#~ msgstr "Hiển thị thông báo trợ giúp này"
-
-#~ msgid "Displays a help screen on how to change the color scheme"
-#~ msgstr "Hiển thị cửa sổ trợ giúp cách thay đổi bộ phối hợp màu"
-
-#~ msgid "missing argument"
-#~ msgstr "thiếu tham số"
-
-#~ msgid "unknown option"
-#~ msgstr "tùy chọn không rõ"
-
-#~ msgid "Show this help message"
-#~ msgstr "Hiển thị thông báo trợ giúp này"
-
-#~ msgid "Display brief usage message"
-#~ msgstr "Hiển thị chỉ dẫn ngắn gọn"
-
-#~ msgid "ARG"
-#~ msgstr "ARG"
-
-#~ msgid "Usage:"
-#~ msgstr "Sử dụng:"
-
-#, fuzzy
-#~ msgid "pro&Mpt on replace"
-#~ msgstr "&Hỏi trước khi thay"
-
-#~ msgid "replace &All"
-#~ msgstr "&Thay thế tất cả"
-
-#~ msgid "O&ne"
-#~ msgstr "&Một"
-
-#, fuzzy
-#~ msgid "%b %d %H:%M"
-#~ msgstr "%b %e %H:%M"
-
-#, fuzzy
-#~ msgid "%b %d %Y"
-#~ msgstr "%b %e  %Y"
-
-#, fuzzy
-#~ msgid " The current address is 0x%08"
-#~ msgstr ""
-#~ " Địa chỉ hiện thời - 0x%lx.\n"
-#~ " Hãy nhập địa chỉ mới:"
-
-#~ msgid "scanf &Expression"
-#~ msgstr "biểu thức &Scanf"
-
-#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " Hãy nhập thứ tự của tham số thay thế, ví dụ 3,2,1,4 "
-
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Biểu thức chính quy không đúng, hoặc biểu thức scanf có quá nhiều biến "
-#~ "đổi "
-
-#~ msgid " Error in replacement format string. "
-#~ msgstr " Lỗi trong định dạng chuỗi thay thế. "
-
-#~ msgid " Replacement too long. "
-#~ msgstr " Chuỗi thay thế quá dài. "
-
-#~ msgid "&Copy              F5"
-#~ msgstr "&Sao chép                  F5"
-
-#~ msgid "&Delete            F8"
-#~ msgstr "&Xóa                       F8"
-
-#~ msgid " The command history is empty "
-#~ msgstr " Lịch sử dòng lệnh rỗng "
-
-#~ msgid "Edit edi&tor menu file"
-#~ msgstr "sửa trình đơn của trình s&Oạn thảo"
-
-#~ msgid ""
-#~ "To use this feature select your codepage in\n"
-#~ "Setup / Display Bits dialog!\n"
-#~ "Do not forget to save options."
-#~ msgstr ""
-#~ "Để sử dụng tính năng này, hãy chọn bảng mã trong\n"
-#~ "trình đơn Cấu hình / hộp thoại Bit hiển thị!\n"
-#~ "Đừng quên ghi nhớ lại cấu hình."
-
-#~ msgid "Invalid hex search expression"
-#~ msgstr "Biểu thức tìm kiếm hex không đúng"
-
-#~ msgid " Invalid regular expression "
-#~ msgstr " Biểu thức chính quy không đúng"
-
-#~ msgid " Enter regexp:"
-#~ msgstr " Nhập biểu thức chính quy:"
-
-#~ msgid "ButtonBar|RxSrch"
-#~ msgstr "Tìm rx"
-
-#~ msgid "Using included S-Lang library"
-#~ msgstr "Sử dụng thư việc S-Lang bao gồm"
-
-#~ msgid "with termcap database"
-#~ msgstr "với cơ sở dữ liệu termcap"
-
-#~ msgid "&Home"
-#~ msgstr "&Cá nhân"
-
-#~ msgid "&Type"
-#~ msgstr "&Loại"
-
-#~ msgid "N&GID"
-#~ msgstr "N&GID"
-
-#~ msgid "N&UID"
-#~ msgstr "N&UID"
-
-#~ msgid "&Owner"
-#~ msgstr "&Chủ sở hữu"
-
-#~ msgid "&Group"
-#~ msgstr "&Nhóm"
-
-#~ msgid "MC was unable to write ~/"
-#~ msgstr "MC không thể ghi nhớ ~/"
-
-#~ msgid " Notice "
-#~ msgstr " Cảnh báo "
-
-#~ msgid ""
-#~ " The Midnight Commander configuration files \n"
-#~ " are now stored in the ~/.mc directory, the \n"
-#~ " files have been moved now\n"
-#~ msgstr ""
-#~ " Các tập tin cấu hình Midnight Commander \n"
-#~ " bây giờ đặt trong thư mục ~/.mc, các \n"
-#~ " tập tin cũ bây giờ được chuyển tới đó\n"
+#: src/viewer/search.c:286
+msgid "Continue from begining?"
+msgstr ""
