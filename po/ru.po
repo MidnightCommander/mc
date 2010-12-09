@@ -929,7 +929,6 @@ msgid "Show mc with specified skin"
 msgstr "Отобразить mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords
-#: src/args.c:325
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -968,7 +967,6 @@ msgstr ""
 "   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names
-#: src/args.c:341
 msgid ""
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
