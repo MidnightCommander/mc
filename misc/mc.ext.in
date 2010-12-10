@@ -267,11 +267,6 @@ shell/.f
 regex/\.(h|hpp)$
 	Open=%var{EDITOR:vi} %f
 
-# Object
-type/^ELF
-	#Open=%var{PAGER:more} %f
-	View=%view{ascii} file %f && nm %f
-
 # Asm
 shell/.s
 	Open=%var{EDITOR:vi} %f
@@ -280,6 +275,14 @@ shell/.s
 regex/\.(C|cc|cpp)$
 	Open=%var{EDITOR:vi} %f
 
+# .so libraries
+regex/\.(so|so\.[0-9\.]*)$
+	View=%view{ascii} file %f && nm -C -D %f
+
+# Object
+type/^ELF
+	#Open=%var{PAGER:more} %f
+	View=%view{ascii} file %f && nm -C %f
 
 ### Documentation ###
 
@@ -294,10 +297,6 @@ shell/.info
 	Open=info -f %f
 
 # Manual page
-# Exception - .so libraries are not manual pages
-regex/\.(so|so\.[0-9\.]*)$
-	View=%view{ascii} file %f && nm %f
-
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])|\.man)$
 	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
 	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
