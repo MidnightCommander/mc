@@ -2461,7 +2461,6 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
     /* try use external clipboard utility */
     copy_file_to_ext_clip ();
 
-    edit_mark_cmd (edit, 1);
     return 0;
 }
 
