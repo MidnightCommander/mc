@@ -517,6 +517,7 @@ edit_load_position (WEdit * edit)
     {
         edit_cursor_move (edit, offset);
         line = edit->curs_line;
+        edit->search_start = edit->curs1;
     }
 
     book_mark_restore (edit, BOOK_MARK_COLOR);
