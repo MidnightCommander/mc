@@ -664,7 +664,10 @@ edit_backspace (WEdit * edit, const int byte_delete)
     for (i = 1; i <= cw; i++)
     {
         if (edit->mark1 >= edit->curs1)
+        {
             edit->mark1--;
+            edit->end_mark_curs--;
+        }
         if (edit->mark2 >= edit->curs1)
             edit->mark2--;
         if (edit->last_get_rule >= edit->curs1)
@@ -2488,7 +2491,10 @@ edit_delete (WEdit * edit, const int byte_delete)
     for (i = 1; i <= cw; i++)
     {
         if (edit->mark1 > edit->curs1)
+        {
             edit->mark1--;
+            edit->end_mark_curs--;
+        }
         if (edit->mark2 > edit->curs1)
             edit->mark2--;
         if (edit->last_get_rule > edit->curs1)
@@ -3085,13 +3091,17 @@ edit_mark_cmd (WEdit * edit, int unmark)
     {
         if (edit->mark2 >= 0)
         {
+            edit->end_mark_curs = -1;
             edit_set_markers (edit, edit->curs1, -1, edit->curs_col + edit->over_col,
                               edit->curs_col + edit->over_col);
             edit->force |= REDRAW_PAGE;
         }
         else
+        {
+            edit->end_mark_curs = edit->curs1;
             edit_set_markers (edit, edit->mark1, edit->curs1, edit->column1,
                               edit->curs_col + edit->over_col);
+        }
     }
 }
 

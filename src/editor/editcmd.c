@@ -1721,6 +1721,13 @@ eval_marks (WEdit * edit, long *start_mark, long *end_mark)
         long end_bol, end_eol;
         long col1, col2;
         long diff1, diff2;
+        long end_mark_curs;
+
+        if (edit->end_mark_curs < 0)
+            end_mark_curs = edit->curs1;
+        else
+            end_mark_curs = edit->end_mark_curs;
+
         if (edit->mark2 >= 0)
         {
             *start_mark = min (edit->mark1, edit->mark2);
@@ -1728,15 +1735,15 @@ eval_marks (WEdit * edit, long *start_mark, long *end_mark)
         }
         else
         {
-            *start_mark = min (edit->mark1, edit->curs1);
-            *end_mark = max (edit->mark1, edit->curs1);
+            *start_mark = min (edit->mark1, end_mark_curs);
+            *end_mark = max (edit->mark1, end_mark_curs);
             edit->column2 = edit->curs_col + edit->over_col;
         }
-        if (edit->column_highlight
-            && (((edit->mark1 > edit->curs1) && (edit->column1 < edit->column2))
-                || ((edit->mark1 < edit->curs1) && (edit->column1 > edit->column2))))
-        {
 
+        if (edit->column_highlight
+           && (((edit->mark1 > end_mark_curs) && (edit->column1 < edit->column2))
+                || ((edit->mark1 < end_mark_curs) && (edit->column1 > edit->column2))))
+        {
             start_bol = edit_bol (edit, *start_mark);
             start_eol = edit_eol (edit, start_bol - 1) + 1;
             end_bol = edit_bol (edit, *end_mark);
