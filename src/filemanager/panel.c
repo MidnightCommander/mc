@@ -3268,12 +3268,12 @@ reload_panelized (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-update_one_panel_widget (WPanel * panel, int force_update, const char *current_file)
+update_one_panel_widget (WPanel * panel, panel_update_flags_t flags, const char *current_file)
 {
-    int free_pointer;
+    gboolean free_pointer;
     char *my_current_file = NULL;
 
-    if (force_update & UP_RELOAD)
+    if ((flags & UP_RELOAD) != 0)
     {
         panel->is_panelized = 0;
         mc_setctl (panel->cwd, VFS_SETCTL_FLUSH, 0);
@@ -3281,14 +3281,13 @@ update_one_panel_widget (WPanel * panel, int force_update, const char *current_f
     }
 
     /* If current_file == -1 (an invalid pointer) then preserve selection */
-    if (current_file == UP_KEEPSEL)
+    free_pointer = current_file == UP_KEEPSEL;
+
+    if (free_pointer)
     {
-        free_pointer = 1;
         my_current_file = g_strdup (panel->dir.list[panel->selected].fname);
         current_file = my_current_file;
     }
-    else
-        free_pointer = 0;
 
     if (panel->is_panelized)
         reload_panelized (panel);
@@ -3305,13 +3304,13 @@ update_one_panel_widget (WPanel * panel, int force_update, const char *current_f
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-update_one_panel (int which, int force_update, const char *current_file)
+update_one_panel (int which, panel_update_flags_t flags, const char *current_file)
 {
     if (get_display_type (which) == view_listing)
     {
         WPanel *panel;
         panel = (WPanel *) get_panel_widget (which);
-        update_one_panel_widget (panel, force_update, current_file);
+        update_one_panel_widget (panel, flags, current_file);
     }
 }
 
@@ -3995,15 +3994,15 @@ panel_change_encoding (WPanel * panel)
  */
 
 void
-update_panels (int force_update, const char *current_file)
+update_panels (panel_update_flags_t flags, const char *current_file)
 {
-    int reload_other = !(force_update & UP_ONLY_CURRENT);
+    gboolean reload_other = (flags & UP_ONLY_CURRENT) == 0;
     WPanel *panel;
     int ret;
 
-    update_one_panel (get_current_index (), force_update, current_file);
+    update_one_panel (get_current_index (), flags, current_file);
     if (reload_other)
-        update_one_panel (get_other_index (), force_update, UP_KEEPSEL);
+        update_one_panel (get_other_index (), flags, UP_KEEPSEL);
 
     if (get_current_type () == view_listing)
         panel = (WPanel *) get_panel_widget (get_current_index ());

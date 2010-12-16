@@ -956,12 +956,11 @@ filter_cmd (void)
 void
 reread_cmd (void)
 {
-    int flag;
+    panel_update_flags_t flag = UP_ONLY_CURRENT;
 
-    if (get_current_type () == view_listing && get_other_type () == view_listing)
-        flag = strcmp (current_panel->cwd, other_panel->cwd) ? UP_ONLY_CURRENT : 0;
-    else
-        flag = UP_ONLY_CURRENT;
+    if (get_current_type () == view_listing && get_other_type () == view_listing
+        && strcmp (current_panel->cwd, other_panel->cwd) == 0)
+        flag = UP_OPTIMIZE;
 
     update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
