@@ -1091,22 +1091,22 @@ set_display_type (int num, panel_view_mode_t type)
 void
 swap_panels (void)
 {
-    Widget tmp;
-    Widget *tmp_widget;
-    WPanel panel;
     WPanel *panel1, *panel2;
-    int tmp_type;
+    Widget *tmp_widget;
 
-#define panelswap(x) panel. x = panel1-> x; panel1-> x = panel2-> x; panel2-> x = panel. x;
-
-#define panelswapstr(e) strcpy (panel. e, panel1-> e); \
-                        strcpy (panel1-> e, panel2-> e); \
-                        strcpy (panel2-> e, panel. e);
     panel1 = (WPanel *) panels[0].widget;
     panel2 = (WPanel *) panels[1].widget;
+
     if (panels[0].type == view_listing && panels[1].type == view_listing)
     {
-        /* Change everything except format/sort/panel_name etc. */
+        WPanel panel;
+
+#define panelswap(x) panel.x = panel1->x; panel1->x = panel2->x; panel2->x = panel.x;
+
+#define panelswapstr(e) strcpy (panel.e, panel1->e); \
+                        strcpy (panel1->e, panel2->e); \
+                        strcpy (panel2->e, panel.e);
+        /* Change content and related stuff */
         panelswap (dir);
         panelswap (active);
         panelswapstr (cwd);
@@ -1119,13 +1119,23 @@ swap_panels (void)
         panelswap (selected);
         panelswap (is_panelized);
         panelswap (dir_stat);
+#undef panelswapstr
+#undef panelswap
 
         panel1->searching = FALSE;
         panel2->searching = FALSE;
+
         if (current_panel == panel1)
             current_panel = panel2;
         else
             current_panel = panel1;
+
+        /* if sort options are different -> resort panels */
+        if (memcmp (&panel1->sort_info, &panel2->sort_info, sizeof (panel_sort_info_t)) != 0)
+        {
+            panel_re_sort (other_panel);
+            panel_re_sort (current_panel);
+        }
 
         if (dlg_widget_active (panels[0].widget))
             dlg_select_widget (panels[1].widget);
@@ -1135,6 +1145,8 @@ swap_panels (void)
     else
     {
         WPanel *tmp_panel;
+        int x, y, cols, lines;
+        int tmp_type;
 
         tmp_panel = right_panel;
         right_panel = left_panel;
@@ -1142,7 +1154,7 @@ swap_panels (void)
 
         if (panels[0].type == view_listing)
         {
-            if (!strcmp (panel1->panel_name, get_nth_panel_name (0)))
+            if (strcmp (panel1->panel_name, get_nth_panel_name (0)) == 0)
             {
                 g_free (panel1->panel_name);
                 panel1->panel_name = g_strdup (get_nth_panel_name (1));
@@ -1150,27 +1162,27 @@ swap_panels (void)
         }
         if (panels[1].type == view_listing)
         {
-            if (!strcmp (panel2->panel_name, get_nth_panel_name (1)))
+            if (strcmp (panel2->panel_name, get_nth_panel_name (1)) == 0)
             {
                 g_free (panel2->panel_name);
                 panel2->panel_name = g_strdup (get_nth_panel_name (0));
             }
         }
 
-        tmp.x = panels[0].widget->x;
-        tmp.y = panels[0].widget->y;
-        tmp.cols = panels[0].widget->cols;
-        tmp.lines = panels[0].widget->lines;
+        x = panels[0].widget->x;
+        y = panels[0].widget->y;
+        cols = panels[0].widget->cols;
+        lines = panels[0].widget->lines;
 
         panels[0].widget->x = panels[1].widget->x;
         panels[0].widget->y = panels[1].widget->y;
         panels[0].widget->cols = panels[1].widget->cols;
         panels[0].widget->lines = panels[1].widget->lines;
 
-        panels[1].widget->x = tmp.x;
-        panels[1].widget->y = tmp.y;
-        panels[1].widget->cols = tmp.cols;
-        panels[1].widget->lines = tmp.lines;
+        panels[1].widget->x = x;
+        panels[1].widget->y = y;
+        panels[1].widget->cols = cols;
+        panels[1].widget->lines = lines;
 
         tmp_widget = panels[0].widget;
         panels[0].widget = panels[1].widget;
