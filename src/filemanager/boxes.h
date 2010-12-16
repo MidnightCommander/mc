@@ -19,8 +19,7 @@
 /*** declarations of public functions ************************************************************/
 
 int display_box (WPanel * p, char **user, char **mini, int *use_msformat, int num);
-const panel_field_t *sort_box (const panel_field_t *, int *reverse,
-                               int *case_sensitive, int *exec_first);
+const panel_field_t *sort_box (panel_sort_info_t *info);
 void confirm_box (void);
 void display_bits_box (void);
 void configure_vfs (void);
