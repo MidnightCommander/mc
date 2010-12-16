@@ -404,8 +404,7 @@ sort_cmd (void)
         return;
 
     p = MENU_PANEL;
-    sort_order = sort_box (p->current_sort_field, &p->reverse, &p->case_sensitive, &p->exec_first);
-
+    sort_order = sort_box (&p->sort_info);
     panel_set_sort_order (p, sort_order);
 }
 

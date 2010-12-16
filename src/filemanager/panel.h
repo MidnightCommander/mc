@@ -61,7 +61,7 @@ typedef enum
 
 struct format_e;
 
-typedef struct panel_format_struct
+typedef struct panel_field_struct
 {
     const char *id;
     int min_size;
@@ -74,6 +74,14 @@ typedef struct panel_format_struct
     const char *(*string_fn) (file_entry *, int);
     sortfn *sort_routine;       /* used by mouse_sort_col() */
 } panel_field_t;
+
+typedef struct panel_sort_info_struct
+{
+    gboolean reverse;                /* Show listing in reverse? */
+    gboolean case_sensitive;         /* Listing is case sensitive? */
+    gboolean exec_first;             /* Show executable top in list? */
+    const panel_field_t *sort_field;
+} panel_sort_info_t;
 
 typedef struct WPanel
 {
@@ -92,14 +100,11 @@ typedef struct WPanel
     uintmax_t total;            /* Bytes in marked files */
     int top_file;               /* The file showed on the top of the panel */
     int selected;               /* Index to the selected file */
-    int reverse;                /* Show listing in reverse? */
-    int case_sensitive;         /* Listing is case sensitive? */
-    int exec_first;             /* Show executable top in list? */
     int split;                  /* Split panel to allow two columns */
     int is_panelized;           /* Flag: special filelisting, can't reload */
     int frame_size;             /* half or full frame */
-    const panel_field_t *current_sort_field;
     char *filter;               /* File name filter */
+    panel_sort_info_t sort_info;        /* Sort descriptor */
 
     int dirty;                  /* Should we redisplay the panel? */
 
