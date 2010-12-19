@@ -937,7 +937,7 @@ edit_do_search (WEdit * edit)
     if (edit->search == NULL)
         edit->search_start = edit->curs1;
 
-    edit_push_action (edit, KEY_PRESS + edit->start_display);
+    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
     if (search_create_bookmark)
     {
@@ -1397,7 +1397,7 @@ edit_save_as_cmd (WEdit * edit)
         return 0;
 
     exp = edit_get_save_file_as (edit);
-    edit_push_action (edit, KEY_PRESS + edit->start_display);
+    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
     if (exp)
     {
@@ -1508,7 +1508,7 @@ edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
     FILE *f;
     int s, i;
 
-    edit_push_action (edit, KEY_PRESS + edit->start_display);
+    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
     s = editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), 1);
     edit->force |= REDRAW_COMPLETELY;
     if (s)
@@ -1928,7 +1928,7 @@ edit_block_copy_cmd (WEdit * edit)
     if (edit->column_highlight)
     {
         edit_set_markers (edit, 0, 0, 0, 0);
-        edit_push_action (edit, COLUMN_ON);
+        edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
     }
     else if (start_mark < current && end_mark > current)
@@ -2007,7 +2007,7 @@ edit_block_move_cmd (WEdit * edit)
                                                             edit->curs1), x, 0) - edit->curs1);
         }
         edit_set_markers (edit, 0, 0, 0, 0);
-        edit_push_action (edit, COLUMN_ON);
+        edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
     }
     else
@@ -2089,7 +2089,7 @@ edit_replace_cmd (WEdit * edit, int again)
         disp1 = edit_replace_cmd__conv_to_display (saved1 ? saved1 : (char *) "");
         disp2 = edit_replace_cmd__conv_to_display (saved2 ? saved2 : (char *) "");
 
-        edit_push_action (edit, KEY_PRESS + edit->start_display);
+        edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
         editcmd_dialog_replace_show (edit, disp1, disp2, &input1, &input2);
 
@@ -2566,7 +2566,7 @@ edit_save_block_cmd (WEdit * edit)
         input_expand_dialog (_("Save block"), _("Enter file name:"),
                              MC_HISTORY_EDIT_SAVE_BLOCK, tmp);
     g_free (tmp);
-    edit_push_action (edit, KEY_PRESS + edit->start_display);
+    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
     if (exp)
     {
         if (!*exp)
@@ -2607,7 +2607,7 @@ edit_insert_file_cmd (WEdit * edit)
     exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
                                MC_HISTORY_EDIT_INSERT_FILE, tmp);
     g_free (tmp);
-    edit_push_action (edit, KEY_PRESS + edit->start_display);
+    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
     if (exp)
     {
         if (!*exp)
