@@ -83,7 +83,8 @@ static int hosts_alloclen = 0;
 static int query_height, query_width;
 static WInput *input;
 static int min_end;
-static int start, end;
+static int start = 0;
+static int end = 0;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -787,15 +788,14 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
 
 /* --------------------------------------------------------------------------------------------- */
 /** Check if directory completion is needed */
-static int
+static gboolean
 check_is_cd (const char *text, int lc_start, input_complete_t flags)
 {
     char *p, *q;
-    int test = 0;
 
     SHOW_C_CTX ("check_is_cd");
-    if (!(flags & INPUT_COMPLETE_CD))
-        return 0;
+    if ((flags & INPUT_COMPLETE_CD) == 0)
+        return FALSE;
 
     /* Skip initial spaces */
     p = (char *) text;
@@ -804,15 +804,7 @@ check_is_cd (const char *text, int lc_start, input_complete_t flags)
         str_next_char (&p);
 
     /* Check if the command is "cd" and the cursor is after it */
-    text += p[0] == 'c';
-    str_next_char (&p);
-    text += p[0] == 'd';
-    str_next_char (&p);
-    text += str_isspace (p);
-    if (test == 3 && (p < q))
-        return 1;
-
-    return 0;
+    return (p[0] == 'c' && p[1] == 'd' && str_isspace (p + 2) && p + 2 < q);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -825,7 +817,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
     char **matches = NULL;
     const char *command_separator_chars = ";|&{(`";
     char *p = NULL, *q = NULL, *r = NULL;
-    int is_cd = check_is_cd (text, *lc_start, flags);
+    gboolean is_cd = check_is_cd (text, *lc_start, flags);
     char *ti;
 
     SHOW_C_CTX ("try_complete");
@@ -1178,9 +1170,9 @@ complete_engine (WInput * in, int what_to_do)
 {
     int s;
 
-    if (in->completions && (str_offset_to_pos (in->buffer, in->point)) != end)
+    if (in->completions != NULL && str_offset_to_pos (in->buffer, in->point) != end)
         input_free_completions (in);
-    if (!in->completions)
+    if (in->completions == NULL)
     {
         end = str_offset_to_pos (in->buffer, in->point);
         for (s = in->point ? in->point - 1 : 0; s >= 0; s--)
