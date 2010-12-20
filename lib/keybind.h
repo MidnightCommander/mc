@@ -30,17 +30,18 @@
 #define CK_End               13
 #define CK_Tab               14
 #define CK_Undo              15
-#define CK_Beginning_Of_Text 16
-#define CK_End_Of_Text       17
-#define CK_Scroll_Up         18
-#define CK_Scroll_Down       19
-#define CK_Return            20
-#define CK_Begin_Page        21
-#define CK_End_Page          22
-#define CK_Delete_Word_Left  23
-#define CK_Delete_Word_Right 24
-#define CK_Paragraph_Up      25
-#define CK_Paragraph_Down    26
+#define CK_Redo              16
+#define CK_Beginning_Of_Text 17
+#define CK_End_Of_Text       18
+#define CK_Scroll_Up         19
+#define CK_Scroll_Down       20
+#define CK_Return            21
+#define CK_Begin_Page        22
+#define CK_End_Page          23
+#define CK_Delete_Word_Left  24
+#define CK_Delete_Word_Right 25
+#define CK_Paragraph_Up      26
+#define CK_Paragraph_Down    27
 
 /* file commands */
 #define CK_Save             101

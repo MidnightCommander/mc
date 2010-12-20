@@ -61,6 +61,7 @@ static name_keymap_t command_names[] = {
     {"EditEnd", CK_End},
     {"EditTab", CK_Tab},
     {"EditUndo", CK_Undo},
+    {"EditRedo", CK_Redo},
     {"EditBeginningOfText", CK_Beginning_Of_Text},
     {"EditEndOfText", CK_End_Of_Text},
     {"EditScrollUp", CK_Scroll_Up},
