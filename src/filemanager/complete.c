@@ -1032,10 +1032,20 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
         case KEY_BACKSPACE:
             bl = 0;
-            if (end == min_end)
+            /* exit from completion list if input line is empty */
+            if (end == 0)
             {
                 h->ret_value = 0;
                 dlg_stop (h);
+            }
+            /* Refill the list box and start again */
+            else if (end == min_end)
+            {
+                end = str_get_prev_char (&input->buffer[end]) - input->buffer;
+                input_handle_char (input, parm);
+                h->ret_value = B_USER;
+                dlg_stop (h);
+                return MSG_HANDLED;
             }
             else
             {
