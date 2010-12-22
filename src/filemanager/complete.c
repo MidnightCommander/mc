@@ -815,13 +815,13 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
     int in_command_position = 0;
     char *word;
     char **matches = NULL;
-    const char *command_separator_chars = ";|&{(`";
     char *p = NULL, *q = NULL, *r = NULL;
-    gboolean is_cd = check_is_cd (text, *lc_start, flags);
-    char *ti;
+    gboolean is_cd;
 
     SHOW_C_CTX ("try_complete");
     word = g_strndup (text + *lc_start, *lc_end - *lc_start);
+
+    is_cd = check_is_cd (text, *lc_start, flags);
 
     /* Determine if this could be a command word. It is if it appears at
        the start of the line (ignoring preceding whitespace), or if it
@@ -829,18 +829,23 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
        be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
     if (!is_cd && (flags & INPUT_COMPLETE_COMMANDS))
     {
-        ti = str_get_prev_char (&text[*lc_start]);
+        const char *command_separator_chars = ";|&{(`";
+        char *ti;
+
+        if (*lc_start == 0)
+            ti = text;
+        else
+            ti = str_get_prev_char (&text[*lc_start]);
         while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
             str_prev_char (&ti);
-        if (ti <= text && (ti[0] == ' ' || ti[0] == '\t'))
-            in_command_position++;
-        else if (strchr (command_separator_chars, ti[0]))
+
+        if (strchr (command_separator_chars, ti[0]) != NULL)
         {
-            register int this_char, prev_char;
+            int this_char, prev_char;
 
             in_command_position++;
 
-            if (ti > text)
+            if (ti != text)
             {
                 /* Handle the two character tokens `>&', `<&', and `>|'.
                    We are not in a command position after one of these. */
@@ -848,10 +853,8 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
                 prev_char = str_get_prev_char (ti)[0];
 
                 if ((this_char == '&' && (prev_char == '<' || prev_char == '>')) ||
-                    (this_char == '|' && prev_char == '>'))
-                    in_command_position = 0;
-
-                else if (ti > text && str_get_prev_char (ti)[0] == '\\')        /* Quoted */
+                    (this_char == '|' && prev_char == '>') ||
+                    (ti != text && str_get_prev_char (ti)[0] == '\\'))        /* Quoted */
                     in_command_position = 0;
             }
         }
