@@ -617,7 +617,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     if ((right_panel == current_panel) && !classic_progressbar)
     {
         ui->progress_file_gauge->from_left_to_right = FALSE;
-        if (dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+        if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
             ui->progress_total_gauge->from_left_to_right = FALSE;
     }
 }

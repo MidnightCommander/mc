@@ -528,14 +528,15 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
 
             if (total_secs < 1)
                 total_secs = 1;
+
             tctx->bps = tctx->copyed_bytes / total_secs;
-            tctx->eta_secs = remain_bytes / tctx->bps;
+            tctx->eta_secs = (tctx->bps != 0) ? remain_bytes / tctx->bps : 0;
         }
 #else
         /* broken on lot of little files */
         tctx->bps_count++;
         tctx->bps = (tctx->bps * (tctx->bps_count - 1) + ctx->bps) / tctx->bps_count;
-        tctx->eta_secs = remain_bytes / tctx->bps;
+        tctx->eta_secs = (tctx->bps != 0) ? remain_bytes / tctx->bps : 0;
 #endif
     }
 }
@@ -860,7 +861,7 @@ panel_get_file (WPanel * panel, struct stat *stat_buf)
 static FileProgressStatus
 panel_compute_totals (const WPanel * panel, const void *ui,
                       compute_dir_size_callback cback,
-                      size_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
+                      size_t * ret_marked, uintmax_t * ret_total, gboolean compute_symlinks)
 {
     int i;
 
@@ -2123,7 +2124,7 @@ compute_dir_size_update_ui (const void *ui, const char *dirname)
 FileProgressStatus
 compute_dir_size (const char *dirname, const void *ui,
                   compute_dir_size_callback cback,
-                  size_t * ret_marked, uintmax_t *ret_total, gboolean compute_symlinks)
+                  size_t * ret_marked, uintmax_t * ret_total, gboolean compute_symlinks)
 {
     int res;
     struct stat s;
