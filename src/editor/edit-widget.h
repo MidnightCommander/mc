@@ -92,6 +92,7 @@ struct WEdit
     long total_lines;           /* total lines in the file */
     long mark1;                 /* position of highlight start */
     long mark2;                 /* position of highlight end */
+    long end_mark_curs;         /* position of cursor after end of highlighting */
     int column1;                /* position of column highlight start */
     int column2;                /* position of column highlight end */
     long bracket;               /* position of a matching bracket */
