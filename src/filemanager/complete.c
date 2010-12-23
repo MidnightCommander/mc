@@ -83,7 +83,8 @@ static int hosts_alloclen = 0;
 static int query_height, query_width;
 static WInput *input;
 static int min_end;
-static int start, end;
+static int start = 0;
+static int end = 0;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -787,15 +788,14 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
 
 /* --------------------------------------------------------------------------------------------- */
 /** Check if directory completion is needed */
-static int
+static gboolean
 check_is_cd (const char *text, int lc_start, input_complete_t flags)
 {
     char *p, *q;
-    int test = 0;
 
     SHOW_C_CTX ("check_is_cd");
-    if (!(flags & INPUT_COMPLETE_CD))
-        return 0;
+    if ((flags & INPUT_COMPLETE_CD) == 0)
+        return FALSE;
 
     /* Skip initial spaces */
     p = (char *) text;
@@ -804,15 +804,7 @@ check_is_cd (const char *text, int lc_start, input_complete_t flags)
         str_next_char (&p);
 
     /* Check if the command is "cd" and the cursor is after it */
-    text += p[0] == 'c';
-    str_next_char (&p);
-    text += p[0] == 'd';
-    str_next_char (&p);
-    text += str_isspace (p);
-    if (test == 3 && (p < q))
-        return 1;
-
-    return 0;
+    return (p[0] == 'c' && p[1] == 'd' && str_isspace (p + 2) && p + 2 < q);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -823,13 +815,13 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
     int in_command_position = 0;
     char *word;
     char **matches = NULL;
-    const char *command_separator_chars = ";|&{(`";
     char *p = NULL, *q = NULL, *r = NULL;
-    int is_cd = check_is_cd (text, *lc_start, flags);
-    char *ti;
+    gboolean is_cd;
 
     SHOW_C_CTX ("try_complete");
     word = g_strndup (text + *lc_start, *lc_end - *lc_start);
+
+    is_cd = check_is_cd (text, *lc_start, flags);
 
     /* Determine if this could be a command word. It is if it appears at
        the start of the line (ignoring preceding whitespace), or if it
@@ -837,18 +829,23 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
        be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
     if (!is_cd && (flags & INPUT_COMPLETE_COMMANDS))
     {
-        ti = str_get_prev_char (&text[*lc_start]);
+        const char *command_separator_chars = ";|&{(`";
+        char *ti;
+
+        if (*lc_start == 0)
+            ti = text;
+        else
+            ti = str_get_prev_char (&text[*lc_start]);
         while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
             str_prev_char (&ti);
-        if (ti <= text && (ti[0] == ' ' || ti[0] == '\t'))
-            in_command_position++;
-        else if (strchr (command_separator_chars, ti[0]))
+
+        if (strchr (command_separator_chars, ti[0]) != NULL)
         {
-            register int this_char, prev_char;
+            int this_char, prev_char;
 
             in_command_position++;
 
-            if (ti > text)
+            if (ti != text)
             {
                 /* Handle the two character tokens `>&', `<&', and `>|'.
                    We are not in a command position after one of these. */
@@ -856,10 +853,8 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
                 prev_char = str_get_prev_char (ti)[0];
 
                 if ((this_char == '&' && (prev_char == '<' || prev_char == '>')) ||
-                    (this_char == '|' && prev_char == '>'))
-                    in_command_position = 0;
-
-                else if (ti > text && str_get_prev_char (ti)[0] == '\\')        /* Quoted */
+                    (this_char == '|' && prev_char == '>') ||
+                    (ti != text && str_get_prev_char (ti)[0] == '\\'))        /* Quoted */
                     in_command_position = 0;
             }
         }
@@ -1040,25 +1035,38 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
         case KEY_BACKSPACE:
             bl = 0;
-            if (end == min_end)
+            /* exit from completion list if input line is empty */
+            if (end == 0)
             {
                 h->ret_value = 0;
                 dlg_stop (h);
             }
+            /* Refill the list box and start again */
+            else if (end == min_end)
+            {
+                end = str_get_prev_char (&input->buffer[end]) - input->buffer;
+                input_handle_char (input, parm);
+                h->ret_value = B_USER;
+                dlg_stop (h);
+                return MSG_HANDLED;
+            }
             else
             {
+                int new_end;
                 int i;
                 GList *e;
+
+                new_end = str_get_prev_char (&input->buffer[end]) - input->buffer;
 
                 for (i = 0, e = ((WListbox *) h->current->data)->list;
                      e != NULL; i++, e = g_list_next (e))
                 {
                     WLEntry *le = (WLEntry *) e->data;
 
-                    if (strncmp (input->buffer + start, le->text, end - start - 1) == 0)
+                    if (strncmp (input->buffer + start, le->text, new_end - start) == 0)
                     {
                         listbox_select_entry ((WListbox *) h->current->data, i);
-                        end = str_get_prev_char (&(input->buffer[end])) - input->buffer;
+                        end = new_end;
                         input_handle_char (input, parm);
                         send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
                         break;
@@ -1068,20 +1076,19 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
             return MSG_HANDLED;
 
         default:
-            if (parm < 32 || parm > 256)
+            if (parm < 32 || parm > 255)
             {
                 bl = 0;
-                if (input_key_is_in_map (input, parm) == 2)
-                {
-                    if (end == min_end)
-                        return MSG_HANDLED;
-                    h->ret_value = B_USER;      /* This means we want to refill the
-                                                   list box and start again */
-                    dlg_stop (h);
-                    return MSG_HANDLED;
-                }
-                else
+                if (input_key_is_in_map (input, parm) != 2)
                     return MSG_NOT_HANDLED;
+
+                if (end == min_end)
+                    return MSG_HANDLED;
+
+                /* This means we want to refill the list box and start again */
+                h->ret_value = B_USER;
+                dlg_stop (h);
+                return MSG_HANDLED;
             }
             else
             {
@@ -1091,13 +1098,13 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                 int low = 4096;
                 char *last_text = NULL;
 
-                buff[bl] = (char) parm;
-                bl++;
+                buff[bl++] = (char) parm;
                 buff[bl] = '\0';
                 switch (str_is_valid_char (buff, bl))
                 {
                 case -1:
                     bl = 0;
+                    /* fallthrough */
                 case -2:
                     return MSG_HANDLED;
                 }
@@ -1107,44 +1114,57 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                 {
                     WLEntry *le = (WLEntry *) e->data;
 
-                    if (strncmp (input->buffer + start, le->text, end - start) == 0)
+                    if (strncmp (input->buffer + start, le->text, end - start) == 0
+                        && strncmp (&le->text[end - start], buff, bl) == 0)
                     {
-                        if (strncmp (&le->text[end - start], buff, bl) == 0)
+                        if (need_redraw == 0)
                         {
-                            if (need_redraw)
+                            need_redraw = 1;
+                            listbox_select_entry ((WListbox *) h->current->data, i);
+                            last_text = le->text;
+                        }
+                        else
+                        {
+                            char *si, *sl;
+                            int si_num = 0;
+                            int sl_num = 0;
+
+                            /* count symbols between start and end */
+                            for (si = le->text + start; si < le->text + end;
+                                 str_next_char (&si), si_num++)
+                                ;
+                            for (sl = last_text + start; sl < last_text + end;
+                                 str_next_char (&sl), sl_num++)
+                                ;
+
+                            /* pointers to next symbols */
+                            si = &le->text [str_offset_to_pos (le->text, ++si_num)];
+                            sl = &last_text [str_offset_to_pos (last_text, ++sl_num)];
+
+                            while (si[0] != '\0' && sl[0] != '\0')
                             {
-                                char *si, *sl;
                                 char *nexti, *nextl;
 
-                                si = &(le->text[end - start]);
-                                sl = &(last_text[end - start]);
+                                nexti = str_get_next_char (si);
+                                nextl = str_get_next_char (sl);
 
-                                for (; si[0] != '\0' && sl[0] != '\0';)
-                                {
-                                    nexti = str_get_next_char (si);
-                                    nextl = str_get_next_char (sl);
+                                if (nexti - si != nextl - sl
+                                    || strncmp (si, sl, nexti - si) != 0)
+                                    break;
 
-                                    if (nexti - si != nextl - sl)
-                                        break;
-                                    if (strncmp (si, sl, nexti - si) != 0)
-                                        break;
+                                si = nexti;
+                                sl = nextl;
 
-                                    si = nexti;
-                                    sl = nextl;
-                                }
-
-                                if (low > si - &le->text[end - start])
-                                    low = si - &le->text[end - start];
-
-                                last_text = le->text;
-                                need_redraw = 2;
+                                si_num++;
                             }
-                            else
-                            {
-                                need_redraw = 1;
-                                listbox_select_entry ((WListbox *) h->current->data, i);
-                                last_text = le->text;
-                            }
+
+                            last_text = le->text;
+
+                            si = &last_text [str_offset_to_pos (last_text, si_num)];
+                            if (low > si - last_text)
+                                low = si - last_text;
+
+                            need_redraw = 2;
                         }
                     }
                 }
@@ -1176,26 +1196,36 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 static int
 complete_engine (WInput * in, int what_to_do)
 {
-    int s;
-
-    if (in->completions && (str_offset_to_pos (in->buffer, in->point)) != end)
+    if (in->completions != NULL && str_offset_to_pos (in->buffer, in->point) != end)
         input_free_completions (in);
-    if (!in->completions)
+    if (in->completions == NULL)
     {
+        char *s;
+
         end = str_offset_to_pos (in->buffer, in->point);
-        for (s = in->point ? in->point - 1 : 0; s >= 0; s--)
+
+        s = in->buffer;
+        if (in->point != 0)
         {
-            start = str_offset_to_pos (in->buffer, s);
-            if (strchr (" \t;|<>", in->buffer[start]))
-            {
-                if (start < end)
-                    start = str_offset_to_pos (in->buffer, s + 1);
-                /* FIXME: maybe need check '\\' prev char
-                   if (start > 0 && in->buffer [start-1] == '\\')
-                 */
-                break;
-            }
+            /* get symbol before in->point */
+            size_t i;
+            for (i = in->point - 1; i > 0; i--)
+                str_next_char (&s);
         }
+
+        for (; s >= in->buffer; str_prev_char (&s))
+        {
+            start = s - in->buffer;
+            if (strchr (" \t;|<>", *s) != NULL)
+                break;
+        }
+
+        if (start < end)
+        {
+            str_next_char (&s);
+            start = s - in->buffer;
+        }
+
         in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
     }
 

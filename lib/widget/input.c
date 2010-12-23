@@ -1166,11 +1166,12 @@ input_key_is_in_map (WInput * in, int key)
 {
     unsigned long command;
 
+    (void) in;
+
     command = keybind_lookup_keymap_command (input_map, key);
     if (command == CK_Ignore_Key)
         return 0;
 
-    input_execute_cmd (in, command);
     return (command == CK_InputComplete) ? 2 : 1;
 }
 
