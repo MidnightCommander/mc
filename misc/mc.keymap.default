@@ -23,6 +23,7 @@ EditHome = home
 EditEnd = end
 EditTab = tab
 EditUndo = ctrl-u
+EditRedo = alt-r
 EditBeginningOfText = ctrl-home; alt-lt
 EditEndOfText = ctrl-end; alt-gt
 EditScrollUp = ctrl-up

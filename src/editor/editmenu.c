@@ -93,6 +93,7 @@ create_edit_menu (void)
     GList *entries = NULL;
 
     entries = g_list_append (entries, menu_entry_create (_("&Undo"), CK_Undo));
+    entries = g_list_append (entries, menu_entry_create (_("&Redo"), CK_Redo));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Toggle ins/overw"), CK_Toggle_Insert));
     entries = g_list_append (entries, menu_separator_create ());
