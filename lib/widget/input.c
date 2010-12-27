@@ -161,7 +161,7 @@ load_text_from_clip_file (char **text)
 static gboolean
 panel_save_curent_file_to_clip_file (void)
 {
-    gboolean res;
+    gboolean res = FALSE;
 
     if (current_panel->marked == 0)
         res = save_text_to_clip_file (selection (current_panel)->fname);
