@@ -3973,6 +3973,7 @@ For example:
 .PP
 .nf
 clipboard_store=xclip \-i
+.fi
 .TP
 .I clipboard_paste
 This variable contains path (with options) to the external clipboard
@@ -3980,7 +3981,8 @@ utility like 'xclip' to print the selection to standard out.
 For example:
 .PP
 .nf
-clipboard_store=xclip \-o
+clipboard_pastee=xclip \-o
+.fi
 .TP
 .I autodetect_codeset
 This option allows use the `enca' command to autodetect codeset of text files

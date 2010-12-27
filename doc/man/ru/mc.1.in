@@ -4257,6 +4257,7 @@ mc.ext\&.
 .PP
 .nf
 clipboard_store=xclip \-i
+.fi
 .TP
 .I clipboard_paste
 Эта переменная позволяет назначить внешнюю программу (с параметрами) для
@@ -4265,7 +4266,8 @@ clipboard_store=xclip \-i
 Например:
 .PP
 .nf
-clipboard_store=xclip \-o
+clipboard_paste=xclip \-o
+.fi
 .PP
 .I autodetect_codeset
 .IP
