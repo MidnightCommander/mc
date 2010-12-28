@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2010-12-08 12:27+0200\n"
-"PO-Revision-Date: 2010-12-28 10:05+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2010-12-28 10:06+0000\n"
+"Last-Translator: PetjaTouru <petja@petjatouru.arkku.net>\n"
+"Language-Team: Finnish (Finland) <None>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lv\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2)\n"
+"Language: fi_FI\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: lib/charsets.c:215
 msgid "Warning: cannot load codepages list"
-msgstr ""
+msgstr "Varoitus: Koodilistaa ei pysty lataamaan"
 
 #: lib/charsets.c:218
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-bittinen ASCII"
 
 #: lib/charsets.c:309 lib/charsets.c:320
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "Nevar tulkot %s uz %s"
+msgstr "Kääntäminen kielestä %s kieleen %s epäonnistui"
 
 #: lib/lock.c:235
 #, c-format
@@ -37,24 +37,27 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
+"Tiedosto \"%s\" on juuri nyt käsittelyssä.\n"
+"Käyttäjä: %s\n"
+"Prosessin ID: %d"
 
 #: lib/lock.c:240
 msgid "File locked"
-msgstr ""
+msgstr "Tiedosto lukittu"
 
 #: lib/lock.c:240
 msgid "&Grab lock"
-msgstr ""
+msgstr "&Lukitse"
 
 #: lib/lock.c:240
 msgid "&Ignore lock"
-msgstr ""
+msgstr "&Vapauta"
 
 #: lib/search/lib.c:42 src/diffviewer/search.c:262 src/editor/editcmd.c:843
 #: src/editor/editcmd.c:883 src/editor/editcmd.c:969 src/editor/editcmd.c:2251
 #: src/viewer/search.c:100
 msgid "Search string not found"
-msgstr ""
+msgstr "Etsittyä merkkijonoa ei löydy"
 
 #: lib/search/lib.c:43
 msgid "Not implemented yet"
@@ -67,19 +70,19 @@ msgstr ""
 #: lib/search/lib.c:46
 #, c-format
 msgid "Invalid token number %d"
-msgstr ""
+msgstr "Token %d ei ole validi"
 
 #: lib/search/search.c:50
 msgid "Normal"
-msgstr ""
+msgstr "Normaali"
 
 #: lib/search/search.c:51
 msgid "&Regular expression"
-msgstr "&Regulāra izteiksme"
+msgstr ""
 
 #: lib/search/search.c:52
 msgid "Hexadecimal"
-msgstr ""
+msgstr "Heksadesimaali"
 
 #: lib/search/search.c:53
 msgid "Wildcard search"
@@ -91,6 +94,8 @@ msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Teemaa '%s' ei pysty lataamaan.\n"
+"Perusteema asetettu."
 
 #: lib/skin/common.c:136
 #, c-format
@@ -98,254 +103,256 @@ msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Teemaa '%s' ei pysty käsittelemään.\n"
+"Perusteema asetettu."
 
 #: lib/tty/key.c:98
 msgid "Function key 1"
-msgstr "Funkc. taustiņš 1"
+msgstr "Funktio 1"
 
 #: lib/tty/key.c:99
 msgid "Function key 2"
-msgstr "Funkc. taustiņš 2"
+msgstr "Funktio 2"
 
 #: lib/tty/key.c:100
 msgid "Function key 3"
-msgstr "Funkc. taustiņš 3"
+msgstr "Funktio 3"
 
 #: lib/tty/key.c:101
 msgid "Function key 4"
-msgstr "Funkc. taustiņš 4"
+msgstr "Funktio 4"
 
 #: lib/tty/key.c:102
 msgid "Function key 5"
-msgstr "Funkc. taustiņš 5"
+msgstr "Funktio 5"
 
 #: lib/tty/key.c:103
 msgid "Function key 6"
-msgstr "Funkc. taustiņš 6"
+msgstr "Funktio 6"
 
 #: lib/tty/key.c:104
 msgid "Function key 7"
-msgstr "Funkc. taustiņš 7"
+msgstr "Funktio 7"
 
 #: lib/tty/key.c:105
 msgid "Function key 8"
-msgstr "Funkc. taustiņš 8"
+msgstr "Funktio 8"
 
 #: lib/tty/key.c:106
 msgid "Function key 9"
-msgstr "Funkc. taustiņš 9"
+msgstr "Funktio 9"
 
 #: lib/tty/key.c:107
 msgid "Function key 10"
-msgstr "Funkc. taustiņš 10"
+msgstr "Funktio 10"
 
 #: lib/tty/key.c:108
 msgid "Function key 11"
-msgstr "Funkc. taustiņš 11"
+msgstr "Funktio 11"
 
 #: lib/tty/key.c:109
 msgid "Function key 12"
-msgstr "Funkc. taustiņš 12"
+msgstr "Funktio 12"
 
 #: lib/tty/key.c:110
 msgid "Function key 13"
-msgstr "Funkc. taustiņš 13"
+msgstr "Funktio 13"
 
 #: lib/tty/key.c:111
 msgid "Function key 14"
-msgstr "Funkc. taustiņš 14"
+msgstr "Funktio 14"
 
 #: lib/tty/key.c:112
 msgid "Function key 15"
-msgstr "Funkc. taustiņš 15"
+msgstr "Funktio 15"
 
 #: lib/tty/key.c:113
 msgid "Function key 16"
-msgstr "Funkc. taustiņš 16"
+msgstr "Funktio 16"
 
 #: lib/tty/key.c:114
 msgid "Function key 17"
-msgstr "Funkc. taustiņš 17"
+msgstr "Funktio 17"
 
 #: lib/tty/key.c:115
 msgid "Function key 18"
-msgstr "Funkc. taustiņš 18"
+msgstr "Funktio 18"
 
 #: lib/tty/key.c:116
 msgid "Function key 19"
-msgstr "Funkc. taustiņš 19"
+msgstr "Funktio 19"
 
 #: lib/tty/key.c:117
 msgid "Function key 20"
-msgstr "Funkc. taustiņš 20"
+msgstr "Funktio 20"
 
 #: lib/tty/key.c:118 lib/tty/key.c:157
 msgid "Backspace key"
-msgstr "Backspace taustiņš"
+msgstr "Askelpalautin"
 
 #: lib/tty/key.c:119
 msgid "End key"
-msgstr "End taustiņš"
+msgstr "End"
 
 #: lib/tty/key.c:120
 msgid "Up arrow key"
-msgstr "Taustiņš ar būltiņu uz augšu"
+msgstr "Ylänuoli"
 
 #: lib/tty/key.c:121
 msgid "Down arrow key"
-msgstr "Taustiņš ar būltiņu uz leju"
+msgstr "Alanuoli"
 
 #: lib/tty/key.c:122
 msgid "Left arrow key"
-msgstr "Taustiņš ar būltiņu pa kreisi"
+msgstr "Vasen nuoli"
 
 #: lib/tty/key.c:123
 msgid "Right arrow key"
-msgstr "Taustiņš ar būltiņu pa labi"
+msgstr "Oikea nuoli"
 
 #: lib/tty/key.c:124
 msgid "Home key"
-msgstr "Home taustiņš"
+msgstr "Home"
 
 #: lib/tty/key.c:125
 msgid "Page Down key"
-msgstr "Page Down taustiņš"
+msgstr "Page Down"
 
 #: lib/tty/key.c:126
 msgid "Page Up key"
-msgstr "Page Up taustiņš"
+msgstr "Page Up"
 
 #: lib/tty/key.c:127 lib/tty/key.c:158
 msgid "Insert key"
-msgstr "Insert taustiņš"
+msgstr "Insert"
 
 #: lib/tty/key.c:128 lib/tty/key.c:159
 msgid "Delete key"
-msgstr "Delete taustiņš"
+msgstr "Delete"
 
 #: lib/tty/key.c:129
 msgid "Completion/M-tab"
-msgstr "Pabeigšana/M-tab"
+msgstr ""
 
 #: lib/tty/key.c:130
 msgid "+ on keypad"
-msgstr "+ uz klaviatūras"
+msgstr "+ keypadilla"
 
 #: lib/tty/key.c:131
 msgid "- on keypad"
-msgstr "- uz klaviatūras"
+msgstr "- keypadilla"
 
 #: lib/tty/key.c:132
 msgid "Slash on keypad"
-msgstr "/ (Slash) uz klaviatūras"
+msgstr "Viiva keypadilla"
 
 #: lib/tty/key.c:133
 msgid "* on keypad"
-msgstr "* uz klaviatūras"
+msgstr "* keypadilla"
 
 #: lib/tty/key.c:136 lib/tty/key.c:156
 msgid "Escape key"
-msgstr ""
+msgstr "Esc"
 
 #: lib/tty/key.c:137
 msgid "Left arrow keypad"
-msgstr "Būltiņa pa kreisi uz klaviatūras"
+msgstr "Vasen nuoli keypadilla"
 
 #: lib/tty/key.c:138
 msgid "Right arrow keypad"
-msgstr "Būltiņa pa labi uz klaviatūras"
+msgstr "Oikea nuoli keypadilla"
 
 #: lib/tty/key.c:139
 msgid "Up arrow keypad"
-msgstr "Būltiņa uz augšu uz klaviatūras"
+msgstr "Ylänuoli keypadilla"
 
 #: lib/tty/key.c:140
 msgid "Down arrow keypad"
-msgstr "Būltiņa uz leju uz klaviatūras"
+msgstr "Alanuoli keypadilla"
 
 #: lib/tty/key.c:141
 msgid "Home on keypad"
-msgstr "Home uz klaviatūras"
+msgstr "Home keypadilla"
 
 #: lib/tty/key.c:142
 msgid "End on keypad"
-msgstr "End uz klaviatūras"
+msgstr "End keypadilla"
 
 #: lib/tty/key.c:143
 msgid "Page Down keypad"
-msgstr "Page Down uz klaviatūras"
+msgstr "Page Down keypadilla"
 
 #: lib/tty/key.c:144
 msgid "Page Up keypad"
-msgstr "Page Up uz klaviatūras"
+msgstr "Page Up keypadilla"
 
 #: lib/tty/key.c:145
 msgid "Insert on keypad"
-msgstr "Insert uz klaviatūras"
+msgstr "Insert keypadilla"
 
 #: lib/tty/key.c:146
 msgid "Delete on keypad"
-msgstr "Delete uz klaviatūras"
+msgstr "Delete keypadilla"
 
 #: lib/tty/key.c:147
 msgid "Enter on keypad"
-msgstr "Enter uz klaviatūras"
+msgstr "Enter keypadilla"
 
 #: lib/tty/key.c:148
 msgid "Function key 21"
-msgstr ""
+msgstr "Funktio 21"
 
 #: lib/tty/key.c:149
 msgid "Function key 22"
-msgstr ""
+msgstr "Funktio 22"
 
 #: lib/tty/key.c:150
 msgid "Function key 23"
-msgstr ""
+msgstr "Funktio 23"
 
 #: lib/tty/key.c:151
 msgid "Function key 24"
-msgstr ""
+msgstr "Funktio 24"
 
 #: lib/tty/key.c:152
 msgid "A1 key"
-msgstr ""
+msgstr "A1"
 
 #: lib/tty/key.c:153
 msgid "C1 key"
-msgstr ""
+msgstr "C1"
 
 #: lib/tty/key.c:160
 msgid "Plus"
-msgstr ""
+msgstr "Plus"
 
 #: lib/tty/key.c:161
 msgid "Minus"
-msgstr ""
+msgstr "Miinus"
 
 #: lib/tty/key.c:162
 msgid "Asterisk"
-msgstr ""
+msgstr "Tähti"
 
 #: lib/tty/key.c:163
 msgid "Dot"
-msgstr ""
+msgstr "Piste"
 
 #: lib/tty/key.c:164
 msgid "Less than"
-msgstr ""
+msgstr "Vähemmän kuin"
 
 #: lib/tty/key.c:165
 msgid "Great than"
-msgstr ""
+msgstr "Enemmän kuin"
 
 #: lib/tty/key.c:166
 msgid "Equal"
-msgstr ""
+msgstr "Yhtä kuin"
 
 #: lib/tty/key.c:167
 msgid "Comma"
-msgstr ""
+msgstr "Pilkku"
 
 #: lib/tty/key.c:168
 msgid "Apostrophe"
@@ -357,11 +364,11 @@ msgstr ""
 
 #: lib/tty/key.c:170
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Varoitus-merkki"
 
 #: lib/tty/key.c:171
 msgid "Question mark"
-msgstr ""
+msgstr "Kysymysmerkki"
 
 #: lib/tty/key.c:172
 msgid "Ampersand"
@@ -369,11 +376,11 @@ msgstr ""
 
 #: lib/tty/key.c:173
 msgid "Dollar sign"
-msgstr ""
+msgstr "Dollarin merkki"
 
 #: lib/tty/key.c:174
 msgid "Quotation mark"
-msgstr ""
+msgstr "Lainausmerkki"
 
 #: lib/tty/key.c:175
 msgid "Caret"
@@ -389,15 +396,15 @@ msgstr ""
 
 #: lib/tty/key.c:178
 msgid "Underline"
-msgstr ""
+msgstr "Alleviivaus"
 
 #: lib/tty/key.c:179
 msgid "Understrike"
-msgstr ""
+msgstr "Yliviivaus"
 
 #: lib/tty/key.c:180
 msgid "Pipe"
-msgstr ""
+msgstr "Putki"
 
 #: lib/tty/key.c:181
 msgid "Left parenthesis"
@@ -425,44 +432,44 @@ msgstr ""
 
 #: lib/tty/key.c:187
 msgid "Enter"
-msgstr ""
+msgstr "Enter"
 
 #: lib/tty/key.c:188
 msgid "Tab key"
-msgstr ""
+msgstr "Sarkain"
 
 #: lib/tty/key.c:189
 msgid "Space key"
-msgstr ""
+msgstr "Välilyönti"
 
 #: lib/tty/key.c:190
 msgid "Slash key"
-msgstr ""
+msgstr "Kenoviiva"
 
 #: lib/tty/key.c:191
 msgid "Backslash key"
-msgstr ""
+msgstr "Takakenoviiva"
 
 #: lib/tty/key.c:192 lib/tty/key.c:193
 msgid "Number sign #"
-msgstr ""
+msgstr "Risuaita"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 #: lib/tty/key.c:195
 msgid "At sign"
-msgstr ""
+msgstr "@"
 
 #: lib/tty/key.c:198 lib/tty/key.c:199
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: lib/tty/key.c:200 lib/tty/key.c:201 lib/tty/key.c:202
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: lib/tty/key.c:203
 msgid "Shift"
-msgstr ""
+msgstr "Vaihto"
 
 #: lib/tty/tty-slang.c:262
 #, c-format
@@ -470,43 +477,43 @@ msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"Ekrāna izmērs %dx%d nav atbalstīts.\n"
-"Pārbaudi TERM vides mainīgo.\n"
+"Näytön koko %dx%d ei ole yhteensopiva.\n"
+"Tarkista TERM.\n"
 
 #: lib/utilunix.c:359
 #, c-format
 msgid "%s is not a directory\n"
-msgstr ""
+msgstr "%s ei ole hakemisto\n"
 
 #: lib/utilunix.c:361
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "Et ole kansion %s omistaja\n"
 
 #: lib/utilunix.c:363
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
+msgstr "Sinulla ei ole oikeuksia kansioon %s\n"
 
 #: lib/utilunix.c:371
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
+msgstr "Väliaikaishakemiston luonti epäonnistui %s: %s\n"
 
 #: lib/utilunix.c:404
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr ""
+msgstr "Väliaikaistiedostoja ei ole luotu kohteeseen %s\n"
 
 #: lib/utilunix.c:410
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "Väliaikais tiedosta ei ole luotu\n"
 
 #: lib/utilunix.c:414 src/execute.c:168
 #, c-format
 msgid "Press any key to continue..."
-msgstr "Nospied jebkuru taustiņu, lai turpinātu..."
+msgstr "Paina mitä tahansa näppäintä jatkaaksesi"
 
 #: lib/utilunix.c:438 lib/utilunix.c:443 lib/utilunix.c:495
 #: src/editor/editcmd.c:168 src/editor/editcmd.c:192 src/editor/editcmd.c:391
@@ -518,11 +525,11 @@ msgstr "Nospied jebkuru taustiņu, lai turpinātu..."
 #: src/help.c:359 src/main.c:486 src/main.c:496 src/subshell.c:392
 #: src/subshell.c:1085 src/viewer/actions_cmd.c:277
 msgid "Warning"
-msgstr "Brīdinājums"
+msgstr "Varoitus"
 
 #: lib/utilunix.c:438
 msgid "Pipe failed"
-msgstr ""
+msgstr "Virheellinen putki"
 
 #: lib/utilunix.c:443
 msgid "Dup failed"
@@ -538,8 +545,6 @@ msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Nevarēja atvērt cpio arhīvu\n"
-"%s"
 
 #: lib/vfs/mc-vfs/cpio.c:294
 #, c-format
@@ -547,8 +552,6 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"Negaidītas cpio arhīva beigas\n"
-"%s"
 
 #: lib/vfs/mc-vfs/cpio.c:380
 #, c-format
@@ -558,15 +561,11 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Nekonsekventas cietsaites\n"
-"%s\n"
-"iekš cpio archīva\n"
-"%s"
 
 #: lib/vfs/mc-vfs/cpio.c:421
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s satur dubultus ierakstus! Izlaižu!"
+msgstr ""
 
 #: lib/vfs/mc-vfs/cpio.c:510 lib/vfs/mc-vfs/cpio.c:570
 #: lib/vfs/mc-vfs/cpio.c:576 lib/vfs/mc-vfs/cpio.c:639
@@ -576,22 +575,18 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"Samaitājusies cpio galvene iekš\n"
-"%s"
 
 #: lib/vfs/mc-vfs/cpio.c:704
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Negaidītas faila beigas\n"
-"%s"
+msgstr "Odottaminen päättyminen tiedostossa %s"
 
 #: lib/vfs/mc-vfs/direntry.c:282
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr "Direktorija kešs priekš %s izbeidzās"
+msgstr "Hakemiston polku yliajoittui %s"
 
 #: lib/vfs/mc-vfs/direntry.c:713 lib/vfs/mc-vfs/direntry.c:716
 msgid "bytes transferred"
@@ -599,11 +594,11 @@ msgstr ""
 
 #: lib/vfs/mc-vfs/direntry.c:1202
 msgid "Starting linear transfer..."
-msgstr "Sākam lineāro pārraidi..."
+msgstr "Aloitetaan lineaarinen transferrointi..."
 
 #: lib/vfs/mc-vfs/direntry.c:1267
 msgid "Getting file"
-msgstr "Dabūjam failu"
+msgstr "Tuodaan tiedostoa"
 
 #: lib/vfs/mc-vfs/extfs.c:484
 #, c-format
@@ -611,87 +606,85 @@ msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Nevar atvērt %s arhīvu\n"
-"%s"
 
 #: lib/vfs/mc-vfs/extfs.c:526 lib/vfs/mc-vfs/extfs.c:547
 #: lib/vfs/mc-vfs/extfs.c:603
 msgid "Inconsistent extfs archive"
-msgstr "Nepatstāvīgs extfs arhīvs"
+msgstr ""
 
 #: lib/vfs/mc-vfs/extfs.c:1545
 #, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr ""
+msgstr "Varoitus: Kansion %s avaaminen ei onnistu\n"
 
 #: lib/vfs/mc-vfs/fish.c:262
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: Atvienojamies no %s"
+msgstr "fish: Katkaistaan yhteys kohteesta %s"
 
 #: lib/vfs/mc-vfs/fish.c:451
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Gaidām sākotnējo līniju..."
+msgstr ""
 
 #: lib/vfs/mc-vfs/fish.c:461
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
+msgstr "Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
 
 #: lib/vfs/mc-vfs/fish.c:468
 #, c-format
 msgid "fish: Password is required for %s"
-msgstr ""
+msgstr "fish: Salasana pakollinen kohteelle %s"
 
 #: lib/vfs/mc-vfs/fish.c:475
 msgid "fish: Sending password..."
-msgstr "fish: Sūtam paroli..."
+msgstr "fish: Lähetetään salasana..."
 
 #: lib/vfs/mc-vfs/fish.c:511
 msgid "fish: Sending initial line..."
-msgstr "fish: Sūtam sākotnējo līniju..."
+msgstr ""
 
 #: lib/vfs/mc-vfs/fish.c:522
 msgid "fish: Handshaking version..."
-msgstr "fish: Rokspiešanas versija..."
+msgstr ""
 
 #: lib/vfs/mc-vfs/fish.c:532
 msgid "fish: Getting host info..."
-msgstr ""
+msgstr "fish: Haetaan palveluntarjoajan tietoja..."
 
 #: lib/vfs/mc-vfs/fish.c:536
 msgid "fish: Setting up current directory..."
-msgstr "fish: Uzstādam pašreizējo direktoriju..."
+msgstr "fish: Haetaan kansion sisältöä"
 
 #: lib/vfs/mc-vfs/fish.c:538
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish: Savienojies, mājas %s."
+msgstr "fish: Yhteys luotu, koti %s."
 
 #: lib/vfs/mc-vfs/fish.c:645
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: Lasām direktoriju %s..."
+msgstr "fish: Luetaan kansiota %s..."
 
 #: lib/vfs/mc-vfs/fish.c:811 lib/vfs/mc-vfs/ftpfs.c:1739
 #: lib/vfs/mc-vfs/undelfs.c:376
 #, c-format
 msgid "%s: done."
-msgstr "%s: izdarīts."
+msgstr "%s: valmis."
 
 #: lib/vfs/mc-vfs/fish.c:824 lib/vfs/mc-vfs/ftpfs.c:1692
 #: lib/vfs/mc-vfs/undelfs.c:379
 #, c-format
 msgid "%s: failure"
-msgstr "%s: neveiksme"
+msgstr "%s: nyt tuli jokin moka"
 
 #: lib/vfs/mc-vfs/fish.c:882
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: glabājam %s: sutām komandu..."
+msgstr "fish: Säilytä %s: lähettämällä komento ..."
 
 #: lib/vfs/mc-vfs/fish.c:916
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lokālā lasīšana kļūdaina, sūtam nulles"
+msgstr "fish: Paikallisen tiedoston luku epäonnistui, lähetetään nollia"
 
 #: lib/vfs/mc-vfs/fish.c:936
 msgid "fish: storing zeros"
@@ -703,87 +696,87 @@ msgstr ""
 
 #: lib/vfs/mc-vfs/fish.c:1004
 msgid "Aborting transfer..."
-msgstr "Pātraucam pārraidīšanu..."
+msgstr "Keskeytetään transferrointi..."
 
 #: lib/vfs/mc-vfs/fish.c:1019
 msgid "Error reported after abort."
-msgstr "Kļūda paziņota pēc pātraukšanas."
+msgstr "Virhe raportoitu keskeyttämisen jälkeen."
 
 #: lib/vfs/mc-vfs/fish.c:1021
 msgid "Aborted transfer would be successful."
-msgstr "Pātraukā pārraidīšana varētu būt veiksmīga"
+msgstr "Keskeytetty siirto olisi onnistunut."
 
 #: lib/vfs/mc-vfs/ftpfs.c:514
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Atvienošanās no %s"
+msgstr "ftpfs: Yhteys katkaistaan kohteesta %s"
 
 #: lib/vfs/mc-vfs/ftpfs.c:567
 #, c-format
 msgid "FTP: Password required for %s"
-msgstr ""
+msgstr "FTP: Salasana vaaditaan kohteelle %s"
 
 #: lib/vfs/mc-vfs/ftpfs.c:607
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: sūtam pieteikumvārdu"
+msgstr "ftpfs: lähetetään kirjautumistietoja"
 
 #: lib/vfs/mc-vfs/ftpfs.c:612
 msgid "ftpfs: sending user password"
-msgstr "ftpfs: sūtam lietotāja paroli"
+msgstr "ftpfs: lähetetään kirjautumistietoja"
 
 #: lib/vfs/mc-vfs/ftpfs.c:618
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr ""
+msgstr "FTP: Tili vaaditaan käyttäjälle %s"
 
 #: lib/vfs/mc-vfs/ftpfs.c:619
 msgid "Account:"
-msgstr ""
+msgstr "Tili:"
 
 #: lib/vfs/mc-vfs/ftpfs.c:623
 msgid "ftpfs: sending user account"
-msgstr ""
+msgstr "ftpfs: lähetetään tilitietoja"
 
 #: lib/vfs/mc-vfs/ftpfs.c:632
 msgid "ftpfs: logged in"
-msgstr "ftpfs: pieteikšanās veiksmīga"
+msgstr "ftpfs: sisäänkirjauduttu"
 
 #: lib/vfs/mc-vfs/ftpfs.c:646
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: lietotāja nepareiza %s pieteikšanās "
+msgstr "ftpfs: Kirjautuminen ei onnistunut käyttäjällä %s"
 
 #: lib/vfs/mc-vfs/ftpfs.c:782
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Nepareizs resursdatora nosaukums."
+msgstr "ftpfs: Palveluntarjoajan nimi ei ole validi."
 
 #: lib/vfs/mc-vfs/ftpfs.c:818 lib/vfs/mc-vfs/ftpfs.c:836
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #: lib/vfs/mc-vfs/ftpfs.c:843
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: veidojam savienojumu ar %s"
+msgstr "ftpfs: luodaan yhteyttä kohteeseen %s"
 
 #: lib/vfs/mc-vfs/ftpfs.c:855
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: savienojumu pātrauca lietotājs"
+msgstr "ftpfs: yhteys keskeytetty käyttäjän toimesta"
 
 #: lib/vfs/mc-vfs/ftpfs.c:859
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: savienojums ar serveri neizdevās: %s"
+msgstr "ftpfs: yhteys palvelimeen epäonnistui: %s"
 
 #: lib/vfs/mc-vfs/ftpfs.c:919
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Gaidam atbildi... %d (Control-C lai atsauktu)"
+msgstr "Odotetaan uudelleenyritystä... %d (Ctrl+C peruuta)"
 
 #: lib/vfs/mc-vfs/ftpfs.c:1255
 msgid "ftpfs: invalid address family"
-msgstr ""
+msgstr "ftpfs: Osoiteperhe ei ole validi"
 
 #: lib/vfs/mc-vfs/ftpfs.c:1263
 #, c-format
@@ -792,49 +785,49 @@ msgstr ""
 
 #: lib/vfs/mc-vfs/ftpfs.c:1297
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: nevar uzstādīt pasīvo režīmu"
+msgstr "ftpfs: passiivi-tilaan siirtyminen epäonnistui"
 
 #: lib/vfs/mc-vfs/ftpfs.c:1397
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: patraucu pārraidi."
+msgstr "ftpfs: keskeytetään transferrointi."
 
 #: lib/vfs/mc-vfs/ftpfs.c:1400
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: pātraukšanas kļūda: %s"
+msgstr "ftpfs: keskeyttämisvirhe: %ss"
 
 #: lib/vfs/mc-vfs/ftpfs.c:1408
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: pātraukšana neizdevās"
+msgstr "ftpfs: keskeyttäminen epäonnistui"
 
 #: lib/vfs/mc-vfs/ftpfs.c:1537 lib/vfs/mc-vfs/ftpfs.c:1650
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD neizdevās."
+msgstr "ftpfs: CWD epäonnistui."
 
 #: lib/vfs/mc-vfs/ftpfs.c:1547 lib/vfs/mc-vfs/ftpfs.c:1555
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: nevar iet par simbolsaiti"
+msgstr "ftpfs: symlink, selvittäminen epäonnistui"
 
 #: lib/vfs/mc-vfs/ftpfs.c:1616
 msgid "Resolving symlink..."
-msgstr "eju pa simbolsaiti"
+msgstr "Selvitetään symlink..."
 
 #: lib/vfs/mc-vfs/ftpfs.c:1640
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Lasu FTP direktoriju %s... %s%s"
+msgstr "ftpfs: Luetaan FTP-hakemistoa %s... %s%s"
 
 #: lib/vfs/mc-vfs/ftpfs.c:1643
 msgid "(strict rfc959)"
-msgstr "(strict rfc959)"
+msgstr ""
 
 #: lib/vfs/mc-vfs/ftpfs.c:1643
 msgid "(chdir first)"
-msgstr "(chdir vispirms)"
+msgstr ""
 
 #: lib/vfs/mc-vfs/ftpfs.c:1753
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: neizdevās; nav kur atkrist"
+msgstr ""
 
 #: lib/vfs/mc-vfs/ftpfs.c:1831
 msgid "ftpfs: storing file"
@@ -849,7 +842,7 @@ msgstr ""
 #: lib/vfs/mc-vfs/sfs.c:423
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr "Brīdinājums: fails %s nav atrasts\n"
+msgstr "Varoitus: tiedostoa %s ei löytynyt\n"
 
 #: lib/vfs/mc-vfs/sfs.c:452
 #, c-format
@@ -857,7 +850,7 @@ msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Brīdinājums: Nepareiza rindiņa iekš %s:\n"
+"Varoitus: Invalidi rivi %s:\n"
 "%s\n"
 
 #: lib/vfs/mc-vfs/sfs.c:471
@@ -866,42 +859,42 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Brīdinājums: Nepareizs karodziņš %c iekš %s:\n"
+"Virhe: Virheellinen lippu %c kohteessa %s:\n"
 "%s\n"
 
 #: lib/vfs/mc-vfs/smbfs.c:691
 #, c-format
 msgid "reconnect to %s failed"
-msgstr ""
+msgstr "uudelleenyritys kohteeseen %s epäonnistui"
 
 #: lib/vfs/mc-vfs/smbfs.c:1307
 msgid "Authentication failed"
-msgstr ""
+msgstr "Authenkaatio epäonnistui"
 
 #: lib/vfs/mc-vfs/smbfs.c:1876
 #, c-format
 msgid "Error %s creating directory %s"
-msgstr ""
+msgstr "Virhe %s luotaessa kansiota %s"
 
 #: lib/vfs/mc-vfs/smbfs.c:1905
 #, c-format
 msgid "Error %s removing directory %s"
-msgstr ""
+msgstr "Virhe %s poistaessa hakemistoa %s"
 
 #: lib/vfs/mc-vfs/smbfs.c:2023
 #, c-format
 msgid "%s opening remote file %s"
-msgstr ""
+msgstr "%s avautuva palvelintiedosto %s"
 
 #: lib/vfs/mc-vfs/smbfs.c:2105
 #, c-format
 msgid "%s removing remote file %s"
-msgstr ""
+msgstr "%s poistaa palvelintiedostoa %s"
 
 #: lib/vfs/mc-vfs/smbfs.c:2144
 #, c-format
 msgid "%s renaming files\n"
-msgstr ""
+msgstr "%s uudelleennimeää tiedostoja\n"
 
 #: lib/vfs/mc-vfs/tar.c:272 lib/vfs/mc-vfs/tar.c:291
 #, c-format
@@ -909,17 +902,15 @@ msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
 #: lib/vfs/mc-vfs/tar.c:545 lib/vfs/mc-vfs/tar.c:576 lib/vfs/mc-vfs/tar.c:656
 #: lib/vfs/mc-vfs/tar.c:665
 msgid "Inconsistent tar archive"
-msgstr "Neatbilstīgs tar arhīvs"
+msgstr ""
 
 #: lib/vfs/mc-vfs/tar.c:561
 msgid "Unexpected EOF on archive file"
-msgstr "Negaidītas arhīva faila beigas (EOF)"
+msgstr ""
 
 #: lib/vfs/mc-vfs/tar.c:758
 #, c-format
@@ -953,7 +944,7 @@ msgstr ""
 #: lib/vfs/mc-vfs/undelfs.c:261
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: lādēju izdzēsto failu informāciju %d inodes"
+msgstr ""
 
 #: lib/vfs/mc-vfs/undelfs.c:276
 #, c-format
@@ -976,7 +967,7 @@ msgstr ""
 
 #: lib/vfs/mc-vfs/undelfs.c:361
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: lasu inode bitkarti..."
+msgstr ""
 
 #: lib/vfs/mc-vfs/undelfs.c:364
 #, c-format
@@ -987,7 +978,7 @@ msgstr ""
 
 #: lib/vfs/mc-vfs/undelfs.c:367
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: lasu bloka bitkarti..."
+msgstr ""
 
 #: lib/vfs/mc-vfs/undelfs.c:370
 #, c-format
@@ -1019,23 +1010,23 @@ msgstr ""
 
 #: lib/vfs/mc-vfs/utilvfs.c:1118
 msgid "Cannot parse:"
-msgstr "Nevar izanalizēt:"
+msgstr ""
 
 #: lib/vfs/mc-vfs/utilvfs.c:1121
 msgid "More parsing errors will be ignored."
-msgstr "Turpmākās analīzes kļūdas tiks ignorētas."
+msgstr ""
 
 #: lib/vfs/mc-vfs/utilvfs.c:1133
 msgid "Internal error:"
-msgstr "Iekšējā kļūda:"
+msgstr ""
 
 #: lib/vfs/mc-vfs/utilvfs.c:1142 src/filemanager/boxes.c:1130
 msgid "Password:"
-msgstr "Parole:"
+msgstr ""
 
 #: lib/vfs/mc-vfs/vfs.c:552
 msgid "Changes to file lost"
-msgstr "Izmaiņas failā pazudušas"
+msgstr ""
 
 #: lib/widget/dialog-switch.c:196
 msgid "Screens"
@@ -1064,7 +1055,7 @@ msgstr ""
 #: src/filemanager/tree.c:857 src/subshell.c:1087 src/viewer/lib.c:157
 #: src/viewer/lib.c:163 src/viewer/search.c:286
 msgid "&Yes"
-msgstr "&Jā"
+msgstr ""
 
 #: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
 #: src/editor/editcmd.c:170 src/editor/editcmd.c:2353
@@ -1076,11 +1067,11 @@ msgstr "&Jā"
 #: src/filemanager/tree.c:857 src/subshell.c:1087 src/viewer/lib.c:157
 #: src/viewer/lib.c:163 src/viewer/search.c:287
 msgid "&No"
-msgstr "&Nē"
+msgstr ""
 
 #: lib/widget/wtools.c:132
 msgid "Background process:"
-msgstr "Fona process:"
+msgstr ""
 
 #: lib/widget/wtools.c:158 src/diffviewer/search.c:72
 #: src/diffviewer/ydiff.c:2404 src/editor/editcmd.c:170
@@ -1106,7 +1097,7 @@ msgstr "Fona process:"
 #: src/filemanager/panelize.c:88 src/learn.c:86 src/viewer/dialogs.c:91
 #: src/viewer/dialogs.c:193 src/viewer/hex.c:392
 msgid "&Cancel"
-msgstr "&Atsaukt"
+msgstr ""
 
 #: lib/widget/wtools.c:159 src/diffviewer/search.c:73
 #: src/diffviewer/ydiff.c:2405 src/editor/edit.c:178 src/editor/editcmd.c:417
@@ -1122,18 +1113,18 @@ msgstr "&Atsaukt"
 #: src/filemanager/option.c:115 src/filemanager/option.c:296
 #: src/subshell.c:395 src/viewer/dialogs.c:93 src/viewer/dialogs.c:194
 msgid "&OK"
-msgstr "&Labi"
+msgstr ""
 
 #: lib/widget/wtools.c:260 lib/widget/wtools.c:386 src/editor/edit.c:265
 #: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1531
 #: src/editor/edit.c:1909 src/editor/edit.c:1919 src/editor/editcmd.c:261
 #: src/editor/editcmd.c:271 src/editor/editcmd.c:348 src/editor/editcmd.c:2445
 msgid "Error"
-msgstr "Kļūda"
+msgstr ""
 
 #: src/args.c:114
 msgid "Displays the current version"
-msgstr "Parāda pašreizējo versiju"
+msgstr ""
 
 #: src/args.c:122
 msgid "Print data directory"
@@ -1145,15 +1136,15 @@ msgstr ""
 
 #: src/args.c:137
 msgid "Enables subshell support (default)"
-msgstr "Ieslēdz zemčaulas atbalstu (noklusētais)"
+msgstr ""
 
 #: src/args.c:144
 msgid "Disables subshell support"
-msgstr "Atslēdz zemčaulas atbalstu"
+msgstr ""
 
 #: src/args.c:154
 msgid "Log ftp dialog to specified file"
-msgstr "Iegrāmatot ftp dialogu noteiktā failā"
+msgstr ""
 
 #: src/args.c:162
 msgid "Set debug level"
@@ -1161,27 +1152,27 @@ msgstr ""
 
 #: src/args.c:171
 msgid "Launches the file viewer on a file"
-msgstr "Palaiž failam failu skatītāju"
+msgstr ""
 
 #: src/args.c:178
 msgid "Edits one file"
-msgstr "Rediģē vienu failu"
+msgstr ""
 
 #: src/args.c:195
 msgid "Forces xterm features"
-msgstr "Aktivizē xterm iespējas"
+msgstr ""
 
 #: src/args.c:202
 msgid "Disable mouse support in text version"
-msgstr "Atslēdz peles atbalstu teksta režīmā"
+msgstr ""
 
 #: src/args.c:210
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Mēģina lietot termcap terminfo vietā"
+msgstr ""
 
 #: src/args.c:218
 msgid "To run on slow terminals"
-msgstr "Lai palaistu uz lēniem termināļiem"
+msgstr ""
 
 #: src/args.c:225
 msgid "Use stickchars to draw"
@@ -1189,7 +1180,7 @@ msgstr ""
 
 #: src/args.c:232
 msgid "Resets soft keys on HP terminals"
-msgstr "Pārslēdz mīkstos taustiņus uz HP termināļiem"
+msgstr ""
 
 #: src/args.c:239
 msgid "Load definitions of key bindings from specified file"
@@ -1197,15 +1188,15 @@ msgstr ""
 
 #: src/args.c:260
 msgid "Requests to run in black and white"
-msgstr "Pieprasa, lai darbotos melnbaltā režīmā"
+msgstr ""
 
 #: src/args.c:267
 msgid "Request to run in color mode"
-msgstr "Pieprasījums darboties krāsu režīmā"
+msgstr ""
 
 #: src/args.c:274
 msgid "Specifies a color configuration"
-msgstr "Nosaka krāsas konfigurāciju"
+msgstr ""
 
 #: src/args.c:281
 msgid "Show mc with specified skin"
@@ -1269,7 +1260,7 @@ msgstr ""
 #: src/args.c:375 src/filemanager/midnight.c:1530 src/textconf.c:132
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Pusnakts Komandieris %s\n"
+msgstr ""
 
 #: src/args.c:496
 msgid "No arguments given to the viewer."
@@ -1318,7 +1309,7 @@ msgstr ""
 
 #: src/diffviewer/internal.h:15 src/editor/edit-impl.h:126
 msgid "&Dismiss"
-msgstr "&Atcelt"
+msgstr ""
 
 #: src/diffviewer/search.c:110 src/editor/editcmd_dialogs.c:109
 #: src/editor/editcmd_dialogs.c:181 src/viewer/dialogs.c:96
@@ -1334,7 +1325,7 @@ msgstr ""
 #: src/diffviewer/search.c:117 src/editor/editcmd_dialogs.c:118
 #: src/editor/editcmd_dialogs.c:191 src/viewer/dialogs.c:101
 msgid "&Backwards"
-msgstr "at&Pakaļ"
+msgstr ""
 
 #: src/diffviewer/search.c:120 src/editor/editcmd_dialogs.c:121
 #: src/editor/editcmd_dialogs.c:194 src/viewer/dialogs.c:103
@@ -1352,7 +1343,7 @@ msgstr ""
 #: src/editor/editcmd_dialogs.c:216 src/viewer/dialogs.c:115
 #: src/viewer/search.c:139 src/viewer/search.c:223 src/viewer/search.c:308
 msgid "Search"
-msgstr "Meklēt"
+msgstr ""
 
 #: src/diffviewer/search.c:275 src/diffviewer/search.c:302
 msgid "Search is disabled"
@@ -1482,7 +1473,7 @@ msgstr ""
 #: src/diffviewer/ydiff.c:2946 src/editor/editcmd.c:2352
 #: src/editor/editcmd.c:2358 src/viewer/lib.c:155 src/viewer/lib.c:161
 msgid "Quit"
-msgstr "Iziet"
+msgstr ""
 
 #: src/diffviewer/ydiff.c:2947 src/editor/editcmd.c:2352 src/viewer/lib.c:156
 msgid "File was modified. Save with exit?"
@@ -1658,13 +1649,13 @@ msgstr ""
 #: src/filemanager/cmd.c:1016 src/filemanager/cmd.c:1052
 #: src/filemanager/cmd.c:1110
 msgid "&User"
-msgstr "&Lietotājs"
+msgstr ""
 
 #: src/editor/editcmd.c:635 src/editor/editcmd.c:671
 #: src/filemanager/cmd.c:1016 src/filemanager/cmd.c:1052
 #: src/filemanager/cmd.c:1110
 msgid "&System Wide"
-msgstr "&Sistēmas Mēroga"
+msgstr ""
 
 #: src/editor/editcmd.c:669 src/filemanager/cmd.c:1050
 msgid "Menu edit"
@@ -1676,7 +1667,7 @@ msgstr ""
 
 #: src/editor/editcmd.c:671 src/filemanager/cmd.c:1052
 msgid "&Local"
-msgstr "&Vietēji"
+msgstr ""
 
 #: src/editor/editcmd.c:773 src/editor/editcmd.c:1964
 msgid "Block is large, you may not be able to undo this action"
@@ -1747,7 +1738,7 @@ msgstr ""
 #: src/filemanager/layout.c:417 src/filemanager/option.c:114
 #: src/filemanager/option.c:295 src/learn.c:88 src/learn.c:214
 msgid "&Save"
-msgstr "&Saglabāt"
+msgstr ""
 
 #: src/editor/editcmd.c:1649 src/editor/editcmd.c:1671
 msgid ""
@@ -1852,23 +1843,23 @@ msgstr ""
 
 #: src/editor/editcmd.c:2755
 msgid "Error creating script:"
-msgstr "Kļūda izveidojot skriptu:"
+msgstr ""
 
 #: src/editor/editcmd.c:2770
 msgid "Error reading script:"
-msgstr "Kļūda lasot skriptu:"
+msgstr ""
 
 #: src/editor/editcmd.c:2782
 msgid "Error closing script:"
-msgstr "Kļūda aizverot skriptu:"
+msgstr ""
 
 #: src/editor/editcmd.c:2788
 msgid "Script created:"
-msgstr "Skripts izveidots:"
+msgstr ""
 
 #: src/editor/editcmd.c:2799 src/editor/editcmd.c:2829
 msgid "Process block"
-msgstr "Procesa bloks"
+msgstr ""
 
 #: src/editor/editcmd.c:2829
 msgid "Error calling program"
@@ -1926,7 +1917,7 @@ msgstr ""
 
 #: src/editor/editcmd_dialogs.c:350
 msgid "Cancel"
-msgstr "Atsaukt"
+msgstr ""
 
 #: src/editor/editcmd_dialogs.c:519
 msgid ""
@@ -1937,16 +1928,16 @@ msgstr ""
 #: src/editor/editcmd_dialogs.c:587 src/filemanager/file.c:456
 #: src/filemanager/file.c:1077 src/filemanager/filegui.c:529
 msgid "&Skip"
-msgstr "&Izlaist"
+msgstr ""
 
 #: src/editor/editcmd_dialogs.c:588 src/filemanager/file.c:1132
 #: src/filemanager/filegui.c:324
 msgid "A&ll"
-msgstr "vi&Si"
+msgstr ""
 
 #: src/editor/editcmd_dialogs.c:589
 msgid "&Replace"
-msgstr "&Aizvietot"
+msgstr ""
 
 #: src/editor/editcmd_dialogs.c:591
 msgid "Replace with:"
@@ -1958,7 +1949,7 @@ msgstr ""
 
 #: src/editor/editmenu.c:70
 msgid "&Open file..."
-msgstr "&Atvērt failu..."
+msgstr ""
 
 #: src/editor/editmenu.c:71
 msgid "&New"
@@ -1986,7 +1977,7 @@ msgstr ""
 
 #: src/editor/editmenu.c:83 src/filemanager/find.c:186 src/subshell.c:395
 msgid "&Quit"
-msgstr "I&Ziet"
+msgstr ""
 
 #: src/editor/editmenu.c:95
 msgid "&Undo"
@@ -2023,7 +2014,7 @@ msgstr ""
 #: src/editor/editmenu.c:106 src/filemanager/file.c:1569
 #: src/filemanager/midnight.c:253
 msgid "&Delete"
-msgstr "&Dzēst"
+msgstr ""
 
 #: src/editor/editmenu.c:108
 msgid "Co&py to clipfile"
@@ -2183,7 +2174,7 @@ msgstr ""
 
 #: src/editor/editmenu.c:221 src/filemanager/midnight.c:346
 msgid "&Save setup"
-msgstr "&Saglabāt uzstādījumus"
+msgstr ""
 
 #: src/editor/editmenu.c:255 src/filemanager/midnight.c:358
 msgid "&File"
@@ -2211,15 +2202,15 @@ msgstr ""
 
 #: src/editor/editoptions.c:53
 msgid "None"
-msgstr "Nekas"
+msgstr ""
 
 #: src/editor/editoptions.c:54
 msgid "Dynamic paragraphing"
-msgstr "Dinamiska paragrāfošana"
+msgstr ""
 
 #: src/editor/editoptions.c:55
 msgid "Type writer wrap"
-msgstr "Mašīnrakstīšanas iekļaušana"
+msgstr ""
 
 #: src/editor/editoptions.c:89
 msgid "Word wrap line length:"
@@ -2235,7 +2226,7 @@ msgstr ""
 
 #: src/editor/editoptions.c:97
 msgid "Synta&x highlighting"
-msgstr "sinta&Kses izgaismošana"
+msgstr ""
 
 #: src/editor/editoptions.c:99
 msgid "Visible tabs"
@@ -2251,11 +2242,11 @@ msgstr ""
 
 #: src/editor/editoptions.c:105
 msgid "Confir&m before saving"
-msgstr "a&Pstiprināt pirms saglabāšanas"
+msgstr ""
 
 #: src/editor/editoptions.c:107
 msgid "&Return does autoindent"
-msgstr "&Enter veido autom.atkāpi"
+msgstr ""
 
 #: src/editor/editoptions.c:108
 msgid "Tab spacing:"
@@ -2263,7 +2254,7 @@ msgstr ""
 
 #: src/editor/editoptions.c:112
 msgid "Fill tabs with &spaces"
-msgstr "piepildīt tabulācijas ar at&Starpēm"
+msgstr ""
 
 #: src/editor/editoptions.c:114
 msgid "&Backspace through tabs"
@@ -2275,7 +2266,7 @@ msgstr ""
 
 #: src/editor/editoptions.c:118
 msgid "Wrap mode"
-msgstr "Iekļaušanas režīms"
+msgstr ""
 
 #: src/editor/editoptions.c:123
 msgid "Editor options"
@@ -2341,7 +2332,7 @@ msgstr ""
 #: src/execute.c:341
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Ievadiet 'exit', lai atgrieztos Pusnakts Komandierī"
+msgstr ""
 
 #: src/execute.c:443
 #, c-format
@@ -2351,47 +2342,47 @@ msgstr ""
 #: src/filemanager/achown.c:88 src/filemanager/chmod.c:122
 #: src/filemanager/chown.c:95
 msgid "&Set"
-msgstr "&Uzstādīt"
+msgstr ""
 
 #: src/filemanager/achown.c:89
 msgid "S&kip"
-msgstr "Iz&laist"
+msgstr ""
 
 #: src/filemanager/achown.c:90 src/filemanager/chmod.c:126
 #: src/filemanager/chown.c:98
 msgid "Set &all"
-msgstr "Uzstādīt &visus"
+msgstr ""
 
 #: src/filemanager/achown.c:310 src/filemanager/achown.c:418
 #: src/filemanager/achown.c:425
 msgid "owner"
-msgstr "īpašnieks"
+msgstr ""
 
 #: src/filemanager/achown.c:310 src/filemanager/achown.c:420
 #: src/filemanager/achown.c:427
 msgid "group"
-msgstr "grupa"
+msgstr ""
 
 #: src/filemanager/achown.c:422
 msgid "other"
-msgstr "citi"
+msgstr ""
 
 #: src/filemanager/achown.c:430
 msgid "On"
-msgstr "Ieslēgts"
+msgstr ""
 
 #: src/filemanager/achown.c:432
 msgid "Flag"
-msgstr "Karogs"
+msgstr ""
 
 #: src/filemanager/achown.c:434
 msgid "Mode"
-msgstr "Režīms"
+msgstr ""
 
 #: src/filemanager/achown.c:439
 #, c-format
 msgid "%6d of %d"
-msgstr "%6d no %d"
+msgstr ""
 
 #: src/filemanager/achown.c:664
 msgid "Chown advanced command"
@@ -2417,35 +2408,35 @@ msgstr ""
 
 #: src/filemanager/boxes.c:136
 msgid "&Stop"
-msgstr "&Stop"
+msgstr ""
 
 #: src/filemanager/boxes.c:137
 msgid "&Resume"
-msgstr "&Rezumēt"
+msgstr ""
 
 #: src/filemanager/boxes.c:138
 msgid "&Kill"
-msgstr "&Nokaut"
+msgstr ""
 
 #: src/filemanager/boxes.c:232
 msgid "&Full file list"
-msgstr "Pi&lns failu saraksts"
+msgstr ""
 
 #: src/filemanager/boxes.c:233
 msgid "&Brief file list"
-msgstr "&Īss failu saraksts"
+msgstr ""
 
 #: src/filemanager/boxes.c:234
 msgid "&Long file list"
-msgstr "&Garšs failu saraksts"
+msgstr ""
 
 #: src/filemanager/boxes.c:235
 msgid "&User defined:"
-msgstr "Li&etotāja definēts:"
+msgstr ""
 
 #: src/filemanager/boxes.c:241
 msgid "Listing mode"
-msgstr "Saraksta režīms"
+msgstr ""
 
 #: src/filemanager/boxes.c:242
 msgid "User &mini status"
@@ -2454,7 +2445,7 @@ msgstr ""
 #: src/filemanager/boxes.c:337 src/filemanager/boxes.c:369
 #: src/selcodepage.c:95
 msgid "Other 8 bit"
-msgstr "Citi 8 bitu"
+msgstr ""
 
 #: src/filemanager/boxes.c:365 src/filemanager/boxes.c:783
 msgid "Display bits"
@@ -2462,15 +2453,15 @@ msgstr ""
 
 #: src/filemanager/boxes.c:367
 msgid "Input / display codepage:"
-msgstr "Ievades / displeja kodu tabula:"
+msgstr ""
 
 #: src/filemanager/boxes.c:378 src/filemanager/boxes.c:777
 msgid "F&ull 8 bits input"
-msgstr "P&ilna 8 bitu ievade"
+msgstr ""
 
 #: src/filemanager/boxes.c:381
 msgid "&Select"
-msgstr "a&tlasīt"
+msgstr ""
 
 #: src/filemanager/boxes.c:457
 msgid "Running"
@@ -2478,11 +2469,11 @@ msgstr ""
 
 #: src/filemanager/boxes.c:458 src/filemanager/find.c:1300
 msgid "Stopped"
-msgstr "Apstādīnāts"
+msgstr ""
 
 #: src/filemanager/boxes.c:604
 msgid "&Reverse"
-msgstr "&Pretēji"
+msgstr ""
 
 #: src/filemanager/boxes.c:606
 msgid "Case sensi&tive"
@@ -2494,7 +2485,7 @@ msgstr ""
 
 #: src/filemanager/boxes.c:617
 msgid "Sort order"
-msgstr "Kārtošanas secība"
+msgstr ""
 
 #: src/filemanager/boxes.c:684 src/filemanager/cmd.c:160
 msgid "Confirmation"
@@ -2533,15 +2524,15 @@ msgstr ""
 
 #: src/filemanager/boxes.c:769
 msgid "Full 8 bits output"
-msgstr "Pilna 8 bitu izvade"
+msgstr ""
 
 #: src/filemanager/boxes.c:770
 msgid "ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
 #: src/filemanager/boxes.c:771
 msgid "7 bits"
-msgstr "7 biti"
+msgstr ""
 
 #: src/filemanager/boxes.c:902 src/filemanager/tree.c:1141
 msgid "Directory tree"
@@ -2561,23 +2552,23 @@ msgstr ""
 
 #: src/filemanager/boxes.c:942
 msgid "&Always use ftp proxy"
-msgstr "&Vienmēr lietot ftp proxy"
+msgstr ""
 
 #: src/filemanager/boxes.c:944 src/filemanager/boxes.c:952
 msgid "sec"
-msgstr "sek"
+msgstr ""
 
 #: src/filemanager/boxes.c:947
 msgid "ftpfs directory cache timeout:"
-msgstr "ftpfs direktorija keša taimauts:"
+msgstr ""
 
 #: src/filemanager/boxes.c:950
 msgid "ftp anonymous password:"
-msgstr "anonīmā ftp parole:"
+msgstr ""
 
 #: src/filemanager/boxes.c:954
 msgid "Timeout for freeing VFSs:"
-msgstr "Taimauts atbrīvojot VFSas:"
+msgstr ""
 
 #: src/filemanager/boxes.c:959
 msgid "Virtual File System Setting"
@@ -2585,158 +2576,158 @@ msgstr ""
 
 #: src/filemanager/boxes.c:1006
 msgid "cd"
-msgstr "cd"
+msgstr ""
 
 #: src/filemanager/boxes.c:1028
 msgid "Quick cd"
-msgstr "Ātrs cd"
+msgstr ""
 
 #: src/filemanager/boxes.c:1045
 msgid "Symbolic link filename:"
-msgstr "Simbolsaites faila nosaukums:"
+msgstr ""
 
 #: src/filemanager/boxes.c:1048
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Eksistējošs faila nosaukums (faila nosaukums, uz kuru simbolsaite norādīs):"
+msgstr ""
 
 #: src/filemanager/boxes.c:1053
 msgid "Symbolic link"
-msgstr "Simbolsaite"
+msgstr ""
 
 #: src/filemanager/boxes.c:1100
 msgid "Background Jobs"
-msgstr "Fona Darbi"
+msgstr ""
 
 #: src/filemanager/boxes.c:1130
 msgid "Domain:"
-msgstr "Domēns:"
+msgstr ""
 
 #: src/filemanager/boxes.c:1130
 msgid "Username:"
-msgstr "Lietotājvārds:"
+msgstr ""
 
 #: src/filemanager/boxes.c:1182
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s Parole"
+msgstr ""
 
 #: src/filemanager/chmod.c:99
 msgid "execute/search by others"
-msgstr "palaist/meklēt citiem"
+msgstr ""
 
 #: src/filemanager/chmod.c:100
 msgid "write by others"
-msgstr "rakstīt citiem"
+msgstr ""
 
 #: src/filemanager/chmod.c:101
 msgid "read by others"
-msgstr "lasīt citiem"
+msgstr ""
 
 #: src/filemanager/chmod.c:102
 msgid "execute/search by group"
-msgstr "palaist/meklēt grupai"
+msgstr ""
 
 #: src/filemanager/chmod.c:103
 msgid "write by group"
-msgstr "rakstīt grupai"
+msgstr ""
 
 #: src/filemanager/chmod.c:104
 msgid "read by group"
-msgstr "lasīt grupai"
+msgstr ""
 
 #: src/filemanager/chmod.c:105
 msgid "execute/search by owner"
-msgstr "palaist/meklēt īpašniekam"
+msgstr ""
 
 #: src/filemanager/chmod.c:106
 msgid "write by owner"
-msgstr "rakstīt īpašniekam"
+msgstr ""
 
 #: src/filemanager/chmod.c:107
 msgid "read by owner"
-msgstr "lasīt īpašniekam"
+msgstr ""
 
 #: src/filemanager/chmod.c:108
 msgid "sticky bit"
-msgstr "lipīgs"
+msgstr ""
 
 #: src/filemanager/chmod.c:109
 msgid "set group ID on execution"
-msgstr "uzstād. grup. ID pie izpildes"
+msgstr ""
 
 #: src/filemanager/chmod.c:110
 msgid "set user ID on execution"
-msgstr "uzstād. liet. ID pie izpildes"
+msgstr ""
 
 #: src/filemanager/chmod.c:123
 msgid "C&lear marked"
-msgstr "A&ttīrīt izvēlēto"
+msgstr ""
 
 #: src/filemanager/chmod.c:124
 msgid "S&et marked"
-msgstr "U&zstādīt izvēlēto"
+msgstr ""
 
 #: src/filemanager/chmod.c:125
 msgid "&Marked all"
-msgstr "&Izvēlēti visi"
+msgstr ""
 
 #: src/filemanager/chmod.c:154 src/filemanager/chown.c:124
 msgid "Name"
-msgstr "Nosaukums"
+msgstr ""
 
 #: src/filemanager/chmod.c:156
 msgid "Permissions (Octal)"
-msgstr "Atļaujas (Octal)"
+msgstr ""
 
 #: src/filemanager/chmod.c:158 src/filemanager/chown.c:126
 msgid "Owner name"
-msgstr "Īpašnieka vārds"
+msgstr ""
 
 #: src/filemanager/chmod.c:160 src/filemanager/chown.c:128
 #: src/filemanager/chown.c:220
 msgid "Group name"
-msgstr "Grupas vārds"
+msgstr ""
 
 #: src/filemanager/chmod.c:163
 msgid "Use SPACE to change"
-msgstr "Lietojiet SPACE, lai mainītu"
+msgstr ""
 
 #: src/filemanager/chmod.c:165
 msgid "an option, ARROW KEYS"
-msgstr "opcija, PULIŅU TAUSTIŅI"
+msgstr ""
 
 #: src/filemanager/chmod.c:167
 msgid "to move between options"
-msgstr ", lai kustētos starp opcijām"
+msgstr ""
 
 #: src/filemanager/chmod.c:169
 msgid "and T or INS to mark"
-msgstr "un T vai INS, lai atzīmētu"
+msgstr ""
 
 #: src/filemanager/chmod.c:226
 msgid "Chmod command"
-msgstr "Komanda chmod"
+msgstr ""
 
 #: src/filemanager/chmod.c:240 src/filemanager/chown.c:216
 msgid "File"
-msgstr "Fails"
+msgstr ""
 
 #: src/filemanager/chmod.c:248 src/filemanager/chown.c:132
 #: src/filemanager/panel.c:204
 msgid "Permission"
-msgstr "Atļauja"
+msgstr ""
 
 #: src/filemanager/chown.c:96
 msgid "Set &users"
-msgstr "Uzstādīt &lietotājus"
+msgstr ""
 
 #: src/filemanager/chown.c:97
 msgid "Set &groups"
-msgstr "Uzstādīt &grupas"
+msgstr ""
 
 #: src/filemanager/chown.c:130
 msgid "Size"
-msgstr "Lielums"
+msgstr ""
 
 #: src/filemanager/chown.c:178
 msgid "Chown command"
@@ -2744,11 +2735,11 @@ msgstr ""
 
 #: src/filemanager/chown.c:197
 msgid "<Unknown user>"
-msgstr "<Nezināms lietotājs>"
+msgstr ""
 
 #: src/filemanager/chown.c:198
 msgid "<Unknown group>"
-msgstr "<Nezināma grupa>"
+msgstr ""
 
 #: src/filemanager/chown.c:222
 msgid "User name"
@@ -2760,12 +2751,12 @@ msgstr ""
 
 #: src/filemanager/cmd.c:160
 msgid "Files tagged, want to cd?"
-msgstr "Faili tagoti, gribat cd?"
+msgstr ""
 
 #: src/filemanager/cmd.c:167 src/filemanager/cmd.c:1170
 #: src/filemanager/panel.c:2237 src/filemanager/panel.c:2721
 msgid "Cannot change directory"
-msgstr "Nevar nomainīt direktoriju"
+msgstr ""
 
 #: src/filemanager/cmd.c:223
 msgid "Filter"
@@ -2778,7 +2769,7 @@ msgstr ""
 #: src/filemanager/cmd.c:249 src/filemanager/filegui.c:957
 #: src/filemanager/find.c:478
 msgid "&Using shell patterns"
-msgstr "&Lietoj"
+msgstr ""
 
 #: src/filemanager/cmd.c:250
 msgid "&Case sensitive"
@@ -2830,7 +2821,7 @@ msgstr ""
 
 #: src/filemanager/cmd.c:873
 msgid "Create a new Directory"
-msgstr "Izveidot Jaunu Direktoriju"
+msgstr ""
 
 #: src/filemanager/cmd.c:874
 msgid "Enter directory name:"
@@ -2846,7 +2837,7 @@ msgstr ""
 
 #: src/filemanager/cmd.c:1014
 msgid "Extension file edit"
-msgstr "Paplašinājuma faila rediģēšana"
+msgstr ""
 
 #: src/filemanager/cmd.c:1015
 msgid "Which extension file you want to edit?"
@@ -2870,15 +2861,15 @@ msgstr ""
 
 #: src/filemanager/cmd.c:1186
 msgid "&Quick"
-msgstr "&Ātri"
+msgstr ""
 
 #: src/filemanager/cmd.c:1186
 msgid "&Size only"
-msgstr "&Tikai izmērs"
+msgstr ""
 
 #: src/filemanager/cmd.c:1186
 msgid "&Thorough"
-msgstr "&Pamatīgi"
+msgstr ""
 
 #: src/filemanager/cmd.c:1201
 msgid ""
@@ -2914,7 +2905,7 @@ msgstr ""
 #: src/filemanager/cmd.c:1317
 #, c-format
 msgid "`%s' is not a symbolic link"
-msgstr "`%s' nav simbolsaite"
+msgstr ""
 
 #: src/filemanager/cmd.c:1406
 msgid "FTP to machine"
@@ -3022,41 +3013,41 @@ msgstr ""
 #: src/filemanager/file.c:147
 #, no-c-format
 msgid "%o %f \"%s\"%m"
-msgstr "%o %f \"%s\"%m"
+msgstr ""
 
 #: src/filemanager/file.c:149
 #, no-c-format
 msgid "%o %d %f%m"
-msgstr "%o %d %f%m"
+msgstr ""
 
 #: src/filemanager/file.c:152
 msgid "file"
-msgstr "failu"
+msgstr "tiedosto"
 
 #: src/filemanager/file.c:153
 msgid "files"
-msgstr "failus"
+msgstr ""
 
 #: src/filemanager/file.c:154
 msgid "directory"
-msgstr "direktoriju"
+msgstr ""
 
 #: src/filemanager/file.c:155
 msgid "directories"
-msgstr "direktoriji"
+msgstr ""
 
 #: src/filemanager/file.c:156
 msgid "files/directories"
-msgstr "failus/direktorijas"
+msgstr ""
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 #: src/filemanager/file.c:158
 msgid " with source mask:"
-msgstr " ar avota masku:"
+msgstr ""
 
 #: src/filemanager/file.c:159 src/filemanager/filegui.c:955
 msgid "to:"
-msgstr "uz:"
+msgstr ""
 
 #: src/filemanager/file.c:162
 #, c-format
@@ -3092,7 +3083,7 @@ msgstr ""
 #: src/filemanager/file.c:1132 src/filemanager/file.c:2040
 #: src/filemanager/filegui.c:316 src/filemanager/filegui.c:528
 msgid "&Abort"
-msgstr "&Atsaukt"
+msgstr ""
 
 #: src/filemanager/file.c:565
 #, c-format
@@ -3146,7 +3137,7 @@ msgstr ""
 
 #: src/filemanager/file.c:1077 src/viewer/hex.c:392
 msgid "&Retry"
-msgstr "&Vēlreiz"
+msgstr ""
 
 #: src/filemanager/file.c:1123
 msgid ""
@@ -3168,7 +3159,7 @@ msgstr ""
 
 #: src/filemanager/file.c:1132 src/filemanager/filegui.c:320
 msgid "Non&e"
-msgstr "n&Evienu"
+msgstr ""
 
 #: src/filemanager/file.c:1281
 #, c-format
@@ -3253,7 +3244,7 @@ msgstr ""
 
 #: src/filemanager/file.c:1509
 msgid "(stalled)"
-msgstr "(staļļots)"
+msgstr ""
 
 #: src/filemanager/file.c:1546
 #, c-format
@@ -3271,11 +3262,11 @@ msgstr ""
 
 #: src/filemanager/file.c:1568
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Tika saņemts nepilns fails. Paturēt to?"
+msgstr ""
 
 #: src/filemanager/file.c:1569
 msgid "&Keep"
-msgstr "&Paturēt"
+msgstr ""
 
 #: src/filemanager/file.c:1646
 #, c-format
@@ -3403,27 +3394,27 @@ msgstr ""
 
 #: src/filemanager/filegui.c:318
 msgid "If &size differs"
-msgstr "ja i&Zmērs atšķiras"
+msgstr ""
 
 #: src/filemanager/filegui.c:322
 msgid "&Update"
-msgstr "&Atjaunināt"
+msgstr ""
 
 #: src/filemanager/filegui.c:326
 msgid "Overwrite all targets?"
-msgstr "Pārrakstīt visus mērļus?"
+msgstr ""
 
 #: src/filemanager/filegui.c:328
 msgid "&Reget"
-msgstr "&Pārdabūt"
+msgstr ""
 
 #: src/filemanager/filegui.c:330
 msgid "A&ppend"
-msgstr "pie&Vienot"
+msgstr ""
 
 #: src/filemanager/filegui.c:336
 msgid "Overwrite this target?"
-msgstr "Pārrakstīt mērķi?"
+msgstr ""
 
 #: src/filemanager/filegui.c:355
 msgid "File exists"
@@ -3450,23 +3441,23 @@ msgstr ""
 
 #: src/filemanager/filegui.c:801
 msgid "Source"
-msgstr "Avots"
+msgstr ""
 
 #: src/filemanager/filegui.c:825
 msgid "Target"
-msgstr "Mērķis"
+msgstr ""
 
 #: src/filemanager/filegui.c:846
 msgid "Deleting"
-msgstr "Dzēšana"
+msgstr ""
 
 #: src/filemanager/filegui.c:936
 msgid "&Background"
-msgstr "&Fonā"
+msgstr ""
 
 #: src/filemanager/filegui.c:944
 msgid "&Stable Symlinks"
-msgstr "&Stabilas Simbolsaites"
+msgstr ""
 
 #: src/filemanager/filegui.c:946
 msgid "Di&ve into subdir if exists"
@@ -3487,31 +3478,31 @@ msgstr ""
 
 #: src/filemanager/find.c:182
 msgid "&Suspend"
-msgstr "At&likt"
+msgstr ""
 
 #: src/filemanager/find.c:183
 msgid "Con&tinue"
-msgstr "Tu&rpināt"
+msgstr ""
 
 #: src/filemanager/find.c:184
 msgid "&Chdir"
-msgstr "&Chdir"
+msgstr ""
 
 #: src/filemanager/find.c:185
 msgid "&Again"
-msgstr "%Atkal"
+msgstr ""
 
 #: src/filemanager/find.c:187 src/filemanager/panelize.c:91
 msgid "Pane&lize"
-msgstr "Pa&nelēt"
+msgstr ""
 
 #: src/filemanager/find.c:188
 msgid "&View - F3"
-msgstr "&Skatīt - F3"
+msgstr ""
 
 #: src/filemanager/find.c:189
 msgid "&Edit - F4"
-msgstr "&Rediģēt - F4"
+msgstr ""
 
 #: src/filemanager/find.c:353
 #, c-format
@@ -3560,11 +3551,11 @@ msgstr ""
 
 #: src/filemanager/find.c:495 src/filemanager/midnight.c:202
 msgid "&Tree"
-msgstr "&Koks"
+msgstr ""
 
 #: src/filemanager/find.c:537 src/filemanager/find.c:1385
 msgid "Find File"
-msgstr "Atrast Failu"
+msgstr ""
 
 #: src/filemanager/find.c:608
 msgid "Content:"
@@ -3576,43 +3567,43 @@ msgstr ""
 
 #: src/filemanager/find.c:622
 msgid "Start at:"
-msgstr "Sāknēt iekš:"
+msgstr ""
 
 #: src/filemanager/find.c:931
 #, c-format
 msgid "Grepping in %s"
-msgstr "Grepoju iekš %s"
+msgstr ""
 
 #: src/filemanager/find.c:1102
 msgid "Finished"
-msgstr "Babeigts"
+msgstr ""
 
 #: src/filemanager/find.c:1121 src/viewer/search.c:223
 #, c-format
 msgid "Searching %s"
-msgstr "Meklēju %s"
+msgstr ""
 
 #: src/filemanager/find.c:1300 src/filemanager/find.c:1407
 msgid "Searching"
-msgstr "Meklēju"
+msgstr ""
 
 #: src/filemanager/hotlist.c:195
 msgid "&Move"
-msgstr "&Pārvietot"
+msgstr ""
 
 #: src/filemanager/hotlist.c:196 src/filemanager/panelize.c:90
 msgid "&Remove"
-msgstr "&Izņemt"
+msgstr ""
 
 #: src/filemanager/hotlist.c:198 src/filemanager/hotlist.c:1027
 #: src/filemanager/hotlist.c:1123
 msgid "&Append"
-msgstr "pie&Likt"
+msgstr ""
 
 #: src/filemanager/hotlist.c:200 src/filemanager/hotlist.c:1026
 #: src/filemanager/hotlist.c:1122
 msgid "&Insert"
-msgstr "ie&Vietot"
+msgstr ""
 
 #: src/filemanager/hotlist.c:202
 msgid "New &entry"
@@ -3624,11 +3615,11 @@ msgstr ""
 
 #: src/filemanager/hotlist.c:208
 msgid "&Up"
-msgstr "&Augšup"
+msgstr ""
 
 #: src/filemanager/hotlist.c:210
 msgid "&Add current"
-msgstr "&Pievienot pašreizējo"
+msgstr ""
 
 #: src/filemanager/hotlist.c:213
 msgid "&Refresh"
@@ -3636,7 +3627,7 @@ msgstr ""
 
 #: src/filemanager/hotlist.c:215
 msgid "Fr&ee VFSs now"
-msgstr "At&brīvot VFS tūlīt"
+msgstr ""
 
 #: src/filemanager/hotlist.c:218
 msgid "Change &to"
@@ -3644,32 +3635,32 @@ msgstr ""
 
 #: src/filemanager/hotlist.c:284
 msgid "Subgroup - press ENTER to see list"
-msgstr "Apakšgrupa - nospied ENTER, lai redzētu sarakstu"
+msgstr ""
 
 #: src/filemanager/hotlist.c:766
 msgid "Active VFS directories"
-msgstr "Aktīvie VFS direktoriji"
+msgstr ""
 
 #: src/filemanager/hotlist.c:771
 msgid "Directory hotlist"
-msgstr "Direktoriju karstais saraksts"
+msgstr ""
 
 #: src/filemanager/hotlist.c:801
 msgid "Directory path"
-msgstr "Direktorija ceļš"
+msgstr ""
 
 #: src/filemanager/hotlist.c:807 src/filemanager/hotlist.c:858
 msgid "Directory label"
-msgstr "Direktorija nosaukums"
+msgstr ""
 
 #: src/filemanager/hotlist.c:834
 #, c-format
 msgid "Moving %s"
-msgstr "Pārvietoju %s"
+msgstr ""
 
 #: src/filemanager/hotlist.c:1094
 msgid "New hotlist entry"
-msgstr "Jauna karstā saraksta ieraksts"
+msgstr ""
 
 #: src/filemanager/hotlist.c:1094
 msgid "Directory label:"
@@ -3719,7 +3710,7 @@ msgstr ""
 #: src/filemanager/hotlist.c:1687
 #, c-format
 msgid "Label for \"%s\":"
-msgstr "Nosaukums priekš \"%s\":"
+msgstr ""
 
 #: src/filemanager/hotlist.c:1694
 msgid "Add to hotlist"
@@ -3732,12 +3723,12 @@ msgstr ""
 #: src/filemanager/info.c:108
 #, c-format
 msgid "Midnight Commander %s"
-msgstr "Pusnakts Komandieris %s"
+msgstr ""
 
 #: src/filemanager/info.c:124
 #, c-format
 msgid "File: %s"
-msgstr "Fails: %s"
+msgstr ""
 
 #: src/filemanager/info.c:141
 #, c-format
@@ -3746,16 +3737,16 @@ msgstr ""
 
 #: src/filemanager/info.c:147
 msgid "No node information"
-msgstr "Nav mezglu informācijas"
+msgstr ""
 
 #: src/filemanager/info.c:156
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Brīvā vieta: %s (%d%%) no %s"
+msgstr ""
 
 #: src/filemanager/info.c:160
 msgid "No space information"
-msgstr "Nav vietas informācijas"
+msgstr ""
 
 #: src/filemanager/info.c:164
 #, c-format
@@ -3764,27 +3755,27 @@ msgstr ""
 
 #: src/filemanager/info.c:165
 msgid "non-local vfs"
-msgstr "ne-vietējā vfs"
+msgstr ""
 
 #: src/filemanager/info.c:171
 #, c-format
 msgid "Device:    %s"
-msgstr "Iekārta:    %s"
+msgstr ""
 
 #: src/filemanager/info.c:177
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Failsistēma: %s"
+msgstr ""
 
 #: src/filemanager/info.c:183
 #, c-format
 msgid "Accessed:  %s"
-msgstr "Apmeklēts:  %s"
+msgstr ""
 
 #: src/filemanager/info.c:188
 #, c-format
 msgid "Modified:  %s"
-msgstr "Modificēts:  %s"
+msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #: src/filemanager/info.c:196
@@ -3800,7 +3791,7 @@ msgstr ""
 #: src/filemanager/info.c:211
 #, c-format
 msgid "Size:      %s"
-msgstr "Lielums:      %s"
+msgstr ""
 
 #: src/filemanager/info.c:213
 #, c-format
@@ -3808,35 +3799,34 @@ msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
 
 #: src/filemanager/info.c:220
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Īpašnieks:     %s/%s"
+msgstr ""
 
 #: src/filemanager/info.c:224
 #, c-format
 msgid "Links:     %d"
-msgstr "Saites:     %d"
+msgstr ""
 
 #: src/filemanager/info.c:228
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Režīms:      %s (%04o)"
+msgstr ""
 
 #: src/filemanager/info.c:233
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Vieta:  %Xh:%Xh"
+msgstr ""
 
 #: src/filemanager/layout.c:174
 msgid "&Vertical"
-msgstr "&Vertikāli"
+msgstr ""
 
 #: src/filemanager/layout.c:175
 msgid "&Horizontal"
-msgstr "&Horizontāli"
+msgstr ""
 
 #: src/filemanager/layout.c:188
 msgid "Show free sp&ace"
@@ -3852,7 +3842,7 @@ msgstr ""
 
 #: src/filemanager/layout.c:191
 msgid "&Keybar visible"
-msgstr "&Taustiņjosla redzama"
+msgstr ""
 
 #: src/filemanager/layout.c:192
 msgid "Command &prompt"
@@ -3868,7 +3858,7 @@ msgstr ""
 
 #: src/filemanager/layout.c:195
 msgid "&Equal split"
-msgstr "&Vienāds sadalījums"
+msgstr ""
 
 #: src/filemanager/layout.c:428
 msgid "Panel split"
@@ -3888,7 +3878,7 @@ msgstr ""
 
 #: src/filemanager/layout.c:486
 msgid "Layout"
-msgstr "Izkārtojums"
+msgstr ""
 
 #: src/filemanager/midnight.c:199
 msgid "File listin&g"
@@ -3904,15 +3894,15 @@ msgstr ""
 
 #: src/filemanager/midnight.c:205
 msgid "&Listing mode..."
-msgstr "&Saraksta režīms..."
+msgstr ""
 
 #: src/filemanager/midnight.c:206
 msgid "&Sort order..."
-msgstr "&Kārtotā secībā..."
+msgstr ""
 
 #: src/filemanager/midnight.c:207
 msgid "&Filter..."
-msgstr "&Filtrs..."
+msgstr ""
 
 #: src/filemanager/midnight.c:210
 msgid "&Encoding..."
@@ -3920,7 +3910,7 @@ msgstr ""
 
 #: src/filemanager/midnight.c:215
 msgid "FT&P link..."
-msgstr "FT&P saite..."
+msgstr ""
 
 #: src/filemanager/midnight.c:218
 msgid "S&hell link..."
@@ -3928,7 +3918,7 @@ msgstr ""
 
 #: src/filemanager/midnight.c:221
 msgid "SM&B link..."
-msgstr "SM&B saite..."
+msgstr ""
 
 #: src/filemanager/midnight.c:225
 msgid "&Rescan"
@@ -4012,7 +4002,7 @@ msgstr ""
 
 #: src/filemanager/midnight.c:279
 msgid "&Directory tree"
-msgstr "&Direktoriju koks"
+msgstr ""
 
 #: src/filemanager/midnight.c:280
 msgid "&Find file"
@@ -4064,19 +4054,19 @@ msgstr ""
 
 #: src/filemanager/midnight.c:309
 msgid "&Undelete files (ext2fs only)"
-msgstr "&Atjaunot izdzēstos failus (ext2fs tikai)"
+msgstr ""
 
 #: src/filemanager/midnight.c:313
 msgid "&Listing format edit"
-msgstr "&Saraksta formāta rediģēšana"
+msgstr ""
 
 #: src/filemanager/midnight.c:319
 msgid "Edit &extension file"
-msgstr "&Paplašinājumu faila rediģēšana"
+msgstr ""
 
 #: src/filemanager/midnight.c:320
 msgid "Edit &menu file"
-msgstr "&Izvēlnes faila rediģēšana"
+msgstr ""
 
 #: src/filemanager/midnight.c:323
 msgid "Edit hi&ghlighting group file"
@@ -4084,11 +4074,11 @@ msgstr ""
 
 #: src/filemanager/midnight.c:335
 msgid "&Configuration..."
-msgstr "&Konfigurācija..."
+msgstr ""
 
 #: src/filemanager/midnight.c:336
 msgid "&Layout..."
-msgstr "&Izkārtojums..."
+msgstr ""
 
 #: src/filemanager/midnight.c:338
 msgid "&Panel options..."
@@ -4100,11 +4090,11 @@ msgstr ""
 
 #: src/filemanager/midnight.c:340
 msgid "&Display bits..."
-msgstr "&Displeja biti..."
+msgstr ""
 
 #: src/filemanager/midnight.c:343
 msgid "&Virtual FS..."
-msgstr "&Virtuālā FS..."
+msgstr ""
 
 #: src/filemanager/midnight.c:466
 msgid "Panels:"
@@ -4112,7 +4102,7 @@ msgstr ""
 
 #: src/filemanager/midnight.c:734
 msgid "The TERM environment variable is unset!\n"
-msgstr "TERM mainīgais nav ieslēgts!\n"
+msgstr ""
 
 #: src/filemanager/midnight.c:948
 #, c-format
@@ -4120,7 +4110,6 @@ msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
 
 #: src/filemanager/midnight.c:951 src/filemanager/midnight.c:957
 #: src/filemanager/panel.c:2257
@@ -4165,7 +4154,7 @@ msgstr ""
 
 #: src/filemanager/option.c:104
 msgid "&Never"
-msgstr "&Nekad"
+msgstr ""
 
 #: src/filemanager/option.c:105
 msgid "On dum&b terminals"
@@ -4173,7 +4162,7 @@ msgstr ""
 
 #: src/filemanager/option.c:106
 msgid "Alwa&ys"
-msgstr "vien&Mēr"
+msgstr ""
 
 #: src/filemanager/option.c:117
 msgid "A&uto save setup"
@@ -4201,7 +4190,7 @@ msgstr ""
 
 #: src/filemanager/option.c:129
 msgid "&Drop down menus"
-msgstr "&Krītošas izvēlnes"
+msgstr ""
 
 #: src/filemanager/option.c:131
 msgid "Auto m&enus"
@@ -4245,7 +4234,7 @@ msgstr ""
 
 #: src/filemanager/option.c:156
 msgid "&Verbose operation"
-msgstr "&Vārdiskas oprerācijās"
+msgstr ""
 
 #: src/filemanager/option.c:158
 msgid "File operation options"
@@ -4253,7 +4242,7 @@ msgstr ""
 
 #: src/filemanager/option.c:166
 msgid "Configure options"
-msgstr "Konfigurēt opcijas"
+msgstr ""
 
 #: src/filemanager/option.c:287
 msgid "Case &insensitive"
@@ -4293,7 +4282,7 @@ msgstr ""
 
 #: src/filemanager/option.c:315
 msgid "L&ynx-like motion"
-msgstr "L&ynx-iska pārvietošanās"
+msgstr ""
 
 #: src/filemanager/option.c:318
 msgid "Navigation"
@@ -4313,7 +4302,7 @@ msgstr ""
 
 #: src/filemanager/option.c:326
 msgid "&Fast dir reload"
-msgstr "ā&Tra direktoriju pārlāde"
+msgstr ""
 
 #: src/filemanager/option.c:328
 msgid "Show &hidden files"
@@ -4355,7 +4344,7 @@ msgstr ""
 
 #: src/filemanager/panel.c:110
 msgid "&Unsorted"
-msgstr "&Nesakārtots"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4365,7 +4354,7 @@ msgstr ""
 
 #: src/filemanager/panel.c:120
 msgid "&Name"
-msgstr "&Vārds"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4385,7 +4374,7 @@ msgstr ""
 
 #: src/filemanager/panel.c:140
 msgid "&Extension"
-msgstr "&Paplašinājums"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4395,7 +4384,7 @@ msgstr ""
 
 #: src/filemanager/panel.c:150
 msgid "&Size"
-msgstr "&Lielums"
+msgstr ""
 
 #: src/filemanager/panel.c:158
 msgid "Block Size"
@@ -4409,7 +4398,7 @@ msgstr ""
 
 #: src/filemanager/panel.c:176
 msgid "&Modify time"
-msgstr "&Modificēšanas laiks"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4419,7 +4408,7 @@ msgstr ""
 
 #: src/filemanager/panel.c:186
 msgid "&Access time"
-msgstr "&Pieejas laiks"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4433,11 +4422,11 @@ msgstr ""
 
 #: src/filemanager/panel.c:212
 msgid "Perm"
-msgstr "Atļ"
+msgstr ""
 
 #: src/filemanager/panel.c:220
 msgid "Nl"
-msgstr "Nl"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4447,23 +4436,23 @@ msgstr ""
 
 #: src/filemanager/panel.c:229
 msgid "&Inode"
-msgstr "&Inode"
+msgstr ""
 
 #: src/filemanager/panel.c:237
 msgid "UID"
-msgstr "UID"
+msgstr ""
 
 #: src/filemanager/panel.c:245
 msgid "GID"
-msgstr "GID"
+msgstr ""
 
 #: src/filemanager/panel.c:253
 msgid "Owner"
-msgstr "Īpašnieks"
+msgstr ""
 
 #: src/filemanager/panel.c:261
 msgid "Group"
-msgstr "Grupa"
+msgstr ""
 
 #: src/filemanager/panel.c:475
 msgid "[dev]"
@@ -4471,7 +4460,7 @@ msgstr ""
 
 #: src/filemanager/panel.c:490 src/filemanager/panel.c:927
 msgid "UP--DIR"
-msgstr "AUGŠ--DIR"
+msgstr ""
 
 #: src/filemanager/panel.c:512
 msgid "SYMLINK"
@@ -4479,11 +4468,11 @@ msgstr ""
 
 #: src/filemanager/panel.c:517
 msgid "SUB-DIR"
-msgstr "ZEM-DIR"
+msgstr ""
 
 #: src/filemanager/panel.c:918
 msgid "<readlink failed>"
-msgstr "<lasītsaiti neveiksme>"
+msgstr ""
 
 #: src/filemanager/panel.c:978
 #, c-format
@@ -4491,7 +4480,6 @@ msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
 
 #: src/filemanager/panel.c:982
 #, c-format
@@ -4499,7 +4487,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
 
 #: src/filemanager/panel.c:1557
 msgid "Unknown tag on display format:"
@@ -4511,24 +4498,24 @@ msgstr ""
 
 #: src/filemanager/panel.c:3707
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Lietotāja piedāvātais formāts izskatās nepareizs, atgriežamies pie noklusētā."
+msgstr ""
 
 #: src/filemanager/panelize.c:89
 msgid "&Add new"
-msgstr "&Pievienot jaunu"
+msgstr ""
 
 #: src/filemanager/panelize.c:190 src/filemanager/panelize.c:390
 msgid "External panelize"
-msgstr "Ārējā panelēšana"
+msgstr ""
 
 #: src/filemanager/panelize.c:204
 msgid "Command"
-msgstr "Komanda"
+msgstr ""
 
 #: src/filemanager/panelize.c:218 src/filemanager/panelize.c:291
 #: src/filemanager/panelize.c:467 src/filemanager/panelize.c:516
 msgid "Other command"
-msgstr "Cita omanda"
+msgstr ""
 
 #: src/filemanager/panelize.c:272
 msgid "Add to external panelize"
@@ -4540,11 +4527,11 @@ msgstr ""
 
 #: src/filemanager/panelize.c:331
 msgid "Cannot invoke command."
-msgstr "Nevar palais komandu."
+msgstr ""
 
 #: src/filemanager/panelize.c:390
 msgid "Pipe close failed"
-msgstr "Kanāla aizvēršana neizdevās"
+msgstr ""
 
 #: src/filemanager/panelize.c:407
 msgid "Cannot run external panelize in a non-local directory"
@@ -4552,15 +4539,15 @@ msgstr ""
 
 #: src/filemanager/panelize.c:471
 msgid "Find rejects after patching"
-msgstr "Atrast atraidījumus pēc ielāpošanas"
+msgstr ""
 
 #: src/filemanager/panelize.c:473
 msgid "Find *.orig after patching"
-msgstr "Atrast *.orig pēc ielāpošanas"
+msgstr ""
 
 #: src/filemanager/panelize.c:475
 msgid "Find SUID and SGID programs"
-msgstr "Atrast SUID un SGID programmas"
+msgstr ""
 
 #: src/filemanager/tree.c:178
 #, c-format
@@ -4568,18 +4555,16 @@ msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"Nevarēja atvērt failu %s, lai ierakstītu:\n"
-"%s\n"
 
 #: src/filemanager/tree.c:744
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "Kopēt direktoriju \"%s\" uz:"
+msgstr ""
 
 #: src/filemanager/tree.c:781
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr "Pārvietot direktoriju \"%s\" uz:"
+msgstr ""
 
 #: src/filemanager/tree.c:794
 #, c-format
@@ -4619,8 +4604,6 @@ msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 #: src/filemanager/usermenu.c:301
 msgid "Debug"
@@ -4648,8 +4631,6 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Faila %s īpašnieks nav root vai jūs, vai arī tai ir visiem-rakstīt atļauja.\n"
-"Tā lietošana var kompromitēt jūsu drošību"
 
 #: src/filemanager/usermenu.c:676
 msgid "Format error on file Extensions File"
@@ -4696,7 +4677,7 @@ msgstr ""
 
 #: src/help.c:1090
 msgid "Help"
-msgstr "Palīdzība"
+msgstr ""
 
 #: src/help.c:1113
 msgid "ButtonBar|Index"
@@ -4708,7 +4689,7 @@ msgstr ""
 
 #: src/learn.c:98
 msgid "Learn keys"
-msgstr "Mācību taustiņi"
+msgstr ""
 
 #: src/learn.c:111
 msgid "Teach me a key"
@@ -4726,14 +4707,6 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"Lūdzu nospied %s\n"
-"un tad gaidi līdz šis ziņojums pazūd.\n"
-"\n"
-"Tad nospied to vēlreiz, lai redzētu, vai parādās OK\n"
-"blakus šai pogai.\n"
-"\n"
-"Ja tu vēlies iziet, vienreiz nospied Escape taustiņu\n"
-"un uzgaidil."
 
 #: src/learn.c:144
 msgid "Cannot accept this key"
@@ -4747,39 +4720,35 @@ msgstr ""
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 #: src/learn.c:202
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 #: src/learn.c:212
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"Izskatās, ka visi tavi taustiņi\n"
-"jau strādā labi. Tas ir lieliski."
 
 #: src/learn.c:214
 msgid "&Discard"
-msgstr "&Atsaukt"
+msgstr ""
 
 #: src/learn.c:221
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Lieliski! Jums ir pilnīga termināļa datubāze!\n"
-"Visi jūsu taustiņi strādā labi."
 
 #: src/learn.c:335
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Nospied visus šeit minētos taustiņus. Kad tas ir izdarīts, pārbaudi"
+msgstr ""
 
 #: src/learn.c:338
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "kuri taustiņi nav atzīmēti kā OK. Nospiediet atstarpes taustiņu pie trūkstošajiem"
+msgstr ""
 
 #: src/learn.c:341
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "taustiņu, vai klikšķini ar peli, lai to definētu. Kosties apkārt ar Tab."
+msgstr ""
 
 #: src/main.c:496
 #, c-format
@@ -4792,15 +4761,15 @@ msgstr ""
 
 #: src/selcodepage.c:83
 msgid "-  < No translation >"
-msgstr "-  < Nav tulkojuma >"
+msgstr ""
 
 #: src/setup.c:186
 msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
+msgstr ""
 
 #: src/setup.c:187
 msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
+msgstr ""
 
 #: src/setup.c:1099
 #, c-format
@@ -4819,7 +4788,7 @@ msgstr ""
 #: src/subshell.c:844
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "Nevarēja atvērt nosaukto kanālu %s\n"
+msgstr ""
 
 #: src/subshell.c:1086
 msgid "The shell is still active. Quit anyway?"
@@ -4828,7 +4797,7 @@ msgstr ""
 #: src/subshell.c:1274
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "Brīdinājums: Nevarēja pārmainīt uz %s.\n"
+msgstr ""
 
 #: src/textconf.c:74
 msgid "Using the S-Lang library with terminfo database\n"
@@ -4844,7 +4813,7 @@ msgstr ""
 
 #: src/textconf.c:84
 msgid "With builtin Editor\n"
-msgstr "Ar iebūvēto Redaktoru\n"
+msgstr ""
 
 #: src/textconf.c:89
 msgid "With optional subshell support\n"
@@ -4856,27 +4825,27 @@ msgstr ""
 
 #: src/textconf.c:96
 msgid "With support for background operations\n"
-msgstr "Ar atbalstu fona operācijām\n"
+msgstr ""
 
 #: src/textconf.c:100
 msgid "With mouse support on xterm and Linux console\n"
-msgstr "Ar peles atbalstu xterm un Linux konsolei\n"
+msgstr ""
 
 #: src/textconf.c:102
 msgid "With mouse support on xterm\n"
-msgstr "Ar peles atbalstu xterm\n"
+msgstr ""
 
 #: src/textconf.c:106
 msgid "With support for X11 events\n"
-msgstr "Ar atbalstu X11 operācijām\n"
+msgstr ""
 
 #: src/textconf.c:110
 msgid "With internationalization support\n"
-msgstr "ar internacionalizācijas atbalstu\n"
+msgstr ""
 
 #: src/textconf.c:114
 msgid "With multiple codepages support\n"
-msgstr "Ar vairāku kodu tabulu atbalstu\n"
+msgstr ""
 
 #: src/textconf.c:134
 #, c-format
@@ -4923,7 +4892,7 @@ msgstr ""
 
 #: src/viewer/dialogs.c:204
 msgid "Goto"
-msgstr "Ietuz"
+msgstr ""
 
 #: src/viewer/display.c:97
 msgid "ButtonBar|Ascii"
