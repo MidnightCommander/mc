@@ -1404,7 +1404,6 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
         default:
             if (SUP.flags > FISH_FLAG_RSH)
             {
-                break;
                 g_snprintf (gbuf, sizeof (gbuf), ":%d", SUP.flags);
                 flags = gbuf;
             }
