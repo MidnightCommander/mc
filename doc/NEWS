@@ -1,3 +1,30 @@
+Version 4.7.5
+
+- Core
+
+    * Minor enhancement and fix for mc.ext for .so libraries and ELF objects (#1800):
+        - .so libraries have the higher priority of extension handling over ELF objects;
+        - added -C -D options to nm utility for .so libraries;
+        - added -C option to nm utility for ELF objects.
+
+- Editor
+
+    * Copy to clipboard doesn't reset the text selection (#2238)
+    * Don't reset search position after file opened in viewer and reopened in mcedit (#2449)
+
+- Misc
+
+    * Code cleanup
+    * Translation updates
+
+- Fixes
+
+    * Crash in copy/move progress dialog (#2448)
+    * Broken autocompletion (#2288)
+    * Text selection bugs in mcedit (#1898, #2437)
+    * awk is used instead of grep in iso9660 VFS plugin (#1963)
+
+
 Version 4.7.5-pre1
 
 - Core
