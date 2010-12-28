@@ -58,6 +58,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/keybind.h"        /* CK_PanelMoveDown, CK_InputHistoryShow */
 
 #include "src/subshell.h"       /* use_subshell */
 #include "src/consaver/cons.saver.h"    /* console_flag */
@@ -66,7 +67,6 @@
 #include "src/setup.h"
 #include "src/execute.h"        /* toggle_panels() */
 #include "src/history.h"
-#include "src/keybind-defaults.h"       /* CK_InputHistoryShow */
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
@@ -956,12 +956,11 @@ filter_cmd (void)
 void
 reread_cmd (void)
 {
-    int flag;
+    panel_update_flags_t flag = UP_ONLY_CURRENT;
 
-    if (get_current_type () == view_listing && get_other_type () == view_listing)
-        flag = strcmp (current_panel->cwd, other_panel->cwd) ? UP_ONLY_CURRENT : 0;
-    else
-        flag = UP_ONLY_CURRENT;
+    if (get_current_type () == view_listing && get_other_type () == view_listing
+        && strcmp (current_panel->cwd, other_panel->cwd) == 0)
+        flag = UP_OPTIMIZE;
 
     update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
@@ -1513,7 +1512,7 @@ single_dirsize_cmd (void)
     }
 
     if (panels_options.mark_moves_down)
-        send_message (&panel->widget, WIDGET_KEY, KEY_DOWN);
+        send_message ((Widget *) panel, WIDGET_COMMAND, CK_PanelMoveDown);
 
     recalculate_panel_summary (panel);
 

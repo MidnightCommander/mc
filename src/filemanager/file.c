@@ -462,30 +462,24 @@ real_warn_same_file (enum OperationMode mode, const char *fmt, const char *a, co
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef WITH_BACKGROUND
 static FileProgressStatus
 warn_same_file (const char *fmt, const char *a, const char *b)
 {
+#ifdef WITH_BACKGROUND
     union
     {
         void *p;
-          FileProgressStatus (*f) (enum OperationMode, const char *fmt,
-                                   const char *a, const char *b);
+        FileProgressStatus (*f) (enum OperationMode, const char *fmt,
+                                 const char *a, const char *b);
     } pntr;
+
     pntr.f = real_warn_same_file;
 
     if (we_are_background)
         return parent_call (pntr.p, NULL, 3, strlen (fmt), fmt, strlen (a), a, strlen (b), b);
-    else
-        return real_warn_same_file (Foreground, fmt, a, b);
-}
-#else
-static FileProgressStatus
-warn_same_file (const char *fmt, const char *a, const char *b)
-{
+#endif
     return real_warn_same_file (Foreground, fmt, a, b);
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 

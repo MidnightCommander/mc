@@ -222,7 +222,7 @@ vfs_stamp_create (struct vfs_class *oldvfs, vfsid oldvfsid)
         n3vfsid = NULL;
     }
 
-    if (!oldvfs->nothingisopen || !(*oldvfs->nothingisopen) (oldvfsid))
+    if (!oldvfs || !oldvfs->nothingisopen || !(*oldvfs->nothingisopen) (oldvfsid))
         return;
 
     vfs_addstamp (oldvfs, oldvfsid);

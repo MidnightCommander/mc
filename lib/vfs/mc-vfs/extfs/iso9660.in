@@ -11,7 +11,7 @@
 test_iso () {
     CHARSET=`locale charmap 2>/dev/null`
     if test -z "$CHARSET"; then
-	CHARSET=`locale 2>/dev/null | grep LC_CTYPE | sed -n -e 's/.*\.\(.*\)"$/\1/p'`
+	CHARSET=`locale 2>/dev/null | @GREP@ LC_CTYPE | sed -n -e 's/.*\.\(.*\)"$/\1/p'`
     fi
     if test -n "$CHARSET"; then
 	CHARSET=`echo "$CHARSET" | tr '[A-Z]' '[a-z]' | sed -e 's/^iso-/iso/'`

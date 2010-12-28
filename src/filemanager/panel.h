@@ -23,10 +23,6 @@
 
 #define LIST_TYPES 4
 
-#define UP_OPTIMIZE     0
-#define UP_RELOAD       1
-#define UP_ONLY_CURRENT 2
-
 #define UP_KEEPSEL ((char *) -1)
 
 /*** enums ***************************************************************************************/
@@ -53,6 +49,13 @@ enum panel_display_enum
     frame_full,                 /* full screen frame */
     frame_half                  /* half screen frame */
 };
+
+typedef enum
+{
+    UP_OPTIMIZE     = 0,
+    UP_RELOAD       = 1,
+    UP_ONLY_CURRENT = 2
+} panel_update_flags_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -142,7 +145,7 @@ void panel_re_sort (WPanel * panel);
 void panel_change_encoding (WPanel * panel);
 
 void update_dirty_panels (void);
-void update_panels (int force_update, const char *current_file);
+void update_panels (panel_update_flags_t flags, const char *current_file);
 void panel_update_cols (Widget * widget, int frame_size);
 int set_panel_formats (WPanel * p);
 
