@@ -852,7 +852,8 @@ open_include_file (const char *filename)
         return fopen (filename, "r");
 
     g_free (error_file_name);
-    error_file_name = g_build_filename (home_dir, EDIT_DIR, filename, (char *) NULL);
+    error_file_name =
+        g_build_filename (mc_config_get_data_path (), EDIT_DIR, filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f != NULL)
         return f;
@@ -1510,7 +1511,7 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
         if (!*edit->filename && !type)
             return;
     }
-    f = g_build_filename (home_dir, EDIT_SYNTAX_FILE, (char *) NULL);
+    f = g_build_filename (mc_config_get_data_path (), EDIT_SYNTAX_FILE, (char *) NULL);
     if (edit != NULL)
         r = edit_read_syntax_file (edit, pnames, f, edit->filename,
                                    get_first_editor_line (edit),

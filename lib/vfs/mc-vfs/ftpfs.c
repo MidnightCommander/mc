@@ -88,6 +88,7 @@ What to do with this?
 
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/mcconfig.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
 #include "lib/widget.h"         /* message() */
@@ -1827,7 +1828,7 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *l
             w_buf += n_written;
             n_read -= n_written;
         }
-        print_vfs_message ("%s: %" PRIuMAX  "/%" PRIuMAX,
+        print_vfs_message ("%s: %" PRIuMAX "/%" PRIuMAX,
                            _("ftpfs: storing file"), (uintmax_t) n_stored, (uintmax_t) s.st_size);
     }
     tty_disable_interrupt_key ();
@@ -2388,7 +2389,7 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     }
 
     /* Load current .netrc */
-    netrcname = g_build_filename (home_dir, ".netrc", (char *) NULL);
+    netrcname = g_build_filename (mc_config_get_home_dir (), ".netrc", (char *) NULL);
     if (!g_file_get_contents (netrcname, &netrc, NULL, NULL))
     {
         g_free (netrcname);

@@ -1024,7 +1024,7 @@ ext_cmd (void)
 
     if (dir == 0)
     {
-        buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEBIND_FILE, NULL);
+        buffer = g_build_filename (mc_config_get_data_path (), MC_FILEBIND_FILE, NULL);
         check_for_default (extdir, buffer);
         do_edit (buffer);
         g_free (buffer);
@@ -1073,7 +1073,7 @@ edit_mc_menu_cmd (void)
         break;
 
     case 1:
-        buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_USERMENU_FILE, NULL);
+        buffer = g_build_filename (mc_config_get_data_path (), MC_USERMENU_FILE, NULL);
         check_for_default (menufile, buffer);
         break;
 
@@ -1118,7 +1118,7 @@ edit_fhl_cmd (void)
 
     if (dir == 0)
     {
-        buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, NULL);
+        buffer = g_build_filename (mc_config_get_path (), MC_FHL_INI_FILE, NULL);
         check_for_default (fhlfile, buffer);
         do_edit (buffer);
         g_free (buffer);
@@ -1572,8 +1572,8 @@ void
 save_setup_cmd (void)
 {
     if (save_setup (TRUE, TRUE))
-        message (D_NORMAL, _("Setup"), _("Setup saved to ~/%s"),
-                 MC_USERCONF_DIR PATH_SEP_STR MC_CONFIG_FILE);
+        message (D_NORMAL, _("Setup"), _("Setup saved to %s%s%s"),
+                 mc_config_get_path (), PATH_SEP_STR, MC_CONFIG_FILE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

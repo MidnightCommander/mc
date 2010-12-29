@@ -81,8 +81,6 @@ extern const char *mc_prompt;
 extern char *mc_home;
 extern char *mc_home_alt;
 
-extern const char *home_dir;
-
 /*** declarations of public functions ************************************************************/
 
 #ifdef HAVE_SUBSHELL_SUPPORT

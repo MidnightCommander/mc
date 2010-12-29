@@ -383,7 +383,7 @@ static const struct
  \return
  Newly allocated path to config name or NULL if file not found.
 
- If config_file_name is a relative path, then search config in stantart pathes.
+ If config_file_name is a relative path, then search config in stantart paths.
 */
 static char *
 load_setup_get_full_config_name (const char *subdir, const char *config_file_name)
@@ -407,9 +407,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
         return NULL;
 
     if (subdir != NULL)
-        ret = g_build_filename (home_dir, MC_USERCONF_DIR, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_config_get_path (), subdir, lc_basename, NULL);
     else
-        ret = g_build_filename (home_dir, MC_USERCONF_DIR, lc_basename, NULL);
+        ret = g_build_filename (mc_config_get_path (), lc_basename, NULL);
 
     if (exist_file (ret))
     {
@@ -689,7 +689,7 @@ load_setup_get_keymap_profile_config (void)
     g_free (fname);
 
     /* 3) ~/.mc (home_dir?) */
-    fname = g_build_filename (home_dir, MC_USERCONF_DIR, GLOBAL_KEYMAP_FILE, NULL);
+    fname = g_build_filename (mc_config_get_path (), GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
@@ -811,7 +811,7 @@ setup_init (void)
     if (profile_name != NULL)
         return profile_name;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+    profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
     if (!exist_file (profile))
     {
         inifile = concat_dir_and_file (mc_home, "mc.ini");
@@ -864,7 +864,7 @@ load_setup (void)
         global_profile_name = g_build_filename (mc_home_alt, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
-    panels_profile_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_PANELS_FILE, NULL);
+    panels_profile_name = g_build_filename (mc_config_get_cache_path (), MC_PANELS_FILE, NULL);
 
     mc_main_config = mc_config_init (profile);
 
@@ -1015,7 +1015,7 @@ save_setup (gboolean save_options, gboolean save_panel_options)
         mc_config_set_string (mc_main_config, "Misc", "clipboard_store", clipboard_store_path);
         mc_config_set_string (mc_main_config, "Misc", "clipboard_paste", clipboard_paste_path);
 
-        tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+        tmp_profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
         ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
 
         g_free (tmp_profile);
@@ -1069,7 +1069,7 @@ save_config (void)
     GError *error = NULL;
     size_t i;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+    profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
 
     /* Save integer options */
     for (i = 0; int_options[i].opt_name != NULL; i++)
@@ -1108,7 +1108,7 @@ save_layout (void)
     char *profile;
     size_t i;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+    profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
     /* Save integer options */
     for (i = 0; layout[i].opt_name != NULL; i++)
         mc_config_set_int (mc_main_config, "Layout", layout[i].opt_name, *layout[i].opt_addr);

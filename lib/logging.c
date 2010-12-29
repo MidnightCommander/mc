@@ -81,7 +81,7 @@ mc_log (const char *fmt, ...)
     if (is_logging_enabled ())
     {
         va_start (args, fmt);
-        logfilename = g_strdup_printf ("%s/%s/log", home_dir, MC_USERCONF_DIR);
+        logfilename = g_build_filename (mc_config_get_cache_path (), "mc.log", NULL);
         if (logfilename != NULL)
         {
             f = fopen (logfilename, "a");

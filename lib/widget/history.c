@@ -154,7 +154,7 @@ history_get (const char *input_name)
     if ((input_name == NULL) || (*input_name == '\0'))
         return NULL;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_HISTORY_FILE, NULL);
+    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, NULL);
     cfg = mc_config_init (profile);
 
     /* get number of keys */
@@ -227,7 +227,7 @@ history_put (const char *input_name, GList * h)
     if (h == NULL)
         return;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_HISTORY_FILE, NULL);
+    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, NULL);
 
     i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
     if (i != -1)

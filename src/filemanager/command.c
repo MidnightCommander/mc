@@ -325,7 +325,7 @@ do_cd_command (char *orig_cmd)
     {
         if (cmd[0] == 0)
         {
-            sync_tree (home_dir);
+            sync_tree (mc_config_get_home_dir ());
         }
         else if (strcmp (cmd + 3, "..") == 0)
         {

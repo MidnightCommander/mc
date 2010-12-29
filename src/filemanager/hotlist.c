@@ -506,7 +506,7 @@ hotlist_button_callback (WButton * button, int action)
 
     case B_REFRESH_VFS:
         listbox_remove_list (l_hotlist);
-        listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, home_dir, 0);
+        listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, mc_config_get_home_dir (), 0);
         vfs_fill_names (add_name_to_list);
         return MSG_NOT_HANDLED;
 #endif /* ENABLE_VFS */
@@ -814,7 +814,7 @@ init_hotlist (int list_type)
 #ifdef ENABLE_VFS
     if (list_type == LIST_VFSLIST)
     {
-        listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, home_dir, 0);
+        listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, mc_config_get_home_dir (), 0);
         vfs_fill_names (add_name_to_list);
     }
     else
@@ -1551,7 +1551,7 @@ load_hotlist (void)
     }
 
     if (!hotlist_file_name)
-        hotlist_file_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_HOTLIST_FILE, NULL);
+        hotlist_file_name = g_build_filename (mc_config_get_path (), MC_HOTLIST_FILE, NULL);
 
     hotlist = new_hotlist ();
     hotlist->type = HL_TYPE_GROUP;

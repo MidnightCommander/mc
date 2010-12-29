@@ -53,7 +53,7 @@
 #include "lib/tty/key.h"        /* XCTRL */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/fileloc.h"
+#include "lib/mcconfig.h"
 #include "lib/util.h"
 #include "lib/widget.h"
 
@@ -237,7 +237,7 @@ write_all (int fd, const void *buf, size_t count)
 static void
 init_subshell_child (const char *pty_name)
 {
-    const char *init_file = NULL;
+    char *init_file = NULL;
     pid_t mc_sid;
 
     (void) pty_name;
@@ -270,7 +270,7 @@ init_subshell_child (const char *pty_name)
     /* and the user's startup file may do a `cd' command anyway   */
     {
         int ret;
-        ret = chdir (home_dir); /* FIXME? What about when we re-run the subshell? */
+        ret = chdir (mc_config_get_home_dir ());        /* FIXME? What about when we re-run the subshell? */
     }
 
     /* Set MC_SID to prevent running one mc from another */
@@ -285,16 +285,28 @@ init_subshell_child (const char *pty_name)
     switch (subshell_type)
     {
     case BASH:
-        init_file = MC_USERCONF_DIR PATH_SEP_STR "bashrc";
+        init_file = g_build_filename (mc_config_get_path (), "bashrc", NULL);
+
         if (access (init_file, R_OK) == -1)
-            init_file = ".bashrc";
+        {
+            g_free (init_file);
+            init_file = g_strdup (".bashrc");
+        }
 
         /* Make MC's special commands not show up in bash's history */
         putenv ((char *) "HISTCONTROL=ignorespace");
 
         /* Allow alternative readline settings for MC */
-        if (access (MC_USERCONF_DIR PATH_SEP_STR "inputrc", R_OK) == 0)
-            putenv ((char *) "INPUTRC=" MC_USERCONF_DIR PATH_SEP_STR "/inputrc");
+        {
+            char *input_file = g_build_filename (mc_config_get_path (), "inputrc", NULL);
+            if (access (input_file, R_OK) == 0)
+            {
+                char *putenv_str = g_strconcat ("INPUTRC=", input_file, NULL);
+                putenv (putenv_str);
+                g_free (putenv_str);
+            }
+            g_free (input_file);
+        }
 
         break;
 
@@ -353,6 +365,7 @@ init_subshell_child (const char *pty_name)
     }
 
     /* If we get this far, everything failed miserably */
+    g_free (init_file);
     _exit (FORK_FAILURE);
 }
 

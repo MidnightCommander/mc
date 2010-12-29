@@ -16,7 +16,7 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef MC_USERCONF_DIR
-#define MC_USERCONF_DIR         ".mc"
+#define MC_USERCONF_DIR         "mc"
 #endif
 
 #define TAGS_NAME               "TAGS"
@@ -62,14 +62,14 @@
 #define MC_SKINS_SUBDIR         "skins"
 
 /* editor home directory */
-#define EDIT_DIR                MC_USERCONF_DIR PATH_SEP_STR "cedit"
+#define EDIT_DIR                "mcedit"
 
 /* file names */
 #define EDIT_SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"
-#define EDIT_CLIP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.clip"
-#define EDIT_MACRO_FILE         EDIT_DIR PATH_SEP_STR "cooledit.macros"
-#define EDIT_BLOCK_FILE         EDIT_DIR PATH_SEP_STR "cooledit.block"
-#define EDIT_TEMP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.temp"
+#define EDIT_CLIP_FILE          EDIT_DIR PATH_SEP_STR "mcedit.clip"
+#define EDIT_MACRO_FILE         EDIT_DIR PATH_SEP_STR "mcedit.macros"
+#define EDIT_BLOCK_FILE         EDIT_DIR PATH_SEP_STR "mcedit.block"
+#define EDIT_TEMP_FILE          EDIT_DIR PATH_SEP_STR "mcedit.temp"
 
 #define EDIT_GLOBAL_MENU        "cedit.menu"
 #define EDIT_LOCAL_MENU         ".cedit.menu"

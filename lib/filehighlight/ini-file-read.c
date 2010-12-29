@@ -202,7 +202,7 @@ mc_fhl_init_from_standard_files (mc_fhl_t * fhl)
     gboolean ok;
 
     /* ~/.mc/filehighlight.ini */
-    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, (char *) NULL);
+    name = g_build_filename (mc_config_get_data_path (), MC_FHL_INI_FILE, (char *) NULL);
     ok = mc_fhl_read_ini_file (fhl, name);
     g_free (name);
     if (ok)

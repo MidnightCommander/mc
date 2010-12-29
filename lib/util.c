@@ -50,7 +50,7 @@
 
 #include "src/filemanager/filegui.h"
 #include "src/filemanager/file.h"       /* copy_file_file() */
-#include "src/main.h"           /* home_dir, eight_bit_clean */
+#include "src/main.h"           /* eight_bit_clean */
 
 /*** global variables ****************************************************************************/
 
@@ -392,8 +392,7 @@ void
 size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si)
 {
     /* Avoid taking power for every file.  */
-    static const uintmax_t power10[] =
-    {
+    static const uintmax_t power10[] = {
         1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
     };
     static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
@@ -585,8 +584,8 @@ strip_home_and_password (const char *dir)
     size_t len;
     static char newdir[MC_MAXPATHLEN];
 
-    len = strlen (home_dir);
-    if (home_dir != NULL && strncmp (dir, home_dir, len) == 0 &&
+    len = strlen (mc_config_get_home_dir ());
+    if (mc_config_get_home_dir () != NULL && strncmp (dir, mc_config_get_home_dir (), len) == 0 &&
         (dir[len] == PATH_SEP || dir[len] == '\0'))
     {
         newdir[0] = '~';
@@ -1229,7 +1228,7 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
     *offset = 0;
 
     /* open file with positions */
-    fn = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
+    fn = g_build_filename (mc_config_get_cache_path (), MC_FILEPOS_FILE, NULL);
     f = fopen (fn, "r");
     g_free (fn);
     if (f == NULL)
@@ -1319,7 +1318,7 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
         filepos_max_saved_entries = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
                                                        "filepos_max_saved_entries", 1024);
 
-    fn = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
+    fn = g_build_filename (mc_config_get_cache_path (), MC_FILEPOS_FILE, NULL);
     if (fn == NULL)
         goto early_error;
 
