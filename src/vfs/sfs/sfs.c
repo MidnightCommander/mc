@@ -66,7 +66,8 @@
 #define F_FULLMATCH 8
 
 #define COPY_CHAR \
-    if ((size_t) (t-pad) > sizeof(pad)) { \
+    if ((size_t) (t - pad) > sizeof(pad)) \
+    { \
         g_free (pqname); \
         return -1; \
     } \
@@ -74,25 +75,28 @@
         *t++ = *s;
 
 #define COPY_STRING(a) \
-    if ((t-pad)+strlen(a)>sizeof(pad)) { \
+    if ((t - pad) + strlen(a) > sizeof(pad)) \
+    { \
         g_free (pqname); \
         return -1; \
-    } else { \
+    } \
+    else \
+    { \
         strcpy (t, a); \
-        t+= strlen(a); \
+        t += strlen (a); \
     }
 
 /*** file scope type declarations ****************************************************************/
 
-struct cachedfile
+typedef struct cachedfile
 {
-    char *name, *cache;
-    struct cachedfile *next;
-};
+    char *name;
+    char *cache;
+} cachedfile;
 
 /*** file scope variables ************************************************************************/
 
-static struct cachedfile *head;
+static GSList *head;
 static struct vfs_class vfs_sfs_ops;
 
 static int sfs_no = 0;
@@ -101,6 +105,16 @@ static char *sfs_command[MAXFS];
 static int sfs_flags[MAXFS];
 
 /*** file scope functions ************************************************************************/
+
+static int
+cachedfile_compare (const void *a, const void *b)
+{
+    const cachedfile *cf = (const cachedfile *) a;
+    const char *name = (const char *) b;
+
+    return strcmp (name, cf->name);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static int
@@ -196,39 +210,34 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 static const char *
 sfs_redirect (struct vfs_class *me, const char *name)
 {
-    struct cachedfile *cur = head;
+    GSList *cur;
+    cachedfile *cf;
     char *cache;
     int handle;
 
-    while (cur)
+    cur = g_slist_find_custom (head, name, cachedfile_compare);
+    if (cur != NULL)
     {
-        if (!strcmp (name, cur->name))
-        {
-            vfs_stamp (&vfs_sfs_ops, cur);
-            return cur->cache;
-        }
-        cur = cur->next;
-    }
+       cf = (cachedfile *) cur->data;
+       vfs_stamp (&vfs_sfs_ops, cf);
+       return cf->cache;
+     }
 
     handle = vfs_mkstemps (&cache, "sfs", name);
 
     if (handle == -1)
-    {
         return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
-    }
 
     close (handle);
 
-    if (!sfs_vfmake (me, name, cache))
+    if (sfs_vfmake (me, name, cache) == 0)
     {
-        cur = g_new (struct cachedfile, 1);
-        cur->name = g_strdup (name);
-        cur->cache = cache;
-        cur->next = head;
-        head = cur;
+        cf = g_new (cachedfile, 1);
+        cf->name = g_strdup (name);
+        cf->cache = cache;
+        head = g_slist_prepend (head, cf);
 
-        vfs_stamp_create (&vfs_sfs_ops, head);
-
+        vfs_stamp_create (&vfs_sfs_ops, (cachedfile *) head->data);
         return cache;
     }
 
@@ -319,18 +328,13 @@ sfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 static vfsid
 sfs_getid (struct vfs_class *me, const char *path)
 {
-    struct cachedfile *cur = head;
+    GSList *cur;
 
     (void) me;
 
-    while (cur)
-    {
-        if (!strcmp (path, cur->name))
-            break;
-        cur = cur->next;
-    }
+    cur = g_slist_find_custom (head, path, cachedfile_compare);
 
-    return (vfsid) cur;
+    return (vfsid) (cur != NULL ? cur->data : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -338,23 +342,21 @@ sfs_getid (struct vfs_class *me, const char *path)
 static void
 sfs_free (vfsid id)
 {
-    struct cachedfile *which = (struct cachedfile *) id;
-    struct cachedfile *cur, *prev;
+    struct cachedfile *which;
+    GSList *cur;
 
-    for (cur = head, prev = 0; cur && cur != which; prev = cur, cur = cur->next)
-        ;
-    if (!cur)
-        vfs_die ("Free of thing which is unknown to me\n");
-    unlink (cur->cache);
+    which = (struct cachedfile *) id;
+    cur = g_slist_find (head, which);
+    if (cur == NULL)
+       vfs_die ("Free of thing which is unknown to me\n");
 
-    if (prev)
-        prev->next = cur->next;
-    else
-        head = cur->next;
+    which = (struct cachedfile *) cur->data;
+    unlink (which->cache);
+    g_free (which->cache);
+    g_free (which->name);
+    g_free (which);
 
-    g_free (cur->cache);
-    g_free (cur->name);
-    g_free (cur);
+    head = g_slist_delete_link (head, cur);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -362,15 +364,12 @@ sfs_free (vfsid id)
 static void
 sfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
-    struct cachedfile *cur = head;
+    GSList *cur;
 
     (void) me;
 
-    while (cur)
-    {
-        (*func) (cur->name);
-        cur = cur->next;
-    }
+    for (cur = head; cur != NULL; cur = g_slist_next (cur))
+        func (((cachedfile *) cur->data)->name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
