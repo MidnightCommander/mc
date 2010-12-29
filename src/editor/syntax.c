@@ -1,9 +1,11 @@
 /* editor syntax highlighting.
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007 Free Software Foundation, Inc.
+   2007, 2010 Free Software Foundation, Inc.
 
-   Authors: 1998 Paul Sheer
+   Authors:
+   1998 Paul Sheer
+   Egmont Koblinger <egmont@gmail.com>, 2010
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -762,14 +764,16 @@ get_args (char *l, char **args, int args_size)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-this_try_alloc_color_pair (const char *fg, const char *bg)
+this_try_alloc_color_pair (const char *fg, const char *bg, const char *attrs)
 {
-    char f[80], b[80], *p;
+    char f[80], b[80], a[80], *p;
 
     if (bg != NULL && *bg == '\0')
         bg = NULL;
     if (fg != NULL && *fg == '\0')
         fg = NULL;
+    if (attrs != NULL && *attrs == '\0')
+        attrs = NULL;
 
     if ((fg == NULL) && (bg == NULL))
         return EDITOR_NORMAL_COLOR;
@@ -820,7 +824,19 @@ this_try_alloc_color_pair (const char *fg, const char *bg)
         g_free (editnormal);
     }
 
-    return tty_try_alloc_color_pair (fg, bg);
+    if (attrs != NULL)
+    {
+        g_strlcpy (a, attrs, sizeof (a));
+        p = strchr (a, '/');
+        if (p != NULL)
+            *p = '\0';
+        /* get_args() mangles the + signs, unmangle 'em */
+        p = a;
+        while ((p = strchr (p, SYNTAX_TOKEN_PLUS)) != NULL)
+            *p++ = '+';
+        attrs = a;
+    }
+    return tty_try_alloc_color_pair (fg, bg, attrs);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -873,8 +889,8 @@ static int
 edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 {
     FILE *g = NULL;
-    char *fg, *bg;
-    char last_fg[32] = "", last_bg[32] = "";
+    char *fg, *bg, *attrs;
+    char last_fg[32] = "", last_bg[32] = "", last_attrs[64] = "";
     char whole_right[512];
     char whole_left[512];
     char *l = 0;
@@ -1053,9 +1069,13 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             bg = *a;
             if (*a)
                 a++;
+            attrs = *a;
+            if (*a)
+                a++;
             g_strlcpy (last_fg, fg ? fg : "", sizeof (last_fg));
             g_strlcpy (last_bg, bg ? bg : "", sizeof (last_bg));
-            c->keyword[0]->color = this_try_alloc_color_pair (fg, bg);
+            g_strlcpy (last_attrs, attrs ? attrs : "", sizeof (last_attrs));
+            c->keyword[0]->color = this_try_alloc_color_pair (fg, bg, attrs);
             c->keyword[0]->keyword = g_strdup (" ");
             check_not_a;
 
@@ -1122,11 +1142,16 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             bg = *a;
             if (*a)
                 a++;
+            attrs = *a;
+            if (*a)
+                a++;
             if (!fg)
                 fg = last_fg;
             if (!bg)
                 bg = last_bg;
-            k->color = this_try_alloc_color_pair (fg, bg);
+            if (!attrs)
+                attrs = last_attrs;
+            k->color = this_try_alloc_color_pair (fg, bg, attrs);
             check_not_a;
 
             if (++num_words >= alloc_words_per_context)

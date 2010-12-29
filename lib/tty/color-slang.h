@@ -11,12 +11,21 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* When using Slang with color, we have all the indexes free but
- * those defined here (A_BOLD, A_UNDERLINE, A_REVERSE, A_BOLD_REVERSE)
+ * those defined here (A_BOLD, A_UNDERLINE, A_REVERSE, A_BLINK)
  */
 
 #ifndef A_BOLD
 #define A_BOLD SLTT_BOLD_MASK
 #endif /* A_BOLD */
+#ifndef A_UNDERLINE
+#define A_UNDERLINE SLTT_ULINE_MASK
+#endif /* A_UNDERLINE */
+#ifndef A_REVERSE
+#define A_REVERSE SLTT_REV_MASK
+#endif /* A_REVERSE */
+#ifndef A_BLINK
+#define A_BLINK SLTT_BLINK_MASK
+#endif /* A_BLINK */
 
 /*** enums ***************************************************************************************/
 

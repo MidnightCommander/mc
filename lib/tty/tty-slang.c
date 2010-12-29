@@ -2,10 +2,11 @@
    Interface to the terminal controlling library.
    Slang wrapper.
 
-   Copyright (C) 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
+   Copyright (C) 2005, 2006, 2007, 2009, 2010 Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2009.
+   Andrew Borodin <aborodin@vmail.ru>, 2009
+   Egmont Koblinger <egmont@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
 
@@ -291,7 +292,7 @@ tty_init (gboolean slow, gboolean ugly_lines)
 
     tty_reset_prog_mode ();
     load_terminfo_keys ();
-    SLtt_Blink_Mode = 0;
+    SLtt_Blink_Mode = 1;
 
     tty_start_interrupt_key ();
 

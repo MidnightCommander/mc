@@ -2,10 +2,11 @@
    Skins engine.
    Interface functions
 
-   Copyright (C) 2009 The Free Software Foundation, Inc.
+   Copyright (C) 2009, 2010 The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009
+   Egmont Koblinger <egmont@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
 
@@ -54,6 +55,7 @@ mc_skin_hash_destroy_value (gpointer data)
     mc_skin_color_t *mc_skin_color = (mc_skin_color_t *) data;
     g_free (mc_skin_color->fgcolor);
     g_free (mc_skin_color->bgcolor);
+    g_free (mc_skin_color->attrs);
     g_free (mc_skin_color);
 }
 

@@ -2,10 +2,11 @@
    Skins engine.
    Work with colors
 
-   Copyright (C) 2009 The Free Software Foundation, Inc.
+   Copyright (C) 2009, 2010 The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009
+   Egmont Koblinger <egmont@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
 
@@ -144,36 +145,19 @@ mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const
         return NULL;
     }
 
-    switch (items_count)
-    {
-    case 0:
-        tmp = mc_skin_color_get_with_defaults (group, "_default_");
-        if (tmp != NULL)
-        {
-            mc_skin_color->fgcolor = g_strdup (tmp->fgcolor);
-            mc_skin_color->bgcolor = g_strdup (tmp->bgcolor);
-        }
-        else
-        {
-            g_strfreev (values);
-            g_free (mc_skin_color);
-            return NULL;
-        }
-        break;
-    case 1:
-        mc_skin_color->fgcolor = (values[0]) ? g_strstrip (g_strdup (values[0])) : NULL;
-        tmp = mc_skin_color_get_with_defaults (group, "_default_");
-        mc_skin_color->bgcolor = (tmp != NULL) ? g_strdup (tmp->bgcolor) : NULL;
-        break;
-    case 2:
-        mc_skin_color->fgcolor = (values[0]) ? g_strstrip (g_strdup (values[0])) : NULL;
-        mc_skin_color->bgcolor = (values[1]) ? g_strstrip (g_strdup (values[1])) : NULL;
-        break;
-    }
+    tmp = mc_skin_color_get_with_defaults (group, "_default_");
+    mc_skin_color->fgcolor = (items_count > 0 && values[0][0]) ? g_strstrip (g_strdup (values[0])) :
+        (tmp != NULL) ? g_strdup (tmp->fgcolor) : NULL;
+    mc_skin_color->bgcolor = (items_count > 1 && values[1][0]) ? g_strstrip (g_strdup (values[1])) :
+        (tmp != NULL) ? g_strdup (tmp->bgcolor) : NULL;
+    mc_skin_color->attrs = (items_count > 2 && values[2][0]) ? g_strstrip (g_strdup (values[2])) :
+        (tmp != NULL) ? g_strdup (tmp->attrs) : NULL;
+
     g_strfreev (values);
 
     mc_skin_color->pair_index =
-        tty_try_alloc_color_pair2 (mc_skin_color->fgcolor, mc_skin_color->bgcolor, FALSE);
+        tty_try_alloc_color_pair2 (mc_skin_color->fgcolor, mc_skin_color->bgcolor,
+                                   mc_skin_color->attrs, FALSE);
 
     return mc_skin_color;
 }
@@ -189,8 +173,10 @@ mc_skin_color_set_default_for_terminal (mc_skin_t * mc_skin)
     {
         mc_skin_color->fgcolor = g_strdup ("default");
         mc_skin_color->bgcolor = g_strdup ("default");
+        mc_skin_color->attrs = NULL;
         mc_skin_color->pair_index =
-            tty_try_alloc_color_pair2 (mc_skin_color->fgcolor, mc_skin_color->bgcolor, FALSE);
+            tty_try_alloc_color_pair2 (mc_skin_color->fgcolor, mc_skin_color->bgcolor,
+                                       mc_skin_color->attrs, FALSE);
         mc_skin_color_add_to_hash (mc_skin, "skin", "terminal_default_color", mc_skin_color);
     }
 }
@@ -337,7 +323,7 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
     if (mc_skin_color == NULL)
         return FALSE;
 
-    tty_color_set_defaults (mc_skin_color->fgcolor, mc_skin_color->bgcolor);
+    tty_color_set_defaults (mc_skin_color->fgcolor, mc_skin_color->bgcolor, mc_skin_color->attrs);
     mc_skin_color_add_to_hash (mc_skin, "core", "_default_", mc_skin_color);
 
     for (; *groups != NULL; groups++)

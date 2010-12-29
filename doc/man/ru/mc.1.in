@@ -3675,7 +3675,7 @@ xterm=menu=magenta:marked=,magenta:markselect=,red
 Формат определения цвета:
 .PP
 .nf
-  <keyword>=<foregroundcolor>,<backgroundcolor>:<keyword>= ...
+  <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>= ...
 .fi
 .PP
 Цвета не являются обязательными, а в качестве ключевых слов (keywords)
@@ -3754,17 +3754,27 @@ editnormal, editbold, editmarked, editwhitespace, editlinestate.
 .PP
 Возможные цвета: black, gray, red, brightred, green, brightgreen, brown,
 yellow, blue, brightblue, magenta, brightmagenta, cyan, brightcyan,
-lightgray и white.
-.PP
-Для прозрачного фона используются специальное ключевое слово 'default'.
-Слово 'default' можно использовать только при задании цвета фона.
+lightgray и white. Для прозрачного фона используются специальное ключевое
+слово "default". Слово "default" можно использовать только при задании цвета
+фона. Для основных цветов MC используется другое специальное ключевое
+слово: "base". Если терминал поддерживает 256 цветов, то для них могут
+использоваться обозначения: от color16 до color255 или от rgb000 до rgb555
+и от gray0 до gray23.
 Пример:
 .PP
 .nf
 [Colors]
 base_color=normal=white,default:marked=magenta,default
 .fi
-
+.PP
+Атрибуты обозначаются словами "bold", "underline", "reverse" и "blink".
+Чтобы использовать несколько атрибутов, их надо перечислить через символ "+".
+The special word "none" menas no attributes, without attempting to fall back
+to base_color. Пример:
+.PP
+.nf
+menuhotsel=yellow;black;bold+underline
+.fi
 .\"NODE "Skins"
 .SH "Внешний вид"
 Вы можете изменить внешний вид Midnight Commander'а. Для этого необходимо
@@ -3983,7 +3993,6 @@ base_color=normal=white,default:marked=magenta,default
 .I editlinestate
 Цвет области отображения состояния строки.
 
-
 .PP
 Секция
 .BR [viewer]
@@ -3993,15 +4002,15 @@ base_color=normal=white,default:marked=magenta,default
 Цветовыделение элементов с атрибутом
 .BR underline
 
-
 .\"NODE "  Skins colors"
 .SH "  Цветовые пары"
-Каждый параметр в скин\-файле содержит цветовые пары 
+Каждый параметр в скин\-файле содержит цветовые пары.
 .PP
-Цветовые пары описываются как два цвета, разделённых символом ';'
-первый цвет задаёт цвет написания символов, второй \- цвет фона.
-Один из цветов может быть пропущен, в этом случае будет взят цвет
-по умолчанию (глобальный или для данной секции).
+Цветовые пары описываются как два цвета и необязательные атрибуты,
+разделённые символом ";". Первый цвет задаёт цвет написания символов,
+второй \- цвет фона. Любой из цветов и атрибуты могут быть пропущены,
+в этом случае будет взят цвет по умолчанию (глобальный или для данной
+секции).
 .PP
 Например:
 .br
@@ -4009,18 +4018,17 @@ base_color=normal=white,default:marked=magenta,default
 [core]
     # зелёным по чёрному
     _default_=green;black
-    # зелёным (умолч.)  по синему
+    # зелёным (умолч.) по синему
     selected=;blue
-    # жёлтым по чёрному(умолч.)
-    marked=yellow;
+    # жёлтым по чёрному (умолч.) с подчёркиванием
+    marked=yellow;;underline
 .fi
 
 .PP
-Возможные цвета (названия) описаны в секции
+Возможные цвета (названия) и атрибуты описаны в секции
 .\"LINK2"
 Цвета\&.
 .\"Colors"
-
 
 .\"NODE "  Skins lines"
 .SH "  Линии для отрисовки рамок"

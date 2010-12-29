@@ -1,9 +1,11 @@
 /* Color setup for NCurses screen library
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2008, 2009 Free Software Foundation, Inc.
+   2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2009.
+   Andrew Borodin <aborodin@vmail.ru>, 2009
+   Slava Zanko <slavazanko@gmail.com>, 2010
+   Egmont Koblinger <egmont@gmail.com>, 2010
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -57,28 +59,25 @@ mc_tty_color_attr_destroy_cb (gpointer data)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-mc_tty_color_save_attr_lib (int color_pair, int color_attr)
+static void
+mc_tty_color_save_attr (int color_pair, int color_attr)
 {
     int *attr, *key;
 
     attr = g_try_new0 (int, 1);
     if (attr == NULL)
-        return color_attr;
+        return;
 
     key = g_try_new (int, 1);
     if (key == NULL)
     {
         g_free (attr);
-        return color_attr;
+        return;
     }
 
-    *key = color_pair;
+    *attr = color_attr;
 
-    if (color_attr != -1)
-        *attr = color_attr & (A_BOLD | A_REVERSE | A_UNDERLINE);
     g_hash_table_replace (mc_tty_color_color_pair_attrs, (gpointer) key, (gpointer) attr);
-    return color_attr & (~(*attr));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -97,14 +96,13 @@ color_get_attr (int color_pair)
 
 static void
 mc_tty_color_pair_init_special (tty_color_pair_t * mc_color_pair,
-                                int fg1, int bg1, int fg2, int bg2, int mask)
+                                int fg1, int bg1, int fg2, int bg2, int attr)
 {
     if (has_colors () && !mc_tty_color_disable)
-        init_pair (mc_color_pair->pair_index,
-                   mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg1 | mask), bg1);
+        init_pair (mc_color_pair->pair_index, fg1, bg1);
     else
-        init_pair (mc_color_pair->pair_index,
-                   mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg2 | mask), bg2);
+        init_pair (mc_color_pair->pair_index, fg2, bg2);
+    mc_tty_color_save_attr (mc_color_pair->pair_index, attr);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -141,6 +139,7 @@ tty_color_deinit_lib (void)
 void
 tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
 {
+
     if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
     {
         switch (mc_color_pair->ifg)
@@ -169,13 +168,21 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
     }
     else
     {
-        int mask_fg = (mc_color_pair->ifg == -1) ? mc_color_pair->ifg : 0xff;
-        int mask_bg = (mc_color_pair->ibg == -1) ? mc_color_pair->ibg : 0xff;
+        int ifg, ibg, attr;
 
-        init_pair (mc_color_pair->pair_index,
-                   mc_tty_color_save_attr_lib (mc_color_pair->pair_index,
-                                               mc_color_pair->ifg) & mask_fg,
-                   mc_color_pair->ibg & mask_bg);
+        ifg = mc_color_pair->ifg;
+        ibg = mc_color_pair->ibg;
+        attr = mc_color_pair->attr;
+
+        /* In 8 color mode, change bright colors into bold */
+        if (COLORS == 8 && ifg >= 8 && ifg < 16)
+        {
+            ifg &= 0x07;
+            attr |= A_BOLD;
+        }
+
+        init_pair (mc_color_pair->pair_index, ifg, ibg);
+        mc_tty_color_save_attr (mc_color_pair->pair_index, attr);
     }
 }
 
