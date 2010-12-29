@@ -33,7 +33,7 @@ Force black and white display.
 Force ANSI color mode on terminals that don't seem to have color
 support.
 .TP
-.I "\-C <keyword>=<FGcolor>,<BGcolor>:<keyword>= ..."
+.I "\-C <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>= ..."
 Specify a different color set.  See the
 .B Colors
 section in mc(1) for more information.
@@ -249,12 +249,14 @@ Each context starts with a line of the form:
 .I delim
 .RI [ foreground ]
 .RI [ background ]
+.RI [ attributes ]
 .PP
 The first context is an exception.  It must start with the command
 .PP
 .B context default
 .RI [ foreground ]
 .RI [ background ]
+.RI [ attributes ]
 .PP
 otherwise
 .B mcedit
@@ -294,6 +296,7 @@ Each rule is a line of the form:
 .RB [ linestart ]
 .I string foreground
 .RI [ background ]
+.RI [ attributes ]
 .PP
 Context or keyword strings are interpreted, so that you can include tabs
 and spaces with the sequences \\t and \\s.  Newlines and backslashes are
@@ -331,8 +334,14 @@ directive to continue across multiple lines.
 .PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white.  If the syntax file is shared
-with
+cyan, brightcyan, lightgray and white. The special keyword "default" means
+the terminal's default. Another special keyword "base" means mc's main
+colors, it is useful as a placeholder if you want to specify attributes
+without modifying the background color. When 256 colors are available,
+they can be specified either as color16 to color255, or as rgb000 to rgb555
+and gray0 to gray23.
+.PP
+If the syntax file is shared with
 .BR cooledit ,
 it is possible to specify different colors for
 .B mcedit
@@ -348,6 +357,9 @@ keyword  #include  red/Orange
 uses the color before the slash.  See cooledit(1) for supported
 .B cooledit
 colors.
+.PP
+Attributes can be any of bold, underline, reverse and blink, appended by a
+plus sign if more than one are desired.
 .PP
 Comments may be put on a separate line starting with the hash sign (#).
 .PP

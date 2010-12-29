@@ -14,6 +14,7 @@ typedef struct mc_skin_color_struct
 {
     gchar *fgcolor;
     gchar *bgcolor;
+    gchar *attrs;
     int pair_index;
 } mc_skin_color_t;
 

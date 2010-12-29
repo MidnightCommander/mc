@@ -3417,7 +3417,7 @@ xterm=menu=magenta:marked=,magenta:markselect=,red
 The format for the color definition is:
 .PP
 .nf
-  <keyword>=<foregroundcolor>,<backgroundcolor>:<keyword>= ...
+  <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>=...
 .fi
 .PP
 The colors are optional, and the keywords are: normal, selected, disabled, marked,
@@ -3481,11 +3481,21 @@ The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
 cyan, brightcyan, lightgray and white. And there is a special keyword
 for transparent background. It is 'default'. The 'default' can only be
-used for background color. Example:
+used for background color. Another special keyword "base" means mc's main
+colors.  When 256 colors are available, they can be specified either as
+color16 to color255, or as rgb000 to rgb555 and gray0 to gray23. Example:
 .PP
 .nf
 [Colors]
 base_color=normal=white,default:marked=magenta,default
+.fi
+.PP
+Attributes can be any of bold, underline, reverse and blink, appended by a
+plus sign if more than one are desired.  The special word "none" means no
+attributes, without attempting to fall back to base_color.  Example:
+.PP
+.nf
+menuhotsel=yellow;black;bold+underline
 .fi
 
 .\"NODE "Skins"
@@ -3727,11 +3737,12 @@ attribute
 .SH "  Color pair definitions"
 Any parameter in skin\-file contain definition of color pair.
 .PP
-Color pairs described as two colors separated by ';'. First color
-sets the foreground color, second color sets background color.
-One of the colors may be omitted, in this case color will be
-taken from default color pair (global color pair  or
-from default color pair of this section).
+Color pairs described as two colors and the optional attributes
+separated by ';'. First field sets the foreground color, second
+field sets background color, third field sets the attributes.
+Any of the fields may be omitted, in this case value will be
+taken from default color pair (global color pair or from default
+color pair of this section).
 .PP
 Example:
 .br
@@ -3739,14 +3750,15 @@ Example:
 [core]
     # green on black
     _default_=green;black
-    # green (default)  on blue
+    # green (default) on blue
     selected=;blue
     # yellow on black (default)
-    marked=yellow;
+    # underlined yellow on black (default)
+    marked=yellow;;underline
 .fi
 
 .PP
-Possible colors (names) described in
+Possible colors (names) and attributes are described in
 .\"LINK2"
 Colors\&.
 .\"Colors"

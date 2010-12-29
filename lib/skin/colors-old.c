@@ -2,10 +2,11 @@
    Skins engine.
    Work with colors - backward compability
 
-   Copyright (C) 2009 The Free Software Foundation, Inc.
+   Copyright (C) 2009, 2010 The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009
+   Egmont Koblinger <egmont@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
 
@@ -135,7 +136,7 @@ mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_str
 
     for (; *colors; colors++)
     {
-        key_val = g_strsplit_set (*colors, "=,", 3);
+        key_val = g_strsplit_set (*colors, "=,", 4);
 
         if (!key_val)
             continue;
@@ -147,7 +148,9 @@ mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_str
             continue;
         }
 
-        if (key_val[2] != NULL)
+        if (key_val[3] != NULL)
+            skin_val = g_strdup_printf ("%s;%s;%s", key_val[1], key_val[2], key_val[3]);
+        else if (key_val[2] != NULL)
             skin_val = g_strdup_printf ("%s;%s", key_val[1], key_val[2]);
         else
             skin_val = g_strdup_printf ("%s;", key_val[1]);

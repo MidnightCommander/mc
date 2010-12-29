@@ -23,7 +23,7 @@ Force color mode on terminals where
 .B mcview
 defaults to black and white.
 .TP
-.I "\-C <keyword>=<FGcolor>,<BGcolor>:<keyword>= ..."
+.I "\-C <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>= ..."
 Specify a different color set.  See the
 .B Colors
 section in mc(1) for more information.

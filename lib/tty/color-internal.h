@@ -33,11 +33,10 @@ typedef enum {
 
 typedef struct mc_color_pair_struct
 {
-    const char *cfg;
-    const char *cbg;
     int ifg;
     int ibg;
-    int pair_index;
+    int attr;
+    size_t pair_index;
     gboolean is_temp;
 } tty_color_pair_t;
 
@@ -48,8 +47,9 @@ extern gboolean mc_tty_color_disable;
 
 /*** declarations of public functions ************************************************************/
 
-const char *tty_color_get_valid_name (const char *);
+const char *tty_color_get_name_by_index (int);
 int tty_color_get_index_by_name (const char *);
+int tty_attr_get_bits (const char *);
 
 void tty_color_init_lib (gboolean, gboolean);
 void tty_color_deinit_lib (void);

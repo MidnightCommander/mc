@@ -322,8 +322,8 @@ mc_args_new_color_group (void)
     /* FIXME: to preserve translations, lines should be split. */
     mc_args__loc__colors_string = g_strdup_printf ("%s\n%s",
                                                    /* TRANSLATORS: don't translate keywords */
-                                                   _("--colors KEYWORD={FORE},{BACK}\n\n"
-                                                     "{FORE} and {BACK} can be omitted, and the default will be used\n"
+                                                   _("--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n\n"
+                                                     "{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
                                                      "\n Keywords:\n"
                                                      "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
                                                      "                 input, inputmark, inputunchanged, commandlinemark\n"
@@ -337,11 +337,16 @@ mc_args_new_color_group (void)
                                                      "                 editlinestate\n"
                                                      "   Viewer:       viewunderline\n"
                                                      "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"),
-                                                   /* TRANSLATORS: don't translate color names */
-                                                   _("Colors:\n"
+                                                   /* TRANSLATORS: don't translate color names and attributes */
+                                                   _("Standard Colors:\n"
                                                     "   black, gray, red, brightred, green, brightgreen, brown,\n"
                                                     "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-                                                    "   brightcyan, lightgray and white\n\n"));
+                                                    "   brightcyan, lightgray and white\n\n"
+                                                    "Extended colors, when 256 colors are available:\n"
+                                                    "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n\n"
+                                                    "Attributes:\n"
+                                                    "   bold, underline, reverse, blink; append more with '+'\n")
+                                                    );
 
     return g_option_group_new ("color", mc_args__loc__colors_string,
                                _("Color options"), NULL, NULL);

@@ -1,9 +1,10 @@
 /* Color setup for S_Lang screen library
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2008, 2009 Free Software Foundation, Inc.
+   2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2009.
+   Andrew Borodin <aborodin@vmail.ru>, 2009
+   Egmont Koblinger <egmont@gmail.com>, 2010
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -168,9 +169,10 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
     }
     else
     {
-        fg = (mc_color_pair->cfg) ? mc_color_pair->cfg : "default";
-        bg = (mc_color_pair->cbg) ? mc_color_pair->cbg : "default";
+        fg = tty_color_get_name_by_index(mc_color_pair->ifg);
+        bg = tty_color_get_name_by_index(mc_color_pair->ibg);
         SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);
+        SLtt_add_color_attribute (mc_color_pair->pair_index, mc_color_pair->attr);
     }
 }
 
