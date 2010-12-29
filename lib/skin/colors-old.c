@@ -28,6 +28,7 @@
 
 #include <config.h>
 #include <stdlib.h>
+#include <string.h>             /* strcmp() */
 #include <sys/types.h>          /* size_t */
 
 #include "internal.h"
@@ -51,71 +52,86 @@ typedef struct mc_skin_colors_old_struct
 
 /*** file scope variables ************************************************************************/
 
+/* keep this table alphabetically sorted */
 static const mc_skin_colors_old_t old_colors[] = {
-    {"normal", "core", "_default_"},
-    {"marked", "core", "marked"},
-    {"selected", "core", "selected"},
-    {"markselect", "core", "markselect"},
-    {"disabled", "core", "disabled"},
-    {"reverse", "core", "reverse"},
-    {"header", "core", "header"},
-    {"dnormal", "dialog", "_default_"},
-    {"dfocus", "dialog", "dfocus"},
-    {"dhotnormal", "dialog", "dhotnormal"},
-    {"dhotfocus", "dialog", "dhotfocus"},
-    {"errors", "error", "_default_"},
-    {"errdhotnormal", "error", "errdhotnormal"},
-    {"errdhotfocus", "error", "errdhotfocus"},
-    {"menunormal", "menu", "_default_"},
-    {"menuhot", "menu", "menuhot"},
-    {"menusel", "menu", "menusel"},
-    {"menuhotsel", "menu", "menuhotsel"},
-    {"menuinactive", "menu", "menuinactive"},
-    {"pmenunormal", "popupmenu", "_default_"},
-    {"pmenusel", "popupmenu", "menusel"},
-    {"pmenutitle", "popupmenu", "menutitle"},
-    {"bbarhotkey", "buttonbar", "hotkey"},
     {"bbarbutton", "buttonbar", "button"},
-    {"statusbar", "statusbar", "_default_"},
+    {"bbarhotkey", "buttonbar", "hotkey"},
+    {"commandlinemark", "core", "commandlinemark"},
+    {"dfocus", "dialog", "dfocus"},
+    {"dhotfocus", "dialog", "dhotfocus"},
+    {"dhotnormal", "dialog", "dhotnormal"},
+    {"disabled", "core", "disabled"},
+    {"dnormal", "dialog", "_default_"},
+    {"editbold", "editor", "editbold"},
+    {"editlinestate", "editor", "editlinestate"},
+    {"editmarked", "editor", "editmarked"},
+    {"editnormal", "editor", "_default_"},
+    {"editwhitespace", "editor", "editwhitespace"},
+    {"errdhotfocus", "error", "errdhotfocus"},
+    {"errdhotnormal", "error", "errdhotnormal"},
+    {"errors", "error", "_default_"},
     {"gauge", "core", "gauge"},
+    {"header", "core", "header"},
+    {"helpbold", "help", "helpbold"},
+    {"helpitalic", "help", "helpitalic"},
+    {"helplink", "help", "helplink"},
+    {"helpnormal", "help", "_default_"},
+    {"helpslink", "help", "helpslink"},
     {"input", "core", "input"},
     {"inputmark", "core", "inputmark"},
     {"inputunchanged", "core", "inputunchanged"},
-    {"commandlinemark", "core", "commandlinemark"},
-    {"helpnormal", "help", "_default_"},
-    {"helpitalic", "help", "helpitalic"},
-    {"helpbold", "help", "helpbold"},
-    {"helplink", "help", "helplink"},
-    {"helpslink", "help", "helpslink"},
-    {"viewunderline", "viewer", "viewunderline"},
-    {"editnormal", "editor", "_default_"},
-    {"editbold", "editor", "editbold"},
-    {"editmarked", "editor", "editmarked"},
-    {"editwhitespace", "editor", "editwhitespace"},
-    {"editlinestate", "editor", "editlinestate"},
-    {NULL, NULL, NULL}
+    {"marked", "core", "marked"},
+    {"markselect", "core", "markselect"},
+    {"menuhot", "menu", "menuhot"},
+    {"menuhotsel", "menu", "menuhotsel"},
+    {"menuinactive", "menu", "menuinactive"},
+    {"menunormal", "menu", "_default_"},
+    {"menusel", "menu", "menusel"},
+    {"normal", "core", "_default_"},
+    {"pmenunormal", "popupmenu", "_default_"},
+    {"pmenusel", "popupmenu", "menusel"},
+    {"pmenutitle", "popupmenu", "menutitle"},
+    {"reverse", "core", "reverse"},
+    {"selected", "core", "selected"},
+    {"statusbar", "statusbar", "_default_"},
+    {"viewunderline", "viewer", "viewunderline"}
 };
 
+static const size_t num_old_colors = G_N_ELEMENTS (old_colors);
 
 /*** file scope functions ************************************************************************/
+
+static int
+old_color_comparator (const void *p1, const void *p2)
+{
+    const mc_skin_colors_old_t *m1 = (const mc_skin_colors_old_t *) p1;
+    const mc_skin_colors_old_t *m2 = (const mc_skin_colors_old_t *) p2;
+
+    return strcmp (m1->old_color, m2->old_color);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 mc_skin_colors_old_transform (const char *old_color, const char **group, const char **key)
 {
-    int lc_index;
+    const mc_skin_colors_old_t oc = { old_color, NULL, NULL };
+    mc_skin_colors_old_t *res;
 
-    if (old_color != NULL)
-        for (lc_index = 0; old_colors[lc_index].old_color; lc_index++)
-            if (strcasecmp (old_color, old_colors[lc_index].old_color) == 0)
-            {
-                if (group != NULL)
-                    *group = old_colors[lc_index].group;
-                if (key != NULL)
-                    *key = old_colors[lc_index].key;
-                return TRUE;
-            }
-    return FALSE;
+    if (old_color == NULL)
+        return FALSE;
+
+    res = (mc_skin_colors_old_t *) bsearch (&oc, old_colors, num_old_colors,
+                                            sizeof (old_colors[0]), old_color_comparator);
+
+    if (res == NULL)
+        return FALSE;
+
+    if (group != NULL)
+        *group = res->group;
+    if (key != NULL)
+        *key = res->key;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
