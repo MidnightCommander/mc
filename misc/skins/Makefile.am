@@ -6,7 +6,9 @@ skin_DATA = \
 	double-lines.ini \
 	featured.ini \
 	gotar.ini \
-	nicedark.ini
+	nicedark.ini \
+	sand256.ini
+
 
 EXTRA_DIST = \
     $(skin_DATA)
