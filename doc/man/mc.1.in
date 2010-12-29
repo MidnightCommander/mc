@@ -3431,6 +3431,10 @@ helplink, helpslink, helptitle.  Viewer color are: viewbold, viewunderline, view
 Editor colors are: editnormal, editbold, editmarked, editwhitespace, editlinestate.
 Popup menu colors are: pmenunormal, pmenusel, pmenutitle.
 .PP
+.I header
+determines the color of panel header, the line that contains column titles
+and sort mode indicator.
+.PP
 .I input
 determines the color of input lines used in query dialogs.
 .PP

@@ -58,6 +58,7 @@ static const mc_skin_colors_old_t old_colors[] = {
     {"markselect", "core", "markselect"},
     {"disabled", "core", "disabled"},
     {"reverse", "core", "reverse"},
+    {"header", "core", "header"},
     {"dnormal", "dialog", "_default_"},
     {"dfocus", "dialog", "dfocus"},
     {"dhotnormal", "dialog", "dhotnormal"},

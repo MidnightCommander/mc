@@ -325,7 +325,7 @@ mc_args_new_color_group (void)
                                                    _("--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n\n"
                                                      "{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
                                                      "\n Keywords:\n"
-                                                     "   Global:       errors, disabled, reverse, gauge, viewunderline\n"
+                                                     "   Global:       errors, disabled, reverse, gauge, header\n"
                                                      "                 input, inputmark, inputunchanged, commandlinemark\n"
                                                      "                 bbarhotkey, bbarbutton, statusbar\n"
                                                      "   File display: normal, selected, marked, markselect\n"
