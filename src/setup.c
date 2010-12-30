@@ -390,8 +390,6 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
 {
     /*
        TODO: IMHO, in future this function must be placed into mc_config module.
-       Also, need to rename stupid mc_home and mc_home_alt to mc_sysconfdir and mc_datadir;
-       home_mc => mc_user_homedir
      */
     char *lc_basename, *ret;
 
@@ -419,9 +417,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (ret);
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_home, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_sysconfig_dir, subdir, lc_basename, NULL);
     else
-        ret = g_build_filename (mc_home, lc_basename, NULL);
+        ret = g_build_filename (mc_sysconfig_dir, lc_basename, NULL);
 
     if (exist_file (ret))
     {
@@ -431,9 +429,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (ret);
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_home_alt, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_share_data_dir, subdir, lc_basename, NULL);
     else
-        ret = g_build_filename (mc_home_alt, lc_basename, NULL);
+        ret = g_build_filename (mc_share_data_dir, lc_basename, NULL);
 
     g_free (lc_basename);
 
@@ -678,13 +676,13 @@ load_setup_get_keymap_profile_config (void)
     mc_config_t *keymap_config = NULL;
     char *fname, *fname2;
 
-    /* 1) /usr/share/mc (mc_home_alt) */
-    fname = g_build_filename (mc_home_alt, GLOBAL_KEYMAP_FILE, NULL);
+    /* 1) /usr/share/mc (mc_share_data_dir) */
+    fname = g_build_filename (mc_share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
-    /* 2) /etc/mc (mc_home) */
-    fname = g_build_filename (mc_home, GLOBAL_KEYMAP_FILE, NULL);
+    /* 2) /etc/mc (mc_sysconfig_dir) */
+    fname = g_build_filename (mc_sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
@@ -814,7 +812,7 @@ setup_init (void)
     profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
     if (!exist_file (profile))
     {
-        inifile = concat_dir_and_file (mc_home, "mc.ini");
+        inifile = concat_dir_and_file (mc_sysconfig_dir, "mc.ini");
         if (exist_file (inifile))
         {
             g_free (profile);
@@ -823,7 +821,7 @@ setup_init (void)
         else
         {
             g_free (inifile);
-            inifile = concat_dir_and_file (mc_home_alt, "mc.ini");
+            inifile = concat_dir_and_file (mc_share_data_dir, "mc.ini");
             if (exist_file (inifile))
             {
                 g_free (profile);
@@ -857,11 +855,11 @@ load_setup (void)
 
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = g_build_filename (mc_home, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
+    global_profile_name = g_build_filename (mc_sysconfig_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     if (!exist_file (global_profile_name))
     {
         g_free (global_profile_name);
-        global_profile_name = g_build_filename (mc_home_alt, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
+        global_profile_name = g_build_filename (mc_share_data_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
     panels_profile_name = g_build_filename (mc_config_get_cache_path (), MC_PANELS_FILE, NULL);

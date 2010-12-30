@@ -200,12 +200,12 @@ load_codepages_list (void)
     char *fname;
 
     /* 1: try load /usr/share/mc/mc.charsets */
-    fname = g_build_filename (mc_home_alt, CHARSETS_LIST, (char *) NULL);
+    fname = g_build_filename (mc_share_data_dir, CHARSETS_LIST, (char *) NULL);
     load_codepages_list_from_file (&codepages, fname);
     g_free (fname);
 
     /* 2: try load /etc/mc/mc.charsets */
-    fname = g_build_filename (mc_home, CHARSETS_LIST, (char *) NULL);
+    fname = g_build_filename (mc_sysconfig_dir, CHARSETS_LIST, (char *) NULL);
     load_codepages_list_from_file (&codepages, fname);
     g_free (fname);
 

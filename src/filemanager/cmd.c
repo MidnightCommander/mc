@@ -1020,7 +1020,7 @@ ext_cmd (void)
                             _("Which extension file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_home, MC_LIB_EXT);
+    extdir = concat_dir_and_file (mc_sysconfig_dir, MC_LIB_EXT);
 
     if (dir == 0)
     {
@@ -1034,7 +1034,7 @@ ext_cmd (void)
         if (!exist_file (extdir))
         {
             g_free (extdir);
-            extdir = concat_dir_and_file (mc_home_alt, MC_LIB_EXT);
+            extdir = concat_dir_and_file (mc_share_data_dir, MC_LIB_EXT);
         }
         do_edit (extdir);
     }
@@ -1056,12 +1056,12 @@ edit_mc_menu_cmd (void)
                         _("Which menu file do you want to edit?"),
                         D_NORMAL, geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+    menufile = concat_dir_and_file (mc_sysconfig_dir, MC_GLOBAL_MENU);
 
     if (!exist_file (menufile))
     {
         g_free (menufile);
-        menufile = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
+        menufile = concat_dir_and_file (mc_share_data_dir, MC_GLOBAL_MENU);
     }
 
     switch (dir)
@@ -1078,11 +1078,11 @@ edit_mc_menu_cmd (void)
         break;
 
     case 2:
-        buffer = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+        buffer = concat_dir_and_file (mc_sysconfig_dir, MC_GLOBAL_MENU);
         if (!exist_file (buffer))
         {
             g_free (buffer);
-            buffer = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
+            buffer = concat_dir_and_file (mc_share_data_dir, MC_GLOBAL_MENU);
         }
         break;
 
@@ -1114,7 +1114,7 @@ edit_fhl_cmd (void)
                             _("Which highlighting file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
+    fhlfile = concat_dir_and_file (mc_sysconfig_dir, MC_FHL_INI_FILE);
 
     if (dir == 0)
     {
@@ -1128,7 +1128,7 @@ edit_fhl_cmd (void)
         if (!exist_file (fhlfile))
         {
             g_free (fhlfile);
-            fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
+            fhlfile = concat_dir_and_file (mc_sysconfig_dir, MC_FHL_INI_FILE);
         }
         do_edit (fhlfile);
     }
@@ -1365,7 +1365,7 @@ get_random_hint (int force)
         return g_strdup ("");
     last_sec = tv.tv_sec;
 
-    data = load_mc_home_file (mc_home_alt, MC_HINT, NULL);
+    data = load_mc_home_file (mc_share_data_dir, MC_HINT, NULL);
     if (data == NULL)
         return NULL;
 

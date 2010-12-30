@@ -667,7 +667,7 @@ ftpfs_load_no_proxy_list (void)
     if (mc_file)
         return;
 
-    mc_file = concat_dir_and_file (mc_home, "mc.no_proxy");
+    mc_file = concat_dir_and_file (mc_sysconfig_dir, "mc.no_proxy");
     if (exist_file (mc_file))
     {
         npf = fopen (mc_file, "r");

@@ -887,7 +887,7 @@ user_menu_cmd (struct WEdit *edit_widget)
             {
                 g_free (menu);
                 menu = concat_dir_and_file
-                    (mc_home_alt, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                    (mc_share_data_dir, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
             }
         }
     }

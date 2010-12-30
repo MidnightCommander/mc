@@ -60,7 +60,7 @@
 #include "src/filemanager/layout.h"     /* clr_scr() */
 
 #include "src/history.h"
-#include "src/main.h"           /* mc_home, midnight_shutdown */
+#include "src/main.h"           /* mc_sysconfig_dir, midnight_shutdown */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
 #include "src/selcodepage.h"
@@ -635,11 +635,11 @@ edit_load_syntax_file (WEdit * edit)
                             _("&User"), _("&System Wide"));
     }
 
-    extdir = g_build_filename (mc_home, "syntax", "Syntax", (char *) NULL);
+    extdir = g_build_filename (mc_sysconfig_dir, "syntax", "Syntax", (char *) NULL);
     if (!exist_file (extdir))
     {
         g_free (extdir);
-        extdir = g_build_filename (mc_home_alt, "syntax", "Syntax", (char *) NULL);
+        extdir = g_build_filename (mc_share_data_dir, "syntax", "Syntax", (char *) NULL);
     }
 
     if (dir == 0)
@@ -670,12 +670,12 @@ edit_load_menu_file (WEdit * edit)
                         _("Which menu file do you want to edit?"), D_NORMAL,
                         geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile = concat_dir_and_file (mc_home, EDIT_GLOBAL_MENU);
+    menufile = concat_dir_and_file (mc_sysconfig_dir, EDIT_GLOBAL_MENU);
 
     if (!exist_file (menufile))
     {
         g_free (menufile);
-        menufile = concat_dir_and_file (mc_home_alt, EDIT_GLOBAL_MENU);
+        menufile = concat_dir_and_file (mc_share_data_dir, EDIT_GLOBAL_MENU);
     }
 
     switch (dir)
@@ -692,11 +692,11 @@ edit_load_menu_file (WEdit * edit)
         break;
 
     case 2:
-        buffer = concat_dir_and_file (mc_home, EDIT_GLOBAL_MENU);
+        buffer = concat_dir_and_file (mc_sysconfig_dir, EDIT_GLOBAL_MENU);
         if (!exist_file (buffer))
         {
             g_free (buffer);
-            buffer = concat_dir_and_file (mc_home_alt, EDIT_GLOBAL_MENU);
+            buffer = concat_dir_and_file (mc_share_data_dir, EDIT_GLOBAL_MENU);
         }
         break;
 
@@ -2750,7 +2750,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
     gchar *o, *h, *b, *tmp;
     char *quoted_name = NULL;
 
-    o = g_strconcat (mc_home, shell_cmd, (char *) NULL);        /* original source script */
+    o = g_strconcat (mc_sysconfig_dir, shell_cmd, (char *) NULL);        /* original source script */
     h = g_strconcat (mc_config_get_data_path (), PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);     /* home script */
     b = concat_dir_and_file (mc_config_get_cache_path (), EDIT_BLOCK_FILE);     /* block file */
 
@@ -2771,7 +2771,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
         script_src = fopen (o, "r");
         if (script_src == NULL)
         {
-            o = g_strconcat (mc_home_alt, shell_cmd, (char *) NULL);
+            o = g_strconcat (mc_share_data_dir, shell_cmd, (char *) NULL);
             script_src = fopen (o, "r");
             if (script_src == NULL)
             {

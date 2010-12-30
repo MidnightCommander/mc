@@ -45,7 +45,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"         /* D_ERROR, D_NORMAL */
 
-#include "src/main.h"           /* mc_home */
+#include "src/main.h"           /* mc_sysconfig_dir */
 #include "src/execute.h"        /* EXECUTE_AS_SHELL */
 
 #include "vfs-impl.h"
@@ -415,7 +415,7 @@ sfs_init (struct vfs_class *me)
 
     (void) me;
 
-    mc_sfsini = g_build_filename (mc_home, "sfs.ini", (char *) NULL);
+    mc_sfsini = g_build_filename (mc_sysconfig_dir, "sfs.ini", (char *) NULL);
     cfg = fopen (mc_sfsini, "r");
 
     if (cfg == NULL)

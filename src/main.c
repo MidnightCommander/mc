@@ -119,10 +119,13 @@ char *shell = NULL;
 /* The prompt */
 const char *mc_prompt = NULL;
 
-/* mc_home: The home of MC - /etc/mc or defined by MC_DATADIR */
-char *mc_home = NULL;
-/* mc_home_alt: Alternative home of MC - deprecated /usr/share/mc */
-char *mc_home_alt = NULL;
+/* mc_sysconfig_dir: Area for default settings from maintainers of distributuves
+  default is /etc/mc or may be defined by MC_DATADIR
+  */
+char *mc_sysconfig_dir = NULL;
+
+/* mc_share_data_dir: Area for default settings from developers */
+char *mc_share_data_dir = NULL;
 
 /* Set to TRUE to suppress printing the last directory */
 int print_last_revert = FALSE;
@@ -196,13 +199,13 @@ OS_Setup (void)
     mc_libdir = getenv ("MC_DATADIR");
     if (mc_libdir != NULL)
     {
-        mc_home = g_strdup (mc_libdir);
-        mc_home_alt = g_strdup (SYSCONFDIR);
+        mc_sysconfig_dir = g_strdup (mc_libdir);
+        mc_share_data_dir = g_strdup (SYSCONFDIR);
     }
     else
     {
-        mc_home = g_strdup (SYSCONFDIR);
-        mc_home_alt = g_strdup (DATADIR);
+        mc_sysconfig_dir = g_strdup (SYSCONFDIR);
+        mc_share_data_dir = g_strdup (DATADIR);
     }
 
 }
@@ -578,8 +581,8 @@ main (int argc, char *argv[])
     }
     g_free (last_wd_string);
 
-    g_free (mc_home_alt);
-    g_free (mc_home);
+    g_free (mc_share_data_dir);
+    g_free (mc_sysconfig_dir);
     g_free (shell);
 
     done_key ();
