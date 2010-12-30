@@ -160,7 +160,7 @@ remove_callback (tree_entry * entry, void *data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Save the ~/.mc/Tree file */
+/** Save the ${XDG_CACHE_HOME}/mc/Tree file */
 
 static void
 save_tree (WTree * tree)

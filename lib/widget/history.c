@@ -209,7 +209,7 @@ history_get (const char *input_name)
 /*
    This saves the history of an input line from the widget. It is called
    with the widgets history name. It stores histories in the file
-   ~/.mc/history in using the profile code.
+   ${XDG_CACHE_HOME}/mc/history in using the profile code.
  */
 void
 history_put (const char *input_name, GList * h)

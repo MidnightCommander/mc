@@ -263,11 +263,11 @@ f2 Keyboard
    enhanced keys.  If you want to use ESC to cancel things you have to
    press it twice i.e. ESC-ESC.  If you find this cumbersome you can
    generally use F10 to cancel.  Alternatively turn on the old_esc_mode
-   setting in the ~/.mc/ini file.  The old_esc_mode setting makes ESC
-   work as a prefix only if another key is pressed within 0.5 seconds.
-   After 0.5 seconds the ESC key cancels.  There is no way to make ESC
-   cancel immediately (if we want to be able to use arrows keys and
-   function keys).
+   setting in the ~/.config/mc/ini file.  The
+   old_esc_mode setting makes ESC work as a prefix only if another key
+   is pressed within 0.5 seconds. After 0.5 seconds the ESC key cancels.
+   There is no way to make ESC cancel immediately (if we want to be able
+   to use arrows keys and function keys).
 
 2.5 How can I add the plus sign (+) on the command line?
 

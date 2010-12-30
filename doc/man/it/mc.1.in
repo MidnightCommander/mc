@@ -207,7 +207,7 @@ albero directory\&.
 L'auto ripetizione predefinita per il mouse è di 400 millisecondi. Questo
 valore può essere cambiato modificando il file
 .\"LINK2"
-\&~/.mc/ini
+\&~/.config/mc/ini
 .\"Save Setup"
 e cambiando il parametro
 .IR mouse_repeat_rate .
@@ -1239,7 +1239,7 @@ Le directory che devono essere saltate devono essere impostate nella variabile
 .B ignore_dirs 
 nella sezione
 .B FindFile
-del file ~/.mc/ini.
+del file ~/.config/mc/ini.
 .PP
 Le directory devono essere separate da una virgola, come nell'esempio:
 .PP
@@ -1304,7 +1304,7 @@ comando cd interno\&.
 .\"NODE "    Extension File Edit"
 .SH "    Modifica file estensioni"
 Questo comando invocherà l'editor sul file 
-.IR ~/.mc/bindings . 
+.IR ~/.local/share/mc/bindings . 
 Il fomato di questo file è il seguente (il formato è cambiato dalla 
 versione 3.0):
 .PP
@@ -1371,7 +1371,7 @@ personalizzati dall'utente. Quando si accede al menu utente, viene
 utilizzato, se esiste, il file .mc.menu dalla directory corrente,
 ma solo se è di proprietà dell'utente o di root e se non è scrivibile
 a tutti. Se tale file non viene trovato, mc alla stessa maniera 
-prova con ~/.mc/menu altrimenti usa il menu di sistema
+prova con ~/.local/share/mc/menu altrimenti usa il menu di sistema
 @prefix@/share/mc/mc.menu.
 .PP
 Il formato del file menu è molto semplice. Le righe che cominciano
@@ -1656,7 +1656,7 @@ espressioni regolari sono quelle descritte in ed(1).
 .I Autosalva configurazione.
 Se quest'opzione è abilitata, quando si esce dal Midnight Commander le
 opzioni configurabili del Midnight Commander vengono salvate nel file
-~/.mc/ini.
+~/.config/mc/ini.
 .PP
 .I Menu automatici.
 Se quest'opzione è abilitata, il menu utente sarà invocato alla partenza.
@@ -1807,7 +1807,7 @@ premere Esc una volta ed aspettare.
 .PP
 Quando si è finito con tutti i tasti, è possibile salvarli. Le definizioni
 dei tasti che si è ridefinito saranno scritte nella sezione [terminal:TERM]
-del vostro ~/.mc/ini file (dove TERM è il nome del terminale corrente). Le
+del vostro ~/.config/mc/ini file (dove TERM è il nome del terminale corrente). Le
 definizioni dei tasti che già funzionavano correttamente non vengono salvate.
 .\"NODE "    Virtual FS"
 .SH "    FS virtuale "
@@ -1904,14 +1904,14 @@ funzionare con alcuni firewall.
 .\"NODE "    Save Setup"
 .SH "    Salva configurazione"
 Alla partenza il Midnight Commander prova a caricare le informazioni di
-inizializzazione dal file ~/.mc/ini. Se questo file non esiste, 
+inizializzazione dal file ~/.config/mc/ini. Se questo file non esiste, 
 caricherà le informazioni dal file di configurazione di sistema 
 posizionato in @prefix@/share/mc/mc.ini. Se il file di configurazione di 
 sistema non esiste, MC userà le impostazioni predefinite.
 .PP
 Il comando
 .I salva configurazione
-crea il file ~/.mc/ini salvando le impostazioni correnti 
+crea il file ~/.config/mc/ini salvando le impostazioni correnti 
 dei menu
 .\"LINK2"
 sinistra, destra
@@ -2113,11 +2113,11 @@ esca dal Midnight Commander.
 Se si sta usando
 .B bash
 si può specificare comandi alla partenza della subshell nel file
-~/.mc/bashrc e mappature speciali della tastiera nel file
-~/.mc/inputrc.
+~/.local/share/mc/bashrc e mappature speciali della tastiera nel file
+~/.local/share/mc/inputrc.
 .B tcsh 
 gli utenti possono specificare comandi alla partenza nel file
-~/.mc/tcshrc.
+~/.local/share/mc/tcshrc.
 .PP
 Quando il codice della subshell viene utilizzato, si può sospendere
 l'applicazione in ogni momento con la sequenza C\-o e saltare nuovamente
@@ -2495,13 +2495,13 @@ discesa appropriato. Gli altri tasti sono: maiusc + tasti freccia
 produce la selezione del testo.
 .B Ctrl\-Ins
 copia nel file 
-.B cooledit.clip
+.B mcedit.clip
 e
 .B Shift\-Ins
-incolla da cooledit.clip.
+incolla da mcedit.clip.
 .B Shift\-Del 
 taglia in 
-.BR cooledit.clip , 
+.BR mcedit.clip , 
 e
 .B Ctrl\-Del
 cancella il testo selezionato. 
@@ -2520,7 +2520,7 @@ e poi il tasto assegnato. La macro viene eseguita anche se si
 preme il tasto Meta, Ctrl, o Esc e il tasto assegnato, basta che il tasto
 non sia già assegnato a qualche altra funzione. Una volta definiti, i
 macro comandi finiscono nel file
-.B .mc/cedit/cooledit.macros
+.B ~/.local/share/mc/mcedit/mcedit.macros
 nella propria directory home. E' possibile cancellare una macro cancellando
 la riga appropriata nel suddetto file.
 .PP
@@ -2532,7 +2532,7 @@ o
 o altro). Questo comportamento viene controllato dal file 
 .B @prefix@/share/mc/edit.indent.rc
 che viene copiato nel 
-.B .mc/cedit/edit.indent.rc
+.B ~/.local/share/mc/mcedit/edit.indent.rc
 nella propria directory home la prima volta che lo si usa.
 .PP
 L'editor visualizza snche caratteri non\-americani (160+). Quando si modifica
@@ -2910,13 +2910,13 @@ Molte delle impostazioni del Midnight Commander possono essere cambiate
 dai menu. Comunque, c'è un piccolo numero di impostazioni che possono
 essere cambiate solo agendo sul file di configurazione.
 .PP
-Queste sono le variabili che possono essere impostate nel file ~/.mc/ini:
+Queste sono le variabili che possono essere impostate nel file ~/.config/mc/ini:
 .TP
 .I clear_before_exec
 Il valore predefinito del Midnight Commander è di cancellare lo schermo
 prima dell'esecuzione di un comando. Se si preferisce vedere il risultato
 di un comando in fondo allo schermo, si modifichi la copia locale del file
-~/.mc/ini e si cambi il valore del campo clear_before_exec a 0.
+~/.config/mc/ini e si cambi il valore del campo clear_before_exec a 0.
 .TP
 .I confirm_view_dir
 Se si preme F3 su di una directory, normalmente MC entra nella directory.
@@ -3005,7 +3005,7 @@ Il Midnight Commander fornisce una maniera per correggere il database
 dei terminali si sistema senza richiedere i privilegi di 
 amministratore (root). Il Midnight Commander ricerca nel file di
 inizializzazione di sistema (il file mc.lib collocato nella directory
-di libreria del Midnight Commander) e nel file ~/.mc/ini la sezione
+di libreria del Midnight Commander) e nel file ~/.config/mc/ini la sezione
 "terminal:nome\-del\-terminale\-in\-uso" e poi la sezione "terminal:general",
 ogni riga della sezione contiene il simbolo chiave che si vuol definire,
 seguito da un segno di uguale e la definizione per quel tasto.
@@ -3058,7 +3058,7 @@ Il file di aiuto per il programma.
 .IP
 Il file delle estensioni di sistema predefinito.
 .PP
-.I ~/.mc/bindings
+.I ~/.local/share/mc/bindings
 .IP
 Le estensioni dell'utente, la configurazione del visualizzatore e
 dell'editor di file. Se presenti, questi file si sovrappongono ai file di 
@@ -3067,19 +3067,19 @@ sistema.
 .I @prefix@/share/mc/mc.ini
 .IP
 La configurazione di sistema predefinita per il Midnight Commander, usata solo
-se l'utente non possiede il proprio file ~/.mc/ini.
+se l'utente non possiede il proprio file ~/.config/mc/ini.
 .PP
 .I @prefix@/share/mc/mc.lib
 .IP
 Le impostazioni globali per il Midnight Commander. La modifica di questo
-file influisce su tutti gli utenti, che abbiano o no il file ~/.mc/ini .
+file influisce su tutti gli utenti, che abbiano o no il file ~/.config/mc/ini .
 Attualmente vengono caricate solo le
 .\"LINK2"
 impostazioni del terminale
 .\"Terminal databases"
 da mc.lib.
 .PP
-.I ~/.mc/ini
+.I ~/.config/mc/ini
 .IP
 La configurazione dell'utente. Se questo file è presente, la configurazione
 viene caricata da qui invece che dal file di sistema.
@@ -3092,12 +3092,12 @@ Questo file contiene i suggerimenti (dritte) mostrate dal programma.
 .IP
 Questo file contiene il menu di sistema per le applicazioni.
 .PP
-.I ~/.mc/menu
+.I ~/.local/share/mc/menu
 .IP
 Il menu utente per le applicazioni. Se presente viene usato al posto
 del menu delle applicazioni di sistema.
 .PP
-.I ~/.mc/Tree
+.I ~/.cache/mc/Tree
 .IP
 L'elenco di directory per l'albero directory e per la vista ad albero.
 .PP

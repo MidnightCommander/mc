@@ -97,7 +97,7 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
     }
     g_free (file_name);
 
-    /* ~/.mc/skins/ */
+    /* ${XDG_DATA_HOME}/mc/skins/ */
     if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_config_get_data_path ()))
         return TRUE;
 

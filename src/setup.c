@@ -78,7 +78,7 @@
 
 /*** global variables ****************************************************************************/
 
-char *profile_name;             /* .mc/ini */
+char *profile_name;             /* ${XDG_CONFIG_HOME}/mc/ini */
 char *global_profile_name;      /* mc.lib */
 
 /* Only used at program boot */
@@ -190,7 +190,7 @@ int file_op_compute_totals = 1;
 
 /*** file scope variables ************************************************************************/
 
-static char *panels_profile_name = NULL;        /* .mc/panels.ini */
+static char *panels_profile_name = NULL;        /* ${XDG_CACHE_HOME}/mc/panels.ini */
 
 /* *INDENT-OFF* */
 static const struct
@@ -686,7 +686,7 @@ load_setup_get_keymap_profile_config (void)
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
-    /* 3) ~/.mc (home_dir?) */
+    /* 3) ${XDG_CONFIG_HOME}/mc */
     fname = g_build_filename (mc_config_get_path (), GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
@@ -854,7 +854,7 @@ load_setup (void)
     profile = setup_init ();
 
     /* mc.lib is common for all users, but has priority lower than
-       ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
+       ${XDG_CONFIG_HOME}/mc/ini.  FIXME: it's only used for keys and treestore now */
     global_profile_name = g_build_filename (mc_sysconfig_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     if (!exist_file (global_profile_name))
     {
@@ -1120,7 +1120,7 @@ void
 load_key_defs (void)
 {
     /*
-     * Load keys from mc.lib before ~/.mc/ini, so that the user
+     * Load keys from mc.lib before ${XDG_CONFIG_HOME}/mc/ini, so that the user
      * definitions override global settings.
      */
     mc_config_t *mc_global_config;
@@ -1161,7 +1161,7 @@ void
 load_keymap_defs (void)
 {
     /*
-     * Load keymap from GLOBAL_KEYMAP_FILE before ~/.mc/keymap, so that the user
+     * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_DATA_HOME}/mc/keymap, so that the user
      * definitions override global settings.
      */
     mc_config_t *mc_global_keymap;

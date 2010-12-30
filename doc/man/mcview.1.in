@@ -68,14 +68,14 @@ The help file for the program.
 .I @prefix@/share/mc/mc.ini
 .IP
 The default system\-wide setup for GNU Midnight Commander, used only if
-the user's own ~/.mc/ini file is missing.
+the user's own ~/.config/mc/ini file is missing.
 .PP
 .I @prefix@/share/mc/mc.lib
 .IP
 Global settings for the Midnight Commander.  Settings in this file
-affect all users, whether they have ~/.mc/ini or not.
+affect all users, whether they have ~/.config/mc/ini or not.
 .PP
-.I $HOME/.mc/ini
+.I ~/.config/mc/ini
 .IP
 User's own setup.  If this file is present, the setup is loaded from
 here instead of the system\-wide startup file.
