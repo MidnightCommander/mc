@@ -90,6 +90,7 @@ int option_edit_top_extreme = 0;
 int option_edit_bottom_extreme = 0;
 int enable_show_tabs_tws = 1;
 int option_check_nl_at_eof = 0;
+int option_group_undo = 0;
 int show_right_margin = 0;
 
 const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
@@ -641,6 +642,26 @@ edit_pop_redo_action (WEdit * edit)
     return c;
 }
 
+static long
+get_prev_undo_action (WEdit * edit)
+{
+    long c;
+    unsigned long sp = edit->undo_stack_pointer;
+
+    if (sp == edit->undo_stack_bottom)
+        return STACK_BOTTOM;
+
+    sp = (sp - 1) & edit->undo_stack_size_mask;
+    c = edit->undo_stack[sp];
+    if (c >= 0)
+        return c;
+
+    if (sp == edit->undo_stack_bottom)
+        return STACK_BOTTOM;
+
+    c = edit->undo_stack[(sp - 1) & edit->undo_stack_size_mask];
+    return c;
+}
 /* --------------------------------------------------------------------------------------------- */
 /** is called whenever a modification is made by one of the four routines below */
 
@@ -1251,9 +1272,11 @@ edit_do_undo (WEdit * edit)
             edit_cursor_move (edit, -1);
             break;
         case BACKSPACE:
+        case BACKSPACE_BR:
             edit_backspace (edit, 1);
             break;
         case DELCHAR:
+        case DELCHAR_BR:
             edit_delete (edit, 1);
             break;
         case COLUMN_ON:
@@ -1368,6 +1391,24 @@ edit_do_redo (WEdit * edit)
     edit_update_curs_row (edit);
 
   done_redo:;
+}
+
+static void
+edit_group_undo (WEdit * edit)
+{
+    long ac = KEY_PRESS;
+    long cur_ac = KEY_PRESS;
+    while (ac != STACK_BOTTOM && ac == cur_ac)
+    {
+        cur_ac = get_prev_undo_action (edit);
+        edit_do_undo (edit);
+        ac = get_prev_undo_action (edit);
+        /* exit from cycle if option_group_undo is not set,
+         * and make single UNDO operation
+         */
+        if (!option_group_undo)
+            ac = STACK_BOTTOM;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2559,8 +2600,11 @@ edit_insert (WEdit * edit, int c)
     }
 
     /* save the reverse command onto the undo stack */
-    edit_push_undo_action (edit, BACKSPACE);
-
+    /* ordinary char and not space */
+    if (c > 32)
+        edit_push_undo_action (edit, BACKSPACE);
+    else
+        edit_push_undo_action (edit, BACKSPACE_BR);
     /* update markers */
     edit->mark1 += (edit->mark1 > edit->curs1);
     edit->mark2 += (edit->mark2 > edit->curs1);
@@ -2604,7 +2648,11 @@ edit_insert_ahead (WEdit * edit, int c)
         edit->total_lines++;
         edit->force |= REDRAW_AFTER_CURSOR;
     }
-    edit_push_undo_action (edit, DELCHAR);
+    /* ordinary char and not space */
+    if (c > 32)
+        edit_push_undo_action (edit, DELCHAR);
+    else
+        edit_push_undo_action (edit, DELCHAR_BR);
 
     edit->mark1 += (edit->mark1 >= edit->curs1);
     edit->mark2 += (edit->mark2 >= edit->curs1);
@@ -3326,7 +3374,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     if (command == CK_Undo)
     {
         edit->redo_stack_reset = 0;
-        edit_do_undo (edit);
+        edit_group_undo (edit);
         edit->found_len = 0;
         edit->prev_col = edit_get_col (edit);
         edit->search_start = edit->curs1;
