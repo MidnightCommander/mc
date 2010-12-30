@@ -794,6 +794,7 @@ check_is_cd (const char *text, int lc_start, input_complete_t flags)
     char *p, *q;
 
     SHOW_C_CTX ("check_is_cd");
+
     if ((flags & INPUT_COMPLETE_CD) == 0)
         return FALSE;
 
@@ -812,7 +813,7 @@ check_is_cd (const char *text, int lc_start, input_complete_t flags)
 static char **
 try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
 {
-    int in_command_position = 0;
+    size_t in_command_position = 0;
     char *word;
     char **matches = NULL;
     char *p = NULL, *q = NULL, *r = NULL;
@@ -835,11 +836,15 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
         if (*lc_start == 0)
             ti = text;
         else
+        {
             ti = str_get_prev_char (&text[*lc_start]);
-        while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
-            str_prev_char (&ti);
+            while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
+                str_prev_char (&ti);
+        }
 
-        if (strchr (command_separator_chars, ti[0]) != NULL)
+        if (ti == text)
+            in_command_position++;
+        else if (strchr (command_separator_chars, ti[0]) != NULL)
         {
             int this_char, prev_char;
 
@@ -915,7 +920,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
     /* And finally if this word is in a command position, then
        complete over possible command names, including aliases, functions,
        and command names. */
-    if (!matches && in_command_position)
+    if (!matches && in_command_position != 0)
     {
         SHOW_C_CTX ("try_complete:cmd_subst");
         matches =
