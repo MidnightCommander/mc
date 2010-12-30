@@ -287,6 +287,7 @@ const global_keymap_t default_editor_keymap[] = {
     {XCTRL ('o'), CK_Shell, "C-o"},
     {XCTRL ('s'), CK_Toggle_Syntax, "C-s"},
     {XCTRL ('u'), CK_Undo, "C-u"},
+    {ALT ('r'), CK_Redo, "M-r"},
     {ALT ('e'), CK_SelectCodepage, "M-e"},
     {XCTRL ('q'), CK_Insert_Literal, "C-q"},
     {XCTRL ('r'), CK_Begin_End_Macro, "C-r"},
