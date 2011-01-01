@@ -320,6 +320,7 @@ static const struct
     { "editor_simple_statusbar", &simple_statusbar },
     { "editor_check_new_line", &option_check_nl_at_eof },
     { "editor_show_right_margin", &show_right_margin },
+    { "editor_group_undo", &option_group_undo },
 #endif /* USE_INTERNAL_EDIT */
     { "nice_rotating_dash", &nice_rotating_dash },
     { "horizontal_split",   &horizontal_split },

@@ -62,6 +62,7 @@ extern int option_line_state;
 extern int option_save_mode;
 extern int option_save_position;
 extern int option_syntax_highlighting;
+extern int option_group_undo;
 extern char *option_backup_ext;
 
 extern int edit_confirm_save;

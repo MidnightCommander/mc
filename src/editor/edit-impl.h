@@ -107,6 +107,8 @@
 #define CURS_RIGHT_LOTS 607
 #define COLUMN_ON       608
 #define COLUMN_OFF      609
+#define DELCHAR_BR      610
+#define BACKSPACE_BR    611
 #define MARK_1          1000
 #define MARK_2          700000000
 #define KEY_PRESS       1400000000
