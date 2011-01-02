@@ -2008,6 +2008,12 @@ The selection of directories is untouched. If off, the reverse selection
 is applied to files as well to directories: all unselected items become
 selected, and vice versa.
 .PP
+.I Simple swap.
+If both panels contain file listing, simple swap means that panels exchange
+its screen positions: left panel become right one, and vice versa. If this
+option is unchecked, file listing panels exchange its content keeping listing
+format and sort options. Unchecked by default.
+.PP
 .I Auto save panels setup.
 If this option is enabled, when you exit the Midnight Commander the
 current settings of panels are saved in the ~/.mc/panels.ini file.

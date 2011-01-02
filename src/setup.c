@@ -367,11 +367,8 @@ static const struct
 };
 /* *INDENT-ON* */
 
-static const char *panels_section = "Panels";
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
 
 /**
   Get name of config file.
@@ -1403,15 +1400,15 @@ panels_load_options (void)
         panels_options.qsearch_mode = (qsearch_mode_t) qmode;
 
     /* overwrite by new parameters */
-    if (mc_config_has_group (mc_main_config, panels_section))
+    if (mc_config_has_group (mc_main_config, CONFIG_PANELS_SECTION))
     {
         for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
             *panels_ini_options[i].opt_addr =
-                mc_config_get_bool (mc_main_config, panels_section,
+                mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
                                     panels_ini_options[i].opt_name,
                                     *panels_ini_options[i].opt_addr);
 
-        qmode = mc_config_get_int (mc_main_config, panels_section,
+        qmode = mc_config_get_int (mc_main_config, CONFIG_PANELS_SECTION,
                                    "quick_search_mode", (int) panels_options.qsearch_mode);
         if (qmode < 0)
             panels_options.qsearch_mode = QSEARCH_CASE_INSENSITIVE;
@@ -1433,10 +1430,10 @@ panels_save_options (void)
     size_t i;
 
     for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
-        mc_config_set_bool (mc_main_config, panels_section,
+        mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
                             panels_ini_options[i].opt_name, *panels_ini_options[i].opt_addr);
 
-    mc_config_set_int (mc_main_config, panels_section,
+    mc_config_set_int (mc_main_config, CONFIG_PANELS_SECTION,
                        "quick_search_mode", (int) panels_options.qsearch_mode);
 }
 
