@@ -4,6 +4,7 @@
 /*** typedefs(not structures) and defined constants ********************/
 
 #define CONFIG_APP_SECTION "Midnight-Commander"
+#define CONFIG_PANELS_SECTION "Panels"
 
 /*** enums *************************************************************/
 

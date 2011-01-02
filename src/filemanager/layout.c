@@ -1097,7 +1097,8 @@ swap_panels (void)
     panel1 = (WPanel *) panels[0].widget;
     panel2 = (WPanel *) panels[1].widget;
 
-    if (panels[0].type == view_listing && panels[1].type == view_listing)
+    if (panels[0].type == view_listing && panels[1].type == view_listing &&
+        !mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION, "simple_swap", FALSE))
     {
         WPanel panel;
 

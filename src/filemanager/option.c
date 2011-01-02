@@ -32,7 +32,7 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-#include "lib/mcconfig.h"       /* mc_config_save_file() */
+#include "lib/mcconfig.h"
 #include "lib/strutil.h"        /* str_term_width1() */
 #include "lib/tty/key.h"        /* old_esc_mode_timeout */
 #include "lib/widget.h"
@@ -283,6 +283,9 @@ panel_options_box (void)
     int dlg_width = 60;
     int dlg_height = 19;
 
+    int simple_swap = mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
+                                          "simple_swap", FALSE) ? 1 : 0;
+
     const char *qsearch_options[] = {
         N_("Case &insensitive"),
         N_("Case s&ensitive"),
@@ -317,8 +320,10 @@ panel_options_box (void)
         QUICK_GROUPBOX (dlg_width / 2, dlg_width, 2, dlg_height, dlg_width / 2 - 4, 5,
                         N_("Navigation")),
         /* main panel options */
-        QUICK_CHECKBOX (5, dlg_width, 10, dlg_height, N_("A&uto save panels setup"),
+        QUICK_CHECKBOX (5, dlg_width, 11, dlg_height, N_("A&uto save panels setup"),
                         &panels_options.auto_save_setup),
+        QUICK_CHECKBOX (5, dlg_width, 10, dlg_height, N_("Simple s&wap"),
+                        &simple_swap),
         QUICK_CHECKBOX (5, dlg_width, 9, dlg_height, N_("Re&verse files only"),
                         &panels_options.reverse_files_only),
         QUICK_CHECKBOX (5, dlg_width, 8, dlg_height, N_("Ma&rk moves down"),
@@ -338,7 +343,7 @@ panel_options_box (void)
         QUICK_END
     };
 
-    const size_t qw_num = sizeof (quick_widgets) / sizeof (quick_widgets[0]) - 1;
+    const size_t qw_num = G_N_ELEMENTS (quick_widgets) - 1;
 
     QuickDialog Quick_input = {
         dlg_width, dlg_height, -1, -1,
@@ -365,7 +370,7 @@ panel_options_box (void)
                 for (j = 0; j < QSEARCH_NUM; j++)
                     qsearch_options[j] = _(qsearch_options[j]);
             }
-            else if ((i == 4) || (i == 7) || (i == 11) || (i == 20))
+            else if ((i == 4) || (i == 7) || (i == 11) || (i == 21))
                 /* groupboxes */
                 quick_widgets[i].u.groupbox.title = _(quick_widgets[i].u.groupbox.title);
             else
@@ -387,7 +392,7 @@ panel_options_box (void)
 
     /* checkboxes within groupboxes */
     c_len = 0;
-    for (i = 5; i < 20; i++)
+    for (i = 5; i < 21; i++)
         if ((i != 7) && (i != 11))
             c_len = max (c_len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
 
@@ -398,7 +403,7 @@ panel_options_box (void)
     g_len = max (c_len + 2, str_term_width1 (quick_widgets[4].u.groupbox.title) + 4);
     g_len = max (g_len, str_term_width1 (quick_widgets[7].u.groupbox.title) + 4);
     g_len = max (g_len, str_term_width1 (quick_widgets[11].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[20].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[21].u.groupbox.title) + 4);
     /* dialog width */
     Quick_input.xlen = max (dlg_width, g_len * 2 + 9);
     Quick_input.xlen = max (Quick_input.xlen, b_len + 2);
@@ -413,7 +418,7 @@ panel_options_box (void)
     quick_widgets[4].u.groupbox.width =
         quick_widgets[7].u.groupbox.width =
         quick_widgets[11].u.groupbox.width = Quick_input.xlen / 2 - 3;
-    quick_widgets[20].u.groupbox.width = Quick_input.xlen / 2 - 4;
+    quick_widgets[21].u.groupbox.width = Quick_input.xlen / 2 - 4;
 
     /* right column */
     quick_widgets[4].relative_x =
@@ -431,6 +436,9 @@ panel_options_box (void)
 
     if ((qd_result == B_ENTER) || (qd_result == B_EXIT))
     {
+        mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
+                           "simple_swap", (gboolean) (simple_swap & C_BOOL));
+
         if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
         {
             message (D_NORMAL, _("Information"),
