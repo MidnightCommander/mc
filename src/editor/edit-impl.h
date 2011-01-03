@@ -289,7 +289,7 @@ int edit_save_block_cmd (WEdit * edit);
 int edit_insert_file_cmd (WEdit * edit);
 void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width);
 int edit_insert_column_of_text_from_file (WEdit * edit, int file);
-int edit_insert_file (WEdit * edit, const char *filename);
+long edit_insert_file (WEdit * edit, const char *filename);
 int edit_load_back_cmd (WEdit * edit);
 int edit_load_forward_cmd (WEdit * edit);
 void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block);
