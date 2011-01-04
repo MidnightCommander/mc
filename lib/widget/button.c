@@ -81,7 +81,7 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
         }
 
         if (b->text.hotkey != NULL &&
-            g_ascii_tolower ((gchar) b->text.hotkey[0]) == g_ascii_tolower ((gchar) parm))
+            g_ascii_tolower ((gchar) b->text.hotkey[0]) == parm)
         {
             button_callback (w, WIDGET_KEY, ' ');
             return MSG_HANDLED;
