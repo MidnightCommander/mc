@@ -974,10 +974,17 @@ correct_key_code (int code)
      * XCTRL macro should be used.  In some cases, we are interested,
      * e.g. to distinguish Ctrl-Enter from Enter.
      */
-    if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n')
+    if (c == '\b')
+    {
+        /* Special case for backspase ('\b' < 32) */
+        c = KEY_BACKSPACE;
+        mod &= ~KEY_M_CTRL;
+    }
+    else if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n')
     {
         mod |= KEY_M_CTRL;
     }
+
 #ifdef __QNXNTO__
     qmod = get_modifier ();
 
