@@ -437,7 +437,7 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         }
 
         /* check content regexp */
-        if ((content_regexp_cbox->state & C_BOOL)
+        if ((content_use_cbox->state & C_BOOL) && (content_regexp_cbox->state & C_BOOL)
             && (in_with->buffer[0] != '\0') && !find_check_regexp (in_with->buffer))
         {
             h->state = DLG_ACTIVE;      /* Don't stop the dialog */
