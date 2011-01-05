@@ -61,15 +61,13 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
     {
     case WIDGET_HOTKEY:
         {
-            int lp = g_ascii_tolower ((gchar) parm);
-
             for (i = 0; i < r->count; i++)
             {
                 if (r->texts[i].hotkey != NULL)
                 {
                     int c = g_ascii_tolower ((gchar) r->texts[i].hotkey[0]);
 
-                    if (c != lp)
+                    if (c != parm)
                         continue;
                     r->pos = i;
 

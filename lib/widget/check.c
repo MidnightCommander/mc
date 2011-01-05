@@ -61,7 +61,7 @@ check_callback (Widget * w, widget_msg_t msg, int parm)
     case WIDGET_HOTKEY:
         if (c->text.hotkey != NULL)
         {
-            if (g_ascii_tolower ((gchar) c->text.hotkey[0]) == g_ascii_tolower ((gchar) parm))
+            if (g_ascii_tolower ((gchar) c->text.hotkey[0]) == parm)
             {
                 check_callback (w, WIDGET_KEY, ' ');    /* make action */
                 return MSG_HANDLED;
