@@ -1685,18 +1685,14 @@ user_menu (WEdit * edit)
         edit_save_block (edit, block_file, start_mark, end_mark);
 
     /* run shell scripts from menu */
-    user_menu_cmd (edit);
-
-    if ((mc_stat (block_file, &status) == 0) && (status.st_size != 0))
+    if (user_menu_cmd (edit) && (mc_stat (block_file, &status) == 0) && (status.st_size != 0))
     {
         int rc = 0;
         FILE *fd;
 
+        /* i.e. we have marked block */
         if (nomark == 0)
-        {
-            /* i.e. we have marked block */
             rc = edit_block_delete_cmd (edit);
-        }
 
         if (rc == 0)
         {

@@ -850,7 +850,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
  * otherwise we are called from the mcedit menu.
  */
 
-void
+gboolean
 user_menu_cmd (struct WEdit *edit_widget)
 {
     char *p;
@@ -859,11 +859,12 @@ user_menu_cmd (struct WEdit *edit_widget)
     int col, i, accept_entry = 1;
     int selected, old_patterns;
     Listbox *listbox;
+    gboolean res = FALSE;
 
     if (!vfs_current_is_local ())
     {
         message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute commands on non-local filesystems"));
-        return;
+        return FALSE;
     }
 
     menu = g_strdup (edit_widget ? EDIT_LOCAL_MENU : MC_LOCAL_MENU);
@@ -894,7 +895,7 @@ user_menu_cmd (struct WEdit *edit_widget)
         message (D_ERROR, MSG_ERROR, _("Cannot open file%s\n%s"), menu, unix_error_string (errno));
         g_free (menu);
         menu = NULL;
-        return;
+        return FALSE;
     }
 
     max_cols = 0;
@@ -990,7 +991,10 @@ user_menu_cmd (struct WEdit *edit_widget)
     }
 
     if (menu_lines == 0)
+    {
         message (D_ERROR, MSG_ERROR, _("No suitable entries found in %s"), menu);
+        res = FALSE;
+    }
     else
     {
         max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
@@ -1010,7 +1014,10 @@ user_menu_cmd (struct WEdit *edit_widget)
 
         selected = run_listbox (listbox);
         if (selected >= 0)
+        {
             execute_menu_command (edit_widget, entries[selected]);
+            res = TRUE;
+        }
 
         do_refresh ();
     }
@@ -1020,6 +1027,7 @@ user_menu_cmd (struct WEdit *edit_widget)
     menu = NULL;
     g_free (entries);
     g_free (data);
+    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */
