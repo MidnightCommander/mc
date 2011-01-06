@@ -363,7 +363,6 @@ init_menu (void)
     right_menu = create_menu ("", create_panel_menu (), "[Left and Right Menus]");
     menubar_add_menu (the_menubar, right_menu);
     update_menu ();
-    menubar_set_visible (the_menubar, menubar_visible);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1477,6 +1476,7 @@ update_menu (void)
     menu_set_name (left_menu, horizontal_split ? _("&Above") : _("&Left"));
     menu_set_name (right_menu, horizontal_split ? _("&Below") : _("&Right"));
     menubar_arrange (the_menubar);
+    menubar_set_visible (the_menubar, menubar_visible);
 }
 
 void
