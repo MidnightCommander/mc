@@ -721,11 +721,17 @@ void
 filtered_view_cmd (void)
 {
     char *command;
+    const char *initial_command;
+
+    if (cmdline->buffer[0] == '\0')
+        initial_command = selection (current_panel)->fname;
+    else
+        initial_command = cmdline->buffer;
 
     command =
         input_dialog (_("Filtered view"),
                       _("Filter command and arguments:"),
-                      MC_HISTORY_FM_FILTERED_VIEW, selection (current_panel)->fname);
+                      MC_HISTORY_FM_FILTERED_VIEW, initial_command);
 
     if (command != NULL)
     {
