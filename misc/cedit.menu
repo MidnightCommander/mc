@@ -21,7 +21,7 @@ shell_patterns=0    # expression type
 #    because next time there will be no tagged files.
 # %s and %S The selected files: The tagged files if
 #    there are any. Otherwise the current file.
-# 
+#
 # %% The % character
 #
 # %{some text} Prompt for the substitution. An input box
@@ -34,10 +34,10 @@ shell_patterns=0    # expression type
 + y Perl\ Program | f \.pl$
 1       Author description header
         unset LANG
-	unset LANGUAGE
-	LC_ALL=
-	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
-	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
+        unset LANGUAGE
+        LC_ALL=
+        MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+        AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         cat >>%b <<EOF
         #----------------------------------------------------------------------
         # Description:
@@ -45,16 +45,16 @@ shell_patterns=0    # expression type
         # Created at: `date`
         # Computer: `uname -n` 
         # System: `uname -sr` on `uname -m`
-        #    
+        #
         # Copyright (c) `date +%%Y` $AUTHOR  All rights reserved.
         #
         #----------------------------------------------------------------------
         # Configure section:
-        
+
         #----------------------------------------------------------------------
         #
         # main()
-        
+
         EOF
 
 + y Perl\ Program | f \.pl$
@@ -84,7 +84,7 @@ shell_patterns=0    # expression type
         %iif () {
         %i}
         EOF
-                
+
 + y Perl\ Program | f \.pl$
 6       if () else
         cat <<EOF > %b
@@ -118,7 +118,7 @@ a       sub ()
         sub
         $NAME ()
         {
-        } # end of $NAME()        
+        } # end of $NAME()
         EOF
 #----------------------- End [perl] language template -------------------------
 
@@ -126,10 +126,10 @@ a       sub ()
 + y Shell\ Script | f \.sh$
 1       Author description header
         unset LANG
-	unset LANGUAGE
-	LC_ALL=
-	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
-	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
+        unset LANGUAGE
+        LC_ALL=
+        MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+        AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         cat >>%b <<EOF
         #----------------------------------------------------------------------
         # Description:
@@ -137,16 +137,16 @@ a       sub ()
         # Created at: `date`
         # Computer: `uname -n`
         # System: `uname -sr` on `uname -m`
-        #    
+        #
         # Copyright (c) `date +%%Y` $AUTHOR  All rights reserved.
         #
         #----------------------------------------------------------------------
         # Configure section:
-        
+
         #----------------------------------------------------------------------
         #
         # main()
-        
+
         EOF
 
 + y Shell\ Script | f \.sh$
@@ -183,9 +183,9 @@ a       sub ()
         do
         cat <<EOF >> %b
         %i)
-	%i    ;;
+        %i    ;;
         EOF
-        let NUMBER=$NUMBER-1    
+        let NUMBER=$NUMBER-1
         done
         cat <<EOF >> %b
         %i*)
@@ -199,38 +199,38 @@ a       sub ()
         $NAME() {
         } # end of $NAME()
         EOF
-                
+
 + y Shell\ Script | f \.sh$
 8       select of bash
         cat <<EOF >> %b
         %iselect i in \$l
         %ido
         %i    if [ -n "\$i" ];then
-	%i       break
+        %i       break
         %i    else
-	%i       continue
-        %i    fi	
+        %i       continue
+        %i    fi
         %idone
         EOF
-        
+
 #----------------------- End [shell] language template ------------------------
 
 #------------------------- Begin [c] language template ------------------------
 + f \.h$ | f \.c$ | f \.cc$
 1       Author description header
         unset LANG
-	unset LANGUAGE
-	LC_ALL=
-	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
-	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
+        unset LANGUAGE
+        LC_ALL=
+        MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+        AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         cat >> %b <<EOF
         /********************************************************************
         * Description:
         * Author: $AUTHOR <$REPLYTO>
         * Created at: `date`
-        * Computer: `uname -n` 
+        * Computer: `uname -n`
         * System: `uname -sr` on `uname -m`
-        *    
+        *
         * Copyright (c) `date +%%Y` $AUTHOR  All rights reserved.
         *
         ********************************************************************/
@@ -262,7 +262,7 @@ a       sub ()
         %iif () {
         %i}
         EOF
-                
+
 + f \.c$ | f \.cc$
 4       if () else
         cat <<EOF > %b
@@ -287,32 +287,32 @@ a       sub ()
         do
             echo "%icase '':" >>%b
             echo "%i      break;" >>%b
-            let NUMBER=$NUMBER-1    
+            let NUMBER=$NUMBER-1
         done
         echo "%i      default:" >>%b
         echo "%i}" >>%b
-        
+
 + f \.c$ | f \.cc$
 7       for ()
         cat <<EOF > %b
         %ifor (i =  ; i <  ; i++) {
         %i}
         EOF
-        
+
 + f \.c$ | f \.cc$
-8       while ()               
+8       while ()
         cat <<EOF > %b
         %iwhile () {
         %i}
         EOF
 
 + f \.c$ | f \.cc$
-9       do {} while ()               
+9       do {} while ()
         cat <<EOF > %b
         %ido {
         %i} while ()
         EOF
-        
+
 + f \.c$ | f \.cc$
 a       array
         cat <<EOF > %b
@@ -336,7 +336,7 @@ c       struct
         %i;
         %i};
         EOF
-        
+
 + f \.c$ | f \.cc$
 d       union
         cat <<EOF > %b
@@ -344,7 +344,7 @@ d       union
         %i;
         %i};
         EOF
-        
+
 + f \.c$ | f \.cc$
 e       typedef struct
         cat <<EOF > %b
@@ -388,7 +388,7 @@ d       #ifdef
 
 + f \.c$ | f \.h$ | f \.cc$
 h       View all *.h into current directory
-	cat *.h |less
+        cat *.h |less
 
 + f \.c$ | f \.cc$
 d       Run gdb for current file
@@ -405,7 +405,7 @@ c       Compile, link and run the current .c file
 
 + f \.c$ | f \.h$
 t       Indent `C' formatter
-	indent -kr -pcs %b 1>/dev/null 2> %e
+        indent -kr -pcs %b 1>/dev/null 2> %e
 
 #--------------------- End [c/c++] language template --------------------------
 
@@ -421,10 +421,10 @@ p       #! /usr/bin/perl
 + y unknown & t r
 a       Author description header
         unset LANG
-	unset LANGUAGE
-	LC_ALL=
-	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
-	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
+        unset LANGUAGE
+        LC_ALL=
+        MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+        AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         cat >>%b <<EOF
         ----------------------------------------------------------------------
         Description:
@@ -432,10 +432,10 @@ a       Author description header
         Created at: `date`
         Computer: `uname -n` 
         System: `uname -sr` on `uname -m`
-        
+
         Copyright (c) `date +%%Y` $AUTHOR  All rights reserved.
         ----------------------------------------------------------------------
-                
+
         EOF
 #--------------------------- End unknown template -----------------------------
 
@@ -444,13 +444,13 @@ a       Author description header
 #----------------------- Begin common section ---------------------------------
 I       Insert `Changelog' string
         DATE="`date +%%Y-%%m-%%d`"
-	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
-	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
+        MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+        AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         EMAIL="<$REPLYTO>"
         echo "$DATE  $AUTHOR  $EMAIL" >%b
 
 s       Invoke `shell'
-	sh
+        sh
 
 m       view `man'
         MAN=%{Enter name of man:}
@@ -458,11 +458,21 @@ m       view `man'
         man -Pcat $MAN >$TMPFILE
         mcview $TMPFILE
         rm -f $TMPFILE
-                
+
 i       Insert a out of command to cursor.
         CMD=%{ Enter command: }
-    	eval $CMD > %b
+        eval $CMD > %b
 
 o       Open bash to next free console
         open -s -- /bin/bash
+
+u       Upper case selection
+        TMPFILE=`mktemp ${MC_TMPDIR:-/tmp}/up.XXXXXX` || exit 1
+        cat %b > $TMPFILE
+        cat $TMPFILE| sed 's/\(.*\)/\U\1/' >%b
+
+l       Lower case selection
+        TMPFILE=`mktemp ${MC_TMPDIR:-/tmp}/up.XXXXXX` || exit 1
+        cat %b > $TMPFILE
+        cat $TMPFILE| sed 's/\(.*\)/\U\1/' >%b
 #-------------------------- End of common section -----------------------------
