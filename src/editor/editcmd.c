@@ -2617,7 +2617,7 @@ edit_insert_file_cmd (WEdit * edit)
         }
         else
         {
-            if (edit_insert_file (edit, exp))
+            if (edit_insert_file (edit, exp) != 0)
             {
                 g_free (exp);
                 edit->force |= REDRAW_COMPLETELY;

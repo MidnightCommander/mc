@@ -19,7 +19,7 @@ struct WEdit;
 
 /*** declarations of public functions ************************************************************/
 
-void user_menu_cmd (struct WEdit *edit_widget);
+gboolean user_menu_cmd (struct WEdit *edit_widget);
 char *expand_format (struct WEdit *edit_widget, char c, gboolean do_quote);
 int check_format_view (const char *);
 int check_format_var (const char *, char **);
