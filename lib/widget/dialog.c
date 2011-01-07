@@ -952,7 +952,7 @@ dlg_select_widget (void *w)
     const Widget *widget = (Widget *) w;
     Dlg_head *h = widget->owner;
 
-    do_select_widget (h, g_list_find (h->widgets, widget), SELECT_NEXT);
+    do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
 }
 
 /* --------------------------------------------------------------------------------------------- */
