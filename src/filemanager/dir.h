@@ -52,12 +52,12 @@ typedef struct
 
 /*** declarations of public functions ************************************************************/
 
-int do_load_dir (const char *path, dir_list * list, sortfn * sort, int reverse,
-                 int case_sensitive, int exec_ff, const char *fltr);
-void do_sort (dir_list * list, sortfn * sort, int top, int reverse,
-              int case_sensitive, int exec_ff);
+int do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean reverse,
+                 gboolean case_sensitive, gboolean exec_ff, const char *fltr);
+void do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse,
+              gboolean case_sensitive, gboolean exec_ff);
 int do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
-                   int reverse, int case_sensitive, int exec_ff, const char *fltr);
+                   gboolean reverse, gboolean case_sensitive, gboolean exec_ff, const char *fltr);
 void clean_dir (dir_list * list, int count);
 gboolean set_zero_dir (dir_list * list);
 int handle_path (dir_list * list, const char *path, struct stat *buf1,

@@ -576,7 +576,7 @@ display_box (WPanel * panel, char **userp, char **minip, int *use_msformat, int 
 /* --------------------------------------------------------------------------------------------- */
 
 const panel_field_t *
-sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, int *exec_first)
+sort_box (panel_sort_info_t *info)
 {
     int dlg_width = 40, dlg_height = 7;
 
@@ -585,7 +585,7 @@ sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, 
 
     int sort_idx = 0;
 
-    const panel_field_t *result = sort_format;
+    const panel_field_t *result = info->sort_field;
 
     sort_orders_names = panel_get_sortable_fields (&sort_names_num);
     dlg_height += sort_names_num;
@@ -601,14 +601,13 @@ sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, 
             /* 1 */
             QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
             /* 2 */
-            QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), reverse),
+            QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), &info->reverse),
             /* 3 */
-            QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), case_sensitive),
+            QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), &info->case_sensitive),
             /* 4 */
-            QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
+            QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), &info->exec_first),
             /* 5 */
-            QUICK_RADIO (4, dlg_width, 3, dlg_height, 0,
-                         NULL, &sort_idx),
+            QUICK_RADIO (4, dlg_width, 3, dlg_height, 0, NULL, &sort_idx),
             QUICK_END
         };
 
@@ -622,7 +621,7 @@ sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, 
         quick_widgets[5].u.radio.count = sort_names_num;
 
         for (i = 0; i < sort_names_num; i++)
-            if (strcmp (sort_orders_names[i], _(sort_format->title_hotkey)) == 0)
+            if (strcmp (sort_orders_names[i], _(info->sort_field->title_hotkey)) == 0)
             {
                 sort_idx = i;
                 break;
@@ -670,7 +669,7 @@ sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, 
             result = panel_get_field_by_title_hotkey (sort_orders_names[sort_idx]);
 
         if (result == NULL)
-            result = sort_format;
+            result = info->sort_field;
     }
     g_strfreev ((gchar **) sort_orders_names);
     return result;

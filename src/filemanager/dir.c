@@ -47,7 +47,7 @@
 /*** file scope macro definitions ****************************************************************/
 
 #define MY_ISDIR(x) (\
-    (is_exe (x->st.st_mode) && !(S_ISDIR (x->st.st_mode) || x->f.link_to_dir) && (exec_first == 1)) \
+    (is_exe (x->st.st_mode) && !(S_ISDIR (x->st.st_mode) || x->f.link_to_dir) && exec_first) \
         ? 1 \
         : ( (S_ISDIR (x->st.st_mode) || x->f.link_to_dir) ? 2 : 0) )
 
@@ -62,7 +62,7 @@ static int reverse = 1;
 static int case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
 
 /* Are the exec_bit files top in list */
-static int exec_first = 1;
+static gboolean exec_first = TRUE;
 
 static dir_list dir_copy = { 0, 0 };
 
@@ -400,8 +400,8 @@ sort_size (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_sort (dir_list * list, sortfn * sort, int top, int reverse_f, int case_sensitive_f,
-         int exec_first_f)
+do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse_f, gboolean case_sensitive_f,
+         gboolean exec_first_f)
 {
     int dot_dot_found = 0;
 
@@ -410,11 +410,11 @@ do_sort (dir_list * list, sortfn * sort, int top, int reverse_f, int case_sensit
 
     /* If there is an ".." entry the caller must take care to
        ensure that it occupies the first list element. */
-    if (!strcmp (list->list[0].fname, ".."))
+    if (strcmp (list->list[0].fname, "..") == 0)
         dot_dot_found = 1;
 
     reverse = reverse_f ? -1 : 1;
-    case_sensitive = case_sensitive_f;
+    case_sensitive = case_sensitive_f ? 1 : 0;
     exec_first = exec_first_f;
     qsort (&(list->list)[dot_dot_found], top + 1 - dot_dot_found, sizeof (file_entry), sort);
 
@@ -511,8 +511,8 @@ handle_path (dir_list * list, const char *path,
 /* --------------------------------------------------------------------------------------------- */
 
 int
-do_load_dir (const char *path, dir_list * list, sortfn * sort, int lc_reverse,
-             int lc_case_sensitive, int exec_ff, const char *fltr)
+do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_reverse,
+             gboolean lc_case_sensitive, gboolean exec_ff, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -593,7 +593,7 @@ if_link_is_exe (const char *full_name, const file_entry * file)
 
 int
 do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
-               int rev, int lc_case_sensitive, int exec_ff, const char *fltr)
+               gboolean lc_reverse, gboolean lc_case_sensitive, gboolean exec_ff, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -704,7 +704,7 @@ do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
     g_hash_table_destroy (marked_files);
     if (next_free)
     {
-        do_sort (list, sort, next_free - 1, rev, lc_case_sensitive, exec_ff);
+        do_sort (list, sort, next_free - 1, lc_reverse, lc_case_sensitive, exec_ff);
     }
     clean_dir (&dir_copy, count);
     return next_free;
