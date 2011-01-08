@@ -1190,6 +1190,12 @@ swap_panels (void)
         tmp_type = panels[0].type;
         panels[0].type = panels[1].type;
         panels[1].type = tmp_type;
+
+        /* force update formats because of possible changed sizes */
+        if (panels[0].type == view_listing)
+            set_panel_formats ((WPanel *) panels[0].widget);
+        if (panels[1].type == view_listing)
+            set_panel_formats ((WPanel *) panels[1].widget);
     }
 }
 
