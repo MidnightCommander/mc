@@ -1,6 +1,7 @@
 skindir = $(pkgdatadir)/skins
 
 skin_DATA = \
+	dark.ini \
 	darkfar.ini \
 	default.ini \
 	double-lines.ini \
