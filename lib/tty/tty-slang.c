@@ -45,6 +45,7 @@
 
 #include "tty-internal.h"       /* slow_tty */
 #include "tty.h"
+#include "color.h"
 #include "color-slang.h"
 #include "color-internal.h"
 #include "mouse.h"              /* Gpm_Event is required in key.h */
