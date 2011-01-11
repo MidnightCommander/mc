@@ -65,14 +65,15 @@ extern int mc_tty_frm[];
 
 extern char *tty_tgetstr (const char *name);
 
-extern void tty_beep (void);
-
-/*** declarations of public functions ************************************************************/
-
-
 /* {{{ Input }}} */
 
 extern int reset_hp_softkeys;
+
+/*** declarations of public functions ************************************************************/
+
+extern void tty_beep (void);
+
+/* {{{ Input }}} */
 
 extern void tty_init (gboolean slow, gboolean ugly_lines);
 extern void tty_shutdown (void);
