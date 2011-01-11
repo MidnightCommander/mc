@@ -75,6 +75,7 @@ mc_tty_color_save_attr (int color_pair, int color_attr)
         return;
     }
 
+    *key = color_pair;
     *attr = color_attr;
 
     g_hash_table_replace (mc_tty_color_color_pair_attrs, (gpointer) key, (gpointer) attr);
