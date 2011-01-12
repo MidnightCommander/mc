@@ -635,8 +635,9 @@ void
 layout_change (void)
 {
     setup_panels ();
-    /* re-init the menu, because perhaps there was a change in the way
-       how the panel are split (horizontal/vertical). */
+    /* update the main menu, because perhaps there was a change in the way
+       how the panel are split (horizontal/vertical),
+       and a change of menu visibility. */
     update_menu ();
     load_hint (1);
 }
