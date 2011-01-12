@@ -8,7 +8,8 @@ skin_DATA = \
 	featured.ini \
 	gotar.ini \
 	nicedark.ini \
-	sand256.ini
+	sand256.ini \
+	xoria256.ini
 
 
 EXTRA_DIST = \
