@@ -330,31 +330,59 @@ tty_getyx (int *py, int *px)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* if x < 0 or y < 0, draw line starting from current position */
 
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
+    int x1;
+
+    if (y < 0 || y >= LINES || x >= COLS)
+        return;
+
+    x1 = x;
+
+    if (x < 0)
+    {
+        len += x;
+        if (len <= 0)
+            return;
+        x = 0;
+    }
+
     if ((chtype) ch == ACS_HLINE)
         ch = mc_tty_frm[MC_TTY_FRM_HORIZ];
 
-    if ((y >= 0) && (x >= 0))
-        move (y, x);
+    move (y, x);
     hline (ch, len);
+    move (y, x1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* if x < 0 or y < 0, draw line starting from current position */
 
 void
 tty_draw_vline (int y, int x, int ch, int len)
 {
+    int y1;
+
+    if (x < 0 || x >= COLS || y >= LINES)
+        return;
+
+    y1 = y;
+
+    if (y < 0)
+    {
+        len += y;
+        if (len <= 0)
+            return;
+        y = 0;
+    }
+
     if ((chtype) ch == ACS_VLINE)
         ch = mc_tty_frm[MC_TTY_FRM_VERT];
 
-    if ((y >= 0) && (x >= 0))
-        move (y, x);
+    move (y, x);
     vline (ch, len);
+    move (y1, x);
 }
 
 /* --------------------------------------------------------------------------------------------- */

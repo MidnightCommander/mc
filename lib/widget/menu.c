@@ -121,11 +121,14 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
     }
     else
     {
+        int yt, xt;
+
         /* menu text */
         tty_setcolor (color);
         widget_move (&menubar->widget, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
-        tty_draw_hline (-1, -1, ' ', menu->max_entry_len + 2);  /* clear line */
+        tty_getyx (&yt, &xt);
+        tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 2);  /* clear line */
         tty_print_string (entry->text.start);
 
         if (entry->text.hotkey != NULL)
