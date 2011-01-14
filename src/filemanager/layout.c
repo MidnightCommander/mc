@@ -1060,10 +1060,15 @@ set_display_type (int num, panel_view_mode_t type)
 
     if (type == view_listing)
     {
+        WPanel *panel = (WPanel *) new_widget;
+
         if (num == 0)
-            left_panel = (WPanel *) new_widget;
+            left_panel = panel;
         else
-            right_panel = (WPanel *) new_widget;
+            right_panel = panel;
+
+        /* forced update format after set new sizes */
+        set_panel_formats (panel);
     }
 
     if (type == view_tree)
