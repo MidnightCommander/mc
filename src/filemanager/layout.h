@@ -42,6 +42,7 @@ void destroy_panels (void);
 void sigwinch_handler (int dummy);
 void change_screen_size (void);
 void set_display_type (int num, panel_view_mode_t type);
+void panel_update_cols (Widget * widget, panel_display_t frame_size);
 void swap_panels (void);
 panel_view_mode_t get_display_type (int idx);
 panel_view_mode_t get_current_type (void);
@@ -55,7 +56,6 @@ struct Widget *get_panel_widget (int idx);
 struct WPanel *get_other_panel (void);
 
 void save_panel_dir (int idx);
-Widget *restore_into_right_dir_panel (int idx, Widget * from_widget);
 const char *get_panel_dir_for (const WPanel * widget);
 
 void set_hintbar (const char *str);
