@@ -1373,7 +1373,7 @@ paint_frame (WPanel * panel)
 static const char *
 parse_panel_size (WPanel * panel, const char *format, int isstatus)
 {
-    int frame = frame_half;
+    panel_display_t frame = frame_half;
     format = skip_separators (format);
 
     if (!strncmp (format, "full", 4))
@@ -3442,48 +3442,6 @@ try_to_select (WPanel * panel, const char *name)
 {
     do_try_to_select (panel, name);
     select_item (panel);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-panel_update_cols (Widget * widget, int frame_size)
-{
-    int cols, origin;
-
-    /* don't touch panel if it is not in dialog yet */
-    /* if panel is not in dialog it is not in widgets list
-       and cannot be compared with get_panel_widget() result */
-    if (widget->owner == NULL)
-        return;
-
-    if (horizontal_split)
-    {
-        widget->cols = COLS;
-        return;
-    }
-
-    if (frame_size == frame_full)
-    {
-        cols = COLS;
-        origin = 0;
-    }
-    else
-    {
-        if (widget == get_panel_widget (0))
-        {
-            cols = first_panel_size;
-            origin = 0;
-        }
-        else
-        {
-            cols = COLS - first_panel_size;
-            origin = first_panel_size;
-        }
-    }
-
-    widget->cols = cols;
-    widget->x = origin;
 }
 
 /* --------------------------------------------------------------------------------------------- */

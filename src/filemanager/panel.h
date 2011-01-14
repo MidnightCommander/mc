@@ -44,11 +44,11 @@ typedef enum
     view_nothing = 4,           /* Undefined */
 } panel_view_mode_t;
 
-enum panel_display_enum
+typedef enum
 {
     frame_full,                 /* full screen frame */
     frame_half                  /* half screen frame */
-};
+} panel_display_t;
 
 typedef enum
 {
@@ -102,7 +102,7 @@ typedef struct WPanel
     int selected;               /* Index to the selected file */
     int split;                  /* Split panel to allow two columns */
     int is_panelized;           /* Flag: special filelisting, can't reload */
-    int frame_size;             /* half or full frame */
+    panel_display_t frame_size; /* half or full frame */
     char *filter;               /* File name filter */
     panel_sort_info_t sort_info;        /* Sort descriptor */
 
@@ -151,7 +151,6 @@ void panel_change_encoding (WPanel * panel);
 
 void update_dirty_panels (void);
 void update_panels (panel_update_flags_t flags, const char *current_file);
-void panel_update_cols (Widget * widget, int frame_size);
 int set_panel_formats (WPanel * p);
 
 void try_to_select (WPanel * panel, const char *name);
