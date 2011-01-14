@@ -821,7 +821,12 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
     }
 
     if (length < width)
-        tty_draw_hline (-1, -1, ' ', width - length);
+    {
+        int y, x;
+
+        tty_getyx (&y, &x);
+        tty_draw_hline (y, x, ' ', width - length);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1370,7 +1375,12 @@ paint_frame (WPanel * panel)
         g_string_free (format_txt, TRUE);
 
         if (width > 0)
-            tty_draw_hline (-1, -1, ' ', width);
+        {
+            int y, x;
+
+            tty_getyx (&y, &x);
+            tty_draw_hline (y, x, ' ', width);
+        }
     }
 
     if (panel->list_type != list_long)

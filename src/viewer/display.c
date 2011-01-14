@@ -141,7 +141,7 @@ mcview_display_status (mcview_t * view)
 
     tty_setcolor (STATUSBAR_COLOR);
     widget_move (view, top, left);
-    tty_draw_hline (-1, -1, ' ', width);
+    tty_draw_hline (top, left, ' ', width);
 
     file_label = view->filename ? view->filename : view->command ? view->command : "";
     file_label_width = str_term_width1 (file_label) - 2;
