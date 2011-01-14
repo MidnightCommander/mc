@@ -149,7 +149,6 @@ void panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order);
 void panel_re_sort (WPanel * panel);
 void panel_change_encoding (WPanel * panel);
 
-void update_dirty_panels (void);
 void update_panels (panel_update_flags_t flags, const char *current_file);
 int set_panel_formats (WPanel * p);
 
