@@ -253,6 +253,7 @@ void edit_refresh_cmd (WEdit * edit);
 void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark);
+void edit_info_status (WEdit * edit);
 void edit_status (WEdit * edit);
 void edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion);
 void edit_update_screen (WEdit * edit);

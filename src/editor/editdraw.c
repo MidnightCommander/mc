@@ -892,6 +892,75 @@ edit_status (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+edit_info_status (WEdit * edit)
+{
+    int cols = edit->widget.cols;
+
+    tty_setcolor (STATUSBAR_COLOR);
+
+    if (cols > 5)
+    {
+        edit_move (2, 0);
+        tty_printf ("[%s]", str_term_trim (edit->filename, edit->widget.cols - 8 - 6));
+    }
+
+    if (cols > 13)
+    {
+        edit_move (edit->widget.cols - 8, 0);
+        tty_printf ("[%c%c%c%c]",
+                    edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
+                    edit->modified ? 'M' : '-',
+                    macro_index < 0 ? '-' : 'R',
+                    edit->overwrite == 0 ? '-' : 'O');
+    }
+
+    if (cols > 30)
+    {
+        edit_move (2, edit->widget.lines - 1);
+        tty_printf ("%3ld %5ld/%ld %6ld/%ld",
+                    edit->curs_col + edit->over_col,
+                    edit->curs_line + 1,
+                    edit->total_lines + 1,
+                    edit->curs1,
+                    edit->last_byte );
+    }
+
+    /*
+     * If we are at the end of file, print <EOF>,
+     * otherwise print the current character as is (if printable),
+     * as decimal and as hex.
+     */
+    if (cols > 46)
+    {
+        edit_move (32, edit->widget.lines - 1);
+        if (edit->curs1 >= edit->last_byte)
+            tty_print_string ("[<EOF>       ]");
+#ifdef HAVE_CHARSET
+        else if (edit->utf8)
+        {
+            unsigned int cur_utf;
+            int cw = 1;
+
+            cur_utf = edit_get_utf (edit, edit->curs1, &cw);
+            if (cw <= 0)
+                cur_utf = edit_get_byte (edit, edit->curs1);
+            tty_printf ("[%05d 0x%04X]", cur_utf, cur_utf);
+        }
+#endif
+        else
+        {
+            unsigned char cur_byte;
+
+            cur_byte = edit_get_byte (edit, edit->curs1);
+            tty_printf ("[%05d 0x%04X]", (unsigned int) cur_byte, (unsigned int) cur_byte);
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /** this scrolls the text so that cursor is on the screen */
 void
 edit_scroll_screen_over_cursor (WEdit * edit)
