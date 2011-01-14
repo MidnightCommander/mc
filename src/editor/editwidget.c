@@ -440,14 +440,16 @@ edit_update_screen (WEdit * e)
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_col (e);
 
-    /* draw a frame around edit area */
-    if (EDIT_WITH_FRAME)
+    if (!EDIT_WITH_FRAME)
+        edit_status (e);
+    else
     {
+        /* draw a frame around edit area */
         tty_setcolor (EDITOR_NORMAL_COLOR);
         tty_draw_box (e->widget.y, e->widget.x, e->widget.lines, e->widget.cols, TRUE);
-    }
 
-    edit_status (e);
+        edit_info_status (e);
+    }
 
     /* pop all events for this window for internal handling */
     if (!is_idle ())
