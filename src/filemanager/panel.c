@@ -3451,6 +3451,12 @@ panel_update_cols (Widget * widget, int frame_size)
 {
     int cols, origin;
 
+    /* don't touch panel if it is not in dialog yet */
+    /* if panel is not in dialog it is not in widgets list
+       and cannot be compared with get_panel_widget() result */
+    if (widget->owner == NULL)
+        return;
+
     if (horizontal_split)
     {
         widget->cols = COLS;
