@@ -1,8 +1,9 @@
-SUBDIRS = filehighlight mcconfig search skin tty vfs strutil widget
+SUBDIRS = event filehighlight mcconfig search skin tty vfs strutil widget
 
 noinst_LTLIBRARIES = libmc.la
 
 SUBLIB_includes = \
+	event.h \
 	filehighlight.h \
 	mcconfig.h \
 	search.h \
@@ -40,6 +41,7 @@ endif
 libmc_la_CFLAGS= $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
 libmc_la_LIBADD = \
+	event/libmcevent.la \
 	filehighlight/libmcfilehighlight.la \
 	mcconfig/libmcconfig.la \
 	search/libsearch.la \
