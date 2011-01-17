@@ -3,7 +3,7 @@ SUBDIRS = event filehighlight mcconfig search skin tty vfs strutil widget
 noinst_LTLIBRARIES = libmc.la
 
 SUBLIB_includes = \
-	event.h \
+	event.h event-types.h \
 	filehighlight.h \
 	mcconfig.h \
 	search.h \

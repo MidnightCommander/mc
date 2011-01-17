@@ -62,6 +62,7 @@ mc_SOURCES = \
 	args.c args.h \
 	background.c background.h \
 	clipboard.c clipboard.h \
+	events_init.c events_init.h \
 	execute.c execute.h \
 	help.c help.h \
 	history.h \

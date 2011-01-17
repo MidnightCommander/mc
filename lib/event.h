@@ -1,6 +1,8 @@
 #ifndef MC__EVENT_H
 #define MC__EVENT_H
 
+#include "event-types.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 typedef gboolean (*mc_event_callback_func_t) (const gchar *, const gchar *, gpointer, gpointer);

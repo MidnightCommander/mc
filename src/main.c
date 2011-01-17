@@ -41,6 +41,7 @@
 
 #include "lib/global.h"
 
+#include "lib/event.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* For init_key() */
 #include "lib/tty/win.h"        /* xterm_flag */
@@ -57,6 +58,7 @@
 #include "filemanager/ext.h"    /* flush_extension_file() */
 #include "filemanager/command.h"        /* cmdline */
 
+#include "events_init.h"
 #include "args.h"
 #include "subshell.h"
 #include "setup.h"              /* load_setup() */
@@ -427,6 +429,13 @@ main (int argc, char *argv[])
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
 
+    if (!events_init (&error))
+    {
+        fprintf (stderr, _("Failed to run:\n%s\n"), error->message);
+        g_error_free (error);
+        (void) mc_event_deinit (NULL);
+        exit (EXIT_FAILURE);
+    }
 
     /* Set up temporary directory */
     mc_tmpdir ();
@@ -612,7 +621,16 @@ main (int argc, char *argv[])
     g_free (mc_run_param0);
     g_free (mc_run_param1);
 
+    mc_event_deinit (&error);
+
     mc_config_deinit_config_paths ();
+
+    if (error != NULL)
+    {
+        fprintf (stderr, _("\nFailed while close:\n%s\n"), error->message);
+        g_error_free (error);
+        exit (EXIT_FAILURE);
+    }
 
     putchar ('\n');             /* Hack to make shell's prompt start at left of screen */
 

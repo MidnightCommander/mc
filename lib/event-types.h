@@ -1,0 +1,23 @@
+#ifndef MC__EVENT_TYPES_H
+#define MC__EVENT_TYPES_H
+
+/*** typedefs(not structures) and defined constants **********************************************/
+
+/* Event groups for main modules */
+#define MCEVENT_GROUP_CORE "Core"
+#define MCEVENT_GROUP_DIFFVIEWER "DiffViewer"
+#define MCEVENT_GROUP_EDITOR "Editor"
+#define MCEVENT_GROUP_FILEMANAGER "FileManager"
+#define MCEVENT_GROUP_VIEWER "Viewer"
+
+/*** enums ***************************************************************************************/
+
+/*** structures declarations (and typedefs of structures)*****************************************/
+
+/*** global variables defined in .c file *********************************************************/
+
+/*** declarations of public functions ************************************************************/
+
+/*** inline functions ****************************************************************************/
+
+#endif /* MC__EVENT_TYPES_H */
