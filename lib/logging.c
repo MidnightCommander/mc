@@ -68,6 +68,28 @@ is_logging_enabled (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_va_log (const char *fmt, va_list args)
+{
+    FILE *f;
+    char *logfilename;
+
+    logfilename = g_build_filename (mc_config_get_cache_path (), "mc.log", NULL);
+    if (logfilename != NULL)
+    {
+        f = fopen (logfilename, "a");
+        if (f != NULL)
+        {
+            (void) vfprintf (f, fmt, args);
+            (void) fclose (f);
+        }
+        g_free (logfilename);
+    }
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -75,25 +97,25 @@ void
 mc_log (const char *fmt, ...)
 {
     va_list args;
-    FILE *f;
-    char *logfilename;
 
-    if (is_logging_enabled ())
-    {
-        va_start (args, fmt);
-        logfilename = g_build_filename (mc_config_get_cache_path (), "mc.log", NULL);
-        if (logfilename != NULL)
-        {
-            f = fopen (logfilename, "a");
-            if (f != NULL)
-            {
-                (void) vfprintf (f, fmt, args);
-                (void) fclose (f);
-            }
-            g_free (logfilename);
-            va_end (args);
-        }
-    }
+    if (!is_logging_enabled ())
+        return;
+
+    va_start (args, fmt);
+    mc_va_log (fmt, args);
+    va_end (args);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+mc_always_log (const char *fmt, ...)
+{
+    va_list args;
+
+    va_start (args, fmt);
+    mc_va_log (fmt, args);
+    va_end (args);
 }
 
 /* --------------------------------------------------------------------------------------------- */
