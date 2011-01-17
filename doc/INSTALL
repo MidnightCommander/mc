@@ -179,7 +179,7 @@ VFS options:
      libext2fs library available, this option adds support for
      recovering deleted files (the undel virtual file system).
 
-`--with-vfs-smb'
+`--enable-vfs-smb'
      (off by default)
      This option enables remote VFS over the SMB protocol.  A stripped
      down version of samba distributed with the sources is compiled and
