@@ -991,6 +991,25 @@ toggle_show_hidden (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Repaint the contents of the panels without frames.  To schedule panel
+ * for repainting, set panel->dirty to 1.  There are many reasons why
+ * the panels need to be repainted, and this is a costly operation, so
+ * it's done once per event.
+ */
+
+static void
+update_dirty_panels (void)
+{
+    if (get_current_type () == view_listing && current_panel->dirty)
+        send_message ((Widget *) current_panel, WIDGET_DRAW, 0);
+
+    if (get_other_type () == view_listing && other_panel->dirty)
+        send_message ((Widget *) other_panel, WIDGET_DRAW, 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 midnight_execute_cmd (Widget * sender, unsigned long command)
 {

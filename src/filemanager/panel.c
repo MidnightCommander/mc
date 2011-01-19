@@ -79,8 +79,6 @@ int torben_fj_mode = 0;
 /* The hook list for the select file function */
 hook_t *select_file_hook = NULL;
 
-
-
 static const char *string_file_name (file_entry *, int);
 static const char *string_file_size (file_entry *, int);
 static const char *string_file_size_brief (file_entry *, int);
@@ -1146,19 +1144,6 @@ adjust_top_file (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Repaint everything, including frame and separator */
-
-static void
-paint_panel (WPanel * panel)
-{
-    paint_frame (panel);        /* including show_dir */
-    paint_dir (panel);
-    mini_info_separator (panel);
-    display_mini_info (panel);
-    panel->dirty = 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** add "#enc:encodning" to end of path */
 /* if path end width a previous #enc:, only encoding is changed no additional 
  * #enc: is appended
@@ -1262,7 +1247,8 @@ panel_paint_sort_info (WPanel * panel)
 {
     if (*panel->sort_info.sort_field->hotkey != '\0')
     {
-        const char *sort_sign = panel->sort_info.reverse ? panel_sort_down_sign : panel_sort_up_sign;
+        const char *sort_sign =
+            panel->sort_info.reverse ? panel_sort_down_sign : panel_sort_up_sign;
         char *str;
 
         str = g_strdup_printf ("%s%s", sort_sign, Q_ (panel->sort_info.sort_field->hotkey));
@@ -1373,7 +1359,7 @@ paint_frame (WPanel * panel)
 static const char *
 parse_panel_size (WPanel * panel, const char *format, int isstatus)
 {
-    int frame = frame_half;
+    panel_display_t frame = frame_half;
     format = skip_separators (format);
 
     if (!strncmp (format, "full", 4))
@@ -2156,7 +2142,7 @@ do_search (WPanel * panel, int c_code)
         unselect_item (panel);
         panel->selected = sel;
         select_item (panel);
-        paint_panel (panel);
+        send_message ((Widget *) panel, WIDGET_DRAW, 0);
     }
     else if (c_code != KEY_BACKSPACE)
     {
@@ -2927,7 +2913,12 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
     switch (msg)
     {
     case WIDGET_DRAW:
-        paint_panel (panel);
+        /* Repaint everything, including frame and separator */
+        paint_frame (panel);    /* including show_dir */
+        paint_dir (panel);
+        mini_info_separator (panel);
+        display_mini_info (panel);
+        panel->dirty = 0;
         return MSG_HANDLED;
 
     case WIDGET_FOCUS:
@@ -3216,7 +3207,7 @@ panel_event (Gpm_Event * event, void *data)
 
     ret = do_panel_event (event, panel, &redir);
     if (!redir)
-        paint_panel (panel);
+        send_message ((Widget *) panel, WIDGET_DRAW, 0);
 
     return ret;
 }
@@ -3368,24 +3359,6 @@ remove_encoding_from_path (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Repaint the contents of the panels without frames.  To schedule panel
- * for repainting, set panel->dirty to 1.  There are many reasons why
- * the panels need to be repainted, and this is a costly operation, so
- * it's done once per event.
- */
-
-void
-update_dirty_panels (void)
-{
-    if (current_panel->dirty)
-        paint_panel (current_panel);
-
-    if ((get_other_type () == view_listing) && other_panel->dirty)
-        paint_panel (other_panel);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static void
 do_select (WPanel * panel, int i)
@@ -3442,42 +3415,6 @@ try_to_select (WPanel * panel, const char *name)
 {
     do_try_to_select (panel, name);
     select_item (panel);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-panel_update_cols (Widget * widget, int frame_size)
-{
-    int cols, origin;
-
-    if (horizontal_split)
-    {
-        widget->cols = COLS;
-        return;
-    }
-
-    if (frame_size == frame_full)
-    {
-        cols = COLS;
-        origin = 0;
-    }
-    else
-    {
-        if (widget == get_panel_widget (0))
-        {
-            cols = first_panel_size;
-            origin = 0;
-        }
-        else
-        {
-            cols = COLS - first_panel_size;
-            origin = first_panel_size;
-        }
-    }
-
-    widget->cols = cols;
-    widget->x = origin;
 }
 
 /* --------------------------------------------------------------------------------------------- */

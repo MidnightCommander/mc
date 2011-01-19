@@ -588,6 +588,25 @@ panel_do_cols (int idx)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** Save current list_view widget directory into panel */
+
+static Widget *
+restore_into_right_dir_panel (int idx, Widget * from_widget)
+{
+    Widget *new_widget = NULL;
+    const char *saved_dir = panels[idx].last_saved_dir;
+    gboolean last_was_panel = (from_widget && get_display_type (idx) != view_listing);
+    const char *p_name = get_nth_panel_name (idx);
+
+    if (last_was_panel)
+        new_widget = (Widget *) panel_new_with_dir (p_name, saved_dir);
+    else
+        new_widget = (Widget *) panel_new (p_name);
+
+    return new_widget;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 low_level_change_screen_size (void)
@@ -966,7 +985,7 @@ void
 set_display_type (int num, panel_view_mode_t type)
 {
     int x = 0, y = 0, cols = 0, lines = 0;
-    int the_other = 0;          /* Index to the other panel */
+    unsigned int the_other = 0;          /* Index to the other panel */
     const char *file_name = NULL;       /* For Quick view */
     Widget *new_widget = NULL, *old_widget = NULL;
     WPanel *the_other_panel = NULL;
@@ -986,16 +1005,16 @@ set_display_type (int num, panel_view_mode_t type)
     }
 
     /* Get rid of it */
-    if (panels[num].widget)
+    if (panels[num].widget != NULL)
     {
         Widget *w = panels[num].widget;
-        WPanel *panel = (WPanel *) panels[num].widget;
+        WPanel *panel = (WPanel *) w;
 
         x = w->x;
         y = w->y;
         cols = w->cols;
         lines = w->lines;
-        old_widget = panels[num].widget;
+        old_widget = w;
 
         if (panels[num].type == view_listing)
         {
@@ -1056,14 +1075,19 @@ set_display_type (int num, panel_view_mode_t type)
     /* We use replace to keep the circular list of the dialog in the */
     /* same state.  Maybe we could just kill it and then replace it  */
     if ((midnight_dlg != NULL) && (old_widget != NULL))
-        dlg_replace_widget (old_widget, panels[num].widget);
+        dlg_replace_widget (old_widget, new_widget);
 
     if (type == view_listing)
     {
+        WPanel *panel = (WPanel *) new_widget;
+
         if (num == 0)
-            left_panel = (WPanel *) new_widget;
+            left_panel = panel;
         else
-            right_panel = (WPanel *) new_widget;
+            right_panel = panel;
+
+        /* forced update format after set new sizes */
+        set_panel_formats (panel);
     }
 
     if (type == view_tree)
@@ -1077,11 +1101,48 @@ set_display_type (int num, panel_view_mode_t type)
      * - as long as you stay in the left panel almost everything that uses
      *   current_panel causes segfault, e.g. C-Enter, C-x c, ...
      */
-
     if ((type != view_listing) && (current_panel == (WPanel *) old_widget))
         current_panel = num == 0 ? right_panel : left_panel;
 
     g_free (old_widget);
+}
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_update_cols (Widget * widget, panel_display_t frame_size)
+{
+    int cols, origin;
+
+    /* don't touch panel if it is not in dialog yet */
+    /* if panel is not in dialog it is not in widgets list
+       and cannot be compared with get_panel_widget() result */
+    if (widget->owner == NULL)
+        return;
+
+    if (horizontal_split)
+    {
+        widget->cols = COLS;
+        return;
+    }
+
+    if (frame_size == frame_full)
+    {
+        cols = COLS;
+        origin = 0;
+    }
+    else if (widget == get_panel_widget (0))
+    {
+        cols = first_panel_size;
+        origin = 0;
+    }
+    else
+    {
+        cols = COLS - first_panel_size;
+        origin = first_panel_size;
+    }
+
+    widget->cols = cols;
+    widget->x = origin;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1286,25 +1347,6 @@ save_panel_dir (int idx)
         /* Because path can be nonlocal */
         panels[idx].last_saved_dir = vfs_translate_url (widget_work_dir);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Save current list_view widget directory into panel */
-
-Widget *
-restore_into_right_dir_panel (int idx, Widget * from_widget)
-{
-    Widget *new_widget = NULL;
-    const char *saved_dir = panels[idx].last_saved_dir;
-    gboolean last_was_panel = (from_widget && get_display_type (idx) != view_listing);
-    const char *p_name = get_nth_panel_name (idx);
-
-    if (last_was_panel)
-        new_widget = (Widget *) panel_new_with_dir (p_name, saved_dir);
-    else
-        new_widget = (Widget *) panel_new (p_name);
-
-    return new_widget;
 }
 
 /* --------------------------------------------------------------------------------------------- */
