@@ -36,35 +36,74 @@
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
 
-#include "src/main.h"           /* home_dir */
-
 #include "logging.h"
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 
+#define CONFIG_GROUP_NAME "Development"
+#define CONFIG_KEY_NAME "logging"
+#define CONFIG_KEY_NAME_FILE "logfile"
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
+
+static gboolean logging_initialized = FALSE;
+static gboolean logging_enabled = FALSE;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
+is_logging_enabled_from_env (void)
+{
+    const char *env_is_enabled;
+
+    env_is_enabled = g_getenv ("MC_LOG_ENABLE");
+    if (env_is_enabled == NULL)
+        return FALSE;
+
+    logging_enabled = (*env_is_enabled == '1' || g_ascii_strcasecmp (env_is_enabled, "true") == 0);
+    logging_initialized = TRUE;
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
 is_logging_enabled (void)
 {
-    static gboolean logging_initialized = FALSE;
-    static gboolean logging_enabled = FALSE;
 
-    if (!logging_initialized)
-    {
-        logging_enabled = mc_config_get_bool (mc_main_config,
-                                              CONFIG_APP_SECTION, "development.enable_logging",
-                                              FALSE);
-        logging_initialized = TRUE;
-    }
+    if (logging_initialized)
+        return logging_enabled;
+
+    if (is_logging_enabled_from_env ())
+        return logging_enabled;
+
+    logging_enabled =
+        mc_config_get_bool (mc_main_config, CONFIG_GROUP_NAME, CONFIG_KEY_NAME, FALSE);
+    logging_initialized = TRUE;
+
     return logging_enabled;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+get_log_filename (void)
+{
+    const char *env_filename;
+
+    env_filename = g_getenv ("MC_LOG_FILE");
+    if (env_filename != NULL)
+        return g_strdup (env_filename);
+
+    if (mc_config_has_param (mc_main_config, CONFIG_GROUP_NAME, CONFIG_KEY_NAME_FILE))
+        return mc_config_get_string (mc_main_config, CONFIG_GROUP_NAME, CONFIG_KEY_NAME_FILE, NULL);
+
+    return g_build_filename (mc_config_get_cache_path (), "mc.log", NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -75,7 +114,8 @@ mc_va_log (const char *fmt, va_list args)
     FILE *f;
     char *logfilename;
 
-    logfilename = g_build_filename (mc_config_get_cache_path (), "mc.log", NULL);
+    logfilename = get_log_filename ();
+
     if (logfilename != NULL)
     {
         f = fopen (logfilename, "a");
