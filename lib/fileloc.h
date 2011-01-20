@@ -71,7 +71,7 @@
 #define EDIT_BLOCK_FILE         EDIT_DIR PATH_SEP_STR "mcedit.block"
 #define EDIT_TEMP_FILE          EDIT_DIR PATH_SEP_STR "mcedit.temp"
 
-#define EDIT_GLOBAL_MENU        "cedit.menu"
+#define EDIT_GLOBAL_MENU        "mcedit.menu"
 #define EDIT_LOCAL_MENU         ".cedit.menu"
 #define EDIT_HOME_MENU          EDIT_DIR PATH_SEP_STR "menu"
 
