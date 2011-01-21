@@ -169,7 +169,6 @@ static const char *const shell_cmd[] = SHELL_COMMANDS_i;
 
 static void user_menu (WEdit * edit);
 static int left_of_four_spaces (WEdit * edit);
-static inline void edit_execute_macro (WEdit * edit, struct macro macro[], int n);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -558,7 +557,6 @@ edit_purge_widget (WEdit * edit)
     size_t len = sizeof (WEdit) - sizeof (Widget);
     char *start = (char *) edit + sizeof (Widget);
     memset (start, 0, len);
-    edit->macro_i = -1;         /* not recording a macro */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1663,28 +1661,6 @@ edit_goto_matching_bracket (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_execute_macro (WEdit * edit, struct macro macro[], int n)
-{
-    int i = 0;
-
-    if (edit->macro_depth++ > 256)
-    {
-        edit_error_dialog (_("Error"), _("Macro recursion is too deep"));
-        edit->macro_depth--;
-        return;
-    }
-    edit->force |= REDRAW_PAGE;
-    for (; i < n; i++)
-    {
-        edit_execute_cmd (edit, macro[i].command, macro[i].ch);
-    }
-    edit_update_screen (edit);
-    edit->macro_depth--;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** User edit menu, like user menu (F2) but only in editor. */
 
 static void
@@ -2225,7 +2201,7 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
     }
 
     edit_set_keymap ();
-
+    edit_load_macro_cmd (edit);
     return edit;
 }
 
@@ -2266,7 +2242,6 @@ edit_clean (WEdit * edit)
     g_free (edit->redo_stack);
     g_free (edit->filename);
     g_free (edit->dir);
-
     mc_search_free (edit->search);
     edit->search = NULL;
 
@@ -3404,23 +3379,24 @@ edit_find_bracket (WEdit * edit)
 void
 edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion)
 {
-    if (command == CK_Begin_Record_Macro)
+    if (command == CK_Begin_Record_Macro || (command == CK_Begin_End_Macro && macro_index < 0))
     {
-        edit->macro_i = 0;
+        macro_index = 0;
         edit->force |= REDRAW_CHAR_ONLY | REDRAW_LINE;
         return;
     }
-    if (command == CK_End_Record_Macro && edit->macro_i != -1)
+    if ((command == CK_End_Record_Macro || command == CK_Begin_End_Macro) && macro_index != -1)
     {
         edit->force |= REDRAW_COMPLETELY;
-        edit_save_macro_cmd (edit, edit->macro, edit->macro_i);
-        edit->macro_i = -1;
+        edit_store_macro_cmd (edit);
+        macro_index = -1;
         return;
     }
-    if (edit->macro_i >= 0 && edit->macro_i < MAX_MACRO_LENGTH - 1)
+
+    if (macro_index >= 0 && macro_index < MAX_MACRO_LENGTH - 1)
     {
-        edit->macro[edit->macro_i].command = command;
-        edit->macro[edit->macro_i++].ch = char_for_insertion;
+        record_macro_buf[macro_index].action = command;
+        record_macro_buf[macro_index++].ch = char_for_insertion;
     }
     /* record the beginning of a set of editing actions initiated by a key press */
     if (command != CK_Undo && command != CK_Ext_Mode)
@@ -4149,15 +4125,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     }
 
     /* CK_Pipe_Block */
-    if ((command / 1000) == 1)  /* a shell command */
-        edit_block_process_cmd (edit, shell_cmd[command - 1000], 1);
-    if (command > CK_Macro (0) && command <= CK_Last_Macro)
-    {                           /* a macro command */
-        struct macro m[MAX_MACRO_LENGTH];
-        int nm;
-        if (edit_load_macro_cmd (edit, m, &nm, command - 2000))
-            edit_execute_macro (edit, m, nm);
-    }
+    if ((command / 10000) == 1)  /* a shell command */
+        edit_block_process_cmd (edit, shell_cmd[command - 10000], 1);
 
     /* keys which must set the col position, and the search vars */
     switch (command)

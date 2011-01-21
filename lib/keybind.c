@@ -43,6 +43,7 @@
 /*** file scope variables ************************************************************************/
 
 static name_keymap_t command_names[] = {
+    {"InsertChar", CK_Insert_Char},
 #ifdef USE_INTERNAL_EDIT
     {"EditNoCommand", CK_Ignore_Key},
     {"EditIgnoreKey", CK_Ignore_Key},
@@ -199,6 +200,7 @@ static name_keymap_t command_names[] = {
     {"EditSaveMode", CK_Edit_Save_Mode},
     {"EditChooseSyntax", CK_Choose_Syntax},
     {"EditAbout", CK_About},
+    {"EditPipeBlock", CK_Pipe_Block (0)},
 
 #if 0
     {"EditFocusNext", CK_Focus_Next},
@@ -613,6 +615,20 @@ keybind_lookup_action (const char *name)
                    sizeof (command_names[0]), name_keymap_comparator);
 
     return (res != NULL) ? res->val : CK_Ignore_Key;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+const char *
+keybind_lookup_actionname (unsigned long action)
+{
+    size_t i;
+
+    for (i = 0; command_names[i].name != NULL; i++)
+        if (command_names[i].val == action)
+            return command_names[i].name;
+
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

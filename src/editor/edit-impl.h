@@ -184,12 +184,6 @@ typedef struct edit_stack_type
     char *filename;
 } edit_stack_type;
 
-struct macro
-{
-    unsigned long command;
-    int ch;
-};
-
 struct Widget;
 struct WMenuBar;
 
@@ -311,8 +305,8 @@ int edit_sort_cmd (WEdit * edit);
 int edit_ext_cmd (WEdit * edit);
 void edit_help_cmd (WEdit * edit);
 
-int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n);
-int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k);
+int edit_store_macro_cmd (WEdit * edit);
+gboolean edit_load_macro_cmd (WEdit * edit);
 void edit_delete_macro_cmd (WEdit * edit);
 
 int edit_copy_to_X_buf_cmd (WEdit * edit);
@@ -322,6 +316,7 @@ void edit_paste_from_X_buf_cmd (WEdit * edit);
 void edit_select_codepage_cmd (WEdit * edit);
 void edit_insert_literal_cmd (WEdit * edit);
 void edit_execute_macro_cmd (WEdit * edit);
+gboolean edit_execute_macro (WEdit * edit, int hotkey);
 void edit_begin_end_macro_cmd (WEdit * edit);
 
 void edit_paste_from_history (WEdit * edit);

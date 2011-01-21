@@ -507,9 +507,9 @@
    TODO: bring up a viewer to display the error message instead of inserting
    it into the text, which is annoying.
  */
-#define CK_Pipe_Block(i) (1000+(i))
+#define CK_Pipe_Block(i) (10000+(i))
 #define SHELL_COMMANDS_i {"/edit.indent.rc", "/edit.spell.rc", /* and so on */ 0 }
-#define CK_Macro(i)      (2000+(i))
+#define CK_Macro(i)      (20000+(i))
 #define CK_Last_Macro    CK_Macro(0x7FFF)
 
 /*** enums ***************************************************************************************/
@@ -544,6 +544,7 @@ typedef struct global_keymap_t
 
 void keybind_cmd_bind (GArray * keymap, const char *keybind, unsigned long action);
 unsigned long keybind_lookup_action (const char *name);
+const char *keybind_lookup_actionname (unsigned long action);
 const char *keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action);
 unsigned long keybind_lookup_keymap_command (const global_keymap_t * keymap, long key);
 

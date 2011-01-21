@@ -445,126 +445,6 @@ edit_get_save_file_as (WEdit * edit)
 #undef DLG_HEIGHT
 }
 
-/* {{{ Macro stuff starts here */
-
-/* --------------------------------------------------------------------------------------------- */
-/** creates a macro file if it doesn't exist */
-
-static FILE *
-edit_open_macro_file (const char *r)
-{
-    gchar *filename;
-    FILE *fd;
-    int file;
-    filename = concat_dir_and_file (mc_config_get_data_path (), EDIT_MACRO_FILE);
-    file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-    if (file == -1)
-    {
-        g_free (filename);
-        return 0;
-    }
-    close (file);
-    fd = fopen (filename, r);
-    g_free (filename);
-    return fd;
-}
-
-#define MAX_MACROS 1024
-static int saved_macro[MAX_MACROS + 1];
-static int saved_macros_loaded = 0;
-
-/* --------------------------------------------------------------------------------------------- */
-/**
-   This is just to stop the macro file be loaded over and over for keys
-   that aren't defined to anything. On slow systems this could be annoying.
- */
-
-static int
-macro_exists (int k)
-{
-    int i;
-    for (i = 0; i < MAX_MACROS && saved_macro[i]; i++)
-        if (saved_macro[i] == k)
-            return i;
-    return -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** returns 1 on error */
-
-static int
-edit_delete_macro (WEdit * edit, int k)
-{
-    gchar *tmp, *tmp2;
-    struct macro macro[MAX_MACRO_LENGTH];
-    FILE *f, *g;
-    int s, i, n, j = 0;
-
-    (void) edit;
-
-    if (saved_macros_loaded)
-    {
-        j = macro_exists (k);
-        if (j < 0)
-            return 0;
-    }
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_TEMP_FILE);
-    g = fopen (tmp, "w");
-    g_free (tmp);
-    if (!g)
-    {
-        edit_error_dialog (_("Delete macro"), get_sys_error (_("Cannot open temp file")));
-        return 1;
-    }
-    f = edit_open_macro_file ("r");
-    if (!f)
-    {
-        edit_error_dialog (_("Delete macro"), get_sys_error (_("Cannot open macro file")));
-        fclose (g);
-        return 1;
-    }
-    for (;;)
-    {
-        n = fscanf (f, ("key '%d 0': "), &s);
-        if (!n || n == EOF)
-            break;
-        n = 0;
-        while (fscanf (f, "%lu %d, ", &macro[n].command, &macro[n].ch))
-            n++;
-        {
-            int ret;
-            ret = fscanf (f, ";\n");
-        }
-        if (s != k)
-        {
-            fprintf (g, ("key '%d 0': "), s);
-            for (i = 0; i < n; i++)
-                fprintf (g, "%lu %d, ", macro[i].command, macro[i].ch);
-            fprintf (g, ";\n");
-        }
-    }
-    fclose (f);
-    fclose (g);
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_TEMP_FILE);
-    tmp2 = concat_dir_and_file (mc_config_get_data_path (), EDIT_MACRO_FILE);
-    if (rename (tmp, tmp2) == -1)
-    {
-        edit_error_dialog (_("Delete macro"), get_sys_error (_("Cannot overwrite macro file")));
-        g_free (tmp);
-        g_free (tmp2);
-        return 1;
-    }
-    g_free (tmp);
-    g_free (tmp2);
-
-    if (saved_macros_loaded)
-        memmove (saved_macro + j, saved_macro + j + 1, sizeof (int) * (MAX_MACROS - j - 1));
-    return 0;
-}
-
-/* }}} */
-
-/* --------------------------------------------------------------------------------------------- */
 /** returns 1 on success */
 
 static int
@@ -1498,117 +1378,345 @@ edit_save_as_cmd (WEdit * edit)
 
 /* {{{ Macro stuff starts here */
 
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+edit_macro_comparator (gconstpointer *macro1, gconstpointer *macro2)
+{
+    const macros_t *m1 = (const macros_t *) macro1;
+    const macros_t *m2 = (const macros_t *) macro2;
+
+    return m1->hotkey - m2->hotkey;
+}
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 0 on error */
 
-int
-edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
+static void
+edit_macro_sort_by_hotkey (WEdit *edit)
 {
-    FILE *f;
-    int s, i;
-
-    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
-    s = editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), 1);
-    edit->force |= REDRAW_COMPLETELY;
-    if (s)
-    {
-        if (edit_delete_macro (edit, s))
-            return 0;
-        f = edit_open_macro_file ("a+");
-        if (f)
-        {
-            fprintf (f, ("key '%d 0': "), s);
-            for (i = 0; i < n; i++)
-                fprintf (f, "%lu %d, ", macro[i].command, macro[i].ch);
-            fprintf (f, ";\n");
-            fclose (f);
-            if (saved_macros_loaded)
-            {
-                for (i = 0; i < MAX_MACROS && saved_macro[i]; i++);
-                saved_macro[i] = s;
-            }
-            return 1;
-        }
-        else
-            edit_error_dialog (_("Save macro"), get_sys_error (_("Cannot open macro file")));
-    }
-    return 0;
+    if (macros_list == NULL || macros_list->len == 0)
+        return;
+    g_array_sort (macros_list, (GCompareFunc) edit_macro_comparator);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+edit_get_macro (WEdit * edit, int hotkey, const macros_t **macros, guint *indx)
+{
+    const macros_t *array_start = &g_array_index (macros_list, struct macros_t, 0);
+    macros_t *result;
+    macros_t search_macro;
+    search_macro.hotkey = hotkey;
+    result = bsearch (&search_macro, macros_list->data, macros_list->len,
+                      sizeof (macros_t), (GCompareFunc) edit_macro_comparator);
+
+    if (result != NULL && result->macro != NULL)
+    {
+        *indx = (result - array_start);
+        *macros = result;
+        return TRUE;
+    }
+    *indx = 0;
+    return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** returns FALSE on error */
+
+static gboolean
+edit_delete_macro (WEdit * edit, int hotkey)
+{
+    mc_config_t *macros_config = NULL;
+    const char *section_name = "editor";
+    gchar *macros_fname;
+    guint indx;
+    char keyname[8];
+
+    const macros_t *macros = NULL;
+
+    /* clear array of actions for current hotkey */
+    while (edit_get_macro (edit, hotkey, &macros, &indx))
+    {
+        if (macros->macro != NULL)
+            g_array_free (macros->macro, TRUE);
+        macros = NULL;
+        g_array_remove_index (macros_list, indx);
+        edit_macro_sort_by_hotkey (edit);
+    }
+
+    macros_fname = g_build_filename (mc_config_get_path (), MC_MACRO_FILE, NULL);
+    macros_config = mc_config_init (macros_fname);
+    g_free (macros_fname);
+
+    if (macros_config == NULL)
+        return FALSE;
+
+    g_snprintf (keyname, sizeof (keyname), "%i", hotkey);
+    while (mc_config_del_key (macros_config, section_name, keyname));
+    mc_config_save_file (macros_config, NULL);
+    mc_config_deinit (macros_config);
+    return TRUE;
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
 edit_delete_macro_cmd (WEdit * edit)
 {
-    int command;
+    int hotkey;
 
-    command = editcmd_dialog_raw_key_query (_("Delete macro"), _("Press macro hotkey:"), 1);
+    hotkey = editcmd_dialog_raw_key_query (_("Delete macro"), _("Press macro hotkey:"), 1);
 
-    if (command != 0)
-        edit_delete_macro (edit, command);
+    if (hotkey != 0 && !edit_delete_macro (edit, hotkey))
+        message (D_ERROR, _("Delete macro"), _("Macro not deleted"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** return 0 on error */
 
-int
-edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
+/** returns FALSE on error */
+gboolean
+edit_execute_macro (WEdit * edit, int hotkey)
 {
-    FILE *f;
-    int s, i = 0, found = 0;
+    gboolean res = FALSE;
+
+    if (hotkey != 0)
+    {
+        const macros_t *macros;
+        guint indx;
+
+        if (edit_get_macro (edit, hotkey, &macros, &indx) &&
+            macros->macro != NULL && macros->macro->len != 0)
+        {
+            guint i;
+
+            edit->force |= REDRAW_PAGE;
+
+            for (i = 0; i < macros->macro->len; i++)
+            {
+                const macro_action_t *m_act;
+
+                m_act = &g_array_index (macros->macro, struct macro_action_t, i);
+                edit_execute_cmd (edit, m_act->action, m_act->ch);
+                res = TRUE;
+            }
+        }
+    }
+    edit_update_screen (edit);
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** returns FALSE on error */
+gboolean
+edit_store_macro_cmd (WEdit * edit)
+{
+    int i;
+    int hotkey;
+    char keyname[8];
+    GString *marcros_string;
+    mc_config_t *macros_config = NULL;
+    const char *section_name = "editor";
+    gchar *macros_fname;
+    GArray *macros; /* current macro */
+    int tmp_act;
+    gboolean have_macro = FALSE;
+
+    hotkey = editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), 1);
+    if (hotkey == ESC_CHAR)
+        return FALSE;
+
+    tmp_act = keybind_lookup_keymap_command (editor_map, hotkey);
+
+    /* return FALSE if try assign macro into restricted hotkeys */
+    if (tmp_act == CK_Begin_Record_Macro
+       || tmp_act == CK_End_Record_Macro
+       || tmp_act == CK_Begin_End_Macro)
+        return FALSE;
+
+    edit_delete_macro (edit, hotkey);
+
+    macros_fname = g_build_filename (mc_config_get_path (), MC_MACRO_FILE, NULL);
+    macros_config = mc_config_init (macros_fname);
+    g_free (macros_fname);
+
+    if (macros_config == NULL)
+        return FALSE;
+
+    g_snprintf (keyname, sizeof (keyname), "%i", hotkey);
+
+    marcros_string = g_string_sized_new (250);
+
+    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
+
+    macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
+    for (i = 0; i < macro_index; i++)
+    {
+        macro_action_t m_act;
+        const char *action_name;
+
+        action_name = keybind_lookup_actionname (record_macro_buf[i].action);
+
+        if (action_name == NULL)
+            break;
+
+        m_act.action = record_macro_buf[i].action;
+        m_act.ch = record_macro_buf[i].ch;
+        g_array_append_val (macros, m_act);
+        have_macro = TRUE;
+        g_string_append_printf (marcros_string, "%s:%i;", action_name, (int) record_macro_buf[i].ch);
+    }
+    if (have_macro)
+    {
+        macros_t macro;
+        macro.hotkey = hotkey;
+        macro.macro = macros;
+        g_array_append_val (macros_list, macro);
+        mc_config_set_string (macros_config, section_name, keyname, marcros_string->str);
+    }
+    else
+        mc_config_del_key (macros_config, section_name, keyname);
+
+    edit_macro_sort_by_hotkey (edit);
+
+    g_string_free (marcros_string, TRUE);
+    mc_config_save_file (macros_config, NULL);
+    mc_config_deinit (macros_config);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+edit_repeat_macro_cmd (WEdit * edit)
+{
+    int i, j;
+    char *f;
+    long count_repeat;
+    char *error = NULL;
+
+    f = input_dialog (_("Repeat last commands"), _("Repeat times:"), NULL, "1");
+    if (f == NULL || *f == '\0')
+    {
+        g_free (f);
+        return FALSE;
+    }
+
+    count_repeat = strtol (f, &error, 0);
+
+    if (error != NULL)
+    {
+        g_free (f);
+        return FALSE;
+    }
+
+    g_free (f);
+
+    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
+
+    edit->force |= REDRAW_PAGE;
+    for (j = 0; j < count_repeat; j++)
+        for (i = 0; i < macro_index; i++)
+            edit_execute_cmd (edit, record_macro_buf[i].action, record_macro_buf[i].ch);
+    edit_update_screen (edit);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** return FALSE on error */
+
+gboolean
+edit_load_macro_cmd (WEdit * edit)
+{
+    mc_config_t *macros_config = NULL;
+    gchar **profile_keys, **keys;
+    gchar **values, **curr_values;
+    gsize len, values_len;
+    const char *section_name = "editor";
+    gchar *macros_fname;
+    int hotkey;
 
     (void) edit;
 
-    if (saved_macros_loaded)
-        if (macro_exists (k) < 0)
-            return 0;
+    macros_fname = g_build_filename (mc_config_get_path (), MC_MACRO_FILE, NULL);
+    macros_config = mc_config_init (macros_fname);
+    g_free (macros_fname);
 
-    f = edit_open_macro_file ("r");
-    if (f != NULL)
+    if (macros_config == NULL)
+        return FALSE;
+
+    profile_keys = keys = mc_config_get_keys (macros_config, section_name, &len);
+    while (*profile_keys != NULL)
     {
-        struct macro dummy;
-        do
+        gboolean have_macro;
+        GArray *macros;
+        macros_t macro;
+
+        macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
+
+        curr_values = values = mc_config_get_string_list (macros_config, section_name,
+                                                          *profile_keys, &values_len);
+        hotkey = strtol (*profile_keys, NULL, 0);
+        have_macro = FALSE;
+        while (*curr_values != NULL && *curr_values[0] != '\0')
         {
-            int u;
-            u = fscanf (f, ("key '%d 0': "), &s);
-            if (!u || u == EOF)
-                break;
-            if (!saved_macros_loaded)
-                saved_macro[i++] = s;
-            if (!found)
+            char **macro_pair = NULL;
+
+            macro_pair = g_strsplit (*curr_values, ":", 2);
+
+            if (macro_pair != NULL)
             {
-                *n = 0;
-                while (*n < MAX_MACRO_LENGTH
-                       && 2 == fscanf (f, "%lu %d, ", &macro[*n].command, &macro[*n].ch))
-                    (*n)++;
+                macro_action_t m_act;
+                if (macro_pair [0] == NULL || macro_pair [0][0] == '\0')
+                    m_act.action = 0;
+                else
+                {
+                    m_act.action = keybind_lookup_action (macro_pair [0]);
+                    g_free (macro_pair[0]);
+                    macro_pair[0] = NULL;
+                }
+                if (macro_pair [1] == NULL || macro_pair [1][0] == '\0')
+                    m_act.ch = -1;
+                else
+                {
+                    m_act.ch = strtol (macro_pair [1], NULL, 0);
+                    g_free (macro_pair[1]);
+                    macro_pair[1] = NULL;
+                }
+                if (m_act.action != 0)
+                {
+                    /* a shell command */
+                    if ((m_act.action / CK_Pipe_Block (0)) == 1)
+                    {
+                        m_act.action = CK_Pipe_Block (0) + (m_act.ch > 0 ? m_act.ch : 0);
+                        m_act.ch = -1;
+                    }
+                    g_array_append_val (macros, m_act);
+                    have_macro = TRUE;
+                }
+                g_strfreev (macro_pair);
+                macro_pair = NULL;
             }
-            else
-            {
-                while (2 == fscanf (f, "%lu %d, ", &dummy.command, &dummy.ch));
-            }
-            {
-                int ret;
-                ret = fscanf (f, ";\n");
-            }
-            if (s == k)
-                found = 1;
+            curr_values++;
         }
-        while (!found || !saved_macros_loaded);
-        if (!saved_macros_loaded)
+        if (have_macro)
         {
-            saved_macro[i] = 0;
-            saved_macros_loaded = 1;
+            macro.hotkey = hotkey;
+            macro.macro = macros;
+            g_array_append_val (macros_list, macro);
         }
-        fclose (f);
-        return found;
+        profile_keys++;
+        g_strfreev (values);
     }
-    else
-        edit_error_dialog (_("Load macro"), get_sys_error (_("Cannot open macro file")));
-    return 0;
+    g_strfreev (keys);
+    mc_config_deinit (macros_config);
+    edit_macro_sort_by_hotkey (edit);
+    return TRUE;
 }
 
-/* }}} Macro stuff starts here */
+/* }}} Macro stuff end here */
 
 /* --------------------------------------------------------------------------------------------- */
 /** returns 1 on success */
@@ -1633,7 +1741,6 @@ edit_save_confirm_cmd (WEdit * edit)
     }
     return edit_save_cmd (edit);
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /** returns 1 on success */
@@ -3046,7 +3153,7 @@ edit_begin_end_macro_cmd (WEdit * edit)
     /* edit is a pointer to the widget */
     if (edit)
     {
-        unsigned long command = edit->macro_i < 0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
+        unsigned long command = macro_index < 0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
         edit_execute_key_command (edit, command, -1);
     }
 }
