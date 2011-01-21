@@ -57,7 +57,7 @@
 #endif
 
 #include "src/filemanager/cmd.h"        /* view_other_cmd() */
-#include "src/filemanager/usermenu.h"       /* user_menu_cmd() */
+#include "src/filemanager/usermenu.h"   /* user_menu_cmd() */
 
 #include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* option_tab_spacing */
@@ -1678,7 +1678,7 @@ user_menu (WEdit * edit)
     long start_mark, end_mark;
     struct stat status;
 
-    block_file = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);
+    block_file = concat_dir_and_file (mc_config_get_cache_path (), EDIT_BLOCK_FILE);
 
     nomark = eval_marks (edit, &start_mark, &end_mark);
     if (nomark == 0)

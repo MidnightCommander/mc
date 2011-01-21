@@ -78,7 +78,7 @@
 
 /*** global variables ****************************************************************************/
 
-char *profile_name;             /* .mc/ini */
+char *profile_name;             /* ${XDG_CONFIG_HOME}/mc/ini */
 char *global_profile_name;      /* mc.lib */
 
 /* Only used at program boot */
@@ -190,7 +190,7 @@ int file_op_compute_totals = 1;
 
 /*** file scope variables ************************************************************************/
 
-static char *panels_profile_name = NULL;        /* .mc/panels.ini */
+static char *panels_profile_name = NULL;        /* ${XDG_CACHE_HOME}/mc/panels.ini */
 
 /* *INDENT-OFF* */
 static const struct
@@ -383,15 +383,13 @@ static const struct
  \return
  Newly allocated path to config name or NULL if file not found.
 
- If config_file_name is a relative path, then search config in stantart pathes.
+ If config_file_name is a relative path, then search config in stantart paths.
 */
 static char *
 load_setup_get_full_config_name (const char *subdir, const char *config_file_name)
 {
     /*
        TODO: IMHO, in future this function must be placed into mc_config module.
-       Also, need to rename stupid mc_home and mc_home_alt to mc_sysconfdir and mc_datadir;
-       home_mc => mc_user_homedir
      */
     char *lc_basename, *ret;
 
@@ -407,9 +405,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
         return NULL;
 
     if (subdir != NULL)
-        ret = g_build_filename (home_dir, MC_USERCONF_DIR, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_config_get_path (), subdir, lc_basename, NULL);
     else
-        ret = g_build_filename (home_dir, MC_USERCONF_DIR, lc_basename, NULL);
+        ret = g_build_filename (mc_config_get_path (), lc_basename, NULL);
 
     if (exist_file (ret))
     {
@@ -419,9 +417,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (ret);
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_home, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_sysconfig_dir, subdir, lc_basename, NULL);
     else
-        ret = g_build_filename (mc_home, lc_basename, NULL);
+        ret = g_build_filename (mc_sysconfig_dir, lc_basename, NULL);
 
     if (exist_file (ret))
     {
@@ -431,9 +429,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (ret);
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_home_alt, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_share_data_dir, subdir, lc_basename, NULL);
     else
-        ret = g_build_filename (mc_home_alt, lc_basename, NULL);
+        ret = g_build_filename (mc_share_data_dir, lc_basename, NULL);
 
     g_free (lc_basename);
 
@@ -678,18 +676,18 @@ load_setup_get_keymap_profile_config (void)
     mc_config_t *keymap_config = NULL;
     char *fname, *fname2;
 
-    /* 1) /usr/share/mc (mc_home_alt) */
-    fname = g_build_filename (mc_home_alt, GLOBAL_KEYMAP_FILE, NULL);
+    /* 1) /usr/share/mc (mc_share_data_dir) */
+    fname = g_build_filename (mc_share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
-    /* 2) /etc/mc (mc_home) */
-    fname = g_build_filename (mc_home, GLOBAL_KEYMAP_FILE, NULL);
+    /* 2) /etc/mc (mc_sysconfig_dir) */
+    fname = g_build_filename (mc_sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
-    /* 3) ~/.mc (home_dir?) */
-    fname = g_build_filename (home_dir, MC_USERCONF_DIR, GLOBAL_KEYMAP_FILE, NULL);
+    /* 3) ${XDG_CONFIG_HOME}/mc */
+    fname = g_build_filename (mc_config_get_path (), GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
@@ -811,10 +809,10 @@ setup_init (void)
     if (profile_name != NULL)
         return profile_name;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+    profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
     if (!exist_file (profile))
     {
-        inifile = concat_dir_and_file (mc_home, "mc.ini");
+        inifile = concat_dir_and_file (mc_sysconfig_dir, "mc.ini");
         if (exist_file (inifile))
         {
             g_free (profile);
@@ -823,7 +821,7 @@ setup_init (void)
         else
         {
             g_free (inifile);
-            inifile = concat_dir_and_file (mc_home_alt, "mc.ini");
+            inifile = concat_dir_and_file (mc_share_data_dir, "mc.ini");
             if (exist_file (inifile))
             {
                 g_free (profile);
@@ -856,15 +854,15 @@ load_setup (void)
     profile = setup_init ();
 
     /* mc.lib is common for all users, but has priority lower than
-       ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = g_build_filename (mc_home, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
+       ${XDG_CONFIG_HOME}/mc/ini.  FIXME: it's only used for keys and treestore now */
+    global_profile_name = g_build_filename (mc_sysconfig_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     if (!exist_file (global_profile_name))
     {
         g_free (global_profile_name);
-        global_profile_name = g_build_filename (mc_home_alt, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
+        global_profile_name = g_build_filename (mc_share_data_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
-    panels_profile_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_PANELS_FILE, NULL);
+    panels_profile_name = g_build_filename (mc_config_get_cache_path (), MC_PANELS_FILE, NULL);
 
     mc_main_config = mc_config_init (profile);
 
@@ -1015,7 +1013,7 @@ save_setup (gboolean save_options, gboolean save_panel_options)
         mc_config_set_string (mc_main_config, "Misc", "clipboard_store", clipboard_store_path);
         mc_config_set_string (mc_main_config, "Misc", "clipboard_paste", clipboard_paste_path);
 
-        tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+        tmp_profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
         ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
 
         g_free (tmp_profile);
@@ -1069,7 +1067,7 @@ save_config (void)
     GError *error = NULL;
     size_t i;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+    profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
 
     /* Save integer options */
     for (i = 0; int_options[i].opt_name != NULL; i++)
@@ -1108,7 +1106,7 @@ save_layout (void)
     char *profile;
     size_t i;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
+    profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
     /* Save integer options */
     for (i = 0; layout[i].opt_name != NULL; i++)
         mc_config_set_int (mc_main_config, "Layout", layout[i].opt_name, *layout[i].opt_addr);
@@ -1122,7 +1120,7 @@ void
 load_key_defs (void)
 {
     /*
-     * Load keys from mc.lib before ~/.mc/ini, so that the user
+     * Load keys from mc.lib before ${XDG_CONFIG_HOME}/mc/ini, so that the user
      * definitions override global settings.
      */
     mc_config_t *mc_global_config;
@@ -1163,7 +1161,7 @@ void
 load_keymap_defs (void)
 {
     /*
-     * Load keymap from GLOBAL_KEYMAP_FILE before ~/.mc/keymap, so that the user
+     * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_DATA_HOME}/mc/keymap, so that the user
      * definitions override global settings.
      */
     mc_config_t *mc_global_keymap;

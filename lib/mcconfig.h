@@ -1,14 +1,14 @@
 #ifndef MC_CONFIG_H
 #define MC_CONFIG_H
 
-/*** typedefs(not structures) and defined constants ********************/
+/*** typedefs(not structures) and defined constants **********************************************/
 
 #define CONFIG_APP_SECTION "Midnight-Commander"
 #define CONFIG_PANELS_SECTION "Panels"
 
-/*** enums *************************************************************/
+/*** enums ***************************************************************************************/
 
-/*** structures declarations (and typedefs of structures)***************/
+/*** structures declarations (and typedefs of structures)*****************************************/
 
 typedef struct mc_config_struct
 {
@@ -16,12 +16,12 @@ typedef struct mc_config_struct
     gchar *ini_path;
 } mc_config_t;
 
-/*** global variables defined in .c file *******************************/
+/*** global variables defined in .c file *********************************************************/
 
 extern mc_config_t *mc_main_config;
 extern mc_config_t *mc_panels_config;
 
-/*** declarations of public functions **********************************/
+/*** declarations of public functions ************************************************************/
 
 /* mcconfig/common.c: */
 
@@ -85,5 +85,27 @@ void mc_config_set_int_list (mc_config_t *, const gchar *, const gchar *, int[],
 /* mcconfig/dialog.c: */
 
 void mc_config_show_dialog (void);
+
+
+/* mcconfig/paths.c: */
+
+void mc_config_init_config_paths (GError ** error);
+
+void mc_config_deinit_config_paths (void);
+
+gboolean mc_config_deprecated_dir_present (void);
+
+void mc_config_migrate_from_old_place (GError ** error);
+
+const char *mc_config_get_data_path (void);
+
+const char *mc_config_get_cache_path (void);
+
+const char *mc_config_get_path (void);
+
+const char *mc_config_get_home_dir (void);
+
+
+/*** inline functions ****************************************************************************/
 
 #endif

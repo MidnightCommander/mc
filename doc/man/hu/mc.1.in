@@ -188,7 +188,7 @@ esetén is.
 Az egérgomb automatikus ismétlésének határértéke alapesetben 400
 ezredmásodpercnyi. Ez megváltoztatható az
 .\"LINK2"
-~/.mc/ini
+~/.config/mc/ini
 .\"Save Setup"
 fájlban a
 .I mouse_repeat_rate
@@ -1218,7 +1218,7 @@ slow linkkel csatoltak).
 .PP
 Az átlépendő könyvtárakat a
 .B ignore_dirs
-változó állítja be az ~/.mc/ini fájlod
+változó állítja be az ~/.config/mc/ini fájlod
 .B FindFile
 részében.
 .PP
@@ -1289,7 +1289,7 @@ A cd belső parancs
 leírásánál.
 .\"NODE "    Extension File Edit"
 .SH "    Társítások"
-Ez az ~/.mc/bindings szerkesztéséhez segítségül fogja hívni a
+Ez az ~/.local/share/mc/bindings szerkesztéséhez segítségül fogja hívni a
 szövegszerkesztődet. A fájl formátuma a következő (a formátum a 3.0\-ás
 verzióval megváltozott):
 .PP
@@ -1361,7 +1361,7 @@ A felhasználói menüt a felhasználó testre szabhatja. Ez az aktulis
 könyvtár .mc.menu fájlja, ha az létezik, de csak, ha az a felhasználó
 (illetve a root) a tulajdonosa, és nem lehet bárki számára írható. Ha
 nem talál ilyen fájlt, az
-.I ~/.mc/menu
+.I ~/.local/share/mc/menu
 keresése a következő lépés, egyébként pedig az mc az alapértelmezett
 rendszerszintű menüt használja, pl.:
 .IR @prefix@/share/mc/mc.menu ,
@@ -1654,7 +1654,7 @@ engedélyezett, akkor a szokásos kiterjesztések azonosak a ed\-ben lévőkkel:
 .PP
 .I Beállítások automatikus mentése
 Ha ez az opciót bekapcsoltad, amikor kilépsz a Midnight Commander\-ből,
-az MC opcióinak beállításait az ~/.mc/ini fájlba menti.
+az MC opcióinak beállításait az ~/.config/mc/ini fájlba menti.
 .PP
 .I Auto menük.
 Ha ez az opció engedélyezett, a felhasználói menü megjelenik az mc
@@ -1808,7 +1808,7 @@ begépelt gomb lesz az megkérdezett gombbal azonosított. Ezután a
 dialógus ablak eltűnik.
 .PP
 Amikor végeztél minden gombbal, ezt elmentheted a Mentés gombbal az
-~/.mc/ini fájlba, a [terminal:TERM] részbe (ahol a TERM a jelenlegi
+~/.config/mc/ini fájlba, a [terminal:TERM] részbe (ahol a TERM a jelenlegi
 terminál neve), vagy elvetheted. Ha minden gombod megfelelően működik,
 és nem javítottál semmit, akkor (természetesen) nem fog menteni semmit
 sem.
@@ -1869,7 +1869,7 @@ FTP fájlrendszernél\&.
 .SH "    Beállítások mentése"
 A Midnight Commander indításkor megpróbálja az indítási információkat
 beolvasni az
-.I ~/.mc/ini
+.I ~/.config/mc/ini
 fájlból. Ha ez a fájl nem létezik, ezeket az információkat a
 rendszerszintű konfigurációs fájlból fogja beolvasni, amelyek a
 .I @prefix@/share/mc/mc.ini
@@ -1886,7 +1886,7 @@ Bal és Jobb oldali menü
 .\"LINK2"
 Beállítások
 .\"Options Menu"
-menü beállításait az ~/.mc/ini fájlba.
+menü beállításait az ~/.config/mc/ini fájlba.
 .PP
 Ha aktiválod az
 .I Auto Beállításmentés
@@ -2092,10 +2092,10 @@ használni fog.
 .PP
 Ha
 .BR bash \-t
-használsz, a subshell indító parancsait megadhatod az ~/.mc/bashrc
-fájlban, és tetszőleges billentyűzet térképet az ~/.mc/inputrc fájlban. A
+használsz, a subshell indító parancsait megadhatod az ~/.local/share/mc/bashrc
+fájlban, és tetszőleges billentyűzet térképet az ~/.local/share/mc/inputrc fájlban. A
 .B tcsh
-felhasználóknak az indítási parancsokat az ~/.mc/tcshrc fájlban van
+felhasználóknak az indítási parancsokat az ~/.local/share/mc/tcshrc fájlban van
 lehetőségük megadni.
 .PP
 Amikor a subshell kódot használod, bármikor megszakíthatod az
@@ -2459,13 +2459,13 @@ legördülő menü megtekintése szükséges.  Egyéb gombok: Shift és nyíl
 billentyűk a szöveg kijelöléséhez. A
 .B Ctrl\-Ins
 kimásolja a szöveget a
-.BR cooledit.clip \-be
+.BR mcedit.clip \-be
 és a
 .B Shift\-Ins
-beilleszti azt a cooledit.clip\-ből. A
+beilleszti azt a mcedit.clip\-ből. A
 .B Shift\-Del
 kivágja a szöveget a
-.BR cooledit.clip \-be,
+.BR mcedit.clip \-be,
 és a
 .B Ctrl\-Del
 törli a kijelölt szöveget. A lezáró billentyűként szintén használható a
@@ -2485,7 +2485,7 @@ hozzárendelhetsz az adott gomb lenyomásával. A makró lefut a
 lenyomod a Váltó (Alt), Ctrl, vagy az Esc\-et és a megadott gombot,
 feltételezve azt, hogy a gombot nem használja más funkció. Miután
 megadtad, a makro parancs a home könyvtárad
-.B ~/.cedit/cooledit.macros
+.B ~/.local/share/mc/mcedit/mcedit.macros
 fájljába kerül. A makrót a fájl megfelelő sorának törlésével végezheted
 el.
 .PP
@@ -2873,7 +2873,7 @@ base_color=normal=white,default:marked=magenta,default
 A legtöbb Midnight Commander beállítás a menükből is elérhető. Ám van
 néhány beállítás, ami csak a setup fájl szerkesztésével állítható be.
 .PP
-Ezeket a változókat az ~/.mc/ini fájlban állíthatod be:
+Ezeket a változókat az ~/.config/mc/ini fájlban állíthatod be:
 .PP
 .I clear_before_exec
 .IP
@@ -2981,7 +2981,7 @@ tartalommal.
 A Midnight Commander lehetőséget nyújt a terminál adatbázis root jogok
 használata nélküli módosítására. A Midnight Commander a rendszer indító
 fájlban (az mc.lib fájlt a Midnight Commander library könyvtárában
-találjuk), vagy az ~/.mc/ini file "terminal:your\-terminal\-name" részében
+találjuk), vagy az ~/.config/mc/ini file "terminal:your\-terminal\-name" részében
 keres, és, a "terminal:general" rész minden sora tartalmazza azokat a
 billentyűzet szimbólumokat az egyenlőségjelet és a definiált szimbólumot
 követően, amelyeket te mag akarsz határozni. A \\e speciális formátumot
@@ -3033,7 +3033,7 @@ A program súgó fájlja.
 .IP
 Az alapértelmezett rendszerszintű kiterjesztés fájl.
 .PP
-.I ~/.mc/bindings
+.I ~/.local/share/mc/bindings
 .IP
 A felhasználó saját kiterjesztései, nézet beállítások és szerkesztési
 beállítások. Ezek felülbírálják a rendszerszintű fájl bejegyzéseit, ha
@@ -3042,7 +3042,7 @@ van ilyen.
 .I @prefix@/share/mc/mc.ini
 .IP
 Az alapértelmezett rendszerszintű Midnight Commander beállítás, amelyet
-csak akkor használ, ha a felhasználónak nincs saját ~/.mc/ini fájlja.
+csak akkor használ, ha a felhasználónak nincs saját ~/.config/mc/ini fájlja.
 .PP
 .I @prefix@/share/mc/mc.lib
 .IP
@@ -3050,7 +3050,7 @@ A Midnight Commander globális beállításai. Az ebben a fájlban elvégzett
 beállítások minden felhasználó Midnight Commander\-jére vonatkoznak, ez
 használható a site\-globális terminál beállításaihoz.
 .PP
-.I ~/.mc/ini
+.I ~/.config/mc/ini
 .IP
 A felhasználó saját beállításai. Ha ez a fájl elérhető, akkor a
 beállítások ebből a fájlból olvasódnak be a rendszerszintű indító fájl
@@ -3065,19 +3065,19 @@ Ez a fájl tartalmazza a program által megjelenített útmutattásokat
 .IP
 Ez a fájl azonos a rendszerszintű alkalmazás menüvel.
 .PP
-.I ~/.mc/menu
+.I ~/.local/share/mc/menu
 .IP
 A falhasználó saját alkalmazás menüje. Ha ez a fájl elérhető a
 rendszerszintű alkalmazás menü helyett ezt fogja használni.
 .PP
-.I ~/.mc/Tree
+.I ~/.cache/mc/Tree
 .IP
 A könyvtárlista a Könyvtárfa és a Fa nézethez.  Minden sor egy
 bejegyzés. Minden sor perjellel kezdik a teljes könyvtár neveknél. A
 sorok egy számmal kezdődnek, amik azonosak az elöző könyvtáréval. Ha ezt
 a fájlt el akarod készíteni a következő parancsot használd: 
 .nf
-find / \-type d \-print | sort > ~/.mc/Tree"
+find / \-type d \-print | sort > ~/.cache/mc/Tree"
 .fi
 Normálisan nincs erre szükséged, mert a Midnight Commander automatikusan
 frissíti ezt.

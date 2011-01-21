@@ -2632,7 +2632,7 @@ _do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
             new_dir = temp;
         }
     }
-    directory = *new_dir ? new_dir : home_dir;
+    directory = *new_dir ? new_dir : mc_config_get_home_dir ();
 
     if (mc_chdir (directory) == -1)
     {

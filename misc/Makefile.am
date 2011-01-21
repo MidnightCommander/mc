@@ -13,7 +13,7 @@ pkgdata_DATA += mc.charsets
 endif
 
 LIBFILES_CONST = \
-	cedit.menu      \
+	mcedit.menu      \
 	edit.indent.rc \
 	edit.spell.rc \
 	filehighlight.ini \

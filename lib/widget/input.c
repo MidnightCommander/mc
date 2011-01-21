@@ -53,7 +53,7 @@
 #include "src/main.h"           /* home_dir */
 #include "src/filemanager/midnight.h"   /* current_panel */
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
-#include "src/keybind-defaults.h"   /* input_map */
+#include "src/keybind-defaults.h"       /* input_map */
 
 /*** global variables ****************************************************************************/
 
@@ -91,7 +91,7 @@ save_text_to_clip_file (const char *text)
     ssize_t ret;
     size_t str_len;
 
-    fname = g_build_filename (home_dir, EDIT_CLIP_FILE, NULL);
+    fname = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
     file = mc_open (fname, O_CREAT | O_WRONLY | O_TRUNC,
                     S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
     g_free (fname);
@@ -115,7 +115,7 @@ load_text_from_clip_file (char **text)
     char *fname = NULL;
     gboolean first = TRUE;
 
-    fname = g_build_filename (home_dir, EDIT_CLIP_FILE, NULL);
+    fname = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
     f = fopen (fname, "r");
     g_free (fname);
 

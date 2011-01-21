@@ -46,6 +46,7 @@
 #include "lib/strutil.h"        /* str_term_trim() */
 #include "lib/util.h"           /* concat_dir_and_file() */
 #include "lib/widget.h"
+#include "lib/mcconfig.h"
 
 #include "src/keybind-defaults.h"
 #include "src/main.h"           /* home_dir */
@@ -265,7 +266,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_HANDLED;
 
     case DLG_VALIDATE:
-        h->state = DLG_ACTIVE; /* don't stop the dialog before final decision */
+        h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
         if (edit_ok_to_exit (edit))
             h->state = DLG_CLOSED;
         return MSG_HANDLED;
@@ -345,7 +346,15 @@ edit_file (const char *_file, int line)
 
     if (!made_directory)
     {
-        char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
+        char *dir = concat_dir_and_file (mc_config_get_cache_path (), EDIT_DIR);
+        made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
+        g_free (dir);
+
+        dir = concat_dir_and_file (mc_config_get_path (), EDIT_DIR);
+        made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
+        g_free (dir);
+
+        dir = concat_dir_and_file (mc_config_get_data_path (), EDIT_DIR);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
     }

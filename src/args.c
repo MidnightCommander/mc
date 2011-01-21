@@ -567,7 +567,7 @@ mc_args_process (int argc, char *argv[])
     }
     if (mc_args__show_datadirs)
     {
-        printf ("%s (%s)\n", mc_home, mc_home_alt);
+        printf ("%s (%s)\n", mc_sysconfig_dir, mc_share_data_dir);
         return FALSE;
     }
 

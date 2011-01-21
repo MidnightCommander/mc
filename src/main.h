@@ -78,10 +78,8 @@ extern int midnight_shutdown;
 extern char *shell;
 extern const char *mc_prompt;
 
-extern char *mc_home;
-extern char *mc_home_alt;
-
-extern const char *home_dir;
+extern char *mc_sysconfig_dir;
+extern char *mc_share_data_dir;
 
 /*** declarations of public functions ************************************************************/
 

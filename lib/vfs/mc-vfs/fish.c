@@ -61,6 +61,7 @@
 #include "lib/strescape.h"
 #include "lib/unixcompat.h"
 #include "lib/fileloc.h"
+#include "lib/mcconfig.h"
 
 #include "src/filemanager/layout.h"     /* print_vfs_message */
 #include "src/execute.h"        /* pre_exec, post_exec */
@@ -149,7 +150,7 @@ fish_load_script_from_file (const char *hostname, const char *script_name, const
     gsize scr_len = 0;
 
     /* 1st: scan user directory */
-    scr_filename = g_build_path (PATH_SEP_STR, home_dir, MC_USERCONF_DIR, FISH_PREFIX, hostname,
+    scr_filename = g_build_path (PATH_SEP_STR, mc_config_get_data_path (), FISH_PREFIX, hostname,
                                  script_name, (char *) NULL);
     /* silent about user dir */
     g_file_get_contents (scr_filename, &scr_content, &scr_len, NULL);

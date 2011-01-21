@@ -119,12 +119,13 @@ char *shell = NULL;
 /* The prompt */
 const char *mc_prompt = NULL;
 
-/* mc_home: The home of MC - /etc/mc or defined by MC_DATADIR */
-char *mc_home = NULL;
-/* mc_home_alt: Alternative home of MC - deprecated /usr/share/mc */
-char *mc_home_alt = NULL;
-/* The home directory */
-const char *home_dir = NULL;
+/* mc_sysconfig_dir: Area for default settings from maintainers of distributuves
+  default is /etc/mc or may be defined by MC_DATADIR
+  */
+char *mc_sysconfig_dir = NULL;
+
+/* mc_share_data_dir: Area for default settings from developers */
+char *mc_share_data_dir = NULL;
 
 /* Set to TRUE to suppress printing the last directory */
 int print_last_revert = FALSE;
@@ -198,20 +199,15 @@ OS_Setup (void)
     mc_libdir = getenv ("MC_DATADIR");
     if (mc_libdir != NULL)
     {
-        mc_home = g_strdup (mc_libdir);
-        mc_home_alt = g_strdup (SYSCONFDIR);
+        mc_sysconfig_dir = g_strdup (mc_libdir);
+        mc_share_data_dir = g_strdup (SYSCONFDIR);
     }
     else
     {
-        mc_home = g_strdup (SYSCONFDIR);
-        mc_home_alt = g_strdup (DATADIR);
+        mc_sysconfig_dir = g_strdup (SYSCONFDIR);
+        mc_share_data_dir = g_strdup (DATADIR);
     }
 
-    /* This variable is used by the subshell */
-    home_dir = getenv ("HOME");
-
-    if (home_dir == NULL)
-        home_dir = mc_home;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -418,8 +414,6 @@ update_xterm_title_path (void)
 int
 main (int argc, char *argv[])
 {
-    struct stat s;
-    char *mc_dir;
     GError *error = NULL;
     gboolean isInitialized;
 
@@ -427,6 +421,7 @@ main (int argc, char *argv[])
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
+
 
     /* Set up temporary directory */
     mc_tmpdir ();
@@ -462,6 +457,17 @@ main (int argc, char *argv[])
     /* We need this, since ncurses endwin () doesn't restore the signals */
     save_stop_handler ();
 
+    /* Initialize and create home directories */
+    /* do it after the screen library initialization to show the error message */
+    mc_config_init_config_paths (&error);
+    if (error == NULL)
+    {
+        if (mc_config_deprecated_dir_present ())
+        {
+            mc_config_migrate_from_old_place (&error);
+        }
+    }
+
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
     tty_init ((gboolean) mc_args__slow_terminal, (gboolean) mc_args__ugly_line_drawing);
@@ -477,24 +483,28 @@ main (int argc, char *argv[])
     load_keymap_defs ();
 
     tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
-    isInitialized = mc_skin_init (&error);
-    mc_filehighlight = mc_fhl_new (TRUE);
-    dlg_set_default_colors ();
 
-    if (!isInitialized)
+    {
+        GError *error2 = NULL;
+        isInitialized = mc_skin_init (&error2);
+        mc_filehighlight = mc_fhl_new (TRUE);
+        dlg_set_default_colors ();
+
+        if (!isInitialized)
+        {
+            message (D_ERROR, _("Warning"), "%s", error2->message);
+            g_error_free (error2);
+            error2 = NULL;
+        }
+    }
+
+    if (error != NULL)
     {
         message (D_ERROR, _("Warning"), "%s", error->message);
         g_error_free (error);
         error = NULL;
     }
 
-    /* create home directory */
-    /* do it after the screen library initialization to show the error message */
-    mc_dir = g_build_filename (home_dir, MC_USERCONF_DIR, (char *) NULL);
-    canonicalize_pathname (mc_dir);
-    if ((stat (mc_dir, &s) != 0) && (errno == ENOENT) && mkdir (mc_dir, 0700) != 0)
-        message (D_ERROR, _("Warning"), _("Cannot create %s directory"), mc_dir);
-    g_free (mc_dir);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Done here to ensure that the subshell doesn't  */
@@ -571,8 +581,8 @@ main (int argc, char *argv[])
     }
     g_free (last_wd_string);
 
-    g_free (mc_home_alt);
-    g_free (mc_home);
+    g_free (mc_share_data_dir);
+    g_free (mc_sysconfig_dir);
     g_free (shell);
 
     done_key ();
@@ -581,6 +591,8 @@ main (int argc, char *argv[])
 
     g_free (mc_run_param0);
     g_free (mc_run_param1);
+
+    mc_config_deinit_config_paths ();
 
     putchar ('\n');             /* Hack to make shell's prompt start at left of screen */
 

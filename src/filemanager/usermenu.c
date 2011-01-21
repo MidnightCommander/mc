@@ -785,7 +785,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 #ifdef USE_INTERNAL_EDIT
             if (edit_widget)
             {
-                char *file = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);
+                char *file = concat_dir_and_file (mc_config_get_cache_path (), EDIT_BLOCK_FILE);
                 fname = (*quote_func) (file, 0);
                 g_free (file);
                 return fname;
@@ -872,20 +872,29 @@ user_menu_cmd (struct WEdit *edit_widget)
     {
         g_free (menu);
         if (edit_widget)
-            menu = concat_dir_and_file (home_dir, EDIT_HOME_MENU);
+            menu = concat_dir_and_file (mc_config_get_data_path (), EDIT_HOME_MENU);
         else
-            menu = g_build_filename (home_dir, MC_USERCONF_DIR, MC_USERMENU_FILE, NULL);
+            menu = g_build_filename (mc_config_get_data_path (), MC_USERMENU_FILE, NULL);
 
 
         if (!exist_file (menu))
         {
             g_free (menu);
-            menu = concat_dir_and_file (mc_home, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+            menu =
+                concat_dir_and_file (mc_config_get_home_dir (),
+                                     edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
             if (!exist_file (menu))
             {
                 g_free (menu);
-                menu = concat_dir_and_file
-                    (mc_home_alt, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                menu =
+                    concat_dir_and_file (mc_sysconfig_dir,
+                                         edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                if (!exist_file (menu))
+                {
+                    g_free (menu);
+                    menu = concat_dir_and_file
+                        (mc_share_data_dir, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                }
             }
         }
     }

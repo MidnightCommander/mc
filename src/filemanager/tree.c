@@ -160,7 +160,7 @@ remove_callback (tree_entry * entry, void *data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Save the ~/.mc/Tree file */
+/** Save the ${XDG_CACHE_HOME}/mc/Tree file */
 
 static void
 save_tree (WTree * tree)
@@ -174,7 +174,8 @@ save_tree (WTree * tree)
 
     if (error)
     {
-        tree_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, (char *) NULL);
+        tree_name =
+            g_build_filename (mc_config_get_cache_path (), MC_TREESTORE_FILE, (char *) NULL);
         fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), tree_name,
                  unix_error_string (error));
         g_free (tree_name);
@@ -212,7 +213,7 @@ load_tree (WTree * tree)
     tree_store_load ();
 
     tree->selected_ptr = tree->store->tree_first;
-    tree_chdir (tree, home_dir);
+    tree_chdir (tree, mc_config_get_home_dir ());
 }
 
 /* --------------------------------------------------------------------------------------------- */

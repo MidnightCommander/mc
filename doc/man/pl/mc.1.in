@@ -162,7 +162,7 @@ przeglądaniu pomocy i przy drzewie katalogów.
 .PP
 Standardowo czas autopowtórzenia przy klikaniu myszą wynosi 400 milisekund.
 Tę wartość można zmienić edytując plik
-\&~/.mc/ini
+\&~/.config/mc/ini
 i zmieniając parametr
 .IR mouse_repeat_rate .
 .PP
@@ -1024,7 +1024,7 @@ Katalogi do omijania powinny być umieszczone w zmiennej
 .B ignore_dirs
 w sekcji
 .B FindFile
-twojego pliku ~/.mc/ini.
+twojego pliku ~/.config/mc/ini.
 .PP
 Składowe katalogów powinny być oddzielone od siebie przez średniki, to jest
 przykład:
@@ -1085,7 +1085,7 @@ przemieszczanie.
 .PP
 .\"NODE "    Extension File Edit"
 .SH "    Edycja rozszerzeń pliów (Extension File Edit)"
-Ta komenda wywoła twój edytor na plik ~/.mc/bindings. Format tego pliku jest
+Ta komenda wywoła twój edytor na plik ~/.local/share/mc/bindings. Format tego pliku jest
 następujący (zmienił się on począwszy od wersji 3.0):
 .PP
 Wszystkie linie zaczynające się od #, lub puste, nie są brane pod uwagę.
@@ -1158,7 +1158,7 @@ Menu użytkownika jest bardzo użytecznym menu, które może być tworzone
 w sposób dowolny, przez użytkownika. Kiedy tylko próbujesz coś zrobić
 przy użyciu tego menu, ładowany jest plik .mc.menu z aktualnego katalogu, ale
 tylko wtedy kiedy jest on w posiadaniu użytkownika lub roota i mamy do niego
-prawa zapisu. Jeśli takiego nie ma próbuje się z plikiem ~/.mc/menu z tymi
+prawa zapisu. Jeśli takiego nie ma próbuje się z plikiem ~/.local/share/mc/menu z tymi
 samymi założeniami, jeśli jego też nie ma \- używa się standardowego pliku
 systemowego, który znajduje się w @prefix@/share/mc/mc.menu.
 .PP
@@ -1412,7 +1412,7 @@ te, których używa w komenda
 .I Auto Save Setup.
 Jeśli ta opcja jest włączona, kiedy wychodzisz z Midnight Commandera
 konfiguracja MC zostanie zachowana automatycznie (bez pytania)
-do pliku ~/.mc/ini.
+do pliku ~/.config/mc/ini.
 .PP
 .I Auto menus.
 Jeśli ta opcja jest włączona, menu użytkownika będzie włączone na starcie.
@@ -1544,7 +1544,7 @@ wiadomość zniknie. W przeciwnym wypadku wciśnij klawisz, który sobie życzys
 i również poczekaj na zniknięcie okna.
 .PP
 Kiedy skończysz już ze wszystkimi klawiszami, możesz nacisnąć Save
-żeby zachować zmiany do pliku ~/.mc/ini do sekcji [terminal:TERM] (gdzie
+żeby zachować zmiany do pliku ~/.config/mc/ini do sekcji [terminal:TERM] (gdzie
 TERM jest nazwą twojego aktualnego terminala) lub po prostu odrzucić je.
 .PP
 .\"NODE "    Virtual FS"
@@ -1597,13 +1597,13 @@ System plików FTP (FTP File System) po więcej szczegółów.
 .\"NODE "    Save Setup"
 .SH "    Zapisz ustawienia (Save Setup)"
 Na starcie Midnight Commander będzie próbował odczytać opcje startowe
-z pliku ~/.mc/ini. Jeśli on nie istnieje, odczyta on konfiguracje z
+z pliku ~/.config/mc/ini. Jeśli on nie istnieje, odczyta on konfiguracje z
 ogólnodostępnego pliku @prefix@/share/mc/mc.ini. Jeśli on też nie istnieje MC
 użyje swoich domyślnych ustawień.
 .PP
 Komenda
 .I Save Setup
-tworzy plik ~/.mc/ini zachowując aktualne ustawienia lewego, prawego menu,
+tworzy plik ~/.config/mc/ini zachowując aktualne ustawienia lewego, prawego menu,
 jak również menu opcji.
 .PP
 Jeśli właczysz opcję
@@ -1758,11 +1758,11 @@ z Midnight Commandera.
 .PP
 Jeśli używasz
 .B basha
-możesz wybrać startowe komendy twojej powłoki w tle w pliku ~/.mc/bashrc,
-a ustawienia klawiatury w ~/.mc/inputrc.
+możesz wybrać startowe komendy twojej powłoki w tle w pliku ~/.local/share/mc/bashrc,
+a ustawienia klawiatury w ~/.local/share/mc/inputrc.
 Użytkownicy
 .B tcsh
-mogą wstawiać komendy startowe do pliku ~/.mc/tcshrc.
+mogą wstawiać komendy startowe do pliku ~/.local/share/mc/tcshrc.
 .PP
 Jeśli kod powłoki w tle jest użyty, możesz zawiesić aplikację w dowolnej chwili
 po prostu naciskając kombinację C\-o i przeskakując spowrotem do Midnight
@@ -2109,13 +2109,13 @@ zobaczyć jakie są klawisze po prostu obejrzyj odpowiednie menu
 rozwijalne. Inne klawisze to: przemieszczanie z Shiftem zaznaczające tekst.
 .B Ctrl\-Ins
 kopiuje do pliku
-.B cooledit.clip
+.B mcedit.clip
 a
 .B Shift\-Ins
-wkleja z pliku cooledit.clip.
+wkleja z pliku mcedit.clip.
 .B Shift\-Del
 Wycina do
-.BR cooledit.clip ,
+.BR mcedit.clip ,
 a
 .B Ctrl\-Del
 kasuje zaznaczony tekst. Klawisze dokończenia również dają Enter z
@@ -2135,20 +2135,20 @@ i przyporządkowany klawisz. Makro jest wykonywane również jeśli naciśniesz
 klawisz Meta, Ctrl, lub Esc i wybrany klawisz, jednak tylko jeśli ten
 klawisz nie jest używane przez inne funkcje. Raz zdefiniowane, makro
 wędruje sobie do pliku
-.B .mc/cedit/cooledit.macros
+.B ~/.local/share/mc/mcedit/mcedit.macros
 w twoim katalogu domowym. Możesz skasować makro kasując odpowiednią linię z
 tego pliku.
 .PP
 .B F19
 sformatuje format C jeśli jest podświetlony. Żeby to działało, stwórz
 wykonywalny plik
-.B .mc/cedit/edit.indent.rc
+.B ~/.local/share/mc/mcedit/edit.indent.rc
 w twoim katalogu domowym zawierający poniższe:
 .PP
 .nf
 #!/bin/sh
-/usr/bin/indent \-kr \-pcs $HOME/.mc/cedit/cooledit.block >& /dev/null
-cat /dev/null > $HOME/.mc/cedit/cooledit.error
+/usr/bin/indent \-kr \-pcs ~/.cache/mc/mcedit/mcedit.block>& /dev/null
+cat /dev/null > ~/.cache/mc/mcedit/cooledit.error
 .fi
 .PP
 Edytor wyświetla również znaki nieamerykańskie (160+). Kiedy edytujesz plik
@@ -2529,7 +2529,7 @@ Większość ustawień Midnight Commandera może być zmieniana z poziomu menu.
 Pomimo tego jest pewna ilość ustawień, których zmiana możliwa jest jedynie
 poprzez zmianę w plikach konfiguracyjnych.
 .PP
-Opcje mogą być ustawione w twoim pliku ~/.mc/ini :
+Opcje mogą być ustawione w twoim pliku ~/.config/mc/ini :
 .PP
 .I clear_before_exec.
 .IP
@@ -2680,7 +2680,7 @@ zawartość wybranego katalogu.
 Midnight Commander pozwala ci na naprawienie bazy danych terminali bez
 posiadania uprawnień roota. Midnight Commander szuka w pliku startowym
 (mc.lib położonego w katalogach z bibliotekami Midnight Commandera) lub w
-pliku ~/.mc/ini sekcji "terminal:nazwa\-twojego\-terminala" i potem sekcji
+pliku ~/.config/mc/ini sekcji "terminal:nazwa\-twojego\-terminala" i potem sekcji
 "terminal:general", każda linia sekcji zawiera symbol klawisza, który
 chcesz zdefiniować, zaczynające się do znaku równości i definicji klawisza.
 Możesz użyć kombinacji \\E aby reprezentować znak escape i ^x aby
@@ -2733,7 +2733,7 @@ Plik pomocy dla programu.
 .IP
 Standardowy plik rozszerzeń plików.
 .PP
-~/.mc/bindings
+~/.local/share/mc/bindings
 .IP
 Własny plik użytkownika, konfiguruje podgląd i edycje plików. Ma wyższy
 priorytet niż plik systemowy.
@@ -2741,7 +2741,7 @@ priorytet niż plik systemowy.
 @prefix@/share/mc/mc.ini
 .IP
 Standardowy plik setupu do Midnight Commandera, używany tylko wówczas,
-kiedy użytkownik nie ma swojego własnego pliku ~/.mc/ini.
+kiedy użytkownik nie ma swojego własnego pliku ~/.config/mc/ini.
 .PP
 @prefix@/share/mc/mc.lib
 .IP
@@ -2749,7 +2749,7 @@ Globalne ustawienia Midnight Commandera. Ustawienia w tym pliku są
 uwzględniane przez wszystkie sesje Midnight Commandera, użyteczne do
 definiowania ogólnosystemowych ustawień terminali.
 .PP
-~/.mc/ini
+~/.config/mc/ini
 .IP
 Własny setup użytkownika. Jeśli ten plik jest dostępny, jest ładowany
 zamiast pliku globalnego.
@@ -2762,18 +2762,18 @@ Plik zawierający podpowiedzi (hints) wyświetlane przez program.
 .IP
 Ten plik zawiera informacje o ogólnosystemowych aplikacjach w menu.
 .PP
-~/.mc/menu
+~/.local/share/mc/menu
 .IP
 Własny plik menu użytkownika. Jeśli ten plik jest obecny jest używany
 zamiast pliku globalnego.
 .PP
-~/.mc/tree
+~~/.cache/mc/tree
 .IP
 Lista katalogów drzewa katalogów i podglądu drzewa. Jedna linia jest jednym
 wejściem. Linie zaczynające się od ukośnika są pełnymi nazwami katalogów.
 Linie zaczynające się od numeru mają tyle znaków ile poprzedni katalog.
 Jeśli chcesz możesz stworzyć plik używając komendy "find / \-type d
-\-print | sort > ~/.mc/tree". Normalnie nie ma sensu tego czynić, gdyż
+\-print | sort > ~/.cache/mc/tree". Normalnie nie ma sensu tego czynić, gdyż
 Midnight Commander robi to sam za ciebie.
 .PP
 \&./.mc.menu

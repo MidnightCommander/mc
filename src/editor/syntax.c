@@ -57,7 +57,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 
-#include "src/main.h"           /* mc_home */
+#include "src/main.h"           /* mc_sysconfig_dir */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
@@ -852,19 +852,20 @@ open_include_file (const char *filename)
         return fopen (filename, "r");
 
     g_free (error_file_name);
-    error_file_name = g_build_filename (home_dir, EDIT_DIR, filename, (char *) NULL);
+    error_file_name =
+        g_build_filename (mc_config_get_data_path (), EDIT_DIR, filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f != NULL)
         return f;
 
     g_free (error_file_name);
-    error_file_name = g_build_filename (mc_home, "syntax", filename, (char *) NULL);
+    error_file_name = g_build_filename (mc_sysconfig_dir, "syntax", filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f != NULL)
         return f;
 
     g_free (error_file_name);
-    error_file_name = g_build_filename (mc_home_alt, "syntax", filename, (char *) NULL);
+    error_file_name = g_build_filename (mc_share_data_dir, "syntax", filename, (char *) NULL);
 
     return fopen (error_file_name, "r");
 }
@@ -1266,7 +1267,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     f = fopen (syntax_file, "r");
     if (f == NULL)
     {
-        lib_file = g_build_filename (mc_home_alt, "syntax", "Syntax", (char *) NULL);
+        lib_file = g_build_filename (mc_share_data_dir, "syntax", "Syntax", (char *) NULL);
         f = fopen (lib_file, "r");
         g_free (lib_file);
         if (f == NULL)
@@ -1510,7 +1511,7 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
         if (!*edit->filename && !type)
             return;
     }
-    f = g_build_filename (home_dir, EDIT_SYNTAX_FILE, (char *) NULL);
+    f = g_build_filename (mc_config_get_data_path (), EDIT_SYNTAX_FILE, (char *) NULL);
     if (edit != NULL)
         r = edit_read_syntax_file (edit, pnames, f, edit->filename,
                                    get_first_editor_line (edit),

@@ -48,6 +48,7 @@
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
+#include "lib/mcconfig.h"
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 
@@ -1630,14 +1631,11 @@ static int
 extfs_init (struct vfs_class *me)
 {
     gboolean d1, d2;
-    char *dirname;
 
     (void) me;
 
     /* 1st: scan user directory */
-    dirname = g_build_path (PATH_SEP_STR, home_dir, MC_USERCONF_DIR, (char *) NULL);
-    d1 = extfs_get_plugins (dirname, TRUE);     /* silent about user dir */
-    g_free (dirname);
+    d1 = extfs_get_plugins (mc_config_get_data_path (), TRUE);  /* silent about user dir */
     /* 2nd: scan system dir */
     d2 = extfs_get_plugins (LIBEXECDIR, d1);
 
