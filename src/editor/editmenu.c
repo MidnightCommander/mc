@@ -168,11 +168,7 @@ create_command_menu (void)
     entries = g_list_append (entries, menu_separator_create ());
     entries =
         g_list_append (entries,
-                       menu_entry_create (_("&Start record macro"), CK_Begin_Record_Macro));
-    entries =
-        g_list_append (entries,
-                       menu_entry_create (_("Finis&h record macro..."), CK_End_Record_Macro));
-    entries = g_list_append (entries, menu_entry_create (_("&Execute macro..."), CK_Execute_Macro));
+                       menu_entry_create (_("&Start/Stop record macro"), CK_Begin_End_Macro));
     entries = g_list_append (entries, menu_entry_create (_("Delete macr&o..."), CK_Delete_Macro));
     entries = g_list_append (entries, menu_separator_create ());
     entries =
