@@ -1167,18 +1167,6 @@ load_keymap_defs (void)
 
     if (mc_global_keymap != NULL)
     {
-#ifdef USE_INTERNAL_EDIT
-        editor_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("editor", editor_keymap, mc_global_keymap);
-        editor_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("editor:xmap", editor_x_keymap, mc_global_keymap);
-#endif
-
-        viewer_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("viewer", viewer_keymap, mc_global_keymap);
-        viewer_hex_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("viewer:hex", viewer_hex_keymap, mc_global_keymap);
-
         main_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("main", main_keymap, mc_global_keymap);
         main_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
@@ -1186,6 +1174,9 @@ load_keymap_defs (void)
 
         panel_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("panel", panel_keymap, mc_global_keymap);
+
+        dialog_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("dialog", dialog_keymap, mc_global_keymap);
 
         input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("input", input_keymap, mc_global_keymap);
@@ -1199,13 +1190,23 @@ load_keymap_defs (void)
         help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("help", help_keymap, mc_global_keymap);
 
-        dialog_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("dialog", dialog_keymap, mc_global_keymap);
+#ifdef USE_INTERNAL_EDIT
+        editor_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("editor", editor_keymap, mc_global_keymap);
+        editor_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("editor:xmap", editor_x_keymap, mc_global_keymap);
+#endif
+
+        viewer_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("viewer", viewer_keymap, mc_global_keymap);
+        viewer_hex_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("viewer:hex", viewer_hex_keymap, mc_global_keymap);
 
 #ifdef USE_DIFF_VIEW
         diff_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("diffviewer", diff_keymap, mc_global_keymap);
 #endif
+
         mc_config_deinit (mc_global_keymap);
     }
 
@@ -1220,6 +1221,10 @@ load_keymap_defs (void)
     panel_map = default_panel_keymap;
     if (panel_keymap && panel_keymap->len > 0)
         panel_map = (global_keymap_t *) panel_keymap->data;
+
+    dialog_map = default_dialog_keymap;
+    if (dialog_keymap && dialog_keymap->len > 0)
+        dialog_map = (global_keymap_t *) dialog_keymap->data;
 
     input_map = default_input_keymap;
     if (input_keymap && input_keymap->len > 0)
@@ -1237,16 +1242,11 @@ load_keymap_defs (void)
     if (help_keymap && help_keymap->len > 0)
         help_map = (global_keymap_t *) help_keymap->data;
 
-    dialog_map = default_dialog_keymap;
-    if (dialog_keymap && dialog_keymap->len > 0)
-        dialog_map = (global_keymap_t *) dialog_keymap->data;
-
 #ifdef USE_DIFF_VIEW
     diff_map = default_diff_keymap;
     if (diff_keymap && diff_keymap->len > 0)
         diff_map = (global_keymap_t *) diff_keymap->data;
 #endif
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1254,6 +1254,22 @@ load_keymap_defs (void)
 void
 free_keymap_defs (void)
 {
+    if (main_keymap != NULL)
+        g_array_free (main_keymap, TRUE);
+    if (main_x_keymap != NULL)
+        g_array_free (main_x_keymap, TRUE);
+    if (panel_keymap != NULL)
+        g_array_free (panel_keymap, TRUE);
+    if (dialog_keymap != NULL)
+        g_array_free (dialog_keymap, TRUE);
+    if (input_keymap != NULL)
+        g_array_free (input_keymap, TRUE);
+    if (listbox_keymap != NULL)
+        g_array_free (listbox_keymap, TRUE);
+    if (tree_keymap != NULL)
+        g_array_free (tree_keymap, TRUE);
+    if (help_keymap != NULL)
+        g_array_free (help_keymap, TRUE);
 #ifdef USE_INTERNAL_EDIT
     if (editor_keymap != NULL)
         g_array_free (editor_keymap, TRUE);
@@ -1264,22 +1280,6 @@ free_keymap_defs (void)
         g_array_free (viewer_keymap, TRUE);
     if (viewer_hex_keymap != NULL)
         g_array_free (viewer_hex_keymap, TRUE);
-    if (main_keymap != NULL)
-        g_array_free (main_keymap, TRUE);
-    if (main_x_keymap != NULL)
-        g_array_free (main_x_keymap, TRUE);
-    if (panel_keymap != NULL)
-        g_array_free (panel_keymap, TRUE);
-    if (input_keymap != NULL)
-        g_array_free (input_keymap, TRUE);
-    if (listbox_keymap != NULL)
-        g_array_free (listbox_keymap, TRUE);
-    if (tree_keymap != NULL)
-        g_array_free (tree_keymap, TRUE);
-    if (help_keymap != NULL)
-        g_array_free (help_keymap, TRUE);
-    if (dialog_keymap != NULL)
-        g_array_free (dialog_keymap, TRUE);
 #ifdef USE_DIFF_VIEW
     if (diff_keymap != NULL)
         g_array_free (diff_keymap, TRUE);
