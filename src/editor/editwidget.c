@@ -79,7 +79,7 @@ edit_get_shortcut (unsigned long command)
     if (shortcut != NULL)
         return g_strdup (shortcut);
 
-    ext_map = keybind_lookup_keymap_shortcut (editor_map, CK_Ext_Mode);
+    ext_map = keybind_lookup_keymap_shortcut (editor_map, CK_ExtendedKeyMap);
     if (ext_map != NULL)
         shortcut = keybind_lookup_keymap_shortcut (editor_x_map, command);
     if (shortcut != NULL)

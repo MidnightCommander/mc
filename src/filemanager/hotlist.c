@@ -1707,7 +1707,7 @@ add2hotlist_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-hotlist_cmd (int vfs_or_hotlist)
+hotlist_show (int vfs_or_hotlist)
 {
     char *target = NULL;
 

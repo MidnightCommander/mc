@@ -1533,9 +1533,9 @@ edit_store_macro_cmd (WEdit * edit)
     tmp_act = keybind_lookup_keymap_command (editor_map, hotkey);
 
     /* return FALSE if try assign macro into restricted hotkeys */
-    if (tmp_act == CK_Begin_Record_Macro
-       || tmp_act == CK_End_Record_Macro
-       || tmp_act == CK_Begin_End_Macro)
+    if (tmp_act == CK_MacroStartRecord
+       || tmp_act == CK_MacroStopRecord
+       || tmp_act == CK_MacroStartStopRecord)
         return FALSE;
 
     edit_delete_macro (edit, hotkey);
@@ -1692,9 +1692,9 @@ edit_load_macro_cmd (WEdit * edit)
                 if (m_act.action != 0)
                 {
                     /* a shell command */
-                    if ((m_act.action / CK_Pipe_Block (0)) == 1)
+                    if ((m_act.action / CK_PipeBlock (0)) == 1)
                     {
-                        m_act.action = CK_Pipe_Block (0) + (m_act.ch > 0 ? m_act.ch : 0);
+                        m_act.action = CK_PipeBlock (0) + (m_act.ch > 0 ? m_act.ch : 0);
                         m_act.ch = -1;
                     }
                     g_array_append_val (macros, m_act);
@@ -3056,7 +3056,7 @@ edit_begin_end_macro_cmd (WEdit * edit)
     /* edit is a pointer to the widget */
     if (edit != NULL)
     {
-        unsigned long command = macro_index < 0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
+        unsigned long command = macro_index < 0 ? CK_MacroStartRecord : CK_MacroStopRecord;
         edit_execute_key_command (edit, command, -1);
     }
 }
@@ -3069,7 +3069,7 @@ edit_begin_end_repeat_cmd (WEdit * edit)
     /* edit is a pointer to the widget */
     if (edit != NULL)
     {
-        unsigned long command = macro_index < 0 ? CK_Begin_Record_Repeat : CK_End_Record_Repeat;
+        unsigned long command = macro_index < 0 ? CK_RepeatStartRecord : CK_RepeatStopRecord;
         edit_execute_key_command (edit, command, -1);
     }
 }

@@ -853,55 +853,55 @@ help_execute_cmd (unsigned long command)
 
     switch (command)
     {
-    case CK_HelpHelp:
+    case CK_Help:
         help_help (whelp);
         break;
-    case CK_HelpIndex:
+    case CK_Index:
         help_index (whelp);
         break;
-    case CK_HelpBack:
+    case CK_Back:
         help_back (whelp);
         break;
-    case CK_HelpMoveUp:
+    case CK_Up:
         help_prev_link (TRUE);
         break;
-    case CK_HelpMoveDown:
+    case CK_Down:
         help_next_link (TRUE);
         break;
-    case CK_HelpMovePgDn:
+    case CK_PageDown:
         move_forward (help_lines - 1);
         break;
-    case CK_HelpMovePgUp:
+    case CK_PageUp:
         move_backward (help_lines - 1);
         break;
-    case CK_HelpMoveHalfPgDn:
+    case CK_HalfPageDown:
         move_forward (help_lines / 2);
         break;
-    case CK_HelpMoveHalfPgUp:
+    case CK_HalfPageUp:
         move_backward (help_lines / 2);
         break;
-    case CK_HelpMoveTop:
+    case CK_Top:
         move_to_top ();
         break;
-    case CK_HelpMoveBottom:
+    case CK_Bottom:
         move_to_bottom ();
         break;
-    case CK_HelpSelectLink:
+    case CK_Enter:
         help_select_link ();
         break;
-    case CK_HelpNextLink:
+    case CK_LinkNext:
         help_next_link (FALSE);
         break;
-    case CK_HelpPrevLink:
+    case CK_LinkPrev:
         help_prev_link (FALSE);
         break;
-    case CK_HelpNextNode:
+    case CK_NodeNext:
         help_next_node ();
         break;
-    case CK_HelpPrevNode:
+    case CK_NodePrev:
         help_prev_node ();
         break;
-    case CK_HelpQuit:
+    case CK_Quit:
         dlg_stop (whelp);
         break;
     default:

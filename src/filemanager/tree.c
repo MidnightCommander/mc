@@ -1016,54 +1016,54 @@ tree_execute_cmd (WTree * tree, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
-    if (command != CK_TreeStartSearch)
+    if (command != CK_Search)
         tree->searching = 0;
 
     switch (command)
     {
-    case CK_TreeHelp:
+    case CK_Help:
         interactive_display (NULL, "[Directory Tree]");
         break;
-    case CK_TreeForget:
+    case CK_Forget:
         tree_forget (tree);
         break;
-    case CK_TreeToggleNav:
+    case CK_ToggleNavigation:
         tree_toggle_navig (tree);
         break;
-    case CK_TreeCopy:
+    case CK_Copy:
         tree_copy (tree, "");
         break;
-    case CK_TreeMove:
+    case CK_Move:
         tree_move (tree, "");
         break;
-    case CK_TreeMoveUp:
+    case CK_Up:
         tree_move_up (tree);
         break;
-    case CK_TreeMoveDown:
+    case CK_Down:
         tree_move_down (tree);
         break;
-    case CK_TreeMoveHome:
+    case CK_Top:
         tree_move_home (tree);
         break;
-    case CK_TreeMoveEnd:
+    case CK_Bottom:
         tree_move_end (tree);
         break;
-    case CK_TreeMovePgUp:
+    case CK_PageUp:
         tree_move_pgup (tree);
         break;
-    case CK_TreeMovePgDn:
+    case CK_PageDown:
         tree_move_pgdn (tree);
         break;
-    case CK_TreeOpen:
+    case CK_Enter:
         tree_chdir_sel (tree);
         break;
-    case CK_TreeRescan:
+    case CK_Reread:
         tree_rescan (tree);
         break;
-    case CK_TreeStartSearch:
+    case CK_Search:
         tree_start_search (tree);
         break;
-    case CK_TreeRemove:
+    case CK_Delete:
         tree_rmdir (tree);
         break;
     default:
@@ -1086,9 +1086,9 @@ tree_key (WTree * tree, int key)
         if (key == tree_map[i].key)
             switch (tree_map[i].command)
             {
-            case CK_TreeMoveLeft:
+            case CK_Left:
                 return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            case CK_TreeMoveRight:
+            case CK_Right:
                 return tree_move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
             default:
                 tree_execute_cmd (tree, tree_map[i].command);

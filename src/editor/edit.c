@@ -1666,8 +1666,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 
     /* run shell scripts from menu */
     if (user_menu_cmd (edit, menu_file, selected_entry)
-        && (mc_stat (block_file, &status) == 0)
-        && (status.st_size != 0))
+        && (mc_stat (block_file, &status) == 0) && (status.st_size != 0))
     {
         int rc = 0;
         FILE *fd;
@@ -3386,8 +3385,9 @@ edit_find_bracket (WEdit * edit)
 void
 edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion)
 {
-    if (command == CK_Begin_Record_Macro || command == CK_Begin_Record_Repeat
-        || (macro_index < 0 && (command == CK_Begin_End_Macro || command == CK_Begin_End_Repeat)))
+    if (command == CK_MacroStartRecord || command == CK_RepeatStartRecord
+        || (macro_index < 0
+            && (command == CK_MacroStartStopRecord || command == CK_RepeatStartStopRecord)))
     {
         macro_index = 0;
         edit->force |= REDRAW_CHAR_ONLY | REDRAW_LINE;
@@ -3396,19 +3396,18 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
     if (macro_index != -1)
     {
         edit->force |= REDRAW_COMPLETELY;
-        if (command == CK_End_Record_Macro || command == CK_Begin_End_Macro)
+        if (command == CK_MacroStopRecord || command == CK_MacroStartStopRecord)
         {
             edit_store_macro_cmd (edit);
             macro_index = -1;
             return;
         }
-        else if (command == CK_End_Record_Repeat || command == CK_Begin_End_Repeat)
+        else if (command == CK_RepeatStopRecord || command == CK_RepeatStartStopRecord)
         {
             edit_repeat_macro_cmd (edit);
             macro_index = -1;
             return;
         }
-
     }
 
     if (macro_index >= 0 && macro_index < MAX_MACRO_LENGTH - 1)
@@ -3417,7 +3416,7 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
         record_macro_buf[macro_index++].ch = char_for_insertion;
     }
     /* record the beginning of a set of editing actions initiated by a key press */
-    if (command != CK_Undo && command != CK_Ext_Mode)
+    if (command != CK_Undo && command != CK_ExtendedKeyMap)
         edit_push_key_press (edit);
 
     edit_execute_cmd (edit, command, char_for_insertion);
@@ -3542,16 +3541,16 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 
     switch (command)
     {
-    case CK_Begin_Page:
-    case CK_End_Page:
-    case CK_Begin_Page_Highlight:
-    case CK_End_Page_Highlight:
-    case CK_Word_Left:
-    case CK_Word_Right:
+    case CK_TopOnScreen:
+    case CK_BottomOnScreen:
+    case CK_MarkToPageBegin:
+    case CK_MarkToPageEnd:
     case CK_Up:
     case CK_Down:
     case CK_Left:
     case CK_Right:
+    case CK_WordLeft:
+    case CK_WordRight:
         if (edit->mark2 >= 0)
         {
             if (!option_persistent_selections)
@@ -3566,26 +3565,26 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 
     switch (command)
     {
-    case CK_Begin_Page:
-    case CK_End_Page:
-    case CK_Begin_Page_Highlight:
-    case CK_End_Page_Highlight:
-    case CK_Word_Left:
-    case CK_Word_Right:
+    case CK_TopOnScreen:
+    case CK_BottomOnScreen:
+    case CK_MarkToPageBegin:
+    case CK_MarkToPageEnd:
     case CK_Up:
     case CK_Down:
-    case CK_Word_Left_Highlight:
-    case CK_Word_Right_Highlight:
-    case CK_Up_Highlight:
-    case CK_Down_Highlight:
-    case CK_Up_Alt_Highlight:
-    case CK_Down_Alt_Highlight:
+    case CK_WordLeft:
+    case CK_WordRight:
+    case CK_MarkToWordBegin:
+    case CK_MarkToWordEnd:
+    case CK_MarkUp:
+    case CK_MarkDown:
+    case CK_MarkColumnUp:
+    case CK_MarkColumnDown:
         if (edit->mark2 == -1)
             break;              /*marking is following the cursor: may need to highlight a whole line */
     case CK_Left:
     case CK_Right:
-    case CK_Left_Highlight:
-    case CK_Right_Highlight:
+    case CK_MarkLeft:
+    case CK_MarkRight:
         edit->force |= REDRAW_CHAR_ONLY;
     }
 
@@ -3654,24 +3653,24 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         }
         edit_delete (edit, 0);
         break;
-    case CK_Delete_Word_Left:
+    case CK_DeleteToWordBegin:
         edit->over_col = 0;
         edit_left_delete_word (edit);
         break;
-    case CK_Delete_Word_Right:
+    case CK_DeleteToWordEnd:
         if (option_cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 
         edit_right_delete_word (edit);
         break;
-    case CK_Delete_Line:
+    case CK_DeleteLine:
         edit_delete_line (edit);
         break;
-    case CK_Delete_To_Line_End:
-        edit_delete_to_line_end (edit);
-        break;
-    case CK_Delete_To_Line_Begin:
+    case CK_DeleteToHome:
         edit_delete_to_line_begin (edit);
+        break;
+    case CK_DeleteToEnd:
+        edit_delete_to_line_end (edit);
         break;
     case CK_Enter:
         edit->over_col = 0;
@@ -3695,22 +3694,22 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_insert (edit, '\n');
         break;
 
-    case CK_Page_Up_Alt_Highlight:
+    case CK_MarkColumnPageUp:
         edit->column_highlight = 1;
-    case CK_Page_Up:
-    case CK_Page_Up_Highlight:
+    case CK_PageUp:
+    case CK_MarkPageUp:
         edit_move_up (edit, edit->num_widget_lines - 1, 1);
         break;
-    case CK_Page_Down_Alt_Highlight:
+    case CK_MarkColumnPageDown:
         edit->column_highlight = 1;
-    case CK_Page_Down:
-    case CK_Page_Down_Highlight:
+    case CK_PageDown:
+    case CK_MarkPageDown:
         edit_move_down (edit, edit->num_widget_lines - 1, 1);
         break;
-    case CK_Left_Alt_Highlight:
+    case CK_MarkColumnLeft:
         edit->column_highlight = 1;
     case CK_Left:
-    case CK_Left_Highlight:
+    case CK_MarkLeft:
         if (option_fake_half_tabs)
         {
             if (is_in_indent (edit) && right_of_four_spaces (edit))
@@ -3725,10 +3724,10 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         }
         edit_left_char_move_cmd (edit);
         break;
-    case CK_Right_Alt_Highlight:
+    case CK_MarkColumnRight:
         edit->column_highlight = 1;
     case CK_Right:
-    case CK_Right_Highlight:
+    case CK_MarkRight:
         if (option_fake_half_tabs)
         {
             if (is_in_indent (edit) && left_of_four_spaces (edit))
@@ -3740,66 +3739,66 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         }
         edit_right_char_move_cmd (edit);
         break;
-    case CK_Begin_Page:
-    case CK_Begin_Page_Highlight:
+    case CK_TopOnScreen:
+    case CK_MarkToPageBegin:
         edit_begin_page (edit);
         break;
-    case CK_End_Page:
-    case CK_End_Page_Highlight:
+    case CK_BottomOnScreen:
+    case CK_MarkToPageEnd:
         edit_end_page (edit);
         break;
-    case CK_Word_Left:
-    case CK_Word_Left_Highlight:
+    case CK_WordLeft:
+    case CK_MarkToWordBegin:
         edit->over_col = 0;
         edit_left_word_move_cmd (edit);
         break;
-    case CK_Word_Right:
-    case CK_Word_Right_Highlight:
+    case CK_WordRight:
+    case CK_MarkToWordEnd:
         edit->over_col = 0;
         edit_right_word_move_cmd (edit);
         break;
-    case CK_Up_Alt_Highlight:
+    case CK_MarkColumnUp:
         edit->column_highlight = 1;
     case CK_Up:
-    case CK_Up_Highlight:
+    case CK_MarkUp:
         edit_move_up (edit, 1, 0);
         break;
-    case CK_Down_Alt_Highlight:
+    case CK_MarkColumnDown:
         edit->column_highlight = 1;
     case CK_Down:
-    case CK_Down_Highlight:
+    case CK_MarkDown:
         edit_move_down (edit, 1, 0);
         break;
-    case CK_Paragraph_Up_Alt_Highlight:
+    case CK_MarkColumnParagraphUp:
         edit->column_highlight = 1;
-    case CK_Paragraph_Up:
-    case CK_Paragraph_Up_Highlight:
+    case CK_ParagraphUp:
+    case CK_MarkParagraphUp:
         edit_move_up_paragraph (edit, 0);
         break;
-    case CK_Paragraph_Down_Alt_Highlight:
+    case CK_MarkColumnParagraphDown:
         edit->column_highlight = 1;
-    case CK_Paragraph_Down:
-    case CK_Paragraph_Down_Highlight:
+    case CK_ParagraphDown:
+    case CK_MarkParagraphDown:
         edit_move_down_paragraph (edit, 0);
         break;
-    case CK_Scroll_Up_Alt_Highlight:
+    case CK_MarkColumnScrollUp:
         edit->column_highlight = 1;
-    case CK_Scroll_Up:
-    case CK_Scroll_Up_Highlight:
+    case CK_ScrollUp:
+    case CK_MarkScrollUp:
         edit_move_up (edit, 1, 1);
         break;
-    case CK_Scroll_Down_Alt_Highlight:
+    case CK_MarkColumnScrollDown:
         edit->column_highlight = 1;
-    case CK_Scroll_Down:
-    case CK_Scroll_Down_Highlight:
+    case CK_ScrollDown:
+    case CK_MarkScrollDown:
         edit_move_down (edit, 1, 1);
         break;
     case CK_Home:
-    case CK_Home_Highlight:
+    case CK_MarkToHome:
         edit_cursor_to_bol (edit);
         break;
     case CK_End:
-    case CK_End_Highlight:
+    case CK_MarkToEnd:
         edit_cursor_to_eol (edit);
         break;
     case CK_Tab:
@@ -3827,8 +3826,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         }
         break;
 
-    case CK_Toggle_Insert:
-        edit->overwrite = (edit->overwrite == 0);
+    case CK_InsertOverwrite:
+        edit->overwrite = !edit->overwrite;
         break;
 
     case CK_Mark:
@@ -3840,13 +3839,13 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         }
         edit_mark_cmd (edit, 0);
         break;
-    case CK_Column_Mark:
+    case CK_MarkColumn:
         if (!edit->column_highlight)
             edit_push_undo_action (edit, COLUMN_OFF);
         edit->column_highlight = 1;
         edit_mark_cmd (edit, 0);
         break;
-    case CK_Mark_All:
+    case CK_MarkAll:
         edit_set_markers (edit, 0, edit->last_byte, 0, 0);
         edit->force |= REDRAW_PAGE;
         break;
@@ -3856,49 +3855,43 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->column_highlight = 0;
         edit_mark_cmd (edit, 1);
         break;
-    case CK_Mark_Word:
+    case CK_MarkWord:
         if (edit->column_highlight)
             edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
         edit_mark_current_word_cmd (edit);
         break;
-    case CK_Mark_Line:
+    case CK_MarkLine:
         if (edit->column_highlight)
             edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
         edit_mark_current_line_cmd (edit);
         break;
-    case CK_Toggle_Line_State:
+
+    case CK_ShowNumbers:
         option_line_state = !option_line_state;
-        if (option_line_state)
-        {
-            option_line_state_width = LINE_STATE_WIDTH;
-        }
-        else
-        {
-            option_line_state_width = 0;
-        }
+        option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
         edit->force |= REDRAW_PAGE;
         break;
 
-    case CK_Toggle_Show_Margin:
+    case CK_ShowMargin:
         show_right_margin = !show_right_margin;
         edit->force |= REDRAW_PAGE;
         break;
 
-    case CK_Toggle_Bookmark:
+    case CK_Bookmark:
         book_mark_clear (edit, edit->curs_line, BOOK_MARK_FOUND_COLOR);
         if (book_mark_query_color (edit, edit->curs_line, BOOK_MARK_COLOR))
             book_mark_clear (edit, edit->curs_line, BOOK_MARK_COLOR);
         else
             book_mark_insert (edit, edit->curs_line, BOOK_MARK_COLOR);
         break;
-    case CK_Flush_Bookmarks:
+    case CK_BookmarkFlush:
         book_mark_flush (edit, BOOK_MARK_COLOR);
         book_mark_flush (edit, BOOK_MARK_FOUND_COLOR);
         edit->force |= REDRAW_PAGE;
         break;
-    case CK_Next_Bookmark:
+    case CK_BookmarkNext:
         if (edit->book_mark)
         {
             struct _book_mark *p;
@@ -3913,7 +3906,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             }
         }
         break;
-    case CK_Prev_Bookmark:
+    case CK_BookmarkPrev:
         if (edit->book_mark)
         {
             struct _book_mark *p;
@@ -3931,12 +3924,12 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         }
         break;
 
-    case CK_Beginning_Of_Text:
-    case CK_Beginning_Of_Text_Highlight:
+    case CK_Top:
+    case CK_MarkToFileBegin:
         edit_move_to_top (edit);
         break;
-    case CK_End_Of_Text:
-    case CK_End_Of_Text_Highlight:
+    case CK_Bottom:
+    case CK_MarkToFileEnd:
         edit_move_to_bottom (edit);
         break;
 
@@ -3952,21 +3945,21 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_block_move_cmd (edit);
         break;
 
-    case CK_Shift_Block_Left:
+    case CK_BlockShiftLeft:
         if (edit->mark1 != edit->mark2)
             edit_move_block_to_left (edit);
         break;
-    case CK_Shift_Block_Right:
+    case CK_BlockShiftRight:
         if (edit->mark1 != edit->mark2)
             edit_move_block_to_right (edit);
         break;
-    case CK_XStore:
+    case CK_Store:
         edit_copy_to_X_buf_cmd (edit);
         break;
-    case CK_XCut:
+    case CK_Cut:
         edit_cut_to_X_buf_cmd (edit);
         break;
-    case CK_XPaste:
+    case CK_Paste:
         /* if non persistent selection and text selected */
         if (!option_persistent_selections)
         {
@@ -3977,69 +3970,69 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             edit_insert_over (edit);
         edit_paste_from_X_buf_cmd (edit);
         break;
-    case CK_Selection_History:
+    case CK_History:
         edit_paste_from_history (edit);
         break;
 
-    case CK_Save_As:
+    case CK_SaveAs:
         edit_save_as_cmd (edit);
         break;
     case CK_Save:
         edit_save_confirm_cmd (edit);
         break;
-    case CK_Load:
+    case CK_EditFile:
         edit_load_cmd (edit, EDIT_FILE_COMMON);
         break;
-    case CK_Save_Block:
+    case CK_BlockSave:
         edit_save_block_cmd (edit);
         break;
-    case CK_Insert_File:
+    case CK_InsertFile:
         edit_insert_file_cmd (edit);
         break;
 
-    case CK_Load_Prev_File:
+    case CK_FilePrev:
         edit_load_back_cmd (edit);
         break;
-    case CK_Load_Next_File:
+    case CK_FileNext:
         edit_load_forward_cmd (edit);
         break;
 
-    case CK_Load_Syntax_File:
+    case CK_EditSyntaxFile:
         edit_load_cmd (edit, EDIT_FILE_SYNTAX);
         break;
-    case CK_Choose_Syntax:
+    case CK_SyntaxChoose:
         edit_syntax_dialog (edit);
         break;
 
-    case CK_Load_Menu_File:
+    case CK_EditUserMenu:
         edit_load_cmd (edit, EDIT_FILE_MENU);
         break;
 
-    case CK_Toggle_Syntax:
+    case CK_SyntaxOnOff:
         option_syntax_highlighting ^= 1;
         if (option_syntax_highlighting == 1)
             edit_load_syntax (edit, NULL, edit->syntax_type);
         edit->force |= REDRAW_PAGE;
         break;
 
-    case CK_Toggle_Tab_TWS:
+    case CK_ShowTabTws:
         enable_show_tabs_tws ^= 1;
         edit->force |= REDRAW_PAGE;
         break;
 
-    case CK_Find:
+    case CK_Search:
         edit_search_cmd (edit, FALSE);
         break;
-    case CK_Find_Again:
+    case CK_SearchContinue:
         edit_search_cmd (edit, TRUE);
         break;
     case CK_Replace:
         edit_replace_cmd (edit, 0);
         break;
-    case CK_Replace_Again:
+    case CK_ReplaceContinue:
         edit_replace_cmd (edit, 1);
         break;
-    case CK_Complete_Word:
+    case CK_Complete:
         /* if text marked shift block */
         if (edit->mark1 != edit->mark2 && !option_persistent_selections)
         {
@@ -4050,13 +4043,13 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             edit_complete_word_cmd (edit);
         }
         break;
-    case CK_Find_Definition:
+    case CK_Find:
         edit_get_match_keyword_cmd (edit);
         break;
     case CK_Quit:
         dlg_stop (edit->widget.owner);
         break;
-    case CK_New:
+    case CK_EditNew:
         edit_new_cmd (edit);
         break;
     case CK_Help:
@@ -4065,7 +4058,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Refresh:
         edit_refresh_cmd (edit);
         break;
-    case CK_SaveSetupCmd:
+    case CK_SaveSetup:
         save_setup_cmd ();
         break;
     case CK_About:
@@ -4074,10 +4067,10 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_LearnKeys:
         learn_keys ();
         break;
-    case CK_Edit_Options:
+    case CK_Options:
         edit_options_dialog (edit);
         break;
-    case CK_Edit_Save_Mode:
+    case CK_OptionsSaveMode:
         menu_save_mode_cmd ();
         break;
     case CK_Date:
@@ -4096,23 +4089,23 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Goto:
         edit_goto_cmd (edit);
         break;
-    case CK_Paragraph_Format:
+    case CK_ParagraphFormat:
         format_paragraph (edit, 1);
         edit->force |= REDRAW_PAGE;
         break;
-    case CK_Delete_Macro:
+    case CK_MacroDelete:
         edit_delete_macro_cmd (edit);
         break;
-    case CK_Match_Bracket:
+    case CK_MatchBracket:
         edit_goto_matching_bracket (edit);
         break;
-    case CK_User_Menu:
+    case CK_UserMenu:
         user_menu (edit, NULL, -1);
         break;
     case CK_Sort:
         edit_sort_cmd (edit);
         break;
-    case CK_ExtCmd:
+    case CK_ExternalCommand:
         edit_ext_cmd (edit);
         break;
     case CK_Mail:
@@ -4121,67 +4114,69 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Shell:
         view_other_cmd ();
         break;
+#ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         edit_select_codepage_cmd (edit);
         break;
-    case CK_Insert_Literal:
+#endif
+    case CK_InsertLiteral:
         edit_insert_literal_cmd (edit);
         break;
-    case CK_Begin_End_Macro:
+    case CK_MacroStartStopRecord:
         edit_begin_end_macro_cmd (edit);
         break;
-    case CK_Begin_End_Repeat:
+    case CK_RepeatStartStopRecord:
         edit_begin_end_repeat_cmd (edit);
         break;
-    case CK_Ext_Mode:
+    case CK_ExtendedKeyMap:
         edit->extmod = 1;
         break;
     default:
         break;
     }
 
-    /* CK_Pipe_Block */
-    if ((command / CK_Pipe_Block (0)) == 1)
-        edit_block_process_cmd (edit, command - CK_Pipe_Block (0));
+    /* CK_PipeBlock */
+    if ((command / CK_PipeBlock (0)) == 1)
+        edit_block_process_cmd (edit, command - CK_PipeBlock (0));
 
     /* keys which must set the col position, and the search vars */
     switch (command)
     {
-    case CK_Find:
-    case CK_Find_Again:
+    case CK_Search:
+    case CK_SearchContinue:
     case CK_Replace:
-    case CK_Replace_Again:
-    case CK_Complete_Word:
+    case CK_ReplaceContinue:
+    case CK_Complete:
         edit->prev_col = edit_get_col (edit);
         break;
     case CK_Up:
-    case CK_Up_Highlight:
-    case CK_Up_Alt_Highlight:
+    case CK_MarkUp:
+    case CK_MarkColumnUp:
     case CK_Down:
-    case CK_Down_Highlight:
-    case CK_Down_Alt_Highlight:
-    case CK_Page_Up:
-    case CK_Page_Up_Highlight:
-    case CK_Page_Up_Alt_Highlight:
-    case CK_Page_Down:
-    case CK_Page_Down_Highlight:
-    case CK_Page_Down_Alt_Highlight:
-    case CK_Beginning_Of_Text:
-    case CK_Beginning_Of_Text_Highlight:
-    case CK_End_Of_Text:
-    case CK_End_Of_Text_Highlight:
-    case CK_Paragraph_Up:
-    case CK_Paragraph_Up_Highlight:
-    case CK_Paragraph_Up_Alt_Highlight:
-    case CK_Paragraph_Down:
-    case CK_Paragraph_Down_Highlight:
-    case CK_Paragraph_Down_Alt_Highlight:
-    case CK_Scroll_Up:
-    case CK_Scroll_Up_Highlight:
-    case CK_Scroll_Up_Alt_Highlight:
-    case CK_Scroll_Down:
-    case CK_Scroll_Down_Highlight:
-    case CK_Scroll_Down_Alt_Highlight:
+    case CK_MarkDown:
+    case CK_MarkColumnDown:
+    case CK_PageUp:
+    case CK_MarkPageUp:
+    case CK_MarkColumnPageUp:
+    case CK_PageDown:
+    case CK_MarkPageDown:
+    case CK_MarkColumnPageDown:
+    case CK_Top:
+    case CK_MarkToFileBegin:
+    case CK_Bottom:
+    case CK_MarkToFileEnd:
+    case CK_ParagraphUp:
+    case CK_MarkParagraphUp:
+    case CK_MarkColumnParagraphUp:
+    case CK_ParagraphDown:
+    case CK_MarkParagraphDown:
+    case CK_MarkColumnParagraphDown:
+    case CK_ScrollUp:
+    case CK_MarkScrollUp:
+    case CK_MarkColumnScrollUp:
+    case CK_ScrollDown:
+    case CK_MarkScrollDown:
+    case CK_MarkColumnScrollDown:
         edit->search_start = edit->curs1;
         edit->found_len = 0;
         break;
@@ -4198,10 +4193,10 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         {
         case CK_BackSpace:
         case CK_Delete:
-        case CK_Delete_Word_Left:
-        case CK_Delete_Word_Right:
-        case CK_Delete_To_Line_End:
-        case CK_Delete_To_Line_Begin:
+        case CK_DeleteToWordBegin:
+        case CK_DeleteToWordEnd:
+        case CK_DeleteToHome:
+        case CK_DeleteToEnd:
             format_paragraph (edit, 0);
             edit->force |= REDRAW_PAGE;
         }

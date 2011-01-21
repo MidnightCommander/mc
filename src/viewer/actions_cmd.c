@@ -249,22 +249,22 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
 
     switch (command)
     {
-    case CK_ViewHelp:
+    case CK_Help:
         interactive_display (NULL, "[Internal File Viewer]");
         break;
-    case CK_ViewToggleWrapMode:
+    case CK_WrapMode:
         /* Toggle between wrapped and unwrapped view */
         mcview_toggle_wrap_mode (view);
         break;
-    case CK_ViewToggleHexEditMode:
+    case CK_HexEditMode:
         /* Toggle between hexview and hexedit mode */
         mcview_toggle_hexedit_mode (view);
         break;
-    case CK_ViewToggleHexMode:
+    case CK_HexMode:
         /* Toggle between hex view and text view */
         mcview_toggle_hex_mode (view);
         break;
-    case CK_ViewGoto:
+    case CK_Goto:
         {
             off_t addr;
 
@@ -280,100 +280,102 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
             }
             break;
         }
-    case CK_ViewHexEditSave:
+    case CK_Save:
         mcview_hexedit_save_changes (view);
         break;
-    case CK_ViewSearch:
+    case CK_Search:
         mcview_search (view);
         break;
-    case CK_ViewToggleMagicMode:
+    case CK_MagicMode:
         mcview_toggle_magic_mode (view);
         break;
-    case CK_ViewToggleNroffMode:
+    case CK_NroffMode:
         mcview_toggle_nroff_mode (view);
         break;
-    case CK_ViewToggleHexNavMode:
+    case CK_ToggleNavigation:
         view->hexview_in_text = !view->hexview_in_text;
         view->dirty++;
         break;
-    case CK_ViewMoveToBol:
+    case CK_Home:
         mcview_moveto_bol (view);
         break;
-    case CK_ViewMoveToEol:
+    case CK_End:
         mcview_moveto_eol (view);
         break;
-    case CK_ViewMoveLeft:
+    case CK_Left:
         mcview_move_left (view, 1);
         break;
-    case CK_ViewMoveRight:
+    case CK_Right:
         mcview_move_right (view, 1);
         break;
-    case CK_ViewMoveLeft10:
+    case CK_LeftQuick:
         if (!view->hex_mode)
             mcview_move_left (view, 10);
         break;
-    case CK_ViewMoveRight10:
+    case CK_RightQuick:
         if (!view->hex_mode)
             mcview_move_right (view, 10);
         break;
-    case CK_ViewContinueSearch:
+    case CK_SearchContinue:
         mcview_continue_search_cmd (view);
         break;
-    case CK_ViewToggleRuler:
+    case CK_Ruler:
         mcview_display_toggle_ruler (view);
         break;
-    case CK_ViewMoveUp:
+    case CK_Up:
         mcview_move_up (view, 1);
         break;
-    case CK_ViewMoveDown:
+    case CK_Down:
         mcview_move_down (view, 1);
         break;
-    case CK_ViewMoveHalfPgUp:
+    case CK_HalfPageUp:
         mcview_move_up (view, (view->data_area.height + 1) / 2);
         break;
-    case CK_ViewMoveHalfPgDn:
+    case CK_HalfPageDown:
         mcview_move_down (view, (view->data_area.height + 1) / 2);
         break;
-    case CK_ViewMovePgUp:
+    case CK_PageUp:
         mcview_move_up (view, view->data_area.height);
         break;
-    case CK_ViewMovePgDn:
+    case CK_PageDown:
         mcview_move_down (view, view->data_area.height);
         break;
-    case CK_ViewMoveTop:
+    case CK_Top:
         mcview_moveto_top (view);
         break;
-    case CK_ViewMoveBottom:
+    case CK_Bottom:
         mcview_moveto_bottom (view);
         break;
-    case CK_ShowCommandLine:
+    case CK_Shell:
         view_other_cmd ();
         break;
-        /*
-           // Unlike Ctrl-O, run a new shell if the subshell is not running
-           case '!':
-           exec_shell ();
-           return MSG_HANDLED;
-         */
-    case CK_ViewGotoBookmark:
+#if 0
+    /* Unlike Ctrl-O, run a new shell if the subshell is not running */
+    case '!':
+        exec_shell ();
+        return MSG_HANDLED;
+#endif
+    case CK_BookmarkGoto:
         view->marks[view->marker] = view->dpy_start;
         break;
-    case CK_ViewNewBookmark:
+    case CK_Bookmark:
         view->dpy_start = view->marks[view->marker];
         view->dirty++;
         break;
+#ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         mcview_select_encoding (view);
         view->dirty++;
         break;
-    case CK_ViewNextFile:
-    case CK_ViewPrevFile:
+#endif
+    case CK_FileNext:
+    case CK_FilePrev:
         /* Use to indicate parent that we want to see the next/previous file */
         /* Does not work in panel mode */
         if (!mcview_is_in_panel (view))
-            view->move_dir = (command == CK_ViewNextFile) ? 1 : -1;
+            view->move_dir = (command == CK_FileNext) ? 1 : -1;
         /* fallthrough */
-    case CK_ViewQuit:
+    case CK_Quit:
         if (!mcview_is_in_panel (view))
             dlg_stop (view->widget.owner);
         break;
