@@ -1392,11 +1392,10 @@ edit_macro_comparator (gconstpointer *macro1, gconstpointer *macro2)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_macro_sort_by_hotkey (WEdit *edit)
+edit_macro_sort_by_hotkey (void)
 {
-    if (macros_list == NULL || macros_list->len == 0)
-        return;
-    g_array_sort (macros_list, (GCompareFunc) edit_macro_comparator);
+    if (macros_list != NULL && macros_list->len != 0)
+        g_array_sort (macros_list, (GCompareFunc) edit_macro_comparator);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1407,6 +1406,9 @@ edit_get_macro (WEdit * edit, int hotkey, const macros_t **macros, guint *indx)
     const macros_t *array_start = &g_array_index (macros_list, struct macros_t, 0);
     macros_t *result;
     macros_t search_macro;
+
+    (void) edit;
+
     search_macro.hotkey = hotkey;
     result = bsearch (&search_macro, macros_list->data, macros_list->len,
                       sizeof (macros_t), (GCompareFunc) edit_macro_comparator);
@@ -1431,8 +1433,7 @@ edit_delete_macro (WEdit * edit, int hotkey)
     const char *section_name = "editor";
     gchar *macros_fname;
     guint indx;
-    char keyname[8];
-
+    char *keyname;
     const macros_t *macros = NULL;
 
     /* clear array of actions for current hotkey */
@@ -1442,7 +1443,7 @@ edit_delete_macro (WEdit * edit, int hotkey)
             g_array_free (macros->macro, TRUE);
         macros = NULL;
         g_array_remove_index (macros_list, indx);
-        edit_macro_sort_by_hotkey (edit);
+        edit_macro_sort_by_hotkey ();
     }
 
     macros_fname = g_build_filename (mc_config_get_path (), MC_MACRO_FILE, NULL);
@@ -1452,13 +1453,14 @@ edit_delete_macro (WEdit * edit, int hotkey)
     if (macros_config == NULL)
         return FALSE;
 
-    g_snprintf (keyname, sizeof (keyname), "%i", hotkey);
-    while (mc_config_del_key (macros_config, section_name, keyname));
+    keyname = lookup_key_by_code (hotkey);
+    while (mc_config_del_key (macros_config, section_name, keyname))
+        ;
+    g_free (keyname);
     mc_config_save_file (macros_config, NULL);
     mc_config_deinit (macros_config);
     return TRUE;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1515,7 +1517,6 @@ edit_store_macro_cmd (WEdit * edit)
 {
     int i;
     int hotkey;
-    char keyname[8];
     GString *marcros_string;
     mc_config_t *macros_config = NULL;
     const char *section_name = "editor";
@@ -1523,6 +1524,7 @@ edit_store_macro_cmd (WEdit * edit)
     GArray *macros; /* current macro */
     int tmp_act;
     gboolean have_macro = FALSE;
+    char *keyname = NULL;
 
     hotkey = editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), 1);
     if (hotkey == ESC_CHAR)
@@ -1545,13 +1547,13 @@ edit_store_macro_cmd (WEdit * edit)
     if (macros_config == NULL)
         return FALSE;
 
-    g_snprintf (keyname, sizeof (keyname), "%i", hotkey);
-
-    marcros_string = g_string_sized_new (250);
-
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
+    marcros_string = g_string_sized_new (250);
     macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
+
+    keyname = lookup_key_by_code (hotkey);
+
     for (i = 0; i < macro_index; i++)
     {
         macro_action_t m_act;
@@ -1579,7 +1581,8 @@ edit_store_macro_cmd (WEdit * edit)
     else
         mc_config_del_key (macros_config, section_name, keyname);
 
-    edit_macro_sort_by_hotkey (edit);
+    g_free (keyname);
+    edit_macro_sort_by_hotkey ();
 
     g_string_free (marcros_string, TRUE);
     mc_config_save_file (macros_config, NULL);
@@ -1658,8 +1661,9 @@ edit_load_macro_cmd (WEdit * edit)
 
         curr_values = values = mc_config_get_string_list (macros_config, section_name,
                                                           *profile_keys, &values_len);
-        hotkey = strtol (*profile_keys, NULL, 0);
+        hotkey = lookup_key (*profile_keys, NULL);
         have_macro = FALSE;
+
         while (*curr_values != NULL && *curr_values[0] != '\0')
         {
             char **macro_pair = NULL;
@@ -1712,7 +1716,7 @@ edit_load_macro_cmd (WEdit * edit)
     }
     g_strfreev (keys);
     mc_config_deinit (macros_config);
-    edit_macro_sort_by_hotkey (edit);
+    edit_macro_sort_by_hotkey ();
     return TRUE;
 }
 

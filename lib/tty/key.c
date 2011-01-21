@@ -251,6 +251,13 @@ typedef struct SelectList
     struct SelectList *next;
 } SelectList;
 
+typedef enum KeySortType
+{
+    KEY_NOSORT = 0,
+    KEY_SORTBYNAME,
+    KEY_SORTBYCODE
+} KeySortType;
+
 #ifdef __QNXNTO__
 typedef int (*ph_dv_f) (void *, void *);
 typedef int (*ph_ov_f) (void *);
@@ -524,11 +531,11 @@ static Display *x11_display;
 static Window x11_window;
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */
 
-static const size_t key_name_conv_tab_size = sizeof (key_name_conv_tab) /
-    sizeof (key_name_conv_tab[0]) - 1;
+static KeySortType has_been_sorted = KEY_NOSORT;
 
-static const key_code_name_t *key_name_conv_tab_sorted[sizeof (key_name_conv_tab) /
-                                                       sizeof (key_name_conv_tab[0]) - 1];
+static const size_t key_conv_tab_size = G_N_ELEMENTS (key_name_conv_tab) - 1;
+
+static const key_code_name_t *key_conv_tab_sorted[G_N_ELEMENTS (key_name_conv_tab) - 1];
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -1144,7 +1151,7 @@ s_dispose (SelectList * sel)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-key_code_name_comparator (const void *p1, const void *p2)
+key_code_comparator_by_name (const void *p1, const void *p2)
 {
     const key_code_name_t *n1 = *(const key_code_name_t **) p1;
     const key_code_name_t *n2 = *(const key_code_name_t **) p2;
@@ -1154,21 +1161,37 @@ key_code_name_comparator (const void *p1, const void *p2)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
-sort_key_name_conv_tab (void)
+static int
+key_code_comparator_by_code (const void *p1, const void *p2)
 {
-    static gboolean has_been_sorted = FALSE;
+    const key_code_name_t *n1 = *(const key_code_name_t **) p1;
+    const key_code_name_t *n2 = *(const key_code_name_t **) p2;
 
-    if (!has_been_sorted)
+    return n1->code - n2->code;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+sort_key_conv_tab (enum KeySortType type_sort)
+{
+    if (has_been_sorted != type_sort)
     {
         size_t i;
-        for (i = 0; i < key_name_conv_tab_size; i++)
-            key_name_conv_tab_sorted[i] = &key_name_conv_tab[i];
+        for (i = 0; i < key_conv_tab_size; i++)
+            key_conv_tab_sorted[i] = &key_name_conv_tab[i];
 
-        qsort (key_name_conv_tab_sorted,
-               key_name_conv_tab_size, sizeof (key_name_conv_tab_sorted[0]),
-               &key_code_name_comparator);
-        has_been_sorted = TRUE;
+        if (type_sort == KEY_SORTBYNAME)
+        {
+            qsort (key_conv_tab_sorted, key_conv_tab_size, sizeof (key_conv_tab_sorted[0]),
+                   &key_code_comparator_by_name);
+        }
+        else if (type_sort == KEY_SORTBYCODE)
+        {
+            qsort (key_conv_tab_sorted, key_conv_tab_size, sizeof (key_conv_tab_sorted[0]),
+                   &key_code_comparator_by_code);
+        }
+        has_been_sorted = type_sort;
     }
 }
 
@@ -1189,21 +1212,47 @@ lookup_keyname (const char *name, int *idx)
             return (int) name[0];
         }
 
-        sort_key_name_conv_tab ();
+        sort_key_conv_tab (KEY_SORTBYNAME);
 
-        res = bsearch (&keyp, key_name_conv_tab_sorted,
-                       key_name_conv_tab_size,
-                       sizeof (key_name_conv_tab_sorted[0]), key_code_name_comparator);
+        res = bsearch (&keyp, key_conv_tab_sorted, key_conv_tab_size,
+                       sizeof (key_conv_tab_sorted[0]), key_code_comparator_by_name);
 
         if (res != NULL)
         {
-            *idx = (int) (res - (key_code_name_t **) key_name_conv_tab_sorted);
+            *idx = (int) (res - (key_code_name_t **) key_conv_tab_sorted);
             return (*res)->code;
         }
     }
 
     *idx = -1;
     return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+lookup_keycode (const long code, int *idx)
+{
+    if (code != 0)
+    {
+        const key_code_name_t key = { code, NULL, NULL, NULL };
+        const key_code_name_t *keyp = &key;
+        key_code_name_t **res;
+
+        sort_key_conv_tab (KEY_SORTBYCODE);
+
+        res = bsearch (&keyp, key_conv_tab_sorted, key_conv_tab_size,
+                       sizeof (key_conv_tab_sorted[0]), key_code_comparator_by_code);
+
+        if (res != NULL)
+        {
+            *idx = (int) (res - (key_code_name_t **) key_conv_tab_sorted);
+            return TRUE;
+        }
+    }
+
+    *idx = -1;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1413,12 +1462,12 @@ lookup_key (const char *name, char **label)
 
         if (use_meta != -1)
         {
-            g_string_append (s, key_name_conv_tab_sorted[use_meta]->shortcut);
+            g_string_append (s, key_conv_tab_sorted[use_meta]->shortcut);
             g_string_append_c (s, '-');
         }
         if (use_ctrl != -1)
         {
-            g_string_append (s, key_name_conv_tab_sorted[use_ctrl]->shortcut);
+            g_string_append (s, key_conv_tab_sorted[use_ctrl]->shortcut);
             g_string_append_c (s, '-');
         }
         if (use_shift != -1)
@@ -1427,21 +1476,21 @@ lookup_key (const char *name, char **label)
                 g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
             else
             {
-                g_string_append (s, key_name_conv_tab_sorted[use_shift]->shortcut);
+                g_string_append (s, key_conv_tab_sorted[use_shift]->shortcut);
                 g_string_append_c (s, '-');
-                g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
+                g_string_append (s, key_conv_tab_sorted[lc_index]->shortcut);
             }
         }
         else if (k < 128)
         {
             if ((k >= 'A') || (lc_index < 0)
-                || (key_name_conv_tab_sorted[lc_index]->shortcut == NULL))
+                || (key_conv_tab_sorted[lc_index]->shortcut == NULL))
                 g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) k));
             else
-                g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
+                g_string_append (s, key_conv_tab_sorted[lc_index]->shortcut);
         }
-        else if ((lc_index != -1) && (key_name_conv_tab_sorted[lc_index]->shortcut != NULL))
-            g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
+        else if ((lc_index != -1) && (key_conv_tab_sorted[lc_index]->shortcut != NULL))
+            g_string_append (s, key_conv_tab_sorted[lc_index]->shortcut);
         else
             g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) key));
 
@@ -1468,6 +1517,82 @@ lookup_key (const char *name, char **label)
         k = ALT (k);
 
     return (long) k;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+lookup_key_by_code (const int keycode)
+{
+    /* code without modifier */
+    unsigned int k = keycode & ~KEY_M_MASK;
+    /* modifier */
+    unsigned int mod = keycode & KEY_M_MASK;
+
+    int use_meta = -1;
+    int use_ctrl = -1;
+    int use_shift = -1;
+    int key_idx = -1;
+
+    GString *s;
+    int idx;
+
+    s = g_string_sized_new (8);
+
+    if (lookup_keycode (k, &key_idx) || (k > 0 && k < 256))
+    {
+        if (mod & KEY_M_ALT)
+        {
+            if (lookup_keycode (KEY_M_ALT, &idx))
+            {
+                use_meta = idx;
+                g_string_append (s, key_conv_tab_sorted[use_meta]->name);
+                g_string_append_c (s, '-');
+            }
+        }
+        if (mod & KEY_M_CTRL)
+        {
+            /* non printeble chars like a CTRL-[A..Z] */
+            if (k < 32)
+                k += 64;
+
+            if (lookup_keycode (KEY_M_CTRL, &idx))
+            {
+                use_ctrl = idx;
+                g_string_append (s, key_conv_tab_sorted[use_ctrl]->name);
+                g_string_append_c (s, '-');
+            }
+        }
+        if (mod & KEY_M_SHIFT)
+        {
+            if (lookup_keycode (KEY_M_ALT, &idx))
+            {
+                use_shift = idx;
+                if (k < 127)
+                    g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
+                else
+                {
+                    g_string_append (s, key_conv_tab_sorted[use_shift]->name);
+                    g_string_append_c (s, '-');
+                    g_string_append (s, key_conv_tab_sorted[key_idx]->name);
+                }
+            }
+        }
+        else if (k < 128)
+        {
+            if ((k >= 'A') || (key_idx < 0)
+                || (key_conv_tab_sorted[key_idx]->name == NULL))
+                g_string_append_c (s, (gchar) k);
+            else
+                g_string_append (s, key_conv_tab_sorted[key_idx]->name);
+        }
+        else if ((key_idx != -1) && (key_conv_tab_sorted[key_idx]->name != NULL))
+            g_string_append (s, key_conv_tab_sorted[key_idx]->name);
+        else
+            g_string_append_c (s, (gchar) keycode);
+    }
+
+    return g_string_free (s, s->len == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
