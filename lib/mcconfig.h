@@ -18,8 +18,12 @@ typedef struct mc_config_struct
 
 /*** global variables defined in .c file *********************************************************/
 
+extern char *mc_sysconfig_dir;
+extern char *mc_share_data_dir;
+
 extern mc_config_t *mc_main_config;
 extern mc_config_t *mc_panels_config;
+
 
 /*** declarations of public functions ************************************************************/
 

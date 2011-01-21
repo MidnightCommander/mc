@@ -9,5 +9,8 @@ libmcconfig_la_SOURCES = \
 
 libmcconfig_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) \
-	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
+	-DDATADIR=\""$(pkgdatadir)/"\" \
+	-DLOCALEDIR=\""$(localedir)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
+
 

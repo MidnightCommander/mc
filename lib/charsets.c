@@ -33,8 +33,9 @@
 #include "lib/strutil.h"        /* utf-8 functions */
 #include "lib/fileloc.h"
 #include "lib/charsets.h"
+#include "lib/mcconfig.h"
 
-#include "src/main.h"
+#include "src/main.h"           /* display_codepage, source_codepage */
 
 /*** global variables ****************************************************************************/
 

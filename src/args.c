@@ -33,6 +33,7 @@
 #include "lib/tty/color.h"      /* command_line_colors */
 #include "lib/tty/mouse.h"
 #include "lib/strutil.h"
+#include "lib/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #ifdef ENABLE_VFS_SMB
 #include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debugf()  */

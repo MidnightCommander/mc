@@ -9,8 +9,7 @@ SUBDIRS += diffviewer
 endif
 
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
+	-DLOCALEDIR=\""$(localedir)"\"
 
 
 if CONS_SAVER

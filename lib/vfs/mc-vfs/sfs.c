@@ -44,8 +44,8 @@
 #include "lib/global.h"
 #include "lib/util.h"
 #include "lib/widget.h"         /* D_ERROR, D_NORMAL */
+#include "lib/mcconfig.h"       /* mc_sysconfig_dir */
 
-#include "src/main.h"           /* mc_sysconfig_dir */
 #include "src/execute.h"        /* EXECUTE_AS_SHELL */
 
 #include "vfs-impl.h"
