@@ -152,11 +152,6 @@ int ftpfs_ignore_chattr_errors = 1;
 #define INADDR_NONE 0xffffffff
 #endif
 
-/* for uclibc < 0.9.29 */
-#ifndef AI_ADDRCONFIG
-#define AI_ADDRCONFIG 0x0020
-#endif
-
 #define RFC_AUTODETECT 0
 #define RFC_DARING 1
 #define RFC_STRICT 2
@@ -804,11 +799,27 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     tty_enable_interrupt_key ();        /* clear the interrupt flag */
 
     memset (&hints, 0, sizeof (struct addrinfo));
+    hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = AI_ADDRCONFIG;
 
+#ifdef AI_ADDRCONFIG
+    /* By default, only look up addresses using address types for
+     * which a local interface is configured (i.e. no IPv6 if no IPv6
+     * interfaces, likewise for IPv4 (see RFC 3493 for details). */
+    hints.ai_flags = AI_ADDRCONFIG;
+#endif
 
     e = getaddrinfo (host, port, &hints, &res);
+
+#ifdef AI_ADDRCONFIG
+    if (e == EAI_BADFLAGS)
+    {
+        /* Retry with no flags if AI_ADDRCONFIG was rejected. */
+        hints.ai_flags = 0;
+        e = getaddrinfo (host, port, &hints, &res);
+    }
+#endif
+
     g_free (port);
     port = NULL;
 
