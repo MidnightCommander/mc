@@ -45,7 +45,7 @@ mc_config_t *mc_panels_config;
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 static gboolean
-mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path, GError ** error)
+mc_config_new_or_overwrite_file (mc_config_t * mc_config, const gchar * ini_path, GError ** error)
 {
     gchar *data, *written_data;
     gsize len, total_written;
@@ -248,7 +248,7 @@ mc_config_save_file (mc_config_t * mc_config, GError ** error)
     {
         return FALSE;
     }
-    return mc_config_new_or_override_file (mc_config, mc_config->ini_path, error);
+    return mc_config_new_or_overwrite_file (mc_config, mc_config->ini_path, error);
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -260,7 +260,7 @@ mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError 
     {
         return FALSE;
     }
-    return mc_config_new_or_override_file (mc_config, ini_path, error);
+    return mc_config_new_or_overwrite_file (mc_config, ini_path, error);
 
 }
 
