@@ -75,6 +75,7 @@ mc_tty_color_save_attr (int color_pair, int color_attr)
         return;
     }
 
+    *key = color_pair;
     *attr = color_attr;
 
     g_hash_table_replace (mc_tty_color_color_pair_attrs, (gpointer) key, (gpointer) attr);
@@ -174,11 +175,21 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
         ibg = mc_color_pair->ibg;
         attr = mc_color_pair->attr;
 
-        /* In 8 color mode, change bright colors into bold */
-        if (COLORS == 8 && ifg >= 8 && ifg < 16)
+
+        /* In non-256 color mode, change bright colors into bold */
+        if (!tty_use_256colors ())
         {
-            ifg &= 0x07;
-            attr |= A_BOLD;
+            if (ifg >= 8 && ifg < 16)
+            {
+                ifg &= 0x07;
+                attr |= A_BOLD;
+            }
+
+            if (ibg >= 8 && ibg < 16)
+            {
+                ibg &= 0x07;
+                /* attr | = A_BOLD | A_REVERSE ; */
+            }
         }
 
         init_pair (mc_color_pair->pair_index, ifg, ibg);
@@ -199,7 +210,7 @@ tty_setcolor (int color)
 void
 tty_lowlevel_setcolor (int color)
 {
-    attrset (COLOR_PAIR (color) | color_get_attr (color));
+    tty_setcolor (color);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -208,6 +219,14 @@ void
 tty_set_normal_attrs (void)
 {
     standend ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+tty_use_256colors (void)
+{
+    return (COLORS == 256);
 }
 
 /* --------------------------------------------------------------------------------------------- */

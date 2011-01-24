@@ -169,8 +169,8 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
     }
     else
     {
-        fg = tty_color_get_name_by_index(mc_color_pair->ifg);
-        bg = tty_color_get_name_by_index(mc_color_pair->ibg);
+        fg = tty_color_get_name_by_index (mc_color_pair->ifg);
+        bg = tty_color_get_name_by_index (mc_color_pair->ibg);
         SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);
         SLtt_add_color_attribute (mc_color_pair->pair_index, mc_color_pair->attr);
     }
@@ -201,6 +201,14 @@ void
 tty_set_normal_attrs (void)
 {
     SLsmg_normal_video ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+tty_use_256colors (void)
+{
+    return (SLtt_Use_Ansi_Colors && SLtt_tgetnum ((char *) "Co") == 256);
 }
 
 /* --------------------------------------------------------------------------------------------- */

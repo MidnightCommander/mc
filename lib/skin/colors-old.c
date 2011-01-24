@@ -140,9 +140,6 @@ static void
 mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_string)
 {
     gchar **colors, **orig_colors;
-    gchar **key_val;
-    const gchar *skin_group, *skin_key;
-    gchar *skin_val;
 
     if (the_color_string == NULL)
         return;
@@ -151,29 +148,31 @@ mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_str
     if (colors == NULL)
         return;
 
-    for (; *colors; colors++)
+    for (; *colors != NULL; colors++)
     {
+        gchar **key_val;
+        const gchar *skin_group, *skin_key;
+
         key_val = g_strsplit_set (*colors, "=,", 4);
 
-        if (!key_val)
+        if (key_val == NULL)
             continue;
 
-        if (key_val[1] == NULL
-            || !mc_skin_colors_old_transform (key_val[0], &skin_group, &skin_key))
+        if (key_val[1] != NULL
+            && mc_skin_colors_old_transform (key_val[0], &skin_group, &skin_key))
         {
-            g_strfreev (key_val);
-            continue;
+            gchar *skin_val;
+
+            if (key_val[2] == NULL)
+                skin_val = g_strdup_printf ("%s;", key_val[1]);
+            else if (key_val[3] == NULL)
+                skin_val = g_strdup_printf ("%s;%s", key_val[1], key_val[2]);
+            else
+                skin_val = g_strdup_printf ("%s;%s;%s", key_val[1], key_val[2], key_val[3]);
+
+            mc_config_set_string (mc_skin->config, skin_group, skin_key, skin_val);
+            g_free (skin_val);
         }
-
-        if (key_val[3] != NULL)
-            skin_val = g_strdup_printf ("%s;%s;%s", key_val[1], key_val[2], key_val[3]);
-        else if (key_val[2] != NULL)
-            skin_val = g_strdup_printf ("%s;%s", key_val[1], key_val[2]);
-        else
-            skin_val = g_strdup_printf ("%s;", key_val[1]);
-        mc_config_set_string (mc_skin->config, skin_group, skin_key, skin_val);
-
-        g_free (skin_val);
 
         g_strfreev (key_val);
     }

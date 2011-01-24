@@ -47,8 +47,8 @@
 /* Popup menu colors */
 #define PMENU_ENTRY_COLOR         mc_skin_color__cache[24]
 #define PMENU_SELECTED_COLOR      mc_skin_color__cache[25]
-#define PMENU_HOT_COLOR           mc_skin_color__cache[26] /* unused: not implemented yet */
-#define PMENU_HOTSEL_COLOR        mc_skin_color__cache[27] /* unused: not implemented yet */
+#define PMENU_HOT_COLOR           mc_skin_color__cache[26]      /* unused: not implemented yet */
+#define PMENU_HOTSEL_COLOR        mc_skin_color__cache[27]      /* unused: not implemented yet */
 #define PMENU_TITLE_COLOR         mc_skin_color__cache[28]
 
 #define BUTTONBAR_HOTKEY_COLOR    mc_skin_color__cache[29]
@@ -115,6 +115,7 @@ typedef struct mc_skin_struct
     gchar *description;
     mc_config_t *config;
     GHashTable *colors;
+    gboolean have_256_colors;
 } mc_skin_t;
 
 /*** global variables defined in .c file *********************************************************/

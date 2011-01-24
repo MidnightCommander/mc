@@ -45,6 +45,7 @@
 
 #include "tty-internal.h"       /* slow_tty */
 #include "tty.h"
+#include "color.h"
 #include "color-slang.h"
 #include "color-internal.h"
 #include "mouse.h"              /* Gpm_Event is required in key.h */
@@ -292,7 +293,8 @@ tty_init (gboolean slow, gboolean ugly_lines)
 
     tty_reset_prog_mode ();
     load_terminfo_keys ();
-    SLtt_Blink_Mode = 1;
+
+    SLtt_Blink_Mode = tty_use_256colors ()? 1 : 0;
 
     tty_start_interrupt_key ();
 
