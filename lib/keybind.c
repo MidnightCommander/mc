@@ -134,6 +134,7 @@ static name_keymap_t command_names[] = {
     {"EditUserMenu", CK_User_Menu},
     {"EditBeginRecordMacro", CK_Begin_Record_Macro},
     {"EditEndRecordMacro", CK_End_Record_Macro},
+    {"EditBeginEndRepeat", CK_Begin_End_Repeat},
     {"EditDeleteMacro", CK_Delete_Macro},
     {"EditToggleBookmark", CK_Toggle_Bookmark},
     {"EditFlushBookmarks", CK_Flush_Bookmarks},

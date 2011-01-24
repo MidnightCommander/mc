@@ -1590,7 +1590,7 @@ edit_store_macro_cmd (WEdit * edit)
     return TRUE;
 }
 
-/* --------------------------------------------------------------------------------------------- */
+ /* --------------------------------------------------------------------------------------------- */
 
 gboolean
 edit_repeat_macro_cmd (WEdit * edit)
@@ -1600,7 +1600,7 @@ edit_repeat_macro_cmd (WEdit * edit)
     long count_repeat;
     char *error = NULL;
 
-    f = input_dialog (_("Repeat last commands"), _("Repeat times:"), NULL, "1");
+    f = input_dialog (_("Repeat last commands"), _("Repeat times:"), MC_HISTORY_EDIT_REPEAT, NULL);
     if (f == NULL || *f == '\0')
     {
         g_free (f);
@@ -1609,7 +1609,7 @@ edit_repeat_macro_cmd (WEdit * edit)
 
     count_repeat = strtol (f, &error, 0);
 
-    if (error != NULL)
+    if (*error != '\0')
     {
         g_free (f);
         return FALSE;
@@ -1618,8 +1618,8 @@ edit_repeat_macro_cmd (WEdit * edit)
     g_free (f);
 
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
-
     edit->force |= REDRAW_PAGE;
+
     for (j = 0; j < count_repeat; j++)
         for (i = 0; i < macro_index; i++)
             edit_execute_cmd (edit, record_macro_buf[i].action, record_macro_buf[i].ch);
@@ -3155,9 +3155,22 @@ void
 edit_begin_end_macro_cmd (WEdit * edit)
 {
     /* edit is a pointer to the widget */
-    if (edit)
+    if (edit != NULL)
     {
         unsigned long command = macro_index < 0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
+        edit_execute_key_command (edit, command, -1);
+    }
+}
+
+ /* --------------------------------------------------------------------------------------------- */
+
+void
+edit_begin_end_repeat_cmd (WEdit * edit)
+{
+    /* edit is a pointer to the widget */
+    if (edit != NULL)
+    {
+        unsigned long command = macro_index < 0 ? CK_Begin_Record_Repeat : CK_End_Record_Repeat;
         edit_execute_key_command (edit, command, -1);
     }
 }

@@ -308,6 +308,7 @@ void edit_help_cmd (WEdit * edit);
 int edit_store_macro_cmd (WEdit * edit);
 gboolean edit_load_macro_cmd (WEdit * edit);
 void edit_delete_macro_cmd (WEdit * edit);
+gboolean edit_repeat_macro_cmd (WEdit * edit);
 
 int edit_copy_to_X_buf_cmd (WEdit * edit);
 int edit_cut_to_X_buf_cmd (WEdit * edit);
@@ -318,6 +319,7 @@ void edit_insert_literal_cmd (WEdit * edit);
 void edit_execute_macro_cmd (WEdit * edit);
 gboolean edit_execute_macro (WEdit * edit, int hotkey);
 void edit_begin_end_macro_cmd (WEdit * edit);
+void edit_begin_end_repeat_cmd (WEdit * edit);
 
 void edit_paste_from_history (WEdit * edit);
 

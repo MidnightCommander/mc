@@ -170,6 +170,7 @@ create_command_menu (void)
         g_list_append (entries,
                        menu_entry_create (_("&Start/Stop record macro"), CK_Begin_End_Macro));
     entries = g_list_append (entries, menu_entry_create (_("Delete macr&o..."), CK_Delete_Macro));
+    entries = g_list_append (entries, menu_entry_create (_("Record/Repeat &actions"), CK_Begin_End_Repeat));
     entries = g_list_append (entries, menu_separator_create ());
     entries =
         g_list_append (entries, menu_entry_create (_("'ispell' s&pell check"), CK_Pipe_Block (1)));

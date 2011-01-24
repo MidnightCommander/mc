@@ -3379,18 +3379,29 @@ edit_find_bracket (WEdit * edit)
 void
 edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion)
 {
-    if (command == CK_Begin_Record_Macro || (command == CK_Begin_End_Macro && macro_index < 0))
+    if (command == CK_Begin_Record_Macro || command == CK_Begin_Record_Repeat
+        || (macro_index < 0 && (command == CK_Begin_End_Macro || command == CK_Begin_End_Repeat)))
     {
         macro_index = 0;
         edit->force |= REDRAW_CHAR_ONLY | REDRAW_LINE;
         return;
     }
-    if ((command == CK_End_Record_Macro || command == CK_Begin_End_Macro) && macro_index != -1)
+    if (macro_index != -1)
     {
         edit->force |= REDRAW_COMPLETELY;
-        edit_store_macro_cmd (edit);
-        macro_index = -1;
-        return;
+        if (command == CK_End_Record_Macro || command == CK_Begin_End_Macro)
+        {
+            edit_store_macro_cmd (edit);
+            macro_index = -1;
+            return;
+        }
+        else if (command == CK_End_Record_Repeat || command == CK_Begin_End_Repeat)
+        {
+            edit_repeat_macro_cmd (edit);
+            macro_index = -1;
+            return;
+        }
+
     }
 
     if (macro_index >= 0 && macro_index < MAX_MACRO_LENGTH - 1)
@@ -4116,6 +4127,9 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
     case CK_Begin_End_Macro:
         edit_begin_end_macro_cmd (edit);
+        break;
+    case CK_Begin_End_Repeat:
+        edit_begin_end_repeat_cmd (edit);
         break;
     case CK_Ext_Mode:
         edit->extmod = 1;

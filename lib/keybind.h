@@ -189,19 +189,22 @@
 #define CK_Paragraph_Down_Alt_Highlight    671
 
 /* X clipboard operations */
-#define CK_XStore            701
-#define CK_XCut              702
-#define CK_XPaste            703
-#define CK_Selection_History 704
+#define CK_XStore                        701
+#define CK_XCut                          702
+#define CK_XPaste                        703
+#define CK_Selection_History             704
 
-#define CK_Shell           801
+#define CK_Shell                         801
 
 /* C-x or similar */
-#define CK_Ext_Mode        820
+#define CK_Ext_Mode                      820
 
-#define CK_Insert_Literal  851
-#define CK_Execute_Macro   852
-#define CK_Begin_End_Macro 853
+#define CK_Insert_Literal                851
+#define CK_Execute_Macro                 852
+#define CK_Begin_End_Macro               853
+#define CK_Begin_End_Repeat              854
+#define CK_Begin_Record_Repeat           855
+#define CK_End_Record_Repeat             856
 
 /* help */
 #define CK_HelpHelp                     1001
