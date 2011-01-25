@@ -210,6 +210,25 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static char*
+mc_config_get_conffile(const char *base_path, const char* sub_path, const char *conf_name)
+{
+    char *filename;
+
+    if (sub_path != NULL)
+        filename = g_build_filename (base_path, sub_path, conf_name, NULL);
+    else
+        filename = g_build_filename (base_path, conf_name, NULL);
+
+    if (g_file_test (filename, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR))
+        return filename;
+    g_free(filename);
+
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -389,6 +408,39 @@ mc_config_deprecated_dir_present (void)
     gboolean is_present = g_file_test (old_dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR);
     g_free (old_dir);
     return is_present && !config_dir_present;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+mc_config_search_sysconffile(const char* sub_path, const char *conf_name)
+{
+    char *filename;
+
+    filename = mc_config_get_conffile(mc_sysconfig_dir, sub_path, conf_name);
+    if (filename != NULL)
+        return filename;
+
+    filename = mc_config_get_conffile(mc_share_data_dir, sub_path, conf_name);
+    if (filename != NULL)
+        return filename;
+
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+mc_config_search_conffile(const char *base_path, const char* sub_path, const char *conf_name)
+{
+
+    char *filename;
+
+    filename = mc_config_get_conffile(base_path, sub_path, conf_name);
+    if (filename != NULL)
+        return filename;
+
+    return mc_config_search_sysconffile(sub_path, conf_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
