@@ -201,22 +201,11 @@ mc_fhl_init_from_standard_files (mc_fhl_t * fhl)
     gchar *name;
     gboolean ok;
 
-    /* ${XDG_CONFIG_HOME}/mc/filehighlight.ini */
-    name = g_build_filename (mc_config_get_data_path (), MC_FHL_INI_FILE, (char *) NULL);
-    ok = mc_fhl_read_ini_file (fhl, name);
-    g_free (name);
-    if (ok)
-        return TRUE;
+    name = mc_config_search_conffile(mc_config_get_path (), NULL, MC_FHL_INI_FILE);
 
-    /* ${sysconfdir}/mc/filehighlight.ini  */
-    name = g_build_filename (mc_sysconfig_dir, MC_FHL_INI_FILE, (char *) NULL);
-    ok = mc_fhl_read_ini_file (fhl, name);
-    g_free (name);
-    if (ok)
-        return TRUE;
+    if (name == NULL)
+        return FALSE;
 
-    /* ${datadir}/mc/filehighlight.ini  */
-    name = g_build_filename (mc_share_data_dir, MC_FHL_INI_FILE, (char *) NULL);
     ok = mc_fhl_read_ini_file (fhl, name);
     g_free (name);
     return ok;

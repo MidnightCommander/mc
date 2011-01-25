@@ -43,36 +43,7 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-mc_skin_ini_file_load_search_in_dir (mc_skin_t * mc_skin, const gchar * base_dir)
-{
-    char *file_name, *file_name2;
-
-    file_name = g_build_filename (base_dir, MC_SKINS_SUBDIR, mc_skin->name, NULL);
-    if (exist_file (file_name))
-    {
-        mc_skin->config = mc_config_init (file_name);
-        g_free (file_name);
-        return (mc_skin->config != NULL);
-    }
-    g_free (file_name);
-
-    file_name2 = g_strdup_printf ("%s.ini", mc_skin->name);
-    file_name = g_build_filename (base_dir, MC_SKINS_SUBDIR, file_name2, NULL);
-    g_free (file_name2);
-
-    if (exist_file (file_name))
-    {
-        mc_skin->config = mc_config_init (file_name);
-        g_free (file_name);
-        return (mc_skin->config != NULL);
-    }
-    g_free (file_name);
-    return FALSE;
-}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -97,16 +68,20 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
     }
     g_free (file_name);
 
-    /* ${XDG_DATA_HOME}/mc/skins/ */
-    if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_config_get_data_path ()))
-        return TRUE;
+    file_name = mc_config_search_conffile(mc_config_get_data_path (), MC_SKINS_SUBDIR, mc_skin->name);
+    if (file_name == NULL)
+    {
+        char *fname_ext = g_strdup_printf ("%s.ini", mc_skin->name);
+        file_name = mc_config_search_conffile(mc_config_get_data_path (), MC_SKINS_SUBDIR, fname_ext);
+        g_free(fname_ext);
+    }
 
-    /* /etc/mc/skins/ */
-    if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_sysconfig_dir))
-        return TRUE;
+    if (file_name == NULL)
+        return FALSE;
 
-    /* /usr/share/mc/skins/ */
-    return mc_skin_ini_file_load_search_in_dir (mc_skin, mc_share_data_dir);
+    mc_skin->config = mc_config_init (file_name);
+    g_free (file_name);
+    return (mc_skin->config != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
