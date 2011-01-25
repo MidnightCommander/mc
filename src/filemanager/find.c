@@ -34,16 +34,15 @@
 
 #include "lib/global.h"
 
-#include "lib/util.h"           /* canonicalize_pathname() */
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/skin.h"
 #include "lib/search.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/util.h"           /* canonicalize_pathname() */
 
 #include "src/setup.h"          /* verbose */
 #include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
@@ -58,9 +57,6 @@
 #include "find.h"
 
 /*** global variables ****************************************************************************/
-
-/* List of directories to be ignored, separated by ':' */
-char **find_ignore_dirs = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -108,6 +104,9 @@ typedef struct
 } find_file_options_t;
 
 /*** file scope variables ************************************************************************/
+
+/* Parsed ignore dirs */
+static char **find_ignore_dirs = NULL;
 
 /* Size of the find parameters window */
 #if HAVE_CHARSET
@@ -202,14 +201,6 @@ static mc_search_t *search_content_handle = NULL;
 
 /*** file scope functions ************************************************************************/
 
-static int
-find_ignore_dirs_cmp (const void *d1, const void *d2)
-{
-    return strcmp (*(const char **) d1, *(const char **) d2);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 find_load_options (void)
 {
@@ -264,14 +255,16 @@ find_load_options (void)
             }
 
             canonicalize_pathname (find_ignore_dirs[w]);
-            w++;
+            if (find_ignore_dirs[w][0] != '\0')
+                w++;
+            else
+            {
+                g_free (find_ignore_dirs[w]);
+                find_ignore_dirs[w] = NULL;
+            }
         }
 
-        /* sort array */
-        if (find_ignore_dirs[0] != NULL)
-            qsort (find_ignore_dirs, g_strv_length (find_ignore_dirs),
-                   sizeof (find_ignore_dirs[0]), &find_ignore_dirs_cmp);
-        else
+        if (find_ignore_dirs[0] == NULL)
         {
             g_strfreev (find_ignore_dirs);
             find_ignore_dirs = NULL;
@@ -1005,28 +998,58 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline gboolean
+/**
+  If dir is absolute, this means we're within dir and searching file here.
+  If dir is relative, this means we're going to add dir to the directory stack.
+**/
+static gboolean
 find_ignore_dir_search (const char *dir)
 {
     if (find_ignore_dirs != NULL)
     {
         const size_t dlen = strlen (dir);
+        const unsigned char dabs = g_path_is_absolute (dir) ? 1 : 0;
+
         char **ignore_dir;
 
         for (ignore_dir = find_ignore_dirs; *ignore_dir != NULL; ignore_dir++)
         {
             const size_t ilen = strlen (*ignore_dir);
+            const unsigned char iabs = g_path_is_absolute (*ignore_dir) ? 2 : 0;
 
+            /* ignore dir is too long -- skip it */
             if (dlen < ilen)
-                continue;       /* ignore dir is too long -- skip it */
+                continue;
 
-            if (strncmp (dir, *ignore_dir, ilen) != 0)
-                continue;       /* strings are different -- skip ignore_dir */
+            /* handle absolute and relative paths */
+            switch (iabs | dabs)
+            {
+            case 0: /* both paths are relative */
+            case 3: /* both paths are abolute */
+                /* if ignore dir is not a path  of dir -- skip it */
+                if (strncmp (dir, *ignore_dir, ilen) == 0)
+                {
+                    /* be sure that ignore dir is not a part of dir like:
+                       ignore dir is "h", dir is "home" */
+                    if (dir[ilen] == '\0' || dir[ilen] == PATH_SEP)
+                        return TRUE;
+                }
+                break;
+            case 1: /* dir is absolute, ignore_dir is relative */
+                {
+                    char *d;
 
-            /* be sure than ignore_dir is not a part of dir like:
-               ignore_dir is "/h", dir is "/home" */
-            if (dir[ilen] == PATH_SEP || dir[ilen] == '\0')
-                return TRUE;
+                    d = strstr (dir, *ignore_dir);
+                    if (d != NULL && d[-1] == PATH_SEP && (d[ilen] == '\0' || d[ilen] == PATH_SEP))
+                        return TRUE;
+                }
+                break;
+            case 2: /* dir is relative, ignore_dir is absolute */
+                /* FIXME: skip this case */
+                break;
+            default: /* this cannot occurs */
+                return FALSE;
+            }
         }
     }
 
@@ -1105,6 +1128,7 @@ do_search (Dlg_head * h)
                         return 0;
                     }
 
+                    /* handle absolute ignore dirs here */
                     if (!find_ignore_dir_search (tmp))
                         break;
 
@@ -1152,15 +1176,22 @@ do_search (Dlg_head * h)
             gboolean search_ok;
 
             if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
-            {                   /* Can directory be NULL ? */
-                char *tmp_name = concat_dir_and_file (directory, dp->d_name);
-                if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
+            {                           /* Can directory be NULL ? */
+                /* handle relative ignore dirs here */
+                if (!find_ignore_dir_search (dp->d_name))
                 {
-                    push_directory (tmp_name);
-                    subdirs_left--;
+                    char *tmp_name;
+
+                    tmp_name = g_build_filename (directory, dp->d_name, (char *) NULL);
+
+                    if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
+                    {
+                        push_directory (tmp_name);
+                        subdirs_left--;
+                    }
+                    else
+                        g_free (tmp_name);
                 }
-                else
-                    g_free (tmp_name);
             }
 
             search_ok = mc_search_run (search_file_handle, dp->d_name,

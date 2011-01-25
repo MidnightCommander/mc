@@ -1408,6 +1408,12 @@ example:
 ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
+Relative paths are supported also. The following example shows how to skip special
+directories of version control systems:
+.nf
+ignore_dirs=/cdrom:/nfs/wuarchive:/afs:.svn:.git:CVS
+.fi
+.PP
 You may consider using the
 .\"LINK2"
 External panelize
