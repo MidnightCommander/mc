@@ -283,7 +283,7 @@ mcview_do_search (mcview_t * view)
         mcview_update (view);
 
         result =
-            query_dialog (_("Search done"), _("Continue from begining?"), D_NORMAL, 2, _("&Yes"),
+            query_dialog (_("Search done"), _("Continue from beginning?"), D_NORMAL, 2, _("&Yes"),
                           _("&No"));
 
         if (result != 0)

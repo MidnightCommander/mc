@@ -1273,7 +1273,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     {
         if (S_ISDIR (sb2.st_mode))
         {
-            return_status = file_error (_("Cannot overwrite directory\"%s\"\n%s"), dst_path);
+            return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), dst_path);
             if (return_status == FILE_RETRY)
                 continue;
             return return_status;
