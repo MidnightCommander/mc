@@ -605,9 +605,7 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
         }
 
         profile_keys++;
-
-        if (values != NULL)
-            g_strfreev (values);
+        g_strfreev (values);
     }
     g_strfreev (keys);
     g_free (section_name);
@@ -659,9 +657,7 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
         }
 
         profile_keys++;
-
-        if (values != NULL)
-            g_strfreev (values);
+        g_strfreev (values);
     }
     g_strfreev (keys);
 }

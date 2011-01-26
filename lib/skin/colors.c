@@ -130,9 +130,7 @@ mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const
     mc_skin_color_t *mc_skin_color, *tmp;
 
     values = mc_config_get_string_list (mc_skin->config, group, key, &items_count);
-    if (values == NULL)
-        return NULL;
-    if (*values == NULL)
+    if (values == NULL || values[0] == NULL)
     {
         g_strfreev (values);
         return NULL;
@@ -307,11 +305,7 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
     mc_skin_color_check_bw_mode (mc_skin);
 
     orig_groups = groups = mc_config_get_groups (mc_skin->config, &items_count);
-
-    if (groups == NULL)
-        return FALSE;
-
-    if (*groups == NULL)
+    if (groups == NULL || groups[0] == NULL)
     {
         g_strfreev (groups);
         return FALSE;
