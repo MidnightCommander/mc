@@ -1668,11 +1668,12 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 {
     char *block_file;
     int nomark;
+    long curs;
     long start_mark, end_mark;
     struct stat status;
 
     block_file = concat_dir_and_file (mc_config_get_cache_path (), EDIT_BLOCK_FILE);
-
+    curs = edit->curs1;
     nomark = eval_marks (edit, &start_mark, &end_mark);
     if (nomark == 0)
         edit_save_block (edit, block_file, start_mark, end_mark);
@@ -1702,6 +1703,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
         if (fd != NULL)
             fclose (fd);
     }
+    edit_cursor_move (edit, curs - edit->curs1);
     edit_refresh_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
 
