@@ -372,80 +372,6 @@ static const struct
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/**
-  Get name of config file.
-
- \param subdir
- if not NULL, then config also search into specified subdir.
-
- \param config_file_name
- If specified filename is relative, then will search in standart patches.
-
- \return
- Newly allocated path to config name or NULL if file not found.
-
- If config_file_name is a relative path, then search config in stantart paths.
-*/
-static char *
-load_setup_get_full_config_name (const char *subdir, const char *config_file_name)
-{
-    /*
-       TODO: IMHO, in future this function must be placed into mc_config module.
-     */
-    char *lc_basename, *ret;
-
-    if (config_file_name == NULL)
-        return NULL;
-
-    if (g_path_is_absolute (config_file_name))
-        return g_strdup (config_file_name);
-
-
-    lc_basename = g_path_get_basename (config_file_name);
-    if (lc_basename == NULL)
-        return NULL;
-
-    if (subdir != NULL)
-        ret = g_build_filename (mc_config_get_path (), subdir, lc_basename, NULL);
-    else
-        ret = g_build_filename (mc_config_get_path (), lc_basename, NULL);
-
-    if (exist_file (ret))
-    {
-        g_free (lc_basename);
-        return ret;
-    }
-    g_free (ret);
-
-    if (subdir != NULL)
-        ret = g_build_filename (mc_sysconfig_dir, subdir, lc_basename, NULL);
-    else
-        ret = g_build_filename (mc_sysconfig_dir, lc_basename, NULL);
-
-    if (exist_file (ret))
-    {
-        g_free (lc_basename);
-        return ret;
-    }
-    g_free (ret);
-
-    if (subdir != NULL)
-        ret = g_build_filename (mc_share_data_dir, subdir, lc_basename, NULL);
-    else
-        ret = g_build_filename (mc_share_data_dir, lc_basename, NULL);
-
-    g_free (lc_basename);
-
-    if (exist_file (ret))
-        return ret;
-
-    g_free (ret);
-    return NULL;
-
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static const char *
 setup__is_cfg_group_must_panel_config (const char *grp)
 {
@@ -511,28 +437,6 @@ setup__move_panels_config_into_separate_file (const char *profile)
 
     mc_config_save_file (tmp_cfg, NULL);
     mc_config_deinit (tmp_cfg);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
-  Create new mc_config object from specified ini-file or
-  append data to existing mc_config object from ini-file
-
-*/
-
-static void
-load_setup_init_config_from_file (mc_config_t ** config, const char *fname)
-{
-    /*
-       TODO: IMHO, in future this function must be placed into mc_config module.
-     */
-    if (exist_file (fname))
-    {
-        if (*config != NULL)
-            mc_config_read_file (*config, fname);
-        else
-            *config = mc_config_init (fname);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -667,52 +571,35 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
 static mc_config_t *
 load_setup_get_keymap_profile_config (void)
 {
-    /*
-       TODO: IMHO, in future this function must be placed into mc_config module.
-     */
     mc_config_t *keymap_config = NULL;
     char *fname, *fname2;
 
-    /* 1) /usr/share/mc (mc_share_data_dir) */
-    fname = g_build_filename (mc_share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
-    load_setup_init_config_from_file (&keymap_config, fname);
-    g_free (fname);
+    mc_config_load_all_from_paths (mc_config_get_path (), NULL, &keymap_config, GLOBAL_KEYMAP_FILE);
 
-    /* 2) /etc/mc (mc_sysconfig_dir) */
-    fname = g_build_filename (mc_sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
-    load_setup_init_config_from_file (&keymap_config, fname);
-    g_free (fname);
-
-    /* 3) ${XDG_CONFIG_HOME}/mc */
-    fname = g_build_filename (mc_config_get_path (), GLOBAL_KEYMAP_FILE, NULL);
-    load_setup_init_config_from_file (&keymap_config, fname);
-    g_free (fname);
-
-    /* 4) main config; [Midnight Commander] -> keymap */
-
+    /* main config; [Midnight Commander] -> keymap */
     fname2 =
         mc_config_get_string (mc_main_config, CONFIG_APP_SECTION, "keymap", GLOBAL_KEYMAP_FILE);
-    fname = load_setup_get_full_config_name (NULL, fname2);
-    if (fname != NULL)
-    {
-        load_setup_init_config_from_file (&keymap_config, fname);
-        g_free (fname);
-    }
+    fname = mc_config_search_conffile (mc_config_get_path (), NULL, fname2);
     g_free (fname2);
-
-    /* 5) getenv("MC_KEYMAP") */
-    fname = load_setup_get_full_config_name (NULL, g_getenv ("MC_KEYMAP"));
     if (fname != NULL)
     {
-        load_setup_init_config_from_file (&keymap_config, fname);
+        mc_config_init_or_append_data (&keymap_config, fname);
         g_free (fname);
     }
 
-    /* 6) --keymap=<keymap> */
-    fname = load_setup_get_full_config_name (NULL, mc_args__keymap_file);
+    /* getenv("MC_KEYMAP") */
+    fname = mc_config_search_conffile (mc_config_get_path (), NULL, g_getenv ("MC_KEYMAP"));
     if (fname != NULL)
     {
-        load_setup_init_config_from_file (&keymap_config, fname);
+        mc_config_init_or_append_data (&keymap_config, fname);
+        g_free (fname);
+    }
+
+    /* --keymap=<keymap> */
+    fname = mc_config_search_conffile (mc_config_get_path (), NULL, mc_args__keymap_file);
+    if (fname != NULL)
+    {
+        mc_config_init_or_append_data (&keymap_config, fname);
         g_free (fname);
     }
 

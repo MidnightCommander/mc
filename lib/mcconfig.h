@@ -109,10 +109,15 @@ const char *mc_config_get_path (void);
 
 const char *mc_config_get_home_dir (void);
 
-char *mc_config_search_sysconffile(const char* sub_path, const char *conf_name);
+char *mc_config_search_sysconffile (const char *sub_path, const char *conf_name);
 
-char *mc_config_search_conffile(const char *base_path, const char* sub_path, const char *conf_name);
+char *mc_config_search_conffile (const char *base_path, const char *sub_path,
+                                 const char *conf_name);
 
+void mc_config_load_all_from_paths (const char *base_path, const char *sub_path,
+                                    mc_config_t ** config, const char *conf_name);
+
+void mc_config_init_or_append_data (mc_config_t ** config, const char *fname);
 
 /*** inline functions ****************************************************************************/
 

@@ -37,8 +37,8 @@
 /*** global variables ****************************************************************************/
 
 /* mc_sysconfig_dir: Area for default settings from maintainers of distributuves
-  default is /etc/mc or may be defined by MC_DATADIR
-  */
+   default is /etc/mc or may be defined by MC_DATADIR
+ */
 char *mc_sysconfig_dir = NULL;
 
 /* mc_share_data_dir: Area for default settings from developers */
@@ -211,8 +211,8 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char*
-mc_config_get_conffile(const char *base_path, const char* sub_path, const char *conf_name)
+static char *
+mc_config_get_conffile (const char *base_path, const char *sub_path, const char *conf_name)
 {
     char *filename;
 
@@ -223,7 +223,7 @@ mc_config_get_conffile(const char *base_path, const char* sub_path, const char *
 
     if (g_file_test (filename, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR))
         return filename;
-    g_free(filename);
+    g_free (filename);
 
     return NULL;
 }
@@ -413,15 +413,15 @@ mc_config_deprecated_dir_present (void)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mc_config_search_sysconffile(const char* sub_path, const char *conf_name)
+mc_config_search_sysconffile (const char *sub_path, const char *conf_name)
 {
     char *filename;
 
-    filename = mc_config_get_conffile(mc_sysconfig_dir, sub_path, conf_name);
+    filename = mc_config_get_conffile (mc_sysconfig_dir, sub_path, conf_name);
     if (filename != NULL)
         return filename;
 
-    filename = mc_config_get_conffile(mc_share_data_dir, sub_path, conf_name);
+    filename = mc_config_get_conffile (mc_share_data_dir, sub_path, conf_name);
     if (filename != NULL)
         return filename;
 
@@ -431,16 +431,68 @@ mc_config_search_sysconffile(const char* sub_path, const char *conf_name)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mc_config_search_conffile(const char *base_path, const char* sub_path, const char *conf_name)
+mc_config_search_conffile (const char *base_path, const char *sub_path, const char *conf_name)
 {
 
     char *filename;
 
-    filename = mc_config_get_conffile(base_path, sub_path, conf_name);
+    if (conf_name == NULL)
+        return NULL;
+
+    if (g_path_is_absolute (conf_name))
+        return g_strdup (conf_name);
+
+    filename = mc_config_get_conffile (base_path, sub_path, conf_name);
     if (filename != NULL)
         return filename;
 
-    return mc_config_search_sysconffile(sub_path, conf_name);
+    return mc_config_search_sysconffile (sub_path, conf_name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+mc_config_load_all_from_paths (const char *base_path, const char *sub_path, mc_config_t ** config,
+                               const char *conf_name)
+{
+
+    char *filename;
+
+    /* 1) /usr/share/mc (mc_share_data_dir) */
+    filename = mc_config_get_conffile (mc_share_data_dir, sub_path, conf_name);
+    mc_config_init_or_append_data (config, filename);
+    g_free (filename);
+
+    /* 2) /etc/mc (mc_sysconfig_dir) */
+    filename = mc_config_get_conffile (mc_sysconfig_dir, sub_path, conf_name);
+    mc_config_init_or_append_data (config, filename);
+    g_free (filename);
+
+    /* 3) base_path */
+    if (g_path_is_absolute (conf_name))
+        filename = g_strdup (conf_name);
+    else
+        filename = mc_config_get_conffile (base_path, sub_path, conf_name);
+    mc_config_init_or_append_data (config, filename);
+    g_free (filename);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  Create new mc_config object from specified ini-file or
+  append data to existing mc_config object from ini-file
+*/
+
+void
+mc_config_init_or_append_data (mc_config_t ** config, const char *fname)
+{
+    if (fname != NULL && g_file_test (fname, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR))
+    {
+        if (*config != NULL)
+            mc_config_read_file (*config, fname);
+        else
+            *config = mc_config_init (fname);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
