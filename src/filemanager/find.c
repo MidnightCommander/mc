@@ -229,7 +229,7 @@ find_load_options (void)
         mc_config_set_string (mc_main_config, "FindFile", "ignore_dirs", ignore_dirs);
     }
     g_free (ignore_dirs);
-    mc_config_del_param (mc_main_config, "Misc", "find_ignore_dirs");
+    mc_config_del_key (mc_main_config, "Misc", "find_ignore_dirs");
 
     /* Then load new parameters */
     ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");

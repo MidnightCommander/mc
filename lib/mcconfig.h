@@ -28,7 +28,7 @@ extern mc_config_t *mc_panels_config;
 mc_config_t *mc_config_init (const gchar *);
 void mc_config_deinit (mc_config_t *);
 
-gboolean mc_config_del_param (mc_config_t *, const char *, const gchar *);
+gboolean mc_config_del_key (mc_config_t *, const char *, const gchar *);
 gboolean mc_config_del_group (mc_config_t *, const char *);
 
 gboolean mc_config_has_param (mc_config_t *, const char *, const gchar *);
