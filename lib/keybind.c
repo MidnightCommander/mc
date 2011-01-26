@@ -187,7 +187,6 @@ static name_keymap_t command_names[] = {
     {"EditSelectionHistory", CK_Selection_History},
     {"EditShell", CK_Shell},
     {"EditInsertLiteral", CK_Insert_Literal},
-    {"EditExecuteMacro", CK_Execute_Macro},
     {"EditBeginOrEndMacro", CK_Begin_End_Macro},
     {"EditExtMode", CK_Ext_Mode},
     {"EditToggleLineState", CK_Toggle_Line_State},

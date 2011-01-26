@@ -1446,7 +1446,7 @@ edit_delete_macro (WEdit * edit, int hotkey)
         edit_macro_sort_by_hotkey ();
     }
 
-    macros_fname = g_build_filename (mc_config_get_path (), MC_MACRO_FILE, NULL);
+    macros_fname = g_build_filename (mc_config_get_data_path (), MC_MACRO_FILE, (char *) NULL);
     macros_config = mc_config_init (macros_fname);
     g_free (macros_fname);
 
@@ -1540,7 +1540,7 @@ edit_store_macro_cmd (WEdit * edit)
 
     edit_delete_macro (edit, hotkey);
 
-    macros_fname = g_build_filename (mc_config_get_path (), MC_MACRO_FILE, NULL);
+    macros_fname = g_build_filename (mc_config_get_data_path (), MC_MACRO_FILE, (char *) NULL);
     macros_config = mc_config_init (macros_fname);
     g_free (macros_fname);
 
@@ -1643,7 +1643,7 @@ edit_load_macro_cmd (WEdit * edit)
 
     (void) edit;
 
-    macros_fname = g_build_filename (mc_config_get_path (), MC_MACRO_FILE, NULL);
+    macros_fname = g_build_filename (mc_config_get_data_path (), MC_MACRO_FILE, (char *) NULL);
     macros_config = mc_config_init (macros_fname);
     g_free (macros_fname);
 
@@ -1673,19 +1673,19 @@ edit_load_macro_cmd (WEdit * edit)
             if (macro_pair != NULL)
             {
                 macro_action_t m_act;
-                if (macro_pair [0] == NULL || macro_pair [0][0] == '\0')
+                if (macro_pair[0] == NULL || macro_pair[0][0] == '\0')
                     m_act.action = 0;
                 else
                 {
-                    m_act.action = keybind_lookup_action (macro_pair [0]);
+                    m_act.action = keybind_lookup_action (macro_pair[0]);
                     g_free (macro_pair[0]);
                     macro_pair[0] = NULL;
                 }
-                if (macro_pair [1] == NULL || macro_pair [1][0] == '\0')
+                if (macro_pair[1] == NULL || macro_pair[1][0] == '\0')
                     m_act.ch = -1;
                 else
                 {
-                    m_act.ch = strtol (macro_pair [1], NULL, 0);
+                    m_act.ch = strtol (macro_pair[1], NULL, 0);
                     g_free (macro_pair[1]);
                     macro_pair[1] = NULL;
                 }
@@ -2852,129 +2852,17 @@ edit_ext_cmd (WEdit * edit)
    command, that just produces some output which is to be inserted */
 
 void
-edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
+edit_block_process_cmd (WEdit * edit, int macro_number)
 {
-    long start_mark, end_mark;
-    char buf[BUFSIZ];
-    FILE *script_home = NULL;
-    FILE *block_file = NULL;
-    gchar *o, *h, *b, *tmp;
-    char *quoted_name = NULL;
+    char *fname;
+    char *macros_fname = NULL;
 
-    o = g_strconcat (mc_sysconfig_dir, shell_cmd, (char *) NULL);        /* original source script */
-    h = g_strconcat (mc_config_get_data_path (), PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);     /* home script */
-    b = concat_dir_and_file (mc_config_get_cache_path (), EDIT_BLOCK_FILE);     /* block file */
-
-    script_home = fopen (h, "r");
-    if (script_home == NULL)
-    {
-        FILE *script_src = NULL;
-
-        script_home = fopen (h, "w");
-        if (script_home == NULL)
-        {
-            tmp = g_strconcat (_("Error creating script:"), h, (char *) NULL);
-            edit_error_dialog ("", get_sys_error (tmp));
-            g_free (tmp);
-            goto edit_block_process_cmd__EXIT;
-        }
-
-        script_src = fopen (o, "r");
-        if (script_src == NULL)
-        {
-            o = g_strconcat (mc_share_data_dir, shell_cmd, (char *) NULL);
-            script_src = fopen (o, "r");
-            if (script_src == NULL)
-            {
-                fclose (script_home);
-                unlink (h);
-                tmp = g_strconcat (_("Error reading script:"), o, (char *) NULL);
-                edit_error_dialog ("", get_sys_error (tmp));
-                g_free (tmp);
-                goto edit_block_process_cmd__EXIT;
-            }
-        }
-        while (fgets (buf, sizeof (buf), script_src))
-            fputs (buf, script_home);
-        fclose (script_src);
-
-        if (fclose (script_home))
-        {
-            tmp = g_strconcat (_("Error closing script:"), h, (char *) NULL);
-            edit_error_dialog ("", get_sys_error (tmp));
-            g_free (tmp);
-            goto edit_block_process_cmd__EXIT;
-        }
-        chmod (h, 0700);
-        tmp = g_strconcat (_("Script created:"), h, (char *) NULL);
-        edit_error_dialog ("", get_sys_error (tmp));
-        g_free (tmp);
-    }
-
-    open_error_pipe ();
-
-    if (block)
-    {                           /* for marked block run indent formatter */
-        if (eval_marks (edit, &start_mark, &end_mark))
-        {
-            edit_error_dialog (_("Process block"), _("You must first highlight a block of text"));
-            goto edit_block_process_cmd__EXIT;
-        }
-        edit_save_block (edit, b, start_mark, end_mark);
-        quoted_name = name_quote (edit->filename, 0);
-        /*
-         * Run script.
-         * Initial space is to avoid polluting bash history.
-         * Arguments:
-         *   $1 - name of the edited file (to check its extension etc).
-         *   $2 - file containing the current block.
-         *   $3 - file where error messages should be put
-         *        (for compatibility with old scripts).
-         */
-        tmp =
-            g_strconcat (" ", mc_config_get_cache_path (), PATH_SEP_STR EDIT_DIR, shell_cmd, " ",
-                         quoted_name, " ", mc_config_get_cache_path (),
-                         PATH_SEP_STR EDIT_BLOCK_FILE " /dev/null", (char *) NULL);
-    }
-    else
-    {
-        /*
-         * No block selected, just execute the command for the file.
-         * Arguments:
-         *   $1 - name of the edited file.
-         */
-        tmp = g_strconcat (" ", mc_config_get_cache_path (), PATH_SEP_STR EDIT_DIR, shell_cmd, " ",
-                           quoted_name, (char *) NULL);
-    }
-
-    if (system (tmp) == -1)
-    {
-        edit_error_dialog (_("Process block"), _("Error calling program"));
-    }
-    else
-    {
-
-        g_free (quoted_name);
-        close_error_pipe (D_NORMAL, NULL);
-
-        edit_refresh_cmd (edit);
-        edit->force |= REDRAW_COMPLETELY;
-
-        /* insert result block */
-        if (block && !edit_block_delete_cmd (edit))
-        {
-            edit_insert_file (edit, b);
-            block_file = fopen (b, "w");
-            if (block_file != NULL)
-                fclose (block_file);
-        }
-    }
-    g_free (tmp);
-
-  edit_block_process_cmd__EXIT:
-    g_free (b);
-    g_free (h);
-    g_free (o);
+    fname = g_strdup_printf ("%s.%i.sh", MC_EXTMACRO_FILE, macro_number);
+    macros_fname = g_build_filename (mc_config_get_data_path (), fname, (char *) NULL);
+    user_menu (edit, macros_fname, 0);
+    g_free (fname);
+    g_free (macros_fname);
+    edit->force |= REDRAW_COMPLETELY;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3133,20 +3021,6 @@ edit_insert_literal_cmd (WEdit * edit)
     int char_for_insertion = editcmd_dialog_raw_key_query (_("Insert literal"),
                                                            _("Press any key:"), 0);
     edit_execute_key_command (edit, -1, ascii_alpha_to_cntrl (char_for_insertion));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_execute_macro_cmd (WEdit * edit)
-{
-    int command =
-        CK_Macro (editcmd_dialog_raw_key_query (_("Execute macro"), _("Press macro hotkey:"),
-                                                1));
-    if (command == CK_Macro (0))
-        command = CK_Insert_Char;
-
-    edit_execute_key_command (edit, command, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

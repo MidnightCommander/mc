@@ -132,8 +132,6 @@ static const struct edit_filters
 
 static long last_bracket = -1;
 
-static const char *const shell_cmd[] = SHELL_COMMANDS_i;
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -167,7 +165,6 @@ static const char *const shell_cmd[] = SHELL_COMMANDS_i;
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void user_menu (WEdit * edit);
 static int left_of_four_spaces (WEdit * edit);
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1661,10 +1658,13 @@ edit_goto_matching_bracket (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 /** User edit menu, like user menu (F2) but only in editor. */
 
-static void
-user_menu (WEdit * edit)
+void
+user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 {
     char *block_file;
     int nomark;
@@ -1678,7 +1678,9 @@ user_menu (WEdit * edit)
         edit_save_block (edit, block_file, start_mark, end_mark);
 
     /* run shell scripts from menu */
-    if (user_menu_cmd (edit) && (mc_stat (block_file, &status) == 0) && (status.st_size != 0))
+    if (user_menu_cmd (edit, menu_file, selected_entry)
+        && (mc_stat (block_file, &status) == 0)
+        && (status.st_size != 0))
     {
         int rc = 0;
         FILE *fd;
@@ -1706,8 +1708,6 @@ user_menu (WEdit * edit)
     g_free (block_file);
 }
 
-/* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -4102,7 +4102,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_goto_matching_bracket (edit);
         break;
     case CK_User_Menu:
-        user_menu (edit);
+        user_menu (edit, NULL, -1);
         break;
     case CK_Sort:
         edit_sort_cmd (edit);
@@ -4122,9 +4122,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Insert_Literal:
         edit_insert_literal_cmd (edit);
         break;
-    case CK_Execute_Macro:
-        edit_execute_macro_cmd (edit);
-        break;
     case CK_Begin_End_Macro:
         edit_begin_end_macro_cmd (edit);
         break;
@@ -4139,8 +4136,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     }
 
     /* CK_Pipe_Block */
-    if ((command / 10000) == 1)  /* a shell command */
-        edit_block_process_cmd (edit, shell_cmd[command - 10000], 1);
+    if ((command / CK_Pipe_Block (0)) == 1)
+        edit_block_process_cmd (edit, command - CK_Pipe_Block (0));
 
     /* keys which must set the col position, and the search vars */
     switch (command)

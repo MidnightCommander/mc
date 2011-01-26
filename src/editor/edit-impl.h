@@ -215,6 +215,7 @@ extern gboolean search_create_bookmark;
 
 int edit_drop_hotkey_menu (WEdit * e, int key);
 void edit_menu_cmd (WEdit * e);
+void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (struct WMenuBar *menubar);
 void menu_save_mode_cmd (void);
 int edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch);
@@ -289,7 +290,7 @@ int edit_insert_column_of_text_from_file (WEdit * edit, int file);
 long edit_insert_file (WEdit * edit, const char *filename);
 int edit_load_back_cmd (WEdit * edit);
 int edit_load_forward_cmd (WEdit * edit);
-void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block);
+void edit_block_process_cmd (WEdit * edit, int macro_number);
 void edit_refresh_cmd (WEdit * edit);
 void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
@@ -316,7 +317,6 @@ void edit_paste_from_X_buf_cmd (WEdit * edit);
 
 void edit_select_codepage_cmd (WEdit * edit);
 void edit_insert_literal_cmd (WEdit * edit);
-void edit_execute_macro_cmd (WEdit * edit);
 gboolean edit_execute_macro (WEdit * edit, int hotkey);
 void edit_begin_end_macro_cmd (WEdit * edit);
 void edit_begin_end_repeat_cmd (WEdit * edit);

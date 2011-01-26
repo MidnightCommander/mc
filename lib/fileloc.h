@@ -66,6 +66,7 @@
 #define EDIT_DIR                "mcedit"
 
 /* file names */
+#define MC_EXTMACRO_FILE        EDIT_DIR PATH_SEP_STR "macros.d" PATH_SEP_STR "macro"
 #define EDIT_SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"
 #define EDIT_CLIP_FILE          EDIT_DIR PATH_SEP_STR "mcedit.clip"
 #define EDIT_BLOCK_FILE         EDIT_DIR PATH_SEP_STR "mcedit.block"
