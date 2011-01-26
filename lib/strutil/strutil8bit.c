@@ -52,6 +52,7 @@ static inline int char_##func_name(char c)     \
     return func_name((int)(unsigned char)c);   \
 }
 
+/* *INDENT-OFF* */
 DECLARE_CTYPE_WRAPPER (isalnum)
 DECLARE_CTYPE_WRAPPER (isalpha)
 DECLARE_CTYPE_WRAPPER (isascii)
@@ -64,9 +65,13 @@ DECLARE_CTYPE_WRAPPER (isprint)
 DECLARE_CTYPE_WRAPPER (ispunct)
 DECLARE_CTYPE_WRAPPER (isspace)
 DECLARE_CTYPE_WRAPPER (isupper)
-DECLARE_CTYPE_WRAPPER (isxdigit) DECLARE_CTYPE_WRAPPER (toupper) DECLARE_CTYPE_WRAPPER (tolower)
-     static void
-     str_8bit_insert_replace_char (GString * buffer)
+DECLARE_CTYPE_WRAPPER (isxdigit)
+DECLARE_CTYPE_WRAPPER (toupper)
+DECLARE_CTYPE_WRAPPER (tolower)
+/* *INDENT-ON* */
+
+static void
+str_8bit_insert_replace_char (GString * buffer)
 {
     g_string_append_c (buffer, replch);
 }
