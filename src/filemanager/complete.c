@@ -636,7 +636,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
                 if (cur_path >= path_end)
                     break;
                 expanded = tilde_expand (*cur_path ? cur_path : ".");
-                cur_word = concat_dir_and_file (expanded, text);
+                cur_word = g_build_filename (expanded, text, NULL);
                 g_free (expanded);
                 canonicalize_pathname (cur_word);
                 cur_path = strchr (cur_path, 0) + 1;
@@ -856,11 +856,12 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
                    We are not in a command position after one of these. */
                 this_char = ti[0];
                 prev_char = str_get_prev_char (ti)[0];
-
+                /* *INDENT-OFF* */
                 if ((this_char == '&' && (prev_char == '<' || prev_char == '>')) ||
                     (this_char == '|' && prev_char == '>') ||
                     (ti != text && str_get_prev_char (ti)[0] == '\\'))        /* Quoted */
                     in_command_position = 0;
+                /* *INDENT-ON* */
             }
         }
     }
@@ -959,7 +960,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
                     *s = 0;
                     if (*cdpath)
                     {
-                        r = concat_dir_and_file (cdpath, word);
+                        r = g_build_filename (cdpath, word, NULL);
                         SHOW_C_CTX ("try_complete:filename_subst_2");
                         matches = completion_matches (r, filename_completion_function, flags);
                         g_free (r);
@@ -1143,8 +1144,8 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                                 ;
 
                             /* pointers to next symbols */
-                            si = &le->text [str_offset_to_pos (le->text, ++si_num)];
-                            sl = &last_text [str_offset_to_pos (last_text, ++sl_num)];
+                            si = &le->text[str_offset_to_pos (le->text, ++si_num)];
+                            sl = &last_text[str_offset_to_pos (last_text, ++sl_num)];
 
                             while (si[0] != '\0' && sl[0] != '\0')
                             {
@@ -1153,8 +1154,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                                 nexti = str_get_next_char (si);
                                 nextl = str_get_next_char (sl);
 
-                                if (nexti - si != nextl - sl
-                                    || strncmp (si, sl, nexti - si) != 0)
+                                if (nexti - si != nextl - sl || strncmp (si, sl, nexti - si) != 0)
                                     break;
 
                                 si = nexti;
@@ -1165,7 +1165,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
                             last_text = le->text;
 
-                            si = &last_text [str_offset_to_pos (last_text, si_num)];
+                            si = &last_text[str_offset_to_pos (last_text, si_num)];
                             if (low > si - last_text)
                                 low = si - last_text;
 

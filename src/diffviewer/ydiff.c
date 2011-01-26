@@ -3233,7 +3233,7 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
 
     case DLG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
-        h->state = DLG_ACTIVE; /* don't stop the dialog before final decision */
+        h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
         if (dview_ok_to_exit (dview))
             h->state = DLG_CLOSED;
         return MSG_HANDLED;
@@ -3364,8 +3364,8 @@ dview_diff_cmd (void)
             panel0 = other_panel;
             panel1 = current_panel;
         }
-        file0 = concat_dir_and_file (panel0->cwd, selection (panel0)->fname);
-        file1 = concat_dir_and_file (panel1->cwd, selection (panel1)->fname);
+        file0 = g_build_filename (panel0->cwd, selection (panel0)->fname, NULL);
+        file1 = g_build_filename (panel1->cwd, selection (panel1)->fname, NULL);
         is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
         is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
     }

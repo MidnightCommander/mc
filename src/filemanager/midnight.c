@@ -615,7 +615,7 @@ copy_readlink (WPanel * panel)
     if (S_ISLNK (selection (panel)->st.st_mode))
     {
         char buffer[MC_MAXPATHLEN];
-        char *p = concat_dir_and_file (panel->cwd, selection (panel)->fname);
+        char *p = g_build_filename (panel->cwd, selection (panel)->fname, NULL);
         int i;
 
         i = mc_readlink (p, buffer, MC_MAXPATHLEN - 1);

@@ -635,11 +635,11 @@ regex_command (const char *filename, const char *action, int *move_dir)
         {
             g_free (extension_file);
           check_stock_mc_ext:
-            extension_file = concat_dir_and_file (mc_sysconfig_dir, MC_LIB_EXT);
+            extension_file = g_build_filename (mc_sysconfig_dir, MC_LIB_EXT, NULL);
             if (!exist_file (extension_file))
             {
                 g_free (extension_file);
-                extension_file = concat_dir_and_file (mc_share_data_dir, MC_LIB_EXT);
+                extension_file = g_build_filename (mc_share_data_dir, MC_LIB_EXT, NULL);
             }
             mc_user_ext = 0;
         }

@@ -1278,7 +1278,7 @@ vfs_canon (const char *path)
     {
         char *local, *result;
 
-        local = concat_dir_and_file (current_dir, path);
+        local = g_build_filename (current_dir, path, NULL);
 
         result = vfs_canon (local);
         g_free (local);

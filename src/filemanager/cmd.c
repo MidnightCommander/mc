@@ -418,8 +418,8 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
             }
 
             /* Thorough compare on, do byte-by-byte comparison */
-            src_name = concat_dir_and_file (panel->cwd, source->fname);
-            dst_name = concat_dir_and_file (other->cwd, target->fname);
+            src_name = g_build_filename (panel->cwd, source->fname, NULL);
+            dst_name = g_build_filename (other->cwd, target->fname, NULL);
             if (compare_files (src_name, dst_name, source->st.st_size))
                 do_file_mark (panel, i, 1);
             g_free (src_name);
@@ -452,10 +452,10 @@ do_link (link_type_t link_type, const char *fname)
 
         /* suggest the full path for symlink, and either the full or
            relative path to the file it points to  */
-        s = concat_dir_and_file (current_panel->cwd, fname);
+        s = g_build_filename (current_panel->cwd, fname, NULL);
 
         if (get_other_type () == view_listing)
-            d = concat_dir_and_file (other_panel->cwd, fname);
+            d = g_build_filename (other_panel->cwd, fname, NULL);
         else
             d = g_strdup (fname);
 
@@ -887,7 +887,7 @@ mkdir_cmd (void)
         if (dir[0] == '/' || dir[0] == '~')
             absdir = g_strdup (dir);
         else
-            absdir = concat_dir_and_file (current_panel->cwd, dir);
+            absdir = g_build_filename (current_panel->cwd, dir, NULL);
 
         save_cwds_stat ();
         if (my_mkdir (absdir, 0777) == 0)
@@ -1020,7 +1020,7 @@ ext_cmd (void)
                             _("Which extension file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_sysconfig_dir, MC_LIB_EXT);
+    extdir = g_build_filename (mc_sysconfig_dir, MC_LIB_EXT, NULL);
 
     if (dir == 0)
     {
@@ -1034,7 +1034,7 @@ ext_cmd (void)
         if (!exist_file (extdir))
         {
             g_free (extdir);
-            extdir = concat_dir_and_file (mc_share_data_dir, MC_LIB_EXT);
+            extdir = g_build_filename (mc_share_data_dir, MC_LIB_EXT, NULL);
         }
         do_edit (extdir);
     }
@@ -1056,12 +1056,12 @@ edit_mc_menu_cmd (void)
                         _("Which menu file do you want to edit?"),
                         D_NORMAL, geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile = concat_dir_and_file (mc_sysconfig_dir, MC_GLOBAL_MENU);
+    menufile = g_build_filename (mc_sysconfig_dir, MC_GLOBAL_MENU, NULL);
 
     if (!exist_file (menufile))
     {
         g_free (menufile);
-        menufile = concat_dir_and_file (mc_share_data_dir, MC_GLOBAL_MENU);
+        menufile = g_build_filename (mc_share_data_dir, MC_GLOBAL_MENU, NULL);
     }
 
     switch (dir)
@@ -1078,11 +1078,11 @@ edit_mc_menu_cmd (void)
         break;
 
     case 2:
-        buffer = concat_dir_and_file (mc_sysconfig_dir, MC_GLOBAL_MENU);
+        buffer = g_build_filename (mc_sysconfig_dir, MC_GLOBAL_MENU, NULL);
         if (!exist_file (buffer))
         {
             g_free (buffer);
-            buffer = concat_dir_and_file (mc_share_data_dir, MC_GLOBAL_MENU);
+            buffer = g_build_filename (mc_share_data_dir, MC_GLOBAL_MENU, NULL);
         }
         break;
 
@@ -1114,7 +1114,7 @@ edit_fhl_cmd (void)
                             _("Which highlighting file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    fhlfile = concat_dir_and_file (mc_sysconfig_dir, MC_FHL_INI_FILE);
+    fhlfile = g_build_filename (mc_sysconfig_dir, MC_FHL_INI_FILE, NULL);
 
     if (dir == 0)
     {
@@ -1128,7 +1128,7 @@ edit_fhl_cmd (void)
         if (!exist_file (fhlfile))
         {
             g_free (fhlfile);
-            fhlfile = concat_dir_and_file (mc_sysconfig_dir, MC_FHL_INI_FILE);
+            fhlfile = g_build_filename (mc_sysconfig_dir, MC_FHL_INI_FILE, NULL);
         }
         do_edit (fhlfile);
     }

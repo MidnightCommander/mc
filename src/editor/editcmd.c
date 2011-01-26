@@ -134,7 +134,7 @@ edit_save_file (WEdit * edit, const char *filename)
 
     if (*filename != PATH_SEP && edit->dir)
     {
-        real_filename = concat_dir_and_file (edit->dir, filename);
+        real_filename = g_build_filename (edit->dir, filename, NULL);
     }
     else
     {
@@ -212,7 +212,7 @@ edit_save_file (WEdit * edit, const char *filename)
         }
         else
             savedir = g_strdup (".");
-        saveprefix = concat_dir_and_file (savedir, "cooledit");
+        saveprefix = g_build_filename (savedir, "cooledit", NULL);
         g_free (savedir);
         fd = mc_mkstemps (&savename, saveprefix, NULL);
         g_free (saveprefix);
@@ -456,7 +456,7 @@ edit_open_macro_file (const char *r)
     gchar *filename;
     FILE *fd;
     int file;
-    filename = concat_dir_and_file (mc_config_get_data_path (), EDIT_MACRO_FILE);
+    filename = g_build_filename (mc_config_get_data_path (), EDIT_MACRO_FILE, NULL);
     file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     if (file == -1)
     {
@@ -508,7 +508,7 @@ edit_delete_macro (WEdit * edit, int k)
         if (j < 0)
             return 0;
     }
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_TEMP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_TEMP_FILE, NULL);
     g = fopen (tmp, "w");
     g_free (tmp);
     if (!g)
@@ -545,8 +545,8 @@ edit_delete_macro (WEdit * edit, int k)
     }
     fclose (f);
     fclose (g);
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_TEMP_FILE);
-    tmp2 = concat_dir_and_file (mc_config_get_data_path (), EDIT_MACRO_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_TEMP_FILE, NULL);
+    tmp2 = g_build_filename (mc_config_get_data_path (), EDIT_MACRO_FILE, NULL);
     if (rename (tmp, tmp2) == -1)
     {
         edit_error_dialog (_("Delete macro"), get_sys_error (_("Cannot overwrite macro file")));
@@ -646,7 +646,7 @@ edit_load_syntax_file (WEdit * edit)
     {
         char *buffer;
 
-        buffer = concat_dir_and_file (mc_config_get_data_path (), EDIT_SYNTAX_FILE);
+        buffer = g_build_filename (mc_config_get_data_path (), EDIT_SYNTAX_FILE, NULL);
         check_for_default (extdir, buffer);
         edit_load_file_from_filename (edit, buffer);
         g_free (buffer);
@@ -670,12 +670,12 @@ edit_load_menu_file (WEdit * edit)
                         _("Which menu file do you want to edit?"), D_NORMAL,
                         geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile = concat_dir_and_file (mc_sysconfig_dir, EDIT_GLOBAL_MENU);
+    menufile = g_build_filename (mc_sysconfig_dir, EDIT_GLOBAL_MENU, NULL);
 
     if (!exist_file (menufile))
     {
         g_free (menufile);
-        menufile = concat_dir_and_file (mc_share_data_dir, EDIT_GLOBAL_MENU);
+        menufile = g_build_filename (mc_share_data_dir, EDIT_GLOBAL_MENU, NULL);
     }
 
     switch (dir)
@@ -687,16 +687,16 @@ edit_load_menu_file (WEdit * edit)
         break;
 
     case 1:
-        buffer = concat_dir_and_file (mc_config_get_data_path (), EDIT_HOME_MENU);
+        buffer = g_build_filename (mc_config_get_data_path (), EDIT_HOME_MENU, NULL);
         check_for_default (menufile, buffer);
         break;
 
     case 2:
-        buffer = concat_dir_and_file (mc_sysconfig_dir, EDIT_GLOBAL_MENU);
+        buffer = g_build_filename (mc_sysconfig_dir, EDIT_GLOBAL_MENU, NULL);
         if (!exist_file (buffer))
         {
             g_free (buffer);
-            buffer = concat_dir_and_file (mc_share_data_dir, EDIT_GLOBAL_MENU);
+            buffer = g_build_filename (mc_share_data_dir, EDIT_GLOBAL_MENU, NULL);
         }
         break;
 
@@ -1058,7 +1058,7 @@ edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
 {
     int ret;
     gchar *tmp;
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
     ret = edit_save_block (edit, tmp, start, finish);
     g_free (tmp);
     return ret;
@@ -2500,7 +2500,7 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
     gchar *tmp;
     /* try use external clipboard utility */
     paste_to_file_from_ext_clip ();
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
     edit_insert_file (edit, tmp);
     g_free (tmp);
 }
@@ -2561,7 +2561,7 @@ edit_save_block_cmd (WEdit * edit)
     if (eval_marks (edit, &start_mark, &end_mark))
         return 1;
 
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
     exp =
         input_expand_dialog (_("Save block"), _("Enter file name:"),
                              MC_HISTORY_EDIT_SAVE_BLOCK, tmp);
@@ -2603,7 +2603,7 @@ edit_insert_file_cmd (WEdit * edit)
     gchar *tmp;
     char *exp;
 
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
     exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
                                MC_HISTORY_EDIT_INSERT_FILE, tmp);
     g_free (tmp);
@@ -2651,7 +2651,7 @@ edit_sort_cmd (WEdit * edit)
         return 0;
     }
 
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_BLOCK_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_BLOCK_FILE, NULL);
     edit_save_block (edit, tmp, start_mark, end_mark);
     g_free (tmp);
 
@@ -2690,7 +2690,7 @@ edit_sort_cmd (WEdit * edit)
 
     if (edit_block_delete_cmd (edit))
         return 1;
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_TEMP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_TEMP_FILE, NULL);
     edit_insert_file (edit, tmp);
     g_free (tmp);
     return 0;
@@ -2729,7 +2729,7 @@ edit_ext_cmd (WEdit * edit)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_TEMP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_TEMP_FILE, NULL);
     edit_insert_file (edit, tmp);
     g_free (tmp);
     return 0;
@@ -2750,9 +2750,9 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
     gchar *o, *h, *b, *tmp;
     char *quoted_name = NULL;
 
-    o = g_strconcat (mc_sysconfig_dir, shell_cmd, (char *) NULL);        /* original source script */
-    h = g_strconcat (mc_config_get_data_path (), PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);     /* home script */
-    b = concat_dir_and_file (mc_config_get_cache_path (), EDIT_BLOCK_FILE);     /* block file */
+    o = g_strconcat (mc_sysconfig_dir, shell_cmd, (char *) NULL);       /* original source script */
+    h = g_strconcat (mc_config_get_data_path (), PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);      /* home script */
+    b = g_build_filename (mc_config_get_cache_path (), EDIT_BLOCK_FILE, NULL);  /* block file */
 
     script_home = fopen (h, "r");
     if (script_home == NULL)

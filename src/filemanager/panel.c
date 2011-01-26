@@ -897,7 +897,7 @@ display_mini_info (WPanel * panel)
         char *lc_link, link_target[MC_MAXPATHLEN];
         int len;
 
-        lc_link = concat_dir_and_file (panel->cwd, panel->dir.list[panel->selected].fname);
+        lc_link = g_build_filename (panel->cwd, panel->dir.list[panel->selected].fname, NULL);
         len = mc_readlink (lc_link, link_target, MC_MAXPATHLEN - 1);
         g_free (lc_link);
         if (len > 0)
@@ -2226,7 +2226,7 @@ do_enter_on_file_entry (file_entry * fe)
         return 1;
 
     /* Check if the file is executable */
-    full_name = concat_dir_and_file (current_panel->cwd, fe->fname);
+    full_name = g_build_filename (current_panel->cwd, fe->fname, NULL);
     if (!is_exe (fe->st.st_mode) || !if_link_is_exe (full_name, fe))
     {
         g_free (full_name);
@@ -2247,7 +2247,7 @@ do_enter_on_file_entry (file_entry * fe)
         char *tmp;
         int ret;
 
-        tmp = concat_dir_and_file (vfs_get_current_dir (), fe->fname);
+        tmp = g_build_filename (vfs_get_current_dir (), fe->fname, NULL);
         ret = mc_setctl (tmp, VFS_SETCTL_RUN, NULL);
         g_free (tmp);
         /* We took action only if the dialog was shown or the execution
@@ -2293,11 +2293,11 @@ chdir_other_panel (WPanel * panel)
 
     if (!S_ISDIR (panel->dir.list[panel->selected].st.st_mode))
     {
-        new_dir = concat_dir_and_file (panel->cwd, "..");
+        new_dir = g_build_filename (panel->cwd, "..", NULL);
         sel_entry = strrchr (panel->cwd, PATH_SEP);
     }
     else
-        new_dir = concat_dir_and_file (panel->cwd, panel->dir.list[panel->selected].fname);
+        new_dir = g_build_filename (panel->cwd, panel->dir.list[panel->selected].fname, NULL);
 
     change_panel ();
     do_cd (new_dir, cd_exact);
@@ -2372,7 +2372,7 @@ chdir_to_readlink (WPanel * panel)
         if (*buffer == PATH_SEP)
             new_dir = g_strdup (buffer);
         else
-            new_dir = concat_dir_and_file (panel->cwd, buffer);
+            new_dir = g_build_filename (panel->cwd, buffer, NULL);
 
         change_panel ();
         do_cd (new_dir, cd_exact);

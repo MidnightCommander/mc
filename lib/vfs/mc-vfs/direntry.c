@@ -40,7 +40,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
-#include "lib/util.h"           /* concat_dir_and_file */
+#include "lib/util.h"           /* custom_canonicalize_pathname() */
 #if 0
 #include "lib/widget.h"         /* message() */
 #endif
@@ -1352,7 +1352,7 @@ vfs_getid (struct vfs_class *vclass, const char *dir)
     vfsid id = NULL;
 
     /* append slash if needed */
-    dir1 = concat_dir_and_file (dir, "");
+    dir1 = g_build_filename (dir, "", NULL);
     if (vclass->getid)
         id = (*vclass->getid) (vclass, dir1);
 

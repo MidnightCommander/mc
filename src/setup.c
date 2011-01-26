@@ -809,7 +809,7 @@ setup_init (void)
     profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
     if (!exist_file (profile))
     {
-        inifile = concat_dir_and_file (mc_sysconfig_dir, "mc.ini");
+        inifile = g_build_filename (mc_sysconfig_dir, "mc.ini", NULL);
         if (exist_file (inifile))
         {
             g_free (profile);
@@ -818,7 +818,7 @@ setup_init (void)
         else
         {
             g_free (inifile);
-            inifile = concat_dir_and_file (mc_share_data_dir, "mc.ini");
+            inifile = g_build_filename (mc_share_data_dir, "mc.ini", NULL);
             if (exist_file (inifile))
             {
                 g_free (profile);
@@ -856,7 +856,8 @@ load_setup (void)
     if (!exist_file (global_profile_name))
     {
         g_free (global_profile_name);
-        global_profile_name = g_build_filename (mc_share_data_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
+        global_profile_name =
+            g_build_filename (mc_share_data_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
     panels_profile_name = g_build_filename (mc_config_get_cache_path (), MC_PANELS_FILE, NULL);
@@ -1344,7 +1345,8 @@ panel_save_setup (struct WPanel *panel, const char *section)
     size_t i;
 
     mc_config_set_int (mc_panels_config, section, "reverse", panel->sort_info.reverse);
-    mc_config_set_int (mc_panels_config, section, "case_sensitive", panel->sort_info.case_sensitive);
+    mc_config_set_int (mc_panels_config, section, "case_sensitive",
+                       panel->sort_info.case_sensitive);
     mc_config_set_int (mc_panels_config, section, "exec_first", panel->sort_info.exec_first);
 
     mc_config_set_string (mc_panels_config, section, "sort_order", panel->sort_info.sort_field->id);

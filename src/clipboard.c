@@ -68,7 +68,7 @@ copy_file_to_ext_clip (void)
     if (d == NULL || clipboard_store_path == NULL || clipboard_store_path[0] == '\0')
         return FALSE;
 
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
     cmd = g_strconcat (clipboard_store_path, " ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)
@@ -91,7 +91,7 @@ paste_to_file_from_ext_clip (void)
     if (d == NULL || clipboard_paste_path == NULL || clipboard_paste_path[0] == '\0')
         return FALSE;
 
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
     cmd = g_strconcat (clipboard_paste_path, " > ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)

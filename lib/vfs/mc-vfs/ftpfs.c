@@ -58,7 +58,7 @@ What to do with this?
         int f = !strcmp( remote_path, "/~" );
         if (f || !strncmp( remote_path, "/~/", 3 )) {
             char *s;
-            s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
+            s = g_build_filename( qhome (*bucket), remote_path +3-f , NULL);
             g_free (remote_path);
             remote_path = s;
         }
@@ -663,7 +663,7 @@ ftpfs_load_no_proxy_list (void)
     if (mc_file)
         return;
 
-    mc_file = concat_dir_and_file (mc_sysconfig_dir, "mc.no_proxy");
+    mc_file = g_build_filename (mc_sysconfig_dir, "mc.no_proxy", NULL);
     if (exist_file (mc_file))
     {
         npf = fopen (mc_file, "r");
@@ -1677,7 +1677,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     else
     {
         /* Trailing "/." is necessary if remote_path is a symlink */
-        char *path = concat_dir_and_file (remote_path, ".");
+        char *path = g_build_filename (remote_path, ".", NULL);
         sock = ftpfs_open_data_connection (me, super, "LIST -la", path, TYPE_ASCII, 0);
         g_free (path);
     }

@@ -157,7 +157,7 @@ examine_cd (const char *_path)
             *s = 0;
             if (*p)
             {
-                r = concat_dir_and_file (p, q);
+                r = g_build_filename (p, q, NULL);
                 result = do_cd (r, cd_parse_command);
                 g_free (r);
             }
@@ -346,7 +346,7 @@ do_cd_command (char *orig_cmd)
         {
             char *old = current_panel->cwd;
             char *new;
-            new = concat_dir_and_file (old, cmd + 3);
+            new = g_build_filename (old, cmd + 3, NULL);
             sync_tree (new);
             g_free (new);
         }

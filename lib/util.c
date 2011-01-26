@@ -1073,22 +1073,6 @@ diff_two_paths (const char *first, const char *second)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * If filename is NULL, then we just append PATH_SEP to the dir
- */
-
-char *
-concat_dir_and_file (const char *dir, const char *file)
-{
-    int i = strlen (dir);
-
-    if (dir[i - 1] == PATH_SEP)
-        return g_strconcat (dir, file, (char *) NULL);
-    else
-        return g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Append text to GList, remove all entries with the same text
  */
 
@@ -1153,7 +1137,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
     if (strchr (prefix, PATH_SEP) == NULL)
     {
         /* Add prefix first to find the position of XXXXXX */
-        tmpbase = concat_dir_and_file (mc_tmpdir (), prefix);
+        tmpbase = g_build_filename (mc_tmpdir (), prefix, NULL);
     }
     else
     {

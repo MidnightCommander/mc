@@ -914,7 +914,7 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
     int file_fd;
     gboolean ret_val = FALSE;
 
-    fname = concat_dir_and_file (directory, filename);
+    fname = g_build_filename (directory, filename, NULL);
 
     if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode))
     {
@@ -1153,7 +1153,7 @@ do_search (Dlg_head * h)
 
             if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
             {                   /* Can directory be NULL ? */
-                char *tmp_name = concat_dir_and_file (directory, dp->d_name);
+                char *tmp_name = g_build_filename (directory, dp->d_name, NULL);
                 if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
                 {
                     push_directory (tmp_name);
@@ -1207,8 +1207,8 @@ make_fullname (const char *dirname, const char *filename)
     if (strcmp (dirname, ".") == 0 || strcmp (dirname, "." PATH_SEP_STR) == 0)
         return g_strdup (filename);
     if (strncmp (dirname, "." PATH_SEP_STR, 2) == 0)
-        return concat_dir_and_file (dirname + 2, filename);
-    return concat_dir_and_file (dirname, filename);
+        return g_build_filename (dirname + 2, filename, NULL);
+    return g_build_filename (dirname, filename, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

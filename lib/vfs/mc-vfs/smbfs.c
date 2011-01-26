@@ -1354,7 +1354,7 @@ smbfs_get_path (smbfs_connection ** sc, const char *path)
         if (f || !strncmp (remote_path, "/~/", 3))
         {
             char *s;
-            s = concat_dir_and_file ((*sc)->home, remote_path + 3 - f);
+            s = g_build_filename ((*sc)->home, remote_path + 3 - f, NULL);
             g_free (remote_path);
             return s;
         }

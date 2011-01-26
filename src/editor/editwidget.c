@@ -44,7 +44,7 @@
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/strutil.h"        /* str_term_trim() */
-#include "lib/util.h"           /* concat_dir_and_file() */
+#include "lib/util.h"           /* Q_() */
 #include "lib/widget.h"
 #include "lib/mcconfig.h"
 
@@ -346,15 +346,15 @@ edit_file (const char *_file, int line)
 
     if (!made_directory)
     {
-        char *dir = concat_dir_and_file (mc_config_get_cache_path (), EDIT_DIR);
+        char *dir = g_build_filename (mc_config_get_cache_path (), EDIT_DIR, NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = concat_dir_and_file (mc_config_get_path (), EDIT_DIR);
+        dir = g_build_filename (mc_config_get_path (), EDIT_DIR, NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = concat_dir_and_file (mc_config_get_data_path (), EDIT_DIR);
+        dir = g_build_filename (mc_config_get_data_path (), EDIT_DIR, NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
     }

@@ -466,12 +466,14 @@ static FileProgressStatus
 warn_same_file (const char *fmt, const char *a, const char *b)
 {
 #ifdef WITH_BACKGROUND
+/* *INDENT-OFF* */
     union
     {
         void *p;
         FileProgressStatus (*f) (enum OperationMode, const char *fmt,
                                  const char *a, const char *b);
     } pntr;
+/* *INDENT-ON* */
 
     pntr.f = real_warn_same_file;
 
@@ -709,7 +711,7 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
             continue;
         if (!strcmp (next->d_name, ".."))
             continue;
-        path = concat_dir_and_file (s, next->d_name);
+        path = g_build_filename (s, next->d_name, NULL);
         if (mc_lstat (path, &buf))
         {
             g_free (path);
@@ -878,7 +880,7 @@ panel_compute_totals (const WPanel * panel, const void *ui,
             uintmax_t subdir_bytes = 0;
             FileProgressStatus status;
 
-            dir_name = concat_dir_and_file (panel->cwd, panel->dir.list[i].fname);
+            dir_name = g_build_filename (panel->cwd, panel->dir.list[i].fname, NULL);
 
             status = compute_dir_size (dir_name, ui, cback,
                                        &subdir_count, &subdir_bytes, compute_symlinks);
@@ -1722,7 +1724,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         /* Dive into subdir if exists */
         if (toplevel && ctx->dive_into_subdirs)
         {
-            dest_dir = concat_dir_and_file (d, x_basename (s));
+            dest_dir = g_build_filename (d, x_basename (s), NULL);
         }
         else
         {
@@ -1774,14 +1776,14 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             continue;
 
         /* get the filename and add it to the src directory */
-        path = concat_dir_and_file (s, next->d_name);
+        path = g_build_filename (s, next->d_name, NULL);
 
         (*ctx->stat_func) (path, &buf);
         if (S_ISDIR (buf.st_mode))
         {
             char *mdpath;
 
-            mdpath = concat_dir_and_file (dest_dir, next->d_name);
+            mdpath = g_build_filename (dest_dir, next->d_name, NULL);
             /*
              * From here, we just intend to recursively copy subdirs, not
              * the double functionality of copying different when the target
@@ -1796,7 +1798,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             char *dest_file;
 
-            dest_file = concat_dir_and_file (dest_dir, x_basename (path));
+            dest_file = g_build_filename (dest_dir, x_basename (path), NULL);
             return_status = copy_file_file (tctx, ctx, path, dest_file);
             g_free (dest_file);
         }
@@ -1891,7 +1893,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         move_over = TRUE;
     }
     else
-        destdir = concat_dir_and_file (d, x_basename (s));
+        destdir = g_build_filename (d, x_basename (s), NULL);
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
@@ -2160,7 +2162,7 @@ compute_dir_size (const char *dirname, const void *ui,
         if (strcmp (dirent->d_name, "..") == 0)
             continue;
 
-        fullname = concat_dir_and_file (dirname, dirent->d_name);
+        fullname = g_build_filename (dirname, dirent->d_name, NULL);
         res = mc_lstat (fullname, &s);
 
         if (res != 0)
@@ -2459,7 +2461,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     char *repl_dest, *temp2;
 
                     repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
-                    temp2 = concat_dir_and_file (repl_dest, temp);
+                    temp2 = g_build_filename (repl_dest, temp, NULL);
                     g_free (temp);
                     g_free (repl_dest);
                     g_free (dest);
@@ -2552,7 +2554,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         char *temp2, *temp3, *repl_dest;
 
                         repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
-                        temp2 = concat_dir_and_file (repl_dest, temp);
+                        temp2 = g_build_filename (repl_dest, temp, NULL);
                         g_free (temp);
                         g_free (repl_dest);
                         temp3 = source_with_path;

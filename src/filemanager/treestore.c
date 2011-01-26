@@ -749,7 +749,7 @@ tree_store_mark_checked (const char *subname)
     if (ts.check_name[0] == PATH_SEP && ts.check_name[1] == 0)
         name = g_strconcat (PATH_SEP_STR, subname, (char *) NULL);
     else
-        name = concat_dir_and_file (ts.check_name, subname);
+        name = g_build_filename (ts.check_name, subname, NULL);
 
     /* Search for the subdirectory */
     current = ts.check_start;
@@ -910,7 +910,7 @@ tree_store_rescan (const char *dir)
                     continue;
             }
 
-            full_name = concat_dir_and_file (dir, dp->d_name);
+            full_name = g_build_filename (dir, dp->d_name, NULL);
             if (mc_lstat (full_name, &buf) != -1)
             {
                 if (S_ISDIR (buf.st_mode))
