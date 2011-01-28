@@ -1872,7 +1872,13 @@ edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
     if (str != buf)
         str = g_utf8_find_prev_char (buf, str);
 
-    res = g_utf8_get_char_validated (str, -1);
+    if (res < 0 || str == NULL)
+    {
+        *char_width = 0;
+        return 0;
+    }
+    else
+        res = g_utf8_get_char_validated (str, -1);
 
     if (res < 0)
     {
