@@ -69,6 +69,7 @@ What to do with this?
 /* \todo Fix: Namespace pollution: horrible */
 
 #include <config.h>
+#include <stdio.h>              /* sscanf() */
 #include <stdlib.h>             /* atoi() */
 #include <sys/types.h>          /* POSIX-required by sys/socket.h and netdb.h */
 #include <netdb.h>              /* struct hostent */
