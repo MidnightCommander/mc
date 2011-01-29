@@ -919,14 +919,14 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
     if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode))
     {
         g_free (fname);
-        return 0;
+        return FALSE;
     }
 
     file_fd = mc_open (fname, O_RDONLY);
     g_free (fname);
 
     if (file_fd == -1)
-        return 0;
+        return FALSE;
 
     g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), str_trunc (filename, FIND2_X_USE));
 
