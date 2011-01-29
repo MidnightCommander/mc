@@ -108,8 +108,9 @@
 #define COLUMN_ON       608
 #define COLUMN_OFF      609
 #define MARK_1          1000
-#define MARK_2          700000000
-#define KEY_PRESS       1400000000
+#define MARK_2          500000000
+#define MARK_CURS       1000000000
+#define KEY_PRESS       1500000000
 
 /* Tabs spaces: (sofar only HALF_TAB_SIZE is used: */
 #define TAB_SIZE      option_tab_spacing

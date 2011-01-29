@@ -655,6 +655,9 @@ edit_backspace (WEdit * edit, const int byte_delete)
 
     cw = 1;
 
+    if (edit->mark2 != edit->mark1)
+        edit_push_markers (edit);
+
     if (edit->utf8 && byte_delete == 0)
     {
         edit_get_prev_utf (edit, edit->curs1, &cw);
@@ -1263,10 +1266,14 @@ edit_do_undo (WEdit * edit)
             edit->mark1 = ac - MARK_1;
             edit->column1 = edit_move_forward3 (edit, edit_bol (edit, edit->mark1), 0, edit->mark1);
         }
-        else if (ac >= MARK_2 - 2 && ac < KEY_PRESS)
+        if (ac >= MARK_2 - 2 && ac < MARK_CURS - 2)
         {
             edit->mark2 = ac - MARK_2;
             edit->column2 = edit_move_forward3 (edit, edit_bol (edit, edit->mark2), 0, edit->mark2);
+        }
+        else if (ac >= MARK_CURS - 2 && ac < KEY_PRESS)
+        {
+            edit->end_mark_curs = ac - MARK_CURS;
         }
         if (count++)
             edit->force |= REDRAW_PAGE; /* more than one pop usually means something big */
@@ -2494,6 +2501,10 @@ edit_delete (WEdit * edit, const int byte_delete)
         if (cw < 1)
             cw = 1;
     }
+
+    if (edit->mark2 != edit->mark1)
+        edit_push_markers (edit);
+
     for (i = 1; i <= cw; i++)
     {
         if (edit->mark1 > edit->curs1)
@@ -3067,6 +3078,7 @@ edit_push_markers (WEdit * edit)
 {
     edit_push_action (edit, MARK_1 + edit->mark1);
     edit_push_action (edit, MARK_2 + edit->mark2);
+    edit_push_action (edit, MARK_CURS + edit->end_mark_curs);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3194,7 +3206,10 @@ edit_push_key_press (WEdit * edit)
 {
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (edit->mark2 == -1)
+    {
         edit_push_action (edit, MARK_1 + edit->mark1);
+        edit_push_action (edit, MARK_CURS + edit->end_mark_curs);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
