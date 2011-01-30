@@ -320,26 +320,28 @@ panel_options_box (void)
         QUICK_GROUPBOX (dlg_width / 2, dlg_width, 2, dlg_height, dlg_width / 2 - 4, 5,
                         N_("Navigation")),
         /* main panel options */
-        QUICK_CHECKBOX (5, dlg_width, 11, dlg_height, N_("A&uto save panels setup"),
+        QUICK_CHECKBOX (5, dlg_width, 12, dlg_height, N_("A&uto save panels setup"),
                         &panels_options.auto_save_setup),
-        QUICK_CHECKBOX (5, dlg_width, 10, dlg_height, N_("Simple s&wap"),
+        QUICK_CHECKBOX (5, dlg_width, 11, dlg_height, N_("Simple s&wap"),
                         &simple_swap),
-        QUICK_CHECKBOX (5, dlg_width, 9, dlg_height, N_("Re&verse files only"),
+        QUICK_CHECKBOX (5, dlg_width, 10, dlg_height, N_("Re&verse files only"),
                         &panels_options.reverse_files_only),
-        QUICK_CHECKBOX (5, dlg_width, 8, dlg_height, N_("Ma&rk moves down"),
+        QUICK_CHECKBOX (5, dlg_width, 9, dlg_height, N_("Ma&rk moves down"),
                         &panels_options.mark_moves_down),
-        QUICK_CHECKBOX (5, dlg_width, 7, dlg_height, N_("&Fast dir reload"),
+        QUICK_CHECKBOX (5, dlg_width, 8, dlg_height, N_("&Fast dir reload"),
                         &panels_options.fast_reload),
-        QUICK_CHECKBOX (5, dlg_width, 6, dlg_height, N_("Show &hidden files"),
+        QUICK_CHECKBOX (5, dlg_width, 7, dlg_height, N_("Show &hidden files"),
                         &panels_options.show_dot_files),
-        QUICK_CHECKBOX (5, dlg_width, 5, dlg_height, N_("Show &backup files"),
+        QUICK_CHECKBOX (5, dlg_width, 6, dlg_height, N_("Show &backup files"),
                         &panels_options.show_backups),
-        QUICK_CHECKBOX (5, dlg_width, 4, dlg_height, N_("Mi&x all files"),
+        QUICK_CHECKBOX (5, dlg_width, 5, dlg_height, N_("Mi&x all files"),
                         &panels_options.mix_all_files),
-        QUICK_CHECKBOX (5, dlg_width, 3, dlg_height, N_("Use SI si&ze units"),
+        QUICK_CHECKBOX (5, dlg_width, 4, dlg_height, N_("Use SI si&ze units"),
                         &panels_options.kilobyte_si),
+        QUICK_CHECKBOX (5, dlg_width, 3, dlg_height, N_("Show mi&ni-status"),
+                        &panels_options.show_mini_info),
         QUICK_GROUPBOX (3, dlg_width, 2, dlg_height, dlg_width / 2 - 4, 14,
-                        N_("Main panel options")),
+                        N_("Main options")),
         QUICK_END
     };
 
@@ -370,7 +372,7 @@ panel_options_box (void)
                 for (j = 0; j < QSEARCH_NUM; j++)
                     qsearch_options[j] = _(qsearch_options[j]);
             }
-            else if ((i == 4) || (i == 7) || (i == 11) || (i == 21))
+            else if ((i == 4) || (i == 7) || (i == 11) || (i == 22))
                 /* groupboxes */
                 quick_widgets[i].u.groupbox.title = _(quick_widgets[i].u.groupbox.title);
             else
@@ -392,7 +394,7 @@ panel_options_box (void)
 
     /* checkboxes within groupboxes */
     c_len = 0;
-    for (i = 5; i < 21; i++)
+    for (i = 5; i < 22; i++)
         if ((i != 7) && (i != 11))
             c_len = max (c_len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
 
@@ -403,7 +405,7 @@ panel_options_box (void)
     g_len = max (c_len + 2, str_term_width1 (quick_widgets[4].u.groupbox.title) + 4);
     g_len = max (g_len, str_term_width1 (quick_widgets[7].u.groupbox.title) + 4);
     g_len = max (g_len, str_term_width1 (quick_widgets[11].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[21].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[22].u.groupbox.title) + 4);
     /* dialog width */
     Quick_input.xlen = max (dlg_width, g_len * 2 + 9);
     Quick_input.xlen = max (Quick_input.xlen, b_len + 2);
@@ -418,7 +420,7 @@ panel_options_box (void)
     quick_widgets[4].u.groupbox.width =
         quick_widgets[7].u.groupbox.width =
         quick_widgets[11].u.groupbox.width = Quick_input.xlen / 2 - 3;
-    quick_widgets[21].u.groupbox.width = Quick_input.xlen / 2 - 4;
+    quick_widgets[22].u.groupbox.width = Quick_input.xlen / 2 - 4;
 
     /* right column */
     quick_widgets[4].relative_x =

@@ -1940,10 +1940,6 @@ on native console only.
 If enabled, main menu of Midnight Commander is always visible on the top row
 of screen above panels. Enabled by default.
 .PP
-.I Show mini\-status.
-If enabled, one line of status information about the currently selected item
-is shown at the bottom of the panels. Enabled by default.
-.PP
 .I Command prompt.
 If enabled, command line is avalable. Enabled by default.
 .PP
@@ -1967,6 +1963,10 @@ at the bottom frame of panel. Enabled by default.
 .\"NODE "    Panel options"
 .SH "    Panel options"
 .B Main panel options
+.PP
+.I Show mini\-status.
+If enabled, one line of status information about the currently selected item
+is shown at the bottom of the panels. Enabled by default.
 .PP
 .I Use SI size units.
 If this option is enabled, Midnight Commander will use SI units (powers of 1000)
