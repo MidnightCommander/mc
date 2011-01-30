@@ -2173,7 +2173,7 @@ edit_replace_cmd (WEdit * edit, int again)
                 int l;
                 int prompt;
 
-                l = edit->curs_row - edit->num_widget_lines / 3;
+                l = edit->curs_row - edit->widget.lines / 3;
                 if (l > 0)
                     edit_scroll_downward (edit, l);
                 if (l < 0)
@@ -2542,7 +2542,7 @@ edit_goto_cmd (WEdit * edit)
     line = l;
     if (l < 0)
         l = edit->total_lines + l + 2;
-    edit_move_display (edit, l - edit->num_widget_lines / 2 - 1);
+    edit_move_display (edit, l - edit->widget.lines / 2 - 1);
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
     g_free (f);
