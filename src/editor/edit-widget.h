@@ -39,9 +39,6 @@ struct WEdit
 {
     Widget widget;
 
-    int num_widget_lines;
-    int num_widget_columns;
-
     char *filename;             /* Name of the file */
     char *dir;                  /* NULL if filename is absolute */
 

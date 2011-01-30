@@ -130,7 +130,7 @@ edit_event (Gpm_Event * event, void *data)
 
     /* Outside editor window */
     if (event->y <= 1 || event->x <= 0
-        || event->x > edit->num_widget_columns || event->y > edit->num_widget_lines + 1)
+        || event->x > edit->widget.cols || event->y > edit->widget.lines + 1)
         return MOU_NORMAL;
 
     /* Double click */
@@ -301,8 +301,8 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
     {
     case WIDGET_DRAW:
         e->force |= REDRAW_COMPLETELY;
-        e->num_widget_lines = LINES - 2;
-        e->num_widget_columns = COLS;
+        e->widget.lines = LINES - 2;
+        e->widget.cols = COLS;
         /* fallthrough */
 
     case WIDGET_FOCUS:

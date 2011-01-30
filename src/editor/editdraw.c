@@ -320,7 +320,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1];
 
-    if (row > edit->num_widget_lines - EDIT_TEXT_VERTICAL_OFFSET)
+    if (row > edit->widget.lines - EDIT_TEXT_VERTICAL_OFFSET)
         return;
 
     if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
@@ -594,7 +594,7 @@ static inline void
 edit_draw_this_char (WEdit * edit, long curs, long row)
 {
     int b = edit_bol (edit, curs);
-    edit_draw_this_line (edit, b, row, 0, edit->num_widget_columns - 1);
+    edit_draw_this_line (edit, b, row, 0, edit->widget.cols - 1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -619,9 +619,9 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
         if (!(force & REDRAW_IN_BOUNDS))
         {                       /* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
             start_row = 0;
-            end_row = edit->num_widget_lines - 1;
+            end_row = edit->widget.lines - 1;
             start_column = 0;
-            end_column = edit->num_widget_columns - 1;
+            end_column = edit->widget.cols - 1;
         }
         if (force & REDRAW_PAGE)
         {
@@ -691,7 +691,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                     edit_draw_this_line (edit, b, row, start_column, end_column);
                 }
             }
-            if (force & REDRAW_LINE_BELOW && row < edit->num_widget_lines - 1)
+            if (force & REDRAW_LINE_BELOW && row < edit->widget.lines - 1)
             {
                 row = curs_row + 1;
                 b = edit_bol (edit, edit->curs1);
@@ -811,11 +811,11 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     int outby;
     int b_extreme, t_extreme, l_extreme, r_extreme;
 
-    if (edit->num_widget_lines <= 0 || edit->num_widget_columns <= 0)
+    if (edit->widget.lines <= 0 || edit->widget.cols <= 0)
         return;
 
-    edit->num_widget_columns -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    edit->num_widget_lines -= EDIT_TEXT_VERTICAL_OFFSET - 1;
+    edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET - 1;
 
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
@@ -823,33 +823,33 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     t_extreme = EDIT_TOP_EXTREME;
     if (edit->found_len)
     {
-        b_extreme = max (edit->num_widget_lines / 4, b_extreme);
-        t_extreme = max (edit->num_widget_lines / 4, t_extreme);
+        b_extreme = max (edit->widget.lines / 4, b_extreme);
+        t_extreme = max (edit->widget.lines / 4, t_extreme);
     }
-    if (b_extreme + t_extreme + 1 > edit->num_widget_lines)
+    if (b_extreme + t_extreme + 1 > edit->widget.lines)
     {
         int n;
         n = b_extreme + t_extreme;
-        b_extreme = (b_extreme * (edit->num_widget_lines - 1)) / n;
-        t_extreme = (t_extreme * (edit->num_widget_lines - 1)) / n;
+        b_extreme = (b_extreme * (edit->widget.lines - 1)) / n;
+        t_extreme = (t_extreme * (edit->widget.lines - 1)) / n;
     }
-    if (l_extreme + r_extreme + 1 > edit->num_widget_columns)
+    if (l_extreme + r_extreme + 1 > edit->widget.cols)
     {
         int n;
         n = l_extreme + t_extreme;
-        l_extreme = (l_extreme * (edit->num_widget_columns - 1)) / n;
-        r_extreme = (r_extreme * (edit->num_widget_columns - 1)) / n;
+        l_extreme = (l_extreme * (edit->widget.cols - 1)) / n;
+        r_extreme = (r_extreme * (edit->widget.cols - 1)) / n;
     }
     p = edit_get_col (edit) + edit->over_col;
     edit_update_curs_row (edit);
-    outby = p + edit->start_col - edit->num_widget_columns + 1 + (r_extreme + edit->found_len);
+    outby = p + edit->start_col - edit->widget.cols + 1 + (r_extreme + edit->found_len);
     if (outby > 0)
         edit_scroll_right (edit, outby);
     outby = l_extreme - p - edit->start_col;
     if (outby > 0)
         edit_scroll_left (edit, outby);
     p = edit->curs_row;
-    outby = p - edit->num_widget_lines + 1 + b_extreme;
+    outby = p - edit->widget.lines + 1 + b_extreme;
     if (outby > 0)
         edit_scroll_downward (edit, outby);
     outby = t_extreme - p;
@@ -857,8 +857,8 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
 
-    edit->num_widget_lines += EDIT_TEXT_VERTICAL_OFFSET - 1;
-    edit->num_widget_columns += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET - 1;
+    edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
 }
 
 /* --------------------------------------------------------------------------------------------- */
