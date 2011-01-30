@@ -1389,30 +1389,23 @@ that you can do additional operations on them (view, copy, move,
 delete and so on). After panelizing you can press C\-r to return to the
 normal file listing.
 .PP
-It is possible to have a list of directories that the Find File command
-should skip during the search (for example, you may want to avoid
-searches on a CD\-ROM or on a NFS directory that is mounted across a slow
-link).
-.PP
-Directories to be skipped should be set on the variable
-.B ignore_dirs
-in the
-.B FindFile
-section of your ~/.config/ini file.
-.PP
-Directory components should be separated with a colon, here is an
-example:
+The 'Enable ignore directories' checkbox and input field below it
+allow to set up the list of directories that should be skip during the search
+files (for example, you may want to avoid searches on a CD\-ROM or on a NFS
+directory that is mounted across a slow link). List components must be separated
+with a colon, here is an example:
 .PP
 .nf
-[FindFile]
-ignore_dirs=/cdrom:/nfs/wuarchive:/afs
+/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
 Relative paths are supported also. The following example shows how to skip special
 directories of version control systems:
 .nf
-ignore_dirs=/cdrom:/nfs/wuarchive:/afs:.svn:.git:CVS
+/cdrom:/nfs/wuarchive:/afs:.svn:.git:CVS
 .fi
+.PP
+Attention: input field can contain a dot (.), this means the current absolute path.
 .PP
 You may consider using the
 .\"LINK2"
