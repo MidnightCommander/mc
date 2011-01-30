@@ -151,6 +151,8 @@ static int resuming;
 static int last_line;
 static int last_pos;
 
+static size_t ignore_count = 0;
+
 static Dlg_head *find_dlg;      /* The dialog */
 static WButton *stop_button;    /* pointer to the stop button */
 static WLabel *status_label;    /* Finished, Searching etc. */
@@ -1122,7 +1124,17 @@ do_search (Dlg_head * h)
                     if (tmp == NULL)
                     {
                         running = FALSE;
-                        status_update (_("Finished"));
+                        if (ignore_count == 0)
+                            status_update (_("Finished"));
+                        else
+                        {
+                            char msg[BUF_SMALL];
+                            g_snprintf (msg, sizeof (msg),
+                                        ngettext ("Finished (ignored %zd directory)",
+                                                  "Finished (ignored %zd directories)",
+                                                  ignore_count), ignore_count);
+                            status_update (msg);
+                        }
                         find_rotate_dash (h, TRUE);
                         stop_idle (h);
                         return 0;
@@ -1133,6 +1145,7 @@ do_search (Dlg_head * h)
                         break;
 
                     g_free (tmp);
+                    ignore_count++;
                 }
 
                 g_free (directory);
@@ -1178,7 +1191,9 @@ do_search (Dlg_head * h)
             if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
             {                           /* Can directory be NULL ? */
                 /* handle relative ignore dirs here */
-                if (!find_ignore_dir_search (dp->d_name))
+                if (find_ignore_dir_search (dp->d_name))
+                    ignore_count++;
+                else
                 {
                     char *tmp_name;
 
@@ -1224,6 +1239,7 @@ init_find_vars (void)
     g_free (old_dir);
     old_dir = NULL;
     matches = 0;
+    ignore_count = 0;
 
     /* Remove all the items from the stack */
     clear_stack ();
