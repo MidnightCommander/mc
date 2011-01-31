@@ -404,7 +404,7 @@ test_line (WEdit * edit_widget, char *p, int *result)
 /** FIXME: recode this routine on version 3.0, it could be cleaner */
 
 static void
-execute_menu_command (WEdit * edit_widget, const char *commands, gboolean dont_show_prompt)
+execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_prompt)
 {
     FILE *cmd_file;
     int cmd_file_fd;
@@ -534,7 +534,7 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean dont_s
         /* execute the command indirectly to allow execution even
          * on no-exec filesystems. */
         char *cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
-        if (dont_show_prompt)
+        if (!show_prompt)
         {
             if (system (cmd) == -1)
                 message (D_ERROR, MSG_ERROR, "%s", _("Error calling program"));
@@ -868,6 +868,7 @@ user_menu_cmd (struct WEdit *edit_widget, const char *menu_file, int selected_en
     int selected, old_patterns;
     Listbox *listbox;
     gboolean res = FALSE;
+    gboolean interactive = FALSE;
 
     if (!vfs_current_is_local ())
     {
@@ -954,6 +955,9 @@ user_menu_cmd (struct WEdit *edit_widget, const char *menu_file, int selected_en
         {
             if (*p == '#')
             {
+                /* show prompt if first line of external script is #interactive */
+                if (selected_entry >= 0 && strncmp (p, "#interactive", 12) == 0)
+                    interactive = TRUE;
                 /* A commented menu entry */
                 accept_entry = 1;
             }
@@ -1047,7 +1051,7 @@ user_menu_cmd (struct WEdit *edit_widget, const char *menu_file, int selected_en
         }
         if (selected >= 0)
         {
-            execute_menu_command (edit_widget, entries[selected], (selected_entry >= 0));
+            execute_menu_command (edit_widget, entries[selected], interactive);
             res = TRUE;
         }
 

@@ -137,7 +137,10 @@ See
 .B Menu File Edit
 for more detail about format of the script.
 .PP
-Next macro definition can be used:
+Following macro definition and directives can be used:
+.TP
+.I #interactive
+If this directive is set, then script starts in subshell.
 .TP
 .I %c
 The cursor column position number.
