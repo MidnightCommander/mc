@@ -208,7 +208,7 @@ regex/\.(diff|patch)$
 regex/\.s?a$
 	Open=%cd %p#uar
 	#Open=%view{ascii} ar tv %f
-	View=%view{ascii} file %f && nm %f
+	View=%view{ascii} file %f && nm -C %f
 
 # trpm
 regex/\.trpm$
