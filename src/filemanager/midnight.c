@@ -112,9 +112,6 @@ WLabel *the_hint;
 /* The button bar */
 WButtonBar *the_bar;
 
-/* Mouse type: GPM, xterm or none */
-Mouse_Type use_mouse_p = MOUSE_NONE;
-
 /* The dialog handle for the main program */
 Dlg_head *midnight_dlg = NULL;
 

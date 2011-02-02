@@ -40,6 +40,7 @@
 
 /*** global variables ****************************************************************************/
 
+Mouse_Type use_mouse_p = MOUSE_NONE;
 gboolean mouse_enabled = FALSE;
 const char *xmouse_seq;
 
