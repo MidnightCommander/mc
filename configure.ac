@@ -529,6 +529,7 @@ contrib/dist/prototype
 
 misc/Makefile
 misc/skins/Makefile
+misc/macros.d/Makefile
 misc/mc.ext
 
 src/Makefile

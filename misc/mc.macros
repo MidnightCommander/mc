@@ -1,0 +1,9 @@
+#see ./macros.d/*
+[editor]
+#autocomplete "ife", "GPL", "fori"
+ctrl-space=EditWordLeftHighlight:-1;EditPipeBlock:5;EditUnmark:-1;
+#run make
+ctrl-f9=EditPipeBlock:0;
+#indent current selection
+meta-ctrl-F=EditPipeBlock:4;
+
