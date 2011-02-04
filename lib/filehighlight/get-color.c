@@ -81,6 +81,12 @@ mc_fhl_is_link (file_entry * fe)
 }
 
 inline static gboolean
+mc_fhl_is_hlink (file_entry * fe)
+{
+    return (fe->st.st_nlink > 1);
+}
+
+inline static gboolean
 mc_fhl_is_link_to_dir (file_entry * fe)
 {
     return mc_fhl_is_link (fe) && (fe->f.link_to_dir);
@@ -175,16 +181,14 @@ mc_fhl_get_color_filetype (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_ent
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_LINK:
-        if (mc_fhl_is_link (fe))
+        if ((mc_fhl_is_link (fe)) || (mc_fhl_is_hlink (fe)))
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_HARDLINK:
-        /*TODO: hanlde it */
-        if (mc_fhl_is_link (fe))
+        if (mc_fhl_is_hlink (fe))
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_SYMLINK:
-        /*TODO: hanlde it */
         if (mc_fhl_is_link (fe))
             my_color = TRUE;
         break;
