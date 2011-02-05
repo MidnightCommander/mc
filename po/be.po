@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2010-12-08 12:27+0200\n"
-"PO-Revision-Date: 2010-12-28 10:01+0000\n"
+"POT-Creation-Date: 2010-12-28 12:51+0200\n"
+"PO-Revision-Date: 2011-02-05 15:03+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Belarusian <>\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgid "&Ignore lock"
 msgstr "&Ігнараваць блакоўку"
 
 #: lib/search/lib.c:42 src/diffviewer/search.c:262 src/editor/editcmd.c:843
-#: src/editor/editcmd.c:883 src/editor/editcmd.c:969 src/editor/editcmd.c:2251
+#: src/editor/editcmd.c:883 src/editor/editcmd.c:969 src/editor/editcmd.c:2258
 #: src/viewer/search.c:100
 msgid "Search string not found"
 msgstr "Радок пошуку не знойдзены"
@@ -519,9 +519,9 @@ msgstr "Для працягу націсніце любую клавішу..."
 #: src/editor/editcmd.c:168 src/editor/editcmd.c:192 src/editor/editcmd.c:391
 #: src/editor/editcmd.c:771 src/editor/editcmd.c:1424
 #: src/editor/editcmd.c:1647 src/editor/editcmd.c:1670
-#: src/editor/editcmd.c:1962 src/editor/editcmd.c:3050
-#: src/editor/editcmd.c:3090 src/editor/editcmd_dialogs.c:518
-#: src/execute.c:113 src/filemanager/file.c:1369 src/filemanager/panel.c:3706
+#: src/editor/editcmd.c:1969 src/editor/editcmd.c:3056
+#: src/editor/editcmd.c:3096 src/editor/editcmd_dialogs.c:518
+#: src/execute.c:113 src/filemanager/file.c:1364 src/filemanager/panel.c:3705
 #: src/help.c:359 src/main.c:486 src/main.c:496 src/subshell.c:392
 #: src/subshell.c:1085 src/viewer/actions_cmd.c:277
 msgid "Warning"
@@ -604,11 +604,11 @@ msgstr "Кэш каталога састарэў для %s"
 msgid "bytes transferred"
 msgstr "байт перанесены"
 
-#: lib/vfs/mc-vfs/direntry.c:1202
+#: lib/vfs/mc-vfs/direntry.c:1206
 msgid "Starting linear transfer..."
 msgstr "Запуск лінейнай перадачы..."
 
-#: lib/vfs/mc-vfs/direntry.c:1267
+#: lib/vfs/mc-vfs/direntry.c:1271
 msgid "Getting file"
 msgstr "Атрыманне файла"
 
@@ -1070,9 +1070,9 @@ msgid "Do you want clean this history?"
 msgstr "Вы жадаеце ачысціць гэтую гісторыю?"
 
 #: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
-#: src/editor/editcmd.c:170 src/editor/editcmd.c:194 src/editor/editcmd.c:2353
-#: src/editor/editcmd.c:2360 src/filemanager/cmd.c:161
-#: src/filemanager/file.c:1132 src/filemanager/file.c:2363
+#: src/editor/editcmd.c:170 src/editor/editcmd.c:194 src/editor/editcmd.c:2360
+#: src/editor/editcmd.c:2367 src/filemanager/cmd.c:161
+#: src/filemanager/file.c:1127 src/filemanager/file.c:2358
 #: src/filemanager/filegui.c:334 src/filemanager/hotlist.c:1236
 #: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:951
 #: src/filemanager/midnight.c:959 src/filemanager/panel.c:2258
@@ -1082,9 +1082,9 @@ msgid "&Yes"
 msgstr "&Так"
 
 #: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
-#: src/editor/editcmd.c:170 src/editor/editcmd.c:2353
-#: src/editor/editcmd.c:2360 src/filemanager/cmd.c:161
-#: src/filemanager/file.c:1132 src/filemanager/file.c:2363
+#: src/editor/editcmd.c:170 src/editor/editcmd.c:2360
+#: src/editor/editcmd.c:2367 src/filemanager/cmd.c:161
+#: src/filemanager/file.c:1127 src/filemanager/file.c:2358
 #: src/filemanager/filegui.c:332 src/filemanager/hotlist.c:1236
 #: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:951
 #: src/filemanager/midnight.c:959 src/filemanager/panel.c:2258
@@ -1103,8 +1103,8 @@ msgstr "Працэс у тле:"
 #: src/editor/editcmd.c:774 src/editor/editcmd.c:1312
 #: src/editor/editcmd.c:1425 src/editor/editcmd.c:1627
 #: src/editor/editcmd.c:1650 src/editor/editcmd.c:1672
-#: src/editor/editcmd.c:1965 src/editor/editcmd.c:2888
-#: src/editor/editcmd.c:3052 src/editor/editcmd.c:3092
+#: src/editor/editcmd.c:1972 src/editor/editcmd.c:2894
+#: src/editor/editcmd.c:3058 src/editor/editcmd.c:3098
 #: src/editor/editcmd_dialogs.c:105 src/editor/editcmd_dialogs.c:174
 #: src/editor/editcmd_dialogs.c:520 src/editor/editcmd_dialogs.c:586
 #: src/editor/editoptions.c:86 src/filemanager/achown.c:87
@@ -1113,7 +1113,7 @@ msgstr "Працэс у тле:"
 #: src/filemanager/boxes.c:775 src/filemanager/boxes.c:932
 #: src/filemanager/boxes.c:1042 src/filemanager/boxes.c:1131
 #: src/filemanager/chmod.c:121 src/filemanager/chown.c:94
-#: src/filemanager/cmd.c:1186 src/filemanager/filegui.c:934
+#: src/filemanager/cmd.c:1185 src/filemanager/filegui.c:934
 #: src/filemanager/find.c:495 src/filemanager/hotlist.c:206
 #: src/filemanager/hotlist.c:679 src/filemanager/hotlist.c:1025
 #: src/filemanager/hotlist.c:1121 src/filemanager/layout.c:416
@@ -1125,8 +1125,8 @@ msgstr "&Скасаваць"
 
 #: lib/widget/wtools.c:159 src/diffviewer/search.c:73
 #: src/diffviewer/ydiff.c:2405 src/editor/edit.c:178 src/editor/editcmd.c:417
-#: src/editor/editcmd.c:1314 src/editor/editcmd.c:2251
-#: src/editor/editcmd.c:2889 src/editor/editcmd_dialogs.c:106
+#: src/editor/editcmd.c:1314 src/editor/editcmd.c:2258
+#: src/editor/editcmd.c:2895 src/editor/editcmd_dialogs.c:106
 #: src/editor/editcmd_dialogs.c:178 src/editor/editoptions.c:87
 #: src/filemanager/boxes.c:139 src/filemanager/boxes.c:243
 #: src/filemanager/boxes.c:376 src/filemanager/boxes.c:602
@@ -1140,9 +1140,9 @@ msgid "&OK"
 msgstr "&Так"
 
 #: lib/widget/wtools.c:260 lib/widget/wtools.c:386 src/editor/edit.c:265
-#: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1531
-#: src/editor/edit.c:1909 src/editor/edit.c:1919 src/editor/editcmd.c:261
-#: src/editor/editcmd.c:271 src/editor/editcmd.c:348 src/editor/editcmd.c:2445
+#: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1535
+#: src/editor/edit.c:1913 src/editor/edit.c:1923 src/editor/editcmd.c:261
+#: src/editor/editcmd.c:271 src/editor/editcmd.c:348 src/editor/editcmd.c:2452
 msgid "Error"
 msgstr "Памылка"
 
@@ -1328,7 +1328,7 @@ msgid "Terminal options"
 msgstr "Наладкі тэрмiнала"
 
 #: src/background.c:213 src/background.c:287 src/filemanager/file.c:453
-#: src/filemanager/file.c:1076
+#: src/filemanager/file.c:1071
 msgid "Background process error"
 msgstr "Памылка фонавага працэсу"
 
@@ -1390,7 +1390,7 @@ msgstr "Увядзіце радок для пошуку:"
 
 #: src/diffviewer/search.c:138 src/diffviewer/search.c:262
 #: src/diffviewer/search.c:275 src/diffviewer/search.c:302
-#: src/editor/editcmd.c:969 src/editor/editcmd.c:999 src/editor/editcmd.c:2144
+#: src/editor/editcmd.c:969 src/editor/editcmd.c:999 src/editor/editcmd.c:2151
 #: src/editor/editcmd_dialogs.c:216 src/viewer/dialogs.c:115
 #: src/viewer/search.c:139 src/viewer/search.c:223 src/viewer/search.c:308
 msgid "Search"
@@ -1489,7 +1489,7 @@ msgstr "Перайсці да лініі (злева)"
 msgid "Goto line (right)"
 msgstr "Перайсці да лініі (справа)"
 
-#: src/diffviewer/ydiff.c:2785 src/editor/editcmd.c:2519
+#: src/diffviewer/ydiff.c:2785 src/editor/editcmd.c:2525
 msgid "Enter line:"
 msgstr "Увядзіце нумар радка:"
 
@@ -1528,16 +1528,16 @@ msgstr "ButtonBar|опцыi"
 msgid "ButtonBar|Quit"
 msgstr "Выхад"
 
-#: src/diffviewer/ydiff.c:2946 src/editor/editcmd.c:2352
-#: src/editor/editcmd.c:2358 src/viewer/lib.c:155 src/viewer/lib.c:161
+#: src/diffviewer/ydiff.c:2946 src/editor/editcmd.c:2359
+#: src/editor/editcmd.c:2365 src/viewer/lib.c:155 src/viewer/lib.c:161
 msgid "Quit"
 msgstr "Выхад"
 
-#: src/diffviewer/ydiff.c:2947 src/editor/editcmd.c:2352 src/viewer/lib.c:156
+#: src/diffviewer/ydiff.c:2947 src/editor/editcmd.c:2359 src/viewer/lib.c:156
 msgid "File was modified. Save with exit?"
 msgstr "Файл быў зменены. Захаваць пры выхадзе?"
 
-#: src/diffviewer/ydiff.c:2948 src/editor/editcmd.c:2359 src/viewer/lib.c:162
+#: src/diffviewer/ydiff.c:2948 src/editor/editcmd.c:2366 src/viewer/lib.c:162
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
@@ -1606,16 +1606,16 @@ msgstr "\"%s\" не зьяўляецца звычайным файлам"
 msgid "File \"%s\" is too large"
 msgstr "Файл \"%s\" занадта вялікі"
 
-#: src/editor/edit.c:1531
+#: src/editor/edit.c:1535
 msgid "Macro recursion is too deep"
 msgstr "Рэкурсія макрасу надта глыбокая"
 
-#: src/editor/edit.c:1908
+#: src/editor/edit.c:1912
 #, c-format
 msgid "Error reading from pipe: %s"
 msgstr "Памылка чытання з каналу: %s"
 
-#: src/editor/edit.c:1918
+#: src/editor/edit.c:1922
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Немагчыма адкрыць канал для чытання: %s"
@@ -1648,8 +1648,8 @@ msgid "The file you are saving is not finished with a newline"
 msgstr "Файл, якi вы захоўваеце, не скончаны новым радком"
 
 #: src/editor/editcmd.c:393 src/editor/editcmd.c:774 src/editor/editcmd.c:1650
-#: src/editor/editcmd.c:1672 src/editor/editcmd.c:1965
-#: src/editor/editcmd.c:3052 src/editor/editcmd.c:3092
+#: src/editor/editcmd.c:1672 src/editor/editcmd.c:1972
+#: src/editor/editcmd.c:3058 src/editor/editcmd.c:3098
 #: src/editor/editcmd_dialogs.c:520
 msgid "C&ontinue"
 msgstr "Пра&цягнуць"
@@ -1675,7 +1675,7 @@ msgid "Change line breaks to:"
 msgstr "Новы радок скончаны на:"
 
 #: src/editor/editcmd.c:422 src/editor/editcmd.c:1681
-#: src/editor/editcmd.c:2560 src/editor/editcmd.c:2601
+#: src/editor/editcmd.c:2566 src/editor/editcmd.c:2607
 msgid "Enter file name:"
 msgstr "Увядзіце імя файла:"
 
@@ -1710,30 +1710,30 @@ msgid "Which syntax file you want to edit?"
 msgstr "Які сінтаксіс файла вы жадаеце змяніць?"
 
 #: src/editor/editcmd.c:635 src/editor/editcmd.c:671
-#: src/filemanager/cmd.c:1016 src/filemanager/cmd.c:1052
-#: src/filemanager/cmd.c:1110
+#: src/filemanager/cmd.c:1015 src/filemanager/cmd.c:1051
+#: src/filemanager/cmd.c:1109
 msgid "&User"
 msgstr "&Карыстальніцкі"
 
 #: src/editor/editcmd.c:635 src/editor/editcmd.c:671
-#: src/filemanager/cmd.c:1016 src/filemanager/cmd.c:1052
-#: src/filemanager/cmd.c:1110
+#: src/filemanager/cmd.c:1015 src/filemanager/cmd.c:1051
+#: src/filemanager/cmd.c:1109
 msgid "&System Wide"
 msgstr "&Агульнасістэмны"
 
-#: src/editor/editcmd.c:669 src/filemanager/cmd.c:1050
+#: src/editor/editcmd.c:669 src/filemanager/cmd.c:1049
 msgid "Menu edit"
 msgstr "Меню рэдагавання"
 
-#: src/editor/editcmd.c:670 src/filemanager/cmd.c:1051
+#: src/editor/editcmd.c:670 src/filemanager/cmd.c:1050
 msgid "Which menu file do you want to edit?"
 msgstr "Які файл меню вы хочаце змяніць?"
 
-#: src/editor/editcmd.c:671 src/filemanager/cmd.c:1052
+#: src/editor/editcmd.c:671 src/filemanager/cmd.c:1051
 msgid "&Local"
 msgstr "&Лакальны"
 
-#: src/editor/editcmd.c:773 src/editor/editcmd.c:1964
+#: src/editor/editcmd.c:773 src/editor/editcmd.c:1971
 msgid "Block is large, you may not be able to undo this action"
 msgstr "Блок занадта вялікі, вы не зможаце адмяніць гэта дзеянне"
 
@@ -1769,7 +1769,7 @@ msgstr "&Перапісаць"
 msgid "Save as"
 msgstr "Захаваць як"
 
-#: src/editor/editcmd.c:1483 src/editor/editcmd.c:2582
+#: src/editor/editcmd.c:1483 src/editor/editcmd.c:2588
 msgid "Cannot save file"
 msgstr "Не ўдаецца захаваць файл"
 
@@ -1781,7 +1781,7 @@ msgstr "Захаваць макрас"
 msgid "Press the macro's new hotkey:"
 msgstr "Націсніце новую клавішу для макраса:"
 
-#: src/editor/editcmd.c:1546 src/editor/editcmd.c:3021
+#: src/editor/editcmd.c:1546 src/editor/editcmd.c:3027
 msgid "Press macro hotkey:"
 msgstr "Націсніце гарачую клавішу для макраса:"
 
@@ -1816,154 +1816,154 @@ msgstr ""
 msgid "Load"
 msgstr "Загрузiць"
 
-#: src/editor/editcmd.c:2212 src/editor/editcmd.c:2251
-#: src/editor/editcmd.c:2262 src/editor/editcmd_dialogs.c:140
+#: src/editor/editcmd.c:2219 src/editor/editcmd.c:2258
+#: src/editor/editcmd.c:2269 src/editor/editcmd_dialogs.c:140
 msgid "Replace"
 msgstr "Замяніць"
 
-#: src/editor/editcmd.c:2262
+#: src/editor/editcmd.c:2269
 #, c-format
 msgid "%ld replacements made"
 msgstr "Ажыццёўлена падстановак: %ld"
 
-#: src/editor/editcmd.c:2353 src/viewer/lib.c:157
+#: src/editor/editcmd.c:2360 src/viewer/lib.c:157
 msgid "&Cancel quit"
 msgstr "Пера&рваць выхад"
 
-#: src/editor/editcmd.c:2445
+#: src/editor/editcmd.c:2452
 msgid "This function is not implemented"
 msgstr "Гэтая функцыя не рэалізавана"
 
-#: src/editor/editcmd.c:2458
+#: src/editor/editcmd.c:2465
 msgid "Copy to clipboard"
 msgstr "Капіяваць у буфер"
 
-#: src/editor/editcmd.c:2458 src/editor/editcmd.c:2478
+#: src/editor/editcmd.c:2465 src/editor/editcmd.c:2484
 msgid "Unable to save to file"
 msgstr "Немагчыма захаваць у файл"
 
-#: src/editor/editcmd.c:2478
+#: src/editor/editcmd.c:2484
 msgid "Cut to clipboard"
 msgstr "Выразаць у буфер"
 
-#: src/editor/editcmd.c:2519
+#: src/editor/editcmd.c:2525
 msgid "Goto line"
 msgstr "Перайсці да радка"
 
-#: src/editor/editcmd.c:2560 src/editor/editcmd.c:2582
+#: src/editor/editcmd.c:2566 src/editor/editcmd.c:2588
 msgid "Save block"
 msgstr "Захаваць блок"
 
-#: src/editor/editcmd.c:2601 src/editor/editcmd.c:2623
+#: src/editor/editcmd.c:2607 src/editor/editcmd.c:2629
 msgid "Insert file"
 msgstr "Уставіць файл"
 
-#: src/editor/editcmd.c:2623
+#: src/editor/editcmd.c:2629
 msgid "Cannot insert file"
 msgstr "Немагчыма ўставіць файл"
 
-#: src/editor/editcmd.c:2644
+#: src/editor/editcmd.c:2650
 msgid "Sort block"
 msgstr "Сартаваць блок"
 
-#: src/editor/editcmd.c:2644 src/editor/editcmd.c:2799
+#: src/editor/editcmd.c:2650 src/editor/editcmd.c:2805
 msgid "You must first highlight a block of text"
 msgstr "Вы павінны спачатку вылучыць блок тэксту"
 
-#: src/editor/editcmd.c:2652
+#: src/editor/editcmd.c:2658
 msgid "Run sort"
 msgstr "Выканаць сартаванне"
 
-#: src/editor/editcmd.c:2653
+#: src/editor/editcmd.c:2659
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr "Увядзіце параметры сартавання (man sort (1)), падзялёныя прабеламі:"
 
-#: src/editor/editcmd.c:2668 src/editor/editcmd.c:2675
+#: src/editor/editcmd.c:2674 src/editor/editcmd.c:2681
 msgid "Sort"
 msgstr "Сартаванне"
 
-#: src/editor/editcmd.c:2668
+#: src/editor/editcmd.c:2674
 msgid "Cannot execute sort command"
 msgstr "Немагчыма выканаць каманду sort"
 
-#: src/editor/editcmd.c:2674
+#: src/editor/editcmd.c:2680
 #, c-format
 msgid "Sort returned non-zero: %s"
 msgstr "Сартаванне вярнула ненулявы код: %s"
 
-#: src/editor/editcmd.c:2704
+#: src/editor/editcmd.c:2710
 msgid "Paste output of external command"
 msgstr "Уставіць вывад знешней каманды"
 
-#: src/editor/editcmd.c:2705
+#: src/editor/editcmd.c:2711
 msgid "Enter shell command(s):"
 msgstr " Увядзіце каманду(ы) абалонкі: "
 
-#: src/editor/editcmd.c:2717
+#: src/editor/editcmd.c:2723
 msgid "External command"
 msgstr "Знешняя каманда"
 
-#: src/editor/editcmd.c:2717
+#: src/editor/editcmd.c:2723
 msgid "Cannot execute command"
 msgstr " Памылка пры выкананні каманды "
 
-#: src/editor/editcmd.c:2755
+#: src/editor/editcmd.c:2761
 msgid "Error creating script:"
 msgstr "Памылка стварэння скрыпта:"
 
-#: src/editor/editcmd.c:2770
+#: src/editor/editcmd.c:2776
 msgid "Error reading script:"
 msgstr "Памылка чытання скрыпта:"
 
-#: src/editor/editcmd.c:2782
+#: src/editor/editcmd.c:2788
 msgid "Error closing script:"
 msgstr "Памылка закрыцця скрыпта:"
 
-#: src/editor/editcmd.c:2788
+#: src/editor/editcmd.c:2794
 msgid "Script created:"
 msgstr "Скрыпт створаны:"
 
-#: src/editor/editcmd.c:2799 src/editor/editcmd.c:2829
+#: src/editor/editcmd.c:2805 src/editor/editcmd.c:2835
 msgid "Process block"
 msgstr "Апрацаваць блок"
 
-#: src/editor/editcmd.c:2829
+#: src/editor/editcmd.c:2835
 msgid "Error calling program"
 msgstr "Памылка выкліку праграмы"
 
-#: src/editor/editcmd.c:2891
+#: src/editor/editcmd.c:2897
 msgid "Copies to"
 msgstr "Адправіць копіі адрасатам"
 
-#: src/editor/editcmd.c:2894
+#: src/editor/editcmd.c:2900
 msgid "Subject"
 msgstr "Тэма"
 
-#: src/editor/editcmd.c:2896
+#: src/editor/editcmd.c:2902
 msgid "To"
 msgstr "Для"
 
-#: src/editor/editcmd.c:2897
+#: src/editor/editcmd.c:2903
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <Тэма> -c <Копii> <Каму>"
 
-#: src/editor/editcmd.c:2902
+#: src/editor/editcmd.c:2908
 msgid "Mail"
 msgstr "Пошта"
 
-#: src/editor/editcmd.c:3010
+#: src/editor/editcmd.c:3016
 msgid "Insert literal"
 msgstr "Устаўце літарал"
 
-#: src/editor/editcmd.c:3011
+#: src/editor/editcmd.c:3017
 msgid "Press any key:"
 msgstr "Націсніце любую клавішу:"
 
-#: src/editor/editcmd.c:3021
+#: src/editor/editcmd.c:3027
 msgid "Execute macro"
 msgstr "Выканаць макрас"
 
-#: src/editor/editcmd.c:3051 src/editor/editcmd.c:3091
+#: src/editor/editcmd.c:3057 src/editor/editcmd.c:3097
 msgid ""
 "Current text was modified without a file save\n"
 "Continue discards these changes"
@@ -1996,11 +1996,11 @@ msgstr ""
 "Працягнуць з стратай гэтых зменаў."
 
 #: src/editor/editcmd_dialogs.c:587 src/filemanager/file.c:456
-#: src/filemanager/file.c:1077 src/filemanager/filegui.c:529
+#: src/filemanager/file.c:1072 src/filemanager/filegui.c:529
 msgid "&Skip"
 msgstr "П&рапусціць"
 
-#: src/editor/editcmd_dialogs.c:588 src/filemanager/file.c:1132
+#: src/editor/editcmd_dialogs.c:588 src/filemanager/file.c:1127
 #: src/filemanager/filegui.c:324
 msgid "A&ll"
 msgstr "&Усе"
@@ -2081,7 +2081,7 @@ msgstr "&Капiраваць"
 msgid "Mo&ve"
 msgstr "&Перамясціць"
 
-#: src/editor/editmenu.c:106 src/filemanager/file.c:1569
+#: src/editor/editmenu.c:106 src/filemanager/file.c:1564
 #: src/filemanager/midnight.c:253
 msgid "&Delete"
 msgstr "&Выдаліць"
@@ -2833,7 +2833,7 @@ msgstr "Увядзіце імя кампутара (F1 для падрабязн
 msgid "Files tagged, want to cd?"
 msgstr "Файлы пазначаныя, замяніць каталог?"
 
-#: src/filemanager/cmd.c:167 src/filemanager/cmd.c:1170
+#: src/filemanager/cmd.c:167 src/filemanager/cmd.c:1169
 #: src/filemanager/panel.c:2237 src/filemanager/panel.c:2721
 msgid "Cannot change directory"
 msgstr "Немагчыма змяніць каталог"
@@ -2878,7 +2878,7 @@ msgstr "спасылка: %s"
 msgid "symlink: %s"
 msgstr "сімвалічная спасылка: %s"
 
-#: src/filemanager/cmd.c:510 src/filemanager/panel.c:3980
+#: src/filemanager/cmd.c:510 src/filemanager/panel.c:3979
 #, c-format
 msgid "Cannot chdir to \"%s\""
 msgstr "Немагчыма перайсці ў \"%s\""
@@ -2907,51 +2907,51 @@ msgstr " Стварыць новы каталог "
 msgid "Enter directory name:"
 msgstr "Увядзіце імя каталога:"
 
-#: src/filemanager/cmd.c:991
+#: src/filemanager/cmd.c:990
 msgid "Select"
 msgstr "адзначыць групу"
 
-#: src/filemanager/cmd.c:999
+#: src/filemanager/cmd.c:998
 msgid "Unselect"
 msgstr "Зняць адзнаку"
 
-#: src/filemanager/cmd.c:1014
+#: src/filemanager/cmd.c:1013
 msgid "Extension file edit"
 msgstr " Рэдагаваць файла пашырэнняў "
 
-#: src/filemanager/cmd.c:1015
+#: src/filemanager/cmd.c:1014
 msgid "Which extension file you want to edit?"
 msgstr "Які файл пашырэнняў Вы жадаеце рэдагаваць?"
 
-#: src/filemanager/cmd.c:1108
+#: src/filemanager/cmd.c:1107
 msgid "Highlighting groups file edit"
 msgstr "Рэдагаванне файла груп падсветкi"
 
-#: src/filemanager/cmd.c:1109
+#: src/filemanager/cmd.c:1108
 msgid "Which highlighting file you want to edit?"
 msgstr "Які файл пашырэнняў Вы жадаеце рэдагаваць?"
 
-#: src/filemanager/cmd.c:1184
+#: src/filemanager/cmd.c:1183
 msgid "Compare directories"
 msgstr "Параўнаць каталогі"
 
-#: src/filemanager/cmd.c:1185
+#: src/filemanager/cmd.c:1184
 msgid "Select compare method:"
 msgstr "Выберыце метад параўнання:"
 
-#: src/filemanager/cmd.c:1186
+#: src/filemanager/cmd.c:1185
 msgid "&Quick"
 msgstr "&Хуткі"
 
-#: src/filemanager/cmd.c:1186
+#: src/filemanager/cmd.c:1185
 msgid "&Size only"
 msgstr "Па &памеры"
 
-#: src/filemanager/cmd.c:1186
+#: src/filemanager/cmd.c:1185
 msgid "&Thorough"
 msgstr "Па&байтны"
 
-#: src/filemanager/cmd.c:1201
+#: src/filemanager/cmd.c:1200
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
@@ -2959,7 +2959,7 @@ msgstr ""
 "Абедзве панэлі мусяць быць у рэжыме спісу,\n"
 "каб выкарыстоўваць гэтую каманду"
 
-#: src/filemanager/cmd.c:1250
+#: src/filemanager/cmd.c:1249
 msgid ""
 "Not an xterm or Linux console;\n"
 "the panels cannot be toggled."
@@ -2967,47 +2967,47 @@ msgstr ""
 "Гэта не xterm і не кансоль Linux;\n"
 "панэлі не могуць быць адключаны."
 
-#: src/filemanager/cmd.c:1284
+#: src/filemanager/cmd.c:1283
 #, c-format
 msgid "Symlink `%s' points to:"
 msgstr "Сімвалічная спасылка '%s' паказвае на:"
 
-#: src/filemanager/cmd.c:1290
+#: src/filemanager/cmd.c:1289
 msgid "Edit symlink"
 msgstr "Праўка спасылкі"
 
-#: src/filemanager/cmd.c:1298
+#: src/filemanager/cmd.c:1297
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
 msgstr "праўка сімвалічнай спасылкі, немагчыма выдаліць %s: %s"
 
-#: src/filemanager/cmd.c:1304
+#: src/filemanager/cmd.c:1303
 #, c-format
 msgid "edit symlink: %s"
 msgstr "праўка сімвалічнай спасылкі: %s"
 
-#: src/filemanager/cmd.c:1317
+#: src/filemanager/cmd.c:1316
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' не сімвалічная спасылка"
 
-#: src/filemanager/cmd.c:1406
+#: src/filemanager/cmd.c:1405
 msgid "FTP to machine"
 msgstr "FTP-злучэнне з выдаленай машынай"
 
-#: src/filemanager/cmd.c:1417
+#: src/filemanager/cmd.c:1416
 msgid "Shell link to machine"
 msgstr "Shell-злучэнне з выдаленай машынай"
 
-#: src/filemanager/cmd.c:1429
+#: src/filemanager/cmd.c:1428
 msgid "SMB link to machine"
 msgstr "SMB-злучэнне з выдаленай машынай"
 
-#: src/filemanager/cmd.c:1441
+#: src/filemanager/cmd.c:1440
 msgid "Undelete files on an ext2 file system"
 msgstr "Аднаўленне файлаў на файлавай сістэме ext2"
 
-#: src/filemanager/cmd.c:1442
+#: src/filemanager/cmd.c:1441
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
@@ -3015,11 +3015,11 @@ msgstr ""
 "увядзіце назву прылады (без /dev/), на якой\n"
 "аднаўляць файлы пасля выдалення (дробязі па F1):"
 
-#: src/filemanager/cmd.c:1570
+#: src/filemanager/cmd.c:1569
 msgid "Setup"
 msgstr "Настройка"
 
-#: src/filemanager/cmd.c:1570
+#: src/filemanager/cmd.c:1569
 #, c-format
 msgid "Setup saved to ~/%s"
 msgstr "Параметры захаваны ў ~/%s"
@@ -3075,7 +3075,7 @@ msgstr "памылка файла ~/%s"
 msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr "Фармат файла %smc.ext зменены з версіі 3.0. Вы можаце або скапіяваць яго з %smc.ext або выкарыстаць гэты файл як прыклад і напісаць свой."
 
-#: src/filemanager/file.c:87 src/filemanager/file.c:1567
+#: src/filemanager/file.c:87 src/filemanager/file.c:1562
 #: src/filemanager/tree.c:746
 msgid "DialogTitle|Copy"
 msgstr "Капіраванне"
@@ -3176,13 +3176,13 @@ msgstr ""
 "Немагчыма стварыць мэтавую сiмв спасылку \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:456 src/filemanager/file.c:1077
-#: src/filemanager/file.c:1132 src/filemanager/file.c:2040
+#: src/filemanager/file.c:456 src/filemanager/file.c:1072
+#: src/filemanager/file.c:1127 src/filemanager/file.c:2035
 #: src/filemanager/filegui.c:316 src/filemanager/filegui.c:528
 msgid "&Abort"
 msgstr "&Перарваць"
 
-#: src/filemanager/file.c:565
+#: src/filemanager/file.c:560
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -3191,7 +3191,7 @@ msgstr ""
 "Немагчыма атрымаць уласцівасці файла \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:573 src/filemanager/file.c:1301
+#: src/filemanager/file.c:568 src/filemanager/file.c:1296
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -3204,12 +3204,12 @@ msgstr ""
 "\"%s\"\n"
 "адзiнкавы файл"
 
-#: src/filemanager/file.c:577
+#: src/filemanager/file.c:572
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Немагчыма перапісаць каталог \"%s\""
 
-#: src/filemanager/file.c:615
+#: src/filemanager/file.c:610
 #, c-format
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
@@ -3218,7 +3218,7 @@ msgstr ""
 "Немагчыма перамясьціць файл \"%s\" у \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:644
+#: src/filemanager/file.c:639
 #, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
@@ -3227,7 +3227,7 @@ msgstr ""
 "Немагчыма перамясціць файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:682
+#: src/filemanager/file.c:677
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
@@ -3236,8 +3236,8 @@ msgstr ""
 "Немагчыма выдалiць файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:741 src/filemanager/file.c:800
-#: src/filemanager/file.c:2022
+#: src/filemanager/file.c:736 src/filemanager/file.c:795
+#: src/filemanager/file.c:2017
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
@@ -3246,11 +3246,11 @@ msgstr ""
 "Немагчыма выдалiць каталог \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1077 src/viewer/hex.c:392
+#: src/filemanager/file.c:1072 src/viewer/hex.c:392
 msgid "&Retry"
 msgstr "Па&ўтарыць"
 
-#: src/filemanager/file.c:1123
+#: src/filemanager/file.c:1118
 msgid ""
 "\n"
 "Directory not empty.\n"
@@ -3260,7 +3260,7 @@ msgstr ""
 "Каталог не пусты.\n"
 "Выдаліць рэкурсіўна?"
 
-#: src/filemanager/file.c:1124
+#: src/filemanager/file.c:1119
 msgid ""
 "\n"
 "Background process: Directory not empty.\n"
@@ -3269,15 +3269,15 @@ msgstr ""
 "\n"
 "Фонавы працэс: каталог не пусты.Выдаліць рэкурсіўна?"
 
-#: src/filemanager/file.c:1125
+#: src/filemanager/file.c:1120
 msgid "Delete:"
 msgstr "Выдалiць:"
 
-#: src/filemanager/file.c:1132 src/filemanager/filegui.c:320
+#: src/filemanager/file.c:1127 src/filemanager/filegui.c:320
 msgid "Non&e"
 msgstr "ні&Воднага"
 
-#: src/filemanager/file.c:1281
+#: src/filemanager/file.c:1276
 #, c-format
 msgid ""
 "Cannot overwrite directory\"%s\"\n"
@@ -3286,7 +3286,7 @@ msgstr ""
 "Немагчыма перапісаць каталог \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1292
+#: src/filemanager/file.c:1287
 #, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
@@ -3295,7 +3295,7 @@ msgstr ""
 "Немагчыма атрымаць ўласцівасці зыходнага файла \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1329
+#: src/filemanager/file.c:1324
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -3304,7 +3304,7 @@ msgstr ""
 "Немагчыма стварыць спецыяльны файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1338 src/filemanager/file.c:1580
+#: src/filemanager/file.c:1333 src/filemanager/file.c:1575
 #, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
@@ -3313,7 +3313,7 @@ msgstr ""
 "Немагчыма змяніць уладальніка мэтавага файла \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1345 src/filemanager/file.c:1594
+#: src/filemanager/file.c:1340 src/filemanager/file.c:1589
 #, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
@@ -3322,7 +3322,7 @@ msgstr ""
 "Немагчыма змяніць рэжым доступу мэтавага файла \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1358
+#: src/filemanager/file.c:1353
 #, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
@@ -3331,11 +3331,11 @@ msgstr ""
 "Немагчыма адкрыць зыходны файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1369
+#: src/filemanager/file.c:1364
 msgid "Reget failed, about to overwrite file"
 msgstr "Збой дакачкі файла, файл будзе перапісаны"
 
-#: src/filemanager/file.c:1377
+#: src/filemanager/file.c:1372
 #, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
@@ -3344,7 +3344,7 @@ msgstr ""
 "Немагчыма атрымаць ўласцівасці зыходнага файла \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1408
+#: src/filemanager/file.c:1403
 #, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
@@ -3353,7 +3353,7 @@ msgstr ""
 "Немагчыма стварыць мэтавай файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1422
+#: src/filemanager/file.c:1417
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
@@ -3362,7 +3362,7 @@ msgstr ""
 "Немагчыма атрымаць ўласцівасці мэтавага файла \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1458
+#: src/filemanager/file.c:1453
 #, c-format
 msgid ""
 "Cannot read source file\"%s\"\n"
@@ -3371,7 +3371,7 @@ msgstr ""
 "Немагчыма прачытаць зыходны файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1490
+#: src/filemanager/file.c:1485
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
@@ -3380,11 +3380,11 @@ msgstr ""
 "Немагчыма запісаць мэтавай файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1509
+#: src/filemanager/file.c:1504
 msgid "(stalled)"
 msgstr "(завяз)"
 
-#: src/filemanager/file.c:1546
+#: src/filemanager/file.c:1541
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -3393,7 +3393,7 @@ msgstr ""
 "Немагчыма закрыць зыходны файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1556
+#: src/filemanager/file.c:1551
 #, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
@@ -3402,15 +3402,15 @@ msgstr ""
 "Немагчыма закрыць мэтавы файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1568
+#: src/filemanager/file.c:1563
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Быў атрыманы няпоўны файл. Захаваць?"
 
-#: src/filemanager/file.c:1569
+#: src/filemanager/file.c:1564
 msgid "&Keep"
 msgstr "&Захаваць"
 
-#: src/filemanager/file.c:1646
+#: src/filemanager/file.c:1641
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
@@ -3419,7 +3419,7 @@ msgstr ""
 "Немагчыма атрымаць ўласцівасці зыходнага каталога \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1673
+#: src/filemanager/file.c:1668
 #, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
@@ -3428,7 +3428,7 @@ msgstr ""
 "Зыходны каталог \"%s\" каталогам не з'яўляецца\n"
 "%s"
 
-#: src/filemanager/file.c:1682
+#: src/filemanager/file.c:1677
 #, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
@@ -3437,7 +3437,7 @@ msgstr ""
 "Немагчыма скапіяваць цыклічную сімвалічную спасылку\n"
 "%s"
 
-#: src/filemanager/file.c:1722 src/filemanager/file.c:2519
+#: src/filemanager/file.c:1717 src/filemanager/file.c:2514
 #: src/filemanager/tree.c:802
 #, c-format
 msgid ""
@@ -3447,7 +3447,7 @@ msgstr ""
 "Прызначэнне \"%s\" павінна быць каталогам\n"
 "%s"
 
-#: src/filemanager/file.c:1741
+#: src/filemanager/file.c:1736
 #, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
@@ -3456,7 +3456,7 @@ msgstr ""
 "Немагчыма стварыць мэтавы каталог \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1758
+#: src/filemanager/file.c:1753
 #, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
@@ -3465,7 +3465,7 @@ msgstr ""
 "Немагчыма змяніць уладальніка мэтавага каталога \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1889
+#: src/filemanager/file.c:1884
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -3478,7 +3478,7 @@ msgstr ""
 "\"%s\"\n"
 "адзiнкавы каталог"
 
-#: src/filemanager/file.c:1916
+#: src/filemanager/file.c:1911
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
@@ -3487,7 +3487,7 @@ msgstr ""
 "Немагчыма перапісаць каталог \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1918
+#: src/filemanager/file.c:1913
 #, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
@@ -3496,7 +3496,7 @@ msgstr ""
 "Немагчыма перапісаць файл \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1935
+#: src/filemanager/file.c:1930
 #, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
@@ -3505,15 +3505,15 @@ msgstr ""
 "Немагчыма перамясціць каталог \"%s\" у \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:2049
+#: src/filemanager/file.c:2044
 msgid "Directory scanning"
 msgstr "Шлях да каталога"
 
-#: src/filemanager/file.c:2278
+#: src/filemanager/file.c:2273
 msgid "Cannot operate on \"..\"!"
 msgstr "Гэтую аперацыю немагчыма выканаць на \"..\"!"
 
-#: src/filemanager/file.c:2402
+#: src/filemanager/file.c:2397
 msgid "Sorry, I could not put the job in background"
 msgstr "Выбачайце, зрабіць гэта ў фонавым рэжыме немагчыма"
 
@@ -4676,7 +4676,7 @@ msgstr "Невядомы тэг у фармаце адлюстравання:"
 msgid "Do you really want to execute?"
 msgstr "Вы сапраўды жадаеце выканаць гэта?"
 
-#: src/filemanager/panel.c:3707
+#: src/filemanager/panel.c:3706
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Фармат карыстальніка выглядае памылковым, вяртаюся да стандартнага."
 

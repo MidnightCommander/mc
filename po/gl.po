@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2010-12-08 12:27+0200\n"
-"PO-Revision-Date: 2010-12-28 10:03+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"POT-Creation-Date: 2010-12-28 12:51+0200\n"
+"PO-Revision-Date: 2011-02-05 15:06+0000\n"
+"Last-Translator: mbouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician <None>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +54,7 @@ msgid "&Ignore lock"
 msgstr "&Ignorar bloqueo"
 
 #: lib/search/lib.c:42 src/diffviewer/search.c:262 src/editor/editcmd.c:843
-#: src/editor/editcmd.c:883 src/editor/editcmd.c:969 src/editor/editcmd.c:2251
+#: src/editor/editcmd.c:883 src/editor/editcmd.c:969 src/editor/editcmd.c:2258
 #: src/viewer/search.c:100
 msgid "Search string not found"
 msgstr "Non se atopa a cadea buscada"
@@ -457,7 +457,7 @@ msgstr "Signo de numeral #"
 #. TRANSLATORS: Please translate as in "at sign" (@).
 #: lib/tty/key.c:195
 msgid "At sign"
-msgstr ""
+msgstr "@"
 
 #: lib/tty/key.c:198 lib/tty/key.c:199
 msgid "Ctrl"
@@ -519,9 +519,9 @@ msgstr "Prema calquera tecla para continuar..."
 #: src/editor/editcmd.c:168 src/editor/editcmd.c:192 src/editor/editcmd.c:391
 #: src/editor/editcmd.c:771 src/editor/editcmd.c:1424
 #: src/editor/editcmd.c:1647 src/editor/editcmd.c:1670
-#: src/editor/editcmd.c:1962 src/editor/editcmd.c:3050
-#: src/editor/editcmd.c:3090 src/editor/editcmd_dialogs.c:518
-#: src/execute.c:113 src/filemanager/file.c:1369 src/filemanager/panel.c:3706
+#: src/editor/editcmd.c:1969 src/editor/editcmd.c:3056
+#: src/editor/editcmd.c:3096 src/editor/editcmd_dialogs.c:518
+#: src/execute.c:113 src/filemanager/file.c:1364 src/filemanager/panel.c:3705
 #: src/help.c:359 src/main.c:486 src/main.c:496 src/subshell.c:392
 #: src/subshell.c:1085 src/viewer/actions_cmd.c:277
 msgid "Warning"
@@ -602,13 +602,13 @@ msgstr "O cache para %s expirou"
 
 #: lib/vfs/mc-vfs/direntry.c:713 lib/vfs/mc-vfs/direntry.c:716
 msgid "bytes transferred"
-msgstr ""
+msgstr "bytes transferidos"
 
-#: lib/vfs/mc-vfs/direntry.c:1202
+#: lib/vfs/mc-vfs/direntry.c:1206
 msgid "Starting linear transfer..."
 msgstr "Iniciando transferencia en liña..."
 
-#: lib/vfs/mc-vfs/direntry.c:1267
+#: lib/vfs/mc-vfs/direntry.c:1271
 msgid "Getting file"
 msgstr "Obtendo ficheiro"
 
@@ -702,11 +702,11 @@ msgstr "fish: fallo local de lectura, enviando ceros"
 
 #: lib/vfs/mc-vfs/fish.c:936
 msgid "fish: storing zeros"
-msgstr ""
+msgstr "fish: gardando ceros"
 
 #: lib/vfs/mc-vfs/fish.c:936
 msgid "fish: storing file"
-msgstr ""
+msgstr "fish: gardando ficheiro"
 
 #: lib/vfs/mc-vfs/fish.c:1004
 msgid "Aborting transfer..."
@@ -845,7 +845,7 @@ msgstr "ftpfs: produciuse un fallo; non hai onde repregarse"
 
 #: lib/vfs/mc-vfs/ftpfs.c:1831
 msgid "ftpfs: storing file"
-msgstr ""
+msgstr "ftpfs: gardando ficheiro"
 
 #: lib/vfs/mc-vfs/ftpfs.c:2275
 msgid ""
@@ -1070,9 +1070,9 @@ msgid "Do you want clean this history?"
 msgstr "Desexa eliminar este historial?"
 
 #: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
-#: src/editor/editcmd.c:170 src/editor/editcmd.c:194 src/editor/editcmd.c:2353
-#: src/editor/editcmd.c:2360 src/filemanager/cmd.c:161
-#: src/filemanager/file.c:1132 src/filemanager/file.c:2363
+#: src/editor/editcmd.c:170 src/editor/editcmd.c:194 src/editor/editcmd.c:2360
+#: src/editor/editcmd.c:2367 src/filemanager/cmd.c:161
+#: src/filemanager/file.c:1127 src/filemanager/file.c:2358
 #: src/filemanager/filegui.c:334 src/filemanager/hotlist.c:1236
 #: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:951
 #: src/filemanager/midnight.c:959 src/filemanager/panel.c:2258
@@ -1082,9 +1082,9 @@ msgid "&Yes"
 msgstr "&Si"
 
 #: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
-#: src/editor/editcmd.c:170 src/editor/editcmd.c:2353
-#: src/editor/editcmd.c:2360 src/filemanager/cmd.c:161
-#: src/filemanager/file.c:1132 src/filemanager/file.c:2363
+#: src/editor/editcmd.c:170 src/editor/editcmd.c:2360
+#: src/editor/editcmd.c:2367 src/filemanager/cmd.c:161
+#: src/filemanager/file.c:1127 src/filemanager/file.c:2358
 #: src/filemanager/filegui.c:332 src/filemanager/hotlist.c:1236
 #: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:951
 #: src/filemanager/midnight.c:959 src/filemanager/panel.c:2258
@@ -1103,8 +1103,8 @@ msgstr "Procesos en 2º plano"
 #: src/editor/editcmd.c:774 src/editor/editcmd.c:1312
 #: src/editor/editcmd.c:1425 src/editor/editcmd.c:1627
 #: src/editor/editcmd.c:1650 src/editor/editcmd.c:1672
-#: src/editor/editcmd.c:1965 src/editor/editcmd.c:2888
-#: src/editor/editcmd.c:3052 src/editor/editcmd.c:3092
+#: src/editor/editcmd.c:1972 src/editor/editcmd.c:2894
+#: src/editor/editcmd.c:3058 src/editor/editcmd.c:3098
 #: src/editor/editcmd_dialogs.c:105 src/editor/editcmd_dialogs.c:174
 #: src/editor/editcmd_dialogs.c:520 src/editor/editcmd_dialogs.c:586
 #: src/editor/editoptions.c:86 src/filemanager/achown.c:87
@@ -1113,7 +1113,7 @@ msgstr "Procesos en 2º plano"
 #: src/filemanager/boxes.c:775 src/filemanager/boxes.c:932
 #: src/filemanager/boxes.c:1042 src/filemanager/boxes.c:1131
 #: src/filemanager/chmod.c:121 src/filemanager/chown.c:94
-#: src/filemanager/cmd.c:1186 src/filemanager/filegui.c:934
+#: src/filemanager/cmd.c:1185 src/filemanager/filegui.c:934
 #: src/filemanager/find.c:495 src/filemanager/hotlist.c:206
 #: src/filemanager/hotlist.c:679 src/filemanager/hotlist.c:1025
 #: src/filemanager/hotlist.c:1121 src/filemanager/layout.c:416
@@ -1125,8 +1125,8 @@ msgstr "&Cancelar"
 
 #: lib/widget/wtools.c:159 src/diffviewer/search.c:73
 #: src/diffviewer/ydiff.c:2405 src/editor/edit.c:178 src/editor/editcmd.c:417
-#: src/editor/editcmd.c:1314 src/editor/editcmd.c:2251
-#: src/editor/editcmd.c:2889 src/editor/editcmd_dialogs.c:106
+#: src/editor/editcmd.c:1314 src/editor/editcmd.c:2258
+#: src/editor/editcmd.c:2895 src/editor/editcmd_dialogs.c:106
 #: src/editor/editcmd_dialogs.c:178 src/editor/editoptions.c:87
 #: src/filemanager/boxes.c:139 src/filemanager/boxes.c:243
 #: src/filemanager/boxes.c:376 src/filemanager/boxes.c:602
@@ -1140,9 +1140,9 @@ msgid "&OK"
 msgstr "&Aceptar"
 
 #: lib/widget/wtools.c:260 lib/widget/wtools.c:386 src/editor/edit.c:265
-#: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1531
-#: src/editor/edit.c:1909 src/editor/edit.c:1919 src/editor/editcmd.c:261
-#: src/editor/editcmd.c:271 src/editor/editcmd.c:348 src/editor/editcmd.c:2445
+#: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1535
+#: src/editor/edit.c:1913 src/editor/edit.c:1923 src/editor/editcmd.c:261
+#: src/editor/editcmd.c:271 src/editor/editcmd.c:348 src/editor/editcmd.c:2452
 msgid "Error"
 msgstr "Erro"
 
@@ -1247,6 +1247,23 @@ msgid ""
 "   Viewer:       viewunderline\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--cores CONTEXTO={FRONTE},{FONDO}\n"
+"\n"
+"{FRONTE} e {FONDO} pódense omitir e empregarase o valor predeterminado\n"
+"\n"
+" Contextos:\n"
+"   Globais:            errors, disabled, reverse, gauge, viewunderline\n"
+"                       input, inputmark, inputunchanged, commandlinemark\n"
+"                       bbarhotkey, bbarbutton, statusbar\n"
+"   Visor de ficheiros: normal, selected, marked, markselect\n"
+"   Caixas de dialogo:  dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                       errdhotfocus\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús emerxentes:   pmenunormal, pmenusel, pmenutitle\n"
+"   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
+"                       editlinestate\n"
+"   Visor:              viewunderline\n"
+"   Axuda:              helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names
 #: src/args.c:341
@@ -1257,6 +1274,11 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"Cores:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
 
 #: src/args.c:347
 msgid "Color options"
@@ -1306,7 +1328,7 @@ msgid "Terminal options"
 msgstr "Opcións de terminal"
 
 #: src/background.c:213 src/background.c:287 src/filemanager/file.c:453
-#: src/filemanager/file.c:1076
+#: src/filemanager/file.c:1071
 msgid "Background process error"
 msgstr "Produciuse un erro nun proceso en 2º plano"
 
@@ -1368,7 +1390,7 @@ msgstr "Escriba a cadea a buscar:"
 
 #: src/diffviewer/search.c:138 src/diffviewer/search.c:262
 #: src/diffviewer/search.c:275 src/diffviewer/search.c:302
-#: src/editor/editcmd.c:969 src/editor/editcmd.c:999 src/editor/editcmd.c:2144
+#: src/editor/editcmd.c:969 src/editor/editcmd.c:999 src/editor/editcmd.c:2151
 #: src/editor/editcmd_dialogs.c:216 src/viewer/dialogs.c:115
 #: src/viewer/search.c:139 src/viewer/search.c:223 src/viewer/search.c:308
 msgid "Search"
@@ -1467,7 +1489,7 @@ msgstr "Ir á liña (esquerda)"
 msgid "Goto line (right)"
 msgstr "Ir á liña (dereita)"
 
-#: src/diffviewer/ydiff.c:2785 src/editor/editcmd.c:2519
+#: src/diffviewer/ydiff.c:2785 src/editor/editcmd.c:2525
 msgid "Enter line:"
 msgstr "Escriba a liña:"
 
@@ -1506,16 +1528,16 @@ msgstr "ButtonBar|Opcións"
 msgid "ButtonBar|Quit"
 msgstr "ButtonBar|Saír"
 
-#: src/diffviewer/ydiff.c:2946 src/editor/editcmd.c:2352
-#: src/editor/editcmd.c:2358 src/viewer/lib.c:155 src/viewer/lib.c:161
+#: src/diffviewer/ydiff.c:2946 src/editor/editcmd.c:2359
+#: src/editor/editcmd.c:2365 src/viewer/lib.c:155 src/viewer/lib.c:161
 msgid "Quit"
 msgstr "Saír"
 
-#: src/diffviewer/ydiff.c:2947 src/editor/editcmd.c:2352 src/viewer/lib.c:156
+#: src/diffviewer/ydiff.c:2947 src/editor/editcmd.c:2359 src/viewer/lib.c:156
 msgid "File was modified. Save with exit?"
 msgstr "O ficheiro foi modificado. Desexa gardalo ao saír?"
 
-#: src/diffviewer/ydiff.c:2948 src/editor/editcmd.c:2359 src/viewer/lib.c:162
+#: src/diffviewer/ydiff.c:2948 src/editor/editcmd.c:2366 src/viewer/lib.c:162
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
@@ -1584,16 +1606,16 @@ msgstr "«%s» non é un ficheiro regular"
 msgid "File \"%s\" is too large"
 msgstr "O ficheiro «%s» é demasiado grande"
 
-#: src/editor/edit.c:1531
+#: src/editor/edit.c:1535
 msgid "Macro recursion is too deep"
 msgstr "A macro é demasiado recursiva"
 
-#: src/editor/edit.c:1908
+#: src/editor/edit.c:1912
 #, c-format
 msgid "Error reading from pipe: %s"
 msgstr "Produciuse un erro ao ler da canalización: %s"
 
-#: src/editor/edit.c:1918
+#: src/editor/edit.c:1922
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Non é posíbel abrir canalización para lectura: %s"
@@ -1626,8 +1648,8 @@ msgid "The file you are saving is not finished with a newline"
 msgstr "O ficheiro a gardar non remata cun salto de liña"
 
 #: src/editor/editcmd.c:393 src/editor/editcmd.c:774 src/editor/editcmd.c:1650
-#: src/editor/editcmd.c:1672 src/editor/editcmd.c:1965
-#: src/editor/editcmd.c:3052 src/editor/editcmd.c:3092
+#: src/editor/editcmd.c:1672 src/editor/editcmd.c:1972
+#: src/editor/editcmd.c:3058 src/editor/editcmd.c:3098
 #: src/editor/editcmd_dialogs.c:520
 msgid "C&ontinue"
 msgstr "c&Ontinuar"
@@ -1653,7 +1675,7 @@ msgid "Change line breaks to:"
 msgstr "Cambiar saltos de liña por:"
 
 #: src/editor/editcmd.c:422 src/editor/editcmd.c:1681
-#: src/editor/editcmd.c:2560 src/editor/editcmd.c:2601
+#: src/editor/editcmd.c:2566 src/editor/editcmd.c:2607
 msgid "Enter file name:"
 msgstr "Escriba o nome do ficheiro:"
 
@@ -1688,30 +1710,30 @@ msgid "Which syntax file you want to edit?"
 msgstr "Que ficheiro de sintaxe desexa editar?"
 
 #: src/editor/editcmd.c:635 src/editor/editcmd.c:671
-#: src/filemanager/cmd.c:1016 src/filemanager/cmd.c:1052
-#: src/filemanager/cmd.c:1110
+#: src/filemanager/cmd.c:1015 src/filemanager/cmd.c:1051
+#: src/filemanager/cmd.c:1109
 msgid "&User"
 msgstr "&Usuario"
 
 #: src/editor/editcmd.c:635 src/editor/editcmd.c:671
-#: src/filemanager/cmd.c:1016 src/filemanager/cmd.c:1052
-#: src/filemanager/cmd.c:1110
+#: src/filemanager/cmd.c:1015 src/filemanager/cmd.c:1051
+#: src/filemanager/cmd.c:1109
 msgid "&System Wide"
 msgstr "Todo o &Sistema"
 
-#: src/editor/editcmd.c:669 src/filemanager/cmd.c:1050
+#: src/editor/editcmd.c:669 src/filemanager/cmd.c:1049
 msgid "Menu edit"
 msgstr "Editar menú"
 
-#: src/editor/editcmd.c:670 src/filemanager/cmd.c:1051
+#: src/editor/editcmd.c:670 src/filemanager/cmd.c:1050
 msgid "Which menu file do you want to edit?"
 msgstr "Que ficheiro de menú desexa editar?"
 
-#: src/editor/editcmd.c:671 src/filemanager/cmd.c:1052
+#: src/editor/editcmd.c:671 src/filemanager/cmd.c:1051
 msgid "&Local"
 msgstr "&Local"
 
-#: src/editor/editcmd.c:773 src/editor/editcmd.c:1964
+#: src/editor/editcmd.c:773 src/editor/editcmd.c:1971
 msgid "Block is large, you may not be able to undo this action"
 msgstr "O bloque é moi grande, pode que non se poida desfacer esta acción"
 
@@ -1747,7 +1769,7 @@ msgstr "s&Obrescribir"
 msgid "Save as"
 msgstr "Gardar como"
 
-#: src/editor/editcmd.c:1483 src/editor/editcmd.c:2582
+#: src/editor/editcmd.c:1483 src/editor/editcmd.c:2588
 msgid "Cannot save file"
 msgstr "Non é posíbel gardar o ficheiro"
 
@@ -1759,7 +1781,7 @@ msgstr "Gardar macro"
 msgid "Press the macro's new hotkey:"
 msgstr "Prema a nova tecla para a macro:"
 
-#: src/editor/editcmd.c:1546 src/editor/editcmd.c:3021
+#: src/editor/editcmd.c:1546 src/editor/editcmd.c:3027
 msgid "Press macro hotkey:"
 msgstr "Prema a tecla de macro:"
 
@@ -1794,154 +1816,154 @@ msgstr ""
 msgid "Load"
 msgstr "Cargar"
 
-#: src/editor/editcmd.c:2212 src/editor/editcmd.c:2251
-#: src/editor/editcmd.c:2262 src/editor/editcmd_dialogs.c:140
+#: src/editor/editcmd.c:2219 src/editor/editcmd.c:2258
+#: src/editor/editcmd.c:2269 src/editor/editcmd_dialogs.c:140
 msgid "Replace"
 msgstr "Substituír"
 
-#: src/editor/editcmd.c:2262
+#: src/editor/editcmd.c:2269
 #, c-format
 msgid "%ld replacements made"
 msgstr " %ld substitucións feitas"
 
-#: src/editor/editcmd.c:2353 src/viewer/lib.c:157
+#: src/editor/editcmd.c:2360 src/viewer/lib.c:157
 msgid "&Cancel quit"
 msgstr "&Cancelar saída"
 
-#: src/editor/editcmd.c:2445
+#: src/editor/editcmd.c:2452
 msgid "This function is not implemented"
 msgstr "Esa función non está implementada"
 
-#: src/editor/editcmd.c:2458
+#: src/editor/editcmd.c:2465
 msgid "Copy to clipboard"
 msgstr "Copiar ao portapapeis"
 
-#: src/editor/editcmd.c:2458 src/editor/editcmd.c:2478
+#: src/editor/editcmd.c:2465 src/editor/editcmd.c:2484
 msgid "Unable to save to file"
 msgstr "Non foi posíbel gardar o ficheiro"
 
-#: src/editor/editcmd.c:2478
+#: src/editor/editcmd.c:2484
 msgid "Cut to clipboard"
 msgstr "Cortar ao portapapeis"
 
-#: src/editor/editcmd.c:2519
+#: src/editor/editcmd.c:2525
 msgid "Goto line"
 msgstr "Ir á liña"
 
-#: src/editor/editcmd.c:2560 src/editor/editcmd.c:2582
+#: src/editor/editcmd.c:2566 src/editor/editcmd.c:2588
 msgid "Save block"
 msgstr "Gardar o bloque"
 
-#: src/editor/editcmd.c:2601 src/editor/editcmd.c:2623
+#: src/editor/editcmd.c:2607 src/editor/editcmd.c:2629
 msgid "Insert file"
 msgstr "Inserir ficheiro"
 
-#: src/editor/editcmd.c:2623
+#: src/editor/editcmd.c:2629
 msgid "Cannot insert file"
 msgstr "Non é posíbel inserir o ficheiro"
 
-#: src/editor/editcmd.c:2644
+#: src/editor/editcmd.c:2650
 msgid "Sort block"
 msgstr "Ordenar bloque"
 
-#: src/editor/editcmd.c:2644 src/editor/editcmd.c:2799
+#: src/editor/editcmd.c:2650 src/editor/editcmd.c:2805
 msgid "You must first highlight a block of text"
 msgstr "É necesario seleccionar primeiro un bloque de texto"
 
-#: src/editor/editcmd.c:2652
+#: src/editor/editcmd.c:2658
 msgid "Run sort"
 msgstr "Proceder a ordenar"
 
-#: src/editor/editcmd.c:2653
+#: src/editor/editcmd.c:2659
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr "Opcións para ordenar (ver manual), separadas por espazos:"
 
-#: src/editor/editcmd.c:2668 src/editor/editcmd.c:2675
+#: src/editor/editcmd.c:2674 src/editor/editcmd.c:2681
 msgid "Sort"
 msgstr "Ordenar"
 
-#: src/editor/editcmd.c:2668
+#: src/editor/editcmd.c:2674
 msgid "Cannot execute sort command"
 msgstr "Non foi posíbel executar «ordenar»"
 
-#: src/editor/editcmd.c:2674
+#: src/editor/editcmd.c:2680
 #, c-format
 msgid "Sort returned non-zero: %s"
 msgstr "«Ordenar» devolveu un erro (non cero): %s"
 
-#: src/editor/editcmd.c:2704
+#: src/editor/editcmd.c:2710
 msgid "Paste output of external command"
 msgstr "Pegar a saída dunha orde externa"
 
-#: src/editor/editcmd.c:2705
+#: src/editor/editcmd.c:2711
 msgid "Enter shell command(s):"
 msgstr "Orde(s) a executar:"
 
-#: src/editor/editcmd.c:2717
+#: src/editor/editcmd.c:2723
 msgid "External command"
 msgstr "Orde externa"
 
-#: src/editor/editcmd.c:2717
+#: src/editor/editcmd.c:2723
 msgid "Cannot execute command"
 msgstr "Non é posíbel executar a orde"
 
-#: src/editor/editcmd.c:2755
+#: src/editor/editcmd.c:2761
 msgid "Error creating script:"
 msgstr "Produciuse un erro ao crear o script:"
 
-#: src/editor/editcmd.c:2770
+#: src/editor/editcmd.c:2776
 msgid "Error reading script:"
 msgstr "Produciuse un erro ao ler o script:"
 
-#: src/editor/editcmd.c:2782
+#: src/editor/editcmd.c:2788
 msgid "Error closing script:"
 msgstr "Produciuse un erro ao pechar o script:"
 
-#: src/editor/editcmd.c:2788
+#: src/editor/editcmd.c:2794
 msgid "Script created:"
 msgstr "Script creado:"
 
-#: src/editor/editcmd.c:2799 src/editor/editcmd.c:2829
+#: src/editor/editcmd.c:2805 src/editor/editcmd.c:2835
 msgid "Process block"
 msgstr "Proceso de bloque"
 
-#: src/editor/editcmd.c:2829
+#: src/editor/editcmd.c:2835
 msgid "Error calling program"
 msgstr "Produciuse un erro ao chamar ao programa"
 
-#: src/editor/editcmd.c:2891
+#: src/editor/editcmd.c:2897
 msgid "Copies to"
 msgstr "Enviar copias a"
 
-#: src/editor/editcmd.c:2894
+#: src/editor/editcmd.c:2900
 msgid "Subject"
 msgstr "Asunto"
 
-#: src/editor/editcmd.c:2896
+#: src/editor/editcmd.c:2902
 msgid "To"
 msgstr "Para"
 
-#: src/editor/editcmd.c:2897
+#: src/editor/editcmd.c:2903
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "correo -s <asunto> -c <cc> <para>"
 
-#: src/editor/editcmd.c:2902
+#: src/editor/editcmd.c:2908
 msgid "Mail"
 msgstr "Correo-e"
 
-#: src/editor/editcmd.c:3010
+#: src/editor/editcmd.c:3016
 msgid "Insert literal"
 msgstr "Inserir literalmente"
 
-#: src/editor/editcmd.c:3011
+#: src/editor/editcmd.c:3017
 msgid "Press any key:"
 msgstr "Prema calquera tecla:"
 
-#: src/editor/editcmd.c:3021
+#: src/editor/editcmd.c:3027
 msgid "Execute macro"
 msgstr "Executar macro"
 
-#: src/editor/editcmd.c:3051 src/editor/editcmd.c:3091
+#: src/editor/editcmd.c:3057 src/editor/editcmd.c:3097
 msgid ""
 "Current text was modified without a file save\n"
 "Continue discards these changes"
@@ -1974,11 +1996,11 @@ msgstr ""
 "Continuar debotará estes cambios."
 
 #: src/editor/editcmd_dialogs.c:587 src/filemanager/file.c:456
-#: src/filemanager/file.c:1077 src/filemanager/filegui.c:529
+#: src/filemanager/file.c:1072 src/filemanager/filegui.c:529
 msgid "&Skip"
 msgstr "&Omitir"
 
-#: src/editor/editcmd_dialogs.c:588 src/filemanager/file.c:1132
+#: src/editor/editcmd_dialogs.c:588 src/filemanager/file.c:1127
 #: src/filemanager/filegui.c:324
 msgid "A&ll"
 msgstr "&Todos"
@@ -2059,7 +2081,7 @@ msgstr "c&Opiar"
 msgid "Mo&ve"
 msgstr "Mo&Ver"
 
-#: src/editor/editmenu.c:106 src/filemanager/file.c:1569
+#: src/editor/editmenu.c:106 src/filemanager/file.c:1564
 #: src/filemanager/midnight.c:253
 msgid "&Delete"
 msgstr "&Eliminar"
@@ -2811,7 +2833,7 @@ msgstr "Escriba o nome da máquina (F1 para máis detalles):"
 msgid "Files tagged, want to cd?"
 msgstr "Hai ficheiros marcados. Quere cambiar de directorio?"
 
-#: src/filemanager/cmd.c:167 src/filemanager/cmd.c:1170
+#: src/filemanager/cmd.c:167 src/filemanager/cmd.c:1169
 #: src/filemanager/panel.c:2237 src/filemanager/panel.c:2721
 msgid "Cannot change directory"
 msgstr "Non é posíbel cambiar de directorio"
@@ -2856,7 +2878,7 @@ msgstr "ligar: %s"
 msgid "symlink: %s"
 msgstr "ligazón simbólica: %s"
 
-#: src/filemanager/cmd.c:510 src/filemanager/panel.c:3980
+#: src/filemanager/cmd.c:510 src/filemanager/panel.c:3979
 #, c-format
 msgid "Cannot chdir to \"%s\""
 msgstr "Non é posíbel cambiar ao directorio «%s» "
@@ -2885,51 +2907,51 @@ msgstr "Crear un novo directorio"
 msgid "Enter directory name:"
 msgstr "Introduza nome do directorio:"
 
-#: src/filemanager/cmd.c:991
+#: src/filemanager/cmd.c:990
 msgid "Select"
 msgstr "Seleccionar"
 
-#: src/filemanager/cmd.c:999
+#: src/filemanager/cmd.c:998
 msgid "Unselect"
 msgstr "Desmarcar"
 
-#: src/filemanager/cmd.c:1014
+#: src/filemanager/cmd.c:1013
 msgid "Extension file edit"
 msgstr "Editar o ficheiro de extensións "
 
-#: src/filemanager/cmd.c:1015
+#: src/filemanager/cmd.c:1014
 msgid "Which extension file you want to edit?"
 msgstr "Que ficheiro de extensión desexa editar?"
 
-#: src/filemanager/cmd.c:1108
+#: src/filemanager/cmd.c:1107
 msgid "Highlighting groups file edit"
 msgstr "Editar resaltes de cor do grupo"
 
-#: src/filemanager/cmd.c:1109
+#: src/filemanager/cmd.c:1108
 msgid "Which highlighting file you want to edit?"
 msgstr "Que ficheiro de resaltes desexa editar?"
 
-#: src/filemanager/cmd.c:1184
+#: src/filemanager/cmd.c:1183
 msgid "Compare directories"
 msgstr "Comparar directorios "
 
-#: src/filemanager/cmd.c:1185
+#: src/filemanager/cmd.c:1184
 msgid "Select compare method:"
 msgstr "Seleccione o método de comparación:"
 
-#: src/filemanager/cmd.c:1186
+#: src/filemanager/cmd.c:1185
 msgid "&Quick"
 msgstr "&Rápido"
 
-#: src/filemanager/cmd.c:1186
+#: src/filemanager/cmd.c:1185
 msgid "&Size only"
 msgstr "&Só Tamaño"
 
-#: src/filemanager/cmd.c:1186
+#: src/filemanager/cmd.c:1185
 msgid "&Thorough"
 msgstr "Comple&To"
 
-#: src/filemanager/cmd.c:1201
+#: src/filemanager/cmd.c:1200
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
@@ -2937,7 +2959,7 @@ msgstr ""
 "Ambos os dous paneis deben estar en modo lista\n"
 "para usar esta orde "
 
-#: src/filemanager/cmd.c:1250
+#: src/filemanager/cmd.c:1249
 msgid ""
 "Not an xterm or Linux console;\n"
 "the panels cannot be toggled."
@@ -2945,47 +2967,47 @@ msgstr ""
 "Non se está usando nin xterm nin a consola Linux;\n"
 "os paneis non se poden agochar."
 
-#: src/filemanager/cmd.c:1284
+#: src/filemanager/cmd.c:1283
 #, c-format
 msgid "Symlink `%s' points to:"
 msgstr "A ligazón simbólica «%s» apunta a:"
 
-#: src/filemanager/cmd.c:1290
+#: src/filemanager/cmd.c:1289
 msgid "Edit symlink"
 msgstr "Editar ligazón simbólica"
 
-#: src/filemanager/cmd.c:1298
+#: src/filemanager/cmd.c:1297
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
 msgstr "edite a ligazón simbólica, non é posíbel eliminar %s: %s"
 
-#: src/filemanager/cmd.c:1304
+#: src/filemanager/cmd.c:1303
 #, c-format
 msgid "edit symlink: %s"
 msgstr "editar ligazón simbólica: %s"
 
-#: src/filemanager/cmd.c:1317
+#: src/filemanager/cmd.c:1316
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "«%s» non é unha ligazón simbólica"
 
-#: src/filemanager/cmd.c:1406
+#: src/filemanager/cmd.c:1405
 msgid "FTP to machine"
 msgstr "Conexión por FTP"
 
-#: src/filemanager/cmd.c:1417
+#: src/filemanager/cmd.c:1416
 msgid "Shell link to machine"
 msgstr "Conexión por shell"
 
-#: src/filemanager/cmd.c:1429
+#: src/filemanager/cmd.c:1428
 msgid "SMB link to machine"
 msgstr "Conexión por SMB"
 
-#: src/filemanager/cmd.c:1441
+#: src/filemanager/cmd.c:1440
 msgid "Undelete files on an ext2 file system"
 msgstr "Recuperar ficheiros dun sistema de ficheiros ext2"
 
-#: src/filemanager/cmd.c:1442
+#: src/filemanager/cmd.c:1441
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
@@ -2993,11 +3015,11 @@ msgstr ""
 "Introduza o dispositivo (sen /dev/) onde quere\n"
 "recuperar ficheiros: (F1 para máis detalles)"
 
-#: src/filemanager/cmd.c:1570
+#: src/filemanager/cmd.c:1569
 msgid "Setup"
 msgstr "Configuración"
 
-#: src/filemanager/cmd.c:1570
+#: src/filemanager/cmd.c:1569
 #, c-format
 msgid "Setup saved to ~/%s"
 msgstr "Configuración gardada en ~/%s"
@@ -3053,7 +3075,7 @@ msgstr "Produciuse un erro no ficheiro ~/%s"
 msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr "O formato do ficheiro ~/%s cambiou coa versión 3.0. Pode facer unha copia de %smc.ext ou ben empregalo como modelo."
 
-#: src/filemanager/file.c:87 src/filemanager/file.c:1567
+#: src/filemanager/file.c:87 src/filemanager/file.c:1562
 #: src/filemanager/tree.c:746
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Copiar"
@@ -3155,13 +3177,13 @@ msgstr ""
 "Non é posíbel crear a ligazón simbólica «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:456 src/filemanager/file.c:1077
-#: src/filemanager/file.c:1132 src/filemanager/file.c:2040
+#: src/filemanager/file.c:456 src/filemanager/file.c:1072
+#: src/filemanager/file.c:1127 src/filemanager/file.c:2035
 #: src/filemanager/filegui.c:316 src/filemanager/filegui.c:528
 msgid "&Abort"
 msgstr "&Interromper"
 
-#: src/filemanager/file.c:565
+#: src/filemanager/file.c:560
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -3170,7 +3192,7 @@ msgstr ""
 "Non é posíbel identificar o ficheiro «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:573 src/filemanager/file.c:1301
+#: src/filemanager/file.c:568 src/filemanager/file.c:1296
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -3183,12 +3205,12 @@ msgstr ""
 "«%s»\n"
 "son o mesmo ficheiro "
 
-#: src/filemanager/file.c:577
+#: src/filemanager/file.c:572
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Non é posíbel sobrescribir o directorio «%s»"
 
-#: src/filemanager/file.c:615
+#: src/filemanager/file.c:610
 #, c-format
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
@@ -3197,7 +3219,7 @@ msgstr ""
 "Non é posíbel mover o ficheiro «%s» a «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:644
+#: src/filemanager/file.c:639
 #, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
@@ -3206,7 +3228,7 @@ msgstr ""
 "Non é posíbel eliminar o ficheiro «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:682
+#: src/filemanager/file.c:677
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
@@ -3215,8 +3237,8 @@ msgstr ""
 "Non é posíbel eliminar o ficheiro «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:741 src/filemanager/file.c:800
-#: src/filemanager/file.c:2022
+#: src/filemanager/file.c:736 src/filemanager/file.c:795
+#: src/filemanager/file.c:2017
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
@@ -3225,11 +3247,11 @@ msgstr ""
 "Non é posíbel eliminar o directorio «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1077 src/viewer/hex.c:392
+#: src/filemanager/file.c:1072 src/viewer/hex.c:392
 msgid "&Retry"
 msgstr "&Reintentar"
 
-#: src/filemanager/file.c:1123
+#: src/filemanager/file.c:1118
 msgid ""
 "\n"
 "Directory not empty.\n"
@@ -3239,7 +3261,7 @@ msgstr ""
 "O directorio non esta baleiro.\n"
 "Desexa borralo recursivamente?"
 
-#: src/filemanager/file.c:1124
+#: src/filemanager/file.c:1119
 msgid ""
 "\n"
 "Background process: Directory not empty.\n"
@@ -3249,15 +3271,15 @@ msgstr ""
 "Proceso en 2º plano: O directorio non esta baleiro.\n"
 "Desexa borralo recursivamente?"
 
-#: src/filemanager/file.c:1125
+#: src/filemanager/file.c:1120
 msgid "Delete:"
 msgstr "Eliminar:"
 
-#: src/filemanager/file.c:1132 src/filemanager/filegui.c:320
+#: src/filemanager/file.c:1127 src/filemanager/filegui.c:320
 msgid "Non&e"
 msgstr "Nin&Gún"
 
-#: src/filemanager/file.c:1281
+#: src/filemanager/file.c:1276
 #, c-format
 msgid ""
 "Cannot overwrite directory\"%s\"\n"
@@ -3266,7 +3288,7 @@ msgstr ""
 "Non é posíbel sobrescribir o directorio «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1292
+#: src/filemanager/file.c:1287
 #, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
@@ -3275,7 +3297,7 @@ msgstr ""
 "Non é posíbel identificar o ficheiro orixe «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1329
+#: src/filemanager/file.c:1324
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -3284,7 +3306,7 @@ msgstr ""
 "Non é posíbel crear o ficheiro especial «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1338 src/filemanager/file.c:1580
+#: src/filemanager/file.c:1333 src/filemanager/file.c:1575
 #, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
@@ -3293,7 +3315,7 @@ msgstr ""
 "Non é posíbel cambiar o propietario do ficheiro destino: «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1345 src/filemanager/file.c:1594
+#: src/filemanager/file.c:1340 src/filemanager/file.c:1589
 #, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
@@ -3302,7 +3324,7 @@ msgstr ""
 "Non é posíbel cambiar os permisos do ficheiro destino «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1358
+#: src/filemanager/file.c:1353
 #, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
@@ -3311,11 +3333,11 @@ msgstr ""
 "Non é posíbel abrir o ficheiro orixe «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1369
+#: src/filemanager/file.c:1364
 msgid "Reget failed, about to overwrite file"
 msgstr "Fallou o reintento, vaise a sobrescribir o ficheiro"
 
-#: src/filemanager/file.c:1377
+#: src/filemanager/file.c:1372
 #, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
@@ -3324,7 +3346,7 @@ msgstr ""
 "Non é posíbel identificar o ficheiro orixe «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1408
+#: src/filemanager/file.c:1403
 #, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
@@ -3333,7 +3355,7 @@ msgstr ""
 "Non é posíbel crear o ficheiro destino «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1422
+#: src/filemanager/file.c:1417
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
@@ -3342,7 +3364,7 @@ msgstr ""
 "Non é posíbel identificar o ficheiro destino «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1458
+#: src/filemanager/file.c:1453
 #, c-format
 msgid ""
 "Cannot read source file\"%s\"\n"
@@ -3351,7 +3373,7 @@ msgstr ""
 "Non é posíbel ler o ficheiro orixe «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1490
+#: src/filemanager/file.c:1485
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
@@ -3360,11 +3382,11 @@ msgstr ""
 "Non é posíbel escribir o ficheiro destino «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1509
+#: src/filemanager/file.c:1504
 msgid "(stalled)"
 msgstr "(atoado)"
 
-#: src/filemanager/file.c:1546
+#: src/filemanager/file.c:1541
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -3373,7 +3395,7 @@ msgstr ""
 "Non é posíbel pechar o ficheiro orixe «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1556
+#: src/filemanager/file.c:1551
 #, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
@@ -3382,15 +3404,15 @@ msgstr ""
 "Non é posíbel pechar o ficheiro destino «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1568
+#: src/filemanager/file.c:1563
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "O ficheiro esta incompleto. Desexa conservalo?"
 
-#: src/filemanager/file.c:1569
+#: src/filemanager/file.c:1564
 msgid "&Keep"
 msgstr "&Manter"
 
-#: src/filemanager/file.c:1646
+#: src/filemanager/file.c:1641
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
@@ -3399,7 +3421,7 @@ msgstr ""
 "Non é posíbel identificar o directorio de orixe «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1673
+#: src/filemanager/file.c:1668
 #, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
@@ -3408,7 +3430,7 @@ msgstr ""
 "A orixe «%s» non é un directorio\n"
 "%s"
 
-#: src/filemanager/file.c:1682
+#: src/filemanager/file.c:1677
 #, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
@@ -3417,7 +3439,7 @@ msgstr ""
 "Non é posíbel copiar unha ligazón simbólica cíclica\n"
 "«%s»"
 
-#: src/filemanager/file.c:1722 src/filemanager/file.c:2519
+#: src/filemanager/file.c:1717 src/filemanager/file.c:2514
 #: src/filemanager/tree.c:802
 #, c-format
 msgid ""
@@ -3427,7 +3449,7 @@ msgstr ""
 "O destino «%s» debe ser un directorio\n"
 "%s"
 
-#: src/filemanager/file.c:1741
+#: src/filemanager/file.c:1736
 #, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
@@ -3436,7 +3458,7 @@ msgstr ""
 "Non é posíbel crear o directorio destino «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1758
+#: src/filemanager/file.c:1753
 #, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
@@ -3445,7 +3467,7 @@ msgstr ""
 "Non é posíbel cambiar os permisos do directorio destino «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1889
+#: src/filemanager/file.c:1884
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -3458,7 +3480,7 @@ msgstr ""
 "«%s»\n"
 "son o mesmo directorio"
 
-#: src/filemanager/file.c:1916
+#: src/filemanager/file.c:1911
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
@@ -3467,7 +3489,7 @@ msgstr ""
 "Non é posíbel sobrescribir o directorio «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1918
+#: src/filemanager/file.c:1913
 #, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
@@ -3476,7 +3498,7 @@ msgstr ""
 "Non é posíbel sobrescribir o ficheiro «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:1935
+#: src/filemanager/file.c:1930
 #, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
@@ -3485,15 +3507,15 @@ msgstr ""
 "Non é posíbel mover o directorio «%s» a «%s»\n"
 "%s"
 
-#: src/filemanager/file.c:2049
+#: src/filemanager/file.c:2044
 msgid "Directory scanning"
 msgstr "Examinando directorio"
 
-#: src/filemanager/file.c:2278
+#: src/filemanager/file.c:2273
 msgid "Cannot operate on \"..\"!"
 msgstr "Non é posíbel operar sobre «..»!"
 
-#: src/filemanager/file.c:2402
+#: src/filemanager/file.c:2397
 msgid "Sorry, I could not put the job in background"
 msgstr "Síntoo, non se puido pór a tarefa en 2º plano"
 
@@ -3571,7 +3593,7 @@ msgstr "Proceso en 2º plano: O ficheiro xa existe"
 #: src/filemanager/filegui.c:724
 #, c-format
 msgid "Files processed: %zu of %zu"
-msgstr ""
+msgstr "Ficheiros procesados: %zu de %zu"
 
 #: src/filemanager/filegui.c:763
 #, c-format
@@ -3675,7 +3697,7 @@ msgstr "&Todos os xogos de caracteres"
 
 #: src/filemanager/find.c:486
 msgid "Sea&rch for content"
-msgstr ""
+msgstr "Buscar por co&Ntido"
 
 #: src/filemanager/find.c:487
 msgid "Case sens&itive"
@@ -3691,7 +3713,7 @@ msgstr "&Primeira coincidencia"
 
 #: src/filemanager/find.c:492
 msgid "A&ll charsets"
-msgstr ""
+msgstr "@"
 
 #: src/filemanager/find.c:495 src/filemanager/midnight.c:202
 msgid "&Tree"
@@ -4648,7 +4670,7 @@ msgstr "Etiqueta descoñecida no formato de pantalla: "
 msgid "Do you really want to execute?"
 msgstr "Realmente quere executalo? "
 
-#: src/filemanager/panel.c:3707
+#: src/filemanager/panel.c:3706
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "O formato semella non ser correcto. Recuperando o predeterminado."
 
@@ -4980,15 +5002,17 @@ msgstr "Coidado: Non é posíbel cambiar a %s.\n"
 
 #: src/textconf.c:74
 msgid "Using the S-Lang library with terminfo database\n"
-msgstr ""
+msgstr "Empregando a biblioteca S-Lang coa base de datos terminfo\n"
 
 #: src/textconf.c:76
 msgid "Using the ncurses library\n"
-msgstr ""
+msgstr "Empregando a biblioteca ncurses\n"
 
 #: src/textconf.c:78
 msgid "Using the ncursesw library\n"
 msgstr ""
+"Empregando a biblioteca ncursesw\n"
+"\n"
 
 #: src/textconf.c:84
 msgid "With builtin Editor\n"
@@ -4996,11 +5020,11 @@ msgstr "Editor de texto propio incluído\n"
 
 #: src/textconf.c:89
 msgid "With optional subshell support\n"
-msgstr ""
+msgstr "Con compatibilidade opcional coa subterminal\n"
 
 #: src/textconf.c:91
 msgid "With subshell support as default\n"
-msgstr ""
+msgstr "Con compatibilidade predeterminada coa subterminal\n"
 
 #: src/textconf.c:96
 msgid "With support for background operations\n"
@@ -5029,7 +5053,7 @@ msgstr "Compatibilidade para cambio de xogos de caracteres\n"
 #: src/textconf.c:134
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
-msgstr ""
+msgstr "Construido con GLib %d.%d.%d\n"
 
 #: src/textconf.c:141
 #, c-format
