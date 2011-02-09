@@ -39,7 +39,7 @@
 
 #define MEDATA ((struct vfs_s_subclass *) me->data)
 
-#define FH ((struct vfs_s_fh *) fh)
+#define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super
 
 #define LS_NOT_LINEAR 0
@@ -90,7 +90,7 @@ struct vfs_s_inode
 };
 
 /* Data associated with an open file */
-struct vfs_s_fh
+typedef struct
 {
     struct vfs_s_inode *ino;
     off_t pos;                  /* This is for module's use */
@@ -98,7 +98,7 @@ struct vfs_s_fh
     int changed;                /* Did this file change? */
     int linear;                 /* Is that file open with O_LINEAR? */
     void *data;                 /* This is for filesystem-specific use */
-};
+} vfs_file_handler_t;
 
 /*
  * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
@@ -124,19 +124,19 @@ struct vfs_s_subclass
                          const char *archive_name, char *op);
     void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);
 
-    int (*fh_open) (struct vfs_class * me, struct vfs_s_fh * fh, int flags, mode_t mode);
-    int (*fh_close) (struct vfs_class * me, struct vfs_s_fh * fh);
+    int (*fh_open) (struct vfs_class * me, vfs_file_handler_t * fh, int flags, mode_t mode);
+    int (*fh_close) (struct vfs_class * me, vfs_file_handler_t * fh);
 
     struct vfs_s_entry *(*find_entry) (struct vfs_class * me,
                                        struct vfs_s_inode * root,
                                        const char *path, int follow, int flags);
     int (*dir_load) (struct vfs_class * me, struct vfs_s_inode * ino, char *path);
     int (*dir_uptodate) (struct vfs_class * me, struct vfs_s_inode * ino);
-    int (*file_store) (struct vfs_class * me, struct vfs_s_fh * fh, char *path, char *localname);
+    int (*file_store) (struct vfs_class * me, vfs_file_handler_t * fh, char *path, char *localname);
 
-    int (*linear_start) (struct vfs_class * me, struct vfs_s_fh * fh, off_t from);
-    int (*linear_read) (struct vfs_class * me, struct vfs_s_fh * fh, void *buf, size_t len);
-    void (*linear_close) (struct vfs_class * me, struct vfs_s_fh * fh);
+    int (*linear_start) (struct vfs_class * me, vfs_file_handler_t * fh, off_t from);
+    int (*linear_read) (struct vfs_class * me, vfs_file_handler_t * fh, void *buf, size_t len);
+    void (*linear_close) (struct vfs_class * me, vfs_file_handler_t * fh);
 };
 
 /*** global variables defined in .c file *********************************************************/

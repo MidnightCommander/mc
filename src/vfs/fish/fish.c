@@ -865,7 +865,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localname)
+fish_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char *localname)
 {
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
     gchar *shell_commands = NULL;
@@ -991,7 +991,7 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
+fish_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
 {
     fish_fh_data_t *fish;
     gchar *shell_commands = NULL;
@@ -1042,7 +1042,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
+fish_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
     struct vfs_s_super *super = FH_SUPER;
@@ -1072,7 +1072,7 @@ fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t len)
+fish_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size_t len)
 {
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
     struct vfs_s_super *super = FH_SUPER;
@@ -1101,7 +1101,7 @@ fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t l
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-fish_linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
+fish_linear_close (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
 
@@ -1408,7 +1408,7 @@ fish_rmdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
+fish_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
 {
     fish_fh_data_t *fish;
 
@@ -1445,7 +1445,7 @@ fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_fh_close (struct vfs_class *me, struct vfs_s_fh *fh)
+fish_fh_close (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     (void) me;
 

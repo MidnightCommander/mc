@@ -762,7 +762,7 @@ vfs_s_ferrno (struct vfs_class *me)
 static char *
 vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
 {
-    struct vfs_s_fh *fh;
+    vfs_file_handler_t *fh;
     char *local = NULL;
 
     fh = vfs_s_open (me, path, O_RDONLY, 0);
@@ -1137,7 +1137,7 @@ void *
 vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 {
     int was_changed = 0;
-    struct vfs_s_fh *fh;
+    vfs_file_handler_t *fh;
     struct vfs_s_super *super;
     char *q;
     struct vfs_s_inode *ino;
@@ -1192,7 +1192,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     if (S_ISDIR (ino->st.st_mode))
         ERRNOR (EISDIR, NULL);
 
-    fh = g_new (struct vfs_s_fh, 1);
+    fh = g_new (vfs_file_handler_t, 1);
     fh->pos = 0;
     fh->ino = ino;
     fh->handle = -1;
@@ -1240,7 +1240,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     char buffer[8192];
     int handle, n;
     off_t stat_size = ino->st.st_size;
-    struct vfs_s_fh fh;
+    vfs_file_handler_t fh;
 
     memset (&fh, 0, sizeof (fh));
 

@@ -814,7 +814,7 @@ cpio_read (void *fh, char *buffer, size_t count)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-cpio_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
+cpio_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
 {
     (void) mode;
 

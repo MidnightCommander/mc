@@ -1413,7 +1413,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ftpfs_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
+ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     struct vfs_s_super *super = FH_SUPER;
     static unsigned char const ipbuf[3] = { IAC, IP, IAC };
@@ -1786,7 +1786,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localname)
+ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char *localname)
 {
     int h, sock, n_read, n_written;
     off_t n_stored;
@@ -1877,7 +1877,7 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *l
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
+ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
 {
     char *name;
 
@@ -1900,7 +1900,7 @@ ftpfs_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t len)
+ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size_t len)
 {
     ssize_t n;
     struct vfs_s_super *super = FH_SUPER;
@@ -1930,7 +1930,7 @@ ftpfs_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, size_t 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ftpfs_linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
+ftpfs_linear_close (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     if (FH_SOCK != -1)
         ftpfs_linear_abort (me, fh);
@@ -2113,7 +2113,7 @@ ftpfs_rmdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
+ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
 {
     ftp_fh_data_t *ftp;
 
@@ -2187,7 +2187,7 @@ ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_fh_close (struct vfs_class *me, struct vfs_s_fh *fh)
+ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     if (fh->handle != -1 && !fh->ino->localname)
     {
