@@ -73,7 +73,7 @@ mc_event_add (const gchar * event_group_name, const gchar * event_name,
         || event_callback == NULL)
     {
         g_propagate_error (mcerror,
-                           g_error_new (mc_main_error_quark (), 1,
+                           g_error_new (MC_ERROR, 1,
                                         _("Check input data! Some of parameters are NULL!")));
         return FALSE;
     }
@@ -171,7 +171,7 @@ mc_event_get_event_group_by_name (const gchar * event_group_name, gboolean creat
         if (event_group == NULL)
         {
             g_propagate_error (mcerror,
-                               g_error_new (mc_main_error_quark (), 1,
+                               g_error_new (MC_ERROR, 1,
                                             _("Unable to create group '%s' for events!"),
                                             event_group_name));
             return NULL;
@@ -196,7 +196,7 @@ mc_event_get_event_by_name (GTree * event_group, const gchar * event_name, gbool
         if (callbacks == NULL)
         {
             g_propagate_error (mcerror,
-                               g_error_new (mc_main_error_quark (), 1,
+                               g_error_new (MC_ERROR, 1,
                                             _("Unable to create event '%s'!"), event_name));
             return NULL;
         }

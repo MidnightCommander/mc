@@ -268,15 +268,6 @@ init_sigchld (void)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** Define this function for glib-style error handling */
-GQuark
-mc_main_error_quark (void)
-{
-    return g_quark_from_static_string (PACKAGE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 int
 do_cd (const char *new_dir, enum cd_enum exact)
 {

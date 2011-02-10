@@ -141,7 +141,7 @@
 #include <assert.h>
 #endif
 
-#define MC_ERROR mc_main_error_quark ()
+#define MC_ERROR g_quark_from_static_string (PACKAGE)
 
 /*** enums ***************************************************************************************/
 
@@ -268,7 +268,6 @@ extern mc_global_t mc_global;
 /*** declarations of public functions ************************************************************/
 
 void refresh_screen (void *);
-GQuark mc_main_error_quark (void);
 
 /*** inline functions ****************************************************************************/
 #endif
