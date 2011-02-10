@@ -145,9 +145,125 @@
 
 /*** enums ***************************************************************************************/
 
+/* run mode and params */
+typedef enum
+{
+    MC_RUN_FULL = 0,
+    MC_RUN_EDITOR,
+    MC_RUN_VIEWER,
+    MC_RUN_DIFFVIEWER
+} mc_run_mode_t;
+
 /*** structures declarations (and typedefs of structures)*****************************************/
 
+typedef struct
+{
+#ifdef WITH_BACKGROUND
+    /* If true, this is a background process */
+    int we_are_background;
+#endif                          /* WITH_BACKGROUND */
+
+    /*
+     * If utf-8 terminal utf8_display = 1
+     * Display bits set UTF-8
+     */
+    int utf8_display;
+
+    /* Set if the nice message (hint) bar is visible */
+    int message_visible;
+
+    /* Set if the nice and useful keybar is visible */
+    int keybar_visible;
+
+    mc_run_mode_t mc_run_mode;
+
+#ifdef HAVE_CHARSET
+    /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
+    int source_codepage;
+    int display_codepage;
+#else
+    /* If true, allow characters in the range 160-255 */
+    int eight_bit_clean;
+    /*
+     * If true, also allow characters in the range 128-159.
+     * This is reported to break on many terminals (xterm, qansi-m).
+     */
+    int full_eight_bits;
+#endif                          /* !HAVE_CHARSET */
+
+    /* sysconfig_dir: Area for default settings from maintainers of distributuves
+       default is /etc/mc or may be defined by MC_DATADIR
+     */
+    char *sysconfig_dir;
+
+    /* share_data_dir: Area for default settings from developers */
+    char *share_data_dir;
+
+    struct
+    {
+        /* Use the specified skin */
+        char *skin;
+
+        /* Set to force black and white display at program startup */
+        gboolean disable_colors;
+
+        /* If true use +, -, | for line drawing */
+        gboolean ugly_line_drawing;
+
+        /* For slow terminals */
+        gboolean slow_terminal;
+
+    } args;
+
+    struct
+    {
+        /* Used so that widgets know if they are being destroyed or shut down */
+        gboolean midnight_shutdown;
+
+        /* Asks for confirmation before clean up of history */
+        gboolean confirm_history_cleanup;
+
+        /* Set if you want the possible completions dialog for the first time */
+        gboolean show_all_if_ambiguous;
+
+    } widget;
+
+    struct
+    {
+        char *setup_color_string;
+        char *term_color_string;
+        char *color_terminal_string;
+
+        /* Set if the window has changed it's size */
+        gboolean winch_flag;
+
+#ifndef LINUX_CONS_SAVER_C
+        /* Used only in mc, not in cons.saver */
+        char console_flag;
+#endif                          /* !LINUX_CONS_SAVER_C */
+        /* If using a subshell for evaluating commands this is true */
+        gboolean use_subshell;
+#ifdef HAVE_SUBSHELL_SUPPORT
+        /* File descriptors of the pseudoterminal used by the subshell */
+        int subshell_pty;
+#endif                          /* !HAVE_SUBSHELL_SUPPORT */
+
+        /* colors specified on the command line: they override any other setting */
+        char *command_line_colors;
+
+    } tty;
+
+    struct
+    {
+        /* Set when cd symlink following is desirable (bash mode) */
+        gboolean cd_symlinks;
+    } vfs;
+
+} mc_global_t;
+
 /*** global variables defined in .c file *********************************************************/
+
+extern mc_global_t mc_global;
 
 /*** declarations of public functions ************************************************************/
 

@@ -35,12 +35,6 @@ enum
 
 /*** global variables defined in .c file *********************************************************/
 
-/* If using a subshell for evaluating commands this is true */
-extern int use_subshell;
-
-/* File descriptor of the pseudoterminal used by the subshell */
-extern int subshell_pty;
-
 extern enum subshell_state_enum subshell_state;
 
 /* Holds the latest prompt captured from the subshell */
@@ -60,8 +54,6 @@ void do_subshell_chdir (const char *directory, gboolean update_prompt, gboolean 
 void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
 
-#else /* not HAVE_SUBSHELL_SUPPORT */
-#define use_subshell 0
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
 /*** inline functions ****************************************************************************/

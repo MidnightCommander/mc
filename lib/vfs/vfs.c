@@ -58,7 +58,6 @@
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
-#include "src/setup.h"          /* cd_symlinks */
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -413,7 +412,7 @@ _vfs_get_cwd (void)
                 {
                     struct stat my_stat, my_stat2;
                     /* Check if it is O.K. to use the current_dir */
-                    if (cd_symlinks
+                    if (mc_global.vfs.cd_symlinks
                         && mc_stat (sys_cwd, &my_stat) == 0
                         && mc_stat (current_dir, &my_stat2) == 0
                         && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev)

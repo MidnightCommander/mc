@@ -37,8 +37,6 @@
 #include "color.h"              /* variables */
 #include "color-internal.h"
 
-#include "src/setup.h"          /* color_terminal_string */
-
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
@@ -63,11 +61,11 @@ has_colors (gboolean disable, gboolean force)
         const char *terminal = getenv ("TERM");
         const size_t len = strlen (terminal);
 
-        char *cts = color_terminal_string;
+        char *cts = mc_global.tty.color_terminal_string;
         char *s;
         size_t i;
 
-        /* check color_terminal_string */
+        /* check mc_global.tty.color_terminal_string */
         while (*cts != '\0')
         {
             while (*cts == ' ' || *cts == '\t')

@@ -29,9 +29,6 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-/* colors specified on the command line: they override any other setting */
-extern char *command_line_colors;
-
 /*** declarations of public functions ************************************************************/
 
 void tty_init_colors (gboolean disable, gboolean force);

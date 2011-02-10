@@ -46,7 +46,6 @@
 
 /* TODO: these includes should be removed! */
 #include "src/keybind-defaults.h"       /* listbox_map */
-#include "src/setup.h"          /* confirm_history_cleanup */
 
 /*** global variables ****************************************************************************/
 
@@ -269,7 +268,7 @@ listbox_execute_cmd (WListbox * l, unsigned long command)
         }
         break;
     case CK_Clear:
-        if (l->deletable && confirm_history_cleanup
+        if (l->deletable && mc_global.widget.confirm_history_cleanup
             /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix */
             && (query_dialog (Q_ ("DialogTitle|History cleanup"),
                               _("Do you want clean this history?"),

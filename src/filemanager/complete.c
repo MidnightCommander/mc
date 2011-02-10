@@ -46,8 +46,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* show_all_if_ambiguous */
-
 /*** global variables ****************************************************************************/
 
 /* Linux declares environ in <unistd.h>, so don't repeat it here. */
@@ -1343,7 +1341,7 @@ complete (WInput * in)
     {
         engine_flags = DO_INSERTION;
 
-        if (show_all_if_ambiguous)
+        if (mc_global.widget.show_all_if_ambiguous)
             engine_flags |= DO_QUERY;
     }
 

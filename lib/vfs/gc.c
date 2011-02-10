@@ -45,7 +45,6 @@
 #include "lib/global.h"
 
 #include "src/filemanager/midnight.h"   /* current_panel */
-#include "src/filemanager/layout.h"     /* get_current_type(), get_other_type() */
 
 #include "vfs.h"
 #include "utilvfs.h"

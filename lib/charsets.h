@@ -54,14 +54,14 @@ void convert_string (unsigned char *str);
 /*
  * Converter from utf to selected codepage
  * param str, utf char
- * return char in needle codepage (by global int source_codepage)
+ * return char in needle codepage (by global int mc_global.source_codepage)
  */
 unsigned char convert_from_utf_to_current (const char *str);
 
 /*
  * Converter from utf to selected codepage
  * param input_char, gunichar
- * return char in needle codepage (by global int source_codepage)
+ * return char in needle codepage (by global int mc_global.source_codepage)
  */
 unsigned char convert_from_utf_to_current_c (const int input_char, GIConv conv);
 

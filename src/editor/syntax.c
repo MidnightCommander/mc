@@ -57,8 +57,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 
-#include "src/main.h"           /* mc_sysconfig_dir */
-
 #include "edit-impl.h"
 #include "edit-widget.h"
 
@@ -859,13 +857,13 @@ open_include_file (const char *filename)
         return f;
 
     g_free (error_file_name);
-    error_file_name = g_build_filename (mc_sysconfig_dir, "syntax", filename, (char *) NULL);
+    error_file_name = g_build_filename (mc_global.sysconfig_dir, "syntax", filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f != NULL)
         return f;
 
     g_free (error_file_name);
-    error_file_name = g_build_filename (mc_share_data_dir, "syntax", filename, (char *) NULL);
+    error_file_name = g_build_filename (mc_global.share_data_dir, "syntax", filename, (char *) NULL);
 
     return fopen (error_file_name, "r");
 }
@@ -1267,7 +1265,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     f = fopen (syntax_file, "r");
     if (f == NULL)
     {
-        lib_file = g_build_filename (mc_share_data_dir, "syntax", "Syntax", (char *) NULL);
+        lib_file = g_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
         f = fopen (lib_file, "r");
         g_free (lib_file);
         if (f == NULL)

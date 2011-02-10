@@ -352,13 +352,13 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     else
     {
         shell_execute (cmd, EXECUTE_INTERNAL);
-        if (console_flag)
+        if (mc_global.tty.console_flag)
         {
             handle_console (CONSOLE_SAVE);
-            if (output_lines && keybar_visible)
+            if (output_lines && mc_global.keybar_visible)
                 show_console_contents (output_start_y,
-                                       LINES - keybar_visible -
-                                       output_lines - 1, LINES - keybar_visible - 1);
+                                       LINES - mc_global.keybar_visible -
+                                       output_lines - 1, LINES - mc_global.keybar_visible - 1);
         }
     }
 
@@ -635,11 +635,11 @@ regex_command (const char *filename, const char *action, int *move_dir)
         {
             g_free (extension_file);
           check_stock_mc_ext:
-            extension_file = concat_dir_and_file (mc_sysconfig_dir, MC_LIB_EXT);
+            extension_file = concat_dir_and_file (mc_global.sysconfig_dir, MC_LIB_EXT);
             if (!exist_file (extension_file))
             {
                 g_free (extension_file);
-                extension_file = concat_dir_and_file (mc_share_data_dir, MC_LIB_EXT);
+                extension_file = concat_dir_and_file (mc_global.share_data_dir, MC_LIB_EXT);
             }
             mc_user_ext = 0;
         }
@@ -663,12 +663,12 @@ regex_command (const char *filename, const char *action, int *move_dir)
                 else
                 {
                     char *title = g_strdup_printf (_(" %s%s file error"),
-                                                   mc_sysconfig_dir, MC_LIB_EXT);
+                                                   mc_global.sysconfig_dir, MC_LIB_EXT);
                     message (D_ERROR, title, _("The format of the %smc.ext "
                                                "file has changed with version 3.0. It seems that "
                                                "the installation failed. Please fetch a fresh "
                                                "copy from the Midnight Commander package."),
-                             mc_sysconfig_dir);
+                             mc_global.sysconfig_dir);
                     g_free (title);
                     return 0;
                 }
@@ -683,7 +683,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
                      _("The format of the %s%s%s file has "
                        "changed with version 3.0. You may either want to copy "
                        "it from %smc.ext or use that file as an example of how to write it."),
-                     mc_config_get_data_path (), PATH_SEP_STR, MC_FILEBIND_FILE, mc_sysconfig_dir);
+                     mc_config_get_data_path (), PATH_SEP_STR, MC_FILEBIND_FILE, mc_global.sysconfig_dir);
             g_free (title);
         }
     }

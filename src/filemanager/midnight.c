@@ -49,7 +49,7 @@
 #include "lib/skin.h"
 #include "lib/util.h"
 
-#include "lib/vfs/vfs.h" /* vfs_translate_url() */
+#include "lib/vfs/vfs.h"        /* vfs_translate_url() */
 
 #include "src/args.h"
 #include "src/subshell.h"
@@ -57,7 +57,6 @@
 #include "src/learn.h"          /* learn_keys() */
 #include "src/execute.h"        /* suspend_cmd() */
 #include "src/keybind-defaults.h"
-#include "src/main.h"           /* quit */
 
 #include "option.h"             /* configure_box() */
 #include "tree.h"
@@ -81,7 +80,7 @@
 #include "src/diffviewer/ydiff.h"
 #endif
 
-#include "src/consaver/cons.saver.h"    /* console_flag */
+#include "src/consaver/cons.saver.h"    /* show_console_contents */
 
 #include "midnight.h"
 
@@ -122,8 +121,6 @@ Dlg_head *midnight_dlg = NULL;
  * Don't restrict the output on the screen manager level,
  * the translation tables take care of it.
  */
-#define full_eight_bits (1)
-#define eight_bit_clean (1)
 #endif /* !HAVE_CHARSET */
 
 /*** file scope type declarations ****************************************************************/
@@ -552,7 +549,7 @@ create_panels (void)
     cmdline = command_new (0, 0, 0);
     the_prompt = label_new (0, 0, mc_prompt);
     the_prompt->transparent = 1;
-    the_bar = buttonbar_new (keybar_visible);
+    the_bar = buttonbar_new (mc_global.keybar_visible);
 
     the_hint = label_new (0, 0, 0);
     the_hint->transparent = 1;
@@ -781,14 +778,24 @@ static void
 setup_mc (void)
 {
 #ifdef HAVE_SLANG
+#ifdef HAVE_CHARSET
+    tty_display_8bit (TRUE);
+#else
     tty_display_8bit (full_eight_bits != 0);
+#endif /* HAVE_CHARSET */
+#else
+
+#ifdef HAVE_CHARSET
+    tty_display_8bit (TRUE);
 #else
     tty_display_8bit (eight_bit_clean != 0);
+#endif /* HAVE_CHARSET */
+
 #endif
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell)
-        add_select_channel (subshell_pty, load_prompt, 0);
+    if (mc_global.tty.use_subshell)
+        add_select_channel (mc_global.tty.subshell_pty, load_prompt, 0);
 #endif /* !HAVE_SUBSHELL_SUPPORT */
 
     tty_setup_sigwinch (sigwinch_handler);
@@ -906,7 +913,7 @@ prepend_cwd_on_local (const char *filename)
 static void
 mc_maybe_editor_or_viewer (void)
 {
-    switch (mc_run_mode)
+    switch (mc_global.mc_run_mode)
     {
 #ifdef USE_INTERNAL_EDIT
     case MC_RUN_EDITOR:
@@ -962,7 +969,7 @@ quit_cmd_internal (int quiet)
     if (q != 0)
     {
 #ifdef HAVE_SUBSHELL_SUPPORT
-        if (!use_subshell)
+        if (!mc_global.tty.use_subshell)
             stop_dialogs ();
         else if ((q = exit_subshell ()))
 #endif
@@ -1305,10 +1312,10 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
     case DLG_DRAW:
         load_hint (1);
         /* We handle the special case of the output lines */
-        if (console_flag && output_lines)
+        if (mc_global.tty.console_flag && output_lines)
             show_console_contents (output_start_y,
-                                   LINES - output_lines - keybar_visible -
-                                   1, LINES - keybar_visible - 1);
+                                   LINES - output_lines - mc_global.keybar_visible -
+                                   1, LINES - mc_global.keybar_visible - 1);
         return MSG_HANDLED;
 
     case DLG_RESIZE:
@@ -1378,7 +1385,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
             return MSG_HANDLED;
         }
 
-        if ((!alternate_plus_minus || !(console_flag || xterm_flag))
+        if ((!alternate_plus_minus || !(mc_global.tty.console_flag || xterm_flag))
             && !quote && !current_panel->searching)
         {
             if (!only_leading_plus_minus)
@@ -1530,7 +1537,7 @@ load_hint (gboolean force)
     if (the_hint->widget.owner == NULL)
         return;
 
-    if (!message_visible)
+    if (!mc_global.message_visible)
     {
         label_set_text (the_hint, NULL);
         return;
@@ -1608,13 +1615,13 @@ do_nc (void)
     midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
                                "[main]", NULL, DLG_WANT_IDLE);
 
-    if (mc_run_mode == MC_RUN_FULL)
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
         setup_mc ();
     else
         setup_dummy_mc ();
 
     /* Check if we were invoked as an editor or file viewer */
-    if (mc_run_mode != MC_RUN_FULL)
+    if (mc_global.mc_run_mode != MC_RUN_FULL)
         mc_maybe_editor_or_viewer ();
     else
     {
@@ -1626,7 +1633,7 @@ do_nc (void)
     }
 
     /* Program end */
-    midnight_shutdown = 1;
+    mc_global.widget.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();
     destroy_dlg (midnight_dlg);

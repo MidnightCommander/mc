@@ -53,7 +53,7 @@
 #include "src/execute.h"
 #include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
 #include "src/keybind-defaults.h"       /* global_keymap_t */
-#include "src/subshell.h"       /* use_subshell */
+#include "src/subshell.h"       /* do_subshell_chdir() */
 
 #include "dir.h"
 #include "boxes.h"
@@ -1181,7 +1181,7 @@ static char *
 panel_save_name (WPanel * panel)
 {
     /* If the program is shuting down */
-    if ((midnight_shutdown && auto_save_setup) || saving_setup)
+    if ((mc_global.widget.midnight_shutdown && auto_save_setup) || saving_setup)
         return g_strdup (panel->panel_name);
     else
         return g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
@@ -2264,7 +2264,7 @@ do_enter_on_file_entry (file_entry * fe)
     }
 
 #if HAVE_CHARSET
-    source_codepage = default_source_codepage;
+    mc_global.source_codepage = default_source_codepage;
 #endif
 
     return 1;
@@ -2591,7 +2591,7 @@ static void
 subshell_chdir (const char *directory)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell && vfs_current_is_local ())
+    if (mc_global.tty.use_subshell && vfs_current_is_local ())
         do_subshell_chdir (directory, FALSE, TRUE);
 #endif /* HAVE_SUBSHELL_SUPPORT */
 }
@@ -3890,14 +3890,14 @@ panel_change_encoding (WPanel * panel)
     if (panel->codepage == SELECT_CHARSET_NO_TRANSLATE)
     {
         /* No translation */
-        g_free (init_translation_table (display_codepage, display_codepage));
+        g_free (init_translation_table (mc_global.display_codepage, mc_global.display_codepage));
         cd_path = remove_encoding_from_path (panel->cwd);
         do_panel_cd (panel, cd_path, cd_parse_command);
         g_free (cd_path);
         return;
     }
 
-    errmsg = init_translation_table (panel->codepage, display_codepage);
+    errmsg = init_translation_table (panel->codepage, mc_global.display_codepage);
     if (errmsg != NULL)
     {
         message (D_ERROR, MSG_ERROR, "%s", errmsg);

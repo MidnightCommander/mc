@@ -43,7 +43,6 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"          /* For profile_bname */
-#include "src/main.h"
 #include "src/history.h"
 
 #include "dir.h"
@@ -481,7 +480,7 @@ load_panelize (void)
     while (*profile_keys)
     {
 
-        if (utf8_display || conv == INVALID_CONV)
+        if (mc_global.utf8_display || conv == INVALID_CONV)
         {
             buffer = g_string_new (*profile_keys);
         }

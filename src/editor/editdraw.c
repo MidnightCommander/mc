@@ -47,7 +47,6 @@
 #include "lib/widget.h"         /* buttonbar_redraw() */
 #include "lib/charsets.h"
 
-#include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* edit_tab_spacing */
 
 #include "edit-impl.h"
@@ -151,7 +150,7 @@ status_string (WEdit * edit, char *s, int w)
                     edit->curs_line + 1,
                     edit->total_lines + 1, edit->curs1, edit->last_byte, byte_str,
 #ifdef HAVE_CHARSET
-                    source_codepage >= 0 ? get_codepage_id (source_codepage) : ""
+                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) : ""
 #else
                     ""
 #endif
@@ -169,7 +168,7 @@ status_string (WEdit * edit, char *s, int w)
                     edit->curs_line + 1,
                     edit->total_lines + 1, edit->curs1, edit->last_byte, byte_str,
 #ifdef HAVE_CHARSET
-                    source_codepage >= 0 ? get_codepage_id (source_codepage) : ""
+                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) : ""
 #else
                     ""
 #endif
@@ -502,7 +501,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                     /* fallthrough */
                 default:
 #ifdef HAVE_CHARSET
-                    if (utf8_display)
+                    if (mc_global.utf8_display)
                     {
                         if (!edit->utf8)
                         {
@@ -540,8 +539,8 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                     }
                     if (!edit->utf8)
                     {
-                        if ((utf8_display && g_unichar_isprint (c)) ||
-                            (!utf8_display && is_printable (c)))
+                        if ((mc_global.utf8_display && g_unichar_isprint (c)) ||
+                            (!mc_global.utf8_display && is_printable (c)))
                         {
                             p->ch = c;
                             p++;

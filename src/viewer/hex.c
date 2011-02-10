@@ -49,8 +49,6 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
-#include "src/main.h"
-
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
@@ -285,7 +283,7 @@ mcview_display_hex (mcview_t * view)
 
 
 #ifdef HAVE_CHARSET
-            if (utf8_display)
+            if (mc_global.utf8_display)
             {
                 if (!view->utf8)
                 {

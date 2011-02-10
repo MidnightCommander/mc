@@ -60,7 +60,6 @@
 #include "src/filemanager/cmd.h"        /* view_other_cmd() */
 #include "src/filemanager/usermenu.h"   /* user_menu_cmd() */
 
-#include "src/main.h"           /* source_codepage */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/learn.h"          /* learn_keys */
 #include "src/keybind-defaults.h"
@@ -2322,7 +2321,7 @@ edit_set_codeset (WEdit * edit)
 #ifdef HAVE_CHARSET
     const char *cp_id;
 
-    cp_id = get_codepage_id (source_codepage >= 0 ? source_codepage : display_codepage);
+    cp_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage : mc_global.display_codepage);
 
     if (cp_id != NULL)
     {
@@ -2937,7 +2936,7 @@ edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
             int cw = 1;
 
             utf_ch = edit_get_utf (edit, p, &cw);
-            if (utf8_display)
+            if (mc_global.utf8_display)
             {
                 if (cw > 1)
                     col -= cw - 1;
@@ -2960,7 +2959,7 @@ edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
             else
                 return p;
         }
-        else if ((c < 32 || c == 127) && (orig_c == c || (!utf8_display && !edit->utf8)))
+        else if ((c < 32 || c == 127) && (orig_c == c || (!mc_global.utf8_display && !edit->utf8)))
             /* '\r' is shown as ^M, so we must advance 2 characters */
             /* Caret notation for control characters */
             col += 2;
@@ -3499,14 +3498,14 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         if (edit->overwrite)
         {
             /* remove char only one time, after input first byte, multibyte chars */
-            if ((!utf8_display || edit->charpoint == 0)
+            if ((!mc_global.utf8_display || edit->charpoint == 0)
                 && edit_get_byte (edit, edit->curs1) != '\n')
                 edit_delete (edit, 0);
         }
         if (option_cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 #ifdef HAVE_CHARSET
-        if (char_for_insertion > 255 && utf8_display == 0)
+        if (char_for_insertion > 255 && mc_global.utf8_display == 0)
         {
             unsigned char str[6 + 1];
             size_t i = 0;

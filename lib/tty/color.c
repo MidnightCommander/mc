@@ -44,8 +44,6 @@
 
 /*** global variables ****************************************************************************/
 
-char *command_line_colors = NULL;
-
 static char *tty_color_defaults__fg = NULL;
 static char *tty_color_defaults__bg = NULL;
 static char *tty_color_defaults__attrs = NULL;

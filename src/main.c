@@ -50,7 +50,7 @@
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/vfs/vfs.h" /* vfs_init(), vfs_shut() */
+#include "lib/vfs/vfs.h"        /* vfs_init(), vfs_shut() */
 
 #include "filemanager/midnight.h"       /* current_panel */
 #include "filemanager/treestore.h"      /* tree_store_save */
@@ -70,7 +70,7 @@
 #include "selcodepage.h"
 #endif /* HAVE_CHARSET */
 
-#include "consaver/cons.saver.h"        /* console_flag */
+#include "consaver/cons.saver.h"        /* cons_saver_pid */
 
 #include "main.h"
 
@@ -83,53 +83,24 @@ int quit = 0;
 
 #ifdef HAVE_CHARSET
 /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
-int source_codepage = -1;
 int default_source_codepage = -1;
-int display_codepage = -1;
 char *autodetect_codeset = NULL;
 gboolean is_autodetect_codeset_enabled = FALSE;
-#else
-/* If true, allow characters in the range 160-255 */
-int eight_bit_clean = 1;
-/*
- * If true, also allow characters in the range 128-159.
- * This is reported to break on many terminals (xterm, qansi-m).
- */
-int full_eight_bits = 0;
 #endif /* !HAVE_CHARSET */
-
-/*
- * If utf-8 terminal utf8_display = 1
- * Display bits set UTF-8
- */
-int utf8_display = 0;
 
 /* If true use the internal viewer */
 int use_internal_view = 1;
 /* If set, use the builtin editor */
 int use_internal_edit = 1;
 
-mc_run_mode_t mc_run_mode = MC_RUN_FULL;
 char *mc_run_param0 = NULL;
 char *mc_run_param1 = NULL;
-
-/* Used so that widgets know if they are being destroyed or
-   shut down */
-int midnight_shutdown = 0;
 
 /* The user's shell */
 char *shell = NULL;
 
 /* The prompt */
 const char *mc_prompt = NULL;
-
-/* mc_sysconfig_dir: Area for default settings from maintainers of distributuves
-  default is /etc/mc or may be defined by MC_DATADIR
-  */
-char *mc_sysconfig_dir = NULL;
-
-/* mc_share_data_dir: Area for default settings from developers */
-char *mc_share_data_dir = NULL;
 
 /* Set to TRUE to suppress printing the last directory */
 int print_last_revert = FALSE;
@@ -162,20 +133,20 @@ check_codeset (void)
     {
         const char *_display_codepage;
 
-        _display_codepage = get_codepage_id (display_codepage);
+        _display_codepage = get_codepage_id (mc_global.display_codepage);
 
         if (strcmp (_display_codepage, current_system_codepage) != 0)
         {
-            display_codepage = get_codepage_index (current_system_codepage);
-            if (display_codepage == -1)
-                display_codepage = 0;
+            mc_global.display_codepage = get_codepage_index (current_system_codepage);
+            if (mc_global.display_codepage == -1)
+                mc_global.display_codepage = 0;
 
             mc_config_set_string (mc_main_config, "Misc", "display_codepage", cp_display);
         }
     }
 #endif
 
-    utf8_display = str_isutf8 (current_system_codepage);
+    mc_global.utf8_display = str_isutf8 (current_system_codepage);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -208,13 +179,13 @@ OS_Setup (void)
     mc_libdir = getenv ("MC_DATADIR");
     if (mc_libdir != NULL)
     {
-        mc_sysconfig_dir = g_strdup (mc_libdir);
-        mc_share_data_dir = g_strdup (SYSCONFDIR);
+        mc_global.sysconfig_dir = g_strdup (mc_libdir);
+        mc_global.share_data_dir = g_strdup (SYSCONFDIR);
     }
     else
     {
-        mc_sysconfig_dir = g_strdup (SYSCONFDIR);
-        mc_share_data_dir = g_strdup (DATADIR);
+        mc_global.sysconfig_dir = g_strdup (SYSCONFDIR);
+        mc_global.share_data_dir = g_strdup (DATADIR);
     }
 
 }
@@ -227,12 +198,12 @@ sigchld_handler_no_subshell (int sig)
 #ifdef __linux__
     int pid, status;
 
-    if (!console_flag)
+    if (!mc_global.tty.console_flag)
         return;
 
     /* COMMENT: if it were true that after the call to handle_console(..INIT)
-       the value of console_flag never changed, we could simply not install
-       this handler at all if (!console_flag && !use_subshell). */
+       the value of mc_global.tty.console_flag never changed, we could simply not install
+       this handler at all if (!mc_global.tty.console_flag && !mc_global.tty.use_subshell). */
 
     /* That comment is no longer true.  We need to wait() on a sigchld
        handler (that's at least what the tarfs code expects currently). */
@@ -251,7 +222,7 @@ sigchld_handler_no_subshell (int sig)
         {
             /* cons.saver has died - disable console saving */
             handle_console (CONSOLE_DONE);
-            console_flag = 0;
+            mc_global.tty.console_flag = '\0';
         }
     }
     /* If we got here, some other child exited; ignore it */
@@ -269,7 +240,7 @@ init_sigchld (void)
 
     sigchld_action.sa_handler =
 #ifdef HAVE_SUBSHELL_SUPPORT
-        use_subshell ? sigchld_handler :
+        mc_global.tty.use_subshell ? sigchld_handler :
 #endif /* HAVE_SUBSHELL_SUPPORT */
         sigchld_handler_no_subshell;
 
@@ -288,7 +259,7 @@ init_sigchld (void)
          * This may happen on QNX Neutrino 6, where SA_RESTART
          * is defined but not implemented.  Fallback to no subshell.
          */
-        use_subshell = 0;
+        mc_global.tty.use_subshell = FALSE;
 #endif /* HAVE_SUBSHELL_SUPPORT */
     }
 }
@@ -447,7 +418,7 @@ main (int argc, char *argv[])
     str_init_strings (NULL);
 
     vfs_init ();
-    vfs_plugins_init();
+    vfs_plugins_init ();
     vfs_setup_work_dir ();
 
     if (!mc_args_handle (argc, argv, "mc"))
@@ -462,10 +433,10 @@ main (int argc, char *argv[])
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Don't use subshell when invoked as viewer or editor */
-    if (mc_run_mode != MC_RUN_FULL)
-        use_subshell = 0;
+    if (mc_global.mc_run_mode != MC_RUN_FULL)
+        mc_global.tty.use_subshell = FALSE;
 
-    if (use_subshell)
+    if (mc_global.tty.use_subshell)
         subshell_get_console_attributes ();
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
@@ -488,11 +459,11 @@ main (int argc, char *argv[])
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
-    tty_init ((gboolean) mc_args__slow_terminal, (gboolean) mc_args__ugly_line_drawing);
+    tty_init (mc_global.args.slow_terminal, mc_global.args.ugly_line_drawing);
 
     load_setup ();
 
-    /* start check display_codepage and source_codepage */
+    /* start check mc_global.display_codepage and mc_global.source_codepage */
     check_codeset ();
 
     /* Removing this from the X code let's us type C-c */
@@ -502,7 +473,7 @@ main (int argc, char *argv[])
 
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
 
-    tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
+    tty_init_colors (mc_global.args.disable_colors, mc_args__force_colors);
 
     {
         GError *error2 = NULL;
@@ -529,20 +500,20 @@ main (int argc, char *argv[])
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Done here to ensure that the subshell doesn't  */
     /* inherit the file descriptors opened below, etc */
-    if (use_subshell)
+    if (mc_global.tty.use_subshell)
         init_subshell ();
 
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
     /* Also done after init_subshell, to save any shell init file messages */
-    if (console_flag)
+    if (mc_global.tty.console_flag)
         handle_console (CONSOLE_SAVE);
 
     if (alternate_plus_minus)
         application_keypad_mode ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell)
+    if (mc_global.tty.use_subshell)
     {
         mc_prompt = strip_ctrl_codes (subshell_prompt);
         if (mc_prompt == NULL)
@@ -553,7 +524,7 @@ main (int argc, char *argv[])
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */
-    if (!midnight_shutdown)
+    if (!mc_global.widget.midnight_shutdown)
         do_nc ();
 
     /* Save the tree store */
@@ -574,17 +545,17 @@ main (int argc, char *argv[])
 
     done_setup ();
 
-    if (console_flag && (quit & SUBSHELL_EXIT) == 0)
+    if (mc_global.tty.console_flag && (quit & SUBSHELL_EXIT) == 0)
         handle_console (CONSOLE_RESTORE);
     if (alternate_plus_minus)
         numeric_keypad_mode ();
 
     signal (SIGCHLD, SIG_DFL);  /* Disable the SIGCHLD handler */
 
-    if (console_flag)
+    if (mc_global.tty.console_flag)
         handle_console (CONSOLE_DONE);
 
-    if (mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file != NULL
+    if (mc_global.mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file != NULL
         && last_wd_string != NULL && !print_last_revert)
     {
         int last_wd_fd;
@@ -601,8 +572,8 @@ main (int argc, char *argv[])
     }
     g_free (last_wd_string);
 
-    g_free (mc_share_data_dir);
-    g_free (mc_sysconfig_dir);
+    g_free (mc_global.share_data_dir);
+    g_free (mc_global.sysconfig_dir);
     g_free (shell);
 
     done_key ();

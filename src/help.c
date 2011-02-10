@@ -1047,7 +1047,7 @@ interactive_display (const char *filename, const char *node)
     if (filename != NULL)
         g_file_get_contents (filename, &filedata, NULL, NULL);
     else
-        filedata = load_mc_home_file (mc_share_data_dir, MC_HELP, &hlpfile);
+        filedata = load_mc_home_file (mc_global.share_data_dir, MC_HELP, &hlpfile);
 
     if (filedata == NULL)
         message (D_ERROR, MSG_ERROR, _("Cannot open file %s\n%s"),

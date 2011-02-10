@@ -37,8 +37,6 @@ struct FileOpContext;
 
 extern struct TaskList *task_list;
 
-extern int we_are_background;
-
 /*** declarations of public functions ************************************************************/
 
 int do_background (struct FileOpContext *ctx, char *info);

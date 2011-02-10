@@ -33,7 +33,6 @@
 /* TODO: these includes should be removed! */
 #include "src/filemanager/layout.h"     /* repaint_screen() */
 #include "src/filemanager/midnight.h"   /* midnight_dlg */
-#include "src/main.h"           /* midnight_shutdown */
 
 /*** global variables ****************************************************************************/
 
@@ -148,7 +147,7 @@ dialog_switch_next (void)
 {
     GList *next;
 
-    if (midnight_shutdown || mc_current == NULL)
+    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
         return;
 
     next = g_list_next (mc_current);
@@ -165,7 +164,7 @@ dialog_switch_prev (void)
 {
     GList *prev;
 
-    if (midnight_shutdown || mc_current == NULL)
+    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
         return;
 
     prev = g_list_previous (mc_current);
@@ -187,7 +186,7 @@ dialog_switch_list (void)
     int i = 0;
     int rv;
 
-    if (midnight_shutdown || mc_current == NULL)
+    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
         return;
 
     lines = min ((size_t) (LINES * 2 / 3), dlg_num);
@@ -240,7 +239,7 @@ dialog_switch_process_pending (void)
         {
             destroy_dlg (h);
             /* return to panels */
-            if (mc_run_mode == MC_RUN_FULL)
+            if (mc_global.mc_run_mode == MC_RUN_FULL)
             {
                 mc_current = g_list_find (mc_dialogs, midnight_dlg);
                 update_panels (UP_OPTIMIZE, UP_KEEPSEL);

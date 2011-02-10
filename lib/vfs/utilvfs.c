@@ -40,8 +40,6 @@
 #include "lib/util.h"           /* mc_mkstemps() */
 #include "lib/widget.h"         /* message() */
 
-#include "src/history.h"
-
 #include "vfs.h"
 #include "utilvfs.h"
 
@@ -61,6 +59,8 @@
 
 /* Parsing code is used by ftpfs, fish and extfs */
 #define MAXCOLS         30
+
+#define MC_HISTORY_VFS_PASSWORD       "mc.vfs.password"
 
 /*** file scope type declarations ****************************************************************/
 

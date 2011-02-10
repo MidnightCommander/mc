@@ -33,8 +33,6 @@
 
 #include "lib/tty/color.h"      /* tty_use_256colors(); */
 
-#include "src/args.h"
-
 /*** global variables ****************************************************************************/
 
 mc_skin_t mc_skin__default;
@@ -69,8 +67,8 @@ mc_skin_get_default_name (void)
     char *tmp_str;
 
     /* from command line */
-    if (mc_args__skin != NULL)
-        return g_strdup (mc_args__skin);
+    if (mc_global.args.skin != NULL)
+        return g_strdup (mc_global.args.skin);
 
     /* from envirovement variable */
     tmp_str = getenv ("MC_SKIN");
@@ -146,7 +144,7 @@ mc_skin_init (GError ** error)
         (void) mc_skin_ini_file_parse (&mc_skin__default);
         is_good_init = FALSE;
     }
-    if ( is_good_init &&  !tty_use_256colors () && mc_skin__default.have_256_colors )
+    if (is_good_init && !tty_use_256colors () && mc_skin__default.have_256_colors)
     {
         if (*error == NULL)
             *error = g_error_new (MC_ERROR, 0,
@@ -187,7 +185,7 @@ mc_skin_deinit (void)
 gchar *
 mc_skin_get (const gchar * group, const gchar * key, const gchar * default_value)
 {
-    if (mc_args__ugly_line_drawing)
+    if (mc_global.args.ugly_line_drawing)
     {
         return g_strdup (default_value);
     }

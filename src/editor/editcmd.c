@@ -60,7 +60,6 @@
 #include "src/filemanager/layout.h"     /* clr_scr() */
 
 #include "src/history.h"
-#include "src/main.h"           /* mc_sysconfig_dir, midnight_shutdown */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
 #include "src/selcodepage.h"
@@ -515,11 +514,11 @@ edit_load_syntax_file (WEdit * edit)
                             _("&User"), _("&System Wide"));
     }
 
-    extdir = g_build_filename (mc_sysconfig_dir, "syntax", "Syntax", (char *) NULL);
+    extdir = g_build_filename (mc_global.sysconfig_dir, "syntax", "Syntax", (char *) NULL);
     if (!exist_file (extdir))
     {
         g_free (extdir);
-        extdir = g_build_filename (mc_share_data_dir, "syntax", "Syntax", (char *) NULL);
+        extdir = g_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
     }
 
     if (dir == 0)
@@ -550,12 +549,12 @@ edit_load_menu_file (WEdit * edit)
                         _("Which menu file do you want to edit?"), D_NORMAL,
                         geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile = concat_dir_and_file (mc_sysconfig_dir, EDIT_GLOBAL_MENU);
+    menufile = concat_dir_and_file (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU);
 
     if (!exist_file (menufile))
     {
         g_free (menufile);
-        menufile = concat_dir_and_file (mc_share_data_dir, EDIT_GLOBAL_MENU);
+        menufile = concat_dir_and_file (mc_global.share_data_dir, EDIT_GLOBAL_MENU);
     }
 
     switch (dir)
@@ -572,11 +571,11 @@ edit_load_menu_file (WEdit * edit)
         break;
 
     case 2:
-        buffer = concat_dir_and_file (mc_sysconfig_dir, EDIT_GLOBAL_MENU);
+        buffer = concat_dir_and_file (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU);
         if (!exist_file (buffer))
         {
             g_free (buffer);
-            buffer = concat_dir_and_file (mc_share_data_dir, EDIT_GLOBAL_MENU);
+            buffer = concat_dir_and_file (mc_global.share_data_dir, EDIT_GLOBAL_MENU);
         }
         break;
 
@@ -2486,7 +2485,7 @@ edit_ok_to_exit (WEdit * edit)
     if (!edit->modified)
         return TRUE;
 
-    if (!midnight_shutdown)
+    if (!mc_global.widget.midnight_shutdown)
     {
         if (!edit_check_newline (edit))
             return FALSE;
@@ -2512,8 +2511,8 @@ edit_ok_to_exit (WEdit * edit)
     case 0:                    /* Yes */
         edit_push_markers (edit);
         edit_set_markers (edit, 0, 0, 0, 0);
-        if (!edit_save_cmd (edit) || midnight_shutdown)
-            return (gboolean) midnight_shutdown;
+        if (!edit_save_cmd (edit) || mc_global.widget.midnight_shutdown)
+            return mc_global.widget.midnight_shutdown;
         break;
     case 1:                    /* No */
         break;

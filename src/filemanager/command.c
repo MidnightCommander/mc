@@ -215,7 +215,7 @@ enter (WInput * lc_cmdline)
 #ifdef HAVE_SUBSHELL_SUPPORT
         /* Check this early before we clean command line
          * (will be checked again by shell_execute) */
-        if (use_subshell && subshell_state != INACTIVE)
+        if (mc_global.tty.use_subshell && subshell_state != INACTIVE)
         {
             message (D_ERROR, MSG_ERROR, _("The shell is already running a command"));
             return MSG_NOT_HANDLED;
@@ -254,11 +254,11 @@ enter (WInput * lc_cmdline)
 
             quit = 0;
             /* restart subshell */
-            if (use_subshell)
+            if (mc_global.tty.use_subshell)
                 init_subshell ();
         }
 
-        if (use_subshell)
+        if (mc_global.tty.use_subshell)
             load_prompt (0, NULL);
 #endif
     }

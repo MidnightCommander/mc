@@ -50,7 +50,6 @@
 
 #include "src/filemanager/filegui.h"
 #include "src/filemanager/file.h"       /* copy_file_file() */
-#include "src/main.h"           /* eight_bit_clean */
 
 /*** global variables ****************************************************************************/
 
@@ -221,10 +220,10 @@ is_printable (int c)
        by setting the output codepage */
     return is_8bit_printable (c);
 #else
-    if (!eight_bit_clean)
+    if (!mc_global.eight_bit_clean)
         return is_7bit_printable (c);
 
-    if (full_eight_bits)
+    if (mc_global.full_eight_bits)
     {
         return is_8bit_printable (c);
     }

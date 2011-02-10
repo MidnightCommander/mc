@@ -386,7 +386,7 @@ message (int flags, const char *title, const char *text, ...)
         title = _("Error");
 
 #ifdef WITH_BACKGROUND
-    if (we_are_background)
+    if (mc_global.we_are_background)
     {
         func.f = bg_message;
         parent_call (func.p, NULL, 3, sizeof (flags), &flags, strlen (title), title, strlen (p), p);
@@ -416,7 +416,7 @@ input_dialog_help (const char *header, const char *text, const char *help,
         char *(*f) (const char *, const char *, const char *, const char *, const char *);
     } func;
 #ifdef WITH_BACKGROUND
-    if (we_are_background)
+    if (mc_global.we_are_background)
     {
         func.f = fg_input_dialog_help;
         return parent_call_string (func.p, 5,

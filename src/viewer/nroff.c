@@ -42,7 +42,6 @@
 #include "lib/skin.h"
 #include "lib/charsets.h"
 
-#include "src/main.h"           /* utf8_display */
 #include "src/setup.h"          /* option_tab_spacing */
 
 #include "internal.h"
@@ -181,7 +180,7 @@ mcview_display_nroff (mcview_t * view)
         {
             widget_move (view, top + row, left + ((off_t) col - view->dpy_text_column));
 #ifdef HAVE_CHARSET
-            if (utf8_display)
+            if (mc_global.utf8_display)
             {
                 if (!view->utf8)
                 {

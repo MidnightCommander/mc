@@ -119,11 +119,11 @@ configure_box (void)
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 11, dlg_height, N_("Sa&fe delete"),
                         &safe_delete),
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 10, dlg_height, N_("Cd follows lin&ks"),
-                        &cd_symlinks),
+                        &mc_global.vfs.cd_symlinks),
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 9, dlg_height, N_("Rotating d&ash"),
                         &nice_rotating_dash),
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 8, dlg_height, N_("Co&mplete: show all"),
-                        &show_all_if_ambiguous),
+                        &mc_global.widget.show_all_if_ambiguous),
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 7, dlg_height, N_("Shell &patterns"),
                         &easy_patterns),
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 6, dlg_height, N_("&Drop down menus"),
@@ -439,7 +439,7 @@ panel_options_box (void)
     if ((qd_result == B_ENTER) || (qd_result == B_EXIT))
     {
         mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
-                           "simple_swap", (gboolean) (simple_swap & C_BOOL));
+                            "simple_swap", (gboolean) (simple_swap & C_BOOL));
 
         if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
         {

@@ -49,9 +49,6 @@
 #include "lib/util.h"           /* list_append_unique */
 #include "lib/widget.h"
 
-/* TODO: these includes should be removed! */
-#include "src/setup.h"          /* num_history_items_recorded */
-
 /*** global variables ****************************************************************************/
 
 int num_history_items_recorded = 60;
@@ -163,7 +160,7 @@ history_get (const char *input_name)
 
     /* create charset conversion handler to convert strings
        from utf-8 to system codepage */
-    if (!utf8_display)
+    if (!mc_global.utf8_display)
         conv = str_crt_conv_from ("UTF-8");
 
     buffer = g_string_sized_new (64);
@@ -254,7 +251,7 @@ history_put (const char *input_name, GList * h)
 
     /* create charset conversion handler to convert strings
        from system codepage to UTF-8 */
-    if (!utf8_display)
+    if (!mc_global.utf8_display)
         conv = str_crt_conv_to ("UTF-8");
 
     buffer = g_string_sized_new (64);
