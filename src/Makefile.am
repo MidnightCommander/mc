@@ -69,7 +69,8 @@ mc_SOURCES = \
 	main.c main.h \
 	setup.c setup.h \
 	subshell.c subshell.h \
-	textconf.c textconf.h
+	textconf.c textconf.h \
+	util.c util.h
 
 if CHARSET
     mc_SOURCES += selcodepage.c selcodepage.h

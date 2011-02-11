@@ -122,9 +122,6 @@ void init_uid_gid_cache (void);
 char *get_group (int);
 char *get_owner (int);
 
-/* Check if the file exists. If not copy the default */
-int check_for_default (const char *default_file, const char *file);
-
 /* Returns a copy of *s until a \n is found and is below top */
 const char *extract_line (const char *s, const char *top);
 

@@ -65,6 +65,7 @@
 #include "src/setup.h"
 #include "src/execute.h"        /* toggle_panels() */
 #include "src/history.h"
+#include "src/util.h"           /* check_for_default() */
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"

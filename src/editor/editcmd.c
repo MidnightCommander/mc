@@ -65,6 +65,7 @@
 #include "src/selcodepage.h"
 #include "src/keybind-defaults.h"
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
+#include "src/util.h"           /* check_for_default() */
 
 #include "edit-impl.h"
 #include "edit-widget.h"

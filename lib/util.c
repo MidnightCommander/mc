@@ -48,9 +48,6 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 
-#include "src/filemanager/filegui.h"
-#include "src/filemanager/file.h"       /* copy_file_file() */
-
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
@@ -606,30 +603,6 @@ extension (const char *filename)
 {
     const char *d = strrchr (filename, '.');
     return (d != NULL) ? d + 1 : "";
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
-check_for_default (const char *default_file, const char *file)
-{
-    if (!exist_file (file))
-    {
-        FileOpContext *ctx;
-        FileOpTotalContext *tctx;
-
-        if (!exist_file (default_file))
-            return -1;
-
-        ctx = file_op_context_new (OP_COPY);
-        tctx = file_op_total_context_new ();
-        file_op_context_create_ui (ctx, 0, FALSE);
-        copy_file_file (tctx, ctx, default_file, file);
-        file_op_total_context_destroy (tctx);
-        file_op_context_destroy (ctx);
-    }
-
-    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
