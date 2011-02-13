@@ -1,9 +1,10 @@
 /* editor low level data handling and cursor fundamentals.
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007 Free Software Foundation, Inc.
+   2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
 
-   Authors: 1996, 1997 Paul Sheer
+   Authors: Paul Sheer 1996, 1997
+            Ilia Maslakov <il.smind@gmail.com> 2009, 2010, 2011
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -1055,6 +1056,8 @@ edit_left_word_move (WEdit * edit, int s)
             break;
         c1 = edit_get_byte (edit, edit->curs1 - 1);
         c2 = edit_get_byte (edit, edit->curs1);
+        if (c1 == '\n' || c2 == '\n')
+            break;
         if (!(my_type_of (c1) & my_type_of (c2)))
             break;
         if (isspace (c1) && !isspace (c2))
@@ -1091,6 +1094,8 @@ edit_right_word_move (WEdit * edit, int s)
             break;
         c1 = edit_get_byte (edit, edit->curs1 - 1);
         c2 = edit_get_byte (edit, edit->curs1);
+        if (c1 == '\n' || c2 == '\n')
+            break;
         if (!(my_type_of (c1) & my_type_of (c2)))
             break;
         if (isspace (c1) && !isspace (c2))
@@ -1222,6 +1227,8 @@ edit_right_delete_word (WEdit * edit)
             break;
         c1 = edit_delete (edit, 1);
         c2 = edit_get_byte (edit, edit->curs1);
+        if (c1 == '\n' || c2 == '\n')
+            break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
             break;
         if (!(my_type_of (c1) & my_type_of (c2)))
@@ -1241,6 +1248,8 @@ edit_left_delete_word (WEdit * edit)
             break;
         c1 = edit_backspace (edit, 1);
         c2 = edit_get_byte (edit, edit->curs1 - 1);
+        if (c1 == '\n' || c2 == '\n')
+            break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
             break;
         if (!(my_type_of (c1) & my_type_of (c2)))
