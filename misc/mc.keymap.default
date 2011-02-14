@@ -44,6 +44,8 @@ EditRemove = f8
 EditMarkAll =
 EditUnmark =
 EditFind = f7
+EditMarkLine =
+EditMarkWord =
 
 EditShiftBlockLeft =
 EditShiftBlockRight =
