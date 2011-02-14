@@ -112,14 +112,12 @@ mc_config_init (const gchar * ini_path)
         g_free (mc_config);
         return NULL;
     }
-    if (!ini_path || !exist_file (ini_path))
-    {
+    if (ini_path == NULL)
         return mc_config;
-    }
 
-    if (!mc_stat (ini_path, &st) && st.st_size)
+    if (exist_file (ini_path) && mc_stat (ini_path, &st) == 0 && st.st_size != 0)
     {
-        /* file present and not empty */
+        /* file exists and not empty */
         g_key_file_load_from_file (mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL);
     }
 
