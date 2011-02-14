@@ -84,6 +84,8 @@ static name_keymap_t command_names[] = {
     {"EditRemove", CK_Remove},
     {"EditMarkAll", CK_Mark_All},
     {"EditUnmark", CK_Unmark},
+    {"EditMarkWord", CK_Mark_Word},
+    {"EditMarkLine", CK_Mark_Line},
     {"EditSaveBlock", CK_Save_Block},
     {"EditColumnMark", CK_Column_Mark},
     {"EditFind", CK_Find},

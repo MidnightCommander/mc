@@ -133,6 +133,20 @@ edit_event (Gpm_Event * event, void *data)
         || event->x > edit->num_widget_columns || event->y > edit->num_widget_lines + 1)
         return MOU_NORMAL;
 
+    /* Double click */
+    if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
+    {
+        edit_mark_current_word_cmd (edit);
+        goto update;
+    }
+#if 0
+    /* Triple click */
+    if ((event->type & (GPM_TRIPLE | GPM_UP)) == (GPM_UP | GPM_TRIPLE))
+    {
+        edit_mark_current_line_cmd (edit);
+        goto update;
+    }
+#endif
     /* Wheel events */
     if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN))
     {
