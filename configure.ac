@@ -489,6 +489,8 @@ if test "x$enable_werror" = xyes; then
 fi
 CFLAGS="$mc_configured_cflags $CFLAGS_OPTS $CFLAGS"
 
+MC_UNIT_TESTS
+
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
