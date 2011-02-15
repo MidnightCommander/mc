@@ -40,7 +40,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_casecmp */
 
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 
 #include "tty.h"
 #include "tty-internal.h"       /* mouse_enabled */

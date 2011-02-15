@@ -36,7 +36,7 @@
 
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"

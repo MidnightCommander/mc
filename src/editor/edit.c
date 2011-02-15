@@ -46,7 +46,7 @@
 #include "lib/tty/tty.h"        /* attrset() */
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"           /* load_file_position(), save_file_position() */
 #include "lib/timefmt.h"        /* time formatting */

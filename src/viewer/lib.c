@@ -41,7 +41,7 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* save_file_position() */
 #include "lib/lock.h"           /* unlock_file() */

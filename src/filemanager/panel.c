@@ -40,7 +40,7 @@
 #include "lib/strescape.h"
 #include "lib/filehighlight.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/unixcompat.h"
 #include "lib/timefmt.h"
 #include "lib/util.h"

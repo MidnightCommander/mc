@@ -36,13 +36,13 @@
 #include "lib/fileloc.h"
 #include "lib/timefmt.h"
 
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 
 #ifdef ENABLE_VFS_FTP
-#include "lib/vfs/mc-vfs/ftpfs.h"
+#include "src/vfs/ftpfs/ftpfs.h"
 #endif
 #ifdef ENABLE_VFS_FISH
-#include "lib/vfs/mc-vfs/fish.h"
+#include "src/vfs/fish/fish.h"
 #endif
 
 #include "lib/util.h"

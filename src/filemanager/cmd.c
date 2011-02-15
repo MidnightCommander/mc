@@ -53,7 +53,7 @@
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/filehighlight.h"  /* MC_FHL_INI_FILE */
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"

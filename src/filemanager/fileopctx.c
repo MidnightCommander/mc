@@ -36,7 +36,7 @@
 #include "fileopctx.h"
 #include "filegui.h"
 #include "lib/search.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 
 /*** global variables ****************************************************************************/
 

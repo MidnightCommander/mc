@@ -51,7 +51,7 @@
 #include "lib/tty/mouse.h"
 #include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #include "lib/mcconfig.h"
-#include "lib/vfs/mc-vfs/vfs.h" /* For vfs_translate_url() */
+#include "lib/vfs/vfs.h" /* For vfs_translate_url() */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 

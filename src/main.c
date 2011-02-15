@@ -50,13 +50,15 @@
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/vfs/mc-vfs/vfs.h" /* vfs_init(), vfs_shut() */
+#include "lib/vfs/vfs.h" /* vfs_init(), vfs_shut() */
 
 #include "filemanager/midnight.h"       /* current_panel */
 #include "filemanager/treestore.h"      /* tree_store_save */
 #include "filemanager/layout.h" /* command_prompt */
 #include "filemanager/ext.h"    /* flush_extension_file() */
 #include "filemanager/command.h"        /* cmdline */
+
+#include "vfs/plugins_init.h"
 
 #include "events_init.h"
 #include "args.h"
@@ -445,6 +447,8 @@ main (int argc, char *argv[])
     str_init_strings (NULL);
 
     vfs_init ();
+    vfs_plugins_init();
+    vfs_setup_work_dir ();
 
     if (!mc_args_handle (argc, argv, "mc"))
         exit (EXIT_FAILURE);

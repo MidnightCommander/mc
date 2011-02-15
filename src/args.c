@@ -33,11 +33,12 @@
 #include "lib/tty/color.h"      /* command_line_colors */
 #include "lib/tty/mouse.h"
 #include "lib/strutil.h"
-#include "lib/vfs/mc-vfs/vfs.h"
-#ifdef ENABLE_VFS_SMB
-#include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debugf()  */
-#endif
+#include "lib/vfs/vfs.h"
 #include "lib/util.h"           /* x_basename() */
+
+#ifdef ENABLE_VFS_SMB
+#include "src/vfs/smbfs/smbfs.h"       /* smbfs_set_debugf()  */
+#endif
 
 #include "src/main.h"
 #include "src/textconf.h"

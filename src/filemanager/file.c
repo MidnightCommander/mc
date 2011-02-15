@@ -62,7 +62,7 @@
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 
 #include "src/setup.h"

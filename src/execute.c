@@ -30,7 +30,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/tty/win.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/util.h"
 #include "lib/widget.h"
 

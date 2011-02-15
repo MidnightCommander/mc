@@ -32,7 +32,7 @@
 #include "lib/global.h"
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 
 /*** global variables ****************************************************************************/
 

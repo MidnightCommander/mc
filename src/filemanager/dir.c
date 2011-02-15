@@ -30,7 +30,7 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/search.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/fs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"

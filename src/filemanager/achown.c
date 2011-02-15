@@ -39,7 +39,7 @@
 #include "lib/tty/key.h"        /* XCTRL and ALT macros */
 #include "lib/skin.h"
 #include "lib/strutil.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/util.h"
 #include "lib/widget.h"
 

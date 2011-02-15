@@ -38,7 +38,7 @@
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
 #include "lib/util.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #include "lib/charsets.h"       /* get_codepage_index */
 

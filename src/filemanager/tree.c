@@ -45,7 +45,7 @@
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"
 #include "lib/skin.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"

@@ -48,5 +48,5 @@ libmc_la_LIBADD = \
 	strutil/libmcstrutil.la \
 	skin/libmcskin.la \
 	tty/libmctty.la \
-	vfs/mc-vfs/libvfs-mc.la \
+	vfs/libmcvfs.la \
 	widget/libmcwidget.la

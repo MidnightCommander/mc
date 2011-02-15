@@ -49,7 +49,7 @@
 #include "lib/skin.h"
 #include "lib/util.h"
 
-#include "lib/vfs/mc-vfs/vfs.h" /* vfs_translate_url() */
+#include "lib/vfs/vfs.h" /* vfs_translate_url() */
 
 #include "src/args.h"
 #include "src/subshell.h"

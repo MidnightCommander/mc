@@ -42,7 +42,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"

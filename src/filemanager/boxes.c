@@ -42,12 +42,12 @@
 #include "lib/mcconfig.h"       /* Load/save user formats */
 #include "lib/strutil.h"
 
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #ifdef ENABLE_VFS_FTP
-#include "lib/vfs/mc-vfs/ftpfs.h"
+#include "src/vfs/ftpfs/ftpfs.h"
 #endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
-#include "lib/vfs/mc-vfs/smbfs.h"
+#include "src/vfs/smbfs/smbfs.h"
 #endif /* ENABLE_VFS_SMB */
 
 #include "lib/util.h"           /* Q_() */

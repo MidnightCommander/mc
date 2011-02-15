@@ -57,7 +57,7 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/util.h"
 #include "lib/widget.h"         /* D_NORMAL, D_ERROR */
 

@@ -1,4 +1,4 @@
-SUBDIRS = filemanager man2hlp viewer
+SUBDIRS = filemanager man2hlp vfs viewer
 
 if USE_EDIT
 SUBDIRS += editor
@@ -34,6 +34,7 @@ DIFFLIB = diffviewer/libdiffviewer.la
 endif
 
 mc_LDADD = \
+	vfs/libmc-vfs.la \
 	viewer/libmcviewer.la \
 	filemanager/libmcfilemanager.la \
 	$(DIFFLIB) $(EDITLIB) \
@@ -41,7 +42,7 @@ mc_LDADD = \
 
 if ENABLE_VFS_SMB
 # this is a hack for linking with own samba library in simple way
-mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
+mc_LDADD += vfs/smbfs/helpers/libsamba.a
 endif
 
 mc_LDADD += $(MCLIBS) $(SLANGLIB)

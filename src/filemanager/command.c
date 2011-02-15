@@ -34,7 +34,7 @@
 
 #include "lib/global.h"         /* home_dir */
 #include "lib/tty/tty.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strescape.h"
 #include "lib/skin.h"           /* DEFAULT_COLOR */
 #include "lib/util.h"

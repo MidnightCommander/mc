@@ -39,9 +39,9 @@
 #include "lib/skin.h"
 #include "lib/search.h"
 #include "lib/mcconfig.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/util.h"           /* canonicalize_pathname() */
 
 #include "src/setup.h"          /* verbose */
