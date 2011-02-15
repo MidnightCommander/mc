@@ -1,6 +1,8 @@
 #ifndef MC__EVENT_TYPES_H
 #define MC__EVENT_TYPES_H
 
+#include <stdarg.h>
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* Event groups for main modules */
@@ -13,6 +15,16 @@
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
+
+
+/* MCEVENT_GROUP_CORE:vfs_timestamp */
+struct vfs_class;
+typedef struct
+{
+    struct vfs_class *vclass;
+    gpointer id;
+    gboolean ret;
+} ev_vfs_stamp_create_t;
 
 /*** global variables defined in .c file *********************************************************/
 

@@ -57,6 +57,8 @@
 #include "src/learn.h"          /* learn_keys() */
 #include "src/execute.h"        /* suspend_cmd() */
 #include "src/keybind-defaults.h"
+#include "lib/keybind.h"
+#include "lib/event.h"
 
 #include "option.h"             /* configure_box() */
 #include "tree.h"
@@ -66,7 +68,6 @@
 #include "hotlist.h"
 #include "panelize.h"
 #include "command.h"            /* cmdline */
-#include "lib/keybind.h"
 
 #include "chmod.h"
 #include "chown.h"
@@ -487,6 +488,66 @@ translated_mc_chdir (char *dir)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#if ENABLE_VFS
+
+/* event helper */
+static gboolean
+check_panel_timestamp (WPanel * panel, panel_view_mode_t mode, struct vfs_class *vclass, vfsid id)
+{
+    if (mode == view_listing)
+    {
+        struct vfs_class *nvfs;
+        vfsid nvfsid;
+        nvfs = vfs_get_class (panel->cwd);
+        if (nvfs != vclass)
+            return FALSE;
+        nvfsid = vfs_getid (nvfs, panel->cwd);
+        if (nvfsid == id)
+            return TRUE;
+    }
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* event callback */
+static gboolean
+check_current_panel_timestamp (const gchar * event_group_name, const gchar * event_name,
+                               gpointer init_data, gpointer data)
+{
+    ev_vfs_stamp_create_t *event_data = (ev_vfs_stamp_create_t *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
+    event_data->ret =
+        check_panel_timestamp (current_panel, get_current_type (), event_data->vclass,
+                               event_data->id);
+    return !event_data->ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* event callback */
+static gboolean
+check_other_panel_timestamp (const gchar * event_group_name, const gchar * event_name,
+                             gpointer init_data, gpointer data)
+{
+    ev_vfs_stamp_create_t *event_data = (ev_vfs_stamp_create_t *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
+    event_data->ret =
+        check_panel_timestamp (other_panel, get_other_type (), event_data->vclass, event_data->id);
+    return !event_data->ret;
+}
+#endif /* ENABLE_VFS */
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 create_panels (void)
 {
@@ -534,16 +595,18 @@ create_panels (void)
     set_display_type (other_index, other_mode);
 
     if (startup_left_mode == view_listing)
-    {
         current_panel = left_panel;
-    }
+    else if (right_panel != NULL)
+        current_panel = right_panel;
     else
-    {
-        if (right_panel)
-            current_panel = right_panel;
-        else
-            current_panel = left_panel;
-    }
+        current_panel = left_panel;
+
+#if ENABLE_VFS
+    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL,
+                  NULL);
+    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL,
+                  NULL);
+#endif /* ENABLE_VFS */
 
     /* Create the nice widgets */
     cmdline = command_new (0, 0, 0);

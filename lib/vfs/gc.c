@@ -33,18 +33,12 @@
 
 #include <config.h>
 
-#include <stdio.h>
 #include <stdlib.h>             /* For atol() */
-#include <stdarg.h>
-#include <string.h>
-#include <errno.h>
 #include <sys/types.h>
-#include <ctype.h>              /* is_digit() */
 #include <sys/time.h>           /* gettimeofday() */
 
 #include "lib/global.h"
-
-#include "src/filemanager/midnight.h"   /* current_panel */
+#include "lib/event.h"
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -173,58 +167,35 @@ vfs_stamp_path (const char *path)
  */
 
 void
-vfs_stamp_create (struct vfs_class *oldvfs, vfsid oldvfsid)
+vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 {
-    struct vfs_class *nvfs, *n2vfs, *n3vfs;
-    vfsid nvfsid, n2vfsid, n3vfsid;
+    struct vfs_class *nvfs;
+    vfsid nvfsid;
+
+    ev_vfs_stamp_create_t event_data = { vclass, id, FALSE };
 
     /* There are three directories we have to take care of: current_dir,
        current_panel->cwd and other_panel->cwd. Athough most of the time either
        current_dir and current_panel->cwd or current_dir and other_panel->cwd are the
        same, it's possible that all three are different -- Norbert */
 
-    if (current_panel == NULL)
+    if (!mc_event_present (MCEVENT_GROUP_CORE, "vfs_timestamp"))
         return;
 
     nvfs = vfs_get_class (vfs_get_current_dir ());
     nvfsid = vfs_getid (nvfs, vfs_get_current_dir ());
     vfs_rmstamp (nvfs, nvfsid);
 
-    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == NULL)
-    {
-        return;
-    }
-
-    if (get_current_type () == view_listing)
-    {
-        n2vfs = vfs_get_class (current_panel->cwd);
-        n2vfsid = vfs_getid (n2vfs, current_panel->cwd);
-        if (n2vfs == oldvfs && n2vfsid == oldvfsid)
-            return;
-    }
-    else
-    {
-        n2vfs = NULL;
-        n2vfsid = NULL;
-    }
-
-    if (get_other_type () == view_listing)
-    {
-        n3vfs = vfs_get_class (other_panel->cwd);
-        n3vfsid = vfs_getid (n3vfs, other_panel->cwd);
-        if (n3vfs == oldvfs && n3vfsid == oldvfsid)
-            return;
-    }
-    else
-    {
-        n3vfs = NULL;
-        n3vfsid = NULL;
-    }
-
-    if (!oldvfs || !oldvfs->nothingisopen || !(*oldvfs->nothingisopen) (oldvfsid))
+    if (id == NULL || (nvfs == vclass && nvfsid == id))
         return;
 
-    vfs_addstamp (oldvfs, oldvfsid);
+    mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) &event_data);
+
+    if (event_data.ret)
+        return;
+
+    if (vclass != NULL && vclass->nothingisopen != NULL && vclass->nothingisopen (id) != 0)
+        vfs_addstamp (vclass, id);
 }
 
 /* --------------------------------------------------------------------------------------------- */
