@@ -17,11 +17,18 @@ one_test() {
 	fi
 }
 
-test -r doc/mc.1.in || { echo "ERROR: cannot read doc/mc.1.in" 2>&1; exit 1; }
+test -r doc/man/mc.1.in || { echo "ERROR: cannot read doc/mc.1.in" 2>&1; exit 1; }
 
 # Test the documentation for possible errors.
-one_test find doc -name '*.[1-9].in' -exec groff -wall -mandoc -Tps {} \;
-one_test find doc -name '*.[1-9].in' -exec nroff -mandoc -Tlatin1 {} \;
+for i in `find doc -name '*.[1-9].in'`; do
+    echo "test $i"
+    cat $i |preconv -e UTF8| groff -wall -mandoc -Tutf8 | grep "warning:"
+done
+
+for i in `find doc -name '*.[1-9].in'`; do
+    echo "test $i"
+    cat $i |preconv -e UTF8| nroff -Tutf8 -mandoc | grep "warning:"
+done
 
 # Check the English manuals to be in ASCII.
 one_test find doc -maxdepth 1 -name '*.[1-9].in' -exec groff -wall -Tascii {} \;
