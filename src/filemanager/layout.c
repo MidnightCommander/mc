@@ -102,6 +102,8 @@ int free_space = 1;
 /* The starting line for the output of the subprogram */
 int output_start_y = 0;
 
+int ok_to_refresh = 1;
+
 /*** file scope macro definitions ****************************************************************/
 
 /* The maximum number of views managed by the set_display_type routine */
@@ -191,7 +193,6 @@ static int output_lines_label_len;
 
 static WButton *bleft_widget, *bright_widget;
 
-static int ok_to_refresh = 1;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -882,45 +883,6 @@ set_hintbar (const char *str)
     label_set_text (the_hint, str);
     if (ok_to_refresh > 0)
         mc_refresh ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-print_vfs_message (const char *msg, ...)
-{
-    va_list ap;
-    char str[128];
-
-    va_start (ap, msg);
-    g_vsnprintf (str, sizeof (str), msg, ap);
-    va_end (ap);
-
-    if (mc_global.widget.midnight_shutdown)
-        return;
-
-    if (!mc_global.message_visible || !the_hint || !the_hint->widget.owner)
-    {
-        int col, row;
-
-        if (!nice_rotating_dash || (ok_to_refresh <= 0))
-            return;
-
-        /* Preserve current cursor position */
-        tty_getyx (&row, &col);
-
-        tty_gotoyx (0, 0);
-        tty_setcolor (NORMAL_COLOR);
-        tty_print_string (str_fit_to_term (str, COLS - 1, J_LEFT));
-
-        /* Restore cursor position */
-        tty_gotoyx (row, col);
-        mc_refresh ();
-        return;
-    }
-
-    if (mc_global.message_visible)
-        set_hintbar (str);
 }
 
 /* --------------------------------------------------------------------------------------------- */

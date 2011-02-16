@@ -94,7 +94,6 @@ What to do with this?
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
 #include "lib/widget.h"         /* message() */
 
-#include "src/filemanager/layout.h"     /* print_vfs_message */
 #include "src/history.h"
 #include "src/setup.h"          /* for load_anon_passwd */
 
@@ -508,7 +507,7 @@ ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
     if (SUP.sock != -1)
     {
-        print_vfs_message (_("ftpfs: Disconnecting from %s"), SUP.host);
+        vfs_print_message (_("ftpfs: Disconnecting from %s"), SUP.host);
         ftpfs_command (me, super, NONE, "QUIT");
         close (SUP.sock);
     }
@@ -601,12 +600,12 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
             fflush (MEDATA->logfile);
         }
 
-        print_vfs_message (_("ftpfs: sending login name"));
+        vfs_print_message (_("ftpfs: sending login name"));
 
         switch (ftpfs_command (me, super, WAIT_REPLY, "USER %s", name))
         {
         case CONTINUE:
-            print_vfs_message (_("ftpfs: sending user password"));
+            vfs_print_message (_("ftpfs: sending user password"));
             code = ftpfs_command (me, super, WAIT_REPLY, "PASS %s", pass);
             if (code == CONTINUE)
             {
@@ -617,7 +616,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
                 g_free (p);
                 if (op == NULL)
                     ERRNOR (EPERM, 0);
-                print_vfs_message (_("ftpfs: sending user account"));
+                vfs_print_message (_("ftpfs: sending user account"));
                 code = ftpfs_command (me, super, WAIT_REPLY, "ACCT %s", op);
                 g_free (op);
             }
@@ -626,7 +625,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
             /* fall through */
 
         case COMPLETE:
-            print_vfs_message (_("ftpfs: logged in"));
+            vfs_print_message (_("ftpfs: logged in"));
             wipe_password (pass);
             g_free (name);
             return 1;
@@ -776,7 +775,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 
     if (!host || !*host)
     {
-        print_vfs_message (_("ftpfs: Invalid host name."));
+        vfs_print_message (_("ftpfs: Invalid host name."));
         ftpfs_errno = EINVAL;
         g_free (host);
         return -1;
@@ -828,7 +827,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     if (e != 0)
     {
         tty_disable_interrupt_key ();
-        print_vfs_message (_("ftpfs: %s"), gai_strerror (e));
+        vfs_print_message (_("ftpfs: %s"), gai_strerror (e));
         g_free (host);
         ftpfs_errno = EINVAL;
         return -1;
@@ -846,14 +845,14 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
                 continue;
 
             tty_disable_interrupt_key ();
-            print_vfs_message (_("ftpfs: %s"), unix_error_string (errno));
+            vfs_print_message (_("ftpfs: %s"), unix_error_string (errno));
             g_free (host);
             freeaddrinfo (res);
             ftpfs_errno = errno;
             return -1;
         }
 
-        print_vfs_message (_("ftpfs: making connection to %s"), host);
+        vfs_print_message (_("ftpfs: making connection to %s"), host);
         g_free (host);
         host = NULL;
 
@@ -865,11 +864,11 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 
         if (errno == EINTR && tty_got_interrupt ())
         {
-            print_vfs_message (_("ftpfs: connection interrupted by user"));
+            vfs_print_message (_("ftpfs: connection interrupted by user"));
         }
         else if (res->ai_next == NULL)
         {
-            print_vfs_message (_("ftpfs: connection to server failed: %s"),
+            vfs_print_message (_("ftpfs: connection to server failed: %s"),
                                unix_error_string (errno));
         }
         else
@@ -929,7 +928,7 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
                 tty_enable_interrupt_key ();
                 for (count_down = retry_seconds; count_down; count_down--)
                 {
-                    print_vfs_message (_("Waiting to retry... %d (Control-C to cancel)"),
+                    vfs_print_message (_("Waiting to retry... %d (Control-C to cancel)"),
                                        count_down);
                     sleep (1);
                     if (tty_got_interrupt ())
@@ -1265,7 +1264,7 @@ ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
         ((struct sockaddr_in6 *) data_addr)->sin6_port = 0;
         break;
     default:
-        print_vfs_message (_("ftpfs: invalid address family"));
+        vfs_print_message (_("ftpfs: invalid address family"));
         ERRNOR (EINVAL, -1);
     }
 
@@ -1273,7 +1272,7 @@ ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
 
     if (result < 0)
     {
-        print_vfs_message (_("ftpfs: could not create socket: %s"), unix_error_string (errno));
+        vfs_print_message (_("ftpfs: could not create socket: %s"), unix_error_string (errno));
         return -1;
     }
     else
@@ -1307,7 +1306,7 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
         if (ftpfs_setup_passive (me, super, data_sock, &data_addr, &data_addrlen))
             return data_sock;
 
-        print_vfs_message (_("ftpfs: could not setup passive mode"));
+        vfs_print_message (_("ftpfs: could not setup passive mode"));
         SUP.use_passive_connection = 0;
 
         close (data_sock);
@@ -1407,10 +1406,10 @@ ftpfs_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
     FH_SOCK = -1;
     SUP.ctl_connection_busy = 0;
 
-    print_vfs_message (_("ftpfs: aborting transfer."));
+    vfs_print_message (_("ftpfs: aborting transfer."));
     if (send (SUP.sock, ipbuf, sizeof (ipbuf), MSG_OOB) != sizeof (ipbuf))
     {
-        print_vfs_message (_("ftpfs: abort error: %s"), unix_error_string (errno));
+        vfs_print_message (_("ftpfs: abort error: %s"), unix_error_string (errno));
         if (dsock != -1)
             close (dsock);
         return;
@@ -1418,7 +1417,7 @@ ftpfs_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
 
     if (ftpfs_command (me, super, NONE, "%cABOR", DM) != COMPLETE)
     {
-        print_vfs_message (_("ftpfs: abort failed"));
+        vfs_print_message (_("ftpfs: abort failed"));
         if (dsock != -1)
             close (dsock);
         return;
@@ -1547,7 +1546,7 @@ resolve_symlink_with_ls_options (struct vfs_class *me, struct vfs_s_super *super
     {
         if (ftpfs_chdir_internal (bucket, dir->remote_path) != COMPLETE)
         {
-            print_vfs_message (_("ftpfs: CWD failed."));
+            vfs_print_message (_("ftpfs: CWD failed."));
             return;
         }
         sock = ftpfs_open_data_connection (bucket, "LIST -lLa", ".", TYPE_ASCII, 0);
@@ -1557,7 +1556,7 @@ resolve_symlink_with_ls_options (struct vfs_class *me, struct vfs_s_super *super
 
     if (sock == -1)
     {
-        print_vfs_message (_("ftpfs: couldn't resolve symlink"));
+        vfs_print_message (_("ftpfs: couldn't resolve symlink"));
         return;
     }
 
@@ -1565,7 +1564,7 @@ resolve_symlink_with_ls_options (struct vfs_class *me, struct vfs_s_super *super
     if (fp == NULL)
     {
         close (sock);
-        print_vfs_message (_("ftpfs: couldn't resolve symlink"));
+        vfs_print_message (_("ftpfs: couldn't resolve symlink"));
         return;
     }
     tty_enable_interrupt_key ();
@@ -1626,7 +1625,7 @@ resolve_symlink_with_ls_options (struct vfs_class *me, struct vfs_s_super *super
 static void
 resolve_symlink (struct vfs_class *me, struct vfs_s_super *super, struct vfs_s_inode *dir)
 {
-    print_vfs_message (_("Resolving symlink..."));
+    vfs_print_message (_("Resolving symlink..."));
 
     if (SUP.strict_rfc959_list_cmd)
         resolve_symlink_without_ls_options (me, super, dir);
@@ -1650,7 +1649,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         || (strchr (remote_path, ' ') != NULL);
 
   again:
-    print_vfs_message (_("ftpfs: Reading FTP directory %s... %s%s"),
+    vfs_print_message (_("ftpfs: Reading FTP directory %s... %s%s"),
                        remote_path,
                        SUP.strict ==
                        RFC_STRICT ? _("(strict rfc959)") : "", cd_first ? _("(chdir first)") : "");
@@ -1660,7 +1659,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         if (ftpfs_chdir_internal (me, super, remote_path) != COMPLETE)
         {
             ftpfs_errno = ENOENT;
-            print_vfs_message (_("ftpfs: CWD failed."));
+            vfs_print_message (_("ftpfs: CWD failed."));
             return -1;
         }
     }
@@ -1702,7 +1701,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
             close (sock);
             tty_disable_interrupt_key ();
             ftpfs_get_reply (me, SUP.sock, NULL, 0);
-            print_vfs_message (_("%s: failure"), me->name);
+            vfs_print_message (_("%s: failure"), me->name);
             return -1;
         }
 
@@ -1749,7 +1748,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     if (SUP.strict == RFC_AUTODETECT)
         SUP.strict = RFC_DARING;
 
-    print_vfs_message (_("%s: done."), me->name);
+    vfs_print_message (_("%s: done."), me->name);
     return 0;
 
   fallback:
@@ -1763,7 +1762,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         cd_first = 1;
         goto again;
     }
-    print_vfs_message (_("ftpfs: failed; nowhere to fallback to"));
+    vfs_print_message (_("ftpfs: failed; nowhere to fallback to"));
     ERRNOR (EACCES, -1);
 }
 
@@ -1840,7 +1839,7 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *l
             w_buf += n_written;
             n_read -= n_written;
         }
-        print_vfs_message ("%s: %" PRIuMAX "/%" PRIuMAX,
+        vfs_print_message ("%s: %" PRIuMAX "/%" PRIuMAX,
                            _("ftpfs: storing file"), (uintmax_t) n_stored, (uintmax_t) s.st_size);
     }
     tty_disable_interrupt_key ();

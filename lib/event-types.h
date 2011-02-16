@@ -26,6 +26,15 @@ typedef struct
     gboolean ret;
 } ev_vfs_stamp_create_t;
 
+
+/* MCEVENT_GROUP_CORE:vfs_print_message */
+typedef struct
+{
+    const char *msg;
+    va_list ap;
+} ev_vfs_print_message_t;
+
+
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/

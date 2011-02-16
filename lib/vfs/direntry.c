@@ -36,6 +36,7 @@
 #include <time.h>
 #include <sys/time.h>           /* gettimeofday() */
 #include <inttypes.h>           /* uintmax_t */
+#include <stdarg.h>
 
 #include "lib/global.h"
 
@@ -44,8 +45,6 @@
 #if 0
 #include "lib/widget.h"         /* message() */
 #endif
-
-#include "src/filemanager/layout.h"     /* print_vfs_message */
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -279,7 +278,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
     if (ent && (!(MEDATA->dir_uptodate) (me, ent->ino)))
     {
 #if 1
-        print_vfs_message (_("Directory cache expired for %s"), path);
+        vfs_print_message (_("Directory cache expired for %s"), path);
 #endif
         vfs_s_free_entry (me, ent);
         ent = NULL;
@@ -708,11 +707,11 @@ vfs_s_print_stats (const char *fs_name, const char *action,
     }
 
     if (need)
-        print_vfs_message (i18n_percent_transf_format, fs_name, action,
+        vfs_print_message (i18n_percent_transf_format, fs_name, action,
                            file_name, (int) ((double) have * 100 / need), (uintmax_t) have,
                            _("bytes transferred"));
     else
-        print_vfs_message (i18n_transf_format, fs_name, action, file_name, (uintmax_t) have,
+        vfs_print_message (i18n_transf_format, fs_name, action, file_name, (uintmax_t) have,
                            _("bytes transferred"));
 }
 
@@ -1203,7 +1202,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     {
         if (MEDATA->linear_start)
         {
-            print_vfs_message (_("Starting linear transfer..."));
+            vfs_print_message (_("Starting linear transfer..."));
             fh->linear = LS_LINEAR_PREOPEN;
         }
     }

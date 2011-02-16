@@ -288,5 +288,7 @@ void vfs_release_path (const char *dir);
 
 void vfs_fill_names (fill_names_f);
 
+void vfs_print_message (const char *msg, ...) __attribute__ ((format (__printf__, 1, 2)));
+
 /*** inline functions ****************************************************************************/
 #endif /* MC_VFS_VFS_H */

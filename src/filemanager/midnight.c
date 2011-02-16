@@ -86,6 +86,7 @@
 #include "midnight.h"
 
 /* TODO: merge content of layout.c here */
+extern int ok_to_refresh;
 
 /*** global variables ****************************************************************************/
 
@@ -548,6 +549,51 @@ check_other_panel_timestamp (const gchar * event_group_name, const gchar * event
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* event callback */
+static gboolean
+print_vfs_message (const gchar * event_group_name, const gchar * event_name,
+                   gpointer init_data, gpointer data)
+{
+    char str[128];
+    ev_vfs_print_message_t *event_data = (ev_vfs_print_message_t *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
+    g_vsnprintf (str, sizeof (str), event_data->msg, event_data->ap);
+
+    if (mc_global.widget.midnight_shutdown)
+        return TRUE;
+
+    if (!mc_global.message_visible || !the_hint || !the_hint->widget.owner)
+    {
+        int col, row;
+
+        if (!nice_rotating_dash || (ok_to_refresh <= 0))
+            return TRUE;
+
+        /* Preserve current cursor position */
+        tty_getyx (&row, &col);
+
+        tty_gotoyx (0, 0);
+        tty_setcolor (NORMAL_COLOR);
+        tty_print_string (str_fit_to_term (str, COLS - 1, J_LEFT));
+
+        /* Restore cursor position */
+        tty_gotoyx (row, col);
+        mc_refresh ();
+        return TRUE;
+    }
+
+    if (mc_global.message_visible)
+        set_hintbar (str);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 create_panels (void)
 {
@@ -607,6 +653,8 @@ create_panels (void)
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL,
                   NULL);
 #endif /* ENABLE_VFS */
+
+    mc_event_add (MCEVENT_GROUP_CORE, "vfs_print_message", print_vfs_message, NULL, NULL);
 
     /* Create the nice widgets */
     cmdline = command_new (0, 0, 0);

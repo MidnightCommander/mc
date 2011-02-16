@@ -66,8 +66,6 @@ void clr_scr (void);
 void repaint_screen (void);
 void mc_refresh (void);
 
-void print_vfs_message (const char *msg, ...) __attribute__ ((format (__printf__, 1, 2)));
-
 /*** inline functions ****************************************************************************/
 
 #endif /* MC__LAYOUT_H */

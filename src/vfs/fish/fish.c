@@ -63,7 +63,6 @@
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
 
-#include "src/filemanager/layout.h"     /* print_vfs_message */
 #include "src/execute.h"        /* pre_exec, post_exec */
 
 #include "lib/vfs/vfs.h"
@@ -260,7 +259,7 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
     if ((SUP.sockw != -1) || (SUP.sockr != -1))
     {
-        print_vfs_message (_("fish: Disconnecting from %s"), super->name ? super->name : "???");
+        vfs_print_message (_("fish: Disconnecting from %s"), super->name ? super->name : "???");
         fish_command (me, super, NONE, "#BYE\nexit\n");
         close (SUP.sockw);
         close (SUP.sockr);
@@ -509,7 +508,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     if (!ftalk)
         ERRNOR (E_PROTO, -1);
 
-    print_vfs_message (_("fish: Sending initial line..."));
+    vfs_print_message (_("fish: Sending initial line..."));
     /*
      * Run `start_fish_server'. If it doesn't exist - no problem,
      * we'll talk directly to the shell.
@@ -520,7 +519,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
          "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    print_vfs_message (_("fish: Handshaking version..."));
+    vfs_print_message (_("fish: Handshaking version..."));
     if (fish_command (me, super, WAIT_REPLY, "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
@@ -530,13 +529,13 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
          "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    print_vfs_message (_("fish: Getting host info..."));
+    vfs_print_message (_("fish: Getting host info..."));
     if (fish_info (me, super))
         SUP.scr_env = fish_set_env (SUP.host_flags);
 
-    print_vfs_message (_("fish: Setting up current directory..."));
+    vfs_print_message (_("fish: Setting up current directory..."));
     SUP.cwdir = fish_getcwd (me, super);
-    print_vfs_message (_("fish: Connected, home %s."), SUP.cwdir);
+    vfs_print_message (_("fish: Connected, home %s."), SUP.cwdir);
 #if 0
     super->name = g_strconcat ("/#sh:", SUP.user, "@", SUP.host, "/", (char *) NULL);
 #endif
@@ -643,7 +642,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 #endif
     logfile = MEDATA->logfile;
 
-    print_vfs_message (_("fish: Reading directory %s..."), remote_path);
+    vfs_print_message (_("fish: Reading directory %s..."), remote_path);
 
     gettimeofday (&dir->timestamp, NULL);
     dir->timestamp.tv_sec += fish_directory_timeout;
@@ -809,7 +808,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     {
         g_free (SUP.cwdir);
         SUP.cwdir = g_strdup (remote_path);
-        print_vfs_message (_("%s: done."), me->name);
+        vfs_print_message (_("%s: done."), me->name);
         return 0;
     }
     else if (reply_code == ERROR)
@@ -822,7 +821,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     }
 
   error:
-    print_vfs_message (_("%s: failure"), me->name);
+    vfs_print_message (_("%s: failure"), me->name);
     return -1;
 }
 
@@ -880,7 +879,7 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
      */
 
     quoted_name = strutils_shell_escape (name);
-    print_vfs_message (_("fish: store %s: sending command..."), quoted_name);
+    vfs_print_message (_("fish: store %s: sending command..."), quoted_name);
 
     /* FIXME: File size is limited to ULONG_MAX */
     if (!fh->u.fish.append)
@@ -914,7 +913,7 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
         {
             if ((errno == EINTR) && tty_got_interrupt ())
                 continue;
-            print_vfs_message (_("fish: Local read failed, sending zeros"));
+            vfs_print_message (_("fish: Local read failed, sending zeros"));
             close (h);
             h = open ("/dev/zero", O_RDONLY);
         }
@@ -933,7 +932,7 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
         }
         tty_disable_interrupt_key ();
         total += n;
-        print_vfs_message ("%s: %d/%" PRIuMAX,
+        vfs_print_message ("%s: %d/%" PRIuMAX,
                            was_error ? _("fish: storing zeros") : _("fish: storing file"),
                            total, (uintmax_t) s.st_size);
     }
@@ -1002,7 +1001,7 @@ fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
     char buffer[8192];
     int n;
 
-    print_vfs_message (_("Aborting transfer..."));
+    vfs_print_message (_("Aborting transfer..."));
     do
     {
         n = MIN (8192, fh->u.fish.total - fh->u.fish.got);
@@ -1017,9 +1016,9 @@ fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
     while (n != 0);
 
     if (fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
-        print_vfs_message (_("Error reported after abort."));
+        vfs_print_message (_("Error reported after abort."));
     else
-        print_vfs_message (_("Aborted transfer would be successful."));
+        vfs_print_message (_("Aborted transfer would be successful."));
 }
 
 /* --------------------------------------------------------------------------------------------- */

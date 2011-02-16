@@ -54,6 +54,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
+#include "lib/event.h"
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -1512,6 +1513,20 @@ gboolean
 vfs_file_is_local (const char *filename)
 {
     return (vfs_file_class_flags (filename) & VFSF_LOCAL) != 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_print_message (const char *msg, ...)
+{
+    ev_vfs_print_message_t event_data;
+
+    va_start (event_data.ap, msg);
+    event_data.msg = msg;
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "vfs_print_message", (gpointer) & event_data);
+    va_end (event_data.ap);
 }
 
 /* --------------------------------------------------------------------------------------------- */

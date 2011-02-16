@@ -59,7 +59,6 @@
 #include "lib/global.h"
 
 #include "lib/widget.h"         /* message() */
-#include "src/filemanager/layout.h"     /* print_vfs_message */
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/vfs.h"
 
@@ -260,7 +259,7 @@ undelfs_loaddel (void)
     while (ino)
     {
         if ((count++ % 1024) == 0)
-            print_vfs_message (_("undelfs: loading deleted files information %d inodes"), count);
+            vfs_print_message (_("undelfs: loading deleted files information %d inodes"), count);
         if (inode.i_dtime == 0)
             goto next;
 
@@ -360,13 +359,13 @@ undelfs_opendir (struct vfs_class *me, const char *dirname)
         message (D_ERROR, undelfserr, _("Cannot open file %s"), ext2_fname);
         return 0;
     }
-    print_vfs_message (_("undelfs: reading inode bitmap..."));
+    vfs_print_message (_("undelfs: reading inode bitmap..."));
     if (ext2fs_read_inode_bitmap (fs))
     {
         message (D_ERROR, undelfserr, _("Cannot load inode bitmap from:\n%s"), ext2_fname);
         goto quit_opendir;
     }
-    print_vfs_message (_("undelfs: reading block bitmap..."));
+    vfs_print_message (_("undelfs: reading block bitmap..."));
     if (ext2fs_read_block_bitmap (fs))
     {
         message (D_ERROR, undelfserr, _("Cannot load block bitmap from:\n%s"), ext2_fname);
@@ -375,10 +374,10 @@ undelfs_opendir (struct vfs_class *me, const char *dirname)
     /* Now load the deleted information */
     if (!undelfs_loaddel ())
         goto quit_opendir;
-    print_vfs_message (_("%s: done."), me->name);
+    vfs_print_message (_("%s: done."), me->name);
     return fs;
   quit_opendir:
-    print_vfs_message (_("%s: failure"), me->name);
+    vfs_print_message (_("%s: failure"), me->name);
     ext2fs_close (fs);
     fs = NULL;
     return 0;
