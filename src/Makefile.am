@@ -8,10 +8,7 @@ if USE_DIFF
 SUBDIRS += diffviewer
 endif
 
-AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
-
+AM_CPPFLAGS =  -DLOCALEDIR=\""$(localedir)"\"
 
 if CONS_SAVER
 SUBDIRS += consaver

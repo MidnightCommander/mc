@@ -206,6 +206,8 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
 void
 mc_config_init_config_paths (GError ** error)
 {
+    const char *mc_datadir;
+
     char *u_config_dir = (char *) g_get_user_config_dir ();
     char *u_data_dir = (char *) g_get_user_data_dir ();
     char *u_cache_dir = (char *) g_get_user_cache_dir ();
@@ -230,6 +232,17 @@ mc_config_init_config_paths (GError ** error)
     g_free (u_data_dir);
     g_free (u_cache_dir);
     g_free (u_config_dir);
+
+    /* This is the directory, where MC was installed, on Unix this is DATADIR */
+    /* and can be overriden by the MC_DATADIR environment variable */
+    mc_datadir = g_getenv ("MC_DATADIR");
+    if (mc_datadir != NULL)
+        mc_global.sysconfig_dir = g_strdup (mc_datadir);
+    else
+        mc_global.sysconfig_dir = g_strdup (SYSCONFDIR);
+
+    mc_global.share_data_dir = g_strdup (DATADIR);
+
     xdg_vars_initialized = TRUE;
 }
 
@@ -244,6 +257,9 @@ mc_config_deinit_config_paths (void)
     g_free (xdg_config);
     g_free (xdg_cache);
     g_free (xdg_data);
+
+    g_free (mc_global.share_data_dir);
+    g_free (mc_global.sysconfig_dir);
 
     xdg_vars_initialized = FALSE;
 }

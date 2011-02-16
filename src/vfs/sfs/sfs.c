@@ -421,7 +421,7 @@ sfs_init (struct vfs_class *me)
 
     if (cfg == NULL)
     {
-        fprintf (stderr, _("Warning: file %s not found\n"), mc_sfsini);
+        fprintf (stderr, _("%s: Warning: file %s not found\n"), "sfs_init()", mc_sfsini);
         g_free (mc_sfsini);
         return 0;
     }

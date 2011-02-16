@@ -156,7 +156,6 @@ static void
 OS_Setup (void)
 {
     const char *shell_env = getenv ("SHELL");
-    const char *mc_libdir;
 
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
@@ -173,21 +172,6 @@ OS_Setup (void)
         g_free (shell);
         shell = g_strdup ("/bin/sh");
     }
-
-    /* This is the directory, where MC was installed, on Unix this is DATADIR */
-    /* and can be overriden by the MC_DATADIR environment variable */
-    mc_libdir = getenv ("MC_DATADIR");
-    if (mc_libdir != NULL)
-    {
-        mc_global.sysconfig_dir = g_strdup (mc_libdir);
-        mc_global.share_data_dir = g_strdup (SYSCONFDIR);
-    }
-    else
-    {
-        mc_global.sysconfig_dir = g_strdup (SYSCONFDIR);
-        mc_global.share_data_dir = g_strdup (DATADIR);
-    }
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -408,6 +392,13 @@ main (int argc, char *argv[])
 
     str_init_strings (NULL);
 
+    /* Initialize and create home directories */
+    /* do it after the screen library initialization to show the error message */
+    mc_config_init_config_paths (&error);
+
+    if (error == NULL && mc_config_deprecated_dir_present ())
+        mc_config_migrate_from_old_place (&error);
+
     vfs_init ();
     vfs_plugins_init ();
     vfs_setup_work_dir ();
@@ -436,17 +427,6 @@ main (int argc, char *argv[])
 
     /* We need this, since ncurses endwin () doesn't restore the signals */
     save_stop_handler ();
-
-    /* Initialize and create home directories */
-    /* do it after the screen library initialization to show the error message */
-    mc_config_init_config_paths (&error);
-    if (error == NULL)
-    {
-        if (mc_config_deprecated_dir_present ())
-        {
-            mc_config_migrate_from_old_place (&error);
-        }
-    }
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
@@ -563,8 +543,6 @@ main (int argc, char *argv[])
     }
     g_free (last_wd_string);
 
-    g_free (mc_global.share_data_dir);
-    g_free (mc_global.sysconfig_dir);
     g_free (shell);
 
     done_key ();
