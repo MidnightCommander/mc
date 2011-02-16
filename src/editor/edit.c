@@ -973,7 +973,7 @@ my_type_of (int c)
     int x, r = 0;
     const char *p, *q;
     const char option_chars_move_whole_word[] =
-        "!=&|<>^~ !:;, !'!`!.?!\"!( !) !Aa0 !+-*/= |<> ![ !] !\\#! ";
+        "!=&|<>^~ !:;, !'!`!.?!\"!( !) !{ !} !Aa0 !+-*/= |<> ![ !] !\\#! ";
 
     if (!c)
         return 0;
