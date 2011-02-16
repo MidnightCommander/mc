@@ -28,13 +28,13 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"        /* LINES, COLS */
+#include "lib/tty/color.h"      /* tty_set_normal_attrs() */
 #include "lib/widget.h"
-
-/* TODO: these includes should be removed! */
-#include "src/filemanager/layout.h"     /* repaint_screen() */
-#include "src/filemanager/midnight.h"   /* midnight_dlg */
+#include "lib/event.h"
 
 /*** global variables ****************************************************************************/
+
+Dlg_head *midnight_dlg = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -242,7 +242,7 @@ dialog_switch_process_pending (void)
             if (mc_global.mc_run_mode == MC_RUN_FULL)
             {
                 mc_current = g_list_find (mc_dialogs, midnight_dlg);
-                update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+                mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL);
             }
         }
     }
@@ -276,6 +276,25 @@ dialog_switch_shutdown (void)
         run_dlg (dlg);
         destroy_dlg (dlg);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+clr_scr (void)
+{
+    tty_set_normal_attrs ();
+    tty_fill_region (0, 0, LINES, COLS, ' ');
+    tty_refresh ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+repaint_screen (void)
+{
+    do_refresh ();
+    tty_refresh ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

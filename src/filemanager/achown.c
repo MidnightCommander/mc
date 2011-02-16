@@ -46,7 +46,6 @@
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
 #include "chmod.h"
-#include "layout.h"             /* repaint_screen() */
 
 #include "achown.h"
 

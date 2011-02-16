@@ -56,7 +56,6 @@
 #include "src/history.h"
 
 #include "midnight.h"           /* current_panel */
-#include "layout.h"             /* repaint_screen() */
 #include "command.h"            /* cmdline */
 
 #include "hotlist.h"

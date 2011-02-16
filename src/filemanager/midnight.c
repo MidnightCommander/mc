@@ -113,9 +113,6 @@ WLabel *the_hint;
 /* The button bar */
 WButtonBar *the_bar;
 
-/* The dialog handle for the main program */
-Dlg_head *midnight_dlg = NULL;
-
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef HAVE_CHARSET

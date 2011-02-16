@@ -62,8 +62,6 @@ void use_dash (gboolean flag);  /* Disable/Enable rotate_dash routines */
 void rotate_dash (void);
 
 /* Clear screen */
-void clr_scr (void);
-void repaint_screen (void);
 void mc_refresh (void);
 
 /*** inline functions ****************************************************************************/

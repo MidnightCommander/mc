@@ -47,7 +47,6 @@
 
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
-#include "layout.h"             /* repaint_screen() */
 
 #include "panelize.h"
 

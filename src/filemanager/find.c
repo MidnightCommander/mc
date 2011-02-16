@@ -52,7 +52,6 @@
 #include "cmd.h"                /* view_file_at_line */
 #include "midnight.h"           /* current_panel */
 #include "boxes.h"
-#include "layout.h"             /* mc_refresh() */
 
 #include "find.h"
 

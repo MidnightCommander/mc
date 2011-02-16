@@ -48,6 +48,7 @@
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"       /* get_codepage_id () */
 #endif
+#include "lib/event.h"
 
 #include "src/setup.h"          /* For loading/saving panel options */
 #include "src/execute.h"
@@ -3409,6 +3410,25 @@ do_try_to_select (WPanel * panel, const char *name)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* event callback */
+static gboolean
+event_update_panels (const gchar * event_group_name, const gchar * event_name,
+                     gpointer init_data, gpointer data)
+{
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+    (void) data;
+
+    update_panels (UP_RELOAD, UP_KEEPSEL);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
 try_to_select (WPanel * panel, const char *name)
 {
@@ -4102,6 +4122,8 @@ panel_init (void)
     panel_history_prev_item_sign = mc_skin_get ("widget-panel", "history-prev-item-sign", "<");
     panel_history_next_item_sign = mc_skin_get ("widget-panel", "history-next-item-sign", ">");
     panel_history_show_list_sign = mc_skin_get ("widget-panel", "history-show-list-sign", "^");
+
+    mc_event_add (MCEVENT_GROUP_FILEMANAGER, "update_panels", event_update_panels, NULL, NULL);
 
 }
 

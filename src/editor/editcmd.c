@@ -57,8 +57,6 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
-#include "src/filemanager/layout.h"     /* clr_scr() */
-
 #include "src/history.h"
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
@@ -66,6 +64,8 @@
 #include "src/keybind-defaults.h"
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 #include "src/util.h"           /* check_for_default() */
+#include "src/filemanager/layout.h"     /* mc_refresh()  */
+
 
 #include "edit-impl.h"
 #include "edit-widget.h"

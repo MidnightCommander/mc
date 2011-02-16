@@ -44,7 +44,7 @@
 #include "lib/util.h"           /* convert_controls() */
 #include "lib/widget.h"
 
-#include "filemanager/layout.h" /* repaint_screen() */
+#include "src/filemanager/layout.h"     /* mc_refresh()  */
 
 #include "setup.h"
 #include "learn.h"

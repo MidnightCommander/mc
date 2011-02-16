@@ -46,7 +46,6 @@
 #include "dir.h"
 #include "panel.h"              /* Needed for the externs */
 #include "file.h"
-#include "layout.h"             /* repaint_screen() */
 #include "listmode.h"
 
 /*** global variables ****************************************************************************/

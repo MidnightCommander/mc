@@ -41,7 +41,6 @@
 #include "lib/widget.h"
 
 #include "midnight.h"           /* current_panel */
-#include "layout.h"             /* repaint_screen() */
 #include "chmod.h"
 
 /*** global variables ****************************************************************************/
