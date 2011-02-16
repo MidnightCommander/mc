@@ -6,6 +6,8 @@
 #ifndef MC__WIDGET_LISTBOX_H
 #define MC__WIDGET_LISTBOX_H
 
+#include "lib/keybind.h"        /* global_keymap_t */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/
@@ -52,6 +54,8 @@ typedef struct WListbox
 } WListbox;
 
 /*** global variables defined in .c file *********************************************************/
+
+extern const global_keymap_t *listbox_map;
 
 /*** declarations of public functions ************************************************************/
 

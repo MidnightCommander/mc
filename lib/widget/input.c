@@ -55,11 +55,12 @@
 #include "src/main.h"           /* home_dir */
 #include "src/filemanager/midnight.h"   /* current_panel */
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
-#include "src/keybind-defaults.h"       /* input_map */
 
 /*** global variables ****************************************************************************/
 
 int quote = 0;
+
+const global_keymap_t *input_map;
 
 /*** file scope macro definitions ****************************************************************/
 

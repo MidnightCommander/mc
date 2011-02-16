@@ -42,7 +42,6 @@
 #include "src/help.h"           /* interactive_display() */
 #include "src/filemanager/layout.h"
 #include "src/execute.h"        /* suspend_cmd() */
-#include "src/keybind-defaults.h"
 
 /*** global variables ****************************************************************************/
 
@@ -63,6 +62,8 @@ int fast_refresh = 0;
 
 /* left click outside of dialog closes it */
 int mouse_close_dialog = 0;
+
+const global_keymap_t *dialog_map;
 
 /*** file scope macro definitions ****************************************************************/
 

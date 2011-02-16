@@ -31,6 +31,7 @@
 
 #include "lib/global.h"
 #include "lib/hook.h"           /* hook_t */
+#include "lib/keybind.h"        /* global_keymap_t */
 
 /*** defined constants ***************************************************************************/
 
@@ -161,6 +162,8 @@ extern hook_t *idle_hook;
 
 extern int fast_refresh;
 extern int mouse_close_dialog;
+
+extern const global_keymap_t *dialog_map;
 
 /*** declarations of public functions ************************************************************/
 

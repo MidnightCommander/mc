@@ -6,6 +6,8 @@
 #ifndef MC__WIDGET_INPUT_H
 #define MC__WIDGET_INPUT_H
 
+#include "lib/keybind.h"        /* global_keymap_t */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* For history load-save functions */
@@ -67,6 +69,8 @@ typedef struct
 /*** global variables defined in .c file *********************************************************/
 
 extern int quote;
+
+extern const global_keymap_t *input_map;
 
 /*** declarations of public functions ************************************************************/
 

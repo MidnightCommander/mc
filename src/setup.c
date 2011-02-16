@@ -35,6 +35,8 @@
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
 #include "lib/timefmt.h"
+#include "lib/util.h"
+#include "lib/widget.h"
 
 #include "lib/vfs/vfs.h"
 
@@ -45,8 +47,6 @@
 #include "src/vfs/fish/fish.h"
 #endif
 
-#include "lib/util.h"
-#include "lib/widget.h"
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif

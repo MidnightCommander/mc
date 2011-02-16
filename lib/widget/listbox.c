@@ -44,10 +44,9 @@
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
-/* TODO: these includes should be removed! */
-#include "src/keybind-defaults.h"       /* listbox_map */
-
 /*** global variables ****************************************************************************/
+
+const global_keymap_t *listbox_map;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -122,8 +121,8 @@ listbox_draw (WListbox * l, gboolean focused)
     const gboolean disabled = (((Widget *) l)->options & W_DISABLED) != 0;
     const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
     int selc =
-        disabled ? DISABLED_COLOR : focused ? h->color[DLG_COLOR_HOT_FOCUS] : h->
-        color[DLG_COLOR_FOCUS];
+        disabled ? DISABLED_COLOR : focused ? h->
+        color[DLG_COLOR_HOT_FOCUS] : h->color[DLG_COLOR_FOCUS];
 
     GList *le;
     int pos;
