@@ -34,16 +34,15 @@
 
 #include "lib/global.h"
 
-#include "lib/util.h"           /* canonicalize_pathname() */
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/skin.h"
 #include "lib/search.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/util.h"           /* canonicalize_pathname() */
 
 #include "src/setup.h"          /* verbose */
 #include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
@@ -58,9 +57,6 @@
 #include "find.h"
 
 /*** global variables ****************************************************************************/
-
-/* List of directories to be ignored, separated by ':' */
-char **find_ignore_dirs = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -105,15 +101,23 @@ typedef struct
     gboolean content_first_hit;
     gboolean content_whole_words;
     gboolean content_all_charsets;
+
+    /* whether use ignore dirs or not */
+    gboolean ignore_dirs_enable;
+    /* list of directories to be ignored, separated by ':' */
+    char *ignore_dirs;
 } find_file_options_t;
 
 /*** file scope variables ************************************************************************/
 
+/* Parsed ignore dirs */
+static char **find_ignore_dirs = NULL;
+
 /* Size of the find parameters window */
 #if HAVE_CHARSET
-static int FIND_Y = 17;
+static int FIND_Y = 19;
 #else
-static int FIND_Y = 16;
+static int FIND_Y = 18;
 #endif
 static int FIND_X = 68;
 
@@ -123,6 +127,7 @@ static int FIND2_X = 64;
 static WInput *in_start;        /* Start path */
 static WInput *in_name;         /* Filename */
 static WInput *in_with;         /* Text */
+static WInput *in_ignore;
 static WLabel *content_label;   /* 'Content:' label */
 static WCheck *file_case_sens_cbox;     /* "case sensitive" checkbox */
 static WCheck *file_pattern_cbox;       /* File name is glob or regexp */
@@ -137,6 +142,7 @@ static WCheck *content_whole_words_cbox;        /* "whole words" checkbox */
 static WCheck *file_all_charsets_cbox;
 static WCheck *content_all_charsets_cbox;
 #endif
+static WCheck *ignore_dirs_cbox;
 
 static gboolean running = FALSE;        /* nice flag */
 static char *find_pattern = NULL;       /* Pattern to search */
@@ -151,6 +157,8 @@ static char *old_dir = NULL;
 static int resuming;
 static int last_line;
 static int last_pos;
+
+static size_t ignore_count = 0;
 
 static Dlg_head *find_dlg;      /* The dialog */
 static WButton *stop_button;    /* pointer to the stop button */
@@ -202,10 +210,50 @@ static mc_search_t *search_content_handle = NULL;
 
 /*** file scope functions ************************************************************************/
 
-static int
-find_ignore_dirs_cmp (const void *d1, const void *d2)
+static void
+parse_ignore_dirs (const char *ignore_dirs)
 {
-    return strcmp (*(const char **) d1, *(const char **) d2);
+    size_t r = 0, w = 0;    /* read and write iterators */
+
+    if (!options.ignore_dirs_enable || ignore_dirs == NULL  || ignore_dirs[0] == '\0')
+        return;
+
+    find_ignore_dirs = g_strsplit (ignore_dirs, ":", -1);
+
+    /* Values like '/foo::/bar: produce holes in list.
+     * Find and remove them */
+    for (; find_ignore_dirs[r] != NULL; r++)
+    {
+        if (find_ignore_dirs[r][0] == '\0')
+        {
+            /* empty entry -- skip it */
+            g_free (find_ignore_dirs[r]);
+            find_ignore_dirs[r] = NULL;
+            continue;
+        }
+
+        if (r != w)
+        {
+            /* copy entry to the previous free array cell */
+            find_ignore_dirs[w] = find_ignore_dirs[r];
+            find_ignore_dirs[r] = NULL;
+        }
+
+        canonicalize_pathname (find_ignore_dirs[w]);
+        if (find_ignore_dirs[w][0] != '\0')
+            w++;
+        else
+        {
+            g_free (find_ignore_dirs[w]);
+            find_ignore_dirs[w] = NULL;
+        }
+    }
+
+    if (find_ignore_dirs[0] == NULL)
+    {
+        g_strfreev (find_ignore_dirs);
+        find_ignore_dirs = NULL;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -220,63 +268,6 @@ find_load_options (void)
         return;
 
     loaded = TRUE;
-
-    /* Back compatibility: try load old parameter at first */
-    ignore_dirs = mc_config_get_string (mc_main_config, "Misc", "find_ignore_dirs", "");
-    if (ignore_dirs[0] != '\0')
-    {
-        find_ignore_dirs = g_strsplit (ignore_dirs, ":", -1);
-        mc_config_set_string (mc_main_config, "FindFile", "ignore_dirs", ignore_dirs);
-    }
-    g_free (ignore_dirs);
-    mc_config_del_key (mc_main_config, "Misc", "find_ignore_dirs");
-
-    /* Then load new parameters */
-    ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");
-    if (ignore_dirs[0] != '\0')
-    {
-        g_strfreev (find_ignore_dirs);
-        find_ignore_dirs = g_strsplit (ignore_dirs, ":", -1);
-    }
-    g_free (ignore_dirs);
-
-    if (find_ignore_dirs != NULL)
-    {
-        /* Values like '/foo::/bar: produce holes in list.
-           Find and remove them */
-        size_t r = 0, w = 0;    /* read and write iterators */
-
-        for (; find_ignore_dirs[r] != NULL; r++)
-        {
-            if (find_ignore_dirs[r][0] == '\0')
-            {
-                /* empty entry -- skip it */
-                g_free (find_ignore_dirs[r]);
-                find_ignore_dirs[r] = NULL;
-                continue;
-            }
-
-            if (r != w)
-            {
-                /* copy entry to the previous free array cell */
-                find_ignore_dirs[w] = find_ignore_dirs[r];
-                find_ignore_dirs[r] = NULL;
-            }
-
-            canonicalize_pathname (find_ignore_dirs[w]);
-            w++;
-        }
-
-        /* sort array */
-        if (find_ignore_dirs[0] != NULL)
-            qsort (find_ignore_dirs, g_strv_length (find_ignore_dirs),
-                   sizeof (find_ignore_dirs[0]), &find_ignore_dirs_cmp);
-        else
-        {
-            g_strfreev (find_ignore_dirs);
-            find_ignore_dirs = NULL;
-        }
-    }
 
     options.file_case_sens =
         mc_config_get_bool (mc_main_config, "FindFile", "file_case_sens", TRUE);
@@ -298,6 +289,28 @@ find_load_options (void)
         mc_config_get_bool (mc_main_config, "FindFile", "content_whole_words", FALSE);
     options.content_all_charsets =
         mc_config_get_bool (mc_main_config, "FindFile", "content_all_charsets", FALSE);
+    options.ignore_dirs_enable =
+        mc_config_get_bool (mc_main_config, "FindFile", "ignore_dirs_enable", TRUE);
+
+    /* Back compatibility: try load old parameter at first */
+    ignore_dirs = mc_config_get_string (mc_main_config, "Misc", "find_ignore_dirs", "");
+    mc_config_del_param (mc_main_config, "Misc", "find_ignore_dirs");
+
+    /* Then load new parameters */
+    options.ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");
+    if (options.ignore_dirs[0] != '\0')
+        g_free (ignore_dirs);
+    else
+    {
+        g_free (options.ignore_dirs);
+        options.ignore_dirs = ignore_dirs;
+    }
+
+    if (options.ignore_dirs[0] == '\0')
+    {
+        g_free (options.ignore_dirs);
+        options.ignore_dirs = NULL;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -318,6 +331,9 @@ find_save_options (void)
                         options.content_whole_words);
     mc_config_set_bool (mc_main_config, "FindFile", "content_all_charsets",
                         options.content_all_charsets);
+    mc_config_set_bool (mc_main_config, "FindFile", "ignore_dirs_enable",
+                        options.ignore_dirs_enable);
+    mc_config_set_string (mc_main_config, "FindFile", "ignore_dirs", options.ignore_dirs);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -419,6 +435,16 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
             return MSG_HANDLED;
         }
 
+        if (sender == (Widget *) ignore_dirs_cbox)
+        {
+            gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);
+
+            widget_disable (in_ignore->widget, disable);
+            send_message ((Widget *) in_ignore, WIDGET_DRAW, 0);
+
+            return MSG_HANDLED;
+        }
+
         return MSG_NOT_HANDLED;
 
 
@@ -459,7 +485,7 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
  *
  * If the return value is TRUE, then the following holds:
  *
- * START_DIR and PATTERN are pointers to char * and upon return they
+ * START_DIR, IGNORE_FIR and PATTERN are pointers to char * and upon return they
  * contain the information provided by the user.
  *
  * CONTENT holds a strdup of the contents specified by the user if he
@@ -469,7 +495,7 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
  */
 
 static gboolean
-find_parameters (char **start_dir, char **pattern, char **content)
+find_parameters (char **start_dir, char **ignore_dirs, char **pattern, char **content)
 {
     gboolean return_value;
 
@@ -600,19 +626,29 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg, content_use_cbox);
 
     in_with =
-        input_new (6, FIND_X / 2 + 1, input_get_default_colors (), FIND_X / 2 - 4, INPUT_LAST_TEXT,
+        input_new (8, FIND_X / 2 + 1, input_get_default_colors (), FIND_X / 2 - 4, INPUT_LAST_TEXT,
                    MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
     widget_disable (in_with->widget, disable);
     add_widget (find_dlg, in_with);
 
-    content_label = label_new (5, FIND_X / 2 + 1, _("Content:"));
+    content_label = label_new (7, FIND_X / 2 + 1, _("Content:"));
     widget_disable (content_label->widget, disable);
     add_widget (find_dlg, content_label);
 
-    in_name = input_new (6, 3, input_get_default_colors (),
+    in_name = input_new (8, 3, input_get_default_colors (),
                          FIND_X / 2 - 4, INPUT_LAST_TEXT, "name", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_name);
-    add_widget (find_dlg, label_new (5, 3, _("File name:")));
+    add_widget (find_dlg, label_new (7, 3, _("File name:")));
+
+    in_ignore = input_new (5, 3, input_get_default_colors (),  FIND_X - 6,
+                           options.ignore_dirs != NULL ? options.ignore_dirs : "",
+                           "ignoredirs", INPUT_COMPLETE_DEFAULT);
+    widget_disable (in_ignore->widget, !options.ignore_dirs_enable);
+    add_widget (find_dlg, in_ignore);
+
+    ignore_dirs_cbox =
+        check_new (4, 3, options.ignore_dirs_enable, _("Ena&ble ignore directories:"));
+    add_widget (find_dlg, ignore_dirs_cbox);
 
     add_widget (find_dlg, button_new (3, FIND_X - b2 - 2, B_TREE, NORMAL_BUTTON, buts[2], 0));
 
@@ -663,6 +699,9 @@ find_parameters (char **start_dir, char **pattern, char **content)
         options.file_pattern = file_pattern_cbox->state & C_BOOL;
         options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
         options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
+        options.ignore_dirs_enable = ignore_dirs_cbox->state & C_BOOL;
+        g_free (options.ignore_dirs);
+        options.ignore_dirs = g_strdup (in_ignore->buffer);
 
         *content = (options.content_use && in_with->buffer[0] != '\0')
             ? g_strdup (in_with->buffer) : NULL;
@@ -679,6 +718,12 @@ find_parameters (char **start_dir, char **pattern, char **content)
             *start_dir = g_build_filename (current_panel->cwd, *start_dir, (char *) NULL);
 
         canonicalize_pathname (*start_dir);
+
+        if (!options.ignore_dirs_enable || in_ignore->buffer[0] == '\0'
+            || (in_ignore->buffer[0] == '.' && in_ignore->buffer[1] == '\0'))
+            *ignore_dirs = NULL;
+        else
+            *ignore_dirs = g_strdup (in_ignore->buffer);
 
         find_save_options ();
 
@@ -1005,28 +1050,58 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline gboolean
+/**
+  If dir is absolute, this means we're within dir and searching file here.
+  If dir is relative, this means we're going to add dir to the directory stack.
+**/
+static gboolean
 find_ignore_dir_search (const char *dir)
 {
     if (find_ignore_dirs != NULL)
     {
         const size_t dlen = strlen (dir);
+        const unsigned char dabs = g_path_is_absolute (dir) ? 1 : 0;
+
         char **ignore_dir;
 
         for (ignore_dir = find_ignore_dirs; *ignore_dir != NULL; ignore_dir++)
         {
             const size_t ilen = strlen (*ignore_dir);
+            const unsigned char iabs = g_path_is_absolute (*ignore_dir) ? 2 : 0;
 
+            /* ignore dir is too long -- skip it */
             if (dlen < ilen)
-                continue;       /* ignore dir is too long -- skip it */
+                continue;
 
-            if (strncmp (dir, *ignore_dir, ilen) != 0)
-                continue;       /* strings are different -- skip ignore_dir */
+            /* handle absolute and relative paths */
+            switch (iabs | dabs)
+            {
+            case 0: /* both paths are relative */
+            case 3: /* both paths are abolute */
+                /* if ignore dir is not a path  of dir -- skip it */
+                if (strncmp (dir, *ignore_dir, ilen) == 0)
+                {
+                    /* be sure that ignore dir is not a part of dir like:
+                       ignore dir is "h", dir is "home" */
+                    if (dir[ilen] == '\0' || dir[ilen] == PATH_SEP)
+                        return TRUE;
+                }
+                break;
+            case 1: /* dir is absolute, ignore_dir is relative */
+                {
+                    char *d;
 
-            /* be sure than ignore_dir is not a part of dir like:
-               ignore_dir is "/h", dir is "/home" */
-            if (dir[ilen] == PATH_SEP || dir[ilen] == '\0')
-                return TRUE;
+                    d = strstr (dir, *ignore_dir);
+                    if (d != NULL && d[-1] == PATH_SEP && (d[ilen] == '\0' || d[ilen] == PATH_SEP))
+                        return TRUE;
+                }
+                break;
+            case 2: /* dir is relative, ignore_dir is absolute */
+                /* FIXME: skip this case */
+                break;
+            default: /* this cannot occurs */
+                return FALSE;
+            }
         }
     }
 
@@ -1099,16 +1174,28 @@ do_search (Dlg_head * h)
                     if (tmp == NULL)
                     {
                         running = FALSE;
-                        status_update (_("Finished"));
+                        if (ignore_count == 0)
+                            status_update (_("Finished"));
+                        else
+                        {
+                            char msg[BUF_SMALL];
+                            g_snprintf (msg, sizeof (msg),
+                                        ngettext ("Finished (ignored %zd directory)",
+                                                  "Finished (ignored %zd directories)",
+                                                  ignore_count), ignore_count);
+                            status_update (msg);
+                        }
                         find_rotate_dash (h, TRUE);
                         stop_idle (h);
                         return 0;
                     }
 
+                    /* handle absolute ignore dirs here */
                     if (!find_ignore_dir_search (tmp))
                         break;
 
                     g_free (tmp);
+                    ignore_count++;
                 }
 
                 g_free (directory);
@@ -1152,15 +1239,24 @@ do_search (Dlg_head * h)
             gboolean search_ok;
 
             if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
-            {                   /* Can directory be NULL ? */
-                char *tmp_name = concat_dir_and_file (directory, dp->d_name);
-                if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
-                {
-                    push_directory (tmp_name);
-                    subdirs_left--;
-                }
+            {                           /* Can directory be NULL ? */
+                /* handle relative ignore dirs here */
+                if (options.ignore_dirs_enable && find_ignore_dir_search (dp->d_name))
+                    ignore_count++;
                 else
-                    g_free (tmp_name);
+                {
+                    char *tmp_name;
+
+                    tmp_name = g_build_filename (directory, dp->d_name, (char *) NULL);
+
+                    if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
+                    {
+                        push_directory (tmp_name);
+                        subdirs_left--;
+                    }
+                    else
+                        g_free (tmp_name);
+                }
             }
 
             search_ok = mc_search_run (search_file_handle, dp->d_name,
@@ -1193,9 +1289,13 @@ init_find_vars (void)
     g_free (old_dir);
     old_dir = NULL;
     matches = 0;
+    ignore_count = 0;
 
     /* Remove all the items from the stack */
     clear_stack ();
+
+    g_strfreev (find_ignore_dirs);
+    find_ignore_dirs = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1437,6 +1537,7 @@ run_process (void)
     search_file_handle->is_entire_line = options.file_pattern;
 
     resuming = 0;
+
     set_idle_proc (find_dlg, 1);
     ret = run_dlg (find_dlg);
 
@@ -1460,7 +1561,7 @@ kill_gui (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-find_file (const char *start_dir, const char *pattern, const char *content,
+find_file (const char *start_dir, const char *ignore_dirs, const char *pattern, const char *content,
            char **dirname, char **filename)
 {
     int return_value = 0;
@@ -1476,12 +1577,13 @@ find_file (const char *start_dir, const char *pattern, const char *content,
         content_pattern = g_strdup (content);
 
     init_find_vars ();
+    parse_ignore_dirs (ignore_dirs);
     push_directory (start_dir);
 
     return_value = run_process ();
 
-    /* Remove all the items from the stack */
-    clear_stack ();
+    /* Clear variables */
+    init_find_vars ();
 
     get_list_info (&file_tmp, &dir_tmp);
 
@@ -1580,19 +1682,20 @@ find_file (const char *start_dir, const char *pattern, const char *content,
 void
 do_find (void)
 {
-    char *start_dir = NULL, *pattern = NULL, *content = NULL;
+    char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
     char *filename = NULL, *dirname = NULL;
     int v;
     gboolean dir_and_file_set;
 
-    while (find_parameters (&start_dir, &pattern, &content))
+    while (find_parameters (&start_dir, &ignore_dirs, &pattern, &content))
     {
         if (pattern[0] == '\0')
             break;              /* nothing search */
 
         dirname = filename = NULL;
         is_start = FALSE;
-        v = find_file (start_dir, pattern, content, &dirname, &filename);
+        v = find_file (start_dir, ignore_dirs, pattern, content, &dirname, &filename);
+        g_free (ignore_dirs);
         g_free (pattern);
 
         if (v == B_ENTER)
