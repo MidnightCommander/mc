@@ -50,6 +50,8 @@
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
+#include "input_complete.h"
+
 #include "src/main.h"           /* home_dir */
 #include "src/filemanager/midnight.h"   /* current_panel */
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */

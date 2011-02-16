@@ -46,6 +46,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "input_complete.h"
+
 /*** global variables ****************************************************************************/
 
 /* Linux declares environ in <unistd.h>, so don't repeat it here. */

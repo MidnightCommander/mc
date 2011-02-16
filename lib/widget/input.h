@@ -88,9 +88,6 @@ void input_disable_update (WInput * in);
 void input_clean (WInput * in);
 void input_free_completions (WInput * in);
 
-/* src/complete.c */
-void complete (WInput * in);
-
 /*** inline functions ****************************************************************************/
 
 #endif /* MC__WIDGET_INPUT_H */
