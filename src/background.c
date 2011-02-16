@@ -527,6 +527,7 @@ parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
     if (ctx)
         ret = read (from_parent_fd, ctx, sizeof (FileOpContext));
 
+    va_end (ap);
     return i;
 }
 
@@ -550,8 +551,13 @@ parent_call_string (void *routine, int argc, ...)
         value = va_arg (ap, void *);
         if ((write (parent_fd, &len, sizeof (int)) != sizeof (int)) ||
             (write (parent_fd, value, len) != len))
+        {
+            va_end (ap);
             return NULL;
+        }
     }
+    va_end (ap);
+
     if (read (from_parent_fd, &i, sizeof (int)) != sizeof (int))
         return NULL;
     if (!i)
