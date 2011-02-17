@@ -1270,7 +1270,7 @@ edit_do_undo (WEdit * edit)
     long ac;
     long count = 0;
 
-    edit->undo_stack_disable = 1;    /* don't record undo's onto undo stack! */
+    edit->undo_stack_disable = 1;       /* don't record undo's onto undo stack! */
     edit->over_col = 0;
     while ((ac = edit_pop_undo_action (edit)) < KEY_PRESS)
     {
@@ -2454,8 +2454,8 @@ edit_push_undo_action (WEdit * edit, long c, ...)
     }
 
     if (edit->undo_stack_bottom != sp
-            && spm1 != edit->undo_stack_bottom
-            && ((sp - 2) & edit->undo_stack_size_mask) != edit->undo_stack_bottom)
+        && spm1 != edit->undo_stack_bottom
+        && ((sp - 2) & edit->undo_stack_size_mask) != edit->undo_stack_bottom)
     {
         int d;
         if (edit->undo_stack[spm1] < 0)
@@ -2536,8 +2536,8 @@ edit_push_redo_action (WEdit * edit, long c, ...)
     spm1 = (edit->redo_stack_pointer - 1) & edit->redo_stack_size_mask;
 
     if (edit->redo_stack_bottom != sp
-            && spm1 != edit->redo_stack_bottom
-            && ((sp - 2) & edit->redo_stack_size_mask) != edit->redo_stack_bottom)
+        && spm1 != edit->redo_stack_bottom
+        && ((sp - 2) & edit->redo_stack_size_mask) != edit->redo_stack_bottom)
     {
         int d;
         if (edit->redo_stack[spm1] < 0)
@@ -2584,10 +2584,10 @@ edit_push_redo_action (WEdit * edit, long c, ...)
                && edit->redo_stack_bottom != edit->redo_stack_pointer);
 
     /*
-    * If a single key produced enough pushes to wrap all the way round then
-    * we would notice that the [redo_stack_bottom] does not contain KEY_PRESS.
-    * The stack is then initialised:
-    */
+     * If a single key produced enough pushes to wrap all the way round then
+     * we would notice that the [redo_stack_bottom] does not contain KEY_PRESS.
+     * The stack is then initialised:
+     */
 
     if (edit->redo_stack_pointer != edit->redo_stack_bottom
         && edit->redo_stack[edit->redo_stack_bottom] < KEY_PRESS)
