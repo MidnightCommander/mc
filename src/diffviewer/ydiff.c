@@ -42,13 +42,13 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/charsets.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/filemanager/cmd.h"
 #include "src/filemanager/midnight.h"   /* Needed for current_panel and other_panel */
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
 #include "src/keybind-defaults.h"
-#include "src/help.h"
 #include "src/history.h"
 #include "src/selcodepage.h"
 
@@ -118,7 +118,9 @@ dview_set_codeset (WDiff * dview)
     const char *encoding_id = NULL;
 
     dview->utf8 = TRUE;
-    encoding_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage : mc_global.display_codepage);
+    encoding_id =
+        get_codepage_id (mc_global.source_codepage >=
+                         0 ? mc_global.source_codepage : mc_global.display_codepage);
     if (encoding_id != NULL)
     {
         GIConv conv;
@@ -2980,7 +2982,10 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     switch (command)
     {
     case CK_Help:
-        interactive_display (NULL, "[Diff Viewer]");
+        {
+            ev_help_t event_data = { NULL, "[Diff Viewer]" };
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+        }
         break;
     case CK_ShowSymbols:
         dview->display_symbols ^= 1;

@@ -28,6 +28,7 @@
 #include "lib/event.h"
 
 #include "clipboard.h"          /* clipboard events */
+#include "help.h"               /* help_interactive_display() */
 
 #include "events_init.h"
 
@@ -57,6 +58,8 @@ events_init (GError ** error)
         {MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL},
         {MCEVENT_GROUP_CORE, "clipboard_text_to_file", clipboard_text_to_file, NULL},
         {MCEVENT_GROUP_CORE, "clipboard_text_from_file", clipboard_text_from_file, NULL},
+
+        {MCEVENT_GROUP_CORE, "help", help_interactive_display, NULL},
 
         {NULL, NULL, NULL, NULL}
     };

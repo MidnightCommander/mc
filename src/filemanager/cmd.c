@@ -59,9 +59,9 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/keybind.h"        /* CK_Down, CK_History */
+#include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/viewer/mcviewer.h"
-#include "src/help.h"           /* interactive_display() */
 #include "src/setup.h"
 #include "src/execute.h"        /* toggle_panels() */
 #include "src/history.h"
@@ -1322,10 +1322,14 @@ edit_symlink_cmd (void)
 void
 help_cmd (void)
 {
+    ev_help_t event_data = { NULL, NULL };
+
     if (current_panel->searching)
-        interactive_display (NULL, "[Quick search]");
+        event_data.node = "[Quick search]";
     else
-        interactive_display (NULL, "[main]");
+        event_data.node = "[main]";
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
 }
 
 /* --------------------------------------------------------------------------------------------- */

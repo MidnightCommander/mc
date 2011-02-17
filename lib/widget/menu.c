@@ -34,6 +34,7 @@
 #include "lib/tty/key.h"        /* key macros */
 #include "lib/strutil.h"
 #include "lib/widget.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
 /* TODO: these includes should be removed! */
 #include "src/keybind-defaults.h"       /* CK_IgnoreKey */
@@ -422,15 +423,19 @@ menubar_handle_key (WMenuBar * menubar, int key)
     switch (key)
     {
     case KEY_F (1):
-        if (menubar->is_dropped)
-            interactive_display (NULL,
-                                 ((Menu *) g_list_nth_data (menubar->menu,
-                                                            menubar->selected))->help_node);
-        else
-            interactive_display (NULL, "[Menu Bar]");
-        menubar_draw (menubar);
-        return 1;
+        {
+            ev_help_t event_data = { NULL, NULL };
 
+            if (menubar->is_dropped)
+                event_data.node =
+                    ((Menu *) g_list_nth_data (menubar->menu, menubar->selected))->help_node;
+            else
+                event_data.node = "[Menu Bar]";
+
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+            menubar_draw (menubar);
+            return 1;
+        }
     case KEY_LEFT:
     case XCTRL ('b'):
         menubar_left (menubar);

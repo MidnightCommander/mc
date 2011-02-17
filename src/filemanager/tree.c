@@ -50,11 +50,12 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/event.h"          /* mc_event_raise() */
+
 
 #include "src/setup.h"          /* confirm_delete, panels_options */
 #include "src/keybind-defaults.h"
 #include "src/history.h"
-#include "src/help.h"
 
 #include "dir.h"
 #include "midnight.h"           /* the_menubar */
@@ -1022,7 +1023,10 @@ tree_execute_cmd (WTree * tree, unsigned long command)
     switch (command)
     {
     case CK_Help:
-        interactive_display (NULL, "[Directory Tree]");
+        {
+            ev_help_t event_data = { NULL, "[Directory Tree]" };
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+        }
         break;
     case CK_Forget:
         tree_forget (tree);

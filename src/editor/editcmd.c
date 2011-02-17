@@ -60,7 +60,6 @@
 
 #include "src/history.h"
 #include "src/setup.h"          /* option_tab_spacing */
-#include "src/help.h"           /* interactive_display() */
 #include "src/selcodepage.h"
 #include "src/keybind-defaults.h"
 #include "src/util.h"           /* check_for_default() */
@@ -1146,7 +1145,9 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
 void
 edit_help_cmd (WEdit * edit)
 {
-    interactive_display (NULL, "[Internal File Editor]");
+    ev_help_t event_data = { NULL, "[Internal File Editor]" };
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+
     edit->force |= REDRAW_COMPLETELY;
 }
 

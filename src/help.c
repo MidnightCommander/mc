@@ -60,6 +60,7 @@
 #include "lib/fileloc.h"
 #include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/event-types.h"
 
 #include "keybind-defaults.h"
 #include "keybind-defaults.h"
@@ -1028,8 +1029,10 @@ mousedispatch_new (int y, int x, int yl, int xl)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-void
-interactive_display (const char *filename, const char *node)
+/* event callback */
+gboolean
+help_interactive_display (const gchar * event_group_name, const gchar * event_name,
+                          gpointer init_data, gpointer data)
 {
     const dlg_colors_t help_colors = {
         HELP_NORMAL_COLOR,      /* common text color */
@@ -1043,43 +1046,48 @@ interactive_display (const char *filename, const char *node)
     Widget *md;
     char *hlpfile = NULL;
     char *filedata;
+    ev_help_t *event_data = (ev_help_t *) data;
 
-    if (filename != NULL)
-        g_file_get_contents (filename, &filedata, NULL, NULL);
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
+    if (event_data->filename != NULL)
+        g_file_get_contents (event_data->filename, &filedata, NULL, NULL);
     else
         filedata = load_mc_home_file (mc_global.share_data_dir, MC_HELP, &hlpfile);
 
     if (filedata == NULL)
         message (D_ERROR, MSG_ERROR, _("Cannot open file %s\n%s"),
-                 filename ? filename : hlpfile, unix_error_string (errno));
+                 event_data->filename ? event_data->filename : hlpfile, unix_error_string (errno));
 
     g_free (hlpfile);
 
     if (filedata == NULL)
-        return;
+        return TRUE;
 
     translate_file (filedata);
 
     g_free (filedata);
 
     if (fdata == NULL)
-        return;
+        return TRUE;
 
-    if ((node == NULL) || (*node == '\0'))
-        node = "[main]";
+    if ((event_data->node == NULL) || (*event_data->node == '\0'))
+        event_data->node = "[main]";
 
-    main_node = search_string (fdata, node);
+    main_node = search_string (fdata, event_data->node);
 
     if (main_node == NULL)
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot find node %s in help file"), node);
+        message (D_ERROR, MSG_ERROR, _("Cannot find node %s in help file"), event_data->node);
 
         /* Fallback to [main], return if it also cannot be found */
         main_node = search_string (fdata, "[main]");
         if (main_node == NULL)
         {
             interactive_display_finish ();
-            return;
+            return TRUE;
         }
     }
 
@@ -1123,6 +1131,7 @@ interactive_display (const char *filename, const char *node)
     run_dlg (whelp);
     interactive_display_finish ();
     destroy_dlg (whelp);
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

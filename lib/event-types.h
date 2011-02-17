@@ -41,6 +41,13 @@ typedef struct
     gboolean ret;
 } ev_clipboard_text_from_file_t;
 
+/* MCEVENT_GROUP_CORE:help */
+typedef struct
+{
+    const char *filename;
+    const char *node;
+} ev_help_t;
+
 
 /*** global variables defined in .c file *********************************************************/
 

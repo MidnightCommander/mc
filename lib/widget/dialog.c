@@ -37,6 +37,7 @@
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
 /* TODO: these includes should be removed! */
 #include "src/help.h"           /* interactive_display() */
@@ -266,8 +267,11 @@ dlg_execute_cmd (Dlg_head * h, unsigned long command)
         break;
 
     case CK_Help:
-        interactive_display (NULL, h->help_ctx);
-        do_refresh ();
+        {
+            ev_help_t event_data = { NULL, h->help_ctx };
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+            do_refresh ();
+        }
         break;
 
     case CK_Suspend:
