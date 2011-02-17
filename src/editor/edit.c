@@ -4,7 +4,7 @@
    2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
 
    Authors: Paul Sheer 1996, 1997
-            Ilia Maslakov <il.smind@gmail.com> 2009, 2010, 2011
+   Ilia Maslakov <il.smind@gmail.com> 2009, 2010, 2011
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -663,6 +663,7 @@ get_prev_undo_action (WEdit * edit)
     c = edit->undo_stack[(sp - 1) & edit->undo_stack_size_mask];
     return c;
 }
+
 /* --------------------------------------------------------------------------------------------- */
 /** is called whenever a modification is made by one of the four routines below */
 
@@ -1269,7 +1270,7 @@ edit_do_undo (WEdit * edit)
     long ac;
     long count = 0;
 
-    edit->undo_stack_disable = 1;    /* don't record undo's onto undo stack! */
+    edit->undo_stack_disable = 1;       /* don't record undo's onto undo stack! */
     edit->over_col = 0;
     while ((ac = edit_pop_undo_action (edit)) < KEY_PRESS)
     {
@@ -2453,8 +2454,8 @@ edit_push_undo_action (WEdit * edit, long c, ...)
     }
 
     if (edit->undo_stack_bottom != sp
-            && spm1 != edit->undo_stack_bottom
-            && ((sp - 2) & edit->undo_stack_size_mask) != edit->undo_stack_bottom)
+        && spm1 != edit->undo_stack_bottom
+        && ((sp - 2) & edit->undo_stack_size_mask) != edit->undo_stack_bottom)
     {
         int d;
         if (edit->undo_stack[spm1] < 0)
@@ -2535,8 +2536,8 @@ edit_push_redo_action (WEdit * edit, long c, ...)
     spm1 = (edit->redo_stack_pointer - 1) & edit->redo_stack_size_mask;
 
     if (edit->redo_stack_bottom != sp
-            && spm1 != edit->redo_stack_bottom
-            && ((sp - 2) & edit->redo_stack_size_mask) != edit->redo_stack_bottom)
+        && spm1 != edit->redo_stack_bottom
+        && ((sp - 2) & edit->redo_stack_size_mask) != edit->redo_stack_bottom)
     {
         int d;
         if (edit->redo_stack[spm1] < 0)
@@ -2583,10 +2584,10 @@ edit_push_redo_action (WEdit * edit, long c, ...)
                && edit->redo_stack_bottom != edit->redo_stack_pointer);
 
     /*
-    * If a single key produced enough pushes to wrap all the way round then
-    * we would notice that the [redo_stack_bottom] does not contain KEY_PRESS.
-    * The stack is then initialised:
-    */
+     * If a single key produced enough pushes to wrap all the way round then
+     * we would notice that the [redo_stack_bottom] does not contain KEY_PRESS.
+     * The stack is then initialised:
+     */
 
     if (edit->redo_stack_pointer != edit->redo_stack_bottom
         && edit->redo_stack[edit->redo_stack_bottom] < KEY_PRESS)
@@ -3240,6 +3241,56 @@ edit_mark_cmd (WEdit * edit, int unmark)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** highlight the word under cursor */
+
+void
+edit_mark_current_word_cmd (WEdit * edit)
+{
+    long pos;
+
+    for (pos = edit->curs1; pos != 0; pos--)
+    {
+        int c1, c2;
+
+        c1 = edit_get_byte (edit, pos);
+        c2 = edit_get_byte (edit, pos - 1);
+        if (!isspace (c1) && isspace (c2))
+            break;
+        if ((my_type_of (c1) & my_type_of (c2)) == 0)
+            break;
+    }
+    edit->mark1 = pos;
+
+    for (; pos < edit->last_byte; pos++)
+    {
+        int c1, c2;
+
+        c1 = edit_get_byte (edit, pos);
+        c2 = edit_get_byte (edit, pos + 1);
+        if (!isspace (c1) && isspace (c2))
+            break;
+        if ((my_type_of (c1) & my_type_of (c2)) == 0)
+            break;
+    }
+    edit->mark2 = min (pos + 1, edit->last_byte);
+
+    edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_mark_current_line_cmd (WEdit * edit)
+{
+    long pos = edit->curs1;
+
+    edit->mark1 = edit_bol (edit, pos);
+    edit->mark2 = edit_eol (edit, pos);
+
+    edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_delete_line (WEdit * edit)
@@ -3811,7 +3862,18 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->column_highlight = 0;
         edit_mark_cmd (edit, 1);
         break;
-
+    case CK_Mark_Word:
+        if (edit->column_highlight)
+            edit_push_undo_action (edit, COLUMN_ON);
+        edit->column_highlight = 0;
+        edit_mark_current_word_cmd (edit);
+        break;
+    case CK_Mark_Line:
+        if (edit->column_highlight)
+            edit_push_undo_action (edit, COLUMN_ON);
+        edit->column_highlight = 0;
+        edit_mark_current_line_cmd (edit);
+        break;
     case CK_Toggle_Line_State:
         option_line_state = !option_line_state;
         if (option_line_state)
