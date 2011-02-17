@@ -3426,6 +3426,53 @@ event_update_panels (const gchar * event_group_name, const gchar * event_name,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/* event callback */
+static gboolean
+panel_save_curent_file_to_clip_file (const gchar * event_group_name, const gchar * event_name,
+                                     gpointer init_data, gpointer data)
+{
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+    (void) data;
+
+    if (current_panel->marked == 0)
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file",
+                        (gpointer) selection (current_panel)->fname);
+    else
+    {
+        int i;
+        gboolean first = TRUE;
+        char *flist = NULL;
+
+        for (i = 0; i < current_panel->count; i++)
+            if (current_panel->dir.list[i].f.marked != 0)
+            {                   /* Skip the unmarked ones */
+                if (first)
+                {
+                    flist = g_strdup (current_panel->dir.list[i].fname);
+                    first = FALSE;
+                }
+                else
+                {
+                    /* Add empty lines after the file */
+                    char *tmp;
+
+                    tmp =
+                        g_strconcat (flist, "\n", current_panel->dir.list[i].fname, (char *) NULL);
+                    g_free (flist);
+                    flist = tmp;
+                }
+            }
+
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) flist);
+        g_free (flist);
+    }
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -4124,6 +4171,8 @@ panel_init (void)
     panel_history_show_list_sign = mc_skin_get ("widget-panel", "history-show-list-sign", "^");
 
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "update_panels", event_update_panels, NULL, NULL);
+    mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_curent_file_to_clip_file",
+                  panel_save_curent_file_to_clip_file, NULL, NULL);
 
 }
 

@@ -27,6 +27,8 @@
 
 #include "lib/event.h"
 
+#include "clipboard.h"          /* clipboard events */
+
 #include "events_init.h"
 
 /*** global variables ****************************************************************************/
@@ -51,6 +53,11 @@ events_init (GError ** error)
     /* *INDENT-OFF* */
     event_init_t standard_events[] =
     {
+        {MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL},
+        {MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL},
+        {MCEVENT_GROUP_CORE, "clipboard_text_to_file", clipboard_text_to_file, NULL},
+        {MCEVENT_GROUP_CORE, "clipboard_text_from_file", clipboard_text_from_file, NULL},
+
         {NULL, NULL, NULL, NULL}
     };
     /* *INDENT-ON* */

@@ -33,6 +33,9 @@
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
 #include "lib/util.h"
+#include "lib/event.h"
+
+#include "lib/vfs/vfs.h"
 
 #include "main.h"
 #include "src/execute.h"
@@ -58,15 +61,22 @@ char *clipboard_paste_path = NULL;
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+/* event callback */
 gboolean
-copy_file_to_ext_clip (void)
+clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_name,
+                            gpointer init_data, gpointer data)
 {
     char *tmp, *cmd;
     int res = 0;
     const char *d = getenv ("DISPLAY");
 
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+    (void) data;
+
     if (d == NULL || clipboard_store_path == NULL || clipboard_store_path[0] == '\0')
-        return FALSE;
+        return TRUE;
 
     tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
     cmd = g_strconcat (clipboard_store_path, " ", tmp, " 2>/dev/null", (char *) NULL);
@@ -81,15 +91,22 @@ copy_file_to_ext_clip (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* event callback */
 gboolean
-paste_to_file_from_ext_clip (void)
+clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * event_name,
+                              gpointer init_data, gpointer data)
 {
     char *tmp, *cmd;
     int res = 0;
     const char *d = getenv ("DISPLAY");
 
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+    (void) data;
+
     if (d == NULL || clipboard_paste_path == NULL || clipboard_paste_path[0] == '\0')
-        return FALSE;
+        return TRUE;
 
     tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
     cmd = g_strconcat (clipboard_paste_path, " > ", tmp, " 2>/dev/null", (char *) NULL);
@@ -99,6 +116,101 @@ paste_to_file_from_ext_clip (void)
 
     g_free (cmd);
     g_free (tmp);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* event callback */
+gboolean
+clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name,
+                        gpointer init_data, gpointer data)
+{
+    int file;
+    char *fname = NULL;
+    ssize_t ret;
+    size_t str_len;
+    const char *text = (const char *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
+    if (text == NULL)
+        return FALSE;
+
+    fname = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
+    file = mc_open (fname, O_CREAT | O_WRONLY | O_TRUNC,
+                    S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
+    g_free (fname);
+
+    if (file == -1)
+        return TRUE;
+
+    str_len = strlen (text);
+    ret = mc_write (file, (char *) text, str_len);
+    mc_close (file);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* event callback */
+gboolean
+clipboard_text_from_file (const gchar * event_group_name, const gchar * event_name,
+                          gpointer init_data, gpointer data)
+{
+    char buf[BUF_LARGE];
+    FILE *f;
+    char *fname = NULL;
+    gboolean first = TRUE;
+    ev_clipboard_text_from_file_t *event_data = (ev_clipboard_text_from_file_t *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
+    fname = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
+    f = fopen (fname, "r");
+    g_free (fname);
+
+    if (f == NULL)
+    {
+        event_data->ret = FALSE;
+        return TRUE;
+    }
+
+    *(event_data->text) = NULL;
+
+    while (fgets (buf, sizeof (buf), f))
+    {
+        size_t len;
+
+        len = strlen (buf);
+        if (len > 0)
+        {
+            if (buf[len - 1] == '\n')
+                buf[len - 1] = '\0';
+
+            if (first)
+            {
+                first = FALSE;
+                *(event_data->text) = g_strdup (buf);
+            }
+            else
+            {
+                /* remove \n on EOL */
+                char *tmp;
+
+                tmp = g_strconcat (*(event_data->text), " ", buf, (char *) NULL);
+                g_free (*(event_data->text));
+                *(event_data->text) = tmp;
+            }
+        }
+    }
+
+    fclose (f);
+    event_data->ret = (*(event_data->text) != NULL);
     return TRUE;
 }
 

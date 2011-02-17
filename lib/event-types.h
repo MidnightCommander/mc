@@ -34,6 +34,13 @@ typedef struct
     va_list ap;
 } ev_vfs_print_message_t;
 
+/* MCEVENT_GROUP_CORE:clipboard_text_from_file */
+typedef struct
+{
+    char **text;
+    gboolean ret;
+} ev_clipboard_text_from_file_t;
+
 
 /*** global variables defined in .c file *********************************************************/
 

@@ -56,13 +56,13 @@
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #include "lib/charsets.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/history.h"
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
 #include "src/selcodepage.h"
 #include "src/keybind-defaults.h"
-#include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 #include "src/util.h"           /* check_for_default() */
 #include "src/filemanager/layout.h"     /* mc_refresh()  */
 
@@ -2602,7 +2602,7 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
         return 1;
     }
     /* try use external clipboard utility */
-    copy_file_to_ext_clip ();
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 
     return 0;
 }
@@ -2621,7 +2621,7 @@ edit_cut_to_X_buf_cmd (WEdit * edit)
         return 1;
     }
     /* try use external clipboard utility */
-    copy_file_to_ext_clip ();
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 
     edit_block_delete_cmd (edit);
     edit_mark_cmd (edit, 1);
@@ -2635,7 +2635,7 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
 {
     gchar *tmp;
     /* try use external clipboard utility */
-    paste_to_file_from_ext_clip ();
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
     tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
     edit_insert_file (edit, tmp);
     g_free (tmp);
