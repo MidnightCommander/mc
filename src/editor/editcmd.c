@@ -1960,17 +1960,21 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int wid
 /* --------------------------------------------------------------------------------------------- */
 
 int
-edit_insert_column_of_text_from_file (WEdit * edit, int file)
+edit_insert_column_of_text_from_file (WEdit * edit, int file,
+                                      long *start_pos, long *end_pos, int *col1, int *col2)
 {
     long cursor;
-    int i, col;
-    int blocklen = -1, width;
+    int col;
+    int blocklen = -1, width = 0;
     unsigned char *data;
+
     cursor = edit->curs1;
     col = edit_get_col (edit);
     data = g_malloc0 (TEMP_BUF_LEN);
+
     while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0)
     {
+        int i;
         for (width = 0; width < blocklen; width++)
         {
             if (data[width] == '\n')
@@ -2018,9 +2022,13 @@ edit_insert_column_of_text_from_file (WEdit * edit, int file)
             edit_insert (edit, data[i]);
         }
     }
+    *col1 = col;
+    *col2 = col + width;
+    *start_pos = cursor;
+    *end_pos = edit->curs1;
     edit_cursor_move (edit, cursor - edit->curs1);
     g_free (data);
-    edit->force |= REDRAW_PAGE;
+
     return blocklen;
 }
 
