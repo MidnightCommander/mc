@@ -180,7 +180,6 @@ static gboolean feed_subshell (int how, int fail_on_error);
 static void synchronize (void);
 static int pty_open_master (char *pty_name);
 static int pty_open_slave (const char *pty_name);
-static int resize_tty (int fd);
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -250,7 +249,7 @@ init_subshell_child (const char *pty_name)
 
     /* Set the pty's size (80x25 by default on Linux) according to the */
     /* size of the real terminal as calculated by ncurses, if possible */
-    resize_tty (subshell_pty_slave);
+    tty_resize (subshell_pty_slave);
 
     /* Set up the subshell's environment and init file name */
 
@@ -1042,37 +1041,6 @@ do_update_prompt (void)
         fflush (stdout);
         update_subshell_prompt = FALSE;
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/** Resize given terminal using TIOCSWINSZ, return ioctl() result */
-static int
-resize_tty (int fd)
-{
-#if defined TIOCSWINSZ
-    struct winsize tty_size;
-
-    tty_size.ws_row = LINES;
-    tty_size.ws_col = COLS;
-    tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
-
-    return ioctl (fd, TIOCSWINSZ, &tty_size);
-#else
-    return 0;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Resize mc_global.tty.subshell_pty */
-
-void
-resize_subshell (void)
-{
-    if (!mc_global.tty.use_subshell)
-        return;
-
-    resize_tty (mc_global.tty.subshell_pty);
 }
 
 /* --------------------------------------------------------------------------------------------- */

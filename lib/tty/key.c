@@ -48,7 +48,7 @@
 #include "key.h"
 #include "win.h"                /* xterm_flag */
 
-#include "src/filemanager/layout.h"     /* mc_refresh() */
+#include "lib/widget.h"         /* mc_refresh() */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 #include "x11conn.h"

@@ -512,7 +512,7 @@ frontend_run_dlg (Dlg_head * h)
     while (h->state == DLG_ACTIVE)
     {
         if (mc_global.tty.winch_flag)
-            change_screen_size ();
+            dialog_change_screen_size ();
 
         if (is_idle ())
         {

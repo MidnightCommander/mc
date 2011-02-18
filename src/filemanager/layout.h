@@ -37,7 +37,6 @@ void layout_box (void);
 void setup_panels (void);
 void destroy_panels (void);
 void sigwinch_handler (int dummy);
-void change_screen_size (void);
 void set_display_type (int num, panel_view_mode_t type);
 void panel_update_cols (Widget * widget, panel_display_t frame_size);
 void swap_panels (void);
@@ -60,9 +59,6 @@ void set_hintbar (const char *str);
 /* Rotating dash routines */
 void use_dash (gboolean flag);  /* Disable/Enable rotate_dash routines */
 void rotate_dash (void);
-
-/* Clear screen */
-void mc_refresh (void);
 
 /*** inline functions ****************************************************************************/
 

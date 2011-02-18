@@ -47,6 +47,9 @@ struct Dlg_head *create_message (int flags, const char *title,
 void message (int flags, const char *title, const char *text, ...)
     __attribute__ ((format (__printf__, 3, 4)));
 
+/* Clear screen */
+void mc_refresh (void);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC__WTOOLS_H */

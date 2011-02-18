@@ -459,3 +459,22 @@ input_expand_dialog (const char *header, const char *text,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+mc_refresh (void)
+{
+#ifdef WITH_BACKGROUND
+    if (mc_global.we_are_background)
+        return;
+#endif /* WITH_BACKGROUND */
+    if (mc_global.tty.winch_flag == FALSE)
+        tty_refresh ();
+    else
+    {
+        /* if winch was caugth, we should do not only redraw screen, but
+           reposition/resize all */
+        dialog_change_screen_size ();
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */

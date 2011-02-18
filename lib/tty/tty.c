@@ -34,12 +34,16 @@
 #include <signal.h>
 #include <stdarg.h>
 
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
+
 #include "lib/global.h"
 #include "lib/strutil.h"
 
 #include "tty.h"
 #include "tty-internal.h"
-
+#include "win.h"
 
 /*** global variables ****************************************************************************/
 
@@ -201,6 +205,57 @@ mc_tty_normalize_from_utf8 (const char *str)
     str_close_conv (conv);
 
     return g_string_free (buffer, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Resize given terminal using TIOCSWINSZ, return ioctl() result */
+int
+tty_resize (int fd)
+{
+#if defined TIOCSWINSZ
+    struct winsize tty_size;
+
+    tty_size.ws_row = LINES;
+    tty_size.ws_col = COLS;
+    tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
+
+    return ioctl (fd, TIOCSWINSZ, &tty_size);
+#else
+    return 0;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_low_level_change_screen_size (void)
+{
+#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
+#if defined TIOCGWINSZ
+    struct winsize winsz;
+
+    winsz.ws_col = winsz.ws_row = 0;
+    /* Ioctl on the STDIN_FILENO */
+    ioctl (0, TIOCGWINSZ, &winsz);
+    if (winsz.ws_col && winsz.ws_row)
+    {
+#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
+        resizeterm (winsz.ws_row, winsz.ws_col);
+        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
+#else
+        COLS = winsz.ws_col;
+        LINES = winsz.ws_row;
+#endif
+#ifdef HAVE_SUBSHELL_SUPPORT
+        if (!mc_global.tty.use_subshell)
+            return;
+
+        tty_resize (mc_global.tty.subshell_pty);
+#endif
+    }
+#endif /* TIOCGWINSZ */
+#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
 /* --------------------------------------------------------------------------------------------- */

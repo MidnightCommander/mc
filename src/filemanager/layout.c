@@ -58,7 +58,6 @@
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
 #include "src/setup.h"
-#include "src/subshell.h"       /* For resize_subshell() */
 #include "src/background.h"
 
 #include "command.h"
@@ -598,46 +597,6 @@ restore_into_right_dir_panel (int idx, Widget * from_widget)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static inline void
-low_level_change_screen_size (void)
-{
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ
-    struct winsize winsz;
-
-    winsz.ws_col = winsz.ws_row = 0;
-    /* Ioctl on the STDIN_FILENO */
-    ioctl (0, TIOCGWINSZ, &winsz);
-    if (winsz.ws_col && winsz.ws_row)
-    {
-#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
-        resizeterm (winsz.ws_row, winsz.ws_col);
-        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
-#else
-        COLS = winsz.ws_col;
-        LINES = winsz.ws_row;
-#endif
-#ifdef HAVE_SUBSHELL_SUPPORT
-        resize_subshell ();
-#endif
-    }
-#endif /* TIOCGWINSZ */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-dlg_resize_cb (void *data, void *user_data)
-{
-    Dlg_head *d = data;
-
-    (void) user_data;
-    d->callback (d, NULL, DLG_RESIZE, 0, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -684,25 +643,6 @@ layout_box (void)
     destroy_dlg (layout_dlg);
     if (layout_do_change)
         layout_change ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mc_refresh (void)
-{
-#ifdef WITH_BACKGROUND
-    if (mc_global.we_are_background)
-        return;
-#endif /* WITH_BACKGROUND */
-    if (mc_global.tty.winch_flag == FALSE)
-        tty_refresh ();
-    else
-    {
-        /* if winch was caugth, we should do not only redraw screen, but
-           reposition/resize all */
-        change_screen_size ();
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -801,49 +741,10 @@ sigwinch_handler (int dummy)
 {
     (void) dummy;
 #if !(defined(USE_NCURSES) || defined(USE_NCURSESW))    /* don't do malloc in a signal handler */
-    low_level_change_screen_size ();
+    tty_low_level_change_screen_size ();
 #endif
     mc_global.tty.winch_flag = TRUE;
 }
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-change_screen_size (void)
-{
-    mc_global.tty.winch_flag = FALSE;
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ
-
-#ifndef NCURSES_VERSION
-    tty_noraw_mode ();
-    tty_reset_screen ();
-#endif
-    low_level_change_screen_size ();
-#ifdef HAVE_SLANG
-    /* XSI Curses spec states that portable applications shall not invoke
-     * initscr() more than once.  This kludge could be done within the scope
-     * of the specification by using endwin followed by a refresh (in fact,
-     * more than one curses implementation does this); it is guaranteed to work
-     * only with slang.
-     */
-    SLsmg_init_smg ();
-    do_enter_ca_mode ();
-    tty_keypad (TRUE);
-    tty_nodelay (FALSE);
-#endif
-
-    /* Inform all suspending dialogs */
-    dialog_switch_got_winch ();
-    /* Inform all running dialogs */
-    g_list_foreach (top_dlg, (GFunc) dlg_resize_cb, NULL);
-
-    /* Now, force the redraw */
-    repaint_screen ();
-#endif /* TIOCGWINSZ */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
-}
-
 
 /* --------------------------------------------------------------------------------------------- */
 

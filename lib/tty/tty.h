@@ -130,8 +130,11 @@ extern void tty_draw_vline (int y, int x, int ch, int len);
 extern void tty_draw_box (int y, int x, int rows, int cols, gboolean single);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
+extern int tty_resize (int fd);
 extern void tty_refresh (void);
 extern void tty_setup_sigwinch (void (*handler) (int));
+extern void tty_low_level_change_screen_size (void);
+
 
 extern int mc_tty_normalize_lines_char (const char *);
 
