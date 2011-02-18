@@ -46,6 +46,13 @@ char *parent_call_string (void *routine, int argc, ...);
 void unregister_task_running (pid_t pid, int fd);
 void unregister_task_with_pid (pid_t pid);
 
+gboolean background_parent_call (const gchar * event_group_name, const gchar * event_name,
+                                 gpointer init_data, gpointer data);
+
+gboolean
+background_parent_call_string (const gchar * event_group_name, const gchar * event_name,
+                               gpointer init_data, gpointer data);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* !WITH_BACKGROUND */

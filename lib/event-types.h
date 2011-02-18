@@ -48,6 +48,21 @@ typedef struct
     const char *node;
 } ev_help_t;
 
+/* MCEVENT_GROUP_CORE:background_parent_call */
+/* MCEVENT_GROUP_CORE:background_parent_call_string */
+typedef struct
+{
+    void *routine;
+    gpointer *ctx;
+    int argc;
+    va_list ap;
+    union
+    {
+        int i;
+        char *s;
+    } ret;
+} ev_background_parent_call_t;
+
 
 /*** global variables defined in .c file *********************************************************/
 
