@@ -31,6 +31,7 @@ context default
     keyword SPECIAL brightred
     keyword STALE_LINK brightred
     keyword SYMLINK brightred
+    keyword HARDLINK brightred
 
 context linestart # \n brown
 
