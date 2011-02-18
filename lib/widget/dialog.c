@@ -39,10 +39,6 @@
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
 
-/* TODO: these includes should be removed! */
-#include "src/help.h"           /* interactive_display() */
-#include "src/filemanager/layout.h"
-
 /*** global variables ****************************************************************************/
 
 /* Color styles for normal and error dialogs */

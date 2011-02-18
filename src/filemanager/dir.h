@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 
 #include "lib/global.h"
+#include "lib/util.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -19,28 +20,6 @@ typedef int sortfn (const void *, const void *);
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
-
-/* keys are set only during sorting */
-typedef struct
-{
-    /* File attributes */
-    size_t fnamelen;
-    char *fname;
-    struct stat st;
-    /* key used for comparing names */
-    char *sort_key;
-    /* key used for comparing extensions */
-    char *second_sort_key;
-
-    /* Flags */
-    struct
-    {
-        unsigned int marked:1;  /* File marked in pane window */
-        unsigned int link_to_dir:1;     /* If this is a link, does it point to directory? */
-        unsigned int stale_link:1;      /* If this is a symlink and points to Charon's land */
-        unsigned int dir_size_computed:1;       /* Size of directory was computed with dirsizes_cmd */
-    } f;
-} file_entry;
 
 typedef struct
 {

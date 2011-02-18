@@ -36,11 +36,6 @@
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
 
-/* TODO: these includes should be removed! */
-#include "src/keybind-defaults.h"       /* CK_IgnoreKey */
-#include "src/help.h"
-#include "src/filemanager/midnight.h"   /* is_right */
-
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
@@ -297,7 +292,7 @@ menubar_execute (WMenuBar * menubar)
 
     if ((entry != NULL) && (entry->command != CK_IgnoreKey))
     {
-        is_right = (menubar->selected != 0);
+        mc_global.is_right = (menubar->selected != 0);
         menubar_finish (menubar);
         menubar->widget.owner->callback (menubar->widget.owner, &menubar->widget,
                                          DLG_ACTION, entry->command, NULL);

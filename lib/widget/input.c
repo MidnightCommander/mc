@@ -52,9 +52,6 @@
 
 #include "input_complete.h"
 
-#include "src/main.h"           /* home_dir */
-#include "src/filemanager/midnight.h"   /* current_panel */
-
 /*** global variables ****************************************************************************/
 
 int quote = 0;

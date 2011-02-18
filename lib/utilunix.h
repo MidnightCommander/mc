@@ -1,36 +1,25 @@
-#ifndef MC__FILEHIGHLIGHT_H
-#define MC__FILEHIGHLIGHT_H
+/** \file  execute.h
+ *  \brief Header: execution routines
+ */
 
-#include "lib/mcconfig.h"
-#include "lib/search.h"
-
-#include "lib/util.h"
+#ifndef MC__UTILUNIX_H
+#define MC__UTILUNIX_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
+
+/* flags for shell_execute */
+#define EXECUTE_INTERNAL (1 << 0)
+#define EXECUTE_AS_SHELL (1 << 2)
+#define EXECUTE_HIDE     (1 << 3)
 
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_fhl_struct
-{
-    mc_config_t *config;
-    GPtrArray *filters;
-} mc_fhl_t;
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-mc_fhl_t *mc_fhl_new (gboolean);
-void mc_fhl_free (mc_fhl_t **);
-
-int mc_fhl_get_color (mc_fhl_t *, file_entry *);
-
-gboolean mc_fhl_read_ini_file (mc_fhl_t *, const gchar *);
-gboolean mc_fhl_parse_ini_file (mc_fhl_t *);
-void mc_fhl_clear (mc_fhl_t *);
-
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__FILEHIGHLIGHT_H */
+#endif /* MC__UTILUNIX_H */

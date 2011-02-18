@@ -5,12 +5,9 @@
 #ifndef MC__EXECUTE_H
 #define MC__EXECUTE_H
 
-/*** typedefs(not structures) and defined constants **********************************************/
+#include "lib/utilunix.h"
 
-/* flags for shell_execute */
-#define EXECUTE_INTERNAL (1 << 0)
-#define EXECUTE_AS_SHELL (1 << 2)
-#define EXECUTE_HIDE     (1 << 3)
+/*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/
 
@@ -50,4 +47,5 @@ void post_exec (void);
 void pre_exec (void);
 
 /*** inline functions ****************************************************************************/
+
 #endif /* MC__EXECUTE_H */

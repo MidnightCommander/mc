@@ -100,9 +100,6 @@ WPanel *right_panel = NULL;
 /* Pointer to the selected and unselected panel */
 WPanel *current_panel = NULL;
 
-/* Set if the command is being run from the "Right" menu */
-int is_right = 0;
-
 /* The Menubar */
 WMenuBar *the_menubar = NULL;
 /* The widget where we draw the prompt */

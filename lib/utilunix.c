@@ -57,10 +57,11 @@
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 
-#include "src/execute.h"
 #ifdef HAVE_CHARSET
-#include "charsets.h"
+#include "lib/charsets.h"
 #endif
+
+#include "utilunix.h"
 
 /*** global variables ****************************************************************************/
 

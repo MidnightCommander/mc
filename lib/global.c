@@ -71,6 +71,8 @@ mc_global_t mc_global = {
     .sysconfig_dir = NULL,
     .share_data_dir = NULL,
 
+    .is_right = FALSE,
+
     .args =
     {
         .disable_colors = FALSE,
