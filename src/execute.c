@@ -399,15 +399,24 @@ toggle_panels (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-suspend_cmd (void)
+/* event callback */
+gboolean
+execute_suspend (const gchar * event_group_name, const gchar * event_name,
+                 gpointer init_data, gpointer data)
 {
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+    (void) data;
+
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         save_cwds_stat ();
     do_suspend_cmd ();
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     do_refresh ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -42,7 +42,6 @@
 /* TODO: these includes should be removed! */
 #include "src/help.h"           /* interactive_display() */
 #include "src/filemanager/layout.h"
-#include "src/execute.h"        /* suspend_cmd() */
 
 /*** global variables ****************************************************************************/
 
@@ -275,7 +274,7 @@ dlg_execute_cmd (Dlg_head * h, unsigned long command)
         break;
 
     case CK_Suspend:
-        suspend_cmd ();
+        mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL);
         refresh_cmd ();
         break;
     case CK_Refresh:

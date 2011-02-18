@@ -40,7 +40,8 @@ void exec_shell (void);
 void toggle_panels (void);
 
 /* Handle toggling panels by Ctrl-Z */
-void suspend_cmd (void);
+gboolean execute_suspend (const gchar * event_group_name, const gchar * event_name,
+                          gpointer init_data, gpointer data);
 
 /* Execute command on a filename that can be on VFS */
 void execute_with_vfs_arg (const char *command, const char *filename);

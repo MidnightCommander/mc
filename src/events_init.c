@@ -29,6 +29,7 @@
 
 #include "clipboard.h"          /* clipboard events */
 #include "help.h"               /* help_interactive_display() */
+#include "execute.h"            /* execute_suspend() */
 
 #include "events_init.h"
 
@@ -60,6 +61,7 @@ events_init (GError ** error)
         {MCEVENT_GROUP_CORE, "clipboard_text_from_file", clipboard_text_from_file, NULL},
 
         {MCEVENT_GROUP_CORE, "help", help_interactive_display, NULL},
+        {MCEVENT_GROUP_CORE, "suspend", execute_suspend, NULL},
 
         {NULL, NULL, NULL, NULL}
     };

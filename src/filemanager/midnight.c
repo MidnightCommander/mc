@@ -55,7 +55,6 @@
 #include "src/subshell.h"
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */
-#include "src/execute.h"        /* suspend_cmd() */
 #include "src/keybind-defaults.h"
 #include "lib/keybind.h"
 #include "lib/event.h"
@@ -645,10 +644,8 @@ create_panels (void)
         current_panel = left_panel;
 
 #if ENABLE_VFS
-    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL,
-                  NULL);
-    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL,
-                  NULL);
+    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
+    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL, NULL);
 #endif /* ENABLE_VFS */
 
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_print_message", print_vfs_message, NULL, NULL);
@@ -1356,7 +1353,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         ctl_x_cmd ();
         break;
     case CK_Suspend:
-        suspend_cmd ();
+        mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL);
         break;
     case CK_Swap:
         swap_cmd ();
