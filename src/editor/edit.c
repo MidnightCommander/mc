@@ -676,20 +676,6 @@ edit_modification (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-edit_insert_over (WEdit * edit)
-{
-    int i;
-
-    for (i = 0; i < edit->over_col; i++)
-    {
-        edit_insert (edit, ' ');
-    }
-    edit->over_col = 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 edit_backspace (WEdit * edit, const int byte_delete)
 {
@@ -2083,6 +2069,7 @@ edit_insert_file (WEdit * edit, const char *filename)
                 for (i = 0; i < blocklen; i++)
                     edit_insert (edit, buf[i]);
             }
+
         }
         ins_len = edit->curs1 - current;
         edit_cursor_move (edit, current - edit->curs1);
@@ -3944,8 +3931,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_block_delete_cmd (edit);
         break;
     case CK_Move:
-        if (option_cursor_beyond_eol && edit->over_col > 0)
-            edit_insert_over (edit);
         edit_block_move_cmd (edit);
         break;
 
