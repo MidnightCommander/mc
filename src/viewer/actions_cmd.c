@@ -400,12 +400,12 @@ mcview_handle_key (mcview_t * view, int key)
             return MSG_HANDLED;
 
         command = keybind_lookup_keymap_command (view->hex_map, key);
-        if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
+        if ((command != CK_IgnoreKey) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
             return MSG_HANDLED;
     }
 
     command = keybind_lookup_keymap_command (view->plain_map, key);
-    if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
+    if ((command != CK_IgnoreKey) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
         return MSG_HANDLED;
 
 #ifdef MC_ENABLE_DEBUGGING_CODE

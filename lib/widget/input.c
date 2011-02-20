@@ -1115,7 +1115,7 @@ input_handle_char (WInput * in, int key)
 
     command = keybind_lookup_keymap_command (input_map, key);
 
-    if (command == CK_Ignore_Key)
+    if (command == CK_IgnoreKey)
     {
         if (key > 255)
             return MSG_NOT_HANDLED;
@@ -1151,7 +1151,7 @@ input_key_is_in_map (WInput * in, int key)
     (void) in;
 
     command = keybind_lookup_keymap_command (input_map, key);
-    if (command == CK_Ignore_Key)
+    if (command == CK_IgnoreKey)
         return 0;
 
     return (command == CK_Complete) ? 2 : 1;

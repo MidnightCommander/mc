@@ -36,7 +36,7 @@
 #include "lib/widget.h"
 
 /* TODO: these includes should be removed! */
-#include "src/keybind-defaults.h"       /* CK_Ignore_Key */
+#include "src/keybind-defaults.h"       /* CK_IgnoreKey */
 #include "src/help.h"
 #include "src/filemanager/midnight.h"   /* is_right */
 
@@ -294,7 +294,7 @@ menubar_execute (WMenuBar * menubar)
     const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
     const menu_entry_t *entry = g_list_nth_data (menu->entries, menu->selected);
 
-    if ((entry != NULL) && (entry->command != CK_Ignore_Key))
+    if ((entry != NULL) && (entry->command != CK_IgnoreKey))
     {
         is_right = (menubar->selected != 0);
         menubar_finish (menubar);
@@ -320,7 +320,7 @@ menubar_down (WMenuBar * menubar)
         menu->selected = (menu->selected + 1) % len;
         entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
     }
-    while ((entry == NULL) || (entry->command == CK_Ignore_Key));
+    while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
@@ -344,7 +344,7 @@ menubar_up (WMenuBar * menubar)
             menu->selected--;
         entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
     }
-    while ((entry == NULL) || (entry->command == CK_Ignore_Key));
+    while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
@@ -368,7 +368,7 @@ menubar_first (WMenuBar * menubar)
     {
         entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
 
-        if ((entry == NULL) || (entry->command == CK_Ignore_Key))
+        if ((entry == NULL) || (entry->command == CK_IgnoreKey))
             menu->selected++;
         else
             break;
@@ -398,7 +398,7 @@ menubar_last (WMenuBar * menubar)
         menu->selected--;
         entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
     }
-    while ((entry == NULL) || (entry->command == CK_Ignore_Key));
+    while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
@@ -474,7 +474,7 @@ menubar_handle_key (WMenuBar * menubar, int key)
         {
             const menu_entry_t *entry = i->data;
 
-            if ((entry != NULL) && (entry->command != CK_Ignore_Key)
+            if ((entry != NULL) && (entry->command != CK_IgnoreKey)
                 && (entry->text.hotkey != NULL) && (key == g_ascii_tolower (entry->text.hotkey[0])))
             {
                 menu->selected = g_list_position (menu->entries, i);
@@ -686,7 +686,7 @@ menubar_event (Gpm_Event * event, void *data)
         if ((pos < 0) || (pos >= bottom_y - 3))
             return MOU_NORMAL;
 
-        if ((entry != NULL) && (entry->command != CK_Ignore_Key))
+        if ((entry != NULL) && (entry->command != CK_IgnoreKey))
         {
             menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
             menu->selected = pos;

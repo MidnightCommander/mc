@@ -919,7 +919,7 @@ help_handle_key (Dlg_head * h, int c)
     unsigned long command;
 
     command = keybind_lookup_keymap_command (help_map, c);
-    if ((command == CK_Ignore_Key) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
+    if ((command == CK_IgnoreKey) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
         return MSG_NOT_HANDLED;
 
     help_callback (h, NULL, DLG_DRAW, 0, NULL);

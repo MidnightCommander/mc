@@ -301,6 +301,8 @@ static name_keymap_t command_names[] = {
     {"ShowMargin", CK_ShowMargin},
     {"OptionsSaveMode", CK_OptionsSaveMode},
     {"About", CK_About},
+    /* An action to run external script from macro */
+    {"ExecuteScript", CK_PipeBlock (0)},
 #endif /* USE_INTERNAL_EDIT */
 
     /* viewer */
@@ -329,7 +331,7 @@ static name_keymap_t command_names[] = {
     {"Merge", CK_Merge},
 #endif /* USE_DIFF_VIEW */
 
-    {NULL, CK_Ignore_Key}
+    {NULL, CK_IgnoreKey}
 };
 
 static const size_t num_command_names = G_N_ELEMENTS (command_names) - 1;
@@ -366,7 +368,7 @@ sort_command_names (void)
 static void
 keymap_add (GArray * keymap, long key, unsigned long cmd, const char *caption)
 {
-    if (key != 0 && cmd != CK_Ignore_Key)
+    if (key != 0 && cmd != CK_IgnoreKey)
     {
         global_keymap_t new_bind;
 
@@ -405,7 +407,7 @@ keybind_lookup_action (const char *name)
     res = bsearch (&key, command_names, num_command_names,
                    sizeof (command_names[0]), name_keymap_comparator);
 
-    return (res != NULL) ? res->val : CK_Ignore_Key;
+    return (res != NULL) ? res->val : CK_IgnoreKey;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -447,7 +449,7 @@ keybind_lookup_keymap_command (const global_keymap_t * keymap, long key)
         if (keymap[i].key == key)
             return keymap[i].command;
 
-    return CK_Ignore_Key;
+    return CK_IgnoreKey;
 }
 
 /* --------------------------------------------------------------------------------------------- */

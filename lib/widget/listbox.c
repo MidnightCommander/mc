@@ -308,7 +308,7 @@ listbox_key (WListbox * l, int key)
     }
 
     command = keybind_lookup_keymap_command (listbox_map, key);
-    if (command == CK_Ignore_Key)
+    if (command == CK_IgnoreKey)
         return MSG_NOT_HANDLED;
     return listbox_execute_cmd (l, command);
 }

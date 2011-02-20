@@ -116,7 +116,7 @@ const global_keymap_t default_main_map[] = {
     {ALT ('}'), CK_ScreenNext, "M-}"},
     {ALT ('{'), CK_ScreenPrev, "M-{"},
 
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 const global_keymap_t default_main_x_map[] = {
@@ -146,7 +146,7 @@ const global_keymap_t default_main_x_map[] = {
 #ifdef WITH_BACKGROUND
     {'j', CK_Jobs, "j"},
 #endif /* WITH_BACKGROUND */
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 /* panel */
@@ -190,7 +190,7 @@ const global_keymap_t default_panel_keymap[] = {
     {XCTRL ('s'), CK_Search, "C-s"},
     {ALT ('s'), CK_Search, "M-s"},
     {ALT ('i'), CK_PanelOtherSync, "M-i"},
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 /* dialog */
@@ -207,7 +207,7 @@ const global_keymap_t default_dialog_keymap[] = {
     {KEY_F (1), CK_Help, "F1"},
     {XCTRL ('z'), CK_Suspend, "C-z"},
     {XCTRL ('l'), CK_Refresh, "C-l"},
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 const global_keymap_t default_input_keymap[] = {
@@ -255,7 +255,7 @@ const global_keymap_t default_input_keymap[] = {
     /* Completion */
     {ALT ('\t'), CK_Complete, "M-tab"},
 
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 const global_keymap_t default_listbox_keymap[] = {
@@ -277,7 +277,7 @@ const global_keymap_t default_listbox_keymap[] = {
     {'d', CK_Delete, "d"},
     {KEY_M_SHIFT | KEY_DC, CK_Clear, "S-Delete"},
     {'D', CK_Clear, "D"},
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 /* tree */
@@ -314,7 +314,7 @@ const global_keymap_t default_tree_keymap[] = {
     {XCTRL ('s'), CK_Search, "C-s"},
     {ALT ('s'), CK_Search, "M-s"},
     {KEY_DC, CK_Delete, "Delete"},
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 /* help */
@@ -360,7 +360,7 @@ const global_keymap_t default_help_keymap[] = {
     {'p', CK_NodePrev, "p"},
     {ESC_CHAR, CK_Quit, "Esc"},
     {XCTRL ('g'), CK_Quit, "C-g"},
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 #ifdef USE_INTERNAL_EDIT
@@ -492,13 +492,13 @@ const global_keymap_t default_editor_keymap[] = {
 
     {XCTRL ('x'), CK_ExtendedKeyMap, "C-x"},
 
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 /* emacs keyboard layout emulation */
 const global_keymap_t default_editor_x_keymap[] = {
     {'k', CK_EditNew, "k"},
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 #endif /* USE_INTERNAL_EDIT */
 
@@ -589,7 +589,7 @@ const global_keymap_t default_viewer_keymap[] = {
 #endif
     {XCTRL ('o'), CK_Shell, "C-o"},
 
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 const global_keymap_t default_viewer_hex_keymap[] = {
@@ -658,7 +658,7 @@ const global_keymap_t default_viewer_hex_keymap[] = {
 #endif
     {XCTRL ('o'), CK_Shell, "C-o"},
 
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 
 
@@ -708,7 +708,7 @@ const global_keymap_t default_diff_keymap[] = {
     {KEY_F (10), CK_Quit, "F10"},
     {KEY_F (14), CK_EditOther, "S-F4"},
 
-    {0, CK_Ignore_Key, ""}
+    {0, CK_IgnoreKey, ""}
 };
 #endif
 

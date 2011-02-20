@@ -2901,7 +2901,7 @@ edit_print_string (WEdit * e, const char *s)
 {
     size_t i = 0;
     while (s[i] != '\0')
-        edit_execute_cmd (e, CK_Insert_Char, (unsigned char) s[i++]);
+        edit_execute_cmd (e, CK_InsertChar, (unsigned char) s[i++]);
     e->force |= REDRAW_COMPLETELY;
     edit_update_screen (e);
     return i;

@@ -1334,7 +1334,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         {
             ctl_x_map_enabled = FALSE;
             command = keybind_lookup_keymap_command (main_x_map, parm);
-            if (command != CK_Ignore_Key)
+            if (command != CK_IgnoreKey)
                 return midnight_execute_cmd (NULL, command);
         }
 
@@ -1455,7 +1455,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         else
             command = keybind_lookup_keymap_command (main_map, parm);
 
-        return (command == CK_Ignore_Key) ? MSG_NOT_HANDLED : midnight_execute_cmd (NULL, command);
+        return (command == CK_IgnoreKey) ? MSG_NOT_HANDLED : midnight_execute_cmd (NULL, command);
 
     case DLG_POST_KEY:
         if (!the_menubar->is_active)

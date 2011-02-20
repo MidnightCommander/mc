@@ -146,7 +146,7 @@ buttonbar_call (WButtonBar * bb, int i)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
 
-    if ((bb != NULL) && (bb->labels[i].command != CK_Ignore_Key))
+    if ((bb != NULL) && (bb->labels[i].command != CK_IgnoreKey))
         ret = bb->widget.owner->callback (bb->widget.owner,
                                           (Widget *) bb, DLG_ACTION,
                                           bb->labels[i].command, bb->labels[i].receiver);
@@ -256,7 +256,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
 {
     if ((bb != NULL) && (idx >= 1) && (idx <= BUTTONBAR_LABELS_NUM))
     {
-        unsigned long command = CK_Ignore_Key;
+        unsigned long command = CK_IgnoreKey;
 
         if (keymap != NULL)
             command = keybind_lookup_keymap_command (keymap, KEY_F (idx));

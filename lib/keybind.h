@@ -10,298 +10,292 @@
 
 #define KEYMAP_SHORTCUT_LENGTH 32       /* FIXME: is 32 bytes enough for shortcut? */
 
-/* special commands */
-#define CK_Insert_Char -1
-#define CK_Ignore_Key   0
-
-/* common */
-#define CK_Enter             3
-#define CK_Up                10
-#define CK_Down              11
-#define CK_Left              6
-#define CK_Right             7
-#define CK_Home              12
-#define CK_End               13
-#define CK_LeftQuick         9027
-#define CK_RightQuick        9028
-#define CK_PageUp            4
-#define CK_PageDown          5
-#define CK_HalfPageUp        1015
-#define CK_HalfPageDown      1014
-#define CK_Top               17
-#define CK_Bottom            18
-#define CK_TopOnScreen       8019
-#define CK_MiddleOnScreen    8018
-#define CK_BottomOnScreen    8017
-#define CK_WordLeft          8
-#define CK_WordRight         9
-#define CK_Copy              202
-#define CK_Move              203
-#define CK_Delete            2
-#define CK_MakeDir           7045
-#define CK_ChangeMode        7003
-#define CK_ChangeOwn         7005
-#define CK_ChangeOwnAdvanced 7004
-#define CK_Remove            204
-#define CK_BackSpace         1
-#define CK_Redo              16
-#define CK_Clear             4026
-#define CK_Menu              123
-#define CK_MenuLastSelected  7044
-#define CK_UserMenu          425
-#define CK_EditUserMenu                 7026
-#define CK_Search                       8032
-#define CK_SearchContinue               5011
-#define CK_Replace           303
-#define CK_ReplaceContinue   304
-#define CK_SearchStop                   8033
-#define CK_Help                         404
-#define CK_Edit                         7020
-#define CK_Shell           801
-#ifdef HAVE_CHARSET
-#define CK_SelectCodepage               2002
-#endif
-#define CK_History                      4021
-#define CK_HistoryNext                  4022
-#define CK_HistoryPrev                  4023
-#define CK_Complete                     305
-#define CK_SaveAs                       104
-#define CK_Goto                         407
-#define CK_Reread                       7053
-#define CK_Refresh                      406
-#define CK_Suspend                      7060
-#define CK_Swap                         7061
-#define CK_HotList                      7048
-#define CK_ScreenList                   7079
-#define CK_ScreenNext                   7080
-#define CK_ScreenPrev                   7081
-#define CK_FilePrev                     111
-#define CK_FileNext                     112
-#define CK_DeleteToWordBegin            24
-#define CK_DeleteToWordEnd              25
-#define CK_ShowNumbers                  490
-#define CK_Store                        701
-#define CK_Cut                          702
-#define CK_Paste                        703
-#define CK_Mark                         201
-#define CK_MarkLeft                     606
-#define CK_MarkRight                    607
-#define CK_MarkUp                       8021
-#define CK_MarkDown                     8022
-#define CK_MarkToWordBegin              608
-#define CK_MarkToWordEnd                609
-#define CK_MarkToHome                   612
-#define CK_MarkToEnd                    613
-#define CK_ToggleNavigation             5027
-#define CK_Sort                         412
-#define CK_Options                      7007
-#define CK_LearnKeys                    7037
-#define CK_Bookmark                     5013
-#define CK_Quit                         402
-#define CK_QuitQuiet                    7050
-/* C-x or similar */
-#define CK_ExtendedKeyMap               820
-
-/* main commands */
-#ifdef USE_INTERNAL_EDIT
-#define CK_EditForceInternal            7082
-#endif
-#define CK_View                         7071
-#define CK_ViewRaw                      8011
-#define CK_ViewFile                     7072
-#define CK_ViewFiltered                 7029
-#define CK_Find                         419
-#define CK_DirSize                      7058
-#define CK_HotListAdd                   7001
-#define CK_PanelListingChange           7002
-#define CK_CompareDirs                  7006
-#define CK_OptionsVfs                   7008
-#define CK_OptionsConfirm               7009
-#define CK_PutCurrentLink               7012
-#define CK_PutOtherLink                 7015
-#define CK_OptionsDisplayBits           7019
-#define CK_EditExtensionsFile           7021
-#define CK_EditFileHighlightFile        7022
-#define CK_LinkSymbolicEdit             7024
-#define CK_ExternalPanelize             7027
-#define CK_Filter                       7028
-#define CK_ConnectFish                  7031
-#define CK_ConnectFtp                   7032
-#define CK_ConnectSmb                   7059
-#define CK_PanelInfo                    7034
-#define CK_Jobs                         7035
-#define CK_OptionsLayout                7036
-#define CK_Link                         7038
-#define CK_PanelListing                 7039
-#define CK_ListMode                     7042
-#define CK_CdQuick                      7047
-#define CK_PanelQuickView               7049
-#define CK_VfsList                      7054
-#define CK_SaveSetup                    7056
-#define CK_LinkSymbolic                 7062
-#define CK_PanelListingSwitch           7063
-#define CK_ShowHidden                   7064
-#define CK_PanelTree                    7065
-#define CK_Tree                         7066
-#define CK_Undelete                     7067
-#define CK_SplitVertHoriz               7075
-#ifdef USE_DIFF_VIEW
-#define CK_CompareFiles                 7076
-#endif /* USE_DIFF_VIEW */
-#define CK_OptionsPanel                 7077
-#define CK_LinkSymbolicRelative         7078
-#define CK_PutCurrentPath               7011
-#define CK_PutOtherPath                 7014
-#define CK_PutCurrentTagged             7013
-#define CK_PutOtherTagged               7016
-#define CK_Select                       7057
-#define CK_Unselect                     7068
-#define CK_SelectInvert                 7055
-
-/* panels */
-#define CK_PanelOtherCd                 8001
-#define CK_PanelOtherCdLink             8002
-#define CK_CopySingle                   8003
-#define CK_MoveSingle                   8007
-#define CK_DeleteSingle                 8004
-#define CK_CdChild                      8012
-#define CK_CdParent                     8013
-#define CK_CdParentSmart                8043
-#define CK_PanelOtherSync               8034
-#define CK_SortNext                     8035
-#define CK_SortPrev                     8036
-#define CK_SortReverse                  8038
-#define CK_SortByName                   8039
-#define CK_SortByExt                    8040
-#define CK_SortBySize                   8041
-#define CK_SortByMTime                  8042
-
-/* dialog */
-#define CK_Ok                           3001
-#define CK_Cancel                       3002
-
-/* input */
-#define CK_Yank                         4018
-
-/* help */
-#define CK_Index                        1002
-#define CK_Back                         1003
-#define CK_LinkNext                     1008
-#define CK_LinkPrev                     1009
-#define CK_NodeNext                     1010
-#define CK_NodePrev                     1011
-
-/* tree */
-#define CK_Forget                       6003
-
-#ifdef USE_INTERNAL_EDIT
-/* cursor movements */
-#define CK_Tab               14
-#define CK_Undo              15
-#define CK_ScrollUp          19
-#define CK_ScrollDown        20
-#define CK_Return            21
-#define CK_ParagraphUp       26
-#define CK_ParagraphDown     27
-/* file commands */
-#define CK_Save             101
-#define CK_EditFile         102
-#define CK_EditNew          103
-#define CK_EditSyntaxFile   121
-/* block commands */
-#define CK_Unmark            206
-#define CK_BlockSave         207
-#define CK_MarkColumn        208
-#define CK_BlockShiftLeft    211
-#define CK_BlockShiftRight   212
-#define CK_MarkAll           213
-#define CK_MarkWord          214
-#define CK_MarkLine          215
-#define CK_InsertFile           401
-#define CK_InsertOverwrite      403
-#define CK_Date                 405
-#define CK_DeleteLine           408
-#define CK_DeleteToHome         409
-#define CK_DeleteToEnd          410
-#define CK_Mail                 413
-#define CK_ParagraphFormat      416
-#define CK_MatchBracket         421
-#define CK_ExternalCommand      424
-#define CK_OptionsSaveMode      428
-#define CK_About                430
-#define CK_ShowMargin           460
-#define CK_ShowTabTws           470
-#define CK_SyntaxOnOff          480
-#define CK_SyntaxChoose         429
-#define CK_InsertLiteral        851
-/* bookmarks */
-#define CK_BookmarkFlush  551
-#define CK_BookmarkNext   552
-#define CK_BookmarkPrev   553
-/* mark commands */
-#define CK_MarkPageUp                  604
-#define CK_MarkPageDown                605
-#define CK_MarkToFileBegin             614
-#define CK_MarkToFileEnd               615
-#define CK_MarkToPageBegin             616
-#define CK_MarkToPageEnd               617
-#define CK_MarkScrollUp                618
-#define CK_MarkScrollDown              619
-#define CK_MarkParagraphUp             620
-#define CK_MarkParagraphDown           621
-/* column mark commands */
-#define CK_MarkColumnPageUp                654
-#define CK_MarkColumnPageDown              655
-#define CK_MarkColumnLeft                  656
-#define CK_MarkColumnRight                 657
-#define CK_MarkColumnUp                    660
-#define CK_MarkColumnDown                  661
-#define CK_MarkColumnScrollUp              668
-#define CK_MarkColumnScrollDown            669
-#define CK_MarkColumnParagraphUp           670
-#define CK_MarkColumnParagraphDown         671
-/* macros */
-#define CK_MacroStartRecord     501
-#define CK_MacroStopRecord      502
-#define CK_MacroStartStopRecord 853
-#define CK_MacroExecute         852
-#define CK_MacroDelete          503
-#define CK_RepeatStartStopRecord         854
-#define CK_RepeatStartRecord             855
-#define CK_RepeatStopRecord              856
-#endif /* USE_INTERNAL_EDIT */
-
-/* viewer */
-#define CK_WrapMode                     5002
-#define CK_HexEditMode                  5003
-#define CK_HexMode                      5004
-#define CK_MagicMode                    5008
-#define CK_NroffMode                    5009
-#define CK_BookmarkGoto                 5012
-#define CK_Ruler                        5026
-
-#ifdef USE_DIFF_VIEW
-/* diff viewer */
-#define CK_ShowSymbols                  9001
-#define CK_SplitFull                    9003
-#define CK_SplitEqual                   9004
-#define CK_SplitMore                    9005
-#define CK_SplitLess                    9006
-#define CK_Tab2                         9009
-#define CK_Tab3                         9010
-#define CK_Tab4                         9011
-#define CK_Tab8                         9012
-#define CK_HunkNext                     9015
-#define CK_HunkPrev                     9016
-#define CK_EditOther                    9019
-#define CK_Merge                        9035
-#endif /* USE_DIFF_VIEW */
-
 #define CK_PipeBlock(i)  (10000+(i))
 #define CK_Macro(i)      (20000+(i))
-#define CK_Last_Macro    CK_Macro(0x7FFF)
+#define CK_MacroLast     CK_Macro(0x7FFF)
 
 /*** enums ***************************************************************************************/
+
+enum
+{
+    /* special commands */
+    CK_InsertChar = -1,
+    CK_IgnoreKey = 0,
+
+    /* common */
+    CK_Enter = 1,
+    CK_Up,
+    CK_Down,
+    CK_Left,
+    CK_Right,
+    CK_Home,
+    CK_End,
+    CK_LeftQuick,
+    CK_RightQuick,
+    CK_PageUp,
+    CK_PageDown,
+    CK_HalfPageUp,
+    CK_HalfPageDown,
+    CK_Top,
+    CK_Bottom,
+    CK_TopOnScreen,
+    CK_MiddleOnScreen,
+    CK_BottomOnScreen,
+    CK_WordLeft,
+    CK_WordRight,
+    CK_Copy,
+    CK_Move,
+    CK_Delete,
+    CK_MakeDir,
+    CK_ChangeMode,
+    CK_ChangeOwn,
+    CK_ChangeOwnAdvanced,
+    CK_Remove,
+    CK_BackSpace,
+    CK_Redo,
+    CK_Clear,
+    CK_Menu,
+    CK_MenuLastSelected,
+    CK_UserMenu,
+    CK_EditUserMenu,
+    CK_Search,
+    CK_SearchContinue,
+    CK_Replace,
+    CK_ReplaceContinue,
+    CK_SearchStop,
+    CK_Help,
+    CK_Edit,
+    CK_Shell,
+    CK_SelectCodepage,
+    CK_History,
+    CK_HistoryNext,
+    CK_HistoryPrev,
+    CK_Complete,
+    CK_SaveAs,
+    CK_Goto,
+    CK_Reread,
+    CK_Refresh,
+    CK_Suspend,
+    CK_Swap,
+    CK_Mark,
+    CK_HotList,
+    CK_ScreenList,
+    CK_ScreenNext,
+    CK_ScreenPrev,
+    CK_FilePrev,
+    CK_FileNext,
+    CK_DeleteToWordBegin,
+    CK_DeleteToWordEnd,
+    CK_ShowNumbers,
+    CK_Store,
+    CK_Cut,
+    CK_Paste,
+    CK_MarkLeft,
+    CK_MarkRight,
+    CK_MarkUp,
+    CK_MarkDown,
+    CK_MarkToWordBegin,
+    CK_MarkToWordEnd,
+    CK_MarkToHome,
+    CK_MarkToEnd,
+    CK_ToggleNavigation,
+    CK_Sort,
+    CK_Options,
+    CK_LearnKeys,
+    CK_Bookmark,
+    CK_Quit,
+    CK_QuitQuiet,
+    /* C-x or similar */
+    CK_ExtendedKeyMap,
+
+    /* main commands */
+    CK_EditForceInternal = 100,
+    CK_View,
+    CK_ViewRaw,
+    CK_ViewFile,
+    CK_ViewFiltered,
+    CK_Find,
+    CK_DirSize,
+    CK_HotListAdd,
+    CK_PanelListingChange,
+    CK_CompareDirs,
+    CK_OptionsVfs,
+    CK_OptionsConfirm,
+    CK_PutCurrentLink,
+    CK_PutOtherLink,
+    CK_OptionsDisplayBits,
+    CK_EditExtensionsFile,
+    CK_EditFileHighlightFile,
+    CK_LinkSymbolicEdit,
+    CK_ExternalPanelize,
+    CK_Filter,
+    CK_ConnectFish,
+    CK_ConnectFtp,
+    CK_ConnectSmb,
+    CK_PanelInfo,
+    CK_Jobs,
+    CK_OptionsLayout,
+    CK_Link,
+    CK_PanelListing,
+    CK_ListMode,
+    CK_CdQuick,
+    CK_PanelQuickView,
+    CK_VfsList,
+    CK_SaveSetup,
+    CK_LinkSymbolic,
+    CK_PanelListingSwitch,
+    CK_ShowHidden,
+    CK_PanelTree,
+    CK_Tree,
+    CK_Undelete,
+    CK_SplitVertHoriz,
+    CK_CompareFiles,
+    CK_OptionsPanel,
+    CK_LinkSymbolicRelative,
+    CK_PutCurrentPath,
+    CK_PutOtherPath,
+    CK_PutCurrentTagged,
+    CK_PutOtherTagged,
+    CK_Select,
+    CK_Unselect,
+    CK_SelectInvert,
+
+    /* panels */
+    CK_PanelOtherCd = 200,
+    CK_PanelOtherCdLink,
+    CK_CopySingle,
+    CK_MoveSingle,
+    CK_DeleteSingle,
+    CK_CdChild,
+    CK_CdParent,
+    CK_CdParentSmart,
+    CK_PanelOtherSync,
+    CK_SortNext,
+    CK_SortPrev,
+    CK_SortReverse,
+    CK_SortByName,
+    CK_SortByExt,
+    CK_SortBySize,
+    CK_SortByMTime,
+
+    /* dialog */
+    CK_Ok = 300,
+    CK_Cancel,
+
+    /* input */
+    CK_Yank = 350,
+
+    /* help */
+    CK_Index = 400,
+    CK_Back,
+    CK_LinkNext,
+    CK_LinkPrev,
+    CK_NodeNext,
+    CK_NodePrev,
+
+    /* tree */
+    CK_Forget = 450,
+
+    /* editor */
+    /* cursor movements */
+    CK_Tab = 500,
+    CK_Undo,
+    CK_ScrollUp,
+    CK_ScrollDown,
+    CK_Return,
+    CK_ParagraphUp,
+    CK_ParagraphDown,
+    /* file commands */
+    CK_Save,
+    CK_EditFile,
+    CK_EditNew,
+    CK_InsertFile,
+    CK_EditSyntaxFile,
+    /* block commands */
+    CK_BlockSave,
+    CK_BlockShiftLeft,
+    CK_BlockShiftRight,
+    CK_DeleteLine,
+    CK_DeleteToHome,
+    CK_DeleteToEnd,
+    /* bookmarks */
+    CK_BookmarkFlush,
+    CK_BookmarkNext,
+    CK_BookmarkPrev,
+    /* mark commands */
+    CK_MarkColumn,
+    CK_MarkWord,
+    CK_MarkLine,
+    CK_MarkAll,
+    CK_Unmark,
+    CK_MarkPageUp,
+    CK_MarkPageDown,
+    CK_MarkToFileBegin,
+    CK_MarkToFileEnd,
+    CK_MarkToPageBegin,
+    CK_MarkToPageEnd,
+    CK_MarkScrollUp,
+    CK_MarkScrollDown,
+    CK_MarkParagraphUp,
+    CK_MarkParagraphDown,
+    /* column mark commands */
+    CK_MarkColumnPageUp,
+    CK_MarkColumnPageDown,
+    CK_MarkColumnLeft,
+    CK_MarkColumnRight,
+    CK_MarkColumnUp,
+    CK_MarkColumnDown,
+    CK_MarkColumnScrollUp,
+    CK_MarkColumnScrollDown,
+    CK_MarkColumnParagraphUp,
+    CK_MarkColumnParagraphDown,
+    /* macros */
+    CK_MacroStartRecord,
+    CK_MacroStopRecord,
+    CK_MacroStartStopRecord,
+    CK_MacroDelete,
+    CK_RepeatStartRecord,
+    CK_RepeatStopRecord,
+    CK_RepeatStartStopRecord,
+    /* misc commands */
+    CK_InsertOverwrite,
+    CK_ParagraphFormat,
+    CK_MatchBracket,
+    CK_OptionsSaveMode,
+    CK_About,
+    CK_ShowMargin,
+    CK_ShowTabTws,
+    CK_SyntaxOnOff,
+    CK_SyntaxChoose,
+    CK_InsertLiteral,
+    CK_ExternalCommand,
+    CK_Date,
+    CK_Mail,
+
+    /* viewer */
+    CK_WrapMode = 600,
+    CK_MagicMode,
+    CK_NroffMode,
+    CK_HexMode,
+    CK_HexEditMode,
+    CK_BookmarkGoto,
+    CK_Ruler,
+
+    /* diff viewer */
+    CK_ShowSymbols = 700,
+    CK_SplitFull,
+    CK_SplitEqual,
+    CK_SplitMore,
+    CK_SplitLess,
+    CK_Tab2,
+    CK_Tab3,
+    CK_Tab4,
+    CK_Tab8,
+    CK_HunkNext,
+    CK_HunkPrev,
+    CK_EditOther,
+    CK_Merge
+};
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
