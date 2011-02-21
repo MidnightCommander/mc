@@ -689,7 +689,6 @@ load_setup_get_keymap_profile_config (void)
     g_free (fname);
 
     /* 4) main config; [Midnight Commander] -> keymap */
-
     fname2 =
         mc_config_get_string (mc_main_config, CONFIG_APP_SECTION, "keymap", GLOBAL_KEYMAP_FILE);
     fname = load_setup_get_full_config_name (NULL, fname2);
@@ -1155,15 +1154,16 @@ load_anon_passwd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-load_keymap_defs (void)
+load_keymap_defs (gboolean load_from_file)
 {
     /*
      * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_DATA_HOME}/mc/keymap, so that the user
      * definitions override global settings.
      */
-    mc_config_t *mc_global_keymap;
+    mc_config_t *mc_global_keymap = NULL;
 
-    mc_global_keymap = load_setup_get_keymap_profile_config ();
+    if (load_from_file)
+        mc_global_keymap = load_setup_get_keymap_profile_config ();
 
     if (mc_global_keymap != NULL)
     {
