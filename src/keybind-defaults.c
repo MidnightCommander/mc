@@ -61,6 +61,8 @@ const global_keymap_t *help_map;
 const global_keymap_t *editor_map;
 const global_keymap_t *editor_x_map;
 #endif
+const global_keymap_t *viewer_map;
+const global_keymap_t *viewer_hex_map;
 #ifdef USE_DIFF_VIEW
 const global_keymap_t *diff_map;
 #endif
@@ -68,7 +70,7 @@ const global_keymap_t *diff_map;
 /*** global variables ****************************************************************************/
 
 /* midnight */
-const global_keymap_t default_main_map[] = {
+const global_keymap_t default_main_keymap[] = {
     {KEY_F (1), CK_Help, "F1"},
     {KEY_F (2), CK_UserMenu, "F2"},
     {KEY_F (3), CK_View, "F3"},
@@ -119,7 +121,7 @@ const global_keymap_t default_main_map[] = {
     {0, CK_IgnoreKey, ""}
 };
 
-const global_keymap_t default_main_x_map[] = {
+const global_keymap_t default_main_x_keymap[] = {
     {'d', CK_CompareDirs, "d"},
 #ifdef USE_DIFF_VIEW
     {XCTRL ('d'), CK_CompareFiles, "C-d"},

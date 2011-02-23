@@ -175,10 +175,6 @@ typedef struct mcview_struct
     /* converter for translation of text */
     GIConv converter;
 
-    /* keymaps */
-    const global_keymap_t *plain_map;
-    const global_keymap_t *hex_map;
-
     /* handle of search engine */
     mc_search_t *search;
     gchar *last_search_string;

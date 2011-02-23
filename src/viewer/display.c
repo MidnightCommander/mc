@@ -51,6 +51,7 @@
 
 #include "src/setup.h"          /* panels_options */
 #include "src/main.h"
+#include "src/keybind-defaults.h"
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -81,7 +82,7 @@ mcview_set_buttonbar (mcview_t * view)
 {
     Dlg_head *h = view->widget.owner;
     WButtonBar *b = find_buttonbar (h);
-    const global_keymap_t *keymap = view->hex_mode ? view->hex_map : view->plain_map;
+    const global_keymap_t *keymap = view->hex_mode ? viewer_hex_map : viewer_map;
 
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), keymap, (Widget *) view);
 

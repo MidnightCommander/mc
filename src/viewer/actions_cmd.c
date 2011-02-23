@@ -399,12 +399,12 @@ mcview_handle_key (mcview_t * view, int key)
         if (view->hexedit_mode && (mcview_handle_editkey (view, key) == MSG_HANDLED))
             return MSG_HANDLED;
 
-        command = keybind_lookup_keymap_command (view->hex_map, key);
+        command = keybind_lookup_keymap_command (viewer_hex_map, key);
         if ((command != CK_IgnoreKey) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
             return MSG_HANDLED;
     }
 
-    command = keybind_lookup_keymap_command (view->plain_map, key);
+    command = keybind_lookup_keymap_command (viewer_map, key);
     if ((command != CK_IgnoreKey) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
         return MSG_HANDLED;
 

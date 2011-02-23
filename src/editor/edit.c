@@ -558,19 +558,6 @@ edit_purge_widget (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-edit_set_keymap (void)
-{
-    editor_map = default_editor_keymap;
-    if (editor_keymap && editor_keymap->len > 0)
-        editor_map = (global_keymap_t *) editor_keymap->data;
-
-    editor_x_map = default_editor_x_keymap;
-    if (editor_x_keymap && editor_x_keymap->len > 0)
-        editor_x_map = (global_keymap_t *) editor_x_keymap->data;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*
    TODO: if the user undos until the stack bottom, and the stack has not wrapped,
    then the file should be as it was when he loaded up. Then set edit->modified to 0.
@@ -2206,7 +2193,6 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
         edit_move_to_line (edit, line - 1);
     }
 
-    edit_set_keymap ();
     edit_load_macro_cmd (edit);
     return edit;
 }

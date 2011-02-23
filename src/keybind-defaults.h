@@ -43,14 +43,16 @@ extern const global_keymap_t *help_map;
 extern const global_keymap_t *editor_map;
 extern const global_keymap_t *editor_x_map;
 #endif
+extern const global_keymap_t *viewer_map;
+extern const global_keymap_t *viewer_hex_map;
 #ifdef USE_DIFF_VIEW
 extern const global_keymap_t *diff_map;
 #endif
 
 
 /* main.c */
-extern const global_keymap_t default_main_map[];
-extern const global_keymap_t default_main_x_map[];
+extern const global_keymap_t default_main_keymap[];
+extern const global_keymap_t default_main_x_keymap[];
 /* screen.c */
 extern const global_keymap_t default_panel_keymap[];
 /* dialog.c */

@@ -1210,11 +1210,11 @@ load_keymap_defs (gboolean load_from_file)
         mc_config_deinit (mc_global_keymap);
     }
 
-    main_map = default_main_map;
+    main_map = default_main_keymap;
     if (main_keymap && main_keymap->len > 0)
         main_map = (global_keymap_t *) main_keymap->data;
 
-    main_x_map = default_main_x_map;
+    main_x_map = default_main_x_keymap;
     if (main_x_keymap && main_x_keymap->len > 0)
         main_x_map = (global_keymap_t *) main_x_keymap->data;
 
@@ -1241,6 +1241,24 @@ load_keymap_defs (gboolean load_from_file)
     help_map = default_help_keymap;
     if (help_keymap && help_keymap->len > 0)
         help_map = (global_keymap_t *) help_keymap->data;
+
+#ifdef USE_INTERNAL_EDIT
+    editor_map = default_editor_keymap;
+    if (editor_keymap && editor_keymap->len > 0)
+        editor_map = (global_keymap_t *) editor_keymap->data;
+
+    editor_x_map = default_editor_x_keymap;
+    if (editor_x_keymap && editor_x_keymap->len > 0)
+        editor_x_map = (global_keymap_t *) editor_x_keymap->data;
+#endif
+
+    viewer_map = default_viewer_keymap;
+    if (viewer_keymap && viewer_keymap->len > 0)
+        viewer_map = (global_keymap_t *) viewer_keymap->data;
+
+    viewer_hex_map = default_viewer_hex_keymap;
+    if (viewer_hex_keymap && viewer_hex_keymap->len > 0)
+        viewer_hex_map = (global_keymap_t *) viewer_hex_keymap->data;
 
 #ifdef USE_DIFF_VIEW
     diff_map = default_diff_keymap;
