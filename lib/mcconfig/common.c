@@ -194,7 +194,7 @@ mc_config_del_group (mc_config_t * mc_config, const char *group)
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path)
+mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean remove_empty)
 {
     mc_config_t *tmp_config;
     gchar **groups, **curr_grp;
@@ -202,9 +202,7 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path)
     gchar *value;
 
     if (mc_config == NULL)
-    {
         return FALSE;
-    }
 
     tmp_config = mc_config_init (ini_path);
     if (tmp_config == NULL)
@@ -224,11 +222,16 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path)
         for (curr_key = keys; *curr_key != NULL; curr_key++)
         {
             value = g_key_file_get_value (tmp_config->handle, *curr_grp, *curr_key, NULL);
-            if (value == NULL)
-                continue;
-
-            g_key_file_set_value (mc_config->handle, *curr_grp, *curr_key, value);
-            g_free (value);
+            if (value != NULL)
+            {
+                if (*value == '\0' && remove_empty)
+                    g_key_file_remove_key (mc_config->handle, *curr_grp, *curr_key, NULL);
+                else
+                    g_key_file_set_value (mc_config->handle, *curr_grp, *curr_key, value);
+                g_free (value);
+            }
+            else if (remove_empty)
+                g_key_file_remove_key (mc_config->handle, *curr_grp, *curr_key, NULL);
         }
         g_strfreev (keys);
     }

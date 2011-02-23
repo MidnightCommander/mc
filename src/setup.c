@@ -529,7 +529,7 @@ load_setup_init_config_from_file (mc_config_t ** config, const char *fname)
     if (exist_file (fname))
     {
         if (*config != NULL)
-            mc_config_read_file (*config, fname);
+            mc_config_read_file (*config, fname, TRUE);
         else
             *config = mc_config_init (fname);
     }

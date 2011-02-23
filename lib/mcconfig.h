@@ -34,7 +34,8 @@ gboolean mc_config_del_group (mc_config_t *, const char *);
 gboolean mc_config_has_param (mc_config_t *, const char *, const gchar *);
 gboolean mc_config_has_group (mc_config_t *, const char *);
 
-gboolean mc_config_read_file (mc_config_t *, const gchar *);
+gboolean mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path,
+                              gboolean remove_empty);
 
 gboolean mc_config_save_file (mc_config_t * config, GError ** error);
 
