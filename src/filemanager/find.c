@@ -278,7 +278,7 @@ find_load_options (void)
         mc_config_get_bool (mc_main_config, "FindFile", "file_skip_hidden", FALSE);
     options.file_all_charsets =
         mc_config_get_bool (mc_main_config, "FindFile", "file_all_charsets", FALSE);
-    options.content_use = mc_config_get_bool (mc_main_config, "FindFile", "content_use", FALSE);
+    options.content_use = mc_config_get_bool (mc_main_config, "FindFile", "content_use", TRUE);
     options.content_case_sens =
         mc_config_get_bool (mc_main_config, "FindFile", "content_case_sens", TRUE);
     options.content_regexp =
