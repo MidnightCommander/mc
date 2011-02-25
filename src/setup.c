@@ -517,7 +517,6 @@ setup__move_panels_config_into_separate_file (const char *profile)
 /**
   Create new mc_config object from specified ini-file or
   append data to existing mc_config object from ini-file
-
 */
 
 static void
@@ -665,13 +664,18 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
 /* --------------------------------------------------------------------------------------------- */
 
 static mc_config_t *
-load_setup_get_keymap_profile_config (void)
+load_setup_get_keymap_profile_config (gboolean load_from_file)
 {
     /*
        TODO: IMHO, in future this function must be placed into mc_config module.
      */
-    mc_config_t *keymap_config = NULL;
+    mc_config_t *keymap_config;
     char *fname, *fname2;
+
+    /* 0) Create default keymap */
+    keymap_config = create_default_keymap ();
+    if (!load_from_file)
+        return keymap_config;
 
     /* 1) /usr/share/mc (mc_share_data_dir) */
     fname = g_build_filename (mc_share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
@@ -1160,10 +1164,9 @@ load_keymap_defs (gboolean load_from_file)
      * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_DATA_HOME}/mc/keymap, so that the user
      * definitions override global settings.
      */
-    mc_config_t *mc_global_keymap = NULL;
+    mc_config_t *mc_global_keymap;
 
-    if (load_from_file)
-        mc_global_keymap = load_setup_get_keymap_profile_config ();
+    mc_global_keymap = load_setup_get_keymap_profile_config (load_from_file);
 
     if (mc_global_keymap != NULL)
     {
@@ -1210,60 +1213,22 @@ load_keymap_defs (gboolean load_from_file)
         mc_config_deinit (mc_global_keymap);
     }
 
-    main_map = default_main_keymap;
-    if (main_keymap && main_keymap->len > 0)
-        main_map = (global_keymap_t *) main_keymap->data;
-
-    main_x_map = default_main_x_keymap;
-    if (main_x_keymap && main_x_keymap->len > 0)
-        main_x_map = (global_keymap_t *) main_x_keymap->data;
-
-    panel_map = default_panel_keymap;
-    if (panel_keymap && panel_keymap->len > 0)
-        panel_map = (global_keymap_t *) panel_keymap->data;
-
-    dialog_map = default_dialog_keymap;
-    if (dialog_keymap && dialog_keymap->len > 0)
-        dialog_map = (global_keymap_t *) dialog_keymap->data;
-
-    input_map = default_input_keymap;
-    if (input_keymap && input_keymap->len > 0)
-        input_map = (global_keymap_t *) input_keymap->data;
-
-    listbox_map = default_listbox_keymap;
-    if (listbox_keymap && listbox_keymap->len > 0)
-        listbox_map = (global_keymap_t *) listbox_keymap->data;
-
-    tree_map = default_tree_keymap;
-    if (tree_keymap && tree_keymap->len > 0)
-        tree_map = (global_keymap_t *) tree_keymap->data;
-
-    help_map = default_help_keymap;
-    if (help_keymap && help_keymap->len > 0)
-        help_map = (global_keymap_t *) help_keymap->data;
-
+    main_map = (global_keymap_t *) main_keymap->data;
+    main_x_map = (global_keymap_t *) main_x_keymap->data;
+    panel_map = (global_keymap_t *) panel_keymap->data;
+    dialog_map = (global_keymap_t *) dialog_keymap->data;
+    input_map = (global_keymap_t *) input_keymap->data;
+    listbox_map = (global_keymap_t *) listbox_keymap->data;
+    tree_map = (global_keymap_t *) tree_keymap->data;
+    help_map = (global_keymap_t *) help_keymap->data;
 #ifdef USE_INTERNAL_EDIT
-    editor_map = default_editor_keymap;
-    if (editor_keymap && editor_keymap->len > 0)
-        editor_map = (global_keymap_t *) editor_keymap->data;
-
-    editor_x_map = default_editor_x_keymap;
-    if (editor_x_keymap && editor_x_keymap->len > 0)
-        editor_x_map = (global_keymap_t *) editor_x_keymap->data;
+    editor_map = (global_keymap_t *) editor_keymap->data;
+    editor_x_map = (global_keymap_t *) editor_x_keymap->data;
 #endif
-
-    viewer_map = default_viewer_keymap;
-    if (viewer_keymap && viewer_keymap->len > 0)
-        viewer_map = (global_keymap_t *) viewer_keymap->data;
-
-    viewer_hex_map = default_viewer_hex_keymap;
-    if (viewer_hex_keymap && viewer_hex_keymap->len > 0)
-        viewer_hex_map = (global_keymap_t *) viewer_hex_keymap->data;
-
+    viewer_map = (global_keymap_t *) viewer_keymap->data;
+    viewer_hex_map = (global_keymap_t *) viewer_hex_keymap->data;
 #ifdef USE_DIFF_VIEW
-    diff_map = default_diff_keymap;
-    if (diff_keymap && diff_keymap->len > 0)
-        diff_map = (global_keymap_t *) diff_keymap->data;
+    diff_map = (global_keymap_t *) diff_keymap->data;
 #endif
 }
 

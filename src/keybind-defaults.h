@@ -3,6 +3,7 @@
 
 #include "lib/global.h"
 #include "lib/keybind.h"        /* global_keymap_t */
+#include "lib/mcconfig.h"       /* mc_config_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -49,35 +50,9 @@ extern const global_keymap_t *viewer_hex_map;
 extern const global_keymap_t *diff_map;
 #endif
 
-
-/* main.c */
-extern const global_keymap_t default_main_keymap[];
-extern const global_keymap_t default_main_x_keymap[];
-/* screen.c */
-extern const global_keymap_t default_panel_keymap[];
-/* dialog.c */
-extern const global_keymap_t default_dialog_keymap[];
-/* widget.c */
-extern const global_keymap_t default_input_keymap[];
-extern const global_keymap_t default_listbox_keymap[];
-/* tree.c */
-extern const global_keymap_t default_tree_keymap[];
-/* help.c */
-extern const global_keymap_t default_help_keymap[];
-#ifdef USE_INTERNAL_EDIT
-/* ../edit/editkey.c */
-extern const global_keymap_t default_editor_keymap[];
-extern const global_keymap_t default_editor_x_keymap[];
-#endif
-/* viewer/actions_cmd.c */
-extern const global_keymap_t default_viewer_keymap[];
-extern const global_keymap_t default_viewer_hex_keymap[];
-#ifdef USE_DIFF_VIEW
-/* ydiff.c */
-extern const global_keymap_t default_diff_keymap[];
-#endif
-
 /*** declarations of public functions ************************************************************/
+
+mc_config_t *create_default_keymap (void);
 
 /*** inline functions ****************************************************************************/
 
