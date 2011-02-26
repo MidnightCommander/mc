@@ -466,12 +466,14 @@ static FileProgressStatus
 warn_same_file (const char *fmt, const char *a, const char *b)
 {
 #ifdef WITH_BACKGROUND
+/* *INDENT-OFF* */
     union
     {
         void *p;
           FileProgressStatus (*f) (enum OperationMode, const char *fmt,
                                    const char *a, const char *b);
     } pntr;
+/* *INDENT-ON* */
 
     pntr.f = real_warn_same_file;
 
@@ -672,11 +674,16 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
         buf.st_size = 0;
     }
 
-    while (mc_unlink (s) != 0)
+    while (mc_unlink (s) != 0 && !ctx->skip_all)
     {
         return_status = file_error (_("Cannot delete file \"%s\"\n%s"), s);
-        if (return_status != FILE_RETRY)
+        if (return_status == FILE_ABORT)
             return return_status;
+        if (return_status == FILE_RETRY)
+            continue;
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
+        break;
     }
 
     if (tctx->progress_count == 0)
@@ -686,6 +693,12 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+  Recursive remove of files
+  abort->cancel stack
+  skip ->warn every level, gets default
+  skipall->remove as much as possible
+*/
 static FileProgressStatus
 recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
 {
@@ -703,7 +716,7 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
     if (!reading)
         return FILE_RETRY;
 
-    while ((next = mc_readdir (reading)) && return_status == FILE_CONT)
+    while ((next = mc_readdir (reading)) && return_status != FILE_ABORT)
     {
         if (!strcmp (next->d_name, "."))
             continue;
@@ -717,25 +730,29 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
             return FILE_RETRY;
         }
         if (S_ISDIR (buf.st_mode))
-            return_status =
-                (recursive_erase (tctx, ctx, path) != FILE_CONT) ? FILE_RETRY : FILE_CONT;
+            return_status = recursive_erase (tctx, ctx, path);
         else
             return_status = erase_file (tctx, ctx, path, 0);
         g_free (path);
     }
     mc_closedir (reading);
-    if (return_status != FILE_CONT)
+    if (return_status == FILE_ABORT)
         return return_status;
     file_progress_show_deleting (ctx, s);
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
     mc_refresh ();
 
-    while (my_rmdir (s))
+    while (my_rmdir (s) != 0 && !ctx->skip_all)
     {
         return_status = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
-        if (return_status != FILE_RETRY)
+        if (return_status == FILE_RETRY)
+            continue;
+        if (return_status == FILE_ABORT)
             return return_status;
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
+        break;
     }
 
     return FILE_CONT;
@@ -1069,7 +1086,8 @@ real_do_file_error (enum OperationMode mode, const char *error)
     const char *msg;
 
     msg = mode == Foreground ? MSG_ERROR : _("Background process error");
-    result = query_dialog (msg, error, D_ERROR, 3, _("&Skip"), _("&Retry"), _("&Abort"));
+    result =
+        query_dialog (msg, error, D_ERROR, 4, _("&Skip"), _("Ski&p all"), _("&Retry"), _("&Abort"));
 
     switch (result)
     {
@@ -1079,9 +1097,13 @@ real_do_file_error (enum OperationMode mode, const char *error)
 
     case 1:
         do_refresh ();
-        return FILE_RETRY;
+        return FILE_SKIPALL;
 
     case 2:
+        do_refresh ();
+        return FILE_RETRY;
+
+    case 3:
     default:
         return FILE_ABORT;
     }
@@ -1319,40 +1341,57 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) ||
             S_ISFIFO (sb.st_mode) || S_ISNAM (sb.st_mode) || S_ISSOCK (sb.st_mode))
         {
-            while (mc_mknod (dst_path, sb.st_mode & ctx->umask_kill, sb.st_rdev) < 0)
+            while (mc_mknod (dst_path, sb.st_mode & ctx->umask_kill, sb.st_rdev) < 0
+                   && !ctx->skip_all)
             {
                 return_status = file_error (_("Cannot create special file \"%s\"\n%s"), dst_path);
                 if (return_status == FILE_RETRY)
                     continue;
+                if (return_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
                 return return_status;
             }
             /* Success */
 
-            while (ctx->preserve_uidgid && mc_chown (dst_path, sb.st_uid, sb.st_gid))
+            while (ctx->preserve_uidgid && mc_chown (dst_path, sb.st_uid, sb.st_gid) != 0
+                   && !ctx->skip_all)
             {
                 temp_status = file_error (_("Cannot chown target file \"%s\"\n%s"), dst_path);
-                if (temp_status == FILE_RETRY)
-                    continue;
-                return temp_status;
+                if (temp_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+                if (temp_status == FILE_SKIP)
+                    break;
+                if (temp_status != FILE_RETRY)
+                    return temp_status;
             }
-            while (ctx->preserve && mc_chmod (dst_path, sb.st_mode & ctx->umask_kill))
+
+            while (ctx->preserve && mc_chmod (dst_path, sb.st_mode & ctx->umask_kill) != 0
+                   && !ctx->skip_all)
             {
                 temp_status = file_error (_("Cannot chmod target file \"%s\"\n%s"), dst_path);
-                if (temp_status == FILE_RETRY)
-                    continue;
-                return temp_status;
+                if (temp_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+                if (temp_status == FILE_SKIP)
+                    break;
+                if (temp_status != FILE_RETRY)
+                    return temp_status;
             }
+
             return FILE_CONT;
         }
     }
 
     gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
 
-    while ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0)
+    while ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0 && !ctx->skip_all)
     {
         return_status = file_error (_("Cannot open source file \"%s\"\n%s"), src_path);
         if (return_status == FILE_RETRY)
             continue;
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
+        if (return_status == FILE_SKIP)
+            break;
         ctx->do_append = 0;
         return return_status;
     }
@@ -1367,11 +1406,13 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         }
     }
 
-    while (mc_fstat (src_desc, &sb))
+    while (mc_fstat (src_desc, &sb) != 0 && !ctx->skip_all)
     {
         return_status = file_error (_("Cannot fstat source file \"%s\"\n%s"), src_path);
         if (return_status == FILE_RETRY)
             continue;
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
         ctx->do_append = FALSE;
         goto ret;
     }
@@ -1397,12 +1438,14 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
 
     while ((dest_desc = mc_open (dst_path, open_flags, src_mode)) < 0)
     {
-        if (errno == EEXIST)
+        if (errno == EEXIST || ctx->skip_all)
             goto ret;
 
         return_status = file_error (_("Cannot create target file \"%s\"\n%s"), dst_path);
         if (return_status == FILE_RETRY)
             continue;
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
         ctx->do_append = FALSE;
         goto ret;
     }
@@ -1412,11 +1455,13 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     ctx->do_append = FALSE;
 
     /* Find out the optimal buffer size.  */
-    while (mc_fstat (dest_desc, &sb))
+    while (mc_fstat (dest_desc, &sb) != 0 && !ctx->skip_all)
     {
         return_status = file_error (_("Cannot fstat target file \"%s\"\n%s"), dst_path);
         if (return_status == FILE_RETRY)
             continue;
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
         goto ret;
     }
 
@@ -1448,11 +1493,13 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
             if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0))
                 n_read = -1;
             else
-                while ((n_read = mc_read (src_desc, buf, sizeof (buf))) < 0)
+                while ((n_read = mc_read (src_desc, buf, sizeof (buf))) < 0 && !ctx->skip_all)
                 {
                     return_status = file_error (_("Cannot read source file\"%s\"\n%s"), src_path);
                     if (return_status == FILE_RETRY)
                         continue;
+                    if (return_status == FILE_SKIPALL)
+                        ctx->skip_all = TRUE;
                     goto ret;
                 }
             if (n_read == 0)
@@ -1474,7 +1521,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                 gettimeofday (&tv_last_input, NULL);
 
                 /* dst_write */
-                while ((n_written = mc_write (dest_desc, t, n_read)) < n_read)
+                while ((n_written = mc_write (dest_desc, t, n_read)) < n_read && !ctx->skip_all)
                 {
                     if (n_written > 0)
                     {
@@ -1483,6 +1530,10 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                         continue;
                     }
                     return_status = file_error (_("Cannot write target file \"%s\"\n%s"), dst_path);
+                    if (return_status == FILE_SKIPALL)
+                        ctx->skip_all = TRUE;
+                    if (return_status == FILE_SKIP)
+                        break;
                     if (return_status != FILE_RETRY)
                         goto ret;
                 }
@@ -1536,21 +1587,25 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     dst_status = DEST_FULL;     /* copy successful, don't remove target file */
 
   ret:
-    while (src_desc != -1 && mc_close (src_desc) < 0)
+    while (src_desc != -1 && mc_close (src_desc) < 0 && !ctx->skip_all)
     {
         temp_status = file_error (_("Cannot close source file \"%s\"\n%s"), src_path);
         if (temp_status == FILE_RETRY)
             continue;
         if (temp_status == FILE_ABORT)
             return_status = temp_status;
+        if (temp_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
         break;
     }
 
-    while (dest_desc != -1 && mc_close (dest_desc) < 0)
+    while (dest_desc != -1 && mc_close (dest_desc) < 0 && !ctx->skip_all)
     {
         temp_status = file_error (_("Cannot close target file \"%s\"\n%s"), dst_path);
         if (temp_status == FILE_RETRY)
             continue;
+        if (temp_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
         return_status = temp_status;
         break;
     }
@@ -1570,12 +1625,18 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         /* Copy has succeeded */
         if (!appending && ctx->preserve_uidgid)
         {
-            while (mc_chown (dst_path, src_uid, src_gid))
+            while (mc_chown (dst_path, src_uid, src_gid) != 0 && !ctx->skip_all)
             {
                 temp_status = file_error (_("Cannot chown target file \"%s\"\n%s"), dst_path);
                 if (temp_status == FILE_RETRY)
                     continue;
-                return_status = temp_status;
+                if (temp_status == FILE_SKIPALL)
+                {
+                    ctx->skip_all = TRUE;
+                    return_status = FILE_CONT;
+                }
+                if (temp_status == FILE_SKIP)
+                    return_status = FILE_CONT;
                 break;
             }
         }
@@ -1584,14 +1645,19 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         {
             if (ctx->preserve)
             {
-                while (mc_chmod (dst_path, (src_mode & ctx->umask_kill)))
+                while (mc_chmod (dst_path, (src_mode & ctx->umask_kill)) != 0 && !ctx->skip_all)
                 {
                     temp_status = file_error (_("Cannot chmod target file \"%s\"\n%s"), dst_path);
-                    if (temp_status != FILE_RETRY)
+                    if (temp_status == FILE_RETRY)
+                        continue;
+                    if (temp_status == FILE_SKIPALL)
                     {
-                        return_status = temp_status;
-                        break;
+                        ctx->skip_all = TRUE;
+                        return_status = FILE_CONT;
                     }
+                    if (temp_status == FILE_SKIP)
+                        return_status = FILE_CONT;
+                    break;
                 }
             }
             else

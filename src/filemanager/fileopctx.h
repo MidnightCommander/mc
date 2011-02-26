@@ -56,7 +56,8 @@ typedef enum
     FILE_CONT = 0,
     FILE_RETRY = 1,
     FILE_SKIP = 2,
-    FILE_ABORT = 3
+    FILE_ABORT = 3,
+    FILE_SKIPALL = 4
 } FileProgressStatus;
 
 /* First argument passed to real functions */
@@ -154,6 +155,9 @@ typedef struct FileOpContext
 
     /* PID of the child for background operations */
     pid_t pid;
+
+    /* toggle if all errors should be ignored */
+    gboolean skip_all;
 
     /* User interface data goes here */
     void *ui;
