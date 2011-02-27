@@ -42,6 +42,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_term_form */
+#include "lib/util.h"           /* is_printable() */
 
 #include "tty-internal.h"       /* slow_tty */
 #include "tty.h"
@@ -630,6 +631,8 @@ tty_print_anychar (int c)
     }
     else
     {
+        if (!is_printable (c))
+            c = '.';
         SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
     }
 }

@@ -746,6 +746,15 @@ init_xterm_support (void)
     {
         xterm_flag = 1;
 
+#ifdef HAVE_SLANG
+        /* For 8-bit locales, NCurses handles 154 (0x9A) symbol properly, while S-Lang
+         * requires SLsmg_Display_Eight_Bit >= 154 (OR manual filtering if xterm display
+         * detected - but checking TERM would fail under screen, OR running xterm
+         * with allowC1Printable).
+         */
+        tty_display_8bit (FALSE);
+#endif
+
         /* Default to the standard xterm sequence */
         if (!xmouse_seq)
         {
