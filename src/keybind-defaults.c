@@ -565,22 +565,22 @@ create_default_keymap (void)
 
     keymap = mc_config_init (NULL);
 
-    create_default_keymap_section (keymap, "main", default_main_keymap);
-    create_default_keymap_section (keymap, "main:xmap", default_main_x_keymap);
-    create_default_keymap_section (keymap, "panel", default_panel_keymap);
-    create_default_keymap_section (keymap, "dialog", default_dialog_keymap);
-    create_default_keymap_section (keymap, "input", default_input_keymap);
-    create_default_keymap_section (keymap, "listbox", default_listbox_keymap);
-    create_default_keymap_section (keymap, "tree", default_tree_keymap);
-    create_default_keymap_section (keymap, "help", default_help_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_MAIN, default_main_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_MAIN_EXT, default_main_x_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_PANEL, default_panel_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_DIALOG, default_dialog_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_INPUT, default_input_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_LISTBOX, default_listbox_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_TREE, default_tree_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_HELP, default_help_keymap);
 #ifdef USE_INTERNAL_EDIT
-    create_default_keymap_section (keymap, "editor", default_editor_keymap);
-    create_default_keymap_section (keymap, "editor:xmap", default_editor_x_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_EDITOR, default_editor_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_EDITOR_EXT, default_editor_x_keymap);
 #endif
-    create_default_keymap_section (keymap, "viewer", default_viewer_keymap);
-    create_default_keymap_section (keymap, "viewer:hex", default_viewer_hex_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_VIEWER, default_viewer_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_VIEWER_HEX, default_viewer_hex_keymap);
 #ifdef  USE_DIFF_VIEW
-    create_default_keymap_section (keymap, "diffviewer", default_diff_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_DIFFVIEWER, default_diff_keymap);
 #endif
 
     return keymap;

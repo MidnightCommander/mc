@@ -8,6 +8,21 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+/* keymap sections */
+#define KEYMAP_SECTION_MAIN "main"
+#define KEYMAP_SECTION_MAIN_EXT "main:xmap"
+#define KEYMAP_SECTION_PANEL "panel"
+#define KEYMAP_SECTION_DIALOG "dialog"
+#define KEYMAP_SECTION_INPUT "input"
+#define KEYMAP_SECTION_LISTBOX "listbox"
+#define KEYMAP_SECTION_TREE "tree"
+#define KEYMAP_SECTION_HELP "help"
+#define KEYMAP_SECTION_EDITOR "editor"
+#define KEYMAP_SECTION_EDITOR_EXT "editor:xmap"
+#define KEYMAP_SECTION_VIEWER "viewer"
+#define KEYMAP_SECTION_VIEWER_HEX "viewer:hex"
+#define KEYMAP_SECTION_DIFFVIEWER "diffviewer"
+
 #define KEYMAP_SHORTCUT_LENGTH 32       /* FIXME: is 32 bytes enough for shortcut? */
 
 #define CK_PipeBlock(i)  (10000+(i))
