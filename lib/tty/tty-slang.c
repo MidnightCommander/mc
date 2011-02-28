@@ -247,8 +247,9 @@ tty_init (gboolean slow, gboolean ugly_lines)
     ugly_line_drawing = ugly_lines;
 
     SLtt_Ignore_Beep = 1;
+
+    SLutf8_enable (-1); /* has to be called first before any of the other functions. */
     SLtt_get_terminfo ();
-    SLutf8_enable (-1);
     /*
      * If the terminal in not in terminfo but begins with a well-known
      * string such as "linux" or "xterm" S-Lang will go on, but the
