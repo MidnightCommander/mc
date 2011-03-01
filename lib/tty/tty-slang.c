@@ -42,6 +42,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_term_form */
+#include "lib/util.h"           /* is_printable() */
 
 #include "tty-internal.h"       /* slow_tty */
 #include "tty.h"
@@ -248,8 +249,9 @@ tty_init (gboolean slow, gboolean ugly_lines)
     ugly_line_drawing = ugly_lines;
 
     SLtt_Ignore_Beep = 1;
+
+    SLutf8_enable (-1); /* has to be called first before any of the other functions. */
     SLtt_get_terminfo ();
-    SLutf8_enable (-1);
     /*
      * If the terminal in not in terminfo but begins with a well-known
      * string such as "linux" or "xterm" S-Lang will go on, but the
@@ -630,6 +632,8 @@ tty_print_anychar (int c)
     }
     else
     {
+        if (!is_printable (c))
+            c = '.';
         SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
     }
 }
