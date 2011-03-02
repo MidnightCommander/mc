@@ -520,6 +520,8 @@ static name_keymap_t command_names[] = {
     {"DiffBOF", CK_DiffBOF},
     {"DiffDown", CK_DiffDown},
     {"DiffUp", CK_DiffUp},
+    {"DiffQuickLeft", CK_DiffQuickLeft},
+    {"DiffQuickRight", CK_DiffQuickRight},
     {"DiffLeft", CK_DiffLeft},
     {"DiffRight", CK_DiffRight},
     {"DiffPageDown", CK_DiffPageDown},
