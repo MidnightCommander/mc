@@ -133,6 +133,9 @@ int print_last_revert = FALSE;
 /* If set, then print to the given file the last directory we were at */
 char *last_wd_string = NULL;
 
+/* index to record_macro_buf[], -1 if not recording a macro */
+int macro_index = -1;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -482,6 +485,8 @@ main (int argc, char *argv[])
 
     load_keymap_defs ();
 
+    macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
+
     tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
 
     {
@@ -586,6 +591,19 @@ main (int argc, char *argv[])
     g_free (shell);
 
     done_key ();
+
+    if (macros_list != NULL)
+    {
+        guint i;
+        macros_t *macros;
+        for (i = 0; i < macros_list->len; i++)
+        {
+            macros = &g_array_index (macros_list, struct macros_t, i);
+            if (macros != NULL && macros->macro != NULL)
+                g_array_free (macros->macro, FALSE);
+        }
+        g_array_free (macros_list, TRUE);
+    }
 
     str_uninit_strings ();
 

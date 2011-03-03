@@ -157,6 +157,8 @@ EditFindDefinition = alt-enter
 EditLoadPrevFile = alt-minus
 EditLoadNextFile = alt-plus
 
+EditBeginEndRepeat =
+
 SelectCodepage = alt-e
 
 EditExtMode = ctrl-x

@@ -9,6 +9,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define MAX_MACRO_LENGTH 1024
+
 /*** enums ***************************************************************************************/
 
 /* run mode and params */
@@ -26,8 +28,22 @@ enum cd_enum
     cd_exact
 };
 
-
 /*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct macro_action_t
+{
+    unsigned long action;
+    int ch;
+} macro_action_t;
+
+typedef struct macros_t
+{
+    int hotkey;
+    GArray *macro;
+} macros_t;
+
+/* macro stuff */
+struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
 
 struct mc_fhl_struct;
 
@@ -80,6 +96,10 @@ extern const char *mc_prompt;
 
 extern char *mc_sysconfig_dir;
 extern char *mc_share_data_dir;
+
+GArray *macros_list;
+/* index to record_macro_buf[], -1 if not recording a macro */
+extern int macro_index;
 
 /*** declarations of public functions ************************************************************/
 

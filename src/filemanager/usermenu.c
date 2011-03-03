@@ -404,7 +404,7 @@ test_line (WEdit * edit_widget, char *p, int *result)
 /** FIXME: recode this routine on version 3.0, it could be cleaner */
 
 static void
-execute_menu_command (WEdit * edit_widget, const char *commands)
+execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_prompt)
 {
     FILE *cmd_file;
     int cmd_file_fd;
@@ -534,7 +534,15 @@ execute_menu_command (WEdit * edit_widget, const char *commands)
         /* execute the command indirectly to allow execution even
          * on no-exec filesystems. */
         char *cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
-        shell_execute (cmd, EXECUTE_HIDE);
+        if (!show_prompt)
+        {
+            if (system (cmd) == -1)
+                message (D_ERROR, MSG_ERROR, "%s", _("Error calling program"));
+        }
+        else
+        {
+            shell_execute (cmd, EXECUTE_HIDE);
+        }
         g_free (cmd);
     }
     unlink (file_name);
@@ -851,7 +859,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
  */
 
 gboolean
-user_menu_cmd (struct WEdit *edit_widget)
+user_menu_cmd (struct WEdit *edit_widget, const char *menu_file, int selected_entry)
 {
     char *p;
     char *data, **entries;
@@ -860,16 +868,27 @@ user_menu_cmd (struct WEdit *edit_widget)
     int selected, old_patterns;
     Listbox *listbox;
     gboolean res = FALSE;
+    gboolean interactive = FALSE;
 
     if (!vfs_current_is_local ())
     {
         message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute commands on non-local filesystems"));
         return FALSE;
     }
-
-    menu = g_strdup (edit_widget ? EDIT_LOCAL_MENU : MC_LOCAL_MENU);
+    if (menu_file != NULL)
+        menu = g_strdup (menu_file);
+    else
+        menu = g_strdup (edit_widget ? EDIT_LOCAL_MENU : MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu))
     {
+        if (menu_file != NULL)
+        {
+            message (D_ERROR, MSG_ERROR, _("Cannot open file%s\n%s"), menu, unix_error_string (errno));
+            g_free (menu);
+            menu = NULL;
+            return FALSE;
+        }
+
         g_free (menu);
         if (edit_widget)
             menu = concat_dir_and_file (mc_config_get_data_path (), EDIT_HOME_MENU);
@@ -936,6 +955,9 @@ user_menu_cmd (struct WEdit *edit_widget)
         {
             if (*p == '#')
             {
+                /* show prompt if first line of external script is #interactive */
+                if (selected_entry >= 0 && strncmp (p, "#interactive", 12) == 0)
+                    interactive = TRUE;
                 /* A commented menu entry */
                 accept_entry = 1;
             }
@@ -1006,25 +1028,30 @@ user_menu_cmd (struct WEdit *edit_widget)
     }
     else
     {
-        max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
-
-        /* Create listbox */
-        listbox = create_listbox_window (menu_lines, max_cols + 2, _("User menu"),
-                                         "[Menu File Edit]");
-        /* insert all the items found */
-        for (i = 0; i < menu_lines; i++)
+        if (selected_entry >= 0)
+            selected = selected_entry;
+        else
         {
-            p = entries[i];
-            LISTBOX_APPEND_TEXT (listbox, (unsigned char) p[0],
-                                 extract_line (p, p + MAX_ENTRY_LEN), p);
-        }
-        /* Select the default entry */
-        listbox_select_entry (listbox->list, selected);
+            max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
 
-        selected = run_listbox (listbox);
+            /* Create listbox */
+            listbox = create_listbox_window (menu_lines, max_cols + 2, _("User menu"),
+                                             "[Menu File Edit]");
+            /* insert all the items found */
+            for (i = 0; i < menu_lines; i++)
+            {
+                p = entries[i];
+                LISTBOX_APPEND_TEXT (listbox, (unsigned char) p[0],
+                                     extract_line (p, p + MAX_ENTRY_LEN), p);
+            }
+            /* Select the default entry */
+            listbox_select_entry (listbox->list, selected);
+
+            selected = run_listbox (listbox);
+        }
         if (selected >= 0)
         {
-            execute_menu_command (edit_widget, entries[selected]);
+            execute_menu_command (edit_widget, entries[selected], interactive);
             res = TRUE;
         }
 

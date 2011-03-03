@@ -12,7 +12,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32
 
 /*** enums ***************************************************************************************/
@@ -131,11 +130,6 @@ struct WEdit
     char *syntax_type;          /* description of syntax highlighting type being used */
     GTree *defines;             /* List of defines */
     gboolean is_case_insensitive;       /* selects language case sensitivity */
-
-    /* macro stuff */
-    int macro_i;                /* index to macro[], -1 if not recording a macro */
-    int macro_depth;            /* depth of the macro recursion */
-    struct macro macro[MAX_MACRO_LENGTH];
 
     /* user map stuff */
     GIConv converter;

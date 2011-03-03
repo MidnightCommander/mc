@@ -293,7 +293,6 @@ const global_keymap_t default_editor_keymap[] = {
     {XCTRL ('r'), CK_Begin_End_Macro, "C-r"},
     {XCTRL ('r'), CK_Begin_Record_Macro, "C-r"},
     {XCTRL ('r'), CK_End_Record_Macro, "C-r"},
-    {XCTRL ('a'), CK_Execute_Macro, "C-a"},
     {XCTRL ('f'), CK_Save_Block, "C-f"},
     /* Spell check */
     {XCTRL ('p'), CK_Pipe_Block (1), "C-p"},
@@ -361,7 +360,6 @@ const global_keymap_t default_editor_keymap[] = {
 /* emacs keyboard layout emulation */
 const global_keymap_t default_editor_x_keymap[] = {
     {'k', CK_New, "k"},
-    {'e', CK_Execute_Macro, "e"},
     {0, CK_Ignore_Key, ""}
 };
 #endif /* USE_INTERNAL_EDIT */

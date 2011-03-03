@@ -68,7 +68,7 @@ void init_key_input_fd (void);
 void done_key (void);
 
 long lookup_key (const char *name, char **label);
-
+char *lookup_key_by_code (const int keycode);
 /* mouse support */
 int tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block);
 gboolean is_idle (void);

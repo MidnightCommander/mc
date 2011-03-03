@@ -315,7 +315,9 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
             cb_ret_t ret = MSG_NOT_HANDLED;
 
             /* The user may override the access-keys for the menu bar. */
-            if (edit_translate_key (e, parm, &cmd, &ch))
+            if (macro_index == -1 && edit_execute_macro (e, parm))
+                ret = MSG_HANDLED;
+            else if (edit_translate_key (e, parm, &cmd, &ch))
             {
                 edit_execute_key_command (e, cmd, ch);
                 edit_update_screen (e);

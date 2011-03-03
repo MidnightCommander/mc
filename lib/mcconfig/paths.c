@@ -66,7 +66,6 @@ static const struct
     { "hotlist",                               &xdg_config, MC_HOTLIST_FILE},
     { "mc.keymap",                             &xdg_config, GLOBAL_KEYMAP_FILE},
 
-
     /* data */
     { "skins",                                 &xdg_data, MC_SKINS_SUBDIR},
     { "fish",                                  &xdg_data, FISH_PREFIX},
@@ -75,7 +74,6 @@ static const struct
     { "bashrc",                                &xdg_data, "bashrc"},
     { "inputrc",                               &xdg_data, "inputrc"},
     { "extfs.d",                               &xdg_data, MC_EXTFS_DIR},
-    { "cedit" PATH_SEP_STR "cooledit.macros",  &xdg_data, EDIT_MACRO_FILE},
     { "cedit" PATH_SEP_STR "Syntax",           &xdg_data, EDIT_SYNTAX_FILE},
     { "cedit" PATH_SEP_STR "menu",             &xdg_data, EDIT_HOME_MENU},
     { "cedit" PATH_SEP_STR "edit.indent.rc",   &xdg_data, EDIT_DIR PATH_SEP_STR "edit.indent.rc"},
