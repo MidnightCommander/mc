@@ -43,22 +43,7 @@ DX_INIT_DOXYGEN(mc,doxygen.cfg,devel)
 
 dnl PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
 
-dnl
-dnl First try glib 2.x.
-dnl Keep this check close to the beginning, so that the users
-dnl without any glib won't have their time wasted by other checks.
-dnl
-
-AC_ARG_WITH([glib_static],
-	    [  --with-glib-static       Link glib statically [[no]]])
-
-glib_found=no
-
-PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.8], [glib_found=yes], [:])
-if test x"$glib_found" = xno; then
-    AC_MSG_ERROR([glib-2.0 not found or version too old (must be >= 2.8)])
-fi
-
+AC_CHECK_GLIB
 
 AC_HEADER_MAJOR
 AC_C_CONST
@@ -219,42 +204,10 @@ dnl
 dnl X11 support.
 dnl Used to read keyboard modifiers when running under X11.
 AC_PATH_XTRA
+
 dnl
 dnl Check if the gmodule functionality supported on this system.
 AC_G_MODULE_SUPPORTED
-
-dnl
-dnl Try to find static libraries for glib and gmodule.
-dnl
-if test x$with_glib_static = xyes; then
-    new_GLIB_LIBS=
-    for i in $GLIB_LIBS; do
-	case x$i in
-	x-lglib*)
-	    lib=glib ;;
-	x-lgmodule*)
-	    lib=gmodule ;;
-	*)
-	    lib=
-	    add="$i" ;;
-	esac
-
-	if test -n "$lib"; then
-	    lib1=`echo $i | sed 's/^-l//'`
-	    if test -f "$GLIB_LIBDIR/lib${lib1}.a"; then
-		add="$GLIB_LIBDIR/lib${lib1}.a"
-	    else
-		if test -f "$GLIB_LIBDIR/lib${lib}.a"; then
-		    add="$GLIB_LIBDIR/lib${lib}.a"
-		else
-		    AC_MSG_ERROR([Cannot find static $lib])
-		fi
-	    fi
-	fi
-	new_GLIB_LIBS="$new_GLIB_LIBS $add"
-    done
-    GLIB_LIBS="$new_GLIB_LIBS"
-fi
 
 dnl
 dnl Sequent wants getprocessstats

@@ -42,4 +42,57 @@ AC_DEFUN([AC_G_MODULE_SUPPORTED], [
     fi
 
     AM_CONDITIONAL([HAVE_GMODULE], [test x"$g_module_supported" != x])
+
+    dnl
+    dnl Try to find static libraries for glib and gmodule.
+    dnl
+    if test x$with_glib_static = xyes; then
+        new_GLIB_LIBS=
+        for i in $GLIB_LIBS; do
+            case x$i in
+            x-lglib*)
+                lib=glib ;;
+            x-lgmodule*)
+                lib=gmodule ;;
+            *)
+                lib=
+                add="$i" ;;
+            esac
+
+            if test -n "$lib"; then
+                lib1=`echo $i | sed 's/^-l//'`
+                if test -f "$GLIB_LIBDIR/lib${lib1}.a"; then
+                    add="$GLIB_LIBDIR/lib${lib1}.a"
+                else
+                    if test -f "$GLIB_LIBDIR/lib${lib}.a"; then
+                        add="$GLIB_LIBDIR/lib${lib}.a"
+                    else
+                        AC_MSG_ERROR([Cannot find static $lib])
+                    fi
+                fi
+            fi
+            new_GLIB_LIBS="$new_GLIB_LIBS $add"
+        done
+        GLIB_LIBS="$new_GLIB_LIBS"
+    fi
+
 ])
+
+AC_DEFUN([AC_CHECK_GLIB], [
+    dnl
+    dnl First try glib 2.x.
+    dnl Keep this check close to the beginning, so that the users
+    dnl without any glib won't have their time wasted by other checks.
+    dnl
+
+    AC_ARG_WITH([glib_static],
+        AC_HELP_STRING([--with-glib-static],[Link glib statically [[no]]]))
+
+    glib_found=no
+    PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.8], [glib_found=yes], [:])
+    if test x"$glib_found" = xno; then
+        AC_MSG_ERROR([glib-2.0 not found or version too old (must be >= 2.8)])
+    fi
+
+])
+
