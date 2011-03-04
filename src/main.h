@@ -97,9 +97,10 @@ extern const char *mc_prompt;
 extern char *mc_sysconfig_dir;
 extern char *mc_share_data_dir;
 
-GArray *macros_list;
 /* index to record_macro_buf[], -1 if not recording a macro */
 extern int macro_index;
+
+extern GArray *macros_list;
 
 /*** declarations of public functions ************************************************************/
 
