@@ -139,8 +139,8 @@ for more detail about format of the script.
 .PP
 Following macro definition and directives can be used:
 .TP
-.I #interactive
-If this directive is set, then script starts in subshell.
+.I #silent
+If this directive is set, then script starts without interactive subshell.
 .TP
 .I %c
 The cursor column position number.
