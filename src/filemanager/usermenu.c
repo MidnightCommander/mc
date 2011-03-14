@@ -868,7 +868,7 @@ user_menu_cmd (struct WEdit *edit_widget, const char *menu_file, int selected_en
     int selected, old_patterns;
     Listbox *listbox;
     gboolean res = FALSE;
-    gboolean interactive = FALSE;
+    gboolean interactive = TRUE;
 
     if (!vfs_current_is_local ())
     {
@@ -956,8 +956,8 @@ user_menu_cmd (struct WEdit *edit_widget, const char *menu_file, int selected_en
             if (*p == '#')
             {
                 /* show prompt if first line of external script is #interactive */
-                if (selected_entry >= 0 && strncmp (p, "#interactive", 12) == 0)
-                    interactive = TRUE;
+                if (selected_entry >= 0 && strncmp (p, "#silent", 7) == 0)
+                    interactive = FALSE;
                 /* A commented menu entry */
                 accept_entry = 1;
             }
