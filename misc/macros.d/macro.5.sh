@@ -1,3 +1,4 @@
+#silent
 s       snippets
         a=`cat %b`
         if [ "$a" = "fori" ]; then
