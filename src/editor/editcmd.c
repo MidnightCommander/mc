@@ -1887,10 +1887,26 @@ eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width)
+edit_insert_over (WEdit * edit)
+{
+    int i;
+
+    for (i = 0; i < edit->over_col; i++)
+    {
+        edit_insert (edit, ' ');
+    }
+    edit->over_col = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width,
+                            long *start_pos, long *end_pos, int *col1, int *col2)
 {
     long cursor;
     int i, col;
+
     cursor = edit->curs1;
     col = edit_get_col (edit);
     for (i = 0; i < size; i++)
@@ -1934,23 +1950,31 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int wid
         }
         edit_insert (edit, data[i]);
     }
+    *col1 = col;
+    *col2 = col + width;
+    *start_pos = cursor;
+    *end_pos = edit->curs1;
     edit_cursor_move (edit, cursor - edit->curs1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-edit_insert_column_of_text_from_file (WEdit * edit, int file)
+edit_insert_column_of_text_from_file (WEdit * edit, int file,
+                                      long *start_pos, long *end_pos, int *col1, int *col2)
 {
     long cursor;
-    int i, col;
-    int blocklen = -1, width;
+    int col;
+    int blocklen = -1, width = 0;
     unsigned char *data;
+
     cursor = edit->curs1;
     col = edit_get_col (edit);
     data = g_malloc0 (TEMP_BUF_LEN);
+
     while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0)
     {
+        int i;
         for (width = 0; width < blocklen; width++)
         {
             if (data[width] == '\n')
@@ -1998,9 +2022,13 @@ edit_insert_column_of_text_from_file (WEdit * edit, int file)
             edit_insert (edit, data[i]);
         }
     }
+    *col1 = col;
+    *col2 = col + width;
+    *start_pos = cursor;
+    *end_pos = edit->curs1;
     edit_cursor_move (edit, cursor - edit->curs1);
     g_free (data);
-    edit->force |= REDRAW_PAGE;
+
     return blocklen;
 }
 
@@ -2010,6 +2038,9 @@ void
 edit_block_copy_cmd (WEdit * edit)
 {
     long start_mark, end_mark, current = edit->curs1;
+    long col_delta = 0;
+    long mark1, mark2;
+    int c1, c2;
     int size;
     unsigned char *copy_buf;
 
@@ -2025,7 +2056,8 @@ edit_block_copy_cmd (WEdit * edit)
 
     if (edit->column_highlight)
     {
-        edit_insert_column_of_text (edit, copy_buf, size, abs (edit->column2 - edit->column1));
+        col_delta = abs (edit->column2 - edit->column1);
+        edit_insert_column_of_text (edit, copy_buf, size, col_delta, &mark1, &mark2, &c1, &c2);
     }
     else
     {
@@ -2037,11 +2069,7 @@ edit_block_copy_cmd (WEdit * edit)
     edit_scroll_screen_over_cursor (edit);
 
     if (edit->column_highlight)
-    {
-        edit_set_markers (edit, 0, 0, 0, 0);
-        edit_push_undo_action (edit, COLUMN_ON);
-        edit->column_highlight = 0;
-    }
+        edit_set_markers (edit, edit->curs1, mark2, c1, c2);
     else if (start_mark < current && end_mark > current)
         edit_set_markers (edit, start_mark, end_mark + end_mark - start_mark, 0, 0);
 
@@ -2054,75 +2082,71 @@ edit_block_copy_cmd (WEdit * edit)
 void
 edit_block_move_cmd (WEdit * edit)
 {
-    long count;
     long current;
-    unsigned char *copy_buf;
+    unsigned char *copy_buf = NULL;
     long start_mark, end_mark;
-    int deleted = 0;
-    int x = 0;
+    long line;
 
     if (eval_marks (edit, &start_mark, &end_mark))
         return;
-    if (edit->column_highlight)
-    {
-        edit_update_curs_col (edit);
-        x = edit->curs_col;
-        if (start_mark <= edit->curs1 && end_mark >= edit->curs1)
-            if ((x > edit->column1 && x < edit->column2)
-                || (x > edit->column2 && x < edit->column1))
-                return;
-    }
-    else if (start_mark <= edit->curs1 && end_mark >= edit->curs1)
-        return;
 
-    if ((end_mark - start_mark) > option_max_undo / 2)
-        if (edit_query_dialog2
-            (_("Warning"),
-             _
-             ("Block is large, you may not be able to undo this action"),
-             _("C&ontinue"), _("&Cancel")))
-            return;
-
+    line = edit->curs_line;
+    if (edit->mark2 < 0)
+        edit_mark_cmd (edit, 0);
     edit_push_markers (edit);
-    current = edit->curs1;
+
     if (edit->column_highlight)
     {
-        long line;
-        int size, c1, c2;
-        line = edit->curs_line;
-        if (edit->mark2 < 0)
-            edit_mark_cmd (edit, 0);
+        long mark1, mark2;
+        int size;
+        int b_width = 0;
+        int c1, c2;
+        int x, x2;
+
         c1 = min (edit->column1, edit->column2);
         c2 = max (edit->column1, edit->column2);
+        b_width = (c2 - c1);
+
+        edit_update_curs_col (edit);
+
+        x = edit->curs_col;
+        x2 = x + edit->over_col;
+
+        /* do nothing when cursor inside first line of selected area */
+        if ((edit_eol (edit, edit->curs1) == edit_eol (edit, start_mark)) && (x2 > c1 && x2 <= c2))
+            return;
+
+        if (edit->curs1 > start_mark && edit->curs1 < edit_eol (edit, end_mark))
+        {
+            if (x > c2)
+                x -= b_width;
+            else if (x > c1 && x <= c2)
+                x = c1;
+        }
+        /* save current selection into buffer */
         copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
-        if (x < c2)
-        {
-            edit_block_delete_cmd (edit);
-            deleted = 1;
-        }
-        edit_move_to_line (edit, line);
-        edit_cursor_move (edit,
-                          edit_move_forward3 (edit,
-                                              edit_bol (edit, edit->curs1), x, 0) - edit->curs1);
-        edit_insert_column_of_text (edit, copy_buf, size, c2 - c1);
-        if (!deleted)
-        {
-            line = edit->curs_line;
-            edit_update_curs_col (edit);
-            x = edit->curs_col;
-            edit_block_delete_cmd (edit);
-            edit_move_to_line (edit, line);
-            edit_cursor_move (edit,
-                              edit_move_forward3 (edit,
-                                                  edit_bol (edit,
-                                                            edit->curs1), x, 0) - edit->curs1);
-        }
-        edit_set_markers (edit, 0, 0, 0, 0);
-        edit_push_undo_action (edit, COLUMN_ON);
-        edit->column_highlight = 0;
+
+        /* remove current selection */
+        edit_block_delete_cmd (edit);
+
+        edit->over_col = max (0, edit->over_col - b_width);
+        /* calculate the cursor pos after delete block */
+        current = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), x, 0);
+        edit_cursor_move (edit, current - edit->curs1);
+        edit_scroll_screen_over_cursor (edit);
+
+        /* add TWS if need before block insertion */
+        if (option_cursor_beyond_eol && edit->over_col > 0)
+            edit_insert_over (edit);
+
+        edit_insert_column_of_text (edit, copy_buf, size, b_width, &mark1, &mark2, &c1, &c2);
+        edit_set_markers (edit, mark1, mark2, c1, c2);
     }
     else
     {
+        long count;
+
+        current = edit->curs1;
         copy_buf = g_malloc0 (end_mark - start_mark);
         edit_cursor_move (edit, start_mark - edit->curs1);
         edit_scroll_screen_over_cursor (edit);
@@ -2141,6 +2165,7 @@ edit_block_move_cmd (WEdit * edit)
             edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
         edit_set_markers (edit, edit->curs1, edit->curs1 + end_mark - start_mark, 0, 0);
     }
+
     edit_scroll_screen_over_cursor (edit);
     g_free (copy_buf);
     edit->force |= REDRAW_PAGE;

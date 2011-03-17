@@ -676,20 +676,6 @@ edit_modification (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-edit_insert_over (WEdit * edit)
-{
-    int i;
-
-    for (i = 0; i < edit->over_col; i++)
-    {
-        edit_insert (edit, ' ');
-    }
-    edit->over_col = 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 edit_backspace (WEdit * edit, const int byte_delete)
 {
@@ -2074,7 +2060,17 @@ edit_insert_file (WEdit * edit, const char *filename)
         }
         if (vertical_insertion)
         {
-            blocklen = edit_insert_column_of_text_from_file (edit, file);
+            long mark1, mark2;
+            int c1, c2;
+            blocklen = edit_insert_column_of_text_from_file (edit, file, &mark1, &mark2, &c1, &c2);
+            edit_set_markers (edit, edit->curs1, mark2, c1, c2);
+            /* highlight inserted text then not persistent blocks */
+            if (!option_persistent_selections)
+            {
+                if (!edit->column_highlight)
+                    edit_push_undo_action (edit, COLUMN_OFF);
+                edit->column_highlight = 1;
+            }
         }
         else
         {
@@ -2083,7 +2079,16 @@ edit_insert_file (WEdit * edit, const char *filename)
                 for (i = 0; i < blocklen; i++)
                     edit_insert (edit, buf[i]);
             }
+            /* highlight inserted text then not persistent blocks */
+            if (!option_persistent_selections)
+            {
+                edit_set_markers (edit, edit->curs1, current, 0, 0);
+                if (edit->column_highlight)
+                    edit_push_undo_action (edit, COLUMN_ON);
+                edit->column_highlight = 0;
+            }
         }
+        edit->force |= REDRAW_PAGE;
         ins_len = edit->curs1 - current;
         edit_cursor_move (edit, current - edit->curs1);
         g_free (buf);
@@ -3944,8 +3949,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_block_delete_cmd (edit);
         break;
     case CK_Move:
-        if (option_cursor_beyond_eol && edit->over_col > 0)
-            edit_insert_over (edit);
         edit_block_move_cmd (edit);
         break;
 
