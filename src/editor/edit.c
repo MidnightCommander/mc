@@ -3441,18 +3441,38 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     if (edit->found_len || edit->column_highlight)
         edit->force |= REDRAW_PAGE;
 
-    if (command / 100 == 6)
-    {                           /* a highlight command like shift-arrow */
+    switch (command)
+    {
+    /* a mark command with shift-arrow */
+    case CK_MarkLeft:
+    case CK_MarkRight:
+    case CK_MarkToWordBegin:
+    case CK_MarkToWordEnd:
+    case CK_MarkToHome:
+    case CK_MarkToEnd:
+    case CK_MarkUp:
+    case CK_MarkDown:
+    case CK_MarkPageUp:
+    case CK_MarkPageDown:
+    case CK_MarkToFileBegin:
+    case CK_MarkToFileEnd:
+    case CK_MarkToPageBegin:
+    case CK_MarkToPageEnd:
+    case CK_MarkScrollUp:
+    case CK_MarkScrollDown:
+    case CK_MarkParagraphUp:
+    case CK_MarkParagraphDown:
         edit->column_highlight = 0;
-        if (!edit->highlight || (edit->mark2 != -1 && edit->mark1 != edit->mark2))
+        if (edit->highlight == 0 || (edit->mark2 != -1 && edit->mark1 != edit->mark2))
         {
             edit_mark_cmd (edit, 1);    /* clear */
             edit_mark_cmd (edit, 0);    /* marking on */
         }
         edit->highlight = 1;
-    }
-    else
-    {                           /* any other command */
+        break;
+
+    /* any other command */
+    default:
         if (edit->highlight)
             edit_mark_cmd (edit, 0);    /* clear */
         edit->highlight = 0;
