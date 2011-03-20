@@ -2980,29 +2980,29 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     cb_ret_t res = MSG_HANDLED;
     switch (command)
     {
-    case CK_DiffHelp:
+    case CK_Help:
         interactive_display (NULL, "[Diff Viewer]");
         break;
-    case CK_DiffDisplaySymbols:
+    case CK_ShowSymbols:
         dview->display_symbols ^= 1;
         dview->new_frame = 1;
         break;
-    case CK_DiffDisplayNumbers:
+    case CK_ShowNumbers:
         dview->display_numbers ^= calc_nwidth ((const GArray ** const) dview->a);
         dview->new_frame = 1;
         break;
-    case CK_DiffFull:
+    case CK_SplitFull:
         dview->full ^= 1;
         dview->new_frame = 1;
         break;
-    case CK_DiffEqual:
+    case CK_SplitEqual:
         if (!dview->full)
         {
             dview->bias = 0;
             dview->new_frame = 1;
         }
         break;
-    case CK_DiffSplitMore:
+    case CK_SplitMore:
         if (!dview->full)
         {
             dview_compute_split (dview, 1);
@@ -3010,122 +3010,124 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         }
         break;
 
-    case CK_DiffSplitLess:
+    case CK_SplitLess:
         if (!dview->full)
         {
             dview_compute_split (dview, -1);
             dview->new_frame = 1;
         }
         break;
-    case CK_DiffSetTab2:
+    case CK_Tab2:
         dview->tab_size = 2;
         break;
-    case CK_DiffSetTab3:
+    case CK_Tab3:
         dview->tab_size = 3;
         break;
-    case CK_DiffSetTab4:
+    case CK_Tab4:
         dview->tab_size = 4;
         break;
-    case CK_DiffSetTab8:
+    case CK_Tab8:
         dview->tab_size = 8;
         break;
-    case CK_DiffSwapPanel:
+    case CK_Swap:
         dview->ord ^= 1;
         break;
-    case CK_DiffRedo:
+    case CK_Redo:
         dview_redo (dview);
         break;
-    case CK_DiffNextHunk:
+    case CK_HunkNext:
         dview->skip_rows = dview->search.last_accessed_num_line =
             find_next_hunk (dview->a[0], dview->skip_rows);
         break;
-    case CK_DiffPrevHunk:
+    case CK_HunkPrev:
         dview->skip_rows = dview->search.last_accessed_num_line =
             find_prev_hunk (dview->a[0], dview->skip_rows);
         break;
-    case CK_DiffGoto:
+    case CK_Goto:
         dview_goto_cmd (dview, TRUE);
         break;
-    case CK_DiffEditCurrent:
+    case CK_Edit:
         dview_edit (dview, dview->ord);
         break;
-    case CK_DiffMergeCurrentHunk:
+    case CK_Merge:
         do_merge_hunk (dview);
         dview_redo (dview);
         break;
-    case CK_DiffEditOther:
+    case CK_EditOther:
         dview_edit (dview, dview->ord ^ 1);
         break;
-    case CK_DiffSearch:
+    case CK_Search:
         dview_search_cmd (dview);
         break;
-    case CK_DiffContinueSearch:
+    case CK_SearchContinue:
         dview_continue_search_cmd (dview);
         break;
-    case CK_DiffBOF:
+    case CK_Top:
         dview->skip_rows = dview->search.last_accessed_num_line = 0;
         break;
-    case CK_DiffEOF:
+    case CK_Bottom:
         dview->skip_rows = dview->search.last_accessed_num_line = dview->a[0]->len - 1;
         break;
-    case CK_DiffUp:
+    case CK_Up:
         if (dview->skip_rows > 0)
         {
             dview->skip_rows--;
             dview->search.last_accessed_num_line = dview->skip_rows;
         }
         break;
-    case CK_DiffDown:
+    case CK_Down:
         dview->skip_rows++;
         dview->search.last_accessed_num_line = dview->skip_rows;
         break;
-    case CK_DiffPageDown:
+    case CK_PageDown:
         if (dview->height > 2)
         {
             dview->skip_rows += dview->height - 2;
             dview->search.last_accessed_num_line = dview->skip_rows;
         }
         break;
-    case CK_DiffPageUp:
+    case CK_PageUp:
         if (dview->height > 2)
         {
             dview->skip_rows -= dview->height - 2;
             dview->search.last_accessed_num_line = dview->skip_rows;
         }
         break;
-    case CK_DiffLeft:
+    case CK_Left:
         dview->skip_cols--;
         break;
-    case CK_DiffRight:
+    case CK_Right:
         dview->skip_cols++;
         break;
-    case CK_DiffQuickLeft:
+    case CK_LeftQuick:
         dview->skip_cols -= 8;
         break;
-    case CK_DiffQuickRight:
+    case CK_RightQuick:
         dview->skip_cols += 8;
         break;
-    case CK_DiffHome:
+    case CK_Home:
         dview->skip_cols = 0;
         break;
-    case CK_ShowCommandLine:
+    case CK_Shell:
         view_other_cmd ();
         break;
-    case CK_DiffQuit:
+    case CK_Quit:
         dview->view_quit = 1;
         break;
-    case CK_DiffSave:
+    case CK_Save:
         dview_do_save (dview);
         break;
-    case CK_DiffOptions:
+    case CK_Options:
         dview_diff_options (dview);
         break;
+#ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         dview_select_encoding (dview);
         dview_reread (dview);
         tty_touch_screen ();
         repaint_screen ();
         break;
+#endif
     default:
         res = MSG_NOT_HANDLED;
     }
@@ -3142,7 +3144,7 @@ dview_handle_key (WDiff * dview, int key)
     key = convert_from_input_c (key);
 
     command = keybind_lookup_keymap_command (diff_map, key);
-    if ((command != CK_Ignore_Key) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
+    if ((command != CK_IgnoreKey) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
         return MSG_HANDLED;
 
     /* Key not used */

@@ -20,7 +20,7 @@
 /*** declarations of public functions ************************************************************/
 
 void add2hotlist_cmd (void);
-char *hotlist_cmd (int list_vfs);
+char *hotlist_show (int list_vfs);
 int save_hotlist (void);
 void done_hotlist (void);
 

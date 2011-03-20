@@ -2319,7 +2319,7 @@ chdir_other_panel (WPanel * panel)
  */
 
 static void
-sync_other_panel (WPanel * panel)
+panel_sync_other (const WPanel * panel)
 {
     if (get_other_type () != view_listing)
     {
@@ -2718,138 +2718,140 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
 {
     int res = MSG_HANDLED;
 
-    if (command != CK_PanelStartSearch)
+    if (command != CK_Search)
         stop_search (panel);
 
     switch (command)
     {
-    case CK_PanelChdirOtherPanel:
+    case CK_PanelOtherCd:
         chdir_other_panel (panel);
         break;
-    case CK_PanelChdirToReadlink:
+    case CK_PanelOtherCdLink:
         chdir_to_readlink (panel);
         break;
-    case CK_PanelCmdCopyLocal:
+    case CK_CopySingle:
         copy_cmd_local ();
         break;
-    case CK_PanelCmdDeleteLocal:
+    case CK_DeleteSingle:
         delete_cmd_local ();
         break;
-    case CK_PanelCmdDoEnter:
+    case CK_Enter:
         do_enter (panel);
         break;
-    case CK_PanelCmdViewSimple:
-        view_simple_cmd ();
+    case CK_ViewRaw:
+        view_raw_cmd ();
         break;
-    case CK_PanelCmdEditNew:
+    case CK_EditNew:
         edit_cmd_new ();
         break;
-    case CK_PanelCmdRenameLocal:
+    case CK_MoveSingle:
         rename_cmd_local ();
         break;
-    case CK_PanelCmdReverseSelection:
-        reverse_selection_cmd ();
+    case CK_SelectInvert:
+        select_invert_cmd ();
         break;
-    case CK_PanelCmdSelect:
+    case CK_Select:
         select_cmd ();
         break;
-    case CK_PanelCmdUnselect:
+    case CK_Unselect:
         unselect_cmd ();
         break;
-    case CK_PanelNextPage:
+    case CK_PageDown:
         next_page (panel);
         break;
-    case CK_PanelPrevPage:
+    case CK_PageUp:
         prev_page (panel);
         break;
-    case CK_PanelGotoChildDir:
+    case CK_CdChild:
         goto_child_dir (panel);
         break;
-    case CK_PanelGotoParentDir:
+    case CK_CdParent:
         goto_parent_dir (panel);
         break;
-    case CK_PanelDirectoryHistoryList:
+    case CK_History:
         directory_history_list (panel);
         break;
-    case CK_PanelDirectoryHistoryNext:
+    case CK_HistoryNext:
         directory_history_next (panel);
         break;
-    case CK_PanelDirectoryHistoryPrev:
+    case CK_HistoryPrev:
         directory_history_prev (panel);
         break;
-    case CK_PanelGotoBottomFile:
+    case CK_BottomOnScreen:
         goto_bottom_file (panel);
         break;
-    case CK_PanelGotoMiddleFile:
+    case CK_MiddleOnScreen:
         goto_middle_file (panel);
         break;
-    case CK_PanelGotoTopFile:
+    case CK_TopOnScreen:
         goto_top_file (panel);
         break;
-    case CK_PanelMarkFile:
+    case CK_Mark:
         mark_file (panel);
         break;
-    case CK_PanelMarkFileUp:
+    case CK_MarkUp:
         mark_file_up (panel);
         break;
-    case CK_PanelMarkFileDown:
+    case CK_MarkDown:
         mark_file_down (panel);
         break;
-    case CK_PanelSmartGotoParentDir:
+    case CK_CdParentSmart:
         res = force_maybe_cd ();
         break;
-    case CK_PanelMoveUp:
+    case CK_Up:
         move_up (panel);
         break;
-    case CK_PanelMoveDown:
+    case CK_Down:
         move_down (panel);
         break;
-    case CK_PanelMoveLeft:
+    case CK_Left:
         res = move_left (panel);
         break;
-    case CK_PanelMoveRight:
+    case CK_Right:
         res = move_right (panel);
         break;
-    case CK_PanelMoveEnd:
+    case CK_Bottom:
         move_end (panel);
         break;
-    case CK_PanelMoveHome:
+    case CK_Top:
         move_home (panel);
         break;
-    case CK_PanelSetPanelEncoding:
+#ifdef HAVE_CHARSET
+    case CK_SelectCodepage:
         panel_change_encoding (panel);
         break;
-    case CK_PanelStartSearch:
+#endif
+    case CK_Search:
         start_search (panel);
         break;
-    case CK_PanelStopSearch:
+    case CK_SearchStop:
         break;
-    case CK_PanelSyncOtherPanel:
-        sync_other_panel (panel);
+    case CK_PanelOtherSync:
+        panel_sync_other (panel);
         break;
-    case CK_PanelSelectSortOrder:
+    case CK_Sort:
         panel_select_sort_order (panel);
         break;
-    case CK_PanelToggleSortOrderPrev:
+    case CK_SortPrev:
         panel_toggle_sort_order_prev (panel);
         break;
-    case CK_PanelToggleSortOrderNext:
+    case CK_SortNext:
         panel_toggle_sort_order_next (panel);
         break;
-    case CK_PanelReverseSort:
+    case CK_SortReverse:
         panel->sort_info.reverse = !panel->sort_info.reverse;
         panel_set_sort_order (panel, panel->sort_info.sort_field);
         break;
-    case CK_PanelSortOrderByName:
+    case CK_SortByName:
         panel_set_sort_type_by_id (panel, "name");
         break;
-    case CK_PanelSortOrderByExt:
+    case CK_SortByExt:
         panel_set_sort_type_by_id (panel, "extension");
         break;
-    case CK_PanelSortOrderBySize:
+    case CK_SortBySize:
         panel_set_sort_type_by_id (panel, "size");
         break;
-    case CK_PanelSortOrderByMTime:
+    case CK_SortByMTime:
         panel_set_sort_type_by_id (panel, "mtime");
         break;
     }
@@ -3091,7 +3093,7 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
         if (event->x == panel->widget.cols - 5)
         {
             panel->widget.owner->callback (panel->widget.owner, NULL,
-                                           DLG_ACTION, CK_ToggleShowHidden, NULL);
+                                           DLG_ACTION, CK_ShowHidden, NULL);
             repaint_screen ();
             return MOU_NORMAL;
         }

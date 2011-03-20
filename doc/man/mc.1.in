@@ -62,6 +62,9 @@ database. Only useful on HP terminals when the function keys don't work.
 .I \-K file
 Specify a name of keymap file in the command line.
 .TP
+.I \-\-nokeymap
+Don't load key bindings from any file, use default hardcoded keys.
+.TP
 .I \-l file, \-\-ftplog=file
 Save the ftpfs dialog with the server in file.
 .TP

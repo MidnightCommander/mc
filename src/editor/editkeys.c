@@ -75,7 +75,7 @@
 int
 edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
 {
-    unsigned long command = (unsigned long) CK_Insert_Char;
+    unsigned long command = (unsigned long) CK_InsertChar;
     int char_for_insertion = -1;
     int c;
 
@@ -190,14 +190,14 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
     else
         command = keybind_lookup_keymap_command (editor_map, x_key);
 
-    if (command == CK_Ignore_Key)
-        command = CK_Insert_Char;
+    if (command == CK_IgnoreKey)
+        command = CK_InsertChar;
 
   fin:
     *cmd = (int) command;       /* FIXME */
     *ch = char_for_insertion;
 
-    return (command == (unsigned long) CK_Insert_Char && char_for_insertion == -1) ? 0 : 1;
+    return (command == (unsigned long) CK_InsertChar && char_for_insertion == -1) ? 0 : 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */

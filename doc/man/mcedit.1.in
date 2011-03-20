@@ -117,18 +117,18 @@ like following:
 .PP
 .nf
 [editor]
-ctrl\-W=EditPipeBlock:25;
+ctrl\-W=ExecuteScript:25;
 .fi
 .PP
 This means that ctrl\-W hotkey initiates the
-.I EditPipeBlock(25)
-action, next the editor handler translates this into execution of
+.I ExecuteScript(25)
+action, then editor handler translates this into execution of
 .B ~/.local/share/mc/mcedit/macros.d/macro.25.sh
 shell script.
 .PP
-External scripts stored into
+External scripts are stored in
 .B ~/.local/share/mc/mcedit/macros.d/
-directory and must named
+directory and must be named as
 .B macro.XXXX.sh
 where
 .B XXXX

@@ -69,10 +69,13 @@ gboolean mc_args__disable_colors = FALSE;
 /* Force colors, only used by Slang */
 gboolean mc_args__force_colors = FALSE;
 
+/* Don't load keymap form file and use default one */
+gboolean mc_args__nokeymap = FALSE;
+
 /* Line to start the editor on */
 int mc_args__edit_start_line = 0;
 
-/* Show in specified skin */
+/* Use the specified skin */
 char *mc_args__skin = NULL;
 
 char *mc_args__last_wd_file = NULL;
@@ -238,6 +241,13 @@ static const GOptionEntry argument_terminal_table[] = {
      &mc_args__keymap_file,
      N_("Load definitions of key bindings from specified file"),
      "<file>"
+    },
+
+    {
+     "nokeymap", '\0', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
+     &mc_args__nokeymap,
+     N_("Don't load definitions of key bindings from file, use defaults"),
+     NULL
     },
 
     {

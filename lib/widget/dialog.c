@@ -246,48 +246,50 @@ dlg_execute_cmd (Dlg_head * h, unsigned long command)
     cb_ret_t ret = MSG_HANDLED;
     switch (command)
     {
-    case CK_DialogOK:
+    case CK_Ok:
         h->ret_value = B_ENTER;
         dlg_stop (h);
         break;
-    case CK_DialogCancel:
+    case CK_Cancel:
         h->ret_value = B_CANCEL;
         dlg_stop (h);
         break;
 
-    case CK_DialogPrevItem:
+    case CK_Up:
+    case CK_Left:
         dlg_one_up (h);
         break;
-    case CK_DialogNextItem:
+    case CK_Down:
+    case CK_Right:
         dlg_one_down (h);
         break;
 
-    case CK_DialogHelp:
+    case CK_Help:
         interactive_display (NULL, h->help_ctx);
         do_refresh ();
         break;
 
-    case CK_DialogSuspend:
+    case CK_Suspend:
         suspend_cmd ();
         refresh_cmd ();
         break;
-    case CK_DialogRefresh:
+    case CK_Refresh:
         refresh_cmd ();
         break;
 
-    case CK_DialogListCmd:
+    case CK_ScreenList:
         if (!h->modal)
             dialog_switch_list ();
         else
             ret = MSG_NOT_HANDLED;
         break;
-    case CK_DialogNextCmd:
+    case CK_ScreenNext:
         if (!h->modal)
             dialog_switch_next ();
         else
             ret = MSG_NOT_HANDLED;
         break;
-    case CK_DialogPrevCmd:
+    case CK_ScreenPrev:
         if (!h->modal)
             dialog_switch_prev ();
         else
@@ -308,7 +310,7 @@ dlg_handle_key (Dlg_head * h, int d_key)
 {
     unsigned long command;
     command = keybind_lookup_keymap_command (dialog_map, d_key);
-    if ((command == CK_Ignore_Key) || (dlg_execute_cmd (h, command) == MSG_NOT_HANDLED))
+    if ((command == CK_IgnoreKey) || (dlg_execute_cmd (h, command) == MSG_NOT_HANDLED))
         return MSG_NOT_HANDLED;
     else
         return MSG_HANDLED;
@@ -1102,7 +1104,7 @@ dlg_process_event (Dlg_head * h, int key, Gpm_Event * event)
     if (key == EV_NONE)
     {
         if (tty_got_interrupt ())
-            dlg_execute_cmd (h, CK_DialogCancel);
+            dlg_execute_cmd (h, CK_Cancel);
 
         return;
     }

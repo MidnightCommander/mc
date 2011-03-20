@@ -747,11 +747,9 @@ input_execute_cmd (WInput * in, unsigned long command)
     cb_ret_t res = MSG_HANDLED;
 
     /* a highlight command like shift-arrow */
-    if (command == CK_InputLeftHighlight ||
-        command == CK_InputRightHighlight ||
-        command == CK_InputWordLeftHighlight ||
-        command == CK_InputWordRightHighlight ||
-        command == CK_InputBolHighlight || command == CK_InputEolHighlight)
+    if (command == CK_MarkLeft || command == CK_MarkRight ||
+        command == CK_MarkToWordBegin || command == CK_MarkToWordEnd ||
+        command == CK_MarkToHome || command == CK_MarkToEnd)
     {
         if (!in->highlight)
         {
@@ -762,53 +760,41 @@ input_execute_cmd (WInput * in, unsigned long command)
 
     switch (command)
     {
-    case CK_InputForwardWord:
-    case CK_InputBackwardWord:
-    case CK_InputForwardChar:
-    case CK_InputBackwardChar:
+    case CK_WordRight:
+    case CK_WordLeft:
+    case CK_Right:
+    case CK_Left:
         if (in->highlight)
             input_mark_cmd (in, FALSE);
     }
 
     switch (command)
     {
-    case CK_InputBol:
-    case CK_InputBolHighlight:
+    case CK_Home:
+    case CK_MarkToHome:
         beginning_of_line (in);
         break;
-    case CK_InputEol:
-    case CK_InputEolHighlight:
+    case CK_End:
+    case CK_MarkToEnd:
         end_of_line (in);
         break;
-    case CK_InputMoveLeft:
-    case CK_InputLeftHighlight:
+    case CK_Left:
+    case CK_MarkLeft:
         backward_char (in);
         break;
-    case CK_InputWordLeft:
-    case CK_InputWordLeftHighlight:
+    case CK_WordLeft:
+    case CK_MarkToWordBegin:
         backward_word (in);
         break;
-    case CK_InputMoveRight:
-    case CK_InputRightHighlight:
+    case CK_Right:
+    case CK_MarkRight:
         forward_char (in);
         break;
-    case CK_InputWordRight:
-    case CK_InputWordRightHighlight:
+    case CK_WordRight:
+    case CK_MarkToWordEnd:
         forward_word (in);
         break;
-    case CK_InputBackwardChar:
-        backward_char (in);
-        break;
-    case CK_InputBackwardWord:
-        backward_word (in);
-        break;
-    case CK_InputForwardChar:
-        forward_char (in);
-        break;
-    case CK_InputForwardWord:
-        forward_word (in);
-        break;
-    case CK_InputBackwardDelete:
+    case CK_BackSpace:
         if (in->highlight)
         {
             long m1, m2;
@@ -818,7 +804,7 @@ input_execute_cmd (WInput * in, unsigned long command)
         else
             backward_delete (in);
         break;
-    case CK_InputDeleteChar:
+    case CK_Delete:
         if (in->first)
             port_region_marked_for_delete (in);
         else if (in->highlight)
@@ -830,60 +816,56 @@ input_execute_cmd (WInput * in, unsigned long command)
         else
             delete_char (in);
         break;
-    case CK_InputKillWord:
+    case CK_DeleteToWordEnd:
         kill_word (in);
         break;
-    case CK_InputBackwardKillWord:
+    case CK_DeleteToWordBegin:
         back_kill_word (in);
         break;
-    case CK_InputSetMark:
+    case CK_Mark:
         input_mark_cmd (in, TRUE);
         break;
-    case CK_InputKillRegion:
+    case CK_Remove:
         delete_region (in, in->point, in->mark);
         break;
-    case CK_InputKillLine:
-        /* clear command line from cursor to the EOL */
+    case CK_DeleteToEnd:
         kill_line (in);
         break;
-    case CK_InputClearLine:
-        /* clear command line */
+    case CK_Clear:
         clear_line (in);
         break;
-    case CK_InputCopyRegion:
+    case CK_Store:
         copy_region (in, in->mark, in->point);
         break;
-    case CK_InputKillSave:
+    case CK_Cut:
         copy_region (in, in->mark, in->point);
         delete_region (in, in->point, in->mark);
         break;
-    case CK_InputYank:
+    case CK_Yank:
         yank (in);
         break;
-    case CK_InputPaste:
+    case CK_Paste:
         ins_from_clip (in);
         break;
-    case CK_InputHistoryPrev:
+    case CK_HistoryPrev:
         hist_prev (in);
         break;
-    case CK_InputHistoryNext:
+    case CK_HistoryNext:
         hist_next (in);
         break;
-    case CK_InputHistoryShow:
+    case CK_History:
         do_show_hist (in);
         break;
-    case CK_InputComplete:
+    case CK_Complete:
         complete (in);
         break;
     default:
         res = MSG_NOT_HANDLED;
     }
 
-    if (command != CK_InputLeftHighlight &&
-        command != CK_InputRightHighlight &&
-        command != CK_InputWordLeftHighlight &&
-        command != CK_InputWordRightHighlight &&
-        command != CK_InputBolHighlight && command != CK_InputEolHighlight)
+    if (command != CK_MarkLeft && command != CK_MarkRight &&
+        command != CK_MarkToWordBegin && command != CK_MarkToWordEnd &&
+        command != CK_MarkToHome && command != CK_MarkToEnd)
         in->highlight = FALSE;
 
     return res;
@@ -1133,7 +1115,7 @@ input_handle_char (WInput * in, int key)
 
     command = keybind_lookup_keymap_command (input_map, key);
 
-    if (command == CK_Ignore_Key)
+    if (command == CK_IgnoreKey)
     {
         if (key > 255)
             return MSG_NOT_HANDLED;
@@ -1144,7 +1126,7 @@ input_handle_char (WInput * in, int key)
     }
     else
     {
-        if (command != CK_InputComplete)
+        if (command != CK_Complete)
             input_free_completions (in);
         input_execute_cmd (in, command);
         v = MSG_HANDLED;
@@ -1169,10 +1151,10 @@ input_key_is_in_map (WInput * in, int key)
     (void) in;
 
     command = keybind_lookup_keymap_command (input_map, key);
-    if (command == CK_Ignore_Key)
+    if (command == CK_IgnoreKey)
         return 0;
 
-    return (command == CK_InputComplete) ? 2 : 1;
+    return (command == CK_Complete) ? 2 : 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */

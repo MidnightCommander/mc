@@ -58,7 +58,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/keybind.h"        /* CK_PanelMoveDown, CK_InputHistoryShow */
+#include "lib/keybind.h"        /* CK_Down, CK_History */
 
 #include "src/subshell.h"       /* use_subshell */
 #include "src/consaver/cons.saver.h"    /* console_flag */
@@ -79,7 +79,7 @@
 #include "fileopctx.h"
 #include "file.h"               /* file operation routines */
 #include "find.h"               /* do_find() */
-#include "hotlist.h"            /* hotlist_cmd() */
+#include "hotlist.h"            /* hotlist_show() */
 #include "tree.h"               /* tree_chdir() */
 #include "midnight.h"           /* change_panel() */
 #include "usermenu.h"           /* MC_GLOBAL_MENU */
@@ -146,10 +146,10 @@ scan_for_file (WPanel * panel, int idx, int direction)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Run viewer (internal or external) on the currently selected file.
- * If normal is 1, force internal viewer and raw mode (used for F13).
+ * If normal is TRUE, force internal viewer and raw mode (used for F13).
  */
 static void
-do_view_cmd (int normal)
+do_view_cmd (gboolean normal)
 {
     /* Directories are viewed by changing to them */
     if (S_ISDIR (selection (current_panel)->st.st_mode) || link_isdir (selection (current_panel)))
@@ -168,14 +168,16 @@ do_view_cmd (int normal)
     }
     else
     {
-        int dir, file_idx;
-        char *filename;
+        int file_idx;
 
         file_idx = current_panel->selected;
-        while (1)
-        {
-            filename = current_panel->dir.list[file_idx].fname;
 
+        while (TRUE)
+        {
+            char *filename;
+            int dir;
+
+            filename = current_panel->dir.list[file_idx].fname;
             dir = view_file (filename, normal, use_internal_view);
             if (dir == 0)
                 break;
@@ -686,7 +688,7 @@ view_file (const char *filename, int plain_view, int internal)
 void
 view_cmd (void)
 {
-    do_view_cmd (0);
+    do_view_cmd (FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -710,15 +712,15 @@ view_file_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 /** Run plain internal viewer on the currently selected file */
 void
-view_simple_cmd (void)
+view_raw_cmd (void)
 {
-    do_view_cmd (1);
+    do_view_cmd (TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-filtered_view_cmd (void)
+view_filtered_cmd (void)
 {
     char *command;
     const char *initial_command;
@@ -975,7 +977,7 @@ reread_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-reverse_selection_cmd (void)
+select_invert_cmd (void)
 {
     int i;
     file_entry *file;
@@ -1142,11 +1144,11 @@ edit_fhl_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-quick_chdir_cmd (void)
+hotlist_cmd (void)
 {
     char *target;
 
-    target = hotlist_cmd (LIST_HOTLIST);
+    target = hotlist_show (LIST_HOTLIST);
     if (!target)
         return;
 
@@ -1163,11 +1165,11 @@ quick_chdir_cmd (void)
 
 #ifdef ENABLE_VFS
 void
-reselect_vfs (void)
+vfs_list (void)
 {
     char *target;
 
-    target = hotlist_cmd (LIST_VFSLIST);
+    target = hotlist_show (LIST_VFSLIST);
     if (!target)
         return;
 
@@ -1221,15 +1223,6 @@ diff_view_cmd (void)
     dialog_switch_process_pending ();
 }
 #endif
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-history_cmd (void)
-{
-    /* show the history of command line widget */
-    send_message (&cmdline->widget, WIDGET_COMMAND, CK_InputHistoryShow);
-}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1518,7 +1511,7 @@ single_dirsize_cmd (void)
     }
 
     if (panels_options.mark_moves_down)
-        send_message ((Widget *) panel, WIDGET_COMMAND, CK_PanelMoveDown);
+        send_message ((Widget *) panel, WIDGET_COMMAND, CK_Down);
 
     recalculate_panel_summary (panel);
 
@@ -1636,7 +1629,7 @@ change_listing_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tree_cmd (void)
+panel_tree_cmd (void)
 {
     set_display_type (MENU_PANEL_IDX, view_tree);
 }

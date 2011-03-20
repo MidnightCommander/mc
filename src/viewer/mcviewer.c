@@ -186,19 +186,6 @@ mcview_real_event (Gpm_Event * event, void *x)
     return result;
 }
 
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-mcview_set_keymap (mcview_t * view)
-{
-    view->plain_map = default_viewer_keymap;
-    if (viewer_keymap && viewer_keymap->len > 0)
-        view->plain_map = (global_keymap_t *) viewer_keymap->data;
-
-    view->hex_map = default_viewer_hex_keymap;
-    if (viewer_hex_keymap && viewer_hex_keymap->len > 0)
-        view->hex_map = (global_keymap_t *) viewer_hex_keymap->data;
-}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -210,8 +197,6 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     mcview_t *view = g_new0 (mcview_t, 1);
 
     init_widget (&view->widget, y, x, lines, cols, mcview_callback, mcview_real_event);
-
-    mcview_set_keymap (view);
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;

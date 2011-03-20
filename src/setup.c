@@ -517,7 +517,6 @@ setup__move_panels_config_into_separate_file (const char *profile)
 /**
   Create new mc_config object from specified ini-file or
   append data to existing mc_config object from ini-file
-
 */
 
 static void
@@ -529,7 +528,7 @@ load_setup_init_config_from_file (mc_config_t ** config, const char *fname)
     if (exist_file (fname))
     {
         if (*config != NULL)
-            mc_config_read_file (*config, fname);
+            mc_config_read_file (*config, fname, TRUE);
         else
             *config = mc_config_init (fname);
     }
@@ -665,13 +664,18 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
 /* --------------------------------------------------------------------------------------------- */
 
 static mc_config_t *
-load_setup_get_keymap_profile_config (void)
+load_setup_get_keymap_profile_config (gboolean load_from_file)
 {
     /*
        TODO: IMHO, in future this function must be placed into mc_config module.
      */
-    mc_config_t *keymap_config = NULL;
+    mc_config_t *keymap_config;
     char *fname, *fname2;
+
+    /* 0) Create default keymap */
+    keymap_config = create_default_keymap ();
+    if (!load_from_file)
+        return keymap_config;
 
     /* 1) /usr/share/mc (mc_share_data_dir) */
     fname = g_build_filename (mc_share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
@@ -689,7 +693,6 @@ load_setup_get_keymap_profile_config (void)
     g_free (fname);
 
     /* 4) main config; [Midnight Commander] -> keymap */
-
     fname2 =
         mc_config_get_string (mc_main_config, CONFIG_APP_SECTION, "keymap", GLOBAL_KEYMAP_FILE);
     fname = load_setup_get_full_config_name (NULL, fname2);
@@ -1155,7 +1158,7 @@ load_anon_passwd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-load_keymap_defs (void)
+load_keymap_defs (gboolean load_from_file)
 {
     /*
      * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_DATA_HOME}/mc/keymap, so that the user
@@ -1163,90 +1166,70 @@ load_keymap_defs (void)
      */
     mc_config_t *mc_global_keymap;
 
-    mc_global_keymap = load_setup_get_keymap_profile_config ();
+    mc_global_keymap = load_setup_get_keymap_profile_config (load_from_file);
 
     if (mc_global_keymap != NULL)
     {
+        main_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_MAIN, main_keymap, mc_global_keymap);
+        main_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_MAIN_EXT, main_x_keymap, mc_global_keymap);
+
+        panel_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_PANEL, panel_keymap, mc_global_keymap);
+
+        dialog_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_DIALOG, dialog_keymap, mc_global_keymap);
+
+        input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_INPUT, input_keymap, mc_global_keymap);
+
+        listbox_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_LISTBOX, listbox_keymap, mc_global_keymap);
+
+        tree_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_TREE, tree_keymap, mc_global_keymap);
+
+        help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_HELP, help_keymap, mc_global_keymap);
+
 #ifdef USE_INTERNAL_EDIT
         editor_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("editor", editor_keymap, mc_global_keymap);
+        load_keymap_from_section (KEYMAP_SECTION_EDITOR, editor_keymap, mc_global_keymap);
         editor_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("editor:xmap", editor_x_keymap, mc_global_keymap);
+        load_keymap_from_section (KEYMAP_SECTION_EDITOR_EXT, editor_x_keymap, mc_global_keymap);
 #endif
 
         viewer_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("viewer", viewer_keymap, mc_global_keymap);
+        load_keymap_from_section (KEYMAP_SECTION_VIEWER, viewer_keymap, mc_global_keymap);
         viewer_hex_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("viewer:hex", viewer_hex_keymap, mc_global_keymap);
-
-        main_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("main", main_keymap, mc_global_keymap);
-        main_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("main:xmap", main_x_keymap, mc_global_keymap);
-
-        panel_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("panel", panel_keymap, mc_global_keymap);
-
-        input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("input", input_keymap, mc_global_keymap);
-
-        listbox_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("listbox", listbox_keymap, mc_global_keymap);
-
-        tree_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("tree", tree_keymap, mc_global_keymap);
-
-        help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("help", help_keymap, mc_global_keymap);
-
-        dialog_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("dialog", dialog_keymap, mc_global_keymap);
+        load_keymap_from_section (KEYMAP_SECTION_VIEWER_HEX, viewer_hex_keymap, mc_global_keymap);
 
 #ifdef USE_DIFF_VIEW
         diff_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section ("diffviewer", diff_keymap, mc_global_keymap);
+        load_keymap_from_section (KEYMAP_SECTION_DIFFVIEWER, diff_keymap, mc_global_keymap);
 #endif
+
         mc_config_deinit (mc_global_keymap);
     }
 
-    main_map = default_main_map;
-    if (main_keymap && main_keymap->len > 0)
-        main_map = (global_keymap_t *) main_keymap->data;
-
-    main_x_map = default_main_x_map;
-    if (main_x_keymap && main_x_keymap->len > 0)
-        main_x_map = (global_keymap_t *) main_x_keymap->data;
-
-    panel_map = default_panel_keymap;
-    if (panel_keymap && panel_keymap->len > 0)
-        panel_map = (global_keymap_t *) panel_keymap->data;
-
-    input_map = default_input_keymap;
-    if (input_keymap && input_keymap->len > 0)
-        input_map = (global_keymap_t *) input_keymap->data;
-
-    listbox_map = default_listbox_keymap;
-    if (listbox_keymap && listbox_keymap->len > 0)
-        listbox_map = (global_keymap_t *) listbox_keymap->data;
-
-    tree_map = default_tree_keymap;
-    if (tree_keymap && tree_keymap->len > 0)
-        tree_map = (global_keymap_t *) tree_keymap->data;
-
-    help_map = default_help_keymap;
-    if (help_keymap && help_keymap->len > 0)
-        help_map = (global_keymap_t *) help_keymap->data;
-
-    dialog_map = default_dialog_keymap;
-    if (dialog_keymap && dialog_keymap->len > 0)
-        dialog_map = (global_keymap_t *) dialog_keymap->data;
-
-#ifdef USE_DIFF_VIEW
-    diff_map = default_diff_keymap;
-    if (diff_keymap && diff_keymap->len > 0)
-        diff_map = (global_keymap_t *) diff_keymap->data;
+    main_map = (global_keymap_t *) main_keymap->data;
+    main_x_map = (global_keymap_t *) main_x_keymap->data;
+    panel_map = (global_keymap_t *) panel_keymap->data;
+    dialog_map = (global_keymap_t *) dialog_keymap->data;
+    input_map = (global_keymap_t *) input_keymap->data;
+    listbox_map = (global_keymap_t *) listbox_keymap->data;
+    tree_map = (global_keymap_t *) tree_keymap->data;
+    help_map = (global_keymap_t *) help_keymap->data;
+#ifdef USE_INTERNAL_EDIT
+    editor_map = (global_keymap_t *) editor_keymap->data;
+    editor_x_map = (global_keymap_t *) editor_x_keymap->data;
 #endif
-
+    viewer_map = (global_keymap_t *) viewer_keymap->data;
+    viewer_hex_map = (global_keymap_t *) viewer_hex_keymap->data;
+#ifdef USE_DIFF_VIEW
+    diff_map = (global_keymap_t *) diff_keymap->data;
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1254,6 +1237,22 @@ load_keymap_defs (void)
 void
 free_keymap_defs (void)
 {
+    if (main_keymap != NULL)
+        g_array_free (main_keymap, TRUE);
+    if (main_x_keymap != NULL)
+        g_array_free (main_x_keymap, TRUE);
+    if (panel_keymap != NULL)
+        g_array_free (panel_keymap, TRUE);
+    if (dialog_keymap != NULL)
+        g_array_free (dialog_keymap, TRUE);
+    if (input_keymap != NULL)
+        g_array_free (input_keymap, TRUE);
+    if (listbox_keymap != NULL)
+        g_array_free (listbox_keymap, TRUE);
+    if (tree_keymap != NULL)
+        g_array_free (tree_keymap, TRUE);
+    if (help_keymap != NULL)
+        g_array_free (help_keymap, TRUE);
 #ifdef USE_INTERNAL_EDIT
     if (editor_keymap != NULL)
         g_array_free (editor_keymap, TRUE);
@@ -1264,22 +1263,6 @@ free_keymap_defs (void)
         g_array_free (viewer_keymap, TRUE);
     if (viewer_hex_keymap != NULL)
         g_array_free (viewer_hex_keymap, TRUE);
-    if (main_keymap != NULL)
-        g_array_free (main_keymap, TRUE);
-    if (main_x_keymap != NULL)
-        g_array_free (main_x_keymap, TRUE);
-    if (panel_keymap != NULL)
-        g_array_free (panel_keymap, TRUE);
-    if (input_keymap != NULL)
-        g_array_free (input_keymap, TRUE);
-    if (listbox_keymap != NULL)
-        g_array_free (listbox_keymap, TRUE);
-    if (tree_keymap != NULL)
-        g_array_free (tree_keymap, TRUE);
-    if (help_keymap != NULL)
-        g_array_free (help_keymap, TRUE);
-    if (dialog_keymap != NULL)
-        g_array_free (dialog_keymap, TRUE);
 #ifdef USE_DIFF_VIEW
     if (diff_keymap != NULL)
         g_array_free (diff_keymap, TRUE);

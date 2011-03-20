@@ -1,0 +1,484 @@
+This file describes how keybind names used in mc.keymap.* files
+are changed in 4.8.* releases.
+
++---------------------------------+-------------------------+-----------------------------------------+
+|            Old name             |        New name         |                 Notes                   |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                            [main] section                                           |
++---------------------------------+-------------------------+-----------------------------------------+
+| CmdCopy                         | Copy                    |                                         |
+| CmdRename                       | Move                    |                                         |
+| CmdDelete                       | Delete                  |                                         |
+| CmdMkdir                        | MakeDir                 |                                         |
+| ShowCommandLine                 | Shell                   |                                         |
+| CmdMenu                         | Menu                    |                                         |
+| CmdMenuLastSelected             | MenuLastSelected        |                                         |
+| CmdUserMenu                     | UserMenu                |                                         |
+| CmdEditMcMenu                   | EditUserMenu            |                                         |
+| CmdHelp                         | Help                    |                                         |
+| CmdHistory                      | History                 |                                         |
+| CmdEdit                         | Edit                    |                                         |
+| CmdEditForceInternal            | EditForceInternal       |                                         |
+| CmdView                         | View                    |                                         |
+| CmdViewFile                     | ViewFile                |                                         |
+| CmdFilteredView                 | ViewFiltered            |                                         |
+| CmdFind                         | Find                    |                                         |
+| CmdReread                       | Reread                  |                                         |
+| CmdSingleDirsize                | DirSize                 |                                         |
+| CmdDialogList                   | ScreenList              |                                         |
+| CmdSuspend                      | Suspend                 |                                         |
+| CmdCopyCurrentPathname          | PutCurrentPath          |                                         |
+| CmdCopyOtherPathname            | PutOtherPath            |                                         |
+| CmdSelect                       | Select                  |                                         |
+| CmdUnselect                     | Unselect                |                                         |
+| CmdReverseSelection             | SelectInvert            |                                         |
+| CmdQuickChdir                   | HotList                 |                                         |
+| CmdSwapPanel                    | Swap                    |                                         |
+| CmdListing                      | PanelListing            |                                         |
+| CmdToggleListing                | PanelListingSwitch      |                                         |
+| CmdChangeListing                | PanelListingChange      |                                         |
+| CmdToggleShowHidden             | ShowHidden              |                                         |
+| CmdTogglePanelsSplit            | SplitVertHoriz          |                                         |
+| CmdQuickCd                      | CdQuick                 |                                         |
+| CmdConfigureBox                 | Options                 |                                         |
+| CmdLayout                       | OptionsLayout           |                                         |
+| CmdPanelOptions                 | OptionsPanel            |                                         |
+| CmdConfirmBox                   | OptionsConfirm          |                                         |
+| CmdDisplayBitsBox               | OptionsDisplayBits      |                                         |
+| CmdConfigureVfs                 | OptionsVfs              |                                         |
+| CmdSaveSetup                    | SaveSetup               |                                         |
+| CmdEditExtFile                  | EditExtensionsFile      |                                         |
+| CmdEditFhlFile                  | EditFileHighlightFile   |                                         |
+| CmdFilter                       | Filter                  |                                         |
+| CmdFishlink                     | ConnectFish             |                                         |
+| CmdFtplink                      | ConnectFtp              |                                         |
+| CmdSmblink                      | ConnectSmb              |                                         |
+| CmdUndelete                     | Undelete                |                                         |
+| CmdQuit                         | Quit                    |                                         |
+| CmdQuietQuit                    | QuitQuiet               |                                         |
+| ExtMap1                         | ExtendedKeyMap          |                                         |
+| CmdEditUserMenu                 |                         | Unused. Removed                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                          [main:xmap] section                                        |
++---------------------------------+-------------------------+-----------------------------------------+
+| CmdChmod                        | ChangeMode              |                                         |
+| CmdChown                        | ChangeOwn               |                                         |
+| CmdCompareDirs                  | CompareDirs             |                                         |
+| CmdDiffView                     | CompareFiles            |                                         |
+| CmdInfo                         | PanelInfo               |                                         |
+| CmdQuickView                    | PanelQuickView          |                                         |
+| CmdLink                         | Link                    |                                         |
+| CmdSymlink                      | LinkSymbolic            |                                         |
+| CmdRelativeSymlink              | LinkSymbolicRelative    |                                         |
+| CmdEditSymlink                  | LinkSymbolicEdit        |                                         |
+| CmdExternalPanelize             | ExternalPanelize        |                                         |
+| CmdReselectVfs                  | VfsList                 |                                         |
+| CmdJobs                         | Jobs                    |                                         |
+| CmdAddHotlist                   | HotListAdd              |                                         |
+| CmdCopyCurrentPathname          | PutCurrentPath          |                                         |
+| CmdCopyOtherPathname            | PutOtherPath            |                                         |
+| CmdCopyCurrentTagged            | PutCurrentTagged        |                                         |
+| CmdCopyOtherTagged              | PutOtherTagged          |                                         |
+| CmdCopyCurrentReadlink          | PutCurrentLink          |                                         |
+| CmdCopyOtherReadlink            | PutOtherLink            |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                            [panel] section                                          |
++---------------------------------+-------------------------+-----------------------------------------+
+| PanelMoveUp                     | Up                      |                                         |
+| PanelMoveDown                   | Down                    |                                         |
+| PanelMoveLeft                   | Left                    |                                         |
+| PanelMoveRight                  | Right                   |                                         |
+| PanelPrevPage                   | PageUp                  |                                         |
+| PanelNextPage                   | PageDown                |                                         |
+| PanelMoveHome                   | Top                     |                                         |
+| PanelMoveEnd                    | Bottom                  |                                         |
+| PanelGotoTopFile                | TopOnScreen             |                                         |
+| PanelGotoMiddleFile             | MiddleOnScreen          |                                         |
+| PanelGotoBottomFile             | BottomOnScreen          |                                         |
+| PanelCopyLocal                  | CopySingle              |                                         |
+| PanelRenameLocal                | MoveSingle              |                                         |
+| PanelDeleteLocal                | DeleteSingle            |                                         |
+| PanelStartSearch                | Search                  |                                         |
+| PanelSetPanelEncoding           | SelectCodepage          |                                         |
+| PanelDirectoryHistoryList       | History                 |                                         |
+| PanelDirectoryHistoryNext       | HistoryNext             |                                         |
+| PanelDirectoryHistoryPrev       | HistoryPrev             |                                         |
+| PanelEditNew                    | EditNew                 |                                         |
+| PanelViewSimple                 | ViewRaw                 |                                         |
+| PanelSelect                     | Select                  |                                         |
+| PanelUnselect                   | Unselect                |                                         |
+| PanelReverseSelection           | SelectInvert            |                                         |
+| PanelSyncOtherPanel             | PanelOtherSync          |                                         |
+| PanelChdirOtherPanel            | PanelOtherCd            |                                         |
+| PanelChdirToReadlink            | PanelOtherCdLink        |                                         |
+| PanelGotoChildDir               | CdChild                 |                                         |
+| PanelGotoParentDir              | CdParent                |                                         |
+| PanelSmartGotoParentDir         | CdParentSmart           |                                         |
+| PanelMarkFile                   | Mark                    |                                         |
+| PanelMarkDown                   | MarkDown                |                                         |
+| PanelMarkUp                     | MarkUp                  |                                         |
+| PanelDoEnter                    | Enter                   |                                         |
+| PanelSelectSortOrder            | Sort                    |                                         |
+| PanelReverseSort                | SortReverse             |                                         |
+| PanelToggleSortOrderPrev        | SortPrev                |                                         |
+| PanelToggleSortOrderNext        | SortNext                |                                         |
+| PanelSortOrderByName            | SortByName              |                                         |
+| PanelSortOrderByExt             | SortByExt               |                                         |
+| PanelSortOrderBySize            | SortBySize              |                                         |
+| PanelSortOrderByMTime           | SortByMTime             |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                           [dialog] section                                          |
++---------------------------------+-------------------------+-----------------------------------------+
+| DialogOK                        | Ok                      |                                         |
+| DialogCancel                    | Cancel                  |                                         |
+| DialogPrevItem                  | Up, Left                | Left should not be used                 |
+| DialogNextItem                  | Down, Right             | Right should not be used                |
+| DialogHelp                      | Help                    |                                         |
+| DialogRefresh                   | Refresh                 |                                         |
+| DialogSuspend                   | Suspend                 |                                         |
+| CmdDialogList                   | ScreenList              |                                         |
+| CmdDialogNext                   | ScreenNext              |                                         |
+| CmdDialogPrev                   | ScreenPrev              |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                            [input] section                                          |
++---------------------------------+-------------------------+-----------------------------------------+
+| InputBol                        | Home                    |                                         |
+| InputEol                        | End                     |                                         |
+| InputMoveLeft                   | Left                    |                                         |
+| InputMoveRight                  | Right                   |                                         |
+| InputBackwardChar               |                         | Removed. 'Left' is used instead         |
+| InputForwardChar                |                         | Removed. 'Right' is used instead        |
+| InputWordLeft                   | WordLeft                |                                         |
+| InputBackwardWord               |                         | Removed. 'WordLeft' is used instead     |
+| InputWordRight                  | WordRight               |                                         |
+| InputForwardWord                |                         | Removed. 'WordRight' is used instead    |
+| InputDeleteChar                 | Delete                  |                                         |
+| InputBackwardDelete             | Backspace               |                                         |
+| InputBackwardKillWord           | DeleteToWordBegin       |                                         |
+| InputKillWord                   | DeleteToWordEnd         |                                         |
+| InputKillLine                   | DeleteToEnd             |                                         |
+| InputKillRegion                 | Remove                  |                                         |
+| InputClearLine                  | Clear                   |                                         |
+| InputComplete                   | Complete                |                                         |
+| InputSetMark                    | Mark                    |                                         |
+| InputLeftHighlight              | MarkLeft                |                                         |
+| InputRightHighlight             | MarkRight               |                                         |
+| InputWordLeftHighlight          | MarkToWordBegin         |                                         |
+| InputWordRightHighlight         | MarkToWordEnd           |                                         |
+| InputBolHighlight               | MarkToHome              |                                         |
+| InputEolHighlight               | MarkToEnd               |                                         |
+| InputHistoryPrev                | HistoryPrev             |                                         |
+| InputHistoryNext                | HistoryNext             |                                         |
+| InputHistoryShow                | History                 |                                         |
+| InputXCut                       | Cut                     |                                         |
+| InputXStore                     | Store                   |                                         |
+| InputXPaste                     | Paste                   |                                         |
+| InputYank                       | Yank                    |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                           [listbox] section                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+| ListboxMoveUp                   | Up                      |                                         |
+| ListboxMoveDown                 | Down                    |                                         |
+| ListboxMovePgUp                 | PageUp                  |                                         |
+| ListboxMovePgDn                 | PageDown                |                                         |
+| ListboxMoveHome                 | Top                     |                                         |
+| ListboxMoveEnd                  | Bottom                  |                                         |
+| ListboxDeleteItem               | Delete                  |                                         |
+| ListboxDeleteAll                | Clear                   |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                            [tree] section                                           |
++---------------------------------+-------------------------+-----------------------------------------+
+| TreeMoveUp                      | Up                      |                                         |
+| TreeMoveDown                    | Down                    |                                         |
+| TreeMoveLeft                    | Left                    |                                         |
+| TreeMoveRight                   | Right                   |                                         |
+| TreeMovePgUp                    | PageUp                  |                                         |
+| TreeMovePgDn                    | PageDown                |                                         |
+| TreeMoveHome                    | Top                     |                                         |
+| TreeMoveEnd                     | Bottom                  |                                         |
+| TreeCopy                        | Copy                    |                                         |
+| TreeMove                        | Move                    |                                         |
+| TreeRemove                      | Delete                  |                                         |
+| TreeHelp                        | Help                    |                                         |
+| TreeStartSearch                 | Search                  |                                         |
+| TreeRescan                      | Reread                  |                                         |
+| TreeToggleNav                   | ToggleNavigation        |                                         |
+| TreeForget                      | Forget                  |                                         |
+| TreeOpen                        | Enter                   |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                            [help] section                                           |
++---------------------------------+-------------------------+-----------------------------------------+
+| HelpIndex                       | Index                   |                                         |
+| HelpBack                        | Back                    |                                         |
+| HelpMoveUp                      | Up                      |                                         |
+| HelpMoveDown                    | Down                    |                                         |
+| HelpMovePgUp                    | PageUp                  |                                         |
+| HelpMovePgDn                    | PageDown                |                                         |
+| HelpMoveHalfPgUp                | HalfPageUp              |                                         |
+| HelpMoveHalfPgDn                | HalfPageDown            |                                         |
+| HelpMoveTop                     | Top                     |                                         |
+| HelpMoveBottom                  | Bottom                  |                                         |
+| HelpSelectLink                  | Enter                   |                                         |
+| HelpNextLink                    | LinkNext                |                                         |
+| HelpPrevLink                    | LinkPrev                |                                         |
+| HelpNextNode                    | NodeNext                |                                         |
+| HelpPrevNode                    | NodePrev                |                                         |
+| HelpHelp                        | Help                    |                                         |
+| HelpQuit                        | Quit                    |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                           [editor] section                                          |
++---------------------------------+-------------------------+-----------------------------------------+
+| EditEnter                       | Enter                   |                                         |
+| EditUp                          | Up                      |                                         |
+| EditDown                        | Down                    |                                         |
+| EditLeft                        | Left                    |                                         |
+| EditRight                       | Right                   |                                         |
+| EditHome                        | Home                    |                                         |
+| EditEnd                         | End                     |                                         |
+| EditPageUp                      | PageUp                  |                                         |
+| EditPageDown                    | PageDown                |                                         |
+| EditBeginningOfText             | Top                     |                                         |
+| EditEndOfText                   | Bottom                  |                                         |
+| EditBeginPage                   | TopOnScreen             |                                         |
+| EditEndPage                     | BottomOnScreen          |                                         |
+| EditParagraphUp                 | ParagraphUp             |                                         |
+| EditParagraphDown               | ParagraphDown           |                                         |
+| EditParagraphFormat             | ParagraphFormat         |                                         |
+| EditRemove                      | Remove                  |                                         |
+| EditDelete                      | Delete                  |                                         |
+| EditBackSpace                   | BackSpace               |                                         |
+| EditWordLeft                    | WordLeft                |                                         |
+| EditWordRight                   | WordRight               |                                         |
+| EditDeleteWordLeft              | DeleteToWordBegin       |                                         |
+| EditDeleteWordRight             | DeleteToWordEnd         |                                         |
+| EditDeleteLine                  | DeleteLine              |                                         |
+| EditDeleteToLineBegin           | DeleteToHome            |                                         |
+| EditDeleteToLineEnd             | DeleteToEnd             |                                         |
+| EditReturn                      | Return                  |                                         |
+| EditTab                         | Tab                     |                                         |
+| EditToggleInsert                | InsertOverwrite         |                                         |
+| EditUndo                        | Undo                    |                                         |
+| EditRedo                        | Redo                    |                                         |
+| EditInsertLiteral               | InsertLiteral           |                                         |
+| EditMenu                        | Menu                    |                                         |
+| EditUserMenu                    | UserMenu                |                                         |
+|                                 | EditUserMenu            | Added to edit the user menu of editor   |
+| EditSelectionHistory            | History                 |                                         |
+| EditHelp                        | Help                    |                                         |
+| EditFind                        | Search                  |                                         |
+| EditFindAgain                   | SearchContinue          |                                         |
+| EditReplace                     | Replace                 |                                         |
+| EditReplaceAgain                | ReplaceContinue         |                                         |
+| EditCompleteWord                |                         | Removed. 'Complete' is used instead     |
+| EditComplete                    | Complete                |                                         |
+| EditLoad                        | EditFile                |                                         |
+| EditInsertFile                  | InsertFile              |                                         |
+| EditSave                        | Save                    |                                         |
+| EditSaveas                      | SaveAs                  |                                         |
+| EditSaveBlock                   | BlockSave               |                                         |
+| EditShiftBlockLeft              | BlockShiftLeft          |                                         |
+| EditShiftBlockRight             | BlockShiftRight         |                                         |
+| EditMark                        | Mark                    |                                         |
+| EditColumnMark                  | MarkColumn              |                                         |
+| EditMarkAll                     | MarkAll                 |                                         |
+| EditLeftHighlight               | MarkLeft                |                                         |
+| EditRightHighlight              | MarkRight               |                                         |
+| EditUpHighlight                 | MarkUp                  |                                         |
+| EditDownHighlight               | MarkDown                |                                         |
+| EditPageUpHighlight             | MarkPageUp              |                                         |
+| EditPageDownHighlight           | MarkPageDown            |                                         |
+| EditParagraphUpHighlight        | MarkParagraphUp         |                                         |
+| EditParagraphDownHighlight      | MarkParagraphDown       |                                         |
+| EditWordLeftHighlight           | MarkToWordBegin         |                                         |
+| EditWordRightHighlight          | MarkToWordEnd           |                                         |
+| EditHomeHighlight               | MarkToHome              |                                         |
+| EditEndHighlight                | MarkToEnd               |                                         |
+| EditBeginningOfTextHighlight    | MarkToFileBegin         |                                         |
+| EditEndOfTextHighlight          | MarkToFileEnd           |                                         |
+| EditBeginPageHighlight          | MarkToPageBegin         |                                         |
+| EditEndPageHighlight            | MarkToPageEnd           |                                         |
+| EditScrollUpHighlight           | MarkScrollUp            |                                         |
+| EditScrollDownHighlight         | MarkScrollDown          |                                         |
+| EditLeftAltHighlight            | MarkColumnLeft          |                                         |
+| EditRightAltHighlight           | MarkColumnRight         |                                         |
+| EditUpAltHighlight              | MarkColumnUp            |                                         |
+| EditDownAltHighlight            | MarkColumnDown          |                                         |
+| EditPageUpAltHighlight          | MarkColumnPageUp        |                                         |
+| EditPageDownAltHighlight        | MarkColumnPageDown      |                                         |
+| EditParagraphUpAltHighlight     | MarkColumnParagraphUp   |                                         |
+| EditParagraphDownAltHighlight   | MarkColumnParagraphDown |                                         |
+| EditScrollUpAltHighlight        | MarkColumnScrollUp      |                                         |
+| EditScrollDownAltHighlight      | MarkColumnScrollDown    |                                         |
+| EditUnmark                      | Unmark                  |                                         |
+| EditCopy                        | Copy                    |                                         |
+| EditMove                        | Move                    |                                         |
+| EditScrollUp                    | ScrollUp                |                                         |
+| EditScrollDown                  | ScrollDown              |                                         |
+| EditGoto                        | Goto                    |                                         |
+| EditToggleLineState             | ShowNumbers             |                                         |
+| EditToggleTabTWS                | ShowTabTws              |                                         |
+| EditToggleShowMargin            | ShowMargin              |                                         |
+| EditToggleSyntax                | SyntaxOnOff             |                                         |
+| EditChooseSyntax                | SyntaxChoose            |                                         |
+| EditToggleBookmark              | Bookmark                |                                         |
+| EditNextBookmark                | BookmarkNext            |                                         |
+| EditPrevBookmark                | BookmarkPrev            |                                         |
+| EditFlushBookmarks              | BookmarkFlush           |                                         |
+| EditFindDefinition              | Find                    |                                         |
+| EditLoadNextFile                | FileNext                |                                         |
+| EditLoadPrevFile                | FilePrev                |                                         |
+| EditXCut                        | Cut                     |                                         |
+| EditXStore                      | Store                   |                                         |
+| EditXPaste                      | Paste                   |                                         |
+| EditShell                       | Shell                   |                                         |
+| EditRefresh                     | Refresh                 |                                         |
+| EditSort                        | Sort                    |                                         |
+| EditOptions                     | Options                 |                                         |
+| EditSaveMode                    | OptionsSaveMode         |                                         |
+| EditMatchBracket                | MatchBracket            |                                         |
+| EditDate                        | Date                    |                                         |
+| EditMail                        | Mail                    |                                         |
+| EditQuit                        | Quit                    |                                         |
+| EditAbout                       | About                   |                                         |
+| EditExtMode                     | ExtendedKeyMap          |                                         |
+| EditExtCmd                      | ExternalCommand         |                                         |
+| EditBeginRecordMacro            | MacroStartRecord        |                                         |
+| EditEndRecordMacro              | MacroStopRecord         |                                         |
+| EditBeginOrEndMacro             | MacroStartStopRecord    |                                         |
+| EditDeleteMacro                 | MacroDelete             |                                         |
+| CmdLearnKeys                    | LearnKeys               |                                         |
+| EditFindFile                    |                         | Unused. Removed                         |
+| EditExecuteMacro                |                         | Unused. Removed                         |
+| EditWordLeftAltHighlight        |                         | Unused. Removed                         |
+| EditWordRightAltHighlight       |                         | Unused. Removed                         |
+| EditHomeAltHighlight            |                         | Unused. Removed                         |
+| EditEndAltHighlight             |                         | Unused. Removed                         |
+| EditBeginningOfTextAltHighlight |                         | Unused. Removed                         |
+| EditEndOfTextAltHighlight       |                         | Unused. Removed                         |
+| EditBeginPageAltHighlight       |                         | Unused. Removed                         |
+| EditEndPageAltHighlight         |                         | Unused. Removed                         |
+| EditSaveAndQuit                 |                         | Unused. Removed                         |
+| EditCheckSaveAndQuit            |                         | Unused. Removed                         |
+| EditNewWindow                   |                         | Unused. Removed                         |
+| EditSaveDesktop                 |                         | Unused. Removed                         |
+| EditTerminal                    |                         | Unused. Removed                         |
+| EditTerminalApp                 |                         | Unused. Removed                         |
+| EditTypeLoadPython              |                         | Unused. Removed                         |
+| EditUtil                        |                         | Unused. Removed                         |
+| EditRunAnother                  |                         | Unused. Removed                         |
+| EditDebugStart                  |                         | Unused. Removed                         |
+| EditDebugStop                   |                         | Unused. Removed                         |
+| EditDebugToggleBreak            |                         | Unused. Removed                         |
+| EditDebugClear                  |                         | Unused. Removed                         |
+| EditDebugNext                   |                         | Unused. Removed                         |
+| EditDebugStep                   |                         | Unused. Removed                         |
+| EditDebugBackTrace              |                         | Unused. Removed                         |
+| EditDebugContinue               |                         | Unused. Removed                         |
+| EditDebugEnterCommand           |                         | Unused. Removed                         |
+| EditDebugUntilCurser            |                         | Unused. Removed                         |
+| EditCycle                       |                         | Unused. Removed                         |
+| EditMaximize                    |                         | Unused. Removed                         |
+| EditManPage                     |                         | Unused. Removed                         |
+| EditCtags                       |                         | Unused. Removed                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                        [editor:xmap] section                                        |
++---------------------------------+-------------------------+-----------------------------------------+
+| EditExecuteMacro                |                         | Unused. Removed                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                          [viewer] section                                           |
++---------------------------------+-------------------------+-----------------------------------------+
+| ViewMoveUp                      | Up                      |                                         |
+| ViewMoveDown                    | Down                    |                                         |
+| ViewMoveLeft                    | Left                    |                                         |
+| ViewMoveRight                   | Right                   |                                         |
+| ViewMoveToBol                   | Home                    |                                         |
+| ViewMoveToEol                   | End                     |                                         |
+| ViewMovePgUp                    | PageUp                  |                                         |
+| ViewMovePgDn                    | PageDown                |                                         |
+| ViewMoveHalfPgUp                | HalfPageUp              |                                         |
+| ViewMoveHalfPgDn                | HalfPageDown            |                                         |
+| ViewMoveTop                     | Top                     |                                         |
+| ViewMoveBottom                  | Bottom                  |                                         |
+| ViewHelp                        | Help                    |                                         |
+| ViewSearch                      | Search                  |                                         |
+| ViewSearchContinue              | SearchContinue          |                                         |
+| ViewGoto                        | Goto                    |                                         |
+| ViewNextFile                    | FileNext                |                                         |
+| ViewPrevFile                    | FilePrev                |                                         |
+| ViewToggleHexMode               | HexMode                 |                                         |
+| ViewToggleWrapMode              | WrapMode                |                                         |
+| ViewToggleMagicMode             | MagicMode               |                                         |
+| ViewToggleNroffMode             | NroffMode               |                                         |
+| ViewToggleRuler                 | Ruler                   |                                         |
+| ViewNewBookmark                 | Bookmark                |                                         |
+| ViewGotoBookmark                | BookmarkGoto            |                                         |
+| ShowCommandLine                 | Shell                   |                                         |
+| ViewQuit                        | Quit                    |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                        [viewer:hex] section                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+| ViewMoveUp                      | Up                      |                                         |
+| ViewMoveDown                    | Down                    |                                         |
+| ViewMoveLeft                    | Left                    |                                         |
+| ViewMoveRight                   | Right                   |                                         |
+| ViewMoveLeft10                  | LeftQuick               |                                         |
+| ViewMoveRight10                 | RightQuick              |                                         |
+| ViewMoveToBol                   | Home                    |                                         |
+| ViewMoveToEol                   | End                     |                                         |
+| ViewMovePgUp                    | PageUp                  |                                         |
+| ViewMovePgDn                    | PageDown                |                                         |
+| ViewMoveTop                     | Top                     |                                         |
+| ViewMoveBottom                  | Bottom                  |                                         |
+| ViewHelp                        | Help                    |                                         |
+| ViewSearch                      | Search                  |                                         |
+| ViewSearchContinue              | SearchContinue          |                                         |
+| ViewHexEditSave                 | Save                    |                                         |
+| ViewGoto                        | Goto                    |                                         |
+| ViewToggleHexMode               | HexMode                 |                                         |
+| ViewToggleHexEditMode           | HexEditMode             |                                         |
+| ViewToggleHexNavMode            | ToggleNavigation        |                                         |
+| ViewToggleMagicMode             | MagicMode               |                                         |
+| ViewToggleNroffMode             | NroffMode               |                                         |
+| ShowCommandLine                 | Shell                   |                                         |
+| ViewQuit                        | Quit                    |                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+|                                        [diffviewer] section                                         |
++---------------------------------+-------------------------+-----------------------------------------+
+| DiffUp                          | Up                      |                                         |
+| DiffDown                        | Down                    |                                         |
+| DiffLeft                        | Left                    |                                         |
+| DiffRight                       | Right                   |                                         |
+| DiffQuickLeft                   | LeftQuick               |                                         |
+| DiffQuickRight                  | RightQuick              |                                         |
+| DiffHome                        | Home                    |                                         |
+| DiffEnd                         |                         | Unused. Removed                         |
+| DiffPageUp                      | PageUp                  |                                         |
+| DiffPageDown                    | PageDown                |                                         |
+| DiffBOF                         | Top                     |                                         |
+| DiffEOF                         | Bottom                  |                                         |
+| DiffHelp                        | Help                    |                                         |
+| DiffSearch                      | Search                  |                                         |
+| DiffSearchContinue              | SearchContinue          |                                         |
+| DiffRedo                        | Redo                    |                                         |
+| DiffSave                        | Save                    |                                         |
+| DiffGoto                        | Goto                    |                                         |
+| DiffSwapPanel                   | Swap                    |                                         |
+| DiffFull                        | SplitFull               |                                         |
+| DiffEqual                       | SplitEqual              |                                         |
+| DiffSplitMore                   | SplitMore               |                                         |
+| DiffSplitLess                   | SplitLess               |                                         |
+| DiffSetTab2                     | Tab2                    |                                         |
+| DiffSetTab3                     | Tab3                    |                                         |
+| DiffSetTab4                     | Tab4                    |                                         |
+| DiffSetTab8                     | Tab8                    |                                         |
+| DiffEditCurrent                 | Edit                    |                                         |
+| DiffEditOther                   | EditOther               |                                         |
+| DiffNextHunk                    | HunkNext                |                                         |
+| DiffPrevHunk                    | HunkPrev                |                                         |
+| DiffMergeCurrentHunk            | Merge                   |                                         |
+| DiffDisplaySymbols              | ShowSymbols             |                                         |
+| DiffDisplayNumbers              | ShowNumbers             |                                         |
+| DiffOptions                     | Options                 |                                         |
+| ShowCommandLine                 | Shell                   |                                         |
+| DiffQuit                        | Quit                    |                                         |
++---------------------------------+-------------------------+-----------------------------------------+

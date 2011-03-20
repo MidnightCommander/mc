@@ -485,7 +485,7 @@ main (int argc, char *argv[])
     /* Removing this from the X code let's us type C-c */
     load_key_defs ();
 
-    load_keymap_defs ();
+    load_keymap_defs (!mc_args__nokeymap);
 
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
 
