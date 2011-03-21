@@ -40,7 +40,7 @@
 #include "lib/strescape.h"
 #include "lib/filehighlight.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/unixcompat.h"
 #include "lib/timefmt.h"
 #include "lib/util.h"
@@ -48,12 +48,13 @@
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"       /* get_codepage_id () */
 #endif
+#include "lib/event.h"
 
 #include "src/setup.h"          /* For loading/saving panel options */
 #include "src/execute.h"
 #include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
 #include "src/keybind-defaults.h"       /* global_keymap_t */
-#include "src/subshell.h"       /* use_subshell */
+#include "src/subshell.h"       /* do_subshell_chdir() */
 
 #include "dir.h"
 #include "boxes.h"
@@ -1181,7 +1182,7 @@ static char *
 panel_save_name (WPanel * panel)
 {
     /* If the program is shuting down */
-    if ((midnight_shutdown && auto_save_setup) || saving_setup)
+    if ((mc_global.widget.midnight_shutdown && auto_save_setup) || saving_setup)
         return g_strdup (panel->panel_name);
     else
         return g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
@@ -2264,7 +2265,7 @@ do_enter_on_file_entry (file_entry * fe)
     }
 
 #if HAVE_CHARSET
-    source_codepage = default_source_codepage;
+    mc_global.source_codepage = default_source_codepage;
 #endif
 
     return 1;
@@ -2591,7 +2592,7 @@ static void
 subshell_chdir (const char *directory)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell && vfs_current_is_local ())
+    if (mc_global.tty.use_subshell && vfs_current_is_local ())
         do_subshell_chdir (directory, FALSE, TRUE);
 #endif /* HAVE_SUBSHELL_SUPPORT */
 }
@@ -3409,6 +3410,72 @@ do_try_to_select (WPanel * panel, const char *name)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* event callback */
+static gboolean
+event_update_panels (const gchar * event_group_name, const gchar * event_name,
+                     gpointer init_data, gpointer data)
+{
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+    (void) data;
+
+    update_panels (UP_RELOAD, UP_KEEPSEL);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* event callback */
+static gboolean
+panel_save_curent_file_to_clip_file (const gchar * event_group_name, const gchar * event_name,
+                                     gpointer init_data, gpointer data)
+{
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+    (void) data;
+
+    if (current_panel->marked == 0)
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file",
+                        (gpointer) selection (current_panel)->fname);
+    else
+    {
+        int i;
+        gboolean first = TRUE;
+        char *flist = NULL;
+
+        for (i = 0; i < current_panel->count; i++)
+            if (current_panel->dir.list[i].f.marked != 0)
+            {                   /* Skip the unmarked ones */
+                if (first)
+                {
+                    flist = g_strdup (current_panel->dir.list[i].fname);
+                    first = FALSE;
+                }
+                else
+                {
+                    /* Add empty lines after the file */
+                    char *tmp;
+
+                    tmp =
+                        g_strconcat (flist, "\n", current_panel->dir.list[i].fname, (char *) NULL);
+                    g_free (flist);
+                    flist = tmp;
+                }
+            }
+
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) flist);
+        g_free (flist);
+    }
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 void
 try_to_select (WPanel * panel, const char *name)
 {
@@ -3890,14 +3957,14 @@ panel_change_encoding (WPanel * panel)
     if (panel->codepage == SELECT_CHARSET_NO_TRANSLATE)
     {
         /* No translation */
-        g_free (init_translation_table (display_codepage, display_codepage));
+        g_free (init_translation_table (mc_global.display_codepage, mc_global.display_codepage));
         cd_path = remove_encoding_from_path (panel->cwd);
         do_panel_cd (panel, cd_path, cd_parse_command);
         g_free (cd_path);
         return;
     }
 
-    errmsg = init_translation_table (panel->codepage, display_codepage);
+    errmsg = init_translation_table (panel->codepage, mc_global.display_codepage);
     if (errmsg != NULL)
     {
         message (D_ERROR, MSG_ERROR, "%s", errmsg);
@@ -4102,6 +4169,10 @@ panel_init (void)
     panel_history_prev_item_sign = mc_skin_get ("widget-panel", "history-prev-item-sign", "<");
     panel_history_next_item_sign = mc_skin_get ("widget-panel", "history-next-item-sign", ">");
     panel_history_show_list_sign = mc_skin_get ("widget-panel", "history-show-list-sign", "^");
+
+    mc_event_add (MCEVENT_GROUP_FILEMANAGER, "update_panels", event_update_panels, NULL, NULL);
+    mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_curent_file_to_clip_file",
+                  panel_save_curent_file_to_clip_file, NULL, NULL);
 
 }
 

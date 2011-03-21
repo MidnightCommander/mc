@@ -30,7 +30,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/tty/win.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/util.h"
 #include "lib/widget.h"
 
@@ -81,7 +81,7 @@ edition_pre_exec (void)
         clr_scr ();
     else
     {
-        if (!(console_flag || xterm_flag))
+        if (!(mc_global.tty.console_flag || xterm_flag))
             printf ("\n\n");
     }
 
@@ -132,19 +132,19 @@ do_execute (const char *lc_shell, const char *command, int flags)
     if (!vfs_current_is_local ())
         old_vfs_dir = g_strdup (vfs_get_current_dir ());
 
-    if (mc_run_mode == MC_RUN_FULL)
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
         save_cwds_stat ();
     pre_exec ();
-    if (console_flag)
+    if (mc_global.tty.console_flag)
         handle_console (CONSOLE_RESTORE);
 
-    if (!use_subshell && command && !(flags & EXECUTE_INTERNAL))
+    if (!mc_global.tty.use_subshell && command && !(flags & EXECUTE_INTERNAL))
     {
         printf ("%s%s\n", mc_prompt, command);
         fflush (stdout);
     }
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell && !(flags & EXECUTE_INTERNAL))
+    if (mc_global.tty.use_subshell && !(flags & EXECUTE_INTERNAL))
     {
         do_update_prompt ();
 
@@ -159,7 +159,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
     {
         if ((pause_after_run == pause_always
              || (pause_after_run == pause_on_dumb_terminals && !xterm_flag
-                 && !console_flag)) && quit == 0
+                 && !mc_global.tty.console_flag)) && quit == 0
 #ifdef HAVE_SUBSHELL_SUPPORT
             && subshell_state != RUNNING_COMMAND
 #endif /* HAVE_SUBSHELL_SUPPORT */
@@ -172,9 +172,9 @@ do_execute (const char *lc_shell, const char *command, int flags)
             printf ("\r\n");
             fflush (stdout);
         }
-        if (console_flag)
+        if (mc_global.tty.console_flag)
         {
-            if (output_lines && keybar_visible)
+            if (output_lines && mc_global.keybar_visible)
             {
                 putchar ('\n');
                 fflush (stdout);
@@ -182,7 +182,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
         }
     }
 
-    if (console_flag)
+    if (mc_global.tty.console_flag)
         handle_console (CONSOLE_SAVE);
     edition_post_exec ();
 
@@ -198,7 +198,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
         g_free (old_vfs_dir);
     }
 
-    if (mc_run_mode == MC_RUN_FULL)
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         update_xterm_title_path ();
@@ -215,7 +215,7 @@ do_suspend_cmd (void)
 {
     pre_exec ();
 
-    if (console_flag && !use_subshell)
+    if (mc_global.tty.console_flag && !mc_global.tty.use_subshell)
         handle_console (CONSOLE_RESTORE);
 
 #ifdef SIGTSTP
@@ -234,7 +234,7 @@ do_suspend_cmd (void)
     }
 #endif /* SIGTSTP */
 
-    if (console_flag && !use_subshell)
+    if (mc_global.tty.console_flag && !mc_global.tty.use_subshell)
         handle_console (CONSOLE_SAVE);
 
     edition_post_exec ();
@@ -277,7 +277,7 @@ shell_execute (const char *command, int flags)
     }
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell)
+    if (mc_global.tty.use_subshell)
         if (subshell_state == INACTIVE)
             do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
         else
@@ -324,11 +324,11 @@ toggle_panels (void)
     tty_reset_screen ();
     do_exit_ca_mode ();
     tty_raw_mode ();
-    if (console_flag)
+    if (mc_global.tty.console_flag)
         handle_console (CONSOLE_RESTORE);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell)
+    if (mc_global.tty.use_subshell)
     {
         new_dir_p = vfs_current_is_local ()? &new_dir : NULL;
         invoke_subshell (NULL, VISIBLY, new_dir_p);
@@ -347,7 +347,7 @@ toggle_panels (void)
             get_key_code (0);
     }
 
-    if (console_flag)
+    if (mc_global.tty.console_flag)
         handle_console (CONSOLE_SAVE);
 
     do_enter_ca_mode ();
@@ -366,7 +366,7 @@ toggle_panels (void)
         quit = 0;
 #ifdef HAVE_SUBSHELL_SUPPORT
         /* restart subshell */
-        if (use_subshell)
+        if (mc_global.tty.use_subshell)
             init_subshell ();
 #endif /* HAVE_SUBSHELL_SUPPORT */
     }
@@ -377,19 +377,19 @@ toggle_panels (void)
         application_keypad_mode ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell)
+    if (mc_global.tty.use_subshell)
     {
         load_prompt (0, NULL);
         if (new_dir)
             do_possible_cd (new_dir);
-        if (console_flag && output_lines)
+        if (mc_global.tty.console_flag && output_lines)
             show_console_contents (output_start_y,
-                                   LINES - keybar_visible - output_lines -
-                                   1, LINES - keybar_visible - 1);
+                                   LINES - mc_global.keybar_visible - output_lines -
+                                   1, LINES - mc_global.keybar_visible - 1);
     }
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
-    if (mc_run_mode == MC_RUN_FULL)
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         update_xterm_title_path ();
@@ -399,15 +399,24 @@ toggle_panels (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-suspend_cmd (void)
+/* event callback */
+gboolean
+execute_suspend (const gchar * event_group_name, const gchar * event_name,
+                 gpointer init_data, gpointer data)
 {
-    if (mc_run_mode == MC_RUN_FULL)
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+    (void) data;
+
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
         save_cwds_stat ();
     do_suspend_cmd ();
-    if (mc_run_mode == MC_RUN_FULL)
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     do_refresh ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

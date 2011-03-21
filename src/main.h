@@ -14,13 +14,6 @@
 /*** enums ***************************************************************************************/
 
 /* run mode and params */
-typedef enum
-{
-    MC_RUN_FULL = 0,
-    MC_RUN_EDITOR,
-    MC_RUN_VIEWER,
-    MC_RUN_DIFFVIEWER
-} mc_run_mode_t;
 
 enum cd_enum
 {
@@ -49,7 +42,6 @@ struct mc_fhl_struct;
 
 /*** global variables defined in .c file *********************************************************/
 
-extern mc_run_mode_t mc_run_mode;
 /*
  * MC_RUN_FULL: dir for left panel
  * MC_RUN_EDITOR: file to edit
@@ -77,25 +69,13 @@ extern int use_internal_view;
 extern int use_internal_edit;
 
 #ifdef HAVE_CHARSET
-extern int source_codepage;
 extern int default_source_codepage;
-extern int display_codepage;
 extern char *autodetect_codeset;
 extern gboolean is_autodetect_codeset_enabled;
-#else
-extern int eight_bit_clean;
-extern int full_eight_bits;
 #endif /* !HAVE_CHARSET */
-
-extern int utf8_display;
-
-extern int midnight_shutdown;
 
 extern char *shell;
 extern const char *mc_prompt;
-
-extern char *mc_sysconfig_dir;
-extern char *mc_share_data_dir;
 
 /* index to record_macro_buf[], -1 if not recording a macro */
 extern int macro_index;

@@ -31,8 +31,6 @@
 #include "internal.h"
 #include "lib/tty/tty.h"
 
-#include "src/args.h"
-
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
@@ -98,9 +96,9 @@ mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
 void
 mc_skin_lines_parse_ini_file (mc_skin_t * mc_skin)
 {
-    if (mc_args__slow_terminal)
+    if (mc_global.args.slow_terminal)
         mc_skin_hardcoded_space_lines (mc_skin);
-    else if (mc_args__ugly_line_drawing)
+    else if (mc_global.args.ugly_line_drawing)
         mc_skin_hardcoded_ugly_lines (mc_skin);
 
     /* single lines */

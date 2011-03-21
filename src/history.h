@@ -37,7 +37,6 @@
 #define MC_HISTORY_VIEW_SEARCH_REGEX  "mc.view.search.regex"
 
 #define MC_HISTORY_FTPFS_ACCOUNT      "mc.vfs.ftp.account"
-#define MC_HISTORY_VFS_PASSWORD       "mc.vfs.password"
 
 #define MC_HISTORY_EXT_PARAMETER      "mc.ext.parameter"
 

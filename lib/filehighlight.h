@@ -4,7 +4,7 @@
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 
-#include "src/filemanager/dir.h"
+#include "lib/util.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

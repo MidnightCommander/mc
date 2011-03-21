@@ -46,8 +46,8 @@
 #include "lib/global.h"
 #include "lib/tty/key.h"        /* add_select_channel(), delete_select_channel() */
 #include "lib/widget.h"         /* message() */
+#include "lib/event-types.h"
 
-#include "filemanager/layout.h" /* repaint_screen() */
 #include "filemanager/fileopctx.h"      /* FileOpContext */
 
 #include "background.h"
@@ -55,9 +55,6 @@
 /*** global variables ****************************************************************************/
 
 #define MAXCALLARGS 4           /* Number of arguments supported */
-
-/* If true, this is a background process */
-int we_are_background = 0;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -412,6 +409,71 @@ parent_call_header (void *routine, int argc, enum ReturnType type, FileOpContext
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+parent_va_call (void *routine, gpointer data, int argc, va_list ap)
+{
+    int i;
+    ssize_t ret;
+    struct FileOpContext *ctx = (struct FileOpContext *) data;
+
+    parent_call_header (routine, argc, Return_Integer, ctx);
+    for (i = 0; i < argc; i++)
+    {
+        int len;
+        void *value;
+
+        len = va_arg (ap, int);
+        value = va_arg (ap, void *);
+        ret = write (parent_fd, &len, sizeof (int));
+        ret = write (parent_fd, value, len);
+    }
+
+    ret = read (from_parent_fd, &i, sizeof (int));
+    if (ctx)
+        ret = read (from_parent_fd, ctx, sizeof (FileOpContext));
+
+    return i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+parent_va_call_string (void *routine, int argc, va_list ap)
+{
+    char *str;
+    int i;
+
+    parent_call_header (routine, argc, Return_String, NULL);
+    for (i = 0; i < argc; i++)
+    {
+        int len;
+        void *value;
+
+        len = va_arg (ap, int);
+        value = va_arg (ap, void *);
+        if ((write (parent_fd, &len, sizeof (int)) != sizeof (int)) ||
+            (write (parent_fd, value, len) != len))
+        {
+            return NULL;
+        }
+    }
+
+    if (read (from_parent_fd, &i, sizeof (int)) != sizeof (int))
+        return NULL;
+    if (!i)
+        return NULL;
+    str = g_malloc (i + 1);
+    if (read (from_parent_fd, str, i) != i)
+    {
+        g_free (str);
+        return NULL;
+    }
+    str[i] = 0;
+    return str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -475,7 +537,7 @@ do_background (struct FileOpContext *ctx, char *info)
         parent_fd = comm[1];
         from_parent_fd = back_comm[0];
 
-        we_are_background = 1;
+        mc_global.we_are_background = 1;
         top_dlg = NULL;
 
         /* Make stdin/stdout/stderr point somewhere */
@@ -509,28 +571,14 @@ do_background (struct FileOpContext *ctx, char *info)
 int
 parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
 {
+    int ret;
     va_list ap;
-    int i;
-    ssize_t ret;
 
     va_start (ap, argc);
-    parent_call_header (routine, argc, Return_Integer, ctx);
-    for (i = 0; i < argc; i++)
-    {
-        int len;
-        void *value;
+    ret = parent_va_call (routine, (gpointer) ctx, argc, ap);
+    va_end (ap);
 
-        len = va_arg (ap, int);
-        value = va_arg (ap, void *);
-        ret = write (parent_fd, &len, sizeof (int));
-        ret = write (parent_fd, value, len);
-    }
-
-    ret = read (from_parent_fd, &i, sizeof (int));
-    if (ctx)
-        ret = read (from_parent_fd, ctx, sizeof (FileOpContext));
-
-    return i;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -540,33 +588,50 @@ parent_call_string (void *routine, int argc, ...)
 {
     va_list ap;
     char *str;
-    int i;
 
     va_start (ap, argc);
-    parent_call_header (routine, argc, Return_String, NULL);
-    for (i = 0; i < argc; i++)
-    {
-        int len;
-        void *value;
+    str = parent_va_call_string (routine, argc, ap);
+    va_end (ap);
 
-        len = va_arg (ap, int);
-        value = va_arg (ap, void *);
-        if ((write (parent_fd, &len, sizeof (int)) != sizeof (int)) ||
-            (write (parent_fd, value, len) != len))
-            return NULL;
-    }
-    if (read (from_parent_fd, &i, sizeof (int)) != sizeof (int))
-        return NULL;
-    if (!i)
-        return NULL;
-    str = g_malloc (i + 1);
-    if (read (from_parent_fd, str, i) != i)
-    {
-        g_free (str);
-        return NULL;
-    }
-    str[i] = 0;
     return str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* event callback */
+gboolean
+background_parent_call (const gchar * event_group_name, const gchar * event_name,
+                        gpointer init_data, gpointer data)
+{
+    ev_background_parent_call_t *event_data = (ev_background_parent_call_t *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
+    event_data->ret.i =
+        parent_va_call (event_data->routine, event_data->ctx, event_data->argc, event_data->ap);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* event callback */
+gboolean
+background_parent_call_string (const gchar * event_group_name, const gchar * event_name,
+                               gpointer init_data, gpointer data)
+{
+    ev_background_parent_call_t *event_data = (ev_background_parent_call_t *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
+    event_data->ret.s =
+        parent_va_call_string (event_data->routine, event_data->argc, event_data->ap);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

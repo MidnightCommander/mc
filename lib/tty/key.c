@@ -40,7 +40,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_casecmp */
 
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 
 #include "tty.h"
 #include "tty-internal.h"       /* mouse_enabled */
@@ -48,10 +48,7 @@
 #include "key.h"
 #include "win.h"                /* xterm_flag */
 
-#include "src/main.h"
-#include "src/filemanager/layout.h"     /* winch_flag, mc_refresh() */
-#include "src/consaver/cons.saver.h"
-
+#include "lib/widget.h"         /* mc_refresh() */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 #include "x11conn.h"
@@ -1959,7 +1956,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
             }
         }
 
-        if (!block || winch_flag)
+        if (!block || mc_global.tty.winch_flag)
         {
             time_addr = &time_out;
             time_out.tv_sec = 0;
@@ -1979,7 +1976,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
         {
             if (redo_event)
                 return EV_MOUSE;
-            if (!block || winch_flag)
+            if (!block || mc_global.tty.winch_flag)
                 return EV_NONE;
             vfs_timeout_handler ();
         }
@@ -2106,7 +2103,7 @@ learn_key (void)
 void
 numeric_keypad_mode (void)
 {
-    if (console_flag || xterm_flag)
+    if (mc_global.tty.console_flag || xterm_flag)
     {
         fputs ("\033>", stdout);
         fflush (stdout);
@@ -2118,7 +2115,7 @@ numeric_keypad_mode (void)
 void
 application_keypad_mode (void)
 {
-    if (console_flag || xterm_flag)
+    if (mc_global.tty.console_flag || xterm_flag)
     {
         fputs ("\033=", stdout);
         fflush (stdout);

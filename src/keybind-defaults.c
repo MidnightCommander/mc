@@ -57,6 +57,7 @@ const global_keymap_t *input_map = NULL;
 const global_keymap_t *listbox_map = NULL;
 const global_keymap_t *tree_map = NULL;
 const global_keymap_t *help_map = NULL;
+
 #ifdef USE_INTERNAL_EDIT
 const global_keymap_t *editor_map = NULL;
 const global_keymap_t *editor_x_map = NULL;

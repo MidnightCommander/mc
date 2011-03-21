@@ -25,8 +25,6 @@
 
 /*** global variables **************************************************/
 
-extern int utf8_display;
-
 /*** file scope macro definitions **************************************/
 
 /*** file scope type declarations **************************************/
@@ -42,7 +40,7 @@ mc_config_normalize_before_save (const gchar * value)
     GIConv conv;
     GString *buffer;
 
-    if (utf8_display)
+    if (mc_global.utf8_display)
         return g_strdup (value);
 
     conv = str_crt_conv_to ("UTF-8");

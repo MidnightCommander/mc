@@ -81,7 +81,7 @@
 #include "lib/tty/key.h"        /* tty_get_event */
 #include "lib/mcconfig.h"
 #include "lib/search.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */

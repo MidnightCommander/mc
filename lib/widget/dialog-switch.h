@@ -12,6 +12,8 @@
 
 /*** global variables defined in .c file *********************************************************/
 
+extern Dlg_head *midnight_dlg;
+
 /*** declarations of public functions ************************************************************/
 
 void dialog_switch_add (struct Dlg_head *h);
@@ -26,5 +28,11 @@ int dialog_switch_process_pending (void);
 void dialog_switch_got_winch (void);
 void dialog_switch_shutdown (void);
 
+/* Clear screen */
+void clr_scr (void);
+void repaint_screen (void);
+void dialog_change_screen_size (void);
+
 /*** inline functions ****************************************************************************/
+
 #endif /* MC__DIALOG_SWITCH_H */

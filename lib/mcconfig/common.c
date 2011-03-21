@@ -26,7 +26,7 @@
 #include <errno.h>              /* extern int errno */
 
 #include "lib/global.h"
-#include "lib/vfs/mc-vfs/vfs.h" /* mc_stat */
+#include "lib/vfs/vfs.h"        /* mc_stat */
 #include "lib/util.h"
 #include "lib/mcconfig.h"
 
@@ -65,9 +65,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     fd = mc_open (ini_path, O_WRONLY | O_TRUNC | O_SYNC, 0);
     if (fd == -1)
     {
-        g_propagate_error (error,
-                           g_error_new (mc_main_error_quark (), 0, "%s",
-                                        unix_error_string (errno)));
+        g_propagate_error (error, g_error_new (MC_ERROR, 0, "%s", unix_error_string (errno)));
         g_free (data);
         return FALSE;
     }
@@ -81,9 +79,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     if (cur_written == -1)
     {
         mc_util_restore_from_backup_if_possible (ini_path, "~");
-        g_propagate_error (error,
-                           g_error_new (mc_main_error_quark (), 0, "%s",
-                                        unix_error_string (errno)));
+        g_propagate_error (error, g_error_new (MC_ERROR, 0, "%s", unix_error_string (errno)));
         return FALSE;
     }
 

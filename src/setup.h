@@ -49,7 +49,7 @@ typedef struct
     gboolean filetype_mode;     /* If TRUE then add per file type hilighting */
     gboolean permission_mode;   /* If TRUE, we use permission hilighting */
     qsearch_mode_t qsearch_mode;        /* Quick search mode */
-    gboolean torben_fj_mode;            /* If TRUE, use some usability hacks by Torben */
+    gboolean torben_fj_mode;    /* If TRUE, use some usability hacks by Torben */
 } panels_options_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -57,15 +57,11 @@ typedef struct
 /* global paremeters */
 extern char *profile_name;
 extern char *global_profile_name;
-extern char *setup_color_string;
-extern char *term_color_string;
-extern char *color_terminal_string;
 extern int confirm_delete;
 extern int confirm_directory_hotlist_delete;
 extern int confirm_execute;
 extern int confirm_exit;
 extern int confirm_overwrite;
-extern int confirm_history_cleanup;
 extern int confirm_view_dir;
 extern int safe_delete;
 extern int clear_before_exec;
@@ -81,7 +77,6 @@ extern int option_tab_spacing;
 extern int auto_save_setup;
 extern int only_leading_plus_minus;
 extern int cd_symlinks;
-extern int show_all_if_ambiguous;
 extern int auto_fill_mkdir_name;
 extern int output_starts_shell;
 extern int use_file_to_check_type;

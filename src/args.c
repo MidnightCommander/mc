@@ -30,18 +30,17 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/color.h"      /* command_line_colors */
 #include "lib/tty/mouse.h"
 #include "lib/strutil.h"
-#include "lib/vfs/mc-vfs/vfs.h"
-#ifdef ENABLE_VFS_SMB
-#include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debugf()  */
-#endif
+#include "lib/vfs/vfs.h"
 #include "lib/util.h"           /* x_basename() */
+
+#ifdef ENABLE_VFS_SMB
+#include "src/vfs/smbfs/smbfs.h"        /* smbfs_set_debugf()  */
+#endif
 
 #include "src/main.h"
 #include "src/textconf.h"
-#include "src/subshell.h"       /* use_subshell */
 
 #include "src/args.h"
 
@@ -57,15 +56,6 @@ gboolean mc_args__force_xterm = FALSE;
 
 gboolean mc_args__nomouse = FALSE;
 
-/* For slow terminals */
-gboolean mc_args__slow_terminal = FALSE;
-
-/* If true use +, -, | for line drawing */
-gboolean mc_args__ugly_line_drawing = FALSE;
-
-/* Set to force black and white display at program startup */
-gboolean mc_args__disable_colors = FALSE;
-
 /* Force colors, only used by Slang */
 gboolean mc_args__force_colors = FALSE;
 
@@ -74,9 +64,6 @@ gboolean mc_args__nokeymap = FALSE;
 
 /* Line to start the editor on */
 int mc_args__edit_start_line = 0;
-
-/* Use the specified skin */
-char *mc_args__skin = NULL;
 
 char *mc_args__last_wd_file = NULL;
 
@@ -136,7 +123,7 @@ static const GOptionEntry argument_main_table[] = {
 #ifdef HAVE_SUBSHELL_SUPPORT
     {
      "subshell", 'U', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
-     &use_subshell,
+     &mc_global.tty.use_subshell,
      N_("Enables subshell support (default)"),
      NULL
     },
@@ -217,14 +204,14 @@ static const GOptionEntry argument_terminal_table[] = {
 
     {
      "slow", 's', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_args__slow_terminal,
+     &mc_global.args.slow_terminal,
      N_("To run on slow terminals"),
      NULL
     },
 
     {
      "stickchars", 'a', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_args__ugly_line_drawing,
+     &mc_global.args.ugly_line_drawing,
      N_("Use stickchars to draw"),
      NULL
     },
@@ -260,13 +247,13 @@ static const GOptionEntry argument_terminal_table[] = {
 
 GOptionGroup *color_group;
 #define ARGS_COLOR_OPTIONS 0
-// #define ARGS_COLOR_OPTIONS G_OPTION_FLAG_IN_MAIN
+/* #define ARGS_COLOR_OPTIONS G_OPTION_FLAG_IN_MAIN */
 static const GOptionEntry argument_color_table[] = {
     /* *INDENT-OFF* */
     /* color options */
     {
      "nocolor", 'b', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_args__disable_colors,
+     &mc_global.args.disable_colors,
      N_("Requests to run in black and white"),
      NULL
     },
@@ -280,14 +267,14 @@ static const GOptionEntry argument_color_table[] = {
 
     {
      "colors", 'C', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
-     &command_line_colors,
+     &mc_global.tty.command_line_colors,
      N_("Specifies a color configuration"),
      "<string>"
     },
 
     {
      "skin", 'S', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
-     &mc_args__skin,
+     &mc_global.args.skin,
      N_("Show mc with specified skin"),
      "<string>"
     },
@@ -329,6 +316,7 @@ mc_args_clean_temp_help_strings (void)
 static GOptionGroup *
 mc_args_new_color_group (void)
 {
+/* *INDENT-OFF* */
     /* FIXME: to preserve translations, lines should be split. */
     mc_args__loc__colors_string = g_strdup_printf ("%s\n%s",
                                                    /* TRANSLATORS: don't translate keywords */
@@ -357,6 +345,7 @@ mc_args_new_color_group (void)
                                                     "Attributes:\n"
                                                     "   bold, underline, reverse, blink; append more with '+'\n")
                                                     );
+/* *INDENT-ON* */
 
     return g_option_group_new ("color", mc_args__loc__colors_string,
                                _("Color options"), NULL, NULL);
@@ -498,7 +487,7 @@ mc_setup_by_args (int argc, char *argv[])
                 mc_run_param0 = g_strdup (tmp);
             }
         }
-        mc_run_mode = MC_RUN_EDITOR;
+        mc_global.mc_run_mode = MC_RUN_EDITOR;
     }
     else if (strncmp (base, "mcv", 3) == 0 || strcmp (base, "view") == 0)
     {
@@ -511,7 +500,7 @@ mc_setup_by_args (int argc, char *argv[])
             fprintf (stderr, "%s\n", _("No arguments given to the viewer."));
             exit (EXIT_FAILURE);
         }
-        mc_run_mode = MC_RUN_VIEWER;
+        mc_global.mc_run_mode = MC_RUN_VIEWER;
     }
 #ifdef USE_DIFF_VIEW
     else if (strncmp (base, "mcd", 3) == 0 || strcmp (base, "diff") == 0)
@@ -530,7 +519,7 @@ mc_setup_by_args (int argc, char *argv[])
             tmp = (argc > 1) ? argv[2] : NULL;
             if (tmp != NULL)
                 mc_run_param1 = g_strdup (tmp);
-            mc_run_mode = MC_RUN_DIFFVIEWER;
+            mc_global.mc_run_mode = MC_RUN_DIFFVIEWER;
         }
     }
 #endif /* USE_DIFF_VIEW */
@@ -538,7 +527,7 @@ mc_setup_by_args (int argc, char *argv[])
     {
         /* MC is run as mc */
 
-        switch (mc_run_mode)
+        switch (mc_global.mc_run_mode)
         {
         case MC_RUN_EDITOR:
         case MC_RUN_VIEWER:
@@ -559,7 +548,7 @@ mc_setup_by_args (int argc, char *argv[])
                 if (tmp != NULL)
                     mc_run_param1 = g_strdup (tmp);
             }
-            mc_run_mode = MC_RUN_FULL;
+            mc_global.mc_run_mode = MC_RUN_FULL;
             break;
         }
     }
@@ -577,16 +566,16 @@ mc_args_process (int argc, char *argv[])
     }
     if (mc_args__show_datadirs)
     {
-        printf ("%s (%s)\n", mc_sysconfig_dir, mc_share_data_dir);
+        printf ("%s (%s)\n", mc_global.sysconfig_dir, mc_global.share_data_dir);
         return FALSE;
     }
 
     if (mc_args__force_colors)
-        mc_args__disable_colors = FALSE;
+        mc_global.args.disable_colors = FALSE;
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_args__nouse_subshell)
-        use_subshell = 0;
+        mc_global.tty.use_subshell = FALSE;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
     mc_setup_by_args (argc, argv);
@@ -621,7 +610,7 @@ parse_mc_e_argument (const gchar * option_name, const gchar * value, gpointer da
     (void) data;
     (void) error;
 
-    mc_run_mode = MC_RUN_EDITOR;
+    mc_global.mc_run_mode = MC_RUN_EDITOR;
     mc_run_param0 = g_strdup (value);
 
     return TRUE;
@@ -636,7 +625,7 @@ parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer da
     (void) data;
     (void) error;
 
-    mc_run_mode = MC_RUN_VIEWER;
+    mc_global.mc_run_mode = MC_RUN_VIEWER;
     mc_run_param0 = g_strdup (value);
 
     return TRUE;

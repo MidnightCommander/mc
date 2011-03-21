@@ -44,13 +44,9 @@
 #include "lib/tty/win.h"        /* xterm_flag */
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-
-#include "src/filemanager/filegui.h"
-#include "src/filemanager/file.h"       /* copy_file_file() */
-#include "src/main.h"           /* eight_bit_clean */
 
 /*** global variables ****************************************************************************/
 
@@ -221,10 +217,10 @@ is_printable (int c)
        by setting the output codepage */
     return is_8bit_printable (c);
 #else
-    if (!eight_bit_clean)
+    if (!mc_global.eight_bit_clean)
         return is_7bit_printable (c);
 
-    if (full_eight_bits)
+    if (mc_global.full_eight_bits)
     {
         return is_8bit_printable (c);
     }
@@ -607,30 +603,6 @@ extension (const char *filename)
 {
     const char *d = strrchr (filename, '.');
     return (d != NULL) ? d + 1 : "";
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
-check_for_default (const char *default_file, const char *file)
-{
-    if (!exist_file (file))
-    {
-        FileOpContext *ctx;
-        FileOpTotalContext *tctx;
-
-        if (!exist_file (default_file))
-            return -1;
-
-        ctx = file_op_context_new (OP_COPY);
-        tctx = file_op_total_context_new ();
-        file_op_context_create_ui (ctx, 0, FALSE);
-        copy_file_file (tctx, ctx, default_file, file);
-        file_op_total_context_destroy (tctx);
-        file_op_context_destroy (ctx);
-    }
-
-    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -14,9 +14,9 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define MENU_PANEL (is_right ? right_panel : left_panel)
-#define MENU_PANEL_IDX  (is_right ? 1 : 0)
-#define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
+#define MENU_PANEL (mc_global.is_right ? right_panel : left_panel)
+#define MENU_PANEL_IDX  (mc_global.is_right ? 1 : 0)
+#define SELECTED_IS_PANEL (get_display_type (mc_global.is_right ? 1 : 0) == view_listing)
 
 #define other_panel get_other_panel()
 
@@ -33,9 +33,6 @@ extern WMenuBar *the_menubar;
 extern WLabel *the_prompt;
 extern WLabel *the_hint;
 extern WButtonBar *the_bar;
-
-/* Ugly hack in order to distinguish between left and right panel in menubar */
-extern gboolean is_right;       /* If the selected menu was the right */
 
 extern WPanel *left_panel;
 extern WPanel *right_panel;

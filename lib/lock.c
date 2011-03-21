@@ -53,7 +53,7 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/util.h"           /* tilde_expand() */
 #include "lib/lock.h"
 #include "lib/widget.h"         /* query_dialog() */

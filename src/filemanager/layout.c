@@ -51,16 +51,14 @@
 #include "lib/tty/mouse.h"
 #include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #include "lib/mcconfig.h"
-#include "lib/vfs/mc-vfs/vfs.h" /* For vfs_translate_url() */
+#include "lib/vfs/vfs.h"        /* For vfs_translate_url() */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 
-#include "src/main.h"
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
 #include "src/setup.h"
-#include "src/subshell.h"       /* For use_subshell and resize_subshell() */
-#include "src/background.h"     /* we_are_background */
+#include "src/background.h"
 
 #include "command.h"
 #include "midnight.h"
@@ -79,9 +77,6 @@ int nice_rotating_dash = 1;
 /* Set if the panels are split horizontally */
 int horizontal_split = 0;
 
-/* Set if the window has changed it's size */
-int winch_flag = 0;
-
 /* Set if the split is the same */
 int equal_split = 1;
 
@@ -97,12 +92,6 @@ int command_prompt = 1;
 /* Set if the main menu is visible */
 int menubar_visible = 1;
 
-/* Set if the nice and useful keybar is visible */
-int keybar_visible = 1;
-
-/* Set if the nice message (hint) bar is visible */
-int message_visible = 1;
-
 /* Set to show current working dir in xterm window title */
 int xterm_title = 1;
 
@@ -111,6 +100,8 @@ int free_space = 1;
 
 /* The starting line for the output of the subprogram */
 int output_start_y = 0;
+
+int ok_to_refresh = 1;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -187,8 +178,8 @@ static struct
     /* *INDENT-OFF* */
     { N_("Show free sp&ace"), &free_space, NULL},
     { N_("&XTerm window title"), &xterm_title, NULL},
-    { N_("H&intbar visible"), &message_visible, NULL},
-    { N_("&Keybar visible"), &keybar_visible, NULL},
+    { N_("H&intbar visible"), &mc_global.message_visible, NULL},
+    { N_("&Keybar visible"), &mc_global.keybar_visible, NULL},
     { N_("Command &prompt"), &command_prompt, NULL},
     { N_("Menu&bar visible"), &menubar_visible, NULL},
     { N_("&Equal split"), &equal_split, NULL}
@@ -201,7 +192,6 @@ static int output_lines_label_len;
 
 static WButton *bleft_widget, *bright_widget;
 
-static int ok_to_refresh = 1;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -319,7 +309,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         if (old_output_lines != _output_lines)
         {
             old_output_lines = _output_lines;
-            tty_setcolor (console_flag ? COLOR_NORMAL : DISABLED_COLOR);
+            tty_setcolor (mc_global.tty.console_flag ? COLOR_NORMAL : DISABLED_COLOR);
             dlg_move (h, 9, 6);
             tty_print_string (output_lines_label);
             dlg_move (h, 9, 6 + 3 + output_lines_label_len);
@@ -335,7 +325,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         _xterm_title = check_options[1].widget->state & C_BOOL;
         _free_space = check_options[0].widget->state & C_BOOL;
 
-        if (console_flag)
+        if (mc_global.tty.console_flag)
         {
             int minimum;
             if (_output_lines < 0)
@@ -356,7 +346,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         if (old_output_lines != _output_lines)
         {
             old_output_lines = _output_lines;
-            tty_setcolor (console_flag ? COLOR_NORMAL : DISABLED_COLOR);
+            tty_setcolor (mc_global.tty.console_flag ? COLOR_NORMAL : DISABLED_COLOR);
             dlg_move (h, 9, 6 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
@@ -503,13 +493,13 @@ init_layout (void)
     _equal_split = equal_split;
     _menubar_visible = menubar_visible;
     _command_prompt = command_prompt;
-    _keybar_visible = keybar_visible;
-    _message_visible = message_visible;
+    _keybar_visible = mc_global.keybar_visible;
+    _message_visible = mc_global.message_visible;
     _xterm_title = xterm_title;
     _free_space = free_space;
 
     {
-        const int disabled = console_flag ? 0 : W_DISABLED;
+        const int disabled = mc_global.tty.console_flag ? 0 : W_DISABLED;
         Widget *w;
 
         w = (Widget *) groupbox_new (8, 4, 3, first_width, title2);
@@ -607,46 +597,6 @@ restore_into_right_dir_panel (int idx, Widget * from_widget)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static inline void
-low_level_change_screen_size (void)
-{
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ
-    struct winsize winsz;
-
-    winsz.ws_col = winsz.ws_row = 0;
-    /* Ioctl on the STDIN_FILENO */
-    ioctl (0, TIOCGWINSZ, &winsz);
-    if (winsz.ws_col && winsz.ws_row)
-    {
-#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
-        resizeterm (winsz.ws_row, winsz.ws_col);
-        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
-#else
-        COLS = winsz.ws_col;
-        LINES = winsz.ws_row;
-#endif
-#ifdef HAVE_SUBSHELL_SUPPORT
-        resize_subshell ();
-#endif
-    }
-#endif /* TIOCGWINSZ */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-dlg_resize_cb (void *data, void *user_data)
-{
-    Dlg_head *d = data;
-
-    (void) user_data;
-    d->callback (d, NULL, DLG_RESIZE, 0, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -698,57 +648,19 @@ layout_box (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-clr_scr (void)
-{
-    tty_set_normal_attrs ();
-    tty_fill_region (0, 0, LINES, COLS, ' ');
-    tty_refresh ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-repaint_screen (void)
-{
-    do_refresh ();
-    tty_refresh ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mc_refresh (void)
-{
-#ifdef WITH_BACKGROUND
-    if (we_are_background)
-        return;
-#endif /* WITH_BACKGROUND */
-    if (winch_flag == 0)
-        tty_refresh ();
-    else
-    {
-        /* if winch was caugth, we should do not only redraw screen, but
-           reposition/resize all */
-        change_screen_size ();
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 setup_panels (void)
 {
     int start_y;
     int promptl;                /* the prompt len */
 
-    if (console_flag)
+    if (mc_global.tty.console_flag)
     {
         int minimum;
         if (output_lines < 0)
             output_lines = 0;
         height =
-            LINES - keybar_visible - command_prompt - menubar_visible -
-            output_lines - message_visible;
+            LINES - mc_global.keybar_visible - command_prompt - menubar_visible -
+            output_lines - mc_global.message_visible;
         minimum = MINHEIGHT * (1 + horizontal_split);
         if (height < minimum)
         {
@@ -758,7 +670,9 @@ setup_panels (void)
     }
     else
     {
-        height = LINES - menubar_visible - command_prompt - keybar_visible - message_visible;
+        height =
+            LINES - menubar_visible - command_prompt - mc_global.keybar_visible -
+            mc_global.message_visible;
     }
     check_split ();
     start_y = menubar_visible;
@@ -789,9 +703,10 @@ setup_panels (void)
 
     if (command_prompt)
     {
-        widget_set_size (&cmdline->widget, LINES - 1 - keybar_visible, promptl, 1, COLS - promptl);
+        widget_set_size (&cmdline->widget, LINES - 1 - mc_global.keybar_visible, promptl, 1,
+                         COLS - promptl);
         input_set_origin (cmdline, promptl, COLS - promptl);
-        widget_set_size (&the_prompt->widget, LINES - 1 - keybar_visible, 0, 1, promptl);
+        widget_set_size (&the_prompt->widget, LINES - 1 - mc_global.keybar_visible, 0, 1, promptl);
     }
     else
     {
@@ -800,18 +715,18 @@ setup_panels (void)
         widget_set_size (&the_prompt->widget, LINES, COLS, 0, 0);
     }
 
-    widget_set_size (&the_bar->widget, LINES - 1, 0, keybar_visible, COLS);
-    buttonbar_set_visible (the_bar, keybar_visible);
+    widget_set_size (&the_bar->widget, LINES - 1, 0, mc_global.keybar_visible, COLS);
+    buttonbar_set_visible (the_bar, mc_global.keybar_visible);
 
     /* Output window */
-    if (console_flag && output_lines)
+    if (mc_global.tty.console_flag && output_lines)
     {
-        output_start_y = LINES - command_prompt - keybar_visible - output_lines;
+        output_start_y = LINES - command_prompt - mc_global.keybar_visible - output_lines;
         show_console_contents (output_start_y,
-                               LINES - output_lines - keybar_visible - 1,
-                               LINES - keybar_visible - 1);
+                               LINES - output_lines - mc_global.keybar_visible - 1,
+                               LINES - mc_global.keybar_visible - 1);
     }
-    if (message_visible)
+    if (mc_global.message_visible)
         widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
     else
         widget_set_size (&the_hint->widget, 0, 0, 0, 0);
@@ -826,49 +741,10 @@ sigwinch_handler (int dummy)
 {
     (void) dummy;
 #if !(defined(USE_NCURSES) || defined(USE_NCURSESW))    /* don't do malloc in a signal handler */
-    low_level_change_screen_size ();
+    tty_low_level_change_screen_size ();
 #endif
-    winch_flag = 1;
+    mc_global.tty.winch_flag = TRUE;
 }
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-change_screen_size (void)
-{
-    winch_flag = 0;
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ
-
-#ifndef NCURSES_VERSION
-    tty_noraw_mode ();
-    tty_reset_screen ();
-#endif
-    low_level_change_screen_size ();
-#ifdef HAVE_SLANG
-    /* XSI Curses spec states that portable applications shall not invoke
-     * initscr() more than once.  This kludge could be done within the scope
-     * of the specification by using endwin followed by a refresh (in fact,
-     * more than one curses implementation does this); it is guaranteed to work
-     * only with slang.
-     */
-    SLsmg_init_smg ();
-    do_enter_ca_mode ();
-    tty_keypad (TRUE);
-    tty_nodelay (FALSE);
-#endif
-
-    /* Inform all suspending dialogs */
-    dialog_switch_got_winch ();
-    /* Inform all running dialogs */
-    g_list_foreach (top_dlg, (GFunc) dlg_resize_cb, NULL);
-
-    /* Now, force the redraw */
-    repaint_screen ();
-#endif /* TIOCGWINSZ */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
-}
-
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -889,45 +765,6 @@ set_hintbar (const char *str)
     label_set_text (the_hint, str);
     if (ok_to_refresh > 0)
         mc_refresh ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-print_vfs_message (const char *msg, ...)
-{
-    va_list ap;
-    char str[128];
-
-    va_start (ap, msg);
-    g_vsnprintf (str, sizeof (str), msg, ap);
-    va_end (ap);
-
-    if (midnight_shutdown)
-        return;
-
-    if (!message_visible || !the_hint || !the_hint->widget.owner)
-    {
-        int col, row;
-
-        if (!nice_rotating_dash || (ok_to_refresh <= 0))
-            return;
-
-        /* Preserve current cursor position */
-        tty_getyx (&row, &col);
-
-        tty_gotoyx (0, 0);
-        tty_setcolor (NORMAL_COLOR);
-        tty_print_string (str_fit_to_term (str, COLS - 1, J_LEFT));
-
-        /* Restore cursor position */
-        tty_gotoyx (row, col);
-        mc_refresh ();
-        return;
-    }
-
-    if (message_visible)
-        set_hintbar (str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -985,7 +822,7 @@ void
 set_display_type (int num, panel_view_mode_t type)
 {
     int x = 0, y = 0, cols = 0, lines = 0;
-    unsigned int the_other = 0;          /* Index to the other panel */
+    unsigned int the_other = 0; /* Index to the other panel */
     const char *file_name = NULL;       /* For Quick view */
     Widget *new_widget = NULL, *old_widget = NULL;
     WPanel *the_other_panel = NULL;
@@ -1106,6 +943,7 @@ set_display_type (int num, panel_view_mode_t type)
 
     g_free (old_widget);
 }
+
 /* --------------------------------------------------------------------------------------------- */
 
 void

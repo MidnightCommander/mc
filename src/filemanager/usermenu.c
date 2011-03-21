@@ -32,7 +32,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/search.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
@@ -722,7 +722,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     if (c == '%')
         return g_strdup ("%");
 
-    if (mc_run_mode == MC_RUN_FULL)
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
     {
         if (g_ascii_islower ((gchar) c))
             panel = current_panel;
@@ -735,7 +735,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
         fname = panel->dir.list[panel->selected].fname;
     }
 #ifdef USE_INTERNAL_EDIT
-    else if (mc_run_mode == MC_RUN_EDITOR)
+    else if (mc_global.mc_run_mode == MC_RUN_EDITOR)
         fname = (char *) edit_get_file_name (edit_widget);
 #endif
 
@@ -906,13 +906,13 @@ user_menu_cmd (struct WEdit *edit_widget, const char *menu_file, int selected_en
             {
                 g_free (menu);
                 menu =
-                    concat_dir_and_file (mc_sysconfig_dir,
+                    concat_dir_and_file (mc_global.sysconfig_dir,
                                          edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
                 if (!exist_file (menu))
                 {
                     g_free (menu);
                     menu = concat_dir_and_file
-                        (mc_share_data_dir, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                        (mc_global.share_data_dir, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
                 }
             }
         }

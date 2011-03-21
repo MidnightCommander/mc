@@ -37,12 +37,7 @@
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
-
-/* TODO: these includes should be removed! */
-#include "src/help.h"           /* interactive_display() */
-#include "src/filemanager/layout.h"
-#include "src/execute.h"        /* suspend_cmd() */
-#include "src/keybind-defaults.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
 /*** global variables ****************************************************************************/
 
@@ -63,6 +58,8 @@ int fast_refresh = 0;
 
 /* left click outside of dialog closes it */
 int mouse_close_dialog = 0;
+
+const global_keymap_t *dialog_map;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -265,12 +262,15 @@ dlg_execute_cmd (Dlg_head * h, unsigned long command)
         break;
 
     case CK_Help:
-        interactive_display (NULL, h->help_ctx);
-        do_refresh ();
+        {
+            ev_help_t event_data = { NULL, h->help_ctx };
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+            do_refresh ();
+        }
         break;
 
     case CK_Suspend:
-        suspend_cmd ();
+        mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL);
         refresh_cmd ();
         break;
     case CK_Refresh:
@@ -498,7 +498,7 @@ frontend_run_dlg (Dlg_head * h)
     event.x = -1;
 
     /* close opened editors, viewers, etc */
-    if (!h->modal && midnight_shutdown)
+    if (!h->modal && mc_global.widget.midnight_shutdown)
     {
         h->callback (h, NULL, DLG_VALIDATE, 0, NULL);
         return;
@@ -506,8 +506,8 @@ frontend_run_dlg (Dlg_head * h)
 
     while (h->state == DLG_ACTIVE)
     {
-        if (winch_flag)
-            change_screen_size ();
+        if (mc_global.tty.winch_flag)
+            dialog_change_screen_size ();
 
         if (is_idle ())
         {

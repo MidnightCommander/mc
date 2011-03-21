@@ -35,8 +35,6 @@
 
 #include "lib/tty/color.h"
 
-#include "src/setup.h"
-
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
@@ -160,8 +158,7 @@ mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_str
         if (key_val == NULL)
             continue;
 
-        if (key_val[1] != NULL
-            && mc_skin_colors_old_transform (key_val[0], &skin_group, &skin_key))
+        if (key_val[1] != NULL && mc_skin_colors_old_transform (key_val[0], &skin_group, &skin_key))
         {
             gchar *skin_val;
 
@@ -188,10 +185,10 @@ mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_str
 void
 mc_skin_colors_old_configure (mc_skin_t * mc_skin)
 {
-    mc_skin_colors_old_configure_one (mc_skin, setup_color_string);
-    mc_skin_colors_old_configure_one (mc_skin, term_color_string);
+    mc_skin_colors_old_configure_one (mc_skin, mc_global.tty.setup_color_string);
+    mc_skin_colors_old_configure_one (mc_skin, mc_global.tty.term_color_string);
     mc_skin_colors_old_configure_one (mc_skin, getenv ("MC_COLOR_TABLE"));
-    mc_skin_colors_old_configure_one (mc_skin, command_line_colors);
+    mc_skin_colors_old_configure_one (mc_skin, mc_global.tty.command_line_colors);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -50,7 +50,8 @@
 
 /*** declarations of public functions ************************************************************/
 
-void interactive_display (const char *filename, const char *node);
+gboolean help_interactive_display (const gchar * event_group_name, const gchar * event_name,
+                                   gpointer init_data, gpointer data);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__HELP_H */

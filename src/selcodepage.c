@@ -136,9 +136,9 @@ do_set_codepage (int codepage)
     char *errmsg;
     gboolean ret;
 
-    source_codepage = codepage;
+    mc_global.source_codepage = codepage;
     errmsg = init_translation_table (codepage == SELECT_CHARSET_NO_TRANSLATE ?
-                                     display_codepage : source_codepage, display_codepage);
+                                     mc_global.display_codepage : mc_global.source_codepage, mc_global.display_codepage);
     ret = errmsg == NULL;
 
     if (!ret)

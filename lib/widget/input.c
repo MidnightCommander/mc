@@ -42,22 +42,21 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
-#include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
-#include "src/main.h"           /* home_dir */
-#include "src/filemanager/midnight.h"   /* current_panel */
-#include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
-#include "src/keybind-defaults.h"       /* input_map */
+#include "input_complete.h"
 
 /*** global variables ****************************************************************************/
 
 int quote = 0;
+
+const global_keymap_t *input_map;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -82,124 +81,6 @@ int quote = 0;
 static char *kill_buffer = NULL;
 
 /*** file scope functions ************************************************************************/
-
-static gboolean
-save_text_to_clip_file (const char *text)
-{
-    int file;
-    char *fname = NULL;
-    ssize_t ret;
-    size_t str_len;
-
-    fname = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
-    file = mc_open (fname, O_CREAT | O_WRONLY | O_TRUNC,
-                    S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
-    g_free (fname);
-
-    if (file == -1)
-        return FALSE;
-
-    str_len = strlen (text);
-    ret = mc_write (file, (char *) text, str_len);
-    mc_close (file);
-    return ret == (ssize_t) str_len;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-load_text_from_clip_file (char **text)
-{
-    char buf[BUF_LARGE];
-    FILE *f;
-    char *fname = NULL;
-    gboolean first = TRUE;
-
-    fname = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
-    f = fopen (fname, "r");
-    g_free (fname);
-
-    if (f == NULL)
-        return FALSE;
-
-    *text = NULL;
-
-    while (fgets (buf, sizeof (buf), f))
-    {
-        size_t len;
-
-        len = strlen (buf);
-        if (len > 0)
-        {
-            if (buf[len - 1] == '\n')
-                buf[len - 1] = '\0';
-
-            if (first)
-            {
-                first = FALSE;
-                *text = g_strdup (buf);
-            }
-            else
-            {
-                /* remove \n on EOL */
-                char *tmp;
-
-                tmp = g_strconcat (*text, " ", buf, (char *) NULL);
-                g_free (*text);
-                *text = tmp;
-            }
-        }
-    }
-
-    fclose (f);
-
-    return (*text != NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-panel_save_curent_file_to_clip_file (void)
-{
-    gboolean res = FALSE;
-
-    if (current_panel->marked == 0)
-        res = save_text_to_clip_file (selection (current_panel)->fname);
-    else
-    {
-        int i;
-        gboolean first = TRUE;
-        char *flist = NULL;
-
-        for (i = 0; i < current_panel->count; i++)
-            if (current_panel->dir.list[i].f.marked != 0)
-            {                   /* Skip the unmarked ones */
-                if (first)
-                {
-                    flist = g_strdup (current_panel->dir.list[i].fname);
-                    first = FALSE;
-                }
-                else
-                {
-                    /* Add empty lines after the file */
-                    char *tmp;
-
-                    tmp =
-                        g_strconcat (flist, "\n", current_panel->dir.list[i].fname, (char *) NULL);
-                    g_free (flist);
-                    flist = tmp;
-                }
-            }
-
-        if (flist != NULL)
-        {
-            res = save_text_to_clip_file (flist);
-            g_free (flist);
-        }
-    }
-    return res;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -568,9 +449,9 @@ copy_region (WInput * in, int x_first, int x_last)
     if (last == first)
     {
         /* Copy selected files to clipboard */
-        panel_save_curent_file_to_clip_file ();
+        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "panel_save_curent_file_to_clip_file", NULL);
         /* try use external clipboard utility */
-        copy_file_to_ext_clip ();
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
         return;
     }
 
@@ -581,9 +462,9 @@ copy_region (WInput * in, int x_first, int x_last)
 
     kill_buffer = g_strndup (in->buffer + first, last - first);
 
-    save_text_to_clip_file (kill_buffer);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer);
     /* try use external clipboard utility */
-    copy_file_to_ext_clip ();
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -666,11 +547,15 @@ static void
 ins_from_clip (WInput * in)
 {
     char *p = NULL;
+    ev_clipboard_text_from_file_t event_data;
 
     /* try use external clipboard utility */
-    paste_to_file_from_ext_clip ();
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
 
-    if (load_text_from_clip_file (&p))
+
+    event_data.text = &p;
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &event_data);
+    if (event_data.ret)
     {
         char *pp;
 

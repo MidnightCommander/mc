@@ -36,19 +36,17 @@
 #include "lib/global.h"
 
 #include "lib/skin.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/mcconfig.h"       /* Load/save directories panelize */
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
 
 #include "src/setup.h"          /* For profile_bname */
-#include "src/main.h"
 #include "src/history.h"
 
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
-#include "layout.h"             /* repaint_screen() */
 
 #include "panelize.h"
 
@@ -481,7 +479,7 @@ load_panelize (void)
     while (*profile_keys)
     {
 
-        if (utf8_display || conv == INVALID_CONV)
+        if (mc_global.utf8_display || conv == INVALID_CONV)
         {
             buffer = g_string_new (*profile_keys);
         }

@@ -39,8 +39,6 @@
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_term_form */
 
-#include "src/main.h"
-
 #ifndef WANT_TERM_H
 #define WANT_TERM_H
 #endif
@@ -396,7 +394,7 @@ tty_print_anychar (int c)
 {
     unsigned char str[6 + 1];
 
-    if (utf8_display || c > 255)
+    if (mc_global.utf8_display || c > 255)
     {
         int res = g_unichar_to_utf8 (c, (char *) str);
         if (res == 0)

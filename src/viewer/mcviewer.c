@@ -42,7 +42,7 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/mouse.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* load_file_position() */
 #include "lib/widget.h"

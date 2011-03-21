@@ -42,12 +42,12 @@
 #include "lib/mcconfig.h"       /* Load/save user formats */
 #include "lib/strutil.h"
 
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #ifdef ENABLE_VFS_FTP
-#include "lib/vfs/mc-vfs/ftpfs.h"
+#include "src/vfs/ftpfs/ftpfs.h"
 #endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
-#include "lib/vfs/mc-vfs/smbfs.h"
+#include "src/vfs/smbfs/smbfs.h"
 #endif /* ENABLE_VFS_SMB */
 
 #include "lib/util.h"           /* Q_() */
@@ -337,7 +337,7 @@ sel_charset_button (WButton * button, int action)
             _("Other 8 bit") :
             ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
         if (cpname != NULL)
-            utf8_display = str_isutf8 (cpname);
+            mc_global.utf8_display = str_isutf8 (cpname);
         /* avoid strange bug with label repainting */
         g_snprintf (buf, sizeof (buf), "%-27s", cpname);
         label_set_text (cplabel, buf);
@@ -576,7 +576,7 @@ display_box (WPanel * panel, char **userp, char **minip, int *use_msformat, int 
 /* --------------------------------------------------------------------------------------------- */
 
 const panel_field_t *
-sort_box (panel_sort_info_t *info)
+sort_box (panel_sort_info_t * info)
 {
     int dlg_width = 40, dlg_height = 7;
 
@@ -603,9 +603,11 @@ sort_box (panel_sort_info_t *info)
             /* 2 */
             QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), &info->reverse),
             /* 3 */
-            QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), &info->case_sensitive),
+            QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"),
+                            &info->case_sensitive),
             /* 4 */
-            QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), &info->exec_first),
+            QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"),
+                            &info->exec_first),
             /* 5 */
             QUICK_RADIO (4, dlg_width, 3, dlg_height, 0, NULL, &sort_idx),
             QUICK_END
@@ -687,7 +689,7 @@ confirm_box (void)
         /* 1 */ QUICK_BUTTON (12, 46, 10, 13, N_("&OK"), B_ENTER, NULL),
         /* TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix */
         /* 2 */ QUICK_CHECKBOX (3, 46, 8, 13, N_("Confirmation|&History cleanup"),
-                                &confirm_history_cleanup),
+                                &mc_global.widget.confirm_history_cleanup),
         /* 3 */ QUICK_CHECKBOX (3, 46, 7, 13, N_("Confirmation|Di&rectory hotlist delete"),
                                 &confirm_directory_hotlist_delete),
         /* 4 */ QUICK_CHECKBOX (3, 46, 6, 13, N_("Confirmation|E&xit"), &confirm_exit),
@@ -823,9 +825,9 @@ display_bits_box (void)         /* AB:FIXME: test dialog */
     display_widgets[0].relative_x = display_bits.xlen * 2 / 3 - cancel_len / 2;
     display_widgets[1].relative_x = display_bits.xlen / 3 - ok_len / 2;
 
-    if (full_eight_bits)
+    if (mc_global.full_eight_bits)
         current_mode = 0;
-    else if (eight_bit_clean)
+    else if (mc_global.eight_bit_clean)
         current_mode = 1;
     else
         current_mode = 2;
@@ -834,12 +836,12 @@ display_bits_box (void)         /* AB:FIXME: test dialog */
 
     if (quick_dialog (&display_bits) != B_CANCEL)
     {
-        eight_bit_clean = current_mode < 3;
-        full_eight_bits = current_mode < 2;
+        mc_global.eight_bit_clean = current_mode < 3;
+        mc_global.full_eight_bits = current_mode < 2;
 #ifndef HAVE_SLANG
-        meta (stdscr, eight_bit_clean);
+        meta (stdscr, mc_global.eight_bit_clean);
 #else
-        SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
+        SLsmg_Display_Eight_Bit = mc_global.full_eight_bits ? 128 : 160;
 #endif
         use_8th_bit_as_meta = !new_meta;
     }
@@ -852,7 +854,7 @@ void
 display_bits_box (void)
 {
     Dlg_head *dbits_dlg;
-    new_display_codepage = display_codepage;
+    new_display_codepage = mc_global.display_codepage;
 
     application_keypad_mode ();
     dbits_dlg = init_disp_bits_box ();
@@ -863,17 +865,17 @@ display_bits_box (void)
     {
         char *errmsg;
 
-        display_codepage = new_display_codepage;
-        errmsg = init_translation_table (source_codepage, display_codepage);
+        mc_global.display_codepage = new_display_codepage;
+        errmsg = init_translation_table (mc_global.source_codepage, mc_global.display_codepage);
         if (errmsg != NULL)
         {
             message (D_ERROR, MSG_ERROR, "%s", errmsg);
             g_free (errmsg);
         }
 #ifdef HAVE_SLANG
-        tty_display_8bit (display_codepage != 0 && display_codepage != 1);
+        tty_display_8bit (mc_global.display_codepage != 0 && mc_global.display_codepage != 1);
 #else
-        tty_display_8bit (display_codepage != 0);
+        tty_display_8bit (mc_global.display_codepage != 0);
 #endif
         use_8th_bit_as_meta = !(inpcheck->state & C_BOOL);
     }

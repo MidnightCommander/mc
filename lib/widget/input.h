@@ -6,6 +6,8 @@
 #ifndef MC__WIDGET_INPUT_H
 #define MC__WIDGET_INPUT_H
 
+#include "lib/keybind.h"        /* global_keymap_t */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* For history load-save functions */
@@ -68,6 +70,8 @@ typedef struct
 
 extern int quote;
 
+extern const global_keymap_t *input_map;
+
 /*** declarations of public functions ************************************************************/
 
 WInput *input_new (int y, int x, const int *input_colors,
@@ -87,9 +91,6 @@ void input_enable_update (WInput * in);
 void input_disable_update (WInput * in);
 void input_clean (WInput * in);
 void input_free_completions (WInput * in);
-
-/* src/complete.c */
-void complete (WInput * in);
 
 /*** inline functions ****************************************************************************/
 

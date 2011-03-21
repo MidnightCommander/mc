@@ -25,8 +25,6 @@
 
 /*** global variables **************************************************/
 
-extern int utf8_display;
-
 /*** file scope macro definitions **************************************/
 
 /*** file scope type declarations **************************************/
@@ -103,7 +101,7 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
     if (ret == NULL)
         ret = g_strdup (def);
 
-    if (utf8_display)
+    if (mc_global.utf8_display)
         return ret;
 
     conv = str_crt_conv_from ("UTF-8");

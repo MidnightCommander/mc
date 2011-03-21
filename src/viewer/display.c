@@ -158,7 +158,7 @@ mcview_display_status (mcview_t * view)
             tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end,
                         buffer, mcview_may_still_grow (view) ? "+" : " ",
 #ifdef HAVE_CHARSET
-                        source_codepage >= 0 ? get_codepage_id (source_codepage) : ""
+                        mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) : ""
 #else
                         ""
 #endif

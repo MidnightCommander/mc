@@ -13,12 +13,8 @@
 
 extern gboolean mc_args__force_xterm;
 extern gboolean mc_args__nomouse;
-extern gboolean mc_args__slow_terminal;
-extern gboolean mc_args__ugly_line_drawing;
-extern gboolean mc_args__disable_colors;
 extern gboolean mc_args__force_colors;
 extern gboolean mc_args__nokeymap;
-extern char *mc_args__skin;
 extern gboolean mc_args__version;
 extern int mc_args__edit_start_line;
 extern char *mc_args__last_wd_file;

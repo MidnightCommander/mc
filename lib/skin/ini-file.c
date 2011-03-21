@@ -32,8 +32,6 @@
 #include "lib/fileloc.h"
 #include "lib/util.h"           /* exist_file() */
 
-#include "src/main.h"
-
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
@@ -102,11 +100,11 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
         return TRUE;
 
     /* /etc/mc/skins/ */
-    if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_sysconfig_dir))
+    if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_global.sysconfig_dir))
         return TRUE;
 
     /* /usr/share/mc/skins/ */
-    return mc_skin_ini_file_load_search_in_dir (mc_skin, mc_share_data_dir);
+    return mc_skin_ini_file_load_search_in_dir (mc_skin, mc_global.share_data_dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */

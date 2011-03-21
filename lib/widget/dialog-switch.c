@@ -28,14 +28,14 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"        /* LINES, COLS */
+#include "lib/tty/win.h"        /* do_enter_ca_mode() */
+#include "lib/tty/color.h"      /* tty_set_normal_attrs() */
 #include "lib/widget.h"
-
-/* TODO: these includes should be removed! */
-#include "src/filemanager/layout.h"     /* repaint_screen() */
-#include "src/filemanager/midnight.h"   /* midnight_dlg */
-#include "src/main.h"           /* midnight_shutdown */
+#include "lib/event.h"
 
 /*** global variables ****************************************************************************/
+
+Dlg_head *midnight_dlg = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -90,6 +90,17 @@ dialog_switch_goto (GList * dlg)
                 do_refresh ();
         }
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+dlg_resize_cb (void *data, void *user_data)
+{
+    Dlg_head *d = data;
+
+    (void) user_data;
+    d->callback (d, NULL, DLG_RESIZE, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -148,7 +159,7 @@ dialog_switch_next (void)
 {
     GList *next;
 
-    if (midnight_shutdown || mc_current == NULL)
+    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
         return;
 
     next = g_list_next (mc_current);
@@ -165,7 +176,7 @@ dialog_switch_prev (void)
 {
     GList *prev;
 
-    if (midnight_shutdown || mc_current == NULL)
+    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
         return;
 
     prev = g_list_previous (mc_current);
@@ -187,7 +198,7 @@ dialog_switch_list (void)
     int i = 0;
     int rv;
 
-    if (midnight_shutdown || mc_current == NULL)
+    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
         return;
 
     lines = min ((size_t) (LINES * 2 / 3), dlg_num);
@@ -240,10 +251,10 @@ dialog_switch_process_pending (void)
         {
             destroy_dlg (h);
             /* return to panels */
-            if (mc_run_mode == MC_RUN_FULL)
+            if (mc_global.mc_run_mode == MC_RUN_FULL)
             {
                 mc_current = g_list_find (mc_dialogs, midnight_dlg);
-                update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+                mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL);
             }
         }
     }
@@ -277,6 +288,64 @@ dialog_switch_shutdown (void)
         run_dlg (dlg);
         destroy_dlg (dlg);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+clr_scr (void)
+{
+    tty_set_normal_attrs ();
+    tty_fill_region (0, 0, LINES, COLS, ' ');
+    tty_refresh ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+repaint_screen (void)
+{
+    do_refresh ();
+    tty_refresh ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+dialog_change_screen_size (void)
+{
+    mc_global.tty.winch_flag = FALSE;
+#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
+#if defined TIOCGWINSZ
+
+#ifndef NCURSES_VERSION
+    tty_noraw_mode ();
+    tty_reset_screen ();
+#endif
+    tty_low_level_change_screen_size ();
+#ifdef HAVE_SLANG
+    /* XSI Curses spec states that portable applications shall not invoke
+     * initscr() more than once.  This kludge could be done within the scope
+     * of the specification by using endwin followed by a refresh (in fact,
+     * more than one curses implementation does this); it is guaranteed to work
+     * only with slang.
+     */
+    SLsmg_init_smg ();
+    do_enter_ca_mode ();
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
+#endif
+
+    /* Inform all suspending dialogs */
+    dialog_switch_got_winch ();
+    /* Inform all running dialogs */
+    g_list_foreach (top_dlg, (GFunc) dlg_resize_cb, NULL);
+
+    /* Now, force the redraw */
+    repaint_screen ();
+
+#endif /* TIOCGWINSZ */
+#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
 /* --------------------------------------------------------------------------------------------- */

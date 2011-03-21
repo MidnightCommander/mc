@@ -44,11 +44,9 @@
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
-/* TODO: these includes should be removed! */
-#include "src/keybind-defaults.h"       /* listbox_map */
-#include "src/setup.h"          /* confirm_history_cleanup */
-
 /*** global variables ****************************************************************************/
+
+const global_keymap_t *listbox_map;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -123,8 +121,8 @@ listbox_draw (WListbox * l, gboolean focused)
     const gboolean disabled = (((Widget *) l)->options & W_DISABLED) != 0;
     const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
     int selc =
-        disabled ? DISABLED_COLOR : focused ? h->color[DLG_COLOR_HOT_FOCUS] : h->
-        color[DLG_COLOR_FOCUS];
+        disabled ? DISABLED_COLOR : focused ? h->
+        color[DLG_COLOR_HOT_FOCUS] : h->color[DLG_COLOR_FOCUS];
 
     GList *le;
     int pos;
@@ -269,7 +267,7 @@ listbox_execute_cmd (WListbox * l, unsigned long command)
         }
         break;
     case CK_Clear:
-        if (l->deletable && confirm_history_cleanup
+        if (l->deletable && mc_global.widget.confirm_history_cleanup
             /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix */
             && (query_dialog (Q_ ("DialogTitle|History cleanup"),
                               _("Do you want clean this history?"),

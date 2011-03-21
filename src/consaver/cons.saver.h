@@ -31,7 +31,6 @@ enum
 
 #ifndef LINUX_CONS_SAVER_C
 /* Used only in mc, not in cons.saver */
-extern signed char console_flag;
 extern int cons_saver_pid;
 #endif /* !LINUX_CONS_SAVER_C */
 

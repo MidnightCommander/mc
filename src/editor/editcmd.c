@@ -53,19 +53,18 @@
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/lock.h"
 #include "lib/util.h"           /* tilde_expand() */
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #include "lib/charsets.h"
-
-#include "src/filemanager/layout.h"     /* clr_scr() */
+#include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/history.h"
-#include "src/main.h"           /* mc_sysconfig_dir, midnight_shutdown */
 #include "src/setup.h"          /* option_tab_spacing */
-#include "src/help.h"           /* interactive_display() */
 #include "src/selcodepage.h"
 #include "src/keybind-defaults.h"
-#include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
+#include "src/util.h"           /* check_for_default() */
+#include "src/filemanager/layout.h"     /* mc_refresh()  */
+
 
 #include "edit-impl.h"
 #include "edit-widget.h"
@@ -515,11 +514,11 @@ edit_load_syntax_file (WEdit * edit)
                             _("&User"), _("&System Wide"));
     }
 
-    extdir = g_build_filename (mc_sysconfig_dir, "syntax", "Syntax", (char *) NULL);
+    extdir = g_build_filename (mc_global.sysconfig_dir, "syntax", "Syntax", (char *) NULL);
     if (!exist_file (extdir))
     {
         g_free (extdir);
-        extdir = g_build_filename (mc_share_data_dir, "syntax", "Syntax", (char *) NULL);
+        extdir = g_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
     }
 
     if (dir == 0)
@@ -550,12 +549,12 @@ edit_load_menu_file (WEdit * edit)
                         _("Which menu file do you want to edit?"), D_NORMAL,
                         geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile = concat_dir_and_file (mc_sysconfig_dir, EDIT_GLOBAL_MENU);
+    menufile = concat_dir_and_file (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU);
 
     if (!exist_file (menufile))
     {
         g_free (menufile);
-        menufile = concat_dir_and_file (mc_share_data_dir, EDIT_GLOBAL_MENU);
+        menufile = concat_dir_and_file (mc_global.share_data_dir, EDIT_GLOBAL_MENU);
     }
 
     switch (dir)
@@ -572,11 +571,11 @@ edit_load_menu_file (WEdit * edit)
         break;
 
     case 2:
-        buffer = concat_dir_and_file (mc_sysconfig_dir, EDIT_GLOBAL_MENU);
+        buffer = concat_dir_and_file (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU);
         if (!exist_file (buffer))
         {
             g_free (buffer);
-            buffer = concat_dir_and_file (mc_share_data_dir, EDIT_GLOBAL_MENU);
+            buffer = concat_dir_and_file (mc_global.share_data_dir, EDIT_GLOBAL_MENU);
         }
         break;
 
@@ -1146,7 +1145,9 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
 void
 edit_help_cmd (WEdit * edit)
 {
-    interactive_display (NULL, "[Internal File Editor]");
+    ev_help_t event_data = { NULL, "[Internal File Editor]" };
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+
     edit->force |= REDRAW_COMPLETELY;
 }
 
@@ -2486,7 +2487,7 @@ edit_ok_to_exit (WEdit * edit)
     if (!edit->modified)
         return TRUE;
 
-    if (!midnight_shutdown)
+    if (!mc_global.widget.midnight_shutdown)
     {
         if (!edit_check_newline (edit))
             return FALSE;
@@ -2512,8 +2513,8 @@ edit_ok_to_exit (WEdit * edit)
     case 0:                    /* Yes */
         edit_push_markers (edit);
         edit_set_markers (edit, 0, 0, 0, 0);
-        if (!edit_save_cmd (edit) || midnight_shutdown)
-            return (gboolean) midnight_shutdown;
+        if (!edit_save_cmd (edit) || mc_global.widget.midnight_shutdown)
+            return mc_global.widget.midnight_shutdown;
         break;
     case 1:                    /* No */
         break;
@@ -2602,7 +2603,7 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
         return 1;
     }
     /* try use external clipboard utility */
-    copy_file_to_ext_clip ();
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 
     return 0;
 }
@@ -2621,7 +2622,7 @@ edit_cut_to_X_buf_cmd (WEdit * edit)
         return 1;
     }
     /* try use external clipboard utility */
-    copy_file_to_ext_clip ();
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 
     edit_block_delete_cmd (edit);
     edit_mark_cmd (edit, 1);
@@ -2635,7 +2636,7 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
 {
     gchar *tmp;
     /* try use external clipboard utility */
-    paste_to_file_from_ext_clip ();
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
     tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
     edit_insert_file (edit, tmp);
     g_free (tmp);

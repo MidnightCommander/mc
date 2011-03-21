@@ -35,18 +35,18 @@
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
 #include "lib/timefmt.h"
-
-#include "lib/vfs/mc-vfs/vfs.h"
-
-#ifdef ENABLE_VFS_FTP
-#include "lib/vfs/mc-vfs/ftpfs.h"
-#endif
-#ifdef ENABLE_VFS_FISH
-#include "lib/vfs/mc-vfs/fish.h"
-#endif
-
 #include "lib/util.h"
 #include "lib/widget.h"
+
+#include "lib/vfs/vfs.h"
+
+#ifdef ENABLE_VFS_FTP
+#include "src/vfs/ftpfs/ftpfs.h"
+#endif
+#ifdef ENABLE_VFS_FISH
+#include "src/vfs/fish/fish.h"
+#endif
+
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
@@ -84,10 +84,6 @@ char *global_profile_name;      /* mc.lib */
 /* Only used at program boot */
 gboolean boot_current_is_left = TRUE;
 
-char *setup_color_string;
-char *term_color_string;
-char *color_terminal_string;
-
 /* If on, default for "No" in delete operations */
 int safe_delete = 0;
 
@@ -104,8 +100,6 @@ int confirm_overwrite = 1;
 int confirm_execute = 0;
 /* Asks for confirmation before leaving the program */
 int confirm_exit = 1;
-/* Asks for confirmation before clean up of history */
-int confirm_history_cleanup = 1;
 
 /* If true, at startup the user-menu is invoked */
 int auto_menu = 0;
@@ -157,12 +151,6 @@ int auto_save_setup = 1;
  * command line is emtpy, otherwise they behave like regular letters
  */
 int only_leading_plus_minus = 1;
-
-/* Set when cd symlink following is desirable (bash mode) */
-int cd_symlinks = 1;
-
-/* Set if you want the possible completions dialog for the first time */
-int show_all_if_ambiguous = 0;
 
 /* Automatically fills name with current selected item name on mkdir */
 int auto_fill_mkdir_name = 1;
@@ -226,8 +214,8 @@ static const struct
 } layout [] = {
     { "equal_split", &equal_split },
     { "first_panel_size", &first_panel_size },
-    { "message_visible", &message_visible },
-    { "keybar_visible", &keybar_visible },
+    { "message_visible", &mc_global.message_visible },
+    { "keybar_visible", &mc_global.keybar_visible },
     { "xterm_title", &xterm_title },
     { "output_lines", &output_lines },
     { "command_prompt", &command_prompt },
@@ -252,15 +240,15 @@ static const struct
     { "confirm_delete", &confirm_delete },
     { "confirm_overwrite", &confirm_overwrite },
     { "confirm_execute", &confirm_execute },
-    { "confirm_history_cleanup", &confirm_history_cleanup },
+    { "confirm_history_cleanup", &mc_global.widget.confirm_history_cleanup },
     { "confirm_exit", &confirm_exit },
     { "confirm_directory_hotlist_delete", &confirm_directory_hotlist_delete },
     { "safe_delete", &safe_delete },
     { "mouse_repeat_rate", &mou_auto_repeat },
     { "double_click_speed", &double_click_speed },
 #ifndef HAVE_CHARSET
-    { "eight_bit_clean", &eight_bit_clean },
-    { "full_eight_bits", &full_eight_bits },
+    { "eight_bit_clean", &mc_global.eight_bit_clean },
+    { "full_eight_bits", &mc_global.full_eight_bits },
 #endif /* !HAVE_CHARSET */
     { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
     { "confirm_view_dir", &confirm_view_dir },
@@ -271,8 +259,8 @@ static const struct
     { "wrap_mode",  &mcview_global_wrap_mode},
     { "old_esc_mode", &old_esc_mode },
     { "old_esc_mode_timeout", &old_esc_mode_timeout },
-    { "cd_symlinks", &cd_symlinks },
-    { "show_all_if_ambiguous", &show_all_if_ambiguous },
+    { "cd_symlinks", &mc_global.vfs.cd_symlinks },
+    { "show_all_if_ambiguous", &mc_global.widget.show_all_if_ambiguous },
     { "max_dirt_limit", &mcview_max_dirt_limit },
     { "use_file_to_guess_type", &use_file_to_check_type },
     { "alternate_plus_minus", &alternate_plus_minus },
@@ -418,9 +406,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (ret);
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_sysconfig_dir, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_global.sysconfig_dir, subdir, lc_basename, NULL);
     else
-        ret = g_build_filename (mc_sysconfig_dir, lc_basename, NULL);
+        ret = g_build_filename (mc_global.sysconfig_dir, lc_basename, NULL);
 
     if (exist_file (ret))
     {
@@ -430,9 +418,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (ret);
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_share_data_dir, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_global.share_data_dir, subdir, lc_basename, NULL);
     else
-        ret = g_build_filename (mc_share_data_dir, lc_basename, NULL);
+        ret = g_build_filename (mc_global.share_data_dir, lc_basename, NULL);
 
     g_free (lc_basename);
 
@@ -677,13 +665,13 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     if (!load_from_file)
         return keymap_config;
 
-    /* 1) /usr/share/mc (mc_share_data_dir) */
-    fname = g_build_filename (mc_share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
+    /* 1) /usr/share/mc (mc_global.share_data_dir) */
+    fname = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
-    /* 2) /etc/mc (mc_sysconfig_dir) */
-    fname = g_build_filename (mc_sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
+    /* 2) /etc/mc (mc_global.sysconfig_dir) */
+    fname = g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
@@ -769,7 +757,7 @@ save_panel_types (void)
 {
     panel_view_mode_t type;
 
-    if (mc_run_mode != MC_RUN_FULL)
+    if (mc_global.mc_run_mode != MC_RUN_FULL)
         return;
 
     type = get_display_type (0);
@@ -812,7 +800,7 @@ setup_init (void)
     profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
     if (!exist_file (profile))
     {
-        inifile = concat_dir_and_file (mc_sysconfig_dir, "mc.ini");
+        inifile = concat_dir_and_file (mc_global.sysconfig_dir, "mc.ini");
         if (exist_file (inifile))
         {
             g_free (profile);
@@ -821,7 +809,7 @@ setup_init (void)
         else
         {
             g_free (inifile);
-            inifile = concat_dir_and_file (mc_share_data_dir, "mc.ini");
+            inifile = concat_dir_and_file (mc_global.share_data_dir, "mc.ini");
             if (exist_file (inifile))
             {
                 g_free (profile);
@@ -855,11 +843,13 @@ load_setup (void)
 
     /* mc.lib is common for all users, but has priority lower than
        ${XDG_CONFIG_HOME}/mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = g_build_filename (mc_sysconfig_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
+    global_profile_name =
+        g_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     if (!exist_file (global_profile_name))
     {
         g_free (global_profile_name);
-        global_profile_name = g_build_filename (mc_share_data_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
+        global_profile_name =
+            g_build_filename (mc_global.share_data_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
     panels_profile_name = g_build_filename (mc_config_get_cache_path (), MC_PANELS_FILE, NULL);
@@ -931,9 +921,12 @@ load_setup (void)
 #endif /* ENABLE_VFS_FTP */
 
     /* The default color and the terminal dependent color */
-    setup_color_string = mc_config_get_string (mc_main_config, "Colors", "base_color", "");
-    term_color_string = mc_config_get_string (mc_main_config, "Colors", getenv ("TERM"), "");
-    color_terminal_string = mc_config_get_string (mc_main_config, "Colors", "color_terminals", "");
+    mc_global.tty.setup_color_string =
+        mc_config_get_string (mc_main_config, "Colors", "base_color", "");
+    mc_global.tty.term_color_string =
+        mc_config_get_string (mc_main_config, "Colors", getenv ("TERM"), "");
+    mc_global.tty.color_terminal_string =
+        mc_config_get_string (mc_main_config, "Colors", "color_terminals", "");
 
     /* Load the directory history */
     /*    directory_history_load (); */
@@ -945,16 +938,16 @@ load_setup (void)
         buffer = mc_config_get_string (mc_main_config, "Misc", "display_codepage", "");
         if (buffer[0] != '\0')
         {
-            display_codepage = get_codepage_index (buffer);
-            cp_display = get_codepage_id (display_codepage);
+            mc_global.display_codepage = get_codepage_index (buffer);
+            cp_display = get_codepage_id (mc_global.display_codepage);
         }
         g_free (buffer);
         buffer = mc_config_get_string (mc_main_config, "Misc", "source_codepage", "");
         if (buffer[0] != '\0')
         {
             default_source_codepage = get_codepage_index (buffer);
-            source_codepage = default_source_codepage;  /* May be source_codepage doesn't need this */
-            cp_source = get_codepage_id (source_codepage);
+            mc_global.source_codepage = default_source_codepage;        /* May be source_codepage doesn't need this */
+            cp_source = get_codepage_id (mc_global.source_codepage);
         }
         g_free (buffer);
     }
@@ -963,10 +956,10 @@ load_setup (void)
     if ((autodetect_codeset[0] != '\0') && (strcmp (autodetect_codeset, "off") != 0))
         is_autodetect_codeset_enabled = TRUE;
 
-    g_free (init_translation_table (source_codepage, display_codepage));
-    buffer = (char *) get_codepage_id (display_codepage);
+    g_free (init_translation_table (mc_global.source_codepage, mc_global.display_codepage));
+    buffer = (char *) get_codepage_id (mc_global.display_codepage);
     if (buffer != NULL)
-        utf8_display = str_isutf8 (buffer);
+        mc_global.utf8_display = str_isutf8 (buffer);
 #endif /* HAVE_CHARSET */
 
     clipboard_store_path = mc_config_get_string (mc_main_config, "Misc", "clipboard_store", "");
@@ -1005,7 +998,7 @@ save_setup (gboolean save_options, gboolean save_panel_options)
 
 #ifdef HAVE_CHARSET
         mc_config_set_string (mc_main_config, "Misc", "display_codepage",
-                              get_codepage_id (display_codepage));
+                              get_codepage_id (mc_global.display_codepage));
         mc_config_set_string (mc_main_config, "Misc", "source_codepage",
                               get_codepage_id (default_source_codepage));
         mc_config_set_string (mc_main_config, "Misc", "autodetect_codeset", autodetect_codeset);
@@ -1035,9 +1028,9 @@ done_setup (void)
     g_free (clipboard_paste_path);
     g_free (profile_name);
     g_free (global_profile_name);
-    g_free (color_terminal_string);
-    g_free (term_color_string);
-    g_free (setup_color_string);
+    g_free (mc_global.tty.color_terminal_string);
+    g_free (mc_global.tty.term_color_string);
+    g_free (mc_global.tty.setup_color_string);
     g_free (panels_profile_name);
     mc_config_deinit (mc_main_config);
     mc_config_deinit (mc_panels_config);
@@ -1327,7 +1320,8 @@ panel_save_setup (struct WPanel *panel, const char *section)
     size_t i;
 
     mc_config_set_int (mc_panels_config, section, "reverse", panel->sort_info.reverse);
-    mc_config_set_int (mc_panels_config, section, "case_sensitive", panel->sort_info.case_sensitive);
+    mc_config_set_int (mc_panels_config, section, "case_sensitive",
+                       panel->sort_info.case_sensitive);
     mc_config_set_int (mc_panels_config, section, "exec_first", panel->sort_info.exec_first);
 
     mc_config_set_string (mc_panels_config, section, "sort_order", panel->sort_info.sort_field->id);

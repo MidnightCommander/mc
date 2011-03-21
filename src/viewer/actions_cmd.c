@@ -57,6 +57,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/charsets.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/filemanager/layout.h"
 #include "src/filemanager/cmd.h"
@@ -64,9 +65,7 @@
 
 #include "src/history.h"
 #include "src/execute.h"
-#include "src/help.h"
 #include "src/keybind-defaults.h"
-#include "src/main.h"           /* midnight_shutdown */
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -250,7 +249,11 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     switch (command)
     {
     case CK_Help:
-        interactive_display (NULL, "[Internal File Viewer]");
+        {
+            ev_help_t event_data = { NULL, "[Internal File Viewer]" };
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+            do_refresh ();
+        }
         break;
     case CK_WrapMode:
         /* Toggle between wrapped and unwrapped view */
@@ -494,7 +497,7 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         {
             delete_hook (&select_file_hook, mcview_hook);
 
-            if (midnight_shutdown)
+            if (mc_global.widget.midnight_shutdown)
                 mcview_ok_to_quit (view);
         }
         mcview_done (view);
@@ -525,7 +528,7 @@ mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
 
     case DLG_VALIDATE:
         view = (mcview_t *) find_widget_type (h, mcview_callback);
-        h->state = DLG_ACTIVE; /* don't stop the dialog before final decision */
+        h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
         if (mcview_ok_to_quit (view))
             h->state = DLG_CLOSED;
         else

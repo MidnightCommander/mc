@@ -36,15 +36,12 @@
 #include "lib/util.h"           /* is_printable() */
 #include "tty.h"                /* tty_gotoyx, tty_print_char */
 #include "win.h"
-#include "src/consaver/cons.saver.h"    /* console_flag */
 
 /*** global variables ****************************************************************************/
 
 /* This flag is set by xterm detection routine in function main() */
 /* It is used by function view_other_cmd() */
 int xterm_flag = 0;
-
-extern int keybar_visible;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -122,8 +119,8 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     unsigned char *k;
     int bytes, i, j, cols = 0;
 
-    y1 += (keybar_visible != 0);        /* i don't knwo why we need this - paul */
-    y2 += (keybar_visible != 0);
+    y1 += (mc_global.keybar_visible != 0);     /* i don't knwo why we need this - paul */
+    y2 += (mc_global.keybar_visible != 0);
     while (anything_ready ())
         tty_lowlevel_getch ();
 
@@ -174,7 +171,7 @@ look_for_rxvt_extensions (void)
     }
 
     if (rxvt_extensions)
-        console_flag = 4;
+        mc_global.tty.console_flag = '\004';
 
     return rxvt_extensions;
 }

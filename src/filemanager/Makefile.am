@@ -8,7 +8,6 @@ libmcfilemanager_la_SOURCES = \
 	chown.c chown.h \
 	cmd.c cmd.h \
 	command.c command.h \
-	complete.c \
 	dir.c dir.h \
 	ext.c ext.h \
 	file.c file.h \

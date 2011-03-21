@@ -37,7 +37,7 @@
 #include "lib/global.h"
 #include "lib/fs.h"
 #include "lib/util.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 
 /*** global variables ****************************************************************************/
 

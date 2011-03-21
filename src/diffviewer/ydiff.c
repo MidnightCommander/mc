@@ -38,19 +38,18 @@
 #include "lib/tty/color.h"
 #include "lib/tty/key.h"
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
-#include "lib/vfs/mc-vfs/vfs.h" /* mc_opendir, mc_readdir, mc_closedir, */
+#include "lib/vfs/vfs.h"        /* mc_opendir, mc_readdir, mc_closedir, */
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/charsets.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/filemanager/cmd.h"
 #include "src/filemanager/midnight.h"   /* Needed for current_panel and other_panel */
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
 #include "src/keybind-defaults.h"
-#include "src/help.h"
 #include "src/history.h"
-#include "src/main.h"           /* mc_run_mode, midnight_shutdown */
 #include "src/selcodepage.h"
 
 #include "ydiff.h"
@@ -119,7 +118,9 @@ dview_set_codeset (WDiff * dview)
     const char *encoding_id = NULL;
 
     dview->utf8 = TRUE;
-    encoding_id = get_codepage_id (source_codepage >= 0 ? source_codepage : display_codepage);
+    encoding_id =
+        get_codepage_id (mc_global.source_codepage >=
+                         0 ? mc_global.source_codepage : mc_global.display_codepage);
     if (encoding_id != NULL)
     {
         GIConv conv;
@@ -2582,7 +2583,7 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                             {
                                 tty_setcolor (att[cnt] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
 #ifdef HAVE_CHARSET
-                                if (utf8_display)
+                                if (mc_global.utf8_display)
                                 {
                                     if (!dview->utf8)
                                     {
@@ -2660,7 +2661,7 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
             if (ch_res)
             {
 #ifdef HAVE_CHARSET
-                if (utf8_display)
+                if (mc_global.utf8_display)
                 {
                     if (!dview->utf8)
                     {
@@ -2943,13 +2944,13 @@ dview_ok_to_exit (WDiff * dview)
     if (!dview->merged)
         return res;
 
-    act = query_dialog (_("Quit"), !midnight_shutdown ?
+    act = query_dialog (_("Quit"), !mc_global.widget.midnight_shutdown ?
                         _("File was modified. Save with exit?") :
                         _("Midnight Commander is being shut down.\nSave modified file?"),
                         D_NORMAL, 2, _("&Yes"), _("&No"));
 
     /* Esc is No */
-    if (midnight_shutdown || (act == -1))
+    if (mc_global.widget.midnight_shutdown || (act == -1))
         act = 1;
 
     switch (act)
@@ -2981,7 +2982,10 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     switch (command)
     {
     case CK_Help:
-        interactive_display (NULL, "[Diff Viewer]");
+        {
+            ev_help_t event_data = { NULL, "[Diff Viewer]" };
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+        }
         break;
     case CK_ShowSymbols:
         dview->display_symbols ^= 1;
@@ -3235,7 +3239,7 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
 
     case DLG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
-        h->state = DLG_ACTIVE; /* don't stop the dialog before final decision */
+        h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
         if (dview_ok_to_exit (dview))
             h->state = DLG_CLOSED;
         return MSG_HANDLED;
@@ -3357,7 +3361,7 @@ dview_diff_cmd (void)
     int is_dir0 = 0;
     int is_dir1 = 0;
 
-    if (mc_run_mode == MC_RUN_FULL)
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
     {
         const WPanel *panel0 = current_panel;
         const WPanel *panel1 = other_panel;

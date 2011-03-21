@@ -1,8 +1,24 @@
-SUBDIRS = filehighlight mcconfig search skin tty vfs strutil widget
+SUBDIRS = event filehighlight mcconfig search skin tty vfs strutil widget .
 
-noinst_LTLIBRARIES = libmc.la
+if HAVE_TESTS
+    SUBDIRS += tests
+endif
+
+if ENABLE_MCLIB
+    LIB_VERSION=`echo $(LIBMC_VERSION) | \
+	tr '.' ' '| \
+	while read v1 v2 v3; do echo $$v2':'$$v3':'$$v1; done`
+
+    libmc_la_LDFLAGS=-no-undefined -version-info $(LIB_VERSION) -release $(LIBMC_RELEASE)
+
+    lib_LTLIBRARIES = libmc.la
+else
+    noinst_LTLIBRARIES = libmc.la
+endif
+
 
 SUBLIB_includes = \
+	event.h event-types.h \
 	filehighlight.h \
 	mcconfig.h \
 	search.h \
@@ -12,7 +28,7 @@ SUBLIB_includes = \
 	widget.h
 
 SRC_mc_utils = \
-	utilunix.c \
+	utilunix.c utilunix.h \
 	unixcompat.h \
 	util.c util.h
 
@@ -24,7 +40,7 @@ libmc_la_SOURCES = \
 	fs.h \
 	hook.c hook.h \
 	glibcompat.c glibcompat.h \
-	global.h \
+	global.c global.h \
 	keybind.c keybind.h \
 	lock.c lock.h \
 	timefmt.c timefmt.h
@@ -40,11 +56,23 @@ endif
 libmc_la_CFLAGS= $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
 libmc_la_LIBADD = \
+	event/libmcevent.la \
 	filehighlight/libmcfilehighlight.la \
 	mcconfig/libmcconfig.la \
 	search/libsearch.la \
 	strutil/libmcstrutil.la \
 	skin/libmcskin.la \
 	tty/libmctty.la \
-	vfs/mc-vfs/libvfs-mc.la \
+	vfs/libmcvfs.la \
 	widget/libmcwidget.la
+
+libmc_la_LIBADD += $(MCLIBS) $(SLANGLIB)
+
+if HAVE_GMODULE
+    libmc_la_LIBADD += $(GMODULE_LIBS)
+else
+    libmc_la_LIBADD += $(GLIB_LIBS)
+endif
+
+libmc_la_LIBADD += $(PCRE_LIBS) $(LIBICONV) $(INTLLIBS)
+

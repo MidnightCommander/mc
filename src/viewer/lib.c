@@ -41,7 +41,7 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* save_file_position() */
 #include "lib/lock.h"           /* unlock_file() */
@@ -149,7 +149,7 @@ mcview_ok_to_quit (mcview_t * view)
     if (view->change_list == NULL)
         return TRUE;
 
-    if (!midnight_shutdown)
+    if (!mc_global.widget.midnight_shutdown)
     {
         query_set_sel (2);
         r = query_dialog (_("Quit"),
@@ -169,7 +169,7 @@ mcview_ok_to_quit (mcview_t * view)
     switch (r)
     {
     case 0:                    /* Yes */
-        return mcview_hexedit_save_changes (view) || midnight_shutdown;
+        return mcview_hexedit_save_changes (view) || mc_global.widget.midnight_shutdown;
     case 1:                    /* No */
         mcview_hexedit_free_change_list (view);
         return TRUE;
@@ -290,7 +290,7 @@ mcview_set_codeset (mcview_t * view)
     const char *cp_id = NULL;
 
     view->utf8 = TRUE;
-    cp_id = get_codepage_id (source_codepage >= 0 ? source_codepage : display_codepage);
+    cp_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage : mc_global.display_codepage);
     if (cp_id != NULL)
     {
         GIConv conv;

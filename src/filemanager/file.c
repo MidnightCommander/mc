@@ -62,11 +62,11 @@
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 
 #include "src/setup.h"
-#include "src/background.h"     /* we_are_background */
+#include "src/background.h"
 
 #include "layout.h"             /* rotate_dash() */
 
@@ -469,13 +469,13 @@ warn_same_file (const char *fmt, const char *a, const char *b)
     union
     {
         void *p;
-        FileProgressStatus (*f) (enum OperationMode, const char *fmt,
-                                 const char *a, const char *b);
+          FileProgressStatus (*f) (enum OperationMode, const char *fmt,
+                                   const char *a, const char *b);
     } pntr;
 
     pntr.f = real_warn_same_file;
 
-    if (we_are_background)
+    if (mc_global.we_are_background)
         return parent_call (pntr.p, NULL, 3, strlen (fmt), fmt, strlen (a), a, strlen (b), b);
 #endif
     return real_warn_same_file (Foreground, fmt, a, b);
@@ -1160,7 +1160,7 @@ do_file_error (const char *str)
     } pntr;
     pntr.f = real_do_file_error;
 
-    if (we_are_background)
+    if (mc_global.we_are_background)
         return parent_call (pntr.p, NULL, 1, strlen (str), str);
     else
         return real_do_file_error (Foreground, str);
@@ -1178,7 +1178,7 @@ query_recursive (FileOpContext * ctx, const char *s)
     } pntr;
     pntr.f = real_query_recursive;
 
-    if (we_are_background)
+    if (mc_global.we_are_background)
         return parent_call (pntr.p, ctx, 1, strlen (s), s);
     else
         return real_query_recursive (ctx, Foreground, s);
@@ -1198,7 +1198,7 @@ query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
     } pntr;
     pntr.f = file_progress_real_query_replace;
 
-    if (we_are_background)
+    if (mc_global.we_are_background)
         return parent_call (pntr.p, ctx, 3, strlen (destname), destname,
                             sizeof (struct stat), _s_stat, sizeof (struct stat), _d_stat);
     else
@@ -2639,7 +2639,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
 #ifdef WITH_BACKGROUND
     /* Let our parent know we are saying bye bye */
-    if (we_are_background)
+    if (mc_global.we_are_background)
     {
         int cur_pid = getpid ();
         /* Send pid to parent with child context, it is fork and

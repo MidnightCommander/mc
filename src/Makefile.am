@@ -1,4 +1,4 @@
-SUBDIRS = filemanager man2hlp viewer
+SUBDIRS = filemanager man2hlp vfs viewer
 
 if USE_EDIT
 SUBDIRS += editor
@@ -8,10 +8,7 @@ if USE_DIFF
 SUBDIRS += diffviewer
 endif
 
-AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
-
+AM_CPPFLAGS =  -DLOCALEDIR=\""$(localedir)"\"
 
 if CONS_SAVER
 SUBDIRS += consaver
@@ -34,25 +31,16 @@ DIFFLIB = diffviewer/libdiffviewer.la
 endif
 
 mc_LDADD = \
+	vfs/libmc-vfs.la \
 	viewer/libmcviewer.la \
 	filemanager/libmcfilemanager.la \
 	$(DIFFLIB) $(EDITLIB) \
-	../lib/libmc.la
+	$(top_builddir)/lib/libmc.la
 
 if ENABLE_VFS_SMB
 # this is a hack for linking with own samba library in simple way
-mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
+mc_LDADD += vfs/smbfs/helpers/libsamba.a
 endif
-
-mc_LDADD += $(MCLIBS) $(SLANGLIB)
-
-if HAVE_GMODULE
-mc_LDADD += $(GMODULE_LIBS)
-else
-mc_LDADD += $(GLIB_LIBS)
-endif
-
-mc_LDADD += $(PCRE_LIBS) $(LIBICONV) $(INTLLIBS)
 
 SRC_mc_conssaver = \
 	cons.handler.c consaver/cons.saver.h
@@ -62,6 +50,7 @@ mc_SOURCES = \
 	args.c args.h \
 	background.c background.h \
 	clipboard.c clipboard.h \
+	events_init.c events_init.h \
 	execute.c execute.h \
 	help.c help.h \
 	history.h \
@@ -70,7 +59,8 @@ mc_SOURCES = \
 	main.c main.h \
 	setup.c setup.h \
 	subshell.c subshell.h \
-	textconf.c textconf.h
+	textconf.c textconf.h \
+	util.c util.h
 
 if CHARSET
     mc_SOURCES += selcodepage.c selcodepage.h

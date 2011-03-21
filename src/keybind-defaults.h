@@ -40,6 +40,7 @@ extern const global_keymap_t *input_map;
 extern const global_keymap_t *listbox_map;
 extern const global_keymap_t *tree_map;
 extern const global_keymap_t *help_map;
+
 #ifdef USE_INTERNAL_EDIT
 extern const global_keymap_t *editor_map;
 extern const global_keymap_t *editor_x_map;
