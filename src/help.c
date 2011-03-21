@@ -604,17 +604,23 @@ help_show (Dlg_head * h, const char *paint_start)
 static int
 help_event (Gpm_Event * event, void *vp)
 {
-    Widget *w = vp;
+    Widget *w = (Widget *) vp;
     GSList *current_area;
+    Gpm_Event local;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
 
     if ((event->type & GPM_UP) == 0)
-        return 0;
+        return MOU_NORMAL;
+
+    local = mouse_get_local (event, w);
 
     /* The event is relative to the dialog window, adjust it: */
-    event->x -= 2;
-    event->y -= 2;
+    local.x -= 2;
+    local.y -= 2;
 
-    if (event->buttons & GPM_B_RIGHT)
+    if ((local.buttons & GPM_B_RIGHT) != 0)
     {
         currentpoint = history[history_ptr].page;
         selected_item = history[history_ptr].link;
@@ -623,24 +629,26 @@ help_event (Gpm_Event * event, void *vp)
             history_ptr = HISTORY_SIZE - 1;
 
         help_callback (w->owner, NULL, DLG_DRAW, 0, NULL);
-        return 0;
+        return MOU_NORMAL;
     }
 
     /* Test whether the mouse click is inside one of the link areas */
     for (current_area = link_area; current_area != NULL; current_area = g_slist_next (current_area))
     {
         Link_Area *la = (Link_Area *) current_area->data;
+
         /* Test one line link area */
-        if (event->y == la->y1 && event->x >= la->x1 && event->y == la->y2 && event->x <= la->x2)
+        if (local.y == la->y1 && local.x >= la->x1 && local.y == la->y2 && local.x <= la->x2)
             break;
+
         /* Test two line link area */
         if (la->y1 + 1 == la->y2)
         {
             /* The first line */
-            if (event->y == la->y1 && event->x >= la->x1)
+            if (local.y == la->y1 && local.x >= la->x1)
                 break;
             /* The second line */
-            if (event->y == la->y2 && event->x <= la->x2)
+            if (local.y == la->y2 && local.x <= la->x2)
                 break;
         }
         /* Mouse will not work with link areas of more than two lines */
@@ -658,11 +666,11 @@ help_event (Gpm_Event * event, void *vp)
         currentpoint = help_follow_link (currentpoint, la->link_name);
         selected_item = NULL;
     }
-    else if (event->y < 0)
+    else if (local.y < 0)
         move_backward (help_lines - 1);
-    else if (event->y >= help_lines)
+    else if (local.y >= help_lines)
         move_forward (help_lines - 1);
-    else if (event->y < help_lines / 2)
+    else if (local.y < help_lines / 2)
         move_backward (1);
     else
         move_forward (1);
@@ -670,7 +678,7 @@ help_event (Gpm_Event * event, void *vp)
     /* Show the new node */
     help_callback (w->owner, NULL, DLG_DRAW, 0, NULL);
 
-    return 0;
+    return MOU_NORMAL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

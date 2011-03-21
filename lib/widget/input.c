@@ -897,6 +897,10 @@ static int
 input_event (Gpm_Event * event, void *data)
 {
     WInput *in = (WInput *) data;
+    Widget *w = (Widget *) data;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
 
     if ((event->type & GPM_DOWN) != 0)
     {
@@ -906,19 +910,25 @@ input_event (Gpm_Event * event, void *data)
 
     if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
     {
-        dlg_select_widget (in);
+        Gpm_Event local;
 
-        if (event->x >= in->field_width - HISTORY_BUTTON_WIDTH + 1
+        local = mouse_get_local (event, w);
+
+        dlg_select_widget (w);
+
+        if (local.x >= in->field_width - HISTORY_BUTTON_WIDTH + 1
             && should_show_history_button (in))
             do_show_hist (in);
         else
         {
             in->point = str_length (in->buffer);
-            if (event->x + in->term_first_shown - 1 < str_term_width1 (in->buffer))
-                in->point = str_column_to_pos (in->buffer, event->x + in->term_first_shown - 1);
+            if (local.x + in->term_first_shown - 1 < str_term_width1 (in->buffer))
+                in->point = str_column_to_pos (in->buffer, local.x + in->term_first_shown - 1);
         }
+
         input_update (in, TRUE);
     }
+
     /* A lone up mustn't do anything */
     if (in->highlight && (event->type & (GPM_UP | GPM_DRAG)) != 0)
         return MOU_NORMAL;

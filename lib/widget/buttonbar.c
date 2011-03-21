@@ -218,16 +218,23 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 buttonbar_event (Gpm_Event * event, void *data)
 {
-    WButtonBar *bb = data;
-    int button;
+    Widget *w = (Widget *) data;
 
-    if (!(event->type & GPM_UP))
-        return MOU_NORMAL;
-    if (event->y == 2)
-        return MOU_NORMAL;
-    button = buttonbar_get_button_by_x_coord (bb, event->x - 1);
-    if (button >= 0)
-        buttonbar_call (bb, button);
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
+
+    if ((event->type & GPM_UP) != 0)
+    {
+        WButtonBar *bb = (WButtonBar *) data;
+        Gpm_Event local;
+        int button;
+
+        local = mouse_get_local (event, w);
+        button = buttonbar_get_button_by_x_coord (bb, local.x - 1);
+        if (button >= 0)
+            buttonbar_call (bb, button);
+    }
+
     return MOU_NORMAL;
 }
 
