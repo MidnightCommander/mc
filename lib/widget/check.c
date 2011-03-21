@@ -108,22 +108,22 @@ check_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 check_event (Gpm_Event * event, void *data)
 {
-    WCheck *c = data;
-    Widget *w = data;
+    Widget *w = (Widget *) data;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
 
     if ((event->type & (GPM_DOWN | GPM_UP)) != 0)
     {
-        Dlg_head *h = c->widget.owner;
-
-        dlg_select_widget (c);
-        if (event->type & GPM_UP)
+        dlg_select_widget (w);
+        if ((event->type & GPM_UP) != 0)
         {
             check_callback (w, WIDGET_KEY, ' ');
             check_callback (w, WIDGET_FOCUS, 0);
-            h->callback (h, w, DLG_POST_KEY, ' ', NULL);
-            return MOU_NORMAL;
+            w->owner->callback (w->owner, w, DLG_POST_KEY, ' ', NULL);
         }
     }
+
     return MOU_NORMAL;
 }
 

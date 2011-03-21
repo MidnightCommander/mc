@@ -357,12 +357,12 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 {
     GList *item;
     GList *starting_widget = h->current;
-    Gpm_Event new_event;
     int x = event->x;
     int y = event->y;
 
     /* close the dialog by mouse click out of dialog area */
-    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0) /* left click */
+    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0)
+        && ((event->type & GPM_DOWN) != 0) /* left click */
         && !((x > h->x) && (x <= h->x + h->cols) && (y > h->y) && (y <= h->y + h->lines)))
     {
         h->ret_value = B_CANCEL;
@@ -380,21 +380,19 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
         else
             item = dlg_widget_next (h, item);
 
-        if (((widget->options & W_DISABLED) == 0)
-            && (x > widget->x) && (x <= widget->x + widget->cols)
-            && (y > widget->y) && (y <= widget->y + widget->lines))
+        if ((widget->options & W_DISABLED) == 0 && widget->mouse != NULL)
         {
-            new_event = *event;
-            new_event.x -= widget->x;
-            new_event.y -= widget->y;
+            /* put global cursor position to the widget */
+            int ret;
 
-            if (widget->mouse != NULL)
-                return widget->mouse (&new_event, widget);
+            ret = widget->mouse (event, widget);
+            if (ret != MOU_UNHANDLED)
+                return ret;
         }
     }
     while (item != starting_widget);
 
-    return MOU_NORMAL;
+    return MOU_UNHANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -775,7 +773,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
     new_d->fullscreen = (new_d->x == 0 && new_d->y == 0
                          && new_d->cols == COLS && new_d->lines == LINES);
 
-    new_d->mouse_status = MOU_NORMAL;
+    new_d->mouse_status = MOU_UNHANDLED;
 
     /* Strip existing spaces, add one space before and after the title */
     if (title != NULL)

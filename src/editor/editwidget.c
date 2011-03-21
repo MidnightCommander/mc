@@ -118,86 +118,88 @@ static int
 edit_event (Gpm_Event * event, void *data)
 {
     WEdit *edit = (WEdit *) data;
+    Widget *w = (Widget *) data;
+    Gpm_Event local;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
 
     /* Unknown event type */
-    if (!(event->type & (GPM_DOWN | GPM_DRAG | GPM_UP)))
+    if ((event->type & (GPM_DOWN | GPM_DRAG | GPM_UP)) == 0)
         return MOU_NORMAL;
 
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
 
-    /* Outside editor window */
-    if (event->y < 1 || event->x < 1
-        || event->x > edit->widget.cols || event->y > edit->widget.lines)
-        return MOU_NORMAL;
+    local = mouse_get_local (event, w);
 
     /* Double click */
-    if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
+    if ((local.type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
     {
         edit_mark_current_word_cmd (edit);
         goto update;
     }
 #if 0
     /* Triple click */
-    if ((event->type & (GPM_TRIPLE | GPM_UP)) == (GPM_UP | GPM_TRIPLE))
+    if ((local.type & (GPM_TRIPLE | GPM_UP)) == (GPM_UP | GPM_TRIPLE))
     {
         edit_mark_current_line_cmd (edit);
         goto update;
     }
 #endif
     /* Wheel events */
-    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN))
+    if ((local.buttons & GPM_B_UP) != 0 && (local.type & GPM_DOWN) != 0)
     {
         edit_move_up (edit, 2, 1);
         goto update;
     }
-    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN))
+    if ((local.buttons & GPM_B_DOWN) != 0 && (local.type & GPM_DOWN) != 0)
     {
         edit_move_down (edit, 2, 1);
         goto update;
     }
 
     /* A lone up mustn't do anything */
-    if (edit->mark2 != -1 && event->type & (GPM_UP | GPM_DRAG))
+    if (edit->mark2 != -1 && (local.type & (GPM_UP | GPM_DRAG)) != 0)
         return MOU_NORMAL;
 
-    if (event->type & (GPM_DOWN | GPM_UP))
+    if ((local.type & (GPM_DOWN | GPM_UP)) != 0)
         edit_push_key_press (edit);
 
     if (!option_cursor_beyond_eol)
-        edit->prev_col = event->x - edit->start_col - option_line_state_width - 1;
+        edit->prev_col = local.x - edit->start_col - option_line_state_width - 1;
     else
     {
         long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
                                             edit_eol (edit, edit->curs1));
 
-        if (event->x > line_len)
+        if (local.x > line_len)
         {
-            edit->over_col = event->x - line_len - edit->start_col - option_line_state_width - 1;
+            edit->over_col = local.x - line_len - edit->start_col - option_line_state_width - 1;
             edit->prev_col = line_len;
         }
         else
         {
             edit->over_col = 0;
-            edit->prev_col = event->x - option_line_state_width - edit->start_col - 1;
+            edit->prev_col = local.x - option_line_state_width - edit->start_col - 1;
         }
     }
 
-    --event->y;
-    if (event->y > edit->curs_row)
-        edit_move_down (edit, event->y - edit->curs_row, 0);
-    else if (event->y < edit->curs_row)
-        edit_move_up (edit, edit->curs_row - event->y, 0);
+    --local.y;
+    if (local.y > edit->curs_row)
+        edit_move_down (edit, local.y - edit->curs_row, 0);
+    else if (local.y < edit->curs_row)
+        edit_move_up (edit, edit->curs_row - local.y, 0);
     else
         edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
 
-    if (event->type & GPM_DOWN)
+    if ((local.type & GPM_DOWN) != 0)
     {
         edit_mark_cmd (edit, 1);        /* reset */
         edit->highlight = 0;
     }
 
-    if (!(event->type & GPM_DRAG))
+    if ((local.type & GPM_DRAG) == 0)
         edit_mark_cmd (edit, 0);
 
   update:

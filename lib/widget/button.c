@@ -182,20 +182,21 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 button_event (Gpm_Event * event, void *data)
 {
-    WButton *b = data;
+    Widget *w = (Widget *) data;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
 
     if ((event->type & (GPM_DOWN | GPM_UP)) != 0)
     {
-        Dlg_head *h = b->widget.owner;
-
-        dlg_select_widget (b);
+        dlg_select_widget (w);
         if ((event->type & GPM_UP) != 0)
         {
-            button_callback (&b->widget, WIDGET_KEY, ' ');
-            h->callback (h, &b->widget, DLG_POST_KEY, ' ', NULL);
-            return MOU_NORMAL;
+            button_callback (w, WIDGET_KEY, ' ');
+            w->owner->callback (w->owner, w, DLG_POST_KEY, ' ', NULL);
         }
     }
+
     return MOU_NORMAL;
 }
 

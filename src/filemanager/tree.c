@@ -580,10 +580,10 @@ tree_move_to_bottom (WTree * tree)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Handle mouse click */
 
+/** Handle mouse click */
 static void
-tree_event (WTree * tree, int y)
+tree_mouse_click (WTree * tree, int y)
 {
     if (tree->tree_shown[y])
     {
@@ -630,46 +630,49 @@ maybe_chdir (WTree * tree)
 /** Mouse callback */
 
 static int
-event_callback (Gpm_Event * event, void *data)
+tree_event (Gpm_Event * event, void *data)
 {
-    WTree *tree = data;
+    WTree *tree = (WTree *) data;
+    Widget *w = (Widget *) data;
+    Gpm_Event local;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
+
+    local = mouse_get_local (event, w);
 
     /* rest of the upper frame, the menu is invisible - call menu */
-    if (tree->is_panel && (event->type & GPM_DOWN) && event->y == 1 && !menubar_visible)
-    {
-        event->x += tree->widget.x;
+    if (tree->is_panel && (local.type & GPM_DOWN) != 0 && local.y == 1 && !menubar_visible)
         return the_menubar->widget.mouse (event, the_menubar);
-    }
 
-    if (!(event->type & GPM_UP))
+    if ((local.type & GPM_UP) == 0)
         return MOU_NORMAL;
 
     if (tree->is_panel)
-        event->y--;
+        local.y--;
 
-    event->y--;
+    local.y--;
 
     if (!tree->active)
         change_panel ();
 
-    if (event->y < 0)
+    if (local.y < 0)
     {
         tree_move_backward (tree, tlines (tree) - 1);
         show_tree (tree);
     }
-    else if (event->y >= tlines (tree))
+    else if (local.y >= tlines (tree))
     {
         tree_move_forward (tree, tlines (tree) - 1);
         show_tree (tree);
     }
     else
     {
-        tree_event (tree, event->y);
-        if ((event->type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE))
-        {
+        tree_mouse_click (tree, local.y);
+        if ((local.type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE))
             tree_chdir_sel (tree);
-        }
     }
+
     return MOU_NORMAL;
 }
 
@@ -1265,7 +1268,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
     WTree *tree = g_new (WTree, 1);
 
-    init_widget (&tree->widget, y, x, lines, cols, tree_callback, event_callback);
+    init_widget (&tree->widget, y, x, lines, cols, tree_callback, tree_event);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 

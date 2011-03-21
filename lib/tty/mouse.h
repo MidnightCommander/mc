@@ -63,6 +63,7 @@ enum Gpm_Etype
 /* Constants returned from the mouse callback */
 enum
 {
+    MOU_UNHANDLED = 0,
     MOU_NORMAL,
     MOU_REPEAT
 };

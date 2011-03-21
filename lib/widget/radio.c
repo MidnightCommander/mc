@@ -147,22 +147,27 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 radio_event (Gpm_Event * event, void *data)
 {
-    WRadio *r = data;
-    Widget *w = data;
+    Widget *w = (Widget *) data;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
 
     if ((event->type & (GPM_DOWN | GPM_UP)) != 0)
     {
-        Dlg_head *h = r->widget.owner;
+        WRadio *r = (WRadio *) data;
+        Gpm_Event local;
 
-        r->pos = event->y - 1;
-        dlg_select_widget (r);
+        local = mouse_get_local (event, w);
+
+        r->pos = local.y - 1;
+        dlg_select_widget (w);
         if ((event->type & GPM_UP) != 0)
         {
             radio_callback (w, WIDGET_KEY, ' ');
-            h->callback (h, w, DLG_POST_KEY, ' ', NULL);
-            return MOU_NORMAL;
+            w->owner->callback (w->owner, w, DLG_POST_KEY, ' ', NULL);
         }
     }
+
     return MOU_NORMAL;
 }
 
