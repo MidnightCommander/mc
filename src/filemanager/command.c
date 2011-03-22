@@ -58,6 +58,8 @@ WInput *cmdline;
 
 /*** file scope macro definitions ****************************************************************/
 
+#define CD_OPERAND_OFFSET 3
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -297,11 +299,11 @@ command_callback (Widget * w, widget_msg_t msg, int parm)
 
 /* --------------------------------------------------------------------------------------------- */
 /** Execute the cd command on the command line */
-
 void
 do_cd_command (char *orig_cmd)
 {
     int len;
+    int operand_pos = CD_OPERAND_OFFSET;
     const char *cmd;
 
     /* Any final whitespace should be removed here
@@ -318,8 +320,12 @@ do_cd_command (char *orig_cmd)
     }
 
     cmd = orig_cmd;
-    if (cmd[2] == 0)
-        cmd = "cd ";
+    if (cmd[CD_OPERAND_OFFSET - 1] == 0)
+        cmd = "cd "; /* 0..2 => given text, 3 => \0 */
+
+    /* allow any amount of white space in front of the path operand */
+    while (cmd[operand_pos] == ' ' || cmd[operand_pos] == '\t')
+        operand_pos++;
 
     if (get_current_type () == view_tree)
     {
@@ -327,7 +333,7 @@ do_cd_command (char *orig_cmd)
         {
             sync_tree (home_dir);
         }
-        else if (strcmp (cmd + 3, "..") == 0)
+        else if (strcmp (cmd + operand_pos, "..") == 0)
         {
             char *dir = current_panel->cwd;
             len = strlen (dir);
@@ -338,22 +344,22 @@ do_cd_command (char *orig_cmd)
             else
                 sync_tree (PATH_SEP_STR);
         }
-        else if (cmd[3] == PATH_SEP)
+        else if (cmd[operand_pos] == PATH_SEP)
         {
-            sync_tree (cmd + 3);
+            sync_tree (cmd + operand_pos);
         }
         else
         {
             char *old = current_panel->cwd;
             char *new;
-            new = concat_dir_and_file (old, cmd + 3);
+            new = concat_dir_and_file (old, cmd + operand_pos);
             sync_tree (new);
             g_free (new);
         }
     }
-    else if (!examine_cd (&cmd[3]))
+    else if (!examine_cd (&cmd[operand_pos]))
     {
-        char *d = strip_password (g_strdup (&cmd[3]), 1);
+        char *d = strip_password (g_strdup (&cmd[operand_pos]), 1);
         message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d, unix_error_string (errno));
         g_free (d);
         return;
