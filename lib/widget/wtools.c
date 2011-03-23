@@ -237,6 +237,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef WITH_BACKGROUND
 static int
 wtools_parent_call (void *routine, gpointer ctx, int argc, ...)
 {
@@ -265,6 +266,7 @@ wtools_parent_call_string (void *routine, int argc, ...)
     va_end (event_data.ap);
     return event_data.ret.s;
 }
+#endif /* WITH_BACKGROUND */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -441,14 +443,14 @@ char *
 input_dialog_help (const char *header, const char *text, const char *help,
                    const char *history_name, const char *def_text)
 {
-    union
-    {
-        void *p;
-        char *(*f) (const char *, const char *, const char *, const char *, const char *);
-    } func;
 #ifdef WITH_BACKGROUND
     if (mc_global.we_are_background)
     {
+        union
+        {
+            void *p;
+            char *(*f) (const char *, const char *, const char *, const char *, const char *);
+        } func;
         func.f = fg_input_dialog_help;
         return wtools_parent_call_string (func.p, 5,
                                           strlen (header), header, strlen (text),
