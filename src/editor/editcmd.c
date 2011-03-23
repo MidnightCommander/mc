@@ -2,11 +2,12 @@
    Editor high level editing commands
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2011
+   2007, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997
+   Andrew Borodin <aborodin@vmail.ru> 2012
 
    This file is part of the Midnight Commander.
 
@@ -485,18 +486,24 @@ edit_save_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on error */
+/**
+ * Load file content
+ *
+ * @param edit  widget object
+ * @param exp_vpath vfs file path
+ * @return TRUE if file content was successfully loaded, FALSE otherwise
+ */
 
-static int
+static gboolean
 edit_load_file_from_filename (WEdit * edit, const vfs_path_t * exp_vpath)
 {
     int prev_locked = edit->locked;
     vfs_path_t *prev_filename;
-    int ret = 0;
+    gboolean ret = TRUE;
 
     prev_filename = vfs_path_clone (edit->filename_vpath);
     if (!edit_reload (edit, exp_vpath))
-        ret = 1;
+        ret = FALSE;
     else if (prev_locked)
         unlock_file (prev_filename);
 
@@ -2065,23 +2072,21 @@ edit_save_confirm_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on success */
 
-int
+/* returns TRUE on success */
+gboolean
 edit_new_cmd (WEdit * edit)
 {
-    if (edit->modified)
+    if (edit->modified
+        && edit_query_dialog2 (_("Warning"),
+                               _("Current text was modified without a file save.\n"
+                                 "Continue discards these changes"),
+                               _("C&ontinue"), _("&Cancel")) == 1)
     {
-        if (edit_query_dialog2
-            (_("Warning"),
-             _
-             ("Current text was modified without a file save.\nContinue discards these changes"),
-             _("C&ontinue"), _("&Cancel")))
-        {
-            edit->force |= REDRAW_COMPLETELY;
-            return 0;
-        }
+        edit->force |= REDRAW_COMPLETELY;
+        return TRUE;
     }
+
     edit->force |= REDRAW_COMPLETELY;
 
     return edit_renew (edit);   /* if this gives an error, something has really screwed up */
@@ -2089,17 +2094,19 @@ edit_new_cmd (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_load_cmd (WEdit * edit, edit_current_file_t what)
 {
+    gboolean ret = TRUE;
+
     if (edit->modified
-        && (edit_query_dialog2
-            (_("Warning"),
-             _("Current text was modified without a file save.\n"
-               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")) == 1))
+        && edit_query_dialog2 (_("Warning"),
+                               _("Current text was modified without a file save.\n"
+                                 "Continue discards these changes"), _("C&ontinue"),
+                               _("&Cancel")) == 1)
     {
         edit->force |= REDRAW_COMPLETELY;
-        return 0;
+        return TRUE;
     }
 
     switch (what)
@@ -2113,18 +2120,16 @@ edit_load_cmd (WEdit * edit, edit_current_file_t what)
                                        MC_HISTORY_EDIT_LOAD, filename);
             g_free (filename);
 
-            if (exp != NULL)
+            if (exp != NULL && *exp != '\0')
             {
-                if (*exp != '\0')
-                {
-                    vfs_path_t *exp_vpath;
+                vfs_path_t *exp_vpath;
 
-                    exp_vpath = vfs_path_from_str (exp);
-                    edit_load_file_from_filename (edit, exp_vpath);
-                    vfs_path_free (exp_vpath);
-                }
-                g_free (exp);
+                exp_vpath = vfs_path_from_str (exp);
+                ret = edit_load_file_from_filename (edit, exp_vpath);
+                vfs_path_free (exp_vpath);
             }
+
+            g_free (exp);
         }
         break;
 
@@ -2141,7 +2146,7 @@ edit_load_cmd (WEdit * edit, edit_current_file_t what)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-    return 0;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3017,8 +3022,8 @@ edit_save_block_cmd (WEdit * edit)
 
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns TRUE on success */
 
+/** returns TRUE on success */
 gboolean
 edit_insert_file_cmd (WEdit * edit)
 {
@@ -3354,78 +3359,57 @@ edit_begin_end_repeat_cmd (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_load_forward_cmd (WEdit * edit)
 {
-    if (edit->modified)
+    if (edit->modified
+        && edit_query_dialog2 (_("Warning"),
+                               _("Current text was modified without a file save.\n"
+                                 "Continue discards these changes"), _("C&ontinue"),
+                               _("&Cancel")) == 1)
     {
-        if (edit_query_dialog2
-            (_("Warning"),
-             _("Current text was modified without a file save\n"
-               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")))
-        {
-            edit->force |= REDRAW_COMPLETELY;
-            return 0;
-        }
+        edit->force |= REDRAW_COMPLETELY;
+        return TRUE;
     }
-    if (edit_stack_iterator + 1 < MAX_HISTORY_MOVETO)
-    {
-        if (edit_history_moveto[edit_stack_iterator + 1].line < 1)
-        {
-            return 1;
-        }
-        edit_stack_iterator++;
-        if (edit_history_moveto[edit_stack_iterator].filename_vpath)
-        {
-            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
-                              edit_history_moveto[edit_stack_iterator].line);
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else
-    {
-        return 1;
-    }
+
+    if (edit_stack_iterator + 1 >= MAX_HISTORY_MOVETO)
+        return FALSE;
+
+    if (edit_history_moveto[edit_stack_iterator + 1].line < 1)
+        return FALSE;
+
+    edit_stack_iterator++;
+    if (edit_history_moveto[edit_stack_iterator].filename_vpath != NULL)
+        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
+                                 edit_history_moveto[edit_stack_iterator].line);
+
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_load_back_cmd (WEdit * edit)
 {
-    if (edit->modified)
+    if (edit->modified
+        && edit_query_dialog2 (_("Warning"),
+                               _("Current text was modified without a file save.\n"
+                                 "Continue discards these changes"), _("C&ontinue"),
+                               _("&Cancel")) == 1)
     {
-        if (edit_query_dialog2
-            (_("Warning"),
-             _("Current text was modified without a file save\n"
-               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")))
-        {
-            edit->force |= REDRAW_COMPLETELY;
-            return 0;
-        }
+        edit->force |= REDRAW_COMPLETELY;
+        return TRUE;
     }
-    if (edit_stack_iterator > 0)
-    {
-        edit_stack_iterator--;
-        if (edit_history_moveto[edit_stack_iterator].filename_vpath)
-        {
-            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
-                              edit_history_moveto[edit_stack_iterator].line);
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else
-    {
-        return 1;
-    }
+
+    if (edit_stack_iterator < 0)
+        return FALSE;
+
+    edit_stack_iterator--;
+    if (edit_history_moveto[edit_stack_iterator].filename_vpath != NULL)
+        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
+                                 edit_history_moveto[edit_stack_iterator].line);
+
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
