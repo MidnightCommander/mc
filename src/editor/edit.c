@@ -2,12 +2,13 @@
    Editor low level data handling and cursor fundamentals.
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2008, 2009, 2010, 2011
+   2007, 2008, 2009, 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer 1996, 1997
    Ilia Maslakov <il.smind@gmail.com> 2009, 2010, 2011
+   Andrew Borodin <aborodin@vmail.ru> 2012.
 
    This file is part of the Midnight Commander.
 
@@ -242,17 +243,19 @@ edit_init_buffers (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Load file OR text into buffers.  Set cursor to the beginning of file.
- * @returns 1 on error.
+ *
+ * @returns FALSE on error.
  */
 
-static int
+static gboolean
 edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
 {
     long buf, buf2;
     int file = -1;
-    int ret = 1;
+    gboolean ret = FALSE;
 
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
@@ -267,7 +270,7 @@ edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
         g_free (filename);
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
-        return 1;
+        return FALSE;
     }
 
     if (!edit->buffers2[buf2])
@@ -288,11 +291,11 @@ edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
             if (mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) < 0)
                 break;
         }
-        ret = 0;
+        ret = TRUE;
     }
-    while (0);
+    while (FALSE);
 
-    if (ret != 0)
+    if (!ret)
     {
         gchar *errmsg, *filename;
 
@@ -370,9 +373,16 @@ edit_insert_stream (WEdit * edit, FILE * f)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Open file and create it if necessary.  Return 0 for success, 1 for error.  */
+/**
+  * Open file and create it if necessary.
+  *
+  * @param edit           editor object
+  * @param filename_vpath file name
+  * @param st             buffer for store stat info
+  * @returns TRUE for success, FALSE for error.
+  */
 
-static int
+static gboolean
 check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat *st)
 {
     int file;
@@ -396,11 +406,9 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
             g_free (filename);
             goto cleanup;
         }
-        else
-        {
-            /* New file, delete it if it's not modified or saved */
-            edit->delete_file = 1;
-        }
+
+        /* New file, delete it if it's not modified or saved */
+        edit->delete_file = 1;
     }
 
     /* Check what we have opened */
@@ -448,55 +456,55 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
     {
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
-        return 1;
+        return FALSE;
     }
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Open the file and load it into the buffers, either directly or using
- * a filter.  Return 0 on success, 1 on error.
+ * a filter.  Return TRUE on success, FALSE on error.
  *
  * Fast loading (edit_load_file_fast) is used when the file size is
  * known.  In this case the data is read into the buffers by blocks.
  * If the file size is not known, the data is loaded byte by byte in
  * edit_insert_file.
+ *
+ * @param edit editor object
+ * @return TRUE if file was successfully opened and loaded to buffers, FALSE otherwise
  */
-
-static int
+static gboolean
 edit_load_file (WEdit * edit)
 {
-    int fast_load = 1;
+    gboolean fast_load = TRUE;
 
     /* Cannot do fast load if a filter is used */
     if (edit_find_filter (edit->filename_vpath) >= 0)
-        fast_load = 0;
-
+        fast_load = FALSE;
 
     /*
      * FIXME: line end translation should disable fast loading as well
      * Consider doing fseek() to the end and ftell() for the real size.
      */
-
     if (edit->filename_vpath != NULL)
     {
-
         /*
          * VFS may report file size incorrectly, and slow load is not a big
          * deal considering overhead in VFS.
          */
         if (!vfs_file_is_local (edit->filename_vpath))
-            fast_load = 0;
+            fast_load = FALSE;
 
         /* If we are dealing with a real file, check that it exists */
-        if (check_file_access (edit, edit->filename_vpath, &edit->stat1))
-            return 1;
+        if (!check_file_access (edit, edit->filename_vpath, &edit->stat1))
+            return FALSE;
     }
     else
     {
         /* nothing to load */
-        fast_load = 0;
+        fast_load = FALSE;
     }
 
     edit_init_buffers (edit);
@@ -518,13 +526,13 @@ edit_load_file (WEdit * edit)
             if (edit_insert_file (edit, edit->filename_vpath) < 0)
             {
                 edit_clean (edit);
-                return 1;
+                return FALSE;
             }
             edit->undo_stack_disable = 0;
         }
     }
     edit->lb = LB_ASIS;
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2283,7 +2291,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     edit->converter = str_cnv_from_term;
     edit_set_codeset (edit);
 
-    if (edit_load_file (edit))
+    if (!edit_load_file (edit))
     {
         /* edit_load_file already gives an error message */
         if (to_free)
@@ -2316,15 +2324,15 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Clear the edit struct, freeing everything in it.  Return 1 on success */
 
-int
+/** Clear the edit struct, freeing everything in it.  Return TRUE on success */
+gboolean
 edit_clean (WEdit * edit)
 {
     int j = 0;
 
-    if (!edit)
-        return 0;
+    if (edit == NULL)
+        return FALSE;
 
     /* a stale lock, remove it */
     if (edit->locked)
@@ -2360,13 +2368,13 @@ edit_clean (WEdit * edit)
 
     edit_purge_widget (edit);
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on success */
 
-int
+/** returns TRUE on success */
+gboolean
 edit_renew (WEdit * edit)
 {
     int y = edit->widget.y;
@@ -2379,44 +2387,15 @@ edit_renew (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Load a new file into the editor.  If it fails, preserve the old file.
- * To do it, allocate a new widget, initialize it and, if the new file
- * was loaded, copy the data to the old widget.
- * Return 1 on success, 0 on failure.
- */
 
-int
-edit_reload (WEdit * edit, const vfs_path_t * filename_vpath)
-{
-    WEdit *e;
-    int y = edit->widget.y;
-    int x = edit->widget.x;
-    int lines = edit->widget.lines;
-    int columns = edit->widget.cols;
-
-    e = g_malloc0 (sizeof (WEdit));
-    e->widget = edit->widget;
-    if (edit_init (e, y, x, lines, columns, filename_vpath, 0) == NULL)
-    {
-        g_free (e);
-        return 0;
-    }
-    edit_clean (edit);
-    memcpy (edit, e, sizeof (WEdit));
-    g_free (e);
-    return 1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Load a new file into the editor and set line.  If it fails, preserve the old file.
  * To do it, allocate a new widget, initialize it and, if the new file
  * was loaded, copy the data to the old widget.
- * Return 1 on success, 0 on failure.
+ *
+ * @returns TRUE on success, FALSE on failure.
  */
-
-int
+gboolean
 edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
 {
     WEdit *e;
@@ -2427,15 +2406,18 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
 
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
+
     if (edit_init (e, y, x, lines, columns, filename_vpath, line) == NULL)
     {
         g_free (e);
-        return 0;
+        return FALSE;
     }
+
     edit_clean (edit);
     memcpy (edit, e, sizeof (WEdit));
     g_free (e);
-    return 1;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
