@@ -355,7 +355,7 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_file (const char *_file, int line)
 {
     static gboolean made_directory = FALSE;
@@ -381,7 +381,7 @@ edit_file (const char *_file, int line)
     wedit = edit_init (NULL, 1, 0, LINES - 2, COLS, _file, line);
 
     if (wedit == NULL)
-        return 0;
+        return FALSE;
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
@@ -408,7 +408,7 @@ edit_file (const char *_file, int line)
     if (edit_dlg->state == DLG_CLOSED)
         destroy_dlg (edit_dlg);
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

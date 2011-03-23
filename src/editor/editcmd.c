@@ -473,9 +473,9 @@ edit_save_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on error */
 
-static int
+/** returns FALSE on error */
+static gboolean
 edit_load_file_from_filename (WEdit * edit, char *exp)
 {
     int prev_locked = edit->locked;
@@ -484,10 +484,10 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     if (!edit_reload (edit, exp))
     {
         g_free (prev_filename);
-        return 1;
+        return FALSE;
     }
 
-    if (prev_locked)
+    if (prev_locked != 0)
     {
         char *fullpath;
 
@@ -496,7 +496,7 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
         g_free (fullpath);
     }
     g_free (prev_filename);
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1853,23 +1853,20 @@ edit_save_confirm_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on success */
 
-int
+/** returns TRUE on success */
+gboolean
 edit_new_cmd (WEdit * edit)
 {
-    if (edit->modified)
+    if (edit->modified && edit_query_dialog2 (_("Warning"),
+                                              _
+                                              ("Current text was modified without a file save.\nContinue discards these changes"),
+                                              _("C&ontinue"), _("&Cancel")))
     {
-        if (edit_query_dialog2
-            (_("Warning"),
-             _
-             ("Current text was modified without a file save.\nContinue discards these changes"),
-             _("C&ontinue"), _("&Cancel")))
-        {
-            edit->force |= REDRAW_COMPLETELY;
-            return 0;
-        }
+        edit->force |= REDRAW_COMPLETELY;
+        return TRUE;
     }
+
     edit->force |= REDRAW_COMPLETELY;
 
     return edit_renew (edit);   /* if this gives an error, something has really screwed up */
@@ -1877,19 +1874,18 @@ edit_new_cmd (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_load_cmd (WEdit * edit, edit_current_file_t what)
 {
     char *exp;
 
-    if (edit->modified
-        && (edit_query_dialog2
-            (_("Warning"),
-             _("Current text was modified without a file save.\n"
-               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")) == 1))
+    if (edit->modified && (edit_query_dialog2 (_("Warning"),
+                                               _("Current text was modified without a file save.\n"
+                                                 "Continue discards these changes"), _("C&ontinue"),
+                                               _("&Cancel")) == 1))
     {
         edit->force |= REDRAW_COMPLETELY;
-        return 0;
+        return TRUE;
     }
 
     switch (what)
@@ -1898,9 +1894,9 @@ edit_load_cmd (WEdit * edit, edit_current_file_t what)
         exp = input_expand_dialog (_("Load"), _("Enter file name:"),
                                    MC_HISTORY_EDIT_LOAD, edit->filename);
 
-        if (exp)
+        if (exp != NULL)
         {
-            if (*exp)
+            if (*exp != '\0')
                 edit_load_file_from_filename (edit, exp);
             g_free (exp);
         }
@@ -1919,7 +1915,7 @@ edit_load_cmd (WEdit * edit, edit_current_file_t what)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2778,43 +2774,38 @@ edit_save_block_cmd (WEdit * edit)
 
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on success */
 
-int
+/** returns TRUE on success */
+gboolean
 edit_insert_file_cmd (WEdit * edit)
 {
-    gchar *tmp;
+    char *tmp;
     char *exp;
+    gboolean ret = FALSE;
 
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, (char *) NULL);
     exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
                                MC_HISTORY_EDIT_INSERT_FILE, tmp);
     g_free (tmp);
+
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
-    if (exp)
+
+    if (exp != NULL)
     {
-        if (!*exp)
+        if (*exp == '\0')
         {
             g_free (exp);
-            return 0;
+            return FALSE;
         }
-        else
-        {
-            if (edit_insert_file (edit, exp) != 0)
-            {
-                g_free (exp);
-                edit->force |= REDRAW_COMPLETELY;
-                return 1;
-            }
-            else
-            {
-                g_free (exp);
-                edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
-            }
-        }
+
+        ret = edit_insert_file (edit, exp) != 0;
+        g_free (exp);
+        if (!ret)
+            edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
     }
+
     edit->force |= REDRAW_COMPLETELY;
-    return 0;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3106,78 +3097,55 @@ edit_begin_end_repeat_cmd (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_load_forward_cmd (WEdit * edit)
 {
-    if (edit->modified)
+    if (edit->modified
+        && edit_query_dialog2 (_("Warning"),
+                               _("Current text was modified without a file save\n"
+                                 "Continue discards these changes"), _("C&ontinue"), _("&Cancel")))
     {
-        if (edit_query_dialog2
-            (_("Warning"),
-             _("Current text was modified without a file save\n"
-               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")))
-        {
-            edit->force |= REDRAW_COMPLETELY;
-            return 0;
-        }
+        edit->force |= REDRAW_COMPLETELY;
+        return TRUE;
     }
-    if (edit_stack_iterator + 1 < MAX_HISTORY_MOVETO)
-    {
-        if (edit_history_moveto[edit_stack_iterator + 1].line < 1)
-        {
-            return 1;
-        }
-        edit_stack_iterator++;
-        if (edit_history_moveto[edit_stack_iterator].filename)
-        {
-            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
-                              edit_history_moveto[edit_stack_iterator].line);
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else
-    {
-        return 1;
-    }
+
+    if (edit_stack_iterator + 1 >= MAX_HISTORY_MOVETO)
+        return FALSE;
+
+    if (edit_history_moveto[edit_stack_iterator + 1].line < 1)
+        return FALSE;
+
+    edit_stack_iterator++;
+    if (edit_history_moveto[edit_stack_iterator].filename != NULL)
+        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
+                                 edit_history_moveto[edit_stack_iterator].line);
+
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_load_back_cmd (WEdit * edit)
 {
-    if (edit->modified)
+    if (edit->modified
+        && edit_query_dialog2 (_("Warning"),
+                               _("Current text was modified without a file save\n"
+                                 "Continue discards these changes"), _("C&ontinue"), _("&Cancel")))
     {
-        if (edit_query_dialog2
-            (_("Warning"),
-             _("Current text was modified without a file save\n"
-               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")))
-        {
-            edit->force |= REDRAW_COMPLETELY;
-            return 0;
-        }
+        edit->force |= REDRAW_COMPLETELY;
+        return TRUE;
     }
-    if (edit_stack_iterator > 0)
-    {
-        edit_stack_iterator--;
-        if (edit_history_moveto[edit_stack_iterator].filename)
-        {
-            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
-                              edit_history_moveto[edit_stack_iterator].line);
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else
-    {
-        return 1;
-    }
+
+    if (edit_stack_iterator < 0)
+        return FALSE;
+
+    edit_stack_iterator--;
+    if (edit_history_moveto[edit_stack_iterator].filename)
+        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
+                                 edit_history_moveto[edit_stack_iterator].line);
+
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

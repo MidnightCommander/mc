@@ -243,15 +243,15 @@ edit_init_buffers (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Load file OR text into buffers.  Set cursor to the beginning of file.
- * @returns 1 on error.
+ * @returns FALSE on error.
  */
 
-static int
+static gboolean
 edit_load_file_fast (WEdit * edit, const char *filename)
 {
     long buf, buf2;
     int file = -1;
-    int ret = 1;
+    gboolean ret = FALSE;
 
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
@@ -264,7 +264,7 @@ edit_load_file_fast (WEdit * edit, const char *filename)
         errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
-        return 1;
+        return FALSE;
     }
 
     if (!edit->buffers2[buf2])
@@ -285,10 +285,11 @@ edit_load_file_fast (WEdit * edit, const char *filename)
             if (mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) < 0)
                 break;
         }
-        ret = 0;
+        ret = TRUE;
     }
-    while (0);
-    if (ret)
+    while (FALSE);
+
+    if (!ret)
     {
         char *err_str = g_strdup_printf (_("Error reading %s"), filename);
         edit_error_dialog (_("Error"), err_str);
@@ -354,9 +355,9 @@ edit_insert_stream (WEdit * edit, FILE * f)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Open file and create it if necessary.  Return 0 for success, 1 for error.  */
 
-static int
+/** Open file and create it if necessary.  Return TRUE for success, FALSE for error.  */
+static gboolean
 check_file_access (WEdit * edit, const char *filename, struct stat *st)
 {
     int file;
@@ -377,11 +378,9 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
             errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
             goto cleanup;
         }
-        else
-        {
-            /* New file, delete it if it's not modified or saved */
-            edit->delete_file = 1;
-        }
+
+        /* New file, delete it if it's not modified or saved */
+        edit->delete_file = 1;
     }
 
     /* Check what we have opened */
@@ -415,56 +414,52 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
     {
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
-        return 1;
+        return FALSE;
     }
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Open the file and load it into the buffers, either directly or using
- * a filter.  Return 0 on success, 1 on error.
+ * a filter.  Return TRUE on success, FALSE on error.
  *
  * Fast loading (edit_load_file_fast) is used when the file size is
  * known.  In this case the data is read into the buffers by blocks.
  * If the file size is not known, the data is loaded byte by byte in
  * edit_insert_file.
  */
-
-static int
+static gboolean
 edit_load_file (WEdit * edit)
 {
-    int fast_load = 1;
+    gboolean fast_load = TRUE;
     vfs_path_t *vpath = vfs_path_from_str (edit->filename);
 
     /* Cannot do fast load if a filter is used */
     if (edit_find_filter (edit->filename) >= 0)
-        fast_load = 0;
+        fast_load = FALSE;
 
     /*
      * VFS may report file size incorrectly, and slow load is not a big
      * deal considering overhead in VFS.
      */
     if (!vfs_file_is_local (vpath))
-        fast_load = 0;
+        fast_load = FALSE;
     vfs_path_free (vpath);
 
     /*
      * FIXME: line end translation should disable fast loading as well
      * Consider doing fseek() to the end and ftell() for the real size.
      */
-
-    if (*edit->filename)
-    {
-        /* If we are dealing with a real file, check that it exists */
-        if (check_file_access (edit, edit->filename, &edit->stat1))
-            return 1;
-    }
-    else
+    if (*edit->filename == '\0')
     {
         /* nothing to load */
-        fast_load = 0;
+        fast_load = FALSE;
     }
+    /* If we are dealing with a real file, check that it exists */
+    else if (!check_file_access (edit, edit->filename, &edit->stat1))
+        return FALSE;
 
     edit_init_buffers (edit);
 
@@ -478,19 +473,19 @@ edit_load_file (WEdit * edit)
     else
     {
         edit->last_byte = 0;
-        if (*edit->filename)
+        if (*edit->filename != '\0')
         {
             edit->undo_stack_disable = 1;
             if (edit_insert_file (edit, edit->filename) == 0)
             {
                 edit_clean (edit);
-                return 1;
+                return FALSE;
             }
             edit->undo_stack_disable = 0;
         }
     }
     edit->lb = LB_ASIS;
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2249,7 +2244,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     edit->converter = str_cnv_from_term;
     edit_set_codeset (edit);
 
-    if (edit_load_file (edit))
+    if (!edit_load_file (edit))
     {
         /* edit_load_file already gives an error message */
         if (to_free)
@@ -2282,15 +2277,15 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Clear the edit struct, freeing everything in it.  Return 1 on success */
 
-int
+/** Clear the edit struct, freeing everything in it.  Return TRUE on success */
+gboolean
 edit_clean (WEdit * edit)
 {
     int j = 0;
 
-    if (!edit)
-        return 0;
+    if (edit == NULL)
+        return FALSE;
 
     /* a stale lock, remove it */
     if (edit->locked)
@@ -2326,13 +2321,13 @@ edit_clean (WEdit * edit)
 
     edit_purge_widget (edit);
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on success */
 
-int
+/** returns TRUE on success */
+gboolean
 edit_renew (WEdit * edit)
 {
     int y = edit->widget.y;
@@ -2345,44 +2340,14 @@ edit_renew (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Load a new file into the editor.  If it fails, preserve the old file.
- * To do it, allocate a new widget, initialize it and, if the new file
- * was loaded, copy the data to the old widget.
- * Return 1 on success, 0 on failure.
- */
 
-int
-edit_reload (WEdit * edit, const char *filename)
-{
-    WEdit *e;
-    int y = edit->widget.y;
-    int x = edit->widget.x;
-    int lines = edit->widget.lines;
-    int columns = edit->widget.cols;
-
-    e = g_malloc0 (sizeof (WEdit));
-    e->widget = edit->widget;
-    if (edit_init (e, y, x, lines, columns, filename, 0) == NULL)
-    {
-        g_free (e);
-        return 0;
-    }
-    edit_clean (edit);
-    memcpy (edit, e, sizeof (WEdit));
-    g_free (e);
-    return 1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Load a new file into the editor and set line.  If it fails, preserve the old file.
  * To do it, allocate a new widget, initialize it and, if the new file
  * was loaded, copy the data to the old widget.
- * Return 1 on success, 0 on failure.
+ * Return TRUE on success, FALSE on failure.
  */
-
-int
+gboolean
 edit_reload_line (WEdit * edit, const char *filename, long line)
 {
     WEdit *e;
@@ -2393,15 +2358,18 @@ edit_reload_line (WEdit * edit, const char *filename, long line)
 
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
+
     if (edit_init (e, y, x, lines, columns, filename, line) == NULL)
     {
         g_free (e);
-        return 0;
+        return FALSE;
     }
+
     edit_clean (edit);
     memcpy (edit, e, sizeof (WEdit));
     g_free (e);
-    return 1;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
