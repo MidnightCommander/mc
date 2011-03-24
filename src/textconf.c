@@ -29,6 +29,9 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
+#include "lib/fileloc.h"
+#include "lib/mcconfig.h"
+
 #include "src/textconf.h"
 
 /*** global variables ****************************************************************************/
@@ -156,5 +159,51 @@ show_version (void)
 #undef TYPE_INFO
     (void) printf ("\n");
 }
+
+/* --------------------------------------------------------------------------------------------- */
+#define PRINTF_GROUP(a) \
+    (void) printf ("[%s]\n", a)
+#define PRINTF_SECTION(a,b) \
+    (void) printf ("    %-17s %s\n", a, b)
+#define PRINTF_SECTION2(a,b) \
+    (void) printf ("    %-17s %s/\n", a, b)
+#define PRINTF(a, b, c) \
+    (void) printf ("\t%-15s %s/%s\n", a, b, c)
+#define PRINTF2(a, b, c) \
+    (void) printf ("\t%-15s %s%s\n", a, b, c)
+
+void
+show_datadirs_extended (void)
+{
+    PRINTF_GROUP (_("System data"));
+
+    PRINTF_SECTION ( _("Config directory:"), mc_global.sysconfig_dir);
+    PRINTF_SECTION (_("Data directory:"), mc_global.share_data_dir);
+#ifdef ENABLE_VFS_EXTFS
+    PRINTF2 ("extfs.d:", mc_global.share_data_dir, MC_EXTFS_DIR"/");
+#endif
+#ifdef ENABLE_VFS_FISH
+    PRINTF2 ("fish:", mc_global.share_data_dir, FISH_PREFIX"/");
+#endif
+    (void) puts ("");
+
+    PRINTF_GROUP (_("User data"));
+
+    PRINTF_SECTION2 ( _("Config directory:"), mc_config_get_path ());
+    PRINTF_SECTION2 (_("Data directory:"), mc_config_get_data_path ());
+    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_SUBDIR"/");
+#ifdef ENABLE_VFS_EXTFS
+    PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR"/");
+#endif
+#ifdef ENABLE_VFS_FISH
+    PRINTF ("fish:", mc_config_get_data_path (), FISH_PREFIX"/");
+#endif
+
+    PRINTF_SECTION2 ( _("Cache directory:"), mc_config_get_cache_path ());
+
+}
+#undef PRINTF
+#undef PRINTF_SECTION
+#undef PRINTF_GROUP
 
 /* --------------------------------------------------------------------------------------------- */
