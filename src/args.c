@@ -93,6 +93,7 @@ static GOptionContext *context;
 static gboolean mc_args__nouse_subshell = FALSE;
 static gboolean mc_args__show_datadirs = FALSE;
 static gboolean mc_args__show_datadirs_extended = FALSE;
+static gboolean mc_args__show_configure_opts = FALSE;
 
 static GOptionGroup *main_group;
 
@@ -119,6 +120,14 @@ static const GOptionEntry argument_main_table[] = {
      "datadir-info", 'F', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_args__show_datadirs_extended,
      N_("Print extended info about used data directories"),
+     NULL
+    },
+
+    /* show configure options */
+    {
+     "configure-options", '\0', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
+     &mc_args__show_configure_opts,
+     N_("Print configure options"),
      NULL
     },
 
@@ -582,6 +591,12 @@ mc_args_process (int argc, char *argv[])
     if (mc_args__show_datadirs_extended)
     {
         show_datadirs_extended ();
+        return FALSE;
+    }
+
+    if (mc_args__show_configure_opts)
+    {
+        show_configure_options ();
         return FALSE;
     }
 
