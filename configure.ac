@@ -500,6 +500,7 @@ AC_SUBST(MCLIBS)
 MAN_DATE="$(LC_ALL=C date "+%B %Y")"
 AC_SUBST(MAN_DATE)
 
+AM_CONDITIONAL(USE_NLS, [test x"$USE_NLS" = xyes])
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
