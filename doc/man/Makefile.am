@@ -1,5 +1,7 @@
 DIST_SUBDIRS = es hu it pl ru sr
+if USE_NLS
 SUBDIRS = $(DOC_LINGUAS)
+endif
 
 man_MANS = mc.1 mcedit.1 mcview.1
 
