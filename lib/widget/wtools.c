@@ -372,11 +372,6 @@ message (int flags, const char *title, const char *text, ...)
 {
     char *p;
     va_list ap;
-    union
-    {
-        void *p;
-        void (*f) (int, int *, char *, const char *);
-    } func;
 
     va_start (ap, text);
     p = g_strdup_vprintf (text, ap);
@@ -388,6 +383,11 @@ message (int flags, const char *title, const char *text, ...)
 #ifdef WITH_BACKGROUND
     if (we_are_background)
     {
+        union
+        {
+            void *p;
+            void (*f) (int, int *, char *, const char *);
+        } func;
         func.f = bg_message;
         parent_call (func.p, NULL, 3, sizeof (flags), &flags, strlen (title), title, strlen (p), p);
     }
@@ -410,14 +410,14 @@ char *
 input_dialog_help (const char *header, const char *text, const char *help,
                    const char *history_name, const char *def_text)
 {
-    union
-    {
-        void *p;
-        char *(*f) (const char *, const char *, const char *, const char *, const char *);
-    } func;
 #ifdef WITH_BACKGROUND
     if (we_are_background)
     {
+        union
+        {
+            void *p;
+            char *(*f) (const char *, const char *, const char *, const char *, const char *);
+        } func;
         func.f = fg_input_dialog_help;
         return parent_call_string (func.p, 5,
                                    strlen (header), header, strlen (text),
