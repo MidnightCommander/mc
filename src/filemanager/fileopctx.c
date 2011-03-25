@@ -78,6 +78,7 @@ file_op_context_new (FileOperation op)
     ctx->preserve_uidgid = (geteuid () == 0);
     ctx->umask_kill = 0777777;
     ctx->erase_at_end = TRUE;
+    ctx->skip_all = FALSE;
 
     return ctx;
 }
