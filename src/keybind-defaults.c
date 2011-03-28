@@ -146,7 +146,6 @@ const global_keymap_t default_viewer_keymap[] = {
     {XCTRL ('b'), CK_ViewPrevFile, "C-b"},
 
     {'q', CK_ViewQuit, "q"},
-    {XCTRL ('g'), CK_ViewQuit, "C-g"},
     {ESC_CHAR, CK_ViewQuit, "Esc"},
 
     {ALT ('e'), CK_SelectCodepage, "M-e"},
@@ -213,7 +212,6 @@ const global_keymap_t default_viewer_hex_keymap[] = {
     {'G', CK_ViewMoveBottom, "G"},
 
     {'q', CK_ViewQuit, "q"},
-    {XCTRL ('g'), CK_ViewQuit, "C-g"},
     {ESC_CHAR, CK_ViewQuit, "Esc"},
 
     {ALT ('e'), CK_SelectCodepage, "M-e"},

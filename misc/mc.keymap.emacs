@@ -166,7 +166,7 @@ EditExecuteMacro = e
 [viewer]
 ViewHelp = f1
 ViewToggleWrapMode = f2
-ViewQuit = f3; f10; q; esc; ctrl-g
+ViewQuit = f3; f10; q; esc
 ViewToggleHexMode = f4
 ViewGoto = f5
 ViewSearch = f7; question; slash
@@ -198,7 +198,7 @@ ViewToggleRuler = alt-r
 [viewer:hex]
 ViewHelp = f1
 ViewToggleHexEditMode = f2
-ViewQuit = f3; f10; q; esc; ctrl-g
+ViewQuit = f3; f10; q; esc
 ViewToggleHexMode = f4
 ViewGoto = f5
 ViewHexEditSave = f6
