@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#include "lib/global.h"         /* GList */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define LINK_FOLLOW 15
@@ -52,7 +54,6 @@
 /* Single connection or archive */
 struct vfs_s_super
 {
-    struct vfs_s_super **prevp, *next;
     struct vfs_class *me;
     struct vfs_s_inode *root;
     char *name;                 /* My name, whatever it means */
@@ -182,7 +183,7 @@ struct vfs_s_fh
  */
 struct vfs_s_subclass
 {
-    struct vfs_s_super *supers;
+    GList *supers;
     int inode_counter;
     int flags;                  /* whether the subclass is remove, read-only etc */
     dev_t rdev;

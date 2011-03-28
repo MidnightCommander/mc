@@ -1385,14 +1385,16 @@ fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
 static void
 fish_fill_names (struct vfs_class *me, fill_names_f func)
 {
-    struct vfs_s_super *super = MEDATA->supers;
-    char *name;
+    GList *iter;
 
-    char gbuf[10];
-
-    while (super)
+    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
     {
+        const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
+
+        char *name;
+        char gbuf[10];
         const char *flags = "";
+
         switch (SUP.flags)
         {
         case FISH_FLAG_RSH:
@@ -1411,9 +1413,8 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
         }
 
         name = g_strconcat ("/#sh:", SUP.user, "@", SUP.host, flags, "/", SUP.cwdir, (char *) NULL);
-        (*func) (name);
+        func (name);
         g_free (name);
-        super = super->next;
     }
 }
 

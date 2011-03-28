@@ -2202,15 +2202,16 @@ ftpfs_done (struct vfs_class *me)
 static void
 ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
-    struct vfs_s_super *super = MEDATA->supers;
-    char *name;
+    GList *iter;
 
-    while (super)
+    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
     {
+        const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
+        char *name;
+
         name = g_strconcat ("/#ftp:", SUP.user, "@", SUP.host, "/", SUP.cwdir, (char *) NULL);
-        (*func) (name);
+        func (name);
         g_free (name);
-        super = super->next;
     }
 }
 

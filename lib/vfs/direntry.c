@@ -332,15 +332,10 @@ vfs_s_new_super (struct vfs_class *me)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 vfs_s_insert_super (struct vfs_class *me, struct vfs_s_super *super)
 {
-    super->next = MEDATA->supers;
-    super->prevp = &MEDATA->supers;
-
-    if (MEDATA->supers != NULL)
-        MEDATA->supers->prevp = &super->next;
-    MEDATA->supers = super;
+    MEDATA->supers = g_list_prepend (MEDATA->supers, super);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -364,12 +359,7 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
         message (D_ERROR, "Direntry warning", "%s", "Super has want_stale set");
 #endif
 
-    if (super->prevp)
-    {
-        *super->prevp = super->next;
-        if (super->next)
-            super->next->prevp = super->prevp;
-    }
+    MEDATA->supers = g_list_remove (MEDATA->supers, super);
 
     CALL (free_archive) (me, super);
     g_free (super->name);
@@ -721,16 +711,17 @@ vfs_s_print_stats (const char *fs_name, const char *action,
 static void
 vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
 {
-    struct vfs_s_super *a = MEDATA->supers;
-    char *name;
+    GList *iter;
 
-    while (a)
+    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
     {
-        name = g_strconcat (a->name, "#", me->prefix, "/",
-                            /* a->current_dir->name, */ (char *) NULL);
-        (*func) (name);
+        const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
+        char *name;
+
+        name = g_strconcat (super->name, "#", me->prefix, "/",
+                            /* super->current_dir->name, */ (char *) NULL);
+        func (name);
         g_free (name);
-        a = a->next;
     }
 }
 
@@ -1031,6 +1022,7 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 const char *
 vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **archive, int flags)
 {
+    GList *iter;
     const char *retval;
     char *local, *op;
     const char *archive_name;
@@ -1049,16 +1041,19 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **
             return NULL;
     }
 
-    for (super = MEDATA->supers; super != NULL; super = super->next)
+    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
     {
+        int i;
+
+        super = (struct vfs_s_super *) iter->data;
+
         /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-        int i = MEDATA->archive_same (me, super, archive_name, op, cookie);
+        i = MEDATA->archive_same (me, super, archive_name, op, cookie);
         if (i != 0)
         {
             if (i == 1)
                 goto return_success;
-            else
-                break;
+            break;
         }
     }
 
