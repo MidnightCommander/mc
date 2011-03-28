@@ -1207,7 +1207,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
             fh->linear = LS_LINEAR_PREOPEN;
         }
     }
-    else if ((MEDATA->fh_open) && (MEDATA->fh_open (me, fh, flags, mode)))
+    else if ((MEDATA->fh_open != NULL) && (MEDATA->fh_open (me, fh, flags, mode) != 0))
     {
         g_free (fh);
         return NULL;
@@ -1285,6 +1285,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     close (handle);
 
     tty_disable_interrupt_key ();
+    g_free (fh.data);
     return 0;
 
   error_1:
@@ -1296,6 +1297,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
   error_4:
     g_free (ino->localname);
     ino->localname = NULL;
+    g_free (fh.data);
     return -1;
 }
 

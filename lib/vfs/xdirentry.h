@@ -60,68 +60,7 @@ struct vfs_s_super
     int fd_usage;               /* Number of open files */
     int ino_usage;              /* Usage count of this superblock */
     int want_stale;             /* If set, we do not flush cache properly */
-
-    union
-    {
-#ifdef ENABLE_VFS_FISH
-        struct
-        {
-            int sockr, sockw;
-            char *cwdir;
-            char *host, *user;
-            char *password;
-            int flags;
-            char *scr_ls;
-            char *scr_chmod;
-            char *scr_exists;
-            char *scr_mkdir;
-            char *scr_unlink;
-            char *scr_chown;
-            char *scr_rmdir;
-            char *scr_ln;
-            char *scr_mv;
-            char *scr_hardlink;
-            char *scr_get;
-            char *scr_send;
-            char *scr_append;
-            char *scr_info;
-            int host_flags;
-            char *scr_env;
-        } fish;
-#endif                          /* ENABLE_VFS_FISH */
-#ifdef ENABLE_VFS_FTP
-        struct
-        {
-            int sock;
-            char *cwdir;
-            char *host, *user;
-            char *password;
-            int port;
-
-            char *proxy;        /* proxy server, NULL if no proxy */
-            int failed_on_login;        /* used to pass the failure reason to upper levels */
-            int use_passive_connection;
-            int remote_is_amiga;        /* No leading slash allowed for AmiTCP (Amiga) */
-            int isbinary;
-            int cwd_deferred;   /* current_directory was changed but CWD command hasn't
-                                   been sent yet */
-            int strict;         /* ftp server doesn't understand
-                                 * "LIST -la <path>"; use "CWD <path>"/
-                                 * "LIST" instead
-                                 */
-            int ctl_connection_busy;
-        } ftp;
-#endif                          /* ENABLE_VFS_FTP */
-#if defined(ENABLE_VFS_CPIO) || defined(ENABLE_VFS_TAR)
-        struct
-        {
-            int fd;
-            struct stat st;
-            int type;           /* Type of the archive */
-            struct defer_inode *deferred;       /* List of inodes for which another entries may appear */
-        } arch;
-#endif                          /* ENABLE_VFS_CPIO || ENABLE_VFS_TAR */
-    } u;
+    void *data;                 /* This is for filesystem-specific use */
 };
 
 /*
@@ -158,22 +97,7 @@ struct vfs_s_fh
     int handle;                 /* This is for module's use, but if != -1, will be mc_close()d */
     int changed;                /* Did this file change? */
     int linear;                 /* Is that file open with O_LINEAR? */
-    union
-    {
-#ifdef ENABLE_VFS_FISH
-        struct
-        {
-            off_t got, total;
-            int append;
-        } fish;
-#endif                          /* ENABLE_VFS_FISH */
-#ifdef ENABLE_VFS_FTP
-        struct
-        {
-            int sock, append;
-        } ftp;
-#endif                          /* ENABLE_VFS_FTP */
-    } u;
+    void *data;                 /* This is for filesystem-specific use */
 };
 
 /*
