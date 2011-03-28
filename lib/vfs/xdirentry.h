@@ -130,7 +130,6 @@ struct vfs_s_super
  */
 struct vfs_s_entry
 {
-    struct vfs_s_entry **prevp, *next;  /* Pointers in the entry list */
     struct vfs_s_inode *dir;    /* Directory we are in, i.e. our parent */
     char *name;                 /* Name of this entry */
     struct vfs_s_inode *ino;    /* ... and its inode */
@@ -143,7 +142,7 @@ struct vfs_s_inode
     struct vfs_s_entry *ent;    /* Our entry in the parent directory -
                                    use only for directories because they
                                    cannot be hardlinked */
-    struct vfs_s_entry *subdir; /* If this is a directory, its entry */
+    GList *subdir;              /* If this is a directory, its entry. List of vfs_s_entry */
     struct stat st;             /* Parameters of this inode */
     char *linkname;             /* Symlink's contents */
     char *localname;            /* Filename of local file, if we have one */
