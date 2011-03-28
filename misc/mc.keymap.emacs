@@ -448,6 +448,6 @@ DiffPageUp = pgup
 DiffHome = home
 DiffEnd = end
 DiffHelp = f1
-DiffQuit = f10; q; shift-q; ctrl-g; esc
+DiffQuit = f10; q; shift-q; esc
 ShowCommandLine = ctrl-o
 SelectCodepage = alt-e

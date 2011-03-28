@@ -688,7 +688,6 @@ const global_keymap_t default_diff_keymap[] = {
     {KEY_END, CK_DiffEnd, "End"},
     {'q', CK_DiffQuit, "q"},
     {'Q', CK_DiffQuit, "Q"},
-    {XCTRL ('g'), CK_DiffQuit, "C-g"},
     {ESC_CHAR, CK_DiffQuit, "Esc"},
 
     {KEY_F (1), CK_DiffHelp, "F1"},

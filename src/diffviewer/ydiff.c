@@ -3126,6 +3126,9 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         tty_touch_screen ();
         repaint_screen ();
         break;
+    case CK_DialogCancel:
+        /* don't close diffviewer due to SIGINT */
+        break;
     default:
         res = MSG_NOT_HANDLED;
     }
@@ -3228,8 +3231,19 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     case DLG_ACTION:
-        /* command from buttonbar */
-        return send_message ((Widget *) dview, WIDGET_COMMAND, parm);
+        /* shortcut */
+        if (sender == NULL)
+            return dview_execute_cmd (NULL, parm);
+        /* message from buttonbar */
+        if (sender == (Widget *) find_buttonbar (h))
+        {
+            if (data != NULL)
+                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+
+            dview = (WDiff *) find_widget_type (h, dview_callback);
+            return dview_execute_cmd (dview, parm);
+        }
+        return MSG_NOT_HANDLED;
 
     case DLG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
