@@ -207,11 +207,7 @@ static char reply_str[80];
 
 static struct vfs_class vfs_ftpfs_ops;
 
-static struct no_proxy_entry
-{
-    char *domain;
-    void *next;
-} *no_proxy;
+static GSList *no_proxy;
 
 static char buffer[BUF_MEDIUM];
 static char *netrc;
@@ -653,16 +649,12 @@ ftpfs_load_no_proxy_list (void)
 {
     /* FixMe: shouldn't be hardcoded!!! */
     char s[BUF_LARGE];          /* provide for BUF_LARGE characters */
-    struct no_proxy_entry *np, *current = 0;
     FILE *npf;
     int c;
     char *p;
-    static char *mc_file;
+    static char *mc_file = NULL;
 
-    if (mc_file)
-        return;
-
-    mc_file = concat_dir_and_file (mc_global.sysconfig_dir, "mc.no_proxy");
+    mc_file = g_build_filename (mc_global.sysconfig_dir, "mc.no_proxy", (char *) NULL);
     if (exist_file (mc_file))
     {
         npf = fopen (mc_file, "r");
@@ -678,19 +670,11 @@ ftpfs_load_no_proxy_list (void)
                     continue;
                 }
 
-                if (p == s)
-                    continue;
-
-                *p = '\0';
-
-                np = g_new (struct no_proxy_entry, 1);
-                np->domain = g_strdup (s);
-                np->next = NULL;
-                if (no_proxy)
-                    current->next = np;
-                else
-                    no_proxy = np;
-                current = np;
+                if (p != s)
+                {
+                    *p = '\0';
+                    no_proxy = g_slist_prepend (no_proxy, g_strdup (s));
+                }
             }
             fclose (npf);
         }
@@ -704,9 +688,9 @@ ftpfs_load_no_proxy_list (void)
 static int
 ftpfs_check_proxy (const char *host)
 {
-    struct no_proxy_entry *npe;
+    GSList *npe;
 
-    if (!ftpfs_proxy_host || !*ftpfs_proxy_host || !host || !*host)
+    if (ftpfs_proxy_host == NULL || *ftpfs_proxy_host == '\0' || host == NULL || *host == '\0')
         return 0;               /* sanity check */
 
     if (*host == '!')
@@ -715,26 +699,26 @@ ftpfs_check_proxy (const char *host)
     if (!ftpfs_always_use_proxy)
         return 0;
 
-    if (!strchr (host, '.'))
+    if (strchr (host, '.') == NULL)
         return 0;
 
     ftpfs_load_no_proxy_list ();
-    for (npe = no_proxy; npe; npe = npe->next)
+    for (npe = no_proxy; npe != NULL; npe = g_slist_next (npe))
     {
-        char *domain = npe->domain;
+        const char *domain = (const char *) npe->data;
 
         if (domain[0] == '.')
         {
-            int ld = strlen (domain);
-            int lh = strlen (host);
+            size_t ld = strlen (domain);
+            size_t lh = strlen (host);
 
-            while (ld && lh && host[lh - 1] == domain[ld - 1])
+            while (ld != 0 && lh != 0 && host[lh - 1] == domain[ld - 1])
             {
                 ld--;
                 lh--;
             }
 
-            if (!ld)
+            if (ld == 0)
                 return 0;
         }
         else if (g_ascii_strcasecmp (host, domain) == 0)
@@ -2182,17 +2166,11 @@ ftpfs_fh_close (struct vfs_class *me, struct vfs_s_fh *fh)
 static void
 ftpfs_done (struct vfs_class *me)
 {
-    struct no_proxy_entry *np;
-
     (void) me;
 
-    while (no_proxy)
-    {
-        np = no_proxy->next;
-        g_free (no_proxy->domain);
-        g_free (no_proxy);
-        no_proxy = np;
-    }
+    g_slist_foreach (no_proxy, (GFunc) g_free, NULL);
+    g_slist_free (no_proxy);
+
     g_free (ftpfs_anonymous_passwd);
     g_free (ftpfs_proxy_host);
 }
