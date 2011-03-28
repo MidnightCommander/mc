@@ -426,7 +426,7 @@ static const global_keymap_ini_t default_editor_x_keymap[] = {
 static const global_keymap_ini_t default_viewer_keymap[] = {
     {"Help", "f1"},
     {"WrapMode", "f2"},
-    {"Quit", "f3; f10; q; esc; ctrl-g"},
+    {"Quit", "f3; f10; q; esc"},
     {"HexMode", "f4"},
     {"Goto", "f5"},
     {"Search", "f7; question; slash"},
@@ -463,7 +463,7 @@ static const global_keymap_ini_t default_viewer_keymap[] = {
 static const global_keymap_ini_t default_viewer_hex_keymap[] = {
     {"Help", "f1"},
     {"HexEditMode", "f2"},
-    {"Quit", "f3; f10; q; esc; ctrl-g"},
+    {"Quit", "f3; f10; q; esc"},
     {"HexMode", "f4"},
     {"Goto", "f5"},
     {"Save", "f6"},

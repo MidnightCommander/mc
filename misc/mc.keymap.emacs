@@ -337,7 +337,7 @@ EditNew = k
 [viewer]
 Help = f1
 WrapMode = f2
-Quit = f3; f10; q; esc; ctrl-g
+Quit = f3; f10; q; esc
 HexMode = f4
 Goto = f5
 Search = f7; question; slash
@@ -369,7 +369,7 @@ Ruler = alt-r
 [viewer:hex]
 Help = f1
 HexEditMode = f2
-Quit = f3; f10; q; esc; ctrl-g
+Quit = f3; f10; q; esc
 HexMode = f4
 Goto = f5
 Save = f6
