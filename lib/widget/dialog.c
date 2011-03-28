@@ -1067,7 +1067,6 @@ init_dlg (Dlg_head * h)
     if ((top_dlg != NULL) && ((Dlg_head *) top_dlg->data)->modal)
         h->modal = TRUE;
 
-
     /* add dialog to the stack */
     top_dlg = g_list_prepend (top_dlg, h);
 
@@ -1104,7 +1103,8 @@ dlg_process_event (Dlg_head * h, int key, Gpm_Event * event)
     if (key == EV_NONE)
     {
         if (tty_got_interrupt ())
-            dlg_execute_cmd (h, CK_Cancel);
+            if (h->callback (h, NULL, DLG_ACTION, CK_Cancel, NULL) != MSG_HANDLED)
+                dlg_execute_cmd (h, CK_Cancel);
 
         return;
     }
