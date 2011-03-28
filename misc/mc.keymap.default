@@ -422,6 +422,6 @@ PageUp = pgup
 Home = home
 End = end
 Help = f1
-Quit = f10; q; shift-q; ctrl-g; esc
+Quit = f10; q; shift-q; esc
 Shell = ctrl-o
 SelectCodepage = alt-e

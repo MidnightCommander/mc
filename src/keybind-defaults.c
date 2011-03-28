@@ -527,7 +527,7 @@ static const global_keymap_ini_t default_diff_keymap[] = {
     {"Home", "home"},
     {"End", "end"},
     {"Help", "f1"},
-    {"Quit", "f10; q; shift-q; ctrl-g; esc"},
+    {"Quit", "f10; q; shift-q; esc"},
 #ifdef HAVE_CHARSET
     {"SelectCodepage", "alt-e"},
 #endif
