@@ -422,9 +422,9 @@ confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
     switch (msg)
     {
     case DLG_ACTION:
-        if (sender->id == 6)
+        /* message from "Always use ftp proxy" checkbutton */
+        if (sender != NULL && sender->id == 6)
         {
-            /* message from "Always use ftp proxy" checkbutton */
             const gboolean not_use = !(((WCheck *) sender)->state & C_BOOL);
             Widget *w;
 
