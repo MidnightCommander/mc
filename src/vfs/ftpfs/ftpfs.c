@@ -1,6 +1,6 @@
 /* Virtual File System: FTP file system.
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007 Free Software Foundation, Inc.
+   2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 
    Written by:
    1995 Ching Hui
@@ -9,6 +9,8 @@
    1997 Norbert Warmuth
    1998 Pavel Machek
    2010 Yury V. Zaytsev
+   2010 Slava Zanko
+   2010 Andrew Borodin
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -197,11 +199,6 @@ typedef enum
 typedef struct
 {
     int sock;
-    char *cwdir;
-    char *host;
-    char *user;
-    char *password;
-    int port;
 
     char *proxy;                /* proxy server, NULL if no proxy */
     int failed_on_login;        /* used to pass the failure reason to upper levels */
@@ -322,43 +319,42 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
  * ftp://joe@foo.edu:11321/private
  * If the user is empty, e.g. ftp://@roxanne/private, then your login name
  * is supplied.
- *
  */
 
-static void
-ftpfs_split_url (char *path, char **host, char **user, int *port, char **pass)
+static vfs_url_t *
+ftpfs_split_url (const char *path)
 {
-    char *p;
+    vfs_url_t *p;
 
-    p = vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT, URL_USE_ANONYMOUS);
+    p = vfs_url_split (path, FTP_COMMAND_PORT, URL_USE_ANONYMOUS);
 
-    if (!*user)
+    if (p->user != NULL)
     {
         /* Look up user and password in netrc */
         if (ftpfs_use_netrc)
-            ftpfs_netrc_lookup (*host, user, pass);
-        if (!*user)
-            *user = g_strdup ("anonymous");
+            ftpfs_netrc_lookup (p->host, &p->user, &p->password);
     }
+    if (p->user == NULL)
+        p->user = g_strdup ("anonymous");
 
     /* Look up password in netrc for known user */
-    if (ftpfs_use_netrc && *user && pass && !*pass)
+    if (ftpfs_use_netrc && p->user != NULL && p->password != NULL)
     {
-        char *new_user;
+        char *new_user = NULL;
 
-        ftpfs_netrc_lookup (*host, &new_user, pass);
+        ftpfs_netrc_lookup (p->host, &new_user, &p->password);
 
         /* If user is different, remove password */
-        if (new_user && strcmp (*user, new_user))
+        if (new_user != NULL && strcmp (p->user, new_user) != 0)
         {
-            g_free (*pass);
-            *pass = NULL;
+            g_free (p->password);
+            p->password = NULL;
         }
 
         g_free (new_user);
     }
 
-    g_free (p);
+    return p;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -414,23 +410,30 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
 static int
 ftpfs_reconnect (struct vfs_class *me, struct vfs_s_super *super)
 {
-    int sock = ftpfs_open_socket (me, super);
+    int sock;
+
+    sock = ftpfs_open_socket (me, super);
     if (sock != -1)
     {
-        char *cwdir = SUP->cwdir;
+        char *cwdir = super->url->path;
+
         close (SUP->sock);
         SUP->sock = sock;
-        SUP->cwdir = NULL;
-        if (ftpfs_login_server (me, super, SUP->password))
+        super->url->path = NULL;
+
+
+        if (ftpfs_login_server (me, super, super->url->password) != 0)
         {
-            if (!cwdir)
+            if (cwdir == NULL)
                 return 1;
             sock = ftpfs_chdir_internal (me, super, cwdir);
             g_free (cwdir);
-            return sock == COMPLETE;
+            return sock == COMPLETE ? 1 : 0;
         }
-        SUP->cwdir = cwdir;
+
+        super->url->path = cwdir;
     }
+
     return 0;
 }
 
@@ -532,14 +535,10 @@ ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
     if (SUP->sock != -1)
     {
-        vfs_print_message (_("ftpfs: Disconnecting from %s"), SUP->host);
+        vfs_print_message (_("ftpfs: Disconnecting from %s"), super->url->host);
         ftpfs_command (me, super, NONE, "QUIT");
         close (SUP->sock);
     }
-    g_free (SUP->host);
-    g_free (SUP->user);
-    g_free (SUP->cwdir);
-    g_free (SUP->password);
     g_free (super->data);
     super->data = NULL;
 }
@@ -572,13 +571,13 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 
     SUP->isbinary = TYPE_UNKNOWN;
 
-    if (SUP->password != NULL)  /* explicit password */
-        op = g_strdup (SUP->password);
+    if (super->url->password != NULL)   /* explicit password */
+        op = g_strdup (super->url->password);
     else if (netrcpass != NULL) /* password from netrc */
         op = g_strdup (netrcpass);
-    else if (strcmp (SUP->user, "anonymous") == 0 || strcmp (SUP->user, "ftp") == 0)
+    else if (strcmp (super->url->user, "anonymous") == 0 || strcmp (super->url->user, "ftp") == 0)
     {
-        if (!ftpfs_anonymous_passwd)    /* default anonymous password */
+        if (ftpfs_anonymous_passwd == NULL)     /* default anonymous password */
             ftpfs_init_passwd ();
         op = g_strdup (ftpfs_anonymous_passwd);
         anon = 1;
@@ -587,12 +586,12 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
     {                           /* ask user */
         char *p;
 
-        p = g_strdup_printf (_("FTP: Password required for %s"), SUP->user);
+        p = g_strdup_printf (_("FTP: Password required for %s"), super->url->user);
         op = vfs_get_password (p);
         g_free (p);
         if (op == NULL)
             ERRNOR (EPERM, 0);
-        SUP->password = g_strdup (op);
+        super->url->password = g_strdup (op);
     }
 
     if (!anon || MEDATA->logfile)
@@ -605,13 +604,12 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 
     /* Proxy server accepts: username@host-we-want-to-connect */
     if (SUP->proxy)
-    {
         name =
-            g_strconcat (SUP->user, "@",
-                         SUP->host[0] == '!' ? SUP->host + 1 : SUP->host, (char *) NULL);
-    }
+            g_strconcat (super->url->user, "@",
+                         super->url->host[0] == '!' ? super->url->host + 1 : super->url->host,
+                         (char *) NULL);
     else
-        name = g_strdup (SUP->user);
+        name = g_strdup (super->url->user);
 
     if (ftpfs_get_reply (me, SUP->sock, reply_string, sizeof (reply_string) - 1) == COMPLETE)
     {
@@ -638,7 +636,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
             {
                 char *p;
 
-                p = g_strdup_printf (_("FTP: Account required for user %s"), SUP->user);
+                p = g_strdup_printf (_("FTP: Account required for user %s"), super->url->user);
                 op = input_dialog (p, _("Account:"), MC_HISTORY_FTPFS_ACCOUNT, "");
                 g_free (p);
                 if (op == NULL)
@@ -659,14 +657,15 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 
         default:
             SUP->failed_on_login = 1;
-            if (SUP->password)
-                wipe_password (SUP->password);
-            SUP->password = 0;
+            wipe_password (super->url->password);
+            super->url->password = NULL;
 
             goto login_fail;
         }
     }
-    message (D_ERROR, MSG_ERROR, _("ftpfs: Login incorrect for user %s "), SUP->user);
+
+    message (D_ERROR, MSG_ERROR, _("ftpfs: Login incorrect for user %s "), super->url->user);
+
   login_fail:
     wipe_password (pass);
     g_free (name);
@@ -764,11 +763,12 @@ ftpfs_check_proxy (const char *host)
 static void
 ftpfs_get_proxy_host_and_port (const char *proxy, char **host, int *port)
 {
-    char *user, *dir;
+    vfs_url_t *url;
 
-    dir = vfs_split_url (proxy, host, &user, port, 0, FTP_COMMAND_PORT, URL_USE_ANONYMOUS);
-    g_free (user);
-    g_free (dir);
+    url = vfs_url_split (proxy, FTP_COMMAND_PORT, URL_USE_ANONYMOUS);
+    *host = g_strdup (url->host);
+    *port = url->port;
+    vfs_url_free (url);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -779,16 +779,16 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     struct addrinfo hints, *res, *curr_res;
     int my_socket = 0;
     char *host = NULL;
-    char *port = NULL;
+    char port[8];
     int tmp_port;
     int e;
 
     (void) me;
 
     /* Use a proxy host? */
-    host = g_strdup (SUP->host);
+    host = g_strdup (super->url->host);
 
-    if (!host || !*host)
+    if (host == NULL || *host == '\0')
     {
         vfs_print_message (_("ftpfs: Invalid host name."));
         ftpfs_errno = EINVAL;
@@ -797,15 +797,13 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     }
 
     /* Hosts to connect to that start with a ! should use proxy */
-    tmp_port = SUP->port;
+    tmp_port = super->url->port;
 
-    if (SUP->proxy)
-    {
+    if (SUP->proxy != NULL)
         ftpfs_get_proxy_host_and_port (ftpfs_proxy_host, &host, &tmp_port);
-    }
 
-    port = g_strdup_printf ("%hu", (unsigned short) tmp_port);
-    if (port == NULL)
+    g_snprintf (port, sizeof (port), "%hu", (unsigned short) tmp_port);
+    if (port[0] == '\0')
     {
         g_free (host);
         ftpfs_errno = errno;
@@ -836,8 +834,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     }
 #endif
 
-    g_free (port);
-    port = NULL;
+    *port = '\0';
 
     if (e != 0)
     {
@@ -850,12 +847,10 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 
     for (curr_res = res; curr_res != NULL; curr_res = curr_res->ai_next)
     {
-
         my_socket = socket (curr_res->ai_family, curr_res->ai_socktype, curr_res->ai_protocol);
 
         if (my_socket < 0)
         {
-
             if (curr_res->ai_next != NULL)
                 continue;
 
@@ -878,18 +873,12 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
         close (my_socket);
 
         if (errno == EINTR && tty_got_interrupt ())
-        {
             vfs_print_message (_("ftpfs: connection interrupted by user"));
-        }
         else if (res->ai_next == NULL)
-        {
             vfs_print_message (_("ftpfs: connection to server failed: %s"),
                                unix_error_string (errno));
-        }
         else
-        {
             continue;
-        }
 
         freeaddrinfo (res);
         tty_disable_interrupt_key ();
@@ -906,13 +895,13 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 static int
 ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
-    int retry_seconds, count_down;
+    int retry_seconds = 0;
+    int count_down;
 
     /* We do not want to use the passive if we are using proxies */
     if (SUP->proxy)
         SUP->use_passive_connection = ftpfs_use_passive_connections_over_proxy;
 
-    retry_seconds = 0;
     do
     {
         SUP->failed_on_login = 0;
@@ -921,29 +910,26 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
         if (SUP->sock == -1)
             return -1;
 
-        if (ftpfs_login_server (me, super, NULL))
+        if (ftpfs_login_server (me, super, NULL) != 0)
         {
             /* Logged in, no need to retry the connection */
             break;
         }
         else
         {
-            if (SUP->failed_on_login)
-            {
-                /* Close only the socket descriptor */
-                close (SUP->sock);
-            }
-            else
-            {
+            if (!SUP->failed_on_login)
                 return -1;
-            }
-            if (ftpfs_retry_seconds)
+
+            /* Close only the socket descriptor */
+            close (SUP->sock);
+
+            if (ftpfs_retry_seconds != 0)
             {
                 retry_seconds = ftpfs_retry_seconds;
                 tty_enable_interrupt_key ();
                 for (count_down = retry_seconds; count_down; count_down--)
                 {
-                    vfs_print_message (_("Waiting to retry... %d (Control-C to cancel)"),
+                    vfs_print_message (_("Waiting to retry... %d (Control-G to cancel)"),
                                        count_down);
                     sleep (1);
                     if (tty_got_interrupt ())
@@ -957,11 +943,12 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
             }
         }
     }
-    while (retry_seconds);
+    while (retry_seconds != 0);
 
-    SUP->cwdir = ftpfs_get_current_directory (me, super);
-    if (!SUP->cwdir)
-        SUP->cwdir = g_strdup (PATH_SEP_STR);
+    super->url->path = ftpfs_get_current_directory (me, super);
+    if (super->url->path == NULL)
+        super->url->path = g_strdup (PATH_SEP_STR);
+
     return 0;
 }
 
@@ -971,22 +958,14 @@ static int
 ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super,
                     const char *archive_name, char *op)
 {
-    char *host, *user, *password;
-    int port;
-
     (void) archive_name;
 
-    ftpfs_split_url (strchr (op, ':') + 1, &host, &user, &port, &password);
-
     super->data = g_new0 (ftp_super_data_t, 1);
-    SUP->host = host;
-    SUP->user = user;
-    SUP->port = port;
-    SUP->cwdir = NULL;
-    SUP->proxy = 0;
-    if (ftpfs_check_proxy (host))
+
+    super->url = ftpfs_split_url (strchr (op, ':') + 1);
+    SUP->proxy = NULL;
+    if (ftpfs_check_proxy (super->url->host))
         SUP->proxy = ftpfs_proxy_host;
-    SUP->password = password;
     SUP->use_passive_connection = ftpfs_use_passive_connections;
     SUP->strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
     SUP->isbinary = TYPE_UNKNOWN;
@@ -1003,22 +982,21 @@ static int
 ftpfs_archive_same (struct vfs_class *me, struct vfs_s_super *super,
                     const char *archive_name, char *op, void *cookie)
 {
-    char *host, *user;
-    int port;
+    vfs_url_t *url;
+    int result;
 
     (void) me;
     (void) archive_name;
     (void) cookie;
 
-    ftpfs_split_url (strchr (op, ':') + 1, &host, &user, &port, 0);
+    url = ftpfs_split_url (strchr (op, ':') + 1);
 
-    port = ((strcmp (host, SUP->host) == 0) && (strcmp (user, SUP->user) == 0)
-            && (port == SUP->port));
+    result = ((strcmp (url->host, super->url->host) == 0)
+              && (strcmp (url->user, super->url->user) == 0)
+              && (url->port == super->url->port)) ? 1 : 0;
 
-    g_free (host);
-    g_free (user);
-
-    return port;
+    vfs_url_free (url);
+    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1149,10 +1127,7 @@ ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
         break;
     }
 
-    if (connect (my_socket, (struct sockaddr *) sa, *salen) < 0)
-        return 0;
-
-    return 1;
+    return (connect (my_socket, (struct sockaddr *) sa, *salen) < 0) ? 0 : 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1292,8 +1267,8 @@ ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
         vfs_print_message (_("ftpfs: could not create socket: %s"), unix_error_string (errno));
         return -1;
     }
-    else
-        return result;
+
+    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1315,8 +1290,8 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
     if (SUP->use_passive_connection)
     {
         int data_sock;
-        data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
 
+        data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
         if (data_sock < 0)
             return -1;
 
@@ -1333,24 +1308,22 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
     if (!SUP->use_passive_connection)
     {
         int data_sock;
-        data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
 
+        data_sock = ftpfs_init_data_socket (me, super, &data_addr, &data_addrlen);
         if (data_sock < 0)
             return -1;
 
         if ((bind (data_sock, (struct sockaddr *) &data_addr, data_addrlen) == 0) &&
             (getsockname (data_sock, (struct sockaddr *) &data_addr, &data_addrlen) == 0) &&
-            (listen (data_sock, 1) == 0))
-        {
-            if (ftpfs_setup_active (me, super, data_addr, data_addrlen))
-                return data_sock;
-        }
+            (listen (data_sock, 1) == 0) &&
+            (ftpfs_setup_active (me, super, data_addr, data_addrlen) != 0))
+            return data_sock;
 
         close (data_sock);
     }
 
     /* Restore the initial value of use_passive_connection (for subsequent retries) */
-    SUP->use_passive_connection = SUP->proxy ? ftpfs_use_passive_connections_over_proxy :
+    SUP->use_passive_connection = SUP->proxy != NULL ? ftpfs_use_passive_connections_over_proxy :
         ftpfs_use_passive_connections;
 
     ftpfs_errno = EIO;
@@ -1413,7 +1386,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
+ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 {
     struct vfs_s_super *super = FH_SUPER;
     static unsigned char const ipbuf[3] = { IAC, IP, IAC };
@@ -1786,7 +1759,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char *localname)
+ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
     int h, sock, n_read, n_written;
     off_t n_stored;
@@ -1877,7 +1850,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
+ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 {
     char *name;
 
@@ -1900,7 +1873,7 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size_t len)
+ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
 {
     ssize_t n;
     struct vfs_s_super *super = FH_SUPER;
@@ -1930,7 +1903,7 @@ ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ftpfs_linear_close (struct vfs_class *me, vfs_file_handler_t *fh)
+ftpfs_linear_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
     if (FH_SOCK != -1)
         ftpfs_linear_abort (me, fh);
@@ -2048,11 +2021,9 @@ ftpfs_is_same_dir (struct vfs_class *me, struct vfs_s_super *super, const char *
 {
     (void) me;
 
-    if (!SUP->cwdir)
-        return 0;
-    if (strcmp (path, SUP->cwdir) == 0)
-        return 1;
-    return 0;
+    if (super->url->path == NULL)
+        return FALSE;
+    return (strcmp (path, super->url->path) == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2071,13 +2042,11 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
     g_free (p);
 
     if (r != COMPLETE)
-    {
         ftpfs_errno = EIO;
-    }
     else
     {
-        g_free (SUP->cwdir);
-        SUP->cwdir = g_strdup (remote_path);
+        g_free (super->url->path);
+        super->url->path = g_strdup (remote_path);
         SUP->cwd_deferred = 0;
     }
     return r;
@@ -2113,7 +2082,7 @@ ftpfs_rmdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
+ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
     ftp_fh_data_t *ftp;
 
@@ -2187,7 +2156,7 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t m
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t *fh)
+ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
     if (fh->handle != -1 && !fh->ino->localname)
     {
@@ -2235,7 +2204,8 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
         char *name;
 
-        name = g_strconcat ("/#ftp:", SUP->user, "@", SUP->host, "/", SUP->cwdir, (char *) NULL);
+        name = g_strconcat ("/#ftp:", super->url->user, "@", super->url->host, "/",
+                            super->url->path, (char *) NULL);
         func (name);
         g_free (name);
     }
@@ -2251,7 +2221,6 @@ ftpfs_netrc_next (void)
     static const char *const keywords[] = { "default", "machine",
         "login", "password", "passwd", "account", "macdef", NULL
     };
-
 
     while (1)
     {
@@ -2286,14 +2255,9 @@ ftpfs_netrc_next (void)
     if (!*buffer)
         return NETRC_NONE;
 
-    i = NETRC_DEFAULT;
-    while (keywords[i - 1])
-    {
-        if (!strcmp (keywords[i - 1], buffer))
+    for (i = NETRC_DEFAULT; keywords[i - 1] != NULL; i++)
+        if (strcmp (keywords[i - 1], buffer) == 0)
             return i;
-
-        i++;
-    }
 
     return NETRC_UNKNOWN;
 }
@@ -2407,11 +2371,10 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     } *rup_cache = NULL, *rupp;
 
     /* Initialize *login and *pass */
-    if (!login)
-        return 0;
+    g_free (*login);
     *login = NULL;
-    if (pass)
-        *pass = NULL;
+    g_free (*pass);
+    *pass = NULL;
 
     /* Look up in the cache first */
     for (rupp = rup_cache; rupp != NULL; rupp = rupp->next)
@@ -2521,19 +2484,13 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
 
     rupp = g_new (struct rupcache, 1);
     rupp->host = g_strdup (host);
-    rupp->login = rupp->pass = 0;
+    rupp->login = g_strdup (*login);
+    rupp->pass = g_strdup (tmp_pass);
 
-    if (*login != NULL)
-    {
-        rupp->login = g_strdup (*login);
-    }
-    if (tmp_pass != NULL)
-        rupp->pass = g_strdup (tmp_pass);
     rupp->next = rup_cache;
     rup_cache = rupp;
 
-    if (pass)
-        *pass = tmp_pass;
+    *pass = tmp_pass;
 
     return 0;
 }

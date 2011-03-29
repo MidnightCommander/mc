@@ -84,11 +84,6 @@ extern FILE *dbf;
 #define CNV_LANG(s) dos_to_unix(s,False)
 #define GNAL_VNC(s) unix_to_dos(s,False)
 
-/* Extract the hostname and username from the path */
-/* path is in the form: [user@]hostname/share/remote-dir */
-#define smbfs_get_host_and_username(path, host, user, port, pass) \
-        vfs_split_url (*path, host, user, port, pass, SMB_PORT, 0)
-
 #define smbfs_lstat smbfs_stat  /* no symlinks on smb filesystem? */
 
 /*** file scope type declarations ****************************************************************/
@@ -1324,42 +1319,46 @@ smbfs_open_link (char *host, char *path, const char *user, int *port, char *this
 static char *
 smbfs_get_path (smbfs_connection ** sc, const char *path)
 {
-    char *user, *host, *remote_path, *pass;
-    int port = SMB_PORT;
+    char *remote_path = NULL;
+    vfs_url_t *url;
 
     DEBUG (3, ("smbfs_get_path(%s)\n", path));
-    if (strncmp (path, URL_HEADER, HEADER_LEN))
+    if (strncmp (path, URL_HEADER, HEADER_LEN) != 0)
         return NULL;
     path += HEADER_LEN;
 
     if (*path == '/')           /* '/' leading server name */
         path++;                 /* probably came from server browsing */
 
-    if ((remote_path = smbfs_get_host_and_username (&path, &host, &user, &port, &pass)))
-        if ((*sc = smbfs_open_link (host, remote_path, user, &port, pass)) == NULL)
-        {
-            g_free (remote_path);
-            remote_path = NULL;
-        }
-    g_free (host);
-    g_free (user);
-    if (pass)
-        wipe_password (pass);
+    url = vfs_url_split (path, SMB_PORT, URL_FLAGS_NONE);
 
-    if (!remote_path)
+    if (url != NULL)
+    {
+        *sc = smbfs_open_link (url->host, url->path, url->user, &url->port, url->password);
+        wipe_password (url->password);
+
+        if (*sc != NULL)
+            remote_path = g_strdup (url->path);
+
+        vfs_url_free (url);
+    }
+
+    if (remote_path == NULL)
         return NULL;
 
     /* NOTE: tildes are deprecated. See ftpfs.c */
     {
-        int f = !strcmp (remote_path, "/~");
-        if (f || !strncmp (remote_path, "/~/", 3))
+        int f = strcmp (remote_path, "/~") ? 0 : 1;
+
+        if (f != 0 || strncmp (remote_path, "/~/", 3) == 0)
         {
             char *s;
             s = concat_dir_and_file ((*sc)->home, remote_path + 3 - f);
             g_free (remote_path);
-            return s;
+            remote_path = s;
         }
     }
+
     return remote_path;
 }
 
@@ -1942,10 +1941,9 @@ smbfs_free (vfsid id)
 static void
 smbfs_forget (const char *path)
 {
-    char *host, *user, *p;
-    int port;
+    vfs_url_t *p;
 
-    if (strncmp (path, URL_HEADER, HEADER_LEN))
+    if (strncmp (path, URL_HEADER, HEADER_LEN) != 0)
         return;
 
     DEBUG (3, ("smbfs_forget(path:%s)\n", path));
@@ -1954,30 +1952,29 @@ smbfs_forget (const char *path)
     if (path[0] == '/' && path[1] == '/')
         path += 2;
 
-    if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL)))
+    p = vfs_url_split (path, SMB_PORT, URL_FLAGS_NONE);
+    if (p != NULL)
     {
         size_t i;
-
-        g_free (p);
 
         for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++)
         {
             if (smbfs_connections[i].cli
-                && (strcmp (host, smbfs_connections[i].host) == 0)
-                && (strcmp (user, smbfs_connections[i].user) == 0)
-                && (port == smbfs_connections[i].port))
+                && (strcmp (p->host, smbfs_connections[i].host) == 0)
+                && (strcmp (p->user, smbfs_connections[i].user) == 0)
+                && (p->port == smbfs_connections[i].port))
             {
 
                 /* close socket: the child owns it now */
                 cli_shutdown (smbfs_connections[i].cli);
 
                 /* reopen the connection */
-                smbfs_connections[i].cli = smbfs_do_connect (host, smbfs_connections[i].service);
+                smbfs_connections[i].cli = smbfs_do_connect (p->host, smbfs_connections[i].service);
             }
         }
+
+        vfs_url_free (p);
     }
-    g_free (host);
-    g_free (user);
 }
 
 /* --------------------------------------------------------------------------------------------- */

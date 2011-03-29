@@ -17,18 +17,28 @@
 
 /*** enums ***************************************************************************************/
 
-/** Bit flags for vfs_split_url()
+/** Bit flags for vfs_url_split()
  *
  *  Modify parsing parameters according to flag meaning.
- *  @see vfs_split_url()
+ *  @see vfs_url_split()
  */
-enum VFS_URL_FLAGS
+typedef enum
 {
+    URL_FLAGS_NONE = 0,
     URL_USE_ANONYMOUS = 1, /**< if set, empty *user will contain NULL instead of current */
     URL_NOSLASH = 2        /**< if set, 'proto://' part in url is not searched */
-};
+} vfs_url_flags_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct
+{
+    char *user;
+    char *password;
+    char *host;
+    int port;
+    char *path;
+} vfs_url_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -37,8 +47,8 @@ enum VFS_URL_FLAGS
 int vfs_finduid (const char *name);
 int vfs_findgid (const char *name);
 
-char *vfs_split_url (const char *path, char **host, char **user, int *port,
-                     char **pass, int default_port, enum VFS_URL_FLAGS flags);
+vfs_url_t *vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags);
+void vfs_url_free (vfs_url_t * url);
 int vfs_split_text (char *p);
 
 int vfs_mkstemps (char **pname, const char *prefix, const char *basename);
