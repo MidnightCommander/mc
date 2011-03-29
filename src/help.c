@@ -905,6 +905,9 @@ help_execute_cmd (unsigned long command)
     case CK_Quit:
         dlg_stop (whelp);
         break;
+    case CK_Cancel:
+        /* don't close help due to SIGINT */
+        break;
     default:
         ret = MSG_NOT_HANDLED;
     }
@@ -952,8 +955,17 @@ help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         return help_handle_key (h, parm);
 
     case DLG_ACTION:
-        /* command from buttonbar */
-        return help_execute_cmd (parm);
+        /* shortcut */
+        if (sender == NULL)
+            return help_execute_cmd (parm);
+        /* message from buttonbar */
+        if (sender == (Widget *) find_buttonbar (h))
+        {
+            if (data != NULL)
+                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+            return help_execute_cmd (parm);
+        }
+        return MSG_NOT_HANDLED;
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);

@@ -119,7 +119,7 @@ SortByMTime =
 
 [dialog]
 Ok = enter
-Cancel = f10; esc; ctrl-g
+Cancel = f10; esc
 Up = left; up
 #Left = left; up
 Down = right; down

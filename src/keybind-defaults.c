@@ -297,7 +297,7 @@ static const global_keymap_ini_t default_help_keymap[] = {
     {"Help", "f1"},
     {"Index", "f2; c"},
     {"Back", "f3; left; l"},
-    {"Quit", "f10; esc; ctrl-g"},
+    {"Quit", "f10; esc"},
     {"Up", "up; ctrl-p"},
     {"Down", "down; ctrl-n"},
     {"PageDown", "f; space; pgdn; ctrl-v"},
