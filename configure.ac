@@ -25,6 +25,8 @@ AC_CANONICAL_HOST
 
 AC_USE_SYSTEM_EXTENSIONS
 
+AC_DEFINE_UNQUOTED([MC_CONFIGURE_ARGS],["$ac_configure_args"],[MC configure arguments])
+
 AC_PROG_LIBTOOL
 PKG_PROG_PKG_CONFIG
 AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])

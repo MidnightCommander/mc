@@ -55,6 +55,13 @@ startup.  See also
 .I \-f, \-\-datadir
 Display the compiled\-in search paths for Midnight Commander files.
 .TP
+.I \-F, \-\-datadir\-info
+Display extended info about compiled\-in paths for
+Midnight Commander.
+.TP
+.I \-\-configure\-options
+Display configure options.
+.TP
 .I \-k, \-\-resetsoft
 Reset softkeys to their default from the termcap/terminfo
 database. Only useful on HP terminals when the function keys don't work.

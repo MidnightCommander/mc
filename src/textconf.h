@@ -16,6 +16,8 @@
 /*** declarations of public functions ************************************************************/
 
 extern void show_version (void);
+extern void show_datadirs_extended (void);
+extern void show_configure_options (void);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__TEXTCONF_H */
