@@ -90,6 +90,7 @@ int option_line_state = 0;
 int option_line_state_width = 0;
 gboolean option_cursor_after_inserted_block = FALSE;
 int option_state_full_filename = 0;
+int option_autodetect_lb = 0;
 
 int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;
@@ -452,7 +453,8 @@ edit_load_file (WEdit * edit)
             edit_clean (edit);
             return FALSE;
         }
-        lb_type = detect_lb_type (edit->filename_vpath);
+        if (option_autodetect_lb)
+            lb_type = detect_lb_type (edit->filename_vpath);
 
         if (lb_type != LB_ASIS && lb_type != LB_UNIX)
             fast_load = FALSE;
