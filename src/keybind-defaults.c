@@ -459,7 +459,6 @@ const global_keymap_t default_help_keymap[] = {
     {'n', CK_HelpNextNode, "n"},
     {'p', CK_HelpPrevNode, "p"},
     {ESC_CHAR, CK_HelpQuit, "Esc"},
-    {XCTRL ('g'), CK_HelpQuit, "C-g"},
     {0, CK_Ignore_Key, ""}
 };
 
