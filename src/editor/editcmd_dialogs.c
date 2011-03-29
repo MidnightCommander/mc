@@ -350,13 +350,8 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel
         add_widget (raw_dlg, button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON, _("Cancel"), 0));
     w = run_dlg (raw_dlg);
     destroy_dlg (raw_dlg);
-    if (cancel)
-    {
-        if (w == XCTRL ('g') || w == XCTRL ('c') || w == ESC_CHAR || w == B_CANCEL)
-            return 0;
-    }
 
-    return w;
+    return (cancel && (w == ESC_CHAR || w == B_CANCEL)) ? 0 : w;
 }
 
 /* --------------------------------------------------------------------------------------------- */
