@@ -404,7 +404,6 @@ tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case DLG_ACTION:
-        /* command from buttonbar */
         return send_message ((Widget *) find_tree (h), WIDGET_COMMAND, parm);
 
     default:
