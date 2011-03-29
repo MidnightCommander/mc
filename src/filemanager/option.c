@@ -63,9 +63,9 @@ configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
     switch (msg)
     {
     case DLG_ACTION:
-        if (sender->id == 18)
+        /* message from "Single press" checkbutton */
+        if (sender != NULL && sender->id == 18)
         {
-            /* message from "Single press" checkbutton */
             const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
             Widget *w;
 
