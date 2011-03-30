@@ -163,6 +163,9 @@ static name_keymap_t command_names[] = {
 #ifdef ENABLE_VFS_FTP
     {"ConnectFtp", CK_ConnectFtp},
 #endif
+#ifdef ENABLE_VFS_SFTP
+    {"ConnectSftp", CK_ConnectSftp},
+#endif
 #ifdef ENABLE_VFS_SMB
     {"ConnectSmb", CK_ConnectSmb},
 #endif

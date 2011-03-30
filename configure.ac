@@ -546,6 +546,8 @@ src/vfs/fish/helpers/Makefile
 
 src/vfs/ftpfs/Makefile
 
+src/vfs/sftpfs/Makefile
+
 src/vfs/local/Makefile
 
 src/vfs/sfs/Makefile

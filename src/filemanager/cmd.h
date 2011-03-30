@@ -38,6 +38,9 @@ typedef enum
 #ifdef ENABLE_VFS_FTP
 void ftplink_cmd (void);
 #endif
+#ifdef ENABLE_VFS_SFTP
+void sftplink_cmd (void);
+#endif
 #ifdef ENABLE_VFS_FISH
 void fishlink_cmd (void);
 #endif
