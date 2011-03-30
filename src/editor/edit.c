@@ -652,7 +652,6 @@ static void
 edit_modification (WEdit * edit)
 {
     edit->caches_valid = 0;
-    edit->screen_modified = 1;
 
     /* raise lock when file modified */
     if (!edit->modified && !edit->delete_file)

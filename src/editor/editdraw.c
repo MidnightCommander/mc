@@ -630,7 +630,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             while (row <= end_row)
             {
                 if (key_pending (edit))
-                    goto exit_render;
+                    return;
                 edit_draw_this_line (edit, b, row, start_column, end_column);
                 b = edit_move_forward (edit, b, 1, 0);
                 row++;
@@ -650,7 +650,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                     while (row <= upto)
                     {
                         if (key_pending (edit))
-                            goto exit_render;
+                            return;
                         edit_draw_this_line (edit, b, row, start_column, end_column);
                         b = edit_move_forward (edit, b, 1, 0);
                     }
@@ -661,7 +661,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             if (curs_row >= start_row && curs_row <= end_row)
             {
                 if (key_pending (edit))
-                    goto exit_render;
+                    return;
                 edit_draw_this_line (edit, b, curs_row, start_column, end_column);
             }
             if (force & REDRAW_AFTER_CURSOR)
@@ -673,7 +673,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                     while (row <= end_row)
                     {
                         if (key_pending (edit))
-                            goto exit_render;
+                            return;
                         edit_draw_this_line (edit, b, row, start_column, end_column);
                         b = edit_move_forward (edit, b, 1, 0);
                         row++;
@@ -687,7 +687,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                 if (row >= start_row && row <= end_row)
                 {
                     if (key_pending (edit))
-                        goto exit_render;
+                        return;
                     edit_draw_this_line (edit, b, row, start_column, end_column);
                 }
             }
@@ -699,7 +699,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                 if (row >= start_row && row <= end_row)
                 {
                     if (key_pending (edit))
-                        goto exit_render;
+                        return;
                     edit_draw_this_line (edit, b, row, start_column, end_column);
                 }
             }
@@ -723,9 +723,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     prev_curs_row = edit->curs_row;
     prev_curs = edit->curs1;
-
-  exit_render:
-    edit->screen_modified = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
