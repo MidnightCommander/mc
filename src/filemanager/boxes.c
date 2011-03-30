@@ -404,7 +404,6 @@ tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case DLG_ACTION:
-        /* command from buttonbar */
         return send_message ((Widget *) find_tree (h), WIDGET_COMMAND, parm);
 
     default:
@@ -423,9 +422,9 @@ confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
     switch (msg)
     {
     case DLG_ACTION:
-        if (sender->id == 6)
+        /* message from "Always use ftp proxy" checkbutton */
+        if (sender != NULL && sender->id == 6)
         {
-            /* message from "Always use ftp proxy" checkbutton */
             const gboolean not_use = !(((WCheck *) sender)->state & C_BOOL);
             Widget *w;
 

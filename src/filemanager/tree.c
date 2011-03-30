@@ -1070,6 +1070,9 @@ tree_execute_cmd (WTree * tree, unsigned long command)
     case CK_Delete:
         tree_rmdir (tree);
         break;
+    case CK_Cancel:
+        /* don't close tree due to SIGINT */
+        break;
     default:
         res = MSG_NOT_HANDLED;
     }

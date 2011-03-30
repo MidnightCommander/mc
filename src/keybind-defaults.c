@@ -297,7 +297,7 @@ static const global_keymap_ini_t default_help_keymap[] = {
     {"Help", "f1"},
     {"Index", "f2; c"},
     {"Back", "f3; left; l"},
-    {"Quit", "f10; esc; ctrl-g"},
+    {"Quit", "f10; esc"},
     {"Up", "up; ctrl-p"},
     {"Down", "down; ctrl-n"},
     {"PageDown", "f; space; pgdn; ctrl-v"},
@@ -426,7 +426,7 @@ static const global_keymap_ini_t default_editor_x_keymap[] = {
 static const global_keymap_ini_t default_viewer_keymap[] = {
     {"Help", "f1"},
     {"WrapMode", "f2"},
-    {"Quit", "f3; f10; q; esc; ctrl-g"},
+    {"Quit", "f3; f10; q; esc"},
     {"HexMode", "f4"},
     {"Goto", "f5"},
     {"Search", "f7; question; slash"},
@@ -463,7 +463,7 @@ static const global_keymap_ini_t default_viewer_keymap[] = {
 static const global_keymap_ini_t default_viewer_hex_keymap[] = {
     {"Help", "f1"},
     {"HexEditMode", "f2"},
-    {"Quit", "f3; f10; q; esc; ctrl-g"},
+    {"Quit", "f3; f10; q; esc"},
     {"HexMode", "f4"},
     {"Goto", "f5"},
     {"Save", "f6"},
@@ -527,7 +527,7 @@ static const global_keymap_ini_t default_diff_keymap[] = {
     {"Home", "home"},
     {"End", "end"},
     {"Help", "f1"},
-    {"Quit", "f10; q; shift-q; ctrl-g; esc"},
+    {"Quit", "f10; q; shift-q; esc"},
 #ifdef HAVE_CHARSET
     {"SelectCodepage", "alt-e"},
 #endif

@@ -39,6 +39,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/keybind.h"        /* CK_Cancel */
 
 #include "midnight.h"           /* current_panel */
 #include "chmod.h"
@@ -179,6 +180,11 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
     switch (msg)
     {
     case DLG_ACTION:
+        /* close dialog due to SIGINT (ctrl-g) */
+        if (sender == NULL && parm == CK_Cancel)
+            return MSG_NOT_HANDLED;
+
+        /* handle checkboxes */
         if (id >= 0)
         {
             c_stat ^= check_perm[id].mode;
@@ -186,8 +192,10 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
             label_set_text (statl, buffer);
             chmod_toggle_select (h, id);
             mode_change = 1;
+            return MSG_HANDLED;
         }
-        return MSG_HANDLED;
+
+        return MSG_NOT_HANDLED;
 
     case DLG_KEY:
         if ((parm == 'T' || parm == 't' || parm == KEY_IC) && id > 0)

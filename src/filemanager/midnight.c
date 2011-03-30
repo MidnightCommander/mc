@@ -1390,6 +1390,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_ViewFile:
         view_file_cmd ();
         break;
+    case CK_Cancel:
+        /* don't close panels due to SIGINT */
+        break;
     default:
         res = MSG_NOT_HANDLED;
     }
@@ -1574,19 +1577,18 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
     case DLG_ACTION:
         /* shortcut */
         if (sender == NULL)
-            midnight_execute_cmd (NULL, parm);
+            return midnight_execute_cmd (NULL, parm);
         /* message from menu */
-        else if (sender == (Widget *) the_menubar)
-            midnight_execute_cmd (sender, parm);
+        if (sender == (Widget *) the_menubar)
+            return midnight_execute_cmd (sender, parm);
         /* message from buttonbar */
-        else if (sender == (Widget *) the_bar)
+        if (sender == (Widget *) the_bar)
         {
-            if (data == NULL)
-                midnight_execute_cmd (sender, parm);
-            else
-                send_message ((Widget *) data, WIDGET_COMMAND, parm);
+            if (data != NULL)
+                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+            return midnight_execute_cmd (sender, parm);
         }
-        return MSG_HANDLED;
+        return MSG_NOT_HANDLED;
 
     case DLG_END:
         panel_deinit ();

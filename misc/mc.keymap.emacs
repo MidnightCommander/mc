@@ -119,7 +119,7 @@ SortByMTime =
 
 [dialog]
 Ok = enter
-Cancel = f10; esc; ctrl-g
+Cancel = f10; esc
 Up = left; up
 #Left = left; up
 Down = right; down
@@ -337,7 +337,7 @@ EditNew = k
 [viewer]
 Help = f1
 WrapMode = f2
-Quit = f3; f10; q; esc; ctrl-g
+Quit = f3; f10; q; esc
 HexMode = f4
 Goto = f5
 Search = f7; question; slash
@@ -369,7 +369,7 @@ Ruler = alt-r
 [viewer:hex]
 Help = f1
 HexEditMode = f2
-Quit = f3; f10; q; esc; ctrl-g
+Quit = f3; f10; q; esc
 HexMode = f4
 Goto = f5
 Save = f6
@@ -425,6 +425,6 @@ PageUp = pgup
 Home = home
 End = end
 Help = f1
-Quit = f10; q; shift-q; ctrl-g; esc
+Quit = f10; q; shift-q; esc
 Shell = ctrl-o
 SelectCodepage = alt-e
