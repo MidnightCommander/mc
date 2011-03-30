@@ -78,7 +78,6 @@ struct WEdit
     unsigned int modified:1;    /* File has been modified and needs saving */
     unsigned int loading_done:1;        /* File has been loaded into the editor */
     unsigned int locked:1;      /* We hold lock on current file */
-    unsigned int screen_modified:1;     /* File has been changed since the last screen draw */
     unsigned int delete_file:1; /* New file, needs to be deleted unless modified */
     unsigned int highlight:1;   /* There is a selected block */
     unsigned int column_highlight:1;
