@@ -349,12 +349,6 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     case CK_ShowCommandLine:
         view_other_cmd ();
         break;
-        /*
-           // Unlike Ctrl-O, run a new shell if the subshell is not running
-           case '!':
-           exec_shell ();
-           return MSG_HANDLED;
-         */
     case CK_ViewGotoBookmark:
         view->marks[view->marker] = view->dpy_start;
         break;
