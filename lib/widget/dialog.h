@@ -145,8 +145,6 @@ struct Dlg_head
     dlg_cb_fn callback;
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
     dlg_title_str get_title;    /* useless for modal dialogs */
-
-    struct Dlg_head *parent;    /* Parent dialog */
 };
 
 /*** global variables defined in .c file *********************************************************/
