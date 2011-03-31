@@ -3447,6 +3447,17 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_MarkScrollDown:
     case CK_MarkParagraphUp:
     case CK_MarkParagraphDown:
+    /* a mark command with alt-arrow */
+    case CK_MarkColumnPageUp:
+    case CK_MarkColumnPageDown:
+    case CK_MarkColumnLeft:
+    case CK_MarkColumnRight:
+    case CK_MarkColumnUp:
+    case CK_MarkColumnDown:
+    case CK_MarkColumnScrollUp:
+    case CK_MarkColumnScrollDown:
+    case CK_MarkColumnParagraphUp:
+    case CK_MarkColumnParagraphDown:
         edit->column_highlight = 0;
         if (edit->highlight == 0 || (edit->mark2 != -1 && edit->mark1 != edit->mark2))
         {
