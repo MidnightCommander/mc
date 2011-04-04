@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2010-12-28 12:51+0200\n"
-"PO-Revision-Date: 2011-02-05 15:05+0000\n"
+"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Basque <None>\n"
 "MIME-Version: 1.0\n"
@@ -521,7 +521,7 @@ msgstr "Sakatu edozein tekla jarraitzeko..."
 #: src/editor/editcmd.c:1647 src/editor/editcmd.c:1670
 #: src/editor/editcmd.c:1969 src/editor/editcmd.c:3056
 #: src/editor/editcmd.c:3096 src/editor/editcmd_dialogs.c:518
-#: src/execute.c:113 src/filemanager/file.c:1364 src/filemanager/panel.c:3705
+#: src/execute.c:113 src/filemanager/file.c:1364 src/filemanager/panel.c:3647
 #: src/help.c:359 src/main.c:486 src/main.c:496 src/subshell.c:392
 #: src/subshell.c:1085 src/viewer/actions_cmd.c:277
 msgid "Warning"
@@ -642,7 +642,8 @@ msgstr "fish: Hasierako lerroaren zain..."
 
 #: lib/vfs/mc-vfs/fish.c:461
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Barkatu, oraingoz ezin dugu pasahitz bidez autentikatutako konexiorik egin."
+msgstr ""
+"Barkatu, oraingoz ezin dugu pasahitz bidez autentikatutako konexiorik egin."
 
 #: lib/vfs/mc-vfs/fish.c:468
 #, c-format
@@ -679,13 +680,13 @@ msgstr "fish: Konektatuta, etxea %s."
 msgid "fish: Reading directory %s..."
 msgstr "fish: %s direktorioa irakurtzen..."
 
-#: lib/vfs/mc-vfs/fish.c:811 lib/vfs/mc-vfs/ftpfs.c:1739
+#: lib/vfs/mc-vfs/fish.c:811 lib/vfs/mc-vfs/ftpfs.c:1751
 #: lib/vfs/mc-vfs/undelfs.c:376
 #, c-format
 msgid "%s: done."
 msgstr "%s: eginda."
 
-#: lib/vfs/mc-vfs/fish.c:824 lib/vfs/mc-vfs/ftpfs.c:1692
+#: lib/vfs/mc-vfs/fish.c:824 lib/vfs/mc-vfs/ftpfs.c:1704
 #: lib/vfs/mc-vfs/undelfs.c:379
 #, c-format
 msgid "%s: failure"
@@ -720,134 +721,134 @@ msgstr "Akatsaren berri eman da galarazi ondoren."
 msgid "Aborted transfer would be successful."
 msgstr "Galarazitako transferentzia arrakastatsua izango zen."
 
-#: lib/vfs/mc-vfs/ftpfs.c:514
+#: lib/vfs/mc-vfs/ftpfs.c:510
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: %s(e)tik deskonektatzen"
 
-#: lib/vfs/mc-vfs/ftpfs.c:567
+#: lib/vfs/mc-vfs/ftpfs.c:563
 #, c-format
 msgid "FTP: Password required for %s"
 msgstr "FTP: %s(a)rentzako pasahitza behar da"
 
-#: lib/vfs/mc-vfs/ftpfs.c:607
+#: lib/vfs/mc-vfs/ftpfs.c:603
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: saio hasteko izena bidaltzen"
 
-#: lib/vfs/mc-vfs/ftpfs.c:612
+#: lib/vfs/mc-vfs/ftpfs.c:608
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: erabiltzailearen pasahitza bidaltzen"
 
-#: lib/vfs/mc-vfs/ftpfs.c:618
+#: lib/vfs/mc-vfs/ftpfs.c:614
 #, c-format
 msgid "FTP: Account required for user %s"
 msgstr "FTP: %s erabiltzailearentzako kontua behar da"
 
-#: lib/vfs/mc-vfs/ftpfs.c:619
+#: lib/vfs/mc-vfs/ftpfs.c:615
 msgid "Account:"
 msgstr "Kontua:"
 
-#: lib/vfs/mc-vfs/ftpfs.c:623
+#: lib/vfs/mc-vfs/ftpfs.c:619
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: erabiltzailearen kontua bidaltzen"
 
-#: lib/vfs/mc-vfs/ftpfs.c:632
+#: lib/vfs/mc-vfs/ftpfs.c:628
 msgid "ftpfs: logged in"
 msgstr "ftpfs: saio hasita"
 
-#: lib/vfs/mc-vfs/ftpfs.c:646
+#: lib/vfs/mc-vfs/ftpfs.c:642
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: %s erabiltzailearen saio hasiera okerra "
 
-#: lib/vfs/mc-vfs/ftpfs.c:782
+#: lib/vfs/mc-vfs/ftpfs.c:778
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ostalari izen baliogabea."
 
-#: lib/vfs/mc-vfs/ftpfs.c:818 lib/vfs/mc-vfs/ftpfs.c:836
+#: lib/vfs/mc-vfs/ftpfs.c:830 lib/vfs/mc-vfs/ftpfs.c:848
 #, c-format
 msgid "ftpfs: %s"
 msgstr "ftpfs: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:843
+#: lib/vfs/mc-vfs/ftpfs.c:855
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: %s(e)ra koneksioa egiten"
 
-#: lib/vfs/mc-vfs/ftpfs.c:855
+#: lib/vfs/mc-vfs/ftpfs.c:867
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: konexioa erabiltzaileak eten du"
 
-#: lib/vfs/mc-vfs/ftpfs.c:859
+#: lib/vfs/mc-vfs/ftpfs.c:871
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: zerbitzarirako konexioak huts egin du: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:919
+#: lib/vfs/mc-vfs/ftpfs.c:931
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Berriro saiatzeko zain... %d (Kontrol-C uzteko)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1255
+#: lib/vfs/mc-vfs/ftpfs.c:1267
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: baliogabeko helbide familia"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1263
+#: lib/vfs/mc-vfs/ftpfs.c:1275
 #, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: ezin izan da socket sortu: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1297
+#: lib/vfs/mc-vfs/ftpfs.c:1309
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: ezin izan da modu pasiboa ezarri"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1397
+#: lib/vfs/mc-vfs/ftpfs.c:1409
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: transferentzia galarazten."
 
-#: lib/vfs/mc-vfs/ftpfs.c:1400
+#: lib/vfs/mc-vfs/ftpfs.c:1412
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: galarazte akatsa: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1408
+#: lib/vfs/mc-vfs/ftpfs.c:1420
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: galarazteak huts egin du"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1537 lib/vfs/mc-vfs/ftpfs.c:1650
+#: lib/vfs/mc-vfs/ftpfs.c:1549 lib/vfs/mc-vfs/ftpfs.c:1662
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD-k huts egin du."
 
-#: lib/vfs/mc-vfs/ftpfs.c:1547 lib/vfs/mc-vfs/ftpfs.c:1555
+#: lib/vfs/mc-vfs/ftpfs.c:1559 lib/vfs/mc-vfs/ftpfs.c:1567
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: ezin izan da esteka sinbolikoa ebatzi"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1616
+#: lib/vfs/mc-vfs/ftpfs.c:1628
 msgid "Resolving symlink..."
 msgstr "Esteka sinbolikoa ebazten..."
 
-#: lib/vfs/mc-vfs/ftpfs.c:1640
+#: lib/vfs/mc-vfs/ftpfs.c:1652
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: %s FTP direktorioa irakurtzen... %s%s "
 
-#: lib/vfs/mc-vfs/ftpfs.c:1643
+#: lib/vfs/mc-vfs/ftpfs.c:1655
 msgid "(strict rfc959)"
 msgstr "(rfc959 hertsia)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1643
+#: lib/vfs/mc-vfs/ftpfs.c:1655
 msgid "(chdir first)"
 msgstr "(aurrena chdir)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1753
+#: lib/vfs/mc-vfs/ftpfs.c:1765
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: huts egin du; ez dauka nora itzuli"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1831
+#: lib/vfs/mc-vfs/ftpfs.c:1843
 msgid "ftpfs: storing file"
 msgstr "ftpfs: fitxategia biltegiratzen"
 
-#: lib/vfs/mc-vfs/ftpfs.c:2275
+#: lib/vfs/mc-vfs/ftpfs.c:2287
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
@@ -1044,7 +1045,7 @@ msgstr "Gainerako analisi-erroreei ez zaie jaramonik egingo."
 msgid "Internal error:"
 msgstr "Barne-errorea:"
 
-#: lib/vfs/mc-vfs/utilvfs.c:1142 src/filemanager/boxes.c:1130
+#: lib/vfs/mc-vfs/utilvfs.c:1142 src/filemanager/boxes.c:1129
 msgid "Password:"
 msgstr "Pasahitza:"
 
@@ -1074,8 +1075,8 @@ msgstr "Historia hau ezabatu nahi duzu?"
 #: src/editor/editcmd.c:2367 src/filemanager/cmd.c:161
 #: src/filemanager/file.c:1127 src/filemanager/file.c:2358
 #: src/filemanager/filegui.c:334 src/filemanager/hotlist.c:1236
-#: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:951
-#: src/filemanager/midnight.c:959 src/filemanager/panel.c:2258
+#: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:946
+#: src/filemanager/midnight.c:954 src/filemanager/panel.c:2244
 #: src/filemanager/tree.c:857 src/subshell.c:1087 src/viewer/lib.c:157
 #: src/viewer/lib.c:163 src/viewer/search.c:286
 msgid "&Yes"
@@ -1086,8 +1087,8 @@ msgstr "&Bai"
 #: src/editor/editcmd.c:2367 src/filemanager/cmd.c:161
 #: src/filemanager/file.c:1127 src/filemanager/file.c:2358
 #: src/filemanager/filegui.c:332 src/filemanager/hotlist.c:1236
-#: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:951
-#: src/filemanager/midnight.c:959 src/filemanager/panel.c:2258
+#: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:946
+#: src/filemanager/midnight.c:954 src/filemanager/panel.c:2244
 #: src/filemanager/tree.c:857 src/subshell.c:1087 src/viewer/lib.c:157
 #: src/viewer/lib.c:163 src/viewer/search.c:287
 msgid "&No"
@@ -1109,15 +1110,15 @@ msgstr "Atzeko planoko prozesua:"
 #: src/editor/editcmd_dialogs.c:520 src/editor/editcmd_dialogs.c:586
 #: src/editor/editoptions.c:86 src/filemanager/achown.c:87
 #: src/filemanager/boxes.c:244 src/filemanager/boxes.c:375
-#: src/filemanager/boxes.c:600 src/filemanager/boxes.c:687
-#: src/filemanager/boxes.c:775 src/filemanager/boxes.c:932
-#: src/filemanager/boxes.c:1042 src/filemanager/boxes.c:1131
+#: src/filemanager/boxes.c:600 src/filemanager/boxes.c:686
+#: src/filemanager/boxes.c:774 src/filemanager/boxes.c:931
+#: src/filemanager/boxes.c:1041 src/filemanager/boxes.c:1130
 #: src/filemanager/chmod.c:121 src/filemanager/chown.c:94
 #: src/filemanager/cmd.c:1185 src/filemanager/filegui.c:934
 #: src/filemanager/find.c:495 src/filemanager/hotlist.c:206
 #: src/filemanager/hotlist.c:679 src/filemanager/hotlist.c:1025
 #: src/filemanager/hotlist.c:1121 src/filemanager/layout.c:416
-#: src/filemanager/option.c:113 src/filemanager/option.c:294
+#: src/filemanager/option.c:113 src/filemanager/option.c:297
 #: src/filemanager/panelize.c:88 src/learn.c:86 src/viewer/dialogs.c:91
 #: src/viewer/dialogs.c:193 src/viewer/hex.c:392
 msgid "&Cancel"
@@ -1130,18 +1131,18 @@ msgstr "&Utzi"
 #: src/editor/editcmd_dialogs.c:178 src/editor/editoptions.c:87
 #: src/filemanager/boxes.c:139 src/filemanager/boxes.c:243
 #: src/filemanager/boxes.c:376 src/filemanager/boxes.c:602
-#: src/filemanager/boxes.c:688 src/filemanager/boxes.c:776
-#: src/filemanager/boxes.c:933 src/filemanager/boxes.c:1043
-#: src/filemanager/boxes.c:1131 src/filemanager/filegui.c:942
+#: src/filemanager/boxes.c:687 src/filemanager/boxes.c:775
+#: src/filemanager/boxes.c:932 src/filemanager/boxes.c:1042
+#: src/filemanager/boxes.c:1130 src/filemanager/filegui.c:942
 #: src/filemanager/find.c:495 src/filemanager/layout.c:415
-#: src/filemanager/option.c:115 src/filemanager/option.c:296
+#: src/filemanager/option.c:115 src/filemanager/option.c:299
 #: src/subshell.c:395 src/viewer/dialogs.c:93 src/viewer/dialogs.c:194
 msgid "&OK"
 msgstr "&Ados"
 
-#: lib/widget/wtools.c:260 lib/widget/wtools.c:386 src/editor/edit.c:265
-#: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1535
-#: src/editor/edit.c:1913 src/editor/edit.c:1923 src/editor/editcmd.c:261
+#: lib/widget/wtools.c:260 lib/widget/wtools.c:381 src/editor/edit.c:265
+#: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1542
+#: src/editor/edit.c:1926 src/editor/edit.c:1936 src/editor/editcmd.c:261
 #: src/editor/editcmd.c:271 src/editor/editcmd.c:348 src/editor/editcmd.c:2452
 msgid "Error"
 msgstr "Errorea"
@@ -1234,7 +1235,7 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 " Keywords:\n"
-"   Global:       errors, disabled, reverse, gauge, viewunderline\n"
+"   Global:       errors, disabled, reverse, gauge, header\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "                 bbarhotkey, bbarbutton, statusbar\n"
 "   File display: normal, selected, marked, markselect\n"
@@ -1244,7 +1245,7 @@ msgid ""
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
-"   Viewer:       viewunderline\n"
+"   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 
@@ -1289,7 +1290,7 @@ msgstr ""
 "Mesedez bidali edozein akats txosten (`mc -V'-ren irteera barne)\n"
 "\"ticket\" bezala hona: www.midnight-commander.org\n"
 
-#: src/args.c:375 src/filemanager/midnight.c:1530 src/textconf.c:132
+#: src/args.c:375 src/filemanager/midnight.c:1545 src/textconf.c:132
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNUren %s Midnight Commander-a\n"
@@ -1341,7 +1342,7 @@ msgstr ""
 "Hondoko prozesu batek manejatu ditzakegun argumentuak\n"
 "baino gehiago eskatu dizkigu."
 
-#: src/diffviewer/internal.h:15 src/editor/edit-impl.h:126
+#: src/diffviewer/internal.h:15 src/editor/edit-impl.h:127
 msgid "&Dismiss"
 msgstr "&Itxi"
 
@@ -1477,7 +1478,7 @@ msgid "Enter line:"
 msgstr "Sartu lerroa:"
 
 #: src/diffviewer/ydiff.c:2819 src/editor/editwidget.c:221
-#: src/filemanager/midnight.c:1486 src/filemanager/tree.c:1177 src/help.c:1112
+#: src/filemanager/midnight.c:1501 src/filemanager/tree.c:1177 src/help.c:1112
 #: src/viewer/display.c:86
 msgid "ButtonBar|Help"
 msgstr "Laguntza"
@@ -1487,7 +1488,7 @@ msgstr "Laguntza"
 msgid "ButtonBar|Save"
 msgstr "Gorde"
 
-#: src/diffviewer/ydiff.c:2821 src/filemanager/midnight.c:1489
+#: src/diffviewer/ydiff.c:2821 src/filemanager/midnight.c:1504
 #: src/viewer/display.c:93
 msgid "ButtonBar|Edit"
 msgstr "Editatu"
@@ -1506,7 +1507,7 @@ msgid "ButtonBar|Options"
 msgstr "Aukerak"
 
 #: src/diffviewer/ydiff.c:2825 src/editor/editwidget.c:230
-#: src/filemanager/midnight.c:1495 src/help.c:1121 src/viewer/display.c:120
+#: src/filemanager/midnight.c:1510 src/help.c:1121 src/viewer/display.c:120
 #: src/viewer/display.c:123
 msgid "ButtonBar|Quit"
 msgstr "Irten"
@@ -1589,16 +1590,16 @@ msgstr "\"%s\" ez da fitxategi arrunta"
 msgid "File \"%s\" is too large"
 msgstr "\"%s\" fitxategia handiegia da"
 
-#: src/editor/edit.c:1535
+#: src/editor/edit.c:1542
 msgid "Macro recursion is too deep"
 msgstr "Makro errekurtsioa sakonegia da"
 
-#: src/editor/edit.c:1912
+#: src/editor/edit.c:1925
 #, c-format
 msgid "Error reading from pipe: %s"
 msgstr "Akatsa hoditik irakurtzerakoan: %s"
 
-#: src/editor/edit.c:1922
+#: src/editor/edit.c:1935
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Hodia irakurtzeko ezin ireki: %s"
@@ -1783,7 +1784,7 @@ msgstr "Gorde fitxategia"
 
 #: src/editor/editcmd.c:1627 src/editor/editmenu.c:73
 #: src/filemanager/layout.c:417 src/filemanager/option.c:114
-#: src/filemanager/option.c:295 src/learn.c:88 src/learn.c:214
+#: src/filemanager/option.c:298 src/learn.c:88 src/learn.c:214
 msgid "&Save"
 msgstr "&Gorde"
 
@@ -1859,7 +1860,9 @@ msgstr "Exekutatu \"sort\""
 
 #: src/editor/editcmd.c:2659
 msgid "Enter sort options (see manpage) separated by whitespace:"
-msgstr "Sartu sailkatzeko aukerak (begiratu eskuliburu (\"man\") orrialdea) zuriune bitartez banatuta:"
+msgstr ""
+"Sartu sailkatzeko aukerak (begiratu eskuliburu (\"man\") orrialdea) zuriune "
+"bitartez banatuta:"
 
 #: src/editor/editcmd.c:2674 src/editor/editcmd.c:2681
 msgid "Sort"
@@ -2065,7 +2068,7 @@ msgid "Mo&ve"
 msgstr "&Mugitu"
 
 #: src/editor/editmenu.c:106 src/filemanager/file.c:1564
-#: src/filemanager/midnight.c:253
+#: src/filemanager/midnight.c:250
 msgid "&Delete"
 msgstr "E&zabatu"
 
@@ -2209,7 +2212,7 @@ msgstr "&Orokorra..."
 msgid "Save &mode..."
 msgstr "Gordetzeko &modua..."
 
-#: src/editor/editmenu.c:214 src/filemanager/midnight.c:341
+#: src/editor/editmenu.c:214 src/filemanager/midnight.c:338
 msgid "Learn &keys..."
 msgstr "&Teklak ikasi..."
 
@@ -2225,15 +2228,15 @@ msgstr "Sinta&xi fitxategia"
 msgid "&Menu file"
 msgstr "&Menu fitxategia"
 
-#: src/editor/editmenu.c:221 src/filemanager/midnight.c:346
+#: src/editor/editmenu.c:221 src/filemanager/midnight.c:343
 msgid "&Save setup"
 msgstr "&Gorde konfigurazioa"
 
-#: src/editor/editmenu.c:255 src/filemanager/midnight.c:358
+#: src/editor/editmenu.c:255 src/filemanager/midnight.c:355
 msgid "&File"
 msgstr "&Fitxategia"
 
-#: src/editor/editmenu.c:257 src/filemanager/midnight.c:240
+#: src/editor/editmenu.c:257 src/filemanager/midnight.c:237
 msgid "&Edit"
 msgstr "&Editatu"
 
@@ -2241,7 +2244,7 @@ msgstr "&Editatu"
 msgid "&Search"
 msgstr "&Bilatu"
 
-#: src/editor/editmenu.c:262 src/filemanager/midnight.c:360
+#: src/editor/editmenu.c:262 src/filemanager/midnight.c:357
 msgid "&Command"
 msgstr "&Komandoa"
 
@@ -2249,7 +2252,7 @@ msgstr "&Komandoa"
 msgid "For&mat"
 msgstr "For&matua"
 
-#: src/editor/editmenu.c:267 src/filemanager/midnight.c:362
+#: src/editor/editmenu.c:267 src/filemanager/midnight.c:359
 msgid "&Options"
 msgstr "&Aukerak"
 
@@ -2337,7 +2340,7 @@ msgstr "Marka"
 msgid "ButtonBar|Replac"
 msgstr "Ordezk"
 
-#: src/editor/editwidget.c:225 src/filemanager/midnight.c:1490
+#: src/editor/editwidget.c:225 src/filemanager/midnight.c:1505
 #: src/filemanager/tree.c:1182
 msgid "ButtonBar|Copy"
 msgstr "Kopiatu"
@@ -2346,11 +2349,11 @@ msgstr "Kopiatu"
 msgid "ButtonBar|Move"
 msgstr "Mugitu"
 
-#: src/editor/editwidget.c:228 src/filemanager/midnight.c:1493
+#: src/editor/editwidget.c:228 src/filemanager/midnight.c:1508
 msgid "ButtonBar|Delete"
 msgstr "Ezabatu"
 
-#: src/editor/editwidget.c:229 src/filemanager/midnight.c:1494
+#: src/editor/editwidget.c:229 src/filemanager/midnight.c:1509
 msgid "ButtonBar|PullDn"
 msgstr "Jaitsi"
 
@@ -2384,7 +2387,7 @@ msgstr ""
 "duzu, edo zeure buruari aparteko baimenak eman dizkiozu\n"
 "\"su\" komandoa erabiliz?"
 
-#: src/execute.c:284 src/filemanager/command.c:220
+#: src/execute.c:284 src/filemanager/command.c:222
 msgid "The shell is already running a command"
 msgstr "Shell-a dagoeneko komando bat exekutate ari da"
 
@@ -2510,7 +2513,7 @@ msgstr "Erabiltzailearen &mini egoera"
 msgid "Other 8 bit"
 msgstr "Beste 8 bit"
 
-#: src/filemanager/boxes.c:365 src/filemanager/boxes.c:783
+#: src/filemanager/boxes.c:365 src/filemanager/boxes.c:782
 msgid "Display bits"
 msgstr ""
 
@@ -2518,7 +2521,7 @@ msgstr ""
 msgid "Input / display codepage:"
 msgstr "Sartu / bistaratu kode-orrialdea:"
 
-#: src/filemanager/boxes.c:378 src/filemanager/boxes.c:777
+#: src/filemanager/boxes.c:378 src/filemanager/boxes.c:776
 msgid "F&ull 8 bits input"
 msgstr "8 bit-eko sarrera"
 
@@ -2546,130 +2549,132 @@ msgstr "Berei&zi maius/minus"
 msgid "Executable &first"
 msgstr "Exekutagarria &lehenengo"
 
-#: src/filemanager/boxes.c:617
+#: src/filemanager/boxes.c:616
 msgid "Sort order"
 msgstr "Sailkatzeko ordena"
 
-#: src/filemanager/boxes.c:684 src/filemanager/cmd.c:160
+#: src/filemanager/boxes.c:683 src/filemanager/cmd.c:160
 msgid "Confirmation"
 msgstr "Berrespena"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context
 #. prefix
 #. 2
-#: src/filemanager/boxes.c:690
+#: src/filemanager/boxes.c:689
 msgid "Confirmation|&History cleanup"
 msgstr "&Historia garbitu"
 
-#: src/filemanager/boxes.c:692
+#: src/filemanager/boxes.c:691
 msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "&Gogokoen direktorioa ezabatu"
 
-#: src/filemanager/boxes.c:694
+#: src/filemanager/boxes.c:693
 msgid "Confirmation|E&xit"
 msgstr "&Irten"
 
-#: src/filemanager/boxes.c:695
+#: src/filemanager/boxes.c:694
 msgid "Confirmation|&Execute"
 msgstr "&Exekutatu"
 
-#: src/filemanager/boxes.c:696
+#: src/filemanager/boxes.c:695
 msgid "Confirmation|O&verwrite"
 msgstr "Gai&nidatzi"
 
-#: src/filemanager/boxes.c:697
+#: src/filemanager/boxes.c:696
 msgid "Confirmation|&Delete"
 msgstr "E&zabatu"
 
-#: src/filemanager/boxes.c:768
+#: src/filemanager/boxes.c:767
 msgid "UTF-8 output"
 msgstr "UTF-8 irteera"
 
-#: src/filemanager/boxes.c:769
+#: src/filemanager/boxes.c:768
 msgid "Full 8 bits output"
 msgstr "8 biteko irteera"
 
-#: src/filemanager/boxes.c:770
+#: src/filemanager/boxes.c:769
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
-#: src/filemanager/boxes.c:771
+#: src/filemanager/boxes.c:770
 msgid "7 bits"
 msgstr "7 bit"
 
-#: src/filemanager/boxes.c:902 src/filemanager/tree.c:1141
+#: src/filemanager/boxes.c:901 src/filemanager/tree.c:1141
 msgid "Directory tree"
 msgstr "Direktorio zuhaitza"
 
-#: src/filemanager/boxes.c:935
+#: src/filemanager/boxes.c:934
 msgid "Use passive mode over pro&xy"
 msgstr "Erabili modu pasiboa proxy-arekin"
 
-#: src/filemanager/boxes.c:937
+#: src/filemanager/boxes.c:936
 msgid "Use &passive mode"
 msgstr "Erabili modu &pasiboa"
 
-#: src/filemanager/boxes.c:939
+#: src/filemanager/boxes.c:938
 msgid "&Use ~/.netrc"
 msgstr "&Erabili ~/.netrc"
 
-#: src/filemanager/boxes.c:942
+#: src/filemanager/boxes.c:941
 msgid "&Always use ftp proxy"
 msgstr "&Erabili beti ftp proxy-a"
 
-#: src/filemanager/boxes.c:944 src/filemanager/boxes.c:952
+#: src/filemanager/boxes.c:943 src/filemanager/boxes.c:951
 msgid "sec"
 msgstr "seg"
 
-#: src/filemanager/boxes.c:947
+#: src/filemanager/boxes.c:946
 msgid "ftpfs directory cache timeout:"
 msgstr "ftpfs direktorioen cache-ko denbora-muga:"
 
-#: src/filemanager/boxes.c:950
+#: src/filemanager/boxes.c:949
 msgid "ftp anonymous password:"
 msgstr "ftp anonimoaren pasahitza:"
 
-#: src/filemanager/boxes.c:954
+#: src/filemanager/boxes.c:953
 msgid "Timeout for freeing VFSs:"
 msgstr "VFSak askatzeko denbora-muga:"
 
-#: src/filemanager/boxes.c:959
+#: src/filemanager/boxes.c:958
 msgid "Virtual File System Setting"
 msgstr "Alegiazko fitxategi sistemaren (VFS) ezarpena"
 
-#: src/filemanager/boxes.c:1006
+#: src/filemanager/boxes.c:1005
 msgid "cd"
 msgstr "cd"
 
-#: src/filemanager/boxes.c:1028
+#: src/filemanager/boxes.c:1027
 msgid "Quick cd"
 msgstr "cd bizkorra"
 
-#: src/filemanager/boxes.c:1045
+#: src/filemanager/boxes.c:1044
 msgid "Symbolic link filename:"
 msgstr "Esteka sinbolikoaren fitxategi izena:"
 
-#: src/filemanager/boxes.c:1048
+#: src/filemanager/boxes.c:1047
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Existitzen den fitxategi izena (esteka sinbolikoak erakutsiko duen fitxategi izena):"
+msgstr ""
+"Existitzen den fitxategi izena (esteka sinbolikoak erakutsiko duen fitxategi"
+" izena):"
 
-#: src/filemanager/boxes.c:1053
+#: src/filemanager/boxes.c:1052
 msgid "Symbolic link"
 msgstr "Esteka sinbolikoa"
 
-#: src/filemanager/boxes.c:1100
+#: src/filemanager/boxes.c:1099
 msgid "Background Jobs"
 msgstr "Hondoko lanak"
 
-#: src/filemanager/boxes.c:1130
+#: src/filemanager/boxes.c:1129
 msgid "Domain:"
 msgstr "Domeinua:"
 
-#: src/filemanager/boxes.c:1130
+#: src/filemanager/boxes.c:1129
 msgid "Username:"
 msgstr "Erabiltzaile izena:"
 
-#: src/filemanager/boxes.c:1182
+#: src/filemanager/boxes.c:1181
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s(r)entzako pasahitza"
@@ -2776,7 +2781,7 @@ msgid "File"
 msgstr "Fitxategia"
 
 #: src/filemanager/chmod.c:248 src/filemanager/chown.c:132
-#: src/filemanager/panel.c:204
+#: src/filemanager/panel.c:202
 msgid "Permission"
 msgstr "Baimena"
 
@@ -2817,7 +2822,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Fitxategiak hautatuta, direktoria aldatu nahi?"
 
 #: src/filemanager/cmd.c:167 src/filemanager/cmd.c:1169
-#: src/filemanager/panel.c:2237 src/filemanager/panel.c:2721
+#: src/filemanager/panel.c:2223 src/filemanager/panel.c:2712
 msgid "Cannot change directory"
 msgstr "Direktorioa ezin aldatu"
 
@@ -2861,7 +2866,7 @@ msgstr "esteka: %s"
 msgid "symlink: %s"
 msgstr "esteka sinbolikoa: %s"
 
-#: src/filemanager/cmd.c:510 src/filemanager/panel.c:3979
+#: src/filemanager/cmd.c:510 src/filemanager/panel.c:3922
 #, c-format
 msgid "Cannot chdir to \"%s\""
 msgstr "\"%s\" direktoriora ezin aldatu (\"chdir\")"
@@ -3007,11 +3012,11 @@ msgstr "Ezarpena"
 msgid "Setup saved to ~/%s"
 msgstr "Ezarpena ~/%s kokapenera gordeta"
 
-#: src/filemanager/command.c:212 src/filemanager/usermenu.c:865
+#: src/filemanager/command.c:214 src/filemanager/usermenu.c:865
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Komandoak ezin exekutatu bertakoa ez den fitxategi-sistema batean"
 
-#: src/filemanager/command.c:357 src/filemanager/panel.c:2934
+#: src/filemanager/command.c:363 src/filemanager/panel.c:2930
 #: src/filemanager/tree.c:586
 #, c-format
 msgid ""
@@ -3045,8 +3050,14 @@ msgstr " %s%s fitxategi akatsa"
 
 #: src/filemanager/ext.c:666
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
-msgstr "%smc.ext fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. Ematen du instalaketak huts egin duela. Mesedez eskuratu kopia berri bat Midnight Commander paketetik."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"%smc.ext fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. Ematen du "
+"instalaketak huts egin duela. Mesedez eskuratu kopia berri bat Midnight "
+"Commander paketetik."
 
 #: src/filemanager/ext.c:678
 #, c-format
@@ -3055,8 +3066,13 @@ msgstr "~/%s fitxategi akatsa"
 
 #: src/filemanager/ext.c:681
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "~/%s fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. Agian %smc.ext fitxategitik kopiatu nahiko duzu edo fitxategiaidazteko eredu gisa erabili."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0. You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write"
+" it."
+msgstr ""
+"~/%s fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. Agian %smc.ext"
+" fitxategitik kopiatu nahiko duzu edo fitxategiaidazteko eredu gisa erabili."
 
 #: src/filemanager/file.c:87 src/filemanager/file.c:1562
 #: src/filemanager/tree.c:746
@@ -3261,10 +3277,10 @@ msgstr "Ezabatu:"
 msgid "Non&e"
 msgstr "&Bat ere ez"
 
-#: src/filemanager/file.c:1276
+#: src/filemanager/file.c:1276 src/filemanager/file.c:1911
 #, c-format
 msgid ""
-"Cannot overwrite directory\"%s\"\n"
+"Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
 "\"%s\" direktorioa ezin gainidatzi\n"
@@ -3461,15 +3477,6 @@ msgstr ""
 "eta\n"
 "\"%s\"\n"
 "direktorio bera dira"
-
-#: src/filemanager/file.c:1911
-#, c-format
-msgid ""
-"Cannot overwrite directory \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" direktorioa ezin gainidatzi\n"
-"%s"
 
 #: src/filemanager/file.c:1913
 #, c-format
@@ -3697,7 +3704,7 @@ msgstr "&Lehenengo agerraldia"
 msgid "A&ll charsets"
 msgstr "Karaktere-&multzo guztiak"
 
-#: src/filemanager/find.c:495 src/filemanager/midnight.c:202
+#: src/filemanager/find.c:495 src/filemanager/midnight.c:199
 msgid "&Tree"
 msgstr "Zu&haitza"
 
@@ -3868,7 +3875,7 @@ msgstr "\"%s\"(r)en etiketa:"
 msgid "Add to hotlist"
 msgstr "Erantsi gogokoetara"
 
-#: src/filemanager/info.c:72 src/filemanager/option.c:436
+#: src/filemanager/info.c:72 src/filemanager/option.c:444
 msgid "Information"
 msgstr "Informazioa"
 
@@ -4032,275 +4039,275 @@ msgstr "Irteera lerroak:"
 msgid "Layout"
 msgstr "Diseinua"
 
-#: src/filemanager/midnight.c:199
+#: src/filemanager/midnight.c:196
 msgid "File listin&g"
 msgstr "&Fitxategien zerrendatzea"
 
-#: src/filemanager/midnight.c:200
+#: src/filemanager/midnight.c:197
 msgid "&Quick view"
 msgstr "Ikuspegi &azkarra"
 
-#: src/filemanager/midnight.c:201
+#: src/filemanager/midnight.c:198
 msgid "&Info"
 msgstr "&Info"
 
-#: src/filemanager/midnight.c:205
+#: src/filemanager/midnight.c:202
 msgid "&Listing mode..."
 msgstr "&Zerrendatzeko modua..."
 
-#: src/filemanager/midnight.c:206
+#: src/filemanager/midnight.c:203
 msgid "&Sort order..."
 msgstr "&Sailkatzeko ordena..."
 
-#: src/filemanager/midnight.c:207
+#: src/filemanager/midnight.c:204
 msgid "&Filter..."
 msgstr "I&ragazkia..."
 
-#: src/filemanager/midnight.c:210
+#: src/filemanager/midnight.c:207
 msgid "&Encoding..."
 msgstr "&Kodeketa..."
 
-#: src/filemanager/midnight.c:215
+#: src/filemanager/midnight.c:212
 msgid "FT&P link..."
 msgstr "FT&P esteka..."
 
-#: src/filemanager/midnight.c:218
+#: src/filemanager/midnight.c:215
 msgid "S&hell link..."
 msgstr "S&hell esteka..."
 
-#: src/filemanager/midnight.c:221
+#: src/filemanager/midnight.c:218
 msgid "SM&B link..."
 msgstr "S&MB esteka..."
 
-#: src/filemanager/midnight.c:225
+#: src/filemanager/midnight.c:222
 msgid "&Rescan"
 msgstr "&Berraztertu"
 
-#: src/filemanager/midnight.c:237
+#: src/filemanager/midnight.c:234
 msgid "&View"
 msgstr "&Ikusi"
 
-#: src/filemanager/midnight.c:238
+#: src/filemanager/midnight.c:235
 msgid "Vie&w file..."
 msgstr "Ikusi &fitxategia..."
 
-#: src/filemanager/midnight.c:239
+#: src/filemanager/midnight.c:236
 msgid "&Filtered view"
 msgstr "I&ragazitako ikuspegia"
 
-#: src/filemanager/midnight.c:241
+#: src/filemanager/midnight.c:238
 msgid "&Copy"
 msgstr "&Kopiatu"
 
-#: src/filemanager/midnight.c:242
+#: src/filemanager/midnight.c:239
 msgid "C&hmod"
 msgstr "C&hmod"
 
-#: src/filemanager/midnight.c:243
+#: src/filemanager/midnight.c:240
 msgid "&Link"
 msgstr "&Esteka"
 
-#: src/filemanager/midnight.c:244
+#: src/filemanager/midnight.c:241
 msgid "&Symlink"
 msgstr "E&steka sinbolikoa"
 
-#: src/filemanager/midnight.c:246
+#: src/filemanager/midnight.c:243
 msgid "Relative symlin&k"
 msgstr "Es&teka sinboliko erlatiboa"
 
-#: src/filemanager/midnight.c:247
+#: src/filemanager/midnight.c:244
 msgid "Edit s&ymlink"
 msgstr "E&ditatu esteka sinbolikoa"
 
-#: src/filemanager/midnight.c:248
+#: src/filemanager/midnight.c:245
 msgid "Ch&own"
 msgstr "&Chown"
 
-#: src/filemanager/midnight.c:250
+#: src/filemanager/midnight.c:247
 msgid "&Advanced chown"
 msgstr "Ch&own aurreratua"
 
-#: src/filemanager/midnight.c:251
+#: src/filemanager/midnight.c:248
 msgid "&Rename/Move"
 msgstr "Berrizendatu/Mu&gitu"
 
-#: src/filemanager/midnight.c:252
+#: src/filemanager/midnight.c:249
 msgid "&Mkdir"
 msgstr "&Mkdir"
 
-#: src/filemanager/midnight.c:254
+#: src/filemanager/midnight.c:251
 msgid "&Quick cd"
 msgstr "Cd a&zkarra"
 
-#: src/filemanager/midnight.c:256
+#: src/filemanager/midnight.c:253
 msgid "Select &group"
 msgstr "Hautatu ta&ldea"
 
-#: src/filemanager/midnight.c:257
+#: src/filemanager/midnight.c:254
 msgid "U&nselect group"
 msgstr "Des&autatu taldea"
 
-#: src/filemanager/midnight.c:260
+#: src/filemanager/midnight.c:257
 msgid "Reverse selec&tion"
 msgstr "Alderantzizko ha&utaketa"
 
-#: src/filemanager/midnight.c:262
+#: src/filemanager/midnight.c:259
 msgid "E&xit"
 msgstr "Irte&n"
 
-#: src/filemanager/midnight.c:278
+#: src/filemanager/midnight.c:275
 msgid "&User menu"
 msgstr "&Erabiltzailearen menua"
 
-#: src/filemanager/midnight.c:279
+#: src/filemanager/midnight.c:276
 msgid "&Directory tree"
 msgstr "&Direktorio zuhaitza"
 
-#: src/filemanager/midnight.c:280
+#: src/filemanager/midnight.c:277
 msgid "&Find file"
 msgstr "&Aurkitu fitxategia"
 
-#: src/filemanager/midnight.c:281
+#: src/filemanager/midnight.c:278
 msgid "S&wap panels"
 msgstr "&Trukatu panelak"
 
-#: src/filemanager/midnight.c:283
+#: src/filemanager/midnight.c:280
 msgid "Switch &panels on/off"
 msgstr "&Panelak ezkutatu/erakutsi"
 
-#: src/filemanager/midnight.c:285
+#: src/filemanager/midnight.c:282
 msgid "&Compare directories"
 msgstr "&Konparatu direktorioak"
 
-#: src/filemanager/midnight.c:287
+#: src/filemanager/midnight.c:284
 msgid "&View diff files"
 msgstr "&Ikusi diff fitxategiak"
 
-#: src/filemanager/midnight.c:290
+#: src/filemanager/midnight.c:287
 msgid "E&xternal panelize"
 msgstr "Ka&npoko panela"
 
-#: src/filemanager/midnight.c:293
+#: src/filemanager/midnight.c:290
 msgid "Show directory s&izes"
 msgstr "E&rakutsi direktorioen neurriak"
 
-#: src/filemanager/midnight.c:295
+#: src/filemanager/midnight.c:292
 msgid "Command &history"
 msgstr "Ko&mandoen historia"
 
-#: src/filemanager/midnight.c:297
+#: src/filemanager/midnight.c:294
 msgid "Di&rectory hotlist"
 msgstr "&Gogoko direktorioak"
 
-#: src/filemanager/midnight.c:299
+#: src/filemanager/midnight.c:296
 msgid "&Active VFS list"
 msgstr "&Jarduneko VFS zerrenda"
 
-#: src/filemanager/midnight.c:302
+#: src/filemanager/midnight.c:299
 msgid "&Background jobs"
 msgstr "&Hondoko lanak"
 
-#: src/filemanager/midnight.c:304
+#: src/filemanager/midnight.c:301
 msgid "Screen lis&t"
 msgstr "Pantaila &zerrenda"
 
-#: src/filemanager/midnight.c:309
+#: src/filemanager/midnight.c:306
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Berreskuratu fitxategiak (soilik ext2fs)"
 
-#: src/filemanager/midnight.c:313
+#: src/filemanager/midnight.c:310
 msgid "&Listing format edit"
 msgstr "Zerrendatzeko &formatua editatu"
 
-#: src/filemanager/midnight.c:319
+#: src/filemanager/midnight.c:316
 msgid "Edit &extension file"
 msgstr "Editatu &luzapen fitxategia"
 
-#: src/filemanager/midnight.c:320
+#: src/filemanager/midnight.c:317
 msgid "Edit &menu file"
 msgstr "Editat&u menu fitxategia"
 
-#: src/filemanager/midnight.c:323
+#: src/filemanager/midnight.c:320
 msgid "Edit hi&ghlighting group file"
 msgstr "Editatu nabarmentzeko taldeen &fitxategia"
 
-#: src/filemanager/midnight.c:335
+#: src/filemanager/midnight.c:332
 msgid "&Configuration..."
 msgstr "&Konfigurazioa..."
 
-#: src/filemanager/midnight.c:336
+#: src/filemanager/midnight.c:333
 msgid "&Layout..."
 msgstr "&Diseinua..."
 
-#: src/filemanager/midnight.c:338
+#: src/filemanager/midnight.c:335
 msgid "&Panel options..."
 msgstr "&Panelen aukerak..."
 
-#: src/filemanager/midnight.c:339
+#: src/filemanager/midnight.c:336
 msgid "C&onfirmation..."
 msgstr "&Berrespena..."
 
-#: src/filemanager/midnight.c:340
+#: src/filemanager/midnight.c:337
 msgid "&Display bits..."
 msgstr "&Bistaratu bitak..."
 
-#: src/filemanager/midnight.c:343
+#: src/filemanager/midnight.c:340
 msgid "&Virtual FS..."
 msgstr "Alegiazko &FS..."
 
-#: src/filemanager/midnight.c:466
+#: src/filemanager/midnight.c:461
 msgid "Panels:"
 msgstr "Panelak:"
 
-#: src/filemanager/midnight.c:734
+#: src/filemanager/midnight.c:729
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
 
-#: src/filemanager/midnight.c:948
+#: src/filemanager/midnight.c:943
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] "Pantaila %zd irekita daukazu. Irten hala ere?"
 msgstr[1] "%zd pantaila irekita dauzkazu. Irten hala ere?"
 
-#: src/filemanager/midnight.c:951 src/filemanager/midnight.c:957
-#: src/filemanager/panel.c:2257
+#: src/filemanager/midnight.c:946 src/filemanager/midnight.c:952
+#: src/filemanager/panel.c:2243
 msgid "The Midnight Commander"
 msgstr "Midnight Commander-ra"
 
-#: src/filemanager/midnight.c:958
+#: src/filemanager/midnight.c:953
 msgid "Do you really want to quit the Midnight Commander?"
 msgstr "Benetan utzi nahi duzu Midnight Commander-ra?"
 
-#: src/filemanager/midnight.c:1478
+#: src/filemanager/midnight.c:1492
 msgid "&Above"
 msgstr "&Gainean"
 
-#: src/filemanager/midnight.c:1478
+#: src/filemanager/midnight.c:1492
 msgid "&Left"
 msgstr "E&zkerra"
 
-#: src/filemanager/midnight.c:1479
+#: src/filemanager/midnight.c:1493
 msgid "&Below"
 msgstr "&Azpian"
 
-#: src/filemanager/midnight.c:1479
+#: src/filemanager/midnight.c:1493
 msgid "&Right"
 msgstr "E&skuina"
 
-#: src/filemanager/midnight.c:1487
+#: src/filemanager/midnight.c:1502
 msgid "ButtonBar|Menu"
 msgstr "Menua"
 
-#: src/filemanager/midnight.c:1488 src/viewer/display.c:91
+#: src/filemanager/midnight.c:1503 src/viewer/display.c:91
 msgid "ButtonBar|View"
 msgstr "Ikusi"
 
-#: src/filemanager/midnight.c:1491 src/filemanager/tree.c:1183
+#: src/filemanager/midnight.c:1506 src/filemanager/tree.c:1183
 msgid "ButtonBar|RenMov"
 msgstr "BerrizenMug"
 
-#: src/filemanager/midnight.c:1492 src/filemanager/tree.c:1186
+#: src/filemanager/midnight.c:1507 src/filemanager/tree.c:1186
 msgid "ButtonBar|Mkdir"
 msgstr "SortuDir"
 
@@ -4396,91 +4403,95 @@ msgstr "Fitxategi eragiketen aukerak"
 msgid "Configure options"
 msgstr "Konfiguratu aukerak"
 
-#: src/filemanager/option.c:287
+#: src/filemanager/option.c:290
 msgid "Case &insensitive"
 msgstr "&Ez bereizi maius/minus"
 
-#: src/filemanager/option.c:288
+#: src/filemanager/option.c:291
 msgid "Case s&ensitive"
 msgstr "Bereizi &maiuskulak/minuskulak"
 
-#: src/filemanager/option.c:289
+#: src/filemanager/option.c:292
 msgid "Use panel sort mo&de"
 msgstr "Erabili panela sailkatzeko mo&dua"
 
-#: src/filemanager/option.c:302
+#: src/filemanager/option.c:305
 msgid "Quick search"
 msgstr "Bilaketa azkarra"
 
-#: src/filemanager/option.c:304
+#: src/filemanager/option.c:307
 msgid "&Permissions"
 msgstr "&Baimenak"
 
-#: src/filemanager/option.c:306
+#: src/filemanager/option.c:309
 msgid "File &types"
 msgstr "Fitxategi &motak"
 
-#: src/filemanager/option.c:309
+#: src/filemanager/option.c:312
 msgid "File highlight"
 msgstr "Fitxategi nabarmentzea"
 
-#: src/filemanager/option.c:311
+#: src/filemanager/option.c:314
 msgid "&Mouse page scrolling"
 msgstr "&Saguarekin orri labainketa"
 
-#: src/filemanager/option.c:313
+#: src/filemanager/option.c:316
 msgid "Pa&ge scrolling"
 msgstr "Orri &labainketa"
 
-#: src/filemanager/option.c:315
+#: src/filemanager/option.c:318
 msgid "L&ynx-like motion"
 msgstr "L&ynx-en moduko mugimendua"
 
-#: src/filemanager/option.c:318
+#: src/filemanager/option.c:321
 msgid "Navigation"
 msgstr "Nabigazioa"
 
-#: src/filemanager/option.c:320
+#: src/filemanager/option.c:323
 msgid "A&uto save panels setup"
 msgstr "A&uto gorde panelen ezarpena"
 
-#: src/filemanager/option.c:322
+#: src/filemanager/option.c:325
+msgid "Simple s&wap"
+msgstr ""
+
+#: src/filemanager/option.c:327
 msgid "Re&verse files only"
 msgstr "&Alderantzikatu fitxategiak soilik"
 
-#: src/filemanager/option.c:324
+#: src/filemanager/option.c:329
 msgid "Ma&rk moves down"
 msgstr "Ma&rkatzean beheruntz mugitu"
 
-#: src/filemanager/option.c:326
+#: src/filemanager/option.c:331
 msgid "&Fast dir reload"
 msgstr "&Direktorio birzamaketa bizkorra"
 
-#: src/filemanager/option.c:328
+#: src/filemanager/option.c:333
 msgid "Show &hidden files"
 msgstr "Erakutsi &ezkutuko fitxategiak"
 
-#: src/filemanager/option.c:330
+#: src/filemanager/option.c:335
 msgid "Show &backup files"
 msgstr "Erakutsi &babeskopia fitxategiak"
 
-#: src/filemanager/option.c:332
+#: src/filemanager/option.c:337
 msgid "Mi&x all files"
 msgstr "Na&hastu fitxategi guztiak"
 
-#: src/filemanager/option.c:334
+#: src/filemanager/option.c:339
 msgid "Use SI si&ze units"
 msgstr "Erabili SI ne&urri unitateak"
 
-#: src/filemanager/option.c:337
+#: src/filemanager/option.c:342
 msgid "Main panel options"
 msgstr "Panel nagusiaren aukerak"
 
-#: src/filemanager/option.c:345
+#: src/filemanager/option.c:350
 msgid "Panel options"
 msgstr "Panelek aukerak"
 
-#: src/filemanager/option.c:437
+#: src/filemanager/option.c:445
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
 "directory contents. In this case you'll need to do a\n"
@@ -4494,167 +4505,168 @@ msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:109
+#: src/filemanager/panel.c:107
 msgid "sort|u"
 msgstr "g"
 
-#: src/filemanager/panel.c:110
+#: src/filemanager/panel.c:108
 msgid "&Unsorted"
 msgstr "Sailkatu &gabe"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:119
+#: src/filemanager/panel.c:117
 msgid "sort|n"
 msgstr "z"
 
-#: src/filemanager/panel.c:120
+#: src/filemanager/panel.c:118
 msgid "&Name"
 msgstr "&Izena"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:129
+#: src/filemanager/panel.c:127
 msgid "sort|v"
 msgstr "b"
 
-#: src/filemanager/panel.c:130
+#: src/filemanager/panel.c:128
 msgid "&Version"
 msgstr "&Bertsioa"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:139
+#: src/filemanager/panel.c:137
 msgid "sort|e"
 msgstr "l"
 
-#: src/filemanager/panel.c:140
+#: src/filemanager/panel.c:138
 msgid "&Extension"
 msgstr "&Luzapena"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:149
+#: src/filemanager/panel.c:147
 msgid "sort|s"
 msgstr "n"
 
-#: src/filemanager/panel.c:150
+#: src/filemanager/panel.c:148
 msgid "&Size"
 msgstr "&Neurria"
 
-#: src/filemanager/panel.c:158
+#: src/filemanager/panel.c:156
 msgid "Block Size"
 msgstr "Bloke neurria"
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:175
+#: src/filemanager/panel.c:173
 msgid "sort|m"
 msgstr "d"
 
-#: src/filemanager/panel.c:176
+#: src/filemanager/panel.c:174
 msgid "&Modify time"
 msgstr "&Edukiaren aldaketa ordua"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:185
+#: src/filemanager/panel.c:183
 msgid "sort|a"
 msgstr "a"
 
-#: src/filemanager/panel.c:186
+#: src/filemanager/panel.c:184
 msgid "&Access time"
 msgstr "&Atzipen ordua"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:195
+#: src/filemanager/panel.c:193
 msgid "sort|h"
 msgstr "t"
 
-#: src/filemanager/panel.c:196
+#: src/filemanager/panel.c:194
 msgid "C&hange time"
 msgstr "A&tributuen aldaketa ordua"
 
-#: src/filemanager/panel.c:212
+#: src/filemanager/panel.c:210
 msgid "Perm"
 msgstr "Baim"
 
-#: src/filemanager/panel.c:220
+#: src/filemanager/panel.c:218
 msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:228
+#: src/filemanager/panel.c:226
 msgid "sort|i"
 msgstr "i"
 
-#: src/filemanager/panel.c:229
+#: src/filemanager/panel.c:227
 msgid "&Inode"
 msgstr "&Inodoa"
 
-#: src/filemanager/panel.c:237
+#: src/filemanager/panel.c:235
 msgid "UID"
 msgstr "UID"
 
-#: src/filemanager/panel.c:245
+#: src/filemanager/panel.c:243
 msgid "GID"
 msgstr "GID"
 
-#: src/filemanager/panel.c:253
+#: src/filemanager/panel.c:251
 msgid "Owner"
 msgstr "Jabea"
 
-#: src/filemanager/panel.c:261
+#: src/filemanager/panel.c:259
 msgid "Group"
 msgstr "Taldea"
 
-#: src/filemanager/panel.c:475
+#: src/filemanager/panel.c:473
 msgid "[dev]"
 msgstr "[gai]"
 
-#: src/filemanager/panel.c:490 src/filemanager/panel.c:927
+#: src/filemanager/panel.c:488 src/filemanager/panel.c:925
 msgid "UP--DIR"
 msgstr "GOI--DIR"
 
-#: src/filemanager/panel.c:512
+#: src/filemanager/panel.c:510
 msgid "SYMLINK"
 msgstr "ESTEKSINB"
 
-#: src/filemanager/panel.c:517
+#: src/filemanager/panel.c:515
 msgid "SUB-DIR"
 msgstr "AZPI-DIR"
 
-#: src/filemanager/panel.c:918
+#: src/filemanager/panel.c:916
 msgid "<readlink failed>"
 msgstr "<readlink-ek huts egin du>"
 
-#: src/filemanager/panel.c:978
+#: src/filemanager/panel.c:976
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] "byte %s"
 msgstr[1] "%s byte"
 
-#: src/filemanager/panel.c:982
+#: src/filemanager/panel.c:980
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s fitxategi %d-ean"
 msgstr[1] "%s %d fitxategitan"
 
-#: src/filemanager/panel.c:1557
+#: src/filemanager/panel.c:1543
 msgid "Unknown tag on display format:"
 msgstr "Etiketa ezezaguna bistaratzeko formatuan:"
 
-#: src/filemanager/panel.c:2258
+#: src/filemanager/panel.c:2244
 msgid "Do you really want to execute?"
 msgstr "Beneta exekutatu nahi duzu?"
 
-#: src/filemanager/panel.c:3706
+#: src/filemanager/panel.c:3648
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
+msgstr ""
+"Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
 
 #: src/filemanager/panelize.c:89
 msgid "&Add new"
@@ -4927,7 +4939,9 @@ msgstr "zer tekla ez dauden Adosez markatuta. Sakatu zuriune-barra "
 
 #: src/learn.c:341
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "tekla horietan edo egin klik saguaz definitzeko. Tabuladorearekin mugitu batetik bestera."
+msgstr ""
+"tekla horietan edo egin klik saguaz definitzeko. Tabuladorearekin mugitu "
+"batetik bestera."
 
 #: src/main.c:496
 #, c-format
@@ -4950,7 +4964,7 @@ msgstr "%Y %b %e"
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/setup.c:1099
+#: src/setup.c:1092
 #, c-format
 msgid ""
 "Cannot save file %s:\n"
@@ -5173,5 +5187,5 @@ msgid "Search done"
 msgstr "Bilaketa eginda"
 
 #: src/viewer/search.c:286
-msgid "Continue from begining?"
-msgstr "Hasieratik jarraitu?"
+msgid "Continue from beginning?"
+msgstr ""
