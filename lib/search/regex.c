@@ -5,7 +5,8 @@
    Copyright (C) 2009 The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009,2010,2011
+   Vitaliy Filippov <vitalif@yourcmc.ru>, 2011
 
    This file is part of the Midnight Commander.
 
@@ -52,6 +53,13 @@ typedef enum
     REPLACE_T_UPP_TRANSFORM = 4,
     REPLACE_T_LOW_TRANSFORM = 8
 } replace_transform_type_t;
+
+typedef enum
+{
+    REPLACE_PREPARE_T_NOTHING_SPECIAL = -1,
+    REPLACE_PREPARE_T_REPLACE_FLAG = -2,
+    REPLACE_PREPARE_T_ESCAPE_SEQ = -3,
+} replace_prepare_t;
 
 /*** file scope variables ************************************************************************/
 
@@ -374,6 +382,71 @@ mc_search_regex__get_token_by_num (const mc_search_t * lc_mc_search, gsize lc_in
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+mc_search_regex__replace_handle_esc_seq (const GString * replace_str, const gsize current_pos,
+                                         gsize * skip_len, int *ret, char *next_char)
+{
+    char *curr_str = &(replace_str->str[current_pos]);
+
+    *next_char = *(curr_str + 1);
+
+    if (replace_str->len > current_pos + 2)
+    {
+        if (*next_char == '{')
+        {
+            for (*skip_len = 2; /* \{ */
+                 current_pos + *skip_len < replace_str->len
+                 && (*(curr_str + *skip_len)) != '}'; (*skip_len)++);
+            if (current_pos + *skip_len < replace_str->len)     /* } */
+                (*skip_len)++;
+            *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
+            return FALSE;
+        }
+
+        if (*next_char == 'x')
+        {
+            *skip_len = 2;      /* \x */
+            *next_char = *(curr_str + 2);
+            if (*next_char == '{')
+            {
+                for (*skip_len = 3;     /* \x{ */
+                     current_pos + *skip_len < replace_str->len
+                     && (*(curr_str + *skip_len)) != '}'; (*skip_len)++);
+                if (current_pos + *skip_len < replace_str->len)
+                    (*skip_len)++;
+                *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
+                return FALSE;
+            }
+            else if (!g_ascii_isxdigit ((guchar) * next_char))
+            {
+                *skip_len = 2;  /* \x without number behind */
+                *ret = REPLACE_PREPARE_T_NOTHING_SPECIAL;
+                return FALSE;
+            }
+            else
+            {
+                *next_char = *(curr_str + 3);
+                if (!g_ascii_isxdigit ((guchar) * next_char))
+                    *skip_len = 3;      /* \xH */
+                else
+                    *skip_len = 4;      /* \xHH */
+                *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
+                return FALSE;
+            }
+        }
+    }
+
+    if (strchr ("ntvbrfa", *next_char) != NULL)
+    {
+        *skip_len = 2;
+        *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
+        return FALSE;
+    }
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 mc_search_regex__process_replace_str (const GString * replace_str, const gsize current_pos,
                                       gsize * skip_len, replace_transform_type_t * replace_flags)
@@ -383,16 +456,17 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
     const char *curr_str = &(replace_str->str[current_pos]);
 
     if (current_pos > replace_str->len)
-        return -1;
+        return REPLACE_PREPARE_T_NOTHING_SPECIAL;
 
     *skip_len = 0;
 
-    if (*curr_str == '$' && *(curr_str + 1) == '{' && (*(curr_str + 2) & (char) 0xf0) == 0x30)
+    if ((*curr_str == '$') && (*(curr_str + 1) == '{') && ((*(curr_str + 2) & (char) 0xf0) == 0x30)
+        && (replace_str->len > current_pos + 2))
     {
         if (strutils_is_char_escaped (replace_str->str, curr_str))
         {
             *skip_len = 1;
-            return -1;
+            return REPLACE_PREPARE_T_NOTHING_SPECIAL;
         }
 
         for (*skip_len = 0;
@@ -400,36 +474,43 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
              && (*(curr_str + 2 + *skip_len) & (char) 0xf0) == 0x30; (*skip_len)++);
 
         if (*(curr_str + 2 + *skip_len) != '}')
-            return -1;
+            return REPLACE_PREPARE_T_NOTHING_SPECIAL;
 
         tmp_str = g_strndup (curr_str + 2, *skip_len);
         if (tmp_str == NULL)
-            return -1;
+            return REPLACE_PREPARE_T_NOTHING_SPECIAL;
 
         ret = atoi (tmp_str);
         g_free (tmp_str);
 
         *skip_len += 3;         /* ${} */
-        return ret;
+        return ret;             /* capture buffer index >= 0 */
     }
 
-    if (*curr_str == '\\')
+    if ((*curr_str == '\\') && (replace_str->len > current_pos + 1))
     {
+        char next_char;
+
         if (strutils_is_char_escaped (replace_str->str, curr_str))
         {
             *skip_len = 1;
-            return -1;
+            return REPLACE_PREPARE_T_NOTHING_SPECIAL;
         }
 
         if (g_ascii_isdigit (*(curr_str + 1)))
         {
-            ret = g_ascii_digit_value (*(curr_str + 1));
+            ret = g_ascii_digit_value (*(curr_str + 1));        /* capture buffer index >= 0 */
             *skip_len = 2;      /* \\ and one digit */
             return ret;
         }
-        ret = -2;
+
+        if (!mc_search_regex__replace_handle_esc_seq
+            (replace_str, current_pos, skip_len, &ret, &next_char))
+            return ret;
+
+        ret = REPLACE_PREPARE_T_REPLACE_FLAG;
         *skip_len += 2;
-        switch (*(curr_str + 1))
+        switch (next_char)
         {
         case 'U':
             *replace_flags |= REPLACE_T_UPP_TRANSFORM;
@@ -449,12 +530,14 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
             *replace_flags = REPLACE_T_NO_TRANSFORM;
             break;
         default:
-            ret = -1;
+            ret = REPLACE_PREPARE_T_NOTHING_SPECIAL;
             break;
         }
     }
     return ret;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize len,
@@ -517,7 +600,79 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
 
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_search_regex__process_escape_sequence (GString * dest_str, const char *from, gsize len,
+                                          replace_transform_type_t * replace_flags)
+{
+    gsize i = 0;
+    char c = 0;
+
+    if (len == (gsize) (-1))
+        len = strlen (from);
+    if (len == 0)
+        return;
+    if (from[i] == '{')
+        i++;
+    if (i >= len)
+        return;
+    if (from[i] == 'x')
+    {
+        i++;
+        if (i < len && from[i] == '{')
+            i++;
+        for (; i < len; i++)
+        {
+            if (from[i] >= '0' && from[i] <= '9')
+                c = c * 16 + from[i] - '0';
+            else if (from[i] >= 'a' && from[i] <= 'f')
+                c = c * 16 + 10 + from[i] - 'a';
+            else if (from[i] >= 'A' && from[i] <= 'F')
+                c = c * 16 + 10 + from[i] - 'A';
+            else
+                break;
+        }
+    }
+    else if (from[i] >= '0' && from[i] <= '9')
+        for (; i < len && from[i] >= '0' && from[i] <= '7'; i++)
+            c = c * 8 + from[i] - '0';
+    else
+    {
+        switch (from[i])
+        {
+        case 'n':
+            c = '\n';
+            break;
+        case 't':
+            c = '\t';
+            break;
+        case 'v':
+            c = '\v';
+            break;
+        case 'b':
+            c = '\b';
+            break;
+        case 'r':
+            c = '\r';
+            break;
+        case 'f':
+            c = '\f';
+            break;
+        case 'a':
+            c = '\a';
+            break;
+        default:
+            mc_search_regex__process_append_str (dest_str, from, len, replace_flags);
+            return;
+        }
+    }
+    g_string_append_len (dest_str, &c, 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_search,
@@ -525,10 +680,6 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
 {
 #ifdef SEARCH_TYPE_GLIB
     GError *error = NULL;
-#else /* SEARCH_TYPE_GLIB */
-    const char *error;
-    int erroffset;
-#endif /* SEARCH_TYPE_GLIB */
 
     if (!lc_mc_search->is_case_sensitive)
     {
@@ -538,10 +689,9 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
         mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
         g_string_free (tmp, TRUE);
     }
-#ifdef SEARCH_TYPE_GLIB
     mc_search_cond->regex_handle =
-        g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW | G_REGEX_DOTALL, 0,
-                     &error);
+        g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW | G_REGEX_DOTALL,
+                     0, &error);
 
     if (error != NULL)
     {
@@ -551,8 +701,30 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
         return;
     }
 #else /* SEARCH_TYPE_GLIB */
+    const char *error;
+    int erroffset;
+    int pcre_options = PCRE_EXTRA | PCRE_MULTILINE;
+
+    if (str_isutf8(charset))
+    {
+        pcre_options |= PCRE_UTF8;
+        if (lc_mc_search->is_case_sensitive)
+            pcre_options |= PCRE_CASELESS;
+    }
+    else
+    {
+        if (!lc_mc_search->is_case_sensitive)
+        {
+            GString *tmp;
+
+            tmp = mc_search_cond->str;
+            mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
+            g_string_free (tmp, TRUE);
+        }
+    }
+
     mc_search_cond->regex_handle =
-        pcre_compile (mc_search_cond->str->str, PCRE_EXTRA, &error, &erroffset, NULL);
+        pcre_compile (mc_search_cond->str->str, pcre_options, &error, &erroffset, NULL);
     if (mc_search_cond->regex_handle == NULL)
     {
         lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
@@ -708,7 +880,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
     {
         lc_index = mc_search_regex__process_replace_str (replace_str, loop, &len, &replace_flags);
 
-        if (lc_index == -1)
+        if (lc_index == REPLACE_PREPARE_T_NOTHING_SPECIAL)
         {
             if (len != 0)
             {
@@ -723,7 +895,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
             continue;
         }
 
-        if (lc_index == -2)
+        if (lc_index == REPLACE_PREPARE_T_REPLACE_FLAG)
         {
             if (loop)
                 mc_search_regex__process_append_str (ret, prev_str,
@@ -734,6 +906,21 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
             continue;
         }
 
+        /* escape sequence */
+        if (lc_index == REPLACE_PREPARE_T_ESCAPE_SEQ)
+        {
+            mc_search_regex__process_append_str (ret, prev_str,
+                                                 replace_str->str + loop - prev_str,
+                                                 &replace_flags);
+            /* call process_escape_sequence without starting '\\' */
+            mc_search_regex__process_escape_sequence (ret, replace_str->str + loop + 1, len - 1,
+                                                      &replace_flags);
+            prev_str = replace_str->str + loop + len;
+            loop += len - 1;
+            continue;
+        }
+
+        /* invalid capture buffer number */
         if (lc_index > lc_mc_search->num_results)
         {
             g_string_free (ret, TRUE);
