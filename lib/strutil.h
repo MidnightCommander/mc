@@ -511,10 +511,10 @@ int str_key_collate (const char *t1, const char *t2, int case_sen);
  */
 void str_release_key (char *key, int case_sen);
 
-/* return 1 if codeset_name is utf8 or utf-8 
+/* return TRUE if codeset_name is utf8 or utf-8
  * I
  */
-int str_isutf8 (const char *codeset_name);
+gboolean str_isutf8 (const char *codeset_name);
 
 const char *str_detect_termencoding (void);
 
