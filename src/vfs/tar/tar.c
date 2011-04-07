@@ -47,7 +47,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/gc.h"                 /* vfs_rmstamp */
+#include "lib/vfs/gc.h"         /* vfs_rmstamp */
 
 #include "tar.h"
 
@@ -207,6 +207,13 @@ typedef enum
     STATUS_EOF
 } ReadStatus;
 
+typedef struct
+{
+    int fd;
+    struct stat st;
+    int type;                   /* Type of the archive */
+} tar_super_data_t;
+
 /*** file scope variables ************************************************************************/
 
 static struct vfs_class vfs_tarfs_ops;
@@ -254,8 +261,14 @@ tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 {
     (void) me;
 
-    if (archive->u.arch.fd != -1)
-        mc_close (archive->u.arch.fd);
+    if (archive->data != NULL)
+    {
+        tar_super_data_t *arch = (tar_super_data_t *) archive->data;
+
+        if (arch->fd != -1)
+            mc_close (arch->fd);
+        g_free (archive->data);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -265,6 +278,7 @@ static int
 tar_open_archive_int (struct vfs_class *me, const char *name, struct vfs_s_super *archive)
 {
     int result, type;
+    tar_super_data_t *arch;
     mode_t mode;
     struct vfs_s_inode *root;
 
@@ -276,9 +290,11 @@ tar_open_archive_int (struct vfs_class *me, const char *name, struct vfs_s_super
     }
 
     archive->name = g_strdup (name);
-    mc_stat (name, &(archive->u.arch.st));
-    archive->u.arch.fd = -1;
-    archive->u.arch.type = TAR_UNKNOWN;
+    archive->data = g_new (tar_super_data_t, 1);
+    arch = (tar_super_data_t *) archive->data;
+    mc_stat (name, &arch->st);
+    arch->fd = -1;
+    arch->type = TAR_UNKNOWN;
 
     /* Find out the method to handle this tar file */
     type = get_compression_type (result, name);
@@ -296,8 +312,8 @@ tar_open_archive_int (struct vfs_class *me, const char *name, struct vfs_s_super
             ERRNOR (ENOENT, -1);
     }
 
-    archive->u.arch.fd = result;
-    mode = archive->u.arch.st.st_mode & 07777;
+    arch->fd = result;
+    mode = arch->st.st_mode & 07777;
     if (mode & 0400)
         mode |= 0100;
     if (mode & 0040)
@@ -306,7 +322,7 @@ tar_open_archive_int (struct vfs_class *me, const char *name, struct vfs_s_super
         mode |= 0001;
     mode |= S_IFDIR;
 
-    root = vfs_s_new_inode (me, archive, &archive->u.arch.st);
+    root = vfs_s_new_inode (me, archive, &arch->st);
     root->st.st_mode = mode;
     root->data_offset = -1;
     root->st.st_nlink++;
@@ -349,6 +365,8 @@ tar_skip_n_records (struct vfs_s_super *archive, int tard, int n)
 static void
 tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *header, size_t h_size)
 {
+    tar_super_data_t *arch = (tar_super_data_t *) archive->data;
+
     st->st_mode = tar_from_oct (8, header->header.mode);
 
     /* Adjust st->st_mode because there are tar-files with
@@ -357,30 +375,20 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
      * problem when I adjust them, too. -- Norbert.
      */
     if (header->header.linkflag == LF_DIR)
-    {
         st->st_mode |= S_IFDIR;
-    }
     else if (header->header.linkflag == LF_SYMLINK)
-    {
         st->st_mode |= S_IFLNK;
-    }
     else if (header->header.linkflag == LF_CHR)
-    {
         st->st_mode |= S_IFCHR;
-    }
     else if (header->header.linkflag == LF_BLK)
-    {
         st->st_mode |= S_IFBLK;
-    }
     else if (header->header.linkflag == LF_FIFO)
-    {
         st->st_mode |= S_IFIFO;
-    }
     else
         st->st_mode |= S_IFREG;
 
     st->st_rdev = 0;
-    switch (archive->u.arch.type)
+    switch (arch->type)
     {
     case TAR_USTAR:
     case TAR_POSIX:
@@ -409,7 +417,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
     st->st_mtime = tar_from_oct (1 + 12, header->header.mtime);
     st->st_atime = 0;
     st->st_ctime = 0;
-    if (archive->u.arch.type == TAR_GNU)
+    if (arch->type == TAR_GNU)
     {
         st->st_atime = tar_from_oct (1 + 12, header->header.unused.oldgnu.atime);
         st->st_ctime = tar_from_oct (1 + 12, header->header.unused.oldgnu.ctime);
@@ -425,6 +433,8 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
 static ReadStatus
 tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, size_t * h_size)
 {
+    tar_super_data_t *arch = (tar_super_data_t *) archive->data;
+
     register int i;
     register long sum, signed_sum, recsum;
     register char *p;
@@ -474,19 +484,17 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     /*
      * Try to determine the archive format.
      */
-    if (archive->u.arch.type == TAR_UNKNOWN)
+    if (arch->type == TAR_UNKNOWN)
     {
-        if (!strcmp (header->header.magic, TMAGIC))
+        if (strcmp (header->header.magic, TMAGIC) == 0)
         {
             if (header->header.linkflag == LF_GLOBAL_EXTHDR)
-                archive->u.arch.type = TAR_POSIX;
+                arch->type = TAR_POSIX;
             else
-                archive->u.arch.type = TAR_USTAR;
+                arch->type = TAR_USTAR;
         }
-        else if (!strcmp (header->header.magic, OLDGNU_MAGIC))
-        {
-            archive->u.arch.type = TAR_GNU;
-        }
+        else if (strcmp (header->header.magic, OLDGNU_MAGIC) == 0)
+            arch->type = TAR_GNU;
     }
 
     /*
@@ -494,12 +502,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
      */
     if (header->header.linkflag == '\000')
     {
-        if (header->header.arch_name[NAMSIZ - 1] != '\0')
-            i = NAMSIZ;
-        else
-            i = strlen (header->header.arch_name);
+        size_t len;
 
-        if (i && header->header.arch_name[i - 1] == '/')
+        if (header->header.arch_name[NAMSIZ - 1] != '\0')
+            len = NAMSIZ;
+        else
+            len = strlen (header->header.arch_name);
+
+        if (len != 0 && header->header.arch_name[len - 1] == '/')
             header->header.linkflag = LF_DIR;
     }
 
@@ -517,8 +527,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
      */
     if (header->header.linkflag == LF_DUMPDIR)
     {
-        if (archive->u.arch.type == TAR_UNKNOWN)
-            archive->u.arch.type = TAR_GNU;
+        if (arch->type == TAR_UNKNOWN)
+            arch->type = TAR_GNU;
         return STATUS_SUCCESS;
     }
 
@@ -528,8 +538,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
      */
     if (header->header.linkflag == LF_EXTHDR || header->header.linkflag == LF_GLOBAL_EXTHDR)
     {
-        if (archive->u.arch.type == TAR_UNKNOWN)
-            archive->u.arch.type = TAR_POSIX;
+        if (arch->type == TAR_UNKNOWN)
+            arch->type = TAR_POSIX;
         return STATUS_SUCCESS;
     }
 
@@ -539,8 +549,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         char *bp, *data;
         int size, written;
 
-        if (archive->u.arch.type == TAR_UNKNOWN)
-            archive->u.arch.type = TAR_GNU;
+        if (arch->type == TAR_UNKNOWN)
+            arch->type = TAR_GNU;
 
         if (*h_size > MC_MAXPATHLEN)
         {
@@ -598,7 +608,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             current_link_name[len - 1] = 0;
 
         current_file_name = NULL;
-        switch (archive->u.arch.type)
+        switch (arch->type)
         {
         case TAR_USTAR:
         case TAR_POSIX:
@@ -701,9 +711,10 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
       done:
         next_long_link = next_long_name = NULL;
 
-        if (archive->u.arch.type == TAR_GNU && header->header.unused.oldgnu.isextended)
+        if (arch->type == TAR_GNU && header->header.unused.oldgnu.isextended)
         {
-            while (tar_get_next_record (archive, tard)->ext_hdr.isextended);
+            while (tar_get_next_record (archive, tard)->ext_hdr.isextended != 0)
+                ;
             inode->data_offset = current_tar_position;
         }
         return STATUS_SUCCESS;
@@ -814,7 +825,7 @@ tar_super_same (struct vfs_class *me, struct vfs_s_super *parc,
         return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (parc->u.arch.st.st_mtime < archive_stat->st_mtime)
+    if (((tar_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
         (*vfs_tarfs_ops.free) ((vfsid) parc);
@@ -832,7 +843,7 @@ static ssize_t
 tar_read (void *fh, char *buffer, size_t count)
 {
     off_t begin = FH->ino->data_offset;
-    int fd = FH_SUPER->u.arch.fd;
+    int fd = ((tar_super_data_t *) FH_SUPER->data)->fd;
     struct vfs_class *me = FH_SUPER->me;
     ssize_t res;
 
@@ -852,7 +863,7 @@ tar_read (void *fh, char *buffer, size_t count)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-tar_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, mode_t mode)
+tar_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
 {
     (void) fh;
     (void) mode;

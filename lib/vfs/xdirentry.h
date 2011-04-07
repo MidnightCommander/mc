@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#include "lib/global.h"         /* GList */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define LINK_FOLLOW 15
@@ -37,7 +39,7 @@
 
 #define MEDATA ((struct vfs_s_subclass *) me->data)
 
-#define FH ((struct vfs_s_fh *) fh)
+#define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super
 
 #define LS_NOT_LINEAR 0
@@ -52,75 +54,13 @@
 /* Single connection or archive */
 struct vfs_s_super
 {
-    struct vfs_s_super **prevp, *next;
     struct vfs_class *me;
     struct vfs_s_inode *root;
     char *name;                 /* My name, whatever it means */
     int fd_usage;               /* Number of open files */
     int ino_usage;              /* Usage count of this superblock */
     int want_stale;             /* If set, we do not flush cache properly */
-
-    union
-    {
-#ifdef ENABLE_VFS_FISH
-        struct
-        {
-            int sockr, sockw;
-            char *cwdir;
-            char *host, *user;
-            char *password;
-            int flags;
-            char *scr_ls;
-            char *scr_chmod;
-            char *scr_exists;
-            char *scr_mkdir;
-            char *scr_unlink;
-            char *scr_chown;
-            char *scr_rmdir;
-            char *scr_ln;
-            char *scr_mv;
-            char *scr_hardlink;
-            char *scr_get;
-            char *scr_send;
-            char *scr_append;
-            char *scr_info;
-            int host_flags;
-            char *scr_env;
-        } fish;
-#endif                          /* ENABLE_VFS_FISH */
-#ifdef ENABLE_VFS_FTP
-        struct
-        {
-            int sock;
-            char *cwdir;
-            char *host, *user;
-            char *password;
-            int port;
-
-            char *proxy;        /* proxy server, NULL if no proxy */
-            int failed_on_login;        /* used to pass the failure reason to upper levels */
-            int use_passive_connection;
-            int remote_is_amiga;        /* No leading slash allowed for AmiTCP (Amiga) */
-            int isbinary;
-            int cwd_deferred;   /* current_directory was changed but CWD command hasn't
-                                   been sent yet */
-            int strict;         /* ftp server doesn't understand
-                                 * "LIST -la <path>"; use "CWD <path>"/
-                                 * "LIST" instead
-                                 */
-            int ctl_connection_busy;
-        } ftp;
-#endif                          /* ENABLE_VFS_FTP */
-#if defined(ENABLE_VFS_CPIO) || defined(ENABLE_VFS_TAR)
-        struct
-        {
-            int fd;
-            struct stat st;
-            int type;           /* Type of the archive */
-            struct defer_inode *deferred;       /* List of inodes for which another entries may appear */
-        } arch;
-#endif                          /* ENABLE_VFS_CPIO || ENABLE_VFS_TAR */
-    } u;
+    void *data;                 /* This is for filesystem-specific use */
 };
 
 /*
@@ -129,7 +69,6 @@ struct vfs_s_super
  */
 struct vfs_s_entry
 {
-    struct vfs_s_entry **prevp, *next;  /* Pointers in the entry list */
     struct vfs_s_inode *dir;    /* Directory we are in, i.e. our parent */
     char *name;                 /* Name of this entry */
     struct vfs_s_inode *ino;    /* ... and its inode */
@@ -142,7 +81,7 @@ struct vfs_s_inode
     struct vfs_s_entry *ent;    /* Our entry in the parent directory -
                                    use only for directories because they
                                    cannot be hardlinked */
-    struct vfs_s_entry *subdir; /* If this is a directory, its entry */
+    GList *subdir;              /* If this is a directory, its entry. List of vfs_s_entry */
     struct stat st;             /* Parameters of this inode */
     char *linkname;             /* Symlink's contents */
     char *localname;            /* Filename of local file, if we have one */
@@ -151,30 +90,15 @@ struct vfs_s_inode
 };
 
 /* Data associated with an open file */
-struct vfs_s_fh
+typedef struct
 {
     struct vfs_s_inode *ino;
     off_t pos;                  /* This is for module's use */
     int handle;                 /* This is for module's use, but if != -1, will be mc_close()d */
     int changed;                /* Did this file change? */
     int linear;                 /* Is that file open with O_LINEAR? */
-    union
-    {
-#ifdef ENABLE_VFS_FISH
-        struct
-        {
-            off_t got, total;
-            int append;
-        } fish;
-#endif                          /* ENABLE_VFS_FISH */
-#ifdef ENABLE_VFS_FTP
-        struct
-        {
-            int sock, append;
-        } ftp;
-#endif                          /* ENABLE_VFS_FTP */
-    } u;
-};
+    void *data;                 /* This is for filesystem-specific use */
+} vfs_file_handler_t;
 
 /*
  * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
@@ -182,7 +106,7 @@ struct vfs_s_fh
  */
 struct vfs_s_subclass
 {
-    struct vfs_s_super *supers;
+    GList *supers;
     int inode_counter;
     int flags;                  /* whether the subclass is remove, read-only etc */
     dev_t rdev;
@@ -200,19 +124,19 @@ struct vfs_s_subclass
                          const char *archive_name, char *op);
     void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);
 
-    int (*fh_open) (struct vfs_class * me, struct vfs_s_fh * fh, int flags, mode_t mode);
-    int (*fh_close) (struct vfs_class * me, struct vfs_s_fh * fh);
+    int (*fh_open) (struct vfs_class * me, vfs_file_handler_t * fh, int flags, mode_t mode);
+    int (*fh_close) (struct vfs_class * me, vfs_file_handler_t * fh);
 
     struct vfs_s_entry *(*find_entry) (struct vfs_class * me,
                                        struct vfs_s_inode * root,
                                        const char *path, int follow, int flags);
     int (*dir_load) (struct vfs_class * me, struct vfs_s_inode * ino, char *path);
     int (*dir_uptodate) (struct vfs_class * me, struct vfs_s_inode * ino);
-    int (*file_store) (struct vfs_class * me, struct vfs_s_fh * fh, char *path, char *localname);
+    int (*file_store) (struct vfs_class * me, vfs_file_handler_t * fh, char *path, char *localname);
 
-    int (*linear_start) (struct vfs_class * me, struct vfs_s_fh * fh, off_t from);
-    int (*linear_read) (struct vfs_class * me, struct vfs_s_fh * fh, void *buf, size_t len);
-    void (*linear_close) (struct vfs_class * me, struct vfs_s_fh * fh);
+    int (*linear_start) (struct vfs_class * me, vfs_file_handler_t * fh, off_t from);
+    int (*linear_read) (struct vfs_class * me, vfs_file_handler_t * fh, void *buf, size_t len);
+    void (*linear_close) (struct vfs_class * me, vfs_file_handler_t * fh);
 };
 
 /*** global variables defined in .c file *********************************************************/
