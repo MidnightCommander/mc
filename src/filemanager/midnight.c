@@ -486,18 +486,20 @@ translated_mc_chdir (char *dir)
 
 /* event helper */
 static gboolean
-check_panel_timestamp (WPanel * panel, panel_view_mode_t mode, struct vfs_class *vclass, vfsid id)
+check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_class *vclass,
+                       vfsid id)
 {
     if (mode == view_listing)
     {
         struct vfs_class *nvfs;
         vfsid nvfsid;
+
         nvfs = vfs_get_class (panel->cwd);
         if (nvfs != vclass)
             return FALSE;
         nvfsid = vfs_getid (nvfs, panel->cwd);
-        if (nvfsid == id)
-            return TRUE;
+        if (nvfsid != id)
+            return FALSE;
     }
     return TRUE;
 }
@@ -1734,6 +1736,9 @@ do_nc (void)
         /* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
             last_wd_string = g_strdup (current_panel->cwd);
+
+        /* don't handle VFS timestamps for dirs opened in panels */
+        mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");
     }
 
     /* Program end */
