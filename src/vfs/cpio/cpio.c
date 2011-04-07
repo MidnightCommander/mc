@@ -28,6 +28,9 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
@@ -119,20 +122,19 @@ struct new_cpio_header
     unsigned long c_chksum;
 };
 
-struct defer_inode
+typedef struct
 {
-    struct defer_inode *next;
     unsigned long inumber;
     unsigned short device;
     struct vfs_s_inode *inode;
-};
+} defer_inode;
 
 typedef struct
 {
     int fd;
     struct stat st;
     int type;                   /* Type of the archive */
-    struct defer_inode *deferred;       /* List of inodes for which another entries may appear */
+    GSList *deferred;           /* List of inodes for which another entries may appear */
 } cpio_super_data_t;
 
 /*** file scope variables ************************************************************************/
@@ -153,12 +155,13 @@ static ssize_t cpio_read (void *fh, char *buffer, size_t count);
 
 /* --------------------------------------------------------------------------------------------- */
 
-static struct defer_inode *
-cpio_defer_find (struct defer_inode *l, struct defer_inode *i)
+static int
+cpio_defer_find (const void *a, const void *b)
 {
-    while (l && (l->inumber != i->inumber || l->device != i->device))
-        l = l->next;
-    return l;
+    const defer_inode *a1 = (const defer_inode *) a;
+    const defer_inode *b1 = (const defer_inode *) b;
+
+    return (a1->inumber == b1->inumber && a1->device == b1->device) ? 0 : 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -187,7 +190,6 @@ cpio_skip_padding (struct vfs_s_super *super)
 static void
 cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
-    struct defer_inode *l, *lnext;
     cpio_super_data_t *arch = (cpio_super_data_t *) super->data;
 
     (void) me;
@@ -198,13 +200,9 @@ cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if (arch->fd != -1)
         mc_close (arch->fd);
     arch->fd = -1;
-    for (l = arch->deferred; l != NULL; l = lnext)
-    {
-        lnext = l->next;
-        g_free (l);
-    }
+    g_slist_foreach (arch->deferred, (GFunc) g_free, NULL);
+    g_slist_free (arch->deferred);
     arch->deferred = NULL;
-
     g_free (super->data);
     super->data = NULL;
 }
@@ -394,15 +392,13 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
 
     if ((st->st_nlink > 1) && ((arch->type == CPIO_NEWC) || (arch->type == CPIO_CRC)))
     {                           /* For case of hardlinked files */
-        struct defer_inode i, *l;
-        i.inumber = st->st_ino;
-        i.device = st->st_dev;
-        i.inode = NULL;
+        defer_inode i = {st->st_ino, st->st_dev, NULL};
+        GSList *l;
 
-        l = cpio_defer_find (arch->deferred, &i);
+        l = g_slist_find_custom (arch->deferred, &i, cpio_defer_find);
         if (l != NULL)
         {
-            inode = l->inode;
+            inode = ((defer_inode *) l->data)->inode;
             if (inode->st.st_size != 0 && st->st_size != 0 && (inode->st.st_size != st->st_size))
             {
                 message (D_ERROR, MSG_ERROR,
@@ -469,14 +465,14 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
             if ((st->st_nlink > 0) && ((arch->type == CPIO_NEWC) || (arch->type == CPIO_CRC)))
             {
                 /* For case of hardlinked files */
-                struct defer_inode *i;
+                defer_inode *i;
 
-                i = g_new (struct defer_inode, 1);
+                i = g_new (defer_inode, 1);
                 i->inumber = st->st_ino;
                 i->device = st->st_dev;
                 i->inode = inode;
-                i->next = arch->deferred;
-                arch->deferred = i;
+
+                arch->deferred = g_slist_prepend (arch->deferred, i);
             }
         }
 
