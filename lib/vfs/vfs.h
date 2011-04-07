@@ -19,6 +19,8 @@
 #include "lib/global.h"
 #include "lib/fs.h"             /* MC_MAXPATHLEN */
 
+#include "interface.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH) || defined (ENABLE_VFS_SMB)
@@ -231,35 +233,7 @@ char *vfs_get_current_dir (void);
 gboolean vfs_current_is_local (void);
 gboolean vfs_file_is_local (const char *filename);
 
-ssize_t mc_read (int handle, void *buffer, size_t count);
-ssize_t mc_write (int handle, const void *buffer, size_t count);
-int mc_utime (const char *path, struct utimbuf *times);
-int mc_readlink (const char *path, char *buf, size_t bufsiz);
-int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
-int mc_close (int handle);
-off_t mc_lseek (int fd, off_t offset, int whence);
-DIR *mc_opendir (const char *dirname);
-struct dirent *mc_readdir (DIR * dirp);
-int mc_closedir (DIR * dir);
-int mc_stat (const char *path, struct stat *buf);
-int mc_mknod (const char *path, mode_t mode, dev_t dev);
-int mc_link (const char *name1, const char *name2);
-int mc_mkdir (const char *path, mode_t mode);
-int mc_rmdir (const char *path);
-int mc_fstat (int fd, struct stat *buf);
-int mc_lstat (const char *path, struct stat *buf);
-int mc_symlink (const char *name1, const char *name2);
-int mc_rename (const char *original, const char *target);
-int mc_chmod (const char *path, mode_t mode);
-int mc_chown (const char *path, uid_t owner, gid_t group);
-int mc_chdir (const char *path);
-int mc_unlink (const char *path);
-int mc_ctl (int fd, int ctlop, void *arg);
-int mc_setctl (const char *path, int ctlop, void *arg);
-int mc_open (const char *filename, int flags, ...);
-char *mc_get_current_wd (char *buffer, size_t bufsize);
 char *vfs_canon (const char *path);
-char *mc_getlocalcopy (const char *pathname);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_translate_url (const char *url);
 
@@ -289,6 +263,18 @@ void vfs_release_path (const char *dir);
 void vfs_fill_names (fill_names_f);
 
 void vfs_print_message (const char *msg, ...) __attribute__ ((format (__printf__, 1, 2)));
+
+int vfs_ferrno (struct vfs_class *vfs);
+
+int vfs_new_handle (struct vfs_class *vclass, void *fsinfo);
+
+struct vfs_class * vfs_class_find_by_handle (int handle);
+
+void *vfs_class_data_find_by_handle (int handle);
+
+void vfs_free_handle (int handle);
+
+const char *_vfs_get_cwd (void);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC_VFS_VFS_H */
