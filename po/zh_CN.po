@@ -4982,11 +4982,11 @@ msgstr "使用S-Lang库和terminfo数据库\n"
 
 #: src/textconf.c:76
 msgid "Using the ncurses library\n"
-msgstr "使用ncurses库"
+msgstr "使用ncurses库\n"
 
 #: src/textconf.c:78
 msgid "Using the ncursesw library\n"
-msgstr "使用ncursesw库"
+msgstr "使用ncursesw库\n"
 
 #: src/textconf.c:84
 msgid "With builtin Editor\n"
