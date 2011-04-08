@@ -920,7 +920,6 @@ msgid "Show mc with specified skin"
 msgstr "Отобразить mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -957,7 +956,7 @@ msgstr ""
 "   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
-"   Просмотрщик:        viewunderline\n"
+"   Просмотрщик:        viewbold, viewunderline, viewselected\n"
 "   Справка:            helpnormal, helpitalic, helpbold, helplink, "
 "helpslink\n"
 
@@ -3389,7 +3388,7 @@ msgid "Quick search"
 msgstr "Быстрый поиск"
 
 msgid "&Permissions"
-msgstr "&Права доступа"
+msgstr "П&рава доступа"
 
 msgid "File &types"
 msgstr "&Типы файлов"
@@ -3413,7 +3412,7 @@ msgid "A&uto save panels setup"
 msgstr "&Автосохранение настроек панелей"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "Проста&я перестановка"
 
 msgid "Re&verse files only"
 msgstr "Ин&вертировать только файлы"
@@ -3995,13 +3994,5 @@ msgstr "Переход к найденному"
 msgid "Search done"
 msgstr "Поиск закончен"
 
-#, fuzzy
 msgid "Continue from beginning?"
 msgstr "Продолжить с начала?"
-
-#~ msgid ""
-#~ "Cannot overwrite directory\"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Невозможно переписать каталог \"%s\"\n"
-#~ "%s"
