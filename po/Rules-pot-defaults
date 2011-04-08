@@ -9,4 +9,5 @@ update-po: Makefile
 	    < $(srcdir)/$(DOMAIN).pot > $(DOMAIN).1po && \
 	mv -f $(DOMAIN).1po $(srcdir)/$(DOMAIN).pot
 	test -z "$(UPDATEPOFILES)" || $(MAKE) $(UPDATEPOFILES)
-	$(MAKE) update-gmo
+	$(MAKE) update-gmo && \
+	for i in $(srcdir)/*.po; do sed -i '/^#\:/d' $$i; done
