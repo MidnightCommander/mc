@@ -377,6 +377,9 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         if (!mcview_is_in_panel (view))
             dlg_stop (view->widget.owner);
         break;
+    case CK_DialogCancel:
+        /* don't close viewer due to SIGINT */
+        break;
     default:
         res = MSG_NOT_HANDLED;
     }
@@ -517,9 +520,19 @@ mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
         return MSG_HANDLED;
 
     case DLG_ACTION:
-        /* command from buttonbar */
-        view = (mcview_t *) data;
-        return send_message ((Widget *) view, WIDGET_COMMAND, parm);
+        /* shortcut */
+        if (sender == NULL)
+            return mcview_execute_cmd (NULL, parm);
+        /* message from buttonbar */
+        if (sender == (Widget *) find_buttonbar (h))
+        {
+            if (data != NULL)
+                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+
+            view = (mcview_t *) find_widget_type (h, mcview_callback);
+            return mcview_execute_cmd (view, parm);
+        }
+        return MSG_NOT_HANDLED;
 
     case DLG_VALIDATE:
         view = (mcview_t *) find_widget_type (h, mcview_callback);

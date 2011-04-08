@@ -146,7 +146,6 @@ const global_keymap_t default_viewer_keymap[] = {
     {XCTRL ('b'), CK_ViewPrevFile, "C-b"},
 
     {'q', CK_ViewQuit, "q"},
-    {XCTRL ('g'), CK_ViewQuit, "C-g"},
     {ESC_CHAR, CK_ViewQuit, "Esc"},
 
     {ALT ('e'), CK_SelectCodepage, "M-e"},
@@ -213,7 +212,6 @@ const global_keymap_t default_viewer_hex_keymap[] = {
     {'G', CK_ViewMoveBottom, "G"},
 
     {'q', CK_ViewQuit, "q"},
-    {XCTRL ('g'), CK_ViewQuit, "C-g"},
     {ESC_CHAR, CK_ViewQuit, "Esc"},
 
     {ALT ('e'), CK_SelectCodepage, "M-e"},
@@ -461,7 +459,6 @@ const global_keymap_t default_help_keymap[] = {
     {'n', CK_HelpNextNode, "n"},
     {'p', CK_HelpPrevNode, "p"},
     {ESC_CHAR, CK_HelpQuit, "Esc"},
-    {XCTRL ('g'), CK_HelpQuit, "C-g"},
     {0, CK_Ignore_Key, ""}
 };
 
@@ -690,7 +687,6 @@ const global_keymap_t default_diff_keymap[] = {
     {KEY_END, CK_DiffEnd, "End"},
     {'q', CK_DiffQuit, "q"},
     {'Q', CK_DiffQuit, "Q"},
-    {XCTRL ('g'), CK_DiffQuit, "C-g"},
     {ESC_CHAR, CK_DiffQuit, "Esc"},
 
     {KEY_F (1), CK_DiffHelp, "F1"},
