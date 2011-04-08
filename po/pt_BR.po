@@ -474,7 +474,7 @@ msgid ""
 "Check the TERM environment variable.\n"
 msgstr ""
 "Tamanho de tela %dx%d não é suportado.\n"
-"Verifique a variável de ambiente TERM."
+"Verifique a variável de ambiente TERM.\n"
 
 #: lib/utilunix.c:359
 #, c-format
@@ -904,7 +904,7 @@ msgstr "%s removendo arquivo remoto %s"
 #: lib/vfs/mc-vfs/smbfs.c:2144
 #, c-format
 msgid "%s renaming files\n"
-msgstr "%s renomeando arquivos"
+msgstr "%s renomeando arquivos\n"
 
 #: lib/vfs/mc-vfs/tar.c:272 lib/vfs/mc-vfs/tar.c:291
 #, c-format
