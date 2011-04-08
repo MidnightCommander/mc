@@ -350,7 +350,7 @@ static char *panel_history_show_list_sign = NULL;
 static WPanel *mouse_mark_panel = NULL;
 
 static int mouse_marking = 0;
-
+static int state_mark = 0;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2060,6 +2060,44 @@ mark_file_down (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+mark_file_right (WPanel * panel)
+{
+    int lines = llines (panel);
+
+    if (state_mark < 0)
+        state_mark = selection (panel)->f.marked ? 0 : 1;
+
+    lines = min (lines, panel->count - panel->selected - 1);
+    for (; lines != 0; lines--)
+    {
+        do_file_mark (panel, panel->selected, state_mark);
+        move_down (panel);
+    }
+    do_file_mark (panel, panel->selected, state_mark);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mark_file_left (WPanel * panel)
+{
+    int lines = llines (panel);
+
+    if (state_mark < 0)
+        state_mark = selection (panel)->f.marked ? 0 : 1;
+
+    lines = min (lines, panel->selected + 1);
+    for (; lines != 0; lines--)
+    {
+        do_file_mark (panel, panel->selected, state_mark);
+        move_up (panel);
+    }
+    do_file_mark (panel, panel->selected, state_mark);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Incremental search of a file name in the panel.
   * @param panel instance of WPanel structure
   * @param c_code key code
@@ -2744,6 +2782,21 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
     if (command != CK_Search)
         stop_search (panel);
 
+
+    switch (command)
+    {
+    case CK_Up:
+    case CK_Down:
+    case CK_Left:
+    case CK_Right:
+    case CK_Bottom:
+    case CK_Top:
+    case CK_PageDown:
+    case CK_PageUp:
+        /* reset state of marks flag*/
+        state_mark = -1;
+        break;
+    }
     switch (command)
     {
     case CK_PanelOtherCd:
@@ -2817,6 +2870,12 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         break;
     case CK_MarkDown:
         mark_file_down (panel);
+        break;
+    case CK_MarkLeft:
+        mark_file_left (panel);
+        break;
+    case CK_MarkRight:
+        mark_file_right (panel);
         break;
     case CK_CdParentSmart:
         res = force_maybe_cd ();
@@ -2951,6 +3010,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_FOCUS:
+        state_mark = -1;
         current_panel = panel;
         panel->active = 1;
         if (mc_chdir (panel->cwd) != 0)
