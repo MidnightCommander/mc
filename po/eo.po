@@ -2,35 +2,31 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-04-08 10:07+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Esperanto <None>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eo\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: lib/charsets.c:215
 msgid "Warning: cannot load codepages list"
 msgstr "Averto: ne povas ŝargi liston da kodpaĝoj"
 
-#: lib/charsets.c:218
 msgid "7-bit ASCII"
 msgstr "7-bita Askio"
 
-#: lib/charsets.c:309 lib/charsets.c:320
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Ne povas traduki el %s al %s"
 
-#: lib/lock.c:235
 #, c-format
 msgid ""
 "File \"%s\" is already being edited.\n"
@@ -41,54 +37,40 @@ msgstr ""
 "Uzanta: %s\n"
 "Proceza identigilo: %d"
 
-#: lib/lock.c:240
 msgid "File locked"
 msgstr "Dosiero fiksita"
 
-#: lib/lock.c:240
 msgid "&Grab lock"
 msgstr "&Ekkapti fiksilon"
 
-#: lib/lock.c:240
 msgid "&Ignore lock"
 msgstr "&Ignori fiksilon"
 
-#: lib/search/lib.c:42 src/diffviewer/search.c:262 src/editor/editcmd.c:843
-#: src/editor/editcmd.c:883 src/editor/editcmd.c:969 src/editor/editcmd.c:2258
-#: src/viewer/search.c:100
 msgid "Search string not found"
 msgstr "Serĉita ĉeno ne trovita"
 
-#: lib/search/lib.c:43
 msgid "Not implemented yet"
 msgstr "Ne jam realigita"
 
-#: lib/search/lib.c:45
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr "Nombro da anstataŭotaj eroj ne egalas nombron da trovitaj eroj"
 
-#: lib/search/lib.c:46
 #, c-format
 msgid "Invalid token number %d"
 msgstr "Nevalida era numero %d"
 
-#: lib/search/search.c:50
 msgid "Normal"
 msgstr "Normala"
 
-#: lib/search/search.c:51
 msgid "&Regular expression"
 msgstr "&Regulesprimo"
 
-#: lib/search/search.c:52
 msgid "Hexadecimal"
 msgstr "Deksesuma"
 
-#: lib/search/search.c:53
 msgid "Wildcard search"
 msgstr "Ĵokera serĉo"
 
-#: lib/skin/common.c:124
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
@@ -97,7 +79,6 @@ msgstr ""
 "Ne povas ŝargi etoson '%s'.\n"
 "Apriora etoso estas ŝargita"
 
-#: lib/skin/common.c:136
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
@@ -106,372 +87,280 @@ msgstr ""
 "Ne povas interpreti etoson '%s'.\n"
 "Apriora etoso estas ŝargita"
 
-#: lib/tty/key.c:98
 msgid "Function key 1"
 msgstr "Funkcia klavo 1"
 
-#: lib/tty/key.c:99
 msgid "Function key 2"
 msgstr "Funkcia klavo 2"
 
-#: lib/tty/key.c:100
 msgid "Function key 3"
 msgstr "Funkcia klavo 3"
 
-#: lib/tty/key.c:101
 msgid "Function key 4"
 msgstr "Funkcia klavo 4"
 
-#: lib/tty/key.c:102
 msgid "Function key 5"
 msgstr "Funkcia klavo 5"
 
-#: lib/tty/key.c:103
 msgid "Function key 6"
 msgstr "Funkcia klavo 6"
 
-#: lib/tty/key.c:104
 msgid "Function key 7"
 msgstr "Funkcia klavo 7"
 
-#: lib/tty/key.c:105
 msgid "Function key 8"
 msgstr "Funkcia klavo 8"
 
-#: lib/tty/key.c:106
 msgid "Function key 9"
 msgstr "Funkcia klavo 9"
 
-#: lib/tty/key.c:107
 msgid "Function key 10"
 msgstr "Funkcia klavo 10"
 
-#: lib/tty/key.c:108
 msgid "Function key 11"
 msgstr "Funkcia klavo 11"
 
-#: lib/tty/key.c:109
 msgid "Function key 12"
 msgstr "Funkcia klavo 12"
 
-#: lib/tty/key.c:110
 msgid "Function key 13"
 msgstr "Funkcia klavo 13"
 
-#: lib/tty/key.c:111
 msgid "Function key 14"
 msgstr "Funkcia klavo 14"
 
-#: lib/tty/key.c:112
 msgid "Function key 15"
 msgstr "Funkcia klavo 15"
 
-#: lib/tty/key.c:113
 msgid "Function key 16"
 msgstr "Funkcia klavo 16"
 
-#: lib/tty/key.c:114
 msgid "Function key 17"
 msgstr "Funkcia klavo 17"
 
-#: lib/tty/key.c:115
 msgid "Function key 18"
 msgstr "Funkcia klavo 18"
 
-#: lib/tty/key.c:116
 msgid "Function key 19"
 msgstr "Funkcia klavo 19"
 
-#: lib/tty/key.c:117
 msgid "Function key 20"
 msgstr "Funkcia klavo 20"
 
-#: lib/tty/key.c:118 lib/tty/key.c:157
 msgid "Backspace key"
 msgstr "Retropaŝo"
 
-#: lib/tty/key.c:119
 msgid "End key"
 msgstr "Fino"
 
-#: lib/tty/key.c:120
 msgid "Up arrow key"
 msgstr "Supra sagoklavo"
 
-#: lib/tty/key.c:121
 msgid "Down arrow key"
 msgstr "Suba sagoklavo"
 
-#: lib/tty/key.c:122
 msgid "Left arrow key"
 msgstr "Maldekstra sagoklavo"
 
-#: lib/tty/key.c:123
 msgid "Right arrow key"
 msgstr "Dekstra sagoklavo"
 
-#: lib/tty/key.c:124
 msgid "Home key"
 msgstr "Hejmo"
 
-#: lib/tty/key.c:125
 msgid "Page Down key"
 msgstr "Suben je ekranpleno"
 
-#: lib/tty/key.c:126
 msgid "Page Up key"
 msgstr "Supren je ekranpleno"
 
-#: lib/tty/key.c:127 lib/tty/key.c:158
 msgid "Insert key"
 msgstr "Enmeto"
 
-#: lib/tty/key.c:128 lib/tty/key.c:159
 msgid "Delete key"
 msgstr "Foriga klavo"
 
-#: lib/tty/key.c:129
 msgid "Completion/M-tab"
 msgstr "Kompleto"
 
-#: lib/tty/key.c:130
 msgid "+ on keypad"
 msgstr "+ ĉe cifera klavaro"
 
-#: lib/tty/key.c:131
 msgid "- on keypad"
 msgstr "- ĉe cifera klavaro"
 
-#: lib/tty/key.c:132
 msgid "Slash on keypad"
 msgstr "Oblikvo ĉe cifera klavaro"
 
-#: lib/tty/key.c:133
 msgid "* on keypad"
 msgstr "* ĉe cifera klavaro"
 
-#: lib/tty/key.c:136 lib/tty/key.c:156
 msgid "Escape key"
 msgstr "Eskapa klavo"
 
-#: lib/tty/key.c:137
 msgid "Left arrow keypad"
 msgstr "Maldekstra sagoklavo [cifera klavaro]"
 
-#: lib/tty/key.c:138
 msgid "Right arrow keypad"
 msgstr "Dekstra sagoklavo [cifera klavaro]"
 
-#: lib/tty/key.c:139
 msgid "Up arrow keypad"
 msgstr "Supra sagoklavo [cifera klavaro]"
 
-#: lib/tty/key.c:140
 msgid "Down arrow keypad"
 msgstr "Suba sagoklavo [cifera klavaro]"
 
-#: lib/tty/key.c:141
 msgid "Home on keypad"
 msgstr "Hejmo [cifera klavaro]"
 
-#: lib/tty/key.c:142
 msgid "End on keypad"
 msgstr "Fino [cifera klavaro]"
 
-#: lib/tty/key.c:143
 msgid "Page Down keypad"
 msgstr "Suben [cifera klavaro]"
 
-#: lib/tty/key.c:144
 msgid "Page Up keypad"
 msgstr "Supren [cifera klavaro]"
 
-#: lib/tty/key.c:145
 msgid "Insert on keypad"
 msgstr "Enmeto [cifera klavaro]"
 
-#: lib/tty/key.c:146
 msgid "Delete on keypad"
 msgstr "Foriga klavo [cifera klavaro]"
 
-#: lib/tty/key.c:147
 msgid "Enter on keypad"
 msgstr "Enen-klavo sagoklavo [cifera klavaro]"
 
-#: lib/tty/key.c:148
 msgid "Function key 21"
 msgstr "Funkcia klavo 21"
 
-#: lib/tty/key.c:149
 msgid "Function key 22"
 msgstr "Funkcia klavo 22"
 
-#: lib/tty/key.c:150
 msgid "Function key 23"
 msgstr "Funkcia klavo 23"
 
-#: lib/tty/key.c:151
 msgid "Function key 24"
 msgstr "Funkcia klavo 24"
 
-#: lib/tty/key.c:152
 msgid "A1 key"
 msgstr "Klavo A1"
 
-#: lib/tty/key.c:153
 msgid "C1 key"
 msgstr "Klavo C1"
 
-#: lib/tty/key.c:160
 msgid "Plus"
 msgstr "Plus"
 
-#: lib/tty/key.c:161
 msgid "Minus"
 msgstr "Minus"
 
-#: lib/tty/key.c:162
 msgid "Asterisk"
 msgstr "Steleto"
 
-#: lib/tty/key.c:163
 msgid "Dot"
 msgstr "Punkto"
 
-#: lib/tty/key.c:164
 msgid "Less than"
 msgstr "Malpli ol"
 
-#: lib/tty/key.c:165
 msgid "Great than"
 msgstr "Pli ol"
 
-#: lib/tty/key.c:166
 msgid "Equal"
 msgstr "Egala"
 
-#: lib/tty/key.c:167
 msgid "Comma"
 msgstr "Komo"
 
-#: lib/tty/key.c:168
 msgid "Apostrophe"
 msgstr "Apostrofo"
 
-#: lib/tty/key.c:169
 msgid "Colon"
 msgstr "Dupunkto"
 
-#: lib/tty/key.c:170
 msgid "Exclamation mark"
 msgstr "Krisigno"
 
-#: lib/tty/key.c:171
 msgid "Question mark"
 msgstr "Demandosigno"
 
-#: lib/tty/key.c:172
 msgid "Ampersand"
 msgstr "Kaj-signo"
 
-#: lib/tty/key.c:173
 msgid "Dollar sign"
 msgstr "Dolara signo"
 
-#: lib/tty/key.c:174
 msgid "Quotation mark"
 msgstr "Citilo"
 
-#: lib/tty/key.c:175
 msgid "Caret"
 msgstr "Ĉapelo"
 
-#: lib/tty/key.c:176
 msgid "Tilda"
 msgstr "Tildo"
 
-#: lib/tty/key.c:177
 msgid "Prime"
 msgstr "Ĉefo"
 
-#: lib/tty/key.c:178
 msgid "Underline"
 msgstr "Substreko"
 
-#: lib/tty/key.c:179
 msgid "Understrike"
 msgstr "Superstreko"
 
-#: lib/tty/key.c:180
 msgid "Pipe"
 msgstr "Dukto"
 
-#: lib/tty/key.c:181
 msgid "Left parenthesis"
 msgstr "Maldekstra ronda krampo"
 
-#: lib/tty/key.c:182
 msgid "Right parenthesis"
 msgstr "Dekstra ronda krampo"
 
-#: lib/tty/key.c:183
 msgid "Left bracket"
 msgstr "Maldekstra rekta krampo"
 
-#: lib/tty/key.c:184
 msgid "Right bracket"
 msgstr "Dekstra rekta krampo"
 
-#: lib/tty/key.c:185
 msgid "Left brace"
 msgstr "Maldekstra kuniga krampo"
 
-#: lib/tty/key.c:186
 msgid "Right brace"
 msgstr "Dekstra kuniga krampo"
 
-#: lib/tty/key.c:187
 msgid "Enter"
 msgstr "Enen-klavo"
 
-#: lib/tty/key.c:188
 msgid "Tab key"
 msgstr "Tabo"
 
-#: lib/tty/key.c:189
 msgid "Space key"
 msgstr "Spaceto"
 
-#: lib/tty/key.c:190
 msgid "Slash key"
 msgstr "Oblikvo"
 
-#: lib/tty/key.c:191
 msgid "Backslash key"
 msgstr "Deklivo"
 
-#: lib/tty/key.c:192 lib/tty/key.c:193
 msgid "Number sign #"
 msgstr "Numersigno"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
-#: lib/tty/key.c:195
 msgid "At sign"
 msgstr "Po-signo"
 
-#: lib/tty/key.c:198 lib/tty/key.c:199
 msgid "Ctrl"
 msgstr "Stirklavo"
 
-#: lib/tty/key.c:200 lib/tty/key.c:201 lib/tty/key.c:202
 msgid "Alt"
 msgstr "Alternativo"
 
-#: lib/tty/key.c:203
 msgid "Shift"
 msgstr "Uskleca inversigilo"
 
-#: lib/tty/tty-slang.c:262
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -480,66 +369,46 @@ msgstr ""
 "Ekrangrando %dx%d ne estas regata.\n"
 "Kontroli la medivariablon TERM.\n"
 
-#: lib/utilunix.c:359
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s ne estas dosierujo\n"
 
-#: lib/utilunix.c:361
 #, c-format
 msgid "Directory %s is not owned by you\n"
 msgstr "Dosierujo %s ne estas estrata de vi\n"
 
-#: lib/utilunix.c:363
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr "Ne povas agordi la ĝustajn permesojn por dosierujo %s\n"
 
-#: lib/utilunix.c:371
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr "Ne povas krei provizoran dosierujon %s: %s\n"
 
-#: lib/utilunix.c:404
 #, c-format
 msgid "Temporary files will be created in %s\n"
 msgstr "Provizoraj dosieroj kreiĝos en %s\n"
 
-#: lib/utilunix.c:410
 #, c-format
 msgid "Temporary files will not be created\n"
 msgstr "Provizoraj dosieroj ne kreiĝos\n"
 
-#: lib/utilunix.c:414 src/execute.c:168
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Premu iun klavon por daŭri..."
 
-#: lib/utilunix.c:438 lib/utilunix.c:443 lib/utilunix.c:495
-#: src/editor/editcmd.c:168 src/editor/editcmd.c:192 src/editor/editcmd.c:391
-#: src/editor/editcmd.c:771 src/editor/editcmd.c:1424
-#: src/editor/editcmd.c:1647 src/editor/editcmd.c:1670
-#: src/editor/editcmd.c:1969 src/editor/editcmd.c:3056
-#: src/editor/editcmd.c:3096 src/editor/editcmd_dialogs.c:518
-#: src/execute.c:113 src/filemanager/file.c:1364 src/filemanager/panel.c:3647
-#: src/help.c:359 src/main.c:486 src/main.c:496 src/subshell.c:392
-#: src/subshell.c:1085 src/viewer/actions_cmd.c:277
 msgid "Warning"
 msgstr "Averto"
 
-#: lib/utilunix.c:438
 msgid "Pipe failed"
 msgstr "Dukto malsukcesis"
 
-#: lib/utilunix.c:443
 msgid "Dup failed"
 msgstr "Duplikato malsukcesis"
 
-#: lib/utilunix.c:500
 msgid "Error dup'ing old error pipe"
 msgstr "Erara dum duplikati malnovan eraran dukton"
 
-#: lib/vfs/mc-vfs/cpio.c:201 lib/vfs/mc-vfs/cpio.c:220
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
@@ -548,7 +417,6 @@ msgstr ""
 "Ne povas malfermi cpio-dosieron\n"
 "%s"
 
-#: lib/vfs/mc-vfs/cpio.c:294
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -557,7 +425,6 @@ msgstr ""
 "Tro baldaŭa fino de cpio-dosiero\n"
 "%s"
 
-#: lib/vfs/mc-vfs/cpio.c:380
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -570,14 +437,10 @@ msgstr ""
 "en cpio-dosiero\n"
 "%s"
 
-#: lib/vfs/mc-vfs/cpio.c:421
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s enhavas duplikatajn erojn! Preterpasanta!"
 
-#: lib/vfs/mc-vfs/cpio.c:510 lib/vfs/mc-vfs/cpio.c:570
-#: lib/vfs/mc-vfs/cpio.c:576 lib/vfs/mc-vfs/cpio.c:639
-#: lib/vfs/mc-vfs/cpio.c:649
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
@@ -586,7 +449,6 @@ msgstr ""
 "Putrigita cpio-kapo renkontita en\n"
 "%s"
 
-#: lib/vfs/mc-vfs/cpio.c:704
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -595,24 +457,19 @@ msgstr ""
 "Neanticipa dosierfino\n"
 "%s"
 
-#: lib/vfs/mc-vfs/direntry.c:282
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr "Dosieruja tenejo eksvalidiĝis por %s"
 
-#: lib/vfs/mc-vfs/direntry.c:713 lib/vfs/mc-vfs/direntry.c:716
 msgid "bytes transferred"
 msgstr "bajtoj transigitaj"
 
-#: lib/vfs/mc-vfs/direntry.c:1206
 msgid "Starting linear transfer..."
 msgstr "Komencanta linian transigon..."
 
-#: lib/vfs/mc-vfs/direntry.c:1271
 msgid "Getting file"
 msgstr "Ricevanta dosieron."
 
-#: lib/vfs/mc-vfs/extfs.c:484
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -621,233 +478,178 @@ msgstr ""
 "Ne povas malfermi dosiero %s\n"
 "%s"
 
-#: lib/vfs/mc-vfs/extfs.c:526 lib/vfs/mc-vfs/extfs.c:547
-#: lib/vfs/mc-vfs/extfs.c:603
 msgid "Inconsistent extfs archive"
 msgstr "Malkonsekvenca extfs-dosieron"
 
-#: lib/vfs/mc-vfs/extfs.c:1545
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Averto: ne povas malfermi dosierujon %s\n"
 
-#: lib/vfs/mc-vfs/fish.c:262
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Malkonektiĝanta de %s"
 
-#: lib/vfs/mc-vfs/fish.c:451
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Atendanta komencan linion..."
 
-#: lib/vfs/mc-vfs/fish.c:461
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Bedaŭrinde ni ne povas nun fari pasvortajn atestadajn konektojn."
 
-#: lib/vfs/mc-vfs/fish.c:468
 #, c-format
 msgid "fish: Password is required for %s"
 msgstr "fish: Pasvorto estas postulita por %s"
 
-#: lib/vfs/mc-vfs/fish.c:475
 msgid "fish: Sending password..."
 msgstr "fish: Sendanta pasvorton..."
 
-#: lib/vfs/mc-vfs/fish.c:511
 msgid "fish: Sending initial line..."
 msgstr "fish: Sendanta komencan linion..."
 
-#: lib/vfs/mc-vfs/fish.c:522
 msgid "fish: Handshaking version..."
 msgstr "fish: Konsentanta eldonon..."
 
-#: lib/vfs/mc-vfs/fish.c:532
 msgid "fish: Getting host info..."
 msgstr "fish: Akiranta gastiganto-informojn..."
 
-#: lib/vfs/mc-vfs/fish.c:536
 msgid "fish: Setting up current directory..."
 msgstr "fish: Stariganta nunan dosierujon..."
 
-#: lib/vfs/mc-vfs/fish.c:538
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Konektita, hejmo %s."
 
-#: lib/vfs/mc-vfs/fish.c:645
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Leganta dosierujon %s..."
 
-#: lib/vfs/mc-vfs/fish.c:811 lib/vfs/mc-vfs/ftpfs.c:1751
-#: lib/vfs/mc-vfs/undelfs.c:376
 #, c-format
 msgid "%s: done."
 msgstr "%s: finita."
 
-#: lib/vfs/mc-vfs/fish.c:824 lib/vfs/mc-vfs/ftpfs.c:1704
-#: lib/vfs/mc-vfs/undelfs.c:379
 #, c-format
 msgid "%s: failure"
 msgstr "%s: malsukceso"
 
-#: lib/vfs/mc-vfs/fish.c:882
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: teno %s: sendanta komandon..."
 
-#: lib/vfs/mc-vfs/fish.c:916
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Loka legado malsukcesis, sendanta nulojn"
 
-#: lib/vfs/mc-vfs/fish.c:936
 msgid "fish: storing zeros"
 msgstr "fish: konservanta nulojn"
 
-#: lib/vfs/mc-vfs/fish.c:936
 msgid "fish: storing file"
 msgstr "fish: konservanta dosieron"
 
-#: lib/vfs/mc-vfs/fish.c:1004
 msgid "Aborting transfer..."
 msgstr "Ĉesiganta transigon..."
 
-#: lib/vfs/mc-vfs/fish.c:1019
 msgid "Error reported after abort."
 msgstr "Eraro raportita post ĉesigo."
 
-#: lib/vfs/mc-vfs/fish.c:1021
 msgid "Aborted transfer would be successful."
 msgstr "Ĉesigita transigo estus sukcesa."
 
-#: lib/vfs/mc-vfs/ftpfs.c:510
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Malkonektiĝanta de %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:563
 #, c-format
 msgid "FTP: Password required for %s"
 msgstr "FTP: Pasvorto postulita por %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:603
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: sendi salutnomon"
 
-#: lib/vfs/mc-vfs/ftpfs.c:608
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: sendi pasvorton"
 
-#: lib/vfs/mc-vfs/ftpfs.c:614
 #, c-format
 msgid "FTP: Account required for user %s"
 msgstr "FTP: Konto postulita por uzanto %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:615
 msgid "Account:"
 msgstr "Konto:"
 
-#: lib/vfs/mc-vfs/ftpfs.c:619
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: sendi uzantan konton"
 
-#: lib/vfs/mc-vfs/ftpfs.c:628
 msgid "ftpfs: logged in"
 msgstr "ftpfs: ensalutita"
 
-#: lib/vfs/mc-vfs/ftpfs.c:642
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Ensaluto malĝusta por uzanto %s "
 
-#: lib/vfs/mc-vfs/ftpfs.c:778
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Nevalida gastigantonome."
 
-#: lib/vfs/mc-vfs/ftpfs.c:830 lib/vfs/mc-vfs/ftpfs.c:848
 #, c-format
 msgid "ftpfs: %s"
 msgstr "ftpfs: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:855
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: konektiĝanta al %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:867
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: konekto interrompita de uzanto"
 
-#: lib/vfs/mc-vfs/ftpfs.c:871
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: konekto al servilo fiaskis: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:931
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Atendanta por reprovi... %d (Stirklavo-C por nuligi)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1267
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: nevalida familio"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1275
 #, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: ne povas krei konektingon: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1309
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: ne povas starigi pasivan reĝimon"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1409
 msgid "ftpfs: aborting transfer."
 msgstr "ftps: ĉesigantan transigon."
 
-#: lib/vfs/mc-vfs/ftpfs.c:1412
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: ĉesiga eraro: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1420
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: ĉesiga malsukceso"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1549 lib/vfs/mc-vfs/ftpfs.c:1662
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD malsukcesis."
 
-#: lib/vfs/mc-vfs/ftpfs.c:1559 lib/vfs/mc-vfs/ftpfs.c:1567
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: ne povas solvi molan ligilon"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1628
 msgid "Resolving symlink..."
 msgstr "Solvanta molan ligilon..."
 
-#: lib/vfs/mc-vfs/ftpfs.c:1652
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Leganta FTP-dosierujon %s... %s%s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1655
 msgid "(strict rfc959)"
 msgstr "(severa rfc959)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1655
 msgid "(chdir first)"
 msgstr "(ŝanĝi dosierujon unue)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1765
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: malsukcesis; neniuj pluaj litoj"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1843
 msgid "ftpfs: storing file"
 msgstr "ftpfs: konservanta dosieron"
 
-#: lib/vfs/mc-vfs/ftpfs.c:2287
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
@@ -855,12 +657,10 @@ msgstr ""
 "~/.netrc havas neĝustan reĝimon\n"
 "Forigi pasvorton aŭ alĝustigi reĝimon"
 
-#: lib/vfs/mc-vfs/sfs.c:423
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Averto: dosiero %s ne trovita\n"
 
-#: lib/vfs/mc-vfs/sfs.c:452
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -869,7 +669,6 @@ msgstr ""
 "Averto: Nevalida linio en %s:\n"
 "%s\n"
 
-#: lib/vfs/mc-vfs/sfs.c:471
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -878,41 +677,33 @@ msgstr ""
 "Averto: Nevalida marko %c in %s:\n"
 "%s\n"
 
-#: lib/vfs/mc-vfs/smbfs.c:691
 #, c-format
 msgid "reconnect to %s failed"
 msgstr "rekonektiĝi al %s malsukcesis"
 
-#: lib/vfs/mc-vfs/smbfs.c:1307
 msgid "Authentication failed"
 msgstr "Atestado malsukcesis"
 
-#: lib/vfs/mc-vfs/smbfs.c:1876
 #, c-format
 msgid "Error %s creating directory %s"
 msgstr "Eraro %s dum krei dosierujon %s"
 
-#: lib/vfs/mc-vfs/smbfs.c:1905
 #, c-format
 msgid "Error %s removing directory %s"
 msgstr "Eraro %s dum forigi dosierujon %s"
 
-#: lib/vfs/mc-vfs/smbfs.c:2023
 #, c-format
 msgid "%s opening remote file %s"
 msgstr "%s malfermanta forajn dosierojn %s"
 
-#: lib/vfs/mc-vfs/smbfs.c:2105
 #, c-format
 msgid "%s removing remote file %s"
 msgstr "%s dum forigi forajn dosierojn %s"
 
-#: lib/vfs/mc-vfs/smbfs.c:2144
 #, c-format
 msgid "%s renaming files\n"
 msgstr "%s alinomanta dosierojn\n"
 
-#: lib/vfs/mc-vfs/tar.c:272 lib/vfs/mc-vfs/tar.c:291
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -921,16 +712,12 @@ msgstr ""
 "Ne povas malfermi tar-dosieron\n"
 "%s"
 
-#: lib/vfs/mc-vfs/tar.c:545 lib/vfs/mc-vfs/tar.c:576 lib/vfs/mc-vfs/tar.c:656
-#: lib/vfs/mc-vfs/tar.c:665
 msgid "Inconsistent tar archive"
 msgstr "Malkonsekvenca tar-dosiero"
 
-#: lib/vfs/mc-vfs/tar.c:561
 msgid "Unexpected EOF on archive file"
 msgstr "Malanticipita dosierfino en dosiero"
 
-#: lib/vfs/mc-vfs/tar.c:758
 #, c-format
 msgid ""
 "%s\n"
@@ -939,57 +726,45 @@ msgstr ""
 "%s\n"
 "ne aspektas kiel tar-dosieron."
 
-#: lib/vfs/mc-vfs/undelfs.c:123
 msgid "undelfs: error"
 msgstr "undelfs: eraro"
 
-#: lib/vfs/mc-vfs/undelfs.c:236
 msgid "not enough memory"
 msgstr "ne sufiĉan memoron"
 
-#: lib/vfs/mc-vfs/undelfs.c:242
 msgid "while allocating block buffer"
 msgstr "dum okupi blokan bufron"
 
-#: lib/vfs/mc-vfs/undelfs.c:248
 #, c-format
 msgid "open_inode_scan: %d"
 msgstr "open_inode_scan: %d"
 
-#: lib/vfs/mc-vfs/undelfs.c:254
 #, c-format
 msgid "while starting inode scan %d"
 msgstr "dum komenci inode-skanon %d"
 
-#: lib/vfs/mc-vfs/undelfs.c:261
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: ŝargis forigitajn dosierajn informojn [%d inode-oj]"
 
-#: lib/vfs/mc-vfs/undelfs.c:276
 #, c-format
 msgid "while calling ext2_block_iterate %d"
 msgstr "dum voki al ext2_block_iterate %d"
 
-#: lib/vfs/mc-vfs/undelfs.c:288
 msgid "no more memory while reallocating array"
 msgstr "ne plu memoro dum okupi tabelon"
 
-#: lib/vfs/mc-vfs/undelfs.c:310
 #, c-format
 msgid "while doing inode scan %d"
 msgstr "dum fari inode-skanon %d"
 
-#: lib/vfs/mc-vfs/undelfs.c:358
 #, c-format
 msgid "Cannot open file %s"
 msgstr "Ne povas malfermi dosieron %s"
 
-#: lib/vfs/mc-vfs/undelfs.c:361
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: leganta inode-bitmapon..."
 
-#: lib/vfs/mc-vfs/undelfs.c:364
 #, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
@@ -998,11 +773,9 @@ msgstr ""
 "Ne povas ŝargi inode-bitmapon el:\n"
 "%s"
 
-#: lib/vfs/mc-vfs/undelfs.c:367
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: leganta blokan bitmapon..."
 
-#: lib/vfs/mc-vfs/undelfs.c:370
 #, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
@@ -1011,223 +784,129 @@ msgstr ""
 "Ne povas ŝargi blokan bitmapon el:\n"
 "%s"
 
-#: lib/vfs/mc-vfs/undelfs.c:395
 msgid "vfs_info is not fs!"
 msgstr "vfs_info estas ne fs!"
 
-#: lib/vfs/mc-vfs/undelfs.c:441 lib/vfs/mc-vfs/undelfs.c:658
 msgid "You have to chdir to extract files first"
 msgstr "Vi devas ŝanĝi dosierujon antaŭ ol eltiri dosierujojn"
 
-#: lib/vfs/mc-vfs/undelfs.c:587
 msgid "while iterating over blocks"
 msgstr "dum trairi blokojn"
 
-#: lib/vfs/mc-vfs/undelfs.c:702
 #, c-format
 msgid "Cannot open file \"%s\""
 msgstr "Ne povas malfermi dosieron \"%s\""
 
-#: lib/vfs/mc-vfs/undelfs.c:796
 msgid "Ext2lib error"
 msgstr "Ext2lib: eraro"
 
-#: lib/vfs/mc-vfs/utilvfs.c:1118
 msgid "Cannot parse:"
 msgstr "Ne povas analizi:"
 
-#: lib/vfs/mc-vfs/utilvfs.c:1121
 msgid "More parsing errors will be ignored."
 msgstr "Pli da analizaj eraroj estos ignorotaj."
 
-#: lib/vfs/mc-vfs/utilvfs.c:1133
 msgid "Internal error:"
 msgstr "Interna eraro:"
 
-#: lib/vfs/mc-vfs/utilvfs.c:1142 src/filemanager/boxes.c:1129
 msgid "Password:"
 msgstr "Pasvorto:"
 
-#: lib/vfs/mc-vfs/vfs.c:552
 msgid "Changes to file lost"
 msgstr "Ŝanĝoj de la dosiero perditaj"
 
-#: lib/widget/dialog-switch.c:196
 msgid "Screens"
 msgstr "Ekranplenoj"
 
-#: lib/widget/history.c:308 lib/widget/history.c:330
 msgid "History"
 msgstr "Historio"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-#: lib/widget/listbox.c:274
 msgid "DialogTitle|History cleanup"
 msgstr "DialogTitle|Historia purigado"
 
-#: lib/widget/listbox.c:275
 msgid "Do you want clean this history?"
 msgstr "Ĉu vi volas purigi ĉi tiun historion?"
 
-#: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
-#: src/editor/editcmd.c:170 src/editor/editcmd.c:194 src/editor/editcmd.c:2360
-#: src/editor/editcmd.c:2367 src/filemanager/cmd.c:161
-#: src/filemanager/file.c:1127 src/filemanager/file.c:2358
-#: src/filemanager/filegui.c:334 src/filemanager/hotlist.c:1236
-#: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:946
-#: src/filemanager/midnight.c:954 src/filemanager/panel.c:2244
-#: src/filemanager/tree.c:857 src/subshell.c:1087 src/viewer/lib.c:157
-#: src/viewer/lib.c:163 src/viewer/search.c:286
 msgid "&Yes"
 msgstr "&Jes"
 
-#: lib/widget/listbox.c:276 src/diffviewer/ydiff.c:2949
-#: src/editor/editcmd.c:170 src/editor/editcmd.c:2360
-#: src/editor/editcmd.c:2367 src/filemanager/cmd.c:161
-#: src/filemanager/file.c:1127 src/filemanager/file.c:2358
-#: src/filemanager/filegui.c:332 src/filemanager/hotlist.c:1236
-#: src/filemanager/hotlist.c:1253 src/filemanager/midnight.c:946
-#: src/filemanager/midnight.c:954 src/filemanager/panel.c:2244
-#: src/filemanager/tree.c:857 src/subshell.c:1087 src/viewer/lib.c:157
-#: src/viewer/lib.c:163 src/viewer/search.c:287
 msgid "&No"
 msgstr "&Ne"
 
-#: lib/widget/wtools.c:132
 msgid "Background process:"
 msgstr "Fona procezo:"
 
-#: lib/widget/wtools.c:158 src/diffviewer/search.c:72
-#: src/diffviewer/ydiff.c:2404 src/editor/editcmd.c:170
-#: src/editor/editcmd.c:194 src/editor/editcmd.c:393 src/editor/editcmd.c:416
-#: src/editor/editcmd.c:774 src/editor/editcmd.c:1312
-#: src/editor/editcmd.c:1425 src/editor/editcmd.c:1627
-#: src/editor/editcmd.c:1650 src/editor/editcmd.c:1672
-#: src/editor/editcmd.c:1972 src/editor/editcmd.c:2894
-#: src/editor/editcmd.c:3058 src/editor/editcmd.c:3098
-#: src/editor/editcmd_dialogs.c:105 src/editor/editcmd_dialogs.c:174
-#: src/editor/editcmd_dialogs.c:520 src/editor/editcmd_dialogs.c:586
-#: src/editor/editoptions.c:86 src/filemanager/achown.c:87
-#: src/filemanager/boxes.c:244 src/filemanager/boxes.c:375
-#: src/filemanager/boxes.c:600 src/filemanager/boxes.c:686
-#: src/filemanager/boxes.c:774 src/filemanager/boxes.c:931
-#: src/filemanager/boxes.c:1041 src/filemanager/boxes.c:1130
-#: src/filemanager/chmod.c:121 src/filemanager/chown.c:94
-#: src/filemanager/cmd.c:1185 src/filemanager/filegui.c:934
-#: src/filemanager/find.c:495 src/filemanager/hotlist.c:206
-#: src/filemanager/hotlist.c:679 src/filemanager/hotlist.c:1025
-#: src/filemanager/hotlist.c:1121 src/filemanager/layout.c:416
-#: src/filemanager/option.c:113 src/filemanager/option.c:297
-#: src/filemanager/panelize.c:88 src/learn.c:86 src/viewer/dialogs.c:91
-#: src/viewer/dialogs.c:193 src/viewer/hex.c:392
 msgid "&Cancel"
 msgstr "N&uligi"
 
-#: lib/widget/wtools.c:159 src/diffviewer/search.c:73
-#: src/diffviewer/ydiff.c:2405 src/editor/edit.c:178 src/editor/editcmd.c:417
-#: src/editor/editcmd.c:1314 src/editor/editcmd.c:2258
-#: src/editor/editcmd.c:2895 src/editor/editcmd_dialogs.c:106
-#: src/editor/editcmd_dialogs.c:178 src/editor/editoptions.c:87
-#: src/filemanager/boxes.c:139 src/filemanager/boxes.c:243
-#: src/filemanager/boxes.c:376 src/filemanager/boxes.c:602
-#: src/filemanager/boxes.c:687 src/filemanager/boxes.c:775
-#: src/filemanager/boxes.c:932 src/filemanager/boxes.c:1042
-#: src/filemanager/boxes.c:1130 src/filemanager/filegui.c:942
-#: src/filemanager/find.c:495 src/filemanager/layout.c:415
-#: src/filemanager/option.c:115 src/filemanager/option.c:299
-#: src/subshell.c:395 src/viewer/dialogs.c:93 src/viewer/dialogs.c:194
 msgid "&OK"
 msgstr "&Bone"
 
-#: lib/widget/wtools.c:260 lib/widget/wtools.c:381 src/editor/edit.c:265
-#: src/editor/edit.c:294 src/editor/edit.c:416 src/editor/edit.c:1542
-#: src/editor/edit.c:1926 src/editor/edit.c:1936 src/editor/editcmd.c:261
-#: src/editor/editcmd.c:271 src/editor/editcmd.c:348 src/editor/editcmd.c:2452
 msgid "Error"
 msgstr "Eraro"
 
-#: src/args.c:114
 msgid "Displays the current version"
 msgstr "Montras la uzatan eldonon"
 
-#: src/args.c:122
 msgid "Print data directory"
 msgstr "Printi datuman dosierujon"
 
-#: src/args.c:129
 msgid "Print last working directory to specified file"
 msgstr "Printi lastan labordosierujon al specifan dosieron"
 
-#: src/args.c:137
 msgid "Enables subshell support (default)"
 msgstr "Ebligas subŝelon (apriore)"
 
-#: src/args.c:144
 msgid "Disables subshell support"
 msgstr "Malebligas subŝelon"
 
-#: src/args.c:154
 msgid "Log ftp dialog to specified file"
 msgstr "Protokoli FTP-dialogujon al specifa dosiero"
 
-#: src/args.c:162
 msgid "Set debug level"
 msgstr "Specifi senerarigan nivelon"
 
-#: src/args.c:171
 msgid "Launches the file viewer on a file"
 msgstr "Plenumigas la dosiero-legilon je la dosiero"
 
-#: src/args.c:178
 msgid "Edits one file"
 msgstr "Redaktas unuopan dosieron"
 
-#: src/args.c:195
 msgid "Forces xterm features"
 msgstr "Devigas xterm-trajtojn"
 
-#: src/args.c:202
 msgid "Disable mouse support in text version"
 msgstr "Malebligi musan regon en teksta variaĵo"
 
-#: src/args.c:210
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Provas uzi termcap-on anstataŭ terminfo-on"
 
-#: src/args.c:218
 msgid "To run on slow terminals"
 msgstr "Por plenumiĝi en malrapidaj terminaloj"
 
-#: src/args.c:225
 msgid "Use stickchars to draw"
 msgstr "Uzi stango-signojn por skizi"
 
-#: src/args.c:232
 msgid "Resets soft keys on HP terminals"
 msgstr "Restarigas molajn klavojn en HP-terminaloj"
 
-#: src/args.c:239
 msgid "Load definitions of key bindings from specified file"
 msgstr "Ŝargi difinojn de klavaj bindaĵoj el specifa dosiero"
 
-#: src/args.c:260
 msgid "Requests to run in black and white"
 msgstr "Petas plenumiĝi unukolore"
 
-#: src/args.c:267
 msgid "Request to run in color mode"
 msgstr "Petas plenumiĝi bunte"
 
-#: src/args.c:274
 msgid "Specifies a color configuration"
 msgstr "Specifas koloran agordon"
 
-#: src/args.c:281
 msgid "Show mc with specified skin"
 msgstr "Montri kun specifa etoso"
 
 #. TRANSLATORS: don't translate keywords
-#: src/args.c:325
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -1249,7 +928,6 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: don't translate color names
-#: src/args.c:341
 msgid ""
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1263,23 +941,18 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/args.c:347
 msgid "Color options"
 msgstr "Kolora agordo"
 
-#: src/args.c:357 src/args.c:359
 msgid "+number"
 msgstr "+nombro"
 
-#: src/args.c:358
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
-#: src/args.c:361
 msgid "Set initial line number for the internal editor"
 msgstr "Agordi komencan lininumeron por la interna tekstoredaktilo"
 
-#: src/args.c:372
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -1289,51 +962,37 @@ msgstr ""
 "Bonvolu sendi ĉiujn raportojn pri eraro (inkluzive de la eligo de 'mc -V')\n"
 "kiel biletoj en www.midnight-commander.org\n"
 
-#: src/args.c:375 src/filemanager/midnight.c:1545 src/textconf.c:132
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/args.c:496
 msgid "No arguments given to the viewer."
 msgstr "Neniuj parametroj donitaj al la legilo."
 
-#: src/args.c:508
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Du dosieroj estas postulitaj por voki la diff-legilon."
 
-#: src/args.c:653
 msgid "Main options"
 msgstr "Ĉefa agordo"
 
-#: src/args.c:659 src/args.c:660
 msgid "Terminal options"
 msgstr "Terminala agordo"
 
-#: src/background.c:213 src/background.c:287 src/filemanager/file.c:453
-#: src/filemanager/file.c:1071
 msgid "Background process error"
 msgstr "Eraro ĉe fona procezo"
 
-#: src/background.c:220 src/background.c:287
 msgid "Unknown error in child"
 msgstr "Nekonata eraro en ido"
 
-#: src/background.c:228
 msgid "Child died unexpectedly"
 msgstr "Ido mortis neanticipe"
 
-#: src/background.c:237 src/background.c:243 src/background.c:252
-#: src/background.c:263 src/background.c:269
 msgid "Background protocol error"
 msgstr "Eraro ĉe fona protokolo"
 
-#: src/background.c:237 src/background.c:252 src/background.c:263
-#: src/background.c:269
 msgid "Reading failed"
 msgstr "Legado malsukcesis"
 
-#: src/background.c:244
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
@@ -1341,49 +1000,30 @@ msgstr ""
 "Fona proceso sendis al ni peton por pli da parametroj\n"
 "ol ni povas trakti."
 
-#: src/diffviewer/internal.h:15 src/editor/edit-impl.h:127
 msgid "&Dismiss"
 msgstr "&Kaŝi"
 
-#: src/diffviewer/search.c:110 src/editor/editcmd_dialogs.c:109
-#: src/editor/editcmd_dialogs.c:181 src/viewer/dialogs.c:96
 msgid "All charsets"
 msgstr "Ĉiuj signaroj"
 
-#: src/diffviewer/search.c:114 src/editor/editcmd_dialogs.c:113
-#: src/editor/editcmd_dialogs.c:185 src/filemanager/find.c:490
-#: src/viewer/dialogs.c:99
 msgid "&Whole words"
 msgstr "&Tutaj vortoj"
 
-#: src/diffviewer/search.c:117 src/editor/editcmd_dialogs.c:118
-#: src/editor/editcmd_dialogs.c:191 src/viewer/dialogs.c:101
 msgid "&Backwards"
 msgstr "&Dorsen"
 
-#: src/diffviewer/search.c:120 src/editor/editcmd_dialogs.c:121
-#: src/editor/editcmd_dialogs.c:194 src/viewer/dialogs.c:103
 msgid "Case &sensitive"
 msgstr "Ne ignori u&sklecon"
 
-#: src/diffviewer/search.c:132 src/editor/editcmd_dialogs.c:132
-#: src/editor/editcmd_dialogs.c:205 src/viewer/dialogs.c:109
 msgid "Enter search string:"
 msgstr "Enmetu serĉan ĉenon:"
 
-#: src/diffviewer/search.c:138 src/diffviewer/search.c:262
-#: src/diffviewer/search.c:275 src/diffviewer/search.c:302
-#: src/editor/editcmd.c:969 src/editor/editcmd.c:999 src/editor/editcmd.c:2151
-#: src/editor/editcmd_dialogs.c:216 src/viewer/dialogs.c:115
-#: src/viewer/search.c:139 src/viewer/search.c:223 src/viewer/search.c:308
 msgid "Search"
 msgstr "Serĉo"
 
-#: src/diffviewer/search.c:275 src/diffviewer/search.c:302
 msgid "Search is disabled"
 msgstr "Serĉo estas malebligita"
 
-#: src/diffviewer/ydiff.c:201
 #, c-format
 msgid ""
 "Cannot create temporary diff file\n"
@@ -1392,7 +1032,6 @@ msgstr ""
 "Ne povas krei provizoran diff-dosieron\n"
 "%s"
 
-#: src/diffviewer/ydiff.c:2207
 #, c-format
 msgid ""
 "Cannot create backup file\n"
@@ -1403,7 +1042,6 @@ msgstr ""
 "%s%s\n"
 "%s"
 
-#: src/diffviewer/ydiff.c:2217
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
@@ -1412,115 +1050,81 @@ msgstr ""
 "Ne povas krei provizoran kunfanan dosieron\n"
 "%s"
 
-#: src/diffviewer/ydiff.c:2398
 msgid "&Normal"
 msgstr "&Normala"
 
-#: src/diffviewer/ydiff.c:2399
 msgid "&Fastest (Assume large files)"
 msgstr "Plej &rapida (supozas grandajn dosierojn)"
 
-#: src/diffviewer/ydiff.c:2400
 msgid "&Minimal (Find a smaller set of change)"
 msgstr "&Minimuma (trovi pli malgrandan aron da ŝanĝo)"
 
-#: src/diffviewer/ydiff.c:2408
 msgid "Strip &trailing carriage return"
 msgstr "Forigi &sekvan novan linion"
 
-#: src/diffviewer/ydiff.c:2410
 msgid "Ignore all &whitespace"
 msgstr "Ignori ĉiujn &blankospacojn"
 
-#: src/diffviewer/ydiff.c:2412
 msgid "Ignore &space change"
 msgstr "Ignori &spacajn ŝanĝöjn"
 
-#: src/diffviewer/ydiff.c:2414
 msgid "Ignore tab &expansion"
 msgstr "Ignori taban &etendadon"
 
-#: src/diffviewer/ydiff.c:2416
 msgid "&Ignore case"
 msgstr "&Ignori usklecon"
 
-#: src/diffviewer/ydiff.c:2417
 msgid "Diff extra options"
 msgstr "Diff: aldonaj agordaĵoj"
 
-#: src/diffviewer/ydiff.c:2420
 msgid "Diff algorithm"
 msgstr "Diff-algoritmo"
 
-#: src/diffviewer/ydiff.c:2427
 msgid "Diff Options"
 msgstr "Diff-aj agordaĵoj"
 
-#: src/diffviewer/ydiff.c:2758
 msgid "Edit"
 msgstr "Redakti"
 
-#: src/diffviewer/ydiff.c:2758
 msgid "Edit is disabled"
 msgstr "Redakti estas malaktivigita"
 
-#: src/diffviewer/ydiff.c:2778
 msgid "Goto line (left)"
 msgstr "Iri linion (maldekstra)"
 
-#: src/diffviewer/ydiff.c:2778
 msgid "Goto line (right)"
 msgstr "Iri linion (dekstra)"
 
-#: src/diffviewer/ydiff.c:2785 src/editor/editcmd.c:2525
 msgid "Enter line:"
 msgstr "Enmeti linion:"
 
-#: src/diffviewer/ydiff.c:2819 src/editor/editwidget.c:221
-#: src/filemanager/midnight.c:1501 src/filemanager/tree.c:1177 src/help.c:1112
-#: src/viewer/display.c:86
 msgid "ButtonBar|Help"
 msgstr "Butonlinio|Helpo"
 
-#: src/diffviewer/ydiff.c:2820 src/editor/editwidget.c:222
-#: src/viewer/display.c:98
 msgid "ButtonBar|Save"
 msgstr "Butonlinio|Konservi"
 
-#: src/diffviewer/ydiff.c:2821 src/filemanager/midnight.c:1504
-#: src/viewer/display.c:93
 msgid "ButtonBar|Edit"
 msgstr "Butonlinio|Redakti"
 
-#: src/diffviewer/ydiff.c:2822
 msgid "ButtonBar|Merge"
 msgstr "ButtonBar|Kunfandi"
 
-#: src/diffviewer/ydiff.c:2823 src/editor/editwidget.c:227
-#: src/viewer/display.c:108
 msgid "ButtonBar|Search"
 msgstr "ButtonBar|Serĉi"
 
-#: src/diffviewer/ydiff.c:2824
 msgid "ButtonBar|Options"
 msgstr "ButtonBar|Agordo"
 
-#: src/diffviewer/ydiff.c:2825 src/editor/editwidget.c:230
-#: src/filemanager/midnight.c:1510 src/help.c:1121 src/viewer/display.c:120
-#: src/viewer/display.c:123
 msgid "ButtonBar|Quit"
 msgstr "Butonlinio|Eliri"
 
-#: src/diffviewer/ydiff.c:2946 src/editor/editcmd.c:2359
-#: src/editor/editcmd.c:2365 src/viewer/lib.c:155 src/viewer/lib.c:161
 msgid "Quit"
 msgstr "Eliri"
 
-#: src/diffviewer/ydiff.c:2947 src/editor/editcmd.c:2359 src/viewer/lib.c:156
 msgid "File was modified. Save with exit?"
 msgstr "Dosiero estis modifita. Ĉu konservi kun eliro?"
 
-#: src/diffviewer/ydiff.c:2948 src/editor/editcmd.c:2366 src/viewer/lib.c:162
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
@@ -1528,31 +1132,24 @@ msgstr ""
 "Midnight Commander estas elirinta.\n"
 "Ĉu konservi modifitan dosieron?"
 
-#: src/diffviewer/ydiff.c:3256 src/diffviewer/ydiff.c:3259
 msgid "Diff:"
 msgstr "Diff:"
 
-#: src/diffviewer/ydiff.c:3399
 msgid "Two files are needed to compare"
 msgstr "Du dosieroj estas bezonataj por kompari"
 
-#: src/editor/choosesyntax.c:65
 msgid "Choose syntax highlighting"
 msgstr "Elekti sintaksan prilumadon"
 
-#: src/editor/choosesyntax.c:66
 msgid "< Auto >"
 msgstr "< Aŭtomata >"
 
-#: src/editor/choosesyntax.c:67
 msgid "< Reload Current Syntax >"
 msgstr "< Reŝargi nunan sintakson >"
 
-#: src/editor/edit.c:177
 msgid "About"
 msgstr "Pri"
 
-#: src/editor/edit.c:196
 msgid ""
 "Copyright (C) 1996-2010 the Free Software Foundation\n"
 "\n"
@@ -1564,230 +1161,167 @@ msgstr ""
 "            Afabla tekstoredaktilo\n"
 "         skribita por Midnight Commander"
 
-#: src/editor/edit.c:264 src/editor/edit.c:377
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr "Ne povas malfermi je %s por legi"
 
-#: src/editor/edit.c:293
 #, c-format
 msgid "Error reading %s"
 msgstr "Eraro legi je %s"
 
-#: src/editor/edit.c:390
 #, c-format
 msgid "Cannot get size/permissions for %s"
 msgstr "Ne povas akiri grandon/permesojn por %s"
 
-#: src/editor/edit.c:397
 #, c-format
 msgid "\"%s\" is not a regular file"
 msgstr "\"%s\" estas ne regula dosiero"
 
-#: src/editor/edit.c:409
 #, c-format
 msgid "File \"%s\" is too large"
 msgstr "Dosiero \"%s\" estas tro granda"
 
-#: src/editor/edit.c:1542
 msgid "Macro recursion is too deep"
 msgstr "Makroa rekursio estas tro profunda"
 
-#: src/editor/edit.c:1925
 #, c-format
 msgid "Error reading from pipe: %s"
 msgstr "Eraro dum legi de dukto: %s"
 
-#: src/editor/edit.c:1935
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Ne povas malfermi dukton por legi: %s"
 
-#: src/editor/editcmd.c:169
 msgid "File has hard-links. Detach before saving?"
 msgstr "Dosiero havas malmolajn ligilojn. Ĉu elmeti antaŭ ol konservi?"
 
-#: src/editor/editcmd.c:193
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr "La dosiero estis ekstere modifita. Ĉu senkonsidere konservi?"
 
-#: src/editor/editcmd.c:260
 #, c-format
 msgid "Error writing to pipe: %s"
 msgstr "Eraro dum skribi al dukto: %s"
 
-#: src/editor/editcmd.c:270
 #, c-format
 msgid "Cannot open pipe for writing: %s"
 msgstr "Ne povas malfermi dukton por skribi: %s"
 
-#: src/editor/editcmd.c:347
 #, c-format
 msgid "Cannot open file for writing: %s"
 msgstr "Ne povas malfermi dosieron por skribi: %s"
 
-#: src/editor/editcmd.c:392
 msgid "The file you are saving is not finished with a newline"
 msgstr "La dosiero, kiun vi estas konservanta, ne finiĝas per nova linio"
 
-#: src/editor/editcmd.c:393 src/editor/editcmd.c:774 src/editor/editcmd.c:1650
-#: src/editor/editcmd.c:1672 src/editor/editcmd.c:1972
-#: src/editor/editcmd.c:3058 src/editor/editcmd.c:3098
-#: src/editor/editcmd_dialogs.c:520
 msgid "C&ontinue"
 msgstr "D&aurigi"
 
-#: src/editor/editcmd.c:409
 msgid "&Do not change"
 msgstr "&Ne ŝanĝu"
 
-#: src/editor/editcmd.c:410
 msgid "&Unix format (LF)"
 msgstr "&Uniksa formato"
 
-#: src/editor/editcmd.c:411
 msgid "&Windows/DOS format (CR LF)"
 msgstr "&Vindozo/DOS-a formato"
 
-#: src/editor/editcmd.c:412
 msgid "&Macintosh format (CR)"
 msgstr "&Makintoŝa formato"
 
-#: src/editor/editcmd.c:419
 msgid "Change line breaks to:"
 msgstr "ŝanĝi linirompojn al:"
 
-#: src/editor/editcmd.c:422 src/editor/editcmd.c:1681
-#: src/editor/editcmd.c:2566 src/editor/editcmd.c:2607
 msgid "Enter file name:"
 msgstr "Enmeti dosiernomon:"
 
-#: src/editor/editcmd.c:428
 msgid "Save As"
 msgstr "Konservi kiel"
 
-#: src/editor/editcmd.c:516 src/editor/editcmd.c:522 src/editor/editcmd.c:552
-#: src/editor/editcmd.c:1546
 msgid "Delete macro"
 msgstr "Forigi makroon"
 
-#: src/editor/editcmd.c:516
 msgid "Cannot open temp file"
 msgstr "Ne povas malfermi provizoran dosieron"
 
-#: src/editor/editcmd.c:522 src/editor/editcmd.c:1534
-#: src/editor/editcmd.c:1607
 msgid "Cannot open macro file"
 msgstr "Ne povas malfermi makroan dosieron"
 
-#: src/editor/editcmd.c:552
 msgid "Cannot overwrite macro file"
 msgstr "Ne povas anstataŭigi makroan dosieron"
 
-#: src/editor/editcmd.c:633
 msgid "Syntax file edit"
 msgstr "Sintakso-dosiera redaktado"
 
-#: src/editor/editcmd.c:634
 msgid "Which syntax file you want to edit?"
 msgstr "Kiun sintakso-dosiero vi volas redakti?"
 
-#: src/editor/editcmd.c:635 src/editor/editcmd.c:671
-#: src/filemanager/cmd.c:1015 src/filemanager/cmd.c:1051
-#: src/filemanager/cmd.c:1109
 msgid "&User"
 msgstr "&Uzanto"
 
-#: src/editor/editcmd.c:635 src/editor/editcmd.c:671
-#: src/filemanager/cmd.c:1015 src/filemanager/cmd.c:1051
-#: src/filemanager/cmd.c:1109
 msgid "&System Wide"
 msgstr "Tut&sisteme"
 
-#: src/editor/editcmd.c:669 src/filemanager/cmd.c:1049
 msgid "Menu edit"
 msgstr "Menua redaktilo"
 
-#: src/editor/editcmd.c:670 src/filemanager/cmd.c:1050
 msgid "Which menu file do you want to edit?"
 msgstr "Kiun menuo-dosiero vi volas redakti?"
 
-#: src/editor/editcmd.c:671 src/filemanager/cmd.c:1051
 msgid "&Local"
 msgstr "&Loka"
 
-#: src/editor/editcmd.c:773 src/editor/editcmd.c:1971
 msgid "Block is large, you may not be able to undo this action"
 msgstr "Bloko estas tra granda, do vi eble ne povos malfari tiun agon"
 
-#: src/editor/editcmd.c:1305
 msgid "&Quick save"
 msgstr "&Rapida konservado"
 
-#: src/editor/editcmd.c:1306
 msgid "&Safe save"
 msgstr "&Sekura konservado"
 
-#: src/editor/editcmd.c:1307
 msgid "&Do backups with following extension:"
 msgstr "Fari sekurkopiojn kun la jena sufikso:"
 
-#: src/editor/editcmd.c:1316
 msgid "Check &POSIX new line"
 msgstr "Kontroli la novan linion laŭ &POSIX"
 
-#: src/editor/editcmd.c:1325
 msgid "Edit Save Mode"
 msgstr "Reĝimo de redakta konservado"
 
-#: src/editor/editcmd.c:1425
 msgid "A file already exists with this name"
 msgstr "Dosiero kun tiu nomo jam ekzistas"
 
-#: src/editor/editcmd.c:1425
 msgid "&Overwrite"
 msgstr "&Anstataŭigi"
 
-#: src/editor/editcmd.c:1483
 msgid "Save as"
 msgstr "Konservi kiel"
 
-#: src/editor/editcmd.c:1483 src/editor/editcmd.c:2588
 msgid "Cannot save file"
 msgstr "Ne povas konservi dosieron"
 
-#: src/editor/editcmd.c:1512 src/editor/editcmd.c:1534
 msgid "Save macro"
 msgstr "Konservi makroon"
 
-#: src/editor/editcmd.c:1512
 msgid "Press the macro's new hotkey:"
 msgstr "Premu la novan klavkomandon de la makroo:"
 
-#: src/editor/editcmd.c:1546 src/editor/editcmd.c:3027
 msgid "Press macro hotkey:"
 msgstr "Premu makroan klavkomandon:"
 
-#: src/editor/editcmd.c:1607
 msgid "Load macro"
 msgstr "Ŝarga makroo"
 
-#: src/editor/editcmd.c:1626
 #, c-format
 msgid "Confirm save file: \"%s\""
 msgstr "Konfirmi konservi dosieron: \"%s\""
 
-#: src/editor/editcmd.c:1627 src/viewer/hex.c:380 src/viewer/hex.c:392
 msgid "Save file"
 msgstr "Konservi dosieron"
 
-#: src/editor/editcmd.c:1627 src/editor/editmenu.c:73
-#: src/filemanager/layout.c:417 src/filemanager/option.c:114
-#: src/filemanager/option.c:298 src/learn.c:88 src/learn.c:214
 msgid "&Save"
 msgstr "&Konservi"
 
-#: src/editor/editcmd.c:1649 src/editor/editcmd.c:1671
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes"
@@ -1795,159 +1329,120 @@ msgstr ""
 "Aktuala teksto estis modifita sen dosiera konservado.\n"
 "Daŭrigi forviŝas tiujn ŝanĝojn"
 
-#: src/editor/editcmd.c:1681
 msgid "Load"
 msgstr "Ŝargi"
 
-#: src/editor/editcmd.c:2219 src/editor/editcmd.c:2258
-#: src/editor/editcmd.c:2269 src/editor/editcmd_dialogs.c:140
 msgid "Replace"
 msgstr "Anstataŭigi"
 
-#: src/editor/editcmd.c:2269
 #, c-format
 msgid "%ld replacements made"
 msgstr "%ld anstataŭigoj faritaj"
 
-#: src/editor/editcmd.c:2360 src/viewer/lib.c:157
 msgid "&Cancel quit"
 msgstr "&Ne eliri"
 
-#: src/editor/editcmd.c:2452
 msgid "This function is not implemented"
 msgstr "Tiu funkcio ne estas realigita"
 
-#: src/editor/editcmd.c:2465
 msgid "Copy to clipboard"
 msgstr "Enpoŝigi"
 
-#: src/editor/editcmd.c:2465 src/editor/editcmd.c:2484
 msgid "Unable to save to file"
 msgstr "Ne povas konservi al dosiero"
 
-#: src/editor/editcmd.c:2484
 msgid "Cut to clipboard"
 msgstr "Tranĉi en poŝon"
 
-#: src/editor/editcmd.c:2525
 msgid "Goto line"
 msgstr "Iri linion"
 
-#: src/editor/editcmd.c:2566 src/editor/editcmd.c:2588
 msgid "Save block"
 msgstr "Konservi blokon"
 
-#: src/editor/editcmd.c:2607 src/editor/editcmd.c:2629
 msgid "Insert file"
 msgstr "Enmeti dosieron"
 
-#: src/editor/editcmd.c:2629
 msgid "Cannot insert file"
 msgstr "Ne povas enmeti dosieron"
 
-#: src/editor/editcmd.c:2650
 msgid "Sort block"
 msgstr "Ordigi blokon"
 
-#: src/editor/editcmd.c:2650 src/editor/editcmd.c:2805
 msgid "You must first highlight a block of text"
 msgstr "Vi devas antaŭe elekti blokon da teksto"
 
-#: src/editor/editcmd.c:2658
 msgid "Run sort"
 msgstr "Rula ordigo"
 
-#: src/editor/editcmd.c:2659
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
 "Enmetu ordigajn agordaĵon (vidu man-paĝon) apartigante per blankospacoj:"
 
-#: src/editor/editcmd.c:2674 src/editor/editcmd.c:2681
 msgid "Sort"
 msgstr "Ordigi"
 
-#: src/editor/editcmd.c:2674
 msgid "Cannot execute sort command"
 msgstr "Ne povas plenumi ordigan komandon"
 
-#: src/editor/editcmd.c:2680
 #, c-format
 msgid "Sort returned non-zero: %s"
 msgstr "Ordigo ne donis nulon: %s"
 
-#: src/editor/editcmd.c:2710
 msgid "Paste output of external command"
 msgstr "Alglui eligon de ekstera komando"
 
-#: src/editor/editcmd.c:2711
 msgid "Enter shell command(s):"
 msgstr "Enmetu ŝela(j)n komando(j)n"
 
-#: src/editor/editcmd.c:2723
 msgid "External command"
 msgstr "Ekstera komando"
 
-#: src/editor/editcmd.c:2723
 msgid "Cannot execute command"
 msgstr "Ne povas plenumi komandon"
 
-#: src/editor/editcmd.c:2761
 msgid "Error creating script:"
 msgstr "Eraro dum krei skribsistemon:"
 
-#: src/editor/editcmd.c:2776
 msgid "Error reading script:"
 msgstr "Eraro dum legi skribsistemon:"
 
-#: src/editor/editcmd.c:2788
 msgid "Error closing script:"
 msgstr "Eraro dum fermi skribsistemon:"
 
-#: src/editor/editcmd.c:2794
 msgid "Script created:"
 msgstr "Skribsistemo kreita:"
 
-#: src/editor/editcmd.c:2805 src/editor/editcmd.c:2835
 msgid "Process block"
 msgstr "Proceza bloko"
 
-#: src/editor/editcmd.c:2835
 msgid "Error calling program"
 msgstr "Eraro dum programa plenumo"
 
-#: src/editor/editcmd.c:2897
 msgid "Copies to"
 msgstr "Kopioj al"
 
-#: src/editor/editcmd.c:2900
 msgid "Subject"
 msgstr "Temo"
 
-#: src/editor/editcmd.c:2902
 msgid "To"
 msgstr "Al"
 
-#: src/editor/editcmd.c:2903
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <temo> -c <aliaj_ricevontoj> <al>"
 
-#: src/editor/editcmd.c:2908
 msgid "Mail"
 msgstr "Retpoŝto"
 
-#: src/editor/editcmd.c:3016
 msgid "Insert literal"
 msgstr "Enmeti laŭvortaĵon"
 
-#: src/editor/editcmd.c:3017
 msgid "Press any key:"
 msgstr "Premu iun klavon:"
 
-#: src/editor/editcmd.c:3027
 msgid "Execute macro"
 msgstr "Plenumigi makroon"
 
-#: src/editor/editcmd.c:3057 src/editor/editcmd.c:3097
 msgid ""
 "Current text was modified without a file save\n"
 "Continue discards these changes"
@@ -1955,23 +1450,18 @@ msgstr ""
 "Aktuala teksto estis modifita sen dosiera konservado\n"
 "Daŭri forviŝas tiujn ŝanĝojn"
 
-#: src/editor/editcmd_dialogs.c:116 src/editor/editcmd_dialogs.c:188
 msgid "In se&lection"
 msgstr "En e&lekto"
 
-#: src/editor/editcmd_dialogs.c:127
 msgid "Enter replacement string:"
 msgstr "Enmetu anstataŭigan ĉenon:"
 
-#: src/editor/editcmd_dialogs.c:176
 msgid "&Find all"
 msgstr "&Trovi ĉion"
 
-#: src/editor/editcmd_dialogs.c:350
 msgid "Cancel"
 msgstr "Nuligi"
 
-#: src/editor/editcmd_dialogs.c:519
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
@@ -1979,387 +1469,288 @@ msgstr ""
 "AKtuala teksto estis modifita sen dosiera konservado.\n"
 "Daŭri forviŝas tiujn ŝanĝojn."
 
-#: src/editor/editcmd_dialogs.c:587 src/filemanager/file.c:456
-#: src/filemanager/file.c:1072 src/filemanager/filegui.c:529
 msgid "&Skip"
 msgstr "Preterpa&si"
 
-#: src/editor/editcmd_dialogs.c:588 src/filemanager/file.c:1127
-#: src/filemanager/filegui.c:324
 msgid "A&ll"
 msgstr "&Ĉiuj"
 
-#: src/editor/editcmd_dialogs.c:589
 msgid "&Replace"
 msgstr "&Anstataŭigi"
 
-#: src/editor/editcmd_dialogs.c:591
 msgid "Replace with:"
 msgstr "Anstataŭigi per:"
 
-#: src/editor/editcmd_dialogs.c:635
 msgid "Confirm replace"
 msgstr "Konfirmi anstataŭigon"
 
-#: src/editor/editmenu.c:70
 msgid "&Open file..."
 msgstr "&Malfermi dosieron..."
 
-#: src/editor/editmenu.c:71
 msgid "&New"
 msgstr "&Nova"
 
-#: src/editor/editmenu.c:74
 msgid "Save &as..."
 msgstr "&Konservi kiel"
 
-#: src/editor/editmenu.c:76
 msgid "&Insert file..."
 msgstr "Enmetu dos&ieron..."
 
-#: src/editor/editmenu.c:77
 msgid "Cop&y to file..."
 msgstr "Kop&iu al dosiero..."
 
-#: src/editor/editmenu.c:79
 msgid "&User menu..."
 msgstr "&Uzanto-menuo..."
 
-#: src/editor/editmenu.c:81
 msgid "A&bout..."
 msgstr "&Pri..."
 
-#: src/editor/editmenu.c:83 src/filemanager/find.c:186 src/subshell.c:395
 msgid "&Quit"
 msgstr "&Eliri"
 
-#: src/editor/editmenu.c:95
 msgid "&Undo"
 msgstr "&Malfari"
 
-#: src/editor/editmenu.c:97
 msgid "&Toggle ins/overw"
 msgstr "Inversigi (enme&ti/anstataŭigi)"
 
-#: src/editor/editmenu.c:99
 msgid "To&ggle mark"
 msgstr "Inversi&gi markon"
 
-#: src/editor/editmenu.c:100
 msgid "&Mark columns"
 msgstr "&Marki kolumnojn"
 
-#: src/editor/editmenu.c:101
 msgid "Mark &all"
 msgstr "Marki &ĉion"
 
-#: src/editor/editmenu.c:102
 msgid "Unmar&k"
 msgstr "Malmar&ki"
 
-#: src/editor/editmenu.c:104
 msgid "Cop&y"
 msgstr "Kop&ii"
 
-#: src/editor/editmenu.c:105
 msgid "Mo&ve"
 msgstr "Mo&vi"
 
-#: src/editor/editmenu.c:106 src/filemanager/file.c:1564
-#: src/filemanager/midnight.c:250
 msgid "&Delete"
 msgstr "&Forigi"
 
-#: src/editor/editmenu.c:108
 msgid "Co&py to clipfile"
 msgstr "Ko&pii al poŝa dosiero"
 
-#: src/editor/editmenu.c:109
 msgid "&Cut to clipfile"
 msgstr "Eltran&ĉi al poŝa dosiero"
 
-#: src/editor/editmenu.c:110
 msgid "Pa&ste from clipfile"
 msgstr "Alglui al poŝa do&siero"
 
-#: src/editor/editmenu.c:112
 msgid "&Beginning"
 msgstr "&Komenco"
 
-#: src/editor/editmenu.c:113
 msgid "&End"
 msgstr "&Fino"
 
-#: src/editor/editmenu.c:125
 msgid "&Search..."
 msgstr "&Serĉi..."
 
-#: src/editor/editmenu.c:126
 msgid "Search &again"
 msgstr "Serĉi &denove"
 
-#: src/editor/editmenu.c:127
 msgid "&Replace..."
 msgstr "&Anstataŭigi"
 
-#: src/editor/editmenu.c:130
 msgid "&Toggle bookmark"
 msgstr "&Inversigi legosignon"
 
-#: src/editor/editmenu.c:131
 msgid "&Next bookmark"
 msgstr "&Sekva legosigno"
 
-#: src/editor/editmenu.c:132
 msgid "&Prev bookmark"
 msgstr "&Antaŭa legosigno"
 
-#: src/editor/editmenu.c:133
 msgid "&Flush bookmark"
 msgstr "For&viŝi legosignon"
 
-#: src/editor/editmenu.c:145
 msgid "&Go to line..."
 msgstr "&Iri al linio..."
 
-#: src/editor/editmenu.c:147
 msgid "&Toggle line state"
 msgstr "Inversigi linian s&taton"
 
-#: src/editor/editmenu.c:149
 msgid "Go to matching &bracket"
 msgstr "Iri al kongrua &krampo"
 
-#: src/editor/editmenu.c:152
 msgid "Toggle s&yntax highlighting"
 msgstr "(Mal)ŝalti s&intaksan prilumadon"
 
-#: src/editor/editmenu.c:155
 msgid "&Find declaration"
 msgstr "&Trovi deklaron"
 
-#: src/editor/editmenu.c:157
 msgid "Back from &declaration"
 msgstr "Posten el &deklaro"
 
-#: src/editor/editmenu.c:160
 msgid "For&ward to declaration"
 msgstr "An&taŭen al deklaro"
 
-#: src/editor/editmenu.c:163
 msgid "Encod&ing..."
 msgstr "&Kodoprezento"
 
-#: src/editor/editmenu.c:166
 msgid "&Refresh screen"
 msgstr "&Refreŝigi ekranon"
 
-#: src/editor/editmenu.c:170
 msgid "&Start record macro"
 msgstr "&Komenci registri makroon"
 
-#: src/editor/editmenu.c:173
 msgid "Finis&h record macro..."
 msgstr "F&ini registri makroon..."
 
-#: src/editor/editmenu.c:174
 msgid "&Execute macro..."
 msgstr "Pl&enumigi makroon..."
 
-#: src/editor/editmenu.c:175
 msgid "Delete macr&o..."
 msgstr "Forigi makr&oo..."
 
-#: src/editor/editmenu.c:178
 msgid "'ispell' s&pell check"
 msgstr "Plenumi je 'ispell'"
 
-#: src/editor/editmenu.c:179
 msgid "&Mail..."
 msgstr "&Retpoŝto..."
 
-#: src/editor/editmenu.c:192
 msgid "Insert &literal..."
 msgstr "Enmeti &laŭvortaĵon..."
 
-#: src/editor/editmenu.c:193
 msgid "Insert &date/time"
 msgstr "Enmeti &daton/tempon"
 
-#: src/editor/editmenu.c:196
 msgid "&Format paragraph"
 msgstr "&Formati alineon"
 
-#: src/editor/editmenu.c:197
 msgid "&Sort..."
 msgstr "&Ordigi"
 
-#: src/editor/editmenu.c:198
 msgid "&Paste output of..."
 msgstr "Al&glui eligo el..."
 
-#: src/editor/editmenu.c:200
 msgid "&External formatter"
 msgstr "&Ekstera aranĝilo"
 
-#: src/editor/editmenu.c:212
 msgid "&General..."
 msgstr "&Ĝenerala"
 
-#: src/editor/editmenu.c:213
 msgid "Save &mode..."
 msgstr "Konservi &reĝimon..."
 
-#: src/editor/editmenu.c:214 src/filemanager/midnight.c:338
 msgid "Learn &keys..."
 msgstr "Lerni &klavojn..."
 
-#: src/editor/editmenu.c:216
 msgid "Syntax &highlighting..."
 msgstr "Sintaksa &prilumado..."
 
-#: src/editor/editmenu.c:218
 msgid "S&yntax file"
 msgstr "S&intakso-dosiero"
 
-#: src/editor/editmenu.c:219
 msgid "&Menu file"
 msgstr "&Menuo-dosiero"
 
-#: src/editor/editmenu.c:221 src/filemanager/midnight.c:343
 msgid "&Save setup"
 msgstr "&Konservi agordon"
 
-#: src/editor/editmenu.c:255 src/filemanager/midnight.c:355
 msgid "&File"
 msgstr "Dosiero"
 
-#: src/editor/editmenu.c:257 src/filemanager/midnight.c:237
 msgid "&Edit"
 msgstr "&Redakti"
 
-#: src/editor/editmenu.c:259
 msgid "&Search"
 msgstr "&Serĉi"
 
-#: src/editor/editmenu.c:262 src/filemanager/midnight.c:357
 msgid "&Command"
 msgstr "&Komandoj"
 
-#: src/editor/editmenu.c:265
 msgid "For&mat"
 msgstr "For&mati"
 
-#: src/editor/editmenu.c:267 src/filemanager/midnight.c:359
 msgid "&Options"
 msgstr "Ag&ordo"
 
-#: src/editor/editoptions.c:53
 msgid "None"
 msgstr "Neniu"
 
-#: src/editor/editoptions.c:54
 msgid "Dynamic paragraphing"
 msgstr "Dinamika alineado"
 
-#: src/editor/editoptions.c:55
 msgid "Type writer wrap"
 msgstr "Tajpila linifaldo"
 
-#: src/editor/editoptions.c:89
 msgid "Word wrap line length:"
 msgstr "Linifalda longo+"
 
-#: src/editor/editoptions.c:93
 msgid "Cursor beyond end of line"
 msgstr "Kursoro preter linifino"
 
-#: src/editor/editoptions.c:95
 msgid "Pers&istent selection"
 msgstr "&Daŭra elektado"
 
-#: src/editor/editoptions.c:97
 msgid "Synta&x highlighting"
 msgstr "Sinta&ksa prilumado"
 
-#: src/editor/editoptions.c:99
 msgid "Visible tabs"
 msgstr "Videblaj taboj"
 
-#: src/editor/editoptions.c:101
 msgid "Visible trailing spaces"
 msgstr "Videblaj postaj spacetoj"
 
-#: src/editor/editoptions.c:103
 msgid "Save file &position"
 msgstr "Konservi dosieran &pozicion"
 
-#: src/editor/editoptions.c:105
 msgid "Confir&m before saving"
 msgstr "Konfirmi antaŭ ol konservado"
 
-#: src/editor/editoptions.c:107
 msgid "&Return does autoindent"
 msgstr "&Enen-klavo ne aŭtomate deŝovas"
 
-#: src/editor/editoptions.c:108
 msgid "Tab spacing:"
 msgstr "Taba spaco:"
 
-#: src/editor/editoptions.c:112
 msgid "Fill tabs with &spaces"
 msgstr "Plenigi tabojn per &spacetoj"
 
-#: src/editor/editoptions.c:114
 msgid "&Backspace through tabs"
 msgstr "&Retropaŝi tra taboj"
 
-#: src/editor/editoptions.c:116
 msgid "&Fake half tabs"
 msgstr "&Falsaj duontaboj"
 
-#: src/editor/editoptions.c:118
 msgid "Wrap mode"
 msgstr "Linifalda reĝimo"
 
-#: src/editor/editoptions.c:123
 msgid "Editor options"
 msgstr "Redaktilaj agordaĵoj"
 
-#: src/editor/editwidget.c:101 src/editor/editwidget.c:103
 msgid "Edit: "
 msgstr "Redakti: "
 
-#: src/editor/editwidget.c:223
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|Mark"
 
-#: src/editor/editwidget.c:224
 msgid "ButtonBar|Replac"
 msgstr "ButtonBar|Anstataŭigi"
 
-#: src/editor/editwidget.c:225 src/filemanager/midnight.c:1505
-#: src/filemanager/tree.c:1182
 msgid "ButtonBar|Copy"
 msgstr "Butonlinio|Kopii"
 
-#: src/editor/editwidget.c:226
 msgid "ButtonBar|Move"
 msgstr "Butonlinio|Movi"
 
-#: src/editor/editwidget.c:228 src/filemanager/midnight.c:1508
 msgid "ButtonBar|Delete"
 msgstr "Butonlinio|Forigi"
 
-#: src/editor/editwidget.c:229 src/filemanager/midnight.c:1509
 msgid "ButtonBar|PullDn"
 msgstr "ButtonBar|Ŝprucmenuoj"
 
-#: src/editor/syntax.c:1498 src/editor/syntax.c:1504
 msgid "Load syntax file"
 msgstr "Ŝargi sintakso-dosieron"
 
-#: src/editor/syntax.c:1499 src/help.c:1053
 #, c-format
 msgid ""
 "Cannot open file %s\n"
@@ -2368,12 +1759,10 @@ msgstr ""
 "Ne povas malfermi dosieron %s\n"
 "%s"
 
-#: src/editor/syntax.c:1505
 #, c-format
 msgid "Error in file %s on line %d"
 msgstr "Eraro en dosiero %s ĉe linio %d"
 
-#: src/execute.c:114
 msgid ""
 "The Commander can't change to the directory that\n"
 "the subshell claims you are in. Perhaps you have\n"
@@ -2385,72 +1774,51 @@ msgstr ""
 "forigis vian labordosierujon, aŭ donis al vi\n"
 "aldonajn atingopermesojn per la komando \"su\"."
 
-#: src/execute.c:284 src/filemanager/command.c:222
 msgid "The shell is already running a command"
 msgstr "La ŝelo jam plenumas komandon"
 
-#: src/execute.c:341
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Tajpu \"exit\" por reiri al Midnight Commander"
 
-#: src/execute.c:443
 #, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr "Ne povas atingi lokan kopion de %s"
 
-#: src/filemanager/achown.c:88 src/filemanager/chmod.c:122
-#: src/filemanager/chown.c:95
 msgid "&Set"
 msgstr "&Agordi"
 
-#: src/filemanager/achown.c:89
 msgid "S&kip"
 msgstr "P&reterpasi"
 
-#: src/filemanager/achown.c:90 src/filemanager/chmod.c:126
-#: src/filemanager/chown.c:98
 msgid "Set &all"
 msgstr "Agordi por &ĉiuj"
 
-#: src/filemanager/achown.c:310 src/filemanager/achown.c:418
-#: src/filemanager/achown.c:425
 msgid "owner"
 msgstr "estro"
 
-#: src/filemanager/achown.c:310 src/filemanager/achown.c:420
-#: src/filemanager/achown.c:427
 msgid "group"
 msgstr "grupo"
 
-#: src/filemanager/achown.c:422
 msgid "other"
 msgstr "aliaj"
 
-#: src/filemanager/achown.c:430
 msgid "On"
 msgstr "ĉe"
 
-#: src/filemanager/achown.c:432
 msgid "Flag"
 msgstr "Markoj"
 
-#: src/filemanager/achown.c:434
 msgid "Mode"
 msgstr "Reĝimo"
 
-#: src/filemanager/achown.c:439
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d el %d"
 
-#: src/filemanager/achown.c:664
 msgid "Chown advanced command"
 msgstr "[chown] altnivelaj komandoj"
 
-#: src/filemanager/achown.c:732 src/filemanager/achown.c:749
-#: src/filemanager/achown.c:804 src/filemanager/chmod.c:282
-#: src/filemanager/chmod.c:366
 #, c-format
 msgid ""
 "Cannot chmod \"%s\"\n"
@@ -2459,9 +1827,6 @@ msgstr ""
 "Ne povas chmod-i \"%s\"\n"
 "%s"
 
-#: src/filemanager/achown.c:737 src/filemanager/achown.c:754
-#: src/filemanager/achown.c:809 src/filemanager/chown.c:243
-#: src/filemanager/chown.c:364
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2470,472 +1835,352 @@ msgstr ""
 "Ne povas chown-i \"%s\"\n"
 "%s"
 
-#: src/filemanager/boxes.c:136
 msgid "&Stop"
 msgstr "&Ĉesigi"
 
-#: src/filemanager/boxes.c:137
 msgid "&Resume"
 msgstr "&Rekomenci"
 
-#: src/filemanager/boxes.c:138
 msgid "&Kill"
 msgstr "&Mortigi"
 
-#: src/filemanager/boxes.c:232
 msgid "&Full file list"
 msgstr "&Kompleta dosierlisto"
 
-#: src/filemanager/boxes.c:233
 msgid "&Brief file list"
 msgstr "&Mallonga dosierlisto"
 
-#: src/filemanager/boxes.c:234
 msgid "&Long file list"
 msgstr "&Longa dosierlisto"
 
-#: src/filemanager/boxes.c:235
 msgid "&User defined:"
 msgstr "&Uzanto difinata:"
 
-#: src/filemanager/boxes.c:241
 msgid "Listing mode"
 msgstr "Lista reĝimo"
 
-#: src/filemanager/boxes.c:242
 msgid "User &mini status"
 msgstr "&Miniatura stato de uzanto"
 
-#: src/filemanager/boxes.c:337 src/filemanager/boxes.c:369
-#: src/selcodepage.c:95
 msgid "Other 8 bit"
 msgstr "Alia 8-bita"
 
-#: src/filemanager/boxes.c:365 src/filemanager/boxes.c:782
 msgid "Display bits"
 msgstr "Elmontraj bitoj"
 
-#: src/filemanager/boxes.c:367
 msgid "Input / display codepage:"
 msgstr "Enmeto / elmontro kodpaĝo:"
 
-#: src/filemanager/boxes.c:378 src/filemanager/boxes.c:776
 msgid "F&ull 8 bits input"
 msgstr "Pl&ena 8-bita enmeto"
 
-#: src/filemanager/boxes.c:381
 msgid "&Select"
 msgstr "&Elekti"
 
-#: src/filemanager/boxes.c:457
 msgid "Running"
 msgstr "Plenumanta"
 
-#: src/filemanager/boxes.c:458 src/filemanager/find.c:1300
 msgid "Stopped"
 msgstr "Ĉesigita"
 
-#: src/filemanager/boxes.c:604
 msgid "&Reverse"
 msgstr "&Inversigi"
 
-#: src/filemanager/boxes.c:606
 msgid "Case sensi&tive"
 msgstr "&Ne ignori usklecon"
 
-#: src/filemanager/boxes.c:608
 msgid "Executable &first"
 msgstr "Plenumebla &unue"
 
-#: src/filemanager/boxes.c:616
 msgid "Sort order"
 msgstr "Ordigi laŭ"
 
-#: src/filemanager/boxes.c:683 src/filemanager/cmd.c:160
 msgid "Confirmation"
 msgstr "Konfirmo"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
-#: src/filemanager/boxes.c:689
 msgid "Confirmation|&History cleanup"
 msgstr "Konfirmo|&Historia purigado"
 
-#: src/filemanager/boxes.c:691
 msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Konfirmo|Dos&ierujo-rapidolista forigo"
 
-#: src/filemanager/boxes.c:693
 msgid "Confirmation|E&xit"
 msgstr "Konfirmo|E&liro"
 
-#: src/filemanager/boxes.c:694
 msgid "Confirmation|&Execute"
 msgstr "Konfirmo|Pl&enumi"
 
-#: src/filemanager/boxes.c:695
 msgid "Confirmation|O&verwrite"
 msgstr "Konfirmo|A&nstataŭi"
 
-#: src/filemanager/boxes.c:696
 msgid "Confirmation|&Delete"
 msgstr "Konfirmo|&Forigi"
 
-#: src/filemanager/boxes.c:767
 msgid "UTF-8 output"
 msgstr "UTF-8-a eligo"
 
-#: src/filemanager/boxes.c:768
 msgid "Full 8 bits output"
 msgstr "Plena 8-bita eligo"
 
-#: src/filemanager/boxes.c:769
 msgid "ISO 8859-1"
 msgstr "ISO-8859-1"
 
-#: src/filemanager/boxes.c:770
 msgid "7 bits"
 msgstr "7-bitaj"
 
-#: src/filemanager/boxes.c:901 src/filemanager/tree.c:1141
 msgid "Directory tree"
 msgstr "Dosieruja arbo"
 
-#: src/filemanager/boxes.c:934
 msgid "Use passive mode over pro&xy"
 msgstr "Uzi pasivan reĝimon tra pro&kurilo"
 
-#: src/filemanager/boxes.c:936
 msgid "Use &passive mode"
 msgstr "Uzi &pasivan reĝimon"
 
-#: src/filemanager/boxes.c:938
 msgid "&Use ~/.netrc"
 msgstr "&Uzi je ~/.netrc"
 
-#: src/filemanager/boxes.c:941
 msgid "&Always use ftp proxy"
 msgstr "&Ĉiam uzi FTP-prokurilon"
 
-#: src/filemanager/boxes.c:943 src/filemanager/boxes.c:951
 msgid "sec"
 msgstr "sek"
 
-#: src/filemanager/boxes.c:946
 msgid "ftpfs directory cache timeout:"
 msgstr "ftpfs-dosierujo tenejo eksvalidiĝis:"
 
-#: src/filemanager/boxes.c:949
 msgid "ftp anonymous password:"
 msgstr "sennoma FTP-pasvorto:"
 
-#: src/filemanager/boxes.c:953
 msgid "Timeout for freeing VFSs:"
 msgstr "Antaŭliberiga periodo:"
 
-#: src/filemanager/boxes.c:958
 msgid "Virtual File System Setting"
 msgstr "Agordaĵoj pri virtualaj dosiersistemoj"
 
-#: src/filemanager/boxes.c:1005
 msgid "cd"
 msgstr "dosierujo interŝanĝo"
 
-#: src/filemanager/boxes.c:1027
 msgid "Quick cd"
 msgstr "Rapida dosierujo interŝanĝo"
 
-#: src/filemanager/boxes.c:1044
 msgid "Symbolic link filename:"
 msgstr "Mola ligilo dosiernomo:"
 
-#: src/filemanager/boxes.c:1047
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Jama dosiernomo:"
 
-#: src/filemanager/boxes.c:1052
 msgid "Symbolic link"
 msgstr "Mola ligilo"
 
-#: src/filemanager/boxes.c:1099
 msgid "Background Jobs"
 msgstr "Fonaj taskoj"
 
-#: src/filemanager/boxes.c:1129
 msgid "Domain:"
 msgstr "Domajno"
 
-#: src/filemanager/boxes.c:1129
 msgid "Username:"
 msgstr "Salutnomo:"
 
-#: src/filemanager/boxes.c:1181
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Pasvorto por \\\\%s\\%s"
 
-#: src/filemanager/chmod.c:99
 msgid "execute/search by others"
 msgstr "plenumi/serĉi laŭ aliaj"
 
-#: src/filemanager/chmod.c:100
 msgid "write by others"
 msgstr "skribi laŭ aliaj"
 
-#: src/filemanager/chmod.c:101
 msgid "read by others"
 msgstr "legi laŭ aliaj"
 
-#: src/filemanager/chmod.c:102
 msgid "execute/search by group"
 msgstr "plenumi/serĉi laŭ grupo"
 
-#: src/filemanager/chmod.c:103
 msgid "write by group"
 msgstr "skribi laŭ grupo"
 
-#: src/filemanager/chmod.c:104
 msgid "read by group"
 msgstr "legi laŭ grupo"
 
-#: src/filemanager/chmod.c:105
 msgid "execute/search by owner"
 msgstr "plenumi/serĉi laŭ estro"
 
-#: src/filemanager/chmod.c:106
 msgid "write by owner"
 msgstr "skribi laŭ estro"
 
-#: src/filemanager/chmod.c:107
 msgid "read by owner"
 msgstr "legi laŭ estro"
 
-#: src/filemanager/chmod.c:108
 msgid "sticky bit"
 msgstr "gluema bito"
 
-#: src/filemanager/chmod.c:109
 msgid "set group ID on execution"
 msgstr "agordi grupan identigilon dum plenumigo"
 
-#: src/filemanager/chmod.c:110
 msgid "set user ID on execution"
 msgstr "agordi uzantan identigilon dum plenumigo"
 
-#: src/filemanager/chmod.c:123
 msgid "C&lear marked"
 msgstr "&Forviŝi markitajn"
 
-#: src/filemanager/chmod.c:124
 msgid "S&et marked"
 msgstr "&Agordi markitajn"
 
-#: src/filemanager/chmod.c:125
 msgid "&Marked all"
 msgstr "&Marki ĉion"
 
-#: src/filemanager/chmod.c:154 src/filemanager/chown.c:124
 msgid "Name"
 msgstr "Nomo"
 
-#: src/filemanager/chmod.c:156
 msgid "Permissions (Octal)"
 msgstr "Permesoj (Okuma)"
 
-#: src/filemanager/chmod.c:158 src/filemanager/chown.c:126
 msgid "Owner name"
 msgstr "Estra nomo"
 
-#: src/filemanager/chmod.c:160 src/filemanager/chown.c:128
-#: src/filemanager/chown.c:220
 msgid "Group name"
 msgstr "Grupa nomo"
 
-#: src/filemanager/chmod.c:163
 msgid "Use SPACE to change"
 msgstr "Uzi spaceton por ŝanĝi"
 
-#: src/filemanager/chmod.c:165
 msgid "an option, ARROW KEYS"
 msgstr "elekton, sagoklavoj"
 
-#: src/filemanager/chmod.c:167
 msgid "to move between options"
 msgstr "por movi inter agordaĵoj"
 
-#: src/filemanager/chmod.c:169
 msgid "and T or INS to mark"
 msgstr "kaj je T aŭ ENMETO por marki"
 
-#: src/filemanager/chmod.c:226
 msgid "Chmod command"
 msgstr "Komando chmod"
 
-#: src/filemanager/chmod.c:240 src/filemanager/chown.c:216
 msgid "File"
 msgstr "Dosiero"
 
-#: src/filemanager/chmod.c:248 src/filemanager/chown.c:132
-#: src/filemanager/panel.c:202
 msgid "Permission"
 msgstr "Permeso"
 
-#: src/filemanager/chown.c:96
 msgid "Set &users"
 msgstr "Elekti &uzantojn"
 
-#: src/filemanager/chown.c:97
 msgid "Set &groups"
 msgstr "Elekti &grupojn"
 
-#: src/filemanager/chown.c:130
 msgid "Size"
 msgstr "Grando"
 
-#: src/filemanager/chown.c:178
 msgid "Chown command"
 msgstr "Komando chown"
 
-#: src/filemanager/chown.c:197
 msgid "<Unknown user>"
 msgstr "<Nekonata uzanto>"
 
-#: src/filemanager/chown.c:198
 msgid "<Unknown group>"
 msgstr "<Nekonata grupo>"
 
-#: src/filemanager/chown.c:222
 msgid "User name"
 msgstr "Salutnomo"
 
-#: src/filemanager/cmd.c:114
 msgid "Enter machine name (F1 for details):"
 msgstr "Enmetu servilan nomon (F1 por detaloj):"
 
-#: src/filemanager/cmd.c:160
 msgid "Files tagged, want to cd?"
 msgstr "Dosieroj markitaj, ĉu vi volas al ŝanĝi la dosierujon?"
 
-#: src/filemanager/cmd.c:167 src/filemanager/cmd.c:1169
-#: src/filemanager/panel.c:2223 src/filemanager/panel.c:2712
 msgid "Cannot change directory"
 msgstr "Ne povas ŝanĝi dosierujon"
 
-#: src/filemanager/cmd.c:223
 msgid "Filter"
 msgstr "Filtri"
 
-#: src/filemanager/cmd.c:224
 msgid "Set expression for filtering filenames"
 msgstr "Agordi esprimon por filtri dosiernomojn"
 
-#: src/filemanager/cmd.c:249 src/filemanager/filegui.c:957
-#: src/filemanager/find.c:478
 msgid "&Using shell patterns"
 msgstr "&Uzi ŝelajn ŝablonojn"
 
-#: src/filemanager/cmd.c:250
 msgid "&Case sensitive"
 msgstr "&Usklecon ignori"
 
-#: src/filemanager/cmd.c:251
 msgid "&Files only"
 msgstr "Nur &dosierujoj"
 
-#: src/filemanager/cmd.c:440
 #, c-format
 msgid "Link %s to:"
 msgstr "Ligi je %s al:"
 
-#: src/filemanager/cmd.c:441
 msgid "Link"
 msgstr "Ligi"
 
-#: src/filemanager/cmd.c:446
 #, c-format
 msgid "link: %s"
 msgstr "ligilo: %s"
 
-#: src/filemanager/cmd.c:473
 #, c-format
 msgid "symlink: %s"
 msgstr "mola ligilo: %s"
 
-#: src/filemanager/cmd.c:510 src/filemanager/panel.c:3922
 #, c-format
 msgid "Cannot chdir to \"%s\""
 msgstr "Ne povas ŝanĝi dosierujon al \"%s\""
 
-#: src/filemanager/cmd.c:701
 msgid "View file"
 msgstr "Vidi dosieron"
 
-#: src/filemanager/cmd.c:701
 msgid "Filename:"
 msgstr "Dosiernomo:"
 
-#: src/filemanager/cmd.c:726
 msgid "Filtered view"
 msgstr "Filtrita vido"
 
-#: src/filemanager/cmd.c:727
 msgid "Filter command and arguments:"
 msgstr "Filtraj komando kaj parametroj:"
 
-#: src/filemanager/cmd.c:873
 msgid "Create a new Directory"
 msgstr "Krei novan dosierujon"
 
-#: src/filemanager/cmd.c:874
 msgid "Enter directory name:"
 msgstr "Enmetu dosierujan nomon:"
 
-#: src/filemanager/cmd.c:990
 msgid "Select"
 msgstr "Elekti"
 
-#: src/filemanager/cmd.c:998
 msgid "Unselect"
 msgstr "Malelekti"
 
-#: src/filemanager/cmd.c:1013
 msgid "Extension file edit"
 msgstr "sufikso-dosiera redaktilo"
 
-#: src/filemanager/cmd.c:1014
 msgid "Which extension file you want to edit?"
 msgstr "Kiun etendaĵan dosieron vi volas redakti?"
 
-#: src/filemanager/cmd.c:1107
 msgid "Highlighting groups file edit"
 msgstr "Prilumi grupojn en dosiera redaktado"
 
-#: src/filemanager/cmd.c:1108
 msgid "Which highlighting file you want to edit?"
 msgstr "Kiun prilumo-dosiero vi volas redakti?"
 
-#: src/filemanager/cmd.c:1183
 msgid "Compare directories"
 msgstr "Kompari dosierujojn"
 
-#: src/filemanager/cmd.c:1184
 msgid "Select compare method:"
 msgstr "Elektu komparan metodon:"
 
-#: src/filemanager/cmd.c:1185
 msgid "&Quick"
 msgstr "&Rapida"
 
-#: src/filemanager/cmd.c:1185
 msgid "&Size only"
 msgstr "Nur laŭ &grando"
 
-#: src/filemanager/cmd.c:1185
 msgid "&Thorough"
 msgstr "&Funde"
 
-#: src/filemanager/cmd.c:1200
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
@@ -2943,7 +2188,6 @@ msgstr ""
 "Ambaŭ flankoj estu en la lista reĝimo\n"
 "por uzi ĉi tiun komandon"
 
-#: src/filemanager/cmd.c:1249
 msgid ""
 "Not an xterm or Linux console;\n"
 "the panels cannot be toggled."
@@ -2951,47 +2195,37 @@ msgstr ""
 "Ne xterm-fenestron aŭ linuksan terminalon;\n"
 "la flankojn oni ne povis inversigi."
 
-#: src/filemanager/cmd.c:1283
 #, c-format
 msgid "Symlink `%s' points to:"
 msgstr "Mola ligilo '%s' almontras al:"
 
-#: src/filemanager/cmd.c:1289
 msgid "Edit symlink"
 msgstr "Redakti molan ligilon"
 
-#: src/filemanager/cmd.c:1297
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
 msgstr "redakti molan ligilon, ne povas forigi %s: %s"
 
-#: src/filemanager/cmd.c:1303
 #, c-format
 msgid "edit symlink: %s"
 msgstr "redakti molan ligilon: %s"
 
-#: src/filemanager/cmd.c:1316
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "'%s' ne estas mola ligilo"
 
-#: src/filemanager/cmd.c:1405
 msgid "FTP to machine"
 msgstr "FTP al servilo"
 
-#: src/filemanager/cmd.c:1416
 msgid "Shell link to machine"
 msgstr "Ŝela ligilo al servilo"
 
-#: src/filemanager/cmd.c:1428
 msgid "SMB link to machine"
 msgstr "SMB-i ligilon al servilo"
 
-#: src/filemanager/cmd.c:1440
 msgid "Undelete files on an ext2 file system"
 msgstr "Malforigi dosierojn en ext2-dosiersistemon"
 
-#: src/filemanager/cmd.c:1441
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
@@ -2999,21 +2233,16 @@ msgstr ""
 "Enmetu aparaton (sed /dev/) por malforigi\n"
 "dosierojn: (F1 por detalaj)"
 
-#: src/filemanager/cmd.c:1569
 msgid "Setup"
 msgstr "Agordo"
 
-#: src/filemanager/cmd.c:1569
 #, c-format
 msgid "Setup saved to ~/%s"
 msgstr "Agordo konservita al ~/%s"
 
-#: src/filemanager/command.c:214 src/filemanager/usermenu.c:865
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Ne povas plenumi komandojn en foraj dosiersistemoj"
 
-#: src/filemanager/command.c:363 src/filemanager/panel.c:2930
-#: src/filemanager/tree.c:586
 #, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
@@ -3022,11 +2251,9 @@ msgstr ""
 "Ne povas ŝanĝi dosierujon al \"%s\"\n"
 "%s"
 
-#: src/filemanager/dir.c:534 src/filemanager/dir.c:609
 msgid "Cannot read directory contents"
 msgstr "Ne povas legi dosierujan enhavon"
 
-#: src/filemanager/ext.c:129 src/filemanager/usermenu.c:430
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
@@ -3035,16 +2262,13 @@ msgstr ""
 "Ne povas krei provizoran komandodosieron\n"
 "%s"
 
-#: src/filemanager/ext.c:146 src/filemanager/usermenu.c:459
 msgid "Parameter"
 msgstr "Parametro"
 
-#: src/filemanager/ext.c:664
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s: dosiera eraro"
 
-#: src/filemanager/ext.c:666
 #, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
@@ -3055,95 +2279,74 @@ msgstr ""
 "malsukcesis. Bonvolu havigi al vi freŝan ekzempleron de la pako Midnight "
 "Commander."
 
-#: src/filemanager/ext.c:678
 #, c-format
 msgid "~/%s file error"
 msgstr "~/%s: dosiera eraro"
 
-#: src/filemanager/ext.c:681
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "La aranĝo de la dosiero ~/%s ŝanĝiĝis en eldono 3.0. Vi eble povos aŭ kopii "
 "ĝin el %smc.txt aŭ uzi tion dosieron kiel ekzemplon."
 
-#: src/filemanager/file.c:87 src/filemanager/file.c:1562
-#: src/filemanager/tree.c:746
 msgid "DialogTitle|Copy"
 msgstr "Dialogtitola|Kopii"
 
-#: src/filemanager/file.c:88 src/filemanager/tree.c:784
 msgid "DialogTitle|Move"
 msgstr "DialogujoTitolo|Movi"
 
-#: src/filemanager/file.c:89 src/filemanager/tree.c:857
 msgid "DialogTitle|Delete"
 msgstr "DosierTitolo|Forigi"
 
-#: src/filemanager/file.c:132
 msgid "FileOperation|Copy"
 msgstr "Dosieroperacio|Kopii"
 
-#: src/filemanager/file.c:133
 msgid "FileOperation|Move"
 msgstr "Dosieroperacio|Movi"
 
-#: src/filemanager/file.c:134
 msgid "FileOperation|Delete"
 msgstr "Dosieroperacio|Forigi"
 
-#: src/filemanager/file.c:147
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/filemanager/file.c:149
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/filemanager/file.c:152
 msgid "file"
 msgstr "dosiero"
 
-#: src/filemanager/file.c:153
 msgid "files"
 msgstr "dosieroj"
 
-#: src/filemanager/file.c:154
 msgid "directory"
 msgstr "dosierujo"
 
-#: src/filemanager/file.c:155
 msgid "directories"
 msgstr "dosierujoj"
 
-#: src/filemanager/file.c:156
 msgid "files/directories"
 msgstr "dosier(uj)oj"
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-#: src/filemanager/file.c:158
 msgid " with source mask:"
 msgstr " kun fonta masko:"
 
-#: src/filemanager/file.c:159 src/filemanager/filegui.c:955
 msgid "to:"
 msgstr "al:"
 
-#: src/filemanager/file.c:162
 #, c-format
 msgid "%s?"
 msgstr "%s?"
 
-#: src/filemanager/file.c:298
 msgid "Cannot make the hardlink"
 msgstr "Ne povas fari la malmolan ligilon"
 
-#: src/filemanager/file.c:342
 #, c-format
 msgid ""
 "Cannot read source link \"%s\"\n"
@@ -3152,7 +2355,6 @@ msgstr ""
 "Ne povas legi fontan ligilon \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:353
 msgid ""
 "Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
@@ -3162,7 +2364,6 @@ msgstr ""
 "\n"
 "La agordaĵo \"Stabilaj molaj ligiloj\" estos malebligitaj"
 
-#: src/filemanager/file.c:406
 #, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
@@ -3171,13 +2372,9 @@ msgstr ""
 "Ne povas krei celan molan ligilon \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:456 src/filemanager/file.c:1072
-#: src/filemanager/file.c:1127 src/filemanager/file.c:2035
-#: src/filemanager/filegui.c:316 src/filemanager/filegui.c:528
 msgid "&Abort"
 msgstr "&Ĉesigi"
 
-#: src/filemanager/file.c:560
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -3186,7 +2383,6 @@ msgstr ""
 "Ne povas trovi dosieron \"%s\n"
 "%s"
 
-#: src/filemanager/file.c:568 src/filemanager/file.c:1296
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -3199,12 +2395,10 @@ msgstr ""
 "\"%s\"\n"
 "are the same file"
 
-#: src/filemanager/file.c:572
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Ne povas anstataŭi dosierujon \"%s\""
 
-#: src/filemanager/file.c:610
 #, c-format
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
@@ -3213,7 +2407,6 @@ msgstr ""
 "Ne povas movi dosieron \"%s\" al \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:639
 #, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
@@ -3222,7 +2415,6 @@ msgstr ""
 "Ne povas forigi dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:677
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
@@ -3231,8 +2423,6 @@ msgstr ""
 "Ne povas forigi dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:736 src/filemanager/file.c:795
-#: src/filemanager/file.c:2017
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
@@ -3241,11 +2431,9 @@ msgstr ""
 "Ne povas forigi dosierujon \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1072 src/viewer/hex.c:392
 msgid "&Retry"
 msgstr "&Reprovi"
 
-#: src/filemanager/file.c:1118
 msgid ""
 "\n"
 "Directory not empty.\n"
@@ -3255,7 +2443,6 @@ msgstr ""
 "Dosierujo ne vakas.\n"
 "Ĉu forigi ĝin funde?"
 
-#: src/filemanager/file.c:1119
 msgid ""
 "\n"
 "Background process: Directory not empty.\n"
@@ -3265,15 +2452,12 @@ msgstr ""
 "Fona procezo: Dosierujo ne vakas.\n"
 "Ĉu forigi ĝin funde?"
 
-#: src/filemanager/file.c:1120
 msgid "Delete:"
 msgstr "Forigi:"
 
-#: src/filemanager/file.c:1127 src/filemanager/filegui.c:320
 msgid "Non&e"
 msgstr "&Neniu"
 
-#: src/filemanager/file.c:1276 src/filemanager/file.c:1911
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
@@ -3282,7 +2466,6 @@ msgstr ""
 "Ne povas anstataŭi dosierujon \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1287
 #, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
@@ -3291,7 +2474,6 @@ msgstr ""
 "Ne povas trovi fontotekstan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1324
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -3300,7 +2482,6 @@ msgstr ""
 "Ne povas trovi specialan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1333 src/filemanager/file.c:1575
 #, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
@@ -3309,7 +2490,6 @@ msgstr ""
 "Ne povas chown-i celan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1340 src/filemanager/file.c:1589
 #, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
@@ -3318,7 +2498,6 @@ msgstr ""
 "Ne povas chmod-i celan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1353
 #, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
@@ -3327,11 +2506,9 @@ msgstr ""
 "Ne povas malfermi fontan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1364
 msgid "Reget failed, about to overwrite file"
 msgstr "Denova akirado malsukcesis, anstataŭos dosieron"
 
-#: src/filemanager/file.c:1372
 #, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
@@ -3340,7 +2517,6 @@ msgstr ""
 "nee povas fstat-i fontan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1403
 #, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
@@ -3349,7 +2525,6 @@ msgstr ""
 "Ne povas krei celan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1417
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
@@ -3358,7 +2533,6 @@ msgstr ""
 "Ne povas fstat-i celan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1453
 #, c-format
 msgid ""
 "Cannot read source file\"%s\"\n"
@@ -3367,7 +2541,6 @@ msgstr ""
 "Ne povas legi fontan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1485
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
@@ -3376,11 +2549,9 @@ msgstr ""
 "Ne povas skribi celan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1504
 msgid "(stalled)"
 msgstr "(paŭzinta)"
 
-#: src/filemanager/file.c:1541
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -3389,7 +2560,6 @@ msgstr ""
 "Ne povas fermi fontan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1551
 #, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
@@ -3398,15 +2568,12 @@ msgstr ""
 "Ne povas fermi celan dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1563
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Nekompleta dosiero estis akirita. Ĉu teni ĝin?"
 
-#: src/filemanager/file.c:1564
 msgid "&Keep"
 msgstr "&Teni"
 
-#: src/filemanager/file.c:1641
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
@@ -3415,7 +2582,6 @@ msgstr ""
 "Ne povas stat-i fontan dosierujon \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1668
 #, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
@@ -3424,7 +2590,6 @@ msgstr ""
 "Fonto \"%s\" ne estas dosierujo\n"
 "%s"
 
-#: src/filemanager/file.c:1677
 #, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
@@ -3433,8 +2598,6 @@ msgstr ""
 "Ne povas kopii ciklan molan ligilon\n"
 "\"%s\""
 
-#: src/filemanager/file.c:1717 src/filemanager/file.c:2514
-#: src/filemanager/tree.c:802
 #, c-format
 msgid ""
 "Destination \"%s\" must be a directory\n"
@@ -3443,7 +2606,6 @@ msgstr ""
 "Celo \"%s\" devas esti dosierujo\n"
 "%s"
 
-#: src/filemanager/file.c:1736
 #, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
@@ -3452,7 +2614,6 @@ msgstr ""
 "Ne povas krei celan dosierujon \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1753
 #, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
@@ -3461,7 +2622,6 @@ msgstr ""
 "Ne povas chown-i celan dosierujon \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1884
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -3474,7 +2634,6 @@ msgstr ""
 "\"%s\"\n"
 "estas la sama dosierujo"
 
-#: src/filemanager/file.c:1913
 #, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
@@ -3483,7 +2642,6 @@ msgstr ""
 "Ne povas anstataŭi dosieron \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:1930
 #, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
@@ -3492,352 +2650,267 @@ msgstr ""
 "Ne povas movi dosierujon \"%s\" al \"%s\"\n"
 "%s"
 
-#: src/filemanager/file.c:2044
 msgid "Directory scanning"
 msgstr "Dosieruja skanado"
 
-#: src/filemanager/file.c:2273
 msgid "Cannot operate on \"..\"!"
 msgstr "Ne povas operacii je \"..\"!"
 
-#: src/filemanager/file.c:2397
 msgid "Sorry, I could not put the job in background"
 msgstr "Bedaŭrinde mi ne povis meti la taskon en la fono"
 
-#: src/filemanager/filegui.c:236
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr "%d:%02d.%02d"
 
-#: src/filemanager/filegui.c:253
 #, c-format
 msgid "ETA %s"
 msgstr "Taskita resto: %s"
 
-#: src/filemanager/filegui.c:263
 #, c-format
 msgid "%.2f MB/s"
 msgstr "%.2f MB/s"
 
-#: src/filemanager/filegui.c:267
 #, c-format
 msgid "%.2f KB/s"
 msgstr "%.2f KB/s"
 
-#: src/filemanager/filegui.c:271
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#: src/filemanager/filegui.c:308
 msgid "Target file already exists!"
 msgstr "Cela dosiero jam ekzistas!"
 
-#: src/filemanager/filegui.c:312
 #, c-format
 msgid "Source date: %s, size %llu"
 msgstr "Fonta dato: %s, grando: %llu"
 
-#: src/filemanager/filegui.c:314
 #, c-format
 msgid "Target date: %s, size %llu"
 msgstr "Cela dato: %s, grando: %llu"
 
-#: src/filemanager/filegui.c:318
 msgid "If &size differs"
 msgstr "Se &grando malsamas"
 
-#: src/filemanager/filegui.c:322
 msgid "&Update"
 msgstr "&Aktualigi"
 
-#: src/filemanager/filegui.c:326
 msgid "Overwrite all targets?"
 msgstr "Ĉu anstataŭigi ĉiujn celojn?"
 
-#: src/filemanager/filegui.c:328
 msgid "&Reget"
 msgstr "&Ree akiri"
 
-#: src/filemanager/filegui.c:330
 msgid "A&ppend"
 msgstr "Al&meti"
 
-#: src/filemanager/filegui.c:336
 msgid "Overwrite this target?"
 msgstr "Ĉu anstataŭigi ĉi tiun celon?"
 
-#: src/filemanager/filegui.c:355
 msgid "File exists"
 msgstr "Dosiero ekzistas"
 
-#: src/filemanager/filegui.c:357
 msgid "Background process: File exists"
 msgstr "Fona procezo: Dosiero ekzistas"
 
-#: src/filemanager/filegui.c:724
 #, c-format
 msgid "Files processed: %zu of %zu"
 msgstr "Dosieroj traktitaj %zu el %zu"
 
-#: src/filemanager/filegui.c:763
 #, c-format
 msgid "Time: %s  %s (%s)"
 msgstr "Tempo: %s  %s (%s)"
 
-#: src/filemanager/filegui.c:769
 #, c-format
 msgid "Total: %s of %s"
 msgstr "Totalo: %s el %s"
 
-#: src/filemanager/filegui.c:801
 msgid "Source"
 msgstr "Fonto"
 
-#: src/filemanager/filegui.c:825
 msgid "Target"
 msgstr "Celo"
 
-#: src/filemanager/filegui.c:846
 msgid "Deleting"
 msgstr "Foriganta je"
 
-#: src/filemanager/filegui.c:936
 msgid "&Background"
 msgstr "&Fone"
 
-#: src/filemanager/filegui.c:944
 msgid "&Stable Symlinks"
 msgstr "&Stabilaj molaj ligiloj"
 
-#: src/filemanager/filegui.c:946
 msgid "Di&ve into subdir if exists"
 msgstr "Plon&ĝi en subdosierujon se ĝi ekzistas"
 
-#: src/filemanager/filegui.c:949
 msgid "Preserve &attributes"
 msgstr "Konservi &atributojn"
 
-#: src/filemanager/filegui.c:951
 msgid "Follow &links"
 msgstr "Sekvi &Ligilojn"
 
-#: src/filemanager/filegui.c:1102
 #, c-format
 msgid "Invalid source pattern `%s'"
 msgstr "Nevalida celan ŝablonon '%s'"
 
-#: src/filemanager/find.c:182
 msgid "&Suspend"
 msgstr "&Paŭzi"
 
-#: src/filemanager/find.c:183
 msgid "Con&tinue"
 msgstr "&Daŭrigi"
 
-#: src/filemanager/find.c:184
 msgid "&Chdir"
 msgstr "&Ŝanĝi dosierujon"
 
-#: src/filemanager/find.c:185
 msgid "&Again"
 msgstr "&Denove"
 
-#: src/filemanager/find.c:187 src/filemanager/panelize.c:91
 msgid "Pane&lize"
 msgstr "F&lankigi"
 
-#: src/filemanager/find.c:188
 msgid "&View - F3"
 msgstr "&Vidi - F3"
 
-#: src/filemanager/find.c:189
 msgid "&Edit - F4"
 msgstr "&Redakti - F4"
 
-#: src/filemanager/find.c:353
 #, c-format
 msgid "Found: %ld"
 msgstr "Trovita: %ld"
 
-#: src/filemanager/find.c:434 src/filemanager/find.c:444
 msgid "Malformed regular expression"
 msgstr "Misformita regulesprimo"
 
-#: src/filemanager/find.c:477
 msgid "Cas&e sensitive"
 msgstr "N&e ignori usklecon"
 
-#: src/filemanager/find.c:479
 msgid "&Find recursively"
 msgstr "&Trovi rekursie"
 
-#: src/filemanager/find.c:480
 msgid "S&kip hidden"
 msgstr "P&reterpasi kaŝitan"
 
-#: src/filemanager/find.c:482
 msgid "&All charsets"
 msgstr "&Ĉiuj signaroj"
 
-#: src/filemanager/find.c:486
 msgid "Sea&rch for content"
 msgstr "Se&rĉi por enhavo"
 
-#: src/filemanager/find.c:487
 msgid "Case sens&itive"
 msgstr "&Ignori usklecon"
 
-#: src/filemanager/find.c:488
 msgid "Re&gular expression"
 msgstr "Re&gulesprimo"
 
-#: src/filemanager/find.c:489
 msgid "Fir&st hit"
 msgstr "Unu&a rezulto"
 
-#: src/filemanager/find.c:492
 msgid "A&ll charsets"
 msgstr "&Ĉiuj signaroj"
 
-#: src/filemanager/find.c:495 src/filemanager/midnight.c:199
 msgid "&Tree"
 msgstr "&Arbo"
 
-#: src/filemanager/find.c:537 src/filemanager/find.c:1385
 msgid "Find File"
 msgstr "Trovi dosieron"
 
-#: src/filemanager/find.c:608
 msgid "Content:"
 msgstr "Enhavo:"
 
-#: src/filemanager/find.c:615
 msgid "File name:"
 msgstr "Dosiernomo:"
 
-#: src/filemanager/find.c:622
 msgid "Start at:"
 msgstr "Komenci je:"
 
-#: src/filemanager/find.c:931
 #, c-format
 msgid "Grepping in %s"
 msgstr "Grep-anta en %s"
 
-#: src/filemanager/find.c:1102
 msgid "Finished"
 msgstr "Finita"
 
-#: src/filemanager/find.c:1121 src/viewer/search.c:223
 #, c-format
 msgid "Searching %s"
 msgstr "Serĉanta en %s"
 
-#: src/filemanager/find.c:1300 src/filemanager/find.c:1407
 msgid "Searching"
 msgstr "Serĉanta"
 
-#: src/filemanager/hotlist.c:195
 msgid "&Move"
 msgstr "&Movi"
 
-#: src/filemanager/hotlist.c:196 src/filemanager/panelize.c:90
 msgid "&Remove"
 msgstr "&Forigi"
 
-#: src/filemanager/hotlist.c:198 src/filemanager/hotlist.c:1027
-#: src/filemanager/hotlist.c:1123
 msgid "&Append"
 msgstr "&Almeti"
 
-#: src/filemanager/hotlist.c:200 src/filemanager/hotlist.c:1026
-#: src/filemanager/hotlist.c:1122
 msgid "&Insert"
 msgstr "&Enmeti"
 
-#: src/filemanager/hotlist.c:202
 msgid "New &entry"
 msgstr "&Nova ero"
 
-#: src/filemanager/hotlist.c:204
 msgid "New &group"
 msgstr "Nova &grupo"
 
-#: src/filemanager/hotlist.c:208
 msgid "&Up"
 msgstr "&Supren"
 
-#: src/filemanager/hotlist.c:210
 msgid "&Add current"
 msgstr "&Aldoni nunan"
 
-#: src/filemanager/hotlist.c:213
 msgid "&Refresh"
 msgstr "&Refreŝigi"
 
-#: src/filemanager/hotlist.c:215
 msgid "Fr&ee VFSs now"
 msgstr "Nun liberigi virtualajn dosiersistemojn"
 
-#: src/filemanager/hotlist.c:218
 msgid "Change &to"
 msgstr "Ŝanĝi al"
 
-#: src/filemanager/hotlist.c:284
 msgid "Subgroup - press ENTER to see list"
 msgstr "Subgrupo - premu enen-klavon por vidi liston"
 
-#: src/filemanager/hotlist.c:766
 msgid "Active VFS directories"
 msgstr "[Virtualaj dosiersistemoj] Aktivaj dosierujoj"
 
-#: src/filemanager/hotlist.c:771
 msgid "Directory hotlist"
 msgstr "Dosieruja rapidolisto"
 
-#: src/filemanager/hotlist.c:801
 msgid "Directory path"
 msgstr "Dosieruja vojo"
 
-#: src/filemanager/hotlist.c:807 src/filemanager/hotlist.c:858
 msgid "Directory label"
 msgstr "Dosieruja etikedo"
 
-#: src/filemanager/hotlist.c:834
 #, c-format
 msgid "Moving %s"
 msgstr "Movanta je %s"
 
-#: src/filemanager/hotlist.c:1094
 msgid "New hotlist entry"
 msgstr "Nova rapidolista ero"
 
-#: src/filemanager/hotlist.c:1094
 msgid "Directory label:"
 msgstr "Dosieruja etikedo:"
 
-#: src/filemanager/hotlist.c:1095
 msgid "Directory path:"
 msgstr "Dosieruja vojo:"
 
-#: src/filemanager/hotlist.c:1179
 msgid "New hotlist group"
 msgstr "Nova rapidolista grupo"
 
-#: src/filemanager/hotlist.c:1179
 msgid "Name of new group:"
 msgstr "Nomo de nova grupo:"
 
-#: src/filemanager/hotlist.c:1230 src/filemanager/hotlist.c:1251
 msgid "Remove:"
 msgstr "Forigi:"
 
-#: src/filemanager/hotlist.c:1235
 msgid "Are you sure you want to remove this entry?"
 msgstr "Ĉu vi certas, ke vi volas forigi ĉi tiun eron?"
 
-#: src/filemanager/hotlist.c:1252
 msgid ""
 "Group not empty.\n"
 "Remove it?"
@@ -3845,15 +2918,12 @@ msgstr ""
 "Grupo ne vakas.\n"
 "Ĉu forigi ĝin?"
 
-#: src/filemanager/hotlist.c:1558
 msgid "Top level group"
 msgstr "Plej supra grupo"
 
-#: src/filemanager/hotlist.c:1581
 msgid "Hotlist Load"
 msgstr "Ŝargi rapidoliston"
 
-#: src/filemanager/hotlist.c:1583
 #, c-format
 msgid ""
 "MC was unable to write ~/%s file,\n"
@@ -3862,632 +2932,480 @@ msgstr ""
 "MC ne povis skribi al la dosiero ~/%s,\n"
 "via malnovaj rapidolistaj eroj ne estis forigitaj"
 
-#: src/filemanager/hotlist.c:1687
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Etikedo por \"%s\":"
 
-#: src/filemanager/hotlist.c:1694
 msgid "Add to hotlist"
 msgstr "Aldoni al rapidolisto"
 
-#: src/filemanager/info.c:72 src/filemanager/option.c:444
 msgid "Information"
 msgstr "Informoj"
 
-#: src/filemanager/info.c:108
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#: src/filemanager/info.c:124
 #, c-format
 msgid "File: %s"
 msgstr "Dosiero: %s"
 
-#: src/filemanager/info.c:141
 #, c-format
 msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Liberaj nodoj: %ld (%ld%%) el %ld"
 
-#: src/filemanager/info.c:147
 msgid "No node information"
 msgstr "Neniuj nodaj informoj"
 
-#: src/filemanager/info.c:156
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
 msgstr "Libera spaco: %s (%d%%) el %s"
 
-#: src/filemanager/info.c:160
 msgid "No space information"
 msgstr "Neniuj spacaj informoj"
 
-#: src/filemanager/info.c:164
 #, c-format
 msgid "Type:      %s"
 msgstr "Tipo:      %s"
 
-#: src/filemanager/info.c:165
 msgid "non-local vfs"
 msgstr "fora virtuala dosiersistemo"
 
-#: src/filemanager/info.c:171
 #, c-format
 msgid "Device:    %s"
 msgstr "Aparato:    %s"
 
-#: src/filemanager/info.c:177
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Dosiersistemo: %s"
 
-#: src/filemanager/info.c:183
 #, c-format
 msgid "Accessed:  %s"
 msgstr "Atingita:  %s"
 
-#: src/filemanager/info.c:188
 #, c-format
 msgid "Modified:  %s"
 msgstr "Modifita:  %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#: src/filemanager/info.c:196
 #, c-format
 msgid "Changed:   %s"
 msgstr "Ŝanĝita:   %s"
 
-#: src/filemanager/info.c:204
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr "Aparata tipo: granda %lu, malgranda %lu"
 
-#: src/filemanager/info.c:211
 #, c-format
 msgid "Size:      %s"
 msgstr "Grando:      %s"
 
-#: src/filemanager/info.c:213
 #, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] " (%ld bloko)"
 msgstr[1] " (%ld blokoj)"
 
-#: src/filemanager/info.c:220
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "Estro:     %s/%s"
 
-#: src/filemanager/info.c:224
 #, c-format
 msgid "Links:     %d"
 msgstr "Ligiloj:     %d"
 
-#: src/filemanager/info.c:228
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "Permesoj:      %s (%04o)"
 
-#: src/filemanager/info.c:233
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Loko:  %Xh:%Xh"
 
-#: src/filemanager/layout.c:174
 msgid "&Vertical"
 msgstr "&Vertikala"
 
-#: src/filemanager/layout.c:175
 msgid "&Horizontal"
 msgstr "&Horizontala"
 
-#: src/filemanager/layout.c:188
 msgid "Show free sp&ace"
 msgstr "Montri liberan sp&acan"
 
-#: src/filemanager/layout.c:189
 msgid "&XTerm window title"
 msgstr "Fenestra titolo en XTerm"
 
-#: src/filemanager/layout.c:190
 msgid "H&intbar visible"
 msgstr "Kons&ilstrio videbla"
 
-#: src/filemanager/layout.c:191
 msgid "&Keybar visible"
 msgstr "&Klavlinia videbla"
 
-#: src/filemanager/layout.c:192
 msgid "Command &prompt"
 msgstr "Komanda &demandilo"
 
-#: src/filemanager/layout.c:193
 msgid "Show &mini status"
 msgstr "Montri &miniaturan statlinion"
 
-#: src/filemanager/layout.c:194
 msgid "Menu&bar visible"
 msgstr "Menu&linia videbla"
 
-#: src/filemanager/layout.c:195
 msgid "&Equal split"
 msgstr "&Same granda"
 
-#: src/filemanager/layout.c:428
 msgid "Panel split"
 msgstr "Flanka splito"
 
-#: src/filemanager/layout.c:429
 msgid "Console output"
 msgstr "Terminala eligo"
 
-#: src/filemanager/layout.c:430 src/filemanager/option.c:137
 msgid "Other options"
 msgstr "Aliaj agordaĵoj"
 
-#: src/filemanager/layout.c:431
 msgid "Output lines:"
 msgstr "Eligaj linioj:"
 
-#: src/filemanager/layout.c:486
 msgid "Layout"
 msgstr "Aranĝo"
 
-#: src/filemanager/midnight.c:196
 msgid "File listin&g"
 msgstr "Dosiero lis&to"
 
-#: src/filemanager/midnight.c:197
 msgid "&Quick view"
 msgstr "&Rapida vido"
 
-#: src/filemanager/midnight.c:198
 msgid "&Info"
 msgstr "&Informoj"
 
-#: src/filemanager/midnight.c:202
 msgid "&Listing mode..."
 msgstr "&Lista reĝimo..."
 
-#: src/filemanager/midnight.c:203
 msgid "&Sort order..."
 msgstr "&Ordigi laŭ..."
 
-#: src/filemanager/midnight.c:204
 msgid "&Filter..."
 msgstr "&Filtri..."
 
-#: src/filemanager/midnight.c:207
 msgid "&Encoding..."
 msgstr "&Kodoprezento..."
 
-#: src/filemanager/midnight.c:212
 msgid "FT&P link..."
 msgstr "FT&P-a legilo..."
 
-#: src/filemanager/midnight.c:215
 msgid "S&hell link..."
 msgstr "&Ŝela ligilo..."
 
-#: src/filemanager/midnight.c:218
 msgid "SM&B link..."
 msgstr "SM&B-a ligilo..."
 
-#: src/filemanager/midnight.c:222
 msgid "&Rescan"
 msgstr "&Reskani"
 
-#: src/filemanager/midnight.c:234
 msgid "&View"
 msgstr "&Vidi"
 
-#: src/filemanager/midnight.c:235
 msgid "Vie&w file..."
 msgstr "Vidi &dosieron..."
 
-#: src/filemanager/midnight.c:236
 msgid "&Filtered view"
 msgstr "&Filtrita vido"
 
-#: src/filemanager/midnight.c:238
 msgid "&Copy"
 msgstr "&Kopii"
 
-#: src/filemanager/midnight.c:239
 msgid "C&hmod"
 msgstr "&Ŝanĝi permesojn"
 
-#: src/filemanager/midnight.c:240
 msgid "&Link"
 msgstr "&Ligilo"
 
-#: src/filemanager/midnight.c:241
 msgid "&Symlink"
 msgstr "&Mola ligilo"
 
-#: src/filemanager/midnight.c:243
 msgid "Relative symlin&k"
 msgstr "Relativa mola ligilo"
 
-#: src/filemanager/midnight.c:244
 msgid "Edit s&ymlink"
 msgstr "Redakti m&olan ligilon"
 
-#: src/filemanager/midnight.c:245
 msgid "Ch&own"
 msgstr "chown"
 
-#: src/filemanager/midnight.c:247
 msgid "&Advanced chown"
 msgstr "&Altnivela chown"
 
-#: src/filemanager/midnight.c:248
 msgid "&Rename/Move"
 msgstr "&Alinomigi/Movi"
 
-#: src/filemanager/midnight.c:249
 msgid "&Mkdir"
 msgstr "&Novan dosierujon"
 
-#: src/filemanager/midnight.c:251
 msgid "&Quick cd"
 msgstr "&Rapide ŝanĝi dosierujon"
 
-#: src/filemanager/midnight.c:253
 msgid "Select &group"
 msgstr "Elekti &grupon"
 
-#: src/filemanager/midnight.c:254
 msgid "U&nselect group"
 msgstr "M&alelekti grupon"
 
-#: src/filemanager/midnight.c:257
 msgid "Reverse selec&tion"
 msgstr "Inversigi elek&ton"
 
-#: src/filemanager/midnight.c:259
 msgid "E&xit"
 msgstr "E&liri"
 
-#: src/filemanager/midnight.c:275
 msgid "&User menu"
 msgstr "&Uzanto-menuo"
 
-#: src/filemanager/midnight.c:276
 msgid "&Directory tree"
 msgstr "&Dosieruja arbo"
 
-#: src/filemanager/midnight.c:277
 msgid "&Find file"
 msgstr "&Trovi dosieron"
 
-#: src/filemanager/midnight.c:278
 msgid "S&wap panels"
 msgstr "In&versigi flankojn"
 
-#: src/filemanager/midnight.c:280
 msgid "Switch &panels on/off"
 msgstr "(Mal)ŝalti &flankojn"
 
-#: src/filemanager/midnight.c:282
 msgid "&Compare directories"
 msgstr "&Kompari dosierujojn"
 
-#: src/filemanager/midnight.c:284
 msgid "&View diff files"
 msgstr "&Vidi diff-dosierojn"
 
-#: src/filemanager/midnight.c:287
 msgid "E&xternal panelize"
 msgstr "&Eksterigi flankojn"
 
-#: src/filemanager/midnight.c:290
 msgid "Show directory s&izes"
 msgstr "Montri dosierujajn g&randojn"
 
-#: src/filemanager/midnight.c:292
 msgid "Command &history"
 msgstr "Komanda &historio"
 
-#: src/filemanager/midnight.c:294
 msgid "Di&rectory hotlist"
 msgstr "Dosie&ruja rapidolista"
 
-#: src/filemanager/midnight.c:296
 msgid "&Active VFS list"
 msgstr "Listo de &aktivaj virtualaj dosiersistemoj"
 
-#: src/filemanager/midnight.c:299
 msgid "&Background jobs"
 msgstr "&Fonaj taskoj"
 
-#: src/filemanager/midnight.c:301
 msgid "Screen lis&t"
 msgstr "Paĝa lis&to"
 
-#: src/filemanager/midnight.c:306
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Malforigi dosierojn (nur en ext2fs)"
 
-#: src/filemanager/midnight.c:310
 msgid "&Listing format edit"
 msgstr "Redakti &listan aranĝon"
 
-#: src/filemanager/midnight.c:316
 msgid "Edit &extension file"
 msgstr "Redakti &sufikso-dosieron"
 
-#: src/filemanager/midnight.c:317
 msgid "Edit &menu file"
 msgstr "Redakti &menuo-dosieron"
 
-#: src/filemanager/midnight.c:320
 msgid "Edit hi&ghlighting group file"
 msgstr "Redakti pri&lumo-grupan dosieron"
 
-#: src/filemanager/midnight.c:332
 msgid "&Configuration..."
 msgstr "&Agordo.."
 
-#: src/filemanager/midnight.c:333
 msgid "&Layout..."
 msgstr "&Aranĝo..."
 
-#: src/filemanager/midnight.c:335
 msgid "&Panel options..."
 msgstr "&Flankaj agordaĵoj..."
 
-#: src/filemanager/midnight.c:336
 msgid "C&onfirmation..."
 msgstr "K&onfirmo..."
 
-#: src/filemanager/midnight.c:337
 msgid "&Display bits..."
 msgstr "&Elmontraj bitoj..."
 
-#: src/filemanager/midnight.c:340
 msgid "&Virtual FS..."
 msgstr "&Virtualaj dosiersistemoj..."
 
-#: src/filemanager/midnight.c:461
 msgid "Panels:"
 msgstr "Flankoj:"
 
-#: src/filemanager/midnight.c:729
 msgid "The TERM environment variable is unset!\n"
 msgstr "La medivarablo TERM ne estas valorizita!\n"
 
-#: src/filemanager/midnight.c:943
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] "%zd paĝoj estas malfermitaj. Ĉu senkonsidere eliri?"
 msgstr[1] "%zd paĝoj estas malfermitaj. Ĉu senkonsidere eliri?"
 
-#: src/filemanager/midnight.c:946 src/filemanager/midnight.c:952
-#: src/filemanager/panel.c:2243
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
 
-#: src/filemanager/midnight.c:953
 msgid "Do you really want to quit the Midnight Commander?"
 msgstr "Ĉu vi efektive volas eliri el Midnight Commander?"
 
-#: src/filemanager/midnight.c:1492
 msgid "&Above"
 msgstr "&Supra"
 
-#: src/filemanager/midnight.c:1492
 msgid "&Left"
 msgstr "&Maldekstra"
 
-#: src/filemanager/midnight.c:1493
 msgid "&Below"
 msgstr "S&uba"
 
-#: src/filemanager/midnight.c:1493
 msgid "&Right"
 msgstr "&Dekstra"
 
-#: src/filemanager/midnight.c:1502
 msgid "ButtonBar|Menu"
 msgstr "Butonlinio|Menuo"
 
-#: src/filemanager/midnight.c:1503 src/viewer/display.c:91
 msgid "ButtonBar|View"
 msgstr "Butonlinio|Vidi"
 
-#: src/filemanager/midnight.c:1506 src/filemanager/tree.c:1183
 msgid "ButtonBar|RenMov"
 msgstr "Butonlinio|Alinomi"
 
-#: src/filemanager/midnight.c:1507 src/filemanager/tree.c:1186
 msgid "ButtonBar|Mkdir"
 msgstr "Butonlinio|Novan dosierujon"
 
-#: src/filemanager/option.c:104
 msgid "&Never"
 msgstr "&Neniam"
 
-#: src/filemanager/option.c:105
 msgid "On dum&b terminals"
 msgstr "En sencer&bajn terminaloj"
 
-#: src/filemanager/option.c:106
 msgid "Alwa&ys"
 msgstr "&Ĉiam"
 
-#: src/filemanager/option.c:117
 msgid "A&uto save setup"
 msgstr "A&ŭtomate konservi agordon"
 
-#: src/filemanager/option.c:119
 msgid "Sa&fe delete"
 msgstr "Se&ndanĝera forigo"
 
-#: src/filemanager/option.c:121
 msgid "Cd follows lin&ks"
 msgstr "dosierujo interŝanĝo sekvas &ligilojn"
 
-#: src/filemanager/option.c:123
 msgid "Rotating d&ash"
 msgstr "Turniĝanta &streko"
 
-#: src/filemanager/option.c:125
 msgid "Co&mplete: show all"
 msgstr "Ko&mpleto: montri ĉion"
 
-#: src/filemanager/option.c:127
 msgid "Shell &patterns"
 msgstr "&Ŝelaj ŝablonoj"
 
-#: src/filemanager/option.c:129
 msgid "&Drop down menus"
 msgstr "&Ŝprucmenuoj"
 
-#: src/filemanager/option.c:131
 msgid "Auto m&enus"
 msgstr "Aŭtomataj m&enuoj"
 
-#: src/filemanager/option.c:132
 msgid "Use internal vie&w"
 msgstr "Uzi internan &vidon"
 
-#: src/filemanager/option.c:134
 msgid "Use internal edi&t"
 msgstr "Uzi internan &tekstoredaktilon"
 
-#: src/filemanager/option.c:141
 msgid "Pause after run"
 msgstr "Paŭzo post plenumo"
 
-#: src/filemanager/option.c:146
 msgid "Timeout:"
 msgstr "Valida periodo:"
 
-#: src/filemanager/option.c:147
 msgid "S&ingle press"
 msgstr "&Unuopa premo"
 
-#: src/filemanager/option.c:148
 msgid "Esc key mode"
 msgstr "Eskapo-klava reĝimo"
 
-#: src/filemanager/option.c:151
 msgid "Mkdi&r autoname"
 msgstr "aŭtomate nomi novan dosierujon"
 
-#: src/filemanager/option.c:152
 msgid "Classic pro&gressbar"
 msgstr "Konata pro&gesilo"
 
-#: src/filemanager/option.c:154
 msgid "Compute tota&ls"
 msgstr "Komputi tota&lojn"
 
-#: src/filemanager/option.c:156
 msgid "&Verbose operation"
 msgstr "Tro &vorthava funkciado"
 
-#: src/filemanager/option.c:158
 msgid "File operation options"
 msgstr "Dosierfunkciadaj agordaĵoj"
 
-#: src/filemanager/option.c:166
 msgid "Configure options"
 msgstr "Agordaĵoj"
 
-#: src/filemanager/option.c:290
 msgid "Case &insensitive"
 msgstr "&Ignori usklecon"
 
-#: src/filemanager/option.c:291
 msgid "Case s&ensitive"
 msgstr "Ignori uskl&eco"
 
-#: src/filemanager/option.c:292
 msgid "Use panel sort mo&de"
 msgstr "Uzi reĝimon de flanka ordigo"
 
-#: src/filemanager/option.c:305
 msgid "Quick search"
 msgstr "Rapida serĉo"
 
-#: src/filemanager/option.c:307
 msgid "&Permissions"
 msgstr "&Permesoj"
 
-#: src/filemanager/option.c:309
 msgid "File &types"
 msgstr "Dosier&tipoj"
 
-#: src/filemanager/option.c:312
 msgid "File highlight"
 msgstr "Dosiera prilumado"
 
-#: src/filemanager/option.c:314
 msgid "&Mouse page scrolling"
 msgstr "Per&musa paĝa rulumado"
 
-#: src/filemanager/option.c:316
 msgid "Pa&ge scrolling"
 msgstr "Pa&ĝa rulumado"
 
-#: src/filemanager/option.c:318
 msgid "L&ynx-like motion"
 msgstr "Linko-simila movo"
 
-#: src/filemanager/option.c:321
 msgid "Navigation"
 msgstr "Navigo"
 
-#: src/filemanager/option.c:323
 msgid "A&uto save panels setup"
 msgstr "&Aŭtomate konservi flankan agordon"
 
-#: src/filemanager/option.c:325
 msgid "Simple s&wap"
 msgstr "Nura i&nterŝanĝo"
 
-#: src/filemanager/option.c:327
 msgid "Re&verse files only"
 msgstr "Nur in&versigi dosierojn"
 
-#: src/filemanager/option.c:329
 msgid "Ma&rk moves down"
 msgstr "Ma&rko movas suben"
 
-#: src/filemanager/option.c:331
 msgid "&Fast dir reload"
 msgstr "&Rapide reŝargi dosierujojn"
 
-#: src/filemanager/option.c:333
 msgid "Show &hidden files"
 msgstr "Montri &kaŝitajn dosierojn"
 
-#: src/filemanager/option.c:335
 msgid "Show &backup files"
 msgstr "Montri &sekurkopiojn"
 
-#: src/filemanager/option.c:337
 msgid "Mi&x all files"
 msgstr "Mi&ksi ĉiujn dosierojn"
 
-#: src/filemanager/option.c:339
 msgid "Use SI si&ze units"
 msgstr "Uzi metrajn unuojn de grando"
 
-#: src/filemanager/option.c:342
 msgid "Main panel options"
 msgstr "Ĉefaj agordaĵoj pri la flankoj"
 
-#: src/filemanager/option.c:350
 msgid "Panel options"
 msgstr "Flankaj agordaĵoj"
 
-#: src/filemanager/option.c:445
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
 "directory contents. In this case you'll need to do a\n"
@@ -4501,218 +3419,169 @@ msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:107
 msgid "sort|u"
 msgstr "sort|n"
 
-#: src/filemanager/panel.c:108
 msgid "&Unsorted"
 msgstr "&Neordigita"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:117
 msgid "sort|n"
 msgstr "sort|n"
 
-#: src/filemanager/panel.c:118
 msgid "&Name"
 msgstr "&Nomo"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:127
 msgid "sort|v"
 msgstr "sort|e"
 
-#: src/filemanager/panel.c:128
 msgid "&Version"
 msgstr "&Eldono"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:137
 msgid "sort|e"
 msgstr "sort|a"
 
-#: src/filemanager/panel.c:138
 msgid "&Extension"
 msgstr "&Aldonaĵo"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:147
 msgid "sort|s"
 msgstr "sort|g"
 
-#: src/filemanager/panel.c:148
 msgid "&Size"
 msgstr "&Grando"
 
-#: src/filemanager/panel.c:156
 msgid "Block Size"
 msgstr "Bloka grando"
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:173
 msgid "sort|m"
 msgstr "sort|m"
 
-#: src/filemanager/panel.c:174
 msgid "&Modify time"
 msgstr "&Modifita tempo"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:183
 msgid "sort|a"
 msgstr "sort|a"
 
-#: src/filemanager/panel.c:184
 msgid "&Access time"
 msgstr "&Atingita tempo"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:193
 msgid "sort|h"
 msgstr "sort|ŝ"
 
-#: src/filemanager/panel.c:194
 msgid "C&hange time"
 msgstr "Ŝanĝi tempon"
 
-#: src/filemanager/panel.c:210
 msgid "Perm"
 msgstr "Perm"
 
-#: src/filemanager/panel.c:218
 msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:226
 msgid "sort|i"
 msgstr "sort|i"
 
-#: src/filemanager/panel.c:227
 msgid "&Inode"
 msgstr "&Inode"
 
-#: src/filemanager/panel.c:235
 msgid "UID"
 msgstr "Uzanta identigilo"
 
-#: src/filemanager/panel.c:243
 msgid "GID"
 msgstr "GID"
 
-#: src/filemanager/panel.c:251
 msgid "Owner"
 msgstr "Estro"
 
-#: src/filemanager/panel.c:259
 msgid "Group"
 msgstr "Grupo"
 
-#: src/filemanager/panel.c:473
 msgid "[dev]"
 msgstr "[aparato]"
 
-#: src/filemanager/panel.c:488 src/filemanager/panel.c:925
 msgid "UP--DIR"
 msgstr "SUPREN--DOSIERUJO"
 
-#: src/filemanager/panel.c:510
 msgid "SYMLINK"
 msgstr "MOLA LIGILO"
 
-#: src/filemanager/panel.c:515
 msgid "SUB-DIR"
 msgstr "SUB-DOSIERUJO"
 
-#: src/filemanager/panel.c:916
 msgid "<readlink failed>"
 msgstr "<legi ligilon malsukcesis>"
 
-#: src/filemanager/panel.c:976
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] "%s bajto"
 msgstr[1] "%s bajtoj"
 
-#: src/filemanager/panel.c:980
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s en %d dosiero"
 msgstr[1] "%s en %d dosieroj"
 
-#: src/filemanager/panel.c:1543
 msgid "Unknown tag on display format:"
 msgstr "Nekonata etikedo en elmontra formato:"
 
-#: src/filemanager/panel.c:2244
 msgid "Do you really want to execute?"
 msgstr "Ĉu vi efekti volas plenumigi?"
 
-#: src/filemanager/panel.c:3648
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Uzanto havigita formato aspektas nevalide, restarigante la aprioran."
 
-#: src/filemanager/panelize.c:89
 msgid "&Add new"
 msgstr "&Aldoni novan"
 
-#: src/filemanager/panelize.c:190 src/filemanager/panelize.c:390
 msgid "External panelize"
 msgstr "Eksterigi flankojn"
 
-#: src/filemanager/panelize.c:204
 msgid "Command"
 msgstr "Komando"
 
-#: src/filemanager/panelize.c:218 src/filemanager/panelize.c:291
-#: src/filemanager/panelize.c:467 src/filemanager/panelize.c:516
 msgid "Other command"
 msgstr "Alia komando"
 
-#: src/filemanager/panelize.c:272
 msgid "Add to external panelize"
 msgstr "Aldoni al eksteraj flankoj"
 
-#: src/filemanager/panelize.c:273
 msgid "Enter command label:"
 msgstr "Enmetu komandan etikedon:"
 
-#: src/filemanager/panelize.c:331
 msgid "Cannot invoke command."
 msgstr "Ne povas plenumi komandon."
 
-#: src/filemanager/panelize.c:390
 msgid "Pipe close failed"
 msgstr "Dukta fermo malsukcesis"
 
-#: src/filemanager/panelize.c:407
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Ne povas plenumi eksterajn flanojn en fora dosierujo"
 
-#: src/filemanager/panelize.c:471
 msgid "Find rejects after patching"
 msgstr "Trovi rifuzojn post flikado"
 
-#: src/filemanager/panelize.c:473
 msgid "Find *.orig after patching"
 msgstr "Trovi originalajn post flikado"
 
-#: src/filemanager/panelize.c:475
 msgid "Find SUID and SGID programs"
 msgstr "Trovi SUID- kaj SGID-programoj"
 
-#: src/filemanager/tree.c:178
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
@@ -4721,17 +3590,14 @@ msgstr ""
 "Ne povas malfermi la dosieron %s por skribi:\n"
 "%s\n"
 
-#: src/filemanager/tree.c:744
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr "Kopii dosierujon \"%s\" al:"
 
-#: src/filemanager/tree.c:781
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr "Movi dosierujon \"%s\" al:"
 
-#: src/filemanager/tree.c:794
 #, c-format
 msgid ""
 "Cannot stat the destination\n"
@@ -4740,32 +3606,25 @@ msgstr ""
 "Ne povas stat-i la celon\n"
 "%s"
 
-#: src/filemanager/tree.c:856
 #, c-format
 msgid "Delete %s?"
 msgstr "Ĉu forigi je %s?"
 
-#: src/filemanager/tree.c:1007 src/filemanager/tree.c:1180
 msgid "ButtonBar|Static"
 msgstr "ButtonBar|Statika"
 
-#: src/filemanager/tree.c:1008 src/filemanager/tree.c:1181
 msgid "ButtonBar|Dynamc"
 msgstr "ButtonBar|Dinamika"
 
-#: src/filemanager/tree.c:1178
 msgid "ButtonBar|Rescan"
 msgstr "Butonlinio|Reskani"
 
-#: src/filemanager/tree.c:1179
 msgid "ButtonBar|Forget"
 msgstr "ButtonBar|Forgesi"
 
-#: src/filemanager/tree.c:1190
 msgid "ButtonBar|Rmdir"
 msgstr "ButtonBar|ForDujo"
 
-#: src/filemanager/treestore.c:369
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -4774,50 +3633,41 @@ msgstr ""
 "Ne povas skribi al la dosiero %s:\n"
 "%s\n"
 
-#: src/filemanager/usermenu.c:301
 msgid "Debug"
 msgstr "Senerarigi"
 
-#: src/filemanager/usermenu.c:319
 msgid "ERROR:"
 msgstr "ERARO:"
 
-#: src/filemanager/usermenu.c:323
 msgid "True:"
 msgstr "Vera:"
 
-#: src/filemanager/usermenu.c:325
 msgid "False:"
 msgstr "Malvera:"
 
-#: src/filemanager/usermenu.c:565
 msgid "Warning -- ignoring file"
 msgstr "Averto -- ignoranta dosieron"
 
-#: src/filemanager/usermenu.c:566
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Dosiero %s ne estas posedita de ĉefuzanto aŭ vi aŭ estas universale skribebla.\n"
+"Dosiero %s ne estas posedita de ĉefuzanto aŭ vi aŭ estas universale "
+"skribebla.\n"
 "Uzi ĝin eble kompromitos vian sekurecon"
 
-#: src/filemanager/usermenu.c:676
 msgid "Format error on file Extensions File"
 msgstr "Aranĝeraro en sufikso-dosiero"
 
-#: src/filemanager/usermenu.c:677
 #, c-format
 msgid "The %%var macro has no default"
 msgstr "La makroo %%var havas neniun aprioraĵon"
 
-#: src/filemanager/usermenu.c:678
 #, c-format
 msgid "The %%var macro has no variable"
 msgstr "La makroo %%var havas neniun variablon"
 
-#: src/filemanager/usermenu.c:894
 #, c-format
 msgid ""
 "Cannot open file%s\n"
@@ -4826,49 +3676,38 @@ msgstr ""
 "Ne povas malfermi dosieron%s\n"
 "%s"
 
-#: src/filemanager/usermenu.c:993
 #, c-format
 msgid "No suitable entries found in %s"
 msgstr "Neniuj taŭgaj eroj trovitaj en %s"
 
-#: src/filemanager/usermenu.c:999
 msgid "User menu"
 msgstr "Uzanto-menuo"
 
-#: src/help.c:321
 msgid "Help file format error\n"
 msgstr "Eraro ĉe la helpdosiera formato\n"
 
-#: src/help.c:359
 msgid "Internal bug: Double start of link area"
 msgstr "Interna eraro: Duobla komenco de liga regiono"
 
-#: src/help.c:702 src/help.c:1075
 #, c-format
 msgid "Cannot find node %s in help file"
 msgstr "Ne povas trovi nodon %s en helpa dosiero"
 
-#: src/help.c:1090
 msgid "Help"
 msgstr "Helpo"
 
-#: src/help.c:1113
 msgid "ButtonBar|Index"
 msgstr "ButtonBar|Indekso"
 
-#: src/help.c:1114
 msgid "ButtonBar|Prev"
 msgstr "ButtonBar|Antaŭa"
 
-#: src/learn.c:98
 msgid "Learn keys"
 msgstr "Lerni klavojn"
 
-#: src/learn.c:111
 msgid "Teach me a key"
 msgstr "Lernigi al mi klavon"
 
-#: src/learn.c:112
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -4889,21 +3728,17 @@ msgstr ""
 "Se vi volas eskapi, unufoje premu la klavon Eskapo\n"
 "kaj ankaŭ atendu."
 
-#: src/learn.c:144
 msgid "Cannot accept this key"
 msgstr "Ne povas akcepti tiun klavon"
 
-#: src/learn.c:144
 #, c-format
 msgid "You have entered \"%s\""
 msgstr "Vi enmetis je \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
-#: src/learn.c:202
 msgid "OK"
 msgstr "Bone"
 
-#: src/learn.c:212
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -4911,11 +3746,9 @@ msgstr ""
 "Ŝaĵne ĉiuj el viaj klavoj jam\n"
 "bone funkcias. Tio estas bonega."
 
-#: src/learn.c:214
 msgid "&Discard"
 msgstr "&Forviŝi"
 
-#: src/learn.c:221
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -4923,41 +3756,33 @@ msgstr ""
 "Bonege! Vi havas kompletan terminalan datumbazon!\n"
 "Ĉiuj el viaj klavoj funkcias bone."
 
-#: src/learn.c:335
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr ""
 "Premu ĉiujn la klavojn menciitajn ĉi tie. Post kiam vi faris tion, kontrolu"
 
-#: src/learn.c:338
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "kiujn klavojn ne estas markitajn per \"Bone\". Premu spaceton ĉe la manka"
+msgstr ""
+"kiujn klavojn ne estas markitajn per \"Bone\". Premu spaceton ĉe la manka"
 
-#: src/learn.c:341
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "klavo, aŭ klaku per la muso por difini ĝin. Dismovu per tabo."
 
-#: src/main.c:496
 #, c-format
 msgid "Cannot create %s directory"
 msgstr "Ne povas krei dosiurujon %s"
 
-#: src/selcodepage.c:79
 msgid "Choose codepage"
 msgstr "Elekti kodpaĝon"
 
-#: src/selcodepage.c:83
 msgid "-  < No translation >"
 msgstr "- < Neniu traduko >"
 
-#: src/setup.c:186
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-#: src/setup.c:187
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/setup.c:1092
 #, c-format
 msgid ""
 "Cannot save file %s:\n"
@@ -4966,7 +3791,6 @@ msgstr ""
 "Ne povas konsnervi dosieron %s:\n"
 "%s"
 
-#: src/subshell.c:393
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -4976,156 +3800,119 @@ msgstr ""
 "plenumiĝi en ĉi tiu terminalo.\n"
 "Subŝelo estos malebligita."
 
-#: src/subshell.c:844
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Ne povas malfermi nomitan dukton %s\n"
 
-#: src/subshell.c:1086
 msgid "The shell is still active. Quit anyway?"
 msgstr "La ŝelo estas aktiva. Ĉu senkonsidere eliri?"
 
-#: src/subshell.c:1274
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Averto: Ne povas ŝanĝi al %s.\n"
 
-#: src/textconf.c:74
 msgid "Using the S-Lang library with terminfo database\n"
 msgstr "Uzado de la biblioteko S-Lang kun terminfo-datumbazo\n"
 
-#: src/textconf.c:76
 msgid "Using the ncurses library\n"
 msgstr "Uzanta la bibliotekon ncurses\n"
 
-#: src/textconf.c:78
 msgid "Using the ncursesw library\n"
 msgstr "Uzanta la bibliotekon ncursesw\n"
 
-#: src/textconf.c:84
 msgid "With builtin Editor\n"
 msgstr "Per interna tekstoredaktilo\n"
 
-#: src/textconf.c:89
 msgid "With optional subshell support\n"
 msgstr "Kun laŭvola subŝelo\n"
 
-#: src/textconf.c:91
 msgid "With subshell support as default\n"
 msgstr "Kun aŭtomato subŝelo\n"
 
-#: src/textconf.c:96
 msgid "With support for background operations\n"
 msgstr "Kun rego de fonaj operacioj\n"
 
-#: src/textconf.c:100
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "Kun musa rego ĉe terminaloj xterm-aj kaj linuksaj\n"
 
-#: src/textconf.c:102
 msgid "With mouse support on xterm\n"
 msgstr "Kun musa rego ĉe xterm\n"
 
-#: src/textconf.c:106
 msgid "With support for X11 events\n"
 msgstr "Kun rego de X11-eventoj\n"
 
-#: src/textconf.c:110
 msgid "With internationalization support\n"
 msgstr "Kun internaciiga rego\n"
 
-#: src/textconf.c:114
 msgid "With multiple codepages support\n"
 msgstr "Kun rego de pluraj kodpaĝoj\n"
 
-#: src/textconf.c:134
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Muntita kun GLib %d.%d.%d\n"
 
-#: src/textconf.c:141
 #, c-format
 msgid "Virtual File Systems:"
 msgstr "Virtuala dosiersistemoj:"
 
-#: src/textconf.c:147
 #, c-format
 msgid "Data types:"
 msgstr "Datumtipoj:"
 
-#: src/viewer/actions_cmd.c:277
 msgid "Invalid value"
 msgstr "Nevalida valoro"
 
-#: src/viewer/datasource.c:384
 msgid "Cannot spawn child process"
 msgstr "Ne povas krei idan procezon"
 
-#: src/viewer/datasource.c:397
 msgid "Empty output from child filter"
 msgstr "Vaka eligo el ida filtrilo"
 
-#: src/viewer/dialogs.c:174
 msgid "&Line number (decimal)"
 msgstr "&Linia numero (dekuma)"
 
-#: src/viewer/dialogs.c:175
 msgid "Pe&rcents"
 msgstr "E&lcentoj"
 
-#: src/viewer/dialogs.c:176
 msgid "&Decimal offset"
 msgstr "&Dekuma ŝovo"
 
-#: src/viewer/dialogs.c:177
 msgid "He&xadecimal offset"
 msgstr "Dek&sesuma ŝovo"
 
-#: src/viewer/dialogs.c:204
 msgid "Goto"
 msgstr "Iri"
 
-#: src/viewer/display.c:97
 msgid "ButtonBar|Ascii"
 msgstr "Butonlinio|Askio"
 
-#: src/viewer/display.c:99
 msgid "ButtonBar|HxSrch"
 msgstr "ButtonBar|Dekses"
 
-#: src/viewer/display.c:104
 msgid "ButtonBar|UnWrap"
 msgstr "ButtonBar|Malfaldi"
 
-#: src/viewer/display.c:105
 msgid "ButtonBar|Wrap"
 msgstr "ButtonBar|Faldi"
 
-#: src/viewer/display.c:106
 msgid "ButtonBar|Hex"
 msgstr "ButtonBar|Dekses"
 
-#: src/viewer/display.c:111
 msgid "ButtonBar|Goto"
 msgstr "ButtonBar|Iri"
 
-#: src/viewer/display.c:112
 msgid "ButtonBar|Raw"
 msgstr "ButtonBar|Nuda"
 
-#: src/viewer/display.c:113
 msgid "ButtonBar|Parse"
 msgstr "ButtonBar|Analizi"
 
-#: src/viewer/display.c:121
 msgid "ButtonBar|Unform"
 msgstr "Buttonbar|Malform"
 
-#: src/viewer/display.c:122
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
-#: src/viewer/hex.c:381
 #, c-format
 msgid ""
 "Error while closing the file:\n"
@@ -5136,7 +3923,6 @@ msgstr ""
 "%s\n"
 "Datumo eble ne estis skribita"
 
-#: src/viewer/hex.c:389
 #, c-format
 msgid ""
 "Cannot save file:\n"
@@ -5145,11 +3931,9 @@ msgstr ""
 "Ne povas konservi dosieron:\n"
 "%s"
 
-#: src/viewer/lib.c:424 src/viewer/lib.c:426
 msgid "View: "
 msgstr "Vidi: "
 
-#: src/viewer/mcviewer.c:334
 #, c-format
 msgid ""
 "Cannot open \"%s\"\n"
@@ -5158,7 +3942,6 @@ msgstr ""
 "Ne povas malfermi je \"%s\"\n"
 "%s"
 
-#: src/viewer/mcviewer.c:348
 #, c-format
 msgid ""
 "Cannot stat \"%s\"\n"
@@ -5167,18 +3950,14 @@ msgstr ""
 "Ne povas stat-i je \"%s\"\n"
 "%s"
 
-#: src/viewer/mcviewer.c:361
 msgid "Cannot view: not a regular file"
 msgstr "Ne povas vidi: ne regula dosiero"
 
-#: src/viewer/search.c:139
 msgid "Seeking to search result"
 msgstr "Trovanta en serĉa rezulto"
 
-#: src/viewer/search.c:286
 msgid "Search done"
 msgstr "Serĉo finita"
 
-#: src/viewer/search.c:286
 msgid "Continue from beginning?"
 msgstr "Ĉu daŭrigi je komenco?"
