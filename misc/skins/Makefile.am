@@ -7,6 +7,7 @@ skin_DATA = \
 	double-lines.ini \
 	featured.ini \
 	gotar.ini \
+	mc46.ini \
 	nicedark.ini \
 	sand256.ini \
 	xoria256.ini
