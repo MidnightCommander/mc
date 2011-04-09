@@ -7,7 +7,8 @@ skin_DATA = \
 	double-lines.ini \
 	featured.ini \
 	gotar.ini \
-	nicedark.ini
+	nicedark.ini \
+	mc46.ini
 
 EXTRA_DIST = \
     $(skin_DATA)
