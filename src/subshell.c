@@ -185,14 +185,6 @@ static int prompt_pos;
 
 
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-static void init_raw_mode (void);
-static gboolean feed_subshell (int how, int fail_on_error);
-static void synchronize (void);
-static int pty_open_master (char *pty_name);
-static int pty_open_slave (const char *pty_name);
-static int resize_tty (int fd);
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -222,6 +214,25 @@ write_all (int fd, const void *buf, size_t count)
         written += ret;
     }
     return written;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Resize given terminal using TIOCSWINSZ, return ioctl() result */
+static int
+resize_tty (int fd)
+{
+#if defined TIOCSWINSZ
+    struct winsize tty_size;
+
+    tty_size.ws_row = LINES;
+    tty_size.ws_col = COLS;
+    tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
+
+    return ioctl (fd, TIOCSWINSZ, &tty_size);
+#else
+    return 0;
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -404,7 +415,7 @@ check_sid (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-init_raw_mode ()
+init_raw_mode (void)
 {
     static int initialized = 0;
 
@@ -427,6 +438,44 @@ init_raw_mode ()
         raw_mode.c_cc[VMIN] = 1;        /* soon as a character is available   */
         initialized = 1;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Wait until the subshell dies or stops.  If it stops, make it resume.
+ * Possibly modifies the globals `subshell_alive' and `subshell_stopped'
+ */
+
+static void
+synchronize (void)
+{
+    sigset_t sigchld_mask, old_mask;
+
+    sigemptyset (&sigchld_mask);
+    sigaddset (&sigchld_mask, SIGCHLD);
+    sigprocmask (SIG_BLOCK, &sigchld_mask, &old_mask);
+
+    /*
+     * SIGCHLD should not be blocked, but we unblock it just in case.
+     * This is known to be useful for cygwin 1.3.12 and older.
+     */
+    sigdelset (&old_mask, SIGCHLD);
+
+    /* Wait until the subshell has stopped */
+    while (subshell_alive && !subshell_stopped)
+        sigsuspend (&old_mask);
+
+    if (subshell_state != ACTIVE)
+    {
+        /* Discard all remaining data from stdin to the subshell */
+        tcflush (subshell_pty_slave, TCIFLUSH);
+    }
+
+    subshell_stopped = FALSE;
+    kill (subshell_pid, SIGCONT);
+
+    sigprocmask (SIG_SETMASK, &old_mask, NULL);
+    /* We can't do any better without modifying the shell(s) */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -558,49 +607,11 @@ feed_subshell (int how, int fail_on_error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Wait until the subshell dies or stops.  If it stops, make it resume.
- * Possibly modifies the globals `subshell_alive' and `subshell_stopped'
- */
-
-static void
-synchronize (void)
-{
-    sigset_t sigchld_mask, old_mask;
-
-    sigemptyset (&sigchld_mask);
-    sigaddset (&sigchld_mask, SIGCHLD);
-    sigprocmask (SIG_BLOCK, &sigchld_mask, &old_mask);
-
-    /*
-     * SIGCHLD should not be blocked, but we unblock it just in case.
-     * This is known to be useful for cygwin 1.3.12 and older.
-     */
-    sigdelset (&old_mask, SIGCHLD);
-
-    /* Wait until the subshell has stopped */
-    while (subshell_alive && !subshell_stopped)
-        sigsuspend (&old_mask);
-
-    if (subshell_state != ACTIVE)
-    {
-        /* Discard all remaining data from stdin to the subshell */
-        tcflush (subshell_pty_slave, TCIFLUSH);
-    }
-
-    subshell_stopped = FALSE;
-    kill (subshell_pid, SIGCONT);
-
-    sigprocmask (SIG_SETMASK, &old_mask, NULL);
-    /* We can't do any better without modifying the shell(s) */
-}
-
 /* pty opening functions */
 
 #ifdef HAVE_GRANTPT
 
 /* System V version of pty_open_master */
-
 static int
 pty_open_master (char *pty_name)
 {
@@ -635,8 +646,8 @@ pty_open_master (char *pty_name)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** System V version of pty_open_slave */
 
+/** System V version of pty_open_slave */
 static int
 pty_open_slave (const char *pty_name)
 {
@@ -688,6 +699,7 @@ pty_open_slave (const char *pty_name)
 #else /* !HAVE_GRANTPT */
 
 /* --------------------------------------------------------------------------------------------- */
+
 /** BSD version of pty_open_master */
 static int
 pty_open_master (char *pty_name)
@@ -725,8 +737,8 @@ pty_open_master (char *pty_name)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** BSD version of pty_open_slave */
 
+/** BSD version of pty_open_slave */
 static int
 pty_open_slave (const char *pty_name)
 {
@@ -1043,34 +1055,13 @@ do_update_prompt (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-/** Resize given terminal using TIOCSWINSZ, return ioctl() result */
-static int
-resize_tty (int fd)
-{
-#if defined TIOCSWINSZ
-    struct winsize tty_size;
-
-    tty_size.ws_row = LINES;
-    tty_size.ws_col = COLS;
-    tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
-
-    return ioctl (fd, TIOCSWINSZ, &tty_size);
-#else
-    return 0;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Resize subshell_pty */
 
 void
 resize_subshell (void)
 {
-    if (use_subshell == 0)
-        return;
-
-    resize_tty (subshell_pty);
+    if (use_subshell != 0)
+        resize_tty (subshell_pty);
 }
 
 /* --------------------------------------------------------------------------------------------- */
