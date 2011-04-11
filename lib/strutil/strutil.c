@@ -338,7 +338,7 @@ str_test_encoding_class (const char *encoding, const char **table)
 }
 
 static void
-str_choose_str_functions ()
+str_choose_str_functions (void)
 {
     if (str_test_encoding_class (codeset, str_utf8_encodings))
     {
