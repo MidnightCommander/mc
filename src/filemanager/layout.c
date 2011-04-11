@@ -26,22 +26,10 @@
 
 #include <config.h>
 
-#include <signal.h>
-#include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sys/stat.h>
-
-     /*
-      * If TIOCGWINSZ supported, make it available here, because window-
-      * resizing code depends on it...
-      */
-#ifdef HAVE_SYS_IOCTL_H
-#include <sys/ioctl.h>
-#endif
-#include <termios.h>
 #include <unistd.h>
 
 #include "lib/global.h"
@@ -49,7 +37,6 @@
 #include "lib/skin.h"
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"
-#include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"        /* For vfs_translate_url() */
 #include "lib/strutil.h"

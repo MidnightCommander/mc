@@ -55,7 +55,9 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
+#endif
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>

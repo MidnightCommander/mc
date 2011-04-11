@@ -26,6 +26,13 @@
 
 #include <config.h>
 
+/* If TIOCGWINSZ supported, make it available here, because window resizing code
+ * depends on it... */
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
+#include <termios.h>
+
 #include "lib/global.h"
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/win.h"        /* do_enter_ca_mode() */
@@ -94,6 +101,7 @@ dialog_switch_goto (GList * dlg)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#if defined TIOCGWINSZ
 static void
 dlg_resize_cb (void *data, void *user_data)
 {
@@ -102,6 +110,7 @@ dlg_resize_cb (void *data, void *user_data)
     (void) user_data;
     d->callback (d, NULL, DLG_RESIZE, 0, NULL);
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
