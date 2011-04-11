@@ -170,12 +170,12 @@ static struct link *linklist = NULL;
 static struct link *erase_list;
 
 /*
- * In copy_dir_dir we use two additional single linked lists: The first - 
- * variable name `parent_dirs' - holds information about already copied 
- * directories and is used to detect cyclic symbolic links. 
- * The second (`dest_dirs' below) holds information about just created 
- * target directories and is used to detect when an directory is copied 
- * into itself (we don't want to copy infinitly). 
+ * In copy_dir_dir we use two additional single linked lists: The first -
+ * variable name `parent_dirs' - holds information about already copied
+ * directories and is used to detect cyclic symbolic links.
+ * The second (`dest_dirs' below) holds information about just created
+ * target directories and is used to detect when an directory is copied
+ * into itself (we don't want to copy infinitly).
  * Both lists don't use the linkcount and name structure members of struct
  * link.
  */
@@ -184,17 +184,6 @@ static struct link *dest_dirs = NULL;
 static FileProgressStatus transform_error = FILE_CONT;
 
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-static FileProgressStatus query_replace (FileOpContext * ctx, const char *destname,
-                                         struct stat *_s_stat, struct stat *_d_stat);
-static FileProgressStatus query_recursive (FileOpContext * ctx, const char *s);
-static FileProgressStatus do_file_error (const char *str);
-static FileProgressStatus erase_dir_iff_empty (FileOpContext * ctx, const char *s);
-static FileProgressStatus erase_file (FileOpTotalContext * tctx, FileOpContext * ctx,
-                                      const char *s, gboolean is_toplevel_file);
-static FileProgressStatus files_error (const char *format, const char *file1, const char *file2);
-
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
@@ -484,6 +473,186 @@ warn_same_file (const char *fmt, const char *a, const char *b)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* {{{ Query/status report routines */
+
+static FileProgressStatus
+real_do_file_error (enum OperationMode mode, const char *error)
+{
+    int result;
+    const char *msg;
+
+    msg = mode == Foreground ? MSG_ERROR : _("Background process error");
+    result =
+        query_dialog (msg, error, D_ERROR, 4, _("&Skip"), _("Ski&p all"), _("&Retry"), _("&Abort"));
+
+    switch (result)
+    {
+    case 0:
+        do_refresh ();
+        return FILE_SKIP;
+
+    case 1:
+        do_refresh ();
+        return FILE_SKIPALL;
+
+    case 2:
+        do_refresh ();
+        return FILE_RETRY;
+
+    case 3:
+    default:
+        return FILE_ABORT;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+real_query_recursive (FileOpContext * ctx, enum OperationMode mode, const char *s)
+{
+    gchar *text;
+
+    if (ctx->recursive_result < RECURSIVE_ALWAYS)
+    {
+        const char *msg = mode == Foreground
+            ? _("\nDirectory not empty.\nDelete it recursively?")
+            : _("\nBackground process: Directory not empty.\nDelete it recursively?");
+        text = g_strconcat (_("Delete:"), " ", path_trunc (s, 30), (char *) NULL);
+
+        if (safe_delete)
+            query_set_sel (1);
+
+        ctx->recursive_result =
+            (FileCopyMode) query_dialog (text, msg, D_ERROR, 5,
+                                         _("&Yes"), _("&No"), _("A&ll"), _("Non&e"), _("&Abort"));
+
+        if (ctx->recursive_result != RECURSIVE_ABORT)
+            do_refresh ();
+        g_free (text);
+    }
+
+    switch (ctx->recursive_result)
+    {
+    case RECURSIVE_YES:
+    case RECURSIVE_ALWAYS:
+        return FILE_CONT;
+
+    case RECURSIVE_NO:
+    case RECURSIVE_NEVER:
+        return FILE_SKIP;
+
+    case RECURSIVE_ABORT:
+    default:
+        return FILE_ABORT;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef WITH_BACKGROUND
+static FileProgressStatus
+do_file_error (const char *str)
+{
+    union
+    {
+        void *p;
+          FileProgressStatus (*f) (enum OperationMode, const char *);
+    } pntr;
+    pntr.f = real_do_file_error;
+
+    if (mc_global.we_are_background)
+        return parent_call (pntr.p, NULL, 1, strlen (str), str);
+    else
+        return real_do_file_error (Foreground, str);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+query_recursive (FileOpContext * ctx, const char *s)
+{
+    union
+    {
+        void *p;
+          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *);
+    } pntr;
+    pntr.f = real_query_recursive;
+
+    if (mc_global.we_are_background)
+        return parent_call (pntr.p, ctx, 1, strlen (s), s);
+    else
+        return real_query_recursive (ctx, Foreground, s);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
+               struct stat *_d_stat)
+{
+    union
+    {
+        void *p;
+          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
+                                   struct stat *, struct stat *);
+    } pntr;
+    pntr.f = file_progress_real_query_replace;
+
+    if (mc_global.we_are_background)
+        return parent_call (pntr.p, ctx, 3, strlen (destname), destname,
+                            sizeof (struct stat), _s_stat, sizeof (struct stat), _d_stat);
+    else
+        return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
+}
+
+#else
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+do_file_error (const char *str)
+{
+    return real_do_file_error (Foreground, str);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+query_recursive (FileOpContext * ctx, const char *s)
+{
+    return real_query_recursive (ctx, Foreground, s);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
+               struct stat *_d_stat)
+{
+    return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
+}
+
+#endif /* !WITH_BACKGROUND */
+
+/* --------------------------------------------------------------------------------------------- */
+/** Report error with two files */
+
+static FileProgressStatus
+files_error (const char *format, const char *file1, const char *file2)
+{
+    char buf[BUF_MEDIUM];
+    char *nfile1 = g_strdup (path_trunc (file1, 15));
+    char *nfile2 = g_strdup (path_trunc (file2, 15));
+
+    g_snprintf (buf, sizeof (buf), format, nfile1, nfile2, unix_error_string (errno));
+
+    g_free (nfile1);
+    g_free (nfile2);
+
+    return do_file_error (buf);
+}
+/* }}} */
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
@@ -538,7 +707,6 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 
 /* {{{ Move routines */
 static FileProgressStatus
@@ -918,6 +1086,7 @@ panel_compute_totals (const WPanel * panel, const void *ui,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /** Initialize variables for progress bars */
 static FileProgressStatus
 panel_operate_init_totals (FileOperation operation,
@@ -1074,186 +1243,6 @@ end_bg_process (FileOpContext * ctx, enum OperationMode mode)
     return 1;
 }
 #endif
-/* }}} */
-
-/* --------------------------------------------------------------------------------------------- */
-/* {{{ Query/status report routines */
-
-static FileProgressStatus
-real_do_file_error (enum OperationMode mode, const char *error)
-{
-    int result;
-    const char *msg;
-
-    msg = mode == Foreground ? MSG_ERROR : _("Background process error");
-    result =
-        query_dialog (msg, error, D_ERROR, 4, _("&Skip"), _("Ski&p all"), _("&Retry"), _("&Abort"));
-
-    switch (result)
-    {
-    case 0:
-        do_refresh ();
-        return FILE_SKIP;
-
-    case 1:
-        do_refresh ();
-        return FILE_SKIPALL;
-
-    case 2:
-        do_refresh ();
-        return FILE_RETRY;
-
-    case 3:
-    default:
-        return FILE_ABORT;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Report error with two files */
-
-static FileProgressStatus
-files_error (const char *format, const char *file1, const char *file2)
-{
-    char buf[BUF_MEDIUM];
-    char *nfile1 = g_strdup (path_trunc (file1, 15));
-    char *nfile2 = g_strdup (path_trunc (file2, 15));
-
-    g_snprintf (buf, sizeof (buf), format, nfile1, nfile2, unix_error_string (errno));
-
-    g_free (nfile1);
-    g_free (nfile2);
-
-    return do_file_error (buf);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static FileProgressStatus
-real_query_recursive (FileOpContext * ctx, enum OperationMode mode, const char *s)
-{
-    gchar *text;
-
-    if (ctx->recursive_result < RECURSIVE_ALWAYS)
-    {
-        const char *msg = mode == Foreground
-            ? _("\nDirectory not empty.\nDelete it recursively?")
-            : _("\nBackground process: Directory not empty.\nDelete it recursively?");
-        text = g_strconcat (_("Delete:"), " ", path_trunc (s, 30), (char *) NULL);
-
-        if (safe_delete)
-            query_set_sel (1);
-
-        ctx->recursive_result =
-            (FileCopyMode) query_dialog (text, msg, D_ERROR, 5,
-                                         _("&Yes"), _("&No"), _("A&ll"), _("Non&e"), _("&Abort"));
-
-        if (ctx->recursive_result != RECURSIVE_ABORT)
-            do_refresh ();
-        g_free (text);
-    }
-
-    switch (ctx->recursive_result)
-    {
-    case RECURSIVE_YES:
-    case RECURSIVE_ALWAYS:
-        return FILE_CONT;
-
-    case RECURSIVE_NO:
-    case RECURSIVE_NEVER:
-        return FILE_SKIP;
-
-    case RECURSIVE_ABORT:
-    default:
-        return FILE_ABORT;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-#ifdef WITH_BACKGROUND
-static FileProgressStatus
-do_file_error (const char *str)
-{
-    union
-    {
-        void *p;
-          FileProgressStatus (*f) (enum OperationMode, const char *);
-    } pntr;
-    pntr.f = real_do_file_error;
-
-    if (mc_global.we_are_background)
-        return parent_call (pntr.p, NULL, 1, strlen (str), str);
-    else
-        return real_do_file_error (Foreground, str);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static FileProgressStatus
-query_recursive (FileOpContext * ctx, const char *s)
-{
-    union
-    {
-        void *p;
-          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *);
-    } pntr;
-    pntr.f = real_query_recursive;
-
-    if (mc_global.we_are_background)
-        return parent_call (pntr.p, ctx, 1, strlen (s), s);
-    else
-        return real_query_recursive (ctx, Foreground, s);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static FileProgressStatus
-query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
-               struct stat *_d_stat)
-{
-    union
-    {
-        void *p;
-          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
-                                   struct stat *, struct stat *);
-    } pntr;
-    pntr.f = file_progress_real_query_replace;
-
-    if (mc_global.we_are_background)
-        return parent_call (pntr.p, ctx, 3, strlen (destname), destname,
-                            sizeof (struct stat), _s_stat, sizeof (struct stat), _d_stat);
-    else
-        return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
-}
-
-#else
-/* --------------------------------------------------------------------------------------------- */
-
-static FileProgressStatus
-do_file_error (const char *str)
-{
-    return real_do_file_error (Foreground, str);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static FileProgressStatus
-query_recursive (FileOpContext * ctx, const char *s)
-{
-    return real_query_recursive (ctx, Foreground, s);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static FileProgressStatus
-query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
-               struct stat *_d_stat)
-{
-    return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
-}
-
-#endif /* !WITH_BACKGROUND */
 /* }}} */
 
 /* --------------------------------------------------------------------------------------------- */

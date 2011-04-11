@@ -77,10 +77,6 @@ typedef enum
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flags);
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * broadcast a message to all the widgets in a dialog that have
  * the options set to flags. If flags is zero, the message is sent

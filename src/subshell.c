@@ -174,14 +174,6 @@ static int prompt_pos;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-static void init_raw_mode (void);
-static gboolean feed_subshell (int how, int fail_on_error);
-static void synchronize (void);
-static int pty_open_master (char *pty_name);
-static int pty_open_slave (const char *pty_name);
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  *  Write all data, even if the write() call is interrupted.
  */
@@ -430,6 +422,44 @@ init_raw_mode ()
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Wait until the subshell dies or stops.  If it stops, make it resume.
+ * Possibly modifies the globals `subshell_alive' and `subshell_stopped'
+ */
+
+static void
+synchronize (void)
+{
+    sigset_t sigchld_mask, old_mask;
+
+    sigemptyset (&sigchld_mask);
+    sigaddset (&sigchld_mask, SIGCHLD);
+    sigprocmask (SIG_BLOCK, &sigchld_mask, &old_mask);
+
+    /*
+     * SIGCHLD should not be blocked, but we unblock it just in case.
+     * This is known to be useful for cygwin 1.3.12 and older.
+     */
+    sigdelset (&old_mask, SIGCHLD);
+
+    /* Wait until the subshell has stopped */
+    while (subshell_alive && !subshell_stopped)
+        sigsuspend (&old_mask);
+
+    if (subshell_state != ACTIVE)
+    {
+        /* Discard all remaining data from stdin to the subshell */
+        tcflush (subshell_pty_slave, TCIFLUSH);
+    }
+
+    subshell_stopped = FALSE;
+    kill (subshell_pid, SIGCONT);
+
+    sigprocmask (SIG_SETMASK, &old_mask, NULL);
+    /* We can't do any better without modifying the shell(s) */
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Feed the subshell our keyboard input until it says it's finished */
 
 static gboolean
@@ -558,43 +588,6 @@ feed_subshell (int how, int fail_on_error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Wait until the subshell dies or stops.  If it stops, make it resume.
- * Possibly modifies the globals `subshell_alive' and `subshell_stopped'
- */
-
-static void
-synchronize (void)
-{
-    sigset_t sigchld_mask, old_mask;
-
-    sigemptyset (&sigchld_mask);
-    sigaddset (&sigchld_mask, SIGCHLD);
-    sigprocmask (SIG_BLOCK, &sigchld_mask, &old_mask);
-
-    /*
-     * SIGCHLD should not be blocked, but we unblock it just in case.
-     * This is known to be useful for cygwin 1.3.12 and older.
-     */
-    sigdelset (&old_mask, SIGCHLD);
-
-    /* Wait until the subshell has stopped */
-    while (subshell_alive && !subshell_stopped)
-        sigsuspend (&old_mask);
-
-    if (subshell_state != ACTIVE)
-    {
-        /* Discard all remaining data from stdin to the subshell */
-        tcflush (subshell_pty_slave, TCIFLUSH);
-    }
-
-    subshell_stopped = FALSE;
-    kill (subshell_pid, SIGCONT);
-
-    sigprocmask (SIG_SETMASK, &old_mask, NULL);
-    /* We can't do any better without modifying the shell(s) */
-}
-
 /* pty opening functions */
 
 #ifdef HAVE_GRANTPT
@@ -747,6 +740,7 @@ pty_open_slave (const char *pty_name)
     return pty_slave;
 }
 #endif /* !HAVE_GRANTPT */
+
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -1072,7 +1066,6 @@ exit_subshell (void)
 
     return subshell_quit;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /**
