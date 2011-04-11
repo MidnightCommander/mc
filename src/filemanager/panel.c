@@ -342,12 +342,6 @@ typedef struct format_e
 
 /*** file scope variables ************************************************************************/
 
-static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
-static int panel_event (Gpm_Event * event, void *);
-static void paint_frame (WPanel * panel);
-static const char *panel_format (WPanel * panel);
-static const char *mini_status_format (WPanel * panel);
-
 static char *panel_sort_up_sign = NULL;
 static char *panel_sort_down_sign = NULL;
 
@@ -1635,7 +1629,6 @@ panel_format (WPanel * panel)
 {
     switch (panel->list_type)
     {
-
     case list_long:
         return "full perm space nlink space owner space group space size space mtime space name";
 

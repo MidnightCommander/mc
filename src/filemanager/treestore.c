@@ -187,7 +187,7 @@ tree_store_load_from (char *name)
     FILE *file;
     char buffer[MC_MAXPATHLEN + 20], oldname[MC_MAXPATHLEN];
     char *different;
-    int len, common;
+    int common;
     int do_load;
 
     g_return_val_if_fail (name != NULL, FALSE);
@@ -237,8 +237,6 @@ tree_store_load_from (char *name)
             scanned = buffer[0] == '1';
 
             lc_name = decode (buffer + 2);
-
-            len = strlen (lc_name);
             if (lc_name[0] != PATH_SEP)
             {
                 /* Clear-text decompression */
