@@ -1067,7 +1067,8 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **
         ERRNOR (EIO, NULL);
 
     super = vfs_s_new_super (me);
-    result = MEDATA->open_archive (me, super, archive_name, op);
+    if (MEDATA->open_archive != NULL)
+        result = MEDATA->open_archive (me, super, archive_name, op);
     if (result == -1)
     {
         vfs_s_free_super (me, super);
