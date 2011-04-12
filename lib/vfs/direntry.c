@@ -1198,6 +1198,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     fh->handle = -1;
     fh->changed = was_changed;
     fh->linear = 0;
+    fh->data = NULL;
 
     if (IS_LINEAR (flags))
     {
