@@ -62,9 +62,10 @@ typedef enum
 /* Dialog state */
 typedef enum
 {
-    DLG_ACTIVE = 0,             /* Dialog is visible and active */
-    DLG_SUSPENDED = 1,          /* Dialog is suspended */
-    DLG_CLOSED = 2              /* Dialog is closed */
+    DLG_CONSTRUCT = 0,          /* DIalog has been constructed but bot run yet */
+    DLG_ACTIVE = 1,             /* Dialog is visible and active */
+    DLG_SUSPENDED = 2,          /* Dialog is suspended */
+    DLG_CLOSED = 3              /* Dialog is closed */
 } dlg_state_t;
 
 /* Dialog color constants */
@@ -159,8 +160,10 @@ Dlg_head *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
 
 void dlg_set_default_colors (void);
 
-int add_widget_autopos (Dlg_head * dest, void *w, widget_pos_flags_t pos_flags);
-int add_widget (Dlg_head * dest, void *w);
+unsigned long add_widget_autopos (Dlg_head * dest, void *w, widget_pos_flags_t pos_flags, const void *before);
+unsigned long add_widget (Dlg_head * dest, void *w);
+unsigned long add_widget_before (Dlg_head * h, void *w, void *before);
+void del_widget (void *w);
 
 /* sets size of dialog, leaving positioning to automatic mehtods
    according to dialog flags */
@@ -200,7 +203,7 @@ void dlg_stop (Dlg_head * h);
 void dlg_select_widget (void *widget);
 void dlg_one_up (Dlg_head * h);
 void dlg_one_down (Dlg_head * h);
-int dlg_focus (Dlg_head * h);
+gboolean dlg_focus (Dlg_head * h);
 Widget *find_widget_type (const Dlg_head * h, callback_fn callback);
 Widget *dlg_find_by_id (const Dlg_head * h, unsigned long id);
 void dlg_select_by_id (const Dlg_head * h, unsigned long id);

@@ -891,7 +891,7 @@ set_display_type (int num, panel_view_mode_t type)
     /* same state.  Maybe we could just kill it and then replace it  */
     if ((midnight_dlg != NULL) && (old_widget != NULL))
     {
-        if (old_widget == view_listing)
+        if (old_type == view_listing)
         {
             /* save and write directory history of panel
              * ... and other histories of midnight_dlg  */
