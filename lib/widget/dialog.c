@@ -849,7 +849,7 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags)
     widget->y += h->y;
     widget->owner = h;
     widget->pos_flags = pos_flags;
-    widget->id = g_list_length (h->widgets);
+    widget->id = h->widget_id++;
 
     if ((h->flags & DLG_REVERSE) != 0)
         h->widgets = g_list_prepend (h->widgets, widget);
@@ -954,7 +954,7 @@ find_widget_type (const Dlg_head * h, callback_fn callback)
 /** Find the widget with the given id */
 
 Widget *
-dlg_find_by_id (const Dlg_head * h, unsigned int id)
+dlg_find_by_id (const Dlg_head * h, unsigned long id)
 {
     GList *w;
 
@@ -966,7 +966,7 @@ dlg_find_by_id (const Dlg_head * h, unsigned int id)
 /** Find the widget with the given id in the dialog h and select it */
 
 void
-dlg_select_by_id (const Dlg_head * h, unsigned int id)
+dlg_select_by_id (const Dlg_head * h, unsigned long id)
 {
     Widget *w;
 
