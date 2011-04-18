@@ -1447,7 +1447,7 @@ void
 sftplink_cmd (void)
 {
     nice_cd (_("SFTP to machine"), _(machine_str),
-             "[SFTP File System]", ":sftplink_cmd: SFTP to machine ", "/#sftp:", 1);
+             "[SFTP (SSH File Transfer Protocol) filesystem]", ":sftplink_cmd: SFTP to machine ", "/#sftp:", 1);
 }
 #endif /* ENABLE_VFS_FTP */
 
