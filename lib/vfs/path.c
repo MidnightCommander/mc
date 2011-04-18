@@ -34,6 +34,8 @@
 
 #include "lib/global.h"
 
+#include "vfs.h"
+#include "utilvfs.h"
 #include "path.h"
 
 /*** global variables ****************************************************************************/
@@ -67,37 +69,42 @@ vfs_path_to_str (const vfs_path_t * path)
         vfs_path_element_t *element = vfs_path_get_by_index (path, element_index);
         g_string_append (buffer, element->path);
     }
-    return g_string_free(buffer, FALSE);
+    return g_string_free (buffer, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 vfs_path_t *
-vfs_path_from_str (const char * path_str)
+vfs_path_from_str (const char *path_str)
 {
+    char *file;
     vfs_path_t *path;
     vfs_path_element_t *element;
 
     if (path_str == NULL)
         return NULL;
 
-    path = vfs_path_new();
+    file = vfs_canon_and_translate (path_str);
+    if (file == NULL)
+        return NULL;
 
-    element = g_new0(vfs_path_element_t,1);
-    element->path = g_strdup(path_str); // FIXME!!!
+    path = vfs_path_new ();
 
-    g_ptr_array_add(path->path,element);
+    element = g_new0 (vfs_path_element_t, 1);
+    element->class = vfs_get_class (file);
 
+    g_ptr_array_add (path->path, element);
+    path->unparsed = file;
     return path;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 vfs_path_t *
-vfs_path_new(void)
+vfs_path_new (void)
 {
     vfs_path_t *path;
-    path = g_new0(vfs_path_t,1);
+    path = g_new0 (vfs_path_t, 1);
     path->path = g_ptr_array_new ();
     return path;
 }
@@ -105,7 +112,7 @@ vfs_path_new(void)
 /* --------------------------------------------------------------------------------------------- */
 
 size_t
-vfs_path_length (const vfs_path_t *path)
+vfs_path_length (const vfs_path_t * path)
 {
     return path->path->len;
 }
@@ -113,22 +120,22 @@ vfs_path_length (const vfs_path_t *path)
 /* --------------------------------------------------------------------------------------------- */
 
 vfs_path_element_t *
-vfs_path_get_by_index (const vfs_path_t *path, size_t element_index)
+vfs_path_get_by_index (const vfs_path_t * path, size_t element_index)
 {
-    return g_ptr_array_index(path->path, element_index);
+    return g_ptr_array_index (path->path, element_index);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-vfs_path_element_free(vfs_path_element_t *element)
+vfs_path_element_free (vfs_path_element_t * element)
 {
     if (element == NULL)
         return;
 
-    g_free(element->path);
-    g_free(element->encoding);
-    g_free(element);
+    g_free (element->path);
+    g_free (element->encoding);
+    g_free (element);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -141,8 +148,8 @@ vfs_path_free (vfs_path_t * path)
 
     g_ptr_array_foreach (path->path, (GFunc) vfs_path_element_free, NULL);
     g_ptr_array_free (path->path, TRUE);
-    g_free(path->unparsed);
-    g_free(path);
+    g_free (path->unparsed);
+    g_free (path);
 }
 
 /* --------------------------------------------------------------------------------------------- */

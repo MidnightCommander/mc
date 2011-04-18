@@ -48,10 +48,11 @@
 #include "lib/global.h"
 
 #include "lib/widget.h"         /* message() */
-#include "lib/strutil.h"       /* str_crt_conv_from() */
+#include "lib/strutil.h"        /* str_crt_conv_from() */
 
 #include "vfs.h"
 #include "utilvfs.h"
+#include "path.h"
 #include "gc.h"
 
 extern GString *vfs_str_buffer;
@@ -184,42 +185,39 @@ mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
 int
 mc_open (const char *filename, int flags, ...)
 {
-    int mode = 0;
-    void *info;
-    va_list ap;
-    char *file;
-    struct vfs_class *vfs;
+    int mode = 0, result = -1;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    file = vfs_canon_and_translate (filename);
-    if (file == NULL)
+    vpath = vfs_path_from_str (filename);
+    if (vpath == NULL)
         return -1;
-
-    vfs = vfs_get_class (file);
 
     /* Get the mode flag */
     if (flags & O_CREAT)
     {
+        va_list ap;
         va_start (ap, flags);
         mode = va_arg (ap, int);
         va_end (ap);
     }
 
-    if (vfs->open == NULL)
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    if (path_element != NULL && path_element->class->open != NULL)
     {
-        g_free (file);
+        void *info;
+        /* open must be supported */
+        info = path_element->class->open (path_element->class, vpath->unparsed, flags, mode);
+        if (info == NULL)
+            errno = vfs_ferrno (path_element->class);
+        else
+            result = vfs_new_handle (path_element->class, info);
+    }
+    else
         errno = -EOPNOTSUPP;
-        return -1;
-    }
 
-    info = vfs->open (vfs, file, flags, mode);  /* open must be supported */
-    g_free (file);
-    if (info == NULL)
-    {
-        errno = vfs_ferrno (vfs);
-        return -1;
-    }
-
-    return vfs_new_handle (vfs, info);
+    vfs_path_free (vpath);
+    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -229,33 +227,42 @@ mc_open (const char *filename, int flags, ...)
 #define MC_NAMEOP(name, inarg, callarg) \
 int mc_##name inarg \
 { \
-    struct vfs_class *vfs; \
     int result; \
-    char *mpath; \
-    mpath = vfs_canon_and_translate (path); \
-    if (mpath == NULL)  \
+    vfs_path_t *vpath; \
+    vfs_path_element_t *path_element; \
+\
+    vpath = vfs_path_from_str (path); \
+    if (vpath == NULL) \
         return -1; \
-    vfs = vfs_get_class (mpath); \
-    if (vfs == NULL) \
+\
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1); \
+    if (path_element == NULL) \
     { \
-        g_free (mpath); \
+        vfs_path_free(vpath); \
         return -1; \
     } \
-    result = vfs->name != NULL ? vfs->name callarg : -1; \
-    g_free (mpath); \
+\
+    if (path_element->class == NULL) \
+    { \
+        vfs_path_free(vpath); \
+        return -1; \
+    } \
+\
+    result = path_element->class != NULL ? path_element->class->name callarg : -1; \
     if (result == -1) \
-        errno = vfs->name != NULL ? vfs_ferrno (vfs) : E_NOTSUPP; \
+        errno = path_element->class->name != NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP; \
+    vfs_path_free(vpath); \
     return result; \
 }
 
-MC_NAMEOP (chmod, (const char *path, mode_t mode), (vfs, mpath, mode))
-MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vfs, mpath, owner, group))
-MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (vfs, mpath, times))
-MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (vfs, mpath, buf, bufsiz))
-MC_NAMEOP (unlink, (const char *path), (vfs, mpath))
-MC_NAMEOP (mkdir, (const char *path, mode_t mode), (vfs, mpath, mode))
-MC_NAMEOP (rmdir, (const char *path), (vfs, mpath))
-MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vfs, mpath, mode, dev))
+MC_NAMEOP (chmod, (const char *path, mode_t mode), (path_element->class, vpath->unparsed, mode))
+MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (path_element->class, vpath->unparsed, owner, group))
+MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (path_element->class, vpath->unparsed, times))
+MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (path_element->class, vpath->unparsed, buf, bufsiz))
+MC_NAMEOP (unlink, (const char *path), (path_element->class, vpath->unparsed))
+MC_NAMEOP (mkdir, (const char *path, mode_t mode), (path_element->class, vpath->unparsed, mode))
+MC_NAMEOP (rmdir, (const char *path), (path_element->class, vpath->unparsed))
+MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (path_element->class, vpath->unparsed, mode, dev))
 
 /* *INDENT-ON* */
 
@@ -264,15 +271,22 @@ MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vfs, mpath, mode,
 int
 mc_symlink (const char *name1, const char *path)
 {
-    struct vfs_class *vfs;
-    int result;
-    char *mpath;
+    int result = -1;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
     char *lpath;
     char *tmp;
 
-    mpath = vfs_canon_and_translate (path);
-    if (mpath == NULL)
+    vpath = vfs_path_from_str (path);
+    if (vpath == NULL)
         return -1;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    if (path_element == NULL)
+    {
+        vfs_path_free (vpath);
+        return -1;
+    }
 
     tmp = g_strdup (name1);
     lpath = vfs_translate_path_n (tmp);
@@ -280,19 +294,17 @@ mc_symlink (const char *name1, const char *path)
 
     if (lpath != NULL)
     {
-        vfs = vfs_get_class (mpath);
-        result = vfs->symlink != NULL ? vfs->symlink (vfs, lpath, mpath) : -1;
-        g_free (lpath);
-        g_free (mpath);
-
+        result =
+            path_element->class->symlink !=
+            NULL ? path_element->class->symlink (path_element->class, lpath,
+                                                 vpath->unparsed) : -1;
         if (result == -1)
-            errno = vfs->symlink != NULL ? vfs_ferrno (vfs) : E_NOTSUPP;
-        return result;
+            errno =
+                path_element->class->symlink != NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP;
     }
-
-    g_free (mpath);
-
-    return -1;
+    g_free (lpath);
+    vfs_path_free (vpath);
+    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -323,30 +335,38 @@ MC_HANDLEOP (write, (int handle, const void *buf, size_t nbyte), (vfs_class_data
 #define MC_RENAMEOP(name) \
 int mc_##name (const char *fname1, const char *fname2) \
 { \
-    struct vfs_class *vfs; \
     int result; \
-    char *name2, *name1; \
-    name1 = vfs_canon_and_translate (fname1); \
-    if (name1 == NULL) \
+    vfs_path_t *vpath1, *vpath2; \
+    vfs_path_element_t *path_element1, *path_element2; \
+\
+    vpath1 = vfs_path_from_str (fname1); \
+    if (vpath1 == NULL) \
         return -1; \
-    name2 = vfs_canon_and_translate (fname2); \
-    if (name2 == NULL) { \
-        g_free (name1); \
+\
+    vpath2 = vfs_path_from_str (fname2); \
+    if (vpath2 == NULL) \
+    { \
+        vfs_path_free(vpath1); \
         return -1; \
-    } \
-    vfs = vfs_get_class (name1); \
-    if (vfs != vfs_get_class (name2)) \
+    }\
+    path_element1 = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1); \
+    path_element2 = vfs_path_get_by_index (vpath2, vfs_path_length (vpath2) - 1); \
+\
+    if (path_element1->class != path_element2->class) \
     { \
         errno = EXDEV; \
-        g_free (name1); \
-        g_free (name2); \
+        vfs_path_free(vpath1); \
+        vfs_path_free(vpath2); \
         return -1; \
-    } \
-    result = vfs->name != NULL ? vfs->name (vfs, name1, name2) : -1; \
-    g_free (name1); \
-    g_free (name2); \
+    }\
+\
+    result = path_element1->class->name != NULL \
+        ? path_element1->class->name (path_element1->class, vpath1->unparsed, vpath2->unparsed) \
+        : -1; \
     if (result == -1) \
-        errno = vfs->name != NULL ? vfs_ferrno (vfs) : E_NOTSUPP; \
+        errno = path_element1->class->name != NULL ? vfs_ferrno (path_element1->class) : E_NOTSUPP; \
+    vfs_path_free(vpath1); \
+    vfs_path_free(vpath2); \
     return result; \
 }
 
@@ -373,21 +393,23 @@ mc_ctl (int handle, int ctlop, void *arg)
 int
 mc_setctl (const char *path, int ctlop, void *arg)
 {
-    struct vfs_class *vfs;
     int result = -1;
-    char *mpath;
 
-    if (path == NULL)
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
+
+    vpath = vfs_path_from_str (path);
+    if (vpath == NULL)
         vfs_die ("You don't want to pass NULL to mc_setctl.");
 
-    mpath = vfs_canon_and_translate (path);
-    if (mpath != NULL)
-    {
-        vfs = vfs_get_class (mpath);
-        result = vfs->setctl != NULL ? vfs->setctl (vfs, mpath, ctlop, arg) : 0;
-        g_free (mpath);
-    }
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    if (path_element != NULL && path_element->class != NULL)
+        result =
+            path_element->class->setctl != NULL ? path_element->class->setctl (path_element->class,
+                                                                               vpath->unparsed,
+                                                                               ctlop, arg) : 0;
 
+    vfs_path_free (vpath);
     return result;
 }
 
@@ -554,29 +576,26 @@ mc_closedir (DIR * dirp)
 int
 mc_stat (const char *filename, struct stat *buf)
 {
-    struct vfs_class *vfs;
-    int result;
-    char *path;
+    int result = -1;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    path = vfs_canon_and_translate (filename);
-
-    if (path == NULL)
+    vpath = vfs_path_from_str (filename);
+    if (vpath == NULL)
         return -1;
 
-    vfs = vfs_get_class (path);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    if (vfs == NULL)
+    if (path_element != NULL && path_element->class != NULL)
     {
-        g_free (path);
-        return -1;
+        result =
+            path_element->class->stat ? (*path_element->class->stat) (path_element->class,
+                                                                      vpath->unparsed, buf) : -1;
+        if (result == -1)
+            errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
     }
 
-    result = vfs->stat ? (*vfs->stat) (vfs, path, buf) : -1;
-
-    g_free (path);
-
-    if (result == -1)
-        errno = vfs->name ? vfs_ferrno (vfs) : E_NOTSUPP;
+    vfs_path_free (vpath);
     return result;
 }
 
@@ -585,26 +604,27 @@ mc_stat (const char *filename, struct stat *buf)
 int
 mc_lstat (const char *filename, struct stat *buf)
 {
-    struct vfs_class *vfs;
-    int result;
-    char *path;
+    int result = -1;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    path = vfs_canon_and_translate (filename);
-
-    if (path == NULL)
+    vpath = vfs_path_from_str (filename);
+    if (vpath == NULL)
         return -1;
 
-    vfs = vfs_get_class (path);
-    if (vfs == NULL)
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    if (path_element != NULL && path_element->class != NULL)
     {
-        g_free (path);
-        return -1;
+        result =
+            path_element->class->lstat ? (*path_element->class->lstat) (path_element->class,
+                                                                        vpath->unparsed,
+                                                                        buf) : -1;
+        if (result == -1)
+            errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
     }
 
-    result = vfs->lstat ? (*vfs->lstat) (vfs, path, buf) : -1;
-    g_free (path);
-    if (result == -1)
-        errno = vfs->name ? vfs_ferrno (vfs) : E_NOTSUPP;
+    vfs_path_free (vpath);
     return result;
 }
 
@@ -650,20 +670,23 @@ char *
 mc_getlocalcopy (const char *pathname)
 {
     char *result = NULL;
-    char *path;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    path = vfs_canon_and_translate (pathname);
-    if (path != NULL)
+    vpath = vfs_path_from_str (pathname);
+    if (vpath == NULL)
+        return NULL;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    if (path_element != NULL)
     {
-        struct vfs_class *vfs = vfs_get_class (path);
-
-        result = vfs->getlocalcopy != NULL ?
-            vfs->getlocalcopy (vfs, path) : mc_def_getlocalcopy (path);
-        g_free (path);
+        result = path_element->class->getlocalcopy != NULL ?
+            path_element->class->getlocalcopy (path_element->class,
+                                               vpath->unparsed) : mc_def_getlocalcopy (vpath->unparsed);
         if (result == NULL)
-            errno = vfs_ferrno (vfs);
+            errno = vfs_ferrno (path_element->class);
     }
-
+    vfs_path_free (vpath);
     return result;
 }
 
@@ -673,19 +696,22 @@ int
 mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
 {
     int return_value = -1;
-    char *path;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    path = vfs_canon_and_translate (pathname);
-    if (path != NULL)
+    vpath = vfs_path_from_str (pathname);
+    if (vpath == NULL)
+        return -1;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    if (path_element != NULL)
     {
-        struct vfs_class *vfs = vfs_get_class (path);
-
-        return_value = vfs->ungetlocalcopy != NULL ?
-            vfs->ungetlocalcopy (vfs, path, local, has_changed) :
-            mc_def_ungetlocalcopy (vfs, path, local, has_changed);
-        g_free (path);
+        return_value = path_element->class->ungetlocalcopy != NULL ?
+            path_element->class->ungetlocalcopy (path_element->class, vpath->unparsed, local,
+                                                 has_changed) :
+            mc_def_ungetlocalcopy (path_element->class, vpath->unparsed, local, has_changed);
     }
-
+    vfs_path_free (vpath);
     return return_value;
 }
 
