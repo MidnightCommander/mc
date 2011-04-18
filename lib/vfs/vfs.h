@@ -20,6 +20,7 @@
 #include "lib/fs.h"             /* MC_MAXPATHLEN */
 
 #include "interface.h"
+#include "path.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -150,7 +151,7 @@ typedef struct vfs_class
      */
     int (*which) (struct vfs_class * me, const char *path);
 
-    void *(*open) (struct vfs_class * me, const char *fname, int flags, mode_t mode);
+    void *(*open) (const vfs_path_t * vpath, int flags, mode_t mode);
     int (*close) (void *vfs_info);
       ssize_t (*read) (void *vfs_info, char *buffer, size_t count);
       ssize_t (*write) (void *vfs_info, const char *buf, size_t count);
@@ -182,9 +183,8 @@ typedef struct vfs_class
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
 
-    char *(*getlocalcopy) (struct vfs_class * me, const char *filename);
-    int (*ungetlocalcopy) (struct vfs_class * me, const char *filename,
-                           const char *local, int has_changed);
+    char *(*getlocalcopy) (const vfs_path_t * vpath);
+    int (*ungetlocalcopy) (const vfs_path_t * vpath, const char *local, int has_changed);
 
     int (*mkdir) (struct vfs_class * me, const char *path, mode_t mode);
     int (*rmdir) (struct vfs_class * me, const char *path);
@@ -214,7 +214,7 @@ extern int use_netrc;
 /*** declarations of public functions ************************************************************/
 
 /* lib/vfs/direntry.c: */
-void *vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode);
+void *vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode);
 
 vfsid vfs_getid (struct vfs_class *vclass, const char *dir);
 
@@ -268,7 +268,7 @@ int vfs_ferrno (struct vfs_class *vfs);
 
 int vfs_new_handle (struct vfs_class *vclass, void *fsinfo);
 
-struct vfs_class * vfs_class_find_by_handle (int handle);
+struct vfs_class *vfs_class_find_by_handle (int handle);
 
 void *vfs_class_data_find_by_handle (int handle);
 

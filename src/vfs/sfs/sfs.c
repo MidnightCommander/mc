@@ -50,7 +50,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "src/vfs/local/local.h"
-#include "lib/vfs/gc.h"                 /* vfs_stamp_create */
+#include "lib/vfs/gc.h"         /* vfs_stamp_create */
 
 #include "sfs.h"
 
@@ -218,10 +218,10 @@ sfs_redirect (struct vfs_class *me, const char *name)
     cur = g_slist_find_custom (head, name, cachedfile_compare);
     if (cur != NULL)
     {
-       cf = (cachedfile *) cur->data;
-       vfs_stamp (&vfs_sfs_ops, cf);
-       return cf->cache;
-     }
+        cf = (cachedfile *) cur->data;
+        vfs_stamp (&vfs_sfs_ops, cf);
+        return cf->cache;
+    }
 
     handle = vfs_mkstemps (&cache, "sfs", name);
 
@@ -249,12 +249,16 @@ sfs_redirect (struct vfs_class *me, const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-sfs_open (struct vfs_class *me, const char *path, int flags, mode_t mode)
+sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ , int flags,
+          mode_t mode)
 {
     int *sfs_info;
     int fd;
+    const char *path;
+    vfs_path_element_t *path_element;
 
-    path = sfs_redirect (me, path);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path = sfs_redirect (path_element->class, vpath->unparsed);
     fd = open (path, NO_LINEAR (flags), mode);
     if (fd == -1)
         return 0;
@@ -348,7 +352,7 @@ sfs_free (vfsid id)
     which = (struct cachedfile *) id;
     cur = g_slist_find (head, which);
     if (cur == NULL)
-       vfs_die ("Free of thing which is unknown to me\n");
+        vfs_die ("Free of thing which is unknown to me\n");
 
     which = (struct cachedfile *) cur->data;
     unlink (which->cache);
@@ -386,19 +390,22 @@ sfs_nothingisopen (vfsid id)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-sfs_getlocalcopy (struct vfs_class *me, const char *path)
+sfs_getlocalcopy (const vfs_path_t * vpath)
 {
-    path = sfs_redirect (me, path);
+    vfs_path_element_t *path_element;
+    const char *path;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path = sfs_redirect (path_element->class, vpath->unparsed);
     return g_strdup (path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
+sfs_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_changed)
 {
-    (void) me;
-    (void) path;
+    (void) vpath;
     (void) local;
     (void) has_changed;
     return 0;

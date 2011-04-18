@@ -763,12 +763,12 @@ vfs_s_ferrno (struct vfs_class *me)
  */
 
 static char *
-vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
+vfs_s_getlocalcopy (const vfs_path_t * vpath)
 {
     vfs_file_handler_t *fh;
     char *local = NULL;
 
-    fh = vfs_s_open (me, path, O_RDONLY, 0);
+    fh = vfs_s_open (vpath, O_RDONLY, 0);
 
     if (fh != NULL)
     {
@@ -788,10 +788,9 @@ vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
  */
 
 static int
-vfs_s_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
+vfs_s_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_changed)
 {
-    (void) me;
-    (void) path;
+    (void) vpath;
     (void) local;
     (void) has_changed;
     return 0;
@@ -1138,22 +1137,26 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 /* --------------------------- stat and friends ---------------------------- */
 
 void *
-vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
+vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     int was_changed = 0;
     vfs_file_handler_t *fh;
     struct vfs_s_super *super;
     char *q;
     struct vfs_s_inode *ino;
+    vfs_path_element_t *path_element;
 
-    q = vfs_s_get_path (me, file, &super, 0);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    q = vfs_s_get_path (path_element->class, vpath->unparsed, &super, 0);
     if (q == NULL)
         return NULL;
-    ino = vfs_s_find_inode (me, super, q, LINK_FOLLOW, FL_NONE);
+    ino = vfs_s_find_inode (path_element->class, super, q, LINK_FOLLOW, FL_NONE);
     if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
     {
         g_free (q);
-        ERRNOR (EEXIST, NULL);
+        path_element->class->verrno = EEXIST;
+        return NULL;
     }
     if (!ino)
     {
@@ -1163,14 +1166,14 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
         int tmp_handle;
 
         /* If the filesystem is read-only, disable file creation */
-        if (!(flags & O_CREAT) || !(me->write))
+        if (!(flags & O_CREAT) || !(path_element->class->write))
         {
             g_free (q);
             return NULL;
         }
 
-        split_dir_name (me, q, &dirname, &name, &save);
-        dir = vfs_s_find_inode (me, super, dirname, LINK_FOLLOW, FL_DIR);
+        split_dir_name (path_element->class, q, &dirname, &name, &save);
+        dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
         if (dir == NULL)
         {
             g_free (q);
@@ -1178,10 +1181,10 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
         }
         if (save)
             *save = PATH_SEP;
-        ent = vfs_s_generate_entry (me, name, dir, 0755);
+        ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
         ino = ent->ino;
-        vfs_s_insert_entry (me, dir, ent);
-        tmp_handle = vfs_mkstemps (&ino->localname, me->name, name);
+        vfs_s_insert_entry (path_element->class, dir, ent);
+        tmp_handle = vfs_mkstemps (&ino->localname, path_element->class->name, name);
         if (tmp_handle == -1)
         {
             g_free (q);
@@ -1194,7 +1197,10 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     g_free (q);
 
     if (S_ISDIR (ino->st.st_mode))
-        ERRNOR (EISDIR, NULL);
+    {
+        path_element->class->verrno = EISDIR;
+        return NULL;
+    }
 
     fh = g_new (vfs_file_handler_t, 1);
     fh->pos = 0;
@@ -1206,13 +1212,14 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 
     if (IS_LINEAR (flags))
     {
-        if (MEDATA->linear_start)
+        if (VFSDATA (path_element)->linear_start)
         {
             vfs_print_message (_("Starting linear transfer..."));
             fh->linear = LS_LINEAR_PREOPEN;
         }
     }
-    else if ((MEDATA->fh_open != NULL) && (MEDATA->fh_open (me, fh, flags, mode) != 0))
+    else if ((VFSDATA (path_element)->fh_open != NULL)
+             && (VFSDATA (path_element)->fh_open (path_element->class, fh, flags, mode) != 0))
     {
         g_free (fh);
         return NULL;
@@ -1224,12 +1231,13 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
         if (fh->handle == -1)
         {
             g_free (fh);
-            ERRNOR (errno, NULL);
+            path_element->class->verrno = errno;
+            return NULL;
         }
     }
 
     /* i.e. we had no open files and now we have one */
-    vfs_rmstamp (me, (vfsid) super);
+    vfs_rmstamp (path_element->class, (vfsid) super);
     super->fd_usage++;
     fh->ino->st.st_nlink++;
     return fh;

@@ -59,14 +59,12 @@ static struct vfs_class vfs_local_ops;
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-local_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
+local_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     int *local_info;
     int fd;
 
-    (void) me;
-
-    fd = open (file, NO_LINEAR (flags), mode);
+    fd = open (vpath->unparsed, NO_LINEAR (flags), mode);
     if (fd == -1)
         return 0;
 
@@ -290,20 +288,17 @@ local_rmdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-local_getlocalcopy (struct vfs_class *me, const char *path)
+local_getlocalcopy (const vfs_path_t * vpath)
 {
-    (void) me;
-
-    return g_strdup (path);
+    return g_strdup (vpath->unparsed);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
+local_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_changed)
 {
-    (void) me;
-    (void) path;
+    (void) vpath;
     (void) local;
     (void) has_changed;
 

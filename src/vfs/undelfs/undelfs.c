@@ -423,17 +423,16 @@ undelfs_closedir (void *vfs_info)
 /* We do not support lseek */
 
 static void *
-undelfs_open (struct vfs_class *me, const char *fname, int flags, mode_t mode)
+undelfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     char *file, *f;
     ext2_ino_t inode, i;
     undelfs_file *p = NULL;
-    (void) me;
     (void) flags;
     (void) mode;
 
     /* Only allow reads on this file system */
-    undelfs_get_path (fname, &file, &f);
+    undelfs_get_path (vpath->unparsed, &file, &f);
     if (!file)
         return 0;
 

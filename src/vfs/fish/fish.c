@@ -1483,14 +1483,14 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-fish_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
+fish_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     /*
        sorry, i've places hack here
        cause fish don't able to open files with O_EXCL flag
      */
     flags &= ~O_EXCL;
-    return vfs_s_open (me, file, flags, mode);
+    return vfs_s_open (vpath, flags, mode);
 }
 
 /* --------------------------------------------------------------------------------------------- */

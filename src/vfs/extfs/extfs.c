@@ -857,7 +857,7 @@ extfs_run (struct vfs_class *me, const char *file)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-extfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
+extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     struct pseudofile *extfs_info;
     struct archive *archive = NULL;
@@ -865,8 +865,9 @@ extfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
     struct entry *entry;
     int local_handle;
     gboolean created = FALSE;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    q = extfs_get_path (me, file, &archive, FALSE);
+    q = extfs_get_path (path_element->class, vpath->unparsed, &archive, FALSE);
     if (q == NULL)
         return NULL;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1481,12 +1482,12 @@ extfs_free (vfsid id)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-extfs_getlocalcopy (struct vfs_class *me, const char *path)
+extfs_getlocalcopy (const vfs_path_t * vpath)
 {
     struct pseudofile *fp;
     char *p;
 
-    fp = (struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
+    fp = (struct pseudofile *) extfs_open (vpath, O_RDONLY, 0);
     if (fp == NULL)
         return NULL;
     if (fp->entry->inode->local_filename == NULL)
@@ -1503,11 +1504,11 @@ extfs_getlocalcopy (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
+extfs_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_changed)
 {
     struct pseudofile *fp;
 
-    fp = (struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
+    fp = (struct pseudofile *) extfs_open (vpath, O_RDONLY, 0);
     if (fp == NULL)
         return 0;
 

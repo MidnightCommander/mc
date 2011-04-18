@@ -207,7 +207,7 @@ mc_open (const char *filename, int flags, ...)
     {
         void *info;
         /* open must be supported */
-        info = path_element->class->open (path_element->class, vpath->unparsed, flags, mode);
+        info = path_element->class->open (vpath, flags, mode);
         if (info == NULL)
             errno = vfs_ferrno (path_element->class);
         else
@@ -296,8 +296,7 @@ mc_symlink (const char *name1, const char *path)
     {
         result =
             path_element->class->symlink !=
-            NULL ? path_element->class->symlink (path_element->class, lpath,
-                                                 vpath->unparsed) : -1;
+            NULL ? path_element->class->symlink (path_element->class, lpath, vpath->unparsed) : -1;
         if (result == -1)
             errno =
                 path_element->class->symlink != NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP;
@@ -618,8 +617,7 @@ mc_lstat (const char *filename, struct stat *buf)
     {
         result =
             path_element->class->lstat ? (*path_element->class->lstat) (path_element->class,
-                                                                        vpath->unparsed,
-                                                                        buf) : -1;
+                                                                        vpath->unparsed, buf) : -1;
         if (result == -1)
             errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
     }
@@ -681,8 +679,7 @@ mc_getlocalcopy (const char *pathname)
     if (path_element != NULL)
     {
         result = path_element->class->getlocalcopy != NULL ?
-            path_element->class->getlocalcopy (path_element->class,
-                                               vpath->unparsed) : mc_def_getlocalcopy (vpath->unparsed);
+            path_element->class->getlocalcopy (vpath) : mc_def_getlocalcopy (vpath->unparsed);
         if (result == NULL)
             errno = vfs_ferrno (path_element->class);
     }
@@ -707,7 +704,7 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
     if (path_element != NULL)
     {
         return_value = path_element->class->ungetlocalcopy != NULL ?
-            path_element->class->ungetlocalcopy (path_element->class, vpath->unparsed, local,
+            path_element->class->ungetlocalcopy (vpath, local,
                                                  has_changed) :
             mc_def_ungetlocalcopy (path_element->class, vpath->unparsed, local, has_changed);
     }

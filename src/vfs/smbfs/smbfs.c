@@ -2054,18 +2054,16 @@ smbfs_open_readwrite (smbfs_handle * remote_handle, char *rname, int flags, mode
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-smbfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
+smbfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     char *remote_file;
     void *ret;
     smbfs_connection *sc;
     smbfs_handle *remote_handle;
 
-    (void) me;
+    DEBUG (3, ("smbfs_open(file:%s, flags:%d, mode:%o)\n", vpath->unparsed, flags, mode));
 
-    DEBUG (3, ("smbfs_open(file:%s, flags:%d, mode:%o)\n", file, flags, mode));
-
-    if (!(remote_file = smbfs_get_path (&sc, file)))
+    if (!(remote_file = smbfs_get_path (&sc, vpath->unparsed)))
         return 0;
 
     remote_file = free_after (smbfs_convert_path (remote_file, FALSE), remote_file);
