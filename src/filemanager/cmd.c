@@ -1571,6 +1571,9 @@ save_setup_cmd (void)
     if (save_setup (TRUE, TRUE))
         message (D_NORMAL, _("Setup"), _("Setup saved to %s%s%s"),
                  mc_config_get_path (), PATH_SEP_STR, MC_CONFIG_FILE);
+    else
+        message (D_ERROR, _("Setup"), _("Unable to save setup to %s%s%s"),
+                 mc_config_get_path (), PATH_SEP_STR, MC_CONFIG_FILE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -515,7 +515,6 @@ save_panelize (void)
             mc_config_set_string (mc_main_config,
                                   panelize_section, current->label, current->command);
     }
-    mc_config_save_file (mc_main_config, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
