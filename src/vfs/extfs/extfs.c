@@ -1168,10 +1168,9 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+extfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    (void) me;
-    (void) path;
+    (void) vpath;
     (void) owner;
     (void) group;
     return 0;
@@ -1180,10 +1179,9 @@ extfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_chmod (struct vfs_class *me, const char *path, int mode)
+extfs_chmod (const vfs_path_t * vpath, int mode)
 {
-    (void) me;
-    (void) path;
+    (void) vpath;
     (void) mode;
     return 0;
 }

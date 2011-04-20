@@ -1261,24 +1261,39 @@ fish_symlink (struct vfs_class *me, const char *setto, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_chmod (struct vfs_class *me, const char *path, int mode)
+fish_chmod (const vfs_path_t * vpath, int mode)
 {
     gchar *shell_commands = NULL;
+    char buf[BUF_LARGE];
+    const char *crpath;
+    char *rpath, *mpath;
+    struct vfs_s_super *super;
+    vfs_path_element_t *path_element;
 
-    PREFIX;
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    mpath = g_strdup (vpath->unparsed);
+    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    if (crpath == NULL)
+    {
+        g_free (mpath);
+        return -1;
+    }
+    rpath = strutils_shell_escape (crpath);
+    g_free (mpath);
 
     shell_commands = g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n",
                                   SUP->scr_chmod, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath, mode & 07777);
     g_free (shell_commands);
     g_free (rpath);
-    return fish_send_command (me, super, buf, OPT_FLUSH);
+    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
     char *sowner, *sgroup;
     struct passwd *pw;
@@ -1297,19 +1312,35 @@ fish_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 
     {
         gchar *shell_commands = NULL;
+        char buf[BUF_LARGE];
+        const char *crpath;
+        char *rpath, *mpath;
+        struct vfs_s_super *super;
+        vfs_path_element_t *path_element;
 
-        PREFIX;
+        path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+
+        mpath = g_strdup (vpath->unparsed);
+        crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+        if (crpath == NULL)
+        {
+            g_free (mpath);
+            return -1;
+        }
+        rpath = strutils_shell_escape (crpath);
+        g_free (mpath);
 
         shell_commands = g_strconcat (SUP->scr_env,
                                       "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
                                       SUP->scr_chown, (char *) NULL);
         g_snprintf (buf, sizeof (buf), shell_commands, rpath, sowner, sgroup);
         g_free (shell_commands);
-        fish_send_command (me, super, buf, OPT_FLUSH);
+        fish_send_command (path_element->class, super, buf, OPT_FLUSH);
         /* FIXME: what should we report if chgrp succeeds but chown fails? */
         /* fish_send_command(me, super, buf, OPT_FLUSH); */
         g_free (rpath);
-        return fish_send_command (me, super, buf, OPT_FLUSH);
+        return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
     }
 }
 

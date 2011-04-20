@@ -1974,14 +1974,17 @@ ftpfs_send_command (struct vfs_class *me, const char *filename, const char *cmd,
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_chmod (struct vfs_class *me, const char *path, int mode)
+ftpfs_chmod (const vfs_path_t * vpath, int mode)
 {
     char buf[BUF_SMALL];
     int ret;
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
     g_snprintf (buf, sizeof (buf), "SITE CHMOD %4.4o /%%s", mode & 07777);
 
-    ret = ftpfs_send_command (me, path, buf, OPT_FLUSH);
+    ret = ftpfs_send_command (path_element->class, vpath->unparsed, buf, OPT_FLUSH);
 
     return ftpfs_ignore_chattr_errors ? 0 : ret;
 }
@@ -1989,16 +1992,19 @@ ftpfs_chmod (struct vfs_class *me, const char *path, int mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+ftpfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
 #if 0
+    (void) vpath;
+    (void) owner;
+    (void) group;
+
     ftpfs_errno = EPERM;
     return -1;
 #else
     /* Everyone knows it is not possible to chown remotely, so why bother them.
        If someone's root, then copy/move will always try to chown it... */
-    (void) me;
-    (void) path;
+    (void) vpath;
     (void) owner;
     (void) group;
     return 0;

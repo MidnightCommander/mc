@@ -964,11 +964,9 @@ smbfs_closedir (void *info)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_chmod (struct vfs_class *me, const char *path, int mode)
+smbfs_chmod (const vfs_path_t * vpath, int mode)
 {
-    (void) me;
-
-    DEBUG (3, ("smbfs_chmod(path:%s, mode:%d)\n", path, mode));
+    DEBUG (3, ("smbfs_chmod(path:%s, mode:%d)\n", vpath->unparsed, mode));
     /*      my_errno = EOPNOTSUPP;
        return -1;   *//* cannot chmod on smb filesystem */
     return 0;                   /* make mc happy */
@@ -977,11 +975,9 @@ smbfs_chmod (struct vfs_class *me, const char *path, int mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+smbfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    (void) me;
-
-    DEBUG (3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path, owner, group));
+    DEBUG (3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", vpath->unparsed, owner, group));
     my_errno = EOPNOTSUPP;      /* ready for your labotomy? */
     return -1;
 }
@@ -989,12 +985,11 @@ smbfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
+smbfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 {
-    (void) me;
     (void) times;
 
-    DEBUG (3, ("smbfs_utime(path:%s)\n", path));
+    DEBUG (3, ("smbfs_utime(path:%s)\n", vpath->unparsed));
     my_errno = EOPNOTSUPP;
     return -1;
 }

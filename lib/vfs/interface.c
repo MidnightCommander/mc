@@ -255,9 +255,9 @@ int mc_##name inarg \
     return result; \
 }
 
-MC_NAMEOP (chmod, (const char *path, mode_t mode), (path_element->class, vpath->unparsed, mode))
-MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (path_element->class, vpath->unparsed, owner, group))
-MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (path_element->class, vpath->unparsed, times))
+MC_NAMEOP (chmod, (const char *path, mode_t mode), (vpath, mode))
+MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vpath, owner, group))
+MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (vpath, times))
 MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (path_element->class, vpath->unparsed, buf, bufsiz))
 MC_NAMEOP (unlink, (const char *path), (path_element->class, vpath->unparsed))
 MC_NAMEOP (mkdir, (const char *path, mode_t mode), (path_element->class, vpath->unparsed, mode))

@@ -141,31 +141,25 @@ local_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chmod (struct vfs_class *me, const char *path, int mode)
+local_chmod (const vfs_path_t * vpath, int mode)
 {
-    (void) me;
-
-    return chmod (path, mode);
+    return chmod (vpath->unparsed, mode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+local_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    (void) me;
-
-    return chown (path, owner, group);
+    return chown (vpath->unparsed, owner, group);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
+local_utime (const vfs_path_t * vpath, struct utimbuf *times)
 {
-    (void) me;
-
-    return utime (path, times);
+    return utime (vpath->unparsed, times);
 }
 
 /* --------------------------------------------------------------------------------------------- */

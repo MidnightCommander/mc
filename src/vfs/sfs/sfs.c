@@ -294,27 +294,42 @@ sfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_chmod (struct vfs_class *me, const char *path, int mode)
+sfs_chmod (const vfs_path_t * vpath, int mode)
 {
-    path = sfs_redirect (me, path);
+    const char *path;
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    path = sfs_redirect (path_element->class, vpath->unparsed);
     return chmod (path, mode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+sfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    path = sfs_redirect (me, path);
+    const char *path;
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    path = sfs_redirect (path_element->class, vpath->unparsed);
     return chown (path, owner, group);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
+sfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 {
-    path = sfs_redirect (me, path);
+    const char *path;
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    path = sfs_redirect (path_element->class, vpath->unparsed);
     return utime (path, times);
 }
 
