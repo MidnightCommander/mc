@@ -24,11 +24,8 @@
 #include <config.h>
 
 #include <stdlib.h>             /* atoi() */
-#include <stdio.h>
-#include <string.h>
 
 #include <sys/types.h>
-#include <sys/stat.h>
 #include <unistd.h>
 
 #include "lib/global.h"
@@ -55,6 +52,17 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* don't use max() macro to avoid double call of str_term_width1() in widget width calculation */
+#undef max
+
+static int
+max (int a, int b)
+{
+    return a > b ? a : b;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
