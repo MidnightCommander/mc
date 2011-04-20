@@ -447,48 +447,39 @@ mc_opendir (const char *dirname)
 {
     int handle, *handlep;
     void *info;
-    struct vfs_class *vfs;
-    char *canon;
-    char *dname;
     struct vfs_dirinfo *dirinfo;
-    const char *encoding;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    canon = vfs_canon (dirname);
-    dname = vfs_translate_path_n (canon);
+    vpath = vfs_path_from_str (dirname);
 
-    if (dname != NULL)
+    if (vpath == NULL)
+        return NULL;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    info = path_element->class->opendir ? (*path_element->class->opendir) (vpath) : NULL;
+
+    if (info == NULL)
     {
-        vfs = vfs_get_class (dname);
-        info = vfs->opendir ? (*vfs->opendir) (vfs, dname) : NULL;
-        g_free (dname);
-
-        if (info == NULL)
-        {
-            errno = vfs->opendir ? vfs_ferrno (vfs) : E_NOTSUPP;
-            g_free (canon);
-            return NULL;
-        }
-
-        dirinfo = g_new (struct vfs_dirinfo, 1);
-        dirinfo->info = info;
-
-        encoding = vfs_get_encoding (canon);
-        g_free (canon);
-        dirinfo->converter = (encoding != NULL) ? str_crt_conv_from (encoding) : str_cnv_from_term;
-        if (dirinfo->converter == INVALID_CONV)
-            dirinfo->converter = str_cnv_from_term;
-
-        handle = vfs_new_handle (vfs, dirinfo);
-
-        handlep = g_new (int, 1);
-        *handlep = handle;
-        return (DIR *) handlep;
-    }
-    else
-    {
-        g_free (canon);
+        errno = path_element->class->opendir ? vfs_ferrno (path_element->class) : E_NOTSUPP;
         return NULL;
     }
+
+    dirinfo = g_new (struct vfs_dirinfo, 1);
+    dirinfo->info = info;
+
+    dirinfo->converter =
+        (vpath->unparsed_encoding !=
+         NULL) ? str_crt_conv_from (vpath->unparsed_encoding) : str_cnv_from_term;
+    if (dirinfo->converter == INVALID_CONV)
+        dirinfo->converter = str_cnv_from_term;
+
+    handle = vfs_new_handle (path_element->class, dirinfo);
+
+    handlep = g_new (int, 1);
+    *handlep = handle;
+    return (DIR *) handlep;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -587,9 +578,7 @@ mc_stat (const char *filename, struct stat *buf)
 
     if (path_element != NULL && path_element->class != NULL)
     {
-        result =
-            path_element->class->stat ? (*path_element->class->stat) (path_element->class,
-                                                                      vpath->unparsed, buf) : -1;
+        result = path_element->class->stat ? (*path_element->class->stat) (vpath, buf) : -1;
         if (result == -1)
             errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
     }
@@ -615,9 +604,7 @@ mc_lstat (const char *filename, struct stat *buf)
 
     if (path_element != NULL && path_element->class != NULL)
     {
-        result =
-            path_element->class->lstat ? (*path_element->class->lstat) (path_element->class,
-                                                                        vpath->unparsed, buf) : -1;
+        result = path_element->class->lstat ? (*path_element->class->lstat) (vpath, buf) : -1;
         if (result == -1)
             errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
     }
@@ -721,62 +708,52 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
 int
 mc_chdir (const char *path)
 {
-    char *new_dir;
-    char *trans_dir;
-    struct vfs_class *old_vfs, *new_vfs;
+    //    char *new_dir;
+    //    char *trans_dir;
+    struct vfs_class *old_vfs;
     vfsid old_vfsid;
     int result;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    new_dir = vfs_canon (path);
-    trans_dir = vfs_translate_path_n (new_dir);
-    if (trans_dir != NULL)
+    vpath = vfs_path_from_str (path);
+
+    if (vpath == NULL)
+        return -1;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    if (!path_element->class->chdir)
+        return -1;
+
+    result = (*path_element->class->chdir) (vpath);
+
+    if (result == -1)
     {
-        new_vfs = vfs_get_class (trans_dir);
-        if (!new_vfs->chdir)
-        {
-            g_free (new_dir);
-            g_free (trans_dir);
-            return -1;
-        }
-
-        result = (*new_vfs->chdir) (new_vfs, trans_dir);
-
-        if (result == -1)
-        {
-            errno = vfs_ferrno (new_vfs);
-            g_free (new_dir);
-            g_free (trans_dir);
-            return -1;
-        }
-
-        old_vfsid = vfs_getid (current_vfs, current_dir);
-        old_vfs = current_vfs;
-
-        /* Actually change directory */
-        g_free (current_dir);
-        current_dir = new_dir;
-        current_vfs = new_vfs;
-
-        /* This function uses the new current_dir implicitly */
-        vfs_stamp_create (old_vfs, old_vfsid);
-
-        /* Sometimes we assume no trailing slash on cwd */
-        if (*current_dir)
-        {
-            char *p;
-            p = strchr (current_dir, 0) - 1;
-            if (*p == PATH_SEP && p > current_dir)
-                *p = 0;
-        }
-
-        g_free (trans_dir);
-        return 0;
-    }
-    else
-    {
-        g_free (new_dir);
+        errno = vfs_ferrno (path_element->class);
         return -1;
     }
+
+    old_vfsid = vfs_getid (current_vfs, current_dir);
+    old_vfs = current_vfs;
+
+    /* Actually change directory */
+    g_free (current_dir);
+    current_dir = vpath->unparsed;
+    current_vfs = path_element->class;
+
+    /* This function uses the new current_dir implicitly */
+    vfs_stamp_create (old_vfs, old_vfsid);
+
+    /* Sometimes we assume no trailing slash on cwd */
+    if (*current_dir)
+    {
+        char *p;
+        p = strchr (current_dir, 0) - 1;
+        if (*p == PATH_SEP && p > current_dir)
+            *p = 0;
+    }
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */

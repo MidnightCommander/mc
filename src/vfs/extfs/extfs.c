@@ -991,14 +991,15 @@ extfs_errno (struct vfs_class *me)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-extfs_opendir (struct vfs_class *me, const char *dirname)
+extfs_opendir (const vfs_path_t * vpath)
 {
     struct archive *archive = NULL;
     char *q;
     struct entry *entry;
     struct entry **info;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    q = extfs_get_path (me, dirname, &archive, FALSE);
+    q = extfs_get_path (path_element->class, vpath->unparsed, &archive, FALSE);
     if (q == NULL)
         return NULL;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1075,16 +1076,18 @@ extfs_stat_move (struct stat *buf, const struct inode *inode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, gboolean resolve)
+extfs_internal_stat (const vfs_path_t * vpath, struct stat *buf, gboolean resolve)
 {
     struct archive *archive;
     char *q, *mpath;
     struct entry *entry;
     int result = -1;
+    vfs_path_element_t *path_element;
 
-    mpath = g_strdup (path);
+    mpath = g_strdup (vpath->unparsed);
 
-    q = extfs_get_path_mangle (me, mpath, &archive, FALSE);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1106,17 +1109,17 @@ extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, g
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
+extfs_stat (const vfs_path_t * vpath, struct stat *buf)
 {
-    return extfs_internal_stat (me, path, buf, TRUE);
+    return extfs_internal_stat (vpath, buf, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+extfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
-    return extfs_internal_stat (me, path, buf, FALSE);
+    return extfs_internal_stat (vpath, buf, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1324,14 +1327,15 @@ extfs_rmdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_chdir (struct vfs_class *me, const char *path)
+extfs_chdir (const vfs_path_t * vpath)
 {
     struct archive *archive = NULL;
     char *q;
     struct entry *entry;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
     my_errno = ENOTDIR;
-    q = extfs_get_path (me, path, &archive, FALSE);
+    q = extfs_get_path (path_element->class, vpath->unparsed, &archive, FALSE);
     if (q == NULL)
         return -1;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);

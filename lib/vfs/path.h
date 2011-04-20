@@ -11,12 +11,15 @@
 
 struct vfs_class;
 
-typedef struct {
+typedef struct
+{
     GPtrArray *path;
     char *unparsed;
+    char *unparsed_encoding;
 } vfs_path_t;
 
-typedef struct {
+typedef struct
+{
     char *path;
     struct vfs_class *class;
     char *encoding;
@@ -29,15 +32,15 @@ typedef struct {
 
 /*** declarations of public functions ************************************************************/
 
-vfs_path_t *vfs_path_new(void);
+vfs_path_t *vfs_path_new (void);
 void vfs_path_free (vfs_path_t * path);
-size_t vfs_path_length (const vfs_path_t *path);
+size_t vfs_path_length (const vfs_path_t * path);
 
 char *vfs_path_to_str (const vfs_path_t * path);
-vfs_path_t * vfs_path_from_str (const char * path_str);
+vfs_path_t *vfs_path_from_str (const char *path_str);
 
-vfs_path_element_t *vfs_path_get_by_index (const vfs_path_t *path, size_t element_index);
-void vfs_path_element_free(vfs_path_element_t *element);
+vfs_path_element_t *vfs_path_get_by_index (const vfs_path_t * path, size_t element_index);
+void vfs_path_element_free (vfs_path_element_t * element);
 
 
 /*** inline functions ****************************************************************************/

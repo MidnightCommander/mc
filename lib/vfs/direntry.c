@@ -438,21 +438,29 @@ vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-vfs_s_opendir (struct vfs_class *me, const char *dirname)
+vfs_s_opendir (const vfs_path_t * vpath)
 {
     struct vfs_s_inode *dir;
     struct dirhandle *info;
+    vfs_path_element_t *path_element;
 
-    dir = vfs_s_inode_from_path (me, dirname, FL_DIR | FL_FOLLOW);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    dir = vfs_s_inode_from_path (path_element->class, vpath->unparsed, FL_DIR | FL_FOLLOW);
     if (dir == NULL)
         return NULL;
     if (!S_ISDIR (dir->st.st_mode))
-        ERRNOR (ENOTDIR, NULL);
+    {
+        path_element->class->verrno = ENOTDIR;
+        return NULL;
+    }
 
     dir->st.st_nlink++;
 #if 0
     if (dir->subdir == NULL)    /* This can actually happen if we allow empty directories */
-        ERRNOR (EAGAIN, NULL);
+    {
+        path_element->class->verrno = EAGAIN;
+        return NULL;
+    }
 #endif
     info = g_new (struct dirhandle, 1);
     info->cur = dir->subdir;
@@ -501,11 +509,11 @@ vfs_s_closedir (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-vfs_s_chdir (struct vfs_class *me, const char *path)
+vfs_s_chdir (const vfs_path_t * vpath)
 {
     void *data;
 
-    data = vfs_s_opendir (me, path);
+    data = vfs_s_opendir (vpath);
     if (data == NULL)
         return -1;
     vfs_s_closedir (data);
@@ -516,11 +524,13 @@ vfs_s_chdir (struct vfs_class *me, const char *path)
 /* --------------------------- stat and friends ---------------------------- */
 
 static int
-vfs_s_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, int flag)
+vfs_s_internal_stat (const vfs_path_t * vpath, struct stat *buf, int flag)
 {
     struct vfs_s_inode *ino;
+    vfs_path_element_t *path_element;
 
-    ino = vfs_s_inode_from_path (me, path, flag);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    ino = vfs_s_inode_from_path (path_element->class, vpath->unparsed, flag);
     if (ino == NULL)
         return -1;
     *buf = ino->st;
@@ -530,17 +540,17 @@ vfs_s_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, i
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-vfs_s_stat (struct vfs_class *me, const char *path, struct stat *buf)
+vfs_s_stat (const vfs_path_t * vpath, struct stat *buf)
 {
-    return vfs_s_internal_stat (me, path, buf, FL_FOLLOW);
+    return vfs_s_internal_stat (vpath, buf, FL_FOLLOW);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-vfs_s_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
-    return vfs_s_internal_stat (me, path, buf, FL_NONE);
+    return vfs_s_internal_stat (vpath, buf, FL_NONE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

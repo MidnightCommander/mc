@@ -272,18 +272,26 @@ sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ ,
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
+sfs_stat (const vfs_path_t * vpath, struct stat *buf)
 {
-    path = sfs_redirect (me, path);
+    vfs_path_element_t *path_element;
+    const char *path;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path = sfs_redirect (path_element->class, vpath->unparsed);
     return stat (path, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+sfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
-    path = sfs_redirect (me, path);
+    vfs_path_element_t *path_element;
+    const char *path;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path = sfs_redirect (path_element->class, vpath->unparsed);
 #ifndef HAVE_STATLSTAT
     return lstat (path, buf);
 #else

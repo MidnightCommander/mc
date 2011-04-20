@@ -330,11 +330,13 @@ undelfs_loaddel (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-undelfs_opendir (struct vfs_class *me, const char *dirname)
+undelfs_opendir (const vfs_path_t * vpath)
 {
     char *file, *f;
+    vfs_path_element_t *path_element;
 
-    undelfs_get_path (dirname, &file, &f);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    undelfs_get_path (vpath->unparsed, &file, &f);
     if (!file)
         return 0;
 
@@ -374,10 +376,10 @@ undelfs_opendir (struct vfs_class *me, const char *dirname)
     /* Now load the deleted information */
     if (!undelfs_loaddel ())
         goto quit_opendir;
-    vfs_print_message (_("%s: done."), me->name);
+    vfs_print_message (_("%s: done."), path_element->class->name);
     return fs;
   quit_opendir:
-    vfs_print_message (_("%s: failure"), me->name);
+    vfs_print_message (_("%s: failure"), path_element->class->name);
     ext2fs_close (fs);
     fs = NULL;
     return 0;
@@ -630,13 +632,12 @@ undelfs_stat_int (int inode_index, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-undelfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+undelfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
     int inode_index;
     char *file, *f;
-    (void) me;
 
-    undelfs_get_path (path, &file, &f);
+    undelfs_get_path (vpath->unparsed, &file, &f);
     if (!file)
         return 0;
 
@@ -683,13 +684,12 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-undelfs_chdir (struct vfs_class *me, const char *path)
+undelfs_chdir (const vfs_path_t * vpath)
 {
     char *file, *f;
     int fd;
-    (void) me;
 
-    undelfs_get_path (path, &file, &f);
+    undelfs_get_path (vpath->unparsed, &file, &f);
     if (!file)
         return -1;
 

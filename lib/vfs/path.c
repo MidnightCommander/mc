@@ -77,24 +77,26 @@ vfs_path_to_str (const vfs_path_t * path)
 vfs_path_t *
 vfs_path_from_str (const char *path_str)
 {
-    char *file;
     vfs_path_t *path;
     vfs_path_element_t *element;
 
     if (path_str == NULL)
         return NULL;
 
-    file = vfs_canon_and_translate (path_str);
-    if (file == NULL)
-        return NULL;
-
     path = vfs_path_new ();
+    path->unparsed_encoding = g_strdup (vfs_get_encoding (path_str));
+
+    path->unparsed = vfs_canon_and_translate (path_str);
+    if (path->unparsed == NULL)
+    {
+        vfs_path_free (path);
+        return NULL;
+    }
 
     element = g_new0 (vfs_path_element_t, 1);
-    element->class = vfs_get_class (file);
+    element->class = vfs_get_class (path->unparsed);
 
     g_ptr_array_add (path->path, element);
-    path->unparsed = file;
     return path;
 }
 
@@ -149,6 +151,7 @@ vfs_path_free (vfs_path_t * path)
     g_ptr_array_foreach (path->path, (GFunc) vfs_path_element_free, NULL);
     g_ptr_array_free (path->path, TRUE);
     g_free (path->unparsed);
+    g_free (path->unparsed_encoding);
     g_free (path);
 }
 

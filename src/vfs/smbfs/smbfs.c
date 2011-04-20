@@ -1374,23 +1374,21 @@ is_error (int result, int errno_num)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-smbfs_opendir (struct vfs_class *me, const char *dirname)
+smbfs_opendir (const vfs_path_t * vpath)
 {
     opendir_info *smbfs_info;
     smbfs_connection *sc;
     char *remote_dir;
 
-    (void) me;
+    DEBUG (3, ("smbfs_opendir(dirname:%s)\n", vpath->unparsed));
 
-    DEBUG (3, ("smbfs_opendir(dirname:%s)\n", dirname));
-
-    if (!(remote_dir = smbfs_get_path (&sc, dirname)))
+    if (!(remote_dir = smbfs_get_path (&sc, vpath->unparsed)))
         return NULL;
 
     /* FIXME: where freed? */
     smbfs_info = g_new (opendir_info, 1);
     smbfs_info->server_list = FALSE;
-    smbfs_info->path = g_strdup (dirname);      /* keep original */
+    smbfs_info->path = g_strdup (vpath->unparsed);      /* keep original */
     smbfs_info->dirname = remote_dir;
     smbfs_info->conn = sc;
     smbfs_info->entries = 0;
@@ -1649,15 +1647,13 @@ smbfs_get_stat_info (smbfs_connection * sc, const char *path, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_chdir (struct vfs_class *me, const char *path)
+smbfs_chdir (const vfs_path_t * vpath)
 {
     char *remote_dir;
     smbfs_connection *sc;
 
-    (void) me;
-
-    DEBUG (3, ("smbfs_chdir(path:%s)\n", path));
-    if (!(remote_dir = smbfs_get_path (&sc, path)))
+    DEBUG (3, ("smbfs_chdir(path:%s)\n", vpath->unparsed));
+    if (!(remote_dir = smbfs_get_path (&sc, vpath->unparsed)))
         return -1;
     g_free (remote_dir);
 
@@ -1667,19 +1663,19 @@ smbfs_chdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_loaddir_by_name (struct vfs_class *me, const char *path)
+smbfs_loaddir_by_name (const vfs_path_t * vpath)
 {
     void *info;
     char *mypath, *p;
 
-    mypath = g_strdup (path);
+    mypath = g_strdup (vpath->unparsed);
     p = strrchr (mypath, '/');
 
     if (p > mypath)
         *p = 0;
     DEBUG (6, ("smbfs_loaddir_by_name(%s)\n", mypath));
-    smbfs_chdir (me, mypath);
-    info = smbfs_opendir (me, mypath);
+    smbfs_chdir (vpath);
+    info = smbfs_opendir (vpath);
     g_free (mypath);
     if (!info)
         return -1;
@@ -1691,24 +1687,24 @@ smbfs_loaddir_by_name (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
+smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
 {
     smbfs_connection *sc;
     pstring server_url;
     char *service, *pp, *at;
     const char *p;
 
-    DEBUG (3, ("smbfs_stat(path:%s)\n", path));
+    DEBUG (3, ("smbfs_stat(path:%s)\n", vpath->unparsed));
 
     if (!current_info)
     {
         DEBUG (1, ("current_info = NULL: "));
-        if (smbfs_loaddir_by_name (me, path) < 0)
+        if (smbfs_loaddir_by_name (vpath) < 0)
             return -1;
     }
 
     /* check if stating server */
-    p = path;
+    p = vpath->unparsed;
     if (strncmp (p, URL_HEADER, HEADER_LEN))
     {
         DEBUG (1, ("'%s' doesnt start with '%s' (length %d)\n", p, URL_HEADER, HEADER_LEN));
@@ -1741,19 +1737,19 @@ smbfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
     {
         if (!current_info->server_list)
         {
-            if (smbfs_loaddir_by_name (me, path) < 0)
+            if (smbfs_loaddir_by_name (vpath) < 0)
                 return -1;
         }
-        return smbfs_fake_server_stat (server_url, path, buf);
+        return smbfs_fake_server_stat (server_url, vpath->unparsed, buf);
     }
 
     if (!strchr (++pp, '/'))
     {
-        return smbfs_fake_share_stat (server_url, path, buf);
+        return smbfs_fake_share_stat (server_url, vpath->unparsed, buf);
     }
 
     /* stating inside share at this point */
-    if (!(service = smbfs_get_path (&sc, path)))        /* connects if necessary */
+    if (!(service = smbfs_get_path (&sc, vpath->unparsed)))     /* connects if necessary */
         return -1;
     {
         int hostlen = strlen (current_bucket->host);
@@ -1788,7 +1784,7 @@ smbfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
     if (strncmp (p, pp, strlen (p)) != 0)
     {
         DEBUG (6, ("desired '%s' is not loaded, we have '%s'\n", p, pp));
-        if (smbfs_loaddir_by_name (me, path) < 0)
+        if (smbfs_loaddir_by_name (vpath) < 0)
         {
             g_free (service);
             return -1;
@@ -1797,7 +1793,7 @@ smbfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
     }
     g_free (service);
     /* stat dirs & files under shares now */
-    return smbfs_get_stat_info (sc, path, buf);
+    return smbfs_get_stat_info (sc, vpath->unparsed, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */

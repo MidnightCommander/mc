@@ -77,14 +77,12 @@ local_open (const vfs_path_t * vpath, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-local_opendir (struct vfs_class *me, const char *dirname)
+local_opendir (const vfs_path_t * vpath)
 {
     DIR **local_info;
     DIR *dir;
 
-    (void) me;
-
-    dir = opendir (dirname);
+    dir = opendir (vpath->unparsed);
     if (!dir)
         return 0;
 
@@ -117,24 +115,20 @@ local_closedir (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_stat (struct vfs_class *me, const char *path, struct stat *buf)
+local_stat (const vfs_path_t * vpath, struct stat *buf)
 {
-    (void) me;
-
-    return stat (path, buf);
+    return stat (vpath->unparsed, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+local_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
-    (void) me;
-
 #ifndef HAVE_STATLSTAT
-    return lstat (path, buf);
+    return lstat (vpath->unparsed, buf);
 #else
-    return statlstat (path, buf);
+    return statlstat (vpath->unparsed, buf);
 #endif
 }
 
@@ -232,11 +226,9 @@ local_rename (struct vfs_class *me, const char *a, const char *b)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chdir (struct vfs_class *me, const char *path)
+local_chdir (const vfs_path_t * vpath)
 {
-    (void) me;
-
-    return chdir (path);
+    return chdir (vpath->unparsed);
 }
 
 /* --------------------------------------------------------------------------------------------- */
