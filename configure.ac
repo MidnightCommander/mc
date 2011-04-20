@@ -609,6 +609,7 @@ if test x$enable_tests != xno; then
     AC_CONFIG_FILES([
 lib/tests/Makefile
 lib/tests/mcconfig/Makefile
+lib/tests/vfs/Makefile
 ])
 
 fi
