@@ -2014,9 +2014,12 @@ ftpfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_unlink (struct vfs_class *me, const char *path)
+ftpfs_unlink (const vfs_path_t * vpath)
 {
-    return ftpfs_send_command (me, path, "DELE /%s", OPT_FLUSH);
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    return ftpfs_send_command (path_element->class, vpath->unparsed, "DELE /%s", OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2061,10 +2064,13 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_rename (struct vfs_class *me, const char *path1, const char *path2)
+ftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    ftpfs_send_command (me, path1, "RNFR /%s", OPT_FLUSH);
-    return ftpfs_send_command (me, path2, "RNTO /%s", OPT_FLUSH);
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
+    ftpfs_send_command (path_element->class, vpath1->unparsed, "RNFR /%s", OPT_FLUSH);
+    return ftpfs_send_command (path_element->class, vpath2->unparsed, "RNTO /%s", OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -565,20 +565,29 @@ vfs_s_fstat (void *fh, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
     struct vfs_s_inode *ino;
     size_t len;
+    vfs_path_element_t *path_element;
 
-    ino = vfs_s_inode_from_path (me, path, 0);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    ino = vfs_s_inode_from_path (path_element->class, vpath->unparsed, 0);
     if (!ino)
         return -1;
 
     if (!S_ISLNK (ino->st.st_mode))
-        ERRNOR (EINVAL, -1);
+    {
+        path_element->class->verrno = EINVAL;
+        return -1;
+    }
 
     if (ino->linkname == NULL)
-        ERRNOR (EFAULT, -1);
+    {
+        path_element->class->verrno = EFAULT;
+        return -1;
+    }
 
     len = strlen (ino->linkname);
     if (size < len)

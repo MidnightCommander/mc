@@ -258,11 +258,11 @@ int mc_##name inarg \
 MC_NAMEOP (chmod, (const char *path, mode_t mode), (vpath, mode))
 MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vpath, owner, group))
 MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (vpath, times))
-MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (path_element->class, vpath->unparsed, buf, bufsiz))
-MC_NAMEOP (unlink, (const char *path), (path_element->class, vpath->unparsed))
+MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (vpath, buf, bufsiz))
+MC_NAMEOP (unlink, (const char *path), (vpath))
 MC_NAMEOP (mkdir, (const char *path, mode_t mode), (path_element->class, vpath->unparsed, mode))
 MC_NAMEOP (rmdir, (const char *path), (path_element->class, vpath->unparsed))
-MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (path_element->class, vpath->unparsed, mode, dev))
+MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vpath, mode, dev))
 
 /* *INDENT-ON* */
 
@@ -272,37 +272,32 @@ int
 mc_symlink (const char *name1, const char *path)
 {
     int result = -1;
-    vfs_path_t *vpath;
-    vfs_path_element_t *path_element;
-    char *lpath;
-    char *tmp;
+    vfs_path_t *vpath1, *vpath2;
 
-    vpath = vfs_path_from_str (path);
-    if (vpath == NULL)
+    vpath1 = vfs_path_from_str (path);
+    if (vpath1 == NULL)
         return -1;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    if (path_element == NULL)
-    {
-        vfs_path_free (vpath);
-        return -1;
-    }
+    vpath2 = vfs_path_from_str (name1);
 
-    tmp = g_strdup (name1);
-    lpath = vfs_translate_path_n (tmp);
-    g_free (tmp);
-
-    if (lpath != NULL)
+    if (vpath2 != NULL)
     {
-        result =
-            path_element->class->symlink !=
-            NULL ? path_element->class->symlink (path_element->class, lpath, vpath->unparsed) : -1;
-        if (result == -1)
-            errno =
-                path_element->class->symlink != NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP;
+        vfs_path_element_t *path_element =
+            vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
+        if (path_element != NULL)
+        {
+            result =
+                path_element->class->symlink !=
+                NULL ? path_element->class->symlink (vpath2, vpath1) : -1;
+
+            if (result == -1)
+                errno =
+                    path_element->class->symlink !=
+                    NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP;
+        }
     }
-    g_free (lpath);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath1);
+    vfs_path_free (vpath2);
     return result;
 }
 
@@ -360,7 +355,7 @@ int mc_##name (const char *fname1, const char *fname2) \
     }\
 \
     result = path_element1->class->name != NULL \
-        ? path_element1->class->name (path_element1->class, vpath1->unparsed, vpath2->unparsed) \
+        ? path_element1->class->name (vpath1, vpath2) \
         : -1; \
     if (result == -1) \
         errno = path_element1->class->name != NULL ? vfs_ferrno (path_element1->class) : E_NOTSUPP; \

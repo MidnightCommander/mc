@@ -168,15 +168,15 @@ typedef struct vfs_class
     int (*chown) (const vfs_path_t * vpath, uid_t owner, gid_t group);
     int (*utime) (const vfs_path_t * vpath, struct utimbuf * times);
 
-    int (*readlink) (struct vfs_class * me, const char *path, char *buf, size_t size);
-    int (*symlink) (struct vfs_class * me, const char *n1, const char *n2);
-    int (*link) (struct vfs_class * me, const char *p1, const char *p2);
-    int (*unlink) (struct vfs_class * me, const char *path);
-    int (*rename) (struct vfs_class * me, const char *p1, const char *p2);
+    int (*readlink) (const vfs_path_t * vpath, char *buf, size_t size);
+    int (*symlink) (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
+    int (*link) (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
+    int (*unlink) (const vfs_path_t * vpath);
+    int (*rename) (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
     int (*chdir) (const vfs_path_t * vpath);
     int (*ferrno) (struct vfs_class * me);
       off_t (*lseek) (void *vfs_info, off_t offset, int whence);
-    int (*mknod) (struct vfs_class * me, const char *path, mode_t mode, dev_t dev);
+    int (*mknod) (const vfs_path_t * vpath, mode_t mode, dev_t dev);
 
       vfsid (*getid) (struct vfs_class * me, const char *path);
 

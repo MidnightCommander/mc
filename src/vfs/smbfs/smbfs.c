@@ -997,11 +997,9 @@ smbfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+smbfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
-    (void) me;
-
-    DEBUG (3, ("smbfs_readlink(path:%s, buf:%s, size:%zu)\n", path, buf, size));
+    DEBUG (3, ("smbfs_readlink(path:%s, buf:%s, size:%zu)\n", vpath->unparsed, buf, size));
     my_errno = EOPNOTSUPP;
     return -1;                  /* no symlinks on smb filesystem? */
 }
@@ -1009,11 +1007,9 @@ smbfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_symlink (struct vfs_class *me, const char *n1, const char *n2)
+smbfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
-
-    DEBUG (3, ("smbfs_symlink(n1:%s, n2:%s)\n", n1, n2));
+    DEBUG (3, ("smbfs_symlink(n1:%s, n2:%s)\n", vpath1->unparsed, vpath2->unparsed));
     my_errno = EOPNOTSUPP;
     return -1;                  /* no symlinks on smb filesystem? */
 }
@@ -1835,11 +1831,10 @@ smbfs_lseek (void *data, off_t offset, int whence)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
+smbfs_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 {
-    (void) me;
-
-    DEBUG (3, ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path, mode, (unsigned int) dev));
+    DEBUG (3,
+           ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", vpath->unparsed, mode, (unsigned int) dev));
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -1906,11 +1901,9 @@ smbfs_rmdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_link (struct vfs_class *me, const char *p1, const char *p2)
+smbfs_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
-
-    DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", p1, p2));
+    DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", vpath1->unparsed, vpath2->unparsed));
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -2075,14 +2068,12 @@ smbfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_unlink (struct vfs_class *me, const char *path)
+smbfs_unlink (const vfs_path_t * vpath)
 {
     smbfs_connection *sc;
     char *remote_file;
 
-    (void) me;
-
-    if ((remote_file = smbfs_get_path (&sc, path)) == 0)
+    if ((remote_file = smbfs_get_path (&sc, vpath->unparsed)) == 0)
         return -1;
 
     remote_file = free_after (smbfs_convert_path (remote_file, FALSE), remote_file);
@@ -2101,18 +2092,16 @@ smbfs_unlink (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_rename (struct vfs_class *me, const char *a, const char *b)
+smbfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     smbfs_connection *sc;
     char *ra, *rb;
     int retval;
 
-    (void) me;
-
-    if ((ra = smbfs_get_path (&sc, a)) == 0)
+    if ((ra = smbfs_get_path (&sc, vpath1->unparsed)) == 0)
         return -1;
 
-    if ((rb = smbfs_get_path (&sc, b)) == 0)
+    if ((rb = smbfs_get_path (&sc, vpath2->unparsed)) == 0)
     {
         g_free (ra);
         return -1;

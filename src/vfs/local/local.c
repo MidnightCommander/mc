@@ -159,31 +159,25 @@ local_utime (const vfs_path_t * vpath, struct utimbuf *times)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+local_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
-    (void) me;
-
-    return readlink (path, buf, size);
+    return readlink (vpath->unparsed, buf, size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_unlink (struct vfs_class *me, const char *path)
+local_unlink (const vfs_path_t * vpath)
 {
-    (void) me;
-
-    return unlink (path);
+    return unlink (vpath->unparsed);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_symlink (struct vfs_class *me, const char *n1, const char *n2)
+local_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
-
-    return symlink (n1, n2);
+    return symlink (vpath1->unparsed, vpath2->unparsed);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -216,11 +210,9 @@ local_write (void *data, const char *buf, size_t nbyte)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_rename (struct vfs_class *me, const char *a, const char *b)
+local_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
-
-    return rename (a, b);
+    return rename (vpath1->unparsed, vpath2->unparsed);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -234,21 +226,17 @@ local_chdir (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
+local_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 {
-    (void) me;
-
-    return mknod (path, mode, dev);
+    return mknod (vpath->unparsed, mode, dev);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_link (struct vfs_class *me, const char *p1, const char *p2)
+local_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
-
-    return link (p1, p2);
+    return link (vpath1->unparsed, vpath2->unparsed);
 }
 
 /* --------------------------------------------------------------------------------------------- */

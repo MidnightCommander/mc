@@ -1150,23 +1150,24 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_rename (struct vfs_class *me, const char *path1, const char *path2)
+fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2, *mpath1, *mpath2;
     struct vfs_s_super *super, *super2;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
 
-    mpath1 = g_strdup (path1);
-    crpath1 = vfs_s_get_path_mangle (me, mpath1, &super, 0);
+    mpath1 = g_strdup (vpath1->unparsed);
+    crpath1 = vfs_s_get_path_mangle (path_element->class, mpath1, &super, 0);
     if (crpath1 == NULL)
     {
         g_free (mpath1);
         return -1;
     }
-    mpath2 = g_strdup (path2);
-    crpath2 = vfs_s_get_path_mangle (me, mpath2, &super2, 0);
+    mpath2 = g_strdup (vpath2->unparsed);
+    crpath2 = vfs_s_get_path_mangle (path_element->class, mpath2, &super2, 0);
     if (crpath2 == NULL)
     {
         g_free (mpath1);
@@ -1183,29 +1184,33 @@ fish_rename (struct vfs_class *me, const char *path1, const char *path2)
     g_free (shell_commands);
     g_free (rpath1);
     g_free (rpath2);
-    return fish_send_command (me, super2, buf, OPT_FLUSH);
+    return fish_send_command (path_element->class, super2, buf, OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_link (struct vfs_class *me, const char *path1, const char *path2)
+fish_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2, *mpath1, *mpath2;
     struct vfs_s_super *super, *super2;
+    vfs_path_element_t *path_element;
 
-    mpath1 = g_strdup (path1);
-    crpath1 = vfs_s_get_path_mangle (me, mpath1, &super, 0);
+
+    path_element = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
+
+    mpath1 = g_strdup (vpath1->unparsed);
+    crpath1 = vfs_s_get_path_mangle (path_element->class, mpath1, &super, 0);
     if (crpath1 == NULL)
     {
         g_free (mpath1);
         return -1;
     }
-    mpath2 = g_strdup (path2);
-    crpath2 = vfs_s_get_path_mangle (me, mpath2, &super2, 0);
+    mpath2 = g_strdup (vpath2->unparsed);
+    crpath2 = vfs_s_get_path_mangle (path_element->class, mpath2, &super2, 0);
     if (crpath2 == NULL)
     {
         g_free (mpath1);
@@ -1222,14 +1227,14 @@ fish_link (struct vfs_class *me, const char *path1, const char *path2)
     g_free (shell_commands);
     g_free (rpath1);
     g_free (rpath2);
-    return fish_send_command (me, super2, buf, OPT_FLUSH);
+    return fish_send_command (path_element->class, super2, buf, OPT_FLUSH);
 }
 
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_symlink (struct vfs_class *me, const char *setto, const char *path)
+fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     char *qsetto;
     gchar *shell_commands = NULL;
@@ -1237,9 +1242,10 @@ fish_symlink (struct vfs_class *me, const char *setto, const char *path)
     const char *crpath;
     char *rpath, *mpath;
     struct vfs_s_super *super;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
 
-    mpath = g_strdup (path);
-    crpath = vfs_s_get_path_mangle (me, mpath, &super, 0);
+    mpath = g_strdup (vpath2->unparsed);
+    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
     if (crpath == NULL)
     {
         g_free (mpath);
@@ -1248,14 +1254,14 @@ fish_symlink (struct vfs_class *me, const char *setto, const char *path)
     rpath = strutils_shell_escape (crpath);
     g_free (mpath);
 
-    qsetto = strutils_shell_escape (setto);
+    qsetto = strutils_shell_escape (vpath1->unparsed);
     shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
                                   SUP->scr_ln, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, qsetto, rpath);
     g_free (shell_commands);
     g_free (qsetto);
     g_free (rpath);
-    return fish_send_command (me, super, buf, OPT_FLUSH);
+    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1347,18 +1353,33 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_unlink (struct vfs_class *me, const char *path)
+fish_unlink (const vfs_path_t * vpath)
 {
     gchar *shell_commands = NULL;
 
-    PREFIX;
+    char buf[BUF_LARGE];
+    const char *crpath;
+    char *rpath, *mpath;
+    struct vfs_s_super *super;
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    mpath = g_strdup (vpath->unparsed);
+    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    if (crpath == NULL)
+    {
+        g_free (mpath);
+        return -1;
+    }
+    rpath = strutils_shell_escape (crpath);
+    g_free (mpath);
 
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_unlink, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
     g_free (shell_commands);
     g_free (rpath);
-    return fish_send_command (me, super, buf, OPT_FLUSH);
+    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -344,9 +344,11 @@ sfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+sfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
-    path = sfs_redirect (me, path);
+    const char *path;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path = sfs_redirect (path_element->class, vpath->unparsed);
     return readlink (path, buf, size);
 }
 

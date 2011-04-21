@@ -1136,17 +1136,20 @@ extfs_fstat (void *data, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
     struct archive *archive;
     char *q, *mpath;
     size_t len;
     struct entry *entry;
     int result = -1;
+    vfs_path_element_t *path_element;
 
-    mpath = g_strdup (path);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    q = extfs_get_path_mangle (me, mpath, &archive, FALSE);
+    mpath = g_strdup (vpath->unparsed);
+
+    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1154,7 +1157,7 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
         goto cleanup;
     if (!S_ISLNK (entry->inode->mode))
     {
-        me->verrno = EINVAL;
+        path_element->class->verrno = EINVAL;
         goto cleanup;
     }
     len = strlen (entry->inode->linkname);
@@ -1203,16 +1206,17 @@ extfs_write (void *data, const char *buf, size_t nbyte)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_unlink (struct vfs_class *me, const char *file)
+extfs_unlink (const vfs_path_t * vpath)
 {
     struct archive *archive;
     char *q, *mpath;
     struct entry *entry;
     int result = -1;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    mpath = g_strdup (file);
+    mpath = g_strdup (vpath->unparsed);
 
-    q = extfs_get_path_mangle (me, mpath, &archive, FALSE);
+    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1223,7 +1227,7 @@ extfs_unlink (struct vfs_class *me, const char *file)
         goto cleanup;
     if (S_ISDIR (entry->inode->mode))
     {
-        me->verrno = EISDIR;
+        path_element->class->verrno = EISDIR;
         goto cleanup;
     }
     if (extfs_cmd (" rm ", archive, entry, ""))
