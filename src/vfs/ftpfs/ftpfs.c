@@ -1938,35 +1938,39 @@ ftpfs_ctl (void *fh, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_send_command (struct vfs_class *me, const char *filename, const char *cmd, int flags)
+ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
 {
     const char *rpath;
     char *p, *mpath;
     struct vfs_s_super *super;
     int r;
+    vfs_path_element_t *path_element;
+
     int flush_directory_cache = (flags & OPT_FLUSH);
 
-    mpath = g_strdup (filename);
-    rpath = vfs_s_get_path_mangle (me, mpath, &super, 0);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    mpath = g_strdup (vpath->unparsed);
+    rpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
     if (rpath == NULL)
     {
         g_free (mpath);
         return -1;
     }
-    p = ftpfs_translate_path (me, super, rpath);
-    r = ftpfs_command (me, super, WAIT_REPLY, cmd, p);
+    p = ftpfs_translate_path (path_element->class, super, rpath);
+    r = ftpfs_command (path_element->class, super, WAIT_REPLY, cmd, p);
     g_free (p);
     vfs_stamp_create (&vfs_ftpfs_ops, super);
     if (flags & OPT_IGNORE_ERROR)
         r = COMPLETE;
     if (r != COMPLETE)
     {
-        me->verrno = EPERM;
+        path_element->class->verrno = EPERM;
         g_free (mpath);
         return -1;
     }
     if (flush_directory_cache)
-        vfs_s_invalidate (me, super);
+        vfs_s_invalidate (path_element->class, super);
     g_free (mpath);
     return 0;
 }
@@ -1978,13 +1982,10 @@ ftpfs_chmod (const vfs_path_t * vpath, int mode)
 {
     char buf[BUF_SMALL];
     int ret;
-    vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
     g_snprintf (buf, sizeof (buf), "SITE CHMOD %4.4o /%%s", mode & 07777);
 
-    ret = ftpfs_send_command (path_element->class, vpath->unparsed, buf, OPT_FLUSH);
+    ret = ftpfs_send_command (vpath, buf, OPT_FLUSH);
 
     return ftpfs_ignore_chattr_errors ? 0 : ret;
 }
@@ -2016,10 +2017,7 @@ ftpfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 static int
 ftpfs_unlink (const vfs_path_t * vpath)
 {
-    vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    return ftpfs_send_command (path_element->class, vpath->unparsed, "DELE /%s", OPT_FLUSH);
+    return ftpfs_send_command (vpath, "DELE /%s", OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2066,11 +2064,8 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
 static int
 ftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
-    ftpfs_send_command (path_element->class, vpath1->unparsed, "RNFR /%s", OPT_FLUSH);
-    return ftpfs_send_command (path_element->class, vpath2->unparsed, "RNTO /%s", OPT_FLUSH);
+    ftpfs_send_command (vpath1, "RNFR /%s", OPT_FLUSH);
+    return ftpfs_send_command (vpath2, "RNTO /%s", OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2078,11 +2073,9 @@ ftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 static int
 ftpfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
-    vfs_path_element_t *path_element;
     (void) mode;                /* FIXME: should be used */
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    return ftpfs_send_command (path_element->class, vpath->unparsed, "MKD /%s", OPT_FLUSH);
+    return ftpfs_send_command (vpath, "MKD /%s", OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2090,10 +2083,7 @@ ftpfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 static int
 ftpfs_rmdir (const vfs_path_t * vpath)
 {
-    vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    return ftpfs_send_command (path_element->class, vpath->unparsed, "RMD /%s", OPT_FLUSH);
+    return ftpfs_send_command (vpath, "RMD /%s", OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
