@@ -242,21 +242,17 @@ local_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_mkdir (struct vfs_class *me, const char *path, mode_t mode)
+local_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
-    (void) me;
-
-    return mkdir (path, mode);
+    return mkdir (vpath->unparsed, mode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_rmdir (struct vfs_class *me, const char *path)
+local_rmdir (const vfs_path_t * vpath)
 {
-    (void) me;
-
-    return rmdir (path);
+    return rmdir (vpath->unparsed);
 }
 
 /* --------------------------------------------------------------------------------------------- */

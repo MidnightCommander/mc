@@ -153,12 +153,16 @@ vfs_rmstamp (struct vfs_class *v, vfsid id)
 void
 vfs_stamp_path (const char *path)
 {
-    struct vfs_class *vfs;
     vfsid id;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    vfs = vfs_get_class (path);
-    id = vfs_getid (vfs, path);
-    vfs_addstamp (vfs, id);
+    vpath = vfs_path_from_str (path);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    id = vfs_getid (vpath);
+    vfs_addstamp (path_element->class, id);
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -169,10 +173,11 @@ vfs_stamp_path (const char *path)
 void
 vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 {
-    struct vfs_class *nvfs;
     vfsid nvfsid;
 
     ev_vfs_stamp_create_t event_data = { vclass, id, FALSE };
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
     /* There are three directories we have to take care of: current_dir,
        current_panel->cwd and other_panel->cwd. Athough most of the time either
@@ -182,20 +187,21 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
     if (!mc_event_present (MCEVENT_GROUP_CORE, "vfs_timestamp"))
         return;
 
-    nvfs = vfs_get_class (vfs_get_current_dir ());
-    nvfsid = vfs_getid (nvfs, vfs_get_current_dir ());
-    vfs_rmstamp (nvfs, nvfsid);
+    vpath = vfs_path_from_str (vfs_get_current_dir ());
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    if (id == NULL || (nvfs == vclass && nvfsid == id))
-        return;
+    nvfsid = vfs_getid (vpath);
+    vfs_rmstamp (path_element->class, nvfsid);
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) &event_data);
+    if (!(id == NULL || (path_element->class == vclass && nvfsid == id)))
+    {
+        mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) & event_data);
 
-    if (event_data.ret)
-        return;
-
-    if (vclass != NULL && vclass->nothingisopen != NULL && vclass->nothingisopen (id) != 0)
-        vfs_addstamp (vclass, id);
+        if (!event_data.ret && vclass != NULL && vclass->nothingisopen != NULL
+            && vclass->nothingisopen (id) != 0)
+            vfs_addstamp (vclass, id);
+    }
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -260,12 +266,13 @@ vfs_timeout_handler (void)
 void
 vfs_release_path (const char *dir)
 {
-    struct vfs_class *oldvfs;
-    vfsid oldvfsid;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element;
 
-    oldvfs = vfs_get_class (dir);
-    oldvfsid = vfs_getid (oldvfs, dir);
-    vfs_stamp_create (oldvfs, oldvfsid);
+    vpath = vfs_path_from_str (dir);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    vfs_stamp_create (path_element->class, vfs_getid (vpath));
 }
 
 /* --------------------------------------------------------------------------------------------- */

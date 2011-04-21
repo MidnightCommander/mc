@@ -1245,24 +1245,25 @@ extfs_unlink (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
+extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
     struct archive *archive;
     char *q, *mpath;
     struct entry *entry;
     int result = -1;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
     (void) mode;
 
-    mpath = g_strdup (path);
+    mpath = g_strdup (vpath->unparsed);
 
-    q = extfs_get_path_mangle (me, mpath, &archive, FALSE);
+    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
     if (entry != NULL)
     {
-        me->verrno = EEXIST;
+        path_element->class->verrno = EEXIST;
         goto cleanup;
     }
     entry = extfs_find_entry (archive->root_entry, q, TRUE, FALSE);
@@ -1273,7 +1274,7 @@ extfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
         goto cleanup;
     if (!S_ISDIR (entry->inode->mode))
     {
-        me->verrno = ENOTDIR;
+        path_element->class->verrno = ENOTDIR;
         goto cleanup;
     }
 
@@ -1292,16 +1293,17 @@ extfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_rmdir (struct vfs_class *me, const char *path)
+extfs_rmdir (const vfs_path_t * vpath)
 {
     struct archive *archive;
     char *q, *mpath;
     struct entry *entry;
     int result = -1;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    mpath = g_strdup (path);
+    mpath = g_strdup (vpath->unparsed);
 
-    q = extfs_get_path_mangle (me, mpath, &archive, FALSE);
+    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1312,7 +1314,7 @@ extfs_rmdir (struct vfs_class *me, const char *path)
         goto cleanup;
     if (!S_ISDIR (entry->inode->mode))
     {
-        me->verrno = ENOTDIR;
+        path_element->class->verrno = ENOTDIR;
         goto cleanup;
     }
 
@@ -1366,12 +1368,13 @@ extfs_lseek (void *data, off_t offset, int whence)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfsid
-extfs_getid (struct vfs_class *me, const char *path)
+extfs_getid (const vfs_path_t * vpath)
 {
     struct archive *archive = NULL;
     char *p;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    p = extfs_get_path (me, path, &archive, TRUE);
+    p = extfs_get_path (path_element->class, vpath->unparsed, &archive, TRUE);
     if (p == NULL)
         return NULL;
     g_free (p);
@@ -1683,13 +1686,15 @@ extfs_done (struct vfs_class *me)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
+extfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
     (void) arg;
 
     if (ctlop == VFS_SETCTL_RUN)
     {
-        extfs_run (me, path);
+        extfs_run (path_element->class, vpath->unparsed);
         return 1;
     }
     return 0;

@@ -1842,19 +1842,17 @@ smbfs_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
+smbfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
     smbfs_connection *sc;
     char *remote_file;
     char *cpath;
 
-    (void) me;
-
-    DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, (int) mode));
-    if ((remote_file = smbfs_get_path (&sc, path)) == 0)
+    DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", vpath->unparsed, (int) mode));
+    if ((remote_file = smbfs_get_path (&sc, vpath->unparsed)) == 0)
         return -1;
     g_free (remote_file);
-    cpath = smbfs_convert_path (path, FALSE);
+    cpath = smbfs_convert_path (vpath->unparsed, FALSE);
 
     if (!cli_mkdir (sc->cli, cpath))
     {
@@ -1871,19 +1869,17 @@ smbfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_rmdir (struct vfs_class *me, const char *path)
+smbfs_rmdir (const vfs_path_t * vpath)
 {
     smbfs_connection *sc;
     char *remote_file;
     char *cpath;
 
-    (void) me;
-
-    DEBUG (3, ("smbfs_rmdir(path:%s)\n", path));
-    if ((remote_file = smbfs_get_path (&sc, path)) == 0)
+    DEBUG (3, ("smbfs_rmdir(path:%s)\n", vpath->unparsed));
+    if ((remote_file = smbfs_get_path (&sc, vpath->unparsed)) == 0)
         return -1;
     g_free (remote_file);
-    cpath = smbfs_convert_path (path, FALSE);
+    cpath = smbfs_convert_path (vpath->unparsed, FALSE);
 
     if (!cli_rmdir (sc->cli, cpath))
     {
@@ -1964,16 +1960,15 @@ smbfs_forget (const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
+smbfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
-    (void) me;
     (void) arg;
 
-    DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path, ctlop));
+    DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", vpath->unparsed, ctlop));
     switch (ctlop)
     {
     case VFS_SETCTL_FORGET:
-        smbfs_forget (path);
+        smbfs_forget (vpath->unparsed);
         return 0;
     }
     return 0;

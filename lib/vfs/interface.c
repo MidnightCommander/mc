@@ -260,8 +260,8 @@ MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vpath, owner, g
 MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (vpath, times))
 MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (vpath, buf, bufsiz))
 MC_NAMEOP (unlink, (const char *path), (vpath))
-MC_NAMEOP (mkdir, (const char *path, mode_t mode), (path_element->class, vpath->unparsed, mode))
-MC_NAMEOP (rmdir, (const char *path), (path_element->class, vpath->unparsed))
+MC_NAMEOP (mkdir, (const char *path, mode_t mode), (vpath, mode))
+MC_NAMEOP (rmdir, (const char *path), (vpath))
 MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vpath, mode, dev))
 
 /* *INDENT-ON* */
@@ -399,8 +399,7 @@ mc_setctl (const char *path, int ctlop, void *arg)
     path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
     if (path_element != NULL && path_element->class != NULL)
         result =
-            path_element->class->setctl != NULL ? path_element->class->setctl (path_element->class,
-                                                                               vpath->unparsed,
+            path_element->class->setctl != NULL ? path_element->class->setctl (vpath,
                                                                                ctlop, arg) : 0;
 
     vfs_path_free (vpath);
@@ -729,8 +728,12 @@ mc_chdir (const char *path)
         return -1;
     }
 
-    old_vfsid = vfs_getid (current_vfs, current_dir);
-    old_vfs = current_vfs;
+    {
+        vfs_path_t *current_vpath = vfs_path_from_str (current_dir);
+        old_vfsid = vfs_getid (current_vpath);
+        old_vfs = current_vfs;
+        vfs_path_free (current_vpath);
+    }
 
     /* Actually change directory */
     g_free (current_dir);

@@ -178,7 +178,7 @@ typedef struct vfs_class
       off_t (*lseek) (void *vfs_info, off_t offset, int whence);
     int (*mknod) (const vfs_path_t * vpath, mode_t mode, dev_t dev);
 
-      vfsid (*getid) (struct vfs_class * me, const char *path);
+      vfsid (*getid) (const vfs_path_t * vpath);
 
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
@@ -186,11 +186,11 @@ typedef struct vfs_class
     char *(*getlocalcopy) (const vfs_path_t * vpath);
     int (*ungetlocalcopy) (const vfs_path_t * vpath, const char *local, int has_changed);
 
-    int (*mkdir) (struct vfs_class * me, const char *path, mode_t mode);
-    int (*rmdir) (struct vfs_class * me, const char *path);
+    int (*mkdir) (const vfs_path_t * vpath, mode_t mode);
+    int (*rmdir) (const vfs_path_t * vpath);
 
     int (*ctl) (void *vfs_info, int ctlop, void *arg);
-    int (*setctl) (struct vfs_class * me, const char *path, int ctlop, void *arg);
+    int (*setctl) (const vfs_path_t * vpath, int ctlop, void *arg);
 } vfs_class;
 
 /*
@@ -216,7 +216,7 @@ extern int use_netrc;
 /* lib/vfs/direntry.c: */
 void *vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode);
 
-vfsid vfs_getid (struct vfs_class *vclass, const char *dir);
+vfsid vfs_getid (const vfs_path_t * vpath);
 
 void vfs_init (void);
 void vfs_shut (void);

@@ -491,14 +491,16 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
 {
     if (mode == view_listing)
     {
-        struct vfs_class *nvfs;
-        vfsid nvfsid;
+        vfs_path_t *vpath;
+        vfs_path_element_t *path_element;
 
-        nvfs = vfs_get_class (panel->cwd);
-        if (nvfs != vclass)
+        vpath = vfs_path_from_str (panel->cwd);
+        path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+        if (path_element->class != vclass)
             return FALSE;
-        nvfsid = vfs_getid (nvfs, panel->cwd);
-        if (nvfsid != id)
+
+        if (vfs_getid (vpath) != id)
             return FALSE;
     }
     return TRUE;

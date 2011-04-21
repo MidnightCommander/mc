@@ -818,13 +818,17 @@ vfs_s_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_chang
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-vfs_s_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
+vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
     switch (ctlop)
     {
     case VFS_SETCTL_STALE_DATA:
         {
-            struct vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
+            struct vfs_s_inode *ino =
+                vfs_s_inode_from_path (path_element->class, vpath->unparsed, 0);
 
             if (ino == NULL)
                 return 0;
@@ -833,15 +837,15 @@ vfs_s_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
             else
             {
                 ino->super->want_stale = 0;
-                vfs_s_invalidate (me, ino->super);
+                vfs_s_invalidate (path_element->class, ino->super);
             }
             return 1;
         }
     case VFS_SETCTL_LOGFILE:
-        MEDATA->logfile = fopen ((char *) arg, "w");
+        ((struct vfs_s_subclass *) path_element->class->data)->logfile = fopen ((char *) arg, "w");
         return 1;
     case VFS_SETCTL_FLUSH:
-        MEDATA->flush = 1;
+        ((struct vfs_s_subclass *) path_element->class->data)->flush = 1;
         return 1;
     }
     return 0;
@@ -851,12 +855,15 @@ vfs_s_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 /* ----------------------------- Stamping support -------------------------- */
 
 static vfsid
-vfs_s_getid (struct vfs_class *me, const char *path)
+vfs_s_getid (const vfs_path_t * vpath)
 {
     struct vfs_s_super *archive = NULL;
     char *p;
+    vfs_path_element_t *path_element;
 
-    p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    p = vfs_s_get_path (path_element->class, vpath->unparsed, &archive, FL_NO_OPEN);
     if (p == NULL)
         return NULL;
     g_free (p);
@@ -1380,18 +1387,15 @@ vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
 /** Find VFS id for given directory name */
 
 vfsid
-vfs_getid (struct vfs_class *vclass, const char *dir)
+vfs_getid (const vfs_path_t * vpath)
 {
-    char *dir1;
-    vfsid id = NULL;
+    vfs_path_element_t *path_element;
 
-    /* append slash if needed */
-    dir1 = concat_dir_and_file (dir, "");
-    if (vclass->getid)
-        id = (*vclass->getid) (vclass, dir1);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    if (path_element == NULL || path_element->class->getid == NULL)
+        return NULL;
 
-    g_free (dir1);
-    return id;
+    return (*path_element->class->getid) (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

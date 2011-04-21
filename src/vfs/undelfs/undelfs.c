@@ -726,12 +726,11 @@ undelfs_lseek (void *vfs_info, off_t offset, int whence)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfsid
-undelfs_getid (struct vfs_class *me, const char *path)
+undelfs_getid (const vfs_path_t * vpath)
 {
     char *fname, *fsname;
-    (void) me;
 
-    undelfs_get_path (path, &fsname, &fname);
+    undelfs_get_path (vpath->unparsed, &fsname, &fname);
 
     if (!fsname)
         return NULL;

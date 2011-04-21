@@ -355,13 +355,11 @@ sfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfsid
-sfs_getid (struct vfs_class *me, const char *path)
+sfs_getid (const vfs_path_t * vpath)
 {
     GSList *cur;
 
-    (void) me;
-
-    cur = g_slist_find_custom (head, path, cachedfile_compare);
+    cur = g_slist_find_custom (head, vpath->unparsed, cachedfile_compare);
 
     return (vfsid) (cur != NULL ? cur->data : NULL);
 }

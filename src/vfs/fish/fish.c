@@ -1403,14 +1403,29 @@ fish_exists (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
+fish_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
     gchar *shell_commands = NULL;
     int ret_code;
-
-    PREFIX;
+    char buf[BUF_LARGE];
+    const char *crpath;
+    char *rpath, *mpath;
+    struct vfs_s_super *super;
+    vfs_path_element_t *path_element;
 
     (void) mode;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    mpath = g_strdup (vpath->unparsed);
+    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    if (crpath == NULL)
+    {
+        g_free (mpath);
+        return -1;
+    }
+    rpath = strutils_shell_escape (crpath);
+    g_free (mpath);
 
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_mkdir, (char *) NULL);
@@ -1418,31 +1433,49 @@ fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
     g_free (shell_commands);
 
     g_free (rpath);
-    ret_code = fish_send_command (me, super, buf, OPT_FLUSH);
+    ret_code = fish_send_command (path_element->class, super, buf, OPT_FLUSH);
 
     if (ret_code != 0)
         return ret_code;
 
-    if (!fish_exists (me, path))
-        ERRNOR (EACCES, -1);
+    if (!fish_exists (path_element->class, vpath->unparsed))
+    {
+        path_element->class->verrno = EACCES;
+        return -1;
+    }
     return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_rmdir (struct vfs_class *me, const char *path)
+fish_rmdir (const vfs_path_t * vpath)
 {
     gchar *shell_commands = NULL;
+    char buf[BUF_LARGE];
+    const char *crpath;
+    char *rpath, *mpath;
+    struct vfs_s_super *super;
+    vfs_path_element_t *path_element;
 
-    PREFIX;
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    mpath = g_strdup (vpath->unparsed);
+    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    if (crpath == NULL)
+    {
+        g_free (mpath);
+        return -1;
+    }
+    rpath = strutils_shell_escape (crpath);
+    g_free (mpath);
 
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_rmdir, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath);
     g_free (shell_commands);
     g_free (rpath);
-    return fish_send_command (me, super, buf, OPT_FLUSH);
+    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */

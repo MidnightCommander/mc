@@ -2076,19 +2076,24 @@ ftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
+ftpfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
+    vfs_path_element_t *path_element;
     (void) mode;                /* FIXME: should be used */
 
-    return ftpfs_send_command (me, path, "MKD /%s", OPT_FLUSH);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    return ftpfs_send_command (path_element->class, vpath->unparsed, "MKD /%s", OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_rmdir (struct vfs_class *me, const char *path)
+ftpfs_rmdir (const vfs_path_t * vpath)
 {
-    return ftpfs_send_command (me, path, "RMD /%s", OPT_FLUSH);
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    return ftpfs_send_command (path_element->class, vpath->unparsed, "RMD /%s", OPT_FLUSH);
 }
 
 /* --------------------------------------------------------------------------------------------- */
