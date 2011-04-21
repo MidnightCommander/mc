@@ -57,7 +57,7 @@
 #include "src/main.h"           /* home_dir */
 
 #include "edit-impl.h"
-#include "edit-widget.h"
+#include "editwidget.h"
 
 /*** global variables ****************************************************************************/
 

@@ -37,7 +37,7 @@
 #include "src/main.h"
 #include "src/history.h"
 
-#include "src/editor/edit-widget.h"
+#include "src/editor/editwidget.h"
 #include "src/editor/etags.h"
 #include "src/editor/editcmd_dialogs.h"
 

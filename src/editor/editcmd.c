@@ -69,7 +69,7 @@
 
 
 #include "edit-impl.h"
-#include "edit-widget.h"
+#include "editwidget.h"
 #include "editcmd_dialogs.h"
 #include "etags.h"
 
