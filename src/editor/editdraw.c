@@ -54,7 +54,7 @@
 #include "src/main.h"           /* macro_index */
 
 #include "edit-impl.h"
-#include "edit-widget.h"
+#include "editwidget.h"
 
 /*** global variables ****************************************************************************/
 

@@ -71,7 +71,7 @@
 #include "src/filemanager/layout.h"     /* mc_refresh()  */
 
 #include "edit-impl.h"
-#include "edit-widget.h"
+#include "editwidget.h"
 #include "editcmd_dialogs.h"
 #include "etags.h"
 
