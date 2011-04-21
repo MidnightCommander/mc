@@ -60,7 +60,7 @@
 #include "lib/widget.h"         /* message() */
 
 #include "edit-impl.h"
-#include "edit-widget.h"
+#include "editwidget.h"
 
 /*** global variables ****************************************************************************/
 
