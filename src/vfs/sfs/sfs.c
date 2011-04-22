@@ -208,14 +208,16 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-sfs_redirect (struct vfs_class *me, const char *name)
+sfs_redirect (const vfs_path_t * vpath)
 {
     GSList *cur;
     cachedfile *cf;
     char *cache;
     int handle;
+    vfs_path_element_t *path_element;
 
-    cur = g_slist_find_custom (head, name, cachedfile_compare);
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    cur = g_slist_find_custom (head, vpath->unparsed, cachedfile_compare);
     if (cur != NULL)
     {
         cf = (cachedfile *) cur->data;
@@ -223,17 +225,17 @@ sfs_redirect (struct vfs_class *me, const char *name)
         return cf->cache;
     }
 
-    handle = vfs_mkstemps (&cache, "sfs", name);
+    handle = vfs_mkstemps (&cache, "sfs", vpath->unparsed);
 
     if (handle == -1)
         return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
 
     close (handle);
 
-    if (sfs_vfmake (me, name, cache) == 0)
+    if (sfs_vfmake (path_element->class, vpath->unparsed, cache) == 0)
     {
         cf = g_new (cachedfile, 1);
-        cf->name = g_strdup (name);
+        cf->name = g_strdup (vpath->unparsed);
         cf->cache = cache;
         head = g_slist_prepend (head, cf);
 
@@ -254,12 +256,8 @@ sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ ,
 {
     int *sfs_info;
     int fd;
-    const char *path;
-    vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    path = sfs_redirect (path_element->class, vpath->unparsed);
-    fd = open (path, NO_LINEAR (flags), mode);
+    fd = open (sfs_redirect (vpath), NO_LINEAR (flags), mode);
     if (fd == -1)
         return 0;
 
@@ -274,12 +272,7 @@ sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ ,
 static int
 sfs_stat (const vfs_path_t * vpath, struct stat *buf)
 {
-    vfs_path_element_t *path_element;
-    const char *path;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    path = sfs_redirect (path_element->class, vpath->unparsed);
-    return stat (path, buf);
+    return stat (sfs_redirect (vpath), buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -287,15 +280,10 @@ sfs_stat (const vfs_path_t * vpath, struct stat *buf)
 static int
 sfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
-    vfs_path_element_t *path_element;
-    const char *path;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    path = sfs_redirect (path_element->class, vpath->unparsed);
 #ifndef HAVE_STATLSTAT
-    return lstat (path, buf);
+    return lstat (sfs_redirect (vpath), buf);
 #else
-    return statlstat (path, buf);
+    return statlstat (sfs_redirect (vpath), buf);
 #endif
 }
 
@@ -304,13 +292,7 @@ sfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 static int
 sfs_chmod (const vfs_path_t * vpath, int mode)
 {
-    const char *path;
-    vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-
-    path = sfs_redirect (path_element->class, vpath->unparsed);
-    return chmod (path, mode);
+    return chmod (sfs_redirect (vpath), mode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -318,13 +300,7 @@ sfs_chmod (const vfs_path_t * vpath, int mode)
 static int
 sfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    const char *path;
-    vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-
-    path = sfs_redirect (path_element->class, vpath->unparsed);
-    return chown (path, owner, group);
+    return chown (sfs_redirect (vpath), owner, group);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -332,13 +308,7 @@ sfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 static int
 sfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 {
-    const char *path;
-    vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-
-    path = sfs_redirect (path_element->class, vpath->unparsed);
-    return utime (path, times);
+    return utime (sfs_redirect (vpath), times);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -346,10 +316,7 @@ sfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 static int
 sfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
-    const char *path;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    path = sfs_redirect (path_element->class, vpath->unparsed);
-    return readlink (path, buf, size);
+    return readlink (sfs_redirect (vpath), buf, size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -415,12 +382,7 @@ sfs_nothingisopen (vfsid id)
 static char *
 sfs_getlocalcopy (const vfs_path_t * vpath)
 {
-    vfs_path_element_t *path_element;
-    const char *path;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    path = sfs_redirect (path_element->class, vpath->unparsed);
-    return g_strdup (path);
+    return g_strdup (sfs_redirect (vpath));
 }
 
 /* --------------------------------------------------------------------------------------------- */
