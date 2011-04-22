@@ -56,6 +56,7 @@
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/gc.h"         /* vfs_stamp_create */
+#include "lib/event.h"
 
 #include "sftpfs.h"
 #include "dialogs.h"
@@ -1423,6 +1424,9 @@ init_sftpfs (void)
     vfs_sftpfs_ops.rmdir = sftpfs_rmdir;
     vfs_register_class (&vfs_sftpfs_ops);
 
+    mc_event_add ("vfs", "plugin_name_for_config_dialog", sftpfs_plugin_name_for_config_dialog,
+                  NULL, NULL);
+    mc_event_add ("vfs", "plugin_show_config_dialog", sftpfs_plugin_show_config_dialog, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

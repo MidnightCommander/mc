@@ -209,7 +209,7 @@ create_panel_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("S&hell link..."), CK_ConnectFish));
 #endif
 #ifdef ENABLE_VFS_SFTP
-    entries = g_list_append (entries, menu_entry_create (_("S&FTP link..."), CK_ConnectSftp));
+    entries = g_list_prepend (entries, menu_entry_create (_("S&FTP link..."), CK_ConnectSftp));
 #endif
 #ifdef ENABLE_VFS_SMB
     entries = g_list_prepend (entries, menu_entry_create (_("SM&B link..."), CK_ConnectSmb));
@@ -332,6 +332,26 @@ create_options_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("Learn &keys..."), CK_LearnKeys));
 #ifdef ENABLE_VFS
     entries = g_list_prepend (entries, menu_entry_create (_("&Virtual FS..."), CK_OptionsVfs));
+#if 0
+    entries = g_list_prepend (entries, menu_separator_create ());
+    {
+        /* get list of vfs-plugins, who need call to configuration dialog */
+        GList *config_plugins = NULL;
+
+        mc_event_raise ("vfs", "plugin_name_for_config_dialog", (gpointer) & config_plugins);
+        if (config_plugins != NULL)
+        {
+            GList *i;
+
+            for (i = config_plugins; i != NULL; i = g_list_next (i))
+                entries =
+                    g_list_prepend (entries,
+                                   menu_entry_create_event ((const char *) i->data, "vfs",
+                                                            "plugin_show_config_dialog", i->data));
+            g_list_free (config_plugins);
+        }
+    }
+#endif
 #endif
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("&Save setup"), CK_SaveSetup));
