@@ -373,10 +373,12 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     item = starting_widget;
     do
     {
-        Widget *widget;
+        Widget *widget = (Widget *) item->data;
 
-        widget = (Widget *) item->data;
-        item = dlg_widget_next (h, item);
+        if ((h->flags & DLG_REVERSE) == 0)
+            item = dlg_widget_prev (h, item);
+        else
+            item = dlg_widget_next (h, item);
 
         if (((widget->options & W_DISABLED) == 0)
             && (x > widget->x) && (x <= widget->x + widget->cols)
