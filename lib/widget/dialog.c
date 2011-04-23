@@ -1065,7 +1065,7 @@ dlg_select_by_id (const Dlg_head * h, unsigned long id)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*
+/**
  * Try to select widget in the dialog.
  */
 
@@ -1076,6 +1076,36 @@ dlg_select_widget (void *w)
     Dlg_head *h = widget->owner;
 
     do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Set widget at top of widget list and make it current.
+ */
+
+void
+dlg_set_top_widget (void *w)
+{
+    Widget *widget = (Widget *) w;
+    Dlg_head *h = widget->owner;
+    GList *l;
+
+    l = g_list_find (h->widgets, w);
+    if (l == NULL)
+        abort ();               /* widget is not in dialog, this should not happen */
+
+    /* unfocus prevoius widget and focus current one before widget reordering */
+    if (h->state == DLG_ACTIVE)
+        do_select_widget (h, l, SELECT_EXACT);
+
+    /* widget reordering */
+    h->widgets = g_list_remove_link (h->widgets, l);
+    if ((h->flags & DLG_REVERSE) != 0)
+        h->widgets = g_list_concat (l, h->widgets);
+    else
+        h->widgets = g_list_concat (h->widgets, l);
+    h->current = l;
 }
 
 /* --------------------------------------------------------------------------------------------- */
