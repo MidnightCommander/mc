@@ -200,7 +200,8 @@ void dlg_erase (Dlg_head * h);
 void dlg_stop (Dlg_head * h);
 
 /* Widget selection */
-void dlg_select_widget (void *widget);
+void dlg_select_widget (void *w);
+void dlg_set_top_widget (void *w);
 void dlg_one_up (Dlg_head * h);
 void dlg_one_down (Dlg_head * h);
 gboolean dlg_focus (Dlg_head * h);
