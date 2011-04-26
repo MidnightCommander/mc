@@ -260,6 +260,53 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_class *
+_vfs_split_with_semi_skip_count (char *path, char **inpath, char **op, size_t skip_count)
+{
+    char *semi;
+    char *slash;
+    struct vfs_class *ret;
+
+    if (path == NULL)
+        vfs_die ("Cannot split NULL");
+
+    semi = strrstr_skip_count (path, "#", skip_count);
+
+    if ((semi == NULL) || (!path_magic (path)))
+        return NULL;
+
+    slash = strchr (semi, PATH_SEP);
+    *semi = '\0';
+
+    if (op != NULL)
+        *op = NULL;
+
+    if (inpath != NULL)
+        *inpath = NULL;
+
+    if (slash != NULL)
+        *slash = '\0';
+
+    ret = vfs_prefix_to_class (semi + 1);
+    if (ret != NULL)
+    {
+        if (op != NULL)
+            *op = semi + 1;
+        if (inpath != NULL)
+            *inpath = slash != NULL ? slash + 1 : NULL;
+        return ret;
+    }
+
+    if (slash != NULL)
+        *slash = PATH_SEP;
+
+    *semi = '#';
+    ret = _vfs_split_with_semi_skip_count (path, inpath, op, skip_count + 1);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /** Free open file data for given file handle */
@@ -437,45 +484,7 @@ vfs_strip_suffix_from_filename (const char *filename)
 struct vfs_class *
 vfs_split (char *path, char **inpath, char **op)
 {
-    char *semi;
-    char *slash;
-    struct vfs_class *ret;
-
-    if (path == NULL)
-        vfs_die ("Cannot split NULL");
-
-    semi = strrchr (path, '#');
-    if (semi == NULL || !path_magic (path))
-        return NULL;
-
-    slash = strchr (semi, PATH_SEP);
-    *semi = '\0';
-
-    if (op != NULL)
-        *op = NULL;
-
-    if (inpath != NULL)
-        *inpath = NULL;
-
-    if (slash != NULL)
-        *slash = '\0';
-
-    ret = vfs_prefix_to_class (semi + 1);
-    if (ret != NULL)
-    {
-        if (op != NULL)
-            *op = semi + 1;
-        if (inpath != NULL)
-            *inpath = slash != NULL ? slash + 1 : NULL;
-        return ret;
-    }
-
-    if (slash != NULL)
-        *slash = PATH_SEP;
-
-    ret = vfs_split (path, inpath, op);
-    *semi = '#';
-    return ret;
+    return _vfs_split_with_semi_skip_count (path, inpath, op, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
