@@ -84,6 +84,54 @@ START_TEST (test_register_vfs_class)
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
+START_TEST (test_register_vfs_class2)
+{
+    static struct vfs_s_subclass test_subclass1, test_subclass2;
+    static struct vfs_class vfs_test_ops1, vfs_test_ops2;
+
+    test_subclass1.flags = VFS_S_REMOTE;
+    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
+
+    vfs_test_ops1.name = "testfs1";
+    vfs_test_ops1.flags = VFSF_NOLINKS;
+    vfs_test_ops1.prefix = "test1:";
+    vfs_register_class (&vfs_test_ops1);
+
+    vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
+
+    vfs_test_ops2.name = "testfs2";
+    vfs_test_ops2.prefix = "test2:";
+    vfs_register_class (&vfs_test_ops2);
+
+
+    fail_if (vfs_list->len != 3, "Failed to register test VFS module");;
+
+    {
+        struct vfs_class *result;
+        result = vfs_get_class("/#test1://bla-bla/some/path");
+        fail_if(result == NULL, "VFS module not found!");
+        fail_unless(result == &vfs_test_ops1, "Result(%p)  don't match to vfs_test_ops1(%p)!", result, &vfs_test_ops1);
+    }
+
+
+    {
+        struct vfs_class *result;
+        result = vfs_get_class("/#test2://bla-bla/some/path/#test1://bla-bla/some/path");
+        fail_if(result == NULL, "VFS module not found!");
+        fail_unless(result == &vfs_test_ops1, "Result(%p)  don't match to vfs_test_ops1(%p)!", result, &vfs_test_ops1);
+    }
+
+    {
+        struct vfs_class *result;
+        result = vfs_get_class("/#test1://bla-bla/some/path/#test2://bla-bla/some/path");
+        fail_if(result == NULL, "VFS module not found!");
+        fail_unless(result == &vfs_test_ops2, "Result(%p)  don't match to vfs_test_ops2(%p)!", result, &vfs_test_ops2);
+    }
+
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 main (void)
@@ -98,6 +146,7 @@ main (void)
 
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, test_register_vfs_class);
+    tcase_add_test (tc_core, test_register_vfs_class2);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
