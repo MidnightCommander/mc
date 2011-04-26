@@ -803,3 +803,26 @@ str_msg_term_size (const char *text, int *lines, int *columns)
 
     g_free (tmp);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count)
+{
+    char *semi;
+    ssize_t len;
+
+    len = strlen (haystack);
+
+    do
+    {
+        semi = g_strrstr_len (haystack, len, needle);
+        if (semi == NULL)
+            return NULL;
+        len = semi - haystack - 1;
+    }
+    while (skip_count-- != 0);
+    return semi;
+}
+
+/* --------------------------------------------------------------------------------------------- */
