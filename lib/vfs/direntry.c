@@ -398,12 +398,15 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
  */
 
 static char *
-vfs_s_get_path (struct vfs_class *me, const char *inname, struct vfs_s_super **archive, int flags)
+vfs_s_get_path (const vfs_path_t *vpath, struct vfs_s_super **archive, int flags)
 {
     char *buf, *retval;
+    vfs_path_element_t *path_element;
 
-    buf = g_strdup (inname);
-    retval = g_strdup (vfs_s_get_path_mangle (me, buf, archive, flags));
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
+    buf = g_strdup (vpath->unparsed);
+    retval = g_strdup (vfs_s_get_path_mangle (path_element->class, buf, archive, flags));
     g_free (buf);
     return retval;
 }
@@ -413,22 +416,25 @@ vfs_s_get_path (struct vfs_class *me, const char *inname, struct vfs_s_super **a
 /* ------------------------ readdir & friends ----------------------------- */
 
 static struct vfs_s_inode *
-vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
+vfs_s_inode_from_path (const vfs_path_t *vpath, int flags)
 {
     struct vfs_s_super *super;
     struct vfs_s_inode *ino;
     char *q;
+    vfs_path_element_t *path_element;
 
-    if (!(q = vfs_s_get_path (me, name, &super, 0)))
+    if (!(q = vfs_s_get_path (vpath, &super, 0)))
         return NULL;
 
+    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+
     ino =
-        vfs_s_find_inode (me, super, q,
+        vfs_s_find_inode (path_element->class, super, q,
                           flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
     if ((!ino) && (!*q))
         /* We are asking about / directory of ftp server: assume it exists */
         ino =
-            vfs_s_find_inode (me, super, q,
+            vfs_s_find_inode (path_element->class, super, q,
                               flags & FL_FOLLOW ? LINK_FOLLOW :
                               LINK_NO_FOLLOW, FL_DIR | (flags & ~FL_FOLLOW));
     g_free (q);
@@ -445,7 +451,8 @@ vfs_s_opendir (const vfs_path_t * vpath)
     vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    dir = vfs_s_inode_from_path (path_element->class, vpath->unparsed, FL_DIR | FL_FOLLOW);
+
+    dir = vfs_s_inode_from_path (vpath, FL_DIR | FL_FOLLOW);
     if (dir == NULL)
         return NULL;
     if (!S_ISDIR (dir->st.st_mode))
@@ -527,10 +534,8 @@ static int
 vfs_s_internal_stat (const vfs_path_t * vpath, struct stat *buf, int flag)
 {
     struct vfs_s_inode *ino;
-    vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    ino = vfs_s_inode_from_path (path_element->class, vpath->unparsed, flag);
+    ino = vfs_s_inode_from_path (vpath, flag);
     if (ino == NULL)
         return -1;
     *buf = ino->st;
@@ -573,7 +578,7 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 
     path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    ino = vfs_s_inode_from_path (path_element->class, vpath->unparsed, 0);
+    ino = vfs_s_inode_from_path (vpath, 0);
     if (!ino)
         return -1;
 
@@ -828,7 +833,7 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
     case VFS_SETCTL_STALE_DATA:
         {
             struct vfs_s_inode *ino =
-                vfs_s_inode_from_path (path_element->class, vpath->unparsed, 0);
+                vfs_s_inode_from_path (vpath, 0);
 
             if (ino == NULL)
                 return 0;
@@ -859,11 +864,8 @@ vfs_s_getid (const vfs_path_t * vpath)
 {
     struct vfs_s_super *archive = NULL;
     char *p;
-    vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-
-    p = vfs_s_get_path (path_element->class, vpath->unparsed, &archive, FL_NO_OPEN);
+    p = vfs_s_get_path (vpath, &archive, FL_NO_OPEN);
     if (p == NULL)
         return NULL;
     g_free (p);
@@ -1174,7 +1176,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    q = vfs_s_get_path (path_element->class, vpath->unparsed, &super, 0);
+    q = vfs_s_get_path (vpath, &super, 0);
     if (q == NULL)
         return NULL;
     ino = vfs_s_find_inode (path_element->class, super, q, LINK_FOLLOW, FL_NONE);

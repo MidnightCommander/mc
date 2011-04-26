@@ -105,18 +105,18 @@ vfs_path_from_str (const char *path_str)
 vfs_path_t *
 vfs_path_new (void)
 {
-    vfs_path_t *path;
-    path = g_new0 (vfs_path_t, 1);
-    path->path = g_ptr_array_new ();
-    return path;
+    vfs_path_t *vpath;
+    vpath = g_new0 (vfs_path_t, 1);
+    vpath->path = g_ptr_array_new ();
+    return vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 size_t
-vfs_path_length (const vfs_path_t * path)
+vfs_path_length (const vfs_path_t * vpath)
 {
-    return path->path->len;
+    return vpath->path->len;
 }
 
 /* --------------------------------------------------------------------------------------------- */
