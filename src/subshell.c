@@ -1239,7 +1239,7 @@ do_subshell_chdir (const char *directory, gboolean update_prompt, gboolean reset
         if (bPathNotEq && strcmp (pcwd, "."))
         {
             char *cwd = strip_password (g_strdup (pcwd), 1);
-            fprintf (stderr, _("Warning: Cannot change to %s.\n"), cwd);
+            vfs_print_message (_("Warning: Cannot change to %s.\n"), cwd);
             g_free (cwd);
         }
     }
