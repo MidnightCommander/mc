@@ -94,6 +94,75 @@ START_TEST (test_vfs_path_from_to_string)
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
+START_TEST (test_vfs_path_from_to_partial_string_by_class)
+{
+    vfs_path_t *vpath;
+    char *result;
+    vpath = vfs_path_from_str (ETALON_PATH_STR);
+
+
+    result = vfs_path_to_str_elements_count(vpath, -1);
+    fail_unless(
+        strcmp("/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path", result);
+    g_free(result);
+
+    result = vfs_path_to_str_elements_count(vpath, -2);
+    fail_unless(
+        strcmp("/#test1:/bla-bla/some/path/", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/#test1:/bla-bla/some/path/", result);
+    g_free(result);
+
+    result = vfs_path_to_str_elements_count(vpath, -3);
+    fail_unless(
+        strcmp("/", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/", result);
+    g_free(result);
+
+    /* index out of bound*/
+    result = vfs_path_to_str_elements_count(vpath, -4);
+    fail_unless(
+        strcmp("", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "", result);
+    g_free(result);
+
+
+    result = vfs_path_to_str_elements_count(vpath, 1);
+    fail_unless(
+        strcmp("/", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/", result);
+    g_free(result);
+
+    result = vfs_path_to_str_elements_count(vpath, 2);
+    fail_unless(
+        strcmp("/#test1:/bla-bla/some/path/", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/#test1:/bla-bla/some/path/", result);
+    g_free(result);
+
+    result = vfs_path_to_str_elements_count(vpath, 3);
+    fail_unless(
+        strcmp("/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path", result);
+    g_free(result);
+
+    result = vfs_path_to_str_elements_count(vpath, 4);
+    fail_unless(
+        strcmp(ETALON_PATH_STR, result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_STR, result);
+    g_free(result);
+
+    /* index out of bound*/
+    result = vfs_path_to_str_elements_count(vpath, 5);
+    fail_unless(
+        strcmp(ETALON_PATH_STR, result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_STR, result);
+    g_free(result);
+
+    vfs_path_free(vpath);
+}
+END_TEST
+/* --------------------------------------------------------------------------------------------- */
+
 
 int
 main (void)
@@ -108,6 +177,7 @@ main (void)
 
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, test_vfs_path_from_to_string);
+    tcase_add_test (tc_core, test_vfs_path_from_to_partial_string_by_class);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

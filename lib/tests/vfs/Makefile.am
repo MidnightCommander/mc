@@ -3,6 +3,7 @@ LIBS=@CHECK_LIBS@  \
     $(top_builddir)/lib/libmc.la
 
 TESTS = \
+	current_dir \
 	vfs_prefix_to_class \
 	get_vfs_class \
 	vfs_split \
@@ -10,6 +11,9 @@ TESTS = \
 	vfs_s_get_path_mangle
 
 check_PROGRAMS = $(TESTS)
+
+current_dir_SOURCES = \
+	current_dir.c
 
 get_vfs_class_SOURCES = \
 	get_vfs_class.c
