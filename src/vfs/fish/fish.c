@@ -1155,29 +1155,20 @@ fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath1, *crpath2;
-    char *rpath1, *rpath2, *mpath1, *mpath2;
+    char *rpath1, *rpath2;
     struct vfs_s_super *super, *super2;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
 
-    mpath1 = g_strdup (vpath1->unparsed);
-    crpath1 = vfs_s_get_path_mangle (path_element->class, mpath1, &super, 0);
+    crpath1 = vfs_s_get_path_mangle (vpath1, &super, 0);
     if (crpath1 == NULL)
-    {
-        g_free (mpath1);
         return -1;
-    }
-    mpath2 = g_strdup (vpath2->unparsed);
-    crpath2 = vfs_s_get_path_mangle (path_element->class, mpath2, &super2, 0);
+
+    crpath2 = vfs_s_get_path_mangle (vpath2, &super2, 0);
     if (crpath2 == NULL)
-    {
-        g_free (mpath1);
-        g_free (mpath2);
         return -1;
-    }
+
     rpath1 = strutils_shell_escape (crpath1);
-    g_free (mpath1);
     rpath2 = strutils_shell_escape (crpath2);
-    g_free (mpath2);
     shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
                                   SUP->scr_mv, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath1, rpath2);
@@ -1195,32 +1186,23 @@ fish_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath1, *crpath2;
-    char *rpath1, *rpath2, *mpath1, *mpath2;
+    char *rpath1, *rpath2;
     struct vfs_s_super *super, *super2;
     vfs_path_element_t *path_element;
 
 
-    path_element = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
+    path_element = vfs_path_get_by_index (vpath1, -1);
 
-    mpath1 = g_strdup (vpath1->unparsed);
-    crpath1 = vfs_s_get_path_mangle (path_element->class, mpath1, &super, 0);
+    crpath1 = vfs_s_get_path_mangle (vpath1, &super, 0);
     if (crpath1 == NULL)
-    {
-        g_free (mpath1);
         return -1;
-    }
-    mpath2 = g_strdup (vpath2->unparsed);
-    crpath2 = vfs_s_get_path_mangle (path_element->class, mpath2, &super2, 0);
+
+    crpath2 = vfs_s_get_path_mangle (vpath2, &super2, 0);
     if (crpath2 == NULL)
-    {
-        g_free (mpath1);
-        g_free (mpath2);
         return -1;
-    }
+
     rpath1 = strutils_shell_escape (crpath1);
-    g_free (mpath1);
     rpath2 = strutils_shell_escape (crpath2);
-    g_free (mpath2);
     shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
                                   SUP->scr_hardlink, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, rpath1, rpath2);
@@ -1240,19 +1222,14 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath;
-    char *rpath, *mpath;
+    char *rpath;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
 
-    mpath = g_strdup (vpath2->unparsed);
-    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    crpath = vfs_s_get_path_mangle (vpath2, &super, 0);
     if (crpath == NULL)
-    {
-        g_free (mpath);
         return -1;
-    }
     rpath = strutils_shell_escape (crpath);
-    g_free (mpath);
 
     qsetto = strutils_shell_escape (vpath1->unparsed);
     shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
@@ -1272,21 +1249,16 @@ fish_chmod (const vfs_path_t * vpath, int mode)
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath;
-    char *rpath, *mpath;
+    char *rpath;
     struct vfs_s_super *super;
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
-    mpath = g_strdup (vpath->unparsed);
-    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
     if (crpath == NULL)
-    {
-        g_free (mpath);
         return -1;
-    }
     rpath = strutils_shell_escape (crpath);
-    g_free (mpath);
 
     shell_commands = g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n",
                                   SUP->scr_chmod, (char *) NULL);
@@ -1320,22 +1292,17 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
         gchar *shell_commands = NULL;
         char buf[BUF_LARGE];
         const char *crpath;
-        char *rpath, *mpath;
+        char *rpath;
         struct vfs_s_super *super;
         vfs_path_element_t *path_element;
 
-        path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+        path_element = vfs_path_get_by_index (vpath, -1);
 
 
-        mpath = g_strdup (vpath->unparsed);
-        crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+        crpath = vfs_s_get_path_mangle (vpath, &super, 0);
         if (crpath == NULL)
-        {
-            g_free (mpath);
             return -1;
-        }
         rpath = strutils_shell_escape (crpath);
-        g_free (mpath);
 
         shell_commands = g_strconcat (SUP->scr_env,
                                       "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
@@ -1359,20 +1326,15 @@ fish_unlink (const vfs_path_t * vpath)
 
     char buf[BUF_LARGE];
     const char *crpath;
-    char *rpath, *mpath;
+    char *rpath;
     struct vfs_s_super *super;
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    mpath = g_strdup (vpath->unparsed);
-    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    path_element = vfs_path_get_by_index (vpath, -1);
+    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
     if (crpath == NULL)
-    {
-        g_free (mpath);
         return -1;
-    }
     rpath = strutils_shell_escape (crpath);
-    g_free (mpath);
 
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_unlink, (char *) NULL);
@@ -1385,11 +1347,21 @@ fish_unlink (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_exists (struct vfs_class *me, const char *path)
+fish_exists (const vfs_path_t * vpath)
 {
     gchar *shell_commands = NULL;
 
-    PREFIX;
+    char buf[BUF_LARGE];
+    const char *crpath;
+    char *rpath;
+    struct vfs_s_super *super;
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
+    if (crpath == NULL)
+        return -1;
+    rpath = strutils_shell_escape (crpath);
 
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_exists, (char *) NULL);
@@ -1397,7 +1369,7 @@ fish_exists (struct vfs_class *me, const char *path)
     g_free (shell_commands);
     g_free (rpath);
 
-    return (fish_send_command (me, super, buf, OPT_FLUSH) == 0) ? 1 : 0;
+    return (fish_send_command (path_element->class, super, buf, OPT_FLUSH) == 0) ? 1 : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1409,23 +1381,18 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
     int ret_code;
     char buf[BUF_LARGE];
     const char *crpath;
-    char *rpath, *mpath;
+    char *rpath;
     struct vfs_s_super *super;
     vfs_path_element_t *path_element;
 
     (void) mode;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
-    mpath = g_strdup (vpath->unparsed);
-    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
     if (crpath == NULL)
-    {
-        g_free (mpath);
         return -1;
-    }
     rpath = strutils_shell_escape (crpath);
-    g_free (mpath);
 
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_mkdir, (char *) NULL);
@@ -1438,7 +1405,7 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
     if (ret_code != 0)
         return ret_code;
 
-    if (!fish_exists (path_element->class, vpath->unparsed))
+    if (!fish_exists (vpath))
     {
         path_element->class->verrno = EACCES;
         return -1;
@@ -1454,21 +1421,16 @@ fish_rmdir (const vfs_path_t * vpath)
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath;
-    char *rpath, *mpath;
+    char *rpath;
     struct vfs_s_super *super;
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
-    mpath = g_strdup (vpath->unparsed);
-    crpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
     if (crpath == NULL)
-    {
-        g_free (mpath);
         return -1;
-    }
     rpath = strutils_shell_escape (crpath);
-    g_free (mpath);
 
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_rmdir, (char *) NULL);

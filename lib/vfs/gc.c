@@ -158,7 +158,7 @@ vfs_stamp_path (const char *path)
     vfs_path_element_t *path_element;
 
     vpath = vfs_path_from_str (path);
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     id = vfs_getid (vpath);
     vfs_addstamp (path_element->class, id);
@@ -188,7 +188,7 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
         return;
 
     vpath = vfs_path_from_str (vfs_get_current_dir ());
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     nvfsid = vfs_getid (vpath);
     vfs_rmstamp (path_element->class, nvfsid);
@@ -270,7 +270,7 @@ vfs_release_path (const char *dir)
     vfs_path_element_t *path_element;
 
     vpath = vfs_path_from_str (dir);
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     vfs_stamp_create (path_element->class, vfs_getid (vpath));
 }

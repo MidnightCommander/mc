@@ -1,4 +1,4 @@
-/* lib/vfs - get vfs_path_t from string
+/* lib/vfs - test vfs_prefix_to_class() functionality
 
    Copyright (C) 2011 Free Software Foundation, Inc.
 
@@ -28,12 +28,28 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/path.c" /* for testing static methods  */
+#include "lib/vfs/vfs.c" /* for testing static methods  */
 
 #include "src/vfs/local/local.c"
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
+
+
+static int
+test_which (struct vfs_class *me, const char *path)
+{
+    (void) me;
+
+    if (
+        (strcmp(path, "test_1:") == 0) ||
+        (strcmp(path, "test_2:") == 0) ||
+        (strcmp(path, "test_3:") == 0) ||
+        (strcmp(path, "test_4:") == 0)
+    )
+        return 1;
+    return -1;
+}
 
 static void
 setup (void)
@@ -48,10 +64,10 @@ setup (void)
 
     test_subclass1.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
-
     vfs_test_ops1.name = "testfs1";
     vfs_test_ops1.flags = VFSF_NOLINKS;
     vfs_test_ops1.prefix = "test1:";
+    vfs_test_ops1.which = test_which;
     vfs_register_class (&vfs_test_ops1);
 
     vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
@@ -74,15 +90,26 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test_vfs_path_from_string)
+START_TEST (test_vfs_prefix_to_class_valid)
 {
-    vfs_path_t *vpath;
-    size_t vpath_len;
-    vpath = vfs_path_from_str ("/#test1://bla-bla/some/path/#test2://bla-bla/some/path#test3:/111/22/33");
+    fail_unless(vfs_prefix_to_class((char *) "test_1:") == &vfs_test_ops1, "'test_1:' doesn't transform to vfs_test_ops1");
+    fail_unless(vfs_prefix_to_class((char *) "test_2:") == &vfs_test_ops1, "'test_2:' doesn't transform to vfs_test_ops1");
+    fail_unless(vfs_prefix_to_class((char *) "test_3:") == &vfs_test_ops1, "'test_3:' doesn't transform to vfs_test_ops1");
+    fail_unless(vfs_prefix_to_class((char *) "test_4:") == &vfs_test_ops1, "'test_4:' doesn't transform to vfs_test_ops1");
 
-    vpath_len = vfs_path_length(vpath);
-//    fail_unless(vpath_len == 3, "vpath length should be 3 (actial: %d)",vpath_len);
-    vfs_path_free(vpath);
+    fail_unless(vfs_prefix_to_class((char *) "test2:") == &vfs_test_ops2, "'test2:' doesn't transform to vfs_test_ops2");
+
+    fail_unless(vfs_prefix_to_class((char *) "test3:") == &vfs_test_ops3, "'test3:' doesn't transform to vfs_test_ops3");
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+START_TEST (test_vfs_prefix_to_class_invalid)
+{
+    fail_unless(vfs_prefix_to_class((char *) "test1:") == NULL, "'test1:' doesn't transform to NULL");
+    fail_unless(vfs_prefix_to_class((char *) "test_5:") == NULL, "'test_5:' doesn't transform to NULL");
+    fail_unless(vfs_prefix_to_class((char *) "test4:") == NULL, "'test4:' doesn't transform to NULL");
 }
 END_TEST
 
@@ -100,7 +127,8 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_vfs_path_from_string);
+    tcase_add_test (tc_core, test_vfs_prefix_to_class_valid);
+    tcase_add_test (tc_core, test_vfs_prefix_to_class_invalid);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

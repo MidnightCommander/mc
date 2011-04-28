@@ -495,7 +495,7 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
         vfs_path_element_t *path_element;
 
         vpath = vfs_path_from_str (panel->cwd);
-        path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+        path_element = vfs_path_get_by_index (vpath, -1);
 
         if (path_element->class != vclass)
             return FALSE;

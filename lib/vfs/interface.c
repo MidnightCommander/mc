@@ -202,7 +202,7 @@ mc_open (const char *filename, int flags, ...)
         va_end (ap);
     }
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
     if (path_element != NULL && path_element->class->open != NULL)
     {
         void *info;
@@ -235,7 +235,7 @@ int mc_##name inarg \
     if (vpath == NULL) \
         return -1; \
 \
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1); \
+    path_element = vfs_path_get_by_index (vpath, -1); \
     if (path_element == NULL) \
     { \
         vfs_path_free(vpath); \
@@ -283,7 +283,7 @@ mc_symlink (const char *name1, const char *path)
     if (vpath2 != NULL)
     {
         vfs_path_element_t *path_element =
-            vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1);
+            vfs_path_get_by_index (vpath1, vfs_path_elements_count (vpath1) - 1);
         if (path_element != NULL)
         {
             result =
@@ -343,8 +343,8 @@ int mc_##name (const char *fname1, const char *fname2) \
         vfs_path_free(vpath1); \
         return -1; \
     }\
-    path_element1 = vfs_path_get_by_index (vpath1, vfs_path_length (vpath1) - 1); \
-    path_element2 = vfs_path_get_by_index (vpath2, vfs_path_length (vpath2) - 1); \
+    path_element1 = vfs_path_get_by_index (vpath1, vfs_path_elements_count (vpath1) - 1); \
+    path_element2 = vfs_path_get_by_index (vpath2, vfs_path_elements_count (vpath2) - 1); \
 \
     if (path_element1->class != path_element2->class) \
     { \
@@ -396,7 +396,7 @@ mc_setctl (const char *path, int ctlop, void *arg)
     if (vpath == NULL)
         vfs_die ("You don't want to pass NULL to mc_setctl.");
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
     if (path_element != NULL && path_element->class != NULL)
         result =
             path_element->class->setctl != NULL ? path_element->class->setctl (vpath,
@@ -450,7 +450,7 @@ mc_opendir (const char *dirname)
     if (vpath == NULL)
         return NULL;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     info = path_element->class->opendir ? (*path_element->class->opendir) (vpath) : NULL;
 
@@ -568,7 +568,7 @@ mc_stat (const char *filename, struct stat *buf)
     if (vpath == NULL)
         return -1;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     if (path_element != NULL && path_element->class != NULL)
     {
@@ -594,7 +594,7 @@ mc_lstat (const char *filename, struct stat *buf)
     if (vpath == NULL)
         return -1;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     if (path_element != NULL && path_element->class != NULL)
     {
@@ -656,7 +656,7 @@ mc_getlocalcopy (const char *pathname)
     if (vpath == NULL)
         return NULL;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
     if (path_element != NULL)
     {
         result = path_element->class->getlocalcopy != NULL ?
@@ -681,7 +681,7 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
     if (vpath == NULL)
         return -1;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
     if (path_element != NULL)
     {
         return_value = path_element->class->ungetlocalcopy != NULL ?
@@ -715,7 +715,7 @@ mc_chdir (const char *path)
     if (vpath == NULL)
         return -1;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     if (!path_element->class->chdir)
         return -1;

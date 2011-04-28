@@ -33,10 +33,13 @@
 #include <config.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"
 
 #include "vfs.h"
 #include "utilvfs.h"
 #include "path.h"
+
+extern GPtrArray *vfs__classes_list;
 
 /*** global variables ****************************************************************************/
 
@@ -49,85 +52,245 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+path_magic (const char *path)
+{
+    struct stat buf;
+
+    return (stat (path, &buf) != 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Splits path extracting vfs part.
+ *
+ * Splits path
+ * \verbatim /p1#op/inpath \endverbatim
+ * into
+ * \verbatim inpath,op; \endverbatim
+ * returns which vfs it is.
+ * What is left in path is p1. You still want to g_free(path), you DON'T
+ * want to free neither *inpath nor *op
+ */
+
+static struct vfs_class *
+_vfs_split_with_semi_skip_count (char *path, const char **inpath, const char **op,
+                                 size_t skip_count)
+{
+    char *semi;
+    char *slash;
+    struct vfs_class *ret;
+
+    if (path == NULL)
+        vfs_die ("Cannot split NULL");
+
+    semi = strrstr_skip_count (path, "#", skip_count);
+
+    if ((semi == NULL) || (!path_magic (path)))
+        return NULL;
+
+    slash = strchr (semi, PATH_SEP);
+    *semi = '\0';
+
+    if (op != NULL)
+        *op = NULL;
+
+    if (inpath != NULL)
+        *inpath = NULL;
+
+    if (slash != NULL)
+        *slash = '\0';
+
+    ret = vfs_prefix_to_class (semi + 1);
+    if (ret != NULL)
+    {
+        if (op != NULL)
+            *op = semi + 1;
+        if (inpath != NULL)
+            *inpath = slash != NULL ? slash + 1 : NULL;
+        return ret;
+    }
+
+    if (slash != NULL)
+        *slash = PATH_SEP;
+
+    *semi = '#';
+    ret = _vfs_split_with_semi_skip_count (path, inpath, op, skip_count + 1);
+    return ret;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Convert first elements_count elements from vfs_path_t to string representation.
+ *
+ * @param vpath pointer to vfs_path_t object
+ * @param elements_count count of first elements for convert
+ *
+ * @return pointer to newly created string.
+ */
 
 char *
-vfs_path_to_str (const vfs_path_t * path)
+vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
 {
-    size_t element_index;
+    int element_index;
     GString *buffer;
 
-    if (path == NULL)
+    if (vpath == NULL)
         return NULL;
+
+    if (elements_count > vfs_path_elements_count (vpath))
+        elements_count = vfs_path_elements_count (vpath);
+
+    if (elements_count < 0)
+        elements_count = vfs_path_elements_count (vpath) + elements_count;
 
     buffer = g_string_new ("");
 
-    for (element_index = 0; element_index < vfs_path_length (path); element_index++)
+    for (element_index = 0; element_index < elements_count; element_index++)
     {
-        vfs_path_element_t *element = vfs_path_get_by_index (path, element_index);
+        vfs_path_element_t *element = vfs_path_get_by_index (vpath, element_index);
+
+        if (element->raw_url_str != NULL)
+        {
+            g_string_append (buffer, "#");
+            g_string_append (buffer, element->raw_url_str);
+        }
+        if ((*element->path != PATH_SEP) && (*element->path != '\0'))
+            g_string_append_c (buffer, PATH_SEP);
         g_string_append (buffer, element->path);
     }
     return g_string_free (buffer, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Convert vfs_path_t to string representation.
+ *
+ * @param vpath pointer to vfs_path_t object
+ *
+ * @return pointer to newly created string.
+ */
+char *
+vfs_path_to_str (const vfs_path_t * vpath)
+{
+    return vfs_path_to_str_elements_count (vpath, vfs_path_elements_count (vpath));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Split path string to path elements.
+ *
+ * @param path_str VFS-path
+ *
+ * @return pointer to newly created vfs_path_t object with filled elements array.
+ */
 
 vfs_path_t *
 vfs_path_from_str (const char *path_str)
 {
-    vfs_path_t *path;
+    vfs_path_t *vpath;
     vfs_path_element_t *element;
+    struct vfs_class *class;
+    const char *local, *op;
+    char *path;
 
     if (path_str == NULL)
         return NULL;
 
-    path = vfs_path_new ();
-    path->unparsed_encoding = g_strdup (vfs_get_encoding (path_str));
+    vpath = vfs_path_new ();
+    vpath->unparsed_encoding = g_strdup (vfs_get_encoding (path_str));
 
-    path->unparsed = vfs_canon_and_translate (path_str);
-    if (path->unparsed == NULL)
+    vpath->unparsed = vfs_canon_and_translate (path_str);
+
+    if (vpath->unparsed == NULL)
     {
-        vfs_path_free (path);
+        vfs_path_free (vpath);
         return NULL;
     }
 
-    element = g_new0 (vfs_path_element_t, 1);
-    element->class = vfs_get_class (path->unparsed);
+    path = g_strdup (vpath->unparsed);
+    while ((class = _vfs_split_with_semi_skip_count (path, &local, &op, 0)) != NULL)
+    {
+        element = g_new0 (vfs_path_element_t, 1);
+        element->class = vfs_prefix_to_class (op);
+        if (local == NULL)
+            local = "";
+        element->path = g_strdup (local);
+        element->raw_url_str = g_strdup (op);
+        vpath->path = g_list_prepend (vpath->path, element);
+    }
+    if (path[0] != '\0')
+    {
+        element = g_new0 (vfs_path_element_t, 1);
+        element->class = g_ptr_array_index (vfs__classes_list, 0);
+        element->path = g_strdup (path);
+        element->raw_url_str = NULL;
+        vpath->path = g_list_prepend (vpath->path, element);
+    }
+    g_free (path);
 
-    g_ptr_array_add (path->path, element);
-    return path;
+    return vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/*
+ * Create new vfs_path_t object.
+ *
+ * @return pointer to newly created vfs_path_t object.
+ */
 
 vfs_path_t *
 vfs_path_new (void)
 {
     vfs_path_t *vpath;
     vpath = g_new0 (vfs_path_t, 1);
-    vpath->path = g_ptr_array_new ();
     return vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/*
+ * Get count of path elements.
+ *
+ * @param vpath pointer to vfs_path_t object
+ *
+ * @return count of path elements.
+ */
 
-size_t
-vfs_path_length (const vfs_path_t * vpath)
+int
+vfs_path_elements_count (const vfs_path_t * vpath)
 {
-    return vpath->path->len;
+    return g_list_length (vpath->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/*
+ * Get one path element by index.
+ *
+ * @param vpath pointer to vfs_path_t object
+ * @param element_index element index. May have negative value (in this case count was started at the end of list).
+ *
+ * @return path element.
+ */
 
 vfs_path_element_t *
-vfs_path_get_by_index (const vfs_path_t * path, size_t element_index)
+vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 {
-    return g_ptr_array_index (path->path, element_index);
+    if (element_index >= 0)
+        return g_list_nth_data (vpath->path, element_index);
+
+    return g_list_nth_data (vpath->path, vfs_path_elements_count (vpath) + element_index);
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/*
+ * Free one path element.
+ *
+ * @param element pointer to vfs_path_element_t object
+ *
+ */
 
 void
 vfs_path_element_free (vfs_path_element_t * element)
@@ -135,24 +298,56 @@ vfs_path_element_free (vfs_path_element_t * element)
     if (element == NULL)
         return;
 
+    vfs_url_free (element->url);
     g_free (element->path);
     g_free (element->encoding);
     g_free (element);
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/*
+ * Free vfs_path_t object.
+ *
+ * @param vpath pointer to vfs_path_t object
+ *
+ */
 
 void
 vfs_path_free (vfs_path_t * path)
 {
     if (path == NULL)
         return;
-
-    g_ptr_array_foreach (path->path, (GFunc) vfs_path_element_free, NULL);
-    g_ptr_array_free (path->path, TRUE);
+    g_list_foreach (path->path, (GFunc) vfs_path_element_free, NULL);
+    g_list_free (path->path);
     g_free (path->unparsed);
     g_free (path->unparsed_encoding);
     g_free (path);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Return VFS class for the given prefix */
+struct vfs_class *
+vfs_prefix_to_class (const char *prefix)
+{
+    guint i;
+
+    /* Avoid first class (localfs) that would accept any prefix */
+    for (i = 1; i < vfs__classes_list->len; i++)
+    {
+        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        if (vfs->which != NULL)
+        {
+            if (vfs->which (vfs, prefix) == -1)
+                continue;
+            return vfs;
+        }
+
+        if (vfs->prefix != NULL && strncmp (prefix, vfs->prefix, strlen (vfs->prefix)) == 0)
+            return vfs;
+    }
+
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

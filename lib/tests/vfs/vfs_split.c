@@ -28,7 +28,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/vfs.c" /* for testing static methods  */
+#include "lib/vfs/path.c" /* for testing static methods  */
 
 #include "src/vfs/local/local.c"
 
@@ -76,8 +76,8 @@ teardown (void)
 
 START_TEST (test_vfs_split)
 {
-    char *local, *op, *path;
-    const char *etalon_path, *etalon_local, *etalon_op;
+    char *path;
+    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
     struct vfs_class *result;
 
     path = g_strdup("#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/#test3:/qqq/www/eee.rr");
@@ -85,7 +85,7 @@ START_TEST (test_vfs_split)
     etalon_path = "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/";
     etalon_local = "qqq/www/eee.rr";
     etalon_op = "test3:";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops3, "Result(%p) doesn't match to vfs_test_ops3(%p)", result, &vfs_test_ops3);
     fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
@@ -94,7 +94,7 @@ START_TEST (test_vfs_split)
     etalon_path = "#test1:/bla-bla/some/path/";
     etalon_local = "bla-bla/some/path2/";
     etalon_op = "test2:";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
     fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
@@ -103,13 +103,13 @@ START_TEST (test_vfs_split)
     etalon_path = "";
     etalon_local = "bla-bla/some/path/";
     etalon_op = "test1:";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops1, "Result(%p) doesn't match to vfs_test_ops1(%p)", result, &vfs_test_ops2);
     fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
     fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
 
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == NULL, "Result(%p) doesn't match to vfs_test_ops1(NULL)", result);
     fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
@@ -123,8 +123,8 @@ END_TEST
 
 START_TEST (test_vfs_split_with_local)
 {
-    char *local, *op, *path;
-    const char *etalon_path, *etalon_local, *etalon_op;
+    char *path;
+    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
     struct vfs_class *result;
 
     path = g_strdup("/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2#test3:/qqq/www/eee.rr");
@@ -132,7 +132,7 @@ START_TEST (test_vfs_split_with_local)
     etalon_path = "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2";
     etalon_local = "qqq/www/eee.rr";
     etalon_op = "test3:";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops3, "Result(%p) doesn't match to vfs_test_ops3(%p)", result, &vfs_test_ops3);
     fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
@@ -141,7 +141,7 @@ START_TEST (test_vfs_split_with_local)
     etalon_path = "/local/path/#test1:/bla-bla/some/path/";
     etalon_local = "bla-bla/some/path2";
     etalon_op = "test2:";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
     fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
@@ -150,13 +150,13 @@ START_TEST (test_vfs_split_with_local)
     etalon_path = "/local/path/";
     etalon_local = "bla-bla/some/path/";
     etalon_op = "test1:";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops1, "Result(%p) doesn't match to vfs_test_ops1(%p)", result, &vfs_test_ops2);
     fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
     fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
 
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == NULL, "Result(%p) doesn't match to vfs_test_ops1(NULL)", result);
 
     g_free(path);
@@ -166,8 +166,8 @@ END_TEST
 /* --------------------------------------------------------------------------------------------- */
 START_TEST (test_vfs_split_url)
 {
-    char *local, *op, *path;
-    const char *etalon_path, *etalon_local, *etalon_op;
+    char *path;
+    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
     struct vfs_class *result;
 
     path = g_strdup("#test2:username:passwd@somehost.net/bla-bla/some/path2");
@@ -175,7 +175,7 @@ START_TEST (test_vfs_split_url)
     etalon_path = "";
     etalon_local = "bla-bla/some/path2";
     etalon_op = "test2:username:passwd@somehost.net";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
     fail_unless(path != NULL && strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(local != NULL && strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
@@ -189,8 +189,8 @@ END_TEST
 
 START_TEST (test_vfs_split_url_with_semi)
 {
-    char *local, *op, *path;
-    const char *etalon_path, *etalon_local, *etalon_op;
+    char *path;
+    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
     struct vfs_class *result;
 
 
@@ -199,7 +199,7 @@ START_TEST (test_vfs_split_url_with_semi)
     etalon_path = "/local/path/#test1:/bla-bla/some/path/";
     etalon_local = "bla-bla/some/path2";
     etalon_op = "test2:username:p!a@s#s$w%d@somehost.net";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
     fail_unless(path != NULL && strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(local != NULL && strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
@@ -214,8 +214,8 @@ END_TEST
 
 START_TEST (test_vfs_split_with_semi_in_path)
 {
-    char *local, *op, *path;
-    const char *etalon_path, *etalon_local, *etalon_op;
+    char *path;
+    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
     struct vfs_class *result;
 
     path = g_strdup("#test2:/bl#a-bl#a/so#me/pa#th2");
@@ -223,7 +223,7 @@ START_TEST (test_vfs_split_with_semi_in_path)
     etalon_path = "";
     etalon_local = "bl#a-bl#a/so#me/pa#th2";
     etalon_op = "test2:";
-    result = vfs_split (path, &local, &op);
+    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
     fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
     fail_unless(path != NULL && strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
     fail_unless(local != NULL && strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);

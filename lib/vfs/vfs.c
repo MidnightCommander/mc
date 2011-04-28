@@ -56,6 +56,8 @@
 extern struct dirent *mc_readdir_result;
 /*** global variables ****************************************************************************/
 
+GPtrArray *vfs__classes_list = NULL;
+
 GString *vfs_str_buffer;
 struct vfs_class *current_vfs;
 
@@ -87,8 +89,6 @@ struct vfs_openfile
 static GPtrArray *vfs_openfiles;
 static long vfs_free_handle_list = -1;
 
-static GPtrArray *vfs_list = NULL;
-
 static const struct
 {
     const char *name;
@@ -112,32 +112,6 @@ static const struct
 };
 
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/** Return VFS class for the given prefix */
-static struct vfs_class *
-vfs_prefix_to_class (char *prefix)
-{
-    guint i;
-
-    /* Avoid first class (localfs) that would accept any prefix */
-    for (i = 1; i < vfs_list->len; i++)
-    {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs_list, i);
-        if (vfs->which != NULL)
-        {
-            if (vfs->which (vfs, prefix) == -1)
-                continue;
-            return vfs;
-        }
-
-        if (vfs->prefix != NULL && strncmp (prefix, vfs->prefix, strlen (vfs->prefix)) == 0)
-            return vfs;
-    }
-
-    return NULL;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
@@ -260,53 +234,6 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static struct vfs_class *
-_vfs_split_with_semi_skip_count (char *path, char **inpath, char **op, size_t skip_count)
-{
-    char *semi;
-    char *slash;
-    struct vfs_class *ret;
-
-    if (path == NULL)
-        vfs_die ("Cannot split NULL");
-
-    semi = strrstr_skip_count (path, "#", skip_count);
-
-    if ((semi == NULL) || (!path_magic (path)))
-        return NULL;
-
-    slash = strchr (semi, PATH_SEP);
-    *semi = '\0';
-
-    if (op != NULL)
-        *op = NULL;
-
-    if (inpath != NULL)
-        *inpath = NULL;
-
-    if (slash != NULL)
-        *slash = '\0';
-
-    ret = vfs_prefix_to_class (semi + 1);
-    if (ret != NULL)
-    {
-        if (op != NULL)
-            *op = semi + 1;
-        if (inpath != NULL)
-            *inpath = slash != NULL ? slash + 1 : NULL;
-        return ret;
-    }
-
-    if (slash != NULL)
-        *slash = PATH_SEP;
-
-    *semi = '#';
-    ret = _vfs_split_with_semi_skip_count (path, inpath, op, skip_count + 1);
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /** Free open file data for given file handle */
@@ -419,7 +346,7 @@ vfs_register_class (struct vfs_class * vfs)
         if (!vfs->init (vfs))   /* but it failed */
             return FALSE;
 
-    g_ptr_array_add (vfs_list, vfs);
+    g_ptr_array_add (vfs__classes_list, vfs);
 
     return TRUE;
 }
@@ -446,9 +373,9 @@ vfs_strip_suffix_from_filename (const char *filename)
         return p;
 
     /* Avoid first class (localfs) that would accept any prefix */
-    for (i = 1; i < vfs_list->len; i++)
+    for (i = 1; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs_list, i);
+        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
 
         if (vfs->which != NULL)
         {
@@ -469,26 +396,6 @@ vfs_strip_suffix_from_filename (const char *filename)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/**
- * Splits path extracting vfs part.
- *
- * Splits path
- * \verbatim /p1#op/inpath \endverbatim
- * into
- * \verbatim inpath,op; \endverbatim
- * returns which vfs it is.
- * What is left in path is p1. You still want to g_free(path), you DON'T
- * want to free neither *inpath nor *op
- */
-
-struct vfs_class *
-vfs_split (char *path, char **inpath, char **op)
-{
-    return _vfs_split_with_semi_skip_count (path, inpath, op, 0);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 struct vfs_class *
 vfs_get_class (const char *pathname)
 {
@@ -500,7 +407,7 @@ vfs_get_class (const char *pathname)
     g_free (path);
 
     if (vfs == NULL)
-        vfs = g_ptr_array_index (vfs_list, 0);  /* localfs */
+        vfs = g_ptr_array_index (vfs__classes_list, 0); /* localfs */
 
     return vfs;
 }
@@ -659,7 +566,7 @@ void
 vfs_init (void)
 {
     /* create the VFS handle arrays */
-    vfs_list = g_ptr_array_new ();
+    vfs__classes_list = g_ptr_array_new ();
 
     /* create the VFS handle array */
     vfs_openfiles = g_ptr_array_new ();
@@ -693,16 +600,16 @@ vfs_shut (void)
 
     g_free (current_dir);
 
-    for (i = 0; i < vfs_list->len; i++)
+    for (i = 0; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs_list, i);
+        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
 
         if (vfs->done != NULL)
             vfs->done (vfs);
     }
 
     g_ptr_array_free (vfs_openfiles, TRUE);
-    g_ptr_array_free (vfs_list, TRUE);
+    g_ptr_array_free (vfs__classes_list, TRUE);
     g_string_free (vfs_str_buffer, TRUE);
     g_free (mc_readdir_result);
 }
@@ -718,9 +625,9 @@ vfs_fill_names (fill_names_f func)
 {
     guint i;
 
-    for (i = 0; i < vfs_list->len; i++)
+    for (i = 0; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs_list, i);
+        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
 
         if (vfs->fill_names != NULL)
             vfs->fill_names (vfs, func);

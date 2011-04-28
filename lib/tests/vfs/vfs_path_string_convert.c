@@ -1,4 +1,4 @@
-/* lib/vfs - test vfs_s_get_path_mangle() function
+/* lib/vfs - get vfs_path_t from string
 
    Copyright (C) 2011 Free Software Foundation, Inc.
 
@@ -27,49 +27,13 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
-#include "lib/vfs/direntry.c" /* for testing static methods  */
+#include "lib/vfs/xdirentry.h"
+#include "lib/vfs/path.c" /* for testing static methods  */
 
 #include "src/vfs/local/local.c"
 
-#define ARCH_NAME "/path/to/some/file.ext"
-#define ETALON_PATH "path/to/test1_file.ext"
-#define ETALON_VFS_NAME "#test2:user:pass@host.net"
-
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
-
-static int
-test1_mock_open_archive(struct vfs_class *me, struct vfs_s_super *super,
-                        const char *archive_name, char *op)
-{
-    struct vfs_s_inode *root;
-
-    (void) op;
-
-    fail_unless(strcmp("/" ETALON_VFS_NAME ARCH_NAME, archive_name) == 0,
-        "etalon(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_NAME ARCH_NAME, archive_name);
-
-    super->name = g_strdup (archive_name);
-    super->data = g_new (char *, 1);
-    root = vfs_s_new_inode (me, super, NULL);
-    super->root = root;
-
-    return 0;
-}
-
-static int
-test1_mock_archive_same (struct vfs_class *me, struct vfs_s_super *super,
-                        const char *archive_name, char *op, void *cookie)
-{
-    (void) me;
-    (void) super;
-    (void) op;
-    (void) cookie;
-
-    if (strcmp(ARCH_NAME, archive_name) != 0)
-        return 0;
-    return 1;
-}
 
 static void
 setup (void)
@@ -89,9 +53,6 @@ setup (void)
     vfs_test_ops1.flags = VFSF_NOLINKS;
     vfs_test_ops1.prefix = "test1:";
     vfs_register_class (&vfs_test_ops1);
-    test_subclass1.open_archive = test1_mock_open_archive;
-    test_subclass1.archive_same = test1_mock_archive_same;
-    test_subclass1.archive_check = NULL;
 
     vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
     vfs_test_ops2.name = "testfs2";
@@ -102,6 +63,7 @@ setup (void)
     vfs_test_ops3.name = "testfs3";
     vfs_test_ops3.prefix = "test3:";
     vfs_register_class (&vfs_test_ops3);
+
 }
 
 static void
@@ -110,32 +72,24 @@ teardown (void)
     vfs_shut ();
 }
 
-
-void
-vfs_die (const char *m)
-{
-    printf("VFS_DIE: '%s'\n", m);
-}
-
 /* --------------------------------------------------------------------------------------------- */
-
-START_TEST (test_vfs_s_get_path_mangle)
+#define ETALON_PATH_STR "/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path#test3:/111/22/33"
+START_TEST (test_vfs_path_from_to_string)
 {
-    struct vfs_s_super *archive;
+    vfs_path_t *vpath;
+    size_t vpath_len;
+    char *result;
+    vpath = vfs_path_from_str (ETALON_PATH_STR);
 
-    const char *result;
-    vfs_path_t *vpath = vfs_path_from_str("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH);
 
-    result = vfs_s_get_path_mangle (vpath, &archive, 0);
+    vpath_len = vfs_path_elements_count(vpath);
+    fail_unless(vpath_len == 4, "vpath length should be 4 (actial: %d)",vpath_len);
 
-    fail_unless(strcmp(ETALON_PATH, result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", ETALON_PATH, result);
+    result = vfs_path_to_str(vpath);
+    fail_unless(strcmp(ETALON_PATH_STR, result) == 0, "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_STR, result);
+    g_free(result);
 
-    fail_unless(strcmp("/" ETALON_VFS_NAME ARCH_NAME,archive->name) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_NAME ARCH_NAME, archive->name);
-
-    g_free(vpath);
-
+    vfs_path_free(vpath);
 }
 END_TEST
 
@@ -153,7 +107,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_vfs_s_get_path_mangle);
+    tcase_add_test (tc_core, test_vfs_path_from_to_string);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

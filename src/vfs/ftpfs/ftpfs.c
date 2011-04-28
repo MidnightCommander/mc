@@ -1941,22 +1941,19 @@ static int
 ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
 {
     const char *rpath;
-    char *p, *mpath;
+    char *p;
     struct vfs_s_super *super;
     int r;
     vfs_path_element_t *path_element;
 
     int flush_directory_cache = (flags & OPT_FLUSH);
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
-    mpath = g_strdup (vpath->unparsed);
-    rpath = vfs_s_get_path_mangle (path_element->class, mpath, &super, 0);
+    rpath = vfs_s_get_path_mangle (vpath, &super, 0);
     if (rpath == NULL)
-    {
-        g_free (mpath);
         return -1;
-    }
+
     p = ftpfs_translate_path (path_element->class, super, rpath);
     r = ftpfs_command (path_element->class, super, WAIT_REPLY, cmd, p);
     g_free (p);
@@ -1966,12 +1963,10 @@ ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
     if (r != COMPLETE)
     {
         path_element->class->verrno = EPERM;
-        g_free (mpath);
         return -1;
     }
     if (flush_directory_cache)
         vfs_s_invalidate (path_element->class, super);
-    g_free (mpath);
     return 0;
 }
 

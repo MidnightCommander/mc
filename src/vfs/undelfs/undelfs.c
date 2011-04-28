@@ -335,7 +335,7 @@ undelfs_opendir (const vfs_path_t * vpath)
     char *file, *f;
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
     undelfs_get_path (vpath->unparsed, &file, &f);
     if (!file)
         return 0;

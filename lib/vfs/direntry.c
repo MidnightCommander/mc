@@ -398,17 +398,9 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
  */
 
 static char *
-vfs_s_get_path (const vfs_path_t *vpath, struct vfs_s_super **archive, int flags)
+vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flags)
 {
-    char *buf, *retval;
-    vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-
-    buf = g_strdup (vpath->unparsed);
-    retval = g_strdup (vfs_s_get_path_mangle (path_element->class, buf, archive, flags));
-    g_free (buf);
-    return retval;
+    return g_strdup (vfs_s_get_path_mangle (vpath, archive, flags));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -416,17 +408,18 @@ vfs_s_get_path (const vfs_path_t *vpath, struct vfs_s_super **archive, int flags
 /* ------------------------ readdir & friends ----------------------------- */
 
 static struct vfs_s_inode *
-vfs_s_inode_from_path (const vfs_path_t *vpath, int flags)
+vfs_s_inode_from_path (const vfs_path_t * vpath, int flags)
 {
     struct vfs_s_super *super;
     struct vfs_s_inode *ino;
     char *q;
     vfs_path_element_t *path_element;
 
-    if (!(q = vfs_s_get_path (vpath, &super, 0)))
+    q = vfs_s_get_path (vpath, &super, 0);
+    if (q == NULL)
         return NULL;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     ino =
         vfs_s_find_inode (path_element->class, super, q,
@@ -450,7 +443,7 @@ vfs_s_opendir (const vfs_path_t * vpath)
     struct dirhandle *info;
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     dir = vfs_s_inode_from_path (vpath, FL_DIR | FL_FOLLOW);
     if (dir == NULL)
@@ -576,7 +569,7 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
     size_t len;
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     ino = vfs_s_inode_from_path (vpath, 0);
     if (!ino)
@@ -827,13 +820,12 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
     switch (ctlop)
     {
     case VFS_SETCTL_STALE_DATA:
         {
-            struct vfs_s_inode *ino =
-                vfs_s_inode_from_path (vpath, 0);
+            struct vfs_s_inode *ino = vfs_s_inode_from_path (vpath, 0);
 
             if (ino == NULL)
                 return 0;
@@ -1056,35 +1048,43 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
  * can be changed and the result may point inside the original string.
  */
 const char *
-vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **archive, int flags)
+vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive, int flags)
 {
     GList *iter;
     const char *retval;
-    char *local, *op;
-    const char *archive_name;
+    char *archive_name;
     int result = -1;
     struct vfs_s_super *super;
     void *cookie = NULL;
+    vfs_path_element_t *path_element;
+    struct vfs_s_subclass *subclass;
 
-    archive_name = inname;
-    vfs_split (inname, &local, &op);
-    retval = (local != NULL) ? local : "";
+    path_element = vfs_path_get_by_index (vpath, -1);
+    subclass = ((struct vfs_s_subclass *) path_element->class->data);
 
-    if (MEDATA->archive_check != NULL)
+    archive_name = vfs_path_to_str_elements_count (vpath, -1);
+    retval = (path_element->path != NULL) ? path_element->path : "";
+
+    if (subclass->archive_check != NULL)
     {
-        cookie = MEDATA->archive_check (me, archive_name, op);
+        cookie =
+            subclass->archive_check (path_element->class, archive_name, path_element->raw_url_str);
         if (cookie == NULL)
+        {
+            g_free (archive_name);
             return NULL;
+        }
     }
 
-    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
+    for (iter = subclass->supers; iter != NULL; iter = g_list_next (iter))
     {
         int i;
 
         super = (struct vfs_s_super *) iter->data;
 
         /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-        i = MEDATA->archive_same (me, super, archive_name, op, cookie);
+        i = subclass->archive_same (path_element->class, super, archive_name,
+                                    path_element->raw_url_str, cookie);
         if (i != 0)
         {
             if (i == 1)
@@ -1094,26 +1094,35 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **
     }
 
     if (flags & FL_NO_OPEN)
-        ERRNOR (EIO, NULL);
+    {
+        path_element->class->verrno = EIO;
+        g_free (archive_name);
+        return NULL;
+    }
 
-    super = vfs_s_new_super (me);
-    if (MEDATA->open_archive != NULL)
-        result = MEDATA->open_archive (me, super, archive_name, op);
+    super = vfs_s_new_super (path_element->class);
+    if (subclass->open_archive != NULL)
+        result =
+            subclass->open_archive (path_element->class, super, archive_name,
+                                    path_element->raw_url_str);
     if (result == -1)
     {
-        vfs_s_free_super (me, super);
-        ERRNOR (EIO, NULL);
+        vfs_s_free_super (path_element->class, super);
+        path_element->class->verrno = EIO;
+        g_free (archive_name);
+        return NULL;
     }
     if (!super->name)
         vfs_die ("You have to fill name\n");
     if (!super->root)
         vfs_die ("You have to fill root inode\n");
 
-    vfs_s_insert_super (me, super);
-    vfs_stamp_create (me, super);
+    vfs_s_insert_super (path_element->class, super);
+    vfs_stamp_create (path_element->class, super);
 
   return_success:
     *archive = super;
+    g_free (archive_name);
     return retval;
 }
 
@@ -1174,7 +1183,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     struct vfs_s_inode *ino;
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     q = vfs_s_get_path (vpath, &super, 0);
     if (q == NULL)
@@ -1393,7 +1402,7 @@ vfs_getid (const vfs_path_t * vpath)
 {
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
     if (path_element == NULL || path_element->class->getid == NULL)
         return NULL;
 

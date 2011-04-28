@@ -644,24 +644,25 @@ extfs_which (struct vfs_class *me, const char *path)
  */
 
 static char *
-extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **archive,
-                       gboolean do_not_open)
+extfs_get_path_mangle (const vfs_path_t * vpath, struct archive **archive, gboolean do_not_open)
 {
-    char *local, *op;
-    const char *archive_name;
+    char *archive_name;
     int result = -1;
     struct archive *parc;
     int fstype;
+    vfs_path_element_t *path_element;
 
-    archive_name = inname;
-    vfs_split (inname, &local, &op);
+    path_element = vfs_path_get_by_index (vpath, -1);
 
-    fstype = extfs_which (me, op);
+    archive_name = vfs_path_to_str_elements_count (vpath, -1);
+
+    fstype = extfs_which (path_element->class, path_element->raw_url_str);
 
     if (fstype == -1)
+    {
+        g_free (archive_name);
         return NULL;
-    if (local == NULL)
-        local = inname + strlen (inname);
+    }
 
     /*
      * All filesystems should have some local archive, at least
@@ -679,11 +680,16 @@ extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **arch
 
     result = do_not_open ? -1 : extfs_read_archive (fstype, archive_name, &parc);
     if (result == -1)
-        ERRNOR (EIO, NULL);
+    {
+        path_element->class->verrno = EIO;
+        g_free (archive_name);
+        return NULL;
+    }
 
   return_success:
     *archive = parc;
-    return local;
+    g_free (archive_name);
+    return path_element->path;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -693,16 +699,9 @@ extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **arch
  */
 
 static char *
-extfs_get_path (struct vfs_class *me, const char *inname,
-                struct archive **archive, gboolean do_not_open)
+extfs_get_path (const vfs_path_t * vpath, struct archive **archive, gboolean do_not_open)
 {
-    char *buf, *res, *res2;
-
-    buf = g_strdup (inname);
-    res = extfs_get_path_mangle (me, buf, archive, do_not_open);
-    res2 = g_strdup (res);
-    g_free (buf);
-    return res2;
+    return g_strdup (extfs_get_path_mangle (vpath, archive, do_not_open));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -832,14 +831,14 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-extfs_run (struct vfs_class *me, const char *file)
+extfs_run (const vfs_path_t * vpath)
 {
     struct archive *archive = NULL;
     char *p, *q, *archive_name;
     char *cmd;
     const extfs_plugin_info_t *info;
 
-    p = extfs_get_path (me, file, &archive, FALSE);
+    p = extfs_get_path (vpath, &archive, FALSE);
     if (p == NULL)
         return;
     q = name_quote (p, 0);
@@ -865,9 +864,8 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
     struct entry *entry;
     int local_handle;
     gboolean created = FALSE;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    q = extfs_get_path (path_element->class, vpath->unparsed, &archive, FALSE);
+    q = extfs_get_path (vpath, &archive, FALSE);
     if (q == NULL)
         return NULL;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -997,9 +995,8 @@ extfs_opendir (const vfs_path_t * vpath)
     char *q;
     struct entry *entry;
     struct entry **info;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    q = extfs_get_path (path_element->class, vpath->unparsed, &archive, FALSE);
+    q = extfs_get_path (vpath, &archive, FALSE);
     if (q == NULL)
         return NULL;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1079,15 +1076,11 @@ static int
 extfs_internal_stat (const vfs_path_t * vpath, struct stat *buf, gboolean resolve)
 {
     struct archive *archive;
-    char *q, *mpath;
+    char *q;
     struct entry *entry;
     int result = -1;
-    vfs_path_element_t *path_element;
 
-    mpath = g_strdup (vpath->unparsed);
-
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
+    q = extfs_get_path_mangle (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1102,7 +1095,6 @@ extfs_internal_stat (const vfs_path_t * vpath, struct stat *buf, gboolean resolv
     extfs_stat_move (buf, entry->inode);
     result = 0;
   cleanup:
-    g_free (mpath);
     return result;
 }
 
@@ -1139,17 +1131,12 @@ static int
 extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
     struct archive *archive;
-    char *q, *mpath;
+    char *q;
     size_t len;
     struct entry *entry;
     int result = -1;
-    vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-
-    mpath = g_strdup (vpath->unparsed);
-
-    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
+    q = extfs_get_path_mangle (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1157,6 +1144,8 @@ extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
         goto cleanup;
     if (!S_ISLNK (entry->inode->mode))
     {
+        vfs_path_element_t *path_element;
+        path_element = vfs_path_get_by_index (vpath, -1);
         path_element->class->verrno = EINVAL;
         goto cleanup;
     }
@@ -1167,7 +1156,6 @@ extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
     result = len;
     memcpy (buf, entry->inode->linkname, result);
   cleanup:
-    g_free (mpath);
     return result;
 }
 
@@ -1209,14 +1197,11 @@ static int
 extfs_unlink (const vfs_path_t * vpath)
 {
     struct archive *archive;
-    char *q, *mpath;
+    char *q;
     struct entry *entry;
     int result = -1;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    mpath = g_strdup (vpath->unparsed);
-
-    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
+    q = extfs_get_path_mangle (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1227,6 +1212,7 @@ extfs_unlink (const vfs_path_t * vpath)
         goto cleanup;
     if (S_ISDIR (entry->inode->mode))
     {
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
         path_element->class->verrno = EISDIR;
         goto cleanup;
     }
@@ -1238,7 +1224,6 @@ extfs_unlink (const vfs_path_t * vpath)
     extfs_remove_entry (entry);
     result = 0;
   cleanup:
-    g_free (mpath);
     return result;
 }
 
@@ -1248,16 +1233,14 @@ static int
 extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
     struct archive *archive;
-    char *q, *mpath;
+    char *q;
     struct entry *entry;
     int result = -1;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
     (void) mode;
 
-    mpath = g_strdup (vpath->unparsed);
-
-    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
+    q = extfs_get_path_mangle (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1286,7 +1269,6 @@ extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
     }
     result = 0;
   cleanup:
-    g_free (mpath);
     return result;
 }
 
@@ -1296,14 +1278,11 @@ static int
 extfs_rmdir (const vfs_path_t * vpath)
 {
     struct archive *archive;
-    char *q, *mpath;
+    char *q;
     struct entry *entry;
     int result = -1;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    mpath = g_strdup (vpath->unparsed);
-
-    q = extfs_get_path_mangle (path_element->class, mpath, &archive, FALSE);
+    q = extfs_get_path_mangle (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1314,6 +1293,7 @@ extfs_rmdir (const vfs_path_t * vpath)
         goto cleanup;
     if (!S_ISDIR (entry->inode->mode))
     {
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
         path_element->class->verrno = ENOTDIR;
         goto cleanup;
     }
@@ -1326,7 +1306,6 @@ extfs_rmdir (const vfs_path_t * vpath)
     extfs_remove_entry (entry);
     result = 0;
   cleanup:
-    g_free (mpath);
     return result;
 }
 
@@ -1338,10 +1317,9 @@ extfs_chdir (const vfs_path_t * vpath)
     struct archive *archive = NULL;
     char *q;
     struct entry *entry;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
     my_errno = ENOTDIR;
-    q = extfs_get_path (path_element->class, vpath->unparsed, &archive, FALSE);
+    q = extfs_get_path (vpath, &archive, FALSE);
     if (q == NULL)
         return -1;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1372,9 +1350,8 @@ extfs_getid (const vfs_path_t * vpath)
 {
     struct archive *archive = NULL;
     char *p;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
 
-    p = extfs_get_path (path_element->class, vpath->unparsed, &archive, TRUE);
+    p = extfs_get_path (vpath, &archive, TRUE);
     if (p == NULL)
         return NULL;
     g_free (p);
@@ -1688,13 +1665,11 @@ extfs_done (struct vfs_class *me)
 static int
 extfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
-
     (void) arg;
 
     if (ctlop == VFS_SETCTL_RUN)
     {
-        extfs_run (path_element->class, vpath->unparsed);
+        extfs_run (vpath);
         return 1;
     }
     return 0;

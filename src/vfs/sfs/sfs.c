@@ -118,19 +118,19 @@ cachedfile_compare (const void *a, const void *b)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
+sfs_vfmake (const vfs_path_t * vpath, char *cache)
 {
-    char *inpath, *op;
     int w;
     char pad[10240];
     char *s, *t = pad;
     int was_percent = 0;
     char *pname;                /* name of parent archive */
     char *pqname;               /* name of parent archive, quoted */
+    vfs_path_element_t *path_element;
 
-    pname = g_strdup (name);
-    vfs_split (pname, &inpath, &op);
-    w = (*me->which) (me, op);
+    path_element = vfs_path_get_by_index (vpath, -1);
+    pname = vfs_path_to_str_elements_count (vpath, -1);
+    w = (*path_element->class->which) (path_element->class, path_element->raw_url_str);
     if (w == -1)
         vfs_die ("This cannot happen... Hopefully.\n");
 
@@ -173,7 +173,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
                 ptr = pqname;
                 break;
             case '2':
-                ptr = op + strlen (sfs_prefix[w]);
+                ptr = path_element->path;
                 break;
             case '3':
                 ptr = cache;
@@ -216,7 +216,7 @@ sfs_redirect (const vfs_path_t * vpath)
     int handle;
     vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, vfs_path_length (vpath) - 1);
+    path_element = vfs_path_get_by_index (vpath, -1);
     cur = g_slist_find_custom (head, vpath->unparsed, cachedfile_compare);
     if (cur != NULL)
     {
@@ -232,7 +232,7 @@ sfs_redirect (const vfs_path_t * vpath)
 
     close (handle);
 
-    if (sfs_vfmake (path_element->class, vpath->unparsed, cache) == 0)
+    if (sfs_vfmake (vpath, cache) == 0)
     {
         cf = g_new (cachedfile, 1);
         cf->name = g_strdup (vpath->unparsed);

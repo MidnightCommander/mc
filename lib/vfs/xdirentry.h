@@ -12,6 +12,7 @@
 #include <sys/types.h>
 
 #include "lib/global.h"         /* GList */
+#include "lib/vfs/path.h"       /* vfs_path_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -167,8 +168,9 @@ struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *e
 
 /* outside interface */
 void vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub);
-const char *vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
-                                   struct vfs_s_super **archive, int flags);
+const char *vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive,
+                                   int flags);
+
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);
 char *vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino);
 

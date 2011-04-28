@@ -63,7 +63,7 @@ START_TEST (test_register_vfs_class)
     vfs_test_ops.prefix = "test:";
     vfs_register_class (&vfs_test_ops);
 
-    fail_if (vfs_list->len != 2, "Failed to register test VFS module");;
+    fail_if (vfs__classes_list->len != 2, "Failed to register test VFS module");;
 
     {
         struct vfs_class *result;
@@ -104,7 +104,7 @@ START_TEST (test_register_vfs_class2)
     vfs_register_class (&vfs_test_ops2);
 
 
-    fail_if (vfs_list->len != 3, "Failed to register test VFS module");;
+    fail_if (vfs__classes_list->len != 3, "Failed to register test VFS module");;
 
     {
         struct vfs_class *result;

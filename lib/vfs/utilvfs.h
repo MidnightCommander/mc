@@ -31,7 +31,7 @@ typedef enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct
+typedef struct vfs_url_struct
 {
     char *user;
     char *password;
