@@ -5,7 +5,7 @@ AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 libmcvfs_la_SOURCES = \
 	direntry.c		\
 	gc.c gc.h		\
-	interface.c interface.h \
+	interface.c \
 	path.c path.h		\
 	vfs.c vfs.h		\
 	utilvfs.c utilvfs.h	\
