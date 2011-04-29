@@ -12,11 +12,19 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
+/* forward declaration */
+struct mc_config_t;
+
 /*** global variables defined in .c file *********************************************************/
+
+extern int num_history_items_recorded;
 
 /*** declarations of public functions ************************************************************/
 
 GList *history_get (const char *input_name);
+/* save history to the mc_config, but don't save config to file */
+void history_save (struct mc_config_t * cfg, const char *name, GList * h);
+/* write history to the ${XDG_CACHE_HOME}/mc/history file */
 void history_put (const char *input_name, GList * h);
 /* for repositioning of history dialog we should pass widget to this
  * function, as position of history dialog depends on widget's position */

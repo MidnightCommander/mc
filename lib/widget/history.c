@@ -51,6 +51,7 @@
 
 /*** global variables ****************************************************************************/
 
+/* how much history items are used */
 int num_history_items_recorded = 60;
 
 /*** file scope macro definitions ****************************************************************/
@@ -203,39 +204,15 @@ history_get (const char *input_name)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/*
-   This saves the history of an input line from the widget. It is called
-   with the widgets history name. It stores histories in the file
-   ${XDG_CACHE_HOME}/mc/history in using the profile code.
- */
+/**
+  * Save history to the mc_config, but don't save config to file
+  */
 void
-history_put (const char *input_name, GList * h)
+history_save (struct mc_config_t * cfg, const char *name, GList * h)
 {
-    int i;
-    char *profile;
-    mc_config_t *cfg;
     GIConv conv = INVALID_CONV;
     GString *buffer;
-
-    if (num_history_items_recorded == 0)        /* this is how to disable */
-        return;
-    if ((input_name == NULL) || (*input_name == '\0'))
-        return;
-    if (h == NULL)
-        return;
-
-    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, NULL);
-
-    i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
-    if (i != -1)
-        close (i);
-
-    /* Make sure the history is only readable by the user */
-    if (chmod (profile, S_IRUSR | S_IWUSR) == -1 && errno != ENOENT)
-    {
-        g_free (profile);
-        return;
-    }
+    int i;
 
     /* go to end of list */
     h = g_list_last (h);
@@ -244,10 +221,8 @@ history_put (const char *input_name, GList * h)
     for (i = 0; (i < num_history_items_recorded - 1) && (h->prev != NULL); i++)
         h = g_list_previous (h);
 
-    cfg = mc_config_init (profile);
-
-    if (input_name != NULL)
-        mc_config_del_group (cfg, input_name);
+    if (name != NULL)
+        mc_config_del_group (cfg, name);
 
     /* create charset conversion handler to convert strings
        from system codepage to UTF-8 */
@@ -268,22 +243,57 @@ history_put (const char *input_name, GList * h)
         g_snprintf (key, sizeof (key), "%d", i++);
 
         if (conv == INVALID_CONV)
-            mc_config_set_string_raw (cfg, input_name, key, text);
+            mc_config_set_string_raw (cfg, name, key, text);
         else
         {
             g_string_set_size (buffer, 0);
             if (str_convert (conv, text, buffer) == ESTR_FAILURE)
-                mc_config_set_string_raw (cfg, input_name, key, text);
+                mc_config_set_string_raw (cfg, name, key, text);
             else
-                mc_config_set_string_raw (cfg, input_name, key, buffer->str);
+                mc_config_set_string_raw (cfg, name, key, buffer->str);
         }
     }
 
     g_string_free (buffer, TRUE);
     if (conv != INVALID_CONV)
         str_close_conv (conv);
-    mc_config_save_file (cfg, NULL);
-    mc_config_deinit (cfg);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+  * Write the history to the ${XDG_CACHE_HOME}/mc/history file.
+ */
+void
+history_put (const char *input_name, GList * h)
+{
+    char *profile;
+    int i;
+
+    if (num_history_items_recorded == 0)        /* this is how to disable */
+        return;
+    if ((input_name == NULL) || (*input_name == '\0'))
+        return;
+    if (h == NULL)
+        return;
+
+    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, (char *) NULL);
+
+    i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
+    if (i != -1)
+        close (i);
+
+    /* Make sure the history is only readable by the user */
+    if (chmod (profile, S_IRUSR | S_IWUSR) != -1 || errno == ENOENT)
+    {
+        mc_config_t *cfg;
+
+        cfg = mc_config_init (profile);
+        history_save (cfg, input_name, h);
+        mc_config_save_file (cfg, NULL);
+        mc_config_deinit (cfg);
+    }
+
     g_free (profile);
 }
 
