@@ -130,7 +130,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
     char *old_vfs_dir = 0;
 
     if (!vfs_current_is_local ())
-        old_vfs_dir = g_strdup (vfs_get_current_dir ());
+        old_vfs_dir = vfs_get_current_dir ();
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         save_cwds_stat ();

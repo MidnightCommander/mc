@@ -230,6 +230,10 @@ int vfs_timeouts (void);
 void vfs_expire (int now);
 
 char *vfs_get_current_dir (void);
+vfs_path_t *vfs_get_raw_current_dir (void);
+void vfs_set_raw_current_dir (const vfs_path_t * vpath);
+
+
 gboolean vfs_current_is_local (void);
 gboolean vfs_file_is_local (const char *filename);
 
@@ -274,7 +278,7 @@ void *vfs_class_data_find_by_handle (int handle);
 
 void vfs_free_handle (int handle);
 
-const char *_vfs_get_cwd (void);
+char *_vfs_get_cwd (void);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC_VFS_VFS_H */

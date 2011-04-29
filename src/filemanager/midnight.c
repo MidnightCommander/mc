@@ -954,7 +954,11 @@ done_mc (void)
     save_setup (auto_save_setup, panels_options.auto_save_setup);
     done_screen ();
 
-    vfs_stamp_path (vfs_get_current_dir ());
+    {
+        char *curr_dir = vfs_get_current_dir ();
+        vfs_stamp_path (curr_dir);
+        g_free (curr_dir);
+    }
 
     if ((current_panel != NULL) && (get_current_type () == view_listing))
         vfs_stamp_path (current_panel->cwd);

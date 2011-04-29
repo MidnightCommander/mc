@@ -262,7 +262,10 @@ vfs_path_new (void)
 int
 vfs_path_elements_count (const vfs_path_t * vpath)
 {
-    return g_list_length (vpath->path);
+    if (vpath == NULL)
+        return 0;
+
+    return (vpath->path != NULL) ? g_list_length (vpath->path) : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -278,6 +281,9 @@ vfs_path_elements_count (const vfs_path_t * vpath)
 vfs_path_element_t *
 vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 {
+    if (vpath == NULL)
+        return NULL;
+
     if (element_index >= 0)
         return g_list_nth_data (vpath->path, element_index);
 

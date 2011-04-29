@@ -1259,7 +1259,7 @@ edit_set_filename (WEdit * edit, const char *name)
 
     edit->filename = tilde_expand (name);
     if (edit->dir == NULL && !g_path_is_absolute (name))
-        edit->dir = g_strdup (vfs_get_current_dir ());
+        edit->dir = vfs_get_current_dir ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1382,7 +1382,7 @@ edit_save_as_cmd (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-edit_macro_comparator (gconstpointer *macro1, gconstpointer *macro2)
+edit_macro_comparator (gconstpointer * macro1, gconstpointer * macro2)
 {
     const macros_t *m1 = (const macros_t *) macro1;
     const macros_t *m2 = (const macros_t *) macro2;
@@ -1402,7 +1402,7 @@ edit_macro_sort_by_hotkey (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-edit_get_macro (WEdit * edit, int hotkey, const macros_t **macros, guint *indx)
+edit_get_macro (WEdit * edit, int hotkey, const macros_t ** macros, guint * indx)
 {
     const macros_t *array_start = &g_array_index (macros_list, struct macros_t, 0);
     macros_t *result;
@@ -1522,7 +1522,7 @@ edit_store_macro_cmd (WEdit * edit)
     mc_config_t *macros_config = NULL;
     const char *section_name = "editor";
     gchar *macros_fname;
-    GArray *macros; /* current macro */
+    GArray *macros;             /* current macro */
     int tmp_act;
     gboolean have_macro = FALSE;
     char *keyname = NULL;
@@ -1535,8 +1535,7 @@ edit_store_macro_cmd (WEdit * edit)
 
     /* return FALSE if try assign macro into restricted hotkeys */
     if (tmp_act == CK_MacroStartRecord
-       || tmp_act == CK_MacroStopRecord
-       || tmp_act == CK_MacroStartStopRecord)
+        || tmp_act == CK_MacroStopRecord || tmp_act == CK_MacroStartStopRecord)
         return FALSE;
 
     edit_delete_macro (edit, hotkey);
@@ -1569,7 +1568,8 @@ edit_store_macro_cmd (WEdit * edit)
         m_act.ch = record_macro_buf[i].ch;
         g_array_append_val (macros, m_act);
         have_macro = TRUE;
-        g_string_append_printf (marcros_string, "%s:%i;", action_name, (int) record_macro_buf[i].ch);
+        g_string_append_printf (marcros_string, "%s:%i;", action_name,
+                                (int) record_macro_buf[i].ch);
     }
     if (have_macro)
     {

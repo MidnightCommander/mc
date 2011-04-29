@@ -94,6 +94,33 @@ START_TEST (test_vfs_path_from_to_string)
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
+
+START_TEST (test_vfs_path_from_to_string2)
+{
+    vfs_path_t *vpath;
+    size_t vpath_len;
+    char *result;
+    vfs_path_element_t *path_element;
+
+    vpath = vfs_path_from_str ("/");
+
+
+    vpath_len = vfs_path_elements_count(vpath);
+    fail_unless(vpath_len == 1, "vpath length should be 1 (actial: %d)",vpath_len);
+
+    result = vfs_path_to_str(vpath);
+    fail_unless(strcmp("/", result) == 0, "expected(%s) doesn't equal to actual(%s)", "/", result);
+    g_free(result);
+    path_element = vfs_path_get_by_index (vpath, -1);
+    fail_unless(strcmp("/", path_element->path) == 0, "expected(%s) doesn't equal to actual(%s)", "/", path_element->path);
+
+    fail_unless(path_element->class == &vfs_local_ops , "actual vfs-class doesn't equal to localfs");
+
+    vfs_path_free(vpath);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
 START_TEST (test_vfs_path_from_to_partial_string_by_class)
 {
     vfs_path_t *vpath;
@@ -177,6 +204,7 @@ main (void)
 
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, test_vfs_path_from_to_string);
+    tcase_add_test (tc_core, test_vfs_path_from_to_string2);
     tcase_add_test (tc_core, test_vfs_path_from_to_partial_string_by_class);
     /* *********************************** */
 

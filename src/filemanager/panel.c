@@ -2288,10 +2288,12 @@ do_enter_on_file_entry (file_entry * fe)
 
     if (!vfs_current_is_local ())
     {
-        char *tmp;
+        char *tmp, *tmp_curr_dir;
         int ret;
 
-        tmp = concat_dir_and_file (vfs_get_current_dir (), fe->fname);
+        tmp_curr_dir = vfs_get_current_dir ();
+        tmp = concat_dir_and_file (tmp_curr_dir, fe->fname);
+        g_free (tmp_curr_dir);
         ret = mc_setctl (tmp, VFS_SETCTL_RUN, NULL);
         g_free (tmp);
         /* We took action only if the dialog was shown or the execution

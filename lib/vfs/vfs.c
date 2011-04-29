@@ -58,11 +58,9 @@ extern struct dirent *mc_readdir_result;
 
 GPtrArray *vfs__classes_list = NULL;
 
-GString *vfs_str_buffer;
-struct vfs_class *current_vfs;
+GString *vfs_str_buffer = NULL;
+struct vfs_class *current_vfs = NULL;
 
-/** They keep track of the current directory */
-char *current_dir;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -85,6 +83,8 @@ struct vfs_openfile
 
 /*** file scope variables ************************************************************************/
 
+/** They keep track of the current directory */
+static vfs_path_t *current_path = NULL;
 
 static GPtrArray *vfs_openfiles;
 static long vfs_free_handle_list = -1;
@@ -488,15 +488,43 @@ vfs_canon_and_translate (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /**
- * Return current directory without any OS calls.
+ * Get current directory without any OS calls.
+ *
+ * @return string contain current path
  */
 
 char *
 vfs_get_current_dir (void)
 {
-    return current_dir;
+    return vfs_path_to_str (current_path);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get raw current directory object without any OS calls.
+ *
+ * @return object contain current path
+ */
+
+vfs_path_t *
+vfs_get_raw_current_dir (void)
+{
+    return current_path;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Set current directory object.
+ *
+ * @param vpath new path
+ */
+void
+vfs_set_raw_current_dir (const vfs_path_t * vpath)
+{
+    if (current_path != NULL)
+        vfs_path_free (current_path);
+    current_path = (vfs_path_t *) vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -513,9 +541,11 @@ vfs_canon (const char *path)
     /* Relative to current directory */
     if (*path != PATH_SEP)
     {
-        char *local, *result;
+        char *local, *result, *curr_dir;
 
-        local = concat_dir_and_file (current_dir, path);
+        curr_dir = vfs_get_current_dir ();
+        local = concat_dir_and_file (curr_dir, path);
+        g_free (curr_dir);
 
         result = vfs_canon (local);
         g_free (local);
@@ -580,13 +610,18 @@ vfs_init (void)
 void
 vfs_setup_work_dir (void)
 {
-    current_dir = g_strdup (PATH_SEP_STR);
-    _vfs_get_cwd ();
+    vfs_path_element_t *path_element;
 
-    if (strlen (current_dir) > MC_MAXPATHLEN - 2)
-        vfs_die ("Current dir too long.\n");
+    g_free (_vfs_get_cwd ());
 
-    current_vfs = vfs_get_class (current_dir);
+    /* FIXME: is we really need for this check? */
+    /*
+       if (strlen (current_dir) > MC_MAXPATHLEN - 2)
+       vfs_die ("Current dir too long.\n");
+     */
+
+    path_element = vfs_path_get_by_index (current_path, -1);
+    current_vfs = path_element->class;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -598,7 +633,7 @@ vfs_shut (void)
 
     vfs_gc_done ();
 
-    g_free (current_dir);
+    vfs_set_raw_current_dir (NULL);
 
     for (i = 0; i < vfs__classes_list->len; i++)
     {
@@ -681,16 +716,25 @@ vfs_print_message (const char *msg, ...)
  * from the OS.  You must g_strdup() whatever this function returns.
  */
 
-const char *
+char *
 _vfs_get_cwd (void)
 {
-    char *trans;
+    char *trans, *curr_dir;
 
-    trans = vfs_translate_path_n (current_dir);
+    if (vfs_get_raw_current_dir() == NULL)
+    {
+        char *tmp;
+        tmp = g_get_current_dir ();
+        vfs_set_raw_current_dir (vfs_path_from_str (tmp));
+        g_free(tmp);
+    }
+
+    curr_dir = vfs_get_current_dir ();
+    trans = vfs_translate_path_n (curr_dir);
 
     if (_vfs_get_class (trans) == NULL)
     {
-        const char *encoding = vfs_get_encoding (current_dir);
+        const char *encoding = vfs_get_encoding (curr_dir);
 
         if (encoding == NULL)
         {
@@ -700,26 +744,22 @@ _vfs_get_cwd (void)
             if (tmp != NULL)
             {                   /* One of the directories in the path is not readable */
                 estr_t state;
-                char *sys_cwd;
 
                 g_string_set_size (vfs_str_buffer, 0);
                 state = str_vfs_convert_from (str_cnv_from_term, tmp, vfs_str_buffer);
                 g_free (tmp);
 
-                sys_cwd = (state == ESTR_SUCCESS) ? g_strdup (vfs_str_buffer->str) : NULL;
-                if (sys_cwd != NULL)
+                if (state == ESTR_SUCCESS)
                 {
                     struct stat my_stat, my_stat2;
                     /* Check if it is O.K. to use the current_dir */
-                    if (mc_global.vfs.cd_symlinks
-                        && mc_stat (sys_cwd, &my_stat) == 0
-                        && mc_stat (current_dir, &my_stat2) == 0
-                        && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev)
-                        g_free (sys_cwd);
-                    else
+                    if (!(mc_global.vfs.cd_symlinks
+                          && mc_stat (vfs_str_buffer->str, &my_stat) == 0
+                          && mc_stat (curr_dir, &my_stat2) == 0
+                          && my_stat.st_ino == my_stat2.st_ino
+                          && my_stat.st_dev == my_stat2.st_dev))
                     {
-                        g_free (current_dir);
-                        current_dir = sys_cwd;
+                        vfs_set_raw_current_dir (vfs_path_from_str (vfs_str_buffer->str));
                     }
                 }
             }
@@ -727,7 +767,7 @@ _vfs_get_cwd (void)
     }
 
     g_free (trans);
-    return current_dir;
+    return curr_dir;
 }
 
 /* --------------------------------------------------------------------------------------------- */

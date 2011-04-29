@@ -187,7 +187,7 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
     if (!mc_event_present (MCEVENT_GROUP_CORE, "vfs_timestamp"))
         return;
 
-    vpath = vfs_path_from_str (vfs_get_current_dir ());
+    vpath = vfs_get_raw_current_dir ();
     path_element = vfs_path_get_by_index (vpath, -1);
 
     nvfsid = vfs_getid (vpath);
@@ -201,7 +201,6 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
             && vclass->nothingisopen (id) != 0)
             vfs_addstamp (vclass, id);
     }
-    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

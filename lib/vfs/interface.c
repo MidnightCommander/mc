@@ -57,7 +57,6 @@
 
 extern GString *vfs_str_buffer;
 extern struct vfs_class *current_vfs;
-extern char *current_dir;
 
 /*** global variables ****************************************************************************/
 
@@ -637,9 +636,11 @@ mc_fstat (int handle, struct stat *buf)
 char *
 mc_get_current_wd (char *buffer, size_t size)
 {
-    const char *cwd = _vfs_get_cwd ();
+    char *cwd = _vfs_get_cwd ();
 
     g_strlcpy (buffer, cwd, size);
+    g_free (cwd);
+
     return buffer;
 }
 
@@ -702,8 +703,6 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
 int
 mc_chdir (const char *path)
 {
-    //    char *new_dir;
-    //    char *trans_dir;
     struct vfs_class *old_vfs;
     vfsid old_vfsid;
     int result;
@@ -728,27 +727,23 @@ mc_chdir (const char *path)
         return -1;
     }
 
-    {
-        vfs_path_t *current_vpath = vfs_path_from_str (current_dir);
-        old_vfsid = vfs_getid (current_vpath);
-        old_vfs = current_vfs;
-        vfs_path_free (current_vpath);
-    }
+    old_vfsid = vfs_getid (vfs_get_raw_current_dir ());
+    old_vfs = current_vfs;
 
     /* Actually change directory */
-    g_free (current_dir);
-    current_dir = vpath->unparsed;
+    vfs_set_raw_current_dir (vpath);
     current_vfs = path_element->class;
 
     /* This function uses the new current_dir implicitly */
     vfs_stamp_create (old_vfs, old_vfsid);
 
     /* Sometimes we assume no trailing slash on cwd */
-    if (*current_dir)
+    path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
+    if ((path_element != NULL) && (*path_element->path != '\0'))
     {
         char *p;
-        p = strchr (current_dir, 0) - 1;
-        if (*p == PATH_SEP && p > current_dir)
+        p = strchr (path_element->path, 0) - 1;
+        if (*p == PATH_SEP && p > path_element->path)
             *p = 0;
     }
     return 0;
