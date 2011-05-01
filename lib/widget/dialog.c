@@ -723,9 +723,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
     new_d = g_new0 (Dlg_head, 1);
     new_d->modal = modal;
     if (colors != NULL)
-    {
         memmove (new_d->color, colors, sizeof (dlg_colors_t));
-    }
     new_d->help_ctx = help_ctx;
     new_d->callback = (callback != NULL) ? callback : default_dlg_callback;
     new_d->x = x1;
@@ -749,6 +747,9 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
             new_d->title = g_strdup_printf (" %s ", t);
         g_free (t);
     }
+
+    /* unique name got event group for this dialog */
+    new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_DIALOG, (void *) new_d);
 
     return new_d;
 }
@@ -1156,6 +1157,8 @@ destroy_dlg (Dlg_head * h)
     dlg_broadcast_msg (h, WIDGET_DESTROY, FALSE);
     g_list_foreach (h->widgets, (GFunc) g_free, NULL);
     g_list_free (h->widgets);
+    mc_event_group_del (h->event_group);
+    g_free (h->event_group);
     g_free (h->title);
     g_free (h);
 

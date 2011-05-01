@@ -141,6 +141,7 @@ struct Dlg_head
     GList *widgets;             /* widgets list */
     GList *current;             /* Curently active widget */
     void *data;                 /* Data can be passed to dialog */
+    char *event_group;          /* Name of event group for this dialog */
 
     dlg_cb_fn callback;
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
