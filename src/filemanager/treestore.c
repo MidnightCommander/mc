@@ -248,22 +248,26 @@ tree_store_load_from (char *name)
                     different = strtok (NULL, "");
                     if (different)
                     {
+                        vfs_path_t *vpath = vfs_path_from_str (oldname);
                         strcpy (oldname + common, different);
-                        if (vfs_file_is_local (oldname))
+                        if (vfs_file_is_local (vpath))
                         {
                             e = tree_store_add_entry (oldname);
                             e->scanned = scanned;
                         }
+                        vfs_path_free (vpath);
                     }
                 }
             }
             else
             {
-                if (vfs_file_is_local (lc_name))
+                vfs_path_t *vpath = vfs_path_from_str (lc_name);
+                if (vfs_file_is_local (vpath))
                 {
                     e = tree_store_add_entry (lc_name);
                     e->scanned = scanned;
                 }
+                vfs_path_free (vpath);
                 strcpy (oldname, lc_name);
             }
             g_free (lc_name);
@@ -343,8 +347,9 @@ tree_store_save_to (char *name)
     while (current)
     {
         int i, common;
+        vfs_path_t *vpath = vfs_path_from_str (current->name);
 
-        if (vfs_file_is_local (current->name))
+        if (vfs_file_is_local (vpath))
         {
             /* Clear-text compression */
             if (current->prev && (common = str_common (current->prev->name, current->name)) > 2)
@@ -366,9 +371,11 @@ tree_store_save_to (char *name)
             {
                 fprintf (stderr, _("Cannot write to the %s file:\n%s\n"),
                          name, unix_error_string (errno));
+                vfs_path_free (vpath);
                 break;
             }
         }
+        vfs_path_free (vpath);
         current = current->next;
     }
     tree_store_dirty (FALSE);

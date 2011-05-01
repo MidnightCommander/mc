@@ -75,8 +75,15 @@ my_mkdir_rec (char *s, mode_t mode)
         return -1;
 
     /* FIXME: should check instead if s is at the root of that filesystem */
-    if (!vfs_file_is_local (s))
-        return -1;
+    {
+        vfs_path_t *vpath = vfs_path_from_str (s);
+        if (!vfs_file_is_local (vpath))
+        {
+            vfs_path_free (vpath);
+            return -1;
+        }
+        vfs_path_free (vpath);
+    }
 
     if (!strcmp (s, PATH_SEP_STR))
     {

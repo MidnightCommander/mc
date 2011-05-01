@@ -250,7 +250,9 @@ is_in_linklist (struct link *lp, const char *path, struct stat *sb)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Returns 0 if the inode wasn't found in the cache and 1 if it was found
+ * Check and made hardlink
+ *
+ * @return FALSE if the inode wasn't found in the cache and TRUE if it was found
  * and a hardlink was succesfully made
  */
 
@@ -258,14 +260,23 @@ static int
 check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 {
     struct link *lp;
-    struct vfs_class *my_vfs = vfs_get_class (src_name);
+    vfs_path_t *vpath;
+
+    struct vfs_class *my_vfs;
     ino_t ino = pstat->st_ino;
     dev_t dev = pstat->st_dev;
     struct stat link_stat;
     const char *p;
 
-    if ((vfs_file_class_flags (src_name) & VFSF_NOLINKS) != 0)
-        return 0;
+    vpath = vfs_path_from_str (src_name);
+
+    if ((vfs_file_class_flags (vpath) & VFSF_NOLINKS) != 0)
+    {
+        vfs_path_free (vpath);
+        return FALSE;
+    }
+    my_vfs = vfs_path_get_by_index (vpath, -1)->class;
+    vfs_path_free (vpath);
 
     for (lp = linklist; lp != NULL; lp = lp->next)
         if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev)
@@ -280,12 +291,12 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
                     if (!mc_stat (p, &link_stat))
                     {
                         if (!mc_link (p, dst_name))
-                            return 1;
+                            return TRUE;
                     }
                 }
             }
             message (D_ERROR, MSG_ERROR, _("Cannot make the hardlink"));
-            return 0;
+            return FALSE;
         }
     lp = (struct link *) g_try_malloc (sizeof (struct link) + strlen (src_name)
                                        + strlen (dst_name) + 1);
@@ -301,7 +312,7 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
         lp->next = linklist;
         linklist = lp;
     }
-    return 0;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -336,13 +347,20 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
     link_target[len] = 0;
 
     if (ctx->stable_symlinks)
-        if (!vfs_file_is_local (src_path) || !vfs_file_is_local (dst_path))
+    {
+        vfs_path_t *vpath1 = vfs_path_from_str (src_path);
+        vfs_path_t *vpath2 = vfs_path_from_str (dst_path);
+
+        if (!vfs_file_is_local (vpath1) || !vfs_file_is_local (vpath2))
         {
             message (D_ERROR, MSG_ERROR,
                      _("Cannot make stable symlinks across"
                        "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
             ctx->stable_symlinks = FALSE;
         }
+        vfs_path_free (vpath1);
+        vfs_path_free (vpath2);
+    }
 
     if (ctx->stable_symlinks && !g_path_is_absolute (link_target))
     {
@@ -650,6 +668,7 @@ files_error (const char *format, const char *file1, const char *file2)
 
     return do_file_error (buf);
 }
+
 /* }}} */
 
 /* --------------------------------------------------------------------------------------------- */

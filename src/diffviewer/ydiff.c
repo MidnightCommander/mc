@@ -3332,9 +3332,10 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 #define GET_FILE_AND_STAMP(n) \
 do \
 { \
+    vfs_path_t *vpath = vfs_path_from_str(file##n); \
     use_copy##n = 0; \
     real_file##n = file##n; \
-    if (!vfs_file_is_local (file##n)) \
+    if (!vfs_file_is_local (vpath)) \
     { \
         real_file##n = mc_getlocalcopy (file##n); \
         if (real_file##n != NULL) \
@@ -3344,6 +3345,7 @@ do \
                 use_copy##n = -1; \
         } \
     } \
+    vfs_path_free(vpath); \
 } \
 while (0)
 

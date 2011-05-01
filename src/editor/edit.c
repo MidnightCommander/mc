@@ -432,6 +432,7 @@ static int
 edit_load_file (WEdit * edit)
 {
     int fast_load = 1;
+    vfs_path_t *vpath = vfs_path_from_str (edit->filename);
 
     /* Cannot do fast load if a filter is used */
     if (edit_find_filter (edit->filename) >= 0)
@@ -441,8 +442,9 @@ edit_load_file (WEdit * edit)
      * VFS may report file size incorrectly, and slow load is not a big
      * deal considering overhead in VFS.
      */
-    if (!vfs_file_is_local (edit->filename))
+    if (!vfs_file_is_local (vpath))
         fast_load = 0;
+    vfs_path_free (vpath);
 
     /*
      * FIXME: line end translation should disable fast loading as well
@@ -1599,7 +1601,7 @@ edit_get_bracket (WEdit * edit, int in_screen, unsigned long furthest_bracket_se
                 break;
             /* count lines if searching downward */
             if (inc > 0 && a == '\n')
-                if (n++ >= edit->widget.lines - edit->curs_row)     /* out of screen */
+                if (n++ >= edit->widget.lines - edit->curs_row) /* out of screen */
                     break;
         }
         /* count bracket depth */
@@ -2320,7 +2322,9 @@ edit_set_codeset (WEdit * edit)
 #ifdef HAVE_CHARSET
     const char *cp_id;
 
-    cp_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage : mc_global.display_codepage);
+    cp_id =
+        get_codepage_id (mc_global.source_codepage >=
+                         0 ? mc_global.source_codepage : mc_global.display_codepage);
 
     if (cp_id != NULL)
     {
@@ -3427,7 +3431,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 
     switch (command)
     {
-    /* a mark command with shift-arrow */
+        /* a mark command with shift-arrow */
     case CK_MarkLeft:
     case CK_MarkRight:
     case CK_MarkToWordBegin:
@@ -3446,7 +3450,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_MarkScrollDown:
     case CK_MarkParagraphUp:
     case CK_MarkParagraphDown:
-    /* a mark command with alt-arrow */
+        /* a mark command with alt-arrow */
     case CK_MarkColumnPageUp:
     case CK_MarkColumnPageDown:
     case CK_MarkColumnLeft:
@@ -3466,7 +3470,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->highlight = 1;
         break;
 
-    /* any other command */
+        /* any other command */
     default:
         if (edit->highlight)
             edit_mark_cmd (edit, 0);    /* clear */
@@ -3914,8 +3918,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             if (p->next)
             {
                 p = p->next;
-                if (p->line >= edit->start_line + edit->widget.lines
-                    || p->line < edit->start_line)
+                if (p->line >= edit->start_line + edit->widget.lines || p->line < edit->start_line)
                     edit_move_display (edit, p->line - edit->widget.lines / 2);
                 edit_move_to_line (edit, p->line);
             }
@@ -3931,8 +3934,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
                     p = p->prev;
             if (p->line >= 0)
             {
-                if (p->line >= edit->start_line + edit->widget.lines
-                    || p->line < edit->start_line)
+                if (p->line >= edit->start_line + edit->widget.lines || p->line < edit->start_line)
                     edit_move_display (edit, p->line - edit->widget.lines / 2);
                 edit_move_to_line (edit, p->line);
             }

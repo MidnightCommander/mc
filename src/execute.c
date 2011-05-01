@@ -432,15 +432,18 @@ execute_with_vfs_arg (const char *command, const char *filename)
     char *fn;
     struct stat st;
     time_t mtime;
+    vfs_path_t *vpath = vfs_path_from_str (filename);
 
     /* Simplest case, this file is local */
-    if (!filename || vfs_file_is_local (filename))
+    if (!filename || vfs_file_is_local (vpath))
     {
         fn = vfs_canon_and_translate (filename);
         do_execute (command, fn, EXECUTE_INTERNAL);
         g_free (fn);
+        vfs_path_free (vpath);
         return;
     }
+    vfs_path_free (vpath);
 
     /* FIXME: Creation of new files on VFS is not supported */
     if (!*filename)

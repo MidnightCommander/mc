@@ -143,8 +143,8 @@ edit_save_file (WEdit * edit, const char *filename)
     this_save_mode = option_save_mode;
     if (this_save_mode != EDIT_QUICK_SAVE)
     {
-        if (!vfs_file_is_local (real_filename) ||
-            (fd = mc_open (real_filename, O_RDONLY | O_BINARY)) == -1)
+        vfs_path_t *vpath = vfs_path_from_str (real_filename);
+        if (!vfs_file_is_local (vpath) || (fd = mc_open (real_filename, O_RDONLY | O_BINARY)) == -1)
         {
             /*
              * The file does not exists yet, so no safe save or
@@ -152,6 +152,7 @@ edit_save_file (WEdit * edit, const char *filename)
              */
             this_save_mode = EDIT_QUICK_SAVE;
         }
+        vfs_path_free (vpath);
         if (fd != -1)
             mc_close (fd);
     }

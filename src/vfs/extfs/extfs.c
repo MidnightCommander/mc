@@ -395,15 +395,17 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 
     if (info->need_archive)
     {
+        vfs_path_t *vpath = vfs_path_from_str (name);
         if (mc_stat (name, &mystat) == -1)
             return NULL;
 
-        if (!vfs_file_is_local (name))
+        if (!vfs_file_is_local (vpath))
         {
             local_name = mc_getlocalcopy (name);
             if (local_name == NULL)
                 return NULL;
         }
+        vfs_path_free (vpath);
 
         tmp = name_quote (name, 0);
     }

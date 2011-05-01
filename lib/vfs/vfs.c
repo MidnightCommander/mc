@@ -576,18 +576,14 @@ vfs_current_is_local (void)
 /* Return flags of the VFS class of the given filename */
 
 vfs_class_flags_t
-vfs_file_class_flags (const char *filename)
+vfs_file_class_flags (const vfs_path_t * vpath)
 {
-    struct vfs_class *vfs;
-    char *fname;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    fname = vfs_canon_and_translate (filename);
-    if (fname == NULL)
+    if (path_element == NULL)
         return VFSF_UNKNOWN;
 
-    vfs = vfs_get_class (fname);
-    g_free (fname);
-    return vfs->flags;
+    return path_element->class->flags;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -691,9 +687,9 @@ vfs_translate_url (const char *url)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-vfs_file_is_local (const char *filename)
+vfs_file_is_local (const vfs_path_t * vpath)
 {
-    return (vfs_file_class_flags (filename) & VFSF_LOCAL) != 0;
+    return (vfs_file_class_flags (vpath) & VFSF_LOCAL) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */

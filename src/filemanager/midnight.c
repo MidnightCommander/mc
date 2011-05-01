@@ -1002,9 +1002,15 @@ prepend_cwd_on_local (const char *filename)
 {
     char *d;
     size_t l;
+    vfs_path_t *vpath;
 
-    if (!vfs_file_is_local (filename) || g_path_is_absolute (filename))
+    vpath = vfs_path_from_str (filename);
+    if (!vfs_file_is_local (vpath) || g_path_is_absolute (filename))
+    {
+        vfs_path_free (vpath);
         return g_strdup (filename);
+    }
+    vfs_path_free (vpath);
 
     d = g_malloc (MC_MAXPATHLEN + strlen (filename) + 2);
     mc_get_current_wd (d, MC_MAXPATHLEN);

@@ -1015,10 +1015,15 @@ show_free_space (WPanel * panel)
     static struct my_statfs myfs_stats;
     /* Old current working directory for displaying free space */
     static char *old_cwd = NULL;
+    vfs_path_t *vpath = vfs_path_from_str (panel->cwd);
 
     /* Don't try to stat non-local fs */
-    if (!vfs_file_is_local (panel->cwd) || !free_space)
+    if (!vfs_file_is_local (vpath) || !free_space)
+    {
+        vfs_path_free (vpath);
         return;
+    }
+    vfs_path_free (vpath);
 
     if (old_cwd == NULL || strcmp (old_cwd, panel->cwd) != 0)
     {

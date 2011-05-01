@@ -146,14 +146,16 @@ undelfs_shutdown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-undelfs_get_path (const char *dirname, char **fsname, char **file)
+undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
 {
-    const char *p;
+    const char *p, *dirname;
 
     /* To look like filesystem, we have virtual directories
        /#undel:XXX, which have no subdirectories. XXX is replaced with
        hda5, sdb8 etc, which is assumed to live under /dev. 
        -- pavel@ucw.cz */
+
+    dirname = vpath->unparsed;
 
     *fsname = NULL;
 
@@ -336,7 +338,7 @@ undelfs_opendir (const vfs_path_t * vpath)
     vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    undelfs_get_path (vpath->unparsed, &file, &f);
+    undelfs_get_path (vpath, &file, &f);
     if (!file)
         return 0;
 
@@ -434,7 +436,7 @@ undelfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
     (void) mode;
 
     /* Only allow reads on this file system */
-    undelfs_get_path (vpath->unparsed, &file, &f);
+    undelfs_get_path (vpath, &file, &f);
     if (!file)
         return 0;
 
@@ -637,7 +639,7 @@ undelfs_lstat (const vfs_path_t * vpath, struct stat *buf)
     int inode_index;
     char *file, *f;
 
-    undelfs_get_path (vpath->unparsed, &file, &f);
+    undelfs_get_path (vpath, &file, &f);
     if (!file)
         return 0;
 
@@ -689,7 +691,7 @@ undelfs_chdir (const vfs_path_t * vpath)
     char *file, *f;
     int fd;
 
-    undelfs_get_path (vpath->unparsed, &file, &f);
+    undelfs_get_path (vpath, &file, &f);
     if (!file)
         return -1;
 
@@ -730,7 +732,7 @@ undelfs_getid (const vfs_path_t * vpath)
 {
     char *fname, *fsname;
 
-    undelfs_get_path (vpath->unparsed, &fsname, &fname);
+    undelfs_get_path (vpath, &fsname, &fname);
 
     if (!fsname)
         return NULL;
