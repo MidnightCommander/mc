@@ -499,12 +499,15 @@ edit_load_position (WEdit * edit)
     char *filename;
     long line, column;
     off_t offset;
+    vfs_path_t *vpath;
 
     if (!edit->filename || !*edit->filename)
         return;
 
-    filename = vfs_canon (edit->filename);
+    vpath = vfs_path_from_str (edit->filename);
+    filename = vfs_path_to_str (vpath);
     load_file_position (filename, &line, &column, &offset, &edit->serialized_bookmarks);
+    vfs_path_free (vpath);
     g_free (filename);
 
     if (line > 0)
@@ -532,11 +535,13 @@ static void
 edit_save_position (WEdit * edit)
 {
     char *filename;
+    vfs_path_t *vpath;
 
     if (edit->filename == NULL || *edit->filename == '\0')
         return;
 
-    filename = vfs_canon (edit->filename);
+    vpath = vfs_path_from_str (edit->filename);
+    filename = vfs_path_to_str (vpath);
 
     book_mark_serialize (edit, BOOK_MARK_COLOR);
     save_file_position (filename, edit->curs_line + 1, edit->curs_col, edit->curs1,
@@ -544,6 +549,7 @@ edit_save_position (WEdit * edit)
     edit->serialized_bookmarks = NULL;
 
     g_free (filename);
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

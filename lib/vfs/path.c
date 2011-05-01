@@ -34,6 +34,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+#include "lib/util.h"           /* concat_dir_and_file */
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -121,6 +122,64 @@ _vfs_split_with_semi_skip_count (char *path, const char **inpath, const char **o
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * remove //, /./ and /../
+ *
+ * @return newly allocated string
+ */
+
+static char *
+vfs_canon (const char *path)
+{
+    if (!path)
+        vfs_die ("Cannot canonicalize NULL");
+
+    /* Relative to current directory */
+    if (*path != PATH_SEP)
+    {
+        char *local, *result, *curr_dir;
+
+        curr_dir = vfs_get_current_dir ();
+        local = concat_dir_and_file (curr_dir, path);
+        g_free (curr_dir);
+
+        result = vfs_canon (local);
+        g_free (local);
+        return result;
+    }
+
+    /*
+     * So we have path of following form:
+     * /p1/p2#op/.././././p3#op/p4. Good luck.
+     */
+    {
+        char *result = g_strdup (path);
+        canonicalize_pathname (result);
+        return result;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** canonize and translate path
+ *
+ * @return new string
+ */
+
+static char *
+vfs_canon_and_translate (const char *path)
+{
+    char *canon;
+    char *result;
+    if (path == NULL)
+        canon = g_strdup ("");
+    else
+        canon = vfs_canon (path);
+    result = vfs_translate_path_n (canon);
+    g_free (canon);
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -185,7 +244,7 @@ vfs_path_to_str (const vfs_path_t * vpath)
  *
  * @param path_str VFS-path
  *
- * @return pointer to newly created vfs_path_t object with filled elements array.
+ * @return pointer to newly created vfs_path_t object with filled path elements array.
  */
 
 vfs_path_t *
@@ -202,9 +261,7 @@ vfs_path_from_str (const char *path_str)
 
     vpath = vfs_path_new ();
     vpath->unparsed_encoding = g_strdup (vfs_get_encoding (path_str));
-
     vpath->unparsed = vfs_canon_and_translate (path_str);
-
     if (vpath->unparsed == NULL)
     {
         vfs_path_free (vpath);

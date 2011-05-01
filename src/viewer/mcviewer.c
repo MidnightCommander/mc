@@ -387,12 +387,15 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         char *canon_fname;
         long line, col;
         off_t new_offset;
+        vfs_path_t *vpath;
 
-        canon_fname = vfs_canon (view->filename);
+        vpath = vfs_path_from_str (view->filename);
+        canon_fname = vfs_path_to_str (vpath);
         load_file_position (canon_fname, &line, &col, &new_offset, &view->saved_bookmarks);
         new_offset = min (new_offset, mcview_get_filesize (view));
         view->dpy_start = mcview_bol (view, new_offset, 0);
         g_free (canon_fname);
+        vfs_path_free (vpath);
     }
     else if (start_line > 0)
         mcview_moveto (view, start_line - 1, 0);

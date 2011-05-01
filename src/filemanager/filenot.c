@@ -92,7 +92,11 @@ my_mkdir_rec (char *s, mode_t mode)
     }
 
     p = concat_dir_and_file (s, "..");
-    q = vfs_canon (p);
+    {
+        vfs_path_t *vpath = vfs_path_from_str (p);
+        q = vfs_path_to_str (vpath);
+        vfs_path_free (vpath);
+    }
     g_free (p);
 
     result = my_mkdir_rec (q, mode);
@@ -116,9 +120,13 @@ my_mkdir (const char *s, mode_t mode)
     result = mc_mkdir (s, mode);
     if (result)
     {
-        char *p = vfs_canon (s);
+        vfs_path_t *vpath;
+        char *p;
+        vpath = vfs_path_from_str (s);
+        p = vfs_path_to_str (vpath);
 
         result = my_mkdir_rec (p, mode);
+        vfs_path_free (vpath);
         g_free (p);
     }
     if (result == 0)

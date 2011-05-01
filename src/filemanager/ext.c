@@ -119,7 +119,6 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     else
         do_local_copy = 0;
 
-    vfs_path_free (vpath);
     /*
      * All commands should be run in /bin/sh regardless of user shell.
      * To do that, create temporary shell script and run it.
@@ -160,6 +159,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                         g_free (localcopy);
                     }
                     g_free (file_name);
+                    vfs_path_free (vpath);
                     return;
                 }
                 fputs (parameter, cmd_file);
@@ -229,6 +229,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                                         fclose (cmd_file);
                                         unlink (file_name);
                                         g_free (file_name);
+                                        vfs_path_free (vpath);
                                         return;
                                     }
                                     mc_stat (localcopy, &mystat);
@@ -237,7 +238,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                                 }
                                 else
                                 {
-                                    fn = vfs_canon_and_translate (filename);
+                                    fn = vfs_path_to_str (vpath);
                                     text = quote_func (fn, 0);
                                     g_free (fn);
                                 }
@@ -375,6 +376,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
         g_free (localcopy);
     }
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

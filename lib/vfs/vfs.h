@@ -236,7 +236,6 @@ void vfs_set_raw_current_dir (const vfs_path_t * vpath);
 gboolean vfs_current_is_local (void);
 gboolean vfs_file_is_local (const vfs_path_t * vpath);
 
-char *vfs_canon (const char *path);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_translate_url (const char *url);
 
@@ -250,8 +249,6 @@ vfs_class_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
  * return static buffer */
 const char *vfs_get_encoding (const char *path);
 
-/* canonize and translate path, return new string */
-char *vfs_canon_and_translate (const char *path);
 /* translate path back to terminal encoding, remove all #enc:
  * every invalid character is replaced with question mark
  * return static buffer */

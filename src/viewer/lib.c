@@ -236,10 +236,13 @@ mcview_done (mcview_t * view)
     if (mcview_remember_file_position && view->filename != NULL)
     {
         char *canon_fname;
-        canon_fname = vfs_canon (view->filename);
+        vfs_path_t *vpath;
+        vpath = vfs_path_from_str (view->filename);
+        canon_fname = vfs_path_to_str (vpath);
         save_file_position (canon_fname, -1, 0, view->dpy_start, view->saved_bookmarks);
         view->saved_bookmarks = NULL;
         g_free (canon_fname);
+        vfs_path_free (vpath);
     }
 
     /* Write back the global viewer mode */
@@ -290,7 +293,9 @@ mcview_set_codeset (mcview_t * view)
     const char *cp_id = NULL;
 
     view->utf8 = TRUE;
-    cp_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage : mc_global.display_codepage);
+    cp_id =
+        get_codepage_id (mc_global.source_codepage >=
+                         0 ? mc_global.source_codepage : mc_global.display_codepage);
     if (cp_id != NULL)
     {
         GIConv conv;

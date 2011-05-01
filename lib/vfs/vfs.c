@@ -472,22 +472,6 @@ vfs_translate_path_n (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-char *
-vfs_canon_and_translate (const char *path)
-{
-    char *canon;
-    char *result;
-    if (path == NULL)
-        canon = g_strdup ("");
-    else
-        canon = vfs_canon (path);
-    result = vfs_translate_path_n (canon);
-    g_free (canon);
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Get current directory without any OS calls.
  *
@@ -525,42 +509,6 @@ vfs_set_raw_current_dir (const vfs_path_t * vpath)
     if (current_path != NULL)
         vfs_path_free (current_path);
     current_path = (vfs_path_t *) vpath;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * remove //, /./ and /../
- */
-
-char *
-vfs_canon (const char *path)
-{
-    if (!path)
-        vfs_die ("Cannot canonicalize NULL");
-
-    /* Relative to current directory */
-    if (*path != PATH_SEP)
-    {
-        char *local, *result, *curr_dir;
-
-        curr_dir = vfs_get_current_dir ();
-        local = concat_dir_and_file (curr_dir, path);
-        g_free (curr_dir);
-
-        result = vfs_canon (local);
-        g_free (local);
-        return result;
-    }
-
-    /*
-     * So we have path of following form:
-     * /p1/p2#op/.././././p3#op/p4. Good luck.
-     */
-    {
-        char *result = g_strdup (path);
-        canonicalize_pathname (result);
-        return result;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
