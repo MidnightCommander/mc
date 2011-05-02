@@ -214,6 +214,9 @@ history_save (struct mc_config_t * cfg, const char *name, GList * h)
     GString *buffer;
     int i;
 
+    if (name == NULL || *name == '\0' || h == NULL)
+        return;
+
     /* go to end of list */
     h = g_list_last (h);
 
@@ -261,6 +264,7 @@ history_save (struct mc_config_t * cfg, const char *name, GList * h)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#if 0
 /**
   * Write the history to the ${XDG_CACHE_HOME}/mc/history file.
  */
@@ -296,6 +300,7 @@ history_put (const char *input_name, GList * h)
 
     g_free (profile);
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 

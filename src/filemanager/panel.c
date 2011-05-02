@@ -1187,6 +1187,28 @@ panel_save_name (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* "history_save" event handler */
+static gboolean
+panel_save_history (const gchar * event_group_name, const gchar * event_name,
+                    gpointer init_data, gpointer data)
+{
+    WPanel *p = (WPanel *) init_data;
+
+    (void) event_group_name;
+    (void) event_name;
+
+    if (p->dir_history != NULL)
+    {
+        ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
+
+        history_save (ev->cfg, p->hist_name, p->dir_history);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 panel_destroy (WPanel * p)
 {
@@ -1203,11 +1225,10 @@ panel_destroy (WPanel * p)
 
     panel_clean_dir (p);
 
-    /* save and clean history */
+    /* clean history */
     if (p->dir_history != NULL)
     {
-        history_put (p->hist_name, p->dir_history);
-
+        /* directory history is already saved before this moment */
         p->dir_history = g_list_first (p->dir_history);
         g_list_foreach (p->dir_history, (GFunc) g_free, NULL);
         g_list_free (p->dir_history);
@@ -2908,6 +2929,11 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
 
     switch (msg)
     {
+    case WIDGET_INIT:
+        /* subscribe to "history_save" event */
+        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w, NULL);
+        return MSG_HANDLED;
+
     case WIDGET_DRAW:
         /* Repaint everything, including frame and separator */
         paint_frame (panel);    /* including show_dir */
@@ -2956,6 +2982,8 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         return panel_execute_cmd (panel, parm);
 
     case WIDGET_DESTROY:
+        /* unsubscribe from "history_save" event */
+        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w);
         panel_destroy (panel);
         free_my_statfs ();
         return MSG_HANDLED;

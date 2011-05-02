@@ -810,6 +810,7 @@ set_display_type (int num, panel_view_mode_t type)
     unsigned int the_other = 0; /* Index to the other panel */
     const char *file_name = NULL;       /* For Quick view */
     Widget *new_widget = NULL, *old_widget = NULL;
+    panel_view_mode_t old_type;
     WPanel *the_other_panel = NULL;
 
     if (num >= MAX_VIEWS)
@@ -837,15 +838,13 @@ set_display_type (int num, panel_view_mode_t type)
         cols = w->cols;
         lines = w->lines;
         old_widget = w;
+        old_type = panels[num].type;
 
-        if (panels[num].type == view_listing)
+        if (old_type == view_listing && panel->frame_size == frame_full && type != view_listing)
         {
-            if (panel->frame_size == frame_full && type != view_listing)
-            {
-                cols = COLS - first_panel_size;
-                if (num == 1)
-                    x = first_panel_size;
-            }
+            cols = COLS - first_panel_size;
+            if (num == 1)
+                x = first_panel_size;
         }
     }
 
@@ -897,7 +896,16 @@ set_display_type (int num, panel_view_mode_t type)
     /* We use replace to keep the circular list of the dialog in the */
     /* same state.  Maybe we could just kill it and then replace it  */
     if ((midnight_dlg != NULL) && (old_widget != NULL))
+    {
+        if (old_widget == view_listing)
+        {
+            /* save and write directory history of panel
+             * ... and other histories of midnight_dlg  */
+            dlg_save_history (midnight_dlg);
+        }
+
         dlg_replace_widget (old_widget, new_widget);
+    }
 
     if (type == view_listing)
     {

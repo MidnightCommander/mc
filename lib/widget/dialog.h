@@ -190,6 +190,7 @@ int run_dlg (Dlg_head * d);
 void destroy_dlg (Dlg_head * h);
 
 void dlg_run_done (Dlg_head * h);
+void dlg_save_history (Dlg_head * h);
 void dlg_process_event (Dlg_head * h, int key, Gpm_Event * event);
 
 char *dlg_get_title (const Dlg_head * h, size_t len);

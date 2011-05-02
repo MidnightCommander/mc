@@ -7,15 +7,18 @@
 
 /* Event groups for main modules */
 #define MCEVENT_GROUP_CORE "Core"
+#define MCEVENT_GROUP_DIALOG "Dialog"
 #define MCEVENT_GROUP_DIFFVIEWER "DiffViewer"
 #define MCEVENT_GROUP_EDITOR "Editor"
 #define MCEVENT_GROUP_FILEMANAGER "FileManager"
 #define MCEVENT_GROUP_VIEWER "Viewer"
 
+/* Events */
+#define MCEVENT_HISTORY_SAVE "history_save"
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
-
 
 /* MCEVENT_GROUP_CORE:vfs_timestamp */
 struct vfs_class;
@@ -25,7 +28,6 @@ typedef struct
     gpointer id;
     gboolean ret;
 } ev_vfs_stamp_create_t;
-
 
 /* MCEVENT_GROUP_CORE:vfs_print_message */
 typedef struct
@@ -63,6 +65,14 @@ typedef struct
     } ret;
 } ev_background_parent_call_t;
 
+/* MCEVENT_GROUP_DIALOG:history_save */
+struct mc_config_t;
+struct Widget;
+typedef struct
+{
+    struct mc_config_t *cfg;
+    struct Widget *receiver;    /* NULL means broadcast message */
+} ev_history_load_save_t;
 
 /*** global variables defined in .c file *********************************************************/
 

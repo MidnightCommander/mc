@@ -758,6 +758,30 @@ input_execute_cmd (WInput * in, unsigned long command)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* "history_save" event handler */
+static gboolean
+input_save_history (const gchar * event_group_name, const gchar * event_name,
+                    gpointer init_data, gpointer data)
+{
+    WInput *in = (WInput *) init_data;
+
+    (void) event_group_name;
+    (void) event_name;
+
+    if (in->history != NULL && !in->is_password && (((Widget *) in)->owner->ret_value != B_CANCEL))
+    {
+        ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
+
+        if (in->need_push)
+            push_history (in, in->buffer);
+        history_save (ev->cfg, in->history_name, in->history);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 input_destroy (WInput * in)
 {
@@ -769,11 +793,10 @@ input_destroy (WInput * in)
 
     input_clean (in);
 
+    /* clean history */
     if (in->history != NULL)
     {
-        if (!in->is_password && (((Widget *) in)->owner->ret_value != B_CANCEL))
-            history_put (in->history_name, in->history);
-
+        /* history is already saved before this moment */
         in->history = g_list_first (in->history);
         g_list_foreach (in->history, (GFunc) g_free, NULL);
         g_list_free (in->history);
@@ -903,6 +926,11 @@ input_callback (Widget * w, widget_msg_t msg, int parm)
 
     switch (msg)
     {
+    case WIDGET_INIT:
+        /* subscribe to "history_save" event */
+        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
+        return MSG_HANDLED;
+
     case WIDGET_KEY:
         if (parm == XCTRL ('q'))
         {
@@ -943,6 +971,8 @@ input_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_DESTROY:
+        /* unsubscribe from "history_save" event */
+        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w);
         input_destroy (in);
         return MSG_HANDLED;
 
@@ -1210,7 +1240,8 @@ input_disable_update (WInput * in)
 void
 input_clean (WInput * in)
 {
-    push_history (in, in->buffer);
+    if (in->need_push)
+        push_history (in, in->buffer);
     in->need_push = TRUE;
     in->buffer[0] = '\0';
     in->point = 0;
