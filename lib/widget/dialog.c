@@ -142,6 +142,31 @@ dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flag
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+  * Read histories from the ${XDG_CACHE_HOME}/mc/history file
+  */
+static void
+dlg_read_history (Dlg_head * h)
+{
+    char *profile;
+    ev_history_load_save_t event_data;
+
+    if (num_history_items_recorded == 0)        /* this is how to disable */
+        return;
+
+    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, NULL);
+    event_data.cfg = mc_config_init (profile);
+    event_data.receiver = NULL;
+
+    /* create all histories in dialog */
+    mc_event_raise (h->event_group, MCEVENT_HISTORY_LOAD, &event_data);
+
+    mc_config_deinit (event_data.cfg);
+    g_free (profile);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 dlg_unfocus (Dlg_head * h)
 {
@@ -1082,6 +1107,7 @@ init_dlg (Dlg_head * h)
 
         h->callback (h, NULL, DLG_INIT, 0, NULL);
         dlg_broadcast_msg (h, WIDGET_INIT, FALSE);
+        dlg_read_history (h);
     }
 
     h->state = DLG_ACTIVE;

@@ -41,6 +41,7 @@
 #include "lib/vfs/vfs.h"        /* For vfs_translate_url() */
 #include "lib/strutil.h"
 #include "lib/widget.h"
+#include "lib/event.h"
 
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
@@ -910,6 +911,14 @@ set_display_type (int num, panel_view_mode_t type)
     if (type == view_listing)
     {
         WPanel *panel = (WPanel *) new_widget;
+
+        /* if existing panel changed type to view_listing, then load history */
+        if (old_widget != NULL)
+        {
+            ev_history_load_save_t event_data = { NULL, new_widget };
+
+            mc_event_raise (midnight_dlg->event_group, MCEVENT_HISTORY_LOAD, &event_data);
+        }
 
         if (num == 0)
             left_panel = panel;

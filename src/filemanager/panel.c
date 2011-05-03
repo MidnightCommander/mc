@@ -1187,6 +1187,32 @@ panel_save_name (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* "history_load" event handler */
+static gboolean
+panel_load_history (const gchar * event_group_name, const gchar * event_name,
+                    gpointer init_data, gpointer data)
+{
+    WPanel *p = (WPanel *) init_data;
+    ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+
+    if (ev->receiver == NULL || ev->receiver == (Widget *) p)
+    {
+        if (ev->cfg != NULL)
+            p->dir_history = history_load (ev->cfg, p->hist_name);
+        else
+            p->dir_history = history_get (p->hist_name);
+
+        directory_history_add (p, p->cwd);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* "history_save" event handler */
 static gboolean
 panel_save_history (const gchar * event_group_name, const gchar * event_name,
@@ -2930,6 +2956,8 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
     switch (msg)
     {
     case WIDGET_INIT:
+        /* subscribe to "history_load" event */
+        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w, NULL);
         /* subscribe to "history_save" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w, NULL);
         return MSG_HANDLED;
@@ -2982,6 +3010,8 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         return panel_execute_cmd (panel, parm);
 
     case WIDGET_DESTROY:
+        /* unsubscribe from "history_load" event */
+        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w);
         /* unsubscribe from "history_save" event */
         mc_event_del (w->owner->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w);
         panel_destroy (panel);
@@ -3578,8 +3608,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     strcpy (panel->lwd, ".");
 
     panel->hist_name = g_strconcat ("Dir Hist ", panel_name, (char *) NULL);
-    panel->dir_history = history_get (panel->hist_name);
-    directory_history_add (panel, panel->cwd);
+    /* directories history will be get later */
 
     panel->dir.list = g_new (file_entry, MIN_FILES);
     panel->dir.size = MIN_FILES;

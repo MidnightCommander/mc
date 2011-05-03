@@ -758,6 +758,48 @@ input_execute_cmd (WInput * in, unsigned long command)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* "history_load" event handler */
+static gboolean
+input_load_history (const gchar * event_group_name, const gchar * event_name,
+                    gpointer init_data, gpointer data)
+{
+    WInput *in = (WInput *) init_data;
+    ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
+    const char *def_text;
+    size_t buffer_len;
+
+    (void) event_group_name;
+    (void) event_name;
+
+    in->history = history_load (ev->cfg, in->history_name);
+
+    if (in->init_text == NULL)
+        def_text = "";
+    else if (in->init_text == INPUT_LAST_TEXT)
+    {
+        if (in->history != NULL && in->history->data != NULL)
+            def_text = (const char *) in->history->data;
+        else
+            def_text = "";
+
+        in->init_text = NULL;
+    }
+    else
+        def_text = in->init_text;
+
+    buffer_len = strlen (def_text);
+    buffer_len = 1 + max ((size_t) in->field_width, buffer_len);
+    in->current_max_size = buffer_len;
+    if (buffer_len > (size_t) in->field_width)
+        in->buffer = g_realloc (in->buffer, buffer_len);
+    strcpy (in->buffer, def_text);
+    in->point = str_length (in->buffer);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* "history_save" event handler */
 static gboolean
 input_save_history (const gchar * event_group_name, const gchar * event_name,
@@ -801,10 +843,11 @@ input_destroy (WInput * in)
         g_list_foreach (in->history, (GFunc) g_free, NULL);
         g_list_free (in->history);
     }
+    g_free (in->history_name);
 
     g_free (in->buffer);
     input_free_completions (in);
-    g_free (in->history_name);
+    g_free (in->init_text);
 
     g_free (kill_buffer);
     kill_buffer = NULL;
@@ -866,37 +909,11 @@ WInput *
 input_new (int y, int x, const int *input_colors, int width, const char *def_text,
            const char *histname, input_complete_t completion_flags)
 {
-    WInput *in = g_new (WInput, 1);
-    size_t initial_buffer_len;
+    WInput *in;
 
+    in = g_new (WInput, 1);
     init_widget (&in->widget, y, x, 1, width, input_callback, input_event);
-
-    /* history setup */
-    in->history_name = NULL;
-    in->history = NULL;
-    if ((histname != NULL) && (*histname != '\0'))
-    {
-        in->history_name = g_strdup (histname);
-        in->history = history_get (histname);
-    }
-
-    if (def_text == NULL)
-        def_text = "";
-    else if (def_text == INPUT_LAST_TEXT)
-    {
-        if ((in->history != NULL) && (in->history->data != NULL))
-            def_text = (char *) in->history->data;
-        else
-            def_text = "";
-    }
-
-    initial_buffer_len = strlen (def_text);
-    initial_buffer_len = 1 + max ((size_t) width, initial_buffer_len);
     in->widget.options |= W_IS_INPUT;
-    in->completions = NULL;
-    in->completion_flags = completion_flags;
-    in->current_max_size = initial_buffer_len;
-    in->buffer = g_new (char, initial_buffer_len);
 
     memmove (in->color, input_colors, sizeof (input_colors_t));
 
@@ -908,10 +925,25 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
     in->mark = 0;
     in->need_push = TRUE;
     in->is_password = FALSE;
-
-    strcpy (in->buffer, def_text);
-    in->point = str_length (in->buffer);
     in->charpoint = 0;
+
+    /* in->buffer will be corrected in "history_load" event handler */
+    in->current_max_size = width + 1;
+    in->buffer = g_new0 (char, in->current_max_size);
+    in->point = 0;
+
+    in->init_text = (def_text == INPUT_LAST_TEXT) ? INPUT_LAST_TEXT : g_strdup (def_text);
+
+    in->completions = NULL;
+    in->completion_flags = completion_flags;
+
+    /* prepare to history setup */
+    in->history_name = NULL;
+    in->history = NULL;
+    if ((histname != NULL) && (*histname != '\0'))
+        in->history_name = g_strdup (histname);
+
+    /* history will be loaded later */
 
     return in;
 }
@@ -927,6 +959,8 @@ input_callback (Widget * w, widget_msg_t msg, int parm)
     switch (msg)
     {
     case WIDGET_INIT:
+        /* subscribe to "history_load" event */
+        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w, NULL);
         /* subscribe to "history_save" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
         return MSG_HANDLED;
@@ -971,6 +1005,8 @@ input_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_DESTROY:
+        /* unsubscribe from "history_load" event */
+        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w);
         /* unsubscribe from "history_save" event */
         mc_event_del (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w);
         input_destroy (in);

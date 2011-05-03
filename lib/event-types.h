@@ -14,6 +14,7 @@
 #define MCEVENT_GROUP_VIEWER "Viewer"
 
 /* Events */
+#define MCEVENT_HISTORY_LOAD "history_load"
 #define MCEVENT_HISTORY_SAVE "history_save"
 
 /*** enums ***************************************************************************************/
@@ -65,6 +66,7 @@ typedef struct
     } ret;
 } ev_background_parent_call_t;
 
+/* MCEVENT_GROUP_DIALOG:history_load */
 /* MCEVENT_GROUP_DIALOG:history_save */
 struct mc_config_t;
 struct Widget;

@@ -130,22 +130,17 @@ history_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/*
-   This loads the history of an input line to the widget. It is called
-   with the widgets history name on creation of the widget, and returns
-   the GList list.
+/**
+ * Load the history from the ${XDG_CACHE_HOME}/mc/history file.
+ * It is called with the widgets history name and returns the GList list.
  */
+
 GList *
 history_get (const char *input_name)
 {
-    size_t i;
     GList *hist = NULL;
     char *profile;
     mc_config_t *cfg;
-    char **keys;
-    size_t keys_num = 0;
-    GIConv conv = INVALID_CONV;
-    GString *buffer;
 
     if (num_history_items_recorded == 0)        /* this is how to disable */
         return NULL;
@@ -155,8 +150,34 @@ history_get (const char *input_name)
     profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, NULL);
     cfg = mc_config_init (profile);
 
+    hist = history_load (cfg, input_name);
+
+    mc_config_deinit (cfg);
+    g_free (profile);
+
+    return hist;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Load history form the mc_config
+ */
+GList *
+history_load (struct mc_config_t * cfg, const char *name)
+{
+    size_t i;
+    GList *hist = NULL;
+    char **keys;
+    size_t keys_num = 0;
+    GIConv conv = INVALID_CONV;
+    GString *buffer;
+
+    if (name == NULL || *name == '\0')
+        return NULL;
+
     /* get number of keys */
-    keys = mc_config_get_keys (cfg, input_name, &keys_num);
+    keys = mc_config_get_keys (cfg, name, &keys_num);
     g_strfreev (keys);
 
     /* create charset conversion handler to convert strings
@@ -172,7 +193,7 @@ history_get (const char *input_name)
         char *this_entry;
 
         g_snprintf (key, sizeof (key), "%lu", (unsigned long) i);
-        this_entry = mc_config_get_string_raw (cfg, input_name, key, "");
+        this_entry = mc_config_get_string_raw (cfg, name, key, "");
 
         if (this_entry == NULL)
             continue;
@@ -195,8 +216,6 @@ history_get (const char *input_name)
     g_string_free (buffer, TRUE);
     if (conv != INVALID_CONV)
         str_close_conv (conv);
-    mc_config_deinit (cfg);
-    g_free (profile);
 
     /* return pointer to the last entry in the list */
     return g_list_last (hist);
