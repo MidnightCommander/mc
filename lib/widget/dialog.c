@@ -191,6 +191,13 @@ do_select_widget (Dlg_head * h, GList * w, select_dir_t dir)
 
         switch (dir)
         {
+        case SELECT_EXACT:
+            h->current = g_list_find (h->widgets, w0);
+            if (dlg_focus (h))
+                return;
+            /* try find another widget that can take focus */
+            dir = SELECT_NEXT;
+            /* fallthrough */
         case SELECT_NEXT:
             h->current = g_list_next (h->current);
             if (h->current == NULL)
@@ -201,10 +208,6 @@ do_select_widget (Dlg_head * h, GList * w, select_dir_t dir)
             if (h->current == NULL)
                 h->current = g_list_last (h->widgets);
             break;
-        case SELECT_EXACT:
-            h->current = g_list_find (h->widgets, w0);
-            dlg_focus (h);
-            return;
         }
     }
     while (h->current != w /* && (((Widget *) h->current->data)->options & W_DISABLED) == 0 */ );
