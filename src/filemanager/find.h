@@ -15,7 +15,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void do_find (void);
+void find_file (void);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__FIND_H */

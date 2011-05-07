@@ -1566,8 +1566,8 @@ kill_gui (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-find_file (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
-           const char *pattern, const char *content, char **dirname, char **filename)
+do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
+         const char *pattern, const char *content, char **dirname, char **filename)
 {
     int return_value = 0;
     char *dir_tmp = NULL, *file_tmp = NULL;
@@ -1699,7 +1699,7 @@ find_file (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_find (void)
+find_file (void)
 {
     char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;
@@ -1714,7 +1714,7 @@ do_find (void)
 
         dirname = filename = NULL;
         is_start = FALSE;
-        v = find_file (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname, &filename);
+        v = do_find (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname, &filename);
         g_free (ignore_dirs);
         g_free (pattern);
 
