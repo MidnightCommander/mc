@@ -977,7 +977,7 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
     int file_fd;
     gboolean ret_val = FALSE;
 
-    fname = concat_dir_and_file (directory, filename);
+    fname = mc_build_filename (directory, filename, (char *) NULL);
 
     if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode))
     {
