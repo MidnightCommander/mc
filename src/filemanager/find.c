@@ -1318,19 +1318,6 @@ init_find_vars (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
-make_fullname (const char *dirname, const char *filename)
-{
-
-    if (strcmp (dirname, ".") == 0 || strcmp (dirname, "." PATH_SEP_STR) == 0)
-        return g_strdup (filename);
-    if (strncmp (dirname, "." PATH_SEP_STR, 2) == 0)
-        return concat_dir_and_file (dirname + 2, filename);
-    return concat_dir_and_file (dirname, filename);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 {
@@ -1349,7 +1336,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
         line = 0;
     }
 
-    fullname = make_fullname (dir, filename);
+    fullname = mc_build_filename (dir, filename, (char *) NULL);
     if (edit)
         do_edit_at_line (fullname, use_internal_edit, line);
     else
@@ -1634,7 +1621,7 @@ find_file (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs
             else
                 lc_filename = le->text + 4;
 
-            name = make_fullname (le->data, lc_filename);
+            name = mc_build_filename (le->data, lc_filename, (char *) NULL);
             /* skip initial start dir */
             if (start_dir_len < 0)
                 p = name;
