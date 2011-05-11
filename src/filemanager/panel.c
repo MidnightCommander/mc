@@ -351,6 +351,9 @@ static char *panel_history_prev_item_sign = NULL;
 static char *panel_history_next_item_sign = NULL;
 static char *panel_history_show_list_sign = NULL;
 
+/* Panel that selection started */
+static WPanel *mouse_mark_panel = NULL;
+
 static int mouse_marking = 0;
 
 /*** file scope functions ************************************************************************/
@@ -2972,6 +2975,7 @@ mouse_toggle_mark (WPanel * panel)
 {
     do_mark_file (panel, MARK_DONT_MOVE);
     mouse_marking = selection (panel)->f.marked;
+    mouse_mark_panel = current_panel;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2979,10 +2983,14 @@ mouse_toggle_mark (WPanel * panel)
 static void
 mouse_set_mark (WPanel * panel)
 {
-    if (mouse_marking && !(selection (panel)->f.marked))
-        do_mark_file (panel, MARK_DONT_MOVE);
-    else if (!mouse_marking && (selection (panel)->f.marked))
-        do_mark_file (panel, MARK_DONT_MOVE);
+
+    if (mouse_mark_panel == panel)
+    {
+        if (mouse_marking && !(selection (panel)->f.marked))
+            do_mark_file (panel, MARK_DONT_MOVE);
+        else if (!mouse_marking && (selection (panel)->f.marked))
+            do_mark_file (panel, MARK_DONT_MOVE);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
