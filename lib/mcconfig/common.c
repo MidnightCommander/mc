@@ -62,7 +62,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     }
     mc_util_make_backup_if_possible (ini_path, "~");
 
-    fd = mc_open (ini_path, O_WRONLY | O_TRUNC | O_SYNC, 0);
+    fd = mc_open (ini_path, O_WRONLY | O_TRUNC, 0);
     if (fd == -1)
     {
         g_propagate_error (error, g_error_new (MC_ERROR, 0, "%s", unix_error_string (errno)));
