@@ -1568,12 +1568,17 @@ dirsizes_cmd (void)
 void
 save_setup_cmd (void)
 {
+    char *d1;
+    const char *d2;
+
+    d1 = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, (char *) NULL);
+    d2 = strip_home_and_password (d1);
+    g_free (d1);
+
     if (save_setup (TRUE, TRUE))
-        message (D_NORMAL, _("Setup"), _("Setup saved to %s%s%s"),
-                 mc_config_get_path (), PATH_SEP_STR, MC_CONFIG_FILE);
+        message (D_NORMAL, _("Setup"), _("Setup saved to %s"), d2);
     else
-        message (D_ERROR, _("Setup"), _("Unable to save setup to %s%s%s"),
-                 mc_config_get_path (), PATH_SEP_STR, MC_CONFIG_FILE);
+        message (D_ERROR, _("Setup"), _("Unable to save setup to %s"), d2);
 }
 
 /* --------------------------------------------------------------------------------------------- */
