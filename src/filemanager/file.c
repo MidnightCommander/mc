@@ -2240,7 +2240,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     /* Update panel contents to avoid actions on deleted files */
     if (!panel->is_panelized)
     {
-        update_panels (UP_RELOAD, UP_KEEPSEL);
+        panel_update_flags_t flags = UP_RELOAD;
+
+        /* don't update panelized panel */
+        if (get_other_type () == view_listing && other_panel->is_panelized)
+            flags |= UP_ONLY_CURRENT;
+
+        update_panels (flags, UP_KEEPSEL);
         repaint_screen ();
     }
 
