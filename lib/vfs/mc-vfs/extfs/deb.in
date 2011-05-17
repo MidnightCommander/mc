@@ -42,11 +42,11 @@ sub mcdebfs_list
 	print "-r--r--r--   1 root     root     $info_size $date INFO\n";
 	print "-r-xr--r--   1 root     root     $install_size $date INSTALL\n";
 
-	if ( open(PIPEIN, "dpkg-deb -c $qarchivename |") )
+        if ( open(PIPEIN, "LC_ALL=C dpkg-deb -c $qarchivename |") )
 	{
 		while(<PIPEIN>)
 		{
-			split;
+			@_ = split;
 
 			$perm=$_[0]; $owgr=$_[1]; $size=$_[2];
 			if($_[3] =~ /^\d\d\d\d\-/) { # New tar format
@@ -100,7 +100,7 @@ sub mcdebfs_list
         {
                while(<PIPEIN>)
                {
-                       split;
+                       @_ = split;
                        $size=$_[0];
                        last if $size =~ /:/;
                        next if $size !~ /\d+/;
