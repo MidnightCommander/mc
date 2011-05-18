@@ -126,6 +126,28 @@ static struct
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+chmod_i18n (void)
+{
+#if ENABLE_NLS
+    static gboolean i18n = FALSE;
+    unsigned int i;
+
+    if (i18n)
+        return;
+
+    i18n = TRUE;
+
+    for (i = 0; i < PERMISSIONS; i++)
+        check_perm[i].text = _(check_perm[i].text);
+
+    for (i = 0; i < BUTTONS; i++)
+        chmod_but[i].text = _(chmod_but[i].text);
+#endif  /* ENABLE_NLS */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 chmod_toggle_select (Dlg_head * h, int Id)
 {
     tty_setcolor (COLOR_NORMAL);
@@ -232,14 +254,14 @@ init_chmod (void)
                     button_new (BY + chmod_but[i].y - single_set,
                                 BX + chmod_but[i].x,
                                 chmod_but[i].ret_cmd,
-                                chmod_but[i].flags, _(chmod_but[i].text), 0));
+                                chmod_but[i].flags, chmod_but[i].text, 0));
     }
 
     add_widget (ch_dlg, groupbox_new (FY, FX, 10, 25, _("File")));
 
     for (i = 0; i < PERMISSIONS; i++)
     {
-        check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2, 0, _(check_perm[i].text));
+        check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2, 0, check_perm[i].text);
         add_widget (ch_dlg, check_perm[i].check);
     }
 
@@ -320,6 +342,8 @@ chmod_cmd (void)
     struct stat sf_stat;
     char buffer[BUF_TINY];
     unsigned int i;
+
+    chmod_i18n ();
 
     do
     {                           /* do while any files remaining */
