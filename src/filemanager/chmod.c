@@ -153,15 +153,6 @@ chmod_refresh (Dlg_head * h)
     tty_print_string (_("Owner name"));
     dlg_move (h, FY + 7, FX + 2);
     tty_print_string (_("Group name"));
-
-    dlg_move (h, TY, TX);
-    tty_print_string (_("Use SPACE to change"));
-    dlg_move (h, TY + 1, TX);
-    tty_print_string (_("an option, ARROW KEYS"));
-    dlg_move (h, TY + 2, TX);
-    tty_print_string (_("to move between options"));
-    dlg_move (h, TY + 3, TX);
-    tty_print_string (_("and T or INS to mark"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
