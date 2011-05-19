@@ -241,16 +241,13 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 /* --------------------------------------------------------------------------------------------- */
 
 static Dlg_head *
-init_chmod (void)
+init_chmod (const char *fname, const struct stat *sf_stat)
 {
-    unsigned int i;
     Dlg_head *ch_dlg;
+    unsigned int i;
+    const char *c_fname, *c_fown, *c_fgrp;
+    char buffer[BUF_TINY];
 
-    do_refresh ();
-
-    need_update = FALSE;
-    end_chmod = FALSE;
-    c_file = 0;
     single_set = (current_panel->marked < 2) ? 2 : 0;
 
     ch_dlg =
@@ -273,11 +270,25 @@ init_chmod (void)
 
     for (i = 0; i < PERMISSIONS; i++)
     {
-        check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2, 0, check_perm[i].text);
+        check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2,
+                                         (c_stat & check_perm[i].mode) != 0 ? 1 : 0,
+                                         check_perm[i].text);
         add_widget (ch_dlg, check_perm[i].check);
     }
 
     add_widget (ch_dlg, groupbox_new (PY, PX, PERMISSIONS + 2, 33, _("Permission")));
+
+    /* Set the labels */
+    /* Do this at end to have a widget id in a simple way */
+    c_fname = str_trunc (fname, 21);
+    add_widget (ch_dlg, label_new (FY + 2, FX + 2, c_fname));
+    c_fown = str_trunc (get_owner (sf_stat->st_uid), 21);
+    add_widget (ch_dlg, label_new (FY + 6, FX + 2, c_fown));
+    c_fgrp = str_trunc (get_group (sf_stat->st_gid), 21);
+    add_widget (ch_dlg, label_new (FY + 8, FX + 2, c_fgrp));
+    g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) c_stat);
+    statl = label_new (FY + 4, FX + 2, buffer);
+    add_widget (ch_dlg, statl);
 
     return ch_dlg;
 }
@@ -350,20 +361,22 @@ apply_mask (struct stat *sf)
 void
 chmod_cmd (void)
 {
-    char *fname;
-    struct stat sf_stat;
-    char buffer[BUF_TINY];
-    unsigned int i;
-
     chmod_i18n ();
 
     do
     {                           /* do while any files remaining */
         Dlg_head *ch_dlg;
+        struct stat sf_stat;
+        char *fname;
         int result;
-        const char *c_fname, *c_fown, *c_fgrp;
+        unsigned int i;
 
-        ch_dlg = init_chmod ();
+        do_refresh ();
+
+        mode_change = FALSE;
+        need_update = FALSE;
+        end_chmod = FALSE;
+        c_file = 0;
 
         if (current_panel->marked != 0)
             fname = next_file ();       /* next marked file */
@@ -371,28 +384,11 @@ chmod_cmd (void)
             fname = selection (current_panel)->fname;   /* single file */
 
         if (mc_stat (fname, &sf_stat) != 0)
-        {                       /* get status of file */
-            destroy_dlg (ch_dlg);
             break;
-        }
 
         c_stat = sf_stat.st_mode;
-        mode_change = FALSE;        /* clear changes flag */
 
-        /* set check buttons */
-        for (i = 0; i < PERMISSIONS; i++)
-            check_perm[i].check->state = (c_stat & check_perm[i].mode) != 0 ? 1 : 0;
-
-        /* Set the labels */
-        c_fname = str_trunc (fname, 21);
-        add_widget (ch_dlg, label_new (FY + 2, FX + 2, c_fname));
-        c_fown = str_trunc (get_owner (sf_stat.st_uid), 21);
-        add_widget (ch_dlg, label_new (FY + 6, FX + 2, c_fown));
-        c_fgrp = str_trunc (get_group (sf_stat.st_gid), 21);
-        add_widget (ch_dlg, label_new (FY + 8, FX + 2, c_fgrp));
-        g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) c_stat);
-        statl = label_new (FY + 4, FX + 2, buffer);
-        add_widget (ch_dlg, statl);
+        ch_dlg = init_chmod (fname, &sf_stat);
 
         /* do action */
         result = run_dlg (ch_dlg);
