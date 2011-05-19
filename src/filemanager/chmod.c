@@ -58,6 +58,7 @@
 #define TY 12
 
 #define PERMISSIONS 12
+#define LABELS 4
 #define BUTTONS 6
 
 #define B_MARKED B_USER
@@ -102,6 +103,14 @@ static struct
     /* *INDENT-ON* */
 };
 
+static const char *file_info_labels[LABELS] =
+{
+    N_("Name:"),
+    N_("Permissions (octal):"),
+    N_("Owner name:"),
+    N_("Group name:")
+};
+
 static struct
 {
     int ret_cmd;
@@ -139,6 +148,9 @@ chmod_i18n (void)
     for (i = 0; i < PERMISSIONS; i++)
         check_perm[i].text = _(check_perm[i].text);
 
+    for (i = 0; i < LABELS; i++)
+        file_info_labels[i] = _(file_info_labels[i]);
+
     for (i = 0; i < BUTTONS; i++)
         chmod_but[i].text = _(chmod_but[i].text);
 #endif  /* ENABLE_NLS */
@@ -167,13 +179,13 @@ chmod_refresh (Dlg_head * h)
     tty_setcolor (COLOR_NORMAL);
 
     dlg_move (h, FY + 1, FX + 2);
-    tty_print_string (_("Name"));
+    tty_print_string (file_info_labels[0]);
     dlg_move (h, FY + 3, FX + 2);
-    tty_print_string (_("Permissions (Octal)"));
+    tty_print_string (file_info_labels[1]);
     dlg_move (h, FY + 5, FX + 2);
-    tty_print_string (_("Owner name"));
+    tty_print_string (file_info_labels[2]);
     dlg_move (h, FY + 7, FX + 2);
-    tty_print_string (_("Group name"));
+    tty_print_string (file_info_labels[3]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
