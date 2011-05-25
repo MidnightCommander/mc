@@ -209,12 +209,6 @@ AC_TYPE_OFF_T
 AC_CHECK_SIZEOF(off_t)
 AC_TYPE_PID_T
 AC_TYPE_UID_T
-AC_CHECK_TYPE(nlink_t, unsigned int)
-AC_CHECK_TYPES([socklen_t],,,
-[
-#include <sys/types.h>
-#include <sys/socket.h>
-])
 
 AC_FUNC_ALLOCA
 AC_FUNC_STRCOLL
