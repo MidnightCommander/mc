@@ -11,7 +11,7 @@ AC_DEFUN([MC_UNIT_TESTS],[
 
     AC_ARG_ENABLE(
         [tests],
-        AC_HELP_STRING([--enable-tests], [Enable unit tests (see http://check.sourceforge.net/)] )
+        AS_HELP_STRING([--enable-tests], [Enable unit tests (see http://check.sourceforge.net/)])
     )
 
     if test x$enable_tests != xno; then

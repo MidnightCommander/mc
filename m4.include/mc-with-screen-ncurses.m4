@@ -74,7 +74,7 @@ AC_DEFUN([MC_WITH_NCURSES], [
 
     dnl get the user supplied include path
     AC_ARG_WITH([ncurses-includes],
-        AC_HELP_STRING([--with-ncurses-includes=@<:@DIR@:>@],
+        AS_HELP_STRING([--with-ncurses-includes=@<:@DIR@:>@],
             [set path to ncurses includes @<:@default=/usr/include@:>@; make sense only if --with-screen=ncurses; for /usr/local/include/ncurses specify /usr/local/include]
         ),
         [ac_ncurses_inc_path="$withval"],
@@ -83,7 +83,7 @@ AC_DEFUN([MC_WITH_NCURSES], [
 
     dnl get the user supplied lib path
     AC_ARG_WITH([ncurses-libs],
-        AC_HELP_STRING([--with-ncurses-libs=@<:@DIR@:>@],
+        AS_HELP_STRING([--with-ncurses-libs=@<:@DIR@:>@],
             [set path to ncurses library @<:@default=/usr/lib@:>@; make sense only if --with-screen=ncurses]
         ),
         [ac_ncurses_lib_path="$withval"],

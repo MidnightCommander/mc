@@ -48,7 +48,7 @@ dnl
 AC_DEFUN([AC_MC_VFS_UNDELFS],
 [
     AC_ARG_ENABLE([vfs-undelfs],
-	AC_HELP_STRING([--enable-vfs-undelfs], [Support for ext2 undelete filesystem [[no]]]),
+	AS_HELP_STRING([--enable-vfs-undelfs], [Support for ext2 undelete filesystem @<:@no@:>@]),
 	[
 	    if test "x$enableval" = "xno"; then
 		enable_vfs_undelfs=no

@@ -50,7 +50,7 @@ AC_DEFUN([AC_MC_VFS_CHECKS],
     vfs_type="normal"
 
     AC_ARG_ENABLE([vfs],
-	AC_HELP_STRING([--disable-vfs], [Disable VFS]),
+	AS_HELP_STRING([--disable-vfs], [Disable VFS]),
 	[
 	    if test "x$enableval" = "xno"; then
 		enable_vfs=no

@@ -86,7 +86,7 @@ AC_DEFUN([AC_CHECK_GLIB], [
     dnl
 
     AC_ARG_WITH([glib_static],
-        AC_HELP_STRING([--with-glib-static],[Link glib statically [[no]]]))
+        AS_HELP_STRING([--with-glib-static], [Link glib statically @<:@no@:>@]))
 
     glib_found=no
     PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.8], [glib_found=yes], [:])

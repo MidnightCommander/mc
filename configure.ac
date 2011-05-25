@@ -53,7 +53,7 @@ dnl PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
 AC_CHECK_GLIB
 
 AC_ARG_ENABLE([mclib],
-        [AS_HELP_STRING([--enable-mclib],[ Compile shared library libmc.so [no]])],
+        [AS_HELP_STRING([--enable-mclib], [Compile shared library libmc.so @<:@no@:>@])],
         [
             if test "x$enableval" = "xno" ; then
                 enable_mclib=no
@@ -459,7 +459,7 @@ fi
 
 AC_ARG_ENABLE(
     [werror],
-    AC_HELP_STRING([--enable-werror], [Handle all compiler warnings as errors] )
+    AS_HELP_STRING([--enable-werror], [Handle all compiler warnings as errors])
 )
 
 if test "x$enable_werror" = xyes; then

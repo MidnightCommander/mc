@@ -2,7 +2,7 @@ dnl Samba support
 AC_DEFUN([AC_MC_VFS_SMB],
 [
     AC_ARG_ENABLE([vfs-smb],
-		AC_HELP_STRING([--enable-vfs-smb], [Support for SMB filesystem [[no]]]),
+		AS_HELP_STRING([--enable-vfs-smb], [Support for SMB filesystem @<:@no@:>@]),
 		[
 		    if test "x$enableval" = "xno"; then
 			enable_vfs_smb=no
