@@ -216,12 +216,6 @@ AC_CHECK_TYPES([socklen_t],,,
 #include <sys/socket.h>
 ])
 
-dnl This is needed for regex.c only
-AC_CHECK_TYPE(uintptr_t,
-	      [AC_DEFINE(HAVE_UINTPTR_T, 1,
-			 [Define if you have the `uintptr_t' type.])
-])
-
 AC_FUNC_ALLOCA
 AC_FUNC_STRCOLL
 

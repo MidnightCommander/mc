@@ -43,7 +43,7 @@ $AUTOPOINT --force || exit 1
 $XGETTEXT --keyword=_ --keyword=N_ --keyword=Q_ --output=- \
 	`find . -name '*.[ch]'` | sed -ne '/^#:/{s/#://;s/:[0-9]*/\
 /g;s/ //g;p;}' | \
-	grep -v '^$' | sort | uniq | grep -v 'regex.c' >po/POTFILES.in
+	grep -v '^$' | sort | uniq >po/POTFILES.in
 
 $LIBTOOLIZE
 
