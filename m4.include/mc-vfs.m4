@@ -32,7 +32,9 @@ AC_DEFUN([MC_ENABLE_VFS_NET],
     dnl FIXME: network checks should probably be in their own macro.
     AC_REQUIRE_SOCKET
     if test x"$have_socket" = xyes; then
-	AC_CHECK_TYPE(nlink_t, unsigned int)
+        AC_CHECK_TYPE([nlink_t], ,
+                        [AC_DEFINE_UNQUOTED([nlink_t], [unsigned int],
+                            [Define to `unsigned int' if <sys/types.h> does not define.])])
 	AC_CHECK_TYPES([socklen_t],,,
 	    [
 #include <sys/types.h>

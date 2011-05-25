@@ -22,8 +22,8 @@ AC_DEFUN([MC_UNDELFS_CHECKS], [
     if test x"$ext2fs_ext2fs_h" = xyes; then
       ext2fs_undel=yes
       EXT2FS_UNDEL_LIBS="-lext2fs -lcom_err"
-      AC_CHECK_TYPE(ext2_ino_t, ,
-		    [AC_DEFINE(ext2_ino_t, ino_t,
+      AC_CHECK_TYPE([ext2_ino_t], ,
+		    [AC_DEFINE_UNQUOTED([ext2_ino_t], [ino_t],
 			       [Define to ino_t if undefined.])],
 		    [
 #include <errno.h>
