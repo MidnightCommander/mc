@@ -66,12 +66,6 @@ struct dirent *mc_readdir_result = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
-struct vfs_dirinfo
-{
-    DIR *info;
-    GIConv converter;
-};
-
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
@@ -440,7 +434,6 @@ mc_opendir (const char *dirname)
 {
     int handle, *handlep;
     void *info;
-    struct vfs_dirinfo *dirinfo;
     vfs_path_t *vpath;
     vfs_path_element_t *path_element;
 
@@ -459,16 +452,15 @@ mc_opendir (const char *dirname)
         return NULL;
     }
 
-    dirinfo = g_new (struct vfs_dirinfo, 1);
-    dirinfo->info = info;
+    path_element->dir.info = info;
 
-    dirinfo->converter =
+    path_element->dir.converter =
         (vpath->unparsed_encoding !=
          NULL) ? str_crt_conv_from (vpath->unparsed_encoding) : str_cnv_from_term;
-    if (dirinfo->converter == INVALID_CONV)
-        dirinfo->converter = str_cnv_from_term;
+    if (path_element->dir.converter == INVALID_CONV)
+        path_element->dir.converter = str_cnv_from_term;
 
-    handle = vfs_new_handle (path_element->class, dirinfo);
+    handle = vfs_new_handle (path_element->class, path_element);
 
     handlep = g_new (int, 1);
     *handlep = handle;
@@ -483,7 +475,7 @@ mc_readdir (DIR * dirp)
     int handle;
     struct vfs_class *vfs;
     struct dirent *entry = NULL;
-    struct vfs_dirinfo *dirinfo;
+    vfs_path_element_t *vfs_path_element;
     estr_t state;
 
     if (!mc_readdir_result)
@@ -512,14 +504,14 @@ mc_readdir (DIR * dirp)
     if (vfs == NULL)
         return NULL;
 
-    dirinfo = vfs_class_data_find_by_handle (handle);
+    vfs_path_element = vfs_class_data_find_by_handle (handle);
     if (vfs->readdir)
     {
-        entry = (*vfs->readdir) (dirinfo->info);
+        entry = (*vfs->readdir) (vfs_path_element->dir.info);
         if (entry == NULL)
             return NULL;
         g_string_set_size (vfs_str_buffer, 0);
-        state = str_vfs_convert_from (dirinfo->converter, entry->d_name, vfs_str_buffer);
+        state = str_vfs_convert_from (vfs_path_element->dir.converter, entry->d_name, vfs_str_buffer);
         mc_readdir_result->d_ino = entry->d_ino;
         g_strlcpy (mc_readdir_result->d_name, vfs_str_buffer->str, MAXNAMLEN + 1);
     }
@@ -540,15 +532,14 @@ mc_closedir (DIR * dirp)
     vfs = vfs_class_find_by_handle (handle);
     if (vfs != NULL)
     {
-        struct vfs_dirinfo *dirinfo;
+	vfs_path_element_t *vfs_path_element;
+        vfs_path_element = vfs_class_data_find_by_handle (handle);
+        if (vfs_path_element->dir.converter != str_cnv_from_term)
+            str_close_conv (vfs_path_element->dir.converter);
 
-        dirinfo = vfs_class_data_find_by_handle (handle);
-        if (dirinfo->converter != str_cnv_from_term)
-            str_close_conv (dirinfo->converter);
-
-        result = vfs->closedir ? (*vfs->closedir) (dirinfo->info) : -1;
+        result = vfs->closedir ? (*vfs->closedir) (vfs_path_element->dir.info) : -1;
         vfs_free_handle (handle);
-        g_free (dirinfo);
+        vfs_path_element_free (vfs_path_element);
     }
     g_free (dirp);
     return result;

@@ -23,6 +23,11 @@ typedef struct
     struct vfs_class *class;
     char *encoding;
 
+    struct {
+	GIConv converter;
+	DIR *info;
+    } dir;
+
     char *raw_url_str;
     struct vfs_url_struct *url;
 
