@@ -14,7 +14,6 @@ typedef struct
 {
     GList *path;
     char *unparsed;
-    char *unparsed_encoding;
 } vfs_path_t;
 
 typedef struct
@@ -23,9 +22,10 @@ typedef struct
     struct vfs_class *class;
     char *encoding;
 
-    struct {
-	GIConv converter;
-	DIR *info;
+    struct
+    {
+        GIConv converter;
+        DIR *info;
     } dir;
 
     char *raw_url_str;

@@ -260,7 +260,6 @@ vfs_path_from_str (const char *path_str)
         return NULL;
 
     vpath = vfs_path_new ();
-    vpath->unparsed_encoding = g_strdup (vfs_get_encoding (path_str));
     vpath->unparsed = vfs_canon_and_translate (path_str);
     if (vpath->unparsed == NULL)
     {
@@ -276,6 +275,10 @@ vfs_path_from_str (const char *path_str)
         if (local == NULL)
             local = "";
         element->path = g_strdup (local);
+
+        element->encoding = g_strdup (vfs_get_encoding (path));
+        element->dir.converter = INVALID_CONV;
+
         element->raw_url_str = g_strdup (op);
         vpath->path = g_list_prepend (vpath->path, element);
     }
@@ -383,7 +386,6 @@ vfs_path_free (vfs_path_t * path)
     g_list_foreach (path->path, (GFunc) vfs_path_element_free, NULL);
     g_list_free (path->path);
     g_free (path->unparsed);
-    g_free (path->unparsed_encoding);
     g_free (path);
 }
 
