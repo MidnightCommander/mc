@@ -1,4 +1,8 @@
-AM_CFLAGS = -I$(top_srcdir)/lib/vfs $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@
+AM_CFLAGS = -I$(top_srcdir)/lib/vfs $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@ \
+	-DTEST_SHARE_DIR=\"$(abs_srcdir)\" -z muldefs
+
+AM_LDFLAGS = -z muldefs
+
 LIBS=@CHECK_LIBS@  \
     $(top_builddir)/lib/libmc.la
 

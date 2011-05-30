@@ -24,8 +24,14 @@
 
 #include <check.h>
 
+#include "lib/global.c"
 
-#include "lib/global.h"
+#ifndef HAVE_CHARSET
+#define HAVE_CHARSET 1
+#endif
+
+#include "lib/charsets.h"
+
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/path.c" /* for testing static methods  */
@@ -190,6 +196,60 @@ START_TEST (test_vfs_path_from_to_partial_string_by_class)
 END_TEST
 /* --------------------------------------------------------------------------------------------- */
 
+#define encoding_check( input , etalon ) \
+{ \
+    vfs_path_t *vpath; \
+    char *result; \
+\
+    vpath = vfs_path_from_str (input); \
+    result = vfs_path_to_str(vpath); \
+    fail_unless( result != NULL && strcmp(result, etalon) ==0, \
+    "\ninput: %s\nactual: %s\netalon: %s", input, result , etalon ); \
+\
+    g_free(result); \
+    vfs_path_free(vpath); \
+}
+
+START_TEST (test_vfs_path_from_to_string_encoding)
+{
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+    load_codepages_list ();
+
+    encoding_check (
+        "/#test1:/bla-bla1/some/path/#test2:/bla-bla2/#enc:KOI8-R/some/path#test3:/111/22/33",
+        "/#test1:/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+    );
+
+    encoding_check (
+        "/#test1:/bla-bla1/#enc:IBM866/some/path/#test2:/bla-bla2/#enc:KOI8-R/some/path#test3:/111/22/33",
+        "/#test1:/#enc:IBM866/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+    );
+
+    encoding_check (
+        "/#test1:/bla-bla1/some/path/#test2:/bla-bla2/#enc:IBM866/#enc:KOI8-R/some/path#test3:/111/22/33",
+        "/#test1:/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+    );
+
+    encoding_check (
+        "/#test1:/bla-bla1/some/path/#test2:/bla-bla2/#enc:IBM866/some/#enc:KOI8-R/path#test3:/111/22/33",
+        "/#test1:/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+    );
+
+    encoding_check (
+        "/#test1:/bla-bla1/some/path/#test2:/#enc:IBM866/bla-bla2/#enc:KOI8-R/some/path#test3:/111/22/33",
+        "/#test1:/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+    );
+
+    encoding_check (
+        "/#test1:/bla-bla1/some/path/#enc:IBM866/#test2:/bla-bla2/#enc:KOI8-R/some/path#test3:/111/22/33",
+        "/#test1:/#enc:IBM866/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+    );
+
+    free_codepages_list ();
+}
+
+END_TEST
+/* --------------------------------------------------------------------------------------------- */
 
 int
 main (void)
@@ -206,6 +266,7 @@ main (void)
     tcase_add_test (tc_core, test_vfs_path_from_to_string);
     tcase_add_test (tc_core, test_vfs_path_from_to_string2);
     tcase_add_test (tc_core, test_vfs_path_from_to_partial_string_by_class);
+    tcase_add_test (tc_core, test_vfs_path_from_to_string_encoding);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

@@ -160,26 +160,6 @@ vfs_canon (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** canonize and translate path
- *
- * @return new string
- */
-
-static char *
-vfs_canon_and_translate (const char *path)
-{
-    char *canon;
-    char *result;
-    if (path == NULL)
-        canon = g_strdup ("");
-    else
-        canon = vfs_canon (path);
-    result = vfs_translate_path_n (canon);
-    g_free (canon);
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 /** get encoding after last #enc: or NULL, if part does not contain #enc:
  *
@@ -195,9 +175,9 @@ vfs_get_encoding (const char *path)
     char *work;
     char *semi;
     char *slash;
-
     work = g_strdup (path);
     /* try found /#enc: */
+
     semi = g_strrstr (work, PATH_SEP_STR VFS_ENCODING_PREFIX);
 
     if (semi != NULL)
@@ -256,6 +236,11 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
             g_string_append (buffer, "#");
             g_string_append (buffer, element->raw_url_str);
         }
+        if (element->encoding != NULL)
+        {
+            g_string_append (buffer, PATH_SEP_STR VFS_ENCODING_PREFIX);
+            g_string_append (buffer, element->encoding);
+        }
         if ((*element->path != PATH_SEP) && (*element->path != '\0'))
             g_string_append_c (buffer, PATH_SEP);
         g_string_append (buffer, element->path);
@@ -299,7 +284,7 @@ vfs_path_from_str (const char *path_str)
         return NULL;
 
     vpath = vfs_path_new ();
-    vpath->unparsed = vfs_canon_and_translate (path_str);
+    vpath->unparsed = vfs_canon (path_str);
     if (vpath->unparsed == NULL)
     {
         vfs_path_free (vpath);
@@ -313,9 +298,9 @@ vfs_path_from_str (const char *path_str)
         element->class = vfs_prefix_to_class (op);
         if (local == NULL)
             local = "";
-        element->path = g_strdup (local);
+        element->path = vfs_translate_path_n (local);
 
-        element->encoding = vfs_get_encoding (path);
+        element->encoding = vfs_get_encoding (local);
         element->dir.converter = INVALID_CONV;
 
         element->raw_url_str = g_strdup (op);
