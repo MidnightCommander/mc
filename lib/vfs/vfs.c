@@ -414,38 +414,6 @@ vfs_get_class (const char *pathname)
 
 /* --------------------------------------------------------------------------------------------- */
 
-const char *
-vfs_get_encoding (const char *path)
-{
-    static char result[16];
-    char *work;
-    char *semi;
-    char *slash;
-
-    work = g_strdup (path);
-    /* try found /#enc: */
-    semi = g_strrstr (work, PATH_SEP_STR VFS_ENCODING_PREFIX);
-
-    if (semi != NULL)
-    {
-        semi += strlen (VFS_ENCODING_PREFIX) + 1;       /* skip "/#enc:" */
-        slash = strchr (semi, PATH_SEP);
-        if (slash != NULL)
-            slash[0] = '\0';
-
-        g_strlcpy (result, semi, sizeof (result));
-        g_free (work);
-        return result;
-    }
-    else
-    {
-        g_free (work);
-        return NULL;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 char *
 vfs_translate_path (const char *path)
 {
@@ -665,12 +633,12 @@ _vfs_get_cwd (void)
 {
     char *trans, *curr_dir;
 
-    if (vfs_get_raw_current_dir() == NULL)
+    if (vfs_get_raw_current_dir () == NULL)
     {
         char *tmp;
         tmp = g_get_current_dir ();
         vfs_set_raw_current_dir (vfs_path_from_str (tmp));
-        g_free(tmp);
+        g_free (tmp);
     }
 
     curr_dir = vfs_get_current_dir ();
@@ -678,9 +646,9 @@ _vfs_get_cwd (void)
 
     if (_vfs_get_class (trans) == NULL)
     {
-        const char *encoding = vfs_get_encoding (curr_dir);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
 
-        if (encoding == NULL)
+        if (path_element->encoding == NULL)
         {
             char *tmp;
 

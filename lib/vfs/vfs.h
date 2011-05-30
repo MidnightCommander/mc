@@ -245,10 +245,6 @@ char *vfs_path (const char *path);
 struct vfs_class *vfs_get_class (const char *path);
 vfs_class_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
 
-/* return encoding after last #enc: or NULL, if part does not contain #enc:
- * return static buffer */
-const char *vfs_get_encoding (const char *path);
-
 /* translate path back to terminal encoding, remove all #enc:
  * every invalid character is replaced with question mark
  * return static buffer */

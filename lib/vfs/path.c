@@ -180,6 +180,45 @@ vfs_canon_and_translate (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/** get encoding after last #enc: or NULL, if part does not contain #enc:
+ *
+ * @param path string
+ *
+ * @return newly allocated string.
+ */
+
+static char *
+vfs_get_encoding (const char *path)
+{
+    char result[16];
+    char *work;
+    char *semi;
+    char *slash;
+
+    work = g_strdup (path);
+    /* try found /#enc: */
+    semi = g_strrstr (work, PATH_SEP_STR VFS_ENCODING_PREFIX);
+
+    if (semi != NULL)
+    {
+        semi += strlen (VFS_ENCODING_PREFIX) + 1;       /* skip "/#enc:" */
+        slash = strchr (semi, PATH_SEP);
+        if (slash != NULL)
+            slash[0] = '\0';
+
+        g_strlcpy (result, semi, sizeof (result));
+        g_free (work);
+        return g_strdup (result);
+    }
+    else
+    {
+        g_free (work);
+        return NULL;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -276,7 +315,7 @@ vfs_path_from_str (const char *path_str)
             local = "";
         element->path = g_strdup (local);
 
-        element->encoding = g_strdup (vfs_get_encoding (path));
+        element->encoding = vfs_get_encoding (path);
         element->dir.converter = INVALID_CONV;
 
         element->raw_url_str = g_strdup (op);

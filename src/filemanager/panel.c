@@ -3393,12 +3393,17 @@ remove_encoding_from_path (const char *path)
 
     while ((tmp = g_strrstr (tmp_path->str, PATH_SEP_STR VFS_ENCODING_PREFIX)) != NULL)
     {
-        const char *enc;
         GIConv converter;
         char *tmp2;
 
-        enc = vfs_get_encoding ((const char *) tmp);
-        converter = enc != NULL ? str_crt_conv_to (enc) : str_cnv_to_term;
+        vfs_path_t *vpath = vfs_path_from_str (tmp);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
+        converter =
+            path_element->encoding !=
+            NULL ? str_crt_conv_to (path_element->encoding) : str_cnv_to_term;
+        vfs_path_free (vpath);
+
         if (converter == INVALID_CONV)
             converter = str_cnv_to_term;
 
@@ -3662,9 +3667,13 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
 
 #ifdef HAVE_CHARSET
     {
-        const char *enc = vfs_get_encoding (panel->cwd);
-        if (enc != NULL)
-            panel->codepage = get_codepage_index (enc);
+        vfs_path_t *vpath = vfs_path_from_str (panel->cwd);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
+        if (path_element->encoding != NULL)
+            panel->codepage = get_codepage_index (path_element->encoding);
+
+        vfs_path_free (vpath);
     }
 #endif
 
@@ -4041,18 +4050,18 @@ panel_change_encoding (WPanel * panel)
 #endif
     if (encoding != NULL)
     {
-        const char *enc;
-
-        enc = vfs_get_encoding (panel->cwd);
+        vfs_path_t *vpath = vfs_path_from_str (panel->cwd);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
         /* don't add current encoding */
-        if ((enc == NULL) || (strcmp (encoding, enc) != 0))
+        if ((path_element->encoding == NULL) || (strcmp (encoding, path_element->encoding) != 0))
         {
             cd_path = add_encoding_to_path (panel->cwd, encoding);
             if (!do_panel_cd (panel, cd_path, cd_parse_command))
                 message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
             g_free (cd_path);
         }
+        vfs_path_free (vpath);
     }
 }
 
