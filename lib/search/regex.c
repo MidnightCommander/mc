@@ -384,40 +384,54 @@ mc_search_regex__get_token_by_num (const mc_search_t * lc_mc_search, gsize lc_in
 
 static gboolean
 mc_search_regex__replace_handle_esc_seq (const GString * replace_str, const gsize current_pos,
-                                         gsize * skip_len, int *ret, char *next_char)
+                                         gsize * skip_len, int *ret)
 {
     char *curr_str = &(replace_str->str[current_pos]);
-
-    *next_char = *(curr_str + 1);
+    char c = *(curr_str + 1);
 
     if (replace_str->len > current_pos + 2)
     {
-        if (*next_char == '{')
+        if (c == '{')
         {
             for (*skip_len = 2; /* \{ */
                  current_pos + *skip_len < replace_str->len
-                 && (*(curr_str + *skip_len)) != '}'; (*skip_len)++);
-            if (current_pos + *skip_len < replace_str->len)     /* } */
-                (*skip_len)++;
-            *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
-            return FALSE;
-        }
-
-        if (*next_char == 'x')
-        {
-            *skip_len = 2;      /* \x */
-            *next_char = *(curr_str + 2);
-            if (*next_char == '{')
+                 && *(curr_str + *skip_len) >= '0'
+                 && *(curr_str + *skip_len) <= '7'; (*skip_len)++);
+            if (current_pos + *skip_len < replace_str->len && *(curr_str + *skip_len) == '}')
             {
-                for (*skip_len = 3;     /* \x{ */
-                     current_pos + *skip_len < replace_str->len
-                     && (*(curr_str + *skip_len)) != '}'; (*skip_len)++);
-                if (current_pos + *skip_len < replace_str->len)
-                    (*skip_len)++;
+                (*skip_len)++;
                 *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
                 return FALSE;
             }
-            else if (!g_ascii_isxdigit ((guchar) * next_char))
+            else
+            {
+                *ret = REPLACE_PREPARE_T_NOTHING_SPECIAL;
+                return TRUE;
+            }
+        }
+
+        if (c == 'x')
+        {
+            *skip_len = 2;      /* \x */
+            c = *(curr_str + 2);
+            if (c == '{')
+            {
+                for (*skip_len = 3;     /* \x{ */
+                     current_pos + *skip_len < replace_str->len
+                     && g_ascii_isxdigit ((guchar) * (curr_str + *skip_len)); (*skip_len)++);
+                if (current_pos + *skip_len < replace_str->len && *(curr_str + *skip_len) == '}')
+                {
+                    (*skip_len)++;
+                    *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
+                    return FALSE;
+                }
+                else
+                {
+                    *ret = REPLACE_PREPARE_T_NOTHING_SPECIAL;
+                    return TRUE;
+                }
+            }
+            else if (!g_ascii_isxdigit ((guchar) c))
             {
                 *skip_len = 2;  /* \x without number behind */
                 *ret = REPLACE_PREPARE_T_NOTHING_SPECIAL;
@@ -425,8 +439,8 @@ mc_search_regex__replace_handle_esc_seq (const GString * replace_str, const gsiz
             }
             else
             {
-                *next_char = *(curr_str + 3);
-                if (!g_ascii_isxdigit ((guchar) * next_char))
+                c = *(curr_str + 3);
+                if (!g_ascii_isxdigit ((guchar) c))
                     *skip_len = 3;      /* \xH */
                 else
                     *skip_len = 4;      /* \xHH */
@@ -436,7 +450,7 @@ mc_search_regex__replace_handle_esc_seq (const GString * replace_str, const gsiz
         }
     }
 
-    if (strchr ("ntvbrfa", *next_char) != NULL)
+    if (strchr ("ntvbrfa", c) != NULL)
     {
         *skip_len = 2;
         *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
@@ -489,8 +503,6 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
 
     if ((*curr_str == '\\') && (replace_str->len > current_pos + 1))
     {
-        char next_char;
-
         if (strutils_is_char_escaped (replace_str->str, curr_str))
         {
             *skip_len = 1;
@@ -504,13 +516,12 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
             return ret;
         }
 
-        if (!mc_search_regex__replace_handle_esc_seq
-            (replace_str, current_pos, skip_len, &ret, &next_char))
+        if (!mc_search_regex__replace_handle_esc_seq (replace_str, current_pos, skip_len, &ret))
             return ret;
 
         ret = REPLACE_PREPARE_T_REPLACE_FLAG;
         *skip_len += 2;
-        switch (next_char)
+        switch (*(curr_str + 1))
         {
         case 'U':
             *replace_flags |= REPLACE_T_UPP_TRANSFORM;
@@ -604,10 +615,12 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
 
 static void
 mc_search_regex__process_escape_sequence (GString * dest_str, const char *from, gsize len,
-                                          replace_transform_type_t * replace_flags)
+                                          replace_transform_type_t * replace_flags,
+                                          gboolean is_utf8)
 {
     gsize i = 0;
-    char c = 0;
+    unsigned int c = 0;
+    char b;
 
     if (len == (gsize) (-1))
         len = strlen (from);
@@ -617,6 +630,7 @@ mc_search_regex__process_escape_sequence (GString * dest_str, const char *from, 
         i++;
     if (i >= len)
         return;
+
     if (from[i] == 'x')
     {
         i++;
@@ -634,7 +648,7 @@ mc_search_regex__process_escape_sequence (GString * dest_str, const char *from, 
                 break;
         }
     }
-    else if (from[i] >= '0' && from[i] <= '9')
+    else if (from[i] >= '0' && from[i] <= '7')
         for (; i < len && from[i] >= '0' && from[i] <= '7'; i++)
             c = c * 8 + from[i] - '0';
     else
@@ -667,7 +681,36 @@ mc_search_regex__process_escape_sequence (GString * dest_str, const char *from, 
             return;
         }
     }
-    g_string_append_len (dest_str, &c, 1);
+
+    if (c < 0x80 || !is_utf8)
+        g_string_append_c (dest_str, (char) c);
+    else if (c < 0x800)
+    {
+        b = 0xC0 | (c >> 6);
+        g_string_append_c (dest_str, b);
+        b = 0x80 | (c & 0x3F);
+        g_string_append_c (dest_str, b);
+    }
+    else if (c < 0x10000)
+    {
+        b = 0xE0 | (c >> 12);
+        g_string_append_c (dest_str, b);
+        b = 0x80 | ((c >> 6) & 0x3F);
+        g_string_append_c (dest_str, b);
+        b = 0x80 | (c & 0x3F);
+        g_string_append_c (dest_str, b);
+    }
+    else if (c < 0x10FFFF)
+    {
+        b = 0xF0 | (c >> 16);
+        g_string_append_c (dest_str, b);
+        b = 0x80 | ((c >> 12) & 0x3F);
+        g_string_append_c (dest_str, b);
+        b = 0x80 | ((c >> 6) & 0x3F);
+        g_string_append_c (dest_str, b);
+        b = 0x80 | (c & 0x3F);
+        g_string_append_c (dest_str, b);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -705,7 +748,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
     int erroffset;
     int pcre_options = PCRE_EXTRA | PCRE_MULTILINE;
 
-    if (str_isutf8(charset))
+    if (str_isutf8 (charset))
     {
         pcre_options |= PCRE_UTF8;
         if (lc_mc_search->is_case_sensitive)
@@ -744,6 +787,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
         }
     }
 #endif /* SEARCH_TYPE_GLIB */
+    lc_mc_search->is_utf8 = str_isutf8 (charset);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -914,7 +958,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
                                                  &replace_flags);
             /* call process_escape_sequence without starting '\\' */
             mc_search_regex__process_escape_sequence (ret, replace_str->str + loop + 1, len - 1,
-                                                      &replace_flags);
+                                                      &replace_flags, lc_mc_search->is_utf8);
             prev_str = replace_str->str + loop + len;
             loop += len - 1;
             continue;

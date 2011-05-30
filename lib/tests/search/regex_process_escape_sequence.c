@@ -27,9 +27,9 @@
 #include "regex.c" /* for testing static functions*/
 
 /* --------------------------------------------------------------------------------------------- */
-#define test_helper_valid_data(from, etalon, dest_str, replace_flags) { \
+#define test_helper_valid_data(from, etalon, dest_str, replace_flags, utf) { \
     dest_str = g_string_new(""); \
-    mc_search_regex__process_escape_sequence (dest_str, from, -1, &replace_flags); \
+    mc_search_regex__process_escape_sequence (dest_str, from, -1, &replace_flags, utf); \
     fail_if (strcmp(dest_str->str, etalon), "dest_str(%s) != %s", dest_str->str, etalon); \
     g_string_free(dest_str, TRUE); \
 }
@@ -41,36 +41,18 @@ START_TEST (test_regex_process_escape_sequence_valid)
     GString *dest_str;
     replace_transform_type_t replace_flags = REPLACE_T_NO_TRANSFORM;
 
-    test_helper_valid_data("{101}", "A", dest_str, replace_flags);
-    test_helper_valid_data("x42", "B", dest_str, replace_flags);
-    test_helper_valid_data("x{4344}", "CD", dest_str, replace_flags);
+    test_helper_valid_data("{101}", "A", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("x42", "B", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("x{444}", "D", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("x{444}", "ф", dest_str, replace_flags, TRUE);
 
-    test_helper_valid_data("n", "\n", dest_str, replace_flags);
-    test_helper_valid_data("t", "\t", dest_str, replace_flags);
-    test_helper_valid_data("v", "\v", dest_str, replace_flags);
-    test_helper_valid_data("b", "\b", dest_str, replace_flags);
-    test_helper_valid_data("r", "\r", dest_str, replace_flags);
-    test_helper_valid_data("f", "\f", dest_str, replace_flags);
-    test_helper_valid_data("a", "\a", dest_str, replace_flags);
-}
-END_TEST
-
-/* --------------------------------------------------------------------------------------------- */
-
-START_TEST (test_regex_process_escape_sequence_invalid)
-{
-    GString *dest_str;
-    replace_transform_type_t replace_flags = REPLACE_T_NO_TRANSFORM;
-
-    test_helper_valid_data("{101", "{101", dest_str, replace_flags);
-    test_helper_valid_data("101}", "101}", dest_str, replace_flags);
-    test_helper_valid_data("{ab}", "{ab}", dest_str, replace_flags);
-    test_helper_valid_data("xqw", "xqw", dest_str, replace_flags);
-    test_helper_valid_data("x{41", "x{41", dest_str, replace_flags);
-    test_helper_valid_data("x{qwer}", "x{qwer}", dest_str, replace_flags);
-    test_helper_valid_data("s", "s", dest_str, replace_flags);
-    test_helper_valid_data("Q", "Q", dest_str, replace_flags);
-    test_helper_valid_data("1", "1", dest_str, replace_flags);
+    test_helper_valid_data("n", "\n", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("t", "\t", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("v", "\v", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("b", "\b", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("r", "\r", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("f", "\f", dest_str, replace_flags, FALSE);
+    test_helper_valid_data("a", "\a", dest_str, replace_flags, FALSE);
 }
 END_TEST
 
@@ -87,7 +69,6 @@ main (void)
 
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, test_regex_process_escape_sequence_valid);
-    tcase_add_test (tc_core, test_regex_process_escape_sequence_invalid);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

@@ -27,13 +27,22 @@
 #include "regex.c" /* for testing static functions*/
 
 /* --------------------------------------------------------------------------------------------- */
-#define test_helper_check_valid_data( a, b, c, d, e, f, g, h ) \
+#define test_helper_check_valid_data( a, b, c, d, e, f ) \
 { \
     fail_unless( a == b, "ret_value != %s", (b) ? "TRUE": "FALSE" ); \
     fail_unless( c == d, "skip_len(%d) != %d", c, d ); \
     if (f!=0) fail_unless( e == f, "ret(%d) != %d", e, f ); \
-    fail_unless( g == h, "next_char('%c':%d) != %d", g, g, h ); \
-} \
+}
+
+#define test_helper_handle_esc_seq( pos, r, skip, flag ) \
+{ \
+    skip_len = 0;\
+    test_helper_check_valid_data(\
+        mc_search_regex__replace_handle_esc_seq( replace_str, pos, &skip_len, &ret ), r,\
+        skip_len, skip,\
+        ret, flag\
+    ); \
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -42,108 +51,20 @@ START_TEST (test_regex_replace_esc_seq_prepare_valid)
     GString *replace_str;
     gsize skip_len;
     int ret;
-    char next_char;
 
     replace_str = g_string_new("bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a");
 
-    /* \\{123} */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 7, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 6,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, '{'
-    );
-
-    /* \\xab */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 20, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 4,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, 'b'
-    );
-
-    /* \\x{456abcd}  */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 36, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 11,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, '{'
-    );
-
-    /* \\xtre */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 54, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 2,
-        ret, REPLACE_PREPARE_T_NOTHING_SPECIAL,
-        next_char, 't'
-    );
-
-    /* \\n */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 59, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 2,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, 'n'
-    );
-
-    /* \\t */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 61, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 2,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, 't'
-    );
-
-    /* \\v */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 63, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 2,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, 'v'
-    );
-
-    /* \\b */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 65, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 2,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, 'b'
-    );
-
-    /* \\r */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 67, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 2,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, 'r'
-    );
-
-    /* \\f */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 69, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 2,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, 'f'
-    );
-
-    /* \\a */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 71, &skip_len, &ret, &next_char ), FALSE,
-        skip_len, 2,
-        ret, REPLACE_PREPARE_T_ESCAPE_SEQ,
-        next_char, 'a'
-    );
+    test_helper_handle_esc_seq( 7,  FALSE, 6, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\{123} */
+    test_helper_handle_esc_seq( 20, FALSE, 4, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\xab */
+    test_helper_handle_esc_seq( 36, FALSE, 11, REPLACE_PREPARE_T_ESCAPE_SEQ );      /* \\x{456abcd}  */
+    test_helper_handle_esc_seq( 54, FALSE, 2, REPLACE_PREPARE_T_NOTHING_SPECIAL );  /* \\xtre */
+    test_helper_handle_esc_seq( 59, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\n */
+    test_helper_handle_esc_seq( 61, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\t */
+    test_helper_handle_esc_seq( 63, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\v */
+    test_helper_handle_esc_seq( 65, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\b */
+    test_helper_handle_esc_seq( 67, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\r */
+    test_helper_handle_esc_seq( 69, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\f */
+    test_helper_handle_esc_seq( 71, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\a */
 
     g_string_free(replace_str, TRUE);
 }
@@ -157,53 +78,14 @@ START_TEST (test_regex_replace_esc_seq_prepare_invalid)
     GString *replace_str;
     gsize skip_len;
     int ret;
-    char next_char;
 
     replace_str = g_string_new("\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre");
 
-    /* \\{123 */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 0, &skip_len, &ret, &next_char ), TRUE,
-        skip_len, 0,
-        0, 0,
-        next_char, '{'
-    );
-
-    /* \\x{qwerty} */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 6, &skip_len, &ret, &next_char ), TRUE,
-        skip_len, 0,
-        0, 0,
-        next_char, 'x'
-    );
-    /* \\12} */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 17, &skip_len, &ret, &next_char ), TRUE,
-        skip_len, 0,
-        0, 0,
-        next_char, '1'
-    );
-
-    /* \\x{456a-bcd} */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 22, &skip_len, &ret, &next_char ), TRUE,
-        skip_len, 0,
-        0, 0,
-        next_char, 'x'
-    );
-
-    /* \\satre */
-    skip_len=0;
-    test_helper_check_valid_data(
-        mc_search_regex__replace_handle_esc_seq ( replace_str, 41, &skip_len, &ret, &next_char ), TRUE,
-        skip_len, 0,
-        0, 0,
-        next_char, 's'
-    );
+    test_helper_handle_esc_seq( 0, TRUE, 5, REPLACE_PREPARE_T_NOTHING_SPECIAL );    /* \\{123 */
+    test_helper_handle_esc_seq( 6, TRUE, 3, REPLACE_PREPARE_T_NOTHING_SPECIAL );    /* \\x{qwerty} */
+    test_helper_handle_esc_seq( 17, TRUE, 0, REPLACE_PREPARE_T_NOTHING_SPECIAL );   /* \\12} */
+    test_helper_handle_esc_seq( 22, TRUE, 7, REPLACE_PREPARE_T_NOTHING_SPECIAL );   /* \\x{456a-bcd} */
+    test_helper_handle_esc_seq( 41, TRUE, 0, REPLACE_PREPARE_T_NOTHING_SPECIAL );   /* \\satre */
 
     g_string_free(replace_str, TRUE);
 }
