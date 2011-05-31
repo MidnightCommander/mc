@@ -72,7 +72,7 @@ mc_config_set_string_raw (mc_config_t * mc_config, const gchar * group,
     if (!mc_config || !group || !param || !value)
         return;
 
-    g_key_file_set_value (mc_config->handle, group, param, value);
+    g_key_file_set_string (mc_config->handle, group, param, value);
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
