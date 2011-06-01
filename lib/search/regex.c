@@ -43,6 +43,10 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define REPLACE_PREPARE_T_NOTHING_SPECIAL -1
+#define REPLACE_PREPARE_T_REPLACE_FLAG    -2
+#define REPLACE_PREPARE_T_ESCAPE_SEQ      -3
+
 /*** file scope type declarations ****************************************************************/
 
 typedef enum
@@ -54,12 +58,6 @@ typedef enum
     REPLACE_T_LOW_TRANSFORM = 8
 } replace_transform_type_t;
 
-typedef enum
-{
-    REPLACE_PREPARE_T_NOTHING_SPECIAL = -1,
-    REPLACE_PREPARE_T_REPLACE_FLAG = -2,
-    REPLACE_PREPARE_T_ESCAPE_SEQ = -3,
-} replace_prepare_t;
 
 /*** file scope variables ************************************************************************/
 
