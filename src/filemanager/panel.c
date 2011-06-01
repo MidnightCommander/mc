@@ -1148,39 +1148,6 @@ adjust_top_file (WPanel * panel)
  */
 
 static char *
-add_encoding_to_path (const char *path, const char *encoding)
-{
-    char *result;
-    char *semi;
-    char *slash;
-
-    semi = g_strrstr (path, VFS_ENCODING_PREFIX);
-
-    if (semi != NULL)
-    {
-        slash = strchr (semi, PATH_SEP);
-        if (slash != NULL)
-        {
-            result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
-        }
-        else
-        {
-            *semi = '\0';
-            result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
-            *semi = '#';
-        }
-    }
-    else
-    {
-        result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
-    }
-
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static char *
 panel_save_name (WPanel * panel)
 {
     /* If the program is shuting down */
@@ -4051,16 +4018,14 @@ panel_change_encoding (WPanel * panel)
     if (encoding != NULL)
     {
         vfs_path_t *vpath = vfs_path_from_str (panel->cwd);
-        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-        /* don't add current encoding */
-        if ((path_element->encoding == NULL) || (strcmp (encoding, path_element->encoding) != 0))
-        {
-            cd_path = add_encoding_to_path (panel->cwd, encoding);
-            if (!do_panel_cd (panel, cd_path, cd_parse_command))
-                message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
-            g_free (cd_path);
-        }
+        vfs_change_encoding (vpath, encoding);
+
+        cd_path = vfs_path_to_str (vpath);
+        if (!do_panel_cd (panel, cd_path, cd_parse_command))
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
+        g_free (cd_path);
+
         vfs_path_free (vpath);
     }
 }

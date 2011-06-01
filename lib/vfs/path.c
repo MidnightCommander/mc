@@ -310,8 +310,11 @@ vfs_path_from_str (const char *path_str)
     {
         element = g_new0 (vfs_path_element_t, 1);
         element->class = g_ptr_array_index (vfs__classes_list, 0);
-        element->path = g_strdup (path);
+        element->path = vfs_translate_path_n (path);
         element->raw_url_str = NULL;
+
+        element->encoding = vfs_get_encoding (path);
+        element->dir.converter = INVALID_CONV;
         vpath->path = g_list_prepend (vpath->path, element);
     }
     g_free (path);
@@ -391,6 +394,12 @@ vfs_path_element_free (vfs_path_element_t * element)
     vfs_url_free (element->url);
     g_free (element->path);
     g_free (element->encoding);
+
+    if (vfs_path_element_need_cleanup_converter (element))
+    {
+        str_close_conv (element->dir.converter);
+    }
+
     g_free (element);
 }
 
@@ -437,6 +446,22 @@ vfs_prefix_to_class (const char *prefix)
     }
 
     return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Check if need cleanup charset converter for vfs_path_element_t
+ *
+ * @param element part of path
+ *
+ * @return TRUE if need cleanup converter or FALSE otherwise
+ */
+
+gboolean
+vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element)
+{
+    return (element->dir.converter != str_cnv_from_term && element->dir.converter != INVALID_CONV);
 }
 
 /* --------------------------------------------------------------------------------------------- */

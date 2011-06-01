@@ -272,6 +272,8 @@ void vfs_free_handle (int handle);
 
 char *_vfs_get_cwd (void);
 
+vfs_path_t *vfs_change_encoding (vfs_path_t * vpath, const char *encoding);
+
 /**
  * Interface functions described in interface.c
  */

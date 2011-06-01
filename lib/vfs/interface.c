@@ -536,7 +536,10 @@ mc_closedir (DIR * dirp)
         vfs_path_element_t *vfs_path_element;
         vfs_path_element = vfs_class_data_find_by_handle (handle);
         if (vfs_path_element->dir.converter != str_cnv_from_term)
+        {
             str_close_conv (vfs_path_element->dir.converter);
+            vfs_path_element->dir.converter = INVALID_CONV;
+        }
 
         result = vfs->closedir ? (*vfs->closedir) (vfs_path_element->dir.info) : -1;
         vfs_free_handle (handle);

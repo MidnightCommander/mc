@@ -51,6 +51,8 @@ void vfs_path_element_free (vfs_path_element_t * element);
 
 struct vfs_class *vfs_prefix_to_class (const char *prefix);
 
+gboolean vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element);
+
 /*** inline functions ****************************************************************************/
 
 #endif

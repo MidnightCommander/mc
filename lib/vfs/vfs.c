@@ -683,3 +683,33 @@ _vfs_get_cwd (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Change encoding for last part (vfs_path_element_t) of vpath
+ *
+ * @param vpath pointer to path structure
+ * encoding name of charset
+ *
+ * @return pointer to path structure (for use function in anoter functions)
+ */
+vfs_path_t *
+vfs_change_encoding (vfs_path_t * vpath, const char *encoding)
+{
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
+    /* don't add current encoding */
+    if ((path_element->encoding != NULL) && (strcmp (encoding, path_element->encoding) == 0))
+        return vpath;
+
+    g_free (path_element->encoding);
+    path_element->encoding = g_strdup (encoding);
+
+    if (vfs_path_element_need_cleanup_converter (path_element))
+        str_close_conv (path_element->dir.converter);
+
+    path_element->dir.converter = str_crt_conv_from (path_element->encoding);
+
+    return vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
