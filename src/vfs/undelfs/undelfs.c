@@ -149,13 +149,15 @@ static void
 undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
 {
     const char *p, *dirname;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
 
     /* To look like filesystem, we have virtual directories
        /#undel:XXX, which have no subdirectories. XXX is replaced with
        hda5, sdb8 etc, which is assumed to live under /dev. 
        -- pavel@ucw.cz */
 
-    dirname = vpath->unparsed;
+    dirname = path_element->path;
 
     *fsname = NULL;
 

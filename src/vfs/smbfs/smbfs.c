@@ -966,7 +966,9 @@ smbfs_closedir (void *info)
 static int
 smbfs_chmod (const vfs_path_t * vpath, int mode)
 {
-    DEBUG (3, ("smbfs_chmod(path:%s, mode:%d)\n", vpath->unparsed, mode));
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
+    DEBUG (3, ("smbfs_chmod(path:%s, mode:%d)\n", path_element->path, mode));
     /*      my_errno = EOPNOTSUPP;
        return -1;   *//* cannot chmod on smb filesystem */
     return 0;                   /* make mc happy */
@@ -977,7 +979,9 @@ smbfs_chmod (const vfs_path_t * vpath, int mode)
 static int
 smbfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    DEBUG (3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", vpath->unparsed, owner, group));
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
+    DEBUG (3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path_element->path, owner, group));
     my_errno = EOPNOTSUPP;      /* ready for your labotomy? */
     return -1;
 }
@@ -987,9 +991,10 @@ smbfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 static int
 smbfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 {
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
     (void) times;
 
-    DEBUG (3, ("smbfs_utime(path:%s)\n", vpath->unparsed));
+    DEBUG (3, ("smbfs_utime(path:%s)\n", path_element->path));
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -999,7 +1004,9 @@ smbfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 static int
 smbfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
-    DEBUG (3, ("smbfs_readlink(path:%s, buf:%s, size:%zu)\n", vpath->unparsed, buf, size));
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
+    DEBUG (3, ("smbfs_readlink(path:%s, buf:%s, size:%zu)\n", path_element->path, buf, size));
     my_errno = EOPNOTSUPP;
     return -1;                  /* no symlinks on smb filesystem? */
 }
@@ -1009,7 +1016,10 @@ smbfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 static int
 smbfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    DEBUG (3, ("smbfs_symlink(n1:%s, n2:%s)\n", vpath1->unparsed, vpath2->unparsed));
+    vfs_path_element_t *path_element1 = vfs_path_get_by_index (vpath1, -1);
+    vfs_path_element_t *path_element2 = vfs_path_get_by_index (vpath2, -1);
+
+    DEBUG (3, ("smbfs_symlink(n1:%s, n2:%s)\n", path_element1->path, path_element2->path));
     my_errno = EOPNOTSUPP;
     return -1;                  /* no symlinks on smb filesystem? */
 }
@@ -1308,10 +1318,12 @@ smbfs_open_link (char *host, char *path, const char *user, int *port, char *this
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-smbfs_get_path (smbfs_connection ** sc, const char *path)
+smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
 {
     char *remote_path = NULL;
     vfs_url_t *url;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+    char *path = path_element->path;
 
     DEBUG (3, ("smbfs_get_path(%s)\n", path));
     if (strncmp (path, URL_HEADER, HEADER_LEN) != 0)
@@ -1375,16 +1387,17 @@ smbfs_opendir (const vfs_path_t * vpath)
     opendir_info *smbfs_info;
     smbfs_connection *sc;
     char *remote_dir;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_opendir(dirname:%s)\n", vpath->unparsed));
+    DEBUG (3, ("smbfs_opendir(dirname:%s)\n", path_element->path));
 
-    if (!(remote_dir = smbfs_get_path (&sc, vpath->unparsed)))
+    if (!(remote_dir = smbfs_get_path (&sc, vpath)))
         return NULL;
 
     /* FIXME: where freed? */
     smbfs_info = g_new (opendir_info, 1);
     smbfs_info->server_list = FALSE;
-    smbfs_info->path = g_strdup (vpath->unparsed);      /* keep original */
+    smbfs_info->path = g_strdup (path_element->path);   /* keep original */
     smbfs_info->dirname = remote_dir;
     smbfs_info->conn = sc;
     smbfs_info->entries = 0;
@@ -1446,7 +1459,11 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
         /* Make sure there is such share at server */
         smbfs_connection *sc;
         char *p;
-        p = smbfs_get_path (&sc, path);
+        vfs_path_t *vpath = vfs_path_from_str (path);
+
+        p = smbfs_get_path (&sc, vpath);
+        vfs_path_free (vpath);
+
         g_free (p);
         if (p)
         {
@@ -1647,9 +1664,10 @@ smbfs_chdir (const vfs_path_t * vpath)
 {
     char *remote_dir;
     smbfs_connection *sc;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_chdir(path:%s)\n", vpath->unparsed));
-    if (!(remote_dir = smbfs_get_path (&sc, vpath->unparsed)))
+    DEBUG (3, ("smbfs_chdir(path:%s)\n", path_element->path));
+    if (!(remote_dir = smbfs_get_path (&sc, vpath)))
         return -1;
     g_free (remote_dir);
 
@@ -1663,8 +1681,9 @@ smbfs_loaddir_by_name (const vfs_path_t * vpath)
 {
     void *info;
     char *mypath, *p;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    mypath = g_strdup (vpath->unparsed);
+    mypath = g_strdup (path_element->path);
     p = strrchr (mypath, '/');
 
     if (p > mypath)
@@ -1689,8 +1708,9 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
     pstring server_url;
     char *service, *pp, *at;
     const char *p;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_stat(path:%s)\n", vpath->unparsed));
+    DEBUG (3, ("smbfs_stat(path:%s)\n", path_element->path));
 
     if (!current_info)
     {
@@ -1700,7 +1720,7 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
     }
 
     /* check if stating server */
-    p = vpath->unparsed;
+    p = path_element->path;
     if (strncmp (p, URL_HEADER, HEADER_LEN))
     {
         DEBUG (1, ("'%s' doesnt start with '%s' (length %d)\n", p, URL_HEADER, HEADER_LEN));
@@ -1736,16 +1756,16 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
             if (smbfs_loaddir_by_name (vpath) < 0)
                 return -1;
         }
-        return smbfs_fake_server_stat (server_url, vpath->unparsed, buf);
+        return smbfs_fake_server_stat (server_url, path_element->path, buf);
     }
 
     if (!strchr (++pp, '/'))
     {
-        return smbfs_fake_share_stat (server_url, vpath->unparsed, buf);
+        return smbfs_fake_share_stat (server_url, path_element->path, buf);
     }
 
     /* stating inside share at this point */
-    if (!(service = smbfs_get_path (&sc, vpath->unparsed)))     /* connects if necessary */
+    if (!(service = smbfs_get_path (&sc, vpath)))       /* connects if necessary */
         return -1;
     {
         int hostlen = strlen (current_bucket->host);
@@ -1789,7 +1809,7 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
     }
     g_free (service);
     /* stat dirs & files under shares now */
-    return smbfs_get_stat_info (sc, vpath->unparsed, buf);
+    return smbfs_get_stat_info (sc, path_element->path, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1833,8 +1853,11 @@ smbfs_lseek (void *data, off_t offset, int whence)
 static int
 smbfs_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 {
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
     DEBUG (3,
-           ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", vpath->unparsed, mode, (unsigned int) dev));
+           ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path_element->path, mode,
+            (unsigned int) dev));
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -1847,12 +1870,13 @@ smbfs_mkdir (const vfs_path_t * vpath, mode_t mode)
     smbfs_connection *sc;
     char *remote_file;
     char *cpath;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", vpath->unparsed, (int) mode));
-    if ((remote_file = smbfs_get_path (&sc, vpath->unparsed)) == 0)
+    DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path_element->path, (int) mode));
+    if ((remote_file = smbfs_get_path (&sc, vpath)) == 0)
         return -1;
     g_free (remote_file);
-    cpath = smbfs_convert_path (vpath->unparsed, FALSE);
+    cpath = smbfs_convert_path (path_element->path, FALSE);
 
     if (!cli_mkdir (sc->cli, cpath))
     {
@@ -1874,12 +1898,13 @@ smbfs_rmdir (const vfs_path_t * vpath)
     smbfs_connection *sc;
     char *remote_file;
     char *cpath;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_rmdir(path:%s)\n", vpath->unparsed));
-    if ((remote_file = smbfs_get_path (&sc, vpath->unparsed)) == 0)
+    DEBUG (3, ("smbfs_rmdir(path:%s)\n", path_element->path));
+    if ((remote_file = smbfs_get_path (&sc, vpath)) == 0)
         return -1;
     g_free (remote_file);
-    cpath = smbfs_convert_path (vpath->unparsed, FALSE);
+    cpath = smbfs_convert_path (path_element->path, FALSE);
 
     if (!cli_rmdir (sc->cli, cpath))
     {
@@ -1899,7 +1924,10 @@ smbfs_rmdir (const vfs_path_t * vpath)
 static int
 smbfs_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", vpath1->unparsed, vpath2->unparsed));
+    vfs_path_element_t *path_element1 = vfs_path_get_by_index (vpath1, -1);
+    vfs_path_element_t *path_element2 = vfs_path_get_by_index (vpath2, -1);
+
+    DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", path_element1->path, path_element2->path));
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -1962,13 +1990,14 @@ smbfs_forget (const char *path)
 static int
 smbfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
     (void) arg;
 
-    DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", vpath->unparsed, ctlop));
+    DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path_element->path, ctlop));
     switch (ctlop)
     {
     case VFS_SETCTL_FORGET:
-        smbfs_forget (vpath->unparsed);
+        smbfs_forget (path_element->path);
         return 0;
     }
     return 0;
@@ -2039,10 +2068,11 @@ smbfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
     void *ret;
     smbfs_connection *sc;
     smbfs_handle *remote_handle;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_open(file:%s, flags:%d, mode:%o)\n", vpath->unparsed, flags, mode));
+    DEBUG (3, ("smbfs_open(file:%s, flags:%d, mode:%o)\n", path_element->path, flags, mode));
 
-    if (!(remote_file = smbfs_get_path (&sc, vpath->unparsed)))
+    if (!(remote_file = smbfs_get_path (&sc, vpath)))
         return 0;
 
     remote_file = free_after (smbfs_convert_path (remote_file, FALSE), remote_file);
@@ -2068,7 +2098,7 @@ smbfs_unlink (const vfs_path_t * vpath)
     smbfs_connection *sc;
     char *remote_file;
 
-    if ((remote_file = smbfs_get_path (&sc, vpath->unparsed)) == 0)
+    if ((remote_file = smbfs_get_path (&sc, vpath)) == 0)
         return -1;
 
     remote_file = free_after (smbfs_convert_path (remote_file, FALSE), remote_file);
@@ -2093,10 +2123,10 @@ smbfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     char *ra, *rb;
     int retval;
 
-    if ((ra = smbfs_get_path (&sc, vpath1->unparsed)) == 0)
+    if ((ra = smbfs_get_path (&sc, vpath1)) == 0)
         return -1;
 
-    if ((rb = smbfs_get_path (&sc, vpath2->unparsed)) == 0)
+    if ((rb = smbfs_get_path (&sc, vpath2)) == 0)
     {
         g_free (ra);
         return -1;

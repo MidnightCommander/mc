@@ -284,14 +284,13 @@ vfs_path_from_str (const char *path_str)
         return NULL;
 
     vpath = vfs_path_new ();
-    vpath->unparsed = vfs_canon (path_str);
-    if (vpath->unparsed == NULL)
+    path = vfs_canon (path_str);
+    if (path == NULL)
     {
         vfs_path_free (vpath);
         return NULL;
     }
 
-    path = g_strdup (vpath->unparsed);
     while ((class = _vfs_split_with_semi_skip_count (path, &local, &op, 0)) != NULL)
     {
         element = g_new0 (vfs_path_element_t, 1);
@@ -418,7 +417,6 @@ vfs_path_free (vfs_path_t * path)
         return;
     g_list_foreach (path->path, (GFunc) vfs_path_element_free, NULL);
     g_list_free (path->path);
-    g_free (path->unparsed);
     g_free (path);
 }
 

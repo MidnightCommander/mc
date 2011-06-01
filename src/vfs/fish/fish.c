@@ -1222,7 +1222,7 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
     const char *crpath;
-    char *rpath;
+    char *rpath, *str_path;
     struct vfs_s_super *super;
     vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
 
@@ -1231,7 +1231,10 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
         return -1;
     rpath = strutils_shell_escape (crpath);
 
-    qsetto = strutils_shell_escape (vpath1->unparsed);
+    str_path = vfs_path_to_str (vpath1);
+    qsetto = strutils_shell_escape (str_path);
+    g_free (str_path);
+
     shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
                                   SUP->scr_ln, (char *) NULL);
     g_snprintf (buf, sizeof (buf), shell_commands, qsetto, rpath);

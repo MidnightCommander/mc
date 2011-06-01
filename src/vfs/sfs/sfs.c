@@ -215,9 +215,12 @@ sfs_redirect (const vfs_path_t * vpath)
     char *cache;
     int handle;
     vfs_path_element_t *path_element;
+    char *path = vfs_path_to_str (vpath);
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    cur = g_slist_find_custom (head, vpath->unparsed, cachedfile_compare);
+    cur = g_slist_find_custom (head, path, cachedfile_compare);
+    g_free (path);
+
     if (cur != NULL)
     {
         cf = (cachedfile *) cur->data;
@@ -225,7 +228,7 @@ sfs_redirect (const vfs_path_t * vpath)
         return cf->cache;
     }
 
-    handle = vfs_mkstemps (&cache, "sfs", vpath->unparsed);
+    handle = vfs_mkstemps (&cache, "sfs", path_element->path);
 
     if (handle == -1)
         return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
@@ -235,7 +238,7 @@ sfs_redirect (const vfs_path_t * vpath)
     if (sfs_vfmake (vpath, cache) == 0)
     {
         cf = g_new (cachedfile, 1);
-        cf->name = g_strdup (vpath->unparsed);
+        cf->name = vfs_path_to_str (vpath);
         cf->cache = cache;
         head = g_slist_prepend (head, cf);
 
@@ -325,8 +328,10 @@ static vfsid
 sfs_getid (const vfs_path_t * vpath)
 {
     GSList *cur;
+    char *path = vfs_path_to_str (vpath);
 
-    cur = g_slist_find_custom (head, vpath->unparsed, cachedfile_compare);
+    cur = g_slist_find_custom (head, path, cachedfile_compare);
+    g_free (path);
 
     return (vfsid) (cur != NULL ? cur->data : NULL);
 }

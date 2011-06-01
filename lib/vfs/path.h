@@ -13,7 +13,6 @@ struct vfs_url_struct;
 typedef struct
 {
     GList *path;
-    char *unparsed;
 } vfs_path_t;
 
 typedef struct
