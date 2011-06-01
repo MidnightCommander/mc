@@ -135,6 +135,7 @@ enum
     CK_PanelListingChange,
     CK_CompareDirs,
     CK_OptionsVfs,
+    CK_OptionsVfsPlugin,
     CK_OptionsConfirm,
     CK_PutCurrentLink,
     CK_PutOtherLink,

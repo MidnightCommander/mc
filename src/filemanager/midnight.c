@@ -1105,6 +1105,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_OptionsVfs:
         configure_vfs ();
         break;
+    case CK_OptionsVfsPlugin:
+        configure_vfs_plugin ();
+        break;
 #endif
     case CK_OptionsConfirm:
         confirm_box ();

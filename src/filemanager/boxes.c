@@ -57,6 +57,7 @@
 
 #include "lib/util.h"           /* Q_() */
 #include "lib/widget.h"
+#include "lib/event.h"
 
 #include "src/setup.h"          /* For profile_name */
 #include "src/background.h"     /* task_list */
@@ -999,6 +1000,50 @@ configure_vfs (void)
 
 #undef VFSX
 #undef VFSY
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+configure_vfs_plugin (void)
+{
+    /* get list of vfs-plugins, who need call to configuration dialog */
+    GList *config_plugins = NULL, *iterator;
+    int listbox_lines = 0, listbox_cols = 0, listbox_result;
+    Listbox *listbox;
+
+    mc_event_raise ("vfs", "plugin_name_for_config_dialog", (gpointer) & config_plugins);
+    if (config_plugins == NULL)
+        return;
+
+    /* calculate columns and lines in future listbox object */
+    for (iterator = config_plugins; iterator != NULL;
+         iterator = g_list_next (iterator), listbox_lines++)
+    {
+        listbox_cols = max (listbox_cols, (int) strlen ((const char *) iterator->data));
+    }
+    listbox_cols = min (listbox_cols, COLS);
+    listbox_lines = min (listbox_lines, LINES);
+
+
+    listbox = create_listbox_window (listbox_lines, listbox_cols, _("Choose VFS plugin"),
+                                     "[VFS plugins settings]");
+
+    for (iterator = config_plugins; iterator != NULL; iterator = g_list_next (iterator))
+    {
+        LISTBOX_APPEND_TEXT (listbox, '\0', (const char *) iterator->data, NULL);
+    }
+
+    listbox_result = run_listbox (listbox);
+
+    if (listbox_result >= 0)
+    {
+        iterator = g_list_nth (config_plugins, listbox_result);
+        if (iterator != NULL)
+            mc_event_raise ("vfs", "plugin_show_config_dialog", iterator->data);
+    }
+
+    g_list_free (config_plugins);
 }
 
 #endif /* ENABLE_VFS */

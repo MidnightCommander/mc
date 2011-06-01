@@ -150,6 +150,7 @@ static name_keymap_t command_names[] = {
     {"CompareFiles", CK_CompareFiles},
 #endif
     {"OptionsVfs", CK_OptionsVfs},
+    {"OptionsVfsPlugin", CK_OptionsVfsPlugin},
     {"OptionsConfirm", CK_OptionsConfirm},
     {"OptionsDisplayBits", CK_OptionsDisplayBits},
     {"EditExtensionsFile", CK_EditExtensionsFile},
