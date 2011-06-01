@@ -70,7 +70,7 @@
 
 /*** file scope variables ************************************************************************/
 
-static int single_set;
+static gboolean single_set;
 
 static gboolean mode_change, need_update, end_chmod;
 static int c_file;
@@ -115,18 +115,18 @@ static struct
 {
     int ret_cmd;
     int flags;
-    int y;
-    int x;
+    int y;              /* vertical position relatively to dialog bottom boundary */
+    int len;
     const char *text;
 } chmod_but[BUTTONS] =
 {
     /* *INDENT-OFF* */
-    { B_CANCEL, NORMAL_BUTTON, 2, 33, N_("&Cancel") },
-    { B_ENTER, DEFPUSH_BUTTON, 2, 17, N_("&Set") },
-    { B_CLRMRK, NORMAL_BUTTON, 0, 42, N_("C&lear marked") },
-    { B_SETMRK, NORMAL_BUTTON, 0, 27, N_("S&et marked") },
-    { B_MARKED, NORMAL_BUTTON, 0, 12, N_("&Marked all") },
-    { B_ALL,    NORMAL_BUTTON, 0, 0, N_("Set &all") }
+    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_("&Cancel") },
+    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_("&Set") },
+    { B_CLRMRK, NORMAL_BUTTON, 5, 0, N_("C&lear marked") },
+    { B_SETMRK, NORMAL_BUTTON, 5, 0, N_("S&et marked") },
+    { B_MARKED, NORMAL_BUTTON, 6, 0, N_("&Marked all") },
+    { B_ALL,    NORMAL_BUTTON, 6, 0, N_("Set &all") }
     /* *INDENT-ON* */
 };
 
@@ -136,7 +136,6 @@ static struct
 static void
 chmod_i18n (void)
 {
-#if ENABLE_NLS
     static gboolean i18n = FALSE;
     unsigned int i;
 
@@ -145,6 +144,7 @@ chmod_i18n (void)
 
     i18n = TRUE;
 
+#if ENABLE_NLS
     for (i = 0; i < PERMISSIONS; i++)
         check_perm[i].text = _(check_perm[i].text);
 
@@ -154,6 +154,13 @@ chmod_i18n (void)
     for (i = 0; i < BUTTONS; i++)
         chmod_but[i].text = _(chmod_but[i].text);
 #endif  /* ENABLE_NLS */
+
+    for (i = 0; i < BUTTONS; i++)
+    {
+        chmod_but[i].len = str_term_width1 (chmod_but[i].text) + 3; /* [], spaces and w/o & */
+        if (chmod_but[i].flags == DEFPUSH_BUTTON)
+            chmod_but[i].len += 2; /* <> */
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -196,7 +203,7 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
     char buffer[BUF_TINY];
     int id;
 
-    id = dlg_get_current_widget_id (h) - BUTTONS + single_set * 2 - 1;
+    id = dlg_get_current_widget_id (h) - (BUTTONS - (single_set ? 4 : 0)) - 1;
 
     switch (msg)
     {
@@ -243,26 +250,32 @@ static Dlg_head *
 init_chmod (const char *fname, const struct stat *sf_stat)
 {
     Dlg_head *ch_dlg;
+    int lines;
     unsigned int i;
     const char *c_fname, *c_fown, *c_fgrp;
     char buffer[BUF_TINY];
 
-    single_set = (current_panel->marked < 2) ? 2 : 0;
+    single_set = (current_panel->marked < 2);
+    lines = single_set ? 20 : 23;
 
     ch_dlg =
-        create_dlg (TRUE, 0, 0, 22 - single_set, 70, dialog_colors,
+        create_dlg (TRUE, 0, 0, lines, 70, dialog_colors,
                     chmod_callback, "[Chmod]", _("Chmod command"), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++)
     {
-        if (i == 2 && single_set != 0)
-            break;
+        add_widget (ch_dlg,
+                    button_new (lines - chmod_but[i].y, ch_dlg->cols / 2 + 1,
+                                chmod_but[i].ret_cmd,  chmod_but[i].flags, chmod_but[i].text, 0));
+
+        i++;
 
         add_widget (ch_dlg,
-                    button_new (BY + chmod_but[i].y - single_set,
-                                BX + chmod_but[i].x,
-                                chmod_but[i].ret_cmd,
-                                chmod_but[i].flags, chmod_but[i].text, 0));
+                    button_new (lines - chmod_but[i].y, ch_dlg->cols / 2 - chmod_but[i].len,
+                                chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0));
+
+        if (single_set)
+            break;
     }
 
     add_widget (ch_dlg, groupbox_new (FY, FX, 10, 25, _("File")));
