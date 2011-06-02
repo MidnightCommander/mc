@@ -204,7 +204,7 @@ END_TEST
     vpath = vfs_path_from_str (input); \
     result = vfs_path_to_str(vpath); \
     fail_unless( result != NULL && strcmp(result, etalon) ==0, \
-    "\ninput: %s\nactual: %s\netalon: %s", input, result , etalon ); \
+    "\ninput : %s\nactual: %s\netalon: %s", input, result , etalon ); \
 \
     g_free(result); \
     vfs_path_free(vpath); \
@@ -250,6 +250,35 @@ START_TEST (test_vfs_path_from_to_string_encoding)
 
 END_TEST
 /* --------------------------------------------------------------------------------------------- */
+#define ETALON_STR "/path/to/file.ext#test1:/#enc:KOI8-R"
+START_TEST (test_vfs_path_encoding_at_end)
+{
+    vfs_path_t *vpath;
+    char *result;
+    vfs_path_element_t *element;
+
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+    load_codepages_list ();
+
+    vpath = vfs_path_from_str ("/path/to/file.ext#test1:/#enc:KOI8-R");
+    result = vfs_path_to_str(vpath);
+
+    element = vfs_path_get_by_index(vpath, -1);
+    fail_unless(*element->path == '\0', "element->path should be empty, but actual value is '%s'",element->path);
+    fail_unless(element->encoding != NULL && strcmp(element->encoding, "KOI8-R") == 0,
+     "element->encoding should be 'KOI8-R', but actual value is '%s'",element->encoding);
+
+    fail_unless( result != NULL && strcmp(result, ETALON_STR) ==0,
+    "\nactual: %s\netalon: %s", result , ETALON_STR );
+
+    g_free(result);
+    vfs_path_free(vpath);
+
+    free_codepages_list ();
+}
+
+END_TEST
+/* --------------------------------------------------------------------------------------------- */
 
 int
 main (void)
@@ -267,11 +296,12 @@ main (void)
     tcase_add_test (tc_core, test_vfs_path_from_to_string2);
     tcase_add_test (tc_core, test_vfs_path_from_to_partial_string_by_class);
     tcase_add_test (tc_core, test_vfs_path_from_to_string_encoding);
+    tcase_add_test (tc_core, test_vfs_path_encoding_at_end);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "get_vfs_class.log");
+    srunner_set_log (sr, "vfs_path_string_convert.log");
     srunner_run_all (sr, CK_NORMAL);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);
