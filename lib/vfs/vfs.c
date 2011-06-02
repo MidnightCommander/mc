@@ -183,7 +183,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
         GIConv coder = INVALID_CONV;
         int ms;
 
-        /* first must be translated part before /#enc: */
+        /* first must be translated part before #enc: */
         ms = semi - path;
 
         state = _vfs_translate_path (path, ms, defcnv, buffer);
@@ -192,7 +192,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
             return state;
 
         /* now can be translated part after #enc: */
-        semi += strlen (VFS_ENCODING_PREFIX);   /* skip "/#enc:" */
+        semi += strlen (VFS_ENCODING_PREFIX);   /* skip "#enc:" */
         slash = strchr (semi, PATH_SEP);
         /* ignore slashes after size; */
         if (slash - path >= size)
@@ -215,8 +215,6 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
         {
             if (slash != NULL)
                 state = str_vfs_convert_to (coder, slash + 1, path + size - slash - 1, buffer);
-            else if (buffer->len == 0)
-                g_string_append_c (buffer, PATH_SEP);
             str_close_conv (coder);
             return state;
         }

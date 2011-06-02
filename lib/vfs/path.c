@@ -176,13 +176,13 @@ vfs_get_encoding (const char *path)
     char *semi;
     char *slash;
     work = g_strdup (path);
-    /* try found /#enc: */
 
-    semi = g_strrstr (work, PATH_SEP_STR VFS_ENCODING_PREFIX);
+    /* try found #enc: */
+    semi = g_strrstr (work, VFS_ENCODING_PREFIX);
 
-    if (semi != NULL)
+    if (semi != NULL && (semi == work || *(semi - 1) == PATH_SEP))
     {
-        semi += strlen (VFS_ENCODING_PREFIX) + 1;       /* skip "/#enc:" */
+        semi += strlen (VFS_ENCODING_PREFIX);   /* skip "#enc:" */
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL)
             slash[0] = '\0';
