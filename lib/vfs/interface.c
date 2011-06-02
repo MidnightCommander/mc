@@ -241,7 +241,7 @@ int mc_##name inarg \
         return -1; \
     } \
 \
-    result = path_element->class != NULL ? path_element->class->name callarg : -1; \
+    result = path_element->class->name != NULL ? path_element->class->name callarg : -1; \
     if (result == -1) \
         errno = path_element->class->name != NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP; \
     vfs_path_free(vpath); \
