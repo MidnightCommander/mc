@@ -45,6 +45,7 @@ static void
 teardown (void)
 {
     vfs_shut ();
+    str_uninit_strings ();
 }
 
 static int
