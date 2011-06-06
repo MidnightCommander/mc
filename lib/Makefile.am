@@ -43,6 +43,7 @@ libmc_la_SOURCES = \
 	global.c global.h \
 	keybind.c keybind.h \
 	lock.c lock.h \
+	serialize.c serialize.h \
 	timefmt.c timefmt.h
 
 if USE_MAINTAINER_MODE
