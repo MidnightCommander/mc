@@ -31,7 +31,7 @@ void mc_config_deinit (mc_config_t *);
 gboolean mc_config_del_key (mc_config_t *, const char *, const gchar *);
 gboolean mc_config_del_group (mc_config_t *, const char *);
 
-gboolean mc_config_has_param (mc_config_t *, const char *, const gchar *);
+gboolean mc_config_has_param (const mc_config_t *, const char *, const gchar *);
 gboolean mc_config_has_group (mc_config_t *, const char *);
 
 gboolean mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path,
@@ -44,13 +44,13 @@ gboolean mc_config_save_to_file (mc_config_t * config, const gchar * filename, G
 
 /* mcconfig/get.c: */
 
-gchar **mc_config_get_groups (mc_config_t *, gsize *);
+gchar **mc_config_get_groups (const mc_config_t *, gsize *);
 
-gchar **mc_config_get_keys (mc_config_t *, const gchar *, gsize *);
+gchar **mc_config_get_keys (const mc_config_t *, const gchar *, gsize *);
 
 gchar *mc_config_get_string (mc_config_t *, const gchar *, const gchar *, const gchar *);
 
-gchar *mc_config_get_string_raw (mc_config_t *, const gchar *, const gchar *, const gchar *);
+gchar *mc_config_get_string_raw (const mc_config_t *, const gchar *, const gchar *, const gchar *);
 
 gboolean mc_config_get_bool (mc_config_t *, const gchar *, const gchar *, gboolean);
 
@@ -68,7 +68,7 @@ int *mc_config_get_int_list (mc_config_t *, const gchar *, const gchar *, gsize 
 
 void mc_config_set_string_raw (mc_config_t *, const gchar *, const gchar *, const gchar *);
 
-void mc_config_set_string (mc_config_t *, const gchar *, const gchar *, const gchar *);
+void mc_config_set_string (const mc_config_t *, const gchar *, const gchar *, const gchar *);
 
 void mc_config_set_bool (mc_config_t *, const gchar *, const gchar *, gboolean);
 
