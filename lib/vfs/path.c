@@ -35,6 +35,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* concat_dir_and_file */
+#include "lib/serialize.h"
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -196,6 +197,33 @@ vfs_get_encoding (const char *path)
         g_free (work);
         return NULL;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * get VFS class for the given name
+ *
+ * @param class_name name of class
+ *
+ * @return pointer to class structure or NULL if class not found
+ */
+
+static struct vfs_class *
+vfs_get_class_by_name (const char *class_name)
+{
+    guint i;
+
+    if (class_name == NULL)
+        return NULL;
+
+    for (i = 0; i < vfs__classes_list->len; i++)
+    {
+        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        if ((vfs->name != NULL) && (strcmp (vfs->name, class_name) == 0))
+            return vfs;
+    }
+
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -460,6 +488,143 @@ gboolean
 vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element)
 {
     return (element->dir.converter != str_cnv_from_term && element->dir.converter != INVALID_CONV);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Serialize vfs_path_t object to string
+ *
+ * @param vpath data for serialization
+ * @param error contain pointer to object for handle error code and message
+ *
+ * @return serialized vpath as newly allocated string
+ */
+
+char *
+vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
+{
+    mc_config_t *cpath = mc_config_init (NULL);
+    ssize_t element_index;
+    char *ret_value;
+
+    if ((vpath == NULL) || (vfs_path_elements_count (vpath) == 0))
+    {
+        g_set_error (error, MC_ERROR, -1, "vpath object is empty");
+        return NULL;
+
+    }
+    for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
+    {
+        char *groupname = g_strdup_printf ("path-element-%zd", element_index);
+        vfs_path_element_t *element = vfs_path_get_by_index (vpath, element_index);
+
+        /* convert one element to config group */
+
+        mc_config_set_string_raw (cpath, groupname, "path", element->path);
+        mc_config_set_string_raw (cpath, groupname, "class-name", element->class->name);
+        mc_config_set_string_raw (cpath, groupname, "encoding", element->encoding);
+
+        mc_config_set_string_raw (cpath, groupname, "raw_url_str", element->raw_url_str);
+
+        if (element->url != NULL)
+        {
+            mc_config_set_bool (cpath, groupname, "has-url", TRUE);
+            mc_config_set_string_raw (cpath, groupname, "url-user", element->url->user);
+            mc_config_set_string_raw (cpath, groupname, "url-password", element->url->password);
+            mc_config_set_string_raw (cpath, groupname, "url-host", element->url->host);
+            mc_config_set_int (cpath, groupname, "url-port", element->url->port);
+            mc_config_set_string_raw (cpath, groupname, "url-path", element->url->path);
+        }
+
+        g_free (groupname);
+    }
+
+    ret_value = mc_serialize_config (cpath, error);
+    mc_config_deinit (cpath);
+    return ret_value;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Deserialize string to vfs_path_t object
+ *
+ * @param data data for serialization
+ * @param error contain pointer to object for handle error code and message
+ *
+ * @return newly allocated vfs_path_t object
+ */
+
+vfs_path_t *
+vfs_path_deserialize (const char *data, GError ** error)
+{
+    mc_config_t *cpath = mc_deserialize_config (data, error);
+    size_t element_index = 0;
+    vfs_path_t *vpath;
+
+    if (cpath == NULL)
+        return NULL;
+
+    vpath = vfs_path_new ();
+
+    while (TRUE)
+    {
+        vfs_path_element_t *element;
+        char *cfg_value;
+        char *groupname;
+
+        groupname = g_strdup_printf ("path-element-%zd", element_index);
+        if (!mc_config_has_group (cpath, groupname))
+        {
+            g_free (groupname);
+            break;
+        }
+
+        element = g_new0 (vfs_path_element_t, 1);
+        element->dir.converter = INVALID_CONV;
+
+        cfg_value = mc_config_get_string_raw (cpath, groupname, "class-name", NULL);
+        element->class = vfs_get_class_by_name (cfg_value);
+        if (element->class == NULL)
+        {
+            g_free (element);
+            vfs_path_free (vpath);
+            g_set_error (error, MC_ERROR, -1, "Unable to find VFS class by name '%s'", cfg_value);
+            g_free (cfg_value);
+            mc_config_deinit (cpath);
+            return NULL;
+        }
+        g_free (cfg_value);
+
+        element->path = mc_config_get_string_raw (cpath, groupname, "path", NULL);
+        element->encoding = mc_config_get_string_raw (cpath, groupname, "encoding", NULL);
+
+        element->raw_url_str = mc_config_get_string_raw (cpath, groupname, "raw_url_str", NULL);
+
+        if (mc_config_get_bool (cpath, groupname, "has-url", FALSE))
+        {
+            element->url = g_new0 (vfs_url_t, 1);
+            element->url->user = mc_config_get_string_raw (cpath, groupname, "url-user", NULL);
+            element->url->password =
+                mc_config_get_string_raw (cpath, groupname, "url-password", NULL);
+            element->url->host = mc_config_get_string_raw (cpath, groupname, "url-host", NULL);
+            element->url->port = mc_config_get_int (cpath, groupname, "url-port", 0);
+            element->url->path = mc_config_get_string_raw (cpath, groupname, "url-path", NULL);
+        }
+        vpath->path = g_list_append (vpath->path, element);
+
+        g_free (groupname);
+        element_index++;
+    }
+
+    mc_config_deinit (cpath);
+    if (vfs_path_elements_count (vpath) == 0)
+    {
+        vfs_path_free (vpath);
+        g_set_error (error, MC_ERROR, -1, "No any path elements found");
+        return NULL;
+    }
+
+    return vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */

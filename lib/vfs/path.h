@@ -52,6 +52,9 @@ struct vfs_class *vfs_prefix_to_class (const char *prefix);
 
 gboolean vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element);
 
+char *vfs_path_serialize (const vfs_path_t * vpath, GError ** error);
+vfs_path_t *vfs_path_deserialize (const char *data, GError ** error);
+
 /*** inline functions ****************************************************************************/
 
 #endif

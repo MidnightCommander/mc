@@ -8,10 +8,11 @@ LIBS=@CHECK_LIBS@  \
 
 TESTS = \
 	current_dir \
-	vfs_prefix_to_class \
 	get_vfs_class \
-	vfs_split \
+	path_serialize \
 	vfs_path_string_convert \
+	vfs_prefix_to_class \
+	vfs_split \
 	vfs_s_get_path_mangle
 
 check_PROGRAMS = $(TESTS)
@@ -21,6 +22,9 @@ current_dir_SOURCES = \
 
 get_vfs_class_SOURCES = \
 	get_vfs_class.c
+
+path_serialize_SOURCES = \
+	path_serialize.c
 
 vfs_split_SOURCES = \
 	vfs_split.c
