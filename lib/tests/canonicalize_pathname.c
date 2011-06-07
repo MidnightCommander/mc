@@ -72,6 +72,15 @@ START_TEST (test_canonicalize_path)
     /* Collapse "/.." with the previous part of path */
     check_canonicalize ("/some_server/ww/some_server/../ww/../some_server/..//ww/some_server/ww", "/some_server/ww/ww/some_server/ww");
 
+    /* URI style */
+    check_canonicalize ("/some_server/ww/ftp://user:pass@host.net/path/", "/some_server/ww/ftp://user:pass@host.net/path");
+
+    check_canonicalize ("/some_server/ww/ftp://user:pass@host.net/path/../../", "/some_server/ww");
+
+    check_canonicalize ("ftp://user:pass@host.net/path/../../", ".");
+
+    check_canonicalize ("ftp://user/../../", "..");
+
 }
 END_TEST
 

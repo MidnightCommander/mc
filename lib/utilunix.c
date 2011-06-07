@@ -565,7 +565,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         p = lpath;
         while (*p)
         {
-            if (p[0] == PATH_SEP && p[1] == PATH_SEP)
+            if (p[0] == PATH_SEP && p[1] == PATH_SEP && (p == lpath || *(p - 1) != ':'))
             {
                 s = p + 1;
                 while (*(++s) == PATH_SEP);
@@ -650,8 +650,17 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
             /* search for the previous token */
             s = p - 1;
-            while (s >= lpath && *s != PATH_SEP)
+            while (s >= lpath)
+            {
+                if (s >= lpath + 2 && strncmp (s - 2, "://", 3) == 0)
+                {
+                    s -= 2;
+                    continue;
+                }
+                if (*s == PATH_SEP)
+                    break;
                 s--;
+            }
 
             s++;
 
