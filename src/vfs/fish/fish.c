@@ -430,17 +430,17 @@ fish_open_archive_pipeopen (struct vfs_s_super *super)
 {
     char gbuf[10];
     const char *argv[10];       /* All of 10 is used now */
-    const char *xsh = (super->url->port == FISH_FLAG_RSH ? "rsh" : "ssh");
+    const char *xsh = (super->path_element->port == FISH_FLAG_RSH ? "rsh" : "ssh");
     int i = 0;
 
     argv[i++] = xsh;
-    if (super->url->port == FISH_FLAG_COMPRESSED)
+    if (super->path_element->port == FISH_FLAG_COMPRESSED)
         argv[i++] = "-C";
 
-    if (super->url->port > FISH_FLAG_RSH)
+    if (super->path_element->port > FISH_FLAG_RSH)
     {
         argv[i++] = "-p";
-        g_snprintf (gbuf, sizeof (gbuf), "%d", super->url->port);
+        g_snprintf (gbuf, sizeof (gbuf), "%d", super->path_element->port);
         argv[i++] = gbuf;
     }
 
@@ -451,18 +451,18 @@ fish_open_archive_pipeopen (struct vfs_s_super *super)
      * option breaks it for some)
      */
 
-    if (super->url->user != NULL)
+    if (super->path_element->user != NULL)
     {
         argv[i++] = "-l";
-        argv[i++] = super->url->user;
+        argv[i++] = super->path_element->user;
     }
     else
     {
         /* The rest of the code assumes it to be a valid username */
-        super->url->user = vfs_get_local_username ();
+        super->path_element->user = vfs_get_local_username ();
     }
 
-    argv[i++] = super->url->host;
+    argv[i++] = super->path_element->host;
     argv[i++] = "echo FISH:; /bin/sh";
     argv[i++] = NULL;
 
@@ -490,15 +490,15 @@ fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
 
         return FALSE;
 #if 0
-        if (super->url->password == NULL)
+        if (super->path_element->password == NULL)
         {
             char *p, *op;
-            p = g_strdup_printf (_("fish: Password is required for %s"), super->url->user);
+            p = g_strdup_printf (_("fish: Password is required for %s"), super->path_element->user);
             op = vfs_get_password (p);
             g_free (p);
             if (op == NULL)
                 return FALSE;
-            super->url->password = op;
+            super->path_element->password = op;
 
         }
 
@@ -507,8 +507,8 @@ fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
         {
             size_t str_len;
 
-            str_len = strlen (super->url->password);
-            if ((write (SUP.sockw, super->url->password, str_len) != (ssize_t) str_len)
+            str_len = strlen (super->path_element->password);
+            if ((write (SUP.sockw, super->path_element->password, str_len) != (ssize_t) str_len)
                 || (write (SUP->sockw, "\n", 1) != 1))
                 return FALSE;
         }
@@ -564,11 +564,12 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
         SUP->scr_env = fish_set_env (SUP->host_flags);
 
     vfs_print_message (_("fish: Setting up current directory..."));
-    super->url->path = fish_getcwd (me, super);
-    vfs_print_message (_("fish: Connected, home %s."), super->url->path);
+    super->path_element->path = fish_getcwd (me, super);
+    vfs_print_message (_("fish: Connected, home %s."), super->path_element->path);
 #if 0
     super->name =
-        g_strconcat ("/#sh:", super->url->user, "@", super->url->host, "/", (char *) NULL);
+        g_strconcat ("/#sh:", super->path_element->user, "@", super->path_element->host, "/",
+                     (char *) NULL);
 #else
     super->name = g_strdup (PATH_SEP_STR);
 #endif
@@ -586,37 +587,49 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     (void) archive_name;
 
     super->data = g_new0 (fish_super_data_t, 1);
-    super->url = vfs_url_split (strchr (op, ':') + 1, 0, URL_NOSLASH | URL_USE_ANONYMOUS);
+    super->path_element = vfs_url_split (strchr (op, ':') + 1, 0, URL_NOSLASH | URL_USE_ANONYMOUS);
 
     if (strncmp (op, "rsh:", 4) == 0)
-        super->url->port = FISH_FLAG_RSH;
+        super->path_element->port = FISH_FLAG_RSH;
 
-    SUP->scr_ls = fish_load_script_from_file (super->url->host, FISH_LS_FILE, FISH_LS_DEF_CONTENT);
+    SUP->scr_ls =
+        fish_load_script_from_file (super->path_element->host, FISH_LS_FILE, FISH_LS_DEF_CONTENT);
     SUP->scr_exists =
-        fish_load_script_from_file (super->url->host, FISH_EXISTS_FILE, FISH_EXISTS_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_EXISTS_FILE,
+                                    FISH_EXISTS_DEF_CONTENT);
     SUP->scr_mkdir =
-        fish_load_script_from_file (super->url->host, FISH_MKDIR_FILE, FISH_MKDIR_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_MKDIR_FILE,
+                                    FISH_MKDIR_DEF_CONTENT);
     SUP->scr_unlink =
-        fish_load_script_from_file (super->url->host, FISH_UNLINK_FILE, FISH_UNLINK_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_UNLINK_FILE,
+                                    FISH_UNLINK_DEF_CONTENT);
     SUP->scr_chown =
-        fish_load_script_from_file (super->url->host, FISH_CHOWN_FILE, FISH_CHOWN_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_CHOWN_FILE,
+                                    FISH_CHOWN_DEF_CONTENT);
     SUP->scr_chmod =
-        fish_load_script_from_file (super->url->host, FISH_CHMOD_FILE, FISH_CHMOD_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_CHMOD_FILE,
+                                    FISH_CHMOD_DEF_CONTENT);
     SUP->scr_rmdir =
-        fish_load_script_from_file (super->url->host, FISH_RMDIR_FILE, FISH_RMDIR_DEF_CONTENT);
-    SUP->scr_ln = fish_load_script_from_file (super->url->host, FISH_LN_FILE, FISH_LN_DEF_CONTENT);
-    SUP->scr_mv = fish_load_script_from_file (super->url->host, FISH_MV_FILE, FISH_MV_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_RMDIR_FILE,
+                                    FISH_RMDIR_DEF_CONTENT);
+    SUP->scr_ln =
+        fish_load_script_from_file (super->path_element->host, FISH_LN_FILE, FISH_LN_DEF_CONTENT);
+    SUP->scr_mv =
+        fish_load_script_from_file (super->path_element->host, FISH_MV_FILE, FISH_MV_DEF_CONTENT);
     SUP->scr_hardlink =
-        fish_load_script_from_file (super->url->host, FISH_HARDLINK_FILE,
+        fish_load_script_from_file (super->path_element->host, FISH_HARDLINK_FILE,
                                     FISH_HARDLINK_DEF_CONTENT);
     SUP->scr_get =
-        fish_load_script_from_file (super->url->host, FISH_GET_FILE, FISH_GET_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_GET_FILE, FISH_GET_DEF_CONTENT);
     SUP->scr_send =
-        fish_load_script_from_file (super->url->host, FISH_SEND_FILE, FISH_SEND_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_SEND_FILE,
+                                    FISH_SEND_DEF_CONTENT);
     SUP->scr_append =
-        fish_load_script_from_file (super->url->host, FISH_APPEND_FILE, FISH_APPEND_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_APPEND_FILE,
+                                    FISH_APPEND_DEF_CONTENT);
     SUP->scr_info =
-        fish_load_script_from_file (super->url->host, FISH_INFO_FILE, FISH_INFO_DEF_CONTENT);
+        fish_load_script_from_file (super->path_element->host, FISH_INFO_FILE,
+                                    FISH_INFO_DEF_CONTENT);
 
     return fish_open_archive_int (me, super);
 }
@@ -627,23 +640,23 @@ static int
 fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
                    const char *archive_name, char *op, void *cookie)
 {
-    vfs_url_t *url;
+    vfs_path_element_t *path_element;
     int result;
 
     (void) me;
     (void) archive_name;
     (void) cookie;
 
-    url = vfs_url_split (strchr (op, ':') + 1, 0, URL_NOSLASH | URL_USE_ANONYMOUS);
+    path_element = vfs_url_split (strchr (op, ':') + 1, 0, URL_NOSLASH | URL_USE_ANONYMOUS);
 
-    if (url->user == NULL)
-        url->user = vfs_get_local_username ();
+    if (path_element->user == NULL)
+        path_element->user = vfs_get_local_username ();
 
-    result = ((strcmp (url->host, super->url->host) == 0)
-              && (strcmp (url->user, super->url->user) == 0)
-              && (url->port == super->url->port)) ? 1 : 0;
+    result = ((strcmp (path_element->host, super->path_element->host) == 0)
+              && (strcmp (path_element->user, super->path_element->user) == 0)
+              && (path_element->port == super->path_element->port)) ? 1 : 0;
 
-    vfs_url_free (url);
+    vfs_path_element_free (path_element);
 
     return result;
 }
@@ -836,8 +849,8 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     reply_code = fish_decode_reply (buffer + 4, 0);
     if (reply_code == COMPLETE)
     {
-        g_free (super->url->path);
-        super->url->path = g_strdup (remote_path);
+        g_free (super->path_element->path);
+        super->path_element->path = g_strdup (remote_path);
         vfs_print_message (_("%s: done."), me->name);
         return 0;
     }
@@ -1506,7 +1519,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
         char gbuf[10];
         const char *flags = "";
 
-        switch (super->url->port)
+        switch (super->path_element->port)
         {
         case FISH_FLAG_RSH:
             flags = ":r";
@@ -1515,16 +1528,17 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
             flags = ":C";
             break;
         default:
-            if (super->url->port > FISH_FLAG_RSH)
+            if (super->path_element->port > FISH_FLAG_RSH)
             {
-                g_snprintf (gbuf, sizeof (gbuf), ":%d", super->url->port);
+                g_snprintf (gbuf, sizeof (gbuf), ":%d", super->path_element->port);
                 flags = gbuf;
             }
             break;
         }
 
-        name = g_strconcat ("/#sh:", super->url->user, "@", super->url->host, flags, "/",
-                            super->url->path, (char *) NULL);
+        name =
+            g_strconcat ("/#sh:", super->path_element->user, "@", super->path_element->host, flags,
+                         "/", super->path_element->path, (char *) NULL);
         func (name);
         g_free (name);
     }

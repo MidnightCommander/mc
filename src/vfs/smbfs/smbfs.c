@@ -1321,7 +1321,7 @@ static char *
 smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
 {
     char *remote_path = NULL;
-    vfs_url_t *url;
+    vfs_path_element_t *url;
     vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
     char *path = path_element->path;
 
@@ -1343,7 +1343,7 @@ smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
         if (*sc != NULL)
             remote_path = g_strdup (url->path);
 
-        vfs_url_free (url);
+        vfs_path_element_free (url);
     }
 
     if (remote_path == NULL)
@@ -1949,7 +1949,7 @@ smbfs_free (vfsid id)
 static void
 smbfs_forget (const char *path)
 {
-    vfs_url_t *p;
+    vfs_path_element_t *p;
 
     if (strncmp (path, URL_HEADER, HEADER_LEN) != 0)
         return;
@@ -1981,7 +1981,7 @@ smbfs_forget (const char *path)
             }
         }
 
-        vfs_url_free (p);
+        vfs_path_element_free (p);
     }
 }
 

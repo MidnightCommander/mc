@@ -12,6 +12,7 @@
 #include <sys/stat.h>
 
 #include "lib/global.h"
+#include "path.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -31,15 +32,6 @@ typedef enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct vfs_url_struct
-{
-    char *user;
-    char *password;
-    char *host;
-    int port;
-    char *path;
-} vfs_url_t;
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
@@ -47,8 +39,7 @@ typedef struct vfs_url_struct
 int vfs_finduid (const char *name);
 int vfs_findgid (const char *name);
 
-vfs_url_t *vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags);
-void vfs_url_free (vfs_url_t * url);
+vfs_path_element_t *vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags);
 int vfs_split_text (char *p);
 
 int vfs_mkstemps (char **pname, const char *prefix, const char *basename);

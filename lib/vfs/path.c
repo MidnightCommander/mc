@@ -418,7 +418,9 @@ vfs_path_element_free (vfs_path_element_t * element)
     if (element == NULL)
         return;
 
-    vfs_url_free (element->url);
+    g_free (element->user);
+    g_free (element->password);
+    g_free (element->host);
     g_free (element->path);
     g_free (element->encoding);
 
@@ -526,15 +528,10 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
 
         mc_config_set_string_raw (cpath, groupname, "raw_url_str", element->raw_url_str);
 
-        if (element->url != NULL)
-        {
-            mc_config_set_bool (cpath, groupname, "has-url", TRUE);
-            mc_config_set_string_raw (cpath, groupname, "url-user", element->url->user);
-            mc_config_set_string_raw (cpath, groupname, "url-password", element->url->password);
-            mc_config_set_string_raw (cpath, groupname, "url-host", element->url->host);
-            mc_config_set_int (cpath, groupname, "url-port", element->url->port);
-            mc_config_set_string_raw (cpath, groupname, "url-path", element->url->path);
-        }
+        mc_config_set_string_raw (cpath, groupname, "user", element->user);
+        mc_config_set_string_raw (cpath, groupname, "password", element->password);
+        mc_config_set_string_raw (cpath, groupname, "host", element->host);
+        mc_config_set_int (cpath, groupname, "port", element->port);
 
         g_free (groupname);
     }
@@ -600,16 +597,11 @@ vfs_path_deserialize (const char *data, GError ** error)
 
         element->raw_url_str = mc_config_get_string_raw (cpath, groupname, "raw_url_str", NULL);
 
-        if (mc_config_get_bool (cpath, groupname, "has-url", FALSE))
-        {
-            element->url = g_new0 (vfs_url_t, 1);
-            element->url->user = mc_config_get_string_raw (cpath, groupname, "url-user", NULL);
-            element->url->password =
-                mc_config_get_string_raw (cpath, groupname, "url-password", NULL);
-            element->url->host = mc_config_get_string_raw (cpath, groupname, "url-host", NULL);
-            element->url->port = mc_config_get_int (cpath, groupname, "url-port", 0);
-            element->url->path = mc_config_get_string_raw (cpath, groupname, "url-path", NULL);
-        }
+        element->user = mc_config_get_string_raw (cpath, groupname, "user", NULL);
+        element->password = mc_config_get_string_raw (cpath, groupname, "password", NULL);
+        element->host = mc_config_get_string_raw (cpath, groupname, "host", NULL);
+        element->port = mc_config_get_int (cpath, groupname, "port", 0);
+
         vpath->path = g_list_append (vpath->path, element);
 
         g_free (groupname);

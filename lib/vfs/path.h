@@ -17,6 +17,10 @@ typedef struct
 
 typedef struct
 {
+    char *user;
+    char *password;
+    char *host;
+    int port;
     char *path;
     struct vfs_class *class;
     char *encoding;
@@ -28,7 +32,6 @@ typedef struct
     } dir;
 
     char *raw_url_str;
-    struct vfs_url_struct *url;
 
     struct vfs_s_super *current_super_block;
 } vfs_path_element_t;

@@ -86,10 +86,10 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 #define ETALON_PATH_STR "/local/path/#test1:user:pass@some.host:12345/bla-bla/some/path/#test2:/#enc:KOI8-R/bla-bla/some/path#test3:/111/22/33"
-#define ETALON_SERIALIZED_PATH "g14:path-element-0p4:pathv12:/local/path/p10:class-namev7:localfs" \
-        "g14:path-element-1p4:pathv18:bla-bla/some/path/p10:class-namev7:testfs1p11:raw_url_strv31:test1:user:pass@some.host:12345" \
-        "g14:path-element-2p4:pathv17:bla-bla/some/pathp10:class-namev7:testfs2p8:encodingv6:KOI8-Rp11:raw_url_strv6:test2:" \
-        "g14:path-element-3p4:pathv9:111/22/33p10:class-namev7:testfs3p11:raw_url_strv6:test3:"
+#define ETALON_SERIALIZED_PATH "g14:path-element-0p4:pathv12:/local/path/p10:class-namev7:localfsp4:portv1:0" \
+        "g14:path-element-1p4:pathv18:bla-bla/some/path/p10:class-namev7:testfs1p11:raw_url_strv31:test1:user:pass@some.host:12345p4:portv1:0" \
+        "g14:path-element-2p4:pathv17:bla-bla/some/pathp10:class-namev7:testfs2p8:encodingv6:KOI8-Rp11:raw_url_strv6:test2:p4:portv1:0" \
+        "g14:path-element-3p4:pathv9:111/22/33p10:class-namev7:testfs3p11:raw_url_strv6:test3:p4:portv1:0"
 
 START_TEST (test_path_serialize_deserialize)
 {

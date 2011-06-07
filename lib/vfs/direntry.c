@@ -385,7 +385,7 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
 
     CALL (free_archive) (me, super);
 #ifdef ENABLE_VFS_NET
-    vfs_url_free (super->url);
+    vfs_path_element_free (super->path_element);
 #endif
     g_free (super->name);
     g_free (super);

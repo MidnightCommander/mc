@@ -383,17 +383,17 @@ vfs_mkstemps (char **pname, const char *prefix, const char *param_basename)
  *         host.
  */
 
-vfs_url_t *
+vfs_path_element_t *
 vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
 {
-    vfs_url_t *url;
+    vfs_path_element_t *path_element;
 
     char *pcopy;
     const char *pend;
     char *dir, *colon, *inner_colon, *at, *rest;
 
-    url = g_new0 (vfs_url_t, 1);
-    url->port = default_port;
+    path_element = g_new0 (vfs_path_element_t, 1);
+    path_element->port = default_port;
 
     pcopy = g_strdup (path);
     pend = pcopy + strlen (pcopy);
@@ -405,10 +405,10 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
         while (*dir != PATH_SEP && *dir != '\0')
             dir++;
         if (*dir == '\0')
-            url->path = g_strdup (PATH_SEP_STR);
+            path_element->path = g_strdup (PATH_SEP_STR);
         else
         {
-            url->path = g_strdup (dir);
+            path_element->path = g_strdup (dir);
             *dir = '\0';
         }
     }
@@ -427,11 +427,11 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
         {
             *inner_colon = '\0';
             inner_colon++;
-            url->password = g_strdup (inner_colon);
+            path_element->password = g_strdup (inner_colon);
         }
 
         if (*pcopy != '\0')
-            url->user = g_strdup (pcopy);
+            path_element->user = g_strdup (pcopy);
 
         if (pend == at + 1)
             rest = at;
@@ -440,7 +440,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     }
 
     if ((flags & URL_USE_ANONYMOUS) == 0)
-        url->user = vfs_get_local_username ();
+        path_element->user = vfs_get_local_username ();
 
     /* Check if the host comes with a port spec, if so, chop it */
     if (*rest != '[')
@@ -456,7 +456,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
         }
         else
         {
-            vfs_url_free (url);
+            vfs_path_element_free (path_element);
             return NULL;
         }
     }
@@ -464,10 +464,10 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     if (colon != NULL)
     {
         *colon = '\0';
-        if (sscanf (colon + 1, "%d", &url->port) == 1)
+        if (sscanf (colon + 1, "%d", &path_element->port) == 1)
         {
-            if (url->port <= 0 || url->port >= 65536)
-                url->port = default_port;
+            if (path_element->port <= 0 || path_element->port >= 65536)
+                path_element->port = default_port;
         }
         else
             while (*(++colon) != '\0')
@@ -475,33 +475,18 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
                 switch (*colon)
                 {
                 case 'C':
-                    url->port = 1;
+                    path_element->port = 1;
                     break;
                 case 'r':
-                    url->port = 2;
+                    path_element->port = 2;
                     break;
                 }
             }
     }
 
-    url->host = g_strdup (rest);
+    path_element->host = g_strdup (rest);
 
-    return url;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-vfs_url_free (vfs_url_t * url)
-{
-    if (url != NULL)
-    {
-        g_free (url->user);
-        g_free (url->password);
-        g_free (url->host);
-        g_free (url->path);
-        g_free (url);
-    }
+    return path_element;
 }
 
 /* --------------------------------------------------------------------------------------------- */
