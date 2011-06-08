@@ -398,10 +398,35 @@ vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
     if (vpath == NULL)
         return NULL;
 
-    if (element_index >= 0)
-        return g_list_nth_data (vpath->path, element_index);
+    if (element_index < 0)
+        element_index = vfs_path_elements_count (vpath) + element_index;
 
-    return g_list_nth_data (vpath->path, vfs_path_elements_count (vpath) + element_index);
+    return g_list_nth_data (vpath->path, element_index);
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*
+ * Clone one path element
+ *
+ * @param element pointer to vfs_path_element_t object
+ *
+ * @return Newly allocated path element
+ */
+
+vfs_path_element_t *
+vfs_path_element_clone (const vfs_path_element_t * element)
+{
+    vfs_path_element_t *new_element = g_new0 (vfs_path_element_t, 1);
+    memcpy (new_element, element, sizeof (vfs_path_element_t));
+
+    new_element->user = g_strdup (element->user);
+    new_element->password = g_strdup (element->password);
+    new_element->host = g_strdup (element->host);
+    new_element->path = g_strdup (element->path);
+    new_element->encoding = g_strdup (element->encoding);
+
+    return new_element;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -434,6 +459,36 @@ vfs_path_element_free (vfs_path_element_t * element)
 
 /* --------------------------------------------------------------------------------------------- */
 /*
+ * Clone path
+ *
+ * @param vpath pointer to vfs_path_t object
+ *
+ * @return Newly allocated path object
+ */
+
+vfs_path_t *
+vfs_path_clone (const vfs_path_t * vpath)
+{
+    vfs_path_t *new_vpath;
+    int vpath_element_index;
+    if (vpath == NULL)
+        return NULL;
+
+    new_vpath = vfs_path_new ();
+    for (vpath_element_index = 0; vpath_element_index < vfs_path_elements_count (vpath);
+         vpath_element_index++)
+    {
+        new_vpath->path =
+            g_list_append (new_vpath->path,
+                           vfs_path_element_clone (vfs_path_get_by_index
+                                                   (vpath, vpath_element_index)));
+    }
+
+    return new_vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*
  * Free vfs_path_t object.
  *
  * @param vpath pointer to vfs_path_t object
@@ -448,6 +503,31 @@ vfs_path_free (vfs_path_t * path)
     g_list_foreach (path->path, (GFunc) vfs_path_element_free, NULL);
     g_list_free (path->path);
     g_free (path);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*
+ * Remove one path element by index
+ *
+ * @param vpath pointer to vfs_path_t object
+ * @param element_index element index. May have negative value (in this case count was started at the end of list).
+ *
+ */
+
+void
+vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index)
+{
+    vfs_path_element_t *element;
+
+    if ((vpath == NULL) || (vfs_path_elements_count (vpath) == 1))
+        return;
+
+    if (element_index < 0)
+        element_index = vfs_path_elements_count (vpath) + element_index;
+
+    element = g_list_nth_data (vpath->path, element_index);
+    vpath->path = g_list_remove (vpath->path, element);
+    vfs_path_element_free (element);
 }
 
 /* --------------------------------------------------------------------------------------------- */

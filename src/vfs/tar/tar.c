@@ -275,29 +275,31 @@ tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 
 /* Returns fd of the open tar file */
 static int
-tar_open_archive_int (struct vfs_class *me, const char *name, struct vfs_s_super *archive)
+tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs_s_super *archive)
 {
     int result, type;
     tar_super_data_t *arch;
     mode_t mode;
     struct vfs_s_inode *root;
+    char *archive_name = vfs_path_to_str (vpath);
 
-    result = mc_open (name, O_RDONLY);
+    result = mc_open (archive_name, O_RDONLY);
     if (result == -1)
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
+        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), archive_name);
+        g_free(archive_name);
         ERRNOR (ENOENT, -1);
     }
 
-    archive->name = g_strdup (name);
+    archive->name = archive_name;
     archive->data = g_new (tar_super_data_t, 1);
     arch = (tar_super_data_t *) archive->data;
-    mc_stat (name, &arch->st);
+    mc_stat (archive_name, &arch->st);
     arch->fd = -1;
     arch->type = TAR_UNKNOWN;
 
     /* Find out the method to handle this tar file */
-    type = get_compression_type (result, name);
+    type = get_compression_type (result, archive_name);
     mc_lseek (result, 0, SEEK_SET);
     if (type != COMPRESSION_NONE)
     {
@@ -395,12 +397,12 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
     case TAR_GNU:
         st->st_uid =
             *header->header.uname ? vfs_finduid (header->header.uname) : tar_from_oct (8,
-                                                                                       header->
-                                                                                       header.uid);
+                                                                                       header->header.
+                                                                                       uid);
         st->st_gid =
             *header->header.gname ? vfs_findgid (header->header.gname) : tar_from_oct (8,
-                                                                                       header->
-                                                                                       header.gid);
+                                                                                       header->header.
+                                                                                       gid);
         switch (header->header.linkflag)
         {
         case LF_BLK:
@@ -727,7 +729,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
  * Returns 0 on success, -1 on error.
  */
 static int
-tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive, const char *name, char *op)
+tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive, const vfs_path_t * vpath,
+                  char *op)
 {
     /* Initial status at start of archive */
     ReadStatus status = STATUS_EOFMARK;
@@ -738,7 +741,7 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive, const char 
 
     current_tar_position = 0;
     /* Open for reading */
-    tard = tar_open_archive_int (me, name, archive);
+    tard = tar_open_archive_int (me, vpath, archive);
     if (tard == -1)
         return -1;
 
@@ -768,10 +771,15 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive, const char 
 
                 /* Error on first record */
             case STATUS_EOFMARK:
-                message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."), name);
-                /* FALL THRU */
+                {
+                    char *archive_name = vfs_path_to_str(vpath);
+                    message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
+                             archive_name);
+                    g_free(archive_name);
+                    /* FALL THRU */
 
-                /* Error after header rec */
+                    /* Error after header rec */
+                }
             case STATUS_SUCCESS:
                 /* Error after error */
 
@@ -798,31 +806,39 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive, const char 
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-tar_super_check (struct vfs_class *me, const char *archive_name, char *op)
+tar_super_check (struct vfs_class *me, const vfs_path_t * vpath, char *op)
 {
     static struct stat stat_buf;
+    char *archive_name = vfs_path_to_str(vpath);
+    int stat_result;
 
     (void) me;
     (void) op;
 
-    if (mc_stat (archive_name, &stat_buf))
-        return NULL;
-    return &stat_buf;
+    stat_result = mc_stat (archive_name, &stat_buf);
+    g_free(archive_name);
+
+    return (stat_result != 0) ? NULL : &stat_buf;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
 tar_super_same (struct vfs_class *me, struct vfs_s_super *parc,
-                const char *archive_name, char *op, void *cookie)
+                const vfs_path_t * vpath, char *op, void *cookie)
 {
     struct stat *archive_stat = cookie; /* stat of main archive */
+    char *archive_name = vfs_path_to_str(vpath);
 
     (void) me;
     (void) op;
 
-    if (strcmp (parc->name, archive_name))
+    if (strcmp (parc->name, archive_name) != 0)
+    {
+        g_free(archive_name);
         return 0;
+    }
+    g_free(archive_name);
 
     /* Has the cached archive been changed on the disk? */
     if (((tar_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
@@ -863,7 +879,7 @@ tar_read (void *fh, char *buffer, size_t count)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-tar_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
+tar_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
     (void) fh;
     (void) mode;

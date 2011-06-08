@@ -41,6 +41,8 @@ typedef struct
 /*** declarations of public functions ************************************************************/
 
 vfs_path_t *vfs_path_new (void);
+vfs_path_t *vfs_path_clone (const vfs_path_t * vpath);
+void vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index);
 void vfs_path_free (vfs_path_t * path);
 int vfs_path_elements_count (const vfs_path_t * path);
 
@@ -49,6 +51,7 @@ char *vfs_path_to_str_elements_count (const vfs_path_t * path, int elements_coun
 vfs_path_t *vfs_path_from_str (const char *path_str);
 
 vfs_path_element_t *vfs_path_get_by_index (const vfs_path_t * path, int element_index);
+vfs_path_element_t *vfs_path_element_clone (const vfs_path_element_t * element);
 void vfs_path_element_free (vfs_path_element_t * element);
 
 struct vfs_class *vfs_prefix_to_class (const char *prefix);

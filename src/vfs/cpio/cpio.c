@@ -392,7 +392,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
 
     if ((st->st_nlink > 1) && ((arch->type == CPIO_NEWC) || (arch->type == CPIO_CRC)))
     {                           /* For case of hardlinked files */
-        defer_inode i = {st->st_ino, st->st_dev, NULL};
+        defer_inode i = { st->st_ino, st->st_dev, NULL };
         GSList *l;
 
         l = g_slist_find_custom (arch->deferred, &i, cpio_defer_find);
@@ -714,14 +714,19 @@ cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
 /** Need to CPIO_SEEK_CUR to skip the file at the end of add entry!!!! */
 
 static int
-cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super, const char *name, char *op)
+cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super, const vfs_path_t * vpath,
+                   char *op)
 {
     int status = STATUS_START;
+    char *archive_name = vfs_path_to_str (vpath);
 
     (void) op;
 
-    if (cpio_open_cpio_file (me, super, name) == -1)
+    if (cpio_open_cpio_file (me, super, archive_name) == -1)
+    {
+        g_free (archive_name);
         return -1;
+    }
 
     while (TRUE)
     {
@@ -730,7 +735,7 @@ cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super, const char *
         switch (status)
         {
         case STATUS_EOF:
-            message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"), name);
+            message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"), archive_name);
             return 0;
         case STATUS_OK:
             continue;
@@ -740,6 +745,7 @@ cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super, const char *
         break;
     }
 
+    g_free (archive_name);
     return 0;
 }
 
@@ -747,29 +753,38 @@ cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super, const char *
 /** Remaining functions are exactly same as for tarfs (and were in fact just copied) */
 
 static void *
-cpio_super_check (struct vfs_class *me, const char *archive_name, char *op)
+cpio_super_check (struct vfs_class *me, const vfs_path_t * vpath, char *op)
 {
     static struct stat sb;
+    char *archive_name = vfs_path_to_str (vpath);
+    int stat_result;
 
     (void) me;
     (void) op;
 
-    return (mc_stat (archive_name, &sb) == 0 ? &sb : NULL);
+    stat_result = mc_stat (archive_name, &sb);
+    g_free (archive_name);
+    return (stat_result == 0 ? &sb : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
 cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc,
-                 const char *archive_name, char *op, void *cookie)
+                 const vfs_path_t * vpath, char *op, void *cookie)
 {
     struct stat *archive_stat = cookie; /* stat of main archive */
+    char *archive_name = vfs_path_to_str (vpath);
 
     (void) me;
     (void) op;
 
     if (strcmp (parc->name, archive_name))
+    {
+        g_free (archive_name);
         return 0;
+    }
+    g_free (archive_name);
 
     /* Has the cached archive been changed on the disk? */
     if (((cpio_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
@@ -810,7 +825,7 @@ cpio_read (void *fh, char *buffer, size_t count)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-cpio_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
+cpio_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
     (void) mode;
 

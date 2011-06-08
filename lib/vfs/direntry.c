@@ -1052,26 +1052,28 @@ vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive, i
 {
     GList *iter;
     const char *retval;
-    char *archive_name;
     int result = -1;
     struct vfs_s_super *super;
     void *cookie = NULL;
     vfs_path_element_t *path_element;
+    vfs_path_t *vpath_archive;
     struct vfs_s_subclass *subclass;
 
     path_element = vfs_path_get_by_index (vpath, -1);
     subclass = ((struct vfs_s_subclass *) path_element->class->data);
 
-    archive_name = vfs_path_to_str_elements_count (vpath, -1);
+    vpath_archive = vfs_path_clone (vpath);
+    vfs_path_remove_element_by_index (vpath_archive, -1);
+
     retval = (path_element->path != NULL) ? path_element->path : "";
 
     if (subclass->archive_check != NULL)
     {
         cookie =
-            subclass->archive_check (path_element->class, archive_name, path_element->raw_url_str);
+            subclass->archive_check (path_element->class, vpath_archive, path_element->raw_url_str);
         if (cookie == NULL)
         {
-            g_free (archive_name);
+            vfs_path_free (vpath_archive);
             return NULL;
         }
     }
@@ -1083,7 +1085,7 @@ vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive, i
         super = (struct vfs_s_super *) iter->data;
 
         /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-        i = subclass->archive_same (path_element->class, super, archive_name,
+        i = subclass->archive_same (path_element->class, super, vpath_archive,
                                     path_element->raw_url_str, cookie);
         if (i != 0)
         {
@@ -1096,20 +1098,20 @@ vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive, i
     if (flags & FL_NO_OPEN)
     {
         path_element->class->verrno = EIO;
-        g_free (archive_name);
+        vfs_path_free (vpath_archive);
         return NULL;
     }
 
     super = vfs_s_new_super (path_element->class);
     if (subclass->open_archive != NULL)
         result =
-            subclass->open_archive (path_element->class, super, archive_name,
+            subclass->open_archive (path_element->class, super, vpath_archive,
                                     path_element->raw_url_str);
     if (result == -1)
     {
         vfs_s_free_super (path_element->class, super);
         path_element->class->verrno = EIO;
-        g_free (archive_name);
+        vfs_path_free (vpath_archive);
         return NULL;
     }
     if (!super->name)
@@ -1122,7 +1124,7 @@ vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive, i
 
   return_success:
     *archive = super;
-    g_free (archive_name);
+    vfs_path_free (vpath_archive);
     return retval;
 }
 

@@ -124,11 +124,11 @@ struct vfs_s_subclass
     void (*free_inode) (struct vfs_class * me, struct vfs_s_inode * ino);       /* optional */
     int (*init_entry) (struct vfs_class * me, struct vfs_s_entry * entry);      /* optional */
 
-    void *(*archive_check) (struct vfs_class * me, const char *name, char *op); /* optional */
+    void *(*archive_check) (struct vfs_class * me, const vfs_path_t * vpath, char *op); /* optional */
     int (*archive_same) (struct vfs_class * me, struct vfs_s_super * psup,
-                         const char *archive_name, char *op, void *cookie);
+                         const vfs_path_t * vpath, char *op, void *cookie);
     int (*open_archive) (struct vfs_class * me, struct vfs_s_super * psup,
-                         const char *archive_name, char *op);
+                         const vfs_path_t * vpath, char *op);
     void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);
 
     int (*fh_open) (struct vfs_class * me, vfs_file_handler_t * fh, int flags, mode_t mode);

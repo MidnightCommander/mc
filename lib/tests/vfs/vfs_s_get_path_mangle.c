@@ -40,33 +40,36 @@ struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
 static int
 test1_mock_open_archive(struct vfs_class *me, struct vfs_s_super *super,
-                        const char *archive_name, char *op)
+                        const vfs_path_t *vpath, char *op)
 {
     struct vfs_s_inode *root;
+    char *spath = vfs_path_to_str (vpath);
 
     (void) op;
 
-    fail_unless(strcmp("/" ETALON_VFS_NAME ARCH_NAME, archive_name) == 0,
-        "etalon(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_NAME ARCH_NAME, archive_name);
+    fail_unless(strcmp("/" ETALON_VFS_NAME ARCH_NAME, spath) == 0,
+        "etalon(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_NAME ARCH_NAME, spath);
 
-    super->name = g_strdup (archive_name);
+    super->name = g_strdup (spath);
     super->data = g_new (char *, 1);
     root = vfs_s_new_inode (me, super, NULL);
     super->root = root;
-
+    g_free(spath);
     return 0;
 }
 
 static int
 test1_mock_archive_same (struct vfs_class *me, struct vfs_s_super *super,
-                        const char *archive_name, char *op, void *cookie)
+                        const vfs_path_t *vpath, char *op, void *cookie)
 {
+    vfs_path_element_t *path_element = vfs_path_get_by_index(vpath, -1);
+
     (void) me;
     (void) super;
     (void) op;
     (void) cookie;
 
-    if (strcmp(ARCH_NAME, archive_name) != 0)
+    if (strcmp(ARCH_NAME, path_element->path) != 0)
         return 0;
     return 1;
 }

@@ -960,9 +960,9 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
 static int
 ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super,
-                    const char *archive_name, char *op)
+                    const vfs_path_t * vpath, char *op)
 {
-    (void) archive_name;
+    (void) vpath;
 
     super->data = g_new0 (ftp_super_data_t, 1);
 
@@ -984,13 +984,13 @@ ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super,
 
 static int
 ftpfs_archive_same (struct vfs_class *me, struct vfs_s_super *super,
-                    const char *archive_name, char *op, void *cookie)
+                    const vfs_path_t * vpath, char *op, void *cookie)
 {
     vfs_path_element_t *path_element;
     int result;
 
     (void) me;
-    (void) archive_name;
+    (void) vpath;
     (void) cookie;
 
     path_element = ftpfs_split_url (strchr (op, ':') + 1);
