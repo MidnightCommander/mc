@@ -45,17 +45,8 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define PX 5
+#define PX 3
 #define PY 2
-
-#define FX 40
-#define FY 2
-
-#define BX 6
-#define BY 17
-
-#define TX 40
-#define TY 12
 
 #define B_MARKED B_USER
 #define B_ALL    (B_USER + 1)
@@ -74,6 +65,7 @@ static int c_file;
 static mode_t and_mask, or_mask, c_stat;
 
 static WLabel *statl;
+static WGroupbox *file_gb;
 
 static struct
 {
@@ -100,6 +92,7 @@ static struct
 };
 
 static const unsigned int check_perm_num = G_N_ELEMENTS (check_perm);
+static int check_perm_len = 0;
 
 static const char *file_info_labels[] =
 {
@@ -110,6 +103,7 @@ static const char *file_info_labels[] =
 };
 
 static const unsigned int file_info_labels_num = G_N_ELEMENTS (file_info_labels);
+static int file_info_labels_len = 0;
 
 static struct
 {
@@ -140,6 +134,7 @@ chmod_i18n (void)
 {
     static gboolean i18n = FALSE;
     unsigned int i;
+    int len;
 
     if (i18n)
         return;
@@ -156,6 +151,20 @@ chmod_i18n (void)
     for (i = 0; i < chmod_but_num; i++)
         chmod_but[i].text = _(chmod_but[i].text);
 #endif  /* ENABLE_NLS */
+
+    for (i = 0; i < check_perm_num; i++)
+    {
+        len = str_term_width1 (check_perm[i].text);
+        check_perm_len = max (check_perm_len, len);
+    }
+
+    check_perm_len += 1 + 3 + 1; /* mark, [x] and space */
+
+    for (i = 0; i < file_info_labels_num; i++)
+    {
+        len = str_term_width1 (file_info_labels[i]) + 2; /* spaces around */
+        file_info_labels_len = max (file_info_labels_len, len);
+    }
 
     for (i = 0; i < chmod_but_num; i++)
     {
@@ -183,17 +192,20 @@ chmod_toggle_select (Dlg_head * h, int Id)
 static void
 chmod_refresh (Dlg_head * h)
 {
+    int y = file_gb->widget.y + 1;
+    int x = file_gb->widget.x + 2;
+
     common_dialog_repaint (h);
 
     tty_setcolor (COLOR_NORMAL);
 
-    dlg_move (h, FY + 1, FX + 2);
+    tty_gotoyx (y, x);
     tty_print_string (file_info_labels[0]);
-    dlg_move (h, FY + 3, FX + 2);
+    tty_gotoyx (y + 2, x);
     tty_print_string (file_info_labels[1]);
-    dlg_move (h, FY + 5, FX + 2);
+    tty_gotoyx (y + 4, x);
     tty_print_string (file_info_labels[2]);
-    dlg_move (h, FY + 7, FX + 2);
+    tty_gotoyx (y + 6, x);
     tty_print_string (file_info_labels[3]);
 }
 
@@ -252,16 +264,31 @@ static Dlg_head *
 init_chmod (const char *fname, const struct stat *sf_stat)
 {
     Dlg_head *ch_dlg;
-    int lines;
+    int lines, cols;
+    int perm_gb_len;
+    int file_gb_len;
     unsigned int i;
     const char *c_fname, *c_fown, *c_fgrp;
     char buffer[BUF_TINY];
 
     single_set = (current_panel->marked < 2);
+    perm_gb_len = check_perm_len + 2;
+    file_gb_len = file_info_labels_len + 2;
+    cols = str_term_width1 (fname) + 2 + 1;
+    file_gb_len = max (file_gb_len, cols);
+
     lines = single_set ? 20 : 23;
+    cols = perm_gb_len + file_gb_len + 1 + 6;
+
+    if (cols > COLS)
+    {
+        /* shrink the right groupbox */
+        cols = COLS;
+        file_gb_len = cols - (perm_gb_len + 1 + 6);
+    }
 
     ch_dlg =
-        create_dlg (TRUE, 0, 0, lines, 70, dialog_colors,
+        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors,
                     chmod_callback, "[Chmod]", _("Chmod command"), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < chmod_but_num; i++)
@@ -280,7 +307,8 @@ init_chmod (const char *fname, const struct stat *sf_stat)
             break;
     }
 
-    add_widget (ch_dlg, groupbox_new (FY, FX, 10, 25, _("File")));
+    file_gb = groupbox_new (PY, PX + perm_gb_len + 1, check_perm_num + 2, file_gb_len, _("File"));
+    add_widget (ch_dlg, file_gb);
 
     for (i = 0; i < check_perm_num; i++)
     {
@@ -290,18 +318,20 @@ init_chmod (const char *fname, const struct stat *sf_stat)
         add_widget (ch_dlg, check_perm[i].check);
     }
 
-    add_widget (ch_dlg, groupbox_new (PY, PX, check_perm_num + 2, 33, _("Permission")));
+    add_widget (ch_dlg, groupbox_new (PY, PX, check_perm_num + 2, perm_gb_len, _("Permission")));
 
     /* Set the labels */
     /* Do this at end to have a widget id in a simple way */
-    c_fname = str_trunc (fname, 21);
-    add_widget (ch_dlg, label_new (FY + 2, FX + 2, c_fname));
-    c_fown = str_trunc (get_owner (sf_stat->st_uid), 21);
-    add_widget (ch_dlg, label_new (FY + 6, FX + 2, c_fown));
-    c_fgrp = str_trunc (get_group (sf_stat->st_gid), 21);
-    add_widget (ch_dlg, label_new (FY + 8, FX + 2, c_fgrp));
+    lines = PY + 2;
+    cols = PX + perm_gb_len + 3;
+    c_fname = str_trunc (fname, file_gb_len - 3);
+    add_widget (ch_dlg, label_new (lines, cols, c_fname));
+    c_fown = str_trunc (get_owner (sf_stat->st_uid), file_gb_len - 3);
+    add_widget (ch_dlg, label_new (lines + 4, cols, c_fown));
+    c_fgrp = str_trunc (get_group (sf_stat->st_gid), file_gb_len - 3);
+    add_widget (ch_dlg, label_new (lines + 6, cols, c_fgrp));
     g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) c_stat);
-    statl = label_new (FY + 4, FX + 2, buffer);
+    statl = label_new (lines + 2, cols, buffer);
     add_widget (ch_dlg, statl);
 
     return ch_dlg;
