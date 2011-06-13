@@ -24,6 +24,7 @@ typedef struct
     char *path;
     struct vfs_class *class;
     char *encoding;
+    char *vfs_prefix;
 
     struct
     {

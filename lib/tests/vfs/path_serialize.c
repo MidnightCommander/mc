@@ -86,10 +86,32 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 #define ETALON_PATH_STR "/local/path/#test1:user:pass@some.host:12345/bla-bla/some/path/#test2:/#enc:KOI8-R/bla-bla/some/path#test3:/111/22/33"
-#define ETALON_SERIALIZED_PATH "g14:path-element-0p4:pathv12:/local/path/p10:class-namev7:localfsp4:portv1:0" \
-        "g14:path-element-1p4:pathv18:bla-bla/some/path/p10:class-namev7:testfs1p11:raw_url_strv31:test1:user:pass@some.host:12345p4:portv1:0" \
-        "g14:path-element-2p4:pathv17:bla-bla/some/pathp10:class-namev7:testfs2p8:encodingv6:KOI8-Rp11:raw_url_strv6:test2:p4:portv1:0" \
-        "g14:path-element-3p4:pathv9:111/22/33p10:class-namev7:testfs3p11:raw_url_strv6:test3:p4:portv1:0"
+#define ETALON_SERIALIZED_PATH \
+    "g14:path-element-0" \
+        "p4:pathv12:/local/path/" \
+        "p10:class-namev7:localfs" \
+    "g14:path-element-1" \
+        "p4:pathv18:bla-bla/some/path/" \
+        "p10:class-namev7:testfs1" \
+        "p11:raw_url_strv31:test1:user:pass@some.host:12345" \
+        "p10:vfs_prefixv5:test1" \
+        "p4:userv4:user" \
+        "p8:passwordv4:pass" \
+        "p4:hostv9:some.host" \
+        "p4:portv5:12345" \
+    "g14:path-element-2" \
+        "p4:pathv17:bla-bla/some/path" \
+        "p10:class-namev7:testfs2" \
+        "p8:encodingv6:KOI8-R" \
+        "p11:raw_url_strv6:test2:" \
+        "p10:vfs_prefixv5:test2" \
+        "p4:hostv0:" \
+    "g14:path-element-3" \
+        "p4:pathv9:111/22/33" \
+        "p10:class-namev7:testfs3" \
+        "p11:raw_url_strv6:test3:" \
+        "p10:vfs_prefixv5:test3" \
+        "p4:hostv0:"
 
 START_TEST (test_path_serialize_deserialize)
 {
@@ -110,7 +132,7 @@ START_TEST (test_path_serialize_deserialize)
 
     fail_unless (
         strcmp (serialized_vpath, ETALON_SERIALIZED_PATH ) == 0,
-        "serialized_vpath (%s) doesn't equal to etalon (%s)", serialized_vpath, ETALON_SERIALIZED_PATH
+        "\nserialized_vpath    (%s)\nnot equal to etalon (%s)", serialized_vpath, ETALON_SERIALIZED_PATH
     );
 
     vpath = vfs_path_deserialize (serialized_vpath, &error);

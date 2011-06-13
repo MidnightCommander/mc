@@ -161,7 +161,6 @@ vfs_canon (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /** get encoding after last #enc: or NULL, if part does not contain #enc:
  *
  * @param path string
@@ -197,6 +196,106 @@ vfs_get_encoding (const char *path)
         g_free (work);
         return NULL;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**  Extract the hostname and username from the path
+ *
+ * Format of the path is [user@]hostname:port/remote-dir, e.g.:
+ *
+ * ftp://sunsite.unc.edu/pub/linux
+ * ftp://miguel@sphinx.nuclecu.unam.mx/c/nc
+ * ftp://tsx-11.mit.edu:8192/
+ * ftp://joe@foo.edu:11321/private
+ * ftp://joe:password@foo.se
+ *
+ * @param path_element is an input string to be parsed
+ * @param path is an input string to be parsed
+ *
+ * @return g_malloc()ed url info.
+ *         If the user is empty, e.g. ftp://@roxanne/private, and URL_USE_ANONYMOUS
+ *         is not set, then the current login name is supplied.
+ *         Return value is a g_malloc()ed structure with the pathname relative to the
+ *         host.
+ */
+
+static void
+vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
+{
+    char *pcopy;
+    const char *pend;
+    char *dir, *colon, *inner_colon, *at, *rest;
+
+    path_element->port = 0;
+
+    pcopy = g_strdup (path);
+    pend = pcopy + strlen (pcopy);
+    dir = pcopy;
+
+    /* search for any possible user */
+    at = strrchr (pcopy, '@');
+
+    /* We have a username */
+    if (at == NULL)
+        rest = pcopy;
+    else
+    {
+        *at = '\0';
+        inner_colon = strchr (pcopy, ':');
+        if (inner_colon != NULL)
+        {
+            *inner_colon = '\0';
+            inner_colon++;
+            path_element->password = g_strdup (inner_colon);
+        }
+
+        if (*pcopy != '\0')
+            path_element->user = g_strdup (pcopy);
+
+        if (pend == at + 1)
+            rest = at;
+        else
+            rest = at + 1;
+    }
+
+    /* Check if the host comes with a port spec, if so, chop it */
+    if (*rest != '[')
+        colon = strchr (rest, ':');
+    else
+    {
+        colon = strchr (++rest, ']');
+        if (colon != NULL)
+        {
+            colon[0] = '\0';
+            colon[1] = '\0';
+            colon++;
+        }
+    }
+
+    if (colon != NULL)
+    {
+        *colon = '\0';
+        if (sscanf (colon + 1, "%d", &path_element->port) == 1)
+        {
+            if (path_element->port <= 0 || path_element->port >= 65536)
+                path_element->port = 0;
+        }
+        else
+            while (*(++colon) != '\0')
+            {
+                switch (*colon)
+                {
+                case 'C':
+                    path_element->port = 1;
+                    break;
+                case 'r':
+                    path_element->port = 2;
+                    break;
+                }
+            }
+    }
+    path_element->host = g_strdup (rest);
+    g_free (pcopy);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -321,6 +420,7 @@ vfs_path_from_str (const char *path_str)
 
     while ((class = _vfs_split_with_semi_skip_count (path, &local, &op, 0)) != NULL)
     {
+        char *url_params;
         element = g_new0 (vfs_path_element_t, 1);
         element->class = vfs_prefix_to_class (op);
         if (local == NULL)
@@ -331,6 +431,18 @@ vfs_path_from_str (const char *path_str)
         element->dir.converter = INVALID_CONV;
 
         element->raw_url_str = g_strdup (op);
+
+        url_params = strchr (op, ':');  /* skip VFS prefix */
+        if (url_params != NULL)
+        {
+            *url_params = '\0';
+            url_params++;
+            vfs_path_url_split (element, url_params);
+        }
+
+        if (*op != '\0')
+            element->vfs_prefix = g_strdup (op);
+
         vpath->path = g_list_prepend (vpath->path, element);
     }
     if (path[0] != '\0')
@@ -425,6 +537,7 @@ vfs_path_element_clone (const vfs_path_element_t * element)
     new_element->host = g_strdup (element->host);
     new_element->path = g_strdup (element->path);
     new_element->encoding = g_strdup (element->encoding);
+    new_element->vfs_prefix = g_strdup (element->vfs_prefix);
 
     return new_element;
 }
@@ -448,6 +561,7 @@ vfs_path_element_free (vfs_path_element_t * element)
     g_free (element->host);
     g_free (element->path);
     g_free (element->encoding);
+    g_free (element->vfs_prefix);
 
     if (vfs_path_element_need_cleanup_converter (element))
     {
@@ -607,11 +721,13 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
         mc_config_set_string_raw (cpath, groupname, "encoding", element->encoding);
 
         mc_config_set_string_raw (cpath, groupname, "raw_url_str", element->raw_url_str);
+        mc_config_set_string_raw (cpath, groupname, "vfs_prefix", element->vfs_prefix);
 
         mc_config_set_string_raw (cpath, groupname, "user", element->user);
         mc_config_set_string_raw (cpath, groupname, "password", element->password);
         mc_config_set_string_raw (cpath, groupname, "host", element->host);
-        mc_config_set_int (cpath, groupname, "port", element->port);
+        if (element->port != 0)
+            mc_config_set_int (cpath, groupname, "port", element->port);
 
         g_free (groupname);
     }
@@ -676,6 +792,7 @@ vfs_path_deserialize (const char *data, GError ** error)
         element->encoding = mc_config_get_string_raw (cpath, groupname, "encoding", NULL);
 
         element->raw_url_str = mc_config_get_string_raw (cpath, groupname, "raw_url_str", NULL);
+        element->vfs_prefix = mc_config_get_string_raw (cpath, groupname, "vfs_prefix", NULL);
 
         element->user = mc_config_get_string_raw (cpath, groupname, "user", NULL);
         element->password = mc_config_get_string_raw (cpath, groupname, "password", NULL);
