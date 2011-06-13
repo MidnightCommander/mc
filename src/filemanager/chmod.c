@@ -57,10 +57,6 @@
 #define TX 40
 #define TY 12
 
-#define PERMISSIONS 12
-#define LABELS 4
-#define BUTTONS 6
-
 #define B_MARKED B_USER
 #define B_ALL    (B_USER + 1)
 #define B_SETMRK (B_USER + 2)
@@ -85,7 +81,7 @@ static struct
     const char *text;
     gboolean selected;
     WCheck *check;
-} check_perm[PERMISSIONS] =
+} check_perm[] =
 {
     /* *INDENT-OFF* */
     { S_IXOTH, N_("execute/search by others"), FALSE, NULL },
@@ -103,13 +99,17 @@ static struct
     /* *INDENT-ON* */
 };
 
-static const char *file_info_labels[LABELS] =
+static const unsigned int check_perm_num = G_N_ELEMENTS (check_perm);
+
+static const char *file_info_labels[] =
 {
     N_("Name:"),
     N_("Permissions (octal):"),
     N_("Owner name:"),
     N_("Group name:")
 };
+
+static const unsigned int file_info_labels_num = G_N_ELEMENTS (file_info_labels);
 
 static struct
 {
@@ -118,7 +118,7 @@ static struct
     int y;              /* vertical position relatively to dialog bottom boundary */
     int len;
     const char *text;
-} chmod_but[BUTTONS] =
+} chmod_but[] =
 {
     /* *INDENT-OFF* */
     { B_CANCEL, NORMAL_BUTTON, 3, 0, N_("&Cancel") },
@@ -129,6 +129,8 @@ static struct
     { B_ALL,    NORMAL_BUTTON, 6, 0, N_("Set &all") }
     /* *INDENT-ON* */
 };
+
+static const unsigned int chmod_but_num = G_N_ELEMENTS (chmod_but);
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -145,17 +147,17 @@ chmod_i18n (void)
     i18n = TRUE;
 
 #if ENABLE_NLS
-    for (i = 0; i < PERMISSIONS; i++)
+    for (i = 0; i < check_perm_num; i++)
         check_perm[i].text = _(check_perm[i].text);
 
-    for (i = 0; i < LABELS; i++)
+    for (i = 0; i < file_info_labels_num; i++)
         file_info_labels[i] = _(file_info_labels[i]);
 
-    for (i = 0; i < BUTTONS; i++)
+    for (i = 0; i < chmod_but_num; i++)
         chmod_but[i].text = _(chmod_but[i].text);
 #endif  /* ENABLE_NLS */
 
-    for (i = 0; i < BUTTONS; i++)
+    for (i = 0; i < chmod_but_num; i++)
     {
         chmod_but[i].len = str_term_width1 (chmod_but[i].text) + 3; /* [], spaces and w/o & */
         if (chmod_but[i].flags == DEFPUSH_BUTTON)
@@ -171,9 +173,9 @@ chmod_toggle_select (Dlg_head * h, int Id)
     tty_setcolor (COLOR_NORMAL);
     check_perm[Id].selected = !check_perm[Id].selected;
 
-    dlg_move (h, PY + PERMISSIONS - Id, PX + 1);
+    dlg_move (h, PY + check_perm_num - Id, PX + 1);
     tty_print_char (check_perm[Id].selected ? '*' : ' ');
-    dlg_move (h, PY + PERMISSIONS - Id, PX + 3);
+    dlg_move (h, PY + check_perm_num - Id, PX + 3);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -203,7 +205,7 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
     char buffer[BUF_TINY];
     int id;
 
-    id = dlg_get_current_widget_id (h) - (BUTTONS - (single_set ? 4 : 0)) - 1;
+    id = dlg_get_current_widget_id (h) - (chmod_but_num - (single_set ? 4 : 0)) - 1;
 
     switch (msg)
     {
@@ -262,7 +264,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
         create_dlg (TRUE, 0, 0, lines, 70, dialog_colors,
                     chmod_callback, "[Chmod]", _("Chmod command"), DLG_CENTER | DLG_REVERSE);
 
-    for (i = 0; i < BUTTONS; i++)
+    for (i = 0; i < chmod_but_num; i++)
     {
         add_widget (ch_dlg,
                     button_new (lines - chmod_but[i].y, ch_dlg->cols / 2 + 1,
@@ -280,15 +282,15 @@ init_chmod (const char *fname, const struct stat *sf_stat)
 
     add_widget (ch_dlg, groupbox_new (FY, FX, 10, 25, _("File")));
 
-    for (i = 0; i < PERMISSIONS; i++)
+    for (i = 0; i < check_perm_num; i++)
     {
-        check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2,
+        check_perm[i].check = check_new (PY + (check_perm_num - i), PX + 2,
                                          (c_stat & check_perm[i].mode) != 0 ? 1 : 0,
                                          check_perm[i].text);
         add_widget (ch_dlg, check_perm[i].check);
     }
 
-    add_widget (ch_dlg, groupbox_new (PY, PX, PERMISSIONS + 2, 33, _("Permission")));
+    add_widget (ch_dlg, groupbox_new (PY, PX, check_perm_num + 2, 33, _("Permission")));
 
     /* Set the labels */
     /* Do this at end to have a widget id in a simple way */
@@ -423,7 +425,7 @@ chmod_cmd (void)
             and_mask = or_mask = 0;
             and_mask = ~and_mask;
 
-            for (i = 0; i < PERMISSIONS; i++)
+            for (i = 0; i < check_perm_num; i++)
                 if (check_perm[i].selected || result == B_ALL)
                 {
                     if (check_perm[i].check->state & C_BOOL)
@@ -439,7 +441,7 @@ chmod_cmd (void)
             and_mask = or_mask = 0;
             and_mask = ~and_mask;
 
-            for (i = 0; i < PERMISSIONS; i++)
+            for (i = 0; i < check_perm_num; i++)
                 if (check_perm[i].selected)
                     or_mask |= check_perm[i].mode;
 
@@ -450,7 +452,7 @@ chmod_cmd (void)
             and_mask = or_mask = 0;
             and_mask = ~and_mask;
 
-            for (i = 0; i < PERMISSIONS; i++)
+            for (i = 0; i < check_perm_num; i++)
                 if (check_perm[i].selected)
                     and_mask &= ~check_perm[i].mode;
 
