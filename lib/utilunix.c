@@ -658,7 +658,26 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     continue;
                 }
                 if (*s == PATH_SEP)
-                    break;
+                {
+                    /* skip VFS prefix */
+                    char *path_sep;
+                    struct vfs_class *vclass;
+
+                    /* old parser mode */
+                    if (*(s + 1) != '#')
+                        break;
+
+                    path_sep = strchr (s + 1, PATH_SEP);
+                    if (path_sep != NULL)
+                        *path_sep = '\0';
+
+                    vclass = vfs_prefix_to_class (s + 2);
+                    if (path_sep != NULL)
+                        *path_sep = PATH_SEP;
+
+                    if (vclass == NULL)
+                        break;
+                }
                 s--;
             }
 

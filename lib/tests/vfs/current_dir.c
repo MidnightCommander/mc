@@ -95,6 +95,15 @@ START_TEST (set_up_current_dir)
 
     cd_and_check ("..", "/");
 
+    cd_and_check ("/dev/some.file/#test:/bla-bla", "/dev/some.file/#test:/bla-bla");
+
+    cd_and_check ("..", "/dev/some.file/#test:");
+
+    cd_and_check ("..", "/dev");
+
+    cd_and_check ("..", "/");
+
+    cd_and_check ("..", "/");
 }
 END_TEST
 
