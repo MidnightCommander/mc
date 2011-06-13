@@ -1069,8 +1069,7 @@ vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive, i
 
     if (subclass->archive_check != NULL)
     {
-        cookie =
-            subclass->archive_check (path_element->class, vpath_archive, path_element->raw_url_str);
+        cookie = subclass->archive_check (vpath_archive);
         if (cookie == NULL)
         {
             vfs_path_free (vpath_archive);
@@ -1085,8 +1084,7 @@ vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive, i
         super = (struct vfs_s_super *) iter->data;
 
         /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-        i = subclass->archive_same (path_element->class, super, vpath_archive,
-                                    path_element->raw_url_str, cookie);
+        i = subclass->archive_same (path_element, super, vpath_archive, cookie);
         if (i != 0)
         {
             if (i == 1)
@@ -1104,9 +1102,7 @@ vfs_s_get_path_mangle (const vfs_path_t * vpath, struct vfs_s_super **archive, i
 
     super = vfs_s_new_super (path_element->class);
     if (subclass->open_archive != NULL)
-        result =
-            subclass->open_archive (path_element->class, super, vpath_archive,
-                                    path_element->raw_url_str);
+        result = subclass->open_archive (super, vpath_archive, path_element);
     if (result == -1)
     {
         vfs_s_free_super (path_element->class, super);

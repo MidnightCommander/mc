@@ -959,14 +959,14 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super,
-                    const vfs_path_t * vpath, char *op)
+ftpfs_open_archive (struct vfs_s_super *super,
+                    const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
 {
     (void) vpath;
 
     super->data = g_new0 (ftp_super_data_t, 1);
 
-    super->path_element = ftpfs_split_url (strchr (op, ':') + 1);
+    super->path_element = ftpfs_split_url (strchr (vpath_element->raw_url_str, ':') + 1);
     SUP->proxy = NULL;
     if (ftpfs_check_proxy (super->path_element->host))
         SUP->proxy = ftpfs_proxy_host;
@@ -975,25 +975,26 @@ ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     SUP->isbinary = TYPE_UNKNOWN;
     SUP->remote_is_amiga = 0;
     super->name = g_strdup ("/");
-    super->root = vfs_s_new_inode (me, super, vfs_s_default_stat (me, S_IFDIR | 0755));
+    super->root =
+        vfs_s_new_inode (vpath_element->class, super,
+                         vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
 
-    return ftpfs_open_archive_int (me, super);
+    return ftpfs_open_archive_int (vpath_element->class, super);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_archive_same (struct vfs_class *me, struct vfs_s_super *super,
-                    const vfs_path_t * vpath, char *op, void *cookie)
+ftpfs_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
+                    const vfs_path_t * vpath, void *cookie)
 {
     vfs_path_element_t *path_element;
     int result;
 
-    (void) me;
     (void) vpath;
     (void) cookie;
 
-    path_element = ftpfs_split_url (strchr (op, ':') + 1);
+    path_element = ftpfs_split_url (strchr (vpath_element->raw_url_str, ':') + 1);
 
     result = ((strcmp (path_element->host, super->path_element->host) == 0)
               && (strcmp (path_element->user, super->path_element->user) == 0)

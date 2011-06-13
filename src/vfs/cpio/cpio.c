@@ -714,15 +714,15 @@ cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
 /** Need to CPIO_SEEK_CUR to skip the file at the end of add entry!!!! */
 
 static int
-cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super, const vfs_path_t * vpath,
-                   char *op)
+cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
+                   const vfs_path_element_t * vpath_element)
 {
     int status = STATUS_START;
     char *archive_name = vfs_path_to_str (vpath);
 
-    (void) op;
+    (void) vpath_element;
 
-    if (cpio_open_cpio_file (me, super, archive_name) == -1)
+    if (cpio_open_cpio_file (vpath_element->class, super, archive_name) == -1)
     {
         g_free (archive_name);
         return -1;
@@ -730,7 +730,7 @@ cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super, const vfs_pa
 
     while (TRUE)
     {
-        status = cpio_read_head (me, super);
+        status = cpio_read_head (vpath_element->class, super);
 
         switch (status)
         {
@@ -753,14 +753,11 @@ cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super, const vfs_pa
 /** Remaining functions are exactly same as for tarfs (and were in fact just copied) */
 
 static void *
-cpio_super_check (struct vfs_class *me, const vfs_path_t * vpath, char *op)
+cpio_super_check (const vfs_path_t * vpath)
 {
     static struct stat sb;
     char *archive_name = vfs_path_to_str (vpath);
     int stat_result;
-
-    (void) me;
-    (void) op;
 
     stat_result = mc_stat (archive_name, &sb);
     g_free (archive_name);
@@ -770,14 +767,13 @@ cpio_super_check (struct vfs_class *me, const vfs_path_t * vpath, char *op)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc,
-                 const vfs_path_t * vpath, char *op, void *cookie)
+cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *parc,
+                 const vfs_path_t * vpath, void *cookie)
 {
     struct stat *archive_stat = cookie; /* stat of main archive */
     char *archive_name = vfs_path_to_str (vpath);
 
-    (void) me;
-    (void) op;
+    (void) vpath_element;
 
     if (strcmp (parc->name, archive_name))
     {

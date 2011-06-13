@@ -581,15 +581,17 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
-                   const vfs_path_t * vpath, char *op)
+fish_open_archive (struct vfs_s_super *super,
+                   const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
 {
     (void) vpath;
 
     super->data = g_new0 (fish_super_data_t, 1);
-    super->path_element = vfs_url_split (strchr (op, ':') + 1, 0, URL_NOSLASH | URL_USE_ANONYMOUS);
+    super->path_element =
+        vfs_url_split (strchr (vpath_element->raw_url_str, ':') + 1, 0,
+                       URL_NOSLASH | URL_USE_ANONYMOUS);
 
-    if (strncmp (op, "rsh:", 4) == 0)
+    if (strncmp (vpath_element->raw_url_str, "rsh:", 4) == 0)
         super->path_element->port = FISH_FLAG_RSH;
 
     SUP->scr_ls =
@@ -631,23 +633,24 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
         fish_load_script_from_file (super->path_element->host, FISH_INFO_FILE,
                                     FISH_INFO_DEF_CONTENT);
 
-    return fish_open_archive_int (me, super);
+    return fish_open_archive_int (vpath_element->class, super);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
-                   const vfs_path_t * vpath, char *op, void *cookie)
+fish_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
+                   const vfs_path_t * vpath, void *cookie)
 {
     vfs_path_element_t *path_element;
     int result;
 
-    (void) me;
     (void) vpath;
     (void) cookie;
 
-    path_element = vfs_url_split (strchr (op, ':') + 1, 0, URL_NOSLASH | URL_USE_ANONYMOUS);
+    path_element =
+        vfs_url_split (strchr (vpath_element->raw_url_str, ':') + 1, 0,
+                       URL_NOSLASH | URL_USE_ANONYMOUS);
 
     if (path_element->user == NULL)
         path_element->user = vfs_get_local_username ();
