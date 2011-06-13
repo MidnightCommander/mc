@@ -242,7 +242,6 @@ char *vfs_translate_url (const char *url);
 struct vfs_class *vfs_split (char *path, char **inpath, char **op);
 char *vfs_path (const char *path);
 
-struct vfs_class *vfs_get_class (const char *path);
 vfs_class_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
 
 /* translate path back to terminal encoding, remove all #enc:

@@ -113,47 +113,6 @@ static const struct
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-path_magic (const char *path)
-{
-    struct stat buf;
-
-    return (stat (path, &buf) != 0);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static struct vfs_class *
-_vfs_get_class (char *path)
-{
-    char *semi;
-    char *slash;
-    struct vfs_class *ret;
-
-    g_return_val_if_fail (path, NULL);
-
-    semi = strrchr (path, '#');
-    if (semi == NULL || !path_magic (path))
-        return NULL;
-
-    slash = strchr (semi, PATH_SEP);
-    *semi = '\0';
-    if (slash != NULL)
-        *slash = '\0';
-
-    ret = vfs_prefix_to_class (semi + 1);
-
-    if (slash != NULL)
-        *slash = PATH_SEP;
-    if (ret == NULL)
-        ret = _vfs_get_class (path);
-
-    *semi = '#';
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /* now used only by vfs_translate_path, but could be used in other vfs 
  * plugin to automatic detect encoding
  * path - path to translate
@@ -394,24 +353,6 @@ vfs_strip_suffix_from_filename (const char *filename)
 
 /* --------------------------------------------------------------------------------------------- */
 
-struct vfs_class *
-vfs_get_class (const char *pathname)
-{
-    char *path;
-    struct vfs_class *vfs;
-
-    path = g_strdup (pathname);
-    vfs = _vfs_get_class (path);
-    g_free (path);
-
-    if (vfs == NULL)
-        vfs = g_ptr_array_index (vfs__classes_list, 0); /* localfs */
-
-    return vfs;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 char *
 vfs_translate_path (const char *path)
 {
@@ -629,7 +570,7 @@ vfs_print_message (const char *msg, ...)
 char *
 _vfs_get_cwd (void)
 {
-    char *trans, *curr_dir;
+    vfs_path_element_t *path_element;
 
     if (vfs_get_raw_current_dir () == NULL)
     {
@@ -638,13 +579,10 @@ _vfs_get_cwd (void)
         vfs_set_raw_current_dir (vfs_path_from_str (tmp));
         g_free (tmp);
     }
+    path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
 
-    curr_dir = vfs_get_current_dir ();
-    trans = vfs_translate_path_n (curr_dir);
-
-    if (_vfs_get_class (trans) == NULL)
+    if (path_element->class->flags & VFSF_LOCAL)
     {
-        vfs_path_element_t *path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
 
         if (path_element->encoding == NULL)
         {
@@ -665,7 +603,7 @@ _vfs_get_cwd (void)
                     /* Check if it is O.K. to use the current_dir */
                     if (!(mc_global.vfs.cd_symlinks
                           && mc_stat (vfs_str_buffer->str, &my_stat) == 0
-                          && mc_stat (curr_dir, &my_stat2) == 0
+                          && mc_stat (path_element->path, &my_stat2) == 0
                           && my_stat.st_ino == my_stat2.st_ino
                           && my_stat.st_dev == my_stat2.st_dev))
                     {
@@ -676,8 +614,7 @@ _vfs_get_cwd (void)
         }
     }
 
-    g_free (trans);
-    return curr_dir;
+    return vfs_path_to_str (vfs_get_raw_current_dir ());
 }
 
 /* --------------------------------------------------------------------------------------------- */

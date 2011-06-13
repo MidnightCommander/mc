@@ -234,17 +234,22 @@ free_linklist (struct link **lc_linklist)
 static int
 is_in_linklist (struct link *lp, const char *path, struct stat *sb)
 {
+    vfs_path_t *vpath;
+    vfs_path_element_t *vpath_element;
     ino_t ino = sb->st_ino;
     dev_t dev = sb->st_dev;
-    struct vfs_class *vfs = vfs_get_class (path);
+
+    vpath = vfs_path_from_str (path);
+    vpath_element = vfs_path_get_by_index (vpath, -1);
 
     while (lp != NULL)
     {
-        if (lp->vfs == vfs)
+        if (lp->vfs == vpath_element->class)
             if (lp->ino == ino && lp->dev == dev)
                 return 1;
         lp = lp->next;
     }
+    vfs_path_free (vpath);
     return 0;
 }
 
@@ -281,12 +286,29 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
     for (lp = linklist; lp != NULL; lp = lp->next)
         if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev)
         {
+            struct vfs_class *lp_name_class;
+
+            vpath = vfs_path_from_str (lp->name);
+            lp_name_class = vfs_path_get_by_index (vpath, -1)->class;
+            vfs_path_free (vpath);
+
             if (!mc_stat (lp->name, &link_stat) && link_stat.st_ino == ino
-                && link_stat.st_dev == dev && vfs_get_class (lp->name) == my_vfs)
+                && link_stat.st_dev == dev && lp_name_class == my_vfs)
             {
+                struct vfs_class *p_class, *dst_name_class;
+
                 p = strchr (lp->name, 0) + 1;   /* i.e. where the `name' file
                                                    was copied to */
-                if (vfs_get_class (dst_name) == vfs_get_class (p))
+
+                vpath = vfs_path_from_str (p);
+                p_class = vfs_path_get_by_index (vpath, -1)->class;
+                vfs_path_free (vpath);
+
+                vpath = vfs_path_from_str (dst_name);
+                dst_name_class = vfs_path_get_by_index (vpath, -1)->class;
+                vfs_path_free (vpath);
+
+                if (dst_name_class == p_class)
                 {
                     if (!mc_stat (p, &link_stat))
                     {
@@ -1754,7 +1776,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     }
 
     lp = g_new (struct link, 1);
-    lp->vfs = vfs_get_class (s);
+    {
+        vfs_path_t *vpath = vfs_path_from_str (s);
+        lp->vfs = vfs_path_get_by_index (vpath, -1)->class;
+        vfs_path_free (vpath);
+    }
     lp->ino = cbuf.st_ino;
     lp->dev = cbuf.st_dev;
     lp->next = parent_dirs;
@@ -1814,7 +1840,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     lp = g_new (struct link, 1);
     mc_stat (dest_dir, &buf);
-    lp->vfs = vfs_get_class (dest_dir);
+    {
+        vfs_path_t *vpath = vfs_path_from_str (dest_dir);
+        lp->vfs = vfs_path_get_by_index (vpath, -1)->class;
+        vfs_path_free (vpath);
+    }
     lp->ino = buf.st_ino;
     lp->dev = buf.st_dev;
     lp->next = dest_dirs;
