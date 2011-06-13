@@ -130,7 +130,7 @@ sfs_vfmake (const vfs_path_t * vpath, char *cache)
 
     path_element = vfs_path_get_by_index (vpath, -1);
     pname = vfs_path_to_str_elements_count (vpath, -1);
-    w = (*path_element->class->which) (path_element->class, path_element->raw_url_str);
+    w = (*path_element->class->which) (path_element->class, path_element->vfs_prefix);
     if (w == -1)
         vfs_die ("This cannot happen... Hopefully.\n");
 

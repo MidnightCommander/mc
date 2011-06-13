@@ -322,13 +322,14 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
  */
 
 static vfs_path_element_t *
-ftpfs_split_url (const char *path)
+ftpfs_correct_url_parameters (const vfs_path_element_t * velement)
 {
-    vfs_path_element_t *path_element;
+    vfs_path_element_t *path_element = vfs_path_element_clone (velement);
 
-    path_element = vfs_url_split (path, FTP_COMMAND_PORT, URL_USE_ANONYMOUS);
+    if (path_element->port == 0)
+        path_element->port = FTP_COMMAND_PORT;
 
-    if (path_element->user != NULL)
+    if (path_element->user == NULL)
     {
         /* Look up user and password in netrc */
         if (ftpfs_use_netrc)
@@ -341,8 +342,9 @@ ftpfs_split_url (const char *path)
     if (ftpfs_use_netrc && path_element->user != NULL && path_element->password != NULL)
     {
         char *new_user = NULL;
+        char *new_passwd = NULL;
 
-        ftpfs_netrc_lookup (path_element->host, &new_user, &path_element->password);
+        ftpfs_netrc_lookup (path_element->host, &new_user, &new_passwd);
 
         /* If user is different, remove password */
         if (new_user != NULL && strcmp (path_element->user, new_user) != 0)
@@ -352,6 +354,7 @@ ftpfs_split_url (const char *path)
         }
 
         g_free (new_user);
+        g_free (new_passwd);
     }
 
     return path_element;
@@ -966,7 +969,7 @@ ftpfs_open_archive (struct vfs_s_super *super,
 
     super->data = g_new0 (ftp_super_data_t, 1);
 
-    super->path_element = ftpfs_split_url (strchr (vpath_element->raw_url_str, ':') + 1);
+    super->path_element = ftpfs_correct_url_parameters (vpath_element);
     SUP->proxy = NULL;
     if (ftpfs_check_proxy (super->path_element->host))
         SUP->proxy = ftpfs_proxy_host;
@@ -994,7 +997,7 @@ ftpfs_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super
     (void) vpath;
     (void) cookie;
 
-    path_element = ftpfs_split_url (strchr (vpath_element->raw_url_str, ':') + 1);
+    path_element = ftpfs_correct_url_parameters (vpath_element);
 
     result = ((strcmp (path_element->host, super->path_element->host) == 0)
               && (strcmp (path_element->user, super->path_element->user) == 0)

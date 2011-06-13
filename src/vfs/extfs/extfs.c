@@ -658,7 +658,7 @@ extfs_get_path_mangle (const vfs_path_t * vpath, struct archive **archive, gbool
 
     archive_name = vfs_path_to_str_elements_count (vpath, -1);
 
-    fstype = extfs_which (path_element->class, path_element->raw_url_str);
+    fstype = extfs_which (path_element->class, path_element->vfs_prefix);
 
     if (fstype == -1)
     {

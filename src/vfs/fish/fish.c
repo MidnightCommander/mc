@@ -587,11 +587,9 @@ fish_open_archive (struct vfs_s_super *super,
     (void) vpath;
 
     super->data = g_new0 (fish_super_data_t, 1);
-    super->path_element =
-        vfs_url_split (strchr (vpath_element->raw_url_str, ':') + 1, 0,
-                       URL_NOSLASH | URL_USE_ANONYMOUS);
+    super->path_element = vfs_path_element_clone (vpath_element);
 
-    if (strncmp (vpath_element->raw_url_str, "rsh:", 4) == 0)
+    if (strncmp (vpath_element->vfs_prefix, "rsh", 3) == 0)
         super->path_element->port = FISH_FLAG_RSH;
 
     SUP->scr_ls =
@@ -648,9 +646,7 @@ fish_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super 
     (void) vpath;
     (void) cookie;
 
-    path_element =
-        vfs_url_split (strchr (vpath_element->raw_url_str, ':') + 1, 0,
-                       URL_NOSLASH | URL_USE_ANONYMOUS);
+    path_element = vfs_path_element_clone (vpath_element);
 
     if (path_element->user == NULL)
         path_element->user = vfs_get_local_username ();
