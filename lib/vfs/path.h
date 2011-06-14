@@ -32,8 +32,6 @@ typedef struct
         DIR *info;
     } dir;
 
-    char *raw_url_str;
-
     struct vfs_s_super *current_super_block;
 } vfs_path_element_t;
 

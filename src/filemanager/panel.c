@@ -2626,7 +2626,6 @@ _do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
     const char *directory;
     char *olddir;
     char temp[MC_MAXPATHLEN];
-    char *translated_url;
 
     if (cd_type == cd_parse_command)
     {
@@ -2635,7 +2634,6 @@ _do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
     }
 
     olddir = g_strdup (panel->cwd);
-    new_dir = translated_url = vfs_translate_url (new_dir);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
 
@@ -2653,10 +2651,8 @@ _do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
     {
         strcpy (panel->cwd, olddir);
         g_free (olddir);
-        g_free (translated_url);
         return FALSE;
     }
-    g_free (translated_url);
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);

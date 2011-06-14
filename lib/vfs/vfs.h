@@ -237,7 +237,6 @@ gboolean vfs_current_is_local (void);
 gboolean vfs_file_is_local (const vfs_path_t * vpath);
 
 char *vfs_strip_suffix_from_filename (const char *filename);
-char *vfs_translate_url (const char *url);
 
 struct vfs_class *vfs_split (char *path, char **inpath, char **op);
 char *vfs_path (const char *path);

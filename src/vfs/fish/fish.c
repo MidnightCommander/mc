@@ -1581,7 +1581,7 @@ init_fish (void)
 
     vfs_s_init_class (&vfs_fish_ops, &fish_subclass);
     vfs_fish_ops.name = "fish";
-    vfs_fish_ops.prefix = "sh:";
+    vfs_fish_ops.prefix = "sh";
     vfs_fish_ops.fill_names = fish_fill_names;
     vfs_fish_ops.chmod = fish_chmod;
     vfs_fish_ops.chown = fish_chown;

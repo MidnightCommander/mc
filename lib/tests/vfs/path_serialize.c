@@ -58,17 +58,17 @@ setup (void)
 
     vfs_test_ops1.name = "testfs1";
     vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1:";
+    vfs_test_ops1.prefix = "test1";
     vfs_register_class (&vfs_test_ops1);
 
     vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
     vfs_test_ops2.name = "testfs2";
-    vfs_test_ops2.prefix = "test2:";
+    vfs_test_ops2.prefix = "test2";
     vfs_register_class (&vfs_test_ops2);
 
     vfs_s_init_class (&vfs_test_ops3, &test_subclass3);
     vfs_test_ops3.name = "testfs3";
-    vfs_test_ops3.prefix = "test3:";
+    vfs_test_ops3.prefix = "test3";
     vfs_register_class (&vfs_test_ops3);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
@@ -85,7 +85,7 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-#define ETALON_PATH_STR "/local/path/#test1:user:pass@some.host:12345/bla-bla/some/path/#test2:/#enc:KOI8-R/bla-bla/some/path#test3:/111/22/33"
+#define ETALON_PATH_STR "/local/path/#test1:user:pass@some.host:12345/bla-bla/some/path/#test2/#enc:KOI8-R/bla-bla/some/path#test3/111/22/33"
 #define ETALON_SERIALIZED_PATH \
     "g14:path-element-0" \
         "p4:pathv12:/local/path/" \
@@ -93,7 +93,6 @@ teardown (void)
     "g14:path-element-1" \
         "p4:pathv18:bla-bla/some/path/" \
         "p10:class-namev7:testfs1" \
-        "p11:raw_url_strv31:test1:user:pass@some.host:12345" \
         "p10:vfs_prefixv5:test1" \
         "p4:userv4:user" \
         "p8:passwordv4:pass" \
@@ -103,15 +102,11 @@ teardown (void)
         "p4:pathv17:bla-bla/some/path" \
         "p10:class-namev7:testfs2" \
         "p8:encodingv6:KOI8-R" \
-        "p11:raw_url_strv6:test2:" \
         "p10:vfs_prefixv5:test2" \
-        "p4:hostv0:" \
     "g14:path-element-3" \
         "p4:pathv9:111/22/33" \
         "p10:class-namev7:testfs3" \
-        "p11:raw_url_strv6:test3:" \
-        "p10:vfs_prefixv5:test3" \
-        "p4:hostv0:"
+        "p10:vfs_prefixv5:test3"
 
 START_TEST (test_path_serialize_deserialize)
 {

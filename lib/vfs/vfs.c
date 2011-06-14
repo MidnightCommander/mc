@@ -89,28 +89,6 @@ static vfs_path_t *current_path = NULL;
 static GPtrArray *vfs_openfiles;
 static long vfs_free_handle_list = -1;
 
-static const struct
-{
-    const char *name;
-    size_t name_len;
-    const char *substitute;
-} url_table[] =
-{
-    /* *INDENT-OFF* */
-#ifdef ENABLE_VFS_FTP
-    { "ftp://", 6, "/#ftp:" },
-#endif
-#ifdef ENABLE_VFS_FISH
-    { "sh://", 5, "/#sh:" },
-    { "ssh://", 6, "/#sh:" },
-#endif
-#ifdef ENABLE_VFS_SMB
-    { "smb://", 6, "/#smb:" },
-#endif
-    { "a:", 2, "/#a" }
-    /* *INDENT-ON* */
-};
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /* now used only by vfs_translate_path, but could be used in other vfs 
@@ -521,26 +499,6 @@ vfs_fill_names (fill_names_f func)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Returns vfs path corresponding to given url. If passed string is
- * not recognized as url, g_strdup(url) is returned.
- */
-
-char *
-vfs_translate_url (const char *url)
-{
-    size_t i;
-
-    for (i = 0; i < sizeof (url_table) / sizeof (url_table[0]); i++)
-        if (strncmp (url, url_table[i].name, url_table[i].name_len) == 0)
-            return g_strconcat (url_table[i].substitute, url + url_table[i].name_len,
-                                (char *) NULL);
-
-    return g_strdup (url);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 gboolean
 vfs_file_is_local (const vfs_path_t * vpath)
 {

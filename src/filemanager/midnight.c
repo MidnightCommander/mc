@@ -49,7 +49,7 @@
 #include "lib/skin.h"
 #include "lib/util.h"
 
-#include "lib/vfs/vfs.h"        /* vfs_translate_url() */
+#include "lib/vfs/vfs.h"
 
 #include "src/args.h"
 #include "src/subshell.h"
@@ -465,23 +465,6 @@ toggle_panels_split (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/**
- * Just a hack for allowing url-like pathnames to be accepted from the
- * command line.
- */
-static void
-translated_mc_chdir (char *dir)
-{
-    char *newdir;
-    int ret;
-
-    newdir = vfs_translate_url (dir);
-    ret = mc_chdir (newdir);
-    g_free (newdir);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 #if ENABLE_VFS
 
 /* event helper */
@@ -624,7 +607,7 @@ create_panels (void)
              */
             mc_get_current_wd (original_dir, sizeof (original_dir) - 2);
         }
-        translated_mc_chdir (mc_run_param0);
+        mc_chdir (mc_run_param0);
     }
     set_display_type (current_index, current_mode);
 
@@ -632,8 +615,8 @@ create_panels (void)
     if (mc_run_param1 != NULL)
     {
         if (original_dir[0] != '\0')
-            translated_mc_chdir (original_dir);
-        translated_mc_chdir (mc_run_param1);
+            mc_chdir (original_dir);
+        mc_chdir (mc_run_param1);
     }
     set_display_type (other_index, other_mode);
 

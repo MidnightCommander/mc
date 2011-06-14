@@ -2553,7 +2553,7 @@ init_ftpfs (void)
     vfs_s_init_class (&vfs_ftpfs_ops, &ftpfs_subclass);
     vfs_ftpfs_ops.name = "ftpfs";
     vfs_ftpfs_ops.flags = VFSF_NOLINKS;
-    vfs_ftpfs_ops.prefix = "ftp:";
+    vfs_ftpfs_ops.prefix = "ftp";
     vfs_ftpfs_ops.done = &ftpfs_done;
     vfs_ftpfs_ops.fill_names = ftpfs_fill_names;
     vfs_ftpfs_ops.chmod = ftpfs_chmod;

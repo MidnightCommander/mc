@@ -161,6 +161,50 @@ vfs_canon (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Build URL parameters (such as user:pass@host:port) from one path element object
+ *
+ * @param element path element
+ *
+ * @return newly allocated string
+ */
+
+static char *
+vfs_path_build_url_params_str (vfs_path_element_t * element)
+{
+    GString *buffer;
+
+    if (element == NULL)
+        return NULL;
+
+    buffer = g_string_new ("");
+
+    if (element->user != NULL)
+        g_string_append (buffer, element->user);
+
+    if (element->password != NULL)
+    {
+        g_string_append_c (buffer, ':');
+        g_string_append (buffer, element->password);
+    }
+
+    if (element->host != NULL)
+    {
+        if ((element->user != NULL) || (element->password != NULL))
+            g_string_append_c (buffer, '@');
+        g_string_append (buffer, element->host);
+    }
+
+    if ((element->port) != 0 && (element->host != NULL))
+    {
+        g_string_append_c (buffer, ':');
+        g_string_append_printf (buffer, "%d", element->port);
+    }
+
+    return g_string_free (buffer, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** get encoding after last #enc: or NULL, if part does not contain #enc:
  *
  * @param path string
@@ -358,11 +402,21 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
     {
         vfs_path_element_t *element = vfs_path_get_by_index (vpath, element_index);
 
-        if (element->raw_url_str != NULL)
+        if (element->vfs_prefix != NULL)
         {
-            g_string_append (buffer, "#");
-            g_string_append (buffer, element->raw_url_str);
+            char *url_str;
+            g_string_append_c (buffer, '#');
+            g_string_append (buffer, element->vfs_prefix);
+
+            url_str = vfs_path_build_url_params_str (element);
+            if (*url_str != '\0')
+            {
+                g_string_append_c (buffer, ':');
+                g_string_append (buffer, url_str);
+            }
+            g_free (url_str);
         }
+
         if (element->encoding != NULL)
         {
             g_string_append (buffer, PATH_SEP_STR VFS_ENCODING_PREFIX);
@@ -422,15 +476,13 @@ vfs_path_from_str (const char *path_str)
     {
         char *url_params;
         element = g_new0 (vfs_path_element_t, 1);
-        element->class = vfs_prefix_to_class (op);
+        element->class = class;
         if (local == NULL)
             local = "";
         element->path = vfs_translate_path_n (local);
 
         element->encoding = vfs_get_encoding (local);
         element->dir.converter = INVALID_CONV;
-
-        element->raw_url_str = g_strdup (op);
 
         url_params = strchr (op, ':');  /* skip VFS prefix */
         if (url_params != NULL)
@@ -450,7 +502,6 @@ vfs_path_from_str (const char *path_str)
         element = g_new0 (vfs_path_element_t, 1);
         element->class = g_ptr_array_index (vfs__classes_list, 0);
         element->path = vfs_translate_path_n (path);
-        element->raw_url_str = NULL;
 
         element->encoding = vfs_get_encoding (path);
         element->dir.converter = INVALID_CONV;
@@ -720,7 +771,6 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
         mc_config_set_string_raw (cpath, groupname, "class-name", element->class->name);
         mc_config_set_string_raw (cpath, groupname, "encoding", element->encoding);
 
-        mc_config_set_string_raw (cpath, groupname, "raw_url_str", element->raw_url_str);
         mc_config_set_string_raw (cpath, groupname, "vfs_prefix", element->vfs_prefix);
 
         mc_config_set_string_raw (cpath, groupname, "user", element->user);
@@ -791,7 +841,6 @@ vfs_path_deserialize (const char *data, GError ** error)
         element->path = mc_config_get_string_raw (cpath, groupname, "path", NULL);
         element->encoding = mc_config_get_string_raw (cpath, groupname, "encoding", NULL);
 
-        element->raw_url_str = mc_config_get_string_raw (cpath, groupname, "raw_url_str", NULL);
         element->vfs_prefix = mc_config_get_string_raw (cpath, groupname, "vfs_prefix", NULL);
 
         element->user = mc_config_get_string_raw (cpath, groupname, "user", NULL);

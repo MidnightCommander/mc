@@ -57,17 +57,17 @@ setup (void)
 
     vfs_test_ops1.name = "testfs1";
     vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1:";
+    vfs_test_ops1.prefix = "test1";
     vfs_register_class (&vfs_test_ops1);
 
     vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
     vfs_test_ops2.name = "testfs2";
-    vfs_test_ops2.prefix = "test2:";
+    vfs_test_ops2.prefix = "test2";
     vfs_register_class (&vfs_test_ops2);
 
     vfs_s_init_class (&vfs_test_ops3, &test_subclass3);
     vfs_test_ops3.name = "testfs3";
-    vfs_test_ops3.prefix = "test3:";
+    vfs_test_ops3.prefix = "test3";
     vfs_register_class (&vfs_test_ops3);
 
 }
@@ -80,7 +80,7 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-#define ETALON_PATH_STR "/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path#test3:/111/22/33"
+#define ETALON_PATH_STR "/#test1/bla-bla/some/path/#test2/bla-bla/some/path#test3/111/22/33"
 START_TEST (test_vfs_path_from_to_string)
 {
     vfs_path_t *vpath;
@@ -137,14 +137,14 @@ START_TEST (test_vfs_path_from_to_partial_string_by_class)
 
     result = vfs_path_to_str_elements_count(vpath, -1);
     fail_unless(
-        strcmp("/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path", result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path", result);
+        strcmp("/#test1/bla-bla/some/path/#test2/bla-bla/some/path", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/#test1/bla-bla/some/path/#test2/bla-bla/some/path", result);
     g_free(result);
 
     result = vfs_path_to_str_elements_count(vpath, -2);
     fail_unless(
-        strcmp("/#test1:/bla-bla/some/path/", result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/#test1:/bla-bla/some/path/", result);
+        strcmp("/#test1/bla-bla/some/path/", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/#test1/bla-bla/some/path/", result);
     g_free(result);
 
     result = vfs_path_to_str_elements_count(vpath, -3);
@@ -169,14 +169,14 @@ START_TEST (test_vfs_path_from_to_partial_string_by_class)
 
     result = vfs_path_to_str_elements_count(vpath, 2);
     fail_unless(
-        strcmp("/#test1:/bla-bla/some/path/", result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/#test1:/bla-bla/some/path/", result);
+        strcmp("/#test1/bla-bla/some/path/", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/#test1/bla-bla/some/path/", result);
     g_free(result);
 
     result = vfs_path_to_str_elements_count(vpath, 3);
     fail_unless(
-        strcmp("/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path", result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path", result);
+        strcmp("/#test1/bla-bla/some/path/#test2/bla-bla/some/path", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/#test1/bla-bla/some/path/#test2/bla-bla/some/path", result);
     g_free(result);
 
     result = vfs_path_to_str_elements_count(vpath, 4);
@@ -217,33 +217,33 @@ START_TEST (test_vfs_path_from_to_string_encoding)
     load_codepages_list ();
 
     encoding_check (
-        "/#test1:/bla-bla1/some/path/#test2:/bla-bla2/#enc:KOI8-R/some/path#test3:/111/22/33",
-        "/#test1:/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/#test1/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
     );
 
     encoding_check (
-        "/#test1:/bla-bla1/#enc:IBM866/some/path/#test2:/bla-bla2/#enc:KOI8-R/some/path#test3:/111/22/33",
-        "/#test1:/#enc:IBM866/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+        "/#test1/bla-bla1/#enc:IBM866/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/#test1/#enc:IBM866/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
     );
 
     encoding_check (
-        "/#test1:/bla-bla1/some/path/#test2:/bla-bla2/#enc:IBM866/#enc:KOI8-R/some/path#test3:/111/22/33",
-        "/#test1:/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/#test1/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
     );
 
     encoding_check (
-        "/#test1:/bla-bla1/some/path/#test2:/bla-bla2/#enc:IBM866/some/#enc:KOI8-R/path#test3:/111/22/33",
-        "/#test1:/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/some/#enc:KOI8-R/path#test3/111/22/33",
+        "/#test1/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
     );
 
     encoding_check (
-        "/#test1:/bla-bla1/some/path/#test2:/#enc:IBM866/bla-bla2/#enc:KOI8-R/some/path#test3:/111/22/33",
-        "/#test1:/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+        "/#test1/bla-bla1/some/path/#test2/#enc:IBM866/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/#test1/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
     );
 
     encoding_check (
-        "/#test1:/bla-bla1/some/path/#enc:IBM866/#test2:/bla-bla2/#enc:KOI8-R/some/path#test3:/111/22/33",
-        "/#test1:/#enc:IBM866/bla-bla1/some/path/#test2:/#enc:KOI8-R/bla-bla2/some/path#test3:/111/22/33"
+        "/#test1/bla-bla1/some/path/#enc:IBM866/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/#test1/#enc:IBM866/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
     );
 
     free_codepages_list ();
@@ -251,7 +251,7 @@ START_TEST (test_vfs_path_from_to_string_encoding)
 
 END_TEST
 /* --------------------------------------------------------------------------------------------- */
-#define ETALON_STR "/path/to/file.ext#test1:/#enc:KOI8-R"
+#define ETALON_STR "/path/to/file.ext#test1/#enc:KOI8-R"
 START_TEST (test_vfs_path_encoding_at_end)
 {
     vfs_path_t *vpath;

@@ -2200,7 +2200,7 @@ init_smbfs (void)
     tcp_init ();
 
     vfs_smbfs_ops.name = "smbfs";
-    vfs_smbfs_ops.prefix = "smb:";
+    vfs_smbfs_ops.prefix = "smb";
     vfs_smbfs_ops.flags = VFSF_NOLINKS;
     vfs_smbfs_ops.init = smbfs_init;
     vfs_smbfs_ops.fill_names = smbfs_fill_names;

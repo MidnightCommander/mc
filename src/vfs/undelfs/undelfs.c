@@ -161,7 +161,7 @@ undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
 
     *fsname = NULL;
 
-    if (strncmp (dirname, "/#undel:", 8))
+    if (strncmp (dirname, "/#undel", 7))
         return;
 
     dirname += 8;
@@ -806,7 +806,7 @@ void
 init_undelfs (void)
 {
     vfs_undelfs_ops.name = "undelfs";
-    vfs_undelfs_ops.prefix = "undel:";
+    vfs_undelfs_ops.prefix = "undel";
     vfs_undelfs_ops.init = undelfs_init;
     vfs_undelfs_ops.open = undelfs_open;
     vfs_undelfs_ops.close = undelfs_close;

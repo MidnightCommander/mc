@@ -80,14 +80,14 @@ START_TEST (set_up_current_dir)
 
     vfs_test_ops.name = "testfs";
     vfs_test_ops.flags = VFSF_NOLINKS;
-    vfs_test_ops.prefix = "test:";
+    vfs_test_ops.prefix = "test";
     vfs_test_ops.chdir = test_chdir;
 
     vfs_register_class (&vfs_test_ops);
 
-    cd_and_check ("/dev/some.file#test:/bla-bla", "/dev/some.file#test:/bla-bla");
+    cd_and_check ("/dev/some.file#test/bla-bla", "/dev/some.file#test/bla-bla");
 
-    cd_and_check ("..", "/dev/some.file#test:");
+    cd_and_check ("..", "/dev/some.file#test");
 
     cd_and_check ("..", "/dev");
 
@@ -95,9 +95,9 @@ START_TEST (set_up_current_dir)
 
     cd_and_check ("..", "/");
 
-    cd_and_check ("/dev/some.file/#test:/bla-bla", "/dev/some.file/#test:/bla-bla");
+    cd_and_check ("/dev/some.file/#test/bla-bla", "/dev/some.file/#test/bla-bla");
 
-    cd_and_check ("..", "/dev/some.file/#test:");
+    cd_and_check ("..", "/dev/some.file/#test");
 
     cd_and_check ("..", "/dev");
 
