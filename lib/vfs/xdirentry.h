@@ -40,7 +40,7 @@
 
 #define MEDATA ((struct vfs_s_subclass *) me->data)
 
-#define VFSDATA(a) ((struct vfs_s_subclass *) a->class->data)
+#define VFSDATA(a) ((a->class != NULL) ? (struct vfs_s_subclass *) a->class->data : NULL)
 
 #define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super

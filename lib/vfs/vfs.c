@@ -295,37 +295,25 @@ vfs_register_class (struct vfs_class * vfs)
 char *
 vfs_strip_suffix_from_filename (const char *filename)
 {
-    guint i;
-    char *semi;
-    char *p;
+    char *semi, *p, *vfs_prefix;
 
     if (filename == NULL)
         vfs_die ("vfs_strip_suffix_from_path got NULL: impossible");
 
     p = g_strdup (filename);
-    semi = strrchr (p, '#');
+    semi = g_strrstr (p, VFS_PATH_URL_DELIMITER);
     if (semi == NULL)
         return p;
 
-    /* Avoid first class (localfs) that would accept any prefix */
-    for (i = 1; i < vfs__classes_list->len; i++)
+    *semi = '\0';
+    vfs_prefix = strrchr (p, PATH_SEP);
+    if (vfs_prefix == NULL)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
-
-        if (vfs->which != NULL)
-        {
-            if (vfs->which (vfs, semi + 1) == -1)
-                continue;
-            *semi = '\0';       /* Found valid suffix */
-            break;
-        }
-
-        if (vfs->prefix != NULL && strncmp (semi + 1, vfs->prefix, strlen (vfs->prefix)) == 0)
-        {
-            *semi = '\0';       /* Found valid suffix */
-            break;
-        }
+        *semi = *VFS_PATH_URL_DELIMITER;
+        return p;
     }
+    *vfs_prefix = '\0';
+
     return p;
 }
 

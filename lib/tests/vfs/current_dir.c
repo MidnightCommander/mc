@@ -75,7 +75,6 @@ START_TEST (set_up_current_dir)
     static struct vfs_class vfs_test_ops;
     char buffer[MC_MAXPATHLEN];
 
-    test_subclass.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops, &test_subclass);
 
     vfs_test_ops.name = "testfs";
@@ -85,9 +84,11 @@ START_TEST (set_up_current_dir)
 
     vfs_register_class (&vfs_test_ops);
 
-    cd_and_check ("/dev/some.file#test/bla-bla", "/dev/some.file#test/bla-bla");
+    cd_and_check ("/dev/some.file#test", "/dev/some.file/test://");
 
-    cd_and_check ("..", "/dev/some.file#test");
+    cd_and_check ("/dev/some.file#test/bla-bla", "/dev/some.file/test://bla-bla");
+
+    cd_and_check ("..", "/dev/some.file/test://");
 
     cd_and_check ("..", "/dev");
 
@@ -95,9 +96,9 @@ START_TEST (set_up_current_dir)
 
     cd_and_check ("..", "/");
 
-    cd_and_check ("/dev/some.file/#test/bla-bla", "/dev/some.file/#test/bla-bla");
+    cd_and_check ("/dev/some.file/#test/bla-bla", "/dev/some.file/test://bla-bla");
 
-    cd_and_check ("..", "/dev/some.file/#test");
+    cd_and_check ("..", "/dev/some.file/test://");
 
     cd_and_check ("..", "/dev");
 
@@ -115,17 +116,20 @@ START_TEST (set_up_current_dir_url)
     static struct vfs_class vfs_test_ops;
     char buffer[MC_MAXPATHLEN];
 
-    test_subclass.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops, &test_subclass);
 
     vfs_test_ops.name = "testfs";
     vfs_test_ops.flags = VFSF_NOLINKS;
-    vfs_test_ops.prefix = "test:";
+    vfs_test_ops.prefix = "test";
     vfs_test_ops.chdir = test_chdir;
 
     vfs_register_class (&vfs_test_ops);
 
-    cd_and_check ("/dev/some.file/test://bla-bla", "/dev/some.file/#test:bla-bla");
+    cd_and_check ("/dev/some.file/test://", "/dev/some.file/test://");
+
+    cd_and_check ("/dev/some.file/test://bla-bla", "/dev/some.file/test://bla-bla");
+
+    cd_and_check ("..", "/dev/some.file/test://");
 
     cd_and_check ("..", "/dev");
 
@@ -133,9 +137,12 @@ START_TEST (set_up_current_dir_url)
 
     cd_and_check ("..", "/");
 
-    test_subclass.flags &= ~VFS_S_REMOTE;
+    test_subclass.flags = VFS_S_REMOTE;
 
-    cd_and_check ("/dev/some.file/test://bla-bla", "/dev/some.file/#test/bla-bla");
+    cd_and_check ("/test://user:pass@host.net/path", "/test://user:pass@host.net/path");
+    cd_and_check ("..", "/test://user:pass@host.net");
+
+    cd_and_check ("..", "/");
 
 }
 END_TEST

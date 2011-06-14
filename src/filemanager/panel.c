@@ -2582,14 +2582,18 @@ static const char *
 get_parent_dir_name (const char *cwd, const char *lwd)
 {
     size_t llen, clen;
+    const char *p;
 
     llen = strlen (lwd);
     clen = strlen (cwd);
 
-    if (llen > clen)
-    {
-        const char *p;
+    if (llen <= clen)
+        return NULL;
 
+    p = g_strrstr (lwd, VFS_PATH_URL_DELIMITER);
+
+    if (p == NULL)
+    {
         p = strrchr (lwd, PATH_SEP);
 
         if ((p != NULL)
@@ -2597,9 +2601,14 @@ get_parent_dir_name (const char *cwd, const char *lwd)
             && (clen == (size_t) (p - lwd)
                 || ((p == lwd) && (cwd[0] == PATH_SEP) && (cwd[1] == '\0'))))
             return (p + 1);
+
+        return NULL;
     }
 
-    return NULL;
+    while (--p > lwd && *p != PATH_SEP);
+    while (--p > lwd && *p != PATH_SEP);
+
+    return (p != lwd) ? p + 1 : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

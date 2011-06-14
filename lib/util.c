@@ -669,7 +669,15 @@ const char *
 x_basename (const char *s)
 {
     const char *where;
-    return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
+
+    where = g_strrstr (s, VFS_PATH_URL_DELIMITER);
+    if (where == NULL)
+        return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
+
+    while (--where > s && *where != PATH_SEP);
+    while (--where > s && *where != PATH_SEP);
+
+    return (where == s ) ? s: where + 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -890,15 +898,15 @@ decompress_extension (int type)
     switch (type)
     {
     case COMPRESSION_GZIP:
-        return "#ugz";
+        return "/ugz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_BZIP:
-        return "#ubz";
+        return "/ubz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_BZIP2:
-        return "#ubz2";
+        return "/ubz2" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_LZMA:
-        return "#ulzma";
+        return "/ulzma" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_XZ:
-        return "#uxz";
+        return "/uxz" VFS_PATH_URL_DELIMITER;
     }
     /* Should never reach this place */
     fprintf (stderr, "Fatal: decompress_extension called with an unknown argument\n");

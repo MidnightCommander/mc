@@ -34,6 +34,7 @@
 #define ARCH_NAME "/path/to/some/file.ext"
 #define ETALON_PATH "path/to/test1_file.ext"
 #define ETALON_VFS_NAME "#test2:user:pass@host.net"
+#define ETALON_VFS_URL_NAME "test2://user:pass@host.net"
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
@@ -44,8 +45,8 @@ test1_mock_open_archive(struct vfs_s_super *super, const vfs_path_t *vpath, cons
     struct vfs_s_inode *root;
     char *spath = vfs_path_to_str (vpath);
 
-    fail_unless(strcmp("/" ETALON_VFS_NAME ARCH_NAME, spath) == 0,
-        "etalon(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_NAME ARCH_NAME, spath);
+    fail_unless(strcmp("/" ETALON_VFS_URL_NAME ARCH_NAME, spath) == 0,
+        "etalon(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_URL_NAME ARCH_NAME, spath);
 
     super->name = g_strdup (spath);
     super->data = g_new (char *, 1);
@@ -131,8 +132,8 @@ START_TEST (test_vfs_s_get_path_mangle)
     fail_unless(strcmp(ETALON_PATH, result) == 0,
         "expected(%s) doesn't equal to actual(%s)", ETALON_PATH, result);
 
-    fail_unless(strcmp("/" ETALON_VFS_NAME ARCH_NAME,archive->name) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_NAME ARCH_NAME, archive->name);
+    fail_unless(strcmp("/" ETALON_VFS_URL_NAME ARCH_NAME,archive->name) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_URL_NAME ARCH_NAME, archive->name);
 
     g_free(vpath);
 

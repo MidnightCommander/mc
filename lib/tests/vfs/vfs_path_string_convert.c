@@ -81,6 +81,7 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 #define ETALON_PATH_STR "/#test1/bla-bla/some/path/#test2/bla-bla/some/path#test3/111/22/33"
+#define ETALON_PATH_URL_STR "/test1://bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33"
 START_TEST (test_vfs_path_from_to_string)
 {
     vfs_path_t *vpath;
@@ -93,7 +94,7 @@ START_TEST (test_vfs_path_from_to_string)
     fail_unless(vpath_len == 4, "vpath length should be 4 (actial: %d)",vpath_len);
 
     result = vfs_path_to_str(vpath);
-    fail_unless(strcmp(ETALON_PATH_STR, result) == 0, "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_STR, result);
+    fail_unless(strcmp(ETALON_PATH_URL_STR, result) == 0, "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_URL_STR, result);
     g_free(result);
 
     vfs_path_free(vpath);
@@ -137,14 +138,14 @@ START_TEST (test_vfs_path_from_to_partial_string_by_class)
 
     result = vfs_path_to_str_elements_count(vpath, -1);
     fail_unless(
-        strcmp("/#test1/bla-bla/some/path/#test2/bla-bla/some/path", result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/#test1/bla-bla/some/path/#test2/bla-bla/some/path", result);
+        strcmp("/test1://bla-bla/some/path/test2://bla-bla/some/path", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/test1://bla-bla/some/path/test2://bla-bla/some/path", result);
     g_free(result);
 
     result = vfs_path_to_str_elements_count(vpath, -2);
     fail_unless(
-        strcmp("/#test1/bla-bla/some/path/", result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/#test1/bla-bla/some/path/", result);
+        strcmp("/test1://bla-bla/some/path/", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/test1://bla-bla/some/path/", result);
     g_free(result);
 
     result = vfs_path_to_str_elements_count(vpath, -3);
@@ -169,27 +170,27 @@ START_TEST (test_vfs_path_from_to_partial_string_by_class)
 
     result = vfs_path_to_str_elements_count(vpath, 2);
     fail_unless(
-        strcmp("/#test1/bla-bla/some/path/", result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/#test1/bla-bla/some/path/", result);
+        strcmp("/test1://bla-bla/some/path/", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/test1://bla-bla/some/path/", result);
     g_free(result);
 
     result = vfs_path_to_str_elements_count(vpath, 3);
     fail_unless(
-        strcmp("/#test1/bla-bla/some/path/#test2/bla-bla/some/path", result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/#test1/bla-bla/some/path/#test2/bla-bla/some/path", result);
+        strcmp("/test1://bla-bla/some/path/test2://bla-bla/some/path", result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", "/test1://bla-bla/some/path/test2://bla-bla/some/path", result);
     g_free(result);
 
     result = vfs_path_to_str_elements_count(vpath, 4);
     fail_unless(
-        strcmp(ETALON_PATH_STR, result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_STR, result);
+        strcmp(ETALON_PATH_URL_STR, result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_URL_STR, result);
     g_free(result);
 
     /* index out of bound*/
     result = vfs_path_to_str_elements_count(vpath, 5);
     fail_unless(
-        strcmp(ETALON_PATH_STR, result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_STR, result);
+        strcmp(ETALON_PATH_URL_STR, result) == 0,
+        "expected(%s) doesn't equal to actual(%s)", ETALON_PATH_URL_STR, result);
     g_free(result);
 
     vfs_path_free(vpath);
@@ -218,32 +219,32 @@ START_TEST (test_vfs_path_from_to_string_encoding)
 
     encoding_check (
         "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-        "/#test1/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
+        "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33"
     );
 
     encoding_check (
         "/#test1/bla-bla1/#enc:IBM866/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-        "/#test1/#enc:IBM866/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
+        "/test1://#enc:IBM866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33"
     );
 
     encoding_check (
         "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/#enc:KOI8-R/some/path#test3/111/22/33",
-        "/#test1/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
+        "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33"
     );
 
     encoding_check (
         "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/some/#enc:KOI8-R/path#test3/111/22/33",
-        "/#test1/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
+        "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33"
     );
 
     encoding_check (
         "/#test1/bla-bla1/some/path/#test2/#enc:IBM866/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-        "/#test1/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
+        "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33"
     );
 
     encoding_check (
         "/#test1/bla-bla1/some/path/#enc:IBM866/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-        "/#test1/#enc:IBM866/bla-bla1/some/path/#test2/#enc:KOI8-R/bla-bla2/some/path#test3/111/22/33"
+        "/test1://#enc:IBM866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33"
     );
 
     free_codepages_list ();
@@ -251,7 +252,7 @@ START_TEST (test_vfs_path_from_to_string_encoding)
 
 END_TEST
 /* --------------------------------------------------------------------------------------------- */
-#define ETALON_STR "/path/to/file.ext#test1/#enc:KOI8-R"
+#define ETALON_STR "/path/to/file.ext/test1://#enc:KOI8-R"
 START_TEST (test_vfs_path_encoding_at_end)
 {
     vfs_path_t *vpath;
@@ -282,14 +283,13 @@ END_TEST
 /* --------------------------------------------------------------------------------------------- */
 
 #undef ETALON_PATH_STR
-#define ETALON_PATH_STR "/#test1/bla-bla/some/path/#test2:user:passwd@some.host:1234/bla-bla/some/path/#test3/111/22/33"
-#define INPUT_PATH_STR "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33"
+#define ETALON_PATH_STR "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33"
 START_TEST (test_vfs_path_from_to_string_uri)
 {
     vfs_path_t *vpath;
     size_t vpath_len;
     char *result;
-    vpath = vfs_path_from_str (INPUT_PATH_STR);
+    vpath = vfs_path_from_str (ETALON_PATH_STR);
 
     vpath_len = vfs_path_elements_count(vpath);
     fail_unless(vpath_len == 4, "vpath length should be 4 (actial: %d)",vpath_len);

@@ -350,7 +350,9 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
         char *name;
 
         info = &g_array_index (extfs_plugins, extfs_plugin_info_t, a->fstype);
-        name = g_strconcat (a->name ? a->name : "", "#", info->prefix, (char *) NULL);
+        name =
+            g_strconcat (a->name ? a->name : "", "/", info->prefix, VFS_PATH_URL_DELIMITER,
+                         (char *) NULL);
         func (name);
         g_free (name);
         a = a->next;

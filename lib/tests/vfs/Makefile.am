@@ -7,6 +7,7 @@ LIBS=@CHECK_LIBS@  \
     $(top_builddir)/lib/libmc.la
 
 TESTS = \
+	canonicalize_pathname \
 	current_dir \
 	path_serialize \
 	vfs_path_string_convert \
@@ -15,6 +16,9 @@ TESTS = \
 	vfs_s_get_path_mangle
 
 check_PROGRAMS = $(TESTS)
+
+canonicalize_pathname_SOURCES = \
+	canonicalize_pathname.c
 
 current_dir_SOURCES = \
 	current_dir.c

@@ -758,7 +758,7 @@ vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
         char *name;
 
-        name = g_strconcat (super->name, "#", me->prefix, "/",
+        name = g_strconcat (super->name, "/", me->prefix, VFS_PATH_URL_DELIMITER,
                             /* super->current_dir->name, */ (char *) NULL);
         func (name);
         g_free (name);

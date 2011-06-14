@@ -3,6 +3,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define VFS_PATH_URL_DELIMITER "://"
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

@@ -48,8 +48,6 @@ extern GPtrArray *vfs__classes_list;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define URL_DELIMITER "://"
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -384,7 +382,7 @@ vfs_get_class_by_name (const char *class_name)
 static gboolean
 vfs_path_is_str_path_deprecated (const char *path_str)
 {
-    return strstr (path_str, URL_DELIMITER) == NULL;
+    return strstr (path_str, VFS_PATH_URL_DELIMITER) == NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -462,12 +460,12 @@ vfs_path_from_str_uri_parser (char *path)
 
     vpath = vfs_path_new ();
 
-    while ((url_delimiter = g_strrstr (path, URL_DELIMITER)) != NULL)
+    while ((url_delimiter = g_strrstr (path, VFS_PATH_URL_DELIMITER)) != NULL)
     {
         char *vfs_prefix_start;
         char *real_vfs_prefix_start = url_delimiter;
         char *slash_pointer;
-        struct vfs_s_subclass *sub;
+        struct vfs_s_subclass *sub = NULL;
 
         while (real_vfs_prefix_start > path && *(real_vfs_prefix_start) != PATH_SEP)
             real_vfs_prefix_start--;
@@ -475,18 +473,18 @@ vfs_path_from_str_uri_parser (char *path)
 
         if (*(vfs_prefix_start) == PATH_SEP)
             vfs_prefix_start += 1;
-        *(url_delimiter + 1) = '\0';
+
+        *url_delimiter = '\0';
 
         element = g_new0 (vfs_path_element_t, 1);
         element->class = vfs_prefix_to_class (vfs_prefix_start);
-        *url_delimiter = '\0';
         element->vfs_prefix = g_strdup (vfs_prefix_start);
 
         element->dir.converter = INVALID_CONV;
 
-        url_delimiter += 3;
+        url_delimiter += strlen (VFS_PATH_URL_DELIMITER);
         sub = VFSDATA (element);
-        if (sub->flags & VFS_S_REMOTE)
+        if (sub != NULL && sub->flags & VFS_S_REMOTE)
         {
             slash_pointer = strchr (url_delimiter, PATH_SEP);
             if (slash_pointer == NULL)
@@ -508,7 +506,7 @@ vfs_path_from_str_uri_parser (char *path)
         }
         vpath->path = g_list_prepend (vpath->path, element);
 
-        if (real_vfs_prefix_start > path && *(real_vfs_prefix_start) != PATH_SEP)
+        if (real_vfs_prefix_start > path && *(real_vfs_prefix_start) == PATH_SEP)
             *real_vfs_prefix_start = '\0';
         else
             *(real_vfs_prefix_start + 1) = '\0';
@@ -563,25 +561,31 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
         if (element->vfs_prefix != NULL)
         {
             char *url_str;
-            g_string_append_c (buffer, '#');
+
+            if (buffer->str[buffer->len - 1] != '/')
+                g_string_append_c (buffer, '/');
+
             g_string_append (buffer, element->vfs_prefix);
+            g_string_append (buffer, VFS_PATH_URL_DELIMITER);
 
             url_str = vfs_path_build_url_params_str (element);
             if (*url_str != '\0')
-            {
-                g_string_append_c (buffer, ':');
                 g_string_append (buffer, url_str);
-            }
+
             g_free (url_str);
         }
 
         if (element->encoding != NULL)
         {
-            g_string_append (buffer, PATH_SEP_STR VFS_ENCODING_PREFIX);
+            if (buffer->str[buffer->len - 1] != PATH_SEP)
+                g_string_append (buffer, PATH_SEP_STR);
+            g_string_append (buffer, VFS_ENCODING_PREFIX);
             g_string_append (buffer, element->encoding);
         }
-        if ((*element->path != PATH_SEP) && (*element->path != '\0'))
+        if ((*element->path != PATH_SEP) && (*element->path != '\0')
+            && (buffer->str[buffer->len - 1] != PATH_SEP))
             g_string_append_c (buffer, PATH_SEP);
+
         g_string_append (buffer, element->path);
     }
     return g_string_free (buffer, FALSE);

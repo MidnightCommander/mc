@@ -86,6 +86,7 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 #define ETALON_PATH_STR "/local/path/#test1:user:pass@some.host:12345/bla-bla/some/path/#test2/#enc:KOI8-R/bla-bla/some/path#test3/111/22/33"
+#define ETALON_PATH_URL_STR "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33"
 #define ETALON_SERIALIZED_PATH \
     "g14:path-element-0" \
         "p4:pathv12:/local/path/" \
@@ -142,8 +143,8 @@ START_TEST (test_path_serialize_deserialize)
 
     serialized_vpath = vfs_path_to_str (vpath);
     fail_unless (
-        strcmp (serialized_vpath, ETALON_PATH_STR) == 0,
-        "\ndeserialized path   (%s)\nnot equal to etalon (%s)", serialized_vpath, ETALON_PATH_STR
+        strcmp (serialized_vpath, ETALON_PATH_URL_STR) == 0,
+        "\ndeserialized path   (%s)\nnot equal to etalon (%s)", serialized_vpath, ETALON_PATH_URL_STR
     );
     vfs_path_free(vpath);
     g_free(serialized_vpath);

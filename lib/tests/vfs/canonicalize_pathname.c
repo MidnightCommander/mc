@@ -20,22 +20,33 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#define TEST_SUITE_NAME "/lib"
+#define TEST_SUITE_NAME "/lib/vfs"
 
 #include <check.h>
 
 
 #include "lib/global.h"
+#include "lib/strutil.h"
 #include "lib/util.h"
+#include "lib/vfs/xdirentry.h"
+
+#include "src/vfs/local/local.c"
 
 static void
 setup (void)
 {
+    str_init_strings (NULL);
+
+    vfs_init ();
+    init_localfs ();
+    vfs_setup_work_dir ();
 }
 
 static void
 teardown (void)
 {
+    vfs_shut ();
+    str_uninit_strings ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -53,6 +64,16 @@ teardown (void)
 START_TEST (test_canonicalize_path)
 {
     char *path;
+    static struct vfs_s_subclass test_subclass;
+    static struct vfs_class vfs_test_ops;
+
+    vfs_s_init_class (&vfs_test_ops, &test_subclass);
+
+    vfs_test_ops.name = "testfs";
+    vfs_test_ops.flags = VFSF_NOLINKS;
+    vfs_test_ops.prefix = "ftp";
+    test_subclass.flags = VFS_S_REMOTE;
+    vfs_register_class (&vfs_test_ops);
 
     /* UNC path */
     check_canonicalize ("//some_server/ww", "//some_server/ww");
@@ -80,7 +101,6 @@ START_TEST (test_canonicalize_path)
     check_canonicalize ("ftp://user:pass@host.net/path/../../", ".");
 
     check_canonicalize ("ftp://user/../../", "..");
-
 }
 END_TEST
 

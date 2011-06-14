@@ -56,6 +56,7 @@
 #include "lib/strutil.h"        /* str_move() */
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
+#include "lib/vfs/xdirentry.h"
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -543,8 +544,9 @@ void
 custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 {
     char *p, *s;
-    int len;
+    size_t len;
     char *lpath = path;         /* path without leading UNC part */
+    const size_t url_delim_len = strlen (VFS_PATH_URL_DELIMITER);
 
     /* Detect and preserve UNC paths: //server/... */
     if ((flags & CANON_PATH_GUARDUNC) && path[0] == PATH_SEP && path[1] == PATH_SEP)
@@ -593,7 +595,12 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         /* Remove trailing slashes */
         p = lpath + strlen (lpath) - 1;
         while (p > lpath && *p == PATH_SEP)
+        {
+            if (p >= lpath - (url_delim_len + 1)
+                && strncmp (p - url_delim_len + 1, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
+                break;
             *p-- = 0;
+        }
 
         /* Remove leading "./" */
         if (lpath[0] == '.' && lpath[1] == PATH_SEP)
@@ -613,9 +620,12 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         len = strlen (lpath);
         if (len < 2)
             return;
-        if (lpath[len - 1] == PATH_SEP)
+        if (lpath[len - 1] == PATH_SEP
+            && (len < url_delim_len
+                || strncmp (lpath + len - url_delim_len, VFS_PATH_URL_DELIMITER,
+                            url_delim_len) != 0))
         {
-            lpath[len - 1] = 0;
+            lpath[len - 1] = '\0';
         }
         else
         {
@@ -623,12 +633,12 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
             {
                 if (len == 2)
                 {
-                    lpath[1] = 0;
+                    lpath[1] = '\0';
                     return;
                 }
                 else
                 {
-                    lpath[len - 2] = 0;
+                    lpath[len - 2] = '\0';
                 }
             }
         }
@@ -650,13 +660,40 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
             /* search for the previous token */
             s = p - 1;
+            if (s >= lpath + url_delim_len - 2
+                && strncmp (s - url_delim_len + 2, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
+            {
+                s -= (url_delim_len - 2);
+                while (s >= lpath && *s-- != PATH_SEP);
+            }
+
             while (s >= lpath)
             {
-                if (s >= lpath + 2 && strncmp (s - 2, "://", 3) == 0)
+                if (s - url_delim_len > lpath
+                    && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                 {
-                    s -= 2;
-                    continue;
+                    char *vfs_prefix = s - url_delim_len;
+                    struct vfs_class *vclass;
+
+                    while (vfs_prefix > lpath && *--vfs_prefix != PATH_SEP);
+                    if (*vfs_prefix == PATH_SEP)
+                        vfs_prefix++;
+                    *(s - url_delim_len) = '\0';
+
+                    vclass = vfs_prefix_to_class (vfs_prefix);
+                    *(s - url_delim_len) = *VFS_PATH_URL_DELIMITER;
+
+                    if (vclass != NULL)
+                    {
+                        struct vfs_s_subclass *sub = (struct vfs_s_subclass *) vclass->data;
+                        if (sub != NULL && sub->flags & VFS_S_REMOTE)
+                        {
+                            s = vfs_prefix;
+                            continue;
+                        }
+                    }
                 }
+
                 if (*s == PATH_SEP)
                 {
                     /* skip VFS prefix */
@@ -748,7 +785,13 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 }
 #endif /* HAVE_CHARSET */
                 else
-                    s[-1] = 0;
+                {
+                    if (s >= lpath + url_delim_len
+                        && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
+                        *s = '\0';
+                    else
+                        s[-1] = '\0';
+                }
                 break;
             }
 

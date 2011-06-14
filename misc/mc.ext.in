@@ -108,149 +108,149 @@
 
 # .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk
 regex/\.t([gp]?z|ar\.g?[zZ])$|\.ipk$
-	Open=%cd %p#utar
+	Open=%cd %p/utar://
 	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
 
 regex/\.tar\.bz$
-	# Open=%cd %p#utar
+	# Open=%cd %p/utar://
 	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
 
 regex/\.t(ar\.bz2|bz2?|b2)$
-	Open=%cd %p#utar
+	Open=%cd %p/utar://
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
 
 # .tar.lzma, .tlz
 regex/\.t(ar\.lzma|lz)$
-	Open=%cd %p#utar
+	Open=%cd %p/utar://
 	View=%view{ascii} lzma -dc %f 2>/dev/null | tar tvvf -
 
 # .tar.xz, .txz
 regex/\.t(ar\.xz|xz)$
-	Open=%cd %p#utar
+	Open=%cd %p/utar://
 	View=%view{ascii} xz -dc %f 2>/dev/null | tar tvvf -
 
 # .tar.F - used in QNX
 regex/\.tar\.F$
-	# Open=%cd %p#utar
+	# Open=%cd %p/utar://
 	View=%view{ascii} freeze -dc %f 2>/dev/null | tar tvvf -
 
 # .qpr/.qpk - QNX Neutrino package installer files
 regex/\.(qp[rk])$
-	Open=%cd %p#utar
+	Open=%cd %p/utar://
 	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
 
 # tar
 regex/\.(tar|TAR)$
-	Open=%cd %p#utar
+	Open=%cd %p/utar://
 	View=%view{ascii} tar tvvf - < %f
 
 # lha
 type/^LHa\ .*archive
-	Open=%cd %p#ulha
+	Open=%cd %p/ulha://
 	View=%view{ascii} lha l %f
 
 # arj
 regex/\.a(rj|[0-9][0-9])$
-	Open=%cd %p#uarj
+	Open=%cd %p/uarj://
 	View=%view{ascii} unarj l %f
 
 # cab
 regex/\.([cC][aA][bB])$
-	Open=%cd %p#ucab
+	Open=%cd %p/ucab://
 	View=%view{ascii} cabextract -l %f
 
 # ha
 regex/\.([Hh][Aa])$
-	Open=%cd %p#uha
+	Open=%cd %p/uha://
 	View=%view{ascii} ha lf %f
 
 # rar
 regex/\.[rR]([aA][rR]|[0-9][0-9])$
-	Open=%cd %p#urar
+	Open=%cd %p/urar://
 	View=%view{ascii} rar v -c- %f
 
 # ALZip
 regex/\.(alz|ALZ)$
-	Open=%cd %p#ualz
+	Open=%cd %p/ualz://
 	View=%view{ascii} unalz -l %f
 
 # cpio
 shell/.cpio.Z
-	Open=%cd %p#ucpio
+	Open=%cd %p/ucpio://
 	View=%view{ascii} gzip -dc %f | cpio -itv 2>/dev/null
 
 shell/.cpio.gz
-	Open=%cd %p#ucpio
+	Open=%cd %p/ucpio://
 	View=%view{ascii} gzip -dc %f | cpio -itv 2>/dev/null
 
 shell/.cpio
-	Open=%cd %p#ucpio
+	Open=%cd %p/ucpio://
 	View=%view{ascii} cpio -itv < %f 2>/dev/null
 
 # ls-lR
 regex/(^|\.)ls-?lR(\.gz|Z|bz2)$
-	Open=%cd %p#lslR
+	Open=%cd %p/lslR://
 
 # patch
 regex/\.(diff|patch)(\.bz2)$
-	Open=%cd %p#patchfs
+	Open=%cd %p/patchfs://
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null
 
 regex/\.(diff|patch)(\.(gz|Z))$
-	Open=%cd %p#patchfs
+	Open=%cd %p/patchfs://
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 
 regex/\.(diff|patch)$
-	Open=%cd %p#patchfs
+	Open=%cd %p/patchfs://
 	View=%view{ascii} /bin/cat %f 2>/dev/null
 
 # ar library
 regex/\.s?a$
-	Open=%cd %p#uar
+	Open=%cd %p/uar://
 	#Open=%view{ascii} ar tv %f
 	View=%view{ascii} file %f && nm -C %f
 
 # trpm
 regex/\.trpm$
-	Open=%cd %p#trpm
+	Open=%cd %p/trpm://
 	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
 
 # RPM packages (SuSE uses *.spm for source packages)
 regex/\.(src\.rpm|spm)$
-	Open=%cd %p#rpm
+	Open=%cd %p/rpm://
 	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" ; fi ; $RPM -qivlp --scripts %f
 
 regex/\.rpm$
-	Open=%cd %p#rpm
+	Open=%cd %p/rpm://
 	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" ; fi ; $RPM -qivlp --scripts %f
 
 # deb
 regex/\.u?deb$
-	Open=%cd %p#deb
+	Open=%cd %p/deb://
 	View=%view{ascii} dpkg-deb -I %f && echo && dpkg-deb -c %f
 
 # dpkg
 shell/.debd
-        Open=%cd %p#debd
+        Open=%cd %p/debd://
         View=%view{ascii} dpkg -s `echo %p | sed 's/\([0-9a-z.-]*\).*/\1/'`
 # apt
 shell/.deba
-        Open=%cd %p#deba
+        Open=%cd %p/deba://
         View=%view{ascii} apt-cache show `echo %p | sed 's/\([0-9a-z.-]*\).*/\1/'`
 
 # ISO9660
 regex/\.([iI][sS][oO])$
-	Open=%cd %p#iso9660
+	Open=%cd %p/iso9660://
 	View=%view{ascii} isoinfo -l -i %f
 
 # 7zip archives (they are not man pages)
 regex/\.(7z|7Z)$
-	Open=%cd %p#u7z
+	Open=%cd %p/u7z://
 	View=%view{ascii} 7za l %f 2>/dev/null
 
 # Mailboxes
 type/^ASCII\ mail\ text
-	Open=%cd %p#mailfs
+	Open=%cd %p/mailfs://
 
 
 ### Sources ###
@@ -574,7 +574,7 @@ regex/\.(rexx?|cmd)$
 
 # Disk images for Commodore computers (VIC20, C64, C128)
 regex/\.(d64|D64)$
-	Open=%cd %p#uc1541
+	Open=%cd %p/uc1541://
 	View=%view{ascii} c1541 %f -list
 	Extract=c1541 %f -extract
 
@@ -595,25 +595,25 @@ regex/\.(lyx|LYX)$
 
 # ace
 regex/\.(ace|ACE)$
-	Open=%cd %p#uace
+	Open=%cd %p/uace://
 	View=%view{ascii} unace l %f
 	Extract=unace x %f
 
 # arc
 regex/\.(arc|ARC)$
-	Open=%cd %p#uarc
+	Open=%cd %p/uarc://
 	View=%view{ascii} arc l %f
 	Extract=arc x %f '*'
 	Extract (with flags)=I=%{Enter any Arc flags:}; if test -n "$I"; then arc x $I %f; fi
 
 # zip
 type/^([Zz][Ii][Pp])\ archive
-	Open=%cd %p#uzip
+	Open=%cd %p/uzip://
 	View=%view{ascii} unzip -v %f
 
 # zoo
 regex/\.([Zz][Oo][Oo])$
-	Open=%cd %p#uzoo
+	Open=%cd %p/uzoo://
 	View=%view{ascii} zoo l %f
 
 # gzip
