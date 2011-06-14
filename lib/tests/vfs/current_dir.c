@@ -109,6 +109,39 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+START_TEST (set_up_current_dir_url)
+{
+    static struct vfs_s_subclass test_subclass;
+    static struct vfs_class vfs_test_ops;
+    char buffer[MC_MAXPATHLEN];
+
+    test_subclass.flags = VFS_S_REMOTE;
+    vfs_s_init_class (&vfs_test_ops, &test_subclass);
+
+    vfs_test_ops.name = "testfs";
+    vfs_test_ops.flags = VFSF_NOLINKS;
+    vfs_test_ops.prefix = "test:";
+    vfs_test_ops.chdir = test_chdir;
+
+    vfs_register_class (&vfs_test_ops);
+
+    cd_and_check ("/dev/some.file/test://bla-bla", "/dev/some.file/#test:bla-bla");
+
+    cd_and_check ("..", "/dev");
+
+    cd_and_check ("..", "/");
+
+    cd_and_check ("..", "/");
+
+    test_subclass.flags &= ~VFS_S_REMOTE;
+
+    cd_and_check ("/dev/some.file/test://bla-bla", "/dev/some.file/#test/bla-bla");
+
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -122,6 +155,7 @@ main (void)
 
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, set_up_current_dir);
+    tcase_add_test (tc_core, set_up_current_dir_url);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

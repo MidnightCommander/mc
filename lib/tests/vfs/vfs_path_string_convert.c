@@ -52,7 +52,6 @@ setup (void)
     vfs_setup_work_dir ();
 
 
-    test_subclass1.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
 
     vfs_test_ops1.name = "testfs1";
@@ -60,6 +59,7 @@ setup (void)
     vfs_test_ops1.prefix = "test1";
     vfs_register_class (&vfs_test_ops1);
 
+    test_subclass2.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
     vfs_test_ops2.name = "testfs2";
     vfs_test_ops2.prefix = "test2";
@@ -281,6 +281,29 @@ START_TEST (test_vfs_path_encoding_at_end)
 END_TEST
 /* --------------------------------------------------------------------------------------------- */
 
+#undef ETALON_PATH_STR
+#define ETALON_PATH_STR "/#test1/bla-bla/some/path/#test2:user:passwd@some.host:1234/bla-bla/some/path/#test3/111/22/33"
+#define INPUT_PATH_STR "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33"
+START_TEST (test_vfs_path_from_to_string_uri)
+{
+    vfs_path_t *vpath;
+    size_t vpath_len;
+    char *result;
+    vpath = vfs_path_from_str (INPUT_PATH_STR);
+
+    vpath_len = vfs_path_elements_count(vpath);
+    fail_unless(vpath_len == 4, "vpath length should be 4 (actial: %d)",vpath_len);
+
+    result = vfs_path_to_str(vpath);
+    fail_unless(strcmp(ETALON_PATH_STR, result) == 0, "\nexpected(%s)\ndoesn't equal to actual(%s)", ETALON_PATH_STR, result);
+    g_free(result);
+
+    vfs_path_free(vpath);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -298,6 +321,7 @@ main (void)
     tcase_add_test (tc_core, test_vfs_path_from_to_partial_string_by_class);
     tcase_add_test (tc_core, test_vfs_path_from_to_string_encoding);
     tcase_add_test (tc_core, test_vfs_path_encoding_at_end);
+    tcase_add_test (tc_core, test_vfs_path_from_to_string_uri);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

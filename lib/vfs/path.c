@@ -39,6 +39,7 @@
 
 #include "vfs.h"
 #include "utilvfs.h"
+#include "xdirentry.h"
 #include "path.h"
 
 extern GPtrArray *vfs__classes_list;
@@ -46,6 +47,8 @@ extern GPtrArray *vfs__classes_list;
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
+
+#define URL_DELIMITER "://"
 
 /*** file scope type declarations ****************************************************************/
 
@@ -370,6 +373,161 @@ vfs_get_class_by_name (const char *class_name)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Check if path string contain URL-like elements
+ *
+ * @param path_str path
+ *
+ * @return TRUE if path is deprecated or FALSE otherwise
+ */
+
+static gboolean
+vfs_path_is_str_path_deprecated (const char *path_str)
+{
+    return strstr (path_str, URL_DELIMITER) == NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Split path string to path elements by deprecated algorithm.
+ *
+ * @param path_str VFS-path
+ *
+ * @return pointer to newly created vfs_path_t object with filled path elements array.
+*/
+
+static vfs_path_t *
+vfs_path_from_str_deprecated_parser (char *path)
+{
+    vfs_path_t *vpath;
+    vfs_path_element_t *element;
+    struct vfs_class *class;
+    const char *local, *op;
+
+    vpath = vfs_path_new ();
+
+    while ((class = _vfs_split_with_semi_skip_count (path, &local, &op, 0)) != NULL)
+    {
+        char *url_params;
+        element = g_new0 (vfs_path_element_t, 1);
+        element->class = class;
+        if (local == NULL)
+            local = "";
+        element->path = vfs_translate_path_n (local);
+
+        element->encoding = vfs_get_encoding (local);
+        element->dir.converter = INVALID_CONV;
+
+        url_params = strchr (op, ':');  /* skip VFS prefix */
+        if (url_params != NULL)
+        {
+            *url_params = '\0';
+            url_params++;
+            vfs_path_url_split (element, url_params);
+        }
+
+        if (*op != '\0')
+            element->vfs_prefix = g_strdup (op);
+
+        vpath->path = g_list_prepend (vpath->path, element);
+    }
+    if (path[0] != '\0')
+    {
+        element = g_new0 (vfs_path_element_t, 1);
+        element->class = g_ptr_array_index (vfs__classes_list, 0);
+        element->path = vfs_translate_path_n (path);
+
+        element->encoding = vfs_get_encoding (path);
+        element->dir.converter = INVALID_CONV;
+        vpath->path = g_list_prepend (vpath->path, element);
+    }
+
+    return vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Split path string to path elements by URL algorithm.
+ *
+ * @param path_str VFS-path
+ *
+ * @return pointer to newly created vfs_path_t object with filled path elements array.
+*/
+
+static vfs_path_t *
+vfs_path_from_str_uri_parser (char *path)
+{
+    vfs_path_t *vpath;
+    vfs_path_element_t *element;
+
+    char *url_delimiter;
+
+    vpath = vfs_path_new ();
+
+    while ((url_delimiter = g_strrstr (path, URL_DELIMITER)) != NULL)
+    {
+        char *vfs_prefix_start;
+        char *real_vfs_prefix_start = url_delimiter;
+        char *slash_pointer;
+        struct vfs_s_subclass *sub;
+
+        while (real_vfs_prefix_start > path && *(real_vfs_prefix_start) != PATH_SEP)
+            real_vfs_prefix_start--;
+        vfs_prefix_start = real_vfs_prefix_start;
+
+        if (*(vfs_prefix_start) == PATH_SEP)
+            vfs_prefix_start += 1;
+        *(url_delimiter + 1) = '\0';
+
+        element = g_new0 (vfs_path_element_t, 1);
+        element->class = vfs_prefix_to_class (vfs_prefix_start);
+        *url_delimiter = '\0';
+        element->vfs_prefix = g_strdup (vfs_prefix_start);
+
+        element->dir.converter = INVALID_CONV;
+
+        url_delimiter += 3;
+        sub = VFSDATA (element);
+        if (sub->flags & VFS_S_REMOTE)
+        {
+            slash_pointer = strchr (url_delimiter, PATH_SEP);
+            if (slash_pointer == NULL)
+            {
+                element->path = g_strdup ("");
+            }
+            else
+            {
+                element->path = vfs_translate_path_n (slash_pointer + 1);
+                element->encoding = vfs_get_encoding (slash_pointer);
+                *slash_pointer = '\0';
+            }
+            vfs_path_url_split (element, url_delimiter);
+        }
+        else
+        {
+            element->path = vfs_translate_path_n (url_delimiter);
+            element->encoding = vfs_get_encoding (url_delimiter);
+        }
+        vpath->path = g_list_prepend (vpath->path, element);
+
+        if (real_vfs_prefix_start > path && *(real_vfs_prefix_start) != PATH_SEP)
+            *real_vfs_prefix_start = '\0';
+        else
+            *(real_vfs_prefix_start + 1) = '\0';
+    }
+
+    if (path[0] != '\0')
+    {
+        element = g_new0 (vfs_path_element_t, 1);
+        element->class = g_ptr_array_index (vfs__classes_list, 0);
+        element->path = vfs_translate_path_n (path);
+        element->encoding = vfs_get_encoding (path);
+        element->dir.converter = INVALID_CONV;
+        vpath->path = g_list_prepend (vpath->path, element);
+    }
+
+    return vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -456,57 +614,20 @@ vfs_path_t *
 vfs_path_from_str (const char *path_str)
 {
     vfs_path_t *vpath;
-    vfs_path_element_t *element;
-    struct vfs_class *class;
-    const char *local, *op;
     char *path;
 
     if (path_str == NULL)
         return NULL;
 
-    vpath = vfs_path_new ();
     path = vfs_canon (path_str);
     if (path == NULL)
-    {
-        vfs_path_free (vpath);
         return NULL;
-    }
 
-    while ((class = _vfs_split_with_semi_skip_count (path, &local, &op, 0)) != NULL)
-    {
-        char *url_params;
-        element = g_new0 (vfs_path_element_t, 1);
-        element->class = class;
-        if (local == NULL)
-            local = "";
-        element->path = vfs_translate_path_n (local);
+    if (vfs_path_is_str_path_deprecated (path))
+        vpath = vfs_path_from_str_deprecated_parser (path);
+    else
+        vpath = vfs_path_from_str_uri_parser (path);
 
-        element->encoding = vfs_get_encoding (local);
-        element->dir.converter = INVALID_CONV;
-
-        url_params = strchr (op, ':');  /* skip VFS prefix */
-        if (url_params != NULL)
-        {
-            *url_params = '\0';
-            url_params++;
-            vfs_path_url_split (element, url_params);
-        }
-
-        if (*op != '\0')
-            element->vfs_prefix = g_strdup (op);
-
-        vpath->path = g_list_prepend (vpath->path, element);
-    }
-    if (path[0] != '\0')
-    {
-        element = g_new0 (vfs_path_element_t, 1);
-        element->class = g_ptr_array_index (vfs__classes_list, 0);
-        element->path = vfs_translate_path_n (path);
-
-        element->encoding = vfs_get_encoding (path);
-        element->dir.converter = INVALID_CONV;
-        vpath->path = g_list_prepend (vpath->path, element);
-    }
     g_free (path);
 
     return vpath;
@@ -696,8 +817,8 @@ vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /** Return VFS class for the given prefix */
+
 struct vfs_class *
 vfs_prefix_to_class (const char *prefix)
 {
@@ -722,7 +843,6 @@ vfs_prefix_to_class (const char *prefix)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /**
  * Check if need cleanup charset converter for vfs_path_element_t
  *
