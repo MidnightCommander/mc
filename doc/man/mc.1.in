@@ -1473,7 +1473,7 @@ description.
 .\"NODE "    Extension File Edit"
 .SH "    Extension File Edit"
 This will invoke your editor on the file
-.IR ~/.local/share/mc/bindings .
+.IR ~/.local/share/mc/mc.ext .
 The format of this file following:
 .PP
 All lines starting with # or empty lines are thrown away.
@@ -4104,7 +4104,7 @@ The help file for the program.
 .IP
 The default system\-wide extensions file.
 .PP
-.I ~/.local/share/mc/bindings
+.I ~/.local/share/mc/mc.ext
 .IP
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.

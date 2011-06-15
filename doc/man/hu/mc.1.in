@@ -1289,7 +1289,7 @@ A cd belső parancs
 leírásánál.
 .\"NODE "    Extension File Edit"
 .SH "    Társítások"
-Ez az ~/.local/share/mc/bindings szerkesztéséhez segítségül fogja hívni a
+Ez az ~/.local/share/mc/mc.ext szerkesztéséhez segítségül fogja hívni a
 szövegszerkesztődet. A fájl formátuma a következő (a formátum a 3.0\-ás
 verzióval megváltozott):
 .PP
@@ -3033,7 +3033,7 @@ A program súgó fájlja.
 .IP
 Az alapértelmezett rendszerszintű kiterjesztés fájl.
 .PP
-.I ~/.local/share/mc/bindings
+.I ~/.local/share/mc/mc.ext
 .IP
 A felhasználó saját kiterjesztései, nézet beállítások és szerkesztési
 beállítások. Ezek felülbírálják a rendszerszintű fájl bejegyzéseit, ha

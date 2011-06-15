@@ -1355,7 +1355,7 @@ comando cd interno\&.
 .\"NODE "    Extension File Edit"
 .SH "    Editar el Archivo de Extensiones"
 Abre el archivo
-.I ~/.local/share/mc/bindings
+.I ~/.local/share/mc/mc.ext
 en nuestro editor. El administrador puede optar por editar, en su lugar,
 el archivo de extensiones del sistema
 .IR @prefix@/share/mc/mc.ext .
@@ -3666,7 +3666,7 @@ Archivo de ayuda.
 .IP
 Archivo de extensiones por defecto del sistema.
 .PP
-.I ~/.local/share/mc/bindings
+.I ~/.local/share/mc/mc.ext
 .IP
 Archivo de usuario de extensiones y configuración de visor y editor. Si
 está presente prevalece sobre el contenido de los archivos del sistema.

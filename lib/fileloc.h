@@ -52,7 +52,7 @@
 
 #define MC_BASHRC_FILE          "bashrc"
 #define MC_CONFIG_FILE          "ini"
-#define MC_FILEBIND_FILE        "bindings"
+#define MC_FILEBIND_FILE        "mc.ext"
 #define MC_FILEPOS_FILE         "filepos"
 #define MC_HISTORY_FILE         "history"
 #define MC_HOTLIST_FILE         "hotlist"

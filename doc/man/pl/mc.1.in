@@ -1085,7 +1085,7 @@ przemieszczanie.
 .PP
 .\"NODE "    Extension File Edit"
 .SH "    Edycja rozszerzeń pliów (Extension File Edit)"
-Ta komenda wywoła twój edytor na plik ~/.local/share/mc/bindings. Format tego pliku jest
+Ta komenda wywoła twój edytor na plik ~/.local/share/mc/mc.ext. Format tego pliku jest
 następujący (zmienił się on począwszy od wersji 3.0):
 .PP
 Wszystkie linie zaczynające się od #, lub puste, nie są brane pod uwagę.
@@ -2733,7 +2733,7 @@ Plik pomocy dla programu.
 .IP
 Standardowy plik rozszerzeń plików.
 .PP
-~/.local/share/mc/bindings
+~/.local/share/mc/mc.ext
 .IP
 Własny plik użytkownika, konfiguruje podgląd i edycje plików. Ma wyższy
 priorytet niż plik systemowy.

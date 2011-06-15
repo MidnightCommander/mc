@@ -1304,7 +1304,7 @@ comando cd interno\&.
 .\"NODE "    Extension File Edit"
 .SH "    Modifica file estensioni"
 Questo comando invocherà l'editor sul file 
-.IR ~/.local/share/mc/bindings . 
+.IR ~/.local/share/mc/mc.ext .
 Il fomato di questo file è il seguente (il formato è cambiato dalla 
 versione 3.0):
 .PP
@@ -3058,7 +3058,7 @@ Il file di aiuto per il programma.
 .IP
 Il file delle estensioni di sistema predefinito.
 .PP
-.I ~/.local/share/mc/bindings
+.I ~/.local/share/mc/mc.ext
 .IP
 Le estensioni dell'utente, la configurazione del visualizzatore e
 dell'editor di file. Se presenti, questi file si sovrappongono ai file di 
