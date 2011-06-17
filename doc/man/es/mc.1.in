@@ -2703,7 +2703,7 @@ El sistema de archivos tar y los archivos tar comprimidos pueden consultarse usa
 el comando chdir. Para mostrar en el panel el contenido de un archivo tar, cambiamos
 de directorio empleando la siguiente sintaxis:
 .PP
-.I /archivo.tar#utar/[directorio\-dentro\-tar]
+.I /archivo.tar/utar://[directorio\-dentro\-tar]
 .PP
 El archivo mc.ext también ofrece un atajo para los archivos tar, esto quiere decir
 que normalmente basta con apuntar a un archivo tar y pulsar Intro para entrar en el
@@ -2716,8 +2716,8 @@ para obtener más detalles sobre cómo hacer esto.
 Ejemplos:
 .PP
 .nf
-    mc\-3.0.tar.gz#utar/mc\-3.0/vfs
-    /ftp/GCC/gcc\-2.7.0.tar#utar
+    mc\-3.0.tar.gz/utar://mc\-3.0/vfs
+    /ftp/GCC/gcc\-2.7.0.tar/utar://
 .fi
 .PP
 En este último se indica la ruta completa hasta el archivo tar.
@@ -2732,7 +2732,7 @@ o simplemente emplear la orden
 como cuando cambiamos habitualmente de directorio, pero indicando
 como ruta:
 .PP
-.I /#ftp:[!][usuario[:clave]@]maquina[:puerto][dir\-remoto]
+.I ftp://[!][usuario[:clave]@]maquina[:puerto][dir\-remoto]
 .PP
 Los elementos
 .IR usuario ,
@@ -2759,12 +2759,12 @@ delante del nombre de la máquina.
 Ejemplos:
 .PP
 .nf
-    /#ftp:ftp.nuclecu.unam.mx/linux/local
-    /#ftp:tsx\-11.mit.edu/pub/linux/packages
-    /#ftp:!detras.barrera.edu/pub
-    /#ftp:guest@pcremoto.com:40/pub
-    /#ftp:miguel:xxx@servidor/pub
-    /#ftp:ftp.um.es/pub
+    ftp://ftp.nuclecu.unam.mx/linux/local
+    ftp://tsx\-11.mit.edu/pub/linux/packages
+    ftp://!detras.barrera.edu/pub
+    ftp://guest@pcremoto.com:40/pub
+    ftp://miguel:xxx@servidor/pub
+    ftp://ftp.um.es/pub
 .fi
 .PP
 La opciones de FTPfs se encuentran entre las opciones de configuración del
@@ -2782,7 +2782,7 @@ o permitir la conexión a una shell de tipo bash.
 Para conectar con la máquina remota basta cambiar de directorio a un
 directorio virtual cuyo nombre sea de la forma:
 .PP
-.I /#sh:[usuario@]maquina[:opciones]/[directorio\-remoto]
+.I sh://[usuario@]maquina[:opciones]/[directorio\-remoto]
 .PP
 Los elementos
 .IR usuario ,
@@ -2805,9 +2805,9 @@ remota.
 Ejemplos:
 .PP
 .nf
-    /#sh:solorsh.es:r/linux/local
-    /#sh:pepe@quiero.comprension.edu:C/privado
-    /#sh:pepe@sincomprimir.ssh.edu/privado
+    sh://solorsh.es:r/linux/local
+    sh://pepe@quiero.comprension.edu:C/privado
+    sh://pepe@sincomprimir.ssh.edu/privado
 .fi
 
 .\"NODE "  SMB File System"
@@ -2819,7 +2819,7 @@ se puede emplear la "Conexión por SMB..." (accesible desde la barra de
 menús) o bien cambiar de directorio a un directorio virtual cuyo nombre
 sea de la forma:
 .PP
-.I /#smb:[usuario@]maquina[/recurso][/directorio\-remoto]
+.I smb://[usuario@]maquina[/recurso][/directorio\-remoto]
 .PP
 Los elementos
 .IR usuario ,
@@ -2836,9 +2836,9 @@ se pueden especificar en un cuadro de diálogo.
 Ejemplos:
 .PP
 .nf
-    /#smb:maquina/Compartido
-    /#smb:otramaquina
-    /#smb:invitado@maquina/publico/leyes
+    smb://maquina/Compartido
+    smb://otramaquina
+    smb://invitado@maquina/publico/leyes
 .fi
 
 .\"NODE "  Undelete File System"
@@ -2852,14 +2852,14 @@ restaurar todos los archivos borrados en un ext2fs y proporciona
 la extracción selectiva de archivos en una partición regular.
 .PP
 Para usar este sistema de archivos, tendremos que hacer un chdir a un nombre de archivo especial
-formado por el prefijo "/#undel" y el nombre de archivo donde se encuentra el
+formado por el prefijo "/undel://" y el nombre de archivo donde se encuentra el
 sistema de archivos actual.
 .PP
 Por ejemplo, para recuperar archivos borrados en la segunda partición del
 primer disco scsi en Linux, usaríamos el siguiente nombre de ruta:
 .PP
 .nf
-    /#undel:sda2
+    undel://sda2
 .fi
 .PP
 Esto le llevaría un tiempo a undelfs para cargar la información
@@ -2876,7 +2876,7 @@ Los sistemas de archivos Extfs son de dos tipos:
 1. Sistemas de archivos autónomos, que no están asociados a ningún
 archivo existente. Representan algún tipo de información relacionada con
 el sistema en forma de árbol de directorios. Se accede a ellos ejecutando
-.RI ' "cd #nombrefs" '
+.RI ' "cd nombrefs://" '
 donde nombrefs es el nombre corto que identifica el extfs (ver más
 adelante).  Ejemplos de éstos son audio (lista de pistas de sonido en
 el CD) o apt (lista de paquetes de tipo Debian en el sistema).
@@ -2884,7 +2884,7 @@ el CD) o apt (lista de paquetes de tipo Debian en el sistema).
 Por ejemplo, para listar las pistas de música del CD, escribir
 .PP
 .nf
-  cd #audio
+  cd audio://
 .fi
 .PP
 2. Sistemas de archivos en un archivo (como rpm, patchfs y más), que
@@ -2893,7 +2893,7 @@ Puede tratarse de archivos reales empaquetados o comprimidos en un archivo
 (urar, rpm) o archivos virtuales, como puede ser el caso de mensajes
 en un archivo de correo electrónico (mailfs) o partes de un archivo de
 modificaciones o parches (patchfs). Para acceder a ellos se añade
-.RI ' #nombrefs '
+.RI ' nombrefs:// '
 al nombre del archivo a abrir. Este archivo podría él mismo estar en
 otro sistema de archivos virtual.
 .PP
@@ -2901,7 +2901,7 @@ Por ejemplo, para listar los contenidos de un archivo documentos.zip
 comprimido hay que escribir
 .PP
 .nf
-  cd documentos.zip#uzip
+  cd documentos.zip/uzip://
 .fi
 .PP
 En muchos aspectos, se puede tratar un sistema de archivos externo como
@@ -2915,57 +2915,57 @@ archivos externos:
 .TP
 .B a
 acceder a un disquete DOS/Windows 'A:'
-.RI ( "cd #a" ).
+.RI ( "cd a://" ).
 .TP
 .B apt
 monitor del sistema de gestión de paquetes APT de Debian
-.RI ( "cd #apt" ).
+.RI ( "cd apt://" ).
 .TP
 .B audio
 acceso y audición de CDs
-.RI ( "cd #audio"
+.RI ( "cd audio://"
 o
-.IR "cd dispositivo#audio" ).
+.IR "cd dispositivo/audio://" ).
 .TP
 .B bpp
 paquete de la distribución GNU/Linux Bad Penguin
-.RI ( "cd archivo.bpp#bpp" ).
+.RI ( "cd archivo.bpp/bpp://" ).
 .TP
 .B deb
 paquete de la distribución GNU/Linux Debian
-.RI ( "cd archivo.deb#deb" ).
+.RI ( "cd archivo.deb/deb://" ).
 .TP
 .B dpkg
 paquetes instalados en Debian GNU/Linux
-.RI ( "cd #deb" ).
+.RI ( "cd deb://" ).
 .TP
 .B hp48
 ver o copiar archivos a/desde una calculadora HP48
-.RI ( "cd #hp48" ).
+.RI ( "cd hp48://" ).
 .TP
 .B lslR
 navegación en listados lslR empleados en bastantes sitios FTP
-.RI ( "cd filename#lslR" ).
+.RI ( "cd filename/lslR://" ).
 .TP
 .B mailfs
 soporte para archivos de correo electrónico tipo mbox
-.RI ( "cd archivo_mbox#mailfs" ).
+.RI ( "cd archivo_mbox/mailfs://" ).
 .TP
 .B patchfs
 manipulación de archivos de cambios/parches tipo diff
-.RI ( "cd archivo#patchfs" ).
+.RI ( "cd archivo/patchfs://" ).
 .TP
 .B rpm
 paquete RPM
-.RI ( "cd archivo#rpm" ).
+.RI ( "cd archivo/rpm://" ).
 .TP
 .B rpms
 base de datos de paquetes RPM instalados
-.RI ( "cd #rpms" ).
+.RI ( "cd rpms://" ).
 .TP
 .B ulha, urar, uzip, uzoo, uar, uha
 herramientas de compresión
-.RI ( "cd archivo#xxxx"
+.RI ( "cd archivo/xxxx://"
 siendo xxxx uno de estos:
 .IR ulha ,
 .IR urar ,
@@ -2984,7 +2984,7 @@ paquetes Debian:
 .PP
 .nf
   regex/\.deb$
-          Open=%cd %p#deb
+          Open=%cd %p/deb://
 .fi
 .\"NODE "Colors"
 .SH "Colores"
