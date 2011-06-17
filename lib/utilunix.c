@@ -1016,3 +1016,55 @@ get_user_permissions (struct stat *st)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Build filename from arguments.
+ * Like to g_build_filename(), but respect VFS_PATH_URL_DELIMITER
+ */
+
+char *
+mc_build_filename (const char *first_element, ...)
+{
+    va_list args;
+    const char *element = first_element;
+    GString *path;
+    char *ret;
+
+    if (element == NULL)
+        return NULL;
+
+    path = g_string_new ("");
+    va_start (args, first_element);
+
+    do
+    {
+        char *tmp_element;
+        size_t len;
+        const char *start;
+
+        tmp_element = g_strdup (element);
+
+        element = va_arg (args, char *);
+
+        canonicalize_pathname (tmp_element);
+        len = strlen (tmp_element);
+        start = (tmp_element[0] == PATH_SEP) ? tmp_element + 1 : tmp_element;
+
+        g_string_append (path, start);
+        if (tmp_element[len - 1] != PATH_SEP && element != NULL)
+            g_string_append_c (path, PATH_SEP);
+
+        g_free (tmp_element);
+    }
+    while (element != NULL);
+
+    va_end (args);
+
+    g_string_prepend_c (path, PATH_SEP);
+
+    ret = g_string_free (path, FALSE);
+    canonicalize_pathname (ret);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */

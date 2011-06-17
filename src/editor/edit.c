@@ -4275,7 +4275,7 @@ edit_unlock_file (WEdit * edit)
     char *fullpath;
     unsigned int ret;
 
-    fullpath = g_build_filename (edit->dir, edit->filename, (char *) NULL);
+    fullpath = mc_build_filename (edit->dir, edit->filename, (char *) NULL);
     ret = unlock_file (fullpath);
     g_free (fullpath);
 
@@ -4290,7 +4290,7 @@ edit_lock_file (WEdit * edit)
     char *fullpath;
     unsigned int ret;
 
-    fullpath = g_build_filename (edit->dir, edit->filename, (char *) NULL);
+    fullpath = mc_build_filename (edit->dir, edit->filename, (char *) NULL);
     ret = lock_file (fullpath);
     g_free (fullpath);
 

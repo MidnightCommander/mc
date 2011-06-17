@@ -2547,7 +2547,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         if (g_path_is_absolute (source))
             source_with_path = g_strdup (source);
         else
-            source_with_path = g_build_filename (panel->cwd, source, (char *) NULL);
+            source_with_path = mc_build_filename (panel->cwd, source, (char *) NULL);
 #endif /* WITH_FULL_PATHS */
 
         if (panel_operate_init_totals (operation, panel, source_with_path, ctx) == FILE_CONT)
@@ -2641,7 +2641,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 if (g_path_is_absolute (source))
                     source_with_path = g_strdup (source);
                 else
-                    source_with_path = g_build_filename (panel->cwd, source, (char *) NULL);
+                    source_with_path = mc_build_filename (panel->cwd, source, (char *) NULL);
 #endif /* WITH_FULL_PATHS */
 
                 if (operation == OP_DELETE)

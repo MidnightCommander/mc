@@ -492,7 +492,7 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     {
         char *fullpath;
 
-        fullpath = g_build_filename (edit->dir, prev_filename, (char *) NULL);
+        fullpath = mc_build_filename (edit->dir, prev_filename, (char *) NULL);
         unlock_file (fullpath);
         g_free (fullpath);
     }
@@ -3193,7 +3193,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
         g_free (path);
         path = ptr;
         g_free (tagfile);
-        tagfile = g_build_filename (path, TAGS_NAME, (char *) NULL);
+        tagfile = mc_build_filename (path, TAGS_NAME, (char *) NULL);
         if (exist_file (tagfile))
             break;
     }

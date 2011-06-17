@@ -225,7 +225,7 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
                 if (num < MAX_DEFINITIONS - 1)
                 {
                     def_hash[num].filename_len = strlen (filename);
-                    def_hash[num].fullpath = g_build_filename (start_path, filename, (char *) NULL);
+                    def_hash[num].fullpath = mc_build_filename (start_path, filename, (char *) NULL);
 
                     canonicalize_pathname (def_hash[num].fullpath);
                     def_hash[num].filename = g_strdup (filename);

@@ -437,7 +437,7 @@ mcview_lock_file (mcview_t * view)
     char *fullpath;
     gboolean ret;
 
-    fullpath = g_build_filename (view->workdir, view->filename, (char *) NULL);
+    fullpath = mc_build_filename (view->workdir, view->filename, (char *) NULL);
     ret = lock_file (fullpath);
     g_free (fullpath);
 
@@ -452,7 +452,7 @@ mcview_unlock_file (mcview_t * view)
     char *fullpath;
     gboolean ret;
 
-    fullpath = g_build_filename (view->workdir, view->filename, (char *) NULL);
+    fullpath = mc_build_filename (view->workdir, view->filename, (char *) NULL);
     ret = unlock_file (fullpath);
     g_free (fullpath);
 
