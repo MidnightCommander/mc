@@ -5,7 +5,8 @@ LIBS=@CHECK_LIBS@  $(top_builddir)/lib/libmc.la
 
 TESTS = \
 	library_independ \
-	serialize
+	serialize \
+	x_basename
 
 check_PROGRAMS = $(TESTS)
 
@@ -14,3 +15,6 @@ library_independ_SOURCES = \
 
 serialize_SOURCES = \
 	serialize.c
+
+x_basename_SOURCES = \
+	x_basename.c

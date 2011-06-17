@@ -668,16 +668,29 @@ extract_line (const char *s, const char *top)
 const char *
 x_basename (const char *s)
 {
-    const char *where;
+    const char *url_delim, *path_sep;
 
-    where = g_strrstr (s, VFS_PATH_URL_DELIMITER);
-    if (where == NULL)
-        return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
+    url_delim = g_strrstr (s, VFS_PATH_URL_DELIMITER);
+    path_sep = strrchr (s, PATH_SEP);
 
-    while (--where > s && *where != PATH_SEP);
-    while (--where > s && *where != PATH_SEP);
+    if (url_delim == NULL
+        || url_delim < path_sep - strlen (VFS_PATH_URL_DELIMITER)
+        || url_delim - s + strlen (VFS_PATH_URL_DELIMITER) < strlen (s))
+    {
+        /* avoid trailing PATH_SEP, if present */
+        if (s[strlen (s) - 1] == PATH_SEP)
+        {
+            while (--path_sep > s && *path_sep != PATH_SEP);
+            return (path_sep != s) ? path_sep + 1 : s;
+        }
+        else
+            return (path_sep != NULL) ? path_sep + 1 : s;
+    }
 
-    return (where == s ) ? s: where + 1;
+    while (--url_delim > s && *url_delim != PATH_SEP);
+    while (--url_delim > s && *url_delim != PATH_SEP);
+
+    return (url_delim == s) ? s : url_delim + 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
