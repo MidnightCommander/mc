@@ -64,4 +64,10 @@ vfs_path_t *vfs_path_deserialize (const char *data, GError ** error);
 
 /*** inline functions ****************************************************************************/
 
+static inline gboolean
+vfs_path_element_valid (const vfs_path_element_t * element)
+{
+    return (element != NULL && element->class != NULL);
+}
+
 #endif

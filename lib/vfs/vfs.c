@@ -401,7 +401,7 @@ vfs_file_class_flags (const vfs_path_t * vpath)
 {
     vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (path_element == NULL)
+    if (!vfs_path_element_valid (path_element))
         return VFSF_UNKNOWN;
 
     return path_element->class->flags;
