@@ -261,7 +261,7 @@ is_in_linklist (struct link *lp, const char *path, struct stat *sb)
  * and a hardlink was succesfully made
  */
 
-static int
+static gboolean
 check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 {
     struct link *lp;
@@ -1359,7 +1359,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     if (!ctx->do_append)
     {
         /* Check the hardlinks */
-        if (!ctx->follow_links && sb.st_nlink > 1 && check_hardlinks (src_path, dst_path, &sb) == 1)
+        if (!ctx->follow_links && sb.st_nlink > 1 && check_hardlinks (src_path, dst_path, &sb))
         {
             /* We have made a hardlink - no more processing is necessary */
             return FILE_CONT;
@@ -1753,7 +1753,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     /* FIXME: In this step we should do something
        in case the destination already exist */
     /* Check the hardlinks */
-    if (ctx->preserve && cbuf.st_nlink > 1 && check_hardlinks (s, d, &cbuf) == 1)
+    if (ctx->preserve && cbuf.st_nlink > 1 && check_hardlinks (s, d, &cbuf))
     {
         /* We have made a hardlink - no more processing is necessary */
         goto ret_fast;

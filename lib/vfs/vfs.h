@@ -232,14 +232,10 @@ char *vfs_get_current_dir (void);
 vfs_path_t *vfs_get_raw_current_dir (void);
 void vfs_set_raw_current_dir (const vfs_path_t * vpath);
 
-
 gboolean vfs_current_is_local (void);
 gboolean vfs_file_is_local (const vfs_path_t * vpath);
 
 char *vfs_strip_suffix_from_filename (const char *filename);
-
-struct vfs_class *vfs_split (char *path, char **inpath, char **op);
-char *vfs_path (const char *path);
 
 vfs_class_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
 

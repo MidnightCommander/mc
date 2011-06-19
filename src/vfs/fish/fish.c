@@ -115,21 +115,6 @@ int fish_directory_timeout = 900;
 
 #define SUP ((fish_super_data_t *) super->data)
 
-#define PREFIX \
-    char buf[BUF_LARGE]; \
-    const char *crpath; \
-    char *rpath, *mpath; \
-    struct vfs_s_super *super; \
-    mpath = g_strdup (path); \
-    crpath = vfs_s_get_path_mangle (me, mpath, &super, 0); \
-    if (crpath == NULL) \
-    { \
-       g_free (mpath); \
-       return -1; \
-    } \
-    rpath = strutils_shell_escape (crpath); \
-    g_free (mpath)
-
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
