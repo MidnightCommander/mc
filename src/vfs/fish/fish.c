@@ -1171,11 +1171,11 @@ fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     struct vfs_s_super *super, *super2;
     vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
 
-    crpath1 = vfs_s_get_path_mangle (vpath1, &super, 0);
+    crpath1 = vfs_s_get_path (vpath1, &super, 0);
     if (crpath1 == NULL)
         return -1;
 
-    crpath2 = vfs_s_get_path_mangle (vpath2, &super2, 0);
+    crpath2 = vfs_s_get_path (vpath2, &super2, 0);
     if (crpath2 == NULL)
         return -1;
 
@@ -1205,11 +1205,11 @@ fish_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
     path_element = vfs_path_get_by_index (vpath1, -1);
 
-    crpath1 = vfs_s_get_path_mangle (vpath1, &super, 0);
+    crpath1 = vfs_s_get_path (vpath1, &super, 0);
     if (crpath1 == NULL)
         return -1;
 
-    crpath2 = vfs_s_get_path_mangle (vpath2, &super2, 0);
+    crpath2 = vfs_s_get_path (vpath2, &super2, 0);
     if (crpath2 == NULL)
         return -1;
 
@@ -1238,7 +1238,7 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     struct vfs_s_super *super;
     vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
 
-    crpath = vfs_s_get_path_mangle (vpath2, &super, 0);
+    crpath = vfs_s_get_path (vpath2, &super, 0);
     if (crpath == NULL)
         return -1;
     rpath = strutils_shell_escape (crpath);
@@ -1270,7 +1270,7 @@ fish_chmod (const vfs_path_t * vpath, int mode)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
+    crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
     rpath = strutils_shell_escape (crpath);
@@ -1314,7 +1314,7 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
         path_element = vfs_path_get_by_index (vpath, -1);
 
 
-        crpath = vfs_s_get_path_mangle (vpath, &super, 0);
+        crpath = vfs_s_get_path (vpath, &super, 0);
         if (crpath == NULL)
             return -1;
         rpath = strutils_shell_escape (crpath);
@@ -1346,7 +1346,7 @@ fish_unlink (const vfs_path_t * vpath)
     vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
+    crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
     rpath = strutils_shell_escape (crpath);
@@ -1373,7 +1373,7 @@ fish_exists (const vfs_path_t * vpath)
     vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
+    crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
     rpath = strutils_shell_escape (crpath);
@@ -1404,7 +1404,7 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
+    crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
     rpath = strutils_shell_escape (crpath);
@@ -1442,7 +1442,7 @@ fish_rmdir (const vfs_path_t * vpath)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    crpath = vfs_s_get_path_mangle (vpath, &super, 0);
+    crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
     rpath = strutils_shell_escape (crpath);

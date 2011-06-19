@@ -1958,7 +1958,7 @@ ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    rpath = vfs_s_get_path_mangle (vpath, &super, 0);
+    rpath = vfs_s_get_path (vpath, &super, 0);
     if (rpath == NULL)
         return -1;
 

@@ -1,4 +1,4 @@
-/* lib/vfs - test vfs_s_get_path_mangle() function
+/* lib/vfs - test vfs_s_get_path() function
 
    Copyright (C) 2011 Free Software Foundation, Inc.
 
@@ -120,14 +120,14 @@ vfs_die (const char *m)
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test_vfs_s_get_path_mangle)
+START_TEST (test_vfs_s_get_path)
 {
     struct vfs_s_super *archive;
 
     const char *result;
     vfs_path_t *vpath = vfs_path_from_str("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH);
 
-    result = vfs_s_get_path_mangle (vpath, &archive, 0);
+    result = vfs_s_get_path (vpath, &archive, 0);
 
     fail_unless(strcmp(ETALON_PATH, result) == 0,
         "expected(%s) doesn't equal to actual(%s)", ETALON_PATH, result);
@@ -154,12 +154,12 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_vfs_s_get_path_mangle);
+    tcase_add_test (tc_core, test_vfs_s_get_path);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "vfs_s_get_path_mangle.log");
+    srunner_set_log (sr, "vfs_s_get_path.log");
     srunner_run_all (sr, CK_NORMAL);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);

@@ -13,7 +13,7 @@ TESTS = \
 	vfs_path_string_convert \
 	vfs_prefix_to_class \
 	vfs_split \
-	vfs_s_get_path_mangle
+	vfs_s_get_path
 
 check_PROGRAMS = $(TESTS)
 
@@ -35,5 +35,5 @@ vfs_prefix_to_class_SOURCES = \
 vfs_path_string_convert_SOURCES = \
 	vfs_path_string_convert.c
 
-vfs_s_get_path_mangle_SOURCES = \
-	vfs_s_get_path_mangle.c
+vfs_s_get_path_SOURCES = \
+	vfs_s_get_path.c
