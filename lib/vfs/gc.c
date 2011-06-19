@@ -272,6 +272,7 @@ vfs_release_path (const char *dir)
     path_element = vfs_path_get_by_index (vpath, -1);
 
     vfs_stamp_create (path_element->class, vfs_getid (vpath));
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

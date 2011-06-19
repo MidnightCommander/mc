@@ -481,10 +481,17 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
         path_element = vfs_path_get_by_index (vpath, -1);
 
         if (path_element->class != vclass)
+        {
+            vfs_path_free (vpath);
             return FALSE;
+        }
 
         if (vfs_getid (vpath) != id)
+        {
+            vfs_path_free (vpath);
             return FALSE;
+        }
+        vfs_path_free (vpath);
     }
     return TRUE;
 }

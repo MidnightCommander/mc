@@ -451,6 +451,7 @@ mc_opendir (const char *dirname)
     if (info == NULL)
     {
         errno = path_element->class->opendir ? vfs_ferrno (path_element->class) : E_NOTSUPP;
+        vfs_path_free (vpath);
         return NULL;
     }
 
@@ -462,10 +463,11 @@ mc_opendir (const char *dirname)
     if (path_element->dir.converter == INVALID_CONV)
         path_element->dir.converter = str_cnv_from_term;
 
-    handle = vfs_new_handle (path_element->class, path_element);
+    handle = vfs_new_handle (path_element->class, vfs_path_element_clone (path_element));
 
     handlep = g_new (int, 1);
     *handlep = handle;
+    vfs_path_free (vpath);
     return (DIR *) handlep;
 }
 
@@ -726,6 +728,7 @@ mc_chdir (const char *path)
     if (result == -1)
     {
         errno = vfs_ferrno (path_element->class);
+        vfs_path_free (vpath);
         return -1;
     }
 
