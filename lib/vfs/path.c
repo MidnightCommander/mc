@@ -683,14 +683,19 @@ vfs_path_elements_count (const vfs_path_t * vpath)
 vfs_path_element_t *
 vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 {
+    vfs_path_element_t *element;
+
     if (vpath == NULL)
         return NULL;
 
     if (element_index < 0)
         element_index = vfs_path_elements_count (vpath) + element_index;
 
-    return g_list_nth_data (vpath->path, element_index);
+    element = g_list_nth_data (vpath->path, element_index);
+    if (element == NULL)
+        vfs_die ("vfs_path_get_by_index: incorrect index!");
 
+    return element;
 }
 
 /* --------------------------------------------------------------------------------------------- */
