@@ -24,11 +24,8 @@
 #include <config.h>
 
 #include <stdlib.h>             /* atoi() */
-#include <stdio.h>
-#include <string.h>
 
 #include <sys/types.h>
-#include <sys/stat.h>
 #include <unistd.h>
 
 #include "lib/global.h"
@@ -57,6 +54,17 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+/* don't use max() macro to avoid double call of str_term_width1() in widget width calculation */
+#undef max
+
+static int
+max (int a, int b)
+{
+    return a > b ? a : b;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
@@ -64,7 +72,7 @@ configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
     {
     case DLG_ACTION:
         /* message from "Single press" checkbutton */
-        if (sender != NULL && sender->id == 18)
+        if (sender != NULL && sender->id == 17)
         {
             const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
             Widget *w;
@@ -106,12 +114,11 @@ configure_box (void)
         N_("Alwa&ys")
     };
 
-    int pause_options_num = sizeof (pause_options) / sizeof (pause_options[0]);
+    int pause_options_num = G_N_ELEMENTS (pause_options);
 
     QuickWidget quick_widgets[] = {
         /* buttons */
         QUICK_BUTTON (38, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
-        QUICK_BUTTON (26, dlg_width, dlg_height - 3, dlg_height, N_("&Save"), B_EXIT, NULL),
         QUICK_BUTTON (14, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
         /* other options */
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 12, dlg_height, N_("A&uto save setup"),
@@ -159,7 +166,7 @@ configure_box (void)
         QUICK_END
     };
 
-    const size_t qw_num = sizeof (quick_widgets) / sizeof (quick_widgets[0]) - 1;
+    const size_t qw_num = G_N_ELEMENTS (quick_widgets) - 1;
 
     QuickDialog Quick_input = {
         dlg_width, dlg_height, -1, -1,
@@ -167,37 +174,48 @@ configure_box (void)
         quick_widgets, configure_callback, TRUE
     };
 
-    int qd_result;
-
-    int b0_len, b1_len, b2_len;
+    int b0_len, b1_len;
     int b_len, c_len, g_len, l_len;
     size_t i;
 
 #ifdef ENABLE_NLS
-    {
-        for (i = 0; i < qw_num; i++)
-            if (i < 3)
-                /* buttons */
-                quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
-            else if ((i == 13) || (i == 15) || (i == 19) || (i == 24))
-                /* groupboxes */
-                quick_widgets[i].u.groupbox.title = _(quick_widgets[i].u.groupbox.title);
-            else if (i == 14)
+    for (i = 0; i < qw_num; i++)
+        switch (i)
+        {
+        case 0:
+        case 1:
+            /* buttons */
+            quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
+            break;
+        case 12:
+        case 14:
+        case 18:
+        case 23:
+            /* groupboxes */
+            quick_widgets[i].u.groupbox.title = _(quick_widgets[i].u.groupbox.title);
+            break;
+        case 13:
             {
                 /* radio button */
                 size_t j;
                 for (j = 0; j < (size_t) pause_options_num; j++)
                     pause_options[j] = _(pause_options[j]);
             }
-            else if (i == 17)
-                /* label */
-                quick_widgets[i].u.label.text = _(quick_widgets[i].u.label.text);
-            else if (i != 16)
-                /* checkboxes */
-                quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+            break;
+        case 15:
+            /* input line */
+            break;
+        case 16:
+            /* label */
+            quick_widgets[i].u.label.text = _(quick_widgets[i].u.label.text);
+            break;
+        default:
+            /* checkboxes */
+            quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+            break;
+        }
 
-        Quick_input.title = _(Quick_input.title);
-    }
+    Quick_input.title = _(Quick_input.title);
 #endif /* ENABLE_NLS */
 
     /* calculate widget and dialog widths */
@@ -205,26 +223,25 @@ configure_box (void)
     dlg_width = max (dlg_width, str_term_width1 (Quick_input.title) + 4);
     /* buttons */
     b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
-    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 3;
-    b2_len = str_term_width1 (quick_widgets[2].u.button.text) + 5;
-    b_len = b0_len + b1_len + b2_len + 2;
+    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 5;
+    b_len = b0_len + b1_len + 1;
 
     /* checkboxes within groupboxes */
     c_len = 0;
-    for (i = 3; i < 24; i++)
-        if ((i < 13) || (i == 18) || (i > 19))
+    for (i = 2; i < 23; i++)
+        if ((i < 12) || (i == 17) || (i > 18))
             c_len = max (c_len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 3);
     /* radiobuttons */
     for (i = 0; i < (size_t) pause_options_num; i++)
         c_len = max (c_len, str_term_width1 (pause_options[i]) + 3);
     /* label + input */
-    l_len = str_term_width1 (quick_widgets[17].u.label.text);
+    l_len = str_term_width1 (quick_widgets[16].u.label.text);
     c_len = max (c_len, l_len + 1 + 8);
     /* groupboxes */
-    g_len = max (c_len + 2, str_term_width1 (quick_widgets[24].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[19].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[15].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[13].u.groupbox.title) + 4);
+    g_len = max (c_len + 2, str_term_width1 (quick_widgets[23].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[18].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[14].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[12].u.groupbox.title) + 4);
     /* dialog width */
     Quick_input.xlen = max (dlg_width, g_len * 2 + 9);
     Quick_input.xlen = max (Quick_input.xlen, b_len + 2);
@@ -236,43 +253,33 @@ configure_box (void)
         quick_widgets[i].x_divisions = Quick_input.xlen;
 
     /* groupboxes */
-    quick_widgets[15].u.groupbox.width =
-        quick_widgets[19].u.groupbox.width =
-        quick_widgets[24].u.groupbox.width = Quick_input.xlen / 2 - 4;
-    quick_widgets[13].u.groupbox.width = Quick_input.xlen / 2 - 3;
+    quick_widgets[14].u.groupbox.width =
+        quick_widgets[18].u.groupbox.width =
+        quick_widgets[23].u.groupbox.width = Quick_input.xlen / 2 - 4;
+    quick_widgets[12].u.groupbox.width = Quick_input.xlen / 2 - 3;
 
     /* input */
-    quick_widgets[16].relative_x = quick_widgets[17].relative_x + l_len + 1;
-    quick_widgets[16].u.input.len = quick_widgets[19].u.groupbox.width - l_len - 4;
+    quick_widgets[15].relative_x = quick_widgets[16].relative_x + l_len + 1;
+    quick_widgets[15].u.input.len = quick_widgets[18].u.groupbox.width - l_len - 4;
 
     /* right column */
-    quick_widgets[13].relative_x = Quick_input.xlen / 2;
-    for (i = 3; i < 13; i++)
-        quick_widgets[i].relative_x = quick_widgets[13].relative_x + 2;
+    quick_widgets[12].relative_x = Quick_input.xlen / 2;
+    for (i = 2; i < 12; i++)
+        quick_widgets[i].relative_x = quick_widgets[12].relative_x + 2;
 
     /* buttons */
-    quick_widgets[2].relative_x = (Quick_input.xlen - b_len) / 2;
-    quick_widgets[1].relative_x = quick_widgets[2].relative_x + b2_len + 1;
-    quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + 1;
+    quick_widgets[1].relative_x = (Quick_input.xlen - b_len) / 3;
+    quick_widgets[0].relative_x = 2 * quick_widgets[1].relative_x + b1_len + 1;
 
     g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
 
     if (!old_esc_mode)
-        quick_widgets[16].options = quick_widgets[17].options = W_DISABLED;
+        quick_widgets[15].options = quick_widgets[16].options = W_DISABLED;
 
-    qd_result = quick_dialog (&Quick_input);
-
-    if ((qd_result == B_ENTER) || (qd_result == B_EXIT))
+    if (quick_dialog (&Quick_input) == B_ENTER)
         old_esc_mode_timeout = atoi (time_out_new);
 
     g_free (time_out_new);
-
-    /* Save button */
-    if (qd_result == B_EXIT)
-    {
-        save_config ();
-        mc_config_save_file (mc_main_config, NULL);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -295,7 +302,6 @@ panel_options_box (void)
     QuickWidget quick_widgets[] = {
         /* buttons */
         QUICK_BUTTON (38, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
-        QUICK_BUTTON (26, dlg_width, dlg_height - 3, dlg_height, N_("&Save"), B_EXIT, NULL),
         QUICK_BUTTON (14, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
         /* quick search */
         QUICK_RADIO (dlg_width / 2 + 2, dlg_width, 12, dlg_height, QSEARCH_NUM, qsearch_options,
@@ -353,34 +359,41 @@ panel_options_box (void)
         quick_widgets, NULL, TRUE
     };
 
-    int qd_result;
-
-    int b0_len, b1_len, b2_len;
+    int b0_len, b1_len;
     int b_len, c_len, g_len;
     size_t i;
 
 #ifdef ENABLE_NLS
-    {
-        for (i = 0; i < qw_num; i++)
-            if (i < 3)
-                /* buttons */
-                quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
-            else if (i == 3)
+    for (i = 0; i < qw_num; i++)
+        switch (i)
+        {
+        case 0:
+        case 1:
+            /* buttons */
+            quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
+            break;
+        case 2:
             {
                 /* radio button */
                 size_t j;
                 for (j = 0; j < QSEARCH_NUM; j++)
                     qsearch_options[j] = _(qsearch_options[j]);
             }
-            else if ((i == 4) || (i == 7) || (i == 11) || (i == 22))
-                /* groupboxes */
-                quick_widgets[i].u.groupbox.title = _(quick_widgets[i].u.groupbox.title);
-            else
-                /* checkboxes */
-                quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
-
-        Quick_input.title = _(Quick_input.title);
+            break;
+        case 3:
+        case 6:
+        case 10:
+        case 21:
+            /* groupboxes */
+            quick_widgets[i].u.groupbox.title = _(quick_widgets[i].u.groupbox.title);
+            break;
+        default:
+            /* checkboxes */
+            quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+            break;
     }
+
+    Quick_input.title = _(Quick_input.title);
 #endif /* ENABLE_NLS */
 
     /* calculate widget and dialog widths */
@@ -388,24 +401,23 @@ panel_options_box (void)
     dlg_width = max (dlg_width, str_term_width1 (Quick_input.title) + 4);
     /* buttons */
     b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
-    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 3;
-    b2_len = str_term_width1 (quick_widgets[2].u.button.text) + 5;
-    b_len = b0_len + b1_len + b2_len + 2;
+    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 5;
+    b_len = b0_len + b1_len + 1;
 
     /* checkboxes within groupboxes */
     c_len = 0;
-    for (i = 5; i < 22; i++)
-        if ((i != 7) && (i != 11))
+    for (i = 4; i < 21; i++)
+        if ((i != 6) && (i != 10))
             c_len = max (c_len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
 
     /* radiobuttons */
     for (i = 0; i < QSEARCH_NUM; i++)
         c_len = max (c_len, str_term_width1 (qsearch_options[i]) + 3);
     /* groupboxes */
-    g_len = max (c_len + 2, str_term_width1 (quick_widgets[4].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[7].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[11].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[22].u.groupbox.title) + 4);
+    g_len = max (c_len + 2, str_term_width1 (quick_widgets[3].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[6].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[10].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[21].u.groupbox.title) + 4);
     /* dialog width */
     Quick_input.xlen = max (dlg_width, g_len * 2 + 9);
     Quick_input.xlen = max (Quick_input.xlen, b_len + 2);
@@ -417,47 +429,38 @@ panel_options_box (void)
         quick_widgets[i].x_divisions = Quick_input.xlen;
 
     /* groupboxes */
-    quick_widgets[4].u.groupbox.width =
-        quick_widgets[7].u.groupbox.width =
-        quick_widgets[11].u.groupbox.width = Quick_input.xlen / 2 - 3;
-    quick_widgets[22].u.groupbox.width = Quick_input.xlen / 2 - 4;
+    quick_widgets[3].u.groupbox.width =
+        quick_widgets[6].u.groupbox.width =
+        quick_widgets[10].u.groupbox.width = Quick_input.xlen / 2 - 3;
+    quick_widgets[21].u.groupbox.width = Quick_input.xlen / 2 - 4;
 
     /* right column */
-    quick_widgets[4].relative_x =
-        quick_widgets[7].relative_x = quick_widgets[11].relative_x = Quick_input.xlen / 2;
-    for (i = 3; i < 11; i++)
-        if ((i != 4) && (i != 7))
-            quick_widgets[i].relative_x = quick_widgets[4].relative_x + 2;
+    quick_widgets[3].relative_x =
+        quick_widgets[6].relative_x = quick_widgets[10].relative_x = Quick_input.xlen / 2;
+    for (i = 2; i < 10; i++)
+        if ((i != 3) && (i != 6))
+            quick_widgets[i].relative_x = quick_widgets[3].relative_x + 2;
 
     /* buttons */
-    quick_widgets[2].relative_x = (Quick_input.xlen - b_len) / 2;
-    quick_widgets[1].relative_x = quick_widgets[2].relative_x + b2_len + 1;
-    quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + 1;
+    quick_widgets[1].relative_x = (Quick_input.xlen - b_len) / 3;
+    quick_widgets[0].relative_x = 2 * quick_widgets[1].relative_x + b1_len + 1;
 
-    qd_result = quick_dialog (&Quick_input);
+    if (quick_dialog (&Quick_input) != B_ENTER)
+        return
 
-    if ((qd_result == B_ENTER) || (qd_result == B_EXIT))
+    mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
+                        "simple_swap", (gboolean) (simple_swap & C_BOOL));
+
+    if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
     {
-        mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
-                            "simple_swap", (gboolean) (simple_swap & C_BOOL));
-
-        if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
-        {
-            message (D_NORMAL, _("Information"),
-                     _("Using the fast reload option may not reflect the exact\n"
-                       "directory contents. In this case you'll need to do a\n"
-                       "manual reload of the directory. See the man page for\n" "the details."));
-            panels_options.fast_reload_msg_shown = TRUE;
-        }
-        update_panels (UP_RELOAD, UP_KEEPSEL);
+        message (D_NORMAL, _("Information"),
+                 _("Using the fast reload option may not reflect the exact\n"
+                   "directory contents. In this case you'll need to do a\n"
+                   "manual reload of the directory. See the man page for\n" "the details."));
+        panels_options.fast_reload_msg_shown = TRUE;
     }
 
-    if (qd_result == B_EXIT)
-    {
-        /* save panel options */
-        panels_save_options ();
-        mc_config_save_file (mc_main_config, NULL);
-    }
+    update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

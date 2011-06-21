@@ -10,7 +10,7 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_config_struct
+typedef struct mc_config_t
 {
     GKeyFile *handle;
     gchar *ini_path;

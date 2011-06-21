@@ -30,7 +30,7 @@ gboolean mc_event_deinit (GError **);
 
 /* manage.c: */
 gboolean mc_event_add (const gchar *, const gchar *, mc_event_callback_func_t, gpointer, GError **);
-void mc_event_del (const gchar *, const gchar *, mc_event_callback_func_t);
+void mc_event_del (const gchar *, const gchar *, mc_event_callback_func_t, gpointer);
 void mc_event_destroy (const gchar *, const gchar *);
 void mc_event_group_del (const gchar *);
 gboolean mc_event_present (const gchar *, const gchar *);

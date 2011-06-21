@@ -86,7 +86,7 @@ mc_event_add (const gchar * event_group_name, const gchar * event_name,
     if (callbacks == NULL)
         return FALSE;
 
-    cb = mc_event_is_callback_in_array (callbacks, event_callback);
+    cb = mc_event_is_callback_in_array (callbacks, event_callback, event_init_data);
     if (cb == NULL)
     {
         cb = g_new0 (mc_event_callback_t, 1);
@@ -101,7 +101,7 @@ mc_event_add (const gchar * event_group_name, const gchar * event_name,
 
 void
 mc_event_del (const gchar * event_group_name, const gchar * event_name,
-              mc_event_callback_func_t event_callback)
+              mc_event_callback_func_t event_callback, gpointer event_init_data)
 {
     GTree *event_group;
     GPtrArray *callbacks;
@@ -119,7 +119,7 @@ mc_event_del (const gchar * event_group_name, const gchar * event_name,
     if (callbacks == NULL)
         return;
 
-    cb = mc_event_is_callback_in_array (callbacks, event_callback);
+    cb = mc_event_is_callback_in_array (callbacks, event_callback, event_init_data);
 
     if (cb == NULL)
         return;
@@ -208,14 +208,14 @@ mc_event_get_event_by_name (GTree * event_group, const gchar * event_name, gbool
 /* --------------------------------------------------------------------------------------------- */
 
 mc_event_callback_t *
-mc_event_is_callback_in_array (GPtrArray * callbacks, mc_event_callback_func_t event_callback)
+mc_event_is_callback_in_array (GPtrArray * callbacks, mc_event_callback_func_t event_callback, gpointer event_init_data)
 {
     guint array_index;
 
     for (array_index = 0; array_index < callbacks->len; array_index++)
     {
         mc_event_callback_t *cb = g_ptr_array_index (callbacks, array_index);
-        if (cb->callback == event_callback)
+        if (cb->callback == event_callback && cb->init_data == event_init_data)
             return cb;
     }
     return NULL;

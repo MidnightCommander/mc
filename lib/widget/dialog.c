@@ -24,10 +24,13 @@
 #include <config.h>
 
 #include <ctype.h>
+#include <errno.h>
 #include <stdlib.h>
-#include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>              /* open() */
 
 #include "lib/global.h"
 
@@ -37,6 +40,7 @@
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
+#include "lib/fileloc.h"        /* MC_HISTORY_FILE */
 #include "lib/event.h"          /* mc_event_raise() */
 
 /*** global variables ****************************************************************************/
@@ -134,6 +138,31 @@ dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flag
             send_message (w, msg, 0);
     }
     while (first != p);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+  * Read histories from the ${XDG_CACHE_HOME}/mc/history file
+  */
+static void
+dlg_read_history (Dlg_head * h)
+{
+    char *profile;
+    ev_history_load_save_t event_data;
+
+    if (num_history_items_recorded == 0)        /* this is how to disable */
+        return;
+
+    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, NULL);
+    event_data.cfg = mc_config_init (profile);
+    event_data.receiver = NULL;
+
+    /* create all histories in dialog */
+    mc_event_raise (h->event_group, MCEVENT_HISTORY_LOAD, &event_data);
+
+    mc_config_deinit (event_data.cfg);
+    g_free (profile);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -723,9 +752,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
     new_d = g_new0 (Dlg_head, 1);
     new_d->modal = modal;
     if (colors != NULL)
-    {
         memmove (new_d->color, colors, sizeof (dlg_colors_t));
-    }
     new_d->help_ctx = help_ctx;
     new_d->callback = (callback != NULL) ? callback : default_dlg_callback;
     new_d->x = x1;
@@ -749,6 +776,9 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
             new_d->title = g_strdup_printf (" %s ", t);
         g_free (t);
     }
+
+    /* unique name got event group for this dialog */
+    new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_DIALOG, (void *) new_d);
 
     return new_d;
 }
@@ -1077,6 +1107,7 @@ init_dlg (Dlg_head * h)
 
         h->callback (h, NULL, DLG_INIT, 0, NULL);
         dlg_broadcast_msg (h, WIDGET_INIT, FALSE);
+        dlg_read_history (h);
     }
 
     h->state = DLG_ACTIVE;
@@ -1153,13 +1184,54 @@ run_dlg (Dlg_head * h)
 void
 destroy_dlg (Dlg_head * h)
 {
+    /* if some widgets have history, save all history at one moment here */
+    dlg_save_history (h);
     dlg_broadcast_msg (h, WIDGET_DESTROY, FALSE);
     g_list_foreach (h->widgets, (GFunc) g_free, NULL);
     g_list_free (h->widgets);
+    mc_event_group_del (h->event_group);
+    g_free (h->event_group);
     g_free (h->title);
     g_free (h);
 
     do_refresh ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+  * Write history to the ${XDG_CACHE_HOME}/mc/history file
+  */
+void
+dlg_save_history (Dlg_head * h)
+{
+    char *profile;
+    int i;
+
+    if (num_history_items_recorded == 0)        /* this is how to disable */
+        return;
+
+    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, (char *) NULL);
+    i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
+    if (i != -1)
+        close (i);
+
+    /* Make sure the history is only readable by the user */
+    if (chmod (profile, S_IRUSR | S_IWUSR) != -1 || errno == ENOENT)
+    {
+        ev_history_load_save_t event_data;
+
+        event_data.cfg = mc_config_init (profile);
+        event_data.receiver = NULL;
+
+        /* get all histories in dialog */
+        mc_event_raise (h->event_group, MCEVENT_HISTORY_SAVE, &event_data);
+
+        mc_config_save_file (event_data.cfg, NULL);
+        mc_config_deinit (event_data.cfg);
+    }
+
+    g_free (profile);
 }
 
 /* --------------------------------------------------------------------------------------------- */
