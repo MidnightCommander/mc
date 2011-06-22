@@ -119,7 +119,7 @@ typedef struct
 /*** file scope variables ************************************************************************/
 
 static const char *const IPC = "IPC$";
-static const char *const URL_HEADER = "/#smb:";
+static const char *const URL_HEADER = "smb" VFS_PATH_URL_DELIMITER;
 
 static int my_errno;
 static uint32 err;

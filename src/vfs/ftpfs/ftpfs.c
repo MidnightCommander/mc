@@ -2215,8 +2215,9 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
         char *name;
 
         name =
-            g_strconcat ("/#ftp:", super->path_element->user, "@", super->path_element->host, "/",
-                         super->path_element->path, (char *) NULL);
+            g_strconcat (vfs_ftpfs_ops.prefix, VFS_PATH_URL_DELIMITER, super->path_element->user,
+                         "@", super->path_element->host, "/", super->path_element->path,
+                         (char *) NULL);
         func (name);
         g_free (name);
     }
