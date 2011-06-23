@@ -49,7 +49,7 @@
 #include "lib/skin.h"
 #include "lib/util.h"
 
-#include "lib/vfs/vfs.h"        /* vfs_translate_url() */
+#include "lib/vfs/vfs.h"
 
 #include "src/args.h"
 #include "src/subshell.h"
@@ -465,23 +465,6 @@ toggle_panels_split (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/**
- * Just a hack for allowing url-like pathnames to be accepted from the
- * command line.
- */
-static void
-translated_mc_chdir (char *dir)
-{
-    char *newdir;
-    int ret;
-
-    newdir = vfs_translate_url (dir);
-    ret = mc_chdir (newdir);
-    g_free (newdir);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 #if ENABLE_VFS
 
 /* event helper */
@@ -491,15 +474,24 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
 {
     if (mode == view_listing)
     {
-        struct vfs_class *nvfs;
-        vfsid nvfsid;
+        vfs_path_t *vpath;
+        vfs_path_element_t *path_element;
 
-        nvfs = vfs_get_class (panel->cwd);
-        if (nvfs != vclass)
+        vpath = vfs_path_from_str (panel->cwd);
+        path_element = vfs_path_get_by_index (vpath, -1);
+
+        if (path_element->class != vclass)
+        {
+            vfs_path_free (vpath);
             return FALSE;
-        nvfsid = vfs_getid (nvfs, panel->cwd);
-        if (nvfsid != id)
+        }
+
+        if (vfs_getid (vpath) != id)
+        {
+            vfs_path_free (vpath);
             return FALSE;
+        }
+        vfs_path_free (vpath);
     }
     return TRUE;
 }
@@ -622,7 +614,7 @@ create_panels (void)
              */
             mc_get_current_wd (original_dir, sizeof (original_dir) - 2);
         }
-        translated_mc_chdir (mc_run_param0);
+        mc_chdir (mc_run_param0);
     }
     set_display_type (current_index, current_mode);
 
@@ -630,8 +622,8 @@ create_panels (void)
     if (mc_run_param1 != NULL)
     {
         if (original_dir[0] != '\0')
-            translated_mc_chdir (original_dir);
-        translated_mc_chdir (mc_run_param1);
+            mc_chdir (original_dir);
+        mc_chdir (mc_run_param1);
     }
     set_display_type (other_index, other_mode);
 
@@ -952,7 +944,11 @@ done_mc (void)
     save_setup (auto_save_setup, panels_options.auto_save_setup);
     done_screen ();
 
-    vfs_stamp_path (vfs_get_current_dir ());
+    {
+        char *curr_dir = vfs_get_current_dir ();
+        vfs_stamp_path (curr_dir);
+        g_free (curr_dir);
+    }
 
     if ((current_panel != NULL) && (get_current_type () == view_listing))
         vfs_stamp_path (current_panel->cwd);
@@ -996,9 +992,15 @@ prepend_cwd_on_local (const char *filename)
 {
     char *d;
     size_t l;
+    vfs_path_t *vpath;
 
-    if (!vfs_file_is_local (filename) || g_path_is_absolute (filename))
+    vpath = vfs_path_from_str (filename);
+    if (!vfs_file_is_local (vpath) || g_path_is_absolute (filename))
+    {
+        vfs_path_free (vpath);
         return g_strdup (filename);
+    }
+    vfs_path_free (vpath);
 
     d = g_malloc (MC_MAXPATHLEN + strlen (filename) + 2);
     mc_get_current_wd (d, MC_MAXPATHLEN);

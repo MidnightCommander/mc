@@ -485,6 +485,23 @@ do_link (link_type_t link_type, const char *fname)
 /* --------------------------------------------------------------------------------------------- */
 
 #if defined(ENABLE_VFS_UNDELFS) || defined(ENABLE_VFS_NET)
+
+static const char *
+transform_prefix (const char *prefix)
+{
+    static char buffer[BUF_TINY];
+    size_t prefix_len = strlen (prefix);
+
+    if (prefix_len < 3)
+        return prefix;
+
+    strcpy (buffer, prefix + 2);
+    strcpy (buffer + prefix_len - 3, VFS_PATH_URL_DELIMITER);
+    return buffer;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 nice_cd (const char *text, const char *xtext, const char *help,
          const char *history_name, const char *prefix, int to_home)
@@ -502,10 +519,21 @@ nice_cd (const char *text, const char *xtext, const char *help,
     to_home = 0;                /* FIXME: how to solve going to home nicely? /~/ is
                                    ugly as hell and leads to problems in vfs layer */
 
+    /* default prefix in old-style format. */
+    if (strncmp (prefix, machine, strlen (prefix)) != 0)
+        prefix = transform_prefix (prefix);     /* Convert prefix to URL-style format */
+
     if (strncmp (prefix, machine, strlen (prefix)) == 0)
         cd_path = g_strconcat (machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
     else
         cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
+
+    if (*cd_path != PATH_SEP)
+    {
+        char *tmp = cd_path;
+        cd_path = g_strconcat (PATH_SEP_STR, tmp, (char *) NULL);
+        g_free (tmp);
+    }
 
     if (!do_panel_cd (MENU_PANEL, cd_path, cd_parse_command))
         message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);

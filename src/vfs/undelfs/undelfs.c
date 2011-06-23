@@ -146,18 +146,22 @@ undelfs_shutdown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-undelfs_get_path (const char *dirname, char **fsname, char **file)
+undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
 {
-    const char *p;
+    const char *p, *dirname;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
 
     /* To look like filesystem, we have virtual directories
        /#undel:XXX, which have no subdirectories. XXX is replaced with
        hda5, sdb8 etc, which is assumed to live under /dev. 
        -- pavel@ucw.cz */
 
+    dirname = path_element->path;
+
     *fsname = NULL;
 
-    if (strncmp (dirname, "/#undel:", 8))
+    if (strncmp (dirname, "/#undel", 7))
         return;
 
     dirname += 8;
@@ -330,11 +334,13 @@ undelfs_loaddel (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-undelfs_opendir (struct vfs_class *me, const char *dirname)
+undelfs_opendir (const vfs_path_t * vpath)
 {
     char *file, *f;
+    vfs_path_element_t *path_element;
 
-    undelfs_get_path (dirname, &file, &f);
+    path_element = vfs_path_get_by_index (vpath, -1);
+    undelfs_get_path (vpath, &file, &f);
     if (!file)
         return 0;
 
@@ -374,10 +380,10 @@ undelfs_opendir (struct vfs_class *me, const char *dirname)
     /* Now load the deleted information */
     if (!undelfs_loaddel ())
         goto quit_opendir;
-    vfs_print_message (_("%s: done."), me->name);
+    vfs_print_message (_("%s: done."), path_element->class->name);
     return fs;
   quit_opendir:
-    vfs_print_message (_("%s: failure"), me->name);
+    vfs_print_message (_("%s: failure"), path_element->class->name);
     ext2fs_close (fs);
     fs = NULL;
     return 0;
@@ -423,17 +429,16 @@ undelfs_closedir (void *vfs_info)
 /* We do not support lseek */
 
 static void *
-undelfs_open (struct vfs_class *me, const char *fname, int flags, mode_t mode)
+undelfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     char *file, *f;
     ext2_ino_t inode, i;
     undelfs_file *p = NULL;
-    (void) me;
     (void) flags;
     (void) mode;
 
     /* Only allow reads on this file system */
-    undelfs_get_path (fname, &file, &f);
+    undelfs_get_path (vpath, &file, &f);
     if (!file)
         return 0;
 
@@ -631,13 +636,12 @@ undelfs_stat_int (int inode_index, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-undelfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+undelfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
     int inode_index;
     char *file, *f;
-    (void) me;
 
-    undelfs_get_path (path, &file, &f);
+    undelfs_get_path (vpath, &file, &f);
     if (!file)
         return 0;
 
@@ -684,13 +688,12 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-undelfs_chdir (struct vfs_class *me, const char *path)
+undelfs_chdir (const vfs_path_t * vpath)
 {
     char *file, *f;
     int fd;
-    (void) me;
 
-    undelfs_get_path (path, &file, &f);
+    undelfs_get_path (vpath, &file, &f);
     if (!file)
         return -1;
 
@@ -727,12 +730,11 @@ undelfs_lseek (void *vfs_info, off_t offset, int whence)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfsid
-undelfs_getid (struct vfs_class *me, const char *path)
+undelfs_getid (const vfs_path_t * vpath)
 {
     char *fname, *fsname;
-    (void) me;
 
-    undelfs_get_path (path, &fsname, &fname);
+    undelfs_get_path (vpath, &fsname, &fname);
 
     if (!fsname)
         return NULL;
@@ -804,7 +806,7 @@ void
 init_undelfs (void)
 {
     vfs_undelfs_ops.name = "undelfs";
-    vfs_undelfs_ops.prefix = "undel:";
+    vfs_undelfs_ops.prefix = "undel";
     vfs_undelfs_ops.init = undelfs_init;
     vfs_undelfs_ops.open = undelfs_open;
     vfs_undelfs_ops.close = undelfs_close;

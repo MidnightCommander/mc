@@ -373,85 +373,82 @@ vfs_mkstemps (char **pname, const char *prefix, const char *param_basename)
  * ftp://joe:password@foo.se
  *
  * @param path is an input string to be parsed
- * @param host is an outptun g_malloc()ed hostname
- * @param user is an outptut g_malloc()ed username
- *             (NULL if not specified)
- * @param port is an outptut integer port number
- * @param pass is an outptut g_malloc()ed password
  * @param default_port is an input default port
- * @param flags are parsing modifier flags (@see VFS_URL_FLAGS)
+ * @param flags are parsing modifier flags (@see vfs_url_flags_t)
  *
- * @return g_malloc()ed host, user and pass if they are present.
+ * @return g_malloc()ed url info.
  *         If the user is empty, e.g. ftp://@roxanne/private, and URL_USE_ANONYMOUS
  *         is not set, then the current login name is supplied.
- *         Return value is a g_malloc()ed string with the pathname relative to the
+ *         Return value is a g_malloc()ed structure with the pathname relative to the
  *         host.
  */
 
-char *
-vfs_split_url (const char *path, char **host, char **user, int *port,
-               char **pass, int default_port, enum VFS_URL_FLAGS flags)
+vfs_path_element_t *
+vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
 {
+    vfs_path_element_t *path_element;
+
+    char *pcopy;
+    const char *pend;
     char *dir, *colon, *inner_colon, *at, *rest;
-    char *retval;
-    char *const pcopy = g_strdup (path);
-    const char *pend = pcopy + strlen (pcopy);
 
-    if (pass)
-        *pass = NULL;
-    *port = default_port;
-    *user = NULL;
-    retval = NULL;
+    path_element = g_new0 (vfs_path_element_t, 1);
+    path_element->port = default_port;
 
+    pcopy = g_strdup (path);
+    pend = pcopy + strlen (pcopy);
     dir = pcopy;
-    if (!(flags & URL_NOSLASH))
+
+    if ((flags & URL_NOSLASH) == 0)
     {
         /* locate path component */
-        while (*dir != PATH_SEP && *dir)
+        while (*dir != PATH_SEP && *dir != '\0')
             dir++;
-        if (*dir)
-        {
-            retval = g_strdup (dir);
-            *dir = 0;
-        }
+        if (*dir == '\0')
+            path_element->path = g_strdup (PATH_SEP_STR);
         else
-            retval = g_strdup (PATH_SEP_STR);
+        {
+            path_element->path = g_strdup (dir);
+            *dir = '\0';
+        }
     }
 
     /* search for any possible user */
     at = strrchr (pcopy, '@');
 
     /* We have a username */
-    if (at)
+    if (at == NULL)
+        rest = pcopy;
+    else
     {
-        *at = 0;
+        *at = '\0';
         inner_colon = strchr (pcopy, ':');
-        if (inner_colon)
+        if (inner_colon != NULL)
         {
-            *inner_colon = 0;
+            *inner_colon = '\0';
             inner_colon++;
-            if (pass)
-                *pass = g_strdup (inner_colon);
+            path_element->password = g_strdup (inner_colon);
         }
-        if (*pcopy != 0)
-            *user = g_strdup (pcopy);
+
+        if (*pcopy != '\0')
+            path_element->user = g_strdup (pcopy);
 
         if (pend == at + 1)
             rest = at;
         else
             rest = at + 1;
     }
-    else
-        rest = pcopy;
 
-    if (!*user && !(flags & URL_USE_ANONYMOUS))
-        *user = vfs_get_local_username ();
+    if ((flags & URL_USE_ANONYMOUS) == 0)
+        path_element->user = vfs_get_local_username ();
 
     /* Check if the host comes with a port spec, if so, chop it */
-    if ('[' == *rest)
+    if (*rest != '[')
+        colon = strchr (rest, ':');
+    else
     {
         colon = strchr (++rest, ']');
-        if (colon)
+        if (colon != NULL)
         {
             colon[0] = '\0';
             colon[1] = '\0';
@@ -459,45 +456,37 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
         }
         else
         {
-            g_free (pcopy);
-            g_free (retval);
-            *host = NULL;
-            *port = 0;
+            vfs_path_element_free (path_element);
             return NULL;
         }
     }
-    else
-        colon = strchr (rest, ':');
 
-    if (colon)
+    if (colon != NULL)
     {
-        *colon = 0;
-        if (sscanf (colon + 1, "%d", port) == 1)
+        *colon = '\0';
+        if (sscanf (colon + 1, "%d", &path_element->port) == 1)
         {
-            if (*port <= 0 || *port >= 65536)
-                *port = default_port;
+            if (path_element->port <= 0 || path_element->port >= 65536)
+                path_element->port = default_port;
         }
         else
-        {
-            while (*(++colon))
+            while (*(++colon) != '\0')
             {
                 switch (*colon)
                 {
                 case 'C':
-                    *port = 1;
+                    path_element->port = 1;
                     break;
                 case 'r':
-                    *port = 2;
+                    path_element->port = 2;
                     break;
                 }
             }
-        }
     }
-    if (host)
-        *host = g_strdup (rest);
 
-    g_free (pcopy);
-    return retval;
+    path_element->host = g_strdup (rest);
+
+    return path_element;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -234,58 +234,91 @@ free_linklist (struct link **lc_linklist)
 static int
 is_in_linklist (struct link *lp, const char *path, struct stat *sb)
 {
+    vfs_path_t *vpath;
+    vfs_path_element_t *vpath_element;
     ino_t ino = sb->st_ino;
     dev_t dev = sb->st_dev;
-    struct vfs_class *vfs = vfs_get_class (path);
+
+    vpath = vfs_path_from_str (path);
+    vpath_element = vfs_path_get_by_index (vpath, -1);
 
     while (lp != NULL)
     {
-        if (lp->vfs == vfs)
+        if (lp->vfs == vpath_element->class)
             if (lp->ino == ino && lp->dev == dev)
                 return 1;
         lp = lp->next;
     }
+    vfs_path_free (vpath);
     return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Returns 0 if the inode wasn't found in the cache and 1 if it was found
+ * Check and made hardlink
+ *
+ * @return FALSE if the inode wasn't found in the cache and TRUE if it was found
  * and a hardlink was succesfully made
  */
 
-static int
+static gboolean
 check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 {
     struct link *lp;
-    struct vfs_class *my_vfs = vfs_get_class (src_name);
+    vfs_path_t *vpath;
+
+    struct vfs_class *my_vfs;
     ino_t ino = pstat->st_ino;
     dev_t dev = pstat->st_dev;
     struct stat link_stat;
     const char *p;
 
-    if ((vfs_file_class_flags (src_name) & VFSF_NOLINKS) != 0)
-        return 0;
+    vpath = vfs_path_from_str (src_name);
+
+    if ((vfs_file_class_flags (vpath) & VFSF_NOLINKS) != 0)
+    {
+        vfs_path_free (vpath);
+        return FALSE;
+    }
+    my_vfs = vfs_path_get_by_index (vpath, -1)->class;
+    vfs_path_free (vpath);
 
     for (lp = linklist; lp != NULL; lp = lp->next)
         if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev)
         {
+            struct vfs_class *lp_name_class;
+
+            vpath = vfs_path_from_str (lp->name);
+            lp_name_class = vfs_path_get_by_index (vpath, -1)->class;
+            vfs_path_free (vpath);
+
             if (!mc_stat (lp->name, &link_stat) && link_stat.st_ino == ino
-                && link_stat.st_dev == dev && vfs_get_class (lp->name) == my_vfs)
+                && link_stat.st_dev == dev && lp_name_class == my_vfs)
             {
+                struct vfs_class *p_class, *dst_name_class;
+
                 p = strchr (lp->name, 0) + 1;   /* i.e. where the `name' file
                                                    was copied to */
-                if (vfs_get_class (dst_name) == vfs_get_class (p))
+
+                vpath = vfs_path_from_str (p);
+                p_class = vfs_path_get_by_index (vpath, -1)->class;
+                vfs_path_free (vpath);
+
+                vpath = vfs_path_from_str (dst_name);
+                dst_name_class = vfs_path_get_by_index (vpath, -1)->class;
+                vfs_path_free (vpath);
+
+                if (dst_name_class == p_class)
                 {
                     if (!mc_stat (p, &link_stat))
                     {
                         if (!mc_link (p, dst_name))
-                            return 1;
+                            return TRUE;
                     }
                 }
             }
             message (D_ERROR, MSG_ERROR, _("Cannot make the hardlink"));
-            return 0;
+            return FALSE;
         }
     lp = (struct link *) g_try_malloc (sizeof (struct link) + strlen (src_name)
                                        + strlen (dst_name) + 1);
@@ -301,7 +334,7 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
         lp->next = linklist;
         linklist = lp;
     }
-    return 0;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -336,13 +369,20 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
     link_target[len] = 0;
 
     if (ctx->stable_symlinks)
-        if (!vfs_file_is_local (src_path) || !vfs_file_is_local (dst_path))
+    {
+        vfs_path_t *vpath1 = vfs_path_from_str (src_path);
+        vfs_path_t *vpath2 = vfs_path_from_str (dst_path);
+
+        if (!vfs_file_is_local (vpath1) || !vfs_file_is_local (vpath2))
         {
             message (D_ERROR, MSG_ERROR,
                      _("Cannot make stable symlinks across"
                        "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
             ctx->stable_symlinks = FALSE;
         }
+        vfs_path_free (vpath1);
+        vfs_path_free (vpath2);
+    }
 
     if (ctx->stable_symlinks && !g_path_is_absolute (link_target))
     {
@@ -650,6 +690,7 @@ files_error (const char *format, const char *file1, const char *file2)
 
     return do_file_error (buf);
 }
+
 /* }}} */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1318,7 +1359,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     if (!ctx->do_append)
     {
         /* Check the hardlinks */
-        if (!ctx->follow_links && sb.st_nlink > 1 && check_hardlinks (src_path, dst_path, &sb) == 1)
+        if (!ctx->follow_links && sb.st_nlink > 1 && check_hardlinks (src_path, dst_path, &sb))
         {
             /* We have made a hardlink - no more processing is necessary */
             return FILE_CONT;
@@ -1712,7 +1753,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     /* FIXME: In this step we should do something
        in case the destination already exist */
     /* Check the hardlinks */
-    if (ctx->preserve && cbuf.st_nlink > 1 && check_hardlinks (s, d, &cbuf) == 1)
+    if (ctx->preserve && cbuf.st_nlink > 1 && check_hardlinks (s, d, &cbuf))
     {
         /* We have made a hardlink - no more processing is necessary */
         goto ret_fast;
@@ -1735,7 +1776,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     }
 
     lp = g_new (struct link, 1);
-    lp->vfs = vfs_get_class (s);
+    {
+        vfs_path_t *vpath = vfs_path_from_str (s);
+        lp->vfs = vfs_path_get_by_index (vpath, -1)->class;
+        vfs_path_free (vpath);
+    }
     lp->ino = cbuf.st_ino;
     lp->dev = cbuf.st_dev;
     lp->next = parent_dirs;
@@ -1795,7 +1840,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     lp = g_new (struct link, 1);
     mc_stat (dest_dir, &buf);
-    lp->vfs = vfs_get_class (dest_dir);
+    {
+        vfs_path_t *vpath = vfs_path_from_str (dest_dir);
+        lp->vfs = vfs_path_get_by_index (vpath, -1)->class;
+        vfs_path_free (vpath);
+    }
     lp->ino = buf.st_ino;
     lp->dev = buf.st_dev;
     lp->next = dest_dirs;
@@ -2498,7 +2547,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         if (g_path_is_absolute (source))
             source_with_path = g_strdup (source);
         else
-            source_with_path = g_build_filename (panel->cwd, source, (char *) NULL);
+            source_with_path = mc_build_filename (panel->cwd, source, (char *) NULL);
 #endif /* WITH_FULL_PATHS */
 
         if (panel_operate_init_totals (operation, panel, source_with_path, ctx) == FILE_CONT)
@@ -2592,7 +2641,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 if (g_path_is_absolute (source))
                     source_with_path = g_strdup (source);
                 else
-                    source_with_path = g_build_filename (panel->cwd, source, (char *) NULL);
+                    source_with_path = mc_build_filename (panel->cwd, source, (char *) NULL);
 #endif /* WITH_FULL_PATHS */
 
                 if (operation == OP_DELETE)

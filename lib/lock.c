@@ -197,6 +197,7 @@ lock_file (const char *fname)
     struct stat statbuf;
     struct lock_s *lockinfo;
     gboolean symlink_ok;
+    vfs_path_t *vpath;
 
     /* Just to be sure (and don't lock new file) */
     if (fname == NULL || *fname == '\0')
@@ -204,12 +205,16 @@ lock_file (const char *fname)
 
     fname = tilde_expand (fname);
 
+    vpath = vfs_path_from_str (fname);
+
     /* Locking on VFS is not supported */
-    if (!vfs_file_is_local (fname))
+    if (!vfs_file_is_local (vpath))
     {
         g_free ((gpointer) fname);
+        vfs_path_free (vpath);
         return 0;
     }
+    vfs_path_free (vpath);
 
     /* Check if already locked */
     lockfname = lock_build_symlink_name (fname);

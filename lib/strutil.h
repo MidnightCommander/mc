@@ -524,6 +524,12 @@ int str_verscmp (const char *s1, const char *s2);
  */
 void str_msg_term_size (const char *text, int *lines, int *columns);
 
+/**
+ skip first <skip_count>  needle's in haystack and returns pointer to
+ <skip_count+1> needle (or NULL if not found).
+ */
+char *strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count);
+
 /*** inline functions ****************************************************************************/
 
 static inline void

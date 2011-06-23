@@ -12,6 +12,7 @@
 #include <sys/types.h>
 
 #include "lib/global.h"         /* GList */
+#include "lib/vfs/path.h"       /* vfs_path_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -39,6 +40,8 @@
 
 #define MEDATA ((struct vfs_s_subclass *) me->data)
 
+#define VFSDATA(a) ((a->class != NULL) ? (struct vfs_s_subclass *) a->class->data : NULL)
+
 #define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super
 
@@ -60,6 +63,10 @@ struct vfs_s_super
     int fd_usage;               /* Number of open files */
     int ino_usage;              /* Usage count of this superblock */
     int want_stale;             /* If set, we do not flush cache properly */
+#ifdef ENABLE_VFS_NET
+    vfs_path_element_t *path_element;
+#endif                          /* ENABLE_VFS_NET */
+
     void *data;                 /* This is for filesystem-specific use */
 };
 
@@ -117,11 +124,11 @@ struct vfs_s_subclass
     void (*free_inode) (struct vfs_class * me, struct vfs_s_inode * ino);       /* optional */
     int (*init_entry) (struct vfs_class * me, struct vfs_s_entry * entry);      /* optional */
 
-    void *(*archive_check) (struct vfs_class * me, const char *name, char *op); /* optional */
-    int (*archive_same) (struct vfs_class * me, struct vfs_s_super * psup,
-                         const char *archive_name, char *op, void *cookie);
-    int (*open_archive) (struct vfs_class * me, struct vfs_s_super * psup,
-                         const char *archive_name, char *op);
+    void *(*archive_check) (const vfs_path_t * vpath);  /* optional */
+    int (*archive_same) (const vfs_path_element_t * vpath_element, struct vfs_s_super * psup,
+                         const vfs_path_t * vpath, void *cookie);
+    int (*open_archive) (struct vfs_s_super * psup,
+                         const vfs_path_t * vpath, const vfs_path_element_t * vpath_element);
     void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);
 
     int (*fh_open) (struct vfs_class * me, vfs_file_handler_t * fh, int flags, mode_t mode);
@@ -161,8 +168,9 @@ struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *e
 
 /* outside interface */
 void vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub);
-const char *vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
-                                   struct vfs_s_super **archive, int flags);
+const char *vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive,
+                                   int flags);
+
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);
 char *vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino);
 

@@ -714,7 +714,7 @@ find_parameters (char **start_dir, char **ignore_dirs, char **pattern, char **co
         else if (g_path_is_absolute (*start_dir))
             *start_dir = g_strdup (*start_dir);
         else
-            *start_dir = g_build_filename (current_panel->cwd, *start_dir, (char *) NULL);
+            *start_dir = mc_build_filename (current_panel->cwd, *start_dir, (char *) NULL);
 
         canonicalize_pathname (*start_dir);
 
@@ -1246,7 +1246,7 @@ do_search (Dlg_head * h)
                 {
                     char *tmp_name;
 
-                    tmp_name = g_build_filename (directory, dp->d_name, (char *) NULL);
+                    tmp_name = mc_build_filename (directory, dp->d_name, (char *) NULL);
 
                     if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
                     {

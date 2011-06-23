@@ -59,14 +59,13 @@ static struct vfs_class vfs_local_ops;
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-local_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
+local_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     int *local_info;
     int fd;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    (void) me;
-
-    fd = open (file, NO_LINEAR (flags), mode);
+    fd = open (path_element->path, NO_LINEAR (flags), mode);
     if (fd == -1)
         return 0;
 
@@ -79,14 +78,13 @@ local_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-local_opendir (struct vfs_class *me, const char *dirname)
+local_opendir (const vfs_path_t * vpath)
 {
     DIR **local_info;
     DIR *dir;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    (void) me;
-
-    dir = opendir (dirname);
+    dir = opendir (path_element->path);
     if (!dir)
         return 0;
 
@@ -119,85 +117,86 @@ local_closedir (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_stat (struct vfs_class *me, const char *path, struct stat *buf)
+local_stat (const vfs_path_t * vpath, struct stat *buf)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return stat (path, buf);
+    return stat (path_element->path, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+local_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
 #ifndef HAVE_STATLSTAT
-    return lstat (path, buf);
+    return lstat (path_element->path, buf);
 #else
-    return statlstat (path, buf);
+    return statlstat (path_element->path, buf);
 #endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chmod (struct vfs_class *me, const char *path, int mode)
+local_chmod (const vfs_path_t * vpath, int mode)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return chmod (path, mode);
+    return chmod (path_element->path, mode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+local_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return chown (path, owner, group);
+    return chown (path_element->path, owner, group);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
+local_utime (const vfs_path_t * vpath, struct utimbuf *times)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return utime (path, times);
+    return utime (path_element->path, times);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+local_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return readlink (path, buf, size);
+    return readlink (path_element->path, buf, size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_unlink (struct vfs_class *me, const char *path)
+local_unlink (const vfs_path_t * vpath)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return unlink (path);
+    return unlink (path_element->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_symlink (struct vfs_class *me, const char *n1, const char *n2)
+local_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
+    vfs_path_element_t *path_element1 = vfs_path_get_by_index (vpath1, -1);
+    vfs_path_element_t *path_element2 = vfs_path_get_by_index (vpath2, -1);
 
-    return symlink (n1, n2);
+    return symlink (path_element1->path, path_element2->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -230,80 +229,81 @@ local_write (void *data, const char *buf, size_t nbyte)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_rename (struct vfs_class *me, const char *a, const char *b)
+local_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
+    vfs_path_element_t *path_element1 = vfs_path_get_by_index (vpath1, -1);
+    vfs_path_element_t *path_element2 = vfs_path_get_by_index (vpath2, -1);
 
-    return rename (a, b);
+    return rename (path_element1->path, path_element2->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chdir (struct vfs_class *me, const char *path)
+local_chdir (const vfs_path_t * vpath)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return chdir (path);
+    return chdir (path_element->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
+local_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return mknod (path, mode, dev);
+    return mknod (path_element->path, mode, dev);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_link (struct vfs_class *me, const char *p1, const char *p2)
+local_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
+    vfs_path_element_t *path_element1 = vfs_path_get_by_index (vpath1, -1);
+    vfs_path_element_t *path_element2 = vfs_path_get_by_index (vpath2, -1);
 
-    return link (p1, p2);
+    return link (path_element1->path, path_element2->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_mkdir (struct vfs_class *me, const char *path, mode_t mode)
+local_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return mkdir (path, mode);
+    return mkdir (path_element->path, mode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_rmdir (struct vfs_class *me, const char *path)
+local_rmdir (const vfs_path_t * vpath)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return rmdir (path);
+    return rmdir (path_element->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-local_getlocalcopy (struct vfs_class *me, const char *path)
+local_getlocalcopy (const vfs_path_t * vpath)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    return g_strdup (path);
+    return g_strdup (path_element->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
+local_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_changed)
 {
-    (void) me;
-    (void) path;
+    (void) vpath;
     (void) local;
     (void) has_changed;
 

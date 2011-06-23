@@ -262,13 +262,15 @@ do_cd (const char *new_dir, enum cd_enum exact)
 #if HAVE_CHARSET
     if (res)
     {
-        const char *enc_name;
+        vfs_path_t *vpath = vfs_path_from_str (current_panel->cwd);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-        enc_name = vfs_get_encoding (current_panel->cwd);
-        if (enc_name != NULL)
-            current_panel->codepage = get_codepage_index (enc_name);
+        if (path_element->encoding != NULL)
+            current_panel->codepage = get_codepage_index (path_element->encoding);
         else
             current_panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+
+        vfs_path_free (vpath);
     }
 #endif /* HAVE_CHARSET */
 

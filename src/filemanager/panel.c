@@ -1015,10 +1015,15 @@ show_free_space (WPanel * panel)
     static struct my_statfs myfs_stats;
     /* Old current working directory for displaying free space */
     static char *old_cwd = NULL;
+    vfs_path_t *vpath = vfs_path_from_str (panel->cwd);
 
     /* Don't try to stat non-local fs */
-    if (!vfs_file_is_local (panel->cwd) || !free_space)
+    if (!vfs_file_is_local (vpath) || !free_space)
+    {
+        vfs_path_free (vpath);
         return;
+    }
+    vfs_path_free (vpath);
 
     if (old_cwd == NULL || strcmp (old_cwd, panel->cwd) != 0)
     {
@@ -1141,39 +1146,6 @@ adjust_top_file (WPanel * panel)
  * #enc: is appended
  * retun new string
  */
-
-static char *
-add_encoding_to_path (const char *path, const char *encoding)
-{
-    char *result;
-    char *semi;
-    char *slash;
-
-    semi = g_strrstr (path, VFS_ENCODING_PREFIX);
-
-    if (semi != NULL)
-    {
-        slash = strchr (semi, PATH_SEP);
-        if (slash != NULL)
-        {
-            result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
-        }
-        else
-        {
-            *semi = '\0';
-            result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
-            *semi = '#';
-        }
-    }
-    else
-    {
-        result = g_strconcat (path, PATH_SEP_STR VFS_ENCODING_PREFIX, encoding, (char *) NULL);
-    }
-
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static char *
 panel_save_name (WPanel * panel)
@@ -2288,10 +2260,12 @@ do_enter_on_file_entry (file_entry * fe)
 
     if (!vfs_current_is_local ())
     {
-        char *tmp;
+        char *tmp, *tmp_curr_dir;
         int ret;
 
-        tmp = concat_dir_and_file (vfs_get_current_dir (), fe->fname);
+        tmp_curr_dir = vfs_get_current_dir ();
+        tmp = concat_dir_and_file (tmp_curr_dir, fe->fname);
+        g_free (tmp_curr_dir);
         ret = mc_setctl (tmp, VFS_SETCTL_RUN, NULL);
         g_free (tmp);
         /* We took action only if the dialog was shown or the execution
@@ -2608,14 +2582,18 @@ static const char *
 get_parent_dir_name (const char *cwd, const char *lwd)
 {
     size_t llen, clen;
+    const char *p;
 
     llen = strlen (lwd);
     clen = strlen (cwd);
 
-    if (llen > clen)
-    {
-        const char *p;
+    if (llen <= clen)
+        return NULL;
 
+    p = g_strrstr (lwd, VFS_PATH_URL_DELIMITER);
+
+    if (p == NULL)
+    {
         p = strrchr (lwd, PATH_SEP);
 
         if ((p != NULL)
@@ -2623,9 +2601,14 @@ get_parent_dir_name (const char *cwd, const char *lwd)
             && (clen == (size_t) (p - lwd)
                 || ((p == lwd) && (cwd[0] == PATH_SEP) && (cwd[1] == '\0'))))
             return (p + 1);
+
+        return NULL;
     }
 
-    return NULL;
+    while (--p > lwd && *p != PATH_SEP);
+    while (--p > lwd && *p != PATH_SEP);
+
+    return (p != lwd) ? p + 1 : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2652,7 +2635,6 @@ _do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
     const char *directory;
     char *olddir;
     char temp[MC_MAXPATHLEN];
-    char *translated_url;
 
     if (cd_type == cd_parse_command)
     {
@@ -2661,7 +2643,6 @@ _do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
     }
 
     olddir = g_strdup (panel->cwd);
-    new_dir = translated_url = vfs_translate_url (new_dir);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
 
@@ -2679,10 +2660,8 @@ _do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
     {
         strcpy (panel->cwd, olddir);
         g_free (olddir);
-        g_free (translated_url);
         return FALSE;
     }
-    g_free (translated_url);
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);
@@ -3386,12 +3365,17 @@ remove_encoding_from_path (const char *path)
 
     while ((tmp = g_strrstr (tmp_path->str, PATH_SEP_STR VFS_ENCODING_PREFIX)) != NULL)
     {
-        const char *enc;
         GIConv converter;
         char *tmp2;
 
-        enc = vfs_get_encoding ((const char *) tmp);
-        converter = enc != NULL ? str_crt_conv_to (enc) : str_cnv_to_term;
+        vfs_path_t *vpath = vfs_path_from_str (tmp);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
+        converter =
+            path_element->encoding !=
+            NULL ? str_crt_conv_to (path_element->encoding) : str_cnv_to_term;
+        vfs_path_free (vpath);
+
         if (converter == INVALID_CONV)
             converter = str_cnv_to_term;
 
@@ -3655,9 +3639,13 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
 
 #ifdef HAVE_CHARSET
     {
-        const char *enc = vfs_get_encoding (panel->cwd);
-        if (enc != NULL)
-            panel->codepage = get_codepage_index (enc);
+        vfs_path_t *vpath = vfs_path_from_str (panel->cwd);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+
+        if (path_element->encoding != NULL)
+            panel->codepage = get_codepage_index (path_element->encoding);
+
+        vfs_path_free (vpath);
     }
 #endif
 
@@ -4034,18 +4022,16 @@ panel_change_encoding (WPanel * panel)
 #endif
     if (encoding != NULL)
     {
-        const char *enc;
+        vfs_path_t *vpath = vfs_path_from_str (panel->cwd);
 
-        enc = vfs_get_encoding (panel->cwd);
+        vfs_change_encoding (vpath, encoding);
 
-        /* don't add current encoding */
-        if ((enc == NULL) || (strcmp (encoding, enc) != 0))
-        {
-            cd_path = add_encoding_to_path (panel->cwd, encoding);
-            if (!do_panel_cd (panel, cd_path, cd_parse_command))
-                message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
-            g_free (cd_path);
-        }
+        cd_path = vfs_path_to_str (vpath);
+        if (!do_panel_cd (panel, cd_path, cd_parse_command))
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
+        g_free (cd_path);
+
+        vfs_path_free (vpath);
     }
 }
 

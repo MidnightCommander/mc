@@ -143,8 +143,8 @@ edit_save_file (WEdit * edit, const char *filename)
     this_save_mode = option_save_mode;
     if (this_save_mode != EDIT_QUICK_SAVE)
     {
-        if (!vfs_file_is_local (real_filename) ||
-            (fd = mc_open (real_filename, O_RDONLY | O_BINARY)) == -1)
+        vfs_path_t *vpath = vfs_path_from_str (real_filename);
+        if (!vfs_file_is_local (vpath) || (fd = mc_open (real_filename, O_RDONLY | O_BINARY)) == -1)
         {
             /*
              * The file does not exists yet, so no safe save or
@@ -152,6 +152,7 @@ edit_save_file (WEdit * edit, const char *filename)
              */
             this_save_mode = EDIT_QUICK_SAVE;
         }
+        vfs_path_free (vpath);
         if (fd != -1)
             mc_close (fd);
     }
@@ -491,7 +492,7 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     {
         char *fullpath;
 
-        fullpath = g_build_filename (edit->dir, prev_filename, (char *) NULL);
+        fullpath = mc_build_filename (edit->dir, prev_filename, (char *) NULL);
         unlock_file (fullpath);
         g_free (fullpath);
     }
@@ -1259,7 +1260,7 @@ edit_set_filename (WEdit * edit, const char *name)
 
     edit->filename = tilde_expand (name);
     if (edit->dir == NULL && !g_path_is_absolute (name))
-        edit->dir = g_strdup (vfs_get_current_dir ());
+        edit->dir = vfs_get_current_dir ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1382,7 +1383,7 @@ edit_save_as_cmd (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-edit_macro_comparator (gconstpointer *macro1, gconstpointer *macro2)
+edit_macro_comparator (gconstpointer * macro1, gconstpointer * macro2)
 {
     const macros_t *m1 = (const macros_t *) macro1;
     const macros_t *m2 = (const macros_t *) macro2;
@@ -1402,7 +1403,7 @@ edit_macro_sort_by_hotkey (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-edit_get_macro (WEdit * edit, int hotkey, const macros_t **macros, guint *indx)
+edit_get_macro (WEdit * edit, int hotkey, const macros_t ** macros, guint * indx)
 {
     const macros_t *array_start = &g_array_index (macros_list, struct macros_t, 0);
     macros_t *result;
@@ -1522,7 +1523,7 @@ edit_store_macro_cmd (WEdit * edit)
     mc_config_t *macros_config = NULL;
     const char *section_name = "editor";
     gchar *macros_fname;
-    GArray *macros; /* current macro */
+    GArray *macros;             /* current macro */
     int tmp_act;
     gboolean have_macro = FALSE;
     char *keyname = NULL;
@@ -1535,8 +1536,7 @@ edit_store_macro_cmd (WEdit * edit)
 
     /* return FALSE if try assign macro into restricted hotkeys */
     if (tmp_act == CK_MacroStartRecord
-       || tmp_act == CK_MacroStopRecord
-       || tmp_act == CK_MacroStartStopRecord)
+        || tmp_act == CK_MacroStopRecord || tmp_act == CK_MacroStartStopRecord)
         return FALSE;
 
     edit_delete_macro (edit, hotkey);
@@ -1569,7 +1569,8 @@ edit_store_macro_cmd (WEdit * edit)
         m_act.ch = record_macro_buf[i].ch;
         g_array_append_val (macros, m_act);
         have_macro = TRUE;
-        g_string_append_printf (marcros_string, "%s:%i;", action_name, (int) record_macro_buf[i].ch);
+        g_string_append_printf (marcros_string, "%s:%i;", action_name,
+                                (int) record_macro_buf[i].ch);
     }
     if (have_macro)
     {
@@ -3192,7 +3193,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
         g_free (path);
         path = ptr;
         g_free (tagfile);
-        tagfile = g_build_filename (path, TAGS_NAME, (char *) NULL);
+        tagfile = mc_build_filename (path, TAGS_NAME, (char *) NULL);
         if (exist_file (tagfile))
             break;
     }

@@ -3,10 +3,13 @@ noinst_LTLIBRARIES = libmcvfs.la
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 
 libmcvfs_la_SOURCES = \
+	direntry.c		\
+	gc.c gc.h		\
+	interface.c \
+	path.c path.h		\
 	vfs.c vfs.h		\
-	direntry.c xdirentry.h	\
 	utilvfs.c utilvfs.h	\
-	gc.c gc.h
+	xdirentry.h
 
 if ENABLE_VFS_NET
 libmcvfs_la_SOURCES += netutil.c netutil.h

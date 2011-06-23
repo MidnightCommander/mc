@@ -76,7 +76,7 @@ mc_config_set_string_raw (mc_config_t * mc_config, const gchar * group,
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 void
-mc_config_set_string (mc_config_t * mc_config, const gchar * group,
+mc_config_set_string (const mc_config_t * mc_config, const gchar * group,
                       const gchar * param, const gchar * value)
 {
     gchar *buffer;

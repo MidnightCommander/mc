@@ -106,12 +106,15 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     time_t localmtime = 0;
     struct stat mystat;
     quote_func_t quote_func = name_quote;
+    vfs_path_t *vpath;
 
     g_return_if_fail (filename != NULL);
     g_return_if_fail (lc_data != NULL);
 
+    vpath = vfs_path_from_str (filename);
+
     /* Avoid making a local copy if we are doing a cd */
-    if (!vfs_file_is_local (filename))
+    if (!vfs_file_is_local (vpath))
         do_local_copy = 1;
     else
         do_local_copy = 0;
@@ -156,6 +159,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                         g_free (localcopy);
                     }
                     g_free (file_name);
+                    vfs_path_free (vpath);
                     return;
                 }
                 fputs (parameter, cmd_file);
@@ -225,6 +229,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                                         fclose (cmd_file);
                                         unlink (file_name);
                                         g_free (file_name);
+                                        vfs_path_free (vpath);
                                         return;
                                     }
                                     mc_stat (localcopy, &mystat);
@@ -233,7 +238,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                                 }
                                 else
                                 {
-                                    fn = vfs_canon_and_translate (filename);
+                                    fn = vfs_path_to_str (vpath);
                                     text = quote_func (fn, 0);
                                     g_free (fn);
                                 }
@@ -371,6 +376,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
         g_free (localcopy);
     }
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -683,7 +689,8 @@ regex_command (const char *filename, const char *action, int *move_dir)
                      _("The format of the %s%s%s file has "
                        "changed with version 3.0. You may either want to copy "
                        "it from %smc.ext or use that file as an example of how to write it."),
-                     mc_config_get_data_path (), PATH_SEP_STR, MC_FILEBIND_FILE, mc_global.sysconfig_dir);
+                     mc_config_get_data_path (), PATH_SEP_STR, MC_FILEBIND_FILE,
+                     mc_global.sysconfig_dir);
             g_free (title);
         }
     }

@@ -36,7 +36,7 @@
 /*** public functions **************************************************/
 
 gchar **
-mc_config_get_groups (mc_config_t * mc_config, gsize * len)
+mc_config_get_groups (const mc_config_t * mc_config, gsize * len)
 {
     gchar **ret;
 
@@ -58,7 +58,7 @@ mc_config_get_groups (mc_config_t * mc_config, gsize * len)
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gchar **
-mc_config_get_keys (mc_config_t * mc_config, const gchar * group, gsize * len)
+mc_config_get_keys (const mc_config_t * mc_config, const gchar * group, gsize * len)
 {
     gchar **ret;
 
@@ -126,7 +126,7 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gchar *
-mc_config_get_string_raw (mc_config_t * mc_config, const gchar * group,
+mc_config_get_string_raw (const mc_config_t * mc_config, const gchar * group,
                           const gchar * param, const gchar * def)
 {
     gchar *ret;

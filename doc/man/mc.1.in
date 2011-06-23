@@ -1473,7 +1473,7 @@ description.
 .\"NODE "    Extension File Edit"
 .SH "    Extension File Edit"
 This will invoke your editor on the file
-.IR ~/.local/share/mc/bindings .
+.IR ~/.local/share/mc/mc.ext .
 The format of this file following:
 .PP
 All lines starting with # or empty lines are thrown away.
@@ -3110,7 +3110,7 @@ item in the menu or directly change your current directory using the
 .I cd
 command to a path name that looks like this:
 .PP
-.I /#ftp:[!][user[:pass]@]machine[:port][remote\-dir]
+.I ftp://[!][user[:pass]@]machine[:port][remote\-dir]
 .PP
 The
 .IR user ,
@@ -3135,11 +3135,11 @@ To enable using FTP proxy, prepend
 Examples:
 .PP
 .nf
-    /#ftp:ftp.nuclecu.unam.mx/linux/local
-    /#ftp:tsx\-11.mit.edu/pub/linux/packages
-    /#ftp:!behind.firewall.edu/pub
-    /#ftp:guest@remote\-host.com:40/pub
-    /#ftp:miguel:xxx@server/pub
+    ftp://ftp.nuclecu.unam.mx/linux/local
+    ftp://tsx\-11.mit.edu/pub/linux/packages
+    ftp://!behind.firewall.edu/pub
+    ftp://guest@remote\-host.com:40/pub
+    ftp://miguel:xxx@server/pub
 .fi
 .PP
 Please check the
@@ -3154,7 +3154,7 @@ files and compressed tar files by using the chdir command.  To change
 your directory to a tar file, you change your current directory to the
 tar file by using the following syntax:
 .PP
-.I /filename.tar#utar/[dir\-inside\-tar]
+.I /filename.tar/utar://[dir\-inside\-tar]
 .PP
 The mc.ext file already provides a shortcut for tar files, this means
 that usually you just point to a tar file and press return to enter
@@ -3167,8 +3167,8 @@ section for details on how this is done.
 Examples:
 .PP
 .nf
-    mc\-3.0.tar.gz#utar/mc\-3.0/vfs
-    /ftp/GCC/gcc\-2.7.0.tar#utar
+    mc\-3.0.tar.gz/utar://mc\-3.0/vfs
+    /ftp/GCC/gcc\-2.7.0.tar/utar://
 .fi
 .PP
 The latter specifies the full path of the tar archive.
@@ -3183,7 +3183,7 @@ To connect to a remote machine, you just need to chdir
 into a special directory which name is in the following
 format:
 .PP
-.I /#sh:[user@]machine[:options]/[remote\-dir]
+.I sh://[user@]machine[:options]/[remote\-dir]
 .PP
 The
 .I user,
@@ -3211,10 +3211,10 @@ set to this one.
 Examples:
 .PP
 .nf
-    /#sh:onlyrsh.mx:r/linux/local
-    /#sh:joe@want.compression.edu:C/private
-    /#sh:joe@noncompressed.ssh.edu/private
-    /#sh:joe@somehost.ssh.edu:2222/private
+    sh://onlyrsh.mx:r/linux/local
+    sh://joe@want.compression.edu:C/private
+    sh://joe@noncompressed.ssh.edu/private
+    sh://joe@somehost.ssh.edu:2222/private
 .fi
 .\"NODE "  Undelete File System"
 .SH "  Undelete File System"
@@ -3226,14 +3226,14 @@ retrieve all of the deleted files names on an ext2fs and provides and
 to extract the selected files into a regular partition.
 .PP
 To use this file system, you have to chdir into the special file name
-formed by the "/#undel" prefix and the file name where the actual
+formed by the "undel://" prefix and the file name where the actual
 file system resides.
 .PP
 For example, to recover deleted files on the second partition of the
 first SCSI disk on Linux, you would use the following path name:
 .PP
 .nf
-    /#undel:sda2
+    undel://sda2
 .fi
 .PP
 It may take a while for the undelfs to load the required information
@@ -3247,7 +3247,7 @@ To actually use it, you may try to use the panel command "SMB link..."
 (accessible from the menubar) or you may directly change your current
 directory to it using the cd command to a path name that looks like this:
 .PP
-.I /#smb:[user@]machine[/service][/remote\-dir]
+.I smb://[user@]machine[/service][/remote\-dir]
 .PP
 The
 .IR user ,
@@ -3265,9 +3265,9 @@ can be specified in an input dialog.
 Examples:
 .PP
 .nf
-    /#smb:machine/Share
-    /#smb:other_machine
-    /#smb:guest@machine/Public/Irlex
+    smb://machine/Share
+    smb://other_machine
+    smb://guest@machine/Public/Irlex
 .fi
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
@@ -3280,7 +3280,7 @@ Extfs filesystems can be divided into two categories:
 1. Stand\-alone filesystems, which are not associated with any existing
 file.  They represent certain system\-wide data as a directory tree.
 You can invoke them by typing
-.RI ' "cd #fsname" '
+.RI ' "cd fsname://" '
 where fsname is an extfs short name (see below).  Examples of such
 filesystems include audio (list audio tracks on the CD) or apt (list of
 all Debian packages in the system).
@@ -3288,7 +3288,7 @@ all Debian packages in the system).
 For example, to list CD\-Audio tracks on your CD\-ROM drive, type
 .PP
 .nf
-  cd #audio
+  cd audio://
 .fi
 .PP
 2. 'Archive' filesystems (like rpm, patchfs and more), which represent
@@ -3296,14 +3296,14 @@ contents of a file as a directory tree.  It can consist of 'real' files
 compressed in an archive (urar, rpm) or virtual files, like messages
 in a mailbox (mailfs) or parts of a patch (patchfs).  To access such
 filesystems
-.RI ' #fsname '
+.RI ' fsname:// '
 should be appended to the archive name.  Note that the archive itself
 can be on another vfs.
 .PP
 For example, to list contents of a zip archive documents.zip type
 .PP
 .nf
-  cd documents.zip#uzip
+  cd documents.zip/uzip://
 .fi
 .PP
 In many aspects, you could treat extfs like any other directory.  For
@@ -3315,57 +3315,57 @@ Common extfs scripts included with Midnight Commander are:
 .TP
 .B a
 access 'A:' DOS/Windows diskette
-.RI ( "cd #a" ).
+.RI ( "cd a://" ).
 .TP
 .B apt
 front end to Debian's APT package management system
-.RI ( "cd #apt" ).
+.RI ( "cd apt://" ).
 .TP
 .B audio
 audio CD ripping and playing
-.RI ( "cd #audio"
+.RI ( "cd audio://"
 or
-.IR "cd device#audio" ).
+.IR "cd device/audio://" ).
 .TP
 .B bpp
 package of Bad Penguin GNU/Linux distribution
-.RI ( "cd file.bpp#bpp" ).
+.RI ( "cd file.bpp/bpp://" ).
 .TP
 .B deb
 package of Debian GNU/Linux distribution
-.RI ( "cd file.deb#deb" ).
+.RI ( "cd file.deb/deb://" ).
 .TP
 .B dpkg
 Debian GNU/Linux installed packages
-.RI ( "cd #deb" ).
+.RI ( "cd deb://" ).
 .TP
 .B hp48
 view and copy files to/from a HP48 calculator
-.RI ( "cd #hp48" ).
+.RI ( "cd hp48://" ).
 .TP
 .B lslR
 browsing of lslR listings as found on many FTPs
-.RI ( "cd filename#lslR" ).
+.RI ( "cd filename/lslR://" ).
 .TP
 .B mailfs
 mbox\-style mailbox files support
-.RI ( "cd mailbox#mailfs" ).
+.RI ( "cd mailbox/mailfs://" ).
 .TP
 .B patchfs
 extfs to handle unified and context diffs
-.RI ( "cd filename#patchfs" ).
+.RI ( "cd filename/patchfs://" ).
 .TP
 .B rpm
 RPM package
-.RI ( "cd filename#rpm" ).
+.RI ( "cd filename/rpm://" ).
 .TP
 .B rpms
 RPM database management
-.RI ( "cd #rpms" ).
+.RI ( "cd rpms://" ).
 .TP
 .B ulha, urar, uzip, uzoo, uar, uha
 archivers
-.RI ( "cd archive#xxxx"
+.RI ( "cd archive/xxxx://"
 where xxxx is one of:
 .IR ulha ,
 .IR urar ,
@@ -3382,7 +3382,7 @@ section.  Here is an example entry for Debian packages:
 .PP
 .nf
   regex/\.deb$
-          Open=%cd %p#deb
+          Open=%cd %p/deb://
 .fi
 .\"NODE "Colors"
 .SH "Colors"
@@ -4104,7 +4104,7 @@ The help file for the program.
 .IP
 The default system\-wide extensions file.
 .PP
-.I ~/.local/share/mc/bindings
+.I ~/.local/share/mc/mc.ext
 .IP
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.

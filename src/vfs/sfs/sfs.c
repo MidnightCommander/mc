@@ -50,7 +50,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "src/vfs/local/local.h"
-#include "lib/vfs/gc.h"                 /* vfs_stamp_create */
+#include "lib/vfs/gc.h"         /* vfs_stamp_create */
 
 #include "sfs.h"
 
@@ -118,19 +118,19 @@ cachedfile_compare (const void *a, const void *b)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
+sfs_vfmake (const vfs_path_t * vpath, char *cache)
 {
-    char *inpath, *op;
     int w;
     char pad[10240];
     char *s, *t = pad;
     int was_percent = 0;
     char *pname;                /* name of parent archive */
     char *pqname;               /* name of parent archive, quoted */
+    vfs_path_element_t *path_element;
 
-    pname = g_strdup (name);
-    vfs_split (pname, &inpath, &op);
-    w = (*me->which) (me, op);
+    path_element = vfs_path_get_by_index (vpath, -1);
+    pname = vfs_path_to_str_elements_count (vpath, -1);
+    w = (*path_element->class->which) (path_element->class, path_element->vfs_prefix);
     if (w == -1)
         vfs_die ("This cannot happen... Hopefully.\n");
 
@@ -173,7 +173,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
                 ptr = pqname;
                 break;
             case '2':
-                ptr = op + strlen (sfs_prefix[w]);
+                ptr = path_element->path;
                 break;
             case '3':
                 ptr = cache;
@@ -208,32 +208,37 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-sfs_redirect (struct vfs_class *me, const char *name)
+sfs_redirect (const vfs_path_t * vpath)
 {
     GSList *cur;
     cachedfile *cf;
     char *cache;
     int handle;
+    vfs_path_element_t *path_element;
+    char *path = vfs_path_to_str (vpath);
 
-    cur = g_slist_find_custom (head, name, cachedfile_compare);
+    path_element = vfs_path_get_by_index (vpath, -1);
+    cur = g_slist_find_custom (head, path, cachedfile_compare);
+    g_free (path);
+
     if (cur != NULL)
     {
-       cf = (cachedfile *) cur->data;
-       vfs_stamp (&vfs_sfs_ops, cf);
-       return cf->cache;
-     }
+        cf = (cachedfile *) cur->data;
+        vfs_stamp (&vfs_sfs_ops, cf);
+        return cf->cache;
+    }
 
-    handle = vfs_mkstemps (&cache, "sfs", name);
+    handle = vfs_mkstemps (&cache, "sfs", path_element->path);
 
     if (handle == -1)
         return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
 
     close (handle);
 
-    if (sfs_vfmake (me, name, cache) == 0)
+    if (sfs_vfmake (vpath, cache) == 0)
     {
         cf = g_new (cachedfile, 1);
-        cf->name = g_strdup (name);
+        cf->name = vfs_path_to_str (vpath);
         cf->cache = cache;
         head = g_slist_prepend (head, cf);
 
@@ -249,13 +254,13 @@ sfs_redirect (struct vfs_class *me, const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-sfs_open (struct vfs_class *me, const char *path, int flags, mode_t mode)
+sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ , int flags,
+          mode_t mode)
 {
     int *sfs_info;
     int fd;
 
-    path = sfs_redirect (me, path);
-    fd = open (path, NO_LINEAR (flags), mode);
+    fd = open (sfs_redirect (vpath), NO_LINEAR (flags), mode);
     if (fd == -1)
         return 0;
 
@@ -268,71 +273,65 @@ sfs_open (struct vfs_class *me, const char *path, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
+sfs_stat (const vfs_path_t * vpath, struct stat *buf)
 {
-    path = sfs_redirect (me, path);
-    return stat (path, buf);
+    return stat (sfs_redirect (vpath), buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
+sfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
-    path = sfs_redirect (me, path);
 #ifndef HAVE_STATLSTAT
-    return lstat (path, buf);
+    return lstat (sfs_redirect (vpath), buf);
 #else
-    return statlstat (path, buf);
+    return statlstat (sfs_redirect (vpath), buf);
 #endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_chmod (struct vfs_class *me, const char *path, int mode)
+sfs_chmod (const vfs_path_t * vpath, int mode)
 {
-    path = sfs_redirect (me, path);
-    return chmod (path, mode);
+    return chmod (sfs_redirect (vpath), mode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+sfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    path = sfs_redirect (me, path);
-    return chown (path, owner, group);
+    return chown (sfs_redirect (vpath), owner, group);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
+sfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 {
-    path = sfs_redirect (me, path);
-    return utime (path, times);
+    return utime (sfs_redirect (vpath), times);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+sfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
-    path = sfs_redirect (me, path);
-    return readlink (path, buf, size);
+    return readlink (sfs_redirect (vpath), buf, size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static vfsid
-sfs_getid (struct vfs_class *me, const char *path)
+sfs_getid (const vfs_path_t * vpath)
 {
     GSList *cur;
-
-    (void) me;
+    char *path = vfs_path_to_str (vpath);
 
     cur = g_slist_find_custom (head, path, cachedfile_compare);
+    g_free (path);
 
     return (vfsid) (cur != NULL ? cur->data : NULL);
 }
@@ -348,7 +347,7 @@ sfs_free (vfsid id)
     which = (struct cachedfile *) id;
     cur = g_slist_find (head, which);
     if (cur == NULL)
-       vfs_die ("Free of thing which is unknown to me\n");
+        vfs_die ("Free of thing which is unknown to me\n");
 
     which = (struct cachedfile *) cur->data;
     unlink (which->cache);
@@ -386,19 +385,17 @@ sfs_nothingisopen (vfsid id)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-sfs_getlocalcopy (struct vfs_class *me, const char *path)
+sfs_getlocalcopy (const vfs_path_t * vpath)
 {
-    path = sfs_redirect (me, path);
-    return g_strdup (path);
+    return g_strdup (sfs_redirect (vpath));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_ungetlocalcopy (struct vfs_class *me, const char *path, const char *local, int has_changed)
+sfs_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_changed)
 {
-    (void) me;
-    (void) path;
+    (void) vpath;
     (void) local;
     (void) has_changed;
     return 0;

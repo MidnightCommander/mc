@@ -668,8 +668,29 @@ extract_line (const char *s, const char *top)
 const char *
 x_basename (const char *s)
 {
-    const char *where;
-    return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
+    const char *url_delim, *path_sep;
+
+    url_delim = g_strrstr (s, VFS_PATH_URL_DELIMITER);
+    path_sep = strrchr (s, PATH_SEP);
+
+    if (url_delim == NULL
+        || url_delim < path_sep - strlen (VFS_PATH_URL_DELIMITER)
+        || url_delim - s + strlen (VFS_PATH_URL_DELIMITER) < strlen (s))
+    {
+        /* avoid trailing PATH_SEP, if present */
+        if (s[strlen (s) - 1] == PATH_SEP)
+        {
+            while (--path_sep > s && *path_sep != PATH_SEP);
+            return (path_sep != s) ? path_sep + 1 : s;
+        }
+        else
+            return (path_sep != NULL) ? path_sep + 1 : s;
+    }
+
+    while (--url_delim > s && *url_delim != PATH_SEP);
+    while (--url_delim > s && *url_delim != PATH_SEP);
+
+    return (url_delim == s) ? s : url_delim + 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -890,15 +911,15 @@ decompress_extension (int type)
     switch (type)
     {
     case COMPRESSION_GZIP:
-        return "#ugz";
+        return "/ugz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_BZIP:
-        return "#ubz";
+        return "/ubz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_BZIP2:
-        return "#ubz2";
+        return "/ubz2" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_LZMA:
-        return "#ulzma";
+        return "/ulzma" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_XZ:
-        return "#uxz";
+        return "/uxz" VFS_PATH_URL_DELIMITER;
     }
     /* Should never reach this place */
     fprintf (stderr, "Fatal: decompress_extension called with an unknown argument\n");

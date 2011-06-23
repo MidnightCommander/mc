@@ -38,7 +38,7 @@
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/vfs.h"        /* For vfs_translate_url() */
+#include "lib/vfs/vfs.h"        /* For mc_get_current_wd() */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"
@@ -1185,7 +1185,7 @@ save_panel_dir (int idx)
 
         g_free (panels[idx].last_saved_dir);    /* last path no needed */
         /* Because path can be nonlocal */
-        panels[idx].last_saved_dir = vfs_translate_url (widget_work_dir);
+        panels[idx].last_saved_dir = g_strdup (widget_work_dir);
     }
 }
 

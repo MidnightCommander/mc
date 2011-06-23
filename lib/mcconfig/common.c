@@ -137,7 +137,7 @@ mc_config_deinit (mc_config_t * mc_config)
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_has_param (mc_config_t * mc_config, const char *group, const gchar * param)
+mc_config_has_param (const mc_config_t * mc_config, const char *group, const gchar * param)
 {
     if (!mc_config || !group || !param)
         return FALSE;

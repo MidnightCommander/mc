@@ -84,11 +84,6 @@ extern FILE *dbf;
 #define CNV_LANG(s) dos_to_unix(s,False)
 #define GNAL_VNC(s) unix_to_dos(s,False)
 
-/* Extract the hostname and username from the path */
-/* path is in the form: [user@]hostname/share/remote-dir */
-#define smbfs_get_host_and_username(path, host, user, port, pass) \
-        vfs_split_url (*path, host, user, port, pass, SMB_PORT, 0)
-
 #define smbfs_lstat smbfs_stat  /* no symlinks on smb filesystem? */
 
 /*** file scope type declarations ****************************************************************/
@@ -124,7 +119,7 @@ typedef struct
 /*** file scope variables ************************************************************************/
 
 static const char *const IPC = "IPC$";
-static const char *const URL_HEADER = "/#smb:";
+static const char *const URL_HEADER = "smb" VFS_PATH_URL_DELIMITER;
 
 static int my_errno;
 static uint32 err;
@@ -969,11 +964,11 @@ smbfs_closedir (void *info)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_chmod (struct vfs_class *me, const char *path, int mode)
+smbfs_chmod (const vfs_path_t * vpath, int mode)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_chmod(path:%s, mode:%d)\n", path, mode));
+    DEBUG (3, ("smbfs_chmod(path:%s, mode:%d)\n", path_element->path, mode));
     /*      my_errno = EOPNOTSUPP;
        return -1;   *//* cannot chmod on smb filesystem */
     return 0;                   /* make mc happy */
@@ -982,11 +977,11 @@ smbfs_chmod (struct vfs_class *me, const char *path, int mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
+smbfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path, owner, group));
+    DEBUG (3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path_element->path, owner, group));
     my_errno = EOPNOTSUPP;      /* ready for your labotomy? */
     return -1;
 }
@@ -994,12 +989,12 @@ smbfs_chown (struct vfs_class *me, const char *path, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
+smbfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
     (void) times;
 
-    DEBUG (3, ("smbfs_utime(path:%s)\n", path));
+    DEBUG (3, ("smbfs_utime(path:%s)\n", path_element->path));
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -1007,11 +1002,11 @@ smbfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
+smbfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_readlink(path:%s, buf:%s, size:%zu)\n", path, buf, size));
+    DEBUG (3, ("smbfs_readlink(path:%s, buf:%s, size:%zu)\n", path_element->path, buf, size));
     my_errno = EOPNOTSUPP;
     return -1;                  /* no symlinks on smb filesystem? */
 }
@@ -1019,11 +1014,12 @@ smbfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_symlink (struct vfs_class *me, const char *n1, const char *n2)
+smbfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
+    vfs_path_element_t *path_element1 = vfs_path_get_by_index (vpath1, -1);
+    vfs_path_element_t *path_element2 = vfs_path_get_by_index (vpath2, -1);
 
-    DEBUG (3, ("smbfs_symlink(n1:%s, n2:%s)\n", n1, n2));
+    DEBUG (3, ("smbfs_symlink(n1:%s, n2:%s)\n", path_element1->path, path_element2->path));
     my_errno = EOPNOTSUPP;
     return -1;                  /* no symlinks on smb filesystem? */
 }
@@ -1322,44 +1318,50 @@ smbfs_open_link (char *host, char *path, const char *user, int *port, char *this
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-smbfs_get_path (smbfs_connection ** sc, const char *path)
+smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
 {
-    char *user, *host, *remote_path, *pass;
-    int port = SMB_PORT;
+    char *remote_path = NULL;
+    vfs_path_element_t *url;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+    char *path = path_element->path;
 
     DEBUG (3, ("smbfs_get_path(%s)\n", path));
-    if (strncmp (path, URL_HEADER, HEADER_LEN))
+    if (strncmp (path, URL_HEADER, HEADER_LEN) != 0)
         return NULL;
     path += HEADER_LEN;
 
     if (*path == '/')           /* '/' leading server name */
         path++;                 /* probably came from server browsing */
 
-    if ((remote_path = smbfs_get_host_and_username (&path, &host, &user, &port, &pass)))
-        if ((*sc = smbfs_open_link (host, remote_path, user, &port, pass)) == NULL)
-        {
-            g_free (remote_path);
-            remote_path = NULL;
-        }
-    g_free (host);
-    g_free (user);
-    if (pass)
-        wipe_password (pass);
+    url = vfs_url_split (path, SMB_PORT, URL_FLAGS_NONE);
 
-    if (!remote_path)
+    if (url != NULL)
+    {
+        *sc = smbfs_open_link (url->host, url->path, url->user, &url->port, url->password);
+        wipe_password (url->password);
+
+        if (*sc != NULL)
+            remote_path = g_strdup (url->path);
+
+        vfs_path_element_free (url);
+    }
+
+    if (remote_path == NULL)
         return NULL;
 
     /* NOTE: tildes are deprecated. See ftpfs.c */
     {
-        int f = !strcmp (remote_path, "/~");
-        if (f || !strncmp (remote_path, "/~/", 3))
+        int f = strcmp (remote_path, "/~") ? 0 : 1;
+
+        if (f != 0 || strncmp (remote_path, "/~/", 3) == 0)
         {
             char *s;
             s = concat_dir_and_file ((*sc)->home, remote_path + 3 - f);
             g_free (remote_path);
-            return s;
+            remote_path = s;
         }
     }
+
     return remote_path;
 }
 
@@ -1380,23 +1382,22 @@ is_error (int result, int errno_num)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-smbfs_opendir (struct vfs_class *me, const char *dirname)
+smbfs_opendir (const vfs_path_t * vpath)
 {
     opendir_info *smbfs_info;
     smbfs_connection *sc;
     char *remote_dir;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    (void) me;
+    DEBUG (3, ("smbfs_opendir(dirname:%s)\n", path_element->path));
 
-    DEBUG (3, ("smbfs_opendir(dirname:%s)\n", dirname));
-
-    if (!(remote_dir = smbfs_get_path (&sc, dirname)))
+    if (!(remote_dir = smbfs_get_path (&sc, vpath)))
         return NULL;
 
     /* FIXME: where freed? */
     smbfs_info = g_new (opendir_info, 1);
     smbfs_info->server_list = FALSE;
-    smbfs_info->path = g_strdup (dirname);      /* keep original */
+    smbfs_info->path = g_strdup (path_element->path);   /* keep original */
     smbfs_info->dirname = remote_dir;
     smbfs_info->conn = sc;
     smbfs_info->entries = 0;
@@ -1458,7 +1459,11 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
         /* Make sure there is such share at server */
         smbfs_connection *sc;
         char *p;
-        p = smbfs_get_path (&sc, path);
+        vfs_path_t *vpath = vfs_path_from_str (path);
+
+        p = smbfs_get_path (&sc, vpath);
+        vfs_path_free (vpath);
+
         g_free (p);
         if (p)
         {
@@ -1655,15 +1660,14 @@ smbfs_get_stat_info (smbfs_connection * sc, const char *path, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_chdir (struct vfs_class *me, const char *path)
+smbfs_chdir (const vfs_path_t * vpath)
 {
     char *remote_dir;
     smbfs_connection *sc;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    (void) me;
-
-    DEBUG (3, ("smbfs_chdir(path:%s)\n", path));
-    if (!(remote_dir = smbfs_get_path (&sc, path)))
+    DEBUG (3, ("smbfs_chdir(path:%s)\n", path_element->path));
+    if (!(remote_dir = smbfs_get_path (&sc, vpath)))
         return -1;
     g_free (remote_dir);
 
@@ -1673,19 +1677,20 @@ smbfs_chdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_loaddir_by_name (struct vfs_class *me, const char *path)
+smbfs_loaddir_by_name (const vfs_path_t * vpath)
 {
     void *info;
     char *mypath, *p;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    mypath = g_strdup (path);
+    mypath = g_strdup (path_element->path);
     p = strrchr (mypath, '/');
 
     if (p > mypath)
         *p = 0;
     DEBUG (6, ("smbfs_loaddir_by_name(%s)\n", mypath));
-    smbfs_chdir (me, mypath);
-    info = smbfs_opendir (me, mypath);
+    smbfs_chdir (vpath);
+    info = smbfs_opendir (vpath);
     g_free (mypath);
     if (!info)
         return -1;
@@ -1697,24 +1702,25 @@ smbfs_loaddir_by_name (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
+smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
 {
     smbfs_connection *sc;
     pstring server_url;
     char *service, *pp, *at;
     const char *p;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_stat(path:%s)\n", path));
+    DEBUG (3, ("smbfs_stat(path:%s)\n", path_element->path));
 
     if (!current_info)
     {
         DEBUG (1, ("current_info = NULL: "));
-        if (smbfs_loaddir_by_name (me, path) < 0)
+        if (smbfs_loaddir_by_name (vpath) < 0)
             return -1;
     }
 
     /* check if stating server */
-    p = path;
+    p = path_element->path;
     if (strncmp (p, URL_HEADER, HEADER_LEN))
     {
         DEBUG (1, ("'%s' doesnt start with '%s' (length %d)\n", p, URL_HEADER, HEADER_LEN));
@@ -1747,19 +1753,19 @@ smbfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
     {
         if (!current_info->server_list)
         {
-            if (smbfs_loaddir_by_name (me, path) < 0)
+            if (smbfs_loaddir_by_name (vpath) < 0)
                 return -1;
         }
-        return smbfs_fake_server_stat (server_url, path, buf);
+        return smbfs_fake_server_stat (server_url, path_element->path, buf);
     }
 
     if (!strchr (++pp, '/'))
     {
-        return smbfs_fake_share_stat (server_url, path, buf);
+        return smbfs_fake_share_stat (server_url, path_element->path, buf);
     }
 
     /* stating inside share at this point */
-    if (!(service = smbfs_get_path (&sc, path)))        /* connects if necessary */
+    if (!(service = smbfs_get_path (&sc, vpath)))       /* connects if necessary */
         return -1;
     {
         int hostlen = strlen (current_bucket->host);
@@ -1794,7 +1800,7 @@ smbfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
     if (strncmp (p, pp, strlen (p)) != 0)
     {
         DEBUG (6, ("desired '%s' is not loaded, we have '%s'\n", p, pp));
-        if (smbfs_loaddir_by_name (me, path) < 0)
+        if (smbfs_loaddir_by_name (vpath) < 0)
         {
             g_free (service);
             return -1;
@@ -1803,7 +1809,7 @@ smbfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
     }
     g_free (service);
     /* stat dirs & files under shares now */
-    return smbfs_get_stat_info (sc, path, buf);
+    return smbfs_get_stat_info (sc, path_element->path, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1845,11 +1851,13 @@ smbfs_lseek (void *data, off_t offset, int whence)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
+smbfs_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path, mode, (unsigned int) dev));
+    DEBUG (3,
+           ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path_element->path, mode,
+            (unsigned int) dev));
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -1857,19 +1865,18 @@ smbfs_mknod (struct vfs_class *me, const char *path, mode_t mode, dev_t dev)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
+smbfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
     smbfs_connection *sc;
     char *remote_file;
     char *cpath;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    (void) me;
-
-    DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, (int) mode));
-    if ((remote_file = smbfs_get_path (&sc, path)) == 0)
+    DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path_element->path, (int) mode));
+    if ((remote_file = smbfs_get_path (&sc, vpath)) == 0)
         return -1;
     g_free (remote_file);
-    cpath = smbfs_convert_path (path, FALSE);
+    cpath = smbfs_convert_path (path_element->path, FALSE);
 
     if (!cli_mkdir (sc->cli, cpath))
     {
@@ -1886,19 +1893,18 @@ smbfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_rmdir (struct vfs_class *me, const char *path)
+smbfs_rmdir (const vfs_path_t * vpath)
 {
     smbfs_connection *sc;
     char *remote_file;
     char *cpath;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    (void) me;
-
-    DEBUG (3, ("smbfs_rmdir(path:%s)\n", path));
-    if ((remote_file = smbfs_get_path (&sc, path)) == 0)
+    DEBUG (3, ("smbfs_rmdir(path:%s)\n", path_element->path));
+    if ((remote_file = smbfs_get_path (&sc, vpath)) == 0)
         return -1;
     g_free (remote_file);
-    cpath = smbfs_convert_path (path, FALSE);
+    cpath = smbfs_convert_path (path_element->path, FALSE);
 
     if (!cli_rmdir (sc->cli, cpath))
     {
@@ -1916,11 +1922,12 @@ smbfs_rmdir (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_link (struct vfs_class *me, const char *p1, const char *p2)
+smbfs_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    (void) me;
+    vfs_path_element_t *path_element1 = vfs_path_get_by_index (vpath1, -1);
+    vfs_path_element_t *path_element2 = vfs_path_get_by_index (vpath2, -1);
 
-    DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", p1, p2));
+    DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", path_element1->path, path_element2->path));
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -1942,10 +1949,9 @@ smbfs_free (vfsid id)
 static void
 smbfs_forget (const char *path)
 {
-    char *host, *user, *p;
-    int port;
+    vfs_path_element_t *p;
 
-    if (strncmp (path, URL_HEADER, HEADER_LEN))
+    if (strncmp (path, URL_HEADER, HEADER_LEN) != 0)
         return;
 
     DEBUG (3, ("smbfs_forget(path:%s)\n", path));
@@ -1954,45 +1960,44 @@ smbfs_forget (const char *path)
     if (path[0] == '/' && path[1] == '/')
         path += 2;
 
-    if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL)))
+    p = vfs_url_split (path, SMB_PORT, URL_FLAGS_NONE);
+    if (p != NULL)
     {
         size_t i;
-
-        g_free (p);
 
         for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++)
         {
             if (smbfs_connections[i].cli
-                && (strcmp (host, smbfs_connections[i].host) == 0)
-                && (strcmp (user, smbfs_connections[i].user) == 0)
-                && (port == smbfs_connections[i].port))
+                && (strcmp (p->host, smbfs_connections[i].host) == 0)
+                && (strcmp (p->user, smbfs_connections[i].user) == 0)
+                && (p->port == smbfs_connections[i].port))
             {
 
                 /* close socket: the child owns it now */
                 cli_shutdown (smbfs_connections[i].cli);
 
                 /* reopen the connection */
-                smbfs_connections[i].cli = smbfs_do_connect (host, smbfs_connections[i].service);
+                smbfs_connections[i].cli = smbfs_do_connect (p->host, smbfs_connections[i].service);
             }
         }
+
+        vfs_path_element_free (p);
     }
-    g_free (host);
-    g_free (user);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
+smbfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
-    (void) me;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
     (void) arg;
 
-    DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path, ctlop));
+    DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path_element->path, ctlop));
     switch (ctlop)
     {
     case VFS_SETCTL_FORGET:
-        smbfs_forget (path);
+        smbfs_forget (path_element->path);
         return 0;
     }
     return 0;
@@ -2057,18 +2062,17 @@ smbfs_open_readwrite (smbfs_handle * remote_handle, char *rname, int flags, mode
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-smbfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
+smbfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     char *remote_file;
     void *ret;
     smbfs_connection *sc;
     smbfs_handle *remote_handle;
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    (void) me;
+    DEBUG (3, ("smbfs_open(file:%s, flags:%d, mode:%o)\n", path_element->path, flags, mode));
 
-    DEBUG (3, ("smbfs_open(file:%s, flags:%d, mode:%o)\n", file, flags, mode));
-
-    if (!(remote_file = smbfs_get_path (&sc, file)))
+    if (!(remote_file = smbfs_get_path (&sc, vpath)))
         return 0;
 
     remote_file = free_after (smbfs_convert_path (remote_file, FALSE), remote_file);
@@ -2089,14 +2093,12 @@ smbfs_open (struct vfs_class *me, const char *file, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_unlink (struct vfs_class *me, const char *path)
+smbfs_unlink (const vfs_path_t * vpath)
 {
     smbfs_connection *sc;
     char *remote_file;
 
-    (void) me;
-
-    if ((remote_file = smbfs_get_path (&sc, path)) == 0)
+    if ((remote_file = smbfs_get_path (&sc, vpath)) == 0)
         return -1;
 
     remote_file = free_after (smbfs_convert_path (remote_file, FALSE), remote_file);
@@ -2115,18 +2117,16 @@ smbfs_unlink (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_rename (struct vfs_class *me, const char *a, const char *b)
+smbfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     smbfs_connection *sc;
     char *ra, *rb;
     int retval;
 
-    (void) me;
-
-    if ((ra = smbfs_get_path (&sc, a)) == 0)
+    if ((ra = smbfs_get_path (&sc, vpath1)) == 0)
         return -1;
 
-    if ((rb = smbfs_get_path (&sc, b)) == 0)
+    if ((rb = smbfs_get_path (&sc, vpath2)) == 0)
     {
         g_free (ra);
         return -1;
@@ -2200,7 +2200,7 @@ init_smbfs (void)
     tcp_init ();
 
     vfs_smbfs_ops.name = "smbfs";
-    vfs_smbfs_ops.prefix = "smb:";
+    vfs_smbfs_ops.prefix = "smb";
     vfs_smbfs_ops.flags = VFSF_NOLINKS;
     vfs_smbfs_ops.init = smbfs_init;
     vfs_smbfs_ops.fill_names = smbfs_fill_names;
