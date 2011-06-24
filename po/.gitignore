@@ -16,7 +16,6 @@ cat-id-tbl.c
 en@boldquot.header
 en@quot.header
 insert-header.sin
-mc.pot
 messages
 quot.sed
 remove-potcdate.sed
