@@ -297,7 +297,7 @@ http://www.freebsd.org/cgi/cvsweb.cgi/ports/misc/mc/files/
 http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/sysutils/mc/patches/
 	The patches that are applied for the NetBSD version of MC.
 
-http://www.gentoo.org/cgi-bin/viewcvs.cgi/app-misc/mc/files/?hideattic=1
+http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/app-misc/mc/files/?hideattic=1
 	The patches that are applied for the Gentoo Linux version of MC.
 
 
