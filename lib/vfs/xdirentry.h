@@ -168,8 +168,7 @@ struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *e
 
 /* outside interface */
 void vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub);
-const char *vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive,
-                                   int flags);
+const char *vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flags);
 
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);
 char *vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino);
@@ -181,5 +180,14 @@ int vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, 
 /* misc */
 int vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino);
 
+void vfs_s_normalize_filename_pos (struct vfs_s_inode *root_inode, size_t final_filepos);
+
 /*** inline functions ****************************************************************************/
+
+static inline void
+vfs_s_store_filename_pos (struct vfs_s_entry *entry, size_t position)
+{
+    entry->ino->data_offset = (off_t) position;
+}
+
 #endif

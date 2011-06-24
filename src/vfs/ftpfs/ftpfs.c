@@ -1642,6 +1642,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     int sock, num_entries = 0;
     char lc_buffer[BUF_8K];
     int cd_first;
+    size_t filepos = 0;
 
     cd_first = ftpfs_first_cd_then_ls || (SUP->strict == RFC_STRICT)
         || (strchr (remote_path, ' ') != NULL);
@@ -1712,13 +1713,14 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 
         ent = vfs_s_generate_entry (me, NULL, dir, 0);
         i = ent->ino->st.st_nlink;
-        if (!vfs_parse_ls_lga (lc_buffer, &ent->ino->st, &ent->name, &ent->ino->linkname))
+        if (!vfs_parse_ls_lga (lc_buffer, &ent->ino->st, &ent->name, &ent->ino->linkname, &filepos))
         {
             vfs_s_free_entry (me, ent);
             continue;
         }
         ent->ino->st.st_nlink = i;      /* Ouch, we need to preserve our counts :-( */
         num_entries++;
+        vfs_s_store_filename_pos (ent, filepos);
         vfs_s_insert_entry (me, dir, ent);
     }
 
@@ -1742,6 +1744,8 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         cd_first = 1;
         goto again;
     }
+
+    vfs_s_normalize_filename_pos (dir, filepos);
 
     if (SUP->strict == RFC_AUTODETECT)
         SUP->strict = RFC_DARING;
