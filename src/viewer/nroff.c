@@ -112,10 +112,17 @@ mcview_display_nroff (mcview_t * view)
         {
             if (from > 1)
             {
-                mcview_get_byte (view, from - 2, &c_prev);
-                mcview_get_byte (view, from, &c_next);
+#ifdef HAVE_CHARSET
+                if (view->utf8)
+                {
+                    gboolean read_res;
+                    c_next = mcview_get_utf (view, from, &cw, &read_res);
+                }
+                else
+#endif
+                    mcview_get_byte (view, from, &c_next);
             }
-            if (g_ascii_isprint (c_prev) && g_ascii_isprint (c_prev)
+            if (g_unichar_isprint (c_prev) && g_unichar_isprint (c_next)
                 && (c_prev == c_next || c_prev == '_' || (c_prev == '+' && c_next == 'o')))
             {
                 if (col == 0)
@@ -175,6 +182,8 @@ mcview_display_nroff (mcview_t * view)
         {
             tty_setcolor (SELECTED_COLOR);
         }
+
+        c_prev = c;
 
         if ((off_t) col >= view->dpy_text_column
             && (off_t) col - view->dpy_text_column < (off_t) width)
