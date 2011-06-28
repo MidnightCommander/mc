@@ -53,6 +53,9 @@
 
 /*** file scope variables ************************************************************************/
 
+static int search_cb_char_curr_index = 0;
+static char search_cb_char_buffer[6];
+
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -168,17 +171,25 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
         return MC_SEARCH_CB_SKIP;
     }
 
-    lc_byte = view->search_nroff_seq->current_char;
+    if (search_cb_char_curr_index < view->search_nroff_seq->char_width)
+    {
+        lc_byte = search_cb_char_buffer[search_cb_char_curr_index];
+        search_cb_char_curr_index++;
 
-    if (lc_byte == -1)
-        return MC_SEARCH_CB_INVALID;
+        return (lc_byte != -1) ? lc_byte : MC_SEARCH_CB_INVALID;
+    }
 
     mcview_nroff_seq_next (view->search_nroff_seq);
+    search_cb_char_curr_index = 0;
+    if (view->search_nroff_seq->char_width > 1)
+        g_unichar_to_utf8 (view->search_nroff_seq->current_char, search_cb_char_buffer);
+    else
+        search_cb_char_buffer[0] = (char) view->search_nroff_seq->current_char;
 
     if (view->search_nroff_seq->type != NROFF_TYPE_NONE)
-        view->search_numNeedSkipChar = 2;
+        view->search_numNeedSkipChar = 1 + view->search_nroff_seq->char_width;
 
-    return lc_byte;
+    return MC_SEARCH_CB_SKIP;
 }
 
 /* --------------------------------------------------------------------------------------------- */
