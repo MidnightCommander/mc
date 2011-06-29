@@ -1177,7 +1177,7 @@ extfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_chmod (const vfs_path_t * vpath, int mode)
+extfs_chmod (const vfs_path_t * vpath, mode_t mode)
 {
     (void) vpath;
     (void) mode;

@@ -163,7 +163,7 @@ typedef struct vfs_class
     int (*lstat) (const vfs_path_t * vpath, struct stat * buf);
     int (*fstat) (void *vfs_info, struct stat * buf);
 
-    int (*chmod) (const vfs_path_t * vpath, int mode);
+    int (*chmod) (const vfs_path_t * vpath, mode_t mode);
     int (*chown) (const vfs_path_t * vpath, uid_t owner, gid_t group);
     int (*utime) (const vfs_path_t * vpath, struct utimbuf * times);
 

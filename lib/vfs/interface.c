@@ -269,8 +269,7 @@ mc_symlink (const char *name1, const char *path)
 
     if (vpath2 != NULL)
     {
-        vfs_path_element_t *path_element =
-            vfs_path_get_by_index (vpath1, vfs_path_elements_count (vpath1) - 1);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
         if (vfs_path_element_valid (path_element))
         {
             result =
@@ -330,8 +329,8 @@ int mc_##name (const char *fname1, const char *fname2) \
         vfs_path_free(vpath1); \
         return -1; \
     }\
-    path_element1 = vfs_path_get_by_index (vpath1, vfs_path_elements_count (vpath1) - 1); \
-    path_element2 = vfs_path_get_by_index (vpath2, vfs_path_elements_count (vpath2) - 1); \
+    path_element1 = vfs_path_get_by_index (vpath1, - 1); \
+    path_element2 = vfs_path_get_by_index (vpath2, - 1); \
 \
     if (!vfs_path_element_valid (path_element1) || !vfs_path_element_valid (path_element2) || \
         path_element1->class != path_element2->class) \

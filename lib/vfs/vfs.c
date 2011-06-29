@@ -379,8 +379,7 @@ vfs_get_raw_current_dir (void)
 void
 vfs_set_raw_current_dir (const vfs_path_t * vpath)
 {
-    if (current_path != NULL)
-        vfs_path_free (current_path);
+    vfs_path_free (current_path);
     current_path = (vfs_path_t *) vpath;
 }
 

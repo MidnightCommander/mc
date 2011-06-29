@@ -33,8 +33,6 @@ typedef struct
         GIConv converter;
         DIR *info;
     } dir;
-
-    struct vfs_s_super *current_super_block;
 } vfs_path_element_t;
 
 /*** global variables defined in .c file *********************************************************/
