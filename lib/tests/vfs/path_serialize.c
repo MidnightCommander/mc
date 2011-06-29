@@ -115,7 +115,7 @@ START_TEST (test_path_serialize_deserialize)
     char *serialized_vpath;
     GError *error = NULL;
 
-    vpath = vfs_path_from_str (ETALON_PATH_STR);
+    vpath = vfs_path_from_str_flags (ETALON_PATH_STR, VPF_USE_DEPRECATED_PARSER);
     serialized_vpath = vfs_path_serialize (vpath, &error);
     vfs_path_free (vpath);
 

@@ -632,7 +632,7 @@ vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags)
     if (path == NULL)
         return NULL;
 
-    if (vfs_path_is_str_path_deprecated (path))
+    if ((flags & VPF_USE_DEPRECATED_PARSER) != 0 && vfs_path_is_str_path_deprecated (path))
         vpath = vfs_path_from_str_deprecated_parser (path);
     else
         vpath = vfs_path_from_str_uri_parser (path);

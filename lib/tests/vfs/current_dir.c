@@ -69,47 +69,6 @@ test_chdir(const vfs_path_t * vpath)
         strcmp(etalon, mc_get_current_wd(buffer,MC_MAXPATHLEN)) == 0, \
         "\n expected(%s) doesn't equal \nto actual(%s)", etalon, buffer);
 
-START_TEST (set_up_current_dir)
-{
-    static struct vfs_s_subclass test_subclass;
-    static struct vfs_class vfs_test_ops;
-    char buffer[MC_MAXPATHLEN];
-
-    vfs_s_init_class (&vfs_test_ops, &test_subclass);
-
-    vfs_test_ops.name = "testfs";
-    vfs_test_ops.flags = VFSF_NOLINKS;
-    vfs_test_ops.prefix = "test";
-    vfs_test_ops.chdir = test_chdir;
-
-    vfs_register_class (&vfs_test_ops);
-
-    cd_and_check ("/dev/some.file#test", "/dev/some.file/test://");
-
-    cd_and_check ("/dev/some.file#test/bla-bla", "/dev/some.file/test://bla-bla");
-
-    cd_and_check ("..", "/dev/some.file/test://");
-
-    cd_and_check ("..", "/dev");
-
-    cd_and_check ("..", "/");
-
-    cd_and_check ("..", "/");
-
-    cd_and_check ("/dev/some.file/#test/bla-bla", "/dev/some.file/test://bla-bla");
-
-    cd_and_check ("..", "/dev/some.file/test://");
-
-    cd_and_check ("..", "/dev");
-
-    cd_and_check ("..", "/");
-
-    cd_and_check ("..", "/");
-}
-END_TEST
-
-/* --------------------------------------------------------------------------------------------- */
-
 START_TEST (set_up_current_dir_url)
 {
     static struct vfs_s_subclass test_subclass;
@@ -161,7 +120,6 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, set_up_current_dir);
     tcase_add_test (tc_core, set_up_current_dir_url);
     /* *********************************** */
 
