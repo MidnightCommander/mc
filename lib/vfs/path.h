@@ -7,6 +7,12 @@
 
 /*** enums ***************************************************************************************/
 
+typedef enum
+{
+    VPF_NONE = 0,
+    VPF_NO_CANON = 1
+} vfs_path_flag_t;
+
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 struct vfs_class;
@@ -48,6 +54,7 @@ int vfs_path_elements_count (const vfs_path_t * path);
 char *vfs_path_to_str (const vfs_path_t * path);
 char *vfs_path_to_str_elements_count (const vfs_path_t * path, int elements_count);
 vfs_path_t *vfs_path_from_str (const char *path_str);
+vfs_path_t *vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags);
 
 vfs_path_element_t *vfs_path_get_by_index (const vfs_path_t * path, int element_index);
 vfs_path_element_t *vfs_path_element_clone (const vfs_path_element_t * element);

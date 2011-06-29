@@ -265,7 +265,7 @@ mc_symlink (const char *name1, const char *path)
     if (vpath1 == NULL)
         return -1;
 
-    vpath2 = vfs_path_from_str (name1);
+    vpath2 = vfs_path_from_str_flags (name1, VPF_NO_CANON);
 
     if (vpath2 != NULL)
     {

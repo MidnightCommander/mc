@@ -607,15 +607,16 @@ vfs_path_to_str (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Split path string to path elements.
+ * Split path string to path elements with flags for change parce process.
  *
  * @param path_str VFS-path
+ * @param flags flags for parser
  *
  * @return pointer to newly created vfs_path_t object with filled path elements array.
  */
 
 vfs_path_t *
-vfs_path_from_str (const char *path_str)
+vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags)
 {
     vfs_path_t *vpath;
     char *path;
@@ -623,7 +624,11 @@ vfs_path_from_str (const char *path_str)
     if (path_str == NULL)
         return NULL;
 
-    path = vfs_canon (path_str);
+    if ((flags & VPF_NO_CANON) == 0)
+        path = vfs_canon (path_str);
+    else
+        path = g_strdup (path_str);
+
     if (path == NULL)
         return NULL;
 
@@ -635,6 +640,21 @@ vfs_path_from_str (const char *path_str)
     g_free (path);
 
     return vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Split path string to path elements.
+ *
+ * @param path_str VFS-path
+ *
+ * @return pointer to newly created vfs_path_t object with filled path elements array.
+ */
+
+vfs_path_t *
+vfs_path_from_str (const char *path_str)
+{
+    return vfs_path_from_str_flags (path_str, VPF_NONE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
