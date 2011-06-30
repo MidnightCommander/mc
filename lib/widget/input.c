@@ -593,6 +593,8 @@ hist_prev (WInput * in)
 static void
 hist_next (WInput * in)
 {
+    GList *next;
+
     if (in->need_push)
     {
         push_history (in, in->buffer);
@@ -603,12 +605,13 @@ hist_next (WInput * in)
     if (in->history == NULL)
         return;
 
-    if (in->history->next == NULL)
+    next = g_list_next (in->history);
+    if (next == NULL)
         input_assign_text (in, "");
     else
     {
-        in->history = g_list_next (in->history);
-        input_assign_text (in, (char *) in->history->data);
+        in->history = next;
+        input_assign_text (in, (char *) next->data);
         in->need_push = FALSE;
     }
 }
