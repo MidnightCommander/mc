@@ -535,13 +535,15 @@ kill_line (WInput * in)
 static void
 clear_line (WInput * in)
 {
-    in->need_push = 1;
+    in->need_push = TRUE;
     in->buffer[0] = '\0';
     in->point = 0;
     in->mark = 0;
     in->highlight = FALSE;
     in->charpoint = 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 ins_from_clip (WInput * in)
@@ -551,7 +553,6 @@ ins_from_clip (WInput * in)
 
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
-
 
     event_data.text = &p;
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &event_data);
