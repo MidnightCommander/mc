@@ -60,6 +60,7 @@ typedef struct
     char *buffer;               /* pointer to editing buffer */
     char *history_name;         /* name of history for loading and saving */
     GList *history;             /* the history */
+    gboolean history_changed;   /* the history has changed */
     gboolean need_push;         /* need to push the current Input on hist? */
     char **completions;         /* possible completions array */
     input_complete_t completion_flags;
