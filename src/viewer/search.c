@@ -239,9 +239,9 @@ mcview_do_search (mcview_t * view)
 
     if (view->search_start != 0)
     {
-        search_start = mcview_search_options.backwards ? -2 : 0;
-        search_start += view->search_start +
-            mcview__get_nroff_real_len (view, view->search_start, 2) * search_start;
+        int nroff_real_len = mcview__get_nroff_real_len (view, view->search_start + 1, 2);
+        search_start = mcview_search_options.backwards ? -2 : nroff_real_len != 0 ? 2 : 0;
+        search_start += view->search_start + nroff_real_len * search_start;
     }
 
     if (mcview_search_options.backwards && (int) search_start < 0)
