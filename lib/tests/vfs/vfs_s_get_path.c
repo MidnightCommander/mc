@@ -125,7 +125,8 @@ START_TEST (test_vfs_s_get_path)
     struct vfs_s_super *archive;
 
     const char *result;
-    vfs_path_t *vpath = vfs_path_from_str("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH);
+    vfs_path_t *vpath = vfs_path_from_str_flags ("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH,
+            VPF_USE_DEPRECATED_PARSER);
 
     result = vfs_s_get_path (vpath, &archive, 0);
 

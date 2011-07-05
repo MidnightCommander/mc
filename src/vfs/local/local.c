@@ -141,7 +141,7 @@ local_lstat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chmod (const vfs_path_t * vpath, int mode)
+local_chmod (const vfs_path_t * vpath, mode_t mode)
 {
     vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 

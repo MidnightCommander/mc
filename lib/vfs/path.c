@@ -193,7 +193,11 @@ vfs_path_build_url_params_str (vfs_path_element_t * element)
     {
         if ((element->user != NULL) || (element->password != NULL))
             g_string_append_c (buffer, '@');
+        if (element->ipv6)
+            g_string_append_c (buffer, '[');
         g_string_append (buffer, element->host);
+        if (element->ipv6)
+            g_string_append_c (buffer, ']');
     }
 
     if ((element->port) != 0 && (element->host != NULL))
@@ -314,6 +318,7 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
             colon[0] = '\0';
             colon[1] = '\0';
             colon++;
+            path_element->ipv6 = TRUE;
         }
     }
 
@@ -607,6 +612,43 @@ vfs_path_to_str (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Split path string to path elements with flags for change parce process.
+ *
+ * @param path_str VFS-path
+ * @param flags flags for parser
+ *
+ * @return pointer to newly created vfs_path_t object with filled path elements array.
+ */
+
+vfs_path_t *
+vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags)
+{
+    vfs_path_t *vpath;
+    char *path;
+
+    if (path_str == NULL)
+        return NULL;
+
+    if ((flags & VPF_NO_CANON) == 0)
+        path = vfs_canon (path_str);
+    else
+        path = g_strdup (path_str);
+
+    if (path == NULL)
+        return NULL;
+
+    if ((flags & VPF_USE_DEPRECATED_PARSER) != 0 && vfs_path_is_str_path_deprecated (path))
+        vpath = vfs_path_from_str_deprecated_parser (path);
+    else
+        vpath = vfs_path_from_str_uri_parser (path);
+
+    g_free (path);
+
+    return vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Split path string to path elements.
  *
  * @param path_str VFS-path
@@ -617,24 +659,7 @@ vfs_path_to_str (const vfs_path_t * vpath)
 vfs_path_t *
 vfs_path_from_str (const char *path_str)
 {
-    vfs_path_t *vpath;
-    char *path;
-
-    if (path_str == NULL)
-        return NULL;
-
-    path = vfs_canon (path_str);
-    if (path == NULL)
-        return NULL;
-
-    if (vfs_path_is_str_path_deprecated (path))
-        vpath = vfs_path_from_str_deprecated_parser (path);
-    else
-        vpath = vfs_path_from_str_uri_parser (path);
-
-    g_free (path);
-
-    return vpath;
+    return vfs_path_from_str_flags (path_str, VPF_NONE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -664,10 +689,7 @@ vfs_path_new (void)
 int
 vfs_path_elements_count (const vfs_path_t * vpath)
 {
-    if (vpath == NULL)
-        return 0;
-
-    return (vpath->path != NULL) ? g_list_length (vpath->path) : 0;
+    return (vpath != NULL && vpath->path != NULL) ? g_list_length (vpath->path) : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -683,19 +705,13 @@ vfs_path_elements_count (const vfs_path_t * vpath)
 vfs_path_element_t *
 vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 {
-    vfs_path_element_t *element;
-
-    if (vpath == NULL)
-        return NULL;
+    if (element_index < 0)
+        element_index += vfs_path_elements_count (vpath);
 
     if (element_index < 0)
-        element_index = vfs_path_elements_count (vpath) + element_index;
-
-    element = g_list_nth_data (vpath->path, element_index);
-    if (element == NULL)
         vfs_die ("vfs_path_get_by_index: incorrect index!");
 
-    return element;
+    return g_list_nth_data (vpath->path, element_index);
 }
 
 /* --------------------------------------------------------------------------------------------- */

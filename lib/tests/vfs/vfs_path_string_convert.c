@@ -87,7 +87,7 @@ START_TEST (test_vfs_path_from_to_string)
     vfs_path_t *vpath;
     size_t vpath_len;
     char *result;
-    vpath = vfs_path_from_str (ETALON_PATH_STR);
+    vpath = vfs_path_from_str_flags (ETALON_PATH_STR, VPF_USE_DEPRECATED_PARSER);
 
 
     vpath_len = vfs_path_elements_count(vpath);
@@ -133,7 +133,7 @@ START_TEST (test_vfs_path_from_to_partial_string_by_class)
 {
     vfs_path_t *vpath;
     char *result;
-    vpath = vfs_path_from_str (ETALON_PATH_STR);
+    vpath = vfs_path_from_str_flags (ETALON_PATH_STR, VPF_USE_DEPRECATED_PARSER);
 
 
     result = vfs_path_to_str_elements_count(vpath, -1);
@@ -203,7 +203,7 @@ END_TEST
     vfs_path_t *vpath; \
     char *result; \
 \
-    vpath = vfs_path_from_str (input); \
+    vpath = vfs_path_from_str_flags (input, VPF_USE_DEPRECATED_PARSER); \
     result = vfs_path_to_str(vpath); \
     fail_unless( result != NULL && strcmp(result, etalon) ==0, \
     "\ninput : %s\nactual: %s\netalon: %s", input, result , etalon ); \
@@ -262,7 +262,7 @@ START_TEST (test_vfs_path_encoding_at_end)
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
 
-    vpath = vfs_path_from_str ("/path/to/file.ext#test1:/#enc:KOI8-R");
+    vpath = vfs_path_from_str_flags ("/path/to/file.ext#test1:/#enc:KOI8-R", VPF_USE_DEPRECATED_PARSER);
     result = vfs_path_to_str(vpath);
 
     element = vfs_path_get_by_index(vpath, -1);

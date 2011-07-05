@@ -1244,7 +1244,7 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_chmod (const vfs_path_t * vpath, int mode)
+fish_chmod (const vfs_path_t * vpath, mode_t mode)
 {
     gchar *shell_commands = NULL;
     char buf[BUF_LARGE];
@@ -1262,7 +1262,7 @@ fish_chmod (const vfs_path_t * vpath, int mode)
 
     shell_commands = g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n",
                                   SUP->scr_chmod, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath, mode & 07777);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath, (int) (mode & 07777));
     g_free (shell_commands);
     g_free (rpath);
     return fish_send_command (path_element->class, super, buf, OPT_FLUSH);

@@ -964,11 +964,11 @@ smbfs_closedir (void *info)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_chmod (const vfs_path_t * vpath, int mode)
+smbfs_chmod (const vfs_path_t * vpath, mode_t mode)
 {
     vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
 
-    DEBUG (3, ("smbfs_chmod(path:%s, mode:%d)\n", path_element->path, mode));
+    DEBUG (3, ("smbfs_chmod(path:%s, mode:%d)\n", path_element->path, (int) mode));
     /*      my_errno = EOPNOTSUPP;
        return -1;   *//* cannot chmod on smb filesystem */
     return 0;                   /* make mc happy */

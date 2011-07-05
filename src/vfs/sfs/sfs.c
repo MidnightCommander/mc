@@ -293,7 +293,7 @@ sfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_chmod (const vfs_path_t * vpath, int mode)
+sfs_chmod (const vfs_path_t * vpath, mode_t mode)
 {
     return chmod (sfs_redirect (vpath), mode);
 }
