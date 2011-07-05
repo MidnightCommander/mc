@@ -193,7 +193,11 @@ vfs_path_build_url_params_str (vfs_path_element_t * element)
     {
         if ((element->user != NULL) || (element->password != NULL))
             g_string_append_c (buffer, '@');
+        if (element->ipv6)
+            g_string_append_c (buffer, '[');
         g_string_append (buffer, element->host);
+        if (element->ipv6)
+            g_string_append_c (buffer, ']');
     }
 
     if ((element->port) != 0 && (element->host != NULL))
@@ -314,6 +318,7 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
             colon[0] = '\0';
             colon[1] = '\0';
             colon++;
+            path_element->ipv6 = TRUE;
         }
     }
 

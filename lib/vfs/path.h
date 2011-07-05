@@ -29,6 +29,7 @@ typedef struct
     char *user;
     char *password;
     char *host;
+    gboolean ipv6;
     int port;
     char *path;
     struct vfs_class *class;
