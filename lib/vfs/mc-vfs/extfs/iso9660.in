@@ -78,7 +78,7 @@ BEGIN {
 }
 
 mcisofs_copyout () {
-        if [ "x$SEMICOLON" == "xYES" ]; then
+        if [ "x$SEMICOLON" = "xYES" ]; then
             $ISOINFO -i "$1" -x "/$2;1" 2>/dev/null > "$3"
         else
             $ISOINFO -i "$1" -x "/$2" 2>/dev/null > "$3"
