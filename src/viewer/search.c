@@ -210,7 +210,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 void
 mcview_do_search (mcview_t * view)
 {
-    off_t search_start, growbufsize;
+    off_t search_start = 0;
     gboolean isFound = FALSE;
     gboolean need_search_again = TRUE;
 
@@ -226,15 +226,11 @@ mcview_do_search (mcview_t * view)
 
     /*for avoid infinite search loop we need to increase or decrease start offset of search */
 
-    if (view->search_start)
+    if (view->search_start != 0)
     {
-        search_start = (mcview_search_options.backwards) ? -2 : 2;
-        search_start = view->search_start + search_start +
+        search_start = mcview_search_options.backwards ? -2 : 0;
+        search_start += view->search_start +
             mcview__get_nroff_real_len (view, view->search_start, 2) * search_start;
-    }
-    else
-    {
-        search_start = view->search_start;
     }
 
     if (mcview_search_options.backwards && (int) search_start < 0)
@@ -248,31 +244,30 @@ mcview_do_search (mcview_t * view)
 
     do
     {
+        off_t growbufsize;
+
         if (view->growbuf_in_use)
             growbufsize = mcview_growbuf_filesize (view);
         else
             growbufsize = view->search->original_len;
 
-        if (!mcview_find (view, search_start, &match_len))
+        if (mcview_find (view, search_start, &match_len))
         {
-
-            if (view->search->error_str == NULL)
-                break;
-
-            search_start = growbufsize - view->search->original_len;
-            if (search_start <= 0)
-            {
-                search_start = 0;
-                break;
-            }
-
-            continue;
+            mcview_search_show_result (view, &d, match_len);
+            need_search_again = FALSE;
+            isFound = TRUE;
+            break;
         }
 
-        mcview_search_show_result (view, &d, match_len);
-        need_search_again = FALSE;
-        isFound = TRUE;
-        break;
+        if (view->search->error_str == NULL)
+            break;
+
+        search_start = growbufsize - view->search->original_len;
+        if (search_start <= 0)
+        {
+            search_start = 0;
+            break;
+        }
     }
     while (mcview_may_still_grow (view));
 
@@ -280,6 +275,7 @@ mcview_do_search (mcview_t * view)
         && !mcview_search_options.backwards)
     {
         int result;
+
         mcview_update (view);
 
         result =
@@ -287,13 +283,9 @@ mcview_do_search (mcview_t * view)
                           _("&No"));
 
         if (result != 0)
-        {
             isFound = TRUE;
-        }
         else
-        {
             search_start = 0;
-        }
     }
 
     if (!isFound && view->search->error_str != NULL && mcview_find (view, search_start, &match_len))
@@ -302,11 +294,8 @@ mcview_do_search (mcview_t * view)
         isFound = TRUE;
     }
 
-    if (!isFound)
-    {
-        if (view->search->error_str)
-            message (D_NORMAL, _("Search"), "%s", view->search->error_str);
-    }
+    if (!isFound && view->search->error_str != NULL)
+        message (D_NORMAL, _("Search"), "%s", view->search->error_str);
 
     view->dirty++;
     mcview_update (view);
@@ -317,7 +306,6 @@ mcview_do_search (mcview_t * view)
         dlg_run_done (d);
         destroy_dlg (d);
     }
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
