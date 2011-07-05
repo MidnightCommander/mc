@@ -535,6 +535,7 @@ src/vfs/extfs/helpers/uar
 src/vfs/extfs/helpers/uarc
 src/vfs/extfs/helpers/uarj
 src/vfs/extfs/helpers/uc1541
+src/vfs/extfs/helpers/ucab
 src/vfs/extfs/helpers/uha
 src/vfs/extfs/helpers/ulha
 src/vfs/extfs/helpers/urar

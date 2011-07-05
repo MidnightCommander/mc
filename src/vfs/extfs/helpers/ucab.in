@@ -4,7 +4,7 @@ CAB=cabextract
 
 mccabfs_list ()
 {
-    $CAB -l "$1" | gawk -v uid=`id -un` -v gid=`id -gn` '
+    $CAB -l "$1" | @AWK@ -v uid=`id -un` -v gid=`id -gn` '
 BEGIN { flag=0 }
 /^-------/ { flag++; if (flag > 1) exit 0; next }
 {
