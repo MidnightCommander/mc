@@ -142,10 +142,8 @@ mc_config_get_deprecated_path (void)
 static void
 mc_config_copy (const char *old_name, const char *new_name, GError ** error)
 {
-    if (error != NULL && *error != NULL)
-        return;
 
-    if (g_file_test (old_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR))
+    if (g_file_test (old_name, G_FILE_TEST_IS_REGULAR))
     {
         char *contents = NULL;
         size_t length;
@@ -157,7 +155,7 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
         return;
     }
 
-    if (g_file_test (old_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
+    if (g_file_test (old_name, G_FILE_TEST_IS_DIR))
     {
 
         GDir *dir;
@@ -167,7 +165,7 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
         if (dir == NULL)
             return;
 
-        if (!g_mkdir_with_parents (new_name, 0700))
+        if (g_mkdir_with_parents (new_name, 0700) == -1)
         {
             g_dir_close (dir);
             g_propagate_error (error,
@@ -187,15 +185,6 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
             g_free (new_name2);
             g_free (old_name2);
         }
-    }
-
-    if (rename (old_name, new_name) != 0)
-    {
-        g_propagate_error (error,
-                           g_error_new (MC_ERROR, 0,
-                                        _
-                                        ("An error occured while migrating user settings: %s"),
-                                        g_strerror (errno)));
     }
 }
 
