@@ -842,13 +842,13 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
     (void) event_group_name;
     (void) event_name;
 
-    if (in->history != NULL && in->history_changed && !in->is_password &&
-        (((Widget *) in)->owner->ret_value != B_CANCEL))
+    if (!in->is_password && (((Widget *) in)->owner->ret_value != B_CANCEL))
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
         push_history (in, in->buffer);
-        history_save (ev->cfg, in->history_name, in->history);
+        if (in->history_changed)
+            history_save (ev->cfg, in->history_name, in->history);
         in->history_changed = FALSE;
     }
 
