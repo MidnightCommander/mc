@@ -1,6 +1,10 @@
 #STOR $FISH_FILESIZE $FISH_FILENAME
 FILENAME="/${FISH_FILENAME}"
 echo "### 001"
+if [ $FISH_FILESIZE -eq 0 ]; then
+    > "${FILENAME}"
+    echo "### 200"
+else
 {
     bss=4096
     bsl=4095
@@ -14,3 +18,4 @@ echo "### 001"
         FISH_FILESIZE=`expr $FISH_FILESIZE - $n`
     done
 }; echo "### 200"
+fi
