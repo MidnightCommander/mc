@@ -394,8 +394,7 @@ history_show (GList ** history, Widget * widget)
         char *q;
 
         listbox_get_current (query_list, &q, NULL);
-        if (q != NULL)
-            r = g_strdup (q);
+        r = g_strdup (q);
     }
 
     /* get modified history from dialog */

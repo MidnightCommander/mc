@@ -83,6 +83,19 @@ static char *kill_buffer = NULL;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static size_t
+get_history_length (const GList *history)
+{
+    size_t len = 0;
+
+    for (; history != NULL; history = g_list_previous (history))
+        len++;
+
+    return len;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 draw_history_button (WInput * in)
 {
@@ -170,7 +183,10 @@ delete_region (WInput * in, int x_first, int x_last)
 static void
 do_show_hist (WInput * in)
 {
+    size_t len;
     char *r;
+
+    len = get_history_length (in->history);
 
     r = history_show (&in->history, &in->widget);
     if (r != NULL)
@@ -178,6 +194,10 @@ do_show_hist (WInput * in)
         input_assign_text (in, r);
         g_free (r);
     }
+
+    /* Has history cleaned up or not? */
+    if (len != get_history_length (in->history))
+        in->history_changed = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -224,7 +244,13 @@ push_history (WInput * in, const char *text)
         strip_password (t, i >= ELEMENTS);
     }
 
-    in->history = list_append_unique (in->history, t);
+    if (in->history == NULL || in->history->data == NULL || strcmp (in->history->data, t) != 0 ||
+        in->history_changed)
+    {
+        in->history = list_append_unique (in->history, t);
+        in->history_changed = TRUE;
+    }
+
     in->need_push = FALSE;
 }
 
@@ -535,13 +561,15 @@ kill_line (WInput * in)
 static void
 clear_line (WInput * in)
 {
-    in->need_push = 1;
+    in->need_push = TRUE;
     in->buffer[0] = '\0';
     in->point = 0;
     in->mark = 0;
     in->highlight = FALSE;
     in->charpoint = 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 ins_from_clip (WInput * in)
@@ -551,7 +579,6 @@ ins_from_clip (WInput * in)
 
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
-
 
     event_data.text = &p;
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &event_data);
@@ -583,6 +610,7 @@ hist_prev (WInput * in)
     if (prev != NULL)
     {
         in->history = prev;
+        in->history_changed = TRUE;
         input_assign_text (in, (char *) prev->data);
         in->need_push = FALSE;
     }
@@ -593,6 +621,8 @@ hist_prev (WInput * in)
 static void
 hist_next (WInput * in)
 {
+    GList *next;
+
     if (in->need_push)
     {
         push_history (in, in->buffer);
@@ -603,12 +633,14 @@ hist_next (WInput * in)
     if (in->history == NULL)
         return;
 
-    if (in->history->next == NULL)
+    next = g_list_next (in->history);
+    if (next == NULL)
         input_assign_text (in, "");
     else
     {
-        in->history = g_list_next (in->history);
-        input_assign_text (in, (char *) in->history->data);
+        in->history = next;
+        in->history_changed = TRUE;
+        input_assign_text (in, (char *) next->data);
         in->need_push = FALSE;
     }
 }
@@ -810,13 +842,14 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
     (void) event_group_name;
     (void) event_name;
 
-    if (in->history != NULL && !in->is_password && (((Widget *) in)->owner->ret_value != B_CANCEL))
+    if (in->history != NULL && in->history_changed && !in->is_password &&
+        (((Widget *) in)->owner->ret_value != B_CANCEL))
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
-        if (in->need_push)
-            push_history (in, in->buffer);
+        push_history (in, in->buffer);
         history_save (ev->cfg, in->history_name, in->history);
+        in->history_changed = FALSE;
     }
 
     return TRUE;
@@ -938,8 +971,9 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
     in->completion_flags = completion_flags;
 
     /* prepare to history setup */
-    in->history_name = NULL;
     in->history = NULL;
+    in->history_changed = FALSE;
+    in->history_name = NULL;
     if ((histname != NULL) && (*histname != '\0'))
         in->history_name = g_strdup (histname);
 
@@ -1272,12 +1306,15 @@ input_disable_update (WInput * in)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Cleans the input line and adds the current text to the history */
+/**
+  *  Cleans the input line and adds the current text to the history
+  *
+  *  @param in the input line
+  */
 void
 input_clean (WInput * in)
 {
-    if (in->need_push)
-        push_history (in, in->buffer);
+    push_history (in, in->buffer);
     in->need_push = TRUE;
     in->buffer[0] = '\0';
     in->point = 0;
