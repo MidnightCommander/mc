@@ -2,13 +2,14 @@
    shell connections.
 
    Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2008, 2009, 2010  Free Software Foundation, Inc.
+   2007, 2008, 2009, 2010, 2011  Free Software Foundation, Inc.
 
    Written by: 1998 Pavel Machek
    Spaces fix: 2000 Michal Svec
    2010 Andrew Borodin
    2010 Slava Zanko
    2010 Ilia Maslakov
+   2011 Ilia Maslakov
 
    Derived from ftpfs.c.
 
@@ -651,7 +652,7 @@ static int
 fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 {
     struct vfs_s_super *super = dir->super;
-    char buffer[8192];
+    char buffer[BUF_8K];
     struct vfs_s_entry *ent = NULL;
     FILE *logfile;
     char *quoted_path;
@@ -851,17 +852,21 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 static int
 fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    //fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
     gchar *shell_commands = NULL;
     struct vfs_s_super *super = FH_SUPER;
-    int n, total;
-    char buffer[8192];
+    uintmax_t total_sent = 0;
+    char buffer[16 * BUF_8K];
     struct stat s;
-    int was_error = 0;
     int h;
     char *quoted_name;
+    uintmax_t st_size;
+    gboolean need_repeat = FALSE;
+    gboolean wait_reply = FALSE;
+    int was_error = 0;
 
     h = open (localname, O_RDONLY);
+
     if (h == -1)
         ERRNOR (EIO, -1);
     if (fstat (h, &s) < 0)
@@ -870,108 +875,116 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
         ERRNOR (EIO, -1);
     }
 
-    /* First, try this as stor:
-     *
-     *     ( head -c number ) | ( cat > file; cat >/dev/null )
-     *
-     *  If `head' is not present on the remote system, `dd' will be used.
-     * Unfortunately, we cannot trust most non-GNU `head' implementations
-     * even if `-c' options is supported. Therefore, we separate GNU head
-     * (and other modern heads?) using `-q' and `-' . This causes another
-     * implementations to fail (because of "incorrect options").
-     *
-     *  Fallback is:
-     *
-     *     rest=<number>
-     *     while [ $rest -gt 0 ]
-     *     do
-     *        cnt=`expr \( $rest + 255 \) / 256`
-     *        n=`dd bs=256 count=$cnt | tee -a <target_file> | wc -c`
-     *        rest=`expr $rest - $n`
-     *     done
-     *
-     *  `dd' was not designed for full filling of input buffers,
-     *  and does not report exact number of bytes (not blocks).
-     *  Therefore a more complex shell script is needed.
-     *
-     *   On some systems non-GNU head writes "Usage:" error report to stdout
-     *  instead of stderr. It makes impossible the use of "head || dd"
-     *  algorithm for file appending case, therefore just "dd" is used for it.
-     */
-
     quoted_name = strutils_shell_escape (name);
     vfs_print_message (_("fish: store %s: sending command..."), quoted_name);
 
-    /* FIXME: File size is limited to ULONG_MAX */
-    if (!fish->append)
+    if (s.st_size > (off_t) sizeof (buffer))
     {
-        shell_commands =
-            g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
-                         SUP->scr_append, (char *) NULL);
-
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
-                          (uintmax_t) s.st_size);
-        g_free (shell_commands);
-    }
-    else
-    {
-        shell_commands =
-            g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
-                         SUP->scr_send, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
-                          (uintmax_t) s.st_size);
-        g_free (shell_commands);
-    }
-    if (n != PRELIM)
-    {
-        close (h);
-        ERRNOR (E_REMOTE, -1);
+        st_size = sizeof (buffer);
+        need_repeat = TRUE;
     }
 
-    total = 0;
-
-    while (TRUE)
+    do
     {
-        int t;
-        while ((n = read (h, buffer, sizeof (buffer))) < 0)
+        ssize_t r_bytes, w_bytes, n;
+        gboolean got_interrupt;
+
+        if (total_sent + sizeof (buffer) > (uintmax_t) s.st_size)
         {
-            if ((errno == EINTR) && tty_got_interrupt ())
-                continue;
-            vfs_print_message (_("fish: Local read failed, sending zeros"));
-            close (h);
-            h = open ("/dev/zero", O_RDONLY);
+            st_size = (uintmax_t) s.st_size - total_sent;
+            need_repeat = FALSE;
         }
 
-        if (n == 0)
+        /* reenable SIGINT after fish_command() */
+        tty_enable_interrupt_key ();
+        r_bytes = read (h, buffer, st_size);
+        if (tty_got_interrupt ())
+            break;
+        tty_disable_interrupt_key ();
+
+        if (r_bytes < 0)
+        {
+            was_error = EIO;
+            break;
+        }
+        else if (r_bytes == 0 && s.st_size > 0)
             break;
 
-        t = write (SUP->sockw, buffer, n);
-        if (t != n)
+        shell_commands = g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
+                                      SUP->scr_send, (char *) NULL);
+        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name, (uintmax_t) r_bytes);
+        g_free (shell_commands);
+
+        if (n != PRELIM)
         {
-            if (t == -1)
-                me->verrno = errno;
-            else
-                me->verrno = EIO;
-            goto error_return;
+            wait_reply = TRUE;
+            was_error = E_PROTO;
+            break;
         }
+
+        /* reenable SIGINT after fish_command() */
+        tty_enable_interrupt_key ();
+        w_bytes = write (SUP->sockw, buffer, (size_t) r_bytes);
+        got_interrupt = tty_got_interrupt ();
         tty_disable_interrupt_key ();
-        total += n;
-        vfs_print_message ("%s: %d/%" PRIuMAX,
-                           was_error ? _("fish: storing zeros") : _("fish: storing file"),
-                           total, (uintmax_t) s.st_size);
+
+        /* transfer was interrupted */
+        if (w_bytes < r_bytes && got_interrupt)
+        {
+            /* try reread from current position, after abort transfer */
+            if (lseek (h, total_sent + w_bytes, SEEK_SET) == -1)
+            {
+                close (h);
+                /* read from /dev/zero if source unavaible */
+                /* we need transfer any bytes becouse server side wait data */
+                h = open ("/dev/zero", O_RDONLY);
+            }
+
+            r_bytes = read (h, buffer, r_bytes - w_bytes);
+            w_bytes = write (SUP->sockw, buffer, (size_t) r_bytes);
+
+            wait_reply = TRUE;
+            was_error = EINTR;
+            break;
+        }
+
+        /* strange but w_bytes != r_bytes, maybe target host can't write anymore */
+        if (w_bytes != r_bytes)
+        {
+            wait_reply = TRUE;
+            was_error = (w_bytes == -1) ? errno : EIO;
+            break;
+        }
+
+        total_sent += w_bytes;
+        vfs_print_message ("%s: %" PRIuMAX "/%" PRIuMAX, _("fish: (CTRL-G break) transfered"),
+                           total_sent, (uintmax_t) s.st_size);
+
+        if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
+        {
+            was_error = E_REMOTE;
+            break;
+        }
     }
+    while (need_repeat);
+
+    tty_disable_interrupt_key ();
     close (h);
     g_free (quoted_name);
 
-    if ((fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE) || was_error)
-        ERRNOR (E_REMOTE, -1);
+    if (was_error != 0)
+    {
+        me->verrno = was_error;
+        if (wait_reply)
+        {
+            if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
+                vfs_print_message (_("Error reported after abort."));
+            else
+                vfs_print_message (_("Aborted transfer would be successful."));
+        }
+        return -1;
+    }
     return 0;
-
-  error_return:
-    close (h);
-    fish_get_reply (me, SUP->sockr, NULL, 0);
-    g_free (quoted_name);
-    return -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
