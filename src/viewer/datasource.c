@@ -164,9 +164,9 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
     int res = -1;
     gunichar ch;
     gchar *next_ch = NULL;
-    int width = 0;
 
-    *result = TRUE;
+    *char_width = 0;
+    *result = FALSE;
 
     switch (view->datasource)
     {
@@ -185,18 +185,14 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
     }
 
     if (str == NULL)
-    {
-        *result = FALSE;
-        width = 0;
         return 0;
-    }
 
     res = g_utf8_get_char_validated (str, -1);
 
     if (res < 0)
     {
         ch = *str;
-        width = 0;
+        *char_width = 1;
     }
     else
     {
@@ -204,16 +200,11 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char (str);
         if (next_ch)
-        {
-            width = next_ch - str;
-        }
+            *char_width = next_ch - str;
         else
-        {
-            ch = 0;
-            width = 0;
-        }
+            return 0;
     }
-    *char_width = width;
+    *result = TRUE;
     return ch;
 }
 
