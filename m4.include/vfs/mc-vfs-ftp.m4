@@ -2,7 +2,7 @@ dnl Enable FTP filesystem (classic)
 AC_DEFUN([AC_MC_VFS_FTP],
 [
     AC_ARG_ENABLE([vfs-ftp],
-		    AC_HELP_STRING([--enable-vfs-ftp], [Support for FTP filesystem [[yes]]]))
+		    AS_HELP_STRING([--enable-vfs-ftp], [Support for FTP filesystem @<:@yes@:>@]))
     if test "$enable_vfs" != "no" -a x"$enable_vfs_ftp" != x"no"; then
 	enable_vfs_ftp="yes"
 	AC_MC_VFS_ADDNAME([ftp])

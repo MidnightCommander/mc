@@ -16,7 +16,7 @@ XGETTEXT=xgettext
 MSGMERGE=msgmerge
 
 files=`find . -name '*.[ch]' | xargs $XGETTEXT $XGETTEXT_OPTIONS --output=-  | \
-	sed -ne '/^#:/{s/#://;s/:[0-9]*/\n/g;s/ //g;p;}' | sort -u | grep -v 'regex.c'`
+	sed -ne '/^#:/{s/#://;s/:[0-9]*/\n/g;s/ //g;p;}' | sort -u`
 
 $XGETTEXT --default-domain=$DOMAIN --directory=. \
 	  --add-comments=TRANSLATORS: $XGETTEXT_OPTIONS \

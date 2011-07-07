@@ -17,7 +17,7 @@ dnl @license GPLWithACException
 AC_DEFUN([AX_PATH_LIB_PCRE],[dnl
 AC_MSG_CHECKING([lib pcre])
 AC_ARG_WITH([pcre],
-            AC_HELP_STRING([--with-pcre[[=prefix]]], [compile pcre part (via libpcre check)]),
+            AS_HELP_STRING([--with-pcre@<:@=prefix@:>@], [Compile pcre part (via libpcre check)]),
             ,
             [with_pcre="yes"]
 )

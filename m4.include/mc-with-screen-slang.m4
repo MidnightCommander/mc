@@ -177,7 +177,7 @@ AC_DEFUN([MC_WITH_SLANG], [
     error_msg_slang=""
 
     AC_ARG_WITH([slang-includes],
-        AC_HELP_STRING([--with-slang-includes=@<:@DIR@:>@],
+        AS_HELP_STRING([--with-slang-includes=@<:@DIR@:>@],
             [set path to SLANG includes @<:@default=/usr/include@:>@; make sense only if --with-screen=slang]
         ),
         [ac_slang_inc_path="$withval"],
@@ -185,7 +185,7 @@ AC_DEFUN([MC_WITH_SLANG], [
     )
 
     AC_ARG_WITH([slang-libs],
-        AC_HELP_STRING([--with-slang-libs=@<:@DIR@:>@],
+        AS_HELP_STRING([--with-slang-libs=@<:@DIR@:>@],
             [set path to SLANG library @<:@default=/usr/lib@:>@; make sense only if --with-screen=slang]
         ),
         [ac_slang_lib_path="$withval"],

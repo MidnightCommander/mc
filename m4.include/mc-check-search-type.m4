@@ -32,8 +32,8 @@ AC_DEFUN([MC_CHECK_SEARCH_TYPE_GLIB],[
 AC_DEFUN([MC_CHECK_SEARCH_TYPE],[
 
     AC_ARG_WITH([search-engine],
-        AC_HELP_STRING([--with-search-engine=type],
-        [Select low-level search engine (since glib >= 2.14). [[glib|pcre]]])
+        AS_HELP_STRING([--with-search-engine=type],
+        [Select low-level search engine (since glib >= 2.14) @<:@glib|pcre@:>@])
       )
     case x$with_search_engine in
     xglib)

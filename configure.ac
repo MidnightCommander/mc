@@ -53,7 +53,7 @@ dnl PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
 AC_CHECK_GLIB
 
 AC_ARG_ENABLE([mclib],
-        [AS_HELP_STRING([--enable-mclib],[ Compile shared library libmc.so [no]])],
+        [AS_HELP_STRING([--enable-mclib], [Compile shared library libmc.so @<:@no@:>@])],
         [
             if test "x$enableval" = "xno" ; then
                 enable_mclib=no
@@ -209,18 +209,6 @@ AC_TYPE_OFF_T
 AC_CHECK_SIZEOF(off_t)
 AC_TYPE_PID_T
 AC_TYPE_UID_T
-AC_CHECK_TYPE(nlink_t, unsigned int)
-AC_CHECK_TYPES([socklen_t],,,
-[
-#include <sys/types.h>
-#include <sys/socket.h>
-])
-
-dnl This is needed for regex.c only
-AC_CHECK_TYPE(uintptr_t,
-	      [AC_DEFINE(HAVE_UINTPTR_T, 1,
-			 [Define if you have the `uintptr_t' type.])
-])
 
 AC_FUNC_ALLOCA
 AC_FUNC_STRCOLL
@@ -459,7 +447,7 @@ fi
 
 AC_ARG_ENABLE(
     [werror],
-    AC_HELP_STRING([--enable-werror], [Handle all compiler warnings as errors] )
+    AS_HELP_STRING([--enable-werror], [Handle all compiler warnings as errors])
 )
 
 if test "x$enable_werror" = xyes; then
