@@ -57,6 +57,37 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+mcview_nroff_get_char (mcview_nroff_t * nroff, int *ret_val, off_t nroff_index)
+{
+    int c;
+#ifdef HAVE_CHARSET
+    if (nroff->view->utf8)
+    {
+        gboolean utf_result;
+        c = mcview_get_utf (nroff->view, nroff_index, &nroff->char_width, &utf_result);
+        if (!utf_result)
+        {
+            /* we need got symbol in any case */
+            nroff->char_width = 1;
+            if (!mcview_get_byte (nroff->view, nroff_index, &c) || !g_ascii_isprint (c))
+                return FALSE;
+        }
+    }
+    else
+#endif
+    {
+        nroff->char_width = 1;
+        if (!mcview_get_byte (nroff->view, nroff_index, &c))
+            return FALSE;
+    }
+
+    if (!g_unichar_isprint (c))
+        return FALSE;
+    *ret_val = c;
+    return TRUE;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -111,10 +142,17 @@ mcview_display_nroff (mcview_t * view)
         {
             if (from > 1)
             {
-                mcview_get_byte (view, from - 2, &c_prev);
-                mcview_get_byte (view, from, &c_next);
+#ifdef HAVE_CHARSET
+                if (view->utf8)
+                {
+                    gboolean read_res;
+                    c_next = mcview_get_utf (view, from, &cw, &read_res);
+                }
+                else
+#endif
+                    mcview_get_byte (view, from, &c_next);
             }
-            if (g_ascii_isprint (c_prev) && g_ascii_isprint (c_prev)
+            if (g_unichar_isprint (c_prev) && g_unichar_isprint (c_next)
                 && (c_prev == c_next || c_prev == '_' || (c_prev == '+' && c_next == 'o')))
             {
                 if (col == 0)
@@ -174,6 +212,8 @@ mcview_display_nroff (mcview_t * view)
         {
             tty_setcolor (SELECTED_COLOR);
         }
+
+        c_prev = c;
 
         if ((off_t) col >= view->dpy_text_column
             && (off_t) col - view->dpy_text_column < (off_t) width)
@@ -240,7 +280,7 @@ mcview__get_nroff_real_len (mcview_t * view, off_t start, off_t length)
     {
         if (nroff->type != NROFF_TYPE_NONE)
         {
-            ret += 2;
+            ret += 1 + nroff->char_width;
         }
         i++;
         mcview_nroff_seq_next (nroff);
@@ -298,15 +338,13 @@ mcview_nroff_seq_info (mcview_nroff_t * nroff)
         return NROFF_TYPE_NONE;
     nroff->type = NROFF_TYPE_NONE;
 
-    if (!mcview_get_byte (nroff->view, nroff->index, &nroff->current_char) || !g_ascii_isprint (nroff->current_char))   /* FIXME: utf-8 and g_ascii_isprint */
+    if (!mcview_nroff_get_char (nroff, &nroff->current_char, nroff->index))
         return nroff->type;
 
-    nroff->char_width = 1;
-
-    if (!mcview_get_byte (nroff->view, nroff->index + 1, &next) || next != '\b')
+    if (!mcview_get_byte (nroff->view, nroff->index + nroff->char_width, &next) || next != '\b')
         return nroff->type;
 
-    if (!mcview_get_byte (nroff->view, nroff->index + 2, &next2) || !g_ascii_isprint (next2))   /* FIXME: utf-8 and g_ascii_isprint */
+    if (!mcview_nroff_get_char (nroff, &next2, nroff->index + 1 + nroff->char_width))
         return nroff->type;
 
     if (nroff->current_char == '_' && next2 == '_')
@@ -328,7 +366,6 @@ mcview_nroff_seq_info (mcview_nroff_t * nroff)
     {
         /* ??? */
     }
-
     return nroff->type;
 }
 
