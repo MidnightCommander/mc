@@ -354,15 +354,10 @@ str_choose_str_functions (void)
     }
 }
 
-int
+gboolean
 str_isutf8 (const char *codeset_name)
 {
-    int result = 0;
-    if (str_test_encoding_class (codeset_name, str_utf8_encodings))
-    {
-        result = 1;
-    }
-    return result;
+    return (str_test_encoding_class (codeset_name, str_utf8_encodings) != 0);
 }
 
 void

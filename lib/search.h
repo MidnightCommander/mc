@@ -91,6 +91,7 @@ typedef struct mc_search_struct
     off_t start_buffer;
     /* some data for regexp */
     int num_results;
+    gboolean is_utf8;
     mc_search_matchinfo_t *regex_match_info;
     GString *regex_buffer;
 #ifdef SEARCH_TYPE_PCRE
