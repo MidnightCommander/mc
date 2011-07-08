@@ -32,7 +32,7 @@
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/vfs.h"
-#include "lib/util.h.h"         /* unix_error_string() */
+#include "lib/util.h"         /* unix_error_string() */
 
 #include "lib/mcconfig.h"
 
