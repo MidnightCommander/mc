@@ -30,9 +30,11 @@
 #include <errno.h>
 
 #include "lib/global.h"
-#include "lib/mcconfig.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/vfs.h"
+#include "lib/util.h.h"         /* unix_error_string() */
+
+#include "lib/mcconfig.h"
 
 /*** global variables ****************************************************************************/
 
@@ -142,10 +144,7 @@ mc_config_get_deprecated_path (void)
 static void
 mc_config_copy (const char *old_name, const char *new_name, GError ** error)
 {
-    if (error != NULL && *error != NULL)
-        return;
-
-    if (g_file_test (old_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR))
+    if (g_file_test (old_name, G_FILE_TEST_IS_REGULAR))
     {
         char *contents = NULL;
         size_t length;
@@ -157,7 +156,7 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
         return;
     }
 
-    if (g_file_test (old_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
+    if (g_file_test (old_name, G_FILE_TEST_IS_DIR))
     {
 
         GDir *dir;
@@ -167,35 +166,27 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
         if (dir == NULL)
             return;
 
-        if (!g_mkdir_with_parents (new_name, 0700))
+        if (g_mkdir_with_parents (new_name, 0700) == -1)
         {
             g_dir_close (dir);
             g_propagate_error (error,
                                g_error_new (MC_ERROR, 0,
                                             _
                                             ("An error occured while migrating user settings: %s"),
-                                            g_strerror (errno)));
+                                            unix_error_string (errno)));
             return;
         }
 
         while ((dir_name = g_dir_read_name (dir)) != NULL)
         {
             char *old_name2, *new_name2;
+
             old_name2 = g_build_filename (old_name, dir_name, NULL);
             new_name2 = g_build_filename (new_name, dir_name, NULL);
             mc_config_copy (old_name2, new_name2, error);
             g_free (new_name2);
             g_free (old_name2);
         }
-    }
-
-    if (rename (old_name, new_name) != 0)
-    {
-        g_propagate_error (error,
-                           g_error_new (MC_ERROR, 0,
-                                        _
-                                        ("An error occured while migrating user settings: %s"),
-                                        g_strerror (errno)));
     }
 }
 
@@ -316,47 +307,36 @@ mc_config_get_path (void)
 void
 mc_config_migrate_from_old_place (GError ** error)
 {
-    char *old_dir, *tmp_dir_name;
+    char *old_dir;
     size_t rule_index;
 
     old_dir = mc_config_get_deprecated_path ();
 
-    tmp_dir_name = mc_config_init_one_config_path (xdg_config, EDIT_DIR, error);
-    g_free (tmp_dir_name);
-    tmp_dir_name = mc_config_init_one_config_path (xdg_cache, EDIT_DIR, error);
-    g_free (tmp_dir_name);
-    tmp_dir_name = mc_config_init_one_config_path (xdg_data, EDIT_DIR, error);
-    g_free (tmp_dir_name);
+    g_free (mc_config_init_one_config_path (xdg_config, EDIT_DIR, error));
+    g_free (mc_config_init_one_config_path (xdg_cache, EDIT_DIR, error));
+    g_free (mc_config_init_one_config_path (xdg_data, EDIT_DIR, error));
 
     for (rule_index = 0; mc_config_migrate_rules[rule_index].old_filename != NULL; rule_index++)
     {
-        char *old_name, *new_name;
+        char *old_name;
 
         old_name =
             g_build_filename (old_dir, mc_config_migrate_rules[rule_index].old_filename, NULL);
 
-        if (!g_file_test (old_name, G_FILE_TEST_EXISTS))
+        if (g_file_test (old_name, G_FILE_TEST_EXISTS))
         {
-            g_free (old_name);
-            continue;
+            char *new_name;
+
+            new_name = g_build_filename (*mc_config_migrate_rules[rule_index].new_basedir,
+                                         mc_config_migrate_rules[rule_index].new_filename, NULL);
+
+            mc_config_copy (old_name, new_name, error);
+
+            g_free (new_name);
         }
-
-        new_name = g_build_filename (*mc_config_migrate_rules[rule_index].new_basedir,
-                                     mc_config_migrate_rules[rule_index].new_filename, NULL);
-
-        mc_config_copy (old_name, new_name, error);
-
-        g_free (new_name);
         g_free (old_name);
     }
-    /*
-       {
-       char *old_dir2;
-       old_dir2 = g_strconcat (old_dir, "~", NULL);
-       rename (old_dir, old_dir2);
-       g_free (old_dir2);
-       }
-     */
+
     g_propagate_error (error,
                        g_error_new (MC_ERROR, 0,
                                     _
@@ -374,9 +354,13 @@ mc_config_migrate_from_old_place (GError ** error)
 gboolean
 mc_config_deprecated_dir_present (void)
 {
-    char *old_dir = mc_config_get_deprecated_path ();
-    gboolean is_present = g_file_test (old_dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR);
+    char *old_dir;
+    gboolean is_present;
+
+    old_dir = mc_config_get_deprecated_path ();
+    is_present = g_file_test (old_dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR);
     g_free (old_dir);
+
     return is_present && !config_dir_present;
 }
 
