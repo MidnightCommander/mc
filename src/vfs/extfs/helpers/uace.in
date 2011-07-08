@@ -9,8 +9,6 @@
 # <jpelletier@ieee.org>
 #
 
-# Define your awk
-AWK=gawk
 # Define which archiver you are using with appropriate options
 ACE_LIST="unace l"
 ACE_GET="unace x"
@@ -22,7 +20,13 @@ ACE_GET="unace x"
 # ls:
 mc_ace_fs_list()
 {
-    $ACE_LIST "$1" | gawk -v uid=${UID-0} '
+    if [ "x$UID" = "x" ]; then
+        UID=`id -ru 2>/dev/null`
+        if [ "x$UID" = "x" ]; then
+            UID=0
+        fi
+    fi
+    $ACE_LIST "$1" | @AWK@ -v uid=$UID '
 BEGIN { Month="JanFebMarAprMayJunJulAugSepOctNovDec" }
 /%/ { 
   split($1,date,".")

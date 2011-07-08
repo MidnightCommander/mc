@@ -6,7 +6,7 @@ EXTFSCONFFILES = sfs.ini
 EXTFS_MISC  = README README.extfs
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp rpm trpm u7z ucab
+EXTFS_CONST = bpp rpm trpm u7z
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
@@ -30,6 +30,7 @@ EXTFS_IN    = 			\
 	uarc.in			\
 	uarj.in			\
 	uc1541.in		\
+	ucab.in			\
 	uha.in			\
 	ulha.in			\
 	urar.in			\
@@ -58,6 +59,7 @@ EXTFS_OUT = 			\
 	uarc			\
 	uarj			\
 	uc1541			\
+	ucab			\
 	uha			\
 	ulha			\
 	urar			\
