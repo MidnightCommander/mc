@@ -251,6 +251,8 @@ push_history (WInput * in, const char *text)
         in->history_changed = TRUE;
     }
 
+    g_free (t);
+
     in->need_push = FALSE;
 }
 
