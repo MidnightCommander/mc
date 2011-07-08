@@ -591,6 +591,10 @@ regex/\.(lyx|LYX)$
 	Open=lyx %f
 	View=%view{ascii} lyxcat %f
 
+# torrent
+regex/\.([tT][oO][rR][rR][eE][nN][tT])$
+	View=%view{ascii} ctorrent -x %f 2>/dev/null
+
 ### Plain compressed files ###
 
 # ace
