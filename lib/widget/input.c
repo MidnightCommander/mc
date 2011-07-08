@@ -866,7 +866,7 @@ input_destroy (WInput * in)
         exit (EXIT_FAILURE);
     }
 
-    input_clean (in);
+    input_free_completions (in);
 
     /* clean history */
     if (in->history != NULL)
