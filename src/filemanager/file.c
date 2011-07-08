@@ -1436,8 +1436,10 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         }
     }
 
-    while (mc_fstat (src_desc, &sb) != 0 && !ctx->skip_all)
+    while (mc_fstat (src_desc, &sb) != 0)
     {
+        if (ctx->skip_all)
+            goto ret;
         return_status = file_error (_("Cannot fstat source file \"%s\"\n%s"), src_path);
         if (return_status == FILE_RETRY)
             continue;
@@ -1485,8 +1487,10 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     ctx->do_append = FALSE;
 
     /* Find out the optimal buffer size.  */
-    while (mc_fstat (dest_desc, &sb) != 0 && !ctx->skip_all)
+    while (mc_fstat (dest_desc, &sb) != 0)
     {
+        if (ctx->skip_all)
+            goto ret;
         return_status = file_error (_("Cannot fstat target file \"%s\"\n%s"), dst_path);
         if (return_status == FILE_RETRY)
             continue;
