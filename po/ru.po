@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-02-04 11:13+0300\n"
-"PO-Revision-Date: 2011-02-04 11:18+0300\n"
+"POT-Creation-Date: 2011-07-09 17:00+0400\n"
+"PO-Revision-Date: 2011-07-09 20:20+0400\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Generator: mcedit 4.7.5-pre1\n"
+"X-Generator: mcedit 4.7.5\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Внимание: невозможно загрузить список кодировок"
@@ -38,6 +38,26 @@ msgstr "7-битный ASCII"
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Невозможно перекодировать из %s в %s"
+
+msgid "Event system already initialized"
+msgstr "Система сообщений уже инициализирована"
+
+msgid "Failed to initialize event system"
+msgstr "Сбой инициализации системы сообщений"
+
+msgid "Event system not initialized"
+msgstr "Система сообщений не инициализирована"
+
+msgid "Check input data! Some of parameters are NULL!"
+msgstr "Проверьте входные данные! Некоторые параметры равны NULL!"
+
+#, c-format
+msgid "Unable to create group '%s' for events!"
+msgstr "Невозможно создать группу сообщений \"%s\"!"
+
+#, c-format
+msgid "Unable to create event '%s'!"
+msgstr "Невозможно создать сообщение \"%s\"!"
 
 #, c-format
 msgid ""
@@ -58,6 +78,25 @@ msgstr "Захватить замок"
 msgid "&Ignore lock"
 msgstr "Игнорировать замок"
 
+#, c-format
+msgid "Cannot create %s directory"
+msgstr "Невозможно создать каталог \"%s\""
+
+#, c-format
+msgid "An error occured while migrating user settings: %s"
+msgstr "Ошибка при переносе настроек: %s"
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to Freedesktop recommended dirs.\n"
+"To get more info, please visit\n"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr "Ваши старые настройки перенесены из %s\n"
+"в директории, рекомендованные FreeDesktop.org.\n"
+"Для более полной информации посетите страницу\n"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
 msgid "Search string not found"
 msgstr "Искомая строка не найдена"
 
@@ -71,6 +110,9 @@ msgstr ""
 #, c-format
 msgid "Invalid token number %d"
 msgstr "Неправильный шаблон цели %d"
+
+msgid "Regular expression error"
+msgstr "Ошибка в регулярном выражении"
 
 msgid "Normal"
 msgstr "Обычный"
@@ -99,6 +141,16 @@ msgid ""
 msgstr ""
 "Невозможно произвести синтаксический разбор файла '%s'.\n"
 "Используется скин по умолчанию"
+
+#, c-format
+msgid ""
+"Unable to use '%s' skin with 256 colors support\n"
+"on non-256 colors terminal.\n"
+"Default skin has been loaded"
+msgstr ""
+"Невозможно использовать скин %s, требующий 256 цветов,\n"
+"на терминале, не поддерживающем 256 цветов.\n"
+"Будет использован скин по-умолчанию"
 
 msgid "Function key 1"
 msgstr "Функциональная 1 "
@@ -423,54 +475,6 @@ msgid "Error dup'ing old error pipe"
 msgstr "Ошибка дублирования старого канала ошибок"
 
 #, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Невозможно открыть cpio-архив\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"Преждевременный конец архива cpio\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Несогласованная жесткая ссылка\n"
-"%s\n"
-"в архиве cpio\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s содержит сдвоенные элементы! Пропущено!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Поврежденный заголовок cpio обнаружен в\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Неожиданный конец файла\n"
-"%s"
-
-#, c-format
 msgid "Directory cache expired for %s"
 msgstr "Кэш каталога устарел для %s"
 
@@ -483,335 +487,8 @@ msgstr "Запуск линейной передачи..."
 msgid "Getting file"
 msgstr "Получение файла"
 
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Невозможно открыть %s-архив\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Несогласованный архив extfs"
-
-#, c-format
-msgid "Warning: cannot open %s directory\n"
-msgstr "Внимание: невозможно открыть каталог %s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: отсоединение от %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: ожидается начальная строка..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: требуется пароль для %s"
-
-msgid "fish: Sending password..."
-msgstr "fish: посылается пароль..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: посылается начальная строка..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: версия подтверждения связи..."
-
-msgid "fish: Getting host info..."
-msgstr "fish: собирается информация об удалённой машине..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: устанавливается текущий каталог..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: соединение успешно, персональный каталог %s."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: чтение каталога %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: готово."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: ошибка"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: запись %s: посылается команда..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: сбой локального чтения, посылаются нули"
-
-msgid "fish: storing zeros"
-msgstr "fish: запись нулевых данных"
-
-msgid "fish: storing file"
-msgstr "ftpfs: запись файла"
-
-msgid "Aborting transfer..."
-msgstr "Прерывание передачи..."
-
-msgid "Error reported after abort."
-msgstr "Отмечена ошибка после прерывания."
-
-msgid "Aborted transfer would be successful."
-msgstr "Передача успешно прервана."
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: отсоединение от %s"
-
-#, c-format
-msgid "FTP: Password required for %s"
-msgstr "FTP: требуется пароль для %s"
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: посылается имя пользователя"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: посылается пароль пользователя"
-
-#, c-format
-msgid "FTP: Account required for user %s"
-msgstr "FTP: Необходима учётная запись для пользователя %s"
-
-msgid "Account:"
-msgstr "Счет:"
-
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: посылается учётная запись пользователя"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: зарегистрирован"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: ошибка регистрации пользователя %s"
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: неверное имя системы."
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr "ftpfs: %s"
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: осуществляется соединение с %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: соединение прервано пользователем"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: сбой соединения с сервером: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
-
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: неверный адрес системы."
-
-#, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr "Невозможно создать сокет: %s"
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: невозможно установить пассивный режим"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: прерывание передачи."
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: ошибка прерывания: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: сбой прерывания"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: невозможно распознать символическую ссылку"
-
-msgid "Resolving symlink..."
-msgstr "Распознается символическая ссылка..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: чтение каталога FTP %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(ограничение rfc959)"
-
-msgid "(chdir first)"
-msgstr "(сначала chdir)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
-
-msgid "ftpfs: storing file"
-msgstr "ftpfs: запись файла"
-
-msgid ""
-"~/.netrc file has incorrect mode\n"
-"Remove password or correct mode"
-msgstr ""
-"Файл ~/.netrc имеет неверный режим доступа/владения.\n"
-"Удалите пароль или исправьте режим доступа/владения"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Предупреждение: файл %s не найден\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Предупреждение: неправильная строка в %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Предупреждение: неправильный флаг %c в %s:\n"
-"%s\n"
-
-#, c-format
-msgid "reconnect to %s failed"
-msgstr "Сбой повторного соединения к %s"
-
-msgid "Authentication failed"
-msgstr "Сбой идентификации"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Ошибка %s при создании каталога %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Ошибка %s при удалении каталога %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s при открытии файла %s с удаленной машины"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s при удалении файла %s с удаленной машины"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s при переименовании файла\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Невозможно открыть архив tar\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Несогласованный архив tar"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Неожиданный конец архивного файла"
-
-#, c-format
-msgid ""
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"не похож на архив tar"
-
-msgid "undelfs: error"
-msgstr "undelfs: ошибка"
-
-msgid "not enough memory"
-msgstr "недостаточно памяти"
-
-msgid "while allocating block buffer"
-msgstr "при получении блока буферов"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "при начале сканирования узла %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: загрузка информации об удаленных файлах %d inodes"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "при вызове ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "не хватило памяти при переоткрытии массива"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "при сканировании узла %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Невозможно открыть файл %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: чтение битовой карты узлов..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Невозможно загрузить битовую карту узлов с:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: чтение блока битовой карты..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Невозможно загрузить блок битовой карты с:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info - не файловая система!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Вы должны сначала сменить каталог, чтобы извлечь файлы"
-
-msgid "while iterating over blocks"
-msgstr "при переборе блоков"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Невозможно открыть файл %s"
-
-msgid "Ext2lib error"
-msgstr "Сбой Ext2lib"
+msgid "Changes to file lost"
+msgstr "Изменения для файла потеряны"
 
 msgid "Cannot parse:"
 msgstr "Невозможно проанализировать:"
@@ -824,9 +501,6 @@ msgstr "Внутренняя ошибка:"
 
 msgid "Password:"
 msgstr "Пароль:"
-
-msgid "Changes to file lost"
-msgstr "Изменения для файла потеряны"
 
 msgid "Screens"
 msgstr "Экраны"
@@ -864,6 +538,12 @@ msgstr "Показать текущую версию"
 
 msgid "Print data directory"
 msgstr "Распечатать имя каталога для данных"
+
+msgid "Print extended info about used data directories"
+msgstr "Распечатать расширенную информацию о пользовательских каталогах"
+
+msgid "Print configure options"
+msgstr "Распечатать параметры конфигурации"
 
 msgid "Print last working directory to specified file"
 msgstr "Записать последний рабочий каталог в указанный файл"
@@ -907,6 +587,9 @@ msgstr "Сбросить программные клавиши на термин
 msgid "Load definitions of key bindings from specified file"
 msgstr "Чтение определений привязок клавиш из указанного файла"
 
+msgid "Don't load definitions of key bindings from file, use defaults"
+msgstr "Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
+
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
 
@@ -921,9 +604,9 @@ msgstr "Отобразить mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords
 msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
+"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
 "\n"
 " Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, header\n"
@@ -936,12 +619,12 @@ msgid ""
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
-"   Viewer:       viewunderline\n"
+"   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
+"--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
 "\n"
-"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
+"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n"
 "\n"
 "Ключевые слова:\n"
 "   Общие:              errors, disabled, reverse, gauge, header\n"
@@ -956,23 +639,34 @@ msgstr ""
 "   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
-"   Просмотрщик:        viewunderline\n"
+"   Просмотрщик:        viewbold, viewunderline, viewselected\n"
 "   Справка:            helpnormal, helpitalic, helpbold, helplink, "
 "helpslink\n"
 
-#. TRANSLATORS: don't translate color names
+#. TRANSLATORS: don't translate color names and attributes
 msgid ""
-"Colors:\n"
+"Standard Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+"Extended colors, when 256 colors are available:\n"
+"   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
+"\n"
+"Attributes:\n"
+"   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
-"Цвета:\n"
+"Стандартные цвета:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray, white\n"
 "\n"
+"\n"
+"Расширенные цвета, если доступны 256 цветов:\n"
+"   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
+"\n"
+"Атрибуты:\n"
+"   bold, underline, reverse, blink; несколько атрибутов объединяются занком '+'\n"
 
 msgid "Color options"
 msgstr "Цветовые настройки"
@@ -1214,9 +908,6 @@ msgstr "\"%s\" не является обычным файлом"
 msgid "File \"%s\" is too large"
 msgstr "Файл \"%s\" слишком большой"
 
-msgid "Macro recursion is too deep"
-msgstr "Слишком глубокая рекурсия макросов"
-
 #, c-format
 msgid "Error reading from pipe: %s"
 msgstr "Ошибка чтения из канала: %s"
@@ -1270,18 +961,6 @@ msgstr "Введите имя файла:"
 msgid "Save As"
 msgstr "Сохранить как"
 
-msgid "Delete macro"
-msgstr "Удалить макрос"
-
-msgid "Cannot open temp file"
-msgstr "Невозможно открыть временный файл"
-
-msgid "Cannot open macro file"
-msgstr "Невозможно открыть файл макросов"
-
-msgid "Cannot overwrite macro file"
-msgstr "Невозможно перезаписать файл макросов"
-
 msgid "Syntax file edit"
 msgstr "Редактирование файла синтаксиса"
 
@@ -1333,17 +1012,26 @@ msgstr "Сохранить как"
 msgid "Cannot save file"
 msgstr "Невозможно сохранить файл"
 
+msgid "Delete macro"
+msgstr "Удалить макрос"
+
+msgid "Press macro hotkey:"
+msgstr "Нажмите горячую клавишу для макроса:"
+
+msgid "Macro not deleted"
+msgstr "Макрос не удалён"
+
 msgid "Save macro"
 msgstr "Сохранить макрос"
 
 msgid "Press the macro's new hotkey:"
 msgstr "Нажмите новую клавишу макроса:"
 
-msgid "Press macro hotkey:"
-msgstr "Нажмите горячую клавишу для макроса:"
+msgid "Repeat last commands"
+msgstr "Повторить последние команды"
 
-msgid "Load macro"
-msgstr "Загрузить макрос"
+msgid "Repeat times:"
+msgstr "Число повторений:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1433,24 +1121,6 @@ msgstr "Внешняя команда"
 msgid "Cannot execute command"
 msgstr "Невозможно выполнить команду"
 
-msgid "Error creating script:"
-msgstr "Ошибка создания скрипта:"
-
-msgid "Error reading script:"
-msgstr "Ошибка чтения скрипта:"
-
-msgid "Error closing script:"
-msgstr "Ошибка закрытия скрипта:"
-
-msgid "Script created:"
-msgstr "Скрипт создан:"
-
-msgid "Process block"
-msgstr "Обработать блок"
-
-msgid "Error calling program"
-msgstr "Ошибка выполнения программы"
-
 msgid "Copies to"
 msgstr "Отправить копии адресатам"
 
@@ -1471,9 +1141,6 @@ msgstr "Вставить литерал"
 
 msgid "Press any key:"
 msgstr "Нажмите любую клавишу:"
-
-msgid "Execute macro"
-msgstr "Выполнить макрос"
 
 msgid ""
 "Current text was modified without a file save\n"
@@ -1543,6 +1210,9 @@ msgstr "&Выход"
 msgid "&Undo"
 msgstr "&Отмена"
 
+msgid "&Redo"
+msgstr "В&ернуть"
+
 msgid "&Toggle ins/overw"
 msgstr "&Режим вставки/замены"
 
@@ -1600,7 +1270,7 @@ msgstr "&К следующей закладке"
 msgid "&Prev bookmark"
 msgstr "К пре&дыдущей закладке"
 
-msgid "&Flush bookmark"
+msgid "&Flush bookmarks"
 msgstr "У&брать все закладки"
 
 msgid "&Go to line..."
@@ -1630,17 +1300,14 @@ msgstr "Выбор &кодировки..."
 msgid "&Refresh screen"
 msgstr "Пере&рисовать экран"
 
-msgid "&Start record macro"
-msgstr "&Начать запись макроса"
-
-msgid "Finis&h record macro..."
-msgstr "&Закончить запись макроса..."
-
-msgid "&Execute macro..."
-msgstr "&Выполнить макрос..."
+msgid "&Start/Stop record macro"
+msgstr "&Начать/закончить запись макроса"
 
 msgid "Delete macr&o..."
 msgstr "&Удалить макрос..."
+
+msgid "Record/Repeat &actions"
+msgstr "Записать/повторить &действия"
 
 msgid "'ispell' s&pell check"
 msgstr "Проверка ор&фографии (ispell)"
@@ -1716,6 +1383,9 @@ msgstr "Автоматический перенос"
 
 msgid "Word wrap line length:"
 msgstr "Позиция переноса строк:"
+
+msgid "&Group undo"
+msgstr "&Групповая отмена"
 
 msgid "Cursor beyond end of line"
 msgstr "&Курсор за пределами строки"
@@ -2056,6 +1726,18 @@ msgstr "присв. GID при выполнении"
 msgid "set user ID on execution"
 msgstr "присв. UID при выполнении"
 
+msgid "Name:"
+msgstr "Имя"
+
+msgid "Permissions (octal):"
+msgstr "Доступ (восьмеричный)"
+
+msgid "Owner name:"
+msgstr "Владелец:"
+
+msgid "Group name:"
+msgstr "Группа:"
+
 msgid "C&lear marked"
 msgstr "&Очистить помеченное"
 
@@ -2064,30 +1746,6 @@ msgstr "Уста&новить помеченное"
 
 msgid "&Marked all"
 msgstr "Отметить &всё"
-
-msgid "Name"
-msgstr "Имя"
-
-msgid "Permissions (Octal)"
-msgstr "Доступ (восьмеричный)"
-
-msgid "Owner name"
-msgstr "Имя владельца"
-
-msgid "Group name"
-msgstr "Имя группы"
-
-msgid "Use SPACE to change"
-msgstr "ПРОБЕЛ - для изменений"
-
-msgid "an option, ARROW KEYS"
-msgstr "опций, КЛАВИШИ-СТРЕЛКИ -"
-
-msgid "to move between options"
-msgstr "перемещения между настройками"
-
-msgid "and T or INS to mark"
-msgstr "и T или INS для пометки"
 
 msgid "Chmod command"
 msgstr "Команда chmod"
@@ -2099,10 +1757,19 @@ msgid "Permission"
 msgstr "Права доступа"
 
 msgid "Set &users"
-msgstr "Установить поль&зователей"
+msgstr "Поль&зователи"
 
 msgid "Set &groups"
-msgstr "Установить &группы"
+msgstr "&Группы"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Owner name"
+msgstr "Имя владельца"
+
+msgid "Group name"
+msgstr "Имя группы"
 
 msgid "Size"
 msgstr "Размер"
@@ -2268,9 +1935,13 @@ msgstr ""
 msgid "Setup"
 msgstr "Настройка"
 
+#, -format
+msgid "Setup saved to %s"
+msgstr "Параметры сохранены в %s"
+
 #, c-format
-msgid "Setup saved to ~/%s"
-msgstr "Параметры сохранены в ~/%s"
+msgid "Unable to save setup to %s"
+msgstr "Невозможно сохранить параметры в %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Невозможно выполнять команды на нелокальных файловых системах"
@@ -2311,17 +1982,17 @@ msgstr ""
 "Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
-msgid "~/%s file error"
-msgstr "ошибка файла ~/%s"
+msgid "%s%s%s file error"
+msgstr "Ошибка в файле %s%s%s"
 
 #, c-format
 msgid ""
-"The format of the ~/%s file has changed with version 3.0. You may either "
+"The format of the %s%s%s file has changed with version 3.0. You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
-"Формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с "
-"%smc.ext либо использовать этот файл как пример и написать свой."
+"Формат файла %s%s%s изменён с версии 3.0. Вы можете либо скопировать его с "
+"%smc.ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2408,6 +2079,36 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Прервать"
 
+msgid "Ski&p all"
+msgstr "Пропустить вс&ё"
+
+msgid "&Retry"
+msgstr "По&вторить"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Каталог не пуст.\n"
+"Удалить рекурсивно?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Фоновый процесс: каталог не пуст.\n"
+"Удалить рекурсивно?"
+
+msgid "Delete:"
+msgstr "Удалить:"
+
+msgid "Non&e"
+msgstr "Ни &одного"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2464,36 +2165,9 @@ msgstr ""
 "Невозможно удалить каталог \"%s\"\n"
 "%s"
 
-msgid "&Retry"
-msgstr "По&вторить"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Каталог не пуст.\n"
-"Удалить рекурсивно?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Фоновый процесс: каталог не пуст.\n"
-"Удалить рекурсивно?"
-
-msgid "Delete:"
-msgstr "Удалить:"
-
-msgid "Non&e"
-msgstr "Ни &одного"
-
 #, c-format
 msgid ""
-"Cannot overwrite directory\"%s\"\n"
+"Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
 "Невозможно переписать каталог \"%s\"\n"
@@ -2669,14 +2343,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно переписать каталог \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
 msgstr ""
@@ -2824,7 +2490,7 @@ msgid "Malformed regular expression"
 msgstr "Регулярное выражение сформировано неверно"
 
 msgid "Cas&e sensitive"
-msgstr "У&чет регистра"
+msgstr "У&чёт регистра"
 
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
@@ -2839,7 +2505,7 @@ msgid "Sea&rch for content"
 msgstr "Поиск по содер&жимому"
 
 msgid "Case sens&itive"
-msgstr "Учет ре&гистра"
+msgstr "Учёт ре&гистра"
 
 msgid "Re&gular expression"
 msgstr "&Регулярное выражение"
@@ -2862,6 +2528,9 @@ msgstr "Содержимое:"
 msgid "File name:"
 msgstr "Шаблон имени:"
 
+msgid "Ena&ble ignore directories:"
+msgstr "&Игнорировать каталоги:"
+
 msgid "Start at:"
 msgstr "От каталога:"
 
@@ -2871,6 +2540,13 @@ msgstr "Ищем в %s"
 
 msgid "Finished"
 msgstr "Готово"
+
+#, c-format
+msgid "Finished (ignored %zd directory)"
+msgid_plural "Finished (ignored %zd directories)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, c-format
 msgid "Searching %s"
@@ -3064,12 +2740,6 @@ msgstr "Права: %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Положение: %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Вертикальное"
-
-msgid "&Horizontal"
-msgstr "&Горизонтальное"
-
 msgid "Show free sp&ace"
 msgstr "Сво&бодное место"
 
@@ -3085,9 +2755,6 @@ msgstr "М&етки клавиш"
 msgid "Command &prompt"
 msgstr "&Командная строка"
 
-msgid "Show &mini status"
-msgstr "&Мини-статус"
-
 msgid "Menu&bar visible"
 msgstr "&Линейка меню"
 
@@ -3102,6 +2769,12 @@ msgstr "Консольный вывод"
 
 msgid "Other options"
 msgstr "Прочие настройки"
+
+msgid "&Vertical"
+msgstr "&Вертикальное"
+
+msgid "&Horizontal"
+msgstr "&Горизонтальное"
 
 msgid "Output lines:"
 msgstr "Строки вывода:"
@@ -3190,8 +2863,8 @@ msgstr "Отметить &группу"
 msgid "U&nselect group"
 msgstr "Снять &отметку"
 
-msgid "Reverse selec&tion"
-msgstr "Инвер&тировать отметку"
+msgid "&Invert selection"
+msgstr "О&братить выделение"
 
 msgid "E&xit"
 msgstr "Вы&ход"
@@ -3214,8 +2887,8 @@ msgstr "&Отключить панели"
 msgid "&Compare directories"
 msgstr "&Сравнить каталоги"
 
-msgid "&View diff files"
-msgstr "Сра&внить файлы"
+msgid "C&ompare files"
+msgstr "Сравнить фа&йлы"
 
 msgid "E&xternal panelize"
 msgstr "В&нешняя панелизация"
@@ -3396,16 +3069,16 @@ msgid "Quick search"
 msgstr "Быстрый поиск"
 
 msgid "&Permissions"
-msgstr "&Права доступа"
+msgstr "П&рава доступа"
 
 msgid "File &types"
-msgstr "&Типы файлов"
+msgstr "Типы &файлов"
 
 msgid "File highlight"
 msgstr "Цветовыделение"
 
 msgid "&Mouse page scrolling"
-msgstr "Страничное листание мы&шью"
+msgstr "Страничное листание мышь&ю"
 
 msgid "Pa&ge scrolling"
 msgstr "Страни&чное листание"
@@ -3420,7 +3093,7 @@ msgid "A&uto save panels setup"
 msgstr "&Автосохранение настроек панелей"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "Прос&тая перестановка"
 
 msgid "Re&verse files only"
 msgstr "Ин&вертировать только файлы"
@@ -3438,13 +3111,13 @@ msgid "Show &backup files"
 msgstr "Показывать ре&зервные файлы"
 
 msgid "Mi&x all files"
-msgstr "Смешивать &файлы/каталоги"
+msgstr "Сме&шивать файлы/каталоги"
 
 msgid "Use SI si&ze units"
 msgstr "Вывод в едини&цах СИ"
 
-msgid "Main panel options"
-msgstr "Основные настройки панели"
+msgid "Show mi&ni-status"
+msgstr "Показывать &мини-статус"
 
 msgid "Panel options"
 msgstr "Настройки панели"
@@ -3690,6 +3363,9 @@ msgstr "Истина:"
 msgid "False:"
 msgstr "Ложь:"
 
+msgid "Error calling program"
+msgstr "Ошибка выполнения программы"
+
 msgid "Warning -- ignoring file"
 msgstr "Предупреждение - файл игнорируется"
 
@@ -3811,8 +3487,22 @@ msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ее при помощи Tab или мышкой и нажмите пробел."
 
 #, c-format
-msgid "Cannot create %s directory"
-msgstr "Невозможно создать каталог \"%s\""
+msgid ""
+"Failed to run:\n"
+"%s\n"
+msgstr ""
+"Сбой запуска:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"\n"
+"Failed while close:\n"
+"%s\n"
+msgstr ""
+"\n"
+"Сбой при закрытии:"
+"%s\n"
 
 msgid "Choose codepage"
 msgstr "Выберите кодировку"
@@ -3901,6 +3591,399 @@ msgstr "Виртуальная файловая система:"
 #, c-format
 msgid "Data types:"
 msgstr "Тип данных:"
+
+msgid "System data"
+msgstr "Системные данные"
+
+msgid "Config directory:"
+msgstr "Каталог с файлами настроек:"
+
+msgid "Data directory:"
+msgstr "Каталог с файлами данных:"
+
+msgid "User data"
+msgstr "Пльзовательские данные"
+
+msgid "Cache directory:"
+msgstr "Каталог с кэшируемыми данными:"
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"Невозможно открыть cpio-архив\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Преждевременный конец архива cpio\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Несогласованная жесткая ссылка\n"
+"%s\n"
+"в архиве cpio\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s содержит сдвоенные элементы! Пропущено!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Поврежденный заголовок cpio обнаружен в\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Неожиданный конец файла\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Невозможно открыть %s-архив\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Несогласованный архив extfs"
+
+#, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Внимание: невозможно открыть каталог %s\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: отсоединение от %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: ожидается начальная строка..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
+
+#, c-format
+msgid "fish: Password is required for %s"
+msgstr "fish: требуется пароль для %s"
+
+msgid "fish: Sending password..."
+msgstr "fish: посылается пароль..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: посылается начальная строка..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: версия подтверждения связи..."
+
+msgid "fish: Getting host info..."
+msgstr "fish: собирается информация об удалённой машине..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: устанавливается текущий каталог..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: соединение успешно, персональный каталог %s."
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: чтение каталога %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: готово."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: ошибка"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: запись %s: посылается команда..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: сбой локального чтения, посылаются нули"
+
+msgid "fish: storing zeros"
+msgstr "fish: запись нулевых данных"
+
+msgid "fish: storing file"
+msgstr "ftpfs: запись файла"
+
+msgid "Aborting transfer..."
+msgstr "Прерывание передачи..."
+
+msgid "Error reported after abort."
+msgstr "Отмечена ошибка после прерывания."
+
+msgid "Aborted transfer would be successful."
+msgstr "Передача успешно прервана."
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: отсоединение от %s"
+
+#, c-format
+msgid "FTP: Password required for %s"
+msgstr "FTP: требуется пароль для %s"
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: посылается имя пользователя"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: посылается пароль пользователя"
+
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr "FTP: Необходима учётная запись для пользователя %s"
+
+msgid "Account:"
+msgstr "Счет:"
+
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: посылается учётная запись пользователя"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: зарегистрирован"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: ошибка регистрации пользователя %s"
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: неверное имя системы."
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr "ftpfs: %s"
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: осуществляется соединение с %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: соединение прервано пользователем"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: сбой соединения с сервером: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-G to cancel)"
+msgstr "Ожидание повтора попытки... %d (Control-G для отмены)"
+
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: неверный адрес системы."
+
+#, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr "Невозможно создать сокет: %s"
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: невозможно установить пассивный режим"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: прерывание передачи."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: ошибка прерывания: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: сбой прерывания"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: невозможно распознать символическую ссылку"
+
+msgid "Resolving symlink..."
+msgstr "Распознается символическая ссылка..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: чтение каталога FTP %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(ограничение rfc959)"
+
+msgid "(chdir first)"
+msgstr "(сначала chdir)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
+
+msgid "ftpfs: storing file"
+msgstr "ftpfs: запись файла"
+
+msgid ""
+"~/.netrc file has incorrect mode\n"
+"Remove password or correct mode"
+msgstr ""
+"Файл ~/.netrc имеет неверный режим доступа/владения.\n"
+"Удалите пароль или исправьте режим доступа/владения"
+
+#, c-format
+msgid "%s: Warning: file %s not found\n"
+msgstr "%s: Предупреждение: файл %s не найден\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Предупреждение: неправильная строка в %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Предупреждение: неправильный флаг %c в %s:\n"
+"%s\n"
+
+#, c-format
+msgid "reconnect to %s failed"
+msgstr "Сбой повторного соединения к %s"
+
+msgid "Authentication failed"
+msgstr "Сбой идентификации"
+
+#, c-format
+msgid "Error %s creating directory %s"
+msgstr "Ошибка %s при создании каталога %s"
+
+#, c-format
+msgid "Error %s removing directory %s"
+msgstr "Ошибка %s при удалении каталога %s"
+
+#, c-format
+msgid "%s opening remote file %s"
+msgstr "%s при открытии файла %s с удаленной машины"
+
+#, c-format
+msgid "%s removing remote file %s"
+msgstr "%s при удалении файла %s с удаленной машины"
+
+#, c-format
+msgid "%s renaming files\n"
+msgstr "%s при переименовании файла\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Невозможно открыть архив tar\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Несогласованный архив tar"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Неожиданный конец архивного файла"
+
+#, c-format
+msgid ""
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"%s\n"
+"не похож на архив tar"
+
+msgid "undelfs: error"
+msgstr "undelfs: ошибка"
+
+msgid "not enough memory"
+msgstr "недостаточно памяти"
+
+msgid "while allocating block buffer"
+msgstr "при получении блока буферов"
+
+#, c-format
+msgid "open_inode_scan: %d"
+msgstr "open_inode_scan: %d"
+
+#, c-format
+msgid "while starting inode scan %d"
+msgstr "при начале сканирования узла %d"
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: загрузка информации об удаленных файлах %d inodes"
+
+#, c-format
+msgid "while calling ext2_block_iterate %d"
+msgstr "при вызове ext2_block_iterate %d"
+
+msgid "no more memory while reallocating array"
+msgstr "не хватило памяти при переоткрытии массива"
+
+#, c-format
+msgid "while doing inode scan %d"
+msgstr "при сканировании узла %d"
+
+#, c-format
+msgid "Cannot open file %s"
+msgstr "Невозможно открыть файл %s"
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: чтение битовой карты узлов..."
+
+#, c-format
+msgid ""
+"Cannot load inode bitmap from:\n"
+"%s"
+msgstr ""
+"Невозможно загрузить битовую карту узлов с:\n"
+"%s"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: чтение блока битовой карты..."
+
+#, c-format
+msgid ""
+"Cannot load block bitmap from:\n"
+"%s"
+msgstr ""
+"Невозможно загрузить блок битовой карты с:\n"
+"%s"
+
+msgid "vfs_info is not fs!"
+msgstr "vfs_info - не файловая система!"
+
+msgid "You have to chdir to extract files first"
+msgstr "Вы должны сначала сменить каталог, чтобы извлечь файлы"
+
+msgid "while iterating over blocks"
+msgstr "при переборе блоков"
+
+#, c-format
+msgid "Cannot open file \"%s\""
+msgstr "Невозможно открыть файл %s"
+
+msgid "Ext2lib error"
+msgstr "Сбой Ext2lib"
 
 msgid "Invalid value"
 msgstr "Неверный адрес"
@@ -4002,5 +4085,5 @@ msgstr "Переход к найденному"
 msgid "Search done"
 msgstr "Поиск закончен"
 
-msgid "Continue from begining?"
+msgid "Continue from beginning?"
 msgstr "Продолжить с начала?"
