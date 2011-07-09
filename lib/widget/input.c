@@ -250,8 +250,8 @@ push_history (WInput * in, const char *text)
         in->history = list_append_unique (in->history, t);
         in->history_changed = TRUE;
     }
-
-    g_free (t);
+    else
+        g_free (t);
 
     in->need_push = FALSE;
 }
