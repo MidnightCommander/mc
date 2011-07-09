@@ -454,14 +454,6 @@ tty_touch_screen (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_touch_lines (int start, int num)
-{
-    SLsmg_touch_lines (start, num);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 tty_gotoyx (int y, int x)
 {
     SLsmg_gotorc (y, x);

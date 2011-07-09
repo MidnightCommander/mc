@@ -871,12 +871,7 @@ do_refresh (void)
     if (fast_refresh)
     {
         if ((d != NULL) && (d->data != NULL))
-        {
-            Dlg_head *dlg = (Dlg_head *) d->data;
-
-            tty_touch_lines (dlg->y, dlg->lines);
-            dlg_redraw (dlg);
-        }
+            dlg_redraw ((Dlg_head *) d->data);
     }
     else
     {
@@ -884,10 +879,6 @@ do_refresh (void)
         for (; d != NULL; d = g_list_next (d))
             if ((d->data != NULL) && ((Dlg_head *) d->data)->fullscreen)
                 break;
-
-        /* Clear entire screen to avoid artefacts after printing of non-printable symbols. */
-        clr_scr ();
-
         /* back to top dialog */
         for (; d != NULL; d = g_list_previous (d))
             if (d->data != NULL)

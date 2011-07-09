@@ -110,7 +110,6 @@ extern int tty_lowlevel_getch (void);
 
 extern int tty_reset_screen (void);
 extern void tty_touch_screen (void);
-extern void tty_touch_lines (int start, int num);
 
 extern void tty_gotoyx (int y, int x);
 extern void tty_getyx (int *py, int *px);
