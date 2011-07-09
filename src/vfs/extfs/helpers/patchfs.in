@@ -23,13 +23,17 @@ my $fileutil = 'file -b';
 my $parsedates = eval 'require Date::Parse';
 
 # regular expressions
-my $unified_header=qr/^--- .*\n\+\+\+ .*\n$/;
-my $unified_extract=qr/^--- ([^\s]+).*\n\+\+\+ ([^\s]+)\s*([^\t\n]*)/;
+my $unified_header=qr/^--- .*\t.*\n\+\+\+ .*\t.*\n$/;
+my $unified_extract=qr/^--- ([^\t]+).*\n\+\+\+ ([^\t]+)\s*(.*)\n/;
+my $unified_header2=qr/^--- .*\n\+\+\+ .*\n$/;
+my $unified_extract2=qr/^--- ([^\s]+).*\n\+\+\+ ([^\s]+)\s*(.*)\n/;
 my $unified_contents=qr/^([+\-\\ \n]|@@ .* @@)/;
 my $unified_hunk=qr/@@ -(\d+)(,(\d+))? \+(\d+)(,(\d+))? @@.*\n/;
 
-my $context_header=qr/^\*\*\* .*\n--- .*\n$/;
-my $context_extract=qr/^\*\*\* ([^\s]+).*\n--- ([^\s]+)\s*([^\t\n]*)/;
+my $context_header=qr/^\*\*\* .*\t.*\n--- .*\t.*\n$/;
+my $context_extract=qr/^\*\*\* ([^\t]+).*\n--- ([^\t]+)\s*(.*)\n/;
+my $context_header2=qr/^\*\*\* .*\n--- .*\n$/;
+my $context_extract2=qr/^\*\*\* ([^\s]+).*\n--- ([^\s]+)\s*(.*)\n/;
 my $context_contents=qr/^([!+\-\\ \n]|-{3} .* -{4}|\*{3} .* \*{4}|\*{15})/;
 
 my $ls_extract_id=qr/^[^\s]+\s+[^\s]+\s+([^\s]+)\s+([^\s]+)/;
@@ -201,12 +205,16 @@ sub parse($$$$)
 	    if($unified) {
 		if(/$unified_header/o) {
 		    ($fsrc,$fdst,$time) = /$unified_extract/o;
+		} elsif(/$unified_header2/o) {
+		    ($fsrc,$fdst,$time) = /$unified_extract2/o;
 		} else {
 		    error "Can't parse unified diff header";
 		}
 	    } elsif($context) {
 		if(/$context_header/o) {
 		    ($fsrc,$fdst,$time) = /$context_extract/o;
+		} elsif(/$context_header2/o) {
+		    ($fsrc,$fdst,$time) = /$context_extract2/o;
 		} else {
 		    error "Can't parse context diff header";
 		}
