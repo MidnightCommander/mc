@@ -596,10 +596,11 @@ po/Makefile.in
 
 if test x$enable_tests != xno; then
     AC_CONFIG_FILES([
-lib/tests/Makefile
-lib/tests/mcconfig/Makefile
-lib/tests/search/Makefile
-lib/tests/vfs/Makefile
+tests/Makefile
+tests/lib/Makefile
+tests/lib/mcconfig/Makefile
+tests/lib/search/Makefile
+tests/lib/vfs/Makefile
 ])
 
 fi

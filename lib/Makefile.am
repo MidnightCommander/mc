@@ -1,9 +1,5 @@
 SUBDIRS = event filehighlight mcconfig search skin tty vfs strutil widget .
 
-if HAVE_TESTS
-    SUBDIRS += tests
-endif
-
 if ENABLE_MCLIB
     LIB_VERSION=`echo $(LIBMC_VERSION) | \
 	tr '.' ' '| \
