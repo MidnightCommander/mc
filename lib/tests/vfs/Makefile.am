@@ -10,6 +10,7 @@ TESTS = \
 	canonicalize_pathname \
 	current_dir \
 	path_serialize \
+	vfs_parse_ls_lga \
 	vfs_path_string_convert \
 	vfs_prefix_to_class \
 	vfs_split \
@@ -28,6 +29,9 @@ path_serialize_SOURCES = \
 
 vfs_split_SOURCES = \
 	vfs_split.c
+
+vfs_parse_ls_lga_SOURCES = \
+	vfs_parse_ls_lga.c
 
 vfs_prefix_to_class_SOURCES = \
 	vfs_prefix_to_class.c
