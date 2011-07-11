@@ -2072,7 +2072,7 @@ edit_insert_file (WEdit * edit, const char *filename)
                     edit_insert (edit, buf[i]);
             }
             /* highlight inserted text then not persistent blocks */
-            if (!option_persistent_selections)
+            if (!option_persistent_selections && edit->modified)
             {
                 edit_set_markers (edit, edit->curs1, current, 0, 0);
                 if (edit->column_highlight)

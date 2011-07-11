@@ -16,23 +16,23 @@ stored when configured or compiled, like /usr/local/libexec or /usr/libexec).
 Assign a vfs suffix. For example, if you have .zip file, and would like
 to see what's inside it, path will be
 
-/anypath/my.zip#uzip/some_path/...
+/anypath/my.zip/uzip://some_path/...
 
 In this example, .zip is suffix, but I call vfs 'uzip'. Why? Well,
 what this vfs essentially does is UNzip. UN is too long, so I choosed
 U. Note that sometime in future filesystem like zip may exist: It will
-take whole tree and create .zip file from it. So /usr#zip will be
+take whole tree and create .zip file from it. So /usr/zip:// will be
 zipfile containing whole /usr tree.
 
 If your vfs does not require file to work on, add '+' to the end of name.
 Note, that trailing '+' in file name is not a part of vfs name, it is
 just an vfs attribue. So you have not use it in vfs commands:
 
-cd #rpms
+cd rpms://
 
 is correct command, and
 
-cd #rpms+
+cd rpms+://
 
 is incorrect command.
 
@@ -132,7 +132,7 @@ show on the console or can be redirected to a file.
 * Putting it to use
 ----------------------------------------------------------
 The file .mc.ext in a home directory, and in mc's user directory (commonly
-/usr/local/lib/mc), contains instructions for operations on files depending
+/etc/mc), contains instructions for operations on files depending
 on filename extensions.  It is well documented in other files in this 
 distribution, so here are just a few notes specifically on use of the
 Virtual File System you just built.
@@ -178,14 +178,14 @@ subject.  The sum of this is the .mc.ext entry:
 
 # zip
 regex/\.(zip|ZIP)$
-   Open=%cd zip:%d/%p
+   Open=%cd %p/uzip://
    View=%view{ascii} unzip -v %f
    Icon=zip.xpm
    Extract=unzip %f '*'
 
 Add an entry like this to the .mc.ext file in a user's home directory, If you
 want others to have it, add it to the mc.ext file in the mc system directory,
-often /usr/local/lib/mc/mc.ext.  Notice this file is not prepended with a dot.
+often /etc/mc/mc.ext.  Notice this file is not prepended with a dot.
 
 Once all this is done, and things are in their proper places, exit mc if you
 were using it, and restart it so it picks up the new information.

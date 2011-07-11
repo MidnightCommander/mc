@@ -34,13 +34,7 @@
 #  Make sure that boto <http://code.google.com/p/boto> (python-boto in Debian) is installed.
 #  Preferably pytz (package python-tz in Debian) should be installed as well.
 #
-#  Save as executable file /share/mc/extfs/s3 (or wherever your mc expects to find extfs modules)
-#  Add the the following to your extfs.ini (might exists as /usr/share/mc/extfs/extfs.ini):
-# ----- begin extfs.ini -----
-#  # Amazon S3
-#  s3:
-# ----- end extfs.ini   -----
-#
+#  Save as executable file /usr/libexec/mc/extfs/s3 (or wherever your mc expects to find extfs modules)
 #
 # Settings: (should be set via environment)
 #  Required:
@@ -52,7 +46,7 @@
 #
 #
 # Usage:
-#  Open dialog "Quick cd" (<alt-c>) and type: #s3 <enter> (or simply type ''cd #s3'' in shell line)
+#  Open dialog "Quick cd" (<alt-c>) and type: s3:// <enter> (or simply type `cd s3://' in shell line)
 #
 #
 # History:
