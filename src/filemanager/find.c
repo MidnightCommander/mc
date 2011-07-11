@@ -484,17 +484,16 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
  *
  * If the return value is TRUE, then the following holds:
  *
- * START_DIR, IGNORE_FIR and PATTERN are pointers to char * and upon return they
- * contain the information provided by the user.
+ * start_dir, ignore_dirs, pattern and content contain the information provided by the user.
+ * They are newly allocated strings and must be freed when uneeded.
  *
- * CONTENT holds a strdup of the contents specified by the user if he
- * asked for them or 0 if not (note, this is different from the
- * behavior for the other two parameters.
- *
+ * start_dir_len is -1 when user entered an absolute path, otherwise it is a length
+ * of start_dir (which is absolute). It is used to get a relative pats of find results.
  */
 
 static gboolean
-find_parameters (char **start_dir, char **ignore_dirs, char **pattern, char **content)
+find_parameters (char **start_dir, ssize_t *start_dir_len,
+                 char **ignore_dirs, char **pattern, char **content)
 {
     gboolean return_value;
 
@@ -685,48 +684,68 @@ find_parameters (char **start_dir, char **ignore_dirs, char **pattern, char **co
         }
 
     default:
+        {
+            char *s;
+
 #ifdef HAVE_CHARSET
-        options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
-        options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
+            options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
+            options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
 #endif
-        options.content_use = content_use_cbox->state & C_BOOL;
-        options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
-        options.content_regexp = content_regexp_cbox->state & C_BOOL;
-        options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
-        options.content_whole_words = content_whole_words_cbox->state & C_BOOL;
-        options.find_recurs = recursively_cbox->state & C_BOOL;
-        options.file_pattern = file_pattern_cbox->state & C_BOOL;
-        options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
-        options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
-        options.ignore_dirs_enable = ignore_dirs_cbox->state & C_BOOL;
-        g_free (options.ignore_dirs);
-        options.ignore_dirs = g_strdup (in_ignore->buffer);
+            options.content_use = content_use_cbox->state & C_BOOL;
+            options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
+            options.content_regexp = content_regexp_cbox->state & C_BOOL;
+            options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
+            options.content_whole_words = content_whole_words_cbox->state & C_BOOL;
+            options.find_recurs = recursively_cbox->state & C_BOOL;
+            options.file_pattern = file_pattern_cbox->state & C_BOOL;
+            options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
+            options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
+            options.ignore_dirs_enable = ignore_dirs_cbox->state & C_BOOL;
+            g_free (options.ignore_dirs);
+            options.ignore_dirs = g_strdup (in_ignore->buffer);
 
-        *content = (options.content_use && in_with->buffer[0] != '\0')
-            ? g_strdup (in_with->buffer) : NULL;
-        *start_dir = in_start->buffer[0] != '\0' ? in_start->buffer : (char *) ".";
-        *pattern = g_strdup (in_name->buffer);
-        if (in_start_dir != INPUT_LAST_TEXT)
-            g_free (in_start_dir);
-        in_start_dir = g_strdup (*start_dir);
-        if ((*start_dir)[0] == '.' && (*start_dir)[1] == '\0')
-            *start_dir = g_strdup (current_panel->cwd);
-        else if (g_path_is_absolute (*start_dir))
-            *start_dir = g_strdup (*start_dir);
-        else
-            *start_dir = mc_build_filename (current_panel->cwd, *start_dir, (char *) NULL);
+            *content = (options.content_use && in_with->buffer[0] != '\0')
+                ? g_strdup (in_with->buffer) : NULL;
+            *start_dir = in_start->buffer[0] != '\0' ? in_start->buffer : (char *) ".";
+            *pattern = g_strdup (in_name->buffer);
+            if (in_start_dir != INPUT_LAST_TEXT)
+                g_free (in_start_dir);
+            in_start_dir = g_strdup (*start_dir);
 
-        canonicalize_pathname (*start_dir);
+            s = g_strdup (*start_dir);
+            canonicalize_pathname (s);
 
-        if (!options.ignore_dirs_enable || in_ignore->buffer[0] == '\0'
-            || (in_ignore->buffer[0] == '.' && in_ignore->buffer[1] == '\0'))
-            *ignore_dirs = NULL;
-        else
-            *ignore_dirs = g_strdup (in_ignore->buffer);
+            if (s[0] == '.' && s[1] == '\0')
+            {
+                *start_dir = g_strdup (current_panel->cwd);
+                /* FIXME: is current_panel->cwd canonicalized? */
+                /* relative paths will be used in panelization */
+                *start_dir_len = (ssize_t) strlen (current_panel->cwd);
+                g_free (s);
+            }
+            else if (g_path_is_absolute (s))
+            {
+                *start_dir = s;
+                *start_dir_len = -1;
+            }
+            else
+            {
+                /* relative paths will be used in panelization */
+                *start_dir = mc_build_filename (current_panel->cwd, s, (char *) NULL);
+                *start_dir_len = (ssize_t) strlen (current_panel->cwd);
+                g_free (s);
+            }
 
-        find_save_options ();
+            if (!options.ignore_dirs_enable || in_ignore->buffer[0] == '\0'
+                || (in_ignore->buffer[0] == '.' && in_ignore->buffer[1] == '\0'))
+                *ignore_dirs = NULL;
+            else
+                *ignore_dirs = g_strdup (in_ignore->buffer);
 
-        return_value = TRUE;
+            find_save_options ();
+
+            return_value = TRUE;
+        }
     }
 
     destroy_dlg (find_dlg);
@@ -958,7 +977,7 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
     int file_fd;
     gboolean ret_val = FALSE;
 
-    fname = concat_dir_and_file (directory, filename);
+    fname = mc_build_filename (directory, filename, (char *) NULL);
 
     if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode))
     {
@@ -1299,19 +1318,6 @@ init_find_vars (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
-make_fullname (const char *dirname, const char *filename)
-{
-
-    if (strcmp (dirname, ".") == 0 || strcmp (dirname, "." PATH_SEP_STR) == 0)
-        return g_strdup (filename);
-    if (strncmp (dirname, "." PATH_SEP_STR, 2) == 0)
-        return concat_dir_and_file (dirname + 2, filename);
-    return concat_dir_and_file (dirname, filename);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 {
@@ -1330,7 +1336,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
         line = 0;
     }
 
-    fullname = make_fullname (dir, filename);
+    fullname = mc_build_filename (dir, filename, (char *) NULL);
     if (edit)
         do_edit_at_line (fullname, use_internal_edit, line);
     else
@@ -1560,8 +1566,8 @@ kill_gui (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-find_file (const char *start_dir, const char *ignore_dirs, const char *pattern, const char *content,
-           char **dirname, char **filename)
+do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
+         const char *pattern, const char *content, char **dirname, char **filename)
 {
     int return_value = 0;
     char *dir_tmp = NULL, *file_tmp = NULL;
@@ -1605,6 +1611,7 @@ find_file (const char *start_dir, const char *ignore_dirs, const char *pattern, 
         {
             const char *lc_filename = NULL;
             WLEntry *le = (WLEntry *) entry->data;
+            char *p;
 
             if ((le->text == NULL) || (le->data == NULL))
                 continue;
@@ -1614,8 +1621,18 @@ find_file (const char *start_dir, const char *ignore_dirs, const char *pattern, 
             else
                 lc_filename = le->text + 4;
 
-            name = make_fullname (le->data, lc_filename);
-            status = handle_path (list, name, &st, next_free, &link_to_dir, &stale_link);
+            name = mc_build_filename (le->data, lc_filename, (char *) NULL);
+            /* skip initial start dir */
+            if (start_dir_len < 0)
+                p = name;
+            else
+            {
+                p = name + (size_t) start_dir_len;
+                if (*p == PATH_SEP)
+                    p++;
+            }
+
+            status = handle_path (list, p, &st, next_free, &link_to_dir, &stale_link);
             if (status == 0)
             {
                 g_free (name);
@@ -1629,16 +1646,16 @@ find_file (const char *start_dir, const char *ignore_dirs, const char *pattern, 
 
             /* don't add files more than once to the panel */
             if (content_pattern != NULL && next_free > 0
-                && strcmp (list->list[next_free - 1].fname, name) == 0)
+                && strcmp (list->list[next_free - 1].fname, p) == 0)
             {
                 g_free (name);
                 continue;
             }
 
-            if (!next_free)     /* first turn i.e clean old list */
+            if (next_free == 0)     /* first turn i.e clean old list */
                 panel_clean_dir (current_panel);
-            list->list[next_free].fnamelen = strlen (name);
-            list->list[next_free].fname = name;
+            list->list[next_free].fnamelen = strlen (p);
+            list->list[next_free].fname = g_strdup (p);
             list->list[next_free].f.marked = 0;
             list->list[next_free].f.link_to_dir = link_to_dir;
             list->list[next_free].f.stale_link = stale_link;
@@ -1647,6 +1664,7 @@ find_file (const char *start_dir, const char *ignore_dirs, const char *pattern, 
             list->list[next_free].sort_key = NULL;
             list->list[next_free].second_sort_key = NULL;
             next_free++;
+            g_free (name);
             if (!(next_free & 15))
                 rotate_dash ();
         }
@@ -1656,9 +1674,11 @@ find_file (const char *start_dir, const char *ignore_dirs, const char *pattern, 
             current_panel->count = next_free;
             current_panel->is_panelized = 1;
 
-            if (start_dir[0] == PATH_SEP)
+            /* absolute path */
+            if (start_dir_len < 0)
             {
                 int ret;
+
                 strcpy (current_panel->cwd, PATH_SEP_STR);
                 ret = chdir (PATH_SEP_STR);
             }
@@ -1679,21 +1699,22 @@ find_file (const char *start_dir, const char *ignore_dirs, const char *pattern, 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_find (void)
+find_file (void)
 {
     char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
+    ssize_t start_dir_len;
     char *filename = NULL, *dirname = NULL;
     int v;
     gboolean dir_and_file_set;
 
-    while (find_parameters (&start_dir, &ignore_dirs, &pattern, &content))
+    while (find_parameters (&start_dir, &start_dir_len, &ignore_dirs, &pattern, &content))
     {
         if (pattern[0] == '\0')
             break;              /* nothing search */
 
         dirname = filename = NULL;
         is_start = FALSE;
-        v = find_file (start_dir, ignore_dirs, pattern, content, &dirname, &filename);
+        v = do_find (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname, &filename);
         g_free (ignore_dirs);
         g_free (pattern);
 
