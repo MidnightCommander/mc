@@ -21,7 +21,7 @@ La prima è molto facile:
 Assegnate un suffisso vfs. Per esempio, se avete un file .zip e vorreste
 vedere cosa c'è dentro di esso, il percorso sarebbe
 
-/qualsiasipercorso/my.zip#uzip/unpercorso/...
+/qualsiasipercorso/my.zip/uzip://unpercorso/...
 
 Poi basta aggiungere una linea nel file extfs.ini contenente solo quella
 estensione. Se il vostro vfs non richiede file di lavoro, aggiungete
@@ -31,7 +31,7 @@ In questo esempio, .zip è il suffisso, ma è possibile chiamare vfs 'uzip'.
 Perché? Beh, quello che fa vfs è essenzialmente UNzip. UN è troppo lungo
 così è stato scelto U. Notare che in futuro un filesystem come zip potrà
 esistere: prenderà l'intero albero e creerà un file zip da esso. Così
-/usr:zip sarà un file zip contenente l'intero albero /usr.
+/usr/zip:// sarà un file zip contenente l'intero albero /usr.
 
 La seconda potrebbe richiedere un po' di conoscenza di programmazione shell/c:
 si deve creare un prefisso di programma (con i permessi di esecuzione) in
@@ -137,7 +137,7 @@ risultato mostrato in console o redirezionato in un file.
 * Messa in uso
 ----------------------------------------------------------
 Il file .mc.ext nella directory home e nella directory utente di mc 
-(normalmente /usr/local/lib/mc), contiene le istruzioni per le operazioni 
+(normalmente /etc/mc), contiene le istruzioni per le operazioni 
 sui files a seconda dell'estensione. E' ben documentato in altri file in 
 questa distribuzione perciò qui si darà solo qualche nota specificatamente
 sull'uso del File System Virtuale che si è appena creato.
@@ -183,14 +183,14 @@ c'è ancora un particolare. La somma di questo è nella voce .mc.ext:
 
 # zip
 regex/\.(zip|ZIP)$
-   Open=%cd zip:%d/%p
+   Open=%cd %p/uzip://
    View=%view{ascii} unzip -v %f
    Icon=zip.xpm
    Extract=unzip %f '*'
 
 Aggiungere una voce come questa al file .mc.ext nella directory home dell'utente.
 Se volete che altri la vedano, aggiungetela nel file mc.ext nella directory di
-sistema di mc spesso in /usr/local/lib/mc/mc.ext. Notare che questo file non
+sistema di mc spesso in /etc/mc/mc.ext. Notare che questo file non
 ha un punto iniziale.
 
 Una volta che tutto questo è fatto e le cose sono al loro posto, uscite da mc
