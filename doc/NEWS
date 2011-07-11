@@ -1,3 +1,144 @@
+Version 4.8.0-pre1
+
+WARNING: Configuration files was moved from your $HOME/.mc directory into
+XDG_CONFIG_* directories to respect FDO standard
+(http://standards.freedesktop.org/basedir-spec/basedir-spec-0.7.html).
+To get more information, see ticket #1851.
+
+WARNING: VFS paths now handled as vfsprefix1://vfsdata/vfsprefix2://vfsdata
+(see #2361). Also, 'bindings' user file was renamed to 'mc.ext', so you need
+search in this file all
+
+    Open=file.ext#vfsprefix
+
+and replace them to
+
+    Open=file.ext/vfsprefix://
+
+After this you should rename your 'bindings' file to 'mc.ext'.
+Old-style paths are handled just in 'Directory hotlist' dialog, but you couldn't
+mix URL-like and old style path elements in one path string. Support of old-style
+paths will be removed in next major release (probably in 4.9, who knows...)
+
+WARNING: keybinding names was renamed to provide some unification (see #2511).
+The correspondence of old and new keybinging names are described in doc/keybind-migration.txt
+file and in doc/keybindMigration web page.
+
+Be aware.
+
+- Core
+
+    * Added 256 colours support (#2169, #2173, #2475)
+    * Changed default text in filtered view (alt-!) to input command line (if not empty)
+      or stay old behaviour (current file under cursor) (#2266)
+    * Added simple swap mode that means the swap of panel locations, in addition to current swap
+      of panel content (#2368)
+    * Cofiguration files now moved to directory specified in XDG_CONFIG_HOME environment variable (#1851)
+    * Panel options are read now from [Panels] section only. [Midnight-Commander] section is not read (#2305)
+    * "Show mini info" checkbox was moved from the "Layout" dialog window to the "Panel options" one (#2305)
+    * Select files by shift-left/right in file panel (#2534)
+    * Added support of skip all errors on multi-file/dir operation (#71)
+    * 'Find Files' improvements:
+        - support relative ignored directories (#2275);
+        - handle of ignored directories in dialog window (#2275);
+        - "Search for content" checkbox is enabled by default (#2462)
+    * Added hardlinks detection for filehighlight (#2478)
+    * Unification of keybind names (#2511):
+        - most of keybinding names are changes to unify that names. Table of old and new names
+          is available in doc/keybind-migration.txt;
+        - improve of key rebinding: previously, to rebind some keys, used must redefine the entire section
+          where that bindings are placed in user keymap file. New merge algorithm doesn't require that
+          and allows rebind only wanted keys;
+        - added --nokeymap command line option to disable external keymaps
+    * Sources in 'lib' directory now independent to sources in 'src' one (#2501)
+    * Added configure parameter --enable-mclib for build libmc.so shared library (#2501)
+    * Added new engine for universal event system (as part of #2501)
+    * Optimized loading and saving of configurations and histories (#2541, #2545)
+    * Reimplemented i18n support in 'Chmod' dialog window (#2557) 
+
+- VFS
+
+    * VFS structure changes (as part of #2501):
+        - moved from lib/vfs/mc-vfs to lib/vfs;
+        - split VFS-modules by directories and moved to src/vfs;
+        - lib/vfs/vfs-impl.h was merged into lib/vfs/vfs.h
+    * VFS now used URL-like paths (#2361)
+
+- Editor
+
+    * New engine of the editor macro (#323)
+    * Multiply repeat of the recorded actions (#323)
+    * Call extermal scripts from the editor (#323, #2512)
+    * Added REDO action (#25)
+    * Group UNDO by action (#27)
+    * Selection is not reset after execute user menu (#2463)
+    * Vertical selection is not reset after copy/move (#2504)
+    * More intuitive word left/right action (now the cursor stop beside EOL/BOL) (#2483)
+    * Duble-click marks the current word. Added action MarkWord to mark word, MarkLine
+      to mark current line (#2499)
+    * Regexp search&replace: support escape sequences in replacement string (#1882)
+
+- Misc
+
+    * Minor enhancement in mc.ext:
+    * added -C key to nm utility in View action for static libraries (#2485)
+    * New file bindings:
+        - .torrent: view using ctorrent (#2562);
+        - .mts: handle as videofile (#2566)
+    * Added new entries in cedit.menu: "Sort selection", "Upper case", "Lower case"
+    * New skins:
+        - Xoria256 (#2469)
+        - mc-4.6 (#2524)
+    * Updated skins:
+    * Nice dark (#1791)
+    * Added support for [http://check.sourceforge.net check] unit test framework (as part of #2501)
+    * Added -F/--datadir-info option to show extended information about used data dirs (#2495)
+    * Added --configure-options to easy update & reconfigure existing mc (#2495)
+    * Language-specific man pages and hint and help files are not installed
+      if mc is built with --disable-nls option (#2514)
+    * Added new translation:
+        - Esperanto
+    * Code cleanup (#2481, #2515, #2518, #2560, #2570)
+
+- Fixes
+
+    * Build failure on DragonFly BSD (#2516)
+    * Broken Del & Backspace in dialogs (in locale CP866) (#1634)
+    * Screen and input corruption under xterm in non-UTF locales (#1668)
+    * Alt-Backspace shortcut doesn't work (#2455)
+    * Broken command autocompletion (#2458)
+    * Swap panels doesn't respect sort options (#2368)
+    * File list format of panel is initialized incorrectly after switch back from quick view
+      or info mode to file list one (#2390)
+    * Main menu is not drawn correctly after change of it visibility and activity (#2466)
+    * MC switches to left panel after call of command history using mouse (#2459)
+    * Find file: don't check content regexp if search for content is not used (#2464)
+    * Find file: broken lynk-like navigation in panelization of search result (#2491)
+    * Dialog trims leading spaces in input field (#2544)
+    * Panelize content is lost when doing F5/F6/F8 on a file on the other panel (#2312)
+    * Color of panel header cannot be set in the command line (#2170)
+    * ctrl-g key closes file panels (#2520)
+    * Incorrect files mark by mouse (#2556)
+    * Editor: incorrect restore selection after UNDO (#2456)
+    * Editor: segfault after getting the previous char in utf8 (#2484)
+    * Editor: incorrect detection of the word boundary (added '{', '}' as end of word) (#2500)
+    * Bold and selected colors of viewer cannot be set in the command line (#2489)
+    * Viewer: fixed  incorrect starting offset for 'search again' (#2294)
+    * Viewer: fixed problems while displaying UTF-8 manual pages (#1629)
+    * Diff viewer: quick left/right movements don't work in non-default key maps (#2509)
+    * AI_ADDRCONFIG is not optional for RFC 3493 non-compliant systems (#2401)
+    * FTP directories containing @ result severe security risks (eg. deletion of homedir) (#2220)
+    * Builtin ftp client can't download files with apostrophe in a file name (#2251)
+    * Unable to show FTP listing if password contains # (#2360)
+    * FTP: fixed access to file names starting with space (#81)
+    * Bashisms in extfs (#2569)
+    * Browsing *.deb files is broken with latest Perl (#2552)
+    * isoinfo adds ";1" to the end of file name when Joliet without Rock Ridge is used (#2471)
+    * patchfs incorrectly works with filenames containing spaces (#2572)
+    * cd to ~ processed incorrectly in the command line if more than one space is separating
+      the "cd" and "~" (#2120)
+
+
 Version 4.7.5
 
 - Core
