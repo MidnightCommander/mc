@@ -145,6 +145,7 @@ context default
     keyword whole include\? green
     keyword whole include magenta
     keyword whole require magenta
+    keyword whole require_relative magenta
 #    keyword whole where magenta
 
 #Class numeric
