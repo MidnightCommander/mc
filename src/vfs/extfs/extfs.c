@@ -481,7 +481,6 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
     char *buffer;
     struct archive *current_archive;
     char *current_file_name, *current_link_name;
-    size_t filepos = 0;
 
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, fstype);
 
@@ -499,7 +498,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
         struct stat hstat;
 
         current_link_name = NULL;
-        if (vfs_parse_ls_lga (buffer, &hstat, &current_file_name, &current_link_name, &filepos))
+        if (vfs_parse_ls_lga (buffer, &hstat, &current_file_name, &current_link_name, NULL))
         {
             struct entry *entry, *pent;
             struct inode *inode;
