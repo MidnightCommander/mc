@@ -125,9 +125,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_libexecdir}/mc
 %dir %{_libexecdir}/mc/extfs.d
+%dir %{_libexecdir}/mc/fish
 %attr(4511, vcsa, tty) %{_libexecdir}/mc/cons.saver
 %{_libexecdir}/mc/mc*sh
 %{_libexecdir}/mc/extfs.d/*
+%{_libexecdir}/mc/fish/*
 
 %{_mandir}/man1/*
 %lang(es) %{_mandir}/es/man1/mc.1*
@@ -152,6 +154,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mc/*
 
 %changelog
+* Thu Jul 14 2011 Slava Zanko <slavazanko@gmail.com>
+- Added %{_libexecdir}/mc/fish directory to spec file
+
 * Thu Sep 16 2010 Andrew Borodin <aborodin@vmail.ru>
 - Some files are installed now into %%{_datadir}/mc instead of %%{_sysconfdir}/mc.
 
