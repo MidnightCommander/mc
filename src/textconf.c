@@ -179,12 +179,16 @@ show_datadirs_extended (void)
 
     PRINTF_SECTION ( _("Config directory:"), mc_global.sysconfig_dir);
     PRINTF_SECTION (_("Data directory:"), mc_global.share_data_dir);
+
+#if defined ENABLE_VFS_EXTFS || defined ENABLE_VFS_FISH
+    PRINTF_SECTION (_("VFS plugins and scripts:"), LIBEXECDIR);
 #ifdef ENABLE_VFS_EXTFS
-    PRINTF2 ("extfs.d:", mc_global.share_data_dir, MC_EXTFS_DIR"/");
+    PRINTF2 ("extfs.d:", LIBEXECDIR, MC_EXTFS_DIR "/");
 #endif
 #ifdef ENABLE_VFS_FISH
-    PRINTF2 ("fish:", mc_global.share_data_dir, FISH_PREFIX"/");
+    PRINTF2 ("fish:", LIBEXECDIR, FISH_PREFIX "/");
 #endif
+#endif  /* ENABLE_VFS_EXTFS || defiined ENABLE_VFS_FISH */
     (void) puts ("");
 
     PRINTF_GROUP (_("User data"));
