@@ -128,9 +128,9 @@ context default yellow
 context ' ' brightcyan
 context exclusive // \n brightgreen
     keyword $+:*$ black green
-context exclusive (\*\* \*) brightgreen black
-    keyword $+:*$ black green
 context exclusive (\* \*) brightgreen
+    keyword $+:*$ black green
+context exclusive (\*\* \*) brightgreen black
     keyword $+:*$ black green
 context {$ } green
 context { } brightgreen
