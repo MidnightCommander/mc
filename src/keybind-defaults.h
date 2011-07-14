@@ -35,9 +35,6 @@ extern GArray *diff_keymap;
 extern const global_keymap_t *main_map;
 extern const global_keymap_t *main_x_map;
 extern const global_keymap_t *panel_map;
-extern const global_keymap_t *dialog_map;
-extern const global_keymap_t *input_map;
-extern const global_keymap_t *listbox_map;
 extern const global_keymap_t *tree_map;
 extern const global_keymap_t *help_map;
 

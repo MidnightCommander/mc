@@ -63,7 +63,7 @@ int fast_refresh = 0;
 /* left click outside of dialog closes it */
 int mouse_close_dialog = 0;
 
-const global_keymap_t *dialog_map;
+const global_keymap_t *dialog_map = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 

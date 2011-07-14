@@ -46,7 +46,7 @@
 
 /*** global variables ****************************************************************************/
 
-const global_keymap_t *listbox_map;
+const global_keymap_t *listbox_map = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 

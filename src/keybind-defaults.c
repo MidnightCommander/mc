@@ -26,6 +26,7 @@
 #include <config.h>
 
 #include "lib/global.h"
+#include "lib/widget.h"         /* dialog_map, input_map, listbox_map */
 
 #include "keybind-defaults.h"
 
@@ -52,9 +53,6 @@ GArray *diff_keymap = NULL;
 const global_keymap_t *main_map = NULL;
 const global_keymap_t *main_x_map = NULL;
 const global_keymap_t *panel_map = NULL;
-const global_keymap_t *dialog_map = NULL;
-const global_keymap_t *input_map = NULL;
-const global_keymap_t *listbox_map = NULL;
 const global_keymap_t *tree_map = NULL;
 const global_keymap_t *help_map = NULL;
 
