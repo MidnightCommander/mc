@@ -419,7 +419,7 @@ mc_setup_by_args (int argc, char *argv[])
     if (mc_args__netfs_logfile != NULL)
     {
 #ifdef ENABLE_VFS_FTP
-        mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        mc_setctl ("ftp://", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
 #endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
         smbfs_set_debugf (mc_args__netfs_logfile);
