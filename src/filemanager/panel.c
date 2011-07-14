@@ -2947,6 +2947,18 @@ panel_key (WPanel * panel, int key)
 {
     size_t i;
 
+    if (is_abort_char (key))
+    {
+        stop_search (panel);
+        return MSG_HANDLED;
+    }
+
+    if (panel->searching && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
+    {
+        do_search (panel, key);
+        return MSG_HANDLED;
+    }
+
     for (i = 0; panel_map[i].key != 0; i++)
         if (key == panel_map[i].key)
             return panel_execute_cmd (panel, panel_map[i].command);
@@ -2957,27 +2969,11 @@ panel_key (WPanel * panel, int key)
         return MSG_HANDLED;
     }
 
-    if (is_abort_char (key))
+    if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
-        stop_search (panel);
+        start_search (panel);
+        do_search (panel, key);
         return MSG_HANDLED;
-    }
-
-    /* Do not eat characters not meant for the panel below ' ' (e.g. C-l). */
-    if ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE)
-    {
-        if (panel->searching)
-        {
-            do_search (panel, key);
-            return MSG_HANDLED;
-        }
-
-        if (!command_prompt)
-        {
-            start_search (panel);
-            do_search (panel, key);
-            return MSG_HANDLED;
-        }
     }
 
     return MSG_NOT_HANDLED;
