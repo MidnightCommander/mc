@@ -53,7 +53,7 @@
 
 /*** file scope variables ************************************************************************/
 
-static int search_cb_char_curr_index = 0;
+static int search_cb_char_curr_index = -1;
 static char search_cb_char_buffer[6];
 
 /*** file scope functions ************************************************************************/
@@ -81,6 +81,7 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
     gsize search_end;
 
     view->search_numNeedSkipChar = 0;
+    search_cb_char_curr_index = -1;
 
     if (mcview_search_options.backwards)
     {
@@ -169,6 +170,15 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     {
         view->search_numNeedSkipChar--;
         return MC_SEARCH_CB_SKIP;
+    }
+
+    if (search_cb_char_curr_index == -1)
+    {
+        search_cb_char_curr_index = 0;
+        if (view->search_nroff_seq->char_width > 1)
+            g_unichar_to_utf8 (view->search_nroff_seq->current_char, search_cb_char_buffer);
+        else
+            search_cb_char_buffer[0] = (char) view->search_nroff_seq->current_char;
     }
 
     if (search_cb_char_curr_index < view->search_nroff_seq->char_width)
