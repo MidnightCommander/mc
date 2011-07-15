@@ -82,10 +82,9 @@ mcview_nroff_get_char (mcview_nroff_t * nroff, int *ret_val, off_t nroff_index)
             return FALSE;
     }
 
-    if (!g_unichar_isprint (c))
-        return FALSE;
     *ret_val = c;
-    return TRUE;
+
+    return g_unichar_isprint (c);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -275,14 +274,20 @@ mcview__get_nroff_real_len (mcview_t * view, off_t start, off_t length)
     nroff = mcview_nroff_seq_new_num (view, start);
     if (nroff == NULL)
         return 0;
-
     while (i < length)
     {
-        if (nroff->type != NROFF_TYPE_NONE)
+        switch (nroff->type)
         {
-            ret += 1 + nroff->char_width;
+        case NROFF_TYPE_BOLD:
+            ret += 1 + nroff->char_width;       /* real char width and 0x8 */
+            break;
+        case NROFF_TYPE_UNDERLINE:
+            ret += 2;           /* underline symbol and ox8 */
+            break;
+        default:
+            break;
         }
-        i++;
+        i += nroff->char_width;
         mcview_nroff_seq_next (nroff);
     }
 
@@ -379,10 +384,20 @@ mcview_nroff_seq_next (mcview_nroff_t * nroff)
 
     nroff->prev_type = nroff->type;
 
+    switch (nroff->type)
+    {
+    case NROFF_TYPE_BOLD:
+        nroff->index += 1 + nroff->char_width;
+        break;
+    case NROFF_TYPE_UNDERLINE:
+        nroff->index += 2;
+        break;
+    default:
+        break;
+    }
+
     nroff->index += nroff->char_width;
 
-    if (nroff->prev_type != NROFF_TYPE_NONE)
-        nroff->index += 2;
     mcview_nroff_seq_info (nroff);
     return nroff->current_char;
 }

@@ -816,6 +816,9 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
             if (current_chr == MC_SEARCH_CB_ABORT)
                 break;
 
+            if (current_chr == MC_SEARCH_CB_INVALID)
+                continue;
+
             current_pos++;
 
             if (current_chr == MC_SEARCH_CB_SKIP)

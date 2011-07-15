@@ -116,17 +116,21 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
 static void
 mcview_search_show_result (mcview_t * view, Dlg_head ** d, size_t match_len)
 {
+    int nroff_len;
 
-    view->search_start = view->search->normal_offset +
-        mcview__get_nroff_real_len (view,
-                                    view->search->start_buffer,
-                                    view->search->normal_offset - view->search->start_buffer);
+    nroff_len =
+        view->text_nroff_mode
+        ? mcview__get_nroff_real_len (view, view->search->start_buffer,
+                                      view->search->normal_offset - view->search->start_buffer) : 0;
+    view->search_start = view->search->normal_offset + nroff_len;
 
     if (!view->hex_mode)
         view->search_start++;
 
-    view->search_end = view->search_start + match_len +
-        mcview__get_nroff_real_len (view, view->search_start - 1, match_len);
+    nroff_len =
+        view->text_nroff_mode ? mcview__get_nroff_real_len (view, view->search_start - 1,
+                                                            match_len) : 0;
+    view->search_end = view->search_start + match_len + nroff_len;
 
     if (view->hex_mode)
     {
@@ -161,44 +165,50 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     if (!view->text_nroff_mode)
     {
         if (!mcview_get_byte (view, char_offset, &lc_byte))
-            return MC_SEARCH_CB_INVALID;
+            return MC_SEARCH_CB_OK;
 
         return lc_byte;
     }
 
-    if (view->search_numNeedSkipChar)
+    if (view->search_numNeedSkipChar != 0)
     {
         view->search_numNeedSkipChar--;
         return MC_SEARCH_CB_SKIP;
     }
 
-    if (search_cb_char_curr_index == -1)
+    if (search_cb_char_curr_index == -1
+        || search_cb_char_curr_index >= view->search_nroff_seq->char_width)
     {
+        if (search_cb_char_curr_index != -1)
+            mcview_nroff_seq_next (view->search_nroff_seq);
+
         search_cb_char_curr_index = 0;
         if (view->search_nroff_seq->char_width > 1)
             g_unichar_to_utf8 (view->search_nroff_seq->current_char, search_cb_char_buffer);
         else
             search_cb_char_buffer[0] = (char) view->search_nroff_seq->current_char;
+
+        if (view->search_nroff_seq->type != NROFF_TYPE_NONE)
+        {
+            switch (view->search_nroff_seq->type)
+            {
+            case NROFF_TYPE_BOLD:
+                view->search_numNeedSkipChar = 1 + view->search_nroff_seq->char_width;  /* real char width and 0x8 */
+                break;
+            case NROFF_TYPE_UNDERLINE:
+                view->search_numNeedSkipChar = 2;       /* underline symbol and ox8 */
+                break;
+            default:
+                break;
+            }
+        }
+        return MC_SEARCH_CB_INVALID;
     }
 
-    if (search_cb_char_curr_index < view->search_nroff_seq->char_width)
-    {
-        lc_byte = search_cb_char_buffer[search_cb_char_curr_index];
-        search_cb_char_curr_index++;
-        return (lc_byte != -1) ? (unsigned char) lc_byte : MC_SEARCH_CB_INVALID;
-    }
+    lc_byte = search_cb_char_buffer[search_cb_char_curr_index];
+    search_cb_char_curr_index++;
+    return (lc_byte != -1) ? (unsigned char) lc_byte : MC_SEARCH_CB_INVALID;
 
-    mcview_nroff_seq_next (view->search_nroff_seq);
-    search_cb_char_curr_index = 0;
-    if (view->search_nroff_seq->char_width > 1)
-        g_unichar_to_utf8 (view->search_nroff_seq->current_char, search_cb_char_buffer);
-    else
-        search_cb_char_buffer[0] = (char) view->search_nroff_seq->current_char;
-
-    if (view->search_nroff_seq->type != NROFF_TYPE_NONE)
-        view->search_numNeedSkipChar = 1 + view->search_nroff_seq->char_width;
-
-    return MC_SEARCH_CB_SKIP;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -248,9 +258,14 @@ mcview_do_search (mcview_t * view)
 
     if (view->search_start != 0)
     {
-        int nroff_real_len = mcview__get_nroff_real_len (view, view->search_start + 1, 2);
-        search_start = mcview_search_options.backwards ? -2 : nroff_real_len != 0 ? 2 : 0;
-        search_start += view->search_start + nroff_real_len * search_start;
+        if (!view->text_nroff_mode)
+            search_start = view->search_start + (mcview_search_options.backwards ? -2 : 0);
+        else
+        {
+            int nroff_real_len = mcview__get_nroff_real_len (view, view->search_start + 1, 2);
+            search_start = mcview_search_options.backwards ? -2 : nroff_real_len != 0 ? 1 : 0;
+            search_start += view->search_start + nroff_real_len * search_start;
+        }
     }
 
     if (mcview_search_options.backwards && (int) search_start < 0)
