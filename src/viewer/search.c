@@ -185,8 +185,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     {
         lc_byte = search_cb_char_buffer[search_cb_char_curr_index];
         search_cb_char_curr_index++;
-
-        return (lc_byte != -1) ? lc_byte : MC_SEARCH_CB_INVALID;
+        return (lc_byte != -1) ? (unsigned char) lc_byte : MC_SEARCH_CB_INVALID;
     }
 
     mcview_nroff_seq_next (view->search_nroff_seq);
