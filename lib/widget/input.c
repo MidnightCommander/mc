@@ -56,7 +56,7 @@
 
 int quote = 0;
 
-const global_keymap_t *input_map;
+const global_keymap_t *input_map = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
