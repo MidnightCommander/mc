@@ -453,6 +453,53 @@ menubar_last (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+menubar_try_drop_menu (WMenuBar * menubar, int hotkey)
+{
+    GList *i;
+
+    for (i = menubar->menu; i != NULL; i = g_list_next (i))
+    {
+        menu_t *menu = MENU (i->data);
+
+        if (menu->text.hotkey != NULL && hotkey == g_ascii_tolower (menu->text.hotkey[0]))
+        {
+            menubar_drop (menubar, g_list_position (menubar->menu, i));
+            return MSG_HANDLED;
+        }
+    }
+
+    return MSG_NOT_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
+{
+    menu_t *menu;
+    GList *i;
+
+    menu = g_list_nth_data (menubar->menu, menubar->selected);
+
+    for (i = menu->entries; i != NULL; i = g_list_next (i))
+    {
+        const menu_entry_t *entry = MENUENTRY (i->data);
+
+        if (entry != NULL && entry->text.hotkey != NULL
+            && hotkey == g_ascii_tolower (entry->text.hotkey[0]))
+        {
+            menu->selected = g_list_position (menu->entries, i);
+            menubar_execute (menubar);
+            return MSG_HANDLED;
+        }
+    }
+
+    return MSG_NOT_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 menubar_execute_cmd (WMenuBar * menubar, unsigned long command, int key)
 {
     cb_ret_t ret = MSG_HANDLED;
@@ -510,7 +557,10 @@ menubar_execute_cmd (WMenuBar * menubar, unsigned long command, int key)
         break;
 
     default:
-        ret = MSG_NOT_HANDLED;
+        if (menubar->is_dropped)
+            ret = menubar_try_exec_menu (menubar, key);
+        else
+            ret = menubar_try_drop_menu (menubar, key);
         break;
     }
 
