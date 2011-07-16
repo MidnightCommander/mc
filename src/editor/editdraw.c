@@ -194,8 +194,8 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     struct line_s *p;
 
     int x = start_col_real;
-    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    int y = row + EDIT_TEXT_VERTICAL_OFFSET;
+    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + EDIT_WITH_FRAME + option_line_state_width;
+    int y = row + EDIT_TEXT_VERTICAL_OFFSET + EDIT_WITH_FRAME;
     int cols_to_skip = abs (x);
     int i;
     int wrap_start;
@@ -315,7 +315,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
-    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET)
+    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * EDIT_WITH_FRAME)
         return;
 
     if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
@@ -328,7 +328,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     else
         abn_style = MOD_ABNORMAL;
 
-    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
@@ -879,8 +879,10 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     if (edit->widget.lines <= 0 || edit->widget.cols <= 0)
         return;
 
-    edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET;
+    edit->widget.y += EDIT_WITH_FRAME;
+    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
+    edit->widget.x += EDIT_WITH_FRAME;
+    edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
 
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
@@ -928,8 +930,10 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
 
-    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET;
-    edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    edit->widget.y -= EDIT_WITH_FRAME;
+    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
+    edit->widget.x -= EDIT_WITH_FRAME;
+    edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
 }
 
 /* --------------------------------------------------------------------------------------------- */

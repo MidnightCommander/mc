@@ -33,6 +33,7 @@
 
 #define EDIT_TEXT_HORIZONTAL_OFFSET 0
 #define EDIT_TEXT_VERTICAL_OFFSET   0
+#define EDIT_WITH_FRAME             1
 
 #define EDIT_RIGHT_EXTREME option_edit_right_extreme
 #define EDIT_LEFT_EXTREME option_edit_left_extreme
