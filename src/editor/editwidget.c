@@ -163,6 +163,12 @@ edit_event (Gpm_Event * event, void *data)
     if ((local.type & (GPM_DOWN | GPM_UP)) != 0)
         edit_push_key_press (edit);
 
+    if (EDIT_WITH_FRAME)
+    {
+        local.y--;
+        local.x--;
+    }
+
     if (!option_cursor_beyond_eol)
         edit->prev_col = local.x - edit->start_col - option_line_state_width - 1;
     else
@@ -182,11 +188,10 @@ edit_event (Gpm_Event * event, void *data)
         }
     }
 
-    --local.y;
-    if (local.y > edit->curs_row)
-        edit_move_down (edit, local.y - edit->curs_row, 0);
-    else if (local.y < edit->curs_row)
-        edit_move_up (edit, edit->curs_row - local.y, 0);
+    if (local.y > (edit->curs_row + 1))
+        edit_move_down (edit, local.y - (edit->curs_row + 1), 0);
+    else if (local.y < (edit->curs_row + 1))
+        edit_move_up (edit, (edit->curs_row + 1) - local.y, 0);
     else
         edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
 
@@ -337,9 +342,9 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
         return edit_command_execute (e, parm);
 
     case WIDGET_CURSOR:
-        widget_move (w, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,
+        widget_move (w, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET + EDIT_WITH_FRAME,
                      e->curs_col + e->start_col + e->over_col +
-                     EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width);
+                     EDIT_TEXT_HORIZONTAL_OFFSET + EDIT_WITH_FRAME + option_line_state_width);
         return MSG_HANDLED;
 
     case WIDGET_DESTROY:
@@ -425,8 +430,15 @@ void
 edit_update_screen (WEdit * e)
 {
     edit_scroll_screen_over_cursor (e);
-
     edit_update_curs_col (e);
+
+    /* draw a frame around edit area */
+    if (EDIT_WITH_FRAME)
+    {
+        tty_setcolor (EDITOR_NORMAL_COLOR);
+        tty_draw_box (e->widget.y, e->widget.x, e->widget.lines, e->widget.cols, TRUE);
+    }
+
     edit_status (e);
 
     /* pop all events for this window for internal handling */
