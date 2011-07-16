@@ -1365,6 +1365,9 @@ load_keymap_defs (gboolean load_from_file)
         dialog_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section (KEYMAP_SECTION_DIALOG, dialog_keymap, mc_global_keymap);
 
+        menu_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_MENU, menu_keymap, mc_global_keymap);
+
         input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section (KEYMAP_SECTION_INPUT, input_keymap, mc_global_keymap);
 
@@ -1401,6 +1404,7 @@ load_keymap_defs (gboolean load_from_file)
     main_x_map = (global_keymap_t *) main_x_keymap->data;
     panel_map = (global_keymap_t *) panel_keymap->data;
     dialog_map = (global_keymap_t *) dialog_keymap->data;
+    menu_map = (global_keymap_t *) menu_keymap->data;
     input_map = (global_keymap_t *) input_keymap->data;
     listbox_map = (global_keymap_t *) listbox_keymap->data;
     tree_map = (global_keymap_t *) tree_keymap->data;

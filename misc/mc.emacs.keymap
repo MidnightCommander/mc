@@ -143,6 +143,17 @@ ScreenList = alt-prime
 ScreenNext = alt-rbrace
 ScreenPrev = alt-lbrace
 
+[menu]
+Help = f1
+Left = left; ctrl-b
+Right = right; ctrl-f
+Up = up; ctrl-p
+Down = down; ctrl-n
+Home = home; alt-lt; ctr-a
+End = end; alt-gt ctrl-e
+Enter = enter
+Quit = F10; esc; ctrl-g
+
 [input]
 Home = ctrl-a; alt-lt; home; a1
 End = ctrl-e; alt-gt; end; c1
