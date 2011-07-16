@@ -125,7 +125,7 @@ sub diff_filename
     } elsif (!$fdst || $fdst eq '/dev/null') {
 	return ($fsrc,'PATCH-REMOVE/');
     } elsif (($fdst eq '/dev/null') && ($fsrc eq '/dev/null')) {
-	error 'Malformed diff';
+	error 'Malformed diff, missing a sane filename';
     } else {
 	# fewest path name components
 	if ($fdst=~s|/|/|g < $fsrc=~s|/|/|g) {
@@ -171,9 +171,8 @@ sub parse($$$$)
     my @outsrc;		# if desired ...
     my @outdst;
     my $line;
-
-    # use uid and gid from file
-    my ($uid,$gid)=(`ls -l $archive`=~/$ls_extract_id/o);
+    my %fmap_size=();
+    my %fmap_time=();
 
     import Date::Parse if ($parsedates && $file eq '');
 
@@ -196,11 +195,12 @@ sub parse($$$$)
 	    }
 
 	    if($file eq '' && $filetoprint) {
-		printf $fh "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $fsize, datetime($time), $prefix, $f;
+		$fmap_size{"$prefix$f"}+=$fsize;
+		$fmap_time{"$prefix$f"}=$time;
 	    }
 
 	    # start of new file
-	    $_ .=<I>;	# steel next line, both formats
+	    $_ .=<I>;	# steal next line, both formats
 	    $line++;
 	    if($unified) {
 		if(/$unified_header/o) {
@@ -228,7 +228,7 @@ sub parse($$$$)
 		push @outdst,$fdst;
 	    }
 	    ($f,$prefix)=diff_filename($fsrc,$fdst);
-	    $filefound=($fsrc eq $file || $fdst eq $file);
+	    $filefound=($f eq $file);
 
 	    $f="$f.diff";
 	    $filetoprint=1;
@@ -283,7 +283,16 @@ sub parse($$$$)
 	}
     }
     if($file eq '' && $filetoprint) {
-	printf $fh "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $fsize, datetime($time), $prefix, $f;
+	$fmap_size{"$prefix$f"}+=$fsize;
+	$fmap_time{"$prefix$f"}=$time;
+    }
+
+    # use uid and gid from file
+    my ($uid,$gid)=(`ls -l $archive`=~/$ls_extract_id/o);
+
+    # flush all file names with cumulative file size
+    while(my ($fn, $fs) = each %fmap_size) {
+	printf $fh "-rw-r--r-- 1 %s %s %d %s %s\n", $uid, $gid, $fs, datetime($fmap_time{$fn}), $fn;
     }
 
     close($fh) if($file ne '');
