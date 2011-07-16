@@ -65,3 +65,8 @@ iso9660
 
 # Amazon S3
 s3+
+
+# git frontend
+gitfs - browse the git repo
+changesetfs - list of versions of current file
+patchsetfs - list of patches of current file

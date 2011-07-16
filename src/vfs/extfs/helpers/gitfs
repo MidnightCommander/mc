@@ -1,0 +1,37 @@
+#!/bin/sh
+
+LANG=C
+export LANG
+
+umask 077
+prefix='[git]'
+
+gitfs_list()
+{
+    DATE=`date +"%b %d %H:%M"`
+    GIT_DIR="$2/.git"
+    user=`whoami`
+    git ls-files -v -c -m -d | sort -k 2 | uniq -f 1 | while read status fname
+    do
+        [ "$status" = "H" ] && status=" "
+        [ "$status" = "C" ] && status="*"
+        echo "-r--r--r--   1 $user     0  0 $DATE `dirname $fname`/$prefix$status`basename $fname`"
+    done
+}
+
+gitfs_copyout()
+{
+    echo -e "$2" > "$4"
+    b=`echo "$prefix"| wc -c`
+    b=`expr "$b" + 1`
+    # remove prefix from file name
+    echo "`dirname "$3"`/`basename "$3" | tail -c+"$b"`" >> "$4"
+    echo "git" >> "$4"
+}
+
+case "$1" in
+    list) gitfs_list "$@" ;;
+    copyout) gitfs_copyout "$@" ;;
+    *) exit 1 ;;
+esac
+exit 0
