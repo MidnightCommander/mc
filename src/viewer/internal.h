@@ -315,6 +315,8 @@ mcview_nroff_t *mcview_nroff_seq_new (mcview_t * view);
 void mcview_nroff_seq_free (mcview_nroff_t **);
 nroff_type_t mcview_nroff_seq_info (mcview_nroff_t *);
 int mcview_nroff_seq_next (mcview_nroff_t *);
+int mcview_nroff_seq_prev (mcview_nroff_t *);
+
 
 /* plain.c: */
 void mcview_display_text (mcview_t *);
