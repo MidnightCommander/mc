@@ -1018,10 +1018,9 @@ get_user_permissions (struct stat *st)
  */
 
 char *
-mc_build_filename (const char *first_element, ...)
+mc_build_filenamev (const char *first_element, va_list args)
 {
     gboolean absolute;
-    va_list args;
     const char *element = first_element;
     GString *path;
     char *ret;
@@ -1030,7 +1029,6 @@ mc_build_filename (const char *first_element, ...)
         return NULL;
 
     path = g_string_new ("");
-    va_start (args, first_element);
 
     absolute = (*first_element != '\0' && *first_element == PATH_SEP);
 
@@ -1061,14 +1059,33 @@ mc_build_filename (const char *first_element, ...)
     }
     while (element != NULL);
 
-    va_end (args);
-
     if (absolute)
         g_string_prepend_c (path, PATH_SEP);
 
     ret = g_string_free (path, FALSE);
     canonicalize_pathname (ret);
 
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Build filename from arguments.
+ * Like to g_build_filename(), but respect VFS_PATH_URL_DELIMITER
+ */
+
+char *
+mc_build_filename (const char *first_element, ...)
+{
+    va_list args;
+    char *ret;
+
+    if (first_element == NULL)
+        return NULL;
+
+    va_start (args, first_element);
+    ret = mc_build_filenamev (first_element, args);
+    va_end (args);
     return ret;
 }
 

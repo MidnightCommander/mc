@@ -206,6 +206,7 @@ gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
 char *guess_message_value (void);
 
 char *mc_build_filename (const char *first_element, ...);
+char *mc_build_filenamev (const char *first_element, va_list args);
 
 /*** inline functions **************************************************/
 
