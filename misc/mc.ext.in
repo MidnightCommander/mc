@@ -263,22 +263,25 @@ type/^ASCII\ mail\ text
 
 # C
 shell/.c
-	Open=%var{EDITOR:vi} %f
+	Include=editor
 
 # Fortran
 shell/.f
-	Open=%var{EDITOR:vi} %f
+	Include=editor
 
 # Header
 regex/\.(h|hpp)$
-	Open=%var{EDITOR:vi} %f
+	Include=editor
 
 # Asm
 shell/.s
-	Open=%var{EDITOR:vi} %f
+	Include=editor
 
 # C++
 regex/\.(C|cc|cpp)$
+	Include=editor
+
+include/editor
 	Open=%var{EDITOR:vi} %f
 
 # .so libraries
@@ -553,7 +556,7 @@ regex/\.([dD][vV][iI])$
 
 # TeX
 regex/\.([Tt][Ee][Xx])$
-	Open=%var{EDITOR:vi} %f
+	Include=editor
 
 # DjVu
 regex/\.(djvu|DJVU)$
