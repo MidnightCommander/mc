@@ -97,7 +97,11 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
 
             if (mc_search_run (view->search, (void *) view, search_start, search_end, len)
                 && view->search->normal_offset == (off_t) search_start)
+            {
+                if (view->text_nroff_mode)
+                    view->search->normal_offset++;
                 return TRUE;
+            }
 
             search_start--;
         }
