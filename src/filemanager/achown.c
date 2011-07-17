@@ -743,10 +743,16 @@ apply_advanced_chowns (struct stat *sf)
 
     do
     {
-        lc_fname = next_file ();
+        vfs_path_t *vpath;
 
-        if (mc_stat (lc_fname, sf) != 0)
+        lc_fname = next_file ();
+        vpath = vfs_path_from_str (lc_fname);
+
+        if (mc_stat (vpath, sf) != 0)
+        {
+            vfs_path_free (vpath);
             break;
+        }
         ch_cmode = sf->st_mode;
         if (mc_chmod (lc_fname, get_mode ()) == -1)
             message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
@@ -758,6 +764,7 @@ apply_advanced_chowns (struct stat *sf)
                      lc_fname, unix_error_string (errno));
 
         do_file_mark (current_panel, current_file, 0);
+        vfs_path_free (vpath);
     }
     while (current_panel->marked);
 }
@@ -774,16 +781,19 @@ chown_advanced_cmd (void)
 
     do
     {                           /* do while any files remaining */
+        vfs_path_t *vpath;
         init_chown_advanced ();
 
         if (current_panel->marked)
             fname = next_file ();       /* next marked file */
         else
             fname = selection (current_panel)->fname;   /* single file */
+        vpath = vfs_path_from_str (fname);
 
-        if (mc_stat (fname, sf_stat) != 0)
+        if (mc_stat (vpath, sf_stat) != 0)
         {                       /* get status of file */
             destroy_dlg (ch_dlg);
+            vfs_path_free (vpath);
             break;
         }
         ch_cmode = sf_stat->st_mode;
@@ -827,6 +837,8 @@ chown_advanced_cmd (void)
             need_update = 1;
         }
         destroy_dlg (ch_dlg);
+        vfs_path_free (vpath);
+
     }
     while (current_panel->marked && !end_chown);
 

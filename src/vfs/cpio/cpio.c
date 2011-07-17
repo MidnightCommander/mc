@@ -215,17 +215,19 @@ cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const char *name)
+cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_path_t * vpath)
 {
     int fd, type;
     cpio_super_data_t *arch;
     mode_t mode;
     struct vfs_s_inode *root;
+    char *name = vfs_path_to_str (vpath);
 
     fd = mc_open (name, O_RDONLY);
     if (fd == -1)
     {
         message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
+        g_free (name);
         return -1;
     }
 
@@ -233,7 +235,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const char
     super->data = g_new (cpio_super_data_t, 1);
     arch = (cpio_super_data_t *) super->data;
     arch->fd = -1;              /* for now */
-    mc_stat (name, &arch->st);
+    mc_stat (vpath, &arch->st);
     arch->type = CPIO_UNKNOWN;
     arch->deferred = NULL;
 
@@ -249,6 +251,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const char
         {
             message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
             g_free (s);
+            g_free (name);
             return -1;
         }
         g_free (s);
@@ -268,6 +271,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const char
     super->root = root;
 
     CPIO_SEEK_SET (super, 0);
+    g_free (name);
 
     return fd;
 }
@@ -723,15 +727,11 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
                    const vfs_path_element_t * vpath_element)
 {
     int status = STATUS_START;
-    char *archive_name = vfs_path_to_str (vpath);
 
     (void) vpath_element;
 
-    if (cpio_open_cpio_file (vpath_element->class, super, archive_name) == -1)
-    {
-        g_free (archive_name);
+    if (cpio_open_cpio_file (vpath_element->class, super, vpath) == -1)
         return -1;
-    }
 
     while (TRUE)
     {
@@ -740,8 +740,14 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
         switch (status)
         {
         case STATUS_EOF:
-            message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"), archive_name);
-            return 0;
+            {
+                char *archive_name;
+
+                archive_name = vfs_path_to_str (vpath);
+                message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"), archive_name);
+                g_free (archive_name);
+                return 0;
+            }
         case STATUS_OK:
             continue;
         case STATUS_TRAIL:
@@ -750,7 +756,6 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
         break;
     }
 
-    g_free (archive_name);
     return 0;
 }
 
@@ -761,11 +766,9 @@ static void *
 cpio_super_check (const vfs_path_t * vpath)
 {
     static struct stat sb;
-    char *archive_name = vfs_path_to_str (vpath);
     int stat_result;
 
-    stat_result = mc_stat (archive_name, &sb);
-    g_free (archive_name);
+    stat_result = mc_stat (vpath, &sb);
     return (stat_result == 0 ? &sb : NULL);
 }
 

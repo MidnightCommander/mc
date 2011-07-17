@@ -1,6 +1,8 @@
 #ifndef MC_CONFIG_H
 #define MC_CONFIG_H
 
+#include "lib/vfs/vfs.h"        /* vfs_path_t */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define CONFIG_APP_SECTION "Midnight-Commander"
@@ -112,6 +114,7 @@ const char *mc_config_get_home_dir (void);
 
 char *mc_config_get_full_path (const char *config_name);
 
+vfs_path_t *mc_config_get_full_vpath (const char *config_name);
 
 /*** inline functions ****************************************************************************/
 

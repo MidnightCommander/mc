@@ -80,6 +80,7 @@ mc_def_getlocalcopy (const char *filename)
     ssize_t i;
     char buffer[8192];
     struct stat mystat;
+    vfs_path_t *vpath = vfs_path_from_str (filename);
 
     fdin = mc_open (filename, O_RDONLY | O_LINEAR);
     if (fdin == -1)
@@ -106,12 +107,14 @@ mc_def_getlocalcopy (const char *filename)
         goto fail;
     }
 
-    if (mc_stat (filename, &mystat) != -1)
+    if (mc_stat (vpath, &mystat) != -1)
         chmod (tmp, mystat.st_mode);
+    vfs_path_free (vpath);
 
     return tmp;
 
   fail:
+    vfs_path_free (vpath);
     if (fdout != -1)
         close (fdout);
     if (fdin != -1)
@@ -556,13 +559,11 @@ mc_closedir (DIR * dirp)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_stat (const char *filename, struct stat *buf)
+mc_stat (const vfs_path_t * vpath, struct stat *buf)
 {
     int result = -1;
-    vfs_path_t *vpath;
     vfs_path_element_t *path_element;
 
-    vpath = vfs_path_from_str (filename);
     if (vpath == NULL)
         return -1;
 
@@ -575,20 +576,17 @@ mc_stat (const char *filename, struct stat *buf)
             errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
     }
 
-    vfs_path_free (vpath);
     return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_lstat (const char *filename, struct stat *buf)
+mc_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
     int result = -1;
-    vfs_path_t *vpath;
     vfs_path_element_t *path_element;
 
-    vpath = vfs_path_from_str (filename);
     if (vpath == NULL)
         return -1;
 
@@ -601,7 +599,6 @@ mc_lstat (const char *filename, struct stat *buf)
             errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
     }
 
-    vfs_path_free (vpath);
     return result;
 }
 

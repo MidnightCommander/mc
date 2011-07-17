@@ -3335,9 +3335,11 @@ do \
         real_file##n = mc_getlocalcopy (file##n); \
         if (real_file##n != NULL) \
         { \
+            vfs_path_t *tmp_vpath = vfs_path_from_str (real_file##n); \
             use_copy##n = 1; \
-            if (mc_stat (real_file##n, &st##n) != 0) \
+            if (mc_stat (tmp_vpath, &st##n) != 0) \
                 use_copy##n = -1; \
+            vfs_path_free (tmp_vpath); \
         } \
     } \
     vfs_path_free(vpath); \
@@ -3353,9 +3355,11 @@ do \
         if (use_copy##n > 0) \
         { \
             time_t mtime; \
+            vfs_path_t *tmp_vpath = vfs_path_from_str (real_file##n); \
             mtime = st##n.st_mtime; \
-            if (mc_stat (real_file##n, &st##n) == 0) \
+            if (mc_stat (tmp_vpath, &st##n) == 0) \
                 changed = (mtime != st##n.st_mtime); \
+            vfs_path_free (tmp_vpath); \
         } \
         mc_ungetlocalcopy (file##n, real_file##n, changed); \
         g_free (real_file##n); \

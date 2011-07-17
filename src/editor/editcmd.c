@@ -126,6 +126,7 @@ edit_save_file (WEdit * edit, const char *filename)
     char *savename = 0;
     gchar *real_filename;
     int this_save_mode, fd = -1;
+    vfs_path_t *real_filename_vpath;
 
     if (!filename)
         return 0;
@@ -140,12 +141,13 @@ edit_save_file (WEdit * edit, const char *filename)
     {
         real_filename = g_strdup (filename);
     }
+    real_filename_vpath = vfs_path_from_str (real_filename);
 
     this_save_mode = option_save_mode;
     if (this_save_mode != EDIT_QUICK_SAVE)
     {
-        vfs_path_t *vpath = vfs_path_from_str (real_filename);
-        if (!vfs_file_is_local (vpath) || (fd = mc_open (real_filename, O_RDONLY | O_BINARY)) == -1)
+        if (!vfs_file_is_local (real_filename_vpath)
+            || (fd = mc_open (real_filename, O_RDONLY | O_BINARY)) == -1)
         {
             /*
              * The file does not exists yet, so no safe save or
@@ -153,7 +155,6 @@ edit_save_file (WEdit * edit, const char *filename)
              */
             this_save_mode = EDIT_QUICK_SAVE;
         }
-        vfs_path_free (vpath);
         if (fd != -1)
             mc_close (fd);
     }
@@ -163,7 +164,7 @@ edit_save_file (WEdit * edit, const char *filename)
         int rv;
         struct stat sb;
 
-        rv = mc_stat (real_filename, &sb);
+        rv = mc_stat (real_filename_vpath, &sb);
         if (rv == 0 && sb.st_nlink > 1)
         {
             rv = edit_query_dialog3 (_("Warning"),
@@ -179,6 +180,7 @@ edit_save_file (WEdit * edit, const char *filename)
                 break;
             default:
                 g_free (real_filename);
+                vfs_path_free (real_filename_vpath);
                 return -1;
             }
         }
@@ -196,6 +198,7 @@ edit_save_file (WEdit * edit, const char *filename)
             if (rv != 0)
             {
                 g_free (real_filename);
+                vfs_path_free (real_filename_vpath);
                 return -1;
             }
         }
@@ -220,6 +223,7 @@ edit_save_file (WEdit * edit, const char *filename)
         if (!savename)
         {
             g_free (real_filename);
+            vfs_path_free (real_filename_vpath);
             return 0;
         }
         /* FIXME:
@@ -278,6 +282,7 @@ edit_save_file (WEdit * edit, const char *filename)
     }
     else if (edit->lb == LB_ASIS)
     {                           /* do not change line breaks */
+        vfs_path_t *savename_vpath;
         long buf;
         buf = 0;
         filelen = edit->last_byte;
@@ -325,8 +330,13 @@ edit_save_file (WEdit * edit, const char *filename)
             goto error_save;
 
         /* Update the file information, especially the mtime. */
-        if (mc_stat (savename, &edit->stat1) == -1)
+        savename_vpath = vfs_path_from_str (savename);
+        if (mc_stat (savename_vpath, &edit->stat1) == -1)
+        {
+            vfs_path_free (savename_vpath);
             goto error_save;
+        }
+        vfs_path_free (savename_vpath);
     }
     else
     {                           /* change line breaks */
@@ -373,6 +383,7 @@ edit_save_file (WEdit * edit, const char *filename)
             goto error_save;
     g_free (savename);
     g_free (real_filename);
+    vfs_path_free (real_filename_vpath);
     return 1;
   error_save:
     /*  FIXME: Is this safe ?
@@ -380,6 +391,7 @@ edit_save_file (WEdit * edit, const char *filename)
      *      mc_unlink (savename);
      */
     g_free (real_filename);
+    vfs_path_free (real_filename_vpath);
     g_free (savename);
     return 0;
 }
@@ -1661,6 +1673,7 @@ edit_save_as_cmd (WEdit * edit)
 {
     /* This heads the 'Save As' dialog box */
     char *exp;
+    vfs_path_t *exp_vpath;
     int save_lock = 0;
     int different_filename = 0;
 
@@ -1686,15 +1699,18 @@ edit_save_as_cmd (WEdit * edit)
                 int file;
                 struct stat sb;
 
-                if (mc_stat (exp, &sb) == 0 && !S_ISREG (sb.st_mode))
+                exp_vpath = vfs_path_from_str (exp);
+                if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
                 {
                     edit_error_dialog (_("Save as"),
                                        get_sys_error (_
                                                       ("Cannot save: destination is not a regular file")));
                     g_free (exp);
                     edit->force |= REDRAW_COMPLETELY;
+                    vfs_path_free (exp_vpath);
                     return 0;
                 }
+                vfs_path_free (exp_vpath);
 
                 different_filename = 1;
                 file = mc_open (exp, O_RDONLY | O_BINARY);

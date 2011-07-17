@@ -228,6 +228,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                             {
                                 if (do_local_copy)
                                 {
+                                    vfs_path_t *vpath_local;
                                     localcopy = mc_getlocalcopy (filename);
                                     if (localcopy == NULL)
                                     {
@@ -237,9 +238,11 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                                         vfs_path_free (vpath);
                                         return;
                                     }
-                                    mc_stat (localcopy, &mystat);
+                                    vpath_local = vfs_path_from_str (localcopy);
+                                    mc_stat (vpath_local, &mystat);
                                     localmtime = mystat.st_mtime;
                                     text = quote_func (localcopy, 0);
+                                    vfs_path_free (vpath_local);
                                 }
                                 else
                                 {
@@ -377,8 +380,12 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
     if (localcopy)
     {
-        mc_stat (localcopy, &mystat);
+        vfs_path_t *vpath_local;
+
+        vpath_local = vfs_path_from_str (localcopy);
+        mc_stat (vpath_local, &mystat);
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
+        vfs_path_free (vpath_local);
         g_free (localcopy);
     }
     vfs_path_free (vpath);
@@ -698,7 +705,14 @@ regex_command (const char *filename, const char *action, int *move_dir)
             g_free (title);
         }
     }
-    mc_stat (filename, &mystat);
+
+    {
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (filename);
+        mc_stat (vpath, &mystat);
+        vfs_path_free (vpath);
+    }
 
     include_target = NULL;
     include_target_len = 0;

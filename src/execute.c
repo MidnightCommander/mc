@@ -443,6 +443,7 @@ execute_with_vfs_arg (const char *command, const char *filename)
     struct stat st;
     time_t mtime;
     vfs_path_t *vpath = vfs_path_from_str (filename);
+    vfs_path_t *localcopy_vpath;
 
     /* Simplest case, this file is local */
     if (!filename || vfs_file_is_local (vpath))
@@ -465,6 +466,7 @@ execute_with_vfs_arg (const char *command, const char *filename)
         message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
         return;
     }
+    localcopy_vpath = vfs_path_from_str (localcopy);
 
     /*
      * filename can be an entry on panel, it can be changed by executing
@@ -472,12 +474,13 @@ execute_with_vfs_arg (const char *command, const char *filename)
      * below unnecessary.
      */
     fn = g_strdup (filename);
-    mc_stat (localcopy, &st);
+    mc_stat (localcopy_vpath, &st);
     mtime = st.st_mtime;
     do_execute (command, localcopy, EXECUTE_INTERNAL);
-    mc_stat (localcopy, &st);
+    mc_stat (localcopy_vpath, &st);
     mc_ungetlocalcopy (fn, localcopy, mtime != st.st_mtime);
     g_free (localcopy);
+    vfs_path_free (localcopy_vpath);
     g_free (fn);
 }
 

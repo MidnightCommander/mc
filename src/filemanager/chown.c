@@ -284,6 +284,7 @@ chown_cmd (void)
 
     do
     {                           /* do while any files remaining */
+        vfs_path_t *vpath;
         ch_dlg = init_chown ();
         new_user = new_group = -1;
 
@@ -292,11 +293,14 @@ chown_cmd (void)
         else
             fname = selection (current_panel)->fname;   /* single file */
 
-        if (mc_stat (fname, &sf_stat) != 0)
+        vpath = vfs_path_from_str (fname);
+        if (mc_stat (vpath, &sf_stat) != 0)
         {                       /* get status of file */
             destroy_dlg (ch_dlg);
+            vfs_path_free (vpath);
             break;
         }
+        vfs_path_free (vpath);
 
         /* select in listboxes */
         listbox_select_entry (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));
