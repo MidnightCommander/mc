@@ -698,19 +698,19 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * VFS chdir.
- * Return 0 on success, -1 on failure.
+ *
+ * @param vpath VFS-path
+ *
+ * @return 0 on success, -1 on failure.
  */
 
 int
-mc_chdir (const char *path)
+mc_chdir (const vfs_path_t * vpath)
 {
     struct vfs_class *old_vfs;
     vfsid old_vfsid;
     int result;
-    vfs_path_t *vpath;
     vfs_path_element_t *path_element;
-
-    vpath = vfs_path_from_str (path);
 
     if (vpath == NULL)
         return -1;
@@ -719,7 +719,6 @@ mc_chdir (const char *path)
 
     if (!vfs_path_element_valid (path_element) || path_element->class->chdir == NULL)
     {
-        vfs_path_free (vpath);
         return -1;
     }
 
@@ -728,7 +727,6 @@ mc_chdir (const char *path)
     if (result == -1)
     {
         errno = vfs_ferrno (path_element->class);
-        vfs_path_free (vpath);
         return -1;
     }
 
@@ -736,7 +734,7 @@ mc_chdir (const char *path)
     old_vfs = current_vfs;
 
     /* Actually change directory */
-    vfs_set_raw_current_dir (vpath);
+    vfs_set_raw_current_dir (vfs_path_clone (vpath));
     current_vfs = path_element->class;
 
     /* This function uses the new current_dir implicitly */
