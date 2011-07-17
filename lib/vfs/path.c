@@ -1036,3 +1036,28 @@ vfs_path_deserialize (const char *data, GError ** error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Build vfs_path_t object from arguments.
+ * 
+ * return newly allocated vfs_path_t object
+ */
+
+vfs_path_t *
+vfs_path_build_filename (const char *first_element, ...)
+{
+    va_list args;
+    char *str_path;
+    vfs_path_t *vpath;
+
+    if (first_element == NULL)
+        return NULL;
+
+    va_start (args, first_element);
+    str_path = mc_build_filenamev (first_element, args);
+    va_end (args);
+    vpath = vfs_path_from_str (str_path);
+    g_free (str_path);
+    return vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
