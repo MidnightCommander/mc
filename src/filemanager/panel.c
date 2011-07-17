@@ -2542,12 +2542,20 @@ chdir_to_readlink (WPanel * panel)
         char buffer[MC_MAXPATHLEN], *p;
         int i;
         struct stat st;
+        vfs_path_t *panel_fname_vpath = vfs_path_from_str (selection (panel)->fname);
 
         i = readlink (selection (panel)->fname, buffer, MC_MAXPATHLEN - 1);
         if (i < 0)
+        {
+            vfs_path_free (panel_fname_vpath);
             return;
-        if (mc_stat (selection (panel)->fname, &st) < 0)
+        }
+        if (mc_stat (panel_fname_vpath, &st) < 0)
+        {
+            vfs_path_free (panel_fname_vpath);
             return;
+        }
+        vfs_path_free (panel_fname_vpath);
         buffer[i] = 0;
         if (!S_ISDIR (st.st_mode))
         {
@@ -3506,11 +3514,11 @@ reload_panelized (WPanel * panel)
 {
     int i, j;
     dir_list *list = &panel->dir;
+    vfs_path_t *vpath;
 
     if (panel != current_panel)
     {
         int ret;
-        vfs_path_t *vpath;
 
         vpath = vfs_path_from_str (panel->cwd);
         ret = mc_chdir (vpath);
@@ -3529,9 +3537,11 @@ reload_panelized (WPanel * panel)
              */
             do_file_mark (panel, i, 0);
         }
-        if (mc_lstat (list->list[i].fname, &list->list[i].st))
+        vpath = vfs_path_from_str (list->list[i].fname);
+        if (mc_lstat (vpath, &list->list[i].st))
         {
             g_free (list->list[i].fname);
+            vfs_path_free (vpath);
             continue;
         }
         if (list->list[i].f.marked)
@@ -3539,6 +3549,7 @@ reload_panelized (WPanel * panel)
         if (j != i)
             list->list[j] = list->list[i];
         j++;
+        vfs_path_free (vpath);
     }
     if (j == 0)
         panel->count = set_zero_dir (list) ? 1 : 0;
@@ -3548,7 +3559,6 @@ reload_panelized (WPanel * panel)
     if (panel != current_panel)
     {
         int ret;
-        vfs_path_t *vpath;
 
         vpath = vfs_path_from_str (current_panel->cwd);
         ret = mc_chdir (vpath);

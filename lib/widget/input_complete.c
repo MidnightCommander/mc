@@ -209,13 +209,13 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         isdir = 1;
         isexec = 0;
         {
-            char *tmp;
+            vfs_path_t *vpath;
             struct stat tempstat;
 
-            tmp = g_strconcat (dirname, PATH_SEP_STR, entry->d_name, (char *) NULL);
-            canonicalize_pathname (tmp);
+            vpath = vfs_path_build_filename (dirname, entry->d_name, (char *) NULL);
+
             /* Unix version */
-            if (!mc_stat (tmp, &tempstat))
+            if (mc_stat (vpath, &tempstat) == 0)
             {
                 uid_t my_uid = getuid ();
                 gid_t my_gid = getgid ();
@@ -235,7 +235,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
                 /* stat failed, strange. not a dir in any case */
                 isdir = 0;
             }
-            g_free (tmp);
+            vfs_path_free (vpath);
         }
         if ((flags & INPUT_COMPLETE_COMMANDS) && (isexec || isdir))
             break;

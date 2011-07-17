@@ -795,7 +795,7 @@ tree_entry *
 tree_store_start_check (const char *path)
 {
     tree_entry *current, *retval;
-    int len;
+    size_t len;
 
     if (!ts.loaded)
         return NULL;
@@ -808,9 +808,14 @@ tree_store_start_check (const char *path)
     if (!current)
     {
         struct stat s;
+        vfs_path_t *vpath = vfs_path_from_str (path);
 
-        if (mc_stat (path, &s) == -1)
+        if (mc_stat (vpath, &s) == -1)
+        {
+            vfs_path_free (vpath);
             return NULL;
+        }
+        vfs_path_free (vpath);
 
         if (!S_ISDIR (s.st_mode))
             return NULL;
@@ -909,7 +914,7 @@ tree_store_rescan (const char *dir)
     {
         for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp))
         {
-            char *full_name;
+            vfs_path_t *tmp_vpath;
 
             if (dp->d_name[0] == '.')
             {
@@ -917,13 +922,13 @@ tree_store_rescan (const char *dir)
                     continue;
             }
 
-            full_name = concat_dir_and_file (dir, dp->d_name);
-            if (mc_lstat (full_name, &buf) != -1)
+            tmp_vpath = vfs_path_build_filename (dir, dp->d_name, NULL);
+            if (mc_lstat (tmp_vpath, &buf) != -1)
             {
                 if (S_ISDIR (buf.st_mode))
                     tree_store_mark_checked (dp->d_name);
             }
-            g_free (full_name);
+            vfs_path_free (tmp_vpath);
         }
         mc_closedir (dirp);
     }

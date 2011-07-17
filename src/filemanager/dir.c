@@ -141,6 +141,8 @@ static int
 handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
                struct stat *buf1, int next_free, int *link_to_dir, int *stale_link)
 {
+    vfs_path_t *vpath;
+
     if (dp->d_name[0] == '.' && dp->d_name[1] == 0)
         return 0;
     if (dp->d_name[0] == '.' && dp->d_name[1] == '.' && dp->d_name[2] == 0)
@@ -150,7 +152,8 @@ handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
     if (!panels_options.show_backups && dp->d_name[NLENGTH (dp) - 1] == '~')
         return 0;
 
-    if (mc_lstat (dp->d_name, buf1) == -1)
+    vpath = vfs_path_from_str (dp->d_name);
+    if (mc_lstat (vpath, buf1) == -1)
     {
         /*
          * lstat() fails - such entries should be identified by
@@ -169,11 +172,12 @@ handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
     if (S_ISLNK (buf1->st_mode))
     {
         struct stat buf2;
-        if (!mc_stat (dp->d_name, &buf2))
+        if (mc_stat (vpath, &buf2) == 0)
             *link_to_dir = S_ISDIR (buf2.st_mode) != 0;
         else
             *stale_link = 1;
     }
+    vfs_path_free (vpath);
     if (!(S_ISDIR (buf1->st_mode) || *link_to_dir) && (fltr != NULL)
         && !mc_search (fltr, dp->d_name, MC_SEARCH_T_GLOB))
         return 0;
@@ -199,13 +203,12 @@ get_dotdot_dir_stat (const char *path, struct stat *st)
 
     if ((path != NULL) && (path[0] != '\0') && (st != NULL))
     {
-        char *dotdot_dir;
+        vfs_path_t *vpath;
         struct stat s;
 
-        dotdot_dir = g_strdup_printf ("%s/../", path);
-        canonicalize_pathname (dotdot_dir);
-        ret = mc_stat (dotdot_dir, &s) == 0;
-        g_free (dotdot_dir);
+        vpath = vfs_path_build_filename (path, "..", NULL);
+        ret = mc_stat (vpath, &s) == 0;
+        vfs_path_free (vpath);
         *st = s;
     }
 
@@ -480,12 +483,19 @@ int
 handle_path (dir_list * list, const char *path,
              struct stat *buf1, int next_free, int *link_to_dir, int *stale_link)
 {
+    vfs_path_t *vpath;
+
     if (path[0] == '.' && path[1] == 0)
         return 0;
     if (path[0] == '.' && path[1] == '.' && path[2] == 0)
         return 0;
-    if (mc_lstat (path, buf1) == -1)
+
+    vpath = vfs_path_from_str (path);
+    if (mc_lstat (vpath, buf1) == -1)
+    {
+        vfs_path_free (vpath);
         return 0;
+    }
 
     if (S_ISDIR (buf1->st_mode))
         tree_store_mark_checked (path);
@@ -496,17 +506,18 @@ handle_path (dir_list * list, const char *path,
     if (S_ISLNK (buf1->st_mode))
     {
         struct stat buf2;
-        if (!mc_stat (path, &buf2))
+        if (mc_stat (vpath, &buf2) == 0)
             *link_to_dir = S_ISDIR (buf2.st_mode) != 0;
         else
             *stale_link = 1;
     }
 
+    vfs_path_free (vpath);
+
     /* Need to grow the *list? */
     if (next_free == list->size)
     {
         list->list = g_try_realloc (list->list, sizeof (file_entry) * (list->size + RESIZE_STEPS));
-        if (list->list == NULL)
             return -1;
         list->size += RESIZE_STEPS;
     }
@@ -587,9 +598,14 @@ gboolean
 if_link_is_exe (const char *full_name, const file_entry * file)
 {
     struct stat b;
+    vfs_path_t *vpath = vfs_path_from_str (full_name);
 
-    if (S_ISLNK (file->st.st_mode) && mc_stat (full_name, &b) == 0)
+    if (S_ISLNK (file->st.st_mode) && mc_stat (vpath, &b) == 0)
+    {
+        vfs_path_free (vpath);
         return is_exe (b.st_mode);
+    }
+    vfs_path_free (vpath);
     return TRUE;
 }
 

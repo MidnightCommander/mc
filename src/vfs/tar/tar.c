@@ -300,7 +300,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
     archive->name = archive_name;
     archive->data = g_new (tar_super_data_t, 1);
     arch = (tar_super_data_t *) archive->data;
-    mc_stat (archive_name, &arch->st);
+    mc_stat (vpath, &arch->st);
     arch->fd = -1;
     arch->type = TAR_UNKNOWN;
 
@@ -819,11 +819,9 @@ static void *
 tar_super_check (const vfs_path_t * vpath)
 {
     static struct stat stat_buf;
-    char *archive_name = vfs_path_to_str (vpath);
     int stat_result;
 
-    stat_result = mc_stat (archive_name, &stat_buf);
-    g_free (archive_name);
+    stat_result = mc_stat (vpath, &stat_buf);
 
     return (stat_result != 0) ? NULL : &stat_buf;
 }

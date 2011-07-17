@@ -20,11 +20,12 @@
 #include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
+#include "lib/vfs/vfs.h"
 
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-typedef int (*mc_stat_fn) (const char *filename, struct stat * buf);
+typedef int (*mc_stat_fn) (const vfs_path_t * vpath, struct stat * buf);
 
 /*** enums ***************************************************************************************/
 

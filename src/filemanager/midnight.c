@@ -1630,9 +1630,17 @@ save_cwds_stat (void)
 {
     if (panels_options.fast_reload)
     {
-        mc_stat (current_panel->cwd, &(current_panel->dir_stat));
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (current_panel->cwd);
+        mc_stat (vpath, &(current_panel->dir_stat));
+        vfs_path_free (vpath);
         if (get_other_type () == view_listing)
-            mc_stat (other_panel->cwd, &(other_panel->dir_stat));
+        {
+            vpath = vfs_path_from_str (other_panel->cwd);
+            mc_stat (vpath, &(other_panel->dir_stat));
+            vfs_path_free (vpath);
+        }
     }
 }
 

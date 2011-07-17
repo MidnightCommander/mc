@@ -116,14 +116,18 @@ resolve_symlinks (const char *path)
     int len;
     struct stat mybuf;
     const char *p;
+    vfs_path_t *vpath;
 
     if (*path != PATH_SEP)
         return NULL;
+
+    vpath = vfs_path_from_str (path);
     r = buf = g_malloc (MC_MAXPATHLEN);
     buf2 = g_malloc (MC_MAXPATHLEN);
     *r++ = PATH_SEP;
     *r = 0;
     p = path;
+
     for (;;)
     {
         q = strchr (p + 1, PATH_SEP);
@@ -135,12 +139,12 @@ resolve_symlinks (const char *path)
         }
         c = *q;
         *q = 0;
-        if (mc_lstat (path, &mybuf) < 0)
+        if (mc_lstat (vpath, &mybuf) < 0)
         {
             g_free (buf);
-            g_free (buf2);
+            buf = NULL;
             *q = c;
-            return NULL;
+            goto ret;
         }
         if (!S_ISLNK (mybuf.st_mode))
             strcpy (r, p + 1);
@@ -150,9 +154,9 @@ resolve_symlinks (const char *path)
             if (len < 0)
             {
                 g_free (buf);
-                g_free (buf2);
+                buf = NULL;
                 *q = c;
-                return NULL;
+                goto ret;
             }
             buf2[len] = 0;
             if (*buf2 == PATH_SEP)
@@ -176,7 +180,10 @@ resolve_symlinks (const char *path)
         strcpy (buf, PATH_SEP_STR);
     else if (*(r - 1) == PATH_SEP && r != buf + 1)
         *(r - 1) = 0;
+
+ ret:
     g_free (buf2);
+    vfs_path_free (vpath);
     return buf;
 }
 

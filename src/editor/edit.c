@@ -1833,8 +1833,10 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
     long curs;
     long start_mark, end_mark;
     struct stat status;
+    vfs_path_t *block_file_vpath;
 
     block_file = mc_config_get_full_path (EDIT_BLOCK_FILE);
+    block_file_vpath = vfs_path_from_str (block_file);
     curs = edit->curs1;
     nomark = eval_marks (edit, &start_mark, &end_mark);
     if (nomark == 0)
@@ -1842,7 +1844,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 
     /* run shell scripts from menu */
     if (user_menu_cmd (edit, menu_file, selected_entry)
-        && (mc_stat (block_file, &status) == 0) && (status.st_size != 0))
+        && (mc_stat (block_file_vpath, &status) == 0) && (status.st_size != 0))
     {
         int rc = 0;
         FILE *fd;
@@ -1869,6 +1871,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
     edit->force |= REDRAW_COMPLETELY;
 
     g_free (block_file);
+    vfs_path_free (block_file_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

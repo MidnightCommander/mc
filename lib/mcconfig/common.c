@@ -115,10 +115,17 @@ mc_config_init (const gchar * ini_path)
     if (ini_path == NULL)
         return mc_config;
 
-    if (exist_file (ini_path) && mc_stat (ini_path, &st) == 0 && st.st_size != 0)
+    if (exist_file (ini_path))
     {
-        /* file exists and not empty */
-        g_key_file_load_from_file (mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL);
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (ini_path);
+        if (mc_stat (vpath, &st) == 0 && st.st_size != 0)
+        {
+            /* file exists and not empty */
+            g_key_file_load_from_file (mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL);
+        }
+        vfs_path_free (vpath);
     }
 
     mc_config->ini_path = g_strdup (ini_path);

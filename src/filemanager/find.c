@@ -982,17 +982,21 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
     char *fname = NULL;
     int file_fd;
     gboolean ret_val = FALSE;
+    vfs_path_t *vpath;
 
     fname = mc_build_filename (directory, filename, (char *) NULL);
+    vpath = vfs_path_from_str (fname);
 
-    if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode))
+    if (mc_stat (vpath, &s) != 0 || !S_ISREG (s.st_mode))
     {
         g_free (fname);
+        vfs_path_free (vpath);
         return FALSE;
     }
 
     file_fd = mc_open (fname, O_RDONLY);
     g_free (fname);
+    vfs_path_free (vpath);
 
     if (file_fd == -1)
         return FALSE;
@@ -1189,6 +1193,7 @@ do_search (Dlg_head * h)
             while (dirp == NULL)
             {
                 char *tmp = NULL;
+                vfs_path_t *tmp_vpath;
 
                 tty_setcolor (REVERSE_COLOR);
 
@@ -1224,6 +1229,7 @@ do_search (Dlg_head * h)
 
                 g_free (directory);
                 directory = tmp;
+                tmp_vpath = vfs_path_from_str (directory);
 
                 if (verbose)
                 {
@@ -1236,12 +1242,13 @@ do_search (Dlg_head * h)
                 /* mc_stat should not be called after mc_opendir
                    because vfs_s_opendir modifies the st_nlink
                  */
-                if (mc_stat (directory, &tmp_stat) == 0)
+                if (mc_stat (tmp_vpath, &tmp_stat) == 0)
                     subdirs_left = tmp_stat.st_nlink - 2;
                 else
                     subdirs_left = 0;
 
                 dirp = mc_opendir (directory);
+                vfs_path_free (tmp_vpath);
             }                   /* while (!dirp) */
 
             /* skip invalid filenames */
@@ -1269,17 +1276,18 @@ do_search (Dlg_head * h)
                     ignore_count++;
                 else
                 {
-                    char *tmp_name;
+                    vfs_path_t *tmp_vpath;
 
-                    tmp_name = mc_build_filename (directory, dp->d_name, (char *) NULL);
+                    tmp_vpath = vfs_path_build_filename (directory, dp->d_name, (char *) NULL);
 
-                    if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
+                    if (mc_lstat (tmp_vpath, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
                     {
-                        push_directory (tmp_name);
+                        push_directory (vfs_path_to_str (tmp_vpath));
+                        vfs_path_free (tmp_vpath);
                         subdirs_left--;
                     }
                     else
-                        g_free (tmp_name);
+                        vfs_path_free (tmp_vpath);
                 }
             }
 
