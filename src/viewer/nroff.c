@@ -404,3 +404,56 @@ mcview_nroff_seq_next (mcview_nroff_t * nroff)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+int
+mcview_nroff_seq_prev (mcview_nroff_t * nroff)
+{
+    int prev;
+    off_t prev_index, prev_index2;
+
+    if (nroff == NULL)
+        return -1;
+
+    nroff->prev_type = NROFF_TYPE_NONE;
+
+    if (nroff->index == 0)
+        return -1;
+
+    prev_index = nroff->index - 1;
+
+    while (prev_index != 0)
+    {
+        if (mcview_nroff_get_char (nroff, &nroff->current_char, prev_index))
+            break;
+        prev_index--;
+    }
+    if (prev_index == 0)
+    {
+        nroff->index--;
+        mcview_nroff_seq_info (nroff);
+        return nroff->current_char;
+    }
+
+    prev_index--;
+
+    if (!mcview_get_byte (nroff->view, prev_index, &prev) || prev != '\b')
+    {
+        nroff->index = prev_index;
+        mcview_nroff_seq_info (nroff);
+        return nroff->current_char;
+    }
+    prev_index2 = prev_index - 1;
+
+    while (prev_index2 != 0)
+    {
+        if (mcview_nroff_get_char (nroff, &prev, prev_index))
+            break;
+        prev_index2--;
+    }
+
+    nroff->index = (prev_index2 == 0) ? prev_index : prev_index2;
+    mcview_nroff_seq_info (nroff);
+    return nroff->current_char;
+}
+
+/* --------------------------------------------------------------------------------------------- */

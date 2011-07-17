@@ -266,9 +266,24 @@ mcview_do_search (mcview_t * view)
             search_start = view->search_start + (mcview_search_options.backwards ? -2 : 0);
         else
         {
-            int nroff_real_len = mcview__get_nroff_real_len (view, view->search_start + 1, 2);
-            search_start = mcview_search_options.backwards ? -2 : nroff_real_len != 0 ? 1 : 0;
-            search_start += view->search_start + nroff_real_len * search_start;
+            if (mcview_search_options.backwards)
+            {
+                mcview_nroff_t *nroff;
+                nroff = mcview_nroff_seq_new_num (view, view->search_start);
+                if (mcview_nroff_seq_prev (nroff) != -1)
+                    search_start =
+                        -(mcview__get_nroff_real_len (view, nroff->index - 1, 2) +
+                          nroff->char_width + 1);
+                else
+                    search_start = -2;
+
+                mcview_nroff_seq_free (&nroff);
+            }
+            else
+            {
+                search_start = mcview__get_nroff_real_len (view, view->search_start + 1, 2);
+            }
+            search_start += view->search_start;
         }
     }
 
