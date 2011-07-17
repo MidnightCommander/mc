@@ -609,6 +609,8 @@ create_panels (void)
     /* Creates the left panel */
     if (mc_run_param0 != NULL)
     {
+        vfs_path_t *vpath;
+
         if (mc_run_param1 != NULL)
         {
             /* Ok, user has specified two dirs, save the original one,
@@ -617,16 +619,21 @@ create_panels (void)
              */
             mc_get_current_wd (original_dir, sizeof (original_dir) - 2);
         }
-        mc_chdir (mc_run_param0);
+        vpath = vfs_path_from_str (mc_run_param0);
+        mc_chdir (vpath);
+        vfs_path_free (vpath);
     }
     set_display_type (current_index, current_mode);
 
     /* The other panel */
     if (mc_run_param1 != NULL)
     {
-        if (original_dir[0] != '\0')
-            mc_chdir (original_dir);
-        mc_chdir (mc_run_param1);
+        const char *cd_dir = (original_dir != NULL) ? original_dir : mc_run_param1;
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (cd_dir);
+        mc_chdir (vpath);
+        vfs_path_free (vpath);
     }
     set_display_type (other_index, other_mode);
 
@@ -843,12 +850,15 @@ setup_mc (void)
 static void
 setup_dummy_mc (void)
 {
+    vfs_path_t *vpath;
     char d[MC_MAXPATHLEN];
     int ret;
 
     mc_get_current_wd (d, MC_MAXPATHLEN);
     setup_mc ();
-    ret = mc_chdir (d);
+    vpath = vfs_path_from_str (d);
+    ret = mc_chdir (vpath);
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

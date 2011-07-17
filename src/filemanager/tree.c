@@ -712,16 +712,26 @@ tree_do_search (WTree * tree, int key)
 static void
 tree_rescan (void *data)
 {
-    char old_dir[MC_MAXPATHLEN];
     WTree *tree = data;
+    char old_dir[MC_MAXPATHLEN];
+    vfs_path_t *vpath;
+    gboolean ok;
     int ret;
 
-    if (tree->selected_ptr == NULL || mc_get_current_wd (old_dir, MC_MAXPATHLEN) == NULL
-        || mc_chdir (tree->selected_ptr->name))
+    if (tree->selected_ptr == NULL || mc_get_current_wd (old_dir, MC_MAXPATHLEN) == NULL)
         return;
 
-    tree_store_rescan (tree->selected_ptr->name);
-    ret = mc_chdir (old_dir);
+    vpath = vfs_path_from_str (tree->selected_ptr->name);
+    ok = (mc_chdir (vpath) == 0);
+    vfs_path_free (vpath);
+
+    if (ok)
+    {
+        tree_store_rescan (tree->selected_ptr->name);
+        vpath = vfs_path_from_str (old_dir);
+        ret = mc_chdir (vpath);
+        vfs_path_free (vpath);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

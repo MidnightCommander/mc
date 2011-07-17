@@ -53,12 +53,12 @@ teardown (void)
 }
 
 static int
-test_chdir(const vfs_path_t * vpath)
+test_chdir (const vfs_path_t * vpath)
 {
 #if 0
-    char *path = vfs_path_to_str(vpath);
-    printf("test_chdir: %s\n", path);
-    g_free(path);
+    char *path = vfs_path_to_str (vpath);
+    printf ("test_chdir: %s\n", path);
+    g_free (path);
 #else
     (void) vpath;
 #endif
@@ -68,13 +68,16 @@ test_chdir(const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 #define cd_and_check( cd_dir, etalon ) \
-    mc_chdir(cd_dir); \
+    vpath = vfs_path_from_str (cd_dir); \
+    mc_chdir(vpath); \
+    vfs_path_free (vpath); \
     fail_unless( \
         strcmp(etalon, mc_get_current_wd(buffer,MC_MAXPATHLEN)) == 0, \
         "\n expected(%s) doesn't equal \nto actual(%s)", etalon, buffer);
 
 START_TEST (set_up_current_dir_url)
 {
+    vfs_path_t *vpath;
     static struct vfs_s_subclass test_subclass;
     static struct vfs_class vfs_test_ops;
     char buffer[MC_MAXPATHLEN];
@@ -108,11 +111,10 @@ START_TEST (set_up_current_dir_url)
     cd_and_check ("..", "/");
 
 }
+
 END_TEST
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
+    /* --------------------------------------------------------------------------------------------- */
+    int
 main (void)
 {
     int number_failed;
