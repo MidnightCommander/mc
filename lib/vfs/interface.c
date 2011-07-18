@@ -428,14 +428,11 @@ mc_close (int handle)
 /* --------------------------------------------------------------------------------------------- */
 
 DIR *
-mc_opendir (const char *dirname)
+mc_opendir (const vfs_path_t * vpath)
 {
     int handle, *handlep;
     void *info;
-    vfs_path_t *vpath;
     vfs_path_element_t *path_element;
-
-    vpath = vfs_path_from_str (dirname);
 
     if (vpath == NULL)
         return NULL;
@@ -445,7 +442,6 @@ mc_opendir (const char *dirname)
     if (!vfs_path_element_valid (path_element))
     {
         errno = E_NOTSUPP;
-        vfs_path_free (vpath);
         return NULL;
     }
 
@@ -454,7 +450,6 @@ mc_opendir (const char *dirname)
     if (info == NULL)
     {
         errno = path_element->class->opendir ? vfs_ferrno (path_element->class) : E_NOTSUPP;
-        vfs_path_free (vpath);
         return NULL;
     }
 
@@ -470,7 +465,6 @@ mc_opendir (const char *dirname)
 
     handlep = g_new (int, 1);
     *handlep = handle;
-    vfs_path_free (vpath);
     return (DIR *) handlep;
 }
 

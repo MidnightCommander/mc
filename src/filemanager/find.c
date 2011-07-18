@@ -1233,7 +1233,7 @@ do_search (Dlg_head * h)
                 else
                     subdirs_left = 0;
 
-                dirp = mc_opendir (directory);
+                dirp = mc_opendir (tmp_vpath);
                 vfs_path_free (tmp_vpath);
             }                   /* while (!dirp) */
 

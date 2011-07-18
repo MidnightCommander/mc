@@ -280,8 +280,10 @@ tree_store_load_from (char *name)
     /* Nothing loaded, we add some standard directories */
     if (!ts.tree_first)
     {
+        vfs_path_t *tmp_vpath = vfs_path_from_str (PATH_SEP_STR);
         tree_store_add_entry (PATH_SEP_STR);
-        tree_store_rescan (PATH_SEP_STR);
+        tree_store_rescan (tmp_vpath);
+        vfs_path_free (tmp_vpath);
         ts.loaded = TRUE;
     }
 
@@ -889,27 +891,31 @@ tree_store_end_check (void)
 /* --------------------------------------------------------------------------------------------- */
 
 tree_entry *
-tree_store_rescan (const char *dir)
+tree_store_rescan (const vfs_path_t * vpath)
 {
     DIR *dirp;
     struct dirent *dp;
     struct stat buf;
     tree_entry *entry;
+    char *dir = vfs_path_to_str (vpath);
 
     if (should_skip_directory (dir))
     {
         entry = tree_store_add_entry (dir);
         entry->scanned = 1;
-
+        g_free (dir);
         return entry;
     }
 
     entry = tree_store_start_check (dir);
 
     if (!entry)
+    {
+        g_free (dir);
         return NULL;
+    }
 
-    dirp = mc_opendir (dir);
+    dirp = mc_opendir (vpath);
     if (dirp)
     {
         for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp))
@@ -922,7 +928,7 @@ tree_store_rescan (const char *dir)
                     continue;
             }
 
-            tmp_vpath = vfs_path_build_filename (dir, dp->d_name, NULL);
+            tmp_vpath = vfs_path_append_new (vpath, dp->d_name, NULL);
             if (mc_lstat (tmp_vpath, &buf) != -1)
             {
                 if (S_ISDIR (buf.st_mode))
@@ -934,6 +940,7 @@ tree_store_rescan (const char *dir)
     }
     tree_store_end_check ();
     entry->scanned = 1;
+    g_free (dir);
 
     return entry;
 }

@@ -1015,7 +1015,7 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
         return FILE_RETRY;
 
     vpath = vfs_path_from_str (s);
-    reading = mc_opendir (s);
+    reading = mc_opendir (vpath);
 
     if (reading == NULL)
     {
@@ -1087,10 +1087,14 @@ check_dir_is_empty (const char *path)
     DIR *dir;
     struct dirent *d;
     int i;
+    vfs_path_t *vpath = vfs_path_from_str (path);
 
-    dir = mc_opendir (path);
+    dir = mc_opendir (vpath);
     if (!dir)
+    {
+        vfs_path_free (vpath);
         return -1;
+    }
 
     for (i = 1, d = mc_readdir (dir); d; d = mc_readdir (dir))
     {
@@ -1102,6 +1106,7 @@ check_dir_is_empty (const char *path)
     }
 
     mc_closedir (dir);
+    vfs_path_free (vpath);
     return i;
 }
 
@@ -2066,7 +2071,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
   dont_mkdir:
     /* open the source dir for reading */
-    reading = mc_opendir (s);
+    reading = mc_opendir (src_vpath);
     if (reading == NULL)
         goto ret;
 
@@ -2479,7 +2484,7 @@ compute_dir_size (const char *dirname, const void *ui,
         }
     }
 
-    dir = mc_opendir (dirname);
+    dir = mc_opendir (vpath);
 
     if (dir == NULL)
         goto ret;
