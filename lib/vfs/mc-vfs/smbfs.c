@@ -27,7 +27,7 @@
  * \author Andrew V. Samoilov <sav@bcs.zp.ua>
  * \date 1997, 2002, 2003
  *
- * Namespace: exports init_smbfs, smbfs_set_debug(), smbfs_set_debugf()
+ * Namespace: exports init_smbfs, smbfs_set_debug()
  */
 
 #include <config.h>
@@ -171,6 +171,24 @@ static dir_entry *single_entry;
 
 /* modifies *share */
 static struct cli_state *smbfs_do_connect (const char *server, char *share);
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+smbfs_set_debugf (const char *filename)
+{
+    if (DEBUGLEVEL > 0)
+    {
+        FILE *outfile = fopen (filename, "w");
+        if (outfile)
+        {
+            setup_logging ("", True);   /* No needs for timestamp for each message */
+            dbf = outfile;
+            setbuf (dbf, NULL);
+            pstrcpy (debugf, filename);
+        }
+    }
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /* this function allows you to write:
@@ -351,24 +369,6 @@ void
 smbfs_set_debug (int arg)
 {
     DEBUGLEVEL = arg;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-smbfs_set_debugf (const char *filename)
-{
-    if (DEBUGLEVEL > 0)
-    {
-        FILE *outfile = fopen (filename, "w");
-        if (outfile)
-        {
-            setup_logging ("", True);   /* No needs for timestamp for each message */
-            dbf = outfile;
-            setbuf (dbf, NULL);
-            pstrcpy (debugf, filename);
-        }
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1992,7 +1992,10 @@ smbfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
     {
     case VFS_SETCTL_FORGET:
         smbfs_forget (path);
-        return 0;
+        break;
+    case VFS_SETCTL_LOGFILE:
+        smbfs_set_debugf ((const char *) arg);
+        break;
     }
     return 0;
 }
