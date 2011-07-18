@@ -279,7 +279,7 @@ int mc_utime (const char *path, struct utimbuf *times);
 int mc_readlink (const char *path, char *buf, size_t bufsiz);
 int mc_close (int handle);
 off_t mc_lseek (int fd, off_t offset, int whence);
-DIR *mc_opendir (const char *dirname);
+DIR *mc_opendir (const vfs_path_t * vpath);
 struct dirent *mc_readdir (DIR * dirp);
 int mc_closedir (DIR * dir);
 int mc_stat (const vfs_path_t * vpath, struct stat *buf);

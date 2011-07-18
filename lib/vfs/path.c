@@ -1061,3 +1061,28 @@ vfs_path_build_filename (const char *first_element, ...)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+vfs_path_t *
+vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...)
+{
+    va_list args;
+    char *str_path, *result_str;
+    vfs_path_t *ret_vpath;
+
+    if (vpath == NULL || first_element == NULL)
+        return NULL;
+
+    va_start (args, first_element);
+    str_path = mc_build_filenamev (first_element, args);
+    va_end (args);
+
+    result_str = vfs_path_to_str (vpath);
+    ret_vpath = vfs_path_build_filename (result_str, str_path, NULL);
+    g_free (result_str);
+    g_free (str_path);
+
+    return ret_vpath;
+
+}
+
+/* --------------------------------------------------------------------------------------------- */

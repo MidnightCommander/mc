@@ -54,7 +54,7 @@ tree_entry *tree_store_start_check (const char *path);
 void tree_store_mark_checked (const char *subname);
 void tree_store_end_check (void);
 tree_entry *tree_store_whereis (const char *name);
-tree_entry *tree_store_rescan (const char *dir);
+tree_entry *tree_store_rescan (const vfs_path_t * vpath);
 
 void tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data);
 void tree_store_remove_entry_remove_hook (tree_store_remove_fn callback);
