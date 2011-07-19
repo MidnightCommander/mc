@@ -54,14 +54,16 @@ mc_search__hex_translate_to_regex (const GString * astr)
     const char *str = astr->str;
     GString *buff;
     gchar *tmp_str;
+    gsize tmp_str_len;
     gsize loop = 0;
     int val, ptr;
 
     buff = g_string_sized_new (64);
     tmp_str = g_strndup (str, astr->len);
     g_strchug (tmp_str);        /* trim leadind whitespaces */
+    tmp_str_len = strlen (tmp_str);
 
-    while (loop < astr->len)
+    while (loop < tmp_str_len)
     {
         if (sscanf (tmp_str + loop, "%i%n", &val, &ptr))
         {
@@ -83,7 +85,7 @@ mc_search__hex_translate_to_regex (const GString * astr)
             gsize loop2 = 0;
 
             loop++;
-            while (loop + loop2 < astr->len)
+            while (loop + loop2 < tmp_str_len)
             {
                 if (*(tmp_str + loop + loop2) == '"' &&
                     !strutils_is_char_escaped (tmp_str, tmp_str + loop + loop2))
