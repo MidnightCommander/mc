@@ -929,8 +929,9 @@ vfs_parse_filedate (int idx, time_t * t)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linkname)
+gboolean
+vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkname,
+                  size_t * filename_pos)
 {
     int idx, idx2, num_cols;
     int i;
@@ -940,7 +941,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     size_t skipped;
 
     if (strncmp (p, "total", 5) == 0)
-        return 0;
+        return FALSE;
 
     if (!vfs_parse_filetype (p, &skipped, &s->st_mode))
         goto error;
@@ -1058,6 +1059,14 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     s->st_blocks = (s->st_size + 511) / 512;
 #endif
 
+    if (filename_pos != NULL)
+    {
+        if ((*filename_pos == 0) || (*filename_pos > (size_t) column_ptr[idx]))
+            *filename_pos = column_ptr[idx];
+        else
+            column_ptr[idx] = *filename_pos;
+    }
+
     for (i = idx + 1, idx2 = 0; i < num_cols; i++)
         if (strcmp (columns[i], "->") == 0)
         {
@@ -1107,7 +1116,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     }
 
     g_free (p_copy);
-    return 1;
+    return TRUE;
 
   error:
     {
@@ -1122,7 +1131,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     }
 
     g_free (p_copy);
-    return 0;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
