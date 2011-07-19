@@ -12,8 +12,6 @@
 # <jpelletier@ieee.org>
 #
 
-# Define your awk
-AWK=gawk
 # Define which archiver you are using with appropriate options
 C1541="c1541"
 
@@ -26,7 +24,7 @@ mc_c1541_fs_list()
             UID=0
         fi
     fi
-    $C1541 "$1" -list | gawk -v uid=$UID '
+    $C1541 "$1" -list | @AWK@ -v uid=$UID '
 BEGIN { FS = "\"" }
 /No LINES!/ { next }
 /BLOCKS FREE/ { next }

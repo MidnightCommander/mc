@@ -7,8 +7,6 @@
 # <jpelletier@ieee.org>
 #
 
-# Define your awk
-AWK=gawk
 # Define which archiver you are using with appropriate options
 ARC_LIST="arc v"
 ARC_GET="arc x"
@@ -25,7 +23,7 @@ mc_arc_fs_list()
             UID=0
         fi
     fi
-    $ARC_LIST "$1" | gawk -v uid=$UID '
+    $ARC_LIST "$1" | @AWK@ -v uid=$UID '
 BEGIN { }
 /^Name/ { next }
 /===/ { next }

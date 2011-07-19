@@ -570,6 +570,7 @@ lib/vfs/mc-vfs/extfs/uar
 lib/vfs/mc-vfs/extfs/uarc
 lib/vfs/mc-vfs/extfs/uarj
 lib/vfs/mc-vfs/extfs/uc1541
+lib/vfs/mc-vfs/extfs//ucab
 lib/vfs/mc-vfs/extfs/uha
 lib/vfs/mc-vfs/extfs/ulha
 lib/vfs/mc-vfs/extfs/urar
