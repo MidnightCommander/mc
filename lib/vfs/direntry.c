@@ -109,35 +109,6 @@ vfs_s_entry_compare (const void *a, const void *b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
-{
-    if (ino == NULL)
-        vfs_die ("Don't pass NULL to me");
-
-    /* ==0 can happen if freshly created entry is deleted */
-    if (ino->st.st_nlink > 1)
-    {
-        ino->st.st_nlink--;
-        return;
-    }
-
-    while (ino->subdir != NULL)
-        vfs_s_free_entry (me, (struct vfs_s_entry *) ino->subdir->data);
-
-    CALL (free_inode) (me, ino);
-    g_free (ino->linkname);
-    if ((MEDATA->flags & VFS_S_USETMP) != 0 && ino->localname != NULL)
-    {
-        unlink (ino->localname);
-        g_free (ino->localname);
-    }
-    total_inodes--;
-    ino->super->ino_usage--;
-    g_free (ino);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /* We were asked to create entries automagically */
 
 static struct vfs_s_entry *
@@ -948,6 +919,36 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
     CALL (init_inode) (me, ino);
 
     return ino;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
+{
+    if (ino == NULL)
+        vfs_die ("Don't pass NULL to me");
+
+    /* ==0 can happen if freshly created entry is deleted */
+    if (ino->st.st_nlink > 1)
+    {
+        ino->st.st_nlink--;
+        return;
+    }
+
+    while (ino->subdir != NULL)
+        vfs_s_free_entry (me, (struct vfs_s_entry *) ino->subdir->data);
+
+    CALL (free_inode) (me, ino);
+    g_free (ino->linkname);
+    if ((MEDATA->flags & VFS_S_USETMP) != 0 && ino->localname != NULL)
+    {
+        unlink (ino->localname);
+        g_free (ino->localname);
+    }
+    total_inodes--;
+    ino->super->ino_usage--;
+    g_free (ino);
 }
 
 /* --------------------------------------------------------------------------------------------- */

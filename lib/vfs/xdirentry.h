@@ -158,6 +158,8 @@ struct vfs_s_subclass
 /* entries and inodes */
 struct vfs_s_inode *vfs_s_new_inode (struct vfs_class *me,
                                      struct vfs_s_super *super, struct stat *initstat);
+void vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino);
+
 struct vfs_s_entry *vfs_s_new_entry (struct vfs_class *me, const char *name,
                                      struct vfs_s_inode *inode);
 void vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent);
