@@ -376,14 +376,12 @@ mc_ctl (int handle, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_setctl (const char *path, int ctlop, void *arg)
+mc_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
     int result = -1;
 
-    vfs_path_t *vpath;
     vfs_path_element_t *path_element;
 
-    vpath = vfs_path_from_str (path);
     if (vpath == NULL)
         vfs_die ("You don't want to pass NULL to mc_setctl.");
 
@@ -393,7 +391,6 @@ mc_setctl (const char *path, int ctlop, void *arg)
             path_element->class->setctl != NULL ? path_element->class->setctl (vpath,
                                                                                ctlop, arg) : 0;
 
-    vfs_path_free (vpath);
     return result;
 }
 
