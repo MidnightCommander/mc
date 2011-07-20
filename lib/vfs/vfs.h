@@ -296,7 +296,7 @@ int mc_chown (const char *path, uid_t owner, gid_t group);
 int mc_chdir (const vfs_path_t * vpath);
 int mc_unlink (const char *path);
 int mc_ctl (int fd, int ctlop, void *arg);
-int mc_setctl (const char *path, int ctlop, void *arg);
+int mc_setctl (const vfs_path_t * vpath, int ctlop, void *arg);
 int mc_open (const char *filename, int flags, ...);
 char *mc_get_current_wd (char *buffer, size_t bufsize);
 char *mc_getlocalcopy (const char *pathname);

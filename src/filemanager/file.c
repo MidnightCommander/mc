@@ -2576,6 +2576,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 #define source_with_path source
 #endif /* !WITH_FULL_PATHS */
     char *dest = NULL;
+    vfs_path_t *dest_vpath = NULL;
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
     struct stat src_stat;
@@ -2584,6 +2585,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     FileProgressStatus value;
     FileOpContext *ctx;
     FileOpTotalContext *tctx;
+    vfs_path_t *tmp_vpath;
 
     gboolean do_bg = FALSE;     /* do background operation? */
 
@@ -2691,6 +2693,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             ret_val = FALSE;
             goto ret_fast;
         }
+        dest_vpath = vfs_path_from_str (dest);
     }
     else if (confirm_delete)
     {
@@ -2760,8 +2763,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         /* If we are the parent */
         if (v == 1)
         {
-            mc_setctl (panel->cwd, VFS_SETCTL_FORGET, NULL);
-            mc_setctl (dest, VFS_SETCTL_FORGET, NULL);
+            tmp_vpath = vfs_path_from_str (panel->cwd);
+            mc_setctl (tmp_vpath, VFS_SETCTL_FORGET, NULL);
+            vfs_path_free (tmp_vpath);
+
+            mc_setctl (dest_vpath, VFS_SETCTL_FORGET, NULL);
+            vfs_path_free (dest_vpath);
+            g_free (dest);
             /*          file_op_context_destroy (ctx); */
             return FALSE;
         }
@@ -2772,11 +2780,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     /* We do not want to trash cache every time file is
        created/touched. However, this will make our cache contain
        invalid data. */
-    if ((dest != NULL) && (mc_setctl (dest, VFS_SETCTL_STALE_DATA, (void *) 1)))
+    if ((dest != NULL) && (mc_setctl (dest_vpath, VFS_SETCTL_STALE_DATA, (void *) 1)))
         save_dest = g_strdup (dest);
 
-    if ((panel->cwd[0] != '\0') && (mc_setctl (panel->cwd, VFS_SETCTL_STALE_DATA, (void *) 1)))
+    tmp_vpath = vfs_path_from_str (panel->cwd);
+    if ((panel->cwd[0] != '\0') && (mc_setctl (tmp_vpath, VFS_SETCTL_STALE_DATA, (void *) 1)))
         save_cwd = g_strdup (panel->cwd);
+    vfs_path_free (tmp_vpath);
 
     /* Now, let's do the job */
 
@@ -2832,7 +2842,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     g_free (temp);
                     g_free (repl_dest);
                     g_free (dest);
+                    vfs_path_free (dest_vpath);
                     dest = temp2;
+                    dest_vpath = vfs_path_from_str (dest);
 
                     switch (operation)
                     {
@@ -2878,10 +2890,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         {
             int dst_result;
             struct stat dst_stat;
-            vfs_path_t *vpath = vfs_path_from_str (dest);
 
-            dst_result = mc_stat (vpath, &dst_stat);
-            vfs_path_free (vpath);
+            dst_result = mc_stat (dest_vpath, &dst_stat);
 
             if ((dst_result != 0) || S_ISDIR (dst_stat.st_mode))
                 break;
@@ -3000,13 +3010,17 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     /* Clean up */
     if (save_cwd != NULL)
     {
-        mc_setctl (save_cwd, VFS_SETCTL_STALE_DATA, NULL);
+        tmp_vpath = vfs_path_from_str (save_cwd);
+        mc_setctl (tmp_vpath, VFS_SETCTL_STALE_DATA, NULL);
+        vfs_path_free (tmp_vpath);
         g_free (save_cwd);
     }
 
     if (save_dest != NULL)
     {
-        mc_setctl (save_dest, VFS_SETCTL_STALE_DATA, NULL);
+        tmp_vpath = vfs_path_from_str (save_dest);
+        mc_setctl (tmp_vpath, VFS_SETCTL_STALE_DATA, NULL);
+        vfs_path_free (tmp_vpath);
         g_free (save_dest);
     }
 
@@ -3016,6 +3030,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     g_free (source_with_path);
 #endif /* WITH_FULL_PATHS */
     g_free (dest);
+    vfs_path_free (dest_vpath);
     g_free (ctx->dest_mask);
     ctx->dest_mask = NULL;
 

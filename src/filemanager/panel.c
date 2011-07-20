@@ -2432,14 +2432,12 @@ do_enter_on_file_entry (file_entry * fe)
 
     if (!vfs_current_is_local ())
     {
-        char *tmp, *tmp_curr_dir;
         int ret;
+        vfs_path_t *tmp_vpath;
 
-        tmp_curr_dir = vfs_get_current_dir ();
-        tmp = concat_dir_and_file (tmp_curr_dir, fe->fname);
-        g_free (tmp_curr_dir);
-        ret = mc_setctl (tmp, VFS_SETCTL_RUN, NULL);
-        g_free (tmp);
+        tmp_vpath = vfs_path_append_new (vfs_get_raw_current_dir (), fe->fname, NULL);
+        ret = mc_setctl (tmp_vpath, VFS_SETCTL_RUN, NULL);
+        vfs_path_free (tmp_vpath);
         /* We took action only if the dialog was shown or the execution
          * was successful */
         return confirm_execute || (ret == 0);
@@ -3576,8 +3574,12 @@ update_one_panel_widget (WPanel * panel, panel_update_flags_t flags, const char 
 
     if ((flags & UP_RELOAD) != 0)
     {
+        vfs_path_t *tmp_vpath;
+
+        tmp_vpath = vfs_path_from_str (panel->cwd);
         panel->is_panelized = FALSE;
-        mc_setctl (panel->cwd, VFS_SETCTL_FLUSH, 0);
+        mc_setctl (tmp_vpath, VFS_SETCTL_FLUSH, 0);
+        vfs_path_free (tmp_vpath);
         memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     }
 

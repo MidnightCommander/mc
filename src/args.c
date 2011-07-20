@@ -429,11 +429,16 @@ mc_setup_by_args (int argc, char *argv[])
 
     if (mc_args__netfs_logfile != NULL)
     {
+        vfs_path_t *vpath;
 #ifdef ENABLE_VFS_FTP
-        mc_setctl ("ftp://", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        vpath = vfs_path_from_str ("ftp://");
+        mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        vfs_path_free (vpath);
 #endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
-        mc_setctl ("smb://", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        vpath = vfs_path_from_str ("smb://");
+        mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        vfs_path_free (vpath);
 #endif /* ENABLE_VFS_SMB */
     }
 
