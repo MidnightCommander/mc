@@ -72,32 +72,41 @@ my_mkdir_rec (char *s, mode_t mode)
 {
     char *p, *q;
     int result;
+    vfs_path_t *s_vpath;
 
-    if (!mc_mkdir (s, mode))
+    s_vpath = vfs_path_from_str (s);
+    if (mc_mkdir (s_vpath, mode) == 0)
+    {
+        vfs_path_free (s_vpath);
         return 0;
+    }
     else if (errno != ENOENT)
+    {
+        vfs_path_free (s_vpath);
         return -1;
+    }
 
     /* FIXME: should check instead if s is at the root of that filesystem */
     {
-        vfs_path_t *vpath = vfs_path_from_str (s);
-        if (!vfs_file_is_local (vpath))
+        if (!vfs_file_is_local (s_vpath))
         {
-            vfs_path_free (vpath);
+            vfs_path_free (s_vpath);
             return -1;
         }
-        vfs_path_free (vpath);
     }
 
     if (!strcmp (s, PATH_SEP_STR))
     {
         errno = ENOTDIR;
+        vfs_path_free (s_vpath);
         return -1;
     }
 
     p = concat_dir_and_file (s, "..");
     {
-        vfs_path_t *vpath = vfs_path_from_str (p);
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (p);
         q = vfs_path_to_str (vpath);
         vfs_path_free (vpath);
     }
@@ -105,8 +114,9 @@ my_mkdir_rec (char *s, mode_t mode)
 
     result = my_mkdir_rec (q, mode);
     if (result == 0)
-        result = mc_mkdir (s, mode);
+        result = mc_mkdir (s_vpath, mode);
 
+    vfs_path_free (s_vpath);
     g_free (q);
     return result;
 }
@@ -120,17 +130,17 @@ my_mkdir (const char *s, mode_t mode)
 {
     int result;
     char *my_s;
+    vfs_path_t *s_vpath;
 
-    result = mc_mkdir (s, mode);
-    if (result)
+    s_vpath = vfs_path_from_str (s);
+    result = mc_mkdir (s_vpath, mode);
+
+    if (result != 0)
     {
-        vfs_path_t *vpath;
         char *p;
-        vpath = vfs_path_from_str (s);
-        p = vfs_path_to_str (vpath);
 
+        p = vfs_path_to_str (s_vpath);
         result = my_mkdir_rec (p, mode);
-        vfs_path_free (vpath);
         g_free (p);
     }
     if (result == 0)
@@ -143,6 +153,7 @@ my_mkdir (const char *s, mode_t mode)
 
         g_free (my_s);
     }
+    vfs_path_free (s_vpath);
     return result;
 }
 
@@ -153,12 +164,14 @@ my_rmdir (const char *s)
 {
     int result;
     char *my_s;
+    vfs_path_t *vpath;
 #ifdef FIXME
     WTree *tree = 0;
 #endif
 
+    vpath = vfs_path_from_str (s);
     /* FIXME: Should receive a Wtree! */
-    result = mc_rmdir (s);
+    result = mc_rmdir (vpath);
     if (result == 0)
     {
         my_s = get_absolute_name (s);
@@ -169,6 +182,7 @@ my_rmdir (const char *s)
 
         g_free (my_s);
     }
+    vfs_path_free (vpath);
     return result;
 }
 

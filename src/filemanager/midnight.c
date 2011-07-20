@@ -714,12 +714,13 @@ put_link (WPanel * panel)
     if (S_ISLNK (selection (panel)->st.st_mode))
     {
         char buffer[MC_MAXPATHLEN];
-        char *p;
+        vfs_path_t *vpath;
         int i;
 
-        p = concat_dir_and_file (panel->cwd, selection (panel)->fname);
-        i = mc_readlink (p, buffer, MC_MAXPATHLEN - 1);
-        g_free (p);
+        vpath = vfs_path_build_filename (panel->cwd, selection (panel)->fname, NULL);
+        i = mc_readlink (vpath, buffer, MC_MAXPATHLEN - 1);
+        vfs_path_free (vpath);
+
         if (i > 0)
         {
             buffer[i] = '\0';

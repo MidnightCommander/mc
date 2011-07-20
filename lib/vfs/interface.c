@@ -225,35 +225,31 @@ mc_open (const char *filename, int flags, ...)
 int mc_##name inarg \
 { \
     int result; \
-    vfs_path_t *vpath; \
     vfs_path_element_t *path_element; \
 \
-    vpath = vfs_path_from_str (path); \
     if (vpath == NULL) \
         return -1; \
 \
     path_element = vfs_path_get_by_index (vpath, -1); \
     if (!vfs_path_element_valid (path_element)) \
     { \
-        vfs_path_free(vpath); \
         return -1; \
     } \
 \
     result = path_element->class->name != NULL ? path_element->class->name callarg : -1; \
     if (result == -1) \
         errno = path_element->class->name != NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP; \
-    vfs_path_free(vpath); \
     return result; \
 }
 
-MC_NAMEOP (chmod, (const char *path, mode_t mode), (vpath, mode))
-MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vpath, owner, group))
-MC_NAMEOP (utime, (const char *path, struct utimbuf * times), (vpath, times))
-MC_NAMEOP (readlink, (const char *path, char *buf, size_t bufsiz), (vpath, buf, bufsiz))
-MC_NAMEOP (unlink, (const char *path), (vpath))
-MC_NAMEOP (mkdir, (const char *path, mode_t mode), (vpath, mode))
-MC_NAMEOP (rmdir, (const char *path), (vpath))
-MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vpath, mode, dev))
+MC_NAMEOP (chmod, (const vfs_path_t *vpath, mode_t mode), (vpath, mode))
+MC_NAMEOP (chown, (const vfs_path_t *vpath, uid_t owner, gid_t group), (vpath, owner, group))
+MC_NAMEOP (utime, (const vfs_path_t *vpath, struct utimbuf * times), (vpath, times))
+MC_NAMEOP (readlink, (const vfs_path_t *vpath, char *buf, size_t bufsiz), (vpath, buf, bufsiz))
+MC_NAMEOP (unlink, (const vfs_path_t *vpath), (vpath))
+MC_NAMEOP (mkdir, (const vfs_path_t *vpath, mode_t mode), (vpath, mode))
+MC_NAMEOP (rmdir, (const vfs_path_t *vpath), (vpath))
+MC_NAMEOP (mknod, (const vfs_path_t *vpath, mode_t mode, dev_t dev), (vpath, mode, dev))
 
 /* *INDENT-ON* */
 

@@ -974,12 +974,14 @@ display_mini_info (WPanel * panel)
 
     if (S_ISLNK (panel->dir.list[panel->selected].st.st_mode))
     {
-        char *lc_link, link_target[MC_MAXPATHLEN];
+        char link_target[MC_MAXPATHLEN];
+        vfs_path_t *lc_link_vpath;
         int len;
 
-        lc_link = concat_dir_and_file (panel->cwd, panel->dir.list[panel->selected].fname);
-        len = mc_readlink (lc_link, link_target, MC_MAXPATHLEN - 1);
-        g_free (lc_link);
+        lc_link_vpath =
+            vfs_path_build_filename (panel->cwd, panel->dir.list[panel->selected].fname, NULL);
+        len = mc_readlink (lc_link_vpath, link_target, MC_MAXPATHLEN - 1);
+        vfs_path_free (lc_link_vpath);
         if (len > 0)
         {
             link_target[len] = 0;

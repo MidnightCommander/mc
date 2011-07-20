@@ -233,10 +233,15 @@ edit_save_file (WEdit * edit, const char *filename)
     }
     else
         savename = g_strdup (real_filename);
+
     {
         int ret;
-        ret = mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
-        ret = mc_chmod (savename, edit->stat1.st_mode);
+        vfs_path_t *savename_vpath;
+
+        savename_vpath = vfs_path_from_str (savename);
+        ret = mc_chown (savename_vpath, edit->stat1.st_uid, edit->stat1.st_gid);
+        ret = mc_chmod (savename_vpath, edit->stat1.st_mode);
+        vfs_path_free (savename_vpath);
     }
 
     fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY, edit->stat1.st_mode);

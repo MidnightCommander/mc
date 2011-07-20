@@ -1320,8 +1320,10 @@ edit_symlink_cmd (void)
         char *p = NULL;
         int i;
         char *dest, *q;
+        vfs_path_t *p_vpath;
 
         p = selection (current_panel)->fname;
+        p_vpath = vfs_path_from_str (p);
 
         q = g_strdup_printf (_("Symlink `%s\' points to:"), str_trunc (p, 32));
 
@@ -1335,7 +1337,7 @@ edit_symlink_cmd (void)
                 if (*dest && strcmp (buffer, dest))
                 {
                     save_cwds_stat ();
-                    if (-1 == mc_unlink (p))
+                    if (mc_unlink (p_vpath) == -1)
                     {
                         message (D_ERROR, MSG_ERROR, _("edit symlink, unable to remove %s: %s"),
                                  p, unix_error_string (errno));
@@ -1353,6 +1355,7 @@ edit_symlink_cmd (void)
             }
         }
         g_free (q);
+        vfs_path_free (p_vpath);
     }
     else
     {
