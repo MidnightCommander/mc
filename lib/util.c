@@ -150,7 +150,7 @@ resolve_symlinks (const char *path)
             strcpy (r, p + 1);
         else
         {
-            len = mc_readlink (path, buf2, MC_MAXPATHLEN - 1);
+            len = mc_readlink (vpath, buf2, MC_MAXPATHLEN - 1);
             if (len < 0)
             {
                 g_free (buf);
@@ -1521,7 +1521,13 @@ mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suf
         return FALSE;
 
     if (exist_file (backup_path))
-        mc_unlink (backup_path);
+    {
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (backup_path);
+        mc_unlink (vpath);
+        vfs_path_free (vpath);
+    }
 
     g_free (backup_path);
     return TRUE;
