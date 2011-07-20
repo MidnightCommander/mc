@@ -125,6 +125,7 @@ edit_save_file (WEdit * edit, const char *filename)
     gchar *real_filename;
     int this_save_mode, fd = -1;
     vfs_path_t *real_filename_vpath;
+    vfs_path_t *savename_vpath;
 
     if (!filename)
         return 0;
@@ -234,15 +235,10 @@ edit_save_file (WEdit * edit, const char *filename)
     else
         savename = g_strdup (real_filename);
 
-    {
-        int ret;
-        vfs_path_t *savename_vpath;
+    savename_vpath = vfs_path_from_str (savename);
 
-        savename_vpath = vfs_path_from_str (savename);
-        ret = mc_chown (savename_vpath, edit->stat1.st_uid, edit->stat1.st_gid);
-        ret = mc_chmod (savename_vpath, edit->stat1.st_mode);
-        vfs_path_free (savename_vpath);
-    }
+    (void) mc_chown (savename_vpath, edit->stat1.st_uid, edit->stat1.st_gid);
+    (void) mc_chmod (savename_vpath, edit->stat1.st_mode);
 
     fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY, edit->stat1.st_mode);
     if (fd == -1)
@@ -285,7 +281,6 @@ edit_save_file (WEdit * edit, const char *filename)
     }
     else if (edit->lb == LB_ASIS)
     {                           /* do not change line breaks */
-        vfs_path_t *savename_vpath;
         long buf;
         buf = 0;
         filelen = edit->last_byte;
@@ -335,11 +330,7 @@ edit_save_file (WEdit * edit, const char *filename)
         /* Update the file information, especially the mtime. */
         savename_vpath = vfs_path_from_str (savename);
         if (mc_stat (savename_vpath, &edit->stat1) == -1)
-        {
-            vfs_path_free (savename_vpath);
             goto error_save;
-        }
-        vfs_path_free (savename_vpath);
     }
     else
     {                           /* change line breaks */
@@ -370,21 +361,24 @@ edit_save_file (WEdit * edit, const char *filename)
 
     if (this_save_mode == EDIT_DO_BACKUP)
     {
+        vfs_path_t *tmp_vpath;
+        gboolean ok;
+
         assert (option_backup_ext != NULL);
-        tmp = g_strconcat (real_filename, option_backup_ext, (char *) NULL);
-        if (mc_rename (real_filename, tmp) == -1)
-        {
-            g_free (tmp);
+        tmp_vpath = vfs_path_append_new (real_filename_vpath, option_backup_ext, (char *) NULL);
+        ok = (mc_rename (real_filename_vpath, tmp_vpath) != -1);
+        vfs_path_free (tmp_vpath);
+        if (!ok)
             goto error_save;
-        }
     }
 
     if (this_save_mode != EDIT_QUICK_SAVE)
-        if (mc_rename (savename, real_filename) == -1)
+        if (mc_rename (savename_vpath, real_filename_vpath) == -1)
             goto error_save;
-    g_free (savename);
     g_free (real_filename);
+    g_free (savename);
     vfs_path_free (real_filename_vpath);
+    vfs_path_free (savename_vpath);
     return 1;
   error_save:
     /*  FIXME: Is this safe ?
@@ -392,8 +386,9 @@ edit_save_file (WEdit * edit, const char *filename)
      *      mc_unlink (savename);
      */
     g_free (real_filename);
-    vfs_path_free (real_filename_vpath);
     g_free (savename);
+    vfs_path_free (real_filename_vpath);
+    vfs_path_free (savename_vpath);
     return 0;
 }
 

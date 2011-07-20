@@ -313,22 +313,14 @@ MC_HANDLEOP (write, (int handle, const void *buf, size_t nbyte), (vfs_class_data
 /* --------------------------------------------------------------------------------------------- */
 
 #define MC_RENAMEOP(name) \
-int mc_##name (const char *fname1, const char *fname2) \
+int mc_##name (const vfs_path_t *vpath1, const vfs_path_t *vpath2) \
 { \
     int result; \
-    vfs_path_t *vpath1, *vpath2; \
     vfs_path_element_t *path_element1, *path_element2; \
 \
-    vpath1 = vfs_path_from_str (fname1); \
-    if (vpath1 == NULL) \
+    if (vpath1 == NULL || vpath2 == NULL) \
         return -1; \
 \
-    vpath2 = vfs_path_from_str (fname2); \
-    if (vpath2 == NULL) \
-    { \
-        vfs_path_free(vpath1); \
-        return -1; \
-    }\
     path_element1 = vfs_path_get_by_index (vpath1, - 1); \
     path_element2 = vfs_path_get_by_index (vpath2, - 1); \
 \
@@ -336,8 +328,6 @@ int mc_##name (const char *fname1, const char *fname2) \
         path_element1->class != path_element2->class) \
     { \
         errno = EXDEV; \
-        vfs_path_free(vpath1); \
-        vfs_path_free(vpath2); \
         return -1; \
     }\
 \
@@ -346,8 +336,6 @@ int mc_##name (const char *fname1, const char *fname2) \
         : -1; \
     if (result == -1) \
         errno = path_element1->class->name != NULL ? vfs_ferrno (path_element1->class) : E_NOTSUPP; \
-    vfs_path_free(vpath1); \
-    vfs_path_free(vpath2); \
     return result; \
 }
 

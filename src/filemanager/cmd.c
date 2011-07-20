@@ -440,7 +440,9 @@ static void
 do_link (link_type_t link_type, const char *fname)
 {
     char *dest = NULL, *src = NULL;
+    vfs_path_t *fname_vpath, *dest_vpath = NULL;
 
+    fname_vpath = vfs_path_from_str (fname);
     if (link_type == LINK_HARDLINK)
     {
         src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
@@ -448,7 +450,8 @@ do_link (link_type_t link_type, const char *fname)
         if (!dest || !*dest)
             goto cleanup;
         save_cwds_stat ();
-        if (-1 == mc_link (fname, dest))
+        dest_vpath = vfs_path_from_str (dest);
+        if (-1 == mc_link (fname_vpath, dest_vpath))
             message (D_ERROR, MSG_ERROR, _("link: %s"), unix_error_string (errno));
     }
     else
@@ -483,6 +486,8 @@ do_link (link_type_t link_type, const char *fname)
     repaint_screen ();
 
   cleanup:
+    vfs_path_free (fname_vpath);
+    vfs_path_free (dest_vpath);
     g_free (src);
     g_free (dest);
 }

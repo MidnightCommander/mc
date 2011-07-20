@@ -271,7 +271,7 @@ static gboolean
 check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 {
     struct link *lp;
-    vfs_path_t *vpath;
+    vfs_path_t *src_vpath, *dst_vpath;
 
     struct vfs_class *my_vfs;
     ino_t ino = pstat->st_ino;
@@ -279,26 +279,27 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
     struct stat link_stat;
     const char *p;
 
-    vpath = vfs_path_from_str (src_name);
+    src_vpath = vfs_path_from_str (src_name);
 
-    if ((vfs_file_class_flags (vpath) & VFSF_NOLINKS) != 0)
+    if ((vfs_file_class_flags (src_vpath) & VFSF_NOLINKS) != 0)
     {
-        vfs_path_free (vpath);
+        vfs_path_free (src_vpath);
         return FALSE;
     }
-    my_vfs = vfs_path_get_by_index (vpath, -1)->class;
-    vfs_path_free (vpath);
+    my_vfs = vfs_path_get_by_index (src_vpath, -1)->class;
+    dst_vpath = vfs_path_from_str (dst_name);
 
     for (lp = linklist; lp != NULL; lp = lp->next)
         if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev)
         {
             struct vfs_class *lp_name_class;
             int stat_result;
+            vfs_path_t *tmp_vpath;
 
-            vpath = vfs_path_from_str (lp->name);
-            lp_name_class = vfs_path_get_by_index (vpath, -1)->class;
-            stat_result = mc_stat (vpath, &link_stat);
-            vfs_path_free (vpath);
+            tmp_vpath = vfs_path_from_str (lp->name);
+            lp_name_class = vfs_path_get_by_index (tmp_vpath, -1)->class;
+            stat_result = mc_stat (tmp_vpath, &link_stat);
+            vfs_path_free (tmp_vpath);
 
             if (!stat_result && link_stat.st_ino == ino
                 && link_stat.st_dev == dev && lp_name_class == my_vfs)
@@ -308,28 +309,30 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
                 p = strchr (lp->name, 0) + 1;   /* i.e. where the `name' file
                                                    was copied to */
 
-                vpath = vfs_path_from_str (dst_name);
-                dst_name_class = vfs_path_get_by_index (vpath, -1)->class;
-                vfs_path_free (vpath);
+                dst_name_class = vfs_path_get_by_index (dst_vpath, -1)->class;
 
-                vpath = vfs_path_from_str (p);
-                p_class = vfs_path_get_by_index (vpath, -1)->class;
+                tmp_vpath = vfs_path_from_str (p);
+                p_class = vfs_path_get_by_index (tmp_vpath, -1)->class;
 
                 if (dst_name_class == p_class)
                 {
-                    if (!mc_stat (vpath, &link_stat))
+                    if (!mc_stat (tmp_vpath, &link_stat))
                     {
-                        if (!mc_link (p, dst_name))
+                        if (!mc_link (tmp_vpath, dst_vpath))
                         {
-                            vfs_path_free (vpath);
+                            vfs_path_free (tmp_vpath);
+                            vfs_path_free (src_vpath);
+                            vfs_path_free (dst_vpath);
                             return TRUE;
                         }
                     }
                 }
-                vfs_path_free (vpath);
+                vfs_path_free (tmp_vpath);
 
             }
             message (D_ERROR, MSG_ERROR, _("Cannot make the hardlink"));
+            vfs_path_free (src_vpath);
+            vfs_path_free (dst_vpath);
             return FALSE;
         }
     lp = (struct link *) g_try_malloc (sizeof (struct link) + strlen (src_name)
@@ -346,6 +349,8 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
         lp->next = linklist;
         linklist = lp;
     }
+    vfs_path_free (src_vpath);
+    vfs_path_free (dst_vpath);
     return FALSE;
 }
 
@@ -862,7 +867,7 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
             }
         }
 
-        if (mc_rename (s, d) == 0)
+        if (mc_rename (src_vpath, dst_vpath) == 0)
         {
             vfs_path_free (src_vpath);
             vfs_path_free (dst_vpath);
@@ -1991,7 +1996,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         /* Here the dir doesn't exist : make it ! */
         if (move_over)
         {
-            if (mc_rename (s, d) == 0)
+            if (mc_rename (src_vpath, dst_vpath) == 0)
             {
                 return_status = FILE_CONT;
                 goto ret;
@@ -2260,7 +2265,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     }
 
   retry_rename:
-    if (mc_rename (s, destdir) == 0)
+    if (mc_rename (src_vpath, destdir_vpath) == 0)
     {
         return_status = FILE_CONT;
         goto ret;
