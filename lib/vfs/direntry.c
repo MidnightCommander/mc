@@ -238,31 +238,6 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-split_dir_name (struct vfs_class *me, char *path, char **dir, char **name, char **save)
-{
-    char *s;
-
-    (void) me;
-
-    s = strrchr (path, PATH_SEP);
-    if (s == NULL)
-    {
-        *save = NULL;
-        *name = path;
-        *dir = path + strlen (path);    /* an empty string */
-    }
-    else
-    {
-        *save = s;
-        *dir = path;
-        *s++ = '\0';
-        *name = s;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static struct vfs_s_entry *
 vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
                          const char *a_path, int follow, int flags)
@@ -280,13 +255,15 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 
     if ((flags & FL_DIR) == 0)
     {
-        char *dirname, *name, *save;
+        char *dirname, *name;
         struct vfs_s_inode *ino;
-        split_dir_name (me, path, &dirname, &name, &save);
+
+        dirname = g_path_get_dirname (path);
+        name = g_path_get_basename (path);
         ino = vfs_s_find_inode (me, root->super, dirname, follow, flags | FL_DIR);
-        if (save != NULL)
-            *save = PATH_SEP;
         retval = vfs_s_find_entry_tree (me, ino, name, follow, flags);
+        g_free (dirname);
+        g_free (name);
         g_free (path);
         return retval;
     }
@@ -1220,7 +1197,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     }
     if (!ino)
     {
-        char *dirname, *name, *save, *q_mangle;
+        char *dirname, *name;
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
         int tmp_handle;
@@ -1229,28 +1206,32 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         if (!(flags & O_CREAT) || !(path_element->class->write))
             return NULL;
 
-        q_mangle = g_strdup (q);
-        split_dir_name (path_element->class, q_mangle, &dirname, &name, &save);
+        dirname = g_path_get_dirname (q);
+        name = g_path_get_basename (q);
         dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
         if (dir == NULL)
         {
-            g_free (q_mangle);
+            g_free (dirname);
+            g_free (name);
             return NULL;
         }
-        if (save)
-            *save = PATH_SEP;
         ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
         ino = ent->ino;
         vfs_s_insert_entry (path_element->class, dir, ent);
         if ((VFSDATA (path_element)->flags & VFS_S_USETMP) != 0)
         {
             tmp_handle = vfs_mkstemps (&ino->localname, path_element->class->name, name);
-            g_free (q_mangle);
             if (tmp_handle == -1)
+            {
+                g_free (dirname);
+                g_free (name);
                 return NULL;
+            }
 
             close (tmp_handle);
         }
+        g_free (dirname);
+        g_free (name);
         was_changed = 1;
     }
 
