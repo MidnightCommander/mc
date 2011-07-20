@@ -39,16 +39,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define SEARCH_DIALOG_OPTION_NO_SCANF   (1 << 0)
-#define SEARCH_DIALOG_OPTION_NO_REGEX   (1 << 1)
-#define SEARCH_DIALOG_OPTION_NO_CASE    (1 << 2)
-#define SEARCH_DIALOG_OPTION_BACKWARDS  (1 << 3)
-#define SEARCH_DIALOG_OPTION_BOOKMARK   (1 << 4)
-
-#define EDIT_KEY_EMULATION_NORMAL 0
-#define EDIT_KEY_EMULATION_EMACS  1
-#define EDIT_KEY_EMULATION_USER   2
-
 #define REDRAW_LINE          (1 << 0)
 #define REDRAW_LINE_ABOVE    (1 << 1)
 #define REDRAW_LINE_BELOW    (1 << 2)
@@ -130,14 +120,6 @@
 
 #define edit_query_dialog2(h,t,a,b) query_dialog (h, t, D_NORMAL, 2, a, b)
 #define edit_query_dialog3(h,t,a,b,c) query_dialog (h, t, D_NORMAL, 3, a, b, c)
-
-#ifndef MAX_PATH_LEN
-#ifdef PATH_MAX
-#define MAX_PATH_LEN PATH_MAX
-#else
-#define MAX_PATH_LEN 1024
-#endif
-#endif
 
 /*** enums ***************************************************************************************/
 
