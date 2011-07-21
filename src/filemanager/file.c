@@ -1562,7 +1562,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
 
     gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
 
-    while ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0 && !ctx->skip_all)
+    while ((src_desc = mc_open (src_vpath, O_RDONLY | O_LINEAR)) < 0 && !ctx->skip_all)
     {
         return_status = file_error (_("Cannot open source file \"%s\"\n%s"), src_path);
         if (return_status == FILE_RETRY)
@@ -1620,7 +1620,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         open_flags |= O_CREAT | O_EXCL;
     }
 
-    while ((dest_desc = mc_open (dst_path, open_flags, src_mode)) < 0)
+    while ((dest_desc = mc_open (dst_vpath, open_flags, src_mode)) < 0)
     {
         if (errno != EEXIST)
         {

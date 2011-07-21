@@ -126,7 +126,7 @@ clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name
                         gpointer init_data, gpointer data)
 {
     int file;
-    char *fname = NULL;
+    vfs_path_t *fname_vpath = NULL;
     ssize_t ret;
     size_t str_len;
     const char *text = (const char *) data;
@@ -138,10 +138,10 @@ clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name
     if (text == NULL)
         return FALSE;
 
-    fname = mc_config_get_full_path (EDIT_CLIP_FILE);
-    file = mc_open (fname, O_CREAT | O_WRONLY | O_TRUNC,
+    fname_vpath = mc_config_get_full_vpath (EDIT_CLIP_FILE);
+    file = mc_open (fname_vpath, O_CREAT | O_WRONLY | O_TRUNC,
                     S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
-    g_free (fname);
+    vfs_path_free (fname_vpath);
 
     if (file == -1)
         return TRUE;
