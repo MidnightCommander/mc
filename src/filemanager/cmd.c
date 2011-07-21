@@ -458,6 +458,7 @@ do_link (link_type_t link_type, const char *fname)
     {
         char *s;
         char *d;
+        vfs_path_t *src_vpath;
 
         /* suggest the full path for symlink, and either the full or
            relative path to the file it points to  */
@@ -478,8 +479,12 @@ do_link (link_type_t link_type, const char *fname)
         if (!dest || !*dest || !src || !*src)
             goto cleanup;
         save_cwds_stat ();
-        if (-1 == mc_symlink (dest, src))
+
+        dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
+        src_vpath = vfs_path_from_str (src);
+        if (mc_symlink (dest_vpath, src_vpath) == -1)
             message (D_ERROR, MSG_ERROR, _("symlink: %s"), unix_error_string (errno));
+        vfs_path_free (src_vpath);
     }
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -1349,9 +1354,13 @@ edit_symlink_cmd (void)
                     }
                     else
                     {
-                        if (-1 == mc_symlink (dest, p))
+                        vfs_path_t *dest_vpath;
+
+                        dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
+                        if (mc_symlink (dest_vpath, p_vpath) == -1)
                             message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
                                      unix_error_string (errno));
+                        vfs_path_free(dest_vpath);
                     }
                     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
                     repaint_screen ();

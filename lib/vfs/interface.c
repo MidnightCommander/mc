@@ -256,34 +256,30 @@ MC_NAMEOP (mknod, (const vfs_path_t *vpath, mode_t mode, dev_t dev), (vpath, mod
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_symlink (const char *name1, const char *path)
+mc_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     int result = -1;
-    vfs_path_t *vpath1, *vpath2;
 
-    vpath1 = vfs_path_from_str (path);
     if (vpath1 == NULL)
         return -1;
 
-    vpath2 = vfs_path_from_str_flags (name1, VPF_NO_CANON);
-
-    if (vpath2 != NULL)
+    if (vpath1 != NULL)
     {
-        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
+        vfs_path_element_t *path_element;
+
+        path_element = vfs_path_get_by_index (vpath2, -1);
         if (vfs_path_element_valid (path_element))
         {
             result =
-                path_element->class->symlink !=
-                NULL ? path_element->class->symlink (vpath2, vpath1) : -1;
+                path_element->class->symlink != NULL ?
+                path_element->class->symlink (vpath1, vpath2) : -1;
 
             if (result == -1)
                 errno =
-                    path_element->class->symlink !=
-                    NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP;
+                    path_element->class->symlink != NULL ?
+                    vfs_ferrno (path_element->class) : E_NOTSUPP;
         }
     }
-    vfs_path_free (vpath1);
-    vfs_path_free (vpath2);
     return result;
 }
 

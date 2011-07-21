@@ -289,7 +289,7 @@ int mc_mkdir (const vfs_path_t * vpath, mode_t mode);
 int mc_rmdir (const vfs_path_t * vpath);
 int mc_fstat (int fd, struct stat *buf);
 int mc_lstat (const vfs_path_t * vpath, struct stat *buf);
-int mc_symlink (const char *name1, const char *name2);
+int mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 int mc_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 int mc_chmod (const vfs_path_t * vpath, mode_t mode);
 int mc_chown (const vfs_path_t * vpath, uid_t owner, gid_t group);
