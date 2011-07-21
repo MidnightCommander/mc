@@ -979,23 +979,19 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
 {
     struct stat s;
     char buffer[BUF_4K];
-    char *fname = NULL;
     int file_fd;
     gboolean ret_val = FALSE;
     vfs_path_t *vpath;
 
-    fname = mc_build_filename (directory, filename, (char *) NULL);
-    vpath = vfs_path_from_str (fname);
+    vpath = vfs_path_build_filename (directory, filename, (char *) NULL);
 
     if (mc_stat (vpath, &s) != 0 || !S_ISREG (s.st_mode))
     {
-        g_free (fname);
         vfs_path_free (vpath);
         return FALSE;
     }
 
-    file_fd = mc_open (fname, O_RDONLY);
-    g_free (fname);
+    file_fd = mc_open (vpath, O_RDONLY);
     vfs_path_free (vpath);
 
     if (file_fd == -1)

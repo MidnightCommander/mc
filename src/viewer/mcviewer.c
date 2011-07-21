@@ -273,6 +273,7 @@ gboolean
 mcview_load (mcview_t * view, const char *command, const char *file, int start_line)
 {
     gboolean retval = FALSE;
+    vfs_path_t *vpath = NULL;
 
     assert (view->bytes_per_line != 0);
 
@@ -312,7 +313,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         struct stat st;
 
         /* Open the file */
-        fd = mc_open (file, O_RDONLY | O_NONBLOCK);
+        vpath = vfs_path_from_str (file);
+        fd = mc_open (vpath, O_RDONLY | O_NONBLOCK);
         if (fd == -1)
         {
             g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\"\n%s"),
@@ -386,10 +388,10 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         char *canon_fname;
         long line, col;
         off_t new_offset, max_offset;
-        vfs_path_t *vpath;
+        vfs_path_t *tmp_vpath;
 
-        vpath = vfs_path_from_str (view->filename);
-        canon_fname = vfs_path_to_str (vpath);
+        tmp_vpath = vfs_path_from_str (view->filename);
+        canon_fname = vfs_path_to_str (tmp_vpath);
         load_file_position (canon_fname, &line, &col, &new_offset, &view->saved_bookmarks);
         max_offset = mcview_get_filesize (view) - 1;
         if (max_offset < 0)
@@ -404,7 +406,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             view->hex_cursor = new_offset;
         }
         g_free (canon_fname);
-        vfs_path_free (vpath);
+        vfs_path_free (tmp_vpath);
     }
     else if (start_line > 0)
         mcview_moveto (view, start_line - 1, 0);
@@ -412,6 +414,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
     view->change_list = NULL;
+    vfs_path_free (vpath);
     return retval;
 }
 

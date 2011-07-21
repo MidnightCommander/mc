@@ -253,11 +253,14 @@ edit_load_file_fast (WEdit * edit, const char *filename)
     long buf, buf2;
     int file = -1;
     int ret = 1;
+    vfs_path_t *vpath;
 
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
 
-    file = mc_open (filename, O_RDONLY | O_BINARY);
+    vpath = vfs_path_from_str (filename);
+    file = mc_open (vpath, O_RDONLY | O_BINARY);
+    vfs_path_free (vpath);
     if (file == -1)
     {
         gchar *errmsg;
@@ -362,9 +365,11 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
 {
     int file;
     gchar *errmsg = NULL;
+    vfs_path_t *vpath;
 
     /* Try opening an existing file */
-    file = mc_open (filename, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
+    vpath = vfs_path_from_str (filename);
+    file = mc_open (vpath, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
 
     if (file < 0)
     {
@@ -372,7 +377,7 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
          * Try creating the file. O_EXCL prevents following broken links
          * and opening existing files.
          */
-        file = mc_open (filename, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
+        file = mc_open (vpath, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
         if (file < 0)
         {
             errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
@@ -411,6 +416,7 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
 
   cleanup:
     (void) mc_close (file);
+    vfs_path_free (vpath);
 
     if (errmsg != NULL)
     {
@@ -2076,40 +2082,44 @@ edit_write_stream (WEdit * edit, FILE * f)
 long
 edit_insert_file (WEdit * edit, const char *filename)
 {
-    char *p;
+    char *p = NULL;
     long ins_len = 0;
+    vfs_path_t *vpath;
 
+    vpath = vfs_path_from_str (filename);
     p = edit_get_filter (filename);
     if (p != NULL)
     {
         FILE *f;
         long current = edit->curs1;
+
         f = (FILE *) popen (p, "r");
         if (f != NULL)
         {
             edit_insert_stream (edit, f);
             ins_len = edit->curs1 - current;
-            edit_cursor_move (edit, current - edit->curs1);
+            edit_cursor_move (edit, -ins_len);
             if (pclose (f) > 0)
             {
                 char *errmsg;
+
                 errmsg = g_strdup_printf (_("Error reading from pipe: %s"), p);
                 edit_error_dialog (_("Error"), errmsg);
                 g_free (errmsg);
-                g_free (p);
-                return -1;
+                ins_len = -1;
+                goto ret;
             }
         }
         else
         {
             char *errmsg;
+
             errmsg = g_strdup_printf (_("Cannot open pipe for reading: %s"), p);
             edit_error_dialog (_("Error"), errmsg);
             g_free (errmsg);
-            g_free (p);
-            return -1;
+            ins_len = -1;
+            goto ret;
         }
-        g_free (p);
     }
     else
     {
@@ -2117,9 +2127,13 @@ edit_insert_file (WEdit * edit, const char *filename)
         long current = edit->curs1;
         int vertical_insertion = 0;
         char *buf;
-        file = mc_open (filename, O_RDONLY | O_BINARY);
+
+        file = mc_open (vpath, O_RDONLY | O_BINARY);
         if (file == -1)
-            return -1;
+        {
+            ins_len = -1;
+            goto ret;
+        }
         buf = g_malloc0 (TEMP_BUF_LEN);
         blocklen = mc_read (file, buf, sizeof (VERTICAL_MAGIC));
         if (blocklen > 0)
@@ -2130,10 +2144,12 @@ edit_insert_file (WEdit * edit, const char *filename)
             else
                 mc_lseek (file, 0, SEEK_SET);
         }
+
         if (vertical_insertion)
         {
             long mark1, mark2;
             int c1, c2;
+
             blocklen = edit_insert_column_of_text_from_file (edit, file, &mark1, &mark2, &c1, &c2);
             edit_set_markers (edit, edit->curs1, mark2, c1, c2);
             /* highlight inserted text then not persistent blocks */
@@ -2160,14 +2176,19 @@ edit_insert_file (WEdit * edit, const char *filename)
                 edit->column_highlight = 0;
             }
         }
+
         edit->force |= REDRAW_PAGE;
         ins_len = edit->curs1 - current;
-        edit_cursor_move (edit, current - edit->curs1);
+        edit_cursor_move (edit, -ins_len);
         g_free (buf);
         mc_close (file);
         if (blocklen != 0)
-            return 0;
+            ins_len = 0;
     }
+
+  ret:
+    g_free (p);
+    vfs_path_free (vpath);
     return ins_len;
 }
 

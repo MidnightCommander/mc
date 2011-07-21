@@ -56,21 +56,25 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     gboolean ret;
     int fd;
     ssize_t cur_written;
+    vfs_path_t *ini_vpath;
 
+    ini_vpath = vfs_path_from_str (ini_path);
     data = g_key_file_to_data (mc_config->handle, &len, NULL);
     if (!exist_file (ini_path))
     {
         ret = g_file_set_contents (ini_path, data, len, error);
         g_free (data);
+        vfs_path_free (ini_vpath);
         return ret;
     }
     mc_util_make_backup_if_possible (ini_path, "~");
 
-    fd = mc_open (ini_path, O_WRONLY | O_TRUNC, 0);
+    fd = mc_open (ini_vpath, O_WRONLY | O_TRUNC, 0);
     if (fd == -1)
     {
         g_propagate_error (error, g_error_new (MC_ERROR, 0, "%s", unix_error_string (errno)));
         g_free (data);
+        vfs_path_free (ini_vpath);
         return FALSE;
     }
 
@@ -84,10 +88,12 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     {
         mc_util_restore_from_backup_if_possible (ini_path, "~");
         g_propagate_error (error, g_error_new (MC_ERROR, 0, "%s", unix_error_string (errno)));
+        vfs_path_free (ini_vpath);
         return FALSE;
     }
 
     mc_util_unlink_backup_if_possible (ini_path, "~");
+    vfs_path_free (ini_vpath);
     return TRUE;
 }
 

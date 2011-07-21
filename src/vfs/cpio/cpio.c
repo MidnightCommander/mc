@@ -221,17 +221,19 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     cpio_super_data_t *arch;
     mode_t mode;
     struct vfs_s_inode *root;
-    char *name = vfs_path_to_str (vpath);
 
-    fd = mc_open (name, O_RDONLY);
+    fd = mc_open (vpath, O_RDONLY);
     if (fd == -1)
     {
+        char *name;
+
+        name = vfs_path_to_str (vpath);
         message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
         g_free (name);
         return -1;
     }
 
-    super->name = g_strdup (name);
+    super->name = vfs_path_to_str (vpath);
     super->data = g_new (cpio_super_data_t, 1);
     arch = (cpio_super_data_t *) super->data;
     arch->fd = -1;              /* for now */
@@ -239,19 +241,22 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     arch->type = CPIO_UNKNOWN;
     arch->deferred = NULL;
 
-    type = get_compression_type (fd, name);
+    type = get_compression_type (fd, super->name);
     if (type != COMPRESSION_NONE)
     {
         char *s;
+        vfs_path_t *tmp_vpath;
 
         mc_close (fd);
-        s = g_strconcat (name, decompress_extension (type), (char *) NULL);
-        fd = mc_open (s, O_RDONLY);
+        s = g_strconcat (super->name, decompress_extension (type), (char *) NULL);
+        tmp_vpath = vfs_path_from_str (s);
+        fd = mc_open (tmp_vpath, O_RDONLY);
+        vfs_path_free (tmp_vpath);
         if (fd == -1)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
             g_free (s);
-            g_free (name);
+            g_free (super->name);
             return -1;
         }
         g_free (s);
@@ -271,7 +276,6 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     super->root = root;
 
     CPIO_SEEK_SET (super, 0);
-    g_free (name);
 
     return fd;
 }
