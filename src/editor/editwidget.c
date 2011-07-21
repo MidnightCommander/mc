@@ -71,7 +71,6 @@
 
 static cb_ret_t edit_callback (Widget * w, widget_msg_t msg, int parm);
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
@@ -121,6 +120,8 @@ edit_event (Gpm_Event * event, void *data)
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
 
+    local = mouse_get_local (event, w);
+
     /* Unknown event type */
     if ((event->type & (GPM_DOWN | GPM_DRAG | GPM_UP)) == 0)
         return MOU_NORMAL;
@@ -128,88 +129,181 @@ edit_event (Gpm_Event * event, void *data)
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
 
-    local = mouse_get_local (event, w);
-
-    /* Double click */
-    if ((local.type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
+    if (!EDIT_WITH_FRAME || (local.buttons & GPM_B_LEFT) == 0 || (local.type & GPM_UP) != 0)
+        edit->drag_state = MCEDIT_DRAG_NORMAL;
+    else if (local.y == 1 && edit->drag_state != MCEDIT_DRAG_RESIZE)
     {
-        edit_mark_current_word_cmd (edit);
-        goto update;
+        /* click on the top line (move) */
+
+        /* start move; save x coordinate of mouse */
+        if ((local.type & GPM_DOWN) != 0)
+            edit->drag_state_start = local.x;
+
+        /* moving */
+        if ((local.type & (GPM_DOWN | GPM_DRAG)) != 0)
+            edit->drag_state = MCEDIT_DRAG_MOVE;
     }
+    else if (local.y == w->lines && local.x == w->cols)
+    {
+        /* click on bottom-right corner (resize) */
+        if ((local.type & (GPM_DOWN | GPM_DRAG)) != 0)
+            edit->drag_state = MCEDIT_DRAG_RESIZE;
+    }
+
+    if (edit->drag_state == MCEDIT_DRAG_NORMAL)
+    {
+        gboolean done = TRUE;
+
+        /* Double click */
+        if ((local.type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
+        {
+            edit_mark_current_word_cmd (edit);
+            goto update;
+        }
 #if 0
-    /* Triple click */
-    if ((local.type & (GPM_TRIPLE | GPM_UP)) == (GPM_UP | GPM_TRIPLE))
-    {
-        edit_mark_current_line_cmd (edit);
-        goto update;
-    }
+        /* Triple click */
+        if ((local.type & (GPM_TRIPLE | GPM_UP)) == (GPM_UP | GPM_TRIPLE))
+        {
+            edit_mark_current_line_cmd (edit);
+            goto update;
+        }
 #endif
-    /* Wheel events */
-    if ((local.buttons & GPM_B_UP) != 0 && (local.type & GPM_DOWN) != 0)
-    {
-        edit_move_up (edit, 2, 1);
-        goto update;
-    }
-    if ((local.buttons & GPM_B_DOWN) != 0 && (local.type & GPM_DOWN) != 0)
-    {
-        edit_move_down (edit, 2, 1);
-        goto update;
-    }
-
-    /* A lone up mustn't do anything */
-    if (edit->mark2 != -1 && (local.type & (GPM_UP | GPM_DRAG)) != 0)
-        return MOU_NORMAL;
-
-    if ((local.type & (GPM_DOWN | GPM_UP)) != 0)
-        edit_push_key_press (edit);
-
-    if (EDIT_WITH_FRAME)
-    {
-        local.y--;
-        local.x--;
-    }
-
-    if (!option_cursor_beyond_eol)
-        edit->prev_col = local.x - edit->start_col - option_line_state_width - 1;
-    else
-    {
-        long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
-                                            edit_eol (edit, edit->curs1));
-
-        if (local.x > line_len)
+        /* Wheel events */
+        if ((local.buttons & GPM_B_UP) != 0 && (local.type & GPM_DOWN) != 0)
         {
-            edit->over_col = local.x - line_len - edit->start_col - option_line_state_width - 1;
-            edit->prev_col = line_len;
+            edit_move_up (edit, 2, 1);
+            goto update;
         }
-        else
+        if ((local.buttons & GPM_B_DOWN) != 0 && (local.type & GPM_DOWN) != 0)
         {
-            edit->over_col = 0;
-            edit->prev_col = local.x - option_line_state_width - edit->start_col - 1;
+            edit_move_down (edit, 2, 1);
+            goto update;
         }
-    }
 
-    if (local.y > (edit->curs_row + 1))
-        edit_move_down (edit, local.y - (edit->curs_row + 1), 0);
-    else if (local.y < (edit->curs_row + 1))
-        edit_move_up (edit, (edit->curs_row + 1) - local.y, 0);
+        /* continue handle current event */
+        goto cont;
+
+        /* handle DRAG mouse event, don't use standard way to continue
+         * event handling outside of widget */
+        do
+        {
+            int c;
+
+            c = tty_get_event (event, FALSE, TRUE);
+            if (c == EV_NONE || c != EV_MOUSE)
+                break;
+
+            local = mouse_get_local (event, w);
+
+          cont:
+            /* A lone up mustn't do anything */
+            if (edit->mark2 != -1 && (local.type & (GPM_UP | GPM_DRAG)) != 0)
+                return MOU_NORMAL;
+
+            if ((local.type & (GPM_DOWN | GPM_UP)) != 0)
+                edit_push_key_press (edit);
+
+            local.x--;
+            if (!option_cursor_beyond_eol)
+                edit->prev_col = local.x - edit->start_col - option_line_state_width - 1;
+            else
+            {
+                long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
+                                                    edit_eol (edit, edit->curs1));
+
+                if (local.x > line_len)
+                {
+                    edit->over_col =
+                        local.x - line_len - edit->start_col - option_line_state_width - 1;
+                    edit->prev_col = line_len;
+                }
+                else
+                {
+                    edit->over_col = 0;
+                    edit->prev_col = local.x - option_line_state_width - edit->start_col - 1;
+                }
+            }
+
+            if (EDIT_WITH_FRAME)
+                local.y--;
+            if (local.y > (edit->curs_row + 1))
+                edit_move_down (edit, local.y - (edit->curs_row + 1), 0);
+            else if (local.y < (edit->curs_row + 1))
+                edit_move_up (edit, (edit->curs_row + 1) - local.y, 0);
+            else
+                edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
+
+            if ((local.type & GPM_DOWN) != 0)
+            {
+                edit_mark_cmd (edit, 1);        /* reset */
+                edit->highlight = 0;
+            }
+
+            done = (local.type & GPM_DRAG) == 0;
+            if (done)
+                edit_mark_cmd (edit, 0);
+
+          update:
+            edit_find_bracket (edit);
+            edit->force |= REDRAW_COMPLETELY;
+            edit_update_curs_row (edit);
+            edit_update_curs_col (edit);
+            edit_update_screen (edit);
+        }
+        while (EDIT_WITH_FRAME && !done);
+    }
     else
-        edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
+        while (edit->drag_state != MCEDIT_DRAG_NORMAL)
+        {
+            int c;
 
-    if ((local.type & GPM_DOWN) != 0)
-    {
-        edit_mark_cmd (edit, 1);        /* reset */
-        edit->highlight = 0;
-    }
+            c = tty_get_event (event, FALSE, TRUE);
 
-    if ((local.type & GPM_DRAG) == 0)
-        edit_mark_cmd (edit, 0);
+            if (c == EV_NONE || c != EV_MOUSE)
+            {
+                /* redraw frame */
+                edit->drag_state = MCEDIT_DRAG_NORMAL;
+                edit->force |= REDRAW_COMPLETELY;
+                edit_update_screen (edit);
+            }
+            else if (y == w->y && (event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
+            {
+                /* double click on top line (toggle fullscreen) */
+                edit_toggle_fullscreen (edit);
+                edit->drag_state = MCEDIT_DRAG_NORMAL;
+            else
+            {
+                Dlg_head *h = w->owner;
 
-  update:
-    edit_find_bracket (edit);
-    edit->force |= REDRAW_COMPLETELY;
-    edit_update_curs_row (edit);
-    edit_update_curs_col (edit);
-    edit_update_screen (edit);
+                if (edit->drag_state == MCEDIT_DRAG_MOVE)
+                {
+                    int y = event->y - 1;
+                    int x = event->x - 1;
+
+                    y = max (y, h->y + 1);      /* status line */
+                    y = min (y, h->y + h->lines - 2);   /* buttonbar */
+                    x = max (x, h->x);
+                    x = min (x, h->x + h->cols - 1);
+                    /* don't use widget_set_size() here to avoid double draw  */
+                    w->y = y;
+                    w->x = x - edit->drag_state_start;
+                    edit->force |= REDRAW_PAGE;
+                }
+                else if (edit->drag_state == MCEDIT_DRAG_RESIZE)
+                {
+                    event->y = min (event->y, h->y + h->lines - 1);     /* buttonbar */
+                    event->x = min (event->x, h->x + h->cols);
+                    local = mouse_get_local (event, w);
+
+                    /* don't use widget_set_size() here to avoid double draw  */
+                    w->lines = max (2 + 2, local.y);
+                    w->cols = max (2 + LINE_STATE_WIDTH, local.x);
+                    edit->force |= REDRAW_COMPLETELY;
+                }
+
+                dlg_redraw (h);
+            }
+        }
 
     return MOU_NORMAL;
 }
@@ -279,7 +373,6 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         widget_set_size (&buttonbar->widget, h->lines - 1, h->x, 1, h->cols);
         widget_set_size (&menubar->widget, h->y, h->x, 1, h->cols);
         menubar_arrange (menubar);
-        widget_set_size (&edit->widget, h->y + 1, h->x, h->lines - 2, h->cols);
         return MSG_HANDLED;
 
     case DLG_ACTION:
@@ -436,9 +529,12 @@ edit_update_screen (WEdit * e)
         edit_status (e);
     else
     {
-        /* draw a frame around edit area */
-        tty_setcolor (EDITOR_NORMAL_COLOR);
-        tty_draw_box (e->widget.y, e->widget.x, e->widget.lines, e->widget.cols, TRUE);
+        if ((e->force & REDRAW_COMPLETELY) != 0)
+        {
+            /* draw a frame around edit area */
+            tty_setcolor (EDITOR_NORMAL_COLOR);
+            tty_draw_box (e->widget.y, e->widget.x, e->widget.lines, e->widget.cols, TRUE);
+        }
 
         edit_info_status (e);
     }

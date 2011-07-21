@@ -35,9 +35,24 @@ struct syntax_rule
     unsigned char border;
 };
 
+/*
+ * State of WEdit window
+ * MCEDIT_DRAG_NORMAL - window is in normal mode
+ * MCEDIT_DRAG_MOVE   - window is being moved
+ * MCEDIT_DRAG_RESIZE - window is being resized
+ */
+typedef enum
+{
+    MCEDIT_DRAG_NORMAL = 0,
+    MCEDIT_DRAG_MOVE,
+    MCEDIT_DRAG_RESIZE
+} mcedit_drag_state_t;
+
 struct WEdit
 {
     Widget widget;
+    mcedit_drag_state_t drag_state;
+    int drag_state_start;       /* save cursor position before window moving */
 
     char *filename;             /* Name of the file */
     char *dir;                  /* NULL if filename is absolute */

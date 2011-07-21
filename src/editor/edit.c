@@ -2217,6 +2217,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     }
 
     edit_purge_widget (edit);
+    edit->drag_state = MCEDIT_DRAG_NORMAL;
     edit->widget.y = y;
     edit->widget.x = x;
     edit->widget.lines = lines;
