@@ -311,16 +311,21 @@ edit_event (Gpm_Event * event, void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-edit_command_execute (WEdit * edit, unsigned long command)
+edit_dialog_command_execute (Dlg_head * h, unsigned long command)
 {
-    if (command == CK_Menu)
-        edit_menu_cmd (edit);
-    else
+    gboolean ret = MSG_HANDLED;
+
+    switch (command)
     {
-        edit_execute_key_command (edit, command, -1);
-        edit_update_screen (edit);
+    case CK_Menu:
+        edit_menu_cmd (h);
+        break;
+    default:
+        ret = MSG_NOT_HANDLED;
+        break;
     }
-    return MSG_HANDLED;
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -336,7 +341,7 @@ edit_set_buttonbar (WEdit * edit, WButtonBar * bb)
     buttonbar_set_label (bb, 6, Q_ ("ButtonBar|Move"), editor_map, (Widget *) edit);
     buttonbar_set_label (bb, 7, Q_ ("ButtonBar|Search"), editor_map, (Widget *) edit);
     buttonbar_set_label (bb, 8, Q_ ("ButtonBar|Delete"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb, 9, Q_ ("ButtonBar|PullDn"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb, 9, Q_ ("ButtonBar|PullDn"), editor_map, NULL);
     buttonbar_set_label (bb, 10, Q_ ("ButtonBar|Quit"), editor_map, (Widget *) edit);
 }
 
@@ -376,11 +381,55 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_HANDLED;
 
     case DLG_ACTION:
+        /* shortcut */
+        if (sender == NULL)
+            return edit_dialog_command_execute (h, parm);
+        /* message from menu */
         if (sender == (Widget *) menubar)
-            return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
+        {
+            if (edit_dialog_command_execute (h, parm) == MSG_HANDLED)
+                return MSG_HANDLED;
+            /* try send command to the current window */
+            return send_message ((Widget *) h->current->data, WIDGET_COMMAND, parm);
+        }
+        /* message from buttonbar */
         if (sender == (Widget *) buttonbar)
-            return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
-        return MSG_HANDLED;
+        {
+            if (data != NULL)
+                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+            return edit_dialog_command_execute (h, parm);
+        }
+
+        return MSG_NOT_HANDLED;
+
+    case DLG_KEY:
+        {
+            Widget *w = h->current->data;
+            cb_ret_t ret = MSG_NOT_HANDLED;
+
+            if (edit_widget_is_editor (w))
+            {
+                WEdit *e = (WEdit *) w;
+                unsigned long command;
+
+                if (!e->extmod)
+                    command = keybind_lookup_keymap_command (editor_map, parm);
+                else
+                {
+                    e->extmod = FALSE;
+                    command = keybind_lookup_keymap_command (editor_x_map, parm);
+                }
+
+                if (command != CK_IgnoreKey)
+                    ret = edit_dialog_command_execute (h, command);
+            }
+
+            return ret;
+        }
+
+        /* hardcoded menu hotkeys (see edit_drop_hotkey_menu) */
+    case DLG_UNHANDLED_KEY:
+        return edit_drop_hotkey_menu (h, parm) ? MSG_HANDLED : MSG_NOT_HANDLED;
 
     case DLG_VALIDATE:
         h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
@@ -424,15 +473,15 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
                 edit_update_screen (e);
                 ret = MSG_HANDLED;
             }
-            else if (edit_drop_hotkey_menu (e, parm))
-                ret = MSG_HANDLED;
 
             return ret;
         }
 
     case WIDGET_COMMAND:
         /* command from menubar or buttonbar */
-        return edit_command_execute (e, parm);
+        edit_execute_key_command (e, parm, -1);
+        edit_update_screen (e);
+        return MSG_HANDLED;
 
     case WIDGET_CURSOR:
         widget_move (w, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET + EDIT_WITH_FRAME,

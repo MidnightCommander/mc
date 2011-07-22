@@ -74,7 +74,7 @@
  * Translate the keycode into either 'command' or 'char_for_insertion'.
  * 'command' is one of the editor commands from cmddef.h.
  */
-int
+gboolean
 edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
 {
     unsigned long command = (unsigned long) CK_InsertChar;
@@ -199,7 +199,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
     *cmd = (int) command;       /* FIXME */
     *ch = char_for_insertion;
 
-    return (command == (unsigned long) CK_InsertChar && char_for_insertion == -1) ? 0 : 1;
+    return !(command == (unsigned long) CK_InsertChar && char_for_insertion == -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
