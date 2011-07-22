@@ -269,7 +269,6 @@ void edit_move_display (WEdit * e, long line);
 void edit_word_wrap (WEdit * edit);
 int edit_sort_cmd (WEdit * edit);
 int edit_ext_cmd (WEdit * edit);
-void edit_help_cmd (WEdit * edit);
 
 int edit_store_macro_cmd (WEdit * edit);
 gboolean edit_load_macro_cmd (WEdit * edit);

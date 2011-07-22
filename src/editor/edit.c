@@ -172,56 +172,6 @@ static long last_bracket = -1;
 static int left_of_four_spaces (WEdit * edit);
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_about (void)
-{
-    const char *header = N_("About");
-    const char *button_name = N_("&OK");
-    const char *const version = "MCEdit " VERSION;
-    char text[BUF_LARGE];
-
-    int win_len, version_len, button_len;
-    int cols, lines;
-
-    Dlg_head *about_dlg;
-
-#ifdef ENABLE_NLS
-    header = _(header);
-    button_name = _(button_name);
-#endif
-
-    button_len = str_term_width1 (button_name) + 5;
-    version_len = str_term_width1 (version);
-
-    g_snprintf (text, sizeof (text),
-                _("Copyright (C) 1996-2010 the Free Software Foundation\n\n"
-                  "            A user friendly text editor\n"
-                  "         written for the Midnight Commander"));
-
-    win_len = str_term_width1 (header);
-    win_len = max (win_len, version_len);
-    win_len = max (win_len, button_len);
-
-    /* count width and height of text */
-    str_msg_term_size (text, &lines, &cols);
-    lines += 9;
-    cols = max (win_len, cols) + 6;
-
-    /* dialog */
-    about_dlg = create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
-                            "[Internal File Editor]", header, DLG_CENTER | DLG_TRYUP);
-
-    add_widget (about_dlg, label_new (3, (cols - version_len) / 2, version));
-    add_widget (about_dlg, label_new (5, 3, text));
-    add_widget (about_dlg, button_new (lines - 3, (cols - button_len) / 2,
-                                       B_ENTER, NORMAL_BUTTON, button_name, NULL));
-
-    run_dlg (about_dlg);
-    destroy_dlg (about_dlg);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Initialize the buffers for an empty files.
  */
@@ -3514,7 +3464,14 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
 void
 edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 {
-    /* at first, handle window state */
+    /* at first, handle CK_Quit command */
+    if (command == CK_Quit)
+    {
+        dlg_stop (((Widget *) edit)->owner);
+        return;
+    }
+
+    /* handle window state */
     if (edit_handle_move_resize (edit, command))
         return;
 
@@ -4168,17 +4125,11 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_EditNew:
         edit_new_cmd (edit);
         break;
-    case CK_Help:
-        edit_help_cmd (edit);
-        break;
     case CK_Refresh:
         edit_refresh_cmd (edit);
         break;
     case CK_SaveSetup:
         save_setup_cmd ();
-        break;
-    case CK_About:
-        edit_about ();
         break;
     case CK_LearnKeys:
         learn_keys ();

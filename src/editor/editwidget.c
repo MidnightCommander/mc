@@ -52,6 +52,7 @@
 #include "lib/util.h"           /* mc_build_filename() */
 #include "lib/widget.h"
 #include "lib/mcconfig.h"
+#include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/keybind-defaults.h"
 #include "src/main.h"           /* home_dir */
@@ -73,6 +74,71 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t edit_callback (Widget * w, widget_msg_t msg, int parm);
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Show info about editor
+ */
+
+static void
+edit_about (void)
+{
+    const char *header = N_("About");
+    const char *button_name = N_("&OK");
+    const char *const version = "MCEdit " VERSION;
+    char text[BUF_LARGE];
+
+    int win_len, version_len, button_len;
+    int cols, lines;
+
+    Dlg_head *about_dlg;
+
+#ifdef ENABLE_NLS
+    header = _(header);
+    button_name = _(button_name);
+#endif
+
+    button_len = str_term_width1 (button_name) + 5;
+    version_len = str_term_width1 (version);
+
+    g_snprintf (text, sizeof (text),
+                _("Copyright (C) 1996-2012 the Free Software Foundation\n\n"
+                  "            A user friendly text editor\n"
+                  "         written for the Midnight Commander"));
+
+    win_len = str_term_width1 (header);
+    win_len = max (win_len, version_len);
+    win_len = max (win_len, button_len);
+
+    /* count width and height of text */
+    str_msg_term_size (text, &lines, &cols);
+    lines += 9;
+    cols = max (win_len, cols) + 6;
+
+    /* dialog */
+    about_dlg = create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
+                            "[Internal File Editor]", header, DLG_CENTER | DLG_TRYUP);
+
+    add_widget (about_dlg, label_new (3, (cols - version_len) / 2, version));
+    add_widget (about_dlg, label_new (5, 3, text));
+    add_widget (about_dlg, button_new (lines - 3, (cols - button_len) / 2,
+                                       B_ENTER, NORMAL_BUTTON, button_name, NULL));
+
+    run_dlg (about_dlg);
+    destroy_dlg (about_dlg);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Show a help window
+ */
+
+static void
+edit_help (void)
+{
+    ev_help_t event_data = { NULL, "[Internal File Editor]" };
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -414,6 +480,10 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
 
     switch (command)
     {
+    case CK_Help:
+        edit_help ();
+        /* edit->force |= REDRAW_COMPLETELY; */
+        break;
     case CK_Menu:
         edit_menu_cmd (h);
         break;
@@ -428,12 +498,14 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
                 edit_restore_size ((WEdit *) w);
         }
         break;
+    case CK_About:
+        edit_about ();
+        break;
     case CK_WindowMove:
     case CK_WindowResize:
         if (edit_widget_is_editor ((Widget *) h->current->data))
             edit_handle_move_resize ((WEdit *) h->current->data, command);
         break;
-
     default:
         ret = MSG_NOT_HANDLED;
         break;
@@ -447,7 +519,7 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
 static inline void
 edit_set_buttonbar (WEdit * edit, WButtonBar * bb)
 {
-    buttonbar_set_label (bb, 1, Q_ ("ButtonBar|Help"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb, 1, Q_ ("ButtonBar|Help"), editor_map, NULL);
     buttonbar_set_label (bb, 2, Q_ ("ButtonBar|Save"), editor_map, (Widget *) edit);
     buttonbar_set_label (bb, 3, Q_ ("ButtonBar|Mark"), editor_map, (Widget *) edit);
     buttonbar_set_label (bb, 4, Q_ ("ButtonBar|Replac"), editor_map, (Widget *) edit);
@@ -456,7 +528,7 @@ edit_set_buttonbar (WEdit * edit, WButtonBar * bb)
     buttonbar_set_label (bb, 7, Q_ ("ButtonBar|Search"), editor_map, (Widget *) edit);
     buttonbar_set_label (bb, 8, Q_ ("ButtonBar|Delete"), editor_map, (Widget *) edit);
     buttonbar_set_label (bb, 9, Q_ ("ButtonBar|PullDn"), editor_map, NULL);
-    buttonbar_set_label (bb, 10, Q_ ("ButtonBar|Quit"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb, 10, Q_ ("ButtonBar|Quit"), editor_map, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
