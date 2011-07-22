@@ -1333,17 +1333,6 @@ edit_delete_macro (WEdit * edit, int hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_help_cmd (WEdit * edit)
-{
-    ev_help_t event_data = { NULL, "[Internal File Editor]" };
-    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-
-    edit->force |= REDRAW_COMPLETELY;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 edit_refresh_cmd (WEdit * edit)
 {
 #ifdef HAVE_SLANG
