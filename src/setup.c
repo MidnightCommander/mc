@@ -1012,7 +1012,6 @@ save_setup (gboolean save_options, gboolean save_panel_options)
 
         tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
         ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
-
         g_free (tmp_profile);
     }
 
@@ -1060,11 +1059,7 @@ done_setup (void)
 void
 save_config (void)
 {
-    char *profile;
-    GError *error = NULL;
     size_t i;
-
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
 
     /* Save integer options */
     for (i = 0; int_options[i].opt_name != NULL; i++)
@@ -1075,11 +1070,6 @@ save_config (void)
     for (i = 0; str_options[i].opt_name != NULL; i++)
         mc_config_set_string (mc_main_config, CONFIG_APP_SECTION, str_options[i].opt_name,
                               *str_options[i].opt_addr);
-
-    if (!mc_config_save_to_file (mc_main_config, profile, &error))
-        setup_save_config_show_error (profile, &error);
-
-    g_free (profile);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1100,15 +1090,11 @@ setup_save_config_show_error (const char *filename, GError ** error)
 void
 save_layout (void)
 {
-    char *profile;
     size_t i;
 
-    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
     /* Save integer options */
     for (i = 0; layout[i].opt_name != NULL; i++)
         mc_config_set_int (mc_main_config, "Layout", layout[i].opt_name, *layout[i].opt_addr);
-    mc_config_save_to_file (mc_main_config, profile, NULL);
-    g_free (profile);
 }
 
 /* --------------------------------------------------------------------------------------------- */
