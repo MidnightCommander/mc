@@ -2222,6 +2222,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     edit->widget.x = x;
     edit->widget.lines = lines;
     edit->widget.cols = cols;
+    edit_save_size (edit);
 
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
     edit->stat1.st_uid = getuid ();
@@ -3465,6 +3466,10 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
 void
 edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 {
+    /* at first, handle window state */
+    if (edit_handle_move_resize (edit, command))
+        return;
+
     edit->force |= REDRAW_LINE;
 
     /* The next key press will unhighlight the found string, so update
@@ -4105,9 +4110,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
     case CK_Find:
         edit_get_match_keyword_cmd (edit);
-        break;
-    case CK_Quit:
-        dlg_stop (edit->widget.owner);
         break;
     case CK_EditNew:
         edit_new_cmd (edit);

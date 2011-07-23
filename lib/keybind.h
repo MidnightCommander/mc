@@ -273,6 +273,9 @@ enum
     CK_RepeatStartRecord,
     CK_RepeatStopRecord,
     CK_RepeatStartStopRecord,
+    /* window commands */
+    CK_WindowMove,
+    CK_WindowResize,
     /* misc commands */
     CK_InsertOverwrite,
     CK_ParagraphFormat,
