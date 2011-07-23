@@ -91,4 +91,16 @@ vfs_path_get_last_path_str (const vfs_path_t * vpath)
     return (element != NULL) ? element->path : NULL;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static inline struct vfs_class *
+vfs_path_get_last_path_vfs (const vfs_path_t * vpath)
+{
+    const vfs_path_element_t *element;
+    if (vpath == NULL)
+        return NULL;
+    element = vfs_path_get_by_index (vpath, -1);
+    return (element != NULL) ? element->class : NULL;
+}
+
 #endif
