@@ -64,6 +64,10 @@ struct WEdit
     mcedit_drag_state_t drag_state;
     int drag_state_start;       /* save cursor position before window moving */
 
+    /* save location before move/resize */
+    int x_prev, y_prev;
+    int cols_prev, lines_prev;
+
     vfs_path_t *filename_vpath; /* Name of the file */
     vfs_path_t *dir_vpath;      /* NULL if filename is absolute */
 

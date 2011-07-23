@@ -63,6 +63,9 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define WINDOW_MIN_LINES (2 + 2)
+#define WINDOW_MIN_COLS (2 + LINE_STATE_WIDTH)
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -70,6 +73,102 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t edit_callback (Widget * w, widget_msg_t msg, int parm);
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Restore saved window size.
+ *
+ * @param edit editor object
+ */
+
+static void
+edit_restore_size (WEdit * edit)
+{
+    edit->drag_state = MCEDIT_DRAG_NORMAL;
+    widget_set_size ((Widget *) edit, edit->y_prev, edit->x_prev,
+                     edit->lines_prev, edit->cols_prev);
+    dlg_redraw (((Widget *) edit)->owner);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Move window by one row or column in any direction.
+ *
+ * @param edit    editor object
+ * @param command direction (CK_Up, CK_Down, CK_Left, CK_Right)
+ */
+
+static void
+edit_window_move (WEdit * edit, unsigned long command)
+{
+    Widget *w = (Widget *) edit;
+    Dlg_head *h = w->owner;
+
+    switch (command)
+    {
+    case CK_Up:
+        if (w->y > h->y + 1)    /* menubar */
+            w->y--;
+        break;
+    case CK_Down:
+        if (w->y < h->y + h->lines - 2) /* buttonbar */
+            w->y++;
+        break;
+    case CK_Left:
+        if (w->x + w->cols > h->x)
+            w->x--;
+        break;
+    case CK_Right:
+        if (w->x < h->x + h->cols)
+            w->x++;
+        break;
+    default:
+        return;
+    }
+
+    edit->force |= REDRAW_PAGE;
+    dlg_redraw (h);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Resize window by one row or column in any direction.
+ *
+ * @param edit    editor object
+ * @param command direction (CK_Up, CK_Down, CK_Left, CK_Right)
+ */
+
+static void
+edit_window_resize (WEdit * edit, unsigned long command)
+{
+    Widget *w = (Widget *) edit;
+    Dlg_head *h = w->owner;
+
+    switch (command)
+    {
+    case CK_Up:
+        if (w->lines > WINDOW_MIN_LINES)
+            w->lines--;
+        break;
+    case CK_Down:
+        if (w->y + w->lines < h->y + h->lines - 1)      /* buttonbar */
+            w->lines++;
+        break;
+    case CK_Left:
+        if (w->cols > WINDOW_MIN_COLS)
+            w->cols--;
+        break;
+    case CK_Right:
+        if (w->x + w->cols < h->x + h->cols)
+            w->cols++;
+        break;
+    default:
+        return;
+    }
+
+    edit->force |= REDRAW_COMPLETELY;
+    dlg_redraw (h);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -294,8 +393,8 @@ edit_event (Gpm_Event * event, void *data)
                     local = mouse_get_local (event, w);
 
                     /* don't use widget_set_size() here to avoid double draw  */
-                    w->lines = max (2 + 2, local.y);
-                    w->cols = max (2 + LINE_STATE_WIDTH, local.x);
+                    w->lines = max (WINDOW_MIN_LINES, local.y);
+                    w->cols = max (WINDOW_MIN_COLS, local.x);
                     edit->force |= REDRAW_COMPLETELY;
                 }
 
@@ -318,6 +417,23 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
     case CK_Menu:
         edit_menu_cmd (h);
         break;
+    case CK_Quit:
+    case CK_Cancel:
+        {
+            Widget *w = (Widget *) h->current->data;
+
+            if (!edit_widget_is_editor (w) || ((WEdit *) w)->drag_state == MCEDIT_DRAG_NORMAL)
+                dlg_stop (h);
+            else
+                edit_restore_size ((WEdit *) w);
+        }
+        break;
+    case CK_WindowMove:
+    case CK_WindowResize:
+        if (edit_widget_is_editor ((Widget *) h->current->data))
+            edit_handle_move_resize ((WEdit *) h->current->data, command);
+        break;
+
     default:
         ret = MSG_NOT_HANDLED;
         break;
@@ -430,7 +546,9 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 
     case DLG_VALIDATE:
         h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
-        if (edit_ok_to_exit (edit))
+        if (edit->drag_state != MCEDIT_DRAG_NORMAL)
+            edit_restore_size (edit);
+        else if (edit_ok_to_exit (edit))
             h->state = DLG_CLOSED;
         return MSG_HANDLED;
 
@@ -569,6 +687,20 @@ edit_get_file_name (const WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Check if widget is an WEdit class.
+ *
+ * @param w probably editor object
+ * @return TRUE if widget is an WEdit class, FALSE otherwise
+ */
+
+gboolean
+edit_widget_is_editor (const Widget * w)
+{
+    return (w != NULL && w->callback == edit_callback);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_update_screen (WEdit * e)
@@ -599,6 +731,107 @@ edit_update_screen (WEdit * e)
             e->force |= REDRAW_PAGE;
         edit_render_keypress (e);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Save current window size.
+ *
+ * @param edit editor object
+ */
+
+void
+edit_save_size (WEdit * edit)
+{
+    edit->y_prev = edit->widget.y;
+    edit->x_prev = edit->widget.x;
+    edit->lines_prev = edit->widget.lines;
+    edit->cols_prev = edit->widget.cols;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Handle move/resize events.
+ *
+ * @param edit    editor object
+ * @param command action id
+ * @return TRUE if mouse actions was handled, FALSE otherwise
+ */
+
+gboolean
+edit_handle_move_resize (WEdit * edit, unsigned long command)
+{
+    gboolean ret = FALSE;
+
+    switch (edit->drag_state)
+    {
+    case MCEDIT_DRAG_NORMAL:
+        /* possible start move/resize */
+        switch (command)
+        {
+        case CK_WindowMove:
+            edit->drag_state = MCEDIT_DRAG_MOVE;
+            edit_save_size (edit);
+            ret = TRUE;
+            break;
+        case CK_WindowResize:
+            edit->drag_state = MCEDIT_DRAG_RESIZE;
+            edit_save_size (edit);
+            ret = TRUE;
+            break;
+        default:
+            break;
+        }
+        break;
+
+    case MCEDIT_DRAG_MOVE:
+        switch (command)
+        {
+        case CK_WindowResize:
+            edit->drag_state = MCEDIT_DRAG_RESIZE;
+            ret = TRUE;
+            break;
+        case CK_Up:
+        case CK_Down:
+        case CK_Left:
+        case CK_Right:
+            edit_window_move (edit, command);
+            ret = TRUE;
+            break;
+        case CK_Enter:
+        case CK_WindowMove:
+            edit->drag_state = MCEDIT_DRAG_NORMAL;
+        default:
+            ret = TRUE;
+            break;
+        }
+        break;
+
+    case MCEDIT_DRAG_RESIZE:
+        switch (command)
+        {
+        case CK_WindowMove:
+            edit->drag_state = MCEDIT_DRAG_MOVE;
+            ret = TRUE;
+            break;
+        case CK_Up:
+        case CK_Down:
+        case CK_Left:
+        case CK_Right:
+            edit_window_resize (edit, command);
+            ret = TRUE;
+            break;
+        case CK_Enter:
+        case CK_WindowResize:
+            edit->drag_state = MCEDIT_DRAG_NORMAL;
+        default:
+            ret = TRUE;
+            break;
+        }
+        break;
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

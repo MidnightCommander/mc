@@ -178,6 +178,7 @@ extern gboolean search_create_bookmark;
 
 /*** declarations of public functions ************************************************************/
 
+gboolean edit_widget_is_editor (const Widget * w);
 gboolean edit_drop_hotkey_menu (Dlg_head * h, int key);
 void edit_menu_cmd (Dlg_head * h);
 void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
@@ -261,6 +262,8 @@ void edit_info_status (WEdit * edit);
 void edit_status (WEdit * edit);
 void edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion);
 void edit_update_screen (WEdit * edit);
+void edit_save_size (WEdit * edit);
+gboolean edit_handle_move_resize (WEdit * edit, unsigned long command);
 void edit_move_to_line (WEdit * e, long line);
 void edit_move_display (WEdit * e, long line);
 void edit_word_wrap (WEdit * edit);

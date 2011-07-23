@@ -337,6 +337,8 @@ SelectCodepage = alt-e
 Options =
 OptionsSaveMode =
 LearnKeys =
+WindowMove =
+WindowResize =
 ExtendedKeyMap = ctrl-x
 
 [editor:xmap]

@@ -1,13 +1,13 @@
 /*
    Definitions of key bindings.
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2005, 2009, 2010, 2011, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Vitja Makarov, 2005
    Ilia Maslakov <il.smind@gmail.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012
 
    This file is part of the Midnight Commander.
 
@@ -311,6 +311,8 @@ static name_keymap_t command_names[] = {
     {"About", CK_About},
     /* An action to run external script from macro */
     {"ExecuteScript", CK_PipeBlock (0)},
+    {"WindowMove", CK_WindowMove},
+    {"WindowResize", CK_WindowResize},
 #endif /* USE_INTERNAL_EDIT */
 
     /* viewer */

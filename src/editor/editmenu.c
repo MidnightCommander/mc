@@ -1,11 +1,12 @@
 /*
    Editor menu definitions and initialisation
 
-   Copyright (C) 1996, 1998, 2001, 2002, 2003, 2005, 2007, 2011
+   Copyright (C) 1996, 1998, 2001, 2002, 2003, 2005, 2007, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997
+   Andrew Borodin <aborodin@vmail.ru> 2012
 
    This file is part of the Midnight Commander.
 
@@ -203,6 +204,22 @@ create_format_menu (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Create the 'window' popup menu
+ */
+
+static GList *
+create_window_menu (void)
+{
+    GList *entries = NULL;
+
+    entries = g_list_append (entries, menu_entry_create (_("&Move"), CK_WindowMove));
+    entries = g_list_append (entries, menu_entry_create (_("&Resize"), CK_WindowResize));
+
+    return entries;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static GList *
 create_options_menu (void)
@@ -264,6 +281,8 @@ edit_init_menu (struct WMenuBar *menubar)
     menubar_add_menu (menubar,
                       create_menu (_("For&mat"), create_format_menu (), "[Internal File Editor]"));
     menubar_add_menu (menubar,
+                      create_menu (_("&Window"), create_window_menu (), "[Internal File Editor]"));
+    menubar_add_menu (menubar,
                       create_menu (_("&Options"), create_options_menu (),
                                    "[Internal File Editor]"));
 }
@@ -299,8 +318,11 @@ edit_drop_hotkey_menu (Dlg_head * h, int key)
     case ALT ('m'):
         m = 4;
         break;
-    case ALT ('o'):
+    case ALT ('w'):
         m = 5;
+        break;
+    case ALT ('o'):
+        m = 6;
         break;
     default:
         return FALSE;
