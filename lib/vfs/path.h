@@ -79,4 +79,16 @@ vfs_path_element_valid (const vfs_path_element_t * element)
     return (element != NULL && element->class != NULL);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static inline char *
+vfs_path_get_last_path_str (const vfs_path_t * vpath)
+{
+    const vfs_path_element_t *element;
+    if (vpath == NULL)
+        return NULL;
+    element = vfs_path_get_by_index (vpath, -1);
+    return (element != NULL) ? element->path : NULL;
+}
+
 #endif
