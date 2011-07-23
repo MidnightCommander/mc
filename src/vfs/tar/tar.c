@@ -903,7 +903,7 @@ init_tarfs (void)
 {
     static struct vfs_s_subclass tarfs_subclass;
 
-    tarfs_subclass.flags = VFS_S_READONLY;
+    tarfs_subclass.flags = VFS_S_READONLY;       /* FIXME: tarfs used own temp files */
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
     tarfs_subclass.open_archive = tar_open_archive;

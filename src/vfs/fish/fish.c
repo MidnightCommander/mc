@@ -1560,7 +1560,7 @@ init_fish (void)
 
     tcp_init ();
 
-    fish_subclass.flags = VFS_S_REMOTE;
+    fish_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
     fish_subclass.archive_same = fish_archive_same;
     fish_subclass.open_archive = fish_open_archive;
     fish_subclass.free_archive = fish_free_archive;
