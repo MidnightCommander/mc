@@ -32,10 +32,6 @@
 #define FL_FOLLOW 1
 #define FL_DIR 4
 
-/* For vfs_s_subclass->flags */
-#define VFS_S_REMOTE 1
-#define VFS_S_READONLY 2
-
 #define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
 
 #define MEDATA ((struct vfs_s_subclass *) me->data)
@@ -51,6 +47,14 @@
 #define LS_LINEAR_PREOPEN 3
 
 /*** enums ***************************************************************************************/
+
+/* For vfs_s_subclass->flags */
+typedef enum
+{
+    VFS_S_REMOTE = 1L << 0,
+    VFS_S_READONLY = 1L << 1,
+    VFS_S_USETMP = 1L << 2,
+} vfs_subclass_flags_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -115,7 +119,7 @@ struct vfs_s_subclass
 {
     GList *supers;
     int inode_counter;
-    int flags;                  /* whether the subclass is remove, read-only etc */
+    vfs_subclass_flags_t flags; /* whether the subclass is remove, read-only etc */
     dev_t rdev;
     FILE *logfile;
     int flush;                  /* if set to 1, invalidate directory cache */
