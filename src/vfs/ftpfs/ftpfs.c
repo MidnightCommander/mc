@@ -2562,7 +2562,7 @@ init_ftpfs (void)
 
     tcp_init ();
 
-    ftpfs_subclass.flags = VFS_S_REMOTE;
+    ftpfs_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
     ftpfs_subclass.archive_same = ftpfs_archive_same;
     ftpfs_subclass.open_archive = ftpfs_open_archive;
     ftpfs_subclass.free_archive = ftpfs_free_archive;

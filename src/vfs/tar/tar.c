@@ -401,14 +401,15 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
     case TAR_USTAR:
     case TAR_POSIX:
     case TAR_GNU:
-        st->st_uid =
-            *header->header.uname ? vfs_finduid (header->header.uname) : tar_from_oct (8,
-                                                                                       header->
-                                                                                       header.uid);
-        st->st_gid =
-            *header->header.gname ? vfs_findgid (header->header.gname) : tar_from_oct (8,
-                                                                                       header->
-                                                                                       header.gid);
+        /* *INDENT-OFF* */
+        st->st_uid = *header->header.uname
+            ? vfs_finduid (header->header.uname)
+            : tar_from_oct (8, header->header.uid);
+        st->st_gid = *header->header.gname
+            ? vfs_findgid (header->header.gname)
+            : tar_from_oct (8,header->header.gid);
+        /* *INDENT-ON* */
+
         switch (header->header.linkflag)
         {
         case LF_BLK:
@@ -903,7 +904,7 @@ init_tarfs (void)
 {
     static struct vfs_s_subclass tarfs_subclass;
 
-    tarfs_subclass.flags = VFS_S_READONLY;
+    tarfs_subclass.flags = VFS_S_READONLY;       /* FIXME: tarfs used own temp files */
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
     tarfs_subclass.open_archive = tar_open_archive;
