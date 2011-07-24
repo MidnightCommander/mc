@@ -106,7 +106,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     int is_cd = 0;
     char buffer[1024];
     char *p = 0;
-    char *localcopy = NULL;
+    vfs_path_t *localcopy_vpath = NULL;
     int do_local_copy;
     time_t localmtime = 0;
     struct stat mystat;
@@ -155,10 +155,10 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                     /* User canceled */
                     fclose (cmd_file);
                     mc_unlink (file_name_vpath);
-                    if (localcopy)
+                    if (localcopy_vpath != NULL)
                     {
-                        mc_ungetlocalcopy (filename, localcopy, 0);
-                        g_free (localcopy);
+                        mc_ungetlocalcopy (vpath, localcopy_vpath, FALSE);
+                        vfs_path_free (localcopy_vpath);
                     }
                     goto ret;
                 }
@@ -223,20 +223,18 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                             {
                                 if (do_local_copy)
                                 {
-                                    vfs_path_t *vpath_local;
-
-                                    localcopy = mc_getlocalcopy (filename);
-                                    if (localcopy == NULL)
+                                    localcopy_vpath = mc_getlocalcopy (vpath);
+                                    if (localcopy_vpath == NULL)
                                     {
                                         fclose (cmd_file);
                                         mc_unlink (file_name_vpath);
                                         goto ret;
                                     }
-                                    vpath_local = vfs_path_from_str (localcopy);
-                                    mc_stat (vpath_local, &mystat);
+                                    mc_stat (localcopy_vpath, &mystat);
                                     localmtime = mystat.st_mtime;
-                                    text = quote_func (localcopy, 0);
-                                    vfs_path_free (vpath_local);
+                                    text =
+                                        quote_func (vfs_path_get_last_path_str (localcopy_vpath),
+                                                    0);
                                 }
                                 else
                                 {
@@ -382,15 +380,11 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
     g_free (cmd);
 
-    if (localcopy)
+    if (localcopy_vpath != NULL)
     {
-        vfs_path_t *vpath_local;
-
-        vpath_local = vfs_path_from_str (localcopy);
-        mc_stat (vpath_local, &mystat);
-        mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
-        vfs_path_free (vpath_local);
-        g_free (localcopy);
+        mc_stat (localcopy_vpath, &mystat);
+        mc_ungetlocalcopy (vpath, localcopy_vpath, localmtime != mystat.st_mtime);
+        vfs_path_free (localcopy_vpath);
     }
   ret:
     vfs_path_free (file_name_vpath);
@@ -512,8 +506,9 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
 
     if (*have_type == 0)
     {
+        vfs_path_t *filename_vpath;
+        vfs_path_t *localfile_vpath;
         char *realname;         /* name used with "file" */
-        char *localfile;
 
 #ifdef HAVE_CHARSET
         int got_encoding_data;
@@ -522,15 +517,20 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
         /* Don't repeate even unsuccessful checks */
         *have_type = 1;
 
-        localfile = mc_getlocalcopy (filename);
-        if (localfile == NULL)
+        filename_vpath = vfs_path_from_str (filename);
+        localfile_vpath = mc_getlocalcopy (filename_vpath);
+        if (localfile_vpath == NULL)
+        {
+            vfs_path_free (filename_vpath);
             return -1;
+        }
 
-        realname = localfile;
+        realname = vfs_path_get_last_path_str (localfile_vpath);
 
 #ifdef HAVE_CHARSET
         got_encoding_data = is_autodetect_codeset_enabled
-            ? get_file_encoding_local (localfile, encoding_id, sizeof (encoding_id)) : 0;
+            ? get_file_encoding_local (vfs_path_get_last_path_str (localfile_vpath), encoding_id,
+                                       sizeof (encoding_id)) : 0;
 
         if (got_encoding_data > 0)
         {
@@ -549,9 +549,12 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
         }
 #endif /* HAVE_CHARSET */
 
-        mc_ungetlocalcopy (filename, localfile, 0);
+        mc_ungetlocalcopy (filename_vpath, localfile_vpath, FALSE);
+        vfs_path_free (filename_vpath);
 
-        got_data = get_file_type_local (localfile, content_string, sizeof (content_string));
+        got_data =
+            get_file_type_local (vfs_path_get_last_path_str (localfile_vpath), content_string,
+                                 sizeof (content_string));
 
         if (got_data > 0)
         {
@@ -583,7 +586,7 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
             /* No data */
             content_string[0] = '\0';
         }
-        g_free (realname);
+        vfs_path_free (localfile_vpath);
     }
 
     if (got_data == -1)

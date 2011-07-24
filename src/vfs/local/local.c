@@ -294,18 +294,16 @@ local_rmdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static vfs_path_t *
 local_getlocalcopy (const vfs_path_t * vpath)
 {
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
-
-    return g_strdup (path_element->path);
+    return vfs_path_clone (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_changed)
+local_ungetlocalcopy (const vfs_path_t * vpath, const vfs_path_t * local, gboolean has_changed)
 {
     (void) vpath;
     (void) local;
