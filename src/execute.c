@@ -438,8 +438,6 @@ execute_suspend (const gchar * event_group_name, const gchar * event_name,
 void
 execute_with_vfs_arg (const char *command, const char *filename)
 {
-    char *localcopy;
-    char *fn;
     struct stat st;
     time_t mtime;
     vfs_path_t *vpath = vfs_path_from_str (filename);
@@ -448,40 +446,38 @@ execute_with_vfs_arg (const char *command, const char *filename)
     /* Simplest case, this file is local */
     if (!filename || vfs_file_is_local (vpath))
     {
-        fn = vfs_path_to_str (vpath);
-        do_execute (command, fn, EXECUTE_INTERNAL);
-        g_free (fn);
+        do_execute (command, vfs_path_get_last_path_str (vpath), EXECUTE_INTERNAL);
         vfs_path_free (vpath);
         return;
     }
-    vfs_path_free (vpath);
 
     /* FIXME: Creation of new files on VFS is not supported */
     if (!*filename)
-        return;
-
-    localcopy = mc_getlocalcopy (filename);
-    if (localcopy == NULL)
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
+        vfs_path_free (vpath);
         return;
     }
-    localcopy_vpath = vfs_path_from_str (localcopy);
+
+    localcopy_vpath = mc_getlocalcopy (vpath);
+    if (localcopy_vpath == NULL)
+    {
+        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
+        vfs_path_free (vpath);
+        return;
+    }
 
     /*
      * filename can be an entry on panel, it can be changed by executing
      * the command, so make a copy.  Smarter VFS code would make the code
      * below unnecessary.
      */
-    fn = g_strdup (filename);
     mc_stat (localcopy_vpath, &st);
     mtime = st.st_mtime;
-    do_execute (command, localcopy, EXECUTE_INTERNAL);
+    do_execute (command, vfs_path_get_last_path_str (localcopy_vpath), EXECUTE_INTERNAL);
     mc_stat (localcopy_vpath, &st);
-    mc_ungetlocalcopy (fn, localcopy, mtime != st.st_mtime);
-    g_free (localcopy);
+    mc_ungetlocalcopy (vpath, localcopy_vpath, mtime != st.st_mtime);
     vfs_path_free (localcopy_vpath);
-    g_free (fn);
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

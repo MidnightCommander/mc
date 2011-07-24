@@ -182,8 +182,9 @@ typedef struct vfs_class
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
 
-    char *(*getlocalcopy) (const vfs_path_t * vpath);
-    int (*ungetlocalcopy) (const vfs_path_t * vpath, const char *local, int has_changed);
+    vfs_path_t *(*getlocalcopy) (const vfs_path_t * vpath);
+    int (*ungetlocalcopy) (const vfs_path_t * vpath, const vfs_path_t * local_vpath,
+                           gboolean has_changed);
 
     int (*mkdir) (const vfs_path_t * vpath, mode_t mode);
     int (*rmdir) (const vfs_path_t * vpath);
@@ -299,8 +300,9 @@ int mc_ctl (int fd, int ctlop, void *arg);
 int mc_setctl (const vfs_path_t * vpath, int ctlop, void *arg);
 int mc_open (const vfs_path_t * vpath, int flags, ...);
 char *mc_get_current_wd (char *buffer, size_t bufsize);
-char *mc_getlocalcopy (const char *pathname);
-int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
+vfs_path_t *mc_getlocalcopy (const vfs_path_t * pathname_vpath);
+int mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_vpath,
+                       gboolean has_changed);
 int mc_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *suffix);
 
 /* Creating temporary files safely */

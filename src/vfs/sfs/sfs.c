@@ -74,7 +74,7 @@
         return -1; \
     } \
     else \
-        *t++ = *s;
+        *t++ = *s_iter;
 
 #define COPY_STRING(a) \
     if ((t - pad) + strlen(a) > sizeof(pad)) \
@@ -124,52 +124,58 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
 {
     int w;
     char pad[10240];
-    char *s, *t = pad;
+    char *s_iter, *t = pad;
     int was_percent = 0;
-    char *pname;                /* name of parent archive */
+    vfs_path_t *pname, *s;      /* name of parent archive */
     char *pqname;               /* name of parent archive, quoted */
     vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    pname = vfs_path_to_str_elements_count (vpath, -1);
+    pname = vfs_path_clone (vpath);
+    vfs_path_remove_element_by_index (pname, -1);
+
     w = (*path_element->class->which) (path_element->class, path_element->vfs_prefix);
     if (w == -1)
         vfs_die ("This cannot happen... Hopefully.\n");
 
-    if (!(sfs_flags[w] & F_1) && strcmp (pname, "/"))
+    if ((sfs_flags[w] & F_1) == 0 && strcmp (vfs_path_get_last_path_str (pname), PATH_SEP_STR) != 0)
     {
-        g_free (pname);
+        vfs_path_free (pname);
         return -1;
     }
 
     /*    if ((sfs_flags[w] & F_2) || (!inpath) || (!*inpath)); else return -1; */
-    if (!(sfs_flags[w] & F_NOLOCALCOPY))
+    if ((sfs_flags[w] & F_NOLOCALCOPY) == 0)
     {
         s = mc_getlocalcopy (pname);
-        if (!s)
+        if (s == NULL)
         {
-            g_free (pname);
+            vfs_path_free (pname);
             return -1;
         }
-        pqname = name_quote (s, 0);
-        g_free (s);
+        pqname = name_quote (vfs_path_get_last_path_str (s), 0);
+        vfs_path_free (s);
     }
     else
     {
-        pqname = name_quote (pname, 0);
+        char *pname_str;
+
+        pname_str = vfs_path_to_str (pname);
+        pqname = name_quote (pname_str, 0);
+        g_free (pname_str);
     }
-    g_free (pname);
+    vfs_path_free (pname);
 
 
-    for (s = sfs_command[w]; *s; s++)
+    for (s_iter = sfs_command[w]; *s_iter != '\0'; s_iter++)
     {
         if (was_percent)
         {
-
             const char *ptr = NULL;
+
             was_percent = 0;
 
-            switch (*s)
+            switch (*s_iter)
             {
             case '1':
                 ptr = pqname;
@@ -193,7 +199,7 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
         }
         else
         {
-            if (*s == '%')
+            if (*s_iter == '%')
                 was_percent = 1;
             else
                 COPY_CHAR;
@@ -392,16 +398,16 @@ sfs_nothingisopen (vfsid id)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static vfs_path_t *
 sfs_getlocalcopy (const vfs_path_t * vpath)
 {
-    return g_strdup (sfs_redirect (vpath));
+    return vfs_path_from_str (sfs_redirect (vpath));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_ungetlocalcopy (const vfs_path_t * vpath, const char *local, int has_changed)
+sfs_ungetlocalcopy (const vfs_path_t * vpath, const vfs_path_t * local, gboolean has_changed)
 {
     (void) vpath;
     (void) local;
