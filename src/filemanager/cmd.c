@@ -78,8 +78,8 @@
 
 #include "fileopctx.h"
 #include "file.h"               /* file operation routines */
-#include "find.h"               /* do_find() */
-#include "hotlist.h"            /* hotlist_cmd() */
+#include "find.h"               /* find_file() */
+#include "hotlist.h"            /* hotlist_show() */
 #include "tree.h"               /* tree_chdir() */
 #include "midnight.h"           /* change_panel() */
 #include "usermenu.h"           /* MC_GLOBAL_MENU */
@@ -933,7 +933,7 @@ delete_cmd_local (void)
 void
 find_cmd (void)
 {
-    do_find ();
+    find_file ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
