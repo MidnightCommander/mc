@@ -1221,7 +1221,7 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     const char *crpath;
     char *rpath, *str_path;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath2, -1);
 
     crpath = vfs_s_get_path (vpath2, &super, 0);
     if (crpath == NULL)
