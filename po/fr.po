@@ -2,19 +2,19 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-04-08 10:07+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
+"POT-Creation-Date: 2011-04-04 10:36+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: French <None>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -494,8 +494,8 @@ msgstr "fish : attente de la première ligne..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
-"Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe "
-"pour l'instant."
+"Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe"
+" pour l'instant."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -791,7 +791,8 @@ msgid "vfs_info is not fs!"
 msgstr " vfs_info n'est pas fs !"
 
 msgid "You have to chdir to extract files first"
-msgstr " Vous devez changer de répertoire pour extraire les fichier en premier"
+msgstr ""
+" Vous devez changer de répertoire pour extraire les fichier en premier"
 
 msgid "while iterating over blocks"
 msgstr " lors de l'itération sur les blocs"
@@ -1874,7 +1875,8 @@ msgstr "Ordre de tri"
 msgid "Confirmation"
 msgstr " Confirmation "
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr " Confirmation|Nettoyage de l'&Historique"
@@ -2254,8 +2256,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+"want to copy it from %smc.ext or use that file as an example of how to write"
+" it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -3538,8 +3540,7 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Le fichier %s n'appartient ni à vous ni au root ou tout le monde peux y "
-"écrire.\n"
+"Le fichier %s n'appartient ni à vous ni au root ou tout le monde peux y écrire.\n"
 "Son utilisation peut compromettre la sécurité du système"
 
 msgid "Format error on file Extensions File"

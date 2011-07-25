@@ -1,22 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-04-08 10:07+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
+"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"PO-Revision-Date: 2011-07-06 14:55+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Belarusian <>\n"
-"Language: be\n"
+"Language-Team: Belarusian (http://www.transifex.net/projects/p/mc/team/be/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Language: be\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Увага: не ўдаецца загрузіць спіс кадовак"
@@ -927,6 +926,23 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"-colors KEYWORD={FORE},{BACK} \n"
+"\n"
+"{FORE} і {BACK} НАЗАД можа быць апушчаны, тады значэннi  па змаўчанні будуць выкарыстоўваны\n"
+"\n"
+"Ключавыя словы:\n"
+"   Глабальная:     errors, disabled, reverse, gauge, header\n"
+"                  input, inputmark, inputunchanged, commandlinemark\n"
+"                  bbarhotkey, bbarbutton, statusbar\n"
+"   Адлюстраванне файлаў: normal, selected, marked, markselect\n"
+"   Дыялогi:       dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                   errdhotfocus\n"
+"   Меню:          menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Усплывальныя меню: pmenunormal, pmenusel, pmenutitle\n"
+"   Рэдактар:      editnormal, editbold, editmarked, editwhitespace,\n"
+"                    editlinestate\n"
+"   Прагляднік:    viewbold, viewunderline, viewselected\n"
+"   Даведка:       helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names
 msgid ""
@@ -960,8 +976,7 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Калі ласка, пасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -"
-"V')\n"
+"Калі ласка, пасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -V')\n"
 "як цiкеты на www.midnight-commander.org\n"
 
 #, c-format
@@ -1899,7 +1914,8 @@ msgstr "Парадак сартавання"
 msgid "Confirmation"
 msgstr " Запыт пацверджання"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Ачыстка &гiсторыi"
@@ -2286,8 +2302,8 @@ msgstr "памылка файла ~/%s"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+"want to copy it from %smc.ext or use that file as an example of how to write"
+" it."
 msgstr ""
 "Фармат файла %smc.ext зменены з версіі 3.0. Вы можаце або скапіяваць яго з "
 "%smc.ext або выкарыстаць гэты файл як прыклад і напісаць свой."
@@ -2360,8 +2376,7 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Немагчыма стварыць устойлівыя сiмв спасылкі праз нелокальные файлавыя "
-"сістэмы:\n"
+"Немагчыма стварыць устойлівыя сiмв спасылкі праз нелокальные файлавыя сістэмы:\n"
 "\n"
 "Опцыя \"Устойлівыя сімвалічныя спасылкі\" будзе адменена"
 
@@ -3242,8 +3257,8 @@ msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] "У вас %zd адкрыты экран. Усё роўна выйсці?"
 msgstr[1] "У вас %zd адкрытых экрана. Усё роўна выйсці?"
-msgstr[2] "У вас %zd адкрытых экранў. Усё роўна выйсці?"
-msgstr[3] "У вас %zd адкрытых экранў. Усё роўна выйсці?"
+msgstr[2] "У вас %zd адкрытых экранаў. Усё роўна выйсці?"
+msgstr[3] "У вас %zd адкрытых экранаў. Усё роўна выйсці?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3381,7 +3396,7 @@ msgid "A&uto save panels setup"
 msgstr "Аўтазахаванне наладак панэлі"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "Просты а&бмен"
 
 msgid "Re&verse files only"
 msgstr "Ін&вертаваць толькі файлы"
@@ -3579,7 +3594,8 @@ msgid "Pipe close failed"
 msgstr "Збой закрыцця каналу"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr "Немагчыма выканаць гэтую каманду, знаходзячыся не ў лакальным каталогу"
+msgstr ""
+"Немагчыма выканаць гэтую каманду, знаходзячыся не ў лакальным каталогу"
 
 msgid "Find rejects after patching"
 msgstr "Знайсці карэктуры, адкінутыя камандай patch"
@@ -3966,4 +3982,6 @@ msgid "Search done"
 msgstr "Пошук скончаны"
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "Працягнуць з пачатку?"
+
+

@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# David Martin <dmartina@excite.com>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-04-08 10:07+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Spanish (Castilian) <None>\n"
-"Language: es\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
+"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"PO-Revision-Date: 2011-04-28 19:01+0000\n"
+"Last-Translator: dmartina <dmartina@excite.com>\n"
+"Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/mc/team/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -926,6 +927,23 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors CONTEXTO={FRENTE},{FONDO}\n"
+"\n"
+"{FRENTE} y {FONDO} se pueden omitir y se utilizará el valor estándar\n"
+"\n"
+" Contextos:\n"
+"   Globales:           errors, disabled, reverse, gauge, header\n"
+"                       input, inputmark, inputunchanged, commandlinemark\n"
+"                       bbarhotkey, bbarbutton, statusbar\n"
+"   Visor de archivos:  normal, selected, marked, markselect\n"
+"   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
+"                       errdhotnormal, errdhotfocus\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús emergentes:   pmenunormal, pmenusel, pmenutitle\n"
+"   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
+"                       editlinestate\n"
+"   Visor:              viewbold, viewunderline, viewselected\n"
+"   Ayuda:              helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names
 msgid ""
@@ -1899,7 +1917,8 @@ msgstr "Ordenar"
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "borrar &Historia"
@@ -2288,8 +2307,8 @@ msgstr "error en el archivo ~/%s"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+"want to copy it from %smc.ext or use that file as an example of how to write"
+" it."
 msgstr ""
 "El archivo ~/%s ha cambiado con la versión 3.0.\n"
 "Puede hacer una copia de %smc.ext o bien emplearlo\n"
@@ -3381,7 +3400,7 @@ msgid "A&uto save panels setup"
 msgstr "a&Uto-guarda configuración"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "intercambio de paneles &Simple"
 
 msgid "Re&verse files only"
 msgstr "&Invertir sólo archivos"
@@ -3961,4 +3980,6 @@ msgid "Search done"
 msgstr "Búsqueda finalizada"
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "¿Continuar desde el principio?"
+
+

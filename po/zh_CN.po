@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Jake Li <gnozil@gmail.com>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-04-08 10:07+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
+"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"PO-Revision-Date: 2011-04-08 07:11+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Chinese (China) <None>\n"
-"Language: zh_CN\n"
+"Language-Team: Chinese (China) (http://www.transifex.net/projects/p/mc/team/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
@@ -1897,7 +1898,8 @@ msgstr "排序"
 msgid "Confirmation"
 msgstr "确认"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
@@ -2271,9 +2273,7 @@ msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
-msgstr ""
-"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
-"Commander软件包。"
+msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
 
 #, c-format
 msgid "~/%s file error"
@@ -2282,11 +2282,9 @@ msgstr "~/%s文件错误"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
-"文件的样例。"
+"want to copy it from %smc.ext or use that file as an example of how to write"
+" it."
+msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
@@ -3949,3 +3947,5 @@ msgstr "搜索完成"
 
 msgid "Continue from beginning?"
 msgstr "从开始处继续？"
+
+
