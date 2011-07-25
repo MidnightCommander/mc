@@ -2,20 +2,21 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-07-25 16:33+0400\n"
+"PO-Revision-Date: 2011-07-25 16:45+0400\n"
+"Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Внимание: невозможно загрузить список кодировок"
@@ -494,8 +495,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: ожидается начальная строка..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Извините, сейчас невозможно создать авторизованные паролем соединения."
+msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -928,6 +928,26 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН}\n"
+"\n"
+"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
+"\n"
+"Ключевые слова:\n"
+"   Общие:              errors, disabled, reverse, gauge, header\n"
+"                       input, inputmark, inputunchanged, commandlinemark\n"
+"                       bbarhotkey, bbarbutton, statusbar\n"
+"   Отображение файлов: normal, selected, marked, markselect\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
+"                       errdhotfocus\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
+"   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
+"   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
+"                       editlinestate\n"
+"   Просмотрщик:        viewbold, viewunderline, viewselected\n"
+"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
+"helpslink\n"
 
 #. TRANSLATORS: don't translate color names
 msgid ""
@@ -1899,8 +1919,7 @@ msgstr "Порядок сортировки"
 msgid "Confirmation"
 msgstr "Подтверждение"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "&Очистка истории"
@@ -2026,6 +2045,18 @@ msgstr "присв. GID при выполнении"
 msgid "set user ID on execution"
 msgstr "присв. UID при выполнении"
 
+msgid "Name:"
+msgstr "Имя:"
+
+msgid "Permissions (octal):"
+msgstr "Доступ (восьмеричный):"
+
+msgid "Owner name:"
+msgstr "Владелец:"
+
+msgid "Group name:"
+msgstr "Группа:"
+
 msgid "C&lear marked"
 msgstr "&Очистить помеченное"
 
@@ -2034,30 +2065,6 @@ msgstr "Уста&новить помеченное"
 
 msgid "&Marked all"
 msgstr "Отметить &всё"
-
-msgid "Name"
-msgstr "Имя"
-
-msgid "Permissions (Octal)"
-msgstr "Доступ (восьмеричный)"
-
-msgid "Owner name"
-msgstr "Имя владельца"
-
-msgid "Group name"
-msgstr "Имя группы"
-
-msgid "Use SPACE to change"
-msgstr "ПРОБЕЛ - для изменений"
-
-msgid "an option, ARROW KEYS"
-msgstr "опций, КЛАВИШИ-СТРЕЛКИ -"
-
-msgid "to move between options"
-msgstr "перемещения между настройками"
-
-msgid "and T or INS to mark"
-msgstr "и T или INS для пометки"
 
 msgid "Chmod command"
 msgstr "Команда chmod"
@@ -2073,6 +2080,15 @@ msgstr "Установить поль&зователей"
 
 msgid "Set &groups"
 msgstr "Установить &группы"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Owner name"
+msgstr "Имя владельца"
+
+msgid "Group name"
+msgstr "Имя группы"
 
 msgid "Size"
 msgstr "Размер"
@@ -2242,6 +2258,10 @@ msgstr "Настройка"
 msgid "Setup saved to ~/%s"
 msgstr "Параметры сохранены в ~/%s"
 
+#, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Невозможно сохранить установки в ~/%s"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Невозможно выполнять команды на нелокальных файловых системах"
 
@@ -2277,8 +2297,8 @@ msgid ""
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при "
-"установке.Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
+"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке."
+"Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
 msgid "~/%s file error"
@@ -2287,11 +2307,11 @@ msgstr "ошибка файла ~/%s"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"Формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с"
-" %smc.ext либо использовать этот файл как пример и написать свой."
+"Формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с "
+"%smc.ext либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2361,7 +2381,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Невозможно создать устойчивые симв. ссылки через нелокальные файловыесистемы:\n"
+"Невозможно создать устойчивые симв. ссылки через нелокальные "
+"файловыесистемы:\n"
 "\n"
 "Опция \"Устойчивые символические ссылки\" будет отменена"
 
@@ -2375,6 +2396,33 @@ msgstr ""
 
 msgid "&Abort"
 msgstr "&Прервать"
+
+msgid "&Retry"
+msgstr "По&вторить"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Каталог не пуст.\n"
+"Удалить рекурсивно?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Фоновый процесс: каталог не пуст.\n"
+"Удалить рекурсивно?"
+
+msgid "Delete:"
+msgstr "Удалить:"
+
+msgid "Non&e"
+msgstr "Ни &одного"
 
 #, c-format
 msgid ""
@@ -2431,33 +2479,6 @@ msgid ""
 msgstr ""
 "Невозможно удалить каталог \"%s\"\n"
 "%s"
-
-msgid "&Retry"
-msgstr "По&вторить"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Каталог не пуст.\n"
-"Удалить рекурсивно?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Фоновый процесс: каталог не пуст.\n"
-"Удалить рекурсивно?"
-
-msgid "Delete:"
-msgstr "Удалить:"
-
-msgid "Non&e"
-msgstr "Ни &одного"
 
 #, c-format
 msgid ""
@@ -2840,7 +2861,7 @@ msgid "Searching"
 msgstr "Ищем"
 
 msgid "&Move"
-msgstr "Пере&местить блок"
+msgstr "Пере&местить"
 
 msgid "&Remove"
 msgstr "&Удалить"
@@ -3024,12 +3045,6 @@ msgstr "Права: %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Положение: %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Вертикальное"
-
-msgid "&Horizontal"
-msgstr "&Горизонтальное"
-
 msgid "Show free sp&ace"
 msgstr "Сво&бодное место"
 
@@ -3062,6 +3077,12 @@ msgstr "Консольный вывод"
 
 msgid "Other options"
 msgstr "Прочие настройки"
+
+msgid "&Vertical"
+msgstr "&Вертикальное"
+
+msgid "&Horizontal"
+msgstr "&Горизонтальное"
 
 msgid "Output lines:"
 msgstr "Строки вывода:"
@@ -3380,7 +3401,7 @@ msgid "A&uto save panels setup"
 msgstr "&Автосохранение настроек панелей"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "Прос&тая перестановка"
 
 msgid "Re&verse files only"
 msgstr "Ин&вертировать только файлы"
@@ -3963,4 +3984,4 @@ msgid "Search done"
 msgstr "Поиск закончен"
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "Продолжить с начала?"
