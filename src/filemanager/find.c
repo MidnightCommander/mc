@@ -1604,7 +1604,6 @@ find_file (void)
     ssize_t start_dir_len;
     char *filename = NULL, *dirname = NULL;
     int v;
-    gboolean dir_and_file_set;
 
     while (find_parameters (&start_dir, &start_dir_len, &pattern, &content))
     {
@@ -1635,7 +1634,6 @@ find_file (void)
         }
 
         g_free (content);
-        dir_and_file_set = (dirname != NULL) && (filename != NULL);
         g_free (dirname);
         g_free (filename);
 
@@ -1644,12 +1642,8 @@ find_file (void)
 
         if (v == B_PANELIZE)
         {
-            if (dir_and_file_set)
-            {
-                try_to_select (current_panel, NULL);
-                panel_re_sort (current_panel);
-                try_to_select (current_panel, NULL);
-            }
+            panel_re_sort (current_panel);
+            try_to_select (current_panel, NULL);
             break;
         }
     }
