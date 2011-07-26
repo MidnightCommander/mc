@@ -1,3 +1,35 @@
+Version 4.7.5.3
+
+- Core
+
+    * Optimized loading and saving of configurations and histories (#2541)
+    * Reimplemented i18n support in 'Chmod' dialog window (#2557)
+
+- Misc
+
+    * New file bindings:
+        - .mts: handle as videofile (#2566)
+        - .torrent: view using ctorrent (#2562)
+
+- Fixes:
+
+    * If active panel changed type from file listing to info, inactive panel is not become active (#2459)
+    * Incorrect files mark by mouse (#2556)
+    * Panelize content is lost when doing F5/F6/F8 on a file on the other panel (#2312)
+    * Search dialog trims leading spaces in input field (#2544)
+    * Wrong Backspace key behavior in QuickSearch mode if BS key is mapped to CdParentSmart action (#2522)
+    * Find file: broken lynx-like navigation in panelization of search result (#2491)
+    * Hex search: incorrect length usage in hexadecimal search (#2579)
+    * Editor: incorrect Pascal syntax highlighting (#2531)
+    * Viewer: fixed problems while displaying UTF-8 manual pages (#1629)
+    * Viewer: fixed incorrect starting offset for 'search again' (#2294)
+    * Viewer: fixed search finds bold/underlined strings twice and highlight search results (#265)
+    * VFS: bashisms in extfs (#2569)
+    * VFS: patchfs incorrectly works with filenames containing spaces (#2572)
+    * VFS: ftpfs: fixed access to file names starting with space (#81)
+    * Browsing *.deb files is broken with latest Perl (#2552)
+
+
 Version 4.7.5.2
 
 - Editor
