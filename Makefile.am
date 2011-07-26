@@ -19,7 +19,10 @@ update-version:
 	@if test -x $(top_srcdir)/maint/version.sh; then \
 	    $(top_srcdir)/maint/version.sh "$(top_srcdir)" 2>&1 >/dev/null; \
 	else \
-	    echo "File not found: $(top_srcdir)/maint/version.sh"; \
+	    if test ! -e $(top_srcdir)/version.h; then \
+	        echo "File not found: $(top_srcdir)/maint/version.sh"; \
+	        exit 1; \
+	    fi; \
 	fi
 
 $(top_srcdir)/version.h: update-version
