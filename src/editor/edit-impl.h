@@ -183,7 +183,7 @@ gboolean edit_drop_hotkey_menu (Dlg_head * h, int key);
 void edit_menu_cmd (Dlg_head * h);
 void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (struct WMenuBar *menubar);
-void menu_save_mode_cmd (void);
+void edit_save_mode_cmd (void);
 gboolean edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);
 int edit_get_utf (WEdit * edit, long byte_index, int *char_width);

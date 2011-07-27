@@ -1562,7 +1562,7 @@ edit_refresh_cmd (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-menu_save_mode_cmd (void)
+edit_save_mode_cmd (void)
 {
     /* diaog sizes */
     const int DLG_X = 38;

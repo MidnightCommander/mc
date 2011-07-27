@@ -61,7 +61,6 @@
 #include "lib/charsets.h"       /* get_codepage_id */
 #endif
 
-#include "src/filemanager/cmd.h"        /* view_other_cmd() */
 #include "src/filemanager/usermenu.h"   /* user_menu_cmd() */
 
 #include "src/setup.h"          /* option_tab_spacing */
@@ -4128,17 +4127,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Refresh:
         edit_refresh_cmd (edit);
         break;
-    case CK_SaveSetup:
-        save_setup_cmd ();
-        break;
-    case CK_LearnKeys:
-        learn_keys ();
-        break;
     case CK_Options:
         edit_options_dialog (edit);
-        break;
-    case CK_OptionsSaveMode:
-        menu_save_mode_cmd ();
         break;
     case CK_Date:
         {
@@ -4177,9 +4167,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
     case CK_Mail:
         edit_mail_dialog (edit);
-        break;
-    case CK_Shell:
-        view_other_cmd ();
         break;
 #ifdef HAVE_CHARSET
     case CK_SelectCodepage:
