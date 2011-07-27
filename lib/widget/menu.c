@@ -855,7 +855,7 @@ menubar_arrange (WMenuBar * menubar)
     gap = menubar->widget.cols - 2;
 
     /* First, calculate gap between items... */
-    for (i = menubar->menu; i != NULL; i = g_list_nwxt (i))
+    for (i = menubar->menu; i != NULL; i = g_list_next (i))
     {
         Menu *menu = i->data;
         /* preserve length here, to be used below */
@@ -872,7 +872,7 @@ menubar_arrange (WMenuBar * menubar)
     }
 
     /* ...and now fix start positions of menubar items */
-    for (i = menubar->menu; i != NULL; i = g_list_nwxt (i))
+    for (i = menubar->menu; i != NULL; i = g_list_next (i))
     {
         Menu *menu = i->data;
         int len = menu->start_x;
