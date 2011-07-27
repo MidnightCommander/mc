@@ -296,6 +296,10 @@ type/^Info\ text
 shell/.info
 	Open=info -f %f
 
+# Exception: .3gp are video files not manual pages
+regex/\.(3[gG][pP])$
+	Include=video
+
 # Manual page
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])|\.man)$
 	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
