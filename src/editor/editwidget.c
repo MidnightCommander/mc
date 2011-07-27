@@ -56,6 +56,8 @@
 
 #include "src/keybind-defaults.h"
 #include "src/main.h"           /* home_dir */
+#include "src/filemanager/cmd.h"        /* view_other_cmd(), save_setup_cmd()  */
+#include "src/learn.h"          /* learn_keys() */
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -480,10 +482,22 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
     case CK_About:
         edit_about ();
         break;
+    case CK_Shell:
+        view_other_cmd ();
+        break;
+    case CK_LearnKeys:
+        learn_keys ();
+        break;
     case CK_WindowMove:
     case CK_WindowResize:
         if (edit_widget_is_editor ((Widget *) h->current->data))
             edit_handle_move_resize ((WEdit *) h->current->data, command);
+        break;
+    case CK_OptionsSaveMode:
+        edit_save_mode_cmd ();
+        break;
+    case CK_SaveSetup:
+        save_setup_cmd ();
         break;
     default:
         ret = MSG_NOT_HANDLED;
