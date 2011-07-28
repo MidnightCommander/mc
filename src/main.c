@@ -114,6 +114,11 @@ char *widget_btn_right_sign = NULL;
 char *widget_btn_left_default_sign = NULL;
 char *widget_btn_right_default_sign = NULL;
 
+int widget_edit_tab_first = '<';
+int widget_edit_tab_middle = '-';
+int widget_edit_tab_last = '>';
+
+
 /* index to record_macro_buf[], -1 if not recording a macro */
 int macro_index = -1;
 

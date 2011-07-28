@@ -160,6 +160,10 @@ extern char *widget_btn_right_sign;
 extern char *widget_btn_left_default_sign;
 extern char *widget_btn_right_default_sign;
 
+extern int widget_edit_tab_first;
+extern int widget_edit_tab_middle;
+extern int widget_edit_tab_last;
+
 extern GList *top_dlg;
 
 /* A hook list for idle events */

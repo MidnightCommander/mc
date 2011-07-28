@@ -434,31 +434,31 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                             c = p->style | MOD_WHITESPACE;
                         if (i > 2)
                         {
-                            p->ch = '<';
+                            p->ch = widget_edit_tab_first;
                             p->style = c;
                             p++;
                             while (--i > 1)
                             {
-                                p->ch = '-';
+                                p->ch = widget_edit_tab_middle;
                                 p->style = c;
                                 p++;
                             }
-                            p->ch = '>';
+                            p->ch = widget_edit_tab_last;
                             p->style = c;
                             p++;
                         }
                         else if (i > 1)
                         {
-                            p->ch = '<';
+                            p->ch = widget_edit_tab_first;
                             p->style = c;
                             p++;
-                            p->ch = '>';
+                            p->ch = widget_edit_tab_last;
                             p->style = c;
                             p++;
                         }
                         else
                         {
-                            p->ch = '>';
+                            p->ch = widget_edit_tab_last;
                             p->style = c;
                             p++;
                         }

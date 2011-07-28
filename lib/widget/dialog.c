@@ -806,10 +806,32 @@ dlg_set_default_colors (void)
 void
 dlg_load_skin_decor (void)
 {
+    char *tmp_str = NULL;
+    int res;
+
     widget_btn_left_sign = mc_skin_get ("widget-button", "left-sign", "[ ");
     widget_btn_right_sign = mc_skin_get ("widget-button", "right-sign", " ]");
     widget_btn_left_default_sign = mc_skin_get ("widget-button", "left-default-sign", "[< ");
     widget_btn_right_default_sign = mc_skin_get ("widget-button", "right-default-sign", " >]");
+
+    tmp_str = mc_skin_get ("widget-edit", "tab-first-char", "<");
+    res = g_utf8_get_char_validated (tmp_str, -1);
+    if (res > 0)
+        widget_edit_tab_first = res;
+    g_free (tmp_str);
+
+    tmp_str = mc_skin_get ("widget-edit", "tab-middle-char", "-");
+    res = g_utf8_get_char_validated (tmp_str, -1);
+    if (res > 0)
+        widget_edit_tab_middle = res;
+    g_free (tmp_str);
+
+    tmp_str = mc_skin_get ("widget-edit", "tab-last-char", ">");
+    res = g_utf8_get_char_validated (tmp_str, -1);
+    if (res > 0)
+        widget_edit_tab_last = res;
+    g_free (tmp_str);
+
 }
 
 /* --------------------------------------------------------------------------------------------- */
