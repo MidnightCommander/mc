@@ -720,8 +720,8 @@ edit_file (const vfs_path_t * _file_vpath, int line)
 {
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
-    WEdit *wedit;
     WMenuBar *menubar;
+    gboolean ok;
 
     if (!made_directory)
     {
@@ -740,11 +740,6 @@ edit_file (const vfs_path_t * _file_vpath, int line)
         g_free (dir);
     }
 
-    wedit = edit_init (NULL, 1, 0, LINES - 2, COLS, _file_vpath, line);
-
-    if (wedit == NULL)
-        return FALSE;
-
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
         create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback, NULL,
@@ -757,20 +752,18 @@ edit_file (const vfs_path_t * _file_vpath, int line)
     add_widget (edit_dlg, menubar);
     edit_init_menu (menubar);
 
-    init_widget (&wedit->widget, wedit->widget.y, wedit->widget.x,
-                 wedit->widget.lines, wedit->widget.cols, edit_callback, edit_event);
-    widget_want_cursor (wedit->widget, TRUE);
-
-    add_widget (edit_dlg, wedit);
-
     add_widget (edit_dlg, buttonbar_new (TRUE));
 
-    run_dlg (edit_dlg);
+    ok = edit_add_window (edit_dlg, edit_dlg->y + 1, edit_dlg->x,
+                          edit_dlg->lines - 2, edit_dlg->cols, _file_vpath, line);
 
-    if (edit_dlg->state == DLG_CLOSED)
+    if (ok)
+        run_dlg (edit_dlg);
+
+    if (!ok || edit_dlg->state == DLG_CLOSED)
         destroy_dlg (edit_dlg);
 
-    return TRUE;
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -782,12 +775,6 @@ edit_get_file_name (const WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Check if widget is an WEdit class.
- *
- * @param w probably editor object
- * @return TRUE if widget is an WEdit class, FALSE otherwise
- */
 
 WEdit *
 find_editor (const Dlg_head * h)
@@ -796,6 +783,12 @@ find_editor (const Dlg_head * h)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Check if widget is an WEdit class.
+ *
+ * @param w probably editor object
+ * @return TRUE if widget is an WEdit class, FALSE otherwise
+ */
 
 gboolean
 edit_widget_is_editor (const Widget * w)
@@ -850,6 +843,42 @@ edit_save_size (WEdit * edit)
     edit->x_prev = edit->widget.x;
     edit->lines_prev = edit->widget.lines;
     edit->cols_prev = edit->widget.cols;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Create new editor window and insert it into editor screen.
+ *
+ * @param h     editor dialog (screen)
+ * @param y     y coordinate
+ * @param x     x coordinate
+ * @param lines window height
+ * @param cols  window width
+ * @param f     file object
+ * @param fline line number in file
+ * @return TRUE if new window was successfully created and inserted into editor screen,
+ *         FALSE otherwise
+ */
+
+gboolean
+edit_add_window (Dlg_head * h, int y, int x, int lines, int cols, const vfs_path_t *f, int fline)
+{
+    WEdit *edit;
+    Widget *w;
+
+    edit = edit_init (NULL, y, x, lines, cols, f, fline);
+    if (edit == NULL)
+        return FALSE;
+
+    w = (Widget *) edit;
+    w->callback = edit_callback;
+    w->mouse = edit_event;
+    widget_want_cursor (*w, TRUE);
+
+    add_widget (h, w);
+    dlg_redraw (h);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

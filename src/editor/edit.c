@@ -448,7 +448,10 @@ edit_load_file (WEdit * edit)
 
         /* If we are dealing with a real file, check that it exists */
         if (!check_file_access (edit, edit->filename_vpath, &edit->stat1))
+        {
+            edit_clean (edit);
             return FALSE;
+        }
     }
     else
     {
@@ -2178,7 +2181,9 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     else
         option_line_state_width = 0;
 
-    if (edit == NULL)
+    if (edit != NULL)
+        edit_purge_widget (edit);
+    else
     {
 #ifdef ENABLE_NLS
         /*
@@ -2208,11 +2213,9 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
         }
 #endif /* ENABLE_NLS */
         edit = g_malloc0 (sizeof (WEdit));
-        edit->search = NULL;
         to_free = TRUE;
     }
 
-    edit_purge_widget (edit);
     edit->drag_state = MCEDIT_DRAG_NORMAL;
     edit->widget.y = y;
     edit->widget.x = x;
@@ -2228,6 +2231,8 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     edit->over_col = 0;
     edit->bracket = -1;
     edit->force |= REDRAW_PAGE;
+
+    /* set file name before load file */
     edit_set_filename (edit, filename_vpath);
 
     edit->undo_stack_size = START_STACK_SIZE;

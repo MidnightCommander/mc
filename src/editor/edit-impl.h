@@ -178,6 +178,8 @@ extern gboolean search_create_bookmark;
 
 /*** declarations of public functions ************************************************************/
 
+gboolean edit_add_window (Dlg_head * h, int y, int x, int lines, int cols,
+                          const vfs_path_t * f, int fline);
 WEdit *find_editor (const Dlg_head * h);
 gboolean edit_widget_is_editor (const Widget * w);
 gboolean edit_drop_hotkey_menu (Dlg_head * h, int key);
