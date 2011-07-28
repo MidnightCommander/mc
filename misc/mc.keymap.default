@@ -249,6 +249,7 @@ Save = f2
 EditFile =
 EditNew = ctrl-n
 SaveAs = f12; ctrl-f2
+Close =
 Mark = f3
 Copy = f5
 Move = f6

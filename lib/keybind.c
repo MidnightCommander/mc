@@ -243,6 +243,7 @@ static name_keymap_t command_names[] = {
 #endif
 
 #ifdef USE_INTERNAL_EDIT
+    {"Close", CK_Close},
     {"Tab", CK_Tab},
     {"ScrollUp", CK_ScrollUp},
     {"ScrollDown", CK_ScrollDown},
