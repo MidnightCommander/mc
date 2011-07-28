@@ -238,10 +238,10 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
                         def_hash[num].short_define = g_strdup (longname);
                     }
                     def_hash[num].line = line;
-                    g_free (shortname);
-                    g_free (longname);
                     num++;
                 }
+                g_free (shortname);
+                g_free (longname);
             }
             break;
         }

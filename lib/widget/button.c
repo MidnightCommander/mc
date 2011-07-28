@@ -135,13 +135,13 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
         switch (b->flags)
         {
         case DEFPUSH_BUTTON:
-            tty_print_string ("[< ");
+            tty_print_string (widget_btn_left_default_sign);
             break;
         case NORMAL_BUTTON:
-            tty_print_string ("[ ");
+            tty_print_string (widget_btn_left_sign);
             break;
         case NARROW_BUTTON:
-            tty_print_string ("[");
+            tty_print_string (widget_btn_left_default_sign);
             break;
         case HIDDEN_BUTTON:
         default:
@@ -153,13 +153,13 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
         switch (b->flags)
         {
         case DEFPUSH_BUTTON:
-            tty_print_string (" >]");
+            tty_print_string (widget_btn_right_default_sign);
             break;
         case NORMAL_BUTTON:
-            tty_print_string (" ]");
+            tty_print_string (widget_btn_right_sign);
             break;
         case NARROW_BUTTON:
-            tty_print_string ("]");
+            tty_print_string (widget_btn_right_sign);
             break;
         default:
             break;

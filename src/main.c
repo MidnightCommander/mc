@@ -108,6 +108,12 @@ int print_last_revert = FALSE;
 /* If set, then print to the given file the last directory we were at */
 char *last_wd_string = NULL;
 
+/* some widget decoration */
+char *widget_btn_left_sign = NULL;
+char *widget_btn_right_sign = NULL;
+char *widget_btn_left_default_sign = NULL;
+char *widget_btn_right_default_sign = NULL;
+
 /* index to record_macro_buf[], -1 if not recording a macro */
 int macro_index = -1;
 
@@ -453,7 +459,7 @@ main (int argc, char *argv[])
         isInitialized = mc_skin_init (&error2);
         mc_filehighlight = mc_fhl_new (TRUE);
         dlg_set_default_colors ();
-
+        dlg_load_skin_decor ();
         if (!isInitialized)
         {
             message (D_ERROR, _("Warning"), "%s", error2->message);

@@ -804,6 +804,17 @@ dlg_set_default_colors (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+dlg_load_skin_decor (void)
+{
+    widget_btn_left_sign = mc_skin_get ("widget-button", "left-sign", "[ ");
+    widget_btn_right_sign = mc_skin_get ("widget-button", "right-sign", " ]");
+    widget_btn_left_default_sign = mc_skin_get ("widget-button", "left-default-sign", "[< ");
+    widget_btn_right_default_sign = mc_skin_get ("widget-button", "right-default-sign", " >]");
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 dlg_erase (Dlg_head * h)
 {
     if ((h != NULL) && (h->state == DLG_ACTIVE))

@@ -154,6 +154,12 @@ struct Dlg_head
 extern dlg_colors_t dialog_colors;
 extern dlg_colors_t alarm_colors;
 
+/* some widget decoration */
+extern char *widget_btn_left_sign;
+extern char *widget_btn_right_sign;
+extern char *widget_btn_left_default_sign;
+extern char *widget_btn_right_default_sign;
+
 extern GList *top_dlg;
 
 /* A hook list for idle events */
@@ -175,6 +181,7 @@ Dlg_head *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
                       const char *help_ctx, const char *title, dlg_flags_t flags);
 
 void dlg_set_default_colors (void);
+void dlg_load_skin_decor (void);
 
 int add_widget_autopos (Dlg_head * dest, void *w, widget_pos_flags_t pos_flags);
 int add_widget (Dlg_head * dest, void *w);
