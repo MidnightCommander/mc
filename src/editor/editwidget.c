@@ -697,8 +697,8 @@ edit_file (const char *_file, int line)
 {
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
-    WEdit *wedit;
     WMenuBar *menubar;
+    gboolean ok;
 
     if (!made_directory)
     {
@@ -715,11 +715,6 @@ edit_file (const char *_file, int line)
         g_free (dir);
     }
 
-    wedit = edit_init (NULL, 1, 0, LINES - 2, COLS, _file, line);
-
-    if (wedit == NULL)
-        return FALSE;
-
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
         create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback,
@@ -732,20 +727,18 @@ edit_file (const char *_file, int line)
     add_widget (edit_dlg, menubar);
     edit_init_menu (menubar);
 
-    init_widget (&wedit->widget, wedit->widget.y, wedit->widget.x,
-                 wedit->widget.lines, wedit->widget.cols, edit_callback, edit_event);
-    widget_want_cursor (wedit->widget, TRUE);
-
-    add_widget (edit_dlg, wedit);
-
     add_widget (edit_dlg, buttonbar_new (TRUE));
 
-    run_dlg (edit_dlg);
+    ok = edit_add_window (edit_dlg, edit_dlg->y + 1, edit_dlg->x,
+                          edit_dlg->lines - 2, edit_dlg->cols, _file, line);
 
-    if (edit_dlg->state == DLG_CLOSED)
+    if (ok)
+        run_dlg (edit_dlg);
+
+    if (!ok || edit_dlg->state == DLG_CLOSED)
         destroy_dlg (edit_dlg);
 
-    return TRUE;
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -814,6 +807,29 @@ edit_save_size (WEdit * edit)
     edit->x_prev = edit->widget.x;
     edit->lines_prev = edit->widget.lines;
     edit->cols_prev = edit->widget.cols;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+edit_add_window (Dlg_head * h, int y, int x, int lines, int cols, const char *f, int fline)
+{
+    WEdit *edit;
+    Widget *w;
+
+    edit = edit_init (NULL, y, x, lines, cols, f, fline);
+    if (edit == NULL)
+        return FALSE;
+
+    w = (Widget *) edit;
+    w->callback = edit_callback;
+    w->mouse = edit_event;
+    widget_want_cursor (*w, TRUE);
+
+    add_widget (h, w);
+    dlg_redraw (h);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

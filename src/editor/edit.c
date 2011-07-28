@@ -2130,7 +2130,9 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     else
         option_line_state_width = 0;
 
-    if (edit == NULL)
+    if (edit != NULL)
+        edit_purge_widget (edit);
+    else
     {
 #ifdef ENABLE_NLS
         /*
@@ -2164,7 +2166,6 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
         to_free = TRUE;
     }
 
-    edit_purge_widget (edit);
     edit->drag_state = MCEDIT_DRAG_NORMAL;
     edit->widget.y = y;
     edit->widget.x = x;
@@ -2180,7 +2181,19 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     edit->over_col = 0;
     edit->bracket = -1;
     edit->force |= REDRAW_PAGE;
+
+    /* set file name before load file */
     edit_set_filename (edit, filename);
+
+    if (!edit_load_file (edit))
+    {
+        g_free (edit->filename);
+
+        /* edit_load_file already gives an error message */
+        if (to_free)
+            g_free (edit);
+        return NULL;
+    }
 
     edit->undo_stack_size = START_STACK_SIZE;
     edit->undo_stack_size_mask = START_STACK_SIZE - 1;
@@ -2193,14 +2206,6 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     edit->utf8 = 0;
     edit->converter = str_cnv_from_term;
     edit_set_codeset (edit);
-
-    if (!edit_load_file (edit))
-    {
-        /* edit_load_file already gives an error message */
-        if (to_free)
-            g_free (edit);
-        return NULL;
-    }
 
     edit->loading_done = 1;
     edit->modified = 0;
