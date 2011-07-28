@@ -264,7 +264,7 @@ edit_get_shortcut (unsigned long command)
 static char *
 edit_get_title (const Dlg_head * h, size_t len)
 {
-    const WEdit *edit = (const WEdit *) find_widget_type (h, edit_callback);
+    const WEdit *edit = find_editor (h);
     const char *modified = edit->modified ? "(*) " : "    ";
     const char *file_label;
     char *filename;
@@ -482,6 +482,12 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
 
     switch (command)
     {
+    case CK_Close:
+        /* if there are no opened files anymore, close MC editor */
+        if (edit_widget_is_editor ((Widget *) h->current->data) &&
+            edit_close_cmd ((WEdit *) h->current->data) && find_editor (h) == NULL)
+            dlg_stop (h);
+        break;
     case CK_Help:
         edit_help ();
         /* edit->force |= REDRAW_COMPLETELY; */
@@ -555,13 +561,13 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
     WMenuBar *menubar;
     WButtonBar *buttonbar;
 
-    edit = (WEdit *) find_widget_type (h, edit_callback);
     menubar = find_menubar (h);
     buttonbar = find_buttonbar (h);
 
     switch (msg)
     {
     case DLG_INIT:
+        edit = find_editor (h);
         edit_set_buttonbar (edit, buttonbar);
         return MSG_HANDLED;
 
@@ -632,7 +638,10 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 
     case DLG_VALIDATE:
         h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
-        if (edit->drag_state != MCEDIT_DRAG_NORMAL)
+        edit = find_editor (h);
+        if (edit == NULL)
+            h->state = DLG_CLOSED;
+        else if (edit->drag_state != MCEDIT_DRAG_NORMAL)
             edit_restore_size (edit);
         else if (edit_ok_to_exit (edit))
             h->state = DLG_CLOSED;
@@ -779,6 +788,14 @@ edit_get_file_name (const WEdit * edit)
  * @param w probably editor object
  * @return TRUE if widget is an WEdit class, FALSE otherwise
  */
+
+WEdit *
+find_editor (const Dlg_head * h)
+{
+    return (WEdit *) find_widget_type (h, edit_callback);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 edit_widget_is_editor (const Widget * w)

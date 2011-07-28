@@ -234,6 +234,7 @@ enum
     CK_EditFile,
     CK_InsertFile,
     CK_EditSyntaxFile,
+    CK_Close,
     /* block commands */
     CK_BlockSave,
     CK_BlockShiftLeft,

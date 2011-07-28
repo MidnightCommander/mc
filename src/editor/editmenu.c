@@ -72,6 +72,7 @@ create_file_menu (void)
 
     entries = g_list_prepend (entries, menu_entry_create (_("&Open file..."), CK_EditFile));
     entries = g_list_prepend (entries, menu_entry_create (_("&New"), CK_EditNew));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Close"), CK_Close));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("&Save"), CK_Save));
     entries = g_list_prepend (entries, menu_entry_create (_("Save &as..."), CK_SaveAs));
@@ -213,10 +214,10 @@ create_window_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Move"), CK_WindowMove));
-    entries = g_list_append (entries, menu_entry_create (_("&Resize"), CK_WindowResize));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Move"), CK_WindowMove));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Resize"), CK_WindowResize));
 
-    return entries;
+    return g_list_reverse (entries);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -2140,6 +2140,45 @@ edit_load_cmd (WEdit * edit, edit_current_file_t what)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+  * Close window with opened file.
+  *
+  * @returns TRUE if file was closed.
+  */
+
+gboolean
+edit_close_cmd (WEdit * edit)
+{
+    gboolean ret;
+
+    ret = (edit != NULL) && edit_ok_to_exit (edit);
+
+    if (ret)
+    {
+        Dlg_head *h = ((Widget *) edit)->owner;
+
+        if (edit->locked != 0)
+            unlock_file (edit->filename_vpath);
+
+        del_widget (edit);
+
+        if (edit_widget_is_editor ((Widget *) h->current->data))
+            edit = (WEdit *) h->current->data;
+        else
+        {
+            edit = find_editor (h);
+            if (edit != NULL)
+                dlg_set_top_widget (edit);
+        }
+    }
+
+    if (edit != NULL)
+        edit->force |= REDRAW_COMPLETELY;
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
    if mark2 is -1 then marking is from mark1 to the cursor.
    Otherwise its between the markers. This handles this.
    Returns 1 if no text is marked.

@@ -254,6 +254,7 @@ ParagraphDown =
 Save = f2
 EditFile =
 SaveAs = f12; ctrl-f2
+Close =
 Mark = f3; ctrl-at
 Copy = f5
 Move = f6

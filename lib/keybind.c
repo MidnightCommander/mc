@@ -250,6 +250,7 @@ static name_keymap_t command_names[] = {
 #endif
 
 #ifdef USE_INTERNAL_EDIT
+    {"Close", CK_Close},
     {"Tab", CK_Tab},
     {"Undo", CK_Undo},
     {"ScrollUp", CK_ScrollUp},
