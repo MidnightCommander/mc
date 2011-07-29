@@ -832,6 +832,12 @@ dlg_load_skin_decor (void)
         widget_edit_tab_last = res;
     g_free (tmp_str);
 
+    tmp_str = mc_skin_get ("widget-edit", "eol-char", " ");
+    res = g_utf8_get_char_validated (tmp_str, -1);
+    if (res > 0)
+        widget_edit_eol_char = res;
+    g_free (tmp_str);
+
 }
 
 /* --------------------------------------------------------------------------------------------- */

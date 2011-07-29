@@ -57,7 +57,7 @@
 /* Toggles statusbar draw style */
 int simple_statusbar = 0;
 
-int visible_tabs = 1, visible_tws = 1;
+int visible_tabs = 1, visible_tws = 1, visible_eol = 0;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -419,6 +419,12 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                 {
                 case '\n':
                     col = (end_col + utf8lag) - edit->start_col + 1;    /* quit */
+                    if (tty_use_colors() && visible_eol) {
+                        p->ch = widget_edit_eol_char;
+                        p->style |= MOD_WHITESPACE;
+                        ++p;
+                        ++col;
+                    }
                     break;
                 case '\t':
                     i = TAB_SIZE - ((int) col % TAB_SIZE);

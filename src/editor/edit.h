@@ -69,6 +69,7 @@ extern int edit_confirm_save;
 
 extern int visible_tabs;
 extern int visible_tws;
+extern int visible_eol;
 
 extern int simple_statusbar;
 extern int option_check_nl_at_eof;

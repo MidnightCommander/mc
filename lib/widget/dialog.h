@@ -163,6 +163,7 @@ extern char *widget_btn_right_default_sign;
 extern int widget_edit_tab_first;
 extern int widget_edit_tab_middle;
 extern int widget_edit_tab_last;
+extern int widget_edit_eol_char;
 
 extern GList *top_dlg;
 
