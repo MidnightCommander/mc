@@ -59,6 +59,7 @@
 #include "filemanager/layout.h" /* command_prompt */
 #include "filemanager/ext.h"    /* flush_extension_file() */
 #include "filemanager/command.h"        /* cmdline */
+#include "filemanager/panel.h"          /* panalized_panel */
 
 #include "vfs/plugins_init.h"
 
@@ -261,8 +262,12 @@ int
 do_cd (const char *new_dir, enum cd_enum exact)
 {
     gboolean res;
+    const char *_new_dir = new_dir;
 
-    res = do_panel_cd (current_panel, new_dir, exact);
+    if (current_panel->is_panelized && _new_dir[0] == '.' && _new_dir[1] == '.' && _new_dir[2] == 0)
+        _new_dir = panelized_panel.root;
+
+    res = do_panel_cd (current_panel, _new_dir, exact);
 
 #if HAVE_CHARSET
     if (res)

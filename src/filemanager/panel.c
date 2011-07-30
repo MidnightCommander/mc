@@ -80,6 +80,8 @@
 /* The hook list for the select file function */
 hook_t *select_file_hook = NULL;
 
+panelized_panel_t panelized_panel = { {NULL, 0}, -1, {'\0'} };
+
 static const char *string_file_name (file_entry *, int);
 static const char *string_file_size (file_entry *, int);
 static const char *string_file_size_brief (file_entry *, int);
@@ -799,6 +801,7 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
                 tty_lowlevel_setcolor (-color);
 
             preperad_text = (char *) str_fit_to_term (txt, len, format->just_mode);
+
             if (perm)
                 add_permission_string (preperad_text, format->field_len, fe, attr, color, perm - 1);
             else
@@ -1097,7 +1100,10 @@ show_dir (WPanel * panel)
 
     widget_move (&panel->widget, 0, 3);
 
-    tty_printf (" %s ",
+    if (panel->is_panelized)
+        tty_printf (" %s ", _("Panelize"));
+    else
+        tty_printf (" %s ",
                 str_term_trim (strip_home_and_password (panel->cwd),
                                min (max (panel->widget.cols - 12, 0), panel->widget.cols)));
 
@@ -1895,8 +1901,32 @@ prev_page (WPanel * panel)
 static void
 goto_parent_dir (WPanel * panel)
 {
-    (void) panel;
-    do_cd ("..", cd_exact);
+    if (!panel->is_panelized)
+        do_cd ("..", cd_exact);
+    else
+    {
+        char *fname = panel->dir.list[panel->selected].fname;
+        const char *bname;
+        char *dname;
+
+        if (g_path_is_absolute (fname))
+            fname = g_strdup (fname);
+        else
+            fname = mc_build_filename (panelized_panel.root, fname, (char *) NULL);
+
+        bname = x_basename (fname);
+
+        if (bname == fname)
+            dname = g_strdup (".");
+        else
+            dname = g_strndup (fname, bname - fname);
+
+        do_cd (dname, cd_exact);
+        try_to_select (panel, bname);
+
+        g_free (dname);
+        g_free (fname);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

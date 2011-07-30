@@ -178,6 +178,7 @@ enum
     /* panels */
     CK_PanelOtherCd = 200,
     CK_PanelOtherCdLink,
+    CK_Panelize,
     CK_CopySingle,
     CK_MoveSingle,
     CK_DeleteSingle,
