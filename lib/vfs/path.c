@@ -515,7 +515,8 @@ vfs_path_from_str_uri_parser (char *path)
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
         vpath->path = g_list_prepend (vpath->path, element);
 
-        if (real_vfs_prefix_start > path && *(real_vfs_prefix_start) == PATH_SEP)
+        if ((real_vfs_prefix_start > path && *(real_vfs_prefix_start) == PATH_SEP) ||
+            (real_vfs_prefix_start == path && *(real_vfs_prefix_start) != PATH_SEP))
             *real_vfs_prefix_start = '\0';
         else
             *(real_vfs_prefix_start + 1) = '\0';
@@ -533,6 +534,52 @@ vfs_path_from_str_uri_parser (char *path)
     }
 
     return vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Add element's class info to result string (such as VFS name, host, encoding etc)
+ * This function used as helper only in vfs_path_tokens_get() function
+ *
+ * @param element current path element
+ * @param ret_tokens total tikens for return
+ * @param element_tokens accumulated element-only tokens
+ */
+
+static void
+vfs_path_tokens_add_class_info (vfs_path_element_t * element, GString * ret_tokens,
+                                    GString * element_tokens)
+{
+    if (((element->class->flags & VFSF_LOCAL) == 0 || ret_tokens->len > 0)
+        && element_tokens->len > 0)
+    {
+        char *url_str;
+
+        if (ret_tokens->len > 0 && ret_tokens->str[ret_tokens->len - 1] != PATH_SEP)
+            g_string_append_c (ret_tokens, PATH_SEP);
+
+        g_string_append (ret_tokens, element->vfs_prefix);
+        g_string_append (ret_tokens, VFS_PATH_URL_DELIMITER);
+
+        url_str = vfs_path_build_url_params_str (element);
+        if (*url_str != '\0')
+        {
+            g_string_append (ret_tokens, url_str);
+            g_string_append_c (ret_tokens, PATH_SEP);
+        }
+
+        g_free (url_str);
+    }
+    if (element->encoding != NULL)
+    {
+        if (ret_tokens->len > 0 && ret_tokens->str[ret_tokens->len - 1] != PATH_SEP)
+            g_string_append (ret_tokens, PATH_SEP_STR);
+        g_string_append (ret_tokens, VFS_ENCODING_PREFIX);
+        g_string_append (ret_tokens, element->encoding);
+        g_string_append (ret_tokens, PATH_SEP_STR);
+    }
+
+    g_string_append (ret_tokens, element_tokens->str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -583,8 +630,8 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
         {
             char *url_str;
 
-            if (buffer->str[buffer->len - 1] != '/')
-                g_string_append_c (buffer, '/');
+            if (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP)
+                g_string_append_c (buffer, PATH_SEP);
 
             g_string_append (buffer, element->vfs_prefix);
             g_string_append (buffer, VFS_PATH_URL_DELIMITER);
@@ -1038,8 +1085,10 @@ vfs_path_deserialize (const char *data, GError ** error)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Build vfs_path_t object from arguments.
- * 
- * return newly allocated vfs_path_t object
+ *
+ * @param ... path tokens, terminated by NULL
+ *
+ * @return newly allocated vfs_path_t object
  */
 
 vfs_path_t *
@@ -1061,6 +1110,14 @@ vfs_path_build_filename (const char *first_element, ...)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Append tokens to path object
+ *
+ * @param vpath path object
+ * @param ... NULL-terminated strings
+ *
+ * @return newly allocated path object
+ */
 
 vfs_path_t *
 vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...)
@@ -1083,6 +1140,120 @@ vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...)
 
     return ret_vpath;
 
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * get tockens count in path.
+ *
+ * @param vpath path object
+ *
+ * @return count of tokens
+ */
+
+size_t
+vfs_path_tokens_count (const vfs_path_t * vpath)
+{
+    size_t count_tokens = 0;
+    int element_index;
+
+    if (vpath == NULL)
+        return 0;
+
+    for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
+    {
+        vfs_path_element_t *element;
+        char **path_tokens, **iterator;
+
+        element = vfs_path_get_by_index (vpath, element_index);
+        path_tokens = iterator = g_strsplit (element->path, PATH_SEP_STR, -1);
+
+        while (*iterator != NULL)
+        {
+            if (**iterator != '\0')
+                count_tokens++;
+            iterator++;
+        }
+        g_strfreev (path_tokens);
+    }
+    return count_tokens;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get subpath by tokens
+ *
+ * @param vpath path object
+ * @param start_position first token for got/ Started from 0.
+ *        If negative, then position will be relative to end of path
+ * @param length count of tokens
+ *
+ * @return newly allocated string with path tokens separated by slash
+ */
+
+char *
+vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t length)
+{
+    GString *ret_tokens, *element_tokens;
+    int element_index;
+    size_t tokens_count = vfs_path_tokens_count (vpath);
+
+    if (length == 0)
+        length = tokens_count;
+
+    if (start_position < 0)
+        start_position = (ssize_t) tokens_count + start_position;
+
+    if (start_position < 0)
+        return NULL;
+
+    if (start_position >= (ssize_t) tokens_count)
+        return NULL;
+
+    if (start_position + (ssize_t) length > (ssize_t) tokens_count)
+        length = tokens_count - start_position;
+
+    ret_tokens = g_string_sized_new (32);
+    element_tokens = g_string_sized_new (32);
+
+    for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
+    {
+        vfs_path_element_t *element;
+        char **path_tokens, **iterator;
+
+        g_string_assign (element_tokens, "");
+        element = vfs_path_get_by_index (vpath, element_index);
+        path_tokens = iterator = g_strsplit (element->path, PATH_SEP_STR, -1);
+
+        while (*iterator != NULL)
+        {
+            if (**iterator != '\0')
+            {
+                if (start_position == 0)
+                {
+                    if (length == 0)
+                    {
+                        vfs_path_tokens_add_class_info (element, ret_tokens, element_tokens);
+                        g_string_free (element_tokens, TRUE);
+                        g_strfreev (path_tokens);
+                        return g_string_free (ret_tokens, FALSE);
+                    }
+                    length--;
+                    if (element_tokens->len != 0)
+                        g_string_append_c (element_tokens, PATH_SEP);
+                    g_string_append (element_tokens, *iterator);
+                }
+                else
+                    start_position--;
+            }
+            iterator++;
+        }
+        g_strfreev (path_tokens);
+        vfs_path_tokens_add_class_info (element, ret_tokens, element_tokens);
+    }
+
+    g_string_free (element_tokens, TRUE);
+    return g_string_free (ret_tokens, !(start_position == 0 && length == 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
