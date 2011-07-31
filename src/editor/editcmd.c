@@ -489,120 +489,15 @@ edit_save_cmd (WEdit * edit)
 /**
  * Load file content
  *
- * @param edit  widget object
- * @param exp_vpath vfs file path
+ * @param h screen the owner of editor window
+ * @param vpath vfs file path
  * @return TRUE if file content was successfully loaded, FALSE otherwise
  */
 
-static gboolean
-edit_load_file_from_filename (WEdit * edit, const vfs_path_t * exp_vpath)
+static inline gboolean
+edit_load_file_from_filename (Dlg_head *h, const vfs_path_t *vpath)
 {
-    int prev_locked = edit->locked;
-    vfs_path_t *prev_filename;
-    gboolean ret = TRUE;
-
-    prev_filename = vfs_path_clone (edit->filename_vpath);
-    if (!edit_reload (edit, exp_vpath))
-        ret = FALSE;
-    else if (prev_locked)
-        unlock_file (prev_filename);
-
-    vfs_path_free (prev_filename);
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_load_syntax_file (WEdit * edit)
-{
-    vfs_path_t *extdir_vpath;
-    int dir = 0;
-
-    if (geteuid () == 0)
-    {
-        dir = query_dialog (_("Syntax file edit"),
-                            _("Which syntax file you want to edit?"), D_NORMAL, 2,
-                            _("&User"), _("&System Wide"));
-    }
-
-    extdir_vpath =
-        vfs_path_build_filename (mc_global.sysconfig_dir, "syntax", "Syntax", (char *) NULL);
-    if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
-    {
-        vfs_path_free (extdir_vpath);
-        extdir_vpath =
-            vfs_path_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
-    }
-
-    if (dir == 0)
-    {
-        vfs_path_t *user_syntax_file_vpath;
-
-        user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_SYNTAX_FILE);
-        check_for_default (extdir_vpath, user_syntax_file_vpath);
-        edit_load_file_from_filename (edit, user_syntax_file_vpath);
-        vfs_path_free (user_syntax_file_vpath);
-    }
-    else if (dir == 1)
-        edit_load_file_from_filename (edit, extdir_vpath);
-
-    vfs_path_free (extdir_vpath);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_load_menu_file (WEdit * edit)
-{
-    vfs_path_t *buffer_vpath;
-    vfs_path_t *menufile_vpath;
-    int dir = 0;
-
-    dir = query_dialog (_("Menu edit"),
-                        _("Which menu file do you want to edit?"), D_NORMAL,
-                        geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
-
-    menufile_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, NULL);
-
-    if (!exist_file (vfs_path_get_last_path_str (menufile_vpath)))
-    {
-        vfs_path_free (menufile_vpath);
-        menufile_vpath = vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, NULL);
-    }
-
-    switch (dir)
-    {
-    case 0:
-        buffer_vpath = vfs_path_from_str (EDIT_LOCAL_MENU);
-        check_for_default (menufile_vpath, buffer_vpath);
-        chmod (vfs_path_get_last_path_str (buffer_vpath), 0600);
-        break;
-
-    case 1:
-        buffer_vpath = mc_config_get_full_vpath (EDIT_HOME_MENU);
-        check_for_default (menufile_vpath, buffer_vpath);
-        break;
-
-    case 2:
-        buffer_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, NULL);
-        if (!exist_file (vfs_path_get_last_path_str (buffer_vpath)))
-        {
-            vfs_path_free (buffer_vpath);
-            buffer_vpath =
-                vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, NULL);
-        }
-        break;
-
-    default:
-        vfs_path_free (menufile_vpath);
-        return;
-    }
-
-    edit_load_file_from_filename (edit, buffer_vpath);
-
-    vfs_path_free (buffer_vpath);
-    vfs_path_free (menufile_vpath);
+    return edit_add_window (h, h->y + 1, h->x, h->lines - 2, h->cols, vpath, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2061,80 +1956,139 @@ edit_save_confirm_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Ask file to edit and load it.
+  *
+  * @returns TRUE on success or cancel of ask.
+  */
 
-/* returns TRUE on success */
 gboolean
-edit_new_cmd (WEdit * edit)
+edit_load_cmd (Dlg_head * h)
 {
-    if (edit->modified
-        && edit_query_dialog2 (_("Warning"),
-                               _("Current text was modified without a file save.\n"
-                                 "Continue discards these changes"),
-                               _("C&ontinue"), _("&Cancel")) == 1)
+    char *exp;
+    gboolean ret = TRUE;        /* possible cancel */
+
+    exp = input_expand_dialog (_("Load"), _("Enter file name:"),
+                               MC_HISTORY_EDIT_LOAD, INPUT_LAST_TEXT);
+
+    if (exp != NULL && *exp != '\0')
     {
-        edit->force |= REDRAW_COMPLETELY;
-        return TRUE;
+        vfs_path_t *exp_vpath;
+
+        exp_vpath = vfs_path_from_str (exp);
+        ret = edit_load_file_from_filename (h, exp_vpath);
+        vfs_path_free (exp_vpath);
     }
 
-    edit->force |= REDRAW_COMPLETELY;
+    g_free (exp);
 
-    return edit_renew (edit);   /* if this gives an error, something has really screwed up */
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Load syntax file to edit.
+  *
+  * @returns TRUE on success
+  */
 
 gboolean
-edit_load_cmd (WEdit * edit, edit_current_file_t what)
+edit_load_syntax_file (Dlg_head * h)
 {
-    gboolean ret = TRUE;
+    vfs_path_t *extdir_vpath;
+    int dir = 0;
+    gboolean ret = FALSE;
 
-    if (edit->modified
-        && edit_query_dialog2 (_("Warning"),
-                               _("Current text was modified without a file save.\n"
-                                 "Continue discards these changes"), _("C&ontinue"),
-                               _("&Cancel")) == 1)
+    if (geteuid () == 0)
+        dir = query_dialog (_("Syntax file edit"),
+                            _("Which syntax file you want to edit?"), D_NORMAL, 2,
+                            _("&User"), _("&System wide"));
+
+    extdir_vpath =
+        vfs_path_build_filename (mc_global.sysconfig_dir, "syntax", "Syntax", (char *) NULL);
+    if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
     {
-        edit->force |= REDRAW_COMPLETELY;
-        return TRUE;
+        vfs_path_free (extdir_vpath);
+        extdir_vpath =
+            vfs_path_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
     }
 
-    switch (what)
+    if (dir == 0)
     {
-    case EDIT_FILE_COMMON:
+        vfs_path_t *user_syntax_file_vpath;
+
+        user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_SYNTAX_FILE);
+        check_for_default (extdir_vpath, user_syntax_file_vpath);
+        ret = edit_load_file_from_filename (h, user_syntax_file_vpath);
+        vfs_path_free (user_syntax_file_vpath);
+    }
+    else if (dir == 1)
+        ret = edit_load_file_from_filename (h, extdir_vpath);
+
+    vfs_path_free (extdir_vpath);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  * Load menu file to edit.
+  *
+  * @returns TRUE on success
+  */
+
+gboolean
+edit_load_menu_file (Dlg_head * h)
+{
+    vfs_path_t *buffer_vpath;
+    vfs_path_t *menufile_vpath;
+    int dir;
+    gboolean ret;
+
+    dir = query_dialog (_("Menu edit"),
+                        _("Which menu file do you want to edit?"), D_NORMAL,
+                        geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System wide"));
+
+    menufile_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, NULL);
+    if (!exist_file (vfs_path_get_last_path_str (menufile_vpath)))
+    {
+        vfs_path_free (menufile_vpath);
+        menufile_vpath = vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, NULL);
+     }
+
+    switch (dir)
+    {
+    case 0:
+        buffer_vpath = vfs_path_from_str (EDIT_LOCAL_MENU);
+        check_for_default (menufile_vpath, buffer_vpath);
+        chmod (vfs_path_get_last_path_str (buffer_vpath), 0600);
+        break;
+
+    case 1:
+        buffer_vpath = mc_config_get_full_vpath (EDIT_HOME_MENU);
+        check_for_default (menufile_vpath, buffer_vpath);
+        break;
+
+    case 2:
+        buffer_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, NULL);
+        if (!exist_file (vfs_path_get_last_path_str (buffer_vpath)))
         {
-            char *filename, *exp;
-
-            filename = vfs_path_to_str (edit->filename_vpath);
-            exp = input_expand_dialog (_("Load"), _("Enter file name:"),
-                                       MC_HISTORY_EDIT_LOAD, filename);
-            g_free (filename);
-
-            if (exp != NULL && *exp != '\0')
-            {
-                vfs_path_t *exp_vpath;
-
-                exp_vpath = vfs_path_from_str (exp);
-                ret = edit_load_file_from_filename (edit, exp_vpath);
-                vfs_path_free (exp_vpath);
-            }
-
-            g_free (exp);
+            vfs_path_free (buffer_vpath);
+            buffer_vpath =
+                vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, NULL);
         }
         break;
 
-    case EDIT_FILE_SYNTAX:
-        edit_load_syntax_file (edit);
-        break;
-
-    case EDIT_FILE_MENU:
-        edit_load_menu_file (edit);
-        break;
-
-    default:
-        break;
+     default:
+        vfs_path_free (menufile_vpath);
+        return FALSE;
     }
 
-    edit->force |= REDRAW_COMPLETELY;
+    ret = edit_load_file_from_filename (h, buffer_vpath);
+
+    vfs_path_free (buffer_vpath);
+    vfs_path_free (menufile_vpath);
+
     return ret;
 }
 
@@ -2786,38 +2740,57 @@ edit_search_cmd (WEdit * edit, gboolean again)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Check if it's OK to close the editor.  If there are unsaved changes,
- * ask user.  Return 1 if it's OK to exit, 0 to continue editing.
- */
+  * Check if it's OK to close the file. If there are unsaved changes, ask user.
+  *
+  * @returns TRUE if it's OK to exit, FALSE to continue editing.
+  */
 
 gboolean
 edit_ok_to_exit (WEdit * edit)
 {
+    char *fname = (char *) N_("[NoName]");
+    char *msg;
     int act;
 
     if (!edit->modified)
         return TRUE;
 
+    if (edit->filename_vpath != NULL)
+        fname = vfs_path_to_str (edit->filename_vpath);
+#ifdef ENABLE_NLS
+    else
+        fname = g_strdup (_(fname));
+#else
+    else
+        fname = g_strdup (fname);
+#endif
+
     if (!mc_global.midnight_shutdown)
     {
         if (!edit_check_newline (edit))
+        {
+            g_free (fname);
             return FALSE;
+        }
 
         query_set_sel (2);
-        act = edit_query_dialog3 (_("Quit"), _("File was modified. Save with exit?"),
-                                  _("&Yes"), _("&No"), _("&Cancel quit"));
+
+        msg = g_strdup_printf (_("File %s was modified.\nSave before close?"), fname);
+        act = edit_query_dialog3 (_("Close file"), msg, _("&Yes"), _("&No"), _("&Cancel"));
     }
     else
     {
-        act =
-            edit_query_dialog2 (_("Quit"),
-                                _("Midnight Commander is being shut down.\nSave modified file?"),
-                                _("&Yes"), _("&No"));
+        msg = g_strdup_printf (_("Midnight Commander is being shut down.\nSave modified file %s?"),
+                               fname);
+        act = edit_query_dialog2 (_("Quit"), msg, _("&Yes"), _("&No"));
 
         /* Esc is No */
         if (act == -1)
             act = 1;
     }
+
+    g_free (msg);
+    g_free (fname);
 
     switch (act)
     {
