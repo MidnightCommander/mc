@@ -105,14 +105,6 @@
 
 /*** enums ***************************************************************************************/
 
-/* type for file which is currently being edited */
-typedef enum
-{
-    EDIT_FILE_COMMON = 0,
-    EDIT_FILE_SYNTAX = 1,
-    EDIT_FILE_MENU = 2
-} edit_current_file_t;
-
 /* line breaks */
 typedef enum
 {
@@ -229,9 +221,9 @@ int edit_save_as_cmd (WEdit * edit);
 WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename, long line);
 gboolean edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
-gboolean edit_renew (WEdit * edit);
-gboolean edit_new_cmd (WEdit * edit);
-gboolean edit_load_cmd (WEdit * edit, edit_current_file_t what);
+gboolean edit_load_cmd (Dlg_head * h);
+gboolean edit_load_syntax_file (Dlg_head * h);
+gboolean edit_load_menu_file (Dlg_head * h);
 gboolean edit_close_cmd (WEdit * edit);
 void edit_mark_cmd (WEdit * edit, int unmark);
 void edit_mark_current_word_cmd (WEdit * edit);

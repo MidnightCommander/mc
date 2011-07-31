@@ -2281,21 +2281,6 @@ edit_clean (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** returns TRUE on success */
-gboolean
-edit_renew (WEdit * edit)
-{
-    int y = edit->widget.y;
-    int x = edit->widget.x;
-    int lines = edit->widget.lines;
-    int columns = edit->widget.cols;
-
-    edit_clean (edit);
-    return (edit_init (edit, y, x, lines, columns, "", 0) != NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /**
  * Load a new file into the editor and set line.  If it fails, preserve the old file.
  * To do it, allocate a new widget, initialize it and, if the new file
@@ -4005,9 +3990,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Save:
         edit_save_confirm_cmd (edit);
         break;
-    case CK_EditFile:
-        edit_load_cmd (edit, EDIT_FILE_COMMON);
-        break;
     case CK_BlockSave:
         edit_save_block_cmd (edit);
         break;
@@ -4022,15 +4004,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_load_forward_cmd (edit);
         break;
 
-    case CK_EditSyntaxFile:
-        edit_load_cmd (edit, EDIT_FILE_SYNTAX);
-        break;
     case CK_SyntaxChoose:
         edit_syntax_dialog (edit);
-        break;
-
-    case CK_EditUserMenu:
-        edit_load_cmd (edit, EDIT_FILE_MENU);
         break;
 
     case CK_SyntaxOnOff:
@@ -4070,9 +4045,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
     case CK_Find:
         edit_get_match_keyword_cmd (edit);
-        break;
-    case CK_EditNew:
-        edit_new_cmd (edit);
         break;
     case CK_Refresh:
         edit_refresh_cmd (edit);

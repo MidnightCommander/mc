@@ -270,6 +270,8 @@ edit_event (Gpm_Event * event, void *data)
     if ((event->type & (GPM_DOWN | GPM_DRAG | GPM_UP)) == 0)
         return MOU_NORMAL;
 
+    dlg_set_top_widget (w);
+
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
 
@@ -461,6 +463,18 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
 
     switch (command)
     {
+    case CK_EditNew:
+        edit_add_window (h, h->y + 1, h->x, h->lines - 2, h->cols, "", 0);
+        break;
+    case CK_EditFile:
+        edit_load_cmd (h);
+        break;
+    case CK_EditSyntaxFile:
+        edit_load_syntax_file (h);
+        break;
+    case CK_EditUserMenu:
+        edit_load_menu_file (h);
+        break;
     case CK_Close:
         /* if there are no opened files anymore, close MC editor */
         if (edit_widget_is_editor ((Widget *) h->current->data) &&
@@ -511,6 +525,41 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
     }
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+edit_quit (Dlg_head * h)
+{
+    GList *l;
+    WEdit *e = NULL;
+
+    h->state = DLG_ACTIVE;      /* don't stop the dialog before final decision */
+
+    for (l = h->widgets; l != NULL; l = g_list_next (l))
+        if (edit_widget_is_editor ((Widget *) l->data))
+        {
+            e = (WEdit *) l->data;
+
+            if (e->drag_state != MCEDIT_DRAG_NORMAL)
+            {
+                edit_restore_size (e);
+                return;
+            }
+
+            if (e->modified)
+            {
+                dlg_set_top_widget (e);
+
+                if (!edit_ok_to_exit (e))
+                    return;
+            }
+        }
+
+    /* no editors in dialog at all or no any file required to be saved */
+    if (e == NULL || l == NULL)
+        h->state = DLG_CLOSED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -617,14 +666,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return edit_drop_hotkey_menu (h, parm) ? MSG_HANDLED : MSG_NOT_HANDLED;
 
     case DLG_VALIDATE:
-        h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
-        edit = find_editor (h);
-        if (edit == NULL)
-            h->state = DLG_CLOSED;
-        else if (edit->drag_state != MCEDIT_DRAG_NORMAL)
-            edit_restore_size (edit);
-        else if (edit_ok_to_exit (edit))
-            h->state = DLG_CLOSED;
+        edit_quit (h);
         return MSG_HANDLED;
 
     default:
