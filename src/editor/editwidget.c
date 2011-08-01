@@ -240,6 +240,64 @@ edit_window_resize (WEdit * edit, unsigned long command)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static unsigned char
+get_hotkey (int n)
+{
+    return (n <= 9) ? '0' + n : 'a' + n - 10;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_window_list (const Dlg_head * h)
+{
+    const size_t offset = 2;    /* skip menu and buttonbar */
+    const size_t dlg_num = g_list_length (h->widgets) - offset;
+    int lines, cols;
+    Listbox *listbox;
+    GList *w;
+    int i = 0;
+    int rv;
+
+    lines = min ((size_t) (LINES * 2 / 3), dlg_num);
+    cols = COLS * 2 / 3;
+
+    listbox = create_listbox_window (lines, cols, _("Open files"), "[Open files]");
+
+    for (w = h->widgets; w != NULL; w = g_list_next (w))
+        if (edit_widget_is_editor ((Widget *) w->data))
+        {
+            WEdit *e = (WEdit *) w->data;
+            char *fname;
+
+            if (e->filename_vpath == NULL)
+                fname = g_strdup_printf ("%c [%s]", e->modified ? '*' : ' ', _("NoName"));
+            else
+            {
+                char *fname2;
+
+                fname2 = vfs_path_to_str (e->filename_vpath);
+                fname = g_strdup_printf ("%c%s", e->modified ? '*' : ' ', fname2);
+                g_free (fname2);
+            }
+
+            listbox_add_item (listbox->list, LISTBOX_APPEND_AT_END, get_hotkey (i++),
+                              str_term_trim (fname, listbox->list->widget.cols - 2), NULL);
+            g_free (fname);
+        }
+
+    rv = g_list_position (h->widgets, h->current) - offset;
+    listbox_select_entry (listbox->list, rv);
+    rv = run_listbox (listbox);
+    if (rv >= 0)
+    {
+        w = g_list_nth (h->widgets, rv + offset);
+        dlg_set_top_widget (w->data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 edit_get_shortcut (unsigned long command)
 {
@@ -533,6 +591,17 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
     case CK_WindowResize:
         if (edit_widget_is_editor ((Widget *) h->current->data))
             edit_handle_move_resize ((WEdit *) h->current->data, command);
+        break;
+    case CK_WindowList:
+        edit_window_list (h);
+        break;
+    case CK_WindowNext:
+        dlg_one_down (h);
+        dlg_set_top_widget (h->current->data);
+        break;
+    case CK_WindowPrev:
+        dlg_one_up (h);
+        dlg_set_top_widget (h->current->data);
         break;
     case CK_OptionsSaveMode:
         edit_save_mode_cmd ();

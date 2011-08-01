@@ -314,6 +314,9 @@ static name_keymap_t command_names[] = {
     {"ExecuteScript", CK_PipeBlock (0)},
     {"WindowMove", CK_WindowMove},
     {"WindowResize", CK_WindowResize},
+    {"WindowList", CK_WindowList},
+    {"WindowNext", CK_WindowNext},
+    {"WindowPrev", CK_WindowPrev},
 #endif /* USE_INTERNAL_EDIT */
 
     /* viewer */

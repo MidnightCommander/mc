@@ -340,6 +340,9 @@ OptionsSaveMode =
 LearnKeys =
 WindowMove =
 WindowResize =
+WindowList =
+WindowNext =
+WindowPrev =
 ExtendedKeyMap =
 
 [viewer]

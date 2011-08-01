@@ -282,6 +282,9 @@ enum
     /* window commands */
     CK_WindowMove,
     CK_WindowResize,
+    CK_WindowList,
+    CK_WindowNext,
+    CK_WindowPrev,
     /* misc commands */
     CK_InsertOverwrite,
     CK_ParagraphFormat,
