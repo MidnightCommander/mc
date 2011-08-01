@@ -81,6 +81,7 @@
 #include "filegui.h"
 #include "tree.h"
 #include "midnight.h"           /* current_panel */
+#include "panelize.h"           /* copy_files_to_panelize */
 
 #include "file.h"
 
@@ -2477,6 +2478,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     FileProgressStatus value;
     FileOpContext *ctx;
     FileOpTotalContext *tctx;
+    gboolean copyto_panelize = FALSE;
 
     gboolean do_bg = FALSE;     /* do background operation? */
 
@@ -2497,12 +2499,18 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         panel_update_flags_t flags = UP_RELOAD;
 
         /* don't update panelized panel */
-        if (get_other_type () == view_listing && other_panel->is_panelized)
+        if (other_panel->is_panelized)
+        {
+            flags = UP_OPTIMIZE;
+        }
+        else if (get_other_type () == view_listing)
             flags |= UP_ONLY_CURRENT;
 
         update_panels (flags, UP_KEEPSEL);
         repaint_screen ();
     }
+    if (other_panel->is_panelized)
+        copyto_panelize = TRUE;
 
     if (single_entry)
     {
@@ -2533,10 +2541,15 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         /* Forced single operations default to the original name */
         if (force_single)
             dest_dir = source;
+        else if (copyto_panelize)
+            dest_dir = g_strdup ("Panelize:");
         else if (get_other_type () == view_listing)
             dest_dir = other_panel->cwd;
         else
             dest_dir = panel->cwd;
+
+        copyto_panelize = FALSE;
+
         /*
          * Add trailing backslash only when do non-local ops.
          * It saves user from occasional file renames (when destination
@@ -2569,6 +2582,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         g_free (format);
         g_free (dest_dir_);
 
+        if (dest != NULL && dest[0] != '\0' && strncmp (dest, "Panelize:", 9) == 0)
+            copyto_panelize = TRUE;
+
         if (dest == NULL || dest[0] == '\0')
         {
             g_free (dest);
@@ -2576,7 +2592,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             goto ret_fast;
         }
     }
-    else if (confirm_delete)
+    else if (confirm_delete && !copyto_panelize)
     {
         char *format;
         char fmd_buf[BUF_MEDIUM];
@@ -2610,6 +2626,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     tctx = file_op_total_context_new ();
     gettimeofday (&tctx->transfer_start, (struct timezone *) NULL);
 
+    if (!copyto_panelize)
     {
         filegui_dialog_type_t dialog_type;
 
@@ -2656,6 +2673,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     /* We do not want to trash cache every time file is
        created/touched. However, this will make our cache contain
        invalid data. */
+    if (copyto_panelize)
+    {
+        ret_val = TRUE;
+        copy_files_to_panelize (panel, other_panel);
+        goto clean_up;
+    }
     if ((dest != NULL) && (mc_setctl (dest, VFS_SETCTL_STALE_DATA, (void *) 1)))
         save_dest = g_strdup (dest);
 
@@ -2663,7 +2686,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         save_cwd = g_strdup (panel->cwd);
 
     /* Now, let's do the job */
-
     /* This code is only called by the tree and panel code */
     if (single_entry)
     {

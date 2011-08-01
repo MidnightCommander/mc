@@ -3386,6 +3386,8 @@ reload_panelized (WPanel * panel)
     else
         panel->count = j;
 
+    panelize_save_panel (panel);
+
     if (panel != current_panel)
     {
         int ret;

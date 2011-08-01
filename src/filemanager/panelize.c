@@ -446,6 +446,108 @@ do_panelize_cd (struct WPanel *panel)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+copy_files_to_panelize (WPanel *source_panel, WPanel *target_panel)
+{
+    int i = -1;
+    int next_free;
+    dir_list *list = &source_panel->dir;
+    gboolean need_break = FALSE;
+
+    next_free = panelized_panel.count;
+    mc_log ("copy_files_to_panelize\n");
+
+    while (i < source_panel->count)
+    {
+        i++;
+        if (source_panel->marked <= 1 && source_panel->selected > 0)
+        {
+            i = source_panel->selected;
+            need_break = TRUE;
+        }
+        else if (!list->list[i].f.marked)
+            continue;   /* Skip the unmarked ones */
+        if (next_free >= panelized_panel.list.size)
+        {
+            panelized_panel.list.list = g_try_realloc (panelized_panel.list.list,
+                sizeof (file_entry) * (next_free + RESIZE_STEPS));
+            panelized_panel.list.size += RESIZE_STEPS;
+        }
+        panelized_panel.list.list[next_free].fnamelen = list->list[i].fnamelen;
+        panelized_panel.list.list[next_free].fname = mc_build_filename (source_panel->cwd,
+            list->list[i].fname, (char *) NULL);
+        panelized_panel.list.list[next_free].f.link_to_dir = list->list[i].f.link_to_dir;
+        panelized_panel.list.list[next_free].f.stale_link = list->list[i].f.stale_link;
+        panelized_panel.list.list[next_free].f.dir_size_computed = list->list[i].f.dir_size_computed;
+        panelized_panel.list.list[next_free].f.marked = 0;
+        panelized_panel.list.list[next_free].st = list->list[i].st;
+        list->list[i].f.marked = 0;
+        next_free++;
+        if (need_break)
+            break;
+    }
+
+    source_panel->marked = 0;
+    source_panel->total = 0;
+    source_panel->dirs_marked = 0;
+
+    panelized_panel.count = next_free;
+
+    do_panelize_cd (target_panel);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+delete_from_panelize (struct WPanel *panel)
+{
+    int i;
+    int next_free = 0;
+    dir_list *list = &panel->dir;
+    int selected = panel->selected;
+
+    clean_dir (&panelized_panel.list, panelized_panel.count);
+    for (i = 0; i < panel->count; i++)
+    {
+        if (panel->marked <= 1 && panel->selected == i)
+        {
+            panelized_panel.count--;
+            continue;
+        }
+        else if (list->list[i].f.marked)
+        {
+            if (i < panel->selected)
+                selected--;
+            panelized_panel.count--;
+            continue; /* Skip the marked ones */
+        }
+        panelized_panel.list.list[next_free].fnamelen = list->list[i].fnamelen;
+        panelized_panel.list.list[next_free].fname = g_strdup (list->list[i].fname);
+        panelized_panel.list.list[next_free].f.link_to_dir = list->list[i].f.link_to_dir;
+        panelized_panel.list.list[next_free].f.stale_link = list->list[i].f.stale_link;
+        panelized_panel.list.list[next_free].f.dir_size_computed = list->list[i].f.dir_size_computed;
+        panelized_panel.list.list[next_free].f.marked = 0;
+        panelized_panel.list.list[next_free].st = list->list[i].st;
+        next_free++;
+    }
+    panel->marked = 0;
+    panel->total = 0;
+    panel->dirs_marked = 0;
+
+    do_panelize_cd (panel);
+    panel->selected = min (selected, panel->count - 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+delete_from_panelize_cmd (void)
+{
+    delete_from_panelize (current_panel);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 panelize_save_panel (struct WPanel *panel)
 {
     int i;
@@ -465,6 +567,7 @@ panelize_save_panel (struct WPanel *panel)
             sizeof (file_entry) * panel->count);
         panelized_panel.list.size = panel->count;
     }
+
     for (i = 0; i < panel->count; i++)
     {
         panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;

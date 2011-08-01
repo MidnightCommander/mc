@@ -1213,7 +1213,10 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         menu_last_selected_cmd ();
         break;
     case CK_MakeDir:
-        mkdir_cmd ();
+        if (!current_panel->is_panelized)
+            mkdir_cmd ();
+        else
+            delete_from_panelize_cmd ();
         break;
     case CK_OptionsPanel:
         panel_options_box ();
