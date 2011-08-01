@@ -212,6 +212,10 @@ create_window_menu (void)
 
     entries = g_list_prepend (entries, menu_entry_create (_("&Move"), CK_WindowMove));
     entries = g_list_prepend (entries, menu_entry_create (_("&Resize"), CK_WindowResize));
+    entries = g_list_prepend (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("&Next"), CK_WindowNext));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Previous"), CK_WindowPrev));
+    entries = g_list_prepend (entries, menu_entry_create (_("&List..."), CK_WindowList));
 
     return g_list_reverse (entries);
 }

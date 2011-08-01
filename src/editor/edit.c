@@ -3404,13 +3404,6 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
 void
 edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 {
-    /* at first, handle CK_Quit command */
-    if (command == CK_Quit)
-    {
-        dlg_stop (((Widget *) edit)->owner);
-        return;
-    }
-
     /* handle window state */
     if (edit_handle_move_resize (edit, command))
         return;
