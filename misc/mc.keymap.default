@@ -331,7 +331,7 @@ SelectCodepage = alt-e
 Options =
 OptionsSaveMode =
 LearnKeys =
-ExtendedKeyMap = ctrl-x
+ExtendedKeyMap =
 
 [viewer]
 Help = f1
