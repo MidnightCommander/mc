@@ -131,7 +131,7 @@ struct WEdit
 
     /* line break */
     LineBreaks lb;
-    int extmod;
+    gboolean extmod;
 
     char *labels[10];
 

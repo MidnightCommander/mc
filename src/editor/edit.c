@@ -4031,7 +4031,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_begin_end_macro_cmd (edit);
         break;
     case CK_Ext_Mode:
-        edit->extmod = 1;
+        edit->extmod = TRUE;
         break;
     default:
         break;
