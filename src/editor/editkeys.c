@@ -183,7 +183,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
     /* Commands specific to the key emulation */
     if (edit->extmod)
     {
-        edit->extmod = 0;
+        edit->extmod = FALSE;
         command = keybind_lookup_keymap_command (editor_x_map, x_key);
     }
     else
