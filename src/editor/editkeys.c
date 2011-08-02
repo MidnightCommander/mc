@@ -80,7 +80,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
     int c;
 
     /* an ordinary insertable character */
-    if (x_key < 256)
+    if (!edit->extmod && x_key < 256)
     {
 #ifdef HAVE_CHARSET
         if (edit->charpoint >= 4)
