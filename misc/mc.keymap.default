@@ -250,7 +250,7 @@ CmdSelect = kpplus
 CmdUnselect = kpminus
 CmdReverseSelection = kpasterisk
 CmdDialogList = alt-prime
-ExtMap1 = ctrl-x
+ExtMap1 =
 
 [main:xmap]
 CmdChmod = c
@@ -408,7 +408,6 @@ DialogRefresh = ctrl-l
 CmdDialogList = alt-prime
 CmdDialogNext = alt-rbrace
 CmdDialogPrev = alt-lbrace
-
 
 [diffviewer]
 DiffDisplaySymbols = alt-s; s
