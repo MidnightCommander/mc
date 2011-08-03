@@ -1849,7 +1849,7 @@ move_left (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static cb_ret_t
 move_right (WPanel * panel)
 {
     if (panel->split)
