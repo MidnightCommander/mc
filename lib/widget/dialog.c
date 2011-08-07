@@ -559,6 +559,17 @@ frontend_run_dlg (Dlg_head * h)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
+{
+    Widget *w = (Widget *) a;
+    unsigned long id = GPOINTER_TO_UINT (b);
+
+    return w->id == id ? 0 : 1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -942,16 +953,10 @@ find_widget_type (const Dlg_head * h, callback_fn callback)
 Widget *
 dlg_find_by_id (const Dlg_head * h, unsigned int id)
 {
-    if (h->widgets != NULL)
-    {
-        GList *w;
+    GList *w;
 
-        for (w = h->widgets; w != NULL; w = g_list_next (w))
-            if (((Widget *) w->data)->id == id)
-                return (Widget *) w->data;
-    }
-
-    return NULL;
+    w = g_list_find_custom (h->widgets, GUINT_TO_POINTER (id), dlg_find_widget_by_id);
+    return w != NULL ? (Widget *) w->data : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
