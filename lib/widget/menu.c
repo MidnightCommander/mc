@@ -233,12 +233,24 @@ menubar_draw (WMenuBar * menubar)
 static void
 menubar_remove (WMenuBar * menubar)
 {
-    if (menubar->is_dropped)
-    {
-        menubar->is_dropped = FALSE;
-        do_refresh ();
-        menubar->is_dropped = TRUE;
-    }
+    Dlg_head *h;
+
+    if (!menubar->is_dropped)
+        return;
+
+    /* HACK: before refresh the dialog, change the current widget to keep the order
+       of overlapped widgets. This is useful in multi-window editor.
+       In general, menubar should be a special object, not an ordinary widget
+       in the current dialog. */
+    h = menubar->widget.owner;
+    h->current = g_list_find (h->widgets, dlg_find_by_id (h, menubar->previous_widget));
+
+    menubar->is_dropped = FALSE;
+    do_refresh ();
+    menubar->is_dropped = TRUE;
+
+    /* restore current widget */
+    h->current = g_list_find (h->widgets, menubar);
 }
 
 /* --------------------------------------------------------------------------------------------- */
