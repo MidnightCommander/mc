@@ -78,7 +78,7 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
     dnl check if S-Lang have version 2.0 or newer
     if test x"$found_slang" = x"yes"; then
         AC_MSG_CHECKING([for S-Lang version 2.0 or newer])
-        AC_RUN_IFELSE([
+        AC_RUN_IFELSE([AC_LANG_SOURCE([
 #ifdef HAVE_SLANG_SLANG_H
 #include <slang/slang.h>
 #else
@@ -92,7 +92,7 @@ int main (void)
     return 1;
 #endif
 }
-],
+])],
 	    [mc_slang_is_valid_version=yes],
 	    [mc_slang_is_valid_version=no],
 	    [
