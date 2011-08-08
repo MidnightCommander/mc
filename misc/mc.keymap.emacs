@@ -99,6 +99,7 @@ Unselect = alt-minus
 SelectInvert = alt-asterisk
 CdChild = ctrl-pgdn
 CdParent = ctrl-pgup
+Panelize =
 CdParentSmart =
 History = alt-shift-h
 HistoryNext = alt-u

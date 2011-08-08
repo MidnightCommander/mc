@@ -210,6 +210,7 @@ static name_keymap_t command_names[] = {
     {"DeleteSingle", CK_DeleteSingle},
     {"CdParent", CK_CdParent},
     {"CdChild", CK_CdChild},
+    {"Panelize", CK_Panelize},
     {"PanelOtherSync", CK_PanelOtherSync},
     {"SortNext", CK_SortNext},
     {"SortPrev", CK_SortPrev},
