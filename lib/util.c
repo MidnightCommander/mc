@@ -392,9 +392,37 @@ void
 size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si)
 {
     /* Avoid taking power for every file.  */
-    static const uintmax_t power10[] =
-    {
-        1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
+    static const uintmax_t power10[] = {
+    /* we hope that size of uintmax_t is 4 bytes at least */
+        1ULL,
+        10ULL,
+        100ULL,
+        1000ULL,
+        10000ULL,
+        100000ULL,
+        1000000ULL,
+        10000000ULL,
+        100000000ULL,
+        1000000000ULL
+    /* maximmum value of uintmax_t (in case of 4 bytes) is
+        4294967295
+     */
+#if SIZEOF_UINTMAX_T == 8
+                     ,
+        10000000000ULL,
+        100000000000ULL,
+        1000000000000ULL,
+        10000000000000ULL,
+        100000000000000ULL,
+        1000000000000000ULL,
+        10000000000000000ULL,
+        100000000000000000ULL,
+        1000000000000000000ULL,
+        10000000000000000000ULL
+    /* maximmum value of uintmax_t (in case of 8 bytes) is
+        18447644073710439615
+     */
+#endif
     };
     static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
     static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
@@ -403,6 +431,15 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
 
     if (len == 0)
         len = 9;
+#if SIZEOF_UINTMAX_T == 8
+    /* 20 decimal digits are required to represent 8 bytes */
+    else if (len > 19)
+        len = 19;
+#else
+    /* 10 decimal digits are required to represent 4 bytes */
+    else if (len > 9)
+        len = 9;
+#endif
 
     /*
      * recalculate from 1024 base to 1000 base if units>0
@@ -435,7 +472,7 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
             break;
         }
 
-        if (size < power10[len - (j > 0)])
+        if (size < power10[len - (j > 0 ? 1 : 0)])
         {
             g_snprintf (buffer, len + 1, "%" PRIuMAX "%s", size, use_si ? suffix_lc[j] : suffix[j]);
             break;
