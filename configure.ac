@@ -184,19 +184,15 @@ AC_MSG_RESULT(yes)
 ], [AC_MSG_RESULT(no)])
 
 dnl
-dnl This is from GNU fileutils, check aclocal.m4 for more information
-dnl
-AC_GET_FS_INFO
-
-dnl
 dnl Missing typedefs and replacements
 dnl
 
 AC_CHECK_SIZEOF(long)
-AC_CHECK_SIZEOF(long long)
-AC_TYPE_MODE_T
+AC_TYPE_UINTMAX_T
+AC_CHECK_SIZEOF(uintmax_t)
 AC_TYPE_OFF_T
 AC_CHECK_SIZEOF(off_t)
+AC_TYPE_MODE_T
 AC_TYPE_PID_T
 AC_TYPE_UID_T
 AC_CHECK_TYPE(nlink_t, unsigned int)
@@ -214,6 +210,12 @@ AC_CHECK_TYPE(uintptr_t,
 
 AC_FUNC_ALLOCA
 AC_FUNC_STRCOLL
+
+dnl
+dnl This is from GNU fileutils, check aclocal.m4 for more information
+dnl uintmat_t is required for FS info
+dnl
+AC_GET_FS_INFO
 
 dnl
 dnl X11 support.
