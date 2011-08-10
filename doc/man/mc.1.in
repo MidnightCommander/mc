@@ -981,13 +981,7 @@ are always shown in the directory panel.
 .\"NODE "    Reread"
 .SH "    Reread"
 The reread command reload the list of files in the directory. It is
-useful if other processes have created or removed files.  If you
-have panelized file names in a panel this will reload the directory
-contents and remove the panelized information (See the section
-.\"LINK2"
-External panelize
-.\"External panelize"
-for more information).
+useful if other processes have created or removed files.
 .\"NODE "  File Menu"
 .SH "  File Menu"
 The Midnight Commander uses the F1 \- F10 keys as keyboard shortcuts
