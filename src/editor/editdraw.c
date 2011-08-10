@@ -47,7 +47,6 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"           /* is_printable() */
-#include "lib/widget.h"         /* buttonbar_redraw() */
 #include "lib/charsets.h"
 
 #include "src/setup.h"          /* edit_tab_spacing */
@@ -820,15 +819,11 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 static inline void
 edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
-    gboolean completely = (edit->force & REDRAW_COMPLETELY) != 0;
-
     if (page)                   /* if it was an expose event, 'page' would be set */
         edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
 
     render_edit_text (edit, row_start, col_start, row_end, col_end);
 
-    if (completely)
-        buttonbar_redraw (find_buttonbar (edit->widget.owner));
     /*
      * edit->force != 0 means a key was pending and the redraw
      * was halted, so next time we must redraw everything in case stuff
