@@ -332,10 +332,17 @@ size_trunc (uintmax_t size, gboolean use_si)
     {
         divisor = use_si ? 1000 : 1024;
         xtra = use_si ? "k" : "K";
+
         if (size / divisor > 999999999UL)
         {
             divisor = use_si ? (1000 * 1000) : (1024 * 1024);
             xtra = use_si ? "m" : "M";
+
+            if (size / divisor > 999999999UL)
+            {
+                divisor = use_si ? (1000 * 1000 * 1000) : (1024 * 1024 * 1024);
+                xtra = use_si ? "g" : "G";
+            }
         }
     }
     g_snprintf (x, sizeof (x), "%.0f%s", 1.0 * size / divisor, xtra);
