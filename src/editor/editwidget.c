@@ -675,20 +675,11 @@ edit_set_buttonbar (WEdit * edit, WButtonBar * bb)
 static cb_ret_t
 edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
-    WEdit *edit;
     WMenuBar *menubar;
     WButtonBar *buttonbar;
 
-    menubar = find_menubar (h);
-    buttonbar = find_buttonbar (h);
-
     switch (msg)
     {
-    case DLG_INIT:
-        edit = find_editor (h);
-        edit_set_buttonbar (edit, buttonbar);
-        return MSG_HANDLED;
-
     case DLG_DRAW:
         /* don't use common_dialog_repaint() -- we don't need a frame */
         tty_setcolor (EDITOR_NORMAL_COLOR);
@@ -696,6 +687,8 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_HANDLED;
 
     case DLG_RESIZE:
+        menubar = find_menubar (h);
+        buttonbar = find_buttonbar (h);
         /* dlg_set_size() is surplus for this case */
         h->lines = LINES;
         h->cols = COLS;
@@ -709,6 +702,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         if (sender == NULL)
             return edit_dialog_command_execute (h, parm);
         /* message from menu */
+        menubar = find_menubar (h);
         if (sender == (Widget *) menubar)
         {
             if (edit_dialog_command_execute (h, parm) == MSG_HANDLED)
@@ -717,6 +711,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
             return send_message ((Widget *) h->current->data, WIDGET_COMMAND, parm);
         }
         /* message from buttonbar */
+        buttonbar = find_buttonbar (h);
         if (sender == (Widget *) buttonbar)
         {
             if (data != NULL)
@@ -772,11 +767,14 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 
     switch (msg)
     {
+    case WIDGET_FOCUS:
+        edit_set_buttonbar (e, find_buttonbar (e->widget.owner));
+        e->force |= REDRAW_PAGE;
+        edit_update_screen (e);
+        return MSG_HANDLED;
+
     case WIDGET_DRAW:
         e->force |= REDRAW_COMPLETELY;
-        /* fallthrough */
-
-    case WIDGET_FOCUS:
         edit_update_screen (e);
         return MSG_HANDLED;
 
@@ -938,6 +936,8 @@ edit_update_screen (WEdit * e)
             e->force |= REDRAW_PAGE;
         edit_render_keypress (e);
     }
+
+    buttonbar_redraw (find_buttonbar (((Widget *) e)->owner));
 }
 
 /* --------------------------------------------------------------------------------------------- */
