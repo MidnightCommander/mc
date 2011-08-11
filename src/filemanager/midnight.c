@@ -898,7 +898,7 @@ create_panels_and_run_mc (void)
     add_widget (midnight_dlg, the_prompt);
 
     add_widget (midnight_dlg, the_bar);
-    midnight_set_buttonbar (the_bar);
+    midnight_set_buttonbar (the_bar, FALSE);
 
     /* Run the Midnight Commander if no file was specified in the command line */
     run_dlg (midnight_dlg);
@@ -1544,7 +1544,7 @@ update_menu (void)
 }
 
 void
-midnight_set_buttonbar (WButtonBar * b)
+midnight_set_buttonbar (WButtonBar * b, gboolean is_panelized)
 {
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), main_map, NULL);
     buttonbar_set_label (b, 2, Q_ ("ButtonBar|Menu"), main_map, NULL);
@@ -1552,7 +1552,8 @@ midnight_set_buttonbar (WButtonBar * b)
     buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), main_map, NULL);
     buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), main_map, NULL);
     buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), main_map, NULL);
-    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), main_map, NULL);
+    buttonbar_set_label (b, 7, is_panelized ? Q_ ("ButtonBar|Remove") : Q_ ("ButtonBar|Mkdir"),
+                         main_map, NULL);
     buttonbar_set_label (b, 8, Q_ ("ButtonBar|Delete"), main_map, NULL);
     buttonbar_set_label (b, 9, Q_ ("ButtonBar|PullDn"), main_map, NULL);
     buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), main_map, NULL);

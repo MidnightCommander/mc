@@ -3064,7 +3064,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         panel->dirty = 0;
 
         bb = find_buttonbar (panel->widget.owner);
-        midnight_set_buttonbar (bb);
+        midnight_set_buttonbar (bb, panel->is_panelized);
         buttonbar_redraw (bb);
         return MSG_HANDLED;
 

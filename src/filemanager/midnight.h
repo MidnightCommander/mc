@@ -41,7 +41,7 @@ extern WPanel *current_panel;
 /*** declarations of public functions ************************************************************/
 
 void update_menu (void);
-void midnight_set_buttonbar (WButtonBar * b);
+void midnight_set_buttonbar (WButtonBar * b, gboolean is_panelized);
 void load_hint (gboolean force);
 void change_panel (void);
 void save_cwds_stat (void);
