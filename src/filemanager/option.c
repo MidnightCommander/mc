@@ -444,7 +444,7 @@ panel_options_box (void)
     quick_widgets[0].relative_x = 2 * quick_widgets[1].relative_x + b1_len + 1;
 
     if (quick_dialog (&Quick_input) != B_ENTER)
-        return
+        return;
 
     mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
                         "simple_swap", (gboolean) (simple_swap & C_BOOL));
