@@ -265,10 +265,13 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_HANDLED;
 
     case DLG_RESIZE:
-        widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
-        widget_set_size (&buttonbar->widget, LINES - 1, 0, 1, COLS);
-        widget_set_size (&menubar->widget, 0, 0, 1, COLS);
+        /* dlg_set_size() is surplus for this case */
+        h->lines = LINES;
+        h->cols = COLS;
+        widget_set_size (&buttonbar->widget, h->lines - 1, h->x, 1, h->cols);
+        widget_set_size (&menubar->widget, h->y, h->x, 1, h->cols);
         menubar_arrange (menubar);
+        widget_set_size (&edit->widget, h->y, h->x, h->lines - 1, h->cols);
         return MSG_HANDLED;
 
     case DLG_ACTION:
