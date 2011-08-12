@@ -43,6 +43,8 @@
 
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/key.h"        /* is_idle() */
+#include "lib/tty/color.h"      /* tty_setcolor() */
+#include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
 #include "lib/strutil.h"        /* str_term_trim() */
 #include "lib/util.h"           /* concat_dir_and_file() */
 #include "lib/widget.h"
@@ -114,22 +116,12 @@ edit_event (Gpm_Event * event, void *data)
     if (!(event->type & (GPM_DOWN | GPM_DRAG | GPM_UP)))
         return MOU_NORMAL;
 
-    /* rest of the upper frame, the menu is invisible - call menu */
-    if ((event->type & GPM_DOWN) && (event->y == 1))
-    {
-        WMenuBar *menubar;
-
-        menubar = find_menubar (edit->widget.owner);
-
-        return menubar->widget.mouse (event, menubar);
-    }
-
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
 
     /* Outside editor window */
-    if (event->y <= 1 || event->x <= 0
-        || event->x > edit->widget.cols || event->y > edit->widget.lines + 1)
+    if (event->y < 1 || event->x < 1
+        || event->x > edit->widget.cols || event->y > edit->widget.lines)
         return MOU_NORMAL;
 
     /* Double click */
@@ -165,7 +157,9 @@ edit_event (Gpm_Event * event, void *data)
     if (event->type & (GPM_DOWN | GPM_UP))
         edit_push_key_press (edit);
 
-    if (option_cursor_beyond_eol)
+    if (!option_cursor_beyond_eol)
+        edit->prev_col = event->x - edit->start_col - option_line_state_width - 1;
+    else
     {
         long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
                                             edit_eol (edit, edit->curs1));
@@ -181,15 +175,12 @@ edit_event (Gpm_Event * event, void *data)
             edit->prev_col = event->x - option_line_state_width - edit->start_col - 1;
         }
     }
-    else
-    {
-        edit->prev_col = event->x - edit->start_col - option_line_state_width - 1;
-    }
 
-    if (--event->y > (edit->curs_row + 1))
-        edit_move_down (edit, event->y - (edit->curs_row + 1), 0);
-    else if (event->y < (edit->curs_row + 1))
-        edit_move_up (edit, (edit->curs_row + 1) - event->y, 0);
+    --event->y;
+    if (event->y > edit->curs_row)
+        edit_move_down (edit, event->y - edit->curs_row, 0);
+    else if (event->y < edit->curs_row)
+        edit_move_up (edit, edit->curs_row - event->y, 0);
     else
         edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
 
@@ -264,6 +255,12 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         edit_set_buttonbar (edit, buttonbar);
         return MSG_HANDLED;
 
+    case DLG_DRAW:
+        /* don't use common_dialog_repaint() -- we don't need a frame */
+        tty_setcolor (EDITOR_NORMAL_COLOR);
+        dlg_erase (h);
+        return MSG_HANDLED;
+
     case DLG_RESIZE:
         /* dlg_set_size() is surplus for this case */
         h->lines = LINES;
@@ -271,7 +268,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         widget_set_size (&buttonbar->widget, h->lines - 1, h->x, 1, h->cols);
         widget_set_size (&menubar->widget, h->y, h->x, 1, h->cols);
         menubar_arrange (menubar);
-        widget_set_size (&edit->widget, h->y, h->x, h->lines - 1, h->cols);
+        widget_set_size (&edit->widget, h->y + 1, h->x, h->lines - 2, h->cols);
         return MSG_HANDLED;
 
     case DLG_ACTION:
@@ -303,8 +300,6 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
     {
     case WIDGET_DRAW:
         e->force |= REDRAW_COMPLETELY;
-        e->widget.lines = LINES - 2;
-        e->widget.cols = COLS;
         /* fallthrough */
 
     case WIDGET_FOCUS:
@@ -334,7 +329,7 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
         return edit_command_execute (e, parm);
 
     case WIDGET_CURSOR:
-        widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,
+        widget_move (w, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,
                      e->curs_col + e->start_col + e->over_col +
                      EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width);
         return MSG_HANDLED;
@@ -367,7 +362,7 @@ edit_file (const char *_file, int line)
         g_free (dir);
     }
 
-    wedit = edit_init (NULL, LINES - 2, COLS, _file, line);
+    wedit = edit_init (NULL, 1, 0, LINES - 2, COLS, _file, line);
 
     if (wedit == NULL)
         return 0;
@@ -384,8 +379,9 @@ edit_file (const char *_file, int line)
     add_widget (edit_dlg, menubar);
     edit_init_menu (menubar);
 
-    init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS, edit_callback, edit_event);
-    widget_want_cursor (wedit->widget, 1);
+    init_widget (&wedit->widget, wedit->widget.y, wedit->widget.x,
+                 wedit->widget.lines, wedit->widget.cols, edit_callback, edit_event);
+    widget_want_cursor (wedit->widget, TRUE);
 
     add_widget (edit_dlg, wedit);
 
