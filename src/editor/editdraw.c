@@ -81,6 +81,8 @@ int visible_tabs = 1, visible_tws = 1;
 
 #define key_pending(x) (!is_idle())
 
+#define EDITOR_MINIMUM_TERMINAL_WIDTH 30
+
 
 /*** file scope type declarations ****************************************************************/
 
@@ -766,13 +768,13 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** Draw the status line at the top of the widget. The size of the filename
+/** Draw the status line at the top of the screen. The size of the filename
  * field varies depending on the width of the screen and the length of
  * the filename. */
 void
 edit_status (WEdit * edit)
 {
-    const int w = edit->widget.cols;
+    const int w = edit->widget.owner->cols;
     const size_t status_size = w + 1;
     char *const status = g_malloc (status_size);
     int status_len;
@@ -800,19 +802,18 @@ edit_status (WEdit * edit)
         fname = str_trunc (fname, fname_len);
     }
 
-    widget_move (edit, 0, 0);
+    dlg_move (edit->widget.owner, 0, 0);
     tty_setcolor (STATUSBAR_COLOR);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
 
-    if (simple_statusbar && edit->widget.cols > 30)
+    if (simple_statusbar && w > EDITOR_MINIMUM_TERMINAL_WIDTH)
     {
-        size_t percent;
+        size_t percent = 100;
+
         if (edit->total_lines + 1 != 0)
             percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
-        else
-            percent = 100;
-        widget_move (edit, 0, edit->widget.cols - 5);
+        dlg_move (edit->widget.owner, 0, w - 5);
         tty_printf (" %3d%%", percent);
     }
 
