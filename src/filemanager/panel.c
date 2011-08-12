@@ -2339,6 +2339,8 @@ do_enter (WPanel * panel)
 static void
 chdir_other_panel (WPanel * panel)
 {
+    const file_entry *entry = &panel->dir.list[panel->selected];
+
     char *new_dir;
     char *sel_entry = NULL;
 
@@ -2347,13 +2349,13 @@ chdir_other_panel (WPanel * panel)
         set_display_type (get_other_index (), view_listing);
     }
 
-    if (!S_ISDIR (panel->dir.list[panel->selected].st.st_mode))
+    if (S_ISDIR (entry->st.st_mode) || entry->f.link_to_dir)
+        new_dir = mc_build_filename (panel->cwd, entry->fname, (char *) NULL);
+    else
     {
-        new_dir = concat_dir_and_file (panel->cwd, "..");
+        new_dir = mc_build_filename (panel->cwd, "..", (char *) NULL);
         sel_entry = strrchr (panel->cwd, PATH_SEP);
     }
-    else
-        new_dir = concat_dir_and_file (panel->cwd, panel->dir.list[panel->selected].fname);
 
     change_panel ();
     do_cd (new_dir, cd_exact);
