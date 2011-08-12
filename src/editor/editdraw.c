@@ -204,17 +204,30 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
 
     if (!show_right_margin)
     {
-        tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', end_col + 1 - start_col);
+        int len;
+
+        len = end_col + 1 - start_col;
+        if (len > 0)
+            tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', len);
     }
     else if (edit->start_col < option_word_wrap_line_length)
     {
-        tty_draw_hline (edit->widget.y + y,
-                        edit->widget.x + x1, ' ', option_word_wrap_line_length - edit->start_col);
+        int len;
 
-        tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
-        tty_draw_hline (edit->widget.y + y,
-                        edit->widget.x + x1 + option_word_wrap_line_length + edit->start_col,
-                        ' ', end_col + 1 - start_col);
+        len = option_word_wrap_line_length - edit->start_col;
+        if (len > 0)
+        {
+            tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', len);
+
+            len = end_col + 1 - start_col;
+            if (len > 0)
+            {
+                tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
+                tty_draw_hline (edit->widget.y + y,
+                                edit->widget.x + x1 + option_word_wrap_line_length +
+                                edit->start_col, ' ', len);
+            }
+        }
     }
 
     if (option_line_state)
@@ -610,6 +623,9 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     int force = edit->force;
     long b;
 
+    edit->widget.lines = max (edit->widget.lines, 1);
+    edit->widget.cols = max (edit->widget.cols, 1);
+
     /*
      * If the position of the page has not moved then we can draw the cursor
      * character only.  This will prevent line flicker when using arrow keys.
@@ -829,14 +845,20 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     if (b_extreme + t_extreme + 1 > edit->widget.lines)
     {
         int n;
+
         n = b_extreme + t_extreme;
+        if (n == 0)
+            n = 1;
         b_extreme = (b_extreme * (edit->widget.lines - 1)) / n;
         t_extreme = (t_extreme * (edit->widget.lines - 1)) / n;
     }
     if (l_extreme + r_extreme + 1 > edit->widget.cols)
     {
         int n;
+
         n = l_extreme + t_extreme;
+        if (n == 0)
+            n = 1;
         l_extreme = (l_extreme * (edit->widget.cols - 1)) / n;
         r_extreme = (r_extreme * (edit->widget.cols - 1)) / n;
     }
