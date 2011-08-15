@@ -9,6 +9,7 @@ LIBS=@CHECK_LIBS@  \
 TESTS = \
 	canonicalize_pathname \
 	current_dir \
+	path_recode \
 	path_serialize \
 	vfs_parse_ls_lga \
 	vfs_path_string_convert \
@@ -23,6 +24,9 @@ canonicalize_pathname_SOURCES = \
 
 current_dir_SOURCES = \
 	current_dir.c
+
+path_recode_SOURCES = \
+	path_recode.c
 
 path_serialize_SOURCES = \
 	path_serialize.c

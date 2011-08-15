@@ -418,7 +418,8 @@ vfs_path_from_str_deprecated_parser (char *path)
         element->path = vfs_translate_path_n (local);
 
         element->encoding = vfs_get_encoding (local);
-        element->dir.converter = INVALID_CONV;
+        element->dir.converter =
+            (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
 
         url_params = strchr (op, ':');  /* skip VFS prefix */
         if (url_params != NULL)
@@ -440,7 +441,8 @@ vfs_path_from_str_deprecated_parser (char *path)
         element->path = vfs_translate_path_n (path);
 
         element->encoding = vfs_get_encoding (path);
-        element->dir.converter = INVALID_CONV;
+        element->dir.converter =
+            (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
         vpath->path = g_list_prepend (vpath->path, element);
     }
 
@@ -485,8 +487,6 @@ vfs_path_from_str_uri_parser (char *path)
         element->class = vfs_prefix_to_class (vfs_prefix_start);
         element->vfs_prefix = g_strdup (vfs_prefix_start);
 
-        element->dir.converter = INVALID_CONV;
-
         url_delimiter += strlen (VFS_PATH_URL_DELIMITER);
         sub = VFSDATA (element);
         if (sub != NULL && sub->flags & VFS_S_REMOTE)
@@ -500,6 +500,7 @@ vfs_path_from_str_uri_parser (char *path)
             {
                 element->path = vfs_translate_path_n (slash_pointer + 1);
                 element->encoding = vfs_get_encoding (slash_pointer);
+
                 *slash_pointer = '\0';
             }
             vfs_path_url_split (element, url_delimiter);
@@ -509,6 +510,8 @@ vfs_path_from_str_uri_parser (char *path)
             element->path = vfs_translate_path_n (url_delimiter);
             element->encoding = vfs_get_encoding (url_delimiter);
         }
+        element->dir.converter =
+            (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
         vpath->path = g_list_prepend (vpath->path, element);
 
         if (real_vfs_prefix_start > path && *(real_vfs_prefix_start) == PATH_SEP)
@@ -523,7 +526,8 @@ vfs_path_from_str_uri_parser (char *path)
         element->class = g_ptr_array_index (vfs__classes_list, 0);
         element->path = vfs_translate_path_n (path);
         element->encoding = vfs_get_encoding (path);
-        element->dir.converter = INVALID_CONV;
+        element->dir.converter =
+            (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
         vpath->path = g_list_prepend (vpath->path, element);
     }
 
@@ -538,15 +542,25 @@ vfs_path_from_str_uri_parser (char *path)
  *
  * @param vpath pointer to vfs_path_t object
  * @param elements_count count of first elements for convert
+ * @param flags flags for parser
  *
  * @return pointer to newly created string.
  */
+
+#define vfs_append_from_path(appendfrom) \
+{ \
+    if ((*appendfrom != PATH_SEP) && (*appendfrom != '\0') \
+        && (buffer->str[buffer->len - 1] != PATH_SEP)) \
+        g_string_append_c (buffer, PATH_SEP); \
+    g_string_append (buffer, appendfrom); \
+}
 
 char *
 vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
 {
     int element_index;
     GString *buffer;
+    GString *recode_buffer;
 
     if (vpath == NULL)
         return NULL;
@@ -558,6 +572,7 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
         elements_count = vfs_path_elements_count (vpath) + elements_count;
 
     buffer = g_string_new ("");
+    recode_buffer = g_string_new ("");
 
     for (element_index = 0; element_index < elements_count; element_index++)
     {
@@ -580,21 +595,26 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
             g_free (url_str);
         }
 
-        if (element->encoding != NULL)
+        if (vfs_path_element_need_cleanup_converter (element))
         {
             if (buffer->str[buffer->len - 1] != PATH_SEP)
                 g_string_append (buffer, PATH_SEP_STR);
             g_string_append (buffer, VFS_ENCODING_PREFIX);
             g_string_append (buffer, element->encoding);
+            str_vfs_convert_from (element->dir.converter, element->path, recode_buffer);
+            vfs_append_from_path (recode_buffer->str);
+            g_string_set_size (recode_buffer, 0);
         }
-        if ((*element->path != PATH_SEP) && (*element->path != '\0')
-            && (buffer->str[buffer->len - 1] != PATH_SEP))
-            g_string_append_c (buffer, PATH_SEP);
-
-        g_string_append (buffer, element->path);
+        else
+        {
+            vfs_append_from_path (element->path);
+        }
     }
+    g_string_free (recode_buffer, TRUE);
     return g_string_free (buffer, FALSE);
 }
+
+#undef vfs_append_from_path
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -604,6 +624,7 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
  *
  * @return pointer to newly created string.
  */
+
 char *
 vfs_path_to_str (const vfs_path_t * vpath)
 {
@@ -970,7 +991,6 @@ vfs_path_deserialize (const char *data, GError ** error)
         }
 
         element = g_new0 (vfs_path_element_t, 1);
-        element->dir.converter = INVALID_CONV;
 
         cfg_value = mc_config_get_string_raw (cpath, groupname, "class-name", NULL);
         element->class = vfs_get_class_by_name (cfg_value);
@@ -987,6 +1007,8 @@ vfs_path_deserialize (const char *data, GError ** error)
 
         element->path = mc_config_get_string_raw (cpath, groupname, "path", NULL);
         element->encoding = mc_config_get_string_raw (cpath, groupname, "encoding", NULL);
+        element->dir.converter =
+            (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
 
         element->vfs_prefix = mc_config_get_string_raw (cpath, groupname, "vfs_prefix", NULL);
 
