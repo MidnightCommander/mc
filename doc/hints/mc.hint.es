@@ -36,10 +36,10 @@ Ayudita: F4 puede usar cualquier editor que indiquemos en la variable EDITOR.
 Ayudita: Se puede usar un visor externo indicado en la variable PAGER.
 Ayudita: Para deshabilitar los mensajes de Confirmación vaya al menú Opciones.
 Ayudita: Apunte los directorios y sitios más usados en "Favoritos".
-Ayudita: Para hacer un FTP anónimo con mc: 'cd /#ftp:maquina.dominio'
+Ayudita: Para hacer un FTP anónimo con mc: 'cd ftp://maquina.dominio'
 Ayudita: FTP está integrado en Midnight Commander, en "conexión por FTP..."
 Ayudita: M-t permite cambiar rápidamente entre varios modos de listado.
-Ayudita: Para hacer un FTP no-anónimo: 'cd /#ftp:usuario@maquina.dominio'
+Ayudita: Para hacer un FTP no-anónimo: 'cd ftp://usuario@maquina.dominio'
 Ayudita: Para examinar un archivo RPM basta pulsar <intro> sobre él.
 Ayudita: Para copiar y pegar con ratón mantener presionada la tecla MAYÚSCULAS.
 Ayudita: Los ftp habituales se pueden guardar en "Favoritos".

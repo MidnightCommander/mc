@@ -33,10 +33,10 @@ Tip: Editor pro klávesu F4 určíte pomocí proměnné prostředí EDITOR.
 Tip: Externí prohlížeč určíte proměnnými VIEWER nebo PAGER.
 Tip: Všechny žádosti o potvrzení můžete zakázat v Nastavení/Potvrzování.
 Tip: K seznamu často používaných adresářů se můžete dostat i přes C-\.
-Tip: Na anonymní FTP se připojíte pomocí „cd /#ftp:stroj.domena.cz“.
+Tip: Na anonymní FTP se připojíte pomocí „cd ftp://stroj.domena.cz“.
 Tip: MC má vestavěný FTP. Podívejte se do menu Levý/FTP spojení na počítač.
 Tip: M-t rychle mění formát zobrazení panelů.
-Tip: Při FTP spojení můžete zadat i jméno: „cd /#ftp:jmeno@stroj.domena.cz“.
+Tip: Při FTP spojení můžete zadat i jméno: „cd ftp://jmeno@stroj.domena.cz“.
 Tip: RPM soubory si prohlédnete stiskem Enter.
 Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte Shift.
 Tip: V seznamu adresářů můžete mít i často navštěvované FTP servery. Zkuste C-\.
