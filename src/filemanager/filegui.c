@@ -174,9 +174,6 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
-/* Used to save the hint line */
-static int last_hint_line;
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -575,10 +572,6 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
         create_dlg (TRUE, 0, 0, WY - minus + 1 + total_reserve, dlg_width,
                     dialog_colors, NULL, NULL, op_names[ctx->operation], DLG_CENTER | DLG_REVERSE);
 
-    last_hint_line = the_hint->widget.y;
-    if ((ui->op_dlg->y + ui->op_dlg->lines) > last_hint_line)
-        the_hint->widget.y = ui->op_dlg->y + ui->op_dlg->lines + 1;
-
     add_widget (ui->op_dlg,
                 button_new (WY - minus - 2 + total_reserve,
                             dlg_width / 2 + 1, FILE_ABORT,
@@ -657,8 +650,6 @@ file_op_context_destroy_ui (FileOpContext * ctx)
         g_free (ui);
         ctx->ui = NULL;
     }
-
-    the_hint->widget.y = last_hint_line;
 }
 
 /* --------------------------------------------------------------------------------------------- */
