@@ -60,7 +60,7 @@
 #define REDRAW_COMPLETELY    (1 << 8)
 
 #define EDIT_TEXT_HORIZONTAL_OFFSET 0
-#define EDIT_TEXT_VERTICAL_OFFSET   1
+#define EDIT_TEXT_VERTICAL_OFFSET   0
 
 #define EDIT_RIGHT_EXTREME option_edit_right_extreme
 #define EDIT_LEFT_EXTREME option_edit_left_extreme
@@ -265,7 +265,7 @@ long edit_write_stream (WEdit * edit, FILE * f);
 char *edit_get_write_filter (const char *writename, const char *filename);
 int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
-WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, long line);
+WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename, long line);
 int edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
 int edit_renew (WEdit * edit);

@@ -2101,19 +2101,17 @@ edit_insert_file (WEdit * edit, const char *filename)
  */
 
 WEdit *
-edit_init (WEdit * edit, int lines, int columns, const char *filename, long line)
+edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename, long line)
 {
-    int to_free = 0;
+    gboolean to_free = FALSE;
+
     option_auto_syntax = 1;     /* Resetting to auto on every invokation */
     if (option_line_state)
-    {
         option_line_state_width = LINE_STATE_WIDTH;
-    }
     else
-    {
         option_line_state_width = 0;
-    }
-    if (!edit)
+
+    if (edit == NULL)
     {
 #ifdef ENABLE_NLS
         /*
@@ -2144,19 +2142,25 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
 #endif /* ENABLE_NLS */
         edit = g_malloc0 (sizeof (WEdit));
         edit->search = NULL;
-        to_free = 1;
+        to_free = TRUE;
     }
+
     edit_purge_widget (edit);
+    edit->widget.y = y;
+    edit->widget.x = x;
     edit->widget.lines = lines;
-    edit->over_col = 0;
-    edit->widget.cols = columns;
+    edit->widget.cols = cols;
+
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
     edit->stat1.st_uid = getuid ();
     edit->stat1.st_gid = getgid ();
     edit->stat1.st_mtime = 0;
+
+    edit->over_col = 0;
     edit->bracket = -1;
     edit->force |= REDRAW_PAGE;
     edit_set_filename (edit, filename);
+
     edit->undo_stack_size = START_STACK_SIZE;
     edit->undo_stack_size_mask = START_STACK_SIZE - 1;
     edit->undo_stack = g_malloc0 ((edit->undo_stack_size + 10) * sizeof (long));
@@ -2174,7 +2178,7 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
         /* edit_load_file already gives an error message */
         if (to_free)
             g_free (edit);
-        return 0;
+        return NULL;
     }
 
     edit->loading_done = 1;
@@ -2188,9 +2192,7 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
 
     /* load saved cursor position */
     if ((line == 0) && option_save_position)
-    {
         edit_load_position (edit);
-    }
     else
     {
         if (line <= 0)
@@ -2257,11 +2259,13 @@ edit_clean (WEdit * edit)
 int
 edit_renew (WEdit * edit)
 {
+    int y = edit->widget.y;
+    int x = edit->widget.x;
     int lines = edit->widget.lines;
     int columns = edit->widget.cols;
 
     edit_clean (edit);
-    return (edit_init (edit, lines, columns, "", 0) != NULL);
+    return (edit_init (edit, y, x, lines, columns, "", 0) != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2276,12 +2280,14 @@ int
 edit_reload (WEdit * edit, const char *filename)
 {
     WEdit *e;
+    int y = edit->widget.y;
+    int x = edit->widget.x;
     int lines = edit->widget.lines;
     int columns = edit->widget.cols;
 
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
-    if (!edit_init (e, lines, columns, filename, 0))
+    if (edit_init (e, y, x, lines, columns, filename, 0) == NULL)
     {
         g_free (e);
         return 0;
@@ -2304,12 +2310,14 @@ int
 edit_reload_line (WEdit * edit, const char *filename, long line)
 {
     WEdit *e;
+    int y = edit->widget.y;
+    int x = edit->widget.x;
     int lines = edit->widget.lines;
     int columns = edit->widget.cols;
 
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
-    if (!edit_init (e, lines, columns, filename, line))
+    if (edit_init (e, y, x, lines, columns, filename, line) == NULL)
     {
         g_free (e);
         return 0;

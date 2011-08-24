@@ -80,6 +80,8 @@ int visible_tabs = 1, visible_tws = 1;
 
 #define key_pending(x) (!is_idle())
 
+#define EDITOR_MINIMUM_TERMINAL_WIDTH 30
+
 
 /*** file scope type declarations ****************************************************************/
 
@@ -150,7 +152,8 @@ status_string (WEdit * edit, char *s, int w)
                     edit->curs_line + 1,
                     edit->total_lines + 1, edit->curs1, edit->last_byte, byte_str,
 #ifdef HAVE_CHARSET
-                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) : ""
+                    mc_global.source_codepage >=
+                    0 ? get_codepage_id (mc_global.source_codepage) : ""
 #else
                     ""
 #endif
@@ -168,7 +171,8 @@ status_string (WEdit * edit, char *s, int w)
                     edit->curs_line + 1,
                     edit->total_lines + 1, edit->curs1, edit->last_byte, byte_str,
 #ifdef HAVE_CHARSET
-                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) : ""
+                    mc_global.source_codepage >=
+                    0 ? get_codepage_id (mc_global.source_codepage) : ""
 #else
                     ""
 #endif
@@ -197,35 +201,49 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
     int i;
+    int wrap_start;
+    int len;
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
     if (bookmarked != 0)
         tty_setcolor (bookmarked);
 
-    if (!show_right_margin)
-    {
-        tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', end_col + 1 - start_col);
-    }
-    else if (edit->start_col < option_word_wrap_line_length)
-    {
-        tty_draw_hline (edit->widget.y + y,
-                        edit->widget.x + x1, ' ', option_word_wrap_line_length - edit->start_col);
+    len = end_col + 1 - start_col;
+    wrap_start = option_word_wrap_line_length + edit->start_col;
 
-        tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
-        tty_draw_hline (edit->widget.y + y,
-                        edit->widget.x + x1 + option_word_wrap_line_length + edit->start_col,
-                        ' ', end_col + 1 - start_col);
+    if (len > 0 && edit->widget.y + y >= 0)
+    {
+        if (!show_right_margin || wrap_start > end_col)
+            tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', len);
+        else if (wrap_start < 0)
+        {
+            tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
+            tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', len);
+        }
+        else
+        {
+            if (wrap_start > 0)
+                tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', wrap_start);
+
+            len -= wrap_start;
+            if (len > 0)
+            {
+                tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
+                tty_draw_hline (edit->widget.y + y, edit->widget.x + x1 + wrap_start, ' ', len);
+            }
+        }
     }
 
     if (option_line_state)
     {
+        tty_setcolor (LINE_STATE_COLOR);
         for (i = 0; i < LINE_STATE_WIDTH; i++)
+        {
+            edit_move (x1 + i + FONT_OFFSET_X - option_line_state_width, y + FONT_OFFSET_Y);
             if (status[i] == '\0')
                 status[i] = ' ';
-
-        tty_setcolor (LINE_STATE_COLOR);
-        edit_move (x1 + FONT_OFFSET_X - option_line_state_width, y + FONT_OFFSET_Y);
-        tty_print_string (status);
+            tty_print_char (status[i]);
+        }
     }
 
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
@@ -318,9 +336,9 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     int utf8lag = 0;
     unsigned int cur_line = 0;
     int book_mark = 0;
-    char line_stat[LINE_STATE_WIDTH + 1];
+    char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
-    if (row > edit->widget.lines - EDIT_TEXT_VERTICAL_OFFSET)
+    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET)
         return;
 
     if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
@@ -591,10 +609,10 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-edit_draw_this_char (WEdit * edit, long curs, long row)
+edit_draw_this_char (WEdit * edit, long curs, long row, long start_column, long end_column)
 {
     int b = edit_bol (edit, curs);
-    edit_draw_this_line (edit, b, row, 0, edit->widget.cols - 1);
+    edit_draw_this_line (edit, b, row, start_column, end_column);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -603,27 +621,69 @@ edit_draw_this_char (WEdit * edit, long curs, long row)
 static inline void
 render_edit_text (WEdit * edit, long start_row, long start_column, long end_row, long end_column)
 {
-    long row = 0, curs_row;
     static long prev_curs_row = 0;
     static long prev_curs = 0;
 
+    Widget *w = (Widget *) edit;
+    Dlg_head *h = w->owner;
+
+    long row = 0, curs_row;
     int force = edit->force;
     long b;
+    int y1, x1, y2, x2;
+
+    int last_line;
+    int last_column;
+
+    /* draw only visible region */
+
+    last_line = h->y + h->lines - 1;
+
+    y1 = w->y;
+    if (y1 > last_line - 1 /* buttonbar */ )
+        return;
+
+    last_column = h->x + h->cols - 1;
+
+    x1 = w->x;
+    if (x1 > last_column)
+        return;
+
+    y2 = w->y + w->lines - 1;
+    if (y2 < h->y + 1 /* menubar */ )
+        return;
+
+    x2 = w->x + w->cols - 1;
+    if (x2 < h->x)
+        return;
+
+    if ((force & REDRAW_IN_BOUNDS) == 0)
+    {
+        /* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
+        /* draw only visible region */
+
+        if (y2 <= last_line - 1 /* buttonbar */ )
+            end_row = w->lines - 1;
+        else if (y1 >= h->y + 1 /* menubar */ )
+            end_row = h->lines - 1 - y1 - 1;
+        else
+            end_row = start_row + h->lines - 1 - 1;
+
+        if (x2 <= last_column)
+            end_column = w->cols - 1;
+        else if (x1 >= h->x)
+            end_column = h->cols - 1 - x1;
+        else
+            end_column = start_column + h->cols - 1;
+    }
 
     /*
      * If the position of the page has not moved then we can draw the cursor
      * character only.  This will prevent line flicker when using arrow keys.
      */
-    if ((!(force & REDRAW_CHAR_ONLY)) || (force & REDRAW_PAGE))
+    if ((force & REDRAW_CHAR_ONLY) == 0 || (force & REDRAW_PAGE) != 0)
     {
-        if (!(force & REDRAW_IN_BOUNDS))
-        {                       /* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
-            start_row = 0;
-            end_row = edit->widget.lines - 1;
-            start_column = 0;
-            end_column = edit->widget.cols - 1;
-        }
-        if (force & REDRAW_PAGE)
+        if ((force & REDRAW_PAGE) != 0)
         {
             row = start_row;
             b = edit_move_forward (edit, edit->start_display, start_row, 0);
@@ -640,22 +700,21 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
         {
             curs_row = edit->curs_row;
 
-            if (force & REDRAW_BEFORE_CURSOR)
+            if ((force & REDRAW_BEFORE_CURSOR) != 0 && start_row < curs_row)
             {
-                if (start_row < curs_row)
+                long upto = curs_row - 1 <= end_row ? curs_row - 1 : end_row;
+
+                row = start_row;
+                b = edit->start_display;
+                while (row <= upto)
                 {
-                    long upto = curs_row - 1 <= end_row ? curs_row - 1 : end_row;
-                    row = start_row;
-                    b = edit->start_display;
-                    while (row <= upto)
-                    {
-                        if (key_pending (edit))
-                            return;
-                        edit_draw_this_line (edit, b, row, start_column, end_column);
-                        b = edit_move_forward (edit, b, 1, 0);
-                    }
+                    if (key_pending (edit))
+                        return;
+                    edit_draw_this_line (edit, b, row, start_column, end_column);
+                    b = edit_move_forward (edit, b, 1, 0);
                 }
             }
+
             /*          if (force & REDRAW_LINE)          ---> default */
             b = edit_bol (edit, edit->curs1);
             if (curs_row >= start_row && curs_row <= end_row)
@@ -664,23 +723,22 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                     return;
                 edit_draw_this_line (edit, b, curs_row, start_column, end_column);
             }
-            if (force & REDRAW_AFTER_CURSOR)
+
+            if ((force & REDRAW_AFTER_CURSOR) != 0 && end_row > curs_row)
             {
-                if (end_row > curs_row)
+                row = curs_row + 1 < start_row ? start_row : curs_row + 1;
+                b = edit_move_forward (edit, b, 1, 0);
+                while (row <= end_row)
                 {
-                    row = curs_row + 1 < start_row ? start_row : curs_row + 1;
+                    if (key_pending (edit))
+                        return;
+                    edit_draw_this_line (edit, b, row, start_column, end_column);
                     b = edit_move_forward (edit, b, 1, 0);
-                    while (row <= end_row)
-                    {
-                        if (key_pending (edit))
-                            return;
-                        edit_draw_this_line (edit, b, row, start_column, end_column);
-                        b = edit_move_forward (edit, b, 1, 0);
-                        row++;
-                    }
+                    row++;
                 }
             }
-            if (force & REDRAW_LINE_ABOVE && curs_row >= 1)
+
+            if ((force & REDRAW_LINE_ABOVE) != 0 && curs_row >= 1)
             {
                 row = curs_row - 1;
                 b = edit_move_backward (edit, edit_bol (edit, edit->curs1), 1);
@@ -691,7 +749,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                     edit_draw_this_line (edit, b, row, start_column, end_column);
                 }
             }
-            if (force & REDRAW_LINE_BELOW && row < edit->widget.lines - 1)
+
+            if ((force & REDRAW_LINE_BELOW) != 0 && row < edit->widget.lines - 1)
             {
                 row = curs_row + 1;
                 b = edit_bol (edit, edit->curs1);
@@ -705,18 +764,16 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             }
         }
     }
+    else if (prev_curs_row < edit->curs_row)
+    {
+        /* with the new text highlighting, we must draw from the top down */
+        edit_draw_this_char (edit, prev_curs, prev_curs_row, start_column, end_column);
+        edit_draw_this_char (edit, edit->curs1, edit->curs_row, start_column, end_column);
+    }
     else
     {
-        if (prev_curs_row < edit->curs_row)
-        {                       /* with the new text highlighting, we must draw from the top down */
-            edit_draw_this_char (edit, prev_curs, prev_curs_row);
-            edit_draw_this_char (edit, edit->curs1, edit->curs_row);
-        }
-        else
-        {
-            edit_draw_this_char (edit, edit->curs1, edit->curs_row);
-            edit_draw_this_char (edit, prev_curs, prev_curs_row);
-        }
+        edit_draw_this_char (edit, edit->curs1, edit->curs_row, start_column, end_column);
+        edit_draw_this_char (edit, prev_curs, prev_curs_row, start_column, end_column);
     }
 
     edit->force = 0;
@@ -749,13 +806,13 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** Draw the status line at the top of the widget. The size of the filename
+/** Draw the status line at the top of the screen. The size of the filename
  * field varies depending on the width of the screen and the length of
  * the filename. */
 void
 edit_status (WEdit * edit)
 {
-    const int w = edit->widget.cols;
+    const int w = edit->widget.owner->cols;
     const size_t status_size = w + 1;
     char *const status = g_malloc (status_size);
     int status_len;
@@ -783,19 +840,18 @@ edit_status (WEdit * edit)
         fname = str_trunc (fname, fname_len);
     }
 
-    widget_move (edit, 0, 0);
+    dlg_move (edit->widget.owner, 0, 0);
     tty_setcolor (STATUSBAR_COLOR);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
 
-    if (simple_statusbar && edit->widget.cols > 30)
+    if (simple_statusbar && w > EDITOR_MINIMUM_TERMINAL_WIDTH)
     {
-        size_t percent;
+        size_t percent = 100;
+
         if (edit->total_lines + 1 != 0)
             percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
-        else
-            percent = 100;
-        widget_move (edit, 0, edit->widget.cols - 5);
+        dlg_move (edit->widget.owner, 0, w - 5);
         tty_printf (" %3d%%", percent);
     }
 
@@ -815,7 +871,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         return;
 
     edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET - 1;
+    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET;
 
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
@@ -829,14 +885,20 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     if (b_extreme + t_extreme + 1 > edit->widget.lines)
     {
         int n;
+
         n = b_extreme + t_extreme;
+        if (n == 0)
+            n = 1;
         b_extreme = (b_extreme * (edit->widget.lines - 1)) / n;
         t_extreme = (t_extreme * (edit->widget.lines - 1)) / n;
     }
     if (l_extreme + r_extreme + 1 > edit->widget.cols)
     {
         int n;
+
         n = l_extreme + t_extreme;
+        if (n == 0)
+            n = 1;
         l_extreme = (l_extreme * (edit->widget.cols - 1)) / n;
         r_extreme = (r_extreme * (edit->widget.cols - 1)) / n;
     }
@@ -857,7 +919,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
 
-    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET - 1;
+    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET;
     edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
 }
 
