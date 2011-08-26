@@ -79,7 +79,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
     int c;
 
     /* an ordinary insertable character */
-    if (x_key < 256)
+    if (!edit->extmod && x_key < 256)
     {
 #ifdef HAVE_CHARSET
         if (edit->charpoint >= 4)
@@ -183,7 +183,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
     /* Commands specific to the key emulation */
     if (edit->extmod)
     {
-        edit->extmod = 0;
+        edit->extmod = FALSE;
         command = keybind_lookup_keymap_command (editor_x_map, x_key);
     }
     else
