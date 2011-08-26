@@ -159,7 +159,7 @@ slang_reset_softkeys (void)
         send = (char *) SLtt_tgetstr (tmp);
         if (send != NULL)
         {
-            g_snprintf (tmp, sizeof (tmp), "\033&f%dk%dd%dL%s%s", key,
+            g_snprintf (tmp, sizeof (tmp), ESC_STR "&f%dk%dd%dL%s%s", key,
                         (int) (sizeof (display) - 1), (int) strlen (send), display, send);
             SLtt_write_string (tmp);
         }
