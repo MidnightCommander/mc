@@ -149,6 +149,8 @@ START_TEST (test_vfs_parse_ls_lga)
 {
     size_t filepos = 0;
 
+    vfs_parse_ls_lga_init();
+
     check_vfs_parse_ls_lga_call(
         "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root",
         1, "build_root", NULL, (struct stat)
@@ -215,7 +217,7 @@ START_TEST (test_vfs_parse_ls_lga)
 
     check_vfs_parse_ls_lga_call(
         "drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root",
-        1, "  build_root", NULL, (struct stat)
+        1, "build_root", NULL, (struct stat)
         {
         .st_dev = 0,
         .st_ino = 0,
@@ -245,6 +247,7 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
     struct vfs_s_entry *ent1, *ent2, *ent3;
     int i;
 
+    vfs_parse_ls_lga_init();
 
     ent1 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
     i = ent1->ino->st.st_nlink;
@@ -254,7 +257,7 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
         fail ("An error occured while parse ls output");
         return;
     }
-    vfs_s_store_filename_pos (ent1, filepos);
+    vfs_s_store_filename_leading_spaces (ent1, filepos);
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent1);
 
 
@@ -266,7 +269,7 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
         fail ("An error occured while parse ls output");
         return;
     }
-    vfs_s_store_filename_pos (ent2, filepos);
+    vfs_s_store_filename_leading_spaces (ent2, filepos);
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent2);
 
     ent3 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
@@ -277,10 +280,10 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
         fail ("An error occured while parse ls output");
         return;
     }
-    vfs_s_store_filename_pos (ent3, filepos);
+    vfs_s_store_filename_leading_spaces (ent3, filepos);
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent3);
 
-    vfs_s_normalize_filename_pos (vfs_root_inode, filepos);
+    vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());
 
     fail_unless(strcmp(ent1->name, "     build_root1") == 0, "\nactual '%s'\nnot equal to '%s'\n", ent1->name, "     build_root1");
     fail_unless(strcmp(ent2->name, "   build_root2") == 0, "\nactual '%s'\nnot equal to '%s'\n", ent2->name, "   build_root2");
@@ -288,6 +291,48 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
+#define parce_one_line(ent_index, ls_output) {\
+    ent[ent_index] = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);\
+    if (! vfs_parse_ls_lga (ls_output,\
+    &ent[ent_index]->ino->st, &ent[ent_index]->name, &ent[ent_index]->ino->linkname, &filepos))\
+    {\
+        fail ("An error occured while parse ls output");\
+        return;\
+    }\
+    vfs_s_store_filename_leading_spaces (ent[ent_index], filepos);\
+    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent[ent_index]);\
+    \
+}
+#define fail_unless_ent(ent_index, etalon_str){\
+    fail_unless(\
+        strcmp(ent[ent_index]->name, etalon_str) == 0,\
+        "\nactual '%s'\nnot equal to '%s'\n", ent[ent_index]->name, etalon_str\
+    );\
+}
+
+START_TEST (test_vfs_parse_ls_lga_unaligned)
+{
+    size_t filepos = 0;
+    struct vfs_s_entry *ent[4];
+
+    vfs_parse_ls_lga_init();
+
+    parce_one_line(0, "drwxrwxr-x   10 500      500          4096 Jun 23 17:09  build_root1");
+    parce_one_line(1, "drwxrwxr-x   10 500     500         4096 Jun 23 17:09     build_root2");
+    parce_one_line(2, "drwxrwxr-x 10 500 500 4096 Jun 23 17:09  ..");
+    parce_one_line(3, "drwxrwxr-x      10   500        500             4096   Jun   23   17:09   build_root 0");
+
+    vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());
+
+    fail_unless_ent(0, "build_root1");
+    fail_unless_ent(1, "   build_root2");
+    fail_unless_ent(3, " build_root 0");
+
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -302,6 +347,7 @@ main (void)
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, test_vfs_parse_ls_lga);
     tcase_add_test (tc_core, test_vfs_parse_ls_lga_reorder);
+    tcase_add_test (tc_core, test_vfs_parse_ls_lga_unaligned);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
