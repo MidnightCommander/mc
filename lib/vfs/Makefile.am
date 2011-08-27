@@ -6,6 +6,7 @@ libmcvfs_la_SOURCES = \
 	direntry.c		\
 	gc.c gc.h		\
 	interface.c \
+	parse_ls_vga.c \
 	path.c path.h		\
 	vfs.c vfs.h		\
 	utilvfs.c utilvfs.h	\
