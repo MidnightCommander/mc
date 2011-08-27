@@ -20,6 +20,7 @@ AM_CPPFLAGS = -DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\"
 BASICFILES = \
 	vfs.c vfs.h vfs-impl.h	\
 	direntry.c xdirentry.h	\
+	parse_ls_vga.c \
 	utilvfs.c utilvfs.h	\
 	gc.c gc.h		\
 	local.c local.h
