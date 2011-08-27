@@ -249,12 +249,12 @@ int vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, 
 /* misc */
 int vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino);
 
-void vfs_s_normalize_filename_pos (struct vfs_s_inode *root_inode, size_t final_filepos);
+void vfs_s_normalize_filename_leading_spaces (struct vfs_s_inode *root_inode, size_t final_filepos);
 
 /*** inline functions ****************************************************************************/
 
 static inline void
-vfs_s_store_filename_pos (struct vfs_s_entry *entry, size_t position)
+vfs_s_store_filename_leading_spaces (struct vfs_s_entry *entry, size_t position)
 {
     entry->ino->data_offset = (off_t) position;
 }

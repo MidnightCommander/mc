@@ -1644,7 +1644,6 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     int sock, num_entries = 0;
     char lc_buffer[BUF_8K];
     int cd_first;
-    size_t filepos = 0;
 
     cd_first = ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT)
         || (strchr (remote_path, ' ') != NULL);
@@ -1688,9 +1687,11 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     /* Clear the interrupt flag */
     tty_enable_interrupt_key ();
 
+    vfs_parse_ls_lga_init ();
     while (1)
     {
         int i;
+        size_t count_spaces = 0;
         int res = vfs_s_get_line_interruptible (me, lc_buffer, sizeof (lc_buffer),
                                                 sock);
         if (!res)
@@ -1715,14 +1716,15 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 
         ent = vfs_s_generate_entry (me, NULL, dir, 0);
         i = ent->ino->st.st_nlink;
-        if (!vfs_parse_ls_lga (lc_buffer, &ent->ino->st, &ent->name, &ent->ino->linkname, &filepos))
+        if (!vfs_parse_ls_lga
+            (lc_buffer, &ent->ino->st, &ent->name, &ent->ino->linkname, &count_spaces))
         {
             vfs_s_free_entry (me, ent);
             continue;
         }
         ent->ino->st.st_nlink = i;      /* Ouch, we need to preserve our counts :-( */
         num_entries++;
-        vfs_s_store_filename_pos (ent, filepos);
+        vfs_s_store_filename_leading_spaces (ent, count_spaces);
         vfs_s_insert_entry (me, dir, ent);
     }
 
@@ -1747,7 +1749,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         goto again;
     }
 
-    vfs_s_normalize_filename_pos (dir, filepos);
+    vfs_s_normalize_filename_leading_spaces (dir, vfs_parse_ls_lga_get_final_spaces ());
 
     if (SUP.strict == RFC_AUTODETECT)
         SUP.strict = RFC_DARING;

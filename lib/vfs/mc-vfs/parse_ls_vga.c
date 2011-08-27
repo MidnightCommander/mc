@@ -49,6 +49,7 @@
 
 static char *columns[MAXCOLS];  /* Points to the string in column n */
 static int column_ptr[MAXCOLS]; /* Index from 0 to the starting positions of the columns */
+static size_t vfs_parce_ls_final_num_spaces = 0;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -644,9 +645,25 @@ vfs_split_text (char *p)
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+vfs_parse_ls_lga_init (void)
+{
+    vfs_parce_ls_final_num_spaces = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+size_t
+vfs_parse_ls_lga_get_final_spaces (void)
+{
+    return vfs_parce_ls_final_num_spaces;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 gboolean
 vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkname,
-                  size_t * filename_pos)
+                  size_t * num_spaces)
 {
     int idx, idx2, num_cols;
     int i;
@@ -774,12 +791,11 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
     s->st_blocks = (s->st_size + 511) / 512;
 #endif
 
-    if (filename_pos != NULL)
+    if (num_spaces != NULL)
     {
-        if ((*filename_pos == 0) || (*filename_pos > (size_t) column_ptr[idx]))
-            *filename_pos = column_ptr[idx];
-        else
-            column_ptr[idx] = *filename_pos;
+        *num_spaces = column_ptr[idx] - column_ptr[idx - 1] - strlen (columns[idx - 1]);
+        if (strcmp (columns[idx], "..") == 0)
+            vfs_parce_ls_final_num_spaces = *num_spaces;
     }
 
     for (i = idx + 1, idx2 = 0; i < num_cols; i++)
