@@ -2390,8 +2390,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     }
 
     ctx = file_op_context_new (operation);
-    tctx = file_op_total_context_new ();
-    gettimeofday (&(tctx->transfer_start), (struct timezone *) NULL);
 
     /* Show confirmation dialog */
     if (operation != OP_DELETE)
@@ -2422,11 +2420,11 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             /* just copy */
             dest_dir_ = g_strdup (dest_dir);
         }
+
         if (dest_dir_ == NULL)
         {
-            file_op_total_context_destroy (tctx);
-            file_op_context_destroy (ctx);
-            return FALSE;
+            ret_val = FALSE;
+            goto ret_fast;
         }
 
         /* Generate confirmation prompt */
@@ -2441,10 +2439,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
         if (dest == NULL || dest[0] == '\0')
         {
-            file_op_total_context_destroy (tctx);
-            file_op_context_destroy (ctx);
             g_free (dest);
-            return FALSE;
+            ret_val = FALSE;
+            goto ret_fast;
         }
     }
     else if (confirm_delete)
@@ -2473,11 +2470,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
         if (i != 0)
         {
-            file_op_total_context_destroy (tctx);
-            file_op_context_destroy (ctx);
-            return FALSE;
+            ret_val = FALSE;
+            goto ret_fast;
         }
     }
+
+    tctx = file_op_total_context_new ();
+    gettimeofday (&tctx->transfer_start, (struct timezone *) NULL);
 
     {
         filegui_dialog_type_t dialog_type;
@@ -2766,8 +2765,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     }
 #endif /* WITH_BACKGROUND */
 
-    file_op_context_destroy (ctx);
     file_op_total_context_destroy (tctx);
+  ret_fast:
+    file_op_context_destroy (ctx);
 
     return ret_val;
 }
