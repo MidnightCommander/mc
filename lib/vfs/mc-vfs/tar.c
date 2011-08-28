@@ -631,7 +631,12 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         }
 
         if (current_file_name == NULL)
-            current_file_name = g_strndup (header->header.arch_name, NAMSIZ);
+        {
+            if (next_long_name != NULL)
+                current_file_name = g_strdup (next_long_name);
+            else
+                current_file_name = g_strndup (header->header.arch_name, NAMSIZ);
+        }
 
         canonicalize_pathname (current_file_name);
         len = strlen (current_file_name);
