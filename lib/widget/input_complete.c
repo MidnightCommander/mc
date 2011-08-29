@@ -871,7 +871,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
         q = strrchr (word, '$');
     if (flags & INPUT_COMPLETE_HOSTNAMES)
         r = strrchr (word, '@');
-    if (q && q[1] == '(' && INPUT_COMPLETE_COMMANDS)
+    if (q && q[1] == '(' && (flags & INPUT_COMPLETE_COMMANDS))
     {
         if (q > p)
             p = str_get_next_char (q);
