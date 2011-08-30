@@ -35,9 +35,6 @@ typedef struct macros_t
     GArray *macro;
 } macros_t;
 
-/* macro stuff */
-struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
-
 struct mc_fhl_struct;
 
 /*** global variables defined in .c file *********************************************************/
@@ -79,6 +76,9 @@ extern const char *mc_prompt;
 
 /* index to record_macro_buf[], -1 if not recording a macro */
 extern int macro_index;
+
+/* macro stuff */
+extern struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
 
 extern GArray *macros_list;
 

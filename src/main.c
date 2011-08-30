@@ -111,6 +111,9 @@ char *last_wd_string = NULL;
 /* index to record_macro_buf[], -1 if not recording a macro */
 int macro_index = -1;
 
+/* macro stuff */
+struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
+
 GArray *macros_list;
 
 /*** file scope macro definitions ****************************************************************/
