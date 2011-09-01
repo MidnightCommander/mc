@@ -42,8 +42,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
-#include "lib/tty/key.h"        /* For init_key() */
+#include "lib/tty/key.h"        /* KEY_M_* masks */
 #include "lib/tty/win.h"        /* xterm_flag */
 #include "lib/skin.h"
 #include "lib/util.h"
@@ -753,22 +752,8 @@ setup_dummy_mc (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-done_screen (void)
-{
-    if ((quit & SUBSHELL_EXIT) == 0)
-        clr_scr ();
-    tty_reset_shell_mode ();
-    tty_noraw_mode ();
-    tty_keypad (FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 done_mc (void)
 {
-    disable_mouse ();
-
     /* Setup shutdown
      *
      * We sync the profiles since the hotlist may have changed, while
@@ -776,7 +761,6 @@ done_mc (void)
      */
 
     save_setup (auto_save_setup, panels_options.auto_save_setup);
-    done_screen ();
 
     vfs_stamp_path (vfs_get_current_dir ());
 
@@ -1573,6 +1557,9 @@ do_nc (void)
 #ifdef USE_INTERNAL_EDIT
     edit_stack_free ();
 #endif
+
+    if ((quit & SUBSHELL_EXIT) == 0)
+        clr_scr ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
