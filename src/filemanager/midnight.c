@@ -42,8 +42,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
-#include "lib/tty/key.h"        /* For init_key() */
+#include "lib/tty/key.h"        /* KEY_M_* masks */
 #include "lib/tty/win.h"        /* xterm_flag */
 #include "lib/skin.h"
 #include "lib/util.h"
@@ -852,36 +851,20 @@ setup_dummy_mc (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-done_screen (void)
-{
-    if ((quit & SUBSHELL_EXIT) == 0)
-        clr_scr ();
-    tty_reset_shell_mode ();
-    tty_noraw_mode ();
-    tty_keypad (FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 done_mc (void)
 {
-    disable_mouse ();
-
     /* Setup shutdown
      *
      * We sync the profiles since the hotlist may have changed, while
      * we only change the setup data if we have the auto save feature set
      */
+    char *curr_dir;
 
     save_setup (auto_save_setup, panels_options.auto_save_setup);
-    done_screen ();
 
-    {
-        char *curr_dir = vfs_get_current_dir ();
-        vfs_stamp_path (curr_dir);
-        g_free (curr_dir);
-    }
+    curr_dir = vfs_get_current_dir ();
+    vfs_stamp_path (curr_dir);
+    g_free (curr_dir);
 
     if ((current_panel != NULL) && (get_current_type () == view_listing))
         vfs_stamp_path (current_panel->cwd);
@@ -1686,6 +1669,9 @@ do_nc (void)
 #ifdef USE_INTERNAL_EDIT
     edit_stack_free ();
 #endif
+
+    if ((quit & SUBSHELL_EXIT) == 0)
+        clr_scr ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

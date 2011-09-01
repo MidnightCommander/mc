@@ -182,7 +182,12 @@ tty_init (gboolean slow, gboolean ugly_lines, gboolean mouse_enable, gboolean is
 void
 tty_shutdown (void)
 {
-    endwin ();
+    disable_mouse ();
+    tty_reset_shell_mode ();
+    tty_noraw_mode ();
+    tty_keypad (FALSE);
+    tty_reset_screen ();
+    do_exit_ca_mode ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

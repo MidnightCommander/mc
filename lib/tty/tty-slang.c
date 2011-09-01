@@ -327,8 +327,11 @@ tty_shutdown (void)
 {
     char *op_cap;
 
-    SLsmg_reset_smg ();
+    disable_mouse ();
     tty_reset_shell_mode ();
+    tty_noraw_mode ();
+    tty_keypad (FALSE);
+    tty_reset_screen ();
     do_exit_ca_mode ();
     SLang_reset_tty ();
 
