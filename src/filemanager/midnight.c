@@ -829,8 +829,6 @@ setup_mc (void)
         add_select_channel (mc_global.tty.subshell_pty, load_prompt, 0);
 #endif /* !HAVE_SUBSHELL_SUPPORT */
 
-    tty_setup_sigwinch (sigwinch_handler);
-
     if ((tty_baudrate () < 9600) || tty_is_slow ())
         verbose = 0;
 }

@@ -260,7 +260,7 @@ tty_resize (int fd)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_low_level_change_screen_size (void)
+tty_change_screen_size (void)
 {
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ

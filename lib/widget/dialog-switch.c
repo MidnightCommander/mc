@@ -331,7 +331,7 @@ dialog_change_screen_size (void)
     tty_noraw_mode ();
     tty_reset_screen ();
 #endif
-    tty_low_level_change_screen_size ();
+    tty_change_screen_size ();
 #ifdef HAVE_SLANG
     /* XSI Curses spec states that portable applications shall not invoke
      * initscr() more than once.  This kludge could be done within the scope

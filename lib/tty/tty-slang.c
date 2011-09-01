@@ -132,6 +132,34 @@ static const struct
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+tty_setup_sigwinch (void (*handler) (int))
+{
+#ifdef SIGWINCH
+    struct sigaction act, oact;
+    act.sa_handler = handler;
+    sigemptyset (&act.sa_mask);
+    act.sa_flags = 0;
+#ifdef SA_RESTART
+    act.sa_flags |= SA_RESTART;
+#endif /* SA_RESTART */
+    sigaction (SIGWINCH, &act, &oact);
+#endif /* SIGWINCH */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+sigwinch_handler (int dummy)
+{
+    (void) dummy;
+
+    tty_change_screen_size ();
+    mc_global.tty.winch_flag = TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* HP Terminals have capabilities (pfkey, pfloc, pfx) to program function keys.
    elm 2.4pl15 invoked with the -K option utilizes these softkeys and the
    consequence is that function keys don't work in MC sometimes...
@@ -318,6 +346,8 @@ tty_init (gboolean slow, gboolean ugly_lines, gboolean mouse_enable, gboolean is
     do_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
+
+    tty_setup_sigwinch (sigwinch_handler);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -686,23 +716,6 @@ void
 tty_refresh (void)
 {
     SLsmg_refresh ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-tty_setup_sigwinch (void (*handler) (int))
-{
-#ifdef SIGWINCH
-    struct sigaction act, oact;
-    act.sa_handler = handler;
-    sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
-#ifdef SA_RESTART
-    act.sa_flags |= SA_RESTART;
-#endif /* SA_RESTART */
-    sigaction (SIGWINCH, &act, &oact);
-#endif /* SIGWINCH */
 }
 
 /* --------------------------------------------------------------------------------------------- */
