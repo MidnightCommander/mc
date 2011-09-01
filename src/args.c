@@ -30,7 +30,6 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/strutil.h"
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"           /* x_basename() */
@@ -409,9 +408,6 @@ mc_setup_by_args (int argc, char *argv[])
 {
     const char *base;
     char *tmp;
-
-    if (mc_args__nomouse)
-        use_mouse_p = MOUSE_DISABLED;
 
     if (mc_args__netfs_logfile != NULL)
     {

@@ -75,7 +75,9 @@ extern void tty_beep (void);
 
 /* {{{ Input }}} */
 
-extern void tty_init (gboolean slow, gboolean ugly_lines);
+extern gboolean tty_check_term (gboolean force_xterm);
+extern void tty_init (gboolean slow, gboolean ugly_lines, gboolean mouse_enable,
+                      gboolean is_xterm);
 extern void tty_shutdown (void);
 
 extern gboolean tty_is_slow (void);

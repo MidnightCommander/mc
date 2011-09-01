@@ -33,6 +33,8 @@
 
 #include <signal.h>
 #include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>     /* exit() */
 
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
@@ -43,6 +45,7 @@
 
 #include "tty.h"
 #include "tty-internal.h"
+#include "mouse.h"      /* use_mouse_p */
 #include "win.h"
 
 /*** global variables ****************************************************************************/
@@ -80,6 +83,34 @@ sigintr_handler (int signo)
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Check terminal type. If $TERM is not set or value is empty, mc finishes with EXIT_FAILURE.
+ *
+ * @param force_xterm Set forced the XTerm type
+ *
+ * @return true if @param force_xterm is true or value of $TERM is one of term*, konsole*
+ *              rxvt*, Eterm or dtterm
+ */
+gboolean
+tty_check_term (gboolean force_xterm)
+{
+    const char *termvalue;
+
+    termvalue = getenv ("TERM");
+    if (termvalue == NULL || *termvalue == '\0')
+    {
+        fputs (_("The TERM environment variable is unset!\n"), stderr);
+        exit (EXIT_FAILURE);
+    }
+
+    return force_xterm || strncmp (termvalue, "xterm", 5) == 0
+        || strncmp (termvalue, "konsole", 7) == 0
+        || strncmp (termvalue, "rxvt", 4) == 0
+        || strcmp (termvalue, "Eterm") == 0 || strcmp (termvalue, "dtterm") == 0;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 extern gboolean
@@ -256,6 +287,44 @@ tty_low_level_change_screen_size (void)
     }
 #endif /* TIOCGWINSZ */
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_init_xterm_support (gboolean is_xterm)
+{
+    const char *termvalue;
+
+    termvalue = getenv ("TERM");
+
+    /* Check mouse capabilities */
+    xmouse_seq = tty_tgetstr ("Km");
+
+    if (strcmp (termvalue, "cygwin") == 0)
+    {
+        is_xterm = TRUE;
+        use_mouse_p = MOUSE_DISABLED;
+    }
+
+    if (is_xterm)
+    {
+        /* Default to the standard xterm sequence */
+        if (xmouse_seq == NULL)
+            xmouse_seq = ESC_STR "[M";
+
+        /* Enable mouse unless explicitly disabled by --nomouse */
+        if (use_mouse_p != MOUSE_DISABLED)
+        {
+            const char *color_term = getenv ("COLORTERM");
+            if (strncmp (termvalue, "rxvt", 4) == 0 ||
+                (color_term != NULL && strncmp (color_term, "rxvt", 4) == 0) ||
+                strcmp (termvalue, "Eterm") == 0)
+                use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
+            else
+                use_mouse_p = MOUSE_XTERM_BUTTON_EVENT_TRACKING;
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

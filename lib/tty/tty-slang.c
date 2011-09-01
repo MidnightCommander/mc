@@ -243,14 +243,14 @@ mc_tty_normalize_lines_char (const char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init (gboolean slow, gboolean ugly_lines)
+tty_init (gboolean slow, gboolean ugly_lines, gboolean mouse_enable, gboolean is_xterm)
 {
     slow_tty = slow;
     ugly_line_drawing = ugly_lines;
 
     SLtt_Ignore_Beep = 1;
 
-    SLutf8_enable (-1); /* has to be called first before any of the other functions. */
+    SLutf8_enable (-1);         /* has to be called first before any of the other functions. */
     SLtt_get_terminfo ();
     /*
      * If the terminal in not in terminfo but begins with a well-known
@@ -303,7 +303,18 @@ tty_init (gboolean slow, gboolean ugly_lines)
     /* It's the small part from the previous init_key() */
     init_key_input_fd ();
 
+    /* For 8-bit locales, NCurses handles 154 (0x9A) symbol properly, while S-Lang
+     * requires SLsmg_Display_Eight_Bit >= 154 (OR manual filtering if xterm display
+     * detected - but checking TERM would fail under screen, OR running xterm
+     * with allowC1Printable).
+     */
+    tty_display_8bit (FALSE);
+
     SLsmg_init_smg ();
+    if (!mouse_enable)
+        use_mouse_p = MOUSE_DISABLED;
+    tty_init_xterm_support (is_xterm);  /* do it before do_enter_ca_mode() call */
+    init_mouse ();
     do_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);

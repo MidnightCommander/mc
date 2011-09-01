@@ -39,6 +39,7 @@ extern gboolean mouse_enabled;
 /*** declarations of public functions ************************************************************/
 
 char *mc_tty_normalize_from_utf8 (const char *);
+void tty_init_xterm_support (gboolean is_xterm);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC_TTY_INTERNAL_H */

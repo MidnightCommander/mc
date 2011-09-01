@@ -41,7 +41,7 @@
 
 /* This flag is set by xterm detection routine in function main() */
 /* It is used by function view_other_cmd() */
-int xterm_flag = 0;
+gboolean xterm_flag = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 
