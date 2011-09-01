@@ -440,6 +440,13 @@ main (int argc, char *argv[])
     if (!mc_args_handle (argc, argv, "mc"))
         exit (EXIT_FAILURE);
 
+    /* check terminal type
+     * $TEMR must be set and not empty
+     * xterm_flag is used in init_key() and tty_init()
+     * Do this after mc_args_handle() where mc_args__force_xterm is set up.
+     */
+    xterm_flag = tty_check_term (mc_args__force_xterm);
+
     /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */
     init_key ();
@@ -464,7 +471,8 @@ main (int argc, char *argv[])
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
-    tty_init ((gboolean) mc_args__slow_terminal, (gboolean) mc_args__ugly_line_drawing);
+    tty_init (mc_args__slow_terminal, mc_args__ugly_line_drawing, !mc_args__nomouse,
+              (gboolean) xterm_flag);
 
     load_setup ();
 

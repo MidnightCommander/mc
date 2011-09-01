@@ -48,6 +48,7 @@
 #include "tty-internal.h"       /* slow_tty */
 #include "tty.h"
 #include "color-internal.h"
+#include "mouse.h"
 #include "win.h"
 
 /* include at last !!! */
@@ -139,7 +140,7 @@ mc_tty_normalize_lines_char (const char *ch)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init (gboolean slow, gboolean ugly_lines)
+tty_init (gboolean slow, gboolean ugly_lines, gboolean mouse_enable, gboolean is_xterm)
 {
     slow_tty = slow;
     (void) ugly_lines;
@@ -167,6 +168,10 @@ tty_init (gboolean slow, gboolean ugly_lines)
 
     tty_start_interrupt_key ();
 
+    if (!mouse_enable)
+        use_mouse_p = MOUSE_DISABLED;
+    tty_init_xterm_support (is_xterm);  /* do it before do_enter_ca_mode() call */
+    init_mouse ();
     do_enter_ca_mode ();
     tty_raw_mode ();
     noecho ();

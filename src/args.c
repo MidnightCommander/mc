@@ -388,9 +388,6 @@ mc_setup_by_args (int argc, char *argv[])
     const char *base;
     char *tmp;
 
-    if (mc_args__nomouse)
-        use_mouse_p = MOUSE_DISABLED;
-
     if (mc_args__netfs_logfile != NULL)
     {
 #ifdef ENABLE_VFS_FTP

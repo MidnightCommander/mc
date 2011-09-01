@@ -15,7 +15,7 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern int xterm_flag;
+extern gboolean xterm_flag;
 
 /*** declarations of public functions ************************************************************/
 
