@@ -298,8 +298,19 @@ tty_init_xterm_support (gboolean is_xterm)
 
     termvalue = getenv ("TERM");
 
-    /* Check mouse capabilities */
-    xmouse_seq = tty_tgetstr ("Km");
+    /* Check mouse and ca capabilities */
+    /* terminfo/termcap structures have been already initialized,
+       in slang_init() or/and init_curses()  */
+    /* Check terminfo at first, then check termcap */
+    xmouse_seq = tty_tgetstr ("kmous");
+    if (xmouse_seq == NULL)
+        xmouse_seq = tty_tgetstr ("Km");
+    smcup = tty_tgetstr ("smcup");
+    if (smcup == NULL)
+        smcup = tty_tgetstr ("ti");
+    rmcup = tty_tgetstr ("rmcup");
+    if (rmcup == NULL)
+        rmcup = tty_tgetstr ("te");
 
     if (strcmp (termvalue, "cygwin") == 0)
     {
