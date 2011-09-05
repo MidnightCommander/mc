@@ -86,7 +86,6 @@ static char *data = NULL;
 static void
 exec_extension (const char *filename, const char *lc_data, int *move_dir, int start_line)
 {
-    char *fn;
     char *file_name;
     int cmd_file_fd;
     FILE *cmd_file;
@@ -238,9 +237,9 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                                 }
                                 else
                                 {
-                                    fn = vfs_path_to_str (vpath);
-                                    text = quote_func (fn, 0);
-                                    g_free (fn);
+                                    vfs_path_element_t *path_element;
+                                    path_element = vfs_path_get_by_index (vpath, -1);
+                                    text = quote_func (path_element->path, 0);
                                 }
                             }
 
