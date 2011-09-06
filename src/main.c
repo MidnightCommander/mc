@@ -441,8 +441,7 @@ main (int argc, char *argv[])
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
-    tty_init (mc_global.args.slow_terminal, !mc_args__nomouse,
-              mc_global.tty.xterm_flag);
+    tty_init (!mc_args__nomouse, mc_global.tty.xterm_flag);
 
     load_setup ();
 

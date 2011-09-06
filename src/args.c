@@ -221,7 +221,7 @@ static const GOptionEntry argument_terminal_table[] = {
 
     {
      "slow", 's', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_global.args.slow_terminal,
+     &mc_global.tty.slow_terminal,
      N_("To run on slow terminals"),
      NULL
     },

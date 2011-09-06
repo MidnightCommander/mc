@@ -78,7 +78,6 @@ mc_global_t mc_global = {
         .disable_colors = FALSE,
         .skin = NULL,
         .ugly_line_drawing = FALSE,
-        .slow_terminal = FALSE
     },
 
     .widget =
@@ -106,6 +105,7 @@ mc_global_t mc_global = {
         .winch_flag = FALSE,
         .command_line_colors = NULL,
         .xterm_flag = FALSE,
+        .slow_terminal = FALSE,
     },
 
     .vfs =

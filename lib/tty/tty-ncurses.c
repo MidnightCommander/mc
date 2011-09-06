@@ -43,7 +43,7 @@
 #define WANT_TERM_H
 #endif
 
-#include "tty-internal.h"       /* slow_tty */
+#include "tty-internal.h"       /* mc_tty_normalize_from_utf8() */
 #include "tty.h"
 #include "color-internal.h"
 #include "mouse.h"
@@ -165,10 +165,8 @@ mc_tty_normalize_lines_char (const char *ch)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init (gboolean slow, gboolean mouse_enable, gboolean is_xterm)
+tty_init (gboolean mouse_enable, gboolean is_xterm)
 {
-    slow_tty = slow;
-
     initscr ();
 
 #ifdef HAVE_ESCDELAY

@@ -34,7 +34,7 @@
 #include <signal.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include <unistd.h>     /* exit() */
+#include <unistd.h>             /* exit() */
 
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
@@ -45,7 +45,7 @@
 
 #include "tty.h"
 #include "tty-internal.h"
-#include "mouse.h"      /* use_mouse_p */
+#include "mouse.h"              /* use_mouse_p */
 #include "win.h"
 
 /*** global variables ****************************************************************************/
@@ -54,9 +54,6 @@
    command ran in the subshell to the description found in the termcap/terminfo
    database */
 int reset_hp_softkeys = 0;
-
-/* If true lines are drown by spaces */
-gboolean slow_tty = FALSE;
 
 int mc_tty_frm[MC_TTY_FRM_MAX];
 
@@ -106,14 +103,6 @@ tty_check_term (gboolean force_xterm)
         || strncmp (termvalue, "konsole", 7) == 0
         || strncmp (termvalue, "rxvt", 4) == 0
         || strcmp (termvalue, "Eterm") == 0 || strcmp (termvalue, "dtterm") == 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-extern gboolean
-tty_is_slow (void)
-{
-    return slow_tty;
 }
 
 /* --------------------------------------------------------------------------------------------- */

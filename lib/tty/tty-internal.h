@@ -27,9 +27,6 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-/* If true lines are shown by spaces */
-extern gboolean slow_tty;
-
 /* The mouse is currently: TRUE - enabled, FALSE - disabled */
 extern gboolean mouse_enabled;
 

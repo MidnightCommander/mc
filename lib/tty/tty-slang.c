@@ -44,7 +44,7 @@
 #include "lib/strutil.h"        /* str_term_form */
 #include "lib/util.h"           /* is_printable() */
 
-#include "tty-internal.h"       /* slow_tty */
+#include "tty-internal.h"       /* mc_tty_normalize_from_utf8() */
 #include "tty.h"
 #include "color.h"
 #include "color-slang.h"
@@ -271,10 +271,8 @@ mc_tty_normalize_lines_char (const char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init (gboolean slow, gboolean mouse_enable, gboolean is_xterm)
+tty_init (gboolean mouse_enable, gboolean is_xterm)
 {
-    slow_tty = slow;
-
     SLtt_Ignore_Beep = 1;
 
     SLutf8_enable (-1);         /* has to be called first before any of the other functions. */

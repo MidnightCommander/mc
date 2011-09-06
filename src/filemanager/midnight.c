@@ -828,7 +828,7 @@ setup_mc (void)
         add_select_channel (mc_global.tty.subshell_pty, load_prompt, 0);
 #endif /* !HAVE_SUBSHELL_SUPPORT */
 
-    if ((tty_baudrate () < 9600) || tty_is_slow ())
+    if ((tty_baudrate () < 9600) || mc_global.tty.slow_terminal)
         verbose = 0;
 }
 

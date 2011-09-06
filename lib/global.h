@@ -214,9 +214,6 @@ typedef struct
         /* If true use +, -, | for line drawing */
         gboolean ugly_line_drawing;
 
-        /* For slow terminals */
-        gboolean slow_terminal;
-
     } args;
 
     struct
@@ -258,6 +255,11 @@ typedef struct
         /* This flag is set by xterm detection routine in function main() */
         /* It is used by function view_other_cmd() */
         gboolean xterm_flag;
+
+        /* For slow terminals */
+        /* If true lines are shown by spaces */
+        gboolean slow_terminal;
+
     } tty;
 
     struct
