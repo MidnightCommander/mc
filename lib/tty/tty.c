@@ -58,9 +58,6 @@ int reset_hp_softkeys = 0;
 /* If true lines are drown by spaces */
 gboolean slow_tty = FALSE;
 
-/* If true use +, -, | for line drawing */
-gboolean ugly_line_drawing = FALSE;
-
 int mc_tty_frm[MC_TTY_FRM_MAX];
 
 /*** file scope macro definitions ****************************************************************/

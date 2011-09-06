@@ -165,10 +165,9 @@ mc_tty_normalize_lines_char (const char *ch)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init (gboolean slow, gboolean ugly_lines, gboolean mouse_enable, gboolean is_xterm)
+tty_init (gboolean slow, gboolean mouse_enable, gboolean is_xterm)
 {
     slow_tty = slow;
-    (void) ugly_lines;
 
     initscr ();
 

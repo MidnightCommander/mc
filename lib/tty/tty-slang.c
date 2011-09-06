@@ -271,10 +271,9 @@ mc_tty_normalize_lines_char (const char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init (gboolean slow, gboolean ugly_lines, gboolean mouse_enable, gboolean is_xterm)
+tty_init (gboolean slow, gboolean mouse_enable, gboolean is_xterm)
 {
     slow_tty = slow;
-    ugly_line_drawing = ugly_lines;
 
     SLtt_Ignore_Beep = 1;
 
@@ -300,7 +299,7 @@ tty_init (gboolean slow, gboolean ugly_lines, gboolean mouse_enable, gboolean is
     /* 255 = ignore abort char; XCTRL('g') for abort char = ^g */
     SLang_init_tty (XCTRL ('g'), 1, 0);
 
-    if (ugly_lines)
+    if (mc_global.args.ugly_line_drawing)
         SLtt_Has_Alt_Charset = 0;
 
     /* If SLang uses fileno(stderr) for terminal input MC will hang
