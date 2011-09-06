@@ -41,7 +41,6 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-#include "lib/tty/win.h"        /* xterm_flag */
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/vfs.h"
@@ -93,7 +92,7 @@ static inline int
 is_8bit_printable (unsigned char c)
 {
     /* "Full 8 bits output" doesn't work on xterm */
-    if (xterm_flag)
+    if (mc_global.tty.xterm_flag)
         return is_iso_printable (c);
 
     return (c > 31 && c != 127 && c != 155);
@@ -395,6 +394,7 @@ void
 size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si)
 {
     /* Avoid taking power for every file.  */
+    /* *INDENT-OFF* */
     static const uintmax_t power10[] = {
     /* we hope that size of uintmax_t is 4 bytes at least */
         1ULL,
@@ -427,6 +427,7 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
      */
 #endif
     };
+    /* *INDENT-ON* */
     static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
     static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
     int j = 0;

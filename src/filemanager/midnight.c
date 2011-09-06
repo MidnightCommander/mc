@@ -43,7 +43,6 @@
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* KEY_M_* masks */
-#include "lib/tty/win.h"        /* xterm_flag */
 #include "lib/skin.h"
 #include "lib/util.h"
 
@@ -1408,7 +1407,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
             return MSG_HANDLED;
         }
 
-        if ((!alternate_plus_minus || !(mc_global.tty.console_flag || xterm_flag))
+        if ((!alternate_plus_minus || !(mc_global.tty.console_flag || mc_global.tty.xterm_flag))
             && !quote && !current_panel->searching)
         {
             if (!only_leading_plus_minus)

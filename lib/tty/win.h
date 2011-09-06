@@ -15,8 +15,6 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern gboolean xterm_flag;
-
 /*** declarations of public functions ************************************************************/
 
 void do_enter_ca_mode (void);

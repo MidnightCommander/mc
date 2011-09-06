@@ -44,7 +44,6 @@
 #include "lib/event.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* For init_key() */
-#include "lib/tty/win.h"        /* xterm_flag */
 #include "lib/skin.h"
 #include "lib/filehighlight.h"
 #include "lib/fileloc.h"
@@ -338,7 +337,7 @@ update_xterm_title_path (void)
     char *login = NULL;
     int res = 0;
 
-    if (xterm_flag && xterm_title)
+    if (mc_global.tty.xterm_flag && xterm_title)
     {
         path = strip_home_and_password (current_panel->cwd);
         res = gethostname (host, sizeof (host));
@@ -413,10 +412,10 @@ main (int argc, char *argv[])
 
     /* check terminal type
      * $TEMR must be set and not empty
-     * xterm_flag is used in init_key() and tty_init()
+     * mc_global.tty.xterm_flag is used in init_key() and tty_init()
      * Do this after mc_args_handle() where mc_args__force_xterm is set up.
      */
-    xterm_flag = tty_check_term (mc_args__force_xterm);
+    mc_global.tty.xterm_flag = tty_check_term (mc_args__force_xterm);
 
     /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */
@@ -443,7 +442,7 @@ main (int argc, char *argv[])
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
     tty_init (mc_global.args.slow_terminal, mc_global.args.ugly_line_drawing, !mc_args__nomouse,
-              xterm_flag);
+              mc_global.tty.xterm_flag);
 
     load_setup ();
 

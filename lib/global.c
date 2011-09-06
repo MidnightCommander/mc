@@ -105,6 +105,7 @@ mc_global_t mc_global = {
 
         .winch_flag = FALSE,
         .command_line_colors = NULL,
+        .xterm_flag = FALSE,
     },
 
     .vfs =
