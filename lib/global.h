@@ -214,6 +214,8 @@ typedef struct
         /* If true use +, -, | for line drawing */
         gboolean ugly_line_drawing;
 
+        /* Tries to use old highlight mouse tracking */
+        gboolean old_mouse;
     } args;
 
     struct

@@ -204,6 +204,13 @@ static const GOptionEntry argument_terminal_table[] = {
     },
 
     {
+     "oldmouse", 'g', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
+     &mc_global.tty.old_mouse,
+     N_("Tries to use an old highlight mouse tracking"),
+     NULL
+    },
+
+    {
      "nomouse", 'd', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__nomouse,
      N_("Disable mouse support in text version"),

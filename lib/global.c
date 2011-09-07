@@ -78,6 +78,7 @@ mc_global_t mc_global = {
         .disable_colors = FALSE,
         .skin = NULL,
         .ugly_line_drawing = FALSE,
+        .old_mouse = FALSE,
     },
 
     .widget =
