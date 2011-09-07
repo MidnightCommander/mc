@@ -203,20 +203,8 @@ typedef struct
     /* Set if the command is being run from the "Right" menu */
     gboolean is_right;          /* If the selected menu was the right */
 
-    struct
-    {
-        /* Use the specified skin */
-        char *skin;
-
-        /* Set to force black and white display at program startup */
-        gboolean disable_colors;
-
-        /* If true use +, -, | for line drawing */
-        gboolean ugly_line_drawing;
-
-        /* Tries to use old highlight mouse tracking */
-        gboolean old_mouse;
-    } args;
+    /* Use the specified skin */
+    char *skin;
 
     struct
     {
@@ -262,6 +250,14 @@ typedef struct
         /* If true lines are shown by spaces */
         gboolean slow_terminal;
 
+        /* Set to force black and white display at program startup */
+        gboolean disable_colors;
+
+        /* If true use +, -, | for line drawing */
+        gboolean ugly_line_drawing;
+
+        /* Tries to use old highlight mouse tracking */
+        gboolean old_mouse;
     } tty;
 
     struct

@@ -67,8 +67,8 @@ mc_skin_get_default_name (void)
     char *tmp_str;
 
     /* from command line */
-    if (mc_global.args.skin != NULL)
-        return g_strdup (mc_global.args.skin);
+    if (mc_global.skin != NULL)
+        return g_strdup (mc_global.skin);
 
     /* from envirovement variable */
     tmp_str = getenv ("MC_SKIN");
@@ -185,7 +185,7 @@ mc_skin_deinit (void)
 gchar *
 mc_skin_get (const gchar * group, const gchar * key, const gchar * default_value)
 {
-    if (mc_global.args.ugly_line_drawing)
+    if (mc_global.tty.ugly_line_drawing)
     {
         return g_strdup (default_value);
     }

@@ -235,7 +235,7 @@ static const GOptionEntry argument_terminal_table[] = {
 
     {
      "stickchars", 'a', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_global.args.ugly_line_drawing,
+     &mc_global.tty.ugly_line_drawing,
      N_("Use stickchars to draw"),
      NULL
     },
@@ -277,7 +277,7 @@ static const GOptionEntry argument_color_table[] = {
     /* color options */
     {
      "nocolor", 'b', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_global.args.disable_colors,
+     &mc_global.tty.disable_colors,
      N_("Requests to run in black and white"),
      NULL
     },
@@ -298,7 +298,7 @@ static const GOptionEntry argument_color_table[] = {
 
     {
      "skin", 'S', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
-     &mc_global.args.skin,
+     &mc_global.skin,
      N_("Show mc with specified skin"),
      "<string>"
     },
@@ -604,7 +604,7 @@ mc_args_process (int argc, char *argv[])
     }
 
     if (mc_args__force_colors)
-        mc_global.args.disable_colors = FALSE;
+        mc_global.tty.disable_colors = FALSE;
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_args__nouse_subshell)

@@ -313,7 +313,7 @@ tty_init_xterm_support (gboolean is_xterm)
         /* Enable mouse unless explicitly disabled by --nomouse */
         if (use_mouse_p != MOUSE_DISABLED)
         {
-            if (mc_global.args.old_mouse)
+            if (mc_global.tty.old_mouse)
                 use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
             else
             {

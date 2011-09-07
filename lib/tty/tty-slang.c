@@ -297,7 +297,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     /* 255 = ignore abort char; XCTRL('g') for abort char = ^g */
     SLang_init_tty (XCTRL ('g'), 1, 0);
 
-    if (mc_global.args.ugly_line_drawing)
+    if (mc_global.tty.ugly_line_drawing)
         SLtt_Has_Alt_Charset = 0;
 
     /* If SLang uses fileno(stderr) for terminal input MC will hang

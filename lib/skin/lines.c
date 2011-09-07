@@ -98,7 +98,7 @@ mc_skin_lines_parse_ini_file (mc_skin_t * mc_skin)
 {
     if (mc_global.tty.slow_terminal)
         mc_skin_hardcoded_space_lines (mc_skin);
-    else if (mc_global.args.ugly_line_drawing)
+    else if (mc_global.tty.ugly_line_drawing)
         mc_skin_hardcoded_ugly_lines (mc_skin);
 
     /* single lines */

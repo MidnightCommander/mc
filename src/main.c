@@ -455,7 +455,7 @@ main (int argc, char *argv[])
 
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
 
-    tty_init_colors (mc_global.args.disable_colors, mc_args__force_colors);
+    tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
     {
         GError *error2 = NULL;

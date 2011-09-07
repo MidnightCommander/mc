@@ -73,13 +73,7 @@ mc_global_t mc_global = {
 
     .is_right = FALSE,
 
-    .args =
-    {
-        .disable_colors = FALSE,
-        .skin = NULL,
-        .ugly_line_drawing = FALSE,
-        .old_mouse = FALSE,
-    },
+    .skin = NULL,
 
     .widget =
     {
@@ -107,6 +101,9 @@ mc_global_t mc_global = {
         .command_line_colors = NULL,
         .xterm_flag = FALSE,
         .slow_terminal = FALSE,
+        .disable_colors = FALSE,
+        .ugly_line_drawing = FALSE,
+        .old_mouse = FALSE,
     },
 
     .vfs =
