@@ -149,6 +149,10 @@ Display the version of the program.
 .I \-x, \-\-xterm
 Force xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
+.TP
+.I \-g, \-\-oldmouse
+Force a "normal tracking" mouse mode. Used when running on
+xterm\-capable terminals (tmux/screen).
 .PP
 If specified, the first path name is the directory to show in the
 selected panel; the second path name is the directory to be shown in

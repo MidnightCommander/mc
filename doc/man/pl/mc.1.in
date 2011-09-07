@@ -103,6 +103,10 @@ Wyświetla wersję programu.
 .I \-x
 Wymusza włączenie trybu xterm. Używane kiedy działa się na terminalach wyposażonych
 w opcje xterm (dwa tryby ekranu i możliwość wysyłania myszą sygnałów wyjścia).
+.TP
+.I \-g, \-\-oldmouse
+Force a "normal tracking" mouse mode. Used when running on
+xterm\-capable terminals (tmux/screen).
 .PP
 Jeśli wybrano, pierwszy katalog używany jest do wyświetlenia w pierwszym panelu.
 Drugi wyświetlany jest w drugim panelu.

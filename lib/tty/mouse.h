@@ -98,6 +98,7 @@ extern Mouse_Type use_mouse_p;
 
 /* String indicating that a mouse event has occured, usually "\E[M" */
 extern const char *xmouse_seq;
+extern gboolean old_mouse;
 
 /*** declarations of public functions ************************************************************/
 

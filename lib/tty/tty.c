@@ -272,13 +272,19 @@ tty_init_xterm_support (gboolean is_xterm)
         /* Enable mouse unless explicitly disabled by --nomouse */
         if (use_mouse_p != MOUSE_DISABLED)
         {
-            const char *color_term = getenv ("COLORTERM");
-            if (strncmp (termvalue, "rxvt", 4) == 0 ||
-                (color_term != NULL && strncmp (color_term, "rxvt", 4) == 0) ||
-                strcmp (termvalue, "Eterm") == 0)
+            if (old_mouse)
                 use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
             else
-                use_mouse_p = MOUSE_XTERM_BUTTON_EVENT_TRACKING;
+            {
+                /* FIXME: this dirty hack to set supported type of tracking the mouse */
+                const char *color_term = getenv ("COLORTERM");
+                if (strncmp (termvalue, "rxvt", 4) == 0 ||
+                    (color_term != NULL && strncmp (color_term, "rxvt", 4) == 0) ||
+                    strcmp (termvalue, "Eterm") == 0)
+                    use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
+                else
+                    use_mouse_p = MOUSE_XTERM_BUTTON_EVENT_TRACKING;
+            }
         }
     }
 }

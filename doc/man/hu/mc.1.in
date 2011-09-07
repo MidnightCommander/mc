@@ -100,6 +100,10 @@ Megmutatja a program verziószámát.
 .I "\-x"
 Belép xterm módba. (Két képernyős módban használható, és az egér escape
 szekvenciái is használhatóak).
+.TP
+.I \-g, \-\-oldmouse
+Force a "normal tracking" mouse mode. Used when running on
+xterm\-capable terminals (tmux/screen).
 .PP
 Ha megadtad, akkor az első útvonal tartalma jelenik meg az aktuális
 panelen; a második könyvtár útvonal pedig a másik panelen jelenik meg.
