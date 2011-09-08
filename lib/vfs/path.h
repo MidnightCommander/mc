@@ -10,8 +10,8 @@
 typedef enum
 {
     VPF_NONE = 0,
-    VPF_NO_CANON = 1,
-    VPF_USE_DEPRECATED_PARSER = 2
+    VPF_NO_CANON = 1 << 0,
+    VPF_USE_DEPRECATED_PARSER = 1 << 1
 } vfs_path_flag_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/

@@ -746,7 +746,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
     int erroffset;
     int pcre_options = PCRE_EXTRA | PCRE_MULTILINE;
 
-    if (str_isutf8 (charset))
+    if (str_isutf8 (charset) && mc_global.utf8_display)
     {
         pcre_options |= PCRE_UTF8;
         if (lc_mc_search->is_case_sensitive)

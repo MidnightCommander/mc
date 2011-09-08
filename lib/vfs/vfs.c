@@ -520,41 +520,30 @@ _vfs_get_cwd (void)
     if (vfs_get_raw_current_dir () == NULL)
     {
         char *tmp;
+
         tmp = g_get_current_dir ();
         vfs_set_raw_current_dir (vfs_path_from_str (tmp));
         g_free (tmp);
     }
+
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
 
     if (path_element->class->flags & VFSF_LOCAL)
     {
+        char *tmp;
 
-        if (path_element->encoding == NULL)
-        {
-            char *tmp;
+        tmp = g_get_current_dir ();
+        if (tmp != NULL)
+        {                       /* One of the directories in the path is not readable */
+            struct stat my_stat, my_stat2;
 
-            tmp = g_get_current_dir ();
-            if (tmp != NULL)
-            {                   /* One of the directories in the path is not readable */
-                estr_t state;
-
-                g_string_set_size (vfs_str_buffer, 0);
-                state = str_vfs_convert_from (str_cnv_from_term, tmp, vfs_str_buffer);
-                g_free (tmp);
-
-                if (state == ESTR_SUCCESS)
-                {
-                    struct stat my_stat, my_stat2;
-                    /* Check if it is O.K. to use the current_dir */
-                    if (!(mc_global.vfs.cd_symlinks
-                          && mc_stat (vfs_str_buffer->str, &my_stat) == 0
-                          && mc_stat (path_element->path, &my_stat2) == 0
-                          && my_stat.st_ino == my_stat2.st_ino
-                          && my_stat.st_dev == my_stat2.st_dev))
-                    {
-                        vfs_set_raw_current_dir (vfs_path_from_str (vfs_str_buffer->str));
-                    }
-                }
+            /* Check if it is O.K. to use the current_dir */
+            if (!(mc_global.vfs.cd_symlinks
+                  && mc_stat (tmp, &my_stat) == 0
+                  && mc_stat (path_element->path, &my_stat2) == 0
+                  && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev))
+            {
+                vfs_set_raw_current_dir (vfs_path_from_str (tmp));
             }
         }
     }
