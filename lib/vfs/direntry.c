@@ -1505,17 +1505,17 @@ vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int 
  */
 
 void
-vfs_s_normalize_filename_pos (struct vfs_s_inode *root_inode, size_t final_filepos)
+vfs_s_normalize_filename_leading_spaces (struct vfs_s_inode *root_inode, size_t final_num_spaces)
 {
     GList *iter;
 
     for (iter = root_inode->subdir; iter != NULL; iter = g_list_next (iter))
     {
         struct vfs_s_entry *entry = (struct vfs_s_entry *) iter->data;
-        if ((size_t) entry->ino->data_offset > final_filepos)
+        if ((size_t) entry->ino->data_offset > final_num_spaces)
         {
             char *source_name = entry->name;
-            char *spacer = g_strnfill (entry->ino->data_offset - final_filepos, ' ');
+            char *spacer = g_strnfill (entry->ino->data_offset - final_num_spaces, ' ');
             entry->name = g_strdup_printf ("%s%s", spacer, source_name);
             g_free (spacer);
             g_free (source_name);
