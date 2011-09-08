@@ -121,8 +121,8 @@ listbox_draw (WListbox * l, gboolean focused)
     const gboolean disabled = (((Widget *) l)->options & W_DISABLED) != 0;
     const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
     int selc =
-        disabled ? DISABLED_COLOR : focused ? h->
-        color[DLG_COLOR_HOT_FOCUS] : h->color[DLG_COLOR_FOCUS];
+        disabled ? DISABLED_COLOR : focused ? h->color[DLG_COLOR_HOT_FOCUS] : h->
+        color[DLG_COLOR_FOCUS];
 
     GList *le;
     int pos;
@@ -523,7 +523,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->deletable = deletable;
     l->callback = callback;
     l->allow_duplicates = TRUE;
-    l->scrollbar = !tty_is_slow ();
+    l->scrollbar = !mc_global.tty.slow_terminal;
     widget_want_hotkey (l->widget, TRUE);
     widget_want_cursor (l->widget, FALSE);
 

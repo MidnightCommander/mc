@@ -44,7 +44,7 @@
 #include "lib/strutil.h"        /* str_term_form */
 #include "lib/util.h"           /* is_printable() */
 
-#include "tty-internal.h"       /* slow_tty */
+#include "tty-internal.h"       /* mc_tty_normalize_from_utf8() */
 #include "tty.h"
 #include "color.h"
 #include "color-slang.h"
@@ -130,6 +130,34 @@ static const struct
 };
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tty_setup_sigwinch (void (*handler) (int))
+{
+#ifdef SIGWINCH
+    struct sigaction act, oact;
+    act.sa_handler = handler;
+    sigemptyset (&act.sa_mask);
+    act.sa_flags = 0;
+#ifdef SA_RESTART
+    act.sa_flags |= SA_RESTART;
+#endif /* SA_RESTART */
+    sigaction (SIGWINCH, &act, &oact);
+#endif /* SIGWINCH */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+sigwinch_handler (int dummy)
+{
+    (void) dummy;
+
+    tty_change_screen_size ();
+    mc_global.tty.winch_flag = TRUE;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 /* HP Terminals have capabilities (pfkey, pfloc, pfx) to program function keys.
@@ -243,14 +271,11 @@ mc_tty_normalize_lines_char (const char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init (gboolean slow, gboolean ugly_lines)
+tty_init (gboolean mouse_enable, gboolean is_xterm)
 {
-    slow_tty = slow;
-    ugly_line_drawing = ugly_lines;
-
     SLtt_Ignore_Beep = 1;
 
-    SLutf8_enable (-1); /* has to be called first before any of the other functions. */
+    SLutf8_enable (-1);         /* has to be called first before any of the other functions. */
     SLtt_get_terminfo ();
     /*
      * If the terminal in not in terminfo but begins with a well-known
@@ -272,7 +297,7 @@ tty_init (gboolean slow, gboolean ugly_lines)
     /* 255 = ignore abort char; XCTRL('g') for abort char = ^g */
     SLang_init_tty (XCTRL ('g'), 1, 0);
 
-    if (ugly_lines)
+    if (mc_global.tty.ugly_line_drawing)
         SLtt_Has_Alt_Charset = 0;
 
     /* If SLang uses fileno(stderr) for terminal input MC will hang
@@ -303,10 +328,23 @@ tty_init (gboolean slow, gboolean ugly_lines)
     /* It's the small part from the previous init_key() */
     init_key_input_fd ();
 
+    /* For 8-bit locales, NCurses handles 154 (0x9A) symbol properly, while S-Lang
+     * requires SLsmg_Display_Eight_Bit >= 154 (OR manual filtering if xterm display
+     * detected - but checking TERM would fail under screen, OR running xterm
+     * with allowC1Printable).
+     */
+    tty_display_8bit (FALSE);
+
     SLsmg_init_smg ();
+    if (!mouse_enable)
+        use_mouse_p = MOUSE_DISABLED;
+    tty_init_xterm_support (is_xterm);  /* do it before do_enter_ca_mode() call */
+    init_mouse ();
     do_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
+
+    tty_setup_sigwinch (sigwinch_handler);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -316,8 +354,11 @@ tty_shutdown (void)
 {
     char *op_cap;
 
-    SLsmg_reset_smg ();
+    disable_mouse ();
     tty_reset_shell_mode ();
+    tty_noraw_mode ();
+    tty_keypad (FALSE);
+    tty_reset_screen ();
     do_exit_ca_mode ();
     SLang_reset_tty ();
 
@@ -672,23 +713,6 @@ void
 tty_refresh (void)
 {
     SLsmg_refresh ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-tty_setup_sigwinch (void (*handler) (int))
-{
-#ifdef SIGWINCH
-    struct sigaction act, oact;
-    act.sa_handler = handler;
-    sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
-#ifdef SA_RESTART
-    act.sa_flags |= SA_RESTART;
-#endif /* SA_RESTART */
-    sigaction (SIGWINCH, &act, &oact);
-#endif /* SIGWINCH */
 }
 
 /* --------------------------------------------------------------------------------------------- */

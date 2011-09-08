@@ -723,18 +723,6 @@ setup_panels (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-sigwinch_handler (int dummy)
-{
-    (void) dummy;
-#if !(defined(USE_NCURSES) || defined(USE_NCURSESW))    /* don't do malloc in a signal handler */
-    tty_low_level_change_screen_size ();
-#endif
-    mc_global.tty.winch_flag = TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 use_dash (gboolean flag)
 {
     if (flag)

@@ -43,9 +43,10 @@
 #define WANT_TERM_H
 #endif
 
-#include "tty-internal.h"       /* slow_tty */
+#include "tty-internal.h"       /* mc_tty_normalize_from_utf8() */
 #include "tty.h"
 #include "color-internal.h"
+#include "mouse.h"
 #include "win.h"
 
 /* include at last !!! */
@@ -73,6 +74,33 @@
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tty_setup_sigwinch (void (*handler) (int))
+{
+#if (NCURSES_VERSION_MAJOR >= 4) && defined (SIGWINCH)
+    struct sigaction act, oact;
+    act.sa_handler = handler;
+    sigemptyset (&act.sa_mask);
+    act.sa_flags = 0;
+#ifdef SA_RESTART
+    act.sa_flags |= SA_RESTART;
+#endif /* SA_RESTART */
+    sigaction (SIGWINCH, &act, &oact);
+#endif /* SIGWINCH */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+sigwinch_handler (int dummy)
+{
+    (void) dummy;
+
+    mc_global.tty.winch_flag = TRUE;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -137,11 +165,8 @@ mc_tty_normalize_lines_char (const char *ch)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init (gboolean slow, gboolean ugly_lines)
+tty_init (gboolean mouse_enable, gboolean is_xterm)
 {
-    slow_tty = slow;
-    (void) ugly_lines;
-
     initscr ();
 
 #ifdef HAVE_ESCDELAY
@@ -165,11 +190,17 @@ tty_init (gboolean slow, gboolean ugly_lines)
 
     tty_start_interrupt_key ();
 
+    if (!mouse_enable)
+        use_mouse_p = MOUSE_DISABLED;
+    tty_init_xterm_support (is_xterm);  /* do it before do_enter_ca_mode() call */
+    init_mouse ();
     do_enter_ca_mode ();
     tty_raw_mode ();
     noecho ();
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
+
+    tty_setup_sigwinch (sigwinch_handler);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -177,7 +208,12 @@ tty_init (gboolean slow, gboolean ugly_lines)
 void
 tty_shutdown (void)
 {
-    endwin ();
+    disable_mouse ();
+    tty_reset_shell_mode ();
+    tty_noraw_mode ();
+    tty_keypad (FALSE);
+    tty_reset_screen ();
+    do_exit_ca_mode ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -474,23 +510,6 @@ tty_refresh (void)
 {
     refresh ();
     doupdate ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-tty_setup_sigwinch (void (*handler) (int))
-{
-#if (NCURSES_VERSION_MAJOR >= 4) && defined (SIGWINCH)
-    struct sigaction act, oact;
-    act.sa_handler = handler;
-    sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
-#ifdef SA_RESTART
-    act.sa_flags |= SA_RESTART;
-#endif /* SA_RESTART */
-    sigaction (SIGWINCH, &act, &oact);
-#endif /* SIGWINCH */
 }
 
 /* --------------------------------------------------------------------------------------------- */

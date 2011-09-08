@@ -33,6 +33,8 @@
 
 #include <signal.h>
 #include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>             /* exit() */
 
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
@@ -43,6 +45,7 @@
 
 #include "tty.h"
 #include "tty-internal.h"
+#include "mouse.h"              /* use_mouse_p */
 #include "win.h"
 
 /*** global variables ****************************************************************************/
@@ -51,12 +54,6 @@
    command ran in the subshell to the description found in the termcap/terminfo
    database */
 int reset_hp_softkeys = 0;
-
-/* If true lines are drown by spaces */
-gboolean slow_tty = FALSE;
-
-/* If true use +, -, | for line drawing */
-gboolean ugly_line_drawing = FALSE;
 
 int mc_tty_frm[MC_TTY_FRM_MAX];
 
@@ -82,10 +79,30 @@ sigintr_handler (int signo)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-extern gboolean
-tty_is_slow (void)
+/**
+ * Check terminal type. If $TERM is not set or value is empty, mc finishes with EXIT_FAILURE.
+ *
+ * @param force_xterm Set forced the XTerm type
+ *
+ * @return true if @param force_xterm is true or value of $TERM is one of term*, konsole*
+ *              rxvt*, Eterm or dtterm
+ */
+gboolean
+tty_check_term (gboolean force_xterm)
 {
-    return slow_tty;
+    const char *termvalue;
+
+    termvalue = getenv ("TERM");
+    if (termvalue == NULL || *termvalue == '\0')
+    {
+        fputs (_("The TERM environment variable is unset!\n"), stderr);
+        exit (EXIT_FAILURE);
+    }
+
+    return force_xterm || strncmp (termvalue, "xterm", 5) == 0
+        || strncmp (termvalue, "konsole", 7) == 0
+        || strncmp (termvalue, "rxvt", 4) == 0
+        || strcmp (termvalue, "Eterm") == 0 || strcmp (termvalue, "dtterm") == 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -229,7 +246,7 @@ tty_resize (int fd)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_low_level_change_screen_size (void)
+tty_change_screen_size (void)
 {
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ
@@ -256,6 +273,61 @@ tty_low_level_change_screen_size (void)
     }
 #endif /* TIOCGWINSZ */
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_init_xterm_support (gboolean is_xterm)
+{
+    const char *termvalue;
+
+    termvalue = getenv ("TERM");
+
+    /* Check mouse and ca capabilities */
+    /* terminfo/termcap structures have been already initialized,
+       in slang_init() or/and init_curses()  */
+    /* Check terminfo at first, then check termcap */
+    xmouse_seq = tty_tgetstr ("kmous");
+    if (xmouse_seq == NULL)
+        xmouse_seq = tty_tgetstr ("Km");
+    smcup = tty_tgetstr ("smcup");
+    if (smcup == NULL)
+        smcup = tty_tgetstr ("ti");
+    rmcup = tty_tgetstr ("rmcup");
+    if (rmcup == NULL)
+        rmcup = tty_tgetstr ("te");
+
+    if (strcmp (termvalue, "cygwin") == 0)
+    {
+        is_xterm = TRUE;
+        use_mouse_p = MOUSE_DISABLED;
+    }
+
+    if (is_xterm)
+    {
+        /* Default to the standard xterm sequence */
+        if (xmouse_seq == NULL)
+            xmouse_seq = ESC_STR "[M";
+
+        /* Enable mouse unless explicitly disabled by --nomouse */
+        if (use_mouse_p != MOUSE_DISABLED)
+        {
+            if (mc_global.tty.old_mouse)
+                use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
+            else
+            {
+                /* FIXME: this dirty hack to set supported type of tracking the mouse */
+                const char *color_term = getenv ("COLORTERM");
+                if (strncmp (termvalue, "rxvt", 4) == 0 ||
+                    (color_term != NULL && strncmp (color_term, "rxvt", 4) == 0) ||
+                    strcmp (termvalue, "Eterm") == 0)
+                    use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
+                else
+                    use_mouse_p = MOUSE_XTERM_BUTTON_EVENT_TRACKING;
+            }
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

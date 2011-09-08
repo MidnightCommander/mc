@@ -75,10 +75,9 @@ extern void tty_beep (void);
 
 /* {{{ Input }}} */
 
-extern void tty_init (gboolean slow, gboolean ugly_lines);
+extern gboolean tty_check_term (gboolean force_xterm);
+extern void tty_init (gboolean mouse_enable, gboolean is_xterm);
 extern void tty_shutdown (void);
-
-extern gboolean tty_is_slow (void);
 
 extern void tty_start_interrupt_key (void);
 extern void tty_enable_interrupt_key (void);
@@ -132,9 +131,7 @@ extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 
 extern int tty_resize (int fd);
 extern void tty_refresh (void);
-extern void tty_setup_sigwinch (void (*handler) (int));
-extern void tty_low_level_change_screen_size (void);
-
+extern void tty_change_screen_size (void);
 
 extern int mc_tty_normalize_lines_char (const char *);
 

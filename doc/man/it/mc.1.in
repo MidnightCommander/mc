@@ -118,6 +118,10 @@ Mostra la versione del programma.
 Forza la modalità xterm. Usata quando è in funzione su terminali
 abilitati\-xterm (due modalità video e in grado di spedire sequenze
 mouse di escape).
+.TP
+.I \-g, \-\-oldmouse
+Force a "normal tracking" mouse mode. Used when running on
+xterm\-capable terminals (tmux/screen).
 .PP
 Se specificato, il primo percorso è la directory mostrata nel
 pannello selezionato; il secondo è la directory mostrata nell'altro

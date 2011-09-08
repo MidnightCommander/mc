@@ -30,7 +30,6 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/strutil.h"
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"           /* x_basename() */
@@ -205,6 +204,13 @@ static const GOptionEntry argument_terminal_table[] = {
     },
 
     {
+     "oldmouse", 'g', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
+     &mc_global.tty.old_mouse,
+     N_("Tries to use an old highlight mouse tracking"),
+     NULL
+    },
+
+    {
      "nomouse", 'd', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__nomouse,
      N_("Disable mouse support in text version"),
@@ -222,14 +228,14 @@ static const GOptionEntry argument_terminal_table[] = {
 
     {
      "slow", 's', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_global.args.slow_terminal,
+     &mc_global.tty.slow_terminal,
      N_("To run on slow terminals"),
      NULL
     },
 
     {
      "stickchars", 'a', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_global.args.ugly_line_drawing,
+     &mc_global.tty.ugly_line_drawing,
      N_("Use stickchars to draw"),
      NULL
     },
@@ -271,7 +277,7 @@ static const GOptionEntry argument_color_table[] = {
     /* color options */
     {
      "nocolor", 'b', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE,
-     &mc_global.args.disable_colors,
+     &mc_global.tty.disable_colors,
      N_("Requests to run in black and white"),
      NULL
     },
@@ -292,7 +298,7 @@ static const GOptionEntry argument_color_table[] = {
 
     {
      "skin", 'S', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
-     &mc_global.args.skin,
+     &mc_global.skin,
      N_("Show mc with specified skin"),
      "<string>"
     },
@@ -409,9 +415,6 @@ mc_setup_by_args (int argc, char *argv[])
 {
     const char *base;
     char *tmp;
-
-    if (mc_args__nomouse)
-        use_mouse_p = MOUSE_DISABLED;
 
     if (mc_args__netfs_logfile != NULL)
     {
@@ -601,7 +604,7 @@ mc_args_process (int argc, char *argv[])
     }
 
     if (mc_args__force_colors)
-        mc_global.args.disable_colors = FALSE;
+        mc_global.tty.disable_colors = FALSE;
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_args__nouse_subshell)

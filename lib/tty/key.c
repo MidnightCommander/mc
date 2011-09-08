@@ -46,7 +46,6 @@
 #include "tty-internal.h"       /* mouse_enabled */
 #include "mouse.h"
 #include "key.h"
-#include "win.h"                /* xterm_flag */
 
 #include "lib/widget.h"         /* mc_refresh() */
 
@@ -530,7 +529,9 @@ static Window x11_window;
 
 static KeySortType has_been_sorted = KEY_NOSORT;
 
+/* *INDENT-OFF* */
 static const size_t key_conv_tab_size = G_N_ELEMENTS (key_name_conv_tab) - 1;
+/* *INDENT-ON* */
 
 static const key_code_name_t *key_conv_tab_sorted[G_N_ELEMENTS (key_name_conv_tab) - 1];
 
@@ -1268,7 +1269,7 @@ init_key (void)
     define_sequences (mc_default_keys);
 
     /* Terminfo on irix does not have some keys */
-    if (xterm_flag
+    if (mc_global.tty.xterm_flag
         || (term != NULL
             && (strncmp (term, "iris-ansi", 9) == 0
                 || strncmp (term, "xterm", 5) == 0
@@ -1480,8 +1481,7 @@ lookup_key (const char *name, char **label)
         }
         else if (k < 128)
         {
-            if ((k >= 'A') || (lc_index < 0)
-                || (key_conv_tab_sorted[lc_index]->shortcut == NULL))
+            if ((k >= 'A') || (lc_index < 0) || (key_conv_tab_sorted[lc_index]->shortcut == NULL))
                 g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) k));
             else
                 g_string_append (s, key_conv_tab_sorted[lc_index]->shortcut);
@@ -1577,8 +1577,7 @@ lookup_key_by_code (const int keycode)
         }
         else if (k < 128)
         {
-            if ((k >= 'A') || (key_idx < 0)
-                || (key_conv_tab_sorted[key_idx]->name == NULL))
+            if ((k >= 'A') || (key_idx < 0) || (key_conv_tab_sorted[key_idx]->name == NULL))
                 g_string_append_c (s, (gchar) k);
             else
                 g_string_append (s, key_conv_tab_sorted[key_idx]->name);
@@ -2103,7 +2102,7 @@ learn_key (void)
 void
 numeric_keypad_mode (void)
 {
-    if (mc_global.tty.console_flag || xterm_flag)
+    if (mc_global.tty.console_flag || mc_global.tty.xterm_flag)
     {
         fputs ("\033>", stdout);
         fflush (stdout);
@@ -2115,7 +2114,7 @@ numeric_keypad_mode (void)
 void
 application_keypad_mode (void)
 {
-    if (mc_global.tty.console_flag || xterm_flag)
+    if (mc_global.tty.console_flag || mc_global.tty.xterm_flag)
     {
         fputs ("\033=", stdout);
         fflush (stdout);

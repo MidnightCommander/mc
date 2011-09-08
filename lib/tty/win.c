@@ -34,14 +34,14 @@
 
 #include "lib/global.h"
 #include "lib/util.h"           /* is_printable() */
+#include "tty-internal.h"
 #include "tty.h"                /* tty_gotoyx, tty_print_char */
 #include "win.h"
 
 /*** global variables ****************************************************************************/
 
-/* This flag is set by xterm detection routine in function main() */
-/* It is used by function view_other_cmd() */
-int xterm_flag = 0;
+char *smcup = NULL;
+char *rmcup = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -92,7 +92,7 @@ anything_ready (void)
 void
 do_enter_ca_mode (void)
 {
-    if (xterm_flag)
+    if (mc_global.tty.xterm_flag && smcup != NULL)
     {
         fprintf (stdout, /* ESC_STR ")0" */ ESC_STR "7" ESC_STR "[?47h");
         fflush (stdout);
@@ -104,7 +104,7 @@ do_enter_ca_mode (void)
 void
 do_exit_ca_mode (void)
 {
-    if (xterm_flag)
+    if (mc_global.tty.xterm_flag && rmcup != NULL)
     {
         fprintf (stdout, ESC_STR "[?47l" ESC_STR "8" ESC_STR "[m");
         fflush (stdout);
@@ -119,7 +119,7 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     unsigned char *k;
     int bytes, i, j, cols = 0;
 
-    y1 += (mc_global.keybar_visible != 0);     /* i don't knwo why we need this - paul */
+    y1 += (mc_global.keybar_visible != 0);      /* i don't knwo why we need this - paul */
     y2 += (mc_global.keybar_visible != 0);
     while (anything_ready ())
         tty_lowlevel_getch ();

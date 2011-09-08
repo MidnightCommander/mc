@@ -27,18 +27,17 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-/* If true lines are shown by spaces */
-extern gboolean slow_tty;
-
-/* If true use +, -, | for line drawing */
-extern gboolean ugly_line_drawing;
-
 /* The mouse is currently: TRUE - enabled, FALSE - disabled */
 extern gboolean mouse_enabled;
+
+/* terminal ca capabilities */
+extern char *smcup;
+extern char *rmcup;
 
 /*** declarations of public functions ************************************************************/
 
 char *mc_tty_normalize_from_utf8 (const char *);
+void tty_init_xterm_support (gboolean is_xterm);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC_TTY_INTERNAL_H */

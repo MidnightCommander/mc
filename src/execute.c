@@ -81,7 +81,7 @@ edition_pre_exec (void)
         clr_scr ();
     else
     {
-        if (!(mc_global.tty.console_flag || xterm_flag))
+        if (!(mc_global.tty.console_flag || mc_global.tty.xterm_flag))
             printf ("\n\n");
     }
 
@@ -158,7 +158,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
     if (!(flags & EXECUTE_INTERNAL))
     {
         if ((pause_after_run == pause_always
-             || (pause_after_run == pause_on_dumb_terminals && !xterm_flag
+             || (pause_after_run == pause_on_dumb_terminals && !mc_global.tty.xterm_flag
                  && !mc_global.tty.console_flag)) && quit == 0
 #ifdef HAVE_SUBSHELL_SUPPORT
             && subshell_state != RUNNING_COMMAND
