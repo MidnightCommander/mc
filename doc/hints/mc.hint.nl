@@ -35,10 +35,10 @@ Hint: Je kunt een editor onder F4 specificeren met de shell variabele EDITOR.
 Hint: Je kunt een externe viewer specificeren met de shell variabele PAGER.
 Hint: Je kunt alle aanvragen voor bevestiging instellen in Opties/Bevestiging.
 Hint: Spring naar veel gebruikte directories in een keer met C-\.
-Hint: Je kunt anonieme FTP draaien met mc door middel van 'cd /#ftp:machine.edu'
+Hint: Je kunt anonieme FTP draaien met mc door middel van 'cd ftp://machine.edu'
 Hint: FTP is in de Midnight Commander gebouwd, check het Bestand/FTP link menu.
 Hint: M-t verandert snel van lijst modus.
-Hint: Geef als volgt je gebruikersnaam op met ftps: 'cd /#ftp:naam@machine.edu'
+Hint: Geef als volgt je gebruikersnaam op met ftps: 'cd ftp://naam@machine.edu'
 Hint: Je kunt RPM bestanden bekijken door er op te enteren.
 Hint: Om directories toe te voegen aan de selectie, moet je een slash toevoegen.
 Hint: Voor de normale cut and paste muisfuncties moet je de shift key inhouden.

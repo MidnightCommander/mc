@@ -121,7 +121,7 @@ enable_mouse (void)
                 use_mouse_p = MOUSE_NONE;
                 return;
             }
-            mouse_enabled = 1;
+            mouse_enabled = TRUE;
         }
         break;
 #endif /* HAVE_LIBGPM */

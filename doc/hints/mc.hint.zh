@@ -35,10 +35,10 @@
 提示：你可以使用環境變數 PAGER 來指定外部的檢視器。
 提示：你可以在「選項/確認」裡關閉所有確認的要求。
 提示：使用 C-\ 可以即時跳到經常使用的目錄。
-提示：你可以在 mc 使用無名氏模式 FTP，方法是輸入 'cd /#ftp:machine.edu'
+提示：你可以在 mc 使用無名氏模式 FTP，方法是輸入 'cd ftp://machine.edu'
 提示：FTP 是 Midnight Commander 的內建功能，請檢查「檔案/FTP 連線」選單。
 提示：M-t 可快速地切換列表模式。
-提示：你可以在使用 ftp 時指定使用者名稱，例如：'cd /#ftp:user@machine.edu'
+提示：你可以在使用 ftp 時指定使用者名稱，例如：'cd ftp://user@machine.edu'
 提示：你可以在 rpm 檔上按 enter 來瀏覽 rpm 裡的檔案。
 提示：在選擇對話盒中選取目錄時，要在後面加一 "/"。
 提示：要使用滑鼠剪貼功能需要你按下 shift 鍵

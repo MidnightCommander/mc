@@ -34,10 +34,10 @@ Tipp: Az F4-re használandó szerkesztőt az EDITOR shell-változóval lehet meg
 Tipp: A külső fájlmegjelenítőt a PAGER shell-változóval lehet megadni.
 Tipp: Az összes megerősítéskérés kikapcsolható: "Beállítások/Megerősítések".
 Tipp: Egyszerű módon elérhetők a gyakran használt könyvtárak: C-\
-Tipp: "Anonymous" FTP-zés végezhető ezzel a paranccsal: "cd /#ftp:gépnév.edu".
+Tipp: "Anonymous" FTP-zés végezhető ezzel a paranccsal: "cd ftp://gépnév.edu".
 Tipp: Az FTP be van építve a Midnight Commanderbe: "FTP-kapcsolat" menüpontok.
 Tipp: A listázási mód gyorsan váltható a következő billentyűkombinációval: M-t
-Tipp: FTP-zésnél felhasználónév is megadható: "cd /#ftp:felhasználó@gépnév.edu".
+Tipp: FTP-zésnél felhasználónév is megadható: "cd ftp://felhasználó@gépnév.edu".
 Tipp: Az RPM-csomagfájlok böngészhetők, ehhez Entert kell nyomni az adott fájlon.
 Tipp: Könyvtárak kijelölése a "Kijelölés" ablakban: / jel hozzáfűzésével.
 Tipp: Az egérrel való szövegkimásoláshoz szükség lehet a Shift lenyomására.

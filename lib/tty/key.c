@@ -2104,7 +2104,7 @@ numeric_keypad_mode (void)
 {
     if (mc_global.tty.console_flag || mc_global.tty.xterm_flag)
     {
-        fputs ("\033>", stdout);
+        fputs (ESC_STR ">", stdout);
         fflush (stdout);
     }
 }
@@ -2116,7 +2116,7 @@ application_keypad_mode (void)
 {
     if (mc_global.tty.console_flag || mc_global.tty.xterm_flag)
     {
-        fputs ("\033=", stdout);
+        fputs (ESC_STR "=", stdout);
         fflush (stdout);
     }
 }

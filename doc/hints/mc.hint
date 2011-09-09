@@ -34,10 +34,10 @@ Hint: You may specify the editor for F4 with the shell variable EDITOR.
 Hint: You may specify the external viewer with the shell vars VIEWER or PAGER.
 Hint: You can disable all requests for confirmation in Options/Confirmation.
 Hint: Leap to frequently used directories in a single bound with C-\.
-Hint: You can do anonymous FTP with mc by typing 'cd /#ftp:machine.edu'
+Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
 Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
 Hint: M-t changes quickly the listing mode.
-Hint: You can specify the username when doing ftps: 'cd /#ftp:user@machine.edu'
+Hint: You can specify the username when doing ftps: 'cd ftp://user@machine.edu'
 Hint: You can browse RPM files by tapping enter on top of an rpm file.
 Hint: To mark directories on the select dialog box, append a slash.
 Hint: To use the mouse cut and paste may require holding the shift key

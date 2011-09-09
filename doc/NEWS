@@ -91,7 +91,7 @@ Be aware.
         - mc-4.6 (#2524)
     * Updated skins:
     * Nice dark (#1791)
-    * Added support for [http://check.sourceforge.net check] unit test framework (as part of #2501)
+    * Added support for check unit test framework (http://check.sourceforge.net) (as part of #2501)
     * Added -F/--datadir-info option to show extended information about used data dirs (#2495)
     * Added --configure-options to easy update & reconfigure existing mc (#2495)
     * Language-specific man pages and hint and help files are not installed
@@ -113,7 +113,7 @@ Be aware.
     * Main menu is not drawn correctly after change of it visibility and activity (#2466)
     * MC switches to left panel after call of command history using mouse (#2459)
     * Find file: don't check content regexp if search for content is not used (#2464)
-    * Find file: broken lynk-like navigation in panelization of search result (#2491)
+    * Find file: broken lynx-like navigation in panelization of search result (#2491)
     * Dialog trims leading spaces in input field (#2544)
     * Panelize content is lost when doing F5/F6/F8 on a file on the other panel (#2312)
     * Color of panel header cannot be set in the command line (#2170)
@@ -299,7 +299,7 @@ Version 4.7.3
 
 - Core
 
-    * Mult-screen feature: support of many opened editors and viewers (#1490)
+    * Multi-screen feature: support of many opened editors and viewers (#1490)
     * Reorganization of menu and configuration dialogs. More options are available in UI (#320)
     * Mark of text in input fields is available now, DEL removes selected/unchanged text (#2161, #2228)
     * Now copy/move dialog shows the full path with file name in the field "to:" (#1907)

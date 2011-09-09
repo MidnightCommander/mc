@@ -34,10 +34,10 @@ Porada: można określić edytor dla klawisza F4 za pomocą zmiennej powłoki ED
 Porada: można określić zewnętrzny podgląd za pomocą zmiennych VIEWER lub PAGER.
 Porada: można wyłączyć wszystkie żądania potwierdzenia w Opcje/Potwierdzenia.
 Porada: do listy często używanych katalogów można przejść za pomocą C-\.
-Porada: można połączyć się z anonimowym FTP wpisując "cd /#ftp:komputer.edu".
+Porada: można połączyć się z anonimowym FTP wpisując "cd ftp://komputer.edu".
 Porada: FTP jest wbudowane w mc, proszę zobaczyć menu Plik/Połączenie FTP.
 Porada: M-t szybko zmienia tryb wyświetlania.
-Porada: można podać użytkownika dla ftps: "cd /#ftp:użytkownik@komputer.edu".
+Porada: można podać użytkownika dla ftps: "cd ftp://użytkownik@komputer.edu".
 Porada: można przeglądać pakiety RPM naciskając na nich klawisz Enter.
 Porada: aby zaznaczyć katalogi w oknie zaznaczania, należy dodać ukośnik.
 Porada: użycie wycinania i wklejania za pomocą myszy wymaga klawisza Shift.
