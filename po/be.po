@@ -2,13 +2,14 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # 
+# Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 00:32+0000\n"
+"PO-Revision-Date: 2011-09-09 08:12+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.net/projects/p/mc/team/be/)\n"
 "MIME-Version: 1.0\n"
@@ -81,6 +82,10 @@ msgid ""
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 msgstr ""
+"Вашы старыя налады былі перанесены з %s\n"
+"да рэкамендаваных Freedesktop дырэкторый.\n"
+"Для атрымання больш падрабязнай інфармацыі, калі ласка,\n"
+"наведайце http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 msgid "Search string not found"
 msgstr "Радок пошуку не знойдзены"
@@ -96,7 +101,7 @@ msgid "Invalid token number %d"
 msgstr "Няправільны такен нумар %d"
 
 msgid "Regular expression error"
-msgstr ""
+msgstr "Памылка рэгулярнага выраза"
 
 msgid "Normal"
 msgstr "Нармальны"
@@ -132,6 +137,9 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
+"Немагчыма выкарыстаць скуру '%s' з падтрымкай 256\n"
+"колераў на тэрмінале без падтрымкi 256 колераў.\n"
+"Будзе загружана скура па змаўчанні"
 
 msgid "Function key 1"
 msgstr "Функцыянальная 1 "
@@ -522,9 +530,10 @@ msgstr "Надрукаваць каталог дадзеных"
 
 msgid "Print extended info about used data directories"
 msgstr ""
+"Надрукаваць пашыранаю інфармацыю аб выкарыстоўваных дадзеных каталогаў"
 
 msgid "Print configure options"
-msgstr ""
+msgstr "Надрукаваць налады параметраў"
 
 msgid "Print last working directory to specified file"
 msgstr "Вывесці апошні працоўны каталог у вызначаны файл"
@@ -971,7 +980,7 @@ msgid "Press macro hotkey:"
 msgstr "Націсніце гарачую клавішу для макраса:"
 
 msgid "Macro not deleted"
-msgstr ""
+msgstr "Макрас не быў  выдалены"
 
 msgid "Save macro"
 msgstr "Захаваць макрас"
@@ -980,10 +989,10 @@ msgid "Press the macro's new hotkey:"
 msgstr "Націсніце новую клавішу для макраса:"
 
 msgid "Repeat last commands"
-msgstr ""
+msgstr "Паўтарыць апошнюю каманду"
 
 msgid "Repeat times:"
-msgstr ""
+msgstr "Колькасць паўтораў:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1163,7 +1172,7 @@ msgid "&Undo"
 msgstr "&Адкаціць"
 
 msgid "&Redo"
-msgstr ""
+msgstr "&Паўтарыць"
 
 msgid "&Toggle ins/overw"
 msgstr "&Рэжым устаўкі/замены"
@@ -1253,13 +1262,13 @@ msgid "&Refresh screen"
 msgstr "Пера&маляваць экран"
 
 msgid "&Start/Stop record macro"
-msgstr ""
+msgstr "&Старт/Стоп запісу макраса"
 
 msgid "Delete macr&o..."
 msgstr "Выдаліць макрас"
 
 msgid "Record/Repeat &actions"
-msgstr ""
+msgstr "Запіс/паўтор &дзеянняў"
 
 msgid "'ispell' s&pell check"
 msgstr "&Кантроль правапісу"
@@ -1680,16 +1689,16 @@ msgid "set user ID on execution"
 msgstr "устал. UID пры выкананні"
 
 msgid "Name:"
-msgstr ""
+msgstr "Імя:"
 
 msgid "Permissions (octal):"
-msgstr ""
+msgstr "Дазволы (васьмярковыя):"
 
 msgid "Owner name:"
-msgstr ""
+msgstr "Назва ўладальніка:"
 
 msgid "Group name:"
-msgstr ""
+msgstr "Назва групы:"
 
 msgid "C&lear marked"
 msgstr "&Ачысціць пазначанае"
@@ -1944,6 +1953,8 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write"
 " it."
 msgstr ""
+"Фармат файла %s%s%s змянілся з версіі 3.0. Вы мусіце або скапіяваць яго з "
+"%smc.ext, або выкарыстаць яго як прыклад таго, як напісаць свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Капіраванне"
@@ -2477,7 +2488,7 @@ msgid "File name:"
 msgstr "Iмя файлу:"
 
 msgid "Ena&ble ignore directories:"
-msgstr ""
+msgstr "&Iгнараваць каталогi:"
 
 msgid "Start at:"
 msgstr "Стартаваць ад:"
@@ -3445,6 +3456,8 @@ msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
+"Не атрымалася выканаць:\n"
+"%s\n"
 
 #, c-format
 msgid ""
@@ -3452,6 +3465,9 @@ msgid ""
 "Failed while close:\n"
 "%s\n"
 msgstr ""
+"\n"
+"Памылка у час закрыцця:\n"
+"%s\n"
 
 msgid "Choose codepage"
 msgstr "Выбар кадыроўкі"
@@ -3551,7 +3567,7 @@ msgid "Data directory:"
 msgstr "дырэкторыя дадзеных:"
 
 msgid "User data"
-msgstr ""
+msgstr "Дадзеныя карыстальніка"
 
 msgid "Cache directory:"
 msgstr "дырэкторыя кэшаваных дадзеных"
@@ -3737,7 +3753,7 @@ msgstr "ftpfs: збой далучэння да сервера: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr ""
+msgstr "Чаканне паўтору ... %d (Control-G для адмены)"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Памылковы тып адрасу"

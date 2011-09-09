@@ -1,33 +1,22 @@
-# translation of ru.po to Русский
-# Russian translation of Midnight Commander
-# Copyright (C) 1998-2003, 2005 Free Software Foundation, Inc.
-# Current translators: Anton S. Chumak <nightfast@yahoo.co.uk>
-# Based on work of
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 2000-2003.
-# Pavel Roskin <proski@gnu.org>, 2001-2004.
-# Valek Filippov <frob@df.ru>, 2000.
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999.
-# Sergey Panov <sipan@mit.edu>, 1999.
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999.
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
-# Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011
-# Ilia Maslakov <il.smind@gmail.com>, 2009.
-# Slava Zanko <slavazanko@gmail.com>, 2009.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Project-Id-Version: Midnight Commander\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-09 20:20+0400\n"
-"Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
+"PO-Revision-Date: 2011-09-09 08:17+0000\n"
+"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.net/projects/p/mc/team/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Generator: mcedit 4.7.5\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Внимание: невозможно загрузить список кодировок"
@@ -40,24 +29,24 @@ msgid "Cannot translate from %s to %s"
 msgstr "Невозможно перекодировать из %s в %s"
 
 msgid "Event system already initialized"
-msgstr "Система сообщений уже инициализирована"
+msgstr "Cистема событий уже инициализирована"
 
 msgid "Failed to initialize event system"
-msgstr "Сбой инициализации системы сообщений"
+msgstr "Ошибка инициализации системы событий"
 
 msgid "Event system not initialized"
-msgstr "Система сообщений не инициализирована"
+msgstr "Cистема событий не инициализирована"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr "Проверьте входные данные! Некоторые параметры равны NULL!"
+msgstr ""
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr "Невозможно создать группу сообщений \"%s\"!"
+msgstr "Не удается создать группу '%s' для событий!"
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr "Невозможно создать сообщение \"%s\"!"
+msgstr "Не удается создать событие '%s'!"
 
 #, c-format
 msgid ""
@@ -84,7 +73,7 @@ msgstr "Невозможно создать каталог \"%s\""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
-msgstr "Ошибка при переносе настроек: %s"
+msgstr "Произошла ошибка при переносе пользовательских настроек: %s"
 
 #, c-format
 msgid ""
@@ -92,10 +81,7 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr "Ваши старые настройки перенесены из %s\n"
-"в директории, рекомендованные FreeDesktop.org.\n"
-"Для более полной информации посетите страницу\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
 
 msgid "Search string not found"
 msgstr "Искомая строка не найдена"
@@ -112,7 +98,7 @@ msgid "Invalid token number %d"
 msgstr "Неправильный шаблон цели %d"
 
 msgid "Regular expression error"
-msgstr "Ошибка в регулярном выражении"
+msgstr ""
 
 msgid "Normal"
 msgstr "Обычный"
@@ -148,9 +134,6 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"Невозможно использовать скин %s, требующий 256 цветов,\n"
-"на терминале, не поддерживающем 256 цветов.\n"
-"Будет использован скин по-умолчанию"
 
 msgid "Function key 1"
 msgstr "Функциональная 1 "
@@ -479,7 +462,7 @@ msgid "Directory cache expired for %s"
 msgstr "Кэш каталога устарел для %s"
 
 msgid "bytes transferred"
-msgstr "байт перенесено"
+msgstr "переданных байт"
 
 msgid "Starting linear transfer..."
 msgstr "Запуск линейной передачи..."
@@ -540,10 +523,12 @@ msgid "Print data directory"
 msgstr "Распечатать имя каталога для данных"
 
 msgid "Print extended info about used data directories"
-msgstr "Распечатать расширенную информацию о пользовательских каталогах"
+msgstr ""
+"Показ расширенной информации об используемых каталогов пользовательских "
+"данных"
 
 msgid "Print configure options"
-msgstr "Распечатать параметры конфигурации"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr "Записать последний рабочий каталог в указанный файл"
@@ -588,7 +573,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Чтение определений привязок клавиш из указанного файла"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr "Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
+msgstr ""
 
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
@@ -622,26 +607,6 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
-"\n"
-"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n"
-"\n"
-"Ключевые слова:\n"
-"   Общие:              errors, disabled, reverse, gauge, header\n"
-"                       input, inputmark, inputunchanged, commandlinemark\n"
-"                       bbarhotkey, bbarbutton, statusbar\n"
-"   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                       errdhotfocus\n"
-"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
-"   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
-"   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
-"                       editlinestate\n"
-"   Просмотрщик:        viewbold, viewunderline, viewselected\n"
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -656,17 +621,6 @@ msgid ""
 "Attributes:\n"
 "   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
-"Стандартные цвета:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray, white\n"
-"\n"
-"\n"
-"Расширенные цвета, если доступны 256 цветов:\n"
-"   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
-"\n"
-"Атрибуты:\n"
-"   bold, underline, reverse, blink; несколько атрибутов объединяются занком '+'\n"
 
 msgid "Color options"
 msgstr "Цветовые настройки"
@@ -1019,7 +973,7 @@ msgid "Press macro hotkey:"
 msgstr "Нажмите горячую клавишу для макроса:"
 
 msgid "Macro not deleted"
-msgstr "Макрос не удалён"
+msgstr ""
 
 msgid "Save macro"
 msgstr "Сохранить макрос"
@@ -1028,10 +982,10 @@ msgid "Press the macro's new hotkey:"
 msgstr "Нажмите новую клавишу макроса:"
 
 msgid "Repeat last commands"
-msgstr "Повторить последние команды"
+msgstr "Повторить последнюю команду"
 
 msgid "Repeat times:"
-msgstr "Число повторений:"
+msgstr "Количество повторов:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1211,7 +1165,7 @@ msgid "&Undo"
 msgstr "&Отмена"
 
 msgid "&Redo"
-msgstr "В&ернуть"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr "&Режим вставки/замены"
@@ -1271,7 +1225,7 @@ msgid "&Prev bookmark"
 msgstr "К пре&дыдущей закладке"
 
 msgid "&Flush bookmarks"
-msgstr "У&брать все закладки"
+msgstr ""
 
 msgid "&Go to line..."
 msgstr "Перейти к &строке..."
@@ -1301,13 +1255,13 @@ msgid "&Refresh screen"
 msgstr "Пере&рисовать экран"
 
 msgid "&Start/Stop record macro"
-msgstr "&Начать/закончить запись макроса"
+msgstr ""
 
 msgid "Delete macr&o..."
 msgstr "&Удалить макрос..."
 
 msgid "Record/Repeat &actions"
-msgstr "Записать/повторить &действия"
+msgstr ""
 
 msgid "'ispell' s&pell check"
 msgstr "Проверка ор&фографии (ispell)"
@@ -1385,7 +1339,7 @@ msgid "Word wrap line length:"
 msgstr "Позиция переноса строк:"
 
 msgid "&Group undo"
-msgstr "&Групповая отмена"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr "&Курсор за пределами строки"
@@ -1600,7 +1554,8 @@ msgstr "Порядок сортировки"
 msgid "Confirmation"
 msgstr "Подтверждение"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "&Очистка истории"
@@ -1727,16 +1682,16 @@ msgid "set user ID on execution"
 msgstr "присв. UID при выполнении"
 
 msgid "Name:"
-msgstr "Имя"
+msgstr ""
 
 msgid "Permissions (octal):"
-msgstr "Доступ (восьмеричный)"
+msgstr ""
 
 msgid "Owner name:"
-msgstr "Владелец:"
+msgstr ""
 
 msgid "Group name:"
-msgstr "Группа:"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Очистить помеченное"
@@ -1757,10 +1712,10 @@ msgid "Permission"
 msgstr "Права доступа"
 
 msgid "Set &users"
-msgstr "Поль&зователи"
+msgstr "Установить поль&зователей"
 
 msgid "Set &groups"
-msgstr "&Группы"
+msgstr "Установить &группы"
 
 msgid "Name"
 msgstr "Имя"
@@ -1935,13 +1890,13 @@ msgstr ""
 msgid "Setup"
 msgstr "Настройка"
 
-#, -format
+#, c-format
 msgid "Setup saved to %s"
-msgstr "Параметры сохранены в %s"
+msgstr ""
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr "Невозможно сохранить параметры в %s"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Невозможно выполнять команды на нелокальных файловых системах"
@@ -1978,21 +1933,19 @@ msgid ""
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке."
-"Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
+"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при "
+"установке.Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
 msgid "%s%s%s file error"
-msgstr "Ошибка в файле %s%s%s"
+msgstr ""
 
 #, c-format
 msgid ""
 "The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+"want to copy it from %smc.ext or use that file as an example of how to write"
+" it."
 msgstr ""
-"Формат файла %s%s%s изменён с версии 3.0. Вы можете либо скопировать его с "
-"%smc.ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2016,7 +1969,6 @@ msgstr "Удалить"
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-# msgfmt warnings/errors must be ignored. mc parse this pattern itself.
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o эти %f (%d шт.)%m"
@@ -2063,8 +2015,7 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Невозможно создать устойчивые симв. ссылки через нелокальные "
-"файловыесистемы:\n"
+"Невозможно создать устойчивые симв. ссылки через нелокальные файловыесистемы:\n"
 "\n"
 "Опция \"Устойчивые символические ссылки\" будет отменена"
 
@@ -2080,7 +2031,7 @@ msgid "&Abort"
 msgstr "&Прервать"
 
 msgid "Ski&p all"
-msgstr "Пропустить вс&ё"
+msgstr ""
 
 msgid "&Retry"
 msgstr "По&вторить"
@@ -2423,7 +2374,7 @@ msgstr "Фоновый процесс: файл существует"
 
 #, c-format
 msgid "Files processed: %zu of %zu"
-msgstr "Обработано файлов: %zu из %zu"
+msgstr ""
 
 #, c-format
 msgid "Time: %s  %s (%s)"
@@ -2490,7 +2441,7 @@ msgid "Malformed regular expression"
 msgstr "Регулярное выражение сформировано неверно"
 
 msgid "Cas&e sensitive"
-msgstr "У&чёт регистра"
+msgstr "У&чет регистра"
 
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
@@ -2505,7 +2456,7 @@ msgid "Sea&rch for content"
 msgstr "Поиск по содер&жимому"
 
 msgid "Case sens&itive"
-msgstr "Учёт ре&гистра"
+msgstr "Учет ре&гистра"
 
 msgid "Re&gular expression"
 msgstr "&Регулярное выражение"
@@ -2529,7 +2480,7 @@ msgid "File name:"
 msgstr "Шаблон имени:"
 
 msgid "Ena&ble ignore directories:"
-msgstr "&Игнорировать каталоги:"
+msgstr ""
 
 msgid "Start at:"
 msgstr "От каталога:"
@@ -2720,9 +2671,9 @@ msgstr "Размер: %s"
 #, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] "(%ld блок)"
-msgstr[1] "(%ld блока)"
-msgstr[2] "(%ld блоков)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2825,7 +2776,7 @@ msgid "&Filtered view"
 msgstr "Просмотр вывода команд&ы"
 
 msgid "&Copy"
-msgstr "&Копирование"
+msgstr "&Копировать блок"
 
 msgid "C&hmod"
 msgstr "Права &доступа"
@@ -2864,7 +2815,7 @@ msgid "U&nselect group"
 msgstr "Снять &отметку"
 
 msgid "&Invert selection"
-msgstr "О&братить выделение"
+msgstr ""
 
 msgid "E&xit"
 msgstr "Вы&ход"
@@ -2888,7 +2839,7 @@ msgid "&Compare directories"
 msgstr "&Сравнить каталоги"
 
 msgid "C&ompare files"
-msgstr "Сравнить фа&йлы"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr "В&нешняя панелизация"
@@ -2953,9 +2904,9 @@ msgstr "Переменная среды TERM не определена!\n"
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] "У вас %zd открытый экран. Всё равно выйти?"
-msgstr[1] "У вас %zd открытых экрана. Всё равно выйти?"
-msgstr[2] "У вас %zd открытых экранов. Всё равно выйти?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3069,16 +3020,16 @@ msgid "Quick search"
 msgstr "Быстрый поиск"
 
 msgid "&Permissions"
-msgstr "П&рава доступа"
+msgstr "&Права доступа"
 
 msgid "File &types"
-msgstr "Типы &файлов"
+msgstr "&Типы файлов"
 
 msgid "File highlight"
 msgstr "Цветовыделение"
 
 msgid "&Mouse page scrolling"
-msgstr "Страничное листание мышь&ю"
+msgstr "Страничное листание мы&шью"
 
 msgid "Pa&ge scrolling"
 msgstr "Страни&чное листание"
@@ -3093,7 +3044,7 @@ msgid "A&uto save panels setup"
 msgstr "&Автосохранение настроек панелей"
 
 msgid "Simple s&wap"
-msgstr "Прос&тая перестановка"
+msgstr ""
 
 msgid "Re&verse files only"
 msgstr "Ин&вертировать только файлы"
@@ -3111,13 +3062,13 @@ msgid "Show &backup files"
 msgstr "Показывать ре&зервные файлы"
 
 msgid "Mi&x all files"
-msgstr "Сме&шивать файлы/каталоги"
+msgstr "Смешивать &файлы/каталоги"
 
 msgid "Use SI si&ze units"
 msgstr "Вывод в едини&цах СИ"
 
 msgid "Show mi&ni-status"
-msgstr "Показывать &мини-статус"
+msgstr ""
 
 msgid "Panel options"
 msgstr "Настройки панели"
@@ -3244,16 +3195,16 @@ msgstr "<сбой чтения ссылки>"
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s байт"
-msgstr[1] "%s байта"
-msgstr[2] "%s байт"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s в %d файле"
-msgstr[1] "%s в %d файлах"
-msgstr[2] "%s в %d файлах"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Unknown tag on display format:"
 msgstr "Неизвестный тег в формате отображения:"
@@ -3491,8 +3442,6 @@ msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
-"Сбой запуска:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -3500,9 +3449,6 @@ msgid ""
 "Failed while close:\n"
 "%s\n"
 msgstr ""
-"\n"
-"Сбой при закрытии:"
-"%s\n"
 
 msgid "Choose codepage"
 msgstr "Выберите кодировку"
@@ -3596,16 +3542,16 @@ msgid "System data"
 msgstr "Системные данные"
 
 msgid "Config directory:"
-msgstr "Каталог с файлами настроек:"
+msgstr ""
 
 msgid "Data directory:"
-msgstr "Каталог с файлами данных:"
+msgstr ""
 
 msgid "User data"
-msgstr "Пльзовательские данные"
+msgstr "Данные пользователя"
 
 msgid "Cache directory:"
-msgstr "Каталог с кэшируемыми данными:"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3678,7 +3624,8 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: ожидается начальная строка..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
+msgstr ""
+"Извините, сейчас невозможно создать авторизованные паролем соединения."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3723,10 +3670,10 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: сбой локального чтения, посылаются нули"
 
 msgid "fish: storing zeros"
-msgstr "fish: запись нулевых данных"
+msgstr ""
 
 msgid "fish: storing file"
-msgstr "ftpfs: запись файла"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Прерывание передачи..."
@@ -3788,7 +3735,7 @@ msgstr "ftpfs: сбой соединения с сервером: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Ожидание повтора попытки... %d (Control-G для отмены)"
+msgstr "Ожидание повтора ... %d (Control-G для отмены)"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: неверный адрес системы."
@@ -3833,7 +3780,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 
 msgid "ftpfs: storing file"
-msgstr "ftpfs: запись файла"
+msgstr ""
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
@@ -3844,7 +3791,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "%s: Предупреждение: файл %s не найден\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4087,3 +4034,5 @@ msgstr "Поиск закончен"
 
 msgid "Continue from beginning?"
 msgstr "Продолжить с начала?"
+
+

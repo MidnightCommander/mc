@@ -2,8 +2,9 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # 
-# username <my.somewhat.lengthy.loginname@gmail.com>, 2011.
+# Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
+# username <my.somewhat.lengthy.loginname@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
