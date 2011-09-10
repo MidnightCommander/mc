@@ -6,7 +6,7 @@ EXTFSCONFFILES = sfs.ini
 EXTFS_MISC  = README README.extfs
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp rpm trpm u7z
+EXTFS_CONST = bpp changesetfs gitfs+ patchsetfs rpm trpm u7z
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
@@ -42,14 +42,11 @@ EXTFS_OUT = 			\
 	a+			\
 	apt+			\
 	audio			\
-	changesetfs		\
-	patchsetfs		\
 	deb			\
 	deba			\
 	debd			\
 	dpkg+			\
 	iso9660			\
-	gitfs			\
 	hp48+			\
 	lslR			\
 	mailfs			\
