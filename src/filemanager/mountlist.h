@@ -9,6 +9,8 @@
 #ifndef MC__MOUNTLIST_H
 #define MC__MOUNTLIST_H
 
+#include <stdint.h>             /* uintmax_t */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/
@@ -22,20 +24,20 @@ struct my_statfs
     char *typename;
     const char *mpoint;
     const char *device;
-    int avail;
-    int total;
-    int nfree;
-    int nodes;
+    uintmax_t avail;
+    uintmax_t total;
+    uintmax_t nfree;
+    uintmax_t nodes;
 };
 
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-/*** inline functions ****************************************************************************/
-
 void init_my_statfs (void);
 void my_statfs (struct my_statfs *myfs_stats, const char *path);
 void free_my_statfs (void);
+
+/*** inline functions ****************************************************************************/
 
 #endif /* MC__MOUNTLIST_H */

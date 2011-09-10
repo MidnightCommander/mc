@@ -159,8 +159,6 @@ struct fs_usage
 
 /*** file scope variables ************************************************************************/
 
-static int get_fs_usage (char *path, struct fs_usage *fsp);
-
 #ifdef HAVE_INFOMOUNT_LIST
 static struct mount_entry *mount_list = NULL;
 #endif /* HAVE_INFOMOUNT_LIST */
@@ -931,10 +929,10 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         myfs_stats->typename = entry->me_type;
         myfs_stats->mpoint = entry->me_mountdir;
         myfs_stats->device = entry->me_devname;
-        myfs_stats->avail = getuid ()? fs_use.fsu_bavail / 2 : fs_use.fsu_bfree / 2;
-        myfs_stats->total = fs_use.fsu_blocks / 2;
-        myfs_stats->nfree = fs_use.fsu_ffree;
-        myfs_stats->nodes = fs_use.fsu_files;
+        myfs_stats->avail = (uintmax_t) (getuid () ? fs_use.fsu_bavail : fs_use.fsu_bfree) / 2;
+        myfs_stats->total = (uintmax_t) fs_use.fsu_blocks / 2;
+        myfs_stats->nfree = (uintmax_t) fs_use.fsu_ffree;
+        myfs_stats->nodes = (uintmax_t) fs_use.fsu_files;
     }
     else
 #endif /* HAVE_INFOMOUNT_LIST */
@@ -959,10 +957,10 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         myfs_stats->mpoint = entry->me_mountdir;
         myfs_stats->device = entry->me_devname;
 
-        myfs_stats->avail = fs_use.fsu_bfree / 2;
-        myfs_stats->total = fs_use.fsu_blocks / 2;
-        myfs_stats->nfree = fs_use.fsu_ffree;
-        myfs_stats->nodes = fs_use.fsu_files;
+        myfs_stats->avail = (uintmax_t) fs_use.fsu_bfree / 2;
+        myfs_stats->total = (uintmax_t) fs_use.fsu_blocks / 2;
+        myfs_stats->nfree = (uintmax_t) fs_use.fsu_ffree;
+        myfs_stats->nodes = (uintmax_t) fs_use.fsu_files;
     }
     else
 #endif /* HAVE_INFOMOUNT_QNX */

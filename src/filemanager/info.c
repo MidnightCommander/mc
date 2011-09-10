@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <sys/stat.h>
+#include <inttypes.h>           /* PRIuMAX */
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
@@ -142,27 +143,29 @@ info_show_info (struct WInfo *info)
 
     case 16:
         widget_move (&info->widget, 16, 3);
-        if (myfs_stats.nfree > 0 || myfs_stats.nodes > 0)
-            tty_printf (_("Free nodes: %ld (%ld%%) of %ld"),
-                        (size_t) myfs_stats.nfree,
-                        myfs_stats.nodes != 0
-                        ? 100 * (size_t) myfs_stats.nfree / (size_t) myfs_stats.nodes : 0,
-                        (size_t) myfs_stats.nodes);
-        else
+        if (myfs_stats.nfree == 0 && myfs_stats.nodes == 0)
             tty_print_string (_("No node information"));
+        else
+            tty_printf ("%s %" PRIuMAX "/%" PRIuMAX " (%d%%)",
+                        _("Free nodes:"),
+                        myfs_stats.nfree, myfs_stats.nodes,
+                        myfs_stats.nodes == 0 ? 0 :
+                        (int) (100 * (long double) myfs_stats.nfree / myfs_stats.nodes));
 
     case 15:
         widget_move (&info->widget, 15, 3);
-        if (myfs_stats.avail > 0 || myfs_stats.total > 0)
+        if (myfs_stats.avail == 0 && myfs_stats.total == 0)
+            tty_print_string (_("No space information"));
+        else
         {
             char buffer1[6], buffer2[6];
+
             size_trunc_len (buffer1, 5, myfs_stats.avail, 1, panels_options.kilobyte_si);
             size_trunc_len (buffer2, 5, myfs_stats.total, 1, panels_options.kilobyte_si);
-            tty_printf (_("Free space: %s (%d%%) of %s"), buffer1, myfs_stats.total ?
-                        (int) (100 * (double) myfs_stats.avail / myfs_stats.total) : 0, buffer2);
+            tty_printf (_("Free space: %s/%s (%d%%)"), buffer1, buffer2,
+                        myfs_stats.total == 0 ? 0 :
+                        (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         }
-        else
-            tty_print_string (_("No space information"));
 
     case 14:
         widget_move (&info->widget, 14, 3);
@@ -216,7 +219,7 @@ info_show_info (struct WInfo *info)
             tty_printf (_("Size:      %s"), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
             tty_printf (ngettext (" (%ld block)", " (%ld blocks)",
-                                  (unsigned long int) st.st_blocks), (long int) st.st_blocks);
+                                  (unsigned long) st.st_blocks), (unsigned long) st.st_blocks);
 #endif
         }
 
