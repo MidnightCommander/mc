@@ -23,7 +23,7 @@ if (open IFILE,$filename) {
     }
     printf("### 100\n");
     seek (IFILE, $pos, 0);
-    while ($n = read(IFILE,$content,$blocks)!= 0) {
+    while ($n = read(IFILE,$content,$blksize)!= 0) {
         print $content;
     }
     close IFILE;
