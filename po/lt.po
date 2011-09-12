@@ -1,16 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+#   <nerijus@users.sourceforge.net>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2011-04-04 10:36+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Lithuanian <None>\n"
+"PO-Revision-Date: 2011-07-27 21:20+0000\n"
+"Last-Translator: nerijus <nerijus@users.sourceforge.net>\n"
+"Language-Team: Lithuanian (http://www.transifex.net/projects/p/mc/team/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2315,7 +2317,7 @@ msgstr ""
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
-msgstr ""
+msgstr "Nepavyko perrašyti aplanko \"%s\""
 
 #, c-format
 msgid ""
@@ -2328,18 +2330,24 @@ msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
+"Nepavyko pašalinti failo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
 msgstr ""
+"Nepavyko pašalinti failo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
+"Nepavyko pašalinti aplanko \"%s\"\n"
+"%s"
 
 msgid "&Retry"
 msgstr "&Iš naujo"
@@ -2367,6 +2375,8 @@ msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
+"Nepavyko perrašyti aplanko \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2399,7 +2409,7 @@ msgid ""
 msgstr ""
 
 msgid "Reget failed, about to overwrite file"
-msgstr ""
+msgstr "Pratęsti nepavyko, failas bus perrašytas"
 
 #, c-format
 msgid ""
@@ -2501,6 +2511,8 @@ msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
 msgstr ""
+"Nepavyko perrašyti failo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2558,7 +2570,7 @@ msgid "Overwrite all targets?"
 msgstr "Perrašyti visas paskirtis?"
 
 msgid "&Reget"
-msgstr "Iš nau&jo"
+msgstr "P&ratęsti"
 
 msgid "A&ppend"
 msgstr "&Papildyti"
@@ -3797,3 +3809,5 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
+
+

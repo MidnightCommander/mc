@@ -1,16 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Keith Bowes <zooplah@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2011-04-04 10:36+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Esperanto <None>\n"
+"PO-Revision-Date: 2011-07-31 03:00+0000\n"
+"Last-Translator: zooplah <zooplah@gmail.com>\n"
+"Language-Team: Esperanto (http://www.transifex.net/projects/p/mc/team/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -926,6 +927,22 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors Ŝlosilvorton={TEKSTO},{FONO}\n"
+"\n"
+"{TEKSTO} kaj {FONO} povas esti preterlasitaj; la aŭtomataj valoroj estos uzataj\n"
+" Ŝlosilvortoj:\n"
+"   Universala:       errors, disabled, reverse, gauge, header\n"
+"                     input, inputmark, inputunchanged, commandlinemark\n"
+"                     bbarhotkey, bbarbutton, statusbar\n"
+"   Dosiera elektilo: normal, selected, marked, markselect\n"
+"   Dialogujoj:       dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                     errdhotfocus\n"
+"   Menuoj:           menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Ŝprucmenuoj:      pmenunormal, pmenusel, pmenutitle\n"
+"   Tekstoredaktilo:  editnormal, editbold, editmarked, editwhitespace,\n"
+"                     editlinestate\n"
+"   Legilo:           viewbold, viewunderline, viewselected\n"
+"   Helpo:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names
 msgid ""
@@ -3960,3 +3977,5 @@ msgstr "Serĉo finita"
 
 msgid "Continue from beginning?"
 msgstr "Ĉu daŭrigi je komenco?"
+
+

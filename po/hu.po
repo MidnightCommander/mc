@@ -2,16 +2,23 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # 
-# rezso <rezso@rezso.net>, 2011.
+# Translators:
+# Arpad Biro <biro_arpad@yahoo.com>, 2003, 2004, 2005.
+# Gergely Szabo <szg@subogero.com>, 2009, 2011.
 # Gergely Szabó <szg@subogero.com>, 2011.
+# Laszlo Dvornik <rezuri@zoho.com>, 2011.
+# Rezso Pader <rezso@rezso.net>, 2011.
+# rezso <rezso@rezso.net>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
+# Szabolcs Ban <shooby@gnome.hu>, 2001.
+# Szabolcs Szasz <sz@szasz.hu>, 2001.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2011-04-04 10:36+0300\n"
-"PO-Revision-Date: 2011-04-23 14:47+0000\n"
-"Last-Translator: rezso <rezso@rezso.net>\n"
+"PO-Revision-Date: 2011-09-12 04:50+0000\n"
+"Last-Translator: dvornik <rezuri@zoho.com>\n"
 "Language-Team: Hungarian (http://www.transifex.net/projects/p/mc/team/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -336,7 +343,7 @@ msgid "Enter"
 msgstr "Enter"
 
 msgid "Tab key"
-msgstr "Tabuátor"
+msgstr "Tabulátor"
 
 msgid "Space key"
 msgstr "Szóköz"
@@ -464,7 +471,7 @@ msgid "Directory cache expired for %s"
 msgstr "A könyvtár gyorstárának adatai elévültek: %s"
 
 msgid "bytes transferred"
-msgstr "bájt átvive"
+msgstr "bájt átvíve"
 
 msgid "Starting linear transfer..."
 msgstr "Lineáris átvitel indítása..."
@@ -631,7 +638,7 @@ msgid "ftpfs: CWD failed."
 msgstr "Ftpfs: könyvtárváltás sikertelen"
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "Ftpfs: szimbolikus link feloldása sikertlen"
+msgstr "Ftpfs: szimbolikus link feloldása sikertelen"
 
 msgid "Resolving symlink..."
 msgstr "Szimbolikus link feloldása..."
@@ -735,7 +742,7 @@ msgid "not enough memory"
 msgstr "nincs elég memória"
 
 msgid "while allocating block buffer"
-msgstr "a blokk-puffer allokálásakor"
+msgstr "a blokk-puffer lefoglalásakor"
 
 #, c-format
 msgid "open_inode_scan: %d"
@@ -754,7 +761,7 @@ msgid "while calling ext2_block_iterate %d"
 msgstr "az  ext2_block_iterate hívásakor: %d"
 
 msgid "no more memory while reallocating array"
-msgstr "nincs elég memória a tömb újraallokálásakor"
+msgstr "nincs elég memória a tömb újra lefoglalásakor"
 
 #, c-format
 msgid "while doing inode scan %d"
@@ -928,6 +935,23 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors KULCSSZÓ={FORE},{BACK}\n"
+"\n"
+"A {FORE} és a {BACK} elhagyható, és az alapértelmezés lesz használva\n"
+"\n"
+" Kulcsszavak:\n"
+"   Globális:         errors, disabled, reverse, gauge, header\n"
+"                     input, inputmark, inputunchanged, commandlinemark\n"
+"                     bbarhotkey, bbarbutton, statusbar\n"
+"   Fájl megjelenítő: normal, selected, marked, markselect\n"
+"   Párbeszédablakok: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                     errdhotfocus\n"
+"   Menük:            menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Felbukkanó menük: pmenunormal, pmenusel, pmenutitle\n"
+"   Szerkesztő:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                     editlinestate\n"
+"   Megjelenítő:      viewbold, viewunderline, viewselected\n"
+"   Súgó:             helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names
 msgid ""
@@ -1032,7 +1056,7 @@ msgid ""
 "Cannot create temporary diff file\n"
 "%s"
 msgstr ""
-"Ideiglenes diff fájl létrehozáasa sikertelen\n"
+"Ideiglenes diff fájl létrehozása sikertelen\n"
 "%s"
 
 #, c-format
@@ -1223,7 +1247,7 @@ msgid "&Do not change"
 msgstr "&Ne változtass"
 
 msgid "&Unix format (LF)"
-msgstr "&Unix fomátum (LF)"
+msgstr "&Unix formátum (LF)"
 
 msgid "&Windows/DOS format (CR LF)"
 msgstr "&Windows/DOS formátum (CR LF)"
@@ -1616,7 +1640,7 @@ msgid "'ispell' s&pell check"
 msgstr "&Helyesírás-ellenőrzés"
 
 msgid "&Mail..."
-msgstr "&Mail..."
+msgstr "E-&mail..."
 
 msgid "Insert &literal..."
 msgstr "Karakter &beszúrása..."
@@ -2040,7 +2064,7 @@ msgid "Name"
 msgstr "Fájlnév"
 
 msgid "Permissions (Octal)"
-msgstr "Jogok (oktálisan):"
+msgstr "Jogok (oktálisan)"
 
 msgid "Owner name"
 msgstr "Tulajdonos:"
@@ -2510,7 +2534,7 @@ msgstr ""
 "%s"
 
 msgid "Reget failed, about to overwrite file"
-msgstr "A pozicionálás nem sikerült, a célfájl felülíódik."
+msgstr "A pozicionálás nem sikerült, a célfájl felülíródik."
 
 #, c-format
 msgid ""
@@ -3383,7 +3407,7 @@ msgid "A&uto save panels setup"
 msgstr "Panelek &autom. mentése"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "Egyszerű &csere"
 
 msgid "Re&verse files only"
 msgstr "Csak &fájlok fordítva"
@@ -3851,7 +3875,7 @@ msgstr "Több kódlap támogatása\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
-msgstr "GLib %d.%d.%d verzióval fordíva\n"
+msgstr "GLib %d.%d.%d verzióval fordítva\n"
 
 #, c-format
 msgid "Virtual File Systems:"
@@ -3877,10 +3901,10 @@ msgid "Pe&rcents"
 msgstr "Szá&zalék"
 
 msgid "&Decimal offset"
-msgstr "&Decimális offszet"
+msgstr "&Decimális eltolás"
 
 msgid "He&xadecimal offset"
-msgstr "He&xadecimális offszet"
+msgstr "He&xadecimális eltolás"
 
 msgid "Goto"
 msgstr "Ugrás"

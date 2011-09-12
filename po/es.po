@@ -2,6 +2,7 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # 
+# Translators:
 # David Martin <dmartina@excite.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
@@ -9,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2011-04-04 10:36+0300\n"
-"PO-Revision-Date: 2011-04-28 19:01+0000\n"
+"PO-Revision-Date: 2011-08-12 10:01+0000\n"
 "Last-Translator: dmartina <dmartina@excite.com>\n"
 "Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/mc/team/es/)\n"
 "MIME-Version: 1.0\n"
