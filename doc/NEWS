@@ -1,3 +1,29 @@
+Version 4.7.5.4
+
+- Core
+
+    * Added -g/--oldmouse option to support of NORMAL/BUTTON_EVENT mouse type (useful for screen/tmux) (#2601) 
+
+- Misc
+
+    * New file bindings:
+        - .3gp - video (#2583) 
+
+- Fixes
+
+    * Cannot compile 4.8.0-pre1 and 4.7.5.3 on Solaris (#2587)
+    * Recent autoconf displays warnings about missing AC_LANG_SOURCE (#2589)
+    * Incorrect TTY layer initialization (#2601)
+    * M-o works unexpectedly on symlink shortcuts (#2590)
+    * Panelize doesn't honour current sorting (#2175)
+    * Hintbar jumps to the top of the screen and overwrites main menu (#2593)
+    * File size column is bogus for widths above 9 (#2580)
+    * Editor: mouse clicks are ignored on the bottom line (#2591)
+    * Editor: extended keybingings are broken (#2586)
+    * File name length is limited in tar archive (#2201)
+    * Ftp failures - leading white space in file name (#2594)
+    * FISH hangs while copiyng a lot of small files (#2605) 
+
 Version 4.7.5.3
 
 - Core
