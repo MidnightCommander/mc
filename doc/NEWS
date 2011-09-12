@@ -35,7 +35,8 @@ Version 4.8.0-pre2
     * File name length is limited in tar archive (#2201)
     * Crash when copying symlink over ssh (#2582)
     * Broken panels recode (#2595)
-    * ftp failures - leading white space in file name (#2594) 
+    * ftp failures - leading white space in file name (#2594)
+    * FISH hangs while copiyng a lot of small files (#2605)
 
 Version 4.8.0-pre1
 
