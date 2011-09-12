@@ -79,6 +79,33 @@ typedef enum
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static GList *
+dlg_widget_next (Dlg_head *h, GList *l)
+{
+    GList *next;
+
+    next = g_list_next (l);
+    if (next == NULL)
+        next = h->widgets;
+
+    return next;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static GList *
+dlg_widget_prev (Dlg_head *h, GList *l)
+{
+    GList *prev;
+
+    prev = g_list_previous (l);
+    if (prev == NULL)
+        prev = g_list_last (h->widgets);
+
+    return prev;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -99,19 +126,9 @@ dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flag
         h->current = h->widgets;
 
     if (reverse)
-    {
-        p = g_list_previous (h->current);
-
-        if (p == NULL)
-            p = g_list_last (h->widgets);
-    }
+        p = dlg_widget_prev (h, h->current);
     else
-    {
-        p = g_list_next (h->current);
-
-        if (p == NULL)
-            p = h->widgets;
-    }
+        p = dlg_widget_next (h, h->current);
 
     first = p;
 
@@ -120,19 +137,9 @@ dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flag
         Widget *w = (Widget *) p->data;
 
         if (reverse)
-        {
-            p = g_list_previous (p);
-
-            if (p == NULL)
-                p = g_list_last (h->widgets);
-        }
+            p = dlg_widget_prev (h, p);
         else
-        {
-            p = g_list_next (p);
-
-            if (p == NULL)
-                p = h->widgets;
-        }
+            p = dlg_widget_next (h, p);
 
         if ((flags == 0) || ((flags & w->options) != 0))
             send_message (w, msg, 0);
@@ -203,14 +210,10 @@ do_select_widget (Dlg_head * h, GList * w, select_dir_t dir)
             dir = SELECT_NEXT;
             /* fallthrough */
         case SELECT_NEXT:
-            h->current = g_list_next (h->current);
-            if (h->current == NULL)
-                h->current = h->widgets;
+            h->current = dlg_widget_next (h, h->current);
             break;
         case SELECT_PREV:
-            h->current = g_list_previous (h->current);
-            if (h->current == NULL)
-                h->current = g_list_last (h->widgets);
+            h->current = dlg_widget_prev (h, h->current);
             break;
         }
     }
@@ -340,9 +343,7 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
         Widget *widget;
 
         widget = (Widget *) item->data;
-        item = g_list_next (item);
-        if (item == NULL)
-            item = h->widgets;
+        item = dlg_widget_next (h, item);
 
         if (((widget->options & W_DISABLED) == 0)
             && (x > widget->x) && (x <= widget->x + widget->cols)
@@ -408,9 +409,7 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
     if (handled == MSG_HANDLED)
         return MSG_HANDLED;
 
-    hot_cur = g_list_next (h->current);
-    if (hot_cur == NULL)
-        hot_cur = h->widgets;
+    hot_cur = dlg_widget_next (h, h->current);
 
     /* send it to all widgets */
     while (h->current != hot_cur && handled == MSG_NOT_HANDLED)
@@ -421,11 +420,7 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
             handled = send_message (current, WIDGET_HOTKEY, d_key);
 
         if (handled == MSG_NOT_HANDLED)
-        {
-            hot_cur = g_list_next (hot_cur);
-            if (hot_cur == NULL)
-                hot_cur = h->widgets;
-        }
+            hot_cur = dlg_widget_next (h, hot_cur);
     }
 
     if (handled == MSG_HANDLED)
@@ -531,6 +526,17 @@ frontend_run_dlg (Dlg_head * h)
         if (h->state == DLG_CLOSED)
             h->callback (h, NULL, DLG_VALIDATE, 0, NULL);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
+{
+    Widget *w = (Widget *) a;
+    unsigned long id = GPOINTER_TO_UINT (b);
+
+    return w->id == id ? 0 : 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -916,16 +922,10 @@ find_widget_type (const Dlg_head * h, callback_fn callback)
 Widget *
 dlg_find_by_id (const Dlg_head * h, unsigned int id)
 {
-    if (h->widgets != NULL)
-    {
-        GList *w;
+    GList *w;
 
-        for (w = h->widgets; w != NULL; w = g_list_next (w))
-            if (((Widget *) w->data)->id == id)
-                return (Widget *) w->data;
-    }
-
-    return NULL;
+    w = g_list_find_custom (h->widgets, GUINT_TO_POINTER (id), dlg_find_widget_by_id);
+    return w != NULL ? (Widget *) w->data : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -962,15 +962,7 @@ void
 dlg_one_up (Dlg_head * h)
 {
     if (h->widgets != NULL)
-    {
-        GList *prev;
-
-        prev = g_list_previous (h->current);
-        if (prev == NULL)
-            prev = g_list_last (h->widgets);
-
-        do_select_widget (h, prev, SELECT_PREV);
-    }
+        do_select_widget (h, dlg_widget_prev (h, h->current), SELECT_PREV);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -980,14 +972,7 @@ void
 dlg_one_down (Dlg_head * h)
 {
     if (h->widgets != NULL)
-    {
-        GList *next;
-
-        next = g_list_next (h->current);
-        if (next == NULL)
-            next = h->widgets;
-        do_select_widget (h, next, SELECT_NEXT);
-    }
+        do_select_widget (h, dlg_widget_next (h, h->current), SELECT_NEXT);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1008,10 +993,7 @@ update_cursor (Dlg_head * h)
         else
             do
             {
-                p = g_list_next (p);
-                if (p == NULL)
-                    p = h->widgets;
-
+                p = dlg_widget_next (h, p);
                 if (p == h->current)
                     break;
 
@@ -1084,11 +1066,7 @@ init_dlg (Dlg_head * h)
 
     /* Select the first widget that takes focus */
     while (h->current != NULL && !dlg_focus (h))
-    {
-        h->current = g_list_next (h->current);
-        if (h->current == NULL)
-            h->current = h->widgets;
-    }
+        h->current = dlg_widget_next (h, h->current);
 
     h->ret_value = 0;
 }

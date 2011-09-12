@@ -54,15 +54,18 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
 static gboolean
 parse_define (char *buf, char **long_name, char **short_name, long *line)
 {
+    /* *INDENT-OFF* */
     enum
-    { in_longname, in_shortname, in_shortname_first_char, in_line, finish } def_state = in_longname;
+    {
+        in_longname,
+        in_shortname,
+        in_shortname_first_char,
+        in_line, finish
+    } def_state = in_longname;
+    /* *INDENT-ON* */
 
     static char longdef[LONG_DEF_LEN];
     static char shortdef[SHORT_DEF_LEN];
@@ -147,8 +150,8 @@ parse_define (char *buf, char **long_name, char **short_name, long *line)
             longdef[nlong] = '\0';
             shortdef[nshort] = '\0';
             linedef[nline] = '\0';
-            *long_name = g_strdup (longdef);
-            *short_name = g_strdup (shortdef);
+            *long_name = longdef;
+            *short_name = shortdef;
             *line = atol (linedef);
             return TRUE;
         }
@@ -169,15 +172,17 @@ int
 etags_set_definition_hash (const char *tagfile, const char *start_path,
                            const char *match_func, etags_hash_t * def_hash)
 {
+    /* *INDENT-OFF* */
     enum
-    { start, in_filename, in_define } state = start;
+    {
+        start,
+        in_filename,
+        in_define
+    } state = start;
+    /* *INDENT-ON* */
 
     FILE *f;
     static char buf[BUF_LARGE];
-
-    char *longname = NULL;
-    char *shortname = NULL;
-    long line;
 
     char *chekedstr = NULL;
 
@@ -195,7 +200,6 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
 
     while (fgets (buf, sizeof (buf), f))
     {
-
         switch (state)
         {
         case start:
@@ -221,6 +225,10 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
             chekedstr = strstr (buf, match_func);
             if (chekedstr)
             {
+                char *longname = NULL;
+                char *shortname = NULL;
+                long line = 0;
+
                 parse_define (chekedstr, &longname, &shortname, &line);
                 if (num < MAX_DEFINITIONS - 1)
                 {
@@ -238,8 +246,6 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
                         def_hash[num].short_define = g_strdup (longname);
                     }
                     def_hash[num].line = line;
-                    g_free (shortname);
-                    g_free (longname);
                     num++;
                 }
             }

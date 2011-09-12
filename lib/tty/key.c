@@ -1983,7 +1983,7 @@ numeric_keypad_mode (void)
 {
     if (console_flag || xterm_flag)
     {
-        fputs ("\033>", stdout);
+        fputs (ESC_STR ">", stdout);
         fflush (stdout);
     }
 }
@@ -1995,7 +1995,7 @@ application_keypad_mode (void)
 {
     if (console_flag || xterm_flag)
     {
-        fputs ("\033=", stdout);
+        fputs (ESC_STR "=", stdout);
         fflush (stdout);
     }
 }

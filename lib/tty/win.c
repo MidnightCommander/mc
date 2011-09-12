@@ -131,7 +131,7 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
         tty_lowlevel_getch ();
 
     /* my own wierd protocol base 26 - paul */
-    printf ("\033CL%c%c%c%c\n", (y1 / 26) + 'A', (y1 % 26) + 'A', (y2 / 26) + 'A', (y2 % 26) + 'A');
+    printf (ESC_STR "CL%c%c%c%c\n", (y1 / 26) + 'A', (y1 % 26) + 'A', (y2 / 26) + 'A', (y2 % 26) + 'A');
 
     bytes = (y2 - y1) * (COLS + 1) + 1; /* *should* be the number of bytes read */
     j = 0;

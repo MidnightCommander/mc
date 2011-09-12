@@ -1221,7 +1221,7 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
             g_string_free (temp, TRUE);
             continue;
         }
-        if (*num == MAX_WORD_COMPLETIONS && MAX_WORD_COMPLETIONS)
+        if (*num == MAX_WORD_COMPLETIONS)
         {
             g_free (compl[0].text);
             for (i = 1; i < *num; i++)

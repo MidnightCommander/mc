@@ -67,8 +67,33 @@ default_query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
     {
     case DLG_RESIZE:
         {
-            int xpos = COLS / 2 - h->cols / 2;
-            int ypos = LINES / 3 - (h->lines - 3) / 2;
+            Dlg_head *prev_dlg = NULL;
+            int ypos, xpos;
+
+            /* get dialog under h */
+            if (top_dlg != NULL)
+            {
+                if (top_dlg->data != (void *) h)
+                    prev_dlg = (Dlg_head *) top_dlg->data;
+                else
+                {
+                    GList *p;
+
+                    /* Top dialog is current if it is visible.
+                       Get previous dialog in stack */
+                    p = g_list_next (top_dlg);
+                    if (p != NULL)
+                        prev_dlg = (Dlg_head *) p->data;
+                }
+            }
+
+            /* if previous dialog is not fullscreen'd -- overlap it */
+            if (prev_dlg == NULL || prev_dlg->fullscreen)
+                ypos = LINES / 3 - (h->lines - 3) / 2;
+            else
+                ypos = prev_dlg->y + 2;
+
+            xpos = COLS / 2 - h->cols / 2;
 
             /* set position */
             dlg_set_position (h, ypos, xpos, ypos + h->lines, xpos + h->cols);
