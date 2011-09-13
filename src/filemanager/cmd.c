@@ -1268,8 +1268,8 @@ view_other_cmd (void)
 {
     static int message_flag = TRUE;
 
-    if (!mc_global.tty.xterm_flag && !mc_global.tty.console_flag && !mc_global.tty.use_subshell
-        && !output_starts_shell)
+    if (!mc_global.tty.xterm_flag && mc_global.tty.console_flag == '\0'
+        && !mc_global.tty.use_subshell && !output_starts_shell)
     {
         if (message_flag)
             message (D_ERROR, MSG_ERROR,

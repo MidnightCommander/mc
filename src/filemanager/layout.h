@@ -21,10 +21,10 @@
 extern int equal_split;
 extern int first_panel_size;
 extern int output_lines;
-extern int command_prompt;
+extern gboolean command_prompt;
 extern int menubar_visible;
 extern int output_start_y;
-extern int xterm_title;
+extern gboolean xterm_title;
 extern int free_space;
 
 extern int horizontal_split;

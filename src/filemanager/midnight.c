@@ -1334,7 +1334,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
     case DLG_DRAW:
         load_hint (1);
         /* We handle the special case of the output lines */
-        if (mc_global.tty.console_flag && output_lines)
+        if (mc_global.tty.console_flag != '\0' && output_lines)
             show_console_contents (output_start_y,
                                    LINES - output_lines - mc_global.keybar_visible -
                                    1, LINES - mc_global.keybar_visible - 1);
@@ -1407,8 +1407,9 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
             return MSG_HANDLED;
         }
 
-        if ((!alternate_plus_minus || !(mc_global.tty.console_flag || mc_global.tty.xterm_flag))
-            && !quote && !current_panel->searching)
+        if ((!mc_global.tty.alternate_plus_minus
+             || !(mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag)) && !quote
+            && !current_panel->searching)
         {
             if (!only_leading_plus_minus)
             {

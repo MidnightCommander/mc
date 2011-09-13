@@ -356,7 +356,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     else
     {
         shell_execute (cmd, EXECUTE_INTERNAL);
-        if (mc_global.tty.console_flag)
+        if (mc_global.tty.console_flag != '\0')
         {
             handle_console (CONSOLE_SAVE);
             if (output_lines && mc_global.keybar_visible)

@@ -88,6 +88,7 @@ static inline void
 compute_namelen (struct dirent *dent __attribute__ ((unused)))
 {
 #ifdef DIRENT_LENGTH_COMPUTED
+    (void) dent;
     return;
 #else
     dent->d_namlen = strlen (dent);

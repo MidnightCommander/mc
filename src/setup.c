@@ -263,7 +263,7 @@ static const struct
     { "show_all_if_ambiguous", &mc_global.widget.show_all_if_ambiguous },
     { "max_dirt_limit", &mcview_max_dirt_limit },
     { "use_file_to_guess_type", &use_file_to_check_type },
-    { "alternate_plus_minus", &alternate_plus_minus },
+    { "alternate_plus_minus", &mc_global.tty.alternate_plus_minus },
     { "only_leading_plus_minus", &only_leading_plus_minus },
     { "show_output_starts_shell", &output_starts_shell },
     { "xtree_mode", &xtree_mode },

@@ -394,21 +394,24 @@ void
 learn_keys (void)
 {
     int save_old_esc_mode = old_esc_mode;
-    int save_alternate_plus_minus = alternate_plus_minus;
+    gboolean save_alternate_plus_minus = mc_global.tty.alternate_plus_minus;
 
-    old_esc_mode = 0;           /* old_esc_mode cannot work in learn keys dialog */
-    alternate_plus_minus = 1;   /* don't translate KP_ADD, KP_SUBTRACT and
-                                   KP_MULTIPLY to '+', '-' and '*' in
-                                   correct_key_code */
+    /* old_esc_mode cannot work in learn keys dialog */
+    old_esc_mode = 0;
+
+    /* don't translate KP_ADD, KP_SUBTRACT and
+       KP_MULTIPLY to '+', '-' and '*' in
+       correct_key_code */
+    mc_global.tty.alternate_plus_minus = TRUE;
     application_keypad_mode ();
     init_learn ();
 
     run_dlg (learn_dlg);
 
     old_esc_mode = save_old_esc_mode;
-    alternate_plus_minus = save_alternate_plus_minus;
+    mc_global.tty.alternate_plus_minus = save_alternate_plus_minus;
 
-    if (!alternate_plus_minus)
+    if (!mc_global.tty.alternate_plus_minus)
         numeric_keypad_mode ();
 
     switch (learn_dlg->ret_value)

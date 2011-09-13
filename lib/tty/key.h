@@ -53,7 +53,6 @@ extern const key_code_name_t key_name_conv_tab[];
 
 extern int old_esc_mode_timeout;
 
-extern int alternate_plus_minus;
 extern int double_click_speed;
 extern int old_esc_mode;
 extern int use_8th_bit_as_meta;
@@ -104,7 +103,7 @@ void application_keypad_mode (void);
 static inline gboolean
 is_abort_char (int c)
 {
-    return ((c == ESC_CHAR) || (c == KEY_F (10)));
+    return ((c == (int) ESC_CHAR) || (c == (int) KEY_F (10)));
 }
 
 #endif /* MC_KEY_H */

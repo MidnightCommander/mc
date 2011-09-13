@@ -93,7 +93,7 @@ convert_to_display_c (int c)
 {
     if (c < 0 || c >= 256)
         return c;
-    return conv_displ[c];
+    return (int) conv_displ[c];
 }
 
 static inline int
@@ -101,7 +101,7 @@ convert_from_input_c (int c)
 {
     if (c < 0 || c >= 256)
         return c;
-    return conv_input[c];
+    return (int) conv_input[c];
 }
 
 #endif /* HAVE_CHARSET */
