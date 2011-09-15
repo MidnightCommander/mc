@@ -161,6 +161,10 @@ EditLoadNextFile = alt-plus
 
 SelectCodepage = alt-e
 
+EditExtMode =
+
+[edit:xmap]
+
 [viewer]
 ViewHelp = f1
 ViewToggleWrapMode = f2
@@ -250,7 +254,7 @@ CmdSelect = kpplus
 CmdUnselect = kpminus
 CmdReverseSelection = kpasterisk
 CmdDialogList = alt-prime
-ExtMap1 =
+ExtMap1 = ctrl-x
 
 [main:xmap]
 CmdChmod = c
