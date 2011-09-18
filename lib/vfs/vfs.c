@@ -545,6 +545,8 @@ _vfs_get_cwd (void)
             {
                 vfs_set_raw_current_dir (vfs_path_from_str (tmp));
             }
+
+            g_free (tmp);
         }
     }
 
