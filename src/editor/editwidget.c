@@ -603,6 +603,9 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
         dlg_one_up (h);
         dlg_set_top_widget (h->current->data);
         break;
+    case CK_Options:
+        edit_options_dialog (h);
+        break;
     case CK_OptionsSaveMode:
         edit_save_mode_cmd ();
         break;

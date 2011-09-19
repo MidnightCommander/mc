@@ -1,11 +1,13 @@
 /*
    Editor options dialog box
 
-   Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2007, 2011
+   Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2007, 2011,
+   2012
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997
+   Andrew Borodin <aborodin@vmail.ru> 2012
 
    This file is part of the Midnight Commander.
 
@@ -72,13 +74,51 @@ i18n_translate_array (const char *array[])
     }
 }
 #endif /* ENABLE_NLS */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for the iteration of objects in the 'editors' array.
+ * Tear down 'over_col' property in all editors.
+ *
+ * @param data      probably WEdit object
+ * @param user_data unused
+ */
+
+static void
+edit_reset_over_col (void *data, void *user_data)
+{
+    (void) user_data;
+
+    if (edit_widget_is_editor ((const Widget *) data))
+        ((WEdit *) data)->over_col = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for the iteration of objects in the 'editors' array.
+ * Reload syntax lighlighting in all editors.
+ *
+ * @param data      probably WEdit object
+ * @param user_data unused
+ */
+
+static void
+edit_reload_syntax (void *data, void *user_data)
+{
+    (void) user_data;
+
+    if (edit_widget_is_editor ((Widget *) data))
+    {
+        WEdit *edit = (WEdit *) data;
+        edit_load_syntax (edit, NULL, edit->syntax_type);
+    }
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_options_dialog (WEdit * edit)
+edit_options_dialog (Dlg_head * h)
 {
     char wrap_length[16], tab_spacing[16], *p, *q;
     int wrap_mode = 0;
@@ -154,7 +194,7 @@ edit_options_dialog (WEdit * edit)
     old_syntax_hl = option_syntax_highlighting;
 
     if (!option_cursor_beyond_eol)
-        edit->over_col = 0;
+        g_list_foreach (h->widgets, edit_reset_over_col, NULL);
 
     if (p != NULL)
     {
@@ -190,7 +230,7 @@ edit_options_dialog (WEdit * edit)
 
     /* Load or unload syntax rules if the option has changed */
     if (option_syntax_highlighting != old_syntax_hl)
-        edit_load_syntax (edit, NULL, edit->syntax_type);
+        g_list_foreach (h->widgets, edit_reload_syntax, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

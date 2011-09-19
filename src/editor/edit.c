@@ -4097,9 +4097,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Refresh:
         edit_refresh_cmd (edit);
         break;
-    case CK_Options:
-        edit_options_dialog (edit);
-        break;
     case CK_Date:
         {
             char s[BUF_MEDIUM];
