@@ -1019,23 +1019,28 @@ mc_build_filename (const char *first_element, ...)
 
     do
     {
-        char *tmp_element;
-        size_t len;
-        const char *start;
+        if (*element == '\0')
+            element = va_arg (args, char *);
+        else
+        {
+            char *tmp_element;
+            size_t len;
+            const char *start;
 
-        tmp_element = g_strdup (element);
+            tmp_element = g_strdup (element);
 
-        element = va_arg (args, char *);
+            element = va_arg (args, char *);
 
-        canonicalize_pathname (tmp_element);
-        len = strlen (tmp_element);
-        start = (tmp_element[0] == PATH_SEP) ? tmp_element + 1 : tmp_element;
+            canonicalize_pathname (tmp_element);
+            len = strlen (tmp_element);
+            start = (tmp_element[0] == PATH_SEP) ? tmp_element + 1 : tmp_element;
 
-        g_string_append (path, start);
-        if (tmp_element[len - 1] != PATH_SEP && element != NULL)
-            g_string_append_c (path, PATH_SEP);
+            g_string_append (path, start);
+            if (tmp_element[len - 1] != PATH_SEP && element != NULL)
+                g_string_append_c (path, PATH_SEP);
 
-        g_free (tmp_element);
+            g_free (tmp_element);
+        }
     }
     while (element != NULL);
 
