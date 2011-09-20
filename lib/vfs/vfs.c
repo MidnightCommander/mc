@@ -594,3 +594,42 @@ vfs_change_encoding (vfs_path_t * vpath, const char *encoding)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Preallocate space for file in new place for ensure that file
+ * will be fully copied with less fragmentation.
+ *
+ * @param dest_desc mc VFS file handler
+ * @param src_fsize source file size
+ * @param dest_fsize destination file size (if destination exists, otherwise should be 0)
+ *
+ * @return 0 if success and non-zero otherwise.
+ * Note: function doesn't touch errno global variable.
+ */
+int
+vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
+{
+#ifndef HAVE_POSIX_FALLOCATE
+    (void) dest_desc;
+    (void) src_fsize;
+    (void) dest_fsize;
+    return 0;
+
+#else /* HAVE_POSIX_FALLOCATE */
+    int *dest_fd;
+    struct vfs_class *dest_class;
+
+    dest_class = vfs_class_find_by_handle (dest_vfs_fd);
+    if ((dest_class->flags & VFSF_LOCAL) == 0)
+        return 0;
+
+    dest_fd = (int *) vfs_class_data_find_by_handle (dest_vfs_fd);
+    if (dest_fd == NULL)
+        return 0;
+
+    return posix_fallocate (*dest_fd, dest_fsize, src_fsize - dest_fsize);
+
+#endif /* HAVE_POSIX_FALLOCATE */
+}
+
+/* --------------------------------------------------------------------------------------------- */
