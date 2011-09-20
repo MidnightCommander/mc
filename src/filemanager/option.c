@@ -76,7 +76,7 @@ configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
     {
     case DLG_ACTION:
         /* message from "Single press" checkbutton */
-        if (sender != NULL && sender->id == 17)
+        if (sender != NULL && sender->id == 18)
         {
             const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
             Widget *w;
@@ -125,8 +125,11 @@ configure_box (void)
         QUICK_BUTTON (38, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
         QUICK_BUTTON (14, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
         /* other options */
-        QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 12, dlg_height, N_("A&uto save setup"),
+        QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 13, dlg_height, N_("A&uto save setup"),
                         &auto_save_setup),
+        QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 12, dlg_height,
+                        N_("Preallocate &space before file copying"),
+                        &mc_global.vfs.preallocate_space),
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 11, dlg_height, N_("Sa&fe delete"),
                         &safe_delete),
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 10, dlg_height, N_("Cd follows lin&ks"),
@@ -191,14 +194,14 @@ configure_box (void)
             /* buttons */
             quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
             break;
-        case 12:
-        case 14:
-        case 18:
-        case 23:
+        case 13:
+        case 15:
+        case 19:
+        case 24:
             /* groupboxes */
             quick_widgets[i].u.groupbox.title = _(quick_widgets[i].u.groupbox.title);
             break;
-        case 13:
+        case 14:
             {
                 /* radio button */
                 size_t j;
@@ -206,10 +209,10 @@ configure_box (void)
                     pause_options[j] = _(pause_options[j]);
             }
             break;
-        case 15:
+        case 16:
             /* input line */
             break;
-        case 16:
+        case 17:
             /* label */
             quick_widgets[i].u.label.text = _(quick_widgets[i].u.label.text);
             break;
@@ -232,20 +235,20 @@ configure_box (void)
 
     /* checkboxes within groupboxes */
     c_len = 0;
-    for (i = 2; i < 23; i++)
-        if ((i < 12) || (i == 17) || (i > 18))
+    for (i = 2; i < 24; i++)
+        if ((i < 13) || (i == 18) || (i > 19))
             c_len = max (c_len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 3);
     /* radiobuttons */
     for (i = 0; i < (size_t) pause_options_num; i++)
         c_len = max (c_len, str_term_width1 (pause_options[i]) + 3);
     /* label + input */
-    l_len = str_term_width1 (quick_widgets[16].u.label.text);
+    l_len = str_term_width1 (quick_widgets[17].u.label.text);
     c_len = max (c_len, l_len + 1 + 8);
     /* groupboxes */
-    g_len = max (c_len + 2, str_term_width1 (quick_widgets[23].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[18].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[14].u.groupbox.title) + 4);
-    g_len = max (g_len, str_term_width1 (quick_widgets[12].u.groupbox.title) + 4);
+    g_len = max (c_len + 2, str_term_width1 (quick_widgets[24].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[19].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[15].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[13].u.groupbox.title) + 4);
     /* dialog width */
     Quick_input.xlen = max (dlg_width, g_len * 2 + 9);
     Quick_input.xlen = max (Quick_input.xlen, b_len + 2);
@@ -257,19 +260,19 @@ configure_box (void)
         quick_widgets[i].x_divisions = Quick_input.xlen;
 
     /* groupboxes */
-    quick_widgets[14].u.groupbox.width =
-        quick_widgets[18].u.groupbox.width =
-        quick_widgets[23].u.groupbox.width = Quick_input.xlen / 2 - 4;
-    quick_widgets[12].u.groupbox.width = Quick_input.xlen / 2 - 3;
+    quick_widgets[15].u.groupbox.width =
+        quick_widgets[19].u.groupbox.width =
+        quick_widgets[24].u.groupbox.width = Quick_input.xlen / 2 - 4;
+    quick_widgets[13].u.groupbox.width = Quick_input.xlen / 2 - 3;
 
     /* input */
-    quick_widgets[15].relative_x = quick_widgets[16].relative_x + l_len + 1;
-    quick_widgets[15].u.input.len = quick_widgets[18].u.groupbox.width - l_len - 4;
+    quick_widgets[16].relative_x = quick_widgets[17].relative_x + l_len + 1;
+    quick_widgets[16].u.input.len = quick_widgets[19].u.groupbox.width - l_len - 4;
 
     /* right column */
-    quick_widgets[12].relative_x = Quick_input.xlen / 2;
-    for (i = 2; i < 12; i++)
-        quick_widgets[i].relative_x = quick_widgets[12].relative_x + 2;
+    quick_widgets[13].relative_x = Quick_input.xlen / 2;
+    for (i = 2; i < 13; i++)
+        quick_widgets[i].relative_x = quick_widgets[13].relative_x + 2;
 
     /* buttons */
     quick_widgets[1].relative_x = (Quick_input.xlen - b_len) / 3;
@@ -278,7 +281,7 @@ configure_box (void)
     g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
 
     if (!old_esc_mode)
-        quick_widgets[15].options = quick_widgets[16].options = W_DISABLED;
+        quick_widgets[16].options = quick_widgets[17].options = W_DISABLED;
 
     if (quick_dialog (&Quick_input) == B_ENTER)
         old_esc_mode_timeout = atoi (time_out_new);

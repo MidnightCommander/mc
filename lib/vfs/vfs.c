@@ -619,6 +619,9 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
     int *dest_fd;
     struct vfs_class *dest_class;
 
+    if (!mc_global.vfs.preallocate_space)
+        return 0;
+
     dest_class = vfs_class_find_by_handle (dest_vfs_fd);
     if ((dest_class->flags & VFSF_LOCAL) == 0)
         return 0;
