@@ -980,7 +980,9 @@ está activada.
 Sobreimpresiona una ventana de entrada con destino por defecto al directorio del
 panel no seleccionado y copia el archivo actualmente seleccionado (o
 los archivos marcados, si hay al menos uno marcado) al directorio especificado
-por el usuario en la ventana. Durante este proceso, podemos pulsar
+por el usuario en la ventana. Space for destination file may be preallocated
+relative to preallocate_space configure option. Durante este proceso, podemos
+pulsar
 .IR Ctrl\-c " o " Esc
 para anular la operación. Para más detalles sobre la máscara de origen
 (que será normalmente * o ^\\(.*\\)$ dependiendo

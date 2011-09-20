@@ -1063,12 +1063,13 @@ if the use_internal_edit option is on.
 .PP
 Press F5 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
-directory/filename you specify in the input dialog.  The destination
-defaults to the directory in the non\-selected panel. During this
-process, you can press C\-c or ESC to abort the operation. For details
-about source mask (which will be usually either * or ^\\(.*\\)$ depending
-on setting of Use shell patterns) and possible wildcards in the destination
-see
+directory/filename you specify in the input dialog. The destination
+defaults to the directory in the non\-selected panel. Space for destination
+file may be preallocated relative to preallocate_space configure option.
+During this process, you can press C\-c or ESC to abort the operation.
+For details about source mask (which will be usually either * or ^\\(.*\\)$
+depending on setting of Use shell patterns) and possible wildcards in the
+destination see
 .\"LINK2"
 Mask copy/rename\&.
 .\"Mask Copy/Rename"
