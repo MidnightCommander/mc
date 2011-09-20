@@ -636,6 +636,27 @@ AC_DEFUN([gl_FSTYPENAME],
 ])
 
 dnl
+dnl posix_allocate() function detection
+dnl
+
+AC_DEFUN([gl_POSIX_FALLOCATE], [
+    dnl * Old glibcs have broken posix_fallocate(). Make sure not to use it.
+    AC_TRY_COMPILE([
+        #define _XOPEN_SOURCE 600
+        #include <stdlib.h>
+        #if defined(__GLIBC__) && (__GLIBC__ < 2 || __GLIBC_MINOR__ < 7)
+            possibly broken posix_fallocate
+        #endif
+    ],
+    [posix_fallocate(0, 0, 0);],
+    [AC_DEFINE(
+        [HAVE_POSIX_FALLOCATE],
+        [1],
+        [Define if you have a working posix_fallocate()])
+    ])
+])
+
+dnl
 dnl Filesystem information detection
 dnl
 dnl To get information about the disk, mount points, etc.
@@ -651,4 +672,5 @@ AC_DEFUN([AC_GET_FS_INFO], [
 
     gl_FSUSAGE
     gl_FSTYPENAME
+    gl_POSIX_FALLOCATE
 ])
