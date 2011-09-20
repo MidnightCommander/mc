@@ -1006,6 +1006,7 @@ get_user_permissions (struct stat *st)
 char *
 mc_build_filename (const char *first_element, ...)
 {
+    gboolean absolute;
     va_list args;
     const char *element = first_element;
     GString *path;
@@ -1016,6 +1017,8 @@ mc_build_filename (const char *first_element, ...)
 
     path = g_string_new ("");
     va_start (args, first_element);
+
+    absolute = (*first_element != '\0' && *first_element == PATH_SEP);
 
     do
     {
@@ -1046,7 +1049,8 @@ mc_build_filename (const char *first_element, ...)
 
     va_end (args);
 
-    g_string_prepend_c (path, PATH_SEP);
+    if (absolute)
+        g_string_prepend_c (path, PATH_SEP);
 
     ret = g_string_free (path, FALSE);
     canonicalize_pathname (ret);

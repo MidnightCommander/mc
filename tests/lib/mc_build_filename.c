@@ -54,7 +54,7 @@ START_TEST (test_mc_build_filename)
 {
     char *result;
 
-    check_mc_build_filename(("test", "path", NULL), "/test/path");
+    check_mc_build_filename(("test", "path", NULL), "test/path");
 
     check_mc_build_filename(("/test", "path/", NULL), "/test/path");
 
@@ -68,6 +68,17 @@ START_TEST (test_mc_build_filename)
 
     check_mc_build_filename(("/test", "path", "..", "/test", "path/", NULL), "/test/test/path");
 
+    check_mc_build_filename(("", "path", NULL), "path");
+
+    check_mc_build_filename(("", "/path", NULL), "path");
+
+    check_mc_build_filename(("path", "", NULL), "path");
+
+    check_mc_build_filename(("/path", "", NULL), "/path");
+
+    check_mc_build_filename(("pa", "", "th", NULL), "pa/th");
+
+    check_mc_build_filename(("/pa", "", "/th", NULL), "/pa/th");
 }
 END_TEST
 
