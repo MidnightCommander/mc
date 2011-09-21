@@ -169,6 +169,25 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_openfile *
+vfs_get_openfile (int handle)
+{
+    struct vfs_openfile *h;
+
+    if (handle < VFS_FIRST_HANDLE || (guint) (handle - VFS_FIRST_HANDLE) >= vfs_openfiles->len)
+        return NULL;
+
+    h = (struct vfs_openfile *) g_ptr_array_index (vfs_openfiles, handle - VFS_FIRST_HANDLE);
+    if (h == NULL)
+        return NULL;
+
+    g_assert (h->handle == handle);
+
+    return h;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /** Free open file data for given file handle */
@@ -198,16 +217,9 @@ vfs_class_data_find_by_handle (int handle)
 {
     struct vfs_openfile *h;
 
-    if (handle < VFS_FIRST_HANDLE || (guint) (handle - VFS_FIRST_HANDLE) >= vfs_openfiles->len)
-        return NULL;
+    h = vfs_get_openfile (handle);
 
-    h = (struct vfs_openfile *) g_ptr_array_index (vfs_openfiles, handle - VFS_FIRST_HANDLE);
-    if (!h)
-        return NULL;
-
-    g_assert (h->handle == handle);
-
-    return h->fsinfo;
+    return h == NULL ? NULL : h->fsinfo;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -218,16 +230,9 @@ vfs_class_find_by_handle (int handle)
 {
     struct vfs_openfile *h;
 
-    if (handle < VFS_FIRST_HANDLE || (guint) (handle - VFS_FIRST_HANDLE) >= vfs_openfiles->len)
-        return NULL;
+    h = vfs_get_openfile (handle);
 
-    h = (struct vfs_openfile *) g_ptr_array_index (vfs_openfiles, handle - VFS_FIRST_HANDLE);
-    if (!h)
-        return NULL;
-
-    g_assert (h->handle == handle);
-
-    return h->vclass;
+    return h == NULL ? NULL : h->vclass;
 }
 
 /* --------------------------------------------------------------------------------------------- */
