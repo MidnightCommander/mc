@@ -239,7 +239,9 @@ mcview_done (mcview_t * view)
         vfs_path_t *vpath;
         vpath = vfs_path_from_str (view->filename);
         canon_fname = vfs_path_to_str (vpath);
-        save_file_position (canon_fname, -1, 0, view->dpy_start, view->saved_bookmarks);
+        save_file_position (canon_fname, -1, 0,
+                            view->hex_mode ? view->hex_cursor : view->dpy_start,
+                            view->saved_bookmarks);
         view->saved_bookmarks = NULL;
         g_free (canon_fname);
         vfs_path_free (vpath);
