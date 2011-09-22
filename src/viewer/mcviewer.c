@@ -401,12 +401,22 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     {
         char *canon_fname;
         long line, col;
-        off_t new_offset;
+        off_t new_offset, max_offset;
 
         canon_fname = vfs_canon (view->filename);
         load_file_position (canon_fname, &line, &col, &new_offset, &view->saved_bookmarks);
-        new_offset = min (new_offset, mcview_get_filesize (view));
-        view->dpy_start = mcview_bol (view, new_offset, 0);
+        max_offset = mcview_get_filesize (view) - 1;
+        if (max_offset < 0)
+            new_offset = 0;
+        else
+            new_offset = min (new_offset, max_offset);
+        if (!view->hex_mode)
+            view->dpy_start = mcview_bol (view, new_offset, 0);
+        else
+        {
+            view->dpy_start = new_offset - new_offset % view->bytes_per_line;
+            view->hex_cursor = new_offset;
+        }
         g_free (canon_fname);
     }
     else if (start_line > 0)
