@@ -1095,13 +1095,15 @@ edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
 
     current_word = edit_collect_completions_get_current_word (edit, srch, word_start);
 
+    temp = g_string_new ("");
+
     /* collect max MAX_WORD_COMPLETIONS completions */
     while (mc_search_run (srch, (void *) edit, start + 1, last_byte, &len))
     {
+        g_string_set_size (temp, 0);
         start = srch->normal_offset;
 
         /* add matched completion if not yet added */
-        temp = g_string_new ("");
         for (i = 0; i < len; i++)
         {
             skip = edit_get_byte (edit, start + i);
@@ -1119,10 +1121,7 @@ edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
             continue;
 
         if (current_word != NULL && strcmp (current_word, temp->str) == 0)
-        {
-            g_string_free (temp, TRUE);
             continue;
-        }
 
         skip = 0;
 
@@ -1143,10 +1142,7 @@ edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
             }
         }
         if (skip != 0)
-        {
-            g_string_free (temp, TRUE);
             continue;
-        }
 
         if (*num == MAX_WORD_COMPLETIONS)
         {
@@ -1163,26 +1159,25 @@ edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
             recoded = str_convert_to_display (temp->str);
 
             if (recoded && recoded->len)
-            {
-                g_string_free (temp, TRUE);
-                temp = recoded;
-            }
-            else
-                g_string_free (recoded, TRUE);
+                g_string_assign (temp, recoded->str);
+
+            g_string_free (recoded, TRUE);
         }
 #endif
-        compl[*num].text = temp->str;
+        compl[*num].text = g_strdup (temp->str);
         compl[*num].len = temp->len;
         (*num)++;
         start += len;
-        g_string_free (temp, FALSE);
 
         /* note the maximal length needed for the completion dialog */
         if (len > max_len)
             max_len = len;
     }
+
     mc_search_free (srch);
+    g_string_free (temp, TRUE);
     g_free (current_word);
+
     return max_len;
 }
 
