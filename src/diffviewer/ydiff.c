@@ -2981,12 +2981,6 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     cb_ret_t res = MSG_HANDLED;
     switch (command)
     {
-    case CK_Help:
-        {
-            ev_help_t event_data = { NULL, "[Diff Viewer]" };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-        }
-        break;
     case CK_ShowSymbols:
         dview->display_symbols ^= 1;
         dview->new_frame = 1;
