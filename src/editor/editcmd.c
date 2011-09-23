@@ -1149,7 +1149,7 @@ edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
 /* --------------------------------------------------------------------------------------------- */
 /** collect the possible completions */
 static gsize
-edit_collect_completions (WEdit * edit, long start, gsize word_len,
+edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
                           char *match_expr, struct selection *compl, gsize * num)
 {
     gsize len = 0;
@@ -1159,7 +1159,7 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
     GString *temp;
     mc_search_t *srch;
 
-    long last_byte;
+    long last_byte, start = -1;
 
     srch = mc_search_new (match_expr, -1);
     if (srch == NULL)
@@ -1172,7 +1172,7 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
     }
     else
     {
-        last_byte = start;
+        last_byte = word_start;
     }
 
     srch->search_type = MC_SEARCH_T_REGEX;
@@ -1180,7 +1180,6 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
     srch->search_fn = edit_search_cmd_callback;
 
     /* collect max MAX_WORD_COMPLETIONS completions */
-    start = -1;
     while (1)
     {
         /* get next match */
@@ -1195,8 +1194,16 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
             skip = edit_get_byte (edit, start + i);
             if (isspace (skip))
                 continue;
+
+            /* skip current word */
+            if (start + (long) i == word_start)
+                break;
+
             g_string_append_c (temp, skip);
         }
+
+        if (temp->len == 0)
+            continue;
 
         skip = 0;
 
