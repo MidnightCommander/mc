@@ -130,8 +130,8 @@ mcview_toggle_hex_mode (mcview_t * view)
     }
     else
     {
-        view->dpy_start = view->hex_cursor;
-        mcview_moveto_bol (view);
+        view->dpy_start = mcview_bol (view, view->hex_cursor, 0);
+        view->hex_cursor = view->dpy_start;
         widget_want_cursor (view->widget, 0);
     }
     mcview_altered_hex_mode = 1;
