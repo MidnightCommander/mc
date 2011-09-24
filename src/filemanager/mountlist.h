@@ -24,8 +24,8 @@ struct my_statfs
     char *typename;
     const char *mpoint;
     const char *device;
-    uintmax_t avail;
-    uintmax_t total;
+    uintmax_t avail;    /* in kB */
+    uintmax_t total;    /* in kB */
     uintmax_t nfree;
     uintmax_t nodes;
 };
