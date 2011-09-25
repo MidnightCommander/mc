@@ -209,6 +209,28 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+START_TEST (test_vfs_path_append_vpath)
+{
+    vfs_path_t *vpath1, *vpath2, *vpath3;
+
+    vpath1 = vfs_path_from_str("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33");
+    vpath2 = vfs_path_from_str("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/");
+
+    vpath3 = vfs_path_append_vpath_new (vpath1, vpath2, NULL);
+
+    fail_unless (vfs_path_elements_count(vpath3)  == 6,
+      "\nvpath elements count should be %d, actial is %d\n",
+      6,
+      vfs_path_elements_count(vpath3)
+    );
+    vfs_path_free (vpath1);
+    vfs_path_free (vpath2);
+    vfs_path_free (vpath3);
+
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 main (void)
@@ -224,6 +246,7 @@ main (void)
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, test_vfs_path_tokens_count);
     tcase_add_test (tc_core, test_vfs_path_tokens_get);
+    tcase_add_test (tc_core, test_vfs_path_append_vpath);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
