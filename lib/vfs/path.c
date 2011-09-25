@@ -1143,6 +1143,46 @@ vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Append vpath_t tokens to path object
+ *
+ * @param ... NULL-terminated vpath objects
+ *
+ * @return newly allocated path object
+ */
+
+vfs_path_t *
+vfs_path_append_vpath_new (const vfs_path_t * first_vpath, ...)
+{
+    va_list args;
+    vfs_path_t *ret_vpath;
+    const vfs_path_t *current_vpath = first_vpath;
+
+    if (first_vpath == NULL)
+        return NULL;
+
+    ret_vpath = vfs_path_new ();
+
+    va_start (args, first_vpath);
+    do
+    {
+        int vindex;
+
+        for (vindex = 0; vindex < vfs_path_elements_count (current_vpath); vindex++)
+            ret_vpath->path =
+                g_list_append (ret_vpath->path,
+                               vfs_path_element_clone (vfs_path_get_by_index
+                                                       (current_vpath, vindex)));
+        current_vpath = va_arg (args, const vfs_path_t *);
+    }
+    while (current_vpath != NULL);
+    va_end (args);
+
+    return ret_vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * get tockens count in path.
  *
@@ -1197,6 +1237,9 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t le
     GString *ret_tokens, *element_tokens;
     int element_index;
     size_t tokens_count = vfs_path_tokens_count (vpath);
+
+    if (vpath == NULL)
+        return NULL;
 
     if (length == 0)
         length = tokens_count;
@@ -1254,6 +1297,33 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t le
 
     g_string_free (element_tokens, TRUE);
     return g_string_free (ret_tokens, !(start_position == 0 && length == 0));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get subpath by tokens
+ *
+ * @param vpath path object
+ * @param start_position first token for got/ Started from 0.
+ *        If negative, then position will be relative to end of path
+ * @param length count of tokens
+ *
+ * @return newly allocated path object with path tokens separated by slash
+ */
+
+vfs_path_t *
+vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t length)
+{
+    char *str_tokens;
+    vfs_path_t *ret_vpath = NULL;
+
+    str_tokens = vfs_path_tokens_get (vpath, start_position, length);
+    if (str_tokens != NULL)
+    {
+        ret_vpath = vfs_path_from_str_flags (str_tokens, VPF_NO_CANON);
+        g_free (str_tokens);
+    }
+    return ret_vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
