@@ -2415,9 +2415,6 @@ Egy sort gördít vissza.
 .B C\-l
 Frissíti képernyőt.
 .PP
-.B !
-Shell belépés a jelenlegi munkakönyvtárba.
-.PP
 .B "[n] m"
 Beállítja az n kijelölést.
 .PP

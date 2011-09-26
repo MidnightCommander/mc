@@ -2075,9 +2075,6 @@ Przewija jedną linię wstecz.
 .BR C\-l .
 Odświeża ekran.
 .PP
-.BR ! .
-Włącza powłokę w aktualnym katalogu roboczym.
-.PP
 .BR C\-f .
 Przeskakuje do następnego pliku.
 .PP

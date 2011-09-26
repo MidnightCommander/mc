@@ -2887,9 +2887,6 @@ Refresh the screen.
 .B C\-o
 Switch to the subshell and show the command screen.
 .PP
-.B !
-Like C\-o, but run a new shell if the subshell is not running.
-.PP
 .B "[n] m"
 Set the mark n.
 .PP
