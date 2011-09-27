@@ -172,54 +172,6 @@ vfs_canon (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Build URL parameters (such as user:pass@host:port) from one path element object
- *
- * @param element path element
- *
- * @return newly allocated string
- */
-
-static char *
-vfs_path_build_url_params_str (vfs_path_element_t * element)
-{
-    GString *buffer;
-
-    if (element == NULL)
-        return NULL;
-
-    buffer = g_string_new ("");
-
-    if (element->user != NULL)
-        g_string_append (buffer, element->user);
-
-    if (element->password != NULL)
-    {
-        g_string_append_c (buffer, ':');
-        g_string_append (buffer, element->password);
-    }
-
-    if (element->host != NULL)
-    {
-        if ((element->user != NULL) || (element->password != NULL))
-            g_string_append_c (buffer, '@');
-        if (element->ipv6)
-            g_string_append_c (buffer, '[');
-        g_string_append (buffer, element->host);
-        if (element->ipv6)
-            g_string_append_c (buffer, ']');
-    }
-
-    if ((element->port) != 0 && (element->host != NULL))
-    {
-        g_string_append_c (buffer, ':');
-        g_string_append_printf (buffer, "%d", element->port);
-    }
-
-    return g_string_free (buffer, FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** get encoding after last #enc: or NULL, if part does not contain #enc:
  *
  * @param path string
@@ -570,7 +522,7 @@ vfs_path_tokens_add_class_info (vfs_path_element_t * element, GString * ret_toke
         g_string_append (ret_tokens, element->vfs_prefix);
         g_string_append (ret_tokens, VFS_PATH_URL_DELIMITER);
 
-        url_str = vfs_path_build_url_params_str (element);
+        url_str = vfs_path_build_url_params_str (element, TRUE);
         if (*url_str != '\0')
         {
             g_string_append (ret_tokens, url_str);
@@ -645,7 +597,7 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
             g_string_append (buffer, element->vfs_prefix);
             g_string_append (buffer, VFS_PATH_URL_DELIMITER);
 
-            url_str = vfs_path_build_url_params_str (element);
+            url_str = vfs_path_build_url_params_str (element, TRUE);
             if (*url_str != '\0')
                 g_string_append (buffer, url_str);
 
@@ -1333,6 +1285,54 @@ vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t l
         g_free (str_tokens);
     }
     return ret_vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Build URL parameters (such as user:pass@host:port) from one path element object
+ *
+ * @param element path element
+ *
+ * @return newly allocated string
+ */
+
+char *
+vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolean keep_password)
+{
+    GString *buffer;
+
+    if (element == NULL)
+        return NULL;
+
+    buffer = g_string_new ("");
+
+    if (element->user != NULL)
+        g_string_append (buffer, element->user);
+
+    if (element->password != NULL && keep_password)
+    {
+        g_string_append_c (buffer, ':');
+        g_string_append (buffer, element->password);
+    }
+
+    if (element->host != NULL)
+    {
+        if ((element->user != NULL) || (element->password != NULL))
+            g_string_append_c (buffer, '@');
+        if (element->ipv6)
+            g_string_append_c (buffer, '[');
+        g_string_append (buffer, element->host);
+        if (element->ipv6)
+            g_string_append_c (buffer, ']');
+    }
+
+    if ((element->port) != 0 && (element->host != NULL))
+    {
+        g_string_append_c (buffer, ':');
+        g_string_append_printf (buffer, "%d", element->port);
+    }
+
+    return g_string_free (buffer, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

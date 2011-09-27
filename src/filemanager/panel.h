@@ -88,10 +88,8 @@ typedef struct WPanel
 
     int list_type;              /* listing type (was view_type) */
     int active;                 /* If panel is currently selected */
-    vfs_path_t *cwd_vpath;
-    vfs_path_t *lwd_vpath;
-    //    char cwd[MC_MAXPATHLEN];    /* Current Working Directory */
-    //    char lwd[MC_MAXPATHLEN];    /* Last Working Directory */
+    vfs_path_t *cwd_vpath;      /* Current Working Directory */
+    vfs_path_t *lwd_vpath;      /* Last Working Directory */
     GList *dir_history;         /* directory history */
     char *hist_name;            /* directory history name for history file */
     int count;                  /* Number of files in dir structure */
