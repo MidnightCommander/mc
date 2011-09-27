@@ -927,7 +927,7 @@ invoke_subshell (const char *command, int how, char **new_dir)
 
     /* Make the subshell change to MC's working directory */
     if (new_dir != NULL)
-        do_subshell_chdir (current_panel->cwd, TRUE, TRUE);
+        do_subshell_chdir (current_panel->cwd_vpath, TRUE, TRUE);
 
     if (command == NULL)        /* The user has done "C-o" from MC */
     {
@@ -953,7 +953,14 @@ invoke_subshell (const char *command, int how, char **new_dir)
 
     feed_subshell (how, FALSE);
 
-    pcwd = vfs_translate_path_n (current_panel->cwd);
+    {
+        char *cwd_str;
+
+        cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
+        pcwd = vfs_translate_path_n (cwd_str);
+        g_free (cwd_str);
+    }
+
     if (new_dir && subshell_alive && strcmp (subshell_cwd, pcwd))
         *new_dir = subshell_cwd;        /* Make MC change to the subshell's CWD */
     g_free (pcwd);
@@ -1161,13 +1168,15 @@ subshell_name_quote (const char *s)
 
 /** If it actually changed the directory it returns true */
 void
-do_subshell_chdir (const char *directory, gboolean update_prompt, gboolean reset_prompt)
+do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt)
 {
-    char *pcwd;
+    char *pcwd, *cwd_str;
     char *temp;
-    char *translate;
+    char *directory;
 
-    pcwd = vfs_translate_path_n (current_panel->cwd);
+    cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
+    pcwd = vfs_translate_path_n (cwd_str);
+    g_free (cwd_str);
 
     if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
     {
@@ -1184,10 +1193,14 @@ do_subshell_chdir (const char *directory, gboolean update_prompt, gboolean reset
     /* The initial space keeps this out of the command history (in bash
        because we set "HISTCONTROL=ignorespace") */
     write_all (mc_global.tty.subshell_pty, " cd ", 4);
-    if (*directory)
+
+    directory = vfs_path_to_str (vpath);
+    if (directory != '\0')
     {
+        char *translate;
+
         translate = vfs_translate_path_n (directory);
-        if (translate)
+        if (translate != NULL)
         {
             temp = subshell_name_quote (translate);
             if (temp)
@@ -1212,6 +1225,7 @@ do_subshell_chdir (const char *directory, gboolean update_prompt, gboolean reset
     {
         write_all (mc_global.tty.subshell_pty, "/", 1);
     }
+    g_free (directory);
     write_all (mc_global.tty.subshell_pty, "\n", 1);
 
     subshell_state = RUNNING_COMMAND;

@@ -1061,21 +1061,28 @@ convert_controls (const char *p)
  */
 
 char *
-diff_two_paths (const char *first, const char *second)
+diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     char *p, *q, *r, *s, *buf = NULL;
     int i, j, prevlen = -1, currlen;
     char *my_first = NULL, *my_second = NULL;
+    char *path_str;
 
-    my_first = resolve_symlinks (first);
+    path_str = vfs_path_to_str (vpath1);
+    my_first = resolve_symlinks (path_str);
+    g_free (path_str);
     if (my_first == NULL)
         return NULL;
-    my_second = resolve_symlinks (second);
+
+    path_str = vfs_path_to_str (vpath2);
+    my_second = resolve_symlinks (path_str);
+    g_free (path_str);
     if (my_second == NULL)
     {
         g_free (my_first);
         return NULL;
     }
+
     for (j = 0; j < 2; j++)
     {
         p = my_first;

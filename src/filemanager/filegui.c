@@ -810,15 +810,17 @@ file_progress_show_source (FileOpContext * ctx, const char *s)
     {
 #ifdef WITH_FULL_PATHS
         size_t i;
+        char *cwd_str;
 
-        i = strlen (current_panel->cwd);
+        cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
+        i = strlen (cwd_str);
 
         /* We remove the full path we have added before */
-        if (strncmp (s, current_panel->cwd, i) == 0)
+        if (strncmp (s, cwd_str, i) == 0)
             if (s[i] == PATH_SEP)
                 s += i + 1;
+        g_free (cwd_str);
 #endif /* WITH_FULL_PATHS */
-
         label_set_text (ui->file_label[0], _("Source"));
         label_set_text (ui->file_string[0], truncFileString (ui, s));
     }

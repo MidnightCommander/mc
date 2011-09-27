@@ -307,18 +307,23 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-compare_files (char *name1, char *name2, off_t size)
+compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
 {
     int file1, file2;
+    char *name;
     int result = -1;            /* Different by default */
 
     if (size == 0)
         return 0;
 
-    file1 = open (name1, O_RDONLY);
+    name = vfs_path_to_str (vpath1);
+    file1 = open (name, O_RDONLY);
+    g_free (name);
     if (file1 >= 0)
     {
-        file2 = open (name2, O_RDONLY);
+        name = vfs_path_to_str (vpath2);
+        file2 = open (name, O_RDONLY);
+        g_free (name);
         if (file2 >= 0)
         {
 #ifdef HAVE_MMAP
@@ -362,7 +367,6 @@ static void
 compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
 {
     int i, j;
-    char *src_name, *dst_name;
 
     /* No marks by default */
     panel->marked = 0;
@@ -424,12 +428,16 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
             }
 
             /* Thorough compare on, do byte-by-byte comparison */
-            src_name = concat_dir_and_file (panel->cwd, source->fname);
-            dst_name = concat_dir_and_file (other->cwd, target->fname);
-            if (compare_files (src_name, dst_name, source->st.st_size))
-                do_file_mark (panel, i, 1);
-            g_free (src_name);
-            g_free (dst_name);
+            {
+                vfs_path_t *src_name, *dst_name;
+
+                src_name = vfs_path_append_new (panel->cwd_vpath, source->fname, NULL);
+                dst_name = vfs_path_append_new (other->cwd_vpath, target->fname, NULL);
+                if (compare_files (src_name, dst_name, source->st.st_size))
+                    do_file_mark (panel, i, 1);
+                vfs_path_free (src_name);
+                vfs_path_free (dst_name);
+            }
         }
     }                           /* for (i ...) */
 }
@@ -456,35 +464,41 @@ do_link (link_type_t link_type, const char *fname)
     }
     else
     {
-        char *s;
-        char *d;
-        vfs_path_t *src_vpath;
+        vfs_path_t *s, *d;
 
         /* suggest the full path for symlink, and either the full or
            relative path to the file it points to  */
-        s = concat_dir_and_file (current_panel->cwd, fname);
+        s = vfs_path_append_new (current_panel->cwd_vpath, fname, NULL);
 
         if (get_other_type () == view_listing)
-            d = concat_dir_and_file (other_panel->cwd, fname);
+            d = vfs_path_append_new (other_panel->cwd_vpath, fname, NULL);
         else
-            d = g_strdup (fname);
+            d = vfs_path_from_str (fname);
 
         if (link_type == LINK_SYMLINK_RELATIVE)
-            s = diff_two_paths (other_panel->cwd, s);
+        {
+            char *s_str;
+
+            s_str = diff_two_paths (other_panel->cwd_vpath, s);
+            vfs_path_free (s);
+            s = vfs_path_from_str_flags (s_str, VPF_NO_CANON);
+            g_free (s_str);
+        }
 
         symlink_dialog (s, d, &dest, &src);
-        g_free (d);
-        g_free (s);
+        vfs_path_free (d);
+        vfs_path_free (s);
 
         if (!dest || !*dest || !src || !*src)
             goto cleanup;
         save_cwds_stat ();
 
         dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
-        src_vpath = vfs_path_from_str (src);
-        if (mc_symlink (dest_vpath, src_vpath) == -1)
+
+        s = vfs_path_from_str (src);
+        if (mc_symlink (dest_vpath, s) == -1)
             message (D_ERROR, MSG_ERROR, _("symlink: %s"), unix_error_string (errno));
-        vfs_path_free (src_vpath);
+        vfs_path_free (s);
     }
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -923,7 +937,7 @@ rename_cmd_local (void)
 void
 mkdir_cmd (void)
 {
-    char *dir, *absdir;
+    char *dir;
     const char *name = "";
 
     /* If 'on' then automatically fills name with current selected item name */
@@ -939,10 +953,11 @@ mkdir_cmd (void)
 
     if (*dir)
     {
+        vfs_path_t *absdir;
         if (dir[0] == '/' || dir[0] == '~')
-            absdir = g_strdup (dir);
+            absdir = vfs_path_from_str (dir);
         else
-            absdir = concat_dir_and_file (current_panel->cwd, dir);
+            absdir = vfs_path_append_new (current_panel->cwd_vpath, dir, NULL);
 
         save_cwds_stat ();
         if (my_mkdir (absdir, 0777) == 0)
@@ -955,7 +970,7 @@ mkdir_cmd (void)
         {
             message (D_ERROR, MSG_ERROR, "%s", unix_error_string (errno));
         }
-        g_free (absdir);
+        vfs_path_free (absdir);
     }
     g_free (dir);
 }
@@ -1019,9 +1034,19 @@ reread_cmd (void)
 {
     panel_update_flags_t flag = UP_ONLY_CURRENT;
 
-    if (get_current_type () == view_listing && get_other_type () == view_listing
-        && strcmp (current_panel->cwd, other_panel->cwd) == 0)
-        flag = UP_OPTIMIZE;
+    if (get_current_type () == view_listing && get_other_type () == view_listing)
+    {
+        char *c_cwd, *o_cwd;
+
+        c_cwd = vfs_path_to_str (current_panel->cwd_vpath);
+        o_cwd = vfs_path_to_str (other_panel->cwd_vpath);
+
+        if (strcmp (c_cwd, o_cwd) == 0)
+            flag = UP_OPTIMIZE;
+
+        g_free (c_cwd);
+        g_free (o_cwd);
+    }
 
     update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
@@ -1360,7 +1385,7 @@ edit_symlink_cmd (void)
                         if (mc_symlink (dest_vpath, p_vpath) == -1)
                             message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
                                      unix_error_string (errno));
-                        vfs_path_free(dest_vpath);
+                        vfs_path_free (dest_vpath);
                     }
                     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
                     repaint_screen ();
@@ -1562,16 +1587,18 @@ single_dirsize_cmd (void)
         size_t marked = 0;
         uintmax_t total = 0;
         ComputeDirSizeUI *ui;
+        vfs_path_t *p;
 
         ui = compute_dir_size_create_ui ();
+        p = vfs_path_from_str_flags (entry->fname, VPF_NO_CANON);
 
-        if (compute_dir_size (entry->fname, ui, compute_dir_size_update_ui,
-                              &marked, &total, TRUE) == FILE_CONT)
+        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total, TRUE) == FILE_CONT)
         {
             entry->st.st_size = (off_t) total;
             entry->f.dir_size_computed = 1;
         }
 
+        vfs_path_free (p);
         compute_dir_size_destroy_ui (ui);
     }
 
@@ -1602,12 +1629,17 @@ dirsizes_cmd (void)
             && ((panel->dirs_marked && panel->dir.list[i].f.marked)
                 || !panel->dirs_marked) && strcmp (panel->dir.list[i].fname, "..") != 0)
         {
+            vfs_path_t *p;
             size_t marked = 0;
             uintmax_t total = 0;
+            gboolean ok;
 
-            if (compute_dir_size (panel->dir.list[i].fname,
-                                  ui, compute_dir_size_update_ui, &marked, &total,
-                                  TRUE) != FILE_CONT)
+            p = vfs_path_from_str_flags (panel->dir.list[i].fname, VPF_NO_CANON);
+            ok = compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total,
+                                   TRUE) != FILE_CONT;
+            vfs_path_free (p);
+
+            if (ok)
                 break;
 
             panel->dir.list[i].st.st_size = (off_t) total;

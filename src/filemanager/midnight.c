@@ -436,7 +436,9 @@ midnight_get_title (const Dlg_head * h, size_t len)
 
     (void) h;
 
-    path = strip_home_and_password (current_panel->cwd);
+    p = vfs_path_to_str (current_panel->cwd_vpath);
+    path = strip_home_and_password (p);
+    g_free (p);
     res = gethostname (host, sizeof (host));
     if (res != 0)
         host[0] = '\0';
@@ -478,24 +480,15 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
 {
     if (mode == view_listing)
     {
-        vfs_path_t *vpath;
         vfs_path_element_t *path_element;
 
-        vpath = vfs_path_from_str (panel->cwd);
-        path_element = vfs_path_get_by_index (vpath, -1);
+        path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
 
         if (path_element->class != vclass)
-        {
-            vfs_path_free (vpath);
             return FALSE;
-        }
 
-        if (vfs_getid (vpath) != id)
-        {
-            vfs_path_free (vpath);
+        if (vfs_getid (panel->cwd_vpath) != id)
             return FALSE;
-        }
-        vfs_path_free (vpath);
     }
     return TRUE;
 }
@@ -591,7 +584,7 @@ create_panels (void)
     int current_index;
     int other_index;
     panel_view_mode_t current_mode, other_mode;
-    char original_dir[BUF_1K] = "\0";
+    char *original_dir = NULL;
 
     if (boot_current_is_left)
     {
@@ -618,7 +611,7 @@ create_panels (void)
              * since we may not be able to chdir to the proper
              * second directory later
              */
-            mc_get_current_wd (original_dir, sizeof (original_dir) - 2);
+            original_dir = vfs_get_current_dir ();
         }
         vpath = vfs_path_from_str (mc_run_param0);
         mc_chdir (vpath);
@@ -636,6 +629,7 @@ create_panels (void)
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
+    g_free (original_dir);
     set_display_type (other_index, other_mode);
 
     if (startup_left_mode == view_listing)
@@ -675,7 +669,7 @@ put_current_path (void)
     if (!command_prompt)
         return;
 
-    cwd_path = remove_encoding_from_path (current_panel->cwd);
+    cwd_path = remove_encoding_from_path (current_panel->cwd_vpath);
     command_insert (cmdline, cwd_path, FALSE);
 
     if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
@@ -696,7 +690,7 @@ put_other_path (void)
     if (!command_prompt)
         return;
 
-    cwd_path = remove_encoding_from_path (other_panel->cwd);
+    cwd_path = remove_encoding_from_path (other_panel->cwd_vpath);
     command_insert (cmdline, cwd_path, FALSE);
 
     if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
@@ -717,7 +711,7 @@ put_link (WPanel * panel)
         vfs_path_t *vpath;
         int i;
 
-        vpath = vfs_path_build_filename (panel->cwd, selection (panel)->fname, NULL);
+        vpath = vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname, NULL);
         i = mc_readlink (vpath, buffer, MC_MAXPATHLEN - 1);
         vfs_path_free (vpath);
 
@@ -853,14 +847,15 @@ static void
 setup_dummy_mc (void)
 {
     vfs_path_t *vpath;
-    char d[MC_MAXPATHLEN];
+    char *d;
     int ret;
 
-    mc_get_current_wd (d, MC_MAXPATHLEN);
+    d = _vfs_get_cwd ();
     setup_mc ();
     vpath = vfs_path_from_str (d);
     ret = mc_chdir (vpath);
     vfs_path_free (vpath);
+    g_free (d);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -882,10 +877,22 @@ done_mc (void)
     g_free (curr_dir);
 
     if ((current_panel != NULL) && (get_current_type () == view_listing))
-        vfs_stamp_path (current_panel->cwd);
+    {
+        char *tmp_path;
+
+        tmp_path = vfs_path_to_str (current_panel->cwd_vpath);
+        vfs_stamp_path (tmp_path);
+        g_free (tmp_path);
+    }
 
     if ((other_panel != NULL) && (get_other_type () == view_listing))
-        vfs_stamp_path (other_panel->cwd);
+    {
+        char *tmp_path;
+
+        tmp_path = vfs_path_to_str (other_panel->cwd_vpath);
+        vfs_stamp_path (tmp_path);
+        g_free (tmp_path);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -933,8 +940,7 @@ prepend_cwd_on_local (const char *filename)
     }
     vfs_path_free (vpath);
 
-    d = g_malloc (MC_MAXPATHLEN + strlen (filename) + 2);
-    mc_get_current_wd (d, MC_MAXPATHLEN);
+    d = _vfs_get_cwd ();
     l = strlen (d);
     d[l++] = PATH_SEP;
     strcpy (d + l, filename);
@@ -1631,17 +1637,9 @@ save_cwds_stat (void)
 {
     if (panels_options.fast_reload)
     {
-        vfs_path_t *vpath;
-
-        vpath = vfs_path_from_str (current_panel->cwd);
-        mc_stat (vpath, &(current_panel->dir_stat));
-        vfs_path_free (vpath);
+        mc_stat (current_panel->cwd_vpath, &(current_panel->dir_stat));
         if (get_other_type () == view_listing)
-        {
-            vpath = vfs_path_from_str (other_panel->cwd);
-            mc_stat (vpath, &(other_panel->dir_stat));
-            vfs_path_free (vpath);
-        }
+            mc_stat (other_panel->cwd_vpath, &(other_panel->dir_stat));
     }
 }
 
@@ -1687,9 +1685,9 @@ do_nc (void)
     {
         create_panels_and_run_mc ();
 
-        /* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
+        /* destroy_dlg destroys even current_panel->cwd_vpath, so we have to save a copy :) */
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
-            last_wd_string = g_strdup (current_panel->cwd);
+            last_wd_string = vfs_path_to_str (current_panel->cwd_vpath);
 
         /* don't handle VFS timestamps for dirs opened in panels */
         mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");

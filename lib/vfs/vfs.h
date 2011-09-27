@@ -265,6 +265,7 @@ void *vfs_class_data_find_by_handle (int handle);
 
 void vfs_free_handle (int handle);
 
+void vfs_setup_cwd (void);
 char *_vfs_get_cwd (void);
 
 vfs_path_t *vfs_change_encoding (vfs_path_t * vpath, const char *encoding);
@@ -299,7 +300,6 @@ int mc_unlink (const vfs_path_t * vpath);
 int mc_ctl (int fd, int ctlop, void *arg);
 int mc_setctl (const vfs_path_t * vpath, int ctlop, void *arg);
 int mc_open (const vfs_path_t * vpath, int flags, ...);
-char *mc_get_current_wd (char *buffer, size_t bufsize);
 vfs_path_t *mc_getlocalcopy (const vfs_path_t * pathname_vpath);
 int mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_vpath,
                        gboolean has_changed);
@@ -310,4 +310,5 @@ const char *mc_tmpdir (void);
 
 
 /*** inline functions ****************************************************************************/
+
 #endif /* MC_VFS_VFS_H */
