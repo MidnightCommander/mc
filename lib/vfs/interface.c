@@ -598,23 +598,6 @@ mc_fstat (int handle, struct stat *buf)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Return current directory. If it's local, reread the current directory
- * from the OS. Put directory to the provided buffer.
- */
-
-char *
-mc_get_current_wd (char *buffer, size_t size)
-{
-    char *cwd = _vfs_get_cwd ();
-
-    g_strlcpy (buffer, cwd, size);
-    g_free (cwd);
-
-    return buffer;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 vfs_path_t *
 mc_getlocalcopy (const vfs_path_t * pathname_vpath)

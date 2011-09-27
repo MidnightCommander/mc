@@ -384,14 +384,20 @@ do_cd_command (char *orig_cmd)
         }
         else if (strcmp (cmd + operand_pos, "..") == 0)
         {
-            char *dir = current_panel->cwd;
-            len = strlen (dir);
-            while (len && dir[--len] != PATH_SEP);
-            dir[len] = 0;
-            if (len)
-                sync_tree (dir);
-            else
-                sync_tree (PATH_SEP_STR);
+            char *str_path;
+
+            if (vfs_path_elements_count (current_panel->cwd_vpath) != 1 ||
+                strlen (vfs_path_get_by_index (current_panel->cwd_vpath, 0)->path) > 1)
+            {
+                vfs_path_t *tmp_vpath = current_panel->cwd_vpath;
+
+                current_panel->cwd_vpath =
+                    vfs_path_vtokens_get (tmp_vpath, 0, vfs_path_tokens_count (tmp_vpath) - 1);
+                vfs_path_free (tmp_vpath);
+            }
+            str_path = vfs_path_to_str (current_panel->cwd_vpath);
+            sync_tree (str_path);
+            g_free (str_path);
         }
         else if (cmd[operand_pos] == PATH_SEP)
         {
@@ -399,11 +405,14 @@ do_cd_command (char *orig_cmd)
         }
         else
         {
-            char *old = current_panel->cwd;
-            char *new;
-            new = concat_dir_and_file (old, cmd + operand_pos);
-            sync_tree (new);
-            g_free (new);
+            char *str_path;
+            vfs_path_t *new_vpath;
+
+            new_vpath = vfs_path_append_new (current_panel->cwd_vpath, cmd + operand_pos, NULL);
+            str_path = vfs_path_to_str (new_vpath);
+            vfs_path_free (new_vpath);
+            sync_tree (str_path);
+            g_free (str_path);
         }
     }
     else

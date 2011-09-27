@@ -438,7 +438,7 @@ vfs_setup_work_dir (void)
 {
     vfs_path_element_t *path_element;
 
-    g_free (_vfs_get_cwd ());
+    vfs_setup_cwd ();
 
     /* FIXME: is we really need for this check? */
     /*
@@ -518,12 +518,12 @@ vfs_print_message (const char *msg, ...)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Return current directory.  If it's local, reread the current directory
- * from the OS.  You must g_strdup() whatever this function returns.
+ * If it's local, reread the current directory
+ * from the OS.
  */
 
-char *
-_vfs_get_cwd (void)
+void
+vfs_setup_cwd (void)
 {
     vfs_path_element_t *path_element;
 
@@ -561,6 +561,18 @@ _vfs_get_cwd (void)
                 vfs_path_free (tmp_vpath);
         }
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Return current directory.  If it's local, reread the current directory
+ * from the OS.
+ */
+
+char *
+_vfs_get_cwd (void)
+{
+    vfs_setup_cwd ();
     return vfs_path_to_str (vfs_get_raw_current_dir ());
 }
 

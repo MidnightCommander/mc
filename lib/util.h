@@ -12,6 +12,8 @@
 #include <inttypes.h>           /* uintmax_t */
 #include <unistd.h>
 
+#include "lib/vfs/vfs.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef MAXSYMLINKS
@@ -128,7 +130,7 @@ char *convert_controls (const char *s);
 /* overwrites passwd with '\0's and frees it. */
 void wipe_password (char *passwd);
 
-char *diff_two_paths (const char *first, const char *second);
+char *diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 
 /* Returns the basename of fname. The result is a pointer into fname. */
 const char *x_basename (const char *fname);
@@ -163,7 +165,7 @@ void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
 void canonicalize_pathname (char *);
 
 /* Misc Unix functions */
-int my_mkdir (const char *s, mode_t mode);
+int my_mkdir (const vfs_path_t * s, mode_t mode);
 int my_rmdir (const char *s);
 
 #ifdef HAVE_REALPATH

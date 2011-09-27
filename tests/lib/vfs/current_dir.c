@@ -71,16 +71,18 @@ test_chdir (const vfs_path_t * vpath)
     vpath = vfs_path_from_str (cd_dir); \
     mc_chdir(vpath); \
     vfs_path_free (vpath); \
+    buffer = _vfs_get_cwd (); \
     fail_unless( \
-        strcmp(etalon, mc_get_current_wd(buffer,MC_MAXPATHLEN)) == 0, \
-        "\n expected(%s) doesn't equal \nto actual(%s)", etalon, buffer);
+        strcmp(etalon, buffer) == 0, \
+        "\n expected(%s) doesn't equal \nto actual(%s)", etalon, buffer); \
+    g_free (buffer);
 
 START_TEST (set_up_current_dir_url)
 {
     vfs_path_t *vpath;
     static struct vfs_s_subclass test_subclass;
     static struct vfs_class vfs_test_ops;
-    char buffer[MC_MAXPATHLEN];
+    char *buffer;
 
     vfs_s_init_class (&vfs_test_ops, &test_subclass);
 

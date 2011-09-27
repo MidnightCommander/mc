@@ -713,24 +713,27 @@ static void
 tree_rescan (void *data)
 {
     WTree *tree = data;
-    char old_dir[MC_MAXPATHLEN];
-    vfs_path_t *vpath;
-    int ret;
+    char *old_dir;
+    vfs_path_t *vpath = NULL;
+    int r;
 
-    if (tree->selected_ptr == NULL || mc_get_current_wd (old_dir, MC_MAXPATHLEN) == NULL)
+    old_dir = vfs_get_current_dir ();
+    if (old_dir == NULL)
         return;
+
+    if (tree->selected_ptr == NULL)
+        goto ret;
 
     vpath = vfs_path_from_str (tree->selected_ptr->name);
     if (mc_chdir (vpath) != 0)
-    {
-        vfs_path_free (vpath);
-        return;
-    }
+        goto ret;
 
     tree_store_rescan (vpath);
     vpath = vfs_path_from_str (old_dir);
-    ret = mc_chdir (vpath);
+    r = mc_chdir (vpath);
+  ret:
     vfs_path_free (vpath);
+    g_free (old_dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -835,8 +838,6 @@ tree_mkdir (WTree * tree)
     char old_dir[MC_MAXPATHLEN];
 
     if (!tree->selected_ptr)
-        return;
-    if (mc_get_current_wd (old_dir, MC_MAXPATHLEN) == NULL)
         return;
     if (chdir (tree->selected_ptr->name))
         return;

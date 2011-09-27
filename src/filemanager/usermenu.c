@@ -260,7 +260,13 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
             break;
         case 'd':
             p = extract_arg (p, arg, sizeof (arg));
-            *condition = panel != NULL && mc_search (arg, panel->cwd, search_type) ? 1 : 0;
+            {
+                char *cwd_str;
+
+                cwd_str = vfs_path_to_str (panel->cwd_vpath);
+                *condition = panel != NULL && mc_search (arg, cwd_str, search_type) ? 1 : 0;
+                g_free (cwd_str);
+            }
             break;
         case 't':
             p = extract_arg (p, arg, sizeof (arg));
@@ -772,12 +778,10 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
             char *cwd;
             char *qstr;
 
-            cwd = g_malloc (MC_MAXPATHLEN + 1);
-
             if (panel)
-                g_strlcpy (cwd, panel->cwd, MC_MAXPATHLEN + 1);
+                cwd = vfs_path_to_str (panel->cwd_vpath);
             else
-                mc_get_current_wd (cwd, MC_MAXPATHLEN + 1);
+                cwd = vfs_get_current_dir ();
 
             qstr = (*quote_func) (cwd, 0);
 

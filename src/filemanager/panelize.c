@@ -55,6 +55,7 @@
 #include "panel.h"              /* WPanel */
 
 #include "panelize.h"
+#include "panel.h"
 
 /*** global variables ****************************************************************************/
 
@@ -318,6 +319,18 @@ remove_from_panelize (struct panelize *entry)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+panelize_strlcpy (char *buffer, const vfs_path_t * vpath, size_t max_len)
+{
+    char *str_path;
+
+    str_path = vfs_path_to_str (vpath);
+    g_strlcpy (buffer, str_path, max_len);
+    g_free (str_path);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 do_external_panelize (char *command)
 {
     int status, link_to_dir, stale_link;
@@ -338,7 +351,7 @@ do_external_panelize (char *command)
     /* Clear the counters and the directory list */
     panel_clean_dir (current_panel);
 
-    g_strlcpy (panelized_panel.root, current_panel->cwd, MC_MAXPATHLEN);
+    panelize_strlcpy (panelized_panel.root, current_panel->cwd_vpath, MC_MAXPATHLEN);
 
     if (set_zero_dir (list))
         next_free++;
@@ -387,7 +400,7 @@ do_external_panelize (char *command)
         if (list->list[0].fname[0] == PATH_SEP)
         {
             int ret;
-            strcpy (current_panel->cwd, PATH_SEP_STR);
+            panel_set_cwd (current_panel, PATH_SEP_STR);
             ret = chdir (PATH_SEP_STR);
         }
     }
@@ -413,7 +426,7 @@ do_panelize_cd (struct WPanel *panel)
 
     clean_dir (list, panel->count);
     if (panelized_panel.root[0] == '\0')
-        g_strlcpy (panelized_panel.root, panel->cwd, MC_MAXPATHLEN);
+        panelize_strlcpy (panelized_panel.root, panel->cwd_vpath, MC_MAXPATHLEN);
 
     if (panelized_panel.count < 1)
     {
@@ -428,7 +441,13 @@ do_panelize_cd (struct WPanel *panel)
     panel->count = panelized_panel.count;
     panel->is_panelized = TRUE;
 
-    panelized_same = (strcmp (panelized_panel.root, panel->cwd) == 0);
+    {
+        char *cwd_str;
+
+        cwd_str = vfs_path_to_str (panel->cwd_vpath);
+        panelized_same = (strcmp (panelized_panel.root, cwd_str) == 0);
+        g_free (cwd_str);
+    }
 
     for (i = 0; i < panelized_panel.count; i++)
     {
@@ -469,7 +488,7 @@ panelize_save_panel (struct WPanel *panel)
     int i;
     dir_list *list = &panel->dir;
 
-    g_strlcpy (panelized_panel.root, panel->cwd, MC_MAXPATHLEN);
+    panelize_strlcpy (panelized_panel.root, panel->cwd_vpath, MC_MAXPATHLEN);
 
     if (panelized_panel.count > 0)
         clean_dir (&panelized_panel.list, panelized_panel.count);
@@ -486,7 +505,8 @@ panelize_save_panel (struct WPanel *panel)
     for (i = 0; i < panel->count; i++)
     {
         panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;
-        panelized_panel.list.list[i].fname = g_strndup (list->list[i].fname, list->list[i].fnamelen);
+        panelized_panel.list.list[i].fname =
+            g_strndup (list->list[i].fname, list->list[i].fnamelen);
         panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
         panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
         panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;

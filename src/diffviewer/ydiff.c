@@ -3383,8 +3383,8 @@ dview_diff_cmd (void)
             panel0 = other_panel;
             panel1 = current_panel;
         }
-        file0 = vfs_path_build_filename (panel0->cwd, selection (panel0)->fname, NULL);
-        file1 = vfs_path_build_filename (panel1->cwd, selection (panel1)->fname, NULL);
+        file0 = vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname, NULL);
+        file1 = vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname, NULL);
         is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
         is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
     }

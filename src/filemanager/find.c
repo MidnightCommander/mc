@@ -658,16 +658,21 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
     case B_TREE:
         {
-            const char *temp_dir = in_start->buffer;
+            char *temp_dir;
 
+            temp_dir = in_start->buffer;
             if ((temp_dir[0] == '\0') || ((temp_dir[0] == '.') && (temp_dir[1] == '\0')))
-                temp_dir = current_panel->cwd;
+                temp_dir = vfs_path_to_str (current_panel->cwd_vpath);
+            else
+                temp_dir = g_strdup (temp_dir);
 
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = tree_box (temp_dir);
             if (in_start_dir == NULL)
-                in_start_dir = g_strdup (temp_dir);
+                in_start_dir = temp_dir;
+            else
+                g_free (temp_dir);
 
             input_assign_text (in_start, in_start_dir);
 
@@ -709,10 +714,10 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
             if (s[0] == '.' && s[1] == '\0')
             {
-                *start_dir = g_strdup (current_panel->cwd);
-                /* FIXME: is current_panel->cwd canonicalized? */
+                *start_dir = vfs_path_to_str (current_panel->cwd_vpath);
+                /* FIXME: is current_panel->cwd_vpath canonicalized? */
                 /* relative paths will be used in panelization */
-                *start_dir_len = (ssize_t) strlen (current_panel->cwd);
+                *start_dir_len = (ssize_t) strlen (*start_dir);
                 g_free (s);
             }
             else if (g_path_is_absolute (s))
@@ -723,8 +728,12 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             else
             {
                 /* relative paths will be used in panelization */
-                *start_dir = mc_build_filename (current_panel->cwd, s, (char *) NULL);
-                *start_dir_len = (ssize_t) strlen (current_panel->cwd);
+                char *cwd_str;
+
+                cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
+                *start_dir = mc_build_filename (cwd_str, s, (char *) NULL);
+                *start_dir_len = (ssize_t) strlen (cwd_str);
+                g_free (cwd_str);
                 g_free (s);
             }
 
@@ -1677,8 +1686,8 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             if (start_dir_len < 0)
             {
                 int ret;
-
-                strcpy (current_panel->cwd, PATH_SEP_STR);
+                vfs_path_free (current_panel->cwd_vpath);
+                current_panel->cwd_vpath = vfs_path_from_str (PATH_SEP_STR);
                 ret = chdir (PATH_SEP_STR);
             }
             panelize_save_panel (current_panel);
