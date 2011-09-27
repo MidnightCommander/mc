@@ -1144,7 +1144,74 @@ show_free_space (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Make path string for shiwing in panel's header.
+ * Passwords will removed, also home dir will replaced by ~
+ *
+ * @param panel WPanel object
+ *
+ * @return newly allocated string.
+ */
 
+static char *
+panel_correct_path_to_show (WPanel * panel)
+{
+    const vfs_path_element_t *path_element;
+    GString *ret_str;
+
+    path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
+    ret_str = g_string_new ("");
+
+    if ((path_element->class->flags & VFSF_LOCAL) == 0)
+    {
+        char *url_str;
+
+        g_string_append (ret_str, path_element->vfs_prefix);
+        g_string_append (ret_str, VFS_PATH_URL_DELIMITER);
+
+        url_str = vfs_path_build_url_params_str (path_element, FALSE);
+        if (*url_str != '\0')
+        {
+            g_string_append (ret_str, url_str);
+            g_string_append_c (ret_str, PATH_SEP);
+        }
+        g_free (url_str);
+        g_string_append (ret_str, path_element->path);
+    }
+    else
+    {
+        char *tmp_path;
+
+        tmp_path = g_strdup (path_element->path);
+        g_string_append (ret_str, strip_home_and_password (tmp_path));
+        g_free (tmp_path);
+    }
+    return g_string_free (ret_str, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get Current path element encoding
+ *
+ * @param panel WPanel object
+ *
+ * @return newly allocated string or NULL if path charset is same as system charset
+ */
+
+static char *
+panel_get_encoding_info_str (WPanel * panel)
+{
+    char *ret_str = NULL;
+    const vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
+    if (path_element->encoding != NULL)
+        ret_str = g_strdup_printf ("[%s]", path_element->encoding);
+
+    return ret_str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 static void
 show_dir (WPanel * panel)
 {
@@ -1173,23 +1240,27 @@ show_dir (WPanel * panel)
 
     g_free (tmp);
 
-    if (panel->active)
-        tty_setcolor (REVERSE_COLOR);
-
     widget_move (&panel->widget, 0, 3);
 
     if (panel->is_panelized)
         tty_printf (" %s ", _("Panelize"));
     else
     {
-        char *tmp_path;
-
-        tmp_path = vfs_path_to_str (panel->cwd_vpath);
-        tty_printf (" %s ",
-                    str_term_trim (strip_home_and_password (tmp_path),
-                                   min (max (panel->widget.cols - 12, 0), panel->widget.cols)));
-        g_free (tmp_path);
+        tmp = panel_get_encoding_info_str (panel);
+        if (tmp != NULL)
+        {
+            tty_printf ("%s", tmp);
+            widget_move (&panel->widget, 0, 3 + strlen (tmp));
+            g_free (tmp);
+        }
     }
+    if (panel->active)
+        tty_setcolor (REVERSE_COLOR);
+
+    tmp = panel_correct_path_to_show (panel);
+    tty_printf (" %s ",
+                str_term_trim (tmp, min (max (panel->widget.cols - 12, 0), panel->widget.cols)));
+    g_free (tmp);
 
     if (!panels_options.show_mini_info)
     {
