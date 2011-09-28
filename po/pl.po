@@ -1,22 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# Slava Zanko <slavazanko@gmail.com>, 2011.
+#
+# Translators:
 # Piotr Drąg <piotrdrag@gmail.com>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-11 18:05+0000\n"
 "Last-Translator: raven <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.net/projects/p/mc/team/pl/)\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Ostrzeżenie: nie można wczytać listy stron kodowych"
@@ -363,6 +365,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -659,6 +664,12 @@ msgstr ""
 "Plik ~/.netrc posiada niepoprawny tryb\n"
 "Proszę usunąć hasło lub poprawić tryb"
 
+msgid "Cannot parse:"
+msgstr "Nie można przetworzyć:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Kolejne błędy przetwarzania zostaną zignorowane."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Uwaga: nie odnaleziono pliku %s\n"
@@ -802,12 +813,6 @@ msgstr "Nie można otworzyć pliku \"%s\""
 msgid "Ext2lib error"
 msgstr "Błąd ext2lib"
 
-msgid "Cannot parse:"
-msgstr "Nie można przetworzyć:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Kolejne błędy przetwarzania zostaną zignorowane."
-
 msgid "Internal error:"
 msgstr "Błąd wewnętrzny:"
 
@@ -877,6 +882,9 @@ msgstr "Modyfikuje plik"
 
 msgid "Forces xterm features"
 msgstr "Wymusza funkcje programu xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Wyłącza obsługę myszy w trybie tekstowym"
@@ -1918,8 +1926,7 @@ msgstr "Porządek sortowania"
 msgid "Confirmation"
 msgstr "Potwierdzenia"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Wyczyszczenie &historii"
@@ -2045,6 +2052,22 @@ msgstr "ustaw GID przy wykonaniu"
 msgid "set user ID on execution"
 msgstr "ustaw UID przy wykonaniu"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Nazwa"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Uprawnienia (ósemkowo)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Nazwa właściciela"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Nazwa grupy"
+
 msgid "C&lear marked"
 msgstr "&Wyczyść zaznaczone"
 
@@ -2053,30 +2076,6 @@ msgstr "Ustaw zaznaczon&e"
 
 msgid "&Marked all"
 msgstr "Wszystkie zaz&naczone"
-
-msgid "Name"
-msgstr "Nazwa"
-
-msgid "Permissions (Octal)"
-msgstr "Uprawnienia (ósemkowo)"
-
-msgid "Owner name"
-msgstr "Nazwa właściciela"
-
-msgid "Group name"
-msgstr "Nazwa grupy"
-
-msgid "Use SPACE to change"
-msgstr "Spacja zmienia opcję,"
-
-msgid "an option, ARROW KEYS"
-msgstr "klawisze kursora przenoszą"
-
-msgid "to move between options"
-msgstr "pomiędzy opcjami, a"
-
-msgid "and T or INS to mark"
-msgstr "T lub Ins zaznacza"
 
 msgid "Chmod command"
 msgstr "Polecenie chmod"
@@ -2092,6 +2091,15 @@ msgstr "Ustaw &użytkowników"
 
 msgid "Set &groups"
 msgstr "Ustaw &grupy"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Owner name"
+msgstr "Nazwa właściciela"
+
+msgid "Group name"
+msgstr "Nazwa grupy"
 
 msgid "Size"
 msgstr "Rozmiar"
@@ -2261,6 +2269,10 @@ msgstr "Ustawienia"
 msgid "Setup saved to ~/%s"
 msgstr "Zapisano ustawienia do ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Nie można zapisać do pliku"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Polecenia można wykonywać tylko na lokalnym systemie plików"
 
@@ -2307,8 +2319,8 @@ msgstr "Błąd pliku ~/%s"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "Format pliku ~/%s uległ zmianie wraz z wersją 3.0. Można teraz skopiować go "
 "z %smc.ext lub napisać samemu, opierając się na zawartości tego pliku."
@@ -2396,6 +2408,33 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Przerwij"
 
+msgid "&Retry"
+msgstr "&Ponów"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Katalog nie jest pusty.\n"
+"Usunąć go rekurencyjnie?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Proces w tle: katalog nie jest pusty.\n"
+"Usunąć go rekurencyjnie? "
+
+msgid "Delete:"
+msgstr "Usunięcie:"
+
+msgid "Non&e"
+msgstr "Br&ak"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2451,33 +2490,6 @@ msgid ""
 msgstr ""
 "Nie można usunąć katalogu \"%s\"\n"
 "%s"
-
-msgid "&Retry"
-msgstr "&Ponów"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Katalog nie jest pusty.\n"
-"Usunąć go rekurencyjnie?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Proces w tle: katalog nie jest pusty.\n"
-"Usunąć go rekurencyjnie? "
-
-msgid "Delete:"
-msgstr "Usunięcie:"
-
-msgid "Non&e"
-msgstr "Br&ak"
 
 #, c-format
 msgid ""
@@ -3045,12 +3057,6 @@ msgstr "Tryb:      %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Położenie:  %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "P&ionowy"
-
-msgid "&Horizontal"
-msgstr "Poziom&y"
-
 msgid "Show free sp&ace"
 msgstr "Wyświetla&nie wolnego miejsca"
 
@@ -3083,6 +3089,12 @@ msgstr "Wyjście konsoli"
 
 msgid "Other options"
 msgstr "Inne opcje"
+
+msgid "&Vertical"
+msgstr "P&ionowy"
+
+msgid "&Horizontal"
+msgstr "Poziom&y"
 
 msgid "Output lines:"
 msgstr "Wiersze wyjścia:"
@@ -3254,9 +3266,6 @@ msgstr "Wirtualny &system plików..."
 
 msgid "Panels:"
 msgstr "Panele:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3782,15 +3791,13 @@ msgstr ""
 "Wszystkie klawisze działają właściwie."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-"Należy nacisnąć każdy z wypisanych tu klawiszy, a następnie sprawdzić,"
+msgstr "Należy nacisnąć każdy z wypisanych tu klawiszy, a następnie sprawdzić,"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "które nie są oznaczone jako \"OK\". Naciśnięcie spacji na brakującym"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr ""
-"klawiszu lub kliknięcie określi go. Poruszanie za pomocą klawisza Tab."
+msgstr "klawiszu lub kliknięcie określi go. Poruszanie za pomocą klawisza Tab."
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -3987,4 +3994,14 @@ msgstr "Ukończono wyszukiwanie"
 msgid "Continue from beginning?"
 msgstr "Kontynuować od początku?"
 
+#~ msgid "Use SPACE to change"
+#~ msgstr "Spacja zmienia opcję,"
 
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "klawisze kursora przenoszą"
+
+#~ msgid "to move between options"
+#~ msgstr "pomiędzy opcjami, a"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "T lub Ins zaznacza"

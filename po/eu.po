@@ -1,20 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Basque <None>\n"
+"Language-Team: Basque (http://www.transifex.net/projects/p/mc/team/eu/)\n"
+"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -361,6 +363,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maius"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -658,6 +663,12 @@ msgstr ""
 "~/.netrc fitxategiak modu okerra dauka.\n"
 "Kendu pasahitza edo zuzendu modua"
 
+msgid "Cannot parse:"
+msgstr "Azterketa sintaktikoa ezin egin:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Gainerako analisi-erroreei ez zaie jaramonik egingo."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Abisua: %s fitxategia ez da aurkitu\n"
@@ -789,7 +800,8 @@ msgid "vfs_info is not fs!"
 msgstr "vfs_info ez da fs!"
 
 msgid "You have to chdir to extract files first"
-msgstr "Fitxategiak erauzteko aurrena direktorioa aldatu (\"chdir\") behar duzu"
+msgstr ""
+"Fitxategiak erauzteko aurrena direktorioa aldatu (\"chdir\") behar duzu"
 
 msgid "while iterating over blocks"
 msgstr "blokeen gainean iteratzerakoan"
@@ -800,12 +812,6 @@ msgstr "\"%s\" fitxategia ezin ireki"
 
 msgid "Ext2lib error"
 msgstr "Ext2lib akatsa"
-
-msgid "Cannot parse:"
-msgstr "Azterketa sintaktikoa ezin egin:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Gainerako analisi-erroreei ez zaie jaramonik egingo."
 
 msgid "Internal error:"
 msgstr "Barne-errorea:"
@@ -876,6 +882,9 @@ msgstr "Fitxategi bat editatzen du"
 
 msgid "Forces xterm features"
 msgstr "xterm eginbideak behartzen ditu"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Testu-bertsioan sagu-euskarria desgaitzen du"
@@ -1900,8 +1909,7 @@ msgstr "Sailkatzeko ordena"
 msgid "Confirmation"
 msgstr "Berrespena"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "&Historia garbitu"
@@ -1974,8 +1982,8 @@ msgstr "Esteka sinbolikoaren fitxategi izena:"
 
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
-"Existitzen den fitxategi izena (esteka sinbolikoak erakutsiko duen fitxategi"
-" izena):"
+"Existitzen den fitxategi izena (esteka sinbolikoak erakutsiko duen fitxategi "
+"izena):"
 
 msgid "Symbolic link"
 msgstr "Esteka sinbolikoa"
@@ -2029,6 +2037,22 @@ msgstr "ezarri taldearen ID-a exekutatzerakoan"
 msgid "set user ID on execution"
 msgstr "ezarri erabiltzailearen ID-a exekutatzerakoan"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Izena"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Baimenak (Zortzitarra)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Jabearen izena"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Taldearen izena"
+
 msgid "C&lear marked"
 msgstr "&Garbitu markatutakoa"
 
@@ -2037,30 +2061,6 @@ msgstr "&Ezarri markatutakoa"
 
 msgid "&Marked all"
 msgstr "Guztiak &markatuta"
-
-msgid "Name"
-msgstr "Izena"
-
-msgid "Permissions (Octal)"
-msgstr "Baimenak (Zortzitarra)"
-
-msgid "Owner name"
-msgstr "Jabearen izena"
-
-msgid "Group name"
-msgstr "Taldearen izena"
-
-msgid "Use SPACE to change"
-msgstr "Erabili ZURIUNEA aldatzeko"
-
-msgid "an option, ARROW KEYS"
-msgstr "aukera bat, GEZI TEKLAK"
-
-msgid "to move between options"
-msgstr "aukeren artean mugitzeko"
-
-msgid "and T or INS to mark"
-msgstr "eta T edo INS markatzeko"
 
 msgid "Chmod command"
 msgstr "Chmod komandoa"
@@ -2076,6 +2076,15 @@ msgstr "Ezarri &erabiltzaileak"
 
 msgid "Set &groups"
 msgstr "Ezarri &taldeak"
+
+msgid "Name"
+msgstr "Izena"
+
+msgid "Owner name"
+msgstr "Jabearen izena"
+
+msgid "Group name"
+msgstr "Taldearen izena"
 
 msgid "Size"
 msgstr "Neurria"
@@ -2245,6 +2254,10 @@ msgstr "Ezarpena"
 msgid "Setup saved to ~/%s"
 msgstr "Ezarpena ~/%s kokapenera gordeta"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "fitxategira ezin gorde"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Komandoak ezin exekutatu bertakoa ez den fitxategi-sistema batean"
 
@@ -2291,11 +2304,11 @@ msgstr "~/%s fitxategi akatsa"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"~/%s fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. Agian %smc.ext"
-" fitxategitik kopiatu nahiko duzu edo fitxategiaidazteko eredu gisa erabili."
+"~/%s fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. Agian %smc.ext "
+"fitxategitik kopiatu nahiko duzu edo fitxategiaidazteko eredu gisa erabili."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiatu"
@@ -2365,7 +2378,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Bertakoak ez diren fitxategi sistemen artean ezin da esteka sinboliko egonkorrik sortu:\n"
+"Bertakoak ez diren fitxategi sistemen artean ezin da esteka sinboliko "
+"egonkorrik sortu:\n"
 "\n"
 "Esteka sinboliko egonkorrak aukera ezgaituko da"
 
@@ -2379,6 +2393,33 @@ msgstr ""
 
 msgid "&Abort"
 msgstr "&Abortatu"
+
+msgid "&Retry"
+msgstr "&Saiatu berriz"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Direktorioa ez dago hutsik.\n"
+"Errekurtsiboki ezabatu?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Hondoko prozesua: Direktorioa ez dago hutsik.\n"
+"Errekurtsiboki ezabatu?"
+
+msgid "Delete:"
+msgstr "Ezabatu:"
+
+msgid "Non&e"
+msgstr "&Bat ere ez"
 
 #, c-format
 msgid ""
@@ -2435,33 +2476,6 @@ msgid ""
 msgstr ""
 "\"%s\" direktorioa ezin ezabatu\n"
 "%s"
-
-msgid "&Retry"
-msgstr "&Saiatu berriz"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Direktorioa ez dago hutsik.\n"
-"Errekurtsiboki ezabatu?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Hondoko prozesua: Direktorioa ez dago hutsik.\n"
-"Errekurtsiboki ezabatu?"
-
-msgid "Delete:"
-msgstr "Ezabatu:"
-
-msgid "Non&e"
-msgstr "&Bat ere ez"
 
 #, c-format
 msgid ""
@@ -3027,12 +3041,6 @@ msgstr "Modua:     %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Kokalekua:  %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Bertikalki"
-
-msgid "&Horizontal"
-msgstr "&Horizontala"
-
 msgid "Show free sp&ace"
 msgstr "Erakutsi leku &askea"
 
@@ -3065,6 +3073,12 @@ msgstr "Kontsolaren irteera"
 
 msgid "Other options"
 msgstr "Beste aukera batzuk"
+
+msgid "&Vertical"
+msgstr "&Bertikalki"
+
+msgid "&Horizontal"
+msgstr "&Horizontala"
 
 msgid "Output lines:"
 msgstr "Irteera lerroak:"
@@ -3236,9 +3250,6 @@ msgstr "Alegiazko &FS..."
 
 msgid "Panels:"
 msgstr "Panelak:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3549,8 +3560,7 @@ msgid "Do you really want to execute?"
 msgstr "Beneta exekutatu nahi duzu?"
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
+msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
 
 msgid "&Add new"
 msgstr "&Gehitu berria"
@@ -3967,3 +3977,15 @@ msgstr "Bilaketa eginda"
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "Erabili ZURIUNEA aldatzeko"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "aukera bat, GEZI TEKLAK"
+
+#~ msgid "to move between options"
+#~ msgstr "aukeren artean mugitzeko"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "eta T edo INS markatzeko"

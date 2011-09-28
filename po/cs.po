@@ -1,20 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Martin Zoubek <zoubek@seznam.cz>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Czech <None>\n"
+"Language-Team: Czech (http://www.transifex.net/projects/p/mc/team/cs/)\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
 msgid "Warning: cannot load codepages list"
@@ -361,6 +363,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Proměnná prostředí TERM není nastavena!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -657,6 +662,12 @@ msgstr ""
 "Soubor ~/.netrc nemá správná přístupová práva\n"
 "Odstraňte heslo nebo změňte práva"
 
+msgid "Cannot parse:"
+msgstr "Nelze analyzovat:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Další chyby analýzy budou ignorovány."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Varování: soubor %s nebyl nalezen\n"
@@ -800,12 +811,6 @@ msgstr "Nelze otevřít soubor „%s“"
 msgid "Ext2lib error"
 msgstr "Chyba ext2lib"
 
-msgid "Cannot parse:"
-msgstr "Nelze analyzovat:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Další chyby analýzy budou ignorovány."
-
 msgid "Internal error:"
 msgstr "Interní chyba:"
 
@@ -875,6 +880,9 @@ msgstr "Začne editovat jeden soubor"
 
 msgid "Forces xterm features"
 msgstr "Vnutí použití možností Xtermu"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "V textové verzi vypne podporu myši"
@@ -1897,8 +1905,7 @@ msgstr "Pořadí"
 msgid "Confirmation"
 msgstr "Potvrzování"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Smazání &historie"
@@ -2024,6 +2031,22 @@ msgstr "nastavit GID při spuštění"
 msgid "set user ID on execution"
 msgstr "nastavit UID při spuštění"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Jméno"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Práva (Octal)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Jméno vlastníka"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Jméno skupiny"
+
 msgid "C&lear marked"
 msgstr "&Smazat označené"
 
@@ -2032,30 +2055,6 @@ msgstr "&Nastavit označené"
 
 msgid "&Marked all"
 msgstr "&Nastavit vše na označených souborech"
-
-msgid "Name"
-msgstr "Jméno"
-
-msgid "Permissions (Octal)"
-msgstr "Práva (Octal)"
-
-msgid "Owner name"
-msgstr "Jméno vlastníka"
-
-msgid "Group name"
-msgstr "Jméno skupiny"
-
-msgid "Use SPACE to change"
-msgstr "Použijte MEZERNÍK ke změně"
-
-msgid "an option, ARROW KEYS"
-msgstr "nastavení, ŠIPKY pro pohyb"
-
-msgid "to move between options"
-msgstr "mezi volbami nastavení a T"
-
-msgid "and T or INS to mark"
-msgstr "nebo INS pro označení"
 
 msgid "Chmod command"
 msgstr "Příkaz chmod"
@@ -2071,6 +2070,15 @@ msgstr "Nastav &uživatele"
 
 msgid "Set &groups"
 msgstr "Nastav &skupiny"
+
+msgid "Name"
+msgstr "Jméno"
+
+msgid "Owner name"
+msgstr "Jméno vlastníka"
+
+msgid "Group name"
+msgstr "Jméno skupiny"
 
 msgid "Size"
 msgstr "Délka"
@@ -2240,6 +2248,10 @@ msgstr "Nastavení"
 msgid "Setup saved to ~/%s"
 msgstr "Nastavení uloženo do ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Nelze uložit soubor"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Pokud nepracujete s lokálními soubory, nelze spouštět žádné příkazy"
 
@@ -2276,8 +2288,7 @@ msgid ""
 "Commander package."
 msgstr ""
 "Formát souboru %smc.ext byl modifikován verzí 3.0. Zdá se, že instalace "
-"selhala. Prosím, nahrajte si novou aktuální kopii balíčku Midnight "
-"Commander."
+"selhala. Prosím, nahrajte si novou aktuální kopii balíčku Midnight Commander."
 
 #, c-format
 msgid "~/%s file error"
@@ -2286,8 +2297,8 @@ msgstr "~/%s chyba souboru"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "Formát souboru ~/%s byl modifikován verzí 3.0. Můžete ho buď zkopírovat ze "
 "%smc.ext nebo použít tento soubor jako příklad jak jej napsat."
@@ -2375,6 +2386,33 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Zrušit"
 
+msgid "&Retry"
+msgstr "&Zkusit znovu"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Adresář není prázdný.\n"
+"Smazat rekurzivně?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Proces na pozadí: Adresář není prázdný.\n"
+"Smazat rekurzivně?"
+
+msgid "Delete:"
+msgstr "Smazat:"
+
+msgid "Non&e"
+msgstr "Žá&dné"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2430,33 +2468,6 @@ msgid ""
 msgstr ""
 "Nelze smazat adresář „%s“\n"
 "%s"
-
-msgid "&Retry"
-msgstr "&Zkusit znovu"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Adresář není prázdný.\n"
-"Smazat rekurzivně?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Proces na pozadí: Adresář není prázdný.\n"
-"Smazat rekurzivně?"
-
-msgid "Delete:"
-msgstr "Smazat:"
-
-msgid "Non&e"
-msgstr "Žá&dné"
 
 #, c-format
 msgid ""
@@ -3023,12 +3034,6 @@ msgstr "Práva:     %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Poloha:    %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Vertikální"
-
-msgid "&Horizontal"
-msgstr "&Horizontální"
-
 msgid "Show free sp&ace"
 msgstr "Zo&braz volné místo"
 
@@ -3061,6 +3066,12 @@ msgstr "Výstup z konzole"
 
 msgid "Other options"
 msgstr "Další nastavení"
+
+msgid "&Vertical"
+msgstr "&Vertikální"
+
+msgid "&Horizontal"
+msgstr "&Horizontální"
 
 msgid "Output lines:"
 msgstr "Řádky výstupu:"
@@ -3232,9 +3243,6 @@ msgstr "&Virtuální FS..."
 
 msgid "Panels:"
 msgstr "Panely:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Proměnná prostředí TERM není nastavena!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3576,8 +3584,7 @@ msgstr "Nelze zavřít rouru"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
-"Pokud nepracujete s lokálním adresářem, není možné provést externí "
-"panelizaci"
+"Pokud nepracujete s lokálním adresářem, není možné provést externí panelizaci"
 
 msgid "Find rejects after patching"
 msgstr "Najít odmítnuté části záplat (*.rej) po záplatování"
@@ -3765,8 +3772,7 @@ msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Stiskněte všechny klávesy zmiňované výše. Až to budete mít hotovo,"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"zkontrolujte klávesy, které nejsou označeny OK. Tam stiskněte mezerník"
+msgstr "zkontrolujte klávesy, které nejsou označeny OK. Tam stiskněte mezerník"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "nebo klikněte myší. Po položkách se pohybujte pomocí tabulátoru."
@@ -3965,3 +3971,15 @@ msgstr "Hledání dokončeno"
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "Použijte MEZERNÍK ke změně"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "nastavení, ŠIPKY pro pohyb"
+
+#~ msgid "to move between options"
+#~ msgstr "mezi volbami nastavení a T"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "nebo INS pro označení"

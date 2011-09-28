@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
@@ -354,6 +355,9 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Biến môi trườn TERM chưa được xác định!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -648,6 +652,12 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
+msgid "Cannot parse:"
+msgstr "Không thể phân tích:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Sẽ lờ đi các lỗi phân tích tiếp theo."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Cảnh báo: không tìm thấy tập tin %s\n"
@@ -785,12 +795,6 @@ msgstr ""
 msgid "Ext2lib error"
 msgstr ""
 
-msgid "Cannot parse:"
-msgstr "Không thể phân tích:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Sẽ lờ đi các lỗi phân tích tiếp theo."
-
 msgid "Internal error:"
 msgstr "Lỗi nội bộ:"
 
@@ -860,6 +864,9 @@ msgstr "Soạn thảo tập tin"
 
 msgid "Forces xterm features"
 msgstr "Bắt buộc dùng tính năng của xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Bỏ hỗ trợ chuột trong phiên bản văn bản (text)"
@@ -1843,8 +1850,7 @@ msgstr "Thứ tự sắp xếp"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1970,6 +1976,22 @@ msgstr "đặt ID nhóm khi chạy"
 msgid "set user ID on execution"
 msgstr "đặt ID người dùng khi chạy"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Tên"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Quyền hạn (Hệ tám)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Tên chủ sở hữu"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Tên nhóm"
+
 msgid "C&lear marked"
 msgstr "&Xóa đánh dấu"
 
@@ -1978,30 +2000,6 @@ msgstr "Đá&nh dấu"
 
 msgid "&Marked all"
 msgstr "Đánh &dấu tất cả"
-
-msgid "Name"
-msgstr "Tên"
-
-msgid "Permissions (Octal)"
-msgstr "Quyền hạn (Hệ tám)"
-
-msgid "Owner name"
-msgstr "Tên chủ sở hữu"
-
-msgid "Group name"
-msgstr "Tên nhóm"
-
-msgid "Use SPACE to change"
-msgstr "Dùng PHÍM TRẮNG để thay đổi"
-
-msgid "an option, ARROW KEYS"
-msgstr "tùy chọn, PHÍM MŨI TÊN"
-
-msgid "to move between options"
-msgstr "để di chuyển giữa các tùy chọn"
-
-msgid "and T or INS to mark"
-msgstr "và T hoặc INS để đánh dấu"
 
 msgid "Chmod command"
 msgstr " Câu lệnh chmod "
@@ -2017,6 +2015,15 @@ msgstr "Đặt &người dùng"
 
 msgid "Set &groups"
 msgstr "Đặt &nhóm"
+
+msgid "Name"
+msgstr "Tên"
+
+msgid "Owner name"
+msgstr "Tên chủ sở hữu"
+
+msgid "Group name"
+msgstr "Tên nhóm"
 
 msgid "Size"
 msgstr "Kích cỡ"
@@ -2180,6 +2187,10 @@ msgstr ""
 msgid "Setup saved to ~/%s"
 msgstr ""
 
+#, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr ""
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
@@ -2219,8 +2230,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2299,6 +2310,27 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Dừng"
 
+msgid "&Retry"
+msgstr "&Thử lại"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid "Delete:"
+msgstr ""
+
+msgid "Non&e"
+msgstr "&Không"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2340,27 +2372,6 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "&Retry"
-msgstr "&Thử lại"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid "Delete:"
-msgstr ""
-
-msgid "Non&e"
-msgstr "&Không"
 
 #, c-format
 msgid ""
@@ -2875,12 +2886,6 @@ msgstr "Quyền hạn:    %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Vị trí:       %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Thẳng đứng"
-
-msgid "&Horizontal"
-msgstr "&Nằm ngang"
-
 msgid "Show free sp&ace"
 msgstr ""
 
@@ -2913,6 +2918,12 @@ msgstr ""
 
 msgid "Other options"
 msgstr ""
+
+msgid "&Vertical"
+msgstr "&Thẳng đứng"
+
+msgid "&Horizontal"
+msgstr "&Nằm ngang"
 
 msgid "Output lines:"
 msgstr ""
@@ -3084,9 +3095,6 @@ msgstr "&FS ảo..."
 
 msgid "Panels:"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Biến môi trườn TERM chưa được xác định!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3391,8 +3399,7 @@ msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
-"Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc "
-"định."
+"Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
 
 msgid "&Add new"
 msgstr "&Thêm mới"
@@ -3604,7 +3611,8 @@ msgstr ""
 "Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
+msgstr ""
+"xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."
@@ -3792,3 +3800,15 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "Dùng PHÍM TRẮNG để thay đổi"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "tùy chọn, PHÍM MŨI TÊN"
+
+#~ msgid "to move between options"
+#~ msgstr "để di chuyển giữa các tùy chọn"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "và T hoặc INS để đánh dấu"

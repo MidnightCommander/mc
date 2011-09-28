@@ -1,21 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
+# Translators:
 # Jake Li <gnozil@gmail.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-08 07:11+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.net/projects/p/mc/team/zh_CN/)\n"
+"Language-Team: Chinese (China) (http://www.transifex.net/projects/p/mc/team/"
+"zh_CN/)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
@@ -362,6 +364,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "没有设置 TERM 环境变量！\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -659,6 +664,12 @@ msgstr ""
 "~/.netrc 文件权限不正确。\n"
 "删除口令或者改正权限。"
 
+msgid "Cannot parse:"
+msgstr "无法解析："
+
+msgid "More parsing errors will be ignored."
+msgstr "以后的解析错误将被忽略。"
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "警告：没有找到文件 %s\n"
@@ -802,12 +813,6 @@ msgstr "无法打开文件\"%s\""
 msgid "Ext2lib error"
 msgstr "Ext2lib 错误"
 
-msgid "Cannot parse:"
-msgstr "无法解析："
-
-msgid "More parsing errors will be ignored."
-msgstr "以后的解析错误将被忽略。"
-
 msgid "Internal error:"
 msgstr "内部错误："
 
@@ -877,6 +882,9 @@ msgstr "编辑一个文件"
 
 msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "在文本模式下禁用鼠标支持"
@@ -1898,8 +1906,7 @@ msgstr "排序"
 msgid "Confirmation"
 msgstr "确认"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
@@ -2025,6 +2032,22 @@ msgstr "执行时设置群组 ID"
 msgid "set user ID on execution"
 msgstr "执行时设置用户 ID"
 
+#, fuzzy
+msgid "Name:"
+msgstr "名字"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "权限(8进制)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "所有者名"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "群组名"
+
 msgid "C&lear marked"
 msgstr "清除已标记的(&L)"
 
@@ -2033,30 +2056,6 @@ msgstr "设置已标记的(&E)"
 
 msgid "&Marked all"
 msgstr "全部标记(&M)"
-
-msgid "Name"
-msgstr "名字"
-
-msgid "Permissions (Octal)"
-msgstr "权限(8进制)"
-
-msgid "Owner name"
-msgstr "所有者名"
-
-msgid "Group name"
-msgstr "群组名"
-
-msgid "Use SPACE to change"
-msgstr "使用空格键修改"
-
-msgid "an option, ARROW KEYS"
-msgstr "选项，光标键"
-
-msgid "to move between options"
-msgstr "移到不同选项"
-
-msgid "and T or INS to mark"
-msgstr "T 或 INS 做标记"
 
 msgid "Chmod command"
 msgstr "Chmod 命令"
@@ -2072,6 +2071,15 @@ msgstr "设置用户(&U)"
 
 msgid "Set &groups"
 msgstr "设置群组(&G)"
+
+msgid "Name"
+msgstr "名字"
+
+msgid "Owner name"
+msgstr "所有者名"
+
+msgid "Group name"
+msgstr "群组名"
 
 msgid "Size"
 msgstr "大小"
@@ -2239,6 +2247,10 @@ msgstr "设置"
 msgid "Setup saved to ~/%s"
 msgstr "设置已保存到 ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "无法保存到文件"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "您无法在非本地文件系统上执行命令"
 
@@ -2273,7 +2285,9 @@ msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
-msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
+msgstr ""
+"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
+"Commander软件包。"
 
 #, c-format
 msgid "~/%s file error"
@@ -2282,9 +2296,11 @@ msgstr "~/%s文件错误"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
-msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
+"文件的样例。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
@@ -2369,6 +2385,33 @@ msgstr ""
 msgid "&Abort"
 msgstr "中止(&A)"
 
+msgid "&Retry"
+msgstr "重试(&R)"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"目录非空。\n"
+"递归删除它？"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"后台进程：目录非空 \n"
+"递归删除它？"
+
+msgid "Delete:"
+msgstr "删除："
+
+msgid "Non&e"
+msgstr "无(&E)"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2424,33 +2467,6 @@ msgid ""
 msgstr ""
 "无法删除目录\"%s\"\n"
 "%s"
-
-msgid "&Retry"
-msgstr "重试(&R)"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"目录非空。\n"
-"递归删除它？"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"后台进程：目录非空 \n"
-"递归删除它？"
-
-msgid "Delete:"
-msgstr "删除："
-
-msgid "Non&e"
-msgstr "无(&E)"
 
 #, c-format
 msgid ""
@@ -3015,12 +3031,6 @@ msgstr "模式：     %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "位置：     %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "垂直(&V)"
-
-msgid "&Horizontal"
-msgstr "水平(&H)"
-
 msgid "Show free sp&ace"
 msgstr "显示空闲空间(&A)"
 
@@ -3053,6 +3063,12 @@ msgstr "控制台输出"
 
 msgid "Other options"
 msgstr "其它选项"
+
+msgid "&Vertical"
+msgstr "垂直(&V)"
+
+msgid "&Horizontal"
+msgstr "水平(&H)"
 
 msgid "Output lines:"
 msgstr "输出行："
@@ -3224,9 +3240,6 @@ msgstr "虚拟文件系统(&V)..."
 
 msgid "Panels:"
 msgstr "面板："
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "没有设置 TERM 环境变量！\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3948,4 +3961,14 @@ msgstr "搜索完成"
 msgid "Continue from beginning?"
 msgstr "从开始处继续？"
 
+#~ msgid "Use SPACE to change"
+#~ msgstr "使用空格键修改"
 
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "选项，光标键"
+
+#~ msgid "to move between options"
+#~ msgstr "移到不同选项"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "T 或 INS 做标记"

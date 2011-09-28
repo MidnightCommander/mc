@@ -1,21 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Romanian <None>\n"
+"Language-Team: Romanian (http://www.transifex.net/projects/p/mc/team/ro/)\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1))\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1))\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -354,6 +356,9 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Variabila de mediu TERM nu este setată!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -647,6 +652,12 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
+msgid "Cannot parse:"
+msgstr "Nu pot prelucra:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Alte erori de prelucrare vor fi ignorate"
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Atenţie: nu am găsit fişierul %s\n"
@@ -784,12 +795,6 @@ msgstr ""
 msgid "Ext2lib error"
 msgstr ""
 
-msgid "Cannot parse:"
-msgstr "Nu pot prelucra:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Alte erori de prelucrare vor fi ignorate"
-
 msgid "Internal error:"
 msgstr "Eroare internă:"
 
@@ -859,6 +864,9 @@ msgstr "Editează un fişier"
 
 msgid "Forces xterm features"
 msgstr "Forţează facilităţile xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Dezactivează suportul de mouse în versiunea text"
@@ -1842,8 +1850,7 @@ msgstr "Ordinea de sortare"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1969,6 +1976,22 @@ msgstr "setez ID grup la execuţie"
 msgid "set user ID on execution"
 msgstr "setez ID propr. la exec."
 
+#, fuzzy
+msgid "Name:"
+msgstr "Nume"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Drepturi (Octal)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Numele proprietarului"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Numele grupului"
+
 msgid "C&lear marked"
 msgstr "Şter&g marc."
 
@@ -1977,30 +2000,6 @@ msgstr "Set. &marc."
 
 msgid "&Marked all"
 msgstr "&Tot marc."
-
-msgid "Name"
-msgstr "Nume"
-
-msgid "Permissions (Octal)"
-msgstr "Drepturi (Octal)"
-
-msgid "Owner name"
-msgstr "Numele proprietarului"
-
-msgid "Group name"
-msgstr "Numele grupului"
-
-msgid "Use SPACE to change"
-msgstr "Apăsaţi SPAŢIU pentru"
-
-msgid "an option, ARROW KEYS"
-msgstr "schimbarea unei opţiuni,"
-
-msgid "to move between options"
-msgstr "SĂGEŢILE pentru navigare"
-
-msgid "and T or INS to mark"
-msgstr "şi T sau INS pentru marcare"
 
 msgid "Chmod command"
 msgstr "Comanda chmod"
@@ -2016,6 +2015,15 @@ msgstr "Setează &utilizatori"
 
 msgid "Set &groups"
 msgstr "Setează &grupuri"
+
+msgid "Name"
+msgstr "Nume"
+
+msgid "Owner name"
+msgstr "Numele proprietarului"
+
+msgid "Group name"
+msgstr "Numele grupului"
 
 msgid "Size"
 msgstr "Mărime"
@@ -2179,6 +2187,10 @@ msgstr ""
 msgid "Setup saved to ~/%s"
 msgstr ""
 
+#, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr ""
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
@@ -2218,8 +2230,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2298,6 +2310,27 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Întrerup"
 
+msgid "&Retry"
+msgstr "&Reîncerc"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid "Delete:"
+msgstr ""
+
+msgid "Non&e"
+msgstr "&Niciunul"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2339,27 +2372,6 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "&Retry"
-msgstr "&Reîncerc"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid "Delete:"
-msgstr ""
-
-msgid "Non&e"
-msgstr "&Niciunul"
 
 #, c-format
 msgid ""
@@ -2876,12 +2888,6 @@ msgstr "Mod:       %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Locaţie:   %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Verticală"
-
-msgid "&Horizontal"
-msgstr "ori&Zontală"
-
 msgid "Show free sp&ace"
 msgstr ""
 
@@ -2914,6 +2920,12 @@ msgstr ""
 
 msgid "Other options"
 msgstr ""
+
+msgid "&Vertical"
+msgstr "&Verticală"
+
+msgid "&Horizontal"
+msgstr "ori&Zontală"
 
 msgid "Output lines:"
 msgstr ""
@@ -3085,9 +3097,6 @@ msgstr "Sistem &Virtual de Fişiere..."
 
 msgid "Panels:"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Variabila de mediu TERM nu este setată!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3793,3 +3802,15 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "Apăsaţi SPAŢIU pentru"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "schimbarea unei opţiuni,"
+
+#~ msgid "to move between options"
+#~ msgstr "SĂGEŢILE pentru navigare"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "şi T sau INS pentru marcare"

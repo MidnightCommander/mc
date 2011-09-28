@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Turkish <None>\n"
+"Language-Team: Turkish (http://www.transifex.net/projects/p/mc/team/tr/)\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
@@ -354,6 +355,9 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM çevre değişkeni atanmamış!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -487,8 +491,7 @@ msgstr "fish: Kendi satırı için bekliyor..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
-"Üzgünüm, şimdilik parola ile kimlik bildirimi yapılan bağlantılar "
-"yapılamıyor"
+"Üzgünüm, şimdilik parola ile kimlik bildirimi yapılan bağlantılar yapılamıyor"
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -650,6 +653,12 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
+msgid "Cannot parse:"
+msgstr "Ayrıştırılamadı:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Ayrıştırma hataları bundan sonra yoksayılacak."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Uyarı: %s dosyası yok\n"
@@ -787,12 +796,6 @@ msgstr ""
 msgid "Ext2lib error"
 msgstr ""
 
-msgid "Cannot parse:"
-msgstr "Ayrıştırılamadı:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Ayrıştırma hataları bundan sonra yoksayılacak."
-
 msgid "Internal error:"
 msgstr "İç hata:"
 
@@ -862,6 +865,9 @@ msgstr "Dosya düzenler"
 
 msgid "Forces xterm features"
 msgstr "xterm özelliklerini etkinleştirir"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Metin sürümünde fare desteğini kapatır"
@@ -1845,8 +1851,7 @@ msgstr "Sıralama türü"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1972,6 +1977,22 @@ msgstr "gruptakiler çalıştırabilir"
 msgid "set user ID on execution"
 msgstr "kullanıcı çalıştırabilir"
 
+#, fuzzy
+msgid "Name:"
+msgstr "İsim"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "İzinler (Sekizlik)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Sahibi"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Grup ismi"
+
 msgid "C&lear marked"
 msgstr "İşa&retlenenleri Temizle"
 
@@ -1980,30 +2001,6 @@ msgstr "S&eçimi başlat"
 
 msgid "&Marked all"
 msgstr "Tü&münü seç"
-
-msgid "Name"
-msgstr "İsim"
-
-msgid "Permissions (Octal)"
-msgstr "İzinler (Sekizlik)"
-
-msgid "Owner name"
-msgstr "Sahibi"
-
-msgid "Group name"
-msgstr "Grup ismi"
-
-msgid "Use SPACE to change"
-msgstr "Değiştirirken BOŞLUK tuşunu"
-
-msgid "an option, ARROW KEYS"
-msgstr "gezinirken OK TUŞLARINI,"
-
-msgid "to move between options"
-msgstr "işaretlemede T veya INS"
-
-msgid "and T or INS to mark"
-msgstr "tuşlarını kullanabilirsiniz"
 
 msgid "Chmod command"
 msgstr "Chmod komutu"
@@ -2019,6 +2016,15 @@ msgstr "K&ullanıcıları belirle"
 
 msgid "Set &groups"
 msgstr "&Grupları belirle"
+
+msgid "Name"
+msgstr "İsim"
+
+msgid "Owner name"
+msgstr "Sahibi"
+
+msgid "Group name"
+msgstr "Grup ismi"
 
 msgid "Size"
 msgstr "Boyut"
@@ -2182,6 +2188,10 @@ msgstr ""
 msgid "Setup saved to ~/%s"
 msgstr ""
 
+#, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr ""
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
@@ -2221,8 +2231,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2301,6 +2311,27 @@ msgstr ""
 msgid "&Abort"
 msgstr "İ&ptal"
 
+msgid "&Retry"
+msgstr "&Tekrar"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid "Delete:"
+msgstr ""
+
+msgid "Non&e"
+msgstr "&hiçbiri"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2342,27 +2373,6 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "&Retry"
-msgstr "&Tekrar"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid "Delete:"
-msgstr ""
-
-msgid "Non&e"
-msgstr "&hiçbiri"
 
 #, c-format
 msgid ""
@@ -2877,12 +2887,6 @@ msgstr "Kip:           %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Konum:         %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "Di&key"
-
-msgid "&Horizontal"
-msgstr "&Yatay"
-
 msgid "Show free sp&ace"
 msgstr ""
 
@@ -2915,6 +2919,12 @@ msgstr ""
 
 msgid "Other options"
 msgstr ""
+
+msgid "&Vertical"
+msgstr "Di&key"
+
+msgid "&Horizontal"
+msgstr "&Yatay"
 
 msgid "Output lines:"
 msgstr ""
@@ -3086,9 +3096,6 @@ msgstr "&Sanal Dosya Sistemi..."
 
 msgid "Panels:"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM çevre değişkeni atanmamış!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3788,3 +3795,15 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "Değiştirirken BOŞLUK tuşunu"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "gezinirken OK TUŞLARINI,"
+
+#~ msgid "to move between options"
+#~ msgstr "işaretlemede T veya INS"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "tuşlarını kullanabilirsiniz"

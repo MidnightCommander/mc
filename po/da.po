@@ -1,20 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Joe Hansen <joedalton2@yahoo.dk>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Danish <None>\n"
+"Language-Team: Danish (http://www.transifex.net/projects/p/mc/team/da/)\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -361,6 +363,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Skift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM-miljøvariabelen er ikke sat!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -657,6 +662,12 @@ msgstr ""
 "Filen ~/.netrc har ukorrekt tilstand\n"
 "Fjern adgangskode eller tilpas tilstand"
 
+msgid "Cannot parse:"
+msgstr "Kunne ikke fortolke:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Flere fortolkningsfejl vil blive ignoreret."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Advarsel: fil %s ikke fundet\n"
@@ -800,12 +811,6 @@ msgstr "Kan ikke åbne fil »%s«"
 msgid "Ext2lib error"
 msgstr "Ext2lib-fejl"
 
-msgid "Cannot parse:"
-msgstr "Kunne ikke fortolke:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Flere fortolkningsfejl vil blive ignoreret."
-
 msgid "Internal error:"
 msgstr "Intern fejl:"
 
@@ -875,6 +880,9 @@ msgstr "Redigerer en fil"
 
 msgid "Forces xterm features"
 msgstr "Fremtvinger xterm-funktioner"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Fjern museunderstøttelse i tekstversion"
@@ -1897,8 +1905,7 @@ msgstr "Sorteringsrækkefølge"
 msgid "Confirmation"
 msgstr "Bekræftelse"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Historikoprydning"
@@ -2025,6 +2032,22 @@ msgstr "sæt gruppe-id ved kørsel"
 msgid "set user ID on execution"
 msgstr "sæt bruger-id ved kørsel"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Navn"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Rettigheder (oktal)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Ejernavn"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Gruppenavn"
+
 msgid "C&lear marked"
 msgstr "F&jern markerede"
 
@@ -2033,30 +2056,6 @@ msgstr "Sæ&t markerede"
 
 msgid "&Marked all"
 msgstr "&Marker alle"
-
-msgid "Name"
-msgstr "Navn"
-
-msgid "Permissions (Octal)"
-msgstr "Rettigheder (oktal)"
-
-msgid "Owner name"
-msgstr "Ejernavn"
-
-msgid "Group name"
-msgstr "Gruppenavn"
-
-msgid "Use SPACE to change"
-msgstr "Brug MELLEMRUM for at ændre"
-
-msgid "an option, ARROW KEYS"
-msgstr "et alternativ, PILETASTER"
-
-msgid "to move between options"
-msgstr "for at flytte mellem alternativene"
-
-msgid "and T or INS to mark"
-msgstr "og T eller INS for at markere"
 
 msgid "Chmod command"
 msgstr "Chmod-kommando"
@@ -2072,6 +2071,15 @@ msgstr "Sæt br&ugere"
 
 msgid "Set &groups"
 msgstr "Sæt &grupper"
+
+msgid "Name"
+msgstr "Navn"
+
+msgid "Owner name"
+msgstr "Ejernavn"
+
+msgid "Group name"
+msgstr "Gruppenavn"
 
 msgid "Size"
 msgstr "Størrelse"
@@ -2241,6 +2249,10 @@ msgstr "Opsætning"
 msgid "Setup saved to ~/%s"
 msgstr "Opsætning gemt til ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Kunne ikke gemme fil"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Kan ikke køre kommandoer på filsystemer der ikke er lokale"
 
@@ -2286,12 +2298,12 @@ msgstr "~/%s-filfejl"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "Formatet på filen ~/%s er blevet ændret med version 3.0. Du kan enten "
-"kopiere den fra %smc.ext eller bruge den fil som et eksempel på, hvordan den"
-" skrives."
+"kopiere den fra %smc.ext eller bruge den fil som et eksempel på, hvordan den "
+"skrives."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopier"
@@ -2361,7 +2373,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Kan ikke lave stabile symbolske henvisninger over filsystemer, der ikke er lokale:\n"
+"Kan ikke lave stabile symbolske henvisninger over filsystemer, der ikke er "
+"lokale:\n"
 "\n"
 "Indstillingen stabile symbolske henvisninger vil blive deaktiveret"
 
@@ -2375,6 +2388,33 @@ msgstr ""
 
 msgid "&Abort"
 msgstr "&Afbryd"
+
+msgid "&Retry"
+msgstr "&Prøv igen"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Mappe er ikke tom.\n"
+"Slet den rekursivt?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Baggrundsproces: Mappe er ikke tom.\n"
+"Slet den rekursivt?"
+
+msgid "Delete:"
+msgstr "Slet:"
+
+msgid "Non&e"
+msgstr "Ing&en"
 
 #, c-format
 msgid ""
@@ -2431,33 +2471,6 @@ msgid ""
 msgstr ""
 "Kan ikke fjerne mappe »%s«\n"
 "%s"
-
-msgid "&Retry"
-msgstr "&Prøv igen"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Mappe er ikke tom.\n"
-"Slet den rekursivt?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Baggrundsproces: Mappe er ikke tom.\n"
-"Slet den rekursivt?"
-
-msgid "Delete:"
-msgstr "Slet:"
-
-msgid "Non&e"
-msgstr "Ing&en"
 
 #, c-format
 msgid ""
@@ -3023,12 +3036,6 @@ msgstr "Tilstand:  %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Sted:      %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Lodret"
-
-msgid "&Horizontal"
-msgstr "&Vandret"
-
 msgid "Show free sp&ace"
 msgstr "Vis ledig &plads"
 
@@ -3061,6 +3068,12 @@ msgstr "Konsoluddata"
 
 msgid "Other options"
 msgstr "Andre indstillinger"
+
+msgid "&Vertical"
+msgstr "&Lodret"
+
+msgid "&Horizontal"
+msgstr "&Vandret"
 
 msgid "Output lines:"
 msgstr "Uddatalinjer:"
@@ -3232,9 +3245,6 @@ msgstr "&Virtuelt FS..."
 
 msgid "Panels:"
 msgstr "Paneler:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM-miljøvariabelen er ikke sat!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3960,3 +3970,15 @@ msgstr "Søgning færdig"
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "Brug MELLEMRUM for at ændre"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "et alternativ, PILETASTER"
+
+#~ msgid "to move between options"
+#~ msgstr "for at flytte mellem alternativene"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "og T eller INS for at markere"

@@ -1,20 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+#   <mbouzada@gmail.com>, 2011.
+# mbouzada <mbouzada@gmail.com>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Galician <None>\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
+"PO-Revision-Date: 2011-09-20 08:56+0000\n"
+"Last-Translator: mbouzada <mbouzada@gmail.com>\n"
+"Language-Team: Galician (http://www.transifex.net/projects/p/mc/team/gl/)\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: gl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -363,6 +366,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maiús"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variábel de contorno TERM está sen definir!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -659,6 +665,12 @@ msgstr ""
 "Os permisos de ~/.netrc non son os apropiados.\n"
 "Elimine o contrasinal ou cambie os permisos."
 
+msgid "Cannot parse:"
+msgstr "Non é posíbel analizar:"
+
+msgid "More parsing errors will be ignored."
+msgstr "O resto de erros de análise serán ignorados."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Atención: non se atopa o ficheiro %s\n"
@@ -802,12 +814,6 @@ msgstr "Non é posíbel abrir o ficheiro «%s»"
 msgid "Ext2lib error"
 msgstr "Produciuse un erro de ext2lib"
 
-msgid "Cannot parse:"
-msgstr "Non é posíbel analizar:"
-
-msgid "More parsing errors will be ignored."
-msgstr "O resto de erros de análise serán ignorados."
-
 msgid "Internal error:"
 msgstr "Produciuse un erro interno:"
 
@@ -878,6 +884,9 @@ msgstr "Editar un ficheiro"
 msgid "Forces xterm features"
 msgstr "Forzar as funcionalidades de xterm"
 
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
+
 msgid "Disable mouse support in text version"
 msgstr "Desactivar o rato na versión texto"
 
@@ -928,6 +937,25 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors CONTEXTO={FRONTE},{FONDO}\n"
+"\n"
+"{FRONTE} e {FONDO} pódense omitir e utilizarase o valor predeterminado\n"
+"\n"
+"Contextos:\n"
+"   Globais:            errors, disabled, reverse, gauge, header\n"
+"                       input, inputmark, inputunchanged, commandlinemark\n"
+"                       bbarhotkey, bbarbutton, statusbar\n"
+"   Visor de ficheiros: normal, selected, marked, markselect\n"
+"   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
+"                       errdhotfocus\n"
+"   Menús:              menunormal, menuhot, menusel,,menuhotsel, "
+"menuinactive\n"
+"   Menús emerxentes:   pmenunormal, pmenusel, pmenutitle\n"
+"   Editor:             editnormal, editbold, editmarked, editwhitespace, "
+"editlinestate\n"
+"   Visor:              viewbold, viewunderline, viewselected\n"
+"   Ayuda:              helpnormal, helpitalic, helpbold, helplink, helpslin\n"
 
 #. TRANSLATORS: don't translate color names
 msgid ""
@@ -1899,8 +1927,7 @@ msgstr "Ordenar"
 msgid "Confirmation"
 msgstr "Confirmación "
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Limpar &Historial"
@@ -2027,6 +2054,22 @@ msgstr "estabelecer ID do grupo ao executar"
 msgid "set user ID on execution"
 msgstr "estabelecer ID do usuario ao executar"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Nome"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Permisos (octal)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Nome do propietario"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Nome do grupo"
+
 msgid "C&lear marked"
 msgstr "&Limpar marcados"
 
@@ -2035,30 +2078,6 @@ msgstr "&Estabelecer marcados"
 
 msgid "&Marked all"
 msgstr "Todos &Marcados"
-
-msgid "Name"
-msgstr "Nome"
-
-msgid "Permissions (Octal)"
-msgstr "Permisos (octal)"
-
-msgid "Owner name"
-msgstr "Nome do propietario"
-
-msgid "Group name"
-msgstr "Nome do grupo"
-
-msgid "Use SPACE to change"
-msgstr "Use barra espazadora para cambiar"
-
-msgid "an option, ARROW KEYS"
-msgstr "unha opción, TECLAS DE FRECHA"
-
-msgid "to move between options"
-msgstr "para moverse nas opcións"
-
-msgid "and T or INS to mark"
-msgstr "e T ou INS para marcar"
 
 msgid "Chmod command"
 msgstr "Orde chmod"
@@ -2074,6 +2093,15 @@ msgstr "Asignar &Usuarios"
 
 msgid "Set &groups"
 msgstr "Asignar &Grupos"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Owner name"
+msgstr "Nome do propietario"
+
+msgid "Group name"
+msgstr "Nome do grupo"
 
 msgid "Size"
 msgstr "Tamaño"
@@ -2243,6 +2271,10 @@ msgstr "Configuración"
 msgid "Setup saved to ~/%s"
 msgstr "Configuración gardada en ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Non foi posíbel gardar o ficheiro"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Non é posíbel executar ordes desde sistemas de ficheiros non locais"
 
@@ -2289,11 +2321,11 @@ msgstr "Produciuse un erro no ficheiro ~/%s"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"O formato do ficheiro ~/%s cambiou coa versión 3.0. Pode facer unha copia de"
-" %smc.ext ou ben empregalo como modelo."
+"O formato do ficheiro ~/%s cambiou coa versión 3.0. Pode facer unha copia de "
+"%smc.ext ou ben empregalo como modelo."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Copiar"
@@ -2379,6 +2411,33 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Interromper"
 
+msgid "&Retry"
+msgstr "&Reintentar"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"O directorio non esta baleiro.\n"
+"Desexa borralo recursivamente?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Proceso en 2º plano: O directorio non esta baleiro.\n"
+"Desexa borralo recursivamente?"
+
+msgid "Delete:"
+msgstr "Eliminar:"
+
+msgid "Non&e"
+msgstr "Nin&Gún"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2434,33 +2493,6 @@ msgid ""
 msgstr ""
 "Non é posíbel eliminar o directorio «%s»\n"
 "%s"
-
-msgid "&Retry"
-msgstr "&Reintentar"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"O directorio non esta baleiro.\n"
-"Desexa borralo recursivamente?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Proceso en 2º plano: O directorio non esta baleiro.\n"
-"Desexa borralo recursivamente?"
-
-msgid "Delete:"
-msgstr "Eliminar:"
-
-msgid "Non&e"
-msgstr "Nin&Gún"
 
 #, c-format
 msgid ""
@@ -3026,12 +3058,6 @@ msgstr "Modo:       %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Ubicación:    %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Vertical"
-
-msgid "&Horizontal"
-msgstr "&Horizontal"
-
 msgid "Show free sp&ace"
 msgstr "Mostrar esp&Azo libre"
 
@@ -3064,6 +3090,12 @@ msgstr "Saída de consola"
 
 msgid "Other options"
 msgstr "Outras opcións "
+
+msgid "&Vertical"
+msgstr "&Vertical"
+
+msgid "&Horizontal"
+msgstr "&Horizontal"
 
 msgid "Output lines:"
 msgstr "Liñas de saída"
@@ -3236,9 +3268,6 @@ msgstr "Sistema de ficheiros &Virtual (VFS)..."
 msgid "Panels:"
 msgstr "Paneis:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variábel de contorno TERM está sen definir!\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -3381,7 +3410,7 @@ msgid "A&uto save panels setup"
 msgstr "Configuración de &Auto-gardar "
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "intercambio &Simple de paneis"
 
 msgid "Re&verse files only"
 msgstr "In&Verter só ficheiros"
@@ -3962,4 +3991,16 @@ msgid "Search done"
 msgstr "Busca rematada"
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "Continuar desde o principio?"
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "Use barra espazadora para cambiar"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "unha opción, TECLAS DE FRECHA"
+
+#~ msgid "to move between options"
+#~ msgstr "para moverse nas opcións"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "e T ou INS para marcar"

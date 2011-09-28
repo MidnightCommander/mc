@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Korean <None>\n"
+"Language-Team: Korean (http://www.transifex.net/projects/p/mc/team/ko/)\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
@@ -358,6 +359,9 @@ msgstr "알트"
 msgid "Shift"
 msgstr "쉬프트"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -651,6 +655,12 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
+msgid "Cannot parse:"
+msgstr "분석 할 수 없습니다:"
+
+msgid "More parsing errors will be ignored."
+msgstr "더 많은 구문 분석 오류가 무시됩니다."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
@@ -788,12 +798,6 @@ msgstr ""
 msgid "Ext2lib error"
 msgstr ""
 
-msgid "Cannot parse:"
-msgstr "분석 할 수 없습니다:"
-
-msgid "More parsing errors will be ignored."
-msgstr "더 많은 구문 분석 오류가 무시됩니다."
-
 msgid "Internal error:"
 msgstr "내부 오류:"
 
@@ -863,6 +867,9 @@ msgstr "한 파일 편집"
 
 msgid "Forces xterm features"
 msgstr "xterm 기능을 무조건 사용"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "텍스트 버전에서 마우스 사용안함"
@@ -1846,8 +1853,7 @@ msgstr "정렬 순서"
 msgid "Confirmation"
 msgstr "확인"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|기록청소(&H)"
@@ -1973,6 +1979,22 @@ msgstr "실행시 집단 ID 설정"
 msgid "set user ID on execution"
 msgstr "실행시 사용자 ID 설정"
 
+#, fuzzy
+msgid "Name:"
+msgstr "이름"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "허용 (8진수)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "사용자 이름"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "집단 이름"
+
 msgid "C&lear marked"
 msgstr "선택 해제(&L)"
 
@@ -1981,30 +2003,6 @@ msgstr "선택(&E)"
 
 msgid "&Marked all"
 msgstr "모두 선택(&M)"
-
-msgid "Name"
-msgstr "이름"
-
-msgid "Permissions (Octal)"
-msgstr "허용 (8진수)"
-
-msgid "Owner name"
-msgstr "사용자 이름"
-
-msgid "Group name"
-msgstr "집단 이름"
-
-msgid "Use SPACE to change"
-msgstr "바꾸려면 SPACE 사용"
-
-msgid "an option, ARROW KEYS"
-msgstr "선택 항목, 화살표 키"
-
-msgid "to move between options"
-msgstr "선택항목간에 이동하려면"
-
-msgid "and T or INS to mark"
-msgstr "선택하려면 T 혹은 INS"
 
 msgid "Chmod command"
 msgstr "Chmod 명령"
@@ -2020,6 +2018,15 @@ msgstr "사용자 설정(&U)"
 
 msgid "Set &groups"
 msgstr "집단 설정(&G)"
+
+msgid "Name"
+msgstr "이름"
+
+msgid "Owner name"
+msgstr "사용자 이름"
+
+msgid "Group name"
+msgstr "집단 이름"
 
 msgid "Size"
 msgstr ""
@@ -2183,6 +2190,10 @@ msgstr ""
 msgid "Setup saved to ~/%s"
 msgstr ""
 
+#, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr ""
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
@@ -2222,8 +2233,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2302,6 +2313,27 @@ msgstr ""
 msgid "&Abort"
 msgstr "중단(&A)"
 
+msgid "&Retry"
+msgstr "재시도(&R)"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid "Delete:"
+msgstr ""
+
+msgid "Non&e"
+msgstr "없음(&E)"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2343,27 +2375,6 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "&Retry"
-msgstr "재시도(&R)"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid "Delete:"
-msgstr ""
-
-msgid "Non&e"
-msgstr "없음(&E)"
 
 #, c-format
 msgid ""
@@ -2878,12 +2889,6 @@ msgstr "모드: %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "위치: %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "수직(&V)"
-
-msgid "&Horizontal"
-msgstr "수평(&H)"
-
 msgid "Show free sp&ace"
 msgstr ""
 
@@ -2916,6 +2921,12 @@ msgstr ""
 
 msgid "Other options"
 msgstr ""
+
+msgid "&Vertical"
+msgstr "수직(&V)"
+
+msgid "&Horizontal"
+msgstr "수평(&H)"
 
 msgid "Output lines:"
 msgstr ""
@@ -3087,9 +3098,6 @@ msgstr "가상 파일체계(&V)..."
 
 msgid "Panels:"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3794,3 +3802,15 @@ msgstr "검색결과 없음"
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "바꾸려면 SPACE 사용"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "선택 항목, 화살표 키"
+
+#~ msgid "to move between options"
+#~ msgstr "선택항목간에 이동하려면"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "선택하려면 T 혹은 INS"

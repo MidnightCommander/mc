@@ -1,23 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 #   <nerijus@users.sourceforge.net>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-07-27 21:20+0000\n"
 "Last-Translator: nerijus <nerijus@users.sourceforge.net>\n"
 "Language-Team: Lithuanian (http://www.transifex.net/projects/p/mc/team/lt/)\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lt\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -356,6 +357,9 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -650,6 +654,12 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
+msgid "Cannot parse:"
+msgstr "Nepavyko apdoroti:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Kitos apdorojimo klaidos bus ignoruojamos."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Įspėjimas: failas %s nerasta\n"
@@ -787,12 +797,6 @@ msgstr ""
 msgid "Ext2lib error"
 msgstr ""
 
-msgid "Cannot parse:"
-msgstr "Nepavyko apdoroti:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Kitos apdorojimo klaidos bus ignoruojamos."
-
 msgid "Internal error:"
 msgstr "Vidinė klaida:"
 
@@ -862,6 +866,9 @@ msgstr "Keičia vieną failą"
 
 msgid "Forces xterm features"
 msgstr "Priverčia naudoti „xterm“ galimybes"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Išjungia pelę tekstinėje versijoje"
@@ -1845,8 +1852,7 @@ msgstr "Rikiavimo tvarka"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1972,6 +1978,22 @@ msgstr "grupės ID vykdymui"
 msgid "set user ID on execution"
 msgstr "naudotojo ID vykdymui"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Pavadinimas:"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Leidimai (aštuonet.):"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Savininkas:"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Grupė:"
+
 msgid "C&lear marked"
 msgstr "Išva&lyti pažymėtus"
 
@@ -1980,30 +2002,6 @@ msgstr "Nustat&yti pažymėtus"
 
 msgid "&Marked all"
 msgstr "Pažy&mėti visi"
-
-msgid "Name"
-msgstr "Pavadinimas:"
-
-msgid "Permissions (Octal)"
-msgstr "Leidimai (aštuonet.):"
-
-msgid "Owner name"
-msgstr "Savininkas:"
-
-msgid "Group name"
-msgstr "Grupė:"
-
-msgid "Use SPACE to change"
-msgstr "Tarpu keiskite nustatymus."
-
-msgid "an option, ARROW KEYS"
-msgstr "RODYKLėMIS eikite prie kitų"
-
-msgid "to move between options"
-msgstr "nustatymų. Norėdami žymėti,"
-
-msgid "and T or INS to mark"
-msgstr "naudokite T ar INS"
 
 msgid "Chmod command"
 msgstr "„chmod“ komanda"
@@ -2019,6 +2017,15 @@ msgstr "N&ustatyti naudot."
 
 msgid "Set &groups"
 msgstr "Nustatyti &grupes"
+
+msgid "Name"
+msgstr "Pavadinimas:"
+
+msgid "Owner name"
+msgstr "Savininkas:"
+
+msgid "Group name"
+msgstr "Grupė:"
 
 msgid "Size"
 msgstr "Dydis"
@@ -2182,6 +2189,10 @@ msgstr ""
 msgid "Setup saved to ~/%s"
 msgstr ""
 
+#, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr ""
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
@@ -2221,8 +2232,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2301,6 +2312,27 @@ msgstr ""
 msgid "&Abort"
 msgstr "Nutr&aukti"
 
+msgid "&Retry"
+msgstr "&Iš naujo"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid "Delete:"
+msgstr ""
+
+msgid "Non&e"
+msgstr "&Joks"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2348,27 +2380,6 @@ msgid ""
 msgstr ""
 "Nepavyko pašalinti aplanko \"%s\"\n"
 "%s"
-
-msgid "&Retry"
-msgstr "&Iš naujo"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid "Delete:"
-msgstr ""
-
-msgid "Non&e"
-msgstr "&Joks"
 
 #, c-format
 msgid ""
@@ -2889,12 +2900,6 @@ msgstr "Režimas:    %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Vieta:      %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Vertikalus"
-
-msgid "&Horizontal"
-msgstr "&horizontalus"
-
 msgid "Show free sp&ace"
 msgstr ""
 
@@ -2927,6 +2932,12 @@ msgstr ""
 
 msgid "Other options"
 msgstr ""
+
+msgid "&Vertical"
+msgstr "&Vertikalus"
+
+msgid "&Horizontal"
+msgstr "&horizontalus"
 
 msgid "Output lines:"
 msgstr ""
@@ -3098,9 +3109,6 @@ msgstr "&Virtuali failų sistema..."
 
 msgid "Panels:"
 msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3810,4 +3818,14 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
+#~ msgid "Use SPACE to change"
+#~ msgstr "Tarpu keiskite nustatymus."
 
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "RODYKLėMIS eikite prie kitų"
+
+#~ msgid "to move between options"
+#~ msgstr "nustatymų. Norėdami žymėti,"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "naudokite T ar INS"

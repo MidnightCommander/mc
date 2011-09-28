@@ -1,21 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Oleksandr Natalenko <pfactum@gmail.com>, 2011.
+# Slava Zanko <slavazanko@gmail.com>, 2011.
+# Yevhen Amelin <egghead@fedoraproject.org>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Ukrainian <>\n"
+"Language-Team: Ukrainian (http://www.transifex.net/projects/p/mc/team/uk/)\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Попередження: не вдалося завантажити список кодових сторінок"
@@ -361,6 +365,9 @@ msgstr "Альт"
 msgid "Shift"
 msgstr "Шифт"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Змінна середовища TERM не встановлена!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -657,6 +664,12 @@ msgstr ""
 "Файл ~/.netrc має неправильні права.\n"
 "Видаліть пароль або виправте права на файл"
 
+msgid "Cannot parse:"
+msgstr "Не вдалося розібрати:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Решта помилок розбору не буде врахована."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Попередження: файл %s не знайдено\n"
@@ -802,12 +815,6 @@ msgstr "Не вдалося відкрити файл «%s»"
 msgid "Ext2lib error"
 msgstr "Збій Ext2lib"
 
-msgid "Cannot parse:"
-msgstr "Не вдалося розібрати:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Решта помилок розбору не буде врахована."
-
 msgid "Internal error:"
 msgstr "Внутрішня помилка:"
 
@@ -877,6 +884,9 @@ msgstr "Редагує один файл"
 
 msgid "Forces xterm features"
 msgstr "Нав’язує властивості xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Вимкнути підтримку миші у текстовій версії"
@@ -1895,8 +1905,7 @@ msgstr "Порядок сортування"
 msgid "Confirmation"
 msgstr "Підтвердження"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Очистка історії"
@@ -2022,6 +2031,22 @@ msgstr "вст. GID при виконанні"
 msgid "set user ID on execution"
 msgstr "вст. UID при виконанні"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Назва"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Права (вісімкові)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Ім'я власника"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Назва групи"
+
 msgid "C&lear marked"
 msgstr "&Вим. поміч."
 
@@ -2030,30 +2055,6 @@ msgstr "Увім. п&oміч."
 
 msgid "&Marked all"
 msgstr "Вст. пом&iч."
-
-msgid "Name"
-msgstr "Назва"
-
-msgid "Permissions (Octal)"
-msgstr "Права (вісімкові)"
-
-msgid "Owner name"
-msgstr "Ім'я власника"
-
-msgid "Group name"
-msgstr "Назва групи"
-
-msgid "Use SPACE to change"
-msgstr "ПРОБІЛ - для зміни"
-
-msgid "an option, ARROW KEYS"
-msgstr "опції, КЛАВІШІ-СТРІЛКИ"
-
-msgid "to move between options"
-msgstr "переміщення між параметрами"
-
-msgid "and T or INS to mark"
-msgstr "і T або INS для помітки"
 
 msgid "Chmod command"
 msgstr "Команда chmod"
@@ -2069,6 +2070,15 @@ msgstr "Вст. к&oрист."
 
 msgid "Set &groups"
 msgstr "Вст. гр&yпу"
+
+msgid "Name"
+msgstr "Назва"
+
+msgid "Owner name"
+msgstr "Ім'я власника"
+
+msgid "Group name"
+msgstr "Назва групи"
 
 msgid "Size"
 msgstr "Розмір"
@@ -2238,6 +2248,10 @@ msgstr "Налаштування"
 msgid "Setup saved to ~/%s"
 msgstr "Налаштування збережено до ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Неможливо зберегти у файл"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Ви не можете виконувати команди на нелокальних файлових системах"
 
@@ -2283,8 +2297,8 @@ msgstr "Помилка файлу  ~/%s"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "Формат файлу ~/%s було змінено у версіі 3.0. Ви можете скопіювати його з "
 "%smc.ext чи скористуватися ним як зразком та написати свій."
@@ -2357,7 +2371,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Неможливо створити стійкі символьні посилання через нелокальні файлові системи:\n"
+"Неможливо створити стійкі символьні посилання через нелокальні файлові "
+"системи:\n"
 "\n"
 "Параметр «Стійкі символьні посилання» буде відключено"
 
@@ -2371,6 +2386,33 @@ msgstr ""
 
 msgid "&Abort"
 msgstr "&Перервати"
+
+msgid "&Retry"
+msgstr "По&вторити"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Каталог не порожній.\n"
+"Видалити рекурсивно?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Фоновий процес: каталог не порожній.\n"
+"Видалити рекурсивно?"
+
+msgid "Delete:"
+msgstr "Видалити:"
+
+msgid "Non&e"
+msgstr "Ж&oдного"
 
 #, c-format
 msgid ""
@@ -2427,33 +2469,6 @@ msgid ""
 msgstr ""
 "Не вдається видалити каталог «%s»\n"
 "%s"
-
-msgid "&Retry"
-msgstr "По&вторити"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Каталог не порожній.\n"
-"Видалити рекурсивно?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Фоновий процес: каталог не порожній.\n"
-"Видалити рекурсивно?"
-
-msgid "Delete:"
-msgstr "Видалити:"
-
-msgid "Non&e"
-msgstr "Ж&oдного"
 
 #, c-format
 msgid ""
@@ -3018,12 +3033,6 @@ msgstr "Права:      %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Розташування:  %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Вертикальне"
-
-msgid "&Horizontal"
-msgstr "&Горизонтальне"
-
 msgid "Show free sp&ace"
 msgstr "Показувати вільне місце"
 
@@ -3056,6 +3065,12 @@ msgstr "Консольний вивід"
 
 msgid "Other options"
 msgstr "Інші параметри"
+
+msgid "&Vertical"
+msgstr "&Вертикальне"
+
+msgid "&Horizontal"
+msgstr "&Горизонтальне"
 
 msgid "Output lines:"
 msgstr "Рядків виводу:"
@@ -3227,9 +3242,6 @@ msgstr "Віртуальні &ФС…"
 
 msgid "Panels:"
 msgstr "Панелі:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Змінна середовища TERM не встановлена!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3957,3 +3969,15 @@ msgstr "Пошук завершено"
 
 msgid "Continue from beginning?"
 msgstr "Продовжити з початку?"
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "ПРОБІЛ - для зміни"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "опції, КЛАВІШІ-СТРІЛКИ"
+
+#~ msgid "to move between options"
+#~ msgstr "переміщення між параметрами"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "і T або INS для помітки"

@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-04-04 07:37+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: German <None>\n"
+"Language-Team: German (http://www.transifex.net/projects/p/mc/team/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -363,6 +364,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Die TERM-Variable ist nicht gesetzt!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -662,6 +666,12 @@ msgstr ""
 "~/.netrc hat ungültigen Dateimodus.\n"
 "Bitte Passwort entfernen oder den Modus korrigieren"
 
+msgid "Cannot parse:"
+msgstr "Konnte nicht verarbeiten:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Weitere Verarbeitungsfehler werden ignoriert."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Warnung: Datei %s nicht gefunden\n"
@@ -805,12 +815,6 @@ msgstr "Kann Datei \"%s\" nicht öffnen"
 msgid "Ext2lib error"
 msgstr "Ext2lib-Fehler"
 
-msgid "Cannot parse:"
-msgstr "Konnte nicht verarbeiten:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Weitere Verarbeitungsfehler werden ignoriert."
-
 msgid "Internal error:"
 msgstr "Interner Fehler:"
 
@@ -880,6 +884,9 @@ msgstr "Bearbeitet eine Datei"
 
 msgid "Forces xterm features"
 msgstr "Erzwingt xterm-Funktionen"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Mausunterstützung in der Textversion abschalten"
@@ -1898,8 +1905,7 @@ msgstr "Sortierreihenfolge"
 msgid "Confirmation"
 msgstr "Bestätigung"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|C&hronik löschen"
@@ -2025,6 +2031,22 @@ msgstr "Setze Gruppen-ID bei Ausführung"
 msgid "set user ID on execution"
 msgstr "Setze Nutzer-ID bei Ausführung"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Name"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Zugriffsrechte (oktal)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Eigentümer-Name"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Gruppen-Name"
+
 msgid "C&lear marked"
 msgstr "Markierte &aufheben"
 
@@ -2033,30 +2055,6 @@ msgstr "Markierte s&etzen"
 
 msgid "&Marked all"
 msgstr "Alle &markieren"
-
-msgid "Name"
-msgstr "Name"
-
-msgid "Permissions (Octal)"
-msgstr "Zugriffsrechte (oktal)"
-
-msgid "Owner name"
-msgstr "Eigentümer-Name"
-
-msgid "Group name"
-msgstr "Gruppen-Name"
-
-msgid "Use SPACE to change"
-msgstr "Zum Ändern Leertaste drücken"
-
-msgid "an option, ARROW KEYS"
-msgstr "eine Einstellung, Cursortasten"
-
-msgid "to move between options"
-msgstr "um zwischen Einstellungen zu ändern"
-
-msgid "and T or INS to mark"
-msgstr "und T oder INS zum Markieren"
 
 msgid "Chmod command"
 msgstr "Chmod-Befehl"
@@ -2072,6 +2070,15 @@ msgstr "&User setzen"
 
 msgid "Set &groups"
 msgstr "&Gruppe setzen"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Owner name"
+msgstr "Eigentümer-Name"
+
+msgid "Group name"
+msgstr "Gruppen-Name"
 
 msgid "Size"
 msgstr "Größe"
@@ -2241,6 +2248,10 @@ msgstr "Einstellungen"
 msgid "Setup saved to ~/%s"
 msgstr "Einstellungen in ~/%s gespeichert"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Kann die Datei nicht speichern"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Sie können keine Befehle auf nichtlokalen Dateisystemen ausführen"
 
@@ -2277,8 +2288,8 @@ msgid ""
 "Commander package."
 msgstr ""
 "Das Format von der Datei \"%smc.ext\" hat sich in Version 3.0 geändert. Die "
-"Installation scheint fehlgeschlagen. Bitte holen Sie sich eine frische Kopie"
-" aus dem \"Midnight Commander\"-Package."
+"Installation scheint fehlgeschlagen. Bitte holen Sie sich eine frische Kopie "
+"aus dem \"Midnight Commander\"-Package."
 
 #, c-format
 msgid "~/%s file error"
@@ -2287,8 +2298,8 @@ msgstr "Fehler in Datei \"~/%s\""
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "Das Format von der Datei \"~/%s\" hat sich mit Version 3.0 geändert. "
 "Entweder eine Kopie von %smc.ext erstellen oder diese Datei als Vorlage für "
@@ -2362,7 +2373,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen anlegen:\n"
+"Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen "
+"anlegen:\n"
 "\n"
 "Einstellung Stabile Symbolische Links wird deaktiviert"
 
@@ -2376,6 +2388,33 @@ msgstr ""
 
 msgid "&Abort"
 msgstr "&Abbrechen"
+
+msgid "&Retry"
+msgstr "Wiede&rholen"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Verzeichnis nicht leer.\n"
+"Rekursiv löschen?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Hintergrundprozess: Verzeichnis nicht leer.\n"
+"Rekursiv löschen?"
+
+msgid "Delete:"
+msgstr "Löschen:"
+
+msgid "Non&e"
+msgstr "Kein&e"
 
 #, c-format
 msgid ""
@@ -2432,33 +2471,6 @@ msgid ""
 msgstr ""
 "Kann Verzeichnis \"%s\" nicht löschen\n"
 "%s"
-
-msgid "&Retry"
-msgstr "Wiede&rholen"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Verzeichnis nicht leer.\n"
-"Rekursiv löschen?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Hintergrundprozess: Verzeichnis nicht leer.\n"
-"Rekursiv löschen?"
-
-msgid "Delete:"
-msgstr "Löschen:"
-
-msgid "Non&e"
-msgstr "Kein&e"
 
 #, c-format
 msgid ""
@@ -3024,12 +3036,6 @@ msgstr "Modus:        %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Ort:          %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Vertikal"
-
-msgid "&Horizontal"
-msgstr "&Horizontal"
-
 msgid "Show free sp&ace"
 msgstr "&Freien Platz anzeigen"
 
@@ -3062,6 +3068,12 @@ msgstr "Konsolenausgabe"
 
 msgid "Other options"
 msgstr "Weitere Optionen"
+
+msgid "&Vertical"
+msgstr "&Vertikal"
+
+msgid "&Horizontal"
+msgstr "&Horizontal"
 
 msgid "Output lines:"
 msgstr "Ausgabezeilen:"
@@ -3233,9 +3245,6 @@ msgstr "&Virtuelle FS..."
 
 msgid "Panels:"
 msgstr "Panels:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Die TERM-Variable ist nicht gesetzt!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3655,7 +3664,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Die Datei \"%s\" gehört weder root noch Ihnen oder sie kann von jedem beschrieben werden.\n"
+"Die Datei \"%s\" gehört weder root noch Ihnen oder sie kann von jedem "
+"beschrieben werden.\n"
 "Sie zu benutzen, kann Ihre Sicherheit gefährden"
 
 msgid "Format error on file Extensions File"
@@ -3959,3 +3969,15 @@ msgstr "Suche abgeschlossen"
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#~ msgid "Use SPACE to change"
+#~ msgstr "Zum Ändern Leertaste drücken"
+
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "eine Einstellung, Cursortasten"
+
+#~ msgid "to move between options"
+#~ msgstr "um zwischen Einstellungen zu ändern"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "und T oder INS zum Markieren"

@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Keith Bowes <zooplah@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-07-31 03:00+0000\n"
 "Last-Translator: zooplah <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.net/projects/p/mc/team/eo/)\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eo\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -362,6 +362,9 @@ msgstr "Alternativo"
 msgid "Shift"
 msgstr "Uskleca inversigilo"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "La medivarablo TERM ne estas valorizita!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -658,6 +661,12 @@ msgstr ""
 "~/.netrc havas neĝustan reĝimon\n"
 "Forigi pasvorton aŭ alĝustigi reĝimon"
 
+msgid "Cannot parse:"
+msgstr "Ne povas analizi:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Pli da analizaj eraroj estos ignorotaj."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Averto: dosiero %s ne trovita\n"
@@ -801,12 +810,6 @@ msgstr "Ne povas malfermi dosieron \"%s\""
 msgid "Ext2lib error"
 msgstr "Ext2lib: eraro"
 
-msgid "Cannot parse:"
-msgstr "Ne povas analizi:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Pli da analizaj eraroj estos ignorotaj."
-
 msgid "Internal error:"
 msgstr "Interna eraro:"
 
@@ -877,6 +880,9 @@ msgstr "Redaktas unuopan dosieron"
 msgid "Forces xterm features"
 msgstr "Devigas xterm-trajtojn"
 
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
+
 msgid "Disable mouse support in text version"
 msgstr "Malebligi musan regon en teksta variaĵo"
 
@@ -929,7 +935,8 @@ msgid ""
 msgstr ""
 "--colors Ŝlosilvorton={TEKSTO},{FONO}\n"
 "\n"
-"{TEKSTO} kaj {FONO} povas esti preterlasitaj; la aŭtomataj valoroj estos uzataj\n"
+"{TEKSTO} kaj {FONO} povas esti preterlasitaj; la aŭtomataj valoroj estos "
+"uzataj\n"
 " Ŝlosilvortoj:\n"
 "   Universala:       errors, disabled, reverse, gauge, header\n"
 "                     input, inputmark, inputunchanged, commandlinemark\n"
@@ -1915,8 +1922,7 @@ msgstr "Ordigi laŭ"
 msgid "Confirmation"
 msgstr "Konfirmo"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Konfirmo|&Historia purigado"
@@ -2042,6 +2048,22 @@ msgstr "agordi grupan identigilon dum plenumigo"
 msgid "set user ID on execution"
 msgstr "agordi uzantan identigilon dum plenumigo"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Nomo"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Permesoj (Okuma)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Estra nomo"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Grupa nomo"
+
 msgid "C&lear marked"
 msgstr "&Forviŝi markitajn"
 
@@ -2050,30 +2072,6 @@ msgstr "&Agordi markitajn"
 
 msgid "&Marked all"
 msgstr "&Marki ĉion"
-
-msgid "Name"
-msgstr "Nomo"
-
-msgid "Permissions (Octal)"
-msgstr "Permesoj (Okuma)"
-
-msgid "Owner name"
-msgstr "Estra nomo"
-
-msgid "Group name"
-msgstr "Grupa nomo"
-
-msgid "Use SPACE to change"
-msgstr "Uzi spaceton por ŝanĝi"
-
-msgid "an option, ARROW KEYS"
-msgstr "elekton, sagoklavoj"
-
-msgid "to move between options"
-msgstr "por movi inter agordaĵoj"
-
-msgid "and T or INS to mark"
-msgstr "kaj je T aŭ ENMETO por marki"
 
 msgid "Chmod command"
 msgstr "Komando chmod"
@@ -2089,6 +2087,15 @@ msgstr "Elekti &uzantojn"
 
 msgid "Set &groups"
 msgstr "Elekti &grupojn"
+
+msgid "Name"
+msgstr "Nomo"
+
+msgid "Owner name"
+msgstr "Estra nomo"
+
+msgid "Group name"
+msgstr "Grupa nomo"
 
 msgid "Size"
 msgstr "Grando"
@@ -2258,6 +2265,10 @@ msgstr "Agordo"
 msgid "Setup saved to ~/%s"
 msgstr "Agordo konservita al ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Ne povas konservi al dosiero"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Ne povas plenumi komandojn en foraj dosiersistemoj"
 
@@ -2304,8 +2315,8 @@ msgstr "~/%s: dosiera eraro"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "La aranĝo de la dosiero ~/%s ŝanĝiĝis en eldono 3.0. Vi eble povos aŭ kopii "
 "ĝin el %smc.txt aŭ uzi tion dosieron kiel ekzemplon."
@@ -2393,6 +2404,33 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Ĉesigi"
 
+msgid "&Retry"
+msgstr "&Reprovi"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Dosierujo ne vakas.\n"
+"Ĉu forigi ĝin funde?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Fona procezo: Dosierujo ne vakas.\n"
+"Ĉu forigi ĝin funde?"
+
+msgid "Delete:"
+msgstr "Forigi:"
+
+msgid "Non&e"
+msgstr "&Neniu"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2448,33 +2486,6 @@ msgid ""
 msgstr ""
 "Ne povas forigi dosierujon \"%s\"\n"
 "%s"
-
-msgid "&Retry"
-msgstr "&Reprovi"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Dosierujo ne vakas.\n"
-"Ĉu forigi ĝin funde?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Fona procezo: Dosierujo ne vakas.\n"
-"Ĉu forigi ĝin funde?"
-
-msgid "Delete:"
-msgstr "Forigi:"
-
-msgid "Non&e"
-msgstr "&Neniu"
 
 #, c-format
 msgid ""
@@ -3040,12 +3051,6 @@ msgstr "Permesoj:      %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Loko:  %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Vertikala"
-
-msgid "&Horizontal"
-msgstr "&Horizontala"
-
 msgid "Show free sp&ace"
 msgstr "Montri liberan sp&acan"
 
@@ -3078,6 +3083,12 @@ msgstr "Terminala eligo"
 
 msgid "Other options"
 msgstr "Aliaj agordaĵoj"
+
+msgid "&Vertical"
+msgstr "&Vertikala"
+
+msgid "&Horizontal"
+msgstr "&Horizontala"
 
 msgid "Output lines:"
 msgstr "Eligaj linioj:"
@@ -3249,9 +3260,6 @@ msgstr "&Virtualaj dosiersistemoj..."
 
 msgid "Panels:"
 msgstr "Flankoj:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "La medivarablo TERM ne estas valorizita!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3671,7 +3679,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Dosiero %s ne estas posedita de ĉefuzanto aŭ vi aŭ estas universale skribebla.\n"
+"Dosiero %s ne estas posedita de ĉefuzanto aŭ vi aŭ estas universale "
+"skribebla.\n"
 "Uzi ĝin eble kompromitos vian sekurecon"
 
 msgid "Format error on file Extensions File"
@@ -3778,7 +3787,8 @@ msgstr ""
 "Premu ĉiujn la klavojn menciitajn ĉi tie. Post kiam vi faris tion, kontrolu"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "kiujn klavojn ne estas markitajn per \"Bone\". Premu spaceton ĉe la manka"
+msgstr ""
+"kiujn klavojn ne estas markitajn per \"Bone\". Premu spaceton ĉe la manka"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "klavo, aŭ klaku per la muso por difini ĝin. Dismovu per tabo."
@@ -3978,4 +3988,14 @@ msgstr "Serĉo finita"
 msgid "Continue from beginning?"
 msgstr "Ĉu daŭrigi je komenco?"
 
+#~ msgid "Use SPACE to change"
+#~ msgstr "Uzi spaceton por ŝanĝi"
 
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "elekton, sagoklavoj"
+
+#~ msgid "to move between options"
+#~ msgstr "por movi inter agordaĵoj"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "kaj je T aŭ ENMETO por marki"

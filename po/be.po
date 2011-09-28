@@ -1,21 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
+# Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-07-06 14:55+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.net/projects/p/mc/team/be/)\n"
+"Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: be\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Увага: не ўдаецца загрузіць спіс кадовак"
@@ -361,6 +363,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Пераменная асяродку TERM не вызначана!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -657,6 +662,12 @@ msgstr ""
 "Файл ~/.netrc  мае няправільныя правы доступу.\n"
 "Выдаліце пароль ці выпраўце правы"
 
+msgid "Cannot parse:"
+msgstr "Немагчыма прааналізаваць:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Астатнія памылкі аналізу будуць праігнараваныя."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Увага: файл %s адсутнічае\n"
@@ -800,12 +811,6 @@ msgstr "Не ўдаецца адкрыць файл \"%s\""
 msgid "Ext2lib error"
 msgstr "Памылка Ext2lib"
 
-msgid "Cannot parse:"
-msgstr "Немагчыма прааналізаваць:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Астатнія памылкі аналізу будуць праігнараваныя."
-
 msgid "Internal error:"
 msgstr "Унутраная памылка:"
 
@@ -876,6 +881,9 @@ msgstr "Рэдагуе адзін файл"
 msgid "Forces xterm features"
 msgstr "Навязвае ўласцівасці xterm"
 
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
+
 msgid "Disable mouse support in text version"
 msgstr "Адключыць падтрымку мышы ў тэкставай вэрсіі"
 
@@ -928,7 +936,8 @@ msgid ""
 msgstr ""
 "-colors KEYWORD={FORE},{BACK} \n"
 "\n"
-"{FORE} і {BACK} НАЗАД можа быць апушчаны, тады значэннi  па змаўчанні будуць выкарыстоўваны\n"
+"{FORE} і {BACK} НАЗАД можа быць апушчаны, тады значэннi  па змаўчанні будуць "
+"выкарыстоўваны\n"
 "\n"
 "Ключавыя словы:\n"
 "   Глабальная:     errors, disabled, reverse, gauge, header\n"
@@ -976,7 +985,8 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Калі ласка, пасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -V')\n"
+"Калі ласка, пасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -"
+"V')\n"
 "як цiкеты на www.midnight-commander.org\n"
 
 #, c-format
@@ -1914,8 +1924,7 @@ msgstr "Парадак сартавання"
 msgid "Confirmation"
 msgstr " Запыт пацверджання"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Ачыстка &гiсторыi"
@@ -2041,6 +2050,22 @@ msgstr "устал. GID пры выкананні"
 msgid "set user ID on execution"
 msgstr "устал. UID пры выкананні"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Імя"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Доступ (васьмірычны)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Імя ўладальніка"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Імя групы"
+
 msgid "C&lear marked"
 msgstr "&Ачысціць пазначанае"
 
@@ -2049,30 +2074,6 @@ msgstr "&Усталяваць пазначанае"
 
 msgid "&Marked all"
 msgstr "Пазначыць &усе"
-
-msgid "Name"
-msgstr "Імя"
-
-msgid "Permissions (Octal)"
-msgstr "Доступ (васьмірычны)"
-
-msgid "Owner name"
-msgstr "Імя ўладальніка"
-
-msgid "Group name"
-msgstr "Імя групы"
-
-msgid "Use SPACE to change"
-msgstr "ПРАГАЛ - для змен"
-
-msgid "an option, ARROW KEYS"
-msgstr "опцыяў, КЛАВІШЫ-СТРЭЛКІ - "
-
-msgid "to move between options"
-msgstr "перамяшчэнне між опцыямі"
-
-msgid "and T or INS to mark"
-msgstr "і T ці INS для пазначэння"
 
 msgid "Chmod command"
 msgstr " Каманда chmod "
@@ -2088,6 +2089,15 @@ msgstr "Усталяваць &карыстальнікаў"
 
 msgid "Set &groups"
 msgstr "Усталяваць &групы"
+
+msgid "Name"
+msgstr "Імя"
+
+msgid "Owner name"
+msgstr "Імя ўладальніка"
+
+msgid "Group name"
+msgstr "Імя групы"
 
 msgid "Size"
 msgstr "Памер"
@@ -2257,6 +2267,10 @@ msgstr "Настройка"
 msgid "Setup saved to ~/%s"
 msgstr "Параметры захаваны ў ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Немагчыма захаваць у файл"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Немагчыма выконваць каманды на нелакальных файлавых сістэмах"
 
@@ -2302,8 +2316,8 @@ msgstr "памылка файла ~/%s"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "Фармат файла %smc.ext зменены з версіі 3.0. Вы можаце або скапіяваць яго з "
 "%smc.ext або выкарыстаць гэты файл як прыклад і напісаць свой."
@@ -2376,7 +2390,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Немагчыма стварыць устойлівыя сiмв спасылкі праз нелокальные файлавыя сістэмы:\n"
+"Немагчыма стварыць устойлівыя сiмв спасылкі праз нелокальные файлавыя "
+"сістэмы:\n"
 "\n"
 "Опцыя \"Устойлівыя сімвалічныя спасылкі\" будзе адменена"
 
@@ -2390,6 +2405,32 @@ msgstr ""
 
 msgid "&Abort"
 msgstr "&Перарваць"
+
+msgid "&Retry"
+msgstr "Па&ўтарыць"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Каталог не пусты.\n"
+"Выдаліць рэкурсіўна?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Фонавы працэс: каталог не пусты.Выдаліць рэкурсіўна?"
+
+msgid "Delete:"
+msgstr "Выдалiць:"
+
+msgid "Non&e"
+msgstr "ні&Воднага"
 
 #, c-format
 msgid ""
@@ -2446,32 +2487,6 @@ msgid ""
 msgstr ""
 "Немагчыма выдалiць каталог \"%s\"\n"
 "%s"
-
-msgid "&Retry"
-msgstr "Па&ўтарыць"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Каталог не пусты.\n"
-"Выдаліць рэкурсіўна?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Фонавы працэс: каталог не пусты.Выдаліць рэкурсіўна?"
-
-msgid "Delete:"
-msgstr "Выдалiць:"
-
-msgid "Non&e"
-msgstr "ні&Воднага"
 
 #, c-format
 msgid ""
@@ -3039,12 +3054,6 @@ msgstr "Правы:         %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Месца:         %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Вертыкальнае"
-
-msgid "&Horizontal"
-msgstr "&Гарызантальнае"
-
 msgid "Show free sp&ace"
 msgstr "Паказаць вол&ьнае месца"
 
@@ -3077,6 +3086,12 @@ msgstr "Кансольны друк"
 
 msgid "Other options"
 msgstr "Іншыя налады"
+
+msgid "&Vertical"
+msgstr "&Вертыкальнае"
+
+msgid "&Horizontal"
+msgstr "&Гарызантальнае"
 
 msgid "Output lines:"
 msgstr "Падкi друка:"
@@ -3248,9 +3263,6 @@ msgstr "Віртуальныя &ФС..."
 
 msgid "Panels:"
 msgstr "Панелi:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Пераменная асяродку TERM не вызначана!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3594,8 +3606,7 @@ msgid "Pipe close failed"
 msgstr "Збой закрыцця каналу"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr ""
-"Немагчыма выканаць гэтую каманду, знаходзячыся не ў лакальным каталогу"
+msgstr "Немагчыма выканаць гэтую каманду, знаходзячыся не ў лакальным каталогу"
 
 msgid "Find rejects after patching"
 msgstr "Знайсці карэктуры, адкінутыя камандай patch"
@@ -3984,4 +3995,14 @@ msgstr "Пошук скончаны"
 msgid "Continue from beginning?"
 msgstr "Працягнуць з пачатку?"
 
+#~ msgid "Use SPACE to change"
+#~ msgstr "ПРАГАЛ - для змен"
 
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "опцыяў, КЛАВІШЫ-СТРЭЛКІ - "
+
+#~ msgid "to move between options"
+#~ msgstr "перамяшчэнне між опцыямі"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "і T ці INS для пазначэння"

@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Arpad Biro <biro_arpad@yahoo.com>, 2003, 2004, 2005.
 # Gergely Szabo <szg@subogero.com>, 2009, 2011.
@@ -15,15 +15,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-09-12 04:50+0000\n"
 "Last-Translator: dvornik <rezuri@zoho.com>\n"
 "Language-Team: Hungarian (http://www.transifex.net/projects/p/mc/team/hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -370,6 +370,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Nincs beállítva a TERM környezeti változó.\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -666,6 +669,12 @@ msgstr ""
 "~/.netrc jogosultságai helytelenek.\n"
 "Szüntesse meg a jelszót vagy javítsa a jogosultságokat."
 
+msgid "Cannot parse:"
+msgstr "Nem sikerült értelmezni:"
+
+msgid "More parsing errors will be ignored."
+msgstr "További értelmezési hibákon átlépünk."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Figyelem: \"%s\" fájl nem található\n"
@@ -809,12 +818,6 @@ msgstr "A(z) %s fájl nem megnyitható"
 msgid "Ext2lib error"
 msgstr "Ext2lib-hiba"
 
-msgid "Cannot parse:"
-msgstr "Nem sikerült értelmezni:"
-
-msgid "More parsing errors will be ignored."
-msgstr "További értelmezési hibákon átlépünk."
-
 msgid "Internal error:"
 msgstr "Belső programhiba:"
 
@@ -884,6 +887,9 @@ msgstr "Fájl szerkesztése"
 
 msgid "Forces xterm features"
 msgstr "Xterm-funkciók kikényszerítése"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Egérkezelés letiltása a szöveges változatban"
@@ -1924,8 +1930,7 @@ msgstr "Rendezési mód"
 msgid "Confirmation"
 msgstr "Rákérdezés"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|&Történet törlés"
@@ -2051,6 +2056,22 @@ msgstr "\"Set-GID\" bit (más GID)"
 msgid "set user ID on execution"
 msgstr "\"Set-UID\" bit (más UID)"
 
+#, fuzzy
+msgid "Name:"
+msgstr "Fájlnév"
+
+#, fuzzy
+msgid "Permissions (octal):"
+msgstr "Jogok (oktálisan)"
+
+#, fuzzy
+msgid "Owner name:"
+msgstr "Tulajdonos:"
+
+#, fuzzy
+msgid "Group name:"
+msgstr "Csoport:"
+
 msgid "C&lear marked"
 msgstr "Jel. &ki"
 
@@ -2059,30 +2080,6 @@ msgstr "Jel. b&e"
 
 msgid "&Marked all"
 msgstr "&Jelölteket"
-
-msgid "Name"
-msgstr "Fájlnév"
-
-msgid "Permissions (Octal)"
-msgstr "Jogok (oktálisan)"
-
-msgid "Owner name"
-msgstr "Tulajdonos:"
-
-msgid "Group name"
-msgstr "Csoport:"
-
-msgid "Use SPACE to change"
-msgstr "Szóközzel váltható át"
-
-msgid "an option, ARROW KEYS"
-msgstr "egy-egy opció, a nyilakkal"
-
-msgid "to move between options"
-msgstr "lehet mozogni és \"T\" vagy"
-
-msgid "and T or INS to mark"
-msgstr "\"Insert\" a kijelölés."
 
 msgid "Chmod command"
 msgstr "Jogosultságok beállítása (Chmod)"
@@ -2098,6 +2095,15 @@ msgstr "&Tulajdonost"
 
 msgid "Set &groups"
 msgstr "&Csoportot"
+
+msgid "Name"
+msgstr "Fájlnév"
+
+msgid "Owner name"
+msgstr "Tulajdonos:"
+
+msgid "Group name"
+msgstr "Csoport:"
 
 msgid "Size"
 msgstr "Méret"
@@ -2267,6 +2273,10 @@ msgstr "Beállítások"
 msgid "Setup saved to ~/%s"
 msgstr "Beállítások elmentve ide: ~/%s"
 
+#, fuzzy, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr "Fájl mentése sikertelen"
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Távoli fájlrendszeren nem lehet végrehajtani a parancsokat"
 
@@ -2313,8 +2323,8 @@ msgstr "~/%s fájlhiba"
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 "A(z) ~/%s fájl formátuma a 3.0-s verzióval módosult. Lemásolhatja azt a(z) "
 "%smc.ext fájlból, vagy elkészítheti az alapján."
@@ -2402,6 +2412,33 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Megszakítás"
 
+msgid "&Retry"
+msgstr "Új&ra"
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Nem üres a könyvtár.   \n"
+"Törölni kívánja a tartalmával együtt?"
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"\n"
+"Háttérfolyamat: nem üres a könyvtár. \n"
+"Törölni kívánja a tartalmával együtt?"
+
+msgid "Delete:"
+msgstr "Törlés:"
+
+msgid "Non&e"
+msgstr "&Egyiket sem"
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2456,33 +2493,6 @@ msgid ""
 msgstr ""
 "A(z) \"%s\" könyvtár nem törölhető \n"
 "%s"
-
-msgid "&Retry"
-msgstr "Új&ra"
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Nem üres a könyvtár.   \n"
-"Törölni kívánja a tartalmával együtt?"
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-"\n"
-"Háttérfolyamat: nem üres a könyvtár. \n"
-"Törölni kívánja a tartalmával együtt?"
-
-msgid "Delete:"
-msgstr "Törlés:"
-
-msgid "Non&e"
-msgstr "&Egyiket sem"
 
 #, c-format
 msgid ""
@@ -3052,12 +3062,6 @@ msgstr "Típus+jogok:  %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Hely:         %Xh:%Xh"
 
-msgid "&Vertical"
-msgstr "&Függőleges"
-
-msgid "&Horizontal"
-msgstr "&Vízszintes"
-
 msgid "Show free sp&ace"
 msgstr "&Szabad hely kijelzés"
 
@@ -3090,6 +3094,12 @@ msgstr "Konzol kimenet"
 
 msgid "Other options"
 msgstr "További opciók"
+
+msgid "&Vertical"
+msgstr "&Függőleges"
+
+msgid "&Horizontal"
+msgstr "&Vízszintes"
 
 msgid "Output lines:"
 msgstr "Sorok:"
@@ -3261,9 +3271,6 @@ msgstr "&Virtuális fájlrendszer..."
 
 msgid "Panels:"
 msgstr "Panelek:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Nincs beállítva a TERM környezeti változó.\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3988,4 +3995,14 @@ msgstr "Keresés kész"
 msgid "Continue from beginning?"
 msgstr "Folytatás az elejéről?"
 
+#~ msgid "Use SPACE to change"
+#~ msgstr "Szóközzel váltható át"
 
+#~ msgid "an option, ARROW KEYS"
+#~ msgstr "egy-egy opció, a nyilakkal"
+
+#~ msgid "to move between options"
+#~ msgstr "lehet mozogni és \"T\" vagy"
+
+#~ msgid "and T or INS to mark"
+#~ msgstr "\"Insert\" a kijelölés."
