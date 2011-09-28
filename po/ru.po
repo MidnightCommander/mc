@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-07-25 16:33+0400\n"
+"POT-Creation-Date: 2011-09-28 13:54+0400\n"
 "PO-Revision-Date: 2011-07-25 16:45+0400\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <>\n"
@@ -363,6 +363,9 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Переменная среды TERM не определена!\n"
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -659,6 +662,12 @@ msgstr ""
 "Файл ~/.netrc имеет неверный режим доступа/владения.\n"
 "Удалите пароль или исправьте режим доступа/владения"
 
+msgid "Cannot parse:"
+msgstr "Невозможно проанализировать:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Остальные ошибки анализа будут проигнорированы."
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Предупреждение: файл %s не найден\n"
@@ -802,12 +811,6 @@ msgstr "Невозможно открыть файл %s"
 msgid "Ext2lib error"
 msgstr "Сбой Ext2lib"
 
-msgid "Cannot parse:"
-msgstr "Невозможно проанализировать:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Остальные ошибки анализа будут проигнорированы."
-
 msgid "Internal error:"
 msgstr "Внутренняя ошибка:"
 
@@ -877,6 +880,9 @@ msgstr "Редактировать файл"
 
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr "Пытаться использовать старый способ подсветки трэкинка мыши"
 
 msgid "Disable mouse support in text version"
 msgstr "Отключить поддержку мыши в текстовой версии"
@@ -1767,7 +1773,7 @@ msgid "ButtonBar|Delete"
 msgstr "Удалить"
 
 msgid "ButtonBar|PullDn"
-msgstr "МенюMC"
+msgstr "Меню"
 
 msgid "Load syntax file"
 msgstr "Загрузить файл синтаксиса"
@@ -2691,15 +2697,15 @@ msgstr "ETA %s"
 
 #, c-format
 msgid "%.2f MB/s"
-msgstr "%.2f Мб/с"
+msgstr "%.2f МБ/с"
 
 #, c-format
 msgid "%.2f KB/s"
-msgstr "%.2f кб/с"
+msgstr "%.2f кБ/с"
 
 #, c-format
 msgid "%ld B/s"
-msgstr "%ld б/с"
+msgstr "%ld Б/с"
 
 msgid "Target file already exists!"
 msgstr "Целевой файл уже существует!"
@@ -3254,9 +3260,6 @@ msgstr "Виртуальные &ФС..."
 
 msgid "Panels:"
 msgstr "Панели:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Переменная среды TERM не определена!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
