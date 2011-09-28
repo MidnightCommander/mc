@@ -1,3 +1,11 @@
+Version 4.7.5.5
+
+- Fixes
+
+    * ctrl-x shortcut for extended keybindings mode doesn't work out of box (#2609)
+    * Viewer: cursor position is not restored in hex mode (#2543)
+    * FISH: broken panels drawing after entering password (#2611) 
+
 Version 4.7.5.4
 
 - Core
