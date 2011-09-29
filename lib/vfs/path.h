@@ -21,7 +21,7 @@ struct vfs_url_struct;
 
 typedef struct
 {
-    GList *path;
+    GArray *path;
 } vfs_path_t;
 
 typedef struct
