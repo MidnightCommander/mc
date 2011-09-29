@@ -392,12 +392,17 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     struct archive *current_archive;
     struct entry *root_entry;
     char *local_name = NULL, *tmp = NULL;
+    vfs_path_t *vpath;
+    vfs_path_element_t *path_element = NULL;
+
+    vpath = vfs_path_from_str (name);
+    if (vpath != NULL)
+        path_element = vfs_path_get_by_index (vpath, -1);
 
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, fstype);
 
     if (info->need_archive)
     {
-        vfs_path_t *vpath = vfs_path_from_str (name);
         if (mc_stat (name, &mystat) == -1)
             return NULL;
 
@@ -407,9 +412,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
             if (local_name == NULL)
                 return NULL;
         }
-        vfs_path_free (vpath);
-
-        tmp = name_quote (name, 0);
+        tmp = name_quote ((vpath != NULL) ? path_element->path : name, 0);
     }
 
     cmd = g_strconcat (info->path, info->prefix, " list ",
@@ -427,6 +430,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
             mc_ungetlocalcopy (name, local_name, 0);
             g_free (local_name);
         }
+        vfs_path_free (vpath);
         return NULL;
     }
 
@@ -436,7 +440,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 
     current_archive = g_new (struct archive, 1);
     current_archive->fstype = fstype;
-    current_archive->name = name ? g_strdup (name) : NULL;
+    current_archive->name = (name != NULL) ? g_strdup (name) : NULL;
     current_archive->local_name = local_name;
 
     if (local_name != NULL)
@@ -464,6 +468,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 
     *pparc = current_archive;
 
+    vfs_path_free (vpath);
     return result;
 }
 
@@ -781,7 +786,7 @@ extfs_resolve_symlinks (struct entry *entry)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static const char *
+static char *
 extfs_get_archive_name (struct archive *archive)
 {
     const char *archive_name;
@@ -792,9 +797,16 @@ extfs_get_archive_name (struct archive *archive)
         archive_name = archive->name;
 
     if (!archive_name || !*archive_name)
-        return "no_archive_name";
+        return g_strdup ("no_archive_name");
     else
-        return archive_name;
+    {
+        char *ret_str;
+        vfs_path_t *vpath = vfs_path_from_str (archive_name);
+        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+        ret_str = g_strdup (path_element->path);
+        vfs_path_free (vpath);
+        return ret_str;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -807,7 +819,7 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     char *file;
     char *quoted_file;
     char *quoted_localname;
-    char *archive_name;
+    char *archive_name, *quoted_archive_name;
     const extfs_plugin_info_t *info;
     char *cmd;
     int retval;
@@ -816,14 +828,16 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     quoted_file = name_quote (file, 0);
     g_free (file);
 
-    archive_name = name_quote (extfs_get_archive_name (archive), 0);
+    archive_name = extfs_get_archive_name (archive);
+    quoted_archive_name = name_quote (archive_name, 0);
+    g_free (archive_name);
     quoted_localname = name_quote (localname, 0);
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
     cmd = g_strconcat (info->path, info->prefix, str_extfs_cmd,
-                       archive_name, " ", quoted_file, " ", quoted_localname, (char *) NULL);
+                       quoted_archive_name, " ", quoted_file, " ", quoted_localname, (char *) NULL);
     g_free (quoted_file);
     g_free (quoted_localname);
-    g_free (archive_name);
+    g_free (quoted_archive_name);
 
     open_error_pipe ();
     retval = my_system (EXECUTE_AS_SHELL, shell, cmd);
@@ -838,7 +852,7 @@ static void
 extfs_run (const vfs_path_t * vpath)
 {
     struct archive *archive = NULL;
-    char *p, *q, *archive_name;
+    char *p, *q, *archive_name, *quoted_archive_name;
     char *cmd;
     const extfs_plugin_info_t *info;
 
@@ -848,10 +862,13 @@ extfs_run (const vfs_path_t * vpath)
     q = name_quote (p, 0);
     g_free (p);
 
-    archive_name = name_quote (extfs_get_archive_name (archive), 0);
-    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
-    cmd = g_strconcat (info->path, info->prefix, " run ", archive_name, " ", q, (char *) NULL);
+    archive_name = extfs_get_archive_name (archive);
+    quoted_archive_name = name_quote (archive_name, 0);
     g_free (archive_name);
+    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
+    cmd =
+        g_strconcat (info->path, info->prefix, " run ", quoted_archive_name, " ", q, (char *) NULL);
+    g_free (quoted_archive_name);
     g_free (q);
     shell_execute (cmd, 0);
     g_free (cmd);
