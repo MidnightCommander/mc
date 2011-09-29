@@ -394,7 +394,7 @@ vfs_path_from_str_deprecated_parser (char *path)
         if (*op != '\0')
             element->vfs_prefix = g_strdup (op);
 
-        vpath->path = g_list_prepend (vpath->path, element);
+        g_array_prepend_val (vpath->path, element);
     }
     if (path[0] != '\0')
     {
@@ -405,7 +405,7 @@ vfs_path_from_str_deprecated_parser (char *path)
         element->encoding = vfs_get_encoding (path);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
-        vpath->path = g_list_prepend (vpath->path, element);
+        g_array_prepend_val (vpath->path, element);
     }
 
     return vpath;
@@ -474,7 +474,7 @@ vfs_path_from_str_uri_parser (char *path)
         }
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
-        vpath->path = g_list_prepend (vpath->path, element);
+        g_array_prepend_val (vpath->path, element);
 
         if ((real_vfs_prefix_start > path && *(real_vfs_prefix_start) == PATH_SEP) ||
             (real_vfs_prefix_start == path && *(real_vfs_prefix_start) != PATH_SEP))
@@ -491,7 +491,7 @@ vfs_path_from_str_uri_parser (char *path)
         element->encoding = vfs_get_encoding (path);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
-        vpath->path = g_list_prepend (vpath->path, element);
+        g_array_prepend_val (vpath->path, element);
     }
 
     return vpath;
@@ -509,7 +509,7 @@ vfs_path_from_str_uri_parser (char *path)
 
 static void
 vfs_path_tokens_add_class_info (vfs_path_element_t * element, GString * ret_tokens,
-                                    GString * element_tokens)
+                                GString * element_tokens)
 {
     if (((element->class->flags & VFSF_LOCAL) == 0 || ret_tokens->len > 0)
         && element_tokens->len > 0)
@@ -703,7 +703,10 @@ vfs_path_t *
 vfs_path_new (void)
 {
     vfs_path_t *vpath;
+
     vpath = g_new0 (vfs_path_t, 1);
+    vpath->path = g_array_new (FALSE, TRUE, sizeof (vfs_path_element_t *));
+
     return vpath;
 }
 
@@ -719,7 +722,7 @@ vfs_path_new (void)
 int
 vfs_path_elements_count (const vfs_path_t * vpath)
 {
-    return (vpath != NULL && vpath->path != NULL) ? g_list_length (vpath->path) : 0;
+    return (vpath != NULL && vpath->path != NULL) ? vpath->path->len : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -741,7 +744,7 @@ vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
     if (element_index < 0)
         vfs_die ("vfs_path_get_by_index: incorrect index!");
 
-    return g_list_nth_data (vpath->path, element_index);
+    return g_array_index (vpath->path, vfs_path_element_t *, element_index);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -814,17 +817,20 @@ vfs_path_clone (const vfs_path_t * vpath)
 {
     vfs_path_t *new_vpath;
     int vpath_element_index;
+
     if (vpath == NULL)
         return NULL;
 
     new_vpath = vfs_path_new ();
+
     for (vpath_element_index = 0; vpath_element_index < vfs_path_elements_count (vpath);
          vpath_element_index++)
     {
-        new_vpath->path =
-            g_list_append (new_vpath->path,
-                           vfs_path_element_clone (vfs_path_get_by_index
-                                                   (vpath, vpath_element_index)));
+        vfs_path_element_t *path_element;
+
+        path_element =
+            vfs_path_element_clone (vfs_path_get_by_index (vpath, vpath_element_index));
+        g_array_append_val (new_vpath->path, path_element);
     }
 
     return new_vpath;
@@ -839,13 +845,19 @@ vfs_path_clone (const vfs_path_t * vpath)
  */
 
 void
-vfs_path_free (vfs_path_t * path)
+vfs_path_free (vfs_path_t * vpath)
 {
-    if (path == NULL)
+    int vpath_element_index;
+
+    if (vpath == NULL)
         return;
-    g_list_foreach (path->path, (GFunc) vfs_path_element_free, NULL);
-    g_list_free (path->path);
-    g_free (path);
+
+    for (vpath_element_index = 0; vpath_element_index < vfs_path_elements_count (vpath);
+         vpath_element_index++)
+        vfs_path_element_free (vfs_path_get_by_index (vpath, vpath_element_index));
+
+    g_array_free (vpath->path, TRUE);
+    g_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -868,8 +880,8 @@ vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index)
     if (element_index < 0)
         element_index = vfs_path_elements_count (vpath) + element_index;
 
-    element = g_list_nth_data (vpath->path, element_index);
-    vpath->path = g_list_remove (vpath->path, element);
+    element = vfs_path_get_by_index (vpath, element_index);
+    vpath->path = g_array_remove_index (vpath->path, element_index);
     vfs_path_element_free (element);
 }
 
@@ -1026,7 +1038,7 @@ vfs_path_deserialize (const char *data, GError ** error)
         element->host = mc_config_get_string_raw (cpath, groupname, "host", NULL);
         element->port = mc_config_get_int (cpath, groupname, "port", 0);
 
-        vpath->path = g_list_append (vpath->path, element);
+        vpath->path = g_array_append_val (vpath->path, element);
 
         g_free (groupname);
         element_index++;
@@ -1131,10 +1143,13 @@ vfs_path_append_vpath_new (const vfs_path_t * first_vpath, ...)
         int vindex;
 
         for (vindex = 0; vindex < vfs_path_elements_count (current_vpath); vindex++)
-            ret_vpath->path =
-                g_list_append (ret_vpath->path,
-                               vfs_path_element_clone (vfs_path_get_by_index
-                                                       (current_vpath, vindex)));
+        {
+            vfs_path_element_t *path_element;
+
+            path_element =
+                vfs_path_element_clone (vfs_path_get_by_index (current_vpath, vindex));
+            g_array_append_val (ret_vpath->path, path_element);
+        }
         current_vpath = va_arg (args, const vfs_path_t *);
     }
     while (current_vpath != NULL);
