@@ -177,7 +177,7 @@ static GQueue dir_queue = G_QUEUE_INIT;
 #else
 typedef struct dir_stack
 {
-    char *name;
+    vfs_path_t *name;
     struct dir_stack *prev;
 } dir_stack;
 
@@ -772,17 +772,17 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
 #if GLIB_CHECK_VERSION (2, 14, 0)
 static inline void
-push_directory (const char *dir)
+push_directory (const vfs_path_t * dir)
 {
     g_queue_push_head (&dir_queue, (void *) dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline char *
+static inline vfs_path_t *
 pop_directory (void)
 {
-    return (char *) g_queue_pop_tail (&dir_queue);
+    return (vfs_path_t *) g_queue_pop_tail (&dir_queue);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -791,7 +791,7 @@ pop_directory (void)
 static void
 clear_stack (void)
 {
-    g_queue_foreach (&dir_queue, (GFunc) g_free, NULL);
+    g_queue_foreach (&dir_queue, (GFunc) vfs_path_free, NULL);
     g_queue_clear (&dir_queue);
 }
 
@@ -799,22 +799,22 @@ clear_stack (void)
 
 #else /* GLIB_CHECK_VERSION */
 static void
-push_directory (const char *dir)
+push_directory (const vfs_path_t * dir)
 {
     dir_stack *new;
 
     new = g_new (dir_stack, 1);
-    new->name = (char *) dir;
+    new->name = (vfs_path_t *) dir;
     new->prev = dir_stack_base;
     dir_stack_base = new;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static vfs_path_t *
 pop_directory (void)
 {
-    char *name = NULL;
+    vfs_path_t *name = NULL;
 
     if (dir_stack_base != NULL)
     {
@@ -834,9 +834,10 @@ pop_directory (void)
 static void
 clear_stack (void)
 {
-    char *dir = NULL;
+    vfs_path_t *dir = NULL;
+
     while ((dir = pop_directory ()) != NULL)
-        g_free (dir);
+        vfs_path_free (dir);
 }
 #endif /* GLIB_CHECK_VERSION */
 
@@ -1197,15 +1198,14 @@ do_search (Dlg_head * h)
 
             while (dirp == NULL)
             {
-                char *tmp = NULL;
-                vfs_path_t *tmp_vpath;
+                vfs_path_t *tmp_vpath = NULL;
 
                 tty_setcolor (REVERSE_COLOR);
 
                 while (TRUE)
                 {
-                    tmp = pop_directory ();
-                    if (tmp == NULL)
+                    tmp_vpath = pop_directory ();
+                    if (tmp_vpath == NULL)
                     {
                         running = FALSE;
                         if (ignore_count == 0)
@@ -1225,16 +1225,23 @@ do_search (Dlg_head * h)
                     }
 
                     /* handle absolute ignore dirs here */
-                    if (!find_ignore_dir_search (tmp))
-                        break;
+                    {
+                        char *tmp;
+                        gboolean ok;
 
-                    g_free (tmp);
+                        tmp = vfs_path_to_str (tmp_vpath);
+                        ok = find_ignore_dir_search (tmp);
+                        g_free (tmp);
+                        if (!ok)
+                            break;
+                    }
+
+                    vfs_path_free (tmp_vpath);
                     ignore_count++;
                 }
 
                 g_free (directory);
-                directory = tmp;
-                tmp_vpath = vfs_path_from_str (directory);
+                directory = vfs_path_to_str (tmp_vpath);
 
                 if (verbose)
                 {
@@ -1287,8 +1294,7 @@ do_search (Dlg_head * h)
 
                     if (mc_lstat (tmp_vpath, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
                     {
-                        push_directory (vfs_path_to_str (tmp_vpath));
-                        vfs_path_free (tmp_vpath);
+                        push_directory (tmp_vpath);
                         subdirs_left--;
                     }
                     else
@@ -1602,7 +1608,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 
     init_find_vars ();
     parse_ignore_dirs (ignore_dirs);
-    push_directory (start_dir);
+    push_directory (vfs_path_from_str (start_dir));
 
     return_value = run_process ();
 
