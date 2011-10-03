@@ -4129,12 +4129,10 @@ panel_reload (WPanel * panel)
     }
     while (TRUE);
 
-    tmp_path = vfs_path_to_str (panel->cwd_vpath);
     panel->count =
-        do_reload_dir (tmp_path, &panel->dir, panel->sort_info.sort_field->sort_routine,
+        do_reload_dir (panel->cwd_vpath, &panel->dir, panel->sort_info.sort_field->sort_routine,
                        panel->count, panel->sort_info.reverse, panel->sort_info.case_sensitive,
                        panel->sort_info.exec_first, panel->filter);
-    g_free (tmp_path);
 
     panel->dirty = 1;
     if (panel->selected >= panel->count)
