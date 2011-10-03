@@ -35,7 +35,7 @@ int do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean reve
                  gboolean case_sensitive, gboolean exec_ff, const char *fltr);
 void do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse,
               gboolean case_sensitive, gboolean exec_ff);
-int do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
+int do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int count,
                    gboolean reverse, gboolean case_sensitive, gboolean exec_ff, const char *fltr);
 void clean_dir (dir_list * list, int count);
 gboolean set_zero_dir (dir_list * list);
