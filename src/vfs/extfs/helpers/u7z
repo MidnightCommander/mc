@@ -5,7 +5,7 @@
 # Some Bugfixes/workarounds by Sergiy Niskorodov <sgh@mail.zp.ua>
 # Licensed under GNU GPL version 2 or later version.
 
-P7ZIP=`which 7z 2>/dev/null` || P7ZIP=`which 7za 2>/dev/null` || P7ZIP=`which 7zr 2>/dev/null`
+P7ZIP=`which 7z 2>/dev/null` || P7ZIP=`which 7za 2>/dev/null` || P7ZIP=`which 7zr 2>/dev/null` || P7ZIP=""
 
 mcu7zip_list ()
 {
@@ -63,6 +63,11 @@ LC_DATE=C
 export LC_DATE
 
 umask 077
+
+if [ -z "$P7ZIP" ]; then
+    echo "Error: could not find p7zip (looked for 7z, 7za and 7zr)" >&2
+    exit 1
+fi
 
 cmd="$1"
 shift
