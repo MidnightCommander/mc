@@ -1405,3 +1405,27 @@ vfs_path_ncmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculate path length in string representation
+ *
+ * @param vpath path object
+ *
+ * @return length of path
+ */
+
+size_t
+vfs_path_len (const vfs_path_t * vpath)
+{
+    char *path;
+    size_t ret_val;
+
+    if (vpath == NULL)
+        return 0;
+
+    path = vfs_path_to_str (vpath);
+    ret_val = strlen (path);
+    g_free (path);
+    return ret_val;
+}
+
+/* --------------------------------------------------------------------------------------------- */
