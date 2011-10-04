@@ -1846,12 +1846,12 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
         if (fd != NULL)
             fclose (fd);
     }
-    edit_cursor_move (edit, curs - edit->curs1);
-    edit_refresh_cmd (edit);
-    edit->force |= REDRAW_COMPLETELY;
-
     g_free (block_file);
     vfs_path_free (block_file_vpath);
+
+    edit_cursor_move (edit, curs - edit->curs1);
+    edit->force |= REDRAW_PAGE;
+    send_message ((Widget *) edit, WIDGET_DRAW, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4093,9 +4093,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         break;
     case CK_Find:
         edit_get_match_keyword_cmd (edit);
-        break;
-    case CK_Refresh:
-        edit_refresh_cmd (edit);
         break;
     case CK_Date:
         {

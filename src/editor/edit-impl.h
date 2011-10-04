@@ -250,7 +250,7 @@ long edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
 gboolean edit_load_back_cmd (WEdit * edit);
 gboolean edit_load_forward_cmd (WEdit * edit);
 void edit_block_process_cmd (WEdit * edit, int macro_number);
-void edit_refresh_cmd (WEdit * edit);
+void edit_refresh_cmd (void);
 void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark);

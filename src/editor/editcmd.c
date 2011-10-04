@@ -1437,20 +1437,10 @@ edit_delete_macro (WEdit * edit, int hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_refresh_cmd (WEdit * edit)
+edit_refresh_cmd (void)
 {
-#ifdef HAVE_SLANG
-    int color;
-
-    edit_get_syntax_color (edit, -1, &color);
-    tty_touch_screen ();
-    mc_refresh ();
-#else
-    (void) edit;
-
     clr_scr ();
     repaint_screen ();
-#endif /* !HAVE_SLANG */
     tty_keypad (TRUE);
 }
 
@@ -3315,8 +3305,8 @@ edit_select_codepage_cmd (WEdit * edit)
     if (do_select_codepage ())
         edit_set_codeset (edit);
 
-    edit->force = REDRAW_COMPLETELY;
-    edit_refresh_cmd (edit);
+    edit->force = REDRAW_PAGE;
+    send_message ((Widget *) edit, WIDGET_DRAW, 0);
 #else
     (void) edit;
 #endif
