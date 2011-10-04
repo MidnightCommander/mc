@@ -916,7 +916,7 @@ tree_box (const char *current_dir)
     ((Widget *) bar)->y = LINES - 1;
 
     if (run_dlg (dlg) == B_ENTER)
-        val = g_strdup (tree_selected_name (mytree));
+        val = vfs_path_to_str (tree_selected_name (mytree));
 
     destroy_dlg (dlg);
     return val;

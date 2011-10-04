@@ -553,7 +553,7 @@ do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_rever
         goto ret;
     }
 
-    tree_store_start_check (path);
+    tree_store_start_check (vpath);
 
     /* Do not add a ".." entry to the root directory */
     if ((path[0] == PATH_SEP) && (path[1] == '\0'))
@@ -637,8 +637,7 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int cou
         return set_zero_dir (list) ? 1 : 0;
     }
 
-    tmp_path = vfs_path_to_str (vpath);
-    tree_store_start_check (tmp_path);
+    tree_store_start_check (vpath);
 
     marked_files = g_hash_table_new (g_str_hash, g_str_equal);
     alloc_dir_copy (list->size);
@@ -661,13 +660,15 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int cou
 
     /* Add ".." except to the root directory. The ".." entry
        (if any) must be the first in the list. */
-    if (!((tmp_path[0] == PATH_SEP) && (tmp_path[1] == '\0')))
+    tmp_path = vfs_path_get_by_index (vpath, 0)->path;
+    if (!
+        (vfs_path_elements_count (vpath) == 1 && (tmp_path[0] == PATH_SEP)
+         && (tmp_path[1] == '\0')))
     {
         if (!set_zero_dir (list))
         {
             clean_dir (list, count);
             clean_dir (&dir_copy, count);
-            g_free (tmp_path);
             return next_free;
         }
 
@@ -676,7 +677,6 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int cou
 
         next_free++;
     }
-    g_free (tmp_path);
 
     while ((dp = mc_readdir (dirp)))
     {

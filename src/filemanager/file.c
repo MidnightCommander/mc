@@ -1174,7 +1174,7 @@ panel_get_file (WPanel * panel)
         WTree *tree;
 
         tree = (WTree *) get_panel_widget (get_current_index ());
-        return tree_selected_name (tree);
+        return vfs_path_to_str (tree_selected_name (tree));
     }
 
     if (panel->marked != 0)
@@ -1183,10 +1183,9 @@ panel_get_file (WPanel * panel)
 
         for (i = 0; i < panel->count; i++)
             if (panel->dir.list[i].f.marked)
-                return panel->dir.list[i].fname;
+                return g_strdup (panel->dir.list[i].fname);
     }
-
-    return panel->dir.list[panel->selected].fname;
+    return g_strdup (panel->dir.list[panel->selected].fname);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2625,12 +2624,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         vfs_path_t *source_vpath;
 
         if (force_single)
-            source = selection (panel)->fname;
+            source = g_strdup (selection (panel)->fname);
         else
             source = panel_get_file (panel);
 
         if (strcmp (source, "..") == 0)
         {
+            g_free (source);
             message (D_ERROR, MSG_ERROR, _("Cannot operate on \"..\"!"));
             return FALSE;
         }
@@ -2922,20 +2922,22 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             /* Loop for every file, perform the actual copy operation */
             for (i = 0; i < panel->count; i++)
             {
+                const char *source2;
+
                 if (!panel->dir.list[i].f.marked)
                     continue;   /* Skip the unmarked ones */
 
-                source = panel->dir.list[i].fname;
+                source2 = panel->dir.list[i].fname;
                 src_stat = panel->dir.list[i].st;
 
 #ifdef WITH_FULL_PATHS
                 g_free (source_with_path_str);
                 vfs_path_free (source_with_vpath);
-                if (g_path_is_absolute (source))
-                    source_with_vpath = vfs_path_from_str (source);
+                if (g_path_is_absolute (source2))
+                    source_with_vpath = vfs_path_from_str (source2);
                 else
                     source_with_vpath =
-                        vfs_path_append_new (panel->cwd_vpath, source, (char *) NULL);
+                        vfs_path_append_new (panel->cwd_vpath, source2, (char *) NULL);
                 source_with_path_str = vfs_path_to_str (source_with_vpath);
 #endif /* WITH_FULL_PATHS */
 
@@ -3072,6 +3074,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     file_op_total_context_destroy (tctx);
   ret_fast:
     file_op_context_destroy (ctx);
+    g_free (source);
 
     return ret_val;
 }

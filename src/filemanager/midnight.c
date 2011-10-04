@@ -753,12 +753,14 @@ put_prog_name (void)
     if (get_current_type () == view_tree)
     {
         WTree *tree = (WTree *) get_panel_widget (get_current_index ());
-        tmp = tree_selected_name (tree);
+
+        tmp = vfs_path_to_str (tree_selected_name (tree));
     }
     else
-        tmp = selection (current_panel)->fname;
+        tmp = g_strdup (selection (current_panel)->fname);
 
     command_insert (cmdline, tmp, TRUE);
+    g_free (tmp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
