@@ -562,6 +562,9 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
     case CK_About:
         edit_about ();
         break;
+    case CK_Refresh:
+        edit_refresh_cmd ();
+        break;
     case CK_Shell:
         view_other_cmd ();
         break;
