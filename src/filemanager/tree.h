@@ -27,7 +27,7 @@ struct Dlg_head;
 WTree *tree_new (int y, int x, int lines, int cols, gboolean is_panel);
 
 void tree_chdir (WTree * tree, const char *dir);
-char *tree_selected_name (const WTree * tree);
+vfs_path_t *tree_selected_name (const WTree * tree);
 
 void sync_tree (const char *pathname);
 
