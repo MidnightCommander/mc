@@ -12,6 +12,7 @@ TESTS = \
 	canonicalize_pathname \
 	current_dir \
 	path_cmp \
+	path_len \
 	path_manipulations \
 	path_recode \
 	path_serialize \
@@ -32,6 +33,9 @@ current_dir_SOURCES = \
 
 path_cmp_SOURCES = \
 	path_cmp.c
+
+path_len_SOURCES = \
+	path_len.c
 
 path_manipulations_SOURCES = \
 	path_manipulations.c
