@@ -76,6 +76,8 @@ char *vfs_path_serialize (const vfs_path_t * vpath, GError ** error);
 vfs_path_t *vfs_path_deserialize (const char *data, GError ** error);
 
 char *vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolean keep_password);
+int vfs_path_cmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
+int vfs_path_ncmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len);
 
 /*** inline functions ****************************************************************************/
 
