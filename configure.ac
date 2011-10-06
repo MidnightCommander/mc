@@ -577,12 +577,15 @@ misc/syntax/Makefile
 doc/Makefile
 doc/hints/Makefile
 doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/Makefile
-doc/man/es/mc.1 doc/man/es/Makefile
-doc/man/hu/mc.1 doc/man/hu/Makefile
-doc/man/it/mc.1 doc/man/it/Makefile
-doc/man/pl/mc.1 doc/man/pl/Makefile
-doc/man/ru/mc.1 doc/man/ru/Makefile
-doc/man/sr/mc.1 doc/man/sr/Makefile
+doc/man/po/po4a.cfg
+doc/man/po/Makefile
+doc/man/l10n/Makefile
+doc/man/l10n/es/mc.1 doc/man/l10n/es/Makefile
+doc/man/l10n/hu/mc.1 doc/man/l10n/hu/Makefile
+doc/man/l10n/it/mc.1 doc/man/l10n/it/Makefile
+doc/man/l10n/pl/mc.1 doc/man/l10n/pl/Makefile
+doc/man/l10n/ru/mc.1 doc/man/l10n/ru/Makefile
+doc/man/l10n/sr/mc.1 doc/man/l10n/sr/Makefile
 
 doc/hlp/Makefile
 doc/hlp/es/Makefile

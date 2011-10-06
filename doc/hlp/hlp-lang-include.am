@@ -6,5 +6,5 @@ hlp_DATA = mc.hlp.$(HLP_LANG)
 EXTRA_DIST = xnc.hlp
 CLEANFILES = $(hlp_DATA)
 
-mc.hlp.$(HLP_LANG): $(top_builddir)/doc/man/$(HLP_LANG)/mc.1 $(srcdir)/xnc.hlp $(MAN2HLP)
-	- $(MAN2HLP) $(top_builddir)/doc/man/$(HLP_LANG)/mc.1 $(srcdir)/xnc.hlp mc.hlp.$(HLP_LANG)
+mc.hlp.$(HLP_LANG): $(top_builddir)/doc/man/l10n/$(HLP_LANG)/mc.1 $(srcdir)/xnc.hlp $(MAN2HLP)
+	- $(MAN2HLP) $(top_builddir)/doc/man/l10n/$(HLP_LANG)/mc.1 $(srcdir)/xnc.hlp mc.hlp.$(HLP_LANG)

@@ -1,0 +1,4 @@
+[po4a_langs] ru
+[po4a_paths] $master/mc.doc.pot $lang:$master/$lang.po
+
+[type:man] @srcdir@/../$(docfile) $lang:@srcdir@/../l10n/$lang/$(docfile)

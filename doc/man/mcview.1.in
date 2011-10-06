@@ -65,7 +65,7 @@ selected=black,green"
 .IP
 The help file for the program.
 .PP
-.I @prefix@/share/mc/mc.ini
+.I @prefix@/etc/mc/mc.ini
 .IP
 The default system\-wide setup for GNU Midnight Commander, used only if
 the user's own ~/.config/mc/ini file is missing.
@@ -87,7 +87,7 @@ help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
-ftp://ftp.gnu.org/gnu/mc/.
+http://www.midnight-commander.org/.
 .SH SEE ALSO
 mc(1), mcedit(1)
 .PP

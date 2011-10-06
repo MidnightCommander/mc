@@ -8,4 +8,4 @@ CLEANFILES = $(man_MANS)
 DATE_LANG=sr_SR.UTF-8
 DATE_FORMAT=%B %Y.
 
-include ../date-of-man-include.am
+include ../../date-of-man-include.am

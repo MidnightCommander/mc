@@ -1,7 +1,8 @@
-DIST_SUBDIRS = es hu it pl ru sr
 if USE_NLS
-SUBDIRS = $(DOC_LINGUAS)
+SUBDIRS = l10n po
 endif
+
+DIST_SUBDIRS = l10n po
 
 man_MANS = mc.1 mcedit.1 mcview.1
 
