@@ -118,9 +118,10 @@ mc_search__translate_replace_glob_to_regex (gchar * str)
             if (!escaped_mode)
             {
                 escaped_mode = TRUE;
+                g_string_append_c (buff, '\\');
+                continue;
             }
-            g_string_append_c (buff, c);
-            continue;
+            break;
         case '*':
         case '?':
             if (!escaped_mode)
@@ -130,7 +131,8 @@ mc_search__translate_replace_glob_to_regex (gchar * str)
             }
             break;
         case '&':
-            g_string_append_c (buff, '\\');
+            if (!escaped_mode)
+                g_string_append_c (buff, '\\');
             break;
         }
         g_string_append_c (buff, c);
