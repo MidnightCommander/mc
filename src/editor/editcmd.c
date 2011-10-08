@@ -1218,6 +1218,22 @@ edit_delete_macro (WEdit * edit, int hotkey)
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_syntax_onoff (void *data, void *user_data)
+{
+    (void) user_data;
+
+    if (edit_widget_is_editor ((const Widget *) data))
+    {
+        WEdit *edit = (WEdit *) data;
+
+        if (option_syntax_highlighting)
+            edit_load_syntax (edit, NULL, edit->syntax_type);
+        edit->force |= REDRAW_PAGE;
+    }
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -1229,6 +1245,16 @@ edit_refresh_cmd (void)
     clr_scr ();
     repaint_screen ();
     tty_keypad (TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_syntax_onoff_cmd (Dlg_head * h)
+{
+    option_syntax_highlighting = !option_syntax_highlighting;
+    g_list_foreach (h->widgets, edit_syntax_onoff, NULL);
+    dlg_redraw (h);
 }
 
 /* --------------------------------------------------------------------------------------------- */
