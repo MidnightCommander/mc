@@ -1431,6 +1431,29 @@ edit_delete_macro (WEdit * edit, int hotkey)
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for the iteration of objects in the 'editors' array.
+ * Toggle syntax highlighting in editor object.
+ *
+ * @param data      probably WEdit object
+ * @param user_data unused
+ */
+
+static void
+edit_syntax_onoff_cb (void *data, void *user_data)
+{
+    (void) user_data;
+
+    if (edit_widget_is_editor ((const Widget *) data))
+    {
+        WEdit *edit = (WEdit *) data;
+
+        if (option_syntax_highlighting)
+            edit_load_syntax (edit, NULL, edit->syntax_type);
+        edit->force |= REDRAW_PAGE;
+    }
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -1442,6 +1465,21 @@ edit_refresh_cmd (void)
     clr_scr ();
     repaint_screen ();
     tty_keypad (TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Toggle syntax highlighting in all editor windows.
+ *
+ * @param h root widget for all windows
+ */
+
+void
+edit_syntax_onoff_cmd (Dlg_head * h)
+{
+    option_syntax_highlighting = !option_syntax_highlighting;
+    g_list_foreach (h->widgets, edit_syntax_onoff_cb, NULL);
+    dlg_redraw (h);
 }
 
 /* --------------------------------------------------------------------------------------------- */

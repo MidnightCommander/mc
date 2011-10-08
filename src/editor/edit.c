@@ -4056,13 +4056,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_syntax_dialog (edit);
         break;
 
-    case CK_SyntaxOnOff:
-        option_syntax_highlighting ^= 1;
-        if (option_syntax_highlighting == 1)
-            edit_load_syntax (edit, NULL, edit->syntax_type);
-        edit->force |= REDRAW_PAGE;
-        break;
-
     case CK_ShowTabTws:
         enable_show_tabs_tws ^= 1;
         edit->force |= REDRAW_PAGE;
