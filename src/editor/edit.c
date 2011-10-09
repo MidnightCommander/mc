@@ -3879,11 +3879,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->force |= REDRAW_PAGE;
         break;
 
-    case CK_ShowMargin:
-        show_right_margin = !show_right_margin;
-        edit->force |= REDRAW_PAGE;
-        break;
-
     case CK_Bookmark:
         book_mark_clear (edit, edit->curs_line, BOOK_MARK_FOUND_COLOR);
         if (book_mark_query_color (edit, edit->curs_line, BOOK_MARK_COLOR))
@@ -3999,11 +3994,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 
     case CK_SyntaxChoose:
         edit_syntax_dialog (edit);
-        break;
-
-    case CK_ShowTabTws:
-        enable_show_tabs_tws ^= 1;
-        edit->force |= REDRAW_PAGE;
         break;
 
     case CK_Search:
