@@ -584,6 +584,12 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
     case CK_SyntaxOnOff:
         edit_syntax_onoff_cmd (h);
         break;
+    case CK_ShowTabTws:
+        edit_show_tabs_tws_cmd (h);
+        break;
+    case CK_ShowMargin:
+        edit_show_margin_cmd (h);
+        break;
     case CK_Refresh:
         edit_refresh_cmd ();
         break;
