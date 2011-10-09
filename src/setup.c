@@ -604,9 +604,7 @@ static void
 load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t * cfg)
 {
     gchar **profile_keys, **keys;
-    gchar **values, **curr_values;
-    int action;
-    gsize len, values_len;
+    gsize len;
 
     if (section_name == NULL)
         return;
@@ -615,26 +613,29 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
 
     while (*profile_keys != NULL)
     {
+        gchar **values, **curr_values;
+
         curr_values = values =
-            mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
+            mc_config_get_string_list (cfg, section_name, *profile_keys, &len);
 
-        action = keybind_lookup_action (*profile_keys);
-
-        if (action > 0)
+        if (curr_values != NULL)
         {
-            if (curr_values != NULL)
-            {
+            int action;
+
+            action = keybind_lookup_action (*profile_keys);
+            if (action > 0)
                 while (*curr_values != NULL)
                 {
                     keybind_cmd_bind (keymap, *curr_values, action);
                     curr_values++;
                 }
-            }
+
+            g_strfreev (values);
         }
 
         profile_keys++;
-        g_strfreev (values);
     }
+
     g_strfreev (keys);
 }
 
