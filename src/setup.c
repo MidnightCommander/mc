@@ -605,7 +605,6 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
 {
     gchar **profile_keys, **keys;
     gchar **values, **curr_values;
-    char *valcopy, *value;
     int action;
     gsize len, values_len;
 
@@ -627,19 +626,9 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
             {
                 while (*curr_values != NULL)
                 {
-                    valcopy = convert_controls (*curr_values);
-                    keybind_cmd_bind (keymap, valcopy, action);
-                    g_free (valcopy);
+                    keybind_cmd_bind (keymap, *curr_values, action);
                     curr_values++;
                 }
-            }
-            else
-            {
-                value = mc_config_get_string (cfg, section_name, *profile_keys, "");
-                valcopy = convert_controls (value);
-                /* define_sequence (key_code, valcopy, MCKEY_NOACTION); */
-                g_free (valcopy);
-                g_free (value);
             }
         }
 
