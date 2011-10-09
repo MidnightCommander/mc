@@ -164,6 +164,7 @@ const key_code_name_t key_name_conv_tab[] = {
     {(int) '&', "ampersand", N_("Ampersand"), "&"},
     {(int) '$', "dollar", N_("Dollar sign"), "$"},
     {(int) '"', "quota", N_("Quotation mark"), "\""},
+    {(int) '%', "percent", N_("Percent sign"), "%"},
     {(int) '^', "caret", N_("Caret"), "^"},
     {(int) '~', "tilda", N_("Tilda"), "~"},
     {(int) '`', "prime", N_("Prime"), "`"},
