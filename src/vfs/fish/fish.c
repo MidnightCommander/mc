@@ -128,6 +128,7 @@ typedef struct
     int sockw;
     char *scr_ls;
     char *scr_chmod;
+    char *scr_utime;
     char *scr_exists;
     char *scr_mkdir;
     char *scr_unlink;
@@ -290,6 +291,7 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     g_free (SUP->scr_unlink);
     g_free (SUP->scr_chown);
     g_free (SUP->scr_chmod);
+    g_free (SUP->scr_utime);
     g_free (SUP->scr_rmdir);
     g_free (SUP->scr_ln);
     g_free (SUP->scr_mv);
@@ -599,6 +601,9 @@ fish_open_archive (struct vfs_s_super *super,
     SUP->scr_chmod =
         fish_load_script_from_file (super->path_element->host, FISH_CHMOD_FILE,
                                     FISH_CHMOD_DEF_CONTENT);
+    SUP->scr_utime =
+        fish_load_script_from_file (super->path_element->host, FISH_UTIME_FILE,
+                                    FISH_UTIME_DEF_CONTENT);
     SUP->scr_rmdir =
         fish_load_script_from_file (super->path_element->host, FISH_RMDIR_FILE,
                                     FISH_RMDIR_DEF_CONTENT);
@@ -1323,6 +1328,47 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
+fish_utime (const vfs_path_t * vpath, struct utimbuf *times)
+{
+    gchar *shell_commands = NULL;
+    char utcmtime[16], utcatime[16];
+    struct tm *gmt;
+
+    char buf[BUF_LARGE];
+    const char *crpath;
+    char *rpath;
+    struct vfs_s_super *super;
+    vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+    crpath = vfs_s_get_path (vpath, &super, 0);
+    if (crpath == NULL)
+        return -1;
+    rpath = strutils_shell_escape (crpath);
+
+    gmt = gmtime (&times->modtime);
+    g_snprintf (utcmtime, sizeof (utcmtime), "%04d%02d%02d%02d%02d.%02d",
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
+
+    gmt = gmtime (&times->actime);
+    g_snprintf (utcatime, sizeof (utcatime), "%04d%02d%02d%02d%02d.%02d",
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
+
+    shell_commands =
+        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEATIME=%ld FISH_FILEMTIME=%ld ",
+                     "FISH_TOUCHATIME=%s FISH_TOUCHMTIME=%s;\n", SUP->scr_utime, (char *) NULL);
+    g_snprintf (buf, sizeof (buf), shell_commands, rpath, (long) times->actime,
+                (long) times->modtime, utcatime, utcmtime);
+    g_free (shell_commands);
+    g_free (rpath);
+    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
 fish_unlink (const vfs_path_t * vpath)
 {
     gchar *shell_commands = NULL;
@@ -1578,6 +1624,7 @@ init_fish (void)
     vfs_fish_ops.fill_names = fish_fill_names;
     vfs_fish_ops.chmod = fish_chmod;
     vfs_fish_ops.chown = fish_chown;
+    vfs_fish_ops.utime = fish_utime;
     vfs_fish_ops.open = fish_open;
     vfs_fish_ops.symlink = fish_symlink;
     vfs_fish_ops.link = fish_link;

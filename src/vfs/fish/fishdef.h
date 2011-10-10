@@ -74,6 +74,19 @@
 "    echo \"### 500\"\n"                                                    \
 "fi\n"
 
+/* default 'utime' script */
+#define FISH_UTIME_DEF_CONTENT ""                                                                         \
+"#UTIME $FISH_FILEATIME $FISH_FILEMTIME $FISH_FILENAME\n"                                                 \
+"if [ -n \"$FISH_HAVE_PERL\" ] && \\\n"                                                                   \
+"   perl -e 'utime '$FISH_FILEATIME','$FISH_FILEMTIME',@ARGV;' \"/${FISH_FILENAME}\" 2>/dev/null; then\n" \
+"  echo \"### 000\"\n"                                                                                    \
+"elif TZ=UTC touch -m -t $FISH_TOUCHMTIME \"/${FISH_FILENAME}\" 2>/dev/null && \\\n"                      \
+"     TZ=UTC touch -a -t $FISH_TOUCHATIME \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                      \
+"  echo \"### 000\"\n"                                                                                    \
+"else\n"                                                                                                  \
+"  echo \"### 500\"\n"                                                                                    \
+"fi\n"
+
 /* default 'rmdir' script */
 #define FISH_RMDIR_DEF_CONTENT ""                                           \
 "#RMD $FISH_FILENAME\n"                                                     \
