@@ -558,12 +558,6 @@ doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/Makefile
 doc/man/po/po4a.cfg
 doc/man/po/Makefile
 doc/man/l10n/Makefile
-doc/man/l10n/es/mc.1 doc/man/l10n/es/Makefile
-doc/man/l10n/hu/mc.1 doc/man/l10n/hu/Makefile
-doc/man/l10n/it/mc.1 doc/man/l10n/it/Makefile
-doc/man/l10n/pl/mc.1 doc/man/l10n/pl/Makefile
-doc/man/l10n/ru/mc.1 doc/man/l10n/ru/Makefile
-doc/man/l10n/sr/mc.1 doc/man/l10n/sr/Makefile
 
 doc/hlp/Makefile
 doc/hlp/es/Makefile
@@ -576,6 +570,50 @@ doc/hlp/sr/Makefile
 intl/Makefile
 po/Makefile.in
 ])
+
+
+dnl old MAN-files, non-handled by Transifex
+AC_CONFIG_FILES([
+doc/man/l10n/it/mc.1 doc/man/l10n/it/Makefile
+doc/man/l10n/sr/mc.1 doc/man/l10n/sr/Makefile
+])
+
+dnl MAN-files
+AC_CONFIG_FILES([
+doc/man/l10n/be/mc.1  doc/man/l10n/be/mcedit.1 doc/man/l10n/be/mcview.1 doc/man/l10n/be/Makefile
+doc/man/l10n/bg/mc.1  doc/man/l10n/bg/mcedit.1 doc/man/l10n/bg/mcview.1 doc/man/l10n/bg/Makefile
+doc/man/l10n/ca/mc.1  doc/man/l10n/ca/mcedit.1 doc/man/l10n/ca/mcview.1 doc/man/l10n/ca/Makefile
+doc/man/l10n/cs/mc.1  doc/man/l10n/cs/mcedit.1 doc/man/l10n/cs/mcview.1 doc/man/l10n/cs/Makefile
+doc/man/l10n/da/mc.1  doc/man/l10n/da/mcedit.1 doc/man/l10n/da/mcview.1 doc/man/l10n/da/Makefile
+doc/man/l10n/de/mc.1  doc/man/l10n/de/mcedit.1 doc/man/l10n/de/mcview.1 doc/man/l10n/de/Makefile
+doc/man/l10n/de_CH/mc.1  doc/man/l10n/de_CH/mcedit.1 doc/man/l10n/de_CH/mcview.1 doc/man/l10n/de_CH/Makefile
+doc/man/l10n/el/mc.1  doc/man/l10n/el/mcedit.1 doc/man/l10n/el/mcview.1 doc/man/l10n/el/Makefile
+doc/man/l10n/eo/mc.1  doc/man/l10n/eo/mcedit.1 doc/man/l10n/eo/mcview.1 doc/man/l10n/eo/Makefile
+doc/man/l10n/es/mc.1  doc/man/l10n/es/mcedit.1 doc/man/l10n/es/mcview.1 doc/man/l10n/es/Makefile
+doc/man/l10n/eu/mc.1  doc/man/l10n/eu/mcedit.1 doc/man/l10n/eu/mcview.1 doc/man/l10n/eu/Makefile
+doc/man/l10n/fi_FI/mc.1  doc/man/l10n/fi_FI/mcedit.1 doc/man/l10n/fi_FI/mcview.1 doc/man/l10n/fi_FI/Makefile
+doc/man/l10n/fr/mc.1  doc/man/l10n/fr/mcedit.1 doc/man/l10n/fr/mcview.1 doc/man/l10n/fr/Makefile
+doc/man/l10n/gl/mc.1  doc/man/l10n/gl/mcedit.1 doc/man/l10n/gl/mcview.1 doc/man/l10n/gl/Makefile
+doc/man/l10n/hu/mc.1  doc/man/l10n/hu/mcedit.1 doc/man/l10n/hu/mcview.1 doc/man/l10n/hu/Makefile
+doc/man/l10n/ia/mc.1  doc/man/l10n/ia/mcedit.1 doc/man/l10n/ia/mcview.1 doc/man/l10n/ia/Makefile
+doc/man/l10n/id/mc.1  doc/man/l10n/id/mcedit.1 doc/man/l10n/id/mcview.1 doc/man/l10n/id/Makefile
+doc/man/l10n/it_IT/mc.1  doc/man/l10n/it_IT/mcedit.1 doc/man/l10n/it_IT/mcview.1 doc/man/l10n/it_IT/Makefile
+doc/man/l10n/ja/mc.1  doc/man/l10n/ja/mcedit.1 doc/man/l10n/ja/mcview.1 doc/man/l10n/ja/Makefile
+doc/man/l10n/ko/mc.1  doc/man/l10n/ko/mcedit.1 doc/man/l10n/ko/mcview.1 doc/man/l10n/ko/Makefile
+doc/man/l10n/lt/mc.1  doc/man/l10n/lt/mcedit.1 doc/man/l10n/lt/mcview.1 doc/man/l10n/lt/Makefile
+doc/man/l10n/nl/mc.1  doc/man/l10n/nl/mcedit.1 doc/man/l10n/nl/mcview.1 doc/man/l10n/nl/Makefile
+doc/man/l10n/pl/mc.1  doc/man/l10n/pl/mcedit.1 doc/man/l10n/pl/mcview.1 doc/man/l10n/pl/Makefile
+doc/man/l10n/pt_BR/mc.1  doc/man/l10n/pt_BR/mcedit.1 doc/man/l10n/pt_BR/mcview.1 doc/man/l10n/pt_BR/Makefile
+doc/man/l10n/ro/mc.1  doc/man/l10n/ro/mcedit.1 doc/man/l10n/ro/mcview.1 doc/man/l10n/ro/Makefile
+doc/man/l10n/ru/mc.1  doc/man/l10n/ru/mcedit.1 doc/man/l10n/ru/mcview.1 doc/man/l10n/ru/Makefile
+doc/man/l10n/sk/mc.1  doc/man/l10n/sk/mcedit.1 doc/man/l10n/sk/mcview.1 doc/man/l10n/sk/Makefile
+doc/man/l10n/sl/mc.1  doc/man/l10n/sl/mcedit.1 doc/man/l10n/sl/mcview.1 doc/man/l10n/sl/Makefile
+doc/man/l10n/sv_SE/mc.1  doc/man/l10n/sv_SE/mcedit.1 doc/man/l10n/sv_SE/mcview.1 doc/man/l10n/sv_SE/Makefile
+doc/man/l10n/tr/mc.1  doc/man/l10n/tr/mcedit.1 doc/man/l10n/tr/mcview.1 doc/man/l10n/tr/Makefile
+doc/man/l10n/uk/mc.1  doc/man/l10n/uk/mcedit.1 doc/man/l10n/uk/mcview.1 doc/man/l10n/uk/Makefile
+doc/man/l10n/zh_CN/mc.1  doc/man/l10n/zh_CN/mcedit.1 doc/man/l10n/zh_CN/mcview.1 doc/man/l10n/zh_CN/Makefile
+])
+
 
 if test x$enable_tests != xno; then
     AC_CONFIG_FILES([

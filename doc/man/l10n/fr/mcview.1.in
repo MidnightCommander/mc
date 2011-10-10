@@ -1,0 +1,89 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MCVIEW 1 @DATE_OF_MAN_PAGE@ "MC Version @DISTR_VERSION@" "GNU Midnight Commander"
+.SH NAME
+mcview \- Internal file viewer of GNU Midnight Commander.
+.SH USAGE
+\fBmcview\fP [\-bcCdfhstVx?] file
+.SH DESCRIPTION
+.LP
+mcview is a link to \fBmc\fP, the main GNU Midnight Commander executable.
+Executing GNU Midnight Commander under this name requests staring the
+internal viewer and opening the \fIfile\fP specified on the command line.
+.SH OPTIONS
+.TP 
+\fI\-b\fP
+Force black and white display.
+.TP 
+\fI\-c\fP
+Force color mode on terminals where \fBmcview\fP defaults to black and white.
+.TP 
+\fI\-C <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>= ...\fP
+Specify a different color set.  See the \fBColors\fP section in mc(1) for more
+information.
+.TP 
+\fI\-d\fP
+Disable mouse support.
+.TP 
+\fI\-f\fP
+Display the compiled\-in search paths for Midnight Commander files.
+.TP 
+\fI\-t\fP
+Used only if the code was compiled with S\-Lang and terminfo: it makes the
+Midnight Commander use the value of the \fBTERMCAP\fP variable for the terminal
+information instead of the information on the system wide terminal database
+.TP 
+\fI\-V\fP
+Displays the version of the program.
+.TP 
+\fI\-x\fP
+Forces xterm mode.  Used when running on xterm\-capable terminals (two screen
+modes, and able to send mouse escape sequences).
+.PP
+.SH COLORS
+The default colors may be changed by appending to the \fBMC_COLOR_TABLE\fP
+environment variable.  Foreground and background colors pairs may be
+specified for example with:
+.PP
+.nf
+MC_COLOR_TABLE="$MC_COLOR_TABLE:\e
+normal=lightgray,black:\e
+selected=black,green"
+.fi
+.PP
+.SH FILES
+\fI@prefix@/share/mc/mc.hlp\fP
+.IP
+The help file for the program.
+.PP
+\fI@prefix@/etc/mc/mc.ini\fP
+.IP
+The default system\-wide setup for GNU Midnight Commander, used only if the
+user's own ~/.config/mc/ini file is missing.
+.PP
+\fI@prefix@/share/mc/mc.lib\fP
+.IP
+Global settings for the Midnight Commander.  Settings in this file affect
+all users, whether they have ~/.config/mc/ini or not.
+.PP
+\fI~/.config/mc/ini\fP
+.IP
+User's own setup.  If this file is present, the setup is loaded from here
+instead of the system\-wide startup file.
+.PP
+.SH LICENSE
+This program is distributed under the terms of the GNU General Public
+License as published by the Free Software Foundation.  See the built\-in help
+of the Midnight Commander for details on the License and the lack of
+warranty.
+.SH AVAILABILITY
+The latest version of this program can be found at
+http://www.midnight\-commander.org/.
+.SH "SEE ALSO"
+mc(1), mcedit(1)
+.PP
+.SH BUGS
+Bugs should be reported to mc\-devel@gnome.org

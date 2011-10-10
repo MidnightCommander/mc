@@ -1,0 +1,91 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MCVIEW 1 @DATE_OF_MAN_PAGE@ "MC Eldono " "GNU Midnight Commander"
+.SH NOMO
+mcview \- Interna dokumento\-legilo de GNU Midnight Commander
+.SH UZADO
+\fBmcview\fP [\-bcCdfhstVx?]  dosiero
+.SH PRISKRIBO
+.LP
+mcview estas ligilo al \fBmc\fP, la ĉefa programo de GNU Midnight
+Commander. Plenumigi la programon laŭ ĉi tiu nomo petas, ke plenumiĝas la
+interna dokumento\-legilo malfermanta la \fIdosiero\fP specifitan ĉe la
+komandlinio.
+.SH ELEKTOJ
+.TP 
+\fI\-b\fP
+Devigi unukoloran
+.TP 
+\fI\-c\fP
+Devigi buntan reĝimon en terminaloj en kiu \fBmcview\fP aŭtomate estas
+unukolora.
+.TP 
+\fI\-C <ŝlosilvorto>=<mfkoloro>,<fkoloro>,<atributoj>:<ŝlosilvortoj>= ...\fP
+Specifi malsaman koloraron. Vidi la sekcion \fBKoloroj\fP en mc(1) por pliaj
+informoj.
+.TP 
+\fI\-d\fP
+Malebligi la muson.
+.TP 
+\fI\-f\fP
+Montri la serĉajn vojojn por dosieroj en Midnight Commander specifitaj dum
+kompilumado
+.TP 
+\fI\-t\fP
+Nur uzata se la fontoteksto estis kompilumita per S\-Lang kaj terminfo: ĝi
+devigas, ke Midnight Commander uzu la valoron de la medivariablo \fBTERMCAP\fP
+anstataŭ informoj el la tutsistema terminala datumbazo por terminalaj
+informoj
+.TP 
+\fI\-v\fP
+Montri la eldonon de la programo.
+.TP 
+\fI\-x\fP
+Devigas xterm\-reĝimon. Uzata dum plenumiĝo en xterm\-kapablaj terminaloj (du
+ekranaj reĝımoj, kaj kapablas sendi musajn eskapajn sinsekvojn).
+.PP
+.SH KOLOROJ
+La aprioraj koloroj eblas ŝanĝiĝi per almeti al la medivariablo
+\fBMC_COLOR_TABLE\fP. Malfonaj kaj fonaj paroj eblas esti specifitaj ekzemple
+per:
+.PP
+.nf
+MC_COLOR_TABLE="$MC_COLOR_TABLE:\e
+normal=lightgray,black:\e
+.fi
+.PP
+.SH DOSIEROJ
+\fI@prefix@/share/mc/mc.hlp\fP
+.IP
+La helpdosiero por la programo.
+.PP
+\fI@prefix@/etc/mc/mc.ini\fP
+.IP
+The default system\-wide setup for GNU Midnight Commander, used only if the
+user's own ~/.config/mc/ini file is missing.
+.PP
+\fI@prefix@/share/mc/mc.lib\fP
+.IP
+Global settings for the Midnight Commander.  Settings in this file affect
+all users, whether they have ~/.config/mc/ini or not.
+.PP
+\fI~/.config/mc/ini\fP
+.IP
+User's own setup.  If this file is present, the setup is loaded from here
+instead of the system\-wide startup file.
+.PP
+.SH PERMESILO
+This program is distributed under the terms of the GNU General Public
+License as published by the Free Software Foundation.  See the built\-in help
+of the Midnight Commander for details on the License and the lack of
+warranty.
+.SH ATINGEBLO
+La plej freŝa eldono de la programo estas atingebla el
+.SH "VIDU Ankaŭ"
+mc(1), mcedit(1)
+.PP
+.SH CIMOJ
+Raportu cimojn al

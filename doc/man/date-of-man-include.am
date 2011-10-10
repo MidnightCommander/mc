@@ -1,3 +1,6 @@
+man_MANS = mc.1 mcedit.1 mcview.1
+
+CLEANFILES = $(man_MANS)
 
 mc.1: $(top_builddir)/config.status $(srcdir)/mc.1.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@

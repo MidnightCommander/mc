@@ -626,7 +626,7 @@ clean.
 .IP
 The help file for the program.
 .PP
-.I @prefix@/share/mc/mc.ini
+.I @prefix@/etc/mc/mc.ini
 .IP
 The default system\-wide setup for GNU Midnight Commander, used only if
 the user's own ~/.config/mc/ini file is missing.

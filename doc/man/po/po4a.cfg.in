@@ -1,4 +1,4 @@
-[po4a_langs] ru
+[po4a_langs] be bg ca cs da de_CH de el eo es eu fi_FI fr gl hu ia id it_IT ja ko lt nl pl pt_BR ro ru sk sl sv_SE tr uk zh_CN
 [po4a_paths] $master/mc.doc.pot $lang:$master/$lang.po
 
 [type:man] @srcdir@/../$(docfile) $lang:@srcdir@/../l10n/$lang/$(docfile)
