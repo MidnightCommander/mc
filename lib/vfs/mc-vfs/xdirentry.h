@@ -72,6 +72,7 @@ struct vfs_s_super
             int flags;
             char *scr_ls;
             char *scr_chmod;
+            char *scr_utime;
             char *scr_exists;
             char *scr_mkdir;
             char *scr_unlink;
