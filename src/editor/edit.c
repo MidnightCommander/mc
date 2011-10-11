@@ -1613,6 +1613,26 @@ edit_double_newline (WEdit * edit)
     edit_insert (edit, '\n');
 }
 
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+insert_spaces_tab (WEdit * edit, gboolean half)
+{
+    int i;
+
+    edit_update_curs_col (edit);
+    i = option_tab_spacing * space_width;
+    if (half)
+        i /= 2;
+    i = ((edit->curs_col / i) + 1) * i - edit->curs_col;
+    while (i > 0)
+    {
+        edit_insert (edit, ' ');
+        i -= space_width;
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
@@ -1627,27 +1647,21 @@ edit_tab_cmd (WEdit * edit)
             /*insert a half tab (usually four spaces) unless there is a
                half tab already behind, then delete it and insert a
                full tab. */
-            if (!option_fill_tabs_with_spaces && right_of_four_spaces (edit))
+            if (option_fill_tabs_with_spaces || !right_of_four_spaces (edit))
+                insert_spaces_tab (edit, TRUE);
+            else
             {
                 for (i = 1; i <= HALF_TAB_SIZE; i++)
                     edit_backspace (edit, 1);
                 edit_insert (edit, '\t');
             }
-            else
-            {
-                insert_spaces_tab (edit, 1);
-            }
             return;
         }
     }
     if (option_fill_tabs_with_spaces)
-    {
-        insert_spaces_tab (edit, 0);
-    }
+        insert_spaces_tab (edit, FALSE);
     else
-    {
         edit_insert (edit, '\t');
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1749,6 +1763,105 @@ edit_goto_matching_bracket (WEdit * edit)
         edit->force |= REDRAW_PAGE;
         edit_cursor_move (edit, q - edit->curs1);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_move_block_to_right (WEdit * edit)
+{
+    long start_mark, end_mark;
+    long cur_bol, start_bol;
+
+    if (eval_marks (edit, &start_mark, &end_mark))
+        return;
+
+    start_bol = edit_bol (edit, start_mark);
+    cur_bol = edit_bol (edit, end_mark - 1);
+
+    do
+    {
+        edit_cursor_move (edit, cur_bol - edit->curs1);
+        if (option_fill_tabs_with_spaces)
+            insert_spaces_tab (edit, option_fake_half_tabs);
+        else
+            edit_insert (edit, '\t');
+        edit_cursor_move (edit, edit_bol (edit, cur_bol) - edit->curs1);
+
+        if (cur_bol == 0)
+            break;
+
+        cur_bol = edit_bol (edit, cur_bol - 1);
+    }
+    while (cur_bol >= start_bol);
+
+    edit->force |= REDRAW_PAGE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_move_block_to_left (WEdit * edit)
+{
+    long start_mark, end_mark;
+    long cur_bol, start_bol;
+    int i;
+
+    if (eval_marks (edit, &start_mark, &end_mark))
+        return;
+
+    start_bol = edit_bol (edit, start_mark);
+    cur_bol = edit_bol (edit, end_mark - 1);
+
+    do
+    {
+        int del_tab_width;
+        int next_char;
+
+        edit_cursor_move (edit, cur_bol - edit->curs1);
+
+        if (option_fake_half_tabs)
+            del_tab_width = HALF_TAB_SIZE;
+        else
+            del_tab_width = option_tab_spacing;
+
+        next_char = edit_get_byte (edit, edit->curs1);
+        if (next_char == '\t')
+            edit_delete (edit, 1);
+        else if (next_char == ' ')
+            for (i = 1; i <= del_tab_width; i++)
+            {
+                if (next_char == ' ')
+                    edit_delete (edit, 1);
+                next_char = edit_get_byte (edit, edit->curs1);
+            }
+
+        if (cur_bol == 0)
+            break;
+
+        cur_bol = edit_bol (edit, cur_bol - 1);
+    }
+    while (cur_bol >= start_bol);
+
+    edit->force |= REDRAW_PAGE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * prints at the cursor
+ * @returns the number of chars printed
+ */
+
+static size_t
+edit_print_string (WEdit * e, const char *s)
+{
+    size_t i = 0;
+
+    while (s[i] != '\0')
+        edit_execute_cmd (e, CK_InsertChar, (unsigned char) s[i++]);
+    e->force |= REDRAW_COMPLETELY;
+    edit_update_screen (e);
+    return i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3299,22 +3412,6 @@ edit_delete_line (WEdit * edit)
     while (edit_get_byte (edit, edit->curs1 - 1) != '\n')
     {
         (void) edit_backspace (edit, 1);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-insert_spaces_tab (WEdit * edit, int half)
-{
-    int i;
-    edit_update_curs_col (edit);
-    i = ((edit->curs_col / (option_tab_spacing * space_width / (half + 1))) +
-         1) * (option_tab_spacing * space_width / (half + 1)) - edit->curs_col;
-    while (i > 0)
-    {
-        edit_insert (edit, ' ');
-        i -= space_width;
     }
 }
 
