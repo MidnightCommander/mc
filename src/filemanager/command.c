@@ -80,16 +80,16 @@ WInput *cmdline;
  * they want the behavior they are used to in the shell.
  */
 
-static gboolean
+static char *
 examine_cd (const char *_path)
 {
     typedef enum { copy_sym, subst_var } state_t;
 
     state_t state = copy_sym;
-    gboolean result;
+    char *q;
     size_t qlen;
     char *path_tilde, *path;
-    char *p, *q, *r, *s, c;
+    char *p, *r;
 
     /* Tilde expansion */
     path = strutils_shell_unescape (_path);
@@ -103,6 +103,7 @@ examine_cd (const char *_path)
     /* Variable expansion */
     for (p = path_tilde, r = q; *p != '\0' && r < q + MC_MAXPATHLEN;)
     {
+
         switch (state)
         {
         case copy_sym:
@@ -121,6 +122,8 @@ examine_cd (const char *_path)
 
         case subst_var:
             {
+                char *s;
+                char c;
                 const char *t;
 
                 /* skip dollar */
@@ -173,21 +176,31 @@ examine_cd (const char *_path)
 
     *r = '\0';
 
-    result = do_cd (q, cd_parse_command);
+    return q;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* CDPATH handling */
+static gboolean
+handle_cdpath (const char *path)
+{
+    gboolean result = FALSE;
 
     /* CDPATH handling */
-    if (!result && *q != PATH_SEP)
+    if (*path != PATH_SEP)
     {
-        char *cdpath;
+        char *cdpath, *p;
+        char c;
 
         cdpath = g_strdup (getenv ("CDPATH"));
         p = cdpath;
-        if (p == NULL)
-            c = '\0';
-        else
-            c = ':';
+        c = (p == NULL) ? '\0' : ':';
+
         while (!result && c == ':')
         {
+            char *s;
+
             s = strchr (p, ':');
             if (s == NULL)
                 s = strchr (p, '\0');
@@ -195,7 +208,9 @@ examine_cd (const char *_path)
             *s = '\0';
             if (*p != '\0')
             {
-                r = mc_build_filename (p, q, (char *) NULL);
+                char *r;
+
+                r = mc_build_filename (p, path, (char *) NULL);
                 result = do_cd (r, cd_parse_command);
                 g_free (r);
             }
@@ -204,8 +219,6 @@ examine_cd (const char *_path)
         }
         g_free (cdpath);
     }
-
-    g_free (q);
 
     return result;
 }
@@ -393,12 +406,26 @@ do_cd_command (char *orig_cmd)
             g_free (new);
         }
     }
-    else if (!examine_cd (&cmd[operand_pos]))
+    else
     {
-        char *d = strip_password (g_strdup (&cmd[operand_pos]), 1);
-        message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d, unix_error_string (errno));
-        g_free (d);
-        return;
+        char *path;
+        gboolean ok;
+
+        path = examine_cd (&cmd[operand_pos]);
+        ok = do_cd (path, cd_parse_command);
+        if (!ok)
+            ok = handle_cdpath (path);
+
+        if (!ok)
+        {
+            char *d;
+
+            d = strip_password (path, 1);
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d,
+                     unix_error_string (errno));
+        }
+
+        g_free (path);
     }
 }
 
