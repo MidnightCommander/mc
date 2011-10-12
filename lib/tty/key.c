@@ -125,6 +125,7 @@ const key_code_name_t key_name_conv_tab[] = {
     {KEY_IC, "insert", N_("Insert key"), "Ins"},
     {KEY_DC, "delete", N_("Delete key"), "Del"},
     {ALT ('\t'), "complete", N_("Completion/M-tab"), "Meta-Tab"},
+    {KEY_BTAB, "backtab", N_("Back Tabulation S-tab"), "Shift-Tab"},
     {KEY_KP_ADD, "kpplus", N_("+ on keypad"), "+"},
     {KEY_KP_SUBTRACT, "kpminus", N_("- on keypad"), "-"},
     {(int) '/', "kpslash", N_("Slash on keypad"), "/"},
@@ -1088,11 +1089,18 @@ correct_key_code (int code)
     if (c == KEY_SCANCEL)
         c = '\t';
 
-    /* Convert Shift+Tab and Ctrl+Tab to Back Tab */
-    if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL)))
+    /* Convert Shift+Tab and Ctrl+Tab to Back Tab
+     * only if modifiers directly from X11
+     */
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
+    if (x11_window != 0)
+#endif /* HAVE_TEXTMODE_X11_SUPPORT */
     {
-        c = KEY_BTAB;
-        mod = 0;
+        if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL)))
+        {
+            c = KEY_BTAB;
+            mod = 0;
+        }
     }
 
     /* F0 is the same as F10 for out purposes */
