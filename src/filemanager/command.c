@@ -83,6 +83,9 @@ WInput *cmdline;
 static gboolean
 examine_cd (const char *_path)
 {
+    typedef enum { copy_sym, subst_var } state_t;
+
+    state_t state = copy_sym;
     gboolean result;
     size_t qlen;
     char *path_tilde, *path;
@@ -100,44 +103,68 @@ examine_cd (const char *_path)
     /* Variable expansion */
     for (p = path_tilde, r = q; *p != '\0' && r < q + MC_MAXPATHLEN;)
     {
-        if (*p != '$' || (p[1] == '[' || p[1] == '('))
-            *(r++) = *(p++);
-        else
+        switch (state)
         {
-            const char *t;
-
-            p++;
-            if (*p == '{')
+        case copy_sym:
+            if (p[0] == '\\' && p[1] == '$')
             {
+                /* skip backslash */
                 p++;
-                s = strchr (p, '}');
+                /* copy dollar */
+                *(r++) = *(p++);
             }
+            else if (p[0] != '$' || p[1] == '[' || p[1] == '(')
+                *(r++) = *(p++);
             else
-                s = NULL;
-            if (s == NULL)
-                s = strchr (p, PATH_SEP);
-            if (s == NULL)
-                s = strchr (p, '\0');
-            c = *s;
-            *s = '\0';
-            t = getenv (p);
-            *s = c;
-            if (t == NULL)
+                state = subst_var;
+            break;
+
+        case subst_var:
             {
-                *(r++) = '$';
-                if (*(p - 1) != '$')
-                    *(r++) = '{';
-            }
-            else
-            {
-                if (r + strlen (t) < q + MC_MAXPATHLEN)
+                const char *t;
+
+                /* skip dollar */
+                p++;
+
+                if (p[0] != '{')
+                    s = NULL;
+                else
                 {
-                    strcpy (r, t);
-                    r = strchr (r, '\0');
-                }
-                p = s;
-                if (*s == '}')
                     p++;
+                    s = strchr (p, '}');
+                }
+                if (s == NULL)
+                    s = strchr (p, PATH_SEP);
+                if (s == NULL)
+                    s = strchr (p, '\0');
+                c = *s;
+                *s = '\0';
+                t = getenv (p);
+                *s = c;
+                if (t == NULL)
+                {
+                    *(r++) = '$';
+                    if (p[-1] != '$')
+                        *(r++) = '{';
+                }
+                else
+                {
+                    size_t tlen;
+
+                    tlen = strlen (t);
+
+                    if (r + tlen < q + MC_MAXPATHLEN)
+                    {
+                        strncpy (r, t, tlen + 1);
+                        r += tlen;
+                    }
+                    p = s;
+                    if (*s == '}')
+                        p++;
+                }
+
+                state = copy_sym;
+                break;
             }
         }
     }
