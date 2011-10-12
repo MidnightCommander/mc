@@ -80,29 +80,32 @@ WInput *cmdline;
  * they want the behavior they are used to in the shell.
  */
 
-static int
+static gboolean
 examine_cd (const char *_path)
 {
-    int result, qlen;
+    gboolean result;
+    size_t qlen;
     char *path_tilde, *path;
     char *p, *q, *r, *s, c;
-    const char *t;
 
     /* Tilde expansion */
     path = strutils_shell_unescape (_path);
     path_tilde = tilde_expand (path);
+    g_free (path);
 
     /* Leave space for further expansion */
     qlen = strlen (path_tilde) + MC_MAXPATHLEN;
     q = g_malloc (qlen);
 
     /* Variable expansion */
-    for (p = path_tilde, r = q; *p && r < q + MC_MAXPATHLEN;)
+    for (p = path_tilde, r = q; *p != '\0' && r < q + MC_MAXPATHLEN;)
     {
         if (*p != '$' || (p[1] == '[' || p[1] == '('))
             *(r++) = *(p++);
         else
         {
+            const char *t;
+
             p++;
             if (*p == '{')
             {
@@ -114,9 +117,9 @@ examine_cd (const char *_path)
             if (s == NULL)
                 s = strchr (p, PATH_SEP);
             if (s == NULL)
-                s = strchr (p, 0);
+                s = strchr (p, '\0');
             c = *s;
-            *s = 0;
+            *s = '\0';
             t = getenv (p);
             *s = c;
             if (t == NULL)
@@ -130,38 +133,42 @@ examine_cd (const char *_path)
                 if (r + strlen (t) < q + MC_MAXPATHLEN)
                 {
                     strcpy (r, t);
-                    r = strchr (r, 0);
+                    r = strchr (r, '\0');
                 }
+                p = s;
                 if (*s == '}')
-                    p = s + 1;
-                else
-                    p = s;
+                    p++;
             }
         }
     }
-    *r = 0;
+
+    g_free (path_tilde);
+
+    *r = '\0';
 
     result = do_cd (q, cd_parse_command);
 
     /* CDPATH handling */
-    if (*q != PATH_SEP && !result)
+    if (!result && *q != PATH_SEP)
     {
-        char *const cdpath = g_strdup (getenv ("CDPATH"));
+        char *cdpath;
+
+        cdpath = g_strdup (getenv ("CDPATH"));
         p = cdpath;
         if (p == NULL)
-            c = 0;
+            c = '\0';
         else
             c = ':';
         while (!result && c == ':')
         {
             s = strchr (p, ':');
             if (s == NULL)
-                s = strchr (p, 0);
+                s = strchr (p, '\0');
             c = *s;
-            *s = 0;
-            if (*p)
+            *s = '\0';
+            if (*p != '\0')
             {
-                r = concat_dir_and_file (p, q);
+                r = mc_build_filename (p, q, (char *) NULL);
                 result = do_cd (r, cd_parse_command);
                 g_free (r);
             }
@@ -170,9 +177,9 @@ examine_cd (const char *_path)
         }
         g_free (cdpath);
     }
+
     g_free (q);
-    g_free (path_tilde);
-    g_free (path);
+
     return result;
 }
 
