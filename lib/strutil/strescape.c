@@ -105,39 +105,51 @@ strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
     if (*src == '\0')
         return strdup ("");
 
-    ret = g_string_new ("");
+    ret = g_string_sized_new (16);
 
-    if (src_len == (gsize) - 1)
+    if (src_len == (gsize) (-1))
         src_len = strlen (src);
+    src_len--;
 
-    for (curr_index = 0; curr_index < src_len - 1; curr_index++)
+    for (curr_index = 0; curr_index < src_len; curr_index++)
     {
         if (src[curr_index] != '\\')
         {
             g_string_append_c (ret, src[curr_index]);
             continue;
         }
+
         curr_index++;
-        if (unescape_non_printable)
+
+        if (unescaped_chars == ESCAPE_SHELL_CHARS && src[curr_index] == '$')
         {
-            switch (src[curr_index])
-            {
-            case 'n':
-                g_string_append_c (ret, '\n');
-                continue;
-            case 't':
-                g_string_append_c (ret, '\t');
-                continue;
-            case 'b':
-                g_string_append_c (ret, '\b');
-                continue;
-            case '0':
-                g_string_append (ret, '\0');
-                continue;
-            }
-        }
-        if (strchr (unescaped_chars, (int) src[curr_index]) == NULL)
+            /* special case: \$ is used to disallow variable substitution */
             g_string_append_c (ret, '\\');
+        }
+        else
+        {
+            if (unescape_non_printable)
+            {
+                switch (src[curr_index])
+                {
+                case 'n':
+                    g_string_append_c (ret, '\n');
+                    continue;
+                case 't':
+                    g_string_append_c (ret, '\t');
+                    continue;
+                case 'b':
+                    g_string_append_c (ret, '\b');
+                    continue;
+                case '0':
+                    g_string_append_c (ret, '\0');
+                    continue;
+                }
+            }
+
+            if (strchr (unescaped_chars, (int) src[curr_index]) == NULL)
+                g_string_append_c (ret, '\\');
+        }
 
         g_string_append_c (ret, src[curr_index]);
     }
