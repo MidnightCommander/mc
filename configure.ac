@@ -554,6 +554,10 @@ misc/syntax/Makefile
 
 doc/Makefile
 doc/hints/Makefile
+doc/hints/po/po4a.cfg
+doc/hints/po/Makefile
+doc/hints/l10n/Makefile
+
 doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/Makefile
 doc/man/po/po4a.cfg
 doc/man/po/Makefile

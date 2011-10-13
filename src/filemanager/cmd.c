@@ -1380,7 +1380,7 @@ user_file_menu_cmd (void)
 char *
 get_random_hint (int force)
 {
-    char *data, *result = NULL, *eol;
+    char *data, *result = NULL, *eop;
     int len;
     int start;
     static int last_sec;
@@ -1401,18 +1401,27 @@ get_random_hint (int force)
     /* get a random entry */
     srand (tv.tv_sec);
     len = strlen (data);
-    start = rand () % len;
+    start = rand () % (len - 1);
 
+    /* Search the start of paragraph */
     for (; start != 0; start--)
-        if (data[start] == '\n')
+        if (data[start] == '\n' && data[start + 1] == '\n')
         {
-            start++;
+            start += 2;
             break;
         }
 
-    eol = strchr (data + start, '\n');
-    if (eol != NULL)
-        *eol = '\0';
+    /* Search the end of paragraph */
+    for (eop = data + start; *eop != '\0'; eop++)
+    {
+        if (*eop == '\n' && *(eop + 1) == '\n')
+        {
+            *eop = '\0';
+            break;
+        }
+        if (*eop == '\n')
+            *eop = ' ';
+    }
 
     /* hint files are stored in utf-8 */
     /* try convert hint file from utf-8 to terminal encoding */
