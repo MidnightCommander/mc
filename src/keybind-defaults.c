@@ -1,26 +1,28 @@
 /*
-   Copyright (C) 2009, 2010, 2011 The Free Software Foundation, Inc.
+   Default values for keybinding engine
 
-   Written by:    2005        Vitja Makarov
-   2009, 2010  Ilia Maslakov
-   2010, 2011  Andrew Borodin
+   Copyright (C) 2009, 2010, 2011
+   The Free Software Foundation, Inc.
+
+   Written by:
+   Vitja Makarov, 2005
+   Ilia Maslakov <il.smind@gmail.com>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2010, 2011
 
    This file is part of the Midnight Commander.
 
-   The Midnight Commander is free software; you can redistribute it
+   The Midnight Commander is free software: you can redistribute it
    and/or modify it under the terms of the GNU General Public License as
-   published by the Free Software Foundation; either version 2 of the
-   License, or (at your option) any later version.
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
 
-   The Midnight Commander is distributed in the hope that it will be
-   useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+   The Midnight Commander is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-   MA 02110-1301, USA.
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -544,8 +546,8 @@ static const global_keymap_ini_t default_diff_keymap[] = {
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-create_default_keymap_section (mc_config_t *keymap, const char *section,
-                               const global_keymap_ini_t *k)
+create_default_keymap_section (mc_config_t * keymap, const char *section,
+                               const global_keymap_ini_t * k)
 {
     size_t i;
 

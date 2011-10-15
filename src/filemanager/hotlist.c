@@ -1,30 +1,34 @@
-/* Directory hotlist -- for the Midnight Commander
+/*
+   Directory hotlist -- for the Midnight Commander
+
    Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
-   2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+   2003, 2004, 2005, 2006, 2007, 2008, 2011
+   The Free Software Foundation, Inc.
 
    Written by:
-   1994 Radek Doulik
-   1995 Janne Kukonlehto
-   1996 Andrej Borsenkow
-   1997 Norbert Warmuth
+   Radek Doulik, 1994
+   Janne Kukonlehto, 1995
+   Andrej Borsenkow, 1996
+   Norbert Warmuth, 1997
 
    Janne did the original Hotlist code, Andrej made the groupable
    hotlist; the move hotlist and revamped the file format and made
    it stronger.
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This file is part of the Midnight Commander.
 
-   This program is distributed in the hope that it will be useful,
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /** \file hotlist.c

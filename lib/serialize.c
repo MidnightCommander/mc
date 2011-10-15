@@ -1,27 +1,26 @@
 /*
    Provides a serialize/unserialize functionality for INI-like formats.
 
-   Copyright (C) 2011 Free Software Foundation, Inc.
+   Copyright (C) 2011
+   The Free Software Foundation, Inc.
 
-   Written:
-   2011 Slava Zanko <slavazanko@gmail.com>.
+   Written by:
+   Slava Zanko <slavazanko@gmail.com>, 2011
 
    This file is part of the Midnight Commander.
 
-   The Midnight Commander is free software; you can redistribute it
+   The Midnight Commander is free software: you can redistribute it
    and/or modify it under the terms of the GNU General Public License as
-   published by the Free Software Foundation; either version 2 of the
-   License, or (at your option) any later version.
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
 
-   The Midnight Commander is distributed in the hope that it will be
-   useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+   The Midnight Commander is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-   MA 02110-1301, USA.
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /** \file serialize.c
@@ -173,7 +172,8 @@ mc_deserialize_str (const char prefix, const char *data, GError ** error)
     if (data_len > strlen (data))
     {
         g_set_error (error, MC_ERROR, -3,
-                     FUNC_NAME ": Specified data length (%zd) is greater than actual data length (%zd)",
+                     FUNC_NAME
+                     ": Specified data length (%zd) is greater than actual data length (%zd)",
                      data_len, strlen (data));
         return NULL;
     }

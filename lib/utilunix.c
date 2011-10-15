@@ -1,26 +1,35 @@
-/* Various utilities - Unix variants
+/*
+   Various utilities - Unix variants
+
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2007 Free Software Foundation, Inc.
-   Written 1994, 1995, 1996 by:
-   Miguel de Icaza, Janne Kukonlehto, Dugan Porter,
-   Jakub Jelinek, Mauricio Plaza.
+   2004, 2005, 2007, 2011
+   The Free Software Foundation, Inc.
+
+   Written by:
+   Miguel de Icaza, 1994, 1995, 1996
+   Janne Kukonlehto, 1994, 1995, 1996
+   Dugan Porter, 1994, 1995, 1996
+   Jakub Jelinek, 1994, 1995, 1996
+   Mauricio Plaza, 1994, 1995, 1996
 
    The mc_realpath routine is mostly from uClibc package, written
    by Rick Sladkey <jrs@world.std.com>
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This file is part of the Midnight Commander.
 
-   This program is distributed in the hope that it will be useful,
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 /** \file utilunix.c
  *  \brief Source: various utilities - Unix variant

@@ -20,7 +20,7 @@ Name:           mc
 Version:        %{mc_version}
 Release:        %{mc_release}%{?dist}
 Epoch:          3
-License:        GPLv2
+License:        GPL3+
 Group:          System Environment/Shells
 Source0:        %{name}-%{mc_tarball}.tar.gz
 
@@ -154,6 +154,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mc/*
 
 %changelog
+
+* Fri Oct 14 2011 Slava Zanko <slavazanko@gmail.com>
+- Changed License version
+
 * Thu Jul 14 2011 Slava Zanko <slavazanko@gmail.com>
 - Added %{_libexecdir}/mc/fish directory to spec file
 

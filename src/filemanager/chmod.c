@@ -1,20 +1,24 @@
-/* Chmod command -- for the Midnight Commander
+/*
+   Chmod command -- for the Midnight Commander
+
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007,
-   2008, 2009, 2010, 2011 Free Software Foundation, Inc.
+   2008, 2009, 2010, 2011
+   The Free Software Foundation, Inc.
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This file is part of the Midnight Commander.
 
-   This program is distributed in the hope that it will be useful,
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /** \file chmod.c
@@ -94,8 +98,7 @@ static struct
 static const unsigned int check_perm_num = G_N_ELEMENTS (check_perm);
 static int check_perm_len = 0;
 
-static const char *file_info_labels[] =
-{
+static const char *file_info_labels[] = {
     N_("Name:"),
     N_("Permissions (octal):"),
     N_("Owner name:"),
@@ -109,7 +112,7 @@ static struct
 {
     int ret_cmd;
     int flags;
-    int y;              /* vertical position relatively to dialog bottom boundary */
+    int y;                      /* vertical position relatively to dialog bottom boundary */
     int len;
     const char *text;
 } chmod_but[] =
@@ -150,7 +153,7 @@ chmod_i18n (void)
 
     for (i = 0; i < chmod_but_num; i++)
         chmod_but[i].text = _(chmod_but[i].text);
-#endif  /* ENABLE_NLS */
+#endif /* ENABLE_NLS */
 
     for (i = 0; i < check_perm_num; i++)
     {
@@ -158,19 +161,19 @@ chmod_i18n (void)
         check_perm_len = max (check_perm_len, len);
     }
 
-    check_perm_len += 1 + 3 + 1; /* mark, [x] and space */
+    check_perm_len += 1 + 3 + 1;        /* mark, [x] and space */
 
     for (i = 0; i < file_info_labels_num; i++)
     {
-        len = str_term_width1 (file_info_labels[i]) + 2; /* spaces around */
+        len = str_term_width1 (file_info_labels[i]) + 2;        /* spaces around */
         file_info_labels_len = max (file_info_labels_len, len);
     }
 
     for (i = 0; i < chmod_but_num; i++)
     {
-        chmod_but[i].len = str_term_width1 (chmod_but[i].text) + 3; /* [], spaces and w/o & */
+        chmod_but[i].len = str_term_width1 (chmod_but[i].text) + 3;     /* [], spaces and w/o & */
         if (chmod_but[i].flags == DEFPUSH_BUTTON)
-            chmod_but[i].len += 2; /* <> */
+            chmod_but[i].len += 2;      /* <> */
     }
 }
 
@@ -295,7 +298,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
     {
         add_widget (ch_dlg,
                     button_new (lines - chmod_but[i].y, ch_dlg->cols / 2 + 1,
-                                chmod_but[i].ret_cmd,  chmod_but[i].flags, chmod_but[i].text, 0));
+                                chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0));
 
         i++;
 

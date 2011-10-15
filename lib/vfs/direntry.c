@@ -1,3 +1,31 @@
+/*
+   Directory cache support
+
+   Copyright (C) 1998, 2011
+   The Free Software Foundation, Inc.
+
+   Written by:
+   Pavel Machek <pavel@ucw.cz>, 1998
+
+   This file is part of the Midnight Commander.
+
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+   \warning Paths here do _not_ begin with '/', so root directory of
+   archive/site is simply "".
+ */
+
 /** \file
  *  \brief Source: directory cache support
  *
@@ -21,11 +49,9 @@
  *  completely fake, it contains entries such as 'usr', 'usr/src', ...,
  *  and we'll try to use custom find_entry function.
  *
- *  \author Pavel Machek <pavel@ucw.cz>, distribute under LGPL.
+ *  \author Pavel Machek <pavel@ucw.cz>
  *  \date 1998
  *
- *  \warning Paths here do _not_ begin with '/', so root directory of
- *  archive/site is simply "".
  */
 
 #include <config.h>

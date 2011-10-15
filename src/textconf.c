@@ -1,21 +1,23 @@
-/* Print features specific for this build
+/*
+   Print features specific for this build
 
-   Copyright (C) 2000, 2001, 2002, 2004, 2005, 2007
-   Free Software Foundation, Inc.
+   Copyright (C) 2000, 2001, 2002, 2004, 2005, 2007, 2011
+   The Free Software Foundation, Inc.
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This file is part of the Midnight Commander.
 
-   This program is distributed in the hope that it will be useful,
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /** \file textconf.c
@@ -177,7 +179,7 @@ show_datadirs_extended (void)
 {
     PRINTF_GROUP (_("System data"));
 
-    PRINTF_SECTION ( _("Config directory:"), mc_global.sysconfig_dir);
+    PRINTF_SECTION (_("Config directory:"), mc_global.sysconfig_dir);
     PRINTF_SECTION (_("Data directory:"), mc_global.share_data_dir);
 
 #if defined ENABLE_VFS_EXTFS || defined ENABLE_VFS_FISH
@@ -188,24 +190,25 @@ show_datadirs_extended (void)
 #ifdef ENABLE_VFS_FISH
     PRINTF2 ("fish:", LIBEXECDIR, FISH_PREFIX "/");
 #endif
-#endif  /* ENABLE_VFS_EXTFS || defiined ENABLE_VFS_FISH */
+#endif /* ENABLE_VFS_EXTFS || defiined ENABLE_VFS_FISH */
     (void) puts ("");
 
     PRINTF_GROUP (_("User data"));
 
-    PRINTF_SECTION2 ( _("Config directory:"), mc_config_get_path ());
+    PRINTF_SECTION2 (_("Config directory:"), mc_config_get_path ());
     PRINTF_SECTION2 (_("Data directory:"), mc_config_get_data_path ());
-    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_SUBDIR"/");
+    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_SUBDIR "/");
 #ifdef ENABLE_VFS_EXTFS
-    PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR"/");
+    PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR "/");
 #endif
 #ifdef ENABLE_VFS_FISH
-    PRINTF ("fish:", mc_config_get_data_path (), FISH_PREFIX"/");
+    PRINTF ("fish:", mc_config_get_data_path (), FISH_PREFIX "/");
 #endif
 
-    PRINTF_SECTION2 ( _("Cache directory:"), mc_config_get_cache_path ());
+    PRINTF_SECTION2 (_("Cache directory:"), mc_config_get_cache_path ());
 
 }
+
 #undef PRINTF
 #undef PRINTF_SECTION
 #undef PRINTF_GROUP

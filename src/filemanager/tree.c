@@ -1,31 +1,34 @@
-/* Directory tree browser for the Midnight Commander
-   Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
-   2003, 2004, 2005, 2007 Free Software Foundation, Inc.
-
-   Written: 1994, 1996 Janne Kukonlehto
-   1997 Norbert Warmuth
-   1996, 1999 Miguel de Icaza
-
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-
+/*
+   Directory tree browser for the Midnight Commander
    This module has been converted to be a widget.
 
    The program load and saves the tree each time the tree widget is
    created and destroyed.  This is required for the future vfs layer,
    it will be possible to have tree views over virtual file systems.
 
+   Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
+   2003, 2004, 2005, 2007, 2011
+   The Free Software Foundation, Inc.
+
+   Written by:
+   Janne Kukonlehto, 1994, 1996
+   Norbert Warmuth, 1997
+   Miguel de Icaza, 1996, 1999
+
+   This file is part of the Midnight Commander.
+
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /** \file tree.c

@@ -1,24 +1,29 @@
-/* Input line filename/username/hostname/variable/command completion.
+/*
+   Input line filename/username/hostname/variable/command completion.
    (Let mc type for you...)
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007 Free Software Foundation, Inc.
+   2007, 2011
+   the Free Software Foundation, Inc.
 
-   Written by: 1995 Jakub Jelinek
+   Written by:
+   Jakub Jelinek, 1995
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This file is part of the Midnight Commander.
 
-   This program is distributed in the hope that it will be useful,
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 /** \file complete.c
  *  \brief Source: Input line filename/username/hostname/variable/command completion
@@ -857,9 +862,11 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
                 this_char = ti[0];
                 prev_char = str_get_prev_char (ti)[0];
 
-                if ((this_char == '&' && (prev_char == '<' || prev_char == '>')) ||
-                    (this_char == '|' && prev_char == '>') ||
-                    (ti != text && str_get_prev_char (ti)[0] == '\\'))        /* Quoted */
+                /* Quoted */
+                if ((this_char == '&' && (prev_char == '<' || prev_char == '>'))
+                    || (this_char == '|' && prev_char == '>') || (ti != text
+                                                                  && str_get_prev_char (ti)[0] ==
+                                                                  '\\'))
                     in_command_position = 0;
             }
         }
@@ -1143,8 +1150,8 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                                 ;
 
                             /* pointers to next symbols */
-                            si = &le->text [str_offset_to_pos (le->text, ++si_num)];
-                            sl = &last_text [str_offset_to_pos (last_text, ++sl_num)];
+                            si = &le->text[str_offset_to_pos (le->text, ++si_num)];
+                            sl = &last_text[str_offset_to_pos (last_text, ++sl_num)];
 
                             while (si[0] != '\0' && sl[0] != '\0')
                             {
@@ -1153,8 +1160,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                                 nexti = str_get_next_char (si);
                                 nextl = str_get_next_char (sl);
 
-                                if (nexti - si != nextl - sl
-                                    || strncmp (si, sl, nexti - si) != 0)
+                                if (nexti - si != nextl - sl || strncmp (si, sl, nexti - si) != 0)
                                     break;
 
                                 si = nexti;
@@ -1165,7 +1171,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
                             last_text = le->text;
 
-                            si = &last_text [str_offset_to_pos (last_text, si_num)];
+                            si = &last_text[str_offset_to_pos (last_text, si_num)];
                             if (low > si - last_text)
                                 low = si - last_text;
 

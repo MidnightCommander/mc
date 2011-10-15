@@ -2,27 +2,26 @@
    Handle  events in application.
    Interface functions: init/deinit; start/stop
 
-   Copyright (C) 2011 The Free Software Foundation, Inc.
+   Copyright (C) 2011
+   The Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2011.
 
    This file is part of the Midnight Commander.
 
-   The Midnight Commander is free software; you can redistribute it
+   The Midnight Commander is free software: you can redistribute it
    and/or modify it under the terms of the GNU General Public License as
-   published by the Free Software Foundation; either version 2 of the
-   License, or (at your option) any later version.
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
 
-   The Midnight Commander is distributed in the hope that it will be
-   useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+   The Midnight Commander is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-   MA 02110-1301, USA.
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -53,8 +52,7 @@ mc_event_init (GError ** mcerror)
     if (mc_event_grouplist != NULL)
     {
         g_propagate_error (mcerror,
-                           g_error_new (MC_ERROR, 1,
-                                        _("Event system already initialized")));
+                           g_error_new (MC_ERROR, 1, _("Event system already initialized")));
         return FALSE;
     }
 
@@ -65,8 +63,7 @@ mc_event_init (GError ** mcerror)
     if (mc_event_grouplist == NULL)
     {
         g_propagate_error (mcerror,
-                           g_error_new (MC_ERROR, 2,
-                                        _("Failed to initialize event system")));
+                           g_error_new (MC_ERROR, 2, _("Failed to initialize event system")));
         return FALSE;
     }
 
@@ -80,9 +77,7 @@ mc_event_deinit (GError ** mcerror)
 {
     if (mc_event_grouplist == NULL)
     {
-        g_propagate_error (mcerror,
-                           g_error_new (MC_ERROR, 1,
-                                        _("Event system not initialized")));
+        g_propagate_error (mcerror, g_error_new (MC_ERROR, 1, _("Event system not initialized")));
         return FALSE;
     }
 
@@ -113,7 +108,7 @@ mc_event_mass_add (event_init_t * events, GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_present (const gchar *event_group_name, const gchar *event_name)
+mc_event_present (const gchar * event_group_name, const gchar * event_name)
 {
     GTree *event_group;
     GPtrArray *callbacks;

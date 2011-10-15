@@ -1,26 +1,28 @@
 /*
-   Copyright (C) 2009 The Free Software Foundation, Inc.
+   Definitions of key bindings.
 
-   Written by:    2005        Vitja Makarov
-   2009        Ilia Maslakov
-   2009, 2010  Andrew Borodin
+   Copyright (C) 2009, 2011
+   The Free Software Foundation, Inc.
+
+   Written by:
+   Vitja Makarov, 2005
+   Ilia Maslakov <il.smind@gmail.com>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
 
    This file is part of the Midnight Commander.
 
-   The Midnight Commander is free software; you can redistribute it
+   The Midnight Commander is free software: you can redistribute it
    and/or modify it under the terms of the GNU General Public License as
-   published by the Free Software Foundation; either version 2 of the
-   License, or (at your option) any later version.
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
 
-   The Midnight Commander is distributed in the hope that it will be
-   useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+   The Midnight Commander is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-   MA 02110-1301, USA.
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -334,7 +336,9 @@ static name_keymap_t command_names[] = {
     {NULL, CK_IgnoreKey}
 };
 
+/* *INDENT-OFF* */
 static const size_t num_command_names = G_N_ELEMENTS (command_names) - 1;
+/* *INDENT-ON* */
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */

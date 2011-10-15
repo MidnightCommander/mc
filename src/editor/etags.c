@@ -1,33 +1,32 @@
-/* editor C-code navigation via tags.
+/*
+   Editor C-code navigation via tags.
    make TAGS file via command:
    $ find . -type f -name "*.[ch]" | etags -l c --declarations -
 
    or, if etags utility not installed:
    $ find . -type f -name "*.[ch]" | ctags --c-kinds=+p --fields=+iaS --extra=+q -e -L-
 
-   Copyright (C) 2009 Free Software Foundation, Inc.
+   Copyright (C) 2009, 2011
+   The Free Software Foundation, Inc.
 
-   Authors:
+   Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2009
    Slava Zanko <slavazanko@gmail.com>, 2009
 
-
    This file is part of the Midnight Commander.
 
-   The Midnight Commander is free software; you can redistribute it
+   The Midnight Commander is free software: you can redistribute it
    and/or modify it under the terms of the GNU General Public License as
-   published by the Free Software Foundation; either version 2 of the
-   License, or (at your option) any later version.
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
 
-   The Midnight Commander is distributed in the hope that it will be
-   useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+   The Midnight Commander is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-   MA 02110-1301, USA.
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -233,7 +232,8 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
                 if (num < MAX_DEFINITIONS - 1)
                 {
                     def_hash[num].filename_len = strlen (filename);
-                    def_hash[num].fullpath = mc_build_filename (start_path, filename, (char *) NULL);
+                    def_hash[num].fullpath =
+                        mc_build_filename (start_path, filename, (char *) NULL);
 
                     canonicalize_pathname (def_hash[num].fullpath);
                     def_hash[num].filename = g_strdup (filename);
