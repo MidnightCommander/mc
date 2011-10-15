@@ -811,17 +811,17 @@ setup_mc (void)
 #ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
 #else
-    tty_display_8bit (full_eight_bits != 0);
+    tty_display_8bit (mc_global.full_eight_bits != 0);
 #endif /* HAVE_CHARSET */
-#else
+
+#else /* HAVE_SLANG */
 
 #ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
 #else
-    tty_display_8bit (eight_bit_clean != 0);
+    tty_display_8bit (mc_global.eight_bit_clean != 0);
 #endif /* HAVE_CHARSET */
-
-#endif
+#endif /* HAVE_SLANG */
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_global.tty.use_subshell)
