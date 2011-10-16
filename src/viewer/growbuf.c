@@ -150,6 +150,16 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
                 return;
             }
         }
+        else if (view->datasource == DS_STDIN_PIPE)
+        {
+            nread = fread (p, 1, bytesfree, view->ds_stdio_pipe);
+            if (nread == 0)
+            {
+                view->growbuf_finished = TRUE;
+                view->ds_stdio_pipe = NULL;
+                return;
+            }
+        }
         else
         {
             assert (view->datasource == DS_VFS_PIPE);

@@ -91,6 +91,17 @@ mcview_set_datasource_stdio_pipe (mcview_t * view, FILE * fp)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+mcview_set_datasource_stdin_pipe (mcview_t * view)
+{
+    view->datasource = DS_STDIN_PIPE;
+    view->ds_stdio_pipe = stdin;
+
+    mcview_growbuf_init (view);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 mcview_set_datasource_none (mcview_t * view)
 {
     view->datasource = DS_NONE;
@@ -106,6 +117,7 @@ mcview_get_filesize (mcview_t * view)
     case DS_NONE:
         return 0;
     case DS_STDIO_PIPE:
+    case DS_STDIN_PIPE:
     case DS_VFS_PIPE:
         return mcview_growbuf_filesize (view);
     case DS_FILE:
@@ -171,6 +183,7 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
     switch (view->datasource)
     {
     case DS_STDIO_PIPE:
+    case DS_STDIN_PIPE:
     case DS_VFS_PIPE:
         str = mcview_get_ptr_growing_buffer (view, byte_index);
         break;
@@ -316,6 +329,10 @@ mcview_close_datasource (mcview_t * view)
             close_error_pipe (D_NORMAL, NULL);
             view->ds_stdio_pipe = NULL;
         }
+        mcview_growbuf_free (view);
+        break;
+    case DS_STDIN_PIPE:
+        view->ds_stdio_pipe = NULL;
         mcview_growbuf_free (view);
         break;
     case DS_VFS_PIPE:

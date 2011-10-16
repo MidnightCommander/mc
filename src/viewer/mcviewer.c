@@ -312,6 +312,14 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         char tmp[BUF_MEDIUM];
         struct stat st;
 
+        /* See if "-" filename refers to a standart input pipe */
+        if (file[0] == '-' && file[1] == '\0' && !isatty (fileno(stdin)))
+        {
+            mcview_set_datasource_stdin_pipe (view);
+            retval = TRUE;
+            goto finish;
+        }
+
         /* Open the file */
         fd = mc_open (file, O_RDONLY | O_NONBLOCK);
         if (fd == -1)

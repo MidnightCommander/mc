@@ -29,6 +29,7 @@ enum view_ds
 {
     DS_NONE,                    /* No data available */
     DS_STDIO_PIPE,              /* Data comes from a pipe using popen/pclose */
+    DS_STDIN_PIPE,              /* Data comes from a pipe using standart input */
     DS_VFS_PIPE,                /* Data comes from a piped-in VFS file */
     DS_FILE,                    /* Data comes from a VFS file */
     DS_STRING                   /* Data comes from a string in memory */
@@ -228,6 +229,7 @@ void mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t * coord,
 
 /* datasource.c: */
 void mcview_set_datasource_none (mcview_t *);
+void mcview_set_datasource_stdin_pipe (mcview_t *);
 off_t mcview_get_filesize (mcview_t *);
 void mcview_update_filesize (mcview_t * view);
 char *mcview_get_ptr_file (mcview_t *, off_t);

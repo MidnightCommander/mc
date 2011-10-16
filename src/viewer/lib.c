@@ -78,6 +78,9 @@ mcview_toggle_magic_mode (mcview_t * view)
 {
     char *filename, *command;
 
+    if (view->datasource == DS_STDIN_PIPE) /* stdin can't be "re-opened" */
+        return; /* and we can't do magic toggle without reopen, yet */
+
     mcview_altered_magic_flag = 1;
     view->magic_mode = !view->magic_mode;
     filename = g_strdup (view->filename);

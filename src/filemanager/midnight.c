@@ -907,6 +907,9 @@ prepend_cwd_on_local (const char *filename)
     size_t l;
     vfs_path_t *vpath;
 
+    if (filename[0] == '-' && filename[1] == '\0') /* don't let it reach vfs */
+        return g_strdup (filename);
+
     vpath = vfs_path_from_str (filename);
     if (!vfs_file_is_local (vpath) || g_path_is_absolute (filename))
     {

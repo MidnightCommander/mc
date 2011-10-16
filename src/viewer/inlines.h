@@ -102,6 +102,7 @@ mcview_get_byte (mcview_t * view, off_t offset, int *retval)
     switch (view->datasource)
     {
     case DS_STDIO_PIPE:
+    case DS_STDIN_PIPE:
     case DS_VFS_PIPE:
         return mcview_get_byte_growing_buffer (view, offset, retval);
     case DS_FILE:

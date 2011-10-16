@@ -516,6 +516,9 @@ mc_setup_by_args (int argc, char *argv[])
 
         if (tmp != NULL)
             mc_run_param0 = g_strdup (tmp);
+        /* If fd0 is non-interactive, a file is being piped */
+        else if (!isatty(fileno(stdin)))
+            mc_run_param0 = g_strdup("-");
         else
         {
             fprintf (stderr, "%s\n", _("No arguments given to the viewer."));

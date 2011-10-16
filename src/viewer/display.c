@@ -110,8 +110,12 @@ mcview_set_buttonbar (mcview_t * view)
     }
 
     buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, (Widget *) view);
-    buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
-                         : Q_ ("ButtonBar|Parse"), keymap, (Widget *) view);
+
+    if (view->datasource == DS_STDIN_PIPE)
+        buttonbar_set_label (b, 8, NULL, NULL, NULL);
+    else
+        buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
+                             : Q_ ("ButtonBar|Parse"), keymap, (Widget *) view);
 
     if (mcview_is_in_panel (view))
         buttonbar_set_label (b, 10, "", keymap, (Widget *) view);
