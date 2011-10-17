@@ -22,6 +22,8 @@
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
+#include <config.h>
+
 #include <check.h>
 
 #include "lib/global.c"

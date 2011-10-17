@@ -22,9 +22,10 @@
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
+#include <config.h>
+
 #include <check.h>
 #include <stdio.h>
-
 
 #include "lib/global.h"
 #include "lib/vfs/utilvfs.h"

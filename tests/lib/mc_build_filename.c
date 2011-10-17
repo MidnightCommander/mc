@@ -22,6 +22,8 @@
 
 #define TEST_SUITE_NAME "/lib"
 
+#include <config.h>
+
 #include <check.h>
 
 #include <stdio.h>
