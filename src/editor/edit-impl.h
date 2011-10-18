@@ -202,10 +202,7 @@ void edit_init_menu (struct WMenuBar *menubar);
 void menu_save_mode_cmd (void);
 int edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);
-char *edit_get_byte_ptr (WEdit * edit, long byte_index);
-char *edit_get_buf_ptr (WEdit * edit, long byte_index);
 int edit_get_utf (WEdit * edit, long byte_index, int *char_width);
-int edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width);
 long edit_count_lines (WEdit * edit, long current, long upto);
 long edit_move_forward (WEdit * edit, long current, long lines, long upto);
 long edit_move_forward3 (WEdit * edit, long current, int cols, long upto);
@@ -232,13 +229,10 @@ void edit_block_copy_cmd (WEdit * edit);
 void edit_block_move_cmd (WEdit * edit);
 int edit_block_delete_cmd (WEdit * edit);
 void edit_delete_line (WEdit * edit);
-void insert_spaces_tab (WEdit * edit, int half);
 
 int edit_delete (WEdit * edit, const int byte_delete);
 void edit_insert (WEdit * edit, int c);
 void edit_cursor_move (WEdit * edit, long increment);
-void edit_move_block_to_right (WEdit * edit);
-void edit_move_block_to_left (WEdit * edit);
 void edit_push_undo_action (WEdit * edit, long c, ...);
 void edit_push_redo_action (WEdit * edit, long c, ...);
 void edit_push_key_press (WEdit * edit);
@@ -268,8 +262,6 @@ int edit_save_block (WEdit * edit, const char *filename, long start, long finish
 int edit_save_block_cmd (WEdit * edit);
 int edit_insert_file_cmd (WEdit * edit);
 void edit_insert_over (WEdit * edit);
-void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width,
-                                 long *start_pos, long *end_pos, int *col1, int *col2);
 int edit_insert_column_of_text_from_file (WEdit * edit, int file,
                                           long *start_pos, long *end_pos, int *col1, int *col2);
 long edit_insert_file (WEdit * edit, const char *filename);
@@ -283,7 +275,6 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark);
 void edit_status (WEdit * edit);
 void edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion);
 void edit_update_screen (WEdit * edit);
-int edit_print_string (WEdit * e, const char *s);
 void edit_move_to_line (WEdit * e, long line);
 void edit_move_display (WEdit * e, long line);
 void edit_word_wrap (WEdit * edit);

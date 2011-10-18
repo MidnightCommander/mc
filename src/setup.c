@@ -263,7 +263,7 @@ static const struct
     { "show_all_if_ambiguous", &mc_global.widget.show_all_if_ambiguous },
     { "max_dirt_limit", &mcview_max_dirt_limit },
     { "use_file_to_guess_type", &use_file_to_check_type },
-    { "alternate_plus_minus", &alternate_plus_minus },
+    { "alternate_plus_minus", &mc_global.tty.alternate_plus_minus },
     { "only_leading_plus_minus", &only_leading_plus_minus },
     { "show_output_starts_shell", &output_starts_shell },
     { "xtree_mode", &xtree_mode },
@@ -604,10 +604,7 @@ static void
 load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t * cfg)
 {
     gchar **profile_keys, **keys;
-    gchar **values, **curr_values;
-    char *valcopy, *value;
-    int action;
-    gsize len, values_len;
+    gsize len;
 
     if (section_name == NULL)
         return;
@@ -616,36 +613,29 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
 
     while (*profile_keys != NULL)
     {
+        gchar **values, **curr_values;
+
         curr_values = values =
-            mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
+            mc_config_get_string_list (cfg, section_name, *profile_keys, &len);
 
-        action = keybind_lookup_action (*profile_keys);
-
-        if (action > 0)
+        if (curr_values != NULL)
         {
-            if (curr_values != NULL)
-            {
+            int action;
+
+            action = keybind_lookup_action (*profile_keys);
+            if (action > 0)
                 while (*curr_values != NULL)
                 {
-                    valcopy = convert_controls (*curr_values);
-                    keybind_cmd_bind (keymap, valcopy, action);
-                    g_free (valcopy);
+                    keybind_cmd_bind (keymap, *curr_values, action);
                     curr_values++;
                 }
-            }
-            else
-            {
-                value = mc_config_get_string (cfg, section_name, *profile_keys, "");
-                valcopy = convert_controls (value);
-                /* define_sequence (key_code, valcopy, MCKEY_NOACTION); */
-                g_free (valcopy);
-                g_free (value);
-            }
+
+            g_strfreev (values);
         }
 
         profile_keys++;
-        g_strfreev (values);
     }
+
     g_strfreev (keys);
 }
 

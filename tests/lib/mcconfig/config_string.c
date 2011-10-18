@@ -22,6 +22,8 @@
 
 #define TEST_SUITE_NAME "lib/mcconfig"
 
+#include <config.h>
+
 #include <check.h>
 
 #include "lib/global.h"

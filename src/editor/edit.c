@@ -669,6 +669,121 @@ edit_modification (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static char *
+edit_get_byte_ptr (WEdit * edit, long byte_index)
+{
+    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
+        return NULL;
+
+    if (byte_index >= edit->curs1)
+    {
+        unsigned long p;
+
+        p = edit->curs1 + edit->curs2 - byte_index - 1;
+        return (char *) (edit->buffers2[p >> S_EDIT_BUF_SIZE] +
+                         (EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
+    }
+
+    return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE] +
+                     (byte_index & M_EDIT_BUF_SIZE));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+edit_get_buf_ptr (WEdit * edit, long byte_index)
+{
+    if (byte_index >= (edit->curs1 + edit->curs2))
+        byte_index--;
+
+    if (byte_index < 0)
+        return NULL;
+
+    if (byte_index >= edit->curs1)
+    {
+        unsigned long p;
+
+        p = edit->curs1 + edit->curs2 - 1;
+        return (char *) (edit->buffers2[p >> S_EDIT_BUF_SIZE] +
+                         (EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
+    }
+
+    return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE] + (0 & M_EDIT_BUF_SIZE));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
+{
+    gchar *str, *buf = NULL;
+    int res = -1;
+    gunichar ch;
+    gchar *next_ch = NULL;
+    int width = 0;
+
+    if (byte_index > 0)
+        byte_index--;
+
+    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
+    {
+        *char_width = 0;
+        return 0;
+    }
+
+    ch = edit_get_utf (edit, byte_index, &width);
+
+    if (width == 1)
+    {
+        *char_width = width;
+        return ch;
+    }
+
+    str = edit_get_byte_ptr (edit, byte_index);
+    buf = edit_get_buf_ptr (edit, byte_index);
+    if (str == NULL || buf == NULL)
+    {
+        *char_width = 0;
+        return 0;
+    }
+    /* get prev utf8 char */
+    if (str != buf)
+        str = g_utf8_find_prev_char (buf, str);
+
+    if (str == NULL)
+    {
+        *char_width = 0;
+        return 0;
+    }
+    else
+        res = g_utf8_get_char_validated (str, -1);
+
+    if (res < 0)
+    {
+        ch = *str;
+        width = 0;
+    }
+    else
+    {
+        ch = res;
+        /* Calculate UTF-8 char width */
+        next_ch = g_utf8_next_char (str);
+        if (next_ch)
+        {
+            width = next_ch - str;
+        }
+        else
+        {
+            ch = 0;
+            width = 0;
+        }
+    }
+    *char_width = width;
+    return ch;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 edit_backspace (WEdit * edit, const int byte_delete)
 {
@@ -1498,6 +1613,26 @@ edit_double_newline (WEdit * edit)
     edit_insert (edit, '\n');
 }
 
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+insert_spaces_tab (WEdit * edit, gboolean half)
+{
+    int i;
+
+    edit_update_curs_col (edit);
+    i = option_tab_spacing * space_width;
+    if (half)
+        i /= 2;
+    i = ((edit->curs_col / i) + 1) * i - edit->curs_col;
+    while (i > 0)
+    {
+        edit_insert (edit, ' ');
+        i -= space_width;
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
@@ -1512,27 +1647,21 @@ edit_tab_cmd (WEdit * edit)
             /*insert a half tab (usually four spaces) unless there is a
                half tab already behind, then delete it and insert a
                full tab. */
-            if (!option_fill_tabs_with_spaces && right_of_four_spaces (edit))
+            if (option_fill_tabs_with_spaces || !right_of_four_spaces (edit))
+                insert_spaces_tab (edit, TRUE);
+            else
             {
                 for (i = 1; i <= HALF_TAB_SIZE; i++)
                     edit_backspace (edit, 1);
                 edit_insert (edit, '\t');
             }
-            else
-            {
-                insert_spaces_tab (edit, 1);
-            }
             return;
         }
     }
     if (option_fill_tabs_with_spaces)
-    {
-        insert_spaces_tab (edit, 0);
-    }
+        insert_spaces_tab (edit, FALSE);
     else
-    {
         edit_insert (edit, '\t');
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1637,6 +1766,105 @@ edit_goto_matching_bracket (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_move_block_to_right (WEdit * edit)
+{
+    long start_mark, end_mark;
+    long cur_bol, start_bol;
+
+    if (eval_marks (edit, &start_mark, &end_mark))
+        return;
+
+    start_bol = edit_bol (edit, start_mark);
+    cur_bol = edit_bol (edit, end_mark - 1);
+
+    do
+    {
+        edit_cursor_move (edit, cur_bol - edit->curs1);
+        if (option_fill_tabs_with_spaces)
+            insert_spaces_tab (edit, option_fake_half_tabs);
+        else
+            edit_insert (edit, '\t');
+        edit_cursor_move (edit, edit_bol (edit, cur_bol) - edit->curs1);
+
+        if (cur_bol == 0)
+            break;
+
+        cur_bol = edit_bol (edit, cur_bol - 1);
+    }
+    while (cur_bol >= start_bol);
+
+    edit->force |= REDRAW_PAGE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_move_block_to_left (WEdit * edit)
+{
+    long start_mark, end_mark;
+    long cur_bol, start_bol;
+    int i;
+
+    if (eval_marks (edit, &start_mark, &end_mark))
+        return;
+
+    start_bol = edit_bol (edit, start_mark);
+    cur_bol = edit_bol (edit, end_mark - 1);
+
+    do
+    {
+        int del_tab_width;
+        int next_char;
+
+        edit_cursor_move (edit, cur_bol - edit->curs1);
+
+        if (option_fake_half_tabs)
+            del_tab_width = HALF_TAB_SIZE;
+        else
+            del_tab_width = option_tab_spacing;
+
+        next_char = edit_get_byte (edit, edit->curs1);
+        if (next_char == '\t')
+            edit_delete (edit, 1);
+        else if (next_char == ' ')
+            for (i = 1; i <= del_tab_width; i++)
+            {
+                if (next_char == ' ')
+                    edit_delete (edit, 1);
+                next_char = edit_get_byte (edit, edit->curs1);
+            }
+
+        if (cur_bol == 0)
+            break;
+
+        cur_bol = edit_bol (edit, cur_bol - 1);
+    }
+    while (cur_bol >= start_bol);
+
+    edit->force |= REDRAW_PAGE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * prints at the cursor
+ * @returns the number of chars printed
+ */
+
+static size_t
+edit_print_string (WEdit * e, const char *s)
+{
+    size_t i = 0;
+
+    while (s[i] != '\0')
+        edit_execute_cmd (e, CK_InsertChar, (unsigned char) s[i++]);
+    e->force |= REDRAW_COMPLETELY;
+    edit_update_screen (e);
+    return i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1710,53 +1938,6 @@ edit_get_byte (WEdit * edit, long byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
-edit_get_byte_ptr (WEdit * edit, long byte_index)
-{
-    unsigned long p;
-    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
-        return NULL;
-
-    if (byte_index >= edit->curs1)
-    {
-        p = edit->curs1 + edit->curs2 - byte_index - 1;
-        return (char *) (edit->buffers2[p >> S_EDIT_BUF_SIZE] +
-                         (EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
-    }
-    else
-    {
-        return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE] +
-                         (byte_index & M_EDIT_BUF_SIZE));
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-char *
-edit_get_buf_ptr (WEdit * edit, long byte_index)
-{
-    unsigned long p;
-
-    if (byte_index >= (edit->curs1 + edit->curs2))
-        byte_index--;
-
-    if (byte_index < 0)
-        return NULL;
-
-    if (byte_index >= edit->curs1)
-    {
-        p = edit->curs1 + edit->curs2 - 1;
-        return (char *) (edit->buffers2[p >> S_EDIT_BUF_SIZE] +
-                         (EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
-    }
-    else
-    {
-        return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE] + (0 & M_EDIT_BUF_SIZE));
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 int
 edit_get_utf (WEdit * edit, long byte_index, int *char_width)
 {
@@ -1781,77 +1962,6 @@ edit_get_utf (WEdit * edit, long byte_index, int *char_width)
     }
 
     res = g_utf8_get_char_validated (str, -1);
-
-    if (res < 0)
-    {
-        ch = *str;
-        width = 0;
-    }
-    else
-    {
-        ch = res;
-        /* Calculate UTF-8 char width */
-        next_ch = g_utf8_next_char (str);
-        if (next_ch)
-        {
-            width = next_ch - str;
-        }
-        else
-        {
-            ch = 0;
-            width = 0;
-        }
-    }
-    *char_width = width;
-    return ch;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
-edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
-{
-    gchar *str, *buf = NULL;
-    int res = -1;
-    gunichar ch;
-    gchar *next_ch = NULL;
-    int width = 0;
-
-    if (byte_index > 0)
-        byte_index--;
-
-    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
-    {
-        *char_width = 0;
-        return 0;
-    }
-
-    ch = edit_get_utf (edit, byte_index, &width);
-
-    if (width == 1)
-    {
-        *char_width = width;
-        return ch;
-    }
-
-    str = edit_get_byte_ptr (edit, byte_index);
-    buf = edit_get_buf_ptr (edit, byte_index);
-    if (str == NULL || buf == NULL)
-    {
-        *char_width = 0;
-        return 0;
-    }
-    /* get prev utf8 char */
-    if (str != buf)
-        str = g_utf8_find_prev_char (buf, str);
-
-    if (str == NULL)
-    {
-        *char_width = 0;
-        return 0;
-    }
-    else
-        res = g_utf8_get_char_validated (str, -1);
 
     if (res < 0)
     {
@@ -3302,22 +3412,6 @@ edit_delete_line (WEdit * edit)
     while (edit_get_byte (edit, edit->curs1 - 1) != '\n')
     {
         (void) edit_backspace (edit, 1);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-insert_spaces_tab (WEdit * edit, int half)
-{
-    int i;
-    edit_update_curs_col (edit);
-    i = ((edit->curs_col / (option_tab_spacing * space_width / (half + 1))) +
-         1) * (option_tab_spacing * space_width / (half + 1)) - edit->curs_col;
-    while (i > 0)
-    {
-        edit_insert (edit, ' ');
-        i -= space_width;
     }
 }
 

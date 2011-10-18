@@ -75,13 +75,13 @@ int first_panel_size = 0;
 int output_lines = 0;
 
 /* Set if the command prompt is to be displayed */
-int command_prompt = 1;
+gboolean command_prompt = TRUE;
 
 /* Set if the main menu is visible */
 int menubar_visible = 1;
 
 /* Set to show current working dir in xterm window title */
-int xterm_title = 1;
+gboolean xterm_title = TRUE;
 
 /* Set to show free space on device assigned to current directory */
 int free_space = 1;
@@ -143,7 +143,7 @@ static int _output_lines;
 static int _command_prompt;
 static int _keybar_visible;
 static int _message_visible;
-static int _xterm_title;
+static gboolean _xterm_title;
 static int _free_space;
 
 static int height;
@@ -300,7 +300,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         if (old_output_lines != _output_lines)
         {
             old_output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag ? COLOR_NORMAL : DISABLED_COLOR);
+            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
             dlg_move (h, 9, 5);
             tty_print_string (output_lines_label);
             dlg_move (h, 9, 5 + 3 + output_lines_label_len);
@@ -316,7 +316,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         _xterm_title = check_options[1].widget->state & C_BOOL;
         _free_space = check_options[0].widget->state & C_BOOL;
 
-        if (mc_global.tty.console_flag)
+        if (mc_global.tty.console_flag != '\0')
         {
             int minimum;
             if (_output_lines < 0)
@@ -337,7 +337,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         if (old_output_lines != _output_lines)
         {
             old_output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag ? COLOR_NORMAL : DISABLED_COLOR);
+            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
             dlg_move (h, 9, 5 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
@@ -492,7 +492,7 @@ init_layout (void)
 
     /* "Console output" groupbox */
     {
-        const int disabled = mc_global.tty.console_flag ? 0 : W_DISABLED;
+        const int disabled = mc_global.tty.console_flag != '\0' ? 0 : W_DISABLED;
         Widget *w;
 
         w = (Widget *) button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
@@ -639,7 +639,7 @@ setup_panels (void)
     int start_y;
     int promptl;                /* the prompt len */
 
-    if (mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag != '\0')
     {
         int minimum;
         if (output_lines < 0)
@@ -705,7 +705,7 @@ setup_panels (void)
     buttonbar_set_visible (the_bar, mc_global.keybar_visible);
 
     /* Output window */
-    if (mc_global.tty.console_flag && output_lines)
+    if (mc_global.tty.console_flag != '\0' && output_lines)
     {
         output_start_y = LINES - command_prompt - mc_global.keybar_visible - output_lines;
         show_console_contents (output_start_y,

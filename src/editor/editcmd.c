@@ -79,9 +79,6 @@ int search_create_bookmark = FALSE;
 /* queries on a save */
 int edit_confirm_save = 1;
 
-static int edit_save_cmd (WEdit * edit);
-static unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l);
-
 /*** file scope macro definitions ****************************************************************/
 
 #define space_width 1
@@ -1138,6 +1135,152 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
     return max_len;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width,
+                            long *start_pos, long *end_pos, int *col1, int *col2)
+{
+    long cursor;
+    int i, col;
+
+    cursor = edit->curs1;
+    col = edit_get_col (edit);
+
+    for (i = 0; i < size; i++)
+    {
+        if (data[i] != '\n')
+            edit_insert (edit, data[i]);
+        else
+        {                       /* fill in and move to next line */
+            int l;
+            long p;
+
+            if (edit_get_byte (edit, edit->curs1) != '\n')
+            {
+                l = width - (edit_get_col (edit) - col);
+                while (l > 0)
+                {
+                    edit_insert (edit, ' ');
+                    l -= space_width;
+                }
+            }
+            for (p = edit->curs1;; p++)
+            {
+                if (p == edit->last_byte)
+                {
+                    edit_cursor_move (edit, edit->last_byte - edit->curs1);
+                    edit_insert_ahead (edit, '\n');
+                    p++;
+                    break;
+                }
+                if (edit_get_byte (edit, p) == '\n')
+                {
+                    p++;
+                    break;
+                }
+            }
+            edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
+            l = col - edit_get_col (edit);
+            while (l >= space_width)
+            {
+                edit_insert (edit, ' ');
+                l -= space_width;
+            }
+        }
+    }
+
+    *col1 = col;
+    *col2 = col + width;
+    *start_pos = cursor;
+    *end_pos = edit->curs1;
+    edit_cursor_move (edit, cursor - edit->curs1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+edit_macro_comparator (gconstpointer * macro1, gconstpointer * macro2)
+{
+    const macros_t *m1 = (const macros_t *) macro1;
+    const macros_t *m2 = (const macros_t *) macro2;
+
+    return m1->hotkey - m2->hotkey;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_macro_sort_by_hotkey (void)
+{
+    if (macros_list != NULL && macros_list->len != 0)
+        g_array_sort (macros_list, (GCompareFunc) edit_macro_comparator);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+edit_get_macro (WEdit * edit, int hotkey, const macros_t ** macros, guint * indx)
+{
+    const macros_t *array_start = &g_array_index (macros_list, struct macros_t, 0);
+    macros_t *result;
+    macros_t search_macro;
+
+    (void) edit;
+
+    search_macro.hotkey = hotkey;
+    result = bsearch (&search_macro, macros_list->data, macros_list->len,
+                      sizeof (macros_t), (GCompareFunc) edit_macro_comparator);
+
+    if (result != NULL && result->macro != NULL)
+    {
+        *indx = (result - array_start);
+        *macros = result;
+        return TRUE;
+    }
+    *indx = 0;
+    return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** returns FALSE on error */
+
+static gboolean
+edit_delete_macro (WEdit * edit, int hotkey)
+{
+    mc_config_t *macros_config = NULL;
+    const char *section_name = "editor";
+    gchar *macros_fname;
+    guint indx;
+    char *keyname;
+    const macros_t *macros = NULL;
+
+    /* clear array of actions for current hotkey */
+    while (edit_get_macro (edit, hotkey, &macros, &indx))
+    {
+        if (macros->macro != NULL)
+            g_array_free (macros->macro, TRUE);
+        macros = NULL;
+        g_array_remove_index (macros_list, indx);
+        edit_macro_sort_by_hotkey ();
+    }
+
+    macros_fname = g_build_filename (mc_config_get_data_path (), MC_MACRO_FILE, (char *) NULL);
+    macros_config = mc_config_init (macros_fname);
+    g_free (macros_fname);
+
+    if (macros_config == NULL)
+        return FALSE;
+
+    keyname = lookup_key_by_code (hotkey);
+    while (mc_config_del_key (macros_config, section_name, keyname))
+        ;
+    g_free (keyname);
+    mc_config_save_file (macros_config, NULL);
+    mc_config_deinit (macros_config);
+    return TRUE;
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -1379,91 +1522,6 @@ edit_save_as_cmd (WEdit * edit)
 }
 
 /* {{{ Macro stuff starts here */
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-edit_macro_comparator (gconstpointer * macro1, gconstpointer * macro2)
-{
-    const macros_t *m1 = (const macros_t *) macro1;
-    const macros_t *m2 = (const macros_t *) macro2;
-
-    return m1->hotkey - m2->hotkey;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_macro_sort_by_hotkey (void)
-{
-    if (macros_list != NULL && macros_list->len != 0)
-        g_array_sort (macros_list, (GCompareFunc) edit_macro_comparator);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-edit_get_macro (WEdit * edit, int hotkey, const macros_t ** macros, guint * indx)
-{
-    const macros_t *array_start = &g_array_index (macros_list, struct macros_t, 0);
-    macros_t *result;
-    macros_t search_macro;
-
-    (void) edit;
-
-    search_macro.hotkey = hotkey;
-    result = bsearch (&search_macro, macros_list->data, macros_list->len,
-                      sizeof (macros_t), (GCompareFunc) edit_macro_comparator);
-
-    if (result != NULL && result->macro != NULL)
-    {
-        *indx = (result - array_start);
-        *macros = result;
-        return TRUE;
-    }
-    *indx = 0;
-    return FALSE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** returns FALSE on error */
-
-static gboolean
-edit_delete_macro (WEdit * edit, int hotkey)
-{
-    mc_config_t *macros_config = NULL;
-    const char *section_name = "editor";
-    gchar *macros_fname;
-    guint indx;
-    char *keyname;
-    const macros_t *macros = NULL;
-
-    /* clear array of actions for current hotkey */
-    while (edit_get_macro (edit, hotkey, &macros, &indx))
-    {
-        if (macros->macro != NULL)
-            g_array_free (macros->macro, TRUE);
-        macros = NULL;
-        g_array_remove_index (macros_list, indx);
-        edit_macro_sort_by_hotkey ();
-    }
-
-    macros_fname = g_build_filename (mc_config_get_data_path (), MC_MACRO_FILE, (char *) NULL);
-    macros_config = mc_config_init (macros_fname);
-    g_free (macros_fname);
-
-    if (macros_config == NULL)
-        return FALSE;
-
-    keyname = lookup_key_by_code (hotkey);
-    while (mc_config_del_key (macros_config, section_name, keyname))
-        ;
-    g_free (keyname);
-    mc_config_save_file (macros_config, NULL);
-    mc_config_deinit (macros_config);
-    return TRUE;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -1898,65 +1956,6 @@ edit_insert_over (WEdit * edit)
         edit_insert (edit, ' ');
     }
     edit->over_col = 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width,
-                            long *start_pos, long *end_pos, int *col1, int *col2)
-{
-    long cursor;
-    int i, col;
-
-    cursor = edit->curs1;
-    col = edit_get_col (edit);
-    for (i = 0; i < size; i++)
-    {
-        if (data[i] == '\n')
-        {                       /* fill in and move to next line */
-            int l;
-            long p;
-            if (edit_get_byte (edit, edit->curs1) != '\n')
-            {
-                l = width - (edit_get_col (edit) - col);
-                while (l > 0)
-                {
-                    edit_insert (edit, ' ');
-                    l -= space_width;
-                }
-            }
-            for (p = edit->curs1;; p++)
-            {
-                if (p == edit->last_byte)
-                {
-                    edit_cursor_move (edit, edit->last_byte - edit->curs1);
-                    edit_insert_ahead (edit, '\n');
-                    p++;
-                    break;
-                }
-                if (edit_get_byte (edit, p) == '\n')
-                {
-                    p++;
-                    break;
-                }
-            }
-            edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
-            l = col - edit_get_col (edit);
-            while (l >= space_width)
-            {
-                edit_insert (edit, ' ');
-                l -= space_width;
-            }
-            continue;
-        }
-        edit_insert (edit, data[i]);
-    }
-    *col1 = col;
-    *col2 = col + width;
-    *start_pos = cursor;
-    *end_pos = edit->curs1;
-    edit_cursor_move (edit, cursor - edit->curs1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2893,23 +2892,6 @@ edit_block_process_cmd (WEdit * edit, int macro_number)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * prints at the cursor
- * @returns the number of chars printed
- */
-
-int
-edit_print_string (WEdit * e, const char *s)
-{
-    size_t i = 0;
-    while (s[i] != '\0')
-        edit_execute_cmd (e, CK_InsertChar, (unsigned char) s[i++]);
-    e->force |= REDRAW_COMPLETELY;
-    edit_update_screen (e);
-    return i;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_mail_dialog (WEdit * edit)
@@ -3215,100 +3197,6 @@ edit_get_match_keyword_cmd (WEdit * edit)
                                                (etags_hash_t *) & def_hash, num_def);
     }
     g_free (match_expr);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_move_block_to_right (WEdit * edit)
-{
-    long start_mark, end_mark;
-    long cur_bol, start_bol;
-
-    if (eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    start_bol = edit_bol (edit, start_mark);
-    cur_bol = edit_bol (edit, end_mark - 1);
-    do
-    {
-        edit_cursor_move (edit, cur_bol - edit->curs1);
-        if (option_fill_tabs_with_spaces)
-        {
-            if (option_fake_half_tabs)
-            {
-                insert_spaces_tab (edit, 1);
-            }
-            else
-            {
-                insert_spaces_tab (edit, 0);
-            }
-        }
-        else
-        {
-            edit_insert (edit, '\t');
-        }
-        edit_cursor_move (edit, edit_bol (edit, cur_bol) - edit->curs1);
-        if (cur_bol == 0)
-        {
-            break;
-        }
-        cur_bol = edit_bol (edit, cur_bol - 1);
-    }
-    while (cur_bol >= start_bol);
-    edit->force |= REDRAW_PAGE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_move_block_to_left (WEdit * edit)
-{
-    long start_mark, end_mark;
-    long cur_bol, start_bol;
-    int i, del_tab_width;
-    int next_char;
-
-    if (eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    start_bol = edit_bol (edit, start_mark);
-    cur_bol = edit_bol (edit, end_mark - 1);
-    do
-    {
-        edit_cursor_move (edit, cur_bol - edit->curs1);
-        if (option_fake_half_tabs)
-        {
-            del_tab_width = HALF_TAB_SIZE;
-        }
-        else
-        {
-            del_tab_width = option_tab_spacing;
-        }
-        next_char = edit_get_byte (edit, edit->curs1);
-        if (next_char == '\t')
-        {
-            edit_delete (edit, 1);
-        }
-        else if (next_char == ' ')
-        {
-            for (i = 1; i <= del_tab_width; i++)
-            {
-                if (next_char == ' ')
-                {
-                    edit_delete (edit, 1);
-                }
-                next_char = edit_get_byte (edit, edit->curs1);
-            }
-        }
-        if (cur_bol == 0)
-        {
-            break;
-        }
-        cur_bol = edit_bol (edit, cur_bol - 1);
-    }
-    while (cur_bol >= start_bol);
-    edit->force |= REDRAW_PAGE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

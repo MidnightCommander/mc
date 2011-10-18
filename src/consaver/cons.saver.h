@@ -16,14 +16,14 @@
 
 /*** enums ***************************************************************************************/
 
-enum
+typedef enum
 {
     CONSOLE_INIT = '1',
     CONSOLE_DONE,
     CONSOLE_SAVE,
     CONSOLE_RESTORE,
     CONSOLE_CONTENTS
-};
+} console_action_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -39,7 +39,7 @@ extern int cons_saver_pid;
 #ifndef LINUX_CONS_SAVER_C
 /* Used only in mc, not in cons.saver */
 void show_console_contents (int starty, unsigned char begin_line, unsigned char end_line);
-void handle_console (unsigned char action);
+void handle_console (console_action_t action);
 #endif /* !LINUX_CONS_SAVER_C */
 
 /*** inline functions ****************************************************************************/

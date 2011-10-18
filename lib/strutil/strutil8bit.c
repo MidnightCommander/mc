@@ -381,33 +381,32 @@ str_8bit_term_trim (const char *text, int width)
     actual = result;
     remain = sizeof (result);
 
-    if (width < (int) length)
+    if (width > 0)
     {
-        if (width <= 3)
+        if (width < (int) length)
         {
-            memset (actual, '.', width);
-            actual += width;
-            remain -= width;
+            if (width <= 3)
+            {
+                memset (actual, '.', width);
+                actual += width;
+                remain -= width;
+            }
+            else
+            {
+                memset (actual, '.', 3);
+                actual += 3;
+                remain -= 3;
+
+                pos += length - width + 3;
+
+                for (; pos < length && remain > 1; pos++, actual++, remain--)
+                    actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            }
         }
         else
         {
-            memset (actual, '.', 3);
-            actual += 3;
-            remain -= 3;
-
-            pos += length - width + 3;
-
             for (; pos < length && remain > 1; pos++, actual++, remain--)
-            {
                 actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-            }
-        }
-    }
-    else
-    {
-        for (; pos < length && remain > 1; pos++, actual++, remain--)
-        {
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
         }
     }
 

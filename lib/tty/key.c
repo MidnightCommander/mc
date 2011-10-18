@@ -75,10 +75,6 @@
 
 /*** global variables ****************************************************************************/
 
-/* If true, use + and \ keys normally and select/unselect do if M-+ / M-\.
-   and M-- and keypad + / - */
-int alternate_plus_minus = 0;
-
 int mou_auto_repeat = 100;
 int double_click_speed = 250;
 int old_esc_mode = 0;
@@ -168,6 +164,7 @@ const key_code_name_t key_name_conv_tab[] = {
     {(int) '&', "ampersand", N_("Ampersand"), "&"},
     {(int) '$', "dollar", N_("Dollar sign"), "$"},
     {(int) '"', "quota", N_("Quotation mark"), "\""},
+    {(int) '%', "percent", N_("Percent sign"), "%"},
     {(int) '^', "caret", N_("Caret"), "^"},
     {(int) '~', "tilda", N_("Tilda"), "~"},
     {(int) '`', "prime", N_("Prime"), "`"},
@@ -1058,7 +1055,7 @@ correct_key_code (int code)
         mod &= ~KEY_M_SHIFT;
     }
 
-    if (!alternate_plus_minus)
+    if (!mc_global.tty.alternate_plus_minus)
         switch (c)
         {
         case KEY_KP_ADD:
@@ -2102,7 +2099,7 @@ learn_key (void)
 void
 numeric_keypad_mode (void)
 {
-    if (mc_global.tty.console_flag || mc_global.tty.xterm_flag)
+    if (mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag)
     {
         fputs (ESC_STR ">", stdout);
         fflush (stdout);
@@ -2114,7 +2111,7 @@ numeric_keypad_mode (void)
 void
 application_keypad_mode (void)
 {
-    if (mc_global.tty.console_flag || mc_global.tty.xterm_flag)
+    if (mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag)
     {
         fputs (ESC_STR "=", stdout);
         fflush (stdout);

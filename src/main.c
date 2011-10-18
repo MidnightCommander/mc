@@ -32,12 +32,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <sys/wait.h>
-#include <unistd.h>
 #include <pwd.h>                /* for username in xterm title */
+#include <signal.h>
 
 #include "lib/global.h"
 
@@ -184,7 +181,7 @@ sigchld_handler_no_subshell (int sig)
 #ifdef __linux__
     int pid, status;
 
-    if (!mc_global.tty.console_flag)
+    if (!mc_global.tty.console_flag != '\0')
         return;
 
     /* COMMENT: if it were true that after the call to handle_console(..INIT)
@@ -362,9 +359,9 @@ update_xterm_title_path (void)
         fprintf (stdout, "\33]0;%s\7", str_term_form (p));
         g_free (login);
         g_free (p);
-        if (!alternate_plus_minus)
+        if (!mc_global.tty.alternate_plus_minus)
             numeric_keypad_mode ();
-        fflush (stdout);
+        (void) fflush (stdout);
     }
 }
 
@@ -377,9 +374,9 @@ main (int argc, char *argv[])
     gboolean isInitialized;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
-    setlocale (LC_ALL, "");
-    bindtextdomain ("mc", LOCALEDIR);
-    textdomain ("mc");
+    (void) setlocale (LC_ALL, "");
+    (void) bindtextdomain ("mc", LOCALEDIR);
+    (void) textdomain ("mc");
 
     if (!events_init (&error))
     {
@@ -390,7 +387,7 @@ main (int argc, char *argv[])
     }
 
     /* Set up temporary directory */
-    mc_tmpdir ();
+    (void) mc_tmpdir ();
 
     OS_Setup ();
 
@@ -488,10 +485,10 @@ main (int argc, char *argv[])
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
     /* Also done after init_subshell, to save any shell init file messages */
-    if (mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_SAVE);
 
-    if (alternate_plus_minus)
+    if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -510,7 +507,7 @@ main (int argc, char *argv[])
         do_nc ();
 
     /* Save the tree store */
-    tree_store_save ();
+    (void) tree_store_save ();
 
     free_keymap_defs ();
 
@@ -527,14 +524,14 @@ main (int argc, char *argv[])
 
     done_setup ();
 
-    if (mc_global.tty.console_flag && (quit & SUBSHELL_EXIT) == 0)
+    if (mc_global.tty.console_flag != '\0' && (quit & SUBSHELL_EXIT) == 0)
         handle_console (CONSOLE_RESTORE);
-    if (alternate_plus_minus)
+    if (mc_global.tty.alternate_plus_minus)
         numeric_keypad_mode ();
 
-    signal (SIGCHLD, SIG_DFL);  /* Disable the SIGCHLD handler */
+    (void) signal (SIGCHLD, SIG_DFL);   /* Disable the SIGCHLD handler */
 
-    if (mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_DONE);
 
     if (mc_global.mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file != NULL
@@ -566,9 +563,9 @@ main (int argc, char *argv[])
         {
             macros = &g_array_index (macros_list, struct macros_t, i);
             if (macros != NULL && macros->macro != NULL)
-                g_array_free (macros->macro, FALSE);
+                (void) g_array_free (macros->macro, FALSE);
         }
-        g_array_free (macros_list, TRUE);
+        (void) g_array_free (macros_list, TRUE);
     }
 
     str_uninit_strings ();
@@ -576,7 +573,7 @@ main (int argc, char *argv[])
     g_free (mc_run_param0);
     g_free (mc_run_param1);
 
-    mc_event_deinit (&error);
+    (void) mc_event_deinit (&error);
 
     mc_config_deinit_config_paths ();
 
@@ -587,7 +584,7 @@ main (int argc, char *argv[])
         exit (EXIT_FAILURE);
     }
 
-    putchar ('\n');             /* Hack to make shell's prompt start at left of screen */
+    (void) putchar ('\n');      /* Hack to make shell's prompt start at left of screen */
 
     return 0;
 }

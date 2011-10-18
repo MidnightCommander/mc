@@ -2452,9 +2452,6 @@ Ridisegna lo schermo.
 .B C\-o
 Passa alla subshell e mostra la schermata dei comandi.
 .PP
-.B !
-Come C\-o, ma esegue una nuova shell se la subshell non sta andando.
-.PP
 .B "[n] m"
 Imposta l'indice n.
 .PP

@@ -296,7 +296,6 @@ dlg_execute_cmd (Dlg_head * h, unsigned long command)
         {
             ev_help_t event_data = { NULL, h->help_ctx };
             mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-            do_refresh ();
         }
         break;
 

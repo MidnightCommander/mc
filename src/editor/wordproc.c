@@ -184,7 +184,8 @@ get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
                     p++;
         *s = edit_get_byte (edit, p);
     }
-    *size = (unsigned long) s - (unsigned long) t;
+    *size = (unsigned long) (s - t);
+    /* FIXME: all variables related to 'size' should be fixed */
     t[*size] = '\n';
     return t;
 }

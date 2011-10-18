@@ -22,8 +22,9 @@
 
 #define TEST_SUITE_NAME "/lib"
 
-#include <check.h>
+#include <config.h>
 
+#include <check.h>
 
 #include "lib/global.h"
 #include "lib/strutil.h"

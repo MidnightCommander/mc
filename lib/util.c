@@ -431,7 +431,6 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
     static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
     static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
     int j = 0;
-    int size_remain;
 
     if (len == 0)
         len = 9;
@@ -453,6 +452,8 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
     if (use_si)
         for (j = 0; j < units; j++)
         {
+            uintmax_t size_remain;
+
             size_remain = ((size % 125) * 1024) / 1000; /* size mod 125, recalculated */
             size = size / 125;  /* 128/125 = 1024/1000 */
             size = size * 128;  /* This will convert size from multiple of 1024 to multiple of 1000 */

@@ -2887,9 +2887,6 @@ Refresh the screen.
 .B C\-o
 Switch to the subshell and show the command screen.
 .PP
-.B !
-Like C\-o, but run a new shell if the subshell is not running.
-.PP
 .B "[n] m"
 Set the mark n.
 .PP
@@ -3532,8 +3529,8 @@ with the assignment of colors, as described in Section
 Colors\&.
 .\"Colors"
 .PP
-If your skin contains any of 256\-color definitions, you should define the
-'256colors' key set to TRUE value in [skin] section.
+If your skin contains any of 256\-color definitions, you should define
+the '256colors' key set to TRUE value in [skin] section.
 
 .PP
 A skin\-file is searched on the following algorithm (to the first one found):

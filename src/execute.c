@@ -68,7 +68,7 @@ edition_post_exec (void)
     tty_raw_mode ();
     channels_up ();
     enable_mouse ();
-    if (alternate_plus_minus)
+    if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 }
 
@@ -81,7 +81,7 @@ edition_pre_exec (void)
         clr_scr ();
     else
     {
-        if (!(mc_global.tty.console_flag || mc_global.tty.xterm_flag))
+        if (!(mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag))
             printf ("\n\n");
     }
 
@@ -135,7 +135,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         save_cwds_stat ();
     pre_exec ();
-    if (mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_RESTORE);
 
     if (!mc_global.tty.use_subshell && command && !(flags & EXECUTE_INTERNAL))
@@ -159,7 +159,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
     {
         if ((pause_after_run == pause_always
              || (pause_after_run == pause_on_dumb_terminals && !mc_global.tty.xterm_flag
-                 && !mc_global.tty.console_flag)) && quit == 0
+                 && mc_global.tty.console_flag == '\0')) && quit == 0
 #ifdef HAVE_SUBSHELL_SUPPORT
             && subshell_state != RUNNING_COMMAND
 #endif /* HAVE_SUBSHELL_SUPPORT */
@@ -172,7 +172,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
             printf ("\r\n");
             fflush (stdout);
         }
-        if (mc_global.tty.console_flag)
+        if (mc_global.tty.console_flag != '\0')
         {
             if (output_lines && mc_global.keybar_visible)
             {
@@ -182,7 +182,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
         }
     }
 
-    if (mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_SAVE);
     edition_post_exec ();
 
@@ -215,7 +215,7 @@ do_suspend_cmd (void)
 {
     pre_exec ();
 
-    if (mc_global.tty.console_flag && !mc_global.tty.use_subshell)
+    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
         handle_console (CONSOLE_RESTORE);
 
 #ifdef SIGTSTP
@@ -234,7 +234,7 @@ do_suspend_cmd (void)
     }
 #endif /* SIGTSTP */
 
-    if (mc_global.tty.console_flag && !mc_global.tty.use_subshell)
+    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
         handle_console (CONSOLE_SAVE);
 
     edition_post_exec ();
@@ -312,7 +312,7 @@ toggle_panels (void)
     disable_mouse ();
     if (clear_before_exec)
         clr_scr ();
-    if (alternate_plus_minus)
+    if (mc_global.tty.alternate_plus_minus)
         numeric_keypad_mode ();
 #ifndef HAVE_SLANG
     /* With slang we don't want any of this, since there
@@ -325,7 +325,7 @@ toggle_panels (void)
     tty_reset_screen ();
     do_exit_ca_mode ();
     tty_raw_mode ();
-    if (mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_RESTORE);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -348,7 +348,7 @@ toggle_panels (void)
             get_key_code (0);
     }
 
-    if (mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_SAVE);
 
     do_enter_ca_mode ();
@@ -374,7 +374,7 @@ toggle_panels (void)
 
     enable_mouse ();
     channels_up ();
-    if (alternate_plus_minus)
+    if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -383,7 +383,7 @@ toggle_panels (void)
         load_prompt (0, NULL);
         if (new_dir)
             do_possible_cd (new_dir);
-        if (mc_global.tty.console_flag && output_lines)
+        if (mc_global.tty.console_flag != '\0' && output_lines)
             show_console_contents (output_start_y,
                                    LINES - mc_global.keybar_visible - output_lines -
                                    1, LINES - mc_global.keybar_visible - 1);

@@ -669,6 +669,12 @@ str_utf8_term_trim (const char *text, int width)
     const struct term_form *pre_form;
     struct utf8_tool tool;
 
+    if (width < 1)
+    {
+        result [0] = '\0';
+        return result;
+    }
+
     pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
 
     tool.cheked = pre_form->text;

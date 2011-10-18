@@ -88,7 +88,7 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
     ssize_t ret;
 
     /* Is tty console? */
-    if (!mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag == '\0')
         return;
     /* Paranoid: Is the cons.saver still running? */
     if (cons_saver_pid < 1 || kill (cons_saver_pid, SIGCONT))
@@ -128,7 +128,7 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-handle_console_linux (unsigned char action)
+handle_console_linux (console_action_t action)
 {
     char *tty_name;
     char *mc_conssaver;
@@ -166,7 +166,7 @@ handle_console_linux (unsigned char action)
             status = close (pipefd2[1]);
             /* Was the child successful? */
             status = read (pipefd2[0], &mc_global.tty.console_flag, 1);
-            if (!mc_global.tty.console_flag)
+            if (mc_global.tty.console_flag == '\0')
             {
                 pid_t ret;
                 status = close (pipefd1[1]);
@@ -216,7 +216,7 @@ handle_console_linux (unsigned char action)
     case CONSOLE_SAVE:
     case CONSOLE_RESTORE:
         /* Is tty console? */
-        if (!mc_global.tty.console_flag)
+        if (mc_global.tty.console_flag == '\0')
             return;
         /* Paranoid: Is the cons.saver still running? */
         if (cons_saver_pid < 1 || kill (cons_saver_pid, SIGCONT))
@@ -232,7 +232,7 @@ handle_console_linux (unsigned char action)
             /* Wait the console handler to do its job */
             status = read (pipefd2[0], &mc_global.tty.console_flag, 1);
         }
-        if (action == CONSOLE_DONE || !mc_global.tty.console_flag)
+        if (action == CONSOLE_DONE || mc_global.tty.console_flag == '\0')
         {
             /* We are done -> Let's clean up */
             pid_t ret;
@@ -241,6 +241,8 @@ handle_console_linux (unsigned char action)
             ret = waitpid (cons_saver_pid, &status, 0);
             mc_global.tty.console_flag = '\0';
         }
+        break;
+    default:
         break;
     }
 }
@@ -256,7 +258,7 @@ handle_console_linux (unsigned char action)
 static void
 console_init (void)
 {
-    if (mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag != '\0')
         return;
 
     screen_info.size = sizeof (screen_info);
@@ -297,7 +299,7 @@ console_restore (void)
 {
     int i, last;
 
-    if (!mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag == '\0')
         return;
 
     cursor_to (0, 0);
@@ -321,7 +323,7 @@ console_restore (void)
 static void
 console_shutdown (void)
 {
-    if (!mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag == '\0')
         return;
 
     g_free (screen_shot.buf);
@@ -338,7 +340,7 @@ console_save (void)
     scrmap_t map;
     scrmap_t revmap;
 
-    if (!mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag == '\0')
         return;
 
     /* screen_info.size is already set in console_init() */
@@ -376,8 +378,8 @@ console_save (void)
     for (i = 0; i < screen_shot.xsize * screen_shot.ysize; i++)
     {
         screen_shot.buf[i] =
-            (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.
-            scrmap[screen_shot.buf[i] & 0xff];
+            (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.scrmap[screen_shot.
+                                                                          buf[i] & 0xff];
     }
 }
 
@@ -389,7 +391,7 @@ show_console_contents_freebsd (int starty, unsigned char begin_line, unsigned ch
     int col, line;
     char c;
 
-    if (!mc_global.tty.console_flag)
+    if (mc_global.tty.console_flag == '\0')
         return;
 
     for (line = begin_line; line <= end_line; line++)
@@ -406,7 +408,7 @@ show_console_contents_freebsd (int starty, unsigned char begin_line, unsigned ch
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-handle_console_freebsd (unsigned char action)
+handle_console_freebsd (console_action_t action)
 {
     switch (action)
     {
@@ -424,6 +426,8 @@ handle_console_freebsd (unsigned char action)
 
     case CONSOLE_RESTORE:
         console_restore ();
+        break;
+    default:
         break;
     }
 }
@@ -455,7 +459,7 @@ show_console_contents (int starty, unsigned char begin_line, unsigned char end_l
 /* --------------------------------------------------------------------------------------------- */
 
 void
-handle_console (unsigned char action)
+handle_console (console_action_t action)
 {
     (void) action;
 

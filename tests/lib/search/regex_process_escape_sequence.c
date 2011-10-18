@@ -22,6 +22,8 @@
 
 #define TEST_SUITE_NAME "lib/search/regex"
 
+#include <config.h>
+
 #include <check.h>
 
 #include "regex.c" /* for testing static functions*/

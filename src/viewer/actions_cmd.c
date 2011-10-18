@@ -252,7 +252,6 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         {
             ev_help_t event_data = { NULL, "[Internal File Viewer]" };
             mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-            do_refresh ();
         }
         break;
     case CK_WrapMode:

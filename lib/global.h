@@ -258,6 +258,11 @@ typedef struct
 
         /* Tries to use old highlight mouse tracking */
         gboolean old_mouse;
+
+        /* If true, use + and \ keys normally and select/unselect do if M-+ / M-\.
+           and M-- and keypad + / - */
+        gboolean alternate_plus_minus;
+
     } tty;
 
     struct
