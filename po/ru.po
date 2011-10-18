@@ -4,13 +4,14 @@
 #
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
+# Andrew Borodin <aborodin@vmail.ru>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2011-09-28 21:18+0300\n"
 "PO-Revision-Date: 2011-09-28 17:23+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"Last-Translator: aborodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.net/projects/p/mc/team/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -883,7 +884,7 @@ msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Пытаться использовать старый способ подсветки трэкинка мыши"
 
 msgid "Disable mouse support in text version"
 msgstr "Отключить поддержку мыши в текстовой версии"
@@ -2052,21 +2053,17 @@ msgstr "присв. GID при выполнении"
 msgid "set user ID on execution"
 msgstr "присв. UID при выполнении"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Имя"
+msgstr "Имя:"
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Доступ (восьмеричный)"
+msgstr "Доступ (восьмеричный):"
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Имя владельца"
+msgstr "Владелец:"
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Имя группы"
+msgstr "Группа:"
 
 msgid "C&lear marked"
 msgstr "&Очистить помеченное"
@@ -2269,9 +2266,9 @@ msgstr "Настройка"
 msgid "Setup saved to ~/%s"
 msgstr "Параметры сохранены в ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Невозможно сохранить в файл"
+msgstr "Невозможно сохранить установки в ~/%s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Невозможно выполнять команды на нелокальных файловых системах"
@@ -3993,15 +3990,3 @@ msgstr "Поиск закончен"
 
 msgid "Continue from beginning?"
 msgstr "Продолжить с начала?"
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "ПРОБЕЛ - для изменений"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "опций, КЛАВИШИ-СТРЕЛКИ -"
-
-#~ msgid "to move between options"
-#~ msgstr "перемещения между настройками"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "и T или INS для пометки"
