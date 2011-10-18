@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+#   <mbouzada@gmail.com>, 2011.
 # mbouzada <mbouzada@gmail.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
@@ -10,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 00:32+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"PO-Revision-Date: 2011-09-20 09:48+0000\n"
+"Last-Translator: mbouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.net/projects/p/mc/team/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,24 +31,24 @@ msgid "Cannot translate from %s to %s"
 msgstr "Non é posíbel converter de %s a %s"
 
 msgid "Event system already initialized"
-msgstr ""
+msgstr "O sistema de accións xa foi iniciado"
 
 msgid "Failed to initialize event system"
-msgstr ""
+msgstr "Non foi posíbel iniciar o sistema de accións"
 
 msgid "Event system not initialized"
-msgstr ""
+msgstr "O sistema de accións non foi iniciado"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr ""
+msgstr "Verifique os datos de entrada! Hai parámetros nulos!"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr ""
+msgstr "Non foi posíbel crear o grupo «%s» para accións!"
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr ""
+msgstr "Non foi posíbel crear a acción «%s»!"
 
 #, c-format
 msgid ""
@@ -74,7 +75,7 @@ msgstr "Non é posíbel crear o directorio %s"
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
-msgstr ""
+msgstr "Produciuse un erro na migración da configuración do usuario: %s"
 
 #, c-format
 msgid ""
@@ -83,6 +84,10 @@ msgid ""
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 msgstr ""
+"A configuración antiga foi trasladada de %s\n"
+"cara os directorios recomendados por Freedesktop.\n"
+"Para obter máis detalles consulte\n"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 msgid "Search string not found"
 msgstr "Non se atopa a cadea buscada"
@@ -100,7 +105,7 @@ msgid "Invalid token number %d"
 msgstr "O elemento número %d é incorrecto"
 
 msgid "Regular expression error"
-msgstr ""
+msgstr "Atopouse un erro nunha expresión regular"
 
 msgid "Normal"
 msgstr "Normal"
@@ -136,6 +141,9 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
+"Non é posíbel empregar o tema «%s» con compatibilidade\n"
+"para 256 colores en terminais sen esta característica.\n"
+"Cargouse o tema predeterminado"
 
 msgid "Function key 1"
 msgstr "Tecla «F1»"
@@ -525,10 +533,10 @@ msgid "Print data directory"
 msgstr "Mostrar directorio de datos"
 
 msgid "Print extended info about used data directories"
-msgstr ""
+msgstr "Mostrar información adicional sobre directorios usados"
 
 msgid "Print configure options"
-msgstr ""
+msgstr "Mostrar as opcións de configuración"
 
 msgid "Print last working directory to specified file"
 msgstr "Mostrar o último directorio de traballo para o ficheiro especificado"
@@ -573,7 +581,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Cargar asociacións de teclas desde o ficheiro indicado"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
+msgstr "Non cargar as asociacións de teclas, empregar as predeterminadas"
 
 msgid "Requests to run in black and white"
 msgstr "Solicitar execución en branco e negro"
@@ -607,6 +615,23 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors CONTEXTO={FRENTE},{FONDO},{ATRIBUTOS}:CONTEXTO2=...\n"
+"\n"
+"{FRENTE}, {FONDO} e {ATRIBUTOS}poden omitirse, empregarase o valor predeterminado\n"
+"\n"
+" Contextos:\n"
+"   Globais:            errors, disabled, reverse, gauge, header\n"
+"                       input, inputmark, inputunchanged, commandlinemark\n"
+"                       bbarhotkey, bbarbutton, statusbar\n"
+"   Visor de ficheiros: normal, selected, marked, markselect\n"
+"   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                       errdhotfocus\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús emerxentes:   pmenunormal, pmenusel, pmenutitle\n"
+"   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
+"                       editlinestate\n"
+"   Visor:              viewbold, viewunderline, viewselected\n"
+"   Axuda:              helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -621,6 +646,16 @@ msgid ""
 "Attributes:\n"
 "   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
+"Cores estándar:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+"Cores estendidas, cando estean dispoñíbeis 256 cores::\n"
+"   color16 a color255, ou rgb000 a rgb555 e gray0 a gray23\n"
+"\n"
+"Atributos:\n"
+"   bold, underline, reverse, blink; engadir máis empregando «+»\n"
 
 msgid "Color options"
 msgstr "Opcións de cor"
@@ -973,7 +1008,7 @@ msgid "Press macro hotkey:"
 msgstr "Prema a tecla de macro:"
 
 msgid "Macro not deleted"
-msgstr ""
+msgstr "Macro non eliminada"
 
 msgid "Save macro"
 msgstr "Gardar macro"
@@ -982,10 +1017,10 @@ msgid "Press the macro's new hotkey:"
 msgstr "Prema a nova tecla para a macro:"
 
 msgid "Repeat last commands"
-msgstr ""
+msgstr "Repetir as últimas ordes"
 
 msgid "Repeat times:"
-msgstr ""
+msgstr "Número de repeticións:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1165,7 +1200,7 @@ msgid "&Undo"
 msgstr "&Desfacer"
 
 msgid "&Redo"
-msgstr ""
+msgstr "&Refacer"
 
 msgid "&Toggle ins/overw"
 msgstr "Alternar &Inserción"
@@ -1225,7 +1260,7 @@ msgid "&Prev bookmark"
 msgstr "Marcador ante&Rior"
 
 msgid "&Flush bookmarks"
-msgstr ""
+msgstr "Limpar &Todos os marcadores"
 
 msgid "&Go to line..."
 msgstr "&Ir á liña "
@@ -1255,13 +1290,13 @@ msgid "&Refresh screen"
 msgstr "&Actualizar a pantalla"
 
 msgid "&Start/Stop record macro"
-msgstr ""
+msgstr "Iniciar/parar gravación da &Macro"
 
 msgid "Delete macr&o..."
 msgstr "Eliminar macr&O "
 
 msgid "Record/Repeat &actions"
-msgstr ""
+msgstr "Gravar/repetir &Accións"
 
 msgid "'ispell' s&pell check"
 msgstr "Corrixir orto&Grafía con «ispell»"
@@ -1339,7 +1374,7 @@ msgid "Word wrap line length:"
 msgstr "Lonxitude do axuste de liña:"
 
 msgid "&Group undo"
-msgstr ""
+msgstr "Desfacer no &Grupo"
 
 msgid "Cursor beyond end of line"
 msgstr "Cursor vai ata á fin da &Liña"
@@ -1683,16 +1718,16 @@ msgid "set user ID on execution"
 msgstr "estabelecer ID do usuario ao executar"
 
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 msgid "Permissions (octal):"
-msgstr ""
+msgstr "Permisos (octal):"
 
 msgid "Owner name:"
-msgstr ""
+msgstr "Nome do propietario:"
 
 msgid "Group name:"
-msgstr ""
+msgstr "Nome do grupo"
 
 msgid "C&lear marked"
 msgstr "&Limpar marcados"
@@ -1893,11 +1928,11 @@ msgstr "Configuración"
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr ""
+msgstr "Configuración gardada en %s"
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr ""
+msgstr "Non foi posíbel gardar a configuración en %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Non é posíbel executar ordes desde sistemas de ficheiros non locais"
@@ -1940,7 +1975,7 @@ msgstr ""
 
 #, c-format
 msgid "%s%s%s file error"
-msgstr ""
+msgstr "Produciuse un erro no ficheiro %s%s%s"
 
 #, c-format
 msgid ""
@@ -1948,6 +1983,8 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write"
 " it."
 msgstr ""
+"O formato do ficheiro %s%s%s cambiou coa versión 3.0. Pode facer unha copia "
+"de %smc.ext ou empregalo como modelo."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Copiar"
@@ -2034,7 +2071,7 @@ msgid "&Abort"
 msgstr "&Interromper"
 
 msgid "Ski&p all"
-msgstr ""
+msgstr "omitir &Todos"
 
 msgid "&Retry"
 msgstr "&Reintentar"
@@ -2483,7 +2520,7 @@ msgid "File name:"
 msgstr "Nome do ficheiro:"
 
 msgid "Ena&ble ignore directories:"
-msgstr ""
+msgstr "i&Gnorar directorios..."
 
 msgid "Start at:"
 msgstr "Comezar en:"
@@ -2498,8 +2535,8 @@ msgstr "Rematado"
 #, c-format
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Rematado (%zd directorio ignorado)"
+msgstr[1] "Rematado (%zd directorios ignorados)"
 
 #, c-format
 msgid "Searching %s"
@@ -2816,7 +2853,7 @@ msgid "U&nselect group"
 msgstr "Desmarcar g&Rrupo"
 
 msgid "&Invert selection"
-msgstr ""
+msgstr "&Inverter a selección"
 
 msgid "E&xit"
 msgstr "&Saír"
@@ -2840,7 +2877,7 @@ msgid "&Compare directories"
 msgstr "&Comparar directorios "
 
 msgid "C&ompare files"
-msgstr ""
+msgstr "c&Omparar ficheiros"
 
 msgid "E&xternal panelize"
 msgstr "Paneis e&Xternos"
@@ -3044,7 +3081,7 @@ msgid "A&uto save panels setup"
 msgstr "Configuración de &Auto-gardar "
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "intercambio &Simple de paneis"
 
 msgid "Re&verse files only"
 msgstr "In&Verter só ficheiros"
@@ -3068,7 +3105,7 @@ msgid "Use SI si&ze units"
 msgstr "Tama&Ños en unidades SI"
 
 msgid "Show mi&ni-status"
-msgstr ""
+msgstr "Mostrar m&Ini-estado"
 
 msgid "Panel options"
 msgstr "Opcións dos paneis "
@@ -3440,6 +3477,8 @@ msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
+"Non foi posíbel executar:\n"
+"%s\n"
 
 #, c-format
 msgid ""
@@ -3447,6 +3486,9 @@ msgid ""
 "Failed while close:\n"
 "%s\n"
 msgstr ""
+"\n"
+"Non foi posíbel pechar:\n"
+"%s\n"
 
 msgid "Choose codepage"
 msgstr "Seleccionar xogo de caracteres "
@@ -3518,7 +3560,7 @@ msgid "With mouse support on xterm\n"
 msgstr "Compatibilidade para rato en xterm\n"
 
 msgid "With support for X11 events\n"
-msgstr "Compatibilidade para eventos X11\n"
+msgstr "Compatibilidade para accións X11\n"
 
 msgid "With internationalization support\n"
 msgstr "Compatibilidade para internacionalización\n"
@@ -3539,19 +3581,19 @@ msgid "Data types:"
 msgstr "Tipos de datos:"
 
 msgid "System data"
-msgstr ""
+msgstr "Datos do sistema"
 
 msgid "Config directory:"
-msgstr ""
+msgstr "Directorio de configuración:"
 
 msgid "Data directory:"
-msgstr ""
+msgstr "Directorio de datos:"
 
 msgid "User data"
-msgstr ""
+msgstr "Datos do usuario"
 
 msgid "Cache directory:"
-msgstr ""
+msgstr "Directorio de caché:"
 
 #, c-format
 msgid ""
@@ -3734,7 +3776,7 @@ msgstr "ftpfs: fracasou a conexión ao servidor: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr ""
+msgstr "Agardando antes de volver tentar... %d (Ctrl-G para cancelar)"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: familia de enderezos incorrecta"
@@ -3790,7 +3832,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr ""
+msgstr "%s: Aviso: non é posíbel atopar o ficheiro %s\n"
 
 #, c-format
 msgid ""
@@ -4032,6 +4074,6 @@ msgid "Search done"
 msgstr "Busca rematada"
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "Continuar desde o principio?"
 
 

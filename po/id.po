@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 00:32+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"PO-Revision-Date: 2011-10-08 02:57+0000\n"
+"Last-Translator: andika <andika@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.net/projects/p/mc/team/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -309,16 +309,16 @@ msgid "Dot"
 msgstr "Dot"
 
 msgid "Less than"
-msgstr ""
+msgstr "Kurang dari"
 
 msgid "Great than"
-msgstr ""
+msgstr "Lebih dari"
 
 msgid "Equal"
-msgstr ""
+msgstr "Sama"
 
 msgid "Comma"
-msgstr ""
+msgstr "Koma"
 
 msgid "Apostrophe"
 msgstr ""
@@ -327,10 +327,10 @@ msgid "Colon"
 msgstr ""
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Tanda seru"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Tanda tanya"
 
 msgid "Ampersand"
 msgstr ""
@@ -360,34 +360,34 @@ msgid "Pipe"
 msgstr ""
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "Kurung buka"
 
 msgid "Right parenthesis"
-msgstr ""
+msgstr "Kurung tutup"
 
 msgid "Left bracket"
-msgstr ""
+msgstr "Kurung siku buka"
 
 msgid "Right bracket"
-msgstr ""
+msgstr "Kurung siku tutup"
 
 msgid "Left brace"
-msgstr ""
+msgstr "Kurung kurawal buka"
 
 msgid "Right brace"
-msgstr ""
+msgstr "Kurung kurawal tutup"
 
 msgid "Enter"
-msgstr ""
+msgstr "Enter"
 
 msgid "Tab key"
-msgstr ""
+msgstr "Tab"
 
 msgid "Space key"
-msgstr ""
+msgstr "Tombol spasi"
 
 msgid "Slash key"
-msgstr ""
+msgstr "Tombol garis miring"
 
 msgid "Backslash key"
 msgstr ""
@@ -400,13 +400,13 @@ msgid "At sign"
 msgstr ""
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #, c-format
 msgid ""
