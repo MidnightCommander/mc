@@ -1,25 +1,27 @@
-/* Command line widget.
+/*
+   Command line widget.
+   This widget is derived from the WInput widget, it's used to cope
+   with all the magic of the command input line, we depend on some
+   help from the program's callback.
+
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007 Free Software Foundation, Inc.
+   2007, 2011
+   The Free Software Foundation, Inc.
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This file is part of the Midnight Commander.
 
-   This program is distributed in the hope that it will be useful,
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-
-   This widget is derived from the WInput widget, it's used to cope
-   with all the magic of the command input line, we depend on some
-   help from the program's callback.
-
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /** \file command.c
@@ -321,7 +323,7 @@ do_cd_command (char *orig_cmd)
 
     cmd = orig_cmd;
     if (cmd[CD_OPERAND_OFFSET - 1] == 0)
-        cmd = "cd "; /* 0..2 => given text, 3 => \0 */
+        cmd = "cd ";            /* 0..2 => given text, 3 => \0 */
 
     /* allow any amount of white space in front of the path operand */
     while (cmd[operand_pos] == ' ' || cmd[operand_pos] == '\t')

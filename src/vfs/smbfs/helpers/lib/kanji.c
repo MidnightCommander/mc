@@ -1,27 +1,32 @@
-/* 
+/*
    Unix SMB/Netbios implementation.
    Version 1.9.
    Kanji Extensions
+
    Copyright (C) Andrew Tridgell 1992-1998
-   
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-   
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-   
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+   Copyright (C) 2011
+   The Free Software Foundation, Inc.
 
    Adding for Japanese language by <fujita@ainix.isac.co.jp> 1994.9.5
      and extend coding system to EUC/SJIS/JIS/HEX at 1994.10.11
      and add all jis codes sequence type at 1995.8.16
      Notes: Hexadecimal code by <ohki@gssm.otuka.tsukuba.ac.jp>
+
+  This file is part of the Midnight Commander.
+
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #define _KANJI_C_

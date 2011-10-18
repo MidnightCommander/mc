@@ -1,23 +1,28 @@
-/* Find file command for the Midnight Commander
+/*
+   Find file command for the Midnight Commander
+
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007 Free Software Foundation, Inc.
-   Written 1995 by Miguel de Icaza
+   2006, 2007, 2011
+   The Free Software Foundation, Inc.
 
-   Complete rewrite.
+   Written  by:
+   Miguel de Icaza, 1995
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This file is part of the Midnight Commander.
 
-   This program is distributed in the hope that it will be useful,
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 /** \file find.c
  *  \brief Source: Find file command
@@ -212,9 +217,9 @@ static mc_search_t *search_content_handle = NULL;
 static void
 parse_ignore_dirs (const char *ignore_dirs)
 {
-    size_t r = 0, w = 0;    /* read and write iterators */
+    size_t r = 0, w = 0;        /* read and write iterators */
 
-    if (!options.ignore_dirs_enable || ignore_dirs == NULL  || ignore_dirs[0] == '\0')
+    if (!options.ignore_dirs_enable || ignore_dirs == NULL || ignore_dirs[0] == '\0')
         return;
 
     find_ignore_dirs = g_strsplit (ignore_dirs, ":", -1);
@@ -492,7 +497,7 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
  */
 
 static gboolean
-find_parameters (char **start_dir, ssize_t *start_dir_len,
+find_parameters (char **start_dir, ssize_t * start_dir_len,
                  char **ignore_dirs, char **pattern, char **content)
 {
     gboolean return_value;
@@ -638,7 +643,7 @@ find_parameters (char **start_dir, ssize_t *start_dir_len,
     add_widget (find_dlg, in_name);
     add_widget (find_dlg, label_new (7, 3, _("File name:")));
 
-    in_ignore = input_new (5, 3, input_get_default_colors (),  FIND_X - 6,
+    in_ignore = input_new (5, 3, input_get_default_colors (), FIND_X - 6,
                            options.ignore_dirs != NULL ? options.ignore_dirs : "",
                            "ignoredirs", INPUT_COMPLETE_DEFAULT);
     widget_disable (in_ignore->widget, !options.ignore_dirs_enable);
@@ -1094,8 +1099,8 @@ find_ignore_dir_search (const char *dir)
             /* handle absolute and relative paths */
             switch (iabs | dabs)
             {
-            case 0: /* both paths are relative */
-            case 3: /* both paths are abolute */
+            case 0:            /* both paths are relative */
+            case 3:            /* both paths are abolute */
                 /* if ignore dir is not a path  of dir -- skip it */
                 if (strncmp (dir, *ignore_dir, ilen) == 0)
                 {
@@ -1105,7 +1110,7 @@ find_ignore_dir_search (const char *dir)
                         return TRUE;
                 }
                 break;
-            case 1: /* dir is absolute, ignore_dir is relative */
+            case 1:            /* dir is absolute, ignore_dir is relative */
                 {
                     char *d;
 
@@ -1114,10 +1119,10 @@ find_ignore_dir_search (const char *dir)
                         return TRUE;
                 }
                 break;
-            case 2: /* dir is relative, ignore_dir is absolute */
+            case 2:            /* dir is relative, ignore_dir is absolute */
                 /* FIXME: skip this case */
                 break;
-            default: /* this cannot occurs */
+            default:           /* this cannot occurs */
                 return FALSE;
             }
         }
@@ -1257,7 +1262,7 @@ do_search (Dlg_head * h)
             gboolean search_ok;
 
             if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
-            {                           /* Can directory be NULL ? */
+            {                   /* Can directory be NULL ? */
                 /* handle relative ignore dirs here */
                 if (options.ignore_dirs_enable && find_ignore_dir_search (dp->d_name))
                     ignore_count++;
@@ -1652,7 +1657,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
                 continue;
             }
 
-            if (next_free == 0)     /* first turn i.e clean old list */
+            if (next_free == 0) /* first turn i.e clean old list */
                 panel_clean_dir (current_panel);
             list->list[next_free].fnamelen = strlen (p);
             list->list[next_free].fname = g_strdup (p);

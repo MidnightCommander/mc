@@ -1,24 +1,26 @@
-/* editor menu definitions and initialisation
+/*
+   Editor menu definitions and initialisation
 
-   Copyright (C) 1996, 1998, 2001, 2002, 2003, 2005, 2007
-   Free Software Foundation, Inc.
+   Copyright (C) 1996, 1998, 2001, 2002, 2003, 2005, 2007, 2011
+   The Free Software Foundation, Inc.
 
-   Authors: 1996, 1997 Paul Sheer
+   Written by:
+   Paul Sheer, 1996, 1997
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This file is part of the Midnight Commander.
 
-   This program is distributed in the hope that it will be useful,
+   The Midnight Commander is free software: you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301, USA.
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /** \file
@@ -144,16 +146,14 @@ create_command_menu (void)
     GList *entries = NULL;
 
     entries = g_list_append (entries, menu_entry_create (_("&Go to line..."), CK_Goto));
-    entries =
-        g_list_append (entries, menu_entry_create (_("&Toggle line state"), CK_ShowNumbers));
+    entries = g_list_append (entries, menu_entry_create (_("&Toggle line state"), CK_ShowNumbers));
     entries =
         g_list_append (entries, menu_entry_create (_("Go to matching &bracket"), CK_MatchBracket));
     entries =
         g_list_append (entries,
                        menu_entry_create (_("Toggle s&yntax highlighting"), CK_SyntaxOnOff));
     entries = g_list_append (entries, menu_separator_create ());
-    entries =
-        g_list_append (entries, menu_entry_create (_("&Find declaration"), CK_Find));
+    entries = g_list_append (entries, menu_entry_create (_("&Find declaration"), CK_Find));
     entries = g_list_append (entries, menu_entry_create (_("Back from &declaration"), CK_FilePrev));
     entries =
         g_list_append (entries, menu_entry_create (_("For&ward to declaration"), CK_FileNext));
