@@ -3346,7 +3346,7 @@ msgid "With mouse support on xterm\n"
 msgstr ""
 
 msgid "With support for X11 events\n"
-msgstr "Con supporto pro evenimentos X11\\n"
+msgstr "Con supporto pro evenimentos X11\n"
 
 msgid "With internationalization support\n"
 msgstr ""
