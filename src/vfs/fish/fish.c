@@ -1445,6 +1445,18 @@ fish_rmdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+fish_fh_free_data (vfs_file_handler_t * fh)
+{
+    if (fh != NULL)
+    {
+        g_free (fh->data);
+        fh->data = NULL;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
@@ -1476,19 +1488,8 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
     return 0;
 
   fail:
-    g_free (fh->data);
+    fish_fh_free_data (fh);
     return -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-fish_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
-{
-    (void) me;
-
-    g_free (fh->data);
-    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1561,7 +1562,7 @@ init_fish (void)
     fish_subclass.open_archive = fish_open_archive;
     fish_subclass.free_archive = fish_free_archive;
     fish_subclass.fh_open = fish_fh_open;
-    fish_subclass.fh_close = fish_fh_close;
+    fish_subclass.fh_free_data = fish_fh_free_data;
     fish_subclass.dir_load = fish_dir_load;
     fish_subclass.file_store = fish_file_store;
     fish_subclass.linear_start = fish_linear_start;

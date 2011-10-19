@@ -2102,6 +2102,18 @@ ftpfs_rmdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+ftpfs_fh_free_data (vfs_file_handler_t *fh)
+{
+    if (fh != NULL)
+    {
+        g_free (fh->data);
+        fh->data = NULL;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
@@ -2170,7 +2182,7 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
     return 0;
 
   fail:
-    g_free (fh->data);
+    ftpfs_fh_free_data (fh);
     return -1;
 }
 
@@ -2193,8 +2205,6 @@ ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
             ERRNOR (EIO, -1);
         vfs_s_invalidate (me, FH_SUPER);
     }
-
-    g_free (fh->data);
 
     return 0;
 }
@@ -2556,6 +2566,7 @@ init_ftpfs (void)
     ftpfs_subclass.free_archive = ftpfs_free_archive;
     ftpfs_subclass.fh_open = ftpfs_fh_open;
     ftpfs_subclass.fh_close = ftpfs_fh_close;
+    ftpfs_subclass.fh_free_data = ftpfs_fh_free_data;
     ftpfs_subclass.dir_load = ftpfs_dir_load;
     ftpfs_subclass.file_store = ftpfs_file_store;
     ftpfs_subclass.linear_start = ftpfs_linear_start;
