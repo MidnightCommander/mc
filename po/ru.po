@@ -18,15 +18,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
+"POT-Creation-Date: 2011-10-19 14:23+0400\n"
 "PO-Revision-Date: 2011-09-09 08:17+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.net/projects/p/mc/team/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Внимание: невозможно загрузить список кодировок"
@@ -91,7 +92,8 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr "Ваши старые настройки перенесены из %s\n"
+msgstr ""
+"Ваши старые настройки перенесены из %s\n"
 "в директории, рекомендованные FreeDesktop.org.\n"
 "Для более полной информации посетите страницу\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
@@ -358,6 +360,9 @@ msgstr "Знак доллара"
 msgid "Quotation mark"
 msgstr "Знак цитирования"
 
+msgid "Percent sign"
+msgstr "Знак процента"
+
 msgid "Caret"
 msgstr "Каретка"
 
@@ -424,6 +429,9 @@ msgstr "Alt"
 
 msgid "Shift"
 msgstr "Shift"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Переменная среды TERM не определена!\n"
 
 #, c-format
 msgid ""
@@ -570,6 +578,9 @@ msgstr "Редактировать файл"
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
 
+msgid "Tries to use an old highlight mouse tracking"
+msgstr "Пытаться использовать старый способ трэкинга мыши"
+
 msgid "Disable mouse support in text version"
 msgstr "Отключить поддержку мыши в текстовой версии"
 
@@ -589,7 +600,8 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Чтение определений привязок клавиш из указанного файла"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr "Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
+msgstr ""
+"Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
 
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
@@ -625,7 +637,8 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
 "\n"
-"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n"
+"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по "
+"умолчанию\n"
 "\n"
 "Ключевые слова:\n"
 "   Общие:              errors, disabled, reverse, gauge, header\n"
@@ -667,7 +680,8 @@ msgstr ""
 "   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
 "\n"
 "Атрибуты:\n"
-"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком \"+\"\n"
+"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком "
+"\"+\"\n"
 
 msgid "Color options"
 msgstr "Цветовые настройки"
@@ -1601,8 +1615,7 @@ msgstr "Порядок сортировки"
 msgid "Confirmation"
 msgstr "Подтверждение"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "&Очистка истории"
@@ -1990,11 +2003,11 @@ msgstr "Ошибка в файле %s%s%s"
 #, c-format
 msgid ""
 "The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"Формат файла %s%s%s изменён с версии 3.0. Вы можете либо скопировать его с "
-"%smc.ext, либо использовать этот файл как пример и написать свой."
+"Формат файла %s%s%s изменён с версии 3.0. Вы можете либо скопировать его с %"
+"smc.ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2064,7 +2077,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Невозможно создать устойчивые симв. ссылки через нелокальные файловые системы:\n"
+"Невозможно создать устойчивые симв. ссылки через нелокальные файловые "
+"системы:\n"
 "\n"
 "Опция \"Устойчивые символические ссылки\" будет отменена"
 
@@ -2544,9 +2558,9 @@ msgstr "Готово"
 #, c-format
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Завершено (пропущен %zd каталог)"
+msgstr[1] "Завершено (пропущен %zd каталога)"
+msgstr[2] "Завершено (пропущен %zd каталогов)"
 
 #, c-format
 msgid "Searching %s"
@@ -2946,9 +2960,6 @@ msgstr "Виртуальные &ФС..."
 
 msgid "Panels:"
 msgstr "Панели:"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Переменная среды TERM не определена!\n"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
@@ -3501,8 +3512,7 @@ msgid ""
 "%s\n"
 msgstr ""
 "\n"
-"Сбой при закрытии:"
-"%s\n"
+"Сбой при закрытии:%s\n"
 
 msgid "Choose codepage"
 msgstr "Выберите кодировку"
@@ -3601,6 +3611,9 @@ msgstr "Каталог с файлами настроек:"
 msgid "Data directory:"
 msgstr "Каталог с файлами данных:"
 
+msgid "VFS plugins and scripts:"
+msgstr "Модули и скрипты VFS:"
+
 msgid "User data"
 msgstr "Пльзовательские данные"
 
@@ -3678,8 +3691,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: ожидается начальная строка..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Извините, сейчас невозможно создать авторизованные паролем соединения."
+msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
 
 #, c-format
 msgid "fish: Password is required for %s"
