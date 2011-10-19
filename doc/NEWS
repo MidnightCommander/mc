@@ -1,3 +1,18 @@
+Version 4.8.0
+
+- Misc
+    * Code cleanup (#2620)
+    * License version updated to GPL3+ (#1551)
+    * Added new translation:
+        - Interlingua 
+
+- Fixes
+    * Viewer: cursor position is not restored in hex mode (#2543)
+    * fish: broken panels drawing after entering password (#2611)
+    * fish: content of modified file is appended instead of overwritten in the remote host (#2632)
+    * extfs: broken navigation in archives if current path is encoded (#2621)
+    * extfs: strange error message when opening a 7z file if p7zip is not installed (#2598)
+
 Version 4.8.0-pre2
 
 - Core
