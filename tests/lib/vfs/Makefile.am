@@ -3,6 +3,8 @@ AM_CFLAGS = -I$(top_srcdir)/lib/vfs $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS
 
 AM_LDFLAGS = -z muldefs
 
+EXTRA_DIST = mc.charsets
+
 LIBS=@CHECK_LIBS@  \
     $(top_builddir)/lib/libmc.la
 
