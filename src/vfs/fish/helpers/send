@@ -2,6 +2,7 @@
 FILENAME="/${FISH_FILENAME}"
 echo "### 001"
 {
+    > "${FILENAME}"
     bss=4096
     bsl=4095
     if [ $FISH_FILESIZE -lt $bss ]; then

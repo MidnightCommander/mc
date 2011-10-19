@@ -133,6 +133,7 @@ struct vfs_s_subclass
 
     int (*fh_open) (struct vfs_class * me, vfs_file_handler_t * fh, int flags, mode_t mode);
     int (*fh_close) (struct vfs_class * me, vfs_file_handler_t * fh);
+    void (*fh_free_data) (vfs_file_handler_t * fh);
 
     struct vfs_s_entry *(*find_entry) (struct vfs_class * me,
                                        struct vfs_s_inode * root,

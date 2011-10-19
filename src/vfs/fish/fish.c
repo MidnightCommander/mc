@@ -148,7 +148,7 @@ typedef struct
 {
     off_t got;
     off_t total;
-    int append;
+    gboolean append;
 } fish_fh_data_t;
 
 /*** file scope variables ************************************************************************/
@@ -908,7 +908,7 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
     vfs_print_message (_("fish: store %s: sending command..."), quoted_name);
 
     /* FIXME: File size is limited to ULONG_MAX */
-    if (!fish->append)
+    if (fish->append)
     {
         shell_commands =
             g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
@@ -1000,7 +1000,7 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
         return 0;
     quoted_name = strutils_shell_escape (name);
     g_free (name);
-    fish->append = 0;
+    fish->append = FALSE;
 
     /*
      * Check whether the remote file is readable by using `dd' to copy 
@@ -1445,6 +1445,18 @@ fish_rmdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+fish_fh_free_data (vfs_file_handler_t * fh)
+{
+    if (fh != NULL)
+    {
+        g_free (fh->data);
+        fh->data = NULL;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
@@ -1458,7 +1470,10 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
     /* File will be written only, so no need to retrieve it */
     if (((flags & O_WRONLY) == O_WRONLY) && ((flags & (O_RDONLY | O_RDWR)) == 0))
     {
-        fish->append = flags & O_APPEND;
+        /* user pressed the button [ Append ] in the "Copy" dialog */
+        if ((flags & O_APPEND) != 0)
+            fish->append = TRUE;
+
         if (!fh->ino->localname)
         {
             int tmp_handle = vfs_mkstemps (&fh->ino->localname, me->name,
@@ -1476,19 +1491,8 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
     return 0;
 
   fail:
-    g_free (fh->data);
+    fish_fh_free_data (fh);
     return -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-fish_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
-{
-    (void) me;
-
-    g_free (fh->data);
-    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1561,7 +1565,7 @@ init_fish (void)
     fish_subclass.open_archive = fish_open_archive;
     fish_subclass.free_archive = fish_free_archive;
     fish_subclass.fh_open = fish_fh_open;
-    fish_subclass.fh_close = fish_fh_close;
+    fish_subclass.fh_free_data = fish_fh_free_data;
     fish_subclass.dir_load = fish_dir_load;
     fish_subclass.file_store = fish_file_store;
     fish_subclass.linear_start = fish_linear_start;

@@ -730,6 +730,8 @@ vfs_s_close (void *fh)
         close (FH->handle);
 
     vfs_s_free_inode (me, FH->ino);
+    if (MEDATA->fh_free_data != NULL)
+        MEDATA->fh_free_data (fh);
     g_free (fh);
     return res;
 }
@@ -1264,11 +1266,18 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
             fh->linear = LS_LINEAR_PREOPEN;
         }
     }
-    else if ((VFSDATA (path_element)->fh_open != NULL)
-             && (VFSDATA (path_element)->fh_open (path_element->class, fh, flags, mode) != 0))
+    else
     {
-        g_free (fh);
-        return NULL;
+        struct vfs_s_subclass *s;
+
+        s = VFSDATA (path_element);
+        if (s->fh_open != NULL && s->fh_open (path_element->class, fh, flags, mode) != 0)
+        {
+            if (s->fh_free_data != NULL)
+                s->fh_free_data (fh);
+            g_free (fh);
+            return NULL;
+        }
     }
 
     if (fh->ino->localname)
