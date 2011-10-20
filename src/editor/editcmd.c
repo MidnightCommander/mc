@@ -1100,7 +1100,7 @@ pipe_mail (WEdit * edit, char *to, char *subject, char *cc)
 static gboolean
 is_break_char (char c)
 {
-    return (isspace (c) || strchr ("{}[]()<>=|/\\!?~'\",.;:#$%^&*", c));
+    return (isspace (c) || strchr ("{}[]()<>=|/\\!?~-+`'\",.;:#$%^&*", c));
 }
 
 /* --------------------------------------------------------------------------------------------- */
