@@ -648,7 +648,7 @@ vfs_split_text (char *p)
 void
 vfs_parse_ls_lga_init (void)
 {
-    vfs_parce_ls_final_num_spaces = 0;
+    vfs_parce_ls_final_num_spaces = 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
