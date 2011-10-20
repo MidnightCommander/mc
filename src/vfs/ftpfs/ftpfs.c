@@ -627,6 +627,8 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 
         reply_up = g_ascii_strup (reply_string, -1);
         SUP->remote_is_amiga = strstr (reply_up, "AMIGA") != 0;
+        if (strstr (reply_up, " SPFTP/1.0.0000 SERVER ")) /* handles `LIST -la` in a weird way */
+            SUP.strict = RFC_STRICT;
         g_free (reply_up);
 
         if (MEDATA->logfile)
