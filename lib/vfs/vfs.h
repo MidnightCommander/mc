@@ -268,6 +268,8 @@ char *_vfs_get_cwd (void);
 
 vfs_path_t *vfs_change_encoding (vfs_path_t * vpath, const char *encoding);
 
+int vfs_preallocate (int dest_desc, off_t src_fsize, off_t dest_fsize);
+
 /**
  * Interface functions described in interface.c
  */

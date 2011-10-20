@@ -107,7 +107,8 @@ mc_global_t mc_global = {
 
     .vfs =
     {
-        .cd_symlinks = TRUE
+        .cd_symlinks = TRUE,
+        .preallocate_space = FALSE,
     }
 
 };

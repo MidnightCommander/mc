@@ -1504,6 +1504,27 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
             ctx->skip_all = TRUE;
         goto ret;
     }
+    while (TRUE)
+    {
+        errno = vfs_preallocate (dest_desc, file_size, (ctx->do_append != 0) ? sb.st_size : 0);
+        if (errno == 0)
+            break;
+
+        if (!ctx->skip_all)
+        {
+            return_status =
+                file_error (_("Cannot preallocate space for target file \"%s\"\n%s"), dst_path);
+            if (return_status == FILE_RETRY)
+                continue;
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
+        mc_close (dest_desc);
+        dest_desc = -1;
+        mc_unlink (dst_path);
+        dst_status = DEST_NONE;
+        goto ret;
+    }
 
     ctx->eta_secs = 0.0;
     ctx->bps = 0;

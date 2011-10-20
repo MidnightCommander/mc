@@ -938,7 +938,9 @@ se l'opzione, "usa editor interno" è stata impostata.
 Mostra una finestra di dialogo con destinazione predefinita alla
 directory del pannello non selezionato, che copia il file selezionato (o
 i file marcati, se ce n'è almeno uno) sulla directory specificata
-dall'utente nella finestra di dialogo. Durante il processo è possibile
+dall'utente nella finestra di dialogo. Space for destination
+file may be preallocated relative to preallocate_space configure option.
+Durante il processo è possibile
 premere C\-c o ESC per abortire l'operazione. Per maggiori dettagli sulla
 maschera sorgente (che sarà normalmente * o ^\\(.*\\)$ a seconda
 dell'impostazione di "modelli della shell") o sui caratteri jolly sulla

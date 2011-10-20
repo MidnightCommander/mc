@@ -914,7 +914,9 @@ ha a belső szerkesztő be van kapcsolva.
 Egy beviteli ablakot jelenít meg, amely alapértelmezésben a nem
 kiválasztott panel könyvtárát adja meg rendeltetési helyként, majd
 átmásolja a kiválasztott fájlt (vagy kijelölt fájlokat, ha egynél több
-fájlról van szó) a beviteli ablakban megadott könyvtárba. A folyamat
+fájlról van szó) a beviteli ablakban megadott könyvtárba. Space for
+destination file may be preallocated relative to preallocate_space
+configure option. A folyamat
 futását a C\-c, vagy ESC lenyomásával szakíthatod meg. A forrás maszk
 beállításairól (ami általában a *, vagy a ^\\(.*\\)$ közül valamelyik.
 Ezekről a "Shell kifejezések" beállításnál, illetve a

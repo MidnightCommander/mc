@@ -269,6 +269,10 @@ typedef struct
     {
         /* Set when cd symlink following is desirable (bash mode) */
         gboolean cd_symlinks;
+
+        /* Preallocate space before file copying */
+        gboolean preallocate_space;
+
     } vfs;
 
 } mc_global_t;
