@@ -617,6 +617,7 @@ tests/lib/search/Makefile
 tests/lib/vfs/Makefile
 tests/src/Makefile
 tests/src/filemanager/Makefile
+tests/src/editor/Makefile
 ])
 
 fi

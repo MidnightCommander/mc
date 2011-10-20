@@ -1,1 +1,1 @@
-SUBDIRS = filemanager
+SUBDIRS = . filemanager editor
