@@ -114,6 +114,8 @@ const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 
 #define space_width 1
 
+#define DETECT_LB_TYPE_BUFLEN BUF_MEDIUM
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -416,6 +418,37 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * detect type of line breaks
+ *
+ */
+/* --------------------------------------------------------------------------------------------- */
+
+static LineBreaks
+detect_lb_type (const vfs_path_t *filename_vpath)
+{
+    char buf[BUF_MEDIUM];
+    ssize_t file, sz;
+
+    file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
+    if (file == -1)
+        return LB_ASIS;
+
+    sz = mc_read (file, buf, sizeof (buf) - 1);
+    mc_close (file);
+
+    if (sz <= 0)
+        return LB_ASIS;
+
+    buf[(size_t) sz] = '\0';
+    if (strstr (buf, "\r\n") != NULL)
+        return LB_WIN;
+    if (strchr (buf, '\r') != NULL)
+        return LB_MAC;
+    return LB_ASIS;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Open the file and load it into the buffers, either directly or using
  * a filter.  Return TRUE on success, FALSE on error.
  *
@@ -431,6 +464,7 @@ static gboolean
 edit_load_file (WEdit * edit)
 {
     gboolean fast_load = TRUE;
+    LineBreaks lb_type = LB_ASIS;
 
     /* Cannot do fast load if a filter is used */
     if (edit_find_filter (edit->filename_vpath) >= 0)
@@ -455,6 +489,10 @@ edit_load_file (WEdit * edit)
             edit_clean (edit);
             return FALSE;
         }
+        lb_type = detect_lb_type (edit->filename_vpath);
+
+        if (lb_type != LB_ASIS && lb_type != LB_UNIX)
+            fast_load = FALSE;
     }
     else
     {
@@ -478,15 +516,16 @@ edit_load_file (WEdit * edit)
             && *(vfs_path_get_by_index (edit->filename_vpath, 0)->path) != '\0')
         {
             edit->undo_stack_disable = 1;
-            if (edit_insert_file (edit, edit->filename_vpath) < 0)
+            if (edit_insert_file (edit, edit->filename_vpath, lb_type) < 0)
             {
                 edit_clean (edit);
                 return FALSE;
             }
+            edit_set_markers (edit, 0, 0, 0, 0);
             edit->undo_stack_disable = 0;
         }
     }
-    edit->lb = LB_ASIS;
+    edit->lb = lb_type;
     return TRUE;
 }
 
@@ -1774,7 +1813,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
         {
             long ins_len;
 
-            ins_len = edit_insert_file (edit, block_file_vpath);
+            ins_len = edit_insert_file (edit, block_file_vpath, LB_ASIS);
             if (nomark == 0 && ins_len > 0)
                 edit_set_markers (edit, start_mark, start_mark + ins_len, 0, 0);
         }
@@ -2040,7 +2079,7 @@ edit_get_word_from_pos (WEdit * edit, long start_pos, long *start, gsize * len, 
 /** inserts a file at the cursor, returns count of inserted bytes on success */
 
 long
-edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
+edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath, LineBreaks lb_type)
 {
     char *p;
     long ins_len = 0;
@@ -2120,7 +2159,19 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0)
             {
                 for (i = 0; i < blocklen; i++)
-                    edit_insert (edit, buf[i]);
+                {
+                    if (buf[i] == '\r')
+                    {
+                        if (lb_type == LB_MAC)
+                            edit_insert (edit, '\n');
+                        else if (lb_type == LB_WIN)
+                            /* just skip */ ;
+                        else
+                            edit_insert (edit, '\r');
+                    }
+                    else
+                        edit_insert (edit, buf[i]);
+                }
             }
             /* highlight inserted text then not persistent blocks */
             if (!option_persistent_selections && edit->modified)
@@ -2225,6 +2276,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     edit->redo_stack_size_mask = START_STACK_SIZE - 1;
     edit->redo_stack = g_malloc0 ((edit->redo_stack_size + 10) * sizeof (long));
 
+    edit->highlight = 0;
     edit->utf8 = 0;
     edit->converter = str_cnv_from_term;
     edit_set_codeset (edit);

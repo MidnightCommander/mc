@@ -449,7 +449,9 @@ edit_get_save_file_as (WEdit * edit)
         char *fname;
         vfs_path_t *ret_vpath;
 
-        edit->lb = cur_lb;
+        /* Don't change current LB type (possibly autodetected), unless user asked to. */
+        if (cur_lb != LB_ASIS)
+            edit->lb = cur_lb;
         fname = tilde_expand (filename_res);
         g_free (filename_res);
         ret_vpath = vfs_path_from_str (fname);
@@ -3021,7 +3023,7 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
     tmp = mc_config_get_full_vpath (EDIT_CLIP_FILE);
-    edit_insert_file (edit, tmp);
+    edit_insert_file (edit, tmp, LB_ASIS);
     vfs_path_free (tmp);
 }
 
@@ -3136,7 +3138,7 @@ edit_insert_file_cmd (WEdit * edit)
         vfs_path_t *exp_vpath;
 
         exp_vpath = vfs_path_from_str (exp);
-        ret = (edit_insert_file (edit, exp_vpath) >= 0);
+        ret = (edit_insert_file (edit, exp_vpath, LB_ASIS) >= 0);
         vfs_path_free (exp_vpath);
 
         if (!ret)
@@ -3209,12 +3211,12 @@ edit_sort_cmd (WEdit * edit)
 
     if (edit_block_delete_cmd (edit))
         return 1;
-
+    else
     {
         vfs_path_t *tmp_vpath;
 
         tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
-        edit_insert_file (edit, tmp_vpath);
+        edit_insert_file (edit, tmp_vpath, LB_ASIS);
         vfs_path_free (tmp_vpath);
     }
     return 0;
@@ -3251,16 +3253,15 @@ edit_ext_cmd (WEdit * edit)
         edit_error_dialog (_("External command"), get_sys_error (_("Cannot execute command")));
         return -1;
     }
-
-    edit->force |= REDRAW_COMPLETELY;
-
+    else
     {
         vfs_path_t *tmp_vpath;
 
         tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
-        edit_insert_file (edit, tmp_vpath);
+        edit_insert_file (edit, tmp_vpath, LB_ASIS);
         vfs_path_free (tmp_vpath);
     }
+    edit->force |= REDRAW_COMPLETELY;
     return 0;
 }
 
