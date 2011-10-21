@@ -101,7 +101,7 @@ mc_search__glob_translate_to_regex (const GString * astr)
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_search__translate_replace_glob_to_regex (gchar * str)
+mc_search__translate_replace_glob_to_regex (const char * str)
 {
     GString *buff;
     int cnt = '0';
