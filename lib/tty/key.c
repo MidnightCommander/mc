@@ -38,7 +38,6 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"        /* str_casecmp */
 
 #include "lib/vfs/mc-vfs/vfs.h"
 
@@ -1149,7 +1148,7 @@ key_code_name_comparator (const void *p1, const void *p2)
     const key_code_name_t *n1 = *(const key_code_name_t **) p1;
     const key_code_name_t *n2 = *(const key_code_name_t **) p2;
 
-    return str_casecmp (n1->name, n2->name);
+    return g_ascii_strcasecmp (n1->name, n2->name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
