@@ -191,35 +191,35 @@ create_panel_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("File listin&g"), CK_ListingCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick view"), CK_QuickViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Info"), CK_InfoCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Tree"), CK_TreeCmd));
-    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("File listin&g"), CK_ListingCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Quick view"), CK_QuickViewCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Info"), CK_InfoCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Tree"), CK_TreeCmd));
+    entries = g_list_prepend (entries, menu_separator_create ());
     entries =
-        g_list_append (entries, menu_entry_create (_("&Listing mode..."), CK_ChangeListingCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."), CK_Sort));
-    entries = g_list_append (entries, menu_entry_create (_("&Filter..."), CK_FilterCmd));
+        g_list_prepend (entries, menu_entry_create (_("&Listing mode..."), CK_ChangeListingCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Sort order..."), CK_Sort));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Filter..."), CK_FilterCmd));
 #ifdef HAVE_CHARSET
     entries =
-        g_list_append (entries, menu_entry_create (_("&Encoding..."), CK_PanelSetPanelEncoding));
+        g_list_prepend (entries, menu_entry_create (_("&Encoding..."), CK_PanelSetPanelEncoding));
 #endif
 #ifdef ENABLE_VFS_NET
-    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_FTP
-    entries = g_list_append (entries, menu_entry_create (_("FT&P link..."), CK_FtplinkCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("FT&P link..."), CK_FtplinkCmd));
 #endif
 #ifdef ENABLE_VFS_FISH
-    entries = g_list_append (entries, menu_entry_create (_("S&hell link..."), CK_FishlinkCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("S&hell link..."), CK_FishlinkCmd));
 #endif
 #ifdef ENABLE_VFS_SMB
-    entries = g_list_append (entries, menu_entry_create (_("SM&B link..."), CK_SmblinkCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("SM&B link..."), CK_SmblinkCmd));
 #endif
 #endif /* ENABLE_VFS_NET */
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Rescan"), CK_RereadCmd));
+    entries = g_list_prepend (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("&Rescan"), CK_RereadCmd));
 
-    return entries;
+    return g_list_reverse (entries);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -229,34 +229,34 @@ create_file_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&View"), CK_ViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Vie&w file..."), CK_ViewFileCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Filtered view"), CK_FilteredViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Edit"), CK_EditCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Copy"), CK_CopyCmd));
-    entries = g_list_append (entries, menu_entry_create (_("C&hmod"), CK_ChmodCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Link"), CK_LinkCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Symlink"), CK_SymlinkCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&View"), CK_ViewCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("Vie&w file..."), CK_ViewFileCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Filtered view"), CK_FilteredViewCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Edit"), CK_EditCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Copy"), CK_CopyCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("C&hmod"), CK_ChmodCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Link"), CK_LinkCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Symlink"), CK_SymlinkCmd));
     entries =
-        g_list_append (entries, menu_entry_create (_("Relative symlin&k"), CK_RelativeSymlinkCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Edit s&ymlink"), CK_EditSymlinkCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Ch&own"), CK_ChownCmd));
+        g_list_prepend (entries, menu_entry_create (_("Relative symlin&k"), CK_RelativeSymlinkCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("Edit s&ymlink"), CK_EditSymlinkCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("Ch&own"), CK_ChownCmd));
     entries =
-        g_list_append (entries, menu_entry_create (_("&Advanced chown"), CK_ChownAdvancedCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Rename/Move"), CK_RenameCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Mkdir"), CK_MkdirCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Delete"), CK_DeleteCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick cd"), CK_QuickCdCmd));
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Select &group"), CK_SelectCmd));
-    entries = g_list_append (entries, menu_entry_create (_("U&nselect group"), CK_UnselectCmd));
+        g_list_prepend (entries, menu_entry_create (_("&Advanced chown"), CK_ChownAdvancedCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Rename/Move"), CK_RenameCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Mkdir"), CK_MkdirCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Delete"), CK_DeleteCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Quick cd"), CK_QuickCdCmd));
+    entries = g_list_prepend (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("Select &group"), CK_SelectCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("U&nselect group"), CK_UnselectCmd));
     entries =
-        g_list_append (entries,
-                       menu_entry_create (_("Reverse selec&tion"), CK_ReverseSelectionCmd));
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("E&xit"), CK_QuitCmd));
+        g_list_prepend (entries,
+                        menu_entry_create (_("Reverse selec&tion"), CK_ReverseSelectionCmd));
+    entries = g_list_prepend (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("E&xit"), CK_QuitCmd));
 
-    return entries;
+    return g_list_reverse (entries);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -270,54 +270,55 @@ create_command_menu (void)
      */
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&User menu"), CK_UserMenuCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Directory tree"), CK_TreeBoxCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Find file"), CK_FindCmd));
-    entries = g_list_append (entries, menu_entry_create (_("S&wap panels"), CK_SwapCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&User menu"), CK_UserMenuCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Directory tree"), CK_TreeBoxCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Find file"), CK_FindCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("S&wap panels"), CK_SwapCmd));
     entries =
-        g_list_append (entries, menu_entry_create (_("Switch &panels on/off"), CK_ShowCommandLine));
+        g_list_prepend (entries,
+                        menu_entry_create (_("Switch &panels on/off"), CK_ShowCommandLine));
     entries =
-        g_list_append (entries, menu_entry_create (_("&Compare directories"), CK_CompareDirsCmd));
+        g_list_prepend (entries, menu_entry_create (_("&Compare directories"), CK_CompareDirsCmd));
 #ifdef USE_DIFF_VIEW
-    entries = g_list_append (entries, menu_entry_create (_("&View diff files"), CK_DiffViewCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&View diff files"), CK_DiffViewCmd));
 #endif
     entries =
-        g_list_append (entries, menu_entry_create (_("E&xternal panelize"), CK_ExternalPanelize));
+        g_list_prepend (entries, menu_entry_create (_("E&xternal panelize"), CK_ExternalPanelize));
     entries =
-        g_list_append (entries,
-                       menu_entry_create (_("Show directory s&izes"), CK_SingleDirsizeCmd));
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Command &history"), CK_HistoryCmd));
+        g_list_prepend (entries,
+                        menu_entry_create (_("Show directory s&izes"), CK_SingleDirsizeCmd));
+    entries = g_list_prepend (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("Command &history"), CK_HistoryCmd));
     entries =
-        g_list_append (entries, menu_entry_create (_("Di&rectory hotlist"), CK_QuickChdirCmd));
+        g_list_prepend (entries, menu_entry_create (_("Di&rectory hotlist"), CK_QuickChdirCmd));
 #ifdef ENABLE_VFS
-    entries = g_list_append (entries, menu_entry_create (_("&Active VFS list"), CK_ReselectVfs));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Active VFS list"), CK_ReselectVfs));
 #endif
 #ifdef WITH_BACKGROUND
-    entries = g_list_append (entries, menu_entry_create (_("&Background jobs"), CK_JobsCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Background jobs"), CK_JobsCmd));
 #endif
-    entries = g_list_append (entries, menu_entry_create (_("Screen lis&t"), CK_DialogListCmd));
-    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("Screen lis&t"), CK_DialogListCmd));
+    entries = g_list_prepend (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_UNDELFS
     entries =
-        g_list_append (entries,
-                       menu_entry_create (_("&Undelete files (ext2fs only)"), CK_UndeleteCmd));
+        g_list_prepend (entries,
+                        menu_entry_create (_("&Undelete files (ext2fs only)"), CK_UndeleteCmd));
 #endif
 #ifdef LISTMODE_EDITOR
     entries =
-        g_list_append (entries, menu_entry_create (_("&Listing format edit"), CK_ListmodeCmd));
+        g_list_prepend (entries, menu_entry_create (_("&Listing format edit"), CK_ListmodeCmd));
 #endif
 #if defined (ENABLE_VFS_UNDELFS) || defined (LISTMODE_EDITOR)
-    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_separator_create ());
 #endif
     entries =
-        g_list_append (entries, menu_entry_create (_("Edit &extension file"), CK_EditExtFileCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Edit &menu file"), CK_EditMcMenuCmd));
+        g_list_prepend (entries, menu_entry_create (_("Edit &extension file"), CK_EditExtFileCmd));
+    entries = g_list_prepend (entries, menu_entry_create (_("Edit &menu file"), CK_EditMcMenuCmd));
     entries =
-        g_list_append (entries,
-                       menu_entry_create (_("Edit hi&ghlighting group file"), CK_EditFhlFileCmd));
+        g_list_prepend (entries,
+                        menu_entry_create (_("Edit hi&ghlighting group file"), CK_EditFhlFileCmd));
 
-    return entries;
+    return g_list_reverse (entries);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -327,20 +328,21 @@ create_options_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Configuration..."), CK_ConfigureBox));
-    entries = g_list_append (entries, menu_entry_create (_("&Layout..."), CK_LayoutBox));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Configuration..."), CK_ConfigureBox));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Layout..."), CK_LayoutBox));
     entries =
-        g_list_append (entries, menu_entry_create (_("&Panel options..."), CK_PanelOptionsBox));
-    entries = g_list_append (entries, menu_entry_create (_("C&onfirmation..."), CK_ConfirmBox));
-    entries = g_list_append (entries, menu_entry_create (_("&Display bits..."), CK_DisplayBitsBox));
-    entries = g_list_append (entries, menu_entry_create (_("Learn &keys..."), CK_LearnKeys));
+        g_list_prepend (entries, menu_entry_create (_("&Panel options..."), CK_PanelOptionsBox));
+    entries = g_list_prepend (entries, menu_entry_create (_("C&onfirmation..."), CK_ConfirmBox));
+    entries =
+        g_list_prepend (entries, menu_entry_create (_("&Display bits..."), CK_DisplayBitsBox));
+    entries = g_list_prepend (entries, menu_entry_create (_("Learn &keys..."), CK_LearnKeys));
 #ifdef ENABLE_VFS
-    entries = g_list_append (entries, menu_entry_create (_("&Virtual FS..."), CK_ConfigureVfs));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Virtual FS..."), CK_ConfigureVfs));
 #endif
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Save setup"), CK_SaveSetupCmd));
+    entries = g_list_prepend (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("&Save setup"), CK_SaveSetupCmd));
 
-    return entries;
+    return g_list_reverse (entries);
 }
 
 /* --------------------------------------------------------------------------------------------- */
