@@ -34,7 +34,6 @@
 
 #include "lib/global.h"
 #include "lib/tty/key.h"        /* KEY_M_ */
-#include "lib/strutil.h"        /* str_casecmp() */
 #include "lib/keybind.h"
 
 /*** global variables ****************************************************************************/
@@ -350,7 +349,7 @@ name_keymap_comparator (const void *p1, const void *p2)
     const name_keymap_t *m1 = (const name_keymap_t *) p1;
     const name_keymap_t *m2 = (const name_keymap_t *) p2;
 
-    return str_casecmp (m1->name, m2->name);
+    return g_ascii_strcasecmp (m1->name, m2->name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
