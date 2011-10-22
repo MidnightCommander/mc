@@ -1227,18 +1227,14 @@ remove_from_hotlist (struct hotlist *entry)
 
     if (confirm_directory_hotlist_delete)
     {
-        char *title;
+        char text[BUF_MEDIUM];
         int result;
-
-        title = g_strconcat (_("Remove:"), " ", str_trunc (entry->label, 30), (char *) NULL);
 
         if (safe_delete)
             query_set_sel (1);
-        result = query_dialog (title,
-                               _("Are you sure you want to remove this entry?"),
-                               D_ERROR, 2, _("&Yes"), _("&No"));
-
-        g_free (title);
+        g_snprintf (text, sizeof (text), _("Are you sure you want to remove entry \"%s\"?"),
+                    str_trunc (entry->label, 30));
+        result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR, 2, _("&Yes"), _("&No"));
 
         if (result != 0)
             return;
@@ -1250,13 +1246,13 @@ remove_from_hotlist (struct hotlist *entry)
 
         if (head != NULL && (head->type != HL_TYPE_DOTDOT || head->next != NULL))
         {
-            char *header;
+            char text[BUF_MEDIUM];
             int result;
 
-            header = g_strconcat (_("Remove:"), " ", str_trunc (entry->label, 30), (char *) NULL);
-            result = query_dialog (header, _("Group not empty.\nRemove it?"),
-                                   D_ERROR, 2, _("&Yes"), _("&No"));
-            g_free (header);
+            g_snprintf (text, sizeof (text), _("Group \"%s\" is not empty.\nRemove it?"),
+                        str_trunc (entry->label, 30));
+
+            result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR, 2, _("&Yes"), _("&No"));
 
             if (result != 0)
                 return;
