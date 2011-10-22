@@ -1246,7 +1246,9 @@ remove_from_hotlist (struct hotlist *entry)
 
     if (entry->type == HL_TYPE_GROUP)
     {
-        if (entry->head)
+        struct hotlist *head = entry->head;
+
+        if (head != NULL && (head->type != HL_TYPE_DOTDOT || head->next != NULL))
         {
             char *header;
             int result;
