@@ -78,12 +78,12 @@
 #define N_(String) (String)
 #endif
 #else /* Stubs that do something close enough.  */
-#define textdomain(String)
+#define textdomain(String) 1
 #define gettext(String) (String)
 #define ngettext(String1,String2,Num) (((Num) == 1) ? (String1) : (String2))
 #define dgettext(Domain,Message) (Message)
 #define dcgettext(Domain,Message,Type) (Message)
-#define bindtextdomain(Domain,Directory)
+#define bindtextdomain(Domain,Directory) 1
 #define _(String) (String)
 #define N_(String) (String)
 #endif /* !ENABLE_NLS */
