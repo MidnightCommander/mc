@@ -1237,7 +1237,7 @@ remove_from_hotlist (struct hotlist *entry)
             query_set_sel (1);
         result = query_dialog (title,
                                _("Are you sure you want to remove this entry?"),
-                               D_ERROR, 2, _("&Yes"), _("&No"));
+                               D_ERROR | D_CENTER, 2, _("&Yes"), _("&No"));
 
         g_free (title);
 
@@ -1254,7 +1254,7 @@ remove_from_hotlist (struct hotlist *entry)
 
             header = g_strconcat (_("Remove:"), " ", str_trunc (entry->label, 30), (char *) NULL);
             result = query_dialog (header, _("Group not empty.\nRemove it?"),
-                                   D_ERROR, 2, _("&Yes"), _("&No"));
+                                   D_ERROR | D_CENTER, 2, _("&Yes"), _("&No"));
             g_free (header);
 
             if (result != 0)
