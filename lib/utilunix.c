@@ -500,7 +500,7 @@ close_error_pipe (int error, const char *text)
     if (error_pipe[0] == -1)
         return 0;
 
-    if (error)
+    if (error < 0 || (error > 0 && (error & D_ERROR) != 0))
         title = MSG_ERROR;
     else
         title = _("Warning");
@@ -508,6 +508,9 @@ close_error_pipe (int error, const char *text)
     {
         if (dup2 (old_error, 2) == -1)
         {
+            if (error < 0)
+                error = D_ERROR;
+
             message (error, MSG_ERROR, _("Error dup'ing old error pipe"));
             return 1;
         }
