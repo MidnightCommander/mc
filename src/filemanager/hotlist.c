@@ -1233,10 +1233,11 @@ remove_from_hotlist (struct hotlist *entry)
 
         if (safe_delete)
             query_set_sel (1);
+
         g_snprintf (text, sizeof (text), _("Are you sure you want to remove entry \"%s\"?"),
                     str_trunc (entry->label, 30));
-        result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR, 2, _("&Yes"), _("&No"));
-
+        result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR | D_CENTER, 2,
+                               _("&Yes"), _("&No"));
         if (result != 0)
             return;
     }
@@ -1252,9 +1253,8 @@ remove_from_hotlist (struct hotlist *entry)
 
             g_snprintf (text, sizeof (text), _("Group \"%s\" is not empty.\nRemove it?"),
                         str_trunc (entry->label, 30));
-
-            result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR, 2, _("&Yes"), _("&No"));
-
+            result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR | D_CENTER, 2,
+                                   _("&Yes"), _("&No"));
             if (result != 0)
                 return;
         }
