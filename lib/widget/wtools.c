@@ -68,6 +68,7 @@ default_query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
     switch (msg)
     {
     case DLG_RESIZE:
+        if ((h->flags & DLG_CENTER) == 0)
         {
             Dlg_head *prev_dlg = NULL;
             int ypos, xpos;
@@ -99,8 +100,10 @@ default_query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
 
             /* set position */
             dlg_set_position (h, ypos, xpos, ypos + h->lines, xpos + h->cols);
+
+            return MSG_HANDLED;
         }
-        return MSG_HANDLED;
+        /* fallthrough */
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
@@ -314,7 +317,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     int result = -1;
     int cols, lines;
     char *cur_name;
-    const int *query_colors = (flags & D_ERROR) ? alarm_colors : dialog_colors;
+    const int *query_colors = (flags & D_ERROR) != 0 ? alarm_colors : dialog_colors;
+    dlg_flags_t dlg_flags = (flags & D_CENTER) != 0 ? (DLG_CENTER | DLG_TRYUP) : DLG_NONE;
 
     if (header == MSG_ERROR)
         header = _("Error");
@@ -340,7 +344,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     /* prepare dialog */
     query_dlg =
         create_dlg (TRUE, 0, 0, lines, cols, query_colors, default_query_callback,
-                    "[QueryBox]", header, DLG_NONE);
+                    "[QueryBox]", header, dlg_flags);
 
     if (count > 0)
     {
