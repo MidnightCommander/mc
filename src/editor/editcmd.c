@@ -1100,7 +1100,7 @@ pipe_mail (WEdit * edit, char *to, char *subject, char *cc)
 static gboolean
 is_break_char (char c)
 {
-    return (isspace (c) || strchr ("{}[]()<>=|/\\!?~'\",.;:#$%^&*", c));
+    return (isspace (c) || strchr ("{}[]()<>=|/\\!?~-+`'\",.;:#$%^&*", c));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1147,9 +1147,44 @@ edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get current word under cursor
+ *
+ * @param edit editor object
+ * @param srch mc_search object
+ * @param word_start start word position
+ *
+ * @return newly allocated string or NULL if no any words under cursor
+ */
+
+static char *
+edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, long word_start)
+{
+    gsize len = 0, i;
+    GString *temp;
+
+    if (!mc_search_run (srch, (void *) edit, word_start, edit->last_byte, &len))
+        return NULL;
+
+    temp = g_string_sized_new (len);
+
+    for (i = 0; i < len; i++)
+    {
+        int chr;
+
+        chr = edit_get_byte (edit, word_start + i);
+        if (!isspace (chr))
+            g_string_append_c (temp, chr);
+    }
+
+    return g_string_free (temp, temp->len == 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** collect the possible completions */
+
 static gsize
-edit_collect_completions (WEdit * edit, long start, gsize word_len,
+edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
                           char *match_expr, struct selection *compl, gsize * num)
 {
     gsize len = 0;
@@ -1158,8 +1193,8 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
     int skip;
     GString *temp;
     mc_search_t *srch;
-
-    long last_byte;
+    long last_byte, start = -1;
+    char *current_word;
 
     srch = mc_search_new (match_expr, -1);
     if (srch == NULL)
@@ -1172,39 +1207,50 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
     }
     else
     {
-        last_byte = start;
+        last_byte = word_start;
     }
 
     srch->search_type = MC_SEARCH_T_REGEX;
     srch->is_case_sensitive = TRUE;
     srch->search_fn = edit_search_cmd_callback;
 
+    current_word = edit_collect_completions_get_current_word (edit, srch, word_start);
+
+    temp = g_string_new ("");
+
     /* collect max MAX_WORD_COMPLETIONS completions */
-    start = -1;
-    while (1)
+    while (mc_search_run (srch, (void *) edit, start + 1, last_byte, &len))
     {
-        /* get next match */
-        if (mc_search_run (srch, (void *) edit, start + 1, last_byte, &len) == FALSE)
-            break;
+        g_string_set_size (temp, 0);
         start = srch->normal_offset;
 
         /* add matched completion if not yet added */
-        temp = g_string_new ("");
         for (i = 0; i < len; i++)
         {
             skip = edit_get_byte (edit, start + i);
             if (isspace (skip))
                 continue;
+
+            /* skip current word */
+            if (start + (long) i == word_start)
+                break;
+
             g_string_append_c (temp, skip);
         }
 
+        if (temp->len == 0)
+            continue;
+
+        if (current_word != NULL && strcmp (current_word, temp->str) == 0)
+            continue;
+
         skip = 0;
 
-        for (i = 0; i < (gsize) * num; i++)
+        for (i = 0; i < *num; i++)
         {
             if (strncmp
                 ((char *) &compl[i].text[word_len],
-                 (char *) &temp->str[word_len], max (len, compl[i].len) - (gsize) word_len) == 0)
+                 (char *) &temp->str[word_len], max (len, compl[i].len) - word_len) == 0)
             {
                 struct selection this = compl[i];
                 for (++i; i < *num; i++)
@@ -1216,11 +1262,9 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
                 break;          /* skip it, already added */
             }
         }
-        if (skip)
-        {
-            g_string_free (temp, TRUE);
+        if (skip != 0)
             continue;
-        }
+
         if (*num == MAX_WORD_COMPLETIONS)
         {
             g_free (compl[0].text);
@@ -1236,25 +1280,25 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
             recoded = str_convert_to_display (temp->str);
 
             if (recoded && recoded->len)
-            {
-                g_string_free (temp, TRUE);
-                temp = recoded;
-            }
-            else
-                g_string_free (recoded, TRUE);
+                g_string_assign (temp, recoded->str);
+
+            g_string_free (recoded, TRUE);
         }
 #endif
-        compl[*num].text = temp->str;
+        compl[*num].text = g_strdup (temp->str);
         compl[*num].len = temp->len;
         (*num)++;
         start += len;
-        g_string_free (temp, FALSE);
 
         /* note the maximal length needed for the completion dialog */
         if (len > max_len)
             max_len = len;
     }
+
     mc_search_free (srch);
+    g_string_free (temp, TRUE);
+    g_free (current_word);
+
     return max_len;
 }
 
