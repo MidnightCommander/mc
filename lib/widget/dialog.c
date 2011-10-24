@@ -1179,7 +1179,7 @@ dlg_redraw (Dlg_head * h)
     }
 
     h->callback (h, NULL, DLG_DRAW, 0, NULL);
-    dlg_broadcast_msg (h, WIDGET_DRAW, TRUE);
+    dlg_broadcast_msg (h, WIDGET_DRAW, (h->flags & DLG_REVERSE) != 0);
     update_cursor (h);
 }
 
