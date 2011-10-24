@@ -448,7 +448,7 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
     {
         current = (Widget *) hot_cur->data;
 
-        if ((current->options & W_WANT_HOTKEY) != 0)
+        if ((current->options & W_WANT_HOTKEY) != 0 && (current->options & W_DISABLED) == 0)
             handled = send_message (current, WIDGET_HOTKEY, d_key);
 
         if (handled == MSG_NOT_HANDLED)
