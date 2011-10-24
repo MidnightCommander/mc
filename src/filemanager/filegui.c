@@ -120,7 +120,7 @@ int classic_progressbar = 1;
 typedef enum {
     MSDOS_SUPER_MAGIC     = 0x4d44,
     NTFS_SB_MAGIC         = 0x5346544e,
-    NTFS_3G_MAGIC         = 0x65735546,
+    FUSE_MAGIC         = 0x65735546,
     PROC_SUPER_MAGIC      = 0x9fa0,
     SMB_SUPER_MAGIC       = 0x517B,
     NCP_SUPER_MAGIC       = 0x564c,
@@ -194,7 +194,6 @@ filegui__check_attrs_on_fs (const char *fs_path)
     {
     case MSDOS_SUPER_MAGIC:
     case NTFS_SB_MAGIC:
-    case NTFS_3G_MAGIC:
     case PROC_SUPER_MAGIC:
     case SMB_SUPER_MAGIC:
     case NCP_SUPER_MAGIC:
@@ -843,7 +842,7 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
 FileProgressStatus
 file_progress_real_query_replace (FileOpContext * ctx,
                                   enum OperationMode mode, const char *destname,
-                                  struct stat * _s_stat, struct stat * _d_stat)
+                                  struct stat *_s_stat, struct stat *_d_stat)
 {
     FileOpContextUI *ui;
 
@@ -902,8 +901,7 @@ file_progress_real_query_replace (FileOpContext * ctx,
 char *
 file_mask_dialog (FileOpContext * ctx, FileOperation operation,
                   gboolean only_one,
-                  const char *format, const void *text,
-                  const char *def_text, gboolean * do_bg)
+                  const char *format, const void *text, const char *def_text, gboolean * do_bg)
 {
     const size_t FMDY = 13;
     const size_t FMDX = 68;
