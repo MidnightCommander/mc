@@ -216,6 +216,8 @@ create_window_menu (void)
 
     entries = g_list_prepend (entries, menu_entry_create (_("&Move"), CK_WindowMove));
     entries = g_list_prepend (entries, menu_entry_create (_("&Resize"), CK_WindowResize));
+    entries =
+        g_list_prepend (entries, menu_entry_create (_("&Toggle fullscreen"), CK_WindowFullscreen));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("&Next"), CK_WindowNext));
     entries = g_list_prepend (entries, menu_entry_create (_("&Previous"), CK_WindowPrev));

@@ -193,12 +193,15 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     struct line_s *p;
 
     int x = start_col_real;
-    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + EDIT_WITH_FRAME + option_line_state_width;
+    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET + EDIT_WITH_FRAME;
     int cols_to_skip = abs (x);
     int i;
     int wrap_start;
     int len;
+
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+        x1++;
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
     if (bookmarked != 0)
@@ -327,7 +330,15 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     else
         abn_style = MOD_ABNORMAL;
 
-    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
+    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        const Widget *w = (const Widget *) edit;
+
+        end_col--;
+        if (w->x + w->cols <= w->owner->cols)
+            end_col--;
+    }
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
@@ -889,14 +900,14 @@ edit_info_status (WEdit * edit)
             fname = _(fname);
 #endif
 
-        edit_move (2, 0);
+        edit_move (edit->fullscreen ? 0 : 2, 0);
         tty_printf ("[%s]", str_term_trim (fname, edit->widget.cols - 8 - 6));
         g_free (full_fname);
     }
 
     if (cols > 13)
     {
-        edit_move (edit->widget.cols - 8, 0);
+        edit_move (edit->widget.cols - (edit->fullscreen ? 6 : 8), 0);
         tty_printf ("[%c%c%c%c]",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
                     edit->modified ? 'M' : '-',
@@ -962,8 +973,12 @@ edit_scroll_screen_over_cursor (WEdit * edit)
 
     edit->widget.y += EDIT_WITH_FRAME;
     edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
-    edit->widget.x += EDIT_WITH_FRAME;
-    edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
+    edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        edit->widget.x++;
+        edit->widget.cols -= 2;
+    }
 
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
@@ -1013,8 +1028,12 @@ edit_scroll_screen_over_cursor (WEdit * edit)
 
     edit->widget.y -= EDIT_WITH_FRAME;
     edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
-    edit->widget.x -= EDIT_WITH_FRAME;
-    edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
+    edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        edit->widget.x--;
+        edit->widget.cols += 2;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
