@@ -277,6 +277,7 @@ enum
     /* window commands */
     CK_WindowMove,
     CK_WindowResize,
+    CK_WindowFullscreen,
     CK_WindowList,
     CK_WindowNext,
     CK_WindowPrev,

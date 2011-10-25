@@ -335,6 +335,7 @@ OptionsSaveMode =
 LearnKeys =
 WindowMove =
 WindowResize =
+WindowFullscreen =
 WindowList =
 WindowNext =
 WindowPrev =

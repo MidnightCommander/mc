@@ -199,12 +199,15 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     struct line_s *p = line;
 
     int x = start_col_real;
-    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + EDIT_WITH_FRAME + option_line_state_width;
+    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET + EDIT_WITH_FRAME;
     int cols_to_skip = abs (x);
     int i;
     int wrap_start;
     int len;
+
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+        x1++;
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
     if (bookmarked != 0)
@@ -352,7 +355,15 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     else
         abn_style = MOD_ABNORMAL;
 
-    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
+    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        const Widget *w = (const Widget *) edit;
+
+        end_col--;
+        if (w->x + w->cols <= w->owner->cols)
+            end_col--;
+    }
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
@@ -972,8 +983,12 @@ edit_scroll_screen_over_cursor (WEdit * edit)
 
     edit->widget.y += EDIT_WITH_FRAME;
     edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
-    edit->widget.x += EDIT_WITH_FRAME;
-    edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
+    edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        edit->widget.x++;
+        edit->widget.cols -= 2;
+    }
 
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
@@ -1023,8 +1038,12 @@ edit_scroll_screen_over_cursor (WEdit * edit)
 
     edit->widget.y -= EDIT_WITH_FRAME;
     edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
-    edit->widget.x -= EDIT_WITH_FRAME;
-    edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + 2 * EDIT_WITH_FRAME + option_line_state_width;
+    edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        edit->widget.x--;
+        edit->widget.cols += 2;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -2169,6 +2169,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     edit->widget.lines = lines;
     edit->widget.cols = cols;
     edit_save_size (edit);
+    edit->fullscreen = TRUE;
 
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
     edit->stat1.st_uid = getuid ();
@@ -3401,6 +3402,12 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
 void
 edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 {
+    if (EDIT_WITH_FRAME && command == CK_WindowFullscreen)
+    {
+        edit_toggle_fullscreen (edit);
+        return;
+    }
+
     /* handle window state */
     if (edit_handle_move_resize (edit, command))
         return;

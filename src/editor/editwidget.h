@@ -54,7 +54,7 @@ struct WEdit
     mcedit_drag_state_t drag_state;
     int drag_state_start;       /* save cursor position before window moving */
 
-    /* save location before move/resize */
+    /* save location before move/resize or toggle to fullscreen */
     int x_prev, y_prev;
     int cols_prev, lines_prev;
 
@@ -97,6 +97,7 @@ struct WEdit
     unsigned int highlight:1;   /* There is a selected block */
     unsigned int column_highlight:1;
     unsigned int utf8:1;        /* It's multibyte file codeset */
+    unsigned int fullscreen;    /* Is window fullsreeen or not */
     long prev_col;              /* recent column position of the cursor - used when moving
                                    up or down past lines that are shorter than the current line */
     long curs_line;             /* line number of the cursor. */
