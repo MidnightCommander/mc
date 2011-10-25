@@ -610,7 +610,7 @@ int
 vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
 {
 #ifndef HAVE_POSIX_FALLOCATE
-    (void) dest_desc;
+    (void) dest_vfs_fd;
     (void) src_fsize;
     (void) dest_fsize;
     return 0;
