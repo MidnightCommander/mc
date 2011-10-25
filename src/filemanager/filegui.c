@@ -203,6 +203,8 @@ filegui__check_attrs_on_fs (const char *fs_path)
     case NCP_SUPER_MAGIC:
     case USBDEVICE_SUPER_MAGIC:
         return FALSE;
+    default:
+        break;
     }
 #elif defined(HAVE_STRUCT_STATFS_F_FSTYPENAME) \
       || defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME)
