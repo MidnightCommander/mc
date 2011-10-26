@@ -1298,7 +1298,7 @@ edit_delete_macro (WEdit * edit, int hotkey)
     const char *section_name = "editor";
     gchar *macros_fname;
     guint indx;
-    char *keyname;
+    char *skeyname;
     const macros_t *macros = NULL;
 
     /* clear array of actions for current hotkey */
@@ -1318,10 +1318,10 @@ edit_delete_macro (WEdit * edit, int hotkey)
     if (macros_config == NULL)
         return FALSE;
 
-    keyname = lookup_key_by_code (hotkey);
-    while (mc_config_del_key (macros_config, section_name, keyname))
+    skeyname = lookup_key_by_code (hotkey);
+    while (mc_config_del_key (macros_config, section_name, skeyname))
         ;
-    g_free (keyname);
+    g_free (skeyname);
     mc_config_save_file (macros_config, NULL);
     mc_config_deinit (macros_config);
     return TRUE;
@@ -1630,7 +1630,7 @@ edit_store_macro_cmd (WEdit * edit)
     GArray *macros;             /* current macro */
     int tmp_act;
     gboolean have_macro = FALSE;
-    char *keyname = NULL;
+    char *skeyname = NULL;
 
     hotkey = editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), 1);
     if (hotkey == ESC_CHAR)
@@ -1657,7 +1657,7 @@ edit_store_macro_cmd (WEdit * edit)
     marcros_string = g_string_sized_new (250);
     macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
 
-    keyname = lookup_key_by_code (hotkey);
+    skeyname = lookup_key_by_code (hotkey);
 
     for (i = 0; i < macro_index; i++)
     {
@@ -1682,12 +1682,12 @@ edit_store_macro_cmd (WEdit * edit)
         macro.hotkey = hotkey;
         macro.macro = macros;
         g_array_append_val (macros_list, macro);
-        mc_config_set_string (macros_config, section_name, keyname, marcros_string->str);
+        mc_config_set_string (macros_config, section_name, skeyname, marcros_string->str);
     }
     else
-        mc_config_del_key (macros_config, section_name, keyname);
+        mc_config_del_key (macros_config, section_name, skeyname);
 
-    g_free (keyname);
+    g_free (skeyname);
     edit_macro_sort_by_hotkey ();
 
     g_string_free (marcros_string, TRUE);
