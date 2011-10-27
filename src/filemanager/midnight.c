@@ -70,6 +70,7 @@
 #include "hotlist.h"
 #include "panelize.h"
 #include "command.h"            /* cmdline */
+#include "dir.h"                /* clean_dir() */
 
 #include "chmod.h"
 #include "chown.h"
@@ -200,7 +201,6 @@ create_panel_menu (void)
 #ifdef HAVE_CHARSET
     entries = g_list_append (entries, menu_entry_create (_("&Encoding..."), CK_SelectCodepage));
 #endif
-#ifdef ENABLE_VFS_NET
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_FTP
     entries = g_list_append (entries, menu_entry_create (_("FT&P link..."), CK_ConnectFtp));
@@ -211,7 +211,7 @@ create_panel_menu (void)
 #ifdef ENABLE_VFS_SMB
     entries = g_list_append (entries, menu_entry_create (_("SM&B link..."), CK_ConnectSmb));
 #endif
-#endif /* ENABLE_VFS_NET */
+    entries = g_list_append (entries, menu_entry_create (_("Panelize"), CK_Panelize));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Rescan"), CK_Reread));
 
@@ -1167,6 +1167,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         smblink_cmd ();
         break;
 #endif /* ENABLE_VFS_SMB */
+    case CK_Panelize:
+        cd_panelize_cmd ();
+        break;
     case CK_Help:
         help_cmd ();
         break;
@@ -1661,6 +1664,8 @@ do_nc (void)
 
         /* don't handle VFS timestamps for dirs opened in panels */
         mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");
+
+        clean_dir (&panelized_panel.list, panelized_panel.count);
     }
 
     /* Program end */

@@ -337,6 +337,11 @@ do_external_panelize (char *command)
     /* Clear the counters and the directory list */
     panel_clean_dir (current_panel);
 
+    g_strlcpy (panelized_panel.root, current_panel->cwd, MC_MAXPATHLEN);
+
+    if (set_zero_dir (list))
+        next_free++;
+
     while (1)
     {
         clearerr (external);
@@ -397,7 +402,93 @@ do_external_panelize (char *command)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+do_panelize_cd (struct WPanel *panel)
+{
+    int i;
+    dir_list *list = &panel->dir;
+
+    clean_dir (list, panel->count);
+    if (panelized_panel.root[0] == '\0')
+        g_strlcpy (panelized_panel.root, panel->cwd, MC_MAXPATHLEN);
+
+    if (panelized_panel.count < 1)
+    {
+        if (set_zero_dir (&panelized_panel.list))
+            panelized_panel.count = 1;
+    }
+    else if (panelized_panel.count >= list->size)
+    {
+        list->list = g_try_realloc (list->list, sizeof (file_entry) * (panelized_panel.count));
+        list->size = panelized_panel.count;
+    }
+    panel->count = panelized_panel.count;
+    panel->is_panelized = 1;
+
+    for (i = 0; i < panelized_panel.count; i++)
+    {
+        list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
+        list->list[i].fname = g_strdup (panelized_panel.list.list[i].fname);
+        list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
+        list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
+        list->list[i].f.dir_size_computed = panelized_panel.list.list[i].f.dir_size_computed;
+        list->list[i].f.marked = panelized_panel.list.list[i].f.marked;
+        list->list[i].st = panelized_panel.list.list[i].st;
+        list->list[i].sort_key = panelized_panel.list.list[i].sort_key;
+        list->list[i].second_sort_key = panelized_panel.list.list[i].second_sort_key;
+    }
+    try_to_select (panel, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panelize_save_panel (struct WPanel *panel)
+{
+    int i;
+    dir_list *list = &panel->dir;
+
+    g_strlcpy (panelized_panel.root, panel->cwd, MC_MAXPATHLEN);
+
+    if (panelized_panel.count > 0)
+        clean_dir (&panelized_panel.list, panelized_panel.count);
+    if (panel->count < 1)
+        return;
+
+    panelized_panel.count = panel->count;
+    if (panel->count >= panelized_panel.list.size)
+    {
+        panelized_panel.list.list = g_try_realloc (panelized_panel.list.list,
+            sizeof (file_entry) * panel->count);
+        panelized_panel.list.size = panel->count;
+    }
+    for (i = 0; i < panel->count; i++)
+    {
+        panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;
+        panelized_panel.list.list[i].fname = g_strdup (list->list[i].fname);
+        panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
+        panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
+        panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
+        panelized_panel.list.list[i].f.marked = list->list[i].f.marked;
+        panelized_panel.list.list[i].st = list->list[i].st;
+        panelized_panel.list.list[i].sort_key = list->list[i].sort_key;
+        panelized_panel.list.list[i].second_sort_key = list->list[i].second_sort_key;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+cd_panelize_cmd (void)
+{
+    WPanel *panel = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
+
+    do_panelize_cd (panel);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 void

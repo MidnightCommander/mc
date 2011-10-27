@@ -75,6 +75,13 @@ typedef struct panel_field_struct
     sortfn *sort_routine;       /* used by mouse_sort_col() */
 } panel_field_t;
 
+typedef struct
+{
+    dir_list list;
+    int count;
+    char root[MC_MAXPATHLEN];
+} panelized_panel_t;
+
 typedef struct panel_sort_info_struct
 {
     gboolean reverse;                /* Show listing in reverse? */
@@ -130,6 +137,8 @@ typedef struct WPanel
 } WPanel;
 
 /*** global variables defined in .c file *********************************************************/
+
+extern panelized_panel_t panelized_panel;
 
 extern panel_field_t panel_fields[];
 

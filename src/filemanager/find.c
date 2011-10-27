@@ -57,6 +57,7 @@
 #include "cmd.h"                /* view_file_at_line */
 #include "midnight.h"           /* current_panel */
 #include "boxes.h"
+#include "panelize.h"
 
 #include "find.h"
 
@@ -1612,6 +1613,9 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
         dir_list *list = &current_panel->dir;
         char *name = NULL;
 
+        if (set_zero_dir (list))
+            next_free++;
+
         for (i = 0, entry = find_list->list; entry != NULL; i++, entry = g_list_next (entry))
         {
             const char *lc_filename = NULL;
@@ -1687,6 +1691,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
                 strcpy (current_panel->cwd, PATH_SEP_STR);
                 ret = chdir (PATH_SEP_STR);
             }
+            panelize_save_panel (current_panel);
         }
     }
 
