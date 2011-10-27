@@ -1327,14 +1327,14 @@ smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
     char *remote_path = NULL;
     vfs_path_element_t *url;
     vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
-    char *path = path_element->path;
+    const char *path = path_element->path;
 
     DEBUG (3, ("smbfs_get_path(%s)\n", path));
-    if (strncmp (path, URL_HEADER, HEADER_LEN) != 0)
-        return NULL;
-    path += HEADER_LEN;
 
-    if (*path == '/')           /* '/' leading server name */
+    if (path_element->class != &vfs_smbfs_ops)
+        return NULL;
+
+    while (*path == '/')        /* '/' leading server name */
         path++;                 /* probably came from server browsing */
 
     url = vfs_url_split (path, SMB_PORT, URL_FLAGS_NONE);
@@ -1725,15 +1725,11 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
 
     /* check if stating server */
     p = path_element->path;
-    if (strncmp (p, URL_HEADER, HEADER_LEN))
-    {
-        DEBUG (1, ("'%s' doesnt start with '%s' (length %d)\n", p, URL_HEADER, HEADER_LEN));
+    if (path_element->class != &vfs_smbfs_ops)
         return -1;
-    }
 
-    p += HEADER_LEN;
-    if (*p == '/')
-        p++;
+    while (*p == '/')        /* '/' leading server name */
+        p++;                 /* probably came from server browsing */
 
     pp = strchr (p, '/');       /* advance past next '/' */
     at = strchr (p, '@');
@@ -1951,18 +1947,19 @@ smbfs_free (vfsid id)
  */
 
 static void
-smbfs_forget (const char *path)
+smbfs_forget (const vfs_path_t * vpath)
 {
+    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
     vfs_path_element_t *p;
+    const char *path = path_element->path;
 
-    if (strncmp (path, URL_HEADER, HEADER_LEN) != 0)
+    if (path_element->class != &vfs_smbfs_ops)
         return;
 
     DEBUG (3, ("smbfs_forget(path:%s)\n", path));
 
-    path += 6;
-    if (path[0] == '/' && path[1] == '/')
-        path += 2;
+    while (*path == '/')        /* '/' leading server name */
+        path++;                 /* probably came from server browsing */
 
     p = vfs_url_split (path, SMB_PORT, URL_FLAGS_NONE);
     if (p != NULL)
@@ -2001,7 +1998,7 @@ smbfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
     switch (ctlop)
     {
     case VFS_SETCTL_FORGET:
-        smbfs_forget (path_element->path);
+        smbfs_forget (vpath);
         break;
     case VFS_SETCTL_LOGFILE:
         smbfs_set_debugf ((const char *) arg);
