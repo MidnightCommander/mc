@@ -285,7 +285,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
             return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
         if (sender == (Widget *) buttonbar)
             return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
-        return MSG_HANDLED;
+        return MSG_NOT_HANDLED;
 
     case DLG_VALIDATE:
         h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
