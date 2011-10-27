@@ -287,6 +287,14 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     case CK_Search:
         mcview_search (view);
         break;
+    case CK_SearchForward:
+        mcview_search_options.backwards = FALSE;
+        mcview_search (view);
+        break;
+    case CK_SearchBackward:
+        mcview_search_options.backwards = TRUE;
+        mcview_search (view);
+        break;
     case CK_MagicMode:
         mcview_toggle_magic_mode (view);
         break;
@@ -318,6 +326,14 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
             mcview_move_right (view, 10);
         break;
     case CK_SearchContinue:
+        mcview_continue_search_cmd (view);
+        break;
+    case CK_SearchForwardContinue:
+        mcview_search_options.backwards = FALSE;
+        mcview_continue_search_cmd (view);
+        break;
+    case CK_SearchBackwardContinue:
+        mcview_search_options.backwards = TRUE;
         mcview_continue_search_cmd (view);
         break;
     case CK_Ruler:
