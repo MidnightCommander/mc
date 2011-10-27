@@ -342,11 +342,17 @@ static cb_ret_t
 dlg_handle_key (Dlg_head * h, int d_key)
 {
     unsigned long command;
+
     command = keybind_lookup_keymap_command (dialog_map, d_key);
-    if ((command == CK_IgnoreKey) || (dlg_execute_cmd (h, command) == MSG_NOT_HANDLED))
+
+    if (command == CK_IgnoreKey)
         return MSG_NOT_HANDLED;
-    else
+
+    if (h->callback (h, NULL, DLG_ACTION, command, NULL) == MSG_HANDLED
+        || dlg_execute_cmd (h, command) == MSG_HANDLED)
         return MSG_HANDLED;
+
+    return MSG_NOT_HANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
