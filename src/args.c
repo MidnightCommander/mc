@@ -362,7 +362,8 @@ mc_args_new_color_group (void)
                                                      "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
                                                      "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
                                                      "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-                                                     "                 editlinestate\n"
+                                                     "                 editlinestate, editbg, editframe, editframeactive\n"
+                                                     "                 editframedrag\n"
                                                      "   Viewer:       viewbold, viewunderline, viewselected\n"
                                                      "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"),
                                                    /* TRANSLATORS: don't translate color names and attributes */

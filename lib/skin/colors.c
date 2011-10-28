@@ -2,12 +2,13 @@
    Skins engine.
    Work with colors
 
-   Copyright (C) 2009, 2010, 2011
+   Copyright (C) 2009, 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2009
    Egmont Koblinger <egmont@gmail.com>, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2012
 
    This file is part of the Midnight Commander.
 
@@ -241,6 +242,10 @@ mc_skin_color_cache_init (void)
     EDITOR_WHITESPACE_COLOR = mc_skin_color_get ("editor", "editwhitespace");
     EDITOR_RIGHT_MARGIN_COLOR = mc_skin_color_get ("editor", "editrightmargin");
     LINE_STATE_COLOR = mc_skin_color_get ("editor", "editlinestate");
+    EDITOR_BACKGROUND = mc_skin_color_get ("editor", "editbg");
+    EDITOR_FRAME = mc_skin_color_get ("editor", "editframe");
+    EDITOR_FRAME_ACTIVE = mc_skin_color_get ("editor", "editframeactive");
+    EDITOR_FRAME_DRAG = mc_skin_color_get ("editor", "editframedrag");
 
     BOOK_MARK_COLOR = mc_skin_color_get ("editor", "bookmark");
     BOOK_MARK_FOUND_COLOR = mc_skin_color_get ("editor", "bookmarkfound");

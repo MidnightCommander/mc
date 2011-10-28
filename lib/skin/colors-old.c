@@ -2,12 +2,13 @@
    Skins engine.
    Work with colors - backward compability
 
-   Copyright (C) 2009, 2010, 2011
+   Copyright (C) 2009, 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2009
    Egmont Koblinger <egmont@gmail.com>, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2012
 
    This file is part of the Midnight Commander.
 
@@ -59,7 +60,11 @@ static const mc_skin_colors_old_t old_colors[] = {
     {"dhotnormal", "dialog", "dhotnormal"},
     {"disabled", "core", "disabled"},
     {"dnormal", "dialog", "_default_"},
+    {"editbg", "editor", "editbg"},
     {"editbold", "editor", "editbold"},
+    {"editframe", "editor", "editframe"},
+    {"editframeactive", "editor", "editframeactive"},
+    {"editframedrag", "editor", "editframedrag"},
     {"editlinestate", "editor", "editlinestate"},
     {"editmarked", "editor", "editmarked"},
     {"editnormal", "editor", "_default_"},
