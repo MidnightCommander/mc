@@ -32,6 +32,7 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
+#include "lib/unixcompat.h"     /* makedev */
 #include "lib/widget.h"         /* message() */
 
 #include "utilvfs.h"
