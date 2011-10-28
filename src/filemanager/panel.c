@@ -1048,7 +1048,7 @@ show_free_space (WPanel * panel)
         my_statfs (&myfs_stats, rpath);
     }
 
-    if (myfs_stats.avail > 0 || myfs_stats.total > 0)
+    if (myfs_stats.avail != 0 || myfs_stats.total != 0)
     {
         char buffer1[6], buffer2[6], tmp[BUF_SMALL];
         size_trunc_len (buffer1, sizeof (buffer1) - 1, myfs_stats.avail, 1,
@@ -1056,8 +1056,8 @@ show_free_space (WPanel * panel)
         size_trunc_len (buffer2, sizeof (buffer2) - 1, myfs_stats.total, 1,
                         panels_options.kilobyte_si);
         g_snprintf (tmp, sizeof (tmp), " %s/%s (%d%%) ", buffer1, buffer2,
-                    myfs_stats.total >
-                    0 ? (int) (100 * (double) myfs_stats.avail / myfs_stats.total) : 0);
+                    myfs_stats.total == 0 ? 0 :
+                    (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         widget_move (&panel->widget, panel->widget.lines - 1,
                      panel->widget.cols - 2 - (int) strlen (tmp));
         tty_setcolor (NORMAL_COLOR);

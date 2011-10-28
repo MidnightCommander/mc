@@ -72,6 +72,7 @@ AM_CONDITIONAL([ENABLE_MCLIB], [test x$enable_mclib = xyes])
 
 AC_HEADER_MAJOR
 AC_C_CONST
+dnl Check this before type sizeof checks
 AC_SYS_LARGEFILE
 
 AC_PROG_LN_S
@@ -209,11 +210,7 @@ AC_TYPE_UID_T
 AC_FUNC_ALLOCA
 AC_FUNC_STRCOLL
 
-dnl
-dnl This is from GNU fileutils, check aclocal.m4 for more information
-dnl uintmat_t is required for FS info
-dnl
-AC_GET_FS_INFO
+AC_MC_GET_FS_INFO
 
 dnl
 dnl X11 support.
