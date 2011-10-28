@@ -247,6 +247,9 @@ typedef struct
         /* It is used by function view_other_cmd() */
         gboolean xterm_flag;
 
+        /* disable x11 support */
+        gboolean disable_x11;
+
         /* For slow terminals */
         /* If true lines are shown by spaces */
         gboolean slow_terminal;

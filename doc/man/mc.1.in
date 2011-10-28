@@ -160,6 +160,9 @@ Display the version of the program.
 Force xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .TP
+.I \-X, \-\-no\-x
+Do not use X11 to get the state of modifiers Alt, Ctrl, Shift
+.TP
 .I \-g, \-\-oldmouse
 Force a "normal tracking" mouse mode. Used when running on
 xterm\-capable terminals (tmux/screen).
