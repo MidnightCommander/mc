@@ -203,6 +203,13 @@ static const GOptionEntry argument_terminal_table[] = {
     },
 
     {
+     "no-x11", 'X', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
+     &mc_global.tty.disable_x11,
+     N_("Disable X11 support"),
+     NULL
+    },
+
+    {
      "oldmouse", 'g', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &mc_global.tty.old_mouse,
      N_("Tries to use an old highlight mouse tracking"),

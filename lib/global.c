@@ -98,6 +98,7 @@ mc_global_t mc_global = {
         .winch_flag = FALSE,
         .command_line_colors = NULL,
         .xterm_flag = FALSE,
+        .disable_x11 = FALSE,
         .slow_terminal = FALSE,
         .disable_colors = FALSE,
         .ugly_line_drawing = FALSE,

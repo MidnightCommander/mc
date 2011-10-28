@@ -667,7 +667,7 @@ static void
 init_key_x11 (void)
 {
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (getenv ("DISPLAY") != NULL)
+    if (getenv ("DISPLAY") != NULL && !mc_global.tty.disable_x11)
     {
         x11_display = mc_XOpenDisplay (0);
 
