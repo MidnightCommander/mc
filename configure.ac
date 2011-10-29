@@ -578,8 +578,8 @@ po/Makefile.in
 
 dnl old MAN-files, non-handled by Transifex
 AC_CONFIG_FILES([
-doc/man/l10n/it/mc.1 doc/man/l10n/it/Makefile
-doc/man/l10n/sr/mc.1 doc/man/l10n/sr/Makefile
+doc/man/l10n/it/mc.1 doc/man/l10n/it/Makefile doc/man/l10n/it/mcedit.1 doc/man/l10n/it/mcview.1
+doc/man/l10n/sr/mc.1 doc/man/l10n/sr/Makefile doc/man/l10n/sr/mcedit.1 doc/man/l10n/sr/mcview.1
 ])
 
 dnl MAN-files
