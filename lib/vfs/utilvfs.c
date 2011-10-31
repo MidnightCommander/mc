@@ -44,6 +44,7 @@
 #include "lib/unixcompat.h"
 #include "lib/util.h"           /* mc_mkstemps() */
 #include "lib/widget.h"         /* message() */
+#include "lib/strutil.h"        /* INVALID_CONV */
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -325,6 +326,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     }
 
     path_element->host = g_strdup (rest);
+    path_element->dir.converter = INVALID_CONV;
 
     return path_element;
 }
