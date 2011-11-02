@@ -501,11 +501,11 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
 
     if (prev_locked)
     {
-        char *fullpath;
+        vfs_path_t *fullpath;
 
-        fullpath = mc_build_filename (edit->dir, prev_filename, (char *) NULL);
+        fullpath = vfs_path_build_filename (edit->dir, prev_filename, (char *) NULL);
         unlock_file (fullpath);
-        g_free (fullpath);
+        vfs_path_free (fullpath);
     }
     g_free (prev_filename);
     return 0;
@@ -1689,28 +1689,29 @@ edit_save_as_cmd (WEdit * edit)
         else
         {
             int rv;
+            vfs_path_t *exp_vpath;
+
+            exp_vpath = vfs_path_from_str (exp);
 
             if (strcmp (edit->filename, exp))
             {
                 int file;
-                vfs_path_t *tmp_vpath;
                 struct stat sb;
 
-                tmp_vpath = vfs_path_from_str (exp);
-                if (mc_stat (tmp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
+                if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
                 {
                     edit_error_dialog (_("Save as"),
                                        get_sys_error (_
                                                       ("Cannot save: destination is not a regular file")));
                     g_free (exp);
                     edit->force |= REDRAW_COMPLETELY;
-                    vfs_path_free (tmp_vpath);
+                    vfs_path_free (exp_vpath);
                     return 0;
                 }
 
                 different_filename = 1;
-                file = mc_open (tmp_vpath, O_RDONLY | O_BINARY);
-                vfs_path_free (tmp_vpath);
+                file = mc_open (exp_vpath, O_RDONLY | O_BINARY);
+
                 if (file != -1)
                 {
                     /* the file exists */
@@ -1722,6 +1723,7 @@ edit_save_as_cmd (WEdit * edit)
                     {
                         edit->force |= REDRAW_COMPLETELY;
                         g_free (exp);
+                        vfs_path_free (exp_vpath);
                         return 0;
                     }
                 }
@@ -1729,13 +1731,13 @@ edit_save_as_cmd (WEdit * edit)
                 {
                     edit->stat1.st_mode |= S_IWUSR;
                 }
-                save_lock = lock_file (exp);
+                save_lock = lock_file (exp_vpath);
             }
             else
             {
                 /* filenames equal, check if already locked */
                 if (!edit->locked && !edit->delete_file)
-                    save_lock = lock_file (exp);
+                    save_lock = lock_file (exp_vpath);
             }
 
             if (different_filename)
@@ -1755,7 +1757,7 @@ edit_save_as_cmd (WEdit * edit)
                 if (different_filename)
                 {
                     if (save_lock)
-                        unlock_file (exp);
+                        unlock_file (exp_vpath);
                     if (edit->locked)
                         edit->locked = edit_unlock_file (edit);
                 }
@@ -1769,6 +1771,7 @@ edit_save_as_cmd (WEdit * edit)
                 if (edit->lb != LB_ASIS)
                     edit_reload (edit, exp);
                 g_free (exp);
+                vfs_path_free (exp_vpath);
                 edit->modified = 0;
                 edit->delete_file = 0;
                 if (different_filename)
@@ -1781,8 +1784,9 @@ edit_save_as_cmd (WEdit * edit)
             case -1:
                 /* Failed, so maintain modify (not save) lock */
                 if (save_lock)
-                    unlock_file (exp);
+                    unlock_file (exp_vpath);
                 g_free (exp);
+                vfs_path_free (exp_vpath);
                 edit->force |= REDRAW_COMPLETELY;
                 return 0;
             }
