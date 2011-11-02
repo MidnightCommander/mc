@@ -4371,12 +4371,12 @@ edit_move_down (WEdit * edit, unsigned long i, int do_scroll)
 unsigned int
 edit_unlock_file (WEdit * edit)
 {
-    char *fullpath;
+    vfs_path_t *fullpath;
     unsigned int ret;
 
-    fullpath = mc_build_filename (edit->dir, edit->filename, (char *) NULL);
+    fullpath = vfs_path_build_filename (edit->dir, edit->filename, (char *) NULL);
     ret = unlock_file (fullpath);
-    g_free (fullpath);
+    vfs_path_free (fullpath);
 
     return ret;
 }
@@ -4386,12 +4386,12 @@ edit_unlock_file (WEdit * edit)
 unsigned int
 edit_lock_file (WEdit * edit)
 {
-    char *fullpath;
+    vfs_path_t *fullpath;
     unsigned int ret;
 
-    fullpath = mc_build_filename (edit->dir, edit->filename, (char *) NULL);
+    fullpath = vfs_path_build_filename (edit->dir, edit->filename, (char *) NULL);
     ret = lock_file (fullpath);
-    g_free (fullpath);
+    vfs_path_free (fullpath);
 
     return ret;
 }

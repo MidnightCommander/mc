@@ -435,12 +435,12 @@ mcview_get_title (const Dlg_head * h, size_t len)
 gboolean
 mcview_lock_file (mcview_t * view)
 {
-    char *fullpath;
+    vfs_path_t *fullpath;
     gboolean ret;
 
-    fullpath = mc_build_filename (view->workdir, view->filename, (char *) NULL);
+    fullpath = vfs_path_build_filename (view->workdir, view->filename, (char *) NULL);
     ret = lock_file (fullpath);
-    g_free (fullpath);
+    vfs_path_free (fullpath);
 
     return ret;
 }
@@ -450,12 +450,12 @@ mcview_lock_file (mcview_t * view)
 gboolean
 mcview_unlock_file (mcview_t * view)
 {
-    char *fullpath;
+    vfs_path_t *fullpath;
     gboolean ret;
 
-    fullpath = mc_build_filename (view->workdir, view->filename, (char *) NULL);
+    fullpath = vfs_path_build_filename (view->workdir, view->filename, (char *) NULL);
     ret = unlock_file (fullpath);
-    g_free (fullpath);
+    vfs_path_free (fullpath);
 
     return ret;
 }
