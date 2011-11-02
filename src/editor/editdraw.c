@@ -244,17 +244,15 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     }
 
     edit_move (x1, y);
-    p = line;
     i = 1;
-    while (p->ch)
+    for (p = line; p->ch != 0; p++)
     {
         int style;
         unsigned int textchar;
         int color;
 
-        if (cols_to_skip)
+        if (cols_to_skip != 0)
         {
-            p++;
             cols_to_skip--;
             continue;
         }
@@ -277,41 +275,23 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
                 tty_setcolor (EDITOR_MARKED_COLOR);
             }
             else
-            {
-#if 0
-                if (color != EDITOR_NORMAL_COLOR)
-                {
-                    textchar = ' ';
-                    tty_lowlevel_setcolor (color);
-                }
-                else
-#endif
-                    tty_setcolor (EDITOR_WHITESPACE_COLOR);
-            }
+                tty_setcolor (EDITOR_WHITESPACE_COLOR);
         }
+        else if (style & MOD_BOLD)
+            tty_setcolor (EDITOR_BOLD_COLOR);
+        else if (style & MOD_MARKED)
+            tty_setcolor (EDITOR_MARKED_COLOR);
         else
-        {
-            if (style & MOD_BOLD)
-            {
-                tty_setcolor (EDITOR_BOLD_COLOR);
-            }
-            else if (style & MOD_MARKED)
-            {
-                tty_setcolor (EDITOR_MARKED_COLOR);
-            }
-            else
-            {
-                tty_lowlevel_setcolor (color);
-            }
-        }
+            tty_lowlevel_setcolor (color);
+
         if (show_right_margin)
         {
             if (i > option_word_wrap_line_length + edit->start_col)
                 tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
             i++;
         }
+
         tty_print_anychar (textchar);
-        p++;
     }
 }
 
@@ -353,6 +333,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     start_col_real = (col = (int) edit_move_forward3 (edit, b, 0, q)) + edit->start_col;
+
     if (option_line_state)
     {
         cur_line = edit->start_line + row;
@@ -388,6 +369,9 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
             while (col <= end_col - edit->start_col)
             {
                 int cw = 1;
+                int tab_over = 0;
+                gboolean wide_width_char = FALSE;
+                gboolean control_char = FALSE;
 
                 p->ch = 0;
                 p->style = 0;
@@ -437,6 +421,9 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                     break;
                 case '\t':
                     i = TAB_SIZE - ((int) col % TAB_SIZE);
+                    tab_over = (end_col - edit->start_col) - (col + i - 1);
+                    if (tab_over < 0)
+                        i += tab_over;
                     col += i;
                     if (tty_use_colors () &&
                         ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws))
@@ -522,6 +509,14 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                         {
                             c = convert_from_8bit_to_utf_c ((unsigned char) c, edit->converter);
                         }
+                        else
+                        {
+                            if (g_unichar_iswide (c))
+                            {
+                                wide_width_char = TRUE;
+                                col++;
+                            }
+                        }
                     }
                     else if (edit->utf8)
                         c = convert_from_utf_to_current_c (c, edit->converter);
@@ -539,6 +534,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                         p->style = abn_style;
                         p++;
                         col += 2;
+                        control_char = TRUE;
                         break;
                     }
                     if (c == 127)
@@ -550,6 +546,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                         p->style = abn_style;
                         p++;
                         col += 2;
+                        control_char = TRUE;
                         break;
                     }
                     if (!edit->utf8)
@@ -590,6 +587,20 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                 {
                     q += cw - 1;
                 }
+
+                if (col > (end_col - edit->start_col + 1))
+                {
+                    if (wide_width_char)
+                    {
+                        p--;
+                        break;
+                    }
+                    if (control_char)
+                    {
+                        p -= 2;
+                        break;
+                    }
+                }
             }
         }
     }
@@ -598,7 +609,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
         start_col_real = start_col = 0;
     }
 
-    p->ch = '\0';
+    p->ch = 0;
 
     print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat, book_mark);
 }
