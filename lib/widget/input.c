@@ -1276,13 +1276,13 @@ input_update (WInput * in, gboolean clear_first)
     else
     {
         cp = str_term_substring (in->buffer, in->term_first_shown, in->field_width - has_history);
+        tty_setcolor (in->color[WINPUTC_MAIN]);
         for (i = 0; i < in->field_width - has_history; i++)
         {
-            if (i >= 0)
-            {
-                tty_setcolor (in->color[WINPUTC_MAIN]);
-                tty_print_char ((cp[0] != '\0') ? '*' : ' ');
-            }
+            if (i < (buf_len - in->term_first_shown) && cp[0] != '\0')
+                tty_print_char ('*');
+            else
+                tty_print_char (' ');
             if (cp[0] != '\0')
                 str_cnext_char (&cp);
         }
