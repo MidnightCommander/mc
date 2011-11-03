@@ -840,7 +840,7 @@ set_display_type (int num, panel_view_mode_t type)
     unsigned int the_other = 0; /* Index to the other panel */
     const char *file_name = NULL;       /* For Quick view */
     Widget *new_widget = NULL, *old_widget = NULL;
-    panel_view_mode_t old_type;
+    panel_view_mode_t old_type = view_listing;
     WPanel *the_other_panel = NULL;
 
     if (num >= MAX_VIEWS)
@@ -927,7 +927,7 @@ set_display_type (int num, panel_view_mode_t type)
     /* same state.  Maybe we could just kill it and then replace it  */
     if ((midnight_dlg != NULL) && (old_widget != NULL))
     {
-        if (old_widget == view_listing)
+        if (old_type == view_listing)
         {
             /* save and write directory history of panel
              * ... and other histories of midnight_dlg  */
