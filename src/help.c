@@ -917,9 +917,6 @@ help_execute_cmd (unsigned long command)
     case CK_Quit:
         dlg_stop (whelp);
         break;
-    case CK_Cancel:
-        /* don't close help due to SIGINT */
-        break;
     default:
         ret = MSG_NOT_HANDLED;
     }
