@@ -1531,6 +1531,22 @@ edit_show_margin_cmd (Dlg_head * h)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Toggle line numbers showing in all editor windows.
+ *
+ * @param h root widget for all windows
+ */
+
+void
+edit_show_numbers_cmd (Dlg_head * h)
+{
+    option_line_state = !option_line_state;
+    option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
+    g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
+    dlg_redraw (h);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_save_mode_cmd (void)
