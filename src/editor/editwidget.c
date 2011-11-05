@@ -571,6 +571,9 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
     case CK_ShowMargin:
         edit_show_margin_cmd (h);
         break;
+    case CK_ShowNumbers:
+        edit_show_numbers_cmd (h);
+        break;
     case CK_Refresh:
         edit_refresh_cmd ();
         break;

@@ -2125,10 +2125,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     gboolean to_free = FALSE;
 
     option_auto_syntax = 1;     /* Resetting to auto on every invokation */
-    if (option_line_state)
-        option_line_state_width = LINE_STATE_WIDTH;
-    else
-        option_line_state_width = 0;
+    option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
 
     if (edit != NULL)
         edit_purge_widget (edit);
@@ -3871,12 +3868,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
         edit_mark_current_line_cmd (edit);
-        break;
-
-    case CK_ShowNumbers:
-        option_line_state = !option_line_state;
-        option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
-        edit->force |= REDRAW_PAGE;
         break;
 
     case CK_Bookmark:
