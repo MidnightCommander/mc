@@ -68,31 +68,59 @@ static const struct
     { "filehighlight.ini",                     &mc_config_str, MC_FHL_INI_FILE},
     { "hotlist",                               &mc_config_str, MC_HOTLIST_FILE},
     { "mc.keymap",                             &mc_config_str, GLOBAL_KEYMAP_FILE},
+    { "menu",                                  &mc_config_str, MC_USERMENU_FILE},
+    { "cedit" PATH_SEP_STR "Syntax",           &mc_config_str, EDIT_SYNTAX_FILE},
+    { "cedit" PATH_SEP_STR "menu",             &mc_config_str, EDIT_HOME_MENU},
+    { "cedit" PATH_SEP_STR "edit.indent.rc",   &mc_config_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc"},
+    { "cedit" PATH_SEP_STR "edit.spell.rc",    &mc_config_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc"},
+    { "panels.ini",                            &mc_config_str, MC_PANELS_FILE},
+    /* User should move this file with applying some changes in file */
+/*  { "bindings",                              &mc_config_str, MC_FILEBIND_FILE}, */
 
     /* data */
     { "skins",                                 &mc_data_str, MC_SKINS_SUBDIR},
     { "fish",                                  &mc_data_str, FISH_PREFIX},
-    { "bindings",                              &mc_data_str, MC_FILEBIND_FILE},
-    { "menu",                                  &mc_data_str, MC_USERMENU_FILE},
     { "bashrc",                                &mc_data_str, "bashrc"},
     { "inputrc",                               &mc_data_str, "inputrc"},
     { "extfs.d",                               &mc_data_str, MC_EXTFS_DIR},
-    { "cedit" PATH_SEP_STR "Syntax",           &mc_data_str, EDIT_SYNTAX_FILE},
-    { "cedit" PATH_SEP_STR "menu",             &mc_data_str, EDIT_HOME_MENU},
-    { "cedit" PATH_SEP_STR "edit.indent.rc",   &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc"},
-    { "cedit" PATH_SEP_STR "edit.spell.rc",    &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc"},
+    { "history",                               &mc_data_str, MC_HISTORY_FILE},
+    { "filepos",                               &mc_data_str, MC_FILEPOS_FILE},
+    { "cedit" PATH_SEP_STR "cooledit.clip",    &mc_data_str, EDIT_CLIP_FILE},
 
     /* cache */
-    { "history",                               &mc_cache_str, MC_HISTORY_FILE},
-    { "panels.ini",                            &mc_cache_str, MC_PANELS_FILE},
     { "log",                                   &mc_cache_str, "mc.log"},
-    { "filepos",                               &mc_cache_str, MC_FILEPOS_FILE},
     { "Tree",                                  &mc_cache_str, MC_TREESTORE_FILE},
-    { "cedit" PATH_SEP_STR "cooledit.clip",    &mc_cache_str, EDIT_CLIP_FILE},
     { "cedit" PATH_SEP_STR "cooledit.temp",    &mc_cache_str, EDIT_TEMP_FILE},
     { "cedit" PATH_SEP_STR "cooledit.block",   &mc_cache_str, EDIT_BLOCK_FILE},
 
     {NULL, NULL, NULL}
+    /* *INDENT-ON* */
+};
+
+static const struct
+{
+    char **old_basedir;
+    const char *old_filename;
+
+    char **new_basedir;
+    const char *new_filename;
+} mc_config_migrate_rules_fix[] =
+{
+    /* *INDENT-OFF* */
+    { &mc_data_str, MC_USERMENU_FILE,                       &mc_config_str, MC_USERMENU_FILE},
+    { &mc_data_str, EDIT_SYNTAX_FILE,                       &mc_config_str, EDIT_SYNTAX_FILE},
+    { &mc_data_str, EDIT_HOME_MENU,                         &mc_config_str, EDIT_HOME_MENU},
+    { &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc", &mc_config_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc"},
+    { &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc",  &mc_config_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc"},
+    { &mc_data_str, MC_FILEBIND_FILE,                       &mc_config_str, MC_FILEBIND_FILE},
+
+    { &mc_cache_str, MC_HISTORY_FILE,                       &mc_data_str, MC_HISTORY_FILE},
+    { &mc_cache_str, MC_FILEPOS_FILE,                       &mc_data_str, MC_FILEPOS_FILE},
+    { &mc_cache_str, EDIT_CLIP_FILE,                        &mc_data_str, EDIT_CLIP_FILE},
+
+    { &mc_cache_str, MC_PANELS_FILE,                        &mc_config_str, MC_PANELS_FILE},
+
+    {NULL, NULL, NULL, NULL}
     /* *INDENT-ON* */
 };
 
@@ -192,6 +220,36 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_config_fix_migrated_rules (void)
+{
+    size_t rule_index;
+
+    for (rule_index = 0; mc_config_migrate_rules_fix[rule_index].old_basedir != NULL; rule_index++)
+    {
+        char *old_name;
+
+        old_name =
+            g_build_filename (*mc_config_migrate_rules_fix[rule_index].old_basedir,
+                              mc_config_migrate_rules_fix[rule_index].old_filename, NULL);
+
+        if (g_file_test (old_name, G_FILE_TEST_EXISTS))
+        {
+            char *new_name;
+
+            new_name = g_build_filename (*mc_config_migrate_rules_fix[rule_index].new_basedir,
+                                         mc_config_migrate_rules[rule_index].new_filename, NULL);
+
+            rename (old_name, new_name);
+
+            g_free (new_name);
+        }
+        g_free (old_name);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -226,6 +284,7 @@ mc_config_init_config_paths (GError ** error)
     g_free (u_cache_dir);
     g_free (u_config_dir);
 
+    mc_config_fix_migrated_rules ();
 #else /* MC_HOMEDIR_XDG */
     char *u_config_dir = g_build_filename (mc_config_get_home_dir (), MC_USERCONF_DIR, NULL);
 
