@@ -39,14 +39,16 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define MC_OLD_USERCONF_DIR ".mc"
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
 
 static gboolean xdg_vars_initialized = FALSE;
-static char *xdg_config = NULL;
-static char *xdg_cache = NULL;
-static char *xdg_data = NULL;
+static char *mc_config_str = NULL;
+static char *mc_cache_str = NULL;
+static char *mc_data_str = NULL;
 
 static const char *homedir = NULL;
 
@@ -62,33 +64,33 @@ static const struct
 {
     /* *INDENT-OFF* */
     /* config */
-    { "ini",                                   &xdg_config, MC_CONFIG_FILE},
-    { "filehighlight.ini",                     &xdg_config, MC_FHL_INI_FILE},
-    { "hotlist",                               &xdg_config, MC_HOTLIST_FILE},
-    { "mc.keymap",                             &xdg_config, GLOBAL_KEYMAP_FILE},
+    { "ini",                                   &mc_config_str, MC_CONFIG_FILE},
+    { "filehighlight.ini",                     &mc_config_str, MC_FHL_INI_FILE},
+    { "hotlist",                               &mc_config_str, MC_HOTLIST_FILE},
+    { "mc.keymap",                             &mc_config_str, GLOBAL_KEYMAP_FILE},
 
     /* data */
-    { "skins",                                 &xdg_data, MC_SKINS_SUBDIR},
-    { "fish",                                  &xdg_data, FISH_PREFIX},
-    { "bindings",                              &xdg_data, MC_FILEBIND_FILE},
-    { "menu",                                  &xdg_data, MC_USERMENU_FILE},
-    { "bashrc",                                &xdg_data, "bashrc"},
-    { "inputrc",                               &xdg_data, "inputrc"},
-    { "extfs.d",                               &xdg_data, MC_EXTFS_DIR},
-    { "cedit" PATH_SEP_STR "Syntax",           &xdg_data, EDIT_SYNTAX_FILE},
-    { "cedit" PATH_SEP_STR "menu",             &xdg_data, EDIT_HOME_MENU},
-    { "cedit" PATH_SEP_STR "edit.indent.rc",   &xdg_data, EDIT_DIR PATH_SEP_STR "edit.indent.rc"},
-    { "cedit" PATH_SEP_STR "edit.spell.rc",    &xdg_data, EDIT_DIR PATH_SEP_STR "edit.spell.rc"},
+    { "skins",                                 &mc_data_str, MC_SKINS_SUBDIR},
+    { "fish",                                  &mc_data_str, FISH_PREFIX},
+    { "bindings",                              &mc_data_str, MC_FILEBIND_FILE},
+    { "menu",                                  &mc_data_str, MC_USERMENU_FILE},
+    { "bashrc",                                &mc_data_str, "bashrc"},
+    { "inputrc",                               &mc_data_str, "inputrc"},
+    { "extfs.d",                               &mc_data_str, MC_EXTFS_DIR},
+    { "cedit" PATH_SEP_STR "Syntax",           &mc_data_str, EDIT_SYNTAX_FILE},
+    { "cedit" PATH_SEP_STR "menu",             &mc_data_str, EDIT_HOME_MENU},
+    { "cedit" PATH_SEP_STR "edit.indent.rc",   &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc"},
+    { "cedit" PATH_SEP_STR "edit.spell.rc",    &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc"},
 
     /* cache */
-    { "history",                               &xdg_cache, MC_HISTORY_FILE},
-    { "panels.ini",                            &xdg_cache, MC_PANELS_FILE},
-    { "log",                                   &xdg_cache, "mc.log"},
-    { "filepos",                               &xdg_cache, MC_FILEPOS_FILE},
-    { "Tree",                                  &xdg_cache, MC_TREESTORE_FILE},
-    { "cedit" PATH_SEP_STR "cooledit.clip",    &xdg_cache, EDIT_CLIP_FILE},
-    { "cedit" PATH_SEP_STR "cooledit.temp",    &xdg_cache, EDIT_TEMP_FILE},
-    { "cedit" PATH_SEP_STR "cooledit.block",   &xdg_cache, EDIT_BLOCK_FILE},
+    { "history",                               &mc_cache_str, MC_HISTORY_FILE},
+    { "panels.ini",                            &mc_cache_str, MC_PANELS_FILE},
+    { "log",                                   &mc_cache_str, "mc.log"},
+    { "filepos",                               &mc_cache_str, MC_FILEPOS_FILE},
+    { "Tree",                                  &mc_cache_str, MC_TREESTORE_FILE},
+    { "cedit" PATH_SEP_STR "cooledit.clip",    &mc_cache_str, EDIT_CLIP_FILE},
+    { "cedit" PATH_SEP_STR "cooledit.temp",    &mc_cache_str, EDIT_TEMP_FILE},
+    { "cedit" PATH_SEP_STR "cooledit.block",   &mc_cache_str, EDIT_BLOCK_FILE},
 
     {NULL, NULL, NULL}
     /* *INDENT-ON* */
@@ -135,7 +137,7 @@ mc_config_init_one_config_path (const char *path_base, const char *subdir, GErro
 static char *
 mc_config_get_deprecated_path (void)
 {
-    return g_build_filename (mc_config_get_home_dir (), "." MC_USERCONF_DIR, NULL);
+    return g_build_filename (mc_config_get_home_dir (), MC_OLD_USERCONF_DIR, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -198,6 +200,7 @@ mc_config_init_config_paths (GError ** error)
 {
     const char *mc_datadir;
 
+#if MC_HOMEDIR_XDG
     char *u_config_dir = (char *) g_get_user_config_dir ();
     char *u_data_dir = (char *) g_get_user_data_dir ();
     char *u_cache_dir = (char *) g_get_user_cache_dir ();
@@ -215,13 +218,26 @@ mc_config_init_config_paths (GError ** error)
         ? g_build_filename (mc_config_get_home_dir (), ".local", "share", NULL)
         : g_strdup (u_data_dir);
 
-    xdg_config = mc_config_init_one_config_path (u_config_dir, MC_USERCONF_DIR, error);
-    xdg_cache = mc_config_init_one_config_path (u_cache_dir, MC_USERCONF_DIR, error);
-    xdg_data = mc_config_init_one_config_path (u_data_dir, MC_USERCONF_DIR, error);
+    mc_config_str = mc_config_init_one_config_path (u_config_dir, MC_USERCONF_DIR, error);
+    mc_cache_str = mc_config_init_one_config_path (u_cache_dir, MC_USERCONF_DIR, error);
+    mc_data_str = mc_config_init_one_config_path (u_data_dir, MC_USERCONF_DIR, error);
 
     g_free (u_data_dir);
     g_free (u_cache_dir);
     g_free (u_config_dir);
+
+#else /* MC_HOMEDIR_XDG */
+    char *u_config_dir = g_build_filename (mc_config_get_home_dir (), MC_USERCONF_DIR, NULL);
+
+    u_config_dir = (u_config_dir == NULL)
+        ? g_build_filename (mc_config_get_home_dir (), MC_OLD_USERCONF_DIR,
+                            NULL) : g_strdup (u_config_dir);
+
+    mc_data_str = mc_cache_str = mc_config_str =
+        mc_config_init_one_config_path (u_config_dir, "", error);
+
+    g_free (u_config_dir);
+#endif /* MC_HOMEDIR_XDG */
 
     /* This is the directory, where MC was installed, on Unix this is DATADIR */
     /* and can be overriden by the MC_DATADIR environment variable */
@@ -244,9 +260,11 @@ mc_config_deinit_config_paths (void)
     if (!xdg_vars_initialized)
         return;
 
-    g_free (xdg_config);
-    g_free (xdg_cache);
-    g_free (xdg_data);
+    g_free (mc_config_str);
+#if MC_HOMEDIR_XDG
+    g_free (mc_cache_str);
+    g_free (mc_data_str);
+#endif /* MC_HOMEDIR_XDG */
 
     g_free (mc_global.share_data_dir);
     g_free (mc_global.sysconfig_dir);
@@ -262,7 +280,7 @@ mc_config_get_data_path (void)
     if (!xdg_vars_initialized)
         mc_config_init_config_paths (NULL);
 
-    return (const char *) xdg_data;
+    return (const char *) mc_data_str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -273,7 +291,7 @@ mc_config_get_cache_path (void)
     if (!xdg_vars_initialized)
         mc_config_init_config_paths (NULL);
 
-    return (const char *) xdg_cache;
+    return (const char *) mc_cache_str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -298,7 +316,7 @@ mc_config_get_path (void)
     if (!xdg_vars_initialized)
         mc_config_init_config_paths (NULL);
 
-    return (const char *) xdg_config;
+    return (const char *) mc_config_str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -311,9 +329,11 @@ mc_config_migrate_from_old_place (GError ** error)
 
     old_dir = mc_config_get_deprecated_path ();
 
-    g_free (mc_config_init_one_config_path (xdg_config, EDIT_DIR, error));
-    g_free (mc_config_init_one_config_path (xdg_cache, EDIT_DIR, error));
-    g_free (mc_config_init_one_config_path (xdg_data, EDIT_DIR, error));
+    g_free (mc_config_init_one_config_path (mc_config_str, EDIT_DIR, error));
+#if MC_HOMEDIR_XDG
+    g_free (mc_config_init_one_config_path (mc_cache_str, EDIT_DIR, error));
+    g_free (mc_config_init_one_config_path (mc_data_str, EDIT_DIR, error));
+#endif /* MC_HOMEDIR_XDG */
 
     for (rule_index = 0; mc_config_migrate_rules[rule_index].old_filename != NULL; rule_index++)
     {
@@ -336,6 +356,7 @@ mc_config_migrate_from_old_place (GError ** error)
         g_free (old_name);
     }
 
+#if MC_HOMEDIR_XDG
     g_propagate_error (error,
                        g_error_new (MC_ERROR, 0,
                                     _
@@ -344,6 +365,13 @@ mc_config_migrate_from_old_place (GError ** error)
                                      "To get more info, please visit\n"
                                      "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"),
                                     old_dir));
+#else /* MC_HOMEDIR_XDG */
+    g_propagate_error (error,
+                       g_error_new (MC_ERROR, 0,
+                                    _
+                                    ("Your old settings were migrated from %s\n"
+                                     "to %s\n"), old_dir, mc_config_str));
+#endif /* MC_HOMEDIR_XDG */
 
     g_free (old_dir);
 }
