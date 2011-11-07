@@ -405,6 +405,30 @@ linux*)
 esac
 
 
+dnl
+dnl Where config files should be placed
+dnl
+
+AC_ARG_WITH([homedir],
+    AS_HELP_STRING([--enable-homedir], [Choose any place of user settings relative to home dir, or XDG for respect XDG standards @<:@XDG@:>@]),
+    [
+	if test "x$withval" = "xXDG"; then
+	    with_homedir=XDG
+	else
+	    with_homedir=$withval
+	fi
+    ],
+    [with_homedir=XDG])
+
+
+if test x$with_homedir = xXDG; then
+    AC_DEFINE(MC_HOMEDIR_XDG, 1,
+	[Define to enable XDG standard support])
+else
+    AC_DEFINE_UNQUOTED([MC_USERCONF_DIR], ["$with_homedir"], [Where configs will be placed relative to $HOME])
+fi
+
+
 dnl Support for background operations
 AC_ARG_ENABLE([background],
 	      [  --enable-background     Support for background file operations [[yes]]])
