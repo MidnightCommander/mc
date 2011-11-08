@@ -35,7 +35,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* concat_dir_and_file */
+#include "lib/util.h"           /* mc_build_filename() */
 #include "lib/serialize.h"
 
 #include "vfs.h"
@@ -143,7 +143,7 @@ vfs_canon (const char *path)
         char *local, *result, *curr_dir;
 
         curr_dir = vfs_get_current_dir ();
-        local = concat_dir_and_file (curr_dir, path);
+        local = mc_build_filename (curr_dir, path, NULL);
         g_free (curr_dir);
 
         result = vfs_canon (local);

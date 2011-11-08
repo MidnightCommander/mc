@@ -65,7 +65,7 @@ What to do with this?
         int f = !strcmp( remote_path, "/~" );
         if (f || !strncmp( remote_path, "/~/", 3 )) {
             char *s;
-            s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
+            s = mc_build_filename ( qhome (*bucket), remote_path +3-f, NULL );
             g_free (remote_path);
             remote_path = s;
         }
@@ -1680,8 +1680,10 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         sock = ftpfs_open_data_connection (me, super, "LIST -la", 0, TYPE_ASCII, 0);
     else
     {
+        char *path;
+
         /* Trailing "/." is necessary if remote_path is a symlink */
-        char *path = concat_dir_and_file (remote_path, ".");
+        path = mc_build_filename (remote_path, ".", NULL);
         sock = ftpfs_open_data_connection (me, super, "LIST -la", path, TYPE_ASCII, 0);
         g_free (path);
     }

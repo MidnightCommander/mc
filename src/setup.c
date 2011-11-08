@@ -827,7 +827,7 @@ setup_init (void)
     profile = mc_config_get_full_path (MC_CONFIG_FILE);
     if (!exist_file (profile))
     {
-        inifile = concat_dir_and_file (mc_global.sysconfig_dir, "mc.ini");
+        inifile = mc_build_filename (mc_global.sysconfig_dir, "mc.ini", NULL);
         if (exist_file (inifile))
         {
             g_free (profile);
@@ -836,7 +836,7 @@ setup_init (void)
         else
         {
             g_free (inifile);
-            inifile = concat_dir_and_file (mc_global.share_data_dir, "mc.ini");
+            inifile = mc_build_filename (mc_global.share_data_dir, "mc.ini", NULL);
             if (exist_file (inifile))
             {
                 g_free (profile);

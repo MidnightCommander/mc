@@ -954,19 +954,20 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
         {
             g_free (menu);
             menu =
-                concat_dir_and_file (mc_config_get_home_dir (),
-                                     edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                mc_build_filename (mc_config_get_home_dir (),
+                                   edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU, NULL);
             if (!exist_file (menu))
             {
                 g_free (menu);
                 menu =
-                    concat_dir_and_file (mc_global.sysconfig_dir,
-                                         edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                    mc_build_filename (mc_global.sysconfig_dir,
+                                       edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU, NULL);
                 if (!exist_file (menu))
                 {
                     g_free (menu);
-                    menu = concat_dir_and_file
-                        (mc_global.share_data_dir, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                    menu = mc_build_filename
+                        (mc_global.share_data_dir, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU,
+                         NULL);
                 }
             }
         }

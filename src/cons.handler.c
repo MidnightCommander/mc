@@ -44,7 +44,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"           /* tty_set_normal_attrs */
 #include "lib/tty/win.h"
-#include "lib/util.h"           /* concat_dir_and_file() */
+#include "lib/util.h"           /* mc_build_filename() */
 
 #include "consaver/cons.saver.h"
 
@@ -205,7 +205,7 @@ handle_console_linux (console_action_t action)
                 if (tty_name)
                 {
                     /* Exec the console save/restore handler */
-                    mc_conssaver = concat_dir_and_file (SAVERDIR, "cons.saver");
+                    mc_conssaver = mc_build_filename (SAVERDIR, "cons.saver", NULL);
                     execl (mc_conssaver, "cons.saver", tty_name, (char *) NULL);
                 }
                 /* Console is not a tty or execl() failed */
@@ -383,8 +383,8 @@ console_save (void)
     for (i = 0; i < screen_shot.xsize * screen_shot.ysize; i++)
     {
         screen_shot.buf[i] =
-            (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.scrmap[screen_shot.
-                                                                          buf[i] & 0xff];
+            (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.
+            scrmap[screen_shot.buf[i] & 0xff];
     }
 }
 
