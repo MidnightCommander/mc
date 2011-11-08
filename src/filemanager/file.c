@@ -79,6 +79,7 @@
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
 #include "filegui.h"
+#include "filenot.h"
 #include "tree.h"
 #include "midnight.h"           /* current_panel */
 

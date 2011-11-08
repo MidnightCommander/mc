@@ -12,7 +12,7 @@ libmcfilemanager_la_SOURCES = \
 	ext.c ext.h \
 	file.c file.h \
 	filegui.c filegui.h \
-	filenot.c \
+	filenot.c filenot.h \
 	fileopctx.c fileopctx.h \
 	find.c find.h \
 	hotlist.c hotlist.h \
