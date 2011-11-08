@@ -43,6 +43,8 @@
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"
 
+#include "filenot.h"
+
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/

@@ -164,10 +164,6 @@ char *tilde_expand (const char *);
 void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
 void canonicalize_pathname (char *);
 
-/* Misc Unix functions */
-int my_mkdir (const vfs_path_t * s, mode_t mode);
-int my_rmdir (const char *s);
-
 #ifdef HAVE_REALPATH
 #define mc_realpath realpath
 #else

@@ -82,6 +82,7 @@
 #include "fileopctx.h"
 #include "file.h"               /* file operation routines */
 #include "find.h"               /* find_file() */
+#include "filenot.h"
 #include "hotlist.h"            /* hotlist_show() */
 #include "panel.h"              /* WPanel */
 #include "tree.h"               /* tree_chdir() */
