@@ -1335,6 +1335,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
     char *fullname = NULL;
     const char *filename = NULL;
     int line;
+    vfs_path_t *fullname_vpath;
 
     if (content_pattern != NULL)
     {
@@ -1347,11 +1348,12 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
         line = 0;
     }
 
-    fullname = mc_build_filename (dir, filename, (char *) NULL);
+    fullname_vpath = vfs_path_build_filename (dir, filename, (char *) NULL);
     if (edit)
-        do_edit_at_line (fullname, use_internal_edit, line);
+        do_edit_at_line (fullname_vpath, use_internal_edit, line);
     else
         view_file_at_line (fullname, unparsed_view, use_internal_view, line);
+    vfs_path_free (fullname_vpath);
     g_free (fullname);
 }
 

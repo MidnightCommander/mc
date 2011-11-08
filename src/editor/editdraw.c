@@ -822,8 +822,9 @@ edit_status (WEdit * edit)
     status_string (edit, status, status_size);
     status_len = (int) str_term_width1 (status);
 
-    if (edit->filename)
-        fname = edit->filename;
+    if (edit->filename_vpath != NULL)
+        fname = vfs_path_get_last_path_str (edit->filename_vpath);
+
     fname_len = str_term_width1 (fname);
     if (fname_len < preferred_fname_len)
         fname_len = preferred_fname_len;

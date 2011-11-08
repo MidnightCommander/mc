@@ -1505,18 +1505,20 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
     if (!option_syntax_highlighting && (!pnames || !*pnames))
         return;
 
-    if (edit != NULL)
-    {
-        if (!edit->filename)
-            return;
-        if (!*edit->filename && !type)
-            return;
-    }
+    if (edit != NULL && edit->filename_vpath == NULL)
+        return;
+
     f = mc_config_get_full_path (EDIT_SYNTAX_FILE);
     if (edit != NULL)
-        r = edit_read_syntax_file (edit, pnames, f, edit->filename,
+    {
+        char *tmp_f;
+
+        tmp_f = vfs_path_to_str (edit->filename_vpath);
+        r = edit_read_syntax_file (edit, pnames, f, tmp_f,
                                    get_first_editor_line (edit),
                                    option_auto_syntax ? NULL : edit->syntax_type);
+        g_free (tmp_f);
+    }
     else
         r = edit_read_syntax_file (NULL, pnames, f, NULL, "", NULL);
     if (r == -1)

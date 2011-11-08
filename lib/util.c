@@ -1195,13 +1195,14 @@ list_append_unique (GList * list, char *text)
  */
 
 void
-load_file_position (const char *filename, long *line, long *column, off_t * offset,
+load_file_position (const vfs_path_t * filename_vpath, long *line, long *column, off_t * offset,
                     GArray ** bookmarks)
 {
     char *fn;
     FILE *f;
     char buf[MC_MAXPATHLEN + 100];
-    const size_t len = strlen (filename);
+    const size_t len = vfs_path_len (filename_vpath);
+    char *filename;
 
     /* defaults */
     *line = 1;
@@ -1217,6 +1218,7 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
 
     /* prepare array for serialized bookmarks */
     *bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
+    filename = vfs_path_to_str (filename_vpath);
 
     while (fgets (buf, sizeof (buf), f) != NULL)
     {
@@ -1276,6 +1278,7 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
         g_strfreev (pos_tokens);
     }
 
+    g_free (filename);
     fclose (f);
 }
 
@@ -1285,15 +1288,17 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
  */
 
 void
-save_file_position (const char *filename, long line, long column, off_t offset, GArray * bookmarks)
+save_file_position (const vfs_path_t * filename_vpath, long line, long column, off_t offset,
+                    GArray * bookmarks)
 {
     static size_t filepos_max_saved_entries = 0;
     char *fn, *tmp_fn;
     FILE *f, *tmp_f;
     char buf[MC_MAXPATHLEN + 100];
     size_t i;
-    const size_t len = strlen (filename);
+    const size_t len = vfs_path_len (filename_vpath);
     gboolean src_error = FALSE;
+    char *filename;
 
     if (filepos_max_saved_entries == 0)
         filepos_max_saved_entries = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
@@ -1318,6 +1323,7 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
         goto open_source_error;
     }
 
+    filename = vfs_path_to_str (filename_vpath);
     /* put the new record */
     if (line != 1 || column != 0 || bookmarks != NULL)
     {
@@ -1345,6 +1351,7 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
     }
 
   write_position_error:
+    g_free (filename);
     fclose (tmp_f);
   open_source_error:
     g_free (tmp_fn);

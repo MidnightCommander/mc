@@ -526,24 +526,25 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         {
             if (edit_stack_iterator + 1 < MAX_HISTORY_MOVETO)
             {
-                g_free (edit_history_moveto[edit_stack_iterator].filename);
-                if (edit->dir)
+                vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
+                if (edit->dir_vpath != NULL)
                 {
-                    edit_history_moveto[edit_stack_iterator].filename =
-                        g_strdup_printf ("%s/%s", edit->dir, edit->filename);
+                    edit_history_moveto[edit_stack_iterator].filename_vpath =
+                        vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, NULL);
                 }
                 else
                 {
-                    edit_history_moveto[edit_stack_iterator].filename = g_strdup (edit->filename);
+                    edit_history_moveto[edit_stack_iterator].filename_vpath =
+                        vfs_path_clone (edit->filename_vpath);
                 }
                 edit_history_moveto[edit_stack_iterator].line = edit->start_line +
                     edit->curs_row + 1;
                 edit_stack_iterator++;
-                g_free (edit_history_moveto[edit_stack_iterator].filename);
-                edit_history_moveto[edit_stack_iterator].filename =
-                    g_strdup ((char *) curr_def->fullpath);
+                vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
+                edit_history_moveto[edit_stack_iterator].filename_vpath =
+                    vfs_path_from_str ((char *) curr_def->fullpath);
                 edit_history_moveto[edit_stack_iterator].line = curr_def->line;
-                edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
+                edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
                                   edit_history_moveto[edit_stack_iterator].line);
             }
         }

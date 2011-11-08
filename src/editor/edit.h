@@ -61,9 +61,9 @@ extern int show_right_margin;
 void edit_stack_init (void);
 void edit_stack_free (void);
 
-int edit_file (const char *_file, int line);
+int edit_file (const vfs_path_t * _file_vpath, int line);
 
-const char *edit_get_file_name (const WEdit * edit);
+char *edit_get_file_name (const WEdit * edit);
 int edit_get_curs_col (const WEdit * edit);
 const char *edit_get_syntax_type (const WEdit * edit);
 

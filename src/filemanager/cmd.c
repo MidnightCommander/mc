@@ -195,9 +195,9 @@ do_view_cmd (gboolean normal)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-do_edit (const char *what)
+do_edit (const vfs_path_t * what_vpath)
 {
-    do_edit_at_line (what, use_internal_edit, 0);
+    do_edit_at_line (what_vpath, use_internal_edit, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -813,18 +813,21 @@ view_filtered_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_edit_at_line (const char *what, gboolean internal, int start_line)
+do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_line)
 {
     static const char *editor = NULL;
 
 #ifdef USE_INTERNAL_EDIT
     if (internal)
-        edit_file (what, start_line);
+        edit_file (what_vpath, start_line);
     else
 #else
     (void) start_line;
 #endif /* USE_INTERNAL_EDIT */
     {
+        char *what;
+
+        what = vfs_path_to_str (what_vpath);
         if (editor == NULL)
         {
             editor = getenv ("EDITOR");
@@ -832,6 +835,7 @@ do_edit_at_line (const char *what, gboolean internal, int start_line)
                 editor = get_default_editor ();
         }
         execute_with_vfs_arg (editor, what);
+        g_free (what);
     }
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
@@ -851,7 +855,13 @@ void
 edit_cmd (void)
 {
     if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
-        do_edit (selection (current_panel)->fname);
+    {
+        vfs_path_t *fname;
+
+        fname = vfs_path_from_str (selection (current_panel)->fname);
+        do_edit (fname);
+        vfs_path_free (fname);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -861,7 +871,13 @@ void
 edit_cmd_force_internal (void)
 {
     if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
-        do_edit_at_line (selection (current_panel)->fname, TRUE, 0);
+    {
+        vfs_path_t *fname;
+
+        fname = vfs_path_from_str (selection (current_panel)->fname);
+        do_edit_at_line (fname, TRUE, 0);
+        vfs_path_free (fname);
+    }
 }
 #endif
 
@@ -1089,8 +1105,8 @@ unselect_cmd (void)
 void
 ext_cmd (void)
 {
-    char *buffer;
-    char *extdir;
+    vfs_path_t *buffer_vpath;
+    vfs_path_t *extdir_vpath;
     int dir;
 
     dir = 0;
@@ -1100,25 +1116,25 @@ ext_cmd (void)
                             _("Which extension file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_global.sysconfig_dir, MC_LIB_EXT);
+    extdir_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, NULL);
 
     if (dir == 0)
     {
-        buffer = mc_config_get_full_path (MC_FILEBIND_FILE);
-        check_for_default (extdir, buffer);
-        do_edit (buffer);
-        g_free (buffer);
+        buffer_vpath = mc_config_get_full_vpath (MC_FILEBIND_FILE);
+        check_for_default (extdir_vpath, buffer_vpath);
+        do_edit (buffer_vpath);
+        vfs_path_free (buffer_vpath);
     }
     else if (dir == 1)
     {
-        if (!exist_file (extdir))
+        if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
         {
-            g_free (extdir);
-            extdir = concat_dir_and_file (mc_global.share_data_dir, MC_LIB_EXT);
+            vfs_path_free (extdir_vpath);
+            extdir_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_LIB_EXT, NULL);
         }
-        do_edit (extdir);
+        do_edit (extdir_vpath);
     }
-    g_free (extdir);
+    vfs_path_free (extdir_vpath);
     flush_extension_file ();
 }
 
@@ -1128,53 +1144,53 @@ ext_cmd (void)
 void
 edit_mc_menu_cmd (void)
 {
-    char *buffer;
-    char *menufile;
+    vfs_path_t *buffer_vpath;
+    vfs_path_t *menufile_vpath;
     int dir = 0;
 
     dir = query_dialog (_("Menu edit"),
                         _("Which menu file do you want to edit?"),
                         D_NORMAL, geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile = concat_dir_and_file (mc_global.sysconfig_dir, MC_GLOBAL_MENU);
+    menufile_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, NULL);
 
-    if (!exist_file (menufile))
+    if (!exist_file (vfs_path_get_last_path_str (menufile_vpath)))
     {
-        g_free (menufile);
-        menufile = concat_dir_and_file (mc_global.share_data_dir, MC_GLOBAL_MENU);
+        vfs_path_free (menufile_vpath);
+        menufile_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, NULL);
     }
 
     switch (dir)
     {
     case 0:
-        buffer = g_strdup (MC_LOCAL_MENU);
-        check_for_default (menufile, buffer);
-        chmod (buffer, 0600);
+        buffer_vpath = vfs_path_from_str (MC_LOCAL_MENU);
+        check_for_default (menufile_vpath, buffer_vpath);
+        chmod (vfs_path_get_last_path_str (buffer_vpath), 0600);
         break;
 
     case 1:
-        buffer = mc_config_get_full_path (MC_USERMENU_FILE);
-        check_for_default (menufile, buffer);
+        buffer_vpath = mc_config_get_full_vpath (MC_USERMENU_FILE);
+        check_for_default (menufile_vpath, buffer_vpath);
         break;
 
     case 2:
-        buffer = concat_dir_and_file (mc_global.sysconfig_dir, MC_GLOBAL_MENU);
-        if (!exist_file (buffer))
+        buffer_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, NULL);
+        if (!exist_file (vfs_path_get_last_path_str (buffer_vpath)))
         {
-            g_free (buffer);
-            buffer = concat_dir_and_file (mc_global.share_data_dir, MC_GLOBAL_MENU);
+            vfs_path_free (buffer_vpath);
+            buffer_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, NULL);
         }
         break;
 
     default:
-        g_free (menufile);
+        vfs_path_free (menufile_vpath);
         return;
     }
 
-    do_edit (buffer);
+    do_edit (buffer_vpath);
 
-    g_free (buffer);
-    g_free (menufile);
+    vfs_path_free (buffer_vpath);
+    vfs_path_free (menufile_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1182,8 +1198,8 @@ edit_mc_menu_cmd (void)
 void
 edit_fhl_cmd (void)
 {
-    char *buffer = NULL;
-    char *fhlfile = NULL;
+    vfs_path_t *buffer_vpath = NULL;
+    vfs_path_t *fhlfile_vpath = NULL;
 
     int dir;
 
@@ -1194,25 +1210,26 @@ edit_fhl_cmd (void)
                             _("Which highlighting file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    fhlfile = concat_dir_and_file (mc_global.sysconfig_dir, MC_FHL_INI_FILE);
+    fhlfile_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, NULL);
 
     if (dir == 0)
     {
-        buffer = mc_config_get_full_path (MC_FHL_INI_FILE);
-        check_for_default (fhlfile, buffer);
-        do_edit (buffer);
-        g_free (buffer);
+        buffer_vpath = mc_config_get_full_vpath (MC_FHL_INI_FILE);
+        check_for_default (fhlfile_vpath, buffer_vpath);
+        do_edit (buffer_vpath);
+        vfs_path_free (buffer_vpath);
     }
     else if (dir == 1)
     {
-        if (!exist_file (fhlfile))
+        if (!exist_file (vfs_path_get_last_path_str (fhlfile_vpath)))
         {
-            g_free (fhlfile);
-            fhlfile = concat_dir_and_file (mc_global.sysconfig_dir, MC_FHL_INI_FILE);
+            vfs_path_free (fhlfile_vpath);
+            fhlfile_vpath =
+                vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, NULL);
         }
-        do_edit (fhlfile);
+        do_edit (fhlfile_vpath);
     }
-    g_free (fhlfile);
+    vfs_path_free (fhlfile_vpath);
 
     /* refresh highlighting rules */
     mc_fhl_free (&mc_filehighlight);

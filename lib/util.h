@@ -183,10 +183,10 @@ GList *list_append_unique (GList * list, char *text);
 
 /* Position saving and restoring */
 /* Load position for the given filename */
-void load_file_position (const char *filename, long *line, long *column, off_t * offset,
-                         GArray ** bookmarks);
+void load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
+                         off_t * offset, GArray ** bookmarks);
 /* Save position for the given filename */
-void save_file_position (const char *filename, long line, long column, off_t offset,
+void save_file_position (const vfs_path_t * filename_vpath, long line, long column, off_t offset,
                          GArray * bookmarks);
 
 
