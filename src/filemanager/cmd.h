@@ -55,7 +55,7 @@ void view_cmd (void);
 void view_file_cmd (void);
 void view_raw_cmd (void);
 void view_filtered_cmd (void);
-void do_edit_at_line (const char *what, gboolean internal, int start_line);
+void do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_line);
 void edit_cmd (void);
 void edit_cmd_new (void);
 #ifdef USE_INTERNAL_EDIT

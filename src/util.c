@@ -49,15 +49,24 @@
 /* --------------------------------------------------------------------------------------------- */
 
 int
-check_for_default (const char *default_file, const char *file)
+check_for_default (const vfs_path_t * default_file_vpath, const vfs_path_t * file_vpath)
 {
+    char *file, *default_file;
+
+    file = vfs_path_to_str (file_vpath);
+    default_file = vfs_path_to_str (default_file_vpath);
+
     if (!exist_file (file))
     {
         FileOpContext *ctx;
         FileOpTotalContext *tctx;
 
         if (!exist_file (default_file))
+        {
+            g_free (file);
+            g_free (default_file);
             return -1;
+        }
 
         ctx = file_op_context_new (OP_COPY);
         tctx = file_op_total_context_new ();
@@ -66,6 +75,8 @@ check_for_default (const char *default_file, const char *file)
         file_op_total_context_destroy (tctx);
         file_op_context_destroy (ctx);
     }
+    g_free (file);
+    g_free (default_file);
 
     return 0;
 }

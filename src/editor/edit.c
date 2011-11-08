@@ -248,24 +248,23 @@ edit_init_buffers (WEdit * edit)
  */
 
 static int
-edit_load_file_fast (WEdit * edit, const char *filename)
+edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
 {
     long buf, buf2;
     int file = -1;
     int ret = 1;
-    vfs_path_t *vpath;
 
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
 
-    vpath = vfs_path_from_str (filename);
-    file = mc_open (vpath, O_RDONLY | O_BINARY);
-    vfs_path_free (vpath);
+    file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
     if (file == -1)
     {
-        gchar *errmsg;
+        gchar *errmsg, *filename;
 
+        filename = vfs_path_to_str (filename_vpath);
         errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
+        g_free (filename);
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
         return 1;
@@ -292,11 +291,16 @@ edit_load_file_fast (WEdit * edit, const char *filename)
         ret = 0;
     }
     while (0);
-    if (ret)
+
+    if (ret != 0)
     {
-        char *err_str = g_strdup_printf (_("Error reading %s"), filename);
-        edit_error_dialog (_("Error"), err_str);
-        g_free (err_str);
+        gchar *errmsg, *filename;
+
+        filename = vfs_path_to_str (filename_vpath);
+        errmsg = g_strdup_printf (_("Error reading %s"), filename);
+        g_free (filename);
+        edit_error_dialog (_("Error"), errmsg);
+        g_free (errmsg);
     }
     mc_close (file);
     return ret;
@@ -306,37 +310,45 @@ edit_load_file_fast (WEdit * edit, const char *filename)
 /** Return index of the filter or -1 is there is no appropriate filter */
 
 static int
-edit_find_filter (const char *filename)
+edit_find_filter (const vfs_path_t * filename_vpath)
 {
     size_t i, l, e;
+    char *filename;
 
-    if (filename == NULL)
+    if (filename_vpath == NULL)
         return -1;
 
+    filename = vfs_path_to_str (filename_vpath);
     l = strlen (filename);
     for (i = 0; i < sizeof (all_filters) / sizeof (all_filters[0]); i++)
     {
         e = strlen (all_filters[i].extension);
         if (l > e)
             if (!strcmp (all_filters[i].extension, filename + l - e))
+            {
+                g_free (filename);
                 return i;
+            }
     }
+    g_free (filename);
     return -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-edit_get_filter (const char *filename)
+edit_get_filter (const vfs_path_t * filename_vpath)
 {
     int i;
-    char *p, *quoted_name;
+    char *p, *quoted_name, *filename;
 
-    i = edit_find_filter (filename);
+    i = edit_find_filter (filename_vpath);
     if (i < 0)
         return NULL;
 
+    filename = vfs_path_to_str (filename_vpath);
     quoted_name = name_quote (filename, 0);
+    g_free (filename);
     p = g_strdup_printf (all_filters[i].read, quoted_name);
     g_free (quoted_name);
     return p;
@@ -361,26 +373,27 @@ edit_insert_stream (WEdit * edit, FILE * f)
 /** Open file and create it if necessary.  Return 0 for success, 1 for error.  */
 
 static int
-check_file_access (WEdit * edit, const char *filename, struct stat *st)
+check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat *st)
 {
     int file;
     gchar *errmsg = NULL;
-    vfs_path_t *vpath;
 
     /* Try opening an existing file */
-    vpath = vfs_path_from_str (filename);
-    file = mc_open (vpath, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
-
+    file = mc_open (filename_vpath, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
     if (file < 0)
     {
         /*
          * Try creating the file. O_EXCL prevents following broken links
          * and opening existing files.
          */
-        file = mc_open (vpath, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
+        file = mc_open (filename_vpath, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
         if (file < 0)
         {
+            char *filename;
+
+            filename = vfs_path_to_str (filename_vpath);
             errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
+            g_free (filename);
             goto cleanup;
         }
         else
@@ -393,14 +406,22 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
     /* Check what we have opened */
     if (mc_fstat (file, st) < 0)
     {
+        char *filename;
+
+        filename = vfs_path_to_str (filename_vpath);
         errmsg = g_strdup_printf (_("Cannot get size/permissions for %s"), filename);
+        g_free (filename);
         goto cleanup;
     }
 
     /* We want to open regular files only */
     if (!S_ISREG (st->st_mode))
     {
+        char *filename;
+
+        filename = vfs_path_to_str (filename_vpath);
         errmsg = g_strdup_printf (_("\"%s\" is not a regular file"), filename);
+        g_free (filename);
         goto cleanup;
     }
 
@@ -412,11 +433,16 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
         edit->delete_file = 0;
 
     if (st->st_size >= SIZE_LIMIT)
+    {
+        char *filename;
+
+        filename = vfs_path_to_str (filename_vpath);
         errmsg = g_strdup_printf (_("File \"%s\" is too large"), filename);
+        g_free (filename);
+    }
 
   cleanup:
     (void) mc_close (file);
-    vfs_path_free (vpath);
 
     if (errmsg != NULL)
     {
@@ -442,29 +468,29 @@ static int
 edit_load_file (WEdit * edit)
 {
     int fast_load = 1;
-    vfs_path_t *vpath = vfs_path_from_str (edit->filename);
 
     /* Cannot do fast load if a filter is used */
-    if (edit_find_filter (edit->filename) >= 0)
+    if (edit_find_filter (edit->filename_vpath) >= 0)
         fast_load = 0;
 
-    /*
-     * VFS may report file size incorrectly, and slow load is not a big
-     * deal considering overhead in VFS.
-     */
-    if (!vfs_file_is_local (vpath))
-        fast_load = 0;
-    vfs_path_free (vpath);
 
     /*
      * FIXME: line end translation should disable fast loading as well
      * Consider doing fseek() to the end and ftell() for the real size.
      */
 
-    if (*edit->filename)
+    if (edit->filename_vpath != NULL)
     {
+
+        /*
+         * VFS may report file size incorrectly, and slow load is not a big
+         * deal considering overhead in VFS.
+         */
+        if (!vfs_file_is_local (edit->filename_vpath))
+            fast_load = 0;
+
         /* If we are dealing with a real file, check that it exists */
-        if (check_file_access (edit, edit->filename, &edit->stat1))
+        if (check_file_access (edit, edit->filename_vpath, &edit->stat1))
             return 1;
     }
     else
@@ -478,17 +504,18 @@ edit_load_file (WEdit * edit)
     if (fast_load)
     {
         edit->last_byte = edit->stat1.st_size;
-        edit_load_file_fast (edit, edit->filename);
+        edit_load_file_fast (edit, edit->filename_vpath);
         /* If fast load was used, the number of lines wasn't calculated */
         edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
     }
     else
     {
         edit->last_byte = 0;
-        if (*edit->filename)
+        if (edit->filename_vpath != NULL
+            && *(vfs_path_get_by_index (edit->filename_vpath, 0)->path) != '\0')
         {
             edit->undo_stack_disable = 1;
-            if (edit_insert_file (edit, edit->filename) < 0)
+            if (edit_insert_file (edit, edit->filename_vpath) < 0)
             {
                 edit_clean (edit);
                 return 1;
@@ -506,19 +533,14 @@ edit_load_file (WEdit * edit)
 static void
 edit_load_position (WEdit * edit)
 {
-    char *filename;
     long line, column;
     off_t offset;
-    vfs_path_t *vpath;
 
-    if (!edit->filename || !*edit->filename)
+    if (edit->filename_vpath == NULL
+        || *(vfs_path_get_by_index (edit->filename_vpath, 0)->path) == '\0')
         return;
 
-    vpath = vfs_path_from_str (edit->filename);
-    filename = vfs_path_to_str (vpath);
-    load_file_position (filename, &line, &column, &offset, &edit->serialized_bookmarks);
-    vfs_path_free (vpath);
-    g_free (filename);
+    load_file_position (edit->filename_vpath, &line, &column, &offset, &edit->serialized_bookmarks);
 
     if (line > 0)
     {
@@ -544,22 +566,14 @@ edit_load_position (WEdit * edit)
 static void
 edit_save_position (WEdit * edit)
 {
-    char *filename;
-    vfs_path_t *vpath;
-
-    if (edit->filename == NULL || *edit->filename == '\0')
+    if (edit->filename_vpath == NULL
+        || *(vfs_path_get_by_index (edit->filename_vpath, 0)->path) == '\0')
         return;
 
-    vpath = vfs_path_from_str (edit->filename);
-    filename = vfs_path_to_str (vpath);
-
     book_mark_serialize (edit, BOOK_MARK_COLOR);
-    save_file_position (filename, edit->curs_line + 1, edit->curs_col, edit->curs1,
+    save_file_position (edit->filename_vpath, edit->curs_line + 1, edit->curs_col, edit->curs1,
                         edit->serialized_bookmarks);
     edit->serialized_bookmarks = NULL;
-
-    g_free (filename);
-    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1863,7 +1877,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
         {
             long ins_len;
 
-            ins_len = edit_insert_file (edit, block_file);
+            ins_len = edit_insert_file (edit, block_file_vpath);
             if (nomark == 0 && ins_len > 0)
                 edit_set_markers (edit, start_mark, start_mark + ins_len, 0, 0);
         }
@@ -1966,13 +1980,13 @@ edit_get_utf (WEdit * edit, long byte_index, int *char_width)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-edit_get_write_filter (const vfs_path_t * write_name_vpath, const char *filename)
+edit_get_write_filter (const vfs_path_t * write_name_vpath, const vfs_path_t * filename_vpath)
 {
     int i;
     char *p, *writename;
     vfs_path_element_t *path_element;
 
-    i = edit_find_filter (filename);
+    i = edit_find_filter (filename_vpath);
     if (i < 0)
         return NULL;
 
@@ -2082,14 +2096,12 @@ edit_write_stream (WEdit * edit, FILE * f)
 /* --------------------------------------------------------------------------------------------- */
 /** inserts a file at the cursor, returns count of inserted bytes on success */
 long
-edit_insert_file (WEdit * edit, const char *filename)
+edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
 {
-    char *p = NULL;
+    char *p;
     long ins_len = 0;
-    vfs_path_t *vpath;
 
-    vpath = vfs_path_from_str (filename);
-    p = edit_get_filter (filename);
+    p = edit_get_filter (filename_vpath);
     if (p != NULL)
     {
         FILE *f;
@@ -2122,6 +2134,7 @@ edit_insert_file (WEdit * edit, const char *filename)
             ins_len = -1;
             goto ret;
         }
+        g_free (p);
     }
     else
     {
@@ -2130,12 +2143,13 @@ edit_insert_file (WEdit * edit, const char *filename)
         int vertical_insertion = 0;
         char *buf;
 
-        file = mc_open (vpath, O_RDONLY | O_BINARY);
+        file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
         if (file == -1)
         {
             ins_len = -1;
             goto ret;
         }
+
         buf = g_malloc0 (TEMP_BUF_LEN);
         blocklen = mc_read (file, buf, sizeof (VERTICAL_MAGIC));
         if (blocklen > 0)
@@ -2190,7 +2204,6 @@ edit_insert_file (WEdit * edit, const char *filename)
 
   ret:
     g_free (p);
-    vfs_path_free (vpath);
     return ins_len;
 }
 
@@ -2204,7 +2217,8 @@ edit_insert_file (WEdit * edit, const char *filename)
  */
 
 WEdit *
-edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename, long line)
+edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * filename_vpath,
+           long line)
 {
     gboolean to_free = FALSE;
 
@@ -2262,7 +2276,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename
     edit->over_col = 0;
     edit->bracket = -1;
     edit->force |= REDRAW_PAGE;
-    edit_set_filename (edit, filename);
+    edit_set_filename (edit, filename_vpath);
 
     edit->undo_stack_size = START_STACK_SIZE;
     edit->undo_stack_size_mask = START_STACK_SIZE - 1;
@@ -2331,7 +2345,7 @@ edit_clean (WEdit * edit)
 
     /* File specified on the mcedit command line and never saved */
     if (edit->delete_file)
-        unlink (edit->filename);
+        unlink (vfs_path_get_last_path_str (edit->filename_vpath));
 
     edit_free_syntax_rules (edit);
     book_mark_flush (edit, -1);
@@ -2343,8 +2357,8 @@ edit_clean (WEdit * edit)
 
     g_free (edit->undo_stack);
     g_free (edit->redo_stack);
-    g_free (edit->filename);
-    g_free (edit->dir);
+    vfs_path_free (edit->filename_vpath);
+    vfs_path_free (edit->dir_vpath);
     mc_search_free (edit->search);
     edit->search = NULL;
 
@@ -2368,7 +2382,7 @@ edit_renew (WEdit * edit)
     int columns = edit->widget.cols;
 
     edit_clean (edit);
-    return (edit_init (edit, y, x, lines, columns, "", 0) != NULL);
+    return (edit_init (edit, y, x, lines, columns, NULL, 0) != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2380,7 +2394,7 @@ edit_renew (WEdit * edit)
  */
 
 int
-edit_reload (WEdit * edit, const char *filename)
+edit_reload (WEdit * edit, const vfs_path_t * filename_vpath)
 {
     WEdit *e;
     int y = edit->widget.y;
@@ -2390,7 +2404,7 @@ edit_reload (WEdit * edit, const char *filename)
 
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
-    if (edit_init (e, y, x, lines, columns, filename, 0) == NULL)
+    if (edit_init (e, y, x, lines, columns, filename_vpath, 0) == NULL)
     {
         g_free (e);
         return 0;
@@ -2410,7 +2424,7 @@ edit_reload (WEdit * edit, const char *filename)
  */
 
 int
-edit_reload_line (WEdit * edit, const char *filename, long line)
+edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
 {
     WEdit *e;
     int y = edit->widget.y;
@@ -2420,7 +2434,7 @@ edit_reload_line (WEdit * edit, const char *filename, long line)
 
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
-    if (edit_init (e, y, x, lines, columns, filename, line) == NULL)
+    if (edit_init (e, y, x, lines, columns, filename_vpath, line) == NULL)
     {
         g_free (e);
         return 0;
@@ -4332,7 +4346,7 @@ edit_stack_init (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
     {
-        edit_history_moveto[edit_stack_iterator].filename = NULL;
+        edit_history_moveto[edit_stack_iterator].filename_vpath = NULL;
         edit_history_moveto[edit_stack_iterator].line = -1;
     }
 
@@ -4345,7 +4359,7 @@ void
 edit_stack_free (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
-        g_free (edit_history_moveto[edit_stack_iterator].filename);
+        vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4374,7 +4388,7 @@ edit_unlock_file (WEdit * edit)
     vfs_path_t *fullpath;
     unsigned int ret;
 
-    fullpath = vfs_path_build_filename (edit->dir, edit->filename, (char *) NULL);
+    fullpath = vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, (char *) NULL);
     ret = unlock_file (fullpath);
     vfs_path_free (fullpath);
 
@@ -4389,7 +4403,7 @@ edit_lock_file (WEdit * edit)
     vfs_path_t *fullpath;
     unsigned int ret;
 
-    fullpath = vfs_path_build_filename (edit->dir, edit->filename, (char *) NULL);
+    fullpath = vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, (char *) NULL);
     ret = lock_file (fullpath);
     vfs_path_free (fullpath);
 

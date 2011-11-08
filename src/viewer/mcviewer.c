@@ -385,14 +385,12 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 
     if (mcview_remember_file_position && view->filename != NULL && start_line == 0)
     {
-        char *canon_fname;
         long line, col;
         off_t new_offset, max_offset;
         vfs_path_t *tmp_vpath;
 
         tmp_vpath = vfs_path_from_str (view->filename);
-        canon_fname = vfs_path_to_str (tmp_vpath);
-        load_file_position (canon_fname, &line, &col, &new_offset, &view->saved_bookmarks);
+        load_file_position (tmp_vpath, &line, &col, &new_offset, &view->saved_bookmarks);
         max_offset = mcview_get_filesize (view) - 1;
         if (max_offset < 0)
             new_offset = 0;
@@ -405,7 +403,6 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             view->dpy_start = new_offset - new_offset % view->bytes_per_line;
             view->hex_cursor = new_offset;
         }
-        g_free (canon_fname);
         vfs_path_free (tmp_vpath);
     }
     else if (start_line > 0)

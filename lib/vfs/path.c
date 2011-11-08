@@ -1199,7 +1199,7 @@ vfs_path_tokens_count (const vfs_path_t * vpath)
  */
 
 char *
-vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t length)
+vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length)
 {
     GString *ret_tokens, *element_tokens;
     int element_index;
@@ -1210,6 +1210,9 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t le
 
     if (length == 0)
         length = tokens_count;
+
+    if (length < 0)
+        length = tokens_count + length;
 
     if (start_position < 0)
         start_position = (ssize_t) tokens_count + start_position;
@@ -1279,7 +1282,7 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t le
  */
 
 vfs_path_t *
-vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, size_t length)
+vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length)
 {
     char *str_tokens;
     vfs_path_t *ret_vpath = NULL;

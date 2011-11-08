@@ -101,10 +101,13 @@ edit_get_title (const Dlg_head * h, size_t len)
     const WEdit *edit = (const WEdit *) find_widget_type (h, edit_callback);
     const char *modified = edit->modified ? "(*) " : "    ";
     const char *file_label;
+    char *filename;
 
     len -= 4;
 
-    file_label = str_term_trim (edit->filename, len - str_term_width1 (_("Edit: ")));
+    filename = vfs_path_to_str (edit->filename_vpath);
+    file_label = str_term_trim (filename, len - str_term_width1 (_("Edit: ")));
+    g_free (filename);
 
     return g_strconcat (_("Edit: "), modified, file_label, (char *) NULL);
 }
@@ -354,7 +357,7 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-edit_file (const char *_file, int line)
+edit_file (const vfs_path_t * _file_vpath, int line)
 {
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
@@ -376,7 +379,7 @@ edit_file (const char *_file, int line)
         g_free (dir);
     }
 
-    wedit = edit_init (NULL, 1, 0, LINES - 2, COLS, _file, line);
+    wedit = edit_init (NULL, 1, 0, LINES - 2, COLS, _file_vpath, line);
 
     if (wedit == NULL)
         return 0;
@@ -411,10 +414,10 @@ edit_file (const char *_file, int line)
 
 /* --------------------------------------------------------------------------------------------- */
 
-const char *
+char *
 edit_get_file_name (const WEdit * edit)
 {
-    return edit->filename;
+    return vfs_path_to_str (edit->filename_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
