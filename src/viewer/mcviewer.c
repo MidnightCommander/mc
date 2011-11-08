@@ -279,12 +279,12 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     assert (view->bytes_per_line != 0);
 #endif
 
-    view->filename = g_strdup (file);
+    view->filename_vpath = vfs_path_from_str (file);
 
-    if ((view->workdir == NULL) && (file != NULL))
+    if ((view->workdir_vpath == NULL) && (file != NULL))
     {
         if (!g_path_is_absolute (file))
-            view->workdir = vfs_get_current_dir ();
+            view->workdir_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
         else
         {
             /* try extract path form filename */
@@ -292,12 +292,12 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 
             dirname = g_path_get_dirname (file);
             if (strcmp (dirname, ".") != 0)
-                view->workdir = dirname;
+                view->workdir_vpath = vfs_path_from_str (dirname);
             else
             {
-                g_free (dirname);
-                view->workdir = vfs_get_current_dir ();
+                view->workdir_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
             }
+            g_free (dirname);
         }
     }
 
@@ -322,10 +322,10 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\"\n%s"),
                         file, unix_error_string (errno));
             mcview_show_error (view, tmp);
-            g_free (view->filename);
-            view->filename = NULL;
-            g_free (view->workdir);
-            view->workdir = NULL;
+            vfs_path_free (view->filename_vpath);
+            view->filename_vpath = NULL;
+            vfs_path_free (view->workdir_vpath);
+            view->workdir_vpath = NULL;
             goto finish;
         }
 
@@ -336,10 +336,10 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             g_snprintf (tmp, sizeof (tmp), _("Cannot stat \"%s\"\n%s"),
                         file, unix_error_string (errno));
             mcview_show_error (view, tmp);
-            g_free (view->filename);
-            view->filename = NULL;
-            g_free (view->workdir);
-            view->workdir = NULL;
+            vfs_path_free (view->filename_vpath);
+            view->filename_vpath = NULL;
+            vfs_path_free (view->workdir_vpath);
+            view->workdir_vpath = NULL;
             goto finish;
         }
 
@@ -347,10 +347,10 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         {
             mc_close (fd);
             mcview_show_error (view, _("Cannot view: not a regular file"));
-            g_free (view->filename);
-            view->filename = NULL;
-            g_free (view->workdir);
-            view->workdir = NULL;
+            vfs_path_free (view->filename_vpath);
+            view->filename_vpath = NULL;
+            vfs_path_free (view->workdir_vpath);
+            view->workdir_vpath = NULL;
             goto finish;
         }
 
@@ -367,8 +367,12 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 
             if (view->magic_mode && (type != COMPRESSION_NONE))
             {
-                g_free (view->filename);
-                view->filename = g_strconcat (file, decompress_extension (type), (char *) NULL);
+                char *tmp_filename;
+
+                vfs_path_free (view->filename_vpath);
+                tmp_filename = g_strconcat (file, decompress_extension (type), (char *) NULL);
+                view->filename_vpath = vfs_path_from_str (tmp_filename);
+                g_free (tmp_filename);
             }
             mcview_set_datasource_file (view, fd, &st);
         }
@@ -385,14 +389,12 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
 
-    if (mcview_remember_file_position && view->filename != NULL && start_line == 0)
+    if (mcview_remember_file_position && view->filename_vpath != NULL && start_line == 0)
     {
         long line, col;
         off_t new_offset, max_offset;
-        vfs_path_t *tmp_vpath;
 
-        tmp_vpath = vfs_path_from_str (view->filename);
-        load_file_position (tmp_vpath, &line, &col, &new_offset, &view->saved_bookmarks);
+        load_file_position (view->filename_vpath, &line, &col, &new_offset, &view->saved_bookmarks);
         max_offset = mcview_get_filesize (view) - 1;
         if (max_offset < 0)
             new_offset = 0;
@@ -405,7 +407,6 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             view->dpy_start = new_offset - new_offset % view->bytes_per_line;
             view->hex_cursor = new_offset;
         }
-        vfs_path_free (tmp_vpath);
     }
     else if (start_line > 0)
         mcview_moveto (view, start_line - 1, 0);

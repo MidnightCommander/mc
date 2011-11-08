@@ -347,15 +347,12 @@ mcview_hexedit_save_changes (mcview_t * view)
         int fp;
         char *text;
         struct hexedit_change_node *curr, *next;
-        vfs_path_t *tmp_vpath;
 
 #ifdef HAVE_ASSERT_H
-        assert (view->filename != NULL);
+        assert (view->filename_vpath != NULL);
 #endif
 
-        tmp_vpath = vfs_path_from_str (view->filename);
-        fp = mc_open (tmp_vpath, O_WRONLY);
-        vfs_path_free (tmp_vpath);
+        fp = mc_open (view->filename_vpath, O_WRONLY);
         if (fp != -1)
         {
             for (curr = view->change_list; curr != NULL; curr = next)
