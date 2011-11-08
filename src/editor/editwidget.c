@@ -964,6 +964,8 @@ edit_get_file_name (const WEdit * edit)
 WEdit *
 find_editor (const Dlg_head * h)
 {
+    if (edit_widget_is_editor ((Widget *) h->current->data))
+        return (WEdit *) h->current->data;
     return (WEdit *) find_widget_type (h, edit_callback);
 }
 
