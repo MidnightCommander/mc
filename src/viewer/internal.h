@@ -9,6 +9,7 @@
 
 #include "lib/search.h"
 #include "lib/widget.h"
+#include "lib/vfs/vfs.h"        /* vfs_path_t */
 
 #include "src/keybind-defaults.h"       /* global_keymap_t */
 
@@ -89,8 +90,8 @@ typedef struct mcview_struct
 {
     Widget widget;
 
-    char *filename;             /* Name of the file */
-    char *workdir;              /* Name of the working directory */
+    vfs_path_t *filename_vpath; /* Name of the file */
+    vfs_path_t *workdir_vpath;  /* Name of the working directory */
     char *command;              /* Command used to pipe data in */
 
     enum view_ds datasource;    /* Where the displayed data comes from */
