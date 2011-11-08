@@ -1047,7 +1047,7 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
             continue;
         if (!strcmp (next->d_name, ".."))
             continue;
-        path = concat_dir_and_file (s, next->d_name);
+        path = mc_build_filename (s, next->d_name, NULL);
         tmp_vpath = vfs_path_from_str (path);
         if (mc_lstat (tmp_vpath, &buf) != 0)
         {
@@ -2049,7 +2049,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         /* Dive into subdir if exists */
         if (toplevel && ctx->dive_into_subdirs)
         {
-            dest_dir = concat_dir_and_file (d, x_basename (s));
+            dest_dir = mc_build_filename (d, x_basename (s), NULL);
         }
         else
         {
@@ -2118,7 +2118,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             continue;
 
         /* get the filename and add it to the src directory */
-        path = concat_dir_and_file (s, next->d_name);
+        path = mc_build_filename (s, next->d_name, NULL);
         tmp_vpath = vfs_path_from_str (path);
 
         (*ctx->stat_func) (tmp_vpath, &buf);
@@ -2126,7 +2126,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             char *mdpath;
 
-            mdpath = concat_dir_and_file (dest_dir, next->d_name);
+            mdpath = mc_build_filename (dest_dir, next->d_name, NULL);
             /*
              * From here, we just intend to recursively copy subdirs, not
              * the double functionality of copying different when the target
@@ -2141,7 +2141,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             char *dest_file;
 
-            dest_file = concat_dir_and_file (dest_dir, x_basename (path));
+            dest_file = mc_build_filename (dest_dir, x_basename (path), NULL);
             return_status = copy_file_file (tctx, ctx, path, dest_file);
             g_free (dest_file);
         }
@@ -2245,7 +2245,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         move_over = TRUE;
     }
     else
-        destdir = concat_dir_and_file (d, x_basename (s));
+        destdir = mc_build_filename (d, x_basename (s), NULL);
 
     destdir_vpath = vfs_path_from_str (destdir);
 
@@ -2861,7 +2861,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     char *repl_dest, *temp2;
 
                     repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
-                    temp2 = concat_dir_and_file (repl_dest, temp);
+                    temp2 = mc_build_filename (repl_dest, temp, NULL);
                     g_free (temp);
                     g_free (repl_dest);
                     g_free (dest);
@@ -2962,7 +2962,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         char *temp2, *temp3, *repl_dest;
 
                         repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
-                        temp2 = concat_dir_and_file (repl_dest, temp);
+                        temp2 = mc_build_filename (repl_dest, temp, NULL);
                         g_free (temp);
                         g_free (repl_dest);
                         temp3 = source_with_path_str;

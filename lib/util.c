@@ -1136,22 +1136,6 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * If filename is NULL, then we just append PATH_SEP to the dir
- */
-
-char *
-concat_dir_and_file (const char *dir, const char *file)
-{
-    int i = strlen (dir);
-
-    if (dir[i - 1] == PATH_SEP)
-        return g_strconcat (dir, file, (char *) NULL);
-    else
-        return g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Append text to GList, remove all entries with the same text
  */
 

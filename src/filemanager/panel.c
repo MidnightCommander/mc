@@ -2431,7 +2431,7 @@ do_enter_on_file_entry (file_entry * fe)
         char *tmp_path;
 
         tmp_path = vfs_path_to_str (current_panel->cwd_vpath);
-        full_name = concat_dir_and_file (tmp_path, fe->fname);
+        full_name = mc_build_filename (tmp_path, fe->fname, NULL);
         g_free (tmp_path);
     }
     if (!is_exe (fe->st.st_mode) || !if_link_is_exe (full_name, fe))
@@ -2602,7 +2602,7 @@ chdir_to_readlink (WPanel * panel)
             char *tmp_path;
 
             tmp_path = vfs_path_to_str (panel->cwd_vpath);
-            new_dir = concat_dir_and_file (tmp_path, buffer);
+            new_dir = mc_build_filename (tmp_path, buffer, NULL);
             g_free (tmp_path);
         }
 

@@ -1360,7 +1360,8 @@ smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
         if (f != 0 || strncmp (remote_path, "/~/", 3) == 0)
         {
             char *s;
-            s = concat_dir_and_file ((*sc)->home, remote_path + 3 - f);
+
+            s = mc_build_filename ((*sc)->home, remote_path + 3 - f, NULL);
             g_free (remote_path);
             remote_path = s;
         }
@@ -1728,8 +1729,8 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
     if (path_element->class != &vfs_smbfs_ops)
         return -1;
 
-    while (*p == '/')        /* '/' leading server name */
-        p++;                 /* probably came from server browsing */
+    while (*p == '/')           /* '/' leading server name */
+        p++;                    /* probably came from server browsing */
 
     pp = strchr (p, '/');       /* advance past next '/' */
     at = strchr (p, '@');

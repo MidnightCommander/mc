@@ -646,7 +646,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
                 if (cur_path >= path_end)
                     break;
                 expanded = tilde_expand (*cur_path ? cur_path : ".");
-                cur_word = concat_dir_and_file (expanded, text);
+                cur_word = mc_build_filename (expanded, text, NULL);
                 g_free (expanded);
                 canonicalize_pathname (cur_word);
                 cur_path = strchr (cur_path, 0) + 1;
@@ -986,7 +986,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
                     *s = 0;
                     if (*cdpath)
                     {
-                        r = concat_dir_and_file (cdpath, word);
+                        r = mc_build_filename (cdpath, word, NULL);
                         SHOW_C_CTX ("try_complete:filename_subst_2");
                         matches = completion_matches (r, filename_completion_function, flags);
                         g_free (r);

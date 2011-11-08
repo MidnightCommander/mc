@@ -49,7 +49,7 @@
 #include "lib/tty/color.h"      /* tty_setcolor() */
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
 #include "lib/strutil.h"        /* str_term_trim() */
-#include "lib/util.h"           /* concat_dir_and_file() */
+#include "lib/util.h"           /* mc_build_filename() */
 #include "lib/widget.h"
 #include "lib/mcconfig.h"
 
@@ -369,15 +369,17 @@ edit_file (const vfs_path_t * _file_vpath, int line)
 
     if (!made_directory)
     {
-        char *dir = concat_dir_and_file (mc_config_get_cache_path (), EDIT_DIR);
+        char *dir;
+
+        dir = mc_build_filename (mc_config_get_cache_path (), EDIT_DIR, NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = concat_dir_and_file (mc_config_get_path (), EDIT_DIR);
+        dir = mc_build_filename (mc_config_get_path (), EDIT_DIR, NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = concat_dir_and_file (mc_config_get_data_path (), EDIT_DIR);
+        dir = mc_build_filename (mc_config_get_data_path (), EDIT_DIR, NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
     }
