@@ -444,6 +444,8 @@ edit_get_title (const Dlg_head * h, size_t len)
     len -= 4;
 
     filename = vfs_path_to_str (edit->filename_vpath);
+    if (filename == NULL)
+        filename = g_strdup (_("[NoName]"));
     file_label = str_term_trim (filename, len - str_term_width1 (_("Edit: ")));
     g_free (filename);
 
@@ -1076,6 +1078,8 @@ edit_get_file_name (const WEdit * edit)
 WEdit *
 find_editor (const Dlg_head * h)
 {
+    if (edit_widget_is_editor ((Widget *) h->current->data))
+        return (WEdit *) h->current->data;
     return (WEdit *) find_widget_type (h, edit_callback);
 }
 
