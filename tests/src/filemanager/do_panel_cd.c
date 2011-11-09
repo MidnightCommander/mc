@@ -61,7 +61,7 @@ START_TEST (test_do_panel_cd_empty_mean_home)
     char *cwd;
     struct WPanel *panel;
     gboolean ret;
-
+    vfs_path_t *empty_path;
 
     cmdline = command_new (0, 0, 0);
 
@@ -70,7 +70,9 @@ START_TEST (test_do_panel_cd_empty_mean_home)
     panel->lwd_vpath = vfs_path_from_str("/");
     panel->sort_info.sort_field = g_new0(panel_field_t,1);
 
-    ret = do_panel_cd (panel, "", cd_parse_command);
+    empty_path = vfs_path_from_str (mc_config_get_home_dir());
+    ret = do_panel_cd (panel, empty_path, cd_parse_command);
+    vfs_path_free (empty_path);
 
     fail_unless(ret);
     cwd = vfs_path_to_str (panel->cwd_vpath);

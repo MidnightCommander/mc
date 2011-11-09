@@ -48,7 +48,7 @@ command_new (int y, int x, int cols)
 }
 
 int
-do_cd (const char *new_dir, enum cd_enum exact)
+do_cd (const vfs_path_t *new_dir, enum cd_enum exact)
 {
     (void) new_dir;
     (void) exact;
@@ -190,7 +190,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 }
 
 gboolean
-if_link_is_exe (const char *full_name, const file_entry * file)
+if_link_is_exe (const vfs_path_t *full_name, const file_entry * file)
 {
     (void) full_name;
     (void) file;

@@ -9,6 +9,7 @@
 
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/vfs/vfs.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -53,7 +54,7 @@ int sort_ctime (file_entry * a, file_entry * b);
 int sort_size (file_entry * a, file_entry * b);
 int sort_inode (file_entry * a, file_entry * b);
 
-gboolean if_link_is_exe (const char *full_name, const file_entry * file);
+gboolean if_link_is_exe (const vfs_path_t * full_name, const file_entry * file);
 
 /*** inline functions ****************************************************************************/
 

@@ -606,7 +606,7 @@ tree_chdir_sel (WTree * tree)
     change_panel ();
 
     tmp_path = vfs_path_to_str (tree->selected_ptr->name);
-    if (do_cd (tmp_path, cd_exact))
+    if (do_cd (tree->selected_ptr->name, cd_exact))
         select_item (current_panel);
     else
         message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),

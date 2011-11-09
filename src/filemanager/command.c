@@ -208,11 +208,11 @@ handle_cdpath (const char *path)
             *s = '\0';
             if (*p != '\0')
             {
-                char *r;
+                vfs_path_t *r_vpath;
 
-                r = mc_build_filename (p, path, (char *) NULL);
-                result = do_cd (r, cd_parse_command);
-                g_free (r);
+                r_vpath = vfs_path_build_filename (p, path, NULL);
+                result = do_cd (r_vpath, cd_parse_command);
+                vfs_path_free (r_vpath);
             }
             *s = c;
             p = s + 1;
@@ -418,10 +418,17 @@ do_cd_command (char *orig_cmd)
     else
     {
         char *path;
+        vfs_path_t *q_vpath;
         gboolean ok;
 
         path = examine_cd (&cmd[operand_pos]);
-        ok = do_cd (path, cd_parse_command);
+
+        if (*path == '\0')
+            q_vpath = vfs_path_from_str (mc_config_get_home_dir());
+        else
+            q_vpath = vfs_path_from_str (path);
+
+        ok = do_cd (q_vpath, cd_parse_command);
         if (!ok)
             ok = handle_cdpath (path);
 
@@ -434,6 +441,7 @@ do_cd_command (char *orig_cmd)
                      unix_error_string (errno));
         }
 
+        vfs_path_free (q_vpath);
         g_free (path);
     }
 }
