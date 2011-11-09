@@ -599,17 +599,12 @@ do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_rever
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-if_link_is_exe (const char *full_name, const file_entry * file)
+if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry * file)
 {
     struct stat b;
-    vfs_path_t *vpath = vfs_path_from_str (full_name);
 
-    if (S_ISLNK (file->st.st_mode) && mc_stat (vpath, &b) == 0)
-    {
-        vfs_path_free (vpath);
+    if (S_ISLNK (file->st.st_mode) && mc_stat (full_name_vpath, &b) == 0)
         return is_exe (b.st_mode);
-    }
-    vfs_path_free (vpath);
     return TRUE;
 }
 

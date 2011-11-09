@@ -70,7 +70,7 @@ typedef struct
 {
     dir_list list;
     int count;
-    char root[MC_MAXPATHLEN];
+    vfs_path_t *root_vpath;
 } panelized_panel_t;
 
 typedef struct panel_sort_info_struct
@@ -161,7 +161,7 @@ void recalculate_panel_summary (WPanel * panel);
 void file_mark (WPanel * panel, int idx, int val);
 void do_file_mark (WPanel * panel, int idx, int val);
 
-gboolean do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
+gboolean do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
 void directory_history_add (struct WPanel *panel, const char *dir);
 

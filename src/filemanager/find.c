@@ -1752,14 +1752,24 @@ find_file (void)
         {
             if (dirname != NULL)
             {
-                do_cd (dirname, cd_exact);
+                vfs_path_t *dirname_vpath;
+
+                dirname_vpath = vfs_path_from_str (dirname);
+                do_cd (dirname_vpath, cd_exact);
+                vfs_path_free (dirname_vpath);
                 if (filename != NULL)
                     try_to_select (current_panel,
                                    filename + (content != NULL
                                                ? strchr (filename + 4, ':') - filename + 1 : 4));
             }
             else if (filename != NULL)
-                do_cd (filename, cd_exact);
+            {
+                vfs_path_t *filename_vpath;
+
+                filename_vpath = vfs_path_from_str (filename);
+                do_cd (filename_vpath, cd_exact);
+                vfs_path_free (filename_vpath);
+            }
 
             g_free (dirname);
             g_free (filename);

@@ -352,6 +352,8 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     else if (is_cd)
     {
         char *q;
+        vfs_path_t *p_vpath;
+
         *p = 0;
         p = buffer;
         /*      while (*p == ' ' && *p == '\t')
@@ -363,7 +365,10 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         while (q >= p && (*q == ' ' || *q == '\t'))
             q--;
         q[1] = 0;
-        do_cd (p, cd_parse_command);
+
+        p_vpath = vfs_path_from_str (p);
+        do_cd (p_vpath, cd_parse_command);
+        vfs_path_free (p_vpath);
     }
     else
     {
