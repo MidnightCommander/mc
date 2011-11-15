@@ -47,13 +47,12 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"           /* is_printable() */
-#include "lib/widget.h"         /* buttonbar_redraw() */
 #include "lib/charsets.h"
 
 #include "src/setup.h"          /* edit_tab_spacing */
 
 #include "edit-impl.h"
-#include "edit-widget.h"
+#include "editwidget.h"
 
 /*** global variables ****************************************************************************/
 
@@ -197,15 +196,18 @@ static inline void
 print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
                  long end_col, struct line_s line[], char *status, int bookmarked)
 {
-    struct line_s *p;
+    struct line_s *p = line;
 
     int x = start_col_real;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    int y = row + EDIT_TEXT_VERTICAL_OFFSET;
+    int y = row + EDIT_TEXT_VERTICAL_OFFSET + EDIT_WITH_FRAME;
     int cols_to_skip = abs (x);
     int i;
     int wrap_start;
     int len;
+
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+        x1++;
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
     if (bookmarked != 0)
@@ -250,9 +252,8 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     }
 
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
-    p = line;
     i = 1;
-    while (p->ch)
+    while (p->ch != 0)
     {
         int style;
         unsigned int textchar;
@@ -341,7 +342,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
-    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET)
+    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * EDIT_WITH_FRAME)
         return;
 
     if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
@@ -355,10 +356,19 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
         abn_style = MOD_ABNORMAL;
 
     end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        const Widget *w = (const Widget *) edit;
+
+        end_col--;
+        if (w->x + w->cols <= w->owner->cols)
+            end_col--;
+    }
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     start_col_real = (col = (int) edit_move_forward3 (edit, b, 0, q)) + edit->start_col;
+
     if (option_line_state)
     {
         cur_line = edit->start_line + row;
@@ -394,6 +404,9 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
             while (col <= end_col - edit->start_col)
             {
                 int cw = 1;
+                int tab_over = 0;
+                gboolean wide_width_char = FALSE;
+                gboolean control_char = FALSE;
 
                 p->ch = 0;
                 p->style = 0;
@@ -443,6 +456,9 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                     break;
                 case '\t':
                     i = TAB_SIZE - ((int) col % TAB_SIZE);
+                    tab_over = (end_col - edit->start_col) - (col + i - 1);
+                    if (tab_over < 0)
+                        i += tab_over;
                     col += i;
                     if (tty_use_colors () &&
                         ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws))
@@ -528,6 +544,14 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                         {
                             c = convert_from_8bit_to_utf_c ((unsigned char) c, edit->converter);
                         }
+                        else
+                        {
+                            if (g_unichar_iswide (c))
+                            {
+                                wide_width_char = TRUE;
+                                col++;
+                            }
+                        }
                     }
                     else if (edit->utf8)
                         c = convert_from_utf_to_current_c (c, edit->converter);
@@ -545,6 +569,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                         p->style = abn_style;
                         p++;
                         col += 2;
+                        control_char = TRUE;
                         break;
                     }
                     if (c == 127)
@@ -556,6 +581,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                         p->style = abn_style;
                         p++;
                         col += 2;
+                        control_char = TRUE;
                         break;
                     }
                     if (!edit->utf8)
@@ -596,6 +622,20 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                 {
                     q += cw - 1;
                 }
+
+                if (col > (end_col - edit->start_col + 1))
+                {
+                    if (wide_width_char)
+                    {
+                        p--;
+                        break;
+                    }
+                    if (control_char)
+                    {
+                        p -= 2;
+                        break;
+                    }
+                }
             }
         }
     }
@@ -604,7 +644,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
         start_col_real = start_col = 0;
     }
 
-    p->ch = '\0';
+    p->ch = 0;
 
     print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat, book_mark);
 }
@@ -793,9 +833,8 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
     if (page)                   /* if it was an expose event, 'page' would be set */
         edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
 
-    if (edit->force & REDRAW_COMPLETELY)
-        buttonbar_redraw (find_buttonbar (edit->widget.owner));
     render_edit_text (edit, row_start, col_start, row_end, col_end);
+
     /*
      * edit->force != 0 means a key was pending and the redraw
      * was halted, so next time we must redraw everything in case stuff
@@ -862,6 +901,75 @@ edit_status (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+edit_info_status (WEdit * edit)
+{
+    int cols = edit->widget.cols;
+
+    tty_setcolor (STATUSBAR_COLOR);
+
+    if (cols > 5)
+    {
+        edit_move (2, 0);
+        tty_printf ("[%s]", str_term_trim (edit->filename, edit->widget.cols - 8 - 6));
+    }
+
+    if (cols > 13)
+    {
+        edit_move (edit->widget.cols - 8, 0);
+        tty_printf ("[%c%c%c%c]",
+                    edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
+                    edit->modified ? 'M' : '-',
+                    macro_index < 0 ? '-' : 'R',
+                    edit->overwrite == 0 ? '-' : 'O');
+    }
+
+    if (cols > 30)
+    {
+        edit_move (2, edit->widget.lines - 1);
+        tty_printf ("%3ld %5ld/%ld %6ld/%ld",
+                    edit->curs_col + edit->over_col,
+                    edit->curs_line + 1,
+                    edit->total_lines + 1,
+                    edit->curs1,
+                    edit->last_byte );
+    }
+
+    /*
+     * If we are at the end of file, print <EOF>,
+     * otherwise print the current character as is (if printable),
+     * as decimal and as hex.
+     */
+    if (cols > 46)
+    {
+        edit_move (32, edit->widget.lines - 1);
+        if (edit->curs1 >= edit->last_byte)
+            tty_print_string ("[<EOF>       ]");
+#ifdef HAVE_CHARSET
+        else if (edit->utf8)
+        {
+            unsigned int cur_utf;
+            int cw = 1;
+
+            cur_utf = edit_get_utf (edit, edit->curs1, &cw);
+            if (cw <= 0)
+                cur_utf = edit_get_byte (edit, edit->curs1);
+            tty_printf ("[%05d 0x%04X]", cur_utf, cur_utf);
+        }
+#endif
+        else
+        {
+            unsigned char cur_byte;
+
+            cur_byte = edit_get_byte (edit, edit->curs1);
+            tty_printf ("[%05d 0x%04X]", (unsigned int) cur_byte, (unsigned int) cur_byte);
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /** this scrolls the text so that cursor is on the screen */
 void
 edit_scroll_screen_over_cursor (WEdit * edit)
@@ -873,8 +981,14 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     if (edit->widget.lines <= 0 || edit->widget.cols <= 0)
         return;
 
+    edit->widget.y += EDIT_WITH_FRAME;
+    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
     edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        edit->widget.x++;
+        edit->widget.cols -= 2;
+    }
 
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
@@ -922,8 +1036,14 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
 
-    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET;
+    edit->widget.y -= EDIT_WITH_FRAME;
+    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
     edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    {
+        edit->widget.x--;
+        edit->widget.cols += 2;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

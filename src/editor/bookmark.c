@@ -45,7 +45,7 @@
 #include "lib/global.h"
 #include "lib/util.h"           /* MAX_SAVED_BOOKMARKS */
 
-#include "edit-widget.h"
+#include "editwidget.h"
 
 /*** global variables ****************************************************************************/
 

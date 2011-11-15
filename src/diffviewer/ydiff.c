@@ -2831,16 +2831,16 @@ dview_labels (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-dview_event (Gpm_Event * event, void *x)
+dview_event (Gpm_Event * event, void *data)
 {
-    WDiff *dview = (WDiff *) x;
-    int result = MOU_NORMAL;
+    WDiff *dview = (WDiff *) data;
 
-    /* We are not interested in the release events */
+    if (!mouse_global_in_widget (event, data))
+        return MOU_UNHANDLED;
+
+    /* We are not interested in release events */
     if ((event->type & (GPM_DOWN | GPM_DRAG)) == 0)
-    {
-        return result;
-    }
+        return MOU_NORMAL;
 
     /* Wheel events */
     if ((event->buttons & GPM_B_UP) != 0 && (event->type & GPM_DOWN) != 0)
@@ -2856,7 +2856,7 @@ dview_event (Gpm_Event * event, void *x)
         dview_update (dview);
     }
 
-    return result;
+    return MOU_NORMAL;
 }
 
 static gboolean

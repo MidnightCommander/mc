@@ -121,11 +121,14 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
     }
     else
     {
+        int yt, xt;
+
         /* menu text */
         tty_setcolor (color);
         widget_move (&menubar->widget, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
-        tty_draw_hline (-1, -1, ' ', menu->max_entry_len + 2);  /* clear line */
+        tty_getyx (&yt, &xt);
+        tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 2);  /* clear line */
         tty_print_string (entry->text.start);
 
         if (entry->text.hotkey != NULL)
@@ -233,12 +236,24 @@ menubar_draw (WMenuBar * menubar)
 static void
 menubar_remove (WMenuBar * menubar)
 {
-    if (menubar->is_dropped)
-    {
-        menubar->is_dropped = FALSE;
-        do_refresh ();
-        menubar->is_dropped = TRUE;
-    }
+    Dlg_head *h;
+
+    if (!menubar->is_dropped)
+        return;
+
+    /* HACK: before refresh the dialog, change the current widget to keep the order
+       of overlapped widgets. This is useful in multi-window editor.
+       In general, menubar should be a special object, not an ordinary widget
+       in the current dialog. */
+    h = menubar->widget.owner;
+    h->current = g_list_find (h->widgets, dlg_find_by_id (h, menubar->previous_widget));
+
+    menubar->is_dropped = FALSE;
+    do_refresh ();
+    menubar->is_dropped = TRUE;
+
+    /* restore current widget */
+    h->current = g_list_find (h->widgets, menubar);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -589,10 +604,15 @@ menubar_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 menubar_event (Gpm_Event * event, void *data)
 {
-    WMenuBar *menubar = data;
+    WMenuBar *menubar = (WMenuBar *) data;
+    Widget *w = (Widget *) data;
     gboolean was_active = TRUE;
     int left_x, right_x, bottom_y;
     Menu *menu;
+    Gpm_Event local;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
 
     /* ignore unsupported events */
     if ((event->type & (GPM_UP | GPM_DOWN | GPM_DRAG)) == 0)
@@ -604,22 +624,24 @@ menubar_event (Gpm_Event * event, void *data)
 
     if (!menubar->is_dropped)
     {
-        menubar->previous_widget = dlg_get_current_widget_id (menubar->widget.owner);
+        menubar->previous_widget = dlg_get_current_widget_id (w->owner);
         menubar->is_active = TRUE;
         menubar->is_dropped = TRUE;
         was_active = FALSE;
     }
 
+    local = mouse_get_local (event, w);
+
     /* Mouse operations on the menubar */
-    if (event->y == 1 || !was_active)
+    if (local.y == 1 || !was_active)
     {
-        if ((event->type & GPM_UP) != 0)
+        if ((local.type & GPM_UP) != 0)
             return MOU_NORMAL;
 
         /* wheel events on menubar */
-        if (event->buttons & GPM_B_UP)
+        if ((local.buttons & GPM_B_UP) != 0)
             menubar_left (menubar);
-        else if (event->buttons & GPM_B_DOWN)
+        else if ((local.buttons & GPM_B_DOWN) != 0)
             menubar_right (menubar);
         else
         {
@@ -627,8 +649,8 @@ menubar_event (Gpm_Event * event, void *data)
             unsigned int new_selection = 0;
 
             while ((new_selection < len)
-                   && (event->x > ((Menu *) g_list_nth_data (menubar->menu,
-                                                             new_selection))->start_x))
+                   && (local.x > ((Menu *) g_list_nth_data (menubar->menu,
+                                                            new_selection))->start_x))
                 new_selection++;
 
             if (new_selection != 0)     /* Don't set the invalid value -1 */
@@ -649,11 +671,11 @@ menubar_event (Gpm_Event * event, void *data)
         return MOU_NORMAL;
     }
 
-    if (!menubar->is_dropped || (event->y < 2))
+    if (!menubar->is_dropped || (local.y < 2))
         return MOU_NORMAL;
 
     /* middle click -- everywhere */
-    if (((event->buttons & GPM_B_MIDDLE) != 0) && ((event->type & GPM_DOWN) != 0))
+    if (((local.buttons & GPM_B_MIDDLE) != 0) && ((local.type & GPM_DOWN) != 0))
     {
         menubar_execute (menubar);
         return MOU_NORMAL;
@@ -671,18 +693,18 @@ menubar_event (Gpm_Event * event, void *data)
 
     bottom_y = g_list_length (menu->entries) + 3;
 
-    if ((event->x >= left_x) && (event->x <= right_x) && (event->y <= bottom_y))
+    if ((local.x >= left_x) && (local.x <= right_x) && (local.y <= bottom_y))
     {
-        int pos = event->y - 3;
+        int pos = local.y - 3;
         const menu_entry_t *entry = g_list_nth_data (menu->entries, pos);
 
         /* mouse wheel */
-        if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN))
+        if ((local.buttons & GPM_B_UP) != 0 && (local.type & GPM_DOWN) != 0)
         {
             menubar_up (menubar);
             return MOU_NORMAL;
         }
-        if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN))
+        if ((local.buttons & GPM_B_DOWN) != 0 && (local.type & GPM_DOWN) != 0)
         {
             menubar_down (menubar);
             return MOU_NORMAL;
@@ -702,10 +724,11 @@ menubar_event (Gpm_Event * event, void *data)
                 menubar_execute (menubar);
         }
     }
-    else
+    else if (((local.type & GPM_DOWN) != 0) && ((local.buttons & (GPM_B_UP | GPM_B_DOWN)) == 0))
+    {
         /* use click not wheel to close menu */
-    if (((event->type & GPM_DOWN) != 0) && ((event->buttons & (GPM_B_UP | GPM_B_DOWN)) == 0))
         menubar_finish (menubar);
+    }
 
     return MOU_NORMAL;
 }

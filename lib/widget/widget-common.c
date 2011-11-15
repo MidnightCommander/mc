@@ -227,3 +227,28 @@ widget_erase (Widget * w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/* get mouse pointer location within widget */
+Gpm_Event
+mouse_get_local (const Gpm_Event * global, const Widget * w)
+{
+    Gpm_Event local;
+
+    local.buttons = global->buttons;
+    local.x = global->x - w->x;
+    local.y = global->y - w->y;
+    local.type = global->type;
+
+    return local;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mouse_global_in_widget (const Gpm_Event * event, const Widget * w)
+{
+    return (event->x > w->x) && (event->y > w->y) && (event->x <= w->x + w->cols)
+        && (event->y <= w->y + w->lines);
+}
+
+/* --------------------------------------------------------------------------------------------- */

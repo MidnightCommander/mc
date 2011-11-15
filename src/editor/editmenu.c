@@ -51,7 +51,7 @@
 #include "src/keybind-defaults.h"
 
 #include "edit-impl.h"
-#include "edit-widget.h"
+#include "editwidget.h"
 
 /*** global variables ****************************************************************************/
 
@@ -71,6 +71,7 @@ create_file_menu (void)
 
     entries = g_list_prepend (entries, menu_entry_create (_("&Open file..."), CK_EditFile));
     entries = g_list_prepend (entries, menu_entry_create (_("&New"), CK_EditNew));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Close"), CK_Close));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("&Save"), CK_Save));
     entries = g_list_prepend (entries, menu_entry_create (_("Save &as..."), CK_SaveAs));
@@ -205,6 +206,25 @@ create_format_menu (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static GList *
+create_window_menu (void)
+{
+    GList *entries = NULL;
+
+    entries = g_list_prepend (entries, menu_entry_create (_("&Move"), CK_WindowMove));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Resize"), CK_WindowResize));
+    entries =
+        g_list_prepend (entries, menu_entry_create (_("&Toggle fullscreen"), CK_WindowFullscreen));
+    entries = g_list_prepend (entries, menu_separator_create ());
+    entries = g_list_prepend (entries, menu_entry_create (_("&Next"), CK_WindowNext));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Previous"), CK_WindowPrev));
+    entries = g_list_prepend (entries, menu_entry_create (_("&List..."), CK_WindowList));
+
+    return g_list_reverse (entries);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static GList *
 create_options_menu (void)
 {
     GList *entries = NULL;
@@ -226,11 +246,11 @@ create_options_menu (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_drop_menu_cmd (WEdit * e, int which)
+edit_drop_menu_cmd (Dlg_head * h, int which)
 {
     WMenuBar *menubar;
 
-    menubar = find_menubar (e->widget.owner);
+    menubar = find_menubar (h);
 
     if (!menubar->is_active)
     {
@@ -239,7 +259,7 @@ edit_drop_menu_cmd (WEdit * e, int which)
         if (which >= 0)
             menubar->selected = which;
 
-        menubar->previous_widget = dlg_get_current_widget_id (e->widget.owner);
+        menubar->previous_widget = dlg_get_current_widget_id (h);
         dlg_select_widget (menubar);
     }
 }
@@ -264,6 +284,8 @@ edit_init_menu (struct WMenuBar *menubar)
     menubar_add_menu (menubar,
                       create_menu (_("For&mat"), create_format_menu (), "[Internal File Editor]"));
     menubar_add_menu (menubar,
+                      create_menu (_("&Window"), create_window_menu (), "[Internal File Editor]"));
+    menubar_add_menu (menubar,
                       create_menu (_("&Options"), create_options_menu (),
                                    "[Internal File Editor]"));
 }
@@ -271,15 +293,15 @@ edit_init_menu (struct WMenuBar *menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_menu_cmd (WEdit * e)
+edit_menu_cmd (Dlg_head * h)
 {
-    edit_drop_menu_cmd (e, -1);
+    edit_drop_menu_cmd (h, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-edit_drop_hotkey_menu (WEdit * e, int key)
+gboolean
+edit_drop_hotkey_menu (Dlg_head * h, int key)
 {
     int m = 0;
     switch (key)
@@ -299,15 +321,18 @@ edit_drop_hotkey_menu (WEdit * e, int key)
     case ALT ('m'):
         m = 4;
         break;
-    case ALT ('o'):
+    case ALT ('w'):
         m = 5;
         break;
+    case ALT ('o'):
+        m = 6;
+        break;
     default:
-        return 0;
+        return FALSE;
     }
 
-    edit_drop_menu_cmd (e, m);
-    return 1;
+    edit_drop_menu_cmd (h, m);
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

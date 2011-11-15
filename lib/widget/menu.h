@@ -46,7 +46,7 @@ typedef struct WMenuBar
     gboolean is_dropped;        /* If the menubar has dropped */
     GList *menu;                /* The actual menus */
     size_t selected;            /* Selected menu on the top bar */
-    int previous_widget;        /* Selected widget ID before activating menu */
+    unsigned long previous_widget;      /* Selected widget ID before activating menu */
 } WMenuBar;
 
 /*** global variables defined in .c file *********************************************************/

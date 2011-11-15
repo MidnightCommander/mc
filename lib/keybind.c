@@ -1,13 +1,13 @@
 /*
    Definitions of key bindings.
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2011, 2011
    The Free Software Foundation, Inc.
 
    Written by:
    Vitja Makarov, 2005
    Ilia Maslakov <il.smind@gmail.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011
 
    This file is part of the Midnight Commander.
 
@@ -243,6 +243,7 @@ static name_keymap_t command_names[] = {
 #endif
 
 #ifdef USE_INTERNAL_EDIT
+    {"Close", CK_Close},
     {"Tab", CK_Tab},
     {"ScrollUp", CK_ScrollUp},
     {"ScrollDown", CK_ScrollDown},
@@ -305,6 +306,12 @@ static name_keymap_t command_names[] = {
     {"About", CK_About},
     /* An action to run external script from macro */
     {"ExecuteScript", CK_PipeBlock (0)},
+    {"WindowMove", CK_WindowMove},
+    {"WindowResize", CK_WindowResize},
+    {"WindowFullscreen", CK_WindowFullscreen},
+    {"WindowList", CK_WindowList},
+    {"WindowNext", CK_WindowNext},
+    {"WindowPrev", CK_WindowPrev},
 #endif /* USE_INTERNAL_EDIT */
 
     /* viewer */

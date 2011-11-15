@@ -241,6 +241,10 @@ mc_skin_color_cache_init (void)
     EDITOR_WHITESPACE_COLOR = mc_skin_color_get ("editor", "editwhitespace");
     EDITOR_RIGHT_MARGIN_COLOR = mc_skin_color_get ("editor", "editrightmargin");
     LINE_STATE_COLOR = mc_skin_color_get ("editor", "editlinestate");
+    EDITOR_BACKGROUND = mc_skin_color_get ("editor", "editback");
+    EDITOR_FRAME = mc_skin_color_get ("editor", "editframe");
+    EDITOR_FRAME_ACTIVE = mc_skin_color_get ("editor", "editframeactive");
+    EDITOR_FRAME_DRAG = mc_skin_color_get ("editor", "editframedrag");
 
     BOOK_MARK_COLOR = mc_skin_color_get ("editor", "bookmark");
     BOOK_MARK_FOUND_COLOR = mc_skin_color_get ("editor", "bookmarkfound");

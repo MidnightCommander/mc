@@ -227,6 +227,7 @@ enum
     CK_EditNew,
     CK_InsertFile,
     CK_EditSyntaxFile,
+    CK_Close,
     /* block commands */
     CK_BlockSave,
     CK_BlockShiftLeft,
@@ -273,6 +274,13 @@ enum
     CK_RepeatStartRecord,
     CK_RepeatStopRecord,
     CK_RepeatStartStopRecord,
+    /* window commands */
+    CK_WindowMove,
+    CK_WindowResize,
+    CK_WindowFullscreen,
+    CK_WindowList,
+    CK_WindowNext,
+    CK_WindowPrev,
     /* misc commands */
     CK_InsertOverwrite,
     CK_ParagraphFormat,

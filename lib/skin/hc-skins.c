@@ -75,6 +75,8 @@ mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
     mc_config_set_string (mc_skin->config, "viewer", "viewunderline", "A_UNDERLINE");
     mc_config_set_string (mc_skin->config, "editor", "editbold", "A_BOLD");
     mc_config_set_string (mc_skin->config, "editor", "editmarked", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "editor", "editframeactive", "A_BOLD");
+    mc_config_set_string (mc_skin->config, "editor", "editframedrag", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "buttonbar", "hotkey", "default");
     mc_config_set_string (mc_skin->config, "buttonbar", "button", "A_REVERSE");
 }

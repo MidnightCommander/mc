@@ -7,8 +7,9 @@ noinst_LTLIBRARIES =
 endif
 
 libedit_la_SOURCES = \
-	bookmark.c edit.c editcmd.c editwidget.c editdraw.c editkeys.c \
-	editmenu.c editoptions.c edit-impl.h edit.h edit-widget.h \
+	bookmark.c edit.c editcmd.c editwidget.c editwidget.h \
+	editdraw.c editkeys.c \
+	editmenu.c editoptions.c edit-impl.h edit.h \
 	syntax.c wordproc.c \
 	choosesyntax.c etags.c etags.h editcmd_dialogs.c editcmd_dialogs.h
 

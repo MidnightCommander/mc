@@ -36,7 +36,7 @@
 #include "lib/global.h"
 #include "lib/widget.h"
 
-#include "edit-widget.h"
+#include "editwidget.h"
 #include "edit-impl.h"
 #include "src/setup.h"          /* option_tab_spacing */
 
@@ -72,13 +72,37 @@ i18n_translate_array (const char *array[])
     }
 }
 #endif /* ENABLE_NLS */
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_reset_over_col (void *data, void *user_data)
+{
+    (void) user_data;
+
+    if (edit_widget_is_editor ((const Widget *) data))
+        ((WEdit *) data)->over_col = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_reload_syntax (void *data, void *user_data)
+{
+    (void) user_data;
+
+    if (edit_widget_is_editor ((Widget *) data))
+    {
+        WEdit *edit = (WEdit *) data;
+        edit_load_syntax (edit, NULL, edit->syntax_type);
+    }
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_options_dialog (WEdit * edit)
+edit_options_dialog (Dlg_head *h)
 {
     char wrap_length[16], tab_spacing[16], *p, *q;
     int wrap_mode = 0;
@@ -154,7 +178,7 @@ edit_options_dialog (WEdit * edit)
     old_syntax_hl = option_syntax_highlighting;
 
     if (!option_cursor_beyond_eol)
-        edit->over_col = 0;
+        g_list_foreach (h->widgets, edit_reset_over_col, NULL);
 
     if (p != NULL)
     {
@@ -190,7 +214,7 @@ edit_options_dialog (WEdit * edit)
 
     /* Load or unload syntax rules if the option has changed */
     if (option_syntax_highlighting != old_syntax_hl)
-        edit_load_syntax (edit, NULL, edit->syntax_type);
+        g_list_foreach (h->widgets, edit_reload_syntax, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
