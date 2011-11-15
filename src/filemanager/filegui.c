@@ -559,7 +559,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
         break;
     case FILEGUI_DIALOG_MULTI_ITEM:
         total_reserve = 5;
-        minus = verbose ? 0 : 7;
+        minus = verbose ? (file_op_compute_totals ? 0 : 2) : 7;
         break;
     case FILEGUI_DIALOG_DELETE_ITEM:
         total_reserve = -5;
@@ -570,7 +570,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     ctx->recursive_result = RECURSIVE_YES;
 
     ui->replace_result = REPLACE_YES;
-    ui->showing_eta = with_eta;
+    ui->showing_eta = with_eta && file_op_compute_totals;
     ui->showing_bps = with_eta;
 
     ui->op_dlg =
@@ -586,20 +586,22 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
                             dlg_width / 2 - 1 - skip_button_width, FILE_SKIP,
                             NORMAL_BUTTON, skip_button_label, NULL));
 
-
     if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
     {
+        int dy = file_op_compute_totals ? 0 : 2;
+
         add_widget (ui->op_dlg, hline_new (8, 1, dlg_width - 2));
 
         add_widget (ui->op_dlg, ui->total_bytes_label = label_new (8, FCOPY_LABEL_X + 15, ""));
 
-        add_widget (ui->op_dlg, ui->progress_total_gauge =
-                    gauge_new (9, FCOPY_LABEL_X + 3, 0, 100, 0));
+        if (file_op_compute_totals)
+            add_widget (ui->op_dlg, ui->progress_total_gauge =
+                        gauge_new (9 - dy, FCOPY_LABEL_X + 3, 0, 100, 0));
 
         add_widget (ui->op_dlg, ui->total_files_processed_label =
-                    label_new (11, FCOPY_LABEL_X, ""));
+                    label_new (11 - dy, FCOPY_LABEL_X, ""));
 
-        add_widget (ui->op_dlg, ui->time_label = label_new (12, FCOPY_LABEL_X, ""));
+        add_widget (ui->op_dlg, ui->time_label = label_new (12 - dy, FCOPY_LABEL_X, ""));
     }
 
     add_widget (ui->op_dlg, ui->progress_file_label = label_new (7, FCOPY_LABEL_X, ""));
@@ -615,7 +617,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     if ((right_panel == current_panel) && !classic_progressbar)
     {
         ui->progress_file_gauge->from_left_to_right = FALSE;
-        if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+        if (verbose && file_op_compute_totals && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
             ui->progress_total_gauge->from_left_to_right = FALSE;
     }
 }
@@ -694,8 +696,13 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
     if (ui->showing_eta && ctx->eta_secs > 0.5)
     {
         file_eta_prepare_for_show (buffer2, ctx->eta_secs, FALSE);
-        file_bps_prepare_for_show (buffer3, ctx->bps);
-        g_snprintf (buffer, BUF_TINY, "%s (%s) %s", buffer2, buffer3, stalled_msg);
+        if (ctx->bps == 0)
+            g_snprintf (buffer, BUF_TINY, "%s %s", buffer2, stalled_msg);
+        else
+        {
+            file_bps_prepare_for_show (buffer3, ctx->bps);
+            g_snprintf (buffer, BUF_TINY, "%s (%s) %s", buffer2, buffer3, stalled_msg);
+        }
     }
     else
     {
@@ -717,7 +724,10 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
     g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
-    g_snprintf (buffer, BUF_TINY, _("Files processed: %zu of %zu"), done, total);
+    if (file_op_compute_totals)
+        g_snprintf (buffer, BUF_TINY, _("Files processed: %zu/%zu"), done, total);
+    else
+        g_snprintf (buffer, BUF_TINY, _("Files processed: %zu"), done);
     label_set_text (ui->total_files_processed_label, buffer);
 }
 
@@ -739,30 +749,56 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
 
     ui = ctx->ui;
 
-    if (ctx->progress_bytes != 0)
+    if (file_op_compute_totals)
     {
-        gauge_set_value (ui->progress_total_gauge, 1024,
-                         (int) (1024 * copyed_bytes / ctx->progress_bytes));
-        gauge_show (ui->progress_total_gauge, 1);
+        if (ctx->progress_bytes == 0)
+            gauge_show (ui->progress_total_gauge, 0);
+        else
+        {
+            gauge_set_value (ui->progress_total_gauge, 1024,
+                             (int) (1024 * copyed_bytes / ctx->progress_bytes));
+            gauge_show (ui->progress_total_gauge, 1);
+        }
     }
-    else
-        gauge_show (ui->progress_total_gauge, 0);
 
     if (!show_summary && tctx->bps == 0)
         return;
 
     gettimeofday (&tv_current, NULL);
     file_frmt_time (buffer2, tv_current.tv_sec - tctx->transfer_start.tv_sec);
-    file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
-    file_bps_prepare_for_show (buffer4, (long) tctx->bps);
 
-    g_snprintf (buffer, BUF_TINY, _("Time: %s  %s (%s)"), buffer2, buffer3, buffer4);
+    if (file_op_compute_totals)
+    {
+        file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
+        if (tctx->bps == 0)
+            g_snprintf (buffer, BUF_TINY, _("Time: %s %s"), buffer2, buffer3);
+        else
+        {
+            file_bps_prepare_for_show (buffer4, (long) tctx->bps);
+            g_snprintf (buffer, BUF_TINY, _("Time: %s %s (%s)"), buffer2, buffer3, buffer4);
+        }
+    }
+    else
+    {
+        if (tctx->bps == 0)
+            g_snprintf (buffer, BUF_TINY, _("Time: %s"), buffer2);
+        else
+        {
+            file_bps_prepare_for_show (buffer4, (long) tctx->bps);
+            g_snprintf (buffer, BUF_TINY, _("Time: %s (%s)"), buffer2, buffer4);
+        }
+    }
+
     label_set_text (ui->time_label, buffer);
 
     size_trunc_len (buffer2, 5, tctx->copyed_bytes, 0, panels_options.kilobyte_si);
-    size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
-
-    g_snprintf (buffer, BUF_TINY, _("Total: %s of %s"), buffer2, buffer3);
+    if (!file_op_compute_totals)
+        g_snprintf (buffer, BUF_TINY, _(" Total: %s "), buffer2);
+    else
+    {
+        size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
+        g_snprintf (buffer, BUF_TINY, _(" Total: %s/%s "), buffer2, buffer3);
+    }
 
     label_set_text (ui->total_bytes_label, buffer);
 }
