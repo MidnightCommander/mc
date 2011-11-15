@@ -273,7 +273,7 @@ file_bps_prepare_for_show (char *buffer, long bps)
         g_snprintf (buffer, BUF_TINY, _("%ld B/s"), bps);
     }
     else
-        *buffer = 0;
+        *buffer = '\0';
 }
 
 /* --------------------------------------------------------------------------------------------- */
