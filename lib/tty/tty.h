@@ -97,8 +97,6 @@ extern void tty_keypad (gboolean set);
 extern void tty_nodelay (gboolean set);
 extern int tty_baudrate (void);
 
-extern int tty_lowlevel_getch (void);
-
 /* {{{ Output }}} */
 
 /*
