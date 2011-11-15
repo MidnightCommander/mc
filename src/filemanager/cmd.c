@@ -995,13 +995,13 @@ filter_cmd (void)
 void
 reread_cmd (void)
 {
-    panel_update_flags_t flag = UP_OPTIMIZE;
+    panel_update_flags_t flag = UP_ONLY_CURRENT;
 
-    if (!current_panel->is_panelized && get_current_type () == view_listing &&
-        get_other_type () == view_listing  && strcmp (current_panel->cwd, other_panel->cwd) == 0)
-        flag |= UP_RELOAD | UP_ONLY_CURRENT;
+    if (get_current_type () == view_listing && get_other_type () == view_listing
+        && strcmp (current_panel->cwd, other_panel->cwd) == 0)
+        flag = UP_OPTIMIZE;
 
-    update_panels (flag, UP_KEEPSEL);
+    update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
 }
 
