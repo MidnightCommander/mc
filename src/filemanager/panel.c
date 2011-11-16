@@ -74,6 +74,7 @@
 #include "mountlist.h"          /* my_statfs */
 
 #include "panel.h"
+#include "panelize.h"
 
 /*** global variables ****************************************************************************/
 
