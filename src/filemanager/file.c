@@ -367,9 +367,16 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
     len = mc_readlink (src_path, link_target, MC_MAXPATHLEN - 1);
     if (len < 0)
     {
-        return_status = file_error (_("Cannot read source link \"%s\"\n%s"), src_path);
-        if (return_status == FILE_RETRY)
-            goto retry_src_readlink;
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = file_error (_("Cannot read source link \"%s\"\n%s"), src_path);
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+            if (return_status == FILE_RETRY)
+                goto retry_src_readlink;
+        }
         return return_status;
     }
     link_target[len] = 0;
@@ -438,9 +445,16 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
                 /* Success */
                 return FILE_CONT;
     }
-    return_status = file_error (_("Cannot create target symlink \"%s\"\n%s"), dst_path);
-    if (return_status == FILE_RETRY)
-        goto retry_dst_symlink;
+    if (ctx->skip_all)
+        return_status = FILE_SKIPALL;
+    else
+    {
+        return_status = file_error (_("Cannot create target symlink \"%s\"\n%s"), dst_path);
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
+        if (return_status == FILE_RETRY)
+            goto retry_dst_symlink;
+    }
     return return_status;
 }
 
@@ -774,7 +788,14 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
     while (mc_lstat (s, &src_stats) != 0)
     {
         /* Source doesn't exist */
-        return_status = file_error (_("Cannot stat file \"%s\"\n%s"), s);
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = file_error (_("Cannot stat file \"%s\"\n%s"), s);
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
         if (return_status != FILE_RETRY)
             return return_status;
     }
@@ -824,9 +845,16 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
 
     if (errno != EXDEV)
     {
-        return_status = files_error (_("Cannot move file \"%s\" to \"%s\"\n%s"), s, d);
-        if (return_status == FILE_RETRY)
-            goto retry_rename;
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = files_error (_("Cannot move file \"%s\" to \"%s\"\n%s"), s, d);
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+            if (return_status == FILE_RETRY)
+                goto retry_rename;
+        }
         return return_status;
     }
 #endif
@@ -851,11 +879,13 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
     mc_refresh ();
 
   retry_src_remove:
-    if (mc_unlink (s))
+    if (mc_unlink (s) != 0 && !ctx->skip_all)
     {
         return_status = file_error (_("Cannot remove file \"%s\"\n%s"), s);
         if (return_status == FILE_RETRY)
             goto retry_src_remove;
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
         return return_status;
     }
 
@@ -1022,9 +1052,11 @@ erase_dir_iff_empty (FileOpContext * ctx, const char *s)
     if (1 != check_dir_is_empty (s))    /* not empty or error */
         return FILE_CONT;
 
-    while (my_rmdir (s))
+    while (my_rmdir (s) != 0 && !ctx->skip_all)
     {
         error = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
+        if (error == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
         if (error != FILE_RETRY)
             return error;
     }
@@ -1331,18 +1363,32 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     {
         if (S_ISDIR (sb2.st_mode))
         {
-            return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), dst_path);
-            if (return_status == FILE_RETRY)
-                continue;
+            if (ctx->skip_all)
+                return_status = FILE_SKIPALL;
+            else
+            {
+                return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), dst_path);
+                if (return_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+                if (return_status == FILE_RETRY)
+                    continue;
+            }
             return return_status;
         }
         dst_exists = TRUE;
         break;
     }
 
-    while ((*ctx->stat_func) (src_path, &sb))
+    while ((*ctx->stat_func) (src_path, &sb) != 0)
     {
-        return_status = file_error (_("Cannot stat source file \"%s\"\n%s"), src_path);
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = file_error (_("Cannot stat source file \"%s\"\n%s"), src_path);
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
         if (return_status != FILE_RETRY)
             return return_status;
     }
@@ -1393,10 +1439,10 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                    && !ctx->skip_all)
             {
                 temp_status = file_error (_("Cannot chown target file \"%s\"\n%s"), dst_path);
-                if (temp_status == FILE_SKIPALL)
-                    ctx->skip_all = TRUE;
                 if (temp_status == FILE_SKIP)
                     break;
+                if (temp_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
                 if (temp_status != FILE_RETRY)
                     return temp_status;
             }
@@ -1405,10 +1451,10 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                    && !ctx->skip_all)
             {
                 temp_status = file_error (_("Cannot chmod target file \"%s\"\n%s"), dst_path);
-                if (temp_status == FILE_SKIPALL)
-                    ctx->skip_all = TRUE;
                 if (temp_status == FILE_SKIP)
                     break;
+                if (temp_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
                 if (temp_status != FILE_RETRY)
                     return temp_status;
             }
@@ -1445,13 +1491,16 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     while (mc_fstat (src_desc, &sb) != 0)
     {
         if (ctx->skip_all)
-            goto ret;
-        return_status = file_error (_("Cannot fstat source file \"%s\"\n%s"), src_path);
-        if (return_status == FILE_RETRY)
-            continue;
-        if (return_status == FILE_SKIPALL)
-            ctx->skip_all = TRUE;
-        ctx->do_append = FALSE;
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = file_error (_("Cannot fstat source file \"%s\"\n%s"), src_path);
+            if (return_status == FILE_RETRY)
+                continue;
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+            ctx->do_append = FALSE;
+        }
         goto ret;
     }
     src_mode = sb.st_mode;
@@ -1476,15 +1525,20 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
 
     while ((dest_desc = mc_open (dst_path, open_flags, src_mode)) < 0)
     {
-        if (errno == EEXIST || ctx->skip_all)
-            goto ret;
-
-        return_status = file_error (_("Cannot create target file \"%s\"\n%s"), dst_path);
-        if (return_status == FILE_RETRY)
-            continue;
-        if (return_status == FILE_SKIPALL)
-            ctx->skip_all = TRUE;
-        ctx->do_append = FALSE;
+        if (errno != EEXIST)
+        {
+            if (ctx->skip_all)
+                return_status = FILE_SKIPALL;
+            else
+            {
+                return_status = file_error (_("Cannot create target file \"%s\"\n%s"), dst_path);
+                if (return_status == FILE_RETRY)
+                    continue;
+                if (return_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+                ctx->do_append = FALSE;
+            }
+        }
         goto ret;
     }
     dst_status = DEST_SHORT;    /* file opened, but not fully copied */
@@ -1496,21 +1550,27 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     while (mc_fstat (dest_desc, &sb) != 0)
     {
         if (ctx->skip_all)
-            goto ret;
-        return_status = file_error (_("Cannot fstat target file \"%s\"\n%s"), dst_path);
-        if (return_status == FILE_RETRY)
-            continue;
-        if (return_status == FILE_SKIPALL)
-            ctx->skip_all = TRUE;
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = file_error (_("Cannot fstat target file \"%s\"\n%s"), dst_path);
+            if (return_status == FILE_RETRY)
+                continue;
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
         goto ret;
     }
+
     while (TRUE)
     {
         errno = vfs_preallocate (dest_desc, file_size, (ctx->do_append != 0) ? sb.st_size : 0);
         if (errno == 0)
             break;
 
-        if (!ctx->skip_all)
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
         {
             return_status =
                 file_error (_("Cannot preallocate space for target file \"%s\"\n%s"), dst_path);
@@ -1591,10 +1651,10 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                         continue;
                     }
                     return_status = file_error (_("Cannot write target file \"%s\"\n%s"), dst_path);
-                    if (return_status == FILE_SKIPALL)
-                        ctx->skip_all = TRUE;
                     if (return_status == FILE_SKIP)
                         break;
+                    if (return_status == FILE_SKIPALL)
+                        ctx->skip_all = TRUE;
                     if (return_status != FILE_RETRY)
                         goto ret;
                 }
@@ -1763,11 +1823,18 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     /* First get the mode of the source dir */
   retry_src_stat:
-    if ((*ctx->stat_func) (s, &cbuf))
+    if ((*ctx->stat_func) (s, &cbuf) != 0)
     {
-        return_status = file_error (_("Cannot stat source directory \"%s\"\n%s"), s);
-        if (return_status == FILE_RETRY)
-            goto retry_src_stat;
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = file_error (_("Cannot stat source directory \"%s\"\n%s"), s);
+            if (return_status == FILE_RETRY)
+                goto retry_src_stat;
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
         goto ret_fast;
     }
 
@@ -1792,9 +1859,16 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     if (!S_ISDIR (cbuf.st_mode))
     {
-        return_status = file_error (_("Source \"%s\" is not a directory\n%s"), s);
-        if (return_status == FILE_RETRY)
-            goto retry_src_stat;
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = file_error (_("Source \"%s\" is not a directory\n%s"), s);
+            if (return_status == FILE_RETRY)
+                goto retry_src_stat;
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
         goto ret_fast;
     }
 
@@ -1845,9 +1919,16 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
          */
         if (!S_ISDIR (buf.st_mode))
         {
-            return_status = file_error (_("Destination \"%s\" must be a directory\n%s"), d);
-            if (return_status == FILE_RETRY)
-                goto retry_dst_stat;
+            if (ctx->skip_all)
+                return_status = FILE_SKIPALL;
+            else
+            {
+                return_status = file_error (_("Destination \"%s\" must be a directory\n%s"), d);
+                if (return_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+                if (return_status == FILE_RETRY)
+                    goto retry_dst_stat;
+            }
             goto ret;
         }
         /* Dive into subdir if exists */
@@ -1864,7 +1945,14 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     }
     while (my_mkdir (dest_dir, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU))
     {
-        return_status = file_error (_("Cannot create target directory \"%s\"\n%s"), dest_dir);
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status = file_error (_("Cannot create target directory \"%s\"\n%s"), dest_dir);
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
         if (return_status != FILE_RETRY)
             goto ret;
     }
@@ -1883,9 +1971,17 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     if (ctx->preserve_uidgid)
     {
-        while (mc_chown (dest_dir, cbuf.st_uid, cbuf.st_gid))
+        while (mc_chown (dest_dir, cbuf.st_uid, cbuf.st_gid) != 0)
         {
-            return_status = file_error (_("Cannot chown target directory \"%s\"\n%s"), dest_dir);
+            if (ctx->skip_all)
+                return_status = FILE_SKIPALL;
+            else
+            {
+                return_status =
+                    file_error (_("Cannot chown target directory \"%s\"\n%s"), dest_dir);
+                if (return_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+            }
             if (return_status != FILE_RETRY)
                 goto ret;
         }
@@ -2030,7 +2126,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
-    if (!mc_stat (destdir, &destbuf))
+    if (mc_stat (destdir, &destbuf) == 0)
     {
         if (move_over)
         {
@@ -2040,12 +2136,16 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 goto ret;
             goto oktoret;
         }
+        else if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
         else
         {
             if (S_ISDIR (destbuf.st_mode))
                 return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), destdir);
             else
                 return_status = file_error (_("Cannot overwrite file \"%s\"\n%s"), destdir);
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
             if (return_status == FILE_RETRY)
                 goto retry_dst_stat;
         }
@@ -2062,9 +2162,14 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     if (errno != EXDEV)
     {
-        return_status = files_error (_("Cannot move directory \"%s\" to \"%s\"\n%s"), s, d);
-        if (return_status == FILE_RETRY)
-            goto retry_rename;
+        if (!ctx->skip_all)
+        {
+            return_status = files_error (_("Cannot move directory \"%s\" to \"%s\"\n%s"), s, d);
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+            if (return_status == FILE_RETRY)
+                goto retry_rename;
+        }
         goto ret;
     }
     /* Failed because of filesystem boundary -> copy dir instead */
@@ -2147,7 +2252,7 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
             return error;
     }
 
-    while (my_rmdir (s) == -1)
+    while (my_rmdir (s) == -1 && !ctx->skip_all)
     {
         error = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
         if (error != FILE_RETRY)
@@ -2651,7 +2756,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             if ((dst_result != 0) || S_ISDIR (dst_stat.st_mode))
                 break;
 
-            if (file_error (_("Destination \"%s\" must be a directory\n%s"), dest) != FILE_RETRY)
+            if (ctx->skip_all
+                || file_error (_("Destination \"%s\" must be a directory\n%s"), dest) != FILE_RETRY)
                 goto clean_up;
         }
 
