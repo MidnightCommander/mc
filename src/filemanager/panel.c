@@ -3437,7 +3437,10 @@ update_one_panel (int which, panel_update_flags_t flags, const char *current_fil
     if (get_display_type (which) == view_listing)
     {
         WPanel *panel;
+
         panel = (WPanel *) get_panel_widget (which);
+        if (panel->is_panelized)
+            flags &= ~UP_RELOAD;
         update_one_panel_widget (panel, flags, current_file);
     }
 }
@@ -4156,7 +4159,8 @@ update_panels (panel_update_flags_t flags, const char *current_file)
     else
         panel = (WPanel *) get_panel_widget (get_other_index ());
 
-    ret = mc_chdir (panel->cwd);
+    if (!panel->is_panelized)
+        ret = mc_chdir (panel->cwd);
 }
 
 /* --------------------------------------------------------------------------------------------- */
