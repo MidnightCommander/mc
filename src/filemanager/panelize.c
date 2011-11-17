@@ -409,6 +409,7 @@ do_panelize_cd (struct WPanel *panel)
 {
     int i;
     dir_list *list = &panel->dir;
+    gboolean panelized_same;
 
     clean_dir (list, panel->count);
     if (panelized_panel.root[0] == '\0')
@@ -427,10 +428,25 @@ do_panelize_cd (struct WPanel *panel)
     panel->count = panelized_panel.count;
     panel->is_panelized = TRUE;
 
+    panelized_same = (strcmp (panelized_panel.root, panel->cwd) == 0);
+
     for (i = 0; i < panelized_panel.count; i++)
     {
-        list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
-        list->list[i].fname = g_strdup (panelized_panel.list.list[i].fname);
+        if (panelized_same
+            || (panelized_panel.list.list[i].fname[0] == '.'
+                && panelized_panel.list.list[i].fname[1] == '.'
+                && panelized_panel.list.list[i].fname[2] == '\0'))
+        {
+            list->list[i].fname = g_stndup (panelized_panel.list.list[i].fname);
+            list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
+        }
+        else
+        {
+            list->list[i].fname = mc_build_filename (panelized_panel.root,
+                                                     panelized_panel.list.list[i].fname,
+                                                     (char *) NULL);
+            list->list[i].fnamelen = strlen (list->list[i].fname);
+        }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
         list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
         list->list[i].f.dir_size_computed = panelized_panel.list.list[i].f.dir_size_computed;
