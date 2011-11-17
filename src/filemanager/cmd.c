@@ -83,6 +83,7 @@
 #include "file.h"               /* file operation routines */
 #include "find.h"               /* find_file() */
 #include "hotlist.h"            /* hotlist_show() */
+#include "panel.h"              /* WPanel */
 #include "tree.h"               /* tree_chdir() */
 #include "midnight.h"           /* change_panel() */
 #include "usermenu.h"           /* MC_GLOBAL_MENU */
@@ -581,6 +582,17 @@ switch_to_listing (int panel_index)
 {
     if (get_display_type (panel_index) != view_listing)
         set_display_type (panel_index, view_listing);
+    else
+    {
+        WPanel *p;
+
+        p = (WPanel *) get_panel_widget (panel_index);
+        if (p->is_panelized)
+        {
+            p->is_panelized = 0;
+            panel_reload (p);
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
