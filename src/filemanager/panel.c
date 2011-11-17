@@ -3403,7 +3403,7 @@ update_one_panel_widget (WPanel * panel, panel_update_flags_t flags, const char 
 
     if ((flags & UP_RELOAD) != 0)
     {
-        panel->is_panelized = 0;
+        panel->is_panelized = FALSE;
         mc_setctl (panel->cwd, VFS_SETCTL_FLUSH, 0);
         memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     }
@@ -3637,7 +3637,7 @@ panel_clean_dir (WPanel * panel)
     panel->dirs_marked = 0;
     panel->total = 0;
     panel->searching = FALSE;
-    panel->is_panelized = 0;
+    panel->is_panelized = FALSE;
     panel->dirty = 1;
 
     clean_dir (&panel->dir, count);
@@ -3703,7 +3703,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     panel->dirty = 1;
     panel->searching = FALSE;
     panel->dirs_marked = 0;
-    panel->is_panelized = 0;
+    panel->is_panelized = FALSE;
     panel->format = 0;
     panel->status_format = 0;
     panel->format_modified = 1;

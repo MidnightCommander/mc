@@ -1681,7 +1681,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
         if (next_free)
         {
             current_panel->count = next_free;
-            current_panel->is_panelized = 1;
+            current_panel->is_panelized = TRUE;
 
             /* absolute path */
             if (start_dir_len < 0)

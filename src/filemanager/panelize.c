@@ -380,7 +380,7 @@ do_external_panelize (char *command)
             rotate_dash ();
     }
 
-    current_panel->is_panelized = 1;
+    current_panel->is_panelized = TRUE;
     if (next_free)
     {
         current_panel->count = next_free;
@@ -425,7 +425,7 @@ do_panelize_cd (struct WPanel *panel)
         list->size = panelized_panel.count;
     }
     panel->count = panelized_panel.count;
-    panel->is_panelized = 1;
+    panel->is_panelized = TRUE;
 
     for (i = 0; i < panelized_panel.count; i++)
     {

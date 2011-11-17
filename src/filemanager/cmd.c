@@ -589,7 +589,7 @@ switch_to_listing (int panel_index)
         p = (WPanel *) get_panel_widget (panel_index);
         if (p->is_panelized)
         {
-            p->is_panelized = 0;
+            p->is_panelized = FALSE;
             panel_reload (p);
         }
     }

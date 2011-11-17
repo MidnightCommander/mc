@@ -108,7 +108,7 @@ typedef struct WPanel
     int top_file;               /* The file showed on the top of the panel */
     int selected;               /* Index to the selected file */
     int split;                  /* Split panel to allow two columns */
-    int is_panelized;           /* Flag: special filelisting, can't reload */
+    gboolean is_panelized;      /* Flag: special filelisting, can't reload */
     panel_display_t frame_size; /* half or full frame */
     char *filter;               /* File name filter */
     panel_sort_info_t sort_info;        /* Sort descriptor */
