@@ -52,6 +52,7 @@
 
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
+#include "panel.h"              /* WPanel */
 
 #include "panelize.h"
 
@@ -484,9 +485,10 @@ panelize_save_panel (struct WPanel *panel)
 void
 cd_panelize_cmd (void)
 {
-    WPanel *panel = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
+    if (get_display_type (MENU_PANEL_IDX) != view_listing)
+        set_display_type (MENU_PANEL_IDX, view_listing);
 
-    do_panelize_cd (panel);
+    do_panelize_cd ((struct WPanel *) get_panel_widget (MENU_PANEL_IDX));
 }
 
 /* --------------------------------------------------------------------------------------------- */
