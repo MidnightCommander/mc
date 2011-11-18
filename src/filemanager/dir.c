@@ -458,7 +458,7 @@ set_zero_dir (dir_list * list)
 
     memset (&(list->list)[0], 0, sizeof (file_entry));
     list->list[0].fnamelen = 2;
-    list->list[0].fname = g_strdup ("..");
+    list->list[0].fname = g_strndup ("..", list->list[0].fnamelen);
     list->list[0].f.link_to_dir = 0;
     list->list[0].f.stale_link = 0;
     list->list[0].f.dir_size_computed = 0;
@@ -558,7 +558,7 @@ do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_rever
             return next_free;
         }
         list->list[next_free].fnamelen = NLENGTH (dp);
-        list->list[next_free].fname = g_strdup (dp->d_name);
+        list->list[next_free].fname = g_strndup (dp->d_name, list->list[next_free].fnamelen);
         list->list[next_free].f.marked = 0;
         list->list[next_free].f.link_to_dir = link_to_dir;
         list->list[next_free].f.stale_link = stale_link;
@@ -693,7 +693,7 @@ do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
         }
 
         list->list[next_free].fnamelen = NLENGTH (dp);
-        list->list[next_free].fname = g_strdup (dp->d_name);
+        list->list[next_free].fname = g_strndup (dp->d_name, list->list[next_free].fnamelen);
         list->list[next_free].f.link_to_dir = link_to_dir;
         list->list[next_free].f.stale_link = stale_link;
         list->list[next_free].f.dir_size_computed = 0;

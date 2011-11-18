@@ -367,7 +367,7 @@ do_external_panelize (char *command)
         if (status == -1)
             break;
         list->list[next_free].fnamelen = strlen (name);
-        list->list[next_free].fname = g_strdup (name);
+        list->list[next_free].fname = g_strndup (name, list->list[next_free].fnamelen);
         file_mark (current_panel, next_free, 0);
         list->list[next_free].f.link_to_dir = link_to_dir;
         list->list[next_free].f.stale_link = stale_link;
@@ -422,7 +422,7 @@ do_panelize_cd (struct WPanel *panel)
     }
     else if (panelized_panel.count >= list->size)
     {
-        list->list = g_try_realloc (list->list, sizeof (file_entry) * (panelized_panel.count));
+        list->list = g_try_realloc (list->list, sizeof (file_entry) * panelized_panel.count);
         list->size = panelized_panel.count;
     }
     panel->count = panelized_panel.count;
@@ -437,8 +437,9 @@ do_panelize_cd (struct WPanel *panel)
                 && panelized_panel.list.list[i].fname[1] == '.'
                 && panelized_panel.list.list[i].fname[2] == '\0'))
         {
-            list->list[i].fname = g_stndup (panelized_panel.list.list[i].fname);
             list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
+            list->list[i].fname = g_strndup (panelized_panel.list.list[i].fname,
+                                             panelized_panel.list.list[i].fnamelen);
         }
         else
         {
@@ -479,13 +480,13 @@ panelize_save_panel (struct WPanel *panel)
     if (panel->count >= panelized_panel.list.size)
     {
         panelized_panel.list.list = g_try_realloc (panelized_panel.list.list,
-            sizeof (file_entry) * panel->count);
+                                                   sizeof (file_entry) * panel->count);
         panelized_panel.list.size = panel->count;
     }
     for (i = 0; i < panel->count; i++)
     {
         panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;
-        panelized_panel.list.list[i].fname = g_strdup (list->list[i].fname);
+        panelized_panel.list.list[i].fname = g_strndup (list->list[i].fname, list->list[i].fnamelen);
         panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
         panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
         panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;

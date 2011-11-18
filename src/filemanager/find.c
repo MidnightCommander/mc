@@ -1664,7 +1664,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             if (next_free == 0) /* first turn i.e clean old list */
                 panel_clean_dir (current_panel);
             list->list[next_free].fnamelen = strlen (p);
-            list->list[next_free].fname = g_strdup (p);
+            list->list[next_free].fname = g_strndup (p, list->list[next_free].fnamelen);
             list->list[next_free].f.marked = 0;
             list->list[next_free].f.link_to_dir = link_to_dir;
             list->list[next_free].f.stale_link = stale_link;
