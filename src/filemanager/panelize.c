@@ -52,6 +52,7 @@
 
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
+#include "panel.h"              /* WPanel */
 
 #include "panelize.h"
 
@@ -366,7 +367,7 @@ do_external_panelize (char *command)
         if (status == -1)
             break;
         list->list[next_free].fnamelen = strlen (name);
-        list->list[next_free].fname = g_strdup (name);
+        list->list[next_free].fname = g_strndup (name, list->list[next_free].fnamelen);
         file_mark (current_panel, next_free, 0);
         list->list[next_free].f.link_to_dir = link_to_dir;
         list->list[next_free].f.stale_link = stale_link;
@@ -379,7 +380,7 @@ do_external_panelize (char *command)
             rotate_dash ();
     }
 
-    current_panel->is_panelized = 1;
+    current_panel->is_panelized = TRUE;
     if (next_free)
     {
         current_panel->count = next_free;
@@ -408,6 +409,7 @@ do_panelize_cd (struct WPanel *panel)
 {
     int i;
     dir_list *list = &panel->dir;
+    gboolean panelized_same;
 
     clean_dir (list, panel->count);
     if (panelized_panel.root[0] == '\0')
@@ -420,16 +422,32 @@ do_panelize_cd (struct WPanel *panel)
     }
     else if (panelized_panel.count >= list->size)
     {
-        list->list = g_try_realloc (list->list, sizeof (file_entry) * (panelized_panel.count));
+        list->list = g_try_realloc (list->list, sizeof (file_entry) * panelized_panel.count);
         list->size = panelized_panel.count;
     }
     panel->count = panelized_panel.count;
-    panel->is_panelized = 1;
+    panel->is_panelized = TRUE;
+
+    panelized_same = (strcmp (panelized_panel.root, panel->cwd) == 0);
 
     for (i = 0; i < panelized_panel.count; i++)
     {
-        list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
-        list->list[i].fname = g_strdup (panelized_panel.list.list[i].fname);
+        if (panelized_same
+            || (panelized_panel.list.list[i].fname[0] == '.'
+                && panelized_panel.list.list[i].fname[1] == '.'
+                && panelized_panel.list.list[i].fname[2] == '\0'))
+        {
+            list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
+            list->list[i].fname = g_strndup (panelized_panel.list.list[i].fname,
+                                             panelized_panel.list.list[i].fnamelen);
+        }
+        else
+        {
+            list->list[i].fname = mc_build_filename (panelized_panel.root,
+                                                     panelized_panel.list.list[i].fname,
+                                                     (char *) NULL);
+            list->list[i].fnamelen = strlen (list->list[i].fname);
+        }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
         list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
         list->list[i].f.dir_size_computed = panelized_panel.list.list[i].f.dir_size_computed;
@@ -462,13 +480,13 @@ panelize_save_panel (struct WPanel *panel)
     if (panel->count >= panelized_panel.list.size)
     {
         panelized_panel.list.list = g_try_realloc (panelized_panel.list.list,
-            sizeof (file_entry) * panel->count);
+                                                   sizeof (file_entry) * panel->count);
         panelized_panel.list.size = panel->count;
     }
     for (i = 0; i < panel->count; i++)
     {
         panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;
-        panelized_panel.list.list[i].fname = g_strdup (list->list[i].fname);
+        panelized_panel.list.list[i].fname = g_strndup (list->list[i].fname, list->list[i].fnamelen);
         panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
         panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
         panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
@@ -484,9 +502,10 @@ panelize_save_panel (struct WPanel *panel)
 void
 cd_panelize_cmd (void)
 {
-    WPanel *panel = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
+    if (get_display_type (MENU_PANEL_IDX) != view_listing)
+        set_display_type (MENU_PANEL_IDX, view_listing);
 
-    do_panelize_cd (panel);
+    do_panelize_cd ((struct WPanel *) get_panel_widget (MENU_PANEL_IDX));
 }
 
 /* --------------------------------------------------------------------------------------------- */

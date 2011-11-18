@@ -11,6 +11,8 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
+struct WPanel;
+
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
