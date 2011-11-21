@@ -128,6 +128,7 @@
 #define SCRIPT_SUFFIX ""
 #define get_default_editor() "vi"
 #define OS_SORT_CASE_SENSITIVE_DEFAULT 1
+#define UTF8_CHAR_LEN 6
 
 /* C++ style type casts */
 #define const_cast(m_type, m_expr) ((m_type) (m_expr))
