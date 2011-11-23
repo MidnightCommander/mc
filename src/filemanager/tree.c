@@ -178,8 +178,7 @@ save_tree (WTree * tree)
 
     if (error)
     {
-        tree_name =
-            g_build_filename (mc_config_get_cache_path (), MC_TREESTORE_FILE, (char *) NULL);
+        tree_name = mc_config_get_full_path (MC_TREESTORE_FILE);
         fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), tree_name,
                  unix_error_string (error));
         g_free (tree_name);

@@ -150,7 +150,7 @@ history_get (const char *input_name)
     if ((input_name == NULL) || (*input_name == '\0'))
         return NULL;
 
-    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, NULL);
+    profile = mc_config_get_full_path (MC_HISTORY_FILE);
     cfg = mc_config_init (profile);
 
     hist = history_load (cfg, input_name);
@@ -303,7 +303,7 @@ history_put (const char *input_name, GList * h)
     if (h == NULL)
         return;
 
-    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, (char *) NULL);
+    profile = mc_config_get_full_path (MC_HISTORY_FILE);
 
     i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
     if (i != -1)

@@ -108,6 +108,8 @@ const char *mc_config_get_path (void);
 
 const char *mc_config_get_home_dir (void);
 
+char *mc_config_get_full_path (const char *config_name);
+
 
 /*** inline functions ****************************************************************************/
 

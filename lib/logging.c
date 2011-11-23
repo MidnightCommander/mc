@@ -104,7 +104,7 @@ get_log_filename (void)
     if (mc_config_has_param (mc_main_config, CONFIG_GROUP_NAME, CONFIG_KEY_NAME_FILE))
         return mc_config_get_string (mc_main_config, CONFIG_GROUP_NAME, CONFIG_KEY_NAME_FILE, NULL);
 
-    return g_build_filename (mc_config_get_cache_path (), "mc.log", NULL);
+    return mc_config_get_full_path ("mc.log");
 }
 
 /* --------------------------------------------------------------------------------------------- */

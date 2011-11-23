@@ -1069,7 +1069,7 @@ ext_cmd (void)
 
     if (dir == 0)
     {
-        buffer = g_build_filename (mc_config_get_data_path (), MC_FILEBIND_FILE, NULL);
+        buffer = mc_config_get_full_path (MC_FILEBIND_FILE);
         check_for_default (extdir, buffer);
         do_edit (buffer);
         g_free (buffer);
@@ -1118,7 +1118,7 @@ edit_mc_menu_cmd (void)
         break;
 
     case 1:
-        buffer = g_build_filename (mc_config_get_data_path (), MC_USERMENU_FILE, NULL);
+        buffer = mc_config_get_full_path (MC_USERMENU_FILE);
         check_for_default (menufile, buffer);
         break;
 
@@ -1163,7 +1163,7 @@ edit_fhl_cmd (void)
 
     if (dir == 0)
     {
-        buffer = g_build_filename (mc_config_get_path (), MC_FHL_INI_FILE, NULL);
+        buffer = mc_config_get_full_path (MC_FHL_INI_FILE);
         check_for_default (fhlfile, buffer);
         do_edit (buffer);
         g_free (buffer);
@@ -1615,7 +1615,7 @@ save_setup_cmd (void)
     char *d1;
     const char *d2;
 
-    d1 = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, (char *) NULL);
+    d1 = mc_config_get_full_path (MC_CONFIG_FILE);
     d2 = strip_home_and_password (d1);
     g_free (d1);
 

@@ -714,10 +714,10 @@ edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
     cursor_buf_ptr = utf8_buf + (2 * UTF8_CHAR_LEN);
     str = g_utf8_find_prev_char (utf8_buf, cursor_buf_ptr);
 
-    if (str == NULL || g_utf8_next_char(str) != cursor_buf_ptr)
+    if (str == NULL || g_utf8_next_char (str) != cursor_buf_ptr)
     {
         *char_width = 1;
-        return *(cursor_buf_ptr-1);
+        return *(cursor_buf_ptr - 1);
     }
     else
     {
@@ -726,7 +726,7 @@ edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
         if (res < 0)
         {
             *char_width = 1;
-            return *(cursor_buf_ptr-1);
+            return *(cursor_buf_ptr - 1);
         }
         else
         {
@@ -1833,7 +1833,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
     long start_mark, end_mark;
     struct stat status;
 
-    block_file = concat_dir_and_file (mc_config_get_cache_path (), EDIT_BLOCK_FILE);
+    block_file = mc_config_get_full_path (EDIT_BLOCK_FILE);
     curs = edit->curs1;
     nomark = eval_marks (edit, &start_mark, &end_mark);
     if (nomark == 0)

@@ -647,7 +647,7 @@ tree_store_load (void)
     char *name;
     int retval;
 
-    name = g_build_filename (mc_config_get_cache_path (), MC_TREESTORE_FILE, NULL);
+    name = mc_config_get_full_path (MC_TREESTORE_FILE);
     retval = tree_store_load_from (name);
     g_free (name);
 
@@ -667,7 +667,7 @@ tree_store_save (void)
     char *name;
     int retval;
 
-    name = g_build_filename (mc_config_get_cache_path (), MC_TREESTORE_FILE, NULL);
+    name = mc_config_get_full_path (MC_TREESTORE_FILE);
     mc_util_make_backup_if_possible (name, ".tmp");
 
     retval = tree_store_save_to (name);

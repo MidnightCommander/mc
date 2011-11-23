@@ -165,7 +165,7 @@ dlg_read_history (Dlg_head * h)
     if (num_history_items_recorded == 0)        /* this is how to disable */
         return;
 
-    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, NULL);
+    profile = mc_config_get_full_path (MC_HISTORY_FILE);
     event_data.cfg = mc_config_init (profile);
     event_data.receiver = NULL;
 
@@ -1192,7 +1192,7 @@ dlg_save_history (Dlg_head * h)
     if (num_history_items_recorded == 0)        /* this is how to disable */
         return;
 
-    profile = g_build_filename (mc_config_get_cache_path (), MC_HISTORY_FILE, (char *) NULL);
+    profile = mc_config_get_full_path (MC_HISTORY_FILE);
     i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
     if (i != -1)
         close (i);

@@ -269,7 +269,7 @@ init_subshell_child (const char *pty_name)
     switch (subshell_type)
     {
     case BASH:
-        init_file = g_build_filename (mc_config_get_path (), "bashrc", NULL);
+        init_file = mc_config_get_full_path ("bashrc");
 
         if (access (init_file, R_OK) == -1)
         {
@@ -282,7 +282,7 @@ init_subshell_child (const char *pty_name)
 
         /* Allow alternative readline settings for MC */
         {
-            char *input_file = g_build_filename (mc_config_get_path (), "inputrc", NULL);
+            char *input_file = mc_config_get_full_path ("inputrc");
             if (access (input_file, R_OK) == 0)
             {
                 char *putenv_str = g_strconcat ("INPUTRC=", input_file, NULL);

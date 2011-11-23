@@ -1564,7 +1564,7 @@ load_hotlist (void)
     }
 
     if (!hotlist_file_name)
-        hotlist_file_name = g_build_filename (mc_config_get_path (), MC_HOTLIST_FILE, NULL);
+        hotlist_file_name = mc_config_get_full_path (MC_HOTLIST_FILE);
 
     hotlist = new_hotlist ();
     hotlist->type = HL_TYPE_GROUP;

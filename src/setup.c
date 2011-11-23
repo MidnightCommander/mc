@@ -621,8 +621,7 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
     {
         gchar **values, **curr_values;
 
-        curr_values = values =
-            mc_config_get_string_list (cfg, section_name, *profile_keys, &len);
+        curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &len);
 
         if (curr_values != NULL)
         {
@@ -672,7 +671,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     g_free (fname);
 
     /* 3) ${XDG_CONFIG_HOME}/mc */
-    fname = g_build_filename (mc_config_get_path (), GLOBAL_KEYMAP_FILE, NULL);
+    fname = mc_config_get_full_path (GLOBAL_KEYMAP_FILE);
     load_setup_init_config_from_file (&keymap_config, fname);
     g_free (fname);
 
@@ -793,7 +792,7 @@ setup_init (void)
     if (profile_name != NULL)
         return profile_name;
 
-    profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
+    profile = mc_config_get_full_path (MC_CONFIG_FILE);
     if (!exist_file (profile))
     {
         inifile = concat_dir_and_file (mc_global.sysconfig_dir, "mc.ini");
@@ -848,7 +847,7 @@ load_setup (void)
             g_build_filename (mc_global.share_data_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
-    panels_profile_name = g_build_filename (mc_config_get_cache_path (), MC_PANELS_FILE, NULL);
+    panels_profile_name = mc_config_get_full_path (MC_PANELS_FILE);
 
     mc_main_config = mc_config_init (profile);
 
@@ -1005,7 +1004,7 @@ save_setup (gboolean save_options, gboolean save_panel_options)
         mc_config_set_string (mc_main_config, "Misc", "clipboard_store", clipboard_store_path);
         mc_config_set_string (mc_main_config, "Misc", "clipboard_paste", clipboard_paste_path);
 
-        tmp_profile = g_build_filename (mc_config_get_path (), MC_CONFIG_FILE, NULL);
+        tmp_profile = mc_config_get_full_path (MC_CONFIG_FILE);
         ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
         g_free (tmp_profile);
     }

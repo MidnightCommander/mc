@@ -60,7 +60,7 @@ static const struct
 
     char **new_basedir;
     const char *new_filename;
-} mc_config_migrate_rules[] =
+} mc_config_files_reference[] =
 {
     /* *INDENT-OFF* */
     /* config */
@@ -74,8 +74,9 @@ static const struct
     { "cedit" PATH_SEP_STR "edit.indent.rc",   &mc_config_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc"},
     { "cedit" PATH_SEP_STR "edit.spell.rc",    &mc_config_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc"},
     { "panels.ini",                            &mc_config_str, MC_PANELS_FILE},
+
     /* User should move this file with applying some changes in file */
-/*  { "bindings",                              &mc_config_str, MC_FILEBIND_FILE}, */
+    { "",                                      &mc_config_str, MC_FILEBIND_FILE},
 
     /* data */
     { "skins",                                 &mc_data_str, MC_SKINS_SUBDIR},
@@ -86,6 +87,7 @@ static const struct
     { "history",                               &mc_data_str, MC_HISTORY_FILE},
     { "filepos",                               &mc_data_str, MC_FILEPOS_FILE},
     { "cedit" PATH_SEP_STR "cooledit.clip",    &mc_data_str, EDIT_CLIP_FILE},
+    { "",                                      &mc_data_str, MC_MACRO_FILE},
 
     /* cache */
     { "log",                                   &mc_cache_str, "mc.log"},
@@ -239,7 +241,7 @@ mc_config_fix_migrated_rules (void)
             char *new_name;
 
             new_name = g_build_filename (*mc_config_migrate_rules_fix[rule_index].new_basedir,
-                                         mc_config_migrate_rules[rule_index].new_filename, NULL);
+                                         mc_config_files_reference[rule_index].new_filename, NULL);
 
             rename (old_name, new_name);
 
@@ -394,19 +396,21 @@ mc_config_migrate_from_old_place (GError ** error)
     g_free (mc_config_init_one_config_path (mc_data_str, EDIT_DIR, error));
 #endif /* MC_HOMEDIR_XDG */
 
-    for (rule_index = 0; mc_config_migrate_rules[rule_index].old_filename != NULL; rule_index++)
+    for (rule_index = 0; mc_config_files_reference[rule_index].old_filename != NULL; rule_index++)
     {
         char *old_name;
+        if (*mc_config_files_reference[rule_index].old_filename == '\0')
+            continue;
 
         old_name =
-            g_build_filename (old_dir, mc_config_migrate_rules[rule_index].old_filename, NULL);
+            g_build_filename (old_dir, mc_config_files_reference[rule_index].old_filename, NULL);
 
         if (g_file_test (old_name, G_FILE_TEST_EXISTS))
         {
             char *new_name;
 
-            new_name = g_build_filename (*mc_config_migrate_rules[rule_index].new_basedir,
-                                         mc_config_migrate_rules[rule_index].new_filename, NULL);
+            new_name = g_build_filename (*mc_config_files_reference[rule_index].new_basedir,
+                                         mc_config_files_reference[rule_index].new_filename, NULL);
 
             mc_config_copy (old_name, new_name, error);
 
@@ -448,6 +452,33 @@ mc_config_deprecated_dir_present (void)
     g_free (old_dir);
 
     return is_present && !config_dir_present;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get full path to config file by short name.
+ *
+ * @param config_name short name
+ * @return full path to config file
+ */
+
+char *
+mc_config_get_full_path (const char *config_name)
+{
+    size_t rule_index;
+
+    if (config_name == NULL)
+        return NULL;
+
+    for (rule_index = 0; mc_config_files_reference[rule_index].old_filename != NULL; rule_index++)
+    {
+        if (strcmp (config_name, mc_config_files_reference[rule_index].new_filename) == 0)
+        {
+            return g_build_filename (*mc_config_files_reference[rule_index].new_basedir,
+                                     mc_config_files_reference[rule_index].new_filename, NULL);
+        }
+    }
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

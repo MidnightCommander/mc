@@ -1512,7 +1512,7 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
         if (!*edit->filename && !type)
             return;
     }
-    f = g_build_filename (mc_config_get_data_path (), EDIT_SYNTAX_FILE, (char *) NULL);
+    f = mc_config_get_full_path (EDIT_SYNTAX_FILE);
     if (edit != NULL)
         r = edit_read_syntax_file (edit, pnames, f, edit->filename,
                                    get_first_editor_line (edit),

@@ -77,7 +77,7 @@ clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_
     if (d == NULL || clipboard_store_path == NULL || clipboard_store_path[0] == '\0')
         return TRUE;
 
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
     cmd = g_strconcat (clipboard_store_path, " ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)
@@ -107,7 +107,7 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
     if (d == NULL || clipboard_paste_path == NULL || clipboard_paste_path[0] == '\0')
         return TRUE;
 
-    tmp = concat_dir_and_file (mc_config_get_cache_path (), EDIT_CLIP_FILE);
+    tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
     cmd = g_strconcat (clipboard_paste_path, " > ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)
@@ -138,7 +138,7 @@ clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name
     if (text == NULL)
         return FALSE;
 
-    fname = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
+    fname = mc_config_get_full_path (EDIT_CLIP_FILE);
     file = mc_open (fname, O_CREAT | O_WRONLY | O_TRUNC,
                     S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
     g_free (fname);
@@ -169,7 +169,7 @@ clipboard_text_from_file (const gchar * event_group_name, const gchar * event_na
     (void) event_name;
     (void) init_data;
 
-    fname = g_build_filename (mc_config_get_cache_path (), EDIT_CLIP_FILE, NULL);
+    fname = mc_config_get_full_path (EDIT_CLIP_FILE);
     f = fopen (fname, "r");
     g_free (fname);
 
