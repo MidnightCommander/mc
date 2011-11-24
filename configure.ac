@@ -410,7 +410,7 @@ dnl Where config files should be placed
 dnl
 
 AC_ARG_WITH([homedir],
-    AS_HELP_STRING([--enable-homedir], [Choose any place of user settings relative to home dir, or XDG for respect XDG standards @<:@XDG@:>@]),
+    AS_HELP_STRING([--with-homedir], [Choose any place of user settings relative to home dir, or XDG for respect XDG standards @<:@XDG@:>@]),
     [
 	if test "x$withval" = "xXDG"; then
 	    with_homedir=XDG
