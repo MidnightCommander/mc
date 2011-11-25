@@ -1138,7 +1138,7 @@ void
 load_keymap_defs (gboolean load_from_file)
 {
     /*
-     * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_DATA_HOME}/mc/keymap, so that the user
+     * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_CONFIG_HOME}/mc/mc.keymap, so that the user
      * definitions override global settings.
      */
     mc_config_t *mc_global_keymap;
