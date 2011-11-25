@@ -340,7 +340,7 @@ in section
 of config file.
 .br
 4) File
-.B ~/.local/share/mc/mc.keymap
+.B ~/.config/mc/mc.keymap
 .br
 5) File
 .B @sysconfdir@/mc/mc.keymap
@@ -354,7 +354,7 @@ or without it). Search of keymap\-file will occur in (to the first one found):
 .IP
 .br
 1)
-.B ~/.local/share/mc
+.B ~/.config/mc
 .br
 2)
 .B @sysconfdir@/mc/
