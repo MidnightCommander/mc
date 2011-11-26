@@ -918,7 +918,7 @@ init_subshell (void)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-invoke_subshell (const char *command, int how, char **new_dir)
+invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 {
     char *pcwd;
 
@@ -926,7 +926,7 @@ invoke_subshell (const char *command, int how, char **new_dir)
     tcsetattr (STDOUT_FILENO, TCSANOW, &raw_mode);
 
     /* Make the subshell change to MC's working directory */
-    if (new_dir != NULL)
+    if (new_dir_vpath != NULL)
         do_subshell_chdir (current_panel->cwd_vpath, TRUE, TRUE);
 
     if (command == NULL)        /* The user has done "C-o" from MC */
@@ -961,8 +961,8 @@ invoke_subshell (const char *command, int how, char **new_dir)
         g_free (cwd_str);
     }
 
-    if (new_dir && subshell_alive && strcmp (subshell_cwd, pcwd))
-        *new_dir = subshell_cwd;        /* Make MC change to the subshell's CWD */
+    if (new_dir_vpath != NULL && subshell_alive && strcmp (subshell_cwd, pcwd))
+        *new_dir_vpath = vfs_path_from_str (subshell_cwd);      /* Make MC change to the subshell's CWD */
     g_free (pcwd);
 
     /* Restart the subshell if it has died by SIGHUP, SIGQUIT, etc. */
