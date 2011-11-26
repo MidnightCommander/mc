@@ -43,9 +43,14 @@
 
 #include "src/vfs/local/local.c"
 
+const char *mc_config_get_home_dir (void);
 
-struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
+const char *
+mc_config_get_home_dir (void)
+{
+    return "/mock/home";
+}
+
 
 static void
 setup (void)
@@ -58,6 +63,7 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 #define path_recode_one_check(input, etalon1, etalon2) {\
     vpath = vfs_path_from_str (input);\
     element = vfs_path_get_by_index(vpath, -1);\
@@ -96,6 +102,8 @@ START_TEST (test_path_recode_base_utf8)
 }
 END_TEST
 
+/* --------------------------------------------------------------------------------------------- */
+
 START_TEST (test_path_recode_base_koi8r)
 {
     vfs_path_t *vpath;
@@ -125,6 +133,75 @@ START_TEST (test_path_recode_base_koi8r)
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
+struct vfs_s_subclass test_subclass1;
+struct vfs_class vfs_test_ops1;
+
+START_TEST(test_path_to_str_flags)
+{
+
+    vfs_path_t *vpath;
+    char *str_path;
+
+    str_init_strings ("UTF-8");
+
+    vfs_init ();
+    init_localfs ();
+
+    vfs_setup_work_dir ();
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+    load_codepages_list ();
+
+    test_subclass1.flags = VFS_S_REMOTE;
+    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
+    vfs_test_ops1.name = "testfs1";
+    vfs_test_ops1.flags = VFSF_NOLINKS;
+    vfs_test_ops1.prefix = "test1";
+    vfs_register_class (&vfs_test_ops1);
+
+
+    vpath = vfs_path_from_str ("/test1://user:passwd@host.name/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄");
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    fail_unless (strcmp ("/test1://user@host.name/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
+
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_RECODE);
+    fail_unless (strcmp ("/test1://user:passwd@host.name/тестовый/путь", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
+
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_RECODE | VPF_STRIP_PASSWORD);
+    fail_unless (strcmp ("/test1://user@host.name/тестовый/путь", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
+
+    vfs_path_free (vpath);
+
+    vpath = vfs_path_build_filename (mc_config_get_home_dir (), "test", "dir", NULL);
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME);
+    fail_unless (strcmp ("~/test/dir", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
+    vfs_path_free (vpath);
+
+    vpath = vfs_path_build_filename (mc_config_get_home_dir (), "test1://user:passwd@host.name/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄", NULL);
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+    fail_unless (strcmp ("~/test1://user@host.name/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_RECODE);
+    fail_unless (strcmp ("~/test1://user:passwd@host.name/тестовый/путь", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_RECODE | VPF_STRIP_PASSWORD);
+    fail_unless (strcmp ("~/test1://user@host.name/тестовый/путь", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
+    vfs_path_free (vpath);
+
+    free_codepages_list ();
+    str_uninit_strings ();
+    vfs_shut ();
+
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 
 int
 main (void)
@@ -140,10 +217,12 @@ main (void)
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, test_path_recode_base_utf8);
     tcase_add_test (tc_core, test_path_recode_base_koi8r);
+    tcase_add_test (tc_core, test_path_to_str_flags);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
+    srunner_print (sr, CK_VERBOSE);
     srunner_set_log (sr, "path_recode.log");
     srunner_run_all (sr, CK_NORMAL);
     number_failed = srunner_ntests_failed (sr);
