@@ -11,7 +11,10 @@ typedef enum
 {
     VPF_NONE = 0,
     VPF_NO_CANON = 1 << 0,
-    VPF_USE_DEPRECATED_PARSER = 1 << 1
+    VPF_USE_DEPRECATED_PARSER = 1 << 1,
+    VPF_RECODE = 1 << 2,
+    VPF_STRIP_HOME = 1 << 3,
+    VPF_STRIP_PASSWORD = 1 << 4
 } vfs_path_flag_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -55,6 +58,7 @@ int vfs_path_elements_count (const vfs_path_t * path);
 
 char *vfs_path_to_str (const vfs_path_t * path);
 char *vfs_path_to_str_elements_count (const vfs_path_t * path, int elements_count);
+char *vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_flag_t flags);
 vfs_path_t *vfs_path_from_str (const char *path_str);
 vfs_path_t *vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags);
 vfs_path_t *vfs_path_build_filename (const char *first_element, ...);

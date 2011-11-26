@@ -451,7 +451,7 @@ vfs_path_from_str_uri_parser (char *path)
 
         url_delimiter += strlen (VFS_PATH_URL_DELIMITER);
         sub = VFSDATA (element);
-        if (sub != NULL && sub->flags & VFS_S_REMOTE)
+        if (sub != NULL && (sub->flags & VFS_S_REMOTE) != 0)
         {
             slash_pointer = strchr (url_delimiter, PATH_SEP);
             if (slash_pointer == NULL)
@@ -544,28 +544,64 @@ vfs_path_tokens_add_class_info (vfs_path_element_t * element, GString * ret_toke
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Strip path to home dir.
+ * @param dir pointer to string contains full path
+ */
+
+static char *
+vfs_path_strip_home (const char *dir)
+{
+    const char *home_dir = mc_config_get_home_dir ();
+
+    if (home_dir != NULL)
+    {
+        size_t len;
+
+        len = strlen (home_dir);
+
+        if (strncmp (dir, home_dir, len) == 0 && (dir[len] == PATH_SEP || dir[len] == '\0'))
+            return g_strdup_printf ("~%s", dir + len);
+    }
+
+    return g_strdup (dir);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Convert first elements_count elements from vfs_path_t to string representation.
+ * Convert first elements_count elements from vfs_path_t to string representation with flags.
  *
  * @param vpath pointer to vfs_path_t object
  * @param elements_count count of first elements for convert
- * @param flags flags for parser
+ * @param flags flags for converter
  *
  * @return pointer to newly created string.
  */
 
 #define vfs_append_from_path(appendfrom) \
 { \
-    if ((*appendfrom != PATH_SEP) && (*appendfrom != '\0') \
-        && (buffer->str[buffer->len - 1] != PATH_SEP)) \
-        g_string_append_c (buffer, PATH_SEP); \
-    g_string_append (buffer, appendfrom); \
+    if ((flags & VPF_STRIP_HOME) && element_index == 0 && (element->class->flags & VFSF_LOCAL) != 0) \
+    { \
+        char *stripped_home_str; \
+        stripped_home_str = vfs_path_strip_home (appendfrom); \
+        g_string_append (buffer, stripped_home_str); \
+        g_free (stripped_home_str); \
+    } \
+    else \
+    { \
+        if ((*appendfrom != PATH_SEP) && (*appendfrom != '\0') \
+            && (buffer->str[buffer->len - 1] != PATH_SEP)) \
+            g_string_append_c (buffer, PATH_SEP); \
+        g_string_append (buffer, appendfrom); \
+    } \
 }
 
 char *
-vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
+vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_flag_t flags)
 {
     int element_index;
     GString *buffer;
@@ -574,7 +610,7 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
     if (vpath == NULL)
         return NULL;
 
-    if (elements_count > vfs_path_elements_count (vpath))
+    if (elements_count == 0 || elements_count > vfs_path_elements_count (vpath))
         elements_count = vfs_path_elements_count (vpath);
 
     if (elements_count < 0)
@@ -597,14 +633,15 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
             g_string_append (buffer, element->vfs_prefix);
             g_string_append (buffer, VFS_PATH_URL_DELIMITER);
 
-            url_str = vfs_path_build_url_params_str (element, TRUE);
+            url_str = vfs_path_build_url_params_str (element, !(flags & VPF_STRIP_PASSWORD));
+
             if (*url_str != '\0')
                 g_string_append (buffer, url_str);
 
             g_free (url_str);
         }
 
-        if (vfs_path_element_need_cleanup_converter (element))
+        if ((flags & VPF_RECODE) == 0 && vfs_path_element_need_cleanup_converter (element))
         {
             if (buffer->str[buffer->len - 1] != PATH_SEP)
                 g_string_append (buffer, PATH_SEP_STR);
@@ -624,6 +661,22 @@ vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
 }
 
 #undef vfs_append_from_path
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Convert first elements_count elements from vfs_path_t to string representation.
+ *
+ * @param vpath pointer to vfs_path_t object
+ * @param elements_count count of first elements for convert
+ *
+ * @return pointer to newly created string.
+ */
+
+char *
+vfs_path_to_str_elements_count (const vfs_path_t * vpath, int elements_count)
+{
+    return vfs_path_to_str_flags (vpath, elements_count, VPF_NONE);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**
