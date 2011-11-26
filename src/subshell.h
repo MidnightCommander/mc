@@ -45,7 +45,7 @@ extern gboolean update_subshell_prompt;
 /*** declarations of public functions ************************************************************/
 
 void init_subshell (void);
-int invoke_subshell (const char *command, int how, char **new_dir);
+int invoke_subshell (const char *command, int how, vfs_path_t ** new_dir);
 int read_subshell_prompt (void);
 void do_update_prompt (void);
 int exit_subshell (void);
