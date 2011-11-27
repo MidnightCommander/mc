@@ -643,10 +643,13 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
 
         if ((flags & VPF_RECODE) == 0 && vfs_path_element_need_cleanup_converter (element))
         {
-            if (buffer->str[buffer->len - 1] != PATH_SEP)
-                g_string_append (buffer, PATH_SEP_STR);
-            g_string_append (buffer, VFS_ENCODING_PREFIX);
-            g_string_append (buffer, element->encoding);
+            if ((flags & VPF_HIDE_CHARSET) == 0)
+            {
+                if (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP)
+                    g_string_append (buffer, PATH_SEP_STR);
+                g_string_append (buffer, VFS_ENCODING_PREFIX);
+                g_string_append (buffer, element->encoding);
+            }
             str_vfs_convert_from (element->dir.converter, element->path, recode_buffer);
             vfs_append_from_path (recode_buffer->str);
             g_string_set_size (recode_buffer, 0);
@@ -776,6 +779,19 @@ int
 vfs_path_elements_count (const vfs_path_t * vpath)
 {
     return (vpath != NULL && vpath->path != NULL) ? vpath->path->len : 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Add vfs_path_element_t object to end of list in vfs_path_t object
+ * @param vpath pointer to vfs_path_t object
+ * @param path_element pointer to vfs_path_element_t object
+ */
+
+void
+vfs_path_add_element (const vfs_path_t * vpath, const vfs_path_element_t * path_element)
+{
+    g_array_append_val (vpath->path, path_element);
 }
 
 /* --------------------------------------------------------------------------------------------- */

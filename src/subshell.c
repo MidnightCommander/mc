@@ -1170,13 +1170,11 @@ subshell_name_quote (const char *s)
 void
 do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt)
 {
-    char *pcwd, *cwd_str;
+    char *pcwd;
     char *temp;
     char *directory;
 
-    cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
-    pcwd = vfs_translate_path_n (cwd_str);
-    g_free (cwd_str);
+    pcwd = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_RECODE);
 
     if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
     {
@@ -1250,9 +1248,11 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean re
             bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd);
         }
 
-        if (bPathNotEq && strcmp (pcwd, "."))
+        if (bPathNotEq && strcmp (pcwd, ".") != 0)
         {
-            char *cwd = strip_password (g_strdup (pcwd), 1);
+            char *cwd;
+
+            cwd = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
             vfs_print_message (_("Warning: Cannot change to %s.\n"), cwd);
             g_free (cwd);
         }

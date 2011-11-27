@@ -185,6 +185,9 @@ START_TEST(test_path_to_str_flags)
     str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
     fail_unless (strcmp ("~/test1://user@host.name/#enc:KOI8-R/тестовый/путь", str_path) == 0, "\nstr=%s\n", str_path);
     g_free (str_path);
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET);
+    fail_unless (strcmp ("~/test1://user@host.name/тестовый/путь", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
     str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_RECODE);
     fail_unless (strcmp ("~/test1://user:passwd@host.name/��������/����", str_path) == 0, "\nstr=%s\n", str_path);
     g_free (str_path);

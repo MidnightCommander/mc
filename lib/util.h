@@ -109,12 +109,6 @@ const char *size_trunc_sep (uintmax_t size, gboolean use_si);
 void size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si);
 const char *string_perm (mode_t mode_bits);
 
-/* @modifies path. @returns pointer into path. */
-char *strip_password (char *path, int has_prefix);
-
-/* @returns a pointer into a static buffer. */
-const char *strip_home_and_password (const char *dir);
-
 const char *extension (const char *);
 const char *unix_error_string (int error_num);
 const char *skip_separators (const char *s);

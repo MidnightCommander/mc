@@ -14,7 +14,8 @@ typedef enum
     VPF_USE_DEPRECATED_PARSER = 1 << 1,
     VPF_RECODE = 1 << 2,
     VPF_STRIP_HOME = 1 << 3,
-    VPF_STRIP_PASSWORD = 1 << 4
+    VPF_STRIP_PASSWORD = 1 << 4,
+    VPF_HIDE_CHARSET = 1 << 5
 } vfs_path_flag_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -68,6 +69,7 @@ size_t vfs_path_tokens_count (const vfs_path_t *);
 char *vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length);
 vfs_path_t *vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length);
 
+void vfs_path_add_element (const vfs_path_t * vpath, const vfs_path_element_t * path_element);
 vfs_path_element_t *vfs_path_get_by_index (const vfs_path_t * path, int element_index);
 vfs_path_element_t *vfs_path_element_clone (const vfs_path_element_t * element);
 void vfs_path_element_free (vfs_path_element_t * element);

@@ -436,9 +436,10 @@ do_cd_command (char *orig_cmd)
         {
             char *d;
 
-            d = strip_password (path, 1);
+            d = vfs_path_to_str_flags (q_vpath, 0, VPF_STRIP_PASSWORD);
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d,
                      unix_error_string (errno));
+            g_free (d);
         }
 
         vfs_path_free (q_vpath);

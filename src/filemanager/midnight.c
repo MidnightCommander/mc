@@ -431,18 +431,18 @@ midnight_get_title (const Dlg_head * h, size_t len)
 {
     /* TODO: share code with update_xterm_title_path() */
 
-    const char *path;
+    char *path_origin, *p;
+    char *path;
     char host[BUF_TINY];
-    char *p;
     struct passwd *pw = NULL;
     char *login = NULL;
     int res = 0;
 
     (void) h;
 
-    p = vfs_path_to_str (current_panel->cwd_vpath);
-    path = strip_home_and_password (p);
-    g_free (p);
+    path_origin =
+        vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+
     res = gethostname (host, sizeof (host));
     if (res != 0)
         host[0] = '\0';
@@ -455,12 +455,13 @@ midnight_get_title (const Dlg_head * h, size_t len)
     else
         login = g_strdup (host);
 
-    p = g_strdup_printf ("%s [%s]:%s", _("Panels:"), login, path);
-    path = str_trunc (p, len - 4);
+    p = g_strdup_printf ("%s [%s]:%s", _("Panels:"), login, path_origin);
+    g_free (path_origin);
+    path = g_strdup (str_trunc (p, len - 4));
     g_free (login);
     g_free (p);
 
-    return g_strdup (path);
+    return path;
 }
 
 /* --------------------------------------------------------------------------------------------- */
