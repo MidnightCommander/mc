@@ -1092,7 +1092,7 @@ add_new_entry_cmd (void)
     int ret;
 
     /* Take current directory as default value for input fields */
-    to_free = title = url = strip_password (vfs_path_to_str (current_panel->cwd_vpath), 1);
+    to_free = title = url = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
 
     ret = add_new_entry_input (_("New hotlist entry"), _("Directory label:"),
                                _("Directory path:"), "[Hotlist]", &title, &url);
@@ -1694,19 +1694,18 @@ add_dotdot_to_list (void)
 void
 add2hotlist_cmd (void)
 {
-    char *lc_prompt, *label;
+    char *lc_prompt;
     const char *cp = N_("Label for \"%s\":");
     int l;
-    char *label_string;
+    char *label_string, *label;
 
 #ifdef ENABLE_NLS
     cp = _(cp);
 #endif
 
     l = str_term_width1 (cp);
-    label_string = vfs_path_to_str (current_panel->cwd_vpath);
-    lc_prompt = g_strdup_printf (cp, path_trunc (label_string, COLS - 2 * UX - (l + 8)));
-    strip_password (label_string, 1);
+    label_string = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
+    lc_prompt = g_strdup_printf (cp, str_trunc (label_string, COLS - 2 * UX - (l + 8)));
     label = input_dialog (_("Add to hotlist"), lc_prompt, MC_HISTORY_HOTLIST_ADD, label_string);
     g_free (lc_prompt);
 
@@ -1718,6 +1717,7 @@ add2hotlist_cmd (void)
     }
     add2hotlist (label, label_string, HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
     hotlist_state.modified = 1;
+    g_free (label_string);
 }
 
 /* --------------------------------------------------------------------------------------------- */

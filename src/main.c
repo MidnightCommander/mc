@@ -340,46 +340,43 @@ update_xterm_title_path (void)
 {
     /* TODO: share code with midnight_get_title () */
 
-    const char *path;
+    char *path;
     char host[BUF_TINY];
     char *p;
     struct passwd *pw = NULL;
     char *login = NULL;
     int res = 0;
 
-    if (mc_global.tty.xterm_flag && xterm_title)
-    {
-        char *path_str;
+    if (!(mc_global.tty.xterm_flag && xterm_title))
+        return;
 
-        path_str = vfs_path_to_str (current_panel->cwd_vpath);
-        path = strip_home_and_password (path_str);
-        g_free (path_str);
-        res = gethostname (host, sizeof (host));
-        if (res)
-        {                       /* On success, res = 0 */
-            host[0] = '\0';
-        }
-        else
-        {
-            host[sizeof (host) - 1] = '\0';
-        }
-        pw = getpwuid (getuid ());
-        if (pw)
-        {
-            login = g_strdup_printf ("%s@%s", pw->pw_name, host);
-        }
-        else
-        {
-            login = g_strdup (host);
-        }
-        p = g_strdup_printf ("mc [%s]:%s", login, path);
-        fprintf (stdout, "\33]0;%s\7", str_term_form (p));
-        g_free (login);
-        g_free (p);
-        if (!mc_global.tty.alternate_plus_minus)
-            numeric_keypad_mode ();
-        (void) fflush (stdout);
+    path = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+    res = gethostname (host, sizeof (host));
+    if (res)
+    {                           /* On success, res = 0 */
+        host[0] = '\0';
     }
+    else
+    {
+        host[sizeof (host) - 1] = '\0';
+    }
+    pw = getpwuid (getuid ());
+    if (pw)
+    {
+        login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+    }
+    else
+    {
+        login = g_strdup (host);
+    }
+    p = g_strdup_printf ("mc [%s]:%s", login, path);
+    fprintf (stdout, "\33]0;%s\7", str_term_form (p));
+    g_free (login);
+    g_free (p);
+    if (!mc_global.tty.alternate_plus_minus)
+        numeric_keypad_mode ();
+    (void) fflush (stdout);
+    g_free (path);
 }
 
 /* --------------------------------------------------------------------------------------------- */

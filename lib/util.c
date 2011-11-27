@@ -326,9 +326,15 @@ fake_name_quote (const char *s, int quote_percent)
 const char *
 path_trunc (const char *path, size_t trunc_len)
 {
-    char *secure_path = strip_password (g_strdup (path), 1);
+    vfs_path_t *vpath;
+    char *secure_path;
+    const char *ret;
 
-    const char *ret = str_trunc (secure_path, trunc_len);
+    vpath = vfs_path_from_str (path);
+    secure_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    vfs_path_free (vpath);
+
+    ret = str_trunc (secure_path, trunc_len);
     g_free (secure_path);
 
     return ret;
@@ -562,101 +568,6 @@ string_perm (mode_t mode_bits)
         mode[9] = (mode[9] == 'x') ? 't' : 'T';
 #endif /* S_ISVTX */
     return mode;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- *  p: string which might contain an url with a password (this parameter is
- *  modified in place).
- *  has_prefix = 0: The first parameter is an url without a prefix
- *  (user[:pass]@]machine[:port][remote-dir). Delete
- *  the password.
- *  has_prefix = 1: Search p for known url prefixes. If found delete
- *  the password from the url.
- *  Caveat: only the first url is found
- */
-
-char *
-strip_password (char *p, int has_prefix)
-{
-    static const struct
-    {
-        const char *name;
-        size_t len;
-    } prefixes[] =
-    {
-        /* *INDENT-OFF* */
-        { "/#ftp:", 6 },
-        { "ftp://", 6 },
-        { "/#smb:", 6 },
-        { "smb://", 6 },
-        { "/#sh:", 5 },
-        { "sh://", 5 },
-        { "ssh://", 6 }
-        /* *INDENT-ON* */
-    };
-
-    char *at, *inner_colon, *dir;
-    size_t i;
-    char *result = p;
-
-    for (i = 0; i < sizeof (prefixes) / sizeof (prefixes[0]); i++)
-    {
-        char *q;
-
-        if (has_prefix)
-        {
-            q = strstr (p, prefixes[i].name);
-            if (q == NULL)
-                continue;
-            else
-                p = q + prefixes[i].len;
-        }
-
-        dir = strchr (p, PATH_SEP);
-        if (dir != NULL)
-            *dir = '\0';
-
-        /* search for any possible user */
-        at = strrchr (p, '@');
-
-        if (dir)
-            *dir = PATH_SEP;
-
-        /* We have a username */
-        if (at)
-        {
-            inner_colon = memchr (p, ':', at - p);
-            if (inner_colon)
-                memmove (inner_colon, at, strlen (at) + 1);
-        }
-        break;
-    }
-    return (result);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-const char *
-strip_home_and_password (const char *dir)
-{
-    size_t len;
-    static char newdir[MC_MAXPATHLEN];
-
-    len = strlen (mc_config_get_home_dir ());
-    if (mc_config_get_home_dir () != NULL && strncmp (dir, mc_config_get_home_dir (), len) == 0 &&
-        (dir[len] == PATH_SEP || dir[len] == '\0'))
-    {
-        newdir[0] = '~';
-        g_strlcpy (&newdir[1], &dir[len], sizeof (newdir) - 1);
-        return newdir;
-    }
-
-    /* We do not strip homes in /#ftp tree, I do not like ~'s there 
-       (see ftpfs.c why) */
-    g_strlcpy (newdir, dir, sizeof (newdir));
-    strip_password (newdir, 1);
-    return newdir;
 }
 
 /* --------------------------------------------------------------------------------------------- */

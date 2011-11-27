@@ -2718,6 +2718,8 @@ dview_status (const WDiff * dview, int ord, int width, int c)
     const char *buf;
     int filename_width;
     int linenum, lineofs;
+    vfs_path_t *vpath;
+    char *path;
 
     tty_setcolor (STATUSBAR_COLOR);
 
@@ -2728,12 +2730,16 @@ dview_status (const WDiff * dview, int ord, int width, int c)
     if (filename_width < 8)
         filename_width = 8;
 
-    buf = str_term_trim (strip_home_and_password (dview->label[ord]), filename_width);
+    vpath = vfs_path_from_str (dview->label[ord]);
+    path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+    vfs_path_free (vpath);
+    buf = str_term_trim (path, filename_width);
     if (ord == 0)
         tty_printf ("%-*s %6d+%-4d Col %-4d ", filename_width, buf, linenum, lineofs,
                     dview->skip_cols);
     else
         tty_printf ("%-*s %6d+%-4d Dif %-4d ", filename_width, buf, linenum, lineofs, dview->ndiff);
+    g_free (path);
 }
 
 /* --------------------------------------------------------------------------------------------- */

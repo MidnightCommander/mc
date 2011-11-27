@@ -1156,37 +1156,19 @@ show_free_space (WPanel * panel)
 static char *
 panel_correct_path_to_show (WPanel * panel)
 {
+    vfs_path_t *last_vpath;
     const vfs_path_element_t *path_element;
-    GString *ret_str;
+    char *return_path;
 
-    path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
-    ret_str = g_string_new ("");
+    last_vpath = vfs_path_new ();
+    path_element = vfs_path_element_clone (vfs_path_get_by_index (panel->cwd_vpath, -1));
+    vfs_path_add_element (last_vpath, path_element);
+    return_path =
+        vfs_path_to_str_flags (last_vpath, 0,
+                               VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET);
+    vfs_path_free (last_vpath);
 
-    if ((path_element->class->flags & VFSF_LOCAL) == 0)
-    {
-        char *url_str;
-
-        g_string_append (ret_str, path_element->vfs_prefix);
-        g_string_append (ret_str, VFS_PATH_URL_DELIMITER);
-
-        url_str = vfs_path_build_url_params_str (path_element, FALSE);
-        if (*url_str != '\0')
-        {
-            g_string_append (ret_str, url_str);
-            g_string_append_c (ret_str, PATH_SEP);
-        }
-        g_free (url_str);
-        g_string_append (ret_str, path_element->path);
-    }
-    else
-    {
-        char *tmp_path;
-
-        tmp_path = g_strdup (path_element->path);
-        g_string_append (ret_str, strip_home_and_password (tmp_path));
-        g_free (tmp_path);
-    }
-    return g_string_free (ret_str, FALSE);
+    return return_path;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3365,7 +3347,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         {
             char *cwd;
 
-            cwd = strip_password (vfs_path_to_str (panel->cwd_vpath), 1);
+            cwd = vfs_path_to_str_flags (panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
                      cwd, unix_error_string (errno));
             g_free (cwd);
@@ -4556,11 +4538,12 @@ update_panels (panel_update_flags_t flags, const char *current_file)
 void
 directory_history_add (struct WPanel *panel, const char *dir)
 {
+    vfs_path_t *vpath;
     char *tmp;
 
-    tmp = g_strdup (dir);
-    strip_password (tmp, 1);
-
+    vpath = vfs_path_from_str (dir);
+    tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    vfs_path_free (vpath);
     panel->dir_history = list_append_unique (panel->dir_history, tmp);
 }
 
