@@ -438,33 +438,31 @@ execute_suspend (const gchar * event_group_name, const gchar * event_name,
  */
 
 void
-execute_with_vfs_arg (const char *command, const char *filename)
+execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
 {
     struct stat st;
     time_t mtime;
-    vfs_path_t *vpath = vfs_path_from_str (filename);
     vfs_path_t *localcopy_vpath;
 
     /* Simplest case, this file is local */
-    if (!filename || vfs_file_is_local (vpath))
+    if (filename_vpath == NULL || vfs_file_is_local (filename_vpath))
     {
-        do_execute (command, vfs_path_get_last_path_str (vpath), EXECUTE_INTERNAL);
-        vfs_path_free (vpath);
+        do_execute (command, vfs_path_get_last_path_str (filename_vpath), EXECUTE_INTERNAL);
         return;
     }
 
     /* FIXME: Creation of new files on VFS is not supported */
-    if (!*filename)
-    {
-        vfs_path_free (vpath);
+    if (vfs_path_len (filename_vpath) == 0)
         return;
-    }
 
-    localcopy_vpath = mc_getlocalcopy (vpath);
+    localcopy_vpath = mc_getlocalcopy (filename_vpath);
     if (localcopy_vpath == NULL)
     {
+        char *filename;
+
+        filename = vfs_path_to_str (filename_vpath);
         message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
-        vfs_path_free (vpath);
+        g_free (filename);
         return;
     }
 
@@ -477,9 +475,8 @@ execute_with_vfs_arg (const char *command, const char *filename)
     mtime = st.st_mtime;
     do_execute (command, vfs_path_get_last_path_str (localcopy_vpath), EXECUTE_INTERNAL);
     mc_stat (localcopy_vpath, &st);
-    mc_ungetlocalcopy (vpath, localcopy_vpath, mtime != st.st_mtime);
+    mc_ungetlocalcopy (filename_vpath, localcopy_vpath, mtime != st.st_mtime);
     vfs_path_free (localcopy_vpath);
-    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

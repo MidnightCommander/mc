@@ -50,7 +50,8 @@ extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, gboo
 /* Shows {file} or the output of {command} in the internal viewer,
  * starting in line {start_line}.
  */
-extern mcview_ret_t mcview_viewer (const char *command, const char *file, int start_line);
+extern mcview_ret_t mcview_viewer (const char *command, const vfs_path_t * file_vpath,
+                                   int start_line);
 
 extern gboolean mcview_load (struct mcview_struct *, const char *, const char *, int);
 

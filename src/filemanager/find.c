@@ -1366,7 +1366,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
     if (edit)
         do_edit_at_line (fullname_vpath, use_internal_edit, line);
     else
-        view_file_at_line (fullname, unparsed_view, use_internal_view, line);
+        view_file_at_line (fullname_vpath, unparsed_view, use_internal_view, line);
     vfs_path_free (fullname_vpath);
     g_free (fullname);
 }
