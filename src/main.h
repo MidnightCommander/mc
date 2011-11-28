@@ -93,6 +93,8 @@ int load_prompt (int fd, void *unused);
 gboolean do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 void update_xterm_title_path (void);
 
+void title_path_prepare (char **path, char **login);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC__MAIN_H */
