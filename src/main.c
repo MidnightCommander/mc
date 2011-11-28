@@ -334,23 +334,19 @@ load_prompt (int fd, void *unused)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** Show current directory in the xterm title */
 void
-update_xterm_title_path (void)
+title_path_prepare (char **path, char **login)
 {
-    /* TODO: share code with midnight_get_title () */
 
-    char *path;
     char host[BUF_TINY];
-    char *p;
     struct passwd *pw = NULL;
-    char *login = NULL;
     int res = 0;
 
-    if (!(mc_global.tty.xterm_flag && xterm_title))
-        return;
+    *login = NULL;
 
-    path = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+
+    *path =
+        vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
     res = gethostname (host, sizeof (host));
     if (res)
     {                           /* On success, res = 0 */
@@ -363,12 +359,29 @@ update_xterm_title_path (void)
     pw = getpwuid (getuid ());
     if (pw)
     {
-        login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+        *login = g_strdup_printf ("%s@%s", pw->pw_name, host);
     }
     else
     {
-        login = g_strdup (host);
+        *login = g_strdup (host);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Show current directory in the xterm title */
+void
+update_xterm_title_path (void)
+{
+    char *p;
+    char *path;
+    char *login;
+
+    if (!(mc_global.tty.xterm_flag && xterm_title))
+        return;
+
+    title_path_prepare (&path, &login);
+
     p = g_strdup_printf ("mc [%s]:%s", login, path);
     fprintf (stdout, "\33]0;%s\7", str_term_form (p));
     g_free (login);
