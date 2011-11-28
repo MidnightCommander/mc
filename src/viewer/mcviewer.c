@@ -226,7 +226,7 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 /** Real view only */
 
 mcview_ret_t
-mcview_viewer (const char *command, const char *file, int start_line)
+mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_line)
 {
     gboolean succeeded;
     mcview_t *lc_mcview;
@@ -244,7 +244,13 @@ mcview_viewer (const char *command, const char *file, int start_line)
 
     view_dlg->get_title = mcview_get_title;
 
-    succeeded = mcview_load (lc_mcview, command, file, start_line);
+    {
+        char *file;
+
+        file = vfs_path_to_str (file_vpath);
+        succeeded = mcview_load (lc_mcview, command, file, start_line);
+        g_free (file);
+    }
 
     if (succeeded)
     {

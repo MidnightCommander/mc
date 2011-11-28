@@ -183,11 +183,12 @@ do_view_cmd (gboolean normal)
 
         while (TRUE)
         {
-            char *filename;
+            vfs_path_t *filename_vpath;
             int dir;
 
-            filename = current_panel->dir.list[file_idx].fname;
-            dir = view_file (filename, normal, use_internal_view);
+            filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
+            dir = view_file (filename_vpath, normal, use_internal_view);
+            vfs_path_free (filename_vpath);
             if (dir == 0)
                 break;
             file_idx = scan_for_file (current_panel, file_idx, dir);
@@ -656,7 +657,7 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-view_file_at_line (const char *filename, int plain_view, int internal, int start_line)
+view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal, int start_line)
 {
     static const char *viewer = NULL;
     int move_dir = 0;
@@ -680,7 +681,7 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
         mcview_default_nroff_flag = 0;
         mcview_default_magic_flag = 0;
 
-        switch (mcview_viewer (NULL, filename, start_line))
+        switch (mcview_viewer (NULL, filename_vpath, start_line))
         {
         case MCVIEW_WANT_NEXT:
             move_dir = 1;
@@ -710,9 +711,9 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
         else
             strcpy (view_entry, "View");
 
-        if (regex_command (filename, view_entry, &move_dir) == 0)
+        if (regex_command (filename_vpath, view_entry, &move_dir) == 0)
         {
-            switch (mcview_viewer (NULL, filename, start_line))
+            switch (mcview_viewer (NULL, filename_vpath, start_line))
             {
             case MCVIEW_WANT_NEXT:
                 move_dir = 1;
@@ -738,7 +739,7 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
                 viewer = "view";
         }
 
-        execute_with_vfs_arg (viewer, filename);
+        execute_with_vfs_arg (viewer, filename_vpath);
     }
 
     return move_dir;
@@ -748,16 +749,16 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
 /** view_file (filename, plain_view, internal)
  *
  * Inputs:
- *   filename:   The file name to view
- *   plain_view: If set does not do any fancy pre-processing (no filtering) and
- *               always invokes the internal viewer.
- *   internal:   If set uses the internal viewer, otherwise an external viewer.
+ *   filename_vpath: The file name to view
+ *   plain_view:     If set does not do any fancy pre-processing (no filtering) and
+ *                   always invokes the internal viewer.
+ *   internal:       If set uses the internal viewer, otherwise an external viewer.
  */
 
 int
-view_file (const char *filename, int plain_view, int internal)
+view_file (const vfs_path_t * filename_vpath, int plain_view, int internal)
 {
-    return view_file_at_line (filename, plain_view, internal, 0);
+    return view_file_at_line (filename_vpath, plain_view, internal, 0);
 }
 
 
@@ -777,6 +778,7 @@ void
 view_file_cmd (void)
 {
     char *filename;
+    vfs_path_t *vpath;
 
     filename =
         input_expand_dialog (_("View file"), _("Filename:"),
@@ -784,8 +786,10 @@ view_file_cmd (void)
     if (!filename)
         return;
 
-    view_file (filename, 0, use_internal_view);
+    vpath = vfs_path_from_str (filename);
     g_free (filename);
+    view_file (vpath, 0, use_internal_view);
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -816,7 +820,7 @@ view_filtered_cmd (void)
 
     if (command != NULL)
     {
-        mcview_viewer (command, "", 0);
+        mcview_viewer (command, NULL, 0);
         g_free (command);
         dialog_switch_process_pending ();
     }
@@ -837,17 +841,13 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_lin
     (void) start_line;
 #endif /* USE_INTERNAL_EDIT */
     {
-        char *what;
-
-        what = vfs_path_to_str (what_vpath);
         if (editor == NULL)
         {
             editor = getenv ("EDITOR");
             if (editor == NULL)
                 editor = get_default_editor ();
         }
-        execute_with_vfs_arg (editor, what);
-        g_free (what);
+        execute_with_vfs_arg (editor, what_vpath);
     }
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
@@ -866,14 +866,12 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_lin
 void
 edit_cmd (void)
 {
-    if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
-    {
-        vfs_path_t *fname;
+    vfs_path_t *fname;
 
-        fname = vfs_path_from_str (selection (current_panel)->fname);
+    fname = vfs_path_from_str (selection (current_panel)->fname);
+    if (regex_command (fname, "Edit", NULL) == 0)
         do_edit (fname);
-        vfs_path_free (fname);
-    }
+    vfs_path_free (fname);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -882,14 +880,12 @@ edit_cmd (void)
 void
 edit_cmd_force_internal (void)
 {
-    if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
-    {
-        vfs_path_t *fname;
+    vfs_path_t *fname;
 
-        fname = vfs_path_from_str (selection (current_panel)->fname);
+    fname = vfs_path_from_str (selection (current_panel)->fname);
+    if (regex_command (fname, "Edit", NULL) == 0)
         do_edit_at_line (fname, TRUE, 0);
-        vfs_path_free (fname);
-    }
+    vfs_path_free (fname);
 }
 #endif
 

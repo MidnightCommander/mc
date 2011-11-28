@@ -49,8 +49,9 @@ void help_cmd (void);
 void smart_dirsize_cmd (void);
 void single_dirsize_cmd (void);
 void dirsizes_cmd (void);
-int view_file_at_line (const char *filename, int plain_view, int internal, int start_line);
-int view_file (const char *filename, int normal, int internal);
+int view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal,
+                       int start_line);
+int view_file (const vfs_path_t * filename_vpath, int normal, int internal);
 void view_cmd (void);
 void view_file_cmd (void);
 void view_raw_cmd (void);

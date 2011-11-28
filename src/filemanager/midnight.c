@@ -913,27 +913,18 @@ create_panels_and_run_mc (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /** result must be free'd (I think this should go in util.c) */
-static char *
+static vfs_path_t *
 prepend_cwd_on_local (const char *filename)
 {
-    char *d;
-    size_t l;
     vfs_path_t *vpath;
 
     vpath = vfs_path_from_str (filename);
     if (!vfs_file_is_local (vpath) || g_path_is_absolute (filename))
-    {
-        vfs_path_free (vpath);
-        return g_strdup (filename);
-    }
+        return vpath;
+
     vfs_path_free (vpath);
 
-    d = _vfs_get_cwd ();
-    l = strlen (d);
-    d[l++] = PATH_SEP;
-    strcpy (d + l, filename);
-    canonicalize_pathname (d);
-    return d;
+    return vfs_path_append_new (vfs_get_raw_current_dir (), filename, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -961,11 +952,11 @@ mc_maybe_editor_or_viewer (void)
 #endif /* USE_INTERNAL_EDIT */
     case MC_RUN_VIEWER:
         {
-            char *path;
+            vfs_path_t *vpath;
 
-            path = prepend_cwd_on_local (mc_run_param0);
-            view_file (path, 0, 1);
-            g_free (path);
+            vpath = prepend_cwd_on_local (mc_run_param0);
+            view_file (vpath, 0, 1);
+            vfs_path_free (vpath);
             ret = 1;
             break;
         }
