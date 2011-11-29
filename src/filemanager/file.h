@@ -44,7 +44,8 @@ FileProgressStatus copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
                                  const char *s, const char *d,
                                  gboolean toplevel, gboolean move_over, gboolean do_delete,
                                  struct link *parent_dirs);
-FileProgressStatus erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s);
+FileProgressStatus erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
+                              const vfs_path_t * vpath);
 
 gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_single);
 

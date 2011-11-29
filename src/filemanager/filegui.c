@@ -803,7 +803,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_source (FileOpContext * ctx, const char *s)
+file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileOpContextUI *ui;
 
@@ -812,23 +812,14 @@ file_progress_show_source (FileOpContext * ctx, const char *s)
 
     ui = ctx->ui;
 
-    if (s != NULL)
+    if (s_vpath != NULL)
     {
-#ifdef WITH_FULL_PATHS
-        size_t i;
-        char *cwd_str;
+        char *s;
 
-        cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
-        i = strlen (cwd_str);
-
-        /* We remove the full path we have added before */
-        if (strncmp (s, cwd_str, i) == 0)
-            if (s[i] == PATH_SEP)
-                s += i + 1;
-        g_free (cwd_str);
-#endif /* WITH_FULL_PATHS */
+        s = vfs_path_tokens_get (s_vpath, -1, 1);
         label_set_text (ui->file_label[0], _("Source"));
         label_set_text (ui->file_string[0], truncFileString (ui, s));
+        g_free (s);
     }
     else
     {
@@ -840,7 +831,7 @@ file_progress_show_source (FileOpContext * ctx, const char *s)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_target (FileOpContext * ctx, const char *s)
+file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileOpContextUI *ui;
 
@@ -849,10 +840,14 @@ file_progress_show_target (FileOpContext * ctx, const char *s)
 
     ui = ctx->ui;
 
-    if (s != NULL)
+    if (s_vpath != NULL)
     {
+        char *s;
+
+        s = vfs_path_to_str (s_vpath);
         label_set_text (ui->file_label[1], _("Target"));
         label_set_text (ui->file_string[1], truncFileStringSecure (ui, s));
+        g_free (s);
     }
     else
     {
