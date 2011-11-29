@@ -874,37 +874,34 @@ tree_rmdir (void *data)
     WTree *tree = data;
     FileOpContext *ctx;
     FileOpTotalContext *tctx;
-    char *selected_ptr_name;
 
     if (!tree->selected_ptr)
         return;
-
-    selected_ptr_name = vfs_path_to_str (tree->selected_ptr->name);
 
     if (confirm_delete)
     {
         char *buf;
         int result;
+        char *selected_ptr_name;
 
+        selected_ptr_name = vfs_path_to_str (tree->selected_ptr->name);
         buf = g_strdup_printf (_("Delete %s?"), selected_ptr_name);
+        g_free (selected_ptr_name);
+
         result = query_dialog (Q_ ("DialogTitle|Delete"), buf, D_ERROR, 2, _("&Yes"), _("&No"));
         g_free (buf);
         if (result != 0)
-        {
-            g_free (selected_ptr_name);
             return;
-        }
     }
 
     ctx = file_op_context_new (OP_DELETE);
     tctx = file_op_total_context_new ();
 
     file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
-    if (erase_dir (tctx, ctx, selected_ptr_name) == FILE_CONT)
+    if (erase_dir (tctx, ctx, tree->selected_ptr->name) == FILE_CONT)
         tree_forget (tree);
     file_op_total_context_destroy (tctx);
     file_op_context_destroy (ctx);
-    g_free (selected_ptr_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -197,19 +197,25 @@ handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
 /** get info about ".." */
 
 static gboolean
-get_dotdot_dir_stat (const char *path, struct stat *st)
+get_dotdot_dir_stat (const vfs_path_t * vpath, struct stat *st)
 {
     gboolean ret = FALSE;
 
-    if ((path != NULL) && (path[0] != '\0') && (st != NULL))
+    if ((vpath != NULL) && (st != NULL))
     {
-        vfs_path_t *vpath;
-        struct stat s;
+        const char *path;
 
-        vpath = vfs_path_build_filename (path, "..", NULL);
-        ret = mc_stat (vpath, &s) == 0;
-        vfs_path_free (vpath);
-        *st = s;
+        path = vfs_path_get_by_index (vpath, 0)->path;
+        if (path != NULL && *path != '\0')
+        {
+            vfs_path_t *tmp_vpath;
+            struct stat s;
+
+            tmp_vpath = vfs_path_append_new (vpath, "..", NULL);
+            ret = mc_stat (tmp_vpath, &s) == 0;
+            vfs_path_free (tmp_vpath);
+            *st = s;
+        }
     }
 
     return ret;
@@ -542,7 +548,7 @@ do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_rever
         return next_free;
 
     vpath = vfs_path_from_str (path);
-    if (get_dotdot_dir_stat (path, &st))
+    if (get_dotdot_dir_stat (vpath, &st))
         list->list[next_free].st = st;
     next_free++;
 
@@ -667,7 +673,7 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int cou
             return next_free;
         }
 
-        if (get_dotdot_dir_stat (tmp_path, &st))
+        if (get_dotdot_dir_stat (vpath, &st))
             list->list[next_free].st = st;
 
         next_free++;
