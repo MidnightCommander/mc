@@ -385,7 +385,7 @@ toggle_panels (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_global.tty.use_subshell)
     {
-        load_prompt (0, NULL);
+        do_load_prompt ();
         if (new_dir)
             do_possible_cd (new_dir);
         if (mc_global.tty.console_flag != '\0' && output_lines)
