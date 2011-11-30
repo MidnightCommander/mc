@@ -75,6 +75,17 @@ get_hotkey (int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+dialog_switch_suspend (void *data, void *user_data)
+{
+    (void) user_data;
+
+    if (data != mc_current->data)
+        ((Dlg_head *) data)->state = DLG_SUSPENDED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 dialog_switch_goto (GList * dlg)
 {
     if (mc_current != dlg)
@@ -99,8 +110,11 @@ dialog_switch_goto (GList * dlg)
                 /* return to panels before run the required dialog */
                 dialog_switch_pending = TRUE;
             else
+            {
                 /* switch to panels */
+                midnight_dlg->state = DLG_ACTIVE;
                 do_refresh ();
+            }
         }
     }
 }
@@ -114,7 +128,10 @@ dlg_resize_cb (void *data, void *user_data)
     Dlg_head *d = data;
 
     (void) user_data;
-    d->callback (d, NULL, DLG_RESIZE, 0, NULL);
+    if (d->state == DLG_ACTIVE)
+        d->callback (d, NULL, DLG_RESIZE, 0, NULL);
+    else
+        d->winch_pending = TRUE;
 }
 #endif
 
@@ -136,6 +153,9 @@ dialog_switch_add (Dlg_head * h)
         mc_dialogs = g_list_prepend (mc_dialogs, h);
         mc_current = mc_dialogs;
     }
+
+    /* suspend forced all other screens */
+    g_list_foreach (mc_dialogs, dialog_switch_suspend, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -157,6 +177,10 @@ dialog_switch_remove (Dlg_head * h)
         mc_current = g_list_find (mc_dialogs, (Dlg_head *) top_dlg->data);
     else
         mc_current = mc_dialogs;
+
+    /* resume forced the current screen */
+    if (mc_current != NULL)
+        ((Dlg_head *) mc_current->data)->state = DLG_ACTIVE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -265,6 +289,7 @@ dialog_switch_process_pending (void)
         if (h->state == DLG_CLOSED)
         {
             destroy_dlg (h);
+
             /* return to panels */
             if (mc_global.mc_run_mode == MC_RUN_FULL)
             {
