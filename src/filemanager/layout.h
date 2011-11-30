@@ -41,6 +41,7 @@ void setup_panels (void);
 void destroy_panels (void);
 void sigwinch_handler (int dummy);
 void change_screen_size (void);
+void setup_cmdline (void);
 void set_display_type (int num, panel_view_mode_t type);
 void panel_update_cols (Widget * widget, panel_display_t frame_size);
 void swap_panels (void);

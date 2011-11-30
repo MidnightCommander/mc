@@ -261,7 +261,7 @@ enter (WInput * lc_cmdline)
         }
 
         if (use_subshell)
-            load_prompt (0, NULL);
+            do_load_prompt ();
 #endif
     }
     return MSG_HANDLED;

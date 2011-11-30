@@ -327,33 +327,18 @@ do_cd (const char *new_dir, enum cd_enum exact)
 /* --------------------------------------------------------------------------------------------- */
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-int
-load_prompt (int fd, void *unused)
+gboolean
+do_load_prompt (void)
 {
-    (void) fd;
-    (void) unused;
+    gboolean ret = FALSE;
 
     if (!read_subshell_prompt ())
-        return 0;
+        return ret;
 
     /* Don't actually change the prompt if it's invisible */
     if (((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
     {
-        char *tmp_prompt;
-        int prompt_len;
-
-        tmp_prompt = strip_ctrl_codes (subshell_prompt);
-        prompt_len = str_term_width1 (tmp_prompt);
-
-        /* Check for prompts too big */
-        if (COLS > 8 && prompt_len > COLS - 8)
-        {
-            prompt_len = COLS - 8;
-            tmp_prompt[prompt_len] = '\0';
-        }
-        mc_prompt = tmp_prompt;
-        label_set_text (the_prompt, mc_prompt);
-        input_set_origin ((WInput *) cmdline, prompt_len, COLS - prompt_len);
+        setup_cmdline ();
 
         /* since the prompt has changed, and we are called from one of the
          * tty_get_event channels, the prompt updating does not take place
@@ -361,8 +346,21 @@ load_prompt (int fd, void *unused)
          */
         update_cursor (midnight_dlg);
         mc_refresh ();
+        ret = TRUE;
     }
     update_subshell_prompt = TRUE;
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+load_prompt (int fd, void *unused)
+{
+    (void) fd;
+    (void) unused;
+
+    do_load_prompt ();
     return 0;
 }
 #endif /* HAVE_SUBSHELL_SUPPORT */

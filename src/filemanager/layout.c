@@ -54,13 +54,17 @@
 #include "lib/vfs/mc-vfs/vfs.h" /* For vfs_translate_url() */
 #include "lib/strutil.h"
 #include "lib/widget.h"
+#include "lib/util.h"           /* strip_ctrl_codes() */
 
 #include "src/main.h"
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
 #include "src/setup.h"
-#include "src/subshell.h"       /* For use_subshell and resize_subshell() */
-#include "src/background.h"     /* we_are_background */
+#include "src/background.h"
+#ifdef HAVE_SUBSHELL_SUPPORT
+#include "src/main.h"                   /* do_load_prompt() */
+#include "src/subshell.h"
+#endif
 
 #include "command.h"
 #include "midnight.h"
@@ -742,7 +746,6 @@ void
 setup_panels (void)
 {
     int start_y;
-    int promptl;                /* the prompt len */
 
     if (console_flag)
     {
@@ -786,15 +789,14 @@ setup_panels (void)
     panel_do_cols (0);
     panel_do_cols (1);
 
-    promptl = str_term_width1 (mc_prompt);
-
     widget_set_size (&the_menubar->widget, 0, 0, 1, COLS);
 
     if (command_prompt)
     {
-        widget_set_size (&cmdline->widget, LINES - 1 - keybar_visible, promptl, 1, COLS - promptl);
-        input_set_origin (cmdline, promptl, COLS - promptl);
-        widget_set_size (&the_prompt->widget, LINES - 1 - keybar_visible, 0, 1, promptl);
+#ifdef HAVE_SUBSHELL_SUPPORT
+        if (!use_subshell || !do_load_prompt ())
+#endif
+            setup_cmdline ();
     }
     else
     {
@@ -814,6 +816,7 @@ setup_panels (void)
                                LINES - output_lines - keybar_visible - 1,
                                LINES - keybar_visible - 1);
     }
+
     if (message_visible)
         widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
     else
@@ -872,6 +875,39 @@ change_screen_size (void)
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+void
+setup_cmdline (void)
+{
+    int prompt_len;
+    int y;
+    char *tmp_prompt = NULL;
+
+#ifdef HAVE_SUBSHELL_SUPPORT
+    if (use_subshell)
+        tmp_prompt = strip_ctrl_codes (subshell_prompt);
+    if (tmp_prompt == NULL)
+#endif
+        tmp_prompt = (char *) mc_prompt;
+    prompt_len = str_term_width1 (tmp_prompt);
+
+    /* Check for prompts too big */
+    if (COLS > 8 && prompt_len > COLS - 8)
+    {
+        prompt_len = COLS - 8;
+        tmp_prompt[prompt_len] = '\0';
+    }
+
+    mc_prompt = tmp_prompt;
+
+    y = LINES - 1 - keybar_visible;
+
+    widget_set_size ((Widget *) the_prompt, y, 0, 1, prompt_len);
+    label_set_text (the_prompt, mc_prompt);
+    widget_set_size ((Widget *) cmdline, y, prompt_len, 1, COLS - prompt_len);
+    input_set_origin ((WInput *) cmdline, prompt_len, COLS - prompt_len);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 

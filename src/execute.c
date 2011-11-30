@@ -380,7 +380,7 @@ toggle_panels (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
     {
-        load_prompt (0, NULL);
+        do_load_prompt ();
         if (new_dir)
             do_possible_cd (new_dir);
         if (console_flag && output_lines)
