@@ -650,7 +650,10 @@ dlg_resize_cb (void *data, void *user_data)
     Dlg_head *d = data;
 
     (void) user_data;
-    d->callback (d, NULL, DLG_RESIZE, 0, NULL);
+    if (d->state == DLG_ACTIVE)
+        d->callback (d, NULL, DLG_RESIZE, 0, NULL);
+    else
+        d->winch_pending = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
