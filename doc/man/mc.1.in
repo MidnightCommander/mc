@@ -1473,7 +1473,7 @@ description.
 .\"NODE "    Extension File Edit"
 .SH "    Extension File Edit"
 This will invoke your editor on the file
-.IR ~/.local/share/mc/mc.ext .
+.IR ~/.config/mc/mc.ext .
 The format of this file following:
 .PP
 All lines starting with # or empty lines are thrown away.
@@ -1566,7 +1566,7 @@ The user menu is a menu of useful actions that can be customized by
 the user. When you access the user menu, the
 file .mc.menu from the current directory is used if it exists,
 but only if it is owned by user or root and is not world\-writable.
-If no such file found, ~/.local/share/mc/menu is tried in the same way,
+If no such file found, ~/.config/mc/menu is tried in the same way,
 and otherwise mc uses the default system\-wide menu
 @prefix@/share/mc/mc.menu.
 .PP
@@ -2025,7 +2025,7 @@ format and sort options. Unchecked by default.
 .PP
 .I Auto save panels setup.
 If this option is enabled, when you exit the Midnight Commander the
-current settings of panels are saved in the ~/.cache/mc/panels.ini file.
+current settings of panels are saved in the ~/.config/mc/panels.ini file.
 Disabled by default.
 .PP
 .B Navigation
@@ -4102,7 +4102,7 @@ The help file for the program.
 .IP
 The default system\-wide extensions file.
 .PP
-.I ~/.local/share/mc/mc.ext
+.I ~/.config/mc/mc.ext
 .IP
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
@@ -4134,7 +4134,7 @@ This file contains the hints displayed by the program.
 .IP
 This file contains the default system\-wide applications menu.
 .PP
-.I ~/.local/share/mc/menu
+.I ~/.config/mc/menu
 .IP
 User's own application menu. If this file is present it is used instead
 of the system\-wide applications menu.

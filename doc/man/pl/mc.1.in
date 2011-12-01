@@ -1091,7 +1091,7 @@ przemieszczanie.
 .PP
 .\"NODE "    Extension File Edit"
 .SH "    Edycja rozszerzeń pliów (Extension File Edit)"
-Ta komenda wywoła twój edytor na plik ~/.local/share/mc/mc.ext. Format tego pliku jest
+Ta komenda wywoła twój edytor na plik ~/.config/mc/mc.ext. Format tego pliku jest
 następujący (zmienił się on począwszy od wersji 3.0):
 .PP
 Wszystkie linie zaczynające się od #, lub puste, nie są brane pod uwagę.
@@ -1164,7 +1164,7 @@ Menu użytkownika jest bardzo użytecznym menu, które może być tworzone
 w sposób dowolny, przez użytkownika. Kiedy tylko próbujesz coś zrobić
 przy użyciu tego menu, ładowany jest plik .mc.menu z aktualnego katalogu, ale
 tylko wtedy kiedy jest on w posiadaniu użytkownika lub roota i mamy do niego
-prawa zapisu. Jeśli takiego nie ma próbuje się z plikiem ~/.local/share/mc/menu z tymi
+prawa zapisu. Jeśli takiego nie ma próbuje się z plikiem ~/.config/mc/menu z tymi
 samymi założeniami, jeśli jego też nie ma \- używa się standardowego pliku
 systemowego, który znajduje się w @prefix@/share/mc/mc.menu.
 .PP
@@ -2882,7 +2882,7 @@ Plik pomocy dla programu.
 .IP
 Standardowy plik rozszerzeń plików.
 .PP
-~/.local/share/mc/mc.ext
+~/.config/mc/mc.ext
 .IP
 Własny plik użytkownika, konfiguruje podgląd i edycje plików. Ma wyższy
 priorytet niż plik systemowy.
@@ -2911,7 +2911,7 @@ Plik zawierający podpowiedzi (hints) wyświetlane przez program.
 .IP
 Ten plik zawiera informacje o ogólnosystemowych aplikacjach w menu.
 .PP
-~/.local/share/mc/menu
+~/.config/mc/menu
 .IP
 Własny plik menu użytkownika. Jeśli ten plik jest obecny jest używany
 zamiast pliku globalnego.

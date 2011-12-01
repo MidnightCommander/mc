@@ -1310,7 +1310,7 @@ comando cd interno\&.
 .\"NODE "    Extension File Edit"
 .SH "    Modifica file estensioni"
 Questo comando invocherà l'editor sul file 
-.IR ~/.local/share/mc/mc.ext .
+.IR ~/.config/mc/mc.ext .
 Il fomato di questo file è il seguente (il formato è cambiato dalla 
 versione 3.0):
 .PP
@@ -1377,7 +1377,7 @@ personalizzati dall'utente. Quando si accede al menu utente, viene
 utilizzato, se esiste, il file .mc.menu dalla directory corrente,
 ma solo se è di proprietà dell'utente o di root e se non è scrivibile
 a tutti. Se tale file non viene trovato, mc alla stessa maniera 
-prova con ~/.local/share/mc/menu altrimenti usa il menu di sistema
+prova con ~/.config/mc/menu altrimenti usa il menu di sistema
 @prefix@/share/mc/mc.menu.
 .PP
 Il formato del file menu è molto semplice. Le righe che cominciano
@@ -3176,7 +3176,7 @@ Il file di aiuto per il programma.
 .IP
 Il file delle estensioni di sistema predefinito.
 .PP
-.I ~/.local/share/mc/mc.ext
+.I ~/.config/mc/mc.ext
 .IP
 Le estensioni dell'utente, la configurazione del visualizzatore e
 dell'editor di file. Se presenti, questi file si sovrappongono ai file di 
@@ -3210,7 +3210,7 @@ Questo file contiene i suggerimenti (dritte) mostrate dal programma.
 .IP
 Questo file contiene il menu di sistema per le applicazioni.
 .PP
-.I ~/.local/share/mc/menu
+.I ~/.config/mc/menu
 .IP
 Il menu utente per le applicazioni. Se presente viene usato al posto
 del menu delle applicazioni di sistema.

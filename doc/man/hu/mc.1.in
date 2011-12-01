@@ -1295,7 +1295,7 @@ A cd belső parancs
 leírásánál.
 .\"NODE "    Extension File Edit"
 .SH "    Társítások"
-Ez az ~/.local/share/mc/mc.ext szerkesztéséhez segítségül fogja hívni a
+Ez az ~/.config/mc/mc.ext szerkesztéséhez segítségül fogja hívni a
 szövegszerkesztődet. A fájl formátuma a következő (a formátum a 3.0\-ás
 verzióval megváltozott):
 .PP
@@ -1367,7 +1367,7 @@ A felhasználói menüt a felhasználó testre szabhatja. Ez az aktulis
 könyvtár .mc.menu fájlja, ha az létezik, de csak, ha az a felhasználó
 (illetve a root) a tulajdonosa, és nem lehet bárki számára írható. Ha
 nem talál ilyen fájlt, az
-.I ~/.local/share/mc/menu
+.I ~/.config/mc/menu
 keresése a következő lépés, egyébként pedig az mc az alapértelmezett
 rendszerszintű menüt használja, pl.:
 .IR @prefix@/share/mc/mc.menu ,
@@ -2499,7 +2499,7 @@ formázza a szöveget
 vagy más kódra) amikor ez a rész
 .BR kijelölt .
 Ennek használatához elöször egy futtatható fájlt kell készítened
-.B ~/.cedit/edit.indent.rc
+.B ~/.local/share/mc/mcedit/edit.indent.rc
 néven. Szerkeszd ezt szkriptet, ha szükséges.
 .PP
 A szerkesztő megjeleníti még a nem\-amerikai karaktereket is (160
@@ -3181,7 +3181,7 @@ A program súgó fájlja.
 .IP
 Az alapértelmezett rendszerszintű kiterjesztés fájl.
 .PP
-.I ~/.local/share/mc/mc.ext
+.I ~/.config/mc/mc.ext
 .IP
 A felhasználó saját kiterjesztései, nézet beállítások és szerkesztési
 beállítások. Ezek felülbírálják a rendszerszintű fájl bejegyzéseit, ha
@@ -3213,7 +3213,7 @@ Ez a fájl tartalmazza a program által megjelenített útmutattásokat
 .IP
 Ez a fájl azonos a rendszerszintű alkalmazás menüvel.
 .PP
-.I ~/.local/share/mc/menu
+.I ~/.config/mc/menu
 .IP
 A falhasználó saját alkalmazás menüje. Ha ez a fájl elérhető a
 rendszerszintű alkalmazás menü helyett ezt fogja használni.
