@@ -23,6 +23,7 @@ const panel_field_t *sort_box (panel_sort_info_t *info);
 void confirm_box (void);
 void display_bits_box (void);
 void configure_vfs (void);
+void configure_vfs_plugin (void);
 void jobs_cmd (void);
 char *cd_dialog (void);
 void symlink_dialog (const char *existing, const char *new, char **ret_existing, char **ret_new);

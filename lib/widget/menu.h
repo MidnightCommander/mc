@@ -15,13 +15,29 @@
 
 /*** enums ***************************************************************************************/
 
+typedef enum
+{
+    MENU_ENTITY_TYPE_COMMAND,
+    MENU_ENTITY_TYPE_EVENT,
+} menu_entity_type_t;
+
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 typedef struct menu_entry_t
 {
+    menu_entity_type_t type;
     unsigned char first_letter;
     hotkey_t text;
-    unsigned long command;
+    union
+    {
+        unsigned long command;
+        struct
+        {
+            const char *group;
+            const char *name;
+            gpointer data;
+        } event;
+    } u;
     char *shortcut;
 } menu_entry_t;
 
@@ -54,6 +70,8 @@ typedef struct WMenuBar
 /*** declarations of public functions ************************************************************/
 
 menu_entry_t *menu_entry_create (const char *name, unsigned long command);
+menu_entry_t *menu_entry_create_event (const char *name, const char *event_group,
+                                       const char *event_name, gpointer event_data);
 void menu_entry_free (menu_entry_t * me);
 
 Menu *create_menu (const char *name, GList * entries, const char *help_node);

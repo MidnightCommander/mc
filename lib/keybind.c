@@ -150,6 +150,7 @@ static name_keymap_t command_names[] = {
     {"CompareFiles", CK_CompareFiles},
 #endif
     {"OptionsVfs", CK_OptionsVfs},
+    {"OptionsVfsPlugin", CK_OptionsVfsPlugin},
     {"OptionsConfirm", CK_OptionsConfirm},
     {"OptionsDisplayBits", CK_OptionsDisplayBits},
     {"EditExtensionsFile", CK_EditExtensionsFile},
@@ -162,6 +163,9 @@ static name_keymap_t command_names[] = {
 #endif
 #ifdef ENABLE_VFS_FTP
     {"ConnectFtp", CK_ConnectFtp},
+#endif
+#ifdef ENABLE_VFS_SFTP
+    {"ConnectSftp", CK_ConnectSftp},
 #endif
 #ifdef ENABLE_VFS_SMB
     {"ConnectSmb", CK_ConnectSmb},

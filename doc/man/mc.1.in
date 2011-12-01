@@ -3086,6 +3086,9 @@ system for Linux systems),
 .I fish
 (for manipulating files over shell connections such as rsh and ssh).
 If the code was compiled with
+.I sftpfs
+(for manipulating files over SFTP connections).
+If the code was compiled with
 .I smbfs
 support, you can manipulate files on remote systems with the SMB (CIFS)
 protocol.
@@ -3212,6 +3215,41 @@ Examples:
     sh://joe@want.compression.edu:C/private
     sh://joe@noncompressed.ssh.edu/private
     sh://joe@somehost.ssh.edu:2222/private
+.fi
+.\"NODE "  SFTP (SSH File Transfer Protocol) filesystem "
+.SH "  SFTP (SSH File Transfer Protocol) filesystem"
+The SFTP file system is a network based file system that allows you to
+manipulate the files in a remote machine as if they were local.
+.PP
+To connect to a remote machine, you just need to chdir
+into a special directory which name is in the following
+format:
+.PP
+.I /#sh:[user@]machine:[port]/[remote\-dir]
+.PP
+The
+.I user,
+.I port
+and
+.I remote\-dir
+elements are optional.  If you specify the
+.I user
+element, the Midnight Commander will try to login on the remote
+machine as that user, otherwise it will use your login name.
+.I port
+\- specify the port used by remote server (22 by default).
+If the
+.I remote\-dir
+element is present, your current directory on the remote machine will be
+set to this one.
+.PP
+Examples:
+.PP
+.nf
+    /#sftp:onlyrsh.mx/linux/local
+    /#sftp:joe:password@want.compression.edu/private
+    /#sftp:joe@noncompressed.ssh.edu/private
+    /#sftp:joe@somehost.ssh.edu:2222/private
 .fi
 .\"NODE "  Undelete File System"
 .SH "  Undelete File System"
