@@ -33,6 +33,9 @@
 /* Return code for the mouse sequence */
 #define MCKEY_MOUSE     -2
 
+/* Return code for the extended mouse sequence */
+#define MCKEY_EXTENDED_MOUSE     -3
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
