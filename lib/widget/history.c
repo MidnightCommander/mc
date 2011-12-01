@@ -286,46 +286,6 @@ history_save (struct mc_config_t *cfg, const char *name, GList * h)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if 0
-/**
-  * Write the history to the ${XDG_CACHE_HOME}/mc/history file.
- */
-void
-history_put (const char *input_name, GList * h)
-{
-    char *profile;
-    int i;
-
-    if (num_history_items_recorded == 0)        /* this is how to disable */
-        return;
-    if ((input_name == NULL) || (*input_name == '\0'))
-        return;
-    if (h == NULL)
-        return;
-
-    profile = mc_config_get_full_path (MC_HISTORY_FILE);
-
-    i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
-    if (i != -1)
-        close (i);
-
-    /* Make sure the history is only readable by the user */
-    if (chmod (profile, S_IRUSR | S_IWUSR) != -1 || errno == ENOENT)
-    {
-        mc_config_t *cfg;
-
-        cfg = mc_config_init (profile);
-        history_save (cfg, input_name, h);
-        mc_config_save_file (cfg, NULL);
-        mc_config_deinit (cfg);
-    }
-
-    g_free (profile);
-}
-#endif
-
-/* --------------------------------------------------------------------------------------------- */
-
 char *
 history_show (GList ** history, Widget * widget)
 {
