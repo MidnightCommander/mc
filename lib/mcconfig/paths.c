@@ -223,6 +223,7 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#if MC_HOMEDIR_XDG
 static void
 mc_config_fix_migrated_rules (void)
 {
@@ -250,6 +251,7 @@ mc_config_fix_migrated_rules (void)
         g_free (old_name);
     }
 }
+#endif /* MC_HOMEDIR_XDG */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -469,6 +471,9 @@ mc_config_get_full_path (const char *config_name)
 
     if (config_name == NULL)
         return NULL;
+
+    if (!xdg_vars_initialized)
+        mc_config_init_config_paths (NULL);
 
     for (rule_index = 0; mc_config_files_reference[rule_index].old_filename != NULL; rule_index++)
     {
