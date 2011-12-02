@@ -99,32 +99,33 @@ static const struct
     /* *INDENT-ON* */
 };
 
+#ifdef MC_HOMEDIR_XDG
 static const struct
 {
     char **old_basedir;
-    const char *old_filename;
+    const char *filename;
 
     char **new_basedir;
-    const char *new_filename;
 } mc_config_migrate_rules_fix[] =
 {
     /* *INDENT-OFF* */
-    { &mc_data_str, MC_USERMENU_FILE,                       &mc_config_str, MC_USERMENU_FILE},
-    { &mc_data_str, EDIT_SYNTAX_FILE,                       &mc_config_str, EDIT_SYNTAX_FILE},
-    { &mc_data_str, EDIT_HOME_MENU,                         &mc_config_str, EDIT_HOME_MENU},
-    { &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc", &mc_config_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc"},
-    { &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc",  &mc_config_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc"},
-    { &mc_data_str, MC_FILEBIND_FILE,                       &mc_config_str, MC_FILEBIND_FILE},
+    { &mc_data_str, MC_USERMENU_FILE,                       &mc_config_str},
+    { &mc_data_str, EDIT_SYNTAX_FILE,                       &mc_config_str},
+    { &mc_data_str, EDIT_HOME_MENU,                         &mc_config_str},
+    { &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.indent.rc", &mc_config_str},
+    { &mc_data_str, EDIT_DIR PATH_SEP_STR "edit.spell.rc",  &mc_config_str},
+    { &mc_data_str, MC_FILEBIND_FILE,                       &mc_config_str},
 
-    { &mc_cache_str, MC_HISTORY_FILE,                       &mc_data_str, MC_HISTORY_FILE},
-    { &mc_cache_str, MC_FILEPOS_FILE,                       &mc_data_str, MC_FILEPOS_FILE},
-    { &mc_cache_str, EDIT_CLIP_FILE,                        &mc_data_str, EDIT_CLIP_FILE},
+    { &mc_cache_str, MC_HISTORY_FILE,                       &mc_data_str},
+    { &mc_cache_str, MC_FILEPOS_FILE,                       &mc_data_str},
+    { &mc_cache_str, EDIT_CLIP_FILE,                        &mc_data_str},
 
-    { &mc_cache_str, MC_PANELS_FILE,                        &mc_config_str, MC_PANELS_FILE},
+    { &mc_cache_str, MC_PANELS_FILE,                        &mc_config_str},
 
-    {NULL, NULL, NULL, NULL}
+    {NULL, NULL, NULL}
     /* *INDENT-ON* */
 };
+#endif /* MC_HOMEDIR_XDG */
 
 /*** file scope functions *********************************************************************** */
 /* --------------------------------------------------------------------------------------------- */
@@ -235,17 +236,16 @@ mc_config_fix_migrated_rules (void)
 
         old_name =
             g_build_filename (*mc_config_migrate_rules_fix[rule_index].old_basedir,
-                              mc_config_migrate_rules_fix[rule_index].old_filename, NULL);
+                              mc_config_migrate_rules_fix[rule_index].filename, NULL);
 
         if (g_file_test (old_name, G_FILE_TEST_EXISTS))
         {
             char *new_name;
+            const char *basedir = *mc_config_migrate_rules_fix[rule_index].new_basedir;
+            const char *filename = mc_config_migrate_rules_fix[rule_index].filename;
 
-            new_name = g_build_filename (*mc_config_migrate_rules_fix[rule_index].new_basedir,
-                                         mc_config_files_reference[rule_index].new_filename, NULL);
-
+            new_name = g_build_filename (basedir, filename, NULL);
             rename (old_name, new_name);
-
             g_free (new_name);
         }
         g_free (old_name);
@@ -262,7 +262,7 @@ mc_config_init_config_paths (GError ** error)
 {
     const char *mc_datadir;
 
-#if MC_HOMEDIR_XDG
+#ifdef MC_HOMEDIR_XDG
     char *u_config_dir = (char *) g_get_user_config_dir ();
     char *u_data_dir = (char *) g_get_user_data_dir ();
     char *u_cache_dir = (char *) g_get_user_cache_dir ();
@@ -324,7 +324,7 @@ mc_config_deinit_config_paths (void)
         return;
 
     g_free (mc_config_str);
-#if MC_HOMEDIR_XDG
+#ifdef MC_HOMEDIR_XDG
     g_free (mc_cache_str);
     g_free (mc_data_str);
 #endif /* MC_HOMEDIR_XDG */
@@ -393,7 +393,7 @@ mc_config_migrate_from_old_place (GError ** error)
     old_dir = mc_config_get_deprecated_path ();
 
     g_free (mc_config_init_one_config_path (mc_config_str, EDIT_DIR, error));
-#if MC_HOMEDIR_XDG
+#ifdef MC_HOMEDIR_XDG
     g_free (mc_config_init_one_config_path (mc_cache_str, EDIT_DIR, error));
     g_free (mc_config_init_one_config_path (mc_data_str, EDIT_DIR, error));
 #endif /* MC_HOMEDIR_XDG */
@@ -410,18 +410,17 @@ mc_config_migrate_from_old_place (GError ** error)
         if (g_file_test (old_name, G_FILE_TEST_EXISTS))
         {
             char *new_name;
+            const char *basedir = *mc_config_files_reference[rule_index].new_basedir;
+            const char *filename = mc_config_files_reference[rule_index].new_filename;
 
-            new_name = g_build_filename (*mc_config_files_reference[rule_index].new_basedir,
-                                         mc_config_files_reference[rule_index].new_filename, NULL);
-
+            new_name = g_build_filename (basedir, filename, NULL);
             mc_config_copy (old_name, new_name, error);
-
             g_free (new_name);
         }
         g_free (old_name);
     }
 
-#if MC_HOMEDIR_XDG
+#ifdef MC_HOMEDIR_XDG
     g_propagate_error (error,
                        g_error_new (MC_ERROR, 0,
                                     _
