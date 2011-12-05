@@ -26,6 +26,7 @@
 #include <config.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <errno.h>
 
 #include "lib/global.h"
@@ -151,8 +152,18 @@ mc_config_init_one_config_path (const char *path_base, const char *subdir, GErro
 
     full_path = g_build_filename (path_base, subdir, NULL);
 
-    if (g_file_test (full_path, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
-        config_dir_present = TRUE;
+    if (g_file_test (full_path, G_FILE_TEST_EXISTS))
+    {
+        if (g_file_test (full_path, G_FILE_TEST_IS_DIR))
+        {
+            config_dir_present = TRUE;
+        }
+        else
+        {
+            fprintf (stderr, "%s %s\n", _("FATAL: not a directory:"), full_path);
+            exit (EXIT_FAILURE);
+        }
+    }
 
     mc_config_mkdir (full_path, error);
     if (error != NULL && *error != NULL)
