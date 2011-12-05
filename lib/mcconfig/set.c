@@ -78,6 +78,18 @@ mc_config_set_string_raw (mc_config_t * mc_config, const gchar * group,
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 void
+mc_config_set_string_raw_value (mc_config_t * mc_config, const gchar * group,
+                                const gchar * param, const gchar * value)
+{
+    if (!mc_config || !group || !param || !value)
+        return;
+
+    g_key_file_set_value (mc_config->handle, group, param, value);
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+void
 mc_config_set_string (mc_config_t * mc_config, const gchar * group,
                       const gchar * param, const gchar * value)
 {
