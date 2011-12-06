@@ -641,7 +641,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
         int mc_user_ext = 1;
         int home_error = 0;
 
-        extension_file = g_build_filename (mc_config_get_data_path (), MC_FILEBIND_FILE, NULL);
+        extension_file = mc_config_get_full_path (MC_FILEBIND_FILE);
         if (!exist_file (extension_file))
         {
             g_free (extension_file);
@@ -687,15 +687,14 @@ regex_command (const char *filename, const char *action, int *move_dir)
         }
         if (home_error)
         {
-            char *title = g_strdup_printf (_("%s%s%s file error"),
-                                           mc_config_get_data_path (), PATH_SEP_STR,
-                                           MC_FILEBIND_FILE);
+            char *filebind_filename = mc_config_get_full_path (MC_FILEBIND_FILE);
+            char *title = g_strdup_printf (_("%s file error"), filebind_filename);
             message (D_ERROR, title,
-                     _("The format of the %s%s%s file has "
+                     _("The format of the %s file has "
                        "changed with version 3.0. You may either want to copy "
                        "it from %smc.ext or use that file as an example of how to write it."),
-                     mc_config_get_data_path (), PATH_SEP_STR, MC_FILEBIND_FILE,
-                     mc_global.sysconfig_dir);
+                     filebind_filename, mc_global.sysconfig_dir);
+            g_free (filebind_filename);
             g_free (title);
         }
     }

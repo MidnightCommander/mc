@@ -238,12 +238,12 @@ Forward).
 supports syntax highlighting.  This means that keywords and contexts
 (like C comments, string constants, etc) are highlighted in different
 colors.  The following section explains the format of the file
-.BR ~/.local/share/mc/mcedit/Syntax .
+.BR ~/.config/mc/mcedit/Syntax .
 If this file is missing, system\-wide
 .B @prefix@/share/mc/syntax/Syntax
 is used.
 The file
-.B ~/.local/share/mc/mcedit/Syntax
+.B ~/.config/mc/mcedit/Syntax
 is rescanned on opening of a any new editor file.  The file contains
 rules for highlighting, each of which is given on a separate line, and
 define which keywords will be highlighted to what color.

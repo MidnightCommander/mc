@@ -1361,7 +1361,7 @@ comando cd interno\&.
 .\"NODE "    Extension File Edit"
 .SH "    Editar el Archivo de Extensiones"
 Abre el archivo
-.I ~/.local/share/mc/mc.ext
+.I ~/.config/mc/mc.ext
 en nuestro editor. El administrador puede optar por editar, en su lugar,
 el archivo de extensiones del sistema
 .IR @prefix@/share/mc/mc.ext .
@@ -1434,7 +1434,7 @@ El menú de usuario es un menú de acciones útiles que puede ser personalizado
 por el usuario. Cuando accedemos al menú de usuario se utiliza, si existe,
 el archivo .mc.menu del directorio actual, pero sólo si es propiedad del
 usuario o del superusuario y no es modificable por todos.
-Si no se encuentra allí el archivo, se intenta de la misma manera con ~/.local/share/mc/menu,
+Si no se encuentra allí el archivo, se intenta de la misma manera con ~/.config/mc/menu,
 y si no, mc utiliza el menú por defecto para todo el sistema
 @prefix@/share/mc/mc.menu.
 .PP
@@ -3672,7 +3672,7 @@ Archivo de ayuda.
 .IP
 Archivo de extensiones por defecto del sistema.
 .PP
-.I ~/.local/share/mc/mc.ext
+.I ~/.config/mc/mc.ext
 .IP
 Archivo de usuario de extensiones y configuración de visor y editor. Si
 está presente prevalece sobre el contenido de los archivos del sistema.
@@ -3705,7 +3705,7 @@ programa.
 .IP
 Este archivo contiene el menú de aplicaciones por defecto para el sistema.
 .PP
-.I ~/.local/share/mc/menu
+.I ~/.config/mc/menu
 .IP
 Menú de aplicaciones personal del usuario. Si está presente será utilizado
 en lugar del menú por defecto del sistema.

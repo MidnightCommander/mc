@@ -1277,7 +1277,7 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
     *offset = 0;
 
     /* open file with positions */
-    fn = g_build_filename (mc_config_get_cache_path (), MC_FILEPOS_FILE, NULL);
+    fn = mc_config_get_full_path (MC_FILEPOS_FILE);
     f = fopen (fn, "r");
     g_free (fn);
     if (f == NULL)
@@ -1367,7 +1367,7 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
         filepos_max_saved_entries = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
                                                        "filepos_max_saved_entries", 1024);
 
-    fn = g_build_filename (mc_config_get_cache_path (), MC_FILEPOS_FILE, NULL);
+    fn = mc_config_get_full_path (MC_FILEPOS_FILE);
     if (fn == NULL)
         goto early_error;
 

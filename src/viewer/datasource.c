@@ -163,6 +163,7 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
     int res = -1;
     gunichar ch;
     gchar *next_ch = NULL;
+    gchar utf8buf[UTF8_CHAR_LEN + 1];
 
     *char_width = 0;
     *result = FALSE;
@@ -187,6 +188,25 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
         return 0;
 
     res = g_utf8_get_char_validated (str, -1);
+
+    if (res < 0)
+    {
+        /* Retry with explicit bytes to make sure it's not a buffer boundary */
+        int i;
+        for (i = 0; i < UTF8_CHAR_LEN; i++)
+        {
+            if (mcview_get_byte (view, byte_index + i, &res))
+                utf8buf[i] = res;
+            else
+            {
+                utf8buf[i] = '\0';
+                break;
+            }
+        }
+        utf8buf[UTF8_CHAR_LEN] = '\0';
+        str = utf8buf;
+        res = g_utf8_get_char_validated (str, -1);
+    }
 
     if (res < 0)
     {

@@ -138,6 +138,11 @@ incomplete, use `configure --help' to get the full list):
      default.  Background code is known to be less stable than the rest
      of the code, so you may want to disable it at the compile time.
 
+`--with-homedir'
+     This option allow users  to place user config directories in any
+     place. By default value is 'XDG', this mean, mc will respect XDG
+     standards. If other value will specified, this will used as directory
+     name (relative to $HOME).
 
 VFS options:
 - - - - - -
