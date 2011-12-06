@@ -62,11 +62,11 @@
 
 #include "src/history.h"
 #include "src/setup.h"          /* option_tab_spacing */
+#include "src/main.h"           /* mactos_t */
 #include "src/selcodepage.h"
 #include "src/keybind-defaults.h"
 #include "src/util.h"           /* check_for_default() */
 #include "src/filemanager/layout.h"     /* mc_refresh()  */
-
 
 #include "edit-impl.h"
 #include "edit-widget.h"

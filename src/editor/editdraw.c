@@ -51,6 +51,7 @@
 #include "lib/charsets.h"
 
 #include "src/setup.h"          /* edit_tab_spacing */
+#include "src/main.h"           /* macro_index */
 
 #include "edit-impl.h"
 #include "edit-widget.h"

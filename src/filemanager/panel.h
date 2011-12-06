@@ -37,15 +37,6 @@ enum list_types
 
 typedef enum
 {
-    view_listing = 0,           /* Directory listing */
-    view_info = 1,              /* Information panel */
-    view_tree = 2,              /* Tree view */
-    view_quick = 3,             /* Quick view */
-    view_nothing = 4,           /* Undefined */
-} panel_view_mode_t;
-
-typedef enum
-{
     frame_full,                 /* full screen frame */
     frame_half                  /* half screen frame */
 } panel_display_t;
@@ -157,6 +148,7 @@ void panel_change_encoding (WPanel * panel);
 
 void update_panels (panel_update_flags_t flags, const char *current_file);
 int set_panel_formats (WPanel * p);
+void panel_update_cols (Widget * widget, panel_display_t frame_size);
 
 void try_to_select (WPanel * panel, const char *name);
 

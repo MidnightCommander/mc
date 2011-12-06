@@ -976,45 +976,6 @@ set_display_type (int num, panel_view_mode_t type)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-void
-panel_update_cols (Widget * widget, panel_display_t frame_size)
-{
-    int cols, origin;
-
-    /* don't touch panel if it is not in dialog yet */
-    /* if panel is not in dialog it is not in widgets list
-       and cannot be compared with get_panel_widget() result */
-    if (widget->owner == NULL)
-        return;
-
-    if (horizontal_split)
-    {
-        widget->cols = COLS;
-        return;
-    }
-
-    if (frame_size == frame_full)
-    {
-        cols = COLS;
-        origin = 0;
-    }
-    else if (widget == get_panel_widget (0))
-    {
-        cols = first_panel_size;
-        origin = 0;
-    }
-    else
-    {
-        cols = COLS - first_panel_size;
-        origin = first_panel_size;
-    }
-
-    widget->cols = cols;
-    widget->x = origin;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** This routine is deeply sticked to the two panels idea.
    What should it do in more panels. ANSWER - don't use it
    in any multiple panels environment. */
