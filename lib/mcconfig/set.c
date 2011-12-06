@@ -43,6 +43,7 @@ mc_config_normalize_before_save (const gchar * value)
 {
     GIConv conv;
     GString *buffer;
+    gboolean ok;
 
     if (mc_global.utf8_display)
         return g_strdup (value);
@@ -53,13 +54,15 @@ mc_config_normalize_before_save (const gchar * value)
 
     buffer = g_string_new ("");
 
-    if (str_convert (conv, value, buffer) == ESTR_FAILURE)
+    ok = (str_convert (conv, value, buffer) != ESTR_FAILURE);
+    str_close_conv (conv);
+
+    if (!ok)
     {
         g_string_free (buffer, TRUE);
         return g_strdup (value);
     }
 
-    str_close_conv (conv);
     return g_string_free (buffer, FALSE);
 }
 
