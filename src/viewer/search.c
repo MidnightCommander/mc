@@ -348,18 +348,19 @@ mcview_do_search (mcview_t * view)
         isFound = TRUE;
     }
 
-    if (!isFound && view->search->error_str != NULL)
-        message (D_NORMAL, _("Search"), "%s", view->search->error_str);
-
-    view->dirty++;
-    mcview_update (view);
-
     tty_disable_interrupt_key ();
+
     if (verbose)
     {
         dlg_run_done (d);
         destroy_dlg (d);
     }
+
+    if (!isFound && view->search->error_str != NULL)
+        message (D_NORMAL, _("Search"), "%s", view->search->error_str);
+
+    view->dirty++;
+    mcview_update (view);
 }
 
 /* --------------------------------------------------------------------------------------------- */
