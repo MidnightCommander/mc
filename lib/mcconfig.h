@@ -68,6 +68,8 @@ int *mc_config_get_int_list (mc_config_t *, const gchar *, const gchar *, gsize 
 
 void mc_config_set_string_raw (mc_config_t *, const gchar *, const gchar *, const gchar *);
 
+void mc_config_set_string_raw_value (mc_config_t *, const gchar *, const gchar *, const gchar *);
+
 void mc_config_set_string (const mc_config_t *, const gchar *, const gchar *, const gchar *);
 
 void mc_config_set_bool (mc_config_t *, const gchar *, const gchar *, gboolean);

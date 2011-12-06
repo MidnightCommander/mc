@@ -371,9 +371,9 @@ learn_save (void)
         {
             profile_changed = 1;
 
-            esc_str = strutils_escape (learnkeys[i].sequence, -1, ";", TRUE);
+            esc_str = strutils_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
 
-            mc_config_set_string_raw (mc_main_config, section, key_name_conv_tab[i].name, esc_str);
+            mc_config_set_string_raw_value (mc_main_config, section, key_name_conv_tab[i].name, esc_str);
 
             g_free (esc_str);
         }
