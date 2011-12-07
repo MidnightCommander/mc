@@ -36,6 +36,7 @@ void layout_change (void);
 void layout_box (void);
 void setup_panels (void);
 void destroy_panels (void);
+void setup_cmdline (void);
 void set_display_type (int num, panel_view_mode_t type);
 void panel_update_cols (Widget * widget, panel_display_t frame_size);
 void swap_panels (void);
