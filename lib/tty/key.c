@@ -931,88 +931,90 @@ push_char (int c)
 
 /* --------------------------------------------------------------------------------------------- */
 /* Parse extended mouse coordinates.
-   Returns -1 if pending_keys cannot be a prefix of extended mouse coordinates.
-   Returns 0 if pending_keys is a valid (but still incomplete) prefix for extended mouse
-   coordinates, e.g. "^[[32;4".
-   Returns 1 and fills the mouse_btn, mouse_x, mouse_y values if pending_keys is a complete extended
-   mouse sequence, e.g. "^[[32;42;5M"
+   Returns -1 if pending_keys (up to seq_append) cannot be a prefix of extended mouse coordinates.
+   Returns 0 if pending_keys (up to seq_append) is a valid (but still incomplete) prefix for
+   extended mouse coordinates, e.g. "^[[32;4".
+   Returns 1 and fills the mouse_btn, mouse_x, mouse_y values if pending_keys (up to seq_append) is
+   a complete extended mouse sequence, e.g. "^[[32;42;5M"
  */
 
 /* Technical info (Egmont Koblinger <egmont@gmail.com>):
 
-   The ancient way of reporting mouse coordinates only supports coordinates up to 231,
+   The ancient way of reporting mouse coordinates only supports coordinates up to 223,
    so if your terminal is wider (or taller, but that's unlikely), you cannot use your mouse
    in the rightmost columns.
 
    * The old way of reporting mouse coordinates is the following:
-        + Output DECSET 1000 to enable mouse
-        + Expect escape sequences in the format \e[M<action+32><x+32><y+32> whereas <action+32>,
-          <x+32> and <y+32> are single bytes. (Action is 0 for left click, 1 for middle click,
-          2 for right click, 3 for release, or something like this.)
-        + Disadvantages of this format:
-            + x and y can only go up to 231.
-            + Coordinates above 95 are not ascii-compatible, so any character set converting
-              layer (e.g. luit) messes them up.
-            + The stream is not valid UTF-8, even if everything else is.
+   + Output DECSET 1000 to enable mouse
+   + Expect escape sequences in the format \e[M<action+32><x+32><y+32> whereas <action+32>,
+   <x+32> and <y+32> are single bytes. (Action is 0 for left click, 1 for middle click,
+   2 for right click, 3 for release, or something like this.)
+   + Disadvantages of this format:
+   + x and y can only go up to 223.
+   + Coordinates above 95 are not ascii-compatible, so any character set converting
+   layer (e.g. luit) messes them up.
+   + The stream is not valid UTF-8, even if everything else is.
 
-    * The first new extension, introduced by xterm-262, is the following:
-        + Output DECSET 1000 to enable mouse, followed by DECSET 1005 to activate extended mode.
-        + Expect escape sequences in the format \e[M<action+32><<x+32>><<y+32>> whereas <<x+32>>
-          and <<y+32>> each can be up to two bytes long: coordinate+32 is encoded in UTF-8.
-        + Disadvantates of this format:
-            + There's still a limit of 2015 rows/columns (okay, it's not a real life problem).
-            + Doesn't solve the luit issue.
-            + It is "horribly broken" (quoting urxvt's changelog) in terms of compatibility
-              with the previous standard. There is no way for an application to tell whether
-              the underlying terminal supports this new mode (whether DECSET 1005 did actually change
-              the behavior or not), but depending on this a completely different user action might
-              generate the same input. Example:
-                + If the terminal doesn't support this extension, then clicking at (162, 129)
-                  generates \e[M<32><194><161>.
-                + If the terminal supports this extension, then clicking at (129, 1) [bit of math:
-                  129+32 = 161, U+0161 in UTF-8 is 194 161] generates \e[M<32><194><161><33>.
-                + so there's no way to tell whether the terminal ignored the 1005 escape sequence,
-                  the user clicked on (162, 129) and then typed an exclamation mark; or whether
-                  the terminal recognized the escape, and the user clicked on (129, 1).
-                + Due to this horrible brokenness, there's no way to implement support it without
-                  explicitly asking the user (via a setting) if the terminal can speak this extension.
+   * The first new extension, introduced by xterm-262, is the following:
+   + Output DECSET 1000 to enable mouse, followed by DECSET 1005 to activate extended mode.
+   + Expect escape sequences in the format \e[M<action+32><<x+32>><<y+32>> whereas <<x+32>>
+   and <<y+32>> each can be up to two bytes long: coordinate+32 is encoded in UTF-8.
+   + Disadvantates of this format:
+   + There's still a limit of 2015 rows/columns (okay, it's not a real life problem).
+   + Doesn't solve the luit issue.
+   + It is "horribly broken" (quoting urxvt's changelog) in terms of compatibility
+   with the previous standard. There is no way for an application to tell whether
+   the underlying terminal supports this new mode (whether DECSET 1005 did actually change
+   the behavior or not), but depending on this a completely different user action might
+   generate the same input. Example:
+   + If the terminal doesn't support this extension, then clicking at (162, 129)
+   generates \e[M<32><194><161>.
+   + If the terminal supports this extension, then clicking at (129, 1) [bit of math:
+   129+32 = 161, U+0161 in UTF-8 is 194 161] generates \e[M<32><194><161><33>.
+   + so there's no way to tell whether the terminal ignored the 1005 escape sequence,
+   the user clicked on (162, 129) and then typed an exclamation mark; or whether
+   the terminal recognized the escape, and the user clicked on (129, 1).
+   + Due to this horrible brokenness, there's no way to implement support it without
+   explicitly asking the user (via a setting) if the terminal can speak this extension.
 
-    * The second new extension, introduced by rxvt-unicode-9.10, is the following:
-        + Output DECSET 1000 to enable mouse, followed by DECSET 1015 to activate this extended mode.
-        + Expect escape sequences in the format \e[{action+32};{x};{y}M where this time I used
-          the braces to denote spelling out the numbers in decimal, rather than using raw bytes.
-        + The only thing I don't understand is why they kept the offset of 32 at action, but other
-          than that, this format is totally okay, and solves all the weaknesses of the previous ones.
+   * The second new extension, introduced by rxvt-unicode-9.10, is the following:
+   + Output DECSET 1000 to enable mouse, followed by DECSET 1015 to activate this extended mode.
+   + Expect escape sequences in the format \e[{action+32};{x};{y}M where this time I used
+   the braces to denote spelling out the numbers in decimal, rather than using raw bytes.
+   + The only thing I don't understand is why they kept the offset of 32 at action, but other
+   than that, this format is totally okay, and solves all the weaknesses of the previous ones.
 
-    Currently, at least the following terminal emulators have support for these:
-    * xterm supports the xterm extension
-    * rxvt-unicode >= 9.10 supports both extensions
-    * iterm2 supports both extensions.
-*/
+   Currently, at least the following terminal emulators have support for these:
+   * xterm supports the xterm extension
+   * rxvt-unicode >= 9.10 supports both extensions
+   * iterm2 supports both extensions
+   * vte >= 0.31 supports the urxvt extension
+ */
 
 static int
 parse_extended_mouse_coordinates (void)
 {
     int c, btn = 0, x = 0, y = 0;
     const int *p = pending_keys;
+    const int *endp = seq_append;
 
-    c = *p++;
-    if (c == 0)
+    if (p == endp)
         return 0;
+    c = *p++;
     if (c != ESC_CHAR)
         return -1;
 
-    c = *p++;
-    if (c == 0)
+    if (p == endp)
         return 0;
+    c = *p++;
     if (c != '[')
         return -1;
 
     while (TRUE)
     {
-        c = *p++;
-        if (c == 0)
+        if (p == endp)
             return 0;
+        c = *p++;
         if (c == ';')
             break;
         if (c < '0' || c > '9')
@@ -1025,9 +1027,9 @@ parse_extended_mouse_coordinates (void)
 
     while (TRUE)
     {
-        c = *p++;
-        if (c == 0)
+        if (p == endp)
             return 0;
+        c = *p++;
         if (c == ';')
             break;
         if (c < '0' || c > '9')
@@ -1039,9 +1041,9 @@ parse_extended_mouse_coordinates (void)
 
     while (TRUE)
     {
-        c = *p++;
-        if (c == 0)
+        if (p == endp)
             return 0;
+        c = *p++;
         if (c == 'M')
             break;
         if (c < '0' || c > '9')
@@ -2151,8 +2153,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 #ifdef KEY_MOUSE
                           || c == KEY_MOUSE
 #endif /* KEY_MOUSE */
-                          || c == MCKEY_EXTENDED_MOUSE
-        ))
+                          || c == MCKEY_EXTENDED_MOUSE))
     {
         /* Mouse event */
         /* In case of extended coordinates, mouse_btn, mouse_x and mouse_y are already filled in. */
