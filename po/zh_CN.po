@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-08 07:11+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.net/projects/p/mc/team/"
 "zh_CN/)\n"
@@ -2032,21 +2032,17 @@ msgstr "执行时设置群组 ID"
 msgid "set user ID on execution"
 msgstr "执行时设置用户 ID"
 
-#, fuzzy
 msgid "Name:"
-msgstr "名字"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "权限(8进制)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "所有者名"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "群组名"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "清除已标记的(&L)"
@@ -2247,9 +2243,9 @@ msgstr "设置"
 msgid "Setup saved to ~/%s"
 msgstr "设置已保存到 ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "无法保存到文件"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "您无法在非本地文件系统上执行命令"
@@ -3960,15 +3956,3 @@ msgstr "搜索完成"
 
 msgid "Continue from beginning?"
 msgstr "从开始处继续？"
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "使用空格键修改"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "选项，光标键"
-
-#~ msgid "to move between options"
-#~ msgstr "移到不同选项"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "T 或 INS 做标记"

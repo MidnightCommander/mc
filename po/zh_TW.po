@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_TW\n"
@@ -1976,21 +1976,17 @@ msgstr "執行時 sGID"
 msgid "set user ID on execution"
 msgstr "執行時 sUID"
 
-#, fuzzy
 msgid "Name:"
-msgstr "名稱"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "權限 (八進位)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "擁有者名稱"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "群組名稱"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "清除標示區"
@@ -3794,15 +3790,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "使用空白鍵來改變"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "一個選項，方向鍵"
-
-#~ msgid "to move between options"
-#~ msgstr "在選項間移動"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "，T 或 INS 鍵標示"

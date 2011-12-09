@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
 "PO-Revision-Date: 2011-07-06 14:55+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.net/projects/p/mc/team/be/)\n"
@@ -882,7 +882,7 @@ msgid "Forces xterm features"
 msgstr "Навязвае ўласцівасці xterm"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Паспрабаваць выкарыстоўваць старую сістэму вылучэння мышшем"
 
 msgid "Disable mouse support in text version"
 msgstr "Адключыць падтрымку мышы ў тэкставай вэрсіі"
@@ -2050,21 +2050,17 @@ msgstr "устал. GID пры выкананні"
 msgid "set user ID on execution"
 msgstr "устал. UID пры выкананні"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Імя"
+msgstr "Імя:"
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Доступ (васьмірычны)"
+msgstr "Доступ (васьмірычны):"
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Імя ўладальніка"
+msgstr "Імя ўладальніка:"
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Імя групы"
+msgstr "Імя групы:"
 
 msgid "C&lear marked"
 msgstr "&Ачысціць пазначанае"
@@ -2267,9 +2263,9 @@ msgstr "Настройка"
 msgid "Setup saved to ~/%s"
 msgstr "Параметры захаваны ў ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Немагчыма захаваць у файл"
+msgstr "Немагчыма захаваць прылады у ~/%s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Немагчыма выконваць каманды на нелакальных файлавых сістэмах"

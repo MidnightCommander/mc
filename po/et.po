@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-04-04 10:36+0300\n"
-"PO-Revision-Date: 2011-09-28 17:25+0000\n"
+"POT-Creation-Date: 2011-10-03 12:28+0300\n"
+"PO-Revision-Date: 2010-12-06 10:34+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -354,6 +354,9 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -632,6 +635,12 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
+msgid "Cannot parse:"
+msgstr ""
+
+msgid "More parsing errors will be ignored."
+msgstr ""
+
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr ""
@@ -763,12 +772,6 @@ msgstr ""
 msgid "Ext2lib error"
 msgstr ""
 
-msgid "Cannot parse:"
-msgstr ""
-
-msgid "More parsing errors will be ignored."
-msgstr ""
-
 msgid "Internal error:"
 msgstr ""
 
@@ -837,6 +840,9 @@ msgid "Edits one file"
 msgstr ""
 
 msgid "Forces xterm features"
+msgstr ""
+
+msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
 
 msgid "Disable mouse support in text version"
@@ -1948,6 +1954,18 @@ msgstr ""
 msgid "set user ID on execution"
 msgstr ""
 
+msgid "Name:"
+msgstr ""
+
+msgid "Permissions (octal):"
+msgstr ""
+
+msgid "Owner name:"
+msgstr ""
+
+msgid "Group name:"
+msgstr ""
+
 msgid "C&lear marked"
 msgstr ""
 
@@ -1955,30 +1973,6 @@ msgid "S&et marked"
 msgstr ""
 
 msgid "&Marked all"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Permissions (Octal)"
-msgstr ""
-
-msgid "Owner name"
-msgstr ""
-
-msgid "Group name"
-msgstr ""
-
-msgid "Use SPACE to change"
-msgstr ""
-
-msgid "an option, ARROW KEYS"
-msgstr ""
-
-msgid "to move between options"
-msgstr ""
-
-msgid "and T or INS to mark"
 msgstr ""
 
 msgid "Chmod command"
@@ -1994,6 +1988,15 @@ msgid "Set &users"
 msgstr ""
 
 msgid "Set &groups"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Owner name"
+msgstr ""
+
+msgid "Group name"
 msgstr ""
 
 msgid "Size"
@@ -2158,6 +2161,10 @@ msgstr ""
 msgid "Setup saved to ~/%s"
 msgstr ""
 
+#, c-format
+msgid "Unable to save setup to ~/%s"
+msgstr ""
+
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
@@ -2277,6 +2284,27 @@ msgstr ""
 msgid "&Abort"
 msgstr ""
 
+msgid "&Retry"
+msgstr ""
+
+msgid ""
+"\n"
+"Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid ""
+"\n"
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
+msgstr ""
+
+msgid "Delete:"
+msgstr ""
+
+msgid "Non&e"
+msgstr ""
+
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
@@ -2317,27 +2345,6 @@ msgstr ""
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
-msgstr ""
-
-msgid "&Retry"
-msgstr ""
-
-msgid ""
-"\n"
-"Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid ""
-"\n"
-"Background process: Directory not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid "Delete:"
-msgstr ""
-
-msgid "Non&e"
 msgstr ""
 
 #, c-format
@@ -2854,12 +2861,6 @@ msgstr ""
 msgid "Location:  %Xh:%Xh"
 msgstr ""
 
-msgid "&Vertical"
-msgstr ""
-
-msgid "&Horizontal"
-msgstr ""
-
 msgid "Show free sp&ace"
 msgstr ""
 
@@ -2891,6 +2892,12 @@ msgid "Console output"
 msgstr ""
 
 msgid "Other options"
+msgstr ""
+
+msgid "&Vertical"
+msgstr ""
+
+msgid "&Horizontal"
 msgstr ""
 
 msgid "Output lines:"
@@ -3062,9 +3069,6 @@ msgid "&Virtual FS..."
 msgstr ""
 
 msgid "Panels:"
-msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
 #, c-format

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: az\n"
@@ -1975,21 +1975,17 @@ msgstr "işə salarkən qrup IDsini daxil et"
 msgid "set user ID on execution"
 msgstr "işə salarkən istifadəçi IDsini daxil et"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Ad :"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "İcazələr (Onluq) "
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Sahibinin adı"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Qrup adı"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "Seçilanləri T&əmizlə"
@@ -3795,15 +3791,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr " Dəyişdirmak üçün SPACE istifadə et"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "OX DÜYMƏLARİ"
-
-#~ msgid "to move between options"
-#~ msgstr "seçənəklər arasında gəzmək üçün "
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "Seçmək üçün T va ya INS"

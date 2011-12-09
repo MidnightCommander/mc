@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/mc/team/de/)\n"
 "Language: de\n"
@@ -2031,21 +2031,17 @@ msgstr "Setze Gruppen-ID bei Ausführung"
 msgid "set user ID on execution"
 msgstr "Setze Nutzer-ID bei Ausführung"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Name"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Zugriffsrechte (oktal)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Eigentümer-Name"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Gruppen-Name"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "Markierte &aufheben"
@@ -2248,9 +2244,9 @@ msgstr "Einstellungen"
 msgid "Setup saved to ~/%s"
 msgstr "Einstellungen in ~/%s gespeichert"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Kann die Datei nicht speichern"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Sie können keine Befehle auf nichtlokalen Dateisystemen ausführen"
@@ -3969,15 +3965,3 @@ msgstr "Suche abgeschlossen"
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Zum Ändern Leertaste drücken"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "eine Einstellung, Cursortasten"
-
-#~ msgid "to move between options"
-#~ msgstr "um zwischen Einstellungen zu ändern"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "und T oder INS zum Markieren"

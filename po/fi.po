@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -1954,21 +1954,17 @@ msgstr "aseta GID suoritettaessa"
 msgid "set user ID on execution"
 msgstr "aseta UID suoritettaessa"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nimi"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Oikeudet (oktaalisena)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Omistajan nimi"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Ryhmän nimi"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Tyhjennä merkityt"
@@ -3758,15 +3754,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Välilyönti muuttaa"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "valintaa, nuolinäppäimet"
-
-#~ msgid "to move between options"
-#~ msgstr "liikkuvat valinnoissa,"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "T/INS merkitsevät"

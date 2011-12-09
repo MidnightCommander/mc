@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.net/projects/p/mc/team/ca/)\n"
 "Language: ca\n"
@@ -1977,21 +1977,17 @@ msgstr "executa amb l'ID del grup"
 msgid "set user ID on execution"
 msgstr "executa amb l'ID del propietari"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nom"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Permisos (octal)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Nom del propietari"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Nom del grup"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Esborra els marcats"
@@ -3803,15 +3799,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Utilitzeu ESPAI per canviar"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "una opció, les TECLES DEL CURSOR"
-
-#~ msgid "to move between options"
-#~ msgstr "per moure's entre opcions"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "i la T o INS per marcar-les"

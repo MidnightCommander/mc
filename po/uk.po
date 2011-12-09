@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.net/projects/p/mc/team/uk/)\n"
 "Language: uk\n"
@@ -2031,21 +2031,17 @@ msgstr "вст. GID при виконанні"
 msgid "set user ID on execution"
 msgstr "вст. UID при виконанні"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Назва"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Права (вісімкові)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Ім'я власника"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Назва групи"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Вим. поміч."
@@ -2248,9 +2244,9 @@ msgstr "Налаштування"
 msgid "Setup saved to ~/%s"
 msgstr "Налаштування збережено до ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Неможливо зберегти у файл"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Ви не можете виконувати команди на нелокальних файлових системах"
@@ -3969,15 +3965,3 @@ msgstr "Пошук завершено"
 
 msgid "Continue from beginning?"
 msgstr "Продовжити з початку?"
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "ПРОБІЛ - для зміни"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "опції, КЛАВІШІ-СТРІЛКИ"
-
-#~ msgid "to move between options"
-#~ msgstr "переміщення між параметрами"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "і T або INS для помітки"

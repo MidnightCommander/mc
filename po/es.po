@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-08-12 10:01+0000\n"
-"Last-Translator: dmartina <dmartina@excite.com>\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:35+0000\n"
+"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/mc/"
 "team/es/)\n"
 "Language: es\n"
@@ -2053,21 +2053,17 @@ msgstr "ejecutar con ID del grupo"
 msgid "set user ID on execution"
 msgstr "ejecutar con ID del dueño"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nombre"
+msgstr "Nombre:"
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Permisos"
+msgstr "Permisos:"
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Dueño"
+msgstr "Dueño:"
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Grupo"
+msgstr "Grupo:"
 
 msgid "C&lear marked"
 msgstr "* a &Quitar"
@@ -2270,9 +2266,9 @@ msgstr "Configuración"
 msgid "Setup saved to ~/%s"
 msgstr "Configuración guardada en ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "No pude guardar el archivo."
+msgstr "No se pudo guardar la configuración en ~/%s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Imposible ejecutar comandos desde directorios no locales"
@@ -3992,15 +3988,3 @@ msgstr "Búsqueda finalizada"
 
 msgid "Continue from beginning?"
 msgstr "¿Continuar desde el principio?"
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Use las flechas para"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "moverse, ESPACIO para"
-
-#~ msgid "to move between options"
-#~ msgstr "cambiar los permisos"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "y T o INS para marcar"

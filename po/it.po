@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -2021,21 +2021,17 @@ msgstr "imposta GID"
 msgid "set user ID on execution"
 msgstr "imposta UID"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nome"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Permessi (Ottale)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Nome proprietario"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Nome gruppo"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Canc. marc."
@@ -2238,9 +2234,9 @@ msgstr "Configurazione"
 msgid "Setup saved to ~/%s"
 msgstr "Impostazioni salvate su ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Impossibile salvare su file"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Impossibile eseguire comandi su filesystem non locali"
@@ -3958,15 +3954,3 @@ msgstr "Ricerca conclusa"
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "BARRA SPAZIO per cambiare"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "un opzione, FRECCE"
-
-#~ msgid "to move between options"
-#~ msgstr "per scegliere le opzioni"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "T o INS per marcare"

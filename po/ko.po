@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.net/projects/p/mc/team/ko/)\n"
 "Language: ko\n"
@@ -1979,21 +1979,17 @@ msgstr "실행시 집단 ID 설정"
 msgid "set user ID on execution"
 msgstr "실행시 사용자 ID 설정"
 
-#, fuzzy
 msgid "Name:"
-msgstr "이름"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "허용 (8진수)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "사용자 이름"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "집단 이름"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "선택 해제(&L)"
@@ -3802,15 +3798,3 @@ msgstr "검색결과 없음"
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "바꾸려면 SPACE 사용"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "선택 항목, 화살표 키"
-
-#~ msgid "to move between options"
-#~ msgstr "선택항목간에 이동하려면"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "선택하려면 T 혹은 INS"

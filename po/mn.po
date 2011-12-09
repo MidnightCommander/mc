@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: mn\n"
@@ -1977,21 +1977,17 @@ msgstr "гүйцэтгэх GID-г оноох"
 msgid "set user ID on execution"
 msgstr "гүйцэтгэх UID-г оноох"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Нэр"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Зөвшөөрөл (наймтын тоолол)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Эзэмшигчийн нэр"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Бүлгийн нэр"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "Тэмдэглэгдсэнг &устгах"
@@ -3801,15 +3797,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "өөрчилөлт хийхдээ ХООСОН ЗАЙ ашигла"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "тохиргоонд, СУМТАЙ ТОВЧЛУУР "
-
-#~ msgid "to move between options"
-#~ msgstr "тохиргоо хооронд шилжих"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "ба T эсвэл INS -р тэмдэглэнэ"

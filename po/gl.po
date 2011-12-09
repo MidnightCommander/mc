@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-09-20 08:56+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-05 07:40+0000\n"
 "Last-Translator: mbouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.net/projects/p/mc/team/gl/)\n"
 "Language: gl\n"
@@ -885,7 +885,7 @@ msgid "Forces xterm features"
 msgstr "Forzar as funcionalidades de xterm"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Tenta usar un antigo seguimento resaltado de rato"
 
 msgid "Disable mouse support in text version"
 msgstr "Desactivar o rato na versión texto"
@@ -2054,21 +2054,17 @@ msgstr "estabelecer ID do grupo ao executar"
 msgid "set user ID on execution"
 msgstr "estabelecer ID do usuario ao executar"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nome"
+msgstr "Nome:"
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Permisos (octal)"
+msgstr "Permisos (octal):"
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Nome do propietario"
+msgstr "Nome do propietario:"
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Nome do grupo"
+msgstr "Nome do grupo:"
 
 msgid "C&lear marked"
 msgstr "&Limpar marcados"
@@ -2271,9 +2267,9 @@ msgstr "Configuración"
 msgid "Setup saved to ~/%s"
 msgstr "Configuración gardada en ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Non foi posíbel gardar o ficheiro"
+msgstr "Non foi posíbel gardar a configuración en ~/%s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Non é posíbel executar ordes desde sistemas de ficheiros non locais"
@@ -3992,15 +3988,3 @@ msgstr "Busca rematada"
 
 msgid "Continue from beginning?"
 msgstr "Continuar desde o principio?"
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Use barra espazadora para cambiar"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "unha opción, TECLAS DE FRECHA"
-
-#~ msgid "to move between options"
-#~ msgstr "para moverse nas opcións"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "e T ou INS para marcar"

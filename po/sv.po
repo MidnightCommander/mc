@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sv\n"
@@ -1976,21 +1976,17 @@ msgstr "sätt grupp-ID vid exekvering"
 msgid "set user ID on execution"
 msgstr "sätt användar-ID vid exekvering"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Namn"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Rättigheter (Oktalt)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Ägarnamn"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Gruppnamn"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Nollställ markerad"
@@ -3797,15 +3793,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Använd mellanslag för att ändra"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "en inställning, piltangenterna"
-
-#~ msgid "to move between options"
-#~ msgstr "för att flytta mellan olika alternativ"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "och T eller INS för att välja"

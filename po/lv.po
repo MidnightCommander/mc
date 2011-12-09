@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: lv\n"
@@ -1979,21 +1979,17 @@ msgstr "uzstād. grup. ID pie izpildes"
 msgid "set user ID on execution"
 msgstr "uzstād. liet. ID pie izpildes"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nosaukums"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Atļaujas (Octal)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Īpašnieka vārds"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Grupas vārds"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "A&ttīrīt izvēlēto"
@@ -3809,15 +3805,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Lietojiet SPACE, lai mainītu"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "opcija, PULIŅU TAUSTIŅI"
-
-#~ msgid "to move between options"
-#~ msgstr ", lai kustētos starp opcijām"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "un T vai INS, lai atzīmētu"

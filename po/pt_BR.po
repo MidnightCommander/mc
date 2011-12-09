@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-08 07:09+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Portuguese (Brazilian) (http://www.transifex.net/projects/p/"
 "mc/team/pt_BR/)\n"
@@ -2010,21 +2010,17 @@ msgstr "configurar identificação do grupo para execução"
 msgid "set user ID on execution"
 msgstr "configurar identificação do usuário para execução"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nome"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Permissões (Formato Octal)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Nome do dono"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Nome do grupo"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "Lim&peza marcada"
@@ -2223,9 +2219,9 @@ msgstr "Configuração"
 msgid "Setup saved to ~/%s"
 msgstr "Configuração salvaguardada em ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Impossível salvar o arquivo."
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Impossível executar comandos em sistemas de arquivos remotos"
@@ -3864,15 +3860,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Use ESPAÇO para mudar "
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr " uma opção, SETAS"
-
-#~ msgid "to move between options"
-#~ msgstr "para mover entre opções"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "e T ou INS para marcar"

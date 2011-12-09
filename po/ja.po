@@ -4,14 +4,15 @@
 #
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
+# Tadashi Jokagi <elf@elf.no-ip.org>, 2011.
 # Yoshitaka Yamashita <drum@magic-touch.org>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-07-18 14:29+0000\n"
-"Last-Translator: yoshitakayamashita <drum@magic-touch.org>\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 16:40+0000\n"
+"Last-Translator: elf <elf@elf.no-ip.org>\n"
 "Language-Team: Japanese (http://www.transifex.net/projects/p/mc/team/ja/)\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -20,14 +21,14 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
-msgstr ""
+msgstr "警告: コードページの一覧を読み込めません"
 
 msgid "7-bit ASCII"
-msgstr "7-bit ASCII"
+msgstr "7 ビット ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "%s から %s へ変換することが出来ません"
+msgstr "%s から %s へ変換することができません"
 
 #, c-format
 msgid ""
@@ -46,7 +47,7 @@ msgid "&Grab lock"
 msgstr ""
 
 msgid "&Ignore lock"
-msgstr ""
+msgstr "ロック無視(&I)"
 
 msgid "Search string not found"
 msgstr "検索文字列が見付かりません"
@@ -90,70 +91,70 @@ msgstr ""
 "デフォルトのスキンがロードされました"
 
 msgid "Function key 1"
-msgstr "Functionキー 1"
+msgstr "ファンクション キー 1"
 
 msgid "Function key 2"
-msgstr "Functionキー 2"
+msgstr "ファンクション キー 2"
 
 msgid "Function key 3"
-msgstr "Functionキー 3"
+msgstr "ファンクション キー 3"
 
 msgid "Function key 4"
-msgstr "Functionキー 4"
+msgstr "ファンクション キー 4"
 
 msgid "Function key 5"
-msgstr "Functionキー 5"
+msgstr "ファンクション キー 5"
 
 msgid "Function key 6"
-msgstr "Functionキー 6"
+msgstr "ファンクション キー 6"
 
 msgid "Function key 7"
-msgstr "Functionキー 7"
+msgstr "ファンクション キー 7"
 
 msgid "Function key 8"
-msgstr "Functionキー 8"
+msgstr "ファンクション キー 8"
 
 msgid "Function key 9"
-msgstr "Functionキー 9"
+msgstr "ファンクション キー 9"
 
 msgid "Function key 10"
-msgstr "Functionキー 10"
+msgstr "ファンクション キー 10"
 
 msgid "Function key 11"
-msgstr "Functionキー 11"
+msgstr "ファンクション キー 11"
 
 msgid "Function key 12"
-msgstr "Functionキー 12"
+msgstr "ファンクション キー 12"
 
 msgid "Function key 13"
-msgstr "Functionキー 13"
+msgstr "ファンクション キー 13"
 
 msgid "Function key 14"
-msgstr "Functionキー 14"
+msgstr "ファンクション キー 14"
 
 msgid "Function key 15"
-msgstr "Functionキー 15"
+msgstr "ファンクション キー 15"
 
 msgid "Function key 16"
-msgstr "Functionキー 16"
+msgstr "ファンクション キー 16"
 
 msgid "Function key 17"
-msgstr "Functionキー 17"
+msgstr "ファンクション キー 17"
 
 msgid "Function key 18"
-msgstr "Functionキー 18"
+msgstr "ファンクション キー 18"
 
 msgid "Function key 19"
-msgstr "Functionキー 19"
+msgstr "ファンクション キー 19"
 
 msgid "Function key 20"
-msgstr "Functionキー 20"
+msgstr "ファンクション キー 20"
 
 msgid "Backspace key"
-msgstr "Backspaeceキー"
+msgstr "Backspaece キー"
 
 msgid "End key"
-msgstr "Endキー"
+msgstr "End キー"
 
 msgid "Up arrow key"
 msgstr "上矢印"
@@ -168,25 +169,25 @@ msgid "Right arrow key"
 msgstr "右矢印"
 
 msgid "Home key"
-msgstr "Homeキー"
+msgstr "Home キー"
 
 msgid "Page Down key"
-msgstr "PageDownキー"
+msgstr "PageDown キー"
 
 msgid "Page Up key"
-msgstr "PageUpキー"
+msgstr "PageUp キー"
 
 msgid "Insert key"
-msgstr "Insertキー"
+msgstr "Insert キー"
 
 msgid "Delete key"
-msgstr "Deleteキー"
+msgstr "Delete キー"
 
 msgid "Completion/M-tab"
 msgstr "Completion/M-tab"
 
 msgid "+ on keypad"
-msgstr "10キーの +"
+msgstr "10 キーの +"
 
 msgid "- on keypad"
 msgstr "10キーの -"
@@ -246,10 +247,10 @@ msgid "Function key 24"
 msgstr "Functionキー24"
 
 msgid "A1 key"
-msgstr ""
+msgstr "A1 キー"
 
 msgid "C1 key"
-msgstr ""
+msgstr "C1 キー"
 
 msgid "Plus"
 msgstr "+ キー"
@@ -355,13 +356,13 @@ msgid "At sign"
 msgstr ""
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "環境変数 TERM がセットされていません\n"
@@ -406,10 +407,10 @@ msgid "Warning"
 msgstr "警告"
 
 msgid "Pipe failed"
-msgstr ""
+msgstr "パイプに失敗しました"
 
 msgid "Dup failed"
-msgstr ""
+msgstr "複製に失敗しました"
 
 msgid "Error dup'ing old error pipe"
 msgstr ""
@@ -485,7 +486,7 @@ msgstr "不整合な extfs アーカイブです"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr ""
+msgstr "警告: ディレクトリー %s を開けません\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -499,7 +500,7 @@ msgstr "すいませんが，今のところパスワードを証明すること
 
 #, c-format
 msgid "fish: Password is required for %s"
-msgstr ""
+msgstr "fish: %s のパスワードを要求しています"
 
 msgid "fish: Sending password..."
 msgstr "fish: パスワード送信中..."
@@ -511,7 +512,7 @@ msgid "fish: Handshaking version..."
 msgstr "fish: バージョンのハンドシェイク..."
 
 msgid "fish: Getting host info..."
-msgstr ""
+msgstr "fish: ホスト情報を取得しています..."
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: カレントディレクトリを設定します..."
@@ -560,7 +561,7 @@ msgstr "ftpfs: %s から切断中です"
 
 #, c-format
 msgid "FTP: Password required for %s"
-msgstr ""
+msgstr "FTP: %s のパスワードを要求しています"
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: ログイン名を送信中"
@@ -570,10 +571,10 @@ msgstr "ftpfs: パスワードを送信中"
 
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr ""
+msgstr "FTP: ユーザー %s のアカウントを要求しています"
 
 msgid "Account:"
-msgstr ""
+msgstr "アカウント:"
 
 msgid "ftpfs: sending user account"
 msgstr ""
@@ -590,7 +591,7 @@ msgstr "ftpfs: 不正なホスト名です"
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -658,7 +659,7 @@ msgid ""
 msgstr ""
 
 msgid "Cannot parse:"
-msgstr "構文解析が出来ません:"
+msgstr "構文解析ができません:"
 
 msgid "More parsing errors will be ignored."
 msgstr "多くの構文解析エラーがでましたが無視します"
@@ -685,10 +686,10 @@ msgstr ""
 
 #, c-format
 msgid "reconnect to %s failed"
-msgstr ""
+msgstr "%s への再接続に失敗"
 
 msgid "Authentication failed"
-msgstr ""
+msgstr "認証に失敗しました"
 
 #, c-format
 msgid "Error %s creating directory %s"
@@ -764,7 +765,7 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open file %s"
-msgstr ""
+msgstr "ファイル %s を開けません"
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: iノードビットマップをロード中です..."
@@ -774,15 +775,19 @@ msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
+"i ノードビットマップを開けません:\n"
+"%s"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: ブロックビットマップを読み込み中です..."
+msgstr "undelfs: ブロックビットマップを読み込んでいます..."
 
 #, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
 msgstr ""
+"ブロックビットマップを開けません:\n"
+"%s"
 
 msgid "vfs_info is not fs!"
 msgstr ""
@@ -795,10 +800,10 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open file \"%s\""
-msgstr ""
+msgstr "ファイル「%s」を開けません"
 
 msgid "Ext2lib error"
-msgstr ""
+msgstr "Ext2lib エラー"
 
 msgid "Internal error:"
 msgstr "内部エラー:"
@@ -810,10 +815,10 @@ msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
 
 msgid "Screens"
-msgstr ""
+msgstr "画面"
 
 msgid "History"
-msgstr ""
+msgstr "履歴"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
@@ -859,7 +864,7 @@ msgid "Log ftp dialog to specified file"
 msgstr "ftp の対話記録を指定したファイルに保存"
 
 msgid "Set debug level"
-msgstr ""
+msgstr "デバッグ レベルの設定"
 
 msgid "Launches the file viewer on a file"
 msgstr "ファイルビューアを起動"
@@ -877,7 +882,7 @@ msgid "Disable mouse support in text version"
 msgstr "テキスト版でのマウスのサポートを無効化"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "terminfoの代わりにtermcapを試す"
+msgstr "terminfo の代わりに termcap を試す"
 
 msgid "To run on slow terminals"
 msgstr "遅い端末で実行"
@@ -934,7 +939,7 @@ msgid ""
 msgstr ""
 
 msgid "Color options"
-msgstr ""
+msgstr "色オプション"
 
 msgid "+number"
 msgstr ""
@@ -1284,14 +1289,14 @@ msgid "Press macro hotkey:"
 msgstr ""
 
 msgid "Load macro"
-msgstr ""
+msgstr "マクロの読み込み"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
-msgstr ""
+msgstr "ファイル保存の確認: 「%s」"
 
 msgid "Save file"
-msgstr ""
+msgstr "ファイル保存"
 
 msgid "&Save"
 msgstr "保存(&S)"
@@ -1302,10 +1307,10 @@ msgid ""
 msgstr ""
 
 msgid "Load"
-msgstr ""
+msgstr "読み込み"
 
 msgid "Replace"
-msgstr ""
+msgstr "置換"
 
 #, c-format
 msgid "%ld replacements made"
@@ -1318,43 +1323,43 @@ msgid "This function is not implemented"
 msgstr ""
 
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "クリップボードにコピー"
 
 msgid "Unable to save to file"
-msgstr ""
+msgstr "ファイルへの保存に失敗しました"
 
 msgid "Cut to clipboard"
-msgstr ""
+msgstr "クリップボードに切り取る"
 
 msgid "Goto line"
-msgstr ""
+msgstr "行の移動"
 
 msgid "Save block"
-msgstr ""
+msgstr "ブロックの保存"
 
 msgid "Insert file"
-msgstr ""
+msgstr "ファイルの挿入"
 
 msgid "Cannot insert file"
-msgstr ""
+msgstr "ふぁいるのｓｓ王乳ができません"
 
 msgid "Sort block"
-msgstr ""
+msgstr "ブロックの並び替え"
 
 msgid "You must first highlight a block of text"
 msgstr ""
 
 msgid "Run sort"
-msgstr ""
+msgstr "並び替えの実行"
 
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "並び替え"
 
 msgid "Cannot execute sort command"
-msgstr ""
+msgstr "並び替えコマンドが実行できません"
 
 #, c-format
 msgid "Sort returned non-zero: %s"
@@ -1367,7 +1372,7 @@ msgid "Enter shell command(s):"
 msgstr ""
 
 msgid "External command"
-msgstr ""
+msgstr "外部コマンド"
 
 msgid "Cannot execute command"
 msgstr ""
@@ -1403,7 +1408,7 @@ msgid "mail -s <subject> -c <cc> <to>"
 msgstr ""
 
 msgid "Mail"
-msgstr ""
+msgstr "メール"
 
 msgid "Insert literal"
 msgstr ""
@@ -1412,7 +1417,7 @@ msgid "Press any key:"
 msgstr ""
 
 msgid "Execute macro"
-msgstr ""
+msgstr "マクロの実行"
 
 msgid ""
 "Current text was modified without a file save\n"
@@ -1455,19 +1460,19 @@ msgid "&Open file..."
 msgstr "ファイルを開く(&O)..."
 
 msgid "&New"
-msgstr ""
+msgstr "新規(&N)"
 
 msgid "Save &as..."
-msgstr ""
+msgstr "別名で保存(&A)..."
 
 msgid "&Insert file..."
-msgstr ""
+msgstr "ファイルの挿入(&I)..."
 
 msgid "Cop&y to file..."
-msgstr ""
+msgstr "ファイルにコピー(&Y)..."
 
 msgid "&User menu..."
-msgstr ""
+msgstr "ユーザー メニュー(&U)"
 
 msgid "A&bout..."
 msgstr ""
@@ -1539,7 +1544,7 @@ msgid "&Flush bookmark"
 msgstr ""
 
 msgid "&Go to line..."
-msgstr ""
+msgstr "行の移動(&G)..."
 
 msgid "&Toggle line state"
 msgstr ""
@@ -1560,28 +1565,28 @@ msgid "For&ward to declaration"
 msgstr ""
 
 msgid "Encod&ing..."
-msgstr ""
+msgstr "エンコード(&I)"
 
 msgid "&Refresh screen"
-msgstr ""
+msgstr "画面の再描画(&R)"
 
 msgid "&Start record macro"
-msgstr ""
+msgstr "マクロ記録の開始(&S)"
 
 msgid "Finis&h record macro..."
-msgstr ""
+msgstr "マクロ記録の終了(&H)..."
 
 msgid "&Execute macro..."
-msgstr ""
+msgstr "マクロの実行(&E).."
 
 msgid "Delete macr&o..."
-msgstr ""
+msgstr "マクロの削除(&O)..."
 
 msgid "'ispell' s&pell check"
 msgstr ""
 
 msgid "&Mail..."
-msgstr ""
+msgstr "メール(&M)..."
 
 msgid "Insert &literal..."
 msgstr ""
@@ -1593,7 +1598,7 @@ msgid "&Format paragraph"
 msgstr ""
 
 msgid "&Sort..."
-msgstr ""
+msgstr "並び替え(&S)..."
 
 msgid "&Paste output of..."
 msgstr ""
@@ -1605,7 +1610,7 @@ msgid "&General..."
 msgstr ""
 
 msgid "Save &mode..."
-msgstr ""
+msgstr "保存モード(&M)..."
 
 msgid "Learn &keys..."
 msgstr ""
@@ -1617,28 +1622,28 @@ msgid "S&yntax file"
 msgstr ""
 
 msgid "&Menu file"
-msgstr ""
+msgstr "メニュー ファイル(&M)"
 
 msgid "&Save setup"
 msgstr "設定保存(&S)"
 
 msgid "&File"
-msgstr ""
+msgstr "ファイル(&F)"
 
 msgid "&Edit"
-msgstr ""
+msgstr "編集(&E)"
 
 msgid "&Search"
-msgstr ""
+msgstr "検索(&S)"
 
 msgid "&Command"
-msgstr ""
+msgstr "コマンド(&C)"
 
 msgid "For&mat"
 msgstr ""
 
 msgid "&Options"
-msgstr ""
+msgstr "オプション(&O)"
 
 msgid "None"
 msgstr "なし"
@@ -1692,10 +1697,10 @@ msgid "Wrap mode"
 msgstr "折り返し方法"
 
 msgid "Editor options"
-msgstr ""
+msgstr "編集オプション"
 
 msgid "Edit: "
-msgstr ""
+msgstr "編集: "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -1876,7 +1881,7 @@ msgid "Confirmation|&Delete"
 msgstr ""
 
 msgid "UTF-8 output"
-msgstr ""
+msgstr "UTF-8 出力"
 
 msgid "Full 8 bits output"
 msgstr "8 ビット出力"
@@ -1888,16 +1893,16 @@ msgid "7 bits"
 msgstr "7 ビット"
 
 msgid "Directory tree"
-msgstr ""
+msgstr "ディレクトリー ツリー"
 
 msgid "Use passive mode over pro&xy"
 msgstr ""
 
 msgid "Use &passive mode"
-msgstr ""
+msgstr "パッシブ モードを使う(&P)"
 
 msgid "&Use ~/.netrc"
-msgstr ""
+msgstr "~/.netrc を使う(&U)"
 
 msgid "&Always use ftp proxy"
 msgstr "常に ftp プロキシを使う(&A)"
@@ -1981,21 +1986,17 @@ msgstr "実行時にグループIDを設定"
 msgid "set user ID on execution"
 msgstr "実行時にユーザIDを設定"
 
-#, fuzzy
 msgid "Name:"
-msgstr "名前"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "パーミッション(8進数)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "所有者名"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "グループ名"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "マークをクリア(&l)"
@@ -2043,7 +2044,7 @@ msgid "<Unknown group>"
 msgstr "<不明なグループ>"
 
 msgid "User name"
-msgstr ""
+msgstr "ユーザー名"
 
 msgid "Enter machine name (F1 for details):"
 msgstr ""
@@ -2055,7 +2056,7 @@ msgid "Cannot change directory"
 msgstr "ディレクトリを変更できません"
 
 msgid "Filter"
-msgstr ""
+msgstr "フィルター"
 
 msgid "Set expression for filtering filenames"
 msgstr ""
@@ -2067,32 +2068,32 @@ msgid "&Case sensitive"
 msgstr ""
 
 msgid "&Files only"
-msgstr ""
+msgstr "ファイルのみ(&F)"
 
 #, c-format
 msgid "Link %s to:"
 msgstr ""
 
 msgid "Link"
-msgstr ""
+msgstr "リンク"
 
 #, c-format
 msgid "link: %s"
-msgstr ""
+msgstr "リンク: %s"
 
 #, c-format
 msgid "symlink: %s"
-msgstr ""
+msgstr "シンボリックリンク: %s"
 
 #, c-format
 msgid "Cannot chdir to \"%s\""
 msgstr ""
 
 msgid "View file"
-msgstr ""
+msgstr "ファイルの閲覧"
 
 msgid "Filename:"
-msgstr ""
+msgstr "ファイル名:"
 
 msgid "Filtered view"
 msgstr ""
@@ -2104,7 +2105,7 @@ msgid "Create a new Directory"
 msgstr "新規ディレクトリの作成"
 
 msgid "Enter directory name:"
-msgstr ""
+msgstr "ディレクトリー名の入力:"
 
 msgid "Select"
 msgstr ""
@@ -2125,10 +2126,10 @@ msgid "Which highlighting file you want to edit?"
 msgstr ""
 
 msgid "Compare directories"
-msgstr ""
+msgstr "ディレクトリーの比較"
 
 msgid "Select compare method:"
-msgstr ""
+msgstr "比較方法の選択"
 
 msgid "&Quick"
 msgstr "クイック(&Q)"
@@ -2154,7 +2155,7 @@ msgid "Symlink `%s' points to:"
 msgstr ""
 
 msgid "Edit symlink"
-msgstr ""
+msgstr "シンボリックリンクの編集"
 
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
@@ -3799,15 +3800,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "オプションの変更は"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "スペースで,オプションの"
-
-#~ msgid "to move between options"
-#~ msgstr "移動は矢印で,"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "TあるいはINSでマーク"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-11 18:05+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 10:02+0000\n"
 "Last-Translator: raven <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.net/projects/p/mc/team/pl/)\n"
 "Language: pl\n"
@@ -884,7 +884,7 @@ msgid "Forces xterm features"
 msgstr "Wymusza funkcje programu xterm"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Próbuje użyć starego śledzenia wyróżnienia myszy"
 
 msgid "Disable mouse support in text version"
 msgstr "Wyłącza obsługę myszy w trybie tekstowym"
@@ -2052,21 +2052,17 @@ msgstr "ustaw GID przy wykonaniu"
 msgid "set user ID on execution"
 msgstr "ustaw UID przy wykonaniu"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nazwa"
+msgstr "Nazwa:"
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Uprawnienia (ósemkowo)"
+msgstr "Uprawnienia (ósemkowo):"
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Nazwa właściciela"
+msgstr "Nazwa właściciela:"
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Nazwa grupy"
+msgstr "Nazwa grupy:"
 
 msgid "C&lear marked"
 msgstr "&Wyczyść zaznaczone"
@@ -2269,9 +2265,9 @@ msgstr "Ustawienia"
 msgid "Setup saved to ~/%s"
 msgstr "Zapisano ustawienia do ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Nie można zapisać do pliku"
+msgstr "Nie można zapisać ustawień do ~/%s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Polecenia można wykonywać tylko na lokalnym systemie plików"
@@ -3993,15 +3989,3 @@ msgstr "Ukończono wyszukiwanie"
 
 msgid "Continue from beginning?"
 msgstr "Kontynuować od początku?"
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Spacja zmienia opcję,"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "klawisze kursora przenoszą"
-
-#~ msgid "to move between options"
-#~ msgstr "pomiędzy opcjami, a"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "T lub Ins zaznacza"

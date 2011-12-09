@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-06-05 16:10+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-11-04 16:05+0000\n"
 "Last-Translator: nippur <nippur@fedoraproject.org>\n"
 "Language-Team: Dutch (http://www.transifex.net/projects/p/mc/team/nl/)\n"
 "Language: nl\n"
@@ -884,7 +884,7 @@ msgid "Forces xterm features"
 msgstr "Dwingt xterm features"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Probeert oude highlight mouse tracking te gebruiken"
 
 msgid "Disable mouse support in text version"
 msgstr "Muisondersteuning uitschakelen in de tekstversie"
@@ -2050,21 +2050,17 @@ msgstr "zet groeps-ID(GID) bij uitvoering"
 msgid "set user ID on execution"
 msgstr "zet gebruikers-ID(UID) bij uitvoering"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Naam"
+msgstr "Naam:"
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Toegangsrechten (octaal)"
+msgstr "Permissies (octaal):"
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Naam van de eigenaar"
+msgstr "Naam van de eigenaar:"
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Naam van de groep"
+msgstr "Groepsnaam:"
 
 msgid "C&lear marked"
 msgstr "Mar&kering opheffen"
@@ -2267,9 +2263,9 @@ msgstr "Instellingen"
 msgid "Setup saved to ~/%s"
 msgstr "Instellingen opgeslagen in ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr " Kan niet opslaan naar bestand"
+msgstr "Kan setup niet opslaan in  ~/%s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "U kunt geen opdrachten uitvoeren op non-lokale bestandssystemen"
@@ -3991,15 +3987,3 @@ msgstr "Zoeken afgerond"
 
 msgid "Continue from beginning?"
 msgstr "Doorgaan vanaf het begin?"
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Gebruik de spatiebalk om"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "een optie te veranderen, pijltoetsen"
-
-#~ msgid "to move between options"
-#~ msgstr "om tussen opties te schakelen"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "en T of INS om te markeren"

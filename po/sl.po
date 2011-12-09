@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.net/projects/p/mc/team/sl/)\n"
 "Language: sl\n"
@@ -1979,21 +1979,17 @@ msgstr "nastavi skupinski ID ob zagonu"
 msgid "set user ID on execution"
 msgstr "nastavi uporabnikov ID ob zagonu"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Imenu"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Dovoljenja (osmiško)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Ime lastnika"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Ime skupine"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Počisti označeno"
@@ -3812,15 +3808,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Uporabite PRESLEDNICO za spremembo"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "možnosti, SMERNE TIPKE"
-
-#~ msgid "to move between options"
-#~ msgstr "za premik med možnostmi"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "in T ali INS za označitev"

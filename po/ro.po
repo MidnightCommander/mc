@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.net/projects/p/mc/team/ro/)\n"
 "Language: ro\n"
@@ -1976,21 +1976,17 @@ msgstr "setez ID grup la execuţie"
 msgid "set user ID on execution"
 msgstr "setez ID propr. la exec."
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nume"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Drepturi (Octal)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Numele proprietarului"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Numele grupului"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "Şter&g marc."
@@ -3802,15 +3798,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Apăsaţi SPAŢIU pentru"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "schimbarea unei opţiuni,"
-
-#~ msgid "to move between options"
-#~ msgstr "SĂGEŢILE pentru navigare"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "şi T sau INS pentru marcare"

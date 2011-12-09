@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# Dušan Lago <dusan.lago@gmail.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-05 08:03+0000\n"
+"Last-Translator: dudko <dusan.lago@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.net/projects/p/mc/team/sk/)\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
 msgid "Warning: cannot load codepages list"
-msgstr ""
+msgstr "Upozornenie: nemožno načítať zoznam kódu"
 
 msgid "7-bit ASCII"
 msgstr "7-bitový ASCII"
@@ -34,6 +35,9 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
+"Súbor \"%s\" je práve editovaný.\n"
+"Užívateľ:%s\n"
+"ID procesu:%d"
 
 msgid "File locked"
 msgstr "Súbor zamknutý"
@@ -45,10 +49,10 @@ msgid "&Ignore lock"
 msgstr "&Ignorovať zámok"
 
 msgid "Search string not found"
-msgstr ""
+msgstr "Hladaný reťazec nebol nájdený"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "Zatiaľ nie je implementovaný"
 
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
@@ -194,7 +198,7 @@ msgid "* on keypad"
 msgstr "* na num. kláves."
 
 msgid "Escape key"
-msgstr ""
+msgstr "Klávesa Escape"
 
 msgid "Left arrow keypad"
 msgstr "Ľava šípka na kláv."
@@ -311,10 +315,10 @@ msgid "Pipe"
 msgstr "Rúra"
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "Ľavá zátvorka"
 
 msgid "Right parenthesis"
-msgstr ""
+msgstr "Pravá zátvorka"
 
 msgid "Left bracket"
 msgstr ""
@@ -931,6 +935,10 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"Farby:\n"
+"čierna, šedá, červená, svetlo červená, zelená, svetlo zelená, hnedá\n"
+"žltá, modrá, svetlo modrá, purpurová, svetlo purpurová, azúrová, svetlo "
+"zelenomodrá, svetlo šedá a biela\n"
 
 msgid "Color options"
 msgstr "Možnosti farieb"
@@ -1980,21 +1988,17 @@ msgstr "nastav skup. ID pre vykon."
 msgid "set user ID on execution"
 msgstr "nastav použ. ID pre vykon."
 
-#, fuzzy
 msgid "Name:"
-msgstr "Meno"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Práva (Osmičkové)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Meno vlastníka"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Meno skupiny"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "z&Mazať označ."
@@ -3811,15 +3815,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Použite medzeru pre zmenu"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "voľby, KURZOROVÉ KLÁVESY"
-
-#~ msgid "to move between options"
-#~ msgstr "na presun medzi voľbami"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "a T alebo INS pre označ."

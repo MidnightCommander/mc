@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-06-20 22:26+0000\n"
-"Last-Translator: TrAndy <signupbox@om.it.eu.org>\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
+"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Italian (Italy) (http://www.transifex.net/projects/p/mc/team/"
 "it_IT/)\n"
 "Language: it_IT\n"
@@ -2020,9 +2020,8 @@ msgstr ""
 msgid "Permissions (octal):"
 msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Immettere il nome del file:"
+msgstr ""
 
 msgid "Group name:"
 msgstr ""
@@ -2222,9 +2221,9 @@ msgstr ""
 msgid "Setup saved to ~/%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Impossibile salvare in un file"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""

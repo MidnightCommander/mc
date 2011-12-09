@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/mc/team/cs/)\n"
 "Language: cs\n"
@@ -2031,21 +2031,17 @@ msgstr "nastavit GID při spuštění"
 msgid "set user ID on execution"
 msgstr "nastavit UID při spuštění"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Jméno"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Práva (Octal)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Jméno vlastníka"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Jméno skupiny"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Smazat označené"
@@ -2248,9 +2244,9 @@ msgstr "Nastavení"
 msgid "Setup saved to ~/%s"
 msgstr "Nastavení uloženo do ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Nelze uložit soubor"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Pokud nepracujete s lokálními soubory, nelze spouštět žádné příkazy"
@@ -3971,15 +3967,3 @@ msgstr "Hledání dokončeno"
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Použijte MEZERNÍK ke změně"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "nastavení, ŠIPKY pro pohyb"
-
-#~ msgid "to move between options"
-#~ msgstr "mezi volbami nastavení a T"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "nebo INS pro označení"

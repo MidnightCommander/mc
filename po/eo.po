@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-07-31 03:00+0000\n"
-"Last-Translator: zooplah <zooplah@gmail.com>\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
+"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.net/projects/p/mc/team/eo/)\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -2048,21 +2048,17 @@ msgstr "agordi grupan identigilon dum plenumigo"
 msgid "set user ID on execution"
 msgstr "agordi uzantan identigilon dum plenumigo"
 
-#, fuzzy
 msgid "Name:"
-msgstr "Nomo"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "Permesoj (Okuma)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Estra nomo"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Grupa nomo"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "&Forviŝi markitajn"
@@ -2265,9 +2261,9 @@ msgstr "Agordo"
 msgid "Setup saved to ~/%s"
 msgstr "Agordo konservita al ~/%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to ~/%s"
-msgstr "Ne povas konservi al dosiero"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Ne povas plenumi komandojn en foraj dosiersistemoj"
@@ -3987,15 +3983,3 @@ msgstr "Serĉo finita"
 
 msgid "Continue from beginning?"
 msgstr "Ĉu daŭrigi je komenco?"
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Uzi spaceton por ŝanĝi"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "elekton, sagoklavoj"
-
-#~ msgid "to move between options"
-#~ msgstr "por movi inter agordaĵoj"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "kaj je T aŭ ENMETO por marki"

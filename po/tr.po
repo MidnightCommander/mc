@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-09-28 21:18+0300\n"
-"PO-Revision-Date: 2011-04-04 07:37+0000\n"
+"POT-Creation-Date: 2011-12-09 17:33+0300\n"
+"PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.net/projects/p/mc/team/tr/)\n"
 "Language: tr\n"
@@ -1977,21 +1977,17 @@ msgstr "gruptakiler çalıştırabilir"
 msgid "set user ID on execution"
 msgstr "kullanıcı çalıştırabilir"
 
-#, fuzzy
 msgid "Name:"
-msgstr "İsim"
+msgstr ""
 
-#, fuzzy
 msgid "Permissions (octal):"
-msgstr "İzinler (Sekizlik)"
+msgstr ""
 
-#, fuzzy
 msgid "Owner name:"
-msgstr "Sahibi"
+msgstr ""
 
-#, fuzzy
 msgid "Group name:"
-msgstr "Grup ismi"
+msgstr ""
 
 msgid "C&lear marked"
 msgstr "İşa&retlenenleri Temizle"
@@ -3795,15 +3791,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Use SPACE to change"
-#~ msgstr "Değiştirirken BOŞLUK tuşunu"
-
-#~ msgid "an option, ARROW KEYS"
-#~ msgstr "gezinirken OK TUŞLARINI,"
-
-#~ msgid "to move between options"
-#~ msgstr "işaretlemede T veya INS"
-
-#~ msgid "and T or INS to mark"
-#~ msgstr "tuşlarını kullanabilirsiniz"
