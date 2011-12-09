@@ -1,21 +1,47 @@
+Version 4.7.5.6
+
+- Core
+
+    * Faster startup (#2637)
+
+- Editor
+
+    * Lex/Flex sources (extension .l) handled by yxx.syntax file. Yacc/Bison syntax completed with all symbols (#1647)
+
+- Fixes
+    * Cn't compile on OpenIndiana (Solaris) (#2643)
+    * In "Copy File" dialog the "preserve Attributes" checkbox is always unchecked
+      for filesystems mounted with FUSE (#2254)
+    * Save of some learned keys is broken (#2676)
+    * Command line cursor misplaced after a resize in viewer/editor (#2678)
+    * Editor word completion should ignore the current word (#2614)
+    * Editor sometimes shows two dots instead of letter (#2372)
+    * Viewer sometimes shows two dots instead of letter (#1730)
+    * Viewer shows two dialogs when searcj hot found (#2677)
+    * extfs: strange error message when opening a 7z file if p7zip is not installed (#2598)
+    * Cannot navigate over spftp servers (#2634)
+    * mc adds spaces at the beginning of all files/dirs on ftp servers (#2635)
+
+
 Version 4.7.5.5
 
 - Fixes
 
     * ctrl-x shortcut for extended keybindings mode doesn't work out of box (#2609)
     * Viewer: cursor position is not restored in hex mode (#2543)
-    * FISH: broken panels drawing after entering password (#2611) 
+    * FISH: broken panels drawing after entering password (#2611)
+
 
 Version 4.7.5.4
 
 - Core
 
-    * Added -g/--oldmouse option to support of NORMAL/BUTTON_EVENT mouse type (useful for screen/tmux) (#2601) 
+    * Added -g/--oldmouse option to support of NORMAL/BUTTON_EVENT mouse type (useful for screen/tmux) (#2601)
 
 - Misc
 
     * New file bindings:
-        - .3gp - video (#2583) 
+        - .3gp - video (#2583)
 
 - Fixes
 
@@ -31,6 +57,7 @@ Version 4.7.5.4
     * File name length is limited in tar archive (#2201)
     * Ftp failures - leading white space in file name (#2594)
     * FISH hangs while copiyng a lot of small files (#2605) 
+
 
 Version 4.7.5.3
 
