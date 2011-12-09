@@ -141,8 +141,9 @@ incomplete, use `configure --help' to get the full list):
 `--with-homedir'
      This option allow users  to place user config directories in any
      place. By default value is 'XDG', this mean, mc will respect XDG
-     standards. If other value will specified, this will used as directory
-     name (relative to $HOME).
+     standards. If other value is specified, this will used as directory
+     name (relative to $HOME if path is relative, or as is if path is
+     absolute).
 
 VFS options:
 - - - - - -
