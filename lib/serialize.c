@@ -321,7 +321,7 @@ mc_deserialize_config (const char *data, GError ** error)
             break;
         case WAIT_VALUE:
             current_value = mc_deserialize_str ('v', data, error);
-            if (current_param == NULL)
+            if (current_value == NULL)
             {
                 g_free (current_group);
                 g_free (current_param);
