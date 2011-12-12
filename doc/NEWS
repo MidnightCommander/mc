@@ -8,6 +8,9 @@ Version 4.7.5.6
 
     * Lex/Flex sources (extension .l) handled by yxx.syntax file. Yacc/Bison syntax completed with all symbols (#1647)
 
+- Misc
+    * A few useful additions to filehighlight.ini (#2646)
+
 - Fixes
 
     * Editor sometimes shows two dots instead of letter (#2372)
