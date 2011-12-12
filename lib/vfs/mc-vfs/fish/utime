@@ -1,0 +1,10 @@
+#UTIME $FISH_FILEATIME $FISH_FILEMTIME $FISH_FILENAME
+if [ -n "$FISH_HAVE_PERL" ] &&
+   perl -e 'utime '$FISH_FILEATIME','$FISH_FILEMTIME',@ARGV;' "/${FISH_FILENAME}" 2>/dev/null; then
+  echo "### 000"
+elif TZ=UTC touch -m -t $FISH_TOUCHMTIME "/${FISH_FILENAME}" 2>/dev/null &&
+     TZ=UTC touch -a -t $FISH_TOUCHATIME "/${FISH_FILENAME}" 2>/dev/null; then
+  echo "### 000"
+else
+  echo "### 500"
+fi
