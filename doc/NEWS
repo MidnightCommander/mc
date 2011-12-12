@@ -9,19 +9,17 @@ Version 4.7.5.6
     * Lex/Flex sources (extension .l) handled by yxx.syntax file. Yacc/Bison syntax completed with all symbols (#1647)
 
 - Fixes
-    * Cn't compile on OpenIndiana (Solaris) (#2643)
+
+    * Editor sometimes shows two dots instead of letter (#2372)
+    * can't compile on OpenIndiana (Solaris) (#2643)
     * In "Copy File" dialog the "preserve Attributes" checkbox is always unchecked
       for filesystems mounted with FUSE (#2254)
-    * Save of some learned keys is broken (#2676)
-    * Command line cursor misplaced after a resize in viewer/editor (#2678)
     * Editor word completion should ignore the current word (#2614)
-    * Editor sometimes shows two dots instead of letter (#2372)
     * Viewer sometimes shows two dots instead of letter (#1730)
-    * Viewer shows two dialogs when searcj hot found (#2677)
     * extfs: strange error message when opening a 7z file if p7zip is not installed (#2598)
-    * Cannot navigate over spftp servers (#2634)
+    * cannot navigate over spftp servers (#2634)
     * mc adds spaces at the beginning of all files/dirs on ftp servers (#2635)
-
+    * mc does not preserve file mtime when copying over ssh (#2625)
 
 Version 4.7.5.5
 
