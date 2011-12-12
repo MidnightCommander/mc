@@ -39,6 +39,7 @@
 #define FISH_UNLINK_FILE        "unlink"
 #define FISH_CHOWN_FILE         "chown"
 #define FISH_CHMOD_FILE         "chmod"
+#define FISH_UTIME_FILE         "utime"
 #define FISH_RMDIR_FILE         "rmdir"
 #define FISH_LN_FILE            "ln"
 #define FISH_MV_FILE            "mv"
