@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-09-20 09:48+0000\n"
-"Last-Translator: mbouzada <mbouzada@gmail.com>\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-07 11:21+0000\n"
+"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.net/projects/p/mc/team/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,6 +73,9 @@ msgstr "&Ignorar bloqueo"
 msgid "Cannot create %s directory"
 msgstr "Non é posíbel crear o directorio %s"
 
+msgid "FATAL: not a directory:"
+msgstr ""
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr "Produciuse un erro na migración da configuración do usuario: %s"
@@ -88,6 +91,12 @@ msgstr ""
 "cara os directorios recomendados por Freedesktop.\n"
 "Para obter máis detalles consulte\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
+msgstr ""
 
 msgid "Search string not found"
 msgstr "Non se atopa a cadea buscada"
@@ -352,6 +361,9 @@ msgstr "Símbolo do dólar"
 msgid "Quotation mark"
 msgstr "Comiñas (\")"
 
+msgid "Percent sign"
+msgstr ""
+
 msgid "Caret"
 msgstr "Circunflexo"
 
@@ -418,6 +430,9 @@ msgstr "Alt"
 
 msgid "Shift"
 msgstr "Maiús"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variábel de contorno TERM está sen definir!\n"
 
 #, c-format
 msgid ""
@@ -561,6 +576,9 @@ msgstr "Editar un ficheiro"
 
 msgid "Forces xterm features"
 msgstr "Forzar as funcionalidades de xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Desactivar o rato na versión texto"
@@ -1974,17 +1992,14 @@ msgstr ""
 "Midnight Commander."
 
 #, c-format
-msgid "%s%s%s file error"
-msgstr "Produciuse un erro no ficheiro %s%s%s"
+msgid "%s file error"
+msgstr ""
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
-"O formato do ficheiro %s%s%s cambiou coa versión 3.0. Pode facer unha copia "
-"de %smc.ext ou empregalo como modelo."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Copiar"
@@ -2230,6 +2245,12 @@ msgid ""
 msgstr ""
 "Non é posíbel identificar o ficheiro destino «%s»\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2657,19 +2678,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "Ficheiro: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Nodos libres: %ld (%ld%%) de %ld"
-
 msgid "No node information"
 msgstr "Sen información sobre nodos"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Espazo dispoñíbel %s (%d%%) de %s"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "Sen información do espazo"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2800,6 +2820,9 @@ msgstr "Conexión por &Terminal..."
 
 msgid "SM&B link..."
 msgstr "Conexión por &SMB..."
+
+msgid "Paneli&ze"
+msgstr ""
 
 msgid "&Rescan"
 msgstr "Actuali&Zar"
@@ -2936,9 +2959,6 @@ msgstr "Sistema de ficheiros &Virtual (VFS)..."
 msgid "Panels:"
 msgstr "Paneis:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variábel de contorno TERM está sen definir!\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2975,6 +2995,9 @@ msgstr "ButtonBar|Renomear/Mover"
 msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|Crear directorio"
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nunca"
 
@@ -2986,6 +3009,9 @@ msgstr "&Sempre"
 
 msgid "A&uto save setup"
 msgstr "Configuración de &Auto-gardar "
+
+msgid "Preallocate &space before file copying"
+msgstr ""
 
 msgid "Sa&fe delete"
 msgstr "&Borrado seguro"
@@ -3240,6 +3266,9 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s en %d ficheiro"
 msgstr[1] "%s en %d ficheiros"
+
+msgid "Panelize"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr "Etiqueta descoñecida no formato de pantalla: "
@@ -3588,6 +3617,9 @@ msgstr "Directorio de configuración:"
 
 msgid "Data directory:"
 msgstr "Directorio de datos:"
+
+msgid "VFS plugins and scripts:"
+msgstr ""
 
 msgid "User data"
 msgstr "Datos do usuario"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 00:32+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.net/projects/p/mc/team/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -68,6 +68,9 @@ msgstr "잠금 무시(&I)"
 msgid "Cannot create %s directory"
 msgstr "%s 디렉터리을 만들 수 없습니다"
 
+msgid "FATAL: not a directory:"
+msgstr ""
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr ""
@@ -78,6 +81,12 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
 msgstr ""
 
 msgid "Search string not found"
@@ -338,6 +347,9 @@ msgstr "달라사인"
 msgid "Quotation mark"
 msgstr "퀘스천 마크"
 
+msgid "Percent sign"
+msgstr ""
+
 msgid "Caret"
 msgstr "캐럿"
 
@@ -404,6 +416,9 @@ msgstr "알트"
 
 msgid "Shift"
 msgstr "쉬프트"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 
 #, c-format
 msgid ""
@@ -547,6 +562,9 @@ msgstr "한 파일 편집"
 
 msgid "Forces xterm features"
 msgstr "xterm 기능을 무조건 사용"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "텍스트 버전에서 마우스 사용안함"
@@ -1885,14 +1903,13 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "%s%s%s file error"
+msgid "%s file error"
 msgstr ""
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2091,6 +2108,12 @@ msgstr ""
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -2487,19 +2510,18 @@ msgstr "미드나잇 코맨더 %s"
 msgid "File: %s"
 msgstr ""
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr ""
-
 msgid "No node information"
 msgstr "노드 정보 없음"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "빈 공간: %s (%d%%) of %s"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "빈 공간: 정보 없음"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2629,6 +2651,9 @@ msgstr "쉘 연결(&H)..."
 
 msgid "SM&B link..."
 msgstr "SMB 연결(&B)..."
+
+msgid "Paneli&ze"
+msgstr ""
 
 msgid "&Rescan"
 msgstr "다시읽기(&R)"
@@ -2765,9 +2790,6 @@ msgstr "가상 파일체계(&V)..."
 msgid "Panels:"
 msgstr ""
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2803,6 +2825,9 @@ msgstr "ButtonBar|이동"
 msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|디렉만들기"
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "절대(&N)"
 
@@ -2813,6 +2838,9 @@ msgid "Alwa&ys"
 msgstr "항상(&Y)"
 
 msgid "A&uto save setup"
+msgstr ""
+
+msgid "Preallocate &space before file copying"
 msgstr ""
 
 msgid "Sa&fe delete"
@@ -3062,6 +3090,9 @@ msgstr[0] ""
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
+
+msgid "Panelize"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3397,6 +3428,9 @@ msgid "Config directory:"
 msgstr ""
 
 msgid "Data directory:"
+msgstr ""
+
+msgid "VFS plugins and scripts:"
 msgstr ""
 
 msgid "User data"

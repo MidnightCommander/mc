@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-08-17 17:46+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-10 00:07+0000\n"
 "Last-Translator: zooplah <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.net/projects/p/mc/team/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -71,6 +71,9 @@ msgstr "&Ignori fiksilon"
 msgid "Cannot create %s directory"
 msgstr "Ne eblas krei dosierujon %s"
 
+msgid "FATAL: not a directory:"
+msgstr "PEREIGA: ne estas dosierujo:"
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr "Eraro okazis dum migri uzanto-agordon: %s"
@@ -86,6 +89,14 @@ msgstr ""
 "al dosierujoj rekomendataj de Freedesktop.\n"
 "Por akiri pliajn informojn, bonvolu viziti\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
+msgstr ""
+"Via eksa agordo estis elmigrinta el %s\n"
+"al %s\n"
 
 msgid "Search string not found"
 msgstr "Serĉita ĉeno ne trovita"
@@ -348,6 +359,9 @@ msgstr "Dolara signo"
 msgid "Quotation mark"
 msgstr "Citilo"
 
+msgid "Percent sign"
+msgstr "Elcenta signo"
+
 msgid "Caret"
 msgstr "Ĉapelo"
 
@@ -414,6 +428,9 @@ msgstr "Alternativo"
 
 msgid "Shift"
 msgstr "Uskleca inversigilo"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La medivariablo TERM ne estas valorizita!\n"
 
 #, c-format
 msgid ""
@@ -523,7 +540,7 @@ msgid "Error"
 msgstr "Eraro"
 
 msgid "Displays the current version"
-msgstr "Montras la uzatan eldonon"
+msgstr "Eligi la uzatan eldonon"
 
 msgid "Print data directory"
 msgstr "Eligi datuman dosierujon"
@@ -538,10 +555,10 @@ msgid "Print last working directory to specified file"
 msgstr "Eligi lastan labordosierujon al specifan dosieron"
 
 msgid "Enables subshell support (default)"
-msgstr "Aktivigas subŝelon (apriore)"
+msgstr "Aktivigi subŝelon (apriore)"
 
 msgid "Disables subshell support"
-msgstr "Malaktivigas subŝelon"
+msgstr "Malaktivigi subŝelon"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Protokoli FTP-dialogon al specifa dosiero"
@@ -550,44 +567,47 @@ msgid "Set debug level"
 msgstr "Specifi senerarigan nivelon"
 
 msgid "Launches the file viewer on a file"
-msgstr "Plenumigas la dosiero-legilon je la dosiero"
+msgstr "Plenumigi la dosiero-legilon je la dosiero"
 
 msgid "Edits one file"
-msgstr "Redaktas unuopan dosieron"
+msgstr "Redakti unuopan dosieron"
 
 msgid "Forces xterm features"
-msgstr "Devigas xterm-trajtojn"
+msgstr "Devigi xterm-trajtojn"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr "Provi uzi antaŭan reĝimon de musa spurado"
 
 msgid "Disable mouse support in text version"
 msgstr "Malebligi musan regon en teksta variaĵo"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Provas uzi termcap-on anstataŭ terminfo-on"
+msgstr "Provi uzi termcap-on anstataŭ terminfo-on"
 
 msgid "To run on slow terminals"
 msgstr "Por plenumiĝi en malrapidaj terminaloj"
 
 msgid "Use stickchars to draw"
-msgstr "Uzi stango-signojn por skizi"
+msgstr "Ornami sole per askiaj signoj"
 
 msgid "Resets soft keys on HP terminals"
-msgstr "Restarigas molajn klavojn en HP-terminaloj"
+msgstr "Restarigi molajn klavojn en HP-terminaloj"
 
 msgid "Load definitions of key bindings from specified file"
-msgstr "Ŝargi difinojn de klavaj bindaĵoj el specifa dosiero"
+msgstr "Ŝargi difinojn de klavaj asignoj el specifa dosiero"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
 msgstr ""
-"Ne ŝargu difinojn de klavaj bindaĵoj el specifa dosiero; uzi aŭtomatajn"
+"Ne ŝargi difinojn de klavaj asignoj el specifa dosiero; uzi aŭtomatajn"
 
 msgid "Requests to run in black and white"
-msgstr "Petas plenumiĝi unukolore"
+msgstr "Peti plenumiĝi unukolore"
 
 msgid "Request to run in color mode"
-msgstr "Petas plenumiĝi bunte"
+msgstr "Peti plenumiĝi bunte"
 
 msgid "Specifies a color configuration"
-msgstr "Specifas koloran agordon"
+msgstr "Specifi koloran agordon"
 
 msgid "Show mc with specified skin"
 msgstr "Montri kun specifa etoso"
@@ -1911,7 +1931,7 @@ msgid "SMB link to machine"
 msgstr "SMB-i ligilon al servilo"
 
 msgid "Undelete files on an ext2 file system"
-msgstr "Reatingi dosierojn en ext2-dosiersistemon"
+msgstr "Remeti dosierojn en ext2-dosiersistemon"
 
 msgid ""
 "Enter device (without /dev/) to undelete\n"
@@ -1971,17 +1991,16 @@ msgstr ""
 "Commander."
 
 #, c-format
-msgid "%s%s%s file error"
-msgstr "%s%s%s: dosiera eraro"
+msgid "%s file error"
+msgstr "%s dosiera eraro"
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
-"La aranĝo de la dosiero %s%s%s ŝanĝiĝis en eldono 3.0. Vi eble povos aŭ "
-"kopii ĝin el %smc.txt aŭ uzi tion dosieron kiel ekzemplon."
+"La aranĝo de la dosiero %s ŝanĝiĝis en eldono 3.0. Vi eble povos aŭ kopii "
+"ĝin el %smc.txt aŭ uzi tiun dosieron kiel ekzemplon."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopii"
@@ -2225,6 +2244,14 @@ msgid ""
 "%s"
 msgstr ""
 "Ne eblas fstat-i celan dosieron \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas generi spacon por cela dosiero \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2653,19 +2680,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "Dosiero: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Liberaj nodoj: %ld (%ld%%) el %ld"
-
 msgid "No node information"
 msgstr "Neniuj nodaj informoj"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Libera spaco: %s (%d%%) el %s"
+msgid "Free nodes:"
+msgstr "Liberaj nodoj:"
 
 msgid "No space information"
 msgstr "Neniuj spacaj informoj"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr "Restanta spaco: %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:      %s"
@@ -2796,6 +2822,9 @@ msgstr "Ŝ&ela ligilo..."
 
 msgid "SM&B link..."
 msgstr "SM&B-a ligilo..."
+
+msgid "Paneli&ze"
+msgstr "F&lankigi"
 
 msgid "&Rescan"
 msgstr "&Refreŝigi"
@@ -2932,9 +2961,6 @@ msgstr "&Virtualaj dosiersistemoj..."
 msgid "Panels:"
 msgstr "Flankoj:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La medivariablo TERM ne estas valorizita!\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2971,6 +2997,9 @@ msgstr "ButtonBar|Movi"
 msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|Mkdir"
 
+msgid "Memory exhausted!"
+msgstr "Memoro eluzita!"
+
 msgid "&Never"
 msgstr "&Neniam"
 
@@ -2982,6 +3011,9 @@ msgstr "Ĉ&iam"
 
 msgid "A&uto save setup"
 msgstr "Aŭtomate konservi agor&don"
+
+msgid "Preallocate &space before file copying"
+msgstr "Generi &spacon antaŭ ol kopii dosieron"
 
 msgid "Sa&fe delete"
 msgstr "Sendanĝera &forigo"
@@ -3083,7 +3115,7 @@ msgid "Re&verse files only"
 msgstr "Nur in&versigi dosierojn"
 
 msgid "Ma&rk moves down"
-msgstr "Marko movas suben"
+msgstr "Mar&ko movas suben"
 
 msgid "&Fast dir reload"
 msgstr "&Rapide reŝargi dosierujojn"
@@ -3236,6 +3268,9 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s en %d dosiero"
 msgstr[1] "%s en %d dosieroj"
+
+msgid "Panelize"
+msgstr "F&lankigi"
 
 msgid "Unknown tag on display format:"
 msgstr "Nekonata etikedo en elmontra formato:"
@@ -3582,6 +3617,9 @@ msgstr "Agorda dosierujo:"
 
 msgid "Data directory:"
 msgstr "Datuma dosierujo:"
+
+msgid "VFS plugins and scripts:"
+msgstr "Kromprogramoj kaj programetoj por VFS:"
 
 msgid "User data"
 msgstr "Uzanto-datumoj"

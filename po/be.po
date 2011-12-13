@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-09-15 10:31+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.net/projects/p/mc/team/be/)\n"
 "MIME-Version: 1.0\n"
@@ -71,6 +71,9 @@ msgstr "&Ігнараваць блакоўку"
 msgid "Cannot create %s directory"
 msgstr "Немагчыма стварыць каталог %s"
 
+msgid "FATAL: not a directory:"
+msgstr ""
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr "Адбылася памылка пры пераносе настроек карыстальніка: %s"
@@ -86,6 +89,12 @@ msgstr ""
 "да рэкамендаваных Freedesktop дырэкторый.\n"
 "Для атрымання больш падрабязнай інфармацыі, калі ласка,\n"
 "наведайце http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
+msgstr ""
 
 msgid "Search string not found"
 msgstr "Радок пошуку не знойдзены"
@@ -348,6 +357,9 @@ msgstr "Знак даляра"
 msgid "Quotation mark"
 msgstr "Знак цытаты"
 
+msgid "Percent sign"
+msgstr ""
+
 msgid "Caret"
 msgstr "карэтка"
 
@@ -414,6 +426,9 @@ msgstr "Alt"
 
 msgid "Shift"
 msgstr "Shift"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Пераменная асяродку TERM не вызначана!\n"
 
 #, c-format
 msgid ""
@@ -558,6 +573,9 @@ msgstr "Рэдагуе адзін файл"
 
 msgid "Forces xterm features"
 msgstr "Навязвае ўласцівасці xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Адключыць падтрымку мышы ў тэкставай вэрсіі"
@@ -1971,17 +1989,14 @@ msgstr ""
 "ўсталёўцы. Калі ласка, вазьміце свежую копію з пакету Midnight Commander."
 
 #, c-format
-msgid "%s%s%s file error"
-msgstr "%s%s%s памылка файлу"
+msgid "%s file error"
+msgstr ""
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
-"Фармат файла %s%s%s змянілся з версіі 3.0. Вы мусіце або скапіяваць яго з "
-"%smc.ext, або выкарыстаць яго як прыклад таго, як напісаць свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Капіраванне"
@@ -2226,6 +2241,12 @@ msgid ""
 msgstr ""
 "Немагчыма атрымаць ўласцівасці мэтавага файла \"%s\"\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2655,19 +2676,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "Файл: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Свабодна вузлоў: %ld (%ld%%) з %ld"
-
 msgid "No node information"
 msgstr "Няма інфармацыі пра іноды"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Вол. прастора: %s (%d%%) з %s"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "Няма інфармацыі пра прастору"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2800,6 +2820,9 @@ msgstr "&Лучыва абалонкі"
 
 msgid "SM&B link..."
 msgstr "SM&B сувязь..."
+
+msgid "Paneli&ze"
+msgstr ""
 
 msgid "&Rescan"
 msgstr "Пера&сканiраваць"
@@ -2936,9 +2959,6 @@ msgstr "Віртуальныя &ФС..."
 msgid "Panels:"
 msgstr "Панелi:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Пераменная асяродку TERM не вызначана!\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2977,6 +2997,9 @@ msgstr "Перанос"
 msgid "ButtonBar|Mkdir"
 msgstr "НвКтлаг"
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Ніколі"
 
@@ -2988,6 +3011,9 @@ msgstr "&Заўсёды"
 
 msgid "A&uto save setup"
 msgstr "&Аўтазахаванне налад"
+
+msgid "Preallocate &space before file copying"
+msgstr ""
 
 msgid "Sa&fe delete"
 msgstr "Бяспечнае в&ыдаленне"
@@ -3246,6 +3272,9 @@ msgstr[0] "%s у %d файле"
 msgstr[1] "%s у %d файлах"
 msgstr[2] "%s у %d файлах"
 msgstr[3] "%s у %d файлах"
+
+msgid "Panelize"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr "Невядомы тэг у фармаце адлюстравання:"
@@ -3592,6 +3621,9 @@ msgstr "Дырэкторыя канфігурацыі"
 
 msgid "Data directory:"
 msgstr "Дырэкторыя дадзеных:"
+
+msgid "VFS plugins and scripts:"
+msgstr ""
 
 msgid "User data"
 msgstr "Дадзеныя карыстальніка"

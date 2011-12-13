@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 00:32+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/mc/team/de/)\n"
 "MIME-Version: 1.0\n"
@@ -72,6 +72,9 @@ msgstr "Sperre &ignorieren"
 msgid "Cannot create %s directory"
 msgstr "Kann das Verzeichnis %s nicht erstellen"
 
+msgid "FATAL: not a directory:"
+msgstr ""
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr ""
@@ -82,6 +85,12 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
 msgstr ""
 
 msgid "Search string not found"
@@ -344,6 +353,9 @@ msgstr "Dollarzeichen"
 msgid "Quotation mark"
 msgstr "Anführungszeichen"
 
+msgid "Percent sign"
+msgstr ""
+
 msgid "Caret"
 msgstr "Zirkumflex"
 
@@ -410,6 +422,9 @@ msgstr "Alt"
 
 msgid "Shift"
 msgstr "Shift"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Die TERM-Variable ist nicht gesetzt!\n"
 
 #, c-format
 msgid ""
@@ -553,6 +568,9 @@ msgstr "Bearbeitet eine Datei"
 
 msgid "Forces xterm features"
 msgstr "Erzwingt xterm-Funktionen"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Mausunterstützung in der Textversion abschalten"
@@ -1683,16 +1701,16 @@ msgid "set user ID on execution"
 msgstr "Setze Nutzer-ID bei Ausführung"
 
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 msgid "Permissions (octal):"
-msgstr ""
+msgstr "Rechte (oktal):"
 
 msgid "Owner name:"
-msgstr ""
+msgstr "Eigentümer:"
 
 msgid "Group name:"
-msgstr ""
+msgstr "Gruppe:"
 
 msgid "C&lear marked"
 msgstr "Markierte &aufheben"
@@ -1893,11 +1911,11 @@ msgstr "Einstellungen"
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr ""
+msgstr "Einstellungen gespeichert in %s"
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr ""
+msgstr "Kann Einstellungen nicht in %s speichern"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Sie können keine Befehle auf nichtlokalen Dateisystemen ausführen"
@@ -1939,14 +1957,13 @@ msgstr ""
 " aus dem \"Midnight Commander\"-Package."
 
 #, c-format
-msgid "%s%s%s file error"
+msgid "%s file error"
 msgstr ""
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2192,6 +2209,12 @@ msgid ""
 msgstr ""
 "Kann Zieldatei \"%s\" nicht untersuchen\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2619,19 +2642,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "Datei: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Freie Knoten: %ld (%ld%%) von %ld"
-
 msgid "No node information"
 msgstr "Keine Knoten-Information"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Freier Platz: %s (%d%%) von %s"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "Keine Information über Speicherplatz"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2763,6 +2785,9 @@ msgstr "S&hell-Verbindung..."
 msgid "SM&B link..."
 msgstr "S&MB-Verbindung..."
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Rescan"
 msgstr "&Neu einlesen"
 
@@ -2815,7 +2840,7 @@ msgid "U&nselect group"
 msgstr "Gruppe ab&wählen"
 
 msgid "&Invert selection"
-msgstr ""
+msgstr "Auswahl &umkehren"
 
 msgid "E&xit"
 msgstr "&Verlassen"
@@ -2836,10 +2861,10 @@ msgid "Switch &panels on/off"
 msgstr "&Panels an/aus"
 
 msgid "&Compare directories"
-msgstr "Verzeichnis ver&gleichen"
+msgstr "Verzeichnisse ver&gleichen"
 
 msgid "C&ompare files"
-msgstr ""
+msgstr "&Dateien vergleichen"
 
 msgid "E&xternal panelize"
 msgstr "E&xternes Anordnen"
@@ -2898,9 +2923,6 @@ msgstr "&Virtuelle FS..."
 msgid "Panels:"
 msgstr "Panels:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Die TERM-Variable ist nicht gesetzt!\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2937,6 +2959,9 @@ msgstr "ButtonBar|Verschieben"
 msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|Mkdir"
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nie"
 
@@ -2948,6 +2973,9 @@ msgstr "&Immer"
 
 msgid "A&uto save setup"
 msgstr "Einstellungen auto&m. speichern"
+
+msgid "Preallocate &space before file copying"
+msgstr ""
 
 msgid "Sa&fe delete"
 msgstr "Sicheres &löschen"
@@ -3043,7 +3071,7 @@ msgid "A&uto save panels setup"
 msgstr "Panel&einstellung autom. speichern"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "Ein&facher Tausch"
 
 msgid "Re&verse files only"
 msgstr "Nur &Dateien"
@@ -3067,7 +3095,7 @@ msgid "Use SI si&ze units"
 msgstr "SI-Größeneinheit ver&wenden"
 
 msgid "Show mi&ni-status"
-msgstr ""
+msgstr "Mi&nistatus anzeigen"
 
 msgid "Panel options"
 msgstr "Paneloptionen"
@@ -3201,6 +3229,9 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s Bytes in %d Datei"
 msgstr[1] "%s Bytes in %d Dateien"
+
+msgid "Panelize"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr "Unbekannter Tag in Anzeigeformat: "
@@ -3540,6 +3571,9 @@ msgid "Config directory:"
 msgstr ""
 
 msgid "Data directory:"
+msgstr ""
+
+msgid "VFS plugins and scripts:"
 msgstr ""
 
 msgid "User data"

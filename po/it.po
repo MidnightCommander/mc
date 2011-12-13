@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 00:32+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -71,6 +71,9 @@ msgstr "&Ignora lock"
 msgid "Cannot create %s directory"
 msgstr "Impossibile creare la directory %s"
 
+msgid "FATAL: not a directory:"
+msgstr ""
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr ""
@@ -81,6 +84,12 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
 msgstr ""
 
 msgid "Search string not found"
@@ -341,6 +350,9 @@ msgstr "Dollaro"
 msgid "Quotation mark"
 msgstr "Virgolette"
 
+msgid "Percent sign"
+msgstr ""
+
 msgid "Caret"
 msgstr "Circonflesso"
 
@@ -407,6 +419,9 @@ msgstr "Alt"
 
 msgid "Shift"
 msgstr "Maiusc"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La variabile TERM non è definita!\n"
 
 #, c-format
 msgid ""
@@ -550,6 +565,9 @@ msgstr "Modifica un file"
 
 msgid "Forces xterm features"
 msgstr "Forza il comportamento xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Disabilita il supporto del mouse nella modalità testo"
@@ -1932,14 +1950,13 @@ msgstr ""
 "Midnight Commander."
 
 #, c-format
-msgid "%s%s%s file error"
+msgid "%s file error"
 msgstr ""
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2185,6 +2202,12 @@ msgid ""
 msgstr ""
 "Impossibile ottenere info sul file destinazione \"%s\"\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2612,19 +2635,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "File: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Nodi liberi: %ld (%ld%%) su %ld"
-
 msgid "No node information"
 msgstr "Nessuna info sui nodi"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Spazio libero: %s (%d%%) su %s"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "Nessuna info sullo spazio"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2755,6 +2777,9 @@ msgstr "Connessione S&hell..."
 
 msgid "SM&B link..."
 msgstr "Connessione SM&B..."
+
+msgid "Paneli&ze"
+msgstr ""
 
 msgid "&Rescan"
 msgstr "&Ricarica"
@@ -2891,9 +2916,6 @@ msgstr "FS &virtuale..."
 msgid "Panels:"
 msgstr "Pannelli:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La variabile TERM non è definita!\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2930,6 +2952,9 @@ msgstr "RinSpo"
 msgid "ButtonBar|Mkdir"
 msgstr "CreDir"
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "Mai (&J)"
 
@@ -2941,6 +2966,9 @@ msgstr "Sempre (&W)"
 
 msgid "A&uto save setup"
 msgstr "Autosalva &configurazione"
+
+msgid "Preallocate &space before file copying"
+msgstr ""
 
 msgid "Sa&fe delete"
 msgstr "Cance&llazione sicura"
@@ -3196,6 +3224,9 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] " %s byte in %d file"
 msgstr[1] " %s byte in %d file"
+
+msgid "Panelize"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr "Codice sconosciuto per tale formato:"
@@ -3535,6 +3566,9 @@ msgid "Config directory:"
 msgstr ""
 
 msgid "Data directory:"
+msgstr ""
+
+msgid "VFS plugins and scripts:"
 msgstr ""
 
 msgid "User data"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 00:32+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.net/projects/p/mc/team/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -71,6 +71,9 @@ msgstr "&Nem érdekes, tovább"
 msgid "Cannot create %s directory"
 msgstr "A(z) %s könyvtár nem létrehozható"
 
+msgid "FATAL: not a directory:"
+msgstr ""
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr ""
@@ -81,6 +84,12 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
 msgstr ""
 
 msgid "Search string not found"
@@ -341,6 +350,9 @@ msgstr "Dollárjel"
 msgid "Quotation mark"
 msgstr "Idézőjel"
 
+msgid "Percent sign"
+msgstr ""
+
 msgid "Caret"
 msgstr "Kalap"
 
@@ -407,6 +419,9 @@ msgstr "Alt"
 
 msgid "Shift"
 msgstr "Shift"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Nincs beállítva a TERM környezeti változó.\n"
 
 #, c-format
 msgid ""
@@ -550,6 +565,9 @@ msgstr "Fájl szerkesztése"
 
 msgid "Forces xterm features"
 msgstr "Xterm-funkciók kikényszerítése"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "Egérkezelés letiltása a szöveges változatban"
@@ -1935,14 +1953,13 @@ msgstr ""
 "verziót a Midnight Commander-csomagból."
 
 #, c-format
-msgid "%s%s%s file error"
+msgid "%s file error"
 msgstr ""
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2190,6 +2207,12 @@ msgstr ""
 "Nem sikerült lekérdezni a(z) \"%s\" \n"
 "célfájl adatait. \n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2618,19 +2641,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "Fájl: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Szabad node:  %ld (%ld%%) / %ld"
-
 msgid "No node information"
 msgstr "Nincs node-információ"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Szabad hely:  %s (%d%%) / %s"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "Nincs adat a tárolóhelyről"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2761,6 +2783,9 @@ msgstr "Sh&ell-kapcsolat..."
 
 msgid "SM&B link..."
 msgstr "SM&B-kapcsolat..."
+
+msgid "Paneli&ze"
+msgstr ""
 
 msgid "&Rescan"
 msgstr "Frissít"
@@ -2897,9 +2922,6 @@ msgstr "&Virtuális fájlrendszer..."
 msgid "Panels:"
 msgstr "Panelek:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Nincs beállítva a TERM környezeti változó.\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2936,6 +2958,9 @@ msgstr "Áthelyez"
 msgid "ButtonBar|Mkdir"
 msgstr "ÚjKvt"
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "So&ha"
 
@@ -2947,6 +2972,9 @@ msgstr "Min&dig"
 
 msgid "A&uto save setup"
 msgstr "Auto &Beállításmentés"
+
+msgid "Preallocate &space before file copying"
+msgstr ""
 
 msgid "Sa&fe delete"
 msgstr "\"Ó&vatos\" törlés"
@@ -3200,6 +3228,9 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s %d fájlban"
 msgstr[1] "%s %d fájlban"
+
+msgid "Panelize"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr "Ismeretlen címke a megjelenítési formátumban:"
@@ -3539,6 +3570,9 @@ msgid "Config directory:"
 msgstr ""
 
 msgid "Data directory:"
+msgstr ""
+
+msgid "VFS plugins and scripts:"
 msgstr ""
 
 msgid "User data"

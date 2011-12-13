@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 00:32+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/mc/team/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -71,6 +71,9 @@ msgstr "&Ignorovat zámek"
 msgid "Cannot create %s directory"
 msgstr "Není možné vytvořit adresář %s"
 
+msgid "FATAL: not a directory:"
+msgstr ""
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr ""
@@ -81,6 +84,12 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
 msgstr ""
 
 msgid "Search string not found"
@@ -341,6 +350,9 @@ msgstr "Znak dolaru"
 msgid "Quotation mark"
 msgstr "Uvozovky"
 
+msgid "Percent sign"
+msgstr ""
+
 msgid "Caret"
 msgstr "Stříška"
 
@@ -407,6 +419,9 @@ msgstr "Alt"
 
 msgid "Shift"
 msgstr "Shift"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Proměnná prostředí TERM není nastavena!\n"
 
 #, c-format
 msgid ""
@@ -550,6 +565,9 @@ msgstr "Začne editovat jeden soubor"
 
 msgid "Forces xterm features"
 msgstr "Vnutí použití možností Xtermu"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr ""
 
 msgid "Disable mouse support in text version"
 msgstr "V textové verzi vypne podporu myši"
@@ -1935,14 +1953,13 @@ msgstr ""
 "Commander."
 
 #, c-format
-msgid "%s%s%s file error"
+msgid "%s file error"
 msgstr ""
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2188,6 +2205,12 @@ msgid ""
 msgstr ""
 "Nelze provést fstat cílového souboru „%s“\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2616,19 +2639,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "Soubor: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Volných i-uzlů: %ld (%ld%%) z %ld"
-
 msgid "No node information"
 msgstr "O uzlu nejsou informace"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Volný prostor: %s (%d%%) z %s"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "Nelze získat informace o prostoru"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2760,6 +2782,9 @@ msgstr "S&hellové spojení..."
 
 msgid "SM&B link..."
 msgstr "SM&B spojení..."
+
+msgid "Paneli&ze"
+msgstr ""
 
 msgid "&Rescan"
 msgstr "&Obnovit"
@@ -2896,9 +2921,6 @@ msgstr "&Virtuální FS..."
 msgid "Panels:"
 msgstr "Panely:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Proměnná prostředí TERM není nastavena!\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2936,6 +2958,9 @@ msgstr "TlačítkováLišta|Přesun"
 msgid "ButtonBar|Mkdir"
 msgstr "TlačítkováLišta|NovAdr"
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nikdy"
 
@@ -2947,6 +2972,9 @@ msgstr "Vžd&y"
 
 msgid "A&uto save setup"
 msgstr "&Automatické ukládání parametrů"
+
+msgid "Preallocate &space before file copying"
+msgstr ""
 
 msgid "Sa&fe delete"
 msgstr "&Bezpečné mazání"
@@ -3203,6 +3231,9 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s v %d souboru"
 msgstr[1] "%s ve %d souborech"
 msgstr[2] "%s v %d souborech"
+
+msgid "Panelize"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr "Neznámá popiska ve formátu zobrazení:"
@@ -3545,6 +3576,9 @@ msgid "Config directory:"
 msgstr ""
 
 msgid "Data directory:"
+msgstr ""
+
+msgid "VFS plugins and scripts:"
 msgstr ""
 
 msgid "User data"

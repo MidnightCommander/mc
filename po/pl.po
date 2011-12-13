@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-07-09 17:00+0400\n"
-"PO-Revision-Date: 2011-07-10 11:10+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"PO-Revision-Date: 2011-12-07 18:30+0000\n"
 "Last-Translator: raven <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.net/projects/p/mc/team/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -72,6 +72,9 @@ msgstr "Z&ignoruj blokadę"
 msgid "Cannot create %s directory"
 msgstr "Nie można utworzyć katalogu %s"
 
+msgid "FATAL: not a directory:"
+msgstr "KRYTYCZNE: nie jest katalogiem:"
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr "Wystąpił błąd podczas migrowania ustawień użytkownika: %s"
@@ -87,6 +90,14 @@ msgstr ""
 "do katalogów zalecanych przez freedesktop.org.\n"
 "Więcej informacji znajduje się na stronie\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
+msgstr ""
+"Poprzednie ustawienia zostały przeniesione z %s\n"
+"do %s\n"
 
 msgid "Search string not found"
 msgstr "Nie odnaleziono wyszukiwanego napisu"
@@ -350,6 +361,9 @@ msgstr "Znak dolara"
 msgid "Quotation mark"
 msgstr "Cudzysłów"
 
+msgid "Percent sign"
+msgstr "Znak procenta"
+
 msgid "Caret"
 msgstr "Kareta"
 
@@ -416,6 +430,9 @@ msgstr "Alt"
 
 msgid "Shift"
 msgstr "Shift"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
 
 #, c-format
 msgid ""
@@ -559,6 +576,9 @@ msgstr "Modyfikuje plik"
 
 msgid "Forces xterm features"
 msgstr "Wymusza funkcje programu xterm"
+
+msgid "Tries to use an old highlight mouse tracking"
+msgstr "Próbuje użyć poprzedniej metody śledzenia wyróżnienia myszy"
 
 msgid "Disable mouse support in text version"
 msgstr "Wyłącza obsługę myszy w trybie tekstowym"
@@ -1975,17 +1995,16 @@ msgstr ""
 "programu Midnight Commander."
 
 #, c-format
-msgid "%s%s%s file error"
-msgstr "Błąd pliku %s%s%s"
+msgid "%s file error"
+msgstr "Błąd pliku %s"
 
 #, c-format
 msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
-"Format pliku %s%s%s został zmieniony w wersji 3.0. Można skopiować go z "
-"%smc.ext lub użyć tego pliku jako przykład."
+"Format pliku %s został zmieniony w wersji 3.0. Można skopiować go z %smc.ext"
+" lub użyć tego pliku jako przykład."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiowanie"
@@ -2229,6 +2248,14 @@ msgid ""
 "%s"
 msgstr ""
 "Nie można wykonać polecenia stat na pliku docelowym \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Nie można wcześniej przydzielić miejsca dla pliku docelowego \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2659,19 +2686,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "Plik: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Wolne węzły: %ld (%ld%%) z %ld"
-
 msgid "No node information"
 msgstr "Brak informacji o węźle"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Wolne miejsce: %s (%d%%) z %s"
+msgid "Free nodes:"
+msgstr "Wolne węzły:"
 
 msgid "No space information"
 msgstr "Brak informacji o miejscu"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr "Wolne miejsce: %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:      %s"
@@ -2803,6 +2829,9 @@ msgstr "Połączenie po po&włoce..."
 
 msgid "SM&B link..."
 msgstr "Połączenie SM&B..."
+
+msgid "Paneli&ze"
+msgstr "Filtru&j"
 
 msgid "&Rescan"
 msgstr "Odświ&eż"
@@ -2939,9 +2968,6 @@ msgstr "Wirtualny &system plików..."
 msgid "Panels:"
 msgstr "Panele:"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
-
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2979,6 +3005,9 @@ msgstr "Przen"
 msgid "ButtonBar|Mkdir"
 msgstr "UtwKat"
 
+msgid "Memory exhausted!"
+msgstr "Wyczerpano pamięć"
+
 msgid "&Never"
 msgstr "&Nigdy"
 
@@ -2990,6 +3019,9 @@ msgstr "&Zawsze"
 
 msgid "A&uto save setup"
 msgstr "Auto&matyczny zapis ustawień"
+
+msgid "Preallocate &space before file copying"
+msgstr "Wcześniejsze &przydzielenie miejsca przed kopiowaniem pliku"
 
 msgid "Sa&fe delete"
 msgstr "Bezpieczne &usuwanie"
@@ -3246,6 +3278,9 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s w %d pliku"
 msgstr[1] "%s w %d plikach"
 msgstr[2] "%s w %d plikach"
+
+msgid "Panelize"
+msgstr "Filtruj"
 
 msgid "Unknown tag on display format:"
 msgstr "Nieznany znacznik w formacie wyświetlania:"
@@ -3593,6 +3628,9 @@ msgstr "Katalog konfiguracji:"
 
 msgid "Data directory:"
 msgstr "Katalog danych:"
+
+msgid "VFS plugins and scripts:"
+msgstr "Wtyczki i skrypty VFS:"
 
 msgid "User data"
 msgstr "Dane użytkownika"
