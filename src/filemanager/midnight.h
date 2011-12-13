@@ -28,7 +28,6 @@ struct WPanel;
 
 /*** global variables defined in .c file *********************************************************/
 
-extern Dlg_head *midnight_dlg;
 extern WMenuBar *the_menubar;
 extern WLabel *the_prompt;
 extern WLabel *the_hint;

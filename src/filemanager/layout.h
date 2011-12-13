@@ -8,13 +8,22 @@
 #include "lib/global.h"
 #include "lib/widget.h"
 
-#include "panel.h"
-
 /*** typedefs(not structures) and defined constants **********************************************/
+
+typedef enum
+{
+    view_listing = 0,           /* Directory listing */
+    view_info = 1,              /* Information panel */
+    view_tree = 2,              /* Tree view */
+    view_quick = 3,             /* Quick view */
+    view_nothing = 4,           /* Undefined */
+} panel_view_mode_t;
 
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
+
+struct WPanel;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -38,7 +47,6 @@ void setup_panels (void);
 void destroy_panels (void);
 void setup_cmdline (void);
 void set_display_type (int num, panel_view_mode_t type);
-void panel_update_cols (Widget * widget, panel_display_t frame_size);
 void swap_panels (void);
 panel_view_mode_t get_display_type (int idx);
 panel_view_mode_t get_current_type (void);
@@ -52,7 +60,7 @@ struct Widget *get_panel_widget (int idx);
 struct WPanel *get_other_panel (void);
 
 void save_panel_dir (int idx);
-const char *get_panel_dir_for (const WPanel * widget);
+const char *get_panel_dir_for (const struct WPanel * widget);
 
 void set_hintbar (const char *str);
 

@@ -82,6 +82,8 @@
 int mou_auto_repeat = 100;
 int double_click_speed = 250;
 int old_esc_mode = 0;
+/* timeout for old_esc_mode in usec */
+int old_esc_mode_timeout = 1000000;     /* settable via env */
 int use_8th_bit_as_meta = 0;
 
 /* This table is a mapping between names and the constants we use
@@ -500,9 +502,6 @@ static key_define_t qansi_key_defines[] = {
     {KEY_KP_ADD, ESC_STR "[T", MCKEY_NOACTION}, /* Gr-Plus   */
     {0, NULL, MCKEY_NOACTION},
 };
-
-/* timeout for old_esc_mode in usec */
-int old_esc_mode_timeout = 1000000;     /* settable via env */
 
 /* This holds all the key definitions */
 static key_def *keys = NULL;

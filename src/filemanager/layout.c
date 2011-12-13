@@ -149,7 +149,7 @@ static int _equal_split;
 static int _first_panel_size;
 static int _menubar_visible;
 static int _output_lines;
-static int _command_prompt;
+static gboolean _command_prompt;
 static int _keybar_visible;
 static int _message_visible;
 static gboolean _xterm_title;
@@ -319,10 +319,10 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
 
     case DLG_POST_KEY:
         _menubar_visible = check_options[5].widget->state & C_BOOL;
-        _command_prompt = check_options[4].widget->state & C_BOOL;
+        _command_prompt = (check_options[4].widget->state & C_BOOL) != 0;
         _keybar_visible = check_options[3].widget->state & C_BOOL;
         _message_visible = check_options[2].widget->state & C_BOOL;
-        _xterm_title = check_options[1].widget->state & C_BOOL;
+        _xterm_title = (check_options[1].widget->state & C_BOOL) != 0;
         _free_space = check_options[0].widget->state & C_BOOL;
 
         if (mc_global.tty.console_flag != '\0')
@@ -330,7 +330,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
             int minimum;
             if (_output_lines < 0)
                 _output_lines = 0;
-            height = LINES - _keybar_visible - _command_prompt -
+            height = LINES - _keybar_visible - (_command_prompt ? 1 : 0) -
                 _menubar_visible - _output_lines - _message_visible;
             minimum = MINHEIGHT * (1 + _horizontal_split);
             if (height < minimum)
@@ -340,7 +340,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
             }
         }
         else
-            height = LINES - _keybar_visible - _command_prompt -
+            height = LINES - _keybar_visible - (_command_prompt ? 1 : 0) -
                 _menubar_visible - _output_lines - _message_visible;
 
         if (old_output_lines != _output_lines)
@@ -653,7 +653,7 @@ setup_panels (void)
         if (output_lines < 0)
             output_lines = 0;
         height =
-            LINES - mc_global.keybar_visible - command_prompt - menubar_visible -
+            LINES - mc_global.keybar_visible - (command_prompt ? 1 : 0) - menubar_visible -
             output_lines - mc_global.message_visible;
         minimum = MINHEIGHT * (1 + horizontal_split);
         if (height < minimum)
@@ -665,7 +665,7 @@ setup_panels (void)
     else
     {
         height =
-            LINES - menubar_visible - command_prompt - mc_global.keybar_visible -
+            LINES - menubar_visible - (command_prompt ? 1 : 0) - mc_global.keybar_visible -
             mc_global.message_visible;
     }
     check_split ();
@@ -713,7 +713,7 @@ setup_panels (void)
     /* Output window */
     if (mc_global.tty.console_flag != '\0' && output_lines)
     {
-        output_start_y = LINES - command_prompt - mc_global.keybar_visible - output_lines;
+        output_start_y = LINES - (command_prompt ? 1 : 0) - mc_global.keybar_visible - output_lines;
         show_console_contents (output_start_y,
                                LINES - output_lines - mc_global.keybar_visible - 1,
                                LINES - mc_global.keybar_visible - 1);
@@ -840,7 +840,7 @@ set_display_type (int num, panel_view_mode_t type)
     unsigned int the_other = 0; /* Index to the other panel */
     const char *file_name = NULL;       /* For Quick view */
     Widget *new_widget = NULL, *old_widget = NULL;
-    panel_view_mode_t old_type;
+    panel_view_mode_t old_type = view_listing;
     WPanel *the_other_panel = NULL;
 
     if (num >= MAX_VIEWS)
@@ -927,7 +927,7 @@ set_display_type (int num, panel_view_mode_t type)
     /* same state.  Maybe we could just kill it and then replace it  */
     if ((midnight_dlg != NULL) && (old_widget != NULL))
     {
-        if (old_widget == view_listing)
+        if (old_type == view_listing)
         {
             /* save and write directory history of panel
              * ... and other histories of midnight_dlg  */
@@ -973,45 +973,6 @@ set_display_type (int num, panel_view_mode_t type)
         current_panel = num == 0 ? right_panel : left_panel;
 
     g_free (old_widget);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-panel_update_cols (Widget * widget, panel_display_t frame_size)
-{
-    int cols, origin;
-
-    /* don't touch panel if it is not in dialog yet */
-    /* if panel is not in dialog it is not in widgets list
-       and cannot be compared with get_panel_widget() result */
-    if (widget->owner == NULL)
-        return;
-
-    if (horizontal_split)
-    {
-        widget->cols = COLS;
-        return;
-    }
-
-    if (frame_size == frame_full)
-    {
-        cols = COLS;
-        origin = 0;
-    }
-    else if (widget == get_panel_widget (0))
-    {
-        cols = first_panel_size;
-        origin = 0;
-    }
-    else
-    {
-        cols = COLS - first_panel_size;
-        origin = first_panel_size;
-    }
-
-    widget->cols = cols;
-    widget->x = origin;
 }
 
 /* --------------------------------------------------------------------------------------------- */

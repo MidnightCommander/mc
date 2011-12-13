@@ -1798,6 +1798,10 @@ When you press F7 to create a new directory, the input line in popup dialog
 will be filled by name of current file or directory in active panel.
 Disabled by default.
 .PP
+.I Preallocate space
+Preallocate space for whole target file, if possible, before copy operation.
+Disabled by default.
+.PP
 .B Esc key mode.
 .PP
 By default the Midnight Commander treats the ESC key as a key prefix.

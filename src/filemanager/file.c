@@ -2626,9 +2626,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
         /* Background also need ctx->ui, but not full */
         if (do_bg)
-            file_op_context_create_ui_without_init (ctx, 1, dialog_type);
+            file_op_context_create_ui_without_init (ctx, TRUE, dialog_type);
         else
-            file_op_context_create_ui (ctx, 1, dialog_type);
+            file_op_context_create_ui (ctx, TRUE, dialog_type);
     }
 
 #ifdef WITH_BACKGROUND

@@ -301,11 +301,17 @@ mc_config_init_config_paths (GError ** error)
 
     mc_config_fix_migrated_rules ();
 #else /* MC_HOMEDIR_XDG */
-    char *u_config_dir = g_build_filename (mc_config_get_home_dir (), MC_USERCONF_DIR, NULL);
+    char *defined_userconf_dir;
+    char *u_config_dir;
 
-    u_config_dir = (u_config_dir == NULL)
-        ? g_build_filename (mc_config_get_home_dir (), MC_OLD_USERCONF_DIR,
-                            NULL) : g_strdup (u_config_dir);
+    defined_userconf_dir = tilde_expand (MC_USERCONF_DIR);
+    if (!g_path_is_absolute (defined_userconf_dir))
+    {
+        u_config_dir = g_build_filename (mc_config_get_home_dir (), MC_USERCONF_DIR, NULL);
+        g_free (defined_userconf_dir);
+    }
+    else
+        u_config_dir = defined_userconf_dir;
 
     mc_data_str = mc_cache_str = mc_config_str =
         mc_config_init_one_config_path (u_config_dir, "", error);

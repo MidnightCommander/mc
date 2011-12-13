@@ -93,7 +93,7 @@ tty_setup_sigwinch (void (*handler) (int))
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+static void
 sigwinch_handler (int dummy)
 {
     (void) dummy;

@@ -1593,7 +1593,7 @@ load_hotlist (void)
         else
             message (D_ERROR, _("Hotlist Load"),
                      _
-                     ("MC was unable to write ~/%s file,\nyour old hotlist entries were not deleted"),
+                     ("MC was unable to write %s file,\nyour old hotlist entries were not deleted"),
                      MC_USERCONF_DIR PATH_SEP_STR MC_HOTLIST_FILE);
     }
     else
