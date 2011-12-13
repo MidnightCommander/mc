@@ -18,16 +18,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-10-19 14:23+0400\n"
-"PO-Revision-Date: 2011-09-09 08:17+0000\n"
+"POT-Creation-Date: 2011-12-13 13:55+0300\n"
+"PO-Revision-Date: 2011-12-13 14:05+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.net/projects/p/mc/team/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Внимание: невозможно загрузить список кодировок"
@@ -82,6 +81,9 @@ msgstr "Игнорировать замок"
 msgid "Cannot create %s directory"
 msgstr "Невозможно создать каталог \"%s\""
 
+msgid "FATAL: not a directory:"
+msgstr "КРИТИЧЕСКАЯ ОШИБКА: не является каталогом:"
+
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr "Произошла ошибка при переносе пользовательских настроек: %s"
@@ -98,6 +100,14 @@ msgstr ""
 "Для более полной информации посетите страницу\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
+msgstr ""
+"Ваши старые настройки перенесены из %s\n"
+"в %s\n"
+
 msgid "Search string not found"
 msgstr "Искомая строка не найдена"
 
@@ -105,8 +115,7 @@ msgid "Not implemented yet"
 msgstr "Пока не реализовано"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
-"Количество шаблонных полей не соответствует количеству полей для замены"
+msgstr "Количество шаблонных полей не соответствует количеству полей для замены"
 
 #, c-format
 msgid "Invalid token number %d"
@@ -547,9 +556,7 @@ msgid "Print data directory"
 msgstr "Распечатать имя каталога для данных"
 
 msgid "Print extended info about used data directories"
-msgstr ""
-"Показ расширенной информации об используемых каталогов пользовательских "
-"данных"
+msgstr "Показ расширенной информации об используемых каталогов пользовательских данных"
 
 msgid "Print configure options"
 msgstr "Распечатать параметры конфигурации"
@@ -600,8 +607,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Чтение определений привязок клавиш из указанного файла"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
-"Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
+msgstr "Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
 
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
@@ -637,25 +643,21 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
 "\n"
-"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по "
-"умолчанию\n"
+"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n"
 "\n"
 "Ключевые слова:\n"
 "   Общие:              errors, disabled, reverse, gauge, header\n"
 "                       input, inputmark, inputunchanged, commandlinemark\n"
 "                       bbarhotkey, bbarbutton, statusbar\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 "   Просмотрщик:        viewbold, viewunderline, viewselected\n"
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
+"   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -680,8 +682,7 @@ msgstr ""
 "   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
 "\n"
 "Атрибуты:\n"
-"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком "
-"\"+\"\n"
+"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком \"+\"\n"
 
 msgid "Color options"
 msgstr "Цветовые настройки"
@@ -1985,29 +1986,19 @@ msgstr "Параметр"
 
 #, c-format
 msgid " %s%s file error"
-msgstr "%s%s ошибка файла"
+msgstr "Ошибка в файле %s%s"
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке."
-"Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке.Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
-msgid "%s%s%s file error"
-msgstr "Ошибка в файле %s%s%s"
+msgid "%s file error"
+msgstr "Ошибка в файле %s"
 
 #, c-format
-msgid ""
-"The format of the %s%s%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Формат файла %s%s%s изменён с версии 3.0. Вы можете либо скопировать его с %"
-"smc.ext, либо использовать этот файл как пример и написать свой."
+msgid "The format of the %s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %smc.ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2077,8 +2068,7 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Невозможно создать устойчивые симв. ссылки через нелокальные файловые "
-"системы:\n"
+"Невозможно создать устойчивые симв. ссылки через нелокальные файловые системы:\n"
 "\n"
 "Опция \"Устойчивые символические ссылки\" будет отменена"
 
@@ -2256,6 +2246,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно выделить место для файла \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot read source file\"%s\"\n"
 "%s"
 msgstr ""
@@ -2390,15 +2388,15 @@ msgstr "ETA %s"
 
 #, c-format
 msgid "%.2f MB/s"
-msgstr "%.2f Мб/с"
+msgstr "%.2f МБ/с"
 
 #, c-format
 msgid "%.2f KB/s"
-msgstr "%.2f кб/с"
+msgstr "%.2f КБ/с"
 
 #, c-format
 msgid "%ld B/s"
-msgstr "%ld б/с"
+msgstr "%ld Б/с"
 
 msgid "Target file already exists!"
 msgstr "Целевой файл уже существует!"
@@ -2657,10 +2655,10 @@ msgstr "Загрузка списка быстрого доступа"
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
-"MC не смог удалить файл ~/%s,\n"
+"MC не смог удалить файл %s,\n"
 "ваши старые элементы быстрого доступа не были удалены"
 
 #, c-format
@@ -2681,19 +2679,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "Файл: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "Свободно узлов: %ld (%ld%%) из %ld"
-
 msgid "No node information"
 msgstr "Нет информации об узле"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Своб. место: %s (%d%%) из %s"
+msgid "Free nodes:"
+msgstr "Свободно узлов:"
 
 msgid "No space information"
 msgstr "Нет информации о пространстве"
+
+#, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr "Своб. место: %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:      %s"
@@ -2809,7 +2806,7 @@ msgid "&Listing mode..."
 msgstr "Фор&мат списка..."
 
 msgid "&Sort order..."
-msgstr "Порядок &сортировки..."
+msgstr "П&орядок сортировки..."
 
 msgid "&Filter..."
 msgstr "&Фильтр..."
@@ -2825,6 +2822,9 @@ msgstr "S&hell-соединение..."
 
 msgid "SM&B link..."
 msgstr "SM&B-соединение..."
+
+msgid "Paneli&ze"
+msgstr "Па&нелизация"
 
 msgid "&Rescan"
 msgstr "&Пересмотреть"
@@ -2998,6 +2998,9 @@ msgstr "Перенос"
 msgid "ButtonBar|Mkdir"
 msgstr "НвКтлог"
 
+msgid "Memory exhausted!"
+msgstr "Память исчерпана!"
+
 msgid "&Never"
 msgstr "&Никогда"
 
@@ -3048,6 +3051,9 @@ msgstr "Одино&чное нажатие"
 
 msgid "Esc key mode"
 msgstr "Клавиша Esc"
+
+msgid "Preallocate &space"
+msgstr "В&ыделять место"
 
 msgid "Mkdi&r autoname"
 msgstr "Автоим&я каталога"
@@ -3265,6 +3271,9 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s в %d файле"
 msgstr[1] "%s в %d файлах"
 msgstr[2] "%s в %d файлах"
+
+msgid "Panelize"
+msgstr "Панелизация"
 
 msgid "Unknown tag on display format:"
 msgstr "Неизвестный тег в формате отображения:"
