@@ -1,3 +1,52 @@
+Version 4.8.1
+
+- Core
+
+    * Use posix_fallocate64() when copying files/moving to a new mount point (#2610)
+    * Faster startup (#2637)
+    * Support of extended mouse clicks beyond 223 (#2662)
+
+- VFS
+
+    * Added exit point ("..") at the top of file list (after external panelization) (#275, #278)
+
+- Editor
+
+    * Lex/Flex sources (extension .l) handled by yxx.syntax file. Yacc/Bison syntax completed with all symbols (#1647)
+    * Updated syntax files:
+        - lua
+
+- Misc
+
+    * Updated skins:
+        - sand256 (#2640)
+        - xoria256 (#2641)
+    * Added ability to move MC config files to specified place instead of multiple places in $HOME. (#2636)
+    * Added configure option --with-homedir (default value: XDG) (#2636)
+    * Respect traditional placement of user preferences on Mac OS X (#2658 as part of #2636)
+    * A few useful additions to filehighlight.ini (#2646)
+
+- Fixes
+
+    * Doesn't compile when using --disable-nls (#2639)
+    * Сan't compile on OpenIndiana (Solaris) (#2643)
+    * Moving content of bindings to mc.ext during 4.7 -> 4.8 upgrade breaks mc
+    * Free space on filesystems >2TB is not displayed properly (#2338)
+    * Not all errors are skipped after "Ignore all" choose (#71)
+    * Input field in password mode is fully masked with asterisks (#2653)
+    * In "Copy File" dialog the "preserve Attributes" checkbox is always unchecked for filesystems mounted with FUSE (#2254)
+    * Command line cursor misplaced after a resize in viewer/editor (#2678)
+    * Save of some learned keys is broken (#2676)
+    * Editor sometimes shows two dots instead of letter (#2372)
+    * Editor: word completion should ignore the current word (#2614)
+    * Viewer sometimes shows two dots instead of letter (#1730)
+    * Viewer shows two dialogs when searcj hot found (#2677)
+    * Сannot navigate over spftp servers (#2634)
+    * mc adds spaces at the beginning of all files/dirs on ftp servers (#2635)
+    * VFS: broken SMB (#2652)
+    * man page lies about mc.keymap (#2675)
+    * mc does not preserve file mtime when copying over ssh (#2625)
+
 Version 4.8.0
 
 - Misc
