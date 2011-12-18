@@ -759,7 +759,6 @@ tree_copy (WTree * tree, const char *default_dest)
         tctx = file_op_total_context_new ();
         file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
         tctx->ask_overwrite = FALSE;
-        tctx->is_toplevel_file = FALSE;
         copy_dir_dir (tctx, ctx, tree->selected_ptr->name, dest, TRUE, FALSE, FALSE, NULL);
         file_op_total_context_destroy (tctx);
         file_op_context_destroy (ctx);

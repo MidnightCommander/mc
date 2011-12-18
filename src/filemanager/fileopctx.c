@@ -114,7 +114,6 @@ file_op_total_context_new (void)
     FileOpTotalContext *tctx;
     tctx = g_new0 (FileOpTotalContext, 1);
     tctx->ask_overwrite = TRUE;
-    tctx->is_toplevel_file = TRUE;
     return tctx;
 }
 
