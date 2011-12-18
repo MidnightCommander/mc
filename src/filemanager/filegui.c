@@ -723,7 +723,7 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintmax_t copyed_bytes,
+file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintmax_t copied_bytes,
                           gboolean show_summary)
 {
     char buffer[BUF_TINY];
@@ -745,7 +745,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
         else
         {
             gauge_set_value (ui->progress_total_gauge, 1024,
-                             (int) (1024 * copyed_bytes / ctx->progress_bytes));
+                             (int) (1024 * copied_bytes / ctx->progress_bytes));
             gauge_show (ui->progress_total_gauge, 1);
         }
     }
@@ -780,7 +780,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
 
     label_set_text (ui->time_label, buffer);
 
-    size_trunc_len (buffer2, 5, tctx->copyed_bytes, 0, panels_options.kilobyte_si);
+    size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
     if (!file_op_compute_totals)
         g_snprintf (buffer, BUF_TINY, _(" Total: %s "), buffer2);
     else
