@@ -744,7 +744,7 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
     {
         uintmax_t remain_bytes;
 
-        remain_bytes = ctx->progress_bytes - tctx->copyed_bytes;
+        remain_bytes = ctx->progress_bytes - tctx->copied_bytes;
 #if 1
         {
             int total_secs = tv_current.tv_sec - tctx->transfer_start.tv_sec;
@@ -752,7 +752,7 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
             if (total_secs < 1)
                 total_secs = 1;
 
-            tctx->bps = tctx->copyed_bytes / total_secs;
+            tctx->bps = tctx->copied_bytes / total_secs;
             tctx->eta_secs = (tctx->bps != 0) ? remain_bytes / tctx->bps : 0;
         }
 #else
@@ -1657,7 +1657,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                 }
             }
 
-            tctx->copyed_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
+            tctx->copied_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
 
             secs = (tv_current.tv_sec - tv_last_update.tv_sec);
             update_secs = (tv_current.tv_sec - tv_last_input.tv_sec);
@@ -1685,7 +1685,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                 if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
                     file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-                    file_progress_show_total (tctx, ctx, tctx->copyed_bytes, force_update);
+                    file_progress_show_total (tctx, ctx, tctx->copied_bytes, force_update);
                 }
 
                 file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
