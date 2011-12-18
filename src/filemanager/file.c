@@ -725,13 +725,13 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
     /* 3. Compute ETA */
     dt = (tv_current.tv_sec - tv_transfer_start.tv_sec);
 
-    if (n_read_total)
+    if (n_read_total == 0)
+        ctx->eta_secs = 0.0;
+    else
     {
         ctx->eta_secs = ((dt / (double) n_read_total) * file_size) - dt;
         ctx->bps = n_read_total / ((dt < 1) ? 1 : dt);
     }
-    else
-        ctx->eta_secs = 0.0;
 
     /* 4. Compute BPS rate */
     ctx->bps_time = (tv_current.tv_sec - tv_transfer_start.tv_sec);
@@ -743,7 +743,7 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
     if (ctx->progress_bytes != 0)
     {
         uintmax_t remain_bytes;
-        tctx->copyed_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
+
         remain_bytes = ctx->progress_bytes - tctx->copyed_bytes;
 #if 1
         {
@@ -1337,7 +1337,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     struct stat sb, sb2;
     struct utimbuf utb;
     gboolean dst_exists = FALSE, appending = FALSE;
-    off_t n_read_total = 0, file_size = -1;
+    off_t file_size = -1;
     FileProgressStatus return_status, temp_status;
     struct timeval tv_transfer_start;
     dest_status_t dst_status = DEST_NONE;
@@ -1596,13 +1596,14 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         goto ret;
 
     {
+        off_t n_read_total = 0;
         struct timeval tv_current, tv_last_update, tv_last_input;
         int secs, update_secs;
         const char *stalled_msg = "";
 
         tv_last_update = tv_transfer_start;
 
-        for (;;)
+        while (TRUE)
         {
             char buf[BUF_8K];
 
@@ -1655,6 +1656,9 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                         goto ret;
                 }
             }
+
+            tctx->copyed_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
+
             secs = (tv_current.tv_sec - tv_last_update.tv_sec);
             update_secs = (tv_current.tv_sec - tv_last_input.tv_sec);
 
@@ -1681,9 +1685,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                 if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
                     file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-                    file_progress_show_total (tctx, ctx,
-                                              tctx->progress_bytes + n_read_total + ctx->do_reget,
-                                              force_update);
+                    file_progress_show_total (tctx, ctx, tctx->copyed_bytes, force_update);
                 }
 
                 file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
