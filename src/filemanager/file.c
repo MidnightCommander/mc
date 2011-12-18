@@ -461,17 +461,14 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add,
-                     gboolean is_toplevel_file)
+progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add)
 {
     struct timeval tv_current;
     static struct timeval tv_start = { };
 
-    if (is_toplevel_file || ctx->progress_totals_computed)
-    {
-        tctx->progress_count++;
-        tctx->progress_bytes += (uintmax_t) add;
-    }
+    tctx->progress_count++;
+    tctx->progress_bytes += (uintmax_t) add;
+
     if (tv_start.tv_sec == 0)
     {
         gettimeofday (&tv_start, (struct timezone *) NULL);
@@ -833,7 +830,7 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
         }
 
         if (mc_rename (s, d) == 0)
-            return progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
+            return progress_update_one (tctx, ctx, src_stats.st_size);
     }
 #if 0
     /* Comparison to EXDEV seems not to work in nfs if you're moving from
@@ -890,7 +887,7 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
     }
 
     if (!copy_done)
-        return_status = progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
+        return_status = progress_update_one (tctx, ctx, src_stats.st_size);
 
     return return_status;
 }
@@ -902,8 +899,7 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
 /** Don't update progress status if progress_count==NULL */
 
 static FileProgressStatus
-erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
-            gboolean is_toplevel_file)
+erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
 {
     int return_status;
     struct stat buf;
@@ -933,7 +929,7 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
 
     if (tctx->progress_count == 0)
         return FILE_CONT;
-    return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
+    return progress_update_one (tctx, ctx, buf.st_size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -977,7 +973,7 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
         if (S_ISDIR (buf.st_mode))
             return_status = recursive_erase (tctx, ctx, path);
         else
-            return_status = erase_file (tctx, ctx, path, 0);
+            return_status = erase_file (tctx, ctx, path);
         g_free (path);
     }
     mc_closedir (reading);
@@ -1793,7 +1789,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     }
 
     if (return_status == FILE_CONT)
-        return_status = progress_update_one (tctx, ctx, file_size, tctx->is_toplevel_file);
+        return_status = progress_update_one (tctx, ctx, file_size);
 
     return return_status;
 }
@@ -2056,7 +2052,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                     return_status = erase_dir_iff_empty (ctx, path);
                 }
                 else
-                    return_status = erase_file (tctx, ctx, path, FALSE);
+                    return_status = erase_file (tctx, ctx, path);
             }
         }
         g_free (path);
@@ -2195,7 +2191,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 return_status = erase_dir_iff_empty (ctx, erase_list->name);
             }
             else
-                return_status = erase_file (tctx, ctx, erase_list->name, FALSE);
+                return_status = erase_file (tctx, ctx, erase_list->name);
             lp = erase_list;
             erase_list = erase_list->next;
             g_free (lp);
@@ -2692,7 +2688,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 if (S_ISDIR (src_stat.st_mode))
                     value = erase_dir (tctx, ctx, source_with_path);
                 else
-                    value = erase_file (tctx, ctx, source_with_path, 1);
+                    value = erase_file (tctx, ctx, source_with_path);
             }
             else
             {
@@ -2785,7 +2781,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     if (S_ISDIR (src_stat.st_mode))
                         value = erase_dir (tctx, ctx, source_with_path);
                     else
-                        value = erase_file (tctx, ctx, source_with_path, 1);
+                        value = erase_file (tctx, ctx, source_with_path);
                 }
                 else
                 {

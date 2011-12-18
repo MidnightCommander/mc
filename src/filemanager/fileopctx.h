@@ -174,7 +174,6 @@ typedef struct
     double eta_secs;
 
     gboolean ask_overwrite;
-    gboolean is_toplevel_file;
 } FileOpTotalContext;
 
 /*** global variables defined in .c file *********************************************************/
