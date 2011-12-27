@@ -46,10 +46,10 @@
 /*** file scope variables ************************************************************************/
 
 static const mc_search_type_str_t mc_search__list_types[] = {
-    {N_("Normal"), MC_SEARCH_T_NORMAL},
-    {N_("&Regular expression"), MC_SEARCH_T_REGEX},
-    {N_("Hexadecimal"), MC_SEARCH_T_HEX},
-    {N_("Wildcard search"), MC_SEARCH_T_GLOB},
+    {N_("&Normal"), MC_SEARCH_T_NORMAL},
+    {N_("Re&gular expression"), MC_SEARCH_T_REGEX},
+    {N_("He&xadecimal"), MC_SEARCH_T_HEX},
+    {N_("Wil&dcard search"), MC_SEARCH_T_GLOB},
     {NULL, -1}
 };
 
