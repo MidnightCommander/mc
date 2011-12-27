@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-12-13 13:55+0300\n"
-"PO-Revision-Date: 2011-12-13 14:05+0300\n"
+"POT-Creation-Date: 2011-12-27 21:26+0300\n"
+"PO-Revision-Date: 2011-12-27 21:29+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.net/projects/p/mc/team/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -124,17 +124,17 @@ msgstr "Неправильный шаблон цели %d"
 msgid "Regular expression error"
 msgstr "Ошибка в регулярном выражении"
 
-msgid "Normal"
-msgstr "Обычный"
+msgid "&Normal"
+msgstr "О&бычный"
 
-msgid "&Regular expression"
+msgid "Re&gular expression"
 msgstr "&Регулярное выражение"
 
-msgid "Hexadecimal"
-msgstr "Шестнадцатеричный"
+msgid "He&xadecimal"
+msgstr "Шестнад&цатеричный"
 
-msgid "Wildcard search"
-msgstr "По шаблону"
+msgid "Wil&dcard search"
+msgstr "По &шаблону"
 
 #, c-format
 msgid ""
@@ -585,6 +585,9 @@ msgstr "Редактировать файл"
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
 
+msgid "Disable X11 support"
+msgstr "Не использовать X11 для получения состояния модификаторов Alt, Ctrl, Shift."
+
 msgid "Tries to use an old highlight mouse tracking"
 msgstr "Пытаться использовать старый способ трэкинга мыши"
 
@@ -746,8 +749,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Закрыть"
 
-msgid "All charsets"
-msgstr "Все кодировки"
+msgid "&All charsets"
+msgstr "&Все кодировки"
 
 msgid "&Whole words"
 msgstr "&Слово целиком"
@@ -755,8 +758,8 @@ msgstr "&Слово целиком"
 msgid "&Backwards"
 msgstr "&Назад"
 
-msgid "Case &sensitive"
-msgstr "Учет ре&гистра"
+msgid "Cas&e sensitive"
+msgstr "У&чёт регистра"
 
 msgid "Enter search string:"
 msgstr "Введите строку для поиска:"
@@ -792,9 +795,6 @@ msgid ""
 msgstr ""
 "Невозможно создать временный файл слияния\n"
 "%s"
-
-msgid "&Normal"
-msgstr "О&бычный"
 
 msgid "&Fastest (Assume large files)"
 msgstr "Б&ыстрый (для больших файлов)"
@@ -1166,7 +1166,7 @@ msgstr ""
 "Продолжение операции приведет к потере изменений"
 
 msgid "In se&lection"
-msgstr "В вы&деленном"
+msgstr "В в&ыделенном"
 
 msgid "Enter replacement string:"
 msgstr "Введите текст для замены:"
@@ -2501,26 +2501,17 @@ msgstr "Найден: %ld"
 msgid "Malformed regular expression"
 msgstr "Регулярное выражение сформировано неверно"
 
-msgid "Cas&e sensitive"
-msgstr "У&чёт регистра"
-
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
 msgid "S&kip hidden"
 msgstr "Пропускать скр&ытые"
 
-msgid "&All charsets"
-msgstr "&Все кодировки"
-
 msgid "Sea&rch for content"
 msgstr "Поиск по содер&жимому"
 
 msgid "Case sens&itive"
 msgstr "Учёт ре&гистра"
-
-msgid "Re&gular expression"
-msgstr "&Регулярное выражение"
 
 msgid "Fir&st hit"
 msgstr "До первого в&хождения"
