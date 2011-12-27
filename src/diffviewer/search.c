@@ -106,7 +106,7 @@ mcdiffview_dialog_search (WDiff * dview)
                       B_ENTER, NULL),
         /* 2 */
 #ifdef HAVE_CHARSET
-        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("All charsets"),
+        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&All charsets"),
                         &mcdiffview_search_options.all_codepages),
 #endif
 
@@ -116,7 +116,7 @@ mcdiffview_dialog_search (WDiff * dview)
         QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"),
                         &mcdiffview_search_options.backwards),
         /* 4 */
-        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("Case &sensitive"),
+        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("Cas&e sensitive"),
                         &mcdiffview_search_options.case_sens),
         /* 5 */
         QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
