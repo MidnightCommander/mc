@@ -92,14 +92,14 @@ mcview_dialog_search (mcview_t * view)
         QUICK_BUTTON (2, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
 #ifdef HAVE_CHARSET
         QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT,
-                        N_("All charsets"), &mcview_search_options.all_codepages),
+                        N_("&All charsets"), &mcview_search_options.all_codepages),
 #endif
         QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT,
                         N_("&Whole words"), &mcview_search_options.whole_words),
         QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT,
                         N_("&Backwards"), &mcview_search_options.backwards),
         QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-                        N_("Case &sensitive"), &mcview_search_options.case_sens),
+                        N_("Cas&e sensitive"), &mcview_search_options.case_sens),
         QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
                      num_of_types, (const char **) list_of_types,
                      (int *) &mcview_search_options.type),
