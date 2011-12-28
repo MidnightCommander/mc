@@ -296,6 +296,10 @@ enum
     CK_HexEditMode,
     CK_BookmarkGoto,
     CK_Ruler,
+    CK_SearchForward,
+    CK_SearchBackward,
+    CK_SearchForwardContinue,
+    CK_SearchBackwardContinue,
 
     /* diff viewer */
     CK_ShowSymbols = 700,
