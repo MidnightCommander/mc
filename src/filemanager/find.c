@@ -718,7 +718,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
                 g_free (in_start_dir);
             in_start_dir = g_strdup (*start_dir);
 
-            s = g_strdup (*start_dir);
+            s = tilde_expand (*start_dir);
             canonicalize_pathname (s);
 
             if (s[0] == '.' && s[1] == '\0')
