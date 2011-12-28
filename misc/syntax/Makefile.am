@@ -2,6 +2,7 @@ SYNTAXFILES =			\
 	Syntax			\
 	PKGBUILD.syntax		\
 	ada95.syntax		\
+	as.syntax		\
 	aspx.syntax		\
 	assembler.syntax	\
 	awk.syntax		\
