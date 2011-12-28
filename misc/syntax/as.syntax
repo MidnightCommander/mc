@@ -1,0 +1,200 @@
+#
+# ActionScript syntax highlighting
+# for MC Editor/CoolEdit
+#
+# Author: Oleg Kosenkov <oleg@kosenkov.ca>
+# Based on js.syntax
+#
+# 2011-12-27  Oleg Kosenkov <oleg@kosenkov.ca>
+#    * Initial public release.
+#
+
+context default
+
+    #=========================
+    # Keywords
+    keyword whole arguments yellow
+    keyword whole break yellow
+    keyword whole caller yellow
+    keyword whole case yellow
+    keyword whole catch yellow
+    keyword whole constructor yellow
+    keyword whole continue yellow
+    keyword whole else yellow
+    keyword whole default yellow
+    keyword whole delete yellow
+    keyword whole for yellow
+    keyword whole function yellow
+    keyword whole private yellow
+    keyword whole public yellow
+    keyword whole internal yellow
+    keyword whole protected yellow
+    keyword whole native yellow
+    keyword whole static yellow
+    keyword whole if yellow
+    keyword whole in yellow
+    keyword whole instanceof yellow
+    keyword whole new yellow
+    keyword whole prototype yellow
+    keyword whole override yellow
+    keyword whole return yellow
+    keyword whole switch yellow
+    keyword whole this yellow
+    keyword whole throw yellow
+    keyword whole try yellow
+    keyword whole typeof yellow
+    keyword whole var yellow
+    keyword whole while yellow
+    keyword whole with yellow
+    keyword whole import yellow
+    keyword whole package yellow
+    keyword whole class yellow
+    keyword whole final yellow
+    keyword whole const yellow
+    keyword whole set yellow
+    keyword whole get yellow
+    keyword whole dynamic yellow
+    keyword whole label yellow
+    keyword whole super yellow
+    keyword whole extends yellow
+    keyword whole include yellow
+    keyword whole namespace yellow
+    keyword whole interface yellow
+    keyword whole this yellow
+
+
+    #=========================
+    # Objects
+    keyword whole ActiveXObject yellow
+    keyword whole Array yellow
+    keyword whole Boolean yellow
+    keyword whole Date yellow
+    keyword whole Dictionary yellow
+    keyword whole Enumerator yellow
+    keyword whole FileSystemObject yellow
+    keyword whole Function yellow
+    keyword whole Global yellow
+    keyword whole Image yellow
+    keyword whole Math yellow
+    keyword whole Number yellow
+    keyword whole Object yellow
+    keyword whole TextStream yellow
+    keyword whole RegExp yellow
+    keyword whole VBArray yellow
+    keyword whole String yellow
+    keyword whole void yellow
+    keyword whole int yellow
+
+    #=========================
+    # Most common functions
+    keyword whole alert yellow
+    keyword whole escape yellow
+    keyword whole eval yellow
+    keyword whole indexOf yellow
+    keyword whole isNaN yellow
+    keyword whole toString yellow
+    keyword whole unescape yellow
+    keyword whole valueOf yellow
+
+    #=========================
+    # Constants
+    keyword whole false brightgreen
+    keyword whole null brightgreen
+    keyword whole true brightgreen
+    keyword whole undefined yellow
+
+    #=========================
+    # Comments
+    keyword /\* brown
+    keyword \*/ brown
+    keyword // brown
+
+    #=========================
+    # Numbers
+    wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.
+
+    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+
+    #=========================
+    # Special symbols
+    keyword \. yellow
+    keyword \* yellow
+    keyword \+ yellow
+    keyword - yellow
+    keyword / yellow
+    keyword % yellow
+    keyword = yellow
+    keyword ! yellow
+    keyword & yellow
+    keyword | yellow
+    keyword ^ yellow
+    keyword ~ yellow
+    keyword > yellow
+    keyword < yellow
+
+    #=========================
+    # Separators
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword ? brightcyan
+    keyword : brightcyan
+    keyword ; brightmagenta
+
+
+#=============================
+# Comments
+
+context exclusive /\* \*/ brown
+    spellcheck
+    keyword whole BUG brightred
+    keyword whole FixMe brightred
+    keyword whole FIXME brightred
+    keyword whole Note brightred
+    keyword whole NOTE brightred
+    keyword whole ToDo brightred
+    keyword whole TODO brightred
+    keyword !!\[!\] brightred
+    keyword ??\[?\] brightred
+
+
+context exclusive // \n brown
+    spellcheck
+    keyword whole BUG brightred
+    keyword whole FixMe brightred
+    keyword whole FIXME brightred
+    keyword whole Note brightred
+    keyword whole NOTE brightred
+    keyword whole ToDo brightred
+    keyword whole TODO brightred
+    keyword !!\[!\] brightred
+    keyword ??\[?\] brightred
+
+
+#=============================
+# Strings
+
+context " " green
+    spellcheck
+    keyword \\\{\\'"abtnvfr\} brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+
+    keyword ' brightgreen
+
+context ' ' green
+    spellcheck
+    keyword \\\{\\'"abtnvfr\} brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+
+    keyword " brightgreen
