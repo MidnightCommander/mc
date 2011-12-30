@@ -29,7 +29,7 @@ Version 4.8.1
 - Fixes
 
     * Doesn't compile when using --disable-nls (#2639)
-    * Сan't compile on OpenIndiana (Solaris) (#2643)
+    * Can't compile on OpenIndiana (Solaris) (#2643)
     * Moving content of bindings to mc.ext during 4.7 -> 4.8 upgrade breaks mc
     * Free space on filesystems >2TB is not displayed properly (#2338)
     * Not all errors are skipped after "Ignore all" choose (#71)
@@ -41,11 +41,12 @@ Version 4.8.1
     * Editor: word completion should ignore the current word (#2614)
     * Viewer sometimes shows two dots instead of letter (#1730)
     * Viewer shows two dialogs when searcj hot found (#2677)
-    * Сannot navigate over spftp servers (#2634)
+    * Cannot navigate over spftp servers (#2634)
     * mc adds spaces at the beginning of all files/dirs on ftp servers (#2635)
     * VFS: broken SMB (#2652)
     * man page lies about mc.keymap (#2675)
     * mc does not preserve file mtime when copying over ssh (#2625)
+
 
 Version 4.8.0
 
@@ -61,6 +62,7 @@ Version 4.8.0
     * fish: content of modified file is appended instead of overwritten in the remote host (#2632)
     * extfs: broken navigation in archives if current path is encoded (#2621)
     * extfs: strange error message when opening a 7z file if p7zip is not installed (#2598)
+
 
 Version 4.8.0-pre2
 
@@ -101,6 +103,7 @@ Version 4.8.0-pre2
     * Broken panels recode (#2595)
     * ftp failures - leading white space in file name (#2594)
     * FISH hangs while copiyng a lot of small files (#2605)
+
 
 Version 4.8.0-pre1
 
