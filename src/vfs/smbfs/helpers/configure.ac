@@ -38,7 +38,6 @@ AC_VALIDATE_CACHE_SYSTEM_TYPE
 SAMBA_MAINTAINER_MODE
 
 AC_INLINE
-AC_HEADER_STDC
 AC_HEADER_DIRENT
 AC_HEADER_TIME
 AC_CHECK_HEADERS(arpa/inet.h sys/fcntl.h sys/select.h fcntl.h sys/time.h sys/unistd.h)

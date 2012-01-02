@@ -150,7 +150,6 @@ AC_CHECK_HEADERS([unistd.h string.h memory.h limits.h malloc.h \
 
 AC_HEADER_TIME
 AC_HEADER_DIRENT
-AC_HEADER_STDC
 
 dnl Missing structure components
 AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev])
