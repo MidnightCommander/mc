@@ -7,14 +7,12 @@
 #ifndef MC_GLOBAL_H
 #define MC_GLOBAL_H
 
-#if defined(STDC_HEADERS) || defined(HAVE_STRING_H)
+#if defined(HAVE_STRING_H)
 #include <string.h>
    /* An ANSI string.h and pre-ANSI memory.h might conflict */
-#if !defined(STDC_HEADERS) && defined(HAVE_MEMORY_H)
+#elif defined(HAVE_MEMORY_H)
 #include <memory.h>
-#endif /* !STDC_HEADERS & HAVE_MEMORY_H */
-
-#else /* !STDC_HEADERS & !HAVE_STRING_H */
+#else
 #include <strings.h>
     /* memory and strings.h conflict on other systems */
 #endif /* !STDC_HEADERS & !HAVE_STRING_H */
