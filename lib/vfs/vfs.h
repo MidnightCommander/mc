@@ -10,7 +10,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#ifdef HAVE_UTIME_H
 #include <utime.h>
+#endif
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
