@@ -160,10 +160,10 @@ dnl
 
 AC_CHECK_FUNCS([\
 	atoll \
-	cfgetospeed \
-	initgroups isascii \
-	setreuid statfs sysconf \
-	tcgetattr tcsetattr truncate \
+	isascii \
+	statfs sysconf \
+	tcgetattr tcsetattr \
+	ftruncate \
 	strverscmp \
 	strncasecmp \
 	realpath
@@ -205,7 +205,6 @@ AC_TYPE_MODE_T
 AC_TYPE_PID_T
 AC_TYPE_UID_T
 
-AC_FUNC_ALLOCA
 AC_FUNC_STRCOLL
 
 AC_MC_GET_FS_INFO
