@@ -132,7 +132,7 @@ mc_def_ungetlocalcopy (const vfs_path_t * filename_vpath,
                        const vfs_path_t * local_vpath, gboolean has_changed)
 {
     int fdin = -1, fdout = -1;
-    char *local;
+    const char *local;
 
     local = vfs_path_get_last_path_str (local_vpath);
 
@@ -189,7 +189,7 @@ int
 mc_open (const vfs_path_t * vpath, int flags, ...)
 {
     int mode = 0, result = -1;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (vpath == NULL)
         return -1;
@@ -228,7 +228,7 @@ mc_open (const vfs_path_t * vpath, int flags, ...)
 int mc_##name inarg \
 { \
     int result; \
-    vfs_path_element_t *path_element; \
+    const vfs_path_element_t *path_element; \
 \
     if (vpath == NULL) \
         return -1; \
@@ -268,7 +268,7 @@ mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
     if (vpath1 != NULL)
     {
-        vfs_path_element_t *path_element;
+        const vfs_path_element_t *path_element;
 
         path_element = vfs_path_get_by_index (vpath2, -1);
         if (vfs_path_element_valid (path_element))
@@ -315,7 +315,8 @@ MC_HANDLEOP (write, (int handle, const void *buf, size_t nbyte), (vfs_class_data
 int mc_##name (const vfs_path_t *vpath1, const vfs_path_t *vpath2) \
 { \
     int result; \
-    vfs_path_element_t *path_element1, *path_element2; \
+    const vfs_path_element_t *path_element1; \
+    const vfs_path_element_t *path_element2; \
 \
     if (vpath1 == NULL || vpath2 == NULL) \
         return -1; \
@@ -362,8 +363,7 @@ int
 mc_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
     int result = -1;
-
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (vpath == NULL)
         vfs_die ("You don't want to pass NULL to mc_setctl.");
@@ -417,7 +417,7 @@ mc_opendir (const vfs_path_t * vpath)
     if (vpath == NULL)
         return NULL;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
+    path_element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, -1);
 
     if (!vfs_path_element_valid (path_element))
     {
@@ -435,9 +435,8 @@ mc_opendir (const vfs_path_t * vpath)
 
     path_element->dir.info = info;
 
-    path_element->dir.converter =
-        (path_element->encoding !=
-         NULL) ? str_crt_conv_from (path_element->encoding) : str_cnv_from_term;
+    path_element->dir.converter = (path_element->encoding != NULL) ?
+                    str_crt_conv_from (path_element->encoding) : str_cnv_from_term;
     if (path_element->dir.converter == INVALID_CONV)
         path_element->dir.converter = str_cnv_from_term;
 
@@ -536,7 +535,7 @@ int
 mc_stat (const vfs_path_t * vpath, struct stat *buf)
 {
     int result = -1;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (vpath == NULL)
         return -1;
@@ -559,7 +558,7 @@ int
 mc_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
     int result = -1;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (vpath == NULL)
         return -1;
@@ -603,7 +602,7 @@ vfs_path_t *
 mc_getlocalcopy (const vfs_path_t * pathname_vpath)
 {
     vfs_path_t *result = NULL;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (pathname_vpath == NULL)
         return NULL;
@@ -628,7 +627,7 @@ mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_v
                    gboolean has_changed)
 {
     int return_value = -1;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (pathname_vpath == NULL)
         return -1;
@@ -658,7 +657,7 @@ mc_chdir (const vfs_path_t * vpath)
     struct vfs_class *old_vfs;
     vfsid old_vfsid;
     int result;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (vpath == NULL)
         return -1;

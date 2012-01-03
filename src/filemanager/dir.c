@@ -628,7 +628,7 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int cou
     struct stat st;
     int marked_cnt;
     GHashTable *marked_files;
-    char *tmp_path;
+    const char *tmp_path;
 
     dirp = mc_opendir (vpath);
     if (dirp == NULL)

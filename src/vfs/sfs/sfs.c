@@ -128,7 +128,7 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
     int was_percent = 0;
     vfs_path_t *pname, *s;      /* name of parent archive */
     char *pqname;               /* name of parent archive, quoted */
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
     pname = vfs_path_clone (vpath);
@@ -184,13 +184,8 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
                 ptr = path_element->path;
                 break;
             case '3':
-                {
-                    vfs_path_element_t *tmp_path_element;
-
-                    tmp_path_element = vfs_path_get_by_index (cache_vpath, -1);
-                    ptr = tmp_path_element->path;
-                    break;
-                }
+                ptr = vfs_path_get_by_index (cache_vpath, -1)->path;
+                break;
             case '%':
                 COPY_CHAR;
                 continue;
@@ -227,9 +222,10 @@ sfs_redirect (const vfs_path_t * vpath)
     cachedfile *cf;
     vfs_path_t *cache_vpath;
     int handle;
-    vfs_path_element_t *path_element;
-    char *path = vfs_path_to_str (vpath);
+    const vfs_path_element_t *path_element;
+    char *path;
 
+    path = vfs_path_to_str (vpath);
     path_element = vfs_path_get_by_index (vpath, -1);
     cur = g_slist_find_custom (head, path, cachedfile_compare);
     g_free (path);

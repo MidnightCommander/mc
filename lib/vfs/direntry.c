@@ -375,7 +375,7 @@ vfs_s_inode_from_path (const vfs_path_t * vpath, int flags)
     struct vfs_s_super *super;
     struct vfs_s_inode *ino;
     const char *q;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     q = vfs_s_get_path (vpath, &super, 0);
     if (q == NULL)
@@ -402,7 +402,7 @@ vfs_s_opendir (const vfs_path_t * vpath)
 {
     struct vfs_s_inode *dir;
     struct dirhandle *info;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -528,7 +528,7 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
     struct vfs_s_inode *ino;
     size_t len;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -755,7 +755,7 @@ vfs_s_getlocalcopy (const vfs_path_t * vpath)
 
     if (fh != NULL)
     {
-        struct vfs_class *me;
+        const struct vfs_class *me;
 
         me = vfs_path_get_by_index (vpath, -1)->class;
         if ((MEDATA->flags & VFS_S_USETMP) != 0 && (fh->ino != NULL))
@@ -787,15 +787,17 @@ vfs_s_ungetlocalcopy (const vfs_path_t * vpath, const vfs_path_t * local, gboole
 static int
 vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 {
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
+
     switch (ctlop)
     {
     case VFS_SETCTL_STALE_DATA:
         {
-            struct vfs_s_inode *ino = vfs_s_inode_from_path (vpath, 0);
+            struct vfs_s_inode *ino;
 
+            ino = vfs_s_inode_from_path (vpath, 0);
             if (ino == NULL)
                 return 0;
             if (arg)
@@ -1058,7 +1060,7 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
     int result = -1;
     struct vfs_s_super *super;
     void *cookie = NULL;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
     vfs_path_t *vpath_archive;
     struct vfs_s_subclass *subclass;
 
@@ -1182,7 +1184,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     struct vfs_s_super *super;
     const char *q;
     struct vfs_s_inode *ino;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -1419,7 +1421,7 @@ vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
 vfsid
 vfs_getid (const vfs_path_t * vpath)
 {
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
     if (!vfs_path_element_valid (path_element) || path_element->class->getid == NULL)

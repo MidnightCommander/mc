@@ -466,7 +466,7 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
 {
     if (mode == view_listing)
     {
-        vfs_path_element_t *path_element;
+        const vfs_path_element_t *path_element;
 
         path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
 

@@ -78,7 +78,7 @@ START_TEST (test_path_recode_base_utf8)
 {
     vfs_path_t *vpath;
     char *result;
-    vfs_path_element_t *element;
+    const vfs_path_element_t *element;
 
     str_init_strings ("UTF-8");
 
@@ -108,7 +108,7 @@ START_TEST (test_path_recode_base_koi8r)
 {
     vfs_path_t *vpath;
     char *result;
-    vfs_path_element_t *element;
+    const vfs_path_element_t *element;
 
     str_init_strings ("KOI8-R");
 

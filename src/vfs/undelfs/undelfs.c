@@ -155,8 +155,9 @@ static void
 undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
 {
     const char *p, *dirname;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+    const vfs_path_element_t *path_element;
 
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     /* To look like filesystem, we have virtual directories
        /#undel:XXX, which have no subdirectories. XXX is replaced with
@@ -343,7 +344,7 @@ static void *
 undelfs_opendir (const vfs_path_t * vpath)
 {
     char *file, *f;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
     undelfs_get_path (vpath, &file, &f);

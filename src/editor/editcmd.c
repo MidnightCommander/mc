@@ -323,7 +323,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     else
     {                           /* change line breaks */
         FILE *file;
-        vfs_path_element_t *path_element;
+        const vfs_path_element_t *path_element;
 
         mc_close (fd);
 

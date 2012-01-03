@@ -161,7 +161,7 @@ vfs_stamp_path (const char *path)
 {
     vfsid id;
     vfs_path_t *vpath;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     vpath = vfs_path_from_str (path);
     path_element = vfs_path_get_by_index (vpath, -1);
@@ -183,7 +183,7 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 
     ev_vfs_stamp_create_t event_data = { vclass, id, FALSE };
     vfs_path_t *vpath;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     /* There are three directories we have to take care of: current_dir,
        current_panel->cwd and other_panel->cwd. Athough most of the time either
@@ -272,7 +272,7 @@ void
 vfs_release_path (const char *dir)
 {
     vfs_path_t *vpath;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     vpath = vfs_path_from_str (dir);
     path_element = vfs_path_get_by_index (vpath, -1);

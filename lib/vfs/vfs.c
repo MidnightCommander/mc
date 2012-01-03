@@ -408,8 +408,9 @@ vfs_current_is_local (void)
 vfs_class_flags_t
 vfs_file_class_flags (const vfs_path_t * vpath)
 {
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+    const vfs_path_element_t *path_element;
 
+    path_element = vfs_path_get_by_index (vpath, -1);
     if (!vfs_path_element_valid (path_element))
         return VFSF_UNKNOWN;
 
@@ -436,7 +437,7 @@ vfs_init (void)
 void
 vfs_setup_work_dir (void)
 {
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     vfs_setup_cwd ();
 
@@ -525,7 +526,7 @@ vfs_print_message (const char *msg, ...)
 void
 vfs_setup_cwd (void)
 {
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (vfs_get_raw_current_dir () == NULL)
     {
@@ -589,8 +590,9 @@ _vfs_get_cwd (void)
 vfs_path_t *
 vfs_change_encoding (vfs_path_t * vpath, const char *encoding)
 {
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+    vfs_path_element_t *path_element;
 
+    path_element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, -1);
     /* don't add current encoding */
     if ((path_element->encoding != NULL) && (strcmp (encoding, path_element->encoding) == 0))
         return vpath;

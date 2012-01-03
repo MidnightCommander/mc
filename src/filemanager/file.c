@@ -112,7 +112,7 @@ const char *op_names[3] = {
 struct link
 {
     struct link *next;
-    struct vfs_class *vfs;
+    const struct vfs_class *vfs;
     dev_t dev;
     ino_t ino;
     short linkcount;
@@ -246,7 +246,7 @@ free_linklist (struct link **lc_linklist)
 static int
 is_in_linklist (struct link *lp, const vfs_path_t * vpath, struct stat *sb)
 {
-    struct vfs_class *class;
+    const struct vfs_class *class;
     ino_t ino = sb->st_ino;
     dev_t dev = sb->st_dev;
 
@@ -275,7 +275,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
 {
     struct link *lp;
 
-    struct vfs_class *my_vfs;
+    const struct vfs_class *my_vfs;
     ino_t ino = pstat->st_ino;
     dev_t dev = pstat->st_dev;
     struct stat link_stat;
@@ -288,7 +288,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
     for (lp = linklist; lp != NULL; lp = lp->next)
         if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev)
         {
-            struct vfs_class *lp_name_class;
+            const struct vfs_class *lp_name_class;
             int stat_result;
 
             lp_name_class = vfs_path_get_last_path_vfs (lp->src_vpath);
@@ -297,7 +297,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
             if (stat_result == 0 && link_stat.st_ino == ino
                 && link_stat.st_dev == dev && lp_name_class == my_vfs)
             {
-                struct vfs_class *p_class, *dst_name_class;
+                const struct vfs_class *p_class, *dst_name_class;
 
                 dst_name_class = vfs_path_get_last_path_vfs (dst_vpath);
                 p_class = vfs_path_get_last_path_vfs (lp->dst_vpath);

@@ -238,7 +238,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                                 }
                                 else
                                 {
-                                    vfs_path_element_t *path_element;
+                                    const vfs_path_element_t *path_element;
 
                                     path_element = vfs_path_get_by_index (vpath, -1);
                                     text = quote_func (path_element->path, 0);
@@ -512,7 +512,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
     if (*have_type == 0)
     {
         vfs_path_t *localfile_vpath;
-        char *realname;         /* name used with "file" */
+        const char *realname;         /* name used with "file" */
 
 #ifdef HAVE_CHARSET
         int got_encoding_data;
