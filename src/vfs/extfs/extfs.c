@@ -672,7 +672,7 @@ extfs_get_path_mangle (const vfs_path_t * vpath, struct archive **archive, gbool
     int result = -1;
     struct archive *parc;
     int fstype;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -814,8 +814,11 @@ extfs_get_archive_name (struct archive *archive)
     else
     {
         char *ret_str;
-        vfs_path_t *vpath = vfs_path_from_str (archive_name);
-        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+        vfs_path_t *vpath;
+        const vfs_path_element_t *path_element;
+
+        vpath = vfs_path_from_str (archive_name);
+        path_element = vfs_path_get_by_index (vpath, -1);
         ret_str = g_strdup (path_element->path);
         vfs_path_free (vpath);
         return ret_str;
@@ -923,7 +926,7 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
     if (entry->inode->local_filename == NULL)
     {
         vfs_path_t *local_filename_vpath;
-        char *local_filename;
+        const char *local_filename;
 
         local_handle = vfs_mkstemps (&local_filename_vpath, "extfs", entry->name);
 
@@ -1181,7 +1184,8 @@ extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
         goto cleanup;
     if (!S_ISLNK (entry->inode->mode))
     {
-        vfs_path_element_t *path_element;
+        const vfs_path_element_t *path_element;
+
         path_element = vfs_path_get_by_index (vpath, -1);
         path_element->class->verrno = EINVAL;
         goto cleanup;
@@ -1249,7 +1253,9 @@ extfs_unlink (const vfs_path_t * vpath)
         goto cleanup;
     if (S_ISDIR (entry->inode->mode))
     {
-        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+        const vfs_path_element_t *path_element;
+
+        path_element = vfs_path_get_by_index (vpath, -1);
         path_element->class->verrno = EISDIR;
         goto cleanup;
     }
@@ -1273,10 +1279,11 @@ extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
     char *q;
     struct entry *entry;
     int result = -1;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+    const vfs_path_element_t *path_element;
 
     (void) mode;
 
+    path_element = vfs_path_get_by_index (vpath, -1);
     q = extfs_get_path_mangle (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
@@ -1330,7 +1337,9 @@ extfs_rmdir (const vfs_path_t * vpath)
         goto cleanup;
     if (!S_ISDIR (entry->inode->mode))
     {
-        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+        const vfs_path_element_t *path_element;
+
+        path_element = vfs_path_get_by_index (vpath, -1);
         path_element->class->verrno = ENOTDIR;
         goto cleanup;
     }

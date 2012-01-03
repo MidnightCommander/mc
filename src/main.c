@@ -278,7 +278,7 @@ do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum exact)
 #if HAVE_CHARSET
     if (res)
     {
-        vfs_path_element_t *path_element;
+        const vfs_path_element_t *path_element;
 
         path_element = vfs_path_get_by_index (current_panel->cwd_vpath, -1);
         if (path_element->encoding != NULL)

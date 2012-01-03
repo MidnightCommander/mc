@@ -1984,7 +1984,7 @@ edit_get_write_filter (const vfs_path_t * write_name_vpath, const vfs_path_t * f
 {
     int i;
     char *p, *writename;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     i = edit_find_filter (filename_vpath);
     if (i < 0)

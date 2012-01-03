@@ -1967,8 +1967,7 @@ ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
     char *p;
     struct vfs_s_super *super;
     int r;
-    vfs_path_element_t *path_element;
-
+    const vfs_path_element_t *path_element;
     int flush_directory_cache = (flags & OPT_FLUSH);
 
     path_element = vfs_path_get_by_index (vpath, -1);

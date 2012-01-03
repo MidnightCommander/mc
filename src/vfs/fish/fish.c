@@ -1164,7 +1164,9 @@ fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2;
     struct vfs_s_super *super, *super2;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath1, -1);
+    const vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath1, -1);
 
     crpath1 = vfs_s_get_path (vpath1, &super, 0);
     if (crpath1 == NULL)
@@ -1195,8 +1197,7 @@ fish_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2;
     struct vfs_s_super *super, *super2;
-    vfs_path_element_t *path_element;
-
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath1, -1);
 
@@ -1231,7 +1232,9 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath2, -1);
+    const vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath2, -1);
 
     crpath = vfs_s_get_path (vpath2, &super, 0);
     if (crpath == NULL)
@@ -1259,7 +1262,7 @@ fish_chmod (const vfs_path_t * vpath, mode_t mode)
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -1302,10 +1305,9 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
         const char *crpath;
         char *rpath;
         struct vfs_s_super *super;
-        vfs_path_element_t *path_element;
+        const vfs_path_element_t *path_element;
 
         path_element = vfs_path_get_by_index (vpath, -1);
-
 
         crpath = vfs_s_get_path (vpath, &super, 0);
         if (crpath == NULL)
@@ -1338,9 +1340,10 @@ fish_utime (const vfs_path_t * vpath, struct utimbuf *times)
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
+
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
@@ -1377,9 +1380,10 @@ fish_unlink (const vfs_path_t * vpath)
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
+
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
@@ -1404,9 +1408,10 @@ fish_exists (const vfs_path_t * vpath)
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
+
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
@@ -1432,7 +1437,7 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     (void) mode;
 
@@ -1472,7 +1477,7 @@ fish_rmdir (const vfs_path_t * vpath)
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 

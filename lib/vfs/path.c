@@ -499,7 +499,7 @@ vfs_path_from_str_uri_parser (char *path)
  */
 
 static void
-vfs_path_tokens_add_class_info (vfs_path_element_t * element, GString * ret_tokens,
+vfs_path_tokens_add_class_info (const vfs_path_element_t * element, GString * ret_tokens,
                                 GString * element_tokens)
 {
     if (((element->class->flags & VFSF_LOCAL) == 0 || ret_tokens->len > 0)
@@ -612,7 +612,9 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
 
     for (element_index = 0; element_index < elements_count; element_index++)
     {
-        vfs_path_element_t *element = vfs_path_get_by_index (vpath, element_index);
+        const vfs_path_element_t *element;
+
+        element = vfs_path_get_by_index (vpath, element_index);
 
         if (element->vfs_prefix != NULL)
         {
@@ -795,7 +797,7 @@ vfs_path_add_element (const vfs_path_t * vpath, const vfs_path_element_t * path_
  * @return path element.
  */
 
-vfs_path_element_t *
+const vfs_path_element_t *
 vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 {
     if (element_index < 0)
@@ -914,7 +916,12 @@ vfs_path_free (vfs_path_t * vpath)
 
     for (vpath_element_index = 0; vpath_element_index < vfs_path_elements_count (vpath);
          vpath_element_index++)
-        vfs_path_element_free (vfs_path_get_by_index (vpath, vpath_element_index));
+    {
+        vfs_path_element_t *path_element;
+
+        path_element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, vpath_element_index);
+        vfs_path_element_free (path_element);
+    }
 
     g_array_free (vpath->path, TRUE);
     g_free (vpath);
@@ -940,7 +947,7 @@ vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index)
     if (element_index < 0)
         element_index = vfs_path_elements_count (vpath) + element_index;
 
-    element = vfs_path_get_by_index (vpath, element_index);
+    element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, element_index);
     vpath->path = g_array_remove_index (vpath->path, element_index);
     vfs_path_element_free (element);
 }
@@ -956,7 +963,9 @@ vfs_prefix_to_class (const char *prefix)
     /* Avoid first class (localfs) that would accept any prefix */
     for (i = 1; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        struct vfs_class *vfs;
+
+        vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
         if (vfs->which != NULL)
         {
             if (vfs->which (vfs, prefix) == -1)
@@ -1011,9 +1020,11 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
     }
     for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
     {
-        char *groupname = g_strdup_printf ("path-element-%zd", element_index);
-        vfs_path_element_t *element = vfs_path_get_by_index (vpath, element_index);
+        char *groupname;
+        const vfs_path_element_t *element;
 
+        groupname = g_strdup_printf ("path-element-%zd", element_index);
+        element = vfs_path_get_by_index (vpath, element_index);
         /* convert one element to config group */
 
         mc_config_set_string_raw (cpath, groupname, "path", element->path);
@@ -1238,7 +1249,7 @@ vfs_path_tokens_count (const vfs_path_t * vpath)
 
     for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
     {
-        vfs_path_element_t *element;
+        const vfs_path_element_t *element;
         char **path_tokens, **iterator;
 
         element = vfs_path_get_by_index (vpath, element_index);
@@ -1300,7 +1311,7 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t l
 
     for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
     {
-        vfs_path_element_t *element;
+        const vfs_path_element_t *element;
         char **path_tokens, **iterator;
 
         g_string_assign (element_tokens, "");

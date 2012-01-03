@@ -3762,7 +3762,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
 
     for (indx = 0; indx < vfs_path_elements_count (vpath); indx++)
     {
-        vfs_path_element_t *path_element;
+        const vfs_path_element_t *path_element;
         GIConv converter;
 
         path_element = vfs_path_get_by_index (vpath, indx);
@@ -4056,7 +4056,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
 
 #ifdef HAVE_CHARSET
     {
-        vfs_path_element_t *path_element;
+        const vfs_path_element_t *path_element;
 
         path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
         if (path_element->encoding != NULL)
