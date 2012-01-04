@@ -571,7 +571,6 @@ load_panelize (void)
     gchar **profile_keys, **keys;
     gsize len;
     GIConv conv;
-    GString *buffer;
 
     conv = str_crt_conv_from ("UTF-8");
 
@@ -593,25 +592,22 @@ load_panelize (void)
 
     while (*profile_keys)
     {
+        GString *buffer;
 
         if (mc_global.utf8_display || conv == INVALID_CONV)
-        {
             buffer = g_string_new (*profile_keys);
-        }
         else
         {
             buffer = g_string_new ("");
             if (str_convert (conv, *profile_keys, buffer) == ESTR_FAILURE)
-            {
-                g_string_free (buffer, TRUE);
-                buffer = g_string_new (*profile_keys);
-            }
+                g_string_assign (buffer, *profile_keys);
         }
 
         add2panelize (g_string_free (buffer, FALSE),
                       mc_config_get_string (mc_main_config, panelize_section, *profile_keys, ""));
         profile_keys++;
     }
+
     g_strfreev (keys);
     str_close_conv (conv);
 }
