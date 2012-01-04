@@ -13,6 +13,7 @@ TESTS = \
 	current_dir \
 	path_recode \
 	path_serialize \
+	tempdir \
 	vfs_parse_ls_lga \
 	vfs_path_string_convert \
 	vfs_prefix_to_class \
@@ -32,6 +33,9 @@ path_recode_SOURCES = \
 
 path_serialize_SOURCES = \
 	path_serialize.c
+
+tempdir_SOURCES = \
+	tempdir.c
 
 vfs_split_SOURCES = \
 	vfs_split.c
