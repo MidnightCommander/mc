@@ -482,7 +482,7 @@ edit_load_file (WEdit * edit)
         if (*edit->filename)
         {
             edit->undo_stack_disable = 1;
-            if (edit_insert_file (edit, edit->filename) == 0)
+            if (edit_insert_file (edit, edit->filename) < 0)
             {
                 edit_clean (edit);
                 return 1;
@@ -2094,7 +2094,7 @@ edit_insert_file (WEdit * edit, const char *filename)
                 edit_error_dialog (_("Error"), errmsg);
                 g_free (errmsg);
                 g_free (p);
-                return 0;
+                return -1;
             }
         }
         else
@@ -2104,7 +2104,7 @@ edit_insert_file (WEdit * edit, const char *filename)
             edit_error_dialog (_("Error"), errmsg);
             g_free (errmsg);
             g_free (p);
-            return 0;
+            return -1;
         }
         g_free (p);
     }
@@ -2116,7 +2116,7 @@ edit_insert_file (WEdit * edit, const char *filename)
         char *buf;
         file = mc_open (filename, O_RDONLY | O_BINARY);
         if (file == -1)
-            return 0;
+            return -1;
         buf = g_malloc0 (TEMP_BUF_LEN);
         blocklen = mc_read (file, buf, sizeof (VERTICAL_MAGIC));
         if (blocklen > 0)
