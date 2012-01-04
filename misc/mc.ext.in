@@ -566,8 +566,9 @@ regex/\.([Tt][Ee][Xx])$
 	Include=editor
 
 # DjVu
-regex/\.(djvu|DJVU)$
+regex/\.(djvu?|DJVU?)$
 	Open=djview %f &
+	View=%view{ascii} djvused -e print-pure-txt %f
 
 ### Miscellaneous ###
 
