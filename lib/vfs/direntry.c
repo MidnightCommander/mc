@@ -1220,7 +1220,11 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         vfs_s_insert_entry (path_element->class, dir, ent);
         if ((VFSDATA (path_element)->flags & VFS_S_USETMP) != 0)
         {
-            tmp_handle = vfs_mkstemps (&ino->localname, path_element->class->name, name);
+            vfs_path_t *tmp_vpath;
+
+            tmp_handle = vfs_mkstemps (&tmp_vpath, path_element->class->name, name);
+            ino->localname = vfs_path_to_str (tmp_vpath);
+            vfs_path_free (tmp_vpath);
             if (tmp_handle == -1)
             {
                 g_free (dirname);
@@ -1300,6 +1304,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     int handle, n;
     off_t stat_size = ino->st.st_size;
     vfs_file_handler_t fh;
+    vfs_path_t *tmp_vpath;
 
     if ((MEDATA->flags & VFS_S_USETMP) == 0)
         return -1;
@@ -1309,7 +1314,9 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     fh.ino = ino;
     fh.handle = -1;
 
-    handle = vfs_mkstemps (&ino->localname, me->name, ino->ent->name);
+    handle = vfs_mkstemps (&tmp_vpath, me->name, ino->ent->name);
+    ino->localname = vfs_path_to_str (tmp_vpath);
+    vfs_path_free (tmp_vpath);
     if (handle == -1)
     {
         me->verrno = errno;

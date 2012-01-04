@@ -152,14 +152,17 @@ dview_select_encoding (WDiff * dview)
 #endif
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-rewrite_backup_content (const char *from_file_name, const char *to_file_name)
+rewrite_backup_content (const vfs_path_t * from_file_name_vpath, const char *to_file_name)
 {
     FILE *backup_fd;
     char *contents;
     gsize length;
+    const char *from_file_name;
 
+    from_file_name = vfs_path_get_by_index (from_file_name_vpath, -1)->path;
     if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
         return FALSE;
 
@@ -194,7 +197,7 @@ static int
 open_temp (void **name)
 {
     int fd;
-    char *diff_file_name = NULL;
+    vfs_path_t *diff_file_name = NULL;
 
     fd = mc_mkstemps (&diff_file_name, "mcdiff", NULL);
     if (fd == -1)
@@ -203,7 +206,8 @@ open_temp (void **name)
                  _("Cannot create temporary diff file\n%s"), unix_error_string (errno));
         return -1;
     }
-    *name = diff_file_name;
+    *name = vfs_path_to_str (diff_file_name);
+    vfs_path_free (diff_file_name);
     return fd;
 }
 
@@ -2198,7 +2202,7 @@ do_merge_hunk (WDiff * dview)
     {
         int merge_file_fd;
         FILE *merge_file;
-        char *merge_file_name = NULL;
+        vfs_path_t *merge_file_name_vpath = NULL;
 
         if (!dview->merged)
         {
@@ -2213,7 +2217,7 @@ do_merge_hunk (WDiff * dview)
 
         }
 
-        merge_file_fd = mc_mkstemps (&merge_file_name, "mcmerge", NULL);
+        merge_file_fd = mc_mkstemps (&merge_file_name_vpath, "mcmerge", NULL);
         if (merge_file_fd == -1)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot create temporary merge file\n%s"),
@@ -2237,9 +2241,9 @@ do_merge_hunk (WDiff * dview)
         }
         fflush (merge_file);
         fclose (merge_file);
-        res = rewrite_backup_content (merge_file_name, dview->file[0]);
-        unlink (merge_file_name);
-        g_free (merge_file_name);
+        res = rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
+        mc_unlink (merge_file_name_vpath);
+        vfs_path_free (merge_file_name_vpath);
     }
 }
 

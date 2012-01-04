@@ -123,11 +123,10 @@ edit_save_file (WEdit * edit, const char *filename)
     char *p;
     gchar *tmp;
     long filelen = 0;
-    char *savename = 0;
     gchar *real_filename;
     int this_save_mode, fd = -1;
     vfs_path_t *real_filename_vpath;
-    vfs_path_t *savename_vpath;
+    vfs_path_t *savename_vpath = NULL;
 
     if (!filename)
         return 0;
@@ -217,11 +216,11 @@ edit_save_file (WEdit * edit, const char *filename)
         }
         else
             savedir = g_strdup (".");
-        saveprefix = concat_dir_and_file (savedir, "cooledit");
+        saveprefix = mc_build_filename (savedir, "cooledit", NULL);
         g_free (savedir);
-        fd = mc_mkstemps (&savename, saveprefix, NULL);
+        fd = mc_mkstemps (&savename_vpath, saveprefix, NULL);
         g_free (saveprefix);
-        if (!savename)
+        if (savename_vpath == NULL)
         {
             g_free (real_filename);
             vfs_path_free (real_filename_vpath);
@@ -235,9 +234,7 @@ edit_save_file (WEdit * edit, const char *filename)
         close (fd);
     }
     else
-        savename = g_strdup (real_filename);
-
-    savename_vpath = vfs_path_from_str (savename);
+        savename_vpath = vfs_path_from_str (real_filename);
 
     (void) mc_chown (savename_vpath, edit->stat1.st_uid, edit->stat1.st_gid);
     (void) mc_chmod (savename_vpath, edit->stat1.st_mode);
@@ -247,7 +244,7 @@ edit_save_file (WEdit * edit, const char *filename)
         goto error_save;
 
     /* pipe save */
-    p = edit_get_write_filter (savename, real_filename);
+    p = edit_get_write_filter (savename_vpath, real_filename);
     if (p != NULL)
     {
         FILE *file;
@@ -330,19 +327,19 @@ edit_save_file (WEdit * edit, const char *filename)
             goto error_save;
 
         /* Update the file information, especially the mtime. */
-        savename_vpath = vfs_path_from_str (savename);
         if (mc_stat (savename_vpath, &edit->stat1) == -1)
             goto error_save;
     }
     else
     {                           /* change line breaks */
         FILE *file;
+        vfs_path_element_t *path_element;
 
         mc_close (fd);
 
-        file = (FILE *) fopen (savename, "w");
-
-        if (file)
+        path_element = vfs_path_get_by_index (savename_vpath, -1);
+        file = (FILE *) fopen (path_element->path, "w");
+        if (file != NULL)
         {
             filelen = edit_write_stream (edit, file);
             fclose (file);
@@ -351,7 +348,7 @@ edit_save_file (WEdit * edit, const char *filename)
         {
             char *msg;
 
-            msg = g_strdup_printf (_("Cannot open file for writing: %s"), savename);
+            msg = g_strdup_printf (_("Cannot open file for writing: %s"), path_element->path);
             edit_error_dialog (_("Error"), msg);
             g_free (msg);
             goto error_save;
@@ -379,8 +376,8 @@ edit_save_file (WEdit * edit, const char *filename)
     if (this_save_mode != EDIT_QUICK_SAVE)
         if (mc_rename (savename_vpath, real_filename_vpath) == -1)
             goto error_save;
+
     g_free (real_filename);
-    g_free (savename);
     vfs_path_free (real_filename_vpath);
     vfs_path_free (savename_vpath);
     return 1;
@@ -390,7 +387,6 @@ edit_save_file (WEdit * edit, const char *filename)
      *      mc_unlink (savename);
      */
     g_free (real_filename);
-    g_free (savename);
     vfs_path_free (real_filename_vpath);
     vfs_path_free (savename_vpath);
     return 0;

@@ -1522,10 +1522,17 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
 
         if (!fh->ino->localname)
         {
-            int tmp_handle = vfs_mkstemps (&fh->ino->localname, me->name,
-                                           fh->ino->ent->name);
+            vfs_path_t *vpath;
+            int tmp_handle;
+
+            tmp_handle = vfs_mkstemps (&vpath, me->name, fh->ino->ent->name);
             if (tmp_handle == -1)
+            {
+                vfs_path_free (vpath);
                 goto fail;
+            }
+            fh->ino->localname = vfs_path_to_str (vpath);
+            vfs_path_free (vpath);
             close (tmp_handle);
         }
         return 0;

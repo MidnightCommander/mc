@@ -166,7 +166,7 @@ vfs_findgid (const char *gname)
  */
 
 int
-vfs_mkstemps (char **pname, const char *prefix, const char *param_basename)
+vfs_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *param_basename)
 {
     const char *p;
     char *suffix, *q;
@@ -197,7 +197,7 @@ vfs_mkstemps (char **pname, const char *prefix, const char *param_basename)
     }
     *q = 0;
 
-    fd = mc_mkstemps (pname, prefix, suffix);
+    fd = mc_mkstemps (pname_vpath, prefix, suffix);
     g_free (suffix);
     return fd;
 }

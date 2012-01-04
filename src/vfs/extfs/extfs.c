@@ -921,23 +921,26 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     if (entry->inode->local_filename == NULL)
     {
+        vfs_path_t *local_filename_vpath;
         char *local_filename;
 
-        local_handle = vfs_mkstemps (&local_filename, "extfs", entry->name);
+        local_handle = vfs_mkstemps (&local_filename_vpath, "extfs", entry->name);
 
         if (local_handle == -1)
             return NULL;
         close (local_handle);
+        local_filename = vfs_path_get_by_index (local_filename_vpath, -1)->path;
 
         if (!created && ((flags & O_TRUNC) == 0)
             && extfs_cmd (" copyout ", archive, entry, local_filename))
         {
             unlink (local_filename);
-            g_free (local_filename);
+            vfs_path_free (local_filename_vpath);
             my_errno = EIO;
             return NULL;
         }
-        entry->inode->local_filename = local_filename;
+        entry->inode->local_filename = g_strdup (local_filename);
+        vfs_path_free (local_filename_vpath);
     }
 
     local_handle = open (entry->inode->local_filename, NO_LINEAR (flags), mode);

@@ -50,11 +50,18 @@ struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 static void
 setup (void)
 {
+    str_init_strings (NULL);
+
+    vfs_init ();
+    init_localfs ();
+    vfs_setup_work_dir ();
 }
 
 static void
 teardown (void)
 {
+    vfs_shut ();
+    str_uninit_strings ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -79,16 +86,20 @@ END_TEST
 
 START_TEST (test_mc_mkstemps)
 {
-    char *pname = NULL;
+    vfs_path_t *pname_vpath = NULL;
+    char *pname;
     char *begin_pname;
     int fd;
 
-    fd = mc_mkstemps (&pname, "mctest-", NULL);
+    fd = mc_mkstemps (&pname_vpath, "mctest-", NULL);
     if (fd == -1)
     {
         fail ("\nerror creating temp file!\n");
     }
+    pname = vfs_path_to_str (pname_vpath);
+    vfs_path_free (pname_vpath);
     close (fd);
+
     fail_unless (
         g_file_test (pname, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
         "\nNo such file: %s\n", pname

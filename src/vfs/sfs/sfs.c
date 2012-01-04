@@ -120,7 +120,7 @@ cachedfile_compare (const void *a, const void *b)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_vfmake (const vfs_path_t * vpath, char *cache)
+sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
 {
     int w;
     char pad[10240];
@@ -178,8 +178,13 @@ sfs_vfmake (const vfs_path_t * vpath, char *cache)
                 ptr = path_element->path;
                 break;
             case '3':
-                ptr = cache;
-                break;
+                {
+                    vfs_path_element_t *tmp_path_element;
+
+                    tmp_path_element = vfs_path_get_by_index (cache_vpath, -1);
+                    ptr = tmp_path_element->path;
+                    break;
+                }
             case '%':
                 COPY_CHAR;
                 continue;
@@ -214,7 +219,7 @@ sfs_redirect (const vfs_path_t * vpath)
 {
     GSList *cur;
     cachedfile *cf;
-    char *cache;
+    vfs_path_t *cache_vpath;
     int handle;
     vfs_path_element_t *path_element;
     char *path = vfs_path_to_str (vpath);
@@ -230,26 +235,27 @@ sfs_redirect (const vfs_path_t * vpath)
         return cf->cache;
     }
 
-    handle = vfs_mkstemps (&cache, "sfs", path_element->path);
+    handle = vfs_mkstemps (&cache_vpath, "sfs", path_element->path);
 
     if (handle == -1)
         return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
 
     close (handle);
 
-    if (sfs_vfmake (vpath, cache) == 0)
+    if (sfs_vfmake (vpath, cache_vpath) == 0)
     {
         cf = g_new (cachedfile, 1);
         cf->name = vfs_path_to_str (vpath);
-        cf->cache = cache;
+        cf->cache = vfs_path_to_str (cache_vpath);
         head = g_slist_prepend (head, cf);
+        vfs_path_free (cache_vpath);
 
         vfs_stamp_create (&vfs_sfs_ops, (cachedfile *) head->data);
-        return cache;
+        return cf->cache;
     }
 
-    unlink (cache);
-    g_free (cache);
+    mc_unlink (cache_vpath);
+    vfs_path_free (cache_vpath);
     return "/I_MUST_NOT_EXIST";
 }
 

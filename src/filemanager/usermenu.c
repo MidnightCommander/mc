@@ -418,7 +418,7 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
     gboolean do_quote = FALSE;
     char lc_prompt[80];
     int col;
-    char *file_name;
+    vfs_path_t *file_name_vpath;
     int run_view = 0;
 
     /* Skip menu entry title line */
@@ -428,12 +428,13 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
         return;
     }
 
-    cmd_file_fd = mc_mkstemps (&file_name, "mcusr", SCRIPT_SUFFIX);
+    cmd_file_fd = mc_mkstemps (&file_name_vpath, "mcusr", SCRIPT_SUFFIX);
 
     if (cmd_file_fd == -1)
     {
         message (D_ERROR, MSG_ERROR, _("Cannot create temporary command file\n%s"),
                  unix_error_string (errno));
+        vfs_path_free (file_name_vpath);
         return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
@@ -466,8 +467,8 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
                 {
                     /* User canceled */
                     fclose (cmd_file);
-                    unlink (file_name);
-                    g_free (file_name);
+                    mc_unlink (file_name_vpath);
+                    vfs_path_free (file_name_vpath);
                     return;
                 }
                 if (do_quote)
@@ -528,17 +529,25 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
         }
     }
     fclose (cmd_file);
-    chmod (file_name, S_IRWXU);
+    mc_chmod (file_name_vpath, S_IRWXU);
     if (run_view)
     {
+        char *file_name;
+
+        file_name = vfs_path_to_str (file_name_vpath);
         mcview_viewer (file_name, NULL, 0);
+        g_free (file_name);
         dialog_switch_process_pending ();
     }
     else
     {
         /* execute the command indirectly to allow execution even
          * on no-exec filesystems. */
-        char *cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
+        char *file_name, *cmd;
+
+        file_name = vfs_path_to_str (file_name_vpath);
+        cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
+        g_free (file_name);
         if (!show_prompt)
         {
             if (system (cmd) == -1)
@@ -550,8 +559,8 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
         }
         g_free (cmd);
     }
-    unlink (file_name);
-    g_free (file_name);
+    mc_unlink (file_name_vpath);
+    vfs_path_free (file_name_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
