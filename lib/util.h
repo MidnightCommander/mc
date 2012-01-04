@@ -166,10 +166,6 @@ void canonicalize_pathname (char *);
 int my_mkdir (const char *s, mode_t mode);
 int my_rmdir (const char *s);
 
-/* Creating temporary files safely */
-const char *mc_tmpdir (void);
-int mc_mkstemps (char **pname, const char *prefix, const char *suffix);
-
 #ifdef HAVE_REALPATH
 #define mc_realpath realpath
 #else
