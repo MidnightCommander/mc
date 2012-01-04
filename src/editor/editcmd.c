@@ -34,7 +34,9 @@
 
 #include <config.h>
 
+#ifdef HAVE_ASSERT_H
 #include <assert.h>
+#endif
 #include <ctype.h>
 
 #include <stdio.h>
@@ -355,7 +357,9 @@ edit_save_file (WEdit * edit, const char *filename)
 
     if (this_save_mode == EDIT_DO_BACKUP)
     {
+#ifdef HAVE_ASSERT_H
         assert (option_backup_ext != NULL);
+#endif
         tmp = g_strconcat (real_filename, option_backup_ext, (char *) NULL);
         if (mc_rename (real_filename, tmp) == -1)
         {
@@ -1401,7 +1405,9 @@ menu_save_mode_cmd (void)
     size_t maxlen = 0;
     size_t w0, w1, b_len, w3;
 
+#ifdef HAVE_ASSERT_H
     assert (option_backup_ext != NULL);
+#endif
 
     /* OK/Cancel buttons */
     w0 = str_term_width1 (_(widgets[0].u.button.text)) + 3;

@@ -76,7 +76,9 @@ mcview_growbuf_init (mcview_t * view)
 void
 mcview_growbuf_free (mcview_t * view)
 {
+#ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
+#endif
 
     g_ptr_array_foreach (view->growbuf_blockptr, (GFunc) g_free, NULL);
 
@@ -91,7 +93,9 @@ mcview_growbuf_free (mcview_t * view)
 off_t
 mcview_growbuf_filesize (mcview_t * view)
 {
+#ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
+#endif
 
     if (view->growbuf_blockptr->len == 0)
         return 0;
@@ -113,7 +117,9 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
     size_t bytesfree;
     gboolean short_read;
 
+#ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
+#endif
 
     if (view->growbuf_finished)
         return;
@@ -151,7 +157,10 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
         }
         else
         {
+#ifdef HAVE_ASSERT_H
             assert (view->datasource == DS_VFS_PIPE);
+#endif
+
             do
             {
                 nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
@@ -184,7 +193,9 @@ mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
     pageno = byte_index / VIEW_PAGE_SIZE;
     pageindex = byte_index % VIEW_PAGE_SIZE;
 
+#ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
+#endif
 
     if (pageno < 0)
         return FALSE;
@@ -216,7 +227,9 @@ mcview_get_ptr_growing_buffer (mcview_t * view, off_t byte_index)
     off_t pageno = byte_index / VIEW_PAGE_SIZE;
     off_t pageindex = byte_index % VIEW_PAGE_SIZE;
 
+#ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
+#endif
 
     if (pageno < 0)
         return NULL;

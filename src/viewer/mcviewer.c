@@ -274,7 +274,9 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 {
     gboolean retval = FALSE;
 
+#ifdef HAVE_ASSERT_H
     assert (view->bytes_per_line != 0);
+#endif
 
     view->filename = g_strdup (file);
 

@@ -224,7 +224,10 @@ mcview_move_left (mcview_t * view, off_t columns)
     if (view->hex_mode)
     {
         off_t old_cursor = view->hex_cursor;
+
+#ifdef HAVE_ASSERT_H
         assert (columns == 1);
+#endif
         if (view->hexview_in_text || !view->hexedit_lownibble)
         {
             if (view->hex_cursor > 0)
@@ -253,8 +256,11 @@ mcview_move_right (mcview_t * view, off_t columns)
     {
         off_t last_byte;
         off_t old_cursor = view->hex_cursor;
+
         last_byte = mcview_offset_doz (mcview_get_filesize (view), 1);
+#ifdef HAVE_ASSERT_H
         assert (columns == 1);
+#endif
         if (view->hexview_in_text || view->hexedit_lownibble)
         {
             if (view->hex_cursor < last_byte)
