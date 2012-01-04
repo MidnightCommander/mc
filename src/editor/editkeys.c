@@ -30,7 +30,6 @@
 
 #include <config.h>
 
-#include <assert.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>

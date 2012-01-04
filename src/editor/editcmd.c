@@ -34,7 +34,9 @@
 
 #include <config.h>
 
+#ifdef HAVE_ASSERT_H
 #include <assert.h>
+#endif
 #include <ctype.h>
 
 #include <stdio.h>
@@ -356,7 +358,9 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         vfs_path_t *tmp_vpath;
         gboolean ok;
 
+#ifdef HAVE_ASSERT_H
         assert (option_backup_ext != NULL);
+#endif
         tmp_vpath = vfs_path_append_new (real_filename_vpath, option_backup_ext, (char *) NULL);
         ok = (mc_rename (real_filename_vpath, tmp_vpath) != -1);
         vfs_path_free (tmp_vpath);
@@ -1413,7 +1417,9 @@ menu_save_mode_cmd (void)
     size_t maxlen = 0;
     size_t w0, w1, b_len, w3;
 
+#ifdef HAVE_ASSERT_H
     assert (option_backup_ext != NULL);
+#endif
 
     /* OK/Cancel buttons */
     w0 = str_term_width1 (_(widgets[0].u.button.text)) + 3;

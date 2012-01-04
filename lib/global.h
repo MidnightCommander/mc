@@ -137,7 +137,9 @@
 #else
 #define NDEBUG
 #endif
+#ifdef HAVE_ASSERT_H
 #include <assert.h>
+#endif
 #endif
 
 #define MC_ERROR g_quark_from_static_string (PACKAGE)

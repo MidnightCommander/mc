@@ -349,7 +349,9 @@ mcview_hexedit_save_changes (mcview_t * view)
         char *text;
         struct hexedit_change_node *curr, *next;
 
+#ifdef HAVE_ASSERT_H
         assert (view->filename_vpath != NULL);
+#endif
 
         fp = mc_open (view->filename_vpath, O_WRONLY);
         if (fp != -1)
