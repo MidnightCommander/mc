@@ -1468,7 +1468,6 @@ get_random_hint (int force)
     static int last_sec;
     static struct timeval tv;
     GIConv conv;
-    GString *buffer;
 
     /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
@@ -1501,10 +1500,13 @@ get_random_hint (int force)
     conv = str_crt_conv_from ("UTF-8");
     if (conv != INVALID_CONV)
     {
+        GString *buffer;
+
         buffer = g_string_new ("");
         if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE)
-            result = g_strdup (buffer->str);
-        g_string_free (buffer, TRUE);
+            result = g_string_free (buffer, FALSE);
+        else
+            g_string_free (buffer, TRUE);
         str_close_conv (conv);
     }
 
