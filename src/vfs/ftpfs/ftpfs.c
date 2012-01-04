@@ -627,7 +627,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 
         reply_up = g_ascii_strup (reply_string, -1);
         SUP->remote_is_amiga = strstr (reply_up, "AMIGA") != 0;
-        if (strstr (reply_up, " SPFTP/1.0.0000 SERVER ")) /* handles `LIST -la` in a weird way */
+        if (strstr (reply_up, " SPFTP/1.0.0000 SERVER "))       /* handles `LIST -la` in a weird way */
             SUP->strict = RFC_STRICT;
         g_free (reply_up);
 
@@ -2105,7 +2105,7 @@ ftpfs_rmdir (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ftpfs_fh_free_data (vfs_file_handler_t *fh)
+ftpfs_fh_free_data (vfs_file_handler_t * fh)
 {
     if (fh != NULL)
     {
@@ -2143,11 +2143,18 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
         {
             if (!fh->ino->localname)
             {
-                int handle = vfs_mkstemps (&fh->ino->localname, me->name,
-                                           fh->ino->ent->name);
+                vfs_path_t *vpath;
+                int handle;
+
+                handle = vfs_mkstemps (&vpath, me->name, fh->ino->ent->name);
                 if (handle == -1)
+                {
+                    vfs_path_free (vpath);
                     goto fail;
+                }
                 close (handle);
+                fh->ino->localname = vfs_path_to_str (vpath);
+                vfs_path_free (vpath);
                 ftp->append = flags & O_APPEND;
             }
             return 0;

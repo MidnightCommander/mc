@@ -1966,16 +1966,18 @@ edit_get_utf (WEdit * edit, long byte_index, int *char_width)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-edit_get_write_filter (const char *write_name, const char *filename)
+edit_get_write_filter (const vfs_path_t * write_name_vpath, const char *filename)
 {
     int i;
     char *p, *writename;
+    vfs_path_element_t *path_element;
 
     i = edit_find_filter (filename);
     if (i < 0)
         return NULL;
 
-    writename = name_quote (write_name, 0);
+    path_element = vfs_path_get_by_index (write_name_vpath, -1);
+    writename = name_quote (path_element->path, 0);
     p = g_strdup_printf (all_filters[i].write, writename);
     g_free (writename);
     return p;

@@ -79,6 +79,7 @@ static char *
 mc_def_getlocalcopy (const char *filename)
 {
     char *tmp = NULL;
+    vfs_path_t *tmp_vpath = NULL;
     int fdin = -1, fdout = -1;
     ssize_t i;
     char buffer[BUF_1K * 8];
@@ -90,7 +91,7 @@ mc_def_getlocalcopy (const char *filename)
     if (fdin == -1)
         goto fail;
 
-    fdout = vfs_mkstemps (&tmp, "vfs", filename);
+    fdout = vfs_mkstemps (&tmp_vpath, "vfs", filename);
     if (fdout == -1)
         goto fail;
 
@@ -105,26 +106,27 @@ mc_def_getlocalcopy (const char *filename)
     fdin = -1;
     if (i == -1)
         goto fail;
-    if (close (fdout) == -1)
+    i = close (fdout);
+    fdout = -1;
+    if (i == -1)
     {
         fdout = -1;
         goto fail;
     }
 
     if (mc_stat (vpath, &mystat) != -1)
-        chmod (tmp, mystat.st_mode);
-    vfs_path_free (vpath);
+        mc_chmod (tmp_vpath, mystat.st_mode);
 
-    return tmp;
+    tmp = vfs_path_to_str (tmp_vpath);
 
   fail:
     vfs_path_free (vpath);
+    vfs_path_free (tmp_vpath);
     if (fdout != -1)
         close (fdout);
     if (fdin != -1)
         mc_close (fdin);
-    g_free (tmp);
-    return NULL;
+    return tmp;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -763,7 +765,7 @@ mc_lseek (int fd, off_t offset, int whence)
  */
 
 int
-mc_mkstemps (char **pname, const char *prefix, const char *suffix)
+mc_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *suffix)
 {
     static const char letters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     static unsigned long value;
@@ -771,6 +773,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
     char *tmpbase;
     char *tmpname;
     char *XXXXXX;
+    char *ret_path;
     int count;
 
     if (strchr (prefix, PATH_SEP) == NULL)
@@ -784,7 +787,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
     }
 
     tmpname = g_strconcat (tmpbase, "XXXXXX", suffix, (char *) NULL);
-    *pname = tmpname;
+    ret_path = tmpname;
     XXXXXX = &tmpname[strlen (tmpbase)];
     g_free (tmpbase);
 
@@ -814,6 +817,8 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
         if (fd >= 0)
         {
             /* Successfully created.  */
+            *pname_vpath = vfs_path_from_str (ret_path);
+            g_free (ret_path);
             return fd;
         }
 
@@ -824,8 +829,8 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
     }
 
     /* Unsuccessful. Free the filename. */
-    g_free (tmpname);
-    *pname = NULL;
+    g_free (ret_path);
+    *pname_vpath = NULL;
 
     return -1;
 }
@@ -894,25 +899,30 @@ mc_tmpdir (void)
     if (error != NULL)
     {
         int test_fd;
-        char *test_fn, *fallback_prefix;
-        int fallback_ok = 0;
+        char *fallback_prefix;
+        gboolean fallback_ok = FALSE;
+        vfs_path_t *test_vpath;
 
         if (*error)
             fprintf (stderr, error, buffer);
 
         /* Test if sys_tmp is suitable for temporary files */
         fallback_prefix = g_strdup_printf ("%s/mctest", sys_tmp);
-        test_fd = mc_mkstemps (&test_fn, fallback_prefix, NULL);
+        test_fd = mc_mkstemps (&test_vpath, fallback_prefix, NULL);
         g_free (fallback_prefix);
         if (test_fd != -1)
         {
+            char *test_fn;
+
+            test_fn = vfs_path_to_str (test_vpath);
             close (test_fd);
             test_fd = open (test_fn, O_RDONLY);
+            g_free (test_fn);
             if (test_fd != -1)
             {
                 close (test_fd);
                 unlink (test_fn);
-                fallback_ok = 1;
+                fallback_ok = TRUE;
             }
         }
 
@@ -928,6 +938,7 @@ mc_tmpdir (void)
             g_snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
         }
 
+        vfs_path_free (test_vpath);
         fprintf (stderr, "%s\n", _("Press any key to continue..."));
         getc (stdin);
     }

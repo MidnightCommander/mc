@@ -15,6 +15,7 @@
 
 #include "lib/search.h"         /* mc_search_type_t */
 #include "lib/widget.h"         /* cb_ret_t */
+#include "lib/vfs/vfs.h"        /* vfs_path_t */
 
 #include "edit.h"
 
@@ -219,7 +220,7 @@ void edit_push_redo_action (WEdit * edit, long c, ...);
 void edit_push_key_press (WEdit * edit);
 void edit_insert_ahead (WEdit * edit, int c);
 long edit_write_stream (WEdit * edit, FILE * f);
-char *edit_get_write_filter (const char *writename, const char *filename);
+char *edit_get_write_filter (const vfs_path_t * write_name_vpath, const char *filename);
 int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
 WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename, long line);
