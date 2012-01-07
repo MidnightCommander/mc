@@ -1,11 +1,12 @@
 /*
    Handle command line arguments.
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2009.
+   Andrew Borodin <aborodin@vmail.ru>, 2011, 2012.
 
    This file is part of the Midnight Commander.
 
@@ -59,9 +60,6 @@ gboolean mc_args__force_colors = FALSE;
 
 /* Don't load keymap form file and use default one */
 gboolean mc_args__nokeymap = FALSE;
-
-/* Line to start the editor on */
-int mc_args__edit_start_line = 0;
 
 char *mc_args__last_wd_file = NULL;
 
@@ -179,10 +177,10 @@ static const GOptionEntry argument_main_table[] = {
     },
 
     {
-     "edit", 'e', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_CALLBACK,
+     "edit", 'e', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
      parse_mc_e_argument,
-     N_("Edits one file"),
-     "<file>"},
+     N_("Edit files"),
+     "<file> ..." },
 
     {
      NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
@@ -443,11 +441,11 @@ static gboolean
 parse_mc_e_argument (const gchar * option_name, const gchar * value, gpointer data, GError ** error)
 {
     (void) option_name;
+    (void) value;
     (void) data;
     (void) error;
 
     mc_global.mc_run_mode = MC_RUN_EDITOR;
-    mc_run_param0 = g_strdup (value);
 
     return TRUE;
 }
@@ -465,6 +463,113 @@ parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer da
     mc_run_param0 = g_strdup (value);
 
     return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get list of filenames (and line numbers) from command line, when mc called as editor
+ *
+ * @param argc count of all arguments
+ * @param argv array of strings, contains arguments
+ * @return list of mcedit_arg_t objects
+ */
+
+static GList *
+parse_mcedit_arguments (int argc, char **argv)
+{
+    GList *flist = NULL;
+    int i;
+    int first_line_number = -1;
+
+    for (i = 0; i < argc; i++)
+    {
+        char *tmp;
+        char *end, *p;
+        mcedit_arg_t *arg;
+
+        tmp = argv[i];
+
+        /*
+         * First, try to get line number as +lineno.
+         */
+        if (*tmp == '+')
+        {
+            long lineno;
+            char *error;
+
+            lineno = strtol (tmp + 1, &error, 10);
+
+            if (*error == '\0')
+            {
+                /* this is line number */
+                first_line_number = (int) lineno;
+                continue;
+            }
+            /* this is file name */
+        }
+
+        /*
+         * Check for filename:lineno, followed by an optional colon.
+         * This format is used by many programs (especially compilers)
+         * in error messages and warnings. It is supported so that
+         * users can quickly copy and paste file locations.
+         */
+        end = tmp + strlen (tmp);
+        p = end;
+
+        if (p > tmp && p[-1] == ':')
+            p--;
+        while (p > tmp && g_ascii_isdigit ((gchar) p[-1]))
+            p--;
+
+        if (tmp < p && p < end && p[-1] == ':')
+        {
+            char *fname;
+            vfs_path_t *tmp_vpath, *fname_vpath;
+            struct stat st;
+
+            fname = g_strndup (tmp, p - 1 - tmp);
+            tmp_vpath = vfs_path_from_str (tmp);
+            fname_vpath = vfs_path_from_str (fname);
+
+            /*
+             * Check that the file before the colon actually exists.
+             * If it doesn't exist, create new file.
+             */
+            if (mc_stat (tmp_vpath, &st) == -1 && mc_stat (fname_vpath, &st) != -1)
+            {
+                arg = mcedit_arg_vpath_new (fname_vpath, atoi (p));
+                vfs_path_free (tmp_vpath);
+            }
+            else
+            {
+                arg = mcedit_arg_vpath_new (tmp_vpath, 1);
+                vfs_path_free (fname_vpath);
+            }
+
+            g_free (fname);
+        }
+        else
+            arg = mcedit_arg_new (tmp, 1);
+
+        flist = g_list_prepend (flist, arg);
+    }
+
+    if (flist == NULL)
+        flist = g_list_prepend (flist, mcedit_arg_new (NULL, 1));
+    else if (first_line_number != -1)
+    {
+        /* overwrite line number for first file */
+        GList *l;
+
+        if (first_line_number == 0)
+            first_line_number = 1;
+
+        l = g_list_last (flist);
+        ((mcedit_arg_t *) l->data)->line_number = first_line_number;
+    }
+
+    return flist;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -633,84 +738,7 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
     {
         /* mce* or vi is link to mc */
 
-        mc_run_param0 = g_strdup ("");
-        if (tmp != NULL)
-        {
-            /*
-             * Check for filename:lineno, followed by an optional colon.
-             * This format is used by many programs (especially compilers)
-             * in error messages and warnings. It is supported so that
-             * users can quickly copy and paste file locations.
-             */
-            char *end, *p;
-
-            end = tmp + strlen (tmp);
-            p = end;
-
-            if (p > tmp && p[-1] == ':')
-                p--;
-            while (p > tmp && g_ascii_isdigit ((gchar) p[-1]))
-                p--;
-            if (tmp < p && p < end && p[-1] == ':')
-            {
-                char *fname;
-                struct stat st;
-                vfs_path_t *tmp_vpath, *fname_vpath;
-                gboolean ok;
-
-                fname = g_strndup (tmp, p - 1 - tmp);
-                tmp_vpath = vfs_path_from_str (tmp);
-                fname_vpath = vfs_path_from_str (fname);
-                /*
-                 * Check that the file before the colon actually exists.
-                 * If it doesn't exist, revert to the old behavior.
-                 */
-                ok = mc_stat (tmp_vpath, &st) == -1 && mc_stat (fname_vpath, &st) != -1;
-                vfs_path_free (tmp_vpath);
-                vfs_path_free (fname_vpath);
-
-                if (ok)
-                {
-                    mc_run_param0 = fname;
-                    mc_args__edit_start_line = atoi (p);
-                }
-                else
-                {
-                    g_free (fname);
-                    goto try_plus_filename;
-                }
-            }
-            else
-            {
-              try_plus_filename:
-                if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1]))
-                {
-                    int start_line;
-
-                    start_line = atoi (tmp);
-
-                    /*
-                     * If start_line is zero, position the cursor at the
-                     * beginning of the file as other editors (vi, nano)
-                     */
-                    if (start_line == 0)
-                        start_line++;
-
-                    if (start_line > 0)
-                    {
-                        char *file;
-
-                        file = (argc > 1) ? argv[2] : NULL;
-                        if (file != NULL)
-                        {
-                            tmp = file;
-                            mc_args__edit_start_line = start_line;
-                        }
-                    }
-                }
-                mc_run_param0 = g_strdup (tmp);
-            }
-        }
+        mc_run_param0 = parse_mcedit_arguments (argc - 1, &argv[1]);
         mc_global.mc_run_mode = MC_RUN_EDITOR;
     }
     else if (strncmp (base, "mcv", 3) == 0 || strcmp (base, "view") == 0)
@@ -755,8 +783,11 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
         switch (mc_global.mc_run_mode)
         {
         case MC_RUN_EDITOR:
+            mc_run_param0 = parse_mcedit_arguments (argc - 1, &argv[1]);
+            break;
+
         case MC_RUN_VIEWER:
-            /* mc_run_param0 is set up in parse_mc_e_argument() and parse_mc_v_argument() */
+            /* mc_run_param0 is set up in parse_mc_v_argument() */
             break;
 
         case MC_RUN_DIFFVIEWER:
@@ -779,6 +810,58 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
     }
 
     return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Create mcedit_arg_t object from file name and the line number.
+ *
+ * @param file_name   file name
+ * @param line_number line number
+ * @return mcedit_arg_t object
+ */
+
+mcedit_arg_t *
+mcedit_arg_new (const char *file_name, int line_number)
+{
+    return mcedit_arg_vpath_new (vfs_path_from_str (file_name), line_number);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Create mcedit_arg_t object from vfs_path_t object and the line number.
+ *
+ * @param file_vpath  file path object
+ * @param line_number line number
+ * @return mcedit_arg_t object
+ */
+
+mcedit_arg_t *
+mcedit_arg_vpath_new (vfs_path_t * file_vpath, int line_number)
+{
+    mcedit_arg_t *arg;
+
+    arg = g_new (mcedit_arg_t, 1);
+    arg->file_vpath = file_vpath;
+    if (line_number == 0)
+        line_number = 1;
+    arg->line_number = line_number;
+
+    return arg;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Free the mcedit_arg_t object.
+ *
+ * @param arg mcedit_arg_t object
+ */
+
+void
+mcedit_arg_free (mcedit_arg_t * arg)
+{
+    vfs_path_free (arg->file_vpath);
+    g_free (arg);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -59,6 +59,7 @@
 #include "src/main.h"           /* home_dir */
 #include "src/filemanager/cmd.h"        /* view_other_cmd(), save_setup_cmd()  */
 #include "src/learn.h"          /* learn_keys() */
+#include "src/args.h"           /* mcedit_arg_t */
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -1013,14 +1014,37 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Edit one file.
+ *
+ * @param file_vpath file object
+ * @param line       line number
+ * @return TRUE if no errors was occured, FALSE otherwise
+ */
 
 gboolean
-edit_file (const vfs_path_t * _file_vpath, int line)
+edit_file (const vfs_path_t * file_vpath, int line)
+{
+    mcedit_arg_t arg = { (vfs_path_t *) file_vpath, line };
+    GList *files;
+    gboolean ok;
+
+    files = g_list_prepend (NULL, &arg);
+    ok = edit_files (files);
+    g_list_free (files);
+
+    return ok;
+}
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+edit_files (const GList *files)
 {
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
     WMenuBar *menubar;
-    gboolean ok;
+    const GList *file;
+    gboolean ok = FALSE;
 
     if (!made_directory)
     {
@@ -1053,8 +1077,17 @@ edit_file (const vfs_path_t * _file_vpath, int line)
 
     add_widget (edit_dlg, buttonbar_new (TRUE));
 
-    ok = edit_add_window (edit_dlg, edit_dlg->y + 1, edit_dlg->x,
-                          edit_dlg->lines - 2, edit_dlg->cols, _file_vpath, line);
+    for (file = files; file != NULL; file = g_list_next (file))
+    {
+        mcedit_arg_t *f = (mcedit_arg_t *) file->data;
+        gboolean f_ok;
+
+        f_ok = edit_add_window (edit_dlg, edit_dlg->y + 1, edit_dlg->x,
+                                edit_dlg->lines - 2, edit_dlg->cols,
+                                f->file_vpath, f->line_number);
+        /* at least one file has been opened succefully */
+        ok = ok || f_ok;
+    }
 
     if (ok)
         run_dlg (edit_dlg);

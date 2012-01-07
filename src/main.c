@@ -96,7 +96,7 @@ int use_internal_view = 1;
 /* If set, use the builtin editor */
 int use_internal_edit = 1;
 
-char *mc_run_param0 = NULL;
+void *mc_run_param0 = NULL;
 char *mc_run_param1 = NULL;
 
 /* The user's shell */
@@ -630,7 +630,13 @@ main (int argc, char *argv[])
 
     str_uninit_strings ();
 
-    g_free (mc_run_param0);
+    if (mc_global.mc_run_mode != MC_RUN_EDITOR)
+        g_free (mc_run_param0);
+    else
+    {
+        g_list_foreach ((GList *) mc_run_param0, (GFunc) mcedit_arg_free, NULL);
+        g_list_free ((GList *) mc_run_param0);
+    }
     g_free (mc_run_param1);
 
     mc_config_deinit_config_paths ();

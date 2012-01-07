@@ -580,7 +580,7 @@ create_panels (void)
         current_mode = startup_left_mode;
         other_mode = startup_right_mode;
         /* if mc_run_param0 is NULL, working directory will be used for the left panel */
-        current_dir = mc_run_param0;
+        current_dir = (char *) mc_run_param0;
         /* mc_run_param1 is never NULL. It is setup from command line or from panels.ini
          * (value of other_dir). mc_run_param1 will be used for the right panel */
         other_dir = mc_run_param1;
@@ -600,7 +600,7 @@ create_panels (void)
         if (mc_run_param0 != NULL)
         {
             current_dir = NULL;
-            other_dir = mc_run_param0;
+            other_dir = (char *) mc_run_param0;
         }
         else
         {
@@ -973,29 +973,21 @@ prepend_cwd_on_local (const char *filename)
 static gboolean
 mc_maybe_editor_or_viewer (void)
 {
-    int ret;
+    gboolean ret;
 
     switch (mc_global.mc_run_mode)
     {
 #ifdef USE_INTERNAL_EDIT
     case MC_RUN_EDITOR:
-        {
-            vfs_path_t *vpath = NULL;
-
-            if (mc_run_param0 != NULL && *mc_run_param0 != '\0')
-                vpath = vfs_path_from_str (mc_run_param0);
-
-            ret = edit_file (vpath, mc_args__edit_start_line);
-            vfs_path_free (vpath);
-        }
+        ret = edit_files ((GList *) mc_run_param0);
         break;
 #endif /* USE_INTERNAL_EDIT */
     case MC_RUN_VIEWER:
         {
             vfs_path_t *vpath = NULL;
 
-            if (mc_run_param0 != NULL && *mc_run_param0 != '\0')
-                vpath = prepend_cwd_on_local (mc_run_param0);
+            if (mc_run_param0 != NULL && *(char *) mc_run_param0 != '\0')
+                vpath = prepend_cwd_on_local ((char *) mc_run_param0);
 
             ret = view_file (vpath, 0, 1);
             vfs_path_free (vpath);
@@ -1007,10 +999,10 @@ mc_maybe_editor_or_viewer (void)
         break;
 #endif /* USE_DIFF_VIEW */
     default:
-        ret = 0;
+        ret = FALSE;
     }
 
-    return (ret != 0);
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
