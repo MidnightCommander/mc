@@ -3,20 +3,17 @@
 mcedit \- Internal file editor of GNU Midnight Commander.
 .SH USAGE
 .B mcedit
-[\-bcCdfhstVx?] [+lineno] file
+[\-bcCdfhstVx?] [+lineno] [file1] [file2] ...
 .PP
 .B mcedit
-[\-bcCdfhstVx?] file:lineno[:]
+[\-bcCdfhstVx?] file1:lineno[:] file2:lineno[:] ...
 .SH DESCRIPTION
 .LP
 mcedit is a link to
 .BR mc ,
-the main GNU Midnight Commander executable.  Executing GNU Midnight
-Commander under this name requests staring the internal editor and
-opening the
-.I file
-specified on the command line.  The editor is based on the terminal
-version of
+the main GNU Midnight Commander executable. Executing GNU Midnight Commander
+under this name requests staring the internal editor and opening files
+specified on the command line. The editor is based on the terminal version of
 .B cooledit
 \- standalone editor for X Window System.
 .SH OPTIONS
@@ -24,7 +21,8 @@ version of
 .I "+lineno"
 Go to the line specified by number (do not put a space between the
 .I "+"
-sign and the number).
+sign and the number). Several line numbers are allowed but the last one will be
+actual and it will be applied to the first file only.
 .TP
 .I "\-b"
 Force black and white display.
@@ -57,16 +55,22 @@ Display the version of the program.
 Force xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .SH FEATURES
-The internal file editor is a full\-featured full screen editor.  It can
-edit files up to 64 megabytes.  It is possible to edit binary files. 
-The features it presently supports are: block copy, move, delete, cut,
-paste; key for key undo; pull\-down menus; file insertion; macro
-commands; regular expression search and replace (and our own
-scanf\-printf search and replace); shift\-arrow text highlighting (if
-supported by the terminal); insert\-overwrite toggle; word wrap;
-autoindent; tunable tab size; syntax highlighting for various file
-types; and an option to pipe text blocks through shell commands like
-indent and ispell.
+The internal file editor is a full\-featured windowed editor.  It can
+edit several files at the same time. Maximim size of each file is 64
+megabytes. It is possible to edit binary files. The features it presently
+supports are: block copy, move, delete, cut, paste; key for key undo;
+pull\-down menus; file insertion; macro commands; regular expression
+search and replace; shift\-arrow text highlighting (if supported by
+the terminal); insert\-overwrite toggle; autoindent; tunable tab size;
+syntax highlighting for various file types; and an option to pipe text
+blocks through shell commands like indent and ispell.
+.PP
+Each file is opened in its own window in full\-screen mode. Window control
+in mcedit is similar to the window control in other multi\-window program:
+double click on window title maximizes the window to full\-screen or restores
+window size and position; left\-click on window title and mouse drag moves
+the window in editor area; left\-click on low\-right frame corner and mouse drag
+resizes the window. These actions can be made using "Window" menu.
 .SH KEYS
 The editor is easy to use and can be used without learning.  The
 pull\-down menu is invoked by pressing F9.  You can learn other keys from
@@ -95,8 +99,7 @@ The completion key (usually
 .B "Meta\-Tab"
 or
 .BR "Escape Tab" )
-completes the word under the cursor using the words used earlier in the
-file.
+completes the word under the cursor using the words used in the file.
 .SH MACRO
 .PP
 To define a macro, press
