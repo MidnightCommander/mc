@@ -2778,43 +2778,33 @@ edit_save_block_cmd (WEdit * edit)
 
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on success */
+/** returns TRUE on success */
 
-int
+gboolean
 edit_insert_file_cmd (WEdit * edit)
 {
     gchar *tmp;
     char *exp;
+    gboolean ret = FALSE;
 
     tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
     exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
                                MC_HISTORY_EDIT_INSERT_FILE, tmp);
     g_free (tmp);
+
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
-    if (exp)
+
+    if (exp != NULL && *exp != '\0')
     {
-        if (!*exp)
-        {
-            g_free (exp);
-            return 0;
-        }
-        else
-        {
-            if (edit_insert_file (edit, exp) != 0)
-            {
-                g_free (exp);
-                edit->force |= REDRAW_COMPLETELY;
-                return 1;
-            }
-            else
-            {
-                g_free (exp);
-                edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
-            }
-        }
+        ret = (edit_insert_file (edit, exp) >= 0);
+        if (!ret)
+            edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
     }
+
+    g_free (exp);
+
     edit->force |= REDRAW_COMPLETELY;
-    return 0;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

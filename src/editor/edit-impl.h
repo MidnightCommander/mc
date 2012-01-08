@@ -241,7 +241,7 @@ void edit_complete_word_cmd (WEdit * edit);
 void edit_get_match_keyword_cmd (WEdit * edit);
 int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
 int edit_save_block_cmd (WEdit * edit);
-int edit_insert_file_cmd (WEdit * edit);
+gboolean edit_insert_file_cmd (WEdit * edit);
 void edit_insert_over (WEdit * edit);
 int edit_insert_column_of_text_from_file (WEdit * edit, int file,
                                           long *start_pos, long *end_pos, int *col1, int *col2);
