@@ -167,7 +167,7 @@ static name_keymap_t command_names[] = {
     {"ConnectSmb", CK_ConnectSmb},
 #endif
     {"PanelInfo", CK_PanelInfo},
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     {"Jobs", CK_Jobs},
 #endif
     {"OptionsLayout", CK_OptionsLayout},

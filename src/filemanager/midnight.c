@@ -288,7 +288,7 @@ create_command_menu (void)
 #ifdef ENABLE_VFS
     entries = g_list_prepend (entries, menu_entry_create (_("&Active VFS list"), CK_VfsList));
 #endif
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     entries = g_list_prepend (entries, menu_entry_create (_("&Background jobs"), CK_Jobs));
 #endif
     entries = g_list_prepend (entries, menu_entry_create (_("Screen lis&t"), CK_ScreenList));
@@ -1202,7 +1202,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         else
             info_cmd_no_menu ();        /* shortcut or buttonbar */
         break;
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     case CK_Jobs:
         jobs_cmd ();
         break;

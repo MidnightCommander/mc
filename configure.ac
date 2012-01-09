@@ -427,12 +427,7 @@ else
 fi
 
 
-dnl Support for background operations
-AC_ARG_ENABLE([background],
-	      [  --enable-background     Support for background file operations [[yes]]])
-if test "x$enable_background" != xno; then
-    AC_DEFINE(WITH_BACKGROUND, 1, [Define to enable background file operations])
-fi
+MC_BACKGROUND
 
 
 dnl
@@ -643,6 +638,7 @@ Configuration:
   Mouse support:              ${mouse_lib}
   X11 events support:         ${textmode_x11_support}
   With subshell support:      ${subshell}
+  With background operations: ${enable_background}
   Internal editor:            ${edit_msg}
   Diff viewer:                ${diff_msg}
   Support for charset:        ${charset_msg}

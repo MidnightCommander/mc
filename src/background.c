@@ -33,8 +33,6 @@
 
 #include <config.h>
 
-#ifdef WITH_BACKGROUND
-
 #include <stdlib.h>
 #include <errno.h>
 #include <signal.h>
@@ -640,5 +638,3 @@ background_parent_call_string (const gchar * event_group_name, const gchar * eve
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-#endif /* WITH_BACKGROUND */

@@ -52,7 +52,6 @@ SRC_mc_conssaver = \
 mc_SOURCES = \
 	$(SRC_mc_conssaver) \
 	args.c args.h \
-	background.c background.h \
 	clipboard.c clipboard.h \
 	events_init.c events_init.h \
 	execute.c execute.h \
@@ -68,6 +67,10 @@ mc_SOURCES = \
 
 if CHARSET
     mc_SOURCES += selcodepage.c selcodepage.h
+endif
+
+if ENABLE_BACKGROUND
+    mc_SOURCES += background.c background.h
 endif
 
 EXTRA_DIST = $(SRC_maintainer) $(SRC_charset)
