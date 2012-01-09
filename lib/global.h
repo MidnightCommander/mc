@@ -159,10 +159,10 @@ typedef enum
 
 typedef struct
 {
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     /* If true, this is a background process */
     int we_are_background;
-#endif                          /* WITH_BACKGROUND */
+#endif                          /* ENABLE_BACKGROUND */
 
     /*
      * If utf-8 terminal utf8_display = 1

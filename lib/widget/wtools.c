@@ -154,7 +154,7 @@ fg_message (int flags, const char *title, const char *text)
 /* --------------------------------------------------------------------------------------------- */
 /** Show message box from background */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 static void
 bg_message (int dummy, int *flags, char *title, const char *text)
 {
@@ -163,7 +163,7 @@ bg_message (int dummy, int *flags, char *title, const char *text)
     fg_message (*flags, title, text);
     g_free (title);
 }
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -269,7 +269,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 static int
 wtools_parent_call (void *routine, gpointer ctx, int argc, ...)
 {
@@ -298,7 +298,7 @@ wtools_parent_call_string (void *routine, int argc, ...)
     va_end (event_data.ap);
     return event_data.ret.s;
 }
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -444,7 +444,7 @@ message (int flags, const char *title, const char *text, ...)
     if (title == MSG_ERROR)
         title = _("Error");
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
     {
         union
@@ -458,7 +458,7 @@ message (int flags, const char *title, const char *text, ...)
                             strlen (p), p);
     }
     else
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
         fg_message (flags, title, p);
 
     g_free (p);
@@ -476,7 +476,7 @@ char *
 input_dialog_help (const char *header, const char *text, const char *help,
                    const char *history_name, const char *def_text)
 {
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
     {
         union
@@ -492,7 +492,7 @@ input_dialog_help (const char *header, const char *text, const char *help,
                                           strlen (def_text), def_text);
     }
     else
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
         return fg_input_dialog_help (header, text, help, history_name, def_text);
 }
 

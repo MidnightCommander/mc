@@ -49,9 +49,9 @@
 
 /* *INDENT-OFF* */
 mc_global_t mc_global = {
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     .we_are_background = 0,
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
     .message_visible = 1,
     .keybar_visible = 1,

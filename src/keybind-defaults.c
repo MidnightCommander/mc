@@ -153,9 +153,9 @@ static const global_keymap_ini_t default_main_x_keymap[] = {
     {"PanelInfo", "i"},
     {"PanelQuickView", "q"},
     {"HotListAdd", "h"},
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     {"Jobs", "j"},
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
     {"ExternalPanelize", "!"},
     {NULL, NULL}
 };

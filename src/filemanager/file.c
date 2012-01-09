@@ -72,7 +72,9 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"
-#include "src/background.h"
+#ifdef ENABLE_BACKGROUND
+#include "src/background.h"     /* do_background() */
+#endif
 
 #include "layout.h"             /* rotate_dash() */
 
@@ -511,7 +513,7 @@ real_warn_same_file (enum OperationMode mode, const char *fmt, const char *a, co
 static FileProgressStatus
 warn_same_file (const char *fmt, const char *a, const char *b)
 {
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 /* *INDENT-OFF* */
     union
     {
@@ -606,7 +608,7 @@ real_query_recursive (FileOpContext * ctx, enum OperationMode mode, const char *
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 static FileProgressStatus
 do_file_error (const char *str)
 {
@@ -688,7 +690,7 @@ query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
     return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
 }
 
-#endif /* !WITH_BACKGROUND */
+#endif /* !ENABLE_BACKGROUND */
 
 /* --------------------------------------------------------------------------------------------- */
 /** Report error with two files */
@@ -1295,7 +1297,7 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 static int
 end_bg_process (FileOpContext * ctx, enum OperationMode mode)
 {
@@ -2625,7 +2627,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             file_op_context_create_ui (ctx, TRUE, dialog_type);
     }
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     /* Did the user select to do a background operation? */
     if (do_bg)
     {
@@ -2644,7 +2646,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             return FALSE;
         }
     }
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
     /* Initialize things */
     /* We do not want to trash cache every time file is
@@ -2877,7 +2879,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     g_free (ctx->dest_mask);
     ctx->dest_mask = NULL;
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     /* Let our parent know we are saying bye bye */
     if (mc_global.we_are_background)
     {
@@ -2890,7 +2892,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         vfs_shut ();
         _exit (0);
     }
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
     file_op_total_context_destroy (tctx);
   ret_fast:

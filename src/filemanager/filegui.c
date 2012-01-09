@@ -952,12 +952,12 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
 
     QuickWidget fmd_widgets[] = {
         /* 0 */ QUICK_BUTTON (42, 64, 10, FMDY, N_("&Cancel"), B_CANCEL, NULL),
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
         /* 1 */ QUICK_BUTTON (25, 64, 10, FMDY, N_("&Background"), B_USER, NULL),
 #define OFFSET 0
 #else
 #define OFFSET 1
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
         /*  2 - OFFSET */
         QUICK_BUTTON (14, FMDX, 10, FMDY, N_("&OK"), B_ENTER, NULL),
         /*  3 - OFFSET */
@@ -1008,7 +1008,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
 
     /* buttons */
     b2_len = str_term_width1 (fmd_widgets[2 - OFFSET].u.button.text) + 6 + gap; /* OK */
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     b1_len = str_term_width1 (fmd_widgets[1].u.button.text) + 4 + gap;  /* Background */
 #endif
     b0_len = str_term_width1 (fmd_widgets[0].u.button.text) + 4;        /* Cancel */
@@ -1036,7 +1036,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
     /* OK button */
     fmd_widgets[2 - OFFSET].relative_x = i;
     i += b2_len;
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     /* Background button */
     fmd_widgets[1].relative_x = i;
     i += b1_len;

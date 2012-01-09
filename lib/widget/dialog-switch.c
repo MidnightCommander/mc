@@ -354,10 +354,10 @@ repaint_screen (void)
 void
 mc_refresh (void)
 {
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
         return;
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
     if (!mc_global.tty.winch_flag)
         tty_refresh ();
     else
