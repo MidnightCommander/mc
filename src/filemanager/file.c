@@ -461,17 +461,14 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add,
-                     gboolean is_toplevel_file)
+progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add)
 {
     struct timeval tv_current;
     static struct timeval tv_start = { };
 
-    if (is_toplevel_file || ctx->progress_totals_computed)
-    {
-        tctx->progress_count++;
-        tctx->progress_bytes += (uintmax_t) add;
-    }
+    tctx->progress_count++;
+    tctx->progress_bytes += (uintmax_t) add;
+
     if (tv_start.tv_sec == 0)
     {
         gettimeofday (&tv_start, (struct timezone *) NULL);
@@ -728,13 +725,13 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
     /* 3. Compute ETA */
     dt = (tv_current.tv_sec - tv_transfer_start.tv_sec);
 
-    if (n_read_total)
+    if (n_read_total == 0)
+        ctx->eta_secs = 0.0;
+    else
     {
         ctx->eta_secs = ((dt / (double) n_read_total) * file_size) - dt;
         ctx->bps = n_read_total / ((dt < 1) ? 1 : dt);
     }
-    else
-        ctx->eta_secs = 0.0;
 
     /* 4. Compute BPS rate */
     ctx->bps_time = (tv_current.tv_sec - tv_transfer_start.tv_sec);
@@ -746,8 +743,8 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
     if (ctx->progress_bytes != 0)
     {
         uintmax_t remain_bytes;
-        tctx->copyed_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
-        remain_bytes = ctx->progress_bytes - tctx->copyed_bytes;
+
+        remain_bytes = ctx->progress_bytes - tctx->copied_bytes;
 #if 1
         {
             int total_secs = tv_current.tv_sec - tctx->transfer_start.tv_sec;
@@ -755,7 +752,7 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
             if (total_secs < 1)
                 total_secs = 1;
 
-            tctx->bps = tctx->copyed_bytes / total_secs;
+            tctx->bps = tctx->copied_bytes / total_secs;
             tctx->eta_secs = (tctx->bps != 0) ? remain_bytes / tctx->bps : 0;
         }
 #else
@@ -833,7 +830,7 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
         }
 
         if (mc_rename (s, d) == 0)
-            return progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
+            return progress_update_one (tctx, ctx, src_stats.st_size);
     }
 #if 0
     /* Comparison to EXDEV seems not to work in nfs if you're moving from
@@ -890,7 +887,7 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
     }
 
     if (!copy_done)
-        return_status = progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
+        return_status = progress_update_one (tctx, ctx, src_stats.st_size);
 
     return return_status;
 }
@@ -902,8 +899,7 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
 /** Don't update progress status if progress_count==NULL */
 
 static FileProgressStatus
-erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
-            gboolean is_toplevel_file)
+erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
 {
     int return_status;
     struct stat buf;
@@ -933,7 +929,7 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s,
 
     if (tctx->progress_count == 0)
         return FILE_CONT;
-    return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
+    return progress_update_one (tctx, ctx, buf.st_size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -977,7 +973,7 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
         if (S_ISDIR (buf.st_mode))
             return_status = recursive_erase (tctx, ctx, path);
         else
-            return_status = erase_file (tctx, ctx, path, 0);
+            return_status = erase_file (tctx, ctx, path);
         g_free (path);
     }
     mc_closedir (reading);
@@ -1341,7 +1337,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     struct stat sb, sb2;
     struct utimbuf utb;
     gboolean dst_exists = FALSE, appending = FALSE;
-    off_t n_read_total = 0, file_size = -1;
+    off_t file_size = -1;
     FileProgressStatus return_status, temp_status;
     struct timeval tv_transfer_start;
     dest_status_t dst_status = DEST_NONE;
@@ -1600,13 +1596,14 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
         goto ret;
 
     {
+        off_t n_read_total = 0;
         struct timeval tv_current, tv_last_update, tv_last_input;
         int secs, update_secs;
         const char *stalled_msg = "";
 
         tv_last_update = tv_transfer_start;
 
-        for (;;)
+        while (TRUE)
         {
             char buf[BUF_8K];
 
@@ -1659,6 +1656,9 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                         goto ret;
                 }
             }
+
+            tctx->copied_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
+
             secs = (tv_current.tv_sec - tv_last_update.tv_sec);
             update_secs = (tv_current.tv_sec - tv_last_input.tv_sec);
 
@@ -1685,9 +1685,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                 if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
                     file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-                    file_progress_show_total (tctx, ctx,
-                                              tctx->progress_bytes + n_read_total + ctx->do_reget,
-                                              force_update);
+                    file_progress_show_total (tctx, ctx, tctx->copied_bytes, force_update);
                 }
 
                 file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
@@ -1793,7 +1791,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     }
 
     if (return_status == FILE_CONT)
-        return_status = progress_update_one (tctx, ctx, file_size, tctx->is_toplevel_file);
+        return_status = progress_update_one (tctx, ctx, file_size);
 
     return return_status;
 }
@@ -2056,7 +2054,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                     return_status = erase_dir_iff_empty (ctx, path);
                 }
                 else
-                    return_status = erase_file (tctx, ctx, path, FALSE);
+                    return_status = erase_file (tctx, ctx, path);
             }
         }
         g_free (path);
@@ -2195,7 +2193,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 return_status = erase_dir_iff_empty (ctx, erase_list->name);
             }
             else
-                return_status = erase_file (tctx, ctx, erase_list->name, FALSE);
+                return_status = erase_file (tctx, ctx, erase_list->name);
             lp = erase_list;
             erase_list = erase_list->next;
             g_free (lp);
@@ -2692,7 +2690,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 if (S_ISDIR (src_stat.st_mode))
                     value = erase_dir (tctx, ctx, source_with_path);
                 else
-                    value = erase_file (tctx, ctx, source_with_path, 1);
+                    value = erase_file (tctx, ctx, source_with_path);
             }
             else
             {
@@ -2785,7 +2783,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     if (S_ISDIR (src_stat.st_mode))
                         value = erase_dir (tctx, ctx, source_with_path);
                     else
-                        value = erase_file (tctx, ctx, source_with_path, 1);
+                        value = erase_file (tctx, ctx, source_with_path);
                 }
                 else
                 {

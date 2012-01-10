@@ -167,14 +167,13 @@ typedef struct
 {
     size_t progress_count;
     uintmax_t progress_bytes;
-    uintmax_t copyed_bytes;
+    uintmax_t copied_bytes;
     size_t bps;
     size_t bps_count;
     struct timeval transfer_start;
     double eta_secs;
 
     gboolean ask_overwrite;
-    gboolean is_toplevel_file;
 } FileOpTotalContext;
 
 /*** global variables defined in .c file *********************************************************/
