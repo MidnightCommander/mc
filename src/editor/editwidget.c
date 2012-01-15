@@ -322,7 +322,10 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 
             /* The user may override the access-keys for the menu bar. */
             if (macro_index == -1 && edit_execute_macro (e, parm))
+            {
+                edit_update_screen (e);
                 ret = MSG_HANDLED;
+            }
             else if (edit_translate_key (e, parm, &cmd, &ch))
             {
                 edit_execute_key_command (e, cmd, ch);

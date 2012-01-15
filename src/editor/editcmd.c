@@ -1622,7 +1622,7 @@ edit_execute_macro (WEdit * edit, int hotkey)
             }
         }
     }
-    edit_update_screen (edit);
+
     return res;
 }
 
