@@ -1139,17 +1139,53 @@ show_dir (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** To be used only by long_frame and full_frame to adjust top_file */
+
+/* Returns the number of items in the given panel */
+static int
+ITEMS (WPanel * p)
+{
+    if (p->split)
+        return llines (p) * 2;
+    else
+        return llines (p);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 adjust_top_file (WPanel * panel)
 {
-    int old_top = panel->top_file;
+    int items = ITEMS (panel);
 
-    if (panel->selected - old_top > llines (panel))
-        panel->top_file = panel->selected;
-    if (old_top - panel->count > llines (panel))
-        panel->top_file = panel->count - llines (panel);
+    if (panel->count <= items)
+    {
+        /* If all files fit, show them all. */
+        panel->top_file = 0;
+    }
+    else
+    {
+        int i;
+
+        /* top_file has to be in the range [selected-items+1, selected] so that
+           the selected file is visible.
+           top_file should be in the range [0, count-items] so that there's
+           no empty space wasted.
+           Within these ranges, adjust it by as little as possible. */
+
+        if (panel->top_file < 0)
+            panel->top_file = 0;
+
+        i = panel->selected - items + 1;
+        if (panel->top_file < i)
+            panel->top_file = i;
+
+        i = panel->count - items;
+        if (panel->top_file > i)
+            panel->top_file = i;
+
+        if (panel->top_file > panel->selected)
+            panel->top_file = panel->selected;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1311,8 +1347,7 @@ paint_frame (WPanel * panel)
     int side, width;
     GString *format_txt;
 
-    if (!panel->split)
-        adjust_top_file (panel);
+    adjust_top_file (panel);
 
     widget_erase (&panel->widget);
     show_dir (panel);
@@ -1739,18 +1774,6 @@ force_maybe_cd (void)
         return MSG_HANDLED;
     }
     return MSG_NOT_HANDLED;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Returns the number of items in the given panel */
-static int
-ITEMS (WPanel * p)
-{
-    if (p->split)
-        return llines (p) * 2;
-    else
-        return llines (p);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3914,14 +3937,9 @@ panel_update_cols (Widget * widget, panel_display_t frame_size)
 void
 select_item (WPanel * panel)
 {
-    int items = ITEMS (panel);
-
     /* Although currently all over the code we set the selection and
        top file to decent values before calling select_item, I could
        forget it someday, so it's better to do the actual fitting here */
-
-    if (panel->top_file < 0)
-        panel->top_file = 0;
 
     if (panel->selected < 0)
         panel->selected = 0;
@@ -3929,21 +3947,7 @@ select_item (WPanel * panel)
     if (panel->selected > panel->count - 1)
         panel->selected = panel->count - 1;
 
-    if (panel->top_file > panel->count - 1)
-        panel->top_file = panel->count - 1;
-
-    if ((panel->count - panel->top_file) < items)
-    {
-        panel->top_file = panel->count - items;
-        if (panel->top_file < 0)
-            panel->top_file = 0;
-    }
-
-    if (panel->selected < panel->top_file)
-        panel->top_file = panel->selected;
-
-    if ((panel->selected - panel->top_file) >= items)
-        panel->top_file = panel->selected - items + 1;
+    adjust_top_file (panel);
 
     panel->dirty = 1;
 
