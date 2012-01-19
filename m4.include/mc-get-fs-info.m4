@@ -5,7 +5,7 @@ dnl
 
 AC_DEFUN([gl_POSIX_FALLOCATE], [
     dnl * Old glibcs have broken posix_fallocate(). Make sure not to use it.
-    AC_TRY_COMPILE([
+    AC_TRY_LINK([
         #define _XOPEN_SOURCE 600
         #include <stdlib.h>
         #if defined(__GLIBC__) && (__GLIBC__ < 2 || __GLIBC_MINOR__ < 7)
