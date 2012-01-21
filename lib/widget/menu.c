@@ -46,6 +46,8 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define RESIZABLE_MENUBAR 1
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -892,7 +894,10 @@ menubar_arrange (WMenuBar * menubar)
         gap -= menu->start_x;
     }
 
-    gap /= (menubar->menu->len - 1);
+    if (g_list_next (menubar->menu) == NULL)
+        gap = 1;
+    else
+        gap /= (g_list_length (menubar->menu) - 1);
 
     if (gap <= 0)
     {
