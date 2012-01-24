@@ -111,7 +111,6 @@ const char *op_names[3] = {
 /* This is a hard link cache */
 struct link
 {
-    struct link *next;
     const struct vfs_class *vfs;
     dev_t dev;
     ino_t ino;
@@ -174,10 +173,10 @@ static const char *question_format = N_("%s?");
 /*** file scope variables ************************************************************************/
 
 /* the hard link cache */
-static struct link *linklist = NULL;
+static GSList *linklist = NULL;
 
 /* the files-to-be-erased list */
-static struct link *erase_list;
+static GSList *erase_list = NULL;
 
 /*
  * In copy_dir_dir we use two additional single linked lists: The first -
@@ -189,7 +188,7 @@ static struct link *erase_list;
  * Both lists don't use the linkcount and name structure members of struct
  * link.
  */
-static struct link *dest_dirs = NULL;
+static GSList *dest_dirs = NULL;
 
 static FileProgressStatus transform_error = FILE_CONT;
 
@@ -227,24 +226,30 @@ transform_source (FileOpContext * ctx, const char *source)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-free_linklist (struct link **lc_linklist)
+free_link (void *data)
 {
-    struct link *lp, *lp2;
+    struct link *lp = (struct link *) data;
 
-    for (lp = *lc_linklist; lp != NULL; lp = lp2)
-    {
-        lp2 = lp->next;
-        vfs_path_free (lp->src_vpath);
-        vfs_path_free (lp->dst_vpath);
-        g_free (lp);
-    }
-    *lc_linklist = NULL;
+    vfs_path_free (lp->src_vpath);
+    vfs_path_free (lp->dst_vpath);
+    g_free (lp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-is_in_linklist (struct link *lp, const vfs_path_t * vpath, struct stat *sb)
+static void *
+free_linklist (GSList *lp)
+{
+    g_slist_foreach (lp, (GFunc) free_link, NULL);
+    g_slist_free (lp);
+
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+is_in_linklist (const GSList *lp, const vfs_path_t * vpath, const struct stat *sb)
 {
     const struct vfs_class *class;
     ino_t ino = sb->st_ino;
@@ -252,14 +257,14 @@ is_in_linklist (struct link *lp, const vfs_path_t * vpath, struct stat *sb)
 
     class = vfs_path_get_last_path_vfs (vpath);
 
-    while (lp != NULL)
+    for (; lp != NULL; lp = g_slist_next (lp))
     {
-        if (lp->vfs == class)
-            if (lp->ino == ino && lp->dev == dev)
-                return 1;
-        lp = lp->next;
+        const struct link *lnk = (const struct link *) lp->data;
+
+        if (lnk->vfs == class && lnk->ino == ino && lnk->dev == dev)
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -273,7 +278,8 @@ is_in_linklist (struct link *lp, const vfs_path_t * vpath, struct stat *sb)
 static gboolean
 check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, struct stat *pstat)
 {
-    struct link *lp;
+    GSList *lp;
+    struct link *lnk;
 
     const struct vfs_class *my_vfs;
     ino_t ino = pstat->st_ino;
@@ -285,14 +291,17 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
 
     my_vfs = vfs_path_get_by_index (src_vpath, -1)->class;
 
-    for (lp = linklist; lp != NULL; lp = lp->next)
-        if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev)
+    for (lp = linklist; lp != NULL; lp = g_slist_next (lp))
+    {
+        lnk = (struct link *) lp->data;
+
+        if (lnk->vfs == my_vfs && lnk->ino == ino && lnk->dev == dev)
         {
             const struct vfs_class *lp_name_class;
             int stat_result;
 
-            lp_name_class = vfs_path_get_last_path_vfs (lp->src_vpath);
-            stat_result = mc_stat (lp->src_vpath, &link_stat);
+            lp_name_class = vfs_path_get_last_path_vfs (lnk->src_vpath);
+            stat_result = mc_stat (lnk->src_vpath, &link_stat);
 
             if (stat_result == 0 && link_stat.st_ino == ino
                 && link_stat.st_dev == dev && lp_name_class == my_vfs)
@@ -300,30 +309,30 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
                 const struct vfs_class *p_class, *dst_name_class;
 
                 dst_name_class = vfs_path_get_last_path_vfs (dst_vpath);
-                p_class = vfs_path_get_last_path_vfs (lp->dst_vpath);
+                p_class = vfs_path_get_last_path_vfs (lnk->dst_vpath);
 
                 if (dst_name_class == p_class &&
-                    mc_stat (lp->dst_vpath, &link_stat) == 0 &&
-                    mc_link (lp->dst_vpath, dst_vpath) == 0)
+                    mc_stat (lnk->dst_vpath, &link_stat) == 0 &&
+                    mc_link (lnk->dst_vpath, dst_vpath) == 0)
                     return TRUE;
             }
 
             message (D_ERROR, MSG_ERROR, _("Cannot make the hardlink"));
             return FALSE;
         }
-
-    lp = g_new0 (struct link, 1);
-
-    if (lp != NULL)
-    {
-        lp->vfs = my_vfs;
-        lp->ino = ino;
-        lp->dev = dev;
-        lp->src_vpath = vfs_path_clone (src_vpath);
-        lp->dst_vpath = vfs_path_clone (dst_vpath);
-        lp->next = linklist;
-        linklist = lp;
     }
+
+    lnk = g_new0 (struct link, 1);
+    if (lnk != NULL)
+    {
+        lnk->vfs = my_vfs;
+        lnk->ino = ino;
+        lnk->dev = dev;
+        lnk->src_vpath = vfs_path_clone (src_vpath);
+        lnk->dst_vpath = vfs_path_clone (dst_vpath);
+        linklist  = g_slist_prepend (linklist, lnk);
+    }
+
     return FALSE;
 }
 
@@ -1888,7 +1897,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
 
 FileProgressStatus
 copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *_d,
-              gboolean toplevel, gboolean move_over, gboolean do_delete, struct link * parent_dirs)
+              gboolean toplevel, gboolean move_over, gboolean do_delete, GSList * parent_dirs)
 {
     struct dirent *next;
     struct stat buf, cbuf;
@@ -1969,8 +1978,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     lp->vfs = vfs_path_get_by_index (src_vpath, -1)->class;
     lp->ino = cbuf.st_ino;
     lp->dev = cbuf.st_dev;
-    lp->next = parent_dirs;
-    parent_dirs = lp;
+    parent_dirs = g_slist_prepend (parent_dirs, lp);
 
   retry_dst_stat:
     /* Now, check if the dest dir exists, if not, create it. */
@@ -2044,8 +2052,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     lp->vfs = vfs_path_get_by_index (dest_dir_vpath, -1)->class;
     lp->ino = buf.st_ino;
     lp->dev = buf.st_dev;
-    lp->next = dest_dirs;
-    dest_dirs = lp;
+    dest_dirs = g_slist_prepend (dest_dirs, lp);
 
     if (ctx->preserve_uidgid)
     {
@@ -2115,30 +2122,15 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             if (ctx->erase_at_end)
             {
-                static struct link *tail;
-
                 lp = g_new0 (struct link, 1);
                 lp->src_vpath = vfs_path_clone (tmp_vpath);
                 lp->st_mode = buf.st_mode;
-                lp->next = NULL;
-
-                if (erase_list != NULL)
-                {
-                    tail->next = lp;
-                    tail = lp;
-                }
-                else
-                    erase_list = tail = lp;
+                erase_list = g_slist_append (erase_list, lp);
             }
+            else if (S_ISDIR (buf.st_mode))
+                return_status = erase_dir_iff_empty (ctx, path);
             else
-            {
-                if (S_ISDIR (buf.st_mode))
-                {
-                    return_status = erase_dir_iff_empty (ctx, path);
-                }
-                else
-                    return_status = erase_file (tctx, ctx, tmp_vpath);
-            }
+                return_status = erase_file (tctx, ctx, tmp_vpath);
         }
         g_free (path);
         vfs_path_free (tmp_vpath);
@@ -2163,7 +2155,8 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
   ret:
     g_free (dest_dir);
     vfs_path_free (dest_dir_vpath);
-    g_free (parent_dirs);
+    free_link (parent_dirs->data);
+    g_slist_free_1 (parent_dirs);
   ret_fast:
     g_free (d);
     vfs_path_free (src_vpath);
@@ -2288,21 +2281,23 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     mc_refresh ();
     if (ctx->erase_at_end)
     {
-        for (; erase_list && return_status != FILE_ABORT;)
+        for (; erase_list != NULL && return_status != FILE_ABORT;)
         {
-            if (S_ISDIR (erase_list->st_mode))
+            lp = (struct link *) erase_list->data;
+
+            if (S_ISDIR (lp->st_mode))
             {
                 char *src_path;
 
-                src_path = vfs_path_to_str (erase_list->src_vpath);
+                src_path = vfs_path_to_str (lp->src_vpath);
                 return_status = erase_dir_iff_empty (ctx, src_path);
                 g_free (src_path);
             }
             else
-                return_status = erase_file (tctx, ctx, erase_list->src_vpath);
-            lp = erase_list;
-            erase_list = erase_list->next;
-            g_free (lp);
+                return_status = erase_file (tctx, ctx, lp->src_vpath);
+
+            erase_list = g_slist_remove (erase_list, lp);
+            free_link (lp);
         }
     }
     erase_dir_iff_empty (ctx, s);
@@ -2310,12 +2305,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
   ret:
     g_free (destdir);
     vfs_path_free (destdir_vpath);
-    while (erase_list)
-    {
-        lp = erase_list;
-        erase_list = erase_list->next;
-        g_free (lp);
-    }
+    erase_list = free_linklist (erase_list);
   ret_fast:
     vfs_path_free (src_vpath);
     vfs_path_free (dst_vpath);
@@ -2608,8 +2598,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         i18n_flag = TRUE;
     }
 
-    free_linklist (&linklist);
-    free_linklist (&dest_dirs);
+    linklist = free_linklist (linklist);
+    dest_dirs = free_linklist (dest_dirs);
 
     if (single_entry)
     {
@@ -2977,7 +2967,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                                                       TRUE, FALSE, FALSE, NULL);
                             else
                                 value = copy_file_file (tctx, ctx, source_with_path_str, temp2);
-                            free_linklist (&dest_dirs);
+                            dest_dirs = free_linklist (dest_dirs);
                             break;
 
                         case OP_MOVE:
@@ -3037,8 +3027,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         g_free (save_dest);
     }
 
-    free_linklist (&linklist);
-    free_linklist (&dest_dirs);
+    linklist = free_linklist (linklist);
+    dest_dirs = free_linklist (dest_dirs);
 #ifdef WITH_FULL_PATHS
     g_free (source_with_path_str);
     vfs_path_free (source_with_vpath);
