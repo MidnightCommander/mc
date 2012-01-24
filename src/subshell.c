@@ -1264,7 +1264,6 @@ subshell_get_console_attributes (void)
     {
         fprintf (stderr, "Cannot get terminal settings: %s\r\n", unix_error_string (errno));
         mc_global.tty.use_subshell = FALSE;
-        return;
     }
 }
 
