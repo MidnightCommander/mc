@@ -23,8 +23,6 @@ typedef FileProgressStatus (*compute_dir_size_callback) (const void *ui,
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct link;
-
 /* status dialog of directory size computing */
 typedef struct
 {
@@ -43,7 +41,7 @@ FileProgressStatus move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
 FileProgressStatus copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
                                  const char *s, const char *d,
                                  gboolean toplevel, gboolean move_over, gboolean do_delete,
-                                 struct link *parent_dirs);
+                                 GSList * parent_dirs);
 FileProgressStatus erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
                               const vfs_path_t * vpath);
 
