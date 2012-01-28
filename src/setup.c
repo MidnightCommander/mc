@@ -217,8 +217,6 @@ static const struct
     const char *opt_name;
     int *opt_addr;
 } layout [] = {
-    { "equal_split", &equal_split },
-    { "first_panel_size", &first_panel_size },
     { "message_visible", &mc_global.message_visible },
     { "keybar_visible", &mc_global.keybar_visible },
     { "xterm_title", &xterm_title },
@@ -226,6 +224,11 @@ static const struct
     { "command_prompt", &command_prompt },
     { "menubar_visible", &menubar_visible },
     { "free_space", &free_space },
+    { "horizontal_split", &panels_layout.horizontal_split },
+    { "vertical_equal", &panels_layout.vertical_equal },
+    { "left_panel_size", &panels_layout.left_panel_size },
+    { "horizontal_equal", &panels_layout.horizontal_equal },
+    { "top_panel_size", &panels_layout.top_panel_size },
     { NULL, NULL }
 };
 
@@ -317,7 +320,6 @@ static const struct
     { "editor_group_undo", &option_group_undo },
 #endif /* USE_INTERNAL_EDIT */
     { "nice_rotating_dash", &nice_rotating_dash },
-    { "horizontal_split",   &horizontal_split },
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
     { "copymove_persistent_attr", &setup_copymove_persistent_attr },
@@ -534,10 +536,34 @@ static void
 load_layout (void)
 {
     size_t i;
+    int equal_split;
+    int first_panel_size;
 
+    /* legacy options */
+    panels_layout.horizontal_split = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
+                                                        "horizontal_split", 0);
+    equal_split = mc_config_get_int (mc_main_config, "Layout", "equal_split", 1);
+    first_panel_size = mc_config_get_int (mc_main_config, "Layout", "first_panel_size", 1);
+    if (panels_layout.horizontal_split)
+    {
+        panels_layout.horizontal_equal = equal_split;
+        panels_layout.left_panel_size = first_panel_size;
+    }
+    else
+    {
+        panels_layout.vertical_equal = equal_split;
+        panels_layout.top_panel_size = first_panel_size;
+    }
+
+    /* actual options override legacy ones */
     for (i = 0; layout[i].opt_name != NULL; i++)
         *layout[i].opt_addr = mc_config_get_int (mc_main_config, "Layout",
                                                  layout[i].opt_name, *layout[i].opt_addr);
+
+    /* remove legacy options */
+    mc_config_del_key (mc_main_config, CONFIG_APP_SECTION, "horizontal_split");
+    mc_config_del_key (mc_main_config, "Layout", "equal_split");
+    mc_config_del_key (mc_main_config, "Layout", "first_panel_size");
 }
 
 /* --------------------------------------------------------------------------------------------- */

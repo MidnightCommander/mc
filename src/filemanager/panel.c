@@ -3905,7 +3905,7 @@ panel_update_cols (Widget * widget, panel_display_t frame_size)
     if (widget->owner == NULL)
         return;
 
-    if (horizontal_split)
+    if (panels_layout.horizontal_split)
     {
         widget->cols = COLS;
         return;
@@ -3918,13 +3918,13 @@ panel_update_cols (Widget * widget, panel_display_t frame_size)
     }
     else if (widget == get_panel_widget (0))
     {
-        cols = first_panel_size;
+        cols = panels_layout.left_panel_size;
         origin = 0;
     }
     else
     {
-        cols = COLS - first_panel_size;
-        origin = first_panel_size;
+        cols = COLS - panels_layout.left_panel_size;
+        origin = panels_layout.left_panel_size;
     }
 
     widget->cols = cols;
