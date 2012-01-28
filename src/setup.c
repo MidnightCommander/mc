@@ -557,7 +557,7 @@ load_layout (void)
 
     /* actual options override legacy ones */
     for (i = 0; layout[i].opt_name != NULL; i++)
-        *layout[i].opt_addr = mc_config_get_int (mc_main_config, "Layout",
+        *layout[i].opt_addr = mc_config_get_int (mc_main_config, CONFIG_LAYOUT_SECTION,
                                                  layout[i].opt_name, *layout[i].opt_addr);
 
     /* remove legacy options */
@@ -940,13 +940,15 @@ load_setup (void)
 
     /* Load time formats */
     user_recent_timeformat =
-        mc_config_get_string (mc_main_config, "Misc", "timeformat_recent", FMTTIME);
-    user_old_timeformat = mc_config_get_string (mc_main_config, "Misc", "timeformat_old", FMTYEAR);
+        mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "timeformat_recent", FMTTIME);
+    user_old_timeformat =
+        mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "timeformat_old", FMTYEAR);
 
 #ifdef ENABLE_VFS_FTP
-    ftpfs_proxy_host = mc_config_get_string (mc_main_config, "Misc", "ftp_proxy_host", "gate");
-    ftpfs_ignore_chattr_errors = mc_config_get_bool (mc_main_config, CONFIG_APP_SECTION,
-                                                     "ignore_ftp_chattr_errors", TRUE);
+    ftpfs_proxy_host =
+        mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "ftp_proxy_host", "gate");
+    ftpfs_ignore_chattr_errors =
+        mc_config_get_bool (mc_main_config, CONFIG_APP_SECTION, "ignore_ftp_chattr_errors", TRUE);
     ftpfs_init_passwd ();
 #endif /* ENABLE_VFS_FTP */
 
@@ -965,14 +967,14 @@ load_setup (void)
 #ifdef HAVE_CHARSET
     if (codepages->len > 1)
     {
-        buffer = mc_config_get_string (mc_main_config, "Misc", "display_codepage", "");
+        buffer = mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "display_codepage", "");
         if (buffer[0] != '\0')
         {
             mc_global.display_codepage = get_codepage_index (buffer);
             cp_display = get_codepage_id (mc_global.display_codepage);
         }
         g_free (buffer);
-        buffer = mc_config_get_string (mc_main_config, "Misc", "source_codepage", "");
+        buffer = mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "source_codepage", "");
         if (buffer[0] != '\0')
         {
             default_source_codepage = get_codepage_index (buffer);
@@ -982,7 +984,8 @@ load_setup (void)
         g_free (buffer);
     }
 
-    autodetect_codeset = mc_config_get_string (mc_main_config, "Misc", "autodetect_codeset", "");
+    autodetect_codeset =
+        mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "autodetect_codeset", "");
     if ((autodetect_codeset[0] != '\0') && (strcmp (autodetect_codeset, "off") != 0))
         is_autodetect_codeset_enabled = TRUE;
 
@@ -992,8 +995,10 @@ load_setup (void)
         mc_global.utf8_display = str_isutf8 (buffer);
 #endif /* HAVE_CHARSET */
 
-    clipboard_store_path = mc_config_get_string (mc_main_config, "Misc", "clipboard_store", "");
-    clipboard_paste_path = mc_config_get_string (mc_main_config, "Misc", "clipboard_paste", "");
+    clipboard_store_path =
+        mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "clipboard_store", "");
+    clipboard_paste_path =
+        mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "clipboard_paste", "");
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1021,20 +1026,25 @@ save_setup (gboolean save_options, gboolean save_panel_options)
         /* directory_history_save (); */
 
 #ifdef ENABLE_VFS_FTP
-        mc_config_set_string (mc_main_config, "Misc", "ftpfs_password", ftpfs_anonymous_passwd);
+        mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "ftpfs_password",
+                              ftpfs_anonymous_passwd);
         if (ftpfs_proxy_host)
-            mc_config_set_string (mc_main_config, "Misc", "ftp_proxy_host", ftpfs_proxy_host);
+            mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "ftp_proxy_host",
+                                  ftpfs_proxy_host);
 #endif /* ENABLE_VFS_FTP */
 
 #ifdef HAVE_CHARSET
-        mc_config_set_string (mc_main_config, "Misc", "display_codepage",
+        mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "display_codepage",
                               get_codepage_id (mc_global.display_codepage));
-        mc_config_set_string (mc_main_config, "Misc", "source_codepage",
+        mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "source_codepage",
                               get_codepage_id (default_source_codepage));
-        mc_config_set_string (mc_main_config, "Misc", "autodetect_codeset", autodetect_codeset);
+        mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "autodetect_codeset",
+                              autodetect_codeset);
 #endif /* HAVE_CHARSET */
-        mc_config_set_string (mc_main_config, "Misc", "clipboard_store", clipboard_store_path);
-        mc_config_set_string (mc_main_config, "Misc", "clipboard_paste", clipboard_paste_path);
+        mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "clipboard_store",
+                              clipboard_store_path);
+        mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "clipboard_paste",
+                              clipboard_paste_path);
 
         tmp_profile = mc_config_get_full_path (MC_CONFIG_FILE);
         ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
@@ -1120,7 +1130,8 @@ save_layout (void)
 
     /* Save integer options */
     for (i = 0; layout[i].opt_name != NULL; i++)
-        mc_config_set_int (mc_main_config, "Layout", layout[i].opt_name, *layout[i].opt_addr);
+        mc_config_set_int (mc_main_config, CONFIG_LAYOUT_SECTION, layout[i].opt_name,
+                           *layout[i].opt_addr);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1154,7 +1165,7 @@ load_anon_passwd (void)
 {
     char *buffer;
 
-    buffer = mc_config_get_string (mc_main_config, "Misc", "ftpfs_password", "");
+    buffer = mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "ftpfs_password", "");
 
     if ((buffer != NULL) && (buffer[0] != '\0'))
         return buffer;

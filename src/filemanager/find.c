@@ -298,8 +298,8 @@ find_load_options (void)
         mc_config_get_bool (mc_main_config, "FindFile", "ignore_dirs_enable", TRUE);
 
     /* Back compatibility: try load old parameter at first */
-    ignore_dirs = mc_config_get_string (mc_main_config, "Misc", "find_ignore_dirs", "");
-    mc_config_del_key (mc_main_config, "Misc", "find_ignore_dirs");
+    ignore_dirs = mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "find_ignore_dirs", "");
+    mc_config_del_key (mc_main_config, CONFIG_MISC_SECTION, "find_ignore_dirs");
 
     /* Then load new parameters */
     options.ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");
