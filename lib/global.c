@@ -32,7 +32,6 @@
 
 #include "global.h"
 
-
 /* *INDENT-OFF* */
 #ifdef HAVE_SUBSHELL_SUPPORT
 #  ifdef SUBSHELL_OPTIONAL
@@ -49,13 +48,11 @@
 
 /* *INDENT-OFF* */
 mc_global_t mc_global = {
-#ifdef ENABLE_BACKGROUND
-    .we_are_background = 0,
-#endif /* ENABLE_BACKGROUND */
-
-    .message_visible = 1,
-    .keybar_visible = 1,
     .mc_run_mode = MC_RUN_FULL,
+    .midnight_shutdown = FALSE,
+
+    .sysconfig_dir = NULL,
+    .share_data_dir = NULL,
 
 #ifdef HAVE_CHARSET
     .source_codepage = -1,
@@ -64,27 +61,29 @@ mc_global_t mc_global = {
     .eight_bit_clean = 1,
     .full_eight_bits = 0,
 #endif /* !HAVE_CHARSET */
+    .utf8_display = FALSE,
 
-    .utf8_display = 0,
-    .sysconfig_dir = NULL,
-    .share_data_dir = NULL,
+    .message_visible = 1,
+    .keybar_visible = 1,
 
-    .is_right = FALSE,
-
-    .skin = NULL,
+#ifdef ENABLE_BACKGROUND
+    .we_are_background = FALSE,
+#endif /* ENABLE_BACKGROUND */
 
     .widget =
     {
-        .midnight_shutdown = FALSE,
         .confirm_history_cleanup = TRUE,
-        .show_all_if_ambiguous = FALSE
+        .show_all_if_ambiguous = FALSE,
+        .is_right = FALSE
     },
 
     .tty =
     {
+        .skin = NULL,
         .setup_color_string = NULL,
         .term_color_string = NULL,
         .color_terminal_string = NULL,
+        .command_line_colors = NULL,
 #ifndef LINUX_CONS_SAVER_C
         .console_flag = '\0',
 #endif /* !LINUX_CONS_SAVER_C */
@@ -95,8 +94,6 @@ mc_global_t mc_global = {
         .subshell_pty = 0,
 #endif /* !HAVE_SUBSHELL_SUPPORT */
 
-        .winch_flag = FALSE,
-        .command_line_colors = NULL,
         .xterm_flag = FALSE,
         .disable_x11 = FALSE,
         .slow_terminal = FALSE,
@@ -104,6 +101,7 @@ mc_global_t mc_global = {
         .ugly_line_drawing = FALSE,
         .old_mouse = FALSE,
         .alternate_plus_minus = FALSE,
+        .winch_flag = FALSE
     },
 
     .vfs =

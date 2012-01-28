@@ -66,8 +66,8 @@ mc_skin_get_default_name (void)
     char *tmp_str;
 
     /* from command line */
-    if (mc_global.skin != NULL)
-        return g_strdup (mc_global.skin);
+    if (mc_global.tty.skin != NULL)
+        return g_strdup (mc_global.tty.skin);
 
     /* from envirovement variable */
     tmp_str = getenv ("MC_SKIN");

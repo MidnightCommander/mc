@@ -159,24 +159,15 @@ typedef enum
 
 typedef struct
 {
-#ifdef ENABLE_BACKGROUND
-    /* If true, this is a background process */
-    int we_are_background;
-#endif                          /* ENABLE_BACKGROUND */
-
-    /*
-     * If utf-8 terminal utf8_display = 1
-     * Display bits set UTF-8
-     */
-    int utf8_display;
-
-    /* Set if the nice message (hint) bar is visible */
-    int message_visible;
-
-    /* Set if the nice and useful keybar is visible */
-    int keybar_visible;
-
     mc_run_mode_t mc_run_mode;
+    /* Used so that widgets know if they are being destroyed or shut down */
+    gboolean midnight_shutdown;
+
+    /* sysconfig_dir: Area for default settings from maintainers of distributuves
+       default is /etc/mc or may be defined by MC_DATADIR */
+    char *sysconfig_dir;
+    /* share_data_dir: Area for default settings from developers */
+    char *share_data_dir;
 
 #ifdef HAVE_CHARSET
     /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
@@ -191,43 +182,45 @@ typedef struct
      */
     int full_eight_bits;
 #endif                          /* !HAVE_CHARSET */
-
-    /* sysconfig_dir: Area for default settings from maintainers of distributuves
-       default is /etc/mc or may be defined by MC_DATADIR
+    /*
+     * If utf-8 terminal utf8_display = TRUE
+     * Display bits set UTF-8
      */
-    char *sysconfig_dir;
+    gboolean utf8_display;
 
-    /* share_data_dir: Area for default settings from developers */
-    char *share_data_dir;
+    /* Set if the nice message (hint) bar is visible */
+    int message_visible;
+    /* Set if the nice and useful keybar is visible */
+    int keybar_visible;
 
-    /* Ugly hack in order to distinguish between left and right panel in menubar */
-    /* Set if the command is being run from the "Right" menu */
-    gboolean is_right;          /* If the selected menu was the right */
-
-    /* Use the specified skin */
-    char *skin;
+#ifdef ENABLE_BACKGROUND
+    /* If true, this is a background process */
+    gboolean we_are_background;
+#endif                          /* ENABLE_BACKGROUND */
 
     struct
     {
-        /* Used so that widgets know if they are being destroyed or shut down */
-        gboolean midnight_shutdown;
-
         /* Asks for confirmation before clean up of history */
         gboolean confirm_history_cleanup;
 
         /* Set if you want the possible completions dialog for the first time */
         gboolean show_all_if_ambiguous;
 
+        /* Ugly hack in order to distinguish between left and right panel in menubar */
+        /* Set if the command is being run from the "Right" menu */
+        gboolean is_right;          /* If the selected menu was the right */
     } widget;
 
     struct
     {
+        /* Use the specified skin */
+        char *skin;
+
         char *setup_color_string;
         char *term_color_string;
         char *color_terminal_string;
-
-        /* Set if the window has changed it's size */
-        gboolean winch_flag;
+        /* colors specified on the command line: they override any other setting */
+        char *command_line_colors;
 
 #ifndef LINUX_CONS_SAVER_C
         /* Used only in mc, not in cons.saver */
@@ -239,9 +232,6 @@ typedef struct
         /* File descriptors of the pseudoterminal used by the subshell */
         int subshell_pty;
 #endif                          /* !HAVE_SUBSHELL_SUPPORT */
-
-        /* colors specified on the command line: they override any other setting */
-        char *command_line_colors;
 
         /* This flag is set by xterm detection routine in function main() */
         /* It is used by function view_other_cmd() */
@@ -267,6 +257,8 @@ typedef struct
            and M-- and keypad + / - */
         gboolean alternate_plus_minus;
 
+        /* Set if the window has changed it's size */
+        gboolean winch_flag;
     } tty;
 
     struct
@@ -278,7 +270,6 @@ typedef struct
         gboolean preallocate_space;
 
     } vfs;
-
 } mc_global_t;
 
 /*** global variables defined in .c file *********************************************************/

@@ -774,7 +774,7 @@ init_subshell (void)
         return;
     case 2:
         mc_global.tty.use_subshell = FALSE;
-        mc_global.widget.midnight_shutdown = TRUE;
+        mc_global.midnight_shutdown = TRUE;
         return;
     }
 
