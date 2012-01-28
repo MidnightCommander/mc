@@ -462,7 +462,7 @@ midnight_get_title (const Dlg_head * h, size_t len)
 static void
 toggle_panels_split (void)
 {
-    horizontal_split = !horizontal_split;
+    panels_layout.horizontal_split = !panels_layout.horizontal_split;
     layout_change ();
     do_refresh ();
 }
@@ -1534,8 +1534,8 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 void
 update_menu (void)
 {
-    menu_set_name (left_menu, horizontal_split ? _("&Above") : _("&Left"));
-    menu_set_name (right_menu, horizontal_split ? _("&Below") : _("&Right"));
+    menu_set_name (left_menu, panels_layout.horizontal_split ? _("&Above") : _("&Left"));
+    menu_set_name (right_menu, panels_layout.horizontal_split ? _("&Below") : _("&Right"));
     menubar_arrange (the_menubar);
     menubar_set_visible (the_menubar, menubar_visible);
 }
