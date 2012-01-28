@@ -147,7 +147,8 @@ check_codeset (void)
             if (mc_global.display_codepage == -1)
                 mc_global.display_codepage = 0;
 
-            mc_config_set_string (mc_main_config, "Misc", "display_codepage", cp_display);
+            mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "display_codepage",
+                                  cp_display);
         }
     }
 #endif
