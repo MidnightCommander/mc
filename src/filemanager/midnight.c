@@ -554,7 +554,7 @@ print_vfs_message (const gchar * event_group_name, const gchar * event_name,
 
     g_vsnprintf (str, sizeof (str), event_data->msg, event_data->ap);
 
-    if (mc_global.widget.midnight_shutdown)
+    if (mc_global.midnight_shutdown)
         return TRUE;
 
     if (!mc_global.message_visible || !the_hint || !the_hint->widget.owner)
@@ -1679,7 +1679,7 @@ do_nc (void)
     }
 
     /* Program end */
-    mc_global.widget.midnight_shutdown = TRUE;
+    mc_global.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();
     destroy_dlg (midnight_dlg);

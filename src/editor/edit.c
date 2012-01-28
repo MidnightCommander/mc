@@ -3594,11 +3594,13 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         if (option_cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 #ifdef HAVE_CHARSET
-        if (char_for_insertion > 255 && mc_global.utf8_display == 0)
+        if (char_for_insertion > 255 && !mc_global.utf8_display)
         {
             unsigned char str[6 + 1];
             size_t i = 0;
-            int res = g_unichar_to_utf8 (char_for_insertion, (char *) str);
+            int res;
+
+            res = g_unichar_to_utf8 (char_for_insertion, (char *) str);
             if (res == 0)
             {
                 str[0] = '.';

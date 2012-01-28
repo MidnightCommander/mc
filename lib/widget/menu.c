@@ -298,7 +298,7 @@ menubar_execute (WMenuBar * menubar)
 
     if ((entry != NULL) && (entry->command != CK_IgnoreKey))
     {
-        mc_global.is_right = (menubar->selected != 0);
+        mc_global.widget.is_right = (menubar->selected != 0);
         menubar_finish (menubar);
         menubar->widget.owner->callback (menubar->widget.owner, &menubar->widget,
                                          DLG_ACTION, entry->command, NULL);

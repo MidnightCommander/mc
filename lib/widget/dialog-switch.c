@@ -198,7 +198,7 @@ dialog_switch_next (void)
 {
     GList *next;
 
-    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
+    if (mc_global.midnight_shutdown || mc_current == NULL)
         return;
 
     next = g_list_next (mc_current);
@@ -215,7 +215,7 @@ dialog_switch_prev (void)
 {
     GList *prev;
 
-    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
+    if (mc_global.midnight_shutdown || mc_current == NULL)
         return;
 
     prev = g_list_previous (mc_current);
@@ -237,7 +237,7 @@ dialog_switch_list (void)
     int i = 0;
     int rv;
 
-    if (mc_global.widget.midnight_shutdown || mc_current == NULL)
+    if (mc_global.midnight_shutdown || mc_current == NULL)
         return;
 
     lines = min ((size_t) (LINES * 2 / 3), dlg_num);

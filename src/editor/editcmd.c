@@ -2539,7 +2539,7 @@ edit_ok_to_exit (WEdit * edit)
     if (!edit->modified)
         return TRUE;
 
-    if (!mc_global.widget.midnight_shutdown)
+    if (!mc_global.midnight_shutdown)
     {
         if (!edit_check_newline (edit))
             return FALSE;
@@ -2565,8 +2565,8 @@ edit_ok_to_exit (WEdit * edit)
     case 0:                    /* Yes */
         edit_push_markers (edit);
         edit_set_markers (edit, 0, 0, 0, 0);
-        if (!edit_save_cmd (edit) || mc_global.widget.midnight_shutdown)
-            return mc_global.widget.midnight_shutdown;
+        if (!edit_save_cmd (edit) || mc_global.midnight_shutdown)
+            return mc_global.midnight_shutdown;
         break;
     case 1:                    /* No */
         break;

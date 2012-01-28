@@ -542,7 +542,7 @@ main (int argc, char *argv[])
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */
-    if (mc_global.widget.midnight_shutdown)
+    if (mc_global.midnight_shutdown)
         exit_code = EXIT_SUCCESS;
     else
         exit_code = do_nc () ? EXIT_SUCCESS : EXIT_FAILURE;
