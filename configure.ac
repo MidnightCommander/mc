@@ -79,7 +79,7 @@ AC_PROG_LN_S
 AC_CHECK_TOOL(AR, ar, ar)
 
 dnl Only list browsers here that can be run in background (i.e. with `&')
-AC_CHECK_PROGS(X11_WWW, [gnome-moz-remote mozilla konqueror opera netscape])
+AC_CHECK_PROGS(X11_WWW, [gnome-moz-remote mozilla firefox konqueror opera])
 
 dnl
 dnl Ovverriding mmap support.  This has to be before AC_FUNC_MMAP is used.
