@@ -51,12 +51,25 @@ static GString *
 mc_search__hex_translate_to_regex (const GString * astr)
 {
     GString *buff;
-    gchar *tmp_str;
+    gchar *tmp_str, *tmp_str2;
     gsize tmp_str_len;
     gsize loop = 0;
 
     buff = g_string_sized_new (64);
     tmp_str = g_strndup (astr->str, astr->len);
+    tmp_str2 = tmp_str;
+
+    /* remove 0x prefices */
+    while (TRUE)
+    {
+        tmp_str2 = strstr (tmp_str2, "0x");
+        if (tmp_str2 == NULL)
+            break;
+
+        *tmp_str2++ = ' ';
+        *tmp_str2++ = ' ';
+    }
+
     g_strchug (tmp_str);        /* trim leadind whitespaces */
     tmp_str_len = strlen (tmp_str);
 
@@ -64,7 +77,7 @@ mc_search__hex_translate_to_regex (const GString * astr)
     {
         int val, ptr;
 
-        if (sscanf (tmp_str + loop, "%i%n", &val, &ptr))
+        if (sscanf (tmp_str + loop, "%x%n", &val, &ptr))
         {
             if (val < -128 || val > 255)
                 loop++;
@@ -107,6 +120,7 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_se
 {
     GString *tmp;
 
+    g_string_ascii_down (mc_search_cond->str);
     tmp = mc_search__hex_translate_to_regex (mc_search_cond->str);
     g_string_free (mc_search_cond->str, TRUE);
     mc_search_cond->str = tmp;
