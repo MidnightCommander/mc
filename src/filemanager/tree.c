@@ -1090,19 +1090,6 @@ tree_key (WTree * tree, int key)
 {
     size_t i;
 
-    for (i = 0; tree_map[i].key != 0; i++)
-        if (key == tree_map[i].key)
-            switch (tree_map[i].command)
-            {
-            case CK_Left:
-                return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            case CK_Right:
-                return tree_move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            default:
-                tree_execute_cmd (tree, tree_map[i].command);
-                return MSG_HANDLED;
-            }
-
     if (is_abort_char (key))
     {
         if (tree->is_panel)
@@ -1116,23 +1103,32 @@ tree_key (WTree * tree, int key)
         return MSG_NOT_HANDLED;
     }
 
-    /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
-    if ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE)
+    if (tree->searching && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
-        if (tree->searching)
-        {
-            tree_do_search (tree, key);
-            show_tree (tree);
-            return MSG_HANDLED;
-        }
+        tree_do_search (tree, key);
+        show_tree (tree);
+        return MSG_HANDLED;
+    }
 
-        if (!command_prompt)
-        {
-            tree_start_search (tree);
-            tree_do_search (tree, key);
-            return MSG_HANDLED;
-        }
-        return tree->is_panel ? MSG_HANDLED : MSG_NOT_HANDLED;
+    for (i = 0; tree_map[i].key != 0; i++)
+        if (key == tree_map[i].key)
+            switch (tree_map[i].command)
+            {
+            case CK_Left:
+                return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
+            case CK_Right:
+                return tree_move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
+            default:
+                tree_execute_cmd (tree, tree_map[i].command);
+                return MSG_HANDLED;
+            }
+
+    /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
+    if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
+    {
+        tree_start_search (tree);
+        tree_do_search (tree, key);
+        return MSG_HANDLED;
     }
 
     return MSG_NOT_HANDLED;
