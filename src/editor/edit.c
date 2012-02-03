@@ -3637,8 +3637,12 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     {
     case CK_TopOnScreen:
     case CK_BottomOnScreen:
-    case CK_MarkToPageBegin:
-    case CK_MarkToPageEnd:
+    case CK_Top:
+    case CK_Bottom:
+    case CK_PageUp:
+    case CK_PageDown:
+    case CK_Home:
+    case CK_End:
     case CK_Up:
     case CK_Down:
     case CK_Left:
