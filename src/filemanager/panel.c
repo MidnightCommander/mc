@@ -2603,7 +2603,7 @@ do_enter_on_file_entry (file_entry * fe)
         g_free (cmd);
     }
 
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
     mc_global.source_codepage = default_source_codepage;
 #endif
 

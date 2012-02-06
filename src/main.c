@@ -291,7 +291,7 @@ do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum exact)
 
     res = do_panel_cd (current_panel, _new_dir_vpath, exact);
 
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
     if (res)
     {
         const vfs_path_element_t *path_element;
