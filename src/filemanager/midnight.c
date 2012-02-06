@@ -469,8 +469,7 @@ toggle_panels_split (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if ENABLE_VFS
-
+#ifdef ENABLE_VFS
 /* event helper */
 static gboolean
 check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_class *vclass,
@@ -638,7 +637,7 @@ create_panels (void)
     else
         current_panel = left_panel;
 
-#if ENABLE_VFS
+#ifdef ENABLE_VFS
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL, NULL);
 #endif /* ENABLE_VFS */

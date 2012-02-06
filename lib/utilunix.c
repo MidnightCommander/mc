@@ -733,7 +733,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 else
                 {
                     /* "token/../foo" -> "foo" */
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
                     if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
                         && (is_supported_encoding (s + enc_prefix_len)))
                         /* special case: remove encoding */
@@ -761,7 +761,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 /* "foo/token/.." -> "foo" */
                 if (s == lpath + 1)
                     s[0] = 0;
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
                 else if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
                          && (is_supported_encoding (s + enc_prefix_len)))
                 {

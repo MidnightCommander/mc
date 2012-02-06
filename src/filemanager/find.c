@@ -119,7 +119,7 @@ typedef struct
 static char **find_ignore_dirs = NULL;
 
 /* Size of the find parameters window */
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
 static int FIND_Y = 19;
 #else
 static int FIND_Y = 18;

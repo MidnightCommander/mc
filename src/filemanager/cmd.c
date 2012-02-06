@@ -846,7 +846,7 @@ edit_cmd_force_internal (void)
 void
 edit_cmd_new (void)
 {
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
     mc_global.source_codepage = default_source_codepage;
 #endif
     do_edit (NULL);

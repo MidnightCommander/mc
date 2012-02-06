@@ -148,7 +148,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
         memcpy (encoding, semi, ms);
         encoding[ms] = '\0';
 
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
         if (is_supported_encoding (encoding))
             coder = str_crt_conv_to (encoding);
 #endif

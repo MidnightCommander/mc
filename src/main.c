@@ -285,7 +285,7 @@ do_cd (const char *new_dir, enum cd_enum exact)
 
     res = do_panel_cd (current_panel, _new_dir, exact);
 
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
     if (res)
     {
         vfs_path_t *vpath = vfs_path_from_str (current_panel->cwd);
