@@ -754,6 +754,59 @@ setup_panels (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+panels_split_equal (void)
+{
+    if (panels_layout.horizontal_split)
+        panels_layout.horizontal_equal = TRUE;
+    else
+        panels_layout.vertical_equal = TRUE;
+
+    layout_change ();
+    do_refresh ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panels_split_more (void)
+{
+    if (panels_layout.horizontal_split)
+    {
+        panels_layout.horizontal_equal = FALSE;
+        panels_layout.top_panel_size++;
+    }
+    else
+    {
+        panels_layout.vertical_equal = FALSE;
+        panels_layout.left_panel_size++;
+    }
+
+    layout_change ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panels_split_less (void)
+{
+    if (panels_layout.horizontal_split)
+    {
+        panels_layout.horizontal_equal = FALSE;
+        panels_layout.top_panel_size--;
+    }
+    else
+    {
+        panels_layout.vertical_equal = FALSE;
+        panels_layout.left_panel_size--;
+    }
+
+    layout_change ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+
+void
 setup_cmdline (void)
 {
     int prompt_len;
