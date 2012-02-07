@@ -25,6 +25,7 @@ struct vfs_url_struct;
 
 typedef struct
 {
+    gboolean relative;
     GArray *path;
 } vfs_path_t;
 
@@ -85,6 +86,7 @@ char *vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolea
 size_t vfs_path_len (const vfs_path_t * vpath);
 int vfs_path_cmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 int vfs_path_ncmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len);
+vfs_path_t *vfs_path_to_absolute (const vfs_path_t * vpath);
 
 /*** inline functions ****************************************************************************/
 

@@ -2851,34 +2851,18 @@ static gboolean
 _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
     char *olddir;
-    char temp[MC_MAXPATHLEN];
-    char *new_dir, *_new_dir;
-
-    _new_dir = new_dir = vfs_path_to_str (new_dir_vpath);
-
-    if (cd_type == cd_parse_command)
-    {
-        while (*new_dir == ' ')
-            new_dir++;
-    }
 
     olddir = vfs_path_to_str (panel->cwd_vpath);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
-
     if (cd_type == cd_parse_command)
     {
-        if (strcmp (new_dir, "-") == 0)
-        {
-            char *tmp_path;
+        const vfs_path_element_t *element;
 
-            tmp_path = vfs_path_to_str (panel->lwd_vpath);
-            strcpy (temp, tmp_path);
-            new_dir = temp;
-            g_free (tmp_path);
-        }
+        element = vfs_path_get_by_index (new_dir_vpath, 0);
+        if (strcmp (element->path, "-") == 0)
+            new_dir_vpath = panel->lwd_vpath;
     }
-    g_free (_new_dir);
 
     if (mc_chdir (new_dir_vpath) == -1)
     {
