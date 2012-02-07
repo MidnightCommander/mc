@@ -352,13 +352,14 @@ vfs_path_is_str_path_deprecated (const char *path_str)
 */
 
 static vfs_path_t *
-vfs_path_from_str_deprecated_parser (char *path)
+vfs_path_from_str_deprecated_parser (char *path, vfs_path_flag_t flags)
 {
     vfs_path_t *vpath;
     vfs_path_element_t *element;
     struct vfs_class *class;
     const char *local, *op;
 
+    (void) flags;
     vpath = vfs_path_new ();
 
     while ((class = _vfs_split_with_semi_skip_count (path, &local, &op, 0)) != NULL)
@@ -411,7 +412,7 @@ vfs_path_from_str_deprecated_parser (char *path)
 */
 
 static vfs_path_t *
-vfs_path_from_str_uri_parser (char *path)
+vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
 {
     vfs_path_t *vpath;
     vfs_path_element_t *element;
@@ -419,6 +420,7 @@ vfs_path_from_str_uri_parser (char *path)
     char *url_delimiter;
 
     vpath = vfs_path_new ();
+    vpath->relative = (flags & VPF_NO_CANON) != 0;
 
     while ((url_delimiter = g_strrstr (path, VFS_PATH_URL_DELIMITER)) != NULL)
     {
@@ -573,7 +575,7 @@ vfs_path_strip_home (const char *dir)
  * @return pointer to newly created string.
  */
 
-#define vfs_append_from_path(appendfrom) \
+#define vfs_append_from_path(appendfrom, is_relative) \
 { \
     if ((flags & VPF_STRIP_HOME) && element_index == 0 && (element->class->flags & VFSF_LOCAL) != 0) \
     { \
@@ -584,8 +586,8 @@ vfs_path_strip_home (const char *dir)
     } \
     else \
     { \
-        if ((*appendfrom != PATH_SEP) && (*appendfrom != '\0') \
-            && (buffer->str[buffer->len - 1] != PATH_SEP)) \
+        if ((!is_relative) && (*appendfrom != PATH_SEP) && (*appendfrom != '\0') \
+            && (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP)) \
             g_string_append_c (buffer, PATH_SEP); \
         g_string_append (buffer, appendfrom); \
     } \
@@ -613,14 +615,13 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
     for (element_index = 0; element_index < elements_count; element_index++)
     {
         const vfs_path_element_t *element;
+        gboolean is_relative = vpath->relative && (element_index == 0);
 
         element = vfs_path_get_by_index (vpath, element_index);
-
         if (element->vfs_prefix != NULL)
         {
             char *url_str;
-
-            if (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP)
+            if ((!is_relative) && (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP))
                 g_string_append_c (buffer, PATH_SEP);
 
             g_string_append (buffer, element->vfs_prefix);
@@ -638,18 +639,19 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
         {
             if ((flags & VPF_HIDE_CHARSET) == 0)
             {
-                if (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP)
+                if ((!is_relative)
+                    && (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP))
                     g_string_append (buffer, PATH_SEP_STR);
                 g_string_append (buffer, VFS_ENCODING_PREFIX);
                 g_string_append (buffer, element->encoding);
             }
             str_vfs_convert_from (element->dir.converter, element->path, recode_buffer);
-            vfs_append_from_path (recode_buffer->str);
+            vfs_append_from_path (recode_buffer->str, is_relative);
             g_string_set_size (recode_buffer, 0);
         }
         else
         {
-            vfs_append_from_path (element->path);
+            vfs_append_from_path (element->path, is_relative);
         }
     }
     g_string_free (recode_buffer, TRUE);
@@ -717,9 +719,9 @@ vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags)
         return NULL;
 
     if ((flags & VPF_USE_DEPRECATED_PARSER) != 0 && vfs_path_is_str_path_deprecated (path))
-        vpath = vfs_path_from_str_deprecated_parser (path);
+        vpath = vfs_path_from_str_deprecated_parser (path, flags);
     else
-        vpath = vfs_path_from_str_uri_parser (path);
+        vpath = vfs_path_from_str_uri_parser (path, flags);
 
     g_free (path);
 
@@ -884,14 +886,14 @@ vfs_path_clone (const vfs_path_t * vpath)
         return NULL;
 
     new_vpath = vfs_path_new ();
+    new_vpath->relative = vpath->relative;
 
     for (vpath_element_index = 0; vpath_element_index < vfs_path_elements_count (vpath);
          vpath_element_index++)
     {
         vfs_path_element_t *path_element;
 
-        path_element =
-            vfs_path_element_clone (vfs_path_get_by_index (vpath, vpath_element_index));
+        path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, vpath_element_index));
         g_array_append_val (new_vpath->path, path_element);
     }
 
@@ -1217,8 +1219,7 @@ vfs_path_append_vpath_new (const vfs_path_t * first_vpath, ...)
         {
             vfs_path_element_t *path_element;
 
-            path_element =
-                vfs_path_element_clone (vfs_path_get_by_index (current_vpath, vindex));
+            path_element = vfs_path_element_clone (vfs_path_get_by_index (current_vpath, vindex));
             g_array_append_val (ret_vpath->path, path_element);
         }
         current_vpath = va_arg (args, const vfs_path_t *);
@@ -1509,6 +1510,30 @@ vfs_path_len (const vfs_path_t * vpath)
     ret_val = strlen (path);
     g_free (path);
     return ret_val;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Convert relative vpath object to absolute
+ *
+ * @param vpath path object
+ *
+ * @return absolute path object
+ */
+
+vfs_path_t *
+vfs_path_to_absolute (const vfs_path_t * vpath)
+{
+    vfs_path_t *absolute_vpath;
+    char *path_str;
+
+    if (!vpath->relative)
+        return vfs_path_clone (vpath);
+
+    path_str = vfs_path_to_str (vpath);
+    absolute_vpath = vfs_path_from_str (path_str);
+    g_free (path_str);
+    return absolute_vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */

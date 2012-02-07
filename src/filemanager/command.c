@@ -426,7 +426,7 @@ do_cd_command (char *orig_cmd)
         if (*path == '\0')
             q_vpath = vfs_path_from_str (mc_config_get_home_dir());
         else
-            q_vpath = vfs_path_from_str (path);
+            q_vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
 
         ok = do_cd (q_vpath, cd_parse_command);
         if (!ok)

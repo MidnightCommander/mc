@@ -574,7 +574,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
     {
         vfs_path_t *cd_vpath;
 
-        cd_vpath = vfs_path_from_str (cd_path);
+        cd_vpath = vfs_path_from_str_flags (cd_path, VPF_NO_CANON);
         if (!do_panel_cd (MENU_PANEL, cd_vpath, cd_parse_command))
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
         vfs_path_free (cd_vpath);

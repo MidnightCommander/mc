@@ -436,7 +436,7 @@ mc_opendir (const vfs_path_t * vpath)
     path_element->dir.info = info;
 
     path_element->dir.converter = (path_element->encoding != NULL) ?
-                    str_crt_conv_from (path_element->encoding) : str_cnv_from_term;
+        str_crt_conv_from (path_element->encoding) : str_cnv_from_term;
     if (path_element->dir.converter == INVALID_CONV)
         path_element->dir.converter = str_cnv_from_term;
 
@@ -612,7 +612,7 @@ mc_getlocalcopy (const vfs_path_t * pathname_vpath)
     if (vfs_path_element_valid (path_element))
     {
         result = path_element->class->getlocalcopy != NULL ?
-            path_element->class-> getlocalcopy (pathname_vpath) :
+            path_element->class->getlocalcopy (pathname_vpath) :
             mc_def_getlocalcopy (pathname_vpath);
         if (result == NULL)
             errno = vfs_ferrno (path_element->class);
@@ -658,6 +658,7 @@ mc_chdir (const vfs_path_t * vpath)
     vfsid old_vfsid;
     int result;
     const vfs_path_element_t *path_element;
+    vfs_path_t *abcolute_vpath;
 
     if (vpath == NULL)
         return -1;
@@ -669,10 +670,13 @@ mc_chdir (const vfs_path_t * vpath)
         return -1;
     }
 
-    result = (*path_element->class->chdir) (vpath);
+    abcolute_vpath = vfs_path_to_absolute (vpath);
+
+    result = (*path_element->class->chdir) (abcolute_vpath);
 
     if (result == -1)
     {
+        vfs_path_free (abcolute_vpath);
         errno = vfs_ferrno (path_element->class);
         return -1;
     }
@@ -681,7 +685,8 @@ mc_chdir (const vfs_path_t * vpath)
     old_vfs = current_vfs;
 
     /* Actually change directory */
-    vfs_set_raw_current_dir (vfs_path_clone (vpath));
+    vfs_set_raw_current_dir (abcolute_vpath);
+
     current_vfs = path_element->class;
 
     /* This function uses the new current_dir implicitly */

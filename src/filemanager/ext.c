@@ -366,7 +366,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
             q--;
         q[1] = 0;
 
-        p_vpath = vfs_path_from_str (p);
+        p_vpath = vfs_path_from_str_flags (p, VPF_NO_CANON);
         do_cd (p_vpath, cd_parse_command);
         vfs_path_free (p_vpath);
     }

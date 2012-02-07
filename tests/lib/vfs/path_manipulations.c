@@ -232,6 +232,43 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+START_TEST (test_vfs_path_relative)
+{
+    vfs_path_t *vpath, *copy_vpath;
+    char *path_str;
+
+    vpath = vfs_path_from_str_flags("../bla-bla", VPF_NO_CANON);
+    fail_unless (vpath->relative, "relative flag fail!\n");
+
+    path_str = vfs_path_to_str (vpath);
+
+    fail_unless (strcmp(path_str, "../bla-bla") == 0, "relative fail!\nactual: [%s]\n", path_str);
+    g_free (path_str);
+
+    path_str = (char *) vfs_path_get_last_path_str (vpath);
+    fail_unless (strcmp(path_str, "../bla-bla") == 0, "relative fail!\nactual: element->path=[%s]\n", path_str);
+
+    copy_vpath = vfs_path_clone (vpath);
+
+    path_str = vfs_path_to_str (copy_vpath);
+
+    fail_unless (strcmp(path_str, "../bla-bla") == 0, "relative fail!\nactual: [%s]\n", path_str);
+    g_free (path_str);
+
+    vfs_path_free (copy_vpath);
+    vfs_path_free (vpath);
+
+    vpath = vfs_path_from_str_flags ("../path/test1://user:pass@some.host:12345/bla-bla/some/path/", VPF_NO_CANON);
+    path_str = vfs_path_to_str (vpath);
+    fail_unless (strcmp(path_str, "../path/test1://user:pass@some.host:12345/bla-bla/some/path/") == 0, "relative fail!\nactual: [%s]\n", path_str);
+    g_free (path_str);
+    vfs_path_free (vpath);
+
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -247,6 +284,7 @@ main (void)
     tcase_add_test (tc_core, test_vfs_path_tokens_count);
     tcase_add_test (tc_core, test_vfs_path_tokens_get);
     tcase_add_test (tc_core, test_vfs_path_append_vpath);
+    tcase_add_test (tc_core, test_vfs_path_relative);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
