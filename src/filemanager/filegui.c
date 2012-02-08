@@ -1064,7 +1064,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
     {
         vfs_path_t *vpath;
 
-        vpath = vfs_path_from_str (def_text);
+        vpath = vfs_path_from_str_flags (def_text, (only_one) ? VPF_NO_CANON : VPF_NONE);
         tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
         vfs_path_free (vpath);
     }
