@@ -99,6 +99,12 @@ right=\\eOC
 left=\\e[D
 left=\\eOD
 
+# arrows with modifiers
+alt-shift-right=\\e[1\;4C
+alt-shift-left=\\e[1\;4D
+alt-shift-up=\\e[1\;4A
+alt-shift-down=\\e[1\;4B
+
 [terminal:gnome]
 copy=xterm
 

@@ -1294,6 +1294,15 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_SplitVertHoriz:
         toggle_panels_split ();
         break;
+    case CK_SplitEqual:
+        panels_split_equal ();
+        break;
+    case CK_SplitMore:
+        panels_split_more ();
+        break;
+    case CK_SplitLess:
+        panels_split_less ();
+        break;
     case CK_PanelTree:
         panel_tree_cmd ();
         break;
