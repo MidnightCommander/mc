@@ -122,6 +122,8 @@ SortByName =
 SortByExt =
 SortBySize =
 SortByMTime =
+ScrollLeft =
+ScrollRight =
 
 [dialog]
 Ok = enter

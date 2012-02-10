@@ -196,6 +196,8 @@ enum
     CK_SortByExt,
     CK_SortBySize,
     CK_SortByMTime,
+    CK_ScrollLeft,
+    CK_ScrollRight,
 
     /* dialog */
     CK_Ok = 300,

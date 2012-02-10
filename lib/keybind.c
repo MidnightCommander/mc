@@ -205,6 +205,8 @@ static name_keymap_t command_names[] = {
     {"Unselect", CK_Unselect},
 
     /* panel */
+    {"ScrollLeft", CK_ScrollLeft},
+    {"ScrollRight", CK_ScrollRight},
     {"PanelOtherCd", CK_PanelOtherCd},
     {"PanelOtherCdLink", CK_PanelOtherCdLink},
     {"CopySingle", CK_CopySingle},

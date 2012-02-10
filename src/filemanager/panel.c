@@ -389,7 +389,8 @@ delete_format (format_e * format)
 /** This code relies on the default justification!!! */
 
 static void
-add_permission_string (char *dest, int width, file_entry * fe, int attr, int color, int is_octal)
+add_permission_string (const char *dest, int width, file_entry * fe, int attr, int color,
+                       int is_octal)
 {
     int i, r, l;
 
@@ -764,7 +765,6 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
         color = file_compute_color (attr, fe);
     else
         color = NORMAL_COLOR;
-
     for (format = home; format; format = format->next)
     {
         if (length == width)
@@ -773,7 +773,8 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
         if (format->string_fn)
         {
             int len, perm;
-            char *preperad_text;
+            const char *prepared_text;
+            int name_offset = 0;
 
             if (empty_line)
                 txt = " ";
@@ -785,6 +786,20 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
                 len = width - length;
             if (len <= 0)
                 break;
+
+            if (!isstatus && panel->content_shift > -1 && strcmp (format->id, "name") == 0)
+            {
+                int str_len;
+                int i;
+
+                str_len = str_length (txt);
+                i = max (0, str_len - len);
+                panel->max_shift = max (panel->max_shift, i);
+                i = min (panel->content_shift, i);
+
+                if (i > -1)
+                    name_offset = str_offset_to_pos (txt, i);
+            }
 
             perm = 0;
             if (panels_options.permission_mode)
@@ -800,12 +815,15 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
             else
                 tty_lowlevel_setcolor (-color);
 
-            preperad_text = (char *) str_fit_to_term (txt, len, format->just_mode);
+            if (!isstatus && panel->content_shift > -1)
+                prepared_text = str_fit_to_term (txt + name_offset, len, HIDE_FIT (format->just_mode));
+            else
+                prepared_text = str_fit_to_term (txt, len, format->just_mode);
 
             if (perm)
-                add_permission_string (preperad_text, format->field_len, fe, attr, color, perm - 1);
+                add_permission_string (prepared_text, format->field_len, fe, attr, color, perm - 1);
             else
-                tty_print_string (preperad_text);
+                tty_print_string (prepared_text);
 
             length += len;
         }
@@ -940,7 +958,8 @@ paint_dir (WPanel * panel)
     int items;                  /* Number of items */
 
     items = llines (panel) * (panel->split ? 2 : 1);
-
+    /* reset max len of filename because we have the new max length for the new file list */
+    panel->max_shift = -1;
     for (i = 0; i < items; i++)
     {
         if (i + panel->top_file >= panel->count)
@@ -952,6 +971,7 @@ paint_dir (WPanel * panel)
         }
         repaint_file (panel, i + panel->top_file, 1, color, 0);
     }
+
     tty_set_normal_attrs ();
 }
 
@@ -2628,6 +2648,49 @@ panel_select_sort_order (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * \fn panel_content_scroll_left (panel)
+ * \input:
+ *   panel:     pointer to the panel on which we operate
+ * \brief: scroll long filename to the left (decrement scroll pointer)
+ */
+
+static void
+panel_content_scroll_left (WPanel * panel)
+{
+    if (panel->content_shift > -1)
+    {
+        if (panel->content_shift > panel->max_shift)
+            panel->content_shift = panel->max_shift;
+
+        panel->content_shift--;
+        show_dir (panel);
+        paint_dir (panel);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * \fn panel_content_scroll_right (panel)
+ * \input:
+ *   panel:     pointer to the panel on which we operate
+ * \brief: scroll long filename to the right (increment scroll pointer)
+ */
+
+static void
+panel_content_scroll_right (WPanel * panel)
+{
+    if (panel->content_shift < 0 || panel->content_shift < panel->max_shift)
+    {
+        panel->content_shift++;
+        show_dir (panel);
+        paint_dir (panel);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 panel_set_sort_type_by_id (WPanel * panel, const char *name)
 {
@@ -2941,6 +3004,12 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         panel_change_encoding (panel);
         break;
 #endif
+    case CK_ScrollLeft:
+        panel_content_scroll_left (panel);
+        break;
+    case CK_ScrollRight:
+        panel_content_scroll_right (panel);
+        break;
     case CK_Search:
         start_search (panel);
         break;
@@ -3639,6 +3708,8 @@ panel_clean_dir (WPanel * panel)
     panel->searching = FALSE;
     panel->is_panelized = FALSE;
     panel->dirty = 1;
+    panel->content_shift = -1;
+    panel->max_shift = -1;
 
     clean_dir (&panel->dir, count);
 }
@@ -3707,6 +3778,8 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     panel->format = 0;
     panel->status_format = 0;
     panel->format_modified = 1;
+    panel->content_shift = -1;
+    panel->max_shift = -1;
 
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
