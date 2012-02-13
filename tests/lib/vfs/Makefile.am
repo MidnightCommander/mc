@@ -1,7 +1,7 @@
 AM_CFLAGS = -I$(top_srcdir)/lib/vfs $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@ \
-	-DTEST_SHARE_DIR=\"$(abs_srcdir)\" -z muldefs
+	-DTEST_SHARE_DIR=\"$(abs_srcdir)\"
 
-AM_LDFLAGS = -z muldefs
+AM_LDFLAGS = -Wl,-z,muldefs
 
 EXTRA_DIST = mc.charsets
 
