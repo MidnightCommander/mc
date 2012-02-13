@@ -155,90 +155,88 @@ START_TEST (test_vfs_parse_ls_lga)
 {
     size_t filepos = 0;
 
+    struct stat etalon_stat;
+
+    etalon_stat.st_dev = 0;
+    etalon_stat.st_ino = 0;
+    etalon_stat.st_mode = 0x41fd;
+    etalon_stat.st_nlink = 10;
+    etalon_stat.st_uid = 500;
+    etalon_stat.st_gid = 500;
+    etalon_stat.st_rdev = 0;
+    etalon_stat.st_size = 4096;
+    etalon_stat.st_blksize = 512;
+    etalon_stat.st_blocks = 8;
+    etalon_stat.st_atime = 1308838140;
+    etalon_stat.st_mtime = 1308838140;
+    etalon_stat.st_ctime = 1308838140;
+
     vfs_parse_ls_lga_init();
 
     check_vfs_parse_ls_lga_call(
         "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root",
-        1, "build_root", NULL, (struct stat)
-        {
-        .st_dev = 0,
-        .st_ino = 0,
-        .st_mode = 0x41fd,
-        .st_nlink = 10,
-        .st_uid = 500,
-        .st_gid = 500,
-        .st_rdev = 0,
-        .st_size = 4096,
-        .st_blksize = 512,
-        .st_blocks = 8,
-        .st_atime = 1308838140,
-        .st_mtime = 1308838140,
-        .st_ctime = 1308838140
-        },
+        1, "build_root", NULL, etalon_stat,
         NULL
     );
+
+    etalon_stat.st_dev = 0;
+    etalon_stat.st_ino = 0;
+    etalon_stat.st_mode = 0xa1ff;
+    etalon_stat.st_nlink = 10;
+    etalon_stat.st_uid = 500;
+    etalon_stat.st_gid = 500;
+    etalon_stat.st_rdev = 0;
+    etalon_stat.st_size = 11;
+    etalon_stat.st_blksize = 512;
+    etalon_stat.st_blocks = 1;
+    etalon_stat.st_atime = 1268431200;
+    etalon_stat.st_mtime = 1268431200;
+    etalon_stat.st_ctime = 1268431200;
 
     check_vfs_parse_ls_lga_call(
         "lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING",
-        1, "COPYING", "doc/COPYING",
-        (struct stat)
-        {
-        .st_dev = 0,
-        .st_ino = 0,
-        .st_mode = 0xa1ff,
-        .st_nlink = 10,
-        .st_uid = 500,
-        .st_gid = 500,
-        .st_rdev = 0,
-        .st_size = 11,
-        .st_blksize = 512,
-        .st_blocks = 1,
-        .st_atime = 1268431200,
-        .st_mtime = 1268431200,
-        .st_ctime = 1268431200
-        },
+        1, "COPYING", "doc/COPYING", etalon_stat,
         NULL
     );
 
+    etalon_stat.st_dev = 0;
+    etalon_stat.st_ino = 0;
+    etalon_stat.st_mode = 0x41fd;
+    etalon_stat.st_nlink = 10;
+    etalon_stat.st_uid = 500;
+    etalon_stat.st_gid = 500;
+    etalon_stat.st_rdev = 0;
+    etalon_stat.st_size = 4096;
+    etalon_stat.st_blksize = 512;
+    etalon_stat.st_blocks = 8;
+    etalon_stat.st_atime = 1308838140;
+    etalon_stat.st_mtime = 1308838140;
+    etalon_stat.st_ctime = 1308838140;
+
     check_vfs_parse_ls_lga_call(
         "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
-        1, "..", NULL, (struct stat)
-        {
-        .st_dev = 0,
-        .st_ino = 0,
-        .st_mode = 0x41fd,
-        .st_nlink = 10,
-        .st_uid = 500,
-        .st_gid = 500,
-        .st_rdev = 0,
-        .st_size = 4096,
-        .st_blksize = 512,
-        .st_blocks = 8,
-        .st_atime = 1308838140,
-        .st_mtime = 1308838140,
-        .st_ctime = 1308838140
-        },
+        1, "..", NULL, etalon_stat,
         &filepos
     );
 
+
+    etalon_stat.st_dev = 0;
+    etalon_stat.st_ino = 0;
+    etalon_stat.st_mode = 0x41fd;
+    etalon_stat.st_nlink = 10;
+    etalon_stat.st_uid = 500;
+    etalon_stat.st_gid = 500;
+    etalon_stat.st_rdev = 0;
+    etalon_stat.st_size = 4096;
+    etalon_stat.st_blksize = 512;
+    etalon_stat.st_blocks = 8;
+    etalon_stat.st_atime = 1308838140;
+    etalon_stat.st_mtime = 1308838140;
+    etalon_stat.st_ctime = 1308838140;
+
     check_vfs_parse_ls_lga_call(
         "drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root",
-        1, "build_root", NULL, (struct stat)
-        {
-        .st_dev = 0,
-        .st_ino = 0,
-        .st_mode = 0x41fd,
-        .st_nlink = 10,
-        .st_uid = 500,
-        .st_gid = 500,
-        .st_rdev = 0,
-        .st_size = 4096,
-        .st_blksize = 512,
-        .st_blocks = 8,
-        .st_atime = 1308838140,
-        .st_mtime = 1308838140,
-        .st_ctime = 1308838140
-        },
+        1, "build_root", NULL, etalon_stat,
         &filepos
     );
 
