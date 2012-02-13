@@ -1,7 +1,7 @@
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@ \
-	-DWORKDIR=\"$(abs_builddir)\"  -z muldefs
+	-DWORKDIR=\"$(abs_builddir)\"
 
-AM_LDFLAGS = -z muldefs
+AM_LDFLAGS = -Wl,-z,muldefs
 
 LIBS=@CHECK_LIBS@  $(top_builddir)/lib/libmc.la
 
