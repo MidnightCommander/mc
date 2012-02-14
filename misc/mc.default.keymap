@@ -54,6 +54,7 @@ ScreenList = alt-prime
 # ConnectFtp =
 # ConnectSmb =
 # Undelete =
+EditorViewerHistory = alt-shift-e
 ExtendedKeyMap = ctrl-x
 
 [main:xmap]

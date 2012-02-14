@@ -61,6 +61,7 @@
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */
 #include "src/keybind-defaults.h"
+#include "lib/fileloc.h"        /* MC_FILEPOS_FILE */
 #include "lib/keybind.h"
 #include "lib/event.h"
 
@@ -289,6 +290,10 @@ create_command_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("Show directory s&izes"), CK_DirSize));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("Command &history"), CK_History));
+    entries =
+        g_list_prepend (entries,
+                        menu_entry_create (_("Viewed/edited files hi&story"),
+                                           CK_EditorViewerHistory));
     entries = g_list_prepend (entries, menu_entry_create (_("Di&rectory hotlist"), CK_HotList));
 #ifdef ENABLE_VFS
     entries = g_list_prepend (entries, menu_entry_create (_("&Active VFS list"), CK_VfsList));
@@ -1000,6 +1005,54 @@ mc_maybe_editor_or_viewer (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+show_editor_history_list (void)
+{
+    char *fn;
+    FILE *f;
+    char buf[MC_MAXPATHLEN + 100];
+    GList *file_list = NULL;
+    char *s;
+    WPanel *panel = current_panel;
+
+    /* open file with positions */
+    fn = mc_config_get_full_path (MC_FILEPOS_FILE);
+    f = fopen (fn, "r");
+    g_free (fn);
+    if (f == NULL)
+        return;
+
+    while (fgets (buf, sizeof (buf), f) != NULL)
+    {
+        s = strrchr (buf, ' ');
+        if (s != NULL)
+            s = g_strndup (buf, s - buf);
+        else
+            s = g_strdup (buf);
+
+        file_list = g_list_prepend (file_list, s);
+    }
+    fclose (f);
+
+    file_list = g_list_last (file_list);
+    s = history_show (&file_list, WIDGET (panel));
+
+    if (s != NULL)
+    {
+        vfs_path_t *s_vpath;
+
+        s_vpath = vfs_path_from_str (s);
+        g_free (s);
+        do_edit_at_line (s_vpath, use_internal_edit, 0);
+        vfs_path_free (s_vpath);
+    }
+
+    file_list = g_list_first (file_list);
+    g_list_free_full (file_list, (GDestroyNotify) g_free);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 quit_cmd_internal (int quiet)
 {
@@ -1373,6 +1426,9 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
     case CK_ViewFile:
         view_file_cmd ();
+        break;
+    case CK_EditorViewerHistory:
+        show_editor_history_list ();
         break;
     case CK_Cancel:
         /* don't close panels due to SIGINT */

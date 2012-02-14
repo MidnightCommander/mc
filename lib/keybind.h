@@ -85,6 +85,7 @@ enum
     CK_EditNew,
     CK_Shell,
     CK_SelectCodepage,
+    CK_EditorViewerHistory,
     CK_History,
     CK_HistoryNext,
     CK_HistoryPrev,

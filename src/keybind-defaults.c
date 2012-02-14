@@ -99,6 +99,7 @@ static const global_keymap_ini_t default_main_keymap[] = {
     {"MenuLastSelected", "f19"},
     {"QuitQuiet", "f20"},
     {"History", "alt-h"},
+    {"EditorViewerHistory", "alt-shift-e"},
     {"DirSize", "ctrl-space"},
     /* Copy useful information to the command line */
     {"PutCurrentPath", "alt-a"},
