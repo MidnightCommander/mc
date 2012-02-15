@@ -827,29 +827,29 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     case 't':
     case 'u':
         {
-            int length = 2, i;
-            char *block, *tmp;
+            GString *block;
+            int i;
 
-            if (!panel)
+            if (panel == NULL)
                 return g_strdup ("");
 
-            for (i = 0; i < panel->count; i++)
-                if (panel->dir.list[i].f.marked)
-                    length += strlen (panel->dir.list[i].fname) + 1;    /* for space */
+            block = g_string_sized_new (16);
 
-            block = g_malloc (length * 2 + 1);
-            *block = 0;
             for (i = 0; i < panel->count; i++)
                 if (panel->dir.list[i].f.marked)
                 {
+                    char *tmp;
+
                     tmp = (*quote_func) (panel->dir.list[i].fname, 0);
-                    strcat (block, tmp);
+                    g_string_append (block, tmp);
+                    g_string_append_c (block, ' ');
                     g_free (tmp);
-                    strcat (block, " ");
+
                     if (c_lc == 'u')
                         do_file_mark (panel, i, 0);
                 }
-            return block;
+
+            return g_string_free (block, FALSE);
         }                       /* sub case block */
     }                           /* switch */
     result = g_strdup ("% ");
