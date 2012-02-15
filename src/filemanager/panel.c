@@ -1084,9 +1084,40 @@ panel_correct_path_to_show (WPanel * panel)
     vfs_path_t *last_vpath;
     const vfs_path_element_t *path_element;
     char *return_path;
+    int elements_count;
 
-    last_vpath = vfs_path_new ();
+    elements_count = vfs_path_elements_count (panel->cwd_vpath);
+
+    /* get last path element */
     path_element = vfs_path_element_clone (vfs_path_get_by_index (panel->cwd_vpath, -1));
+
+
+    if (elements_count > 1 && (strcmp (path_element->class->name, "cpiofs") == 0 ||
+                               strcmp (path_element->class->name, "extfs") == 0 ||
+                               strcmp (path_element->class->name, "tarfs") == 0))
+    {
+        const char *archive_name;
+        const vfs_path_element_t *prev_path_element;
+
+        /* get previous path element for catching archive name */
+        prev_path_element = vfs_path_get_by_index (panel->cwd_vpath, -2);
+        archive_name = strrchr (prev_path_element->path, PATH_SEP);
+        if (archive_name != NULL)
+        {
+            last_vpath = vfs_path_from_str_flags (archive_name + 1, VPF_NO_CANON);
+        }
+        else
+        {
+            last_vpath = vfs_path_from_str_flags (prev_path_element->path, VPF_NO_CANON);
+            last_vpath->relative = TRUE;
+        }
+    }
+    else
+    {
+        last_vpath = vfs_path_new ();
+        last_vpath->relative = TRUE;
+    }
+
     vfs_path_add_element (last_vpath, path_element);
     return_path =
         vfs_path_to_str_flags (last_vpath, 0,
