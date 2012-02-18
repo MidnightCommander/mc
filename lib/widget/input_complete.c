@@ -875,7 +875,22 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
     if (flags & INPUT_COMPLETE_COMMANDS)
         p = strrchr (word, '`');
     if (flags & (INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_VARIABLES))
+    {
         q = strrchr (word, '$');
+
+        /* don't substitute variable in \$ case */
+        if (q != NULL && q != word && q[-1] == '\\')
+        {
+            size_t qlen;
+
+            qlen = strlen (q);
+            /* drop '\\' */
+            memmove (q - 1, q, qlen + 1);
+            /* adjust flags */
+            flags &= ~INPUT_COMPLETE_VARIABLES;
+            q = NULL;
+        }
+    }
     if (flags & INPUT_COMPLETE_HOSTNAMES)
         r = strrchr (word, '@');
     if (q && q[1] == '(' && (flags & INPUT_COMPLETE_COMMANDS))
