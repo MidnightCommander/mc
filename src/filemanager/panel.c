@@ -343,6 +343,14 @@ typedef struct format_e
     const char *id;
 } format_e;
 
+/* File name scroll states */
+typedef enum
+{
+    FILENAME_NOSCROLL = 1,
+    FILENAME_SCROLL_LEFT = 2,
+    FILENAME_SCROLL_RIGHT = 4
+} filename_scroll_flag_t;
+
 /*** file scope variables ************************************************************************/
 
 static char *panel_sort_up_sign = NULL;
@@ -353,6 +361,8 @@ static char *panel_hiddenfiles_sign_hide = NULL;
 static char *panel_history_prev_item_sign = NULL;
 static char *panel_history_next_item_sign = NULL;
 static char *panel_history_show_list_sign = NULL;
+static char *panel_filename_scroll_left_char = NULL;
+static char *panel_filename_scroll_right_char = NULL;
 
 /* Panel that selection started */
 static WPanel *mouse_mark_panel = NULL;
@@ -389,7 +399,8 @@ delete_format (format_e * format)
 /** This code relies on the default justification!!! */
 
 static void
-add_permission_string (char *dest, int width, file_entry * fe, int attr, int color, int is_octal)
+add_permission_string (const char *dest, int width, file_entry * fe, int attr, int color,
+                       int is_octal)
 {
     int i, r, l;
 
@@ -744,14 +755,15 @@ file_compute_color (int attr, file_entry * fe)
 /* --------------------------------------------------------------------------------------------- */
 /** Formats the file number file_index of panel in the buffer dest */
 
-static void
+static filename_scroll_flag_t
 format_file (char *dest, int limit, WPanel * panel, int file_index, int width, int attr,
-             int isstatus)
+             int isstatus, int * field_lenght)
 {
     int color, length, empty_line;
     const char *txt;
     format_e *format, *home;
     file_entry *fe;
+    filename_scroll_flag_t res = FILENAME_NOSCROLL;
 
     (void) dest;
     (void) limit;
@@ -759,12 +771,12 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
     empty_line = (file_index >= panel->count);
     home = (isstatus) ? panel->status_format : panel->format;
     fe = &panel->dir.list[file_index];
+    *field_lenght = 0;
 
     if (!empty_line)
         color = file_compute_color (attr, fe);
     else
         color = NORMAL_COLOR;
-
     for (format = home; format; format = format->next)
     {
         if (length == width)
@@ -773,7 +785,8 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
         if (format->string_fn)
         {
             int len, perm;
-            char *preperad_text;
+            const char *prepared_text;
+            int name_offset = 0;
 
             if (empty_line)
                 txt = " ";
@@ -785,6 +798,30 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
                 len = width - length;
             if (len <= 0)
                 break;
+
+            if (!isstatus && panel->content_shift > -1 && strcmp (format->id, "name") == 0)
+            {
+                int str_len;
+                int i;
+
+                *field_lenght = len + 1;
+
+                str_len = str_length (txt);
+                i = max (0, str_len - len);
+                panel->max_shift = max (panel->max_shift, i);
+                i = min (panel->content_shift, i);
+
+                if (i > -1)
+                {
+                    name_offset = str_offset_to_pos (txt, i);
+                    if (str_len > len)
+                    {
+                        res = FILENAME_SCROLL_LEFT;
+                        if (str_length (txt + name_offset) > len)
+                            res |= FILENAME_SCROLL_RIGHT;
+                    }
+                }
+            }
 
             perm = 0;
             if (panels_options.permission_mode)
@@ -800,12 +837,15 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
             else
                 tty_lowlevel_setcolor (-color);
 
-            preperad_text = (char *) str_fit_to_term (txt, len, format->just_mode);
+            if (!isstatus && panel->content_shift > -1)
+                prepared_text = str_fit_to_term (txt + name_offset, len, HIDE_FIT (format->just_mode));
+            else
+                prepared_text = str_fit_to_term (txt, len, format->just_mode);
 
             if (perm)
-                add_permission_string (preperad_text, format->field_len, fe, attr, color, perm - 1);
+                add_permission_string (prepared_text, format->field_len, fe, attr, color, perm - 1);
             else
-                tty_print_string (preperad_text);
+                tty_print_string (prepared_text);
 
             length += len;
         }
@@ -822,6 +862,8 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
 
     if (length < width)
         tty_draw_hline (-1, -1, ' ', width - length);
+
+    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -833,8 +875,10 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
     int width;
     int offset = 0;
     char buffer[BUF_MEDIUM];
-
+    filename_scroll_flag_t ret_frm;
+    int ypos = 0;
     gboolean panel_is_split = !isstatus && panel->split;
+    int fln = 0;
 
     width = panel->widget.cols - 2;
 
@@ -857,14 +901,18 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
 
     if (mv)
     {
+        int pos = file_index - panel->top_file;
+
         if (panel_is_split)
-            widget_move (&panel->widget,
-                         (file_index - panel->top_file) % llines (panel) + 2, offset + 1);
+            ypos = pos % llines (panel);
         else
-            widget_move (&panel->widget, file_index - panel->top_file + 2, 1);
+            ypos = pos;
+
+        ypos += 2;
+        widget_move (&panel->widget, ypos, offset + 1);
     }
 
-    format_file (buffer, sizeof (buffer), panel, file_index, width, attr, isstatus);
+    ret_frm = format_file (buffer, sizeof (buffer), panel, file_index, width, attr, isstatus, &fln);
 
     if (panel_is_split)
     {
@@ -874,6 +922,31 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
         {
             tty_setcolor (NORMAL_COLOR);
             tty_print_one_vline (TRUE);
+        }
+    }
+    if (ret_frm != FILENAME_NOSCROLL && mv)
+    {
+        if (!panel_is_split && fln > 0)
+        {
+            if (panel->list_type == list_long)
+            {
+                offset = width - fln + 1;
+                width = fln - 1;
+            }
+            else
+            {
+                width = fln;
+            }
+        }
+        widget_move (&panel->widget, ypos, offset);
+        tty_setcolor (NORMAL_COLOR);
+        tty_print_string (panel_filename_scroll_left_char);
+
+        if ((ret_frm & FILENAME_SCROLL_RIGHT) != 0)
+        {
+            widget_move (&panel->widget, ypos, offset + 1 + width);
+            tty_setcolor (NORMAL_COLOR);
+            tty_print_string (panel_filename_scroll_right_char);
         }
     }
 }
@@ -940,7 +1013,8 @@ paint_dir (WPanel * panel)
     int items;                  /* Number of items */
 
     items = llines (panel) * (panel->split ? 2 : 1);
-
+    /* reset max len of filename because we have the new max length for the new file list */
+    panel->max_shift = -1;
     for (i = 0; i < items; i++)
     {
         if (i + panel->top_file >= panel->count)
@@ -952,6 +1026,7 @@ paint_dir (WPanel * panel)
         }
         repaint_file (panel, i + panel->top_file, 1, color, 0);
     }
+
     tty_set_normal_attrs ();
 }
 
@@ -2628,6 +2703,52 @@ panel_select_sort_order (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * panel_content_scroll_left:
+ * @param panel the pointer to the panel on which we operate
+ *
+ * scroll long filename to the left (decrement scroll pointer)
+ *
+ */
+
+static void
+panel_content_scroll_left (WPanel * panel)
+{
+    if (panel->content_shift > -1)
+    {
+        if (panel->content_shift > panel->max_shift)
+            panel->content_shift = panel->max_shift;
+
+        panel->content_shift--;
+        show_dir (panel);
+        paint_dir (panel);
+    }
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * panel_content_scroll_right:
+ * @param panel the pointer to the panel on which we operate
+ *
+ * scroll long filename to the right (increment scroll pointer)
+ *
+ */
+
+static void
+panel_content_scroll_right (WPanel * panel)
+{
+    if (panel->content_shift < 0 || panel->content_shift < panel->max_shift)
+    {
+        panel->content_shift++;
+        show_dir (panel);
+        paint_dir (panel);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 panel_set_sort_type_by_id (WPanel * panel, const char *name)
 {
@@ -2941,6 +3062,12 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         panel_change_encoding (panel);
         break;
 #endif
+    case CK_ScrollLeft:
+        panel_content_scroll_left (panel);
+        break;
+    case CK_ScrollRight:
+        panel_content_scroll_right (panel);
+        break;
     case CK_Search:
         start_search (panel);
         break;
@@ -3639,6 +3766,8 @@ panel_clean_dir (WPanel * panel)
     panel->searching = FALSE;
     panel->is_panelized = FALSE;
     panel->dirty = 1;
+    panel->content_shift = -1;
+    panel->max_shift = -1;
 
     clean_dir (&panel->dir, count);
 }
@@ -3707,6 +3836,8 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     panel->format = 0;
     panel->status_format = 0;
     panel->format_modified = 1;
+    panel->content_shift = -1;
+    panel->max_shift = -1;
 
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
@@ -4350,6 +4481,8 @@ panel_init (void)
     panel_history_prev_item_sign = mc_skin_get ("widget-panel", "history-prev-item-sign", "<");
     panel_history_next_item_sign = mc_skin_get ("widget-panel", "history-next-item-sign", ">");
     panel_history_show_list_sign = mc_skin_get ("widget-panel", "history-show-list-sign", "^");
+    panel_filename_scroll_left_char = mc_skin_get ("widget-panel", "filename-scroll-left-char", "{");
+    panel_filename_scroll_right_char = mc_skin_get ("widget-panel", "filename-scroll-right-char", "}");
 
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "update_panels", event_update_panels, NULL, NULL);
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_curent_file_to_clip_file",
@@ -4370,6 +4503,8 @@ panel_deinit (void)
     g_free (panel_history_prev_item_sign);
     g_free (panel_history_next_item_sign);
     g_free (panel_history_show_list_sign);
+    g_free (panel_filename_scroll_left_char);
+    g_free (panel_filename_scroll_right_char);
 
 }
 

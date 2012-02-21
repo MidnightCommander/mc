@@ -125,6 +125,8 @@ typedef struct WPanel
     char prev_search_buffer[MC_MAXFILENAMELEN];
     char search_char[MB_LEN_MAX];       /*buffer for multibytes characters */
     int search_chpoint;         /*point after last characters in search_char */
+    int content_shift;          /* Number of characters of filename need to skip from left side. */
+    int max_shift;              /* Max shift for visible part of current panel */
 } WPanel;
 
 /*** global variables defined in .c file *********************************************************/
