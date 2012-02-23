@@ -1071,35 +1071,26 @@ erase_dir_iff_empty (FileOpContext * ctx, const char *s)
  */
 
 static char *
-panel_get_file (WPanel * panel, struct stat *stat_buf)
+panel_get_file (WPanel * panel)
 {
-    int i;
-
     if (get_current_type () == view_tree)
     {
-        WTree *tree = (WTree *) get_panel_widget (get_current_index ());
-        char *tree_name = tree_selected_name (tree);
+        WTree *tree;
 
-        mc_stat (tree_name, stat_buf);
-        return tree_name;
+        tree = (WTree *) get_panel_widget (get_current_index ());
+        return tree_selected_name (tree);
     }
 
-    if (panel->marked)
+    if (panel->marked != 0)
     {
+        int i;
+
         for (i = 0; i < panel->count; i++)
             if (panel->dir.list[i].f.marked)
-            {
-                *stat_buf = panel->dir.list[i].st;
                 return panel->dir.list[i].fname;
-            }
     }
-    else
-    {
-        *stat_buf = panel->dir.list[panel->selected].st;
-        return panel->dir.list[panel->selected].fname;
-    }
-    g_assert_not_reached ();
-    return NULL;
+
+    return panel->dir.list[panel->selected].fname;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2489,32 +2480,37 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
 
-    /* Update panel contents to avoid actions on deleted files */
-    if (!panel->is_panelized)
-    {
-        panel_update_flags_t flags = UP_RELOAD;
-
-        /* don't update panelized panel */
-        if (get_other_type () == view_listing && other_panel->is_panelized)
-            flags |= UP_ONLY_CURRENT;
-
-        update_panels (flags, UP_KEEPSEL);
-        repaint_screen ();
-    }
-
     if (single_entry)
     {
         if (force_single)
-        {
             source = selection (panel)->fname;
-            src_stat = selection (panel)->st;
-        }
         else
-            source = panel_get_file (panel, &src_stat);
+            source = panel_get_file (panel);
 
-        if (!strcmp (source, ".."))
+        if (strcmp (source, "..") == 0)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot operate on \"..\"!"));
+            return FALSE;
+        }
+
+        /* Update stat to get actual info */
+        if (mc_stat (source, &src_stat) != 0)
+        {
+            message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
+                     path_trunc (source, 30), unix_error_string (errno));
+
+            /* Directory was changed outside MC. Reload it forced */
+            if (!panel->is_panelized)
+            {
+                panel_update_flags_t flags = UP_RELOAD;
+
+                /* don't update panelized panel */
+                if (get_other_type () == view_listing && other_panel->is_panelized)
+                    flags |= UP_ONLY_CURRENT;
+
+                update_panels (flags, UP_KEEPSEL);
+            }
+
             return FALSE;
         }
     }
