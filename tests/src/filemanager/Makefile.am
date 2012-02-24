@@ -12,5 +12,7 @@ TESTS = \
 check_PROGRAMS = $(TESTS)
 
 do_panel_cd_SOURCES = \
-	do_panel_cd.c \
+	do_panel_cd.c
+
+examine_cd_SOURCES = \
 	examine_cd.c
