@@ -653,15 +653,20 @@ static void
 put_current_path (void)
 {
     char *cwd_path;
+    vfs_path_t *cwd_vpath;
+
     if (!command_prompt)
         return;
 
-    cwd_path = remove_encoding_from_path (current_panel->cwd_vpath);
+    cwd_vpath = remove_encoding_from_path (current_panel->cwd_vpath);
+    cwd_path = vfs_path_to_str (cwd_vpath);
     command_insert (cmdline, cwd_path, FALSE);
 
     if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
         command_insert (cmdline, PATH_SEP_STR, FALSE);
+
     g_free (cwd_path);
+    vfs_path_free (cwd_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -670,6 +675,7 @@ static void
 put_other_path (void)
 {
     char *cwd_path;
+    vfs_path_t *cwd_vpath;
 
     if (get_other_type () != view_listing)
         return;
@@ -677,12 +683,15 @@ put_other_path (void)
     if (!command_prompt)
         return;
 
-    cwd_path = remove_encoding_from_path (other_panel->cwd_vpath);
+    cwd_vpath = remove_encoding_from_path (other_panel->cwd_vpath);
+    cwd_path = vfs_path_to_str (cwd_vpath);
     command_insert (cmdline, cwd_path, FALSE);
 
     if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
         command_insert (cmdline, PATH_SEP_STR, FALSE);
+
     g_free (cwd_path);
+    vfs_path_free (cwd_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
