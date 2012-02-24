@@ -3642,36 +3642,55 @@ update_one_panel (int which, panel_update_flags_t flags, const char *current_fil
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Remove encode info from last path element.
+ *
+ */
 
-char *
+vfs_path_t *
 remove_encoding_from_path (const vfs_path_t * vpath)
 {
-    GString *ret;
+    vfs_path_t *ret_vpath;
     GString *tmp_conv;
     int indx;
 
-    ret = g_string_new ("");
+    ret_vpath = vfs_path_new ();
+
     tmp_conv = g_string_new ("");
 
     for (indx = 0; indx < vfs_path_elements_count (vpath); indx++)
     {
-        const vfs_path_element_t *path_element;
         GIConv converter;
+        vfs_path_element_t *path_element;
 
-        path_element = vfs_path_get_by_index (vpath, indx);
-        converter =
-            path_element->encoding != NULL ?
-            str_crt_conv_to (path_element->encoding) : str_cnv_to_term;
+        path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, indx));
+        vfs_path_add_element (ret_vpath, path_element);
+
+        if (path_element->encoding == NULL)
+        {
+            continue;
+        }
+
+        converter = str_crt_conv_to (path_element->encoding);
         if (converter == INVALID_CONV)
-            converter = str_cnv_to_term;
+            continue;
+
+        g_free (path_element->encoding);
+        path_element->encoding = NULL;
 
         str_vfs_convert_from (converter, path_element->path, tmp_conv);
-        g_string_append (ret, tmp_conv->str);
+
+        g_free (path_element->path);
+        path_element->path = g_strdup (tmp_conv->str);
+
         g_string_set_size (tmp_conv, 0);
+
         str_close_conv (converter);
+        str_close_conv (path_element->dir.converter);
+        path_element->dir.converter = INVALID_CONV;
     }
     g_string_free (tmp_conv, TRUE);
-    return g_string_free (ret, FALSE);
+    return ret_vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4349,7 +4368,6 @@ void
 panel_change_encoding (WPanel * panel)
 {
     const char *encoding = NULL;
-    char *cd_path;
 #ifdef HAVE_CHARSET
     char *errmsg;
     int r;
@@ -4367,12 +4385,10 @@ panel_change_encoding (WPanel * panel)
         vfs_path_t *cd_path_vpath;
 
         g_free (init_translation_table (mc_global.display_codepage, mc_global.display_codepage));
-        cd_path = remove_encoding_from_path (panel->cwd_vpath);
-        cd_path_vpath = vfs_path_from_str (cd_path);
+        cd_path_vpath = remove_encoding_from_path (panel->cwd_vpath);
         do_panel_cd (panel, cd_path_vpath, cd_parse_command);
         show_dir (panel);
         vfs_path_free (cd_path_vpath);
-        g_free (cd_path);
         return;
     }
 
@@ -4388,6 +4404,7 @@ panel_change_encoding (WPanel * panel)
 #endif
     if (encoding != NULL)
     {
+        char *cd_path;
         vfs_change_encoding (panel->cwd_vpath, encoding);
 
         cd_path = vfs_path_to_str (panel->cwd_vpath);
