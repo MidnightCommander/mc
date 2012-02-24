@@ -80,88 +80,137 @@ WInput *cmdline;
  * they want the behavior they are used to in the shell.
  */
 
-static int
+static char *
 examine_cd (const char *_path)
 {
-    int result, qlen;
+    typedef enum { copy_sym, subst_var } state_t;
+
+    state_t state = copy_sym;
+    char *q;
+    size_t qlen;
     char *path_tilde, *path;
-    char *p, *q, *r, *s, c;
-    const char *t;
+    char *p, *r;
 
     /* Tilde expansion */
     path = strutils_shell_unescape (_path);
     path_tilde = tilde_expand (path);
+    g_free (path);
 
     /* Leave space for further expansion */
     qlen = strlen (path_tilde) + MC_MAXPATHLEN;
     q = g_malloc (qlen);
 
     /* Variable expansion */
-    for (p = path_tilde, r = q; *p && r < q + MC_MAXPATHLEN;)
+    for (p = path_tilde, r = q; *p != '\0' && r < q + MC_MAXPATHLEN;)
     {
-        if (*p != '$' || (p[1] == '[' || p[1] == '('))
-            *(r++) = *(p++);
-        else
+
+        switch (state)
         {
-            p++;
-            if (*p == '{')
+        case copy_sym:
+            if (p[0] == '\\' && p[1] == '$')
             {
+                /* skip backslash */
                 p++;
-                s = strchr (p, '}');
+                /* copy dollar */
+                *(r++) = *(p++);
             }
+            else if (p[0] != '$' || p[1] == '[' || p[1] == '(')
+                *(r++) = *(p++);
             else
-                s = NULL;
-            if (s == NULL)
-                s = strchr (p, PATH_SEP);
-            if (s == NULL)
-                s = strchr (p, 0);
-            c = *s;
-            *s = 0;
-            t = getenv (p);
-            *s = c;
-            if (t == NULL)
+                state = subst_var;
+            break;
+
+        case subst_var:
             {
-                *(r++) = '$';
-                if (*(p - 1) != '$')
-                    *(r++) = '{';
-            }
-            else
-            {
-                if (r + strlen (t) < q + MC_MAXPATHLEN)
-                {
-                    strcpy (r, t);
-                    r = strchr (r, 0);
-                }
-                if (*s == '}')
-                    p = s + 1;
+                char *s;
+                char c;
+                const char *t;
+
+                /* skip dollar */
+                p++;
+
+                if (p[0] != '{')
+                    s = NULL;
                 else
+                {
+                    p++;
+                    s = strchr (p, '}');
+                }
+                if (s == NULL)
+                    s = strchr (p, PATH_SEP);
+                if (s == NULL)
+                    s = strchr (p, '\0');
+                c = *s;
+                *s = '\0';
+                t = getenv (p);
+                *s = c;
+                if (t == NULL)
+                {
+                    *(r++) = '$';
+                    if (p[-1] != '$')
+                        *(r++) = '{';
+                }
+                else
+                {
+                    size_t tlen;
+
+                    tlen = strlen (t);
+
+                    if (r + tlen < q + MC_MAXPATHLEN)
+                    {
+                        strncpy (r, t, tlen + 1);
+                        r += tlen;
+                    }
                     p = s;
+                    if (*s == '}')
+                        p++;
+                }
+
+                state = copy_sym;
+                break;
             }
         }
     }
-    *r = 0;
 
-    result = do_cd (q, cd_parse_command);
+    g_free (path_tilde);
+
+    *r = '\0';
+
+    return q;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* CDPATH handling */
+static gboolean
+handle_cdpath (const char *path)
+{
+    gboolean result = FALSE;
 
     /* CDPATH handling */
-    if (*q != PATH_SEP && !result)
+    if (*path != PATH_SEP)
     {
-        char *const cdpath = g_strdup (getenv ("CDPATH"));
+        char *cdpath, *p;
+        char c;
+
+        cdpath = g_strdup (getenv ("CDPATH"));
         p = cdpath;
-        if (p == NULL)
-            c = 0;
-        else
-            c = ':';
+        c = (p == NULL) ? '\0' : ':';
+
         while (!result && c == ':')
         {
+            char *s;
+
             s = strchr (p, ':');
             if (s == NULL)
-                s = strchr (p, 0);
+                s = strchr (p, '\0');
             c = *s;
-            *s = 0;
-            if (*p)
+            *s = '\0';
+            if (*p != '\0')
             {
-                r = concat_dir_and_file (p, q);
+                char *r;
+
+                r = mc_build_filename (p, path, (char *) NULL);
                 result = do_cd (r, cd_parse_command);
                 g_free (r);
             }
@@ -170,9 +219,7 @@ examine_cd (const char *_path)
         }
         g_free (cdpath);
     }
-    g_free (q);
-    g_free (path_tilde);
-    g_free (path);
+
     return result;
 }
 
@@ -359,12 +406,26 @@ do_cd_command (char *orig_cmd)
             g_free (new);
         }
     }
-    else if (!examine_cd (&cmd[operand_pos]))
+    else
     {
-        char *d = strip_password (g_strdup (&cmd[operand_pos]), 1);
-        message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d, unix_error_string (errno));
-        g_free (d);
-        return;
+        char *path;
+        gboolean ok;
+
+        path = examine_cd (&cmd[operand_pos]);
+        ok = do_cd (path, cd_parse_command);
+        if (!ok)
+            ok = handle_cdpath (path);
+
+        if (!ok)
+        {
+            char *d;
+
+            d = strip_password (path, 1);
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d,
+                     unix_error_string (errno));
+        }
+
+        g_free (path);
     }
 }
 

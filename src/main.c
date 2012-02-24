@@ -258,7 +258,7 @@ init_sigchld (void)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 do_cd (const char *new_dir, enum cd_enum exact)
 {
     gboolean res;
@@ -284,7 +284,7 @@ do_cd (const char *new_dir, enum cd_enum exact)
     }
 #endif /* HAVE_CHARSET */
 
-    return res ? 1 : 0;
+    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */

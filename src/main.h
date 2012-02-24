@@ -89,7 +89,7 @@ gboolean do_load_prompt (void);
 int load_prompt (int fd, void *unused);
 #endif
 
-int do_cd (const char *new_dir, enum cd_enum cd_type);
+gboolean do_cd (const char *new_dir, enum cd_enum cd_type);
 void update_xterm_title_path (void);
 
 /*** inline functions ****************************************************************************/
