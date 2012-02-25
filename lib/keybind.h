@@ -259,6 +259,9 @@ enum
     CK_MarkScrollDown,
     CK_MarkParagraphUp,
     CK_MarkParagraphDown,
+    /* Highlight occurences commands */
+    CK_HighlightOccurences,
+    CK_UnhighlightOccurences,
     /* column mark commands */
     CK_MarkColumnPageUp,
     CK_MarkColumnPageDown,

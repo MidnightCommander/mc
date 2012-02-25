@@ -53,11 +53,14 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
+#include "lib/charsets.h"       /* str_convert_to_input */
 #include "lib/search.h"         /* search engine */
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
+
+#include "src/history.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"
@@ -66,6 +69,7 @@
 
 int option_syntax_highlighting = 1;
 int option_auto_syntax = 1;
+int option_highlight_occurences = 0;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -133,6 +137,9 @@ struct _syntax_marker
 /*** file scope variables ************************************************************************/
 
 static char *error_file_name = NULL;
+static int hword_symbols_left = 0;
+static char *highlight_word = NULL;
+static size_t highlight_word_length = 0;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -609,6 +616,30 @@ translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
     *color = edit->rules[rule.context]->keyword[rule.keyword]->color;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculating if word highlighting should be raised.
+ *
+ * @param edit editor object
+ * @param byte_index offset in editor
+ * @return length of word which needs for highlight, zero if highlight occurences not found
+ */
+
+static size_t
+need_highlighing (WEdit * edit, long byte_index)
+{
+    size_t i;
+
+    for (i = 0; i < highlight_word_length; i++)
+    {
+        char current_chr;
+        current_chr = edit_get_byte (edit, byte_index++);
+
+        if (current_chr != highlight_word[i])
+            return 0;
+    }
+    return highlight_word_length;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -1417,6 +1448,19 @@ get_first_editor_line (WEdit * edit)
 void
 edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 {
+    if (option_highlight_occurences && tty_use_colors ())
+    {
+        if (hword_symbols_left < 1)
+            hword_symbols_left = need_highlighing (edit, byte_index);
+
+        if (hword_symbols_left > 0)
+        {
+            --hword_symbols_left;
+            *color = EDITOR_BOLD_COLOR;
+            return;
+        }
+    }
+
     if (!tty_use_colors ())
         *color = 0;
     else if (edit->rules && byte_index < edit->last_byte && option_syntax_highlighting)
@@ -1542,6 +1586,73 @@ const char *
 edit_get_syntax_type (const WEdit * edit)
 {
     return edit->syntax_type;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * event handler for initialize highlight occurences.
+ *
+ * @param edit current editor object
+ */
+
+void
+edit_highlight_occurences (WEdit * edit)
+{
+    char *text = NULL;
+
+    (void) edit;
+    text = input_expand_dialog (_("Highlight occurences"),
+                                _("Text:"), MC_HISTORY_EDIT_OCCURENCES, "");
+
+    if (text != NULL)
+    {
+#ifdef HAVE_CHARSET
+        GString *tmp;
+        tmp = str_convert_to_input (text);
+        if ((tmp != NULL) && (tmp->len != 0))
+        {
+            g_free (text);
+            text = g_string_free (tmp, FALSE);
+        }
+        else
+        {
+            g_string_free (tmp, TRUE);
+        }
+#endif /* HAVE_CHARSET */
+        option_highlight_occurences = 1;
+        highlight_word_length = strlen (text);
+
+        g_free (highlight_word);
+        highlight_word = text;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Deinitialize highlight occurences.
+ */
+
+void
+edit_highlight_deinit (void)
+{
+    option_highlight_occurences = 0;
+    highlight_word_length = 0;
+    g_free (highlight_word);
+    highlight_word = NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * event handler for deinitialize highlight occurences.
+ *
+ * @param edit current editor object
+ */
+
+void
+edit_unhighlight_occurences (WEdit * edit)
+{
+    edit_highlight_deinit ();
+    edit_refresh_cmd (edit);
 }
 
 /* --------------------------------------------------------------------------------------------- */

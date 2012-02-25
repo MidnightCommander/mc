@@ -311,6 +311,10 @@ unsigned int edit_lock_file (WEdit * edit);
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);
 
+void edit_highlight_occurences (WEdit * edit);
+void edit_unhighlight_occurences (WEdit * edit);
+void edit_highlight_deinit (void);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC__EDIT_IMPL_H */

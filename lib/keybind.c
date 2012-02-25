@@ -308,6 +308,8 @@ static name_keymap_t command_names[] = {
     {"ShowMargin", CK_ShowMargin},
     {"OptionsSaveMode", CK_OptionsSaveMode},
     {"About", CK_About},
+    {"HighlightOccurences", CK_HighlightOccurences},
+    {"UnhighlightOccurences", CK_UnhighlightOccurences},
     /* An action to run external script from macro */
     {"ExecuteScript", CK_PipeBlock (0)},
 #endif /* USE_INTERNAL_EDIT */

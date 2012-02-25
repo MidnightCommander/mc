@@ -104,6 +104,8 @@ create_edit_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("&Mark columns"), CK_MarkColumn));
     entries = g_list_prepend (entries, menu_entry_create (_("Mark &all"), CK_MarkAll));
     entries = g_list_prepend (entries, menu_entry_create (_("Unmar&k"), CK_Unmark));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Highlight occurences"), CK_HighlightOccurences));
+    entries = g_list_prepend (entries, menu_entry_create (_("Unhighlight &occurences"), CK_UnhighlightOccurences));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("Cop&y"), CK_Copy));
     entries = g_list_prepend (entries, menu_entry_create (_("Mo&ve"), CK_Move));

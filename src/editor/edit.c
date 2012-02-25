@@ -3977,6 +3977,16 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->force |= REDRAW_PAGE;
         break;
 
+    case CK_HighlightOccurences:
+        edit_highlight_occurences (edit);
+        edit->force |= REDRAW_PAGE;
+        break;
+
+    case CK_UnhighlightOccurences:
+        edit_unhighlight_occurences (edit);
+        edit->force |= REDRAW_PAGE;
+        break;
+
     case CK_Bookmark:
         book_mark_clear (edit, edit->curs_line, BOOK_MARK_FOUND_COLOR);
         if (book_mark_query_color (edit, edit->curs_line, BOOK_MARK_COLOR))
@@ -4143,6 +4153,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_get_match_keyword_cmd (edit);
         break;
     case CK_Quit:
+        edit_highlight_deinit ();
         dlg_stop (edit->widget.owner);
         break;
     case CK_EditNew:
