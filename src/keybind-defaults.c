@@ -413,6 +413,7 @@ static const global_keymap_ini_t default_editor_keymap[] = {
     {"Mail", "alt-m"},
     {"ExternalCommand", "alt-u"},
     {"ExtendedKeyMap", "ctrl-x"},
+    {"HighlightOccurences", "alt-f"},
     {NULL, NULL}
 };
 
