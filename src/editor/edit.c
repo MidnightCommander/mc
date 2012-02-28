@@ -2321,6 +2321,7 @@ edit_clean (WEdit * edit)
     g_free (edit->dir);
     mc_search_free (edit->search);
     edit->search = NULL;
+    edit_highlight_deinit ();
 
     if (edit->converter != str_cnv_from_term)
         str_close_conv (edit->converter);
@@ -4153,7 +4154,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_get_match_keyword_cmd (edit);
         break;
     case CK_Quit:
-        edit_highlight_deinit ();
         dlg_stop (edit->widget.owner);
         break;
     case CK_EditNew:
