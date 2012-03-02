@@ -33,6 +33,7 @@ context default
     keyword whole \[\s\]c-sources cyan
     keyword whole \[\s\]data-dir cyan
     keyword whole \[\s\]data-files cyan
+    keyword whole \[\s\]default-language cyan
     keyword whole \[\s\]default cyan
     keyword whole \[\s\]description cyan
     keyword whole \[\s\]exposed-modules cyan
@@ -61,6 +62,7 @@ context default
     keyword whole \[\s\]maintainer cyan
     keyword whole \[\s\]name cyan
     keyword whole \[\s\]nhc98-options cyan
+    keyword whole \[\s\]other-extensions cyan
     keyword whole \[\s\]other-modules cyan
     keyword whole \[\s\]package-url cyan
     keyword whole \[\s\]pkgconfig-depends cyan
@@ -73,7 +75,7 @@ context default
     keyword whole \[\s\]version cyan
 
 #   extended fields
-    keyword whole x\-\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] cyan
+    keyword whole x\-\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] cyan
 
 #   version wildcard
     keyword whole -any red
@@ -176,7 +178,7 @@ context default
     keyword whole BSD4 white
     keyword whole MIT white
 
-#   compillers
+#   compilers
     keyword whole GHC white
     keyword whole NHC white
     keyword whole JHC white
@@ -195,6 +197,7 @@ context default
 
     keyword whole linestart \[\s\]executable yellow
     keyword whole linestart \[\s\]library yellow
+    keyword whole linestart \[\s\]test-suite yellow
     keyword whole flag yellow
     keyword whole repo yellow
 
