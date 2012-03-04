@@ -24,7 +24,7 @@ extern int mc_args__debug_level;
 
 /*** declarations of public functions ************************************************************/
 
-gboolean mc_args_handle (int argc, char **argv, const char *translation_domain);
+gboolean mc_args_handle (int argc, char **argv, const char *translation_domain, GError ** error);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__ARGS_H */

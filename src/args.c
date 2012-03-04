@@ -416,8 +416,8 @@ mc_args_add_extended_info_to_help (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-mc_setup_by_args (int argc, char *argv[])
+static gboolean
+mc_setup_by_args (int argc, char *argv[], GError ** error)
 {
     const char *base;
     char *tmp;
@@ -534,8 +534,8 @@ mc_setup_by_args (int argc, char *argv[])
             mc_run_param0 = g_strdup (tmp);
         else
         {
-            fprintf (stderr, "%s\n", _("No arguments given to the viewer."));
-            exit (EXIT_FAILURE);
+            *error = g_error_new (MC_ERROR, 0, "%s\n", _("No arguments given to the viewer."));
+            return FALSE;
         }
         mc_global.mc_run_mode = MC_RUN_VIEWER;
     }
@@ -546,8 +546,9 @@ mc_setup_by_args (int argc, char *argv[])
 
         if (argc < 3)
         {
-            fprintf (stderr, "%s\n", _("Two files are required to evoke the diffviewer."));
-            exit (EXIT_FAILURE);
+            *error = g_error_new (MC_ERROR, 0, "%s\n",
+                                  _("Two files are required to evoke the diffviewer."));
+            return FALSE;
         }
 
         if (tmp != NULL)
@@ -589,12 +590,14 @@ mc_setup_by_args (int argc, char *argv[])
             break;
         }
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_args_process (int argc, char *argv[])
+mc_args_process (int argc, char *argv[], GError ** error)
 {
     if (mc_args__show_version)
     {
@@ -627,9 +630,7 @@ mc_args_process (int argc, char *argv[])
         mc_global.tty.use_subshell = FALSE;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
-    mc_setup_by_args (argc, argv);
-
-    return TRUE;
+    return mc_setup_by_args (argc, argv, error);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -638,9 +639,13 @@ static gchar *
 mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_message,
                                      const gchar * help_str)
 {
-    GString *buffer = g_string_new ("");
-    GIConv conv = g_iconv_open (charset, "UTF-8");
-    gchar *full_help_str = g_strdup_printf ("%s\n\n%s\n", error_message, help_str);
+    GString *buffer;
+    GIConv conv;
+    gchar *full_help_str;
+
+    buffer = g_string_new ("");
+    conv = g_iconv_open (charset, "UTF-8");
+    full_help_str = g_strdup_printf ("%s\n\n%s\n", error_message, help_str);
 
     str_convert (conv, full_help_str, buffer);
 
@@ -687,9 +692,8 @@ parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer da
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_args_handle (int argc, char **argv, const char *translation_domain)
+mc_args_handle (int argc, char **argv, const char *translation_domain, GError ** error)
 {
-    GError *error = NULL;
     const gchar *_system_codepage = str_detect_termencoding ();
 
 #ifdef ENABLE_NLS
@@ -722,11 +726,12 @@ mc_args_handle (int argc, char **argv, const char *translation_domain)
     g_option_context_add_group (context, color_group);
     g_option_group_set_translation_domain (color_group, translation_domain);
 
-    if (!g_option_context_parse (context, &argc, &argv, &error))
+    if (!g_option_context_parse (context, &argc, &argv, error))
     {
-        if (error != NULL)
+        GError *error2 = NULL;
+
+        if (*error != NULL)
         {
-            gchar *full_help_str;
             gchar *help_str;
 
 #if GLIB_CHECK_VERSION(2,14,0)
@@ -734,19 +739,27 @@ mc_args_handle (int argc, char **argv, const char *translation_domain)
 #else
             help_str = g_strdup ("");
 #endif
-            if (!str_isutf8 (_system_codepage))
-                full_help_str =
-                    mc_args__convert_help_to_syscharset (_system_codepage, error->message,
-                                                         help_str);
+            if (str_isutf8 (_system_codepage))
+                error2 = g_error_new ((*error)->domain, (*error)->code, "%s\n\n%s\n",
+                                      (*error)->message, help_str);
             else
-                full_help_str = g_strdup_printf ("%s\n\n%s\n", error->message, help_str);
+            {
+                gchar *full_help_str;
 
-            fprintf (stderr, "%s", full_help_str);
+                full_help_str =
+                    mc_args__convert_help_to_syscharset (_system_codepage, (*error)->message,
+                                                         help_str);
+                error2 = g_error_new ((*error)->domain, (*error)->code, "%s", full_help_str);
+                g_free (full_help_str);
+            }
 
             g_free (help_str);
-            g_free (full_help_str);
-            g_error_free (error);
+            g_error_free (*error);
+            *error = error2;
         }
+        else
+            *error = g_error_new (MC_ERROR, 0, "%s\n", _("Arguments parse error!"));
+
         g_option_context_free (context);
         mc_args_clean_temp_help_strings ();
         return FALSE;
@@ -760,7 +773,7 @@ mc_args_handle (int argc, char **argv, const char *translation_domain)
         bind_textdomain_codeset ("mc", _system_codepage);
 #endif
 
-    return mc_args_process (argc, argv);
+    return mc_args_process (argc, argv, error);
 }
 
 /* --------------------------------------------------------------------------------------------- */
