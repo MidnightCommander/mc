@@ -72,7 +72,7 @@ static struct str_class used_class;
 
 GIConv str_cnv_to_term;
 GIConv str_cnv_from_term;
-GIConv str_cnv_not_convert;
+GIConv str_cnv_not_convert = INVALID_CONV;
 
 /* if enc is same encoding like on terminal */
 static int

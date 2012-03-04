@@ -380,6 +380,7 @@ int
 main (int argc, char *argv[])
 {
     GError *error = NULL;
+    int exit_code = EXIT_FAILURE;
     gboolean isInitialized;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
@@ -389,32 +390,48 @@ main (int argc, char *argv[])
 
     if (!events_init (&error))
     {
+  startup_exit_falure:
         fprintf (stderr, _("Failed to run:\n%s\n"), error->message);
         g_error_free (error);
+  startup_exit_ok:
         (void) mc_event_deinit (NULL);
-        exit (EXIT_FAILURE);
+        str_uninit_strings ();
+        return exit_code;
     }
-
-    /* Set up temporary directory */
-    (void) mc_tmpdir ();
-
-    OS_Setup ();
 
     str_init_strings (NULL);
 
+    /* Set up temporary directory */
+    (void) mc_tmpdir ();
+    OS_Setup ();
     /* Initialize and create home directories */
     /* do it after the screen library initialization to show the error message */
     mc_config_init_config_paths (&error);
-
     if (error == NULL && mc_config_deprecated_dir_present ())
         mc_config_migrate_from_old_place (&error);
+    if (error != NULL)
+    {
+        g_free (shell);
+        goto startup_exit_falure;
+    }
 
     vfs_init ();
     vfs_plugins_init ();
     vfs_setup_work_dir ();
 
-    if (!mc_args_handle (argc, argv, "mc"))
-        exit (EXIT_FAILURE);
+    /* do this after vfs initialization due to mc_setctl() call in mc_args_handle() */
+    if (!mc_args_handle (argc, argv, "mc", &error))
+    {
+        if (error != NULL)
+        {
+            vfs_shut ();
+            goto startup_exit_falure;
+        }
+
+        /* for help messages */
+        exit_code = EXIT_SUCCESS;
+        goto startup_exit_ok;
+    }
 
     /* check terminal type
      * $TEMR must be set and not empty
@@ -463,20 +480,7 @@ main (int argc, char *argv[])
 
     tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
-    {
-        GError *error2 = NULL;
-        isInitialized = mc_skin_init (&error2);
-        mc_filehighlight = mc_fhl_new (TRUE);
-        dlg_set_default_colors ();
-
-        if (!isInitialized)
-        {
-            message (D_ERROR, _("Warning"), "%s", error2->message);
-            g_error_free (error2);
-            error2 = NULL;
-        }
-    }
-
+    isInitialized = mc_skin_init (&error);
     if (error != NULL)
     {
         message (D_ERROR, _("Warning"), "%s", error->message);
@@ -484,6 +488,8 @@ main (int argc, char *argv[])
         error = NULL;
     }
 
+    mc_filehighlight = mc_fhl_new (TRUE);
+    dlg_set_default_colors ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Done here to ensure that the subshell doesn't  */
@@ -582,9 +588,9 @@ main (int argc, char *argv[])
     g_free (mc_run_param0);
     g_free (mc_run_param1);
 
-    (void) mc_event_deinit (&error);
-
     mc_config_deinit_config_paths ();
+
+    (void) mc_event_deinit (&error);
 
     if (error != NULL)
     {
