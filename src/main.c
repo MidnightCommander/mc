@@ -536,8 +536,10 @@ main (int argc, char *argv[])
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */
-    if (!mc_global.widget.midnight_shutdown)
-        do_nc ();
+    if (mc_global.widget.midnight_shutdown)
+        exit_code = EXIT_SUCCESS;
+    else
+        exit_code = do_nc () ? EXIT_SUCCESS : EXIT_FAILURE;
 
     /* Save the tree store */
     (void) tree_store_save ();
@@ -609,17 +611,16 @@ main (int argc, char *argv[])
     mc_config_deinit_config_paths ();
 
     (void) mc_event_deinit (&error);
-
     if (error != NULL)
     {
         fprintf (stderr, _("\nFailed while close:\n%s\n"), error->message);
         g_error_free (error);
-        exit (EXIT_FAILURE);
+        exit_code = EXIT_FAILURE;
     }
 
     (void) putchar ('\n');      /* Hack to make shell's prompt start at left of screen */
 
-    return 0;
+    return exit_code;
 }
 
 /* --------------------------------------------------------------------------------------------- */

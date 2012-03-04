@@ -3335,7 +3335,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     if ((error != 0) || (dview_dlg->state == DLG_CLOSED))
         destroy_dlg (dview_dlg);
 
-    return error;
+    return error == 0 ? 1 : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3438,8 +3438,8 @@ dview_diff_cmd (void)
     vfs_path_free (file1);
     vfs_path_free (file0);
 
-    if (rv != 0)
-        message (1, MSG_ERROR, _("Two files are needed to compare"));
+    if (rv == 0)
+        message (D_ERROR, MSG_ERROR, _("Two files are needed to compare"));
 }
 
 /* --------------------------------------------------------------------------------------------- */

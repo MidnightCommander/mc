@@ -942,9 +942,11 @@ prepend_cwd_on_local (const char *filename)
 /** Invoke the internal view/edit routine with:
  * the default processing and forcing the internal viewer/editor
  */
-static void
+static gboolean
 mc_maybe_editor_or_viewer (void)
 {
+    int ret;
+
     switch (mc_global.mc_run_mode)
     {
 #ifdef USE_INTERNAL_EDIT
@@ -953,7 +955,7 @@ mc_maybe_editor_or_viewer (void)
             vfs_path_t *param_vpath;
 
             param_vpath = vfs_path_from_str (mc_run_param0);
-            edit_file (param_vpath, mc_args__edit_start_line);
+            ret = edit_file (param_vpath, mc_args__edit_start_line);
             vfs_path_free (param_vpath);
         }
         break;
@@ -965,16 +967,19 @@ mc_maybe_editor_or_viewer (void)
             vpath = prepend_cwd_on_local (mc_run_param0);
             view_file (vpath, 0, 1);
             vfs_path_free (vpath);
+            ret = 1;
             break;
         }
 #ifdef USE_DIFF_VIEW
     case MC_RUN_DIFFVIEWER:
-        diff_view (mc_run_param0, mc_run_param1, mc_run_param0, mc_run_param1);
+        ret = diff_view (mc_run_param0, mc_run_param1, mc_run_param0, mc_run_param1);
         break;
 #endif /* USE_DIFF_VIEW */
     default:
-        break;
+        ret = 0;
     }
+
+    return (ret != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1651,9 +1656,11 @@ quiet_quit_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /** Run the main dialog that occupies the whole screen */
-void
+gboolean
 do_nc (void)
 {
+    gboolean ret;
+
     dlg_colors_t midnight_colors;
 
     midnight_colors[DLG_COLOR_NORMAL] = mc_skin_color_get ("dialog", "_default_");
@@ -1676,10 +1683,11 @@ do_nc (void)
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_global.mc_run_mode != MC_RUN_FULL)
-        mc_maybe_editor_or_viewer ();
+        ret = mc_maybe_editor_or_viewer ();
     else
     {
         create_panels_and_run_mc ();
+        ret = TRUE;
 
         /* destroy_dlg destroys even current_panel->cwd_vpath, so we have to save a copy :) */
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
@@ -1704,6 +1712,8 @@ do_nc (void)
 
     if ((quit & SUBSHELL_EXIT) == 0)
         clr_scr ();
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
