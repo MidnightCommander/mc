@@ -44,6 +44,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/vfs/vfs.h"
+#include "lib/lock.h"           /* lock_file() and unlock_file() */
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/charsets.h"
@@ -371,7 +372,7 @@ mcview_hexedit_save_changes (mcview_t * view)
             view->change_list = NULL;
 
             if (view->locked)
-                view->locked = mcview_unlock_file (view);
+                view->locked = unlock_file (view->filename_vpath);
 
             if (mc_close (fp) == -1)
                 message (D_ERROR, _("Save file"),
@@ -418,7 +419,7 @@ mcview_hexedit_free_change_list (mcview_t * view)
     view->change_list = NULL;
 
     if (view->locked)
-        view->locked = mcview_unlock_file (view);
+        view->locked = unlock_file (view->filename_vpath);
 
     view->dirty++;
 }

@@ -287,8 +287,6 @@ void mcview_show_error (mcview_t * view, const char *error);
 off_t mcview_bol (mcview_t * view, off_t current, off_t limit);
 off_t mcview_eol (mcview_t * view, off_t current, off_t limit);
 char *mcview_get_title (const Dlg_head * h, size_t len);
-gboolean mcview_lock_file (mcview_t * view);
-gboolean mcview_unlock_file (mcview_t * view);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);

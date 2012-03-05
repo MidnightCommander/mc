@@ -455,12 +455,12 @@ edit_save_cmd (WEdit * edit)
     int res, save_lock = 0;
 
     if (!edit->locked && !edit->delete_file)
-        save_lock = edit_lock_file (edit);
+        save_lock = lock_file (edit->filename_vpath);
     res = edit_save_file (edit, edit->filename_vpath);
 
     /* Maintain modify (not save) lock on failure */
     if ((res > 0 && edit->locked) || save_lock)
-        edit->locked = edit_unlock_file (edit);
+        edit->locked = unlock_file (edit->filename_vpath);
 
     /* On failure try 'save as', it does locking on its own */
     if (!res)
@@ -1531,12 +1531,12 @@ edit_save_as_cmd (WEdit * edit)
                     if (save_lock)
                         unlock_file (exp_vpath);
                     if (edit->locked)
-                        edit->locked = edit_unlock_file (edit);
+                        edit->locked = unlock_file (edit->filename_vpath);
                 }
                 else
                 {
                     if (edit->locked || save_lock)
-                        edit->locked = edit_unlock_file (edit);
+                        edit->locked = unlock_file (edit->filename_vpath);
                 }
 
                 edit_set_filename (edit, exp_vpath);

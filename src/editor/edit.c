@@ -687,7 +687,7 @@ edit_modification (WEdit * edit)
 
     /* raise lock when file modified */
     if (!edit->modified && !edit->delete_file)
-        edit->locked = edit_lock_file (edit);
+        edit->locked = lock_file (edit->filename_vpath);
     edit->modified = 1;
 }
 
@@ -2335,7 +2335,7 @@ edit_clean (WEdit * edit)
 
     /* a stale lock, remove it */
     if (edit->locked)
-        edit->locked = edit_unlock_file (edit);
+        edit->locked = unlock_file (edit->filename_vpath);
 
     /* save cursor position */
     if (option_save_position)
@@ -4378,36 +4378,6 @@ void
 edit_move_down (WEdit * edit, unsigned long i, int do_scroll)
 {
     edit_move_updown (edit, i, do_scroll, FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-unsigned int
-edit_unlock_file (WEdit * edit)
-{
-    vfs_path_t *fullpath;
-    unsigned int ret;
-
-    fullpath = vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, (char *) NULL);
-    ret = unlock_file (fullpath);
-    vfs_path_free (fullpath);
-
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-unsigned int
-edit_lock_file (WEdit * edit)
-{
-    vfs_path_t *fullpath;
-    unsigned int ret;
-
-    fullpath = vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, (char *) NULL);
-    ret = lock_file (fullpath);
-    vfs_path_free (fullpath);
-
-    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
