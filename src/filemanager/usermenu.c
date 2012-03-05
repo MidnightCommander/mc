@@ -935,7 +935,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
     {
         if (menu_file != NULL)
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot open file%s\n%s"), menu,
+            message (D_ERROR, MSG_ERROR, _("Cannot open file %s\n%s"), menu,
                      unix_error_string (errno));
             g_free (menu);
             menu = NULL;
