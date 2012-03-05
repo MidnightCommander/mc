@@ -308,9 +308,6 @@ void edit_syntax_dialog (WEdit * edit);
 void edit_mail_dialog (WEdit * edit);
 void format_paragraph (WEdit * edit, int force);
 
-unsigned int edit_unlock_file (WEdit * edit);
-unsigned int edit_lock_file (WEdit * edit);
-
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);
 

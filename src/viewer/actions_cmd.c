@@ -222,7 +222,7 @@ mcview_handle_editkey (mcview_t * view, int key)
     if ((view->filename_vpath != NULL)
         && (*(vfs_path_get_last_path_str (view->filename_vpath)) != '\0')
         && (view->change_list == NULL))
-        view->locked = mcview_lock_file (view);
+        view->locked = lock_file (view->filename_vpath);
 
     if (node == NULL)
     {

@@ -113,20 +113,19 @@ lock_build_name (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-lock_build_symlink_name (const char *fname)
+lock_build_symlink_name (const vfs_path_t * fname_vpath)
 {
-    char *fname_copy, *symlink_name;
-    char absolute_fname[PATH_MAX];
+    const char *elpath, *str_filename;
+    char *str_dirname, *symlink_name;
 
-    if (mc_realpath (fname, absolute_fname) == NULL)
-        return NULL;
+    /* get first path piece */
+    elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
 
-    fname = x_basename (absolute_fname);
-    fname_copy = g_strdup (fname);
-    absolute_fname[fname - absolute_fname] = '\0';
-    symlink_name = g_strconcat (absolute_fname, ".#", fname_copy, (char *) NULL);
-    g_free (fname_copy);
+    str_filename = g_basename (elpath);
+    str_dirname = g_dirname (elpath);
 
+    symlink_name = g_strconcat (str_dirname, PATH_SEP_STR ".#", str_filename, (char *) NULL);
+    g_free (str_dirname);
     return symlink_name;
 }
 
@@ -200,28 +199,20 @@ lock_file (const vfs_path_t * fname_vpath)
     struct lock_s *lockinfo;
     gboolean is_local;
     gboolean symlink_ok = FALSE;
-    char *fname_tmp, *fname;
+    const char *elpath;
 
+    elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
     /* Just to be sure (and don't lock new file) */
-    fname_tmp = vfs_path_to_str (fname_vpath);
-    if (fname_tmp == NULL || *fname_tmp == '\0')
-    {
-        g_free (fname_tmp);
+    if (fname_vpath == NULL || *elpath == '\0')
         return 0;
-    }
-
-    fname = tilde_expand (fname_tmp);
-    g_free (fname_tmp);
 
     /* Locking on VFS is not supported */
     is_local = vfs_file_is_local (fname_vpath);
     if (is_local)
     {
         /* Check if already locked */
-        lockfname = lock_build_symlink_name (fname);
+        lockfname = lock_build_symlink_name (fname_vpath);
     }
-
-    g_free (fname);
 
     if (!is_local || lockfname == NULL)
         return 0;
@@ -251,7 +242,7 @@ lock_file (const vfs_path_t * fname_vpath)
             case -1:
                 g_free (msg);
                 goto ret;
-                break;  /* FIXME: unneeded? */
+                break;          /* FIXME: unneeded? */
             }
             g_free (msg);
         }
@@ -279,20 +270,14 @@ unlock_file (const vfs_path_t * fname_vpath)
 {
     char *lockfname, *lock;
     struct stat statbuf;
-    char *fname_tmp, *fname;
+    const char *elpath;
 
-    /* Just to be sure */
-    fname_tmp = vfs_path_to_str (fname_vpath);
-    if (fname_tmp == NULL || *fname_tmp == '\0')
-    {
-        g_free (fname_tmp);
+    elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
+    /* Just to be sure (and don't lock new file) */
+    if (fname_vpath == NULL || *elpath == '\0')
         return 0;
-    }
 
-    fname = tilde_expand (fname_tmp);
-    g_free (fname_tmp);
-    lockfname = lock_build_symlink_name (fname);
-    g_free (fname);
+    lockfname = lock_build_symlink_name (fname_vpath);
 
     if (lockfname == NULL)
         return 0;

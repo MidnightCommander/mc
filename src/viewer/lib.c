@@ -43,7 +43,6 @@
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* save_file_position() */
-#include "lib/lock.h"           /* unlock_file() */
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
@@ -417,8 +416,7 @@ mcview_get_title (const Dlg_head * h, size_t len)
     char *view_filename;
     char *ret_str;
 
-    view_filename =
-        view->filename_vpath != NULL ? vfs_path_to_str (view->filename_vpath) : NULL;
+    view_filename = view->filename_vpath != NULL ? vfs_path_to_str (view->filename_vpath) : NULL;
 
     len -= 4;
 
@@ -428,36 +426,6 @@ mcview_get_title (const Dlg_head * h, size_t len)
     ret_str = g_strconcat (_("View: "), modified, file_label, (char *) NULL);
     g_free (view_filename);
     return ret_str;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-mcview_lock_file (mcview_t * view)
-{
-    vfs_path_t *fullpath;
-    gboolean ret;
-
-    fullpath = vfs_path_append_vpath_new (view->workdir_vpath, view->filename_vpath, (char *) NULL);
-    ret = lock_file (fullpath);
-    vfs_path_free (fullpath);
-
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-mcview_unlock_file (mcview_t * view)
-{
-    vfs_path_t *fullpath;
-    gboolean ret;
-
-    fullpath = vfs_path_append_vpath_new (view->workdir_vpath, view->filename_vpath, (char *) NULL);
-    ret = unlock_file (fullpath);
-    vfs_path_free (fullpath);
-
-    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
