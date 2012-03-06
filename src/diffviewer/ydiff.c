@@ -152,14 +152,17 @@ dview_select_encoding (WDiff * dview)
 #endif
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-rewrite_backup_content (const char *from_file_name, const char *to_file_name)
+rewrite_backup_content (const vfs_path_t * from_file_name_vpath, const char *to_file_name)
 {
     FILE *backup_fd;
     char *contents;
     gsize length;
+    const char *from_file_name;
 
+    from_file_name = vfs_path_get_by_index (from_file_name_vpath, -1)->path;
     if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
         return FALSE;
 
@@ -194,7 +197,7 @@ static int
 open_temp (void **name)
 {
     int fd;
-    char *diff_file_name = NULL;
+    vfs_path_t *diff_file_name = NULL;
 
     fd = mc_mkstemps (&diff_file_name, "mcdiff", NULL);
     if (fd == -1)
@@ -203,7 +206,8 @@ open_temp (void **name)
                  _("Cannot create temporary diff file\n%s"), unix_error_string (errno));
         return -1;
     }
-    *name = diff_file_name;
+    *name = vfs_path_to_str (diff_file_name);
+    vfs_path_free (diff_file_name);
     return fd;
 }
 
@@ -2198,7 +2202,7 @@ do_merge_hunk (WDiff * dview)
     {
         int merge_file_fd;
         FILE *merge_file;
-        char *merge_file_name = NULL;
+        vfs_path_t *merge_file_name_vpath = NULL;
 
         if (!dview->merged)
         {
@@ -2213,7 +2217,7 @@ do_merge_hunk (WDiff * dview)
 
         }
 
-        merge_file_fd = mc_mkstemps (&merge_file_name, "mcmerge", NULL);
+        merge_file_fd = mc_mkstemps (&merge_file_name_vpath, "mcmerge", NULL);
         if (merge_file_fd == -1)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot create temporary merge file\n%s"),
@@ -2237,9 +2241,9 @@ do_merge_hunk (WDiff * dview)
         }
         fflush (merge_file);
         fclose (merge_file);
-        res = rewrite_backup_content (merge_file_name, dview->file[0]);
-        unlink (merge_file_name);
-        g_free (merge_file_name);
+        res = rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
+        mc_unlink (merge_file_name_vpath);
+        vfs_path_free (merge_file_name_vpath);
     }
 }
 
@@ -2714,6 +2718,8 @@ dview_status (const WDiff * dview, int ord, int width, int c)
     const char *buf;
     int filename_width;
     int linenum, lineofs;
+    vfs_path_t *vpath;
+    char *path;
 
     tty_setcolor (STATUSBAR_COLOR);
 
@@ -2724,12 +2730,16 @@ dview_status (const WDiff * dview, int ord, int width, int c)
     if (filename_width < 8)
         filename_width = 8;
 
-    buf = str_term_trim (strip_home_and_password (dview->label[ord]), filename_width);
+    vpath = vfs_path_from_str (dview->label[ord]);
+    path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+    vfs_path_free (vpath);
+    buf = str_term_trim (path, filename_width);
     if (ord == 0)
         tty_printf ("%-*s %6d+%-4d Col %-4d ", filename_width, buf, linenum, lineofs,
                     dview->skip_cols);
     else
         tty_printf ("%-*s %6d+%-4d Dif %-4d ", filename_width, buf, linenum, lineofs, dview->ndiff);
+    g_free (path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2766,7 +2776,13 @@ dview_edit (WDiff * dview, int ord)
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
     h->modal = TRUE;            /* not allow edit file in several editors */
-    do_edit_at_line (dview->file[ord], use_internal_edit, linenum);
+    {
+        vfs_path_t *tmp_vpath;
+
+        tmp_vpath = vfs_path_from_str (dview->file[ord]);
+        do_edit_at_line (tmp_vpath, use_internal_edit, linenum);
+        vfs_path_free (tmp_vpath);
+    }
     h->modal = h_modal;
     dview_redo (dview);
     dview_update (dview);
@@ -3327,10 +3343,9 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 #define GET_FILE_AND_STAMP(n) \
 do \
 { \
-    vfs_path_t *vpath = vfs_path_from_str(file##n); \
     use_copy##n = 0; \
     real_file##n = file##n; \
-    if (!vfs_file_is_local (vpath)) \
+    if (!vfs_file_is_local (file##n)) \
     { \
         real_file##n = mc_getlocalcopy (file##n); \
         if (real_file##n != NULL) \
@@ -3340,7 +3355,6 @@ do \
                 use_copy##n = -1; \
         } \
     } \
-    vfs_path_free(vpath); \
 } \
 while (0)
 
@@ -3358,7 +3372,7 @@ do \
                 changed = (mtime != st##n.st_mtime); \
         } \
         mc_ungetlocalcopy (file##n, real_file##n, changed); \
-        g_free (real_file##n); \
+        vfs_path_free (real_file##n); \
     } \
 } \
 while (0)
@@ -3367,8 +3381,8 @@ void
 dview_diff_cmd (void)
 {
     int rv = 0;
-    char *file0 = NULL;
-    char *file1 = NULL;
+    vfs_path_t *file0 = NULL;
+    vfs_path_t *file1 = NULL;
     int is_dir0 = 0;
     int is_dir1 = 0;
 
@@ -3381,8 +3395,8 @@ dview_diff_cmd (void)
             panel0 = other_panel;
             panel1 = current_panel;
         }
-        file0 = concat_dir_and_file (panel0->cwd, selection (panel0)->fname);
-        file1 = concat_dir_and_file (panel1->cwd, selection (panel1)->fname);
+        file0 = vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname, NULL);
+        file1 = vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname, NULL);
         is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
         is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
     }
@@ -3396,21 +3410,33 @@ dview_diff_cmd (void)
             int use_copy1;
             struct stat st0;
             struct stat st1;
-            char *real_file0;
-            char *real_file1;
+            vfs_path_t *real_file0;
+            vfs_path_t *real_file1;
+
             GET_FILE_AND_STAMP (0);
             GET_FILE_AND_STAMP (1);
             if (real_file0 != NULL && real_file1 != NULL)
             {
-                rv = diff_view (real_file0, real_file1, file0, file1);
+                char *real_file0_str, *real_file1_str;
+                char *file0_str, *file1_str;
+
+                real_file0_str = vfs_path_to_str (real_file0);
+                real_file1_str = vfs_path_to_str (real_file1);
+                file0_str = vfs_path_to_str (file0);
+                file1_str = vfs_path_to_str (file1);
+                rv = diff_view (real_file0_str, real_file1_str, file0_str, file1_str);
+                g_free (real_file0_str);
+                g_free (real_file1_str);
+                g_free (file0_str);
+                g_free (file1_str);
             }
             UNGET_FILE (1);
             UNGET_FILE (0);
         }
     }
 
-    g_free (file1);
-    g_free (file0);
+    vfs_path_free (file1);
+    vfs_path_free (file0);
 
     if (rv != 0)
         message (1, MSG_ERROR, _("Two files are needed to compare"));

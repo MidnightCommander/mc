@@ -113,10 +113,9 @@ START_TEST (test_vfs_path_from_to_string2)
     vfs_path_t *vpath;
     size_t vpath_len;
     char *result;
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     vpath = vfs_path_from_str ("/");
-
 
     vpath_len = vfs_path_elements_count(vpath);
     fail_unless(vpath_len == 1, "vpath length should be 1 (actial: %d)",vpath_len);
@@ -262,7 +261,7 @@ START_TEST (test_vfs_path_encoding_at_end)
 {
     vfs_path_t *vpath;
     char *result;
-    vfs_path_element_t *element;
+    const vfs_path_element_t *element;
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();

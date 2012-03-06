@@ -1,9 +1,11 @@
-/** \file panelize.h
- *  \brief Header: External panelization module
+/** \file  file.h
+ *  \brief Header: File and directory operation routines
  */
 
-#ifndef MC__PANELIZE_H
-#define MC__PANELIZE_H
+#ifndef MC__FILENOT_H
+#define MC__FILENOT_H
+
+#include "lib/global.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -11,19 +13,14 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct WPanel;
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-void external_panelize (void);
-void load_panelize (void);
-void save_panelize (void);
-void done_panelize (void);
-void cd_panelize_cmd (void);
-void panelize_save_panel (struct WPanel *panel);
-void panelize_change_root (const vfs_path_t * new_root);
+/* Misc Unix functions */
+int my_mkdir (const vfs_path_t * s, mode_t mode);
+int my_rmdir (const char *s);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__PANELIZE_H */
+
+#endif /* MC__FILE_H */

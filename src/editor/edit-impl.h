@@ -15,6 +15,7 @@
 
 #include "lib/search.h"         /* mc_search_type_t */
 #include "lib/widget.h"         /* cb_ret_t */
+#include "lib/vfs/vfs.h"        /* vfs_path_t */
 
 #include "edit.h"
 
@@ -144,7 +145,7 @@ typedef struct edit_search_options_t
 typedef struct edit_stack_type
 {
     long line;
-    char *filename;
+    vfs_path_t *filename_vpath;
 } edit_stack_type;
 
 struct Widget;
@@ -203,7 +204,7 @@ long edit_eol (WEdit * edit, long current);
 void edit_update_curs_row (WEdit * edit);
 void edit_update_curs_col (WEdit * edit);
 void edit_find_bracket (WEdit * edit);
-int edit_reload_line (WEdit * edit, const char *filename, long line);
+int edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line);
 void edit_set_codeset (WEdit * edit);
 
 void edit_block_copy_cmd (WEdit * edit);
@@ -219,15 +220,17 @@ void edit_push_redo_action (WEdit * edit, long c, ...);
 void edit_push_key_press (WEdit * edit);
 void edit_insert_ahead (WEdit * edit, int c);
 long edit_write_stream (WEdit * edit, FILE * f);
-char *edit_get_write_filter (const char *writename, const char *filename);
+char *edit_get_write_filter (const vfs_path_t * write_name_vpath,
+                             const vfs_path_t * filename_vpath);
 int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
-WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols, const char *filename, long line);
+WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols,
+                  const vfs_path_t * filename_vpath, long line);
 int edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
 int edit_renew (WEdit * edit);
 int edit_new_cmd (WEdit * edit);
-int edit_reload (WEdit * edit, const char *filename);
+int edit_reload (WEdit * edit, const vfs_path_t * filename_vpath);
 int edit_load_cmd (WEdit * edit, edit_current_file_t what);
 void edit_mark_cmd (WEdit * edit, int unmark);
 void edit_mark_current_word_cmd (WEdit * edit);
@@ -245,7 +248,7 @@ gboolean edit_insert_file_cmd (WEdit * edit);
 void edit_insert_over (WEdit * edit);
 int edit_insert_column_of_text_from_file (WEdit * edit, int file,
                                           long *start_pos, long *end_pos, int *col1, int *col2);
-long edit_insert_file (WEdit * edit, const char *filename);
+long edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
 int edit_load_back_cmd (WEdit * edit);
 int edit_load_forward_cmd (WEdit * edit);
 void edit_block_process_cmd (WEdit * edit, int macro_number);
@@ -280,7 +283,7 @@ void edit_begin_end_repeat_cmd (WEdit * edit);
 
 void edit_paste_from_history (WEdit * edit);
 
-void edit_set_filename (WEdit * edit, const char *name);
+void edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath);
 
 void edit_load_syntax (WEdit * edit, char ***pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
@@ -304,9 +307,6 @@ void edit_options_dialog (WEdit * edit);
 void edit_syntax_dialog (WEdit * edit);
 void edit_mail_dialog (WEdit * edit);
 void format_paragraph (WEdit * edit, int force);
-
-unsigned int edit_unlock_file (WEdit * edit);
-unsigned int edit_lock_file (WEdit * edit);
 
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);

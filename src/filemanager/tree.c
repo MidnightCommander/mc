@@ -55,7 +55,6 @@
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
 
-
 #include "src/setup.h"          /* confirm_delete, panels_options */
 #include "src/keybind-defaults.h"
 #include "src/history.h"
@@ -188,10 +187,10 @@ save_tree (WTree * tree)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tree_remove_entry (WTree * tree, char *name)
+tree_remove_entry (WTree * tree, const vfs_path_t * name_vpath)
 {
     (void) tree;
-    tree_store_remove_entry (name);
+    tree_store_remove_entry (name_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -250,10 +249,14 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
     else
     {
         /* Show full name of selected directory */
+        char *tmp_path;
+
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
         tty_draw_hline (tree->widget.y + line, tree->widget.x + 1, ' ', tree_cols);
         widget_move (&tree->widget, line, 1);
-        tty_print_string (str_fit_to_term (tree->selected_ptr->name, tree_cols, J_LEFT_FIT));
+        tmp_path = vfs_path_to_str (tree->selected_ptr->name);
+        tty_print_string (str_fit_to_term (tmp_path, tree_cols, J_LEFT_FIT));
+        g_free (tmp_path);
     }
 }
 
@@ -301,25 +304,33 @@ show_tree (WTree * tree)
         i = 0;
         while (current->prev && i < tree->topdiff)
         {
+            char *current_name;
+
             current = current->prev;
+            current_name = vfs_path_to_str (current->name);
+
             if (current->sublevel < tree->selected_ptr->sublevel)
             {
-                if (strncmp (current->name, tree->selected_ptr->name, strlen (current->name)) == 0)
+                if (vfs_path_cmp (current->name, tree->selected_ptr->name) == 0)
                     i++;
             }
             else if (current->sublevel == tree->selected_ptr->sublevel)
             {
-                for (j = strlen (current->name) - 1; current->name[j] != PATH_SEP; j--);
-                if (strncmp (current->name, tree->selected_ptr->name, j) == 0)
+                for (j = strlen (current_name) - 1; current_name[j] != PATH_SEP; j--);
+                if (vfs_path_ncmp (current->name, tree->selected_ptr->name, j) == 0)
                     i++;
             }
-            else if (current->sublevel == tree->selected_ptr->sublevel + 1
-                     && strlen (tree->selected_ptr->name) > 1)
+            else
             {
-                if (strncmp (current->name, tree->selected_ptr->name,
-                             strlen (tree->selected_ptr->name)) == 0)
-                    i++;
+                if (current->sublevel == tree->selected_ptr->sublevel + 1
+                    && vfs_path_len (tree->selected_ptr->name) > 1)
+                {
+                    if (vfs_path_ncmp (current->name, tree->selected_ptr->name,
+                                       vfs_path_len (tree->selected_ptr->name)) == 0)
+                        i++;
+                }
             }
+            g_free (current_name);
         }
         tree->topdiff = i;
     }
@@ -345,8 +356,12 @@ show_tree (WTree * tree)
         if (current->sublevel == topsublevel)
         {
             /* Show full name */
+            char *current_name;
+
+            current_name = vfs_path_to_str (current->name);
             tty_print_string (str_fit_to_term
-                              (current->name, tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
+                              (current_name, tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
+            g_free (current_name);
         }
         else
         {
@@ -388,22 +403,26 @@ show_tree (WTree * tree)
             {
                 if (current->sublevel < tree->selected_ptr->sublevel)
                 {
-                    if (strncmp (current->name, tree->selected_ptr->name,
-                                 strlen (current->name)) == 0)
+                    if (vfs_path_ncmp (current->name, tree->selected_ptr->name,
+                                       vfs_path_len (current->name)) == 0)
                         break;
                 }
                 else if (current->sublevel == tree->selected_ptr->sublevel)
                 {
-                    for (j = strlen (current->name) - 1; current->name[j] != PATH_SEP; j--)
+                    char *current_name;
+
+                    current_name = vfs_path_to_str (current->name);
+                    for (j = strlen (current_name) - 1; current_name[j] != PATH_SEP; j--)
                         ;
-                    if (strncmp (current->name, tree->selected_ptr->name, j) == 0)
+                    g_free (current_name);
+                    if (vfs_path_ncmp (current->name, tree->selected_ptr->name, j) == 0)
                         break;
                 }
                 else if (current->sublevel == tree->selected_ptr->sublevel + 1
-                         && strlen (tree->selected_ptr->name) > 1)
+                         && vfs_path_len (tree->selected_ptr->name) > 1)
                 {
-                    if (strncmp (current->name, tree->selected_ptr->name,
-                                 strlen (tree->selected_ptr->name)) == 0)
+                    if (vfs_path_ncmp (current->name, tree->selected_ptr->name,
+                                       vfs_path_len (tree->selected_ptr->name)) == 0)
                         break;
                 }
                 current = current->next;
@@ -579,17 +598,21 @@ tree_event (WTree * tree, int y)
 static void
 tree_chdir_sel (WTree * tree)
 {
+    char *tmp_path;
+
     if (!tree->is_panel)
         return;
 
     change_panel ();
 
+    tmp_path = vfs_path_to_str (tree->selected_ptr->name);
     if (do_cd (tree->selected_ptr->name, cd_exact))
         select_item (current_panel);
     else
         message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
-                 tree->selected_ptr->name, unix_error_string (errno));
+                 tmp_path, unix_error_string (errno));
 
+    g_free (tmp_path);
     change_panel ();
     show_tree (tree);
 }
@@ -712,16 +735,20 @@ tree_do_search (WTree * tree, int key)
 static void
 tree_rescan (void *data)
 {
-    char old_dir[MC_MAXPATHLEN];
     WTree *tree = data;
     int ret;
+    vfs_path_t *old_vpath;
 
-    if (tree->selected_ptr == NULL || mc_get_current_wd (old_dir, MC_MAXPATHLEN) == NULL
-        || mc_chdir (tree->selected_ptr->name))
+    old_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
+    if (old_vpath == NULL)
         return;
 
-    tree_store_rescan (tree->selected_ptr->name);
-    ret = mc_chdir (old_dir);
+    if (tree->selected_ptr != NULL && mc_chdir (tree->selected_ptr->name) == 0)
+    {
+        tree_store_rescan (tree->selected_ptr->name);
+        ret = mc_chdir (old_vpath);
+    }
+    vfs_path_free (old_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -740,13 +767,15 @@ static void
 tree_copy (WTree * tree, const char *default_dest)
 {
     char msg[BUF_MEDIUM];
-    char *dest;
+    char *dest, *selected_ptr_name;
 
     if (tree->selected_ptr == NULL)
         return;
 
+    selected_ptr_name = vfs_path_to_str (tree->selected_ptr->name);
+
     g_snprintf (msg, sizeof (msg), _("Copy \"%s\" directory to:"),
-                str_trunc (tree->selected_ptr->name, 50));
+                str_trunc (selected_ptr_name, 50));
     dest = input_expand_dialog (Q_ ("DialogTitle|Copy"),
                                 msg, MC_HISTORY_FM_TREE_COPY, default_dest);
 
@@ -759,12 +788,13 @@ tree_copy (WTree * tree, const char *default_dest)
         tctx = file_op_total_context_new ();
         file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
         tctx->ask_overwrite = FALSE;
-        copy_dir_dir (tctx, ctx, tree->selected_ptr->name, dest, TRUE, FALSE, FALSE, NULL);
+        copy_dir_dir (tctx, ctx, selected_ptr_name, dest, TRUE, FALSE, FALSE, NULL);
         file_op_total_context_destroy (tctx);
         file_op_context_destroy (ctx);
     }
 
     g_free (dest);
+    g_free (selected_ptr_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -773,7 +803,7 @@ static void
 tree_move (WTree * tree, const char *default_dest)
 {
     char msg[BUF_MEDIUM];
-    char *dest;
+    char *dest, *selected_ptr_name;
     struct stat buf;
     FileOpContext *ctx;
     FileOpTotalContext *tctx;
@@ -781,39 +811,38 @@ tree_move (WTree * tree, const char *default_dest)
     if (tree->selected_ptr == NULL)
         return;
 
+    selected_ptr_name = vfs_path_to_str (tree->selected_ptr->name);
+
     g_snprintf (msg, sizeof (msg), _("Move \"%s\" directory to:"),
-                str_trunc (tree->selected_ptr->name, 50));
+                str_trunc (selected_ptr_name, 50));
     dest =
         input_expand_dialog (Q_ ("DialogTitle|Move"), msg, MC_HISTORY_FM_TREE_MOVE, default_dest);
 
     if (dest == NULL || *dest == '\0')
-    {
-        g_free (dest);
-        return;
-    }
+        goto ret;
 
     if (stat (dest, &buf))
     {
         message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
                  unix_error_string (errno));
-        g_free (dest);
-        return;
+        goto ret;
     }
 
     if (!S_ISDIR (buf.st_mode))
     {
         file_error (_("Destination \"%s\" must be a directory\n%s"), dest);
-        g_free (dest);
-        return;
+        goto ret;
     }
 
     ctx = file_op_context_new (OP_MOVE);
     tctx = file_op_total_context_new ();
     file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
-    move_dir_dir (tctx, ctx, tree->selected_ptr->name, dest);
+    move_dir_dir (tctx, ctx, selected_ptr_name, dest);
     file_op_total_context_destroy (tctx);
     file_op_context_destroy (ctx);
 
+  ret:
+    g_free (selected_ptr_name);
     g_free (dest);
 }
 
@@ -826,8 +855,6 @@ tree_mkdir (WTree * tree)
     char old_dir[MC_MAXPATHLEN];
 
     if (!tree->selected_ptr)
-        return;
-    if (mc_get_current_wd (old_dir, MC_MAXPATHLEN) == NULL)
         return;
     if (chdir (tree->selected_ptr->name))
         return;
@@ -855,8 +882,12 @@ tree_rmdir (void *data)
     {
         char *buf;
         int result;
+        char *selected_ptr_name;
 
-        buf = g_strdup_printf (_("Delete %s?"), tree->selected_ptr->name);
+        selected_ptr_name = vfs_path_to_str (tree->selected_ptr->name);
+        buf = g_strdup_printf (_("Delete %s?"), selected_ptr_name);
+        g_free (selected_ptr_name);
+
         result = query_dialog (Q_ ("DialogTitle|Delete"), buf, D_ERROR, 2, _("&Yes"), _("&No"));
         g_free (buf);
         if (result != 0)
@@ -1257,21 +1288,23 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
 void
 tree_chdir (WTree * tree, const char *dir)
 {
+    vfs_path_t *vpath;
     tree_entry *current;
 
-    current = tree_store_whereis (dir);
-
+    vpath = vfs_path_from_str (dir);
+    current = tree_store_whereis (vpath);
     if (current != NULL)
     {
         tree->selected_ptr = current;
         tree_check_focus (tree);
     }
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /** Return name of the currently selected entry */
 
-char *
+vfs_path_t *
 tree_selected_name (const WTree * tree)
 {
     return tree->selected_ptr->name;

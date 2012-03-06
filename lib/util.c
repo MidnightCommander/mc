@@ -116,14 +116,18 @@ resolve_symlinks (const char *path)
     int len;
     struct stat mybuf;
     const char *p;
+    vfs_path_t *vpath;
 
     if (*path != PATH_SEP)
         return NULL;
+
+    vpath = vfs_path_from_str (path);
     r = buf = g_malloc (MC_MAXPATHLEN);
     buf2 = g_malloc (MC_MAXPATHLEN);
     *r++ = PATH_SEP;
     *r = 0;
     p = path;
+
     for (;;)
     {
         q = strchr (p + 1, PATH_SEP);
@@ -135,24 +139,24 @@ resolve_symlinks (const char *path)
         }
         c = *q;
         *q = 0;
-        if (mc_lstat (path, &mybuf) < 0)
+        if (mc_lstat (vpath, &mybuf) < 0)
         {
             g_free (buf);
-            g_free (buf2);
+            buf = NULL;
             *q = c;
-            return NULL;
+            goto ret;
         }
         if (!S_ISLNK (mybuf.st_mode))
             strcpy (r, p + 1);
         else
         {
-            len = mc_readlink (path, buf2, MC_MAXPATHLEN - 1);
+            len = mc_readlink (vpath, buf2, MC_MAXPATHLEN - 1);
             if (len < 0)
             {
                 g_free (buf);
-                g_free (buf2);
+                buf = NULL;
                 *q = c;
-                return NULL;
+                goto ret;
             }
             buf2[len] = 0;
             if (*buf2 == PATH_SEP)
@@ -176,7 +180,10 @@ resolve_symlinks (const char *path)
         strcpy (buf, PATH_SEP_STR);
     else if (*(r - 1) == PATH_SEP && r != buf + 1)
         *(r - 1) = 0;
+
+  ret:
     g_free (buf2);
+    vfs_path_free (vpath);
     return buf;
 }
 
@@ -319,9 +326,15 @@ fake_name_quote (const char *s, int quote_percent)
 const char *
 path_trunc (const char *path, size_t trunc_len)
 {
-    char *secure_path = strip_password (g_strdup (path), 1);
+    vfs_path_t *vpath;
+    char *secure_path;
+    const char *ret;
 
-    const char *ret = str_trunc (secure_path, trunc_len);
+    vpath = vfs_path_from_str (path);
+    secure_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    vfs_path_free (vpath);
+
+    ret = str_trunc (secure_path, trunc_len);
     g_free (secure_path);
 
     return ret;
@@ -555,101 +568,6 @@ string_perm (mode_t mode_bits)
         mode[9] = (mode[9] == 'x') ? 't' : 'T';
 #endif /* S_ISVTX */
     return mode;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- *  p: string which might contain an url with a password (this parameter is
- *  modified in place).
- *  has_prefix = 0: The first parameter is an url without a prefix
- *  (user[:pass]@]machine[:port][remote-dir). Delete
- *  the password.
- *  has_prefix = 1: Search p for known url prefixes. If found delete
- *  the password from the url.
- *  Caveat: only the first url is found
- */
-
-char *
-strip_password (char *p, int has_prefix)
-{
-    static const struct
-    {
-        const char *name;
-        size_t len;
-    } prefixes[] =
-    {
-        /* *INDENT-OFF* */
-        { "/#ftp:", 6 },
-        { "ftp://", 6 },
-        { "/#smb:", 6 },
-        { "smb://", 6 },
-        { "/#sh:", 5 },
-        { "sh://", 5 },
-        { "ssh://", 6 }
-        /* *INDENT-ON* */
-    };
-
-    char *at, *inner_colon, *dir;
-    size_t i;
-    char *result = p;
-
-    for (i = 0; i < sizeof (prefixes) / sizeof (prefixes[0]); i++)
-    {
-        char *q;
-
-        if (has_prefix)
-        {
-            q = strstr (p, prefixes[i].name);
-            if (q == NULL)
-                continue;
-            else
-                p = q + prefixes[i].len;
-        }
-
-        dir = strchr (p, PATH_SEP);
-        if (dir != NULL)
-            *dir = '\0';
-
-        /* search for any possible user */
-        at = strrchr (p, '@');
-
-        if (dir)
-            *dir = PATH_SEP;
-
-        /* We have a username */
-        if (at)
-        {
-            inner_colon = memchr (p, ':', at - p);
-            if (inner_colon)
-                memmove (inner_colon, at, strlen (at) + 1);
-        }
-        break;
-    }
-    return (result);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-const char *
-strip_home_and_password (const char *dir)
-{
-    size_t len;
-    static char newdir[MC_MAXPATHLEN];
-
-    len = strlen (mc_config_get_home_dir ());
-    if (mc_config_get_home_dir () != NULL && strncmp (dir, mc_config_get_home_dir (), len) == 0 &&
-        (dir[len] == PATH_SEP || dir[len] == '\0'))
-    {
-        newdir[0] = '~';
-        g_strlcpy (&newdir[1], &dir[len], sizeof (newdir) - 1);
-        return newdir;
-    }
-
-    /* We do not strip homes in /#ftp tree, I do not like ~'s there 
-       (see ftpfs.c why) */
-    g_strlcpy (newdir, dir, sizeof (newdir));
-    strip_password (newdir, 1);
-    return newdir;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1054,21 +972,28 @@ convert_controls (const char *p)
  */
 
 char *
-diff_two_paths (const char *first, const char *second)
+diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     char *p, *q, *r, *s, *buf = NULL;
     int i, j, prevlen = -1, currlen;
     char *my_first = NULL, *my_second = NULL;
+    char *path_str;
 
-    my_first = resolve_symlinks (first);
+    path_str = vfs_path_to_str (vpath1);
+    my_first = resolve_symlinks (path_str);
+    g_free (path_str);
     if (my_first == NULL)
         return NULL;
-    my_second = resolve_symlinks (second);
+
+    path_str = vfs_path_to_str (vpath2);
+    my_second = resolve_symlinks (path_str);
+    g_free (path_str);
     if (my_second == NULL)
     {
         g_free (my_first);
         return NULL;
     }
+
     for (j = 0; j < 2; j++)
     {
         p = my_first;
@@ -1122,22 +1047,6 @@ diff_two_paths (const char *first, const char *second)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * If filename is NULL, then we just append PATH_SEP to the dir
- */
-
-char *
-concat_dir_and_file (const char *dir, const char *file)
-{
-    int i = strlen (dir);
-
-    if (dir[i - 1] == PATH_SEP)
-        return g_strconcat (dir, file, (char *) NULL);
-    else
-        return g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Append text to GList, remove all entries with the same text
  */
 
@@ -1175,101 +1084,20 @@ list_append_unique (GList * list, char *text)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* Following code heavily borrows from libiberty, mkstemps.c */
-/*
- * Arguments:
- * pname (output) - pointer to the name of the temp file (needs g_free).
- *                  NULL if the function fails.
- * prefix - part of the filename before the random part.
- *          Prepend $TMPDIR or /tmp if there are no path separators.
- * suffix - if not NULL, part of the filename after the random part.
- *
- * Result:
- * handle of the open file or -1 if couldn't open any.
- */
-
-int
-mc_mkstemps (char **pname, const char *prefix, const char *suffix)
-{
-    static const char letters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    static unsigned long value;
-    struct timeval tv;
-    char *tmpbase;
-    char *tmpname;
-    char *XXXXXX;
-    int count;
-
-    if (strchr (prefix, PATH_SEP) == NULL)
-    {
-        /* Add prefix first to find the position of XXXXXX */
-        tmpbase = concat_dir_and_file (mc_tmpdir (), prefix);
-    }
-    else
-    {
-        tmpbase = g_strdup (prefix);
-    }
-
-    tmpname = g_strconcat (tmpbase, "XXXXXX", suffix, (char *) NULL);
-    *pname = tmpname;
-    XXXXXX = &tmpname[strlen (tmpbase)];
-    g_free (tmpbase);
-
-    /* Get some more or less random data.  */
-    gettimeofday (&tv, NULL);
-    value += (tv.tv_usec << 16) ^ tv.tv_sec ^ getpid ();
-
-    for (count = 0; count < TMP_MAX; ++count)
-    {
-        unsigned long v = value;
-        int fd;
-
-        /* Fill in the random bits.  */
-        XXXXXX[0] = letters[v % 62];
-        v /= 62;
-        XXXXXX[1] = letters[v % 62];
-        v /= 62;
-        XXXXXX[2] = letters[v % 62];
-        v /= 62;
-        XXXXXX[3] = letters[v % 62];
-        v /= 62;
-        XXXXXX[4] = letters[v % 62];
-        v /= 62;
-        XXXXXX[5] = letters[v % 62];
-
-        fd = open (tmpname, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, S_IRUSR | S_IWUSR);
-        if (fd >= 0)
-        {
-            /* Successfully created.  */
-            return fd;
-        }
-
-        /* This is a random value.  It is only necessary that the next
-           TMP_MAX values generated by adding 7777 to VALUE are different
-           with (module 2^32).  */
-        value += 7777;
-    }
-
-    /* Unsuccessful. Free the filename. */
-    g_free (tmpname);
-    *pname = NULL;
-
-    return -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Read and restore position for the given filename.
  * If there is no stored data, return line 1 and col 0.
  */
 
 void
-load_file_position (const char *filename, long *line, long *column, off_t * offset,
+load_file_position (const vfs_path_t * filename_vpath, long *line, long *column, off_t * offset,
                     GArray ** bookmarks)
 {
     char *fn;
     FILE *f;
     char buf[MC_MAXPATHLEN + 100];
-    const size_t len = strlen (filename);
+    const size_t len = vfs_path_len (filename_vpath);
+    char *filename;
 
     /* defaults */
     *line = 1;
@@ -1285,6 +1113,7 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
 
     /* prepare array for serialized bookmarks */
     *bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
+    filename = vfs_path_to_str (filename_vpath);
 
     while (fgets (buf, sizeof (buf), f) != NULL)
     {
@@ -1344,6 +1173,7 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
         g_strfreev (pos_tokens);
     }
 
+    g_free (filename);
     fclose (f);
 }
 
@@ -1353,15 +1183,17 @@ load_file_position (const char *filename, long *line, long *column, off_t * offs
  */
 
 void
-save_file_position (const char *filename, long line, long column, off_t offset, GArray * bookmarks)
+save_file_position (const vfs_path_t * filename_vpath, long line, long column, off_t offset,
+                    GArray * bookmarks)
 {
     static size_t filepos_max_saved_entries = 0;
     char *fn, *tmp_fn;
     FILE *f, *tmp_f;
     char buf[MC_MAXPATHLEN + 100];
     size_t i;
-    const size_t len = strlen (filename);
+    const size_t len = vfs_path_len (filename_vpath);
     gboolean src_error = FALSE;
+    char *filename;
 
     if (filepos_max_saved_entries == 0)
         filepos_max_saved_entries = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
@@ -1386,6 +1218,7 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
         goto open_source_error;
     }
 
+    filename = vfs_path_to_str (filename_vpath);
     /* put the new record */
     if (line != 1 || column != 0 || bookmarks != NULL)
     {
@@ -1413,6 +1246,7 @@ save_file_position (const char *filename, long line, long column, off_t offset, 
     }
 
   write_position_error:
+    g_free (filename);
     fclose (tmp_f);
   open_source_error:
     g_free (tmp_fn);
@@ -1514,7 +1348,13 @@ mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suf
         return FALSE;
 
     if (exist_file (backup_path))
-        mc_unlink (backup_path);
+    {
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (backup_path);
+        mc_unlink (vpath);
+        vfs_path_free (vpath);
+    }
 
     g_free (backup_path);
     return TRUE;

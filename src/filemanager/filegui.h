@@ -36,8 +36,8 @@ void file_progress_show (FileOpContext * ctx, off_t done, off_t total,
 void file_progress_show_count (FileOpContext * ctx, size_t done, size_t total);
 void file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx,
                                uintmax_t copied_bytes, gboolean show_summary);
-void file_progress_show_source (FileOpContext * ctx, const char *path);
-void file_progress_show_target (FileOpContext * ctx, const char *path);
+void file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath);
+void file_progress_show_target (FileOpContext * ctx, const vfs_path_t * path);
 void file_progress_show_deleting (FileOpContext * ctx, const char *path);
 
 /*** inline functions ****************************************************************************/

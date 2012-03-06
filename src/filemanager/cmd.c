@@ -82,6 +82,7 @@
 #include "fileopctx.h"
 #include "file.h"               /* file operation routines */
 #include "find.h"               /* find_file() */
+#include "filenot.h"
 #include "hotlist.h"            /* hotlist_show() */
 #include "panel.h"              /* WPanel */
 #include "tree.h"               /* tree_chdir() */
@@ -158,6 +159,8 @@ do_view_cmd (gboolean normal)
     /* Directories are viewed by changing to them */
     if (S_ISDIR (selection (current_panel)->st.st_mode) || link_isdir (selection (current_panel)))
     {
+        vfs_path_t *fname_vpath;
+
         if (confirm_view_dir && (current_panel->marked || current_panel->dirs_marked))
         {
             if (query_dialog
@@ -167,8 +170,10 @@ do_view_cmd (gboolean normal)
                 return;
             }
         }
-        if (!do_cd (selection (current_panel)->fname, cd_exact))
+        fname_vpath = vfs_path_from_str (selection (current_panel)->fname);
+        if (!do_cd (fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+        vfs_path_free (fname_vpath);
     }
     else
     {
@@ -178,11 +183,12 @@ do_view_cmd (gboolean normal)
 
         while (TRUE)
         {
-            char *filename;
+            vfs_path_t *filename_vpath;
             int dir;
 
-            filename = current_panel->dir.list[file_idx].fname;
-            dir = view_file (filename, normal, use_internal_view);
+            filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
+            dir = view_file (filename_vpath, normal, use_internal_view);
+            vfs_path_free (filename_vpath);
             if (dir == 0)
                 break;
             file_idx = scan_for_file (current_panel, file_idx, dir);
@@ -195,9 +201,9 @@ do_view_cmd (gboolean normal)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-do_edit (const char *what)
+do_edit (const vfs_path_t * what_vpath)
 {
-    do_edit_at_line (what, use_internal_edit, 0);
+    do_edit_at_line (what_vpath, use_internal_edit, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -307,18 +313,23 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-compare_files (char *name1, char *name2, off_t size)
+compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
 {
     int file1, file2;
+    char *name;
     int result = -1;            /* Different by default */
 
     if (size == 0)
         return 0;
 
-    file1 = open (name1, O_RDONLY);
+    name = vfs_path_to_str (vpath1);
+    file1 = open (name, O_RDONLY);
+    g_free (name);
     if (file1 >= 0)
     {
-        file2 = open (name2, O_RDONLY);
+        name = vfs_path_to_str (vpath2);
+        file2 = open (name, O_RDONLY);
+        g_free (name);
         if (file2 >= 0)
         {
 #ifdef HAVE_MMAP
@@ -362,7 +373,6 @@ static void
 compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
 {
     int i, j;
-    char *src_name, *dst_name;
 
     /* No marks by default */
     panel->marked = 0;
@@ -424,12 +434,16 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
             }
 
             /* Thorough compare on, do byte-by-byte comparison */
-            src_name = concat_dir_and_file (panel->cwd, source->fname);
-            dst_name = concat_dir_and_file (other->cwd, target->fname);
-            if (compare_files (src_name, dst_name, source->st.st_size))
-                do_file_mark (panel, i, 1);
-            g_free (src_name);
-            g_free (dst_name);
+            {
+                vfs_path_t *src_name, *dst_name;
+
+                src_name = vfs_path_append_new (panel->cwd_vpath, source->fname, NULL);
+                dst_name = vfs_path_append_new (other->cwd_vpath, target->fname, NULL);
+                if (compare_files (src_name, dst_name, source->st.st_size))
+                    do_file_mark (panel, i, 1);
+                vfs_path_free (src_name);
+                vfs_path_free (dst_name);
+            }
         }
     }                           /* for (i ...) */
 }
@@ -440,7 +454,9 @@ static void
 do_link (link_type_t link_type, const char *fname)
 {
     char *dest = NULL, *src = NULL;
+    vfs_path_t *fname_vpath, *dest_vpath = NULL;
 
+    fname_vpath = vfs_path_from_str (fname);
     if (link_type == LINK_HARDLINK)
     {
         src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
@@ -448,41 +464,55 @@ do_link (link_type_t link_type, const char *fname)
         if (!dest || !*dest)
             goto cleanup;
         save_cwds_stat ();
-        if (-1 == mc_link (fname, dest))
+        dest_vpath = vfs_path_from_str (dest);
+        if (-1 == mc_link (fname_vpath, dest_vpath))
             message (D_ERROR, MSG_ERROR, _("link: %s"), unix_error_string (errno));
     }
     else
     {
-        char *s;
-        char *d;
+        vfs_path_t *s, *d;
 
         /* suggest the full path for symlink, and either the full or
            relative path to the file it points to  */
-        s = concat_dir_and_file (current_panel->cwd, fname);
+        s = vfs_path_append_new (current_panel->cwd_vpath, fname, NULL);
 
         if (get_other_type () == view_listing)
-            d = concat_dir_and_file (other_panel->cwd, fname);
+            d = vfs_path_append_new (other_panel->cwd_vpath, fname, NULL);
         else
-            d = g_strdup (fname);
+            d = vfs_path_from_str (fname);
 
         if (link_type == LINK_SYMLINK_RELATIVE)
-            s = diff_two_paths (other_panel->cwd, s);
+        {
+            char *s_str;
+
+            s_str = diff_two_paths (other_panel->cwd_vpath, s);
+            vfs_path_free (s);
+            s = vfs_path_from_str_flags (s_str, VPF_NO_CANON);
+            g_free (s_str);
+        }
 
         symlink_dialog (s, d, &dest, &src);
-        g_free (d);
-        g_free (s);
+        vfs_path_free (d);
+        vfs_path_free (s);
 
         if (!dest || !*dest || !src || !*src)
             goto cleanup;
         save_cwds_stat ();
-        if (-1 == mc_symlink (dest, src))
+
+        dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
+
+        s = vfs_path_from_str (src);
+        if (mc_symlink (dest_vpath, s) == -1)
             message (D_ERROR, MSG_ERROR, _("symlink: %s"), unix_error_string (errno));
+        vfs_path_free (s);
     }
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 
   cleanup:
+    vfs_path_free (fname_vpath);
+    vfs_path_free (dest_vpath);
     g_free (src);
     g_free (dest);
 }
@@ -536,12 +566,19 @@ nice_cd (const char *text, const char *xtext, const char *help,
     if (*cd_path != PATH_SEP)
     {
         char *tmp = cd_path;
+
         cd_path = g_strconcat (PATH_SEP_STR, tmp, (char *) NULL);
         g_free (tmp);
     }
 
-    if (!do_panel_cd (MENU_PANEL, cd_path, cd_parse_command))
-        message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
+    {
+        vfs_path_t *cd_vpath;
+
+        cd_vpath = vfs_path_from_str_flags (cd_path, VPF_NO_CANON);
+        if (!do_panel_cd (MENU_PANEL, cd_vpath, cd_parse_command))
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
+        vfs_path_free (cd_vpath);
+    }
     g_free (cd_path);
     g_free (machine);
 }
@@ -620,7 +657,7 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-view_file_at_line (const char *filename, int plain_view, int internal, int start_line)
+view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal, int start_line)
 {
     static const char *viewer = NULL;
     int move_dir = 0;
@@ -644,7 +681,7 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
         mcview_default_nroff_flag = 0;
         mcview_default_magic_flag = 0;
 
-        switch (mcview_viewer (NULL, filename, start_line))
+        switch (mcview_viewer (NULL, filename_vpath, start_line))
         {
         case MCVIEW_WANT_NEXT:
             move_dir = 1;
@@ -674,9 +711,9 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
         else
             strcpy (view_entry, "View");
 
-        if (regex_command (filename, view_entry, &move_dir) == 0)
+        if (regex_command (filename_vpath, view_entry, &move_dir) == 0)
         {
-            switch (mcview_viewer (NULL, filename, start_line))
+            switch (mcview_viewer (NULL, filename_vpath, start_line))
             {
             case MCVIEW_WANT_NEXT:
                 move_dir = 1;
@@ -702,7 +739,7 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
                 viewer = "view";
         }
 
-        execute_with_vfs_arg (viewer, filename);
+        execute_with_vfs_arg (viewer, filename_vpath);
     }
 
     return move_dir;
@@ -712,16 +749,16 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
 /** view_file (filename, plain_view, internal)
  *
  * Inputs:
- *   filename:   The file name to view
- *   plain_view: If set does not do any fancy pre-processing (no filtering) and
- *               always invokes the internal viewer.
- *   internal:   If set uses the internal viewer, otherwise an external viewer.
+ *   filename_vpath: The file name to view
+ *   plain_view:     If set does not do any fancy pre-processing (no filtering) and
+ *                   always invokes the internal viewer.
+ *   internal:       If set uses the internal viewer, otherwise an external viewer.
  */
 
 int
-view_file (const char *filename, int plain_view, int internal)
+view_file (const vfs_path_t * filename_vpath, int plain_view, int internal)
 {
-    return view_file_at_line (filename, plain_view, internal, 0);
+    return view_file_at_line (filename_vpath, plain_view, internal, 0);
 }
 
 
@@ -741,6 +778,7 @@ void
 view_file_cmd (void)
 {
     char *filename;
+    vfs_path_t *vpath;
 
     filename =
         input_expand_dialog (_("View file"), _("Filename:"),
@@ -748,8 +786,10 @@ view_file_cmd (void)
     if (!filename)
         return;
 
-    view_file (filename, 0, use_internal_view);
+    vpath = vfs_path_from_str (filename);
     g_free (filename);
+    view_file (vpath, 0, use_internal_view);
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -780,7 +820,7 @@ view_filtered_cmd (void)
 
     if (command != NULL)
     {
-        mcview_viewer (command, "", 0);
+        mcview_viewer (command, NULL, 0);
         g_free (command);
         dialog_switch_process_pending ();
     }
@@ -789,13 +829,13 @@ view_filtered_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_edit_at_line (const char *what, gboolean internal, int start_line)
+do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_line)
 {
     static const char *editor = NULL;
 
 #ifdef USE_INTERNAL_EDIT
     if (internal)
-        edit_file (what, start_line);
+        edit_file (what_vpath, start_line);
     else
 #else
     (void) start_line;
@@ -807,7 +847,7 @@ do_edit_at_line (const char *what, gboolean internal, int start_line)
             if (editor == NULL)
                 editor = get_default_editor ();
         }
-        execute_with_vfs_arg (editor, what);
+        execute_with_vfs_arg (editor, what_vpath);
     }
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
@@ -826,8 +866,12 @@ do_edit_at_line (const char *what, gboolean internal, int start_line)
 void
 edit_cmd (void)
 {
-    if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
-        do_edit (selection (current_panel)->fname);
+    vfs_path_t *fname;
+
+    fname = vfs_path_from_str (selection (current_panel)->fname);
+    if (regex_command (fname, "Edit", NULL) == 0)
+        do_edit (fname);
+    vfs_path_free (fname);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -836,8 +880,12 @@ edit_cmd (void)
 void
 edit_cmd_force_internal (void)
 {
-    if (regex_command (selection (current_panel)->fname, "Edit", NULL) == 0)
-        do_edit_at_line (selection (current_panel)->fname, TRUE, 0);
+    vfs_path_t *fname;
+
+    fname = vfs_path_from_str (selection (current_panel)->fname);
+    if (regex_command (fname, "Edit", NULL) == 0)
+        do_edit_at_line (fname, TRUE, 0);
+    vfs_path_free (fname);
 }
 #endif
 
@@ -913,7 +961,7 @@ rename_cmd_local (void)
 void
 mkdir_cmd (void)
 {
-    char *dir, *absdir;
+    char *dir;
     const char *name = "";
 
     /* If 'on' then automatically fills name with current selected item name */
@@ -929,10 +977,11 @@ mkdir_cmd (void)
 
     if (*dir)
     {
+        vfs_path_t *absdir;
         if (dir[0] == '/' || dir[0] == '~')
-            absdir = g_strdup (dir);
+            absdir = vfs_path_from_str (dir);
         else
-            absdir = concat_dir_and_file (current_panel->cwd, dir);
+            absdir = vfs_path_append_new (current_panel->cwd_vpath, dir, NULL);
 
         save_cwds_stat ();
         if (my_mkdir (absdir, 0777) == 0)
@@ -945,7 +994,7 @@ mkdir_cmd (void)
         {
             message (D_ERROR, MSG_ERROR, "%s", unix_error_string (errno));
         }
-        g_free (absdir);
+        vfs_path_free (absdir);
     }
     g_free (dir);
 }
@@ -1009,9 +1058,19 @@ reread_cmd (void)
 {
     panel_update_flags_t flag = UP_ONLY_CURRENT;
 
-    if (get_current_type () == view_listing && get_other_type () == view_listing
-        && strcmp (current_panel->cwd, other_panel->cwd) == 0)
-        flag = UP_OPTIMIZE;
+    if (get_current_type () == view_listing && get_other_type () == view_listing)
+    {
+        char *c_cwd, *o_cwd;
+
+        c_cwd = vfs_path_to_str (current_panel->cwd_vpath);
+        o_cwd = vfs_path_to_str (other_panel->cwd_vpath);
+
+        if (strcmp (c_cwd, o_cwd) == 0)
+            flag = UP_OPTIMIZE;
+
+        g_free (c_cwd);
+        g_free (o_cwd);
+    }
 
     update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
@@ -1054,8 +1113,8 @@ unselect_cmd (void)
 void
 ext_cmd (void)
 {
-    char *buffer;
-    char *extdir;
+    vfs_path_t *buffer_vpath;
+    vfs_path_t *extdir_vpath;
     int dir;
 
     dir = 0;
@@ -1065,25 +1124,25 @@ ext_cmd (void)
                             _("Which extension file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_global.sysconfig_dir, MC_LIB_EXT);
+    extdir_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, NULL);
 
     if (dir == 0)
     {
-        buffer = mc_config_get_full_path (MC_FILEBIND_FILE);
-        check_for_default (extdir, buffer);
-        do_edit (buffer);
-        g_free (buffer);
+        buffer_vpath = mc_config_get_full_vpath (MC_FILEBIND_FILE);
+        check_for_default (extdir_vpath, buffer_vpath);
+        do_edit (buffer_vpath);
+        vfs_path_free (buffer_vpath);
     }
     else if (dir == 1)
     {
-        if (!exist_file (extdir))
+        if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
         {
-            g_free (extdir);
-            extdir = concat_dir_and_file (mc_global.share_data_dir, MC_LIB_EXT);
+            vfs_path_free (extdir_vpath);
+            extdir_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_LIB_EXT, NULL);
         }
-        do_edit (extdir);
+        do_edit (extdir_vpath);
     }
-    g_free (extdir);
+    vfs_path_free (extdir_vpath);
     flush_extension_file ();
 }
 
@@ -1093,53 +1152,53 @@ ext_cmd (void)
 void
 edit_mc_menu_cmd (void)
 {
-    char *buffer;
-    char *menufile;
+    vfs_path_t *buffer_vpath;
+    vfs_path_t *menufile_vpath;
     int dir = 0;
 
     dir = query_dialog (_("Menu edit"),
                         _("Which menu file do you want to edit?"),
                         D_NORMAL, geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile = concat_dir_and_file (mc_global.sysconfig_dir, MC_GLOBAL_MENU);
+    menufile_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, NULL);
 
-    if (!exist_file (menufile))
+    if (!exist_file (vfs_path_get_last_path_str (menufile_vpath)))
     {
-        g_free (menufile);
-        menufile = concat_dir_and_file (mc_global.share_data_dir, MC_GLOBAL_MENU);
+        vfs_path_free (menufile_vpath);
+        menufile_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, NULL);
     }
 
     switch (dir)
     {
     case 0:
-        buffer = g_strdup (MC_LOCAL_MENU);
-        check_for_default (menufile, buffer);
-        chmod (buffer, 0600);
+        buffer_vpath = vfs_path_from_str (MC_LOCAL_MENU);
+        check_for_default (menufile_vpath, buffer_vpath);
+        chmod (vfs_path_get_last_path_str (buffer_vpath), 0600);
         break;
 
     case 1:
-        buffer = mc_config_get_full_path (MC_USERMENU_FILE);
-        check_for_default (menufile, buffer);
+        buffer_vpath = mc_config_get_full_vpath (MC_USERMENU_FILE);
+        check_for_default (menufile_vpath, buffer_vpath);
         break;
 
     case 2:
-        buffer = concat_dir_and_file (mc_global.sysconfig_dir, MC_GLOBAL_MENU);
-        if (!exist_file (buffer))
+        buffer_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, NULL);
+        if (!exist_file (vfs_path_get_last_path_str (buffer_vpath)))
         {
-            g_free (buffer);
-            buffer = concat_dir_and_file (mc_global.share_data_dir, MC_GLOBAL_MENU);
+            vfs_path_free (buffer_vpath);
+            buffer_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, NULL);
         }
         break;
 
     default:
-        g_free (menufile);
+        vfs_path_free (menufile_vpath);
         return;
     }
 
-    do_edit (buffer);
+    do_edit (buffer_vpath);
 
-    g_free (buffer);
-    g_free (menufile);
+    vfs_path_free (buffer_vpath);
+    vfs_path_free (menufile_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1147,8 +1206,8 @@ edit_mc_menu_cmd (void)
 void
 edit_fhl_cmd (void)
 {
-    char *buffer = NULL;
-    char *fhlfile = NULL;
+    vfs_path_t *buffer_vpath = NULL;
+    vfs_path_t *fhlfile_vpath = NULL;
 
     int dir;
 
@@ -1159,25 +1218,26 @@ edit_fhl_cmd (void)
                             _("Which highlighting file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    fhlfile = concat_dir_and_file (mc_global.sysconfig_dir, MC_FHL_INI_FILE);
+    fhlfile_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, NULL);
 
     if (dir == 0)
     {
-        buffer = mc_config_get_full_path (MC_FHL_INI_FILE);
-        check_for_default (fhlfile, buffer);
-        do_edit (buffer);
-        g_free (buffer);
+        buffer_vpath = mc_config_get_full_vpath (MC_FHL_INI_FILE);
+        check_for_default (fhlfile_vpath, buffer_vpath);
+        do_edit (buffer_vpath);
+        vfs_path_free (buffer_vpath);
     }
     else if (dir == 1)
     {
-        if (!exist_file (fhlfile))
+        if (!exist_file (vfs_path_get_last_path_str (fhlfile_vpath)))
         {
-            g_free (fhlfile);
-            fhlfile = concat_dir_and_file (mc_global.sysconfig_dir, MC_FHL_INI_FILE);
+            vfs_path_free (fhlfile_vpath);
+            fhlfile_vpath =
+                vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, NULL);
         }
-        do_edit (fhlfile);
+        do_edit (fhlfile_vpath);
     }
-    g_free (fhlfile);
+    vfs_path_free (fhlfile_vpath);
 
     /* refresh highlighting rules */
     mc_fhl_free (&mc_filehighlight);
@@ -1211,13 +1271,16 @@ void
 vfs_list (void)
 {
     char *target;
+    vfs_path_t *target_vpath;
 
     target = hotlist_show (LIST_VFSLIST);
     if (!target)
         return;
 
-    if (!do_cd (target, cd_exact))
+    target_vpath = vfs_path_from_str (target);
+    if (!do_cd (target_vpath, cd_exact))
         message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+    vfs_path_free (target_vpath);
     g_free (target);
 }
 #endif /* ENABLE_VFS */
@@ -1320,8 +1383,10 @@ edit_symlink_cmd (void)
         char *p = NULL;
         int i;
         char *dest, *q;
+        vfs_path_t *p_vpath;
 
         p = selection (current_panel)->fname;
+        p_vpath = vfs_path_from_str (p);
 
         q = g_strdup_printf (_("Symlink `%s\' points to:"), str_trunc (p, 32));
 
@@ -1335,16 +1400,20 @@ edit_symlink_cmd (void)
                 if (*dest && strcmp (buffer, dest))
                 {
                     save_cwds_stat ();
-                    if (-1 == mc_unlink (p))
+                    if (mc_unlink (p_vpath) == -1)
                     {
                         message (D_ERROR, MSG_ERROR, _("edit symlink, unable to remove %s: %s"),
                                  p, unix_error_string (errno));
                     }
                     else
                     {
-                        if (-1 == mc_symlink (dest, p))
+                        vfs_path_t *dest_vpath;
+
+                        dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
+                        if (mc_symlink (dest_vpath, p_vpath) == -1)
                             message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
                                      unix_error_string (errno));
+                        vfs_path_free (dest_vpath);
                     }
                     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
                     repaint_screen ();
@@ -1353,6 +1422,7 @@ edit_symlink_cmd (void)
             }
         }
         g_free (q);
+        vfs_path_free (p_vpath);
     }
     else
     {
@@ -1545,16 +1615,18 @@ single_dirsize_cmd (void)
         size_t marked = 0;
         uintmax_t total = 0;
         ComputeDirSizeUI *ui;
+        vfs_path_t *p;
 
         ui = compute_dir_size_create_ui ();
+        p = vfs_path_from_str_flags (entry->fname, VPF_NO_CANON);
 
-        if (compute_dir_size (entry->fname, ui, compute_dir_size_update_ui,
-                              &marked, &total, TRUE) == FILE_CONT)
+        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total, TRUE) == FILE_CONT)
         {
             entry->st.st_size = (off_t) total;
             entry->f.dir_size_computed = 1;
         }
 
+        vfs_path_free (p);
         compute_dir_size_destroy_ui (ui);
     }
 
@@ -1585,12 +1657,17 @@ dirsizes_cmd (void)
             && ((panel->dirs_marked && panel->dir.list[i].f.marked)
                 || !panel->dirs_marked) && strcmp (panel->dir.list[i].fname, "..") != 0)
         {
+            vfs_path_t *p;
             size_t marked = 0;
             uintmax_t total = 0;
+            gboolean ok;
 
-            if (compute_dir_size (panel->dir.list[i].fname,
-                                  ui, compute_dir_size_update_ui, &marked, &total,
-                                  TRUE) != FILE_CONT)
+            p = vfs_path_from_str_flags (panel->dir.list[i].fname, VPF_NO_CANON);
+            ok = compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total,
+                                   TRUE) != FILE_CONT;
+            vfs_path_free (p);
+
+            if (ok)
                 break;
 
             panel->dir.list[i].st.st_size = (off_t) total;
@@ -1612,17 +1689,18 @@ dirsizes_cmd (void)
 void
 save_setup_cmd (void)
 {
-    char *d1;
-    const char *d2;
+    vfs_path_t *vpath;
+    char *path;
 
-    d1 = mc_config_get_full_path (MC_CONFIG_FILE);
-    d2 = strip_home_and_password (d1);
-    g_free (d1);
+    vpath = mc_config_get_full_vpath (MC_CONFIG_FILE);
+    path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME);
+    vfs_path_free (vpath);
 
     if (save_setup (TRUE, TRUE))
-        message (D_NORMAL, _("Setup"), _("Setup saved to %s"), d2);
+        message (D_NORMAL, _("Setup"), _("Setup saved to %s"), path);
     else
-        message (D_ERROR, _("Setup"), _("Unable to save setup to %s"), d2);
+        message (D_ERROR, _("Setup"), _("Unable to save setup to %s"), path);
+    g_free (path);
 }
 
 /* --------------------------------------------------------------------------------------------- */

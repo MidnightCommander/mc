@@ -503,3 +503,24 @@ mc_config_get_full_path (const char *config_name)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get full path to config file by short name.
+ *
+ * @param config_name short name
+ * @return object with full path to config file
+ */
+
+vfs_path_t *
+mc_config_get_full_vpath (const char *config_name)
+{
+    vfs_path_t *ret_vpath;
+    char *str_path;
+
+    str_path = mc_config_get_full_path (config_name);
+
+    ret_vpath = vfs_path_from_str(str_path);
+    g_free (str_path);
+    return ret_vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */

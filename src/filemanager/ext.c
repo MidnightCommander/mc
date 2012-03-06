@@ -92,7 +92,7 @@ static char *data = NULL;
 static void
 exec_extension (const char *filename, const char *lc_data, int *move_dir, int start_line)
 {
-    char *file_name;
+    vfs_path_t *file_name_vpath;
     int cmd_file_fd;
     FILE *cmd_file;
     char *cmd = NULL;
@@ -106,7 +106,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     int is_cd = 0;
     char buffer[1024];
     char *p = 0;
-    char *localcopy = NULL;
+    vfs_path_t *localcopy_vpath = NULL;
     int do_local_copy;
     time_t localmtime = 0;
     struct stat mystat;
@@ -119,10 +119,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     vpath = vfs_path_from_str (filename);
 
     /* Avoid making a local copy if we are doing a cd */
-    if (!vfs_file_is_local (vpath))
-        do_local_copy = 1;
-    else
-        do_local_copy = 0;
+    do_local_copy = vfs_file_is_local (vpath) ? 0 : 1;
 
     /*
      * All commands should be run in /bin/sh regardless of user shell.
@@ -130,13 +127,13 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
      * Sometimes it's not needed (e.g. for %cd and %view commands),
      * but it's easier to create it anyway.
      */
-    cmd_file_fd = mc_mkstemps (&file_name, "mcext", SCRIPT_SUFFIX);
+    cmd_file_fd = mc_mkstemps (&file_name_vpath, "mcext", SCRIPT_SUFFIX);
 
     if (cmd_file_fd == -1)
     {
         message (D_ERROR, MSG_ERROR,
                  _("Cannot create temporary command file\n%s"), unix_error_string (errno));
-        return;
+        goto ret;
     }
 
     cmd_file = fdopen (cmd_file_fd, "w");
@@ -157,15 +154,13 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                 {
                     /* User canceled */
                     fclose (cmd_file);
-                    unlink (file_name);
-                    if (localcopy)
+                    mc_unlink (file_name_vpath);
+                    if (localcopy_vpath != NULL)
                     {
-                        mc_ungetlocalcopy (filename, localcopy, 0);
-                        g_free (localcopy);
+                        mc_ungetlocalcopy (vpath, localcopy_vpath, FALSE);
+                        vfs_path_free (localcopy_vpath);
                     }
-                    g_free (file_name);
-                    vfs_path_free (vpath);
-                    return;
+                    goto ret;
                 }
                 fputs (parameter, cmd_file);
                 written_nonspace = 1;
@@ -228,22 +223,23 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                             {
                                 if (do_local_copy)
                                 {
-                                    localcopy = mc_getlocalcopy (filename);
-                                    if (localcopy == NULL)
+                                    localcopy_vpath = mc_getlocalcopy (vpath);
+                                    if (localcopy_vpath == NULL)
                                     {
                                         fclose (cmd_file);
-                                        unlink (file_name);
-                                        g_free (file_name);
-                                        vfs_path_free (vpath);
-                                        return;
+                                        mc_unlink (file_name_vpath);
+                                        goto ret;
                                     }
-                                    mc_stat (localcopy, &mystat);
+                                    mc_stat (localcopy_vpath, &mystat);
                                     localmtime = mystat.st_mtime;
-                                    text = quote_func (localcopy, 0);
+                                    text =
+                                        quote_func (vfs_path_get_last_path_str (localcopy_vpath),
+                                                    0);
                                 }
                                 else
                                 {
-                                    vfs_path_element_t *path_element;
+                                    const vfs_path_element_t *path_element;
+
                                     path_element = vfs_path_get_by_index (vpath, -1);
                                     text = quote_func (path_element->path, 0);
                                 }
@@ -283,22 +279,32 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
      * so we clean up after calling view().
      */
     if (!run_view)
+    {
+        char *file_name;
+
+        file_name = vfs_path_to_str (file_name_vpath);
         fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
+        g_free (file_name);
+    }
 
     fclose (cmd_file);
 
     if ((run_view && !written_nonspace) || is_cd)
     {
-        unlink (file_name);
-        g_free (file_name);
-        file_name = NULL;
+        mc_unlink (file_name_vpath);
+        vfs_path_free (file_name_vpath);
+        file_name_vpath = NULL;
     }
     else
     {
+        char *file_name;
+
+        file_name = vfs_path_to_str (file_name_vpath);
         /* Set executable flag on the command file ... */
-        chmod (file_name, S_IRWXU);
+        mc_chmod (file_name_vpath, S_IRWXU);
         /* ... but don't rely on it - run /bin/sh explicitly */
         cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
+        g_free (file_name);
     }
 
     if (run_view)
@@ -317,11 +323,11 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
          */
         if (written_nonspace)
         {
-            ret = mcview_viewer (cmd, filename, start_line);
-            unlink (file_name);
+            ret = mcview_viewer (cmd, vpath, start_line);
+            mc_unlink (file_name_vpath);
         }
         else
-            ret = mcview_viewer (NULL, filename, start_line);
+            ret = mcview_viewer (NULL, vpath, start_line);
 
         if (move_dir != NULL)
             switch (ret)
@@ -346,6 +352,8 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     else if (is_cd)
     {
         char *q;
+        vfs_path_t *p_vpath;
+
         *p = 0;
         p = buffer;
         /*      while (*p == ' ' && *p == '\t')
@@ -357,7 +365,10 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         while (q >= p && (*q == ' ' || *q == '\t'))
             q--;
         q[1] = 0;
-        do_cd (p, cd_parse_command);
+
+        p_vpath = vfs_path_from_str_flags (p, VPF_NO_CANON);
+        do_cd (p_vpath, cd_parse_command);
+        vfs_path_free (p_vpath);
     }
     else
     {
@@ -372,15 +383,16 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         }
     }
 
-    g_free (file_name);
     g_free (cmd);
 
-    if (localcopy)
+    if (localcopy_vpath != NULL)
     {
-        mc_stat (localcopy, &mystat);
-        mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
-        g_free (localcopy);
+        mc_stat (localcopy_vpath, &mystat);
+        mc_ungetlocalcopy (vpath, localcopy_vpath, localmtime != mystat.st_mtime);
+        vfs_path_free (localcopy_vpath);
     }
+  ret:
+    vfs_path_free (file_name_vpath);
     vfs_path_free (vpath);
 }
 
@@ -436,12 +448,12 @@ get_popen_information (const char *cmd_file, const char *args, char *buf, int bu
  */
 
 static int
-get_file_type_local (const char *filename, char *buf, int buflen)
+get_file_type_local (const vfs_path_t * filename_vpath, char *buf, int buflen)
 {
     char *tmp;
     int ret;
 
-    tmp = name_quote (filename, 0);
+    tmp = name_quote (vfs_path_get_last_path_str (filename_vpath), 0);
     ret = get_popen_information (FILE_CMD, tmp, buf, buflen);
     g_free (tmp);
 
@@ -456,12 +468,12 @@ get_file_type_local (const char *filename, char *buf, int buflen)
 
 #ifdef HAVE_CHARSET
 static int
-get_file_encoding_local (const char *filename, char *buf, int buflen)
+get_file_encoding_local (const vfs_path_t * filename_vpath, char *buf, int buflen)
 {
     char *tmp, *lang, *args;
     int ret;
 
-    tmp = name_quote (filename, 0);
+    tmp = name_quote (vfs_path_get_last_path_str (filename_vpath), 0);
     lang = name_quote (autodetect_codeset, 0);
     args = g_strconcat (" -L", lang, " -i ", tmp, (char *) NULL);
 
@@ -484,7 +496,7 @@ get_file_encoding_local (const char *filename, char *buf, int buflen)
  */
 
 static int
-regex_check_type (const char *filename, const char *ptr, int *have_type)
+regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_type)
 {
     int found = 0;
 
@@ -499,8 +511,8 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
 
     if (*have_type == 0)
     {
-        char *realname;         /* name used with "file" */
-        char *localfile;
+        vfs_path_t *localfile_vpath;
+        const char *realname;         /* name used with "file" */
 
 #ifdef HAVE_CHARSET
         int got_encoding_data;
@@ -509,15 +521,15 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
         /* Don't repeate even unsuccessful checks */
         *have_type = 1;
 
-        localfile = mc_getlocalcopy (filename);
-        if (localfile == NULL)
+        localfile_vpath = mc_getlocalcopy (filename_vpath);
+        if (localfile_vpath == NULL)
             return -1;
 
-        realname = localfile;
+        realname = vfs_path_get_last_path_str (localfile_vpath);
 
 #ifdef HAVE_CHARSET
         got_encoding_data = is_autodetect_codeset_enabled
-            ? get_file_encoding_local (localfile, encoding_id, sizeof (encoding_id)) : 0;
+            ? get_file_encoding_local (localfile_vpath, encoding_id, sizeof (encoding_id)) : 0;
 
         if (got_encoding_data > 0)
         {
@@ -536,9 +548,9 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
         }
 #endif /* HAVE_CHARSET */
 
-        mc_ungetlocalcopy (filename, localfile, 0);
+        mc_ungetlocalcopy (filename_vpath, localfile_vpath, FALSE);
 
-        got_data = get_file_type_local (localfile, content_string, sizeof (content_string));
+        got_data = get_file_type_local (localfile_vpath, content_string, sizeof (content_string));
 
         if (got_data > 0)
         {
@@ -570,7 +582,7 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
             /* No data */
             content_string[0] = '\0';
         }
-        g_free (realname);
+        vfs_path_free (localfile_vpath);
     }
 
     if (got_data == -1)
@@ -611,10 +623,10 @@ flush_extension_file (void)
  */
 
 int
-regex_command (const char *filename, const char *action, int *move_dir)
+regex_command (const vfs_path_t * filename_vpath, const char *action, int *move_dir)
 {
-    char *p, *q, *r, c;
-    int file_len = strlen (filename);
+    char *filename, *p, *q, *r, c;
+    size_t file_len;
     int found = 0;
     int error_flag = 0;
     int ret = 0;
@@ -646,11 +658,11 @@ regex_command (const char *filename, const char *action, int *move_dir)
         {
             g_free (extension_file);
           check_stock_mc_ext:
-            extension_file = concat_dir_and_file (mc_global.sysconfig_dir, MC_LIB_EXT);
+            extension_file = mc_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, NULL);
             if (!exist_file (extension_file))
             {
                 g_free (extension_file);
-                extension_file = concat_dir_and_file (mc_global.share_data_dir, MC_LIB_EXT);
+                extension_file = mc_build_filename (mc_global.share_data_dir, MC_LIB_EXT, NULL);
             }
             mc_user_ext = 0;
         }
@@ -698,10 +710,14 @@ regex_command (const char *filename, const char *action, int *move_dir)
             g_free (title);
         }
     }
-    mc_stat (filename, &mystat);
+
+    mc_stat (filename_vpath, &mystat);
 
     include_target = NULL;
     include_target_len = 0;
+    filename = vfs_path_to_str (filename_vpath);
+    file_len = vfs_path_len (filename_vpath);
+
     for (p = data; *p; p++)
     {
         for (q = p; *q == ' ' || *q == '\t'; q++);
@@ -747,14 +763,14 @@ regex_command (const char *filename, const char *action, int *move_dir)
             else if (!strncmp (p, "shell/", 6))
             {
                 p += 6;
-                if (*p == '.' && file_len >= (q - p))
+                if (*p == '.' && file_len >= (size_t)(q - p))
                 {
                     if (!strncmp (p, filename + file_len - (q - p), q - p))
                         found = 1;
                 }
                 else
                 {
-                    if (q - p == file_len && !strncmp (p, filename, q - p))
+                    if ((size_t)(q - p) == file_len && !strncmp (p, filename, q - p))
                         found = 1;
                 }
             }
@@ -762,7 +778,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
             {
                 int res;
                 p += 5;
-                res = regex_check_type (filename, p, &have_type);
+                res = regex_check_type (filename_vpath, p, &have_type);
                 if (res == 1)
                     found = 1;
                 if (res == -1)
@@ -843,6 +859,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
                 break;
         }
     }
+    g_free (filename);
     if (error_flag)
         return -1;
     return ret;

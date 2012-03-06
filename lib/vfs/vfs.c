@@ -408,8 +408,9 @@ vfs_current_is_local (void)
 vfs_class_flags_t
 vfs_file_class_flags (const vfs_path_t * vpath)
 {
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+    const vfs_path_element_t *path_element;
 
+    path_element = vfs_path_get_by_index (vpath, -1);
     if (!vfs_path_element_valid (path_element))
         return VFSF_UNKNOWN;
 
@@ -436,9 +437,9 @@ vfs_init (void)
 void
 vfs_setup_work_dir (void)
 {
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
-    g_free (_vfs_get_cwd ());
+    vfs_setup_cwd ();
 
     /* FIXME: is we really need for this check? */
     /*
@@ -518,14 +519,14 @@ vfs_print_message (const char *msg, ...)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Return current directory.  If it's local, reread the current directory
- * from the OS.  You must g_strdup() whatever this function returns.
+ * If it's local, reread the current directory
+ * from the OS.
  */
 
-char *
-_vfs_get_cwd (void)
+void
+vfs_setup_cwd (void)
 {
-    vfs_path_element_t *path_element;
+    const vfs_path_element_t *path_element;
 
     if (vfs_get_raw_current_dir () == NULL)
     {
@@ -538,28 +539,41 @@ _vfs_get_cwd (void)
 
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
 
-    if (path_element->class->flags & VFSF_LOCAL)
+    if ((path_element->class->flags & VFSF_LOCAL) != 0)
     {
-        char *tmp;
+        char *current_dir;
+        vfs_path_t *tmp_vpath;
 
-        tmp = g_get_current_dir ();
-        if (tmp != NULL)
+        current_dir = g_get_current_dir ();
+        tmp_vpath = vfs_path_from_str (current_dir);
+        g_free (current_dir);
+
+        if (tmp_vpath != NULL)
         {                       /* One of the directories in the path is not readable */
             struct stat my_stat, my_stat2;
 
             /* Check if it is O.K. to use the current_dir */
             if (!(mc_global.vfs.cd_symlinks
-                  && mc_stat (tmp, &my_stat) == 0
-                  && mc_stat (path_element->path, &my_stat2) == 0
+                  && mc_stat (tmp_vpath, &my_stat) == 0
+                  && mc_stat (vfs_get_raw_current_dir (), &my_stat2) == 0
                   && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev))
-            {
-                vfs_set_raw_current_dir (vfs_path_from_str (tmp));
-            }
-
-            g_free (tmp);
+                vfs_set_raw_current_dir (tmp_vpath);
+            else
+                vfs_path_free (tmp_vpath);
         }
     }
+}
 
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Return current directory.  If it's local, reread the current directory
+ * from the OS.
+ */
+
+char *
+_vfs_get_cwd (void)
+{
+    vfs_setup_cwd ();
     return vfs_path_to_str (vfs_get_raw_current_dir ());
 }
 
@@ -576,8 +590,9 @@ _vfs_get_cwd (void)
 vfs_path_t *
 vfs_change_encoding (vfs_path_t * vpath, const char *encoding)
 {
-    vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+    vfs_path_element_t *path_element;
 
+    path_element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, -1);
     /* don't add current encoding */
     if ((path_element->encoding != NULL) && (strcmp (encoding, path_element->encoding) == 0))
         return vpath;

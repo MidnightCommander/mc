@@ -43,7 +43,6 @@
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* save_file_position() */
-#include "lib/lock.h"           /* unlock_file() */
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
@@ -79,7 +78,7 @@ mcview_toggle_magic_mode (mcview_t * view)
 
     mcview_altered_magic_flag = 1;
     view->magic_mode = !view->magic_mode;
-    filename = g_strdup (view->filename);
+    filename = vfs_path_to_str (view->filename_vpath);
     command = g_strdup (view->command);
 
     mcview_done (view);
@@ -184,8 +183,8 @@ mcview_init (mcview_t * view)
 {
     size_t i;
 
-    view->filename = NULL;
-    view->workdir = NULL;
+    view->filename_vpath = NULL;
+    view->workdir_vpath = NULL;
     view->command = NULL;
     view->search_nroff_seq = NULL;
 
@@ -232,18 +231,12 @@ void
 mcview_done (mcview_t * view)
 {
     /* Save current file position */
-    if (mcview_remember_file_position && view->filename != NULL)
+    if (mcview_remember_file_position && view->filename_vpath != NULL)
     {
-        char *canon_fname;
-        vfs_path_t *vpath;
-        vpath = vfs_path_from_str (view->filename);
-        canon_fname = vfs_path_to_str (vpath);
-        save_file_position (canon_fname, -1, 0,
+        save_file_position (view->filename_vpath, -1, 0,
                             view->hex_mode ? view->hex_cursor : view->dpy_start,
                             view->saved_bookmarks);
         view->saved_bookmarks = NULL;
-        g_free (canon_fname);
-        vfs_path_free (vpath);
     }
 
     /* Write back the global viewer mode */
@@ -256,10 +249,10 @@ mcview_done (mcview_t * view)
 
     /* view->widget needs no destructor */
 
-    g_free (view->filename);
-    view->filename = NULL;
-    g_free (view->workdir);
-    view->workdir = NULL;
+    vfs_path_free (view->filename_vpath);
+    view->filename_vpath = NULL;
+    vfs_path_free (view->workdir_vpath);
+    view->workdir_vpath = NULL;
     g_free (view->command);
     view->command = NULL;
 
@@ -420,44 +413,19 @@ mcview_get_title (const Dlg_head * h, size_t len)
     const mcview_t *view = (const mcview_t *) find_widget_type (h, mcview_callback);
     const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
     const char *file_label;
+    char *view_filename;
+    char *ret_str;
+
+    view_filename = view->filename_vpath != NULL ? vfs_path_to_str (view->filename_vpath) : NULL;
 
     len -= 4;
 
-    file_label = view->filename != NULL ? view->filename :
-        view->command != NULL ? view->command : "";
+    file_label = view_filename != NULL ? view_filename : view->command != NULL ? view->command : "";
     file_label = str_term_trim (file_label, len - str_term_width1 (_("View: ")));
 
-    return g_strconcat (_("View: "), modified, file_label, (char *) NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-mcview_lock_file (mcview_t * view)
-{
-    char *fullpath;
-    gboolean ret;
-
-    fullpath = mc_build_filename (view->workdir, view->filename, (char *) NULL);
-    ret = lock_file (fullpath);
-    g_free (fullpath);
-
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-mcview_unlock_file (mcview_t * view)
-{
-    char *fullpath;
-    gboolean ret;
-
-    fullpath = mc_build_filename (view->workdir, view->filename, (char *) NULL);
-    ret = unlock_file (fullpath);
-    g_free (fullpath);
-
-    return ret;
+    ret_str = g_strconcat (_("View: "), modified, file_label, (char *) NULL);
+    g_free (view_filename);
+    return ret_str;
 }
 
 /* --------------------------------------------------------------------------------------------- */

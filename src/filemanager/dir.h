@@ -9,6 +9,7 @@
 
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/vfs/vfs.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -35,7 +36,7 @@ int do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean reve
                  gboolean case_sensitive, gboolean exec_ff, const char *fltr);
 void do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse,
               gboolean case_sensitive, gboolean exec_ff);
-int do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
+int do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int count,
                    gboolean reverse, gboolean case_sensitive, gboolean exec_ff, const char *fltr);
 void clean_dir (dir_list * list, int count);
 gboolean set_zero_dir (dir_list * list);
@@ -53,7 +54,7 @@ int sort_ctime (file_entry * a, file_entry * b);
 int sort_size (file_entry * a, file_entry * b);
 int sort_inode (file_entry * a, file_entry * b);
 
-gboolean if_link_is_exe (const char *full_name, const file_entry * file);
+gboolean if_link_is_exe (const vfs_path_t * full_name, const file_entry * file);
 
 /*** inline functions ****************************************************************************/
 

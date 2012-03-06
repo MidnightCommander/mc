@@ -215,40 +215,48 @@ cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const char *name)
+cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_path_t * vpath)
 {
     int fd, type;
     cpio_super_data_t *arch;
     mode_t mode;
     struct vfs_s_inode *root;
 
-    fd = mc_open (name, O_RDONLY);
+    fd = mc_open (vpath, O_RDONLY);
     if (fd == -1)
     {
+        char *name;
+
+        name = vfs_path_to_str (vpath);
         message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
+        g_free (name);
         return -1;
     }
 
-    super->name = g_strdup (name);
+    super->name = vfs_path_to_str (vpath);
     super->data = g_new (cpio_super_data_t, 1);
     arch = (cpio_super_data_t *) super->data;
     arch->fd = -1;              /* for now */
-    mc_stat (name, &arch->st);
+    mc_stat (vpath, &arch->st);
     arch->type = CPIO_UNKNOWN;
     arch->deferred = NULL;
 
-    type = get_compression_type (fd, name);
+    type = get_compression_type (fd, super->name);
     if (type != COMPRESSION_NONE)
     {
         char *s;
+        vfs_path_t *tmp_vpath;
 
         mc_close (fd);
-        s = g_strconcat (name, decompress_extension (type), (char *) NULL);
-        fd = mc_open (s, O_RDONLY);
+        s = g_strconcat (super->name, decompress_extension (type), (char *) NULL);
+        tmp_vpath = vfs_path_from_str (s);
+        fd = mc_open (tmp_vpath, O_RDONLY);
+        vfs_path_free (tmp_vpath);
         if (fd == -1)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
             g_free (s);
+            g_free (super->name);
             return -1;
         }
         g_free (s);
@@ -723,15 +731,11 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
                    const vfs_path_element_t * vpath_element)
 {
     int status = STATUS_START;
-    char *archive_name = vfs_path_to_str (vpath);
 
     (void) vpath_element;
 
-    if (cpio_open_cpio_file (vpath_element->class, super, archive_name) == -1)
-    {
-        g_free (archive_name);
+    if (cpio_open_cpio_file (vpath_element->class, super, vpath) == -1)
         return -1;
-    }
 
     while (TRUE)
     {
@@ -740,8 +744,14 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
         switch (status)
         {
         case STATUS_EOF:
-            message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"), archive_name);
-            return 0;
+            {
+                char *archive_name;
+
+                archive_name = vfs_path_to_str (vpath);
+                message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"), archive_name);
+                g_free (archive_name);
+                return 0;
+            }
         case STATUS_OK:
             continue;
         case STATUS_TRAIL:
@@ -750,7 +760,6 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
         break;
     }
 
-    g_free (archive_name);
     return 0;
 }
 
@@ -761,11 +770,9 @@ static void *
 cpio_super_check (const vfs_path_t * vpath)
 {
     static struct stat sb;
-    char *archive_name = vfs_path_to_str (vpath);
     int stat_result;
 
-    stat_result = mc_stat (archive_name, &sb);
-    g_free (archive_name);
+    stat_result = mc_stat (vpath, &sb);
     return (stat_result == 0 ? &sb : NULL);
 }
 
@@ -846,7 +853,7 @@ init_cpiofs (void)
 {
     static struct vfs_s_subclass cpio_subclass;
 
-    cpio_subclass.flags = VFS_S_READONLY;
+    cpio_subclass.flags = VFS_S_READONLY;        /* FIXME: cpiofs used own temp files */
     cpio_subclass.archive_check = cpio_super_check;
     cpio_subclass.archive_same = cpio_super_same;
     cpio_subclass.open_archive = cpio_open_archive;

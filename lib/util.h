@@ -12,6 +12,8 @@
 #include <inttypes.h>           /* uintmax_t */
 #include <unistd.h>
 
+#include "lib/vfs/vfs.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef MAXSYMLINKS
@@ -107,14 +109,7 @@ const char *size_trunc_sep (uintmax_t size, gboolean use_si);
 void size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si);
 const char *string_perm (mode_t mode_bits);
 
-/* @modifies path. @returns pointer into path. */
-char *strip_password (char *path, int has_prefix);
-
-/* @returns a pointer into a static buffer. */
-const char *strip_home_and_password (const char *dir);
-
 const char *extension (const char *);
-char *concat_dir_and_file (const char *dir, const char *file);
 const char *unix_error_string (int error_num);
 const char *skip_separators (const char *s);
 const char *skip_numbers (const char *s);
@@ -128,7 +123,7 @@ char *convert_controls (const char *s);
 /* overwrites passwd with '\0's and frees it. */
 void wipe_password (char *passwd);
 
-char *diff_two_paths (const char *first, const char *second);
+char *diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 
 /* Returns the basename of fname. The result is a pointer into fname. */
 const char *x_basename (const char *fname);
@@ -162,14 +157,6 @@ char *tilde_expand (const char *);
 void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
 void canonicalize_pathname (char *);
 
-/* Misc Unix functions */
-int my_mkdir (const char *s, mode_t mode);
-int my_rmdir (const char *s);
-
-/* Creating temporary files safely */
-const char *mc_tmpdir (void);
-int mc_mkstemps (char **pname, const char *prefix, const char *suffix);
-
 #ifdef HAVE_REALPATH
 #define mc_realpath realpath
 #else
@@ -185,10 +172,10 @@ GList *list_append_unique (GList * list, char *text);
 
 /* Position saving and restoring */
 /* Load position for the given filename */
-void load_file_position (const char *filename, long *line, long *column, off_t * offset,
-                         GArray ** bookmarks);
+void load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
+                         off_t * offset, GArray ** bookmarks);
 /* Save position for the given filename */
-void save_file_position (const char *filename, long line, long column, off_t offset,
+void save_file_position (const vfs_path_t * filename_vpath, long line, long column, off_t offset,
                          GArray * bookmarks);
 
 
@@ -206,6 +193,7 @@ gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
 char *guess_message_value (void);
 
 char *mc_build_filename (const char *first_element, ...);
+char *mc_build_filenamev (const char *first_element, va_list args);
 
 /*** inline functions **************************************************/
 

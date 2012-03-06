@@ -242,10 +242,14 @@ chown_done (void)
 static void
 do_chown (uid_t u, gid_t g)
 {
-    if (mc_chown (current_panel->dir.list[current_file].fname, u, g) == -1)
+    vfs_path_t *vpath;
+
+    vpath = vfs_path_from_str (current_panel->dir.list[current_file].fname);
+    if (mc_chown (vpath, u, g) == -1)
         message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                  current_panel->dir.list[current_file].fname, unix_error_string (errno));
 
+    vfs_path_free (vpath);
     do_file_mark (current_panel, current_file, 0);
 }
 
@@ -284,6 +288,8 @@ chown_cmd (void)
 
     do
     {                           /* do while any files remaining */
+        vfs_path_t *vpath;
+
         ch_dlg = init_chown ();
         new_user = new_group = -1;
 
@@ -292,11 +298,14 @@ chown_cmd (void)
         else
             fname = selection (current_panel)->fname;   /* single file */
 
-        if (mc_stat (fname, &sf_stat) != 0)
+        vpath = vfs_path_from_str (fname);
+        if (mc_stat (vpath, &sf_stat) != 0)
         {                       /* get status of file */
             destroy_dlg (ch_dlg);
+            vfs_path_free (vpath);
             break;
         }
+        vfs_path_free (vpath);
 
         /* select in listboxes */
         listbox_select_entry (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));
@@ -362,10 +371,14 @@ chown_cmd (void)
                     new_user = user->pw_uid;
                 if (ch_dlg->ret_value == B_ENTER)
                 {
+                    vfs_path_t *fname_vpath;
+
+                    fname_vpath = vfs_path_from_str (fname);
                     need_update = 1;
-                    if (mc_chown (fname, new_user, new_group) == -1)
+                    if (mc_chown (fname_vpath, new_user, new_group) == -1)
                         message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                                  fname, unix_error_string (errno));
+                    vfs_path_free (vpath);
                 }
                 else
                     apply_chowns (new_user, new_group);

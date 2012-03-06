@@ -36,6 +36,7 @@
 #include "lib/tty/key.h"
 #include "lib/tty/win.h"
 #include "lib/vfs/vfs.h"
+#include "lib/mcconfig.h"
 #include "lib/util.h"
 #include "lib/widget.h"
 
@@ -112,9 +113,9 @@ edition_pre_exec (void)
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 static void
-do_possible_cd (const char *new_dir)
+do_possible_cd (const vfs_path_t * new_dir_vpath)
 {
-    if (!do_cd (new_dir, cd_exact))
+    if (!do_cd (new_dir_vpath, cd_exact))
         message (D_ERROR, _("Warning"),
                  _("The Commander can't change to the directory that\n"
                    "the subshell claims you are in. Perhaps you have\n"
@@ -129,13 +130,13 @@ static void
 do_execute (const char *lc_shell, const char *command, int flags)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
-    char *new_dir = NULL;
+    vfs_path_t *new_dir_vpath = NULL;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
-    char *old_vfs_dir = 0;
+    vfs_path_t *old_vfs_dir_vpath = NULL;
 
     if (!vfs_current_is_local ())
-        old_vfs_dir = vfs_get_current_dir ();
+        old_vfs_dir_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         save_cwds_stat ();
@@ -154,7 +155,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
         do_update_prompt ();
 
         /* We don't care if it died, higher level takes care of this */
-        invoke_subshell (command, VISIBLY, old_vfs_dir ? NULL : &new_dir);
+        invoke_subshell (command, VISIBLY, old_vfs_dir_vpath != NULL ? NULL : &new_dir_vpath);
     }
     else
 #endif /* HAVE_SUBSHELL_SUPPORT */
@@ -192,15 +193,18 @@ do_execute (const char *lc_shell, const char *command, int flags)
     edition_post_exec ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (new_dir)
-        do_possible_cd (new_dir);
+    if (new_dir_vpath != NULL)
+    {
+        do_possible_cd (new_dir_vpath);
+        vfs_path_free (new_dir_vpath);
+    }
 
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
-    if (old_vfs_dir)
+    if (old_vfs_dir_vpath != NULL)
     {
-        mc_chdir (old_vfs_dir);
-        g_free (old_vfs_dir);
+        mc_chdir (old_vfs_dir_vpath);
+        vfs_path_free (old_vfs_dir_vpath);
     }
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
@@ -309,8 +313,8 @@ void
 toggle_panels (void)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
-    char *new_dir = NULL;
-    char **new_dir_p;
+    vfs_path_t *new_dir_vpath = NULL;
+    vfs_path_t **new_dir_p;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
     channels_down ();
@@ -336,7 +340,7 @@ toggle_panels (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_global.tty.use_subshell)
     {
-        new_dir_p = vfs_current_is_local ()? &new_dir : NULL;
+        new_dir_p = vfs_current_is_local () ? &new_dir_vpath : NULL;
         invoke_subshell (NULL, VISIBLY, new_dir_p);
     }
     else
@@ -386,13 +390,15 @@ toggle_panels (void)
     if (mc_global.tty.use_subshell)
     {
         do_load_prompt ();
-        if (new_dir)
-            do_possible_cd (new_dir);
+        if (new_dir_vpath != NULL)
+            do_possible_cd (new_dir_vpath);
         if (mc_global.tty.console_flag != '\0' && output_lines)
             show_console_contents (output_start_y,
                                    LINES - mc_global.keybar_visible - output_lines -
                                    1, LINES - mc_global.keybar_visible - 1);
     }
+
+    vfs_path_free (new_dir_vpath);
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
@@ -432,33 +438,31 @@ execute_suspend (const gchar * event_group_name, const gchar * event_name,
  */
 
 void
-execute_with_vfs_arg (const char *command, const char *filename)
+execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
 {
-    char *localcopy;
-    char *fn;
     struct stat st;
     time_t mtime;
-    vfs_path_t *vpath = vfs_path_from_str (filename);
+    vfs_path_t *localcopy_vpath;
 
     /* Simplest case, this file is local */
-    if (!filename || vfs_file_is_local (vpath))
+    if (filename_vpath == NULL || vfs_file_is_local (filename_vpath))
     {
-        fn = vfs_path_to_str (vpath);
-        do_execute (command, fn, EXECUTE_INTERNAL);
-        g_free (fn);
-        vfs_path_free (vpath);
+        do_execute (command, vfs_path_get_last_path_str (filename_vpath), EXECUTE_INTERNAL);
         return;
     }
-    vfs_path_free (vpath);
 
     /* FIXME: Creation of new files on VFS is not supported */
-    if (!*filename)
+    if (vfs_path_len (filename_vpath) == 0)
         return;
 
-    localcopy = mc_getlocalcopy (filename);
-    if (localcopy == NULL)
+    localcopy_vpath = mc_getlocalcopy (filename_vpath);
+    if (localcopy_vpath == NULL)
     {
+        char *filename;
+
+        filename = vfs_path_to_str (filename_vpath);
         message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
+        g_free (filename);
         return;
     }
 
@@ -467,14 +471,12 @@ execute_with_vfs_arg (const char *command, const char *filename)
      * the command, so make a copy.  Smarter VFS code would make the code
      * below unnecessary.
      */
-    fn = g_strdup (filename);
-    mc_stat (localcopy, &st);
+    mc_stat (localcopy_vpath, &st);
     mtime = st.st_mtime;
-    do_execute (command, localcopy, EXECUTE_INTERNAL);
-    mc_stat (localcopy, &st);
-    mc_ungetlocalcopy (fn, localcopy, mtime != st.st_mtime);
-    g_free (localcopy);
-    g_free (fn);
+    do_execute (command, vfs_path_get_last_path_str (localcopy_vpath), EXECUTE_INTERNAL);
+    mc_stat (localcopy_vpath, &st);
+    mc_ungetlocalcopy (filename_vpath, localcopy_vpath, mtime != st.st_mtime);
+    vfs_path_free (localcopy_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

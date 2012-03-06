@@ -725,39 +725,47 @@ next_file (void)
 static void
 apply_advanced_chowns (struct stat *sf)
 {
+    vfs_path_t *vpath;
     char *lc_fname;
     gid_t a_gid = sf->st_gid;
     uid_t a_uid = sf->st_uid;
 
     lc_fname = current_panel->dir.list[current_file].fname;
+    vpath = vfs_path_from_str (lc_fname);
     need_update = end_chown = 1;
-    if (mc_chmod (lc_fname, get_mode ()) == -1)
+    if (mc_chmod (vpath, get_mode ()) == -1)
         message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                  lc_fname, unix_error_string (errno));
     /* call mc_chown only, if mc_chmod didn't fail */
-    else if (mc_chown (lc_fname, (ch_flags[9] == '+') ? sf->st_uid : (uid_t) - 1,
+    else if (mc_chown (vpath, (ch_flags[9] == '+') ? sf->st_uid : (uid_t) - 1,
                        (ch_flags[10] == '+') ? sf->st_gid : (gid_t) - 1) == -1)
         message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                  lc_fname, unix_error_string (errno));
     do_file_mark (current_panel, current_file, 0);
+    vfs_path_free (vpath);
 
     do
     {
         lc_fname = next_file ();
+        vpath = vfs_path_from_str (lc_fname);
 
-        if (mc_stat (lc_fname, sf) != 0)
+        if (mc_stat (vpath, sf) != 0)
+        {
+            vfs_path_free (vpath);
             break;
+        }
         ch_cmode = sf->st_mode;
-        if (mc_chmod (lc_fname, get_mode ()) == -1)
+        if (mc_chmod (vpath, get_mode ()) == -1)
             message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                      lc_fname, unix_error_string (errno));
         /* call mc_chown only, if mc_chmod didn't fail */
-        else if (mc_chown (lc_fname, (ch_flags[9] == '+') ? a_uid : (uid_t) - 1,
+        else if (mc_chown (vpath, (ch_flags[9] == '+') ? a_uid : (uid_t) - 1,
                            (ch_flags[10] == '+') ? a_gid : (gid_t) - 1) == -1)
             message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                      lc_fname, unix_error_string (errno));
 
         do_file_mark (current_panel, current_file, 0);
+        vfs_path_free (vpath);
     }
     while (current_panel->marked);
 }
@@ -769,21 +777,23 @@ apply_advanced_chowns (struct stat *sf)
 void
 chown_advanced_cmd (void)
 {
-
     files_on_begin = current_panel->marked;
 
     do
     {                           /* do while any files remaining */
+        vfs_path_t *vpath;
         init_chown_advanced ();
 
         if (current_panel->marked)
             fname = next_file ();       /* next marked file */
         else
             fname = selection (current_panel)->fname;   /* single file */
+        vpath = vfs_path_from_str (fname);
 
-        if (mc_stat (fname, sf_stat) != 0)
+        if (mc_stat (vpath, sf_stat) != 0)
         {                       /* get status of file */
             destroy_dlg (ch_dlg);
+            vfs_path_free (vpath);
             break;
         }
         ch_cmode = sf_stat->st_mode;
@@ -802,15 +812,22 @@ chown_advanced_cmd (void)
             break;
 
         case B_ENTER:
-            need_update = 1;
-            if (mc_chmod (fname, get_mode ()) == -1)
-                message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
-                         fname, unix_error_string (errno));
-            /* call mc_chown only, if mc_chmod didn't fail */
-            else if (mc_chown (fname, (ch_flags[9] == '+') ? sf_stat->st_uid : (uid_t) - 1,
-                               (ch_flags[10] == '+') ? sf_stat->st_gid : (gid_t) - 1) == -1)
-                message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
-                         fname, unix_error_string (errno));
+            {
+                vfs_path_t *fname_vpath;
+
+                fname_vpath = vfs_path_from_str (fname);
+                need_update = 1;
+                if (mc_chmod (fname_vpath, get_mode ()) == -1)
+                    message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
+                             fname, unix_error_string (errno));
+                /* call mc_chown only, if mc_chmod didn't fail */
+                else if (mc_chown
+                         (fname_vpath, (ch_flags[9] == '+') ? sf_stat->st_uid : (uid_t) - 1,
+                          (ch_flags[10] == '+') ? sf_stat->st_gid : (gid_t) - 1) == -1)
+                    message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname,
+                             unix_error_string (errno));
+                vfs_path_free (fname_vpath);
+            }
             break;
         case B_SETALL:
             apply_advanced_chowns (sf_stat);
@@ -827,6 +844,8 @@ chown_advanced_cmd (void)
             need_update = 1;
         }
         destroy_dlg (ch_dlg);
+        vfs_path_free (vpath);
+
     }
     while (current_panel->marked && !end_chown);
 

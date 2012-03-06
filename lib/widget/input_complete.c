@@ -126,6 +126,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
     static char *users_dirname = NULL;
     static size_t filename_len;
     int isdir = 1, isexec = 0;
+    static vfs_path_t *dirname_vpath = NULL;
 
     struct dirent *entry = NULL;
 
@@ -156,6 +157,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         g_free (dirname);
         g_free (filename);
         g_free (users_dirname);
+        vfs_path_free (dirname_vpath);
 
         if ((*text != '\0') && (temp = strrchr (text, PATH_SEP)) != NULL)
         {
@@ -167,6 +169,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
             dirname = g_strdup (".");
             filename = g_strdup (text);
         }
+        dirname_vpath = vfs_path_from_str (dirname);
 
         /* We aren't done yet.  We also support the "~user" syntax. */
 
@@ -179,7 +182,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
            and `command`.
            Maybe a dream - UNIMPLEMENTED yet. */
 
-        directory = mc_opendir (dirname);
+        directory = mc_opendir (dirname_vpath);
         filename_len = strlen (filename);
     }
 
@@ -209,13 +212,13 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         isdir = 1;
         isexec = 0;
         {
-            char *tmp;
             struct stat tempstat;
+            vfs_path_t *tmp_vpath;
 
-            tmp = g_strconcat (dirname, PATH_SEP_STR, entry->d_name, (char *) NULL);
-            canonicalize_pathname (tmp);
+            tmp_vpath = vfs_path_build_filename (dirname, entry->d_name, (char *) NULL);
+
             /* Unix version */
-            if (!mc_stat (tmp, &tempstat))
+            if (mc_stat (tmp_vpath, &tempstat) == 0)
             {
                 uid_t my_uid = getuid ();
                 gid_t my_gid = getgid ();
@@ -235,7 +238,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
                 /* stat failed, strange. not a dir in any case */
                 isdir = 0;
             }
-            g_free (tmp);
+            vfs_path_free (tmp_vpath);
         }
         if ((flags & INPUT_COMPLETE_COMMANDS) && (isexec || isdir))
             break;
@@ -254,6 +257,8 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         }
         g_free (dirname);
         dirname = NULL;
+        vfs_path_free (dirname_vpath);
+        dirname_vpath = NULL;
         g_free (filename);
         filename = NULL;
         g_free (users_dirname);
@@ -641,7 +646,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
                 if (cur_path >= path_end)
                     break;
                 expanded = tilde_expand (*cur_path ? cur_path : ".");
-                cur_word = concat_dir_and_file (expanded, text);
+                cur_word = mc_build_filename (expanded, text, NULL);
                 g_free (expanded);
                 canonicalize_pathname (cur_word);
                 cur_path = strchr (cur_path, 0) + 1;
@@ -981,7 +986,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
                     *s = 0;
                     if (*cdpath)
                     {
-                        r = concat_dir_and_file (cdpath, word);
+                        r = mc_build_filename (cdpath, word, NULL);
                         SHOW_C_CTX ("try_complete:filename_subst_2");
                         matches = completion_matches (r, filename_completion_function, flags);
                         g_free (r);

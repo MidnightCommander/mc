@@ -790,7 +790,13 @@ save_panel_types (void)
     if (type == view_listing)
         panel_save_setup (right_panel, right_panel->panel_name);
 
-    mc_config_set_string (mc_panels_config, "Dirs", "other_dir", get_panel_dir_for (other_panel));
+    {
+        char *dirs;
+
+        dirs = get_panel_dir_for (other_panel);
+        mc_config_set_string (mc_panels_config, "Dirs", "other_dir", dirs);
+        g_free (dirs);
+    }
 
     if (current_panel != NULL)
         mc_config_set_string (mc_panels_config, "Dirs", "current_is_left",
@@ -821,7 +827,7 @@ setup_init (void)
     profile = mc_config_get_full_path (MC_CONFIG_FILE);
     if (!exist_file (profile))
     {
-        inifile = concat_dir_and_file (mc_global.sysconfig_dir, "mc.ini");
+        inifile = mc_build_filename (mc_global.sysconfig_dir, "mc.ini", NULL);
         if (exist_file (inifile))
         {
             g_free (profile);
@@ -830,7 +836,7 @@ setup_init (void)
         else
         {
             g_free (inifile);
-            inifile = concat_dir_and_file (mc_global.share_data_dir, "mc.ini");
+            inifile = mc_build_filename (mc_global.share_data_dir, "mc.ini", NULL);
             if (exist_file (inifile))
             {
                 g_free (profile);

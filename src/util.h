@@ -12,9 +12,8 @@
 /*** declarations of public functions ************************************************************/
 
 /* Check if the file exists. If not copy the default */
-int check_for_default (const char *default_file, const char *file);
+int check_for_default (const vfs_path_t * default_file_vpath, const vfs_path_t * file_vpath);
 
 /*** inline functions ****************************************************************************/
 
 #endif /* MC_SRC_UTIL_H */
-

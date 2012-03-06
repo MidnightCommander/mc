@@ -59,7 +59,7 @@
 #include "filemanager/layout.h" /* command_prompt */
 #include "filemanager/ext.h"    /* flush_extension_file() */
 #include "filemanager/command.h"        /* cmdline */
-#include "filemanager/panel.h"          /* panalized_panel */
+#include "filemanager/panel.h"  /* panalized_panel */
 
 #include "vfs/plugins_init.h"
 
@@ -259,28 +259,32 @@ init_sigchld (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-do_cd (const char *new_dir, enum cd_enum exact)
+do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum exact)
 {
     gboolean res;
-    const char *_new_dir = new_dir;
+    const vfs_path_t *_new_dir_vpath = new_dir_vpath;
 
-    if (current_panel->is_panelized && _new_dir[0] == '.' && _new_dir[1] == '.' && _new_dir[2] == 0)
-        _new_dir = panelized_panel.root;
+    if (current_panel->is_panelized)
+    {
+        size_t new_vpath_len;
 
-    res = do_panel_cd (current_panel, _new_dir, exact);
+        new_vpath_len = vfs_path_len (new_dir_vpath);
+        if (vfs_path_ncmp (new_dir_vpath, panelized_panel.root_vpath, new_vpath_len) == 0)
+            _new_dir_vpath = panelized_panel.root_vpath;
+    }
+
+    res = do_panel_cd (current_panel, _new_dir_vpath, exact);
 
 #if HAVE_CHARSET
     if (res)
     {
-        vfs_path_t *vpath = vfs_path_from_str (current_panel->cwd);
-        vfs_path_element_t *path_element = vfs_path_get_by_index (vpath, -1);
+        const vfs_path_element_t *path_element;
 
+        path_element = vfs_path_get_by_index (current_panel->cwd_vpath, -1);
         if (path_element->encoding != NULL)
             current_panel->codepage = get_codepage_index (path_element->encoding);
         else
             current_panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
-
-        vfs_path_free (vpath);
     }
 #endif /* HAVE_CHARSET */
 
@@ -330,48 +334,62 @@ load_prompt (int fd, void *unused)
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+title_path_prepare (char **path, char **login)
+{
+
+    char host[BUF_TINY];
+    struct passwd *pw = NULL;
+    int res = 0;
+
+    *login = NULL;
+
+
+    *path =
+        vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+    res = gethostname (host, sizeof (host));
+    if (res)
+    {                           /* On success, res = 0 */
+        host[0] = '\0';
+    }
+    else
+    {
+        host[sizeof (host) - 1] = '\0';
+    }
+    pw = getpwuid (getuid ());
+    if (pw)
+    {
+        *login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+    }
+    else
+    {
+        *login = g_strdup (host);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /** Show current directory in the xterm title */
 void
 update_xterm_title_path (void)
 {
-    /* TODO: share code with midnight_get_title () */
-
-    const char *path;
-    char host[BUF_TINY];
     char *p;
-    struct passwd *pw = NULL;
-    char *login = NULL;
-    int res = 0;
+    char *path;
+    char *login;
 
-    if (mc_global.tty.xterm_flag && xterm_title)
-    {
-        path = strip_home_and_password (current_panel->cwd);
-        res = gethostname (host, sizeof (host));
-        if (res)
-        {                       /* On success, res = 0 */
-            host[0] = '\0';
-        }
-        else
-        {
-            host[sizeof (host) - 1] = '\0';
-        }
-        pw = getpwuid (getuid ());
-        if (pw)
-        {
-            login = g_strdup_printf ("%s@%s", pw->pw_name, host);
-        }
-        else
-        {
-            login = g_strdup (host);
-        }
-        p = g_strdup_printf ("mc [%s]:%s", login, path);
-        fprintf (stdout, "\33]0;%s\7", str_term_form (p));
-        g_free (login);
-        g_free (p);
-        if (!mc_global.tty.alternate_plus_minus)
-            numeric_keypad_mode ();
-        (void) fflush (stdout);
-    }
+    if (!(mc_global.tty.xterm_flag && xterm_title))
+        return;
+
+    title_path_prepare (&path, &login);
+
+    p = g_strdup_printf ("mc [%s]:%s", login, path);
+    fprintf (stdout, "\33]0;%s\7", str_term_form (p));
+    g_free (login);
+    g_free (p);
+    if (!mc_global.tty.alternate_plus_minus)
+        numeric_keypad_mode ();
+    (void) fflush (stdout);
+    g_free (path);
 }
 
 /* --------------------------------------------------------------------------------------------- */

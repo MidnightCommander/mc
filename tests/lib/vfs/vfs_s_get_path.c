@@ -64,12 +64,13 @@ static int
 test1_mock_archive_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *super,
                         const vfs_path_t *vpath, void *cookie)
 {
-    vfs_path_element_t *path_element = vfs_path_get_by_index(vpath, -1);
+    const vfs_path_element_t *path_element;
 
     (void) vpath_element;
     (void) super;
     (void) cookie;
 
+    path_element = vfs_path_get_by_index(vpath, -1);
     if (strcmp(ARCH_NAME, path_element->path) != 0)
         return 0;
     return 1;

@@ -916,7 +916,7 @@ tree_box (const char *current_dir)
     ((Widget *) bar)->y = LINES - 1;
 
     if (run_dlg (dlg) == B_ENTER)
-        val = g_strdup (tree_selected_name (mytree));
+        val = vfs_path_to_str (tree_selected_name (mytree));
 
     destroy_dlg (dlg);
     return val;
@@ -1041,8 +1041,12 @@ cd_dialog (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-symlink_dialog (const char *existing, const char *new, char **ret_existing, char **ret_new)
+symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
+                char **ret_existing, char **ret_new)
 {
+    char *existing = vfs_path_to_str (existing_vpath);
+    char *new = vfs_path_to_str (new_vpath);
+
     QuickWidget quick_widgets[] = {
         /* 0 */ QUICK_BUTTON (50, 80, 6, 8, N_("&Cancel"), B_CANCEL, NULL),
         /* 1 */ QUICK_BUTTON (16, 80, 6, 8, N_("&OK"), B_ENTER, NULL),
@@ -1064,6 +1068,8 @@ symlink_dialog (const char *existing, const char *new, char **ret_existing, char
         *ret_new = NULL;
         *ret_existing = NULL;
     }
+    g_free (existing);
+    g_free (new);
 }
 
 /* --------------------------------------------------------------------------------------------- */

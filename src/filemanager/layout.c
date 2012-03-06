@@ -43,7 +43,7 @@
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/vfs.h"        /* For mc_get_current_wd() */
+#include "lib/vfs/vfs.h"        /* For _vfs_get_cwd () */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"
@@ -967,10 +967,11 @@ set_display_type (int num, panel_view_mode_t type)
     /* when it's first creation (for example view_info) */
     if (old_widget == NULL && type != view_listing)
     {
-        char panel_dir[MC_MAXPATHLEN];
+        char *panel_dir;
 
-        mc_get_current_wd (panel_dir, sizeof (panel_dir));
+        panel_dir = _vfs_get_cwd ();
         panels[num].last_saved_dir = g_strdup (panel_dir);
+        g_free (panel_dir);
     }
 
     switch (type)
@@ -1088,8 +1089,8 @@ swap_panels (void)
         /* Change content and related stuff */
         panelswap (dir);
         panelswap (active);
-        panelswapstr (cwd);
-        panelswapstr (lwd);
+        panelswap (cwd_vpath);
+        panelswap (lwd_vpath);
         panelswap (count);
         panelswap (marked);
         panelswap (dirs_marked);
@@ -1257,11 +1258,10 @@ save_panel_dir (int idx)
     if ((type == view_listing) && (widget != NULL))
     {
         WPanel *w = (WPanel *) widget;
-        char *widget_work_dir = w->cwd;
 
         g_free (panels[idx].last_saved_dir);    /* last path no needed */
         /* Because path can be nonlocal */
-        panels[idx].last_saved_dir = g_strdup (widget_work_dir);
+        panels[idx].last_saved_dir = vfs_path_to_str (w->cwd_vpath);
     }
 }
 
@@ -1269,7 +1269,7 @@ save_panel_dir (int idx)
 /** Return working dir, if it's view_listing - cwd,
    but for other types - last_saved_dir */
 
-const char *
+char *
 get_panel_dir_for (const WPanel * widget)
 {
     int i;
@@ -1279,12 +1279,12 @@ get_panel_dir_for (const WPanel * widget)
             break;
 
     if (i >= MAX_VIEWS)
-        return ".";
+        return g_strdup (".");
 
     if (get_display_type (i) == view_listing)
-        return ((WPanel *) get_panel_widget (i))->cwd;
+        return vfs_path_to_str (((WPanel *) get_panel_widget (i))->cwd_vpath);
 
-    return panels[i].last_saved_dir;
+    return g_strdup (panels[i].last_saved_dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */

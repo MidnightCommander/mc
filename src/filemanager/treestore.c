@@ -53,6 +53,7 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
+#include "lib/strescape.h"
 #include "lib/hook.h"
 #include "lib/util.h"
 
@@ -77,7 +78,7 @@ static hook_t *remove_entry_hooks;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static tree_entry *tree_store_add_entry (const char *name);
+static tree_entry *tree_store_add_entry (const vfs_path_t * name);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -88,57 +89,85 @@ tree_store_dirty (int state)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Returns the number of common bytes in the strings. */
+/**
+  *
+  * @return the number of common bytes in the strings.
+  */
 
 static size_t
-str_common (const char *s1, const char *s2)
+str_common (const vfs_path_t * s1_vpath, const vfs_path_t * s2_vpath)
 {
     size_t result = 0;
+    char *s1, *fs1;
+    char *s2, *fs2;
+
+    s1 = fs1 = vfs_path_to_str (s1_vpath);
+    s2 = fs2 = vfs_path_to_str (s2_vpath);
 
     while (*s1 != '\0' && *s2 != '\0' && *s1++ == *s2++)
         result++;
+
+    g_free (fs1);
+    g_free (fs2);
+
     return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* The directory names are arranged in a single linked list in the same
-   order as they are displayed. When the tree is displayed the expected
-   order is like this:
-   /
-   /bin
-   /etc
-   /etc/X11
-   /etc/rc.d
-   /etc.old/X11
-   /etc.old/rc.d
-   /usr
-
-   i.e. the required collating sequence when comparing two directory names is 
-   '\0' < PATH_SEP < all-other-characters-in-encoding-order
-
-   Since strcmp doesn't fulfil this requirement we use pathcmp when
-   inserting directory names into the list. The meaning of the return value 
-   of pathcmp and strcmp are the same (an integer less than, equal to, or 
-   greater than zero if p1 is found to be less than, to match, or be greater 
-   than p2.
+/** The directory names are arranged in a single linked list in the same
+  * order as they are displayed. When the tree is displayed the expected
+  * order is like this:
+  * /
+  * /bin
+  * /etc
+  * /etc/X11
+  * /etc/rc.d
+  * /etc.old/X11
+  * /etc.old/rc.d
+  * /usr
+  *
+  * i.e. the required collating sequence when comparing two directory names is 
+  * '\0' < PATH_SEP < all-other-characters-in-encoding-order
+  *
+  * Since strcmp doesn't fulfil this requirement we use pathcmp when
+  * inserting directory names into the list. The meaning of the return value 
+  * of pathcmp and strcmp are the same (an integer less than, equal to, or 
+  * greater than zero if p1 is found to be less than, to match, or be greater 
+  * than p2.
  */
 
 static int
-pathcmp (const char *p1, const char *p2)
+pathcmp (const vfs_path_t * p1_vpath, const vfs_path_t * p2_vpath)
 {
+    int ret_val;
+    char *p1, *fp1;
+    char *p2, *fp2;
+
+    p1 = fp1 = vfs_path_to_str (p1_vpath);
+    p2 = fp2 = vfs_path_to_str (p2_vpath);
+
     for (; *p1 == *p2; p1++, p2++)
         if (*p1 == '\0')
+        {
+            g_free (fp1);
+            g_free (fp2);
             return 0;
+        }
 
     if (*p1 == '\0')
-        return -1;
-    if (*p2 == '\0')
-        return 1;
-    if (*p1 == PATH_SEP)
-        return -1;
-    if (*p2 == PATH_SEP)
-        return 1;
-    return (*p1 - *p2);
+        ret_val = -1;
+    else if (*p2 == '\0')
+        ret_val = 1;
+    else if (*p1 == PATH_SEP)
+        ret_val = -1;
+    else if (*p2 == PATH_SEP)
+        ret_val = 1;
+    else
+        ret_val = (*p1 - *p2);
+
+    g_free (fp1);
+    g_free (fp2);
+    return ret_val;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -250,11 +279,17 @@ tree_store_load_from (char *name)
                     different = strtok (NULL, "");
                     if (different)
                     {
-                        vfs_path_t *vpath = vfs_path_from_str (oldname);
+                        vfs_path_t *vpath;
+
+                        vpath = vfs_path_from_str (oldname);
                         strcpy (oldname + common, different);
                         if (vfs_file_is_local (vpath))
                         {
-                            e = tree_store_add_entry (oldname);
+                            vfs_path_t *tmp_vpath;
+
+                            tmp_vpath = vfs_path_from_str (oldname);
+                            e = tree_store_add_entry (tmp_vpath);
+                            vfs_path_free (tmp_vpath);
                             e->scanned = scanned;
                         }
                         vfs_path_free (vpath);
@@ -263,10 +298,12 @@ tree_store_load_from (char *name)
             }
             else
             {
-                vfs_path_t *vpath = vfs_path_from_str (lc_name);
+                vfs_path_t *vpath;
+
+                vpath = vfs_path_from_str (lc_name);
                 if (vfs_file_is_local (vpath))
                 {
-                    e = tree_store_add_entry (lc_name);
+                    e = tree_store_add_entry (vpath);
                     e->scanned = scanned;
                 }
                 vfs_path_free (vpath);
@@ -280,8 +317,10 @@ tree_store_load_from (char *name)
     /* Nothing loaded, we add some standard directories */
     if (!ts.tree_first)
     {
-        tree_store_add_entry (PATH_SEP_STR);
-        tree_store_rescan (PATH_SEP_STR);
+        vfs_path_t *tmp_vpath = vfs_path_from_str (PATH_SEP_STR);
+        tree_store_add_entry (tmp_vpath);
+        tree_store_rescan (tmp_vpath);
+        vfs_path_free (tmp_vpath);
         ts.loaded = TRUE;
     }
 
@@ -291,43 +330,14 @@ tree_store_load_from (char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-encode (const char *string)
+encode (const vfs_path_t * vpath, size_t offset)
 {
-    int special_chars;
-    const char *p;
-    char *q;
-    char *res;
+    char *string, *ret_val;
 
-    for (special_chars = 0, p = string; *p; p++)
-    {
-        if (*p == '\n' || *p == '\\')
-            special_chars++;
-    }
-
-    res = g_malloc (p - string + special_chars + 1);
-    for (p = string, q = res; *p; p++, q++)
-    {
-        if (*p != '\n' && *p != '\\')
-        {
-            *q = *p;
-            continue;
-        }
-
-        *q++ = '\\';
-
-        switch (*p)
-        {
-        case '\n':
-            *q = 'n';
-            break;
-
-        case '\\':
-            *q = '\\';
-            break;
-        }
-    }
-    *q = 0;
-    return res;
+    string = vfs_path_to_str (vpath);
+    ret_val = strutils_escape (string + offset, -1, "\n\\", FALSE);
+    g_free (string);
+    return ret_val;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -349,21 +359,20 @@ tree_store_save_to (char *name)
     while (current)
     {
         int i, common;
-        vfs_path_t *vpath = vfs_path_from_str (current->name);
 
-        if (vfs_file_is_local (vpath))
+        if (vfs_file_is_local (current->name))
         {
             /* Clear-text compression */
             if (current->prev && (common = str_common (current->prev->name, current->name)) > 2)
             {
-                char *encoded = encode (current->name + common);
+                char *encoded = encode (current->name, common);
 
                 i = fprintf (file, "%d:%d %s\n", current->scanned, common, encoded);
                 g_free (encoded);
             }
             else
             {
-                char *encoded = encode (current->name);
+                char *encoded = encode (current->name, 0);
 
                 i = fprintf (file, "%d:%s\n", current->scanned, encoded);
                 g_free (encoded);
@@ -373,11 +382,9 @@ tree_store_save_to (char *name)
             {
                 fprintf (stderr, _("Cannot write to the %s file:\n%s\n"),
                          name, unix_error_string (errno));
-                vfs_path_free (vpath);
                 break;
             }
         }
-        vfs_path_free (vpath);
         current = current->next;
     }
     tree_store_dirty (FALSE);
@@ -389,13 +396,12 @@ tree_store_save_to (char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 static tree_entry *
-tree_store_add_entry (const char *name)
+tree_store_add_entry (const vfs_path_t * name)
 {
     int flag = -1;
     tree_entry *current = ts.tree_first;
     tree_entry *old = NULL;
     tree_entry *new;
-    int i, len;
     int submask = 0;
 
     if (ts.tree_last && ts.tree_last->next)
@@ -450,15 +456,16 @@ tree_store_add_entry (const char *name)
     }
 
     /* Calculate attributes */
-    new->name = g_strdup (name);
-    len = strlen (new->name);
-    new->sublevel = 0;
-    for (i = 0; i < len; i++)
-        if (new->name[i] == PATH_SEP)
-        {
-            new->sublevel++;
-            new->subname = new->name + i + 1;
-        }
+    new->name = vfs_path_clone (name);
+    new->sublevel = vfs_path_tokens_count (new->name) + 1;
+    {
+        const char *new_name;
+
+        new_name = vfs_path_get_last_path_str (new->name);
+        new->subname = strrchr (new_name, '/');
+        if (new->subname == NULL)
+            new->subname = new_name;
+    }
     if (new->next)
         submask = new->next->submask;
     else
@@ -481,18 +488,11 @@ tree_store_add_entry (const char *name)
     if (new->sublevel > 1)
     {
         /* Let's check if the parent directory is in the tree */
-        char *parent = g_strdup (new->name);
+        vfs_path_t *tmp_vpath;
 
-        for (i = strlen (parent) - 1; i > 1; i--)
-        {
-            if (parent[i] == PATH_SEP)
-            {
-                parent[i] = 0;
-                tree_store_add_entry (parent);
-                break;
-            }
-        }
-        g_free (parent);
+        tmp_vpath = vfs_path_vtokens_get (new->name, 0, new->sublevel - 1);
+        tree_store_add_entry (tmp_vpath);
+        vfs_path_free (tmp_vpath);
     }
 
     tree_store_dirty (TRUE);
@@ -585,11 +585,13 @@ process_special_dirs (GList ** special_dirs, char *file)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-should_skip_directory (const char *dir)
+should_skip_directory (const vfs_path_t * vpath)
 {
     static GList *special_dirs = NULL;
     GList *l;
     static gboolean loaded = FALSE;
+    char *dir;
+    gboolean ret = FALSE;
 
     if (!loaded)
     {
@@ -599,11 +601,16 @@ should_skip_directory (const char *dir)
         process_special_dirs (&special_dirs, global_profile_name);
     }
 
+    dir = vfs_path_to_str (vpath);
     for (l = special_dirs; l != NULL; l = g_list_next (l))
         if (strncmp (dir, l->data, strlen (l->data)) == 0)
-            return TRUE;
+        {
+            ret = TRUE;
+            break;
+        }
 
-    return FALSE;
+    g_free (dir);
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -612,7 +619,7 @@ should_skip_directory (const char *dir)
 
 /* Searches for specified directory */
 tree_entry *
-tree_store_whereis (const char *name)
+tree_store_whereis (const vfs_path_t * name)
 {
     tree_entry *current = ts.tree_first;
     int flag = -1;
@@ -703,36 +710,48 @@ tree_store_remove_entry_remove_hook (tree_store_remove_fn callback)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tree_store_remove_entry (const char *name)
+tree_store_remove_entry (const vfs_path_t * name_vpath)
 {
     tree_entry *current, *base, *old;
-    int len;
+    size_t len;
 
-    g_return_if_fail (name != NULL);
+    g_return_if_fail (name_vpath != NULL);
 
     /* Miguel Ugly hack */
-    if (name[0] == PATH_SEP && name[1] == 0)
-        return;
+    {
+        char *name;
+        gboolean is_root;
+
+        name = vfs_path_to_str (name_vpath);
+        is_root = (name[0] == PATH_SEP && name[1] == '\0');
+        g_free (name);
+        if (is_root)
+            return;
+    }
     /* Miguel Ugly hack end */
 
-    base = tree_store_whereis (name);
+    base = tree_store_whereis (name_vpath);
     if (!base)
         return;                 /* Doesn't exist */
 
-    len = strlen (base->name);
+    len = vfs_path_len (base->name);
     current = base->next;
-    while (current
-           && strncmp (current->name, base->name, len) == 0
-           && (current->name[len] == '\0' || current->name[len] == PATH_SEP))
+    while (current != NULL && vfs_path_ncmp (current->name, base->name, len) == 0)
     {
+        char *current_name;
+        gboolean ok;
+
+        current_name = vfs_path_to_str (current->name);
+        ok = (current_name[len] == '\0' || current_name[len] == PATH_SEP);
+        g_free (current_name);
+        if (!ok)
+            break;
         old = current;
         current = current->next;
         remove_entry (old);
     }
     remove_entry (base);
     tree_store_dirty (TRUE);
-
-    return;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -741,9 +760,10 @@ tree_store_remove_entry (const char *name)
 void
 tree_store_mark_checked (const char *subname)
 {
-    char *name;
+    vfs_path_t *name;
+    char *check_name;
     tree_entry *current, *base;
-    int flag = 1, len;
+    int flag = 1;
     if (!ts.loaded)
         return;
 
@@ -753,10 +773,13 @@ tree_store_mark_checked (const char *subname)
     /* Calculate the full name of the subdirectory */
     if (subname[0] == '.' && (subname[1] == 0 || (subname[1] == '.' && subname[2] == 0)))
         return;
-    if (ts.check_name[0] == PATH_SEP && ts.check_name[1] == 0)
-        name = g_strconcat (PATH_SEP_STR, subname, (char *) NULL);
+
+    check_name = vfs_path_to_str (ts.check_name);
+    if (check_name[0] == PATH_SEP && check_name[1] == 0)
+        name = vfs_path_build_filename (PATH_SEP_STR, subname, NULL);
     else
-        name = concat_dir_and_file (ts.check_name, subname);
+        name = vfs_path_append_new (ts.check_name, subname, NULL);
+    g_free (check_name);
 
     /* Search for the subdirectory */
     current = ts.check_start;
@@ -767,7 +790,7 @@ tree_store_mark_checked (const char *subname)
     {
         /* Doesn't exist -> add it */
         current = tree_store_add_entry (name);
-        ts.add_queue = g_list_prepend (ts.add_queue, g_strdup (name));
+        ts.add_queue_vpath = g_list_prepend (ts.add_queue_vpath, vfs_path_clone (name));
     }
     g_free (name);
 
@@ -775,13 +798,20 @@ tree_store_mark_checked (const char *subname)
     base = current;
     if (base)
     {
-        len = strlen (base->name);
+        size_t len;
+
+        len = vfs_path_len (base->name);
         base->mark = 0;
         current = base->next;
-        while (current
-               && strncmp (current->name, base->name, len) == 0
-               && (current->name[len] == '\0' || current->name[len] == PATH_SEP || len == 1))
+        while (current != NULL && vfs_path_ncmp (current->name, base->name, len) == 0)
         {
+            gboolean ok;
+
+            check_name = vfs_path_to_str (current->name);
+            ok = (check_name[len] == '\0' || check_name[len] == PATH_SEP || len == 1);
+            g_free (check_name);
+            if (!ok)
+                break;
             current->mark = 0;
             current = current->next;
         }
@@ -792,10 +822,10 @@ tree_store_mark_checked (const char *subname)
 /** Mark the subdirectories of the current directory for delete */
 
 tree_entry *
-tree_store_start_check (const char *path)
+tree_store_start_check (const vfs_path_t * vpath)
 {
     tree_entry *current, *retval;
-    int len;
+    size_t len;
 
     if (!ts.loaded)
         return NULL;
@@ -804,36 +834,42 @@ tree_store_start_check (const char *path)
     ts.check_start = NULL;
 
     /* Search for the start of subdirectories */
-    current = tree_store_whereis (path);
+    current = tree_store_whereis (vpath);
     if (!current)
     {
         struct stat s;
 
-        if (mc_stat (path, &s) == -1)
+        if (mc_stat (vpath, &s) == -1)
             return NULL;
 
         if (!S_ISDIR (s.st_mode))
             return NULL;
 
-        current = tree_store_add_entry (path);
-        ts.check_name = g_strdup (path);
+        current = tree_store_add_entry (vpath);
+        ts.check_name = vfs_path_clone (vpath);
 
         return current;
     }
 
-    ts.check_name = g_strdup (path);
+    ts.check_name = vfs_path_clone (vpath);
 
     retval = current;
 
     /* Mark old subdirectories for delete */
     ts.check_start = current->next;
-    len = strlen (ts.check_name);
+    len = vfs_path_len (ts.check_name);
 
     current = ts.check_start;
-    while (current
-           && strncmp (current->name, ts.check_name, len) == 0
-           && (current->name[len] == '\0' || current->name[len] == PATH_SEP || len == 1))
+    while (current != NULL && vfs_path_cmp (current->name, ts.check_name) == 0)
     {
+        char *current_name;
+        gboolean ok;
+
+        current_name = vfs_path_to_str (current->name);
+        ok = (current_name[len] == '\0' || (current_name[len] == PATH_SEP || len == 1));
+        g_free (current_name);
+        if (!ok)
+            break;
         current->mark = 1;
         current = current->next;
     }
@@ -857,13 +893,20 @@ tree_store_end_check (void)
     g_return_if_fail (ts.check_name != NULL);
 
     /* Check delete marks and delete if found */
-    len = strlen (ts.check_name);
+    len = vfs_path_len (ts.check_name);
 
     current = ts.check_start;
-    while (current
-           && strncmp (current->name, ts.check_name, len) == 0
-           && (current->name[len] == '\0' || current->name[len] == PATH_SEP || len == 1))
+    while (current != NULL && vfs_path_ncmp (current->name, ts.check_name, len) == 0)
     {
+        char *current_name;
+        gboolean ok;
+
+        current_name = vfs_path_to_str (current->name);
+        ok = (current_name[len] == '\0' || current_name[len] == PATH_SEP || len == 1);
+        g_free (current_name);
+
+        if (!ok)
+            break;
         old = current;
         current = current->next;
         if (old->mark)
@@ -871,45 +914,43 @@ tree_store_end_check (void)
     }
 
     /* get the stuff in the scan order */
-    ts.add_queue = g_list_reverse (ts.add_queue);
-    the_queue = ts.add_queue;
-    ts.add_queue = NULL;
+    ts.add_queue_vpath = g_list_reverse (ts.add_queue_vpath);
+    the_queue = ts.add_queue_vpath;
+    ts.add_queue_vpath = NULL;
     g_free (ts.check_name);
     ts.check_name = NULL;
 
-    g_list_foreach (the_queue, (GFunc) g_free, NULL);
+    g_list_foreach (the_queue, (GFunc) vfs_path_free, NULL);
     g_list_free (the_queue);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 tree_entry *
-tree_store_rescan (const char *dir)
+tree_store_rescan (const vfs_path_t * vpath)
 {
     DIR *dirp;
     struct dirent *dp;
     struct stat buf;
     tree_entry *entry;
 
-    if (should_skip_directory (dir))
+    if (should_skip_directory (vpath))
     {
-        entry = tree_store_add_entry (dir);
+        entry = tree_store_add_entry (vpath);
         entry->scanned = 1;
-
         return entry;
     }
 
-    entry = tree_store_start_check (dir);
-
-    if (!entry)
+    entry = tree_store_start_check (vpath);
+    if (entry == NULL)
         return NULL;
 
-    dirp = mc_opendir (dir);
+    dirp = mc_opendir (vpath);
     if (dirp)
     {
         for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp))
         {
-            char *full_name;
+            vfs_path_t *tmp_vpath;
 
             if (dp->d_name[0] == '.')
             {
@@ -917,13 +958,13 @@ tree_store_rescan (const char *dir)
                     continue;
             }
 
-            full_name = concat_dir_and_file (dir, dp->d_name);
-            if (mc_lstat (full_name, &buf) != -1)
+            tmp_vpath = vfs_path_append_new (vpath, dp->d_name, NULL);
+            if (mc_lstat (tmp_vpath, &buf) != -1)
             {
                 if (S_ISDIR (buf.st_mode))
                     tree_store_mark_checked (dp->d_name);
             }
-            g_free (full_name);
+            vfs_path_free (tmp_vpath);
         }
         mc_closedir (dirp);
     }

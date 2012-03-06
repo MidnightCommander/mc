@@ -341,9 +341,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
     char buffer[BUF_SMALL];
     const char *title;
-    const char *stripped_name = strip_home_and_password (ui->replace_filename);
     int stripped_name_len;
-
+    vfs_path_t *stripped_vpath;
+    const char *stripped_name;
+    char *stripped_name_orig;
     int result;
 
     widgets_len = g_new0 (int, num);
@@ -353,6 +354,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     else
         title = _("Background process: File exists");
 
+    stripped_vpath = vfs_path_from_str (ui->replace_filename);
+    stripped_name = stripped_name_orig =
+        vfs_path_to_str_flags (stripped_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+    vfs_path_free (stripped_vpath);
     stripped_name_len = str_term_width1 (stripped_name);
 
     {
@@ -454,6 +459,7 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     destroy_dlg (ui->replace_dlg);
 
     g_free (widgets_len);
+    g_free (stripped_name_orig);
 
     return (result == B_CANCEL) ? REPLACE_ABORT : (replace_action_t) result;
 #undef ADD_RD_LABEL
@@ -797,7 +803,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_source (FileOpContext * ctx, const char *s)
+file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileOpContextUI *ui;
 
@@ -806,21 +812,14 @@ file_progress_show_source (FileOpContext * ctx, const char *s)
 
     ui = ctx->ui;
 
-    if (s != NULL)
+    if (s_vpath != NULL)
     {
-#ifdef WITH_FULL_PATHS
-        size_t i;
+        char *s;
 
-        i = strlen (current_panel->cwd);
-
-        /* We remove the full path we have added before */
-        if (strncmp (s, current_panel->cwd, i) == 0)
-            if (s[i] == PATH_SEP)
-                s += i + 1;
-#endif /* WITH_FULL_PATHS */
-
+        s = vfs_path_tokens_get (s_vpath, -1, 1);
         label_set_text (ui->file_label[0], _("Source"));
         label_set_text (ui->file_string[0], truncFileString (ui, s));
+        g_free (s);
     }
     else
     {
@@ -832,7 +831,7 @@ file_progress_show_source (FileOpContext * ctx, const char *s)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_target (FileOpContext * ctx, const char *s)
+file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileOpContextUI *ui;
 
@@ -841,10 +840,14 @@ file_progress_show_target (FileOpContext * ctx, const char *s)
 
     ui = ctx->ui;
 
-    if (s != NULL)
+    if (s_vpath != NULL)
     {
+        char *s;
+
+        s = vfs_path_to_str (s_vpath);
         label_set_text (ui->file_label[1], _("Target"));
         label_set_text (ui->file_string[1], truncFileStringSecure (ui, s));
+        g_free (s);
     }
     else
     {
@@ -1058,7 +1061,13 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
     ctx->op_preserve = filegui__check_attrs_on_fs (def_text);
 
     /* filter out a possible password from def_text */
-    tmp = strip_password (g_strdup (def_text), 1);
+    {
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str_flags (def_text, (only_one) ? VPF_NO_CANON : VPF_NONE);
+        tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+        vfs_path_free (vpath);
+    }
     if (source_easy_patterns)
         def_text_secure = strutils_glob_escape (tmp);
     else
@@ -1073,6 +1082,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
 
     {
         struct stat buf;
+        vfs_path_t *vpath;
 
         QuickDialog Quick_input = {
             fmd_xlen, FMDY, -1, -1, op_names[operation],
@@ -1137,6 +1147,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         tmp = dest_dir;
         dest_dir = tilde_expand (tmp);
         g_free (tmp);
+        vpath = vfs_path_from_str (dest_dir);
 
         ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
         if (ctx->dest_mask == NULL)
@@ -1144,13 +1155,13 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         else
             ctx->dest_mask++;
         orig_mask = ctx->dest_mask;
-        if (!*ctx->dest_mask
+        if (*ctx->dest_mask == '\0'
             || (!ctx->dive_into_subdirs && !is_wildcarded (ctx->dest_mask)
                 && (!only_one
-                    || (!mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode))))
+                    || (mc_stat (vpath, &buf) == 0 && S_ISDIR (buf.st_mode))))
             || (ctx->dive_into_subdirs
                 && ((!only_one && !is_wildcarded (ctx->dest_mask))
-                    || (only_one && !mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode)))))
+                    || (only_one && mc_stat (vpath, &buf) == 0 && S_ISDIR (buf.st_mode)))))
             ctx->dest_mask = g_strdup ("\\0");
         else
         {
@@ -1162,6 +1173,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
             g_free (dest_dir);
             dest_dir = g_strdup ("./");
         }
+        vfs_path_free (vpath);
         if (val == B_USER)
             *do_bg = TRUE;
     }

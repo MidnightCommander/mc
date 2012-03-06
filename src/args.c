@@ -429,11 +429,16 @@ mc_setup_by_args (int argc, char *argv[])
 
     if (mc_args__netfs_logfile != NULL)
     {
+        vfs_path_t *vpath;
 #ifdef ENABLE_VFS_FTP
-        mc_setctl ("ftp://", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        vpath = vfs_path_from_str ("ftp://");
+        mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        vfs_path_free (vpath);
 #endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
-        mc_setctl ("smb://", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        vpath = vfs_path_from_str ("smb://");
+        mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+        vfs_path_free (vpath);
 #endif /* ENABLE_VFS_SMB */
     }
 
@@ -466,13 +471,16 @@ mc_setup_by_args (int argc, char *argv[])
             {
                 char *fname;
                 struct stat st;
+                vfs_path_t *tmp_vpath, *fname_vpath;
 
                 fname = g_strndup (tmp, p - 1 - tmp);
+                tmp_vpath = vfs_path_from_str (tmp);
+                fname_vpath = vfs_path_from_str (fname);
                 /*
                  * Check that the file before the colon actually exists.
                  * If it doesn't exist, revert to the old behavior.
                  */
-                if (mc_stat (tmp, &st) == -1 && mc_stat (fname, &st) != -1)
+                if (mc_stat (tmp_vpath, &st) == -1 && mc_stat (fname_vpath, &st) != -1)
                 {
                     mc_run_param0 = fname;
                     mc_args__edit_start_line = atoi (p);
@@ -482,6 +490,8 @@ mc_setup_by_args (int argc, char *argv[])
                     g_free (fname);
                     goto try_plus_filename;
                 }
+                vfs_path_free (tmp_vpath);
+                vfs_path_free (fname_vpath);
             }
             else
             {

@@ -55,6 +55,7 @@
 #include "panel.h"              /* WPanel */
 
 #include "panelize.h"
+#include "panel.h"
 
 /*** global variables ****************************************************************************/
 
@@ -338,7 +339,7 @@ do_external_panelize (char *command)
     /* Clear the counters and the directory list */
     panel_clean_dir (current_panel);
 
-    g_strlcpy (panelized_panel.root, current_panel->cwd, MC_MAXPATHLEN);
+    panelize_change_root (current_panel->cwd_vpath);
 
     if (set_zero_dir (list))
         next_free++;
@@ -387,7 +388,7 @@ do_external_panelize (char *command)
         if (list->list[0].fname[0] == PATH_SEP)
         {
             int ret;
-            strcpy (current_panel->cwd, PATH_SEP_STR);
+            panel_set_cwd (current_panel, PATH_SEP_STR);
             ret = chdir (PATH_SEP_STR);
         }
     }
@@ -412,8 +413,8 @@ do_panelize_cd (struct WPanel *panel)
     gboolean panelized_same;
 
     clean_dir (list, panel->count);
-    if (panelized_panel.root[0] == '\0')
-        g_strlcpy (panelized_panel.root, panel->cwd, MC_MAXPATHLEN);
+    if (panelized_panel.root_vpath == NULL)
+        panelize_change_root (current_panel->cwd_vpath);
 
     if (panelized_panel.count < 1)
     {
@@ -428,7 +429,7 @@ do_panelize_cd (struct WPanel *panel)
     panel->count = panelized_panel.count;
     panel->is_panelized = TRUE;
 
-    panelized_same = (strcmp (panelized_panel.root, panel->cwd) == 0);
+    panelized_same = (vfs_path_cmp (panelized_panel.root_vpath, panel->cwd_vpath) == 0);
 
     for (i = 0; i < panelized_panel.count; i++)
     {
@@ -443,9 +444,13 @@ do_panelize_cd (struct WPanel *panel)
         }
         else
         {
-            list->list[i].fname = mc_build_filename (panelized_panel.root,
-                                                     panelized_panel.list.list[i].fname,
-                                                     (char *) NULL);
+            vfs_path_t *tmp_vpath;
+
+            tmp_vpath =
+                vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
+                                     NULL);
+            list->list[i].fname = vfs_path_to_str (tmp_vpath);
+            vfs_path_free (tmp_vpath);
             list->list[i].fnamelen = strlen (list->list[i].fname);
         }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
@@ -463,13 +468,26 @@ do_panelize_cd (struct WPanel *panel)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Change root directory of panelized content.
+ * @param new_root - object with new path.
+ */
+void
+panelize_change_root (const vfs_path_t * new_root)
+{
+    vfs_path_free (panelized_panel.root_vpath);
+    panelized_panel.root_vpath = vfs_path_clone (new_root);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 panelize_save_panel (struct WPanel *panel)
 {
     int i;
     dir_list *list = &panel->dir;
 
-    g_strlcpy (panelized_panel.root, panel->cwd, MC_MAXPATHLEN);
+    panelize_change_root (current_panel->cwd_vpath);
 
     if (panelized_panel.count > 0)
         clean_dir (&panelized_panel.list, panelized_panel.count);
@@ -486,7 +504,8 @@ panelize_save_panel (struct WPanel *panel)
     for (i = 0; i < panel->count; i++)
     {
         panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;
-        panelized_panel.list.list[i].fname = g_strndup (list->list[i].fname, list->list[i].fnamelen);
+        panelized_panel.list.list[i].fname =
+            g_strndup (list->list[i].fname, list->list[i].fnamelen);
         panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
         panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
         panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;

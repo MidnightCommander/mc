@@ -208,11 +208,11 @@ handle_cdpath (const char *path)
             *s = '\0';
             if (*p != '\0')
             {
-                char *r;
+                vfs_path_t *r_vpath;
 
-                r = mc_build_filename (p, path, (char *) NULL);
-                result = do_cd (r, cd_parse_command);
-                g_free (r);
+                r_vpath = vfs_path_build_filename (p, path, NULL);
+                result = do_cd (r_vpath, cd_parse_command);
+                vfs_path_free (r_vpath);
             }
             *s = c;
             p = s + 1;
@@ -384,14 +384,20 @@ do_cd_command (char *orig_cmd)
         }
         else if (strcmp (cmd + operand_pos, "..") == 0)
         {
-            char *dir = current_panel->cwd;
-            len = strlen (dir);
-            while (len && dir[--len] != PATH_SEP);
-            dir[len] = 0;
-            if (len)
-                sync_tree (dir);
-            else
-                sync_tree (PATH_SEP_STR);
+            char *str_path;
+
+            if (vfs_path_elements_count (current_panel->cwd_vpath) != 1 ||
+                strlen (vfs_path_get_by_index (current_panel->cwd_vpath, 0)->path) > 1)
+            {
+                vfs_path_t *tmp_vpath = current_panel->cwd_vpath;
+
+                current_panel->cwd_vpath =
+                    vfs_path_vtokens_get (tmp_vpath, 0, vfs_path_tokens_count (tmp_vpath) - 1);
+                vfs_path_free (tmp_vpath);
+            }
+            str_path = vfs_path_to_str (current_panel->cwd_vpath);
+            sync_tree (str_path);
+            g_free (str_path);
         }
         else if (cmd[operand_pos] == PATH_SEP)
         {
@@ -399,20 +405,30 @@ do_cd_command (char *orig_cmd)
         }
         else
         {
-            char *old = current_panel->cwd;
-            char *new;
-            new = concat_dir_and_file (old, cmd + operand_pos);
-            sync_tree (new);
-            g_free (new);
+            char *str_path;
+            vfs_path_t *new_vpath;
+
+            new_vpath = vfs_path_append_new (current_panel->cwd_vpath, cmd + operand_pos, NULL);
+            str_path = vfs_path_to_str (new_vpath);
+            vfs_path_free (new_vpath);
+            sync_tree (str_path);
+            g_free (str_path);
         }
     }
     else
     {
         char *path;
+        vfs_path_t *q_vpath;
         gboolean ok;
 
         path = examine_cd (&cmd[operand_pos]);
-        ok = do_cd (path, cd_parse_command);
+
+        if (*path == '\0')
+            q_vpath = vfs_path_from_str (mc_config_get_home_dir());
+        else
+            q_vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
+
+        ok = do_cd (q_vpath, cd_parse_command);
         if (!ok)
             ok = handle_cdpath (path);
 
@@ -420,11 +436,13 @@ do_cd_command (char *orig_cmd)
         {
             char *d;
 
-            d = strip_password (path, 1);
+            d = vfs_path_to_str_flags (q_vpath, 0, VPF_STRIP_PASSWORD);
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d,
                      unix_error_string (errno));
+            g_free (d);
         }
 
+        vfs_path_free (q_vpath);
         g_free (path);
     }
 }

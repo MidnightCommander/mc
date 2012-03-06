@@ -23,17 +23,19 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define TEST_SUITE_NAME "/lib/vfs"
+#define TEST_SUITE_NAME "/src/filemanager"
 
 #include <config.h>
 
 #include <check.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"
-#include "lib/vfs/xdirentry.h"
-
+#include "src/main.h"
 #include "src/vfs/local/local.c"
+
+#include "src/filemanager/panel.c"
+
+#include "do_panel_cd_stub_env.c"
 
 static void
 setup (void)
@@ -52,71 +54,42 @@ teardown (void)
     str_uninit_strings ();
 }
 
-static int
-test_chdir (const vfs_path_t * vpath)
-{
-#if 0
-    char *path = vfs_path_to_str (vpath);
-    printf ("test_chdir: %s\n", path);
-    g_free (path);
-#else
-    (void) vpath;
-#endif
-    return 0;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
-#define cd_and_check( cd_dir, etalon ) \
-    vpath = vfs_path_from_str (cd_dir); \
-    mc_chdir(vpath); \
-    vfs_path_free (vpath); \
-    buffer = _vfs_get_cwd (); \
-    fail_unless( \
-        strcmp(etalon, buffer) == 0, \
-        "\n expected(%s) doesn't equal \nto actual(%s)", etalon, buffer); \
-    g_free (buffer);
-
-START_TEST (set_up_current_dir_url)
+START_TEST (test_do_panel_cd_empty_mean_home)
 {
-    vfs_path_t *vpath;
-    static struct vfs_s_subclass test_subclass;
-    static struct vfs_class vfs_test_ops;
-    char *buffer;
+    char *cwd;
+    struct WPanel *panel;
+    gboolean ret;
+    vfs_path_t *empty_path;
 
-    vfs_s_init_class (&vfs_test_ops, &test_subclass);
+    cmdline = command_new (0, 0, 0);
 
-    vfs_test_ops.name = "testfs";
-    vfs_test_ops.flags = VFSF_NOLINKS;
-    vfs_test_ops.prefix = "test";
-    vfs_test_ops.chdir = test_chdir;
+    panel = g_new0(struct WPanel, 1);
+    panel->cwd_vpath = vfs_path_from_str("/home");
+    panel->lwd_vpath = vfs_path_from_str("/");
+    panel->sort_info.sort_field = g_new0(panel_field_t,1);
 
-    vfs_register_class (&vfs_test_ops);
+    empty_path = vfs_path_from_str (mc_config_get_home_dir());
+    ret = do_panel_cd (panel, empty_path, cd_parse_command);
+    vfs_path_free (empty_path);
 
-    cd_and_check ("/dev/some.file/test://", "/dev/some.file/test://");
+    fail_unless(ret);
+    cwd = vfs_path_to_str (panel->cwd_vpath);
+    fail_unless(strcmp(cwd, mc_config_get_home_dir ()) == 0);
 
-    cd_and_check ("/dev/some.file/test://bla-bla", "/dev/some.file/test://bla-bla");
 
-    cd_and_check ("..", "/dev/some.file/test://");
-
-    cd_and_check ("..", "/dev");
-
-    cd_and_check ("..", "/");
-
-    cd_and_check ("..", "/");
-
-    test_subclass.flags = VFS_S_REMOTE;
-
-    cd_and_check ("/test://user:pass@host.net/path", "/test://user:pass@host.net/path");
-    cd_and_check ("..", "/test://user:pass@host.net");
-
-    cd_and_check ("..", "/");
-
+    vfs_path_free (panel->cwd_vpath);
+    vfs_path_free (panel->lwd_vpath);
+    g_free ((gpointer) panel->sort_info.sort_field);
+    g_free (panel);
 }
 
 END_TEST
-    /* --------------------------------------------------------------------------------------------- */
-    int
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
 main (void)
 {
     int number_failed;
@@ -128,12 +101,12 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, set_up_current_dir_url);
+    tcase_add_test (tc_core, test_do_panel_cd_empty_mean_home);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "current_dir.log");
+    srunner_set_log (sr, "do_panel_cd.log");
     srunner_run_all (sr, CK_NORMAL);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);

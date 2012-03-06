@@ -366,13 +366,16 @@ next_file (void)
 static void
 do_chmod (struct stat *sf)
 {
+    vfs_path_t *vpath;
     sf->st_mode &= and_mask;
     sf->st_mode |= or_mask;
 
-    if (mc_chmod (current_panel->dir.list[c_file].fname, sf->st_mode) == -1)
+    vpath = vfs_path_from_str (current_panel->dir.list[c_file].fname);
+    if (mc_chmod (vpath, sf->st_mode) == -1)
         message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                  current_panel->dir.list[c_file].fname, unix_error_string (errno));
 
+    vfs_path_free (vpath);
     do_file_mark (current_panel, c_file, 0);
 }
 
@@ -389,9 +392,14 @@ apply_mask (struct stat *sf)
     do
     {
         char *fname;
+        vfs_path_t *vpath;
+        gboolean ok;
 
         fname = next_file ();
-        if (mc_stat (fname, sf) != 0)
+        vpath = vfs_path_from_str (fname);
+        ok = (mc_stat (vpath, sf) == 0);
+        vfs_path_free (vpath);
+        if (!ok)
             return;
 
         c_stat = sf->st_mode;
@@ -412,6 +420,7 @@ chmod_cmd (void)
 
     do
     {                           /* do while any files remaining */
+        vfs_path_t *vpath;
         Dlg_head *ch_dlg;
         struct stat sf_stat;
         char *fname;
@@ -430,8 +439,13 @@ chmod_cmd (void)
         else
             fname = selection (current_panel)->fname;   /* single file */
 
-        if (mc_stat (fname, &sf_stat) != 0)
+        vpath = vfs_path_from_str (fname);
+
+        if (mc_stat (vpath, &sf_stat) != 0)
+        {
+            vfs_path_free (vpath);
             break;
+        }
 
         c_stat = sf_stat.st_mode;
 
@@ -443,7 +457,7 @@ chmod_cmd (void)
         switch (result)
         {
         case B_ENTER:
-            if (mode_change && mc_chmod (fname, c_stat) == -1)
+            if (mode_change && mc_chmod (vpath, c_stat) == -1)
                 message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                          fname, unix_error_string (errno));
             need_update = TRUE;
@@ -498,6 +512,8 @@ chmod_cmd (void)
             do_file_mark (current_panel, c_file, 0);
             need_update = TRUE;
         }
+
+        vfs_path_free (vpath);
 
         destroy_dlg (ch_dlg);
     }

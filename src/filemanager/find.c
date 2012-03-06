@@ -177,7 +177,7 @@ static GQueue dir_queue = G_QUEUE_INIT;
 #else
 typedef struct dir_stack
 {
-    char *name;
+    vfs_path_t *name;
     struct dir_stack *prev;
 } dir_stack;
 
@@ -672,16 +672,21 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
     case B_TREE:
         {
-            const char *temp_dir = in_start->buffer;
+            char *temp_dir;
 
+            temp_dir = in_start->buffer;
             if ((temp_dir[0] == '\0') || ((temp_dir[0] == '.') && (temp_dir[1] == '\0')))
-                temp_dir = current_panel->cwd;
+                temp_dir = vfs_path_to_str (current_panel->cwd_vpath);
+            else
+                temp_dir = g_strdup (temp_dir);
 
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = tree_box (temp_dir);
             if (in_start_dir == NULL)
-                in_start_dir = g_strdup (temp_dir);
+                in_start_dir = temp_dir;
+            else
+                g_free (temp_dir);
 
             input_assign_text (in_start, in_start_dir);
 
@@ -723,10 +728,10 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
             if (s[0] == '.' && s[1] == '\0')
             {
-                *start_dir = g_strdup (current_panel->cwd);
-                /* FIXME: is current_panel->cwd canonicalized? */
+                *start_dir = vfs_path_to_str (current_panel->cwd_vpath);
+                /* FIXME: is current_panel->cwd_vpath canonicalized? */
                 /* relative paths will be used in panelization */
-                *start_dir_len = (ssize_t) strlen (current_panel->cwd);
+                *start_dir_len = (ssize_t) strlen (*start_dir);
                 g_free (s);
             }
             else if (g_path_is_absolute (s))
@@ -737,8 +742,12 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             else
             {
                 /* relative paths will be used in panelization */
-                *start_dir = mc_build_filename (current_panel->cwd, s, (char *) NULL);
-                *start_dir_len = (ssize_t) strlen (current_panel->cwd);
+                char *cwd_str;
+
+                cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
+                *start_dir = mc_build_filename (cwd_str, s, (char *) NULL);
+                *start_dir_len = (ssize_t) strlen (cwd_str);
+                g_free (cwd_str);
                 g_free (s);
             }
 
@@ -763,17 +772,17 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
 #if GLIB_CHECK_VERSION (2, 14, 0)
 static inline void
-push_directory (const char *dir)
+push_directory (const vfs_path_t * dir)
 {
     g_queue_push_head (&dir_queue, (void *) dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline char *
+static inline vfs_path_t *
 pop_directory (void)
 {
-    return (char *) g_queue_pop_tail (&dir_queue);
+    return (vfs_path_t *) g_queue_pop_tail (&dir_queue);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -782,7 +791,7 @@ pop_directory (void)
 static void
 clear_stack (void)
 {
-    g_queue_foreach (&dir_queue, (GFunc) g_free, NULL);
+    g_queue_foreach (&dir_queue, (GFunc) vfs_path_free, NULL);
     g_queue_clear (&dir_queue);
 }
 
@@ -790,22 +799,22 @@ clear_stack (void)
 
 #else /* GLIB_CHECK_VERSION */
 static void
-push_directory (const char *dir)
+push_directory (const vfs_path_t * dir)
 {
     dir_stack *new;
 
     new = g_new (dir_stack, 1);
-    new->name = (char *) dir;
+    new->name = (vfs_path_t *) dir;
     new->prev = dir_stack_base;
     dir_stack_base = new;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static vfs_path_t *
 pop_directory (void)
 {
-    char *name = NULL;
+    vfs_path_t *name = NULL;
 
     if (dir_stack_base != NULL)
     {
@@ -825,9 +834,10 @@ pop_directory (void)
 static void
 clear_stack (void)
 {
-    char *dir = NULL;
+    vfs_path_t *dir = NULL;
+
     while ((dir = pop_directory ()) != NULL)
-        g_free (dir);
+        vfs_path_free (dir);
 }
 #endif /* GLIB_CHECK_VERSION */
 
@@ -979,20 +989,20 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
 {
     struct stat s;
     char buffer[BUF_4K];
-    char *fname = NULL;
     int file_fd;
     gboolean ret_val = FALSE;
+    vfs_path_t *vpath;
 
-    fname = mc_build_filename (directory, filename, (char *) NULL);
+    vpath = vfs_path_build_filename (directory, filename, (char *) NULL);
 
-    if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode))
+    if (mc_stat (vpath, &s) != 0 || !S_ISREG (s.st_mode))
     {
-        g_free (fname);
+        vfs_path_free (vpath);
         return FALSE;
     }
 
-    file_fd = mc_open (fname, O_RDONLY);
-    g_free (fname);
+    file_fd = mc_open (vpath, O_RDONLY);
+    vfs_path_free (vpath);
 
     if (file_fd == -1)
         return FALSE;
@@ -1188,14 +1198,14 @@ do_search (Dlg_head * h)
 
             while (dirp == NULL)
             {
-                char *tmp = NULL;
+                vfs_path_t *tmp_vpath = NULL;
 
                 tty_setcolor (REVERSE_COLOR);
 
                 while (TRUE)
                 {
-                    tmp = pop_directory ();
-                    if (tmp == NULL)
+                    tmp_vpath = pop_directory ();
+                    if (tmp_vpath == NULL)
                     {
                         running = FALSE;
                         if (ignore_count == 0)
@@ -1215,15 +1225,23 @@ do_search (Dlg_head * h)
                     }
 
                     /* handle absolute ignore dirs here */
-                    if (!find_ignore_dir_search (tmp))
-                        break;
+                    {
+                        char *tmp;
+                        gboolean ok;
 
-                    g_free (tmp);
+                        tmp = vfs_path_to_str (tmp_vpath);
+                        ok = find_ignore_dir_search (tmp);
+                        g_free (tmp);
+                        if (!ok)
+                            break;
+                    }
+
+                    vfs_path_free (tmp_vpath);
                     ignore_count++;
                 }
 
                 g_free (directory);
-                directory = tmp;
+                directory = vfs_path_to_str (tmp_vpath);
 
                 if (verbose)
                 {
@@ -1236,12 +1254,13 @@ do_search (Dlg_head * h)
                 /* mc_stat should not be called after mc_opendir
                    because vfs_s_opendir modifies the st_nlink
                  */
-                if (mc_stat (directory, &tmp_stat) == 0)
+                if (mc_stat (tmp_vpath, &tmp_stat) == 0)
                     subdirs_left = tmp_stat.st_nlink - 2;
                 else
                     subdirs_left = 0;
 
-                dirp = mc_opendir (directory);
+                dirp = mc_opendir (tmp_vpath);
+                vfs_path_free (tmp_vpath);
             }                   /* while (!dirp) */
 
             /* skip invalid filenames */
@@ -1269,17 +1288,17 @@ do_search (Dlg_head * h)
                     ignore_count++;
                 else
                 {
-                    char *tmp_name;
+                    vfs_path_t *tmp_vpath;
 
-                    tmp_name = mc_build_filename (directory, dp->d_name, (char *) NULL);
+                    tmp_vpath = vfs_path_build_filename (directory, dp->d_name, (char *) NULL);
 
-                    if (mc_lstat (tmp_name, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
+                    if (mc_lstat (tmp_vpath, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
                     {
-                        push_directory (tmp_name);
+                        push_directory (tmp_vpath);
                         subdirs_left--;
                     }
                     else
-                        g_free (tmp_name);
+                        vfs_path_free (tmp_vpath);
                 }
             }
 
@@ -1330,6 +1349,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
     char *fullname = NULL;
     const char *filename = NULL;
     int line;
+    vfs_path_t *fullname_vpath;
 
     if (content_pattern != NULL)
     {
@@ -1342,11 +1362,12 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
         line = 0;
     }
 
-    fullname = mc_build_filename (dir, filename, (char *) NULL);
+    fullname_vpath = vfs_path_build_filename (dir, filename, (char *) NULL);
     if (edit)
-        do_edit_at_line (fullname, use_internal_edit, line);
+        do_edit_at_line (fullname_vpath, use_internal_edit, line);
     else
-        view_file_at_line (fullname, unparsed_view, use_internal_view, line);
+        view_file_at_line (fullname_vpath, unparsed_view, use_internal_view, line);
+    vfs_path_free (fullname_vpath);
     g_free (fullname);
 }
 
@@ -1589,7 +1610,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 
     init_find_vars ();
     parse_ignore_dirs (ignore_dirs);
-    push_directory (start_dir);
+    push_directory (vfs_path_from_str (start_dir));
 
     return_value = run_process ();
 
@@ -1687,8 +1708,8 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             if (start_dir_len < 0)
             {
                 int ret;
-
-                strcpy (current_panel->cwd, PATH_SEP_STR);
+                vfs_path_free (current_panel->cwd_vpath);
+                current_panel->cwd_vpath = vfs_path_from_str (PATH_SEP_STR);
                 ret = chdir (PATH_SEP_STR);
             }
             panelize_save_panel (current_panel);
@@ -1731,14 +1752,24 @@ find_file (void)
         {
             if (dirname != NULL)
             {
-                do_cd (dirname, cd_exact);
+                vfs_path_t *dirname_vpath;
+
+                dirname_vpath = vfs_path_from_str (dirname);
+                do_cd (dirname_vpath, cd_exact);
+                vfs_path_free (dirname_vpath);
                 if (filename != NULL)
                     try_to_select (current_panel,
                                    filename + (content != NULL
                                                ? strchr (filename + 4, ':') - filename + 1 : 4));
             }
             else if (filename != NULL)
-                do_cd (filename, cd_exact);
+            {
+                vfs_path_t *filename_vpath;
+
+                filename_vpath = vfs_path_from_str (filename);
+                do_cd (filename_vpath, cd_exact);
+                vfs_path_free (filename_vpath);
+            }
 
             g_free (dirname);
             g_free (filename);

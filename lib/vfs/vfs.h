@@ -182,8 +182,9 @@ typedef struct vfs_class
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
 
-    char *(*getlocalcopy) (const vfs_path_t * vpath);
-    int (*ungetlocalcopy) (const vfs_path_t * vpath, const char *local, int has_changed);
+    vfs_path_t *(*getlocalcopy) (const vfs_path_t * vpath);
+    int (*ungetlocalcopy) (const vfs_path_t * vpath, const vfs_path_t * local_vpath,
+                           gboolean has_changed);
 
     int (*mkdir) (const vfs_path_t * vpath, mode_t mode);
     int (*rmdir) (const vfs_path_t * vpath);
@@ -264,6 +265,7 @@ void *vfs_class_data_find_by_handle (int handle);
 
 void vfs_free_handle (int handle);
 
+void vfs_setup_cwd (void);
 char *_vfs_get_cwd (void);
 
 vfs_path_t *vfs_change_encoding (vfs_path_t * vpath, const char *encoding);
@@ -275,33 +277,38 @@ int vfs_preallocate (int dest_desc, off_t src_fsize, off_t dest_fsize);
  */
 ssize_t mc_read (int handle, void *buffer, size_t count);
 ssize_t mc_write (int handle, const void *buffer, size_t count);
-int mc_utime (const char *path, struct utimbuf *times);
-int mc_readlink (const char *path, char *buf, size_t bufsiz);
+int mc_utime (const vfs_path_t * vpath, struct utimbuf *times);
+int mc_readlink (const vfs_path_t * vpath, char *buf, size_t bufsiz);
 int mc_close (int handle);
 off_t mc_lseek (int fd, off_t offset, int whence);
-DIR *mc_opendir (const char *dirname);
+DIR *mc_opendir (const vfs_path_t * vpath);
 struct dirent *mc_readdir (DIR * dirp);
 int mc_closedir (DIR * dir);
-int mc_stat (const char *path, struct stat *buf);
-int mc_mknod (const char *path, mode_t mode, dev_t dev);
-int mc_link (const char *name1, const char *name2);
-int mc_mkdir (const char *path, mode_t mode);
-int mc_rmdir (const char *path);
+int mc_stat (const vfs_path_t * vpath, struct stat *buf);
+int mc_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev);
+int mc_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
+int mc_mkdir (const vfs_path_t * vpath, mode_t mode);
+int mc_rmdir (const vfs_path_t * vpath);
 int mc_fstat (int fd, struct stat *buf);
-int mc_lstat (const char *path, struct stat *buf);
-int mc_symlink (const char *name1, const char *name2);
-int mc_rename (const char *original, const char *target);
-int mc_chmod (const char *path, mode_t mode);
-int mc_chown (const char *path, uid_t owner, gid_t group);
-int mc_chdir (const char *path);
-int mc_unlink (const char *path);
+int mc_lstat (const vfs_path_t * vpath, struct stat *buf);
+int mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
+int mc_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
+int mc_chmod (const vfs_path_t * vpath, mode_t mode);
+int mc_chown (const vfs_path_t * vpath, uid_t owner, gid_t group);
+int mc_chdir (const vfs_path_t * vpath);
+int mc_unlink (const vfs_path_t * vpath);
 int mc_ctl (int fd, int ctlop, void *arg);
-int mc_setctl (const char *path, int ctlop, void *arg);
-int mc_open (const char *filename, int flags, ...);
-char *mc_get_current_wd (char *buffer, size_t bufsize);
-char *mc_getlocalcopy (const char *pathname);
-int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
+int mc_setctl (const vfs_path_t * vpath, int ctlop, void *arg);
+int mc_open (const vfs_path_t * vpath, int flags, ...);
+vfs_path_t *mc_getlocalcopy (const vfs_path_t * pathname_vpath);
+int mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_vpath,
+                       gboolean has_changed);
+int mc_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *suffix);
+
+/* Creating temporary files safely */
+const char *mc_tmpdir (void);
 
 
 /*** inline functions ****************************************************************************/
+
 #endif /* MC_VFS_VFS_H */

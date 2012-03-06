@@ -31,6 +31,8 @@
 
 #include <stdio.h>
 
+#include "lib/global.h"
+#include "lib/vfs/path.h"
 #include "src/filemanager/layout.h"
 #include "src/filemanager/midnight.h"
 #include "src/filemanager/tree.h"
@@ -56,9 +58,9 @@ get_current_type (void)
 }
 
 gboolean
-do_cd (const char *new_dir, enum cd_enum cd_type)
+do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
-    (void) new_dir;
+    (void) new_dir_vpath;
     (void) cd_type;
 
     return TRUE;

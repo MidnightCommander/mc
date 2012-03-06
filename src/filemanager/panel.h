@@ -43,8 +43,8 @@ typedef enum
 
 typedef enum
 {
-    UP_OPTIMIZE     = 0,
-    UP_RELOAD       = 1,
+    UP_OPTIMIZE = 0,
+    UP_RELOAD = 1,
     UP_ONLY_CURRENT = 2
 } panel_update_flags_t;
 
@@ -70,14 +70,14 @@ typedef struct
 {
     dir_list list;
     int count;
-    char root[MC_MAXPATHLEN];
+    vfs_path_t *root_vpath;
 } panelized_panel_t;
 
 typedef struct panel_sort_info_struct
 {
-    gboolean reverse;                /* Show listing in reverse? */
-    gboolean case_sensitive;         /* Listing is case sensitive? */
-    gboolean exec_first;             /* Show executable top in list? */
+    gboolean reverse;           /* Show listing in reverse? */
+    gboolean case_sensitive;    /* Listing is case sensitive? */
+    gboolean exec_first;        /* Show executable top in list? */
     const panel_field_t *sort_field;
 } panel_sort_info_t;
 
@@ -88,8 +88,8 @@ typedef struct WPanel
 
     int list_type;              /* listing type (was view_type) */
     int active;                 /* If panel is currently selected */
-    char cwd[MC_MAXPATHLEN];    /* Current Working Directory */
-    char lwd[MC_MAXPATHLEN];    /* Last Working Directory */
+    vfs_path_t *cwd_vpath;      /* Current Working Directory */
+    vfs_path_t *lwd_vpath;      /* Last Working Directory */
     GList *dir_history;         /* directory history */
     char *hist_name;            /* directory history name for history file */
     int count;                  /* Number of files in dir structure */
@@ -161,11 +161,11 @@ void recalculate_panel_summary (WPanel * panel);
 void file_mark (WPanel * panel, int idx, int val);
 void do_file_mark (WPanel * panel, int idx, int val);
 
-gboolean do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
+gboolean do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
 void directory_history_add (struct WPanel *panel, const char *dir);
 
-char *remove_encoding_from_path (const char *path);
+vfs_path_t *remove_encoding_from_path (const vfs_path_t * vpath);
 
 gsize panel_get_num_of_sortable_fields (void);
 const char **panel_get_sortable_fields (gsize *);
@@ -174,6 +174,8 @@ const panel_field_t *panel_get_field_by_title (const char *);
 const panel_field_t *panel_get_field_by_title_hotkey (const char *);
 gsize panel_get_num_of_user_possible_fields (void);
 const char **panel_get_user_possible_fields (gsize *);
+void panel_set_cwd (WPanel * panel, const char *path_str);
+void panel_set_lwd (WPanel * panel, const char *path_str);
 
 void panel_init (void);
 void panel_deinit (void);

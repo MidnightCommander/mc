@@ -73,7 +73,7 @@ struct Widget *get_panel_widget (int idx);
 struct WPanel *get_other_panel (void);
 
 void save_panel_dir (int idx);
-const char *get_panel_dir_for (const struct WPanel * widget);
+char *get_panel_dir_for (const struct WPanel * widget);
 
 void set_hintbar (const char *str);
 

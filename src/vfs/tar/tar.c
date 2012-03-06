@@ -287,37 +287,46 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
     tar_super_data_t *arch;
     mode_t mode;
     struct vfs_s_inode *root;
-    char *archive_name = vfs_path_to_str (vpath);
 
-    result = mc_open (archive_name, O_RDONLY);
+    result = mc_open (vpath, O_RDONLY);
     if (result == -1)
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), archive_name);
-        g_free (archive_name);
+        char *name;
+
+        name = vfs_path_to_str (vpath);
+        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
+        g_free (name);
         ERRNOR (ENOENT, -1);
     }
 
-    archive->name = archive_name;
+    archive->name = vfs_path_to_str (vpath);
     archive->data = g_new (tar_super_data_t, 1);
     arch = (tar_super_data_t *) archive->data;
-    mc_stat (archive_name, &arch->st);
+    mc_stat (vpath, &arch->st);
     arch->fd = -1;
     arch->type = TAR_UNKNOWN;
 
     /* Find out the method to handle this tar file */
-    type = get_compression_type (result, archive_name);
+    type = get_compression_type (result, archive->name);
     mc_lseek (result, 0, SEEK_SET);
     if (type != COMPRESSION_NONE)
     {
         char *s;
+        vfs_path_t *tmp_vpath;
+
         mc_close (result);
         s = g_strconcat (archive->name, decompress_extension (type), (char *) NULL);
-        result = mc_open (s, O_RDONLY);
+        tmp_vpath = vfs_path_from_str (s);
+        result = mc_open (tmp_vpath, O_RDONLY);
+        vfs_path_free (tmp_vpath);
         if (result == -1)
             message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
         g_free (s);
         if (result == -1)
+        {
+            g_free (archive->name);
             ERRNOR (ENOENT, -1);
+        }
     }
 
     arch->fd = result;
@@ -401,14 +410,15 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
     case TAR_USTAR:
     case TAR_POSIX:
     case TAR_GNU:
-        st->st_uid =
-            *header->header.uname ? vfs_finduid (header->header.uname) : tar_from_oct (8,
-                                                                                       header->
-                                                                                       header.uid);
-        st->st_gid =
-            *header->header.gname ? vfs_findgid (header->header.gname) : tar_from_oct (8,
-                                                                                       header->
-                                                                                       header.gid);
+        /* *INDENT-OFF* */
+        st->st_uid = *header->header.uname
+            ? vfs_finduid (header->header.uname)
+            : tar_from_oct (8, header->header.uid);
+        st->st_gid = *header->header.gname
+            ? vfs_findgid (header->header.gname)
+            : tar_from_oct (8,header->header.gid);
+        /* *INDENT-ON* */
+
         switch (header->header.linkflag)
         {
         case LF_BLK:
@@ -818,11 +828,9 @@ static void *
 tar_super_check (const vfs_path_t * vpath)
 {
     static struct stat stat_buf;
-    char *archive_name = vfs_path_to_str (vpath);
     int stat_result;
 
-    stat_result = mc_stat (archive_name, &stat_buf);
-    g_free (archive_name);
+    stat_result = mc_stat (vpath, &stat_buf);
 
     return (stat_result != 0) ? NULL : &stat_buf;
 }
@@ -903,7 +911,7 @@ init_tarfs (void)
 {
     static struct vfs_s_subclass tarfs_subclass;
 
-    tarfs_subclass.flags = VFS_S_READONLY;
+    tarfs_subclass.flags = VFS_S_READONLY;       /* FIXME: tarfs used own temp files */
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
     tarfs_subclass.open_archive = tar_open_archive;
