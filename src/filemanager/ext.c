@@ -85,61 +85,75 @@ typedef char *(*quote_func_t) (const char *name, int quote_percent);
  * need it
  */
 static char *data = NULL;
+static vfs_path_t *localfilecopy_vpath = NULL;
+static char buffer[BUF_1K];
+
+static char *pbuffer = NULL;
+static time_t localmtime = 0;
+static quote_func_t quote_func = name_quote;
+static gboolean run_view = FALSE;
+static gboolean is_cd = FALSE;
+static gboolean written_nonspace = FALSE;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension (const char *filename, const char *lc_data, int *move_dir, int start_line)
+exec_cleanup_file_name (vfs_path_t * filename_vpath, gboolean has_changed)
 {
-    vfs_path_t *file_name_vpath;
-    int cmd_file_fd;
-    FILE *cmd_file;
-    char *cmd = NULL;
-    int expand_prefix_found = 0;
-    int parameter_found = 0;
-    char lc_prompt[80];
-    int run_view = 0;
-    int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
-    int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
-    int written_nonspace = 0;
-    int is_cd = 0;
-    char buffer[1024];
-    char *p = 0;
-    vfs_path_t *localcopy_vpath = NULL;
-    int do_local_copy;
-    time_t localmtime = 0;
-    struct stat mystat;
-    quote_func_t quote_func = name_quote;
-    vfs_path_t *vpath;
+    if (localfilecopy_vpath == NULL)
+        return;
 
-    g_return_if_fail (filename != NULL);
-    g_return_if_fail (lc_data != NULL);
-
-    vpath = vfs_path_from_str (filename);
-
-    /* Avoid making a local copy if we are doing a cd */
-    do_local_copy = vfs_file_is_local (vpath) ? 0 : 1;
-
-    /*
-     * All commands should be run in /bin/sh regardless of user shell.
-     * To do that, create temporary shell script and run it.
-     * Sometimes it's not needed (e.g. for %cd and %view commands),
-     * but it's easier to create it anyway.
-     */
-    cmd_file_fd = mc_mkstemps (&file_name_vpath, "mcext", SCRIPT_SUFFIX);
-
-    if (cmd_file_fd == -1)
+    if (has_changed)
     {
-        message (D_ERROR, MSG_ERROR,
-                 _("Cannot create temporary command file\n%s"), unix_error_string (errno));
-        goto ret;
+        struct stat mystat;
+
+        mc_stat (localfilecopy_vpath, &mystat);
+        has_changed = localmtime != mystat.st_mtime;
+    }
+    mc_ungetlocalcopy (filename_vpath, localfilecopy_vpath, has_changed);
+    vfs_path_free (localfilecopy_vpath);
+    localfilecopy_vpath = NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+exec_get_file_name (gboolean do_local_copy, vfs_path_t * filename_vpath)
+{
+    if (!do_local_copy)
+        return quote_func (vfs_path_get_last_path_str (filename_vpath), 0);
+
+    if (localfilecopy_vpath == NULL)
+    {
+        struct stat mystat;
+        localfilecopy_vpath = mc_getlocalcopy (filename_vpath);
+        if (localfilecopy_vpath == NULL)
+            return NULL;
+
+        mc_stat (localfilecopy_vpath, &mystat);
+        localmtime = mystat.st_mtime;
     }
 
-    cmd_file = fdopen (cmd_file_fd, "w");
-    fputs ("#! /bin/sh\n", cmd_file);
+    return quote_func (vfs_path_get_last_path_str (localfilecopy_vpath), 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+exec_make_shell_string (const char *lc_data, vfs_path_t * filename_vpath)
+{
+    GString *shell_string = g_string_new ("");
+    char lc_prompt[80];
+    gboolean parameter_found = FALSE;
+    gboolean expand_prefix_found = FALSE;
+    gboolean do_local_copy;
+
+    /* Avoid making a local copy if we are doing a cd */
+    do_local_copy = !vfs_file_is_local (filename_vpath);
 
     lc_prompt[0] = '\0';
+
     for (; *lc_data != '\0' && *lc_data != '\n'; lc_data++)
     {
         if (parameter_found)
@@ -148,22 +162,17 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
             {
                 char *parameter;
 
-                parameter_found = 0;
+                parameter_found = FALSE;
                 parameter = input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_EXT_PARAMETER, "");
                 if (parameter == NULL)
                 {
                     /* User canceled */
-                    fclose (cmd_file);
-                    mc_unlink (file_name_vpath);
-                    if (localcopy_vpath != NULL)
-                    {
-                        mc_ungetlocalcopy (vpath, localcopy_vpath, FALSE);
-                        vfs_path_free (localcopy_vpath);
-                    }
-                    goto ret;
+                    g_string_free (shell_string, TRUE);
+                    exec_cleanup_file_name (filename_vpath, FALSE);
+                    return NULL;
                 }
-                fputs (parameter, cmd_file);
-                written_nonspace = 1;
+                g_string_append (shell_string, parameter);
+                written_nonspace = TRUE;
                 g_free (parameter);
             }
             else
@@ -179,9 +188,9 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         }
         else if (expand_prefix_found)
         {
-            expand_prefix_found = 0;
+            expand_prefix_found = FALSE;
             if (*lc_data == '{')
-                parameter_found = 1;
+                parameter_found = TRUE;
             else
             {
                 int i;
@@ -191,17 +200,18 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                 if (i != 0)
                 {
                     lc_data += i - 1;
-                    run_view = 1;
+                    run_view = TRUE;
                 }
                 else
                 {
+
                     i = check_format_cd (lc_data);
                     if (i > 0)
                     {
-                        is_cd = 1;
+                        is_cd = TRUE;
                         quote_func = fake_name_quote;
-                        do_local_copy = 0;
-                        p = buffer;
+                        do_local_copy = FALSE;
+                        pbuffer = buffer;
                         lc_data += i - 1;
                     }
                     else
@@ -209,7 +219,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                         i = check_format_var (lc_data, &v);
                         if (i > 0 && v != NULL)
                         {
-                            fputs (v, cmd_file);
+                            g_string_append (shell_string, v);
                             g_free (v);
                             lc_data += i;
                         }
@@ -221,57 +231,172 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
                                 text = expand_format (NULL, *lc_data, !is_cd);
                             else
                             {
-                                if (do_local_copy)
+                                text = exec_get_file_name (do_local_copy, filename_vpath);
+                                if (text == NULL)
                                 {
-                                    localcopy_vpath = mc_getlocalcopy (vpath);
-                                    if (localcopy_vpath == NULL)
-                                    {
-                                        fclose (cmd_file);
-                                        mc_unlink (file_name_vpath);
-                                        goto ret;
-                                    }
-                                    mc_stat (localcopy_vpath, &mystat);
-                                    localmtime = mystat.st_mtime;
-                                    text =
-                                        quote_func (vfs_path_get_last_path_str (localcopy_vpath),
-                                                    0);
-                                }
-                                else
-                                {
-                                    const vfs_path_element_t *path_element;
-
-                                    path_element = vfs_path_get_by_index (vpath, -1);
-                                    text = quote_func (path_element->path, 0);
+                                    g_string_free (shell_string, TRUE);
+                                    return NULL;
                                 }
                             }
 
                             if (!is_cd)
-                                fputs (text, cmd_file);
+                                g_string_append (shell_string, text);
                             else
                             {
-                                strcpy (p, text);
-                                p = strchr (p, 0);
+                                strcpy (pbuffer, text);
+                                pbuffer = strchr (pbuffer, 0);
                             }
 
                             g_free (text);
-                            written_nonspace = 1;
+                            written_nonspace = TRUE;
                         }
                     }
                 }
             }
         }
         else if (*lc_data == '%')
-            expand_prefix_found = 1;
+            expand_prefix_found = TRUE;
         else
         {
             if (*lc_data != ' ' && *lc_data != '\t')
-                written_nonspace = 1;
+                written_nonspace = TRUE;
             if (is_cd)
-                *(p++) = *lc_data;
+                *(pbuffer++) = *lc_data;
             else
-                fputc (*lc_data, cmd_file);
+                g_string_append_c (shell_string, *lc_data);
         }
     }                           /* for */
+    return g_string_free (shell_string, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+exec_extension_view (char *cmd, vfs_path_t * filename_vpath, int *move_dir, int start_line,
+                     vfs_path_t * temp_file_name_vpath)
+{
+    mcview_ret_t ret;
+    int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
+    int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
+
+    mcview_altered_hex_mode = 0;
+    mcview_altered_nroff_flag = 0;
+    if (def_hex_mode != mcview_default_hex_mode)
+        changed_hex_mode = 1;
+    if (def_nroff_flag != mcview_default_nroff_flag)
+        changed_nroff_flag = 1;
+
+    /* If we've written whitespace only, then just load filename
+     * into view
+     */
+    if (written_nonspace)
+    {
+        ret = mcview_viewer (cmd, filename_vpath, start_line);
+        mc_unlink (temp_file_name_vpath);
+    }
+    else
+        ret = mcview_viewer (NULL, filename_vpath, start_line);
+
+    if (move_dir != NULL)
+        switch (ret)
+        {
+        case MCVIEW_WANT_NEXT:
+            *move_dir = 1;
+            break;
+        case MCVIEW_WANT_PREV:
+            *move_dir = -1;
+            break;
+        default:
+            *move_dir = 0;
+        }
+
+    if (changed_hex_mode && !mcview_altered_hex_mode)
+        mcview_default_hex_mode = def_hex_mode;
+    if (changed_nroff_flag && !mcview_altered_nroff_flag)
+        mcview_default_nroff_flag = def_nroff_flag;
+
+    dialog_switch_process_pending ();
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+exec_extension_cd (void)
+{
+    char *q;
+    vfs_path_t *p_vpath;
+
+    *pbuffer = '\0';
+    pbuffer = buffer;
+    /*      while (*p == ' ' && *p == '\t')
+     *          p++;
+     */
+    /* Search last non-space character. Start search at the end in order
+       not to short filenames containing spaces. */
+    q = pbuffer + strlen (pbuffer) - 1;
+    while (q >= pbuffer && (*q == ' ' || *q == '\t'))
+        q--;
+    q[1] = 0;
+
+    p_vpath = vfs_path_from_str_flags (pbuffer, VPF_NO_CANON);
+    do_cd (p_vpath, cd_parse_command);
+    vfs_path_free (p_vpath);
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+exec_extension (const char *filename, const char *lc_data, int *move_dir, int start_line)
+{
+    char *shell_string;
+    vfs_path_t *temp_file_name_vpath;
+    int cmd_file_fd;
+    FILE *cmd_file;
+    char *cmd = NULL;
+    vfs_path_t *filename_vpath;
+
+    g_return_if_fail (filename != NULL);
+    g_return_if_fail (lc_data != NULL);
+
+    pbuffer = NULL;
+    localmtime = 0;
+    quote_func = name_quote;
+    run_view = FALSE;
+    is_cd = FALSE;
+    written_nonspace = FALSE;
+
+    filename_vpath = vfs_path_from_str (filename);
+
+    shell_string = exec_make_shell_string (lc_data, filename_vpath);
+
+    if (shell_string == NULL)
+    {
+        vfs_path_free (filename_vpath);
+        return;
+    }
+
+    /*
+     * All commands should be run in /bin/sh regardless of user shell.
+     * To do that, create temporary shell script and run it.
+     * Sometimes it's not needed (e.g. for %cd and %view commands),
+     * but it's easier to create it anyway.
+     */
+    cmd_file_fd = mc_mkstemps (&temp_file_name_vpath, "mcext", SCRIPT_SUFFIX);
+
+    if (cmd_file_fd == -1)
+    {
+        message (D_ERROR, MSG_ERROR,
+                 _("Cannot create temporary command file\n%s"), unix_error_string (errno));
+        goto ret;
+    }
+
+    cmd_file = fdopen (cmd_file_fd, "w");
+    fputs ("#! /bin/sh\n\n", cmd_file);
+
+    fputs (shell_string, cmd_file);
+    g_free (shell_string);
 
     /*
      * Make the script remove itself when it finishes.
@@ -282,7 +407,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     {
         char *file_name;
 
-        file_name = vfs_path_to_str (file_name_vpath);
+        file_name = vfs_path_to_str (temp_file_name_vpath);
         fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
         g_free (file_name);
     }
@@ -291,85 +416,26 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
     if ((run_view && !written_nonspace) || is_cd)
     {
-        mc_unlink (file_name_vpath);
-        vfs_path_free (file_name_vpath);
-        file_name_vpath = NULL;
+        mc_unlink (temp_file_name_vpath);
+        vfs_path_free (temp_file_name_vpath);
+        temp_file_name_vpath = NULL;
     }
     else
     {
         char *file_name;
 
-        file_name = vfs_path_to_str (file_name_vpath);
+        file_name = vfs_path_to_str (temp_file_name_vpath);
         /* Set executable flag on the command file ... */
-        mc_chmod (file_name_vpath, S_IRWXU);
+        mc_chmod (temp_file_name_vpath, S_IRWXU);
         /* ... but don't rely on it - run /bin/sh explicitly */
         cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
         g_free (file_name);
     }
 
     if (run_view)
-    {
-        mcview_ret_t ret;
-
-        mcview_altered_hex_mode = 0;
-        mcview_altered_nroff_flag = 0;
-        if (def_hex_mode != mcview_default_hex_mode)
-            changed_hex_mode = 1;
-        if (def_nroff_flag != mcview_default_nroff_flag)
-            changed_nroff_flag = 1;
-
-        /* If we've written whitespace only, then just load filename
-         * into view
-         */
-        if (written_nonspace)
-        {
-            ret = mcview_viewer (cmd, vpath, start_line);
-            mc_unlink (file_name_vpath);
-        }
-        else
-            ret = mcview_viewer (NULL, vpath, start_line);
-
-        if (move_dir != NULL)
-            switch (ret)
-            {
-            case MCVIEW_WANT_NEXT:
-                *move_dir = 1;
-                break;
-            case MCVIEW_WANT_PREV:
-                *move_dir = -1;
-                break;
-            default:
-                *move_dir = 0;
-            }
-
-        if (changed_hex_mode && !mcview_altered_hex_mode)
-            mcview_default_hex_mode = def_hex_mode;
-        if (changed_nroff_flag && !mcview_altered_nroff_flag)
-            mcview_default_nroff_flag = def_nroff_flag;
-
-        dialog_switch_process_pending ();
-    }
+        exec_extension_view (cmd, filename_vpath, move_dir, start_line, temp_file_name_vpath);
     else if (is_cd)
-    {
-        char *q;
-        vfs_path_t *p_vpath;
-
-        *p = 0;
-        p = buffer;
-        /*      while (*p == ' ' && *p == '\t')
-         *          p++;
-         */
-        /* Search last non-space character. Start search at the end in order
-           not to short filenames containing spaces. */
-        q = p + strlen (p) - 1;
-        while (q >= p && (*q == ' ' || *q == '\t'))
-            q--;
-        q[1] = 0;
-
-        p_vpath = vfs_path_from_str_flags (p, VPF_NO_CANON);
-        do_cd (p_vpath, cd_parse_command);
-        vfs_path_free (p_vpath);
-    }
+        exec_extension_cd ();
     else
     {
         shell_execute (cmd, EXECUTE_INTERNAL);
@@ -385,15 +451,10 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
     g_free (cmd);
 
-    if (localcopy_vpath != NULL)
-    {
-        mc_stat (localcopy_vpath, &mystat);
-        mc_ungetlocalcopy (vpath, localcopy_vpath, localmtime != mystat.st_mtime);
-        vfs_path_free (localcopy_vpath);
-    }
+    exec_cleanup_file_name (filename_vpath, TRUE);
   ret:
-    vfs_path_free (file_name_vpath);
-    vfs_path_free (vpath);
+    vfs_path_free (temp_file_name_vpath);
+    vfs_path_free (filename_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -512,7 +573,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
     if (*have_type == 0)
     {
         vfs_path_t *localfile_vpath;
-        const char *realname;         /* name used with "file" */
+        const char *realname;   /* name used with "file" */
 
 #ifdef HAVE_CHARSET
         int got_encoding_data;
@@ -766,14 +827,14 @@ regex_command (const vfs_path_t * filename_vpath, const char *action, int *move_
             else if (!strncmp (p, "shell/", 6))
             {
                 p += 6;
-                if (*p == '.' && file_len >= (size_t)(q - p))
+                if (*p == '.' && file_len >= (size_t) (q - p))
                 {
                     if (!strncmp (p, filename + file_len - (q - p), q - p))
                         found = 1;
                 }
                 else
                 {
-                    if ((size_t)(q - p) == file_len && !strncmp (p, filename, q - p))
+                    if ((size_t) (q - p) == file_len && !strncmp (p, filename, q - p))
                         found = 1;
                 }
             }
@@ -829,32 +890,26 @@ regex_command (const vfs_path_t * filename_vpath, const char *action, int *move_
                             break;
                         continue;
                     }
-                    if (!strcmp (action, p))
+
+                    if (strcmp (action, p) != 0)
+                        *r = c;
+                    else
                     {
                         *r = c;
-                        for (p = r + 1; *p == ' ' || *p == '\t'; p++);
+
+                        for (p = r + 1; *p == ' ' || *p == '\t'; p++)
+                            ;
 
                         /* Empty commands just stop searching
                          * through, they don't do anything
-                         *
-                         * We need to copy the filename because exec_extension
-                         * may end up invoking update_panels thus making the
-                         * filename parameter invalid (ie, most of the time,
-                         * we get filename as a pointer from current_panel->dir).
                          */
                         if (p < q)
                         {
-                            char *filename_copy = g_strdup (filename);
-
-                            exec_extension (filename_copy, r + 1, move_dir, view_at_line_number);
-                            g_free (filename_copy);
-
+                            exec_extension (filename, r + 1, move_dir, view_at_line_number);
                             ret = 1;
                         }
                         break;
                     }
-                    else
-                        *r = c;
                 }
             }
             p = q;
