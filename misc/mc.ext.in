@@ -40,7 +40,9 @@
 # command is any one-line shell command, with the following substitutions:
 #
 # %% -> % character
-# %p -> name of the current file (without path, but pwd is its path)
+# %p -> name of the current file (without path, but pwd is its path).
+#       Also provided to external application as MC_EXT_BASENAME
+#       global variable
 # %f -> name of the current file. Unlike %p, if file is located on a
 #	non-local virtual filesystem, i.e. either tarfs or ftpfs,
 #	then the file will be temporarily copied into a local directory
@@ -48,10 +50,18 @@
 #	If you don't want to get a local copy and want to get the
 #	virtual fs path (like /#ftp:ftp.cvut.cz/pub/hungry/xword), then
 #	use %d/%p instead of %f.
+#       Also provided to external application as MC_EXT_FILENAME
+#       global variable
 # %d -> name of the current directory (pwd, without trailing slash)
+#       Also provided to external application as MC_EXT_CURRENTDIR
+#       global variable
 # %s -> "selected files", i.e. space separated list of tagged files if any
-#       or name of the current file
+#       or name of the current file.
+#       Also provided to external application as MC_EXT_SELECTED
+#       global variable
 # %t -> list of tagged files
+#       Also provided to external application as MC_EXT_ONLYTAGGED
+#       global variable
 # %u -> list of tagged files (they'll be untaged after the command)
 #
 # (If these 6 letters are in uppercase, they refer to the other panel.

@@ -94,6 +94,7 @@ static quote_func_t quote_func = name_quote;
 static gboolean run_view = FALSE;
 static gboolean is_cd = FALSE;
 static gboolean written_nonspace = FALSE;
+static gboolean do_local_copy = FALSE;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -119,7 +120,7 @@ exec_cleanup_file_name (vfs_path_t * filename_vpath, gboolean has_changed)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-exec_get_file_name (gboolean do_local_copy, vfs_path_t * filename_vpath)
+exec_get_file_name (vfs_path_t * filename_vpath)
 {
     if (!do_local_copy)
         return quote_func (vfs_path_get_last_path_str (filename_vpath), 0);
@@ -141,18 +142,59 @@ exec_get_file_name (gboolean do_local_copy, vfs_path_t * filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
+exec_get_export_variables (vfs_path_t * filename_vpath)
+{
+    char *text;
+    GString *export_vars_string;
+    size_t i;
+
+    /* *INDENT-OFF* */
+    struct
+    {
+        const char symbol;
+        const char *name;
+    } export_variables[] = {
+        {'p', "MC_EXT_BASENAME"},
+        {'d', "MC_EXT_CURRENTDIR"},
+        {'s', "MC_EXT_SELECTED"},
+        {'t', "MC_EXT_ONLYTAGGED"},
+        {'\0', NULL}
+    };
+    /* *INDENT-ON* */
+
+    text = exec_get_file_name (filename_vpath);
+    if (text == NULL)
+        return NULL;
+
+    export_vars_string = g_string_new ("MC_EXT_FILENAME=");
+    g_string_append_printf (export_vars_string, "\"%s\"\nexport MC_EXT_FILENAME\n", text);
+    g_free (text);
+
+    for (i = 0; export_variables[i].name != NULL; i++)
+    {
+        text = expand_format (NULL, export_variables[i].symbol, TRUE);
+        if (text != NULL)
+        {
+            g_string_append_printf (export_vars_string,
+                                    "%s=\"%s\"\nexport %s\n", export_variables[i].name, text,
+                                    export_variables[i].name);
+            g_free (text);
+        }
+    }
+    return g_string_free (export_vars_string, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
 exec_make_shell_string (const char *lc_data, vfs_path_t * filename_vpath)
 {
-    GString *shell_string = g_string_new ("");
-    char lc_prompt[80];
+    GString *shell_string;
+    char lc_prompt[80] = "\0";
     gboolean parameter_found = FALSE;
     gboolean expand_prefix_found = FALSE;
-    gboolean do_local_copy;
 
-    /* Avoid making a local copy if we are doing a cd */
-    do_local_copy = !vfs_file_is_local (filename_vpath);
-
-    lc_prompt[0] = '\0';
+    shell_string = g_string_new ("");
 
     for (; *lc_data != '\0' && *lc_data != '\n'; lc_data++)
     {
@@ -204,7 +246,6 @@ exec_make_shell_string (const char *lc_data, vfs_path_t * filename_vpath)
                 }
                 else
                 {
-
                     i = check_format_cd (lc_data);
                     if (i > 0)
                     {
@@ -231,7 +272,7 @@ exec_make_shell_string (const char *lc_data, vfs_path_t * filename_vpath)
                                 text = expand_format (NULL, *lc_data, !is_cd);
                             else
                             {
-                                text = exec_get_file_name (do_local_copy, filename_vpath);
+                                text = exec_get_file_name (filename_vpath);
                                 if (text == NULL)
                                 {
                                     g_string_free (shell_string, TRUE);
@@ -316,7 +357,6 @@ exec_extension_view (char *cmd, vfs_path_t * filename_vpath, int *move_dir, int 
         mcview_default_nroff_flag = def_nroff_flag;
 
     dialog_switch_process_pending ();
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -350,7 +390,7 @@ exec_extension_cd (void)
 static void
 exec_extension (const char *filename, const char *lc_data, int *move_dir, int start_line)
 {
-    char *shell_string;
+    char *shell_string, *export_variables;
     vfs_path_t *temp_file_name_vpath = NULL;
     int cmd_file_fd;
     FILE *cmd_file;
@@ -369,6 +409,9 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
     filename_vpath = vfs_path_from_str (filename);
 
+    /* Avoid making a local copy if we are doing a cd */
+    do_local_copy = !vfs_file_is_local (filename_vpath);
+
     shell_string = exec_make_shell_string (lc_data, filename_vpath);
 
     if (shell_string == NULL)
@@ -380,7 +423,6 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         g_free (shell_string);
         goto ret;
     }
-
 
     /*
      * All commands should be run in /bin/sh regardless of user shell.
@@ -399,6 +441,13 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
     cmd_file = fdopen (cmd_file_fd, "w");
     fputs ("#! /bin/sh\n\n", cmd_file);
+
+    export_variables = exec_get_export_variables (filename_vpath);
+    if (export_variables != NULL)
+    {
+        fprintf (cmd_file, "%s\n", export_variables);
+        g_free (export_variables);
+    }
 
     fputs (shell_string, cmd_file);
     g_free (shell_string);
@@ -439,8 +488,6 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
     if (run_view)
         exec_extension_view (cmd, filename_vpath, move_dir, start_line, temp_file_name_vpath);
-    else if (is_cd)
-        exec_extension_cd ();
     else
     {
         shell_execute (cmd, EXECUTE_INTERNAL);
