@@ -351,7 +351,7 @@ static void
 exec_extension (const char *filename, const char *lc_data, int *move_dir, int start_line)
 {
     char *shell_string;
-    vfs_path_t *temp_file_name_vpath;
+    vfs_path_t *temp_file_name_vpath = NULL;
     int cmd_file_fd;
     FILE *cmd_file;
     char *cmd = NULL;
@@ -372,10 +372,15 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     shell_string = exec_make_shell_string (lc_data, filename_vpath);
 
     if (shell_string == NULL)
+        goto ret;
+
+    if (is_cd)
     {
-        vfs_path_free (filename_vpath);
-        return;
+        exec_extension_cd ();
+        g_free (shell_string);
+        goto ret;
     }
+
 
     /*
      * All commands should be run in /bin/sh regardless of user shell.
