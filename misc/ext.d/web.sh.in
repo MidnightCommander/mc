@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# $1 - action
+# $2 - type of file
+
+action=$1
+filetype=$2
+
+
+do_view_action() {
+    filetype=$1
+
+    case "${filetype}" in
+    html)
+        links -dump "${MC_EXT_FILENAME}" 2>/dev/null || \
+            w3m -dump "${MC_EXT_FILENAME}" 2>/dev/null || \
+            lynx -dump -force_html "${MC_EXT_FILENAME}"
+        ;;
+    *)
+        ;;
+    esac
+}
+
+do_open_action() {
+    filetype=$1
+
+    case "${filetype}" in
+    html)
+        (if test -n "@X11_WWW@" && test -n "$DISPLAY"; then
+            (@X11_WWW@ file://"${MC_EXT_CURRENTDIR}"/"${MC_EXT_BASENAME}" &) 1>&2
+        else
+            links "${MC_EXT_FILENAME}" || \
+                lynx -force_html "${MC_EXT_FILENAME}" || \
+                ${PAGER:-more} "${MC_EXT_FILENAME}"
+        fi) 2>/dev/null
+        ;;
+    *)
+        ;;
+    esac
+}
+
+case "${action}" in
+view)
+    do_view_action "${filetype}"
+    ;;
+open)
+    xdg-open "${MC_EXT_FILENAME}" 2>/dev/null || \
+        do_open_action "${filetype}"
+    ;;
+*)
+    ;;
+esac
+
