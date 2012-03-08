@@ -2494,7 +2494,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         }
 
         /* Update stat to get actual info */
-        if (mc_stat (source, &src_stat) != 0)
+        if (mc_lstat (source, &src_stat) != 0)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
                      path_trunc (source, 30), unix_error_string (errno));
