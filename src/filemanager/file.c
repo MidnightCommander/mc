@@ -2617,7 +2617,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
         source_vpath = vfs_path_from_str (source);
         /* Update stat to get actual info */
-        if (mc_stat (source_vpath, &src_stat) != 0)
+        if (mc_lstat (source_vpath, &src_stat) != 0)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
                      path_trunc (source, 30), unix_error_string (errno));
