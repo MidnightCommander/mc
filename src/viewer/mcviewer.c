@@ -88,40 +88,44 @@ char *mcview_show_eof = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 /** Both views */
-
-static int
-mcview_event (mcview_t * view, Gpm_Event * event, int *result)
+static gboolean
+do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
 {
     screen_dimen y, x;
+    Gpm_Event local;
 
     *result = MOU_NORMAL;
 
+    local = mouse_get_local (event, (Widget *) view);
+
     /* rest of the upper frame, the menu is invisible - call menu */
-    if (mcview_is_in_panel (view) && (event->type & GPM_DOWN) && event->y == 1 && !menubar_visible)
+    if (mcview_is_in_panel (view) && (local.type & GPM_DOWN) != 0 && local.y == 1
+        && !menubar_visible)
     {
-        event->x += view->widget.x;
         *result = the_menubar->widget.mouse (event, the_menubar);
-        return 0;               /* don't draw viewer over menu */
+        return FALSE;           /* don't draw viewer over menu */
     }
 
     /* We are not interested in the release events */
-    if (!(event->type & (GPM_DOWN | GPM_DRAG)))
-        return 0;
+    if ((local.type & (GPM_DOWN | GPM_DRAG)) == 0)
+        return FALSE;
 
     /* Wheel events */
-    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN))
+    if ((local.buttons & GPM_B_UP) != 0 && (local.type & GPM_DOWN) != 0)
     {
         mcview_move_up (view, 2);
-        return 1;
+        *result = MOU_NORMAL;
+        return TRUE;
     }
-    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN))
+    if ((local.buttons & GPM_B_DOWN) != 0 && (local.type & GPM_DOWN) != 0)
     {
         mcview_move_down (view, 2);
-        return 1;
+        *result = MOU_NORMAL;
+        return TRUE;
     }
 
-    x = event->x;
-    y = event->y;
+    x = local.x;
+    y = local.y;
 
     /* Scrolling left and right */
     if (!view->text_wrap_mode)
@@ -164,27 +168,29 @@ mcview_event (mcview_t * view, Gpm_Event * event, int *result)
         goto processed;
     }
 
-    return 0;
+    return FALSE;
 
   processed:
     *result = MOU_REPEAT;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Real view only */
 
+/** Real view only */
 static int
-mcview_real_event (Gpm_Event * event, void *x)
+mcview_event (Gpm_Event * event, void *data)
 {
-    mcview_t *view = (mcview_t *) x;
+    mcview_t *view = (mcview_t *) data;
     int result;
 
-    if (mcview_event (view, event, &result))
+    if (!mouse_global_in_widget (event, (Widget *) data))
+        return MOU_UNHANDLED;
+
+    if (do_mcview_event (view, event, &result))
         mcview_update (view);
     return result;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -195,7 +201,7 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
     mcview_t *view = g_new0 (mcview_t, 1);
 
-    init_widget (&view->widget, y, x, lines, cols, mcview_callback, mcview_real_event);
+    init_widget (&view->widget, y, x, lines, cols, mcview_callback, mcview_event);
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;

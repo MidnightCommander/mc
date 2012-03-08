@@ -321,14 +321,17 @@ info_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 info_event (Gpm_Event * event, void *data)
 {
-    Widget *w = &((WInfo *) data)->widget;
+    Widget *w = (Widget *) data;
+    Gpm_Event local;
+
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
+
+    local = mouse_get_local (event, w);
 
     /* rest of the upper frame, the menu is invisible - call menu */
-    if (event->type & GPM_DOWN && event->y == 1 && !menubar_visible)
-    {
-        event->x += w->x;
+    if ((local.type & GPM_DOWN) != 0 && local.y == 1 && !menubar_visible)
         return the_menubar->widget.mouse (event, the_menubar);
-    }
 
     return MOU_NORMAL;
 }

@@ -788,7 +788,8 @@ init_hotlist (int list_type)
                                             hotlist_but[i].ret_cmd,
                                             hotlist_but[i].flags,
                                             hotlist_but[i].text,
-                                            hotlist_button_callback), hotlist_but[i].pos_flags);
+                                            hotlist_button_callback), hotlist_but[i].pos_flags,
+                                NULL);
     }
 
     /* We add the labels.
@@ -796,7 +797,7 @@ init_hotlist (int list_type)
      *    pname_group will hold name of current group
      */
     pname = label_new (UY - 11 + LINES, UX + 2, "");
-    add_widget_autopos (hotlist_dlg, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT);
+    add_widget_autopos (hotlist_dlg, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
     if (!hotlist_state.moving)
     {
         char label_text[BUF_TINY];
@@ -804,7 +805,7 @@ init_hotlist (int list_type)
         g_snprintf (label_text, sizeof (label_text), " %s ", _("Directory path"));
         add_widget_autopos (hotlist_dlg,
                             label_new (UY - 12 + LINES, UX + 2,
-                                       label_text), WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT);
+                                       label_text), WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
 
         /* This one holds the displayed pathname */
         pname_group = label_new (UY, UX + 2, _("Directory label"));
@@ -824,7 +825,7 @@ init_hotlist (int list_type)
 #endif /* !ENABLE_VFS */
         fill_listbox ();
 
-    add_widget_autopos (hotlist_dlg, l_hotlist, WPOS_KEEP_ALL);
+    add_widget_autopos (hotlist_dlg, l_hotlist, WPOS_KEEP_ALL, NULL);
     /* add listbox to the dialogs */
 }
 
@@ -1232,10 +1233,11 @@ remove_from_hotlist (struct hotlist *entry)
 
         if (safe_delete)
             query_set_sel (1);
+
         g_snprintf (text, sizeof (text), _("Are you sure you want to remove entry \"%s\"?"),
                     str_trunc (entry->label, 30));
-        result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR, 2, _("&Yes"), _("&No"));
-
+        result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR | D_CENTER, 2,
+                               _("&Yes"), _("&No"));
         if (result != 0)
             return;
     }
@@ -1251,9 +1253,8 @@ remove_from_hotlist (struct hotlist *entry)
 
             g_snprintf (text, sizeof (text), _("Group \"%s\" is not empty.\nRemove it?"),
                         str_trunc (entry->label, 30));
-
-            result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR, 2, _("&Yes"), _("&No"));
-
+            result = query_dialog (Q_ ("DialogTitle|Delete"), text, D_ERROR | D_CENTER, 2,
+                                   _("&Yes"), _("&No"));
             if (result != 0)
                 return;
         }

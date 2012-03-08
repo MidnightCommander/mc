@@ -434,43 +434,44 @@ listbox_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 listbox_event (Gpm_Event * event, void *data)
 {
-    WListbox *l = data;
-    int i;
+    WListbox *l = (WListbox *) data;
+    Widget *w = (Widget *) data;
 
-    Dlg_head *h = l->widget.owner;
+    if (!mouse_global_in_widget (event, w))
+        return MOU_UNHANDLED;
 
     /* Single click */
-    if (event->type & GPM_DOWN)
+    if ((event->type & GPM_DOWN) != 0)
         dlg_select_widget (l);
 
     if (l->list == NULL)
         return MOU_NORMAL;
 
-    if (event->type & (GPM_DOWN | GPM_DRAG))
+    if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
     {
         int ret = MOU_REPEAT;
+        Gpm_Event local;
+        int i;
 
-        if (event->x < 0 || event->x > l->widget.cols)
-            return ret;
-
-        if (event->y < 1)
-            for (i = -event->y; i >= 0; i--)
+        local = mouse_get_local (event, w);
+        if (local.y < 1)
+            for (i = -local.y; i >= 0; i--)
                 listbox_back (l);
-        else if (event->y > l->widget.lines)
-            for (i = event->y - l->widget.lines; i > 0; i--)
+        else if (local.y > w->lines)
+            for (i = local.y - w->lines; i > 0; i--)
                 listbox_fwd (l);
-        else if (event->buttons & GPM_B_UP)
+        else if ((local.buttons & GPM_B_UP) != 0)
         {
             listbox_back (l);
             ret = MOU_NORMAL;
         }
-        else if (event->buttons & GPM_B_DOWN)
+        else if ((local.buttons & GPM_B_DOWN) != 0)
         {
             listbox_fwd (l);
             ret = MOU_NORMAL;
         }
         else
-            listbox_select_entry (l, listbox_select_pos (l, l->top, event->y - 1));
+            listbox_select_entry (l, listbox_select_pos (l, l->top, local.y - 1));
 
         /* We need to refresh ourselves since the dialog manager doesn't */
         /* know about this event */
@@ -481,14 +482,12 @@ listbox_event (Gpm_Event * event, void *data)
     /* Double click */
     if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
     {
+        Gpm_Event local;
         int action;
 
-        if (event->x < 0 || event->x >= l->widget.cols
-            || event->y < 1 || event->y > l->widget.lines)
-            return MOU_NORMAL;
-
+        local = mouse_get_local (event, w);
         dlg_select_widget (l);
-        listbox_select_entry (l, listbox_select_pos (l, l->top, event->y - 1));
+        listbox_select_entry (l, listbox_select_pos (l, l->top, local.y - 1));
 
         if (l->callback != NULL)
             action = l->callback (l);
@@ -497,11 +496,11 @@ listbox_event (Gpm_Event * event, void *data)
 
         if (action == LISTBOX_DONE)
         {
-            h->ret_value = B_ENTER;
-            dlg_stop (h);
-            return MOU_NORMAL;
+            w->owner->ret_value = B_ENTER;
+            dlg_stop (w->owner);
         }
     }
+
     return MOU_NORMAL;
 }
 

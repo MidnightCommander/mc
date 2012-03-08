@@ -65,11 +65,18 @@
 #define CTRL(x) ((x) & 0x1f)
 #endif
 
+#define yx_in_screen(y, x) \
+    (y >= 0 && y < LINES && x >= 0 && x < COLS)
+
 /*** global variables ****************************************************************************/
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
+
+/* ncurses supports cursor positions only within window */
+/* We use our own cursor coordibates to support partially visible widgets */
+static int mc_curs_row, mc_curs_col;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -318,6 +325,19 @@ tty_touch_screen (void)
 void
 tty_gotoyx (int y, int x)
 {
+    mc_curs_row = y;
+    mc_curs_col = x;
+
+    if (y < 0)
+        y = 0;
+    if (y >= LINES)
+        y = LINES - 1;
+
+    if (x < 0)
+        x = 0;
+    if (x >= COLS)
+        x = COLS - 1;
+
     move (y, x);
 }
 
@@ -326,35 +346,70 @@ tty_gotoyx (int y, int x)
 void
 tty_getyx (int *py, int *px)
 {
-    getyx (stdscr, *py, *px);
+    *py = mc_curs_row;
+    *px = mc_curs_col;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* if x < 0 or y < 0, draw line starting from current position */
 
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
+    int x1;
+
+    if (y < 0 || y >= LINES || x >= COLS)
+        return;
+
+    x1 = x;
+
+    if (x < 0)
+    {
+        len += x;
+        if (len <= 0)
+            return;
+        x = 0;
+    }
+
     if ((chtype) ch == ACS_HLINE)
         ch = mc_tty_frm[MC_TTY_FRM_HORIZ];
 
-    if ((y >= 0) && (x >= 0))
-        move (y, x);
+    move (y, x);
     hline (ch, len);
+    move (y, x1);
+
+    mc_curs_row = y;
+    mc_curs_col = x1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* if x < 0 or y < 0, draw line starting from current position */
 
 void
 tty_draw_vline (int y, int x, int ch, int len)
 {
+    int y1;
+
+    if (x < 0 || x >= COLS || y >= LINES)
+        return;
+
+    y1 = y;
+
+    if (y < 0)
+    {
+        len += y;
+        if (len <= 0)
+            return;
+        y = 0;
+    }
+
     if ((chtype) ch == ACS_VLINE)
         ch = mc_tty_frm[MC_TTY_FRM_VERT];
 
-    if ((y >= 0) && (x >= 0))
-        move (y, x);
+    move (y, x);
     vline (ch, len);
+    move (y1, x);
+
+    mc_curs_row = y1;
+    mc_curs_col = x;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -396,6 +451,9 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
     }
 
     move (y, x);
+
+    mc_curs_row = y;
+    mc_curs_col = x;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -419,7 +477,9 @@ tty_display_8bit (gboolean what)
 void
 tty_print_char (int c)
 {
-    addch (c);
+    if (yx_in_screen (mc_curs_row, mc_curs_col))
+        addch (c);
+    mc_curs_col++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -431,19 +491,37 @@ tty_print_anychar (int c)
 
     if (mc_global.utf8_display || c > 255)
     {
-        int res = g_unichar_to_utf8 (c, (char *) str);
+        int res;
+
+        res = g_unichar_to_utf8 (c, (char *) str);
         if (res == 0)
         {
-            str[0] = '.';
-            str[1] = '\0';
+            if (yx_in_screen (mc_curs_row, mc_curs_col))
+                addch ('.');
+            mc_curs_col++;
         }
         else
+        {
+            const char *s;
+
             str[res] = '\0';
-        addstr (str_term_form ((char *) str));
+            s = str_term_form ((char *) str);
+
+            if (yx_in_screen (mc_curs_row, mc_curs_col))
+                addstr (s);
+
+            if (g_unichar_iswide (c))
+                mc_curs_col += 2;
+            else if (!g_unichar_iszerowidth (c))
+                mc_curs_col++;
+        }
     }
     else
-        addch (c);
-
+    {
+        if (yx_in_screen (mc_curs_row, mc_curs_col))
+            addch (c);
+        mc_curs_col++;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -451,26 +529,31 @@ tty_print_anychar (int c)
 void
 tty_print_alt_char (int c, gboolean single)
 {
-    if ((chtype) c == ACS_VLINE)
-        c = mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT];
-    else if ((chtype) c == ACS_HLINE)
-        c = mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ];
-    else if ((chtype) c == ACS_LTEE)
-        c = mc_tty_frm[single ? MC_TTY_FRM_LEFTMIDDLE : MC_TTY_FRM_DLEFTMIDDLE];
-    else if ((chtype) c == ACS_RTEE)
-        c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTMIDDLE : MC_TTY_FRM_DRIGHTMIDDLE];
-    else if ((chtype) c == ACS_ULCORNER)
-        c = mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP];
-    else if ((chtype) c == ACS_LLCORNER)
-        c = mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM];
-    else if ((chtype) c == ACS_URCORNER)
-        c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP];
-    else if ((chtype) c == ACS_LRCORNER)
-        c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM];
-    else if ((chtype) c == ACS_PLUS)
-        c = mc_tty_frm[MC_TTY_FRM_CROSS];
+    if (yx_in_screen (mc_curs_row, mc_curs_col))
+    {
+        if ((chtype) c == ACS_VLINE)
+            c = mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT];
+        else if ((chtype) c == ACS_HLINE)
+            c = mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ];
+        else if ((chtype) c == ACS_LTEE)
+            c = mc_tty_frm[single ? MC_TTY_FRM_LEFTMIDDLE : MC_TTY_FRM_DLEFTMIDDLE];
+        else if ((chtype) c == ACS_RTEE)
+            c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTMIDDLE : MC_TTY_FRM_DRIGHTMIDDLE];
+        else if ((chtype) c == ACS_ULCORNER)
+            c = mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP];
+        else if ((chtype) c == ACS_LLCORNER)
+            c = mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM];
+        else if ((chtype) c == ACS_URCORNER)
+            c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP];
+        else if ((chtype) c == ACS_LRCORNER)
+            c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM];
+        else if ((chtype) c == ACS_PLUS)
+            c = mc_tty_frm[MC_TTY_FRM_CROSS];
 
-    addch (c);
+        addch (c);
+    }
+
+    mc_curs_col++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -478,7 +561,32 @@ tty_print_alt_char (int c, gboolean single)
 void
 tty_print_string (const char *s)
 {
-    addstr (str_term_form (s));
+    int len;
+    int start = 0;
+
+    s = str_term_form (s);
+    len = str_term_width1 (s);
+
+    /* line is upper or below the screen or entire line is before or after scrren */
+    if (mc_curs_row < 0 || mc_curs_row >= LINES || mc_curs_col + len <= 0 || mc_curs_col >= COLS)
+    {
+        mc_curs_col += len;
+        return;
+    }
+
+    /* skip invisible left part */
+    if (mc_curs_col < 0)
+    {
+        start = -mc_curs_col;
+        len += mc_curs_col;
+        mc_curs_col = 0;
+    }
+
+    mc_curs_col += len;
+    if (mc_curs_col >= COLS)
+        len = COLS - (mc_curs_col - len);
+
+    addstr (str_term_substring (s, start, len));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -487,10 +595,12 @@ void
 tty_printf (const char *fmt, ...)
 {
     va_list args;
+    char buf[BUF_1K];           /* FIXME: is it enough? */
 
     va_start (args, fmt);
-    vw_printw (stdscr, fmt, args);
+    g_vsnprintf (buf, sizeof (buf), fmt, args);
     va_end (args);
+    tty_print_string (buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */

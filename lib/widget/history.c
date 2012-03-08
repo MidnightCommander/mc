@@ -328,7 +328,7 @@ history_show (GList ** history, Widget * widget)
 
     /* this call makes list stick to all sides of dialog, effectively make
        it be resized with dialog */
-    add_widget_autopos (query_dlg, query_list, WPOS_KEEP_ALL);
+    add_widget_autopos (query_dlg, query_list, WPOS_KEEP_ALL, NULL);
 
     /* to avoid diplicating of (calculating sizes in two places)
        code, call dlg_hist_callback function here, to set dialog and
