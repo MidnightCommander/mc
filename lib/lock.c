@@ -201,9 +201,12 @@ lock_file (const vfs_path_t * fname_vpath)
     gboolean symlink_ok = FALSE;
     const char *elpath;
 
+    if (fname_vpath == NULL)
+        return 0;
+
     elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
     /* Just to be sure (and don't lock new file) */
-    if (fname_vpath == NULL || *elpath == '\0')
+    if (*elpath == '\0')
         return 0;
 
     /* Locking on VFS is not supported */
@@ -272,9 +275,12 @@ unlock_file (const vfs_path_t * fname_vpath)
     struct stat statbuf;
     const char *elpath;
 
+    if (fname_vpath == NULL)
+        return 0;
+
     elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
     /* Just to be sure (and don't lock new file) */
-    if (fname_vpath == NULL || *elpath == '\0')
+    if (*elpath == '\0')
         return 0;
 
     lockfname = lock_build_symlink_name (fname_vpath);
