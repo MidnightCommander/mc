@@ -4174,7 +4174,7 @@ panel_reload (WPanel * panel)
             break;
 
         tmp_path = vfs_path_to_str (panel->cwd_vpath);
-        if (tmp_path[0] == PATH_SEP && tmp_path[1] == 0)
+        if (tmp_path[0] == PATH_SEP && tmp_path[1] == '\0')
         {
             panel_clean_dir (panel);
             panel->count = set_zero_dir (&panel->dir) ? 1 : 0;
@@ -4182,15 +4182,16 @@ panel_reload (WPanel * panel)
             return;
         }
         last_slash = strrchr (tmp_path, PATH_SEP);
-        if (!last_slash || last_slash == tmp_path)
-        {
-            vfs_path_free (panel->cwd_vpath);
+        vfs_path_free (panel->cwd_vpath);
+        if (last_slash == NULL || last_slash == tmp_path)
             panel->cwd_vpath = vfs_path_from_str (PATH_SEP_STR);
-        }
         else
-            *last_slash = 0;
-        memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
+        {
+            *last_slash = '\0';
+            panel->cwd_vpath = vfs_path_from_str (tmp_path);
+        }
         g_free (tmp_path);
+        memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
         show_dir (panel);
     }
     while (TRUE);
