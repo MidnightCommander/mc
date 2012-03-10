@@ -492,24 +492,16 @@ edit_load_file_from_filename (WEdit * edit, const vfs_path_t * exp_vpath)
 {
     int prev_locked = edit->locked;
     vfs_path_t *prev_filename;
+    int ret = 0;
 
     prev_filename = vfs_path_clone (edit->filename_vpath);
     if (!edit_reload (edit, exp_vpath))
-    {
-        vfs_path_free (prev_filename);
-        return 1;
-    }
+        ret = 1;
+    else if (prev_locked)
+        unlock_file (prev_filename);
 
-    if (prev_locked)
-    {
-        vfs_path_t *fullpath;
-
-        fullpath = vfs_path_append_vpath_new (edit->dir_vpath, prev_filename, (char *) NULL);
-        unlock_file (fullpath);
-        vfs_path_free (fullpath);
-    }
     vfs_path_free (prev_filename);
-    return 0;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
