@@ -676,15 +676,11 @@ extfs_get_path_mangle (const vfs_path_t * vpath, struct archive **archive, gbool
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    archive_name = vfs_path_to_str_elements_count (vpath, -1);
-
     fstype = extfs_which (path_element->class, path_element->vfs_prefix);
-
     if (fstype == -1)
-    {
-        g_free (archive_name);
         return NULL;
-    }
+
+    archive_name = vfs_path_to_str_elements_count (vpath, -1);
 
     /*
      * All filesystems should have some local archive, at least
