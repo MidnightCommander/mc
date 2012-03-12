@@ -134,17 +134,24 @@ _vfs_split_with_semi_skip_count (char *path, const char **inpath, const char **o
 static char *
 vfs_canon (const char *path)
 {
-    if (!path)
+    if (path == NULL)
         vfs_die ("Cannot canonicalize NULL");
 
     /* Relative to current directory */
     if (*path != PATH_SEP)
     {
-        char *local, *result, *curr_dir;
+        char *result, *local;
 
-        curr_dir = vfs_get_current_dir ();
-        local = mc_build_filename (curr_dir, path, NULL);
-        g_free (curr_dir);
+        local = tilde_expand (path);
+        if (*local != PATH_SEP)
+        {
+            char *curr_dir;
+
+            g_free (local);
+            curr_dir = vfs_get_current_dir ();
+            local = mc_build_filename (curr_dir, path, NULL);
+            g_free (curr_dir);
+        }
 
         result = vfs_canon (local);
         g_free (local);
@@ -156,7 +163,9 @@ vfs_canon (const char *path)
      * /p1/p2#op/.././././p3#op/p4. Good luck.
      */
     {
-        char *result = g_strdup (path);
+        char *result;
+
+        result = g_strdup (path);
         canonicalize_pathname (result);
         return result;
     }
