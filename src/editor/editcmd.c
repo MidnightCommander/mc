@@ -127,9 +127,14 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     vfs_path_t *real_filename_vpath;
     vfs_path_t *savename_vpath = NULL;
     const char *start_filename;
+    const vfs_path_element_t *vpath_element;
 
-    start_filename = vfs_path_get_by_index (filename_vpath, 0)->path;
-    if (filename_vpath == NULL || *start_filename == '\0')
+    vpath_element = vfs_path_get_by_index (filename_vpath, 0);
+    if (vpath_element == NULL)
+        return 0;
+
+    start_filename = vpath_element->path;
+    if (*start_filename == '\0')
         return 0;
 
     if (*start_filename != PATH_SEP && edit->dir_vpath != NULL)
