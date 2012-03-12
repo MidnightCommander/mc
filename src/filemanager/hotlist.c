@@ -1432,14 +1432,11 @@ hot_load_group (struct hotlist *grp)
             break;
         case TKN_ENTRY:
             {
-                vfs_path_t *vpath;
                 CHECK_TOKEN (TKN_STRING);
                 label = g_strdup (tkn_buf->str);
                 CHECK_TOKEN (TKN_URL);
                 CHECK_TOKEN (TKN_STRING);
-                vpath = vfs_path_from_str_flags (tkn_buf->str, VPF_USE_DEPRECATED_PARSER);
-                url = vfs_path_to_str (vpath);
-                vfs_path_free (vpath);
+                url = g_strdup (tkn_buf->str);
                 add2hotlist (label, url, HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
                 SKIP_TO_EOL;
             }
@@ -1489,14 +1486,11 @@ hot_load_file (struct hotlist *grp)
             break;
         case TKN_ENTRY:
             {
-                vfs_path_t *vpath;
                 CHECK_TOKEN (TKN_STRING);
                 label = g_strdup (tkn_buf->str);
                 CHECK_TOKEN (TKN_URL);
                 CHECK_TOKEN (TKN_STRING);
-                vpath = vfs_path_from_str_flags (tkn_buf->str, VPF_USE_DEPRECATED_PARSER);
-                url = vfs_path_to_str (vpath);
-                vfs_path_free (vpath);
+                url = g_strdup (tkn_buf->str);
                 add2hotlist (label, url, HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
                 SKIP_TO_EOL;
             }
