@@ -811,6 +811,9 @@ vfs_path_add_element (const vfs_path_t * vpath, const vfs_path_element_t * path_
 const vfs_path_element_t *
 vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 {
+    if (vpath == NULL)
+        return NULL;
+
     if (element_index < 0)
         element_index += vfs_path_elements_count (vpath);
 
