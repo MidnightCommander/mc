@@ -9,8 +9,10 @@ SUBDIRS += diffviewer
 endif
 
 AM_CPPFLAGS = \
-	-DLOCALEDIR=\""$(localedir)"\" \
-	-DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\"
+	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\" \
+	-DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\" \
+	-DDATADIR=\""$(pkgdatadir)/"\" \
+	-DLOCALEDIR=\""$(localedir)"\"
 
 if CONS_SAVER
 SUBDIRS += consaver

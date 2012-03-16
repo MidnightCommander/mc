@@ -161,8 +161,10 @@ check_codeset (void)
 static void
 OS_Setup (void)
 {
-    const char *shell_env = getenv ("SHELL");
+    const char *shell_env;
+    const char *datadir_env;
 
+    shell_env = getenv ("SHELL");
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
         struct passwd *pwd;
@@ -178,6 +180,19 @@ OS_Setup (void)
         g_free (shell);
         shell = g_strdup ("/bin/sh");
     }
+
+    /* This is the directory, where MC was installed, on Unix this is DATADIR */
+    /* and can be overriden by the MC_DATADIR environment variable */
+    datadir_env = g_getenv ("MC_DATADIR");
+    if (datadir_env != NULL)
+        mc_global.sysconfig_dir = g_strdup (datadir_env);
+    else
+        mc_global.sysconfig_dir = g_strdup (SYSCONFDIR);
+
+    mc_global.share_data_dir = g_strdup (DATADIR);
+
+    /* Set up temporary directory */
+    mc_tmpdir ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -419,6 +434,17 @@ main (int argc, char *argv[])
         return exit_code;
     }
 
+    /* do this before mc_args_show_info () to view paths in the --datadir-info output */
+    OS_Setup ();
+
+    if (!g_path_is_absolute (mc_config_get_home_dir ()))
+    {
+        error = g_error_new (MC_ERROR, 0, "%s: %s", _("Home directory path is not absolute"),
+                             mc_config_get_home_dir ());
+        mc_event_deinit (NULL);
+        goto startup_exit_falure;
+    }
+
     if (!mc_args_show_info ())
     {
         exit_code = EXIT_SUCCESS;
@@ -428,10 +454,6 @@ main (int argc, char *argv[])
     if (!events_init (&error))
         goto startup_exit_falure;
 
-    /* Set up temporary directory */
-    (void) mc_tmpdir ();
-    OS_Setup ();
-    /* Initialize and create home directories */
     mc_config_init_config_paths (&error);
     if (error == NULL && mc_config_deprecated_dir_present ())
         mc_config_migrate_from_old_place (&error);
