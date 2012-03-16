@@ -399,37 +399,45 @@ main (int argc, char *argv[])
 {
     GError *error = NULL;
     int exit_code = EXIT_FAILURE;
-    gboolean isInitialized;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     (void) setlocale (LC_ALL, "");
     (void) bindtextdomain ("mc", LOCALEDIR);
     (void) textdomain ("mc");
 
-    if (!events_init (&error))
+    /* do this before args parsing */
+    str_init_strings (NULL);
+
+    if (!mc_args_parse (&argc, &argv, "mc", &error))
     {
   startup_exit_falure:
         fprintf (stderr, _("Failed to run:\n%s\n"), error->message);
         g_error_free (error);
+        g_free (shell);
   startup_exit_ok:
-        (void) mc_event_deinit (NULL);
         str_uninit_strings ();
         return exit_code;
     }
 
-    str_init_strings (NULL);
+    if (!mc_args_show_info ())
+    {
+        exit_code = EXIT_SUCCESS;
+        goto startup_exit_ok;
+    }
+
+    if (!events_init (&error))
+        goto startup_exit_falure;
 
     /* Set up temporary directory */
     (void) mc_tmpdir ();
     OS_Setup ();
     /* Initialize and create home directories */
-    /* do it after the screen library initialization to show the error message */
     mc_config_init_config_paths (&error);
     if (error == NULL && mc_config_deprecated_dir_present ())
         mc_config_migrate_from_old_place (&error);
     if (error != NULL)
     {
-        g_free (shell);
+        mc_event_deinit (NULL);
         goto startup_exit_falure;
     }
 
@@ -437,18 +445,12 @@ main (int argc, char *argv[])
     vfs_plugins_init ();
     vfs_setup_work_dir ();
 
-    /* do this after vfs initialization due to mc_setctl() call in mc_args_handle() */
-    if (!mc_args_handle (argc, argv, "mc", &error))
+    /* do this after vfs initialization due to mc_setctl() call in mc_setup_by_args() */
+    if (!mc_setup_by_args (argc, argv, &error))
     {
-        if (error != NULL)
-        {
-            vfs_shut ();
-            goto startup_exit_falure;
-        }
-
-        /* for help messages */
-        exit_code = EXIT_SUCCESS;
-        goto startup_exit_ok;
+        vfs_shut ();
+        mc_event_deinit (NULL);
+        goto startup_exit_falure;
     }
 
     /* check terminal type
@@ -498,7 +500,7 @@ main (int argc, char *argv[])
 
     tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
-    isInitialized = mc_skin_init (&error);
+    mc_skin_init (&error);
     if (error != NULL)
     {
         message (D_ERROR, _("Warning"), "%s", error->message);
