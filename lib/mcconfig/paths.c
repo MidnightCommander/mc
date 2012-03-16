@@ -271,63 +271,42 @@ mc_config_fix_migrated_rules (void)
 void
 mc_config_init_config_paths (GError ** error)
 {
-    const char *mc_datadir;
-
-#ifdef MC_HOMEDIR_XDG
-    char *u_config_dir = (char *) g_get_user_config_dir ();
-    char *u_data_dir = (char *) g_get_user_data_dir ();
-    char *u_cache_dir = (char *) g_get_user_cache_dir ();
+    char *dir;
 
     if (xdg_vars_initialized)
         return;
 
-    u_config_dir = (u_config_dir == NULL)
-        ? g_build_filename (mc_config_get_home_dir (), ".config", NULL) : g_strdup (u_config_dir);
+#ifdef MC_HOMEDIR_XDG
+    dir = g_build_filename (mc_config_get_home_dir (), ".config", (char *) NULL);
+    mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+    g_free (dir);
 
-    u_cache_dir = (u_cache_dir == NULL)
-        ? g_build_filename (mc_config_get_home_dir (), ".cache", NULL) : g_strdup (u_cache_dir);
+    dir = g_build_filename (mc_config_get_home_dir (), ".cache", (char *) NULL);
+    mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+    g_free (dir);
 
-    u_data_dir = (u_data_dir == NULL)
-        ? g_build_filename (mc_config_get_home_dir (), ".local", "share", NULL)
-        : g_strdup (u_data_dir);
-
-    mc_config_str = mc_config_init_one_config_path (u_config_dir, MC_USERCONF_DIR, error);
-    mc_cache_str = mc_config_init_one_config_path (u_cache_dir, MC_USERCONF_DIR, error);
-    mc_data_str = mc_config_init_one_config_path (u_data_dir, MC_USERCONF_DIR, error);
-
-    g_free (u_data_dir);
-    g_free (u_cache_dir);
-    g_free (u_config_dir);
+    dir = g_build_filename (mc_config_get_home_dir (), ".local", "share", (char *) NULL);
+    mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+    g_free (dir);
 
     mc_config_fix_migrated_rules ();
 #else /* MC_HOMEDIR_XDG */
     char *defined_userconf_dir;
-    char *u_config_dir;
 
     defined_userconf_dir = tilde_expand (MC_USERCONF_DIR);
-    if (!g_path_is_absolute (defined_userconf_dir))
-    {
-        u_config_dir = g_build_filename (mc_config_get_home_dir (), MC_USERCONF_DIR, NULL);
-        g_free (defined_userconf_dir);
-    }
+    if (g_path_is_absolute (defined_userconf_dir))
+        dir = defined_userconf_dir;
     else
-        u_config_dir = defined_userconf_dir;
+    {
+        g_free (defined_userconf_dir);
+        dir = g_build_filename (mc_config_get_home_dir (), MC_USERCONF_DIR, (char *) NULL);
+    }
 
     mc_data_str = mc_cache_str = mc_config_str =
-        mc_config_init_one_config_path (u_config_dir, "", error);
+        mc_config_init_one_config_path (dir, "", error);
 
-    g_free (u_config_dir);
+    g_free (dir);
 #endif /* MC_HOMEDIR_XDG */
-
-    /* This is the directory, where MC was installed, on Unix this is DATADIR */
-    /* and can be overriden by the MC_DATADIR environment variable */
-    mc_datadir = g_getenv ("MC_DATADIR");
-    if (mc_datadir != NULL)
-        mc_global.sysconfig_dir = g_strdup (mc_datadir);
-    else
-        mc_global.sysconfig_dir = g_strdup (SYSCONFDIR);
-
-    mc_global.share_data_dir = g_strdup (DATADIR);
 
     xdg_vars_initialized = TRUE;
 }
@@ -381,8 +360,10 @@ mc_config_get_home_dir (void)
 {
     if (homedir == NULL)
     {
-        homedir = g_getenv ("HOME");
-        if (homedir == NULL)
+        homedir = g_getenv ("MC_HOME");
+        if (homedir == NULL || *homedir == '\0')
+            homedir = g_getenv ("HOME");
+        if (homedir == NULL || *homedir == '\0')
             homedir = g_get_home_dir ();
     }
     return homedir;
