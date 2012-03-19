@@ -1199,7 +1199,7 @@ static char *
 panel_save_name (WPanel * panel)
 {
     /* If the program is shuting down */
-    if ((mc_global.widget.midnight_shutdown && auto_save_setup) || saving_setup)
+    if ((mc_global.midnight_shutdown && auto_save_setup) || saving_setup)
         return g_strdup (panel->panel_name);
     else
         return g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
@@ -2378,7 +2378,7 @@ do_enter_on_file_entry (file_entry * fe)
         g_free (cmd);
     }
 
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
     mc_global.source_codepage = default_source_codepage;
 #endif
 

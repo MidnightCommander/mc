@@ -16,9 +16,3 @@ mcview.1: $(top_builddir)/config.status $(srcdir)/mcview.1.in
 	@MTM=$$(LANG=C stat -c '%y'  $(srcdir)/mcview.1.in); \
 	MAN_DATE=$$(LC_TIME=$(DATE_LANG) date -d "$${MTM}" +'$(DATE_FORMAT)'); \
 	sed -i "s/@DATE_OF_MAN_PAGE@/$${MAN_DATE}/" $@
-
-mcserv.8: $(top_builddir)/config.status $(srcdir)/mcserv.8.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
-	@MTM=$$(LANG=C stat -c '%y'  $(srcdir)/mcserv.1.in); \
-	MAN_DATE=$$(LC_TIME=$(DATE_LANG) date -d "$${MTM}" +'$(DATE_FORMAT)'); \
-	sed -i "s/@DATE_OF_MAN_PAGE@/$${MAN_DATE}/" $@

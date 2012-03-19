@@ -148,7 +148,7 @@ mcview_ok_to_quit (mcview_t * view)
     if (view->change_list == NULL)
         return TRUE;
 
-    if (!mc_global.widget.midnight_shutdown)
+    if (!mc_global.midnight_shutdown)
     {
         query_set_sel (2);
         r = query_dialog (_("Quit"),
@@ -168,7 +168,7 @@ mcview_ok_to_quit (mcview_t * view)
     switch (r)
     {
     case 0:                    /* Yes */
-        return mcview_hexedit_save_changes (view) || mc_global.widget.midnight_shutdown;
+        return mcview_hexedit_save_changes (view) || mc_global.midnight_shutdown;
     case 1:                    /* No */
         mcview_hexedit_free_change_list (view);
         return TRUE;

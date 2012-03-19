@@ -774,7 +774,7 @@ init_subshell (void)
         return;
     case 2:
         mc_global.tty.use_subshell = FALSE;
-        mc_global.widget.midnight_shutdown = TRUE;
+        mc_global.midnight_shutdown = TRUE;
         return;
     }
 
@@ -1264,7 +1264,6 @@ subshell_get_console_attributes (void)
     {
         fprintf (stderr, "Cannot get terminal settings: %s\r\n", unix_error_string (errno));
         mc_global.tty.use_subshell = FALSE;
-        return;
     }
 }
 

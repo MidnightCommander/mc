@@ -144,7 +144,7 @@ chmod_i18n (void)
 
     i18n = TRUE;
 
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
     for (i = 0; i < check_perm_num; i++)
         check_perm[i].text = _(check_perm[i].text);
 

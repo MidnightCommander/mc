@@ -51,7 +51,6 @@
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
 #include "src/setup.h"
-#include "src/background.h"
 #ifdef HAVE_SUBSHELL_SUPPORT
 #include "src/main.h"           /* do_load_prompt() */
 #include "src/subshell.h"

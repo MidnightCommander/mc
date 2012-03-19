@@ -75,7 +75,6 @@ static name_keymap_t command_names[] = {
     {"ChangeOwnAdvanced", CK_ChangeOwnAdvanced},
     {"Remove", CK_Remove},
     {"BackSpace", CK_BackSpace},
-    {"Undo", CK_Undo},
     {"Redo", CK_Redo},
     {"Clear", CK_Clear},
     {"Menu", CK_Menu},
@@ -111,6 +110,8 @@ static name_keymap_t command_names[] = {
     {"ScreenPrev", CK_ScreenPrev},
     {"FileNext", CK_FileNext},
     {"FilePrev", CK_FilePrev},
+    {"DeleteToHome", CK_DeleteToHome},
+    {"DeleteToEnd", CK_DeleteToEnd},
     {"DeleteToWordBegin", CK_DeleteToWordBegin},
     {"DeleteToWordEnd", CK_DeleteToWordEnd},
     {"Cut", CK_Cut},
@@ -167,7 +168,7 @@ static name_keymap_t command_names[] = {
     {"ConnectSmb", CK_ConnectSmb},
 #endif
     {"PanelInfo", CK_PanelInfo},
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     {"Jobs", CK_Jobs},
 #endif
     {"OptionsLayout", CK_OptionsLayout},
@@ -244,6 +245,7 @@ static name_keymap_t command_names[] = {
 
 #ifdef USE_INTERNAL_EDIT
     {"Tab", CK_Tab},
+    {"Undo", CK_Undo},
     {"ScrollUp", CK_ScrollUp},
     {"ScrollDown", CK_ScrollDown},
     {"Return", CK_Return},
@@ -260,8 +262,6 @@ static name_keymap_t command_names[] = {
     {"InsertOverwrite", CK_InsertOverwrite},
     {"Date", CK_Date},
     {"DeleteLine", CK_DeleteLine},
-    {"DeleteToHome", CK_DeleteToHome},
-    {"DeleteToEnd", CK_DeleteToEnd},
     {"EditMail", CK_Mail},
     {"ParagraphFormat", CK_ParagraphFormat},
     {"MatchBracket", CK_MatchBracket},

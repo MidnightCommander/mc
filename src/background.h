@@ -5,8 +5,6 @@
 #ifndef MC__BACKGROUND_H
 #define MC__BACKGROUND_H
 
-#ifdef WITH_BACKGROUND
-
 #include <sys/types.h>          /* pid_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -54,7 +52,5 @@ background_parent_call_string (const gchar * event_group_name, const gchar * eve
                                gpointer init_data, gpointer data);
 
 /*** inline functions ****************************************************************************/
-
-#endif /* !WITH_BACKGROUND */
 
 #endif /* MC__BACKGROUND_H */

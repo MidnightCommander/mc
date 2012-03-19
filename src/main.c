@@ -147,7 +147,8 @@ check_codeset (void)
             if (mc_global.display_codepage == -1)
                 mc_global.display_codepage = 0;
 
-            mc_config_set_string (mc_main_config, "Misc", "display_codepage", cp_display);
+            mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "display_codepage",
+                                  cp_display);
         }
     }
 #endif
@@ -284,7 +285,7 @@ do_cd (const char *new_dir, enum cd_enum exact)
 
     res = do_panel_cd (current_panel, _new_dir, exact);
 
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
     if (res)
     {
         vfs_path_t *vpath = vfs_path_from_str (current_panel->cwd);
@@ -542,7 +543,7 @@ main (int argc, char *argv[])
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */
-    if (mc_global.widget.midnight_shutdown)
+    if (mc_global.midnight_shutdown)
         exit_code = EXIT_SUCCESS;
     else
         exit_code = do_nc () ? EXIT_SUCCESS : EXIT_FAILURE;

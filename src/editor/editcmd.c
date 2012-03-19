@@ -34,7 +34,9 @@
 
 #include <config.h>
 
+#ifdef HAVE_ASSERT_H
 #include <assert.h>
+#endif
 #include <ctype.h>
 
 #include <stdio.h>
@@ -355,7 +357,9 @@ edit_save_file (WEdit * edit, const char *filename)
 
     if (this_save_mode == EDIT_DO_BACKUP)
     {
+#ifdef HAVE_ASSERT_H
         assert (option_backup_ext != NULL);
+#endif
         tmp = g_strconcat (real_filename, option_backup_ext, (char *) NULL);
         if (mc_rename (real_filename, tmp) == -1)
         {
@@ -1401,7 +1405,9 @@ menu_save_mode_cmd (void)
     size_t maxlen = 0;
     size_t w0, w1, b_len, w3;
 
+#ifdef HAVE_ASSERT_H
     assert (option_backup_ext != NULL);
+#endif
 
     /* OK/Cancel buttons */
     w0 = str_term_width1 (_(widgets[0].u.button.text)) + 3;
@@ -1611,7 +1617,7 @@ edit_execute_macro (WEdit * edit, int hotkey)
             }
         }
     }
-    edit_update_screen (edit);
+
     return res;
 }
 
@@ -2533,7 +2539,7 @@ edit_ok_to_exit (WEdit * edit)
     if (!edit->modified)
         return TRUE;
 
-    if (!mc_global.widget.midnight_shutdown)
+    if (!mc_global.midnight_shutdown)
     {
         if (!edit_check_newline (edit))
             return FALSE;
@@ -2559,8 +2565,8 @@ edit_ok_to_exit (WEdit * edit)
     case 0:                    /* Yes */
         edit_push_markers (edit);
         edit_set_markers (edit, 0, 0, 0, 0);
-        if (!edit_save_cmd (edit) || mc_global.widget.midnight_shutdown)
-            return mc_global.widget.midnight_shutdown;
+        if (!edit_save_cmd (edit) || mc_global.midnight_shutdown)
+            return mc_global.midnight_shutdown;
         break;
     case 1:                    /* No */
         break;
