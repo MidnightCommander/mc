@@ -599,6 +599,8 @@ load_panelize (void)
 
     if (!profile_keys || *profile_keys == NULL)
     {
+        add2panelize (g_strdup (_("Modified git files")),
+                      g_strdup ("git ls-files --modified"));
         add2panelize (g_strdup (_("Find rejects after patching")),
                       g_strdup ("find . -name \\*.rej -print"));
         add2panelize (g_strdup (_("Find *.orig after patching")),
