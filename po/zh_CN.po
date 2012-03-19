@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.net/projects/p/mc/team/zh_CN/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 19:08+0300\n"
+"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.net/projects/p/mc/"
+"language/zh_CN/)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
@@ -108,16 +109,18 @@ msgstr "无效的标记个数%d "
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
-msgstr "普通"
+msgid "&Normal"
+msgstr "普通(&N)"
 
-msgid "&Regular expression"
+msgid "Re&gular expression"
 msgstr "正规表达式(&R)"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "十六进制"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "通配符查找"
 
 #, c-format
@@ -238,6 +241,9 @@ msgstr "删除键"
 
 msgid "Completion/M-tab"
 msgstr "补全/M-Tab"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "小键盘 +"
@@ -431,34 +437,6 @@ msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s不是目录\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "目录%s不属于你\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "无法正确设置目录%s的权限\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "无法创建临时目录%s：%s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "在%s中创建临时文件\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "不能创建临时文件\n"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "按任意键继续..."
-
 msgid "Warning"
 msgstr "警告"
 
@@ -486,6 +464,34 @@ msgstr "正在获取文件"
 
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s不是目录\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "目录%s不属于你\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "无法正确设置目录%s的权限\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "无法创建临时目录%s：%s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "在%s中创建临时文件\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "不能创建临时文件\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "按任意键继续..."
 
 msgid "Cannot parse:"
 msgstr "无法解析："
@@ -565,6 +571,10 @@ msgstr "编辑一个文件"
 
 msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
+
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "禁用子 shell 支持"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -662,17 +672,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr "查看器没有指定参数"
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr "两个文件需要调用差异查看器"
-
 msgid "Main options"
 msgstr "主要选项"
 
 msgid "Terminal options"
 msgstr "终端选项 "
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr "查看器没有指定参数"
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr "两个文件需要调用差异查看器"
 
 msgid "Background process error"
 msgstr "后台进程错误"
@@ -699,8 +712,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "取消(&D)"
 
-msgid "All charsets"
-msgstr "所有字体集"
+msgid "&All charsets"
+msgstr "所有字符集(&A)"
 
 msgid "&Whole words"
 msgstr "仅整词(&W)"
@@ -708,8 +721,8 @@ msgstr "仅整词(&W)"
 msgid "&Backwards"
 msgstr "向上(&B)"
 
-msgid "Case &sensitive"
-msgstr "大小写敏感(&S)"
+msgid "Cas&e sensitive"
+msgstr "大小写敏感(&e)"
 
 msgid "Enter search string:"
 msgstr "输入查找字符串："
@@ -745,9 +758,6 @@ msgid ""
 msgstr ""
 "无法创建临时合并文件\n"
 "%s "
-
-msgid "&Normal"
-msgstr "普通(&N)"
 
 msgid "&Fastest (Assume large files)"
 msgstr "最快(&F针对大文件)"
@@ -1568,8 +1578,7 @@ msgstr "排序"
 msgid "Confirmation"
 msgstr "确认"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
@@ -1944,7 +1953,9 @@ msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
-msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
+msgstr ""
+"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
+"Commander软件包。"
 
 #, c-format
 msgid "%s file error"
@@ -2329,6 +2340,14 @@ msgstr "扫描目录"
 msgid "Cannot operate on \"..\"!"
 msgstr "无法操作\"..\"！"
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"无法查看\"%s\"的状态\n"
+"%s"
+
 msgid "Sorry, I could not put the job in background"
 msgstr "抱歉，无法将任务放到后台"
 
@@ -2388,15 +2407,35 @@ msgid "Background process: File exists"
 msgstr "后台进程：文件已存在"
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "时间: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "时间: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "文件：%s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "时间: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "总计: %s / %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "总计: %s / %s"
 
 msgid "Source"
@@ -2455,26 +2494,17 @@ msgstr "找到: %ld"
 msgid "Malformed regular expression"
 msgstr "不正确的正规表达式"
 
-msgid "Cas&e sensitive"
-msgstr "大小写敏感(&e)"
-
 msgid "&Find recursively"
 msgstr "递归查找(&F)"
 
 msgid "S&kip hidden"
 msgstr "跳过隐藏(&K)"
 
-msgid "&All charsets"
-msgstr "所有字符集(&A)"
-
 msgid "Sea&rch for content"
 msgstr "搜索内容(&R)"
 
 msgid "Case sens&itive"
 msgstr "大小写敏感(&T)"
-
-msgid "Re&gular expression"
-msgstr "正规表达式(&R)"
 
 msgid "Fir&st hit"
 msgstr "第一个命中(&S)"
@@ -2586,14 +2616,13 @@ msgstr "新建活动表组"
 msgid "Name of new group:"
 msgstr "新建组名："
 
-msgid "Remove:"
-msgstr "删除："
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "您确实要删除这个条目？"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "组非空。\n"
@@ -2605,9 +2634,9 @@ msgstr "顶级组"
 msgid "Hotlist Load"
 msgstr "加载活动表"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 "MC无法写文件~/%s，\n"
@@ -2961,9 +2990,6 @@ msgstr "总是(&Y)"
 msgid "A&uto save setup"
 msgstr "自动保存设置(&U)"
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr "安全删除(&F)"
 
@@ -3002,6 +3028,10 @@ msgstr "按下单个键(&I)"
 
 msgid "Esc key mode"
 msgstr "ESC键模式"
+
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "忽略所有空白(&W)"
 
 msgid "Mkdi&r autoname"
 msgstr "创建目录时自动命名(&R)"
@@ -3254,6 +3284,10 @@ msgstr "关闭管道失败"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "在非本地目录不能运行外部面板化"
 
+#, fuzzy
+msgid "Modified git files"
+msgstr "修改： %s"
+
 msgid "Find rejects after patching"
 msgstr "应用补丁后查找被拒绝的补丁"
 
@@ -3454,6 +3488,9 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3548,6 +3585,10 @@ msgstr "虚拟文件系统:"
 #, c-format
 msgid "Data types:"
 msgstr "数据类型"
+
+#, fuzzy
+msgid "Home directory:"
+msgstr "目录"
 
 msgid "System data"
 msgstr ""
@@ -4029,14 +4070,6 @@ msgstr ""
 "无法打开\"%s\"\n"
 "%s "
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"无法查看\"%s\"的状态\n"
-"%s"
-
 msgid "Cannot view: not a regular file"
 msgstr "无法查看：不是常规文件"
 
@@ -4049,4 +4082,17 @@ msgstr "搜索完成"
 msgid "Continue from beginning?"
 msgstr ""
 
+#~ msgid "Normal"
+#~ msgstr "普通"
 
+#~ msgid "&Regular expression"
+#~ msgstr "正规表达式(&R)"
+
+#~ msgid "All charsets"
+#~ msgstr "所有字体集"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "大小写敏感(&S)"
+
+#~ msgid "Remove:"
+#~ msgstr "删除："

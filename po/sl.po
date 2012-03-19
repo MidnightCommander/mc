@@ -1,23 +1,26 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
+#   <>, 2012.
 # mateju <>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Slovenian (http://www.transifex.net/projects/p/mc/team/sl/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 19:08+0300\n"
+"PO-Revision-Date: 2012-02-16 09:56+0000\n"
+"Last-Translator: mateju <>\n"
+"Language-Team: Slovenian (http://www.transifex.net/projects/p/mc/language/"
+"sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3)\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Opozorilo: ni mogoče naložiti seznama nabora znakov"
@@ -109,16 +112,18 @@ msgstr "Neveljavno število žetona %d"
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
-msgstr "Običajno"
+msgid "&Normal"
+msgstr ""
 
-msgid "&Regular expression"
-msgstr "&Logični izraz"
+msgid "Re&gular expression"
+msgstr ""
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Šestnajstiško"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "Iskanje z nadomestnimi znaki"
 
 #, c-format
@@ -240,6 +245,9 @@ msgstr "Tipka Izbriši"
 msgid "Completion/M-tab"
 msgstr "Dopolni/predelčnica"
 
+msgid "Back Tabulation S-tab"
+msgstr ""
+
 msgid "+ on keypad"
 msgstr "+ na številčni tipkovnici"
 
@@ -319,28 +327,28 @@ msgid "Dot"
 msgstr "Pika"
 
 msgid "Less than"
-msgstr ""
+msgstr "Manj kot"
 
 msgid "Great than"
-msgstr ""
+msgstr "Več kot"
 
 msgid "Equal"
-msgstr ""
+msgstr "Je enako"
 
 msgid "Comma"
-msgstr ""
+msgstr "Vejica"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "Narekovaj"
 
 msgid "Colon"
-msgstr ""
+msgstr "Podpičje"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Klicaj"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Vprašaj"
 
 msgid "Ampersand"
 msgstr ""
@@ -413,13 +421,13 @@ msgid "At sign"
 msgstr ""
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
@@ -431,34 +439,6 @@ msgid ""
 msgstr ""
 "Velikost zaslona %dx%d ni podprta.\n"
 "Preverite okoljsko spremenljivko TERM.\n"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s ni imenik\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Niste lastnik imenika %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Ne morem nastaviti pravilnih dovoljenj za imenik %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr " Ne morem ustvariti začasnega imenika %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Začasne datoteke bodo ustvarjene v %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Začasne datoteke ne bodo ustvarjene\n"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
 
 msgid "Warning"
 msgstr "Opozorilo"
@@ -487,6 +467,34 @@ msgstr "Dobivam datoteko"
 
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s ni imenik\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Niste lastnik imenika %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Ne morem nastaviti pravilnih dovoljenj za imenik %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr " Ne morem ustvariti začasnega imenika %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Začasne datoteke bodo ustvarjene v %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Začasne datoteke ne bodo ustvarjene\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
 
 msgid "Cannot parse:"
 msgstr "Ne morem razčleniti:"
@@ -566,6 +574,10 @@ msgstr "Urejuje eno datoteko"
 
 msgid "Forces xterm features"
 msgstr "Prisili uporabo xterm dodatkov"
+
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Izključi podporo za podlupine"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -660,16 +672,19 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "Polnočni poveljnik GNU %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr ""
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr ""
-
 msgid "Main options"
 msgstr ""
 
 msgid "Terminal options"
+msgstr ""
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Background process error"
@@ -695,7 +710,7 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Opusti"
 
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
 
 msgid "&Whole words"
@@ -704,7 +719,7 @@ msgstr ""
 msgid "&Backwards"
 msgstr "&Nazaj"
 
-msgid "Case &sensitive"
+msgid "Cas&e sensitive"
 msgstr ""
 
 msgid "Enter search string:"
@@ -733,9 +748,6 @@ msgstr ""
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-
-msgid "&Normal"
 msgstr ""
 
 msgid "&Fastest (Assume large files)"
@@ -1536,8 +1548,7 @@ msgstr "Vrstni red sortiranja"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2216,6 +2227,12 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
@@ -2275,15 +2292,35 @@ msgid "Background process: File exists"
 msgstr ""
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
+msgstr "Datoteka: %s"
+
+#, c-format
+msgid "Time: %s %s (%s)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Datoteka: %s"
+
+#, c-format
+msgid "Time: %s (%s)"
 msgstr ""
 
 #, c-format
-msgid "Total: %s of %s"
+msgid " Total: %s "
+msgstr ""
+
+#, c-format
+msgid " Total: %s/%s "
 msgstr ""
 
 msgid "Source"
@@ -2342,25 +2379,16 @@ msgstr ""
 msgid "Malformed regular expression"
 msgstr ""
 
-msgid "Cas&e sensitive"
-msgstr ""
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
 msgid "Sea&rch for content"
 msgstr ""
 
 msgid "Case sens&itive"
-msgstr ""
-
-msgid "Re&gular expression"
 msgstr ""
 
 msgid "Fir&st hit"
@@ -2476,14 +2504,13 @@ msgstr ""
 msgid "Name of new group:"
 msgstr ""
 
-msgid "Remove:"
+#, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-msgid "Are you sure you want to remove this entry?"
-msgstr ""
-
+#, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
@@ -2495,7 +2522,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
@@ -2853,9 +2880,6 @@ msgstr "&Vedno"
 msgid "A&uto save setup"
 msgstr ""
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr ""
 
@@ -2893,6 +2917,9 @@ msgid "S&ingle press"
 msgstr ""
 
 msgid "Esc key mode"
+msgstr ""
+
+msgid "Preallocate &space"
 msgstr ""
 
 msgid "Mkdi&r autoname"
@@ -3150,6 +3177,10 @@ msgstr "Zaprtje cevi neuspešno"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
+#, fuzzy
+msgid "Modified git files"
+msgstr "Modificiran %s"
+
 msgid "Find rejects after patching"
 msgstr "Poišči zavrnjene po patchingu"
 
@@ -3348,6 +3379,9 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3437,6 +3471,10 @@ msgstr ""
 #, c-format
 msgid "Data types:"
 msgstr ""
+
+#, fuzzy
+msgid "Home directory:"
+msgstr "imenik"
 
 msgid "System data"
 msgstr ""
@@ -3903,12 +3941,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-
 msgid "Cannot view: not a regular file"
 msgstr ""
 
@@ -3921,4 +3953,8 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
+#~ msgid "Normal"
+#~ msgstr "Običajno"
 
+#~ msgid "&Regular expression"
+#~ msgstr "&Logični izraz"

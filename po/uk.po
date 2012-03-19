@@ -1,23 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Oleksandr Natalenko <pfactum@gmail.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Ukrainian (http://www.transifex.net/projects/p/mc/team/uk/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 19:08+0300\n"
+"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Ukrainian (http://www.transifex.net/projects/p/mc/language/"
+"uk/)\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Попередження: не вдалося завантажити список кодових сторінок"
@@ -88,7 +90,8 @@ msgid ""
 msgstr ""
 "Старі настройки перенесено з %s\n"
 "до каталогів, рекомендованих Freedesktop.\n"
-"Щоб отримати докладніші відомості, відвідайте веб-сторінку http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+"Щоб отримати докладніші відомості, відвідайте веб-сторінку http://standards."
+"freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
@@ -113,16 +116,18 @@ msgstr "Неправильний номер елемента: %d"
 msgid "Regular expression error"
 msgstr "Виявлено помилку регулярного виразу"
 
-msgid "Normal"
-msgstr "Нормальний"
+msgid "&Normal"
+msgstr "&Нормальний"
 
-msgid "&Regular expression"
+msgid "Re&gular expression"
 msgstr "Р&eгулярний вираз"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Шістнадцятковий"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "Пошук за шаблоном"
 
 #, c-format
@@ -246,6 +251,9 @@ msgstr "Клавіша Delete"
 
 msgid "Completion/M-tab"
 msgstr "Доповнення/M-Tab"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "Додатковий +"
@@ -439,34 +447,6 @@ msgstr ""
 "Розмір екрана %dx%d не підтримується.\n"
 "Перевірте змінну оточення TERM.\n"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s не є каталогом\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Каталог %s вам не належить\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Не вдалося встановити правильні права для каталога %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Не вдалося створити тимчасовий каталог «%s»: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Тимчасові файли створюватимуться у %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Тимчасові файли не створюватимуться\n"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Щоб продовжити, натисніть будь-яку клавішу…"
-
 msgid "Warning"
 msgstr "Попередження"
 
@@ -494,6 +474,34 @@ msgstr "Отримується файл"
 
 msgid "Changes to file lost"
 msgstr "Зміни у файлі втрачено"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s не є каталогом\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Каталог %s вам не належить\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Не вдалося встановити правильні права для каталога %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Не вдалося створити тимчасовий каталог «%s»: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Тимчасові файли створюватимуться у %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Тимчасові файли не створюватимуться\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Щоб продовжити, натисніть будь-яку клавішу…"
 
 msgid "Cannot parse:"
 msgstr "Не вдалося обробити:"
@@ -574,6 +582,10 @@ msgstr "Редагує один файл"
 msgid "Forces xterm features"
 msgstr "Нав’язує властивості xterm"
 
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Вимикає підтримку вкладеної оболонки"
+
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
 
@@ -596,8 +608,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Завантажити визначення прив’язок клавіш із вказаного файлу"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
-"Не завантажувати прив’язки клавіш із файлу, використовувати стандартні"
+msgstr "Не завантажувати прив’язки клавіш із файлу, використовувати стандартні"
 
 msgid "Requests to run in black and white"
 msgstr "Запитує запуск у чорно-білому режимі"
@@ -633,7 +644,8 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧ={КОЛІР},{ТЛО},{АТРИБУТ}:КЛЮЧ2=...\n"
 "\n"
-"Значення {КОЛІР}, {ТЛО} і {АТРИБУТ} можна пропустити, в такому випадку використовуватимуться стандартні значення\n"
+"Значення {КОЛІР}, {ТЛО} і {АТРИБУТ} можна пропустити, в такому випадку "
+"використовуватимуться стандартні значення\n"
 "\n"
 " Ключові слова:\n"
 "   Глобальні:       errors, disabled, reverse, gauge, header\n"
@@ -671,7 +683,8 @@ msgstr ""
 "   від color16 до color255, або від rgb000 до rgb555 і від gray0 до gray23\n"
 "\n"
 "Атрибути:\n"
-"   bold, underline, reverse, blink; додавайте більше за допомогою символу «+»\n"
+"   bold, underline, reverse, blink; додавайте більше за допомогою символу "
+"«+»\n"
 
 msgid "Color options"
 msgstr "Параметри кольору"
@@ -698,17 +711,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr "Переглядачу не передано жодних аргументів."
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr "Необхідно вказати 2 файли для різницевого перегляду."
-
 msgid "Main options"
 msgstr "Головні параметри"
 
 msgid "Terminal options"
 msgstr "Параметри терміналу"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr "Переглядачу не передано жодних аргументів."
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr "Необхідно вказати 2 файли для різницевого перегляду."
 
 msgid "Background process error"
 msgstr "Сталася помилка фонового процесу"
@@ -735,8 +751,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Закрити"
 
-msgid "All charsets"
-msgstr "Усі кодування"
+msgid "&All charsets"
+msgstr "&Усі кодування"
 
 msgid "&Whole words"
 msgstr "&Цілі слова"
@@ -744,8 +760,8 @@ msgstr "&Цілі слова"
 msgid "&Backwards"
 msgstr "&Hазад"
 
-msgid "Case &sensitive"
-msgstr "Врахування ре&гістру"
+msgid "Cas&e sensitive"
+msgstr "Регістро&залежний"
 
 msgid "Enter search string:"
 msgstr "Введіть рядок для пошуку:"
@@ -781,9 +797,6 @@ msgid ""
 msgstr ""
 "Не вдалося створити тимчасовий файл об’єднання\n"
 "%s "
-
-msgid "&Normal"
-msgstr "&Нормальний"
 
 msgid "&Fastest (Assume large files)"
 msgstr "Н&айшвидший (приймати великі файли)"
@@ -1477,8 +1490,8 @@ msgid ""
 "extra access permissions with the \"su\" command?"
 msgstr ""
 "Commander не може перейти у вказаний вкладеною оболонкою каталог. Імовірно, "
-"робочий каталог видалено або отримано додаткові дозволи за допомогою команди"
-" «su»."
+"робочий каталог видалено або отримано додаткові дозволи за допомогою команди "
+"«su»."
 
 msgid "The shell is already running a command"
 msgstr "Інтерпретатор вже виконує команду"
@@ -1604,8 +1617,7 @@ msgstr "Порядок сортування"
 msgid "Confirmation"
 msgstr "Підтвердження"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|&Очищення історії"
@@ -2064,7 +2076,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Не вдалося створити стійкі символьні посилання між нелокальними файловими системами:\n"
+"Не вдалося створити стійкі символьні посилання між нелокальними файловими "
+"системами:\n"
 "\n"
 "Параметр «Стійкі символьні посилання» буде вимкнено"
 
@@ -2367,6 +2380,14 @@ msgstr "Сканування каталогу"
 msgid "Cannot operate on \"..\"!"
 msgstr "Не можна виконувати операції з «..»"
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"Не вдалося отримати властивості «%s»\n"
+"%s "
+
 msgid "Sorry, I could not put the job in background"
 msgstr "Не вдалося помістити цей процес у фон"
 
@@ -2425,16 +2446,36 @@ msgstr "Файл існує"
 msgid "Background process: File exists"
 msgstr "Фоновий процес: файл існує"
 
-#, c-format
-msgid "Files processed: %zu of %zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu/%zu"
 msgstr "Оброблено файлів: %zu із %zu"
 
-#, c-format
-msgid "Time: %s  %s (%s)"
+#, fuzzy, c-format
+msgid "Files processed: %zu"
+msgstr "Оброблено файлів: %zu із %zu"
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "Час: %s %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Час: %s %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Файл: %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "Час: %s %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "Усього: %s із %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "Усього: %s із %s"
 
 msgid "Source"
@@ -2493,26 +2534,17 @@ msgstr "Знайдено: %ld"
 msgid "Malformed regular expression"
 msgstr "Регулярний вираз сформовано неправильно"
 
-msgid "Cas&e sensitive"
-msgstr "Регістро&залежний"
-
 msgid "&Find recursively"
 msgstr "&Шукати рекурсивно"
 
 msgid "S&kip hidden"
 msgstr "П&ропускати приховані"
 
-msgid "&All charsets"
-msgstr "&Усі кодування"
-
 msgid "Sea&rch for content"
 msgstr "Ш&укати за вмістом"
 
 msgid "Case sens&itive"
 msgstr "Регістро&залежний"
-
-msgid "Re&gular expression"
-msgstr "Р&eгулярний вираз"
 
 msgid "Fir&st hit"
 msgstr "Пер&ший збіг"
@@ -2626,14 +2658,13 @@ msgstr "Нова група:"
 msgid "Name of new group:"
 msgstr "Назва нової групи:"
 
-msgid "Remove:"
-msgstr "Видалити:"
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "Справді видалити цей запис?"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "Група не порожня.\n"
@@ -2645,9 +2676,9 @@ msgstr "Група верхнього рівня"
 msgid "Hotlist Load"
 msgstr "Завантаження списку"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 "Не вдалося записати файл ~/%s,\n"
@@ -3005,9 +3036,6 @@ msgstr "&Завжди"
 msgid "A&uto save setup"
 msgstr "&Автозбереження параметрів"
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr "Безпечне &видалення"
 
@@ -3046,6 +3074,10 @@ msgstr "Одиничне натиснення"
 
 msgid "Esc key mode"
 msgstr "Режим клавіші Escape"
+
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "Ігнорувати всі про&біли"
 
 msgid "Mkdi&r autoname"
 msgstr "Автоіменування нових каталогів"
@@ -3303,6 +3335,10 @@ msgstr "Сталася помилка закриття каналу"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Не вдалося виконати зовнішню панелізацію у нелокальному каталозі"
 
+#, fuzzy
+msgid "Modified git files"
+msgstr "Змінено:  %s"
+
 msgid "Find rejects after patching"
 msgstr "Знайти коректури, відкинуті командою patch"
 
@@ -3506,6 +3542,9 @@ msgstr ""
 "Не вдалося запустити:\n"
 "%s\n"
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3603,6 +3642,10 @@ msgstr "Віртуальні файлові системи:"
 #, c-format
 msgid "Data types:"
 msgstr "Типи даних:"
+
+#, fuzzy
+msgid "Home directory:"
+msgstr "Каталог кешу:"
 
 msgid "System data"
 msgstr "Системна дата"
@@ -4086,14 +4129,6 @@ msgstr ""
 "Не вдалося відкрити «%s»\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"Не вдалося отримати властивості «%s»\n"
-"%s "
-
 msgid "Cannot view: not a regular file"
 msgstr "Не вдалося показати: не звичайний файл"
 
@@ -4106,4 +4141,17 @@ msgstr "Пошук завершено"
 msgid "Continue from beginning?"
 msgstr "Почати спочатку?"
 
+#~ msgid "Normal"
+#~ msgstr "Нормальний"
 
+#~ msgid "&Regular expression"
+#~ msgstr "Р&eгулярний вираз"
+
+#~ msgid "All charsets"
+#~ msgstr "Усі кодування"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "Врахування ре&гістру"
+
+#~ msgid "Remove:"
+#~ msgstr "Видалити:"

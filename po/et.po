@@ -2,13 +2,12 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # 
-# Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"POT-Creation-Date: 2011-07-09 17:00+0400\n"
+"PO-Revision-Date: 2011-07-11 17:34+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -67,9 +66,6 @@ msgstr ""
 msgid "Cannot create %s directory"
 msgstr ""
 
-msgid "FATAL: not a directory:"
-msgstr ""
-
 #, c-format
 msgid "An error occured while migrating user settings: %s"
 msgstr ""
@@ -80,12 +76,6 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
 msgstr ""
 
 msgid "Search string not found"
@@ -342,9 +332,6 @@ msgstr ""
 msgid "Quotation mark"
 msgstr ""
 
-msgid "Percent sign"
-msgstr ""
-
 msgid "Caret"
 msgstr ""
 
@@ -410,9 +397,6 @@ msgid "Alt"
 msgstr ""
 
 msgid "Shift"
-msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
 #, c-format
@@ -554,9 +538,6 @@ msgid "Edits one file"
 msgstr ""
 
 msgid "Forces xterm features"
-msgstr ""
-
-msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
 
 msgid "Disable mouse support in text version"
@@ -1896,13 +1877,14 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "%s file error"
+msgid "%s%s%s file error"
 msgstr ""
 
 #, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s%s%s file has changed with version 3.0. You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write"
+" it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2101,12 +2083,6 @@ msgstr ""
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -2504,17 +2480,18 @@ msgstr ""
 msgid "File: %s"
 msgstr ""
 
+#, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
+msgstr ""
+
 msgid "No node information"
 msgstr ""
 
-msgid "Free nodes:"
+#, c-format
+msgid "Free space: %s (%d%%) of %s"
 msgstr ""
 
 msgid "No space information"
-msgstr ""
-
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
@@ -2645,9 +2622,6 @@ msgid "S&hell link..."
 msgstr ""
 
 msgid "SM&B link..."
-msgstr ""
-
-msgid "Paneli&ze"
 msgstr ""
 
 msgid "&Rescan"
@@ -2785,6 +2759,9 @@ msgstr ""
 msgid "Panels:"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
@@ -2821,9 +2798,6 @@ msgstr ""
 msgid "ButtonBar|Mkdir"
 msgstr ""
 
-msgid "Memory exhausted!"
-msgstr ""
-
 msgid "&Never"
 msgstr ""
 
@@ -2834,9 +2808,6 @@ msgid "Alwa&ys"
 msgstr ""
 
 msgid "A&uto save setup"
-msgstr ""
-
-msgid "Preallocate &space before file copying"
 msgstr ""
 
 msgid "Sa&fe delete"
@@ -3088,9 +3059,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "Panelize"
-msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3403,9 +3371,6 @@ msgid "Config directory:"
 msgstr ""
 
 msgid "Data directory:"
-msgstr ""
-
-msgid "VFS plugins and scripts:"
 msgstr ""
 
 msgid "User data"

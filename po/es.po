@@ -1,23 +1,26 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
+# David Martin <david.martin@telefonica.net>, 2011.
+# David Martín <david.martin@telefonica.net>, 2011.
 # David Martín <dmartina@excite.com>, 2011.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/mc/team/es/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 19:08+0300\n"
+"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"Last-Translator: David Martin <david.martin@telefonica.net>\n"
+"Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/mc/"
+"language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -74,7 +77,7 @@ msgid "Cannot create %s directory"
 msgstr "Imposible crear directorio %s"
 
 msgid "FATAL: not a directory:"
-msgstr ""
+msgstr "¡FATAL! No es directorio:"
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -97,6 +100,8 @@ msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr ""
+"La configuración previa ha sido trasladada de %s\n"
+"a %s\n"
 
 msgid "Search string not found"
 msgstr "La cadena buscada no ha sido encontrada"
@@ -114,16 +119,18 @@ msgstr "El elemento número %d no es válido"
 msgid "Regular expression error"
 msgstr "Error en expresión regular"
 
-msgid "Normal"
+msgid "&Normal"
 msgstr "&Normal"
 
-msgid "&Regular expression"
-msgstr "expresión &Regular"
+msgid "Re&gular expression"
+msgstr "e&Xpresión regular"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "he&Xadecimal"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "caracteres como&Dín"
 
 #, c-format
@@ -248,6 +255,9 @@ msgstr "Tecla Eliminar"
 msgid "Completion/M-tab"
 msgstr "Completar/M-Tab"
 
+msgid "Back Tabulation S-tab"
+msgstr ""
+
 msgid "+ on keypad"
 msgstr "+ en el pad"
 
@@ -360,7 +370,7 @@ msgid "Quotation mark"
 msgstr "Comillas"
 
 msgid "Percent sign"
-msgstr ""
+msgstr "Porcentaje"
 
 msgid "Caret"
 msgstr "Ángulo"
@@ -418,7 +428,7 @@ msgstr "Sostenido"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr "@"
+msgstr "Arroba"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -439,34 +449,6 @@ msgid ""
 msgstr ""
 "El tamaño de ventana %dx%d no está soportado.\n"
 "Verifique el valor de la variable de entorno TERM.\n"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s no es un directorio\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "El directorio %s es de propiedad ajena\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Imposible dar permisos adecuados al directorio %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Imposible crear directorio temporal %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Los archivos temporales se ubicarán en %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "No se crearán archivos temporales\n"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Presione cualquier tecla para continuar..."
 
 msgid "Warning"
 msgstr "¡ Atención !"
@@ -495,6 +477,34 @@ msgstr "Trayendo archivo"
 
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s no es un directorio\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "El directorio %s es de propiedad ajena\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Imposible dar permisos adecuados al directorio %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Imposible crear directorio temporal %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Los archivos temporales se ubicarán en %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "No se crearán archivos temporales\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Presione cualquier tecla para continuar..."
 
 msgid "Cannot parse:"
 msgstr "Imposible analizar:"
@@ -575,8 +585,12 @@ msgstr "Editar un archivo"
 msgid "Forces xterm features"
 msgstr "Utilizar las posibilidades de xterm"
 
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Desactivar el uso de subshell"
+
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Usar rastro de ratón con el antiguo resaltado"
 
 msgid "Disable mouse support in text version"
 msgstr "Desactivar ratón en la versión texto"
@@ -633,16 +647,19 @@ msgid ""
 msgstr ""
 "--colors CONTEXTO={FRENTE},{FONDO},{ATRIBUTOS}:CONTEXTO2=...\n"
 "\n"
-"{FRENTE}, {FONDO} y {ATRIBUTOS} se pueden omitir y se utilizará el valor estándar\n"
+"{FRENTE}, {FONDO} y {ATRIBUTOS} se pueden omitir y se utilizará el valor "
+"estándar\n"
 "\n"
 " Contextos:\n"
 "   Global:            errors, disabled, reverse, gauge, header\n"
 "                      input, inputmark, inputunchanged, commandlinemark\n"
 "                      bbarhotkey, bbarbutton, statusbar\n"
 "   Visor de archivos: normal, selected, marked, markselect\n"
-"   Diálogos:          dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"   Diálogos:          dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
 "                      errdhotfocus\n"
-"   Menús:             menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús:             menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
 "   Menús emergentes:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:            editnormal, editbold, editmarked, editwhitespace,\n"
 "                      editlinestate\n"
@@ -698,17 +715,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr "No se han pasado argumentos al visor."
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr "Se necesitan dos archivos para comparar."
-
 msgid "Main options"
 msgstr "Opciones principales"
 
 msgid "Terminal options"
 msgstr "Opciones de terminal"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr "No se han pasado argumentos al visor."
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr "Se necesitan dos archivos para comparar."
 
 msgid "Background process error"
 msgstr "Error en un proceso en 2º plano"
@@ -735,8 +755,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Ignorar"
 
-msgid "All charsets"
-msgstr "en co&Dificaciones"
+msgid "&All charsets"
+msgstr "cualquier co&Dificación"
 
 msgid "&Whole words"
 msgstr "&Palabras completas"
@@ -744,7 +764,7 @@ msgstr "&Palabras completas"
 msgid "&Backwards"
 msgstr "&Hacia atrás"
 
-msgid "Case &sensitive"
+msgid "Cas&e sensitive"
 msgstr "distinguir &May/min"
 
 msgid "Enter search string:"
@@ -781,9 +801,6 @@ msgid ""
 msgstr ""
 "Imposible crear archivo temporal de mezcla\n"
 "%s"
-
-msgid "&Normal"
-msgstr "&Normal"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Rápido (archivos grandes)"
@@ -1607,8 +1624,7 @@ msgstr "Ordenar"
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "borrar &Historia"
@@ -1993,13 +2009,15 @@ msgstr ""
 
 #, c-format
 msgid "%s file error"
-msgstr ""
+msgstr "error en el archivo %s"
 
 #, c-format
 msgid ""
 "The format of the %s file has changed with version 3.0. You may either want "
 "to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
+"El formato del archivo %s ha cambiado con la versión 3.0. Puede hacer una "
+"copia de %smc.ext o bien emplearlo como modelo."
 
 msgid "DialogTitle|Copy"
 msgstr "Copiar"
@@ -2251,6 +2269,8 @@ msgid ""
 "Cannot preallocate space for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Imposible reservar espacio para el archivo destino \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2375,6 +2395,14 @@ msgstr "Analizando directorio"
 msgid "Cannot operate on \"..\"!"
 msgstr "¡Imposible operar sobre \"..\"!"
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"Imposible identificar \"%s\"\n"
+"%s"
+
 msgid "Sorry, I could not put the job in background"
 msgstr "Lo siento, no se pudo poner la tarea en 2º plano"
 
@@ -2433,16 +2461,36 @@ msgstr "El archivo ya existe"
 msgid "Background process: File exists"
 msgstr "Proceso en 2º plano: El archivo ya existe"
 
-#, c-format
-msgid "Files processed: %zu of %zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu/%zu"
 msgstr "Archivos procesados: %zu de %zu"
 
-#, c-format
-msgid "Time: %s  %s (%s)"
+#, fuzzy, c-format
+msgid "Files processed: %zu"
+msgstr "Archivos procesados: %zu de %zu"
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "Tiempo: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Tiempo: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Archivo: %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "Tiempo: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "Total: %s de %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "Total: %s de %s"
 
 msgid "Source"
@@ -2501,26 +2549,17 @@ msgstr "Encontrado: %ld"
 msgid "Malformed regular expression"
 msgstr "La expresión regular es errónea"
 
-msgid "Cas&e sensitive"
-msgstr "distinguir &May/min"
-
 msgid "&Find recursively"
 msgstr "buscar &Recursivamente"
 
 msgid "S&kip hidden"
 msgstr "saltar &Ocultos"
 
-msgid "&All charsets"
-msgstr "cualquier co&Dificación"
-
 msgid "Sea&rch for content"
 msgstr "buscar co&Ntenido"
 
 msgid "Case sens&itive"
 msgstr "distinguir &May/min"
-
-msgid "Re&gular expression"
-msgstr "e&Xpresión regular"
 
 msgid "Fir&st hit"
 msgstr "pr&Imera coincidencia"
@@ -2633,14 +2672,13 @@ msgstr "Nuevo grupo"
 msgid "Name of new group:"
 msgstr "Nombre del nuevo grupo:"
 
-msgid "Remove:"
-msgstr "Eliminar:"
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "¿Desea realmente eliminar este elemento?"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "El grupo no está vacío.\n"
@@ -2652,9 +2690,9 @@ msgstr "Grupo principal"
 msgid "Hotlist Load"
 msgstr "Cargar favoritos"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 "No se pudo escribir ~/%s,\n"
@@ -2682,14 +2720,14 @@ msgid "No node information"
 msgstr "Sin información sobre inodos"
 
 msgid "Free nodes:"
-msgstr ""
+msgstr "Inodos libres:"
 
 msgid "No space information"
 msgstr "Espacio libre desconocido"
 
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr ""
+msgstr "Espacio libre: %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:      %s"
@@ -2822,7 +2860,7 @@ msgid "SM&B link..."
 msgstr "conexión por &SMB..."
 
 msgid "Paneli&ze"
-msgstr ""
+msgstr "búsquedas e&Xternas"
 
 msgid "&Rescan"
 msgstr "&Actualizar"
@@ -2996,7 +3034,7 @@ msgid "ButtonBar|Mkdir"
 msgstr "Mkdir"
 
 msgid "Memory exhausted!"
-msgstr ""
+msgstr "¡Memoria agotada!"
 
 msgid "&Never"
 msgstr "&Nunca"
@@ -3009,9 +3047,6 @@ msgstr "&Siempre"
 
 msgid "A&uto save setup"
 msgstr "auto-guarda con&Figuración"
-
-msgid "Preallocate &space before file copying"
-msgstr ""
 
 msgid "Sa&fe delete"
 msgstr "precauciones de &Borrado"
@@ -3052,6 +3087,10 @@ msgstr "p&Ulsación única"
 msgid "Esc key mode"
 msgstr "Tecla de escape (Esc)"
 
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "&Reservar espacio al copiar archivos"
+
 msgid "Mkdi&r autoname"
 msgstr "proponer nombre m&Kdir"
 
@@ -3062,7 +3101,7 @@ msgid "Compute tota&ls"
 msgstr "calcular totales"
 
 msgid "&Verbose operation"
-msgstr "ope&Ración detallada"
+msgstr "operac&Ión detallada"
 
 msgid "File operation options"
 msgstr "Operaciones con archivos"
@@ -3268,7 +3307,7 @@ msgstr[0] "%s en %d archivo"
 msgstr[1] "%s en %d archivos"
 
 msgid "Panelize"
-msgstr ""
+msgstr "Búsquedas externas"
 
 msgid "Unknown tag on display format:"
 msgstr "Campo desconocido en el formato de pantalla:"
@@ -3305,6 +3344,10 @@ msgstr "Fallo al cerrar la tubería"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Imposible ejecutar búsquedas externas en un directorio no local"
+
+#, fuzzy
+msgid "Modified git files"
+msgstr "Modificado: %s"
 
 msgid "Find rejects after patching"
 msgstr "Buscar archivos rechazados después de aplicar parches"
@@ -3508,6 +3551,9 @@ msgstr ""
 "Error al ejecutar:\n"
 "%s\n"
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3606,6 +3652,10 @@ msgstr "Sistemas de archivos virtuales:"
 msgid "Data types:"
 msgstr "Tipos de datos:"
 
+#, fuzzy
+msgid "Home directory:"
+msgstr "Directorio de caché:"
+
 msgid "System data"
 msgstr "Datos de sistema"
 
@@ -3616,7 +3666,7 @@ msgid "Data directory:"
 msgstr "Directorio de datos:"
 
 msgid "VFS plugins and scripts:"
-msgstr ""
+msgstr "Complementos y guiones VFS"
 
 msgid "User data"
 msgstr "Datos de usuario"
@@ -4085,14 +4135,6 @@ msgstr ""
 "Imposible abrir \"%s\"\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"Imposible identificar \"%s\"\n"
-"%s"
-
 msgid "Cannot view: not a regular file"
 msgstr "Imposible ver: no es un archivo ordinario"
 
@@ -4105,4 +4147,17 @@ msgstr "Búsqueda finalizada"
 msgid "Continue from beginning?"
 msgstr "¿Continuar desde el principio?"
 
+#~ msgid "Normal"
+#~ msgstr "&Normal"
 
+#~ msgid "&Regular expression"
+#~ msgstr "expresión &Regular"
+
+#~ msgid "All charsets"
+#~ msgstr "en co&Dificaciones"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "distinguir &May/min"
+
+#~ msgid "Remove:"
+#~ msgstr "Eliminar:"

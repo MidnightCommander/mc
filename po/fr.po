@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: French (http://www.transifex.net/projects/p/mc/team/fr/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 19:08+0300\n"
+"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: French (http://www.transifex.net/projects/p/mc/language/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -108,16 +108,17 @@ msgstr " Nombre de jetons invalide %d "
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
-msgstr "Normal"
+msgid "&Normal"
+msgstr "&Normal"
 
-msgid "&Regular expression"
-msgstr "Expression &régulière"
+msgid "Re&gular expression"
+msgstr "Expression ré&gulière"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Hexadécimal"
 
-msgid "Wildcard search"
+msgid "Wil&dcard search"
 msgstr ""
 
 #, c-format
@@ -238,6 +239,9 @@ msgstr "Effacement"
 
 msgid "Completion/M-tab"
 msgstr "Complétion/M-tab"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "Pavé numérique +"
@@ -431,34 +435,6 @@ msgstr ""
 "La taille de l'écran %dx%d n'est pas supportée.\n"
 "Vérifiez la variable d'environnement TERM.\n"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s n'est pas un répertoire\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Vous n'êtes pas le propriétaire du répertoire %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Impossible de régler des droits corrects sur le répertoire %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr " Ne peut créer le répertoire temporaire %s : %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Les fichiers temporaires seront crées dans %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Les fichiers temporaires ne seront pas crées\n"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Appuyez sur une touche pour continuer..."
-
 msgid "Warning"
 msgstr "Attention"
 
@@ -486,6 +462,34 @@ msgstr "Obtention du fichier"
 
 msgid "Changes to file lost"
 msgstr "Les changements au fichier sont perdus"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s n'est pas un répertoire\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Vous n'êtes pas le propriétaire du répertoire %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Impossible de régler des droits corrects sur le répertoire %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr " Ne peut créer le répertoire temporaire %s : %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Les fichiers temporaires seront crées dans %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Les fichiers temporaires ne seront pas crées\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Appuyez sur une touche pour continuer..."
 
 msgid "Cannot parse:"
 msgstr "Ne peut analyser :"
@@ -565,6 +569,10 @@ msgstr "Édite un fichier"
 
 msgid "Forces xterm features"
 msgstr "Force un attribut xterm"
+
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Désactive le support des sous-shells"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -662,17 +670,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr ""
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr ""
-
 msgid "Main options"
 msgstr "Options principales"
 
 msgid "Terminal options"
 msgstr "Options du terminal"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr ""
 
 msgid "Background process error"
 msgstr " Erreur dans un processus en tâche de fond"
@@ -699,8 +710,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Fermer"
 
-msgid "All charsets"
-msgstr "Tous les encodages"
+msgid "&All charsets"
+msgstr "&Tout les encodages"
 
 msgid "&Whole words"
 msgstr "&Mots entiers"
@@ -708,8 +719,8 @@ msgstr "&Mots entiers"
 msgid "&Backwards"
 msgstr "Vers le &haut"
 
-msgid "Case &sensitive"
-msgstr "Respec&t de la casse "
+msgid "Cas&e sensitive"
+msgstr "Sensible la ca&sse "
 
 msgid "Enter search string:"
 msgstr " Saisissez la chaîne à rechercher :"
@@ -738,9 +749,6 @@ msgid ""
 "Cannot create temporary merge file\n"
 "%s"
 msgstr ""
-
-msgid "&Normal"
-msgstr "&Normal"
 
 msgid "&Fastest (Assume large files)"
 msgstr ""
@@ -1548,8 +1556,7 @@ msgstr "Ordre de tri"
 msgid "Confirmation"
 msgstr " Confirmation "
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr " Confirmation|Nettoyage de l'&Historique"
@@ -2233,6 +2240,12 @@ msgstr "Analyse du répertoire"
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
@@ -2292,15 +2305,35 @@ msgid "Background process: File exists"
 msgstr ""
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
+msgstr "Temps :   %s %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Temps :   %s %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Fichier : %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
 msgstr "Temps :   %s %s (%s)"
 
 #, c-format
-msgid "Total: %s of %s"
+msgid " Total: %s "
+msgstr ""
+
+#, c-format
+msgid " Total: %s/%s "
 msgstr ""
 
 msgid "Source"
@@ -2359,26 +2392,17 @@ msgstr "Trouvé : %ld"
 msgid "Malformed regular expression"
 msgstr ""
 
-msgid "Cas&e sensitive"
-msgstr "Sensible la ca&sse "
-
 msgid "&Find recursively"
 msgstr "Recherche récursive"
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr "&Tout les encodages"
-
 msgid "Sea&rch for content"
 msgstr ""
 
 msgid "Case sens&itive"
 msgstr "Respec&t de la casse"
-
-msgid "Re&gular expression"
-msgstr "Expression ré&gulière"
 
 msgid "Fir&st hit"
 msgstr "Première occurence"
@@ -2491,14 +2515,13 @@ msgstr ""
 msgid "Name of new group:"
 msgstr ""
 
-msgid "Remove:"
+#, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-msgid "Are you sure you want to remove this entry?"
-msgstr ""
-
+#, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
@@ -2510,7 +2533,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
@@ -2864,9 +2887,6 @@ msgstr "&Toujours"
 msgid "A&uto save setup"
 msgstr ""
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr ""
 
@@ -2904,6 +2924,9 @@ msgid "S&ingle press"
 msgstr ""
 
 msgid "Esc key mode"
+msgstr ""
+
+msgid "Preallocate &space"
 msgstr ""
 
 msgid "Mkdi&r autoname"
@@ -3158,6 +3181,10 @@ msgstr "Ne peut fermer un tube"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
+#, fuzzy
+msgid "Modified git files"
+msgstr "Modifié :  %s"
+
 msgid "Find rejects after patching"
 msgstr "Trouver les déchets de patches"
 
@@ -3239,7 +3266,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Le fichier %s n'appartient ni à vous ni au root ou tout le monde peux y écrire.\n"
+"Le fichier %s n'appartient ni à vous ni au root ou tout le monde peux y "
+"écrire.\n"
 "Son utilisation peut compromettre la sécurité du système"
 
 msgid "Format error on file Extensions File"
@@ -3354,6 +3382,9 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3449,6 +3480,10 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
+#, fuzzy
+msgid "Home directory:"
+msgstr "répertoire"
+
 msgid "System data"
 msgstr ""
 
@@ -3539,8 +3574,8 @@ msgstr "fish : attente de la première ligne..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
-"Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe"
-" pour l'instant."
+"Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe "
+"pour l'instant."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3836,8 +3871,7 @@ msgid "vfs_info is not fs!"
 msgstr " vfs_info n'est pas fs !"
 
 msgid "You have to chdir to extract files first"
-msgstr ""
-" Vous devez changer de répertoire pour extraire les fichier en premier"
+msgstr " Vous devez changer de répertoire pour extraire les fichier en premier"
 
 msgid "while iterating over blocks"
 msgstr " lors de l'itération sur les blocs"
@@ -3925,12 +3959,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-
 msgid "Cannot view: not a regular file"
 msgstr ""
 
@@ -3943,4 +3971,14 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
+#~ msgid "Normal"
+#~ msgstr "Normal"
 
+#~ msgid "&Regular expression"
+#~ msgstr "Expression &régulière"
+
+#~ msgid "All charsets"
+#~ msgstr "Tous les encodages"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "Respec&t de la casse "

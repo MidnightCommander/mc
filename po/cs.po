@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Czech (http://www.transifex.net/projects/p/mc/team/cs/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 19:08+0300\n"
+"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Czech (http://www.transifex.net/projects/p/mc/language/cs/)\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
 msgid "Warning: cannot load codepages list"
@@ -108,16 +108,18 @@ msgstr "Chybné číslo tokenu %d"
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
-msgstr "Normální"
+msgid "&Normal"
+msgstr "&Normální"
 
-msgid "&Regular expression"
+msgid "Re&gular expression"
 msgstr "&Regulární výraz"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Hexadecimálně"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "Hledání přes žolíky"
 
 #, c-format
@@ -238,6 +240,9 @@ msgstr "Klávesa Delete"
 
 msgid "Completion/M-tab"
 msgstr "Doplňování/M-tab"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "+ na num. klávesnici"
@@ -431,34 +436,6 @@ msgstr ""
 "Velikost obrazovky %d×%d není podporovaná.\n"
 "Prověřte nastavení proměnné prostředí TERM.\n"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s není adresář\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Nejste vlastníkem adresáře %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Nelze nastavit správná práva pro adresář %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Nelze vytvořit dočasný adresář %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Dočasné soubory se budou vytvářet v %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Dočasné soubory se nebudou vytvářet\n"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Stiskněte libovolnou klávesu pro pokračování..."
-
 msgid "Warning"
 msgstr "Varování"
 
@@ -486,6 +463,34 @@ msgstr "Získává se soubor"
 
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s není adresář\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Nejste vlastníkem adresáře %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Nelze nastavit správná práva pro adresář %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Nelze vytvořit dočasný adresář %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Dočasné soubory se budou vytvářet v %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Dočasné soubory se nebudou vytvářet\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Stiskněte libovolnou klávesu pro pokračování..."
 
 msgid "Cannot parse:"
 msgstr "Nelze analyzovat:"
@@ -565,6 +570,10 @@ msgstr "Začne editovat jeden soubor"
 
 msgid "Forces xterm features"
 msgstr "Vnutí použití možností Xtermu"
+
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Vypne podporu podshellu"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -662,17 +671,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr "Prohlížeči nebyly zadány žádné parametry"
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr "Dva soubory jsou potřeba k vyvolání prohlížeče změn"
-
 msgid "Main options"
 msgstr "Hlavní nastavení"
 
 msgid "Terminal options"
 msgstr "Nastavení terminálu"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr "Prohlížeči nebyly zadány žádné parametry"
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr "Dva soubory jsou potřeba k vyvolání prohlížeče změn"
 
 msgid "Background process error"
 msgstr "Chyba procesu na pozadí"
@@ -699,8 +711,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Odmítnout"
 
-msgid "All charsets"
-msgstr "Všechny znakové sady"
+msgid "&All charsets"
+msgstr "Všechny z&nakové sady"
 
 msgid "&Whole words"
 msgstr "Pouze &celá slova"
@@ -708,7 +720,7 @@ msgstr "Pouze &celá slova"
 msgid "&Backwards"
 msgstr "Po&zpátku"
 
-msgid "Case &sensitive"
+msgid "Cas&e sensitive"
 msgstr "Všímat si velikos&ti písmen"
 
 msgid "Enter search string:"
@@ -745,9 +757,6 @@ msgid ""
 msgstr ""
 "Nelze vytvořit dočasný spojený soubor\n"
 "%s"
-
-msgid "&Normal"
-msgstr "&Normální"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Rychlý (Předpokládá velké soubory)"
@@ -1569,8 +1578,7 @@ msgstr "Pořadí"
 msgid "Confirmation"
 msgstr "Potvrzování"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Smazání &historie"
@@ -1949,8 +1957,7 @@ msgid ""
 "Commander package."
 msgstr ""
 "Formát souboru %smc.ext byl modifikován verzí 3.0. Zdá se, že instalace "
-"selhala. Prosím, nahrajte si novou aktuální kopii balíčku Midnight "
-"Commander."
+"selhala. Prosím, nahrajte si novou aktuální kopii balíčku Midnight Commander."
 
 #, c-format
 msgid "%s file error"
@@ -2335,6 +2342,14 @@ msgstr "Prohledávání adresáře"
 msgid "Cannot operate on \"..\"!"
 msgstr "Nelze pracovat s „..“!"
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"Na „%s“ nelze provést stat\n"
+"%s"
+
 msgid "Sorry, I could not put the job in background"
 msgstr "Bohužel, úlohu nelze přesunout na pozadí"
 
@@ -2393,16 +2408,36 @@ msgstr "Soubor existuje"
 msgid "Background process: File exists"
 msgstr "Proces na pozadí: Soubor existuje"
 
-#, c-format
-msgid "Files processed: %zu of %zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu/%zu"
 msgstr "Zpracováno souborů: %zu z %zu"
 
-#, c-format
-msgid "Time: %s  %s (%s)"
+#, fuzzy, c-format
+msgid "Files processed: %zu"
+msgstr "Zpracováno souborů: %zu z %zu"
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "Čas: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Čas: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Soubor: %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "Čas: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "Celkem: %s z %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "Celkem: %s z %s"
 
 msgid "Source"
@@ -2461,26 +2496,17 @@ msgstr "Nalezeno: %ld"
 msgid "Malformed regular expression"
 msgstr "Chybně zadaný regulární výraz"
 
-msgid "Cas&e sensitive"
-msgstr "Všímat si velikos&ti písmen"
-
 msgid "&Find recursively"
 msgstr "Najít re&kurzivně"
 
 msgid "S&kip hidden"
 msgstr "Přeskočit skr&yté"
 
-msgid "&All charsets"
-msgstr "Všechny z&nakové sady"
-
 msgid "Sea&rch for content"
 msgstr "Hledat obsah"
 
 msgid "Case sens&itive"
 msgstr "Všímat si velikos&ti písmen"
-
-msgid "Re&gular expression"
-msgstr "&Regulární výraz"
 
 msgid "Fir&st hit"
 msgstr "&První výskyt"
@@ -2594,14 +2620,13 @@ msgstr "Nová skupina pro rychlý přístup"
 msgid "Name of new group:"
 msgstr "Jméno nové skupiny:"
 
-msgid "Remove:"
-msgstr "Smazat:"
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "Jste si jistí, že chcete odstranit tuto položku?"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "Skupina není prázdná.\n"
@@ -2613,9 +2638,9 @@ msgstr "Hlavní skupina"
 msgid "Hotlist Load"
 msgstr "Čtení seznamu pro rychlý přístup"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 "MC nemohl zapsat soubor ~/%s,\n"
@@ -2973,9 +2998,6 @@ msgstr "Vžd&y"
 msgid "A&uto save setup"
 msgstr "&Automatické ukládání parametrů"
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr "&Bezpečné mazání"
 
@@ -3014,6 +3036,10 @@ msgstr "Jediný stisk"
 
 msgid "Esc key mode"
 msgstr "Mód Escape klávesy"
+
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "Ignorovat všechny mezery"
 
 msgid "Mkdi&r autoname"
 msgstr "Mkdir autonázev"
@@ -3270,8 +3296,11 @@ msgstr "Nelze zavřít rouru"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
-"Pokud nepracujete s lokálním adresářem, není možné provést externí "
-"panelizaci"
+"Pokud nepracujete s lokálním adresářem, není možné provést externí panelizaci"
+
+#, fuzzy
+msgid "Modified git files"
+msgstr "Změněn:   %s"
 
 msgid "Find rejects after patching"
 msgstr "Najít odmítnuté části záplat (*.rej) po záplatování"
@@ -3462,8 +3491,7 @@ msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Stiskněte všechny klávesy zmiňované výše. Až to budete mít hotovo,"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"zkontrolujte klávesy, které nejsou označeny OK. Tam stiskněte mezerník"
+msgstr "zkontrolujte klávesy, které nejsou označeny OK. Tam stiskněte mezerník"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "nebo klikněte myší. Po položkách se pohybujte pomocí tabulátoru."
@@ -3472,6 +3500,9 @@ msgstr "nebo klikněte myší. Po položkách se pohybujte pomocí tabulátoru."
 msgid ""
 "Failed to run:\n"
 "%s\n"
+msgstr ""
+
+msgid "Home directory path is not absolute"
 msgstr ""
 
 #, c-format
@@ -3568,6 +3599,10 @@ msgstr "Virtuální souborové systémy:"
 #, c-format
 msgid "Data types:"
 msgstr "Typy dat:"
+
+#, fuzzy
+msgid "Home directory:"
+msgstr "adresář"
 
 msgid "System data"
 msgstr ""
@@ -4048,14 +4083,6 @@ msgstr ""
 "Nelze otevřít „%s“\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"Na „%s“ nelze provést stat\n"
-"%s"
-
 msgid "Cannot view: not a regular file"
 msgstr "Nelze prohlížet: není to normální soubor"
 
@@ -4068,4 +4095,17 @@ msgstr "Hledání dokončeno"
 msgid "Continue from beginning?"
 msgstr ""
 
+#~ msgid "Normal"
+#~ msgstr "Normální"
 
+#~ msgid "&Regular expression"
+#~ msgstr "&Regulární výraz"
+
+#~ msgid "All charsets"
+#~ msgstr "Všechny znakové sady"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "Všímat si velikos&ti písmen"
+
+#~ msgid "Remove:"
+#~ msgstr "Smazat:"

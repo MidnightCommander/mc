@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 #   <danicases@gmail.com>, 2011.
 # el_libre como el chaval <el.libre@gmail.com>, 2011.
@@ -9,15 +9,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Catalan (http://www.transifex.net/projects/p/mc/team/ca/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 19:08+0300\n"
+"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.net/projects/p/mc/language/"
+"ca/)\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -107,17 +108,19 @@ msgstr ""
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
-msgstr "Normal"
+msgid "&Normal"
+msgstr "&Normal"
 
-msgid "&Regular expression"
-msgstr "Expressió &Habitual"
+msgid "Re&gular expression"
+msgstr "Expressió re&gular"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Hexadecimal"
 
-msgid "Wildcard search"
-msgstr ""
+#, fuzzy
+msgid "Wil&dcard search"
+msgstr "Cerca ràpida"
 
 #, c-format
 msgid ""
@@ -233,6 +236,9 @@ msgstr "Tecla de supressió"
 
 msgid "Completion/M-tab"
 msgstr "Completa/M-tab"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "+ teclat numèric"
@@ -426,34 +432,6 @@ msgstr ""
 "La mida de la pantalla %dx%d no es pot utilitzar.\n"
 "Reviseu la variable d'entorn TERM.\n"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s no és un directori\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "El directori %s no és de la seva propietat\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "No es poden establir els permisos correctes per al directori %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Premeu qualsevol tecla per continuar..."
-
 msgid "Warning"
 msgstr "Avís"
 
@@ -481,6 +459,34 @@ msgstr "S'està recuperant el fitxer"
 
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s no és un directori\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "El directori %s no és de la seva propietat\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "No es poden establir els permisos correctes per al directori %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Premeu qualsevol tecla per continuar..."
 
 msgid "Cannot parse:"
 msgstr "No s'ha pogut analitzar:"
@@ -560,6 +566,10 @@ msgstr "Edita un fitxer"
 
 msgid "Forces xterm features"
 msgstr "Força l'ús de característiques d'xterm"
+
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Inhabilita el suport de subintèrprets"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -654,17 +664,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr ""
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr ""
-
 msgid "Main options"
 msgstr ""
 
 msgid "Terminal options"
 msgstr "Opcions de terminal"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr ""
 
 msgid "Background process error"
 msgstr ""
@@ -689,7 +702,7 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Ignora"
 
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
 
 msgid "&Whole words"
@@ -698,8 +711,8 @@ msgstr ""
 msgid "&Backwards"
 msgstr "Cap &Enrere"
 
-msgid "Case &sensitive"
-msgstr "Diferencia &majúscules"
+msgid "Cas&e sensitive"
+msgstr ""
 
 msgid "Enter search string:"
 msgstr ""
@@ -728,9 +741,6 @@ msgid ""
 "Cannot create temporary merge file\n"
 "%s"
 msgstr ""
-
-msgid "&Normal"
-msgstr "&Normal"
 
 msgid "&Fastest (Assume large files)"
 msgstr ""
@@ -1532,8 +1542,7 @@ msgstr "Ordre de classificació"
 msgid "Confirmation"
 msgstr "Confirmació"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2216,6 +2225,12 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
@@ -2275,15 +2290,35 @@ msgid "Background process: File exists"
 msgstr ""
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "Temps: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Temps: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Fitxer: %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "Temps: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "Total: %s de %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "Total: %s de %s"
 
 msgid "Source"
@@ -2342,16 +2377,10 @@ msgstr ""
 msgid "Malformed regular expression"
 msgstr ""
 
-msgid "Cas&e sensitive"
-msgstr ""
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
-msgstr ""
-
-msgid "&All charsets"
 msgstr ""
 
 msgid "Sea&rch for content"
@@ -2359,9 +2388,6 @@ msgstr ""
 
 msgid "Case sens&itive"
 msgstr ""
-
-msgid "Re&gular expression"
-msgstr "Expressió re&gular"
 
 msgid "Fir&st hit"
 msgstr ""
@@ -2474,14 +2500,13 @@ msgstr ""
 msgid "Name of new group:"
 msgstr ""
 
-msgid "Remove:"
-msgstr "Suprimeix:"
-
-msgid "Are you sure you want to remove this entry?"
+#, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
+#, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
@@ -2493,7 +2518,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
@@ -2847,9 +2872,6 @@ msgstr "&Sempre"
 msgid "A&uto save setup"
 msgstr ""
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr ""
 
@@ -2887,6 +2909,9 @@ msgid "S&ingle press"
 msgstr ""
 
 msgid "Esc key mode"
+msgstr ""
+
+msgid "Preallocate &space"
 msgstr ""
 
 msgid "Mkdi&r autoname"
@@ -3141,6 +3166,10 @@ msgstr "Ha fallat el tancament del conducte"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
+#, fuzzy
+msgid "Modified git files"
+msgstr "Modificat:  %s"
+
 msgid "Find rejects after patching"
 msgstr "Troba els fitxers rebutjats després d'apedaçar"
 
@@ -3328,7 +3357,8 @@ msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Premeu totes les tecles esmentades. Quan ho hagueu fet, comproveu"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
+msgstr ""
+"a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "l'espai o feu-hi clic. Per desplaçar-vos, utilitzeu el tabulador."
@@ -3337,6 +3367,9 @@ msgstr "l'espai o feu-hi clic. Per desplaçar-vos, utilitzeu el tabulador."
 msgid ""
 "Failed to run:\n"
 "%s\n"
+msgstr ""
+
+msgid "Home directory path is not absolute"
 msgstr ""
 
 #, c-format
@@ -3431,6 +3464,10 @@ msgstr ""
 #, c-format
 msgid "Data types:"
 msgstr "Tipus de dades:"
+
+#, fuzzy
+msgid "Home directory:"
+msgstr "directori"
 
 msgid "System data"
 msgstr ""
@@ -3903,12 +3940,6 @@ msgstr ""
 "No es pot obrir \"%s\"\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-
 msgid "Cannot view: not a regular file"
 msgstr ""
 
@@ -3921,4 +3952,14 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
+#~ msgid "Normal"
+#~ msgstr "Normal"
 
+#~ msgid "&Regular expression"
+#~ msgstr "Expressió &Habitual"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "Diferencia &majúscules"
+
+#~ msgid "Remove:"
+#~ msgstr "Suprimeix:"

@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 19:08+0300\n"
+"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: mn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: mn\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -105,16 +105,16 @@ msgstr ""
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
+msgid "&Normal"
 msgstr ""
 
-msgid "&Regular expression"
-msgstr "&Тогтмол илэрхийлэл"
-
-msgid "Hexadecimal"
+msgid "Re&gular expression"
 msgstr ""
 
-msgid "Wildcard search"
+msgid "He&xadecimal"
+msgstr ""
+
+msgid "Wil&dcard search"
 msgstr ""
 
 #, c-format
@@ -231,6 +231,9 @@ msgstr " Delete товч  "
 
 msgid "Completion/M-tab"
 msgstr "Дууссан/M-Tab "
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "+ товч.дээр"
@@ -424,34 +427,6 @@ msgstr ""
 "Дэлгэцийн %dx%d хэмжээсийг сонгох боломжгүй байна.\n"
 "TERM хувьсагчийн утгыг шалгана уу.\n"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s нь лавлах биш байна\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr " %s лавлах нь таны эзэмшил биш байна\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr " %s лавлахын зөв зөвшөөрөлийг олгож чадсангүй\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr " %s: %s түр зуурын лавлахыг үүсгэж чадсангүй\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr " Түр зуурын файлууд нь %s д үүссэн\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Түр зуурын файлууд үүссэнгүй\n"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Дурын товчлуур дарж үргэлжлүүл..."
-
 msgid "Warning"
 msgstr "Анхааруулга"
 
@@ -479,6 +454,34 @@ msgstr "Файл хүлээн авч байна"
 
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s нь лавлах биш байна\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr " %s лавлах нь таны эзэмшил биш байна\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr " %s лавлахын зөв зөвшөөрөлийг олгож чадсангүй\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr " %s: %s түр зуурын лавлахыг үүсгэж чадсангүй\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr " Түр зуурын файлууд нь %s д үүссэн\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Түр зуурын файлууд үүссэнгүй\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Дурын товчлуур дарж үргэлжлүүл..."
 
 msgid "Cannot parse:"
 msgstr "Анализ хийж чадсангүй:"
@@ -558,6 +561,10 @@ msgstr "Нэг файл засах"
 
 msgid "Forces xterm features"
 msgstr "xterm хүчингүүд"
+
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Subshell боломжыг хаах"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -652,16 +659,19 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, хувилбар %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr ""
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr ""
-
 msgid "Main options"
 msgstr ""
 
 msgid "Terminal options"
+msgstr ""
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Background process error"
@@ -687,7 +697,7 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Хаах"
 
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
 
 msgid "&Whole words"
@@ -696,7 +706,7 @@ msgstr ""
 msgid "&Backwards"
 msgstr "&Буцах"
 
-msgid "Case &sensitive"
+msgid "Cas&e sensitive"
 msgstr ""
 
 msgid "Enter search string:"
@@ -725,9 +735,6 @@ msgstr ""
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-
-msgid "&Normal"
 msgstr ""
 
 msgid "&Fastest (Assume large files)"
@@ -1528,8 +1535,7 @@ msgstr "Эрэмбэлэх дараалал"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2208,6 +2214,12 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
@@ -2267,15 +2279,35 @@ msgid "Background process: File exists"
 msgstr ""
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
+msgstr "Файл: %s"
+
+#, c-format
+msgid "Time: %s %s (%s)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Файл: %s"
+
+#, c-format
+msgid "Time: %s (%s)"
 msgstr ""
 
 #, c-format
-msgid "Total: %s of %s"
+msgid " Total: %s "
+msgstr ""
+
+#, c-format
+msgid " Total: %s/%s "
 msgstr ""
 
 msgid "Source"
@@ -2334,25 +2366,16 @@ msgstr ""
 msgid "Malformed regular expression"
 msgstr ""
 
-msgid "Cas&e sensitive"
-msgstr ""
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
 msgid "Sea&rch for content"
 msgstr ""
 
 msgid "Case sens&itive"
-msgstr ""
-
-msgid "Re&gular expression"
 msgstr ""
 
 msgid "Fir&st hit"
@@ -2466,14 +2489,13 @@ msgstr ""
 msgid "Name of new group:"
 msgstr ""
 
-msgid "Remove:"
+#, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-msgid "Are you sure you want to remove this entry?"
-msgstr ""
-
+#, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
@@ -2485,7 +2507,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
@@ -2839,9 +2861,6 @@ msgstr "&үргэлж"
 msgid "A&uto save setup"
 msgstr ""
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr ""
 
@@ -2879,6 +2898,9 @@ msgid "S&ingle press"
 msgstr ""
 
 msgid "Esc key mode"
+msgstr ""
+
+msgid "Preallocate &space"
 msgstr ""
 
 msgid "Mkdi&r autoname"
@@ -3131,6 +3153,10 @@ msgstr "Урсгалыг хаахад алдаа гарлаа"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
+#, fuzzy
+msgid "Modified git files"
+msgstr "Засагдсан:   %s"
+
 msgid "Find rejects after patching"
 msgstr "Рatch-ээр гүйцэтгэгдээгүй шалтгааныг олох"
 
@@ -3329,6 +3355,9 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3418,6 +3447,10 @@ msgstr ""
 #, c-format
 msgid "Data types:"
 msgstr ""
+
+#, fuzzy
+msgid "Home directory:"
+msgstr "лавлах"
 
 msgid "System data"
 msgstr ""
@@ -3884,12 +3917,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-
 msgid "Cannot view: not a regular file"
 msgstr ""
 
@@ -3902,4 +3929,5 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
-
+#~ msgid "&Regular expression"
+#~ msgstr "&Тогтмол илэрхийлэл"
