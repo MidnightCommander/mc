@@ -823,7 +823,7 @@ const char *
 mc_tmpdir (void)
 {
     static char buffer[64];
-    static const char *tmpdir;
+    static const char *tmpdir = NULL;
     const char *sys_tmp;
     struct passwd *pwd;
     struct stat st;

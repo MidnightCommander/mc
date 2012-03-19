@@ -3172,9 +3172,10 @@ valamelyik gomb nem használható).
 .SH ""
 .\"NODE "FILES"
 .SH "Fájlok"
-A progam minden ezzel kapcsolatos infomációt az MCHOME környezeti
-változóban tárol. Ha ezt a változót nem állítottuk be, akkor ez vissza
-fog állítódni a /usr könyvtárra.
+A progam minden ezzel kapcsolatos infomációt az
+.BR MC_DATADIR
+környezeti változóban tárol. Ha ezt a változót nem állítottuk be, akkor
+ez vissza fog állítódni a /usr könyvtárra.
 .PP
 .I @prefix@/share/mc/mc.hlp
 .IP
@@ -3237,6 +3238,12 @@ frissíti ezt.
 .IP
 Helyi felhasználó által definiált menü. Ha ez a fájl létezik, ezt
 használja a home, vagy rendszerszintű alkalmazás menü helyett.
+.PP
+To change default home directory of MC, you can use 
+.BR MC_HOME
+environment variable. The value of MC_HOME must be an absolute path. If MC_HOME
+variable is unset or empty, HOME variable is used. If HOME variable is unset
+or empty, MC home directory is get from GLib library.
 .\"NODE "AVAILABILITY"
 .SH "A Midnight Commander frissítése"
 A program legutolsó verzióját az ftp.nuclecu.unam.mx címen a

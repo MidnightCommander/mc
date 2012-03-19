@@ -177,6 +177,9 @@ show_version (void)
 void
 show_datadirs_extended (void)
 {
+    (void) printf ("%s %s\n", _("Home directory:"), mc_config_get_home_dir ());
+    (void) puts ("");
+
     PRINTF_GROUP (_("System data"));
 
     PRINTF_SECTION (_("Config directory:"), mc_global.sysconfig_dir);
