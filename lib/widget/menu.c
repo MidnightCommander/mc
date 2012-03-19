@@ -46,7 +46,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define RESIZABLE_MENUBAR 1
+#define RESIZABLE_MENUBAR 0
 
 /*** file scope type declarations ****************************************************************/
 
