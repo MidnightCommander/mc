@@ -97,7 +97,7 @@ static const char *const features[] = {
 #endif
 #endif /* !HAVE_SUBSHELL_SUPPORT */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     N_("With support for background operations\n"),
 #endif
 

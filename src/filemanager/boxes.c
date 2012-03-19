@@ -59,7 +59,9 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"          /* For profile_name */
+#ifdef ENABLE_BACKGROUND
 #include "src/background.h"     /* task_list */
+#endif
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -88,12 +90,12 @@
 #endif /* ENABLE_VFS_FTP */
 #endif /* ENABLE_VFS */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 #define B_STOP   (B_USER+1)
 #define B_RESUME (B_USER+2)
 #define B_KILL   (B_USER+3)
 #define JOBS_Y 15
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
 /*** file scope type declarations ****************************************************************/
 
@@ -121,7 +123,7 @@ static char *ret_directory_timeout;
 #endif /* ENABLE_VFS_FTP */
 #endif /* ENABLE_VFS */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 static int JOBS_X = 60;
 static WListbox *bg_list;
 static Dlg_head *jobs_dlg;
@@ -145,7 +147,7 @@ job_buttons[] =
     /* *INDENT-ON* */
 };
 
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -449,7 +451,7 @@ confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 #endif /* ENABLE_VFS_FTP */
 #endif /* ENABLE_VFS */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 static void
 jobs_fill_listbox (void)
 {
@@ -519,7 +521,7 @@ task_cb (WButton * button, int action)
 
     return 0;
 }
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -1074,7 +1076,7 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
 void
 jobs_cmd (void)
 {
@@ -1128,7 +1130,7 @@ jobs_cmd (void)
 
     destroy_dlg (jobs_dlg);
 }
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
 
 /* --------------------------------------------------------------------------------------------- */
 

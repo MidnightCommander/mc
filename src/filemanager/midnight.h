@@ -14,9 +14,9 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define MENU_PANEL (mc_global.is_right ? right_panel : left_panel)
-#define MENU_PANEL_IDX  (mc_global.is_right ? 1 : 0)
-#define SELECTED_IS_PANEL (get_display_type (mc_global.is_right ? 1 : 0) == view_listing)
+#define MENU_PANEL (mc_global.widget.is_right ? right_panel : left_panel)
+#define MENU_PANEL_IDX  (mc_global.widget.is_right ? 1 : 0)
+#define SELECTED_IS_PANEL (get_display_type (mc_global.widget.is_right ? 1 : 0) == view_listing)
 
 #define other_panel get_other_panel()
 

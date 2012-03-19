@@ -34,7 +34,9 @@
 
 #include <config.h>
 
+#ifdef HAVE_ASSERT_H
 #include <assert.h>
+#endif
 #include <ctype.h>
 
 #include <stdio.h>
@@ -356,7 +358,9 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         vfs_path_t *tmp_vpath;
         gboolean ok;
 
+#ifdef HAVE_ASSERT_H
         assert (option_backup_ext != NULL);
+#endif
         tmp_vpath = vfs_path_append_new (real_filename_vpath, option_backup_ext, (char *) NULL);
         ok = (mc_rename (real_filename_vpath, tmp_vpath) != -1);
         vfs_path_free (tmp_vpath);
@@ -488,24 +492,16 @@ edit_load_file_from_filename (WEdit * edit, const vfs_path_t * exp_vpath)
 {
     int prev_locked = edit->locked;
     vfs_path_t *prev_filename;
+    int ret = 0;
 
     prev_filename = vfs_path_clone (edit->filename_vpath);
     if (!edit_reload (edit, exp_vpath))
-    {
-        vfs_path_free (prev_filename);
-        return 1;
-    }
+        ret = 1;
+    else if (prev_locked)
+        unlock_file (prev_filename);
 
-    if (prev_locked)
-    {
-        vfs_path_t *fullpath;
-
-        fullpath = vfs_path_append_vpath_new (edit->dir_vpath, prev_filename, (char *) NULL);
-        unlock_file (fullpath);
-        vfs_path_free (fullpath);
-    }
     vfs_path_free (prev_filename);
-    return 0;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1413,7 +1409,9 @@ menu_save_mode_cmd (void)
     size_t maxlen = 0;
     size_t w0, w1, b_len, w3;
 
+#ifdef HAVE_ASSERT_H
     assert (option_backup_ext != NULL);
+#endif
 
     /* OK/Cancel buttons */
     w0 = str_term_width1 (_(widgets[0].u.button.text)) + 3;
@@ -1616,7 +1614,7 @@ edit_execute_macro (WEdit * edit, int hotkey)
             }
         }
     }
-    edit_update_screen (edit);
+
     return res;
 }
 
@@ -2554,7 +2552,7 @@ edit_ok_to_exit (WEdit * edit)
     if (!edit->modified)
         return TRUE;
 
-    if (!mc_global.widget.midnight_shutdown)
+    if (!mc_global.midnight_shutdown)
     {
         if (!edit_check_newline (edit))
             return FALSE;
@@ -2580,8 +2578,8 @@ edit_ok_to_exit (WEdit * edit)
     case 0:                    /* Yes */
         edit_push_markers (edit);
         edit_set_markers (edit, 0, 0, 0, 0);
-        if (!edit_save_cmd (edit) || mc_global.widget.midnight_shutdown)
-            return mc_global.widget.midnight_shutdown;
+        if (!edit_save_cmd (edit) || mc_global.midnight_shutdown)
+            return mc_global.midnight_shutdown;
         break;
     case 1:                    /* No */
         break;

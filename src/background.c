@@ -33,8 +33,6 @@
 
 #include <config.h>
 
-#ifdef WITH_BACKGROUND
-
 #include <stdlib.h>
 #include <errno.h>
 #include <signal.h>
@@ -542,7 +540,7 @@ do_background (struct FileOpContext *ctx, char *info)
         parent_fd = comm[1];
         from_parent_fd = back_comm[0];
 
-        mc_global.we_are_background = 1;
+        mc_global.we_are_background = TRUE;
         top_dlg = NULL;
 
         /* Make stdin/stdout/stderr point somewhere */
@@ -640,5 +638,3 @@ background_parent_call_string (const gchar * event_group_name, const gchar * eve
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-#endif /* WITH_BACKGROUND */

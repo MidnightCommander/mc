@@ -74,18 +74,11 @@ int visible_tabs = 1, visible_tws = 1;
 #define MOD_CURSOR              (1 << 11)
 #define MOD_WHITESPACE          (1 << 12)
 
-#define FONT_OFFSET_X 0
-#define FONT_OFFSET_Y 0
-#define FIXED_FONT 1
-#define FONT_PIX_PER_LINE 1
-#define FONT_MEAN_WIDTH 1
-
 #define edit_move(x,y) widget_move(edit, y, x);
 
 #define key_pending(x) (!is_idle())
 
 #define EDITOR_MINIMUM_TERMINAL_WIDTH 30
-
 
 /*** file scope type declarations ****************************************************************/
 
@@ -243,14 +236,14 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
         tty_setcolor (LINE_STATE_COLOR);
         for (i = 0; i < LINE_STATE_WIDTH; i++)
         {
-            edit_move (x1 + i + FONT_OFFSET_X - option_line_state_width, y + FONT_OFFSET_Y);
+            edit_move (x1 + i - option_line_state_width, y);
             if (status[i] == '\0')
                 status[i] = ' ';
             tty_print_char (status[i]);
         }
     }
 
-    edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
+    edit_move (x1, y);
     p = line;
     i = 1;
     while (p->ch)

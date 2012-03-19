@@ -87,7 +87,9 @@ What to do with this?
 #endif
 #include <arpa/ftp.h>
 #include <arpa/telnet.h>
+#ifdef HAVE_SYS_PARAM_H
 #include <sys/param.h>
+#endif
 #include <errno.h>
 #include <ctype.h>
 #include <fcntl.h>

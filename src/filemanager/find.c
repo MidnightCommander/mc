@@ -119,7 +119,7 @@ typedef struct
 static char **find_ignore_dirs = NULL;
 
 /* Size of the find parameters window */
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
 static int FIND_Y = 19;
 #else
 static int FIND_Y = 18;
@@ -267,7 +267,6 @@ static void
 find_load_options (void)
 {
     static gboolean loaded = FALSE;
-    char *ignore_dirs;
 
     if (loaded)
         return;
@@ -296,20 +295,7 @@ find_load_options (void)
         mc_config_get_bool (mc_main_config, "FindFile", "content_all_charsets", FALSE);
     options.ignore_dirs_enable =
         mc_config_get_bool (mc_main_config, "FindFile", "ignore_dirs_enable", TRUE);
-
-    /* Back compatibility: try load old parameter at first */
-    ignore_dirs = mc_config_get_string (mc_main_config, "Misc", "find_ignore_dirs", "");
-    mc_config_del_key (mc_main_config, "Misc", "find_ignore_dirs");
-
-    /* Then load new parameters */
     options.ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");
-    if (options.ignore_dirs[0] != '\0')
-        g_free (ignore_dirs);
-    else
-    {
-        g_free (options.ignore_dirs);
-        options.ignore_dirs = ignore_dirs;
-    }
 
     if (options.ignore_dirs[0] == '\0')
     {

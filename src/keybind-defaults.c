@@ -116,6 +116,10 @@ static const global_keymap_ini_t default_main_keymap[] = {
     {"PanelListingSwitch", "alt-t"},
     /* Swap panels */
     {"Swap", "ctrl-u"},
+    /* Resize panels */
+    {"SplitEqual", "alt-equal"},
+    {"SplitMore", "alt-shift-right"},
+    {"SplitLess", "alt-shift-left"},
     /* View output */
     {"Shell", "ctrl-o"},
     {"ShowHidden", "alt-dot"},
@@ -153,9 +157,9 @@ static const global_keymap_ini_t default_main_x_keymap[] = {
     {"PanelInfo", "i"},
     {"PanelQuickView", "q"},
     {"HotListAdd", "h"},
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     {"Jobs", "j"},
-#endif /* WITH_BACKGROUND */
+#endif /* ENABLE_BACKGROUND */
     {"ExternalPanelize", "!"},
     {NULL, NULL}
 };

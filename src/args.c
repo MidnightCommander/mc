@@ -304,7 +304,7 @@ static const GOptionEntry argument_color_table[] = {
 
     {
      "skin", 'S', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
-     &mc_global.skin,
+     &mc_global.tty.skin,
      N_("Show mc with specified skin"),
      "<string>"
     },

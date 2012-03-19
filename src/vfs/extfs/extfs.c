@@ -238,11 +238,12 @@ extfs_generate_entry (struct archive *archive,
 /* --------------------------------------------------------------------------------------------- */
 
 static struct entry *
-extfs_find_entry_int (struct entry *dir, char *name, GSList * list,
+extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
                       gboolean make_dirs, gboolean make_file)
 {
     struct entry *pent, *pdir;
-    char *p, *q, *name_end;
+    const char *p, *name_end;
+    char *q;
     char c = PATH_SEP;
 
     if (g_path_is_absolute (name))
@@ -323,7 +324,7 @@ extfs_find_entry_int (struct entry *dir, char *name, GSList * list,
 /* --------------------------------------------------------------------------------------------- */
 
 static struct entry *
-extfs_find_entry (struct entry *dir, char *name, gboolean make_dirs, gboolean make_file)
+extfs_find_entry (struct entry *dir, const char *name, gboolean make_dirs, gboolean make_file)
 {
     struct entry *res;
 
@@ -661,12 +662,10 @@ extfs_which (struct vfs_class *me, const char *path)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Dissect the path and create corresponding superblock.  Note that inname
- * can be changed and the result may point inside the original string.
+ * Dissect the path and create corresponding superblock.
  */
-
-static char *
-extfs_get_path_mangle (const vfs_path_t * vpath, struct archive **archive, gboolean do_not_open)
+static const char *
+extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean do_not_open)
 {
     char *archive_name;
     int result = -1;
@@ -676,15 +675,11 @@ extfs_get_path_mangle (const vfs_path_t * vpath, struct archive **archive, gbool
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    archive_name = vfs_path_to_str_elements_count (vpath, -1);
-
     fstype = extfs_which (path_element->class, path_element->vfs_prefix);
-
     if (fstype == -1)
-    {
-        g_free (archive_name);
         return NULL;
-    }
+
+    archive_name = vfs_path_to_str_elements_count (vpath, -1);
 
     /*
      * All filesystems should have some local archive, at least
@@ -723,7 +718,7 @@ extfs_get_path_mangle (const vfs_path_t * vpath, struct archive **archive, gbool
 static char *
 extfs_get_path (const vfs_path_t * vpath, struct archive **archive, gboolean do_not_open)
 {
-    return g_strdup (extfs_get_path_mangle (vpath, archive, do_not_open));
+    return g_strdup (extfs_get_path_int (vpath, archive, do_not_open));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1116,11 +1111,11 @@ static int
 extfs_internal_stat (const vfs_path_t * vpath, struct stat *buf, gboolean resolve)
 {
     struct archive *archive;
-    char *q;
+    const char *q;
     struct entry *entry;
     int result = -1;
 
-    q = extfs_get_path_mangle (vpath, &archive, FALSE);
+    q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1171,12 +1166,12 @@ static int
 extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
     struct archive *archive;
-    char *q;
+    const char *q;
     size_t len;
     struct entry *entry;
     int result = -1;
 
-    q = extfs_get_path_mangle (vpath, &archive, FALSE);
+    q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1238,11 +1233,11 @@ static int
 extfs_unlink (const vfs_path_t * vpath)
 {
     struct archive *archive;
-    char *q;
+    const char *q;
     struct entry *entry;
     int result = -1;
 
-    q = extfs_get_path_mangle (vpath, &archive, FALSE);
+    q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1276,7 +1271,7 @@ static int
 extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
     struct archive *archive;
-    char *q;
+    const char *q;
     struct entry *entry;
     int result = -1;
     const vfs_path_element_t *path_element;
@@ -1284,7 +1279,7 @@ extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
     (void) mode;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    q = extfs_get_path_mangle (vpath, &archive, FALSE);
+    q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
@@ -1322,11 +1317,11 @@ static int
 extfs_rmdir (const vfs_path_t * vpath)
 {
     struct archive *archive;
-    char *q;
+    const char *q;
     struct entry *entry;
     int result = -1;
 
-    q = extfs_get_path_mangle (vpath, &archive, FALSE);
+    q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);

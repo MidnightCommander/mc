@@ -288,7 +288,7 @@ create_command_menu (void)
 #ifdef ENABLE_VFS
     entries = g_list_prepend (entries, menu_entry_create (_("&Active VFS list"), CK_VfsList));
 #endif
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     entries = g_list_prepend (entries, menu_entry_create (_("&Background jobs"), CK_Jobs));
 #endif
     entries = g_list_prepend (entries, menu_entry_create (_("Screen lis&t"), CK_ScreenList));
@@ -458,8 +458,7 @@ toggle_panels_split (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if ENABLE_VFS
-
+#ifdef ENABLE_VFS
 /* event helper */
 static gboolean
 check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_class *vclass,
@@ -534,7 +533,7 @@ print_vfs_message (const gchar * event_group_name, const gchar * event_name,
 
     g_vsnprintf (str, sizeof (str), event_data->msg, event_data->ap);
 
-    if (mc_global.widget.midnight_shutdown)
+    if (mc_global.midnight_shutdown)
         return TRUE;
 
     if (!mc_global.message_visible || !the_hint || !the_hint->widget.owner)
@@ -626,7 +625,7 @@ create_panels (void)
     else
         current_panel = left_panel;
 
-#if ENABLE_VFS
+#ifdef ENABLE_VFS
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL, NULL);
 #endif /* ENABLE_VFS */
@@ -1202,7 +1201,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         else
             info_cmd_no_menu ();        /* shortcut or buttonbar */
         break;
-#ifdef WITH_BACKGROUND
+#ifdef ENABLE_BACKGROUND
     case CK_Jobs:
         jobs_cmd ();
         break;
@@ -1700,7 +1699,7 @@ do_nc (void)
     }
 
     /* Program end */
-    mc_global.widget.midnight_shutdown = TRUE;
+    mc_global.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();
     destroy_dlg (midnight_dlg);

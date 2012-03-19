@@ -7,6 +7,8 @@
 
 #define CONFIG_APP_SECTION "Midnight-Commander"
 #define CONFIG_PANELS_SECTION "Panels"
+#define CONFIG_LAYOUT_SECTION "Layout"
+#define CONFIG_MISC_SECTION "Misc"
 
 /*** enums ***************************************************************************************/
 

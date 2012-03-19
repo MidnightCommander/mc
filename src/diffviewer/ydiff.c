@@ -2961,13 +2961,13 @@ dview_ok_to_exit (WDiff * dview)
     if (!dview->merged)
         return res;
 
-    act = query_dialog (_("Quit"), !mc_global.widget.midnight_shutdown ?
+    act = query_dialog (_("Quit"), !mc_global.midnight_shutdown ?
                         _("File was modified. Save with exit?") :
                         _("Midnight Commander is being shut down.\nSave modified file?"),
                         D_NORMAL, 2, _("&Yes"), _("&No"));
 
     /* Esc is No */
-    if (mc_global.widget.midnight_shutdown || (act == -1))
+    if (mc_global.midnight_shutdown || (act == -1))
         act = 1;
 
     switch (act)

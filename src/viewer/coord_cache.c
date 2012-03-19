@@ -147,7 +147,9 @@ mcview_ccache_find (mcview_t * view, const coord_cache_entry_t * coord, cmp_func
     size_t base = 0;
     size_t limit = view->coord_cache->size;
 
+#ifdef HAVE_ASSERT_H
     assert (limit != 0);
+#endif
 
     while (limit > 1)
     {
@@ -214,7 +216,9 @@ mcview_ccache_dump (mcview_t * view)
     guint i;
     const coord_cache_t *cache = view->coord_cache;
 
+#ifdef HAVE_ASSERT_H
     assert (cache != NULL);
+#endif
 
     filesize = mcview_get_filesize (view);
 

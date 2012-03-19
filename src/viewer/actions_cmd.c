@@ -510,7 +510,7 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         {
             delete_hook (&select_file_hook, mcview_hook);
 
-            if (mc_global.widget.midnight_shutdown)
+            if (mc_global.midnight_shutdown)
                 mcview_ok_to_quit (view);
         }
         mcview_done (view);
