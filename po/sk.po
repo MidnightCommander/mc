@@ -1,26 +1,26 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Dušan Lago <dusan.lago@gmail.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.net/projects/p/mc/team/sk/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 20:27+0300\n"
+"PO-Revision-Date: 2012-03-13 11:53+0000\n"
+"Last-Translator: jose1711 <jose1711@gmail.com>\n"
+"Language-Team: Slovak (http://www.transifex.net/projects/p/mc/language/sk/)\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sk\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
 msgid "Warning: cannot load codepages list"
-msgstr "Upozornenie: nie je možné nahrať zoznam znakových sád"
+msgstr "Upozornenie: nemožno načítať zoznam kódu"
 
 msgid "7-bit ASCII"
 msgstr "7-bitový ASCII"
@@ -55,9 +55,9 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"Súbor \"%s\" je už editovaný.\n"
-"Používateľ: %s\n"
-"ID procesu: %d"
+"Súbor \"%s\" je práve editovaný.\n"
+"Užívateľ:%s\n"
+"ID procesu:%d"
 
 msgid "File locked"
 msgstr "Súbor zamknutý"
@@ -94,32 +94,33 @@ msgid ""
 msgstr ""
 
 msgid "Search string not found"
-msgstr "Hľadaný znak nebol nájdený"
+msgstr "Hladaný reťazec nebol nájdený"
 
 msgid "Not implemented yet"
-msgstr "Zatiaľ neimplementované"
+msgstr "Zatiaľ nie je implementovaný"
 
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
-"Počet tokenov určených k nahradeniu nezodpovedá počtu nájdených tokenov"
 
 #, c-format
 msgid "Invalid token number %d"
-msgstr "Chybné číslo tokenu %d"
+msgstr ""
 
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
-msgstr "Normálny"
+msgid "&Normal"
+msgstr ""
 
-msgid "&Regular expression"
-msgstr "&Regulárny výraz"
+msgid "Re&gular expression"
+msgstr "Re&gulárny výraz"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Hexadecimálne"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "Vyhľadávanie pomocou zástupných znakov"
 
 #, c-format
@@ -241,6 +242,9 @@ msgstr "Klávesa Delete"
 msgid "Completion/M-tab"
 msgstr "Doplnenie/M-tab"
 
+msgid "Back Tabulation S-tab"
+msgstr ""
+
 msgid "+ on keypad"
 msgstr "+ na num. kláves."
 
@@ -254,7 +258,7 @@ msgid "* on keypad"
 msgstr "* na num. kláves."
 
 msgid "Escape key"
-msgstr "Klávesa escape"
+msgstr "Klávesa Escape"
 
 msgid "Left arrow keypad"
 msgstr "Ľava šípka na kláv."
@@ -302,10 +306,10 @@ msgid "Function key 24"
 msgstr "Funkčný klá. 24"
 
 msgid "A1 key"
-msgstr "Klávesa A1"
+msgstr ""
 
 msgid "C1 key"
-msgstr "Klávesa C1"
+msgstr ""
 
 msgid "Plus"
 msgstr "Plus"
@@ -380,16 +384,16 @@ msgid "Right parenthesis"
 msgstr "Pravá zátvorka"
 
 msgid "Left bracket"
-msgstr "Ľavá hranatá zátvorka"
+msgstr ""
 
 msgid "Right bracket"
-msgstr "Pravá hranatá zátvorka"
+msgstr ""
 
 msgid "Left brace"
-msgstr "Ľavá zložená zátvorka"
+msgstr ""
 
 msgid "Right brace"
-msgstr "Pravá zložená zátvorka"
+msgstr ""
 
 msgid "Enter"
 msgstr "Enter"
@@ -411,7 +415,7 @@ msgstr "Krížik"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr "Zavináč"
+msgstr ""
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -465,20 +469,20 @@ msgid "Warning"
 msgstr "Varovanie"
 
 msgid "Pipe failed"
-msgstr "Pipe zlyhalo"
+msgstr ""
 
 msgid "Dup failed"
-msgstr "Dup zlyhalo"
+msgstr ""
 
 msgid "Error dup'ing old error pipe"
-msgstr "Chyba pri duplikácií starej chybovej rúry"
+msgstr ""
 
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr "Vyrovnávacia pamäť adresárov vypršala pre %s"
 
 msgid "bytes transferred"
-msgstr "prenesených bajtov"
+msgstr ""
 
 msgid "Starting linear transfer..."
 msgstr "Začína sa lineárny prenos..."
@@ -505,7 +509,7 @@ msgid "Screens"
 msgstr ""
 
 msgid "History"
-msgstr "História"
+msgstr ""
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
@@ -567,6 +571,10 @@ msgstr "Upraví jeden súbor"
 
 msgid "Forces xterm features"
 msgstr "Vynúti funkcie xterm"
+
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Vypína podporu pre subshell"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -661,17 +669,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr ""
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr ""
-
 msgid "Main options"
 msgstr "Hlavné možnosti"
 
 msgid "Terminal options"
 msgstr "Možnosti terminálu"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr ""
 
 msgid "Background process error"
 msgstr ""
@@ -696,8 +707,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Odmietnuť"
 
-msgid "All charsets"
-msgstr "Všetky znakové sady"
+msgid "&All charsets"
+msgstr "Všetky zn&akové sady"
 
 msgid "&Whole words"
 msgstr "&Celé slová"
@@ -705,8 +716,8 @@ msgstr "&Celé slová"
 msgid "&Backwards"
 msgstr "&Späť"
 
-msgid "Case &sensitive"
-msgstr ""
+msgid "Cas&e sensitive"
+msgstr "Rozlišovať v&eľkosť"
 
 msgid "Enter search string:"
 msgstr ""
@@ -734,9 +745,6 @@ msgstr ""
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-
-msgid "&Normal"
 msgstr ""
 
 msgid "&Fastest (Assume large files)"
@@ -1287,7 +1295,7 @@ msgid "Save &mode..."
 msgstr "Reži&M ukladania..."
 
 msgid "Learn &keys..."
-msgstr "Učenie &Kláves..."
+msgstr "Uče&Nie kláves..."
 
 msgid "Syntax &highlighting..."
 msgstr "Zvýraznenie s&Yntaxe..."
@@ -1526,10 +1534,10 @@ msgid "&Reverse"
 msgstr "o&Brátený"
 
 msgid "Case sensi&tive"
-msgstr "&Rozlišovať veľkosť"
+msgstr "Roz&Lišovať veľkosť"
 
 msgid "Executable &first"
-msgstr "Najprv &Spustiteľné"
+msgstr "N&Ajprv spustiteľné"
 
 msgid "Sort order"
 msgstr "Poradie triedenia"
@@ -1537,8 +1545,7 @@ msgstr "Poradie triedenia"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2217,6 +2224,12 @@ msgstr "Prehľadávanie adresára"
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
@@ -2276,15 +2289,35 @@ msgid "Background process: File exists"
 msgstr ""
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
+msgstr "Súbor: %s"
+
+#, c-format
+msgid "Time: %s %s (%s)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Súbor: %s"
+
+#, c-format
+msgid "Time: %s (%s)"
 msgstr ""
 
 #, c-format
-msgid "Total: %s of %s"
+msgid " Total: %s "
+msgstr ""
+
+#, c-format
+msgid " Total: %s/%s "
 msgstr ""
 
 msgid "Source"
@@ -2343,26 +2376,17 @@ msgstr "Nájdené: %ld"
 msgid "Malformed regular expression"
 msgstr ""
 
-msgid "Cas&e sensitive"
-msgstr "Rozlišovať v&eľkosť"
-
 msgid "&Find recursively"
 msgstr "&Hľadať rekurzívne"
 
 msgid "S&kip hidden"
 msgstr "Pres&kočiť skryté"
 
-msgid "&All charsets"
-msgstr "Všetky zn&akové sady"
-
 msgid "Sea&rch for content"
 msgstr ""
 
 msgid "Case sens&itive"
 msgstr "Rozl&išovať veľkosť"
-
-msgid "Re&gular expression"
-msgstr "Re&gulárny výraz"
 
 msgid "Fir&st hit"
 msgstr "Prvý vý&skyt"
@@ -2476,14 +2500,13 @@ msgstr ""
 msgid "Name of new group:"
 msgstr ""
 
-msgid "Remove:"
+#, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-msgid "Are you sure you want to remove this entry?"
-msgstr ""
-
+#, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
@@ -2495,7 +2518,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
@@ -2653,7 +2676,7 @@ msgid "&Encoding..."
 msgstr "Kódovani&E..."
 
 msgid "FT&P link..."
-msgstr "FT&P pripojenie..."
+msgstr "&FTP pripojenie..."
 
 msgid "S&hell link..."
 msgstr "S&hell pripojenie..."
@@ -2851,9 +2874,6 @@ msgstr "&Vždy"
 msgid "A&uto save setup"
 msgstr ""
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr ""
 
@@ -2891,6 +2911,9 @@ msgid "S&ingle press"
 msgstr ""
 
 msgid "Esc key mode"
+msgstr ""
+
+msgid "Preallocate &space"
 msgstr ""
 
 msgid "Mkdi&r autoname"
@@ -3341,6 +3364,9 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3436,6 +3462,10 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
+#, fuzzy
+msgid "Home directory:"
+msgstr "adresár"
+
 msgid "System data"
 msgstr ""
 
@@ -3515,7 +3545,7 @@ msgstr "Neúplný extfs archív"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Upozornenie: nemožno otvoriť adresár %s\n"
+msgstr ""
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -3529,7 +3559,7 @@ msgstr "Ľutujem, nemôžeme overiť heslo pre terajšie spojenie."
 
 #, c-format
 msgid "fish: Password is required for %s"
-msgstr "fish: %s sa vyžaduje heslo"
+msgstr ""
 
 msgid "fish: Sending password..."
 msgstr "fish: Posiela sa heslo..."
@@ -3541,7 +3571,7 @@ msgid "fish: Handshaking version..."
 msgstr "fish: Preberá sa verzia..."
 
 msgid "fish: Getting host info..."
-msgstr "fish: Získavam informácie o hostiteľovi"
+msgstr ""
 
 msgid "fish: Setting up current directory..."
 msgstr "fish: Nastavenie aktuálneho adresár..."
@@ -3570,10 +3600,10 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Miestne čítanie zlyhalo, posielajú sa nuly"
 
 msgid "fish: storing zeros"
-msgstr "fish: ukladám nuly"
+msgstr ""
 
 msgid "fish: storing file"
-msgstr "fish: ukladám súbor"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Prerušuje sa prenos..."
@@ -3590,7 +3620,7 @@ msgstr "ftpfs: Odpája sa z %s"
 
 #, c-format
 msgid "FTP: Password required for %s"
-msgstr "FTP: Heslo vyžadované pre %s"
+msgstr ""
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: posiela sa prihlasovacie meno"
@@ -3680,14 +3710,12 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: zlyhanie; niet kam sa vrátiť"
 
 msgid "ftpfs: storing file"
-msgstr "ftpfs: ukladám súbor"
+msgstr ""
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
-"súbor ~/.netrc nemá správne prístupové práva\n"
-"Odstráňte heslo alebo zmeňte práva"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -3711,14 +3739,14 @@ msgstr ""
 
 #, c-format
 msgid "reconnect to %s failed"
-msgstr "obnova pripojenia k %s zlyhala"
+msgstr ""
 
 msgid "Authentication failed"
-msgstr "Autentifikácia zlyhala"
+msgstr ""
 
 #, c-format
 msgid "Error %s creating directory %s"
-msgstr "Chyba %s pri vytváraní adresáru %s"
+msgstr ""
 
 #, c-format
 msgid "Error %s removing directory %s"
@@ -3755,21 +3783,19 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"%s\n"
-"nevyzerá ako archív .tar."
 
 msgid "undelfs: error"
-msgstr "undelfs: chyba"
+msgstr ""
 
 msgid "not enough memory"
-msgstr "nedostatok pamäte"
+msgstr ""
 
 msgid "while allocating block buffer"
-msgstr "počas alokovania bloku buffera"
+msgstr ""
 
 #, c-format
 msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
+msgstr ""
 
 #, c-format
 msgid "while starting inode scan %d"
@@ -3904,12 +3930,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-
 msgid "Cannot view: not a regular file"
 msgstr ""
 
@@ -3922,4 +3942,11 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
+#~ msgid "Normal"
+#~ msgstr "Normálny"
 
+#~ msgid "&Regular expression"
+#~ msgstr "&Regulárny výraz"
+
+#~ msgid "All charsets"
+#~ msgstr "Všetky znakové sady"

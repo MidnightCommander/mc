@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
-# Keith Bowes <zooplah@gmail.com>, 2011.
+# Keith Bowes <zooplah@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-10 00:07+0000\n"
-"Last-Translator: zooplah <zooplah@gmail.com>\n"
-"Language-Team: Esperanto (http://www.transifex.net/projects/p/mc/team/eo/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 20:27+0300\n"
+"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
+"Language-Team: Esperanto (http://www.transifex.net/projects/p/mc/language/"
+"eo/)\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eo\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -114,17 +115,19 @@ msgstr "Nevalida era numero %d"
 msgid "Regular expression error"
 msgstr "Regulesprima eraro"
 
-msgid "Normal"
+msgid "&Normal"
 msgstr "&Normala"
 
-msgid "&Regular expression"
-msgstr "&Regulesprimo"
+msgid "Re&gular expression"
+msgstr "Re&gulesprimo"
 
-msgid "Hexadecimal"
-msgstr "&Deksesuma"
+#, fuzzy
+msgid "He&xadecimal"
+msgstr "Deksesuma"
 
-msgid "Wildcard search"
-msgstr "Ĵo&kera ŝerco"
+#, fuzzy
+msgid "Wil&dcard search"
+msgstr "Ĵokera serĉo"
 
 #, c-format
 msgid ""
@@ -247,6 +250,9 @@ msgstr "Foriga klavo"
 
 msgid "Completion/M-tab"
 msgstr "Kompleto"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "+ ĉe cifera klavaro"
@@ -575,6 +581,10 @@ msgstr "Redakti unuopan dosieron"
 msgid "Forces xterm features"
 msgstr "Devigi xterm-trajtojn"
 
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Malaktivigi subŝelon"
+
 msgid "Tries to use an old highlight mouse tracking"
 msgstr "Provi uzi antaŭan reĝimon de musa spurado"
 
@@ -597,8 +607,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Ŝargi difinojn de klavaj asignoj el specifa dosiero"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
-"Ne ŝargi difinojn de klavaj asignoj el specifa dosiero; uzi aŭtomatajn"
+msgstr "Ne ŝargi difinojn de klavaj asignoj el specifa dosiero; uzi aŭtomatajn"
 
 msgid "Requests to run in black and white"
 msgstr "Peti plenumiĝi unukolore"
@@ -634,7 +643,8 @@ msgid ""
 msgstr ""
 "--colors ŜLOSILVORTO={TEKSTO},{FONO},{ATRIBUTO}:ŜLOSILVORTO_DUA=...\n"
 "\n"
-"{TEKSTO}, {FONO} kaj {ATRIBUTO} povas esti preterlasitaj; la aŭtomataj valoroj estos uzataj\n"
+"{TEKSTO}, {FONO} kaj {ATRIBUTO} povas esti preterlasitaj; la aŭtomataj "
+"valoroj estos uzataj\n"
 "\n"
 " Ŝlosilvortoj:\n"
 "   Universala:       errors, disabled, reverse, gauge, header\n"
@@ -699,17 +709,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr "Neniuj parametroj donitaj al la legilo."
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr "Du dosieroj estas bezonitaj por voki la flikaĵo-legilon."
-
 msgid "Main options"
 msgstr "Ĉefa agordo"
 
 msgid "Terminal options"
 msgstr "Terminala agordo"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr "Neniuj parametroj donitaj al la legilo."
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr "Du dosieroj estas bezonitaj por voki la flikaĵo-legilon."
 
 msgid "Background process error"
 msgstr "Eraro ĉe fona procezo"
@@ -736,8 +749,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Kaŝi"
 
-msgid "All charsets"
-msgstr "Ĉiuj &signaroj"
+msgid "&All charsets"
+msgstr "Ĉ&iuj signaroj"
 
 msgid "&Whole words"
 msgstr "Tutaj &vortoj"
@@ -745,8 +758,8 @@ msgstr "Tutaj &vortoj"
 msgid "&Backwards"
 msgstr "D&orsen"
 
-msgid "Case &sensitive"
-msgstr "Ne ignori uskl&econ"
+msgid "Cas&e sensitive"
+msgstr "N&e ignori usklecon"
 
 msgid "Enter search string:"
 msgstr "Enmetu serĉan ĉenon:"
@@ -782,9 +795,6 @@ msgid ""
 msgstr ""
 "Ne eblas krei provizoran kunfandan dosieron\n"
 "%s"
-
-msgid "&Normal"
-msgstr "&Normala"
 
 msgid "&Fastest (Assume large files)"
 msgstr "Plej &rapida (supozas grandajn dosierojn)"
@@ -1607,8 +1617,7 @@ msgstr "Ordigi laŭ"
 msgid "Confirmation"
 msgstr "Konfirmo"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|&Historia purigado"
@@ -2377,6 +2386,14 @@ msgstr "Dosieruja skanado"
 msgid "Cannot operate on \"..\"!"
 msgstr "Ne eblas operacii je \"..\"!"
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas stat-i je \"%s\"\n"
+"%s"
+
 msgid "Sorry, I could not put the job in background"
 msgstr "Bedaŭrinde mi ne povis meti la taskon en la fono"
 
@@ -2435,17 +2452,37 @@ msgstr "Dosiero ekzistas"
 msgid "Background process: File exists"
 msgstr "Fona procezo: Dosiero ekzistas"
 
-#, c-format
-msgid "Files processed: %zu of %zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu/%zu"
 msgstr "Dosieroj traktitaj %zu el %zu"
 
-#, c-format
-msgid "Time: %s  %s (%s)"
+#, fuzzy, c-format
+msgid "Files processed: %zu"
+msgstr "Dosieroj traktitaj %zu el %zu"
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "Tempo: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
-msgstr "Kiomo: %s el %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Tempo: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Dosiero: %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "Tempo: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "Totalo: %s el %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
+msgstr "Totalo: %s el %s"
 
 msgid "Source"
 msgstr "Fonto"
@@ -2503,26 +2540,17 @@ msgstr "Trovita: %ld"
 msgid "Malformed regular expression"
 msgstr "Misformita regulesprimo"
 
-msgid "Cas&e sensitive"
-msgstr "N&e ignori usklecon"
-
 msgid "&Find recursively"
 msgstr "&Trovi rekursie"
 
 msgid "S&kip hidden"
 msgstr "P&reterpasi kaŝitan"
 
-msgid "&All charsets"
-msgstr "Ĉ&iuj signaroj"
-
 msgid "Sea&rch for content"
 msgstr "Se&rĉi por enhavo"
 
 msgid "Case sens&itive"
 msgstr "&Ignori usklecon"
-
-msgid "Re&gular expression"
-msgstr "Re&gulesprimo"
 
 msgid "Fir&st hit"
 msgstr "Unu&a rezulto"
@@ -2635,14 +2663,13 @@ msgstr "Nova rapidolista grupo"
 msgid "Name of new group:"
 msgstr "Nomo de nova grupo:"
 
-msgid "Remove:"
-msgstr "Forigi:"
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "Ĉu vi certas, ke vi volas forigi ĉi tiun eron?"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "Grupo ne vakas.\n"
@@ -2654,13 +2681,13 @@ msgstr "Plej supra grupo"
 msgid "Hotlist Load"
 msgstr "Ŝargi rapidoliston"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
-"MC ne povis skribi al la dosiero ~/%s;\n"
-"viaj malnovaj rapidolistaj eroj ne estis forigitaj"
+"MC ne povis skribi al la dosiero ~/%s,\n"
+"via malnovaj rapidolistaj eroj ne estis forigitaj"
 
 #, c-format
 msgid "Label for \"%s\":"
@@ -3012,9 +3039,6 @@ msgstr "Ĉ&iam"
 msgid "A&uto save setup"
 msgstr "Aŭtomate konservi agor&don"
 
-msgid "Preallocate &space before file copying"
-msgstr "Generi &spacon antaŭ ol kopii dosieron"
-
 msgid "Sa&fe delete"
 msgstr "Sendanĝera &forigo"
 
@@ -3053,6 +3077,10 @@ msgstr "Unuopa &premo"
 
 msgid "Esc key mode"
 msgstr "Eskapo-klava reĝimo"
+
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "Generi &spacon antaŭ ol kopii"
 
 msgid "Mkdi&r autoname"
 msgstr "&Aŭtomate nomi novan dosierujon"
@@ -3391,7 +3419,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Dosiero %s estas posedata de nek la ĉefuzanto nek vi aŭ estas universale skribebla.\n"
+"Dosiero %s estas posedata de nek la ĉefuzanto nek vi aŭ estas universale "
+"skribebla.\n"
 "Uzi ĝin eble kompromitos vian sekurecon"
 
 msgid "Format error on file Extensions File"
@@ -3497,11 +3526,11 @@ msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Premu ĉiujn la klavojn menciitajn ĉi tie. Post kiam vi faris tion,"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "kontrolu kiujn klavojn ne estas markitajn per \"Bone\". Premu spaceton ĉe"
+msgstr ""
+"kontrolu kiujn klavojn ne estas markitajn per \"Bone\". Premu spaceton ĉe"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr ""
-"la manka klavo, aŭ klaku per la muso por difini ĝin. Dismovu per tabo."
+msgstr "la manka klavo, aŭ klaku per la muso por difini ĝin. Dismovu per tabo."
 
 #, c-format
 msgid ""
@@ -3510,6 +3539,9 @@ msgid ""
 msgstr ""
 "Malsukcesis plenumigi:\n"
 "%s\n"
+
+msgid "Home directory path is not absolute"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3609,8 +3641,12 @@ msgstr "Virtuala dosiersistemoj:"
 msgid "Data types:"
 msgstr "Datumtipoj:"
 
+#, fuzzy
+msgid "Home directory:"
+msgstr "Teneja dosierujo:"
+
 msgid "System data"
-msgstr "Sistema dato"
+msgstr "Sistemaj datumoj"
 
 msgid "Config directory:"
 msgstr "Agorda dosierujo:"
@@ -4088,14 +4124,6 @@ msgstr ""
 "Ne eblas malfermi je \"%s\"\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"Ne eblas stat-i je \"%s\"\n"
-"%s"
-
 msgid "Cannot view: not a regular file"
 msgstr "Ne eblas vidi: ne regula dosiero"
 
@@ -4108,4 +4136,17 @@ msgstr "Serĉo finita"
 msgid "Continue from beginning?"
 msgstr "Ĉu deiri de la komenco?"
 
+#~ msgid "Normal"
+#~ msgstr "Normala"
 
+#~ msgid "&Regular expression"
+#~ msgstr "&Regulesprimo"
+
+#~ msgid "All charsets"
+#~ msgstr "Ĉiuj signaroj"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "Ne ignori u&sklecon"
+
+#~ msgid "Remove:"
+#~ msgstr "Forigi:"

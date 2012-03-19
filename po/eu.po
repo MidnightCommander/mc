@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Basque (http://www.transifex.net/projects/p/mc/team/eu/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 20:27+0300\n"
+"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
+"Language-Team: Basque (http://www.transifex.net/projects/p/mc/language/eu/)\n"
+"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -30,24 +30,24 @@ msgid "Cannot translate from %s to %s"
 msgstr "Ezin itzuli %s(e)tik %s(e)ra"
 
 msgid "Event system already initialized"
-msgstr "Gertaera sistema dagoeneko hasieratuta"
+msgstr ""
 
 msgid "Failed to initialize event system"
-msgstr "Gertaera sistema hasieratzeak huts egin du"
+msgstr ""
 
 msgid "Event system not initialized"
-msgstr "Gertaera sistema ez dago hasieratuta"
+msgstr ""
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr "Egiaztatu sarrera datuak! Parametroetako batzuk NULUAK dira!"
+msgstr ""
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr "Ezin '%s' taldea gertaeratarako sortu!"
+msgstr ""
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr "Ezin '%s' gertaera sortu!"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -77,7 +77,7 @@ msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
-msgstr "Akats bat gertatu da erabiltzailearen ezarpenak migratzerakoan: %s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -86,10 +86,6 @@ msgid ""
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 msgstr ""
-"Zure ezarpen zaharrak %s-tik \n"
-"Freedesktop-ek gomendatutako direktorioetara migratu dira.\n"
-"Info gehiago nahi baduzu, mesedez bisitatu\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
@@ -111,18 +107,20 @@ msgid "Invalid token number %d"
 msgstr "Token zenbaki baliogabea %d"
 
 msgid "Regular expression error"
-msgstr "Adirazpen erregularraren akatsa"
+msgstr ""
 
-msgid "Normal"
-msgstr "Arrunta"
+msgid "&Normal"
+msgstr "&Arrunta"
 
-msgid "&Regular expression"
-msgstr "Adierazpen e&rregularra"
+msgid "Re&gular expression"
+msgstr "Adierazpen erre&gularra"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Hamaseitarra"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "Zernahitarako karaktere bilaketa"
 
 #, c-format
@@ -147,9 +145,6 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"Ezin da 256 koloretarako euskarria duen '%s' azala\n"
-"256 koloretakoa ez den terminal batean erabili.\n"
-"Lehenetsitako azala zamatu da"
 
 msgid "Function key 1"
 msgstr "1. funtzio tekla"
@@ -246,6 +241,9 @@ msgstr "Ezabatu tekla"
 
 msgid "Completion/M-tab"
 msgstr "Burutzea/M-tab"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "+ zenbakizko teklatuan"
@@ -499,7 +497,7 @@ msgid "Cannot parse:"
 msgstr "Azterketa sintaktikoa ezin egin:"
 
 msgid "More parsing errors will be ignored."
-msgstr "Azterketa sintaktikoaren akats gehiago baztertu egingo dira."
+msgstr "Gainerako analisi-erroreei ez zaie jaramonik egingo."
 
 msgid "Internal error:"
 msgstr "Barne-errorea:"
@@ -545,10 +543,10 @@ msgid "Print data directory"
 msgstr "Inprimatu datu direktorioa"
 
 msgid "Print extended info about used data directories"
-msgstr "Inprimatu info hedatua erabilitako data direktorioei buruz"
+msgstr ""
 
 msgid "Print configure options"
-msgstr "Inprimatu konfiguratzeko aukerak"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr "Inprimatu laneko azken direktorioa zehaztutako fitxategira"
@@ -574,8 +572,12 @@ msgstr "Fitxategi bat editatzen du"
 msgid "Forces xterm features"
 msgstr "xterm eginbideak behartzen ditu"
 
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Subshell euskarria desgaitzen du"
+
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Sagua jarraitzeko nabarmenketa zahar bat erabiltzen saiatzen da"
 
 msgid "Disable mouse support in text version"
 msgstr "Testu-bertsioan sagu-euskarria desgaitzen du"
@@ -596,7 +598,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Zamatu tekla elkarketen definizioak zehaztutako fitxategitik"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr "Ez zamatu tekla loturak fitxategitik, erabili lehenetsitakoak"
+msgstr ""
 
 msgid "Requests to run in black and white"
 msgstr "Zuri-beltzean exekutatzea eskatzen du "
@@ -630,24 +632,6 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors GAKOHITZA={AURRE},{ATZE},{EZAUGR}:GAKOHITZA2=...\n"
-"\n"
-"{AURRE}, {ATZE} eta {EZAUGR} jarri gabe utzi daitezke, eta lehenetsitakoa\n"
-"erabiliko da\n"
-"\n"
-" Gakohitzak:\n"
-"   Globala:      errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   Fitxategien bistaraketa: normal, selected, marked, markselect\n"
-"   Elkarrizketa laukiak: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menuak:       menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Menu gainazaleratuak:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editorea:     editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-"   Erakuslea:    viewbold, viewunderline, viewselected\n"
-"   Laguntza:     helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -662,16 +646,6 @@ msgid ""
 "Attributes:\n"
 "   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
-"Kolore estandarrak:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray eta white\n"
-"\n"
-"Kolore hedatuak, 256 kolore eskuragarri daudenean:\n"
-"   color16-tik color255-ra, edo rgb000-tik rgb555-ra eta gray0-tik gray23-ra\n"
-"\n"
-"Ezaugarriak:\n"
-"   bold, underline, reverse, blink; erantsi gehiago '+' erabiliz\n"
 
 msgid "Color options"
 msgstr "Koloreen aukerak"
@@ -698,17 +672,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNUren %s Midnight Commander-a\n"
 
-msgid "No arguments given to the viewer."
-msgstr "Ez zaizkio argumentuak eman erakusleari."
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr "Bi fitxategi behar dira diffviwer erabiltzeko"
-
 msgid "Main options"
 msgstr "Aukera nagusiak"
 
 msgid "Terminal options"
 msgstr "Terminalaren aukerak"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr "Ez zaizkio argumentuak eman erakusleari."
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr "Bi fitxategi behar dira diffviwer erabiltzeko"
 
 msgid "Background process error"
 msgstr "Hondoko prozesu baten akatsa"
@@ -735,8 +712,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Itxi"
 
-msgid "All charsets"
-msgstr "Karaktere-multzo guztiak"
+msgid "&All charsets"
+msgstr "&Karaktere-multzo guztiak"
 
 msgid "&Whole words"
 msgstr "&Hitz osoak"
@@ -744,7 +721,7 @@ msgstr "&Hitz osoak"
 msgid "&Backwards"
 msgstr "&Atzera"
 
-msgid "Case &sensitive"
+msgid "Cas&e sensitive"
 msgstr "Berei&zi maius/minus"
 
 msgid "Enter search string:"
@@ -782,9 +759,6 @@ msgstr ""
 "Aldiuneko fitxategi bateratua ezin sortu\n"
 "%s"
 
-msgid "&Normal"
-msgstr "&Arrunta"
-
 msgid "&Fastest (Assume large files)"
 msgstr "&Azkarrena (fitxategi haundiak suposatu)"
 
@@ -795,13 +769,13 @@ msgid "Strip &trailing carriage return"
 msgstr "Kendu arras&te orga itzulera"
 
 msgid "Ignore all &whitespace"
-msgstr "Baztertu &zurigune guztiak"
+msgstr "Ez ikusi &zurigune guztiak"
 
 msgid "Ignore &space change"
-msgstr "Baztertu &zuriune aldaketa"
+msgstr "Ezikusi &zuriune aldaketa"
 
 msgid "Ignore tab &expansion"
-msgstr "Baztertu tab &hedapena"
+msgstr "Ezikusi tab &hedapena"
 
 msgid "&Ignore case"
 msgstr "&Ez bereizi maius/minus"
@@ -1024,7 +998,7 @@ msgid "Press macro hotkey:"
 msgstr "Sakatu makroaren laster-tekla:"
 
 msgid "Macro not deleted"
-msgstr "Makro ez ezabatua"
+msgstr ""
 
 msgid "Save macro"
 msgstr "Gorde makroa"
@@ -1033,10 +1007,10 @@ msgid "Press the macro's new hotkey:"
 msgstr "Sakatu makroaren laster-tekla berria:"
 
 msgid "Repeat last commands"
-msgstr "Errepikatu azken komandoa"
+msgstr ""
 
 msgid "Repeat times:"
-msgstr "Zenbat aldiz errepikatu:"
+msgstr ""
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1218,7 +1192,7 @@ msgid "&Undo"
 msgstr "&Desegin"
 
 msgid "&Redo"
-msgstr "&Berregin"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr "&Txandakatu txert/gainid"
@@ -1278,7 +1252,7 @@ msgid "&Prev bookmark"
 msgstr "&Aurreko laster-marka"
 
 msgid "&Flush bookmarks"
-msgstr "&Hustu liburu-markak"
+msgstr ""
 
 msgid "&Go to line..."
 msgstr "&Joan...lerrora"
@@ -1308,13 +1282,13 @@ msgid "&Refresh screen"
 msgstr "&Freskatu pantaila"
 
 msgid "&Start/Stop record macro"
-msgstr "&Hasi/Gelditu makro grabaketa"
+msgstr ""
 
 msgid "Delete macr&o..."
 msgstr "Ezabatu makr&oa..."
 
 msgid "Record/Repeat &actions"
-msgstr "Grabatu/Errepikatu &ekintzak"
+msgstr ""
 
 msgid "'ispell' s&pell check"
 msgstr "'ispell' &ortografia egiaztapena"
@@ -1392,7 +1366,7 @@ msgid "Word wrap line length:"
 msgstr "Itzulbiratutako lerroaren luzeera:"
 
 msgid "&Group undo"
-msgstr "&Taldeka desegin"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr "Kurtsorea lerro amaieratik harantzago"
@@ -1607,8 +1581,7 @@ msgstr "Sailkatzeko ordena"
 msgid "Confirmation"
 msgstr "Berrespena"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "&Historia garbitu"
@@ -1681,8 +1654,8 @@ msgstr "Esteka sinbolikoaren fitxategi izena:"
 
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
-"Existitzen den fitxategi izena (esteka sinbolikoak erakutsiko duen fitxategi"
-" izena):"
+"Existitzen den fitxategi izena (esteka sinbolikoak erakutsiko duen fitxategi "
+"izena):"
 
 msgid "Symbolic link"
 msgstr "Esteka sinbolikoa"
@@ -1947,11 +1920,11 @@ msgstr "Ezarpena"
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr "Ezarpena %s-ra gordeta"
+msgstr ""
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr "Ezarpenak ezin gorde %s-ra"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Komandoak ezin exekutatu bertakoa ez den fitxategi-sistema batean"
@@ -2070,7 +2043,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Bertakoak ez diren fitxategi sistemen artean ezin da esteka sinboliko egonkorrik sortu:\n"
+"Bertakoak ez diren fitxategi sistemen artean ezin da esteka sinboliko "
+"egonkorrik sortu:\n"
 "\n"
 "Esteka sinboliko egonkorrak aukera ezgaituko da"
 
@@ -2086,7 +2060,7 @@ msgid "&Abort"
 msgstr "&Abortatu"
 
 msgid "Ski&p all"
-msgstr "Sa&hiestu guztia"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Saiatu berriz"
@@ -2375,6 +2349,14 @@ msgstr "Direktorio azterketa"
 msgid "Cannot operate on \"..\"!"
 msgstr "Ezin da \"..\" erabili!"
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\"-ren egoera (\"stat\") ezin lortu\n"
+"%s"
+
 msgid "Sorry, I could not put the job in background"
 msgstr "Barkatu, ezin izan dut lana hondoan ipini"
 
@@ -2433,16 +2415,36 @@ msgstr "Fitxategia existitzen da"
 msgid "Background process: File exists"
 msgstr "Hondoko prozesua: Fitxategia existitzen da"
 
-#, c-format
-msgid "Files processed: %zu of %zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu/%zu"
 msgstr "Prozesatutako fitxategiak: %zu / %zu"
 
-#, c-format
-msgid "Time: %s  %s (%s)"
+#, fuzzy, c-format
+msgid "Files processed: %zu"
+msgstr "Prozesatutako fitxategiak: %zu / %zu"
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "Ordua: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Ordua: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Fitxategia: %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "Ordua: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "Guztira: %s / %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "Guztira: %s / %s"
 
 msgid "Source"
@@ -2501,26 +2503,17 @@ msgstr "Aurkitu: %ld"
 msgid "Malformed regular expression"
 msgstr "Gaizki osatutako adierazpen erregularra"
 
-msgid "Cas&e sensitive"
-msgstr "Berei&zi maius/minus"
-
 msgid "&Find recursively"
 msgstr "&Bilatu errekurtsiboki"
 
 msgid "S&kip hidden"
 msgstr "B&aztertu ezkutukoak"
 
-msgid "&All charsets"
-msgstr "&Karaktere-multzo guztiak"
-
 msgid "Sea&rch for content"
 msgstr "Bi&latu edukiaren arabera"
 
 msgid "Case sens&itive"
 msgstr "Berei&zi maius/minus"
-
-msgid "Re&gular expression"
-msgstr "Adierazpen erre&gularra"
 
 msgid "Fir&st hit"
 msgstr "&Lehenengo agerraldia"
@@ -2541,7 +2534,7 @@ msgid "File name:"
 msgstr "Fitxategi izena:"
 
 msgid "Ena&ble ignore directories:"
-msgstr "&Gaitu alboratu direktorioak:"
+msgstr ""
 
 msgid "Start at:"
 msgstr "Hemen hasi:"
@@ -2556,8 +2549,8 @@ msgstr "Amaituta"
 #, c-format
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] "Amaituta (direktorio %zd baztertuta)"
-msgstr[1] "Amaituta (%zd direktorio baztertuta)"
+msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "Searching %s"
@@ -2633,14 +2626,13 @@ msgstr "Gogokoen talde berria"
 msgid "Name of new group:"
 msgstr "Talde berriaren izena:"
 
-msgid "Remove:"
-msgstr "Ezabatu:"
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "Ziur zaude sarrera hau ezabatu nahi duzula?"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "Taldea ez dago hutsik.\n"
@@ -2652,9 +2644,9 @@ msgstr "Goi mailako taldea"
 msgid "Hotlist Load"
 msgstr "Gogokoak zamatu"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 "MC-k ezin izan du ~/%s fitxategian idatzi,\n"
@@ -2876,7 +2868,7 @@ msgid "U&nselect group"
 msgstr "Des&autatu taldea"
 
 msgid "&Invert selection"
-msgstr "&Alderantzikatu hautapena"
+msgstr ""
 
 msgid "E&xit"
 msgstr "Irte&n"
@@ -2900,7 +2892,7 @@ msgid "&Compare directories"
 msgstr "&Konparatu direktorioak"
 
 msgid "C&ompare files"
-msgstr "Fitxategiak al&deratu"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr "Ka&npoko panela"
@@ -3010,9 +3002,6 @@ msgstr "&beti"
 msgid "A&uto save setup"
 msgstr "A&uto gorde ezarpena"
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr "E&zabaketa segurua"
 
@@ -3051,6 +3040,10 @@ msgstr "Be&hin sakatu"
 
 msgid "Esc key mode"
 msgstr "Ihes (Esc) tekla modua"
+
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "Ez ikusi &zurigune guztiak"
 
 msgid "Mkdi&r autoname"
 msgstr "Mkdi&r autoizena"
@@ -3131,7 +3124,7 @@ msgid "Use SI si&ze units"
 msgstr "Erabili SI ne&urri unitateak"
 
 msgid "Show mi&ni-status"
-msgstr "Erakutsi mi&ni-egoera"
+msgstr ""
 
 msgid "Panel options"
 msgstr "Panelek aukerak"
@@ -3277,8 +3270,7 @@ msgid "Do you really want to execute?"
 msgstr "Beneta exekutatu nahi duzu?"
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
+msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
 
 msgid "&Add new"
 msgstr "&Gehitu berria"
@@ -3509,8 +3501,9 @@ msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
-"Exekutatzeak huts egin du:\n"
-"%s\n"
+
+msgid "Home directory path is not absolute"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3518,9 +3511,6 @@ msgid ""
 "Failed while close:\n"
 "%s\n"
 msgstr ""
-"\n"
-"Ixtean huts egin du:\n"
-"%s\n"
 
 msgid "Choose codepage"
 msgstr "Hautatu kode-orrialdea"
@@ -3610,23 +3600,27 @@ msgstr "Alegiazko fitxategi sistemak (VFS):"
 msgid "Data types:"
 msgstr "Datu motak:"
 
+#, fuzzy
+msgid "Home directory:"
+msgstr "direktorioa"
+
 msgid "System data"
-msgstr "Sistemaren datuak"
+msgstr ""
 
 msgid "Config directory:"
-msgstr "Konfiguratu direktorioa:"
+msgstr ""
 
 msgid "Data directory:"
-msgstr "Datuen direktorioa:"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
 
 msgid "User data"
-msgstr "Erabiltzaile datuak"
+msgstr ""
 
 msgid "Cache directory:"
-msgstr "Cache direktorioa:"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3810,7 +3804,7 @@ msgstr "ftpfs: zerbitzarirako konexioak huts egin du: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Berriz saiatzeko itxoiten... %d (Ctrl-G uzteko)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: baliogabeko helbide familia"
@@ -3866,7 +3860,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "%s: Abisua: %s fitxategia ez da aurkitu\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3995,7 +3989,8 @@ msgid "vfs_info is not fs!"
 msgstr "vfs_info ez da fs!"
 
 msgid "You have to chdir to extract files first"
-msgstr "Fitxategiak erauzteko aurrena direktorioa aldatu (\"chdir\") behar duzu"
+msgstr ""
+"Fitxategiak erauzteko aurrena direktorioa aldatu (\"chdir\") behar duzu"
 
 msgid "while iterating over blocks"
 msgstr "blokeen gainean iteratzerakoan"
@@ -4090,14 +4085,6 @@ msgstr ""
 "\"%s\" ezin ireki\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\"-ren egoera (\"stat\") ezin lortu\n"
-"%s"
-
 msgid "Cannot view: not a regular file"
 msgstr "Ezin ikusi: ez da fitxategi arrunta"
 
@@ -4110,4 +4097,17 @@ msgstr "Bilaketa eginda"
 msgid "Continue from beginning?"
 msgstr "Hasieratik jarraitu?"
 
+#~ msgid "Normal"
+#~ msgstr "Arrunta"
 
+#~ msgid "&Regular expression"
+#~ msgstr "Adierazpen e&rregularra"
+
+#~ msgid "All charsets"
+#~ msgstr "Karaktere-multzo guztiak"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "Berei&zi maius/minus"
+
+#~ msgid "Remove:"
+#~ msgstr "Ezabatu:"

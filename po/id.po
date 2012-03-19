@@ -1,32 +1,32 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
-# Andika Triwidada <andika@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Indonesian (http://www.transifex.net/projects/p/mc/team/id/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 20:27+0300\n"
+"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Indonesian (http://www.transifex.net/projects/p/mc/language/"
+"id/)\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
-msgstr "Peringatan: tak bisa memuat daftar codepage"
+msgstr ""
 
 msgid "7-bit ASCII"
-msgstr "ASCII 7 bit"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "Tak bisa menerjemahkan dari %s ke %s"
+msgstr ""
 
 msgid "Event system already initialized"
 msgstr ""
@@ -54,18 +54,15 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"Berkas \"%s\" sedang disunting.\n"
-"Pengguna: %s\n"
-"ID Proses: %d"
 
 msgid "File locked"
-msgstr "Berkas dikunci"
+msgstr ""
 
 msgid "&Grab lock"
-msgstr "Pe&gang kunci"
+msgstr ""
 
 msgid "&Ignore lock"
-msgstr "Aba&ikan kunci"
+msgstr ""
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -93,48 +90,44 @@ msgid ""
 msgstr ""
 
 msgid "Search string not found"
-msgstr "String yang dicari tak ditemukan"
+msgstr ""
 
 msgid "Not implemented yet"
-msgstr "Belum diimplementasi"
+msgstr ""
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr "Cacah token pengganti tak sama dengan cacah token yang ditemukan"
+msgstr ""
 
 #, c-format
 msgid "Invalid token number %d"
-msgstr "Nomor token %d tak valid"
+msgstr ""
 
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
-msgstr "Normal"
+msgid "&Normal"
+msgstr ""
 
-msgid "&Regular expression"
-msgstr "Ekspresi &reguler"
+msgid "Re&gular expression"
+msgstr ""
 
-msgid "Hexadecimal"
-msgstr "Heksadesimal"
+msgid "He&xadecimal"
+msgstr ""
 
-msgid "Wildcard search"
-msgstr "Pencarian wildcard"
+msgid "Wil&dcard search"
+msgstr ""
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Tak bisa memuat skin '%s'.\n"
-"Skin bawaan telah dimuat."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Tak bisa mengurai skin '%s'.\n"
-"Skin bawaan telah dimuat."
 
 #, c-format
 msgid ""
@@ -144,190 +137,193 @@ msgid ""
 msgstr ""
 
 msgid "Function key 1"
-msgstr "Tombol fungsi 1"
+msgstr ""
 
 msgid "Function key 2"
-msgstr "Tombol fungsi 2"
+msgstr ""
 
 msgid "Function key 3"
-msgstr "Tombol fungsi 3"
+msgstr ""
 
 msgid "Function key 4"
-msgstr "Tombol fungsi 4"
+msgstr ""
 
 msgid "Function key 5"
-msgstr "Tombol fungsi 5"
+msgstr ""
 
 msgid "Function key 6"
-msgstr "Tombol fungsi 6"
+msgstr ""
 
 msgid "Function key 7"
-msgstr "Tombol fungsi 7"
+msgstr ""
 
 msgid "Function key 8"
-msgstr "Tombol fungsi 8"
+msgstr ""
 
 msgid "Function key 9"
-msgstr "Tombol fungsi 9"
+msgstr ""
 
 msgid "Function key 10"
-msgstr "Tombol fungsi 10"
+msgstr ""
 
 msgid "Function key 11"
-msgstr "Tombol fungsi 11"
+msgstr ""
 
 msgid "Function key 12"
-msgstr "Tombol fungsi 12"
+msgstr ""
 
 msgid "Function key 13"
-msgstr "Tombol fungsi 13"
+msgstr ""
 
 msgid "Function key 14"
-msgstr "Tombol fungsi 14"
+msgstr ""
 
 msgid "Function key 15"
-msgstr "Tombol fungsi 15"
+msgstr ""
 
 msgid "Function key 16"
-msgstr "Tombol fungsi 16"
+msgstr ""
 
 msgid "Function key 17"
-msgstr "Tombol fungsi 17"
+msgstr ""
 
 msgid "Function key 18"
-msgstr "Tombol fungsi 18"
+msgstr ""
 
 msgid "Function key 19"
-msgstr "Tombol fungsi 19"
+msgstr ""
 
 msgid "Function key 20"
-msgstr "Tombol fungsi 20"
+msgstr ""
 
 msgid "Backspace key"
-msgstr "Tombol backspace"
+msgstr ""
 
 msgid "End key"
-msgstr "Tombol end"
+msgstr ""
 
 msgid "Up arrow key"
-msgstr "Tombol panah atas"
+msgstr ""
 
 msgid "Down arrow key"
-msgstr "Tombol panah bawah"
+msgstr ""
 
 msgid "Left arrow key"
-msgstr "Tombol panah kiri"
+msgstr ""
 
 msgid "Right arrow key"
-msgstr "Tombol panah kanan"
+msgstr ""
 
 msgid "Home key"
-msgstr "Tombol home"
+msgstr ""
 
 msgid "Page Down key"
-msgstr "Tombol Page Down"
+msgstr ""
 
 msgid "Page Up key"
-msgstr "Tombol Page Up"
+msgstr ""
 
 msgid "Insert key"
-msgstr "Tombol insert"
+msgstr ""
 
 msgid "Delete key"
-msgstr "Tombol delete"
+msgstr ""
 
 msgid "Completion/M-tab"
 msgstr ""
 
+msgid "Back Tabulation S-tab"
+msgstr ""
+
 msgid "+ on keypad"
-msgstr "+ pada keypad"
+msgstr ""
 
 msgid "- on keypad"
-msgstr "- pada keypad"
+msgstr ""
 
 msgid "Slash on keypad"
-msgstr "Garis miring pada keypad"
+msgstr ""
 
 msgid "* on keypad"
-msgstr "* pada keypad"
+msgstr ""
 
 msgid "Escape key"
-msgstr "Tombol escape"
+msgstr ""
 
 msgid "Left arrow keypad"
-msgstr "Panah kiri keypad"
+msgstr ""
 
 msgid "Right arrow keypad"
-msgstr "Panah kanan keypad"
+msgstr ""
 
 msgid "Up arrow keypad"
-msgstr "Panah naik keypad"
+msgstr ""
 
 msgid "Down arrow keypad"
-msgstr "Panah turun keypad"
+msgstr ""
 
 msgid "Home on keypad"
-msgstr "Home pada keypad"
+msgstr ""
 
 msgid "End on keypad"
-msgstr "End pada keypad"
+msgstr ""
 
 msgid "Page Down keypad"
-msgstr "Page Down keypad"
+msgstr ""
 
 msgid "Page Up keypad"
-msgstr "Page Up keypad"
+msgstr ""
 
 msgid "Insert on keypad"
-msgstr "Insert pada keypad"
+msgstr ""
 
 msgid "Delete on keypad"
-msgstr "Delete pada keypad"
+msgstr ""
 
 msgid "Enter on keypad"
-msgstr "Enter pada keypad"
+msgstr ""
 
 msgid "Function key 21"
-msgstr "Tombol fungsi 21"
+msgstr ""
 
 msgid "Function key 22"
-msgstr "Tombol fungsi 22"
+msgstr ""
 
 msgid "Function key 23"
-msgstr "Tombol fungsi 23"
+msgstr ""
 
 msgid "Function key 24"
-msgstr "Tombol fungsi 24"
+msgstr ""
 
 msgid "A1 key"
-msgstr "Tombol A1"
+msgstr ""
 
 msgid "C1 key"
-msgstr "Tombol C1"
+msgstr ""
 
 msgid "Plus"
-msgstr "Plus"
+msgstr ""
 
 msgid "Minus"
-msgstr "Minus"
+msgstr ""
 
 msgid "Asterisk"
-msgstr "Asterisk"
+msgstr ""
 
 msgid "Dot"
-msgstr "Dot"
+msgstr ""
 
 msgid "Less than"
-msgstr "Kurang dari"
+msgstr ""
 
 msgid "Great than"
-msgstr "Lebih dari"
+msgstr ""
 
 msgid "Equal"
-msgstr "Sama"
+msgstr ""
 
 msgid "Comma"
-msgstr "Koma"
+msgstr ""
 
 msgid "Apostrophe"
 msgstr ""
@@ -336,10 +332,10 @@ msgid "Colon"
 msgstr ""
 
 msgid "Exclamation mark"
-msgstr "Tanda seru"
+msgstr ""
 
 msgid "Question mark"
-msgstr "Tanda tanya"
+msgstr ""
 
 msgid "Ampersand"
 msgstr ""
@@ -372,34 +368,34 @@ msgid "Pipe"
 msgstr ""
 
 msgid "Left parenthesis"
-msgstr "Kurung buka"
+msgstr ""
 
 msgid "Right parenthesis"
-msgstr "Kurung tutup"
+msgstr ""
 
 msgid "Left bracket"
-msgstr "Kurung siku buka"
+msgstr ""
 
 msgid "Right bracket"
-msgstr "Kurung siku tutup"
+msgstr ""
 
 msgid "Left brace"
-msgstr "Kurung kurawal buka"
+msgstr ""
 
 msgid "Right brace"
-msgstr "Kurung kurawal tutup"
+msgstr ""
 
 msgid "Enter"
-msgstr "Enter"
+msgstr ""
 
 msgid "Tab key"
-msgstr "Tab"
+msgstr ""
 
 msgid "Space key"
-msgstr "Tombol spasi"
+msgstr ""
 
 msgid "Slash key"
-msgstr "Tombol garis miring"
+msgstr ""
 
 msgid "Backslash key"
 msgstr ""
@@ -412,13 +408,13 @@ msgid "At sign"
 msgstr ""
 
 msgid "Ctrl"
-msgstr "Ctrl"
+msgstr ""
 
 msgid "Alt"
-msgstr "Alt"
+msgstr ""
 
 msgid "Shift"
-msgstr "Shift"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
@@ -564,6 +560,9 @@ msgstr ""
 msgid "Forces xterm features"
 msgstr ""
 
+msgid "Disable X11 support"
+msgstr ""
+
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
 
@@ -657,16 +656,19 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr ""
 
-msgid "No arguments given to the viewer."
-msgstr ""
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr ""
-
 msgid "Main options"
 msgstr ""
 
 msgid "Terminal options"
+msgstr ""
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Background process error"
@@ -692,7 +694,7 @@ msgstr ""
 msgid "&Dismiss"
 msgstr ""
 
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
 
 msgid "&Whole words"
@@ -701,7 +703,7 @@ msgstr ""
 msgid "&Backwards"
 msgstr ""
 
-msgid "Case &sensitive"
+msgid "Cas&e sensitive"
 msgstr ""
 
 msgid "Enter search string:"
@@ -730,9 +732,6 @@ msgstr ""
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-
-msgid "&Normal"
 msgstr ""
 
 msgid "&Fastest (Assume large files)"
@@ -1533,8 +1532,7 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2213,6 +2211,12 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
@@ -2272,15 +2276,35 @@ msgid "Background process: File exists"
 msgstr ""
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
 msgstr ""
 
 #, c-format
-msgid "Total: %s of %s"
+msgid "Time: %s %s"
+msgstr ""
+
+#, c-format
+msgid "Time: %s %s (%s)"
+msgstr ""
+
+#, c-format
+msgid "Time: %s"
+msgstr ""
+
+#, c-format
+msgid "Time: %s (%s)"
+msgstr ""
+
+#, c-format
+msgid " Total: %s "
+msgstr ""
+
+#, c-format
+msgid " Total: %s/%s "
 msgstr ""
 
 msgid "Source"
@@ -2339,25 +2363,16 @@ msgstr ""
 msgid "Malformed regular expression"
 msgstr ""
 
-msgid "Cas&e sensitive"
-msgstr ""
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
 msgid "Sea&rch for content"
 msgstr ""
 
 msgid "Case sens&itive"
-msgstr ""
-
-msgid "Re&gular expression"
 msgstr ""
 
 msgid "Fir&st hit"
@@ -2470,14 +2485,13 @@ msgstr ""
 msgid "Name of new group:"
 msgstr ""
 
-msgid "Remove:"
+#, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-msgid "Are you sure you want to remove this entry?"
-msgstr ""
-
+#, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
@@ -2489,7 +2503,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
@@ -2841,9 +2855,6 @@ msgstr ""
 msgid "A&uto save setup"
 msgstr ""
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr ""
 
@@ -2881,6 +2892,9 @@ msgid "S&ingle press"
 msgstr ""
 
 msgid "Esc key mode"
+msgstr ""
+
+msgid "Preallocate &space"
 msgstr ""
 
 msgid "Mkdi&r autoname"
@@ -3309,6 +3323,9 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3397,6 +3414,9 @@ msgstr ""
 
 #, c-format
 msgid "Data types:"
+msgstr ""
+
+msgid "Home directory:"
 msgstr ""
 
 msgid "System data"
@@ -3843,12 +3863,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-
 msgid "Cannot view: not a regular file"
 msgstr ""
 
@@ -3860,5 +3874,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-

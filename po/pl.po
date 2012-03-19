@@ -1,23 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Piotr Drąg <piotrdrag@gmail.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 18:30+0000\n"
-"Last-Translator: raven <piotrdrag@gmail.com>\n"
-"Language-Team: Polish (http://www.transifex.net/projects/p/mc/team/pl/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 20:27+0300\n"
+"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Polish (http://www.transifex.net/projects/p/mc/language/pl/)\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Ostrzeżenie: nie można wczytać listy stron kodowych"
@@ -116,16 +117,18 @@ msgstr "Nieprawidłowy token o numerze %d"
 msgid "Regular expression error"
 msgstr "Błąd wyrażenia regularnego"
 
-msgid "Normal"
-msgstr "Normalny"
+msgid "&Normal"
+msgstr "&Normalny"
 
-msgid "&Regular expression"
+msgid "Re&gular expression"
 msgstr "Wyrażenie re&gularne"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Szesnastkowo"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "Wyszuk. wieloznaczników"
 
 #, c-format
@@ -249,6 +252,9 @@ msgstr "Klawisz Delete    "
 
 msgid "Completion/M-tab"
 msgstr "Uzupełnianie/M-tab"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "+ na klaw. numer. "
@@ -577,6 +583,10 @@ msgstr "Modyfikuje plik"
 msgid "Forces xterm features"
 msgstr "Wymusza funkcje programu xterm"
 
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Wyłącza obsługę podpowłoki"
+
 msgid "Tries to use an old highlight mouse tracking"
 msgstr "Próbuje użyć poprzedniej metody śledzenia wyróżnienia myszy"
 
@@ -703,17 +713,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr "Nie podano parametrów dla przeglądarki."
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr "Wymagane są dwa pliki, aby wywołać program diffviewer."
-
 msgid "Main options"
 msgstr "Główne opcje"
 
 msgid "Terminal options"
 msgstr "Opcje terminala"
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr "Nie podano parametrów dla przeglądarki."
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr "Wymagane są dwa pliki, aby wywołać program diffviewer."
 
 msgid "Background process error"
 msgstr "Błąd procesu w tle"
@@ -740,8 +753,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Porzuć"
 
-msgid "All charsets"
-msgstr "Wszystkie zest. znaków"
+msgid "&All charsets"
+msgstr "W&szystkie zestawy znaków"
 
 msgid "&Whole words"
 msgstr "&Całe słowa"
@@ -749,8 +762,8 @@ msgstr "&Całe słowa"
 msgid "&Backwards"
 msgstr "&Wstecz"
 
-msgid "Case &sensitive"
-msgstr "&Rozróż. wielkości"
+msgid "Cas&e sensitive"
+msgstr "Rozróżniani&e wielkości"
 
 msgid "Enter search string:"
 msgstr "Proszę podać wyszukiwany napis:"
@@ -786,9 +799,6 @@ msgid ""
 msgstr ""
 "Nie można utworzyć tymczasowego pliku łączenia\n"
 "%s"
-
-msgid "&Normal"
-msgstr "&Normalny"
 
 msgid "&Fastest (Assume large files)"
 msgstr "Naj&szybszy (przyjmuje duże pliki)"
@@ -1611,8 +1621,7 @@ msgstr "Porządek sortowania"
 msgid "Confirmation"
 msgstr "Potwierdzenia"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Wyczyszczenie &historii"
@@ -2003,8 +2012,8 @@ msgid ""
 "The format of the %s file has changed with version 3.0. You may either want "
 "to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
-"Format pliku %s został zmieniony w wersji 3.0. Można skopiować go z %smc.ext"
-" lub użyć tego pliku jako przykład."
+"Format pliku %s został zmieniony w wersji 3.0. Można skopiować go z %smc.ext "
+"lub użyć tego pliku jako przykład."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiowanie"
@@ -2381,6 +2390,14 @@ msgstr "Skanowanie katalogu"
 msgid "Cannot operate on \"..\"!"
 msgstr "Nie można wykonać działania na \"..\"."
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"Nie można wykonać polecenia stat na \"%s\"\n"
+"%s"
+
 msgid "Sorry, I could not put the job in background"
 msgstr "Nie można umieścić zadania w tle"
 
@@ -2439,16 +2456,36 @@ msgstr "Plik istnieje"
 msgid "Background process: File exists"
 msgstr "Proces w tle: plik istnieje"
 
-#, c-format
-msgid "Files processed: %zu of %zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu/%zu"
 msgstr "Przetworzono plików: %zu z %zu"
 
-#, c-format
-msgid "Time: %s  %s (%s)"
+#, fuzzy, c-format
+msgid "Files processed: %zu"
+msgstr "Przetworzono plików: %zu z %zu"
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "Czas: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Czas: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Plik: %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "Czas: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "Razem: %s z %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "Razem: %s z %s"
 
 msgid "Source"
@@ -2507,26 +2544,17 @@ msgstr "Odnaleziono: %ld"
 msgid "Malformed regular expression"
 msgstr "Błędnie sformatowane wyrażenie regularne"
 
-msgid "Cas&e sensitive"
-msgstr "Rozróżniani&e wielkości"
-
 msgid "&Find recursively"
 msgstr "&Znajdź rekurencyjnie"
 
 msgid "S&kip hidden"
 msgstr "Pomiń u&kryte"
 
-msgid "&All charsets"
-msgstr "W&szystkie zestawy znaków"
-
 msgid "Sea&rch for content"
 msgstr "Wyszukiwanie &treści"
 
 msgid "Case sens&itive"
 msgstr "Rozróżn&ianie wielkości"
-
-msgid "Re&gular expression"
-msgstr "Wyrażenie re&gularne"
 
 msgid "Fir&st hit"
 msgstr "Pier&wsze trafienie"
@@ -2640,14 +2668,13 @@ msgstr "Nowa grupa podręczna"
 msgid "Name of new group:"
 msgstr "Nazwa nowej grupy:"
 
-msgid "Remove:"
-msgstr "Usunięcie:"
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "Na pewno usunąć ten wpis?"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "Grupa nie jest pusta.\n"
@@ -2659,9 +2686,9 @@ msgstr "Grupa główna"
 msgid "Hotlist Load"
 msgstr "Wczytaj listę podręcznych katalogów"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 "Program MC nie może zapisać do pliku ~/%s.\n"
@@ -3020,9 +3047,6 @@ msgstr "&Zawsze"
 msgid "A&uto save setup"
 msgstr "Auto&matyczny zapis ustawień"
 
-msgid "Preallocate &space before file copying"
-msgstr "Wcześniejsze &przydzielenie miejsca przed kopiowaniem pliku"
-
 msgid "Sa&fe delete"
 msgstr "Bezpieczne &usuwanie"
 
@@ -3061,6 +3085,10 @@ msgstr "Po&jedyncze naciśnięcie"
 
 msgid "Esc key mode"
 msgstr "Tryb klawisza Escape"
+
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "Wcześniejsze &przydzielenie miejsca przed kopiowaniem pliku"
 
 msgid "Mkdi&r autoname"
 msgstr "Automatyczna nazwa przy \"mkdi&r\""
@@ -3504,15 +3532,13 @@ msgstr ""
 "Wszystkie klawisze działają właściwie."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-"Należy nacisnąć każdy z wypisanych tu klawiszy, a następnie sprawdzić,"
+msgstr "Należy nacisnąć każdy z wypisanych tu klawiszy, a następnie sprawdzić,"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "które nie są oznaczone jako \"OK\". Naciśnięcie spacji na brakującym"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr ""
-"klawiszu lub kliknięcie określi go. Poruszanie za pomocą klawisza Tab."
+msgstr "klawiszu lub kliknięcie określi go. Poruszanie za pomocą klawisza Tab."
 
 #, c-format
 msgid ""
@@ -3521,6 +3547,9 @@ msgid ""
 msgstr ""
 "Wykonanie nie powiodło się:\n"
 "%s\n"
+
+msgid "Home directory path is not absolute"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3619,6 +3648,10 @@ msgstr "Wirtualne systemy plików:"
 #, c-format
 msgid "Data types:"
 msgstr "Typy danych:"
+
+#, fuzzy
+msgid "Home directory:"
+msgstr "Katalog pamięci podręcznej:"
 
 msgid "System data"
 msgstr "Dane systemu"
@@ -4099,14 +4132,6 @@ msgstr ""
 "Nie można otworzyć \"%s\"\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"Nie można wykonać polecenia stat na \"%s\"\n"
-"%s"
-
 msgid "Cannot view: not a regular file"
 msgstr "Nie można wyświetlić: nie jest zwykłym plikiem"
 
@@ -4119,4 +4144,17 @@ msgstr "Ukończono wyszukiwanie"
 msgid "Continue from beginning?"
 msgstr "Kontynuować od początku?"
 
+#~ msgid "Normal"
+#~ msgstr "Normalny"
 
+#~ msgid "&Regular expression"
+#~ msgstr "Wyrażenie re&gularne"
+
+#~ msgid "All charsets"
+#~ msgstr "Wszystkie zest. znaków"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "&Rozróż. wielkości"
+
+#~ msgid "Remove:"
+#~ msgstr "Usunięcie:"

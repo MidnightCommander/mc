@@ -1,22 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
-"PO-Revision-Date: 2011-12-07 11:21+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Belarusian (http://www.transifex.net/projects/p/mc/team/be/)\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-03-19 20:27+0300\n"
+"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Belarusian (http://www.transifex.net/projects/p/mc/language/"
+"be/)\n"
+"Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: be\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Увага: не ўдаецца загрузіць спіс кадовак"
@@ -26,27 +28,27 @@ msgstr "7-бiтны ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "Немагчыма перакласці з %s у %s"
+msgstr " Немагчыма перакласці  p '%s'  у '%s'"
 
 msgid "Event system already initialized"
-msgstr "Сістэма падзей ужо ініцыялізаваная"
+msgstr ""
 
 msgid "Failed to initialize event system"
-msgstr "Памылка ініцыялізацыі сістэмы падзей"
+msgstr ""
 
 msgid "Event system not initialized"
-msgstr "Сістэма падзей не ініцыялізаваная"
+msgstr ""
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr "Праверце ўваходныя дадзеныя! Некаторыя з параметраў роўныя NULL!"
+msgstr ""
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr "Немагчыма стварыць групу падзей '%s'!"
+msgstr ""
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr "Немагчыма стварыць падзею '%s'!"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -69,14 +71,14 @@ msgstr "&Ігнараваць блакоўку"
 
 #, c-format
 msgid "Cannot create %s directory"
-msgstr "Немагчыма стварыць каталог %s"
+msgstr "Немагчыма стварыць каталог \"%s\""
 
 msgid "FATAL: not a directory:"
 msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
-msgstr "Адбылася памылка пры пераносе настроек карыстальніка: %s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -85,10 +87,6 @@ msgid ""
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 msgstr ""
-"Вашы старыя налады былі перанесены з %s\n"
-"да рэкамендаваных Freedesktop дырэкторый.\n"
-"Для атрымання больш падрабязнай інфармацыі, калі ласка,\n"
-"наведайце http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
@@ -103,25 +101,27 @@ msgid "Not implemented yet"
 msgstr "Яшчэ не рэалізавана"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr "Коль-ць такенаў да замены не роўна да ліку знойдзеных такенаў"
+msgstr "Коль-ць такенаў да замены роўна да ліку знойдзеных такенаў"
 
 #, c-format
 msgid "Invalid token number %d"
 msgstr "Няправільны такен нумар %d"
 
 msgid "Regular expression error"
-msgstr "Памылка рэгулярнага выраза"
+msgstr ""
 
-msgid "Normal"
-msgstr "Нармальны"
+msgid "&Normal"
+msgstr "&Звычайны"
 
-msgid "&Regular expression"
-msgstr "&Рэгулярны выраз"
+msgid "Re&gular expression"
+msgstr "&Сталы выраз"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "Шаснаццатковы"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "wildcard-пошук"
 
 #, c-format
@@ -129,16 +129,16 @@ msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Не ўдалося загрузiць скуру '%s'.\n"
-"Загружана скура па змаўчанні"
+"Не ўдалося  загрузiць скiн '%s'.\n"
+"Стандартны скін быў загружаны"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Не ўдалося разабраць скуру '%s'.\n"
-"Загружана скура па змаўчанні"
+"Не ўдалося разабраць скiн '%s'.\n"
+"Стандартны скін быў загружаны"
 
 #, c-format
 msgid ""
@@ -146,9 +146,6 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"Немагчыма выкарыстаць скуру '%s' з падтрымкай 256\n"
-"колераў на тэрмінале без падтрымкi 256 колераў.\n"
-"Загружана скура па змаўчанні"
 
 msgid "Function key 1"
 msgstr "Функцыянальная 1 "
@@ -211,49 +208,52 @@ msgid "Function key 20"
 msgstr "Функцыянальная 20"
 
 msgid "Backspace key"
-msgstr "Клавіша Backspace"
+msgstr "Клfвіша Backspace"
 
 msgid "End key"
-msgstr "Клавіша End"
+msgstr "Клавіша End      "
 
 msgid "Up arrow key"
-msgstr "Стрэлка угору"
+msgstr "Стрэлка угору    "
 
 msgid "Down arrow key"
-msgstr "Стрэлка ўніз"
+msgstr "Стрэлка ўніз     "
 
 msgid "Left arrow key"
-msgstr "Стрэлка ўлева"
+msgstr "Стрэлка ўлева    "
 
 msgid "Right arrow key"
-msgstr "Стрэлка ўправа"
+msgstr "Стрэлка ўправа   "
 
 msgid "Home key"
-msgstr "Клавіша Home"
+msgstr "Клавіша Home     "
 
 msgid "Page Down key"
 msgstr "Клавіша Page Down"
 
 msgid "Page Up key"
-msgstr "Клавіша Page Up"
+msgstr "Клавіша Page Up  "
 
 msgid "Insert key"
-msgstr "Клавіша Insert"
+msgstr "Клавіша Insert   "
 
 msgid "Delete key"
-msgstr "Клавіша Delete"
+msgstr "Клавіша Delete   "
 
 msgid "Completion/M-tab"
-msgstr "Заканчэнне/M-Tab"
+msgstr "Заканчэнне/M-Tab "
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
-msgstr "+ на лічбавых клавішах"
+msgstr "+ на keypad'е"
 
 msgid "- on keypad"
-msgstr "- на лічбавых клавішах"
+msgstr "- на keypad'е"
 
 msgid "Slash on keypad"
-msgstr "Slash на лічбавых клавішах"
+msgstr "Slash на keypad'е"
 
 msgid "* on keypad"
 msgstr "* на лічбавых клавішах"
@@ -262,37 +262,37 @@ msgid "Escape key"
 msgstr "клавіша Escape"
 
 msgid "Left arrow keypad"
-msgstr "Стрэлка ўлева на лічбавых клавішах"
+msgstr "Стрэлка ўлева на keypad'e"
 
 msgid "Right arrow keypad"
-msgstr "Стрэлка ўправа на лічбавых клавішах"
+msgstr "Стрэлка ўправа на keypad'e"
 
 msgid "Up arrow keypad"
-msgstr "Стрэлка ўверх на лічбавых клавішах"
+msgstr "Стрэлка ўверх на keypad'e"
 
 msgid "Down arrow keypad"
-msgstr "Стрэлка ўніз на лічбавых клавішах"
+msgstr "Стрэлка ўніз на keypad'e"
 
 msgid "Home on keypad"
-msgstr "Home на лічбавых клавішах"
+msgstr "Home на keypad'е"
 
 msgid "End on keypad"
-msgstr "End на лічбавых клавішах"
+msgstr "End на keypad'е"
 
 msgid "Page Down keypad"
-msgstr "Page Down на лічбавых клавішах"
+msgstr "Page Down keypad"
 
 msgid "Page Up keypad"
-msgstr "Page Up на лічбавых клавішах"
+msgstr "Page Up keypad"
 
 msgid "Insert on keypad"
-msgstr "Insert на лічбавых клавішах"
+msgstr "Insert на keypad'е"
 
 msgid "Delete on keypad"
-msgstr "Delete на лічбавых клавішах"
+msgstr "Delete на keypad'е"
 
 msgid "Enter on keypad"
-msgstr "Enter на лічбавых клавішах"
+msgstr "Enter на keypad'е"
 
 msgid "Function key 21"
 msgstr "Функцыянальная 21 "
@@ -400,13 +400,13 @@ msgid "Enter"
 msgstr "Enter"
 
 msgid "Tab key"
-msgstr "клавiша Tab"
+msgstr "клавiша 'Tab'"
 
 msgid "Space key"
-msgstr "клавіша Прабел"
+msgstr "клавіша  Прабел"
 
 msgid "Slash key"
-msgstr "клавiша Дзяленне"
+msgstr "клавiша 'дзяленне'"
 
 msgid "Backslash key"
 msgstr "клавіша Backspace"
@@ -416,7 +416,7 @@ msgstr "Знак нумара #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr "знак At"
+msgstr "знак 'At'"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -526,10 +526,10 @@ msgid "&No"
 msgstr "&Не"
 
 msgid "Background process:"
-msgstr "Працэс у фоне:"
+msgstr "Працэс у тле:"
 
 msgid "&Cancel"
-msgstr "&Адмянiць"
+msgstr "&Скасаваць"
 
 msgid "&OK"
 msgstr "&Так"
@@ -545,13 +545,12 @@ msgstr "Надрукаваць каталог дадзеных"
 
 msgid "Print extended info about used data directories"
 msgstr ""
-"Надрукаваць пашыранаю інфармацыю аб выкарыстоўваных дадзеных каталогаў"
 
 msgid "Print configure options"
-msgstr "Надрукаваць налады параметраў"
+msgstr ""
 
 msgid "Print last working directory to specified file"
-msgstr "Надрукаваць апошні працоўны каталог у вызначаны файл"
+msgstr "Вывесці апошні працоўны каталог у вызначаны файл"
 
 msgid "Enables subshell support (default)"
 msgstr "Уключыць падтрымку ўбудаванай каманднай абалонкі (прадвызначана)"
@@ -574,8 +573,12 @@ msgstr "Рэдагуе адзін файл"
 msgid "Forces xterm features"
 msgstr "Навязвае ўласцівасці xterm"
 
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Адключыць падтрымку ўбудаванай каманднай абалонкі"
+
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Паспрабаваць выкарыстоўваць старую сістэму вылучэння мышшем"
 
 msgid "Disable mouse support in text version"
 msgstr "Адключыць падтрымку мышы ў тэкставай вэрсіі"
@@ -597,8 +600,6 @@ msgstr "Загрузіць вызначэння прывязкаў клавіш�
 
 msgid "Don't load definitions of key bindings from file, use defaults"
 msgstr ""
-"Немагчыма загрузiць файл вызначэнняў клавіш, выкарыстованы  вызначэння "
-"клавіш па змаўчанні"
 
 msgid "Requests to run in black and white"
 msgstr "Запыт на запуск у монахромным рэжыме"
@@ -610,7 +611,7 @@ msgid "Specifies a color configuration"
 msgstr "Вызначае наладкі колераў"
 
 msgid "Show mc with specified skin"
-msgstr "Адлюстраваць mc з названай скурай"
+msgstr "Адлюстраваць mc з названым скiнам"
 
 #. TRANSLATORS: don't translate keywords
 msgid ""
@@ -632,23 +633,6 @@ msgid ""
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} i {ATTR} могуць быць прапушчаны, будуць выкарыстованы значэнні па змаўчанні\n"
-"\n"
-" Ключавыя словы:\n"
-"   Global:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-"   Viewer:       viewbold, viewunderline, viewselected\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -663,16 +647,6 @@ msgid ""
 "Attributes:\n"
 "   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
-"Стандартныя колеры:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray i white\n"
-"\n"
-"Пашыраные колеры, калi маюцца 256 колераў:\n"
-"   color16 да color255, або rgb000 да rgb555 i gray0 да gray23\n"
-"\n"
-"Атрыбуты:\n"
-"   bold, underline, reverse, blink; больш дадаць можна з '+'\n"
 
 msgid "Color options"
 msgstr "Параметры колеру"
@@ -692,24 +666,28 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Калі ласка, пасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -V')\n"
+"Калі ласка, пасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -"
+"V')\n"
 "як цiкеты на www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
+msgid "Main options"
+msgstr "Галоўная наладка"
+
+msgid "Terminal options"
+msgstr "Наладкі тэрмiнала"
+
+msgid "Arguments parse error!"
+msgstr ""
+
 msgid "No arguments given to the viewer."
 msgstr "Не зададзены аргументы для праглядчыка."
 
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Два файла патрабуецца, каб выклікаць diffviewer."
-
-msgid "Main options"
-msgstr "Галоўныя наладкi"
-
-msgid "Terminal options"
-msgstr "Наладкі тэрмiнала"
 
 msgid "Background process error"
 msgstr "Памылка фонавага працэсу"
@@ -736,8 +714,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Закрыць"
 
-msgid "All charsets"
-msgstr "Усе кадыроўкі"
+msgid "&All charsets"
+msgstr "Усе кадыро&ўкі"
 
 msgid "&Whole words"
 msgstr "Толькі поўныя &словы"
@@ -745,8 +723,8 @@ msgstr "Толькі поўныя &словы"
 msgid "&Backwards"
 msgstr "&Назад"
 
-msgid "Case &sensitive"
-msgstr "Улiк рэ&гiстра"
+msgid "Cas&e sensitive"
+msgstr "Улік р&эгістра"
 
 msgid "Enter search string:"
 msgstr "Увядзіце радок для пошуку:"
@@ -782,9 +760,6 @@ msgid ""
 msgstr ""
 "Немагчыма стварыць часовы файл зліцця\n"
 "%s"
-
-msgid "&Normal"
-msgstr "&Звычайны"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Хуткі (для вялікіх файлаў)"
@@ -832,22 +807,22 @@ msgid "Enter line:"
 msgstr "Увядзіце нумар радка:"
 
 msgid "ButtonBar|Help"
-msgstr "ButtonBar|Дапамога"
+msgstr "ButtonBar|дапамога"
 
 msgid "ButtonBar|Save"
 msgstr "Захвц"
 
 msgid "ButtonBar|Edit"
-msgstr "ButtonBar|Рэдгвц"
+msgstr "ButtonBar|рэдагаваць"
 
 msgid "ButtonBar|Merge"
-msgstr "ButtonBar|Зліць"
+msgstr "ButtonBar|зліць"
 
 msgid "ButtonBar|Search"
 msgstr "Пошук"
 
 msgid "ButtonBar|Options"
-msgstr "ButtonBar|Опцыi"
+msgstr "ButtonBar|опцыi"
 
 msgid "ButtonBar|Quit"
 msgstr "Выхад"
@@ -992,10 +967,10 @@ msgid "Block is large, you may not be able to undo this action"
 msgstr "Блок занадта вялікі, вы не зможаце адмяніць гэта дзеянне"
 
 msgid "&Quick save"
-msgstr "&Хуткае захаванне"
+msgstr "&Хуткае захаванне "
 
 msgid "&Safe save"
-msgstr "&Бяспечнае захаванне"
+msgstr "&Бяспечнае захаванне "
 
 msgid "&Do backups with following extension:"
 msgstr "&Зрабiць копію з наступным пашырэннем:"
@@ -1025,7 +1000,7 @@ msgid "Press macro hotkey:"
 msgstr "Націсніце гарачую клавішу для макраса:"
 
 msgid "Macro not deleted"
-msgstr "Макрас не быў выдалены"
+msgstr ""
 
 msgid "Save macro"
 msgstr "Захаваць макрас"
@@ -1034,10 +1009,10 @@ msgid "Press the macro's new hotkey:"
 msgstr "Націсніце новую клавішу для макраса:"
 
 msgid "Repeat last commands"
-msgstr "Паўтарыць апошнюю каманду"
+msgstr ""
 
 msgid "Repeat times:"
-msgstr "Колькасць паўтораў:"
+msgstr ""
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1119,13 +1094,13 @@ msgid "Paste output of external command"
 msgstr "Уставіць вывад знешней каманды"
 
 msgid "Enter shell command(s):"
-msgstr "Увядзіце каманду(ы) абалонкі:"
+msgstr " Увядзіце каманду(ы) абалонкі: "
 
 msgid "External command"
 msgstr "Знешняя каманда"
 
 msgid "Cannot execute command"
-msgstr "Памылка пры выкананні каманды"
+msgstr " Памылка пры выкананні каманды "
 
 msgid "Copies to"
 msgstr "Адправіць копіі адрасатам"
@@ -1217,7 +1192,7 @@ msgid "&Undo"
 msgstr "&Адкаціць"
 
 msgid "&Redo"
-msgstr "&Паўтарыць"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr "&Рэжым устаўкі/замены"
@@ -1259,7 +1234,7 @@ msgid "&End"
 msgstr "&Канец"
 
 msgid "&Search..."
-msgstr "&Пошук..."
+msgstr "&Пошук"
 
 msgid "Search &again"
 msgstr "П&аўтор пошуку"
@@ -1277,7 +1252,7 @@ msgid "&Prev bookmark"
 msgstr "&Папярэдняя закладка"
 
 msgid "&Flush bookmarks"
-msgstr "&Скінуць закладкі"
+msgstr ""
 
 msgid "&Go to line..."
 msgstr " Перайсці да радка..."
@@ -1301,25 +1276,25 @@ msgid "For&ward to declaration"
 msgstr "&Уперад да дэкларацыi"
 
 msgid "Encod&ing..."
-msgstr "&Кадыроўка..."
+msgstr "&Кадыроўка"
 
 msgid "&Refresh screen"
 msgstr "Пера&маляваць экран"
 
 msgid "&Start/Stop record macro"
-msgstr "&Старт/Стоп запісу макраса"
+msgstr ""
 
 msgid "Delete macr&o..."
-msgstr "Выдаліць макрас..."
+msgstr "Выдаліць макрас"
 
 msgid "Record/Repeat &actions"
-msgstr "Запіс/паўтор &дзеянняў"
+msgstr ""
 
 msgid "'ispell' s&pell check"
 msgstr "&Кантроль правапісу"
 
 msgid "&Mail..."
-msgstr "&E-mail..."
+msgstr "&E-mail"
 
 msgid "Insert &literal..."
 msgstr "Уставіць &літэрал..."
@@ -1331,7 +1306,7 @@ msgid "&Format paragraph"
 msgstr "Фарматаваць &параграф"
 
 msgid "&Sort..."
-msgstr "&Сартыроўка..."
+msgstr "&Сартыроўка"
 
 msgid "&Paste output of..."
 msgstr "Уставіць в&ывад ад ..."
@@ -1340,7 +1315,7 @@ msgid "&External formatter"
 msgstr "&Знешняе фарматаванне"
 
 msgid "&General..."
-msgstr "&Агульныя..."
+msgstr "&Агульныя .."
 
 msgid "Save &mode..."
 msgstr "Рэжым &захавання..."
@@ -1391,7 +1366,7 @@ msgid "Word wrap line length:"
 msgstr "Пазіцыя пераносу радкоў:"
 
 msgid "&Group undo"
-msgstr "&Групавая адмена"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr "Курсор за канец радка"
@@ -1515,7 +1490,7 @@ msgid "On"
 msgstr "На"
 
 msgid "Flag"
-msgstr "Сцяг"
+msgstr "сцяг"
 
 msgid "Mode"
 msgstr "Рэжым"
@@ -1604,16 +1579,15 @@ msgid "Sort order"
 msgstr "Парадак сартавання"
 
 msgid "Confirmation"
-msgstr "Запыт пацверджання"
+msgstr " Запыт пацверджання"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
-msgstr "Ачысцiць &гiсторыю"
+msgstr "Ачыстка &гiсторыi"
 
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "Выдалiць спіс &каталогаў"
+msgstr "Выдаленне спісу &каталогаў"
 
 msgid "Confirmation|E&xit"
 msgstr "Вы&хад"
@@ -1667,13 +1641,13 @@ msgid "Timeout for freeing VFSs:"
 msgstr "Тайм-аўт вызвалення VFS:"
 
 msgid "Virtual File System Setting"
-msgstr "Налада Віртуальнай Файлавай Сістэмы"
+msgstr "Налада Віртуальнай Файлавай сістэмы"
 
 msgid "cd"
 msgstr "Перайсці ў"
 
 msgid "Quick cd"
-msgstr "Хуткая змена каталога "
+msgstr " Хуткая змена каталога "
 
 msgid "Symbolic link filename:"
 msgstr "Назва сімвалічнай спасылкі:"
@@ -1685,7 +1659,7 @@ msgid "Symbolic link"
 msgstr "Сімвалічная спасылка"
 
 msgid "Background Jobs"
-msgstr "Заданні ў фоне"
+msgstr "Заданні ў тле"
 
 msgid "Domain:"
 msgstr "Дамен:"
@@ -1737,13 +1711,13 @@ msgid "Name:"
 msgstr "Імя:"
 
 msgid "Permissions (octal):"
-msgstr "Дазволы (васьмярковыя):"
+msgstr "Доступ (васьмірычны):"
 
 msgid "Owner name:"
-msgstr "Назва ўладальніка:"
+msgstr "Імя ўладальніка:"
 
 msgid "Group name:"
-msgstr "Назва групы:"
+msgstr "Імя групы:"
 
 msgid "C&lear marked"
 msgstr "&Ачысціць пазначанае"
@@ -1755,7 +1729,7 @@ msgid "&Marked all"
 msgstr "Пазначыць &усе"
 
 msgid "Chmod command"
-msgstr "Каманда chmod"
+msgstr " Каманда chmod "
 
 msgid "File"
 msgstr "Файл"
@@ -1849,19 +1823,19 @@ msgid "Filter command and arguments:"
 msgstr "Фільтр каманды і аргументаў:"
 
 msgid "Create a new Directory"
-msgstr "Стварыць новы каталог"
+msgstr " Стварыць новы каталог "
 
 msgid "Enter directory name:"
 msgstr "Увядзіце імя каталога:"
 
 msgid "Select"
-msgstr "Адзначыць групу"
+msgstr "адзначыць групу"
 
 msgid "Unselect"
 msgstr "Зняць адзнаку"
 
 msgid "Extension file edit"
-msgstr "Рэдагаваць файла пашырэнняў"
+msgstr " Рэдагаваць файла пашырэнняў "
 
 msgid "Which extension file you want to edit?"
 msgstr "Які файл пашырэнняў Вы жадаеце рэдагаваць?"
@@ -1936,7 +1910,7 @@ msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
 msgstr ""
-"Увядзіце назву прылады (без /dev/), на якой\n"
+"увядзіце назву прылады (без /dev/), на якой\n"
 "аднаўляць файлы пасля выдалення (дробязі па F1):"
 
 msgid "Setup"
@@ -1944,11 +1918,11 @@ msgstr "Настройка"
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr "Налады захаваны ў %s"
+msgstr ""
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr "Немагчына захаваць налады ў %s"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Немагчыма выконваць каманды на нелакальных файлавых сістэмах"
@@ -1977,7 +1951,7 @@ msgstr "Параметр"
 
 #, c-format
 msgid " %s%s file error"
-msgstr " %s%s памылка файлу"
+msgstr " памылка файла %s%s "
 
 #, c-format
 msgid ""
@@ -2066,7 +2040,8 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Немагчыма стварыць устойлівыя сiмв спасылкі праз нелокальные файлавыя сістэмы:\n"
+"Немагчыма стварыць устойлівыя сiмв спасылкі праз нелокальные файлавыя "
+"сістэмы:\n"
 "\n"
 "Опцыя \"Устойлівыя сімвалічныя спасылкі\" будзе адменена"
 
@@ -2082,7 +2057,7 @@ msgid "&Abort"
 msgstr "&Перарваць"
 
 msgid "Ski&p all"
-msgstr "прапусціць &усе"
+msgstr ""
 
 msgid "&Retry"
 msgstr "Па&ўтарыць"
@@ -2102,8 +2077,7 @@ msgid ""
 "Delete it recursively?"
 msgstr ""
 "\n"
-"Фонавы працэс: каталог не пусты.\n"
-"Выдаліць рэкурсіўна?"
+"Фонавы працэс: каталог не пусты.Выдаліць рэкурсіўна?"
 
 msgid "Delete:"
 msgstr "Выдалiць:"
@@ -2371,6 +2345,14 @@ msgstr "Шлях да каталога"
 msgid "Cannot operate on \"..\"!"
 msgstr "Гэтую аперацыю немагчыма выканаць на \"..\"!"
 
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма атрымаць ўласцівасці \"%s\"\n"
+"%s"
+
 msgid "Sorry, I could not put the job in background"
 msgstr "Выбачайце, зрабіць гэта ў фонавым рэжыме немагчыма"
 
@@ -2429,16 +2411,36 @@ msgstr "Файл існуе"
 msgid "Background process: File exists"
 msgstr "Фонавы працэс: файл iснуе"
 
-#, c-format
-msgid "Files processed: %zu of %zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu/%zu"
 msgstr "Апрацавана файлаў: %zu з %zu"
 
-#, c-format
-msgid "Time: %s  %s (%s)"
+#, fuzzy, c-format
+msgid "Files processed: %zu"
+msgstr "Апрацавана файлаў: %zu з %zu"
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "Час: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "Час: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Файл: %s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "Час: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "Усяго: %s з %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "Усяго: %s з %s"
 
 msgid "Source"
@@ -2451,7 +2453,7 @@ msgid "Deleting"
 msgstr "Выдаляем"
 
 msgid "&Background"
-msgstr "У ф&оне"
+msgstr "У т&ле"
 
 msgid "&Stable Symlinks"
 msgstr "&Захоўваць сімвалічныя спасылкі"
@@ -2492,13 +2494,10 @@ msgstr "&Праўка - F4"
 
 #, c-format
 msgid "Found: %ld"
-msgstr "Знойдзена: %ld"
+msgstr "Знойдзены: %ld"
 
 msgid "Malformed regular expression"
-msgstr "Рэгулярны выраз сфармаваны памылкова"
-
-msgid "Cas&e sensitive"
-msgstr "Улік р&эгістра"
+msgstr "Сталы выраз сфармаваны памылкова"
 
 msgid "&Find recursively"
 msgstr "Знайсці &Рэкурсіўна"
@@ -2506,17 +2505,11 @@ msgstr "Знайсці &Рэкурсіўна"
 msgid "S&kip hidden"
 msgstr "Прапускаць скр&ытыя"
 
-msgid "&All charsets"
-msgstr "Усе кадыро&ўкі"
-
 msgid "Sea&rch for content"
 msgstr "По&шук па змесціва"
 
 msgid "Case sens&itive"
 msgstr "Улік рэ&гістра"
-
-msgid "Re&gular expression"
-msgstr "&Рэгулярны выраз"
 
 msgid "Fir&st hit"
 msgstr "Да першага ува&ходжання"
@@ -2537,7 +2530,7 @@ msgid "File name:"
 msgstr "Iмя файлу:"
 
 msgid "Ena&ble ignore directories:"
-msgstr "&Iгнараваць каталогi:"
+msgstr ""
 
 msgid "Start at:"
 msgstr "Стартаваць ад:"
@@ -2552,10 +2545,10 @@ msgstr "Скончана"
 #, c-format
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] "Скончана (праігнараваны %zd каталог)"
-msgstr[1] "Скончана (праігнаравана %zd каталога)"
-msgstr[2] "Скончана (праігнаравана %zd каталогаў)"
-msgstr[3] "Скончана (праігнаравана %zd каталогаў)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #, c-format
 msgid "Searching %s"
@@ -2631,14 +2624,13 @@ msgstr "Новая група хуткага доступу"
 msgid "Name of new group:"
 msgstr "Імя новай групы:"
 
-msgid "Remove:"
-msgstr "Выдаліць:"
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "Жадаеце выдаліць?"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "Група не пустая.\n"
@@ -2650,9 +2642,9 @@ msgstr "Група верхняга ўзроўню"
 msgid "Hotlist Load"
 msgstr "Загрузка спісу хуткага доступу"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 "MC не змог выдаліць файл ~ /%s,\n"
@@ -2663,7 +2655,7 @@ msgid "Label for \"%s\":"
 msgstr "Пазнака для \"%s\": "
 
 msgid "Add to hotlist"
-msgstr "Дадаць у хуткі доступ"
+msgstr "Дадаць хуткі доступ"
 
 msgid "Information"
 msgstr "Інфармацыя"
@@ -2691,39 +2683,39 @@ msgstr ""
 
 #, c-format
 msgid "Type:      %s"
-msgstr "Тып:         %s"
+msgstr "Тип:           %s"
 
 msgid "non-local vfs"
 msgstr "нелакальная ВФС"
 
 #, c-format
 msgid "Device:    %s"
-msgstr "Прылада:     %s"
+msgstr "Прылада:       %s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Ф.сістэма:   %s"
+msgstr "Ф.сістэма:     %s"
 
 #, c-format
 msgid "Accessed:  %s"
-msgstr "Зварот:      %s"
+msgstr "Зварот:        %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "Мадзiфiц.:   %s"
+msgstr "Мадзiфiц.     :%s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
 msgid "Changed:   %s"
-msgstr "Зменены:     %s"
+msgstr "Зменены:       %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr "Тып прылады: major %lu, minor %lu"
+msgstr "Прылада:       major %lu, minor %lu"
 
 #, c-format
 msgid "Size:      %s"
-msgstr "Памер:       %s"
+msgstr "Памер:         %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2735,19 +2727,19 @@ msgstr[3] " (%ld блокаў)"
 
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Уладальнік:  %s/%s"
+msgstr "Уладальнік:    %s/%s"
 
 #, c-format
 msgid "Links:     %d"
-msgstr "Спасылак:    %d"
+msgstr "Спасылак:      %d"
 
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Правы:       %s (%04o)"
+msgstr "Правы:         %s (%04o)"
 
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Месца:       %Xh:%Xh"
+msgstr "Месца:         %Xh:%Xh"
 
 msgid "Show free sp&ace"
 msgstr "Паказаць вол&ьнае месца"
@@ -2831,7 +2823,7 @@ msgid "&View"
 msgstr "&Прагляд"
 
 msgid "Vie&w file..."
-msgstr "Прагляд &файла..."
+msgstr " Прагляд &файла..."
 
 msgid "&Filtered view"
 msgstr "Прагляд праз &вывад каманды"
@@ -2876,7 +2868,7 @@ msgid "U&nselect group"
 msgstr "Зняць &адзнаку"
 
 msgid "&Invert selection"
-msgstr "&Звярнуць вылучэнне"
+msgstr ""
 
 msgid "E&xit"
 msgstr "Вы&хад"
@@ -2900,7 +2892,7 @@ msgid "&Compare directories"
 msgstr "&Параўнаць каталогі"
 
 msgid "C&ompare files"
-msgstr "&Параўнаць файлы"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr "&Вонкавая панэлізацыя"
@@ -2964,8 +2956,8 @@ msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] "У вас %zd адкрыты экран. Усё роўна выйсці?"
 msgstr[1] "У вас %zd адкрытых экрана. Усё роўна выйсці?"
-msgstr[2] "У вас %zd адкрытых экранў. Усё роўна выйсці?"
-msgstr[3] "У вас %zd адкрытых экранў. Усё роўна выйсці?"
+msgstr[2] "У вас %zd адкрытых экранаў. Усё роўна выйсці?"
+msgstr[3] "У вас %zd адкрытых экранаў. Усё роўна выйсці?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -2980,7 +2972,7 @@ msgid "&Left"
 msgstr "&Левая панэль"
 
 msgid "&Below"
-msgstr "&Ніжняя"
+msgstr "?Ніжняя"
 
 msgid "&Right"
 msgstr "&Правая панэль"
@@ -3012,9 +3004,6 @@ msgstr "&Заўсёды"
 msgid "A&uto save setup"
 msgstr "&Аўтазахаванне налад"
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr "Бяспечнае в&ыдаленне"
 
@@ -3037,7 +3026,7 @@ msgid "Auto m&enus"
 msgstr "Аўтаматычныя &меню"
 
 msgid "Use internal vie&w"
-msgstr "Убуд&аваны праглядчык"
+msgstr "Убуд&аваны прагляд"
 
 msgid "Use internal edi&t"
 msgstr "Убудаваны &рэдактар"
@@ -3053,6 +3042,10 @@ msgstr "Адзіно&чны націск"
 
 msgid "Esc key mode"
 msgstr "Рэжым клавішы Esc"
+
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "І&гнараваць усе прабелы"
 
 msgid "Mkdi&r autoname"
 msgstr "Аўто&імя каталога"
@@ -3109,7 +3102,7 @@ msgid "A&uto save panels setup"
 msgstr "Аўтазахаванне наладак панэлі"
 
 msgid "Simple s&wap"
-msgstr "Просты &абмен"
+msgstr "Просты а&бмен"
 
 msgid "Re&verse files only"
 msgstr "Ін&вертаваць толькі файлы"
@@ -3133,7 +3126,7 @@ msgid "Use SI si&ze units"
 msgstr "Паказа&ць у адзінках СІ"
 
 msgid "Show mi&ni-status"
-msgstr "Паказаць м&іні-статус"
+msgstr ""
 
 msgid "Panel options"
 msgstr "Наладкі панэлі"
@@ -3310,8 +3303,7 @@ msgid "Pipe close failed"
 msgstr "Збой закрыцця каналу"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr ""
-"Немагчыма выканаць гэтую каманду, знаходзячыся не ў лакальным каталогу"
+msgstr "Немагчыма выканаць гэтую каманду, знаходзячыся не ў лакальным каталогу"
 
 msgid "Find rejects after patching"
 msgstr "Знайсці карэктуры, адкінутыя камандай patch"
@@ -3332,11 +3324,11 @@ msgstr ""
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "Капіраваць каталог \"%s\" у:"
+msgstr " Капіяваць каталог \"%s\" у:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr "Перамясціць каталог \"%s\" у:"
+msgstr " Перамясціць каталог \"%s\" у:"
 
 #, c-format
 msgid ""
@@ -3396,8 +3388,9 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Файл %s у бягучым каталогу не належыць root'у цi Вам, і даступны іншым\n"
-"на запіс. Выкарыстанне такога файла непрыймальна з пункту гледжання бяспекі."
+"Файл %s у бягучым каталогу не належыць ані root'у, ані Вам,\n"
+"і даступны іншым на запіс. Выкарыстанне такога файла непрыймальна\n"
+"з пункту гледжання бяспекі."
 
 msgid "Format error on file Extensions File"
 msgstr "Памылка ў фармаце файла Пашырэнняў файлаў"
@@ -3512,8 +3505,9 @@ msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
-"Не атрымалася выканаць:\n"
-"%s\n"
+
+msgid "Home directory path is not absolute"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3521,9 +3515,6 @@ msgid ""
 "Failed while close:\n"
 "%s\n"
 msgstr ""
-"\n"
-"Памылка у час закрыцця:\n"
-"%s\n"
 
 msgid "Choose codepage"
 msgstr "Выбар кадыроўкі"
@@ -3542,7 +3533,7 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr ""
-"Немагчыма захаваць файл: %s\n"
+" Немагчыма захаваць файл: %s\n"
 "%s "
 
 msgid ""
@@ -3563,7 +3554,7 @@ msgstr "Абалонка яшчэ актыўная. Усё роўна выйсц
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "Папярэджанне: Немагчыма перайсці ў %s.\n"
+msgstr " Немагчыма перайсці ў %s.\n"
 
 msgid "Using the S-Lang library with terminfo database\n"
 msgstr "З бібліятэкай S-Lang і з базай дадзеных terminfo\n"
@@ -3581,7 +3572,7 @@ msgid "With optional subshell support\n"
 msgstr "З апцыянальнай падтрымкай унутранай каманднай абалонкі\n"
 
 msgid "With subshell support as default\n"
-msgstr "З падтрымкай унутранай каманднай абалонкі\n"
+msgstr "С падтрымкай унутранай каманднай абалонкі\n"
 
 msgid "With support for background operations\n"
 msgstr "З падтрымкай аперацый у тле\n"
@@ -3613,23 +3604,27 @@ msgstr "Віртуальная файлавая сістэма:"
 msgid "Data types:"
 msgstr "Тып дадзеных:"
 
+#, fuzzy
+msgid "Home directory:"
+msgstr "каталог"
+
 msgid "System data"
-msgstr "Сістэмныя дадзеныя"
+msgstr ""
 
 msgid "Config directory:"
-msgstr "Дырэкторыя канфігурацыі"
+msgstr ""
 
 msgid "Data directory:"
-msgstr "Дырэкторыя дадзеных:"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
 
 msgid "User data"
-msgstr "Дадзеныя карыстальніка"
+msgstr ""
 
 msgid "Cache directory:"
-msgstr "Дырэкторыя кэшаваных дадзеных"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3812,7 +3807,7 @@ msgstr "ftpfs: збой далучэння да сервера: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Чаканне паўтору ... %d (Control-G для адмены)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Памылковы тып адрасу"
@@ -3868,7 +3863,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "%s: Папярэджанне: файл %s не знойдзены\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3997,7 +3992,7 @@ msgid "vfs_info is not fs!"
 msgstr "vfs_info не fs!"
 
 msgid "You have to chdir to extract files first"
-msgstr "Папершае Вы павінны перайсці ў каталаг для вымання файлаў"
+msgstr "папершае Вы павінны перайсці ў каталаг для вымання файлаў"
 
 msgid "while iterating over blocks"
 msgstr "пры пераборы блокаў"
@@ -4092,14 +4087,6 @@ msgstr ""
 "Немагчыма адкрыць \"%s\"\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"Немагчыма атрымаць ўласцівасці \"%s\"\n"
-"%s"
-
 msgid "Cannot view: not a regular file"
 msgstr "Прагляд немагчымы: незвычайны файл"
 
@@ -4112,4 +4099,17 @@ msgstr "Пошук скончаны"
 msgid "Continue from beginning?"
 msgstr "Працягнуць з пачатку?"
 
+#~ msgid "Normal"
+#~ msgstr "Нармальны"
 
+#~ msgid "&Regular expression"
+#~ msgstr "&Сталы выраз"
+
+#~ msgid "All charsets"
+#~ msgstr "Усе кадыроўкі"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "Улiк рэ&гiстра"
+
+#~ msgid "Remove:"
+#~ msgstr "Выдаліць:"
