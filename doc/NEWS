@@ -1,3 +1,46 @@
+Version 4.8.1.1
+
+- Core
+
+    * Added new flag -X (--no-x11) to allow dont't use X11 to get the state of modifiers Alt, Ctrl, Shift (#86)
+    * Support of '~' as home dir in 'Start at:' field in 'Find File' dialog (#2694)
+    * Support of '~' as home dir in hotlists (#2747)
+    * Learning of 'Back Tab' now is possible from 'Learn keys' dialog (#2628)
+    * Optional '0x' prefix for hexadecimal search (#2705)
+
+- Editor
+
+    * Added as.syntax (#2708)
+
+- Viewer
+
+    * Added action bindings for backward search (#2105)
+
+- Misc
+
+    * Added hotkeys for all radio/check-buttons in search/replace dialogs (#2704)
+    * New file bindings:
+        - .m4v, .ts - video (#2702)
+        - djv - DjVu?? (#2645)
+    * Simplify mc.menu - remove LZMA|LZ and change p7 to 7z (#2703)
+    * Updated list of known browsers: gnome-moz-remote mozilla firefox konqueror opera (#2725)
+    * Added MC_HOME environment variable to set up home directory of MC (as part of #2738)
+
+- Fixes
+
+    * Compile failure of 4.8.1 on xBSD because "Undefined symbols: _posix_fallocate" (#2689)
+    * MC deletes the wrong file because of forced panel reload before file operation (#2736)
+    * Cannot chdir to directory if directory name contains the dollar sign (#2451)
+    * Incorrect panel size after change panel split type (#2521)
+    * Wrong total bytes counter for subdirs in copy/move dialog (#2503)
+    * Display corruption in panels after window shrink (#2684)
+    * Command line is unaccessible from tree panel (#2714)
+    * Extra confirmation before delete an empty hotlist group (#1576)
+    * Can't open an edit zero-length file from VFS in mcedit (#2710)
+    * mcedit crashes when ~/.config is a file (#2738)
+    * mcedit: reset selection after END/HOME/PgDn/PgUp (#2726)
+    * 'make check' fails on arm and alpha (-z muldefs) (#2732)
+
 Version 4.8.1
 
 - Core
