@@ -76,7 +76,14 @@ START_TEST (test_do_panel_cd_empty_mean_home)
 
     fail_unless(ret);
     cwd = vfs_path_to_str (panel->cwd_vpath);
-    fail_unless(strcmp(cwd, mc_config_get_home_dir ()) == 0);
+
+    ret = strcmp(cwd, mc_config_get_home_dir ()) == 0;
+    if (!ret)
+    {
+        printf ("cwd=%s\n", cwd);
+        printf ("mc_config_get_home_dir ()=%s\n", mc_config_get_home_dir ());
+    }
+    fail_unless(ret);
 
 
     vfs_path_free (panel->cwd_vpath);
