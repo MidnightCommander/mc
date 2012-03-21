@@ -119,7 +119,7 @@ Forza la modalità xterm. Usata quando è in funzione su terminali
 abilitati\-xterm (due modalità video e in grado di spedire sequenze
 mouse di escape).
 .TP
-.I \-X, \-\-no\-x
+.I \-X, \-\-no\-x11
 Do not use X11 to get the state of modifiers Alt, Ctrl, Shift
 .TP
 .I \-g, \-\-oldmouse

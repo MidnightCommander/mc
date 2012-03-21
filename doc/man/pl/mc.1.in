@@ -104,7 +104,7 @@ Wyświetla wersję programu.
 Wymusza włączenie trybu xterm. Używane kiedy działa się na terminalach wyposażonych
 w opcje xterm (dwa tryby ekranu i możliwość wysyłania myszą sygnałów wyjścia).
 .TP
-.I \-X, \-\-no\-x
+.I \-X, \-\-no\-x11
 Do not use X11 to get the state of modifiers Alt, Ctrl, Shift
 .TP
 .I \-g, \-\-oldmouse
