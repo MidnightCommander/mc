@@ -112,7 +112,7 @@ Muestra la versión del programa.
 Fuerza el modo xterm. Usado cuando se ejecuta en terminales con características de xterm (dos
 modos de pantalla, y pueden enviar secuencias de escape de ratón).
 .TP
-.I \-X, \-\-no\-x
+.I \-X, \-\-no\-x11
 Do not use X11 to get the state of modifiers Alt, Ctrl, Shift
 .TP
 .I \-g, \-\-oldmouse

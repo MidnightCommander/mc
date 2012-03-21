@@ -101,7 +101,7 @@ Megmutatja a program verziószámát.
 Belép xterm módba. (Két képernyős módban használható, és az egér escape
 szekvenciái is használhatóak).
 .TP
-.I \-X, \-\-no\-x
+.I \-X, \-\-no\-x11
 Do not use X11 to get the state of modifiers Alt, Ctrl, Shift
 .TP
 .I \-g, \-\-oldmouse
