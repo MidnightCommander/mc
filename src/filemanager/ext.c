@@ -636,6 +636,9 @@ regex_command (const vfs_path_t * filename_vpath, const char *action, int *move_
     int include_target_len;
     int have_type = 0;          /* Flag used by regex_check_type() */
 
+    if (filename_vpath == NULL)
+        return 0;
+
     /* Check for the special View:%d parameter */
     if (strncmp (action, "View:", 5) == 0)
     {
