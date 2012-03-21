@@ -1259,7 +1259,15 @@ hotlist_cmd (void)
         tree_chdir (the_tree, target);
     else
     {
-        char *cmd = g_strconcat ("cd ", target, (char *) NULL);
+        vfs_path_t *deprecated_vpath;
+        char *cmd, *normalized_target;
+
+        deprecated_vpath = vfs_path_from_str_flags (target, VPF_USE_DEPRECATED_PARSER);
+        normalized_target = vfs_path_to_str (deprecated_vpath);
+        cmd = g_strconcat ("cd ", normalized_target, (char *) NULL);
+        g_free (normalized_target);
+        vfs_path_free (deprecated_vpath);
+
         do_cd_command (cmd);
         g_free (cmd);
     }
@@ -1626,7 +1634,8 @@ single_dirsize_cmd (void)
         ui = compute_dir_size_create_ui ();
         p = vfs_path_from_str_flags (entry->fname, VPF_NO_CANON);
 
-        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total, TRUE) == FILE_CONT)
+        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total, TRUE) ==
+            FILE_CONT)
         {
             entry->st.st_size = (off_t) total;
             entry->f.dir_size_computed = 1;
