@@ -46,6 +46,7 @@
 
 static name_keymap_t command_names[] = {
     /* common */
+    {"InsertChar", CK_InsertChar},
     {"Enter", CK_Enter},
     {"Up", CK_Up},
     {"Down", CK_Down},
