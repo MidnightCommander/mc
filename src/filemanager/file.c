@@ -1867,7 +1867,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                     break;
                 }
             }
-            else
+            else if (!dst_exists)
             {
                 src_mode = umask (-1);
                 umask (src_mode);
