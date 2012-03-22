@@ -108,7 +108,7 @@ START_TEST (set_up_current_dir_url)
     test_subclass.flags = VFS_S_REMOTE;
 
     cd_and_check ("/test://user:pass@host.net/path", "/test://user:pass@host.net/path");
-    cd_and_check ("..", "/test://user:pass@host.net");
+    cd_and_check ("..", "/test://user:pass@host.net/");
 
     cd_and_check ("..", "/");
 

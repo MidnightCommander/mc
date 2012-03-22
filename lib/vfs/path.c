@@ -639,7 +639,10 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
             url_str = vfs_path_build_url_params_str (element, !(flags & VPF_STRIP_PASSWORD));
 
             if (*url_str != '\0')
+            {
                 g_string_append (buffer, url_str);
+                g_string_append_c (buffer, PATH_SEP);
+            }
 
             g_free (url_str);
         }

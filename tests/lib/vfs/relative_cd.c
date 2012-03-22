@@ -90,7 +90,7 @@ test_chdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (relative_cd)
+START_TEST (test_relative_cd)
 {
     vfs_path_t *vpath;
 
@@ -102,10 +102,38 @@ START_TEST (relative_cd)
     fail_if (mc_chdir(vpath) == -1);
     vfs_path_free (vpath);
 }
+END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* Relative to panel_correct_path_to_show()  */
+
+START_TEST (test_vpath_to_str_filter)
+{
+    vfs_path_t *vpath, *last_vpath;
+    char *filtered_path;
+    const vfs_path_element_t *path_element;
+
+    vpath = vfs_path_from_str ("/test1://some.host/dir");
+    path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, -1));
+    vfs_path_free (vpath);
+
+    last_vpath = vfs_path_new ();
+    last_vpath->relative = TRUE;
+
+    vfs_path_add_element (last_vpath, path_element);
+
+    filtered_path = vfs_path_to_str_flags (last_vpath, 0,
+           VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET);
+    vfs_path_free (last_vpath);
+
+    fail_unless (strcmp("test1://some.host/dir", filtered_path) == 0, "actual: %s", filtered_path);
+    g_free (filtered_path);
+
+}
 END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 main (void)
@@ -119,7 +147,8 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, relative_cd);
+    tcase_add_test (tc_core, test_relative_cd);
+    tcase_add_test (tc_core, test_vpath_to_str_filter);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
