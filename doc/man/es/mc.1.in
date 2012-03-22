@@ -5,7 +5,7 @@
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "@DATE_OF_MAN_PAGE@" "MC Versión @DISTR_VERSION@" "GNU Midnight Commander"
+.TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Versión %DISTR_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.
@@ -74,9 +74,9 @@ directorio de trabajo en el archivo indicado.  Esta opción no debe ser
 usada directamente, sino desde un guión de shell adecuado, para dejar
 como directorio activo el directorio que estaba en uso dentro de
 Midnight Commander.  Consúltese en los archivos
-.B @prefix@/share/mc/bin/mc.sh
+.B %prefix%/share/mc/bin/mc.sh
 (usuarios de bash y zsh) y
-.B @prefix@/share/mc/bin/mc.csh
+.B %prefix%/share/mc/bin/mc.csh
 (usuarios de tcsh) la manera de definir
 .B mc
 como un alias para el correspondiente guión de shell.
@@ -1367,7 +1367,7 @@ Abre el archivo
 .I ~/.config/mc/mc.ext
 en nuestro editor. El administrador puede optar por editar, en su lugar,
 el archivo de extensiones del sistema
-.IR @prefix@/share/mc/mc.ext .
+.IR %prefix%/share/mc/mc.ext .
 El formato del archivo (formato nuevo cambiado desde la versión 3.0)
 es como sigue:
 .PP
@@ -1439,7 +1439,7 @@ el archivo .mc.menu del directorio actual, pero sólo si es propiedad del
 usuario o del superusuario y no es modificable por todos.
 Si no se encuentra allí el archivo, se intenta de la misma manera con ~/.config/mc/menu,
 y si no, mc utiliza el menú por defecto para todo el sistema
-@prefix@/share/mc/mc.menu.
+%prefix%/share/mc/mc.menu.
 .PP
 El formato del menú de archivo es muy simple.  Todas las líneas, salvo
 las que empiezan con espacio o tabulación, son consideradas entradas
@@ -1817,7 +1817,7 @@ usando el color indicado por medio de la palabra clave
 .I selected.
 Si se activa el resaltado de tipos de archivos, los nombres aparecerán
 coloreados según las reglas almacenadas en el archivo
-@prefix@/share/mc/filehighlight.ini. Para más información, véase la
+%prefix%/share/mc/filehighlight.ini. Para más información, véase la
 sección sobre
 .\"LINK2"
 Resaltado de nombres\&.
@@ -1939,7 +1939,7 @@ Si la opción
 .I Usar siempre proxy
 está puesta, el programa asume que cualquier nombre de máquina
 sin puntos es accesible directamente y también consulta el archivo
-@prefix@/share/mc.no_proxy en busca de nombres de máquinas locales (o
+%prefix%/share/mc.no_proxy en busca de nombres de máquinas locales (o
 dominios completos si el nombre empieza con un punto).  En todos los
 demás casos se usará siempre el proxy de FTP indicado arriba.
 .PP
@@ -1961,7 +1961,7 @@ y puede ser impedida por algún cortafuegos.
 .SH "    Guardar Configuración"
 Al arrancar Midnight Commander se carga la información de inicio del
 archivo ~/.config/mc/ini.  Si éste no existe, se cargará la información del
-archivo de configuración genérico del sistema, @prefix@/share/mc/mc.ini.
+archivo de configuración genérico del sistema, %prefix%/share/mc/mc.ini.
 Si el archivo de configuración genérico del sistema no existe, MC utiliza
 la configuración por defecto.
 .PP
@@ -2611,7 +2611,7 @@ formateará el bloque seleccionado (sea texto, código
 o
 .B C++
 u otro). Esto está controlado por el archivo
-.B @prefix@/share/mc/edit.indent.rc
+.B %prefix%/share/mc/edit.indent.rc
 que se copia la primera vez que se usa en
 .B ~/.local/share/mc/mcedit/edit.indent.rc
 en el directorio personal.
@@ -3126,10 +3126,10 @@ en la sección
 del archivo de configuración.
 .br
 4) El archivo
-.BR @sysconfdir@/mc/skins/default.ini .
+.BR %sysconfdir%/mc/skins/default.ini .
 .br
 5) El archivo
-.BR @prefix@/share/mc/skins/default.ini .
+.BR %prefix%/share/mc/skins/default.ini .
 
 .PP
 En línea de órdenes, en la variable de entorno o el parámetro de la
@@ -3141,10 +3141,10 @@ en orden, en:
 .BR ~/.local/share/mc/skins/ .
 .br
 2)
-.BR @sysconfdir@/mc/skins/ .
+.BR %sysconfdir%/mc/skins/ .
 .br
 3)
-.BR @prefix@/share/mc/skins/ .
+.BR %prefix%/share/mc/skins/ .
 .br
 
 .PP
@@ -3437,7 +3437,7 @@ en la sección
 Skins\&.
 .\"Skins"
 .PP
-Reglas de resaltado de nombres en el archivo @prefix@/share/mc/filehighlight.ini.
+Reglas de resaltado de nombres en el archivo %prefix%/share/mc/filehighlight.ini.
 Los nombres de sección en este archivo tienen que ser iguales a los nombres
 empleados en la sección [filehighlight] del archivo de skin en uso.
 PP.
@@ -3603,7 +3603,7 @@ seleccionado en cada momento.
 Midnight Commander permite hacer ajustes a la base de datos de terminales
 del sistema sin necesidad de privilegios de superusuario. El programa
 busca definiciones de teclas en el archivo de inicialización del sistema
-.B @prefix@/share/mc/mc.lib
+.B %prefix%/share/mc/mc.lib
 o en el del usuario
 .BR ~/.config/mc/ini ,
 en la sección "terminal:nuestro\-terminal" y si no en "terminal:general".
@@ -3666,13 +3666,13 @@ Los directorios indicados a continuación pueden variar de una
 instalación a otra.  También se pueden modificar con la variable de
 entorno
 .BR MC_DATADIR ,
-que de estar definida se emplearía en vez de @prefix@/share/mc.
+que de estar definida se emplearía en vez de %prefix%/share/mc.
 .PP
-.I @prefix@/share/mc.hlp
+.I %prefix%/share/mc.hlp
 .IP
 Archivo de ayuda.
 .PP
-.I @prefix@/share/mc/mc.ext
+.I %prefix%/share/mc/mc.ext
 .IP
 Archivo de extensiones por defecto del sistema.
 .PP
@@ -3681,12 +3681,12 @@ Archivo de extensiones por defecto del sistema.
 Archivo de usuario de extensiones y configuración de visor y editor. Si
 está presente prevalece sobre el contenido de los archivos del sistema.
 .PP
-.I @prefix@/share/mc/mc.ini
+.I %prefix%/share/mc/mc.ini
 .IP
 Archivo de configuración del sistema para Midnight Commander, sólo si
 el usuario no dispone de su propio ~/.config/mc/ini.
 .PP
-.I @prefix@/share/mc/mc.lib
+.I %prefix%/share/mc/mc.lib
 .IP
 Opciones globales de Midnight Commander. Se aplican siempre a todos los
 usuarios, tengan ~/.config/mc/ini o no. Actualmente sólo se emplea para los
@@ -3700,12 +3700,12 @@ Configuración personal del usuario. Si este archivo está presente entonces
 se cargará la configuración desde aquí en lugar de desde el archivo de
 configuración del sistema.
 .PP
-.I @prefix@/share/mc/mc.hint
+.I %prefix%/share/mc/mc.hint
 .IP
 Este archivo contiene los mensajes cortos de ayuda mostrados por el
 programa.
 .PP
-.I @prefix@/share/mc/mc.menu
+.I %prefix%/share/mc/mc.menu
 .IP
 Este archivo contiene el menú de aplicaciones por defecto para el sistema.
 .PP

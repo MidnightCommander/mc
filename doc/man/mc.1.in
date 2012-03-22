@@ -1,5 +1,5 @@
 .\"TOPICS "Topics:"
-.TH MC 1 "@DATE_OF_MAN_PAGE@" "MC Version @DISTR_VERSION@" "GNU Midnight Commander"
+.TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Version %DISTR_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NAME"
 mc \- Visual shell for Unix\-like systems.
@@ -80,9 +80,9 @@ Print the last working directory to the specified file.  This option is
 not meant to be used directly.  Instead, it's used from a special shell
 script that automatically changes the current directory of the shell to
 the last directory the Midnight Commander was in.  Source the file
-.B @prefix@/share/mc/bin/mc.sh
+.B %prefix%/share/mc/bin/mc.sh
 (bash and zsh users) or
-.B @prefix@/share/mc/bin/mc.csh
+.B %prefix%/share/mc/bin/mc.csh
 (tcsh users) respectively to define
 .B mc
 as an alias to the appropriate shell script.
@@ -346,10 +346,10 @@ of config file.
 .B ~/.config/mc/mc.keymap
 .br
 5) File
-.B @sysconfdir@/mc/mc.keymap
+.B %sysconfdir%/mc/mc.keymap
 .br
 6) File
-.B @prefix@/share/mc/mc.keymap
+.B %prefix%/share/mc/mc.keymap
 .PP
 Command line option, environment variable and parameter in config file may
 contain the absolute path to the keymap\-file (with the extension \.keymap
@@ -360,10 +360,10 @@ or without it). Search of keymap\-file will occur in (to the first one found):
 .B ~/.config/mc
 .br
 2)
-.B @sysconfdir@/mc/
+.B %sysconfdir%/mc/
 .br
 3)
-.B @prefix@/share/mc/
+.B %prefix%/share/mc/
 
 .\"NODE "  Miscellaneous Keys"
 .SH "  Miscellaneous Keys"
@@ -1571,7 +1571,7 @@ file .mc.menu from the current directory is used if it exists,
 but only if it is owned by user or root and is not world\-writable.
 If no such file found, ~/.config/mc/menu is tried in the same way,
 and otherwise mc uses the default system\-wide menu
-@prefix@/share/mc/mc.menu.
+%prefix%/share/mc/mc.menu.
 .PP
 The format of the menu file is very simple. Lines that start with
 anything but space or tab are considered entries for the menu (in
@@ -2072,7 +2072,9 @@ which apply to the user running Midnight Commander are highlighted with
 the color defined by the
 .I selected
 keyword.  If the file type highlighting is enabled, file names are colored
-according to rules described in @sysconfdir@/mc/filehighlight.ini file. See
+according to rules described in
+%sysconfdir%/mc/filehighlight.ini
+file. See
 .\"LINK2"
 Filenames Highlight
 .\"Filenames Highlight"
@@ -2198,7 +2200,7 @@ FTP File System
 for examples.
 .PP
 If this option is set, the program will do two things: consult the
-@prefix@/lib/mc/mc.no_proxy file for lines containing host names that
+%prefix%/lib/mc/mc.no_proxy file for lines containing host names that
 are local (if the host name starts with a dot, it is assumed to be a
 domain) and to assume that any hostnames without dots in their names are
 directly accessible.  All other hosts will be accessed through the
@@ -2220,7 +2222,7 @@ firewalls.
 At startup the Midnight Commander will try to load initialization
 information from the ~/.config/mc/ini file. If this file
 doesn't exist, it will load the information from the system\-wide
-configuration file, located in @prefix@/share/mc/mc.ini. If the 
+configuration file, located in %prefix%/share/mc/mc.ini. If the 
 system\-wide configuration file doesn't exist, MC uses the default settings.
 .PP
 The
@@ -2989,7 +2991,7 @@ or
 .B C++
 code or another). This is controlled by the
 file
-.B @prefix@/share/mc/edit.indent.rc
+.B %prefix%/share/mc/edit.indent.rc
 which is copied to
 .B ~/.local/share/mc/mcedit/edit.indent.rc
 in your home directory the first time you use it.
@@ -3555,10 +3557,10 @@ in section
 in config file.
 .br
 4) File
-.B @sysconfdir@/mc/skins/default.ini
+.B %sysconfdir%/mc/skins/default.ini
 .br
 5) File
-.B @prefix@/share/mc/skins/default.ini
+.B %prefix%/share/mc/skins/default.ini
 
 .PP
 Command line option, environment variable and parameter in config file may
@@ -3572,7 +3574,7 @@ or without it). Search of skin\-file will occur in (to the first one found):
 .B @sysconfdir@/mc/skins/
 .br
 3)
-.B @prefix@/share/mc/skins/
+.B %prefix%/share/mc/skins/
 .br
 
 .PP
@@ -3874,7 +3876,7 @@ Skins
 .\"Skins"
 section.
 .PP
-Rules of filenames highlight are placed in @prefix@/share/mc/filehighlight.ini file
+Rules of filenames highlight are placed in %prefix%/share/mc/filehighlight.ini file
 (~/.config/mc/filehighlight.ini).
 Name of section in this file must be equal to parameters names in
 [filehighlight] section (in current skin\-file).
@@ -4103,13 +4105,13 @@ Full paths below may vary between installations.  They are also affected
 by the
 .BR MC_DATADIR
 environment variable. If it's set, its value is used instead of
-@prefix@/share/mc in the paths below.
+%prefix%/share/mc in the paths below.
 .PP
-.I @prefix@/share/mc/mc.hlp
+.I %prefix%/share/mc/mc.hlp
 .IP
 The help file for the program.
 .PP
-.I @prefix@/share/mc/mc.ext
+.I %prefix%/share/mc/mc.ext
 .IP
 The default system\-wide extensions file.
 .PP
@@ -4118,12 +4120,12 @@ The default system\-wide extensions file.
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
 .PP
-.I @prefix@/share/mc/mc.ini
+.I %prefix%/share/mc/mc.ini
 .IP
 The default system\-wide setup for the Midnight Commander, used only if
 the user doesn't have his own ~/.config/mc/ini file.
 .PP
-.I @prefix@/share/mc/mc.lib
+.I %prefix%/share/mc/mc.lib
 .IP
 Global settings for the Midnight Commander.  Settings in this file
 affect all users, whether they have ~/.config/mc/ini or not.  Currently, only
@@ -4137,11 +4139,11 @@ are loaded from mc.lib.
 User's own setup. If this file is present then the setup is loaded
 from here instead of the system\-wide startup file.
 .PP
-.I @prefix@/share/mc/mc.hint
+.I %prefix%/share/mc/mc.hint
 .IP
 This file contains the hints displayed by the program.
 .PP
-.I @prefix@/share/mc/mc.menu
+.I %prefix%/share/mc/mc.menu
 .IP
 This file contains the default system\-wide applications menu.
 .PP

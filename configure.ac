@@ -590,13 +590,13 @@ misc/syntax/Makefile
 
 doc/Makefile
 doc/hints/Makefile
-doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/Makefile
-doc/man/es/mc.1 doc/man/es/Makefile
-doc/man/hu/mc.1 doc/man/hu/Makefile
-doc/man/it/mc.1 doc/man/it/Makefile
-doc/man/pl/mc.1 doc/man/pl/Makefile
-doc/man/ru/mc.1 doc/man/ru/Makefile
-doc/man/sr/mc.1 doc/man/sr/Makefile
+doc/man/Makefile
+doc/man/es/Makefile
+doc/man/hu/Makefile
+doc/man/it/Makefile
+doc/man/pl/Makefile
+doc/man/ru/Makefile
+doc/man/sr/Makefile
 
 doc/hlp/Makefile
 doc/hlp/es/Makefile
