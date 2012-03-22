@@ -2121,7 +2121,6 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
                 edit_error_dialog (_("Error"), errmsg);
                 g_free (errmsg);
                 ins_len = -1;
-                goto ret;
             }
         }
         else
@@ -2132,7 +2131,6 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             edit_error_dialog (_("Error"), errmsg);
             g_free (errmsg);
             ins_len = -1;
-            goto ret;
         }
         g_free (p);
     }
@@ -2145,10 +2143,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
 
         file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
         if (file == -1)
-        {
-            ins_len = -1;
-            goto ret;
-        }
+            return -1;
 
         buf = g_malloc0 (TEMP_BUF_LEN);
         blocklen = mc_read (file, buf, sizeof (VERTICAL_MAGIC));
@@ -2202,8 +2197,6 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             ins_len = 0;
     }
 
-  ret:
-    g_free (p);
     return ins_len;
 }
 
