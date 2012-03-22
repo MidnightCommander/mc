@@ -658,34 +658,36 @@ mc_chdir (const vfs_path_t * vpath)
     vfsid old_vfsid;
     int result;
     const vfs_path_element_t *path_element;
-    vfs_path_t *abcolute_vpath;
+    vfs_path_t *cd_vpath;
 
     if (vpath == NULL)
         return -1;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
+    if (vpath->relative)
+        cd_vpath = vfs_path_to_absolute (vpath);
+    else
+        cd_vpath = vfs_path_clone (vpath);
+
+    path_element = vfs_path_get_by_index (cd_vpath, -1);
 
     if (!vfs_path_element_valid (path_element) || path_element->class->chdir == NULL)
     {
-        return -1;
+        goto error_end;
     }
 
-    abcolute_vpath = vfs_path_to_absolute (vpath);
-
-    result = (*path_element->class->chdir) (abcolute_vpath);
+    result = (*path_element->class->chdir) (cd_vpath);
 
     if (result == -1)
     {
-        vfs_path_free (abcolute_vpath);
         errno = vfs_ferrno (path_element->class);
-        return -1;
+        goto error_end;
     }
 
     old_vfsid = vfs_getid (vfs_get_raw_current_dir ());
     old_vfs = current_vfs;
 
     /* Actually change directory */
-    vfs_set_raw_current_dir (abcolute_vpath);
+    vfs_set_raw_current_dir (cd_vpath);
 
     current_vfs = path_element->class;
 
@@ -702,6 +704,10 @@ mc_chdir (const vfs_path_t * vpath)
             *p = 0;
     }
     return 0;
+
+  error_end:
+    vfs_path_free (cd_vpath);
+    return -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
