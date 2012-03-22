@@ -951,19 +951,23 @@ mc_maybe_editor_or_viewer (void)
 #ifdef USE_INTERNAL_EDIT
     case MC_RUN_EDITOR:
         {
-            vfs_path_t *param_vpath;
+            vfs_path_t *vpath = NULL;
 
-            param_vpath = vfs_path_from_str (mc_run_param0);
-            ret = edit_file (param_vpath, mc_args__edit_start_line);
-            vfs_path_free (param_vpath);
+            if (mc_run_param0 != NULL && *mc_run_param0 != '\0')
+                vpath = vfs_path_from_str (mc_run_param0);
+
+            ret = edit_file (vpath, mc_args__edit_start_line);
+            vfs_path_free (vpath);
         }
         break;
 #endif /* USE_INTERNAL_EDIT */
     case MC_RUN_VIEWER:
         {
-            vfs_path_t *vpath;
+            vfs_path_t *vpath = NULL;
 
-            vpath = prepend_cwd_on_local (mc_run_param0);
+            if (mc_run_param0 != NULL && *mc_run_param0 != '\0')
+                vpath = prepend_cwd_on_local (mc_run_param0);
+
             view_file (vpath, 0, 1);
             vfs_path_free (vpath);
             ret = 1;
