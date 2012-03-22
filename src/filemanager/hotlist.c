@@ -1712,7 +1712,6 @@ add2hotlist_cmd (void)
     }
     add2hotlist (label, label_string, HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
     hotlist_state.modified = 1;
-    g_free (label_string);
 }
 
 /* --------------------------------------------------------------------------------------------- */
