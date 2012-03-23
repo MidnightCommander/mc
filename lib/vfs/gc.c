@@ -182,7 +182,7 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
     vfsid nvfsid;
 
     ev_vfs_stamp_create_t event_data = { vclass, id, FALSE };
-    vfs_path_t *vpath;
+    const vfs_path_t *vpath;
     const vfs_path_element_t *path_element;
 
     /* There are three directories we have to take care of: current_dir,
