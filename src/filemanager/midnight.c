@@ -608,10 +608,16 @@ create_panels (void)
     /* The other panel */
     if (mc_run_param1 != NULL)
     {
-        const char *cd_dir = (original_dir != NULL) ? original_dir : mc_run_param1;
         vfs_path_t *vpath;
 
-        vpath = vfs_path_from_str (cd_dir);
+        if (original_dir != NULL)
+        {
+            vpath = vfs_path_from_str (original_dir);
+            mc_chdir (vpath);
+            vfs_path_free (vpath);
+        }
+
+        vpath = vfs_path_from_str (mc_run_param1);
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
