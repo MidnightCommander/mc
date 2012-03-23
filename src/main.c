@@ -315,7 +315,7 @@ do_load_prompt (void)
         return ret;
 
     /* Don't actually change the prompt if it's invisible */
-    if (((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
+    if (top_dlg != NULL && ((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
     {
         setup_cmdline ();
 
@@ -408,11 +408,11 @@ main (int argc, char *argv[])
 
     if (!mc_args_parse (&argc, &argv, "mc", &error))
     {
-  startup_exit_falure:
+      startup_exit_falure:
         fprintf (stderr, _("Failed to run:\n%s\n"), error->message);
         g_error_free (error);
         g_free (shell);
-  startup_exit_ok:
+      startup_exit_ok:
         str_uninit_strings ();
         return exit_code;
     }
@@ -546,7 +546,7 @@ main (int argc, char *argv[])
     if (mc_global.midnight_shutdown)
         exit_code = EXIT_SUCCESS;
     else
-        exit_code = do_nc () ? EXIT_SUCCESS : EXIT_FAILURE;
+        exit_code = do_nc ()? EXIT_SUCCESS : EXIT_FAILURE;
 
     /* Save the tree store */
     (void) tree_store_save ();
