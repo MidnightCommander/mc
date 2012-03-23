@@ -1488,6 +1488,15 @@ edit_save_as_cmd (WEdit * edit)
             if (vfs_path_cmp (edit->filename_vpath, exp_vpath) != 0)
             {
                 int file;
+                struct stat sb;
+
+                if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
+                {
+                    edit_error_dialog (_("Save as"),
+                                       get_sys_error (_
+                                                      ("Cannot save: destination is not a regular file")));
+                    goto ret;
+                }
 
                 different_filename = 1;
                 file = mc_open (exp_vpath, O_RDONLY | O_BINARY);
