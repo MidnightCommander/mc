@@ -570,7 +570,7 @@ create_panels (void)
     int current_index;
     int other_index;
     panel_view_mode_t current_mode, other_mode;
-    char *original_dir = NULL;
+    vfs_path_t *original_dir = NULL;
 
     if (boot_current_is_left)
     {
@@ -597,7 +597,7 @@ create_panels (void)
              * since we may not be able to chdir to the proper
              * second directory later
              */
-            original_dir = vfs_get_current_dir ();
+            original_dir = vfs_path_clone (vfs_get_raw_current_dir ());
         }
         vpath = vfs_path_from_str (mc_run_param0);
         mc_chdir (vpath);
@@ -611,17 +611,14 @@ create_panels (void)
         vfs_path_t *vpath;
 
         if (original_dir != NULL)
-        {
-            vpath = vfs_path_from_str (original_dir);
-            mc_chdir (vpath);
-            vfs_path_free (vpath);
-        }
+            mc_chdir (original_dir);
 
         vpath = vfs_path_from_str (mc_run_param1);
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
-    g_free (original_dir);
+    vfs_path_free (original_dir);
+
     set_display_type (other_index, other_mode);
 
     if (startup_left_mode == view_listing)
