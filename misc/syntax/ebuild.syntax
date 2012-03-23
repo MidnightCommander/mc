@@ -36,6 +36,7 @@ context default
     keyword whole PDEPEND brightcyan
     keyword whole PROVIDE brightcyan
     keyword whole RDEPEND brightcyan
+    keyword whole REQUIRED_USE brightcyan
     keyword whole RESTRICT brightcyan
     keyword whole S brightcyan
     keyword whole SITEFILE brightcyan
@@ -145,6 +146,10 @@ context default
     keyword whole mercurial_src_unpack yellow
     #svn
     keyword whole subversion_src_unpack yellow
+
+    #bashism (builtin extended 'test')
+    keyword whole [[ brightcyan
+    keyword whole ]] brightcyan
 
 ####################
 # here starts original sh.syntax (with core commands only)
