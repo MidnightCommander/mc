@@ -838,17 +838,22 @@ vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 vfs_path_element_t *
 vfs_path_element_clone (const vfs_path_element_t * element)
 {
-    vfs_path_element_t *new_element = g_new0 (vfs_path_element_t, 1);
-    memcpy (new_element, element, sizeof (vfs_path_element_t));
+    vfs_path_element_t *new_element = g_new (vfs_path_element_t, 1);
 
     new_element->user = g_strdup (element->user);
     new_element->password = g_strdup (element->password);
     new_element->host = g_strdup (element->host);
+    new_element->ipv6 = element->ipv6;
+    new_element->port = element->port;
     new_element->path = g_strdup (element->path);
+    new_element->class = element->class;
     new_element->encoding = g_strdup (element->encoding);
+    new_element->vfs_prefix = g_strdup (element->vfs_prefix);
     if (vfs_path_element_need_cleanup_converter (element) && new_element->encoding != NULL)
         new_element->dir.converter = str_crt_conv_from (new_element->encoding);
-    new_element->vfs_prefix = g_strdup (element->vfs_prefix);
+    else
+        new_element->dir.converter = element->dir.converter;
+    new_element->dir.info = element->dir.info;
 
     return new_element;
 }
