@@ -46,8 +46,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define RESIZABLE_MENUBAR 0
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -871,24 +869,12 @@ menubar_arrange (WMenuBar * menubar)
     if (menubar->menu == NULL)
         return;
 
-#ifndef RESIZABLE_MENUBAR
-    gap = 3;
-
-    for (i = menubar->menu; i != NULL; i = g_list_next (i))
-    {
-        Menu *menu = i->data;
-        int len = hotkey_width (menu->text) + 2;
-
-        menu->start_x = start_x;
-        start_x += len + gap;
-    }
-#else /* RESIZABLE_MENUBAR */
     gap = menubar->widget.cols - 2;
 
     /* First, calculate gap between items... */
     for (i = menubar->menu; i != NULL; i = g_list_next (i))
     {
-        Menu *menu = i->data;
+        Menu *menu = (Menu *) i->data;
         /* preserve length here, to be used below */
         menu->start_x = hotkey_width (menu->text) + 2;
         gap -= menu->start_x;
@@ -904,17 +890,18 @@ menubar_arrange (WMenuBar * menubar)
         /* We are out of luck - window is too narrow... */
         gap = 1;
     }
+    else if (gap >= 3)
+        gap = 3;
 
     /* ...and now fix start positions of menubar items */
     for (i = menubar->menu; i != NULL; i = g_list_next (i))
     {
-        Menu *menu = i->data;
+        Menu *menu = (Menu *) i->data;
         int len = menu->start_x;
 
         menu->start_x = start_x;
         start_x += len + gap;
     }
-#endif /* RESIZABLE_MENUBAR */
 }
 
 /* --------------------------------------------------------------------------------------------- */
