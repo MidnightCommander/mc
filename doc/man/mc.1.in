@@ -2608,17 +2608,16 @@ determines whether to preserve the permissions, timestamps and (if you
 are root) the ownership of the original files.  If this option is not
 set, the current value of the umask will be respected.
 .PP
-.B Use shell patterns on
+.B Use shell patterns
 .PP
-When the shell patterns option is on you can use the '*' and '?'
-wildcards in the source mask.  They work like they do in the shell.  In
-the target mask only the '*' and '\\<digit>' wildcards are allowed.  The
-first '*' wildcard in the target mask corresponds to the first wildcard
-group in the source mask, the second '*' corresponds to the second group
-and so on.  The '\\1' wildcard corresponds to the first wildcard group
-in the source mask, the '\\2' wildcard corresponds to the second group
-and so on all the way up to '\\9'.  The '\\0' wildcard is the whole
-filename of the source file.
+When this option is on you can use the '*' and '?' wildcards in the source
+mask. They work like they do in the shell. In the target mask only the '*'
+and '\\<digit>' wildcards are allowed. The first '*' wildcard in the target
+mask corresponds to the first wildcard group in the source mask,
+the second '*' corresponds to the second group and so on.  The '\\1' wildcard
+corresponds to the first wildcard group in the source mask, the '\\2' wildcard
+corresponds to the second group and so on all the way up to '\\9'.
+The '\\0' wildcard is the whole filename of the source file.
 .PP
 Two examples:
 .PP
@@ -2659,9 +2658,12 @@ next '\\E' or next '\\U', '\\L' or the end of the file name.
 .PP
 The '\\u' and '\\l' are stronger than '\\U' and '\\L'.
 .PP
-For example, if the source mask is '*' (shell patterns on) or '^\\(.*\\)$'
-(shell patterns off) and the target mask is '\\L\\u*' the file names
-will be converted to have initial upper case and otherwise lower case.
+For example, if the source mask is '*' (
+.I Use shell patterns
+on) or '^\\(.*\\)$' (
+.I Use shell patterns
+off) and the target mask is '\\L\\u*' the file names will be converted
+to have initial upper case and otherwise lower case.
 .PP
 You can also use '\\' as a quote character. For example, '\\\\' is
 a backslash and '\\*' is an asterisk.
