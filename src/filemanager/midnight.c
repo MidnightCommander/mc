@@ -1511,24 +1511,25 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         return MSG_HANDLED;
 
     case DLG_UNHANDLED_KEY:
-        if (command_prompt)
         {
-            cb_ret_t v;
+            cb_ret_t v = MSG_NOT_HANDLED;
 
-            v = send_message ((Widget *) cmdline, WIDGET_KEY, parm);
-            if (v == MSG_HANDLED)
-                return MSG_HANDLED;
+            if (ctl_x_map_enabled)
+            {
+                ctl_x_map_enabled = FALSE;
+                command = keybind_lookup_keymap_command (main_x_map, parm);
+            }
+            else
+                command = keybind_lookup_keymap_command (main_map, parm);
+
+            if (command != CK_IgnoreKey)
+                v = midnight_execute_cmd (NULL, command);
+
+            if (v == MSG_NOT_HANDLED && command_prompt)
+                v = send_message ((Widget *) cmdline, WIDGET_KEY, parm);
+
+            return v;
         }
-
-        if (ctl_x_map_enabled)
-        {
-            ctl_x_map_enabled = FALSE;
-            command = keybind_lookup_keymap_command (main_x_map, parm);
-        }
-        else
-            command = keybind_lookup_keymap_command (main_map, parm);
-
-        return (command == CK_IgnoreKey) ? MSG_NOT_HANDLED : midnight_execute_cmd (NULL, command);
 
     case DLG_POST_KEY:
         if (!the_menubar->is_active)
