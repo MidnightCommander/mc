@@ -16,6 +16,7 @@ TESTS = \
 	path_manipulations \
 	path_recode \
 	path_serialize \
+	relative_cd \
 	tempdir \
 	vfs_parse_ls_lga \
 	vfs_path_string_convert \
@@ -45,6 +46,9 @@ path_recode_SOURCES = \
 
 path_serialize_SOURCES = \
 	path_serialize.c
+
+relative_cd_SOURCES = \
+	relative_cd.c
 
 tempdir_SOURCES = \
 	tempdir.c
