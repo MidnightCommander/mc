@@ -330,7 +330,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
         lnk->dev = dev;
         lnk->src_vpath = vfs_path_clone (src_vpath);
         lnk->dst_vpath = vfs_path_clone (dst_vpath);
-        linklist  = g_slist_prepend (linklist, lnk);
+        linklist = g_slist_prepend (linklist, lnk);
     }
 
     return FALSE;
@@ -1867,7 +1867,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                     break;
                 }
             }
-            else
+            else if (!dst_exists)
             {
                 src_mode = umask (-1);
                 umask (src_mode);
