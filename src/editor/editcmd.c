@@ -1490,6 +1490,18 @@ edit_save_as_cmd (WEdit * edit)
             if (strcmp (edit->filename, exp))
             {
                 int file;
+                struct stat sb;
+
+                if (mc_stat (exp, &sb) == 0 && !S_ISREG (sb.st_mode))
+                {
+                    edit_error_dialog (_("Save as"),
+                                       get_sys_error (_
+                                                      ("Cannot save: destination is not a regular file")));
+                    g_free (exp);
+                    edit->force |= REDRAW_COMPLETELY;
+                    return 0;
+                }
+
                 different_filename = 1;
                 file = mc_open (exp, O_RDONLY | O_BINARY);
                 if (file != -1)
