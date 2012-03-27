@@ -501,11 +501,11 @@ help_show (Dlg_head * h, const char *paint_start)
                 break;
             case CHAR_LINK_POINTER:
                 painting = FALSE;
-                end_link_area (col - 1, line);
                 break;
             case CHAR_LINK_END:
                 painting = TRUE;
                 help_print_word (h, word, &col, &line, FALSE);
+                end_link_area (col - 1, line);
                 tty_setcolor (HELP_NORMAL_COLOR);
                 break;
             case CHAR_ALTERNATE:
