@@ -67,6 +67,7 @@ static const char *str_8bit_encodings[] = {
 
 /* terminal encoding */
 static char *codeset = NULL;
+static char *term_encoding = NULL;
 /* function for encoding specific operations */
 static struct str_class used_class;
 
@@ -324,7 +325,16 @@ str_translate_char (GIConv conv, const char *keys, size_t ch_size, char *output,
 const char *
 str_detect_termencoding (void)
 {
-    return (nl_langinfo (CODESET));
+    if (term_encoding == NULL)
+    {
+        /* On Linux, nl_langinfo (CODESET) returns upper case UTF-8 whether the LANG is set
+           to utf-8 or UTF-8.
+           On Mac OS X, it returns the same case as the LANG input.
+           So let tranform result of nl_langinfo (CODESET) to upper case  unconditionally. */
+        term_encoding = g_ascii_strup (nl_langinfo (CODESET), -1);
+    }
+
+    return term_encoding;
 }
 
 static int
@@ -368,7 +378,7 @@ str_isutf8 (const char *codeset_name)
 void
 str_init_strings (const char *termenc)
 {
-    codeset = g_strdup ((termenc != NULL) ? termenc : str_detect_termencoding ());
+    codeset = termenc != NULL ? g_ascii_strup (termenc, -1) : g_strdup (str_detect_termencoding ());
 
     str_cnv_not_convert = g_iconv_open (codeset, codeset);
     if (str_cnv_not_convert == INVALID_CONV)
@@ -383,7 +393,7 @@ str_init_strings (const char *termenc)
         if (str_cnv_not_convert == INVALID_CONV)
         {
             g_free (codeset);
-            codeset = g_strdup ("ascii");
+            codeset = g_strdup ("ASCII");
             str_cnv_not_convert = g_iconv_open (codeset, codeset);
         }
     }
@@ -399,6 +409,7 @@ str_uninit_strings (void)
 {
     if (str_cnv_not_convert != INVALID_CONV)
         g_iconv_close (str_cnv_not_convert);
+    g_free (term_encoding);
     g_free (codeset);
 }
 
