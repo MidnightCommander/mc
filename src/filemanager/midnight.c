@@ -1014,6 +1014,7 @@ show_editor_history_list (void)
     GList *file_list = NULL;
     char *s;
     WPanel *panel = current_panel;
+    int act;
 
     /* open file with positions */
     fn = mc_config_get_full_path (MC_FILEPOS_FILE);
@@ -1035,15 +1036,37 @@ show_editor_history_list (void)
     fclose (f);
 
     file_list = g_list_last (file_list);
-    s = history_show (&file_list, WIDGET (panel));
+    s = history_show (&file_list, WIDGET (panel), 0, &act);
 
     if (s != NULL)
     {
         vfs_path_t *s_vpath;
 
-        s_vpath = vfs_path_from_str (s);
+        switch (act)
+        {
+        case CK_Edit:
+            s_vpath = vfs_path_from_str (s);
+            edit_file_at_line (s_vpath, use_internal_edit, 0);
+            break;
+
+        case CK_View:
+            s_vpath = vfs_path_from_str (s);
+            view_file (s_vpath, use_internal_view, 0);
+            break;
+
+        default:
+            {
+                char *d;
+
+                d = g_path_get_dirname (s);
+                s_vpath = vfs_path_from_str (d);
+                do_cd (s_vpath, cd_exact);
+                try_to_select (current_panel, s);
+                g_free (d);
+            }
+        }
+
         g_free (s);
-        do_edit_at_line (s_vpath, use_internal_edit, 0);
         vfs_path_free (s_vpath);
     }
 

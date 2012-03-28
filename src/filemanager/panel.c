@@ -3355,7 +3355,7 @@ directory_history_list (WPanel * panel)
 
     pos = g_list_position (panel->dir_history_current, panel->dir_history);
 
-    s = history_show (&panel->dir_history, WIDGET (panel), pos);
+    s = history_show (&panel->dir_history, WIDGET (panel), pos, NULL);
     if (s != NULL)
     {
         vfs_path_t *s_vpath;

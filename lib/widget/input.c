@@ -176,7 +176,7 @@ do_show_hist (WInput * in)
     len = get_history_length (in->history.list);
 
     r = history_show (&in->history.list, WIDGET (in),
-                      g_list_position (in->history.list, in->history.list));
+                      g_list_position (in->history.list, in->history.list), NULL);
     if (r != NULL)
     {
         input_assign_text (in, r);
