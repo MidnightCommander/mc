@@ -179,6 +179,9 @@ tty_draw_box (int y, int x, int ys, int xs, gboolean single)
 {
     int y2, x2;
 
+    if (ys <= 0 || xs <= 0)
+        return;
+
     ys--;
     xs--;
 
