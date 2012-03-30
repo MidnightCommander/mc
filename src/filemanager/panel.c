@@ -3725,10 +3725,15 @@ do_try_to_select (WPanel * panel, const char *name)
     }
 
     /* We only want the last component of the directory,
-     * and from this only the name without suffix. */
-    subdir = vfs_strip_suffix_from_filename (x_basename (name));
+     * and from this only the name without suffix.
+     * Cut prefix if the panel is not panelized */
 
-    /* Search that subdirectory, if found select it */
+    if (panel->is_panelized)
+        subdir = vfs_strip_suffix_from_filename (name);
+    else
+        subdir = vfs_strip_suffix_from_filename (x_basename (name));
+
+    /* Search that subdir or filename without prefix (if not panelized panel), select it if found */
     for (i = 0; i < panel->count; i++)
     {
         if (strcmp (subdir, panel->dir.list[i].fname) == 0)
