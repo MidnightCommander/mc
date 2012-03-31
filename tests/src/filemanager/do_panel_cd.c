@@ -59,6 +59,7 @@ teardown (void)
 START_TEST (test_do_panel_cd_empty_mean_home)
 {
     char *cwd;
+    char *home_wd;
     struct WPanel *panel;
     gboolean ret;
     vfs_path_t *empty_path;
@@ -71,21 +72,25 @@ START_TEST (test_do_panel_cd_empty_mean_home)
     panel->sort_info.sort_field = g_new0(panel_field_t,1);
 
     empty_path = vfs_path_from_str (mc_config_get_home_dir());
+
+    /*
+     * normalize path to handle HOME with trailing slashes:
+     *     HOME=/home/slyfox///////// ./do_panel_cd
+     */
+    home_wd = vfs_path_to_str (empty_path);
     ret = do_panel_cd (panel, empty_path, cd_parse_command);
     vfs_path_free (empty_path);
 
     fail_unless(ret);
     cwd = vfs_path_to_str (panel->cwd_vpath);
 
-    ret = strcmp(cwd, mc_config_get_home_dir ()) == 0;
-    if (!ret)
-    {
-        printf ("cwd=%s\n", cwd);
-        printf ("mc_config_get_home_dir ()=%s\n", mc_config_get_home_dir ());
-    }
-    fail_unless(ret);
+    printf ("mc_config_get_home_dir ()=%s\n", mc_config_get_home_dir ());
+    printf ("cwd=%s\n", cwd);
+    printf ("home_wd=%s\n", home_wd);
+    fail_unless(strcmp(cwd, home_wd) == 0);
 
-
+    g_free (cwd);
+    g_free (home_wd);
     vfs_path_free (panel->cwd_vpath);
     vfs_path_free (panel->lwd_vpath);
     g_free ((gpointer) panel->sort_info.sort_field);
