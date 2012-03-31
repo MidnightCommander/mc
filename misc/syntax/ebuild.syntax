@@ -241,6 +241,8 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole mv cyan
     keyword whole perl cyan
     keyword whole pod2man cyan
+    keyword whole popd cyan
+    keyword whole pushd cyan
     keyword whole rm cyan
     keyword whole sed cyan
     keyword whole sh cyan
