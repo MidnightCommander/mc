@@ -140,8 +140,7 @@ mcview_display_status (mcview_t * view)
         return;
 
     tty_setcolor (STATUSBAR_COLOR);
-    widget_move (view, top, left);
-    tty_draw_hline (top, left, ' ', width);
+    tty_draw_hline (view->widget.y + top, view->widget.x + left, ' ', width);
 
     file_label =
         view->filename_vpath != NULL ?
