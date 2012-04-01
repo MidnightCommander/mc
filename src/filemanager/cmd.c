@@ -1329,6 +1329,10 @@ compare_dirs_cmd (void)
 void
 diff_view_cmd (void)
 {
+    /* both panels must be in the list mode */
+    if (get_current_type () != view_listing || get_other_type () != view_listing)
+        return;
+
     dview_diff_cmd ();
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
