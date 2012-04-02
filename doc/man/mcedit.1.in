@@ -1,4 +1,4 @@
-.TH MCEDIT 1 "@DATE_OF_MAN_PAGE@" "MC Version @DISTR_VERSION@" "GNU Midnight Commander"
+.TH MCEDIT 1 "%DATE_OF_MAN_PAGE%" "MC Version %DISTR_VERSION%" "GNU Midnight Commander"
 .SH NAME
 mcedit \- Internal file editor of GNU Midnight Commander.
 .SH USAGE
@@ -240,7 +240,7 @@ supports syntax highlighting.  This means that keywords and contexts
 colors.  The following section explains the format of the file
 .BR ~/.config/mc/mcedit/Syntax .
 If this file is missing, system\-wide
-.B @prefix@/share/mc/syntax/Syntax
+.B %prefix%/share/mc/syntax/Syntax
 is used.
 The file
 .B ~/.config/mc/mcedit/Syntax
@@ -622,21 +622,21 @@ binary files, you should set
 to 7 bits in the Midnight Commander options menu to keep the spacing
 clean.
 .SH FILES
-.I @prefix@/share/mc/mc.hlp
+.I %prefix%/share/mc/mc.hlp
 .IP
 The help file for the program.
 .PP
-.I @prefix@/share/mc/mc.ini
+.I %prefix%/share/mc/mc.ini
 .IP
 The default system\-wide setup for GNU Midnight Commander, used only if
 the user's own ~/.config/mc/ini file is missing.
 .PP
-.I @prefix@/share/mc/mc.lib
+.I %prefix%/share/mc/mc.lib
 .IP
 Global settings for the Midnight Commander.  Settings in this file
 affect all users, whether they have ~/.config/mc/ini or not.
 .PP
-.I @prefix@/share/mc/syntax/*
+.I %prefix%/share/mc/syntax/*
 .IP
 The default system\-wide syntax files for mcedit, used only if
 the corresponding user's own ~/.local/share/mc/mcedit/ file is missing.
