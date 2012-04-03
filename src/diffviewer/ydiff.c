@@ -42,11 +42,12 @@
 #include "lib/vfs/vfs.h"        /* mc_opendir, mc_readdir, mc_closedir, */
 #include "lib/util.h"
 #include "lib/widget.h"
+#include "lib/strutil.h"
 #include "lib/charsets.h"
 #include "lib/event.h"          /* mc_event_raise() */
 
-#include "src/filemanager/cmd.h"
-#include "src/filemanager/midnight.h"   /* Needed for current_panel and other_panel */
+#include "src/filemanager/cmd.h"        /* do_edit_at_line(), view_other_cmd() */
+#include "src/filemanager/panel.h"
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
 #include "src/keybind-defaults.h"
@@ -3377,34 +3378,96 @@ do \
 } \
 while (0)
 
-void
-dview_diff_cmd (void)
+int
+dview_diff_cmd (const void *f0, const void *f1)
 {
     int rv = 0;
     vfs_path_t *file0 = NULL;
     vfs_path_t *file1 = NULL;
-    int is_dir0 = 0;
-    int is_dir1 = 0;
+    gboolean is_dir0 = FALSE;
+    gboolean is_dir1 = FALSE;
 
-    if (mc_global.mc_run_mode == MC_RUN_FULL)
+    switch (mc_global.mc_run_mode)
     {
-        const WPanel *panel0 = current_panel;
-        const WPanel *panel1 = other_panel;
-        if (get_current_index ())
+    case MC_RUN_FULL:
         {
-            panel0 = other_panel;
-            panel1 = current_panel;
+            /* run from panels */
+            const WPanel *panel0 = (const WPanel *) f0;
+            const WPanel *panel1 = (const WPanel *) f1;
+
+            file0 = vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname, NULL);
+            is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
+            if (is_dir0)
+            {
+                message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
+                         path_trunc (selection (panel0)->fname, 30));
+                goto ret;
+            }
+
+            file1 = vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname, NULL);
+            is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
+            if (is_dir1)
+            {
+                message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
+                         path_trunc (selection (panel1)->fname, 30));
+                goto ret;
+            }
+            break;
         }
-        file0 = vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname, NULL);
-        file1 = vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname, NULL);
-        is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
-        is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
+
+    case MC_RUN_DIFFVIEWER:
+        {
+            /* run from command line */
+            const char *p0 = (const char *) f0;
+            const char *p1 = (const char *) f1;
+            struct stat st;
+
+            file0 = vfs_path_from_str (p0);
+            if (mc_stat (file0, &st) == 0)
+            {
+                is_dir0 = S_ISDIR (st.st_mode);
+                if (is_dir0)
+                {
+                    message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"), path_trunc (p0, 30));
+                    goto ret;
+                }
+            }
+            else
+            {
+                message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
+                         path_trunc (p0, 30), unix_error_string (errno));
+                goto ret;
+            }
+
+            file1 = vfs_path_from_str (p1);
+            if (mc_stat (file1, &st) == 0)
+            {
+                is_dir1 = S_ISDIR (st.st_mode);
+                if (is_dir1)
+                {
+                    message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"), path_trunc (p1, 30));
+                    goto ret;
+                }
+            }
+            else
+            {
+                message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
+                         path_trunc (p1, 30), unix_error_string (errno));
+                goto ret;
+            }
+            break;
+        }
+
+    default:
+        /* this should not happaned */
+        message (D_ERROR, MSG_ERROR, _("Diff viewer: invalid mode"));
+        return 0;
     }
 
     if (rv == 0)
     {
         rv = -1;
-        if (file0 != NULL && !is_dir0 && file1 != NULL && !is_dir1)
+        if (file0 != NULL && file1 != NULL)
         {
             int use_copy0;
             int use_copy1;
@@ -3435,11 +3498,14 @@ dview_diff_cmd (void)
         }
     }
 
+    if (rv == 0)
+        message (D_ERROR, MSG_ERROR, _("Two files are needed to compare"));
+
+  ret:
     vfs_path_free (file1);
     vfs_path_free (file0);
 
-    if (rv == 0)
-        message (D_ERROR, MSG_ERROR, _("Two files are needed to compare"));
+    return (rv != 0) ? 1 : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
