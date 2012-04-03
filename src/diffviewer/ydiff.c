@@ -3297,10 +3297,9 @@ dview_get_title (const Dlg_head * h, size_t len)
     return g_string_free (title, FALSE);
 }
 
-/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-int
+static int
 diff_view (const char *file1, const char *file2, const char *label1, const char *label2)
 {
     int error;
@@ -3339,6 +3338,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     return error == 0 ? 1 : 0;
 }
 
+/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 #define GET_FILE_AND_STAMP(n) \
