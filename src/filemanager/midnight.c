@@ -978,7 +978,7 @@ mc_maybe_editor_or_viewer (void)
         }
 #ifdef USE_DIFF_VIEW
     case MC_RUN_DIFFVIEWER:
-        ret = diff_view (mc_run_param0, mc_run_param1, mc_run_param0, mc_run_param1);
+        ret = dview_diff_cmd (mc_run_param0, mc_run_param1);
         break;
 #endif /* USE_DIFF_VIEW */
     default:
