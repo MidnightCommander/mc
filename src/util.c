@@ -48,24 +48,25 @@
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 check_for_default (const vfs_path_t * default_file_vpath, const vfs_path_t * file_vpath)
 {
-    char *file, *default_file;
+    char *file;
 
     file = vfs_path_to_str (file_vpath);
-    default_file = vfs_path_to_str (default_file_vpath);
 
     if (!exist_file (file))
     {
+        char *default_file;
         FileOpContext *ctx;
         FileOpTotalContext *tctx;
 
+        default_file = vfs_path_to_str (default_file_vpath);
         if (!exist_file (default_file))
         {
             g_free (file);
             g_free (default_file);
-            return -1;
+            return FALSE;
         }
 
         ctx = file_op_context_new (OP_COPY);
@@ -74,11 +75,12 @@ check_for_default (const vfs_path_t * default_file_vpath, const vfs_path_t * fil
         copy_file_file (tctx, ctx, default_file, file);
         file_op_total_context_destroy (tctx);
         file_op_context_destroy (ctx);
+        g_free (default_file);
     }
-    g_free (file);
-    g_free (default_file);
 
-    return 0;
+    g_free (file);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
