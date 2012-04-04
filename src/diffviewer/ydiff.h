@@ -11,7 +11,6 @@
 
 /*** declarations of public functions ************************************************************/
 
-void dview_diff_cmd (void);
-int diff_view (const char *file1, const char *file2, const char *label1, const char *label2);
+int dview_diff_cmd (const void *f0, const void *f1);
 
 #endif /* MC__DIFFVIEW_YDIFF_H */

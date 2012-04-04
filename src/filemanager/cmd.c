@@ -1329,7 +1329,14 @@ compare_dirs_cmd (void)
 void
 diff_view_cmd (void)
 {
-    dview_diff_cmd ();
+    /* both panels must be in the list mode */
+    if (get_current_type () != view_listing || get_other_type () != view_listing)
+        return;
+
+    if (get_current_index () == 0)
+        dview_diff_cmd (current_panel, other_panel);
+    else
+        dview_diff_cmd (other_panel, current_panel);
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
