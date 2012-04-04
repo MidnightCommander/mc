@@ -3727,8 +3727,8 @@ personal o de sistema.
 To change default home directory of MC, you can use 
 .BR MC_HOME
 environment variable. The value of MC_HOME must be an absolute path. If MC_HOME
-variable is unset or empty, HOME variable is used. If HOME variable is unset
-or empty, MC home directory is get from GLib library.
+is unset or empty, HOME variable is used. If HOME is unset or empty, MC
+directories are get from GLib library.
 .\"SKIP_SECTION"
 .SH "LICENCIA"
 Este programa se distribuye en los términos que recoge la Licencia Pública
