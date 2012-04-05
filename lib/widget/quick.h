@@ -186,6 +186,7 @@ typedef struct
             int flags;          /* 1 -- is_password, 2 -- INPUT_COMPLETE_CD */
             const char *histname;
             char **result;
+            gboolean strip_password;
         } input;
 
         struct

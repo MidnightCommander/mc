@@ -180,14 +180,14 @@ bg_message (int dummy, int *flags, char *title, const char *text)
  */
 static char *
 fg_input_dialog_help (const char *header, const char *text, const char *help,
-                      const char *history_name, const char *def_text)
+                      const char *history_name, const char *def_text, gboolean strip_password)
 {
     char *my_str;
-
+    int flags = (strip_password) ? 4 : 0;
     QuickWidget quick_widgets[] = {
         /* 0 */ QUICK_BUTTON (6, 64, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
         /* 1 */ QUICK_BUTTON (3, 64, 1, 0, N_("&OK"), B_ENTER, NULL),
-        /* 2 */ QUICK_INPUT (3, 64, 0, 0, def_text, 58, 0, NULL, &my_str),
+        /* 2 */ QUICK_INPUT (3, 64, 0, 0, def_text, 58, flags, NULL, &my_str),
         /* 3 */ QUICK_LABEL (3, 64, 2, 0, ""),
         QUICK_END
     };
@@ -474,7 +474,7 @@ message (int flags, const char *title, const char *text, ...)
 
 char *
 input_dialog_help (const char *header, const char *text, const char *help,
-                   const char *history_name, const char *def_text)
+                   const char *history_name, const char *def_text, gboolean strip_password)
 {
 #ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
@@ -482,18 +482,20 @@ input_dialog_help (const char *header, const char *text, const char *help,
         union
         {
             void *p;
-            char *(*f) (const char *, const char *, const char *, const char *, const char *);
+            char *(*f) (const char *, const char *, const char *, const char *, const char *,
+                        gboolean);
         } func;
         func.f = fg_input_dialog_help;
-        return wtools_parent_call_string (func.p, 5,
+        return wtools_parent_call_string (func.p, 6,
                                           strlen (header), header, strlen (text),
                                           text, strlen (help), help,
                                           strlen (history_name), history_name,
-                                          strlen (def_text), def_text);
+                                          strlen (def_text), def_text,
+                                          sizeof (gboolean), strip_password);
     }
     else
 #endif /* ENABLE_BACKGROUND */
-        return fg_input_dialog_help (header, text, help, history_name, def_text);
+        return fg_input_dialog_help (header, text, help, history_name, def_text, strip_password);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -502,7 +504,7 @@ input_dialog_help (const char *header, const char *text, const char *help,
 char *
 input_dialog (const char *header, const char *text, const char *history_name, const char *def_text)
 {
-    return input_dialog_help (header, text, "[Input Line Keys]", history_name, def_text);
+    return input_dialog_help (header, text, "[Input Line Keys]", history_name, def_text, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

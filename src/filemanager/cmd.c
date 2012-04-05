@@ -234,7 +234,7 @@ set_panel_filter (WPanel * p)
 
     reg_exp = input_dialog_help (_("Filter"),
                                  _("Set expression for filtering filenames"),
-                                 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x);
+                                 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x, FALSE);
     if (!reg_exp)
         return;
     set_panel_filter_to (p, reg_exp);
@@ -539,7 +539,7 @@ transform_prefix (const char *prefix)
 
 static void
 nice_cd (const char *text, const char *xtext, const char *help,
-         const char *history_name, const char *prefix, int to_home)
+         const char *history_name, const char *prefix, int to_home, gboolean strip_password)
 {
     char *machine;
     char *cd_path;
@@ -547,7 +547,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
     if (!SELECTED_IS_PANEL)
         return;
 
-    machine = input_dialog_help (text, xtext, help, history_name, "");
+    machine = input_dialog_help (text, xtext, help, history_name, "", strip_password);
     if (!machine)
         return;
 
@@ -1537,7 +1537,7 @@ void
 ftplink_cmd (void)
 {
     nice_cd (_("FTP to machine"), _(machine_str),
-             "[FTP File System]", ":ftplink_cmd: FTP to machine ", "/#ftp:", 1);
+             "[FTP File System]", ":ftplink_cmd: FTP to machine ", "/#ftp:", 1, TRUE);
 }
 #endif /* ENABLE_VFS_FTP */
 
@@ -1549,7 +1549,7 @@ fishlink_cmd (void)
 {
     nice_cd (_("Shell link to machine"), _(machine_str),
              "[FIle transfer over SHell filesystem]", ":fishlink_cmd: Shell link to machine ",
-             "/#sh:", 1);
+             "/#sh:", 1, TRUE);
 }
 #endif /* ENABLE_VFS_FISH */
 
@@ -1560,7 +1560,7 @@ void
 smblink_cmd (void)
 {
     nice_cd (_("SMB link to machine"), _(machine_str),
-             "[SMB File System]", ":smblink_cmd: SMB link to machine ", "/#smb:", 0);
+             "[SMB File System]", ":smblink_cmd: SMB link to machine ", "/#smb:", 0, TRUE);
 }
 #endif /* ENABLE_VFS_SMB */
 #endif /* ENABLE_VFS_NET */
@@ -1573,7 +1573,7 @@ undelete_cmd (void)
 {
     nice_cd (_("Undelete files on an ext2 file system"),
              _("Enter device (without /dev/) to undelete\nfiles on: (F1 for details)"),
-             "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "/#undel:", 0);
+             "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "/#undel:", 0, FALSE);
 }
 #endif /* ENABLE_VFS_UNDELFS */
 
