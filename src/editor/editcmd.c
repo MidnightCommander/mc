@@ -707,6 +707,167 @@ edit_block_delete (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get EOL symbol for searching.
+ *
+ * @param edit editor object
+ * @return EOL symbol
+ */
+
+static inline char
+edit_search_get_current_end_line_char (const WEdit * edit)
+{
+    switch (edit->lb)
+    {
+    case LB_MAC:
+        return '\r';
+    default:
+        return '\n';
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Checking if search condition have BOL(^) or EOL ($) regexp special characters.
+ *
+ * @param search search object
+ * @return result of checks.
+ */
+
+static edit_search_line_t
+edit_get_search_line_type (mc_search_t * search)
+{
+    edit_search_line_t search_line_type = 0;
+
+    if (search->search_type != MC_SEARCH_T_REGEX)
+        return search_line_type;
+
+    if (*search->original == '^')
+        search_line_type |= AT_START_LINE;
+
+    if (search->original[search->original_len - 1] == '$')
+        search_line_type |= AT_END_LINE;
+    return search_line_type;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculating the start position of next line.
+ *
+ * @param edit              editor object
+ * @param current_pos       current position
+ * @param max_pos           max position
+ * @param end_string_symbol end of line symbol
+ * @return start position of next line
+ */
+
+static off_t
+edit_calculate_start_of_next_line (WEdit * edit, off_t current_pos, off_t max_pos,
+                                   char end_string_symbol)
+{
+    off_t i;
+
+    for (i = current_pos; i < max_pos; i++)
+    {
+        current_pos++;
+        if (edit_get_byte (edit, i) == end_string_symbol)
+            break;
+    }
+
+    return current_pos;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculating the end position of previous line.
+ *
+ * @param edit              editor object
+ * @param current_pos       current position
+ * @param end_string_symbol end of line symbol
+ * @return end position of previous line
+ */
+
+static off_t
+edit_calculate_end_of_previous_line (WEdit * edit, off_t current_pos, char end_string_symbol)
+{
+    off_t i;
+
+    for (i = current_pos - 1; i >= 0; i--)
+        if (edit_get_byte (edit, i) == end_string_symbol)
+            break;
+
+    return i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculating the start position of previous line.
+ *
+ * @param edit              editor object
+ * @param current_pos       current position
+ * @param end_string_symbol end of line symbol
+ * @return start position of previous line
+ */
+
+static inline off_t
+edit_calculate_start_of_previous_line (WEdit * edit, off_t current_pos, char end_string_symbol)
+{
+    current_pos = edit_calculate_end_of_previous_line (edit, current_pos, end_string_symbol);
+    current_pos = edit_calculate_end_of_previous_line (edit, current_pos, end_string_symbol);
+
+    return (current_pos + 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculating the start position of current line.
+ *
+ * @param edit              editor object
+ * @param current_pos       current position
+ * @param end_string_symbol end of line symbol
+ * @return start position of current line
+ */
+
+static inline off_t
+edit_calculate_start_of_current_line (WEdit * edit, off_t current_pos, char end_string_symbol)
+{
+    current_pos = edit_calculate_end_of_previous_line (edit, current_pos, end_string_symbol);
+
+    return (current_pos + 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Fixing (if needed) search start position if 'only in selection' option present.
+ *
+ * @param edit              editor object
+ */
+
+static void
+edit_search_fix_search_start_if_selection (WEdit * edit)
+{
+    long start_mark = 0;
+    long end_mark = 0;
+
+    if (!edit_search_options.only_in_selection)
+        return;
+
+    if (eval_marks (edit, &start_mark, &end_mark) != 0)
+        return;
+
+    if (edit_search_options.backwards)
+    {
+        if (edit->search_start > end_mark || edit->search_start <= start_mark)
+            edit->search_start = end_mark;
+    }
+    else
+    {
+        if (edit->search_start < start_mark || edit->search_start >= end_mark)
+            edit->search_start = start_mark;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 editcmd_find (WEdit * edit, gsize * len)
@@ -716,7 +877,11 @@ editcmd_find (WEdit * edit, gsize * len)
     long start_mark = 0;
     long end_mark = edit->last_byte;
     int mark_res = 0;
+    char end_string_symbol;
 
+    end_string_symbol = edit_search_get_current_end_line_char (edit);
+
+    /* prepare for search */
     if (edit_search_options.only_in_selection)
     {
         mark_res = eval_marks (edit, &start_mark, &end_mark);
@@ -726,19 +891,26 @@ editcmd_find (WEdit * edit, gsize * len)
             edit->search->error_str = g_strdup (_("Search string not found"));
             return FALSE;
         }
-        if (edit_search_options.backwards)
+
+        /* fix the start and the end of search block positions */
+        if ((edit->search_line_type & AT_START_LINE) != 0
+            && (start_mark != 0 || edit_get_byte (edit, start_mark - 1) != end_string_symbol))
         {
-            if (search_start > end_mark || search_start <= start_mark)
-            {
-                search_start = end_mark;
-            }
+            start_mark =
+                edit_calculate_start_of_next_line (edit, start_mark, edit->last_byte,
+                                                   end_string_symbol);
         }
-        else
+        if ((edit->search_line_type & AT_END_LINE) != 0
+            && (end_mark - 1 != edit->last_byte
+                || edit_get_byte (edit, end_mark) != end_string_symbol))
         {
-            if (search_start < start_mark || search_start >= end_mark)
-            {
-                search_start = start_mark;
-            }
+            end_mark = edit_calculate_end_of_previous_line (edit, end_mark, end_string_symbol);
+        }
+        if (start_mark >= end_mark)
+        {
+            edit->search->error = MC_SEARCH_E_NOTFOUND;
+            edit->search->error_str = g_strdup (_("Search string not found"));
+            return FALSE;
         }
     }
     else
@@ -746,13 +918,21 @@ editcmd_find (WEdit * edit, gsize * len)
         if (edit_search_options.backwards)
             end_mark = max (1, edit->curs1) - 1;
     }
+
+    /* search */
     if (edit_search_options.backwards)
     {
+        /* backward search */
         search_end = end_mark;
+
+        if ((edit->search_line_type & AT_START_LINE) != 0)
+            search_start =
+                edit_calculate_start_of_current_line (edit, search_start, end_string_symbol);
+
         while ((int) search_start >= start_mark)
         {
-            if (search_end > (off_t) (search_start + edit->search->original_len) &&
-                mc_search_is_fixed_search_str (edit->search))
+            if (search_end > (off_t) (search_start + edit->search->original_len)
+                && mc_search_is_fixed_search_str (edit->search))
             {
                 search_end = search_start + edit->search->original_len;
             }
@@ -761,12 +941,22 @@ editcmd_find (WEdit * edit, gsize * len)
             {
                 return TRUE;
             }
-            search_start--;
+
+
+            if ((edit->search_line_type & AT_START_LINE) != 0)
+                search_start =
+                    edit_calculate_start_of_previous_line (edit, search_start, end_string_symbol);
+            else
+                search_start--;
         }
         edit->search->error_str = g_strdup (_("Search string not found"));
     }
     else
     {
+        /* forward search */
+        if ((edit->search_line_type & AT_START_LINE) != 0 && search_start != start_mark)
+            search_start =
+                edit_calculate_start_of_next_line (edit, search_start, end_mark, end_string_symbol);
         return mc_search_run (edit->search, (void *) edit, search_start, end_mark, len);
     }
     return FALSE;
@@ -893,7 +1083,11 @@ static void
 edit_search (WEdit * edit)
 {
     if (editcmd_dialog_search_show (edit))
+    {
+        edit->search_line_type = edit_get_search_line_type (edit->search);
+        edit_search_fix_search_start_if_selection (edit);
         edit_do_search (edit);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2315,6 +2509,7 @@ edit_replace_cmd (WEdit * edit, int again)
 
         mc_search_free (edit->search);
         edit->search = NULL;
+
     }
 
     if (!edit->search)
@@ -2330,6 +2525,8 @@ edit_replace_cmd (WEdit * edit, int again)
         edit->search->is_case_sensitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;
+        edit->search_line_type = edit_get_search_line_type (edit->search);
+        edit_search_fix_search_start_if_selection (edit);
     }
 
     if (edit->found_len && edit->search_start == edit->found_start + 1
@@ -2435,10 +2632,12 @@ edit_replace_cmd (WEdit * edit, int again)
 
             /* so that we don't find the same string again */
             if (edit_search_options.backwards)
+            {
                 edit->search_start--;
+            }
             else
             {
-                edit->search_start += edit->found_len;
+                edit->search_start += edit->found_len + (len == 0 ? 1 : 0);
 
                 if (edit->search_start >= edit->last_byte)
                     break;
@@ -2487,6 +2686,7 @@ edit_search_cmd_callback (const void *user_data, gsize char_offset)
 void
 edit_search_cmd (WEdit * edit, gboolean again)
 {
+
     if (edit == NULL)
         return;
 
@@ -2523,6 +2723,7 @@ edit_search_cmd (WEdit * edit, gboolean again)
                 edit->search->is_case_sensitive = edit_search_options.case_sens;
                 edit->search->whole_words = edit_search_options.whole_words;
                 edit->search->search_fn = edit_search_cmd_callback;
+                edit->search_line_type = edit_get_search_line_type (edit->search);
                 edit_do_search (edit);
             }
         }
