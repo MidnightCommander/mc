@@ -159,6 +159,11 @@ START_TEST(test_path_to_str_flags)
     vfs_test_ops1.prefix = "test1";
     vfs_register_class (&vfs_test_ops1);
 
+    vpath = vfs_path_from_str_flags ("test1://user:passwd@127.0.0.1", VPF_NO_CANON);
+    str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    fail_unless (strcmp ("test1://user@127.0.0.1/", str_path) == 0, "\nstr=%s\n", str_path);
+    g_free (str_path);
+    vfs_path_free (vpath);
 
     vpath = vfs_path_from_str ("/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь");
     str_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
