@@ -2456,6 +2456,7 @@ edit_replace_cmd (WEdit * edit, int again)
     static char *saved2 = NULL;
     char *input1 = NULL;        /* user input from the dialog */
     char *input2 = NULL;
+    GString *input2_str = NULL;
     char *disp1 = NULL;
     char *disp2 = NULL;
     long times_replaced = 0;
@@ -2481,6 +2482,7 @@ edit_replace_cmd (WEdit * edit, int again)
     else
     {
         char *tmp_inp1, *tmp_inp2;
+
         disp1 = edit_replace_cmd__conv_to_display (saved1 ? saved1 : (char *) "");
         disp2 = edit_replace_cmd__conv_to_display (saved2 ? saved2 : (char *) "");
 
@@ -2509,8 +2511,9 @@ edit_replace_cmd (WEdit * edit, int again)
 
         mc_search_free (edit->search);
         edit->search = NULL;
-
     }
+
+    input2_str = g_string_new (input2);
 
     if (!edit->search)
     {
@@ -2558,7 +2561,7 @@ edit_replace_cmd (WEdit * edit, int again)
         if ((edit->search_start >= 0) && (edit->search_start < edit->last_byte))
         {
             gsize i;
-            GString *tmp_str, *repl_str;
+            GString *repl_str;
 
             edit->found_start = edit->search_start;
             i = edit->found_len = len;
@@ -2607,10 +2610,7 @@ edit_replace_cmd (WEdit * edit, int again)
                 }
             }
 
-            /* don't process string each time */
-            tmp_str = g_string_new (input2);
-            repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
-            g_string_free (tmp_str, TRUE);
+            repl_str = mc_search_prepare_replace_str (edit->search, input2_str);
 
             if (edit->search->error != MC_SEARCH_E_OK)
             {
@@ -2671,6 +2671,8 @@ edit_replace_cmd (WEdit * edit, int again)
   cleanup:
     g_free (input1);
     g_free (input2);
+    if (input2_str != NULL)
+        g_string_free (input2_str, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
