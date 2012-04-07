@@ -296,7 +296,7 @@ type/^ELF
 ### Documentation ###
 
 # Texinfo
-regex/\.(te?xi|texinfo)$
+#regex/\.(te?xi|texinfo)$
 
 # GNU Info page
 type/^Info\ text
