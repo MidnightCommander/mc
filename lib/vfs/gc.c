@@ -214,9 +214,9 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
    with now = 1 to force freeing all filesystems that are not in use */
 
 void
-vfs_expire (int now)
+vfs_expire (gboolean now)
 {
-    static int locked = 0;
+    static gboolean locked = FALSE;
     struct timeval lc_time;
     struct vfs_stamping *stamp, *st;
 
@@ -224,7 +224,7 @@ vfs_expire (int now)
        calls message */
     if (locked)
         return;
-    locked = 1;
+    locked = TRUE;
 
     gettimeofday (&lc_time, NULL);
     lc_time.tv_sec -= vfs_timeout;
@@ -242,7 +242,8 @@ vfs_expire (int now)
         else
             stamp = stamp->next;
     }
-    locked = 0;
+
+    locked = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -253,7 +254,7 @@ vfs_expire (int now)
  */
 
 int
-vfs_timeouts ()
+vfs_timeouts (void)
 {
     return stamps ? 10 : 0;
 }
@@ -263,7 +264,7 @@ vfs_timeouts ()
 void
 vfs_timeout_handler (void)
 {
-    vfs_expire (0);
+    vfs_expire (FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
