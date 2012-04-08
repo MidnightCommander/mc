@@ -1220,11 +1220,12 @@ init_dlg (Dlg_head * h)
         dlg_read_history (h);
     }
 
+    h->state = DLG_ACTIVE;
+
     /* Select the first widget that takes focus */
     while (h->current != NULL && !dlg_focus (h))
         h->current = dlg_widget_next (h, h->current);
 
-    h->state = DLG_ACTIVE;
     dlg_redraw (h);
 
     h->ret_value = 0;
