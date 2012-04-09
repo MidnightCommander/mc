@@ -16,6 +16,16 @@
 
 /*** enums ***************************************************************************************/
 
+/**
+    enum for store the search conditions check results.
+    (if search condition have BOL(^) or EOL ($) regexp checial characters).
+*/
+typedef enum
+{
+    AT_START_LINE = (1 << 0),
+    AT_END_LINE = (1 << 1)
+} edit_search_line_t;
+
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 struct _book_mark
@@ -55,6 +65,8 @@ struct WEdit
     /* search handler */
     mc_search_t *search;
     int replace_mode;
+    /* is search conditions should be started from BOL(^) or ended with EOL($) */
+    edit_search_line_t search_line_type;
 
     char *last_search_string;   /* String that have been searched */
     long search_start;          /* First character to start searching from */
