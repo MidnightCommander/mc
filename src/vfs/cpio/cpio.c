@@ -257,6 +257,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
             message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
             g_free (s);
             g_free (super->name);
+            super->name = NULL;
             return -1;
         }
         g_free (s);
