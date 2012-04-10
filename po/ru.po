@@ -18,16 +18,14 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-02-14 08:51+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Russian (http://www.transifex.net/projects/p/mc/language/"
-"ru/)\n"
+"PO-Revision-Date: 2012-04-10 15:13+0300\n"
+"Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
+"Language-Team: Russian (http://www.transifex.net/projects/p/mc/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Внимание: невозможно загрузить список кодировок"
@@ -116,8 +114,7 @@ msgid "Not implemented yet"
 msgstr "Пока не реализовано"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
-"Количество шаблонных полей не соответствует количеству полей для замены"
+msgstr "Количество шаблонных полей не соответствует количеству полей для замены"
 
 #, c-format
 msgid "Invalid token number %d"
@@ -132,13 +129,11 @@ msgstr "О&бычный"
 msgid "Re&gular expression"
 msgstr "&Регулярное выражение"
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "Шестнадцатеричный"
+msgstr "Шестнад&цатеричный"
 
-#, fuzzy
 msgid "Wil&dcard search"
-msgstr "По шаблону"
+msgstr "По &шаблону"
 
 #, c-format
 msgid ""
@@ -263,7 +258,7 @@ msgid "Completion/M-tab"
 msgstr "Завершение/M-Tab "
 
 msgid "Back Tabulation S-tab"
-msgstr ""
+msgstr "Обратная табуляция S-tab"
 
 msgid "+ on keypad"
 msgstr "+ доп.клавиатуры "
@@ -563,9 +558,7 @@ msgid "Print data directory"
 msgstr "Распечатать имя каталога для данных"
 
 msgid "Print extended info about used data directories"
-msgstr ""
-"Показ расширенной информации об используемых каталогов пользовательских "
-"данных"
+msgstr "Показ расширенной информации об используемых каталогов пользовательских данных"
 
 msgid "Print configure options"
 msgstr "Распечатать параметры конфигурации"
@@ -594,9 +587,8 @@ msgstr "Редактировать файл"
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Отключить поддержку встроенной командной оболочки"
+msgstr "Отключить поддержку X11"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr "Пытаться использовать старый способ трэкинга мыши"
@@ -620,8 +612,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Чтение определений привязок клавиш из указанного файла"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
-"Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
+msgstr "Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
 
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
@@ -657,25 +648,21 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
 "\n"
-"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по "
-"умолчанию\n"
+"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n"
 "\n"
 "Ключевые слова:\n"
 "   Общие:              errors, disabled, reverse, gauge, header\n"
 "                       input, inputmark, inputunchanged, commandlinemark\n"
 "                       bbarhotkey, bbarbutton, statusbar\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 "   Просмотрщик:        viewbold, viewunderline, viewselected\n"
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
+"   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -700,8 +687,7 @@ msgstr ""
 "   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
 "\n"
 "Атрибуты:\n"
-"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком "
-"\"+\"\n"
+"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком \"+\"\n"
 
 msgid "Color options"
 msgstr "Цветовые настройки"
@@ -735,7 +721,7 @@ msgid "Terminal options"
 msgstr "Настройки терминала"
 
 msgid "Arguments parse error!"
-msgstr ""
+msgstr "Ошибка при анализе аргументов!"
 
 msgid "No arguments given to the viewer."
 msgstr "Не заданы аргументы для программы просмотра."
@@ -1185,7 +1171,7 @@ msgstr ""
 "Продолжение операции приведет к потере изменений"
 
 msgid "In se&lection"
-msgstr "В вы&деленном"
+msgstr "В в&ыделенном"
 
 msgid "Enter replacement string:"
 msgstr "Введите текст для замены:"
@@ -2008,25 +1994,16 @@ msgid " %s%s file error"
 msgstr "%s%s ошибка файла"
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке."
-"Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке.Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s ошибка файла"
 
 #, c-format
-msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr ""
-"Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc."
-"ext, либо использовать этот файл как пример и написать свой."
+msgid "The format of the %s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc.ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2096,8 +2073,7 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Невозможно создать устойчивые симв. ссылки через нелокальные файловые "
-"системы:\n"
+"Невозможно создать устойчивые симв. ссылки через нелокальные файловые системы:\n"
 "\n"
 "Опция \"Устойчивые символические ссылки\" будет отменена"
 
@@ -2470,37 +2446,29 @@ msgstr "Файл существует"
 msgid "Background process: File exists"
 msgstr "Фоновый процесс: файл существует"
 
-#, fuzzy, c-format
 msgid "Files processed: %zu/%zu"
-msgstr "Обработано файлов: %zu из %zu"
+msgstr "Обработано файлов: %zu/%zu"
 
-#, fuzzy, c-format
 msgid "Files processed: %zu"
-msgstr "Обработано файлов: %zu из %zu"
+msgstr "Обработано файлов: %zu"
 
-#, fuzzy, c-format
 msgid "Time: %s %s"
-msgstr "Время: %s  %s (%s)"
+msgstr "Время: %s %s"
 
-#, fuzzy, c-format
 msgid "Time: %s %s (%s)"
-msgstr "Время: %s  %s (%s)"
+msgstr "Время: %s %s (%s)"
 
-#, fuzzy, c-format
 msgid "Time: %s"
-msgstr "Файл: %s"
+msgstr "Время: %s"
 
-#, fuzzy, c-format
 msgid "Time: %s (%s)"
-msgstr "Время: %s  %s (%s)"
+msgstr "Время: %s (%s)"
 
-#, fuzzy, c-format
 msgid " Total: %s "
-msgstr "Всего: %s из %s"
+msgstr "Всего: %s "
 
-#, fuzzy, c-format
 msgid " Total: %s/%s "
-msgstr "Всего: %s из %s"
+msgstr "Всего: %s/%s"
 
 msgid "Source"
 msgstr "Источник"
@@ -2682,16 +2650,14 @@ msgstr "Новая группа быстрого доступа"
 msgid "Name of new group:"
 msgstr "Имя новой группы:"
 
-#, fuzzy, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
-msgstr "Хотите удалить?"
+msgstr "Вы уверены, что хотите удалить элемент \"%s\"?"
 
-#, fuzzy, c-format
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
-"Группа не пуста.\n"
+"Группа \"%s\" не пуста.\n"
 "Удалить её?"
 
 msgid "Top level group"
@@ -2700,12 +2666,11 @@ msgstr "Группа верхнего уровня"
 msgid "Hotlist Load"
 msgstr "Загрузка списка быстрого доступа"
 
-#, fuzzy, c-format
 msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
-"MC не смог удалить файл ~/%s,\n"
+"MC не смог удалить файл %s,\n"
 "ваши старые элементы быстрого доступа не были удалены"
 
 #, c-format
@@ -3022,13 +2987,13 @@ msgid "Do you really want to quit the Midnight Commander?"
 msgstr "Вы действительно хотите выйти из Midnight Commander?"
 
 msgid "&Above"
-msgstr "&Верхняя"
+msgstr "&Верхняя панель"
 
 msgid "&Left"
 msgstr "&Левая панель"
 
 msgid "&Below"
-msgstr "&Нижняя"
+msgstr "&Нижняя панель"
 
 msgid "&Right"
 msgstr "&Правая панель"
@@ -3099,7 +3064,6 @@ msgstr "Одино&чное нажатие"
 msgid "Esc key mode"
 msgstr "Клавиша Esc"
 
-#, fuzzy
 msgid "Preallocate &space"
 msgstr "В&ыделять место перед копированием"
 
@@ -3359,9 +3323,8 @@ msgstr "Сбой закрытия канала"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Невозможно выполнить эту команду, находясь не в локальном каталоге"
 
-#, fuzzy
 msgid "Modified git files"
-msgstr "Модифицирован: %s"
+msgstr "Изменённые файлы под контролем git"
 
 msgid "Find rejects after patching"
 msgstr "Найти корректуры, отвергнутые командой patch"
@@ -3567,7 +3530,7 @@ msgstr ""
 "%s\n"
 
 msgid "Home directory path is not absolute"
-msgstr ""
+msgstr "Путь к домашнему каталогу не является абсолютным"
 
 #, c-format
 msgid ""
@@ -3666,9 +3629,8 @@ msgstr "Виртуальная файловая система:"
 msgid "Data types:"
 msgstr "Тип данных:"
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "Каталог с кэшируемыми данными:"
+msgstr "Домашний каталог:"
 
 msgid "System data"
 msgstr "Системные данные"
@@ -4163,15 +4125,12 @@ msgstr "Продолжить с начала?"
 
 #~ msgid "Normal"
 #~ msgstr "Обычный"
-
 #~ msgid "&Regular expression"
 #~ msgstr "&Регулярное выражение"
-
 #~ msgid "All charsets"
 #~ msgstr "Все кодировки"
-
 #~ msgid "Case &sensitive"
 #~ msgstr "Учет ре&гистра"
-
 #~ msgid "Remove:"
 #~ msgstr "Удалить:"
+
