@@ -204,52 +204,64 @@ do_show_hist (WInput * in)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** Strip password from incomplete url (just user:pass@host without VFS prefix).
+ *
+ * @param url partial URL
+ * @return newly allocated string without password
+ */
+
+static char *
+input_history_strip_password (const char *url)
+{
+    char *at, *delim, *colon;
+
+    at = strrchr (url, '@');
+    if (at == NULL)
+        return g_strdup (url);
+
+    /* TODO: handle ':' and '@' in password */
+
+    delim = strstr (url, VFS_PATH_URL_DELIMITER);
+    if (delim != NULL)
+        colon = strchr (delim + strlen (VFS_PATH_URL_DELIMITER), ':');
+    else
+        colon = strchr (url, ':');
+
+    if (colon == NULL)
+        return g_strdup (url);
+    *colon = '\0';
+
+    return g_strconcat (url, at, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 push_history (WInput * in, const char *text)
 {
-    /* input widget where urls with passwords are entered without any
-       vfs prefix */
-    const char *password_input_fields[] = {
-        " Link to a remote machine ",
-        " FTP to machine ",
-        " SMB link to machine "
-    };
-    const size_t ELEMENTS = (sizeof (password_input_fields) / sizeof (password_input_fields[0]));
-
     char *t;
-    size_t i;
     gboolean empty;
 
     if (text == NULL)
         return;
-
-#ifdef ENABLE_NLS
-    for (i = 0; i < ELEMENTS; i++)
-        password_input_fields[i] = _(password_input_fields[i]);
-#endif
 
     t = g_strstrip (g_strdup (text));
     empty = *t == '\0';
     g_free (t);
     t = g_strdup (empty ? "" : text);
 
-    if (in->history_name != NULL)
+    if (!empty && in->history_name != NULL && in->strip_password)
     {
-        /* FIXME: It is the strange code. Rewrite is needed. */
-        const char *p = in->history_name + 3;
+        /*
+           We got string user:pass@host without any VFS prefixes
+           and vfs_path_to_str_flags (t, VPF_STRIP_PASSWORD) doesn't work.
+           Therefore we want to strip password in separate algorithm
+         */
+        char *url_with_stripped_password;
 
-        for (i = 0; i < ELEMENTS; i++)
-            if (strcmp (p, password_input_fields[i]) == 0)
-            {
-                vfs_path_t *vpath;
-
-                vpath = vfs_path_from_str (t);
-                g_free (t);
-                t = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
-                vfs_path_free (vpath);
-                break;
-            }
+        url_with_stripped_password = input_history_strip_password (t);
+        g_free (t);
+        t = url_with_stripped_password;
     }
 
     if (in->history == NULL || in->history->data == NULL || strcmp (in->history->data, t) != 0 ||
@@ -979,6 +991,7 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
     in->need_push = TRUE;
     in->is_password = FALSE;
     in->charpoint = 0;
+    in->strip_password = FALSE;
 
     /* in->buffer will be corrected in "history_load" event handler */
     in->current_max_size = width + 1;

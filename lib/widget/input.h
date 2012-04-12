@@ -62,6 +62,7 @@ typedef struct
     GList *history;             /* the history */
     gboolean history_changed;   /* the history has changed */
     gboolean need_push;         /* need to push the current Input on hist? */
+    gboolean strip_password;    /* need to strip password before placing string to history */
     char **completions;         /* possible completions array */
     input_complete_t completion_flags;
     char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
