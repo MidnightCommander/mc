@@ -1635,7 +1635,7 @@ single_dirsize_cmd (void)
         vfs_path_t *p;
 
         ui = compute_dir_size_create_ui ();
-        p = vfs_path_from_str_flags (entry->fname, VPF_NO_CANON);
+        p = vfs_path_from_str (entry->fname);
 
         if (compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total, TRUE) ==
             FILE_CONT)
@@ -1680,7 +1680,7 @@ dirsizes_cmd (void)
             uintmax_t total = 0;
             gboolean ok;
 
-            p = vfs_path_from_str_flags (panel->dir.list[i].fname, VPF_NO_CANON);
+            p = vfs_path_from_str (panel->dir.list[i].fname);
             ok = compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total,
                                    TRUE) != FILE_CONT;
             vfs_path_free (p);
