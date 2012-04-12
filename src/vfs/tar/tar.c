@@ -325,6 +325,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
         if (result == -1)
         {
             g_free (archive->name);
+            archive->name = NULL;
             ERRNOR (ENOENT, -1);
         }
     }
@@ -911,7 +912,7 @@ init_tarfs (void)
 {
     static struct vfs_s_subclass tarfs_subclass;
 
-    tarfs_subclass.flags = VFS_S_READONLY;       /* FIXME: tarfs used own temp files */
+    tarfs_subclass.flags = VFS_S_READONLY;      /* FIXME: tarfs used own temp files */
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
     tarfs_subclass.open_archive = tar_open_archive;
