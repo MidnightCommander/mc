@@ -2704,10 +2704,15 @@ get_parent_dir_name (const char *cwd, const char *lwd)
         return NULL;
     }
 
-    while (--p > lwd && *p != PATH_SEP);
-    while (--p > lwd && *p != PATH_SEP);
+    /* skip VFS prefix */
+    while (--p > lwd && *p != PATH_SEP)
+        ;
+    /* get last component */
+    while (--p > lwd && *p != PATH_SEP)
+        ;
 
-    return (p != lwd) ? p + 1 : NULL;
+    /* return last component */
+    return (*p == PATH_SEP) ? p + 1 : p;
 }
 
 /* --------------------------------------------------------------------------------------------- */
