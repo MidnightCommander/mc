@@ -20,6 +20,7 @@ Build requirements for GNU Midnight Commander
 - slang or ncurses
 - gettext
 - cvs
+- libssh2 >= 1.2.5 is required only for sftp vfs (1.2.7 if you need ssh-agent support)
 
 
 Installation instructions for GNU Midnight Commander
@@ -169,6 +170,10 @@ VFS options:
 `--enable-vfs-fish'
      (on by default)
      Support for FISH vfs
+
+`--enable-vfs-sftp'
+     (off by default)
+     Support for SFTP vfs
 
 `--enable-vfs-extfs'
      (on by default)

@@ -150,6 +150,7 @@ enum
     CK_Filter,
     CK_ConnectFish,
     CK_ConnectFtp,
+    CK_ConnectSftp,
     CK_ConnectSmb,
     CK_PanelInfo,
     CK_Jobs,
