@@ -2988,7 +2988,7 @@ get_parent_dir_name (const char *cwd, const char *lwd)
         ;
 
     /* return last component */
-    return (*p == PATH_SEP) ? p + 1 : p;
+    return (p != lwd || *p == PATH_SEP) ? p + 1 : p;
 }
 
 /* --------------------------------------------------------------------------------------------- */
