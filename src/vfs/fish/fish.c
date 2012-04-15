@@ -42,7 +42,7 @@
  * Derived from ftpfs.c
  * Read README.fish for protocol specification.
  *
- * Syntax of path is: \verbatim /#sh:user@host[:Cr]/path \endverbatim
+ * Syntax of path is: \verbatim sh://user@host[:Cr]/path \endverbatim
  *      where C means you want compressed connection,
  *      and r means you want to use rsh
  *
@@ -546,7 +546,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     vfs_print_message (_("fish: Connected, home %s."), super->path_element->path);
 #if 0
     super->name =
-        g_strconcat ("/#sh:", super->path_element->user, "@", super->path_element->host, "/",
+        g_strconcat ("sh://", super->path_element->user, "@", super->path_element->host, "/",
                      (char *) NULL);
 #else
     super->name = g_strdup (PATH_SEP_STR);
