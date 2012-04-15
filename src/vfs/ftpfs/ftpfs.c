@@ -54,11 +54,11 @@ What to do with this?
 
      * NOTE: Usage of tildes is deprecated, consider:
      * \verbatim
-         cd /#ftp:pavel@hobit
+         cd ftp//:pavel@hobit
          cd ~
        \endverbatim
      * And now: what do I want to do? Do I want to go to /home/pavel or to
-     * /#ftp:hobit/home/pavel? I think first has better sense...
+     * ftp://hobit/home/pavel? I think first has better sense...
      *
     \verbatim
     {
