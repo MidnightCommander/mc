@@ -1149,7 +1149,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
     if (!ino->ent)
         ERRNOR (EAGAIN, NULL);
 
-    if ((MEDATA->flags & VFS_S_USETMP) != 0)
+    if ((MEDATA->flags & VFS_S_USETMP) == 0)
     {
         /* archives */
         char *newpath;
