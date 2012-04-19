@@ -1038,19 +1038,9 @@ reread_cmd (void)
 {
     panel_update_flags_t flag = UP_ONLY_CURRENT;
 
-    if (get_current_type () == view_listing && get_other_type () == view_listing)
-    {
-        char *c_cwd, *o_cwd;
-
-        c_cwd = vfs_path_to_str (current_panel->cwd_vpath);
-        o_cwd = vfs_path_to_str (other_panel->cwd_vpath);
-
-        if (strcmp (c_cwd, o_cwd) == 0)
-            flag = UP_OPTIMIZE;
-
-        g_free (c_cwd);
-        g_free (o_cwd);
-    }
+    if (get_current_type () == view_listing && get_other_type () == view_listing &&
+        vfs_path_cmp (current_panel->cwd_vpath, other_panel->cwd_vpath) == 0)
+        flag = UP_OPTIMIZE;
 
     update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
