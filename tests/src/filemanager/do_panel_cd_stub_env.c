@@ -136,10 +136,10 @@ get_panel_widget (int idx)
 
 
 int
-do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean reverse,
+do_load_dir (const vfs_path_t *vpath, dir_list * list, sortfn * sort, gboolean reverse,
                  gboolean case_sensitive, gboolean exec_ff, const char *fltr)
 {
-    (void) path;
+    (void) vpath;
     (void) list;
     (void) sort;
     (void) reverse;
