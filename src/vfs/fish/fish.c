@@ -404,18 +404,6 @@ fish_info (struct vfs_class *me, struct vfs_s_super *super)
 
 
 /* --------------------------------------------------------------------------------------------- */
-/* The returned directory should always contain a trailing slash */
-
-static char *
-fish_getcwd (struct vfs_class *me, struct vfs_s_super *super)
-{
-    if (fish_command (me, super, WANT_STRING, "#PWD\npwd; echo '### 200'\n") == COMPLETE)
-        return g_strconcat (reply_str, "/", (char *) NULL);
-    ERRNOR (EIO, NULL);
-}
-
-
-/* --------------------------------------------------------------------------------------------- */
 
 static void
 fish_open_archive_pipeopen (struct vfs_s_super *super)
@@ -555,8 +543,6 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     if (fish_info (me, super))
         SUP->scr_env = fish_set_env (SUP->host_flags);
 
-    vfs_print_message (_("fish: Setting up current directory..."));
-    super->path_element->path = fish_getcwd (me, super);
     vfs_print_message (_("fish: Connected, home %s."), super->path_element->path);
 #if 0
     super->name =
@@ -843,8 +829,6 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     reply_code = fish_decode_reply (buffer + 4, 0);
     if (reply_code == COMPLETE)
     {
-        g_free (super->path_element->path);
-        super->path_element->path = g_strdup (remote_path);
         vfs_print_message (_("%s: done."), me->name);
         return 0;
     }
@@ -1584,11 +1568,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
             }
             break;
         }
-
-        name =
-            g_strconcat (vfs_fish_ops.prefix, VFS_PATH_URL_DELIMITER,
-                         super->path_element->user, "@", super->path_element->host, flags, "/",
-                         super->path_element->path, (char *) NULL);
+        name = vfs_path_element_build_pretty_path_str (super->path_element);
         func (name);
         g_free (name);
     }

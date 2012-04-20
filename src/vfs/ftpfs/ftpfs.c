@@ -262,7 +262,6 @@ static const char *netrcp;
    c) strip trailing "/."
  */
 
-static char *ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super);
 static int ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super,
                                  const char *remote_path);
 static int ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply,
@@ -961,10 +960,6 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     }
     while (retry_seconds != 0);
 
-    super->path_element->path = ftpfs_get_current_directory (me, super);
-    if (super->path_element->path == NULL)
-        super->path_element->path = g_strdup (PATH_SEP_STR);
-
     return 0;
 }
 
@@ -1014,57 +1009,6 @@ ftpfs_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super
 
     vfs_path_element_free (path_element);
     return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/* The returned directory should always contain a trailing slash */
-
-static char *
-ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
-{
-    char buf[BUF_8K], *bufp, *bufq;
-
-    if (ftpfs_command (me, super, NONE, "PWD") == COMPLETE &&
-        ftpfs_get_reply (me, SUP->sock, buf, sizeof (buf)) == COMPLETE)
-    {
-        bufp = NULL;
-        for (bufq = buf; *bufq; bufq++)
-            if (*bufq == '"')
-            {
-                if (!bufp)
-                {
-                    bufp = bufq + 1;
-                }
-                else
-                {
-                    *bufq = 0;
-                    if (*bufp)
-                    {
-                        if (*(bufq - 1) != '/')
-                        {
-                            *bufq++ = '/';
-                            *bufq = 0;
-                        }
-                        if (*bufp == '/')
-                            return g_strdup (bufp);
-                        else
-                        {
-                            /* If the remote server is an Amiga a leading slash
-                               might be missing. MC needs it because it is used
-                               as separator between hostname and path internally. */
-                            return g_strconcat ("/", bufp, (char *) NULL);
-                        }
-                    }
-                    else
-                    {
-                        ftpfs_errno = EIO;
-                        return NULL;
-                    }
-                }
-            }
-    }
-    ftpfs_errno = EIO;
-    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2070,11 +2014,7 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
     if (r != COMPLETE)
         ftpfs_errno = EIO;
     else
-    {
-        g_free (super->path_element->path);
-        super->path_element->path = g_strdup (remote_path);
         SUP->cwd_deferred = 0;
-    }
     return r;
 }
 
@@ -2247,10 +2187,7 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
         char *name;
 
-        name =
-            g_strconcat (vfs_ftpfs_ops.prefix, VFS_PATH_URL_DELIMITER, super->path_element->user,
-                         "@", super->path_element->host, "/", super->path_element->path,
-                         (char *) NULL);
+        name = vfs_path_element_build_pretty_path_str (super->path_element);
         func (name);
         g_free (name);
     }
