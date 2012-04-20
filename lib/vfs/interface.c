@@ -58,6 +58,7 @@
 #include "utilvfs.h"
 #include "path.h"
 #include "gc.h"
+#include "xdirentry.h"
 
 extern GString *vfs_str_buffer;
 extern struct vfs_class *current_vfs;
@@ -696,12 +697,35 @@ mc_chdir (const vfs_path_t * vpath)
 
     /* Sometimes we assume no trailing slash on cwd */
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
-    if (vfs_path_element_valid (path_element) && (*path_element->path != '\0'))
+    if (vfs_path_element_valid (path_element))
     {
-        char *p;
-        p = strchr (path_element->path, 0) - 1;
-        if (*p == PATH_SEP && p > path_element->path)
-            *p = 0;
+        if (*path_element->path != '\0')
+        {
+            char *p;
+
+            p = strchr (path_element->path, 0) - 1;
+            if (p != NULL && *p == PATH_SEP && p != path_element->path)
+                *p = '\0';
+        }
+#ifdef ENABLE_VFS_NET
+        {
+            struct vfs_s_subclass *subclass;
+
+            subclass = (struct vfs_s_subclass *) path_element->class->data;
+            if (subclass != NULL)
+            {
+                struct vfs_s_super *super = NULL;
+
+                (void) vfs_s_get_path (vpath, &super, 0);
+                if (super != NULL && super->path_element != NULL)
+                {
+                    g_free (super->path_element->path);
+                    super->path_element->path = g_strdup (path_element->path);
+                }
+            }
+        }
+#endif /* ENABLE_VFS_NET */
+
     }
     return 0;
 

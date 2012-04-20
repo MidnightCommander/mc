@@ -1067,6 +1067,9 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
     path_element = vfs_path_get_by_index (vpath, -1);
     subclass = ((struct vfs_s_subclass *) path_element->class->data);
 
+    if (subclass == NULL)
+        return NULL;
+
     vpath_archive = vfs_path_clone (vpath);
     vfs_path_remove_element_by_index (vpath_archive, -1);
 
