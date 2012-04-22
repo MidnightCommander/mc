@@ -167,8 +167,6 @@ void do_file_mark (WPanel * panel, int idx, int val);
 
 gboolean do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
-void directory_history_add (struct WPanel *panel, const char *dir);
-
 gsize panel_get_num_of_sortable_fields (void);
 const char **panel_get_sortable_fields (gsize *);
 const panel_field_t *panel_get_field_by_id (const char *);
