@@ -1,3 +1,40 @@
+Version 4.8.3
+
+- Misc
+
+    * Code cleanup (#2780)
+
+- Fixes
+
+    * Broken support of XDG_* shell variables (#1851)
+    * Segmentation fault while background copying (#2663)
+    * MC ignores second directory argument (#2762)
+    * Interpretation of LANG variable needs to be case insensitive (#2386)
+    * Cannot copy zero-length files with "Preallocate space" option (#2755)
+    * Problem in the Copy operation with unchecked the "Preserve attributes" option (#2278)
+    * * Cursor position reset after update when panel is panelized, but doesn't (#2766)
+    * File selection reset after exit from the archive in the root (#2776)
+    * Hotlist: broken newly added entries if old-style path is present (#2753)
+    * Can't rebind Fx keys in the file manager (#2384)
+    * "justified" menu alignment (#2756)
+    * The last (or single) word of hyperlinks in the interactive help don't act on mouse clicks (#2763)
+    * 'cd' command is not working in shell link (#2758)
+    * mc hangs on switching screens (#2608)
+    * Case sensitive search with SEARCH_TYPE_PCRE is broken (#2764)
+    * mcedit can't run w/o file as parameter (#2754)
+    * mcedit can't record input char (#2757)
+    * mcedit: save file on top of existing directory changes dir's permissions (#2761)
+    * Unable to edit gzipped files (#2759)
+    * mcedit hangs up on replace with regexp contains '^' or '$' (#1868)
+    * Segfault after open incorrect archive (#2775)
+    * mcdiff crashes if one panel is not in the listing mode (#2769)
+    * The password for vfs sessions remains in input history (#2760)
+    * Showing directory sizes is broken in VFS'es (#2765)
+    * Stale symlinks in vfs (#2777)
+    * Active VFS directories list contain incorrect current path (#2779)
+    * Date not set properly in manpage (#2692)
+    * Empty texinfo rule in mc.ext (#2774)
+
 Version 4.8.2
 
 - Core
