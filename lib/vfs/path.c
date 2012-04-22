@@ -1442,6 +1442,35 @@ vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolean keep
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Build pretty string representation of one path_element_t object
+ *
+ * @param element path element
+ *
+ * @return newly allocated string
+ */
+
+char *
+vfs_path_element_build_pretty_path_str (const vfs_path_element_t * element)
+{
+    char *url_params;
+    GString *pretty_path;
+
+    pretty_path = g_string_new (element->class->prefix);
+    g_string_append (pretty_path, VFS_PATH_URL_DELIMITER);
+
+    url_params = vfs_path_build_url_params_str (element, FALSE);
+    g_string_append (pretty_path, url_params);
+    g_free (url_params);
+
+    if (*element->path != PATH_SEP)
+        g_string_append_c (pretty_path, PATH_SEP);
+
+    g_string_append (pretty_path, element->path);
+    return g_string_free (pretty_path, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Compare two path objects as strings
  *
  * @param vpath1 first path object
