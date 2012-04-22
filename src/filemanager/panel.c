@@ -1382,6 +1382,17 @@ panel_save_name (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+directory_history_add (struct WPanel *panel, const vfs_path_t * vpath)
+{
+    char *tmp;
+
+    tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    panel->dir_history = list_append_unique (panel->dir_history, tmp);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* "history_load" event handler */
 static gboolean
 panel_load_history (const gchar * event_group_name, const gchar * event_name,
@@ -1395,16 +1406,12 @@ panel_load_history (const gchar * event_group_name, const gchar * event_name,
 
     if (ev->receiver == NULL || ev->receiver == (Widget *) p)
     {
-        char *tmp_path;
-
-        tmp_path = vfs_path_to_str (p->cwd_vpath);
         if (ev->cfg != NULL)
             p->dir_history = history_load (ev->cfg, p->hist_name);
         else
             p->dir_history = history_get (p->hist_name);
 
-        directory_history_add (p, tmp_path);
-        g_free (tmp_path);
+        directory_history_add (p, p->cwd_vpath);
     }
 
     return TRUE;
@@ -3123,13 +3130,7 @@ directory_history_list (WPanel * panel)
 
         s_vpath = vfs_path_from_str (s);
         if (_do_panel_cd (panel, s_vpath, cd_exact))
-        {
-            char *tmp_path;
-
-            tmp_path = vfs_path_to_str (panel->cwd_vpath);
-            directory_history_add (panel, tmp_path);
-            g_free (tmp_path);
-        }
+            directory_history_add (panel, panel->cwd_vpath);
         else
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (s_vpath);
@@ -4407,13 +4408,7 @@ do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enu
 
     r = _do_panel_cd (panel, new_dir_vpath, cd_type);
     if (r)
-    {
-        char *tmp_path;
-
-        tmp_path = vfs_path_to_str (panel->cwd_vpath);
-        directory_history_add (panel, tmp_path);
-        g_free (tmp_path);
-    }
+        directory_history_add (panel, panel->cwd_vpath);
     return r;
 }
 
@@ -4567,20 +4562,6 @@ update_panels (panel_update_flags_t flags, const char *current_file)
 
     if (!panel->is_panelized)
         (void) mc_chdir (panel->cwd_vpath);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-directory_history_add (struct WPanel *panel, const char *dir)
-{
-    vfs_path_t *vpath;
-    char *tmp;
-
-    vpath = vfs_path_from_str (dir);
-    tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
-    vfs_path_free (vpath);
-    panel->dir_history = list_append_unique (panel->dir_history, tmp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
