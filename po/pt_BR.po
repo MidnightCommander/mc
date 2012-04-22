@@ -1,23 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Rafael Ferreira <rafael.f.f1@gmail.com>, 2012.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 # Van Der Fran <transifex@vanderland.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-02-14 08:51+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.net/projects/p/mc/"
-"language/pt_BR/)\n"
-"Language: pt_BR\n"
+"PO-Revision-Date: 2012-04-04 03:22+0000\n"
+"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.net/projects/p/mc/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -55,10 +55,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Arquivo \"%s\" já está sendo editado. \n"
-"Usuário: %s \n"
-"Processo Nº: %d"
+msgstr "Arquivo \"%s\" já está sendo editado. \nUsuário: %s \nProcesso Nº: %d"
 
 msgid "File locked"
 msgstr "Arquivo bloqueado"
@@ -116,29 +113,23 @@ msgstr ""
 msgid "Re&gular expression"
 msgstr ""
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "Hexadecimal"
+msgstr ""
 
-#, fuzzy
 msgid "Wil&dcard search"
-msgstr "Pesquisa com curinga"
+msgstr ""
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Não é possível carregar a skin '%s' . \n"
-"Skin padrão foi carregado"
+msgstr "Não é possível carregar a skin '%s' . \nSkin padrão foi carregado"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Não é possível analisar a skin '%s' . \n"
-"Skin padrão foi carregado"
+msgstr "Não é possível analisar a skin '%s' . \nSkin padrão foi carregado"
 
 #, c-format
 msgid ""
@@ -434,15 +425,13 @@ msgstr "A variável de ambiente TERM não foi definida!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Tamanho da tela %d x %d não é suportado. \n"
-"Verifique a variável de ambiente TERM.\n"
+msgstr "Tamanho da tela %d x %d não é suportado. \nVerifique a variável de ambiente TERM.\n"
 
 msgid "Warning"
 msgstr "Aviso"
 
 msgid "Pipe failed"
-msgstr ""
+msgstr "Pipe falhou"
 
 msgid "Dup failed"
 msgstr ""
@@ -573,9 +562,8 @@ msgstr "Edita um arquivo"
 msgid "Forces xterm features"
 msgstr "Força recursos do xterm"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Desabilita suporte à sub interpretadores de comandos"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -1546,7 +1534,8 @@ msgstr "Parâmetros de ordenamento"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1618,9 +1607,7 @@ msgid "Symbolic link filename:"
 msgstr "Nome do arquivo de ligação simbólica"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-"Nome do arquivo existente (nome do arquivo para o qual a ligação irá "
-"apontar):"
+msgstr "Nome do arquivo existente (nome do arquivo para o qual a ligação irá apontar):"
 
 msgid "Symbolic link"
 msgstr "Ligação Simbólica"
@@ -2299,17 +2286,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Arquivo: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Arquivo: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -3137,8 +3124,7 @@ msgid "Do you really want to execute?"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
+msgstr "Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
 
 msgid "&Add new"
 msgstr "&Adicionar Novo"
@@ -3167,9 +3153,8 @@ msgstr "Falha ao fechar conector"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
-#, fuzzy
 msgid "Modified git files"
-msgstr "Modificado: %s"
+msgstr ""
 
 msgid "Find rejects after patching"
 msgstr "A busca foi rejeitada após a atualização"
@@ -3184,9 +3169,7 @@ msgstr "Procurar programas SUID e SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Impossivel abrir arquivo %s para escrita:\n"
-"%s\n"
+msgstr "Impossivel abrir arquivo %s para escrita:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3225,9 +3208,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Impossível escrever para o arquivo %s :\n"
-"%s\n"
+msgstr "Impossível escrever para o arquivo %s :\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3251,10 +3232,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Arquivo %s não pertence ao superusuário ou a você ou pode\n"
-"ser escrito por todos.\n"
-"O seu uso pode comprometer a segurança"
+msgstr "Arquivo %s não pertence ao superusuário ou a você ou pode\nser escrito por todos.\nO seu uso pode comprometer a segurança"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3315,15 +3293,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Por favor, pressione %s\n"
-"e espere até essa mensagem sumir.\n"
-"\n"
-"então, pressione ela de novo para ver se OK aparece\n"
-"próximo ao botão.\n"
-"\n"
-"Se quiser desistir, pressione um ESC simples\n"
-"e aguarde."
+msgstr "Por favor, pressione %s\ne espere até essa mensagem sumir.\n\nentão, pressione ela de novo para ver se OK aparece\npróximo ao botão.\n\nSe quiser desistir, pressione um ESC simples\ne aguarde."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3339,9 +3309,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Parece que todas as teclas já estão funcionando \n"
-"adequadamente. OK!"
+msgstr "Parece que todas as teclas já estão funcionando \nadequadamente. OK!"
 
 msgid "&Discard"
 msgstr "&Descartar"
@@ -3349,9 +3317,7 @@ msgstr "&Descartar"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Ótimo! Já temos um mapeamento de teclas completo!\n"
-"todas as teclas funcionam bem."
+msgstr "Ótimo! Já temos um mapeamento de teclas completo!\ntodas as teclas funcionam bem."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Pressione todas as teclas mencionadas, após terminar, verifique"
@@ -3461,9 +3427,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "diretório"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3487,17 +3452,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Impossível abrir arquivo cpio\n"
-"%s"
+msgstr "Impossível abrir arquivo cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Final prematuro do arquivo cpio\n"
-"%s"
+msgstr "Final prematuro do arquivo cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3505,11 +3466,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Links físicos inconsistentes de\n"
-"%s\n"
-"no arquivo cpio\n"
-"%s"
+msgstr "Links físicos inconsistentes de\n%s\nno arquivo cpio\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3519,25 +3476,19 @@ msgstr "%s contém entradas duplicadas! Ignorando!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Cabeçalho cpio corrompido encontrado em\n"
-"%s"
+msgstr "Cabeçalho cpio corrompido encontrado em\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Fim de arquivo inesperado\n"
-"%s"
+msgstr "Fim de arquivo inesperado\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Impossível abrir arquivo %s\n"
-"%s"
+msgstr "Impossível abrir arquivo %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Arquivo extfs inconsistente"
@@ -3714,9 +3665,7 @@ msgstr "ftpfs: armazenando arquivos"
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
-msgstr ""
-"~ /.netrc possui modo incorreto\n"
-"Remova senha ou ajuste modo "
+msgstr "~ /.netrc possui modo incorreto\nRemova senha ou ajuste modo "
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -3726,17 +3675,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Aviso: linha inválida em %s:\n"
-"%s\n"
+msgstr "Aviso: linha inválida em %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Aviso: etiqueta %c inválida em %s:\n"
-"%s\n"
+msgstr "Aviso: etiqueta %c inválida em %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3769,9 +3714,7 @@ msgstr "%s renomeando arquivos\n"
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Impossível abrir arquivo tar\n"
-"%s"
+msgstr "Impossível abrir arquivo tar\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Arquivo inconsistente"
@@ -3783,9 +3726,7 @@ msgstr "Fim de arquivo inesperado"
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"não parece ser um arquivo 'tar'."
+msgstr "%s\nnão parece ser um arquivo 'tar'."
 
 msgid "undelfs: error"
 msgstr "undelfs: erro"
@@ -3944,9 +3885,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "&Regular expression"
-#~ msgstr "E&xpressão Regular"

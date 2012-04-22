@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"PO-Revision-Date: 2012-03-19 17:04+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: wa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: wa\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -1532,7 +1532,8 @@ msgstr "Ôrde po relire"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2283,17 +2284,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Fitchî: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Fitchî: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -3150,9 +3151,8 @@ msgstr "Li cloyaedje del bûze a fwait berwete"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
-#, fuzzy
 msgid "Modified git files"
-msgstr "Candjî:  %s"
+msgstr ""
 
 msgid "Find rejects after patching"
 msgstr "Trover les sacwè nén prijhes på patch"
@@ -3167,9 +3167,7 @@ msgstr "Trover les programes SUID eyet SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Dji n' sai drovî li fitchî %s po scrire divins:\n"
-"%s\n"
+msgstr "Dji n' sai drovî li fitchî %s po scrire divins:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3208,9 +3206,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Dji n' sai scrire e fitchî %s :\n"
-"%s\n"
+msgstr "Dji n' sai scrire e fitchî %s :\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3234,10 +3230,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Li fitchî %s n' est ni da vosse ni da root. Tot l' monde pout bén scrire "
-"divins.\n"
-"Do côp, si vos vos e siervoz, ça pôreut esse dandjureu..."
+msgstr "Li fitchî %s n' est ni da vosse ni da root. Tot l' monde pout bén scrire divins.\nDo côp, si vos vos e siervoz, ça pôreut esse dandjureu..."
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3298,16 +3291,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Tchôkîz so %s\n"
-"et s'  rawårdez djusk' a tant ki li messaedje eva.\n"
-"\n"
-"Adon, tchôkîz co on côp sol minme tape po vey s' i gn a on 'I Va' k' "
-"aparexhe\n"
-"djusse asto do boton.\n"
-"\n"
-"Si vos voloz spiter foû, tchôkîz on côp so Escape\n"
-"et ratindoz eto."
+msgstr "Tchôkîz so %s\net s'  rawårdez djusk' a tant ki li messaedje eva.\n\nAdon, tchôkîz co on côp sol minme tape po vey s' i gn a on 'I Va' k' aparexhe\ndjusse asto do boton.\n\nSi vos voloz spiter foû, tchôkîz on côp so Escape\net ratindoz eto."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3323,9 +3307,7 @@ msgstr "I Va"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Dj' a l' idêye ki totes vos tapes rotèt ddja \n"
-"a môde di djin. Clapant, edon?"
+msgstr "Dj' a l' idêye ki totes vos tapes rotèt ddja \na môde di djin. Clapant, edon?"
 
 msgid "&Discard"
 msgstr "&Taper la hatch et match"
@@ -3333,18 +3315,13 @@ msgstr "&Taper la hatch et match"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Clapant! Li båze di dnêyes po vosse terminå est pår fwaite!\n"
-"Totes vos tapes rotèt a l' idêye."
+msgstr "Clapant! Li båze di dnêyes po vosse terminå est pår fwaite!\nTotes vos tapes rotèt a l' idêye."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-"Tchôkîz totes les tapes k' on vs dit vaici. On côp ki c' est fwait, waitîz"
+msgstr "Tchôkîz totes les tapes k' on vs dit vaici. On côp ki c' est fwait, waitîz"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"les kénès tapes ni sont nén mårkeyes avou 'I Va'. Tchôkîz sol bår d' espåce "
-"so les mankantès"
+msgstr "les kénès tapes ni sont nén mårkeyes avou 'I Va'. Tchôkîz sol bår d' espåce so les mankantès"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tape, ou bén clitchîz avou vosse soris pol defini. Bodjî avou Tab."
@@ -3448,9 +3425,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "ridant"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3474,9 +3450,7 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Dji n' sai drovî li fitchî cpio\n"
-"%s"
+msgstr "Dji n' sai drovî li fitchî cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3909,6 +3883,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "&Regular expression"
-#~ msgstr "Erûle&ye Ratoûrneure"

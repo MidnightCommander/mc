@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"PO-Revision-Date: 2012-03-19 17:04+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.net/projects/p/mc/language/el/)\n"
-"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -111,29 +111,23 @@ msgstr ""
 msgid "Re&gular expression"
 msgstr ""
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "Δεκαεξαδικό"
+msgstr ""
 
-#, fuzzy
 msgid "Wil&dcard search"
-msgstr "Αναζήτηση χαρακτήρα μπαλαντέρ"
+msgstr ""
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Αδύνατη η φόρτωση του δέρματος '%s'. \n"
-" Το προεπιλεγμένο δέρμα έχει φορτωθεί"
+msgstr "Αδύνατη η φόρτωση του δέρματος '%s'. \n Το προεπιλεγμένο δέρμα έχει φορτωθεί"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Αδύνατη η ανάγνωση του δέρματος '%s'. \n"
-" Το προεπιλεγμένο δέρμα έχει φορτωθεί"
+msgstr "Αδύνατη η ανάγνωση του δέρματος '%s'. \n Το προεπιλεγμένο δέρμα έχει φορτωθεί"
 
 #, c-format
 msgid ""
@@ -1538,7 +1532,8 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -3430,9 +3425,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "Πλήκτρο home"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3492,9 +3486,7 @@ msgstr ""
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Άνοιγμα αρχείου %s ανεπιτυχές\n"
-"%s"
+msgstr "Άνοιγμα αρχείου %s ανεπιτυχές\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Χαλασμένο αρχείο extfs"
@@ -3511,9 +3503,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
-"υποστηρίζονται."
+msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3722,9 +3712,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Άνοιγμα αρχείου tar ανεπιτυχές\n"
-"%s"
+msgstr "Άνοιγμα αρχείου tar ανεπιτυχές\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Χαλασμένο αρχείο tar"
@@ -3895,9 +3883,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Normal"
-#~ msgstr "Κανονικό"
-
-#~ msgid "&Regular expression"
-#~ msgstr "&Κανονική έκφραση"

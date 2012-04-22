@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-02-14 08:51+0000\n"
+"PO-Revision-Date: 2012-03-19 17:04+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -423,9 +423,7 @@ msgstr "TERM miljøvariabelen er ikke satt!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Skjermstørrelse %dx%d er ikke støttet.\n"
-"Sjekk TERM miljøvariabelen.\n"
+msgstr "Skjermstørrelse %dx%d er ikke støttet.\nSjekk TERM miljøvariabelen.\n"
 
 msgid "Warning"
 msgstr "Advarsel"
@@ -562,9 +560,8 @@ msgstr "Redigerer en fil"
 msgid "Forces xterm features"
 msgstr "Tvungen bruk av xterm funksjoner"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Slå av støtte for underskall"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -1535,7 +1532,8 @@ msgstr "Sorteringsrekkefølge"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2286,17 +2284,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Fil: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Fil: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -3153,9 +3151,8 @@ msgstr "Feil under lukking av rør"
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
-#, fuzzy
 msgid "Modified git files"
-msgstr "Endret:    %s"
+msgstr ""
 
 msgid "Find rejects after patching"
 msgstr "Finn avviste etter patching"
@@ -3170,9 +3167,7 @@ msgstr "Finn SUID og SGID programmer"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Kan ikke åpne filen %s for skriving:\n"
-"%s\n"
+msgstr "Kan ikke åpne filen %s for skriving:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3211,9 +3206,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Kan ikke skrive til %s filen:\n"
-"%s\n"
+msgstr "Kan ikke skrive til %s filen:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3237,9 +3230,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Filen %s er ikke eid av root eller er skrivbar for alle.\n"
-"Bruk av den kan kompromittere sikkerheten"
+msgstr "Filen %s er ikke eid av root eller er skrivbar for alle.\nBruk av den kan kompromittere sikkerheten"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3300,15 +3291,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Vær snill og trykk %s\n"
-"og vent til denne meldingen forsvinner.\n"
-"\n"
-"Trykk så igjen fpr å se om OK kommer opp\n"
-"ved siden av knappen.\n"
-"\n"
-"Hvis du vil gå ut igjen, trykk en enkelt Escape tast\n"
-"og vent da også."
+msgstr "Vær snill og trykk %s\nog vent til denne meldingen forsvinner.\n\nTrykk så igjen fpr å se om OK kommer opp\nved siden av knappen.\n\nHvis du vil gå ut igjen, trykk en enkelt Escape tast\nog vent da også."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3324,9 +3307,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Det ser ut til at alle tastene dine \n"
-"allerede virker fint. Det er bra."
+msgstr "Det ser ut til at alle tastene dine \nallerede virker fint. Det er bra."
 
 msgid "&Discard"
 msgstr "forkast"
@@ -3334,9 +3315,7 @@ msgstr "forkast"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Flott! Du har en komplett terminaldatabase!\n"
-"Alle tastene virker fint."
+msgstr "Flott! Du har en komplett terminaldatabase!\nAlle tastene virker fint."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Trykk ned alle tastene som vises her. Sjekk siden"
@@ -3446,9 +3425,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "katalog"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3472,17 +3450,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Kunne ikke åpne cpio arkiv\n"
-"%s"
+msgstr "Kunne ikke åpne cpio arkiv\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Prematur slutt på cpio arkiv\n"
-"%s"
+msgstr "Prematur slutt på cpio arkiv\n%s"
 
 #, c-format
 msgid ""
@@ -3490,11 +3464,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Ukonsistente harde lenker til\n"
-"%s\n"
-"i cpio arkiv\n"
-"%s"
+msgstr "Ukonsistente harde lenker til\n%s\ni cpio arkiv\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3504,25 +3474,19 @@ msgstr "%s inneholder duplikerte oppføringer! Hopper over!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Korrupt cpio header funnet i\n"
-"%s"
+msgstr "Korrupt cpio header funnet i\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Uventet slutt på fil\n"
-"%s"
+msgstr "Uventet slutt på fil\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Kunne ikke åpne %s arkiv\n"
-"%s"
+msgstr "Kunne ikke åpne %s arkiv\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Ukonsistent extfs arkiv"
@@ -3709,17 +3673,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Advarsel: Ugyldig linje i %s.\n"
-"%s\n"
+msgstr "Advarsel: Ugyldig linje i %s.\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Advarsel: Ugyldig flagg %c i %s:\n"
-"%s\n"
+msgstr "Advarsel: Ugyldig flagg %c i %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3752,9 +3712,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Kunne ikke åpne tar-arkiv\n"
-"%s"
+msgstr "Kunne ikke åpne tar-arkiv\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Ukonsistent tar-arkiv"
@@ -3925,6 +3883,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "&Regular expression"
-#~ msgstr "Vanlig uttrykk"
