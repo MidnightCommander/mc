@@ -1,3 +1,35 @@
+Version 4.8.1.2
+
+- VFS
+
+    * Internal VFS reorganization (#2695) 
+
+- Misc
+
+    * Code cleanup (#2781)
+
+Fixes
+
+    * Broken support of XDG_* shell variables (#1851)
+    * Segmentation fault while background copying (#2663)
+    * Interpretation of LANG variable needs to be case insensitive (#2386)
+    * Cannot copy zero-length files with "Preallocate space" option (#2755)
+    * Problem in the Copy operation with unchecked the "Preserve attributes" option (#2278)
+    * Cursor position reset after update when panel is panelized, but doesn't (#2766)
+    * File selection reset after exit from the archive in the root (#2776)
+    * Can't rebind Fx keys in the file manager (#2384)
+    * The last (or single) word of hyperlinks in the interactive help don't act on mouse clicks (#2763)
+    * Case sensitive search with SEARCH_TYPE_PCRE is broken (#2764)
+    * mcedit can't record input char (#2757)
+    * mcedit: save file on top of existing directory changes dir's permissions (#2761)
+    * mcedit hangs up on replace with regexp contains '^' or '$' (#1868)
+    * Segfault after open incorrect archive (#2775)
+    * mcdiff crashes if one panel is not in the listing mode (#2769)
+    * Active VFS directories list contain incorrect current path (#2779)
+    * Date not set properly in manpage (#2692)
+    * Empty texinfo rule in mc.ext (#2774)
+
+
 Version 4.8.1.1
 
 - Core
@@ -40,6 +72,7 @@ Version 4.8.1.1
     * mcedit crashes when ~/.config is a file (#2738)
     * mcedit: reset selection after END/HOME/PgDn/PgUp (#2726)
     * 'make check' fails on arm and alpha (-z muldefs) (#2732)
+
 
 Version 4.8.1
 
