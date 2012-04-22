@@ -177,6 +177,9 @@ tty_print_one_vline (gboolean single)
 void
 tty_draw_box (int y, int x, int ys, int xs, gboolean single)
 {
+    if (ys <= 0 || xs <= 0)
+        return;
+
     ys--;
     xs--;
 

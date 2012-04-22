@@ -115,17 +115,18 @@ lock_build_name (void)
 static char *
 lock_build_symlink_name (const vfs_path_t * fname_vpath)
 {
-    const char *elpath, *str_filename;
-    char *str_dirname, *symlink_name;
+    const char *elpath;
+    char *str_filename, *str_dirname, *symlink_name;
 
     /* get first path piece */
     elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
 
-    str_filename = g_basename (elpath);
-    str_dirname = g_dirname (elpath);
-
+    str_filename = g_path_get_basename (elpath);
+    str_dirname = g_path_get_dirname (elpath);
     symlink_name = g_strconcat (str_dirname, PATH_SEP_STR ".#", str_filename, (char *) NULL);
     g_free (str_dirname);
+    g_free (str_filename);
+
     return symlink_name;
 }
 

@@ -504,7 +504,7 @@ hotlist_button_callback (WButton * button, int action)
 
 #ifdef	ENABLE_VFS
     case B_FREE_ALL_VFS:
-        vfs_expire (1);
+        vfs_expire (TRUE);
         /* fall through */
 
     case B_REFRESH_VFS:

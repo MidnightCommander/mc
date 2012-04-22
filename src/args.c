@@ -654,6 +654,7 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
                 char *fname;
                 struct stat st;
                 vfs_path_t *tmp_vpath, *fname_vpath;
+                gboolean ok;
 
                 fname = g_strndup (tmp, p - 1 - tmp);
                 tmp_vpath = vfs_path_from_str (tmp);
@@ -662,7 +663,11 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
                  * Check that the file before the colon actually exists.
                  * If it doesn't exist, revert to the old behavior.
                  */
-                if (mc_stat (tmp_vpath, &st) == -1 && mc_stat (fname_vpath, &st) != -1)
+                ok = mc_stat (tmp_vpath, &st) == -1 && mc_stat (fname_vpath, &st) != -1;
+                vfs_path_free (tmp_vpath);
+                vfs_path_free (fname_vpath);
+
+                if (ok)
                 {
                     mc_run_param0 = fname;
                     mc_args__edit_start_line = atoi (p);
@@ -672,8 +677,6 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
                     g_free (fname);
                     goto try_plus_filename;
                 }
-                vfs_path_free (tmp_vpath);
-                vfs_path_free (fname_vpath);
             }
             else
             {

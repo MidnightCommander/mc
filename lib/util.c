@@ -110,25 +110,22 @@ is_8bit_printable (unsigned char c)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-resolve_symlinks (const char *path)
+resolve_symlinks (const vfs_path_t *vpath)
 {
+    char *p;
     char *buf, *buf2, *q, *r, c;
-    int len;
     struct stat mybuf;
-    const char *p;
-    vfs_path_t *vpath;
 
-    if (*path != PATH_SEP)
+    if (vpath->relative)
         return NULL;
 
-    vpath = vfs_path_from_str (path);
+    p = vfs_path_to_str (vpath);
     r = buf = g_malloc (MC_MAXPATHLEN);
     buf2 = g_malloc (MC_MAXPATHLEN);
     *r++ = PATH_SEP;
     *r = 0;
-    p = path;
 
-    for (;;)
+    do
     {
         q = strchr (p + 1, PATH_SEP);
         if (!q)
@@ -143,19 +140,19 @@ resolve_symlinks (const char *path)
         {
             g_free (buf);
             buf = NULL;
-            *q = c;
             goto ret;
         }
         if (!S_ISLNK (mybuf.st_mode))
             strcpy (r, p + 1);
         else
         {
+            int len;
+
             len = mc_readlink (vpath, buf2, MC_MAXPATHLEN - 1);
             if (len < 0)
             {
                 g_free (buf);
                 buf = NULL;
-                *q = c;
                 goto ret;
             }
             buf2[len] = 0;
@@ -167,15 +164,16 @@ resolve_symlinks (const char *path)
         canonicalize_pathname (buf);
         r = strchr (buf, 0);
         if (!*r || *(r - 1) != PATH_SEP)
+        /* FIXME: this condition is always true because r points to the EOL */
         {
             *r++ = PATH_SEP;
             *r = 0;
         }
         *q = c;
         p = q;
-        if (!c)
-            break;
     }
+    while (c != '\0');
+
     if (!*buf)
         strcpy (buf, PATH_SEP_STR);
     else if (*(r - 1) == PATH_SEP && r != buf + 1)
@@ -183,7 +181,7 @@ resolve_symlinks (const char *path)
 
   ret:
     g_free (buf2);
-    vfs_path_free (vpath);
+    g_free (p);
     return buf;
 }
 
@@ -977,22 +975,14 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     char *p, *q, *r, *s, *buf = NULL;
     int i, j, prevlen = -1, currlen;
     char *my_first = NULL, *my_second = NULL;
-    char *path_str;
 
-    path_str = vfs_path_to_str (vpath1);
-    my_first = resolve_symlinks (path_str);
-    g_free (path_str);
+    my_first = resolve_symlinks (vpath1);
     if (my_first == NULL)
-        return NULL;
+        goto ret;
 
-    path_str = vfs_path_to_str (vpath2);
-    my_second = resolve_symlinks (path_str);
-    g_free (path_str);
+    my_second = resolve_symlinks (vpath2);
     if (my_second == NULL)
-    {
-        g_free (my_first);
-        return NULL;
-    }
+        goto ret;
 
     for (j = 0; j < 2; j++)
     {
@@ -1028,11 +1018,7 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
             if (currlen < prevlen)
                 g_free (buf);
             else
-            {
-                g_free (my_first);
-                g_free (my_second);
-                return buf;
-            }
+                goto ret;
         }
         p = buf = g_malloc (currlen);
         prevlen = currlen;
@@ -1040,6 +1026,8 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
             strcpy (p, "../");
         strcpy (p, q);
     }
+
+  ret:
     g_free (my_first);
     g_free (my_second);
     return buf;
