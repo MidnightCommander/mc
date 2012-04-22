@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 #   <signupbox@om.it.eu.org>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-03-19 20:27+0300\n"
-"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"PO-Revision-Date: 2012-03-19 17:28+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -53,10 +53,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Il file \"%s\"  viene già elaborato da:\n"
-"Utente: %s\n"
-"ID processo: %d"
+msgstr "Il file \"%s\"  viene già elaborato da:\nUtente: %s\nID processo: %d"
 
 msgid "File locked"
 msgstr "File bloccato"
@@ -114,29 +111,23 @@ msgstr "&Normale"
 msgid "Re&gular expression"
 msgstr ""
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "Esadecimale"
+msgstr ""
 
-#, fuzzy
 msgid "Wil&dcard search"
-msgstr "Ricerca con caratteri jolly"
+msgstr ""
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Impossibile caricare il tema '%s'.\n"
-"Viene utilizzato quello predefinito"
+msgstr "Impossibile caricare il tema '%s'.\nViene utilizzato quello predefinito"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Impossibile analizzare il tema '%s'.\n"
-"Viene caricato quello predefinito"
+msgstr "Impossibile analizzare il tema '%s'.\nViene caricato quello predefinito"
 
 #, c-format
 msgid ""
@@ -432,9 +423,7 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Risoluzione schermo %d x %d non supportata. Controllare la variabile "
-"d'ambiente TERM.\n"
+msgstr "Risoluzione schermo %d x %d non supportata. Controllare la variabile d'ambiente TERM.\n"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -571,9 +560,8 @@ msgstr "Edita un file"
 msgid "Forces xterm features"
 msgstr "Forza caratteristiche xterm"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Disabilita supporto subshell"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -662,11 +650,7 @@ msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
-msgstr ""
-"\n"
-"Si prega di inviare segnalazioni di malfunzionamenti (tra cui l'output di "
-"`mc-V ')\n"
-"come i ticket a www.midnight-commander.org\n"
+msgstr "\nSi prega di inviare segnalazioni di malfunzionamenti (tra cui l'output di `mc-V ')\ncome i ticket a www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -705,9 +689,7 @@ msgstr "Lettura fallito"
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr ""
-"Il processo di background ha inviato una richiesta con\n"
-"più argomenti di quanti possibile gestire."
+msgstr "Il processo di background ha inviato una richiesta con\npiù argomenti di quanti possibile gestire."
 
 msgid "&Dismiss"
 msgstr "&Rinuncia"
@@ -737,27 +719,20 @@ msgstr "La ricerca è disabilitata"
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
-msgstr ""
-"Impossibile creare il file temporaneo diff\n"
-"%s"
+msgstr "Impossibile creare il file temporaneo diff\n%s"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
-msgstr ""
-"Impossibile creare il file di backup\n"
-"%s %s\n"
-"%s"
+msgstr "Impossibile creare il file di backup\n%s %s\n%s"
 
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-"Impossibile creare il file temporaneo di fusione\n"
-"%s"
+msgstr "Impossibile creare il file temporaneo di fusione\n%s"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Più veloce (si assumono file di grandi dimensioni)"
@@ -834,9 +809,7 @@ msgstr "Il file è stato modificato. Salvare e uscire?"
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
-msgstr ""
-"Il Midnight Commander è stato chiuso.\n"
-"Salvare il file modificato?"
+msgstr "Il Midnight Commander è stato chiuso.\nSalvare il file modificato?"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -861,11 +834,7 @@ msgid ""
 "\n"
 "            A user friendly text editor\n"
 "         written for the Midnight Commander"
-msgstr ""
-"Copyright (C) 1996-2010 the Free Software Foundation⏎\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
+msgstr "Copyright (C) 1996-2010 the Free Software Foundation⏎\n\n            A user friendly text editor\n         written for the Midnight Commander"
 
 #, c-format
 msgid "Cannot open %s for reading"
@@ -1025,9 +994,7 @@ msgstr "&Salvare"
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes"
-msgstr ""
-"Il testo attuale è stato modificato senza preventivamente salvare il file.\n"
-"Continuando, le modifiche andranno perse"
+msgstr "Il testo attuale è stato modificato senza preventivamente salvare il file.\nContinuando, le modifiche andranno perse"
 
 msgid "Load"
 msgstr "Caricare"
@@ -1076,8 +1043,7 @@ msgid "Run sort"
 msgstr "Esecuzione ordinamento"
 
 msgid "Enter sort options (see manpage) separated by whitespace:"
-msgstr ""
-"Inserire le opzioni di ordinamento (vedere pagina man) separate da spazi:"
+msgstr "Inserire le opzioni di ordinamento (vedere pagina man) separate da spazi:"
 
 msgid "Sort"
 msgstr "Ordinare"
@@ -1125,9 +1091,7 @@ msgstr "Premere un tasto qualsiasi:"
 msgid ""
 "Current text was modified without a file save\n"
 "Continue discards these changes"
-msgstr ""
-"Il testo attuale è stato modificato senza salvare preventivamente il file\n"
-"Continuando, le modifiche andranno perse"
+msgstr "Il testo attuale è stato modificato senza salvare preventivamente il file\nContinuando, le modifiche andranno perse"
 
 msgid "In se&lection"
 msgstr "In se&lezione"
@@ -1144,10 +1108,7 @@ msgstr "Annullare"
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
-msgstr ""
-"Il testo corrente è stato modificato senza il preventivo salvataggio del "
-"file.\n"
-"Continuare elimina ogni modifica apportata."
+msgstr "Il testo corrente è stato modificato senza il preventivo salvataggio del file.\nContinuare elimina ogni modifica apportata."
 
 msgid "&Skip"
 msgstr "&Ignorare"
@@ -1438,9 +1399,7 @@ msgstr "Caricare file delle sintassi"
 msgid ""
 "Cannot open file %s\n"
 "%s"
-msgstr ""
-"Impossibile aprire il file %s\n"
-"%s"
+msgstr "Impossibile aprire il file %s\n%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1451,10 +1410,7 @@ msgid ""
 "the subshell claims you are in. Perhaps you have\n"
 "deleted your working directory, or given yourself\n"
 "extra access permissions with the \"su\" command?"
-msgstr ""
-"MC non può aprire la cartella che subshell afferma aperta.\n"
-"Che sia stata cancellata la cartella di lavoro, o che siano stati modificati "
-"i permessi di accesso con il comando \"su\"?"
+msgstr "MC non può aprire la cartella che subshell afferma aperta.\nChe sia stata cancellata la cartella di lavoro, o che siano stati modificati i permessi di accesso con il comando \"su\"?"
 
 msgid "The shell is already running a command"
 msgstr ""
@@ -1576,7 +1532,8 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2941,9 +2898,8 @@ msgstr ""
 msgid "Esc key mode"
 msgstr ""
 
-#, fuzzy
 msgid "Preallocate &space"
-msgstr "&Ignorare tutti gli spazi"
+msgstr ""
 
 msgid "Mkdi&r autoname"
 msgstr ""
@@ -3466,9 +3422,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "Tasto Inizio"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3492,17 +3447,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Impossibile aprire archivio cpio\n"
-"%s"
+msgstr "Impossibile aprire archivio cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Fine prematura dell'archivio cpio\n"
-"%s"
+msgstr "Fine prematura dell'archivio cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3510,11 +3461,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Hardlink incoerenti di\n"
-"%s\n"
-"nell'archivio cpio\n"
-"%s"
+msgstr "Hardlink incoerenti di\n%s\nnell'archivio cpio\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3524,9 +3471,7 @@ msgstr "%s contiene voci duplicate! Saltare!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Rilevata intestazione cpio danneggiata in\n"
-"%s"
+msgstr "Rilevata intestazione cpio danneggiata in\n%s"
 
 #, c-format
 msgid ""
@@ -3821,9 +3766,7 @@ msgstr "undelfs: leggendo inode bitmap ..."
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
-msgstr ""
-"Impossibile caricare bitmap inode da:\n"
-"%s"
+msgstr "Impossibile caricare bitmap inode da:\n%s"
 
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: leggendo blocco bitmap ..."
@@ -3832,9 +3775,7 @@ msgstr "undelfs: leggendo blocco bitmap ..."
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
-msgstr ""
-"Impossibile caricare blocco bitmap da:\n"
-"%s"
+msgstr "Impossibile caricare blocco bitmap da:\n%s"
 
 msgid "vfs_info is not fs!"
 msgstr "vfs_info non è fs!"
@@ -3939,15 +3880,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Normal"
-#~ msgstr "Normale"
-
-#~ msgid "&Regular expression"
-#~ msgstr "&Regular expression"
-
-#~ msgid "All charsets"
-#~ msgstr "Tutti i set di caratteri"
-
-#~ msgid "Case &sensitive"
-#~ msgstr "&MAI/minuscole"

@@ -1,25 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 #   <nerijus@users.sourceforge.net>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-03-19 20:27+0300\n"
-"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"PO-Revision-Date: 2012-03-19 17:28+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Lithuanian (http://www.transifex.net/projects/p/mc/language/"
-"lt/)\n"
-"Language: lt\n"
+"Language-Team: Lithuanian (http://www.transifex.net/projects/p/mc/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2)\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -426,9 +424,7 @@ msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Ekrano dydis %dx%d nepalaikomas.\n"
-"Patikrinkite TERM aplinkos kintamąjį.\n"
+msgstr "Ekrano dydis %dx%d nepalaikomas.\nPatikrinkite TERM aplinkos kintamąjį.\n"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -565,9 +561,8 @@ msgstr "Keičia vieną failą"
 msgid "Forces xterm features"
 msgstr "Priverčia naudoti „xterm“ galimybes"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Išjungia „subshell“ palaikymą"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -1538,7 +1533,8 @@ msgstr "Rikiavimo tvarka"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2045,33 +2041,25 @@ msgstr ""
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
-msgstr ""
-"Nepavyko pašalinti failo \"%s\"\n"
-"%s"
+msgstr "Nepavyko pašalinti failo \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
-msgstr ""
-"Nepavyko pašalinti failo \"%s\"\n"
-"%s"
+msgstr "Nepavyko pašalinti failo \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
-msgstr ""
-"Nepavyko pašalinti aplanko \"%s\"\n"
-"%s"
+msgstr "Nepavyko pašalinti aplanko \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
-msgstr ""
-"Nepavyko perrašyti aplanko \"%s\"\n"
-"%s"
+msgstr "Nepavyko perrašyti aplanko \"%s\"\n%s"
 
 #, c-format
 msgid ""
@@ -2211,9 +2199,7 @@ msgstr ""
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr ""
-"Nepavyko perrašyti failo \"%s\"\n"
-"%s"
+msgstr "Nepavyko perrašyti failo \"%s\"\n%s"
 
 #, c-format
 msgid ""
@@ -2299,17 +2285,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Failas: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Failas: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -3184,9 +3170,7 @@ msgstr "Rasti SUID ir SGID programas"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-" Nepavyko atverti failo %s rašymui:\n"
-"%s\n"
+msgstr " Nepavyko atverti failo %s rašymui:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3225,9 +3209,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Nepavyko įrašyti į failą %s:\n"
-"%s\n"
+msgstr "Nepavyko įrašyti į failą %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3251,9 +3233,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Failas %s nepriklauso nei „root“, nei jums arba visi gali į ją rašyti.\n"
-"Jo naudojimas gali būti nesaugus"
+msgstr "Failas %s nepriklauso nei „root“, nei jums arba visi gali į ją rašyti.\nJo naudojimas gali būti nesaugus"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3314,15 +3294,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Paspauskite %s\n"
-"ir palaukite, kol dings šis pranešimas.\n"
-"\n"
-"Tuomet paspauskite jį dar kartą ir patikrinkite,\n"
-"ar prie mygtuko atsirado „OK“.\n"
-"\n"
-"Jei norite atsisakyti, paspauskite „Grįžti“ („Esc“) \n"
-"ir palaukite."
+msgstr "Paspauskite %s\nir palaukite, kol dings šis pranešimas.\n\nTuomet paspauskite jį dar kartą ir patikrinkite,\nar prie mygtuko atsirado „OK“.\n\nJei norite atsisakyti, paspauskite „Grįžti“ („Esc“) \nir palaukite."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3338,9 +3310,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Panašu, kad visi klavišai jau veikia\n"
-"gerai. Tai puiku."
+msgstr "Panašu, kad visi klavišai jau veikia\ngerai. Tai puiku."
 
 msgid "&Discard"
 msgstr "A&tmesti"
@@ -3348,9 +3318,7 @@ msgstr "A&tmesti"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Puiku! Turite išsamią terminalo duomenų bazę!\n"
-"Visi klavišai veikia puikiai."
+msgstr "Puiku! Turite išsamią terminalo duomenų bazę!\nVisi klavišai veikia puikiai."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Paspauskite visus klavišus, parodytus aukščiau. Po to"
@@ -3399,10 +3367,7 @@ msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander jau paleistas\n"
-"šiame terminale.\n"
-"„Subshell“ palaikymas neveiks."
+msgstr "GNU Midnight Commander jau paleistas\nšiame terminale.\n„Subshell“ palaikymas neveiks."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3463,9 +3428,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "aplanką"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3489,17 +3453,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Nepvyko atverti „cpio“ archyvo\n"
-"%s"
+msgstr "Nepvyko atverti „cpio“ archyvo\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Ankstyva „cpio“ archyvo pabaiga\n"
-"%s"
+msgstr "Ankstyva „cpio“ archyvo pabaiga\n%s"
 
 #, c-format
 msgid ""
@@ -3507,11 +3467,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Nesutampančios nuorodos:\n"
-"%s\n"
-"„cpio“ archyve\n"
-"%s"
+msgstr "Nesutampančios nuorodos:\n%s\n„cpio“ archyve\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3521,25 +3477,19 @@ msgstr "Faile „%s“ turi dvigubų įrašų! Praleidžiama!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Sugadinta „cpio“ archyvo antraštė:\n"
-"%s"
+msgstr "Sugadinta „cpio“ archyvo antraštė:\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Netikėta failo pabaiga\n"
-"%s"
+msgstr "Netikėta failo pabaiga\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Nepavyko atverti „%s“ archyvo\n"
-"%s"
+msgstr "Nepavyko atverti „%s“ archyvo\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Prieštaringas „extfs“ archyvas"
@@ -3726,17 +3676,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Įspėjimas: klaidinga eilutė faile %s:\n"
-"%s\n"
+msgstr "Įspėjimas: klaidinga eilutė faile %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Įspėjimas: klaidingas parametras %c faile %s:\n"
-"%s\n"
+msgstr "Įspėjimas: klaidingas parametras %c faile %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3769,9 +3715,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Nepavyko atverti tar archyvo\n"
-"%s"
+msgstr "Nepavyko atverti tar archyvo\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Nevientisas tar archyvas"
@@ -3942,6 +3886,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "&Regular expression"
-#~ msgstr "Reguliari &išraiška"

@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Petja Touru <petja@petjatouru.arkku.net>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-03-19 20:27+0300\n"
-"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"PO-Revision-Date: 2012-03-19 17:28+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: fi_FI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fi_FI\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -53,10 +53,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Tiedosto \"%s\" on juuri nyt käsittelyssä.\n"
-"Käyttäjä: %s\n"
-"Prosessin ID: %d"
+msgstr "Tiedosto \"%s\" on juuri nyt käsittelyssä.\nKäyttäjä: %s\nProsessin ID: %d"
 
 msgid "File locked"
 msgstr "Tiedosto lukittu"
@@ -114,9 +111,8 @@ msgstr ""
 msgid "Re&gular expression"
 msgstr ""
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "Heksadesimaali"
+msgstr ""
 
 msgid "Wil&dcard search"
 msgstr ""
@@ -125,17 +121,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Teemaa '%s' ei pysty lataamaan.\n"
-"Perusteema asetettu."
+msgstr "Teemaa '%s' ei pysty lataamaan.\nPerusteema asetettu."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Teemaa '%s' ei pysty käsittelemään.\n"
-"Perusteema asetettu."
+msgstr "Teemaa '%s' ei pysty käsittelemään.\nPerusteema asetettu."
 
 #, c-format
 msgid ""
@@ -431,9 +423,7 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Näytön koko %dx%d ei ole yhteensopiva.\n"
-"Tarkista TERM.\n"
+msgstr "Näytön koko %dx%d ei ole yhteensopiva.\nTarkista TERM.\n"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -1542,7 +1532,8 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -3431,9 +3422,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "Home"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3510,8 +3500,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
+msgstr "Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3681,17 +3670,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Varoitus: Invalidi rivi %s:\n"
-"%s\n"
+msgstr "Varoitus: Invalidi rivi %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Virhe: Virheellinen lippu %c kohteessa %s:\n"
-"%s\n"
+msgstr "Virhe: Virheellinen lippu %c kohteessa %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3895,6 +3880,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "Normal"
-#~ msgstr "Normaali"

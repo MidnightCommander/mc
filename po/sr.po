@@ -1,24 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-03-19 20:27+0300\n"
-"PO-Revision-Date: 2012-02-14 08:24+0000\n"
+"PO-Revision-Date: 2012-03-19 17:28+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Serbian (http://www.transifex.net/projects/p/mc/language/"
-"sr/)\n"
-"Language: sr\n"
+"Language-Team: Serbian (http://www.transifex.net/projects/p/mc/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Language: sr\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -425,9 +423,7 @@ msgstr "Променљива љуске `TERM' није постављена!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Величина екрана %dx%d није подржана.\n"
-"Проверите променљиву љуске `TERM'.\n"
+msgstr "Величина екрана %dx%d није подржана.\nПроверите променљиву љуске `TERM'.\n"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -564,9 +560,8 @@ msgstr "Уређује једну датотеку"
 msgid "Forces xterm features"
 msgstr "Захтева одлике Икс терминала"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Искључује подршку за подљуске"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -1537,7 +1532,8 @@ msgstr "Поредак ређања"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2288,17 +2284,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Датотека: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Датотека: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -3173,9 +3169,7 @@ msgstr "Нађи програме са постављеним ПКИБ (SUID) и
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Не могу да отворим датотеку %s за упис:\n"
-"%s\n"
+msgstr "Не могу да отворим датотеку %s за упис:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3214,9 +3208,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Не могу да пишем у датотеку %s:\n"
-"%s\n"
+msgstr "Не могу да пишем у датотеку %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3240,9 +3232,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Датотеку %s не поседује ни администратор ни ви, а није ни\n"
-"читљива за свет. Њена употреба може да угрози вашу безбедност"
+msgstr "Датотеку %s не поседује ни администратор ни ви, а није ни\nчитљива за свет. Њена употреба може да угрози вашу безбедност"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3303,15 +3293,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Молим да притиснете тастер %s\n"
-"и да сачекате да ова порука нестане.\n"
-"\n"
-"Онда га поново притисните и видите да ли се појављује\n"
-"`Да' поред његовог дугмета.\n"
-"\n"
-"Ако желите да одустанете, притисните једном тастер\n"
-"`Escape' и сачекајте."
+msgstr "Молим да притиснете тастер %s\nи да сачекате да ова порука нестане.\n\nОнда га поново притисните и видите да ли се појављује\n`Да' поред његовог дугмета.\n\nАко желите да одустанете, притисните једном тастер\n`Escape' и сачекајте."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3327,9 +3309,7 @@ msgstr "Да"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Изгледа да сви ваши тастери већ сада\n"
-"лепо раде. То је одлично."
+msgstr "Изгледа да сви ваши тастери већ сада\nлепо раде. То је одлично."
 
 msgid "&Discard"
 msgstr "&Одбаци"
@@ -3337,9 +3317,7 @@ msgstr "&Одбаци"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Одлично! Имате потпуну терминалску базу!\n"
-"Сви ваши тастери добро раде."
+msgstr "Одлично! Имате потпуну терминалску базу!\nСви ваши тастери добро раде."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Притисните сваки од ових тастера. Пошто сте то урадили, проверите"
@@ -3388,10 +3366,7 @@ msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr ""
-"ГНУ-ов поноћни наредник је већ\n"
-"покренут на овом терминалу.\n"
-"Подршка за подљуске ће бити искључена."
+msgstr "ГНУ-ов поноћни наредник је већ\nпокренут на овом терминалу.\nПодршка за подљуске ће бити искључена."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3452,9 +3427,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "директоријум"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3478,17 +3452,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Не могу да отворим архиву врсте `cpio'\n"
-"%s"
+msgstr "Не могу да отворим архиву врсте `cpio'\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Прерани завршетак архиве врсте `cpio'\n"
-"%s"
+msgstr "Прерани завршетак архиве врсте `cpio'\n%s"
 
 #, c-format
 msgid ""
@@ -3496,11 +3466,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Недоследне тврде везе\n"
-"%s\n"
-"у архиви врсте `cpio'\n"
-"%s"
+msgstr "Недоследне тврде везе\n%s\nу архиви врсте `cpio'\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3510,25 +3476,19 @@ msgstr "%s садржи двоструке ставке! Заобилазим!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Покварено заглавље архиве врсте `cpio' у\n"
-"%s"
+msgstr "Покварено заглавље архиве врсте `cpio' у\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Неочекивани завршетак датотеке\n"
-"%s"
+msgstr "Неочекивани завршетак датотеке\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Не могу да отворим архиву врсте `%s'\n"
-"%s"
+msgstr "Не могу да отворим архиву врсте `%s'\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Недоследна архива extfs"
@@ -3715,17 +3675,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Упозорење: Неисправан ред у %s:\n"
-"%s\n"
+msgstr "Упозорење: Неисправан ред у %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Упозорење: Неисправан прекидач %c у %s:\n"
-"%s\n"
+msgstr "Упозорење: Неисправан прекидач %c у %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3758,9 +3714,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Не могу да отворим архиву врсте `tar'\n"
-"%s"
+msgstr "Не могу да отворим архиву врсте `tar'\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Недоследна архива врсте `tar'"
@@ -3931,6 +3885,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "&Regular expression"
-#~ msgstr "&Регуларни израз"
