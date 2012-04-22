@@ -211,7 +211,7 @@ do_show_hist (WInput * in)
  */
 
 static char *
-input_history_strip_password (const char *url)
+input_history_strip_password (char *url)
 {
     char *at, *delim, *colon;
 

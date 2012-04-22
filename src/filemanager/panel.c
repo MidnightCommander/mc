@@ -3047,17 +3047,19 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
 
     /* Reload current panel */
     panel_clean_dir (panel);
+
     {
         char *tmp_path;
 
-        tmp_path = vfs_path_to_str (panel->cwd_vpath);
         panel->count =
-            do_load_dir (tmp_path, &panel->dir, panel->sort_info.sort_field->sort_routine,
+            do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_info.sort_field->sort_routine,
                          panel->sort_info.reverse, panel->sort_info.case_sensitive,
                          panel->sort_info.exec_first, panel->filter);
+        tmp_path = vfs_path_to_str (panel->cwd_vpath);
         try_to_select (panel, get_parent_dir_name (tmp_path, olddir));
         g_free (tmp_path);
     }
+
     load_hint (0);
     panel->dirty = 1;
     update_xterm_title_path ();
@@ -3480,7 +3482,7 @@ mark_if_marking (WPanel * panel, Gpm_Event * event)
  */
 
 static void
-mouse_sort_col (Gpm_Event * event, WPanel * panel)
+mouse_sort_col (WPanel * panel, int x)
 {
     int i;
     const char *lc_sort_name = NULL;
@@ -3491,7 +3493,7 @@ mouse_sort_col (Gpm_Event * event, WPanel * panel)
     for (i = 0, format = panel->format; format != NULL; format = format->next)
     {
         i += format->field_len;
-        if (event->x < i + 1)
+        if (x < i + 1)
         {
             /* found column */
             lc_sort_name = format->title;
@@ -3595,7 +3597,7 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
     /* sort on clicked column; don't handle wheel events */
     if (mouse_down && (local.buttons & (GPM_B_UP | GPM_B_DOWN)) == 0 && local.y == 2)
     {
-        mouse_sort_col (event, panel);
+        mouse_sort_col (panel, local.x);
         return MOU_NORMAL;
     }
 
@@ -4133,16 +4135,10 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     }
 
     /* Load the default format */
-    {
-        char *tmp_path;
-
-        tmp_path = vfs_path_to_str (panel->cwd_vpath);
-        panel->count =
-            do_load_dir (tmp_path, &panel->dir, panel->sort_info.sort_field->sort_routine,
-                         panel->sort_info.reverse, panel->sort_info.case_sensitive,
-                         panel->sort_info.exec_first, panel->filter);
-        g_free (tmp_path);
-    }
+    panel->count =
+        do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_info.sort_field->sort_routine,
+                     panel->sort_info.reverse, panel->sort_info.case_sensitive,
+                     panel->sort_info.exec_first, panel->filter);
 
     /* Restore old right path */
     if (curdir != NULL)

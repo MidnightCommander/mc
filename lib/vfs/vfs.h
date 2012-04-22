@@ -229,10 +229,10 @@ void vfs_setup_work_dir (void);
 
 void vfs_timeout_handler (void);
 int vfs_timeouts (void);
-void vfs_expire (int now);
+void vfs_expire (gboolean now);
 
 char *vfs_get_current_dir (void);
-vfs_path_t *vfs_get_raw_current_dir (void);
+const vfs_path_t *vfs_get_raw_current_dir (void);
 void vfs_set_raw_current_dir (const vfs_path_t * vpath);
 
 gboolean vfs_current_is_local (void);

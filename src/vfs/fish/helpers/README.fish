@@ -24,12 +24,12 @@ Commander source code.
 
 First, mc looks for system-wide set of scripts, then it checks whether
 current user has host-specific overrides in his per-user mc
-configuration folder. User-defined overrides take priority over
-sytem-wide scripts if they exist. The order in which the folders are
+configuration directory. User-defined overrides take priority over
+sytem-wide scripts if they exist. The order in which the directories are
 traversed is as follows:
 
     /usr/libexec/mc/fish
-    ~/.mc/fish/<hostname>/
+    ~/.local/share/mc/fish/<hostname>/
 
 Server's reply is multiline, but always ends with
 

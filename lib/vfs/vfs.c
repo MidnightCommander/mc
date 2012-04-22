@@ -374,7 +374,7 @@ vfs_get_current_dir (void)
  * @return object contain current path
  */
 
-vfs_path_t *
+const vfs_path_t *
 vfs_get_raw_current_dir (void)
 {
     return current_path;

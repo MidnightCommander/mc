@@ -160,7 +160,7 @@ undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
     path_element = vfs_path_get_by_index (vpath, -1);
 
     /* To look like filesystem, we have virtual directories
-       /#undel:XXX, which have no subdirectories. XXX is replaced with
+       undel://XXX, which have no subdirectories. XXX is replaced with
        hda5, sdb8 etc, which is assumed to live under /dev. 
        -- pavel@ucw.cz */
 
@@ -168,7 +168,7 @@ undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
 
     *fsname = NULL;
 
-    if (strncmp (dirname, "/#undel", 7))
+    if (strncmp (dirname, "undel://", 8) != 0)
         return;
 
     dirname += 8;
@@ -202,7 +202,6 @@ undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
     }
     *file = g_strdup ("");
     *fsname = g_strconcat ("/dev/", dirname, (char *) NULL);
-    return;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -533,7 +533,7 @@ handle_path (dir_list * list, const char *path,
 /* --------------------------------------------------------------------------------------------- */
 
 int
-do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_reverse,
+do_load_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, gboolean lc_reverse,
              gboolean lc_case_sensitive, gboolean exec_ff, const char *fltr)
 {
     DIR *dirp;
@@ -541,13 +541,12 @@ do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_rever
     int status, link_to_dir, stale_link;
     int next_free = 0;
     struct stat st;
-    vfs_path_t *vpath;
+    char *path;
 
     /* ".." (if any) must be the first entry in the list */
     if (!set_zero_dir (list))
         return next_free;
 
-    vpath = vfs_path_from_str (path);
     if (get_dotdot_dir_stat (vpath, &st))
         list->list[next_free].st = st;
     next_free++;
@@ -556,26 +555,25 @@ do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_rever
     if (dirp == NULL)
     {
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
-        goto ret;
+        return next_free;
     }
 
     tree_store_start_check (vpath);
 
     /* Do not add a ".." entry to the root directory */
+    path = vfs_path_to_str (vpath);
     if ((path[0] == PATH_SEP) && (path[1] == '\0'))
         next_free--;
+    g_free (path);
 
-    while ((dp = mc_readdir (dirp)))
+    while ((dp = mc_readdir (dirp)) != NULL)
     {
         status = handle_dirent (list, fltr, dp, &st, next_free, &link_to_dir, &stale_link);
         if (status == 0)
             continue;
         if (status == -1)
-        {
-            tree_store_end_check ();
-            mc_closedir (dirp);
             goto ret;
-        }
+
         list->list[next_free].fnamelen = NLENGTH (dp);
         list->list[next_free].fname = g_strndup (dp->d_name, list->list[next_free].fnamelen);
         list->list[next_free].f.marked = 0;
@@ -594,10 +592,9 @@ do_load_dir (const char *path, dir_list * list, sortfn * sort, gboolean lc_rever
     if (next_free != 0)
         do_sort (list, sort, next_free - 1, lc_reverse, lc_case_sensitive, exec_ff);
 
+  ret:
     mc_closedir (dirp);
     tree_store_end_check ();
-  ret:
-    vfs_path_free (vpath);
     return next_free;
 }
 

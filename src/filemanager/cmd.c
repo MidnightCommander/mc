@@ -520,23 +520,6 @@ do_link (link_type_t link_type, const char *fname)
 /* --------------------------------------------------------------------------------------------- */
 
 #if defined(ENABLE_VFS_UNDELFS) || defined(ENABLE_VFS_NET)
-
-static const char *
-transform_prefix (const char *prefix)
-{
-    static char buffer[BUF_TINY];
-    size_t prefix_len = strlen (prefix);
-
-    if (prefix_len < 3)
-        return prefix;
-
-    strcpy (buffer, prefix + 2);
-    strcpy (buffer + prefix_len - 3, VFS_PATH_URL_DELIMITER);
-    return buffer;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 nice_cd (const char *text, const char *xtext, const char *help,
          const char *history_name, const char *prefix, int to_home, gboolean strip_password)
@@ -548,20 +531,18 @@ nice_cd (const char *text, const char *xtext, const char *help,
         return;
 
     machine = input_dialog_help (text, xtext, help, history_name, "", strip_password);
-    if (!machine)
+    if (machine == NULL)
         return;
 
     to_home = 0;                /* FIXME: how to solve going to home nicely? /~/ is
                                    ugly as hell and leads to problems in vfs layer */
 
-    /* default prefix in old-style format. */
-    if (strncmp (prefix, machine, strlen (prefix)) != 0)
-        prefix = transform_prefix (prefix);     /* Convert prefix to URL-style format */
-
     if (strncmp (prefix, machine, strlen (prefix)) == 0)
         cd_path = g_strconcat (machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
     else
         cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
+
+    g_free (machine);
 
     if (*cd_path != PATH_SEP)
     {
@@ -580,7 +561,6 @@ nice_cd (const char *text, const char *xtext, const char *help,
         vfs_path_free (cd_vpath);
     }
     g_free (cd_path);
-    g_free (machine);
 }
 #endif /* ENABLE_VFS_UNDELFS || ENABLE_VFS_NET */
 
@@ -1058,19 +1038,9 @@ reread_cmd (void)
 {
     panel_update_flags_t flag = UP_ONLY_CURRENT;
 
-    if (get_current_type () == view_listing && get_other_type () == view_listing)
-    {
-        char *c_cwd, *o_cwd;
-
-        c_cwd = vfs_path_to_str (current_panel->cwd_vpath);
-        o_cwd = vfs_path_to_str (other_panel->cwd_vpath);
-
-        if (strcmp (c_cwd, o_cwd) == 0)
-            flag = UP_OPTIMIZE;
-
-        g_free (c_cwd);
-        g_free (o_cwd);
-    }
+    if (get_current_type () == view_listing && get_other_type () == view_listing &&
+        vfs_path_cmp (current_panel->cwd_vpath, other_panel->cwd_vpath) == 0)
+        flag = UP_OPTIMIZE;
 
     update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
@@ -1531,13 +1501,12 @@ get_random_hint (int force)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef ENABLE_VFS_NET
 #ifdef ENABLE_VFS_FTP
 void
 ftplink_cmd (void)
 {
     nice_cd (_("FTP to machine"), _(machine_str),
-             "[FTP File System]", ":ftplink_cmd: FTP to machine ", "/#ftp:", 1, TRUE);
+             "[FTP File System]", ":ftplink_cmd: FTP to machine ", "ftp://", 1, TRUE);
 }
 #endif /* ENABLE_VFS_FTP */
 
@@ -1549,7 +1518,7 @@ fishlink_cmd (void)
 {
     nice_cd (_("Shell link to machine"), _(machine_str),
              "[FIle transfer over SHell filesystem]", ":fishlink_cmd: Shell link to machine ",
-             "/#sh:", 1, TRUE);
+             "sh://", 1, TRUE);
 }
 #endif /* ENABLE_VFS_FISH */
 
@@ -1560,10 +1529,9 @@ void
 smblink_cmd (void)
 {
     nice_cd (_("SMB link to machine"), _(machine_str),
-             "[SMB File System]", ":smblink_cmd: SMB link to machine ", "/#smb:", 0, TRUE);
+             "[SMB File System]", ":smblink_cmd: SMB link to machine ", "smb://", 0, TRUE);
 }
 #endif /* ENABLE_VFS_SMB */
-#endif /* ENABLE_VFS_NET */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1573,7 +1541,7 @@ undelete_cmd (void)
 {
     nice_cd (_("Undelete files on an ext2 file system"),
              _("Enter device (without /dev/) to undelete\nfiles on: (F1 for details)"),
-             "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "/#undel:", 0, FALSE);
+             "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "undel://", 0, FALSE);
 }
 #endif /* ENABLE_VFS_UNDELFS */
 
