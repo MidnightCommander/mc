@@ -567,59 +567,58 @@ print_vfs_message (const gchar * event_group_name, const gchar * event_name,
 static void
 create_panels (void)
 {
-    int current_index;
-    int other_index;
+    int current_index, other_index;
     panel_view_mode_t current_mode, other_mode;
-    vfs_path_t *original_dir = NULL;
+    char *current_dir, *other_dir;
+    vfs_path_t *original_dir;
 
     if (boot_current_is_left)
     {
+        /* left panel is active */
         current_index = 0;
         other_index = 1;
         current_mode = startup_left_mode;
         other_mode = startup_right_mode;
+        current_dir = mc_run_param0;
+        other_dir = mc_run_param1;
     }
     else
     {
+        /* right panel is active */
         current_index = 1;
         other_index = 0;
         current_mode = startup_right_mode;
         other_mode = startup_left_mode;
+        current_dir = mc_run_param1;
+        other_dir = mc_run_param0;
     }
-    /* Creates the left panel */
-    if (mc_run_param0 != NULL)
+
+    /* 1. Get current dir */
+    original_dir = vfs_path_clone (vfs_get_raw_current_dir ());
+
+    /* 2. Create passive panel */
+    if (other_dir != NULL)
     {
         vfs_path_t *vpath;
 
-        if (mc_run_param1 != NULL)
-        {
-            /* Ok, user has specified two dirs, save the original one,
-             * since we may not be able to chdir to the proper
-             * second directory later
-             */
-            original_dir = vfs_path_clone (vfs_get_raw_current_dir ());
-        }
-        vpath = vfs_path_from_str (mc_run_param0);
+        vpath = vfs_path_from_str (other_dir);
+        mc_chdir (vpath);
+        vfs_path_free (vpath);
+    }
+    set_display_type (other_index, other_mode);
+
+    /* 3. Create active panel */
+    if (current_dir == NULL)
+        mc_chdir (original_dir);
+    else
+    {
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (current_dir);
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
     set_display_type (current_index, current_mode);
-
-    /* The other panel */
-    if (mc_run_param1 != NULL)
-    {
-        vfs_path_t *vpath;
-
-        if (original_dir != NULL)
-            mc_chdir (original_dir);
-
-        vpath = vfs_path_from_str (mc_run_param1);
-        mc_chdir (vpath);
-        vfs_path_free (vpath);
-    }
-    vfs_path_free (original_dir);
-
-    set_display_type (other_index, other_mode);
 
     if (startup_left_mode == view_listing)
         current_panel = left_panel;
@@ -627,6 +626,8 @@ create_panels (void)
         current_panel = right_panel;
     else
         current_panel = left_panel;
+
+    vfs_path_free (original_dir);
 
 #ifdef ENABLE_VFS
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
