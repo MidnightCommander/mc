@@ -378,7 +378,7 @@ chown_cmd (void)
                     if (mc_chown (fname_vpath, new_user, new_group) == -1)
                         message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                                  fname, unix_error_string (errno));
-                    vfs_path_free (vpath);
+                    vfs_path_free (fname_vpath);
                 }
                 else
                     apply_chowns (new_user, new_group);
