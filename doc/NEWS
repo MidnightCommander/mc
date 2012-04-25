@@ -1,14 +1,23 @@
+Version 4.8.1.3
+
+- Fixes
+    * Crash at Chown command (#2784)
+    * Crash when creating relative symlink (#2787)
+    * Directories are opened in wrong panels (#2783)
+    * Error message when entering into compressed tar and cpio archives (#2785)
+    * Fails to build from source with --enable-tests (#2786)
+
 Version 4.8.1.2
 
 - VFS
 
-    * Internal VFS reorganization (#2695) 
+    * Internal VFS reorganization (#2695)
 
 - Misc
 
     * Code cleanup (#2781)
 
-Fixes
+- Fixes
 
     * Broken support of XDG_* shell variables (#1851)
     * Segmentation fault while background copying (#2663)
