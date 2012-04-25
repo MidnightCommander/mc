@@ -16,3 +16,5 @@ do_panel_cd_SOURCES = \
 
 examine_cd_SOURCES = \
 	examine_cd.c
+
+EXTRA_DIST = do_panel_cd_stub_env.c
