@@ -112,14 +112,14 @@ is_8bit_printable (unsigned char c)
 static char *
 resolve_symlinks (const vfs_path_t *vpath)
 {
-    char *p;
+    char *p, *p2;
     char *buf, *buf2, *q, *r, c;
     struct stat mybuf;
 
     if (vpath->relative)
         return NULL;
 
-    p = vfs_path_to_str (vpath);
+    p = p2 = vfs_path_to_str (vpath);
     r = buf = g_malloc (MC_MAXPATHLEN);
     buf2 = g_malloc (MC_MAXPATHLEN);
     *r++ = PATH_SEP;
@@ -181,7 +181,7 @@ resolve_symlinks (const vfs_path_t *vpath)
 
   ret:
     g_free (buf2);
-    g_free (p);
+    g_free (p2);
     return buf;
 }
 
