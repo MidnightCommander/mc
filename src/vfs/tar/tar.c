@@ -316,7 +316,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
 
         mc_close (result);
         s = g_strconcat (archive->name, decompress_extension (type), (char *) NULL);
-        tmp_vpath = vfs_path_from_str (s);
+        tmp_vpath = vfs_path_from_str_flags (s, VPF_NO_CANON);
         result = mc_open (tmp_vpath, O_RDONLY);
         vfs_path_free (tmp_vpath);
         if (result == -1)
