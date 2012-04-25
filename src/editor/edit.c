@@ -1044,7 +1044,7 @@ edit_move_to_bottom (WEdit * edit)
 static void
 edit_cursor_to_bol (WEdit * edit)
 {
-    edit_cursor_move (edit, edit_bol (edit, edit->curs1) - edit->curs1);
+    edit_cursor_move (edit, edit_bol_var (edit, edit->curs1) - edit->curs1);
     edit->search_start = edit->curs1;
     edit->prev_col = edit_get_col (edit);
     edit->over_col = 0;
@@ -1056,7 +1056,7 @@ edit_cursor_to_bol (WEdit * edit)
 static void
 edit_cursor_to_eol (WEdit * edit)
 {
-    edit_cursor_move (edit, edit_eol (edit, edit->curs1) - edit->curs1);
+    edit_cursor_move (edit, edit_eol_var (edit, edit->curs1) - edit->curs1);
     edit->search_start = edit->curs1;
     edit->prev_col = edit_get_col (edit);
     edit->over_col = 0;
@@ -2469,6 +2469,53 @@ edit_set_codeset (WEdit * edit)
 #endif
 }
 
+/* returns index of first char on line or the first nonspace char */
+long
+edit_bol_var (WEdit * edit, long current)
+{
+    long tmp;
+    int b;
+
+    if (current < 0)
+        current = 0;
+
+    if (edit_get_byte (edit, current - 1) != '\n')      /* not at BOL */
+        return edit_bol (edit, current);
+
+    if (edit_get_byte (edit, current) == '\n')  /* on an empty line */
+        return current;
+
+    for (tmp = current; (b = edit_get_byte (edit, tmp)) != '\n'; tmp++)
+    {
+        if (b != ' ' && b != '\t')
+            return tmp;
+    }
+    return current;
+}
+
+/* returns index of last char on line or the last nonspace char */
+long
+edit_eol_var (WEdit * edit, long current)
+{
+    long tmp;
+    int b;
+
+    if (current >= edit->last_byte)
+        current = edit->last_byte;
+
+    if (edit_get_byte (edit, current) != '\n')  /* not at BOL */
+        return edit_eol (edit, current);
+
+    if (edit_get_byte (edit, current - 1) == '\n')      /* on an empty line */
+        return current;
+
+    for (tmp = current - 1; (b = edit_get_byte (edit, tmp)) != '\n'; tmp--)
+    {
+        if (b != ' ' && b != '\t')
+            return tmp + 1;
+    }
+    return current;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**
