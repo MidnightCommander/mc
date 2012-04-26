@@ -63,6 +63,9 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#ifdef HAVE_ASPELL
+#include "spell.h"
+#endif
 
 /*** global variables ****************************************************************************/
 
@@ -97,6 +100,10 @@ edit_dlg_init (void)
     {
         edit_window_state_char = mc_skin_get ("editor", "window-state-char", "*");
         edit_window_close_char = mc_skin_get ("editor", "window-close-char", "X");
+
+#ifdef HAVE_ASPELL
+        aspell_init ();
+#endif
     }
 
     edit_dlg_init_refcounter++;
@@ -117,6 +124,10 @@ edit_dlg_deinit (void)
     {
         g_free (edit_window_state_char);
         g_free (edit_window_close_char);
+
+#ifdef HAVE_ASPELL
+        aspell_clean ();
+#endif
     }
 }
 

@@ -51,6 +51,7 @@ DX_INIT_DOXYGEN(mc,doxygen.cfg,devel)
 dnl PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
 
 AC_CHECK_GLIB
+AC_G_MODULE_SUPPORTED
 
 AC_ARG_ENABLE([mclib],
         [AS_HELP_STRING([--enable-mclib], [Compile shared library libmc.so @<:@no@:>@])],
@@ -210,14 +211,9 @@ AC_FUNC_STRCOLL
 
 mc_AC_GET_FS_INFO
 
-dnl
 dnl X11 support.
 dnl Used to read keyboard modifiers when running under X11.
-AC_PATH_XTRA
-
-dnl
-dnl Check if the gmodule functionality supported on this system.
-AC_G_MODULE_SUPPORTED
+MC_WITH_X
 
 dnl
 dnl Sequent wants getprocessstats
@@ -360,24 +356,9 @@ fi
 AC_MSG_RESULT([$result])
 subshell="$result"
 
-
 MC_WITH_SCREEN
 
-
-dnl
-dnl Internal editor support.
-dnl
-AC_ARG_WITH(edit,
-        [  --with-edit              Enable internal editor [[yes]]])
-
-if test x$with_edit != xno; then
-	AC_DEFINE(USE_INTERNAL_EDIT, 1, [Define to enable internal editor])
-	use_edit=yes
-	edit_msg="yes"
-	AC_MSG_NOTICE([using internal editor])
-else
-	edit_msg="no"
-fi
+MC_WITH_EDIT
 
 dnl
 dnl Diff viewer support.
@@ -495,7 +476,8 @@ AC_SUBST(MAN_DATE)
 AM_CONDITIONAL(USE_NLS, [test x"$USE_NLS" = xyes])
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
-AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
+AM_CONDITIONAL(USE_EDIT, [test x"$use_edit" = xyes ])
+AM_CONDITIONAL(USE_ASPELL, [test x"$enable_aspell" = xyes ])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])

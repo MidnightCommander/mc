@@ -416,6 +416,9 @@ static const global_keymap_ini_t default_editor_keymap[] = {
     {"Sort", "alt-t"},
     {"Mail", "alt-m"},
     {"ExternalCommand", "alt-u"},
+#ifdef HAVE_ASPELL
+    {"SpellCheckCurrentWord", "ctrl-p"},
+#endif
     {"ExtendedKeyMap", "ctrl-x"},
     {NULL, NULL}
 };

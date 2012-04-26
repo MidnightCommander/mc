@@ -6,7 +6,7 @@
 
    Written by:
    Vitja Makarov, 2005
-   Ilia Maslakov <il.smind@gmail.com>, 2009
+   Ilia Maslakov <il.smind@gmail.com>, 2009, 2012
    Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012
 
    This file is part of the Midnight Commander.
@@ -281,6 +281,11 @@ static name_keymap_t command_names[] = {
     {"MacroStartStopRecord", CK_MacroStartStopRecord},
     {"MacroDelete", CK_MacroDelete},
     {"RepeatStartStopRecord", CK_RepeatStartStopRecord},
+#ifdef HAVE_ASPELL
+    {"SpellCheck", CK_SpellCheck},
+    {"SpellCheckCurrentWord", CK_SpellCheckCurrentWord},
+    {"SpellCheckSelectLang", CK_SpellCheckSelectLang},
+#endif /* HAVE_ASPELL */
     {"BookmarkFlush", CK_BookmarkFlush},
     {"BookmarkNext", CK_BookmarkNext},
     {"BookmarkPrev", CK_BookmarkPrev},
