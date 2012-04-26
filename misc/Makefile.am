@@ -13,15 +13,17 @@ pkgdata_DATA += mc.charsets
 endif
 
 LIBFILES_CONST = \
-	mcedit.menu      \
-	edit.indent.rc \
-	edit.spell.rc \
+	mcedit.menu \
 	filehighlight.ini \
 	mc.keymap \
 	mc.keymap.default \
 	mc.keymap.emacs \
 	mc.menu \
 	mc.menu.sr
+
+LIBFILES_SCRIPT = \
+	edit.indent.rc \
+	edit.spell.rc
 
 CLEANFILES = $(SCRIPTS_OUT)
 
@@ -30,9 +32,13 @@ cfg_DATA = \
 	$(LIBFILES_CONST) \
 	$(LIBFILES_OUT)
 
+cfg_SCRIPTS = \
+	$(LIBFILES_SCRIPT)
+
 # Files processed by configure don't need to be here
 EXTRA_DIST = \
 	$(LIBFILES_CONST) \
+	$(LIBFILES_SCRIPT) \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA) \
 	$(pkgdata_DATA)
