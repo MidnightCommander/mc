@@ -87,6 +87,7 @@ int option_persistent_selections = 1;
 int option_cursor_beyond_eol = 0;
 int option_line_state = 0;
 int option_line_state_width = 0;
+int option_smart_home_end = 0;
 
 int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;
@@ -1047,6 +1048,9 @@ edit_bol_var (WEdit * edit, long current)
     long tmp;
     int b;
 
+    if (!option_smart_home_end)
+        return edit_bol (edit, current);
+
     if (current < 0)
         current = 0;
 
@@ -1071,6 +1075,9 @@ edit_eol_var (WEdit * edit, long current)
 {
     long tmp;
     int b;
+
+    if (!option_smart_home_end)
+        return edit_eol (edit, current);
 
     if (current >= edit->last_byte)
         current = edit->last_byte;

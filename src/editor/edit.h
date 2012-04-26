@@ -54,6 +54,7 @@ extern int visible_tws;
 extern int simple_statusbar;
 extern int option_check_nl_at_eof;
 extern int show_right_margin;
+extern int option_smart_home_end;
 
 /*** declarations of public functions ************************************************************/
 

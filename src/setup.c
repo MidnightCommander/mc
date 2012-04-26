@@ -308,6 +308,7 @@ static const struct
     { "editor_option_auto_para_formatting", &option_auto_para_formatting },
     { "editor_option_typewriter_wrap", &option_typewriter_wrap },
     { "editor_edit_confirm_save", &edit_confirm_save },
+    { "editor_smart_home_end", &option_smart_home_end },
     { "editor_syntax_highlighting", &option_syntax_highlighting },
     { "editor_persistent_selections", &option_persistent_selections },
     { "editor_cursor_beyond_eol", &option_cursor_beyond_eol },
