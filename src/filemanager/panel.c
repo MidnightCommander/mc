@@ -1389,6 +1389,7 @@ directory_history_add (struct WPanel *panel, const vfs_path_t * vpath)
 
     tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
     panel->dir_history = list_append_unique (panel->dir_history, tmp);
+    panel->dir_history_current = panel->dir_history;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3081,18 +3082,26 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
 static void
 directory_history_next (WPanel * panel)
 {
-    GList *nextdir;
+    gboolean ok;
 
-    nextdir = g_list_next (panel->dir_history);
-    if (nextdir != NULL)
+    do
     {
-        vfs_path_t *data_vpath;
+        GList *next;
 
-        data_vpath = vfs_path_from_str ((char *) nextdir->data);
-        if (_do_panel_cd (panel, data_vpath, cd_exact))
-            panel->dir_history = nextdir;
-        vfs_path_free (data_vpath);
+        ok = TRUE;
+        next = g_list_next (panel->dir_history_current);
+        if (next != NULL)
+        {
+            vfs_path_t *data_vpath;
+
+            data_vpath = vfs_path_from_str ((char *) next->data);
+            ok = _do_panel_cd (panel, data_vpath, cd_exact);
+            vfs_path_free (data_vpath);
+            panel->dir_history_current = next;
+        }
+        /* skip directories that present in history but absent in file system */
     }
+    while (!ok);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3100,19 +3109,26 @@ directory_history_next (WPanel * panel)
 static void
 directory_history_prev (WPanel * panel)
 {
-    GList *prevdir;
+    gboolean ok;
 
-    prevdir = g_list_previous (panel->dir_history);
-
-    if (prevdir != NULL)
+    do
     {
-        vfs_path_t *data_vpath;
+        GList *prev;
 
-        data_vpath = vfs_path_from_str ((char *) prevdir->data);
-        if (_do_panel_cd (panel, data_vpath, cd_exact))
-            panel->dir_history = prevdir;
-        vfs_path_free (data_vpath);
+        ok = TRUE;
+        prev = g_list_previous (panel->dir_history_current);
+        if (prev != NULL)
+        {
+            vfs_path_t *data_vpath;
+
+            data_vpath = vfs_path_from_str ((char *) prev->data);
+            ok = _do_panel_cd (panel, data_vpath, cd_exact);
+            vfs_path_free (data_vpath);
+            panel->dir_history_current = prev;
+        }
+        /* skip directories that present in history but absent in file system */
     }
+    while (!ok);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3121,20 +3137,45 @@ static void
 directory_history_list (WPanel * panel)
 {
     char *s;
+    gboolean ok = FALSE;
+    size_t pos;
 
-    s = history_show (&panel->dir_history, &panel->widget, -1);
+    pos = g_list_position (panel->dir_history_current, panel->dir_history);
 
+    s = history_show (&panel->dir_history, &panel->widget, pos);
     if (s != NULL)
     {
         vfs_path_t *s_vpath;
 
         s_vpath = vfs_path_from_str (s);
-        if (_do_panel_cd (panel, s_vpath, cd_exact))
+        ok = _do_panel_cd (panel, s_vpath, cd_exact);
+        if (ok)
             directory_history_add (panel, panel->cwd_vpath);
         else
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (s_vpath);
         g_free (s);
+    }
+
+    if (!ok)
+    {
+        /* Since history is fully modified in history_show(), panel->dir_history actually
+         * points to the invalid place. Try restore current postition here. */
+
+        size_t i;
+
+        panel->dir_history_current = panel->dir_history;
+
+        for (i = 0; i <= pos; i++)
+        {
+            GList *prev;
+
+            prev = g_list_previous (panel->dir_history_current);
+            if (prev == NULL)
+                break;
+
+            panel->dir_history_current = prev;
+        }
     }
 }
 
