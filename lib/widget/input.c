@@ -105,7 +105,13 @@ draw_history_button (WInput * in)
     char c;
     gboolean disabled = (((Widget *) in)->options & W_DISABLED) != 0;
 
-    c = in->history->next ? (in->history->prev ? '|' : 'v') : '^';
+    if (g_list_next (in->history_current) == NULL)
+        c = '^';
+    else if (g_list_previous (in->history_current) == NULL)
+        c = 'v';
+    else
+        c = '|';
+
     widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
@@ -189,7 +195,7 @@ do_show_hist (WInput * in)
 
     len = get_history_length (in->history);
 
-    r = history_show (&in->history, &in->widget);
+    r = history_show (&in->history, &in->widget, g_list_position (in->history_current, in->history));
     if (r != NULL)
     {
         input_assign_text (in, r);
@@ -271,6 +277,7 @@ push_history (WInput * in, const char *text)
         in->history_changed)
     {
         in->history = list_append_unique (in->history, t);
+        in->history_current = in->history;
         in->history_changed = TRUE;
     }
     else
@@ -631,12 +638,12 @@ hist_prev (WInput * in)
     if (in->need_push)
         push_history (in, in->buffer);
 
-    prev = g_list_previous (in->history);
+    prev = g_list_previous (in->history_current);
     if (prev != NULL)
     {
-        in->history = prev;
-        in->history_changed = TRUE;
         input_assign_text (in, (char *) prev->data);
+        in->history_current = prev;
+        in->history_changed = TRUE;
         in->need_push = FALSE;
     }
 }
@@ -658,14 +665,17 @@ hist_next (WInput * in)
     if (in->history == NULL)
         return;
 
-    next = g_list_next (in->history);
+    next = g_list_next (in->history_current);
     if (next == NULL)
+    {
         input_assign_text (in, "");
+        in->history_current = in->history;
+    }
     else
     {
-        in->history = next;
-        in->history_changed = TRUE;
         input_assign_text (in, (char *) next->data);
+        in->history_current = next;
+        in->history_changed = TRUE;
         in->need_push = FALSE;
     }
 }
@@ -829,6 +839,7 @@ input_load_history (const gchar * event_group_name, const gchar * event_name,
     (void) event_name;
 
     in->history = history_load (ev->cfg, in->history_name);
+    in->history_current = in->history;
 
     if (in->init_text == NULL)
         def_text = "";
@@ -998,6 +1009,7 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
 
     /* prepare to history setup */
     in->history = NULL;
+    in->history_current = NULL;
     in->history_changed = FALSE;
     in->history_name = NULL;
     if ((histname != NULL) && (*histname != '\0'))
@@ -1173,12 +1185,13 @@ input_assign_text (WInput * in, const char *text)
 {
     input_free_completions (in);
     g_free (in->buffer);
-    in->buffer = g_strdup (text);       /* was in->buffer->text */
-    in->current_max_size = strlen (in->buffer) + 1;
+    in->current_max_size = strlen (text) + 1;
+    in->buffer = g_strndup (text, in->current_max_size);        /* was in->buffer->text */
     in->point = str_length (in->buffer);
     in->mark = 0;
     in->need_push = TRUE;
     in->charpoint = 0;
+    input_update (in, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

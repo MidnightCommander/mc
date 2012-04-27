@@ -29,7 +29,7 @@ GList *history_load (struct mc_config_t *cfg, const char *name);
 void history_save (struct mc_config_t *cfg, const char *name, GList * h);
 /* for repositioning of history dialog we should pass widget to this
  * function, as position of history dialog depends on widget's position */
-char *history_show (GList ** history, Widget * widget);
+char *history_show (GList ** history, Widget * widget, int current);
 
 /*** inline functions ****************************************************************************/
 
