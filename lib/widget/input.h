@@ -60,6 +60,7 @@ typedef struct
     char *buffer;               /* pointer to editing buffer */
     char *history_name;         /* name of history for loading and saving */
     GList *history;             /* the history */
+    GList *history_current;     /* current history item */
     gboolean history_changed;   /* the history has changed */
     gboolean need_push;         /* need to push the current Input on hist? */
     gboolean strip_password;    /* need to strip password before placing string to history */

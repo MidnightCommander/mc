@@ -3122,7 +3122,7 @@ directory_history_list (WPanel * panel)
 {
     char *s;
 
-    s = history_show (&panel->dir_history, &panel->widget);
+    s = history_show (&panel->dir_history, &panel->widget, -1);
 
     if (s != NULL)
     {
