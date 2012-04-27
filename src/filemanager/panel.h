@@ -91,6 +91,7 @@ typedef struct WPanel
     vfs_path_t *cwd_vpath;      /* Current Working Directory */
     vfs_path_t *lwd_vpath;      /* Last Working Directory */
     GList *dir_history;         /* directory history */
+    GList *dir_history_current; /* pointer to the current history item */
     char *hist_name;            /* directory history name for history file */
     int count;                  /* Number of files in dir structure */
     int marked;                 /* Count of marked files */
