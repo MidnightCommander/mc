@@ -321,7 +321,8 @@ int mcview_nroff_seq_prev (mcview_nroff_t *);
 void mcview_display_text (mcview_t *);
 
 /* search.c: */
-int mcview_search_cmd_callback (const void *user_data, gsize char_offset);
+mc_search_cbret_t mcview_search_cmd_callback (const void *user_data, gsize char_offset,
+                                              int *current_char);
 int mcview_search_update_cmd_callback (const void *, gsize);
 void mcview_do_search (mcview_t * view);
 

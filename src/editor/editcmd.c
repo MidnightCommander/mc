@@ -2687,10 +2687,11 @@ edit_replace_cmd (WEdit * edit, int again)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-edit_search_cmd_callback (const void *user_data, gsize char_offset)
+mc_search_cbret_t
+edit_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
 {
-    return edit_get_byte ((WEdit *) user_data, (long) char_offset);
+    *current_char = edit_get_byte ((WEdit *) user_data, (long) char_offset);
+    return MC_SEARCH_CB_OK;
 }
 
 /* --------------------------------------------------------------------------------------------- */
