@@ -82,13 +82,13 @@ include slang.syntax
 file ..\*\\.tex$ LaTeX\s2.09\sDocument
 include latex.syntax
 
-file ..\*\.(texi|texinfo|TEXI|TEXINFO)$ Texinfo\sDocument
+file ..\*\\.(texi|texinfo|TEXI|TEXINFO)$ Texinfo\sDocument
 include texinfo.syntax
 
 file ..\*\\.c$ C\sProgram
 include c.syntax
 
-file ..\*\\.([hC]|CC|cxx|cc|cpp|CPP|CXX|hxx|hh|hpp|HPP|h\.in)$ C/C\+\+\sProgram
+file ..\*\\.([hC]|CC|cxx|cc|cpp|CPP|CXX|hxx|hh|hpp|HPP|h\\.in)$ C/C\+\+\sProgram
 include cxx.syntax
 
 file ..\*\\.d$ D\sProgram
@@ -142,7 +142,7 @@ include octave.syntax
 file ..\*\\.(sql|SQL)$ SQL\sProgram
 include sql.syntax
 
-file ..\*\\.(spec|spec\.in)$ RPM\sSpecfile
+file ..\*\\.(spec|spec\\.in)$ RPM\sSpecfile
 include spec.syntax
 
 file ..\*\\.repo$ YUM\sRepo\sFile
@@ -187,7 +187,7 @@ include ini.syntax
 file Don_t_match_me Mail\sfolder ^(From|Return-(P|p)ath:|From:|Date:)\s
 include mail.syntax
 
-file \.procmailrc$ Procmail\sRC\sFile ^#/usr/bin/procmail
+file \\.procmailrc$ Procmail\sRC\sFile ^#/usr/bin/procmail
 include procmail.syntax
 
 file sources.list$ sources\slist
