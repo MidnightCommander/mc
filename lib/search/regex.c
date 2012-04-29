@@ -259,9 +259,8 @@ mc_search__regex_found_cond_one (mc_search_t * lc_mc_search, mc_search_regex_t *
 #ifdef SEARCH_TYPE_GLIB
     GError *error = NULL;
 
-    if (!g_regex_match_full
-        (regex, search_str->str, -1, 0, G_REGEX_MATCH_NEWLINE_ANY, &lc_mc_search->regex_match_info,
-         &error))
+    if (!g_regex_match_full (regex, search_str->str, search_str->len, 0, G_REGEX_MATCH_NEWLINE_ANY,
+                             &lc_mc_search->regex_match_info, &error))
     {
         g_match_info_free (lc_mc_search->regex_match_info);
         lc_mc_search->regex_match_info = NULL;
@@ -278,7 +277,7 @@ mc_search__regex_found_cond_one (mc_search_t * lc_mc_search, mc_search_regex_t *
     lc_mc_search->num_results = g_match_info_get_match_count (lc_mc_search->regex_match_info);
 #else /* SEARCH_TYPE_GLIB */
     lc_mc_search->num_results = pcre_exec (regex, lc_mc_search->regex_match_info,
-                                           search_str->str, search_str->len - 1, 0, 0,
+                                           search_str->str, search_str->len, 0, 0,
                                            lc_mc_search->iovector, MC_SEARCH__NUM_REPLACE_ARGS);
     if (lc_mc_search->num_results < 0)
     {
@@ -827,13 +826,8 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
 
             g_string_append_c (lc_mc_search->regex_buffer, (char) current_chr);
 
-
-            if (current_chr == 0 || (char) current_chr == '\n')
+            if ((char) current_chr == '\n' || virtual_pos > end_search)
                 break;
-
-            if (virtual_pos > end_search)
-                break;
-
         }
         switch (mc_search__regex_found_cond (lc_mc_search, lc_mc_search->regex_buffer))
         {
