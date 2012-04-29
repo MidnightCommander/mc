@@ -158,19 +158,16 @@ mcview_search_show_result (mcview_t * view, Dlg_head ** d, size_t match_len)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-int
-mcview_search_cmd_callback (const void *user_data, gsize char_offset)
+mc_search_cbret_t
+mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
 {
-    int lc_byte;
     mcview_t *view = (mcview_t *) user_data;
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
     if (!view->text_nroff_mode)
     {
-        if (!mcview_get_byte (view, char_offset, &lc_byte))
-            return MC_SEARCH_CB_OK;
-
-        return lc_byte;
+        mcview_get_byte (view, char_offset, current_char);
+        return MC_SEARCH_CB_OK;
     }
 
     if (view->search_numNeedSkipChar != 0)
@@ -208,10 +205,10 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
         return MC_SEARCH_CB_INVALID;
     }
 
-    lc_byte = search_cb_char_buffer[search_cb_char_curr_index];
+    *current_char = search_cb_char_buffer[search_cb_char_curr_index];
     search_cb_char_curr_index++;
-    return (lc_byte != -1) ? (unsigned char) lc_byte : MC_SEARCH_CB_INVALID;
 
+    return (*current_char != -1) ? MC_SEARCH_CB_OK : MC_SEARCH_CB_INVALID;
 }
 
 /* --------------------------------------------------------------------------------------------- */
