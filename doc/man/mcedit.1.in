@@ -443,7 +443,7 @@ Comments may be put on a separate line starting with the hash sign (#).
 .PP
 If you are describing case insensitive language you need to use
 .B caseinsensitive
-derective. It should be specified at the begining of syntax file.
+directive. It should be specified at the beginning of syntax file.
 .PP
 Because of the simplicity of the implementation, there are a few
 intricacies that will not be dealt with correctly but these are a minor
