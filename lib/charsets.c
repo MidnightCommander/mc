@@ -29,8 +29,6 @@
 
 #include <config.h>
 
-#ifdef HAVE_CHARSET
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -51,6 +49,8 @@ const char *cp_display = NULL;
 const char *cp_source = NULL;
 
 /*** file scope macro definitions ****************************************************************/
+
+#define UNKNCHAR '\001'
 
 #define OTHER_8BIT "Other_8_bit"
 
@@ -571,5 +571,3 @@ convert_from_8bit_to_utf_c2 (const char input_char)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-#endif /* HAVE_CHARSET */

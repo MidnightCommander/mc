@@ -5,24 +5,11 @@
 #ifndef MC__CHARSETS_H
 #define MC__CHARSETS_H
 
-#include "lib/global.h"
-
-
 /*** typedefs(not structures) and defined constants **********************************************/
-
-#ifdef HAVE_CHARSET
-#define UNKNCHAR '\001'
-#else
-#define convert_to_display_c(c) (c)
-#define convert_from_input_c(c) (c)
-#define convert_to_display(str) do {} while (0)
-#define convert_from_input(str) do {} while (0)
-#endif /* HAVE_CHARSET */
 
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
-#ifdef HAVE_CHARSET
 
 typedef struct
 {
@@ -103,7 +90,5 @@ convert_from_input_c (int c)
         return c;
     return (int) conv_input[c];
 }
-
-#endif /* HAVE_CHARSET */
 
 #endif /* MC__CHARSETS_H */

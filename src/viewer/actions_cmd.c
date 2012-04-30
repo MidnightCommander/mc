@@ -55,7 +55,9 @@
 #include "lib/lock.h"           /* lock_file() */
 #include "lib/util.h"
 #include "lib/widget.h"
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 #include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/filemanager/layout.h"
@@ -513,7 +515,9 @@ mcview_handle_key (mcview_t * view, int key)
 {
     unsigned long command;
 
+#ifdef HAVE_CHARSET
     key = convert_from_input_c (key);
+#endif
 
     if (view->hex_mode)
     {
