@@ -185,6 +185,10 @@ shell/.cpio.Z
 	Open=%cd %p/ucpio://
 	View=%view{ascii} gzip -dc %f | cpio -itv 2>/dev/null
 
+shell/.cpio.xz
+	Open=%cd %p/ucpio://
+	View=%view{ascii} xz -dc %f | cpio -itv 2>/dev/null
+
 shell/.cpio.gz
 	Open=%cd %p/ucpio://
 	View=%view{ascii} gzip -dc %f | cpio -itv 2>/dev/null
