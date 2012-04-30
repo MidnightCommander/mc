@@ -118,7 +118,9 @@ typedef struct WPanel
     char *panel_name;           /* The panel name */
     struct stat dir_stat;       /* Stat of current dir: used by execute () */
 
+#ifdef HAVE_CHARSET
     int codepage;               /* panel codepage */
+#endif
 
     gboolean searching;
     char search_buffer[MC_MAXFILENAMELEN];
@@ -144,7 +146,11 @@ void panel_clean_dir (WPanel * panel);
 void panel_reload (WPanel * panel);
 void panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order);
 void panel_re_sort (WPanel * panel);
+
+#ifdef HAVE_CHARSET
 void panel_change_encoding (WPanel * panel);
+vfs_path_t *remove_encoding_from_path (const vfs_path_t * vpath);
+#endif
 
 void update_panels (panel_update_flags_t flags, const char *current_file);
 int set_panel_formats (WPanel * p);
@@ -162,8 +168,6 @@ void do_file_mark (WPanel * panel, int idx, int val);
 gboolean do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
 void directory_history_add (struct WPanel *panel, const char *dir);
-
-vfs_path_t *remove_encoding_from_path (const vfs_path_t * vpath);
 
 gsize panel_get_num_of_sortable_fields (void);
 const char **panel_get_sortable_fields (gsize *);
