@@ -44,10 +44,14 @@
 #include "lib/strutil.h"
 #include "lib/util.h"           /* save_file_position() */
 #include "lib/widget.h"
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "src/main.h"
+#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
+#endif
 
 #include "internal.h"
 #include "mcviewer.h"

@@ -40,7 +40,9 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/util.h"           /* is_printable() */
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "src/setup.h"          /* option_tab_spacing */
 
@@ -168,8 +170,9 @@ mcview_display_text (mcview_t * view)
             else
 #endif
             {
+#ifdef HAVE_CHARSET
                 c = convert_to_display_c (c);
-
+#endif
                 if (!is_printable (c))
                     c = '.';
             }

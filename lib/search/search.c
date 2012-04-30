@@ -32,8 +32,9 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
-
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "internal.h"
 

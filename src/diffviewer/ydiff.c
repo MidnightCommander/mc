@@ -43,7 +43,9 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/strutil.h"
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 #include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/filemanager/cmd.h"        /* do_edit_at_line(), view_other_cmd() */
@@ -52,7 +54,9 @@
 
 #include "src/keybind-defaults.h"
 #include "src/history.h"
+#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
+#endif
 
 #include "ydiff.h"
 #include "internal.h"
@@ -142,16 +146,14 @@ dview_set_codeset (WDiff * dview)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 static void
 dview_select_encoding (WDiff * dview)
 {
-#ifdef HAVE_CHARSET
     if (do_select_codepage ())
         dview_set_codeset (dview);
-#else
-    (void) dview;
-#endif
 }
+#endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2602,8 +2604,8 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                                     next_ch =
                                         convert_from_utf_to_current_c (next_ch, dview->converter);
                                 else
-#endif
                                     next_ch = convert_to_display_c (next_ch);
+#endif
 
                                 tty_print_anychar (next_ch);
                                 col++;
@@ -2678,8 +2680,8 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                 else if (dview->utf8)
                     next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
                 else
-#endif
                     next_ch = convert_to_display_c (next_ch);
+#endif
 
                 tty_print_anychar (next_ch);
                 col++;
@@ -3160,7 +3162,9 @@ dview_handle_key (WDiff * dview, int key)
 {
     unsigned long command;
 
+#ifdef HAVE_CHARSET
     key = convert_from_input_c (key);
+#endif
 
     command = keybind_lookup_keymap_command (diff_map, key);
     if ((command != CK_IgnoreKey) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
