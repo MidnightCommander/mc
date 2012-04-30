@@ -585,7 +585,7 @@ displays the directory history, equivalent to depressing the 'v' with
 the mouse.
 .\"NODE "  Quick search"
 .SH "  Quick search"
-The Quick search mode allows to perform fast file search in file panel.
+The Quick search mode allows you to perform fast file search in file panel.
 Press
 .I C\-s
 or
@@ -3280,7 +3280,7 @@ Examples:
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs
-allows to integrate numerous features and file types into GNU Midnight
+allows you to integrate numerous features and file types into GNU Midnight
 Commander in an easy way, by writing scripts.
 .PP
 Extfs filesystems can be divided into two categories:
