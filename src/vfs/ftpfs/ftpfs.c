@@ -219,6 +219,7 @@ typedef struct
                                  * "LIST" instead
                                  */
     int ctl_connection_busy;
+    char *current_dir;
 } ftp_super_data_t;
 
 typedef struct
@@ -262,6 +263,7 @@ static const char *netrcp;
    c) strip trailing "/."
  */
 
+static char *ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super);
 static int ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super,
                                  const char *remote_path);
 static int ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply,
@@ -424,11 +426,11 @@ ftpfs_reconnect (struct vfs_class *me, struct vfs_s_super *super)
     sock = ftpfs_open_socket (me, super);
     if (sock != -1)
     {
-        char *cwdir = super->path_element->path;
+        char *cwdir = SUP->current_dir;
 
         close (SUP->sock);
         SUP->sock = sock;
-        super->path_element->path = NULL;
+        SUP->current_dir = NULL;
 
 
         if (ftpfs_login_server (me, super, super->path_element->password) != 0)
@@ -440,7 +442,7 @@ ftpfs_reconnect (struct vfs_class *me, struct vfs_s_super *super)
             return sock == COMPLETE ? 1 : 0;
         }
 
-        super->path_element->path = cwdir;
+        SUP->current_dir = cwdir;
     }
 
     return 0;
@@ -548,6 +550,7 @@ ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
         ftpfs_command (me, super, NONE, "QUIT");
         close (SUP->sock);
     }
+    g_free (SUP->current_dir);
     g_free (super->data);
     super->data = NULL;
 }
@@ -960,6 +963,10 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     }
     while (retry_seconds != 0);
 
+    SUP->current_dir = ftpfs_get_current_directory (me, super);
+    if (SUP->current_dir == NULL)
+        SUP->current_dir = g_strdup (PATH_SEP_STR);
+
     return 0;
 }
 
@@ -1009,6 +1016,55 @@ ftpfs_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super
 
     vfs_path_element_free (path_element);
     return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* The returned directory should always contain a trailing slash */
+
+static char *
+ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
+{
+    char buf[MC_MAXPATHLEN + 1];
+
+    if (ftpfs_command (me, super, NONE, "PWD") == COMPLETE &&
+        ftpfs_get_reply (me, SUP->sock, buf, sizeof (buf)) == COMPLETE)
+    {
+        char *bufp = NULL;
+        char *bufq;
+
+        for (bufq = buf; *bufq != '\0'; bufq++)
+            if (*bufq == '"')
+            {
+                if (bufp == NULL)
+                    bufp = bufq + 1;
+                else
+                {
+                    *bufq = '\0';
+
+                    if (*bufp != '\0')
+                    {
+                        if (*(bufq - 1) != '/')
+                        {
+                            *bufq++ = '/';
+                            *bufq = '\0';
+                        }
+
+                        if (*bufp == '/')
+                            return g_strdup (bufp);
+
+                        /* If the remote server is an Amiga a leading slash
+                           might be missing. MC needs it because it is used
+                           as separator between hostname and path internally. */
+                        return g_strconcat ("/", bufp, (char *) NULL);
+                    }
+
+                    break;
+                }
+            }
+    }
+
+    ftpfs_errno = EIO;
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1991,9 +2047,9 @@ ftpfs_is_same_dir (struct vfs_class *me, struct vfs_s_super *super, const char *
 {
     (void) me;
 
-    if (super->path_element->path == NULL)
+    if (SUP->current_dir == NULL)
         return FALSE;
-    return (strcmp (path, super->path_element->path) == 0);
+    return (strcmp (path, SUP->current_dir) == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2014,7 +2070,11 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
     if (r != COMPLETE)
         ftpfs_errno = EIO;
     else
+    {
+        g_free (SUP->current_dir);
+        SUP->current_dir = g_strdup (remote_path);
         SUP->cwd_deferred = 0;
+    }
     return r;
 }
 
@@ -2188,6 +2248,7 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
         char *name;
 
         name = vfs_path_element_build_pretty_path_str (super->path_element);
+
         func (name);
         g_free (name);
     }
