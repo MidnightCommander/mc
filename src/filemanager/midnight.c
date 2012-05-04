@@ -579,7 +579,10 @@ create_panels (void)
         other_index = 1;
         current_mode = startup_left_mode;
         other_mode = startup_right_mode;
+        /* if mc_run_param0 is NULL, working directory will be used for the left panel */
         current_dir = mc_run_param0;
+        /* mc_run_param1 is never NULL. It is setup from command line or from panels.ini
+         * (value of other_dir). mc_run_param1 will be used for the right panel */
         other_dir = mc_run_param1;
     }
     else
@@ -589,8 +592,21 @@ create_panels (void)
         other_index = 0;
         current_mode = startup_right_mode;
         other_mode = startup_left_mode;
-        current_dir = mc_run_param1;
-        other_dir = mc_run_param0;
+
+        /* if mc_run_param0 is not NULL (it was setup from command line), it will be used
+         * for the left panel, working directory will be used for the right one;
+         * if mc_run_param0 is NULL, working directory will be used for the right (active) panel,
+         * mc_run_param1 will be used for the left one */
+        if (mc_run_param0 != NULL)
+        {
+            current_dir = NULL;
+            other_dir = mc_run_param0;
+        }
+        else
+        {
+            current_dir = NULL;
+            other_dir = mc_run_param1;
+        }
     }
 
     /* 1. Get current dir */
@@ -609,7 +625,10 @@ create_panels (void)
 
     /* 3. Create active panel */
     if (current_dir == NULL)
+    {
+        current_dir = vfs_path_to_str (original_dir);
         mc_chdir (original_dir);
+    }
     else
     {
         vfs_path_t *vpath;

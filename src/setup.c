@@ -799,8 +799,7 @@ save_panel_types (void)
     }
 
     if (current_panel != NULL)
-        mc_config_set_string (mc_panels_config, "Dirs", "current_is_left",
-                              get_current_index () == 0 ? "1" : "0");
+        mc_config_set_bool (mc_panels_config, "Dirs", "current_is_left", get_current_index () == 0);
 
     if (mc_panels_config->ini_path == NULL)
         mc_panels_config->ini_path = g_strdup (panels_profile_name);
