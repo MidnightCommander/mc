@@ -617,7 +617,10 @@ create_panels (void)
     {
         vfs_path_t *vpath;
 
-        vpath = vfs_path_from_str (other_dir);
+        if (g_path_is_absolute (other_dir))
+            vpath = vfs_path_from_str (other_dir);
+        else
+            vpath = vfs_path_append_new (original_dir, other_dir, (char *) NULL);
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
@@ -633,7 +636,10 @@ create_panels (void)
     {
         vfs_path_t *vpath;
 
-        vpath = vfs_path_from_str (current_dir);
+        if (g_path_is_absolute (current_dir))
+            vpath = vfs_path_from_str (current_dir);
+        else
+            vpath = vfs_path_append_new (original_dir, current_dir, (char *) NULL);
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
