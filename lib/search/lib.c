@@ -137,15 +137,18 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-mc_search__get_char (mc_search_t * lc_mc_search, const void *user_data, gsize current_pos)
+mc_search_cbret_t
+mc_search__get_char (mc_search_t * lc_mc_search, const void *user_data, gsize current_pos,
+                     int *current_char)
 {
-    char *data;
-    if (lc_mc_search->search_fn)
-        return (lc_mc_search->search_fn) (user_data, current_pos);
+    unsigned char *data;
 
-    data = (char *) user_data;
-    return (int) (unsigned char) data[current_pos];
+    if (lc_mc_search->search_fn != NULL)
+        return lc_mc_search->search_fn (user_data, current_pos, current_char);
+
+    data = (unsigned char *) user_data;
+    *current_char = (int) data[current_pos];
+    return (*current_char == 0) ? MC_SEARCH_CB_ABORT : MC_SEARCH_CB_OK;
 }
 
 /* --------------------------------------------------------------------------------------------- */

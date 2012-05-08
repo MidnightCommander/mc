@@ -47,7 +47,7 @@ gchar *mc_search__recode_str (const char *, gsize, const char *, const char *, g
 
 gchar *mc_search__get_one_symbol (const char *, const char *, gsize, gboolean *);
 
-int mc_search__get_char (mc_search_t *, const void *, gsize);
+mc_search_cbret_t mc_search__get_char (mc_search_t *, const void *, gsize, int *);
 
 GString *mc_search__tolower_case_str (const char *, const char *, gsize);
 

@@ -13,7 +13,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
+typedef int (*mc_search_fn) (const void *user_data, gsize char_offset, int *current_char);
+typedef int (*mc_update_fn) (const void *user_data, gsize char_offset);
 
 #define MC_SEARCH__NUM_REPLACE_ARGS 64
 
@@ -77,11 +78,10 @@ typedef struct mc_search_struct
     mc_search_fn search_fn;
 
     /* function, used for updatin current search status. NULL if not used */
-    mc_search_fn update_fn;
+    mc_update_fn update_fn;
 
     /* type of search */
     mc_search_type_t search_type;
-
 
     /* public output data */
 
