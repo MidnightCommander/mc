@@ -12,6 +12,7 @@
 #include "lib/vfs/vfs.h"        /* vfs_path_t */
 
 #include "src/keybind-defaults.h"       /* global_keymap_t */
+#include "src/filemanager/dir.h"        /* dir_list */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -184,6 +185,13 @@ typedef struct mcview_struct
     int search_numNeedSkipChar;
 
     GArray *saved_bookmarks;
+
+    dir_list *dir;              /* List of current directory files
+                                 * to handle CK_FileNext and CK_FilePrev commands */
+    int *dir_count;             /* Number of files in dir structure.
+                                 * Pointer is used here as reference to WPanel::count */
+    int *dir_idx;               /* Index of current file in dir structure.
+                                 * Pointer is used here as reference to WPanel::count */
 } mcview_t;
 
 typedef struct mcview_nroff_struct

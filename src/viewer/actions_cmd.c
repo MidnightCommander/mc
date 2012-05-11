@@ -242,6 +242,112 @@ mcview_handle_editkey (mcview_t * view, int key)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+mcview_load_next_prev_init (mcview_t * view)
+{
+    if (mc_global.mc_run_mode != MC_RUN_VIEWER)
+    {
+        /* get file list from current panel. Update it each time */
+        view->dir = &current_panel->dir;
+        view->dir_count = &current_panel->count;
+        view->dir_idx = &current_panel->selected;
+    }
+    else if (view->dir == NULL)
+    {
+        /* Run from command line */
+        /* Run 1st time. Load/get directory */
+
+        /* TODO: check mtime of directory to reload it */
+
+        char *full_fname;
+        const char *fname;
+        size_t fname_len;
+        int i;
+
+        /* load directory where requested file is */
+        view->dir = g_new0 (dir_list, 1);
+        view->dir_count = g_new (int, 1);
+        view->dir_idx = g_new (int, 1);
+
+        *view->dir_count = do_load_dir (view->workdir_vpath, view->dir, (sortfn *) sort_name, FALSE,
+                                        TRUE, FALSE, NULL);
+
+        full_fname = vfs_path_to_str (view->filename_vpath);
+        fname = x_basename (full_fname);
+        fname_len = strlen (fname);
+
+        /* search current file in the list */
+        for (i = 0; i != *view->dir_count; i++)
+        {
+            const file_entry *fe = &view->dir->list[i];
+
+            if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
+                break;
+        }
+
+        g_free (full_fname);
+
+        *view->dir_idx = i;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mcview_scan_for_file (mcview_t * view, int direction)
+{
+    int i;
+
+    for (i = *view->dir_idx + direction; i != *view->dir_idx; i += direction)
+    {
+        if (i < 0)
+            i = *view->dir_count - 1;
+        if (i == *view->dir_count)
+            i = 0;
+        if (!S_ISDIR (view->dir->list[i].st.st_mode))
+            break;
+    }
+
+    *view->dir_idx = i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mcview_load_next_prev (mcview_t * view, int direction)
+{
+    dir_list *dir;
+    int *dir_count, *dir_idx;
+    vfs_path_t *vfile;
+    char *file;
+
+    mcview_load_next_prev_init (view);
+    mcview_scan_for_file (view, direction);
+
+    /* reinit view */
+    dir = view->dir;
+    dir_count = view->dir_count;
+    dir_idx = view->dir_idx;
+    view->dir = NULL;
+    view->dir_count = NULL;
+    view->dir_idx = NULL;
+    vfile = vfs_path_append_new (view->workdir_vpath, dir->list[*dir_idx].fname, (char *) NULL);
+    file = vfs_path_to_str (vfile);
+    vfs_path_free (vfile);
+    mcview_done (view);
+    mcview_init (view);
+    mcview_load (view, NULL, file, 0);
+    g_free (file);
+    view->dir = dir;
+    view->dir_count = dir_count;
+    view->dir_idx = dir_idx;
+
+    view->dpy_bbar_dirty = FALSE; /* FIXME */
+    view->dirty++;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 mcview_execute_cmd (mcview_t * view, unsigned long command)
 {
@@ -383,11 +489,10 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
 #endif
     case CK_FileNext:
     case CK_FilePrev:
-        /* Use to indicate parent that we want to see the next/previous file */
         /* Does not work in panel mode */
         if (!mcview_is_in_panel (view))
-            view->move_dir = (command == CK_FileNext) ? 1 : -1;
-        /* fallthrough */
+            mcview_load_next_prev (view, command == CK_FileNext ? 1 : -1);
+        break;
     case CK_Quit:
         if (!mcview_is_in_panel (view))
             dlg_stop (view->widget.owner);
