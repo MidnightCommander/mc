@@ -231,7 +231,6 @@ mcview_init (mcview_t * view)
     for (i = 0; i < sizeof (view->marks) / sizeof (view->marks[0]); i++)
         view->marks[i] = 0;
 
-    view->move_dir = 0;
     view->update_steps = 0;
     view->update_activate = 0;
 

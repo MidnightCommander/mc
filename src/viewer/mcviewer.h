@@ -11,14 +11,6 @@
 
 struct mcview_struct;
 
-typedef enum
-{
-    MCVIEW_EXIT_FAILURE = -1,
-    MCVIEW_EXIT_OK = 0,
-    MCVIEW_WANT_NEXT,
-    MCVIEW_WANT_PREV
-} mcview_ret_t;
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -50,8 +42,8 @@ extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, gboo
 /* Shows {file} or the output of {command} in the internal viewer,
  * starting in line {start_line}.
  */
-extern mcview_ret_t mcview_viewer (const char *command, const vfs_path_t * file_vpath,
-                                   int start_line);
+extern gboolean mcview_viewer (const char *command, const vfs_path_t * file_vpath,
+                               int start_line);
 
 extern gboolean mcview_load (struct mcview_struct *, const char *, const char *, int);
 

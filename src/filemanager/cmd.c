@@ -121,34 +121,6 @@ static const char *machine_str = N_("Enter machine name (F1 for details):");
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-/** scan_for_file (panel, idx, direction)
- *
- * Inputs:
- *   panel:     pointer to the panel on which we operate
- *   idx:       starting file.
- *   direction: 1, or -1
- */
-
-static int
-scan_for_file (WPanel * panel, int idx, int direction)
-{
-    int i = idx + direction;
-
-    while (i != idx)
-    {
-        if (i < 0)
-            i = panel->count - 1;
-        if (i == panel->count)
-            i = 0;
-        if (!S_ISDIR (panel->dir.list[i].st.st_mode))
-            return i;
-        i += direction;
-    }
-    return i;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Run viewer (internal or external) on the currently selected file.
  * If normal is TRUE, force internal viewer and raw mode (used for F13).
@@ -178,21 +150,12 @@ do_view_cmd (gboolean normal)
     else
     {
         int file_idx;
+        vfs_path_t *filename_vpath;
 
         file_idx = current_panel->selected;
-
-        while (TRUE)
-        {
-            vfs_path_t *filename_vpath;
-            int dir;
-
-            filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
-            dir = view_file (filename_vpath, normal, use_internal_view);
-            vfs_path_free (filename_vpath);
-            if (dir == 0)
-                break;
-            file_idx = scan_for_file (current_panel, file_idx, dir);
-        }
+        filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
+        view_file (filename_vpath, normal, use_internal_view);
+        vfs_path_free (filename_vpath);
     }
 
     repaint_screen ();
@@ -636,11 +599,11 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal, int start_line)
 {
     static const char *viewer = NULL;
-    int move_dir = 0;
+    gboolean ret = TRUE;
 
     if (plain_view)
     {
@@ -661,17 +624,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
         mcview_default_nroff_flag = 0;
         mcview_default_magic_flag = 0;
 
-        switch (mcview_viewer (NULL, filename_vpath, start_line))
-        {
-        case MCVIEW_WANT_NEXT:
-            move_dir = 1;
-            break;
-        case MCVIEW_WANT_PREV:
-            move_dir = -1;
-            break;
-        default:
-            move_dir = 0;
-        }
+        ret = mcview_viewer (NULL, filename_vpath, start_line);
 
         if (changed_hex_mode && !mcview_altered_hex_mode)
             mcview_default_hex_mode = 1;
@@ -691,20 +644,10 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
         else
             strcpy (view_entry, "View");
 
-        if (regex_command (filename_vpath, view_entry, &move_dir) == 0)
+        ret = (regex_command (filename_vpath, view_entry) == 0);
+        if (ret)
         {
-            switch (mcview_viewer (NULL, filename_vpath, start_line))
-            {
-            case MCVIEW_WANT_NEXT:
-                move_dir = 1;
-                break;
-            case MCVIEW_WANT_PREV:
-                move_dir = -1;
-                break;
-            default:
-                move_dir = 0;
-            }
-
+            ret = mcview_viewer (NULL, filename_vpath, start_line);
             dialog_switch_process_pending ();
         }
     }
@@ -722,7 +665,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
         execute_with_vfs_arg (viewer, filename_vpath);
     }
 
-    return move_dir;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -735,7 +678,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
  *   internal:       If set uses the internal viewer, otherwise an external viewer.
  */
 
-int
+gboolean
 view_file (const vfs_path_t * filename_vpath, int plain_view, int internal)
 {
     return view_file_at_line (filename_vpath, plain_view, internal, 0);
@@ -849,7 +792,7 @@ edit_cmd (void)
     vfs_path_t *fname;
 
     fname = vfs_path_from_str (selection (current_panel)->fname);
-    if (regex_command (fname, "Edit", NULL) == 0)
+    if (regex_command (fname, "Edit") == 0)
         do_edit (fname);
     vfs_path_free (fname);
 }
@@ -863,7 +806,7 @@ edit_cmd_force_internal (void)
     vfs_path_t *fname;
 
     fname = vfs_path_from_str (selection (current_panel)->fname);
-    if (regex_command (fname, "Edit", NULL) == 0)
+    if (regex_command (fname, "Edit") == 0)
         do_edit_at_line (fname, TRUE, 0);
     vfs_path_free (fname);
 }

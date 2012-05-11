@@ -313,10 +313,9 @@ exec_make_shell_string (const char *lc_data, vfs_path_t * filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension_view (char *cmd, vfs_path_t * filename_vpath, int *move_dir, int start_line,
+exec_extension_view (char *cmd, vfs_path_t * filename_vpath, int start_line,
                      vfs_path_t * temp_file_name_vpath)
 {
-    mcview_ret_t ret;
     int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
     int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
 
@@ -332,24 +331,11 @@ exec_extension_view (char *cmd, vfs_path_t * filename_vpath, int *move_dir, int 
      */
     if (written_nonspace)
     {
-        ret = mcview_viewer (cmd, filename_vpath, start_line);
+        mcview_viewer (cmd, filename_vpath, start_line);
         mc_unlink (temp_file_name_vpath);
     }
     else
-        ret = mcview_viewer (NULL, filename_vpath, start_line);
-
-    if (move_dir != NULL)
-        switch (ret)
-        {
-        case MCVIEW_WANT_NEXT:
-            *move_dir = 1;
-            break;
-        case MCVIEW_WANT_PREV:
-            *move_dir = -1;
-            break;
-        default:
-            *move_dir = 0;
-        }
+        mcview_viewer (NULL, filename_vpath, start_line);
 
     if (changed_hex_mode && !mcview_altered_hex_mode)
         mcview_default_hex_mode = def_hex_mode;
@@ -388,7 +374,7 @@ exec_extension_cd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension (const char *filename, const char *lc_data, int *move_dir, int start_line)
+exec_extension (const char *filename, const char *lc_data, int start_line)
 {
     char *shell_string, *export_variables;
     vfs_path_t *temp_file_name_vpath = NULL;
@@ -487,7 +473,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     }
 
     if (run_view)
-        exec_extension_view (cmd, filename_vpath, move_dir, start_line, temp_file_name_vpath);
+        exec_extension_view (cmd, filename_vpath, start_line, temp_file_name_vpath);
     else
     {
         shell_execute (cmd, EXECUTE_INTERNAL);
@@ -736,7 +722,7 @@ flush_extension_file (void)
  */
 
 int
-regex_command (const vfs_path_t * filename_vpath, const char *action, int *move_dir)
+regex_command (const vfs_path_t * filename_vpath, const char *action)
 {
     char *filename, *p, *q, *r, c;
     size_t file_len;
@@ -957,7 +943,7 @@ regex_command (const vfs_path_t * filename_vpath, const char *action, int *move_
                          */
                         if (p < q)
                         {
-                            exec_extension (filename, r + 1, move_dir, view_at_line_number);
+                            exec_extension (filename, r + 1, view_at_line_number);
                             ret = 1;
                         }
                         break;

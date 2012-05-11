@@ -180,11 +180,10 @@ do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse,
 }
 
 int
-regex_command (const vfs_path_t *filename, const char *action, int *move_dir)
+regex_command (const vfs_path_t *filename, const char *action)
 {
     (void) filename;
     (void) action;
-    (void) move_dir;
 
     return 0;
 }

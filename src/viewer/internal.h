@@ -164,12 +164,6 @@ typedef struct mcview_struct
     int marker;                 /* mark to use */
     off_t marks[10];            /* 10 marks: 0..9 */
 
-    int move_dir;               /* return value from widget:
-                                 * 0 do nothing
-                                 * -1 view previous file
-                                 * 1 view next file
-                                 */
-
     off_t update_steps;         /* The number of bytes between percent
                                  * increments */
     off_t update_activate;      /* Last point where we updated the status */
