@@ -283,23 +283,29 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 
     view->filename_vpath = vfs_path_from_str (file);
 
-    if ((view->workdir_vpath == NULL) && (file != NULL))
+    /* get working dir */
+    if (file != NULL && file[0] != '\0')
     {
+        vfs_path_free (view->workdir_vpath);
+
         if (!g_path_is_absolute (file))
-            view->workdir_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
+        {
+            vfs_path_t *p;
+
+            p = vfs_path_clone (vfs_get_raw_current_dir ());
+            view->workdir_vpath = vfs_path_append_new (p, file, (char *) NULL);
+            vfs_path_free (p);
+        }
         else
         {
             /* try extract path form filename */
-            char *dirname;
+            const char *fname;
+            char *dir;
 
-            dirname = g_path_get_dirname (file);
-            if (strcmp (dirname, ".") != 0)
-                view->workdir_vpath = vfs_path_from_str (dirname);
-            else
-            {
-                view->workdir_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
-            }
-            g_free (dirname);
+            fname = x_basename (file);
+            dir = g_strndup (file, (size_t) (fname - file));
+            view->workdir_vpath = vfs_path_from_str (dir);
+            g_free (dir);
         }
     }
 
