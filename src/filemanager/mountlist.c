@@ -38,6 +38,11 @@
 
 #include <errno.h>
 
+/* This header needs to be included before sys/mount.h on *BSD */
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+
 #if defined STAT_STATVFS || defined STAT_STATVFS64 /* POSIX 1003.1-2001 (and later) with XSI */
 #include <sys/statvfs.h>
 #else
@@ -46,11 +51,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
-
-/* This header needs to be included before sys/mount.h on *BSD */
-#ifdef HAVE_SYS_PARAM_H
-#include <sys/param.h>
-#endif
 
 #ifdef MOUNTED_GETFSSTAT        /* OSF_1 and Darwin1.3.x */
 #ifdef HAVE_SYS_UCRED_H
