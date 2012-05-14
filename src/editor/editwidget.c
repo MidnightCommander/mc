@@ -2,11 +2,12 @@
    Editor initialisation and callback handler.
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007,2011
+   2007, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997
+   Andrew Borodin <aborodin@vmail.ru> 2012
 
    This file is part of the Midnight Commander.
 
@@ -47,7 +48,7 @@
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/tty/color.h"      /* tty_setcolor() */
-#include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
+#include "lib/skin.h"
 #include "lib/strutil.h"        /* str_term_trim() */
 #include "lib/util.h"           /* mc_build_filename() */
 #include "lib/widget.h"
@@ -67,15 +68,56 @@
 /*** file scope macro definitions ****************************************************************/
 
 #define WINDOW_MIN_LINES (2 + 2)
-#define WINDOW_MIN_COLS (2 + LINE_STATE_WIDTH)
+#define WINDOW_MIN_COLS (2 + LINE_STATE_WIDTH + 2)
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
 
+static char *edit_window_state_char = NULL;
+static char *edit_window_close_char = NULL;
+static unsigned int edit_dlg_init_refcounter = 0;
+
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t edit_callback (Widget * w, widget_msg_t msg, int parm);
+static cb_ret_t edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
+                                      void *data);
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Init the 'edit' subsystem
+ */
+
+static void
+edit_dlg_init (void)
+{
+    if (edit_dlg_init_refcounter == 0)
+    {
+        edit_window_state_char = mc_skin_get ("editor", "window-state-char", "*");
+        edit_window_close_char = mc_skin_get ("editor", "window-close-char", "X");
+    }
+
+    edit_dlg_init_refcounter++;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Deinit the 'edit' subsystem
+ */
+
+static void
+edit_dlg_deinit (void)
+{
+    if (edit_dlg_init_refcounter != 0)
+        edit_dlg_init_refcounter--;
+
+    if (edit_dlg_init_refcounter == 0)
+    {
+        g_free (edit_window_state_char);
+        g_free (edit_window_close_char);
+    }
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -148,6 +190,12 @@ static void
 edit_draw_frame (const WEdit * edit, gboolean active)
 {
     const Widget *w = (const Widget *) edit;
+    int dx;
+    char tmp[17];
+    int color;
+
+    color = edit->drag_state != MCEDIT_DRAG_NORMAL ? EDITOR_FRAME_DRAG : active ?
+                                                     EDITOR_FRAME_ACTIVE : EDITOR_FRAME;
 
     if (edit->fullscreen)
     {
@@ -158,12 +206,12 @@ edit_draw_frame (const WEdit * edit, gboolean active)
                         w->cols);
         tty_draw_hline (w->y + w->lines - 1, w->x,
                         mc_tty_frm[!active ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], w->cols);
+        dx = 6;
     }
     else
     {
         /* draw a frame around edit area */
-        tty_setcolor (edit->drag_state != MCEDIT_DRAG_NORMAL ? EDITOR_FRAME_DRAG : 
-                      active ? EDITOR_FRAME_ACTIVE : EDITOR_FRAME);
+        tty_setcolor (color);
         /* draw double frame for active window if skin supports that */
         tty_draw_box (w->y, w->x, w->lines, w->cols, !active);
         /* draw a drag marker */
@@ -173,7 +221,14 @@ edit_draw_frame (const WEdit * edit, gboolean active)
             widget_move (w, w->lines - 1, w->cols - 1);
             tty_print_alt_char (ACS_LRCORNER, TRUE);
         }
+        dx = 8;
     }
+
+    /* toggle fullscreen mode and close icons */
+    tty_setcolor (color);
+    widget_move (w, 0, edit->widget.cols - dx);
+    g_snprintf (tmp, sizeof (tmp), "[%s][%s]", edit_window_state_char, edit_window_close_char);
+    tty_print_string (tmp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -423,9 +478,23 @@ edit_event (Gpm_Event * event, void *data)
     else if (local.y == 1 && edit->drag_state != MCEDIT_DRAG_RESIZE)
     {
         /* click on the top line (move) */
-        /* move if not fullscreen */
+        int dx = edit->fullscreen ? 0 : 2;
+
+        if (local.x == edit->widget.cols - dx - 1)
+        {
+            edit_dialog_callback (w->owner, NULL, DLG_ACTION, CK_Close, NULL);
+            return MOU_NORMAL;
+        }
+
+        if (local.x == edit->widget.cols - dx - 4)
+        {
+            edit_toggle_fullscreen (edit);
+            return MOU_NORMAL;
+        }
+
         if ((local.type & (GPM_DOWN | GPM_DRAG)) != 0)
         {
+            /* move if not fullscreen */
             edit->drag_state_start = local.x;
             edit->drag_state = MCEDIT_DRAG_MOVE;
             edit->force |= REDRAW_COMPLETELY;
@@ -778,6 +847,10 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 
     switch (msg)
     {
+    case DLG_INIT:
+        edit_dlg_init ();
+        return MSG_HANDLED;
+
     case DLG_DRAW:
         /* don't use common_dialog_repaint() -- we don't need a frame */
         tty_setcolor (EDITOR_BACKGROUND);
@@ -850,6 +923,10 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 
     case DLG_VALIDATE:
         edit_quit (h);
+        return MSG_HANDLED;
+
+    case DLG_END:
+        edit_dlg_deinit ();
         return MSG_HANDLED;
 
     default:

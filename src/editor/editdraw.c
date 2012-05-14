@@ -881,6 +881,7 @@ edit_status (WEdit * edit)
 void
 edit_info_status (WEdit * edit)
 {
+    int y, x;
     int cols = edit->widget.cols;
 
     tty_setcolor (STATUSBAR_COLOR);
@@ -905,9 +906,12 @@ edit_info_status (WEdit * edit)
         g_free (full_fname);
     }
 
-    if (cols > 13)
+    tty_getyx (&y, &x);
+    x -= edit->widget.x;
+    x += 4;
+    if (x + 6 <= cols - (edit->fullscreen ? 0 : 2) - 6)
     {
-        edit_move (edit->widget.cols - (edit->fullscreen ? 6 : 8), 0);
+        edit_move (x, 0);
         tty_printf ("[%c%c%c%c]",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
                     edit->modified ? 'M' : '-',
