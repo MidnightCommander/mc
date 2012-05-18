@@ -604,9 +604,14 @@ shell/Imakefile
 regex/^Makefile.(PL|pl)$
 	Open=%var{PERL:perl} %f
 
+# sqlite3.db
+type/^SQLite 3.x database
+	Open=@EXTHELPERSDIR@/misc.sh open sqlite
+	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view sqlite
+
 # dbf
 shell/i/.dbf
-	Open=%view{ascii} @EXTHELPERSDIR@/misc.sh open dbf
+	Open=@EXTHELPERSDIR@/misc.sh open dbf
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dbf
 
 # REXX script
