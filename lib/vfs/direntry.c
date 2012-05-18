@@ -1044,6 +1044,58 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 /* Ook, these were functions around directory entries / inodes */
 /* -------------------------------- superblock games -------------------------- */
 /**
+ * get superlock object by vpath
+ *
+ * @param vpath path
+ * @return superlock object or NULL if not found
+ */
+
+struct vfs_s_super *
+vfs_get_super_by_vpath (const vfs_path_t * vpath)
+{
+    GList *iter;
+    void *cookie = NULL;
+    const vfs_path_element_t *path_element;
+    struct vfs_s_subclass *subclass;
+    struct vfs_s_super *super = NULL;
+    vfs_path_t *vpath_archive;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+    subclass = ((struct vfs_s_subclass *) path_element->class->data);
+    if (subclass == NULL)
+        return NULL;
+
+    vpath_archive = vfs_path_clone (vpath);
+    vfs_path_remove_element_by_index (vpath_archive, -1);
+
+    if (subclass->archive_check != NULL)
+    {
+        cookie = subclass->archive_check (vpath_archive);
+        if (cookie == NULL)
+            goto ret;
+    }
+
+    for (iter = subclass->supers; iter != NULL; iter = g_list_next (iter))
+    {
+        int i;
+
+        super = (struct vfs_s_super *) iter->data;
+
+        /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
+        i = subclass->archive_same (path_element, super, vpath_archive, cookie);
+        if (i == 1)
+            goto ret;
+        if (i != 0)
+            break;
+    }
+
+  ret:
+    vfs_path_free (vpath_archive);
+    return super;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * get path from last VFS-element and create corresponding superblock
  *
  * @param vpath source path object
@@ -1055,67 +1107,44 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 const char *
 vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flags)
 {
-    GList *iter;
-    const char *retval;
+    const char *retval = "";
     int result = -1;
     struct vfs_s_super *super;
-    void *cookie = NULL;
     const vfs_path_element_t *path_element;
-    vfs_path_t *vpath_archive;
     struct vfs_s_subclass *subclass;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    subclass = ((struct vfs_s_subclass *) path_element->class->data);
 
-    if (subclass == NULL)
-        return NULL;
+    if (path_element->path != NULL)
+        retval = path_element->path;
 
-    vpath_archive = vfs_path_clone (vpath);
-    vfs_path_remove_element_by_index (vpath_archive, -1);
-
-    retval = (path_element->path != NULL) ? path_element->path : "";
-
-    if (subclass->archive_check != NULL)
-    {
-        cookie = subclass->archive_check (vpath_archive);
-        if (cookie == NULL)
-        {
-            vfs_path_free (vpath_archive);
-            return NULL;
-        }
-    }
-
-    for (iter = subclass->supers; iter != NULL; iter = g_list_next (iter))
-    {
-        int i;
-
-        super = (struct vfs_s_super *) iter->data;
-
-        /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-        i = subclass->archive_same (path_element, super, vpath_archive, cookie);
-        if (i != 0)
-        {
-            if (i == 1)
-                goto return_success;
-            break;
-        }
-    }
+    super = vfs_get_super_by_vpath(vpath);
+    if (super != NULL)
+        goto return_success;
 
     if (flags & FL_NO_OPEN)
     {
         path_element->class->verrno = EIO;
-        vfs_path_free (vpath_archive);
         return NULL;
     }
 
     super = vfs_s_new_super (path_element->class);
+
+    subclass = ((struct vfs_s_subclass *) path_element->class->data);
     if (subclass->open_archive != NULL)
+    {
+        vfs_path_t *vpath_archive;
+
+        vpath_archive = vfs_path_clone (vpath);
+        vfs_path_remove_element_by_index (vpath_archive, -1);
+
         result = subclass->open_archive (super, vpath_archive, path_element);
+        vfs_path_free (vpath_archive);
+    }
     if (result == -1)
     {
         vfs_s_free_super (path_element->class, super);
         path_element->class->verrno = EIO;
-        vfs_path_free (vpath_archive);
         return NULL;
     }
     if (!super->name)
@@ -1128,7 +1157,6 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
 
   return_success:
     *archive = super;
-    vfs_path_free (vpath_archive);
     return retval;
 }
 
