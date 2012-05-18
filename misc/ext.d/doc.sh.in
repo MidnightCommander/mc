@@ -1,0 +1,96 @@
+#!/bin/sh
+
+# $1 - action
+# $2 - type of file
+
+action=$1
+filetype=$2
+
+
+do_view_action() {
+    filetype=$1
+
+    case "${filetype}" in
+    ps)
+        ps2ascii "${MC_EXT_FILENAME}"
+        ;;
+    pdf)
+        pdftotext "${MC_EXT_FILENAME}" -
+        ;;
+    odt)
+        odt2txt "${MC_EXT_FILENAME}"
+        ;;
+    msdoc)
+        antiword -t "${MC_EXT_FILENAME}" || \
+            catdoc -w "${MC_EXT_FILENAME}" || \
+            word2x -f text "${MC_EXT_FILENAME}" - || \
+            strings "${MC_EXT_FILENAME}"
+        ;;
+    msxls)
+        xls2csv "${MC_EXT_FILENAME}" || \
+            strings "${MC_EXT_FILENAME}"
+        ;;
+    dvi)
+        dvi2tty "${MC_EXT_FILENAME}"
+        ;;
+    djvu)
+        djvused -e print-pure-txt "${MC_EXT_FILENAME}"
+        ;;
+    *)
+        ;;
+    esac
+}
+
+do_open_action() {
+    filetype=$1
+
+    case "${filetype}" in
+    ps)
+        (gv "${MC_EXT_FILENAME}" &)
+        ;;
+    pdf)
+        (xpdf "${MC_EXT_FILENAME}" &)
+        #(acroread "${MC_EXT_FILENAME}" &)
+        #(ghostview "${MC_EXT_FILENAME}" &)
+        ;;
+    ooffice)
+        (ooffice "${MC_EXT_FILENAME}" &)
+        ;;
+    abw)
+        (abiword "${MC_EXT_FILENAME}" &)
+        ;;
+    msdoc)
+        (abiword "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        ;;
+    msxls)
+        (gnumeric "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        ;;
+    framemaker)
+        fmclient -f "${MC_EXT_FILENAME}"
+        ;;
+    dvi)
+        if [ x$DISPLAY = x ]; then
+            dvisvga "${MC_EXT_FILENAME}"
+        else
+            (xdvi "${MC_EXT_FILENAME}" &)
+        fi
+        ;;
+    djvu)
+        djview "${MC_EXT_FILENAME}" &
+        ;;
+    *)
+        ;;
+    esac
+}
+
+case "${action}" in
+view)
+    do_view_action "${filetype}"
+    ;;
+open)
+    xdg-open "${MC_EXT_FILENAME}" 2>/dev/null || \
+        do_open_action "${filetype}"
+    ;;
+*)
+    ;;
+esac

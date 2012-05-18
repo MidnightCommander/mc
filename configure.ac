@@ -481,6 +481,10 @@ AC_SUBST(LIBS)
 dnl Libraries used only when building the mc binary
 AC_SUBST(MCLIBS)
 
+
+EXTHELPERSDIR=${prefix}/libexec/${PACKAGE}/ext.d
+AC_SUBST(EXTHELPERSDIR)
+
 MAN_DATE="$(LC_ALL=C date "+%B %Y")"
 AC_SUBST(MAN_DATE)
 
@@ -514,6 +518,10 @@ contrib/dist/prototype
 
 misc/Makefile
 misc/skins/Makefile
+misc/ext.d/Makefile
+misc/ext.d/doc.sh
+misc/ext.d/text.sh
+misc/ext.d/web.sh
 misc/macros.d/Makefile
 misc/mc.ext
 
