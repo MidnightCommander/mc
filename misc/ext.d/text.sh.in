@@ -112,7 +112,14 @@ do_open_action() {
         esac | ${pager}
         ;;
     chm)
-        which kchmviewer > /dev/null 2>&1 && (kchmviewer "${MC_EXT_FILENAME}" &) || (xchm "${MC_EXT_FILENAME}" &)
+        if [ -n "$DISPLAY" ]; then
+            which kchmviewer > /dev/null 2>&1 \
+                && (kchmviewer "${MC_EXT_FILENAME}" &) \
+                || (xchm "${MC_EXT_FILENAME}" &)
+        else
+            chm_http "${MC_EXT_FILENAME}" & elinks http://localhost:8080/index.html
+            kill -INT %1
+        fi
         ;;
     *)
         ;;

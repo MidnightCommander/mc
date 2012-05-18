@@ -33,7 +33,7 @@ do_open_action() {
         (gimp "${MC_EXT_FILENAME}" &)
         ;;
     *)
-        if [ "$DISPLAY" = "" ]; then
+        if [ -z "$DISPLAY" ]; then
             zgv "${MC_EXT_FILENAME}"
         else
             (gqview "${MC_EXT_FILENAME}" &)

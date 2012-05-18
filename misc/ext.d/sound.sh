@@ -32,7 +32,7 @@ do_open_action() {
 
     case "${filetype}" in
     common)
-        if [ "$DISPLAY" = "" ]; then
+        if [ -z "$DISPLAY" ]; then
             play "${MC_EXT_FILENAME}"
         else
             (xmms  "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
@@ -46,14 +46,14 @@ do_open_action() {
         vplay -s 22 "${MC_EXT_FILENAME}"
         ;;
     mp3)
-        if [ "$DISPLAY" = "" ]; then
+        if [ -z "$DISPLAY" ]; then
             mpg123 "${MC_EXT_FILENAME}"
         else
             (xmms "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         fi
         ;;
     ogg)
-        if [ "$DISPLAY" = "" ]; then
+        if [ -z "$DISPLAY" ]; then
             ogg123 "${MC_EXT_FILENAME}"
         else
             (xmms "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
