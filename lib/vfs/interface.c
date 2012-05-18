@@ -699,34 +699,25 @@ mc_chdir (const vfs_path_t * vpath)
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
     if (vfs_path_element_valid (path_element))
     {
+        struct vfs_s_super *super;
+
         if (*path_element->path != '\0')
         {
             char *p;
 
             p = strchr (path_element->path, 0) - 1;
-            if (p != NULL && *p == PATH_SEP && p != path_element->path)
+            if (*p == PATH_SEP && p > path_element->path)
                 *p = '\0';
         }
-#ifdef ENABLE_VFS_NET
+
+        super = vfs_get_super_by_vpath (vpath);
+        if (super != NULL)
         {
-            struct vfs_s_subclass *subclass;
-
-            subclass = (struct vfs_s_subclass *) path_element->class->data;
-            if (subclass != NULL)
-            {
-                struct vfs_s_super *super = NULL;
-
-                (void) vfs_s_get_path (vpath, &super, 0);
-                if (super != NULL && super->path_element != NULL)
-                {
-                    g_free (super->path_element->path);
-                    super->path_element->path = g_strdup (path_element->path);
-                }
-            }
+            g_free (super->path_element->path);
+            super->path_element->path = g_strdup (path_element->path);
         }
-#endif /* ENABLE_VFS_NET */
-
     }
+
     return 0;
 
   error_end:
