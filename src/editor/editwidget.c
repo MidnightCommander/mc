@@ -393,7 +393,7 @@ edit_file (const vfs_path_t * _file_vpath, int line)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback,
+        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback, NULL,
                     "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     edit_dlg->get_shortcut = edit_get_shortcut;

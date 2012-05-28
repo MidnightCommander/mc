@@ -125,7 +125,7 @@ edit_options_dialog (WEdit * edit)
 
     QuickDialog Quick_options = {
         OPT_DLG_W, OPT_DLG_H, -1, -1, N_("Editor options"),
-        "[Editor options]", quick_widgets, NULL, FALSE
+        "[Editor options]", quick_widgets, NULL, NULL, FALSE
     };
 
 #ifdef ENABLE_NLS

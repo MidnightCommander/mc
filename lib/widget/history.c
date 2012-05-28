@@ -320,7 +320,7 @@ history_show (GList ** history, Widget * widget)
     hist_data.maxlen = maxlen;
 
     query_dlg =
-        create_dlg (TRUE, 0, 0, 4, 4, dialog_colors, history_dlg_callback,
+        create_dlg (TRUE, 0, 0, 4, 4, dialog_colors, history_dlg_callback, NULL,
                     "[History-query]", _("History"), DLG_COMPACT);
     query_dlg->data = &hist_data;
 

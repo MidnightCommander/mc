@@ -1116,7 +1116,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
 
     whelp =
         create_dlg (TRUE, 0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
-                    help_colors, help_callback, "[Help]", _("Help"),
+                    help_colors, help_callback, NULL, "[Help]", _("Help"),
                     DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;

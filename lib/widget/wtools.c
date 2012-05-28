@@ -244,7 +244,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     {
         QuickDialog Quick_input = {
             len, lines + 6, -1, -1, header,
-            help, quick_widgets, NULL, TRUE
+            help, quick_widgets, NULL, NULL, TRUE
         };
 
         for (i = 0; i < 4; i++)
@@ -343,7 +343,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, query_colors, default_query_callback,
+        create_dlg (TRUE, 0, 0, lines, cols, query_colors, default_query_callback, NULL,
                     "[QueryBox]", header, dlg_flags);
 
     if (count > 0)

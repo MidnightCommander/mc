@@ -418,7 +418,7 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
     /* FIXME - missing help node */
     ui->replace_dlg =
-        create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, "[Replace]",
+        create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]",
                     title, DLG_CENTER | DLG_REVERSE);
 
     /* prompt -- centered */
@@ -573,7 +573,8 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
 
     ui->op_dlg =
         create_dlg (TRUE, 0, 0, dlg_height, dlg_width,
-                    dialog_colors, NULL, NULL, op_names[ctx->operation], DLG_CENTER | DLG_REVERSE);
+                    dialog_colors, NULL, NULL, NULL, op_names[ctx->operation],
+                    DLG_CENTER | DLG_REVERSE);
 
     add_widget (ui->op_dlg,
                 button_new (dlg_height - 3, dlg_width / 2 + 1, FILE_ABORT,
@@ -1086,7 +1087,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
 
         QuickDialog Quick_input = {
             fmd_xlen, FMDY, -1, -1, op_names[operation],
-            "[Mask Copy/Rename]", fmd_widgets, NULL, TRUE
+            "[Mask Copy/Rename]", fmd_widgets, NULL, NULL, TRUE
         };
 
       ask_file_mask:

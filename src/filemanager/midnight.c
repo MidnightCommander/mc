@@ -1706,7 +1706,7 @@ do_nc (void)
     edit_stack_init ();
 #endif
 
-    midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
+    midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback, NULL,
                                "[main]", NULL, DLG_WANT_IDLE);
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)

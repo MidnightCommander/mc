@@ -296,7 +296,7 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     displays_status = _status;
 
     dd = create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors,
-                     display_callback, "[Listing Mode...]", display_title,
+                     display_callback, NULL, "[Listing Mode...]", display_title,
                      DLG_CENTER | DLG_REVERSE);
 
     add_widget (dd, cancel_button);
@@ -368,7 +368,7 @@ init_disp_bits_box (void)
     do_refresh ();
 
     dbits_dlg =
-        create_dlg (TRUE, 0, 0, DISPY, DISPX, dialog_colors, NULL,
+        create_dlg (TRUE, 0, 0, DISPY, DISPX, dialog_colors, NULL, NULL,
                     "[Display bits]", _("Display bits"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (dbits_dlg, label_new (3, 4, _("Input / display codepage:")));
@@ -622,7 +622,7 @@ sort_box (panel_sort_info_t * info)
         QuickDialog quick_dlg = {
             dlg_width, dlg_height, -1, -1,
             N_("Sort order"), "[Sort Order...]",
-            quick_widgets, NULL, TRUE
+            quick_widgets, NULL, NULL, TRUE
         };
 
         quick_widgets[5].u.radio.items = sort_orders_names;
@@ -751,7 +751,7 @@ confirm_box (void)
     {
         QuickDialog confirmation = {
             dlg_width, dlg_height, -1, -1, title,
-            "[Confirmation]", conf_widgets, NULL, TRUE
+            "[Confirmation]", conf_widgets, NULL, NULL, TRUE
         };
 
         (void) quick_dialog (&confirmation);
@@ -788,7 +788,7 @@ display_bits_box (void)         /* AB:FIXME: test dialog */
 
     QuickDialog display_bits = {
         DISPX, DISPY, -1, -1, _("Display bits"),
-        "[Display bits]", display_widgets, NULL, TRUE
+        "[Display bits]", display_widgets, NULL, NULL, TRUE
     };
 
     int i;
@@ -905,7 +905,7 @@ tree_box (const char *current_dir)
 
     /* Create the components */
     dlg = create_dlg (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors,
-                      tree_callback, "[Directory Tree]",
+                      tree_callback, NULL, "[Directory Tree]",
                       _("Directory tree"), DLG_CENTER | DLG_REVERSE);
 
     mytree = tree_new (2, 2, dlg->lines - 6, dlg->cols - 5, FALSE);
@@ -970,6 +970,7 @@ configure_vfs (void)
 #else
         NULL,
 #endif
+        NULL,
         FALSE
     };
 
@@ -1033,7 +1034,7 @@ cd_dialog (void)
 
         QuickDialog Quick_input = {
             xlen, ylen, 2, LINES - 2 - ylen, _("Quick cd"),
-            "[Quick cd]", quick_widgets, NULL, TRUE
+            "[Quick cd]", quick_widgets, NULL, NULL, TRUE
         };
 
         return (quick_dialog (&Quick_input) != B_CANCEL) ? my_str : NULL;
@@ -1062,7 +1063,7 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
 
     QuickDialog Quick_input = {
         64, 12, -1, -1, N_("Symbolic link"),
-        "[File Menu]", quick_widgets, NULL, FALSE
+        "[File Menu]", quick_widgets, NULL, NULL, FALSE
     };
 
     if (quick_dialog (&Quick_input) == B_CANCEL)
@@ -1109,7 +1110,7 @@ jobs_cmd (void)
     }
 #endif /* ENABLE_NLS */
 
-    jobs_dlg = create_dlg (TRUE, 0, 0, JOBS_Y, JOBS_X, dialog_colors, NULL,
+    jobs_dlg = create_dlg (TRUE, 0, 0, JOBS_Y, JOBS_X, dialog_colors, NULL, NULL,
                            "[Background jobs]", _("Background Jobs"), DLG_CENTER | DLG_REVERSE);
 
     bg_list = listbox_new (2, 3, JOBS_Y - 9, JOBS_X - 7, FALSE, NULL);
@@ -1194,7 +1195,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
 
     title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
 
-    auth_dlg = create_dlg (TRUE, 0, 0, dialog_y, dialog_x, dialog_colors, NULL,
+    auth_dlg = create_dlg (TRUE, 0, 0, dialog_y, dialog_x, dialog_colors, NULL, NULL,
                            "[Smb Authinfo]", title, DLG_CENTER | DLG_REVERSE);
 
     g_free (title);

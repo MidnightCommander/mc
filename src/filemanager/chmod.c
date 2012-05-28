@@ -306,7 +306,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
 
     ch_dlg =
         create_dlg (TRUE, 0, 0, lines, cols, dialog_colors,
-                    chmod_callback, "[Chmod]", _("Chmod command"), DLG_CENTER | DLG_REVERSE);
+                    chmod_callback, NULL, "[Chmod]", _("Chmod command"), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < chmod_but_num; i++)
     {

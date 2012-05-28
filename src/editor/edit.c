@@ -208,7 +208,7 @@ edit_about (void)
     cols = max (win_len, cols) + 6;
 
     /* dialog */
-    about_dlg = create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, NULL,
+    about_dlg = create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
                             "[Internal File Editor]", header, DLG_CENTER | DLG_TRYUP);
 
     add_widget (about_dlg, label_new (3, (cols - version_len) / 2, version));

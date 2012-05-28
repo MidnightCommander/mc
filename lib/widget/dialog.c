@@ -40,7 +40,6 @@
 
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
-#include "lib/tty/mouse.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
@@ -373,6 +372,15 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
         h->ret_value = B_CANCEL;
         dlg_stop (h);
         return MOU_NORMAL;
+    }
+
+    if (h->mouse != NULL)
+    {
+        int mou;
+
+        mou = h->mouse (event, h);
+        if (mou != MOU_UNHANDLED)
+            return mou;
     }
 
     item = starting_widget;
@@ -758,8 +766,8 @@ default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 
 Dlg_head *
 create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
-            const int *colors, dlg_cb_fn callback, const char *help_ctx,
-            const char *title, dlg_flags_t flags)
+            const int *colors, dlg_cb_fn callback,  mouse_h mouse_handler,
+            const char *help_ctx, const char *title, dlg_flags_t flags)
 {
     Dlg_head *new_d;
 
@@ -770,6 +778,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
         memmove (new_d->color, colors, sizeof (dlg_colors_t));
     new_d->help_ctx = help_ctx;
     new_d->callback = (callback != NULL) ? callback : default_dlg_callback;
+    new_d->mouse = mouse_handler;
     new_d->x = x1;
     new_d->y = y1;
     new_d->flags = flags;
