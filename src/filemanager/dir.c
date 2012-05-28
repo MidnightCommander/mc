@@ -524,6 +524,7 @@ handle_path (dir_list * list, const char *path,
     if (next_free == list->size)
     {
         list->list = g_try_realloc (list->list, sizeof (file_entry) * (list->size + RESIZE_STEPS));
+        if (list->list == NULL)
             return -1;
         list->size += RESIZE_STEPS;
     }
