@@ -501,6 +501,13 @@ regex/\.([oO][gG][mM])$
 regex/\.([rR][aA]?[mM])$
 	Open=@EXTHELPERSDIR@/video.sh open ram
 
+# WebM
+regex/\.([wW][eE][bB][mM])$
+    Include=video
+
+type/WebM
+    Include=video
+
 include/video
 	Open=@EXTHELPERSDIR@/video.sh open ALL_FORMATS
 
