@@ -317,26 +317,6 @@ info_callback (Widget * w, widget_msg_t msg, int parm)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static int
-info_event (Gpm_Event * event, void *data)
-{
-    Widget *w = (Widget *) data;
-    Gpm_Event local;
-
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
-
-    local = mouse_get_local (event, w);
-
-    /* rest of the upper frame, the menu is invisible - call menu */
-    if ((local.type & GPM_DOWN) != 0 && local.y == 1 && !menubar_visible)
-        return the_menubar->widget.mouse (event, the_menubar);
-
-    return MOU_NORMAL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -345,7 +325,7 @@ info_new (int y, int x, int lines, int cols)
 {
     struct WInfo *info = g_new (struct WInfo, 1);
 
-    init_widget (&info->widget, y, x, lines, cols, info_callback, info_event);
+    init_widget (&info->widget, y, x, lines, cols, info_callback, NULL);
 
     /* We do not want the cursor */
     widget_want_cursor (info->widget, 0);

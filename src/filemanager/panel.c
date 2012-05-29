@@ -3536,18 +3536,20 @@ mouse_sort_col (WPanel * panel, int x)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Mouse callback of the panel minus repainting.
- * If the event is redirected to the menu, *redir is set to TRUE.
  */
-static inline int
-do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
+static int
+panel_event (Gpm_Event * event, void *data)
 {
+    WPanel *panel = (WPanel *) data;
+    Widget *w = (Widget *) data;
+
     const int lines = llines (panel);
     const gboolean is_active = dlg_widget_active (panel);
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
-    Widget *w = (Widget *) panel;
     Gpm_Event local;
 
-    *redir = FALSE;
+    if (!mouse_global_in_widget (event, (Widget *) data))
+        return MOU_UNHANDLED;
 
     local = mouse_get_local (event, w);
 
@@ -3558,47 +3560,41 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
         if (local.x == 2)
         {
             directory_history_prev (panel);
+            goto finish;
+        }
+
+        /* ">" button */
+        if (local.x == w->cols - 1)
+        {
+            directory_history_next (panel);
+            goto finish;
+        }
+
+        /* "^" button */
+        if (local.x >= w->cols - 4 && local.x <= w->cols - 2)
+        {
+            directory_history_list (panel);
+            /* both panels have been redrawn */
             return MOU_NORMAL;
         }
 
         /* "." button show/hide hidden files */
-        if (local.x == panel->widget.cols - 5)
+        if (local.x == w->cols - 5)
         {
             midnight_dlg->callback (midnight_dlg, NULL, DLG_ACTION, CK_ShowHidden, NULL);
-            repaint_screen ();
+            /* both panels have been updated */
             return MOU_NORMAL;
-        }
-
-        /* ">" button */
-        if (local.x == panel->widget.cols - 1)
-        {
-            directory_history_next (panel);
-            return MOU_NORMAL;
-        }
-
-        /* "^" button */
-        if (local.x >= panel->widget.cols - 4 && local.x <= panel->widget.cols - 2)
-        {
-            directory_history_list (panel);
-            return MOU_NORMAL;
-        }
-
-        /* rest of the upper frame, the menu is invisible - call menu */
-        if (!menubar_visible)
-        {
-            *redir = TRUE;
-            return the_menubar->widget.mouse (event, the_menubar);
         }
 
         /* no other events on 1st line */
-        return MOU_NORMAL;
+        return MOU_UNHANDLED;
     }
 
     /* sort on clicked column; don't handle wheel events */
     if (mouse_down && (local.buttons & (GPM_B_UP | GPM_B_DOWN)) == 0 && local.y == 2)
     {
         mouse_sort_col (panel, local.x);
-        return MOU_NORMAL;
+        goto finish;
     }
 
     /* Mouse wheel events */
@@ -3611,7 +3607,7 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
             else                /* We are in first page */
                 move_up (panel);
         }
-        return MOU_NORMAL;
+        goto finish;
     }
 
     if (mouse_down && (local.buttons & GPM_B_DOWN) != 0)
@@ -3623,7 +3619,7 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
             else                /* We are in last page */
                 move_down (panel);
         }
-        return MOU_NORMAL;
+        goto finish;
     }
 
     local.y -= 2;
@@ -3639,7 +3635,7 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
         else
         {
             my_index = panel->top_file + local.y - 1;
-            if (panel->split && (local.x > ((panel->widget.cols - 2) / 2)))
+            if (panel->split && (local.x > (w->cols - 2) / 2))
                 my_index += llines (panel);
 
             if (my_index >= panel->count)
@@ -3656,33 +3652,13 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
         /* This one is new */
         mark_if_marking (panel, &local);
     }
-    else if ((local.type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE))
-    {
-        if (local.y > 0 && local.y <= lines)
-            do_enter (panel);
-    }
+    else if ((local.type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE) &&
+             local.y > 0 && local.y <= lines)
+        do_enter (panel);
 
+  finish:
+    send_message (w, WIDGET_DRAW, 0);
     return MOU_NORMAL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Mouse callback of the panel */
-
-static int
-panel_event (Gpm_Event * event, void *data)
-{
-    WPanel *panel = (WPanel *) data;
-    int ret;
-    gboolean redir;
-
-    if (!mouse_global_in_widget (event, (Widget *) data))
-        return MOU_UNHANDLED;
-
-    ret = do_panel_event (event, panel, &redir);
-    if (!redir)
-        send_message ((Widget *) panel, WIDGET_DRAW, 0);
-
-    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
