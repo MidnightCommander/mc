@@ -93,18 +93,18 @@ do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
 {
     screen_dimen y, x;
     Gpm_Event local;
+    Widget *w = (Widget *) view;
+
+    /* rest of the upper frame - call menu */
+    if (mcview_is_in_panel (view) && (event->type & GPM_DOWN) != 0 && event->y == w->owner->y + 1)
+    {
+        *result = MOU_UNHANDLED;
+        return FALSE;           /* don't draw viewer over menu */
+    }
 
     *result = MOU_NORMAL;
 
-    local = mouse_get_local (event, (Widget *) view);
-
-    /* rest of the upper frame, the menu is invisible - call menu */
-    if (mcview_is_in_panel (view) && (local.type & GPM_DOWN) != 0 && local.y == 1
-        && !menubar_visible)
-    {
-        *result = the_menubar->widget.mouse (event, the_menubar);
-        return FALSE;           /* don't draw viewer over menu */
-    }
+    local = mouse_get_local (event, w);
 
     /* We are not interested in the release events */
     if ((local.type & (GPM_DOWN | GPM_DRAG)) == 0)
@@ -114,13 +114,11 @@ do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
     if ((local.buttons & GPM_B_UP) != 0 && (local.type & GPM_DOWN) != 0)
     {
         mcview_move_up (view, 2);
-        *result = MOU_NORMAL;
         return TRUE;
     }
     if ((local.buttons & GPM_B_DOWN) != 0 && (local.type & GPM_DOWN) != 0)
     {
         mcview_move_down (view, 2);
-        *result = MOU_NORMAL;
         return TRUE;
     }
 
@@ -135,7 +133,8 @@ do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
             mcview_move_left (view, 1);
             goto processed;
         }
-        else if (x < view->data_area.width * 3 / 4)
+
+        if (x < view->data_area.width * 3 / 4)
         {
             /* ignore the click */
         }
@@ -240,7 +239,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     mcview_ret_t ret;
 
     /* Create dialog and widgets, put them on the dialog */
-    view_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback,
+    view_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback, NULL,
                            "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
     lc_mcview = mcview_new (0, 0, LINES - 1, COLS, FALSE);

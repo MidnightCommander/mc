@@ -1588,6 +1588,48 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+midnight_event (Gpm_Event *event, void *data)
+{
+    Dlg_head *h = (Dlg_head *) data;
+    int ret = MOU_UNHANDLED;
+
+    if (event->y == h->y + 1)
+    {
+        /* menubar */
+        if (menubar_visible)
+            ret = ((Widget *) the_menubar)->mouse (event, the_menubar);
+        else
+        {
+            Widget *w;
+
+            w = get_panel_widget (0);
+            ret = w->mouse (event, w);
+
+            if (ret == MOU_UNHANDLED)
+            {
+                w = get_panel_widget (1);
+                ret = w->mouse (event, w);
+            }
+
+            if (ret == MOU_UNHANDLED)
+                ret = ((Widget *) the_menubar)->mouse (event, the_menubar);
+        }
+    }
+    else if (event->y == h->y + h->lines && mc_global.keybar_visible)
+    {
+        /* buttonbar */
+
+        /* in general, this can be handled in default way (dlg_mouse_event)
+         * but let make it here to avoid walking in widget list */
+        ret = ((Widget *) the_bar)->mouse (event, the_bar);
+    }
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1599,6 +1641,8 @@ update_menu (void)
     menubar_arrange (the_menubar);
     menubar_set_visible (the_menubar, menubar_visible);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 midnight_set_buttonbar (WButtonBar * b)
@@ -1707,7 +1751,7 @@ do_nc (void)
 #endif
 
     midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
-                               "[main]", NULL, DLG_WANT_IDLE);
+                               midnight_event, "[main]", NULL, DLG_WANT_IDLE);
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         setup_mc ();

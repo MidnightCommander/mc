@@ -14,6 +14,7 @@
 #include "lib/global.h"
 #include "lib/hook.h"           /* hook_t */
 #include "lib/keybind.h"        /* global_keymap_t */
+#include "lib/tty/mouse.h"      /* mouse_h */
 
 /*** defined constants ***************************************************************************/
 
@@ -128,6 +129,7 @@ struct Dlg_head
     char *event_group;          /* Name of event group for this dialog */
 
     dlg_cb_fn callback;
+    mouse_h mouse;
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
     dlg_title_str get_title;    /* useless for modal dialogs */
 };
@@ -155,7 +157,7 @@ void draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single);
 
 /* Creates a dialog head  */
 Dlg_head *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
-                      const int *colors, dlg_cb_fn callback,
+                      const int *colors, dlg_cb_fn callback, mouse_h mouse_handler,
                       const char *help_ctx, const char *title, dlg_flags_t flags);
 
 void dlg_set_default_colors (void);

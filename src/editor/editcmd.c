@@ -431,7 +431,7 @@ edit_get_save_file_as (WEdit * edit)
     QuickDialog Quick_options = {
         DLG_WIDTH, DLG_HEIGHT, -1, -1,
         N_("Save As"), "[Save File As]",
-        quick_widgets, NULL, FALSE
+        quick_widgets, NULL, NULL, FALSE
     };
 
     if (quick_dialog (&Quick_options) != B_CANCEL)
@@ -1596,7 +1596,7 @@ menu_save_mode_cmd (void)
 
     QuickDialog dialog = {
         DLG_X, DLG_Y, -1, -1, N_("Edit Save Mode"),
-        "[Edit Save Mode]", widgets, NULL, FALSE
+        "[Edit Save Mode]", widgets, NULL, NULL, FALSE
     };
 
     size_t i;
@@ -3214,7 +3214,7 @@ edit_mail_dialog (WEdit * edit)
 
     QuickDialog Quick_input = {
         50, MAIL_DLG_HEIGHT, -1, -1, N_("Mail"),
-        "[Input Line Keys]", quick_widgets, NULL, FALSE
+        "[Input Line Keys]", quick_widgets, NULL, NULL, FALSE
     };
 
     quick_widgets[2].u.input.text = mail_cc_last ? mail_cc_last : "";

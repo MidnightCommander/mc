@@ -198,7 +198,7 @@ init_listmode (char *oldlistformat)
     do_refresh ();
 
     listmode_dlg =
-        create_dlg (TRUE, 0, 0, 22, 74, dialog_colors, NULL, listmode_section,
+        create_dlg (TRUE, 0, 0, 22, 74, dialog_colors, NULL, NULL, listmode_section,
                     "Listing format edit", DLG_CENTER | DLG_REVERSE);
 
     add_widget (listmode_dlg, groupbox_new (UY, UX, 4, 63, "General options"));

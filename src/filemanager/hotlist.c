@@ -777,7 +777,7 @@ init_hotlist (int list_type)
 
     hotlist_dlg =
         create_dlg (TRUE, 0, 0, LINES - 2, hotlist_cols, dialog_colors,
-                    hotlist_callback, help_node, title, DLG_CENTER | DLG_REVERSE);
+                    hotlist_callback, NULL, help_node, title, DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++)
     {
@@ -842,7 +842,7 @@ init_movelist (int list_type, struct hotlist *item)
 
     movelist_dlg =
         create_dlg (TRUE, 0, 0, LINES - 6, movelist_cols, dialog_colors,
-                    hotlist_callback, "[Hotlist]", hdr, DLG_CENTER | DLG_REVERSE);
+                    hotlist_callback, NULL, "[Hotlist]", hdr, DLG_CENTER | DLG_REVERSE);
     g_free (hdr);
 
     for (i = 0; i < BUTTONS; i++)
@@ -1062,7 +1062,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     {
         QuickDialog Quick_input = {
             len, lines1 + lines2 + 7, -1, -1, header,
-            help, quick_widgets, NULL, FALSE
+            help, quick_widgets, NULL, NULL, FALSE
         };
 
         for (i = 0; i < 7; i++)
@@ -1154,7 +1154,7 @@ add_new_group_input (const char *header, const char *label, char **result)
     {
         QuickDialog Quick_input = {
             len, lines + 6, -1, -1, header,
-            "[Hotlist]", quick_widgets, NULL, FALSE
+            "[Hotlist]", quick_widgets, NULL, NULL, FALSE
         };
 
         int relative_y[] = { 1, 1, 1, 0, 2 };   /* the relative_x component from the

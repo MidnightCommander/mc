@@ -2432,7 +2432,7 @@ dview_diff_options (WDiff * dview)
     QuickDialog diffopt = {
         OPTX, OPTY, -1, -1,
         N_("Diff Options"), "[Diff Options]",
-        diffopt_widgets, NULL, FALSE
+        diffopt_widgets, NULL, NULL, FALSE
     };
 
     if (quick_dialog (&diffopt) != B_CANCEL)
@@ -3308,7 +3308,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
-        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback,
+        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback, NULL,
                     "[Diff Viewer]", NULL, DLG_WANT_TAB);
 
     dview = g_new0 (WDiff, 1);

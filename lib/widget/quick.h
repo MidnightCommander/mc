@@ -5,6 +5,8 @@
 #ifndef MC__QUICK_H
 #define MC__QUICK_H
 
+#include "lib/tty/mouse.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define QUICK_CHECKBOX(x, xdiv, y, ydiv, txt, st)                       \
@@ -218,6 +220,7 @@ typedef struct
     const char *help;
     QuickWidget *widgets;
     dlg_cb_fn callback;
+    mouse_h mouse;
     gboolean i18n;              /* If true, internationalization has happened */
 } QuickDialog;
 
