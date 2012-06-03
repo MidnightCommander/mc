@@ -33,7 +33,6 @@
 
 #define EDIT_TEXT_HORIZONTAL_OFFSET 0
 #define EDIT_TEXT_VERTICAL_OFFSET   0
-#define EDIT_WITH_FRAME             1
 
 #define EDIT_RIGHT_EXTREME option_edit_right_extreme
 #define EDIT_LEFT_EXTREME option_edit_left_extreme
@@ -168,6 +167,9 @@ extern int option_edit_bottom_extreme;
 extern const char *option_whole_chars_search;
 extern gboolean search_create_bookmark;
 
+extern char *edit_window_state_char;
+extern char *edit_window_close_char;
+
 /*** declarations of public functions ************************************************************/
 
 gboolean edit_add_window (Dlg_head * h, int y, int x, int lines, int cols,
@@ -258,8 +260,7 @@ void edit_show_numbers_cmd (Dlg_head * h);
 void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark);
-void edit_info_status (WEdit * edit);
-void edit_status (WEdit * edit);
+void edit_status (WEdit * edit, gboolean active);
 void edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion);
 void edit_update_screen (WEdit * edit);
 void edit_save_size (WEdit * edit);

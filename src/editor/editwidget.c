@@ -66,6 +66,9 @@
 
 /*** global variables ****************************************************************************/
 
+char *edit_window_state_char = NULL;
+char *edit_window_close_char = NULL;
+
 /*** file scope macro definitions ****************************************************************/
 
 #define WINDOW_MIN_LINES (2 + 2)
@@ -74,9 +77,6 @@
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
-
-static char *edit_window_state_char = NULL;
-static char *edit_window_close_char = NULL;
 static unsigned int edit_dlg_init_refcounter = 0;
 
 /*** file scope functions ************************************************************************/
@@ -183,53 +183,6 @@ edit_help (void)
 {
     ev_help_t event_data = { NULL, "[Internal File Editor]" };
     mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_draw_frame (const WEdit * edit, gboolean active)
-{
-    const Widget *w = (const Widget *) edit;
-    int dx;
-    char tmp[17];
-    int color;
-
-    color = edit->drag_state != MCEDIT_DRAG_NORMAL ? EDITOR_FRAME_DRAG : active ?
-                                                     EDITOR_FRAME_ACTIVE : EDITOR_FRAME;
-
-    if (edit->fullscreen)
-    {
-        tty_setcolor (active ? EDITOR_FRAME_ACTIVE : EDITOR_FRAME);
-        /* draw lines at top and bottom */
-        /* draw double lines for active window if skin supports that */
-        tty_draw_hline (w->y, w->x, mc_tty_frm[!active ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ],
-                        w->cols);
-        tty_draw_hline (w->y + w->lines - 1, w->x,
-                        mc_tty_frm[!active ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], w->cols);
-        dx = 6;
-    }
-    else
-    {
-        /* draw a frame around edit area */
-        tty_setcolor (color);
-        /* draw double frame for active window if skin supports that */
-        tty_draw_box (w->y, w->x, w->lines, w->cols, !active);
-        /* draw a drag marker */
-        if (edit->drag_state == MCEDIT_DRAG_NORMAL)
-        {
-            tty_setcolor (EDITOR_FRAME_DRAG);
-            widget_move (w, w->lines - 1, w->cols - 1);
-            tty_print_alt_char (ACS_LRCORNER, TRUE);
-        }
-        dx = 8;
-    }
-
-    /* toggle fullscreen mode and close icons */
-    tty_setcolor (color);
-    widget_move (w, 0, edit->widget.cols - dx);
-    g_snprintf (tmp, sizeof (tmp), "[%s][%s]", edit_window_state_char, edit_window_close_char);
-    tty_print_string (tmp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -354,6 +307,12 @@ edit_window_resize (WEdit * edit, unsigned long command)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get hotkey by number.
+ *
+ * @param n number
+ * @return hotkey
+ */
 
 static unsigned char
 get_hotkey (int n)
@@ -454,6 +413,13 @@ edit_get_title (const Dlg_head * h, size_t len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Handle mouse events of editor window
+ *
+ * @param event mouse event
+ * @param data editor window
+ * @return MOU_NORMAL if event was handled, MOU_UNHANDLED otherwise
+ */
 
 static int
 edit_event (Gpm_Event * event, void *data)
@@ -476,7 +442,7 @@ edit_event (Gpm_Event * event, void *data)
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
 
-    if (!EDIT_WITH_FRAME || (local.buttons & GPM_B_LEFT) == 0 || (local.type & GPM_UP) != 0)
+    if (edit->fullscreen || (local.buttons & GPM_B_LEFT) == 0 || (local.type & GPM_UP) != 0)
         edit->drag_state = MCEDIT_DRAG_NORMAL;
     else if (local.y == 1 && edit->drag_state != MCEDIT_DRAG_RESIZE)
     {
@@ -590,7 +556,7 @@ edit_event (Gpm_Event * event, void *data)
                 }
             }
 
-            if (EDIT_WITH_FRAME)
+            if (!edit->fullscreen)
                 local.y--;
             if (local.y > (edit->curs_row + 1))
                 edit_move_down (edit, local.y - (edit->curs_row + 1), 0);
@@ -616,7 +582,7 @@ edit_event (Gpm_Event * event, void *data)
             edit_update_curs_col (edit);
             edit_update_screen (edit);
         }
-        while (EDIT_WITH_FRAME && !done);
+        while (!edit->fullscreen && !done);
     }
     else
         while (edit->drag_state != MCEDIT_DRAG_NORMAL)
@@ -683,6 +649,78 @@ edit_event (Gpm_Event * event, void *data)
         }
 
     return MOU_NORMAL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Handle mouse events of editor screen.
+ *
+ * @param event mouse event
+ * @param data editor screen
+ * @return MOU_NORMAL if event was handled, MOU_UNHANDLED otherwise
+ */
+
+static int
+edit_dialog_event (Gpm_Event *event, void *data)
+{
+    Dlg_head *h = (Dlg_head *) data;
+    Widget *w;
+    int ret = MOU_UNHANDLED;
+
+    w = (Widget *) find_menubar (h);
+
+    if (event->y == h->y + 1 && (event->type & GPM_DOWN) != 0 && !((WMenuBar *) w)->is_active)
+    {
+        /* menubar */
+
+        GList *l;
+        GList *top = NULL;
+        int x;
+
+        /* Try find top fullscreen window */
+        for (l = h->widgets; l != NULL; l = g_list_next (l))
+            if (edit_widget_is_editor ((Widget *) l->data) && ((WEdit *) l->data)->fullscreen)
+                top = l;
+
+        /* Handle fullscreen/close buttons in the top line */
+        x = h->x + h->cols + 1 - 6;
+
+        if (top != NULL && event->x >= x)
+        {
+            WEdit *e;
+
+            e = (WEdit *) top->data;
+            x = event->x - x;
+
+            if (top != h->current)
+            {
+                /* Window is not active. Activate it */
+                dlg_set_top_widget (e);
+            }
+
+            /* Handle buttons */
+            if (x <= 2)
+                edit_toggle_fullscreen (e);
+            else
+                edit_dialog_callback (h, NULL, DLG_ACTION, CK_Close, NULL);
+
+            ret = MOU_NORMAL;
+        }
+
+        if (ret == MOU_UNHANDLED)
+            dlg_select_widget (w);
+    }
+    else if (event->y == h->y + h->lines)
+    {
+        /* buttonbar */
+
+        /* In general, this can be handled in default way (dlg_mouse_event)
+         * but let make it here to avoid walking in widget list */
+        w = (Widget *) find_buttonbar (h);
+        ret = w->mouse (event, w);
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -956,12 +994,8 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_UNFOCUS:
-        if (!EDIT_WITH_FRAME)
-            return MSG_NOT_HANDLED;
-
         /* redraw frame and status */
-        edit_draw_frame (e, FALSE);
-        edit_info_status (e);
+        edit_status (e, FALSE);
         return MSG_HANDLED;
 
     case WIDGET_KEY:
@@ -993,12 +1027,13 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_CURSOR:
         {
-            int x = (EDIT_WITH_FRAME && !e->fullscreen) ? 1 : 0;
+            int y, x;
 
-            x += e->curs_col + e->start_col + e->over_col + EDIT_TEXT_HORIZONTAL_OFFSET +
-                 option_line_state_width;
+            y = (e->fullscreen ? 0 : 1) + EDIT_TEXT_VERTICAL_OFFSET + e->curs_row;
+            x = (e->fullscreen ? 0 : 1) + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width +
+                e->curs_col + e->start_col + e->over_col;
 
-            widget_move (w, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET + EDIT_WITH_FRAME, x);
+            widget_move (w, y, x);
             return MSG_HANDLED;
         }
 
@@ -1065,7 +1100,7 @@ edit_files (const GList *files)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback, NULL,
+        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback, edit_dialog_event,
                     "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     edit_dlg->get_shortcut = edit_get_shortcut;
@@ -1138,15 +1173,8 @@ edit_update_screen (WEdit * e)
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_col (e);
 
-    if (!EDIT_WITH_FRAME)
-        edit_status (e);
-    else
-    {
-        if ((e->force & REDRAW_COMPLETELY) != 0)
-            edit_draw_frame (e, (void *) e == ((Widget *) e)->owner->current->data);
-
-        edit_info_status (e);
-    }
+    edit_status (e, (e->force & REDRAW_COMPLETELY) != 0 &&
+                    (void *) e == ((Widget *) e)->owner->current->data);
 
     /* pop all events for this window for internal handling */
     if (!is_idle ())
@@ -1272,8 +1300,7 @@ edit_handle_move_resize (WEdit * edit, unsigned long command)
         case CK_WindowMove:
             edit->drag_state = MCEDIT_DRAG_NORMAL;
             /* redraw frame and status */
-            edit_draw_frame (edit, TRUE);
-            edit_info_status (edit);
+            edit_status (edit, TRUE);
         default:
             ret = TRUE;
             break;
@@ -1298,8 +1325,7 @@ edit_handle_move_resize (WEdit * edit, unsigned long command)
         case CK_WindowResize:
             edit->drag_state = MCEDIT_DRAG_NORMAL;
             /* redraw frame and status */
-            edit_draw_frame (edit, TRUE);
-            edit_info_status (edit);
+            edit_status (edit, TRUE);
         default:
             ret = TRUE;
             break;

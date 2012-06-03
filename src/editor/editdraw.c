@@ -2,11 +2,12 @@
    Editor text drawing.
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2011
+   2007, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997
+   Andrew Borodin <aborodin@vmail.ru> 2012
 
    This file is part of the Midnight Commander.
 
@@ -90,6 +91,14 @@ struct line_s
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+
+static inline void
+printwstr (const char *s, int len)
+{
+    if (len > 0)
+        tty_printf ("%-*.*s", len, len, s);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
@@ -176,12 +185,198 @@ status_string (WEdit * edit, char *s, int w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Draw the status line at the top of the screen for fullscreen editor window.
+ *
+ * @param edit  editor object
+ * @param color color pair
+ */
 
 static inline void
-printwstr (const char *s, int len)
+edit_status_fullscreen (WEdit * edit, int color)
 {
-    if (len > 0)
-        tty_printf ("%-*.*s", len, len, s);
+    const int w = edit->widget.owner->cols;
+    const size_t status_size = w + 1;
+    char *const status = g_malloc (status_size);
+    int status_len;
+    const char *fname = "";
+    int fname_len;
+    const int gap = 3;          /* between the filename and the status */
+    const int right_gap = 5;    /* at the right end of the screen */
+    const int preferred_fname_len = 16;
+
+    status_string (edit, status, status_size);
+    status_len = (int) str_term_width1 (status);
+
+    if (edit->filename_vpath != NULL)
+        fname = x_basename (vfs_path_get_last_path_str (edit->filename_vpath));
+
+    fname_len = str_term_width1 (fname);
+    if (fname_len < preferred_fname_len)
+        fname_len = preferred_fname_len;
+
+    if (fname_len + gap + status_len + right_gap >= w)
+    {
+        if (preferred_fname_len + gap + status_len + right_gap >= w)
+            fname_len = preferred_fname_len;
+        else
+            fname_len = w - (gap + status_len + right_gap);
+        fname = str_trunc (fname, fname_len);
+    }
+
+    dlg_move (edit->widget.owner, 0, 0);
+    tty_setcolor (color);
+    printwstr (fname, fname_len + gap);
+    printwstr (status, w - (fname_len + gap));
+
+    if (simple_statusbar && w > EDITOR_MINIMUM_TERMINAL_WIDTH)
+    {
+        size_t percent = 100;
+
+        if (edit->total_lines + 1 != 0)
+            percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
+        dlg_move (edit->widget.owner, 0, w - 6 - 6);
+        tty_printf (" %3d%%", percent);
+    }
+
+    g_free (status);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Draw status line for editor window if window is not in fullscreen mode.
+ *
+ * @param edit editor object
+ */
+
+static inline void
+edit_status_window (WEdit * edit)
+{
+    int y, x;
+    int cols = edit->widget.cols;
+
+    tty_setcolor (STATUSBAR_COLOR);
+
+    if (cols > 5)
+    {
+        const char *fname = N_("NoName");
+        char *full_fname = NULL;
+
+        if (edit->filename_vpath != NULL)
+        {
+            full_fname = vfs_path_to_str (edit->filename_vpath);
+            fname = x_basename (full_fname);
+        }
+#ifdef ENABLE_NLS
+        else
+            fname = _(fname);
+#endif
+
+        edit_move (2, 0);
+        tty_printf ("[%s]", str_term_trim (fname, edit->widget.cols - 8 - 6));
+        g_free (full_fname);
+    }
+
+    tty_getyx (&y, &x);
+    x -= edit->widget.x;
+    x += 4;
+    if (x + 6 <= cols - 2 - 6)
+    {
+        edit_move (x, 0);
+        tty_printf ("[%c%c%c%c]",
+                    edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
+                    edit->modified ? 'M' : '-',
+                    macro_index < 0 ? '-' : 'R', edit->overwrite == 0 ? '-' : 'O');
+    }
+
+    if (cols > 30)
+    {
+        edit_move (2, edit->widget.lines - 1);
+        tty_printf ("%3ld %5ld/%ld %6ld/%ld",
+                    edit->curs_col + edit->over_col,
+                    edit->curs_line + 1, edit->total_lines + 1, edit->curs1, edit->last_byte);
+    }
+
+    /*
+     * If we are at the end of file, print <EOF>,
+     * otherwise print the current character as is (if printable),
+     * as decimal and as hex.
+     */
+    if (cols > 46)
+    {
+        edit_move (32, edit->widget.lines - 1);
+        if (edit->curs1 >= edit->last_byte)
+            tty_print_string ("[<EOF>       ]");
+#ifdef HAVE_CHARSET
+        else if (edit->utf8)
+        {
+            unsigned int cur_utf;
+            int cw = 1;
+
+            cur_utf = edit_get_utf (edit, edit->curs1, &cw);
+            if (cw <= 0)
+                cur_utf = edit_get_byte (edit, edit->curs1);
+            tty_printf ("[%05d 0x%04X]", cur_utf, cur_utf);
+        }
+#endif
+        else
+        {
+            unsigned char cur_byte;
+
+            cur_byte = edit_get_byte (edit, edit->curs1);
+            tty_printf ("[%05d 0x%04X]", (unsigned int) cur_byte, (unsigned int) cur_byte);
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Draw a frame around edit area.
+ *
+ * @param edit   editor object
+ * @param color  color pair
+ * @param active TRUE if editor object is focused
+ */
+
+static inline void
+edit_draw_frame (const WEdit * edit, int color, gboolean active)
+{
+    const Widget *w = (const Widget *) edit;
+
+    /* draw a frame around edit area */
+    tty_setcolor (color);
+    /* draw double frame for active window if skin supports that */
+    tty_draw_box (w->y, w->x, w->lines, w->cols, !active);
+    /* draw a drag marker */
+    if (edit->drag_state == MCEDIT_DRAG_NORMAL)
+    {
+        tty_setcolor (EDITOR_FRAME_DRAG);
+        widget_move (w, w->lines - 1, w->cols - 1);
+        tty_print_alt_char (ACS_LRCORNER, TRUE);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Draw a window control buttons.
+ *
+ * @param edit  editor object
+ * @param color color pair
+ */
+
+static inline void
+edit_draw_window_icons (const WEdit * edit, int color)
+{
+    const Widget *w = (const Widget *) edit;
+    char tmp[17];
+
+    tty_setcolor (color);
+    if (edit->fullscreen)
+        dlg_move (w->owner, 0, w->owner->cols - 6);
+    else
+        widget_move (w, 0, edit->widget.cols - 8);
+    g_snprintf (tmp, sizeof (tmp), "[%s][%s]", edit_window_state_char, edit_window_close_char);
+    tty_print_string (tmp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -194,14 +389,17 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
 
     int x = start_col_real;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    int y = row + EDIT_TEXT_VERTICAL_OFFSET + EDIT_WITH_FRAME;
+    int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
     int i;
     int wrap_start;
     int len;
 
-    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    if (!edit->fullscreen)
+    {
         x1++;
+        y++;
+    }
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
     if (bookmarked != 0)
@@ -317,7 +515,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
-    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * EDIT_WITH_FRAME)
+    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen ? 0 : 1))
         return;
 
     if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
@@ -331,7 +529,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
         abn_style = MOD_ABNORMAL;
 
     end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    if (!edit->fullscreen)
     {
         const Widget *w = (const Widget *) edit;
 
@@ -823,143 +1021,25 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** Draw the status line at the top of the screen. The size of the filename
- * field varies depending on the width of the screen and the length of
- * the filename. */
 void
-edit_status (WEdit * edit)
+edit_status (WEdit * edit, gboolean active)
 {
-    const int w = edit->widget.owner->cols;
-    const size_t status_size = w + 1;
-    char *const status = g_malloc (status_size);
-    int status_len;
-    const char *fname = "";
-    int fname_len;
-    const int gap = 3;          /* between the filename and the status */
-    const int right_gap = 5;    /* at the right end of the screen */
-    const int preferred_fname_len = 16;
+    int color;
 
-    status_string (edit, status, status_size);
-    status_len = (int) str_term_width1 (status);
-
-    if (edit->filename_vpath != NULL)
-        fname = vfs_path_get_last_path_str (edit->filename_vpath);
-
-    fname_len = str_term_width1 (fname);
-    if (fname_len < preferred_fname_len)
-        fname_len = preferred_fname_len;
-
-    if (fname_len + gap + status_len + right_gap >= w)
+    if (edit->fullscreen)
     {
-        if (preferred_fname_len + gap + status_len + right_gap >= w)
-            fname_len = preferred_fname_len;
-        else
-            fname_len = w - (gap + status_len + right_gap);
-        fname = str_trunc (fname, fname_len);
+        color = STATUSBAR_COLOR;
+        edit_status_fullscreen (edit, color);
+    }
+    else
+    {
+        color = edit->drag_state != MCEDIT_DRAG_NORMAL ? EDITOR_FRAME_DRAG : active ?
+            EDITOR_FRAME_ACTIVE : EDITOR_FRAME;
+        edit_draw_frame (edit, color, active);
+        edit_status_window (edit);
     }
 
-    dlg_move (edit->widget.owner, 0, 0);
-    tty_setcolor (STATUSBAR_COLOR);
-    printwstr (fname, fname_len + gap);
-    printwstr (status, w - (fname_len + gap));
-
-    if (simple_statusbar && w > EDITOR_MINIMUM_TERMINAL_WIDTH)
-    {
-        size_t percent = 100;
-
-        if (edit->total_lines + 1 != 0)
-            percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
-        dlg_move (edit->widget.owner, 0, w - 5);
-        tty_printf (" %3d%%", percent);
-    }
-
-    g_free (status);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_info_status (WEdit * edit)
-{
-    int y, x;
-    int cols = edit->widget.cols;
-
-    tty_setcolor (STATUSBAR_COLOR);
-
-    if (cols > 5)
-    {
-        const char *fname = N_("NoName");
-        char *full_fname = NULL;
-
-        if (edit->filename_vpath != NULL)
-        {
-            full_fname = vfs_path_to_str (edit->filename_vpath);
-            fname = x_basename (full_fname);
-        }
-#ifdef ENABLE_NLS
-        else
-            fname = _(fname);
-#endif
-
-        edit_move (edit->fullscreen ? 0 : 2, 0);
-        tty_printf ("[%s]", str_term_trim (fname, edit->widget.cols - 8 - 6));
-        g_free (full_fname);
-    }
-
-    tty_getyx (&y, &x);
-    x -= edit->widget.x;
-    x += 4;
-    if (x + 6 <= cols - (edit->fullscreen ? 0 : 2) - 6)
-    {
-        edit_move (x, 0);
-        tty_printf ("[%c%c%c%c]",
-                    edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
-                    edit->modified ? 'M' : '-',
-                    macro_index < 0 ? '-' : 'R',
-                    edit->overwrite == 0 ? '-' : 'O');
-    }
-
-    if (cols > 30)
-    {
-        edit_move (2, edit->widget.lines - 1);
-        tty_printf ("%3ld %5ld/%ld %6ld/%ld",
-                    edit->curs_col + edit->over_col,
-                    edit->curs_line + 1,
-                    edit->total_lines + 1,
-                    edit->curs1,
-                    edit->last_byte );
-    }
-
-    /*
-     * If we are at the end of file, print <EOF>,
-     * otherwise print the current character as is (if printable),
-     * as decimal and as hex.
-     */
-    if (cols > 46)
-    {
-        edit_move (32, edit->widget.lines - 1);
-        if (edit->curs1 >= edit->last_byte)
-            tty_print_string ("[<EOF>       ]");
-#ifdef HAVE_CHARSET
-        else if (edit->utf8)
-        {
-            unsigned int cur_utf;
-            int cw = 1;
-
-            cur_utf = edit_get_utf (edit, edit->curs1, &cw);
-            if (cw <= 0)
-                cur_utf = edit_get_byte (edit, edit->curs1);
-            tty_printf ("[%05d 0x%04X]", cur_utf, cur_utf);
-        }
-#endif
-        else
-        {
-            unsigned char cur_byte;
-
-            cur_byte = edit_get_byte (edit, edit->curs1);
-            tty_printf ("[%05d 0x%04X]", (unsigned int) cur_byte, (unsigned int) cur_byte);
-        }
-    }
+    edit_draw_window_icons (edit, color);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -975,13 +1055,15 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     if (edit->widget.lines <= 0 || edit->widget.cols <= 0)
         return;
 
-    edit->widget.y += EDIT_WITH_FRAME;
-    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
+    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET;
     edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    if (EDIT_WITH_FRAME && !edit->fullscreen)
+
+    if (!edit->fullscreen)
     {
         edit->widget.x++;
         edit->widget.cols -= 2;
+        edit->widget.y++;
+        edit->widget.lines -= 2;
     }
 
     r_extreme = EDIT_RIGHT_EXTREME;
@@ -1030,13 +1112,14 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
 
-    edit->widget.y -= EDIT_WITH_FRAME;
-    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET + 2 * EDIT_WITH_FRAME;
+    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET;
     edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
-    if (EDIT_WITH_FRAME && !edit->fullscreen)
+    if (!edit->fullscreen)
     {
         edit->widget.x--;
         edit->widget.cols += 2;
+        edit->widget.y--;
+        edit->widget.lines += 2;
     }
 }
 

@@ -3451,7 +3451,7 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
 void
 edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 {
-    if (EDIT_WITH_FRAME && command == CK_WindowFullscreen)
+    if (command == CK_WindowFullscreen)
     {
         edit_toggle_fullscreen (edit);
         return;
