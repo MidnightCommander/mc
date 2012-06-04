@@ -1087,6 +1087,8 @@ vfs_get_super_by_vpath (const vfs_path_t * vpath)
             goto ret;
         if (i != 0)
             break;
+
+        super = NULL;
     }
 
   ret:
@@ -1118,7 +1120,7 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
     if (path_element->path != NULL)
         retval = path_element->path;
 
-    super = vfs_get_super_by_vpath(vpath);
+    super = vfs_get_super_by_vpath (vpath);
     if (super != NULL)
         goto return_success;
 
