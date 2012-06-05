@@ -230,13 +230,12 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 /* --------------------------------------------------------------------------------------------- */
 /** Real view only */
 
-mcview_ret_t
+gboolean
 mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_line)
 {
     gboolean succeeded;
     mcview_t *lc_mcview;
     Dlg_head *view_dlg;
-    mcview_ret_t ret;
 
     /* Create dialog and widgets, put them on the dialog */
     view_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback, NULL,
@@ -258,22 +257,14 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     }
 
     if (succeeded)
-    {
         run_dlg (view_dlg);
-
-        ret = lc_mcview->move_dir == 0 ? MCVIEW_EXIT_OK :
-            lc_mcview->move_dir > 0 ? MCVIEW_WANT_NEXT : MCVIEW_WANT_PREV;
-    }
     else
-    {
         view_dlg->state = DLG_CLOSED;
-        ret = MCVIEW_EXIT_FAILURE;
-    }
 
     if (view_dlg->state == DLG_CLOSED)
         destroy_dlg (view_dlg);
 
-    return ret;
+    return succeeded;
 }
 
 /* {{{ Miscellaneous functions }}} */
@@ -292,23 +283,29 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 
     view->filename_vpath = vfs_path_from_str (file);
 
-    if ((view->workdir_vpath == NULL) && (file != NULL))
+    /* get working dir */
+    if (file != NULL && file[0] != '\0')
     {
+        vfs_path_free (view->workdir_vpath);
+
         if (!g_path_is_absolute (file))
-            view->workdir_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
+        {
+            vfs_path_t *p;
+
+            p = vfs_path_clone (vfs_get_raw_current_dir ());
+            view->workdir_vpath = vfs_path_append_new (p, file, (char *) NULL);
+            vfs_path_free (p);
+        }
         else
         {
             /* try extract path form filename */
-            char *dirname;
+            const char *fname;
+            char *dir;
 
-            dirname = g_path_get_dirname (file);
-            if (strcmp (dirname, ".") != 0)
-                view->workdir_vpath = vfs_path_from_str (dirname);
-            else
-            {
-                view->workdir_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
-            }
-            g_free (dirname);
+            fname = x_basename (file);
+            dir = g_strndup (file, (size_t) (fname - file));
+            view->workdir_vpath = vfs_path_from_str (dir);
+            g_free (dir);
         }
     }
 

@@ -997,9 +997,8 @@ mc_maybe_editor_or_viewer (void)
             if (mc_run_param0 != NULL && *mc_run_param0 != '\0')
                 vpath = prepend_cwd_on_local (mc_run_param0);
 
-            view_file (vpath, 0, 1);
+            ret = view_file (vpath, 0, 1);
             vfs_path_free (vpath);
-            ret = 1;
             break;
         }
 #ifdef USE_DIFF_VIEW
