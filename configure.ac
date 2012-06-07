@@ -208,7 +208,7 @@ AC_TYPE_UID_T
 
 AC_FUNC_STRCOLL
 
-AC_MC_GET_FS_INFO
+mc_AC_GET_FS_INFO
 
 dnl
 dnl X11 support.
