@@ -11,7 +11,7 @@
    in an interactive program.
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2011
+   2004, 2005, 2006, 2007, 2009, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
@@ -21,7 +21,8 @@
    Jakub Jelinek, 1995, 1996
    Norbert Warmuth, 1997
    Pavel Machek, 1998
-   Slava Zanko, 2009
+   Slava Zanko, 2009-2012
+   Andrew Borodin, 2009-2012
 
    This file is part of the Midnight Commander.
 
@@ -52,6 +53,15 @@
 
 #include <config.h>
 
+/* Keep this conditional in sync with the similar conditional in m4.include/mc-get-fs-info. */
+#if ((STAT_STATVFS || STAT_STATVFS64)                                       \
+     && (HAVE_STRUCT_STATVFS_F_BASETYPE || HAVE_STRUCT_STATVFS_F_FSTYPENAME \
+         || (! HAVE_STRUCT_STATFS_F_FSTYPENAME)))
+# define USE_STATVFS 1
+#else
+# define USE_STATVFS 0
+#endif
+
 #include <errno.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -59,23 +69,73 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#if defined(STAT_STATVFS) \
-     && (defined(HAVE_STRUCT_STATVFS_F_BASETYPE) \
-         || defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME))
-#include <sys/statvfs.h>
-#define STRUCT_STATFS struct statvfs
-#define STATFS statvfs
-#elif defined(HAVE_STATFS) && !defined(STAT_STATFS4)
-#ifdef HAVE_SYS_VFS_H
-#include <sys/vfs.h>
-#elif defined(HAVE_SYS_MOUNT_H) && defined(HAVE_SYS_PARAM_H)
-#include <sys/param.h>
-#include <sys/mount.h>
-#elif defined(HAVE_SYS_STATFS_H)
-#include <sys/statfs.h>
+#if USE_STATVFS
+# include <sys/statvfs.h>
+#elif HAVE_SYS_VFS_H
+# include <sys/vfs.h>
+#elif HAVE_SYS_MOUNT_H && HAVE_SYS_PARAM_H
+/* NOTE: freebsd5.0 needs sys/param.h and sys/mount.h for statfs.
+   It does have statvfs.h, but shouldn't use it, since it doesn't
+   HAVE_STRUCT_STATVFS_F_BASETYPE.  So find a clean way to fix it.  */
+/* NetBSD 1.5.2 needs these, for the declaration of struct statfs. */
+# include <sys/param.h>
+# include <sys/mount.h>
+# if HAVE_NFS_NFS_CLNT_H && HAVE_NFS_VFS_H
+/* Ultrix 4.4 needs these for the declaration of struct statfs.  */
+#  include <netinet/in.h>
+#  include <nfs/nfs_clnt.h>
+#  include <nfs/vfs.h>
+# endif
+#elif HAVE_OS_H                 /* BeOS */
+# include <fs_info.h>
 #endif
-#define STRUCT_STATFS struct statfs
-#define STATFS statfs
+
+#if USE_STATVFS
+# define STRUCT_STATVFS struct statvfs
+# if ! STAT_STATVFS && STAT_STATVFS64
+#  define STATFS statvfs64
+# else
+#  define STATFS statvfs
+# endif
+#else
+# define STATFS statfs
+# if HAVE_OS_H                  /* BeOS */
+/* BeOS has a statvfs function, but it does not return sensible values
+   for f_files, f_ffree and f_favail, and lacks f_type, f_basetype and
+   f_fstypename.  Use 'struct fs_info' instead.  */
+static int
+statfs (char const *filename, struct fs_info *buf)
+{
+    dev_t device = dev_for_path (filename);
+
+    if (device < 0)
+    {
+        errno = (device == B_ENTRY_NOT_FOUND ? ENOENT
+                 : device == B_BAD_VALUE ? EINVAL
+                 : device == B_NAME_TOO_LONG ? ENAMETOOLONG
+                 : device == B_NO_MEMORY ? ENOMEM
+                 : device == B_FILE_ERROR ? EIO
+                 : 0);
+        return -1;
+    }
+    /* If successful, buf->dev will be == device.  */
+    return fs_stat_dev (device, buf);
+}
+
+#  define STRUCT_STATVFS struct fs_info
+# else
+#  define STRUCT_STATVFS struct statfs
+# endif
+#endif
+
+#if HAVE_STRUCT_STATVFS_F_BASETYPE
+# define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_basetype
+#else
+# if HAVE_STRUCT_STATVFS_F_FSTYPENAME || HAVE_STRUCT_STATFS_F_FSTYPENAME
+#  define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_fstypename
+# elif HAVE_OS_H                /* BeOS */
+#  define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME fsh_name
+# endif
 #endif
 
 #include <unistd.h>
@@ -119,7 +179,7 @@ int classic_progressbar = 1;
 typedef enum {
     MSDOS_SUPER_MAGIC     = 0x4d44,
     NTFS_SB_MAGIC         = 0x5346544e,
-    FUSE_MAGIC         = 0x65735546,
+    FUSE_MAGIC            = 0x65735546,
     PROC_SUPER_MAGIC      = 0x9fa0,
     SMB_SUPER_MAGIC       = 0x517B,
     NCP_SUPER_MAGIC       = 0x564c,
@@ -179,13 +239,13 @@ typedef struct
 static gboolean
 filegui__check_attrs_on_fs (const char *fs_path)
 {
-#ifdef STATFS
-    STRUCT_STATFS stfs;
+#ifdef USE_STATVFS
+    STRUCT_STATVFS stfs;
 
     if (!setup_copymove_persistent_attr)
         return FALSE;
 
-    if (STATFS (fs_path, &stfs) != 0)
+    if (statfs (fs_path, &stfs) != 0)
         return TRUE;
 
 #ifdef __linux__
@@ -203,20 +263,22 @@ filegui__check_attrs_on_fs (const char *fs_path)
     }
 #elif defined(HAVE_STRUCT_STATFS_F_FSTYPENAME) \
       || defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME)
-    if (!strcmp (stfs.f_fstypename, "msdos")
-        || !strcmp (stfs.f_fstypename, "msdosfs")
-        || !strcmp (stfs.f_fstypename, "ntfs")
-        || !strcmp (stfs.f_fstypename, "procfs")
-        || !strcmp (stfs.f_fstypename, "smbfs") || strstr (stfs.f_fstypename, "fusefs"))
+    if (strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "msdos") == 0
+        || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "msdosfs") == 0
+        || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "ntfs") == 0
+        || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "procfs") == 0
+        || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "smbfs") == 0
+        || strstr (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "fusefs") != NULL)
         return FALSE;
 #elif defined(HAVE_STRUCT_STATVFS_F_BASETYPE)
-    if (!strcmp (stfs.f_basetype, "pcfs")
-        || !strcmp (stfs.f_basetype, "ntfs")
-        || !strcmp (stfs.f_basetype, "proc")
-        || !strcmp (stfs.f_basetype, "smbfs") || !strcmp (stfs.f_basetype, "fuse"))
+    if (strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "pcfs") == 0
+        || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "ntfs") == 0
+        || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "proc") == 0
+        || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "smbfs") == 0
+        || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "fuse") == 0)
         return FALSE;
 #endif
-#endif /* STATFS */
+#endif /* USE_STATVFS */
 
     return TRUE;
 }
@@ -545,7 +607,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     buttons_width = abort_button_width + skip_button_width + 2;
 
     dlg_width = max (58, buttons_width + 6);
-    dlg_height = 17; /* to make compiler happy :) */
+    dlg_height = 17;            /* to make compiler happy :) */
 
     ui = g_new0 (FileOpContextUI, 1);
     ctx->ui = ui;
@@ -590,8 +652,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
             add_widget (ui->op_dlg, ui->progress_total_gauge =
                         gauge_new (7 + dy, 3 + 3, 0, 100, 0));
 
-        add_widget (ui->op_dlg, ui->total_files_processed_label =
-                    label_new (9 + dy, 3, ""));
+        add_widget (ui->op_dlg, ui->total_files_processed_label = label_new (9 + dy, 3, ""));
 
         add_widget (ui->op_dlg, ui->time_label = label_new (10 + dy, 3, ""));
 
