@@ -26,11 +26,9 @@
 
 #include "lib/global.c"
 
-#ifndef HAVE_CHARSET
-#define HAVE_CHARSET 1
-#endif
-
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
@@ -73,13 +71,17 @@ setup (void)
     vfs_register_class (&vfs_test_ops3);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+#ifdef HAVE_CHARSET
     load_codepages_list ();
+#endif
 }
 
 static void
 teardown (void)
 {
+#ifdef HAVE_CHARSET
     free_codepages_list ();
+#endif
 
     vfs_shut ();
     str_uninit_strings ();
@@ -127,12 +129,14 @@ START_TEST (test_vfs_path_tokens_count)
     fail_unless (tokens_count == 5, "actual: %zu; expected: 5\n", tokens_count);
     vfs_path_free (vpath);
 
+#ifdef HAVE_CHARSET
     vpath = vfs_path_from_str (
         "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33"
     );
     tokens_count = vfs_path_tokens_count(vpath);
     fail_unless (tokens_count == 11, "actual: %zu; expected: 11\n", tokens_count);
     vfs_path_free (vpath);
+#endif
 }
 END_TEST
 
@@ -176,11 +180,13 @@ START_TEST (test_vfs_path_tokens_get)
     /* get 'path2/path3' by 1,2  from LOCAL VFS */
     check_token_str ("test3://path1/path2/path3/path4", 1, 2, "path2/path3");
 
-   /* get 'path2/path3' by 1,2  from LOCAL VFS with encoding */
+#ifdef HAVE_CHARSET
+    /* get 'path2/path3' by 1,2  from LOCAL VFS with encoding */
     check_token_str ("test3://path1/path2/test3://#enc:KOI8-R/path3/path4", 1, 2, "path2/test3://#enc:KOI8-R/path3");
 
     /* get 'path2/path3' by 1,2  with encoding */
     check_token_str ("#enc:KOI8-R/path1/path2/path3/path4", 1, 2, "#enc:KOI8-R/path2/path3");
+#endif
 
     /* get 'path2/path3' by 1,2  from non-LOCAL VFS */
     check_token_str ("test2://path1/path2/path3/path4", 1, 2, "test2://path2/path3");
@@ -213,7 +219,11 @@ START_TEST (test_vfs_path_append_vpath)
 {
     vfs_path_t *vpath1, *vpath2, *vpath3;
 
+#ifdef HAVE_CHARSET
     vpath1 = vfs_path_from_str("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33");
+#else
+    vpath1 = vfs_path_from_str("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33");
+#endif
     vpath2 = vfs_path_from_str("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/");
 
     vpath3 = vfs_path_append_vpath_new (vpath1, vpath2, NULL);
