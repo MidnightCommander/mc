@@ -1597,19 +1597,21 @@ midnight_event (Gpm_Event *event, void *data)
     if (event->y == h->y + 1)
     {
         /* menubar */
-        if (menubar_visible)
+        if (menubar_visible || the_menubar->is_active)
             ret = ((Widget *) the_menubar)->mouse (event, the_menubar);
         else
         {
             Widget *w;
 
             w = get_panel_widget (0);
-            ret = w->mouse (event, w);
+            if (w->mouse != NULL)
+                ret = w->mouse (event, w);
 
             if (ret == MOU_UNHANDLED)
             {
                 w = get_panel_widget (1);
-                ret = w->mouse (event, w);
+                if (w->mouse != NULL)
+                    ret = w->mouse (event, w);
             }
 
             if (ret == MOU_UNHANDLED)

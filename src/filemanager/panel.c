@@ -3554,24 +3554,24 @@ panel_event (Gpm_Event * event, void *data)
     local = mouse_get_local (event, w);
 
     /* 1st line */
-    if (mouse_down && local.y == 1)
+    if (local.y == 1)
     {
         /* "<" button */
-        if (local.x == 2)
+        if (mouse_down && local.x == 2)
         {
             directory_history_prev (panel);
             goto finish;
         }
 
         /* ">" button */
-        if (local.x == w->cols - 1)
+        if (mouse_down && local.x == w->cols - 1)
         {
             directory_history_next (panel);
             goto finish;
         }
 
         /* "^" button */
-        if (local.x >= w->cols - 4 && local.x <= w->cols - 2)
+        if (mouse_down && local.x >= w->cols - 4 && local.x <= w->cols - 2)
         {
             directory_history_list (panel);
             /* both panels have been redrawn */
@@ -3579,7 +3579,7 @@ panel_event (Gpm_Event * event, void *data)
         }
 
         /* "." button show/hide hidden files */
-        if (local.x == w->cols - 5)
+        if (mouse_down && local.x == w->cols - 5)
         {
             midnight_dlg->callback (midnight_dlg, NULL, DLG_ACTION, CK_ShowHidden, NULL);
             /* both panels have been updated */
