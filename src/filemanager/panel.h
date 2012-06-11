@@ -91,6 +91,7 @@ typedef struct WPanel
     vfs_path_t *cwd_vpath;      /* Current Working Directory */
     vfs_path_t *lwd_vpath;      /* Last Working Directory */
     GList *dir_history;         /* directory history */
+    GList *dir_history_current; /* pointer to the current history item */
     char *hist_name;            /* directory history name for history file */
     int count;                  /* Number of files in dir structure */
     int marked;                 /* Count of marked files */
@@ -162,8 +163,6 @@ void file_mark (WPanel * panel, int idx, int val);
 void do_file_mark (WPanel * panel, int idx, int val);
 
 gboolean do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
-
-void directory_history_add (struct WPanel *panel, const char *dir);
 
 vfs_path_t *remove_encoding_from_path (const vfs_path_t * vpath);
 
