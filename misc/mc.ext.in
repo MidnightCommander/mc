@@ -270,6 +270,12 @@ regex/\.s?a$
 	#Open=%view{ascii} ar tv %f
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view ar
 
+# gplib
+regex/\.([Ll][Ii][Bb])$
+	Open=%cd %p/ulib://
+	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lib
+
+
 # Mailboxes
 type/^ASCII\ mail\ text
 	Open=%cd %p/mailfs://

@@ -520,6 +520,7 @@ misc/Makefile
 misc/skins/Makefile
 misc/ext.d/Makefile
 misc/ext.d/doc.sh
+misc/ext.d/misc.sh
 misc/ext.d/text.sh
 misc/ext.d/web.sh
 misc/macros.d/Makefile
@@ -562,6 +563,7 @@ src/vfs/extfs/helpers/uc1541
 src/vfs/extfs/helpers/ucab
 src/vfs/extfs/helpers/uha
 src/vfs/extfs/helpers/ulha
+src/vfs/extfs/helpers/ulib
 src/vfs/extfs/helpers/urar
 src/vfs/extfs/helpers/uzip
 src/vfs/extfs/helpers/uzoo

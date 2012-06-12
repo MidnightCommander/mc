@@ -1,0 +1,144 @@
+#! @PERL@ -w
+#
+# VFS to manage the gputils archives.
+# Written by Molnár Károly (proton7@freemail.hu) 2012
+#
+
+my %month = ('jan' => '01', 'feb' => '02', 'mar' => '03',
+             'apr' => '04', 'may' => '05', 'jun' => '06',
+             'jul' => '07', 'aug' => '08', 'sep' => '09',
+             'oct' => '10', 'nov' => '11', 'dec' => '12');
+
+my @PATHS = ('/usr/bin/gplib', '/usr/local/bin/gplib');
+
+my $gplib = '';
+
+foreach my $i (@PATHS)
+{
+    if (-x $i)
+    {
+        $gplib = $i;
+        last;
+    }
+}
+
+if ($gplib eq '')
+{
+    print STDERR "\a\t$0 : Gplib not found!\n";
+    exit(1);
+}
+
+my $cmd = shift;
+my $archive = shift;
+
+#-------------------------------------------------------------------------------
+
+sub mc_ulib_fs_list
+{
+    open(PIPE, "$gplib -tq $archive |") || die("Error in $gplib -tq");
+
+    my($dev, $inode, $mode, $nlink, $uid, $gid) = stat($archive);
+
+    while (<PIPE>)
+    {
+        chomp;
+        my @w = split(/\s+/o);
+        my $fname = $w[0];
+
+        $fname =~ s|\\|/|g;
+
+        printf("-rw-r--r-- 1 %s %s %d %s-%02u-%s %s %s\n",
+           $uid, $gid, int($w[1]), $month{lc($w[4])}, $w[5], $w[7], substr($w[6], 0, 5), $fname);
+    }
+    close (PIPE);
+}
+
+#-------------------------------------------------------------------------------
+
+sub mc_ulib_fs_copyin
+{
+    system("$gplib -r $archive $_[0]");
+    my $ret = $?;
+
+    if ($ret)
+    {
+        die("Error in: $gplib -r");
+    }
+}
+
+#-------------------------------------------------------------------------------
+
+sub mc_ulib_fs_copyout
+{
+    my($module, $fname) = @_;
+    my $tmpdir = $ENV{'TMPDIR'};
+
+    $tmpdir = '/tmp' if ($tmpdir eq '');
+
+    open(PIPE, "$gplib -tq $archive |") || die("Error in: $gplib -tq");
+
+    while (<PIPE>)
+    {
+        chomp;
+        my @w = split(/\s+/o);
+        my $module_orig = $w[0];
+        my $count = () = ($module_orig =~ /(\\)/g);
+        my $md = $module_orig;
+
+        $md =~ s|\\|/|g;
+
+        if ($module eq $md)
+        {
+            return if ($count);
+        }
+    }
+
+    close (PIPE);
+
+    chdir($tmpdir);
+    system("$gplib -x $archive $module");
+    my $ret = $?;
+
+    if ($ret)
+    {
+        die("Error in: $gplib -x");
+    }
+
+    rename($module, $fname) || die("Error in: rename($module, $fname)");
+}
+
+#-------------------------------------------------------------------------------
+
+sub mc_ulib_fs_rm
+{
+    system("$gplib -d $archive $_[0]");
+    my $ret = $?;
+
+    if ($ret)
+    {
+        die("Error in: $gplib -d");
+    }
+}
+
+################################################################################
+
+if ($cmd eq 'list')
+{
+    mc_ulib_fs_list(@ARGV);
+}
+elsif ($cmd eq 'copyin')
+{
+    mc_ulib_fs_copyin(@ARGV);
+}
+elsif ($cmd eq 'copyout')
+{
+    mc_ulib_fs_copyout(@ARGV);
+}
+elsif ($cmd eq 'rm')
+{
+    mc_ulib_fs_rm(@ARGV);
+}
+else
+{
+    exit(1);
+}

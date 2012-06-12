@@ -70,3 +70,6 @@ s3+
 gitfs - browse the git repo
 changesetfs - list of versions of current file
 patchsetfs - list of patches of current file
+
+# Gputils lib archives.
+ulib
