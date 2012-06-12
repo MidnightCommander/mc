@@ -60,6 +60,7 @@ START_TEST (test_do_panel_cd_empty_mean_home)
 {
     char *cwd;
     char *home_wd;
+    const char *home_directory;
     struct WPanel *panel;
     gboolean ret;
     vfs_path_t *empty_path;
@@ -71,7 +72,11 @@ START_TEST (test_do_panel_cd_empty_mean_home)
     panel->lwd_vpath = vfs_path_from_str("/");
     panel->sort_info.sort_field = g_new0(panel_field_t,1);
 
-    empty_path = vfs_path_from_str (mc_config_get_home_dir());
+    home_directory = mc_config_get_home_dir();
+    if (home_directory == NULL)
+        home_directory = "/home/test";
+
+    empty_path = vfs_path_from_str (home_directory);
 
     /*
      * normalize path to handle HOME with trailing slashes:
