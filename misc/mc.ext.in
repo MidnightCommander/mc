@@ -537,11 +537,11 @@ regex/\.([hH][tT][mM][lL]?)$
 
 # StarOffice 5.2
 shell/.sdw
-	Open=@EXTHELPERSDIR@/doc.sh open oofice
+	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 
 # StarOffice 6 and OpenOffice.org formats
 regex/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|odf|sxm|odm|sxg)$
-	Open=@EXTHELPERSDIR@/doc.sh open oofice
+	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view odt
 
 # AbiWord
@@ -570,7 +570,7 @@ type/^Microsoft\ Excel
 
 # Use OpenOffice.org to open any MS Office documents
 type/^Microsoft\ Office\ Document
-	Open=@EXTHELPERSDIR@/doc.sh open oofice
+	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 
 # Framemaker
 type/^FrameMaker
