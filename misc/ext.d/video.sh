@@ -12,6 +12,7 @@ do_view_action() {
 
     case "${filetype}" in
     *)
+        cat "${MC_EXT_FILENAME}"
         ;;
     esac
 }

@@ -516,6 +516,7 @@ type/WebM
 
 include/video
 	Open=@EXTHELPERSDIR@/video.sh open ALL_FORMATS
+	View=%view{ascii} @EXTHELPERSDIR@/video.sh view ALL_FORMATS
 
 
 ### Documents ###
