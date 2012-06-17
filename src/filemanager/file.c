@@ -1404,6 +1404,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     int open_flags;
     gboolean is_first_time = TRUE;
     vfs_path_t *src_vpath = NULL, *dst_vpath = NULL;
+    gboolean write_errno_nospace = FALSE;
 
     /* FIXME: We should not be using global variables! */
     ctx->do_reget = 0;
@@ -1726,7 +1727,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                 gettimeofday (&tv_last_input, NULL);
 
                 /* dst_write */
-                while ((n_written = mc_write (dest_desc, t, n_read)) < n_read && !ctx->skip_all)
+                while ((n_written = mc_write (dest_desc, t, n_read)) < n_read)
                 {
                     if (n_written > 0)
                     {
@@ -1734,13 +1735,33 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                         t += n_written;
                         continue;
                     }
-                    return_status = file_error (_("Cannot write target file \"%s\"\n%s"), dst_path);
+
+                    write_errno_nospace = (n_written < 0 && errno == ENOSPC);
+
+                    if (ctx->skip_all)
+                        return_status = FILE_SKIPALL;
+                    else
+                        return_status =
+                            file_error (_("Cannot write target file \"%s\"\n%s"), dst_path);
+
                     if (return_status == FILE_SKIP)
+                    {
+                        if (write_errno_nospace)
+                            goto ret;
                         break;
+                    }
                     if (return_status == FILE_SKIPALL)
+                    {
                         ctx->skip_all = TRUE;
+                        if (write_errno_nospace)
+                            goto ret;
+                    }
                     if (return_status != FILE_RETRY)
                         goto ret;
+
+                    /* User pressed "Retry". Will the next mc_write() call be succesful?
+                     * Reset error flag to be ready for that. */
+                    write_errno_nospace = FALSE;
                 }
             }
 
@@ -1819,11 +1840,14 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     if (dst_status == DEST_SHORT)
     {
         /* Remove short file */
-        int result;
+        int result = 0;
 
-        result = query_dialog (Q_ ("DialogTitle|Copy"),
-                               _("Incomplete file was retrieved. Keep it?"),
-                               D_ERROR, 2, _("&Delete"), _("&Keep"));
+        /* In case of copy/move to full partition, keep source file
+         * and remove incomplete destination one */
+        if (!write_errno_nospace)
+            result = query_dialog (Q_ ("DialogTitle|Copy"),
+                                   _("Incomplete file was retrieved. Keep it?"),
+                                   D_ERROR, 2, _("&Delete"), _("&Keep"));
         if (result == 0)
             mc_unlink (dst_vpath);
     }
