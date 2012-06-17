@@ -1064,6 +1064,8 @@ exit_subshell (void)
 
     if (subshell_quit)
     {
+        write_all (mc_global.tty.subshell_pty, " exit\n", 6);
+
         if (subshell_type == TCSH)
         {
             if (unlink (tcsh_fifo) == -1)
