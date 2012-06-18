@@ -227,6 +227,11 @@ input_history_strip_password (char *url)
     else
         colon = strchr (url, ':');
 
+    /* if 'colon' before 'at', 'colon' delimits user and password: user:password@host */
+    /* if 'colon' after 'at', 'colon' delimits host and port: user@host:port */
+    if (colon != NULL && colon > at)
+        colon = NULL;
+
     if (colon == NULL)
         return g_strdup (url);
     *colon = '\0';
