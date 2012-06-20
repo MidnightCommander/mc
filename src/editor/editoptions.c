@@ -106,7 +106,7 @@ edit_reload_syntax (void *data, void *user_data)
 {
     (void) user_data;
 
-    if (edit_widget_is_editor ((Widget *) data))
+    if (edit_widget_is_editor (WIDGET (data)))
     {
         WEdit *edit = (WEdit *) data;
         edit_load_syntax (edit, NULL, edit->syntax_type);

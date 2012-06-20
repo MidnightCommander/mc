@@ -219,8 +219,7 @@ void update_cursor (Dlg_head * h);
 static inline gboolean
 dlg_widget_active (void *w)
 {
-    Widget *w1 = (Widget *) w;
-    return ((Widget *) w1->owner->current->data == w1);
+    return (w == WIDGET (w)->owner->current->data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -228,7 +227,7 @@ dlg_widget_active (void *w)
 static inline unsigned long
 dlg_get_current_widget_id (const struct Dlg_head *h)
 {
-    return ((Widget *) h->current->data)->id;
+    return WIDGET (h->current->data)->id;
 }
 
 #endif /* MC__DIALOG_H */

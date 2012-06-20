@@ -401,36 +401,36 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
     switch (msg)
     {
     case DLG_ACTION:
-        if (sender == (Widget *) content_use_cbox)
+        if (sender == WIDGET (content_use_cbox))
         {
             gboolean disable = !(content_use_cbox->state & C_BOOL);
 
-            widget_disable (content_label->widget, disable);
-            send_message ((Widget *) content_label, WIDGET_DRAW, 0);
-            widget_disable (in_with->widget, disable);
-            send_message ((Widget *) in_with, WIDGET_DRAW, 0);
-            widget_disable (content_first_hit_cbox->widget, disable);
-            send_message ((Widget *) content_first_hit_cbox, WIDGET_DRAW, 0);
-            widget_disable (content_regexp_cbox->widget, disable);
-            send_message ((Widget *) content_regexp_cbox, WIDGET_DRAW, 0);
-            widget_disable (content_case_sens_cbox->widget, disable);
-            send_message ((Widget *) content_case_sens_cbox, WIDGET_DRAW, 0);
+            widget_disable (WIDGET (content_label), disable);
+            send_message (WIDGET (content_label), WIDGET_DRAW, 0);
+            widget_disable (WIDGET (in_with), disable);
+            send_message (WIDGET (in_with), WIDGET_DRAW, 0);
+            widget_disable (WIDGET (content_first_hit_cbox), disable);
+            send_message (WIDGET (content_first_hit_cbox), WIDGET_DRAW, 0);
+            widget_disable (WIDGET (content_regexp_cbox), disable);
+            send_message (WIDGET (content_regexp_cbox), WIDGET_DRAW, 0);
+            widget_disable (WIDGET (content_case_sens_cbox), disable);
+            send_message (WIDGET (content_case_sens_cbox), WIDGET_DRAW, 0);
 #ifdef HAVE_CHARSET
-            widget_disable (content_all_charsets_cbox->widget, disable);
-            send_message ((Widget *) content_all_charsets_cbox, WIDGET_DRAW, 0);
+            widget_disable (WIDGET (content_all_charsets_cbox), disable);
+            send_message (WIDGET (content_all_charsets_cbox), WIDGET_DRAW, 0);
 #endif
-            widget_disable (content_whole_words_cbox->widget, disable);
-            send_message ((Widget *) content_whole_words_cbox, WIDGET_DRAW, 0);
+            widget_disable (WIDGET (content_whole_words_cbox), disable);
+            send_message (WIDGET (content_whole_words_cbox), WIDGET_DRAW, 0);
 
             return MSG_HANDLED;
         }
 
-        if (sender == (Widget *) ignore_dirs_cbox)
+        if (sender == WIDGET (ignore_dirs_cbox))
         {
             gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);
 
-            widget_disable (in_ignore->widget, disable);
-            send_message ((Widget *) in_ignore, WIDGET_DRAW, 0);
+            widget_disable (WIDGET (in_ignore), disable);
+            send_message (WIDGET (in_ignore), WIDGET_DRAW, 0);
 
             return MSG_HANDLED;
         }
@@ -563,31 +563,31 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     content_first_hit_cbox =
         check_new (cbox_position--, FIND_X / 2 + 1, options.content_first_hit,
                    content_first_hit_label);
-    widget_disable (content_first_hit_cbox->widget, disable);
+    widget_disable (WIDGET (content_first_hit_cbox), disable);
     add_widget (find_dlg, content_first_hit_cbox);
 
     content_whole_words_cbox =
         check_new (cbox_position--, FIND_X / 2 + 1, options.content_whole_words,
                    content_whole_words_label);
-    widget_disable (content_whole_words_cbox->widget, disable);
+    widget_disable (WIDGET (content_whole_words_cbox), disable);
     add_widget (find_dlg, content_whole_words_cbox);
 
 #ifdef HAVE_CHARSET
     content_all_charsets_cbox = check_new (cbox_position--, FIND_X / 2 + 1,
                                            options.content_all_charsets,
                                            content_all_charsets_label);
-    widget_disable (content_all_charsets_cbox->widget, disable);
+    widget_disable (WIDGET (content_all_charsets_cbox), disable);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
 
     content_case_sens_cbox =
         check_new (cbox_position--, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
-    widget_disable (content_case_sens_cbox->widget, disable);
+    widget_disable (WIDGET (content_case_sens_cbox), disable);
     add_widget (find_dlg, content_case_sens_cbox);
 
     content_regexp_cbox =
         check_new (cbox_position--, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
-    widget_disable (content_regexp_cbox->widget, disable);
+    widget_disable (WIDGET (content_regexp_cbox), disable);
     add_widget (find_dlg, content_regexp_cbox);
 
     cbox_position = FIND_Y - 6;
@@ -618,11 +618,11 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     in_with =
         input_new (8, FIND_X / 2 + 1, input_get_default_colors (), FIND_X / 2 - 4, INPUT_LAST_TEXT,
                    MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
-    widget_disable (in_with->widget, disable);
+    widget_disable (WIDGET (in_with), disable);
     add_widget (find_dlg, in_with);
 
     content_label = label_new (7, FIND_X / 2 + 1, _("Content:"));
-    widget_disable (content_label->widget, disable);
+    widget_disable (WIDGET (content_label), disable);
     add_widget (find_dlg, content_label);
 
     in_name = input_new (8, 3, input_get_default_colors (),
@@ -633,7 +633,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     in_ignore = input_new (5, 3, input_get_default_colors (), FIND_X - 6,
                            options.ignore_dirs != NULL ? options.ignore_dirs : "",
                            "ignoredirs", INPUT_COMPLETE_DEFAULT);
-    widget_disable (in_ignore->widget, !options.ignore_dirs_enable);
+    widget_disable (WIDGET (in_ignore), !options.ignore_dirs_enable);
     add_widget (find_dlg, in_ignore);
 
     ignore_dirs_cbox =
@@ -868,7 +868,7 @@ find_add_match (const char *dir, const char *file)
     /* Don't scroll */
     if (matches == 0)
         listbox_select_first (find_list);
-    send_message (&find_list->widget, WIDGET_DRAW, 0);
+    send_message (WIDGET (find_list), WIDGET_DRAW, 0);
 
     matches++;
     found_num_update ();

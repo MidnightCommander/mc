@@ -137,7 +137,7 @@ dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flag
 
     do
     {
-        Widget *w = (Widget *) p->data;
+        Widget *w = WIDGET (p->data);
 
         if (reverse)
             p = dlg_widget_prev (h, p);
@@ -183,7 +183,7 @@ dlg_unfocus (Dlg_head * h)
     /* we can unfocus disabled widget */
     if ((h->current != NULL) && (h->state == DLG_CONSTRUCT || h->state == DLG_ACTIVE))
     {
-        Widget *current = (Widget *) h->current->data;
+        Widget *current = WIDGET (h->current->data);
 
         if (send_message (current, WIDGET_UNFOCUS, 0) == MSG_HANDLED)
         {
@@ -215,7 +215,7 @@ dlg_find_widget_callback (const void *a, const void *b)
 static void
 do_select_widget (Dlg_head * h, GList * w, select_dir_t dir)
 {
-    Widget *w0 = (Widget *) h->current->data;
+    Widget *w0 = WIDGET (h->current->data);
 
     if (!dlg_unfocus (h))
         return;
@@ -244,12 +244,12 @@ do_select_widget (Dlg_head * h, GList * w, select_dir_t dir)
             break;
         }
     }
-    while (h->current != w /* && (((Widget *) h->current->data)->options & W_DISABLED) == 0 */ );
+    while (h->current != w /* && (WIDGET (h->current->data)->options & W_DISABLED) == 0 */ );
 
-    if (dlg_overlap (w0, (Widget *) h->current->data))
+    if (dlg_overlap (w0, WIDGET (h->current->data)))
     {
-        send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
-        send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0);
+        send_message (WIDGET (h->current->data), WIDGET_DRAW, 0);
+        send_message (WIDGET (h->current->data), WIDGET_FOCUS, 0);
     }
 }
 
@@ -387,7 +387,7 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     item = starting_widget;
     do
     {
-        Widget *widget = (Widget *) item->data;
+        Widget *widget = WIDGET (item->data);
 
         if ((h->flags & DLG_REVERSE) == 0)
             item = dlg_widget_prev (h, item);
@@ -430,7 +430,7 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
      * the currently selected widget is an input line
      */
 
-    current = (Widget *) h->current->data;
+    current = WIDGET (h->current->data);
 
     if ((current->options & W_DISABLED) != 0)
         return MSG_NOT_HANDLED;
@@ -461,7 +461,7 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
     /* send it to all widgets */
     while (h->current != hot_cur && handled == MSG_NOT_HANDLED)
     {
-        current = (Widget *) hot_cur->data;
+        current = WIDGET (hot_cur->data);
 
         if ((current->options & W_WANT_HOTKEY) != 0 && (current->options & W_DISABLED) == 0)
             handled = send_message (current, WIDGET_HOTKEY, d_key);
@@ -515,7 +515,7 @@ dlg_key_event (Dlg_head * h, int d_key)
         h->callback (h, NULL, DLG_HOTKEY_HANDLED, 0, NULL);
     else
         /* not used - then try widget_callback */
-        handled = send_message ((Widget *) h->current->data, WIDGET_KEY, d_key);
+        handled = send_message (WIDGET (h->current->data), WIDGET_KEY, d_key);
 
     /* not used- try to use the unhandled case */
     if (handled == MSG_NOT_HANDLED)
@@ -580,7 +580,7 @@ frontend_run_dlg (Dlg_head * h)
 static int
 dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
 {
-    Widget *w = (Widget *) a;
+    Widget *w = WIDGET (a);
     unsigned long id = GPOINTER_TO_UINT (b);
 
     return w->id == id ? 0 : 1;
@@ -677,7 +677,7 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
                2. control sticks to two sides of
                one direction - it should be sized */
 
-            Widget *c = (Widget *) w->data;
+            Widget *c = WIDGET (w->data);
             int x = c->x;
             int y = c->y;
             int cols = c->cols;
@@ -782,7 +782,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
     new_d = g_new0 (Dlg_head, 1);
     w = WIDGET (new_d);
     init_widget (w, y1, x1, lines, cols, NULL, mouse_handler);
-    widget_want_cursor (*w, FALSE);
+    widget_want_cursor (w, FALSE);
 
     new_d->state = DLG_CONSTRUCT;
     new_d->modal = modal;
@@ -865,7 +865,7 @@ set_idle_proc (Dlg_head * d, int enable)
 unsigned long
 add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags, const void *before)
 {
-    Widget *widget = (Widget *) w;
+    Widget *widget = WIDGET (w);
 
     /* Don't accept 0 widgets */
     if (w == NULL)
@@ -959,7 +959,7 @@ add_widget_before (Dlg_head * h, void *w, void *before)
 void
 del_widget (void *w)
 {
-    Dlg_head *h = ((Widget *) w)->owner;
+    Dlg_head *h = WIDGET (w)->owner;
     GList *d;
 
     /* Don't accept NULL widget. This shouldn't happen */
@@ -1029,7 +1029,7 @@ dlg_focus (Dlg_head * h)
     /* cannot focus disabled widget */
     if ((h->current != NULL) && (h->state == DLG_CONSTRUCT || h->state == DLG_ACTIVE))
     {
-        Widget *current = (Widget *) h->current->data;
+        Widget *current = WIDGET (h->current->data);
 
         if (((current->options & W_DISABLED) == 0)
             && (send_message (current, WIDGET_FOCUS, 0) == MSG_HANDLED))
@@ -1063,7 +1063,7 @@ find_widget_type (const Dlg_head * h, callback_fn callback)
 
     w = g_list_find_custom (h->widgets, callback, dlg_find_widget_callback);
 
-    return (w == NULL) ? NULL : (Widget *) w->data;
+    return (w == NULL) ? NULL : WIDGET (w->data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1075,7 +1075,7 @@ dlg_find_by_id (const Dlg_head * h, unsigned long id)
     GList *w;
 
     w = g_list_find_custom (h->widgets, GUINT_TO_POINTER (id), dlg_find_widget_by_id);
-    return w != NULL ? (Widget *) w->data : NULL;
+    return w != NULL ? WIDGET (w->data) : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1099,7 +1099,7 @@ dlg_select_by_id (const Dlg_head * h, unsigned long id)
 void
 dlg_select_widget (void *w)
 {
-    const Widget *widget = (Widget *) w;
+    Widget *widget = WIDGET (w);
     Dlg_head *h = widget->owner;
 
     do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
@@ -1114,7 +1114,7 @@ dlg_select_widget (void *w)
 void
 dlg_set_top_widget (void *w)
 {
-    Widget *widget = (Widget *) w;
+    Widget *widget = WIDGET (w);
     Dlg_head *h = widget->owner;
     GList *l;
 
@@ -1166,7 +1166,7 @@ update_cursor (Dlg_head * h)
     {
         Widget *w;
 
-        w = (Widget *) p->data;
+        w = WIDGET (p->data);
 
         if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
             send_message (w, WIDGET_CURSOR, 0);
@@ -1177,7 +1177,7 @@ update_cursor (Dlg_head * h)
                 if (p == h->current)
                     break;
 
-                w = (Widget *) p->data;
+                w = WIDGET (p->data);
 
                 if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
                     if (send_message (w, WIDGET_CURSOR, 0) == MSG_HANDLED)
@@ -1282,7 +1282,7 @@ dlg_run_done (Dlg_head * h)
 
     if (h->state == DLG_CLOSED)
     {
-        h->callback (h, (Widget *) h->current->data, DLG_END, 0, NULL);
+        h->callback (h, WIDGET (h->current->data), DLG_END, 0, NULL);
         if (!h->modal)
             dialog_switch_remove (h);
     }

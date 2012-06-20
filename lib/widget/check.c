@@ -57,7 +57,7 @@ static cb_ret_t
 check_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WCheck *c = (WCheck *) w;
-    Dlg_head *h = c->widget.owner;
+    Dlg_head *h = w->owner;
 
     switch (msg)
     {
@@ -82,14 +82,14 @@ check_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_CURSOR:
-        widget_move (&c->widget, 0, 1);
+        widget_move (c, 0, 1);
         return MSG_HANDLED;
 
     case WIDGET_FOCUS:
     case WIDGET_UNFOCUS:
     case WIDGET_DRAW:
         widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
-        widget_move (&c->widget, 0, 0);
+        widget_move (c, 0, 0);
         tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
         hotkey_draw (w, c->text, msg == WIDGET_FOCUS);
         return MSG_HANDLED;
@@ -108,7 +108,7 @@ check_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 check_event (Gpm_Event * event, void *data)
 {
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
@@ -135,13 +135,17 @@ WCheck *
 check_new (int y, int x, int state, const char *text)
 {
     WCheck *c;
+    Widget *w;
 
     c = g_new (WCheck, 1);
+    w = WIDGET (c);
     c->text = parse_hotkey (text);
-    init_widget (&c->widget, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_event);
+    init_widget (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_event);
     /* 4 is width of "[X] " */
     c->state = state ? C_BOOL : 0;
-    widget_want_hotkey (c->widget, TRUE);
+    widget_want_hotkey (w, TRUE);
 
     return c;
 }
+
+/* --------------------------------------------------------------------------------------------- */

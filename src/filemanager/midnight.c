@@ -541,7 +541,7 @@ print_vfs_message (const gchar * event_group_name, const gchar * event_name,
     if (mc_global.midnight_shutdown)
         return TRUE;
 
-    if (!mc_global.message_visible || !the_hint || !the_hint->widget.owner)
+    if (!mc_global.message_visible || the_hint == NULL || WIDGET (the_hint)->owner == NULL)
     {
         int col, row;
 
@@ -672,7 +672,7 @@ create_panels (void)
     the_hint = label_new (0, 0, 0);
     the_hint->transparent = 1;
     the_hint->auto_adjust_cols = 0;
-    the_hint->widget.cols = COLS;
+    WIDGET (the_hint)->cols = COLS;
 
     the_menubar = menubar_new (0, 0, COLS, NULL);
 }
@@ -1094,10 +1094,10 @@ static void
 update_dirty_panels (void)
 {
     if (get_current_type () == view_listing && current_panel->dirty)
-        send_message ((Widget *) current_panel, WIDGET_DRAW, 0);
+        send_message (WIDGET (current_panel), WIDGET_DRAW, 0);
 
     if (get_other_type () == view_listing && other_panel->dirty)
-        send_message ((Widget *) other_panel, WIDGET_DRAW, 0);
+        send_message (WIDGET (other_panel), WIDGET_DRAW, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1110,7 +1110,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     (void) sender;
 
     /* stop quick search before executing any command */
-    send_message ((Widget *) current_panel, WIDGET_COMMAND, CK_SearchStop);
+    send_message (WIDGET (current_panel), WIDGET_COMMAND, CK_SearchStop);
 
     switch (command)
     {
@@ -1238,10 +1238,10 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         break;
     case CK_History:
         /* show the history of command line widget */
-        send_message (&cmdline->widget, WIDGET_COMMAND, CK_History);
+        send_message (WIDGET (cmdline), WIDGET_COMMAND, CK_History);
         break;
     case CK_PanelInfo:
-        if (sender == (Widget *) the_menubar)
+        if (sender == WIDGET (the_menubar))
             info_cmd ();        /* menu */
         else
             info_cmd_no_menu ();        /* shortcut or buttonbar */
@@ -1292,7 +1292,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         hotlist_cmd ();
         break;
     case CK_PanelQuickView:
-        if (sender == (Widget *) the_menubar)
+        if (sender == WIDGET (the_menubar))
             quick_view_cmd ();  /* menu */
         else
             quick_cmd_no_menu ();       /* shortcut or buttonabr */
@@ -1465,7 +1465,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 
             if (cmdline->buffer[i] != '\0')
             {
-                send_message ((Widget *) cmdline, WIDGET_KEY, parm);
+                send_message (WIDGET (cmdline), WIDGET_KEY, parm);
                 return MSG_HANDLED;
             }
 
@@ -1544,7 +1544,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         if ((get_current_type () == view_listing) && current_panel->searching)
         {
             current_panel->dirty = 1;   /* FIXME: unneeded? */
-            send_message ((Widget *) current_panel, WIDGET_COMMAND, CK_SearchStop);
+            send_message (WIDGET (current_panel), WIDGET_COMMAND, CK_SearchStop);
         }
         return MSG_HANDLED;
 
@@ -1564,7 +1564,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
                 v = midnight_execute_cmd (NULL, command);
 
             if (v == MSG_NOT_HANDLED && command_prompt)
-                v = send_message ((Widget *) cmdline, WIDGET_KEY, parm);
+                v = send_message (WIDGET (cmdline), WIDGET_KEY, parm);
 
             return v;
         }
@@ -1579,13 +1579,13 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         if (sender == NULL)
             return midnight_execute_cmd (NULL, parm);
         /* message from menu */
-        if (sender == (Widget *) the_menubar)
+        if (sender == WIDGET (the_menubar))
             return midnight_execute_cmd (sender, parm);
         /* message from buttonbar */
-        if (sender == (Widget *) the_bar)
+        if (sender == WIDGET (the_bar))
         {
             if (data != NULL)
-                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+                return send_message (WIDGET (data), WIDGET_COMMAND, parm);
             return midnight_execute_cmd (sender, parm);
         }
         return MSG_NOT_HANDLED;
@@ -1611,7 +1611,7 @@ midnight_event (Gpm_Event * event, void *data)
     {
         /* menubar */
         if (menubar_visible || the_menubar->is_active)
-            ret = ((Widget *) the_menubar)->mouse (event, the_menubar);
+            ret = WIDGET (the_menubar)->mouse (event, the_menubar);
         else
         {
             Widget *w;
@@ -1628,7 +1628,7 @@ midnight_event (Gpm_Event * event, void *data)
             }
 
             if (ret == MOU_UNHANDLED)
-                ret = ((Widget *) the_menubar)->mouse (event, the_menubar);
+                ret = WIDGET (the_menubar)->mouse (event, the_menubar);
         }
     }
 
@@ -1676,7 +1676,7 @@ load_hint (gboolean force)
 {
     char *hint;
 
-    if (the_hint->widget.owner == NULL)
+    if (WIDGET (the_hint)->owner == NULL)
         return;
 
     if (!mc_global.message_visible)

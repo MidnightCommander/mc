@@ -99,12 +99,14 @@ WGroupbox *
 groupbox_new (int y, int x, int height, int width, const char *title)
 {
     WGroupbox *g;
+    Widget *w;
 
     g = g_new (WGroupbox, 1);
-    init_widget (&g->widget, y, x, height, width, groupbox_callback, NULL);
+    w = WIDGET (g);
+    init_widget (w, y, x, height, width, groupbox_callback, NULL);
 
-    widget_want_cursor (g->widget, FALSE);
-    widget_want_hotkey (g->widget, FALSE);
+    widget_want_cursor (w, FALSE);
+    widget_want_hotkey (w, FALSE);
 
     /* Strip existing spaces, add one space before and after the title */
     if (title != NULL)

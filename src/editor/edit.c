@@ -515,7 +515,7 @@ edit_load_position (WEdit * edit)
     book_mark_restore (edit, BOOK_MARK_COLOR);
 
     edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
-    edit_move_display (edit, line - (edit->widget.lines / 2));
+    edit_move_display (edit, line - (WIDGET (edit)->lines / 2));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -906,7 +906,7 @@ static void
 edit_end_page (WEdit * edit)
 {
     edit_update_curs_row (edit);
-    edit_move_down (edit, edit->widget.lines - edit->curs_row - 1, 0);
+    edit_move_down (edit, WIDGET (edit)->lines - edit->curs_row - 1, 0);
 }
 
 
@@ -938,7 +938,7 @@ edit_move_to_bottom (WEdit * edit)
         edit_move_down (edit, edit->total_lines - edit->curs_row, 0);
         edit->start_display = edit->last_byte;
         edit->start_line = edit->total_lines;
-        edit_scroll_upward (edit, edit->widget.lines - 1);
+        edit_scroll_upward (edit, WIDGET (edit)->lines - 1);
         edit->force |= REDRAW_PAGE;
     }
 }
@@ -1624,7 +1624,7 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
                 break;
             /* count lines if searching downward */
             if (inc > 0 && a == '\n')
-                if (n++ >= edit->widget.lines - edit->curs_row) /* out of screen */
+                if (n++ >= WIDGET (edit)->lines - edit->curs_row) /* out of screen */
                     break;
         }
         /* count bracket depth */
@@ -1807,7 +1807,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 
     edit_cursor_move (edit, curs - edit->curs1);
     edit->force |= REDRAW_PAGE;
-    send_message ((Widget *) edit, WIDGET_DRAW, 0);
+    send_message (WIDGET (edit), WIDGET_DRAW, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2187,6 +2187,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
            long line)
 {
     gboolean to_free = FALSE;
+    Widget *w;
 
     option_auto_syntax = 1;     /* Resetting to auto on every invokation */
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
@@ -2226,13 +2227,15 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
         to_free = TRUE;
     }
 
-    edit->drag_state = MCEDIT_DRAG_NORMAL;
-    edit->widget.y = y;
-    edit->widget.x = x;
-    edit->widget.lines = lines;
-    edit->widget.cols = cols;
+    w = WIDGET (edit);
+
+    w->y = y;
+    w->x = x;
+    w->lines = lines;
+    w->cols = cols;
     edit_save_size (edit);
     edit->fullscreen = TRUE;
+    edit->drag_state = MCEDIT_DRAG_NORMAL;
 
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
     edit->stat1.st_uid = getuid ();
@@ -2352,14 +2355,16 @@ edit_clean (WEdit * edit)
 gboolean
 edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
 {
+    Widget *w = WIDGET (edit);
     WEdit *e;
-    int y = edit->widget.y;
-    int x = edit->widget.x;
-    int lines = edit->widget.lines;
-    int columns = edit->widget.cols;
+
+    int y = w->y;
+    int x = w->x;
+    int lines = w->lines;
+    int columns = w->cols;
 
     e = g_malloc0 (sizeof (WEdit));
-    e->widget = edit->widget;
+    *WIDGET (e) = *w;
 
     if (edit_init (e, y, x, lines, columns, filename_vpath, line) == NULL)
     {
@@ -3154,7 +3159,7 @@ edit_scroll_downward (WEdit * edit, long i)
 {
     long lines_below;
 
-    lines_below = edit->total_lines - edit->start_line - (edit->widget.lines - 1);
+    lines_below = edit->total_lines - edit->start_line - (WIDGET (edit)->lines - 1);
     if (lines_below > 0)
     {
         if (i > lines_below)
@@ -3531,6 +3536,8 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
 void
 edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 {
+    Widget *w = WIDGET (edit);
+
     if (command == CK_WindowFullscreen)
     {
         edit_toggle_fullscreen (edit);
@@ -3817,13 +3824,13 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->column_highlight = 1;
     case CK_PageUp:
     case CK_MarkPageUp:
-        edit_move_up (edit, edit->widget.lines - 1, 1);
+        edit_move_up (edit, w->lines - 1, 1);
         break;
     case CK_MarkColumnPageDown:
         edit->column_highlight = 1;
     case CK_PageDown:
     case CK_MarkPageDown:
-        edit_move_down (edit, edit->widget.lines - 1, 1);
+        edit_move_down (edit, w->lines - 1, 1);
         break;
     case CK_MarkColumnLeft:
         edit->column_highlight = 1;
@@ -4000,8 +4007,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             if (p->next != NULL)
             {
                 p = p->next;
-                if (p->line >= edit->start_line + edit->widget.lines || p->line < edit->start_line)
-                    edit_move_display (edit, p->line - edit->widget.lines / 2);
+                if (p->line >= edit->start_line + w->lines || p->line < edit->start_line)
+                    edit_move_display (edit, p->line - w->lines / 2);
                 edit_move_to_line (edit, p->line);
             }
         }
@@ -4017,8 +4024,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
                     p = p->prev;
             if (p->line >= 0)
             {
-                if (p->line >= edit->start_line + edit->widget.lines || p->line < edit->start_line)
-                    edit_move_display (edit, p->line - edit->widget.lines / 2);
+                if (p->line >= edit->start_line + w->lines || p->line < edit->start_line)
+                    edit_move_display (edit, p->line - w->lines / 2);
                 edit_move_to_line (edit, p->line);
             }
         }

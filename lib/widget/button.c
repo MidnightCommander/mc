@@ -60,7 +60,7 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
     WButton *b = (WButton *) w;
     int stop = 0;
     int off = 0;
-    Dlg_head *h = b->widget.owner;
+    Dlg_head *h = w->owner;
 
     switch (msg)
     {
@@ -71,7 +71,7 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
          * when hotkeys are sent to all widgets before the key is
          * handled by the current widget.
          */
-        if (parm == '\n' && (Widget *) h->current->data == &b->widget)
+        if (parm == '\n' && WIDGET (h->current->data) == WIDGET (b))
         {
             button_callback (w, WIDGET_KEY, ' ');
             return MSG_HANDLED;
@@ -120,7 +120,7 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
             off = 0;
             break;
         }
-        widget_move (&b->widget, 0, b->hotpos + off);
+        widget_move (w, 0, b->hotpos + off);
         return MSG_HANDLED;
 
     case WIDGET_UNFOCUS:
@@ -182,7 +182,7 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 button_event (Gpm_Event * event, void *data)
 {
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
@@ -208,17 +208,18 @@ WButton *
 button_new (int y, int x, int action, button_flags_t flags, const char *text, bcback_fn callback)
 {
     WButton *b;
+    Widget *w;
 
     b = g_new (WButton, 1);
+    w = WIDGET (b);
+
     b->action = action;
     b->flags = flags;
     b->text = parse_hotkey (text);
-
-    init_widget (&b->widget, y, x, 1, button_get_len (b), button_callback, button_event);
-
+    init_widget (w, y, x, 1, button_get_len (b), button_callback, button_event);
     b->selected = FALSE;
     b->callback = callback;
-    widget_want_hotkey (b->widget, TRUE);
+    widget_want_hotkey (w, TRUE);
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
 
     return b;
@@ -241,8 +242,8 @@ button_set_text (WButton * b, const char *text)
 {
     release_hotkey (b->text);
     b->text = parse_hotkey (text);
-    b->widget.cols = button_get_len (b);
-    dlg_redraw (b->widget.owner);
+    WIDGET (b)->cols = button_get_len (b);
+    dlg_redraw (WIDGET (b)->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */

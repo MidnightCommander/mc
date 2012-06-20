@@ -60,7 +60,7 @@ static cb_ret_t
 label_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WLabel *l = (WLabel *) w;
-    Dlg_head *h = l->widget.owner;
+    Dlg_head *h = w->owner;
 
     switch (msg)
     {
@@ -97,8 +97,8 @@ label_callback (Widget * w, widget_msg_t msg, int parm)
                     q[0] = '\0';
                 }
 
-                widget_move (&l->widget, y, 0);
-                tty_print_string (str_fit_to_term (p, l->widget.cols, J_LEFT));
+                widget_move (w, y, 0);
+                tty_print_string (str_fit_to_term (p, w->cols, J_LEFT));
 
                 if (q == NULL)
                     break;
@@ -127,6 +127,7 @@ WLabel *
 label_new (int y, int x, const char *text)
 {
     WLabel *l;
+    Widget *w;
     int cols = 1;
     int lines = 1;
 
@@ -134,12 +135,14 @@ label_new (int y, int x, const char *text)
         str_msg_term_size (text, &lines, &cols);
 
     l = g_new (WLabel, 1);
-    init_widget (&l->widget, y, x, lines, cols, label_callback, NULL);
+    w = WIDGET (l);
+    init_widget (w, y, x, lines, cols, label_callback, NULL);
+
     l->text = g_strdup (text);
     l->auto_adjust_cols = TRUE;
     l->transparent = FALSE;
-    widget_want_cursor (l->widget, FALSE);
-    widget_want_hotkey (l->widget, FALSE);
+    widget_want_cursor (w, FALSE);
+    widget_want_hotkey (w, FALSE);
 
     return l;
 }
@@ -149,7 +152,8 @@ label_new (int y, int x, const char *text)
 void
 label_set_text (WLabel * label, const char *text)
 {
-    int newcols = label->widget.cols;
+    Widget *w = WIDGET (label);
+    int newcols = w->cols;
     int newlines;
 
     if (label->text != NULL && text != NULL && strcmp (label->text, text) == 0)
@@ -165,18 +169,18 @@ label_set_text (WLabel * label, const char *text)
         if (label->auto_adjust_cols)
         {
             str_msg_term_size (text, &newlines, &newcols);
-            if (newcols > label->widget.cols)
-                label->widget.cols = newcols;
-            if (newlines > label->widget.lines)
-                label->widget.lines = newlines;
+            if (newcols > w->cols)
+                w->cols = newcols;
+            if (newlines > w->lines)
+                w->lines = newlines;
         }
     }
 
-    if (label->widget.owner != NULL)
-        label_callback ((Widget *) label, WIDGET_DRAW, 0);
+    if (w->owner != NULL)
+        label_callback (w, WIDGET_DRAW, 0);
 
-    if (newcols < label->widget.cols)
-        label->widget.cols = newcols;
+    if (newcols < w->cols)
+        w->cols = newcols;
 }
 
 /* --------------------------------------------------------------------------------------------- */

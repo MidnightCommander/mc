@@ -628,10 +628,10 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
     quick_widgets[6].u.label.text = repl_to;
 
     if (xpos == -1)
-        xpos = (edit->widget.cols - dlg_width) / 2;
+        xpos = (WIDGET (edit)->cols - dlg_width) / 2;
 
     if (ypos == -1)
-        ypos = edit->widget.lines * 2 / 3;
+        ypos = WIDGET (edit)->lines * 2 / 3;
 
     {
         QuickDialog Quick_input = {

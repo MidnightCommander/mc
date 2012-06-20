@@ -57,7 +57,7 @@ static cb_ret_t
 hline_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WHLine *l = (WHLine *) w;
-    Dlg_head *h = l->widget.owner;
+    Dlg_head *h = w->owner;
 
     switch (msg)
     {
@@ -65,9 +65,9 @@ hline_callback (Widget * w, widget_msg_t msg, int parm)
     case WIDGET_RESIZED:
         if (l->auto_adjust_cols)
         {
-            Widget *wo = WIDGET (w->owner);
+            Widget *wo = WIDGET (h);
 
-            if (((w->owner->flags & DLG_COMPACT) != 0))
+            if (((h->flags & DLG_COMPACT) != 0))
             {
                 w->x = wo->x;
                 w->cols = wo->cols;
@@ -113,14 +113,16 @@ WHLine *
 hline_new (int y, int x, int width)
 {
     WHLine *l;
+    Widget *w;
     int lines = 1;
 
     l = g_new (WHLine, 1);
-    init_widget (&l->widget, y, x, lines, width, hline_callback, NULL);
+    w = WIDGET (l);
+    init_widget (w, y, x, lines, width, hline_callback, NULL);
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;
-    widget_want_cursor (l->widget, FALSE);
-    widget_want_hotkey (l->widget, FALSE);
+    widget_want_cursor (w, FALSE);
+    widget_want_hotkey (w, FALSE);
 
     return l;
 }

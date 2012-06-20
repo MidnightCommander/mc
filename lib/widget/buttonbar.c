@@ -148,11 +148,11 @@ static gboolean
 buttonbar_call (WButtonBar * bb, int i)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
+    Widget *w = WIDGET (bb);
 
     if ((bb != NULL) && (bb->labels[i].command != CK_IgnoreKey))
-        ret = bb->widget.owner->callback (bb->widget.owner,
-                                          (Widget *) bb, DLG_ACTION,
-                                          bb->labels[i].command, bb->labels[i].receiver);
+        ret = w->owner->callback (w->owner, w, DLG_ACTION,
+                                  bb->labels[i].command, bb->labels[i].receiver);
     return ret;
 }
 
@@ -180,10 +180,10 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
         if (bb->visible)
         {
             buttonbar_init_button_positions (bb);
-            widget_move (&bb->widget, 0, 0);
+            widget_move (w, 0, 0);
             tty_setcolor (DEFAULT_COLOR);
-            tty_printf ("%-*s", bb->widget.cols, "");
-            widget_move (&bb->widget, 0, 0);
+            tty_printf ("%-*s", w->cols, "");
+            widget_move (w, 0, 0);
 
             for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             {
@@ -218,7 +218,7 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 buttonbar_event (Gpm_Event * event, void *data)
 {
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
@@ -246,14 +246,16 @@ WButtonBar *
 buttonbar_new (gboolean visible)
 {
     WButtonBar *bb;
+    Widget *w;
 
     bb = g_new0 (WButtonBar, 1);
+    w = WIDGET (bb);
+    init_widget (w, LINES - 1, 0, 1, COLS, buttonbar_callback, buttonbar_event);
 
-    init_widget (&bb->widget, LINES - 1, 0, 1, COLS, buttonbar_callback, buttonbar_event);
-    bb->widget.pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
+    w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     bb->visible = visible;
-    widget_want_hotkey (bb->widget, 1);
-    widget_want_cursor (bb->widget, 0);
+    widget_want_hotkey (w, TRUE);
+    widget_want_cursor (w, FALSE);
 
     return bb;
 }
@@ -277,7 +279,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
             set_label_text (bb, idx, text);
 
         bb->labels[idx - 1].command = command;
-        bb->labels[idx - 1].receiver = (Widget *) receiver;
+        bb->labels[idx - 1].receiver = WIDGET (receiver);
     }
 }
 

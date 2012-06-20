@@ -62,7 +62,7 @@ static cb_ret_t
 gauge_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WGauge *g = (WGauge *) w;
-    Dlg_head *h = g->widget.owner;
+    Dlg_head *h = w->owner;
 
     if (msg == WIDGET_INIT)
         return MSG_HANDLED;
@@ -73,7 +73,7 @@ gauge_callback (Widget * w, widget_msg_t msg, int parm)
 
     if (msg == WIDGET_DRAW)
     {
-        widget_move (&g->widget, 0, 0);
+        widget_move (w, 0, 0);
         tty_setcolor (h->color[DLG_COLOR_NORMAL]);
         if (!g->shown)
             tty_printf ("%*s", gauge_len, "");
@@ -129,9 +129,11 @@ WGauge *
 gauge_new (int y, int x, gboolean shown, int max, int current)
 {
     WGauge *g;
+    Widget *w;
 
     g = g_new (WGauge, 1);
-    init_widget (&g->widget, y, x, 1, gauge_len, gauge_callback, NULL);
+    w = WIDGET (g);
+    init_widget (w, y, x, 1, gauge_len, gauge_callback, NULL);
 
     g->shown = shown;
     if (max == 0)
@@ -140,8 +142,8 @@ gauge_new (int y, int x, gboolean shown, int max, int current)
     g->current = current;
     g->from_left_to_right = TRUE;
 
-    widget_want_cursor (g->widget, FALSE);
-    widget_want_hotkey (g->widget, FALSE);
+    widget_want_cursor (w, FALSE);
+    widget_want_hotkey (w, FALSE);
 
     return g;
 }
@@ -158,7 +160,7 @@ gauge_set_value (WGauge * g, int max, int current)
         max = 1;                /* I do not like division by zero :) */
     g->current = current;
     g->max = max;
-    gauge_callback ((Widget *) g, WIDGET_DRAW, 0);
+    gauge_callback (WIDGET (g), WIDGET_DRAW, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -169,7 +171,7 @@ gauge_show (WGauge * g, gboolean shown)
     if (g->shown != shown)
     {
         g->shown = shown;
-        gauge_callback ((Widget *) g, WIDGET_DRAW, 0);
+        gauge_callback (WIDGET (g), WIDGET_DRAW, 0);
     }
 }
 

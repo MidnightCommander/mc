@@ -83,31 +83,32 @@ listbox_entry_free (void *data)
 static void
 listbox_drawscroll (WListbox * l)
 {
-    const int max_line = l->widget.lines - 1;
+    Widget *w = WIDGET (l);
+    int max_line = w->lines - 1;
     int line = 0;
     int i;
 
     /* Are we at the top? */
-    widget_move (&l->widget, 0, l->widget.cols);
+    widget_move (w, 0, w->cols);
     if (l->top == 0)
         tty_print_one_vline (TRUE);
     else
         tty_print_char ('^');
 
     /* Are we at the bottom? */
-    widget_move (&l->widget, max_line, l->widget.cols);
-    if ((l->top + l->widget.lines == l->count) || (l->widget.lines >= l->count))
+    widget_move (w, max_line, w->cols);
+    if ((l->top + w->lines == l->count) || (w->lines >= l->count))
         tty_print_one_vline (TRUE);
     else
         tty_print_char ('v');
 
     /* Now draw the nice relative pointer */
     if (l->count != 0)
-        line = 1 + ((l->pos * (l->widget.lines - 2)) / l->count);
+        line = 1 + ((l->pos * (w->lines - 2)) / l->count);
 
     for (i = 1; i < max_line; i++)
     {
-        widget_move (&l->widget, i, l->widget.cols);
+        widget_move (w, i, w->cols);
         if (i != line)
             tty_print_one_vline (TRUE);
         else
@@ -120,8 +121,9 @@ listbox_drawscroll (WListbox * l)
 static void
 listbox_draw (WListbox * l, gboolean focused)
 {
-    const Dlg_head *h = l->widget.owner;
-    const gboolean disabled = (((Widget *) l)->options & W_DISABLED) != 0;
+    Widget *w = WIDGET (l);
+    const Dlg_head *h = w->owner;
+    const gboolean disabled = (w->options & W_DISABLED) != 0;
     const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
     /* *INDENT-OFF* */
     int selc = disabled
@@ -140,7 +142,7 @@ listbox_draw (WListbox * l, gboolean focused)
     /*    pos = (le == NULL) ? 0 : g_list_position (l->list, le); */
     pos = (le == NULL) ? 0 : l->top;
 
-    for (i = 0; i < l->widget.lines; i++)
+    for (i = 0; i < w->lines; i++)
     {
         const char *text;
 
@@ -153,7 +155,7 @@ listbox_draw (WListbox * l, gboolean focused)
         else
             tty_setcolor (normalc);
 
-        widget_move (&l->widget, i, 1);
+        widget_move (l, i, 1);
 
         if ((i > 0 && pos >= l->count) || (l->list == NULL) || (le == NULL))
             text = "";
@@ -165,12 +167,12 @@ listbox_draw (WListbox * l, gboolean focused)
             pos++;
         }
 
-        tty_print_string (str_fit_to_term (text, l->widget.cols - 2, J_LEFT_FIT));
+        tty_print_string (str_fit_to_term (text, w->cols - 2, J_LEFT_FIT));
     }
 
     l->cursor_y = sel_line;
 
-    if (l->scrollbar && (l->count > l->widget.lines))
+    if (l->scrollbar && (l->count > w->lines))
     {
         tty_setcolor (normalc);
         listbox_drawscroll (l);
@@ -239,6 +241,7 @@ listbox_execute_cmd (WListbox * l, unsigned long command)
 {
     cb_ret_t ret = MSG_HANDLED;
     int i;
+    Widget *w = WIDGET (l);
 
     switch (command)
     {
@@ -255,18 +258,18 @@ listbox_execute_cmd (WListbox * l, unsigned long command)
         listbox_select_last (l);
         break;
     case CK_PageUp:
-        for (i = 0; (i < l->widget.lines - 1) && (l->pos > 0); i++)
+        for (i = 0; (i < w->lines - 1) && (l->pos > 0); i++)
             listbox_back (l);
         break;
     case CK_PageDown:
-        for (i = 0; (i < l->widget.lines - 1) && (l->pos < l->count - 1); i++)
+        for (i = 0; (i < w->lines - 1) && (l->pos < l->count - 1); i++)
             listbox_fwd (l);
         break;
     case CK_Delete:
         if (l->deletable)
         {
             gboolean is_last = (l->pos + 1 >= l->count);
-            gboolean is_more = (l->top + l->widget.lines >= l->count);
+            gboolean is_more = (l->top + w->lines >= l->count);
 
             listbox_remove_current (l);
             if ((l->top > 0) && (is_last || is_more))
@@ -306,7 +309,7 @@ listbox_key (WListbox * l, int key)
         listbox_select_entry (l, key - '0');
 
         /* need scroll to item? */
-        if (abs (oldpos - l->pos) > l->widget.lines)
+        if (abs (oldpos - l->pos) > WIDGET (l)->lines)
             l->top = l->pos;
 
         return MSG_HANDLED;
@@ -365,7 +368,7 @@ static cb_ret_t
 listbox_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WListbox *l = (WListbox *) w;
-    Dlg_head *h = l->widget.owner;
+    Dlg_head *h = w->owner;
     cb_ret_t ret_code;
 
     switch (msg)
@@ -411,7 +414,7 @@ listbox_callback (Widget * w, widget_msg_t msg, int parm)
         return listbox_execute_cmd (l, parm);
 
     case WIDGET_CURSOR:
-        widget_move (&l->widget, l->cursor_y, 0);
+        widget_move (l, l->cursor_y, 0);
         h->callback (h, w, DLG_ACTION, l->pos, NULL);
         return MSG_HANDLED;
 
@@ -439,7 +442,7 @@ static int
 listbox_event (Gpm_Event * event, void *data)
 {
     WListbox *l = (WListbox *) data;
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
@@ -516,12 +519,14 @@ WListbox *
 listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn callback)
 {
     WListbox *l;
+    Widget *w;
 
     if (height <= 0)
         height = 1;
 
     l = g_new (WListbox, 1);
-    init_widget (&l->widget, y, x, height, width, listbox_callback, listbox_event);
+    w = WIDGET (l);
+    init_widget (w, y, x, height, width, listbox_callback, listbox_event);
 
     l->list = NULL;
     l->top = l->pos = 0;
@@ -530,8 +535,8 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->callback = callback;
     l->allow_duplicates = TRUE;
     l->scrollbar = !mc_global.tty.slow_terminal;
-    widget_want_hotkey (l->widget, TRUE);
-    widget_want_cursor (l->widget, FALSE);
+    widget_want_hotkey (w, TRUE);
+    widget_want_cursor (w, FALSE);
 
     return l;
 }
@@ -573,8 +578,10 @@ listbox_select_first (WListbox * l)
 void
 listbox_select_last (WListbox * l)
 {
+    int lines = WIDGET (l)->lines;
+
     l->pos = l->count - 1;
-    l->top = l->count > l->widget.lines ? l->count - l->widget.lines : 0;
+    l->top = l->count > lines ? l->count - lines : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -600,8 +607,13 @@ listbox_select_entry (WListbox * l, int dest)
             l->pos = dest;
             if (!top_seen)
                 l->top = l->pos;
-            else if (l->pos - l->top >= l->widget.lines)
-                l->top = l->pos - l->widget.lines + 1;
+            else
+            {
+                int lines = WIDGET (l)->lines;
+
+                if (l->pos - l->top >= lines)
+                    l->top = l->pos - lines + 1;
+            }
             return;
         }
     }

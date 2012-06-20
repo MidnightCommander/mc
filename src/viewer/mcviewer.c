@@ -90,7 +90,7 @@ do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
 {
     screen_dimen y, x;
     Gpm_Event local;
-    Widget *w = (Widget *) view;
+    Widget *w = WIDGET (view);
 
     /* rest of the upper frame - call menu */
     if (mcview_is_in_panel (view) && (event->type & GPM_DOWN) != 0 &&
@@ -181,7 +181,7 @@ mcview_event (Gpm_Event * event, void *data)
     mcview_t *view = (mcview_t *) data;
     int result;
 
-    if (!mouse_global_in_widget (event, (Widget *) data))
+    if (!mouse_global_in_widget (event, WIDGET (data)))
         return MOU_UNHANDLED;
 
     if (do_mcview_event (view, event, &result))
@@ -196,9 +196,10 @@ mcview_event (Gpm_Event * event, void *data)
 mcview_t *
 mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
-    mcview_t *view = g_new0 (mcview_t, 1);
+    mcview_t *view;
 
-    init_widget (&view->widget, y, x, lines, cols, mcview_callback, mcview_event);
+    view = g_new0 (mcview_t, 1);
+    init_widget (WIDGET (view), y, x, lines, cols, mcview_callback, mcview_event);
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;

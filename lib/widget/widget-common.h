@@ -15,7 +15,7 @@
 #define widget_move(w, _y, _x) tty_gotoyx (WIDGET(w)->y + (_y), WIDGET(w)->x + (_x))
 /* Sets/clear the specified flag in the options field */
 #define widget_option(w,f,i) \
-    w.options = ((i) ? ((w).options | (f)) : ((w).options & (~(f))))
+    (w)->options = ((i) ? ((w)->options | (f)) : ((w)->options & (~(f))))
 #define widget_want_cursor(w,i) widget_option((w), W_WANT_CURSOR, (i))
 #define widget_want_hotkey(w,i) widget_option((w), W_WANT_HOTKEY, (i))
 #define widget_disable(w,i) widget_option((w), W_DISABLED, (i))

@@ -2206,14 +2206,14 @@ edit_close_cmd (WEdit * edit)
 
     if (ret)
     {
-        Dlg_head *h = ((Widget *) edit)->owner;
+        Dlg_head *h = WIDGET (edit)->owner;
 
         if (edit->locked != 0)
             unlock_file (edit->filename_vpath);
 
         del_widget (edit);
 
-        if (edit_widget_is_editor ((Widget *) h->current->data))
+        if (edit_widget_is_editor (WIDGET (h->current->data)))
             edit = (WEdit *) h->current->data;
         else
         {
@@ -2667,7 +2667,7 @@ edit_replace_cmd (WEdit * edit, int again)
                 long l;
                 int prompt;
 
-                l = (long) (edit->curs_row - edit->widget.lines / 3);
+                l = edit->curs_row - WIDGET (edit)->lines / 3;
                 if (l > 0)
                     edit_scroll_downward (edit, l);
                 if (l < 0)
@@ -3072,7 +3072,7 @@ edit_goto_cmd (WEdit * edit)
     line = l;
     if (l < 0)
         l = edit->total_lines + l + 2;
-    edit_move_display (edit, l - edit->widget.lines / 2 - 1);
+    edit_move_display (edit, l - WIDGET (edit)->lines / 2 - 1);
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
     g_free (f);
@@ -3409,7 +3409,7 @@ edit_select_codepage_cmd (WEdit * edit)
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
-    send_message ((Widget *) edit, WIDGET_DRAW, 0);
+    send_message (WIDGET (edit), WIDGET_DRAW, 0);
 }
 #endif
 

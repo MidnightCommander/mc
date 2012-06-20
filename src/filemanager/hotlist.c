@@ -631,7 +631,7 @@ hotlist_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 static lcback_ret_t
 l_call (WListbox * list)
 {
-    Dlg_head *dlg = list->widget.owner;
+    Dlg_head *dlg = WIDGET (list)->owner;
 
     if (list->count != 0)
     {

@@ -246,7 +246,7 @@ dialog_switch_list (void)
         dlg = (Dlg_head *) h->data;
 
         if ((dlg != NULL) && (dlg->get_title != NULL))
-            title = dlg->get_title (dlg, listbox->list->widget.cols - 2);       /* FIXME! */
+            title = dlg->get_title (dlg, WIDGET (listbox->list)->cols - 2);
         else
             title = g_strdup ("");
 

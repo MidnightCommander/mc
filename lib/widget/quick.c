@@ -90,16 +90,15 @@ quick_dialog_skip (QuickDialog * qd, int nskip)
         switch (qw->widget_type)
         {
         case quick_checkbox:
-            qw->widget =
-                (Widget *) check_new (ypos, xpos, *qw->u.checkbox.state,
-                                      I18N (qw->u.checkbox.text));
+            qw->widget = WIDGET (check_new (ypos, xpos, *qw->u.checkbox.state,
+                                            I18N (qw->u.checkbox.text)));
             break;
 
         case quick_button:
-            qw->widget = (Widget *) button_new (ypos, xpos, qw->u.button.action,
-                                                (qw->u.button.action ==
-                                                 B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-                                                I18N (qw->u.button.text), qw->u.button.callback);
+            qw->widget = WIDGET (button_new (ypos, xpos, qw->u.button.action,
+                                             qw->u.button.action == B_ENTER ?
+                                                 DEFPUSH_BUTTON : NORMAL_BUTTON,
+                                             I18N (qw->u.button.text), qw->u.button.callback));
             break;
 
         case quick_input:
@@ -111,19 +110,19 @@ quick_dialog_skip (QuickDialog * qd, int nskip)
                 in->completion_flags |= INPUT_COMPLETE_CD;
             if ((qw->u.input.flags & 4) != 0)
                 in->strip_password = TRUE;
-            qw->widget = (Widget *) in;
+            qw->widget = WIDGET (in);
             *qw->u.input.result = NULL;
             break;
 
         case quick_label:
-            qw->widget = (Widget *) label_new (ypos, xpos, I18N (qw->u.label.text));
+            qw->widget = WIDGET (label_new (ypos, xpos, I18N (qw->u.label.text)));
             break;
 
         case quick_groupbox:
-            qw->widget = (Widget *) groupbox_new (ypos, xpos,
-                                                  qw->u.groupbox.height,
-                                                  qw->u.groupbox.width,
-                                                  I18N (qw->u.groupbox.title));
+            qw->widget = WIDGET (groupbox_new (ypos, xpos,
+                                               qw->u.groupbox.height,
+                                               qw->u.groupbox.width,
+                                               I18N (qw->u.groupbox.title)));
             break;
 
         case quick_radio:
@@ -143,7 +142,7 @@ quick_dialog_skip (QuickDialog * qd, int nskip)
 
                 r = radio_new (ypos, xpos, qw->u.radio.count, (const char **) items);
                 r->pos = r->sel = *qw->u.radio.value;
-                qw->widget = (Widget *) r;
+                qw->widget = WIDGET (r);
                 g_strfreev (items);
                 break;
             }

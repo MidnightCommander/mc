@@ -2877,7 +2877,7 @@ dview_edit (WDiff * dview, diff_place_t ord)
         return;
     }
 
-    h = ((Widget *) dview)->owner;
+    h = WIDGET (dview)->owner;
     h_modal = h->modal;
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
@@ -2943,19 +2943,21 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
 static void
 dview_labels (WDiff * dview)
 {
+    Widget *d;
     Dlg_head *h;
     WButtonBar *b;
 
-    h = dview->widget.owner;
+    d = WIDGET (dview);
+    h = d->owner;
     b = find_buttonbar (h);
 
-    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, (Widget *) dview);
+    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, d);
+    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, d);
+    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, d);
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, d);
+    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, d);
+    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), diff_map, d);
+    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, d);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3312,7 +3314,7 @@ static cb_ret_t
 dview_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WDiff *dview = (WDiff *) w;
-    Dlg_head *h = dview->widget.owner;
+    Dlg_head *h = w->owner;
     cb_ret_t i;
 
     switch (msg)
@@ -3365,8 +3367,8 @@ dview_adjust_size (Dlg_head * h)
     /* Look up the viewer and the buttonbar, we assume only two widgets here */
     dview = (WDiff *) find_widget_type (h, dview_callback);
     bar = find_buttonbar (h);
-    widget_set_size (&dview->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size ((Widget *) bar, LINES - 1, 0, 1, COLS);
+    widget_set_size (WIDGET (dview), 0, 0, LINES - 1, COLS);
+    widget_set_size (WIDGET (bar), LINES - 1, 0, 1, COLS);
 
     dview_compute_areas (dview);
 }
@@ -3389,10 +3391,10 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
         if (sender == NULL)
             return dview_execute_cmd (NULL, parm);
         /* message from buttonbar */
-        if (sender == (Widget *) find_buttonbar (h))
+        if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+                return send_message (WIDGET (data), WIDGET_COMMAND, parm);
 
             dview = (WDiff *) find_widget_type (h, dview_callback);
             return dview_execute_cmd (dview, parm);
@@ -3443,6 +3445,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 {
     int error;
     WDiff *dview;
+    Widget *w;
     Dlg_head *dview_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
@@ -3451,11 +3454,9 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
                     "[Diff Viewer]", NULL, DLG_WANT_TAB);
 
     dview = g_new0 (WDiff, 1);
-
-    init_widget (&dview->widget, 0, 0, LINES - 1, COLS,
-                 (callback_fn) dview_callback, (mouse_h) dview_event);
-
-    widget_want_cursor (dview->widget, 0);
+    w = WIDGET (dview);
+    init_widget (w, 0, 0, LINES - 1, COLS, (callback_fn) dview_callback, (mouse_h) dview_event);
+    widget_want_cursor (w, FALSE);
 
     add_widget (dview_dlg, dview);
     add_widget (dview_dlg, buttonbar_new (TRUE));

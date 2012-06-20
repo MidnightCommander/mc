@@ -100,26 +100,24 @@ menu_arrange (Menu * menu, dlg_shortcut_str get_shortcut)
 static void
 menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 {
+    Widget *w = WIDGET (menubar);
     const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
     const menu_entry_t *entry = g_list_nth_data (menu->entries, idx);
     const int y = 2 + idx;
     int x = menu->start_x;
 
-    if (x + menu->max_entry_len + 4 > (gsize) menubar->widget.cols)
-        x = menubar->widget.cols - menu->max_entry_len - 4;
+    if (x + menu->max_entry_len + 4 > (gsize) w->cols)
+        x = w->cols - menu->max_entry_len - 4;
 
     if (entry == NULL)
     {
         /* menu separator */
         tty_setcolor (MENU_ENTRY_COLOR);
 
-        widget_move (&menubar->widget, y, x - 1);
+        widget_move (w, y, x - 1);
         tty_print_alt_char (ACS_LTEE, FALSE);
-
-        tty_draw_hline (menubar->widget.y + y, menubar->widget.x + x,
-                        ACS_HLINE, menu->max_entry_len + 3);
-
-        widget_move (&menubar->widget, y, x + menu->max_entry_len + 3);
+        tty_draw_hline (w->y + y, w->x + x, ACS_HLINE, menu->max_entry_len + 3);
+        widget_move (w, y, x + menu->max_entry_len + 3);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
     else
@@ -128,7 +126,7 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 
         /* menu text */
         tty_setcolor (color);
-        widget_move (&menubar->widget, y, x);
+        widget_move (w, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
         tty_getyx (&yt, &xt);
         tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 2);  /* clear line */
@@ -146,12 +144,12 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 
         if (entry->shortcut != NULL)
         {
-            widget_move (&menubar->widget, y, x + menu->max_hotkey_len + 3);
+            widget_move (w, y, x + menu->max_hotkey_len + 3);
             tty_print_string (entry->shortcut);
         }
 
         /* move cursor to the start of entry text */
-        widget_move (&menubar->widget, y, x + 1);
+        widget_move (w, y, x + 1);
     }
 }
 
@@ -160,18 +158,17 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 static void
 menubar_draw_drop (WMenuBar * menubar)
 {
+    Widget *w = WIDGET (menubar);
     const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
     const unsigned int count = g_list_length (menu->entries);
     int column = menu->start_x - 1;
     unsigned int i;
 
-    if (column + menu->max_entry_len + 5 > (gsize) menubar->widget.cols)
-        column = menubar->widget.cols - menu->max_entry_len - 5;
+    if (column + menu->max_entry_len + 5 > (gsize) w->cols)
+        column = w->cols - menu->max_entry_len - 5;
 
     tty_setcolor (MENU_ENTRY_COLOR);
-    draw_box (menubar->widget.owner,
-              menubar->widget.y + 1, menubar->widget.x + column,
-              count + 2, menu->max_entry_len + 5, FALSE);
+    draw_box (w->owner, w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5, FALSE);
 
     for (i = 0; i < count; i++)
         menubar_paint_idx (menubar, i,
@@ -196,11 +193,12 @@ menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
 static void
 menubar_draw (WMenuBar * menubar)
 {
+    Widget *w = WIDGET (menubar);
     GList *i;
 
     /* First draw the complete menubar */
     tty_setcolor (menubar->is_active ? MENU_ENTRY_COLOR : MENU_INACTIVE_COLOR);
-    tty_draw_hline (menubar->widget.y, menubar->widget.x, ' ', menubar->widget.cols);
+    tty_draw_hline (w->y, w->x, ' ', w->cols);
 
     /* Now each one of the entries */
     for (i = menubar->menu; i != NULL; i = g_list_next (i))
@@ -209,7 +207,7 @@ menubar_draw (WMenuBar * menubar)
         gboolean is_selected = (menubar->selected == (gsize) g_list_position (menubar->menu, i));
 
         menubar_set_color (menubar, is_selected, FALSE);
-        widget_move (&menubar->widget, 0, menu->start_x);
+        widget_move (w, 0, menu->start_x);
 
         tty_print_char (' ');
         tty_print_string (menu->text.start);
@@ -230,7 +228,7 @@ menubar_draw (WMenuBar * menubar)
     if (menubar->is_dropped)
         menubar_draw_drop (menubar);
     else
-        widget_move (&menubar->widget, 0,
+        widget_move (w, 0,
                      ((Menu *) g_list_nth_data (menubar->menu, menubar->selected))->start_x);
 }
 
@@ -248,7 +246,7 @@ menubar_remove (WMenuBar * menubar)
        of overlapped widgets. This is useful in multi-window editor.
        In general, menubar should be a special object, not an ordinary widget
        in the current dialog. */
-    h = menubar->widget.owner;
+    h = WIDGET (menubar)->owner;
     h->current = g_list_find (h->widgets, dlg_find_by_id (h, menubar->previous_widget));
 
     menubar->is_dropped = FALSE;
@@ -287,12 +285,14 @@ menubar_right (WMenuBar * menubar)
 static void
 menubar_finish (WMenuBar * menubar)
 {
+    Widget *w = WIDGET (menubar);
+
     menubar->is_dropped = FALSE;
     menubar->is_active = FALSE;
-    menubar->widget.lines = 1;
-    widget_want_hotkey (menubar->widget, 0);
+    w->lines = 1;
+    widget_want_hotkey (w, 0);
 
-    dlg_select_by_id (menubar->widget.owner, menubar->previous_widget);
+    dlg_select_by_id (w->owner, menubar->previous_widget);
     do_refresh ();
 }
 
@@ -316,10 +316,11 @@ menubar_execute (WMenuBar * menubar)
 
     if ((entry != NULL) && (entry->command != CK_IgnoreKey))
     {
+        Widget *w = WIDGET (menubar);
+
         mc_global.widget.is_right = (menubar->selected != 0);
         menubar_finish (menubar);
-        menubar->widget.owner->callback (menubar->widget.owner, &menubar->widget,
-                                         DLG_ACTION, entry->command, NULL);
+        w->owner->callback (w->owner, w, DLG_ACTION, entry->command, NULL);
         do_refresh ();
     }
 }
@@ -555,10 +556,10 @@ menubar_callback (Widget * w, widget_msg_t msg, int parm)
             return MSG_NOT_HANDLED;
 
         /* Trick to get all the mouse events */
-        menubar->widget.lines = LINES;
+        w->lines = LINES;
 
         /* Trick to get all of the hotkeys */
-        widget_want_hotkey (menubar->widget, 1);
+        widget_want_hotkey (w, 1);
         menubar_draw (menubar);
         return MSG_HANDLED;
 
@@ -608,7 +609,7 @@ static int
 menubar_event (Gpm_Event * event, void *data)
 {
     WMenuBar *menubar = (WMenuBar *) data;
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
     gboolean was_active = TRUE;
     int left_x, right_x, bottom_y;
     Menu *menu;
@@ -688,10 +689,10 @@ menubar_event (Gpm_Event * event, void *data)
     menu = (Menu *) g_list_nth_data (menubar->menu, menubar->selected);
     left_x = menu->start_x;
     right_x = left_x + menu->max_entry_len + 3;
-    if (right_x > menubar->widget.cols)
+    if (right_x > w->cols)
     {
-        left_x = menubar->widget.cols - menu->max_entry_len - 3;
-        right_x = menubar->widget.cols;
+        left_x = w->cols - menu->max_entry_len - 3;
+        right_x = w->cols;
     }
 
     bottom_y = g_list_length (menu->entries) + 3;
@@ -813,11 +814,14 @@ WMenuBar *
 menubar_new (int y, int x, int cols, GList * menu)
 {
     WMenuBar *menubar;
+    Widget *w;
 
     menubar = g_new0 (WMenuBar, 1);
-    init_widget (&menubar->widget, y, x, 1, cols, menubar_callback, menubar_event);
-    widget_want_cursor (menubar->widget, FALSE);
+    w = WIDGET (menubar);
+    init_widget (w, y, x, 1, cols, menubar_callback, menubar_event);
+
     menubar->is_visible = TRUE; /* by default */
+    widget_want_cursor (w, FALSE);
     menubar_set_menu (menubar, menu);
 
     return menubar;
@@ -849,7 +853,7 @@ menubar_add_menu (WMenuBar * menubar, Menu * menu)
 {
     if (menu != NULL)
     {
-        menu_arrange (menu, menubar->widget.owner->get_shortcut);
+        menu_arrange (menu, WIDGET (menubar)->owner->get_shortcut);
         menubar->menu = g_list_append (menubar->menu, menu);
     }
 
@@ -872,7 +876,7 @@ menubar_arrange (WMenuBar * menubar)
     if (menubar->menu == NULL)
         return;
 
-    gap = menubar->widget.cols - 2;
+    gap = WIDGET (menubar)->cols - 2;
 
     /* First, calculate gap between items... */
     for (i = menubar->menu; i != NULL; i = g_list_next (i))

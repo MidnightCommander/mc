@@ -73,32 +73,34 @@ static struct my_statfs myfs_stats;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-info_box (struct WInfo *info)
+info_box (WInfo *info)
 {
+    Widget *w = WIDGET (info);
+
     const char *title = _("Information");
     const int len = str_term_width1 (title);
 
     tty_set_normal_attrs ();
     tty_setcolor (NORMAL_COLOR);
-    widget_erase (&info->widget);
-    draw_box (info->widget.owner, info->widget.y, info->widget.x,
-              info->widget.lines, info->widget.cols, FALSE);
+    widget_erase (w);
+    draw_box (w->owner, w->y, w->x, w->lines, w->cols, FALSE);
 
-    widget_move (&info->widget, 0, (info->widget.cols - len - 2) / 2);
+    widget_move (w, 0, (w->cols - len - 2) / 2);
     tty_printf (" %s ", title);
 
-    widget_move (&info->widget, 2, 0);
+    widget_move (w, 2, 0);
     tty_print_alt_char (ACS_LTEE, FALSE);
-    widget_move (&info->widget, 2, info->widget.cols - 1);
+    widget_move (w, 2, w->cols - 1);
     tty_print_alt_char (ACS_RTEE, FALSE);
-    tty_draw_hline (info->widget.y + 2, info->widget.x + 1, ACS_HLINE, info->widget.cols - 2);
+    tty_draw_hline (w->y + 2, w->x + 1, ACS_HLINE, w->cols - 2);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-info_show_info (struct WInfo *info)
+info_show_info (WInfo *info)
 {
+    Widget *w = WIDGET (info);
     static int i18n_adjust = 0;
     static const char *file_label;
     GString *buff;
@@ -110,7 +112,7 @@ info_show_info (struct WInfo *info)
     info_box (info);
 
     tty_setcolor (MARKED_COLOR);
-    widget_move (&info->widget, 1, 3);
+    widget_move (w, 1, 3);
     tty_printf (_("Midnight Commander %s"), VERSION);
 
     if (!info->ready)
@@ -142,14 +144,14 @@ info_show_info (struct WInfo *info)
 
     buff = g_string_new ("");
 
-    switch (info->widget.lines - 2)
+    switch (w->lines - 2)
     {
         /* Note: all cases are fall-throughs */
 
     default:
 
     case 16:
-        widget_move (&info->widget, 16, 3);
+        widget_move (w, 16, 3);
         if (myfs_stats.nfree == 0 && myfs_stats.nodes == 0)
             tty_print_string (_("No node information"));
         else
@@ -160,7 +162,7 @@ info_show_info (struct WInfo *info)
                         (int) (100 * (long double) myfs_stats.nfree / myfs_stats.nodes));
 
     case 15:
-        widget_move (&info->widget, 15, 3);
+        widget_move (w, 15, 3);
         if (myfs_stats.avail == 0 && myfs_stats.total == 0)
             tty_print_string (_("No space information"));
         else
@@ -175,36 +177,36 @@ info_show_info (struct WInfo *info)
         }
 
     case 14:
-        widget_move (&info->widget, 14, 3);
+        widget_move (w, 14, 3);
         tty_printf (_("Type:      %s"),
                     myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
         if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
             tty_printf (" (%Xh)", myfs_stats.type);
 
     case 13:
-        widget_move (&info->widget, 13, 3);
+        widget_move (w, 13, 3);
         str_printf (buff, _("Device:    %s"),
-                    str_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
+                    str_trunc (myfs_stats.device, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
     case 12:
-        widget_move (&info->widget, 12, 3);
+        widget_move (w, 12, 3);
         str_printf (buff, _("Filesystem: %s"),
-                    str_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
+                    str_trunc (myfs_stats.mpoint, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
     case 11:
-        widget_move (&info->widget, 11, 3);
+        widget_move (w, 11, 3);
         str_printf (buff, _("Accessed:  %s"), file_date (st.st_atime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
     case 10:
-        widget_move (&info->widget, 10, 3);
+        widget_move (w, 10, 3);
         str_printf (buff, _("Modified:  %s"), file_date (st.st_mtime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
     case 9:
-        widget_move (&info->widget, 9, 3);
+        widget_move (w, 9, 3);
         /* The field st_ctime is changed by writing or by setting inode
            information (i.e., owner, group, link count, mode, etc.).  */
         /* TRANSLATORS: Time of last status change as in stat(2) man. */
@@ -213,7 +215,7 @@ info_show_info (struct WInfo *info)
         g_string_set_size (buff, 0);
 
     case 8:
-        widget_move (&info->widget, 8, 3);
+        widget_move (w, 8, 3);
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
         if (S_ISCHR (st.st_mode) || S_ISBLK (st.st_mode))
             tty_printf (_("Dev. type: major %lu, minor %lu"),
@@ -231,29 +233,29 @@ info_show_info (struct WInfo *info)
         }
 
     case 7:
-        widget_move (&info->widget, 7, 3);
+        widget_move (w, 7, 3);
         tty_printf (_("Owner:     %s/%s"), get_owner (st.st_uid), get_group (st.st_gid));
 
     case 6:
-        widget_move (&info->widget, 6, 3);
+        widget_move (w, 6, 3);
         tty_printf (_("Links:     %d"), (int) st.st_nlink);
 
     case 5:
-        widget_move (&info->widget, 5, 3);
+        widget_move (w, 5, 3);
         tty_printf (_("Mode:      %s (%04o)"),
                     string_perm (st.st_mode), (unsigned) st.st_mode & 07777);
 
     case 4:
-        widget_move (&info->widget, 4, 3);
+        widget_move (w, 4, 3);
         tty_printf (_("Location:  %Xh:%Xh"), (int) st.st_dev, (int) st.st_ino);
 
     case 3:
         {
             const char *fname;
 
-            widget_move (&info->widget, 3, 2);
+            widget_move (w, 3, 2);
             fname = current_panel->dir.list[current_panel->selected].fname;
-            str_printf (buff, file_label, str_trunc (fname, info->widget.cols - i18n_adjust));
+            str_printf (buff, file_label, str_trunc (fname, w->cols - i18n_adjust));
             tty_print_string (buff->str);
         }
 
@@ -276,7 +278,7 @@ info_hook (void *data)
     other_widget = get_panel_widget (get_current_index ());
     if (!other_widget)
         return;
-    if (dlg_overlap (&info->widget, other_widget))
+    if (dlg_overlap (WIDGET (info), other_widget))
         return;
 
     info->ready = 1;
@@ -323,12 +325,14 @@ info_callback (Widget * w, widget_msg_t msg, int parm)
 WInfo *
 info_new (int y, int x, int lines, int cols)
 {
-    struct WInfo *info = g_new (struct WInfo, 1);
+    WInfo *info;
+    Widget *w;
 
-    init_widget (&info->widget, y, x, lines, cols, info_callback, NULL);
-
+    info = g_new (struct WInfo, 1);
+    w = WIDGET (info);
+    init_widget (w, y, x, lines, cols, info_callback, NULL);
     /* We do not want the cursor */
-    widget_want_cursor (info->widget, 0);
+    widget_want_cursor (w, FALSE);
 
     return info;
 }

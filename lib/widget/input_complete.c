@@ -1100,7 +1100,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                         listbox_select_entry ((WListbox *) h->current->data, i);
                         end = new_end;
                         input_handle_char (input, parm);
-                        send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
+                        send_message (WIDGET (h->current->data), WIDGET_DRAW, 0);
                         break;
                     }
                 }
@@ -1203,7 +1203,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                 if (need_redraw == 2)
                 {
                     insert_text (input, last_text, low);
-                    send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
+                    send_message (WIDGET (h->current->data), WIDGET_DRAW, 0);
                 }
                 else if (need_redraw == 1)
                 {
@@ -1290,8 +1290,8 @@ complete_engine (WInput * in, int what_to_do)
                 if (i > maxlen)
                     maxlen = i;
             }
-            start_x = in->widget.x;
-            start_y = in->widget.y;
+            start_x = WIDGET (in)->x;
+            start_y = WIDGET (in)->y;
             if (start_y - 2 >= count)
             {
                 y = start_y - 2 - count;

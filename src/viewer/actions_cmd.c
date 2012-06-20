@@ -497,7 +497,7 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         break;
     case CK_Quit:
         if (!mcview_is_in_panel (view))
-            dlg_stop (view->widget.owner);
+            dlg_stop (WIDGET (view)->owner);
         break;
     case CK_Cancel:
         /* don't close viewer due to SIGINT */
@@ -560,8 +560,8 @@ mcview_adjust_size (Dlg_head * h)
     view = (mcview_t *) find_widget_type (h, mcview_callback);
     b = find_buttonbar (h);
 
-    widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size (&b->widget, LINES - 1, 0, 1, COLS);
+    widget_set_size (WIDGET (view), 0, 0, LINES - 1, COLS);
+    widget_set_size (WIDGET (b), LINES - 1, 0, 1, COLS);
 
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
@@ -648,10 +648,10 @@ mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
         if (sender == NULL)
             return mcview_execute_cmd (NULL, parm);
         /* message from buttonbar */
-        if (sender == (Widget *) find_buttonbar (h))
+        if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+                return send_message (WIDGET (data), WIDGET_COMMAND, parm);
 
             view = (mcview_t *) find_widget_type (h, mcview_callback);
             return mcview_execute_cmd (view, parm);

@@ -58,7 +58,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WRadio *r = (WRadio *) w;
     int i;
-    Dlg_head *h = r->widget.owner;
+    Dlg_head *h = w->owner;
 
     switch (msg)
     {
@@ -113,7 +113,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
     case WIDGET_CURSOR:
         h->callback (h, w, DLG_ACTION, 0, NULL);
         radio_callback (w, WIDGET_FOCUS, ' ');
-        widget_move (&r->widget, r->pos, 1);
+        widget_move (r, r->pos, 1);
         return MSG_HANDLED;
 
     case WIDGET_UNFOCUS:
@@ -124,8 +124,8 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
             const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
 
             widget_selectcolor (w, focused, FALSE);
-            widget_move (&r->widget, i, 0);
-            tty_draw_hline (r->widget.y + i, r->widget.x, ' ', r->widget.cols);
+            widget_move (r, i, 0);
+            tty_draw_hline (w->y + i, w->x, ' ', w->cols);
             tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
             hotkey_draw (w, r->texts[i], focused);
         }
@@ -147,7 +147,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 radio_event (Gpm_Event * event, void *data)
 {
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
@@ -179,28 +179,31 @@ WRadio *
 radio_new (int y, int x, int count, const char **texts)
 {
     WRadio *r;
+    Widget *w;
     int i, wmax = 0;
 
     r = g_new (WRadio, 1);
+    w = WIDGET (r);
+
     /* Compute the longest string */
     r->texts = g_new (hotkey_t, count);
 
     for (i = 0; i < count; i++)
     {
-        int w;
+        int width;
 
         r->texts[i] = parse_hotkey (texts[i]);
-        w = hotkey_width (r->texts[i]);
-        wmax = max (w, wmax);
+        width = hotkey_width (r->texts[i]);
+        wmax = max (width, wmax);
     }
 
-    init_widget (&r->widget, y, x, count, 4 + wmax, radio_callback, radio_event);
+    init_widget (w, y, x, count, 4 + wmax, radio_callback, radio_event);
     /* 4 is width of "(*) " */
     r->state = 1;
     r->pos = 0;
     r->sel = 0;
     r->count = count;
-    widget_want_hotkey (r->widget, TRUE);
+    widget_want_hotkey (w, TRUE);
 
     return r;
 }

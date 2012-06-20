@@ -195,8 +195,8 @@ chmod_toggle_select (Dlg_head * h, int Id)
 static void
 chmod_refresh (Dlg_head * h)
 {
-    int y = file_gb->widget.y + 1;
-    int x = file_gb->widget.x + 2;
+    int y = WIDGET (file_gb)->y + 1;
+    int x = WIDGET (file_gb)->x + 2;
 
     common_dialog_repaint (h);
 
@@ -237,7 +237,7 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
             /* whether action was sent by checkbox? */
             for (i = 0; i < check_perm_num; i++)
-                if (sender == (Widget *) check_perm[i].check)
+                if (sender == WIDGET (check_perm[i].check))
                 {
                     sender_is_checkbox = TRUE;
                     break;

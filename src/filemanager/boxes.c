@@ -187,32 +187,32 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
         {
             display_radio->pos = display_radio->sel = 3;
             dlg_select_widget (display_radio);  /* force redraw */
-            h->callback (h, (Widget *) display_radio, DLG_ACTION, 0, NULL);
+            h->callback (h, WIDGET (display_radio), DLG_ACTION, 0, NULL);
             return MSG_HANDLED;
         }
         return MSG_NOT_HANDLED;
 
     case DLG_ACTION:
-        if (sender == (Widget *) display_radio)
+        if (sender == WIDGET (display_radio))
         {
             if (!(display_check_status->state & C_BOOL))
                 input_assign_text (display_mini_status, displays_status[display_radio->sel]);
             input_update (display_mini_status, FALSE);
             input_update (display_user_format, FALSE);
-            widget_disable (display_user_format->widget, display_radio->sel != 3);
+            widget_disable (WIDGET (display_user_format), display_radio->sel != 3);
             return MSG_HANDLED;
         }
 
-        if (sender == (Widget *) display_check_status)
+        if (sender == WIDGET (display_check_status))
         {
             if (display_check_status->state & C_BOOL)
             {
-                widget_disable (display_mini_status->widget, FALSE);
+                widget_disable (WIDGET (display_mini_status), FALSE);
                 input_assign_text (display_mini_status, displays_status[3]);
             }
             else
             {
-                widget_disable (display_mini_status->widget, TRUE);
+                widget_disable (WIDGET (display_mini_status), TRUE);
                 input_assign_text (display_mini_status, displays_status[display_radio->sel]);
             }
             input_update (display_mini_status, FALSE);
@@ -289,8 +289,8 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
         /* buttons */
         dlg_width = max (dlg_width, b_len + 6);
         gap = (dlg_width - 6 - b_len) / 3;
-        ok_button->widget.x = 3 + gap;
-        cancel_button->widget.x = ok_button->widget.x + ok_len + gap + 2;
+        WIDGET (ok_button)->x = 3 + gap;
+        WIDGET (cancel_button)->x = WIDGET (ok_button)->x + ok_len + gap + 2;
     }
 
     displays_status = _status;
@@ -411,7 +411,7 @@ tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case DLG_ACTION:
-        return send_message ((Widget *) find_tree (h), WIDGET_COMMAND, parm);
+        return send_message (WIDGET (find_tree (h)), WIDGET_COMMAND, parm);
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
@@ -437,7 +437,7 @@ confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 
             /* input */
             w = dlg_find_by_id (h, sender->id - 1);
-            widget_disable (*w, not_use);
+            widget_disable (w, not_use);
             send_message (w, WIDGET_DRAW, 0);
 
             return MSG_HANDLED;
@@ -916,8 +916,8 @@ tree_box (const char *current_dir)
     bar = buttonbar_new (TRUE);
     add_widget (dlg, bar);
     /* restore ButtonBar coordinates after add_widget() */
-    ((Widget *) bar)->x = 0;
-    ((Widget *) bar)->y = LINES - 1;
+    WIDGET (bar)->x = 0;
+    WIDGET (bar)->y = LINES - 1;
 
     if (run_dlg (dlg) == B_ENTER)
         val = vfs_path_to_str (tree_selected_name (mytree));

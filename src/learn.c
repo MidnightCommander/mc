@@ -166,7 +166,7 @@ learn_move (int right)
 
     totalcols = (learn_total - 1) / ROWS + 1;
     for (i = 0; i < learn_total; i++)
-        if (learnkeys[i].button == (Widget *) learn_dlg->current->data)
+        if (learnkeys[i].button == WIDGET (learn_dlg->current->data))
         {
             if (right)
             {
@@ -324,9 +324,11 @@ init_learn (void)
         learnkeys[i].ok = 0;
         learnkeys[i].sequence = NULL;
         g_snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
-        add_widget (learn_dlg, learnkeys[i].button = (Widget *)
-                    button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button));
-        add_widget (learn_dlg, learnkeys[i].label = (Widget *) label_new (y, x + 19, ""));
+        learnkeys[i].button =
+                WIDGET (button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button));
+        add_widget (learn_dlg, learnkeys[i].button);
+        learnkeys[i].label = WIDGET (label_new (y, x + 19, ""));
+        add_widget (learn_dlg, learnkeys[i].label);
         if (i % 13)
             y--;
         else

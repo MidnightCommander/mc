@@ -140,13 +140,13 @@ mcview_toggle_hex_mode (mcview_t * view)
     {
         view->hex_cursor = view->dpy_start;
         view->dpy_start = mcview_offset_rounddown (view->dpy_start, view->bytes_per_line);
-        widget_want_cursor (view->widget, 1);
+        widget_want_cursor (WIDGET (view), TRUE);
     }
     else
     {
         view->dpy_start = mcview_bol (view, view->hex_cursor, 0);
         view->hex_cursor = view->dpy_start;
-        widget_want_cursor (view->widget, 0);
+        widget_want_cursor (WIDGET (view), FALSE);
     }
     mcview_altered_hex_mode = 1;
     view->dpy_bbar_dirty = TRUE;

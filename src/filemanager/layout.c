@@ -233,7 +233,7 @@ update_split (const Dlg_head * h)
         check_options[6].widget->state = _panels_layout.horizontal_equal ? 1 : 0;
     else
         check_options[6].widget->state = _panels_layout.vertical_equal ? 1 : 0;
-    send_message ((Widget *) check_options[6].widget, WIDGET_DRAW, 0);
+    send_message (WIDGET (check_options[6].widget), WIDGET_DRAW, 0);
 
     tty_setcolor (check_options[6].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
 
@@ -275,7 +275,7 @@ b_left_right_cback (WButton * button, int action)
             _panels_layout.left_panel_size--;
     }
 
-    update_split (button->widget.owner);
+    update_split (WIDGET (button)->owner);
     return 0;
 }
 
@@ -373,7 +373,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     case DLG_ACTION:
-        if (sender == (Widget *) radio_widget)
+        if (sender == WIDGET (radio_widget))
         {
             if (_panels_layout.horizontal_split != radio_widget->sel)
             {
@@ -396,7 +396,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
             return MSG_HANDLED;
         }
 
-        if (sender == (Widget *) check_options[6].widget)
+        if (sender == WIDGET (check_options[6].widget))
         {
             int eq;
 
@@ -411,10 +411,10 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
                 eq = _panels_layout.vertical_equal;
             }
 
-            widget_disable (bleft_widget->widget, eq);
-            send_message ((Widget *) bleft_widget, WIDGET_DRAW, 0);
-            widget_disable (bright_widget->widget, eq);
-            send_message ((Widget *) bright_widget, WIDGET_DRAW, 0);
+            widget_disable (WIDGET (bleft_widget), eq);
+            send_message (WIDGET (bleft_widget), WIDGET_DRAW, 0);
+            widget_disable (WIDGET (bright_widget), eq);
+            send_message (WIDGET (bright_widget), WIDGET_DRAW, 0);
 
             update_split (h);
 
@@ -541,17 +541,17 @@ init_layout (void)
         const int disabled = mc_global.tty.console_flag != '\0' ? 0 : W_DISABLED;
         Widget *w;
 
-        w = (Widget *) button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
-                                   NARROW_BUTTON, "&-", bminus_cback);
+        w = WIDGET (button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
+                                NARROW_BUTTON, "&-", bminus_cback));
         w->options |= disabled;
         add_widget (layout_dlg, w);
 
-        w = (Widget *) button_new (9, output_lines_label_len + 5, B_PLUS,
-                                   NARROW_BUTTON, "&+", bplus_cback);
+        w = WIDGET (button_new (9, output_lines_label_len + 5, B_PLUS,
+                                NARROW_BUTTON, "&+", bplus_cback));
         w->options |= disabled;
         add_widget (layout_dlg, w);
 
-        w = (Widget *) groupbox_new (8, 3, 3, l1, title2);
+        w = WIDGET (groupbox_new (8, 3, 3, l1, title2));
         w->options |= disabled;
         add_widget (layout_dlg, w);
     }
@@ -561,11 +561,11 @@ init_layout (void)
 
     /* "Panel split" groupbox */
     bright_widget = button_new (6, 14, B_2RIGHT, NARROW_BUTTON, "&>", b_left_right_cback);
-    widget_disable (bright_widget->widget, equal_split);
+    widget_disable (WIDGET (bright_widget), equal_split);
     add_widget (layout_dlg, bright_widget);
 
     bleft_widget = button_new (6, 8, B_2LEFT, NARROW_BUTTON, "&<", b_left_right_cback);
-    widget_disable (bleft_widget->widget, equal_split);
+    widget_disable (WIDGET (bleft_widget), equal_split);
     add_widget (layout_dlg, bleft_widget);
 
     check_options[6].widget = check_new (5, 5, XTRACT (6));
@@ -599,17 +599,17 @@ panel_do_cols (int idx)
 static Widget *
 restore_into_right_dir_panel (int idx, Widget * from_widget)
 {
-    Widget *new_widget = NULL;
+    WPanel *new_widget;
     const char *saved_dir = panels[idx].last_saved_dir;
     gboolean last_was_panel = (from_widget && get_display_type (idx) != view_listing);
     const char *p_name = get_nth_panel_name (idx);
 
     if (last_was_panel)
-        new_widget = (Widget *) panel_new_with_dir (p_name, saved_dir);
+        new_widget = panel_new_with_dir (p_name, saved_dir);
     else
-        new_widget = (Widget *) panel_new (p_name);
+        new_widget = panel_new (p_name);
 
-    return new_widget;
+    return WIDGET (new_widget);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -714,7 +714,7 @@ setup_panels (void)
     panel_do_cols (0);
     panel_do_cols (1);
 
-    widget_set_size (&the_menubar->widget, 0, 0, 1, COLS);
+    widget_set_size (WIDGET (the_menubar), 0, 0, 1, COLS);
 
     if (command_prompt)
     {
@@ -725,12 +725,12 @@ setup_panels (void)
     }
     else
     {
-        widget_set_size (&cmdline->widget, 0, 0, 0, 0);
+        widget_set_size (WIDGET (cmdline), 0, 0, 0, 0);
         input_set_origin (cmdline, 0, 0);
-        widget_set_size (&the_prompt->widget, LINES, COLS, 0, 0);
+        widget_set_size (WIDGET (the_prompt), LINES, COLS, 0, 0);
     }
 
-    widget_set_size (&the_bar->widget, LINES - 1, 0, mc_global.keybar_visible, COLS);
+    widget_set_size (WIDGET (the_bar), LINES - 1, 0, mc_global.keybar_visible, COLS);
     buttonbar_set_visible (the_bar, mc_global.keybar_visible);
 
     /* Output window */
@@ -743,9 +743,9 @@ setup_panels (void)
     }
 
     if (mc_global.message_visible)
-        widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
+        widget_set_size (WIDGET (the_hint), height + start_y, 0, 1, COLS);
     else
-        widget_set_size (&the_hint->widget, 0, 0, 0, 0);
+        widget_set_size (WIDGET (the_hint), 0, 0, 0, 0);
 
     update_xterm_title_path ();
 }
@@ -831,10 +831,10 @@ setup_cmdline (void)
 
     y = LINES - 1 - mc_global.keybar_visible;
 
-    widget_set_size ((Widget *) the_prompt, y, 0, 1, prompt_len);
+    widget_set_size (WIDGET (the_prompt), y, 0, 1, prompt_len);
     label_set_text (the_prompt, mc_prompt);
-    widget_set_size ((Widget *) cmdline, y, prompt_len, 1, COLS - prompt_len);
-    input_set_origin ((WInput *) cmdline, prompt_len, COLS - prompt_len);
+    widget_set_size (WIDGET (cmdline), y, prompt_len, 1, COLS - prompt_len);
+    input_set_origin (cmdline, prompt_len, COLS - prompt_len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -982,15 +982,15 @@ set_display_type (int num, panel_view_mode_t type)
         break;
 
     case view_info:
-        new_widget = (Widget *) info_new (y, x, lines, cols);
+        new_widget = WIDGET (info_new (y, x, lines, cols));
         break;
 
     case view_tree:
-        new_widget = (Widget *) tree_new (y, x, lines, cols, TRUE);
+        new_widget = WIDGET (tree_new (y, x, lines, cols, TRUE));
         break;
 
     case view_quick:
-        new_widget = (Widget *) mcview_new (y, x, lines, cols, TRUE);
+        new_widget = WIDGET (mcview_new (y, x, lines, cols, TRUE));
         the_other_panel = (WPanel *) panels[the_other].widget;
         if (the_other_panel != NULL)
             file_name = the_other_panel->dir.list[the_other_panel->selected].fname;
@@ -1199,7 +1199,7 @@ get_panel_widget (int idx)
 int
 get_current_index (void)
 {
-    if (panels[0].widget == ((Widget *) current_panel))
+    if (panels[0].widget == WIDGET (current_panel))
         return 0;
     else
         return 1;
@@ -1227,7 +1227,7 @@ get_other_panel (void)
 panel_view_mode_t
 get_current_type (void)
 {
-    if (panels[0].widget == (Widget *) current_panel)
+    if (panels[0].widget == WIDGET (current_panel))
         return panels[0].type;
     else
         return panels[1].type;
@@ -1239,7 +1239,7 @@ get_current_type (void)
 panel_view_mode_t
 get_other_type (void)
 {
-    if (panels[0].widget == (Widget *) current_panel)
+    if (panels[0].widget == WIDGET (current_panel))
         return panels[1].type;
     else
         return panels[0].type;

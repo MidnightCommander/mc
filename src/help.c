@@ -603,7 +603,7 @@ help_show (Dlg_head * h, const char *paint_start)
 static int
 help_event (Gpm_Event * event, void *vp)
 {
-    Widget *w = (Widget *) vp;
+    Widget *w = WIDGET (vp);
     GSList *current_area;
     Gpm_Event local;
 
@@ -951,7 +951,7 @@ help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
         dlg_set_size (h, help_lines + 4, HELP_WINDOW_WIDTH + 4);
         bb = find_buttonbar (h);
-        widget_set_size (&bb->widget, LINES - 1, 0, 1, COLS);
+        widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
         return MSG_HANDLED;
 
     case DLG_DRAW:
@@ -967,10 +967,10 @@ help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         if (sender == NULL)
             return help_execute_cmd (parm);
         /* message from buttonbar */
-        if (sender == (Widget *) find_buttonbar (h))
+        if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+                return send_message (WIDGET (data), WIDGET_COMMAND, parm);
             return help_execute_cmd (parm);
         }
         return MSG_NOT_HANDLED;
@@ -1129,8 +1129,8 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     }
 
     help_bar = buttonbar_new (TRUE);
-    help_bar->widget.y -= WIDGET (whelp)->y;
-    help_bar->widget.x -= WIDGET (whelp)->x;
+    WIDGET (help_bar)->y -= WIDGET (whelp)->y;
+    WIDGET (help_bar)->x -= WIDGET (whelp)->x;
 
     md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
 
