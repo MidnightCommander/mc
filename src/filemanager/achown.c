@@ -230,19 +230,19 @@ print_flags (void)
 
     for (i = 0; i < 3; i++)
     {
-        dlg_move (ch_dlg, BY + 1, 9 + i);
+        widget_move (ch_dlg, BY + 1, 9 + i);
         tty_print_char (ch_flags[i]);
     }
 
     for (i = 0; i < 3; i++)
     {
-        dlg_move (ch_dlg, BY + 1, 17 + i);
+        widget_move (ch_dlg, BY + 1, 17 + i);
         tty_print_char (ch_flags[i + 3]);
     }
 
     for (i = 0; i < 3; i++)
     {
-        dlg_move (ch_dlg, BY + 1, 25 + i);
+        widget_move (ch_dlg, BY + 1, 25 + i);
         tty_print_char (ch_flags[i + 6]);
     }
 
@@ -250,12 +250,12 @@ print_flags (void)
 
     for (i = 0; i < 15; i++)
     {
-        dlg_move (ch_dlg, BY + 1, 35 + i);
+        widget_move (ch_dlg, BY + 1, 35 + i);
         tty_print_char (ch_flags[9]);
     }
     for (i = 0; i < 15; i++)
     {
-        dlg_move (ch_dlg, BY + 1, 53 + i);
+        widget_move (ch_dlg, BY + 1, 53 + i);
         tty_print_char (ch_flags[10]);
     }
 }
@@ -267,7 +267,7 @@ update_mode (Dlg_head * h)
 {
     print_flags ();
     tty_setcolor (COLOR_NORMAL);
-    dlg_move (h, BY + 2, 9);
+    widget_move (h, BY + 2, 9);
     tty_printf ("%12o", get_mode ());
     send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0);
 }
@@ -417,28 +417,28 @@ chown_refresh (void)
 
     tty_setcolor (COLOR_NORMAL);
 
-    dlg_move (ch_dlg, BY - 1, 8);
+    widget_move (ch_dlg, BY - 1, 8);
     tty_print_string (_("owner"));
-    dlg_move (ch_dlg, BY - 1, 16);
+    widget_move (ch_dlg, BY - 1, 16);
     tty_print_string (_("group"));
-    dlg_move (ch_dlg, BY - 1, 24);
+    widget_move (ch_dlg, BY - 1, 24);
     tty_print_string (_("other"));
 
-    dlg_move (ch_dlg, BY - 1, 35);
+    widget_move (ch_dlg, BY - 1, 35);
     tty_print_string (_("owner"));
-    dlg_move (ch_dlg, BY - 1, 53);
+    widget_move (ch_dlg, BY - 1, 53);
     tty_print_string (_("group"));
 
-    dlg_move (ch_dlg, 3, 4);
+    widget_move (ch_dlg, 3, 4);
     tty_print_string (_("On"));
-    dlg_move (ch_dlg, BY + 1, 4);
+    widget_move (ch_dlg, BY + 1, 4);
     tty_print_string (_("Flag"));
-    dlg_move (ch_dlg, BY + 2, 4);
+    widget_move (ch_dlg, BY + 2, 4);
     tty_print_string (_("Mode"));
 
     if (!single_set)
     {
-        dlg_move (ch_dlg, 3, 54);
+        widget_move (ch_dlg, 3, 54);
         tty_printf (_("%6d of %d"), files_on_begin - (current_panel->marked) + 1, files_on_begin);
     }
 
@@ -454,9 +454,9 @@ chown_info_update (void)
     tty_setcolor (COLOR_NORMAL);
 
     /* name && mode */
-    dlg_move (ch_dlg, 3, 8);
+    widget_move (ch_dlg, 3, 8);
     tty_print_string (str_fit_to_term (fname, 45, J_LEFT_FIT));
-    dlg_move (ch_dlg, BY + 2, 9);
+    widget_move (ch_dlg, BY + 2, 9);
     tty_printf ("%12o", get_mode ());
 
     /* permissions */

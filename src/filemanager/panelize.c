@@ -146,7 +146,7 @@ panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
     case DLG_DRAW:
         common_dialog_repaint (h);
         tty_setcolor (COLOR_NORMAL);
-        draw_box (h, UY, UX, h->lines - 10, h->cols - 10, TRUE);
+        draw_box (h, UY, UX, WIDGET (h)->lines - 10, WIDGET (h)->cols - 10, TRUE);
         return MSG_HANDLED;
 
     default:
@@ -204,13 +204,13 @@ init_panelize (void)
 
     pname =
         input_new (UY + 14, UX, input_get_default_colors (),
-                   panelize_dlg->cols - 10, "", "in", INPUT_COMPLETE_DEFAULT);
+                   WIDGET (panelize_dlg)->cols - 10, "", "in", INPUT_COMPLETE_DEFAULT);
     add_widget (panelize_dlg, pname);
 
     add_widget (panelize_dlg, label_new (UY + 13, UX, _("Command")));
 
     /* get new listbox */
-    l_panelize = listbox_new (UY + 1, UX + 1, 10, panelize_dlg->cols - 12, FALSE, NULL);
+    l_panelize = listbox_new (UY + 1, UX + 1, 10, WIDGET (panelize_dlg)->cols - 12, FALSE, NULL);
 
     while (current)
     {

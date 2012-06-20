@@ -237,19 +237,19 @@ update_split (const Dlg_head * h)
 
     tty_setcolor (check_options[6].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
 
-    dlg_move (h, 6, 5);
+    widget_move (h, 6, 5);
     if (_panels_layout.horizontal_split)
         tty_printf ("%03d", _panels_layout.top_panel_size);
     else
         tty_printf ("%03d", _panels_layout.left_panel_size);
 
-    dlg_move (h, 6, 17);
+    widget_move (h, 6, 17);
     if (_panels_layout.horizontal_split)
         tty_printf ("%03d", height - _panels_layout.top_panel_size);
     else
         tty_printf ("%03d", COLS - _panels_layout.left_panel_size);
 
-    dlg_move (h, 6, 12);
+    widget_move (h, 6, 12);
     tty_print_char ('=');
 }
 
@@ -329,9 +329,9 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         {
             old_output_lines = _output_lines;
             tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-            dlg_move (h, 9, 5);
+            widget_move (h, 9, 5);
             tty_print_string (output_lines_label);
-            dlg_move (h, 9, 5 + 3 + output_lines_label_len);
+            widget_move (h, 9, 5 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
         return MSG_HANDLED;
@@ -367,7 +367,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         {
             old_output_lines = _output_lines;
             tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-            dlg_move (h, 9, 5 + 3 + output_lines_label_len);
+            widget_move (h, 9, 5 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
         return MSG_HANDLED;

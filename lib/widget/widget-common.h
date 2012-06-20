@@ -10,7 +10,9 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define widget_move(w, _y, _x) tty_gotoyx (((Widget *)(w))->y + (_y), ((Widget *)(w))->x + (_x))
+#define WIDGET(x) ((Widget *)(x))
+
+#define widget_move(w, _y, _x) tty_gotoyx (WIDGET(w)->y + (_y), WIDGET(w)->x + (_x))
 /* Sets/clear the specified flag in the options field */
 #define widget_option(w,f,i) \
     w.options = ((i) ? ((w).options | (f)) : ((w).options & (~(f))))

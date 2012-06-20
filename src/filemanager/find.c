@@ -1140,7 +1140,7 @@ find_rotate_dash (const Dlg_head * h, gboolean finish)
     {
         pos = (pos + 1) % 4;
         tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-        dlg_move (h, FIND2_Y - 7, FIND2_X - 4);
+        widget_move (h, FIND2_Y - 7, FIND2_X - 4);
         tty_print_char (finish ? ' ' : rotating_dash[pos]);
         mc_refresh ();
     }

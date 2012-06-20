@@ -65,15 +65,17 @@ hline_callback (Widget * w, widget_msg_t msg, int parm)
     case WIDGET_RESIZED:
         if (l->auto_adjust_cols)
         {
+            Widget *wo = WIDGET (w->owner);
+
             if (((w->owner->flags & DLG_COMPACT) != 0))
             {
-                w->x = w->owner->x;
-                w->cols = w->owner->cols;
+                w->x = wo->x;
+                w->cols = wo->cols;
             }
             else
             {
-                w->x = w->owner->x + 1;
-                w->cols = w->owner->cols - 2;
+                w->x = wo->x + 1;
+                w->cols = wo->cols - 2;
             }
         }
 

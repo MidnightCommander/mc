@@ -193,7 +193,8 @@ status_string (WEdit * edit, char *s, int w)
 static inline void
 edit_status_fullscreen (WEdit * edit, int color)
 {
-    const int w = edit->widget.owner->cols;
+    Widget *h = WIDGET (WIDGET (edit)->owner);
+    const int w = h->cols;
     const size_t status_size = w + 1;
     char *const status = g_malloc (status_size);
     int status_len;
@@ -222,7 +223,7 @@ edit_status_fullscreen (WEdit * edit, int color)
         fname = str_trunc (fname, fname_len);
     }
 
-    dlg_move (edit->widget.owner, 0, 0);
+    widget_move (h, 0, 0);
     tty_setcolor (color);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
@@ -233,7 +234,7 @@ edit_status_fullscreen (WEdit * edit, int color)
 
         if (edit->total_lines + 1 != 0)
             percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
-        dlg_move (edit->widget.owner, 0, w - 6 - 6);
+        widget_move (h, 0, w - 6 - 6);
         tty_printf (" %3d%%", percent);
     }
 
@@ -250,8 +251,9 @@ edit_status_fullscreen (WEdit * edit, int color)
 static inline void
 edit_status_window (WEdit * edit)
 {
+    Widget *w = WIDGET (edit);
     int y, x;
-    int cols = edit->widget.cols;
+    int cols = w->cols;
 
     tty_setcolor (STATUSBAR_COLOR);
 
@@ -271,12 +273,12 @@ edit_status_window (WEdit * edit)
 #endif
 
         edit_move (2, 0);
-        tty_printf ("[%s]", str_term_trim (fname, edit->widget.cols - 8 - 6));
+        tty_printf ("[%s]", str_term_trim (fname, w->cols - 8 - 6));
         g_free (full_fname);
     }
 
     tty_getyx (&y, &x);
-    x -= edit->widget.x;
+    x -= w->x;
     x += 4;
     if (x + 6 <= cols - 2 - 6)
     {
@@ -289,7 +291,7 @@ edit_status_window (WEdit * edit)
 
     if (cols > 30)
     {
-        edit_move (2, edit->widget.lines - 1);
+        edit_move (2, w->lines - 1);
         tty_printf ("%3ld %5ld/%ld %6ld/%ld",
                     edit->curs_col + edit->over_col,
                     edit->curs_line + 1, edit->total_lines + 1, edit->curs1, edit->last_byte);
@@ -302,7 +304,7 @@ edit_status_window (WEdit * edit)
      */
     if (cols > 46)
     {
-        edit_move (32, edit->widget.lines - 1);
+        edit_move (32, w->lines - 1);
         if (edit->curs1 >= edit->last_byte)
             tty_print_string ("[<EOF>       ]");
 #ifdef HAVE_CHARSET
@@ -365,14 +367,14 @@ edit_draw_frame (const WEdit * edit, int color, gboolean active)
 static inline void
 edit_draw_window_icons (const WEdit * edit, int color)
 {
-    const Widget *w = (const Widget *) edit;
+    const Widget *w = WIDGET (edit);
     char tmp[17];
 
     tty_setcolor (color);
     if (edit->fullscreen)
-        dlg_move (w->owner, 0, w->owner->cols - 6);
+        widget_move (w->owner, 0, WIDGET (w->owner)->cols - 6);
     else
-        widget_move (w, 0, edit->widget.cols - 8);
+        widget_move (w, 0, w->cols - 8);
     g_snprintf (tmp, sizeof (tmp), "[%s][%s]", edit_window_state_char, edit_window_close_char);
     tty_print_string (tmp);
 }
@@ -499,6 +501,8 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
 static void
 edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_col)
 {
+    Widget *w = WIDGET (edit);
+
     struct line_s line[MAX_LINE_LEN];
     struct line_s *p = line;
 
@@ -513,7 +517,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
-    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen ? 0 : 1))
+    if (row > w->lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen ? 0 : 1))
         return;
 
     if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
@@ -529,10 +533,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     if (!edit->fullscreen)
     {
-        const Widget *w = (const Widget *) edit;
-
         end_col--;
-        if (w->x + w->cols <= w->owner->cols)
+        if (w->x + w->cols <= WIDGET (w->owner)->cols)
             end_col--;
     }
 
@@ -843,6 +845,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     Widget *w = (Widget *) edit;
     Dlg_head *h = w->owner;
+    Widget *wh = WIDGET (h);
 
     long row = 0, curs_row;
     int force = edit->force;
@@ -854,24 +857,24 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     /* draw only visible region */
 
-    last_line = h->y + h->lines - 1;
+    last_line = wh->y + wh->lines - 1;
 
     y1 = w->y;
     if (y1 > last_line - 1 /* buttonbar */ )
         return;
 
-    last_column = h->x + h->cols - 1;
+    last_column = wh->x + wh->cols - 1;
 
     x1 = w->x;
     if (x1 > last_column)
         return;
 
     y2 = w->y + w->lines - 1;
-    if (y2 < h->y + 1 /* menubar */ )
+    if (y2 < wh->y + 1 /* menubar */ )
         return;
 
     x2 = w->x + w->cols - 1;
-    if (x2 < h->x)
+    if (x2 < wh->x)
         return;
 
     if ((force & REDRAW_IN_BOUNDS) == 0)
@@ -881,17 +884,17 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
         if (y2 <= last_line - 1 /* buttonbar */ )
             end_row = w->lines - 1;
-        else if (y1 >= h->y + 1 /* menubar */ )
-            end_row = h->lines - 1 - y1 - 1;
+        else if (y1 >= wh->y + 1 /* menubar */ )
+            end_row = wh->lines - 1 - y1 - 1;
         else
-            end_row = start_row + h->lines - 1 - 1;
+            end_row = start_row + wh->lines - 1 - 1;
 
         if (x2 <= last_column)
             end_column = w->cols - 1;
-        else if (x1 >= h->x)
-            end_column = h->cols - 1 - x1;
+        else if (x1 >= wh->x)
+            end_column = wh->cols - 1 - x1;
         else
-            end_column = start_column + h->cols - 1;
+            end_column = start_column + wh->cols - 1;
     }
 
     /*

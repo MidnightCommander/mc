@@ -123,15 +123,15 @@ chown_refresh (Dlg_head * h)
 
     tty_setcolor (COLOR_NORMAL);
 
-    dlg_move (h, TY + 1, TX + 2);
+    widget_move (h, TY + 1, TX + 2);
     tty_print_string (_("Name"));
-    dlg_move (h, TY + 3, TX + 2);
+    widget_move (h, TY + 3, TX + 2);
     tty_print_string (_("Owner name"));
-    dlg_move (h, TY + 5, TX + 2);
+    widget_move (h, TY + 5, TX + 2);
     tty_print_string (_("Group name"));
-    dlg_move (h, TY + 7, TX + 2);
+    widget_move (h, TY + 7, TX + 2);
     tty_print_string (_("Size"));
-    dlg_move (h, TY + 9, TX + 2);
+    widget_move (h, TY + 9, TX + 2);
     tty_print_string (_("Permission"));
 }
 

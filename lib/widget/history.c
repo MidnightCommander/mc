@@ -338,7 +338,7 @@ history_show (GList ** history, Widget * widget, int current)
        size. */
     history_dlg_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
 
-    if (query_dlg->y < widget->y)
+    if (WIDGET (query_dlg)->y < widget->y)
     {
         /* draw list entries from bottom upto top */
         listbox_set_list (query_list, hlist);
@@ -378,7 +378,7 @@ history_show (GList ** history, Widget * widget, int current)
     }
 
     /* restore history direction */
-    if (query_dlg->y < widget->y)
+    if (WIDGET (query_dlg)->y < widget->y)
         z = g_list_reverse (z);
 
     destroy_dlg (query_dlg);

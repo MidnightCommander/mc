@@ -359,6 +359,8 @@ dlg_handle_key (Dlg_head * h, int d_key)
 static int
 dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 {
+    Widget *wh = WIDGET (h);
+
     GList *item;
     GList *starting_widget = h->current;
     int x = event->x;
@@ -366,18 +368,18 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 
     /* close the dialog by mouse click out of dialog area */
     if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0) /* left click */
-        && !((x > h->x) && (x <= h->x + h->cols) && (y > h->y) && (y <= h->y + h->lines)))
+        && !((x > wh->x) && (x <= wh->x + wh->cols) && (y > wh->y) && (y <= wh->y + wh->lines)))
     {
         h->ret_value = B_CANCEL;
         dlg_stop (h);
         return MOU_NORMAL;
     }
 
-    if (h->mouse != NULL)
+    if (wh->mouse != NULL)
     {
         int mou;
 
-        mou = h->mouse (event, h);
+        mou = wh->mouse (event, wh);
         if (mou != MOU_UNHANDLED)
             return mou;
     }
@@ -590,9 +592,11 @@ dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
 
 /** draw box in window */
 void
-draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single)
+draw_box (const Dlg_head * h, int y, int x, int ys, int xs, gboolean single)
 {
-    tty_draw_box (h->y + y, h->x + x, ys, xs, single);
+    const Widget *wh = WIDGET (h);
+
+    tty_draw_box (wh->y + y, wh->x + x, ys, xs, single);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -601,6 +605,8 @@ draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single)
 void
 common_dialog_repaint (Dlg_head * h)
 {
+    Widget *wh = WIDGET (h);
+
     int space;
 
     if (h->state != DLG_ACTIVE)
@@ -610,12 +616,12 @@ common_dialog_repaint (Dlg_head * h)
 
     tty_setcolor (h->color[DLG_COLOR_NORMAL]);
     dlg_erase (h);
-    draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space, FALSE);
+    draw_box (h, space, space, wh->lines - 2 * space, wh->cols - 2 * space, FALSE);
 
     if (h->title != NULL)
     {
         tty_setcolor (h->color[DLG_COLOR_TITLE]);
-        dlg_move (h, space, (h->cols - str_term_width1 (h->title)) / 2);
+        widget_move (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
         tty_print_string (h->title);
     }
 }
@@ -626,20 +632,22 @@ common_dialog_repaint (Dlg_head * h)
 void
 dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
 {
+    Widget *wh = WIDGET (h);
+
     /* save old positions, will be used to reposition childs */
     int ox, oy, oc, ol;
     int shift_x, shift_y, scale_x, scale_y;
 
     /* save old positions, will be used to reposition childs */
-    ox = h->x;
-    oy = h->y;
-    oc = h->cols;
-    ol = h->lines;
+    ox = wh->x;
+    oy = wh->y;
+    oc = wh->cols;
+    ol = wh->lines;
 
-    h->x = x1;
-    h->y = y1;
-    h->lines = y2 - y1;
-    h->cols = x2 - x1;
+    wh->x = x1;
+    wh->y = y1;
+    wh->lines = y2 - y1;
+    wh->cols = x2 - x1;
 
     /* dialog is empty */
     if (h->widgets == NULL)
@@ -649,10 +657,10 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
         h->current = h->widgets;
 
     /* values by which controls should be moved */
-    shift_x = h->x - ox;
-    shift_y = h->y - oy;
-    scale_x = h->cols - oc;
-    scale_y = h->lines - ol;
+    shift_x = wh->x - ox;
+    shift_y = wh->y - oy;
+    scale_x = wh->cols - oc;
+    scale_y = wh->lines - ol;
 
     if ((shift_x != 0) || (shift_y != 0) || (scale_x != 0) || (scale_y != 0))
     {
@@ -706,8 +714,8 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
 void
 dlg_set_size (Dlg_head * h, int lines, int cols)
 {
-    int x = h->x;
-    int y = h->y;
+    int x = WIDGET (h)->x;
+    int y = WIDGET (h)->y;
 
     if (h->flags & DLG_CENTER)
     {
@@ -751,7 +759,7 @@ default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
            according to flags (if any of flags require automatic
            resizing, like DLG_CENTER, end after that reposition
            controls in dialog according to flags of widget) */
-        dlg_set_size (h, h->lines, h->cols);
+        dlg_set_size (h, WIDGET (h)->lines, WIDGET (h)->cols);
         return MSG_HANDLED;
 
     default:
@@ -769,23 +777,24 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
             const char *help_ctx, const char *title, dlg_flags_t flags)
 {
     Dlg_head *new_d;
+    Widget *w;
 
     new_d = g_new0 (Dlg_head, 1);
+    w = WIDGET (new_d);
+    init_widget (w, y1, x1, lines, cols, NULL, mouse_handler);
+    widget_want_cursor (*w, FALSE);
+
     new_d->state = DLG_CONSTRUCT;
     new_d->modal = modal;
     if (colors != NULL)
         memmove (new_d->color, colors, sizeof (dlg_colors_t));
     new_d->help_ctx = help_ctx;
     new_d->callback = (callback != NULL) ? callback : default_dlg_callback;
-    new_d->mouse = mouse_handler;
-    new_d->x = x1;
-    new_d->y = y1;
     new_d->flags = flags;
     new_d->data = NULL;
 
     dlg_set_size (new_d, lines, cols);
-    new_d->fullscreen = (new_d->x == 0 && new_d->y == 0
-                         && new_d->cols == COLS && new_d->lines == LINES);
+    new_d->fullscreen = (w->x == 0 && w->y == 0 && w->cols == COLS && w->lines == LINES);
 
     new_d->mouse_status = MOU_UNHANDLED;
 
@@ -830,7 +839,11 @@ void
 dlg_erase (Dlg_head * h)
 {
     if ((h != NULL) && (h->state == DLG_ACTIVE))
-        tty_fill_region (h->y, h->x, h->lines, h->cols, ' ');
+    {
+        Widget *wh = WIDGET (h);
+
+        tty_fill_region (wh->y, wh->x, wh->lines, wh->cols, ' ');
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -858,8 +871,8 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags, const v
     if (w == NULL)
         abort ();
 
-    widget->x += h->x;
-    widget->y += h->y;
+    widget->x += WIDGET (h)->x;
+    widget->y += WIDGET (h)->y;
     widget->owner = h;
     widget->pos_flags = pos_flags;
     widget->id = h->widget_id++;

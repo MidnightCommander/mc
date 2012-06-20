@@ -93,7 +93,8 @@ do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
     Widget *w = (Widget *) view;
 
     /* rest of the upper frame - call menu */
-    if (mcview_is_in_panel (view) && (event->type & GPM_DOWN) != 0 && event->y == w->owner->y + 1)
+    if (mcview_is_in_panel (view) && (event->type & GPM_DOWN) != 0 &&
+        event->y == WIDGET (w->owner)->y + 1)
     {
         *result = MOU_UNHANDLED;
         return FALSE;           /* don't draw viewer over menu */

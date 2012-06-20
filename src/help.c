@@ -422,7 +422,7 @@ help_print_word (Dlg_head * h, GString * word, int *col, int *line, gboolean add
             g_string_set_size (word, 0);
         else
         {
-            dlg_move (h, *line + 2, *col + 2);
+            widget_move (h, *line + 2, *col + 2);
             tty_print_string (word->str);
             g_string_set_size (word, 0);
             *col += w;
@@ -514,7 +514,7 @@ help_show (Dlg_head * h, const char *paint_start)
                 acs = FALSE;
                 break;
             case CHAR_VERSION:
-                dlg_move (h, line + 2, col + 2);
+                widget_move (h, line + 2, col + 2);
                 tty_print_string (VERSION);
                 col += str_term_width1 (VERSION);
                 break;
@@ -555,7 +555,7 @@ help_show (Dlg_head * h, const char *paint_start)
                         g_string_append (word, buff);
                     else if (col < HELP_WINDOW_WIDTH)
                     {
-                        dlg_move (h, line + 2, col + 2);
+                        widget_move (h, line + 2, col + 2);
 
                         if ((c == ' ') || (c == '.'))
                             tty_print_char (c);
@@ -563,7 +563,7 @@ help_show (Dlg_head * h, const char *paint_start)
 #ifndef HAVE_SLANG
                             tty_print_char (acs_map[c]);
 #else
-                            SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
+                            SLsmg_draw_object (WIDGET (h)->y + line + 2, WIDGET (h)->x + col + 2, c);
 #endif
                         col++;
                     }
@@ -595,7 +595,7 @@ help_show (Dlg_head * h, const char *paint_start)
 
     /* Position the cursor over a nice link */
     if (active_col)
-        dlg_move (h, active_line, active_col);
+        widget_move (h, active_line, active_col);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1129,8 +1129,8 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     }
 
     help_bar = buttonbar_new (TRUE);
-    help_bar->widget.y -= whelp->y;
-    help_bar->widget.x -= whelp->x;
+    help_bar->widget.y -= WIDGET (whelp)->y;
+    help_bar->widget.x -= WIDGET (whelp)->x;
 
     md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
 

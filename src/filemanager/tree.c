@@ -640,7 +640,7 @@ tree_event (Gpm_Event * event, void *data)
         return MOU_UNHANDLED;
 
     /* rest of the upper frame - call menu */
-    if (tree->is_panel && (event->type & GPM_DOWN) != 0 && event->y == w->owner->y + 1)
+    if (tree->is_panel && (event->type & GPM_DOWN) != 0 && event->y == WIDGET (w->owner)->y + 1)
         return MOU_UNHANDLED;
 
     local = mouse_get_local (event, w);

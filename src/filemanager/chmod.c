@@ -185,9 +185,9 @@ chmod_toggle_select (Dlg_head * h, int Id)
     tty_setcolor (COLOR_NORMAL);
     check_perm[Id].selected = !check_perm[Id].selected;
 
-    dlg_move (h, PY + check_perm_num - Id, PX + 1);
+    widget_move (h, PY + check_perm_num - Id, PX + 1);
     tty_print_char (check_perm[Id].selected ? '*' : ' ');
-    dlg_move (h, PY + check_perm_num - Id, PX + 3);
+    widget_move (h, PY + check_perm_num - Id, PX + 3);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -311,13 +311,13 @@ init_chmod (const char *fname, const struct stat *sf_stat)
     for (i = 0; i < chmod_but_num; i++)
     {
         add_widget (ch_dlg,
-                    button_new (lines - chmod_but[i].y, ch_dlg->cols / 2 + 1,
+                    button_new (lines - chmod_but[i].y, WIDGET (ch_dlg)->cols / 2 + 1,
                                 chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0));
 
         i++;
 
         add_widget (ch_dlg,
-                    button_new (lines - chmod_but[i].y, ch_dlg->cols / 2 - chmod_but[i].len,
+                    button_new (lines - chmod_but[i].y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len,
                                 chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0));
 
         if (single_set)

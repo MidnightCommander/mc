@@ -67,16 +67,16 @@ groupbox_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_DRAW:
         {
+            Widget *wo = WIDGET (w->owner);
+
             gboolean disabled = (w->options & W_DISABLED) != 0;
             tty_setcolor (disabled ? DISABLED_COLOR : COLOR_NORMAL);
-            draw_box (g->widget.owner, g->widget.y - g->widget.owner->y,
-                      g->widget.x - g->widget.owner->x, g->widget.lines, g->widget.cols, TRUE);
+            draw_box (w->owner, w->y - wo->y, w->x - wo->x, w->lines, w->cols, TRUE);
 
             if (g->title != NULL)
             {
                 tty_setcolor (disabled ? DISABLED_COLOR : COLOR_TITLE);
-                dlg_move (g->widget.owner, g->widget.y - g->widget.owner->y,
-                          g->widget.x - g->widget.owner->x + 1);
+                widget_move (w->owner, w->y - wo->y, w->x - wo->x + 1);
                 tty_print_string (g->title);
             }
             return MSG_HANDLED;

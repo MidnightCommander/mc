@@ -1604,10 +1604,10 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 static int
 midnight_event (Gpm_Event * event, void *data)
 {
-    Dlg_head *h = (Dlg_head *) data;
+    Widget *wh = WIDGET (data);
     int ret = MOU_UNHANDLED;
 
-    if (event->y == h->y + 1)
+    if (event->y == wh->y + 1)
     {
         /* menubar */
         if (menubar_visible || the_menubar->is_active)

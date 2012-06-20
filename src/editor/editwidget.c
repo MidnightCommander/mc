@@ -208,16 +208,16 @@ edit_help (void)
 static void
 edit_dialog_resize_cb (void *data, void *user_data)
 {
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     (void) user_data;
 
     if (edit_widget_is_editor (w) && ((WEdit *) w)->fullscreen)
     {
-        Dlg_head *h = w->owner;
+        Widget *wh = WIDGET (w->owner);
 
-        w->lines = h->lines - 2;
-        w->cols = h->cols;
+        w->lines = wh->lines - 2;
+        w->cols = wh->cols;
     }
 }
 
@@ -248,25 +248,25 @@ edit_restore_size (WEdit * edit)
 static void
 edit_window_move (WEdit * edit, unsigned long command)
 {
-    Widget *w = (Widget *) edit;
-    Dlg_head *h = w->owner;
+    Widget *w = WIDGET (edit);
+    Widget *wh = WIDGET (w->owner);
 
     switch (command)
     {
     case CK_Up:
-        if (w->y > h->y + 1)    /* menubar */
+        if (w->y > wh->y + 1)    /* menubar */
             w->y--;
         break;
     case CK_Down:
-        if (w->y < h->y + h->lines - 2) /* buttonbar */
+        if (w->y < wh->y + wh->lines - 2) /* buttonbar */
             w->y++;
         break;
     case CK_Left:
-        if (w->x + w->cols > h->x)
+        if (w->x + w->cols > wh->x)
             w->x--;
         break;
     case CK_Right:
-        if (w->x < h->x + h->cols)
+        if (w->x < wh->x + wh->cols)
             w->x++;
         break;
     default:
@@ -274,7 +274,7 @@ edit_window_move (WEdit * edit, unsigned long command)
     }
 
     edit->force |= REDRAW_PAGE;
-    dlg_redraw (h);
+    dlg_redraw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -288,8 +288,8 @@ edit_window_move (WEdit * edit, unsigned long command)
 static void
 edit_window_resize (WEdit * edit, unsigned long command)
 {
-    Widget *w = (Widget *) edit;
-    Dlg_head *h = w->owner;
+    Widget *w = WIDGET (edit);
+    Widget *wh = WIDGET (w->owner);
 
     switch (command)
     {
@@ -298,7 +298,7 @@ edit_window_resize (WEdit * edit, unsigned long command)
             w->lines--;
         break;
     case CK_Down:
-        if (w->y + w->lines < h->y + h->lines - 1)      /* buttonbar */
+        if (w->y + w->lines < wh->y + wh->lines - 1)      /* buttonbar */
             w->lines++;
         break;
     case CK_Left:
@@ -306,7 +306,7 @@ edit_window_resize (WEdit * edit, unsigned long command)
             w->cols--;
         break;
     case CK_Right:
-        if (w->x + w->cols < h->x + h->cols)
+        if (w->x + w->cols < wh->x + wh->cols)
             w->cols++;
         break;
     default:
@@ -314,7 +314,7 @@ edit_window_resize (WEdit * edit, unsigned long command)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-    dlg_redraw (h);
+    dlg_redraw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -628,7 +628,7 @@ edit_event (Gpm_Event * event, void *data)
             }
             else if (!edit->fullscreen)
             {
-                Dlg_head *h = w->owner;
+                Widget *h = WIDGET (w->owner);
 
                 if (edit->drag_state == MCEDIT_DRAG_MOVE)
                 {
@@ -655,7 +655,7 @@ edit_event (Gpm_Event * event, void *data)
                     edit->force |= REDRAW_COMPLETELY;
                 }
 
-                dlg_redraw (h);
+                dlg_redraw (w->owner);
             }
         }
 
@@ -676,11 +676,12 @@ edit_dialog_event (Gpm_Event * event, void *data)
 {
     Dlg_head *h = (Dlg_head *) data;
     Widget *w;
+    Widget *wh = WIDGET (h);
     int ret = MOU_UNHANDLED;
 
-    w = (Widget *) find_menubar (h);
+    w = WIDGET (find_menubar (h));
 
-    if (event->y == h->y + 1 && (event->type & GPM_DOWN) != 0 && !((WMenuBar *) w)->is_active)
+    if (event->y == wh->y + 1 && (event->type & GPM_DOWN) != 0 && !((WMenuBar *) w)->is_active)
     {
         /* menubar */
 
@@ -694,7 +695,7 @@ edit_dialog_event (Gpm_Event * event, void *data)
                 top = l;
 
         /* Handle fullscreen/close buttons in the top line */
-        x = h->x + h->cols + 1 - 6;
+        x = wh->x + wh->cols + 1 - 6;
 
         if (top != NULL && event->x >= x)
         {
@@ -730,12 +731,13 @@ edit_dialog_event (Gpm_Event * event, void *data)
 static cb_ret_t
 edit_dialog_command_execute (Dlg_head * h, unsigned long command)
 {
+    Widget *wh = WIDGET (h);
     gboolean ret = MSG_HANDLED;
 
     switch (command)
     {
     case CK_EditNew:
-        edit_add_window (h, h->y + 1, h->x, h->lines - 2, h->cols, NULL, 0);
+        edit_add_window (h, wh->y + 1, wh->x, wh->lines - 2, wh->cols, NULL, 0);
         break;
     case CK_EditFile:
         edit_load_cmd (h);
@@ -887,6 +889,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 {
     WMenuBar *menubar;
     WButtonBar *buttonbar;
+    Widget *wh = WIDGET (h);
 
     switch (msg)
     {
@@ -904,10 +907,10 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         menubar = find_menubar (h);
         buttonbar = find_buttonbar (h);
         /* dlg_set_size() is surplus for this case */
-        h->lines = LINES;
-        h->cols = COLS;
-        widget_set_size (&buttonbar->widget, h->lines - 1, h->x, 1, h->cols);
-        widget_set_size (&menubar->widget, h->y, h->x, 1, h->cols);
+        wh->lines = LINES;
+        wh->cols = COLS;
+        widget_set_size (&buttonbar->widget, wh->lines - 1, wh->x, 1, wh->cols);
+        widget_set_size (&menubar->widget, wh->y, wh->x, 1, wh->cols);
         menubar_arrange (menubar);
         g_list_foreach (h->widgets, (GFunc) edit_dialog_resize_cb, NULL);
         return MSG_HANDLED;
@@ -1117,11 +1120,12 @@ edit_files (const GList * files)
 
     for (file = files; file != NULL; file = g_list_next (file))
     {
+        Widget *w = WIDGET (edit_dlg);
         mcedit_arg_t *f = (mcedit_arg_t *) file->data;
         gboolean f_ok;
 
-        f_ok = edit_add_window (edit_dlg, edit_dlg->y + 1, edit_dlg->x,
-                                edit_dlg->lines - 2, edit_dlg->cols, f->file_vpath, f->line_number);
+        f_ok = edit_add_window (edit_dlg, w->y + 1, w->x, w->lines - 2, w->cols, f->file_vpath,
+                                f->line_number);
         /* at least one file has been opened succefully */
         ok = ok || f_ok;
     }
@@ -1348,8 +1352,6 @@ edit_handle_move_resize (WEdit * edit, unsigned long command)
 void
 edit_toggle_fullscreen (WEdit * edit)
 {
-    Dlg_head *h = ((Widget *) edit)->owner;
-
     edit->fullscreen = !edit->fullscreen;
     edit->force = REDRAW_COMPLETELY;
 
@@ -1357,8 +1359,11 @@ edit_toggle_fullscreen (WEdit * edit)
         edit_restore_size (edit);
     else
     {
+        Widget *w = WIDGET (edit);
+        Widget *h = WIDGET (w->owner);
+
         edit_save_size (edit);
-        widget_set_size ((Widget *) edit, h->y + 1, h->x, h->lines - 2, h->cols);
+        widget_set_size (w, h->y + 1, h->x, h->lines - 2, h->cols);
         edit->force |= REDRAW_PAGE;
         edit_update_screen (edit);
     }

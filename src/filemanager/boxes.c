@@ -898,6 +898,7 @@ tree_box (const char *current_dir)
 {
     WTree *mytree;
     Dlg_head *dlg;
+    Widget *wd;
     char *val = NULL;
     WButtonBar *bar;
 
@@ -907,10 +908,11 @@ tree_box (const char *current_dir)
     dlg = create_dlg (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors,
                       tree_callback, NULL, "[Directory Tree]",
                       _("Directory tree"), DLG_CENTER | DLG_REVERSE);
+    wd = WIDGET (dlg);
 
-    mytree = tree_new (2, 2, dlg->lines - 6, dlg->cols - 5, FALSE);
+    mytree = tree_new (2, 2, wd->lines - 6, wd->cols - 5, FALSE);
     add_widget (dlg, mytree);
-    add_widget (dlg, hline_new (dlg->lines - 4, 1, -1));
+    add_widget (dlg, hline_new (wd->lines - 4, 1, -1));
     bar = buttonbar_new (TRUE);
     add_widget (dlg, bar);
     /* restore ButtonBar coordinates after add_widget() */

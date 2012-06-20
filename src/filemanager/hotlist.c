@@ -248,14 +248,16 @@ static void add_dotdot_to_list (void);
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-hotlist_refresh (Dlg_head * dlg)
+hotlist_refresh (Dlg_head * h)
 {
+    Widget *wh = WIDGET (h);
+
     /* TODO: use groupboxes here */
-    common_dialog_repaint (dlg);
+    common_dialog_repaint (h);
     tty_setcolor (COLOR_NORMAL);
-    draw_box (dlg, 2, 5, dlg->lines - (hotlist_state.moving ? 6 : 10), dlg->cols - (UX * 2), TRUE);
+    draw_box (h, 2, 5, wh->lines - (hotlist_state.moving ? 6 : 10), wh->cols - (UX * 2), TRUE);
     if (!hotlist_state.moving)
-        draw_box (dlg, dlg->lines - 8, 5, 3, dlg->cols - (UX * 2), TRUE);
+        draw_box (h, wh->lines - 8, 5, 3, wh->cols - (UX * 2), TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -267,7 +269,8 @@ update_path_name (void)
     const char *text = "";
     char *p;
     WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
-    Dlg_head *dlg = list->widget.owner;
+    Dlg_head *owner = WIDGET (list)->owner;
+    Widget *wo = WIDGET (owner);
 
     if (list->count != 0)
     {
@@ -288,16 +291,16 @@ update_path_name (void)
         }
     }
     if (!hotlist_state.moving)
-        label_set_text (pname, str_trunc (text, dlg->cols - (UX * 2 + 4)));
+        label_set_text (pname, str_trunc (text, wo->cols - (UX * 2 + 4)));
 
     p = g_strconcat (" ", current_group->label, " ", (char *) NULL);
     if (!hotlist_state.moving)
-        label_set_text (pname_group, str_trunc (p, dlg->cols - (UX * 2 + 4)));
+        label_set_text (pname_group, str_trunc (p, wo->cols - (UX * 2 + 4)));
     else
-        label_set_text (movelist_group, str_trunc (p, dlg->cols - (UX * 2 + 4)));
+        label_set_text (movelist_group, str_trunc (p, wo->cols - (UX * 2 + 4)));
     g_free (p);
 
-    dlg_redraw (dlg);
+    dlg_redraw (owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -863,8 +866,8 @@ init_movelist (int list_type, struct hotlist *item)
     add_widget (movelist_dlg, movelist_group);
     /* get new listbox */
     l_movelist =
-        listbox_new (UY + 1, UX + 1, movelist_dlg->lines - 8,
-                     movelist_dlg->cols - 2 * UX - 2, FALSE, l_call);
+        listbox_new (UY + 1, UX + 1, WIDGET (movelist_dlg)->lines - 8,
+                     WIDGET (movelist_dlg)->cols - 2 * UX - 2, FALSE, l_call);
 
     fill_listbox ();
 

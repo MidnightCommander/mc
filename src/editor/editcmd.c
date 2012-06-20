@@ -514,7 +514,9 @@ edit_save_cmd (WEdit * edit)
 static inline gboolean
 edit_load_file_from_filename (Dlg_head * h, const vfs_path_t * vpath)
 {
-    return edit_add_window (h, h->y + 1, h->x, h->lines - 2, h->cols, vpath, 0);
+    Widget *w = WIDGET (h);
+
+    return edit_add_window (h, w->y + 1, w->x, w->lines - 2, w->cols, vpath, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */

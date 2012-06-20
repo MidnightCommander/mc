@@ -25,8 +25,6 @@
 #define B_HELP          3
 #define B_USER          100
 
-#define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + (_y), ((Dlg_head *)(h))->x + (_x))
-
 /*** enums ***************************************************************************************/
 
 /* Dialog messages */
@@ -101,6 +99,8 @@ typedef cb_ret_t (*menu_exec_fn) (int command);
 
 struct Dlg_head
 {
+    Widget widget;
+
     /* Set by the user */
     gboolean modal;             /* type of dialog: modal or not */
     dlg_flags_t flags;          /* User flags */
@@ -110,10 +110,6 @@ struct Dlg_head
 
     /* Set and received by the user */
     int ret_value;              /* Result of run_dlg() */
-
-    /* Geometry */
-    int x, y;                   /* Position relative to screen origin */
-    int cols, lines;            /* Width and height of the window */
 
     /* Internal flags */
     dlg_state_t state;
@@ -129,7 +125,6 @@ struct Dlg_head
     char *event_group;          /* Name of event group for this dialog */
 
     dlg_cb_fn callback;
-    mouse_h mouse;
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
     dlg_title_str get_title;    /* useless for modal dialogs */
 };
@@ -153,7 +148,7 @@ extern const global_keymap_t *dialog_map;
 /*** declarations of public functions ************************************************************/
 
 /* draw box in window */
-void draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single);
+void draw_box (const Dlg_head * h, int y, int x, int ys, int xs, gboolean single);
 
 /* Creates a dialog head  */
 Dlg_head *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,

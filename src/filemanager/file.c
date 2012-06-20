@@ -2420,7 +2420,7 @@ compute_dir_size_create_ui (void)
     add_widget (ui->dlg, ui->dirname);
 
     add_widget (ui->dlg,
-                button_new (5, (ui->dlg->cols - strlen (b_name)) / 2,
+                button_new (5, (WIDGET (ui->dlg)->cols - strlen (b_name)) / 2,
                             FILE_ABORT, NORMAL_BUTTON, b_name, NULL));
 
     /* We will manage the dialog without any help,
@@ -2461,7 +2461,7 @@ compute_dir_size_update_ui (const void *ui, const vfs_path_t * dirname_vpath)
         return FILE_CONT;
 
     dirname = vfs_path_to_str (dirname_vpath);
-    label_set_text (this->dirname, str_trunc (dirname, this->dlg->cols - 6));
+    label_set_text (this->dirname, str_trunc (dirname, WIDGET (this->dlg)->cols - 6));
     g_free (dirname);
 
     event.x = -1;               /* Don't show the GPM cursor */
