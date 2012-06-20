@@ -2,8 +2,11 @@
    Pulldown menu code
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2009, 2011
+   2007, 2009, 2011, 2012
    The Free Software Foundation, Inc.
+
+   Written by:
+   Andrew Borodin <aborodin@vmail.ru>, 2012
 
    This file is part of the Midnight Commander.
 
@@ -622,6 +625,11 @@ menubar_event (Gpm_Event * event, void *data)
     if (!menubar->is_active && ((event->buttons & (GPM_B_MIDDLE | GPM_B_UP | GPM_B_DOWN)) != 0))
         return MOU_NORMAL;
 
+    local = mouse_get_local (event, w);
+
+    if (local.y == 1 && (local.type & GPM_UP) != 0)
+        return MOU_NORMAL;
+
     if (!menubar->is_dropped)
     {
         menubar->previous_widget = dlg_get_current_widget_id (w->owner);
@@ -630,14 +638,9 @@ menubar_event (Gpm_Event * event, void *data)
         was_active = FALSE;
     }
 
-    local = mouse_get_local (event, w);
-
     /* Mouse operations on the menubar */
     if (local.y == 1 || !was_active)
     {
-        if ((local.type & GPM_UP) != 0)
-            return MOU_NORMAL;
-
         /* wheel events on menubar */
         if ((local.buttons & GPM_B_UP) != 0)
             menubar_left (menubar);

@@ -42,11 +42,11 @@ struct mc_fhl_struct;
 
 /*
  * MC_RUN_FULL: dir for left panel
- * MC_RUN_EDITOR: file to edit
+ * MC_RUN_EDITOR: list of files to edit
  * MC_RUN_VIEWER: file to view
  * MC_RUN_DIFFVIEWER: first file to compare
  */
-extern char *mc_run_param0;
+extern void *mc_run_param0;
 /*
  * MC_RUN_FULL: dir for right panel
  * MC_RUN_EDITOR: unused

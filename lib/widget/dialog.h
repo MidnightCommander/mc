@@ -25,7 +25,7 @@
 #define B_HELP          3
 #define B_USER          100
 
-#define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + _y, ((Dlg_head *)(h))->x + _x)
+#define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + (_y), ((Dlg_head *)(h))->x + (_x))
 
 /*** enums ***************************************************************************************/
 
