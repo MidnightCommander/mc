@@ -12,6 +12,7 @@ m4_include([m4.include/vfs/socket.m4])
 m4_include([m4.include/vfs/mc-vfs-extfs.m4])
 m4_include([m4.include/vfs/mc-vfs-sfs.m4])
 m4_include([m4.include/vfs/mc-vfs-ftp.m4])
+m4_include([m4.include/vfs/mc-vfs-sftp.m4])
 m4_include([m4.include/vfs/mc-vfs-fish.m4])
 m4_include([m4.include/vfs/mc-vfs-undelfs.m4])
 m4_include([m4.include/vfs/mc-vfs-tarfs.m4])
@@ -74,6 +75,7 @@ AC_DEFUN([AC_MC_VFS_CHECKS],
     AC_MC_VFS_EXTFS
     AC_MC_VFS_UNDELFS
     AC_MC_VFS_FTP
+    AC_MC_VFS_SFTP
     AC_MC_VFS_FISH
     AC_MC_VFS_SMB
 
