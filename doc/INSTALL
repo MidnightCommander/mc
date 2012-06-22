@@ -172,7 +172,7 @@ VFS options:
      Support for FISH vfs
 
 `--enable-vfs-sftp'
-     (off by default)
+     (auto)
      Support for SFTP vfs
 
 `--enable-vfs-extfs'
