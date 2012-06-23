@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-21 20:31+0200\n"
-"PO-Revision-Date: 2012-05-21 20:33+0200\n"
+"POT-Creation-Date: 2012-06-23 14:11+0200\n"
+"PO-Revision-Date: 2012-06-23 14:11+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.net/projects/p/mc/language/"
 "it/), tp@linux.it\n"
@@ -576,8 +576,8 @@ msgstr "Imposta livello di debug"
 msgid "Launches the file viewer on a file"
 msgstr "Esegue il visualizzatore per un file"
 
-msgid "Edits one file"
-msgstr "Modifica un file"
+msgid "Edit files"
+msgstr "Modifica i file"
 
 msgid "Forces xterm features"
 msgstr "Forza il comportamento xterm"
@@ -638,14 +638,15 @@ msgid ""
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 "--colors PCHIAVE1={PRIMOP},{SFONDO},{ATTRIB}:PCHIAVE2=...\n"
 "\n"
-"{PRIMOP}, {SFONDO} e {ATTR} si possono omettere, nel caso usa il "
-"predefinito\n"
+"{PRIMOP}, {SFONDO} e {ATTR} si possono omettere, in tal caso mc usa\n"
+"valore il predefinito\n"
 "\n"
 " Parole chiave:\n"
 "   Globali:      errors, disabled, reverse, gauge, header\n"
@@ -657,7 +658,8 @@ msgstr ""
 "   Menu:         menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Menu scomp.:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
 "   Visualiz.:    viewbold, viewunderline, viewselected\n"
 "   Aiuto:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
@@ -906,20 +908,6 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Ricarica la sintassi corrente >"
 
-msgid "About"
-msgstr "Informazioni"
-
-msgid ""
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr ""
-"Copyright (C) 1996-2012 the Free Software Foundation\n"
-"\n"
-"            Un semplice editor di testo\n"
-"         scritto per il Midnight Commander"
-
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr "Impossibile aprire %s in lettura"
@@ -993,27 +981,6 @@ msgstr "Inserire nome file:"
 msgid "Save As"
 msgstr "Salva come"
 
-msgid "Syntax file edit"
-msgstr "Modifica il file sintassi"
-
-msgid "Which syntax file you want to edit?"
-msgstr "Quale file della sintassi vuoi modificare?"
-
-msgid "&User"
-msgstr "&Utente"
-
-msgid "&System Wide"
-msgstr "di &Sistema"
-
-msgid "Menu edit"
-msgstr "Modifica menu"
-
-msgid "Which menu file do you want to edit?"
-msgstr "Quale file menu vuoi modificare?"
-
-msgid "&Local"
-msgstr "&Locale"
-
 msgid "Block is large, you may not be able to undo this action"
 msgstr "Il blocco è grande, potresti non riuscire ad annullare l'azione."
 
@@ -1078,15 +1045,29 @@ msgstr "Salva file"
 msgid "&Save"
 msgstr "&Salva"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes"
-msgstr ""
-"Il testo corrente è stato modificato senza salvare.\n"
-"Continuando si perdono tutte le modifiche."
-
 msgid "Load"
 msgstr "Carica"
+
+msgid "Syntax file edit"
+msgstr "Modifica il file sintassi"
+
+msgid "Which syntax file you want to edit?"
+msgstr "Quale file della sintassi vuoi modificare?"
+
+msgid "&User"
+msgstr "&Utente"
+
+msgid "&System wide"
+msgstr "Di &sistema"
+
+msgid "Menu edit"
+msgstr "Modifica menu"
+
+msgid "Which menu file do you want to edit?"
+msgstr "Quale file menu vuoi modificare?"
+
+msgid "&Local"
+msgstr "&Locale"
 
 msgid "Replace"
 msgstr "Sostituisci"
@@ -1095,8 +1076,27 @@ msgstr "Sostituisci"
 msgid "%ld replacements made"
 msgstr "Eseguite %ld sostituzioni"
 
-msgid "&Cancel quit"
-msgstr "Annulla l'us&cita"
+msgid "[NoName]"
+msgstr "[SenzaNome]"
+
+#, c-format
+msgid ""
+"File %s was modified.\n"
+"Save before close?"
+msgstr ""
+"Il file %s è stato modificato.\n"
+"Salvarlo prima di uscire?"
+
+msgid "Close file"
+msgstr "Chiudi il file"
+
+#, c-format
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file %s?"
+msgstr ""
+"Midnight Commander si sta chiudendo.\n"
+"Salvare il file %s modificato?"
 
 msgid "This function is not implemented"
 msgstr "Questa funzione non è stata implementata"
@@ -1178,10 +1178,10 @@ msgid "Press any key:"
 msgstr "Premere un tasto:"
 
 msgid ""
-"Current text was modified without a file save\n"
+"Current text was modified without a file save.\n"
 "Continue discards these changes"
 msgstr ""
-"Il testo corrente è stato modificato senza salvare\n"
+"Il testo corrente è stato modificato senza salvare.\n"
 "Continuando si perdono tutte le modifiche."
 
 msgid "In se&lection"
@@ -1218,11 +1218,17 @@ msgstr "Sostituisci con:"
 msgid "Confirm replace"
 msgstr "Conferma sostituzione"
 
+msgid "NoName"
+msgstr "SenzaNome"
+
 msgid "&Open file..."
 msgstr "&Apri file..."
 
 msgid "&New"
 msgstr "&Nuovo"
+
+msgid "&Close"
+msgstr "&Chiudi"
 
 msgid "Save &as..."
 msgstr "Sal&va come..."
@@ -1368,6 +1374,24 @@ msgstr "&Incolla l'uscita di..."
 msgid "&External formatter"
 msgstr "Formattatore &esterno"
 
+msgid "&Move"
+msgstr "&Sposta"
+
+msgid "&Resize"
+msgstr "&Ridimensiona"
+
+msgid "&Toggle fullscreen"
+msgstr "Commu&ta a pieno schermo"
+
+msgid "&Next"
+msgstr "S&uccessiva"
+
+msgid "&Previous"
+msgstr "&Precedente"
+
+msgid "&List..."
+msgstr "E&lenco..."
+
 msgid "&General..."
 msgstr "&Generale...  "
 
@@ -1375,7 +1399,7 @@ msgid "Save &mode..."
 msgstr "&Modalità salvataggio..."
 
 msgid "Learn &keys..."
-msgstr "&Impara tasti..."
+msgstr "Impara &tasti..."
 
 msgid "Syntax &highlighting..."
 msgstr "Sintassi &evidenziata..."
@@ -1384,7 +1408,7 @@ msgid "S&yntax file"
 msgstr "File s&intassi"
 
 msgid "&Menu file"
-msgstr "File &menu"
+msgstr "File men&u"
 
 msgid "&Save setup"
 msgstr "&Salva configurazione"
@@ -1403,6 +1427,9 @@ msgstr "&Comandi"
 
 msgid "For&mat"
 msgstr "For&mato"
+
+msgid "&Window"
+msgstr "F&inestra"
 
 msgid "&Options"
 msgstr "&Opzioni"
@@ -1463,6 +1490,23 @@ msgstr "Modalità a capo"
 
 msgid "Editor options"
 msgstr "Opzioni editor"
+
+msgid "About"
+msgstr "Informazioni"
+
+msgid ""
+"Copyright (C) 1996-2012 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+"Copyright (C) 1996-2012 the Free Software Foundation\n"
+"\n"
+"            Un semplice editor di testo\n"
+"         scritto per il Midnight Commander"
+
+msgid "Open files"
+msgstr "Apri i file..."
 
 msgid "Edit: "
 msgstr "Modifica:"
@@ -1894,6 +1938,9 @@ msgstr "Modifica file delle estensioni"
 msgid "Which extension file you want to edit?"
 msgstr "Quale file delle estensioni vuoi modificare?"
 
+msgid "&System Wide"
+msgstr "di &Sistema"
+
 msgid "Highlighting groups file edit"
 msgstr "Modifica file gruppi di evidenziazione"
 
@@ -1950,6 +1997,9 @@ msgstr "\"%s\" non è un collegamento simbolico"
 
 msgid "FTP to machine"
 msgstr "Connessione FTP"
+
+msgid "SFTP to machine"
+msgstr "Connessione SFTP"
 
 msgid "Shell link to machine"
 msgstr "Connessione shell"
@@ -2606,9 +2656,6 @@ msgstr "Cercando %s"
 msgid "Searching"
 msgstr "Cercando"
 
-msgid "&Move"
-msgstr "&Sposta"
-
 msgid "&Remove"
 msgstr "Elimina"
 
@@ -2856,6 +2903,9 @@ msgstr "Connessione FT&P..."
 
 msgid "S&hell link..."
 msgstr "Connessione S&hell..."
+
+msgid "S&FTP link..."
+msgstr "Connessione S&FTP..."
 
 msgid "SM&B link..."
 msgstr "Connessione SM&B..."
@@ -3922,6 +3972,62 @@ msgstr ""
 "%s\n"
 
 #, c-format
+msgid "sftp: an error occured while reading %s: %s"
+msgstr "sftp: si è verificato un errore durante la lettura %s: %s"
+
+msgid "sftp: Unable to get current user name."
+msgstr "sftp: impossibile ottenere il nome utente corrente."
+
+msgid "sftp: Invalid host name."
+msgstr "sftp: nome host non valido."
+
+msgid "sftp: Invalid port value."
+msgstr "sftp: porta host non valida."
+
+#, c-format
+msgid "sftp: %s"
+msgstr "sftp: %s"
+
+#, c-format
+msgid "sftp: making connection to %s"
+msgstr "sftp: connessione in corso a %s"
+
+msgid "sftp: connection interrupted by user"
+msgstr "sftp: connessione interrotta dall'utente"
+
+#, c-format
+msgid "sftp: connection to server failed: %s"
+msgstr "sftp: connessione al server fallita: %s"
+
+#, c-format
+msgid "sftp: Enter passphrase for %s "
+msgstr "sftp: inserire la password per %s "
+
+msgid "sftp: Passphrase is empty."
+msgstr "sftp: la password è vuota."
+
+#, c-format
+msgid "sftp: Enter password for %s "
+msgstr "sftp: inserire la password per %s "
+
+msgid "sftp: Password is empty."
+msgstr "sftp: la password è vuota."
+
+#, c-format
+msgid "sftp: Failure establishing SSH session: (%d)"
+msgstr "sftp: fallito il tentativo di connessione SSH: (%d)"
+
+msgid "sftp: No file handler data present for reading file"
+msgstr "sftp: nessun dato presente nel file handler per la lettura del file"
+
+#, c-format
+msgid "sftp: (Ctrl-G break) Listing... %s"
+msgstr "sftp: (Ctrl-G blocca) elencazione... %s"
+
+msgid "sftp: Listing done."
+msgstr "sftp: elencazione effettuata."
+
+#, c-format
 msgid "reconnect to %s failed"
 msgstr "riconnessione a %s fallita"
 
@@ -4115,6 +4221,9 @@ msgid ""
 msgstr ""
 "Impossibile salvare il file:\n"
 "%s"
+
+msgid "&Cancel quit"
+msgstr "Annulla l'us&cita"
 
 msgid "View: "
 msgstr "Mostra: "
