@@ -128,6 +128,37 @@ if test $ac_fsusage_space = no; then
   fi
 fi
 
+# Check for this unconditionally so we have a
+# good fallback on glibc/Linux > 2.6 < 2.6.36
+AC_MSG_CHECKING([for two-argument statfs with statfs.f_frsize member])
+AC_CACHE_VAL([fu_cv_sys_stat_statfs2_frsize],
+[AC_RUN_IFELSE([AC_LANG_SOURCE([[
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+#ifdef HAVE_SYS_MOUNT_H
+#include <sys/mount.h>
+#endif
+#ifdef HAVE_SYS_VFS_H
+#include <sys/vfs.h>
+#endif
+  int
+  main ()
+  {
+  struct statfs fsd;
+  fsd.f_frsize = 0;
+  return statfs (".", &fsd) != 0;
+  }]])],
+  [fu_cv_sys_stat_statfs2_frsize=yes],
+  [fu_cv_sys_stat_statfs2_frsize=no],
+  [fu_cv_sys_stat_statfs2_frsize=no])])
+AC_MSG_RESULT([$fu_cv_sys_stat_statfs2_frsize])
+if test $fu_cv_sys_stat_statfs2_frsize = yes; then
+    AC_DEFINE([STAT_STATFS2_FRSIZE], [1],
+[  Define if statfs takes 2 args and struct statfs has a field named f_frsize.
+   (glibc/Linux > 2.6)])
+fi
+
 if test $ac_fsusage_space = no; then
   # glibc/Linux, Mac OS X, FreeBSD < 5.0, NetBSD < 3.0, OpenBSD < 4.4.
   # (glibc/{Hurd,kFreeBSD}, FreeBSD >= 5.0, NetBSD >= 3.0,
