@@ -50,14 +50,6 @@ if test $ac_fsusage_space = no; then
   # OpenBSD >= 4.4, AIX, HP-UX, IRIX, Solaris, Cygwin, Interix, BeOS.
   AC_CACHE_CHECK([for statvfs function (SVR4)], [fu_cv_sys_stat_statvfs],
                  [AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <sys/types.h>
-#if (defined __GLIBC__ || defined __UCLIBC__) && defined __linux__
-Do not use statvfs on systems with GNU libc on Linux, because that function
-stats all preceding entries in /proc/mounts, and that makes df hang if even
-one of the corresponding file systems is hard-mounted, but not available.
-statvfs in GNU libc on Hurd, BeOS, Haiku operates differently: it only makes
-a system call.
-#endif
-
 #ifdef __osf__
 "Do not use Tru64's statvfs implementation"
 #endif
