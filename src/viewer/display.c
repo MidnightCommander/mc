@@ -59,6 +59,8 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define BUF_TRUNC_LEN 5 /* The length of the line displays the file size */
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -134,7 +136,6 @@ mcview_display_status (mcview_t * view)
     const screen_dimen width = view->status_area.width;
     const screen_dimen height = view->status_area.height;
     const char *file_label;
-    screen_dimen file_label_width;
 
     if (height < 1)
         return;
@@ -146,26 +147,25 @@ mcview_display_status (mcview_t * view)
         view->filename_vpath != NULL ?
         vfs_path_get_last_path_str (view->filename_vpath) : view->command != NULL ?
         view->command : "";
-    file_label_width = str_term_width1 (file_label) - 2;
+
     if (width > 40)
     {
-        char buffer[BUF_TINY];
+        char buffer[BUF_TRUNC_LEN + 1];
 
         widget_move (view, top, width - 32);
         if (view->hex_mode)
             tty_printf ("0x%08" PRIxMAX, (uintmax_t) view->hex_cursor);
         else
         {
-            size_trunc_len (buffer, 5, mcview_get_filesize (view), 0, panels_options.kilobyte_si);
+            size_trunc_len (buffer, BUF_TRUNC_LEN, mcview_get_filesize (view), 0,
+                            panels_options.kilobyte_si);
             tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end,
                         buffer, mcview_may_still_grow (view) ? "+" : " ",
 #ifdef HAVE_CHARSET
-                        mc_global.source_codepage >=
-                        0 ? get_codepage_id (mc_global.source_codepage) : ""
-#else
-                        ""
+                        mc_global.source_codepage >= 0 ?
+                        get_codepage_id (mc_global.source_codepage) :
 #endif
-                );
+                        "");
         }
     }
     widget_move (view, top, left);
