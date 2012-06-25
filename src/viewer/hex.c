@@ -47,7 +47,9 @@
 #include "lib/lock.h"           /* lock_file() and unlock_file() */
 #include "lib/util.h"
 #include "lib/widget.h"
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "internal.h"
 
@@ -72,6 +74,7 @@ static const char hex_char[] = "0123456789ABCDEF";
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 static int
 utf8_to_int (char *str, int *char_width, gboolean * result)
 {
@@ -114,6 +117,7 @@ utf8_to_int (char *str, int *char_width, gboolean * result)
     *char_width = width;
     return ch;
 }
+#endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -139,7 +143,9 @@ mcview_display_hex (mcview_t * view)
     int c;
     mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
+#ifdef HAVE_CHARSET
     int ch = 0;
+#endif /* HAVE_CHARSET */
 
     char hex_buff[10];          /* A temporary buffer for sprintf and mvwaddstr */
     int bytes;                  /* Number of bytes already printed on the line */
@@ -202,7 +208,7 @@ mcview_display_hex (mcview_t * view)
                     curr = corr;
                 }
             }
-#endif
+#endif /* HAVE_CHARSET */
             if (!mcview_get_byte (view, from, &c))
                 break;
 
@@ -297,7 +303,9 @@ mcview_display_hex (mcview_t * view)
             else
 #endif
             {
+#ifdef HAVE_CHARSET
                 c = convert_to_display_c (c);
+#endif
 
                 if (!is_printable (c))
                     c = '.';
@@ -312,9 +320,7 @@ mcview_display_hex (mcview_t * view)
                     tty_print_anychar (ch);
                 else
 #endif
-                {
                     tty_print_char (c);
-                }
             }
 
             /* Save the cursor position for mcview_place_cursor() */

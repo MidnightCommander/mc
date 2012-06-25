@@ -14,7 +14,6 @@ TESTS = \
 	path_cmp \
 	path_len \
 	path_manipulations \
-	path_recode \
 	path_serialize \
 	relative_cd \
 	tempdir \
@@ -23,6 +22,10 @@ TESTS = \
 	vfs_prefix_to_class \
 	vfs_split \
 	vfs_s_get_path
+
+if CHARSET
+TESTS += path_recode
+endif
 
 check_PROGRAMS = $(TESTS)
 

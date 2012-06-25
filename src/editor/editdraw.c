@@ -48,7 +48,10 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"           /* is_printable() */
+#include "lib/widget.h"
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "src/setup.h"          /* edit_tab_spacing */
 #include "src/main.h"           /* macro_index */
@@ -729,8 +732,8 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                     else if (edit->utf8)
                         c = convert_from_utf_to_current_c (c, edit->converter);
                     else
-#endif
                         c = convert_to_display_c (c);
+#endif
 
                     /* Caret notation for control characters */
                     if (c < 32)

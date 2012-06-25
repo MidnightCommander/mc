@@ -38,12 +38,16 @@ typedef struct
     int port;
     char *path;
     struct vfs_class *class;
+#ifdef HAVE_CHARSET
     char *encoding;
+#endif
     char *vfs_prefix;
 
     struct
     {
+#ifdef HAVE_CHARSET
         GIConv converter;
+#endif
         DIR *info;
     } dir;
 } vfs_path_element_t;
@@ -77,7 +81,9 @@ void vfs_path_element_free (vfs_path_element_t * element);
 
 struct vfs_class *vfs_prefix_to_class (const char *prefix);
 
+#ifdef HAVE_CHARSET
 gboolean vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element);
+#endif
 
 char *vfs_path_serialize (const vfs_path_t * vpath, GError ** error);
 vfs_path_t *vfs_path_deserialize (const char *data, GError ** error);

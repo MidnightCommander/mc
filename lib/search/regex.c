@@ -34,8 +34,6 @@
 #include "lib/search.h"
 #include "lib/strescape.h"
 
-#include "lib/charsets.h"
-
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

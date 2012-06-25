@@ -172,6 +172,8 @@ vfs_canon (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+#ifdef HAVE_CHARSET
 /** get encoding after last #enc: or NULL, if part does not contain #enc:
  *
  * @param path string
@@ -208,6 +210,7 @@ vfs_get_encoding (const char *path)
         return NULL;
     }
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**  Extract the hostname and username from the path
@@ -380,9 +383,11 @@ vfs_path_from_str_deprecated_parser (char *path, vfs_path_flag_t flags)
             local = "";
         element->path = vfs_translate_path_n (local);
 
+#ifdef HAVE_CHARSET
         element->encoding = vfs_get_encoding (local);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
+#endif
 
         url_params = strchr (op, ':');  /* skip VFS prefix */
         if (url_params != NULL)
@@ -403,9 +408,11 @@ vfs_path_from_str_deprecated_parser (char *path, vfs_path_flag_t flags)
         element->class = g_ptr_array_index (vfs__classes_list, 0);
         element->path = vfs_translate_path_n (path);
 
+#ifdef HAVE_CHARSET
         element->encoding = vfs_get_encoding (path);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
+#endif
         g_array_prepend_val (vpath->path, element);
     }
 
@@ -463,8 +470,9 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
             else
             {
                 element->path = vfs_translate_path_n (slash_pointer + 1);
+#ifdef HAVE_CHARSET
                 element->encoding = vfs_get_encoding (slash_pointer);
-
+#endif
                 *slash_pointer = '\0';
             }
             vfs_path_url_split (element, url_delimiter);
@@ -472,10 +480,14 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
         else
         {
             element->path = vfs_translate_path_n (url_delimiter);
+#ifdef HAVE_CHARSET
             element->encoding = vfs_get_encoding (url_delimiter);
+#endif
         }
+#ifdef HAVE_CHARSET
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
+#endif
         g_array_prepend_val (vpath->path, element);
 
         if ((real_vfs_prefix_start > path && *(real_vfs_prefix_start) == PATH_SEP) ||
@@ -490,9 +502,11 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
         element = g_new0 (vfs_path_element_t, 1);
         element->class = g_ptr_array_index (vfs__classes_list, 0);
         element->path = vfs_translate_path_n (path);
+#ifdef HAVE_CHARSET
         element->encoding = vfs_get_encoding (path);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
+#endif
         g_array_prepend_val (vpath->path, element);
     }
 
@@ -533,6 +547,8 @@ vfs_path_tokens_add_class_info (const vfs_path_element_t * element, GString * re
 
         g_free (url_str);
     }
+
+#ifdef HAVE_CHARSET
     if (element->encoding != NULL)
     {
         if (ret_tokens->len > 0 && ret_tokens->str[ret_tokens->len - 1] != PATH_SEP)
@@ -541,6 +557,7 @@ vfs_path_tokens_add_class_info (const vfs_path_element_t * element, GString * re
         g_string_append (ret_tokens, element->encoding);
         g_string_append (ret_tokens, PATH_SEP_STR);
     }
+#endif
 
     g_string_append (ret_tokens, element_tokens->str);
 }
@@ -647,6 +664,7 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
             g_free (url_str);
         }
 
+#ifdef HAVE_CHARSET
         if ((flags & VPF_RECODE) == 0 && vfs_path_element_need_cleanup_converter (element))
         {
             if ((flags & VPF_HIDE_CHARSET) == 0)
@@ -662,6 +680,7 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
             g_string_set_size (recode_buffer, 0);
         }
         else
+#endif
         {
             vfs_append_from_path (element->path, is_relative);
         }
@@ -847,12 +866,14 @@ vfs_path_element_clone (const vfs_path_element_t * element)
     new_element->port = element->port;
     new_element->path = g_strdup (element->path);
     new_element->class = element->class;
-    new_element->encoding = g_strdup (element->encoding);
     new_element->vfs_prefix = g_strdup (element->vfs_prefix);
+#ifdef HAVE_CHARSET
+    new_element->encoding = g_strdup (element->encoding);
     if (vfs_path_element_need_cleanup_converter (element) && new_element->encoding != NULL)
         new_element->dir.converter = str_crt_conv_from (new_element->encoding);
     else
         new_element->dir.converter = element->dir.converter;
+#endif
     new_element->dir.info = element->dir.info;
 
     return new_element;
@@ -876,13 +897,14 @@ vfs_path_element_free (vfs_path_element_t * element)
     g_free (element->password);
     g_free (element->host);
     g_free (element->path);
-    g_free (element->encoding);
     g_free (element->vfs_prefix);
 
+#ifdef HAVE_CHARSET
+    g_free (element->encoding);
+
     if (vfs_path_element_need_cleanup_converter (element))
-    {
         str_close_conv (element->dir.converter);
-    }
+#endif
 
     g_free (element);
 }
@@ -1010,12 +1032,13 @@ vfs_prefix_to_class (const char *prefix)
  *
  * @return TRUE if need cleanup converter or FALSE otherwise
  */
-
+#ifdef HAVE_CHARSET
 gboolean
 vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element)
 {
     return (element->dir.converter != str_cnv_from_term && element->dir.converter != INVALID_CONV);
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -1051,8 +1074,9 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
 
         mc_config_set_string_raw (cpath, groupname, "path", element->path);
         mc_config_set_string_raw (cpath, groupname, "class-name", element->class->name);
+#ifdef HAVE_CHARSET
         mc_config_set_string_raw (cpath, groupname, "encoding", element->encoding);
-
+#endif
         mc_config_set_string_raw (cpath, groupname, "vfs_prefix", element->vfs_prefix);
 
         mc_config_set_string_raw (cpath, groupname, "user", element->user);
@@ -1120,9 +1144,12 @@ vfs_path_deserialize (const char *data, GError ** error)
         g_free (cfg_value);
 
         element->path = mc_config_get_string_raw (cpath, groupname, "path", NULL);
+
+#ifdef HAVE_CHARSET
         element->encoding = mc_config_get_string_raw (cpath, groupname, "encoding", NULL);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
+#endif
 
         element->vfs_prefix = mc_config_get_string_raw (cpath, groupname, "vfs_prefix", NULL);
 

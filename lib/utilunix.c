@@ -550,7 +550,9 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
     if (flags & CANON_PATH_REMDOUBLEDOTS)
     {
+#ifdef HAVE_CHARSET
         const size_t enc_prefix_len = strlen (VFS_ENCODING_PREFIX);
+#endif /* HAVE_CHARSET */
 
         /* Collapse "/.." with the previous part of path */
         p = lpath;

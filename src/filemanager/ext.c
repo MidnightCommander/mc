@@ -46,7 +46,9 @@
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"       /* get_codepage_index */
+#endif
 
 #include "src/setup.h"          /* use_file_to_check_type */
 #include "src/execute.h"
@@ -601,7 +603,9 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
 
     /* Following variables are valid if *have_type is 1 */
     static char content_string[2048];
+#ifdef HAVE_CHARSET
     static char encoding_id[21];        /* CSISO51INISCYRILLIC -- 20 */
+#endif
     static size_t content_shift = 0;
     static int got_data = 0;
 

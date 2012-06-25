@@ -30,8 +30,6 @@
 #include "lib/strutil.h"
 #include "lib/search.h"
 
-#include "lib/charsets.h"
-
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

@@ -60,13 +60,17 @@
 #include "lib/util.h"           /* tilde_expand() */
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
-#include "lib/charsets.h"
 #include "lib/event.h"          /* mc_event_raise() */
+#ifdef HAVE_CHARSET
+#include "lib/charsets.h"
+#endif
 
 #include "src/history.h"
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/main.h"           /* mactos_t */
+#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
+#endif
 #include "src/keybind-defaults.h"
 #include "src/util.h"           /* check_for_default() */
 #include "src/filemanager/layout.h"     /* mc_refresh()  */

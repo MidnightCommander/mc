@@ -58,7 +58,9 @@
 
 #include "src/setup.h"          /* For loading/saving panel options */
 #include "src/execute.h"
+#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
+#endif
 #include "src/keybind-defaults.h"       /* global_keymap_t */
 #include "src/subshell.h"       /* do_subshell_chdir() */
 
@@ -1217,6 +1219,7 @@ panel_correct_path_to_show (WPanel * panel)
  * @return newly allocated string or NULL if path charset is same as system charset
  */
 
+#ifdef HAVE_CHARSET
 static char *
 panel_get_encoding_info_str (WPanel * panel)
 {
@@ -1229,6 +1232,7 @@ panel_get_encoding_info_str (WPanel * panel)
 
     return ret_str;
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1264,6 +1268,7 @@ show_dir (WPanel * panel)
 
     if (panel->is_panelized)
         tty_printf (" %s ", _("Panelize"));
+#ifdef HAVE_CHARSET
     else
     {
         tmp = panel_get_encoding_info_str (panel);
@@ -1274,6 +1279,8 @@ show_dir (WPanel * panel)
             g_free (tmp);
         }
     }
+#endif
+
     if (panel->active)
         tty_setcolor (REVERSE_COLOR);
 
@@ -3803,60 +3810,6 @@ update_one_panel (int which, panel_update_flags_t flags, const char *current_fil
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Remove encode info from last path element.
- *
- */
-
-vfs_path_t *
-remove_encoding_from_path (const vfs_path_t * vpath)
-{
-    vfs_path_t *ret_vpath;
-    GString *tmp_conv;
-    int indx;
-
-    ret_vpath = vfs_path_new ();
-
-    tmp_conv = g_string_new ("");
-
-    for (indx = 0; indx < vfs_path_elements_count (vpath); indx++)
-    {
-        GIConv converter;
-        vfs_path_element_t *path_element;
-
-        path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, indx));
-        vfs_path_add_element (ret_vpath, path_element);
-
-        if (path_element->encoding == NULL)
-        {
-            continue;
-        }
-
-        converter = str_crt_conv_to (path_element->encoding);
-        if (converter == INVALID_CONV)
-            continue;
-
-        g_free (path_element->encoding);
-        path_element->encoding = NULL;
-
-        str_vfs_convert_from (converter, path_element->path, tmp_conv);
-
-        g_free (path_element->path);
-        path_element->path = g_strdup (tmp_conv->str);
-
-        g_string_set_size (tmp_conv, 0);
-
-        str_close_conv (converter);
-        str_close_conv (path_element->dir.converter);
-        path_element->dir.converter = INVALID_CONV;
-    }
-    g_string_free (tmp_conv, TRUE);
-    return ret_vpath;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static void
 do_select (WPanel * panel, int i)
@@ -4111,7 +4064,9 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
 
+#ifdef HAVE_CHARSET
     panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+#endif
 
     for (i = 0; i < LIST_TYPES; i++)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
@@ -4146,7 +4101,9 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
 
     if (mc_chdir (panel->cwd_vpath) != 0)
     {
+#ifdef HAVE_CHARSET
         panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+#endif
         vfs_setup_cwd ();
         vfs_path_free (panel->cwd_vpath);
         panel->cwd_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
@@ -4525,11 +4482,11 @@ panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order)
  * @param panel WPanel object
  */
 
+#ifdef HAVE_CHARSET
 void
 panel_change_encoding (WPanel * panel)
 {
     const char *encoding = NULL;
-#ifdef HAVE_CHARSET
     char *errmsg;
     int r;
 
@@ -4562,7 +4519,6 @@ panel_change_encoding (WPanel * panel)
     }
 
     encoding = get_codepage_id (panel->codepage);
-#endif
     if (encoding != NULL)
     {
         char *cd_path;
@@ -4574,6 +4530,57 @@ panel_change_encoding (WPanel * panel)
         g_free (cd_path);
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Remove encode info from last path element.
+ *
+ */
+vfs_path_t *
+remove_encoding_from_path (const vfs_path_t * vpath)
+{
+    vfs_path_t *ret_vpath;
+    GString *tmp_conv;
+    int indx;
+
+    ret_vpath = vfs_path_new ();
+
+    tmp_conv = g_string_new ("");
+
+    for (indx = 0; indx < vfs_path_elements_count (vpath); indx++)
+    {
+        GIConv converter;
+        vfs_path_element_t *path_element;
+
+        path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, indx));
+        vfs_path_add_element (ret_vpath, path_element);
+
+        if (path_element->encoding == NULL)
+            continue;
+
+        converter = str_crt_conv_to (path_element->encoding);
+        if (converter == INVALID_CONV)
+            continue;
+
+        g_free (path_element->encoding);
+        path_element->encoding = NULL;
+
+        str_vfs_convert_from (converter, path_element->path, tmp_conv);
+
+        g_free (path_element->path);
+        path_element->path = g_strdup (tmp_conv->str);
+
+        g_string_set_size (tmp_conv, 0);
+
+        str_close_conv (converter);
+        str_close_conv (path_element->dir.converter);
+        path_element->dir.converter = INVALID_CONV;
+    }
+    g_string_free (tmp_conv, TRUE);
+    return ret_vpath;
+}
+#endif  /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
 /**
