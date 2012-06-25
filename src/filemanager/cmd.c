@@ -1785,11 +1785,13 @@ toggle_listing_cmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 void
 encoding_cmd (void)
 {
     if (SELECTED_IS_PANEL)
         panel_change_encoding (MENU_PANEL);
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */

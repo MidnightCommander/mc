@@ -94,6 +94,7 @@ static vfs_path_t *current_path = NULL;
 static GPtrArray *vfs_openfiles;
 static long vfs_free_handle_list = -1;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /* now used only by vfs_translate_path, but could be used in other vfs 
@@ -108,9 +109,10 @@ static long vfs_free_handle_list = -1;
 static estr_t
 _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer)
 {
+    estr_t state = ESTR_SUCCESS;
+#ifdef HAVE_CHARSET
     const char *semi;
     const char *slash;
-    estr_t state = ESTR_SUCCESS;
 
     if (size == 0)
         return ESTR_SUCCESS;
@@ -148,10 +150,8 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
         memcpy (encoding, semi, ms);
         encoding[ms] = '\0';
 
-#ifdef HAVE_CHARSET
         if (is_supported_encoding (encoding))
             coder = str_crt_conv_to (encoding);
-#endif
 
         if (coder != INVALID_CONV)
         {
@@ -169,6 +169,12 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
         /* path can be translated whole at once */
         state = str_vfs_convert_to (defcnv, path, size, buffer);
     }
+#else
+    (void) size;
+    (void) defcnv;
+
+    g_string_assign (buffer, path);
+#endif  /* HAVE_CHARSET */
 
     return state;
 }
@@ -579,6 +585,7 @@ _vfs_get_cwd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 /**
  * Change encoding for last part (vfs_path_element_t) of vpath
  *
@@ -607,6 +614,7 @@ vfs_change_encoding (vfs_path_t * vpath, const char *encoding)
 
     return vpath;
 }
+#endif  /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
 

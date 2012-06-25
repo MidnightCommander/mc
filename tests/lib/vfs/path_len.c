@@ -26,11 +26,9 @@
 
 #include "lib/global.c"
 
-#ifndef HAVE_CHARSET
-#define HAVE_CHARSET 1
-#endif
-
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
@@ -49,12 +47,18 @@ setup (void)
     vfs_setup_work_dir ();
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+#ifdef HAVE_CHARSET
     load_codepages_list ();
+#endif
 }
 
 static void
 teardown (void)
 {
+#ifdef HAVE_CHARSET
+    free_codepages_list ();
+#endif
+
     vfs_shut ();
     str_uninit_strings ();
 }
@@ -74,8 +78,9 @@ START_TEST (test_path_length)
     size_t result;
 
     path_len_one_check ("/тестовый/путь", 26);
-
+#ifdef HAVE_CHARSET
     path_len_one_check ("/#enc:KOI8-R/тестовый/путь",  38);
+#endif
     path_len_one_check (NULL, 0);
 }
 END_TEST

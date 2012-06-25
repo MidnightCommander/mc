@@ -45,7 +45,6 @@
 #include "lib/strutil.h"
 #include "lib/util.h"           /* load_file_position() */
 #include "lib/widget.h"
-#include "lib/charsets.h"
 
 #include "src/main.h"
 

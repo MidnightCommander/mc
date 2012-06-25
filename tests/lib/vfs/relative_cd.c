@@ -26,12 +26,6 @@
 
 #include "lib/global.c"
 
-#ifndef HAVE_CHARSET
-#define HAVE_CHARSET 1
-#endif
-
-#include "lib/charsets.h"
-
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/path.h"
@@ -65,14 +59,11 @@ setup (void)
     vfs_register_class (&vfs_test_ops1);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
-    load_codepages_list ();
 }
 
 static void
 teardown (void)
 {
-    free_codepages_list ();
-
     vfs_shut ();
     str_uninit_strings ();
 }

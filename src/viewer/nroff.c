@@ -39,7 +39,9 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "src/setup.h"          /* option_tab_spacing */
 
@@ -227,19 +229,10 @@ mcview_display_nroff (mcview_t * view)
                 if (!g_unichar_isprint (c))
                     c = '.';
             }
+            else if (view->utf8)
+                c = convert_from_utf_to_current_c (c, view->converter);
             else
-            {
-                if (view->utf8)
-                {
-                    c = convert_from_utf_to_current_c (c, view->converter);
-                }
-                else
-                {
-#endif
-                    c = convert_to_display_c (c);
-#ifdef HAVE_CHARSET
-                }
-            }
+                c = convert_to_display_c (c);
 #endif
             tty_print_anychar (c);
         }

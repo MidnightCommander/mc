@@ -31,11 +31,9 @@
 
 #include "lib/global.c"
 
-#ifndef HAVE_CHARSET
-#define HAVE_CHARSET 1
-#endif
-
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
@@ -201,7 +199,7 @@ START_TEST (test_vfs_path_from_to_partial_string_by_class)
 }
 END_TEST
 /* --------------------------------------------------------------------------------------------- */
-
+#ifdef HAVE_CHARSET
 #define encoding_check( input , etalon ) \
 { \
     vfs_path_t *vpath; \
@@ -284,6 +282,7 @@ START_TEST (test_vfs_path_encoding_at_end)
 }
 
 END_TEST
+#endif  /* HAVE_CHARSET */
 /* --------------------------------------------------------------------------------------------- */
 
 #undef ETALON_PATH_STR
@@ -323,8 +322,10 @@ main (void)
     tcase_add_test (tc_core, test_vfs_path_from_to_string);
     tcase_add_test (tc_core, test_vfs_path_from_to_string2);
     tcase_add_test (tc_core, test_vfs_path_from_to_partial_string_by_class);
+#ifdef HAVE_CHARSET
     tcase_add_test (tc_core, test_vfs_path_from_to_string_encoding);
     tcase_add_test (tc_core, test_vfs_path_encoding_at_end);
+#endif
     tcase_add_test (tc_core, test_vfs_path_from_to_string_uri);
     /* *********************************** */
 

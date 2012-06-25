@@ -31,11 +31,9 @@
 
 #include "lib/global.c"
 
-#ifndef HAVE_CHARSET
-#define HAVE_CHARSET 1
-#endif
-
+#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
+#endif
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
@@ -77,19 +75,24 @@ setup (void)
     vfs_register_class (&vfs_test_ops3);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+#ifdef HAVE_CHARSET
     load_codepages_list ();
+#endif
 }
 
 static void
 teardown (void)
 {
+#ifdef HAVE_CHARSET
     free_codepages_list ();
+#endif
 
     vfs_shut ();
     str_uninit_strings ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
+#ifdef HAVE_CHARSET
 #define ETALON_PATH_STR "/local/path/#test1:user:pass@some.host:12345/bla-bla/some/path/#test2/#enc:KOI8-R/bla-bla/some/path#test3/111/22/33"
 #define ETALON_PATH_URL_STR "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33"
 #define ETALON_SERIALIZED_PATH \
@@ -113,6 +116,30 @@ teardown (void)
         "p4:pathv9:111/22/33" \
         "p10:class-namev7:testfs3" \
         "p10:vfs_prefixv5:test3"
+#else
+#define ETALON_PATH_STR "/local/path/#test1:user:pass@some.host:12345/bla-bla/some/path/#test2/bla-bla/some/path#test3/111/22/33"
+#define ETALON_PATH_URL_STR "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33"
+#define ETALON_SERIALIZED_PATH \
+    "g14:path-element-0" \
+        "p4:pathv12:/local/path/" \
+        "p10:class-namev7:localfs" \
+    "g14:path-element-1" \
+        "p4:pathv18:bla-bla/some/path/" \
+        "p10:class-namev7:testfs1" \
+        "p10:vfs_prefixv5:test1" \
+        "p4:userv4:user" \
+        "p8:passwordv4:pass" \
+        "p4:hostv9:some.host" \
+        "p4:portv5:12345" \
+    "g14:path-element-2" \
+        "p4:pathv17:bla-bla/some/path" \
+        "p10:class-namev7:testfs2" \
+        "p10:vfs_prefixv5:test2" \
+    "g14:path-element-3" \
+        "p4:pathv9:111/22/33" \
+        "p10:class-namev7:testfs3" \
+        "p10:vfs_prefixv5:test3"
+#endif
 
 START_TEST (test_path_serialize_deserialize)
 {
