@@ -93,7 +93,6 @@ static const global_keymap_ini_t default_main_keymap[] = {
     {"Delete", "f8"},
     {"Menu", "f9"},
     {"Quit", "f10"},
-    {"ViewFile", "f13"},
     {"MenuLastSelected", "f19"},
     {"QuitQuiet", "f20"},
     {"History", "alt-h"},
