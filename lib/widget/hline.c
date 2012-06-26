@@ -54,7 +54,7 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-hline_callback (Widget * w, widget_msg_t msg, int parm)
+hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WHLine *l = (WHLine *) w;
     Dlg_head *h = w->owner;
@@ -101,7 +101,7 @@ hline_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

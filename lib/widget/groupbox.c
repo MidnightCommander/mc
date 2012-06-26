@@ -53,7 +53,7 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-groupbox_callback (Widget * w, widget_msg_t msg, int parm)
+groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WGroupbox *g = (WGroupbox *) w;
 
@@ -87,7 +87,7 @@ groupbox_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

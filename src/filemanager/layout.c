@@ -233,7 +233,7 @@ update_split (const Dlg_head * h)
         check_options[6].widget->state = _panels_layout.horizontal_equal ? 1 : 0;
     else
         check_options[6].widget->state = _panels_layout.vertical_equal ? 1 : 0;
-    send_message (WIDGET (check_options[6].widget), WIDGET_DRAW, 0);
+    send_message (WIDGET (check_options[6].widget), NULL, WIDGET_DRAW, 0, NULL);
 
     tty_setcolor (check_options[6].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
 
@@ -412,9 +412,9 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
             }
 
             widget_disable (WIDGET (bleft_widget), eq);
-            send_message (WIDGET (bleft_widget), WIDGET_DRAW, 0);
+            send_message (WIDGET (bleft_widget), NULL, WIDGET_DRAW, 0, NULL);
             widget_disable (WIDGET (bright_widget), eq);
-            send_message (WIDGET (bright_widget), WIDGET_DRAW, 0);
+            send_message (WIDGET (bright_widget), NULL, WIDGET_DRAW, 0, NULL);
 
             update_split (h);
 

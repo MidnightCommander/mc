@@ -214,9 +214,8 @@ extern mcview_search_options_t mcview_search_options;
 /*** declarations of public functions ************************************************************/
 
 /* actions_cmd.c:  */
-cb_ret_t mcview_callback (Widget * w, widget_msg_t msg, int parm);
-cb_ret_t mcview_dialog_callback (Dlg_head * h, Widget * sender,
-                                 dlg_msg_t msg, int parm, void *data);
+cb_ret_t mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
+cb_ret_t mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
 /* coord_cache.c: */
 coord_cache_t *coord_cache_new (void);

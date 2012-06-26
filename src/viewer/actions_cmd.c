@@ -573,7 +573,7 @@ mcview_adjust_size (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_callback (Widget * w, widget_msg_t msg, int parm)
+mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     mcview_t *view = (mcview_t *) w;
     cb_ret_t i;
@@ -626,7 +626,7 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 
@@ -651,7 +651,7 @@ mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
         if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message (WIDGET (data), WIDGET_COMMAND, parm);
+                return send_message (WIDGET (data), NULL, WIDGET_COMMAND, parm, NULL);
 
             view = (mcview_t *) find_widget_type (h, mcview_callback);
             return mcview_execute_cmd (view, parm);

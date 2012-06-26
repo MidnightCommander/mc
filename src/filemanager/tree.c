@@ -1203,7 +1203,7 @@ tree_frame (Dlg_head * h, WTree * tree)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-tree_callback (Widget * w, widget_msg_t msg, int parm)
+tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WTree *tree = (WTree *) w;
     Dlg_head *h = w->owner;
@@ -1260,7 +1260,7 @@ tree_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

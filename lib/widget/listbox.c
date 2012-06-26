@@ -365,7 +365,7 @@ listbox_destroy (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-listbox_callback (Widget * w, widget_msg_t msg, int parm)
+listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WListbox *l = (WListbox *) w;
     Dlg_head *h = w->owner;
@@ -432,7 +432,7 @@ listbox_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

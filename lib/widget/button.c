@@ -55,7 +55,7 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-button_callback (Widget * w, widget_msg_t msg, int parm)
+button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WButton *b = (WButton *) w;
     int stop = 0;
@@ -73,19 +73,19 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
          */
         if (parm == '\n' && WIDGET (h->current->data) == WIDGET (b))
         {
-            button_callback (w, WIDGET_KEY, ' ');
+            send_message (w, sender, WIDGET_KEY, ' ', data);
             return MSG_HANDLED;
         }
 
         if (parm == '\n' && b->flags == DEFPUSH_BUTTON)
         {
-            button_callback (w, WIDGET_KEY, ' ');
+            send_message (w, sender, WIDGET_KEY, ' ', data);
             return MSG_HANDLED;
         }
 
         if (b->text.hotkey != NULL && g_ascii_tolower ((gchar) b->text.hotkey[0]) == parm)
         {
-            button_callback (w, WIDGET_KEY, ' ');
+            send_message (w, sender, WIDGET_KEY, ' ', data);
             return MSG_HANDLED;
         }
         return MSG_NOT_HANDLED;
@@ -173,7 +173,7 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 
@@ -192,7 +192,7 @@ button_event (Gpm_Event * event, void *data)
         dlg_select_widget (w);
         if ((event->type & GPM_UP) != 0)
         {
-            button_callback (w, WIDGET_KEY, ' ');
+            send_message (w, NULL, WIDGET_KEY, ' ', NULL);
             w->owner->callback (w->owner, w, DLG_POST_KEY, ' ', NULL);
         }
     }

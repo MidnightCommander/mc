@@ -159,7 +159,7 @@ buttonbar_call (WButtonBar * bb, int i)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
+buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WButtonBar *bb = (WButtonBar *) w;
     int i;
@@ -209,7 +209,7 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

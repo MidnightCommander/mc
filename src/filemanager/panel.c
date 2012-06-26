@@ -2498,7 +2498,7 @@ do_search (WPanel * panel, int c_code)
         unselect_item (panel);
         panel->selected = sel;
         select_item (panel);
-        send_message (WIDGET (panel), WIDGET_DRAW, 0);
+        send_message (WIDGET (panel), NULL, WIDGET_DRAW, 0, NULL);
     }
     else if (c_code != KEY_BACKSPACE)
     {
@@ -3416,7 +3416,7 @@ panel_key (WPanel * panel, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panel_callback (Widget * w, widget_msg_t msg, int parm)
+panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WPanel *panel = (WPanel *) w;
     WButtonBar *bb;
@@ -3490,7 +3490,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 
@@ -3719,7 +3719,8 @@ panel_event (Gpm_Event * event, void *data)
 
   finish:
     if (panel->dirty)
-        send_message (w, WIDGET_DRAW, 0);
+        send_message (w, NULL, WIDGET_DRAW, 0, NULL);
+
     return MOU_NORMAL;
 }
 

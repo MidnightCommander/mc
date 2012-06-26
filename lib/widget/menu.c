@@ -53,8 +53,6 @@
 
 /*** file scope variables ************************************************************************/
 
-static cb_ret_t menubar_callback (Widget * w, widget_msg_t msg, int parm);
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -544,7 +542,7 @@ menubar_handle_key (WMenuBar * menubar, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-menubar_callback (Widget * w, widget_msg_t msg, int parm)
+menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WMenuBar *menubar = (WMenuBar *) w;
 
@@ -590,7 +588,7 @@ menubar_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_RESIZED:
         /* try show menu after screen resize */
-        send_message (w, WIDGET_FOCUS, 0);
+        send_message (w, sender, WIDGET_FOCUS, 0, data);
         return MSG_HANDLED;
 
 
@@ -599,7 +597,7 @@ menubar_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

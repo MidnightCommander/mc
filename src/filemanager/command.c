@@ -335,7 +335,7 @@ enter (WInput * lc_cmdline)
  */
 
 static cb_ret_t
-command_callback (Widget * w, widget_msg_t msg, int parm)
+command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WInput *cmd = (WInput *) w;
 
@@ -352,7 +352,7 @@ command_callback (Widget * w, widget_msg_t msg, int parm)
         /* fall through */
 
     default:
-        return input_callback (w, msg, parm);
+        return input_callback (w, sender, msg, parm, data);
     }
 }
 

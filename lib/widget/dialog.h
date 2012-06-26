@@ -203,7 +203,7 @@ void dlg_set_top_widget (void *w);
 void dlg_one_up (Dlg_head * h);
 void dlg_one_down (Dlg_head * h);
 gboolean dlg_focus (Dlg_head * h);
-Widget *find_widget_type (const Dlg_head * h, callback_fn callback);
+Widget *find_widget_type (const Dlg_head * h, widget_cb_fn callback);
 Widget *dlg_find_by_id (const Dlg_head * h, unsigned long id);
 void dlg_select_by_id (const Dlg_head * h, unsigned long id);
 

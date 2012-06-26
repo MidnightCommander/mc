@@ -288,13 +288,15 @@ info_hook (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-info_callback (Widget * w, widget_msg_t msg, int parm)
+info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     struct WInfo *info = (struct WInfo *) w;
 
+    (void) sender;
+    (void) data;
+
     switch (msg)
     {
-
     case WIDGET_INIT:
         init_my_statfs ();
         add_hook (&select_file_hook, info_hook, info);
@@ -314,7 +316,7 @@ info_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

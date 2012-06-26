@@ -1036,7 +1036,7 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-input_callback (Widget * w, widget_msg_t msg, int parm)
+input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WInput *in = (WInput *) w;
     cb_ret_t v;
@@ -1097,7 +1097,7 @@ input_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

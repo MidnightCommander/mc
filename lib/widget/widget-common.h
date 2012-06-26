@@ -77,7 +77,7 @@ typedef enum
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /* Widget callback */
-typedef cb_ret_t (*callback_fn) (struct Widget * widget, widget_msg_t msg, int parm);
+typedef cb_ret_t (*widget_cb_fn) (struct Widget * widget, Widget * sender, widget_msg_t msg, int parm, void *data);
 
 /* Every Widget must have this as its first element */
 struct Widget
@@ -87,7 +87,7 @@ struct Widget
     widget_options_t options;
     widget_pos_flags_t pos_flags;       /* repositioning flags */
     unsigned int id;            /* Number of the widget, starting with 0 */
-    callback_fn callback;
+    widget_cb_fn callback;
     mouse_h mouse;
     struct Dlg_head *owner;
 };
@@ -118,9 +118,9 @@ void hotkey_draw (struct Widget *w, const hotkey_t hotkey, gboolean focused);
 
 /* widget initialization */
 void init_widget (Widget * w, int y, int x, int lines, int cols,
-                  callback_fn callback, mouse_h mouse_handler);
+                  widget_cb_fn callback, mouse_h mouse_handler);
 /* Default callback for widgets */
-cb_ret_t default_proc (widget_msg_t msg, int parm);
+cb_ret_t default_widget_callback (Widget * sender, widget_msg_t msg, int parm, void *data);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (struct Widget *w, gboolean focused, gboolean hotkey);
@@ -133,9 +133,9 @@ gboolean mouse_global_in_widget (const Gpm_Event * event, const Widget * w);
 /*** inline functions ****************************************************************************/
 
 static inline cb_ret_t
-send_message (Widget * w, widget_msg_t msg, int parm)
+send_message (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    return w->callback (w, msg, parm);
+    return w->callback (w, sender, msg, parm, data);
 }
 
 #endif /* MC__WIDGET_INTERNAL_H */

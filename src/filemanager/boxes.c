@@ -411,7 +411,7 @@ tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case DLG_ACTION:
-        return send_message (WIDGET (find_tree (h)), WIDGET_COMMAND, parm);
+        return send_message (WIDGET (find_tree (h)), NULL, WIDGET_COMMAND, parm, NULL);
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
@@ -438,7 +438,7 @@ confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
             /* input */
             w = dlg_find_by_id (h, sender->id - 1);
             widget_disable (w, not_use);
-            send_message (w, WIDGET_DRAW, 0);
+            send_message (w, NULL, WIDGET_DRAW, 0, NULL);
 
             return MSG_HANDLED;
         }

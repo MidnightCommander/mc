@@ -145,7 +145,7 @@ dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t msg, gboolean reverse, int flag
             p = dlg_widget_next (h, p);
 
         if ((flags == 0) || ((flags & w->options) != 0))
-            send_message (w, msg, 0);
+            send_message (w, NULL, msg, 0, NULL);
     }
     while (first != p);
 }
@@ -185,7 +185,7 @@ dlg_unfocus (Dlg_head * h)
     {
         Widget *current = WIDGET (h->current->data);
 
-        if (send_message (current, WIDGET_UNFOCUS, 0) == MSG_HANDLED)
+        if (send_message (current, NULL, WIDGET_UNFOCUS, 0, NULL) == MSG_HANDLED)
         {
             h->callback (h, current, DLG_UNFOCUS, 0, NULL);
             return TRUE;
@@ -200,8 +200,8 @@ dlg_unfocus (Dlg_head * h)
 static int
 dlg_find_widget_callback (const void *a, const void *b)
 {
-    const Widget *w = (const Widget *) a;
-    callback_fn f = (callback_fn) b;
+    const Widget *w = WIDGET (a);
+    widget_cb_fn f = (widget_cb_fn) b;
 
     return (w->callback == f) ? 0 : 1;
 }
@@ -248,8 +248,8 @@ do_select_widget (Dlg_head * h, GList * w, select_dir_t dir)
 
     if (dlg_overlap (w0, WIDGET (h->current->data)))
     {
-        send_message (WIDGET (h->current->data), WIDGET_DRAW, 0);
-        send_message (WIDGET (h->current->data), WIDGET_FOCUS, 0);
+        send_message (WIDGET (h->current->data), NULL, WIDGET_DRAW, 0, NULL);
+        send_message (WIDGET (h->current->data), NULL, WIDGET_FOCUS, 0, NULL);
     }
 }
 
@@ -450,7 +450,7 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
 
     handled = MSG_NOT_HANDLED;
     if ((current->options & W_WANT_HOTKEY) != 0)
-        handled = send_message (current, WIDGET_HOTKEY, d_key);
+        handled = send_message (current, NULL, WIDGET_HOTKEY, d_key, NULL);
 
     /* If not used, send hotkey to other widgets */
     if (handled == MSG_HANDLED)
@@ -464,7 +464,7 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
         current = WIDGET (hot_cur->data);
 
         if ((current->options & W_WANT_HOTKEY) != 0 && (current->options & W_DISABLED) == 0)
-            handled = send_message (current, WIDGET_HOTKEY, d_key);
+            handled = send_message (current, NULL, WIDGET_HOTKEY, d_key, NULL);
 
         if (handled == MSG_NOT_HANDLED)
             hot_cur = dlg_widget_next (h, hot_cur);
@@ -515,7 +515,7 @@ dlg_key_event (Dlg_head * h, int d_key)
         h->callback (h, NULL, DLG_HOTKEY_HANDLED, 0, NULL);
     else
         /* not used - then try widget_callback */
-        handled = send_message (WIDGET (h->current->data), WIDGET_KEY, d_key);
+        handled = send_message (WIDGET (h->current->data), NULL, WIDGET_KEY, d_key, NULL);
 
     /* not used- try to use the unhandled case */
     if (handled == MSG_NOT_HANDLED)
@@ -927,9 +927,9 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags, const v
     /* widget has been added in runtime */
     if (h->state == DLG_ACTIVE)
     {
-        send_message (widget, WIDGET_INIT, 0);
-        send_message (widget, WIDGET_DRAW, 0);
-        send_message (widget, WIDGET_FOCUS, 0);
+        send_message (widget, NULL, WIDGET_INIT, 0, NULL);
+        send_message (widget, NULL, WIDGET_DRAW, 0, NULL);
+        send_message (widget, NULL, WIDGET_FOCUS, 0, NULL);
     }
 
     return widget->id;
@@ -976,7 +976,7 @@ del_widget (void *w)
     }
 
     h->widgets = g_list_remove_link (h->widgets, d);
-    send_message (d->data, WIDGET_DESTROY, 0);
+    send_message (d->data, NULL, WIDGET_DESTROY, 0, NULL);
     g_list_free_1 (d);
 
     /* widget has been deleted in runtime */
@@ -1032,7 +1032,7 @@ dlg_focus (Dlg_head * h)
         Widget *current = WIDGET (h->current->data);
 
         if (((current->options & W_DISABLED) == 0)
-            && (send_message (current, WIDGET_FOCUS, 0) == MSG_HANDLED))
+            && (send_message (current, NULL, WIDGET_FOCUS, 0, NULL) == MSG_HANDLED))
         {
             h->callback (h, current, DLG_FOCUS, 0, NULL);
             return TRUE;
@@ -1057,7 +1057,7 @@ dlg_overlap (Widget * a, Widget * b)
 /** Find the widget with the given callback in the dialog h */
 
 Widget *
-find_widget_type (const Dlg_head * h, callback_fn callback)
+find_widget_type (const Dlg_head * h, widget_cb_fn callback)
 {
     GList *w;
 
@@ -1169,7 +1169,7 @@ update_cursor (Dlg_head * h)
         w = WIDGET (p->data);
 
         if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
-            send_message (w, WIDGET_CURSOR, 0);
+            send_message (w, NULL, WIDGET_CURSOR, 0, NULL);
         else
             do
             {
@@ -1180,7 +1180,7 @@ update_cursor (Dlg_head * h)
                 w = WIDGET (p->data);
 
                 if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
-                    if (send_message (w, WIDGET_CURSOR, 0) == MSG_HANDLED)
+                    if (send_message (w, NULL, WIDGET_CURSOR, 0, NULL) == MSG_HANDLED)
                         break;
             }
             while (TRUE);
@@ -1405,14 +1405,14 @@ dlg_replace_widget (Widget * old_w, Widget * new_w)
     else
         g_list_find (h->widgets, old_w)->data = new_w;
 
-    send_message (old_w, WIDGET_DESTROY, 0);
-    send_message (new_w, WIDGET_INIT, 0);
+    send_message (old_w, NULL, WIDGET_DESTROY, 0, NULL);
+    send_message (new_w, NULL, WIDGET_INIT, 0, NULL);
 
     if (should_focus)
         dlg_select_widget (new_w);
 
     if (new_w->owner->state == DLG_ACTIVE)
-        send_message (new_w, WIDGET_DRAW, 0);
+        send_message (new_w, NULL, WIDGET_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

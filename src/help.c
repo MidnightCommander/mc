@@ -970,7 +970,7 @@ help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message (WIDGET (data), WIDGET_COMMAND, parm);
+                return send_message (WIDGET (data), NULL, WIDGET_COMMAND, parm, NULL);
             return help_execute_cmd (parm);
         }
         return MSG_NOT_HANDLED;
@@ -1022,7 +1022,7 @@ translate_file (char *filedata)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-md_callback (Widget * w, widget_msg_t msg, int parm)
+md_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -1031,7 +1031,7 @@ md_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

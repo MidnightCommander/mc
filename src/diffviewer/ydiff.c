@@ -3311,7 +3311,7 @@ dview_handle_key (WDiff * dview, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_callback (Widget * w, widget_msg_t msg, int parm)
+dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) w;
     Dlg_head *h = w->owner;
@@ -3352,7 +3352,7 @@ dview_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 
@@ -3394,7 +3394,7 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
         if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message (WIDGET (data), WIDGET_COMMAND, parm);
+                return send_message (WIDGET (data), NULL, WIDGET_COMMAND, parm, NULL);
 
             dview = (WDiff *) find_widget_type (h, dview_callback);
             return dview_execute_cmd (dview, parm);
@@ -3455,7 +3455,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
-    init_widget (w, 0, 0, LINES - 1, COLS, (callback_fn) dview_callback, (mouse_h) dview_event);
+    init_widget (w, 0, 0, LINES - 1, COLS, dview_callback, dview_event);
     widget_want_cursor (w, FALSE);
 
     add_widget (dview_dlg, dview);

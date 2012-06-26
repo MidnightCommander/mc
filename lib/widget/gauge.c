@@ -59,7 +59,7 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-gauge_callback (Widget * w, widget_msg_t msg, int parm)
+gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WGauge *g = (WGauge *) w;
     Dlg_head *h = w->owner;
@@ -118,7 +118,7 @@ gauge_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
     }
 
-    return default_proc (msg, parm);
+    return default_widget_callback (sender, msg, parm, data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -160,7 +160,7 @@ gauge_set_value (WGauge * g, int max, int current)
         max = 1;                /* I do not like division by zero :) */
     g->current = current;
     g->max = max;
-    gauge_callback (WIDGET (g), WIDGET_DRAW, 0);
+    gauge_callback (WIDGET (g), NULL, WIDGET_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -171,7 +171,7 @@ gauge_show (WGauge * g, gboolean shown)
     if (g->shown != shown)
     {
         g->shown = shown;
-        gauge_callback (WIDGET (g), WIDGET_DRAW, 0);
+        gauge_callback (WIDGET (g), NULL, WIDGET_DRAW, 0, NULL);
     }
 }
 

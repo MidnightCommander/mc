@@ -139,7 +139,7 @@ hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 
 void
 init_widget (Widget * w, int y, int x, int lines, int cols,
-             callback_fn callback, mouse_h mouse_handler)
+             widget_cb_fn callback, mouse_h mouse_handler)
 {
     w->x = x;
     w->y = y;
@@ -157,9 +157,11 @@ init_widget (Widget * w, int y, int x, int lines, int cols,
 
 /* Default callback for widgets */
 cb_ret_t
-default_proc (widget_msg_t msg, int parm)
+default_widget_callback (Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    (void) sender;
     (void) parm;
+    (void) data;
 
     switch (msg)
     {
@@ -186,7 +188,7 @@ widget_set_size (Widget * widget, int y, int x, int lines, int cols)
     widget->y = y;
     widget->cols = cols;
     widget->lines = lines;
-    send_message (widget, WIDGET_RESIZED, 0 /* unused */ );
+    send_message (widget, NULL, WIDGET_RESIZED, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

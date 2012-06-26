@@ -84,7 +84,6 @@ static unsigned int edit_dlg_init_refcounter = 0;
 
 /*** file scope functions ************************************************************************/
 
-static cb_ret_t edit_callback (Widget * w, widget_msg_t msg, int parm);
 static cb_ret_t edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
                                       void *data);
 
@@ -925,14 +924,14 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
             if (edit_dialog_command_execute (h, parm) == MSG_HANDLED)
                 return MSG_HANDLED;
             /* try send command to the current window */
-            return send_message (WIDGET (h->current->data), WIDGET_COMMAND, parm);
+            return send_message (WIDGET (h->current->data), NULL, WIDGET_COMMAND, parm, NULL);
         }
         /* message from buttonbar */
         buttonbar = find_buttonbar (h);
         if (sender == WIDGET (buttonbar))
         {
             if (data != NULL)
-                return send_message (WIDGET (data), WIDGET_COMMAND, parm);
+                return send_message (WIDGET (data), NULL, WIDGET_COMMAND, parm, NULL);
             return edit_dialog_command_execute (h, parm);
         }
         return MSG_NOT_HANDLED;
@@ -982,7 +981,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-edit_callback (Widget * w, widget_msg_t msg, int parm)
+edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WEdit *e = (WEdit *) w;
 
@@ -1046,7 +1045,7 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 

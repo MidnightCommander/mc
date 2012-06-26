@@ -57,7 +57,7 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-label_callback (Widget * w, widget_msg_t msg, int parm)
+label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WLabel *l = (WLabel *) w;
     Dlg_head *h = w->owner;
@@ -115,7 +115,7 @@ label_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 
@@ -177,7 +177,7 @@ label_set_text (WLabel * label, const char *text)
     }
 
     if (w->owner != NULL)
-        label_callback (w, WIDGET_DRAW, 0);
+        send_message (w, NULL, WIDGET_DRAW, 0, NULL);
 
     if (newcols < w->cols)
         w->cols = newcols;

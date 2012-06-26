@@ -54,7 +54,7 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-radio_callback (Widget * w, widget_msg_t msg, int parm)
+radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WRadio *r = (WRadio *) w;
     int i;
@@ -75,7 +75,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
                     r->pos = i;
 
                     /* Take action */
-                    radio_callback (w, WIDGET_KEY, ' ');
+                    send_message (w, sender, WIDGET_KEY, ' ', data);
                     return MSG_HANDLED;
                 }
             }
@@ -88,7 +88,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
         case ' ':
             r->sel = r->pos;
             h->callback (h, w, DLG_ACTION, 0, NULL);
-            radio_callback (w, WIDGET_FOCUS, ' ');
+            send_message (w, sender, WIDGET_FOCUS, ' ', data);
             return MSG_HANDLED;
 
         case KEY_UP:
@@ -112,7 +112,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_CURSOR:
         h->callback (h, w, DLG_ACTION, 0, NULL);
-        radio_callback (w, WIDGET_FOCUS, ' ');
+        send_message (w, sender, WIDGET_FOCUS, ' ', data);
         widget_move (r, r->pos, 1);
         return MSG_HANDLED;
 
@@ -138,7 +138,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 
@@ -163,7 +163,7 @@ radio_event (Gpm_Event * event, void *data)
         dlg_select_widget (w);
         if ((event->type & GPM_UP) != 0)
         {
-            radio_callback (w, WIDGET_KEY, ' ');
+            radio_callback (w, NULL, WIDGET_KEY, ' ', NULL);
             w->owner->callback (w->owner, w, DLG_POST_KEY, ' ', NULL);
         }
     }

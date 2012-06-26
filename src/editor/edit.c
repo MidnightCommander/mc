@@ -1807,7 +1807,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 
     edit_cursor_move (edit, curs - edit->curs1);
     edit->force |= REDRAW_PAGE;
-    send_message (WIDGET (edit), WIDGET_DRAW, 0);
+    send_message (WIDGET (edit), NULL, WIDGET_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -54,7 +54,7 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-check_callback (Widget * w, widget_msg_t msg, int parm)
+check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WCheck *c = (WCheck *) w;
     Dlg_head *h = w->owner;
@@ -66,7 +66,7 @@ check_callback (Widget * w, widget_msg_t msg, int parm)
         {
             if (g_ascii_tolower ((gchar) c->text.hotkey[0]) == parm)
             {
-                check_callback (w, WIDGET_KEY, ' ');    /* make action */
+                send_message (w, sender, WIDGET_KEY, ' ', data);    /* make action */
                 return MSG_HANDLED;
             }
         }
@@ -78,7 +78,7 @@ check_callback (Widget * w, widget_msg_t msg, int parm)
         c->state ^= C_BOOL;
         c->state ^= C_CHANGE;
         h->callback (h, w, DLG_ACTION, 0, NULL);
-        check_callback (w, WIDGET_FOCUS, ' ');
+        send_message (w, sender, WIDGET_FOCUS, ' ', data);
         return MSG_HANDLED;
 
     case WIDGET_CURSOR:
@@ -99,7 +99,7 @@ check_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_widget_callback (sender, msg, parm, data);
     }
 }
 
@@ -118,8 +118,8 @@ check_event (Gpm_Event * event, void *data)
         dlg_select_widget (w);
         if ((event->type & GPM_UP) != 0)
         {
-            check_callback (w, WIDGET_KEY, ' ');
-            check_callback (w, WIDGET_FOCUS, 0);
+            send_message (w, NULL, WIDGET_KEY, ' ', NULL);
+            send_message (w, NULL, WIDGET_FOCUS, 0, NULL);
             w->owner->callback (w->owner, w, DLG_POST_KEY, ' ', NULL);
         }
     }
