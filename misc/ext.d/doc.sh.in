@@ -142,11 +142,11 @@ do_open_action() {
         fmclient -f "${MC_EXT_FILENAME}"
         ;;
     dvi)
-        if [ -z "$DISPLAY" ]; then
+        if [ -n "$DISPLAY" ]; then
+            (xdvi "${MC_EXT_FILENAME}" &)
+        else
             dvisvga "${MC_EXT_FILENAME}" || \
                 dvi2tty "${MC_EXT_FILENAME}" | ${PAGER:-more}
-        else
-            (xdvi "${MC_EXT_FILENAME}" &)
         fi
         ;;
     djvu)
