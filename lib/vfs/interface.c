@@ -711,8 +711,6 @@ mc_chdir (const vfs_path_t * vpath)
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
     if (vfs_path_element_valid (path_element))
     {
-        struct vfs_s_super *super;
-
         if (*path_element->path != '\0')
         {
             char *p;
@@ -722,12 +720,18 @@ mc_chdir (const vfs_path_t * vpath)
                 *p = '\0';
         }
 
-        super = vfs_get_super_by_vpath (vpath);
-        if (super != NULL)
+#ifdef ENABLE_VFS_NET
         {
-            g_free (super->path_element->path);
-            super->path_element->path = g_strdup (path_element->path);
+            struct vfs_s_super *super;
+
+            super = vfs_get_super_by_vpath (vpath);
+            if (super != NULL && super->path_element != NULL)
+            {
+                g_free (super->path_element->path);
+                super->path_element->path = g_strdup (path_element->path);
+            }
         }
+#endif /* ENABLE_VFS_NET */
     }
 
     return 0;
