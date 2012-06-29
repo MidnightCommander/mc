@@ -22,6 +22,7 @@ do_view_action() {
             tail +13 || file "${MC_EXT_FILENAME}"
         ;;
     *)
+        cat "${MC_EXT_FILENAME}"
         ;;
     esac
 }

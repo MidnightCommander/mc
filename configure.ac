@@ -482,7 +482,11 @@ dnl Libraries used only when building the mc binary
 AC_SUBST(MCLIBS)
 
 
-EXTHELPERSDIR=${prefix}/libexec/${PACKAGE}/ext.d
+if test x${libexecdir} = x'${exec_prefix}/libexec'; then
+    EXTHELPERSDIR=${prefix}/libexec/${PACKAGE}/ext.d
+else
+    EXTHELPERSDIR=${libexecdir}/${PACKAGE}/ext.d
+fi
 AC_SUBST(EXTHELPERSDIR)
 
 MAN_DATE="$(LC_ALL=C date "+%B %Y")"

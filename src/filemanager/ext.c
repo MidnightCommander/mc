@@ -169,7 +169,7 @@ exec_get_export_variables (vfs_path_t * filename_vpath)
         return NULL;
 
     export_vars_string = g_string_new ("MC_EXT_FILENAME=");
-    g_string_append_printf (export_vars_string, "\"%s\"\nexport MC_EXT_FILENAME\n", text);
+    g_string_append_printf (export_vars_string, "%s\nexport MC_EXT_FILENAME\n", text);
     g_free (text);
 
     for (i = 0; export_variables[i].name != NULL; i++)
@@ -178,7 +178,7 @@ exec_get_export_variables (vfs_path_t * filename_vpath)
         if (text != NULL)
         {
             g_string_append_printf (export_vars_string,
-                                    "%s=\"%s\"\nexport %s\n", export_variables[i].name, text,
+                                    "%s=%s\nexport %s\n", export_variables[i].name, text,
                                     export_variables[i].name);
             g_free (text);
         }
