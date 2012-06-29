@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdint.h>         /* SIZE_MAX */
+#include <stdint.h>             /* SIZE_MAX */
 #include <sys/types.h>
 
 #include <errno.h>
@@ -43,7 +43,7 @@
 #include <sys/param.h>
 #endif
 
-#if defined STAT_STATVFS || defined STAT_STATVFS64 /* POSIX 1003.1-2001 (and later) with XSI */
+#if defined STAT_STATVFS || defined STAT_STATVFS64      /* POSIX 1003.1-2001 (and later) with XSI */
 #include <sys/statvfs.h>
 #else
 /* Don't include backward-compatibility files unless they're needed.
@@ -202,7 +202,7 @@
 #undef closedir
 
 #ifndef ME_DUMMY
-# define ME_DUMMY(Fs_name, Fs_type) \
+#define ME_DUMMY(Fs_name, Fs_type) \
     (strcmp (Fs_type, "autofs") == 0 \
      || strcmp (Fs_type, "none") == 0 \
      || strcmp (Fs_type, "proc") == 0 \
@@ -240,7 +240,7 @@ me_remote (char const *fs_name, char const *fs_type _GL_UNUSED)
 #ifndef ME_REMOTE
 /* A file system is `remote' if its Fs_name contains a `:'
    or if (it is of type (smbfs or cifs) and its Fs_name starts with `//').  */
-# define ME_REMOTE(Fs_name, Fs_type) \
+#define ME_REMOTE(Fs_name, Fs_type) \
     (strchr (Fs_name, ':') != NULL \
      || ((Fs_name)[0] == '/' \
          && (Fs_name)[1] == '/' \
@@ -270,7 +270,7 @@ me_remote (char const *fs_name, char const *fs_type _GL_UNUSED)
    otherwise, use PROPAGATE_ALL_ONES.  */
 #define PROPAGATE_TOP_BIT(x) ((x) | ~ (EXTRACT_TOP_BIT (x) - 1))
 
-#ifdef STAT_READ_FILSYS  /* SVR2 */
+#ifdef STAT_READ_FILSYS         /* SVR2 */
 /* Set errno to zero upon EOF.  */
 #define ZERO_BYTE_TRANSFER_ERRNO 0
 
@@ -279,32 +279,32 @@ me_remote (char const *fs_name, char const *fs_type _GL_UNUSED)
 #else
 #define IS_EINTR(x) 0
 #endif
-#endif  /* STAT_READ_FILSYS */
+#endif /* STAT_READ_FILSYS */
 
 /*** file scope type declarations ****************************************************************/
 
 /* A mount table entry. */
 struct mount_entry
 {
-    char *me_devname;             /* Device node name, including "/dev/". */
-    char *me_mountdir;            /* Mount point directory name. */
-    char *me_type;                /* "nfs", "4.2", etc. */
-    dev_t me_dev;                 /* Device number of me_mountdir. */
-    unsigned int me_dummy : 1;    /* Nonzero for dummy file systems. */
-    unsigned int me_remote : 1;   /* Nonzero for remote fileystems. */
-    unsigned int me_type_malloced : 1; /* Nonzero if me_type was malloced. */
+    char *me_devname;           /* Device node name, including "/dev/". */
+    char *me_mountdir;          /* Mount point directory name. */
+    char *me_type;              /* "nfs", "4.2", etc. */
+    dev_t me_dev;               /* Device number of me_mountdir. */
+    unsigned int me_dummy:1;    /* Nonzero for dummy file systems. */
+    unsigned int me_remote:1;   /* Nonzero for remote fileystems. */
+    unsigned int me_type_malloced:1;    /* Nonzero if me_type was malloced. */
     struct mount_entry *me_next;
 };
 
 struct fs_usage
 {
-    uintmax_t fsu_blocksize;      /* Size of a block.  */
-    uintmax_t fsu_blocks;         /* Total blocks. */
-    uintmax_t fsu_bfree;          /* Free blocks available to superuser. */
-    uintmax_t fsu_bavail;         /* Free blocks available to non-superuser. */
-    int fsu_bavail_top_bit_set;   /* 1 if fsu_bavail represents a value < 0.  */
-    uintmax_t fsu_files;          /* Total file nodes. */
-    uintmax_t fsu_ffree;          /* Free file nodes. */
+    uintmax_t fsu_blocksize;    /* Size of a block.  */
+    uintmax_t fsu_blocks;       /* Total blocks. */
+    uintmax_t fsu_bfree;        /* Free blocks available to superuser. */
+    uintmax_t fsu_bavail;       /* Free blocks available to non-superuser. */
+    int fsu_bavail_top_bit_set; /* 1 if fsu_bavail represents a value < 0.  */
+    uintmax_t fsu_files;        /* Total file nodes. */
+    uintmax_t fsu_ffree;        /* Free file nodes. */
 };
 
 /*** file scope variables ************************************************************************/
@@ -1044,7 +1044,7 @@ read_file_system_list (int need_fs_type)
                             && (ignore == options || ignore[-1] == ',')
                             && (ignore[sizeof ("ignore") - 1] == ','
                                 || ignore[sizeof ("ignore") - 1] == '\0'));
-            me->me_dev = (dev_t)(-1);   /* vmt_fsid might be the info we want.  */
+            me->me_dev = (dev_t) (-1);  /* vmt_fsid might be the info we want.  */
 
             /* Add to the linked list. */
             *mtail = me;
@@ -1221,7 +1221,7 @@ read_file_system_list (int need_fs_type, int all_fs)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef STAT_READ_FILSYS  /* SVR2 */
+#ifdef STAT_READ_FILSYS         /* SVR2 */
 
 /* Read(write) up to COUNT bytes at BUF from(to) descriptor FD, retrying if
    interrupted.  Return the actual number of bytes read(written), zero for EOF,
@@ -1229,24 +1229,26 @@ read_file_system_list (int need_fs_type, int all_fs)
 static size_t
 safe_read (int fd, void *buf, size_t count)
 {
-  /* Work around a bug in Tru64 5.1.  Attempting to read more than
-     INT_MAX bytes fails with errno == EINVAL.  See
-     <http://lists.gnu.org/archive/html/bug-gnu-utils/2002-04/msg00010.html>.
-     When decreasing COUNT, keep it block-aligned.  */
-  enum { BUGGY_READ_MAXIMUM = INT_MAX & ~8191 };
+    /* Work around a bug in Tru64 5.1.  Attempting to read more than
+       INT_MAX bytes fails with errno == EINVAL.  See
+       <http://lists.gnu.org/archive/html/bug-gnu-utils/2002-04/msg00010.html>.
+       When decreasing COUNT, keep it block-aligned.  */
+    /* *INDENT-OFF* */
+    enum { BUGGY_READ_MAXIMUM = INT_MAX & ~8191 };
+    /* *INDENT-ON* */
 
-  for (;;)
+    for (;;)
     {
-      ssize_t result = read (fd, buf, count);
+        ssize_t result = read (fd, buf, count);
 
-      if (0 <= result)
-        return result;
-      else if (IS_EINTR (errno))
-        continue;
-      else if (errno == EINVAL && BUGGY_READ_MAXIMUM < count)
-        count = BUGGY_READ_MAXIMUM;
-      else
-        return result;
+        if (0 <= result)
+            return result;
+        else if (IS_EINTR (errno))
+            continue;
+        else if (errno == EINVAL && BUGGY_READ_MAXIMUM < count)
+            count = BUGGY_READ_MAXIMUM;
+        else
+            return result;
     }
 }
 
@@ -1262,28 +1264,28 @@ safe_read (int fd, void *buf, size_t count)
 static size_t
 full_read (int fd, void *buf, size_t count)
 {
-  size_t total = 0;
-  char *ptr = (char *) buf;
+    size_t total = 0;
+    char *ptr = (char *) buf;
 
-  while (count > 0)
+    while (count > 0)
     {
-      size_t n_rw = safe_read (fd, ptr, count);
-      if (n_rw == (size_t) (-1))
-        break;
-      if (n_rw == 0)
+        size_t n_rw = safe_read (fd, ptr, count);
+        if (n_rw == (size_t) (-1))
+            break;
+        if (n_rw == 0)
         {
-          errno = ZERO_BYTE_TRANSFER_ERRNO;
-          break;
+            errno = ZERO_BYTE_TRANSFER_ERRNO;
+            break;
         }
-      total += n_rw;
-      ptr += n_rw;
-      count -= n_rw;
+        total += n_rw;
+        ptr += n_rw;
+        count -= n_rw;
     }
 
-  return total;
+    return total;
 }
 
-#endif  /* STAT_READ_FILSYS */
+#endif /* STAT_READ_FILSYS */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1298,7 +1300,7 @@ full_read (int fd, void *buf, size_t count)
 static int
 get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 {
-#ifdef STAT_STATVFS        /* POSIX, except glibc/Linux */
+#ifdef STAT_STATVFS             /* POSIX, except glibc/Linux */
 
     struct statvfs fsd;
 
@@ -1306,8 +1308,11 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         return -1;
 
     /* f_frsize isn't guaranteed to be supported.  */
-    fsp->fsu_blocksize = (fsd.f_frsize
-                          ? PROPAGATE_ALL_ONES (fsd.f_frsize) : PROPAGATE_ALL_ONES (fsd.f_bsize));
+    /* *INDENT-OFF* */
+    fsp->fsu_blocksize = fsd.f_frsize
+        ? PROPAGATE_ALL_ONES (fsd.f_frsize)
+        : PROPAGATE_ALL_ONES (fsd.f_bsize);
+    /* *INDENT-ON* */
 
 #elif defined STAT_STATVFS64    /* AIX */
 
@@ -1317,8 +1322,11 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         return -1;
 
     /* f_frsize isn't guaranteed to be supported.  */
-    fsp->fsu_blocksize = (fsd.f_frsize
-                          ? PROPAGATE_ALL_ONES (fsd.f_frsize) : PROPAGATE_ALL_ONES (fsd.f_bsize));
+    /* *INDENT-OFF* */
+    fsp->fsu_blocksize = fsd.f_frsize
+        ? PROPAGATE_ALL_ONES (fsd.f_frsize)
+        : PROPAGATE_ALL_ONES (fsd.f_bsize);
+    /* *INDENT-ON* */
 
 #elif defined STAT_STATFS2_FS_DATA      /* Ultrix */
 
@@ -1447,7 +1455,6 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
     fsp->fsu_ffree = PROPAGATE_ALL_ONES (fsd.f_ffree);
 
 #endif
-
     (void) disk;                /* avoid argument-unused warning */
     return 0;
 }
@@ -1517,7 +1524,9 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         myfs_stats->typename = entry->me_type;
         myfs_stats->mpoint = entry->me_mountdir;
         myfs_stats->device = entry->me_devname;
-        myfs_stats->avail = ((uintmax_t) (getuid () ? fs_use.fsu_bavail : fs_use.fsu_bfree) * fs_use.fsu_blocksize) >> 10;
+        myfs_stats->avail =
+            ((uintmax_t) (getuid ()? fs_use.fsu_bavail : fs_use.fsu_bfree) *
+             fs_use.fsu_blocksize) >> 10;
         myfs_stats->total = ((uintmax_t) fs_use.fsu_blocks * fs_use.fsu_blocksize) >> 10;
         myfs_stats->nfree = (uintmax_t) fs_use.fsu_ffree;
         myfs_stats->nodes = (uintmax_t) fs_use.fsu_files;
