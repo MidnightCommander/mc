@@ -78,6 +78,139 @@ sigintr_handler (int signo)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+void
+show_clock (void)
+{
+    int lngstr;
+    time_t curtime;
+    int yt, xt;
+
+    char timestr[11] = "";
+
+    clock_type = op_clock_type;
+
+    if (clock_type)
+    {
+        curtime = time (0);
+
+        if (clock_type == HOUR_MIN)
+        {
+            lngstr = 6;
+            if (!(strftime (timestr, lngstr, "%R", localtime (&curtime))))
+                strcpy (timestr, "??:??");
+        }
+        else if (clock_type == HOUR_MIN_SEC)
+        {
+            lngstr = 9;
+            if (!(strftime (timestr, lngstr, "%X", localtime (&curtime))))
+                strcpy (timestr, "??:??:??");
+        }
+
+        tty_getyx (&yt, &xt);
+        tty_gotoyx (0, COLS - lngstr);
+        tty_print_string (timestr);
+        tty_gotoyx (yt, xt);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+clock_interrupt_handler (void)
+{
+    if (clock_type)
+    {
+        show_clock ();
+
+#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__bsdi__)
+        mc_refresh ();
+#endif
+
+#ifdef SIGACT
+        sigaction (SIGALRM, &clock_new, &clock_dummy);
+#else
+        signal (SIGALRM, clock_interrupt_handler);
+#endif
+        alarm (clock_ticks);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+set_clock_type (int ct)
+{
+    if (ct == HOUR_MIN_SEC)
+    {
+        /* update every seconds */
+        clock_type = ct;
+        clock_ticks = 1;
+    }
+    else if (ct == HOUR_MIN)
+    {
+        /* update every minits */
+        clock_type = ct;
+        clock_ticks = 60;
+    }
+    else
+    {
+        /* no clock at all */
+        clock_type = 0;
+        clock_ticks = 0;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+clock_init (void)
+{
+    if (op_clock_type)
+    {
+        set_clock_type (op_clock_type);
+        show_clock ();
+#ifdef SIGACT
+        clock_new.sa_handler = clock_interrupt_handler;
+        sigemptyset (&clock_new.sa_mask);
+        clock_new.sa_flags = 0;
+        sigaction (SIGALRM, &clock_new, &clock_old);
+#else
+        clock_alarm = signal (SIGALRM, clock_interrupt_handler);
+#endif
+        clock_remain = alarm (clock_ticks);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+clock_cancel (void)
+{
+    if (clock_type)
+    {
+#ifdef SIGACT
+        sigaction (SIGALRM, &clock_old, &clock_dummy);
+        if (clock_old.sa_handler != SIG_IGN)
+            alarm (clock_remain);
+#else
+        signal (SIGALRM, clock_alarm);
+        if (clock_alarm != SIG_IGN)
+            alarm (clock_remain);
+#endif
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+clock_resume (void)
+{
+    if (clock_type)
+        clock_interrupt_handler ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /**
  * Check terminal type. If $TERM is not set or value is empty, mc finishes with EXIT_FAILURE.
  *

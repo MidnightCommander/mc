@@ -342,6 +342,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     do_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
+    clock_init ();
 
     tty_setup_sigwinch (sigwinch_handler);
 }

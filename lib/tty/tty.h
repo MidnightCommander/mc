@@ -71,6 +71,13 @@ extern int reset_hp_softkeys;
 
 /*** declarations of public functions ************************************************************/
 
+void clock_interrupt_handler (void);
+void set_clock_type (int ct);
+void clock_init (void);
+void clock_cancel (void);
+void clock_resume (void);
+void show_clock (void);
+
 extern void tty_beep (void);
 
 /* {{{ Input }}} */

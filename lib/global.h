@@ -146,6 +146,10 @@
 
 /*** enums ***************************************************************************************/
 
+#define NO_CLOCK      0
+#define HOUR_MIN_SEC  1
+#define HOUR_MIN      2
+
 /* run mode and params */
 typedef enum
 {
@@ -274,7 +278,17 @@ typedef struct
 
 /*** global variables defined in .c file *********************************************************/
 
+extern unsigned int clock_remain;
 extern mc_global_t mc_global;
+extern int op_clock_type;
+extern int clock_ticks;
+extern int clock_type;
+
+#ifdef SIGACT
+struct sigaction clock_new, clock_old, clock_dummy;
+#else
+void (*clock_alarm) (int);
+#endif
 
 /*** declarations of public functions ************************************************************/
 

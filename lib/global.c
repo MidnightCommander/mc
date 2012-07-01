@@ -1,3 +1,4 @@
+
 /*
    Global structure for some library-related variables
 
@@ -45,6 +46,17 @@
 /* *INDENT-ON* */
 
 /*** global variables ****************************************************************************/
+
+#ifdef SIGACT
+struct sigaction clock_new, clock_old, clock_dummy;
+#else
+void (*clock_alarm) (int);
+#endif
+
+unsigned int clock_remain;
+int op_clock_type = HOUR_MIN_SEC;
+int clock_ticks;
+int clock_type;
 
 /* *INDENT-OFF* */
 mc_global_t mc_global = {

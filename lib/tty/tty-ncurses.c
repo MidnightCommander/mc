@@ -205,6 +205,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     noecho ();
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
+    clock_init ();
 
     tty_setup_sigwinch (sigwinch_handler);
 }

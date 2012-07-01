@@ -226,6 +226,12 @@ menubar_draw (WMenuBar * menubar)
 
         tty_print_char (' ');
     }
+    if (op_clock_type != NO_CLOCK)
+    {
+        mc_log ("show_clock\n");
+        clock_resume ();
+        show_clock ();
+    }
 
     if (menubar->is_dropped)
         menubar_draw_drop (menubar);
