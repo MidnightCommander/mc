@@ -138,6 +138,7 @@ panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
     {
     case DLG_INIT:
     case DLG_POST_KEY:
+    case DLG_FOCUS:
         tty_setcolor (MENU_ENTRY_COLOR);
         update_command ();
         return MSG_HANDLED;
