@@ -3401,19 +3401,17 @@ edit_complete_word_cmd (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 void
 edit_select_codepage_cmd (WEdit * edit)
 {
-#ifdef HAVE_CHARSET
     if (do_select_codepage ())
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
     send_message ((Widget *) edit, WIDGET_DRAW, 0);
-#else
-    (void) edit;
-#endif
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
