@@ -57,11 +57,7 @@ else
 fi
 RPM2CPIO="rpm2cpio"
 
-
 SED="sed"
-# Surround the whole filename with single quotes and handle specially
-# \', ' and \ at the end of the string.
-SEDCMD="s/ /\\\\ /g;s/'/\\\\'/g;s/\"/\\\\\"/g"
 
 param=$1; shift
 rpm_filename=$1; shift
@@ -75,7 +71,7 @@ mcrpmfs_getSupportedTags()
 
 mcrpmfs_getDesription()
 {
-    $RPM -qip "`echo ${rpm_filename}| $SED "${SEDCMD}"`"
+    $RPM -qip "${rpm_filename}"
 }
 
 mcrpmfs_getAllNeededTags()
@@ -103,17 +99,17 @@ mcrpmfs_getAllNeededTags()
 "|PROVIDES=%{PROVIDES}"\
 ${tag_CONFLICTS}\
 "|PACKAGER=%{PACKAGER}" \
-    "`echo ${rpm_filename}| $SED "${SEDCMD}"`"
+    "${rpm_filename}"
 }
 
 mcrpmfs_getRawOneTag()
 {
-    $RPM -qp --qf "$1" "`echo ${rpm_filename}| $SED "${SEDCMD}"`"
+    $RPM -qp --qf "$1" "${rpm_filename}"
 }
 
 mcrpmfs_getOneTag()
 {
-    echo $AllTAGS | sed "s/.*|${1}=//" | cut -d '|' -f 1
+    echo $AllTAGS | $SED "s/.*|${1}=//" | cut -d '|' -f 1
 }
 
 AllTAGS=`mcrpmfs_getAllNeededTags "$1"`
@@ -238,17 +234,17 @@ mcrpmfs_copyout ()
 	HEADER) mcrpmfs_getDesription > "$2"; exit 0;;
 	INSTALL)
 	    echo "# Run this script to install this RPM package" > "$2"
-	    echo $RPM -ivh "`echo ${rpm_filename}| $SED "${SEDCMD}"`" >> "$2"
+	    echo $RPM -ivh "${rpm_filename}" >> "$2"
 	    exit 0
 	;;
 	UPGRADE)
 	    echo "# Run this to upgrade this RPM package" > "$2"
-	    echo $RPM -Uvh "`echo ${rpm_filename}| $SED "${SEDCMD}"`" >> "$2"
+	    echo $RPM -Uvh "${rpm_filename}" >> "$2"
 	    exit 0
 	;;
 	REBUILD)
 	    echo "# Run this to rebuild this RPM package" > "$2"
-	    echo $RPMBUILD --rebuild "`echo ${rpm_filename}| $SED "${SEDCMD}"`" >> "$2"
+	    echo $RPMBUILD --rebuild "${rpm_filename}" >> "$2"
 	    exit 0
 	;;
 	ERROR) mcrpmfs_getDesription > /dev/null 2> "$2"; exit 0;;
@@ -276,14 +272,14 @@ mcrpmfs_copyout ()
 	INFO/SCRIPTS/PREUN)	mcrpmfs_getRawOneTag "%{RPMTAG_PREUN}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/POSTUN)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTUN}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/VERIFYSCRIPT)	mcrpmfs_getRawOneTag "%{VERIFYSCRIPT}\n" > "$2"; exit 0;;
-	INFO/SCRIPTS/ALL)		$RPM -qp --scripts "`echo ${rpm_filename}| $SED "${SEDCMD}"`" > "$2"; exit 0;;
+	INFO/SCRIPTS/ALL)		$RPM -qp --scripts "${rpm_filename}" > "$2"; exit 0;;
 	INFO/SUMMARY)		mcrpmfs_getRawOneTag "%{SUMMARY}\n" > "$2"; exit 0;;
 	INFO/OS)		mcrpmfs_getRawOneTag "%{OS}\n" > "$2"; exit 0;;
 	INFO/CHANGELOG)		mcrpmfs_getRawOneTag "[* %{CHANGELOGTIME:date} %{CHANGELOGNAME}\n%{CHANGELOGTEXT}\n\n]\n" > "$2"; exit 0;;
 	INFO/SIZE)		mcrpmfs_getRawOneTag "%{SIZE} bytes\n" > "$2"; exit 0;;
 	INFO/OBSOLETES)		mcrpmfs_getRawOneTag "[%{OBSOLETENAME} %|OBSOLETEFLAGS?{%{OBSOLETEFLAGS:depflags} %{OBSOLETEVERSION}}:{}|\n]" > "$2"; exit 0;;
 	INFO/CONFLICTS)		mcrpmfs_getRawOneTag "[%{CONFLICTNAME} %{CONFLICTFLAGS:depflags} %{CONFLICTVERSION}\n]" >"$2"; exit 0;;
-	CONTENTS.cpio)		$RPM2CPIO "`echo ${rpm_filename}| $SED "${SEDCMD}"`" > "$2"; exit 0;;
+	CONTENTS.cpio)		$RPM2CPIO "${rpm_filename}" > "$2"; exit 0;;
 	*)
 	    ;;
     esac
@@ -292,9 +288,9 @@ mcrpmfs_copyout ()
 mcrpmfs_run ()
 {
     case "$1" in
-	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "`echo ${rpm_filename}| $SED "${SEDCMD}"`"; exit 0;;
-	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "`echo ${rpm_filename}| $SED "${SEDCMD}"`"; exit 0;;
-	REBUILD) echo "Rebuilding \"${rpm_filename}\""; $RPMBUILD --rebuild "`echo ${rpm_filename}| $SED "${SEDCMD}"`"; exit 0;;
+	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "${rpm_filename}"; exit 0;;
+	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "${rpm_filename}"; exit 0;;
+	REBUILD) echo "Rebuilding \"${rpm_filename}\""; $RPMBUILD --rebuild "${rpm_filename}"; exit 0;;
     esac
 }
 
