@@ -252,10 +252,7 @@ init_subshell_child (const char *pty_name)
 
     /* It simplifies things to change to our home directory here, */
     /* and the user's startup file may do a `cd' command anyway   */
-    {
-        int ret;
-        ret = chdir (mc_config_get_home_dir ());        /* FIXME? What about when we re-run the subshell? */
-    }
+    chdir (mc_config_get_home_dir ());        /* FIXME? What about when we re-run the subshell? */
 
     /* Set MC_SID to prevent running one mc from another */
     mc_sid = getsid (0);

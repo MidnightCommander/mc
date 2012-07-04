@@ -251,9 +251,8 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
 
     if (logfile)
     {
-        size_t ret;
-        ret = fwrite (str, strlen (str), 1, logfile);
-        ret = fflush (logfile);
+        (void) fwrite (str, strlen (str), 1, logfile);
+        (void) fflush (logfile);
     }
 
     tty_enable_interrupt_key ();
@@ -330,13 +329,13 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
     }
     else
     {
-        res = dup2 (fileset1[0], 0);
+        (void) dup2 (fileset1[0], 0);
         close (fileset1[0]);
         close (fileset1[1]);
-        res = dup2 (fileset2[1], 1);
+        (void) dup2 (fileset2[1], 1);
         close (2);
         /* stderr to /dev/null */
-        res = open ("/dev/null", O_WRONLY);
+        (void) open ("/dev/null", O_WRONLY);
         close (fileset2[0]);
         close (fileset2[1]);
         execvp (path, const_cast (char **, argv));

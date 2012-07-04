@@ -2188,7 +2188,6 @@ static void
 do_merge_hunk (WDiff * dview)
 {
     int from1, to1, from2, to2;
-    int res;
     int hunk;
 
     hunk = get_current_hunk (dview, &from1, &to1, &from2, &to2);
@@ -2235,7 +2234,7 @@ do_merge_hunk (WDiff * dview)
         }
         fflush (merge_file);
         fclose (merge_file);
-        res = rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
+        rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
         mc_unlink (merge_file_name_vpath);
         vfs_path_free (merge_file_name_vpath);
     }
@@ -2975,7 +2974,7 @@ dview_ok_to_exit (WDiff * dview)
         break;
     case 1:                    /* No */
         if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
-            res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+            mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
         /* fall through */
     default:
         res = TRUE;
