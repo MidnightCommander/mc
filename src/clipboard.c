@@ -66,7 +66,6 @@ clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_
                             gpointer init_data, gpointer data)
 {
     char *tmp, *cmd;
-    int res = 0;
     const char *d = getenv ("DISPLAY");
 
     (void) event_group_name;
@@ -81,7 +80,7 @@ clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_
     cmd = g_strconcat (clipboard_store_path, " ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)
-        res = my_system (EXECUTE_AS_SHELL, shell, cmd);
+        (void) my_system (EXECUTE_AS_SHELL, shell, cmd);
 
     g_free (cmd);
     g_free (tmp);
@@ -127,7 +126,6 @@ clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name
 {
     int file;
     vfs_path_t *fname_vpath = NULL;
-    ssize_t ret;
     size_t str_len;
     const char *text = (const char *) data;
 
@@ -147,7 +145,7 @@ clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name
         return TRUE;
 
     str_len = strlen (text);
-    ret = mc_write (file, (char *) text, str_len);
+    (void) mc_write (file, (char *) text, str_len);
     mc_close (file);
     return TRUE;
 }

@@ -1523,10 +1523,8 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
     {
         if (logfile)
         {
-            size_t ret1;
-            int ret2;
-            ret1 = fwrite (&c, 1, 1, logfile);
-            ret2 = fflush (logfile);
+            (void) fwrite (&c, 1, 1, logfile);
+            (void) fflush (logfile);
         }
         if (c == '\n')
             return 1;
