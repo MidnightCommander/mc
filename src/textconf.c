@@ -64,6 +64,9 @@ static const char *const vfs_supported[] = {
 #ifdef ENABLE_VFS_FTP
     "ftpfs",
 #endif
+#ifdef ENABLE_VFS_SFTP
+    "sftpfs",
+#endif
 #ifdef ENABLE_VFS_FISH
     "fish",
 #endif

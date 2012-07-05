@@ -86,6 +86,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
 {
     unsigned long sftp_open_flags = 0;
     int sftp_open_mode = 0;
+    gboolean do_append = FALSE;
     sftpfs_file_handler_data_t *file_handler_data;
     sftpfs_super_data_t *super_data;
     char *name;
@@ -103,7 +104,11 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
     {
         sftp_open_flags = (flags & O_WRONLY) != 0 ? LIBSSH2_FXF_WRITE : 0;
         sftp_open_flags |= (flags & O_CREAT) != 0 ? LIBSSH2_FXF_CREAT : 0;
-        sftp_open_flags |= (flags & O_APPEND) != 0 ? LIBSSH2_FXF_APPEND : 0;
+        if ((flags & O_APPEND) != 0)
+        {
+            sftp_open_flags |= LIBSSH2_FXF_APPEND;
+            do_append = TRUE;
+        }
         sftp_open_flags |= (flags & O_TRUNC) != 0 ? LIBSSH2_FXF_TRUNC : 0;
 
         sftp_open_mode = LIBSSH2_SFTP_S_IRUSR |
@@ -138,7 +143,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
     file_handler_data->mode = mode;
     file_handler->data = file_handler_data;
 
-    if ((flags & O_APPEND) != 0)
+    if (do_append)
     {
         struct stat file_info;
 

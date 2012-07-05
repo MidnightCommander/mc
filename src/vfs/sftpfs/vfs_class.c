@@ -635,6 +635,34 @@ sftpfs_cb_errno (struct vfs_class *me)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for fill_names VFS function.
+ * Add SFTP connections to the 'Active VFS connections'  list
+ *
+ * @param me   unused
+ * @param func callback function for adding SFTP-connection to list of active connections
+ */
+
+static void
+sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
+{
+    GList *iter;
+
+    (void) me;
+
+    for (iter = sftpfs_subclass.supers; iter != NULL; iter = g_list_next (iter))
+    {
+        const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
+        char *name;
+
+        name = vfs_path_element_build_pretty_path_str (super->path_element);
+
+        func (name);
+        g_free (name);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -662,6 +690,8 @@ sftpfs_init_class_callbacks (void)
 {
     sftpfs_class.init = sftpfs_cb_init;
     sftpfs_class.done = sftpfs_cb_done;
+
+    sftpfs_class.fill_names = sftpfs_cb_fill_names;
 
     sftpfs_class.opendir = sftpfs_cb_opendir;
     sftpfs_class.readdir = sftpfs_cb_readdir;
