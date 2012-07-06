@@ -854,7 +854,7 @@ init_cpiofs (void)
 {
     static struct vfs_s_subclass cpio_subclass;
 
-    cpio_subclass.flags = VFS_S_READONLY;        /* FIXME: cpiofs used own temp files */
+    cpio_subclass.flags = VFS_S_READONLY;       /* FIXME: cpiofs used own temp files */
     cpio_subclass.archive_check = cpio_super_check;
     cpio_subclass.archive_same = cpio_super_same;
     cpio_subclass.open_archive = cpio_open_archive;

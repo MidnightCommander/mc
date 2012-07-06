@@ -422,7 +422,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
                 goto ret;
         }
 
-        tmp = name_quote ( vfs_path_get_last_path_str (name_vpath), 0);
+        tmp = name_quote (vfs_path_get_last_path_str (name_vpath), 0);
     }
 
     cmd = g_strconcat (info->path, info->prefix, " list ",

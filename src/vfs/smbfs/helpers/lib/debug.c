@@ -22,7 +22,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include "includes.h"
 
@@ -84,10 +84,10 @@
  *                  levels higher than DEBUGLEVEL will not be processed.
  */
 
-FILE   *dbf        = NULL;
-pstring debugf     = "";
-BOOL    append_log = False;
-int     DEBUGLEVEL = 1;
+FILE *dbf = NULL;
+pstring debugf = "";
+BOOL append_log = False;
+int DEBUGLEVEL = 1;
 
 
 /* -------------------------------------------------------------------------- **
@@ -108,9 +108,10 @@ int     DEBUGLEVEL = 1;
  *  format_pos      - Marks the first free byte of the format_bufr.
  */
 
-static BOOL    stdout_logging = False;
-static pstring format_bufr    = { '\0' };
-static size_t  format_pos     = 0;
+static BOOL stdout_logging = False;
+static pstring format_bufr = { '\0' };
+
+static size_t format_pos = 0;
 
 
 /* -------------------------------------------------------------------------- **
@@ -121,15 +122,16 @@ static size_t  format_pos     = 0;
  * get ready for syslog stuff
  * ************************************************************************** **
  */
-void setup_logging( const char *pname, BOOL interactive )
-  {
-  (void) pname;
-  if( interactive )
+void
+setup_logging (const char *pname, BOOL interactive)
+{
+    (void) pname;
+    if (interactive)
     {
-    stdout_logging = True;
-    dbf = stderr;
+        stdout_logging = True;
+        dbf = stderr;
     }
-  } /* setup_logging */
+}                               /* setup_logging */
 
 /* ************************************************************************** **
  * Write an debug message on the debugfile.
@@ -137,68 +139,70 @@ void setup_logging( const char *pname, BOOL interactive )
  * ************************************************************************** **
  */
 #ifdef HAVE_STDARG_H
- int Debug1( const char *format_str, ... )
+int
+Debug1 (const char *format_str, ...)
 {
 #else
- int Debug1(va_alist)
-va_dcl
-{  
-  const char *format_str;
+int
+Debug1 (va_alist)
+     va_dcl
+{
+    const char *format_str;
 #endif
-  va_list ap;  
-  int old_errno = errno;
+    va_list ap;
+    int old_errno = errno;
 
-  if( stdout_logging )
+    if (stdout_logging)
     {
 #ifdef HAVE_STDARG_H
-    va_start( ap, format_str );
+        va_start (ap, format_str);
 #else
-    va_start( ap );
-    format_str = va_arg( ap, const char * );
+        va_start (ap);
+        format_str = va_arg (ap, const char *);
 #endif
-    (void)vfprintf( dbf, format_str, ap );
-    va_end( ap );
-    errno = old_errno;
-    return( 0 );
-    }
-  
-    if( !dbf && *debugf)
-      {
-      mode_t oldumask = umask( 022 );
-
-      if( append_log )
-        dbf = sys_fopen( debugf, "a" );
-      else
-        dbf = sys_fopen( debugf, "w" );
-      (void)umask( oldumask );
-      if( dbf )
-        {
-        setbuf( dbf, NULL );
-        }
-      else
-        {
+        (void) vfprintf (dbf, format_str, ap);
+        va_end (ap);
         errno = old_errno;
-        return(0);
+        return (0);
+    }
+
+    if (!dbf && *debugf)
+    {
+        mode_t oldumask = umask (022);
+
+        if (append_log)
+            dbf = sys_fopen (debugf, "a");
+        else
+            dbf = sys_fopen (debugf, "w");
+        (void) umask (oldumask);
+        if (dbf)
+        {
+            setbuf (dbf, NULL);
         }
-      }
+        else
+        {
+            errno = old_errno;
+            return (0);
+        }
+    }
 
     if (dbf)
     {
 #ifdef HAVE_STDARG_H
-    va_start( ap, format_str );
+        va_start (ap, format_str);
 #else
-    va_start( ap );
-    format_str = va_arg( ap, const char * );
+        va_start (ap);
+        format_str = va_arg (ap, const char *);
 #endif
-    (void)vfprintf( dbf, format_str, ap );
-    va_end( ap );
-    (void)fflush( dbf );
+        (void) vfprintf (dbf, format_str, ap);
+        va_end (ap);
+        (void) fflush (dbf);
     }
 
-  errno = old_errno;
+    errno = old_errno;
 
-  return( 0 );
-  } /* Debug1 */
+    return (0);
+}                               /* Debug1 */
 
 
 /* ************************************************************************** **
@@ -209,12 +213,13 @@ va_dcl
  *
  * ************************************************************************** **
  */
-static void bufr_print( void )
-  {
-  format_bufr[format_pos] = '\0';
-  (void)Debug1( "%s", format_bufr );
-  format_pos = 0;
-  } /* bufr_print */
+static void
+bufr_print (void)
+{
+    format_bufr[format_pos] = '\0';
+    (void) Debug1 ("%s", format_bufr);
+    format_pos = 0;
+}                               /* bufr_print */
 
 /* ************************************************************************** **
  * Format the debug message text.
@@ -233,42 +238,42 @@ static void bufr_print( void )
  *
  * ************************************************************************** **
  */
-static void format_debug_text( char *msg )
-  {
-  size_t i;
-  BOOL timestamp = (!stdout_logging && (lp_timestamp_logs() || 
-					!(lp_loaded())));
+static void
+format_debug_text (char *msg)
+{
+    size_t i;
+    BOOL timestamp = (!stdout_logging && (lp_timestamp_logs () || !(lp_loaded ())));
 
-  for( i = 0; msg[i]; i++ )
+    for (i = 0; msg[i]; i++)
     {
-    /* Indent two spaces at each new line. */
-    if(timestamp && 0 == format_pos)
-      {
-      format_bufr[0] = format_bufr[1] = ' ';
-      format_pos = 2;
-      }
+        /* Indent two spaces at each new line. */
+        if (timestamp && 0 == format_pos)
+        {
+            format_bufr[0] = format_bufr[1] = ' ';
+            format_pos = 2;
+        }
 
-    /* If there's room, copy the character to the format buffer. */
-    if( format_pos < FORMAT_BUFR_MAX )
-      format_bufr[format_pos++] = msg[i];
+        /* If there's room, copy the character to the format buffer. */
+        if (format_pos < FORMAT_BUFR_MAX)
+            format_bufr[format_pos++] = msg[i];
 
-    /* If a newline is encountered, print & restart. */
-    if( '\n' == msg[i] )
-      bufr_print();
+        /* If a newline is encountered, print & restart. */
+        if ('\n' == msg[i])
+            bufr_print ();
 
-    /* If the buffer is full dump it out, reset it, and put out a line
-     * continuation indicator.
-     */
-    if( format_pos >= FORMAT_BUFR_MAX )
-      {
-      bufr_print();
-      (void)Debug1( " +>\n" );
-      }
+        /* If the buffer is full dump it out, reset it, and put out a line
+         * continuation indicator.
+         */
+        if (format_pos >= FORMAT_BUFR_MAX)
+        {
+            bufr_print ();
+            (void) Debug1 (" +>\n");
+        }
     }
 
-  /* Just to be safe... */
-  format_bufr[format_pos] = '\0';
-  } /* format_debug_text */
+    /* Just to be safe... */
+    format_bufr[format_pos] = '\0';
+}                               /* format_debug_text */
 
 /* ************************************************************************** **
  * Flush debug output, including the format buffer content.
@@ -278,11 +283,12 @@ static void format_debug_text( char *msg )
  *
  * ************************************************************************** **
  */
-void dbgflush( void )
-  {
-  bufr_print();
-  (void)fflush( dbf );
-  } /* dbgflush */
+void
+dbgflush (void)
+{
+    bufr_print ();
+    (void) fflush (dbf);
+}                               /* dbgflush */
 
 /* ************************************************************************** **
  * Print a Debug Header.
@@ -306,38 +312,38 @@ void dbgflush( void )
  *
  * ************************************************************************** **
  */
-BOOL dbghdr( int level, const char *file, const char *func, int line )
-  {
-  if( format_pos )
+BOOL
+dbghdr (int level, const char *file, const char *func, int line)
+{
+    if (format_pos)
     {
-    /* This is a fudge.  If there is stuff sitting in the format_bufr, then
-     * the *right* thing to do is to call
-     *   format_debug_text( "\n" );
-     * to write the remainder, and then proceed with the new header.
-     * Unfortunately, there are several places in the code at which
-     * the DEBUG() macro is used to build partial lines.  That in mind,
-     * we'll work under the assumption that an incomplete line indicates
-     * that a new header is *not* desired.
+        /* This is a fudge.  If there is stuff sitting in the format_bufr, then
+         * the *right* thing to do is to call
+         *   format_debug_text( "\n" );
+         * to write the remainder, and then proceed with the new header.
+         * Unfortunately, there are several places in the code at which
+         * the DEBUG() macro is used to build partial lines.  That in mind,
+         * we'll work under the assumption that an incomplete line indicates
+         * that a new header is *not* desired.
+         */
+        return (True);
+    }
+
+    /* Don't print a header if we're logging to stdout. */
+    if (stdout_logging)
+        return (True);
+
+    /* Print the header if timestamps are turned on.  If parameters are
+     * not yet loaded, then default to timestamps on.
      */
-    return( True );
-    }
-
-  /* Don't print a header if we're logging to stdout. */
-  if( stdout_logging )
-    return( True );
-
-  /* Print the header if timestamps are turned on.  If parameters are
-   * not yet loaded, then default to timestamps on.
-   */
-  if( lp_timestamp_logs() || !(lp_loaded()) )
+    if (lp_timestamp_logs () || !(lp_loaded ()))
     {
-    /* Print it all out at once to prevent split syslog output. */
-    (void)Debug1( "[%s, %d] %s:%s(%d)\n",
-                  timestring(), level, file, func, line );
+        /* Print it all out at once to prevent split syslog output. */
+        (void) Debug1 ("[%s, %d] %s:%s(%d)\n", timestring (), level, file, func, line);
     }
 
-  return( True );
-  } /* dbghdr */
+    return (True);
+}                               /* dbghdr */
 
 /* ************************************************************************** **
  * Add text to the body of the "current" debug message via the format buffer.
@@ -353,37 +359,39 @@ BOOL dbghdr( int level, const char *file, const char *func, int line )
  * ************************************************************************** **
  */
 #ifdef HAVE_STDARG_H
- BOOL dbgtext( const char *format_str, ... )
-  {
-  va_list ap;
-  pstring msgbuf;
+BOOL
+dbgtext (const char *format_str, ...)
+{
+    va_list ap;
+    pstring msgbuf;
 
-  va_start( ap, format_str ); 
-  vslprintf( msgbuf, sizeof(msgbuf)-1, format_str, ap );
-  va_end( ap );
+    va_start (ap, format_str);
+    vslprintf (msgbuf, sizeof (msgbuf) - 1, format_str, ap);
+    va_end (ap);
 
-  format_debug_text( msgbuf );
+    format_debug_text (msgbuf);
 
-  return( True );
-  } /* dbgtext */
+    return (True);
+}                               /* dbgtext */
 
 #else
- BOOL dbgtext( va_alist )
- va_dcl
-  {
-  char *format_str;
-  va_list ap;
-  pstring msgbuf;
+BOOL
+dbgtext (va_alist)
+     va_dcl
+{
+    char *format_str;
+    va_list ap;
+    pstring msgbuf;
 
-  va_start( ap );
-  format_str = va_arg( ap, char * );
-  vslprintf( msgbuf, sizeof(msgbuf)-1, format_str, ap );
-  va_end( ap );
+    va_start (ap);
+    format_str = va_arg (ap, char *);
+    vslprintf (msgbuf, sizeof (msgbuf) - 1, format_str, ap);
+    va_end (ap);
 
-  format_debug_text( msgbuf );
+    format_debug_text (msgbuf);
 
-  return( True );
-  } /* dbgtext */
+    return (True);
+}                               /* dbgtext */
 
 #endif
 

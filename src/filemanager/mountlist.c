@@ -1233,7 +1233,9 @@ safe_read (int fd, void *buf, size_t count)
        INT_MAX bytes fails with errno == EINVAL.  See
        <http://lists.gnu.org/archive/html/bug-gnu-utils/2002-04/msg00010.html>.
        When decreasing COUNT, keep it block-aligned.  */
+    /* *INDENT-OFF* */
     enum { BUGGY_READ_MAXIMUM = INT_MAX & ~8191 };
+    /* *INDENT-ON* */
 
     for (;;)
     {

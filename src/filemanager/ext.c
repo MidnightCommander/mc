@@ -516,7 +516,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
     if (*have_type == 0)
     {
         vfs_path_t *localfile_vpath;
-        const char *realname;         /* name used with "file" */
+        const char *realname;   /* name used with "file" */
 
 #ifdef HAVE_CHARSET
         int got_encoding_data;
@@ -767,14 +767,14 @@ regex_command (const vfs_path_t * filename_vpath, const char *action, int *move_
             else if (!strncmp (p, "shell/", 6))
             {
                 p += 6;
-                if (*p == '.' && file_len >= (size_t)(q - p))
+                if (*p == '.' && file_len >= (size_t) (q - p))
                 {
                     if (!strncmp (p, filename + file_len - (q - p), q - p))
                         found = 1;
                 }
                 else
                 {
-                    if ((size_t)(q - p) == file_len && !strncmp (p, filename, q - p))
+                    if ((size_t) (q - p) == file_len && !strncmp (p, filename, q - p))
                         found = 1;
                 }
             }

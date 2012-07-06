@@ -675,7 +675,7 @@ str_utf8_term_trim (const char *text, int width)
 
     if (width < 1)
     {
-        result [0] = '\0';
+        result[0] = '\0';
         return result;
     }
 

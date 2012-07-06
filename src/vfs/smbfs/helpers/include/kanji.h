@@ -2,7 +2,7 @@
    Unix SMB/Netbios implementation.
    Version 1.9.
    Kanji Extensions
-*/
+ */
 #ifndef _KANJI_H_
 #define _KANJI_H_
 
@@ -86,7 +86,7 @@
 #define is_hangul(c) ((0x81 <= ((unsigned char) (c)) && ((unsigned char) (c)) <= 0xfd))
 
 /* For traditional Chinese (known as Big5 encoding - code page 950). */
-#define is_big5_c1(c) ((0xa1 <= ((unsigned char) (c)) && ((unsigned char) (c)) <= 0xf9)) 
+#define is_big5_c1(c) ((0xa1 <= ((unsigned char) (c)) && ((unsigned char) (c)) <= 0xf9))
 
 /* For simplified Chinese (code page - 936). */
 #define is_simpch_c1(c) ((0xa1 <= ((unsigned char) (c)) && ((unsigned char) (c)) <= 0xf7))
@@ -118,14 +118,14 @@
 /* Ensure we use our definitions in all other files than kanji.c. */
 
 /* Function pointers we will replace. */
-extern char *(*multibyte_strchr)(const char *s, int c);
-extern char *(*multibyte_strrchr)(const char *s, int c);
-extern char *(*multibyte_strstr)(const char *s1, const char *s2);
-extern char *(*multibyte_strtok)(char *s1, const char *s2);
-extern char *(*_dos_to_unix)(char *str, BOOL overwrite);
-extern char *(*_unix_to_dos)(char *str, BOOL overwrite);
-extern BOOL (*is_multibyte_char)(char c);
-extern int (*_skip_multibyte_char)(char c);
+extern char *(*multibyte_strchr) (const char *s, int c);
+extern char *(*multibyte_strrchr) (const char *s, int c);
+extern char *(*multibyte_strstr) (const char *s1, const char *s2);
+extern char *(*multibyte_strtok) (char *s1, const char *s2);
+extern char *(*_dos_to_unix) (char *str, BOOL overwrite);
+extern char *(*_unix_to_dos) (char *str, BOOL overwrite);
+extern BOOL (*is_multibyte_char) (char c);
+extern int (*_skip_multibyte_char) (char c);
 
 #define strchr(s1, c) ((*multibyte_strchr)((s1), (c)))
 #define strrchr(s1, c) ((*multibyte_strrchr)((s1), (c)))
