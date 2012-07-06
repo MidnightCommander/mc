@@ -27,7 +27,7 @@ struct selection
 
 void editcmd_dialog_replace_show (WEdit *, const char *, const char *, char **, char **);
 
-gboolean editcmd_dialog_search_show (WEdit *edit);
+gboolean editcmd_dialog_search_show (WEdit * edit);
 
 int editcmd_dialog_raw_key_query (const char *, const char *, int);
 

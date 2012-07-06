@@ -557,7 +557,7 @@ init_layout (void)
     }
 
     equal_split = panels_layout.horizontal_split ?
-                        panels_layout.horizontal_equal : panels_layout.vertical_equal;
+        panels_layout.horizontal_equal : panels_layout.vertical_equal;
 
     /* "Panel split" groupbox */
     bright_widget = button_new (6, 14, B_2RIGHT, NARROW_BUTTON, "&>", b_left_right_cback);

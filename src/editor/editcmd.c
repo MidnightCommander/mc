@@ -504,7 +504,7 @@ edit_save_cmd (WEdit * edit)
  */
 
 static inline gboolean
-edit_load_file_from_filename (Dlg_head *h, const vfs_path_t *vpath)
+edit_load_file_from_filename (Dlg_head * h, const vfs_path_t * vpath)
 {
     return edit_add_window (h, h->y + 1, h->x, h->lines - 2, h->cols, vpath, 0);
 }
@@ -2146,7 +2146,7 @@ edit_load_menu_file (Dlg_head * h)
     {
         vfs_path_free (menufile_vpath);
         menufile_vpath = vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, NULL);
-     }
+    }
 
     switch (dir)
     {
@@ -2171,7 +2171,7 @@ edit_load_menu_file (Dlg_head * h)
         }
         break;
 
-     default:
+    default:
         vfs_path_free (menufile_vpath);
         return FALSE;
     }
@@ -3699,6 +3699,6 @@ edit_set_spell_lang (void)
     }
     aspell_array_clean (lang_list);
 }
-#endif  /* HAVE_ASPELL */
+#endif /* HAVE_ASPELL */
 
 /* --------------------------------------------------------------------------------------------- */

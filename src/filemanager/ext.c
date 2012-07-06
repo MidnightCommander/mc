@@ -376,7 +376,7 @@ exec_extension_cd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension (const vfs_path_t *filename_vpath, const char *lc_data, int start_line)
+exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int start_line)
 {
     char *shell_string, *export_variables;
     vfs_path_t *temp_file_name_vpath = NULL;

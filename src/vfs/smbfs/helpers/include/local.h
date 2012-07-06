@@ -25,7 +25,7 @@
    refer to the special "printers" service */
 #define PRINTERS_NAME "printers"
 
-/* Yves Gaige <yvesg@hptnodur.grenoble.hp.com> requested this set this 	     */
+/* Yves Gaige <yvesg@hptnodur.grenoble.hp.com> requested this set this       */
 /* to a maximum of 8 if old smb clients break because of long printer names. */
 #define MAXPRINTERLEN 15
 
@@ -59,7 +59,7 @@
 #ifndef MAX_OPEN_FILES
 #define MAX_OPEN_FILES 10000
 #endif
- 
+
 /* the max number of simultanous connections to the server by all clients */
 #define MAXSTATUS 100000
 
@@ -80,7 +80,7 @@
 
 /* shall filenames with illegal chars in them get mangled in long
    filename listings? */
-#define MANGLE_LONG_FILENAMES 
+#define MANGLE_LONG_FILENAMES
 
 /* define this if you want to stop spoofing with .. and soft links
    NOTE: This also slows down the server considerably */
@@ -152,7 +152,7 @@
 #define SHORT_CONNECT_TIMEOUT 5000
 
 /* default socket options. Dave Miller thinks we should default to TCP_NODELAY
-   given the socket IO pattern that Samba uses*/
+   given the socket IO pattern that Samba uses */
 #ifdef TCP_NODELAY
 #define DEFAULT_SOCKET_OPTIONS "TCP_NODELAY"
 #else

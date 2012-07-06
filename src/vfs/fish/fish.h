@@ -21,7 +21,7 @@ extern int fish_directory_timeout;
 
 /*** declarations of public functions ************************************************************/
 
-void init_fish(void);
+void init_fish (void);
 
 /*** inline functions ****************************************************************************/
 

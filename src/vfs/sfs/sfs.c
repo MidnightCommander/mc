@@ -190,7 +190,8 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
                 COPY_CHAR;
                 continue;
             }
-            if (ptr != NULL) {
+            if (ptr != NULL)
+            {
                 COPY_STRING (ptr);
             }
         }

@@ -27,7 +27,7 @@
 #include <config.h>
 #include <errno.h>
 #include <stddef.h>
-#include <stdlib.h>     /* atoi() */
+#include <stdlib.h>             /* atoi() */
 
 #include "lib/global.h"
 
@@ -300,7 +300,7 @@ sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** er
         gboolean ok;
 
         ok = sftpfs_fill_config_entity_from_config
-                (ssh_config_handler, config_entity, vpath_element, error);
+            (ssh_config_handler, config_entity, vpath_element, error);
         fclose (ssh_config_handler);
 
         if (!ok)
@@ -380,13 +380,13 @@ void
 sftpfs_init_config_variables_patterns (void)
 {
     size_t structure_offsets[] = {
-        offsetof(sftpfs_ssh_config_entity_t, user),
-        offsetof(sftpfs_ssh_config_entity_t, real_host),
-        offsetof(sftpfs_ssh_config_entity_t, identities_only),
-        offsetof(sftpfs_ssh_config_entity_t, identity_file),
-        offsetof(sftpfs_ssh_config_entity_t, port),
-        offsetof(sftpfs_ssh_config_entity_t, password_auth),
-        offsetof(sftpfs_ssh_config_entity_t, pubkey_auth)
+        offsetof (sftpfs_ssh_config_entity_t, user),
+        offsetof (sftpfs_ssh_config_entity_t, real_host),
+        offsetof (sftpfs_ssh_config_entity_t, identities_only),
+        offsetof (sftpfs_ssh_config_entity_t, identity_file),
+        offsetof (sftpfs_ssh_config_entity_t, port),
+        offsetof (sftpfs_ssh_config_entity_t, password_auth),
+        offsetof (sftpfs_ssh_config_entity_t, pubkey_auth)
     };
 
     int i;

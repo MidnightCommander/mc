@@ -123,9 +123,13 @@ listbox_draw (WListbox * l, gboolean focused)
     const Dlg_head *h = l->widget.owner;
     const gboolean disabled = (((Widget *) l)->options & W_DISABLED) != 0;
     const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
-    int selc =
-        disabled ? DISABLED_COLOR : focused ? h->
-        color[DLG_COLOR_HOT_FOCUS] : h->color[DLG_COLOR_FOCUS];
+    /* *INDENT-OFF* */
+    int selc = disabled
+        ? DISABLED_COLOR
+        : focused
+            ? h->color[DLG_COLOR_HOT_FOCUS] 
+            : h->color[DLG_COLOR_FOCUS];
+    /* *INDENT-ON* */
 
     GList *le;
     int pos;

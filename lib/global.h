@@ -208,7 +208,7 @@ typedef struct
 
         /* Ugly hack in order to distinguish between left and right panel in menubar */
         /* Set if the command is being run from the "Right" menu */
-        gboolean is_right;          /* If the selected menu was the right */
+        gboolean is_right;      /* If the selected menu was the right */
     } widget;
 
     struct

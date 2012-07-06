@@ -24,9 +24,9 @@ extern int num_history_items_recorded;
 /* read history to the mc_config, but don't save config to file */
 GList *history_get (const char *input_name);
 /* load history form the mc_config */
-GList *history_load (struct mc_config_t * cfg, const char *name);
+GList *history_load (struct mc_config_t *cfg, const char *name);
 /* save history to the mc_config, but don't save config to file */
-void history_save (struct mc_config_t * cfg, const char *name, GList * h);
+void history_save (struct mc_config_t *cfg, const char *name, GList * h);
 /* for repositioning of history dialog we should pass widget to this
  * function, as position of history dialog depends on widget's position */
 char *history_show (GList ** history, Widget * widget, int current);

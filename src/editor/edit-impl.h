@@ -257,7 +257,7 @@ void edit_insert_over (WEdit * edit);
 int edit_insert_column_of_text_from_file (WEdit * edit, int file,
                                           long *start_pos, long *end_pos, int *col1, int *col2);
 
-char *edit_get_word_from_pos (WEdit * edit, long start_pos, long *start, gsize *len, gsize *cut);
+char *edit_get_word_from_pos (WEdit * edit, long start_pos, long *start, gsize * len, gsize * cut);
 long edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
 gboolean edit_load_back_cmd (WEdit * edit);
 gboolean edit_load_forward_cmd (WEdit * edit);

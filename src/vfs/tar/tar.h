@@ -11,7 +11,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void init_tarfs(void);
+void init_tarfs (void);
 
 /*** inline functions ****************************************************************************/
 

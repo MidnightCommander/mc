@@ -77,8 +77,7 @@ quick_dialog_skip (QuickDialog * qd, int nskip)
                          DLG_CENTER | DLG_TRYUP | DLG_REVERSE);
     else
         dd = create_dlg (TRUE, qd->ypos, qd->xpos, qd->ylen, qd->xlen,
-                         dialog_colors, qd->callback, qd->mouse, qd->help, qd->title,
-                         DLG_REVERSE);
+                         dialog_colors, qd->callback, qd->mouse, qd->help, qd->title, DLG_REVERSE);
 
     for (qw = qd->widgets; qw->widget_type != quick_end; qw++)
     {

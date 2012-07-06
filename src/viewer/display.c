@@ -59,7 +59,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define BUF_TRUNC_LEN 5 /* The length of the line displays the file size */
+#define BUF_TRUNC_LEN 5         /* The length of the line displays the file size */
 
 /*** file scope type declarations ****************************************************************/
 

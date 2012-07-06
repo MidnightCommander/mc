@@ -365,8 +365,7 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     int y = event->y;
 
     /* close the dialog by mouse click out of dialog area */
-    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0)
-        && ((event->type & GPM_DOWN) != 0) /* left click */
+    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0) /* left click */
         && !((x > h->x) && (x <= h->x + h->cols) && (y > h->y) && (y <= h->y + h->lines)))
     {
         h->ret_value = B_CANCEL;
@@ -766,7 +765,7 @@ default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 
 Dlg_head *
 create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
-            const int *colors, dlg_cb_fn callback,  mouse_h mouse_handler,
+            const int *colors, dlg_cb_fn callback, mouse_h mouse_handler,
             const char *help_ctx, const char *title, dlg_flags_t flags)
 {
     Dlg_head *new_d;

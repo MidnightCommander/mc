@@ -1600,7 +1600,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-midnight_event (Gpm_Event *event, void *data)
+midnight_event (Gpm_Event * event, void *data)
 {
     Dlg_head *h = (Dlg_head *) data;
     int ret = MOU_UNHANDLED;

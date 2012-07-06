@@ -59,7 +59,7 @@
  */
 
 int
-spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word, GArray *suggest)
+spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word, GArray * suggest)
 {
 
     int sug_dlg_h = 14;         /* dialog height */
@@ -154,11 +154,11 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
  */
 
 char *
-spell_dialog_lang_list_show (GArray *languages)
+spell_dialog_lang_list_show (GArray * languages)
 {
 
-    int lang_dlg_h = 12;              /* dialog height */
-    int lang_dlg_w = 30;              /* dialog width */
+    int lang_dlg_h = 12;        /* dialog height */
+    int lang_dlg_w = 30;        /* dialog width */
     char *selected_lang = NULL;
     unsigned int i;
     int res;

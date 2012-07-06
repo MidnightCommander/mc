@@ -4582,7 +4582,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
     g_string_free (tmp_conv, TRUE);
     return ret_vpath;
 }
-#endif  /* HAVE_CHARSET */
+#endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
 /**

@@ -110,7 +110,7 @@ is_8bit_printable (unsigned char c)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-resolve_symlinks (const vfs_path_t *vpath)
+resolve_symlinks (const vfs_path_t * vpath)
 {
     char *p, *p2;
     char *buf, *buf2, *q, *r, c;
@@ -164,7 +164,7 @@ resolve_symlinks (const vfs_path_t *vpath)
         canonicalize_pathname (buf);
         r = strchr (buf, 0);
         if (!*r || *(r - 1) != PATH_SEP)
-        /* FIXME: this condition is always true because r points to the EOL */
+            /* FIXME: this condition is always true because r points to the EOL */
         {
             *r++ = PATH_SEP;
             *r = 0;
