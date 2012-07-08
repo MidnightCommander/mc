@@ -2404,7 +2404,7 @@ static void
 dview_diff_options (WDiff * dview)
 {
     const char *quality_str[] = {
-        N_("&Normal"),
+        N_("No&rmal"),
         N_("&Fastest (Assume large files)"),
         N_("&Minimal (Find a smaller set of change)")
     };
