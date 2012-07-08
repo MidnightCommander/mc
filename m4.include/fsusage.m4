@@ -102,32 +102,6 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
   fi
 fi
 
-if test $ac_fsusage_space = no; then
-  # DEC Alpha running OSF/1
-  AC_MSG_CHECKING([for 3-argument statfs function (DEC OSF/1)])
-  AC_CACHE_VAL([fu_cv_sys_stat_statfs3_osf1],
-  [AC_RUN_IFELSE([AC_LANG_SOURCE([[
-#include <sys/param.h>
-#include <sys/types.h>
-#include <sys/mount.h>
-  int
-  main ()
-  {
-    struct statfs fsd;
-    fsd.f_fsize = 0;
-    return statfs (".", &fsd, sizeof (struct statfs)) != 0;
-  }]])],
-    [fu_cv_sys_stat_statfs3_osf1=yes],
-    [fu_cv_sys_stat_statfs3_osf1=no],
-    [fu_cv_sys_stat_statfs3_osf1=no])])
-  AC_MSG_RESULT([$fu_cv_sys_stat_statfs3_osf1])
-  if test $fu_cv_sys_stat_statfs3_osf1 = yes; then
-    ac_fsusage_space=yes
-    AC_DEFINE([STAT_STATFS3_OSF1], [1],
-              [   Define if  statfs takes 3 args.  (DEC Alpha running OSF/1)])
-  fi
-fi
-
 # Check for this unconditionally so we have a
 # good fallback on glibc/Linux > 2.6 < 2.6.36
 AC_MSG_CHECKING([for two-argument statfs with statfs.f_frsize member])
@@ -154,9 +128,36 @@ AC_CACHE_VAL([fu_cv_sys_stat_statfs2_frsize],
   [fu_cv_sys_stat_statfs2_frsize=no])])
 AC_MSG_RESULT([$fu_cv_sys_stat_statfs2_frsize])
 if test $fu_cv_sys_stat_statfs2_frsize = yes; then
+    ac_fsusage_space=yes
     AC_DEFINE([STAT_STATFS2_FRSIZE], [1],
 [  Define if statfs takes 2 args and struct statfs has a field named f_frsize.
    (glibc/Linux > 2.6)])
+fi
+
+if test $ac_fsusage_space = no; then
+  # DEC Alpha running OSF/1
+  AC_MSG_CHECKING([for 3-argument statfs function (DEC OSF/1)])
+  AC_CACHE_VAL([fu_cv_sys_stat_statfs3_osf1],
+  [AC_RUN_IFELSE([AC_LANG_SOURCE([[
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/mount.h>
+  int
+  main ()
+  {
+    struct statfs fsd;
+    fsd.f_fsize = 0;
+    return statfs (".", &fsd, sizeof (struct statfs)) != 0;
+  }]])],
+    [fu_cv_sys_stat_statfs3_osf1=yes],
+    [fu_cv_sys_stat_statfs3_osf1=no],
+    [fu_cv_sys_stat_statfs3_osf1=no])])
+  AC_MSG_RESULT([$fu_cv_sys_stat_statfs3_osf1])
+  if test $fu_cv_sys_stat_statfs3_osf1 = yes; then
+    ac_fsusage_space=yes
+    AC_DEFINE([STAT_STATFS3_OSF1], [1],
+              [   Define if  statfs takes 3 args.  (DEC Alpha running OSF/1)])
+  fi
 fi
 
 if test $ac_fsusage_space = no; then
