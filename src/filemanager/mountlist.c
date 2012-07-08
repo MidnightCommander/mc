@@ -276,6 +276,8 @@ me_remote (char const *fs_name, char const *fs_type _GL_UNUSED)
    preceding entries in /proc/mounts; that makes df hang if even one
    of the corresponding file systems is hard-mounted but not available.  */
 # if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+/* The FRSIZE fallback is not required in this case.  */
+#undef STAT_STATFS2_FRSIZE
 static int
 statvfs_works (void)
 {
