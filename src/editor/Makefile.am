@@ -13,5 +13,4 @@ libedit_la_SOURCES = \
 	syntax.c wordproc.c \
 	choosesyntax.c etags.c etags.h editcmd_dialogs.c editcmd_dialogs.h
 
-libedit_la_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
-
+AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)

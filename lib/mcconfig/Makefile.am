@@ -7,6 +7,7 @@ libmcconfig_la_SOURCES = \
 	set.c \
 	paths.c
 
-libmcconfig_la_CFLAGS = -I$(top_srcdir) \
-	$(GLIB_CFLAGS) \
+AM_CPPFLAGS = \
 	-DLOCALEDIR=\""$(localedir)"\"
+
+AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)
