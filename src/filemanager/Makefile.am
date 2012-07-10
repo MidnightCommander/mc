@@ -31,8 +31,10 @@ libmcfilemanager_la_SOURCES = \
 libmcfilemanager_la_SOURCES += mountlist.c mountlist.h
 #endif
 
-libmcfilemanager_la_CFLAGS = -I$(top_srcdir) \
-	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
-	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
+AM_CPPFLAGS = \
+	-DDATADIR=\""$(pkgdatadir)/"\" \
+	-DLOCALEDIR=\""$(localedir)"\"
+
+AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CFLAGS)
 
 libmcfilemanager_la_LIBADD = ../../lib/libmc.la
