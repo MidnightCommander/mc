@@ -288,6 +288,9 @@ enum
     CK_WindowNext,
     CK_WindowPrev,
     /* misc commands */
+    CK_SpellCheck,
+    CK_SpellCheckCurrentWord,
+    CK_SpellCheckSelectLang,
     CK_InsertOverwrite,
     CK_ParagraphFormat,
     CK_MatchBracket,

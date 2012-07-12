@@ -8,6 +8,7 @@
    Written by:
    Paul Sheer, 1996, 1997
    Andrew Borodin <aborodin@vmail.ru> 2012
+   Ilia Maslakov <il.smind@gmail.com> 2012
 
    This file is part of the Midnight Commander.
 
@@ -78,6 +79,10 @@
 #include "edit-impl.h"
 #include "editwidget.h"
 #include "editcmd_dialogs.h"
+#ifdef HAVE_ASPELL
+#include "spell.h"
+#include "spell_dialogs.h"
+#endif
 #include "etags.h"
 
 /*** global variables ****************************************************************************/
@@ -1080,14 +1085,6 @@ pipe_mail (WEdit * edit, char *to, char *subject, char *cc)
             fputc (edit_get_byte (edit, i), p);
         pclose (p);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-is_break_char (char c)
-{
-    return (isspace (c) || strchr ("{}[]()<>=|/\\!?~-+`'\",.;:#$%^&*", c));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3573,5 +3570,138 @@ edit_get_match_keyword_cmd (WEdit * edit)
     }
     g_free (match_expr);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef HAVE_ASPELL
+int
+edit_suggest_current_word (WEdit * edit)
+{
+    gsize cut_len = 0;
+    gsize word_len = 0;
+    long word_start = 0;
+    int retval = B_SKIP_WORD;
+    char *match_word;
+
+    /* search start of word to spell check */
+    match_word = edit_get_word_from_pos (edit, edit->curs1, &word_start, &word_len, &cut_len);
+
+#ifdef HAVE_CHARSET
+    if (mc_global.source_codepage >= 0 && (mc_global.source_codepage != mc_global.display_codepage))
+    {
+        GString *tmp_word;
+
+        tmp_word = str_convert_to_display (match_word);
+        g_free (match_word);
+        match_word = g_string_free (tmp_word, FALSE);
+    }
+#endif
+    if (!aspell_check (match_word, (int) word_len))
+    {
+        GArray *suggest;
+        unsigned int res;
+
+        suggest = g_array_new (TRUE, FALSE, sizeof (char *));
+
+        res = aspell_suggest (suggest, match_word, (int) word_len);
+        if (res != 0)
+        {
+            char *new_word = NULL;
+
+            edit->found_start = word_start;
+            edit->found_len = word_len;
+            edit->force |= REDRAW_PAGE;
+            edit_scroll_screen_over_cursor (edit);
+            edit_render_keypress (edit);
+
+            retval = spell_dialog_spell_suggest_show (edit, match_word, &new_word, suggest);
+            edit_cursor_move (edit, word_len - cut_len);
+
+            if (retval == B_ENTER && new_word != NULL)
+            {
+                guint i;
+                char *cp_word;
+
+#ifdef HAVE_CHARSET
+                if (mc_global.source_codepage >= 0 &&
+                    (mc_global.source_codepage != mc_global.display_codepage))
+                {
+                    GString *tmp_word;
+
+                    tmp_word = str_convert_to_input (new_word);
+                    g_free (new_word);
+                    new_word = g_string_free (tmp_word, FALSE);
+                }
+#endif
+                cp_word = new_word;
+                for (i = 0; i < word_len; i++)
+                    edit_backspace (edit, 1);
+                for (; *new_word; new_word++)
+                    edit_insert (edit, *new_word);
+                g_free (cp_word);
+            }
+            else if (retval == B_ADD_WORD && match_word != NULL)
+                aspell_add_to_dict (match_word, (int) word_len);
+        }
+
+        g_array_free (suggest, TRUE);
+        edit->found_start = 0;
+        edit->found_len = 0;
+    }
+    g_free (match_word);
+    return retval;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_spellcheck_file (WEdit * edit)
+{
+    if (edit->curs_line > 0)
+    {
+        edit_cursor_move (edit, -edit->curs1);
+        edit_move_to_prev_col (edit, 0);
+        edit_update_curs_row (edit);
+    }
+
+    do
+    {
+        int c1, c2;
+
+        c2 = edit_get_byte (edit, edit->curs1);
+
+        do
+        {
+            if (edit->curs1 >= edit->last_byte)
+                return;
+
+            c1 = c2;
+            edit_cursor_move (edit, 1);
+            c2 = edit_get_byte (edit, edit->curs1);
+        }
+        while (is_break_char (c1) || is_break_char (c2));
+    }
+    while (edit_suggest_current_word (edit) != B_CANCEL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_set_spell_lang (void)
+{
+    GArray *lang_list;
+
+    lang_list = g_array_new (TRUE, FALSE, sizeof (char *));
+    if (aspell_get_lang_list (lang_list) != 0)
+    {
+        char *lang;
+
+        lang = spell_dialog_lang_list_show (lang_list);
+        if (lang != NULL)
+            (void) aspell_set_lang (lang);
+    }
+    aspell_array_clean (lang_list);
+}
+#endif  /* HAVE_ASPELL */
 
 /* --------------------------------------------------------------------------------------------- */

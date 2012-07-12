@@ -3,7 +3,7 @@ EXTRA_DIST =
 if USE_EDIT
 noinst_LTLIBRARIES = libedit.la
 else
-noinst_LTLIBRARIES = 
+noinst_LTLIBRARIES =
 endif
 
 libedit_la_SOURCES = \
@@ -13,5 +13,12 @@ libedit_la_SOURCES = \
 	syntax.c wordproc.c \
 	choosesyntax.c etags.c etags.h editcmd_dialogs.c editcmd_dialogs.h
 
-libedit_la_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
+if USE_ASPELL
+if HAVE_GMODULE
+libedit_la_SOURCES += \
+	spell.c spell.h \
+	spell_dialogs.c spell_dialogs.h
+endif
+endif
 
+libedit_la_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)

@@ -22,8 +22,7 @@ LIBFILES_CONST = \
 	mc.menu.sr
 
 LIBFILES_SCRIPT = \
-	edit.indent.rc \
-	edit.spell.rc
+	edit.indent.rc
 
 CLEANFILES = $(SCRIPTS_OUT)
 

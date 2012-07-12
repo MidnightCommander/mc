@@ -212,6 +212,7 @@ int edit_block_delete_cmd (WEdit * edit);
 void edit_delete_line (WEdit * edit);
 
 int edit_delete (WEdit * edit, const int byte_delete);
+int edit_backspace (WEdit * edit, const int byte_delete);
 void edit_insert (WEdit * edit, int c);
 void edit_cursor_move (WEdit * edit, long increment);
 void edit_push_undo_action (WEdit * edit, long c, ...);
@@ -242,12 +243,21 @@ mc_search_cbret_t edit_search_cmd_callback (const void *user_data, gsize char_of
                                             int *current_char);
 void edit_complete_word_cmd (WEdit * edit);
 void edit_get_match_keyword_cmd (WEdit * edit);
+
+#ifdef HAVE_ASPELL
+int edit_suggest_current_word (WEdit * edit);
+void edit_spellcheck_file (WEdit * edit);
+void edit_set_spell_lang (void);
+#endif
+
 int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
 int edit_save_block_cmd (WEdit * edit);
 gboolean edit_insert_file_cmd (WEdit * edit);
 void edit_insert_over (WEdit * edit);
 int edit_insert_column_of_text_from_file (WEdit * edit, int file,
                                           long *start_pos, long *end_pos, int *col1, int *col2);
+
+char *edit_get_word_from_pos (WEdit * edit, long start_pos, long *start, gsize *len, gsize *cut);
 long edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
 gboolean edit_load_back_cmd (WEdit * edit);
 gboolean edit_load_forward_cmd (WEdit * edit);
@@ -307,6 +317,7 @@ void book_mark_serialize (WEdit * edit, int color);
 void book_mark_restore (WEdit * edit, int color);
 
 int line_is_blank (WEdit * edit, long line);
+gboolean is_break_char (char c);
 int edit_indent_width (WEdit * edit, long p);
 void edit_insert_indent (WEdit * edit, int indent);
 void edit_options_dialog (Dlg_head * h);

@@ -70,6 +70,9 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#ifdef HAVE_ASPELL
+#include "spell.h"
+#endif
 
 /*** global variables ****************************************************************************/
 
@@ -715,72 +718,6 @@ edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
             return res;
         }
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-edit_backspace (WEdit * edit, const int byte_delete)
-{
-    int p = 0;
-    int cw = 1;
-    int i;
-
-    if (!edit->curs1)
-        return 0;
-
-    cw = 1;
-
-    if (edit->mark2 != edit->mark1)
-        edit_push_markers (edit);
-
-    if (edit->utf8 && byte_delete == 0)
-    {
-        edit_get_prev_utf (edit, edit->curs1, &cw);
-        if (cw < 1)
-            cw = 1;
-    }
-    for (i = 1; i <= cw; i++)
-    {
-        if (edit->mark1 >= edit->curs1)
-        {
-            edit->mark1--;
-            edit->end_mark_curs--;
-        }
-        if (edit->mark2 >= edit->curs1)
-            edit->mark2--;
-        if (edit->last_get_rule >= edit->curs1)
-            edit->last_get_rule--;
-
-        p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] +
-              ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
-        if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE))
-        {
-            g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
-            edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
-        }
-        edit->last_byte--;
-        edit->curs1--;
-        edit_push_undo_action (edit, p);
-    }
-    edit_modification (edit);
-    if (p == '\n')
-    {
-        if (edit->book_mark)
-            book_mark_dec (edit, edit->curs_line);
-        edit->curs_line--;
-        edit->total_lines--;
-        edit->force |= REDRAW_AFTER_CURSOR;
-    }
-
-    if (edit->curs1 < edit->start_display)
-    {
-        edit->start_display--;
-        if (p == '\n')
-            edit->start_line--;
-    }
-
-    return p;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2054,7 +1991,54 @@ edit_write_stream (WEdit * edit, FILE * f)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+gboolean
+is_break_char (char c)
+{
+    return (isspace (c) || strchr ("{}[]()<>=|/\\!?~-+`'\",.;:#$%^&*", c));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+edit_get_word_from_pos (WEdit *edit, long start_pos, long *start, gsize *len, gsize *cut)
+{
+    long word_start;
+    long cut_len = 0;
+    GString *match_expr;
+    unsigned char *bufpos;
+    int c1, c2;
+
+    for (word_start = start_pos; word_start != 0; word_start--, cut_len++)
+    {
+        c1 = edit_get_byte (edit, word_start);
+        c2 = edit_get_byte (edit, word_start - 1);
+
+        if (is_break_char (c1) != is_break_char (c2) || c1 == '\n' || c2 == '\n')
+            break;
+    }
+
+    bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE][word_start & M_EDIT_BUF_SIZE];
+    match_expr = g_string_sized_new (16);
+
+    do
+    {
+        c1 = edit_get_byte (edit, word_start + match_expr->len);
+        c2 = edit_get_byte (edit, word_start + match_expr->len + 1);
+        g_string_append_c (match_expr, c1);
+    }
+    while (!(is_break_char (c1) != is_break_char (c2) || c1 == '\n' || c2 == '\n'));
+
+    *len = match_expr->len;
+    *start = word_start;
+    *cut = cut_len;
+
+    return g_string_free (match_expr, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** inserts a file at the cursor, returns count of inserted bytes on success */
+
 long
 edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
 {
@@ -2274,6 +2258,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     }
 
     edit_load_macro_cmd (edit);
+
     return edit;
 }
 
@@ -2773,6 +2758,72 @@ edit_delete (WEdit * edit, const int byte_delete)
         edit->total_lines--;
         edit->force |= REDRAW_AFTER_CURSOR;
     }
+    if (edit->curs1 < edit->start_display)
+    {
+        edit->start_display--;
+        if (p == '\n')
+            edit->start_line--;
+    }
+
+    return p;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+edit_backspace (WEdit * edit, const int byte_delete)
+{
+    int p = 0;
+    int cw = 1;
+    int i;
+
+    if (edit->curs1 == 0)
+        return 0;
+
+    cw = 1;
+
+    if (edit->mark2 != edit->mark1)
+        edit_push_markers (edit);
+
+    if (edit->utf8 && byte_delete == 0)
+    {
+        edit_get_prev_utf (edit, edit->curs1, &cw);
+        if (cw < 1)
+            cw = 1;
+    }
+    for (i = 1; i <= cw; i++)
+    {
+        if (edit->mark1 >= edit->curs1)
+        {
+            edit->mark1--;
+            edit->end_mark_curs--;
+        }
+        if (edit->mark2 >= edit->curs1)
+            edit->mark2--;
+        if (edit->last_get_rule >= edit->curs1)
+            edit->last_get_rule--;
+
+        p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] +
+              ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
+        if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE))
+        {
+            g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
+            edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
+        }
+        edit->last_byte--;
+        edit->curs1--;
+        edit_push_undo_action (edit, p);
+    }
+    edit_modification (edit);
+    if (p == '\n')
+    {
+        if (edit->book_mark)
+            book_mark_dec (edit, edit->curs_line);
+        edit->curs_line--;
+        edit->total_lines--;
+        edit->force |= REDRAW_AFTER_CURSOR;
+    }
+
     if (edit->curs1 < edit->start_display)
     {
         edit->start_display--;
@@ -4075,6 +4126,17 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_Find:
         edit_get_match_keyword_cmd (edit);
         break;
+#ifdef HAVE_ASPELL
+    case CK_SpellCheckCurrentWord:
+        edit_suggest_current_word (edit);
+        break;
+    case CK_SpellCheck:
+        edit_spellcheck_file (edit);
+        break;
+    case CK_SpellCheckSelectLang:
+        edit_set_spell_lang ();
+        break;
+#endif
     case CK_Date:
         {
             char s[BUF_MEDIUM];

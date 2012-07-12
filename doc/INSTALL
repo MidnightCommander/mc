@@ -21,6 +21,7 @@ Build requirements for GNU Midnight Commander
 - gettext
 - cvs
 - libssh2 >= 1.2.5 is required only for sftp vfs (1.2.7 if you need ssh-agent support)
+- libaspell to support spell checking in the internal editor
 
 
 Installation instructions for GNU Midnight Commander
@@ -88,6 +89,10 @@ incomplete, use `configure --help' to get the full list):
      Configure GNU Midnight Commander to be compiled without the
      built-in file editor.  The built-in editor is compiled in by
      default.
+
+`--enable-aspell'
+     This option adds spell check support in the internal editor using
+     libaspell. Disabled by default.
 
 `--without-gpm-mouse'
      Use this flag to disable gpm mouse support (e.g. if you want to
