@@ -19,7 +19,7 @@ Build requirements for GNU Midnight Commander
 - pcre (if glib < 2.14)
 - slang or ncurses
 - gettext
-- cvs
+- cvs (for gettext < 0.18 or if gettext >= 0.18 is built with --with-cvs)
 - libssh2 >= 1.2.5 is required only for sftp vfs (1.2.7 if you need ssh-agent support)
 - libaspell to support spell checking in the internal editor
 
