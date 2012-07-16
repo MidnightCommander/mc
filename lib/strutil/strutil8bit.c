@@ -319,7 +319,6 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
                 goto finally;
             memset (actual, ' ', width - length - ident);
             actual += width - length - ident;
-            remain -= width - length - ident;
         }
     }
     else
@@ -393,7 +392,6 @@ str_8bit_term_trim (const char *text, int width)
             {
                 memset (actual, '.', width);
                 actual += width;
-                remain -= width;
             }
             else
             {

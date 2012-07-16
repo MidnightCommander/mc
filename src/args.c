@@ -86,7 +86,9 @@ static gboolean parse_mc_v_argument (const gchar * option_name, const gchar * va
 
 static GOptionContext *context;
 
+#ifdef HAVE_SUBSHELL_SUPPORT
 static gboolean mc_args__nouse_subshell = FALSE;
+#endif /* HAVE_SUBSHELL_SUPPORT */
 static gboolean mc_args__show_datadirs = FALSE;
 static gboolean mc_args__show_datadirs_extended = FALSE;
 static gboolean mc_args__show_configure_opts = FALSE;

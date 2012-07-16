@@ -710,17 +710,23 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                 char *temp;
                 char *data_start = buffer + 1;
                 char *filename = data_start;
-                char *linkname = data_start;
-                char *filename_bound = filename + strlen (filename);
-                char *linkname_bound = filename_bound;
+                char *filename_bound;
+
+                filename_bound = filename + strlen (filename);
+
                 if (!strcmp (data_start, "\".\"") || !strcmp (data_start, "\"..\""))
                     break;      /* We'll do "." and ".." ourselves */
 
                 if (S_ISLNK (ST.st_mode))
                 {
+                    char *linkname;
+                    char *linkname_bound;
                     /* we expect: "escaped-name" -> "escaped-name"
                        //     -> cannot occur in filenames,
                        //     because it will be escaped to -\> */
+
+
+                    linkname_bound = filename_bound;
 
                     if (*filename == '"')
                         ++filename;

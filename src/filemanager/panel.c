@@ -3015,6 +3015,8 @@ subshell_chdir (const vfs_path_t * vpath)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_global.tty.use_subshell && vfs_current_is_local ())
         do_subshell_chdir (vpath, FALSE, TRUE);
+#else /* HAVE_SUBSHELL_SUPPORT */
+    (void) vpath;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 }
 
