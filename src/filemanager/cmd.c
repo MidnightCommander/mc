@@ -273,7 +273,7 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     if (quick_dialog (&quick_dlg) == B_CANCEL)
         return;
 
-    if (!reg_exp)
+    if (reg_exp == NULL)
         return;
     if (!*reg_exp)
     {

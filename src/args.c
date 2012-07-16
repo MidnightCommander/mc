@@ -88,7 +88,9 @@ static gboolean parse_mc_v_argument (const gchar * option_name, const gchar * va
 
 static GOptionContext *context;
 
+#ifdef HAVE_SUBSHELL_SUPPORT
 static gboolean mc_args__nouse_subshell = FALSE;
+#endif /* HAVE_SUBSHELL_SUPPORT */
 static gboolean mc_args__show_datadirs = FALSE;
 static gboolean mc_args__show_datadirs_extended = FALSE;
 static gboolean mc_args__show_configure_opts = FALSE;
@@ -609,9 +611,11 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
         smbfs_set_debug (mc_args__debug_level);
 #endif /* ENABLE_VFS_SMB */
 
+#if defined ENABLE_VFS_FTP || defined ENABLE_VFS_FTP
     if (mc_args__netfs_logfile != NULL)
     {
         vfs_path_t *vpath;
+
 #ifdef ENABLE_VFS_FTP
         vpath = vfs_path_from_str ("ftp://");
         mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
@@ -623,6 +627,7 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
         vfs_path_free (vpath);
 #endif /* ENABLE_VFS_SMB */
     }
+#endif /* ENABLE_VFS_FTP || ENABLE_VFS_SMB */
 
     base = x_basename (argv[0]);
     tmp = (argc > 0) ? argv[1] : NULL;

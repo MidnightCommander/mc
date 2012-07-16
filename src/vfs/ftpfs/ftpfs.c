@@ -2488,7 +2488,8 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
             }
 
             /* Ignore unsafe passwords */
-            if (strcmp (*login, "anonymous") && strcmp (*login, "ftp")
+            if (*login != NULL &&
+                strcmp (*login, "anonymous") != 0 && strcmp (*login, "ftp") != 0
                 && ftpfs_netrc_bad_mode (netrcname))
             {
                 need_break = 1;

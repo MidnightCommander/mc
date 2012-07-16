@@ -632,31 +632,22 @@ dview_get_utf (char *str, int *char_width, gboolean * result)
     if (str == NULL)
     {
         *result = FALSE;
-        width = 0;
         return 0;
     }
 
     res = g_utf8_get_char_validated (str, -1);
 
     if (res < 0)
-    {
         ch = *str;
-        width = 0;
-    }
     else
     {
         ch = res;
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char (str);
-        if (next_ch)
-        {
+        if (next_ch != NULL)
             width = next_ch - str;
-        }
         else
-        {
             ch = 0;
-            width = 0;
-        }
     }
     *char_width = width;
     return ch;
@@ -2377,7 +2368,7 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
 static void
 dview_reread (WDiff * dview)
 {
-    int ndiff = dview->ndiff;
+    int ndiff;
 
     destroy_hdiff (dview);
     if (dview->a[0] != NULL)

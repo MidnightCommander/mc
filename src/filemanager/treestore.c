@@ -408,7 +408,7 @@ tree_store_add_entry (const vfs_path_t * name)
         abort ();
 
     /* Search for the correct place */
-    while (current && (flag = pathcmp (current->name, name)) < 0)
+    while (current != NULL && (flag = pathcmp (current->name, name)) < 0)
     {
         old = current;
         current = current->next;
@@ -430,7 +430,8 @@ tree_store_add_entry (const vfs_path_t * name)
         }
         else
         {
-            old->next = new;
+            if (old != NULL)
+                old->next = new;
             new->prev = old;
         }
         new->next = NULL;
@@ -440,7 +441,7 @@ tree_store_add_entry (const vfs_path_t * name)
     {
         /* Insert in to the middle of the list */
         new->prev = old;
-        if (old)
+        if (old != NULL)
         {
             /* Yes, in the middle */
             new->next = old->next;
