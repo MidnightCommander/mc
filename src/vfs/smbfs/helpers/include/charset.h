@@ -2,7 +2,7 @@
    Unix SMB/Netbios implementation.
    Version 1.9.
    Character set handling
-*/
+ */
 
 #ifndef CHARSET_C
 
@@ -44,7 +44,7 @@ extern char *lower_char_map;
 /* this is used to determine if a character is safe to use in
    something that may be put on a command line */
 #define issafe(c) (isalnum((c&0xff)) || strchr("-._",c))
-#endif		/* !CHARSET_C */
+#endif /* !CHARSET_C */
 
 /* Dynamic codepage files defines. */
 

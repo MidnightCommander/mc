@@ -632,31 +632,22 @@ dview_get_utf (char *str, int *char_width, gboolean * result)
     if (str == NULL)
     {
         *result = FALSE;
-        width = 0;
         return 0;
     }
 
     res = g_utf8_get_char_validated (str, -1);
 
     if (res < 0)
-    {
         ch = *str;
-        width = 0;
-    }
     else
     {
         ch = res;
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char (str);
-        if (next_ch)
-        {
+        if (next_ch != NULL)
             width = next_ch - str;
-        }
         else
-        {
             ch = 0;
-            width = 0;
-        }
     }
     *char_width = width;
     return ch;
@@ -2197,7 +2188,6 @@ static void
 do_merge_hunk (WDiff * dview)
 {
     int from1, to1, from2, to2;
-    int res;
     int hunk;
 
     hunk = get_current_hunk (dview, &from1, &to1, &from2, &to2);
@@ -2244,7 +2234,7 @@ do_merge_hunk (WDiff * dview)
         }
         fflush (merge_file);
         fclose (merge_file);
-        res = rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
+        rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
         mc_unlink (merge_file_name_vpath);
         vfs_path_free (merge_file_name_vpath);
     }
@@ -2377,7 +2367,7 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
 static void
 dview_reread (WDiff * dview)
 {
-    int ndiff = dview->ndiff;
+    int ndiff;
 
     destroy_hdiff (dview);
     if (dview->a[0] != NULL)
@@ -2984,7 +2974,7 @@ dview_ok_to_exit (WDiff * dview)
         break;
     case 1:                    /* No */
         if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
-            res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+            mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
         /* fall through */
     default:
         res = TRUE;

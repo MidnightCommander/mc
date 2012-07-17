@@ -108,8 +108,8 @@ char *load_anon_passwd (void);
 void load_keymap_defs (gboolean load_from_file);
 void free_keymap_defs (void);
 
-void panel_load_setup (struct WPanel * panel, const char *section);
-void panel_save_setup (struct WPanel * panel, const char *section);
+void panel_load_setup (struct WPanel *panel, const char *section);
+void panel_save_setup (struct WPanel *panel, const char *section);
 
 void panels_load_options (void);
 void panels_save_options (void);

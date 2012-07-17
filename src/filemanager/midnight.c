@@ -628,10 +628,7 @@ create_panels (void)
 
     /* 3. Create active panel */
     if (current_dir == NULL)
-    {
-        current_dir = vfs_path_to_str (original_dir);
         mc_chdir (original_dir);
-    }
     else
     {
         vfs_path_t *vpath;

@@ -540,7 +540,7 @@ mc_config_get_full_vpath (const char *config_name)
 
     str_path = mc_config_get_full_path (config_name);
 
-    ret_vpath = vfs_path_from_str(str_path);
+    ret_vpath = vfs_path_from_str (str_path);
     g_free (str_path);
     return ret_vpath;
 }

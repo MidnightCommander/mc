@@ -57,7 +57,7 @@
 #include "src/main.h"           /* home_dir */
 
 #include "edit-impl.h"
-#include "edit-widget.h"
+#include "editwidget.h"
 
 /*** global variables ****************************************************************************/
 
@@ -359,7 +359,7 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_file (const vfs_path_t * _file_vpath, int line)
 {
     static gboolean made_directory = FALSE;
@@ -387,7 +387,7 @@ edit_file (const vfs_path_t * _file_vpath, int line)
     wedit = edit_init (NULL, 1, 0, LINES - 2, COLS, _file_vpath, line);
 
     if (wedit == NULL)
-        return 0;
+        return FALSE;
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
@@ -414,7 +414,7 @@ edit_file (const vfs_path_t * _file_vpath, int line)
     if (edit_dlg->state == DLG_CLOSED)
         destroy_dlg (edit_dlg);
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

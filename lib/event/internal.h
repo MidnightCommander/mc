@@ -25,7 +25,8 @@ GTree *mc_event_get_event_group_by_name (const gchar * event_group_name, gboolea
 GPtrArray *mc_event_get_event_by_name (GTree * event_group, const gchar * event_name,
                                        gboolean create_new, GError ** mcerror);
 mc_event_callback_t *mc_event_is_callback_in_array (GPtrArray * callbacks,
-                                                    mc_event_callback_func_t event_callback, gpointer event_init_data);
+                                                    mc_event_callback_func_t event_callback,
+                                                    gpointer event_init_data);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC_EVENT_INTERNAL_H */

@@ -811,10 +811,9 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             }
 
             /* Record of zeroes */
-        case STATUS_EOFMARK:
-            status = prev_status;       /* If error after 0's */
+        case STATUS_EOFMARK:   /* If error after 0's */
             /* FALL THRU */
-
+            /* exit from loop */
         case STATUS_EOF:       /* End of archive */
             break;
         }

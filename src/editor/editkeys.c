@@ -51,7 +51,7 @@
 #endif
 
 #include "edit-impl.h"
-#include "edit-widget.h"        /* WEdit */
+#include "editwidget.h"         /* WEdit */
 #include "editcmd_dialogs.h"
 
 #include "src/keybind-defaults.h"       /* keybind_lookup_keymap_command() */

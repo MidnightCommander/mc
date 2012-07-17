@@ -22,17 +22,18 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include "includes.h"
 
 extern int DEBUGLEVEL;
 
-static char *last_ptr=NULL;
+static char *last_ptr = NULL;
 
-void set_first_token(char *ptr)
+void
+set_first_token (char *ptr)
 {
-	last_ptr = ptr;
+    last_ptr = ptr;
 }
 
 /****************************************************************************
@@ -41,42 +42,51 @@ void set_first_token(char *ptr)
 Based on a routine by GJC@VILLAGE.COM. 
 Extensively modified by Andrew.Tridgell@anu.edu.au
 ****************************************************************************/
-BOOL next_token(char **ptr,char *buff, const char *sep, size_t bufsize)
+BOOL
+next_token (char **ptr, char *buff, const char *sep, size_t bufsize)
 {
-  char *s;
-  BOOL quoted;
-  size_t len=1;
+    char *s;
+    BOOL quoted;
+    size_t len = 1;
 
-  if (!ptr) ptr = &last_ptr;
-  if (!ptr) return(False);
+    if (!ptr)
+        ptr = &last_ptr;
+    if (!ptr)
+        return (False);
 
-  s = *ptr;
+    s = *ptr;
 
-  /* default to simple separators */
-  if (!sep) sep = " \t\n\r";
+    /* default to simple separators */
+    if (!sep)
+        sep = " \t\n\r";
 
-  /* find the first non sep char */
-  while(*s && strchr(sep,*s)) s++;
+    /* find the first non sep char */
+    while (*s && strchr (sep, *s))
+        s++;
 
-  /* nothing left? */
-  if (! *s) return(False);
+    /* nothing left? */
+    if (!*s)
+        return (False);
 
-  /* copy over the token */
-  for (quoted = False; len < bufsize && *s && (quoted || !strchr(sep,*s)); s++)
+    /* copy over the token */
+    for (quoted = False; len < bufsize && *s && (quoted || !strchr (sep, *s)); s++)
     {
-	    if (*s == '\"') {
-		    quoted = !quoted;
-	    } else {
-		    len++;
-		    *buff++ = *s;
-	    }
+        if (*s == '\"')
+        {
+            quoted = !quoted;
+        }
+        else
+        {
+            len++;
+            *buff++ = *s;
+        }
     }
 
-  *ptr = (*s) ? s+1 : s;  
-  *buff = 0;
-  last_ptr = *ptr;
+    *ptr = (*s) ? s + 1 : s;
+    *buff = 0;
+    last_ptr = *ptr;
 
-  return(True);
+    return (True);
 }
 
 #if 0
@@ -84,392 +94,420 @@ BOOL next_token(char **ptr,char *buff, const char *sep, size_t bufsize)
 Convert list of tokens to array; dependent on above routine.
 Uses last_ptr from above - bit of a hack.
 ****************************************************************************/
-char **toktocliplist(int *ctok, char *sep)
+char **
+toktocliplist (int *ctok, char *sep)
 {
-  char *s=last_ptr;
-  int ictok=0;
-  char **ret, **iret;
+    char *s = last_ptr;
+    int ictok = 0;
+    char **ret, **iret;
 
-  if (!sep) sep = " \t\n\r";
+    if (!sep)
+        sep = " \t\n\r";
 
-  while(*s && strchr(sep,*s)) s++;
+    while (*s && strchr (sep, *s))
+        s++;
 
-  /* nothing left? */
-  if (!*s) return(NULL);
+    /* nothing left? */
+    if (!*s)
+        return (NULL);
 
-  do {
-    ictok++;
-    while(*s && (!strchr(sep,*s))) s++;
-    while(*s && strchr(sep,*s)) *s++=0;
-  } while(*s);
+    do
+    {
+        ictok++;
+        while (*s && (!strchr (sep, *s)))
+            s++;
+        while (*s && strchr (sep, *s))
+            *s++ = 0;
+    }
+    while (*s);
 
-  *ctok=ictok;
-  s=last_ptr;
+    *ctok = ictok;
+    s = last_ptr;
 
-  if (!(ret=iret=malloc(ictok*sizeof(char *)))) return NULL;
-  
-  while(ictok--) {    
-    *iret++=s;
-    while(*s++);
-    while(!*s) s++;
-  }
+    if (!(ret = iret = malloc (ictok * sizeof (char *))))
+        return NULL;
 
-  return ret;
+    while (ictok--)
+    {
+        *iret++ = s;
+        while (*s++);
+        while (!*s)
+            s++;
+    }
+
+    return ret;
 }
 #endif /*0 */
 
 /*******************************************************************
   case insensitive string compararison
 ********************************************************************/
-int StrCaseCmp(const char *s, const char *t)
+int
+StrCaseCmp (const char *s, const char *t)
 {
-  /* compare until we run out of string, either t or s, or find a difference */
-  /* We *must* use toupper rather than tolower here due to the
-     asynchronous upper to lower mapping.
-   */
+    /* compare until we run out of string, either t or s, or find a difference */
+    /* We *must* use toupper rather than tolower here due to the
+       asynchronous upper to lower mapping.
+     */
 #if !defined(KANJI_WIN95_COMPATIBILITY)
-  /*
-   * For completeness we should put in equivalent code for code pages
-   * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
-   * doubt anyone wants Samba to behave differently from Win95 and WinNT
-   * here. They both treat full width ascii characters as case senstive
-   * filenames (ie. they don't do the work we do here).
-   * JRA.
-   */
+    /*
+     * For completeness we should put in equivalent code for code pages
+     * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
+     * doubt anyone wants Samba to behave differently from Win95 and WinNT
+     * here. They both treat full width ascii characters as case senstive
+     * filenames (ie. they don't do the work we do here).
+     * JRA.
+     */
 
-  if(lp_client_code_page() == KANJI_CODEPAGE)
-  {
-    /* Win95 treats full width ascii characters as case sensitive. */
-    int diff;
-    for (;;)
+    if (lp_client_code_page () == KANJI_CODEPAGE)
     {
-      if (!*s || !*t)
-	    return toupper (*s) - toupper (*t);
-      else if (is_sj_alph (*s) && is_sj_alph (*t))
-      {
-        diff = sj_toupper2 (*(s+1)) - sj_toupper2 (*(t+1));
-        if (diff)
-          return diff;
-        s += 2;
-        t += 2;
-      }
-      else if (is_shift_jis (*s) && is_shift_jis (*t))
-      {
-        diff = ((int) (unsigned char) *s) - ((int) (unsigned char) *t);
-        if (diff)
-          return diff;
-        diff = ((int) (unsigned char) *(s+1)) - ((int) (unsigned char) *(t+1));
-        if (diff)
-          return diff;
-        s += 2;
-        t += 2;
-      }
-      else if (is_shift_jis (*s))
-        return 1;
-      else if (is_shift_jis (*t))
-        return -1;
-      else 
-      {
-        diff = toupper (*s) - toupper (*t);
-        if (diff)
-          return diff;
-        s++;
-        t++;
-      }
+        /* Win95 treats full width ascii characters as case sensitive. */
+        int diff;
+        for (;;)
+        {
+            if (!*s || !*t)
+                return toupper (*s) - toupper (*t);
+            else if (is_sj_alph (*s) && is_sj_alph (*t))
+            {
+                diff = sj_toupper2 (*(s + 1)) - sj_toupper2 (*(t + 1));
+                if (diff)
+                    return diff;
+                s += 2;
+                t += 2;
+            }
+            else if (is_shift_jis (*s) && is_shift_jis (*t))
+            {
+                diff = ((int) (unsigned char) *s) - ((int) (unsigned char) *t);
+                if (diff)
+                    return diff;
+                diff = ((int) (unsigned char) *(s + 1)) - ((int) (unsigned char) *(t + 1));
+                if (diff)
+                    return diff;
+                s += 2;
+                t += 2;
+            }
+            else if (is_shift_jis (*s))
+                return 1;
+            else if (is_shift_jis (*t))
+                return -1;
+            else
+            {
+                diff = toupper (*s) - toupper (*t);
+                if (diff)
+                    return diff;
+                s++;
+                t++;
+            }
+        }
     }
-  }
-  else
+    else
 #endif /* KANJI_WIN95_COMPATIBILITY */
-  {
-    while (*s && *t && toupper(*s) == toupper(*t))
     {
-      s++;
-      t++;
-    }
+        while (*s && *t && toupper (*s) == toupper (*t))
+        {
+            s++;
+            t++;
+        }
 
-    return(toupper(*s) - toupper(*t));
-  }
+        return (toupper (*s) - toupper (*t));
+    }
 }
 
 /*******************************************************************
   case insensitive string compararison, length limited
 ********************************************************************/
-int StrnCaseCmp(const char *s, const char *t, size_t n)
+int
+StrnCaseCmp (const char *s, const char *t, size_t n)
 {
-  /* compare until we run out of string, either t or s, or chars */
-  /* We *must* use toupper rather than tolower here due to the
-     asynchronous upper to lower mapping.
-   */
+    /* compare until we run out of string, either t or s, or chars */
+    /* We *must* use toupper rather than tolower here due to the
+       asynchronous upper to lower mapping.
+     */
 #if !defined(KANJI_WIN95_COMPATIBILITY)
-  /*
-   * For completeness we should put in equivalent code for code pages
-   * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
-   * doubt anyone wants Samba to behave differently from Win95 and WinNT
-   * here. They both treat full width ascii characters as case senstive
-   * filenames (ie. they don't do the work we do here).
-   * JRA. 
-   */
+    /*
+     * For completeness we should put in equivalent code for code pages
+     * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
+     * doubt anyone wants Samba to behave differently from Win95 and WinNT
+     * here. They both treat full width ascii characters as case senstive
+     * filenames (ie. they don't do the work we do here).
+     * JRA. 
+     */
 
-  if(lp_client_code_page() == KANJI_CODEPAGE)
-  {
-    /* Win95 treats full width ascii characters as case sensitive. */
-    int diff;
-    for (;n > 0;)
+    if (lp_client_code_page () == KANJI_CODEPAGE)
     {
-      if (!*s || !*t)
-        return toupper (*s) - toupper (*t);
-      else if (is_sj_alph (*s) && is_sj_alph (*t))
-      {
-        diff = sj_toupper2 (*(s+1)) - sj_toupper2 (*(t+1));
-        if (diff)
-          return diff;
-        s += 2;
-        t += 2;
-        n -= 2;
-      }
-      else if (is_shift_jis (*s) && is_shift_jis (*t))
-      {
-        diff = ((int) (unsigned char) *s) - ((int) (unsigned char) *t);
-        if (diff)
-          return diff;
-        diff = ((int) (unsigned char) *(s+1)) - ((int) (unsigned char) *(t+1));
-        if (diff)
-          return diff;
-        s += 2;
-        t += 2;
-        n -= 2;
-      }
-      else if (is_shift_jis (*s))
-        return 1;
-      else if (is_shift_jis (*t))
-        return -1;
-      else 
-      {
-        diff = toupper (*s) - toupper (*t);
-        if (diff)
-          return diff;
-        s++;
-        t++;
-        n--;
-      }
+        /* Win95 treats full width ascii characters as case sensitive. */
+        int diff;
+        for (; n > 0;)
+        {
+            if (!*s || !*t)
+                return toupper (*s) - toupper (*t);
+            else if (is_sj_alph (*s) && is_sj_alph (*t))
+            {
+                diff = sj_toupper2 (*(s + 1)) - sj_toupper2 (*(t + 1));
+                if (diff)
+                    return diff;
+                s += 2;
+                t += 2;
+                n -= 2;
+            }
+            else if (is_shift_jis (*s) && is_shift_jis (*t))
+            {
+                diff = ((int) (unsigned char) *s) - ((int) (unsigned char) *t);
+                if (diff)
+                    return diff;
+                diff = ((int) (unsigned char) *(s + 1)) - ((int) (unsigned char) *(t + 1));
+                if (diff)
+                    return diff;
+                s += 2;
+                t += 2;
+                n -= 2;
+            }
+            else if (is_shift_jis (*s))
+                return 1;
+            else if (is_shift_jis (*t))
+                return -1;
+            else
+            {
+                diff = toupper (*s) - toupper (*t);
+                if (diff)
+                    return diff;
+                s++;
+                t++;
+                n--;
+            }
+        }
+        return 0;
     }
-    return 0;
-  }
-  else
+    else
 #endif /* KANJI_WIN95_COMPATIBILITY */
-  {
-    while (n && *s && *t && toupper(*s) == toupper(*t))
     {
-      s++;
-      t++;
-      n--;
+        while (n && *s && *t && toupper (*s) == toupper (*t))
+        {
+            s++;
+            t++;
+            n--;
+        }
+
+        /* not run out of chars - strings are different lengths */
+        if (n)
+            return (toupper (*s) - toupper (*t));
+
+        /* identical up to where we run out of chars, 
+           and strings are same length */
+        return (0);
     }
-
-    /* not run out of chars - strings are different lengths */
-    if (n) 
-      return(toupper(*s) - toupper(*t));
-
-    /* identical up to where we run out of chars, 
-       and strings are same length */
-    return(0);
-  }
 }
 
 /*******************************************************************
   compare 2 strings 
 ********************************************************************/
-BOOL strequal(const char *s1, const char *s2)
+BOOL
+strequal (const char *s1, const char *s2)
 {
-  if (s1 == s2) return(True);
-  if (!s1 || !s2) return(False);
-  
-  return(StrCaseCmp(s1,s2)==0);
+    if (s1 == s2)
+        return (True);
+    if (!s1 || !s2)
+        return (False);
+
+    return (StrCaseCmp (s1, s2) == 0);
 }
 
 /*******************************************************************
   compare 2 strings up to and including the nth char.
   ******************************************************************/
-BOOL strnequal(const char *s1,const char *s2,size_t n)
+BOOL
+strnequal (const char *s1, const char *s2, size_t n)
 {
-  if (s1 == s2) return(True);
-  if (!s1 || !s2 || !n) return(False);
-  
-  return(StrnCaseCmp(s1,s2,n)==0);
+    if (s1 == s2)
+        return (True);
+    if (!s1 || !s2 || !n)
+        return (False);
+
+    return (StrnCaseCmp (s1, s2, n) == 0);
 }
 
 /*******************************************************************
   compare 2 strings (case sensitive)
 ********************************************************************/
-BOOL strcsequal(const char *s1,const char *s2)
+BOOL
+strcsequal (const char *s1, const char *s2)
 {
-  if (s1 == s2) return(True);
-  if (!s1 || !s2) return(False);
-  
-  return(strcmp(s1,s2)==0);
+    if (s1 == s2)
+        return (True);
+    if (!s1 || !s2)
+        return (False);
+
+    return (strcmp (s1, s2) == 0);
 }
 
 
 /*******************************************************************
   convert a string to lower case
 ********************************************************************/
-void strlower(char *s)
+void
+strlower (char *s)
 {
-  while (*s)
-  {
+    while (*s)
+    {
 #if !defined(KANJI_WIN95_COMPATIBILITY)
-  /*
-   * For completeness we should put in equivalent code for code pages
-   * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
-   * doubt anyone wants Samba to behave differently from Win95 and WinNT
-   * here. They both treat full width ascii characters as case senstive
-   * filenames (ie. they don't do the work we do here).
-   * JRA. 
-   */
+        /*
+         * For completeness we should put in equivalent code for code pages
+         * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
+         * doubt anyone wants Samba to behave differently from Win95 and WinNT
+         * here. They both treat full width ascii characters as case senstive
+         * filenames (ie. they don't do the work we do here).
+         * JRA. 
+         */
 
-    if(lp_client_code_page() == KANJI_CODEPAGE)
-    {
-      /* Win95 treats full width ascii characters as case sensitive. */
-      if (is_shift_jis (*s))
-      {
-        if (is_sj_upper (s[0], s[1]))
-          s[1] = sj_tolower2 (s[1]);
-        s += 2;
-      }
-      else if (is_kana (*s))
-      {
-        s++;
-      }
-      else
-      {
-        if (isupper(*s))
-          *s = tolower(*s);
-        s++;
-      }
-    }
-    else
+        if (lp_client_code_page () == KANJI_CODEPAGE)
+        {
+            /* Win95 treats full width ascii characters as case sensitive. */
+            if (is_shift_jis (*s))
+            {
+                if (is_sj_upper (s[0], s[1]))
+                    s[1] = sj_tolower2 (s[1]);
+                s += 2;
+            }
+            else if (is_kana (*s))
+            {
+                s++;
+            }
+            else
+            {
+                if (isupper (*s))
+                    *s = tolower (*s);
+                s++;
+            }
+        }
+        else
 #endif /* KANJI_WIN95_COMPATIBILITY */
-    {
-      size_t skip = skip_multibyte_char( *s );
-      if( skip != 0 )
-        s += skip;
-      else
-      {
-        if (isupper(*s))
-          *s = tolower(*s);
-        s++;
-      }
+        {
+            size_t skip = skip_multibyte_char (*s);
+            if (skip != 0)
+                s += skip;
+            else
+            {
+                if (isupper (*s))
+                    *s = tolower (*s);
+                s++;
+            }
+        }
     }
-  }
 }
 
 /*******************************************************************
   convert a string to upper case
 ********************************************************************/
-void strupper(char *s)
+void
+strupper (char *s)
 {
-  while (*s)
-  {
+    while (*s)
+    {
 #if !defined(KANJI_WIN95_COMPATIBILITY)
-  /*
-   * For completeness we should put in equivalent code for code pages
-   * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
-   * doubt anyone wants Samba to behave differently from Win95 and WinNT
-   * here. They both treat full width ascii characters as case senstive
-   * filenames (ie. they don't do the work we do here).
-   * JRA. 
-   */
+        /*
+         * For completeness we should put in equivalent code for code pages
+         * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
+         * doubt anyone wants Samba to behave differently from Win95 and WinNT
+         * here. They both treat full width ascii characters as case senstive
+         * filenames (ie. they don't do the work we do here).
+         * JRA. 
+         */
 
-    if(lp_client_code_page() == KANJI_CODEPAGE)
-    {
-      /* Win95 treats full width ascii characters as case sensitive. */
-      if (is_shift_jis (*s))
-      {
-        if (is_sj_lower (s[0], s[1]))
-          s[1] = sj_toupper2 (s[1]);
-        s += 2;
-      }
-      else if (is_kana (*s))
-      {
-        s++;
-      }
-      else
-      {
-        if (islower(*s))
-          *s = toupper(*s);
-        s++;
-      }
-    }
-    else
+        if (lp_client_code_page () == KANJI_CODEPAGE)
+        {
+            /* Win95 treats full width ascii characters as case sensitive. */
+            if (is_shift_jis (*s))
+            {
+                if (is_sj_lower (s[0], s[1]))
+                    s[1] = sj_toupper2 (s[1]);
+                s += 2;
+            }
+            else if (is_kana (*s))
+            {
+                s++;
+            }
+            else
+            {
+                if (islower (*s))
+                    *s = toupper (*s);
+                s++;
+            }
+        }
+        else
 #endif /* KANJI_WIN95_COMPATIBILITY */
-    {
-      size_t skip = skip_multibyte_char( *s );
-      if( skip != 0 )
-        s += skip;
-      else
-      {
-        if (islower(*s))
-          *s = toupper(*s);
-        s++;
-      }
+        {
+            size_t skip = skip_multibyte_char (*s);
+            if (skip != 0)
+                s += skip;
+            else
+            {
+                if (islower (*s))
+                    *s = toupper (*s);
+                s++;
+            }
+        }
     }
-  }
 }
 
 #if 0
 /*******************************************************************
   convert a string to "normal" form
 ********************************************************************/
-void strnorm(char *s)
+void
+strnorm (char *s)
 {
-  extern int case_default;
-  if (case_default == CASE_UPPER)
-    strupper(s);
-  else
-    strlower(s);
+    extern int case_default;
+    if (case_default == CASE_UPPER)
+        strupper (s);
+    else
+        strlower (s);
 }
 
 /*******************************************************************
 check if a string is in "normal" case
 ********************************************************************/
-BOOL strisnormal(char *s)
+BOOL
+strisnormal (char *s)
 {
-  extern int case_default;
-  if (case_default == CASE_UPPER)
-    return(!strhaslower(s));
+    extern int case_default;
+    if (case_default == CASE_UPPER)
+        return (!strhaslower (s));
 
-  return(!strhasupper(s));
+    return (!strhasupper (s));
 }
 #endif /* 0 */
 
 /****************************************************************************
   string replace
 ****************************************************************************/
-void string_replace(char *s,char oldc,char newc)
+void
+string_replace (char *s, char oldc, char newc)
 {
-  size_t skip;
-  while (*s)
-  {
-    skip = skip_multibyte_char( *s );
-    if( skip != 0 )
-      s += skip;
-    else
+    size_t skip;
+    while (*s)
     {
-      if (oldc == *s)
-        *s = newc;
-      s++;
+        skip = skip_multibyte_char (*s);
+        if (skip != 0)
+            s += skip;
+        else
+        {
+            if (oldc == *s)
+                *s = newc;
+            s++;
+        }
     }
-  }
 }
 
 
 /*******************************************************************
 skip past some strings in a buffer
 ********************************************************************/
-char *skip_string(char *buf,size_t n)
+char *
+skip_string (char *buf, size_t n)
 {
-  while (n--)
-    buf += strlen(buf) + 1;
-  return(buf);
+    while (n--)
+        buf += strlen (buf) + 1;
+    return (buf);
 }
 
 /*******************************************************************
@@ -479,267 +517,275 @@ char *skip_string(char *buf,size_t n)
  16.oct.98, jdblair@cobaltnet.com.
 ********************************************************************/
 
-size_t str_charnum(const char *s)
+size_t
+str_charnum (const char *s)
 {
-  size_t len = 0;
-  
-  while (*s != '\0') {
-    int skip = skip_multibyte_char(*s);
-    s += (skip ? skip : 1);
-    len++;
-  }
-  return len;
+    size_t len = 0;
+
+    while (*s != '\0')
+    {
+        int skip = skip_multibyte_char (*s);
+        s += (skip ? skip : 1);
+        len++;
+    }
+    return len;
 }
 
 /*******************************************************************
 trim the specified elements off the front and back of a string
 ********************************************************************/
 
-BOOL trim_string(char *s,const char *front,const char *back)
+BOOL
+trim_string (char *s, const char *front, const char *back)
 {
-  BOOL ret = False;
-  size_t front_len = (front && *front) ? strlen(front) : 0;
-  size_t back_len = (back && *back) ? strlen(back) : 0;
-  size_t s_len;
+    BOOL ret = False;
+    size_t front_len = (front && *front) ? strlen (front) : 0;
+    size_t back_len = (back && *back) ? strlen (back) : 0;
+    size_t s_len;
 
-  while (front_len && strncmp(s, front, front_len) == 0)
-  {
-    char *p = s;
-    ret = True;
-    while (1)
+    while (front_len && strncmp (s, front, front_len) == 0)
     {
-      if (!(*p = p[front_len]))
-        break;
-      p++;
-    }
-  }
-
-  /*
-   * We split out the multibyte code page
-   * case here for speed purposes. Under a
-   * multibyte code page we need to walk the
-   * string forwards only and multiple times.
-   * Thanks to John Blair for finding this
-   * one. JRA.
-   */
-
-  if(back_len)
-  {
-    if(!is_multibyte_codepage())
-    {
-      s_len = strlen(s);
-      while ((s_len >= back_len) && 
-             (strncmp(s + s_len - back_len, back, back_len)==0))  
-      {
+        char *p = s;
         ret = True;
-        s[s_len - back_len] = '\0';
-        s_len = strlen(s);
-      }
-    }
-    else
-    {
-
-      /*
-       * Multibyte code page case.
-       * Keep going through the string, trying
-       * to match the 'back' string with the end
-       * of the string. If we get a match, truncate
-       * 'back' off the end of the string and
-       * go through the string again from the
-       * start. Keep doing this until we have
-       * gone through the string with no match
-       * at the string end.
-       */
-
-      size_t mb_back_len = str_charnum(back);
-      size_t mb_s_len = str_charnum(s);
-
-      while(mb_s_len >= mb_back_len)
-      {
-        size_t charcount = 0;
-        char *mbp = s;
-
-        while(charcount < (mb_s_len - mb_back_len))
+        while (1)
         {
-          size_t skip = skip_multibyte_char(*mbp);
-          mbp += (skip ? skip : 1);
-          charcount++;
+            if (!(*p = p[front_len]))
+                break;
+            p++;
         }
+    }
 
-        /*
-         * mbp now points at mb_back_len multibyte
-         * characters from the end of s.
-         */
+    /*
+     * We split out the multibyte code page
+     * case here for speed purposes. Under a
+     * multibyte code page we need to walk the
+     * string forwards only and multiple times.
+     * Thanks to John Blair for finding this
+     * one. JRA.
+     */
 
-        if(strcmp(mbp, back) == 0)
+    if (back_len)
+    {
+        if (!is_multibyte_codepage ())
         {
-          ret = True;
-          *mbp = '\0';
-          mb_s_len = str_charnum(s);
-          mbp = s;
+            s_len = strlen (s);
+            while ((s_len >= back_len) && (strncmp (s + s_len - back_len, back, back_len) == 0))
+            {
+                ret = True;
+                s[s_len - back_len] = '\0';
+                s_len = strlen (s);
+            }
         }
         else
-          break;
-      } /* end while mb_s_len... */
-    } /* end else .. */
-  } /* end if back_len .. */
+        {
 
-  return(ret);
+            /*
+             * Multibyte code page case.
+             * Keep going through the string, trying
+             * to match the 'back' string with the end
+             * of the string. If we get a match, truncate
+             * 'back' off the end of the string and
+             * go through the string again from the
+             * start. Keep doing this until we have
+             * gone through the string with no match
+             * at the string end.
+             */
+
+            size_t mb_back_len = str_charnum (back);
+            size_t mb_s_len = str_charnum (s);
+
+            while (mb_s_len >= mb_back_len)
+            {
+                size_t charcount = 0;
+                char *mbp = s;
+
+                while (charcount < (mb_s_len - mb_back_len))
+                {
+                    size_t skip = skip_multibyte_char (*mbp);
+                    mbp += (skip ? skip : 1);
+                    charcount++;
+                }
+
+                /*
+                 * mbp now points at mb_back_len multibyte
+                 * characters from the end of s.
+                 */
+
+                if (strcmp (mbp, back) == 0)
+                {
+                    ret = True;
+                    *mbp = '\0';
+                    mb_s_len = str_charnum (s);
+                    mbp = s;
+                }
+                else
+                    break;
+            }                   /* end while mb_s_len... */
+        }                       /* end else .. */
+    }                           /* end if back_len .. */
+
+    return (ret);
 }
 
 #if 0
 /****************************************************************************
 does a string have any uppercase chars in it?
 ****************************************************************************/
-BOOL strhasupper(const char *s)
+BOOL
+strhasupper (const char *s)
 {
-  while (*s) 
-  {
+    while (*s)
+    {
 #if !defined(KANJI_WIN95_COMPATIBILITY)
-  /*
-   * For completeness we should put in equivalent code for code pages
-   * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
-   * doubt anyone wants Samba to behave differently from Win95 and WinNT
-   * here. They both treat full width ascii characters as case senstive
-   * filenames (ie. they don't do the work we do here).
-   * JRA. 
-   */
+        /*
+         * For completeness we should put in equivalent code for code pages
+         * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
+         * doubt anyone wants Samba to behave differently from Win95 and WinNT
+         * here. They both treat full width ascii characters as case senstive
+         * filenames (ie. they don't do the work we do here).
+         * JRA. 
+         */
 
-    if(lp_client_code_page() == KANJI_CODEPAGE)
-    {
-      /* Win95 treats full width ascii characters as case sensitive. */
-      if (is_shift_jis (*s))
-        s += 2;
-      else if (is_kana (*s))
-        s++;
-      else
-      {
-        if (isupper(*s))
-          return(True);
-        s++;
-      }
-    }
-    else
+        if (lp_client_code_page () == KANJI_CODEPAGE)
+        {
+            /* Win95 treats full width ascii characters as case sensitive. */
+            if (is_shift_jis (*s))
+                s += 2;
+            else if (is_kana (*s))
+                s++;
+            else
+            {
+                if (isupper (*s))
+                    return (True);
+                s++;
+            }
+        }
+        else
 #endif /* KANJI_WIN95_COMPATIBILITY */
-    {
-      size_t skip = skip_multibyte_char( *s );
-      if( skip != 0 )
-        s += skip;
-      else {
-        if (isupper(*s))
-          return(True);
-        s++;
-      }
+        {
+            size_t skip = skip_multibyte_char (*s);
+            if (skip != 0)
+                s += skip;
+            else
+            {
+                if (isupper (*s))
+                    return (True);
+                s++;
+            }
+        }
     }
-  }
-  return(False);
+    return (False);
 }
 
 
 /****************************************************************************
 does a string have any lowercase chars in it?
 ****************************************************************************/
-BOOL strhaslower(const char *s)
+BOOL
+strhaslower (const char *s)
 {
-  while (*s) 
-  {
+    while (*s)
+    {
 #if !defined(KANJI_WIN95_COMPATIBILITY)
-  /*
-   * For completeness we should put in equivalent code for code pages
-   * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
-   * doubt anyone wants Samba to behave differently from Win95 and WinNT
-   * here. They both treat full width ascii characters as case senstive
-   * filenames (ie. they don't do the work we do here).
-   * JRA. 
-   */
+        /*
+         * For completeness we should put in equivalent code for code pages
+         * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
+         * doubt anyone wants Samba to behave differently from Win95 and WinNT
+         * here. They both treat full width ascii characters as case senstive
+         * filenames (ie. they don't do the work we do here).
+         * JRA. 
+         */
 
-    if(lp_client_code_page() == KANJI_CODEPAGE)
-    {
-      /* Win95 treats full width ascii characters as case sensitive. */
-      if (is_shift_jis (*s))
-      {
-        if (is_sj_upper (s[0], s[1]))
-          return(True);
-        if (is_sj_lower (s[0], s[1]))
-          return (True);
-        s += 2;
-      }
-      else if (is_kana (*s))
-      {
-        s++;
-      }
-      else
-      {
-        if (islower(*s))
-          return(True);
-        s++;
-      }
-    }
-    else
+        if (lp_client_code_page () == KANJI_CODEPAGE)
+        {
+            /* Win95 treats full width ascii characters as case sensitive. */
+            if (is_shift_jis (*s))
+            {
+                if (is_sj_upper (s[0], s[1]))
+                    return (True);
+                if (is_sj_lower (s[0], s[1]))
+                    return (True);
+                s += 2;
+            }
+            else if (is_kana (*s))
+            {
+                s++;
+            }
+            else
+            {
+                if (islower (*s))
+                    return (True);
+                s++;
+            }
+        }
+        else
 #endif /* KANJI_WIN95_COMPATIBILITY */
-    {
-      size_t skip = skip_multibyte_char( *s );
-      if( skip != 0 )
-        s += skip;
-      else {
-        if (islower(*s))
-          return(True);
-        s++;
-      }
+        {
+            size_t skip = skip_multibyte_char (*s);
+            if (skip != 0)
+                s += skip;
+            else
+            {
+                if (islower (*s))
+                    return (True);
+                s++;
+            }
+        }
     }
-  }
-  return(False);
+    return (False);
 }
 #endif /*0 */
 
 /****************************************************************************
 find the number of chars in a string
 ****************************************************************************/
-size_t count_chars(const char *s,char c)
+size_t
+count_chars (const char *s, char c)
 {
-  size_t count=0;
+    size_t count = 0;
 
 #if !defined(KANJI_WIN95_COMPATIBILITY)
-  /*
-   * For completeness we should put in equivalent code for code pages
-   * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
-   * doubt anyone wants Samba to behave differently from Win95 and WinNT
-   * here. They both treat full width ascii characters as case senstive
-   * filenames (ie. they don't do the work we do here).
-   * JRA. 
-   */
+    /*
+     * For completeness we should put in equivalent code for code pages
+     * 949 (Korean hangul) and 950 (Big5 Traditional Chinese) here - but
+     * doubt anyone wants Samba to behave differently from Win95 and WinNT
+     * here. They both treat full width ascii characters as case senstive
+     * filenames (ie. they don't do the work we do here).
+     * JRA. 
+     */
 
-  if(lp_client_code_page() == KANJI_CODEPAGE)
-  {
-    /* Win95 treats full width ascii characters as case sensitive. */
-    while (*s) 
+    if (lp_client_code_page () == KANJI_CODEPAGE)
     {
-      if (is_shift_jis (*s))
-        s += 2;
-      else 
-      {
-        if (*s == c)
-          count++;
-        s++;
-      }
+        /* Win95 treats full width ascii characters as case sensitive. */
+        while (*s)
+        {
+            if (is_shift_jis (*s))
+                s += 2;
+            else
+            {
+                if (*s == c)
+                    count++;
+                s++;
+            }
+        }
     }
-  }
-  else
+    else
 #endif /* KANJI_WIN95_COMPATIBILITY */
-  {
-    while (*s) 
     {
-      size_t skip = skip_multibyte_char( *s );
-      if( skip != 0 )
-        s += skip;
-      else {
-        if (*s == c)
-          count++;
-        s++;
-      }
+        while (*s)
+        {
+            size_t skip = skip_multibyte_char (*s);
+            if (skip != 0)
+                s += skip;
+            else
+            {
+                if (*s == c)
+                    count++;
+                s++;
+            }
+        }
     }
-  }
-  return(count);
+    return (count);
 }
 
 
@@ -748,60 +794,68 @@ size_t count_chars(const char *s,char c)
 safe string copy into a known length string. maxlength does not
 include the terminating zero.
 ********************************************************************/
-char *safe_strcpy(char *dest,const char *src, size_t maxlength)
+char *
+safe_strcpy (char *dest, const char *src, size_t maxlength)
 {
     size_t len;
 
-    if (!dest) {
-        DEBUG(0,("ERROR: NULL dest in safe_strcpy\n"));
+    if (!dest)
+    {
+        DEBUG (0, ("ERROR: NULL dest in safe_strcpy\n"));
         return NULL;
     }
 
-    if (!src) {
+    if (!src)
+    {
         *dest = 0;
         return dest;
-    }  
-
-    len = strlen(src);
-
-    if (len > maxlength) {
-	    DEBUG(0,("ERROR: string overflow by %d in safe_strcpy [%.50s]\n",
-		     (int)(len-maxlength), src));
-	    len = maxlength;
     }
-      
-    memcpy(dest, src, len);
+
+    len = strlen (src);
+
+    if (len > maxlength)
+    {
+        DEBUG (0, ("ERROR: string overflow by %d in safe_strcpy [%.50s]\n",
+                   (int) (len - maxlength), src));
+        len = maxlength;
+    }
+
+    memcpy (dest, src, len);
     dest[len] = 0;
     return dest;
-}  
+}
 
 /*******************************************************************
 safe string cat into a string. maxlength does not
 include the terminating zero.
 ********************************************************************/
-char *safe_strcat(char *dest, const char *src, size_t maxlength)
+char *
+safe_strcat (char *dest, const char *src, size_t maxlength)
 {
     size_t src_len, dest_len;
 
-    if (!dest) {
-        DEBUG(0,("ERROR: NULL dest in safe_strcat\n"));
+    if (!dest)
+    {
+        DEBUG (0, ("ERROR: NULL dest in safe_strcat\n"));
         return NULL;
     }
 
-    if (!src) {
+    if (!src)
+    {
         return dest;
-    }  
-
-    src_len = strlen(src);
-    dest_len = strlen(dest);
-
-    if (src_len + dest_len > maxlength) {
-	    DEBUG(0,("ERROR: string overflow by %d in safe_strcat [%.50s]\n",
-		     (int)(src_len + dest_len - maxlength), src));
-	    src_len = maxlength - dest_len;
     }
-      
-    memcpy(&dest[dest_len], src, src_len);
+
+    src_len = strlen (src);
+    dest_len = strlen (dest);
+
+    if (src_len + dest_len > maxlength)
+    {
+        DEBUG (0, ("ERROR: string overflow by %d in safe_strcat [%.50s]\n",
+                   (int) (src_len + dest_len - maxlength), src));
+        src_len = maxlength - dest_len;
+    }
+
+    memcpy (&dest[dest_len], src, src_len);
     dest[dest_len + src_len] = 0;
     return dest;
 }
@@ -809,36 +863,42 @@ char *safe_strcat(char *dest, const char *src, size_t maxlength)
 /****************************************************************************
 this is a safer strcpy(), meant to prevent core dumps when nasty things happen
 ****************************************************************************/
-char *StrCpy(char *dest,const char *src)
+char *
+StrCpy (char *dest, const char *src)
 {
-  char *d = dest;
+    char *d = dest;
 
-  /* I don't want to get lazy with these ... */
-  SMB_ASSERT(dest && src);
+    /* I don't want to get lazy with these ... */
+    SMB_ASSERT (dest && src);
 
-  if (!dest) return(NULL);
-  if (!src) {
-    *dest = 0;
-    return(dest);
-  }
-  while ((*d++ = *src++)) ;
-  return(dest);
+    if (!dest)
+        return (NULL);
+    if (!src)
+    {
+        *dest = 0;
+        return (dest);
+    }
+    while ((*d++ = *src++));
+    return (dest);
 }
 
 /****************************************************************************
 like strncpy but always null terminates. Make sure there is room!
 ****************************************************************************/
-char *StrnCpy(char *dest,const char *src,size_t n)
+char *
+StrnCpy (char *dest, const char *src, size_t n)
 {
-  char *d = dest;
-  if (!dest) return(NULL);
-  if (!src) {
-    *dest = 0;
-    return(dest);
-  }
-  while (n-- && (*d++ = *src++)) ;
-  *d = 0;
-  return(dest);
+    char *d = dest;
+    if (!dest)
+        return (NULL);
+    if (!src)
+    {
+        *dest = 0;
+        return (dest);
+    }
+    while (n-- && (*d++ = *src++));
+    *d = 0;
+    return (dest);
 }
 
 #if 0
@@ -846,23 +906,24 @@ char *StrnCpy(char *dest,const char *src,size_t n)
 like strncpy but copies up to the character marker.  always null terminates.
 returns a pointer to the character marker in the source string (src).
 ****************************************************************************/
-char *strncpyn(char *dest, const char *src,size_t n, char c)
+char *
+strncpyn (char *dest, const char *src, size_t n, char c)
 {
-	char *p;
-	size_t str_len;
+    char *p;
+    size_t str_len;
 
-	p = strchr(src, c);
-	if (p == NULL)
-	{
-		DEBUG(5, ("strncpyn: separator character (%c) not found\n", c));
-		return NULL;
-	}
+    p = strchr (src, c);
+    if (p == NULL)
+    {
+        DEBUG (5, ("strncpyn: separator character (%c) not found\n", c));
+        return NULL;
+    }
 
-	str_len = PTR_DIFF(p, src);
-	strncpy(dest, src, MIN(n, str_len));
-	dest[str_len] = '\0';
+    str_len = PTR_DIFF (p, src);
+    strncpy (dest, src, MIN (n, str_len));
+    dest[str_len] = '\0';
 
-	return p;
+    return p;
 }
 
 
@@ -875,67 +936,74 @@ char *strncpyn(char *dest, const char *src,size_t n, char c)
  valid examples: "0A5D15"; "0x15, 0x49, 0xa2"; "59\ta9\te3\n"
 
 **************************************************************/
-size_t strhex_to_str(char *p, size_t len, const char *strhex)
+size_t
+strhex_to_str (char *p, size_t len, const char *strhex)
 {
-	size_t i;
-	size_t num_chars = 0;
-	unsigned char   lonybble, hinybble;
-	char           *hexchars = "0123456789ABCDEF";
-	char           *p1 = NULL, *p2 = NULL;
+    size_t i;
+    size_t num_chars = 0;
+    unsigned char lonybble, hinybble;
+    char *hexchars = "0123456789ABCDEF";
+    char *p1 = NULL, *p2 = NULL;
 
-	for (i = 0; i < len && strhex[i] != 0; i++)
-	{
-		if (strnequal(hexchars, "0x", 2))
-		{
-			i++; /* skip two chars */
-			continue;
-		}
+    for (i = 0; i < len && strhex[i] != 0; i++)
+    {
+        if (strnequal (hexchars, "0x", 2))
+        {
+            i++;                /* skip two chars */
+            continue;
+        }
 
-		if (!(p1 = strchr(hexchars, toupper(strhex[i]))))
-		{
-			break;
-		}
+        if (!(p1 = strchr (hexchars, toupper (strhex[i]))))
+        {
+            break;
+        }
 
-		i++; /* next hex digit */
+        i++;                    /* next hex digit */
 
-		if (!(p2 = strchr(hexchars, toupper(strhex[i]))))
-		{
-			break;
-		}
+        if (!(p2 = strchr (hexchars, toupper (strhex[i]))))
+        {
+            break;
+        }
 
-		/* get the two nybbles */
-		hinybble = PTR_DIFF(p1, hexchars);
-		lonybble = PTR_DIFF(p2, hexchars);
+        /* get the two nybbles */
+        hinybble = PTR_DIFF (p1, hexchars);
+        lonybble = PTR_DIFF (p2, hexchars);
 
-		p[num_chars] = (hinybble << 4) | lonybble;
-		num_chars++;
+        p[num_chars] = (hinybble << 4) | lonybble;
+        num_chars++;
 
-		p1 = NULL;
-		p2 = NULL;
-	}
-	return num_chars;
+        p1 = NULL;
+        p2 = NULL;
+    }
+    return num_chars;
 }
 
 /****************************************************************************
 check if a string is part of a list
 ****************************************************************************/
-BOOL in_list(char *s,char *list,BOOL casesensitive)
+BOOL
+in_list (char *s, char *list, BOOL casesensitive)
 {
-  pstring tok;
-  char *p=list;
+    pstring tok;
+    char *p = list;
 
-  if (!list) return(False);
+    if (!list)
+        return (False);
 
-  while (next_token(&p,tok,LIST_SEP,sizeof(tok))) {
-    if (casesensitive) {
-      if (strcmp(tok,s) == 0)
-        return(True);
-    } else {
-      if (StrCaseCmp(tok,s) == 0)
-        return(True);
+    while (next_token (&p, tok, LIST_SEP, sizeof (tok)))
+    {
+        if (casesensitive)
+        {
+            if (strcmp (tok, s) == 0)
+                return (True);
+        }
+        else
+        {
+            if (StrCaseCmp (tok, s) == 0)
+                return (True);
+        }
     }
-  }
-  return(False);
+    return (False);
 }
 #endif /*0 */
 
@@ -945,59 +1013,67 @@ static char *null_string = NULL;
 /****************************************************************************
 set a string value, allocing the space for the string
 ****************************************************************************/
-BOOL string_init(char **dest,const char *src)
+BOOL
+string_init (char **dest, const char *src)
 {
-  size_t l;
-  if (!src)     
-    src = "";
+    size_t l;
+    if (!src)
+        src = "";
 
-  l = strlen(src);
+    l = strlen (src);
 
-  if (l == 0)
+    if (l == 0)
     {
-      if (!null_string) {
-        if((null_string = (char *)malloc(1)) == NULL) {
-          DEBUG(0,("string_init: malloc fail for null_string.\n"));
-          return False;
+        if (!null_string)
+        {
+            if ((null_string = (char *) malloc (1)) == NULL)
+            {
+                DEBUG (0, ("string_init: malloc fail for null_string.\n"));
+                return False;
+            }
+            *null_string = 0;
         }
-        *null_string = 0;
-      }
-      *dest = null_string;
+        *dest = null_string;
     }
-  else
+    else
     {
-      (*dest) = (char *)malloc(l+1);
-      if ((*dest) == NULL) {
-	      DEBUG(0,("Out of memory in string_init\n"));
-	      return False;
-      }
+        (*dest) = (char *) malloc (l + 1);
+        if ((*dest) == NULL)
+        {
+            DEBUG (0, ("Out of memory in string_init\n"));
+            return False;
+        }
 
-      pstrcpy(*dest,src);
+        pstrcpy (*dest, src);
     }
-  return(True);
+    return (True);
 }
 
 /****************************************************************************
 free a string value
 ****************************************************************************/
-void string_free(char **s)
+void
+string_free (char **s)
 {
-  if (!s || !(*s)) return;
-  if (*s == null_string)
+    if (!s || !(*s))
+        return;
+    if (*s == null_string)
+        *s = NULL;
+    if (*s)
+        free (*s);
     *s = NULL;
-  if (*s) free(*s);
-  *s = NULL;
 }
 
 /****************************************************************************
 set a string value, allocing the space for the string, and deallocating any 
 existing space
 ****************************************************************************/
-BOOL string_set(char **dest,const char *src)
+BOOL
+string_set (char **dest, const char *src)
 {
-  string_free(dest);
+    string_free (dest);
 
-  return(string_init(dest,src));
+    return (string_init (dest, src));
 }
 
 
@@ -1010,36 +1086,42 @@ insert. It may do multiple replacements.
 
 any of " ; ' or ` in the insert string are replaced with _
 ****************************************************************************/
-void string_sub(char *s,const char *pattern,const char *insert)
+void
+string_sub (char *s, const char *pattern, const char *insert)
 {
-	char *p;
-	size_t ls,lp,li, i;
+    char *p;
+    size_t ls, lp, li, i;
 
-	if (!insert || !pattern || !s) return;
+    if (!insert || !pattern || !s)
+        return;
 
-	ls = strlen(s);
-	lp = strlen(pattern);
-	li = strlen(insert);
+    ls = strlen (s);
+    lp = strlen (pattern);
+    li = strlen (insert);
 
-	if (!*pattern) return;
-	
-	while (lp <= ls && (p = strstr(s,pattern))) {
-		memmove(p+li,p+lp,ls + 1 - (PTR_DIFF(p,s) + lp));
-		for (i=0;i<li;i++) {
-			switch (insert[i]) {
-			case '`':
-			case '"':
-			case '\'':
-			case ';':
-				p[i] = '_';
-				break;
-			default:
-				p[i] = insert[i];
-			}
-		}
-		s = p + li;
-		ls += (li-lp);
-	}
+    if (!*pattern)
+        return;
+
+    while (lp <= ls && (p = strstr (s, pattern)))
+    {
+        memmove (p + li, p + lp, ls + 1 - (PTR_DIFF (p, s) + lp));
+        for (i = 0; i < li; i++)
+        {
+            switch (insert[i])
+            {
+            case '`':
+            case '"':
+            case '\'':
+            case ';':
+                p[i] = '_';
+                break;
+            default:
+                p[i] = insert[i];
+            }
+        }
+        s = p + li;
+        ls += (li - lp);
+    }
 }
 
 #if 0
@@ -1047,57 +1129,62 @@ void string_sub(char *s,const char *pattern,const char *insert)
 similar to string_sub() but allows for any character to be substituted. 
 Use with caution!
 ****************************************************************************/
-void all_string_sub(char *s,const char *pattern,const char *insert)
+void
+all_string_sub (char *s, const char *pattern, const char *insert)
 {
-	char *p;
-	size_t ls,lp,li;
+    char *p;
+    size_t ls, lp, li;
 
-	if (!insert || !pattern || !s) return;
+    if (!insert || !pattern || !s)
+        return;
 
-	ls = strlen(s);
-	lp = strlen(pattern);
-	li = strlen(insert);
+    ls = strlen (s);
+    lp = strlen (pattern);
+    li = strlen (insert);
 
-	if (!*pattern) return;
-	
-	while (lp <= ls && (p = strstr(s,pattern))) {
-		memmove(p+li,p+lp,ls + 1 - (PTR_DIFF(p,s) + lp));
-		memcpy(p, insert, li);
-		s = p + li;
-		ls += (li-lp);
-	}
+    if (!*pattern)
+        return;
+
+    while (lp <= ls && (p = strstr (s, pattern)))
+    {
+        memmove (p + li, p + lp, ls + 1 - (PTR_DIFF (p, s) + lp));
+        memcpy (p, insert, li);
+        s = p + li;
+        ls += (li - lp);
+    }
 }
 
 
 /****************************************************************************
  splits out the front and back at a separator.
 ****************************************************************************/
-void split_at_last_component(char *path, char *front, char sep, char *back)
+void
+split_at_last_component (char *path, char *front, char sep, char *back)
 {
-	char *p = strrchr(path, sep);
+    char *p = strrchr (path, sep);
 
-	if (p != NULL)
-	{
-		*p = 0;
-	}
-	if (front != NULL)
-	{
-		pstrcpy(front, path);
-	}
-	if (p != NULL)
-	{
-		if (back != NULL)
-		{
-			pstrcpy(back, p+1);
-		}
-		*p = '\\';
-	}
-	else
-	{
-		if (back != NULL)
-		{
-			back[0] = 0;
-		}
-	}
+    if (p != NULL)
+    {
+        *p = 0;
+    }
+    if (front != NULL)
+    {
+        pstrcpy (front, path);
+    }
+    if (p != NULL)
+    {
+        if (back != NULL)
+        {
+            pstrcpy (back, p + 1);
+        }
+        *p = '\\';
+    }
+    else
+    {
+        if (back != NULL)
+        {
+            back[0] = 0;
+        }
+    }
 }
 #endif /*0 */

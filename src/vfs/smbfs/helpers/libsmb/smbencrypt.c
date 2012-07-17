@@ -24,7 +24,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include "includes.h"
 
@@ -36,34 +36,36 @@ extern int DEBUGLEVEL;
    This implements the X/Open SMB password encryption
    It takes a password, a 8 byte "crypt key" and puts 24 bytes of 
    encrypted password into p24 */
-void SMBencrypt(uchar *passwd, uchar *c8, uchar *p24)
+void
+SMBencrypt (uchar * passwd, uchar * c8, uchar * p24)
 {
-	uchar p14[15], p21[21];
+    uchar p14[15], p21[21];
 
-	memset(p21,'\0',21);
-	memset(p14,'\0',14);
-	StrnCpy((char *)p14,(char *)passwd,14);
+    memset (p21, '\0', 21);
+    memset (p14, '\0', 14);
+    StrnCpy ((char *) p14, (char *) passwd, 14);
 
-	strupper((char *)p14);
-	E_P16(p14, p21); 
+    strupper ((char *) p14);
+    E_P16 (p14, p21);
 
-	SMBOWFencrypt(p21, c8, p24);
+    SMBOWFencrypt (p21, c8, p24);
 
 #ifdef DEBUG_PASSWORD
-	DEBUG(100,("SMBencrypt: lm#, challenge, response\n"));
-	dump_data(100, (char *)p21, 16);
-	dump_data(100, (char *)c8, 8);
-	dump_data(100, (char *)p24, 24);
+    DEBUG (100, ("SMBencrypt: lm#, challenge, response\n"));
+    dump_data (100, (char *) p21, 16);
+    dump_data (100, (char *) c8, 8);
+    dump_data (100, (char *) p24, 24);
 #endif
 }
 
 /* Routines for Windows NT MD4 Hash functions. */
-static int _my_wcslen(int16 *str)
+static int
+_my_wcslen (int16 * str)
 {
-	int len = 0;
-	while(*str++ != 0)
-		len++;
-	return len;
+    int len = 0;
+    while (*str++ != 0)
+        len++;
+    return len;
 }
 
 /*
@@ -72,126 +74,133 @@ static int _my_wcslen(int16 *str)
  * this must be in intel (little-endian)
  * format.
  */
- 
-static int _my_mbstowcs(int16 *dst, uchar *src, int len)
+
+static int
+_my_mbstowcs (int16 * dst, uchar * src, int len)
 {
-	int i;
-	int16 val;
- 
-	for(i = 0; i < len; i++) {
-		val = *src;
-		SSVAL(dst,0,val);
-		dst++;
-		src++;
-		if(val == 0)
-			break;
-	}
-	return i;
+    int i;
+    int16 val;
+
+    for (i = 0; i < len; i++)
+    {
+        val = *src;
+        SSVAL (dst, 0, val);
+        dst++;
+        src++;
+        if (val == 0)
+            break;
+    }
+    return i;
 }
 
 /* 
  * Creates the MD4 Hash of the users password in NT UNICODE.
  */
- 
-void E_md4hash(uchar *passwd, uchar *p16)
-{
-	int len;
-	int16 wpwd[129];
-	
-	/* Password cannot be longer than 128 characters */
-	len = strlen((char *)passwd);
-	if(len > 128)
-		len = 128;
-	/* Password must be converted to NT unicode */
-	_my_mbstowcs(wpwd, passwd, len);
-	wpwd[len] = 0; /* Ensure string is null terminated */
-	/* Calculate length in bytes */
-	len = _my_wcslen(wpwd) * sizeof(int16);
 
-	mdfour(p16, (unsigned char *)wpwd, len);
+void
+E_md4hash (uchar * passwd, uchar * p16)
+{
+    int len;
+    int16 wpwd[129];
+
+    /* Password cannot be longer than 128 characters */
+    len = strlen ((char *) passwd);
+    if (len > 128)
+        len = 128;
+    /* Password must be converted to NT unicode */
+    _my_mbstowcs (wpwd, passwd, len);
+    wpwd[len] = 0;              /* Ensure string is null terminated */
+    /* Calculate length in bytes */
+    len = _my_wcslen (wpwd) * sizeof (int16);
+
+    mdfour (p16, (unsigned char *) wpwd, len);
 }
 
 /* Does both the NT and LM owfs of a user's password */
-void nt_lm_owf_gen(char *pwd, uchar nt_p16[16], uchar p16[16])
+void
+nt_lm_owf_gen (char *pwd, uchar nt_p16[16], uchar p16[16])
 {
-	char passwd[130];
+    char passwd[130];
 
-	memset(passwd,'\0',130);
-	safe_strcpy( passwd, pwd, sizeof(passwd)-1);
+    memset (passwd, '\0', 130);
+    safe_strcpy (passwd, pwd, sizeof (passwd) - 1);
 
-	/* Calculate the MD4 hash (NT compatible) of the password */
-	memset(nt_p16, '\0', 16);
-	E_md4hash((uchar *)passwd, nt_p16);
-
-#ifdef DEBUG_PASSWORD
-	DEBUG(100,("nt_lm_owf_gen: pwd, nt#\n"));
-	dump_data(120, passwd, strlen(passwd));
-	dump_data(100, (char *)nt_p16, 16);
-#endif
-
-	/* Mangle the passwords into Lanman format */
-	passwd[14] = '\0';
-	strupper(passwd);
-
-	/* Calculate the SMB (lanman) hash functions of the password */
-
-	memset(p16, '\0', 16);
-	E_P16((uchar *) passwd, (uchar *)p16);
+    /* Calculate the MD4 hash (NT compatible) of the password */
+    memset (nt_p16, '\0', 16);
+    E_md4hash ((uchar *) passwd, nt_p16);
 
 #ifdef DEBUG_PASSWORD
-	DEBUG(100,("nt_lm_owf_gen: pwd, lm#\n"));
-	dump_data(120, passwd, strlen(passwd));
-	dump_data(100, (char *)p16, 16);
+    DEBUG (100, ("nt_lm_owf_gen: pwd, nt#\n"));
+    dump_data (120, passwd, strlen (passwd));
+    dump_data (100, (char *) nt_p16, 16);
 #endif
-	/* clear out local copy of user's password (just being paranoid). */
-	memset(passwd, '\0', sizeof(passwd));
+
+    /* Mangle the passwords into Lanman format */
+    passwd[14] = '\0';
+    strupper (passwd);
+
+    /* Calculate the SMB (lanman) hash functions of the password */
+
+    memset (p16, '\0', 16);
+    E_P16 ((uchar *) passwd, (uchar *) p16);
+
+#ifdef DEBUG_PASSWORD
+    DEBUG (100, ("nt_lm_owf_gen: pwd, lm#\n"));
+    dump_data (120, passwd, strlen (passwd));
+    dump_data (100, (char *) p16, 16);
+#endif
+    /* clear out local copy of user's password (just being paranoid). */
+    memset (passwd, '\0', sizeof (passwd));
 }
 
 /* Does the des encryption from the NT or LM MD4 hash. */
-void SMBOWFencrypt(uchar passwd[16], uchar *c8, uchar p24[24])
+void
+SMBOWFencrypt (uchar passwd[16], uchar * c8, uchar p24[24])
 {
-	uchar p21[21];
- 
-	memset(p21,'\0',21);
- 
-	memcpy(p21, passwd, 16);    
-	E_P24(p21, c8, p24);
+    uchar p21[21];
+
+    memset (p21, '\0', 21);
+
+    memcpy (p21, passwd, 16);
+    E_P24 (p21, c8, p24);
 }
 
 /* Does the des encryption from the FIRST 8 BYTES of the NT or LM MD4 hash. */
-void NTLMSSPOWFencrypt(uchar passwd[8], uchar *ntlmchalresp, uchar p24[24])
+void
+NTLMSSPOWFencrypt (uchar passwd[8], uchar * ntlmchalresp, uchar p24[24])
 {
-	uchar p21[21];
- 
-	memset(p21,'\0',21);
-	memcpy(p21, passwd, 8);    
-	memset(p21 + 8, 0xbd, 8);    
+    uchar p21[21];
 
-	E_P24(p21, ntlmchalresp, p24);
+    memset (p21, '\0', 21);
+    memcpy (p21, passwd, 8);
+    memset (p21 + 8, 0xbd, 8);
+
+    E_P24 (p21, ntlmchalresp, p24);
 #ifdef DEBUG_PASSWORD
-	DEBUG(100,("NTLMSSPOWFencrypt: p21, c8, p24\n"));
-	dump_data(100, (char *)p21, 21);
-	dump_data(100, (char *)ntlmchalresp, 8);
-	dump_data(100, (char *)p24, 24);
+    DEBUG (100, ("NTLMSSPOWFencrypt: p21, c8, p24\n"));
+    dump_data (100, (char *) p21, 21);
+    dump_data (100, (char *) ntlmchalresp, 8);
+    dump_data (100, (char *) p24, 24);
 #endif
 }
 
 
 /* Does the NT MD4 hash then des encryption. */
- 
-void SMBNTencrypt(uchar *passwd, uchar *c8, uchar *p24)
+
+void
+SMBNTencrypt (uchar * passwd, uchar * c8, uchar * p24)
 {
-	uchar p21[21];
- 
-	memset(p21,'\0',21);
- 
-	E_md4hash(passwd, p21);    
-	SMBOWFencrypt(p21, c8, p24);
+    uchar p21[21];
+
+    memset (p21, '\0', 21);
+
+    E_md4hash (passwd, p21);
+    SMBOWFencrypt (p21, c8, p24);
 
 #ifdef DEBUG_PASSWORD
-	DEBUG(100,("SMBNTencrypt: nt#, challenge, response\n"));
-	dump_data(100, (char *)p21, 16);
-	dump_data(100, (char *)c8, 8);
-	dump_data(100, (char *)p24, 24);
+    DEBUG (100, ("SMBNTencrypt: nt#, challenge, response\n"));
+    dump_data (100, (char *) p21, 16);
+    dump_data (100, (char *) c8, 8);
+    dump_data (100, (char *) p24, 24);
 #endif
 }

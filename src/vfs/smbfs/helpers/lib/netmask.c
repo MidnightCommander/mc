@@ -22,7 +22,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 
 /* working out the netmask for an interface is an incredibly non-portable
@@ -34,7 +34,7 @@
    this code cannot use any of the normal Samba debug stuff or defines.
    This is standalone code.
 
-*/
+ */
 
 #ifndef AUTOCONF
 #include "config.h"
@@ -63,84 +63,89 @@
  * Prototype for gcc in fussy mode.
  */
 
-int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask);
+int get_netmask (struct in_addr *ipaddr, struct in_addr *nmask);
 
 /****************************************************************************
   get the netmask address for a local interface
 ****************************************************************************/
-int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask)
-{  
-	struct ifconf ifc;
-	char buff[2048];
-	int fd, i, n;
-	struct ifreq *ifr=NULL;
+int
+get_netmask (struct in_addr *ipaddr, struct in_addr *nmask)
+{
+    struct ifconf ifc;
+    char buff[2048];
+    int fd, i, n;
+    struct ifreq *ifr = NULL;
 
-	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+    if ((fd = socket (AF_INET, SOCK_DGRAM, 0)) == -1)
+    {
 #ifdef DEBUG
-		fprintf(stderr,"socket failed\n");
+        fprintf (stderr, "socket failed\n");
 #endif
-		return -1;
-	}
-  
-	ifc.ifc_len = sizeof(buff);
-	ifc.ifc_buf = buff;
-	if (ioctl(fd, SIOCGIFCONF, &ifc) != 0) {
-#ifdef DEBUG
-		fprintf(stderr,"SIOCGIFCONF failed\n");
-#endif
-		close(fd);
-		return -1;
-	} 
+        return -1;
+    }
 
-	ifr = ifc.ifc_req;
-  
-	n = ifc.ifc_len / sizeof(struct ifreq);
-	
+    ifc.ifc_len = sizeof (buff);
+    ifc.ifc_buf = buff;
+    if (ioctl (fd, SIOCGIFCONF, &ifc) != 0)
+    {
 #ifdef DEBUG
-	fprintf(stderr,"%d interfaces - looking for %s\n", 
-		n, inet_ntoa(*ipaddr));
+        fprintf (stderr, "SIOCGIFCONF failed\n");
 #endif
+        close (fd);
+        return -1;
+    }
 
-	/* Loop through interfaces, looking for given IP address */
-	for (i=n-1;i>=0;i--) {
-		if (ioctl(fd, SIOCGIFADDR, &ifr[i]) != 0) {
-#ifdef DEBUG
-			fprintf(stderr,"SIOCGIFADDR failed\n");
-#endif
-			continue;
-		}
+    ifr = ifc.ifc_req;
+
+    n = ifc.ifc_len / sizeof (struct ifreq);
 
 #ifdef DEBUG
-		fprintf(stderr,"interface %s\n", 
-			inet_ntoa((*(struct sockaddr_in *)&ifr[i].ifr_addr).sin_addr));
-#endif
-		if (ipaddr->s_addr !=
-		    (*(struct sockaddr_in *)&ifr[i].ifr_addr).sin_addr.s_addr) {
-			continue;
-		}
-
-		if (ioctl(fd, SIOCGIFNETMASK, &ifr[i]) != 0) {
-#ifdef DEBUG
-			fprintf(stderr,"SIOCGIFNETMASK failed\n");
-#endif
-			close(fd);
-			return -1;
-		}  
-		close(fd);
-		(*nmask) = ((struct sockaddr_in *)&ifr[i].ifr_addr)->sin_addr;
-#ifdef DEBUG
-		fprintf(stderr,"netmask %s\n", inet_ntoa(*nmask));
-#endif
-		return 0;
-	}
-
-#ifdef DEBUG
-	fprintf(stderr,"interface not found\n");
+    fprintf (stderr, "%d interfaces - looking for %s\n", n, inet_ntoa (*ipaddr));
 #endif
 
-	close(fd);
-	return -1;
-}  
+    /* Loop through interfaces, looking for given IP address */
+    for (i = n - 1; i >= 0; i--)
+    {
+        if (ioctl (fd, SIOCGIFADDR, &ifr[i]) != 0)
+        {
+#ifdef DEBUG
+            fprintf (stderr, "SIOCGIFADDR failed\n");
+#endif
+            continue;
+        }
+
+#ifdef DEBUG
+        fprintf (stderr, "interface %s\n",
+                 inet_ntoa ((*(struct sockaddr_in *) &ifr[i].ifr_addr).sin_addr));
+#endif
+        if (ipaddr->s_addr != (*(struct sockaddr_in *) &ifr[i].ifr_addr).sin_addr.s_addr)
+        {
+            continue;
+        }
+
+        if (ioctl (fd, SIOCGIFNETMASK, &ifr[i]) != 0)
+        {
+#ifdef DEBUG
+            fprintf (stderr, "SIOCGIFNETMASK failed\n");
+#endif
+            close (fd);
+            return -1;
+        }
+        close (fd);
+        (*nmask) = ((struct sockaddr_in *) &ifr[i].ifr_addr)->sin_addr;
+#ifdef DEBUG
+        fprintf (stderr, "netmask %s\n", inet_ntoa (*nmask));
+#endif
+        return 0;
+    }
+
+#ifdef DEBUG
+    fprintf (stderr, "interface not found\n");
+#endif
+
+    close (fd);
+    return -1;
+}
 
 #elif defined(HAVE_NETMASK_IFREQ)
 
@@ -165,84 +170,90 @@ int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask)
 /****************************************************************************
 this should cover most of the rest of systems
 ****************************************************************************/
- int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask)
+int
+get_netmask (struct in_addr *ipaddr, struct in_addr *nmask)
 {
-	struct ifreq ifreq;
-	struct strioctl strioctl;
-	struct ifconf *ifc;
-	char buff[2048];
-	int fd, i, n;
-	struct ifreq *ifr=NULL;
+    struct ifreq ifreq;
+    struct strioctl strioctl;
+    struct ifconf *ifc;
+    char buff[2048];
+    int fd, i, n;
+    struct ifreq *ifr = NULL;
 
-	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+    if ((fd = socket (AF_INET, SOCK_DGRAM, 0)) == -1)
+    {
 #ifdef DEBUG
-		fprintf(stderr,"socket failed\n");
+        fprintf (stderr, "socket failed\n");
 #endif
-		return -1;
-	}
-  
-	ifc = (struct ifconf *)buff;
-	ifc->ifc_len = BUFSIZ - sizeof(struct ifconf);
-	strioctl.ic_cmd = SIOCGIFCONF;
-	strioctl.ic_dp  = (char *)ifc;
-	strioctl.ic_len = sizeof(buff);
-	if (ioctl(fd, I_STR, &strioctl) < 0) {
-#ifdef DEBUG
-		fprintf(stderr,"SIOCGIFCONF failed\n");
-#endif
-		close(fd);
-		return -1;
-	} 
-	
-	ifr = (struct ifreq *)ifc->ifc_req;  
+        return -1;
+    }
 
-	/* Loop through interfaces, looking for given IP address */
-	n = ifc->ifc_len / sizeof(struct ifreq);
-
-	for (i = 0; i<n; i++, ifr++) {
+    ifc = (struct ifconf *) buff;
+    ifc->ifc_len = BUFSIZ - sizeof (struct ifconf);
+    strioctl.ic_cmd = SIOCGIFCONF;
+    strioctl.ic_dp = (char *) ifc;
+    strioctl.ic_len = sizeof (buff);
+    if (ioctl (fd, I_STR, &strioctl) < 0)
+    {
 #ifdef DEBUG
-		fprintf(stderr,"interface %s\n", 
-			inet_ntoa((*(struct sockaddr_in *)&ifr->ifr_addr).sin_addr.s_addr));
+        fprintf (stderr, "SIOCGIFCONF failed\n");
 #endif
-		if (ipaddr->s_addr ==
-		    (*(struct sockaddr_in *) &ifr->ifr_addr).sin_addr.s_addr) {
-			break;
-		}
-	}
+        close (fd);
+        return -1;
+    }
+
+    ifr = (struct ifreq *) ifc->ifc_req;
+
+    /* Loop through interfaces, looking for given IP address */
+    n = ifc->ifc_len / sizeof (struct ifreq);
+
+    for (i = 0; i < n; i++, ifr++)
+    {
+#ifdef DEBUG
+        fprintf (stderr, "interface %s\n",
+                 inet_ntoa ((*(struct sockaddr_in *) &ifr->ifr_addr).sin_addr.s_addr));
+#endif
+        if (ipaddr->s_addr == (*(struct sockaddr_in *) &ifr->ifr_addr).sin_addr.s_addr)
+        {
+            break;
+        }
+    }
 
 #ifdef DEBUG
-	if (i == n) {
-		fprintf(stderr,"interface not found\n");
-		close(fd);
-		return -1;
-	}
+    if (i == n)
+    {
+        fprintf (stderr, "interface not found\n");
+        close (fd);
+        return -1;
+    }
 #endif
 
-	ifreq = *ifr;
-  
-	strioctl.ic_cmd = SIOCGIFNETMASK;
-	strioctl.ic_dp  = (char *)&ifreq;
-	strioctl.ic_len = sizeof(struct ifreq);
-	if (ioctl(fd, I_STR, &strioctl) != 0) {
-#ifdef DEBUG
-		fprintf(stderr,"Failed SIOCGIFNETMASK\n");
-#endif
-		close(fd);
-		return -1;
-	}
+    ifreq = *ifr;
 
-	close(fd);
-	*nmask = ((struct sockaddr_in *)&ifreq.ifr_addr)->sin_addr;
+    strioctl.ic_cmd = SIOCGIFNETMASK;
+    strioctl.ic_dp = (char *) &ifreq;
+    strioctl.ic_len = sizeof (struct ifreq);
+    if (ioctl (fd, I_STR, &strioctl) != 0)
+    {
 #ifdef DEBUG
-	fprintf(stderr,"netmask %s\n", inet_ntoa(*nmask));
+        fprintf (stderr, "Failed SIOCGIFNETMASK\n");
 #endif
-	return 0;
+        close (fd);
+        return -1;
+    }
+
+    close (fd);
+    *nmask = ((struct sockaddr_in *) &ifreq.ifr_addr)->sin_addr;
+#ifdef DEBUG
+    fprintf (stderr, "netmask %s\n", inet_ntoa (*nmask));
+#endif
+    return 0;
 }
 
 #elif defined(HAVE_NETMASK_AIX)
 
 #include <stdio.h>
-#include <unistd.h>	/* close() declaration for gcc in fussy mode */
+#include <unistd.h>             /* close() declaration for gcc in fussy mode */
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -259,87 +270,93 @@ this should cover most of the rest of systems
  * Prototype for gcc in fussy mode.
  */
 
-int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask);
+int get_netmask (struct in_addr *ipaddr, struct in_addr *nmask);
 
 /****************************************************************************
 this one is for AIX
 ****************************************************************************/
 
- int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask)
+int
+get_netmask (struct in_addr *ipaddr, struct in_addr *nmask)
 {
-	char buff[2048];
-	int fd, i;
-	struct ifconf ifc;
-	struct ifreq *ifr=NULL;
+    char buff[2048];
+    int fd, i;
+    struct ifconf ifc;
+    struct ifreq *ifr = NULL;
 
-	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+    if ((fd = socket (AF_INET, SOCK_DGRAM, 0)) == -1)
+    {
 #ifdef DEBUG
-		fprintf(stderr,"socket failed\n");
+        fprintf (stderr, "socket failed\n");
 #endif
-		return -1;
-	}
+        return -1;
+    }
 
 
-	ifc.ifc_len = sizeof(buff);
-	ifc.ifc_buf = buff;
+    ifc.ifc_len = sizeof (buff);
+    ifc.ifc_buf = buff;
 
-	if (ioctl(fd, SIOCGIFCONF, &ifc) != 0) {
+    if (ioctl (fd, SIOCGIFCONF, &ifc) != 0)
+    {
 #ifdef DEBUG
-		fprintf(stderr,"SIOCGIFCONF failed\n");
+        fprintf (stderr, "SIOCGIFCONF failed\n");
 #endif
-		close(fd);
-		return -1;
-	}
+        close (fd);
+        return -1;
+    }
 
-	ifr = ifc.ifc_req;
-	/* Loop through interfaces, looking for given IP address */
-	i = ifc.ifc_len;
-	while (i > 0) {
+    ifr = ifc.ifc_req;
+    /* Loop through interfaces, looking for given IP address */
+    i = ifc.ifc_len;
+    while (i > 0)
+    {
 #ifdef DEBUG
-		fprintf(stderr,"interface %s\n", 
-			inet_ntoa((*(struct sockaddr_in *)&ifr->ifr_addr).sin_addr));
+        fprintf (stderr, "interface %s\n",
+                 inet_ntoa ((*(struct sockaddr_in *) &ifr->ifr_addr).sin_addr));
 #endif
-		if (ipaddr->s_addr ==
-		    (*(struct sockaddr_in *) &ifr->ifr_addr).sin_addr.s_addr) {
-			break;
-		}
-		i -= ifr->ifr_addr.sa_len + IFNAMSIZ;
-		ifr = (struct ifreq*) ((char*) ifr + ifr->ifr_addr.sa_len + 
-				       IFNAMSIZ);
-	}
-  
+        if (ipaddr->s_addr == (*(struct sockaddr_in *) &ifr->ifr_addr).sin_addr.s_addr)
+        {
+            break;
+        }
+        i -= ifr->ifr_addr.sa_len + IFNAMSIZ;
+        ifr = (struct ifreq *) ((char *) ifr + ifr->ifr_addr.sa_len + IFNAMSIZ);
+    }
+
 
 #ifdef DEBUG
-	if (i <= 0) {
-		fprintf(stderr,"interface not found\n");
-		close(fd);
-		return -1;
-	}
+    if (i <= 0)
+    {
+        fprintf (stderr, "interface not found\n");
+        close (fd);
+        return -1;
+    }
 #endif
 
-	if (ioctl(fd, SIOCGIFNETMASK, ifr) != 0) {
+    if (ioctl (fd, SIOCGIFNETMASK, ifr) != 0)
+    {
 #ifdef DEBUG
-		fprintf(stderr,"SIOCGIFNETMASK failed\n");
+        fprintf (stderr, "SIOCGIFNETMASK failed\n");
 #endif
-		close(fd);
-		return -1;
-	}  
+        close (fd);
+        return -1;
+    }
 
-	close(fd);
+    close (fd);
 
-	(*nmask) = ((struct sockaddr_in *)&ifr->ifr_addr)->sin_addr;
+    (*nmask) = ((struct sockaddr_in *) &ifr->ifr_addr)->sin_addr;
 #ifdef DEBUG
-	fprintf(stderr,"netmask %s\n", inet_ntoa(*nmask));
+    fprintf (stderr, "netmask %s\n", inet_ntoa (*nmask));
 #endif
-	return 0;
+    return 0;
 }
 
 #else /* a dummy version */
-struct in_addr; /* it may not have been declared before */
-int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask);
- int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask)
+struct in_addr;                 /* it may not have been declared before */
+int get_netmask (struct in_addr *ipaddr, struct in_addr *nmask);
+int
+get_netmask (struct in_addr *ipaddr, struct in_addr *nmask)
 {
-	return -1;
+    return -1;
 }
 #endif
 
@@ -347,29 +364,32 @@ int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask);
 #ifdef AUTOCONF
 /* this is the autoconf driver to test get_netmask() */
 
- main()
+main ()
 {
-	char buf[1024];
-	struct hostent *hp;
-	struct in_addr ip, nmask;
+    char buf[1024];
+    struct hostent *hp;
+    struct in_addr ip, nmask;
 
-	if (gethostname(buf, sizeof(buf)-1) != 0) {
-		fprintf(stderr,"gethostname failed\n");
-		exit(1);
-	}
+    if (gethostname (buf, sizeof (buf) - 1) != 0)
+    {
+        fprintf (stderr, "gethostname failed\n");
+        exit (1);
+    }
 
-	hp = gethostbyname(buf);
+    hp = gethostbyname (buf);
 
-	if (!hp) {
-		fprintf(stderr,"gethostbyname failed\n");
-		exit(1);
-	}
+    if (!hp)
+    {
+        fprintf (stderr, "gethostbyname failed\n");
+        exit (1);
+    }
 
-	memcpy((char *)&ip, (char *)hp->h_addr, hp->h_length);
+    memcpy ((char *) &ip, (char *) hp->h_addr, hp->h_length);
 
-	if (get_netmask(&ip, &nmask) == 0) exit(0);
+    if (get_netmask (&ip, &nmask) == 0)
+        exit (0);
 
-	fprintf(stderr,"get_netmask failed\n");
-	exit(1);
+    fprintf (stderr, "get_netmask failed\n");
+    exit (1);
 }
 #endif

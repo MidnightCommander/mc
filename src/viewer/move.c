@@ -407,7 +407,11 @@ mcview_moveto_eol (mcview_t * view)
             else
                 view->dpy_text_column = eol - bol;
         }
-        view->dpy_text_column = max (0, view->dpy_text_column - view->data_area.width);
+
+        if (view->dpy_text_column < (off_t) view->data_area.width)
+            view->dpy_text_column = 0;
+        else
+            view->dpy_text_column = view->dpy_text_column - (off_t) view->data_area.width;
     }
     mcview_movement_fixups (view, FALSE);
 }

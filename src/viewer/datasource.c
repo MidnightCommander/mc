@@ -379,7 +379,7 @@ mcview_close_datasource (mcview_t * view)
 #ifdef HAVE_ASSERT_H
         assert (!"Unknown datasource type")
 #endif
-        ;
+            ;
     }
     view->datasource = DS_NONE;
 }

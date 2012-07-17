@@ -4,9 +4,9 @@
    Unix SMB/Netbios implementation.
    Version 1.9.
    Machine customisation and include handling
-*/
+ */
 
-#ifndef NO_CONFIG_H /* for some tests */
+#ifndef NO_CONFIG_H             /* for some tests */
 #include "config.h"
 #endif
 
@@ -156,7 +156,7 @@
 /* POSIX terminal handling. */
 #include <termios.h>
 
-# include <dirent.h>
+#include <dirent.h>
 
 #ifdef HAVE_SYS_MMAN_H
 #include <sys/mman.h>
@@ -185,23 +185,23 @@
 #include <sys/acl.h>
 #endif
 
-#ifdef HAVE_SYS_FS_S5PARAM_H 
+#ifdef HAVE_SYS_FS_S5PARAM_H
 #include <sys/fs/s5param.h>
 #endif
 
 #if defined (HAVE_SYS_FILSYS_H) && !defined (_CRAY)
-#include <sys/filsys.h> 
+#include <sys/filsys.h>
 #endif
 
 #ifdef HAVE_SYS_STATFS_H
-# include <sys/statfs.h>
+#include <sys/statfs.h>
 #endif
 
-#ifdef HAVE_DUSTAT_H              
+#ifdef HAVE_DUSTAT_H
 #include <sys/dustat.h>
 #endif
 
-#ifdef HAVE_SYS_STATVFS_H          
+#ifdef HAVE_SYS_STATVFS_H
 #include <sys/statvfs.h>
 #endif
 
@@ -219,7 +219,7 @@
 #include <sys/security.h>
 #include <prot.h>
 #define PASSWORD_LENGTH 16
-#endif  /* HAVE_SYS_SECURITY_H */
+#endif /* HAVE_SYS_SECURITY_H */
 
 #ifdef HAVE_COMPAT_H
 #include <compat.h>
@@ -269,7 +269,7 @@
    they actually only need to be at least 16 and 32 bits
    respectively. Thus if your word size is 8 bytes just defining them
    as signed and unsigned int will work.
-*/
+ */
 
 #ifndef uint8
 #define uint8 unsigned char
@@ -334,23 +334,23 @@
  */
 
 #ifndef SMB_INO_T
-#    define SMB_INO_T ino_t
+#define SMB_INO_T ino_t
 #endif
 
 #ifndef LARGE_SMB_INO_T
-#  if defined(SIZEOF_INO_T) && (SIZEOF_INO_T == 8)
-#    define LARGE_SMB_INO_T 1
-#  endif
+#if defined(SIZEOF_INO_T) && (SIZEOF_INO_T == 8)
+#define LARGE_SMB_INO_T 1
+#endif
 #endif
 
 #ifdef LARGE_SMB_INO_T
 #define SINO_T(p, ofs, v) (SIVAL(p,ofs,(v)&0xFFFFFFFF), SIVAL(p,(ofs)+4,(v)>>32))
-#else 
+#else
 #define SINO_T(p, ofs, v) (SIVAL(p,ofs,v),SIVAL(p,(ofs)+4,0))
 #endif
 
 #ifndef SMB_OFF_T
-#    define SMB_OFF_T off_t
+#define SMB_OFF_T off_t
 #endif
 
 #define SMB_OFF_T_BITS (sizeof(SMB_OFF_T)*8)
@@ -361,14 +361,14 @@
  */
 
 #ifndef LARGE_SMB_OFF_T
-#  if defined(SIZEOF_OFF_T) && (SIZEOF_OFF_T == 8)
-#    define LARGE_SMB_OFF_T 1
-#  endif
+#if defined(SIZEOF_OFF_T) && (SIZEOF_OFF_T == 8)
+#define LARGE_SMB_OFF_T 1
+#endif
 #endif
 
 #ifdef LARGE_SMB_OFF_T
 #define SOFF_T(p, ofs, v) (SIVAL(p,ofs,(v)&0xFFFFFFFF), SIVAL(p,(ofs)+4,(v)>>32))
-#else 
+#else
 #define SOFF_T(p, ofs, v) (SIVAL(p,ofs,v),SIVAL(p,(ofs)+4,0))
 #endif
 
@@ -377,7 +377,7 @@
  */
 
 #ifndef SMB_STRUCT_STAT
-#    define SMB_STRUCT_STAT struct stat
+#define SMB_STRUCT_STAT struct stat
 #endif
 
 /*
@@ -385,7 +385,7 @@
  */
 
 #ifndef SMB_STRUCT_DIRENT
-#    define SMB_STRUCT_DIRENT struct dirent
+#define SMB_STRUCT_DIRENT struct dirent
 #endif
 
 /*
@@ -393,19 +393,19 @@
  */
 
 #ifndef SMB_STRUCT_FLOCK
-#    define SMB_STRUCT_FLOCK struct flock
+#define SMB_STRUCT_FLOCK struct flock
 #endif
 
 #ifndef SMB_F_SETLKW
-#    define SMB_F_SETLKW F_SETLKW
+#define SMB_F_SETLKW F_SETLKW
 #endif
 
 #ifndef SMB_F_SETLK
-#    define SMB_F_SETLK F_SETLK
+#define SMB_F_SETLK F_SETLK
 #endif
 
 #ifndef SMB_F_GETLK
-#    define SMB_F_GETLK F_GETLK
+#define SMB_F_GETLK F_GETLK
 #endif
 
 #if defined(HAVE_LONGLONG)
@@ -515,7 +515,7 @@
 #endif
 
 /* what is the longest significant password available on your system? 
- Knowing this speeds up password searches a lot */
+   Knowing this speeds up password searches a lot */
 #ifndef PASSWORD_LENGTH
 #define PASSWORD_LENGTH 8
 #endif
@@ -549,19 +549,19 @@
 #endif
 
 #ifndef HAVE_INITGROUPS
-int initgroups(char *name,gid_t id);
+int initgroups (char *name, gid_t id);
 #endif
 
 #ifndef HAVE_RENAME
-int rename(const char *zfrom, const char *zto);
+int rename (const char *zfrom, const char *zto);
 #endif
 
 #ifndef HAVE_MKTIME
-time_t mktime(struct tm *t);
+time_t mktime (struct tm *t);
 #endif
 
 #ifndef HAVE_STRTOUL
-unsigned long strtoul(const char *nptr, char **endptr, int base);
+unsigned long strtoul (const char *nptr, char **endptr, int base);
 #endif
 
 #ifdef REPLACE_GETPASS
