@@ -337,16 +337,14 @@ mcview_set_codeset (mcview_t * view)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 void
 mcview_select_encoding (mcview_t * view)
 {
-#ifdef HAVE_CHARSET
     if (do_select_codepage ())
         mcview_set_codeset (view);
-#else
-    (void) view;
-#endif
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 

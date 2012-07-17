@@ -21,4 +21,4 @@ libedit_la_SOURCES += \
 endif
 endif
 
-libedit_la_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
+AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)

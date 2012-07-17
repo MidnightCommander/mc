@@ -3015,6 +3015,8 @@ subshell_chdir (const vfs_path_t * vpath)
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_global.tty.use_subshell && vfs_current_is_local ())
         do_subshell_chdir (vpath, FALSE, TRUE);
+#else /* HAVE_SUBSHELL_SUPPORT */
+    (void) vpath;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 }
 
@@ -4121,7 +4123,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
         vfs_path_t *vpath;
 
         vpath = vfs_path_from_str (curdir);
-        err = mc_chdir (vpath);
+        mc_chdir (vpath);
         vfs_path_free (vpath);
     }
     g_free (curdir);
@@ -4580,7 +4582,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
     g_string_free (tmp_conv, TRUE);
     return ret_vpath;
 }
-#endif  /* HAVE_CHARSET */
+#endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
 /**

@@ -17,8 +17,8 @@
 /*** declarations of public functions ************************************************************/
 
 int spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word,
-                                     GArray *suggest);
-char *spell_dialog_lang_list_show (GArray *languages);
+                                     GArray * suggest);
+char *spell_dialog_lang_list_show (GArray * languages);
 
 /*** inline functions ****************************************************************************/
 

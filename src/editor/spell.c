@@ -72,8 +72,8 @@ static struct AspellStringEnumeration *(*mc_aspell_word_list_elements) (const st
 static const char *(*mc_aspell_config_retrieve) (struct AspellConfig * ths, const char *key);
 static void (*mc_delete_aspell_speller) (struct AspellSpeller * ths);
 /*
-static void (*mc_delete_aspell_config) (struct AspellConfig * ths);
-*/
+   static void (*mc_delete_aspell_config) (struct AspellConfig * ths);
+ */
 static void (*mc_delete_aspell_can_have_error) (struct AspellCanHaveError * ths);
 static const char *(*mc_aspell_error_message) (const struct AspellCanHaveError * ths);
 static void (*mc_delete_aspell_string_enumeration) (struct AspellStringEnumeration * ths);
@@ -86,7 +86,7 @@ static const char *(*mc_aspell_string_enumeration_next) (struct AspellStringEnum
 static void (*mc_delete_aspell_dict_info_enumeration) (struct AspellDictInfoEnumeration * ths);
 static unsigned int (*mc_aspell_word_list_size) (const struct AspellWordList * ths);
 static const struct AspellError *(*mc_aspell_error) (const struct AspellCanHaveError * ths);
-static int (*mc_aspell_speller_add_to_personal) (struct AspellSpeller * ths, const char * word,
+static int (*mc_aspell_speller_add_to_personal) (struct AspellSpeller * ths, const char *word,
                                                  int word_size);
 static int (*mc_aspell_speller_save_all_word_lists) (struct AspellSpeller * ths);
 
@@ -193,8 +193,7 @@ spell_available (void)
                           (void *) &mc_aspell_speller_error_message))
         goto error_ret;
 
-    if (!g_module_symbol (spell_module, "aspell_speller_error",
-                          (void *) &mc_aspell_speller_error))
+    if (!g_module_symbol (spell_module, "aspell_speller_error", (void *) &mc_aspell_speller_error))
         goto error_ret;
 
     if (!g_module_symbol (spell_module, "aspell_error", (void *) &mc_aspell_error))

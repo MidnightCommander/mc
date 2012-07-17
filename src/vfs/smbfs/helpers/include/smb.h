@@ -2,7 +2,7 @@
    Unix SMB/Netbios implementation.
    Version 1.9.
    SMB parameters and setup
-*/
+ */
 #ifndef _SMB_H
 #define _SMB_H
 
@@ -51,19 +51,20 @@ typedef int BOOL;
    arguemnts to DEBUG() right. We have got them wrong too often in the 
    past */
 #ifdef HAVE_STDARG_H
-int  Debug1( const char *, ... )
+int
+Debug1 (const char *, ...)
 #ifdef __GNUC__
-     __attribute__ ((format (printf, 1, 2)))
+    __attribute__ ((format (printf, 1, 2)))
 #endif
-;
-BOOL dbgtext( const char *, ... )
+    ;
+     BOOL dbgtext (const char *, ...)
 #ifdef __GNUC__
-     __attribute__ ((format (printf, 1, 2)))
+    __attribute__ ((format (printf, 1, 2)))
 #endif
-;
+    ;
 #else
-int  Debug1();
-BOOL dbgtext();
+int Debug1 ();
+BOOL dbgtext ();
 #endif
 
 /* If we have these macros, we can add additional info to the header. */
@@ -136,8 +137,8 @@ BOOL dbgtext();
 #define DIR_STRUCT_SIZE 43
 
 /* these define all the command types recognised by the server - there
-are lots of gaps so probably there are some rare commands that are not
-implemented */
+   are lots of gaps so probably there are some rare commands that are not
+   implemented */
 
 #define pSETDIR '\377'
 
@@ -211,104 +212,104 @@ implemented */
 #define GET_FILE_CREATE_DISPOSITION(x) ((x) & (FILE_CREATE_IF_NOT_EXIST|FILE_FAIL_IF_NOT_EXIST))
 
 /* share types */
-#define STYPE_DISKTREE  0	/* Disk drive */
-#define STYPE_PRINTQ    1	/* Spooler queue */
-#define STYPE_DEVICE    2	/* Serial device */
-#define STYPE_IPC       3	/* Interprocess communication (IPC) */
-#define STYPE_HIDDEN    0x80000000 /* share is a hidden one (ends with $) */
+#define STYPE_DISKTREE  0       /* Disk drive */
+#define STYPE_PRINTQ    1       /* Spooler queue */
+#define STYPE_DEVICE    2       /* Serial device */
+#define STYPE_IPC       3       /* Interprocess communication (IPC) */
+#define STYPE_HIDDEN    0x80000000      /* share is a hidden one (ends with $) */
 
 /* SMB X/Open error codes for the ERRDOS error class */
-#define ERRbadfunc 1 /* Invalid function (or system call) */
-#define ERRbadfile 2 /* File not found (pathname error) */
-#define ERRbadpath 3 /* Directory not found */
-#define ERRnofids 4 /* Too many open files */
-#define ERRnoaccess 5 /* Access denied */
-#define ERRbadfid 6 /* Invalid fid */
-#define ERRnomem 8 /* Out of memory */
-#define ERRbadmem 9 /* Invalid memory block address */
-#define ERRbadenv 10 /* Invalid environment */
-#define ERRbadaccess 12 /* Invalid open mode */
-#define ERRbaddata 13 /* Invalid data (only from ioctl call) */
-#define ERRres 14 /* reserved */
-#define ERRbaddrive 15 /* Invalid drive */
-#define ERRremcd 16 /* Attempt to delete current directory */
-#define ERRdiffdevice 17 /* rename/move across different filesystems */
-#define ERRnofiles 18 /* no more files found in file search */
-#define ERRbadshare 32 /* Share mode on file conflict with open mode */
-#define ERRlock 33 /* Lock request conflicts with existing lock */
-#define ERRunsup 50 /* Request unsupported, returned by Win 95, RJS 20Jun98 */
-#define ERRfilexists 80 /* File in operation already exists */
-#define ERRcannotopen 110 /* Cannot open the file specified */
+#define ERRbadfunc 1            /* Invalid function (or system call) */
+#define ERRbadfile 2            /* File not found (pathname error) */
+#define ERRbadpath 3            /* Directory not found */
+#define ERRnofids 4             /* Too many open files */
+#define ERRnoaccess 5           /* Access denied */
+#define ERRbadfid 6             /* Invalid fid */
+#define ERRnomem 8              /* Out of memory */
+#define ERRbadmem 9             /* Invalid memory block address */
+#define ERRbadenv 10            /* Invalid environment */
+#define ERRbadaccess 12         /* Invalid open mode */
+#define ERRbaddata 13           /* Invalid data (only from ioctl call) */
+#define ERRres 14               /* reserved */
+#define ERRbaddrive 15          /* Invalid drive */
+#define ERRremcd 16             /* Attempt to delete current directory */
+#define ERRdiffdevice 17        /* rename/move across different filesystems */
+#define ERRnofiles 18           /* no more files found in file search */
+#define ERRbadshare 32          /* Share mode on file conflict with open mode */
+#define ERRlock 33              /* Lock request conflicts with existing lock */
+#define ERRunsup 50             /* Request unsupported, returned by Win 95, RJS 20Jun98 */
+#define ERRfilexists 80         /* File in operation already exists */
+#define ERRcannotopen 110       /* Cannot open the file specified */
 #define ERRunknownlevel 124
 #define ERRrename 183
-#define ERRbadpipe 230 /* Named pipe invalid */
-#define ERRpipebusy 231 /* All instances of pipe are busy */
-#define ERRpipeclosing 232 /* named pipe close in progress */
-#define ERRnotconnected 233 /* No process on other end of named pipe */
-#define ERRmoredata 234 /* More data to be returned */
-#define ERRbaddirectory 267 /* Invalid directory name in a path. */
+#define ERRbadpipe 230          /* Named pipe invalid */
+#define ERRpipebusy 231         /* All instances of pipe are busy */
+#define ERRpipeclosing 232      /* named pipe close in progress */
+#define ERRnotconnected 233     /* No process on other end of named pipe */
+#define ERRmoredata 234         /* More data to be returned */
+#define ERRbaddirectory 267     /* Invalid directory name in a path. */
 #define ERROR_EAS_DIDNT_FIT 275 /* Extended attributes didn't fit */
-#define ERROR_EAS_NOT_SUPPORTED 282 /* Extended attributes not supported */
-#define ERROR_NOTIFY_ENUM_DIR 1022 /* Buffer too small to return change notify. */
+#define ERROR_EAS_NOT_SUPPORTED 282     /* Extended attributes not supported */
+#define ERROR_NOTIFY_ENUM_DIR 1022      /* Buffer too small to return change notify. */
 #define ERRunknownipc 2142
 
 
 /* here's a special one from observing NT */
-#define ERRnoipc 66 /* don't support ipc */
+#define ERRnoipc 66             /* don't support ipc */
 
 /* Error codes for the ERRSRV class */
 
-#define ERRerror 1 /* Non specific error code */
-#define ERRbadpw 2 /* Bad password */
-#define ERRbadtype 3 /* reserved */
-#define ERRaccess 4 /* No permissions to do the requested operation */
-#define ERRinvnid 5 /* tid invalid */
-#define ERRinvnetname 6 /* Invalid servername */
-#define ERRinvdevice 7 /* Invalid device */
-#define ERRqfull 49 /* Print queue full */
-#define ERRqtoobig 50 /* Queued item too big */
-#define ERRinvpfid 52 /* Invalid print file in smb_fid */
-#define ERRsmbcmd 64 /* Unrecognised command */
-#define ERRsrverror 65 /* smb server internal error */
-#define ERRfilespecs 67 /* fid and pathname invalid combination */
-#define ERRbadlink 68 /* reserved */
-#define ERRbadpermits 69 /* Access specified for a file is not valid */
-#define ERRbadpid 70 /* reserved */
-#define ERRsetattrmode 71 /* attribute mode invalid */
-#define ERRpaused 81 /* Message server paused */
-#define ERRmsgoff 82 /* Not receiving messages */
-#define ERRnoroom 83 /* No room for message */
-#define ERRrmuns 87 /* too many remote usernames */
-#define ERRtimeout 88 /* operation timed out */
-#define ERRnoresource  89 /* No resources currently available for request. */
-#define ERRtoomanyuids 90 /* too many userids */
-#define ERRbaduid 91 /* bad userid */
-#define ERRuseMPX 250 /* temporarily unable to use raw mode, use MPX mode */
-#define ERRuseSTD 251 /* temporarily unable to use raw mode, use standard mode */
-#define ERRcontMPX 252 /* resume MPX mode */
-#define ERRbadPW /* reserved */
+#define ERRerror 1              /* Non specific error code */
+#define ERRbadpw 2              /* Bad password */
+#define ERRbadtype 3            /* reserved */
+#define ERRaccess 4             /* No permissions to do the requested operation */
+#define ERRinvnid 5             /* tid invalid */
+#define ERRinvnetname 6         /* Invalid servername */
+#define ERRinvdevice 7          /* Invalid device */
+#define ERRqfull 49             /* Print queue full */
+#define ERRqtoobig 50           /* Queued item too big */
+#define ERRinvpfid 52           /* Invalid print file in smb_fid */
+#define ERRsmbcmd 64            /* Unrecognised command */
+#define ERRsrverror 65          /* smb server internal error */
+#define ERRfilespecs 67         /* fid and pathname invalid combination */
+#define ERRbadlink 68           /* reserved */
+#define ERRbadpermits 69        /* Access specified for a file is not valid */
+#define ERRbadpid 70            /* reserved */
+#define ERRsetattrmode 71       /* attribute mode invalid */
+#define ERRpaused 81            /* Message server paused */
+#define ERRmsgoff 82            /* Not receiving messages */
+#define ERRnoroom 83            /* No room for message */
+#define ERRrmuns 87             /* too many remote usernames */
+#define ERRtimeout 88           /* operation timed out */
+#define ERRnoresource  89       /* No resources currently available for request. */
+#define ERRtoomanyuids 90       /* too many userids */
+#define ERRbaduid 91            /* bad userid */
+#define ERRuseMPX 250           /* temporarily unable to use raw mode, use MPX mode */
+#define ERRuseSTD 251           /* temporarily unable to use raw mode, use standard mode */
+#define ERRcontMPX 252          /* resume MPX mode */
+#define ERRbadPW                /* reserved */
 #define ERRnosupport 0xFFFF
-#define ERRunknownsmb 22 /* from NT 3.5 response */
+#define ERRunknownsmb 22        /* from NT 3.5 response */
 
 
 /* Error codes for the ERRHRD class */
 
-#define ERRnowrite 19 /* read only media */
-#define ERRbadunit 20 /* Unknown device */
-#define ERRnotready 21 /* Drive not ready */
-#define ERRbadcmd 22 /* Unknown command */
-#define ERRdata 23 /* Data (CRC) error */
-#define ERRbadreq 24 /* Bad request structure length */
+#define ERRnowrite 19           /* read only media */
+#define ERRbadunit 20           /* Unknown device */
+#define ERRnotready 21          /* Drive not ready */
+#define ERRbadcmd 22            /* Unknown command */
+#define ERRdata 23              /* Data (CRC) error */
+#define ERRbadreq 24            /* Bad request structure length */
 #define ERRseek 25
 #define ERRbadmedia 26
 #define ERRbadsector 27
 #define ERRnopaper 28
-#define ERRwrite 29 /* write fault */
-#define ERRread 30 /* read fault */
-#define ERRgeneral 31 /* General hardware failure */
+#define ERRwrite 29             /* write fault */
+#define ERRread 30              /* read fault */
+#define ERRgeneral 31           /* General hardware failure */
 #define ERRwrongdisk 34
 #define ERRFCBunavail 35
-#define ERRsharebufexc 36 /* share buffer exceeded */
+#define ERRsharebufexc 36       /* share buffer exceeded */
 #define ERRdiskfull 39
 
 
@@ -331,98 +332,98 @@ typedef char fstring[128];
 /* 64 bit time (100usec) since ????? - cifs6.txt, section 3.5, page 30 */
 typedef struct nttime_info
 {
-  uint32 low;
-  uint32 high;
+    uint32 low;
+    uint32 high;
 
 } NTTIME;
 
 /* Allowable account control bits */
-#define ACB_DISABLED   0x0001  /* 1 = User account disabled */
-#define ACB_HOMDIRREQ  0x0002  /* 1 = Home directory required */
-#define ACB_PWNOTREQ   0x0004  /* 1 = User password not required */
-#define ACB_TEMPDUP    0x0008  /* 1 = Temporary duplicate account */
-#define ACB_NORMAL     0x0010  /* 1 = Normal user account */
-#define ACB_MNS        0x0020  /* 1 = MNS logon user account */
-#define ACB_DOMTRUST   0x0040  /* 1 = Interdomain trust account */
-#define ACB_WSTRUST    0x0080  /* 1 = Workstation trust account */
-#define ACB_SVRTRUST   0x0100  /* 1 = Server trust account */
-#define ACB_PWNOEXP    0x0200  /* 1 = User password does not expire */
-#define ACB_AUTOLOCK   0x0400  /* 1 = Account auto locked */
- 
+#define ACB_DISABLED   0x0001   /* 1 = User account disabled */
+#define ACB_HOMDIRREQ  0x0002   /* 1 = Home directory required */
+#define ACB_PWNOTREQ   0x0004   /* 1 = User password not required */
+#define ACB_TEMPDUP    0x0008   /* 1 = Temporary duplicate account */
+#define ACB_NORMAL     0x0010   /* 1 = Normal user account */
+#define ACB_MNS        0x0020   /* 1 = MNS logon user account */
+#define ACB_DOMTRUST   0x0040   /* 1 = Interdomain trust account */
+#define ACB_WSTRUST    0x0080   /* 1 = Workstation trust account */
+#define ACB_SVRTRUST   0x0100   /* 1 = Server trust account */
+#define ACB_PWNOEXP    0x0200   /* 1 = User password does not expire */
+#define ACB_AUTOLOCK   0x0400   /* 1 = Account auto locked */
+
 #define MAX_HOURS_LEN 32
 
 struct sam_passwd
 {
-	time_t logon_time;            /* logon time */
-	time_t logoff_time;           /* logoff time */
-	time_t kickoff_time;          /* kickoff time */
-	time_t pass_last_set_time;    /* password last set time */
-	time_t pass_can_change_time;  /* password can change time */
-	time_t pass_must_change_time; /* password must change time */
+    time_t logon_time;          /* logon time */
+    time_t logoff_time;         /* logoff time */
+    time_t kickoff_time;        /* kickoff time */
+    time_t pass_last_set_time;  /* password last set time */
+    time_t pass_can_change_time;        /* password can change time */
+    time_t pass_must_change_time;       /* password must change time */
 
-	char *smb_name;     /* username string */
-	char *full_name;    /* user's full name string */
-	char *home_dir;     /* home directory string */
-	char *dir_drive;    /* home directory drive string */
-	char *logon_script; /* logon script string */
-	char *profile_path; /* profile path string */
-	char *acct_desc  ;  /* user description string */
-	char *workstations; /* login from workstations string */
-	char *unknown_str ; /* don't know what this is, yet. */
-	char *munged_dial ; /* munged path name and dial-back tel number */
+    char *smb_name;             /* username string */
+    char *full_name;            /* user's full name string */
+    char *home_dir;             /* home directory string */
+    char *dir_drive;            /* home directory drive string */
+    char *logon_script;         /* logon script string */
+    char *profile_path;         /* profile path string */
+    char *acct_desc;            /* user description string */
+    char *workstations;         /* login from workstations string */
+    char *unknown_str;          /* don't know what this is, yet. */
+    char *munged_dial;          /* munged path name and dial-back tel number */
 
-	uid_t smb_userid;       /* this is actually the unix uid_t */
-	gid_t smb_grpid;        /* this is actually the unix gid_t */
-	uint32 user_rid;      /* Primary User ID */
-	uint32 group_rid;     /* Primary Group ID */
+    uid_t smb_userid;           /* this is actually the unix uid_t */
+    gid_t smb_grpid;            /* this is actually the unix gid_t */
+    uint32 user_rid;            /* Primary User ID */
+    uint32 group_rid;           /* Primary Group ID */
 
-	unsigned char *smb_passwd; /* Null if no password */
-	unsigned char *smb_nt_passwd; /* Null if no password */
+    unsigned char *smb_passwd;  /* Null if no password */
+    unsigned char *smb_nt_passwd;       /* Null if no password */
 
-	uint16 acct_ctrl; /* account info (ACB_xxxx bit-mask) */
-	uint32 unknown_3; /* 0x00ff ffff */
+    uint16 acct_ctrl;           /* account info (ACB_xxxx bit-mask) */
+    uint32 unknown_3;           /* 0x00ff ffff */
 
-	uint16 logon_divs; /* 168 - number of hours in a week */
-	uint32 hours_len; /* normally 21 bytes */
-	uint8 hours[MAX_HOURS_LEN];
+    uint16 logon_divs;          /* 168 - number of hours in a week */
+    uint32 hours_len;           /* normally 21 bytes */
+    uint8 hours[MAX_HOURS_LEN];
 
-	uint32 unknown_5; /* 0x0002 0000 */
-	uint32 unknown_6; /* 0x0000 04ec */
+    uint32 unknown_5;           /* 0x0002 0000 */
+    uint32 unknown_6;           /* 0x0000 04ec */
 };
 
 struct smb_passwd
 {
-	uid_t smb_userid;     /* this is actually the unix uid_t */
-	char *smb_name;     /* username string */
+    uid_t smb_userid;           /* this is actually the unix uid_t */
+    char *smb_name;             /* username string */
 
-	unsigned char *smb_passwd; /* Null if no password */
-	unsigned char *smb_nt_passwd; /* Null if no password */
+    unsigned char *smb_passwd;  /* Null if no password */
+    unsigned char *smb_nt_passwd;       /* Null if no password */
 
-	uint16 acct_ctrl; /* account info (ACB_xxxx bit-mask) */
-	time_t pass_last_set_time;    /* password last set time */
+    uint16 acct_ctrl;           /* account info (ACB_xxxx bit-mask) */
+    time_t pass_last_set_time;  /* password last set time */
 };
 
 
 struct sam_disp_info
 {
-	uint32 user_rid;      /* Primary User ID */
-	char *smb_name;     /* username string */
-	char *full_name;    /* user's full name string */
+    uint32 user_rid;            /* Primary User ID */
+    char *smb_name;             /* username string */
+    char *full_name;            /* user's full name string */
 };
 
-#define MAXSUBAUTHS 15 /* max sub authorities in a SID */
+#define MAXSUBAUTHS 15          /* max sub authorities in a SID */
 
 /* DOM_SID - security id */
 typedef struct sid_info
 {
-  uint8  sid_rev_num;             /* SID revision number */
-  uint8  num_auths;               /* number of sub-authorities */
-  uint8  id_auth[6];              /* Identifier Authority */
-  /*
-   * Note that the values in these uint32's are in *native* byteorder,
-   * not neccessarily little-endian...... JRA.
-   */
-  uint32 sub_auths[MAXSUBAUTHS];  /* pointer to sub-authorities. */
+    uint8 sid_rev_num;          /* SID revision number */
+    uint8 num_auths;            /* number of sub-authorities */
+    uint8 id_auth[6];           /* Identifier Authority */
+    /*
+     * Note that the values in these uint32's are in *native* byteorder,
+     * not neccessarily little-endian...... JRA.
+     */
+    uint32 sub_auths[MAXSUBAUTHS];      /* pointer to sub-authorities. */
 
 } DOM_SID;
 
@@ -432,9 +433,9 @@ typedef struct sid_info
 /* local group member info */
 typedef struct local_grp_member_info
 {
-	DOM_SID sid    ; /* matches with name */
-	uint8   sid_use; /* usr=1 grp=2 dom=3 alias=4 wkng=5 del=6 inv=7 unk=8 */
-	fstring name   ; /* matches with sid: must be of the form "DOMAIN\account" */
+    DOM_SID sid;                /* matches with name */
+    uint8 sid_use;              /* usr=1 grp=2 dom=3 alias=4 wkng=5 del=6 inv=7 unk=8 */
+    fstring name;               /* matches with sid: must be of the form "DOMAIN\account" */
 
 } LOCAL_GRP_MEMBER;
 
@@ -443,8 +444,8 @@ typedef struct local_grp_member_info
 /* local group info */
 typedef struct local_grp_info
 {
-	fstring name;
-	fstring comment;
+    fstring name;
+    fstring comment;
 
 } LOCAL_GRP;
 
@@ -453,10 +454,10 @@ typedef struct local_grp_info
 /* domain group member info */
 typedef struct domain_grp_info
 {
-	fstring name;
-	fstring comment;
-	uint32  rid; /* group rid */
-	uint8   attr; /* attributes forced to be set to 0x7: SE_GROUP_xxx */
+    fstring name;
+    fstring comment;
+    uint32 rid;                 /* group rid */
+    uint8 attr;                 /* attributes forced to be set to 0x7: SE_GROUP_xxx */
 
 } DOMAIN_GRP;
 
@@ -465,39 +466,39 @@ typedef struct domain_grp_info
 /* domain group info */
 typedef struct domain_grp_member_info
 {
-	fstring name;
-	uint8   attr; /* attributes forced to be set to 0x7: SE_GROUP_xxx */
+    fstring name;
+    uint8 attr;                 /* attributes forced to be set to 0x7: SE_GROUP_xxx */
 
 } DOMAIN_GRP_MEMBER;
 
 /* DOM_CHAL - challenge info */
 typedef struct chal_info
 {
-  uchar data[8]; /* credentials */
+    uchar data[8];              /* credentials */
 } DOM_CHAL;
 
 /* 32 bit time (sec) since 01jan1970 - cifs6.txt, section 3.5, page 30 */
 typedef struct time_info
 {
-  uint32 time;
+    uint32 time;
 } UTIME;
 
 /* DOM_CREDs - timestamped client or server credentials */
 typedef struct cred_info
-{  
-  DOM_CHAL challenge; /* credentials */
-  UTIME timestamp;    /* credential time-stamp */
+{
+    DOM_CHAL challenge;         /* credentials */
+    UTIME timestamp;            /* credential time-stamp */
 } DOM_CRED;
 
 /* Structure used when SMBwritebmpx is active */
 typedef struct
 {
-  size_t wr_total_written; /* So we know when to discard this */
-  int32 wr_timeout;
-  int32 wr_errclass;
-  int32 wr_error; /* Cached errors */
-  BOOL  wr_mode; /* write through mode) */
-  BOOL  wr_discard; /* discard all further data */
+    size_t wr_total_written;    /* So we know when to discard this */
+    int32 wr_timeout;
+    int32 wr_errclass;
+    int32 wr_error;             /* Cached errors */
+    BOOL wr_mode;               /* write through mode) */
+    BOOL wr_discard;            /* discard all further data */
 } write_bmpx_struct;
 
 /*
@@ -508,17 +509,17 @@ typedef struct
 
 typedef struct file_fd_struct
 {
-	struct file_fd_struct *next, *prev;
-	uint16 ref_count;
-	uint16 uid_cache_count;
-	uid_t uid_users_cache[10];
-	SMB_DEV_T dev;
-	SMB_INO_T inode;
-	int fd;
-	int fd_readonly;
-	int fd_writeonly;
-	int real_open_flags;
-	BOOL delete_on_close;
+    struct file_fd_struct *next, *prev;
+    uint16 ref_count;
+    uint16 uid_cache_count;
+    uid_t uid_users_cache[10];
+    SMB_DEV_T dev;
+    SMB_INO_T inode;
+    int fd;
+    int fd_readonly;
+    int fd_writeonly;
+    int real_open_flags;
+    BOOL delete_on_close;
 } file_fd_struct;
 
 /*
@@ -528,212 +529,218 @@ typedef struct file_fd_struct
 
 typedef struct
 {
-  time_t modify_time;
-  time_t status_time;
+    time_t modify_time;
+    time_t status_time;
 } dir_status_struct;
 
-struct uid_cache {
-  int entries;
-  uid_t list[UID_CACHE_SIZE];
+struct uid_cache
+{
+    int entries;
+    uid_t list[UID_CACHE_SIZE];
 };
 
 typedef struct
 {
-  char *name;
-  BOOL is_wild;
+    char *name;
+    BOOL is_wild;
 } name_compare_entry;
 
 typedef struct connection_struct
 {
-	struct connection_struct *next, *prev;
-	unsigned cnum; /* an index passed over the wire */
-	int service;
-	BOOL force_user;
-	struct uid_cache uid_cache;
-	void *dirptr;
-	BOOL printer;
-	BOOL ipc;
-	BOOL read_only;
-	BOOL admin_user;
-	char *dirpath;
-	char *connectpath;
-	char *origpath;
-	char *user; /* name of user who *opened* this connection */
-	uid_t uid; /* uid of user who *opened* this connection */
-	gid_t gid; /* gid of user who *opened* this connection */
+    struct connection_struct *next, *prev;
+    unsigned cnum;              /* an index passed over the wire */
+    int service;
+    BOOL force_user;
+    struct uid_cache uid_cache;
+    void *dirptr;
+    BOOL printer;
+    BOOL ipc;
+    BOOL read_only;
+    BOOL admin_user;
+    char *dirpath;
+    char *connectpath;
+    char *origpath;
+    char *user;                 /* name of user who *opened* this connection */
+    uid_t uid;                  /* uid of user who *opened* this connection */
+    gid_t gid;                  /* gid of user who *opened* this connection */
 
-	uint16 vuid; /* vuid of user who *opened* this connection, or UID_FIELD_INVALID */
+    uint16 vuid;                /* vuid of user who *opened* this connection, or UID_FIELD_INVALID */
 
-	/* following groups stuff added by ih */
+    /* following groups stuff added by ih */
 
-	/* This groups info is valid for the user that *opened* the connection */
-	int ngroups;
-	gid_t *groups;
-	
-	time_t lastused;
-	BOOL used;
-	int num_files_open;
-	name_compare_entry *hide_list; /* Per-share list of files to return as hidden. */
-	name_compare_entry *veto_list; /* Per-share list of files to veto (never show). */
-	name_compare_entry *veto_oplock_list; /* Per-share list of files to refuse oplocks on. */       
+    /* This groups info is valid for the user that *opened* the connection */
+    int ngroups;
+    gid_t *groups;
+
+    time_t lastused;
+    BOOL used;
+    int num_files_open;
+    name_compare_entry *hide_list;      /* Per-share list of files to return as hidden. */
+    name_compare_entry *veto_list;      /* Per-share list of files to veto (never show). */
+    name_compare_entry *veto_oplock_list;       /* Per-share list of files to refuse oplocks on. */
 
 } connection_struct;
 
 struct current_user
 {
-	connection_struct *conn;
-	uint16 vuid;
-	uid_t uid;
-	gid_t gid;
-	int ngroups;
-	gid_t *groups;
+    connection_struct *conn;
+    uint16 vuid;
+    uid_t uid;
+    gid_t gid;
+    int ngroups;
+    gid_t *groups;
 };
 
 typedef struct files_struct
 {
-	struct files_struct *next, *prev;
-	int fnum;
-	connection_struct *conn;
-	file_fd_struct *fd_ptr;
-	SMB_OFF_T pos;
-	SMB_OFF_T size;
-	mode_t mode;
-	uint16 vuid;
-	char *mmap_ptr;
-	SMB_OFF_T mmap_size;
-	write_bmpx_struct *wbmpx_ptr;
-	struct timeval open_time;
-	int share_mode;
-	time_t pending_modtime;
-	BOOL open;
-	BOOL can_lock;
-	BOOL can_read;
-	BOOL can_write;
-	BOOL print_file;
-	BOOL modified;
-	BOOL granted_oplock;
-	BOOL sent_oplock_break;
-	BOOL is_directory;
-	BOOL directory_delete_on_close;
-	BOOL stat_open;
-	char *fsp_name;
+    struct files_struct *next, *prev;
+    int fnum;
+    connection_struct *conn;
+    file_fd_struct *fd_ptr;
+    SMB_OFF_T pos;
+    SMB_OFF_T size;
+    mode_t mode;
+    uint16 vuid;
+    char *mmap_ptr;
+    SMB_OFF_T mmap_size;
+    write_bmpx_struct *wbmpx_ptr;
+    struct timeval open_time;
+    int share_mode;
+    time_t pending_modtime;
+    BOOL open;
+    BOOL can_lock;
+    BOOL can_read;
+    BOOL can_write;
+    BOOL print_file;
+    BOOL modified;
+    BOOL granted_oplock;
+    BOOL sent_oplock_break;
+    BOOL is_directory;
+    BOOL directory_delete_on_close;
+    BOOL stat_open;
+    char *fsp_name;
 } files_struct;
 
 /* Domain controller authentication protocol info */
 struct dcinfo
 {
-  DOM_CHAL clnt_chal; /* Initial challenge received from client */
-  DOM_CHAL srv_chal;  /* Initial server challenge */
-  DOM_CRED clnt_cred; /* Last client credential */
-  DOM_CRED srv_cred;  /* Last server credential */
+    DOM_CHAL clnt_chal;         /* Initial challenge received from client */
+    DOM_CHAL srv_chal;          /* Initial server challenge */
+    DOM_CRED clnt_cred;         /* Last client credential */
+    DOM_CRED srv_cred;          /* Last server credential */
 
-  uchar  sess_key[8]; /* Session key */
-  uchar  md4pw[16];   /* md4(machine password) */
+    uchar sess_key[8];          /* Session key */
+    uchar md4pw[16];            /* md4(machine password) */
 };
 
 typedef struct
 {
-  uid_t uid; /* uid of a validated user */
-  gid_t gid; /* gid of a validated user */
+    uid_t uid;                  /* uid of a validated user */
+    gid_t gid;                  /* gid of a validated user */
 
-  fstring requested_name; /* user name from the client */
-  fstring name; /* unix user name of a validated user */
-  fstring real_name;   /* to store real name from password file - simeon */
-  BOOL guest;
+    fstring requested_name;     /* user name from the client */
+    fstring name;               /* unix user name of a validated user */
+    fstring real_name;          /* to store real name from password file - simeon */
+    BOOL guest;
 
-  /* following groups stuff added by ih */
-  /* This groups info is needed for when we become_user() for this uid */
-  int n_groups;
-  gid_t *groups;
+    /* following groups stuff added by ih */
+    /* This groups info is needed for when we become_user() for this uid */
+    int n_groups;
+    gid_t *groups;
 
-  int n_sids;
-  int *sids;
+    int n_sids;
+    int *sids;
 
-  /* per-user authentication information on NT RPCs */
-  struct dcinfo dc;
+    /* per-user authentication information on NT RPCs */
+    struct dcinfo dc;
 
 } user_struct;
 
 
-enum {LPQ_QUEUED,LPQ_PAUSED,LPQ_SPOOLING,LPQ_PRINTING};
+enum
+{ LPQ_QUEUED, LPQ_PAUSED, LPQ_SPOOLING, LPQ_PRINTING };
 
 typedef struct
 {
-  int job;
-  int size;
-  int status;
-  int priority;
-  time_t time;
-  char user[30];
-  char file[100];
+    int job;
+    int size;
+    int status;
+    int priority;
+    time_t time;
+    char user[30];
+    char file[100];
 } print_queue_struct;
 
-enum {LPSTAT_OK, LPSTAT_STOPPED, LPSTAT_ERROR};
+enum
+{ LPSTAT_OK, LPSTAT_STOPPED, LPSTAT_ERROR };
 
 typedef struct
 {
-  fstring message;
-  int status;
-}  print_status_struct;
+    fstring message;
+    int status;
+} print_status_struct;
 
 /* used for server information: client, nameserv and ipc */
 struct server_info_struct
 {
-  fstring name;
-  uint32 type;
-  fstring comment;
-  fstring domain; /* used ONLY in ipc.c NOT namework.c */
-  BOOL server_added; /* used ONLY in ipc.c NOT namework.c */
+    fstring name;
+    uint32 type;
+    fstring comment;
+    fstring domain;             /* used ONLY in ipc.c NOT namework.c */
+    BOOL server_added;          /* used ONLY in ipc.c NOT namework.c */
 };
 
 
 /* used for network interfaces */
 struct interface
 {
-	struct interface *next;
-	struct in_addr ip;
-	struct in_addr bcast;
-	struct in_addr nmask;
+    struct interface *next;
+    struct in_addr ip;
+    struct in_addr bcast;
+    struct in_addr nmask;
 };
 
 /* struct returned by get_share_modes */
 typedef struct
 {
-  int pid;
-  uint16 op_port;
-  uint16 op_type;
-  int share_mode;
-  struct timeval time;
+    int pid;
+    uint16 op_port;
+    uint16 op_type;
+    int share_mode;
+    struct timeval time;
 } share_mode_entry;
 
 
 /* each implementation of the share mode code needs
    to support the following operations */
-struct share_ops {
-	BOOL (*stop_mgmt)(void);
-	BOOL (*lock_entry)(connection_struct *, SMB_DEV_T , SMB_INO_T , int *);
-	BOOL (*unlock_entry)(connection_struct *, SMB_DEV_T , SMB_INO_T , int );
-	int (*get_entries)(connection_struct *, int , SMB_DEV_T , SMB_INO_T , share_mode_entry **);
-	void (*del_entry)(int , files_struct *);
-	BOOL (*set_entry)(int, files_struct *, uint16 , uint16 );
-    BOOL (*mod_entry)(int, files_struct *, void (*)(share_mode_entry *, SMB_DEV_T, SMB_INO_T, void *), void *);
-	int (*forall)(void (*)(share_mode_entry *, char *));
-	void (*status)(FILE *);
+struct share_ops
+{
+    BOOL (*stop_mgmt) (void);
+    BOOL (*lock_entry) (connection_struct *, SMB_DEV_T, SMB_INO_T, int *);
+    BOOL (*unlock_entry) (connection_struct *, SMB_DEV_T, SMB_INO_T, int);
+    int (*get_entries) (connection_struct *, int, SMB_DEV_T, SMB_INO_T, share_mode_entry **);
+    void (*del_entry) (int, files_struct *);
+      BOOL (*set_entry) (int, files_struct *, uint16, uint16);
+      BOOL (*mod_entry) (int, files_struct *,
+                         void (*)(share_mode_entry *, SMB_DEV_T, SMB_INO_T, void *), void *);
+    int (*forall) (void (*)(share_mode_entry *, char *));
+    void (*status) (FILE *);
 };
 
 /* each implementation of the shared memory code needs
    to support the following operations */
-struct shmem_ops {
-	BOOL (*shm_close)( void );
-	int (*shm_alloc)(int );
-	BOOL (*shm_free)(int );
-	int (*get_userdef_off)(void);
-	void *(*offset2addr)(int );
-	int (*addr2offset)(void *addr);
-	BOOL (*lock_hash_entry)(unsigned int);
-	BOOL (*unlock_hash_entry)( unsigned int );
-	BOOL (*get_usage)(int *,int *,int *);
-	unsigned (*hash_size)(void);
+struct shmem_ops
+{
+    BOOL (*shm_close) (void);
+    int (*shm_alloc) (int);
+      BOOL (*shm_free) (int);
+    int (*get_userdef_off) (void);
+    void *(*offset2addr) (int);
+    int (*addr2offset) (void *addr);
+      BOOL (*lock_hash_entry) (unsigned int);
+      BOOL (*unlock_hash_entry) (unsigned int);
+      BOOL (*get_usage) (int *, int *, int *);
+    unsigned (*hash_size) (void);
 };
 
 /*
@@ -741,61 +748,63 @@ struct shmem_ops {
  * to support the following operations.
  */
 
-struct passdb_ops {
-  /*
-   * Password database ops.
-   */
-  void *(*startsmbpwent)(BOOL);
-  void (*endsmbpwent)(void *);
-  SMB_BIG_UINT (*getsmbpwpos)(void *);
-  BOOL (*setsmbpwpos)(void *, SMB_BIG_UINT);
+struct passdb_ops
+{
+    /*
+     * Password database ops.
+     */
+    void *(*startsmbpwent) (BOOL);
+    void (*endsmbpwent) (void *);
+      SMB_BIG_UINT (*getsmbpwpos) (void *);
+      BOOL (*setsmbpwpos) (void *, SMB_BIG_UINT);
 
-  /*
-   * smb password database query functions.
-   */
-  struct smb_passwd *(*getsmbpwnam)(char *);
-  struct smb_passwd *(*getsmbpwuid)(uid_t);
-  struct smb_passwd *(*getsmbpwrid)(uint32);
-  struct smb_passwd *(*getsmbpwent)(void *);
+    /*
+     * smb password database query functions.
+     */
+    struct smb_passwd *(*getsmbpwnam) (char *);
+    struct smb_passwd *(*getsmbpwuid) (uid_t);
+    struct smb_passwd *(*getsmbpwrid) (uint32);
+    struct smb_passwd *(*getsmbpwent) (void *);
 
-  /*
-   * smb password database modification functions.
-   */
-  BOOL (*add_smbpwd_entry)(struct smb_passwd *);
-  BOOL (*mod_smbpwd_entry)(struct smb_passwd *, BOOL);
+    /*
+     * smb password database modification functions.
+     */
+      BOOL (*add_smbpwd_entry) (struct smb_passwd *);
+      BOOL (*mod_smbpwd_entry) (struct smb_passwd *, BOOL);
 
-  /*
-   * Functions that manipulate a struct sam_passwd.
-   */
-  struct sam_passwd *(*getsam21pwent)(void *);
+    /*
+     * Functions that manipulate a struct sam_passwd.
+     */
+    struct sam_passwd *(*getsam21pwent) (void *);
 
-  /*
-   * sam password database query functions.
-   */
-  struct sam_passwd *(*getsam21pwnam)(char *);
-  struct sam_passwd *(*getsam21pwuid)(uid_t);
-  struct sam_passwd *(*getsam21pwrid)(uint32);
+    /*
+     * sam password database query functions.
+     */
+    struct sam_passwd *(*getsam21pwnam) (char *);
+    struct sam_passwd *(*getsam21pwuid) (uid_t);
+    struct sam_passwd *(*getsam21pwrid) (uint32);
 
-  /*
-   * sam password database modification functions.
-   */
-  BOOL (*add_sam21pwd_entry)(struct sam_passwd *);
-  BOOL (*mod_sam21pwd_entry)(struct sam_passwd *, BOOL);
+    /*
+     * sam password database modification functions.
+     */
+      BOOL (*add_sam21pwd_entry) (struct sam_passwd *);
+      BOOL (*mod_sam21pwd_entry) (struct sam_passwd *, BOOL);
 
-  /*
-   * sam query display info functions.
-   */
-  struct sam_disp_info *(*getsamdispnam)(char *);
-  struct sam_disp_info *(*getsamdisprid)(uint32);
-  struct sam_disp_info *(*getsamdispent)(void *);
+    /*
+     * sam query display info functions.
+     */
+    struct sam_disp_info *(*getsamdispnam) (char *);
+    struct sam_disp_info *(*getsamdisprid) (uint32);
+    struct sam_disp_info *(*getsamdispent) (void *);
 
 #if 0
-  /*
-   * password checking functions
-   */
-  struct smb_passwd *(*smb_password_chal  )(char *username, char lm_pass[24], char nt_pass[24], char chal[8]);
-  struct smb_passwd *(*smb_password_check )(char *username, char lm_hash[16], char nt_hash[16]);
-  struct passwd     *(*unix_password_check)(char *username, char *pass, int pass_len);
+    /*
+     * password checking functions
+     */
+    struct smb_passwd *(*smb_password_chal) (char *username, char lm_pass[24], char nt_pass[24],
+                                             char chal[8]);
+    struct smb_passwd *(*smb_password_check) (char *username, char lm_hash[16], char nt_hash[16]);
+    struct passwd *(*unix_password_check) (char *username, char *pass, int pass_len);
 #endif
 };
 
@@ -803,81 +812,85 @@ struct passdb_ops {
 
 struct connect_record
 {
-  int magic;
-  int pid;
-  int cnum;
-  uid_t uid;
-  gid_t gid;
-  char name[24];
-  char addr[24];
-  char machine[128];
-  time_t start;
+    int magic;
+    int pid;
+    int cnum;
+    uid_t uid;
+    gid_t gid;
+    char name[24];
+    char addr[24];
+    char machine[128];
+    time_t start;
 };
 
 /* This is used by smbclient to send it to a smbfs mount point */
-struct connection_options {
-  int protocol;
-  /* Connection-Options */
-  uint32 max_xmit;
-  uint16 server_vuid;
-  uint16 tid;
-  /* The following are LANMAN 1.0 options */
-  uint16 sec_mode;
-  uint16 max_mux;
-  uint16 max_vcs;
-  uint16 rawmode;
-  uint32 sesskey;
-  /* The following are NT LM 0.12 options */
-  uint32 maxraw;
-  uint32 capabilities;
-  uint16 serverzone;
+struct connection_options
+{
+    int protocol;
+    /* Connection-Options */
+    uint32 max_xmit;
+    uint16 server_vuid;
+    uint16 tid;
+    /* The following are LANMAN 1.0 options */
+    uint16 sec_mode;
+    uint16 max_mux;
+    uint16 max_vcs;
+    uint16 rawmode;
+    uint32 sesskey;
+    /* The following are NT LM 0.12 options */
+    uint32 maxraw;
+    uint32 capabilities;
+    uint16 serverzone;
 };
 
 /* the following are used by loadparm for option lists */
 typedef enum
 {
-  P_BOOL,P_BOOLREV,P_CHAR,P_INTEGER,P_OCTAL,
-  P_STRING,P_USTRING,P_GSTRING,P_UGSTRING,P_ENUM,P_SEP
+    P_BOOL, P_BOOLREV, P_CHAR, P_INTEGER, P_OCTAL,
+    P_STRING, P_USTRING, P_GSTRING, P_UGSTRING, P_ENUM, P_SEP
 } parm_type;
 
 typedef enum
 {
-  P_LOCAL,P_GLOBAL,P_SEPARATOR,P_NONE
+    P_LOCAL, P_GLOBAL, P_SEPARATOR, P_NONE
 } parm_class;
 
-struct enum_list {
-	int value;
-	const char *name;
+struct enum_list
+{
+    int value;
+    const char *name;
 };
 
 struct parm_struct
 {
-	const char *label;
-	parm_type type;
-	parm_class class;
-	void *ptr;
-	BOOL (*special)(const char *, char **);
-	const struct enum_list *enum_list;
-	unsigned flags;
-	union {
-		BOOL bvalue;
-		int ivalue;
-		char *svalue;
-		char cvalue;
-	} def;
+    const char *label;
+    parm_type type;
+    parm_class class;
+    void *ptr;
+      BOOL (*special) (const char *, char **);
+    const struct enum_list *enum_list;
+    unsigned flags;
+    union
+    {
+        BOOL bvalue;
+        int ivalue;
+        char *svalue;
+        char cvalue;
+    } def;
 };
 
-struct bitmap {
-	uint32 *b;
-	int n;
+struct bitmap
+{
+    uint32 *b;
+    int n;
 };
 
-#define FLAG_BASIC 	0x01 /* fundamental options */
-#define FLAG_SHARE 	0x02 /* file sharing options */
-#define FLAG_PRINT 	0x04 /* printing options */
-#define FLAG_GLOBAL 	0x08 /* local options that should be globally settable in SWAT */
-#define FLAG_DEPRECATED 0x10 /* options that should no longer be used */
-#define FLAG_HIDE  	0x20 /* options that should be hidden in SWAT */
+#define FLAG_BASIC 	0x01    /* fundamental options */
+#define FLAG_SHARE 	0x02    /* file sharing options */
+#define FLAG_PRINT 	0x04    /* printing options */
+#define FLAG_GLOBAL 	0x08    /* local options that should be globally settable in SWAT */
+#define FLAG_DEPRECATED 0x10    /* options that should no longer be used */
+#define FLAG_HIDE  	0x20    /* options that should be hidden in SWAT */
 
 #ifndef LOCKING_VERSION
 #define LOCKING_VERSION 4
@@ -928,7 +941,7 @@ struct bitmap {
  * stat structure is valid.
  */
 
-#define VALID_STAT(st) (st.st_nlink != 0)  
+#define VALID_STAT(st) (st.st_nlink != 0)
 #define VALID_STAT_OF_DIR(st) (VALID_STAT(st) && S_ISDIR(st.st_mode))
 
 #define SMBENCRYPT()       (lp_encrypted_passwords())
@@ -980,51 +993,51 @@ struct bitmap {
 #define FLAG_REPLY                  0x80
 
 /* the complete */
-#define SMBmkdir      0x00   /* create directory */
-#define SMBrmdir      0x01   /* delete directory */
-#define SMBopen       0x02   /* open file */
-#define SMBcreate     0x03   /* create file */
-#define SMBclose      0x04   /* close file */
-#define SMBflush      0x05   /* flush file */
-#define SMBunlink     0x06   /* delete file */
-#define SMBmv         0x07   /* rename file */
-#define SMBgetatr     0x08   /* get file attributes */
-#define SMBsetatr     0x09   /* set file attributes */
-#define SMBread       0x0A   /* read from file */
-#define SMBwrite      0x0B   /* write to file */
-#define SMBlock       0x0C   /* lock byte range */
-#define SMBunlock     0x0D   /* unlock byte range */
-#define SMBctemp      0x0E   /* create temporary file */
-#define SMBmknew      0x0F   /* make new file */
-#define SMBchkpth     0x10   /* check directory path */
-#define SMBexit       0x11   /* process exit */
-#define SMBlseek      0x12   /* seek */
-#define SMBtcon       0x70   /* tree connect */
-#define SMBtconX      0x75   /* tree connect and X*/
-#define SMBtdis       0x71   /* tree disconnect */
-#define SMBnegprot    0x72   /* negotiate protocol */
-#define SMBdskattr    0x80   /* get disk attributes */
-#define SMBsearch     0x81   /* search directory */
-#define SMBsplopen    0xC0   /* open print spool file */
-#define SMBsplwr      0xC1   /* write to print spool file */
-#define SMBsplclose   0xC2   /* close print spool file */
-#define SMBsplretq    0xC3   /* return print queue */
-#define SMBsends      0xD0   /* send single block message */
-#define SMBsendb      0xD1   /* send broadcast message */
-#define SMBfwdname    0xD2   /* forward user name */
-#define SMBcancelf    0xD3   /* cancel forward */
-#define SMBgetmac     0xD4   /* get machine name */
-#define SMBsendstrt   0xD5   /* send start of multi-block message */
-#define SMBsendend    0xD6   /* send end of multi-block message */
-#define SMBsendtxt    0xD7   /* send text of multi-block message */
+#define SMBmkdir      0x00      /* create directory */
+#define SMBrmdir      0x01      /* delete directory */
+#define SMBopen       0x02      /* open file */
+#define SMBcreate     0x03      /* create file */
+#define SMBclose      0x04      /* close file */
+#define SMBflush      0x05      /* flush file */
+#define SMBunlink     0x06      /* delete file */
+#define SMBmv         0x07      /* rename file */
+#define SMBgetatr     0x08      /* get file attributes */
+#define SMBsetatr     0x09      /* set file attributes */
+#define SMBread       0x0A      /* read from file */
+#define SMBwrite      0x0B      /* write to file */
+#define SMBlock       0x0C      /* lock byte range */
+#define SMBunlock     0x0D      /* unlock byte range */
+#define SMBctemp      0x0E      /* create temporary file */
+#define SMBmknew      0x0F      /* make new file */
+#define SMBchkpth     0x10      /* check directory path */
+#define SMBexit       0x11      /* process exit */
+#define SMBlseek      0x12      /* seek */
+#define SMBtcon       0x70      /* tree connect */
+#define SMBtconX      0x75      /* tree connect and X */
+#define SMBtdis       0x71      /* tree disconnect */
+#define SMBnegprot    0x72      /* negotiate protocol */
+#define SMBdskattr    0x80      /* get disk attributes */
+#define SMBsearch     0x81      /* search directory */
+#define SMBsplopen    0xC0      /* open print spool file */
+#define SMBsplwr      0xC1      /* write to print spool file */
+#define SMBsplclose   0xC2      /* close print spool file */
+#define SMBsplretq    0xC3      /* return print queue */
+#define SMBsends      0xD0      /* send single block message */
+#define SMBsendb      0xD1      /* send broadcast message */
+#define SMBfwdname    0xD2      /* forward user name */
+#define SMBcancelf    0xD3      /* cancel forward */
+#define SMBgetmac     0xD4      /* get machine name */
+#define SMBsendstrt   0xD5      /* send start of multi-block message */
+#define SMBsendend    0xD6      /* send end of multi-block message */
+#define SMBsendtxt    0xD7      /* send text of multi-block message */
 
 /* Core+ protocol */
-#define SMBlockread	  0x13   /* Lock a range and read */
-#define SMBwriteunlock 0x14 /* Unlock a range then write */
-#define SMBreadbraw   0x1a  /* read a block of data with no smb header */
-#define SMBwritebraw  0x1d  /* write a block of data with no smb header */
-#define SMBwritec     0x20  /* secondary write request */
-#define SMBwriteclose 0x2c  /* write a file then close it */
+#define SMBlockread	  0x13  /* Lock a range and read */
+#define SMBwriteunlock 0x14     /* Unlock a range then write */
+#define SMBreadbraw   0x1a      /* read a block of data with no smb header */
+#define SMBwritebraw  0x1d      /* write a block of data with no smb header */
+#define SMBwritec     0x20      /* secondary write request */
+#define SMBwriteclose 0x2c      /* write a file then close it */
 
 /* dos extended protocol */
 #define SMBreadBraw      0x1A   /* read block raw */
@@ -1195,7 +1208,7 @@ struct bitmap {
 #define FILE_WRITE_ATTRIBUTES 0x100
 
 #define FILE_ALL_ATTRIBUTES   0x1FF
- 
+
 /* Generic access masks & rights. */
 #define SPECIFIC_RIGHTS_MASK 0x00FFFFL
 #define STANDARD_RIGHTS_MASK 0xFF0000L
@@ -1214,7 +1227,7 @@ struct bitmap {
 #define FILE_ALL_STANDARD_ACCESS 0x1F0000
 
 /* Mapping of access rights to UNIX perms. */
-#if 0 /* Don't use all here... JRA. */
+#if 0                           /* Don't use all here... JRA. */
 #define UNIX_ACCESS_RWX (FILE_ALL_ATTRIBUTES|FILE_ALL_STANDARD_ACCESS)
 #else
 #define UNIX_ACCESS_RWX (UNIX_ACCESS_R|UNIX_ACCESS_W|UNIX_ACCESS_X)
@@ -1236,7 +1249,7 @@ struct bitmap {
 #define OPEN_DIRECTORY 8
 
 /* ShareAccess field. */
-#define FILE_SHARE_NONE 0 /* Cannot be used in bitmask. */
+#define FILE_SHARE_NONE 0       /* Cannot be used in bitmask. */
 #define FILE_SHARE_READ 1
 #define FILE_SHARE_WRITE 2
 #define FILE_SHARE_DELETE 4
@@ -1316,24 +1329,25 @@ struct bitmap {
 #define smb_base(buf) (((char *)(buf))+4)
 
 
-#define SMB_SUCCESS 0  /* The request was successful. */
-#define ERRDOS 0x01 /*  Error is from the core DOS operating system set. */
-#define ERRSRV 0x02  /* Error is generated by the server network file manager.*/
-#define ERRHRD 0x03  /* Error is an hardware error. */
-#define ERRCMD 0xFF  /* Command was not in the "SMB" format. */
+#define SMB_SUCCESS 0           /* The request was successful. */
+#define ERRDOS 0x01             /*  Error is from the core DOS operating system set. */
+#define ERRSRV 0x02             /* Error is generated by the server network file manager. */
+#define ERRHRD 0x03             /* Error is an hardware error. */
+#define ERRCMD 0xFF             /* Command was not in the "SMB" format. */
 
 #ifdef HAVE_STDARG_H
-int slprintf(char *str, int n, const char *format, ...)
+int
+slprintf (char *str, int n, const char *format, ...)
 #ifdef __GNUC__
-     __attribute__ ((format (printf, 3, 4)))
+    __attribute__ ((format (printf, 3, 4)))
 #endif
-;
+    ;
 #else
-int slprintf();
+int slprintf ();
 #endif
 
 #ifdef WITH_DFS
-void dfs_unlogin(void);
+void dfs_unlogin (void);
 extern int dcelogin_atmost_once;
 #endif
 
@@ -1358,7 +1372,7 @@ extern int dcelogin_atmost_once;
 
 
 /* Some POSIX definitions for those without */
- 
+
 #ifndef S_IFDIR
 #define S_IFDIR         0x4000
 #endif
@@ -1427,10 +1441,10 @@ extern int dcelogin_atmost_once;
 #define SV_TYPE_SERVER_OSF          0x00100000
 #define SV_TYPE_SERVER_VMS          0x00200000
 #define SV_TYPE_WIN95_PLUS          0x00400000
-#define SV_TYPE_ALTERNATE_XPORT     0x20000000  
-#define SV_TYPE_LOCAL_LIST_ONLY     0x40000000  
+#define SV_TYPE_ALTERNATE_XPORT     0x20000000
+#define SV_TYPE_LOCAL_LIST_ONLY     0x40000000
 #define SV_TYPE_DOMAIN_ENUM         0x80000000
-#define SV_TYPE_ALL                 0xFFFFFFFF  
+#define SV_TYPE_ALL                 0xFFFFFFFF
 
 /* what server type are we currently  - JHT Says we ARE 4.20 */
 /* this was set by JHT in liaison with Jeremy Allison early 1997 */
@@ -1438,7 +1452,7 @@ extern int dcelogin_atmost_once;
 /* History: */
 /* Version 4.0 - never made public */
 /* Version 4.10 - New to 1.9.16p2, lost in space 1.9.16p3 to 1.9.16p9 */
-/*		- Reappeared in 1.9.16p11 with fixed smbd services */
+/*              - Reappeared in 1.9.16p11 with fixed smbd services */
 /* Version 4.20 - To indicate that nmbd and browsing now works better */
 
 #define DEFAULT_MAJOR_VERSION 0x04
@@ -1449,12 +1463,12 @@ extern int dcelogin_atmost_once;
 #define BROWSER_CONSTANT	0xaa55
 
 /* NT Flags2 bits - cifs6.txt section 3.1.2 */
-   
+
 #define FLAGS2_LONG_PATH_COMPONENTS   0x0001
 #define FLAGS2_EXTENDED_ATTRIBUTES    0x0002
 #define FLAGS2_DFS_PATHNAMES          0x1000
 #define FLAGS2_READ_PERMIT_NO_EXECUTE 0x2000
-#define FLAGS2_32_BIT_ERROR_CODES     0x4000 
+#define FLAGS2_32_BIT_ERROR_CODES     0x4000
 #define FLAGS2_UNICODE_STRINGS        0x8000
 
 /* Capabilities.  see ftp.microsoft.com/developr/drg/cifs/cifs/cifs4.txt */
@@ -1474,24 +1488,33 @@ extern int dcelogin_atmost_once;
 
 /* protocol types. It assumes that higher protocols include lower protocols
    as subsets */
-enum protocol_types {PROTOCOL_NONE,PROTOCOL_CORE,PROTOCOL_COREPLUS,PROTOCOL_LANMAN1,PROTOCOL_LANMAN2,PROTOCOL_NT1};
+enum protocol_types
+{ PROTOCOL_NONE, PROTOCOL_CORE, PROTOCOL_COREPLUS, PROTOCOL_LANMAN1, PROTOCOL_LANMAN2,
+    PROTOCOL_NT1
+};
 
 /* security levels */
-enum security_types {SEC_SHARE,SEC_USER,SEC_SERVER,SEC_DOMAIN};
+enum security_types
+{ SEC_SHARE, SEC_USER, SEC_SERVER, SEC_DOMAIN };
 
 /* printing types */
-enum printing_types {PRINT_BSD,PRINT_SYSV,PRINT_AIX,PRINT_HPUX,
-		     PRINT_QNX,PRINT_PLP,PRINT_LPRNG,PRINT_SOFTQ};
+enum printing_types
+{ PRINT_BSD, PRINT_SYSV, PRINT_AIX, PRINT_HPUX,
+    PRINT_QNX, PRINT_PLP, PRINT_LPRNG, PRINT_SOFTQ
+};
 
 /* Remote architectures we know about. */
-enum remote_arch_types {RA_UNKNOWN, RA_WFWG, RA_OS2, RA_WIN95, RA_WINNT, RA_SAMBA};
+enum remote_arch_types
+{ RA_UNKNOWN, RA_WFWG, RA_OS2, RA_WIN95, RA_WINNT, RA_SAMBA };
 
 /* case handling */
-enum case_handling {CASE_LOWER,CASE_UPPER};
+enum case_handling
+{ CASE_LOWER, CASE_UPPER };
 
 #ifdef WITH_SSL
 /* SSL version options */
-enum ssl_version_enum {SMB_SSL_V2,SMB_SSL_V3,SMB_SSL_V23,SMB_SSL_TLS1};
+enum ssl_version_enum
+{ SMB_SSL_V2, SMB_SSL_V3, SMB_SSL_V23, SMB_SSL_TLS1 };
 #endif /* WITH_SSL */
 
 /* Macros to get at offsets within smb_lkrng and smb_unlkrng
@@ -1532,7 +1555,7 @@ enum ssl_version_enum {SMB_SSL_V2,SMB_SSL_V3,SMB_SSL_V23,SMB_SSL_TLS1};
  */
 
 #define UID_FIELD_INVALID 0
-#define VUID_OFFSET 100 /* Amount to bias returned vuid numbers */
+#define VUID_OFFSET 100         /* Amount to bias returned vuid numbers */
 
 /* Defines needed for multi-codepage support. */
 #define MSDOS_LATIN_1_CODEPAGE 850
@@ -1677,10 +1700,11 @@ extern int unix_ERR_code;
 #define SMB_ASSERT_ARRAY(a,n) SMB_ASSERT((sizeof(a)/sizeof((a)[0])) >= (n))
 
 /* A netbios name structure. */
-struct nmb_name {
-  char         name[17];
-  char         scope[64];
-  unsigned int name_type;
+struct nmb_name
+{
+    char name[17];
+    char scope[64];
+    unsigned int name_type;
 };
 
 #include "client.h"
@@ -1710,7 +1734,7 @@ struct nmb_name {
 
    Note that map_to_guest only has an effect in user or server
    level security.
-*/
+ */
 
 #define NEVER_MAP_TO_GUEST 0
 #define MAP_TO_GUEST_ON_BAD_USER 1

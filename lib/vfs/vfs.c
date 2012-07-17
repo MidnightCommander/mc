@@ -174,7 +174,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
     (void) defcnv;
 
     g_string_assign (buffer, path);
-#endif  /* HAVE_CHARSET */
+#endif /* HAVE_CHARSET */
 
     return state;
 }
@@ -614,7 +614,7 @@ vfs_change_encoding (vfs_path_t * vpath, const char *encoding)
 
     return vpath;
 }
-#endif  /* HAVE_CHARSET */
+#endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
 

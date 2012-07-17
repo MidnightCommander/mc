@@ -11,7 +11,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void init_undelfs(void);
+void init_undelfs (void);
 
 /*** inline functions ****************************************************************************/
 

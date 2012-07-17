@@ -22,7 +22,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include "includes.h"
 
@@ -32,40 +32,44 @@ extern int DEBUGLEVEL;
 /* this is like vsnprintf but the 'n' limit does not include
    the terminating null. So if you have a 1024 byte buffer then
    pass 1023 for n */
-int vslprintf(char *str, int n, const char *format, va_list ap)
+int
+vslprintf (char *str, int n, const char *format, va_list ap)
 {
-	int ret = vsnprintf(str, n, format, ap);
-	if (ret > n || ret < 0) {
-		str[n] = 0;
-		return -1;
-	}
-	str[ret] = 0;
-	return ret;
+    int ret = vsnprintf (str, n, format, ap);
+    if (ret > n || ret < 0)
+    {
+        str[n] = 0;
+        return -1;
+    }
+    str[ret] = 0;
+    return ret;
 }
 
 #ifdef HAVE_STDARG_H
- int slprintf(char *str, int n, const char *format, ...)
+int
+slprintf (char *str, int n, const char *format, ...)
 {
 #else
- int slprintf(va_alist)
-va_dcl
+int
+slprintf (va_alist)
+     va_dcl
 {
-	char *str, *format;
-	int n;
+    char *str, *format;
+    int n;
 #endif
-	va_list ap;  
-	int ret;
+    va_list ap;
+    int ret;
 
 #ifdef HAVE_STDARG_H
-	va_start(ap, format);
+    va_start (ap, format);
 #else
-	va_start(ap);
-	str = va_arg(ap,char *);
-	n = va_arg(ap,int);
-	format = va_arg(ap,char *);
+    va_start (ap);
+    str = va_arg (ap, char *);
+    n = va_arg (ap, int);
+    format = va_arg (ap, char *);
 #endif
 
-	ret = vslprintf(str,n,format,ap);
-	va_end(ap);
-	return ret;
+    ret = vslprintf (str, n, format, ap);
+    va_end (ap);
+    return ret;
 }

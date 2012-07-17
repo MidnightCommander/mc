@@ -238,7 +238,7 @@ free_link (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-free_linklist (GSList *lp)
+free_linklist (GSList * lp)
 {
     g_slist_foreach (lp, (GFunc) free_link, NULL);
     g_slist_free (lp);
@@ -249,7 +249,7 @@ free_linklist (GSList *lp)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-is_in_linklist (const GSList *lp, const vfs_path_t * vpath, const struct stat *sb)
+is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *sb)
 {
     const struct vfs_class *class;
     ino_t ino = sb->st_ino;

@@ -102,7 +102,7 @@ static gboolean do_local_copy = FALSE;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_cleanup_file_name (vfs_path_t * filename_vpath, gboolean has_changed)
+exec_cleanup_file_name (const vfs_path_t * filename_vpath, gboolean has_changed)
 {
     if (localfilecopy_vpath == NULL)
         return;
@@ -122,7 +122,7 @@ exec_cleanup_file_name (vfs_path_t * filename_vpath, gboolean has_changed)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-exec_get_file_name (vfs_path_t * filename_vpath)
+exec_get_file_name (const vfs_path_t * filename_vpath)
 {
     if (!do_local_copy)
         return quote_func (vfs_path_get_last_path_str (filename_vpath), 0);
@@ -144,7 +144,7 @@ exec_get_file_name (vfs_path_t * filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-exec_get_export_variables (vfs_path_t * filename_vpath)
+exec_get_export_variables (const vfs_path_t * filename_vpath)
 {
     char *text;
     GString *export_vars_string;
@@ -189,7 +189,7 @@ exec_get_export_variables (vfs_path_t * filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-exec_make_shell_string (const char *lc_data, vfs_path_t * filename_vpath)
+exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
 {
     GString *shell_string;
     char lc_prompt[80] = "\0";
@@ -315,7 +315,7 @@ exec_make_shell_string (const char *lc_data, vfs_path_t * filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension_view (char *cmd, vfs_path_t * filename_vpath, int start_line,
+exec_extension_view (char *cmd, const vfs_path_t * filename_vpath, int start_line,
                      vfs_path_t * temp_file_name_vpath)
 {
     int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
@@ -376,16 +376,14 @@ exec_extension_cd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension (const char *filename, const char *lc_data, int start_line)
+exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int start_line)
 {
     char *shell_string, *export_variables;
     vfs_path_t *temp_file_name_vpath = NULL;
     int cmd_file_fd;
     FILE *cmd_file;
     char *cmd = NULL;
-    vfs_path_t *filename_vpath;
 
-    g_return_if_fail (filename != NULL);
     g_return_if_fail (lc_data != NULL);
 
     pbuffer = NULL;
@@ -394,8 +392,6 @@ exec_extension (const char *filename, const char *lc_data, int start_line)
     run_view = FALSE;
     is_cd = FALSE;
     written_nonspace = FALSE;
-
-    filename_vpath = vfs_path_from_str (filename);
 
     /* Avoid making a local copy if we are doing a cd */
     do_local_copy = !vfs_file_is_local (filename_vpath);
@@ -494,7 +490,6 @@ exec_extension (const char *filename, const char *lc_data, int start_line)
     exec_cleanup_file_name (filename_vpath, TRUE);
   ret:
     vfs_path_free (temp_file_name_vpath);
-    vfs_path_free (filename_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -947,7 +942,7 @@ regex_command (const vfs_path_t * filename_vpath, const char *action)
                          */
                         if (p < q)
                         {
-                            exec_extension (filename, r + 1, view_at_line_number);
+                            exec_extension (filename_vpath, r + 1, view_at_line_number);
                             ret = 1;
                         }
                         break;

@@ -344,7 +344,7 @@ mcview_load_next_prev (mcview_t * view, int direction)
     view->dir_count = dir_count;
     view->dir_idx = dir_idx;
 
-    view->dpy_bbar_dirty = FALSE; /* FIXME */
+    view->dpy_bbar_dirty = FALSE;       /* FIXME */
     view->dirty++;
 }
 

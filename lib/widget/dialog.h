@@ -63,7 +63,7 @@ typedef enum
 /* Dialog state */
 typedef enum
 {
-    DLG_CONSTRUCT = 0,          /* DIalog has been constructed but bot run yet */
+    DLG_CONSTRUCT = 0,          /* Dialog has been constructed but not run yet */
     DLG_ACTIVE = 1,             /* Dialog is visible and active */
     DLG_SUSPENDED = 2,          /* Dialog is suspended */
     DLG_CLOSED = 3              /* Dialog is closed */

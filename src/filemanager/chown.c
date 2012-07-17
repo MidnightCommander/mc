@@ -258,15 +258,13 @@ do_chown (uid_t u, gid_t g)
 static void
 apply_chowns (uid_t u, gid_t g)
 {
-    char *fname;
 
     need_update = end_chown = 1;
     do_chown (u, g);
 
     do
     {
-        fname = next_file ();
-
+        next_file ();
         do_chown (u, g);
     }
     while (current_panel->marked);

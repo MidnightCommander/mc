@@ -117,46 +117,6 @@ TAB_SKIP (int ts, int pos)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-dview_set_codeset (WDiff * dview)
-{
-#ifdef HAVE_CHARSET
-    const char *encoding_id = NULL;
-
-    dview->utf8 = TRUE;
-    encoding_id =
-        get_codepage_id (mc_global.source_codepage >=
-                         0 ? mc_global.source_codepage : mc_global.display_codepage);
-    if (encoding_id != NULL)
-    {
-        GIConv conv;
-        conv = str_crt_conv_from (encoding_id);
-        if (conv != INVALID_CONV)
-        {
-            if (dview->converter != str_cnv_from_term)
-                str_close_conv (dview->converter);
-            dview->converter = conv;
-        }
-        dview->utf8 = (gboolean) str_isutf8 (encoding_id);
-    }
-#else
-    (void) dview;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-#ifdef HAVE_CHARSET
-static void
-dview_select_encoding (WDiff * dview)
-{
-    if (do_select_codepage ())
-        dview_set_codeset (dview);
-}
-#endif /* HAVE_CHARSET */
-
-/* --------------------------------------------------------------------------------------------- */
-
 static gboolean
 rewrite_backup_content (const vfs_path_t * from_file_name_vpath, const char *to_file_name)
 {
@@ -632,31 +592,22 @@ dview_get_utf (char *str, int *char_width, gboolean * result)
     if (str == NULL)
     {
         *result = FALSE;
-        width = 0;
         return 0;
     }
 
     res = g_utf8_get_char_validated (str, -1);
 
     if (res < 0)
-    {
         ch = *str;
-        width = 0;
-    }
     else
     {
         ch = res;
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char (str);
-        if (next_ch)
-        {
+        if (next_ch != NULL)
             width = next_ch - str;
-        }
         else
-        {
             ch = 0;
-            width = 0;
-        }
     }
     *char_width = width;
     return ch;
@@ -2197,7 +2148,6 @@ static void
 do_merge_hunk (WDiff * dview)
 {
     int from1, to1, from2, to2;
-    int res;
     int hunk;
 
     hunk = get_current_hunk (dview, &from1, &to1, &from2, &to2);
@@ -2244,7 +2194,7 @@ do_merge_hunk (WDiff * dview)
         }
         fflush (merge_file);
         fclose (merge_file);
-        res = rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
+        rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
         mc_unlink (merge_file_name_vpath);
         vfs_path_free (merge_file_name_vpath);
     }
@@ -2277,6 +2227,118 @@ dview_compute_areas (WDiff * dview)
     dview->half2 = COLS - dview->half1;
 
     dview_compute_split (dview, 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+dview_reread (WDiff * dview)
+{
+    int ndiff;
+
+    destroy_hdiff (dview);
+    if (dview->a[0] != NULL)
+    {
+        g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[0], TRUE);
+    }
+    if (dview->a[1] != NULL)
+    {
+        g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
+        g_array_free (dview->a[1], TRUE);
+    }
+
+    dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
+    dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
+
+    ndiff = redo_diff (dview);
+    if (ndiff >= 0)
+        dview->ndiff = ndiff;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef HAVE_CHARSET
+static void
+dview_set_codeset (WDiff * dview)
+{
+    const char *encoding_id = NULL;
+
+    dview->utf8 = TRUE;
+    encoding_id =
+        get_codepage_id (mc_global.source_codepage >=
+                         0 ? mc_global.source_codepage : mc_global.display_codepage);
+    if (encoding_id != NULL)
+    {
+        GIConv conv;
+        conv = str_crt_conv_from (encoding_id);
+        if (conv != INVALID_CONV)
+        {
+            if (dview->converter != str_cnv_from_term)
+                str_close_conv (dview->converter);
+            dview->converter = conv;
+        }
+        dview->utf8 = (gboolean) str_isutf8 (encoding_id);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+dview_select_encoding (WDiff * dview)
+{
+    if (do_select_codepage ())
+        dview_set_codeset (dview);
+
+    dview_reread (dview);
+    tty_touch_screen ();
+    repaint_screen ();
+}
+#endif /* HAVE_CHARSET */
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+dview_diff_options (WDiff * dview)
+{
+    const char *quality_str[] = {
+        N_("No&rmal"),
+        N_("&Fastest (Assume large files)"),
+        N_("&Minimal (Find a smaller set of change)")
+    };
+
+    QuickWidget diffopt_widgets[] = {
+        QUICK_BUTTON (6, 10, 14, OPTY, N_("&Cancel"), B_CANCEL, NULL),
+        QUICK_BUTTON (2, 10, 14, OPTY, N_("&OK"), B_ENTER, NULL),
+
+        QUICK_CHECKBOX (3, OPTX, 12, OPTY,
+                        N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr),
+        QUICK_CHECKBOX (3, OPTX, 11, OPTY,
+                        N_("Ignore all &whitespace"), &dview->opt.ignore_all_space),
+        QUICK_CHECKBOX (3, OPTX, 10, OPTY,
+                        N_("Ignore &space change"), &dview->opt.ignore_space_change),
+        QUICK_CHECKBOX (3, OPTX, 9, OPTY,
+                        N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion),
+        QUICK_CHECKBOX (3, OPTX, 8, OPTY,
+                        N_("&Ignore case"), &dview->opt.ignore_case),
+        QUICK_LABEL (3, OPTX, 7, OPTY, N_("Diff extra options")),
+        QUICK_RADIO (3, OPTX, 3, OPTY,
+                     3, (const char **) quality_str, (int *) &dview->opt.quality),
+        QUICK_LABEL (3, OPTX, 2, OPTY, N_("Diff algorithm")),
+
+        QUICK_END
+    };
+
+    QuickDialog diffopt = {
+        OPTX, OPTY, -1, -1,
+        N_("Diff Options"), "[Diff Options]",
+        diffopt_widgets, NULL, NULL, FALSE
+    };
+
+    if (quick_dialog (&diffopt) != B_CANCEL)
+    {
+        dview_reread (dview);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2328,8 +2390,9 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->hdiff = NULL;
     dview->dsrc = dsrc;
     dview->converter = str_cnv_from_term;
+#ifdef HAVE_CHARSET
     dview_set_codeset (dview);
-
+#endif
     dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
 
@@ -2370,77 +2433,6 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview_compute_areas (dview);
 
     return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-dview_reread (WDiff * dview)
-{
-    int ndiff = dview->ndiff;
-
-    destroy_hdiff (dview);
-    if (dview->a[0] != NULL)
-    {
-        g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
-        g_array_free (dview->a[0], TRUE);
-    }
-    if (dview->a[1] != NULL)
-    {
-        g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
-        g_array_free (dview->a[1], TRUE);
-    }
-
-    dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
-    dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
-
-    ndiff = redo_diff (dview);
-    if (ndiff >= 0)
-        dview->ndiff = ndiff;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-static void
-dview_diff_options (WDiff * dview)
-{
-    const char *quality_str[] = {
-        N_("No&rmal"),
-        N_("&Fastest (Assume large files)"),
-        N_("&Minimal (Find a smaller set of change)")
-    };
-
-    QuickWidget diffopt_widgets[] = {
-        QUICK_BUTTON (6, 10, 14, OPTY, N_("&Cancel"), B_CANCEL, NULL),
-        QUICK_BUTTON (2, 10, 14, OPTY, N_("&OK"), B_ENTER, NULL),
-
-        QUICK_CHECKBOX (3, OPTX, 12, OPTY,
-                        N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr),
-        QUICK_CHECKBOX (3, OPTX, 11, OPTY,
-                        N_("Ignore all &whitespace"), &dview->opt.ignore_all_space),
-        QUICK_CHECKBOX (3, OPTX, 10, OPTY,
-                        N_("Ignore &space change"), &dview->opt.ignore_space_change),
-        QUICK_CHECKBOX (3, OPTX, 9, OPTY,
-                        N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion),
-        QUICK_CHECKBOX (3, OPTX, 8, OPTY,
-                        N_("&Ignore case"), &dview->opt.ignore_case),
-        QUICK_LABEL (3, OPTX, 7, OPTY, N_("Diff extra options")),
-        QUICK_RADIO (3, OPTX, 3, OPTY,
-                     3, (const char **) quality_str, (int *) &dview->opt.quality),
-        QUICK_LABEL (3, OPTX, 2, OPTY, N_("Diff algorithm")),
-
-        QUICK_END
-    };
-
-    QuickDialog diffopt = {
-        OPTX, OPTY, -1, -1,
-        N_("Diff Options"), "[Diff Options]",
-        diffopt_widgets, NULL, NULL, FALSE
-    };
-
-    if (quick_dialog (&diffopt) != B_CANCEL)
-    {
-        dview_reread (dview);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2984,7 +2976,7 @@ dview_ok_to_exit (WDiff * dview)
         break;
     case 1:                    /* No */
         if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
-            res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+            mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
         /* fall through */
     default:
         res = TRUE;
@@ -3141,9 +3133,6 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
 #ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         dview_select_encoding (dview);
-        dview_reread (dview);
-        tty_touch_screen ();
-        repaint_screen ();
         break;
 #endif
     case CK_Cancel:

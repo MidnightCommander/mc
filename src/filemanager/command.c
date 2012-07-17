@@ -83,7 +83,8 @@ WInput *cmdline;
 static char *
 examine_cd (const char *_path)
 {
-    typedef enum { copy_sym, subst_var } state_t;
+    typedef enum
+    { copy_sym, subst_var } state_t;
 
     state_t state = copy_sym;
     char *q;
@@ -424,7 +425,7 @@ do_cd_command (char *orig_cmd)
         path = examine_cd (&cmd[operand_pos]);
 
         if (*path == '\0')
-            q_vpath = vfs_path_from_str (mc_config_get_home_dir());
+            q_vpath = vfs_path_from_str (mc_config_get_home_dir ());
         else
             q_vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
 

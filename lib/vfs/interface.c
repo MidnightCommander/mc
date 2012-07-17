@@ -104,13 +104,11 @@ mc_def_getlocalcopy (const vfs_path_t * filename_vpath)
     fdin = -1;
     if (i == -1)
         goto fail;
+
     i = close (fdout);
     fdout = -1;
     if (i == -1)
-    {
-        fdout = -1;
         goto fail;
-    }
 
     if (mc_stat (filename_vpath, &mystat) != -1)
         mc_chmod (tmp_vpath, mystat.st_mode);

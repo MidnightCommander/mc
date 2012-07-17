@@ -504,7 +504,7 @@ edit_save_cmd (WEdit * edit)
  */
 
 static inline gboolean
-edit_load_file_from_filename (Dlg_head *h, const vfs_path_t *vpath)
+edit_load_file_from_filename (Dlg_head * h, const vfs_path_t * vpath)
 {
     return edit_add_window (h, h->y + 1, h->x, h->lines - 2, h->cols, vpath, 0);
 }
@@ -555,7 +555,7 @@ edit_block_delete (WEdit * edit)
 {
     long count;
     long start_mark, end_mark;
-    int curs_pos, line_width;
+    int curs_pos;
     long curs_line, c1, c2;
 
     if (eval_marks (edit, &start_mark, &end_mark))
@@ -583,9 +583,6 @@ edit_block_delete (WEdit * edit)
 
     curs_line = edit->curs_line;
 
-    /* calculate line width and cursor position before cut */
-    line_width = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
-                                     edit_eol (edit, edit->curs1));
     curs_pos = edit->curs_col + edit->over_col;
 
     /* move cursor to start of selection */
@@ -596,12 +593,14 @@ edit_block_delete (WEdit * edit)
     {
         if (edit->column_highlight)
         {
+            int line_width;
+
             if (edit->mark2 < 0)
                 edit_mark_cmd (edit, 0);
             edit_delete_column_of_text (edit);
             /* move cursor to the saved position */
             edit_move_to_line (edit, curs_line);
-            /* calculate line width after cut */
+            /* calculate line width and cursor position before cut */
             line_width = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
                                              edit_eol (edit, edit->curs1));
             if (option_cursor_beyond_eol && curs_pos > line_width)
@@ -2147,7 +2146,7 @@ edit_load_menu_file (Dlg_head * h)
     {
         vfs_path_free (menufile_vpath);
         menufile_vpath = vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, NULL);
-     }
+    }
 
     switch (dir)
     {
@@ -2172,7 +2171,7 @@ edit_load_menu_file (Dlg_head * h)
         }
         break;
 
-     default:
+    default:
         vfs_path_free (menufile_vpath);
         return FALSE;
     }
@@ -3401,19 +3400,17 @@ edit_complete_word_cmd (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 void
 edit_select_codepage_cmd (WEdit * edit)
 {
-#ifdef HAVE_CHARSET
     if (do_select_codepage ())
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
     send_message ((Widget *) edit, WIDGET_DRAW, 0);
-#else
-    (void) edit;
-#endif
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -3702,6 +3699,6 @@ edit_set_spell_lang (void)
     }
     aspell_array_clean (lang_list);
 }
-#endif  /* HAVE_ASPELL */
+#endif /* HAVE_ASPELL */
 
 /* --------------------------------------------------------------------------------------------- */

@@ -2001,7 +2001,7 @@ is_break_char (char c)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-edit_get_word_from_pos (WEdit *edit, long start_pos, long *start, gsize *len, gsize *cut)
+edit_get_word_from_pos (WEdit * edit, long start_pos, long *start, gsize * len, gsize * cut)
 {
     long word_start;
     long cut_len = 0;

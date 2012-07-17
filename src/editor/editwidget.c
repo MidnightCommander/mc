@@ -672,7 +672,7 @@ edit_event (Gpm_Event * event, void *data)
  */
 
 static int
-edit_dialog_event (Gpm_Event *event, void *data)
+edit_dialog_event (Gpm_Event * event, void *data)
 {
     Dlg_head *h = (Dlg_head *) data;
     Widget *w;
@@ -1081,10 +1081,11 @@ edit_file (const vfs_path_t * file_vpath, int line)
 
     return ok;
 }
+
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-edit_files (const GList *files)
+edit_files (const GList * files)
 {
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
@@ -1129,8 +1130,7 @@ edit_files (const GList *files)
         gboolean f_ok;
 
         f_ok = edit_add_window (edit_dlg, edit_dlg->y + 1, edit_dlg->x,
-                                edit_dlg->lines - 2, edit_dlg->cols,
-                                f->file_vpath, f->line_number);
+                                edit_dlg->lines - 2, edit_dlg->cols, f->file_vpath, f->line_number);
         /* at least one file has been opened succefully */
         ok = ok || f_ok;
     }
@@ -1185,7 +1185,7 @@ edit_update_screen (WEdit * e)
     edit_update_curs_col (e);
 
     edit_status (e, (e->force & REDRAW_COMPLETELY) != 0 &&
-                    (void *) e == ((Widget *) e)->owner->current->data);
+                 (void *) e == ((Widget *) e)->owner->current->data);
 
     /* pop all events for this window for internal handling */
     if (!is_idle ())
@@ -1232,7 +1232,7 @@ edit_save_size (WEdit * edit)
  */
 
 gboolean
-edit_add_window (Dlg_head * h, int y, int x, int lines, int cols, const vfs_path_t *f, int fline)
+edit_add_window (Dlg_head * h, int y, int x, int lines, int cols, const vfs_path_t * f, int fline)
 {
     WEdit *edit;
     Widget *w;

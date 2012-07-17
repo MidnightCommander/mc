@@ -114,14 +114,12 @@ draw_history_button (WInput * in)
 
     widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
+
 #ifdef LARGE_HISTORY_BUTTON
-    {
-        Dlg_head *h;
-        h = in->widget.owner;
-        tty_print_string ("[ ]");
-        widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
-    }
+    tty_print_string ("[ ]");
+    widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
 #endif
+
     tty_print_char (c);
 }
 
@@ -197,7 +195,8 @@ do_show_hist (WInput * in)
 
     len = get_history_length (in->history);
 
-    r = history_show (&in->history, &in->widget, g_list_position (in->history_current, in->history));
+    r = history_show (&in->history, &in->widget,
+                      g_list_position (in->history_current, in->history));
     if (r != NULL)
     {
         input_assign_text (in, r);
@@ -1136,8 +1135,6 @@ input_handle_char (WInput * in, int key)
 {
     cb_ret_t v;
     unsigned long command;
-
-    v = MSG_NOT_HANDLED;
 
     if (quote != 0)
     {

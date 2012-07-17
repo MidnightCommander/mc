@@ -631,10 +631,7 @@ create_panels (void)
 
     /* 3. Create active panel */
     if (current_dir == NULL)
-    {
-        current_dir = vfs_path_to_str (original_dir);
         mc_chdir (original_dir);
-    }
     else
     {
         vfs_path_t *vpath;
@@ -1603,7 +1600,7 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-midnight_event (Gpm_Event *event, void *data)
+midnight_event (Gpm_Event * event, void *data)
 {
     Dlg_head *h = (Dlg_head *) data;
     int ret = MOU_UNHANDLED;

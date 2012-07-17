@@ -200,7 +200,7 @@ background_attention (int fd, void *closure)
     /*    void *routine; */
     int argc, i, result, status;
     char *data[MAXCALLARGS];
-    ssize_t bytes, ret;
+    ssize_t bytes;
     struct TaskList *p;
     int to_child_fd = -1;
     enum ReturnType type;
@@ -330,9 +330,9 @@ background_attention (int fd, void *closure)
             }
 
         /* Send the result code and the value for shared variables */
-        ret = write (to_child_fd, &result, sizeof (int));
+        (void) write (to_child_fd, &result, sizeof (int));
         if (have_ctx && to_child_fd != -1)
-            ret = write (to_child_fd, ctx, sizeof (FileOpContext));
+            (void) write (to_child_fd, ctx, sizeof (FileOpContext));
     }
     else if (type == Return_String)
     {
@@ -365,15 +365,15 @@ background_attention (int fd, void *closure)
         if (resstr)
         {
             len = strlen (resstr);
-            ret = write (to_child_fd, &len, sizeof (len));
+            (void) write (to_child_fd, &len, sizeof (len));
             if (len != 0)
-                ret = write (to_child_fd, resstr, len);
+                (void) write (to_child_fd, resstr, len);
             g_free (resstr);
         }
         else
         {
             len = 0;
-            ret = write (to_child_fd, &len, sizeof (len));
+            (void) write (to_child_fd, &len, sizeof (len));
         }
     }
     for (i = 0; i < argc; i++)
@@ -398,17 +398,16 @@ static void
 parent_call_header (void *routine, int argc, enum ReturnType type, FileOpContext * ctx)
 {
     int have_ctx;
-    ssize_t ret;
 
     have_ctx = (ctx != NULL);
 
-    ret = write (parent_fd, &routine, sizeof (routine));
-    ret = write (parent_fd, &argc, sizeof (int));
-    ret = write (parent_fd, &type, sizeof (type));
-    ret = write (parent_fd, &have_ctx, sizeof (have_ctx));
+    (void) write (parent_fd, &routine, sizeof (routine));
+    (void) write (parent_fd, &argc, sizeof (int));
+    (void) write (parent_fd, &type, sizeof (type));
+    (void) write (parent_fd, &have_ctx, sizeof (have_ctx));
 
     if (have_ctx)
-        ret = write (parent_fd, ctx, sizeof (FileOpContext));
+        (void) write (parent_fd, ctx, sizeof (FileOpContext));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -417,7 +416,6 @@ static int
 parent_va_call (void *routine, gpointer data, int argc, va_list ap)
 {
     int i;
-    ssize_t ret;
     struct FileOpContext *ctx = (struct FileOpContext *) data;
 
     parent_call_header (routine, argc, Return_Integer, ctx);
@@ -428,13 +426,13 @@ parent_va_call (void *routine, gpointer data, int argc, va_list ap)
 
         len = va_arg (ap, int);
         value = va_arg (ap, void *);
-        ret = write (parent_fd, &len, sizeof (int));
-        ret = write (parent_fd, value, len);
+        (void) write (parent_fd, &len, sizeof (int));
+        (void) write (parent_fd, value, len);
     }
 
-    ret = read (from_parent_fd, &i, sizeof (int));
+    (void) read (from_parent_fd, &i, sizeof (int));
     if (ctx)
-        ret = read (from_parent_fd, ctx, sizeof (FileOpContext));
+        (void) read (from_parent_fd, ctx, sizeof (FileOpContext));
 
     return i;
 }

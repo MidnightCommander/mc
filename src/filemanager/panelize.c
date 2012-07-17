@@ -138,6 +138,7 @@ panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
     {
     case DLG_INIT:
     case DLG_POST_KEY:
+    case DLG_FOCUS:
         tty_setcolor (MENU_ENTRY_COLOR);
         update_command ();
         return MSG_HANDLED;
@@ -387,9 +388,8 @@ do_external_panelize (char *command)
         current_panel->count = next_free;
         if (list->list[0].fname[0] == PATH_SEP)
         {
-            int ret;
             panel_set_cwd (current_panel, PATH_SEP_STR);
-            ret = chdir (PATH_SEP_STR);
+            chdir (PATH_SEP_STR);
         }
     }
     else
@@ -599,8 +599,7 @@ load_panelize (void)
 
     if (!profile_keys || *profile_keys == NULL)
     {
-        add2panelize (g_strdup (_("Modified git files")),
-                      g_strdup ("git ls-files --modified"));
+        add2panelize (g_strdup (_("Modified git files")), g_strdup ("git ls-files --modified"));
         add2panelize (g_strdup (_("Find rejects after patching")),
                       g_strdup ("find . -name \\*.rej -print"));
         add2panelize (g_strdup (_("Find *.orig after patching")),

@@ -11,7 +11,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void init_cpiofs(void);
+void init_cpiofs (void);
 
 /*** inline functions ****************************************************************************/
 

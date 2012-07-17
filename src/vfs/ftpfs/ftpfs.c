@@ -477,8 +477,7 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
         }
         else
         {
-            size_t ret;
-            ret = fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
+            (void) fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
         }
 
         fflush (MEDATA->logfile);
@@ -2488,7 +2487,8 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
             }
 
             /* Ignore unsafe passwords */
-            if (strcmp (*login, "anonymous") && strcmp (*login, "ftp")
+            if (*login != NULL &&
+                strcmp (*login, "anonymous") != 0 && strcmp (*login, "ftp") != 0
                 && ftpfs_netrc_bad_mode (netrcname))
             {
                 need_break = 1;

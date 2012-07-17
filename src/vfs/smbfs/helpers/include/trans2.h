@@ -2,7 +2,7 @@
    Unix SMB/Netbios implementation.
    Version 1.9.
    SMB transaction2 handling
-*/
+ */
 
 #ifndef _TRANS2_H_
 #define _TRANS2_H_
@@ -243,6 +243,3 @@ Byte offset   Type     name                description
 #define TYPE_VIRTUAL			0x40
 
 #endif
-
-
-
