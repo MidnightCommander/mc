@@ -477,7 +477,8 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
         }
         else
         {
-            (void) fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
+            size_t ret;
+            ret = fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
         }
 
         fflush (MEDATA->logfile);

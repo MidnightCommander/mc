@@ -603,8 +603,10 @@ main (int argc, char *argv[])
                            S_IRUSR | S_IWUSR);
         if (last_wd_fd != -1)
         {
-            (void) write (last_wd_fd, last_wd_string, strlen (last_wd_string));
-            (void) close (last_wd_fd);
+            ssize_t ret1;
+            int ret2;
+            ret1 = write (last_wd_fd, last_wd_string, strlen (last_wd_string));
+            ret2 = close (last_wd_fd);
         }
     }
     g_free (last_wd_string);

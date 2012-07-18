@@ -90,6 +90,7 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
     unsigned char message = 0;
     unsigned short bytes = 0;
     int i;
+    ssize_t ret;
 
     /* Is tty console? */
     if (mc_global.tty.console_flag == '\0')
@@ -104,29 +105,29 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
 
     /* Send command to the console handler */
     message = CONSOLE_CONTENTS;
-    (void) write (pipefd1[1], &message, 1);
+    ret = write (pipefd1[1], &message, 1);
     /* Check for outdated cons.saver */
-    (void) read (pipefd2[0], &message, 1);
+    ret = read (pipefd2[0], &message, 1);
     if (message != CONSOLE_CONTENTS)
         return;
 
     /* Send the range of lines that we want */
-    (void) write (pipefd1[1], &begin_line, 1);
-    (void) write (pipefd1[1], &end_line, 1);
+    ret = write (pipefd1[1], &begin_line, 1);
+    ret = write (pipefd1[1], &end_line, 1);
     /* Read the corresponding number of bytes */
-    (void) read (pipefd2[0], &bytes, 2);
+    ret = read (pipefd2[0], &bytes, 2);
 
     /* Read the bytes and output them */
     for (i = 0; i < bytes; i++)
     {
         if ((i % COLS) == 0)
             tty_gotoyx (starty + (i / COLS), 0);
-        (void) read (pipefd2[0], &message, 1);
+        ret = read (pipefd2[0], &message, 1);
         tty_print_char (message);
     }
 
     /* Read the value of the mc_global.tty.console_flag */
-    (void) read (pipefd2[0], &message, 1);
+    ret = read (pipefd2[0], &message, 1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -239,9 +240,10 @@ handle_console_linux (console_action_t action)
         if (action == CONSOLE_DONE || mc_global.tty.console_flag == '\0')
         {
             /* We are done -> Let's clean up */
+            pid_t ret;
             close (pipefd1[1]);
             close (pipefd2[0]);
-            (void) waitpid (cons_saver_pid, &status, 0);
+            ret = waitpid (cons_saver_pid, &status, 0);
             mc_global.tty.console_flag = '\0';
         }
         break;

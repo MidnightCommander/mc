@@ -387,8 +387,9 @@ do_external_panelize (char *command)
         current_panel->count = next_free;
         if (list->list[0].fname[0] == PATH_SEP)
         {
+            int ret;
             panel_set_cwd (current_panel, PATH_SEP_STR);
-            chdir (PATH_SEP_STR);
+            ret = chdir (PATH_SEP_STR);
         }
     }
     else

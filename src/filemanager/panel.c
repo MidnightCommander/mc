@@ -3958,7 +3958,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
         vfs_path_t *vpath;
 
         vpath = vfs_path_from_str (curdir);
-        mc_chdir (vpath);
+        err = mc_chdir (vpath);
         vfs_path_free (vpath);
     }
     g_free (curdir);
