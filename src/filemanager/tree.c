@@ -739,6 +739,7 @@ static void
 tree_rescan (void *data)
 {
     WTree *tree = data;
+    int ret;
     vfs_path_t *old_vpath;
 
     old_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
@@ -748,7 +749,7 @@ tree_rescan (void *data)
     if (tree->selected_ptr != NULL && mc_chdir (tree->selected_ptr->name) == 0)
     {
         tree_store_rescan (tree->selected_ptr->name);
-        mc_chdir (old_vpath);
+        ret = mc_chdir (old_vpath);
     }
     vfs_path_free (old_vpath);
 }
