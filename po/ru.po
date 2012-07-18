@@ -4,8 +4,9 @@
 # 
 # Translators:
 #   <aborodin@vmail.ru>, 2011.
+# Alex Tkachenko <alex@bcs.zp.ua>, 1998.
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
-# Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011.
+# Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012.
 # Andrew V. Samoilov <sav@bcs.zp.ua>, 1999.
 # Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999.
@@ -18,10 +19,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-04-22 05:40+0000\n"
+"POT-Creation-Date: 2012-07-12 22:14+0400\n"
+"PO-Revision-Date: 2012-07-14 09:42+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
-"Language-Team: Russian (http://www.transifex.net/projects/p/mc/language/ru/)\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -115,7 +116,7 @@ msgstr "Неправильный шаблон цели %d"
 msgid "Regular expression error"
 msgstr "Ошибка в регулярном выражении"
 
-msgid "&Normal"
+msgid "No&rmal"
 msgstr "О&бычный"
 
 msgid "Re&gular expression"
@@ -342,7 +343,7 @@ msgid "Colon"
 msgstr "Двоеточие"
 
 msgid "Exclamation mark"
-msgstr "Восклицательный знак"
+msgstr "Exclamation mark"
 
 msgid "Question mark"
 msgstr "Вопросительный знак"
@@ -541,7 +542,7 @@ msgid "Print data directory"
 msgstr "Распечатать имя каталога для данных"
 
 msgid "Print extended info about used data directories"
-msgstr "Показ расширенной информации об используемых каталогов пользовательских данных"
+msgstr "Показ расширенной информации об используемых каталогах"
 
 msgid "Print configure options"
 msgstr "Распечатать параметры конфигурации"
@@ -564,8 +565,8 @@ msgstr "Установить уровень отладки"
 msgid "Launches the file viewer on a file"
 msgstr "Просматривать файл"
 
-msgid "Edits one file"
-msgstr "Редактировать файл"
+msgid "Edit files"
+msgstr "Редактировать файлы"
 
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
@@ -625,10 +626,11 @@ msgid ""
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-msgstr "--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n\n{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n\nКлючевые слова:\n   Общие:              errors, disabled, reverse, gauge, header\n                       input, inputmark, inputunchanged, commandlinemark\n                       bbarhotkey, bbarbutton, statusbar\n   Отображение файлов: normal, selected, marked, markselect\n   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n                       errdhotfocus\n   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n                       editlinestate\n   Просмотрщик:        viewbold, viewunderline, viewselected\n   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+msgstr "--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n\n{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n\nКлючевые слова:\n   Общие:              errors, disabled, reverse, gauge, header\n                       input, inputmark, inputunchanged, commandlinemark\n                       bbarhotkey, bbarbutton, statusbar\n   Отображение файлов: normal, selected, marked, markselect\n   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n                       errdhotfocus\n   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n                       editlinestate, editbg, editframe, editframeactive\n                       editframedrag\n   Просмотрщик:        viewbold, viewunderline, viewselected\n   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -824,6 +826,19 @@ msgstr "Midnight Commander завершается.\nСохранить изме�
 msgid "Diff:"
 msgstr "Различия:"
 
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr "\"%s\" является каталогом"
+
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr "Невозможно получить свойства \"%s\"\n%s"
+
+msgid "Diff viewer: invalid mode"
+msgstr "Неверный режим запуска программы сравнения файлов"
+
 msgid "Two files are needed to compare"
 msgstr "Для сравнения необходимы два файла"
 
@@ -835,16 +850,6 @@ msgstr "< Автоматически >"
 
 msgid "< Reload Current Syntax >"
 msgstr "Перезагрузить текущее цветовыделение"
-
-msgid "About"
-msgstr "О программе"
-
-msgid ""
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr "    Copyright (C) 1996-2010 the Free Software Foundation\n\n Текстовый редактор с дружественным интерфейсом пользователя.\n               Создан для Midnight Commander."
 
 #, c-format
 msgid "Cannot open %s for reading"
@@ -919,27 +924,6 @@ msgstr "Введите имя файла:"
 msgid "Save As"
 msgstr "Сохранить как"
 
-msgid "Syntax file edit"
-msgstr "Редактирование файла синтаксиса"
-
-msgid "Which syntax file you want to edit?"
-msgstr "Какой файл синтаксиса Вы хотите редактировать?"
-
-msgid "&User"
-msgstr "&Пользовательский"
-
-msgid "&System Wide"
-msgstr "&Общесистемный"
-
-msgid "Menu edit"
-msgstr "Редактирование файла меню"
-
-msgid "Which menu file do you want to edit?"
-msgstr "Какой файл меню Вы хотите редактировать?"
-
-msgid "&Local"
-msgstr "&Местный"
-
 msgid "Block is large, you may not be able to undo this action"
 msgstr "Блок слишком велик, вам может не удаться отменить эту операцию."
 
@@ -958,14 +942,17 @@ msgstr "П&роверка перевода строки в конце файла
 msgid "Edit Save Mode"
 msgstr "Режим сохранения"
 
+msgid "Save as"
+msgstr "Сохранить как"
+
+msgid "Cannot save: destination is not a regular file"
+msgstr "Невозможно сохранить файл: файл назначения не является обычным файлом"
+
 msgid "A file already exists with this name"
 msgstr "Файл с таким именем уже существует"
 
 msgid "&Overwrite"
 msgstr "Пе&реписать"
-
-msgid "Save as"
-msgstr "Сохранить как"
 
 msgid "Cannot save file"
 msgstr "Невозможно сохранить файл"
@@ -1001,13 +988,29 @@ msgstr "Сохранить файл"
 msgid "&Save"
 msgstr "&Сохранить"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes"
-msgstr "Текущий текст был модифицирован и не сохранен.\nПродолжение операции приведет к потере изменений."
-
 msgid "Load"
 msgstr "Загрузить"
+
+msgid "Syntax file edit"
+msgstr "Редактирование файла синтаксиса"
+
+msgid "Which syntax file you want to edit?"
+msgstr "Какой файл синтаксиса Вы хотите редактировать?"
+
+msgid "&User"
+msgstr "&Пользовательский"
+
+msgid "&System wide"
+msgstr "&Общесистемный"
+
+msgid "Menu edit"
+msgstr "Редактирование файла меню"
+
+msgid "Which menu file do you want to edit?"
+msgstr "Какой файл меню Вы хотите редактировать?"
+
+msgid "&Local"
+msgstr "&Местный"
 
 msgid "Replace"
 msgstr "Заменить"
@@ -1016,8 +1019,23 @@ msgstr "Заменить"
 msgid "%ld replacements made"
 msgstr "Осуществлено подстановок: %ld"
 
-msgid "&Cancel quit"
-msgstr "&Прервать выход"
+msgid "[NoName]"
+msgstr "[Без имени]"
+
+#, c-format
+msgid ""
+"File %s was modified.\n"
+"Save before close?"
+msgstr "Файл %s был изменён.\nСохранить при выходе?"
+
+msgid "Close file"
+msgstr "Закрытие файла"
+
+#, c-format
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file %s?"
+msgstr "Midnight Commander завершается.\nСохранить изменённый файл %s?"
 
 msgid "This function is not implemented"
 msgstr "Эта функция не реализована"
@@ -1099,9 +1117,9 @@ msgid "Press any key:"
 msgstr "Нажмите любую клавишу:"
 
 msgid ""
-"Current text was modified without a file save\n"
+"Current text was modified without a file save.\n"
 "Continue discards these changes"
-msgstr "Текущий текст был модифицирован и не сохранен.\nПродолжение операции приведет к потере изменений"
+msgstr "Текущий текст был модифицирован и не сохранен.\nПродолжение операции приведет к потере изменений."
 
 msgid "In se&lection"
 msgstr "В в&ыделенном"
@@ -1140,6 +1158,9 @@ msgstr "&Открыть файл..."
 
 msgid "&New"
 msgstr "&Новый"
+
+msgid "&Close"
+msgstr "&Закрыть"
 
 msgid "Save &as..."
 msgstr "Сохранить &как..."
@@ -1261,8 +1282,14 @@ msgstr "&Удалить макрос..."
 msgid "Record/Repeat &actions"
 msgstr "Записать/повторить &действия"
 
-msgid "'ispell' s&pell check"
-msgstr "Проверка ор&фографии (ispell)"
+msgid "S&pell check"
+msgstr "Проверка ор&фографии"
+
+msgid "C&heck word"
+msgstr "Про&верить слово"
+
+msgid "Change spelling &language"
+msgstr "Изменить &язык проверки орфографии"
 
 msgid "&Mail..."
 msgstr "&Электронная почта..."
@@ -1284,6 +1311,24 @@ msgstr "Вставить в&ывод команды..."
 
 msgid "&External formatter"
 msgstr "&Форматировать"
+
+msgid "&Move"
+msgstr "Пере&местить"
+
+msgid "&Resize"
+msgstr "Изменить &размер"
+
+msgid "&Toggle fullscreen"
+msgstr "Окно во весь &экран"
+
+msgid "&Next"
+msgstr "&Следующее"
+
+msgid "&Previous"
+msgstr "&Предыдущее"
+
+msgid "&List..."
+msgstr "&Список окон..."
 
 msgid "&General..."
 msgstr "&Общие..."
@@ -1320,6 +1365,9 @@ msgstr "&Команда"
 
 msgid "For&mat"
 msgstr "Фор&матирование"
+
+msgid "&Window"
+msgstr "&Окна"
 
 msgid "&Options"
 msgstr "&Настройки"
@@ -1380,6 +1428,22 @@ msgstr "Режим переноса строк"
 
 msgid "Editor options"
 msgstr "Настройки редактора"
+
+msgid "About"
+msgstr "О программе"
+
+msgid ""
+"Copyright (C) 1996-2012 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr "    Copyright (C) 1996-2012 the Free Software Foundation\n\n Текстовый редактор с дружественным интерфейсом пользователя.\n               Создан для Midnight Commander."
+
+msgid "Open files"
+msgstr "Открытые файлы"
+
+msgid "NoName"
+msgstr "Без имени"
 
 msgid "Edit: "
 msgstr "Правка: "
@@ -1802,6 +1866,9 @@ msgstr "Редактирование файла расширений"
 msgid "Which extension file you want to edit?"
 msgstr "Какой файл расширений Вы хотите редактировать?"
 
+msgid "&System Wide"
+msgstr "&Общесистемный"
+
 msgid "Highlighting groups file edit"
 msgstr "Редактирование файла подсветки имён"
 
@@ -1855,6 +1922,9 @@ msgstr "%s не является символической ссылкой"
 msgid "FTP to machine"
 msgstr "FTP-соединение с удаленной машиной"
 
+msgid "SFTP to machine"
+msgstr "SFTP-соединение с удаленной машиной"
+
 msgid "Shell link to machine"
 msgstr "Shell-соединение с удаленной машиной"
 
@@ -1892,14 +1962,14 @@ msgstr "Невозможно перейти в \"%s\"\n%s"
 msgid "Cannot read directory contents"
 msgstr "Невозможно прочесть содержимое каталога"
 
+msgid "Parameter"
+msgstr "Параметр"
+
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr "Невозможно создать временный командный файл\n%s"
-
-msgid "Parameter"
-msgstr "Параметр"
 
 #, c-format
 msgid " %s%s file error"
@@ -2222,12 +2292,6 @@ msgstr "Путь к каталогу"
 msgid "Cannot operate on \"..\"!"
 msgstr "Эту операцию невозможно выполнить на \"..\"!"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr "Невозможно получить свойства \"%s\"\n%s"
-
 msgid "Sorry, I could not put the job in background"
 msgstr "Извините, сделать это в фоновом режиме невозможно"
 
@@ -2288,7 +2352,7 @@ msgstr "Фоновый процесс: файл существует"
 
 #, c-format
 msgid "Files processed: %zu/%zu"
-msgstr "Файлы обработаны: %zu/%zu"
+msgstr "Обработано файлов: %zu/%zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -2421,8 +2485,8 @@ msgstr "Готово"
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] "Завершено (пропущен %zd каталог)"
-msgstr[1] "Завершено (пропущен %zd каталога)"
-msgstr[2] "Завершено (пропущен %zd каталогов)"
+msgstr[1] "Завершено (пропущено %zd каталога)"
+msgstr[2] "Завершено (пропущено %zd каталогов)"
 
 #, c-format
 msgid "Searching %s"
@@ -2430,9 +2494,6 @@ msgstr "Ищем %s"
 
 msgid "Searching"
 msgstr "Ищем"
-
-msgid "&Move"
-msgstr "Пере&местить блок"
 
 msgid "&Remove"
 msgstr "&Удалить"
@@ -2679,6 +2740,9 @@ msgstr "&FTP-соединение..."
 msgid "S&hell link..."
 msgstr "S&hell-соединение..."
 
+msgid "S&FTP link..."
+msgstr "&SFTP-соединение..."
+
 msgid "SM&B link..."
 msgstr "SM&B-соединение..."
 
@@ -2773,7 +2837,7 @@ msgid "Command &history"
 msgstr "&История командной строки"
 
 msgid "Di&rectory hotlist"
-msgstr "&Быстрый доступ к каталогам"
+msgstr "Каталоги &быстрого доступа"
 
 msgid "&Active VFS list"
 msgstr "Список &активных ВФС"
@@ -2791,10 +2855,10 @@ msgid "&Listing format edit"
 msgstr "&Редактирование формата"
 
 msgid "Edit &extension file"
-msgstr "Файл рас&ширений"
+msgstr "Редактировать файл рас&ширений"
 
 msgid "Edit &menu file"
-msgstr "Файл &меню"
+msgstr "Редактировать файл &меню"
 
 msgid "Edit hi&ghlighting group file"
 msgstr "Редактировать файл рас&цветки имён"
@@ -3440,8 +3504,8 @@ msgstr "Виртуальная файловая система:"
 msgid "Data types:"
 msgstr "Тип данных:"
 
-msgid "Home directory:"
-msgstr "Домашний каталог:"
+msgid "Root directory:"
+msgstr "Корневой каталог:"
 
 msgid "System data"
 msgstr "Системные данные"
@@ -3536,13 +3600,6 @@ msgstr "fish: версия подтверждения связи..."
 msgid "fish: Getting host info..."
 msgstr "fish: собирается информация об удалённой машине..."
 
-msgid "fish: Setting up current directory..."
-msgstr "fish: устанавливается текущий каталог..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: соединение успешно, персональный каталог %s."
-
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: чтение каталога %s..."
@@ -3566,7 +3623,7 @@ msgid "fish: storing zeros"
 msgstr "fish: запись нулевых данных"
 
 msgid "fish: storing file"
-msgstr "ftpfs: запись файла"
+msgstr "fish: запись файла"
 
 msgid "Aborting transfer..."
 msgstr "Прерывание передачи..."
@@ -3877,6 +3934,9 @@ msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr "Невозможно сохранить файл:\n%s"
+
+msgid "&Cancel quit"
+msgstr "&Прервать выход"
 
 msgid "View: "
 msgstr "Просмотр: "

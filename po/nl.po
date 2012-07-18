@@ -7,14 +7,15 @@
 # Richard E. van der Luit <nippur@fedoraproject.org>, 2012.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 # toniotonba <TonioTonBa@gmail.com>, 2011.
+#   <wannessmet@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-04-11 09:02+0000\n"
-"Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>\n"
-"Language-Team: Dutch (http://www.transifex.net/projects/p/mc/language/nl/)\n"
+"POT-Creation-Date: 2012-07-12 22:14+0400\n"
+"PO-Revision-Date: 2012-07-13 12:04+0000\n"
+"Last-Translator: bucovaina78 <wannessmet@gmail.com>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/mc/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -108,8 +109,8 @@ msgstr "ongeldig token nummer %d"
 msgid "Regular expression error"
 msgstr "Regular expressie fout"
 
-msgid "&Normal"
-msgstr "&Normaal"
+msgid "No&rmal"
+msgstr ""
 
 msgid "Re&gular expression"
 msgstr "&Reguliere expressie"
@@ -557,8 +558,8 @@ msgstr "Debugniveau instellen"
 msgid "Launches the file viewer on a file"
 msgstr "Start de bestandviewer voor een bestand"
 
-msgid "Edits one file"
-msgstr "Bewerkt een bestand"
+msgid "Edit files"
+msgstr "Bewerk bestanden"
 
 msgid "Forces xterm features"
 msgstr "Dwingt xterm features"
@@ -618,10 +619,11 @@ msgid ""
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-msgstr "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n\n{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n\n Keywords:\n   Global:       errors, disabled, reverse, gauge, header\n                 input, inputmark, inputunchanged, commandlinemark\n                 bbarhotkey, bbarbutton, statusbar\n   File display: normal, selected, marked, markselect\n   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n                 errdhotfocus\n   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n   Popup menus:  pmenunormal, pmenusel, pmenutitle\n   Editor:       editnormal, editbold, editmarked, editwhitespace,\n                 editlinestate\n   Viewer:       viewbold, viewunderline, viewselected\n   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+msgstr ""
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -817,6 +819,19 @@ msgstr "Midnight Commander wordt afgesloten. \nGewijzigd bestand opslaan??"
 msgid "Diff:"
 msgstr "Diff:"
 
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr "Kan niet stat  \"%s\"\n%s"
+
+msgid "Diff viewer: invalid mode"
+msgstr ""
+
 msgid "Two files are needed to compare"
 msgstr "Er zijn twee bestanden nodig om te vergelijken"
 
@@ -828,16 +843,6 @@ msgstr "< Auto >"
 
 msgid "< Reload Current Syntax >"
 msgstr "< Herlaadt Huidige Syntax >"
-
-msgid "About"
-msgstr "Over"
-
-msgid ""
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr "Copyright (C) 1996-2010 de Free Software Foundation\n\n            Een gebruiksvriendelijke tekst-editor\n         geschreven voor de Midnight Commander"
 
 #, c-format
 msgid "Cannot open %s for reading"
@@ -912,27 +917,6 @@ msgstr "Geef bestandsnaam:"
 msgid "Save As"
 msgstr "Opslaan Als"
 
-msgid "Syntax file edit"
-msgstr "Uitbreidingsbestand bewerken"
-
-msgid "Which syntax file you want to edit?"
-msgstr "Welk syntax-bestand wilt u bewerken?"
-
-msgid "&User"
-msgstr "&Gebruiker"
-
-msgid "&System Wide"
-msgstr "&Systeembreed"
-
-msgid "Menu edit"
-msgstr "Menu bewerken"
-
-msgid "Which menu file do you want to edit?"
-msgstr "Welk menubestand wilt u bewerken?"
-
-msgid "&Local"
-msgstr "&Lokaal"
-
 msgid "Block is large, you may not be able to undo this action"
 msgstr "Groot blok, wellicht kunt u deze actie niet ongedaan maken..."
 
@@ -951,14 +935,17 @@ msgstr "Controleer &POSIX nieuwe regel"
 msgid "Edit Save Mode"
 msgstr "Bewerk Opslag Modus"
 
+msgid "Save as"
+msgstr "Opslaan als"
+
+msgid "Cannot save: destination is not a regular file"
+msgstr ""
+
 msgid "A file already exists with this name"
 msgstr "Er bestaat al een bestand met die naam."
 
 msgid "&Overwrite"
 msgstr "&Overschrijven"
-
-msgid "Save as"
-msgstr "Opslaan als"
 
 msgid "Cannot save file"
 msgstr "Kan bestand niet opslaan"
@@ -994,13 +981,29 @@ msgstr "Bestand opslaan"
 msgid "&Save"
 msgstr "Op&slaan"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes"
-msgstr "Deze tekst is veranderd zonder te zijn opgeslagen.\nDoorgaan gooit alle wijzigingen weg."
-
 msgid "Load"
 msgstr "Laden"
+
+msgid "Syntax file edit"
+msgstr "Uitbreidingsbestand bewerken"
+
+msgid "Which syntax file you want to edit?"
+msgstr "Welk syntax-bestand wilt u bewerken?"
+
+msgid "&User"
+msgstr "&Gebruiker"
+
+msgid "&System wide"
+msgstr ""
+
+msgid "Menu edit"
+msgstr "Menu bewerken"
+
+msgid "Which menu file do you want to edit?"
+msgstr "Welk menubestand wilt u bewerken?"
+
+msgid "&Local"
+msgstr "&Lokaal"
 
 msgid "Replace"
 msgstr "Vervangen"
@@ -1009,8 +1012,23 @@ msgstr "Vervangen"
 msgid "%ld replacements made"
 msgstr "%ld vervangingen doorgevoerd"
 
-msgid "&Cancel quit"
-msgstr "&Annuleer afsluiten"
+msgid "[NoName]"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s was modified.\n"
+"Save before close?"
+msgstr ""
+
+msgid "Close file"
+msgstr ""
+
+#, c-format
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file %s?"
+msgstr ""
 
 msgid "This function is not implemented"
 msgstr "Deze functie is niet geïmplementeerd"
@@ -1092,7 +1110,7 @@ msgid "Press any key:"
 msgstr "Druk op een toets:"
 
 msgid ""
-"Current text was modified without a file save\n"
+"Current text was modified without a file save.\n"
 "Continue discards these changes"
 msgstr "Deze tekst is veranderd zonder te zijn opgeslagen.\nDoorgaan gooit alle wijzigingen weg."
 
@@ -1133,6 +1151,9 @@ msgstr "&Open bestand..."
 
 msgid "&New"
 msgstr "&Nieuw"
+
+msgid "&Close"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "&Opslaan als..."
@@ -1254,8 +1275,14 @@ msgstr "Macro ver&wijderen..."
 msgid "Record/Repeat &actions"
 msgstr "Opnemen/Herhalen &acties"
 
-msgid "'ispell' s&pell check"
-msgstr "`ispell'-s&pellingcontrole"
+msgid "S&pell check"
+msgstr ""
+
+msgid "C&heck word"
+msgstr ""
+
+msgid "Change spelling &language"
+msgstr ""
 
 msgid "&Mail..."
 msgstr "&Mail...              "
@@ -1277,6 +1304,24 @@ msgstr "Plak &uitvoer van..."
 
 msgid "&External formatter"
 msgstr "&Externe formatter"
+
+msgid "&Move"
+msgstr "&Verplaatsen"
+
+msgid "&Resize"
+msgstr ""
+
+msgid "&Toggle fullscreen"
+msgstr ""
+
+msgid "&Next"
+msgstr ""
+
+msgid "&Previous"
+msgstr ""
+
+msgid "&List..."
+msgstr ""
 
 msgid "&General..."
 msgstr "&Algemeen..."
@@ -1313,6 +1358,9 @@ msgstr "&Opdracht"
 
 msgid "For&mat"
 msgstr "For&mat"
+
+msgid "&Window"
+msgstr ""
 
 msgid "&Options"
 msgstr "&Opties"
@@ -1373,6 +1421,22 @@ msgstr "Woordafbrekingsmodus"
 
 msgid "Editor options"
 msgstr "Editor opties"
+
+msgid "About"
+msgstr "Over"
+
+msgid ""
+"Copyright (C) 1996-2012 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+
+msgid "Open files"
+msgstr ""
+
+msgid "NoName"
+msgstr ""
 
 msgid "Edit: "
 msgstr "Edit: "
@@ -1795,6 +1859,9 @@ msgstr "Bewerken uitbreidingsbestand"
 msgid "Which extension file you want to edit?"
 msgstr "Welke extensiebestand wilt u bewerken?"
 
+msgid "&System Wide"
+msgstr "&Systeembreed"
+
 msgid "Highlighting groups file edit"
 msgstr "Oplichten groups bestand aanpassing"
 
@@ -1848,6 +1915,9 @@ msgstr "'%s' is geen symbolische link"
 msgid "FTP to machine"
 msgstr "FTP naar machine"
 
+msgid "SFTP to machine"
+msgstr ""
+
 msgid "Shell link to machine"
 msgstr "Shell link naar machine"
 
@@ -1885,14 +1955,14 @@ msgstr "Veranderen naar map \"%s\" mislukt \n%s "
 msgid "Cannot read directory contents"
 msgstr "Kan mapinhoud niet lezen"
 
+msgid "Parameter"
+msgstr "Parameter"
+
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr "Kan geen tijdelijk opdrachtbestand maken \n%s "
-
-msgid "Parameter"
-msgstr "Parameter"
 
 #, c-format
 msgid " %s%s file error"
@@ -2215,12 +2285,6 @@ msgstr "Map scannen"
 msgid "Cannot operate on \"..\"!"
 msgstr "Opereren op \"..\" is niet mogelijk! "
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr "Kan niet stat  \"%s\"\n%s"
-
 msgid "Sorry, I could not put the job in background"
 msgstr "Sorry, de taak kon niet in de achtergrond geplaatst worden"
 
@@ -2422,9 +2486,6 @@ msgstr "Zoeken naar %s"
 
 msgid "Searching"
 msgstr "Aan het zoeken"
-
-msgid "&Move"
-msgstr "&Verplaatsen"
 
 msgid "&Remove"
 msgstr "Ver&wijderen"
@@ -2669,6 +2730,9 @@ msgstr "FT&P-Verbinding...      "
 
 msgid "S&hell link..."
 msgstr "S&hellverbinding...    "
+
+msgid "S&FTP link..."
+msgstr ""
 
 msgid "SM&B link..."
 msgstr "SM&B-Verbinding..."
@@ -3428,8 +3492,8 @@ msgstr "Virtuele Bestandssystemen:"
 msgid "Data types:"
 msgstr "Datatypen:"
 
-msgid "Home directory:"
-msgstr "Thuismap:"
+msgid "Root directory:"
+msgstr ""
 
 msgid "System data"
 msgstr "Systeemdata"
@@ -3523,13 +3587,6 @@ msgstr "fish: versie handshaking..."
 
 msgid "fish: Getting host info..."
 msgstr "fish: Host info ontvangen..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: huidige map opzetten..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: verbonden, home %s"
 
 #, c-format
 msgid "fish: Reading directory %s..."
@@ -3865,6 +3922,9 @@ msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr "Kon bestand %s niet opslaan"
+
+msgid "&Cancel quit"
+msgstr "&Annuleer afsluiten"
 
 msgid "View: "
 msgstr "bekijk :"

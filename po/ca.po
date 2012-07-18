@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-03-19 17:04+0000\n"
+"POT-Creation-Date: 2012-07-12 22:14+0400\n"
+"PO-Revision-Date: 2012-07-13 08:36+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Catalan (http://www.transifex.net/projects/p/mc/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/mc/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -107,8 +107,8 @@ msgstr ""
 msgid "Regular expression error"
 msgstr ""
 
-msgid "&Normal"
-msgstr "&Normal"
+msgid "No&rmal"
+msgstr ""
 
 msgid "Re&gular expression"
 msgstr "Expressió re&gular"
@@ -556,8 +556,8 @@ msgstr ""
 msgid "Launches the file viewer on a file"
 msgstr "Executa el visualitzador de fitxers amb un fitxer"
 
-msgid "Edits one file"
-msgstr "Edita un fitxer"
+msgid "Edit files"
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Força l'ús de característiques d'xterm"
@@ -617,7 +617,8 @@ msgid ""
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
@@ -816,6 +817,19 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diferència:"
 
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Diff viewer: invalid mode"
+msgstr ""
+
 msgid "Two files are needed to compare"
 msgstr ""
 
@@ -826,16 +840,6 @@ msgid "< Auto >"
 msgstr "< Auto >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
-
-msgid "About"
-msgstr "Quant a"
-
-msgid ""
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
 msgstr ""
 
 #, c-format
@@ -911,27 +915,6 @@ msgstr ""
 msgid "Save As"
 msgstr "Anomena i desa"
 
-msgid "Syntax file edit"
-msgstr ""
-
-msgid "Which syntax file you want to edit?"
-msgstr ""
-
-msgid "&User"
-msgstr "El d'&Usuari"
-
-msgid "&System Wide"
-msgstr "El de tot el &Sistema"
-
-msgid "Menu edit"
-msgstr "Menú edita"
-
-msgid "Which menu file do you want to edit?"
-msgstr ""
-
-msgid "&Local"
-msgstr "&Local"
-
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
 
@@ -950,14 +933,17 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
+msgid "Save as"
+msgstr "Anomena i desa"
+
+msgid "Cannot save: destination is not a regular file"
+msgstr ""
+
 msgid "A file already exists with this name"
 msgstr ""
 
 msgid "&Overwrite"
 msgstr "S&obreescriu"
-
-msgid "Save as"
-msgstr "Anomena i desa"
 
 msgid "Cannot save file"
 msgstr "No es pot desar el fitxer"
@@ -993,13 +979,29 @@ msgstr "Desa el fitxer"
 msgid "&Save"
 msgstr "&Desa"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes"
-msgstr ""
-
 msgid "Load"
 msgstr "Carrega"
+
+msgid "Syntax file edit"
+msgstr ""
+
+msgid "Which syntax file you want to edit?"
+msgstr ""
+
+msgid "&User"
+msgstr "El d'&Usuari"
+
+msgid "&System wide"
+msgstr ""
+
+msgid "Menu edit"
+msgstr "Menú edita"
+
+msgid "Which menu file do you want to edit?"
+msgstr ""
+
+msgid "&Local"
+msgstr "&Local"
 
 msgid "Replace"
 msgstr "Reemplaça"
@@ -1008,7 +1010,22 @@ msgstr "Reemplaça"
 msgid "%ld replacements made"
 msgstr ""
 
-msgid "&Cancel quit"
+msgid "[NoName]"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s was modified.\n"
+"Save before close?"
+msgstr ""
+
+msgid "Close file"
+msgstr ""
+
+#, c-format
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file %s?"
 msgstr ""
 
 msgid "This function is not implemented"
@@ -1091,7 +1108,7 @@ msgid "Press any key:"
 msgstr ""
 
 msgid ""
-"Current text was modified without a file save\n"
+"Current text was modified without a file save.\n"
 "Continue discards these changes"
 msgstr ""
 
@@ -1132,6 +1149,9 @@ msgstr "&Obre el fitxer..."
 
 msgid "&New"
 msgstr "&Nou"
+
+msgid "&Close"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "&Anomena i desa..."
@@ -1253,7 +1273,13 @@ msgstr ""
 msgid "Record/Repeat &actions"
 msgstr ""
 
-msgid "'ispell' s&pell check"
+msgid "S&pell check"
+msgstr ""
+
+msgid "C&heck word"
+msgstr ""
+
+msgid "Change spelling &language"
 msgstr ""
 
 msgid "&Mail..."
@@ -1275,6 +1301,24 @@ msgid "&Paste output of..."
 msgstr ""
 
 msgid "&External formatter"
+msgstr ""
+
+msgid "&Move"
+msgstr "&Mou"
+
+msgid "&Resize"
+msgstr ""
+
+msgid "&Toggle fullscreen"
+msgstr ""
+
+msgid "&Next"
+msgstr ""
+
+msgid "&Previous"
+msgstr ""
+
+msgid "&List..."
 msgstr ""
 
 msgid "&General..."
@@ -1312,6 +1356,9 @@ msgstr "&Comanda"
 
 msgid "For&mat"
 msgstr "For&mat"
+
+msgid "&Window"
+msgstr ""
 
 msgid "&Options"
 msgstr "&Opcions"
@@ -1371,6 +1418,22 @@ msgid "Wrap mode"
 msgstr "Mode d'ajustament"
 
 msgid "Editor options"
+msgstr ""
+
+msgid "About"
+msgstr "Quant a"
+
+msgid ""
+"Copyright (C) 1996-2012 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+
+msgid "Open files"
+msgstr ""
+
+msgid "NoName"
 msgstr ""
 
 msgid "Edit: "
@@ -1794,6 +1857,9 @@ msgstr "Edita el fitxer d'extensions"
 msgid "Which extension file you want to edit?"
 msgstr ""
 
+msgid "&System Wide"
+msgstr "El de tot el &Sistema"
+
 msgid "Highlighting groups file edit"
 msgstr ""
 
@@ -1847,6 +1913,9 @@ msgstr "`%s' no és un enllaç simbòlic"
 msgid "FTP to machine"
 msgstr ""
 
+msgid "SFTP to machine"
+msgstr ""
+
 msgid "Shell link to machine"
 msgstr ""
 
@@ -1884,14 +1953,14 @@ msgstr ""
 msgid "Cannot read directory contents"
 msgstr ""
 
+msgid "Parameter"
+msgstr "Paràmetre"
+
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr ""
-
-msgid "Parameter"
-msgstr "Paràmetre"
 
 #, c-format
 msgid " %s%s file error"
@@ -2214,12 +2283,6 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
@@ -2421,9 +2484,6 @@ msgstr "S'està cercant a %s"
 
 msgid "Searching"
 msgstr "Cercant"
-
-msgid "&Move"
-msgstr "&Mou"
 
 msgid "&Remove"
 msgstr "&Suprimeix"
@@ -2667,6 +2727,9 @@ msgid "FT&P link..."
 msgstr "enllaç per a F&TP..."
 
 msgid "S&hell link..."
+msgstr ""
+
+msgid "S&FTP link..."
 msgstr ""
 
 msgid "SM&B link..."
@@ -3427,7 +3490,7 @@ msgstr ""
 msgid "Data types:"
 msgstr "Tipus de dades:"
 
-msgid "Home directory:"
+msgid "Root directory:"
 msgstr ""
 
 msgid "System data"
@@ -3522,13 +3585,6 @@ msgstr "fish: S'està intercanviant la versió..."
 
 msgid "fish: Getting host info..."
 msgstr "fish: Obtenint informació de l'amfitrió ..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: S'està definint el directori actual..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: Connectat, directori inicial %s."
 
 #, c-format
 msgid "fish: Reading directory %s..."
@@ -3864,6 +3920,9 @@ msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr "No es pot desar el fitxer :\n%s"
+
+msgid "&Cancel quit"
+msgstr ""
 
 msgid "View: "
 msgstr "Visualitza:"

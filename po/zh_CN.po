@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Jake Li <gnozil@gmail.com>, 2012.
 #   <qinghao1@foxmail.com>, 2012.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-04-07 15:47+0000\n"
-"Last-Translator: qingxianhao <qinghao1@foxmail.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.net/projects/p/mc/language/zh_CN/)\n"
+"POT-Creation-Date: 2012-07-12 22:14+0400\n"
+"PO-Revision-Date: 2012-07-13 08:36+0000\n"
+"Last-Translator: Jake Li <gnozil@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/mc/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -106,8 +107,8 @@ msgstr "无效的标记个数%d "
 msgid "Regular expression error"
 msgstr "正则表达式错误"
 
-msgid "&Normal"
-msgstr "普通(&N)"
+msgid "No&rmal"
+msgstr ""
 
 msgid "Re&gular expression"
 msgstr "正规表达式(&R)"
@@ -532,7 +533,7 @@ msgid "Print data directory"
 msgstr "打印数据目录"
 
 msgid "Print extended info about used data directories"
-msgstr ""
+msgstr "打印已使用数据目录的扩展信息"
 
 msgid "Print configure options"
 msgstr "打印配置选项"
@@ -555,8 +556,8 @@ msgstr "设置调试级别"
 msgid "Launches the file viewer on a file"
 msgstr "在文件上启动文件查看器"
 
-msgid "Edits one file"
-msgstr "编辑一个文件"
+msgid "Edit files"
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
@@ -616,10 +617,11 @@ msgid ""
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-msgstr "--colors 关键字={前景色},{背景色},{属性}:关键字2=...\n\n省略{前景色},{背景色}或{属性} ，使用默认值\n\n 关键字:\n   全局：    errors, disabled, reverse, gauge, header\n                 input, inputmark, inputunchanged, commandlinemark\n                 bbarhotkey, bbarbutton, statusbar\n   文件显示： normal, selected, marked, markselect\n   对话框： dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n                 errdhotfocus\n   菜单：    menunormal, menuhot, menusel, menuhotsel, menuinactive\n   弹出菜单：pmenunormal, pmenusel, pmenutitle\n   编辑器： editnormal, editbold, editmarked, editwhitespace,\n                  editlinestate\n   查看器： viewbold, viewunderline, viewselected\n   帮助内容： helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+msgstr ""
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -815,6 +817,19 @@ msgstr "Midnight Commander就要被关闭了，\n要保存修改过的文件吗?
 msgid "Diff:"
 msgstr "差异："
 
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr "无法查看\"%s\"的状态\n%s"
+
+msgid "Diff viewer: invalid mode"
+msgstr ""
+
 msgid "Two files are needed to compare"
 msgstr "比较时需要两个文件"
 
@@ -826,16 +841,6 @@ msgstr "<自动>"
 
 msgid "< Reload Current Syntax >"
 msgstr "<重新加载当前语法>"
-
-msgid "About"
-msgstr "关于"
-
-msgid ""
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
-msgstr "版权所有 (C) 1996-2010 自由软件基金会(FSF)\n\n为 Midnight Commander 开发的\n       对用户友好的文字编辑器。"
 
 #, c-format
 msgid "Cannot open %s for reading"
@@ -910,27 +915,6 @@ msgstr "输入文件名："
 msgid "Save As"
 msgstr "保存为"
 
-msgid "Syntax file edit"
-msgstr "语法文件编辑"
-
-msgid "Which syntax file you want to edit?"
-msgstr "您要编辑哪个语法文件？"
-
-msgid "&User"
-msgstr "用户(&U)"
-
-msgid "&System Wide"
-msgstr "系统范围(&S)"
-
-msgid "Menu edit"
-msgstr "菜单编辑"
-
-msgid "Which menu file do you want to edit?"
-msgstr "您要编辑哪个菜单文件？"
-
-msgid "&Local"
-msgstr "本地(&L)"
-
 msgid "Block is large, you may not be able to undo this action"
 msgstr "块过大，您可能无法撤消这个动作。"
 
@@ -949,14 +933,17 @@ msgstr "检查&POSIX换行"
 msgid "Edit Save Mode"
 msgstr "编辑保存模式 "
 
+msgid "Save as"
+msgstr "保存为"
+
+msgid "Cannot save: destination is not a regular file"
+msgstr ""
+
 msgid "A file already exists with this name"
 msgstr "同名文件已存在"
 
 msgid "&Overwrite"
 msgstr "覆盖(&O)"
-
-msgid "Save as"
-msgstr "保存为"
 
 msgid "Cannot save file"
 msgstr "不能保存文件"
@@ -992,13 +979,29 @@ msgstr "保存文件"
 msgid "&Save"
 msgstr "保存(&S)"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes"
-msgstr "当前文本被修改但没有保存文件。\n选择继续将丢失这些修改。"
-
 msgid "Load"
 msgstr "加载"
+
+msgid "Syntax file edit"
+msgstr "语法文件编辑"
+
+msgid "Which syntax file you want to edit?"
+msgstr "您要编辑哪个语法文件？"
+
+msgid "&User"
+msgstr "用户(&U)"
+
+msgid "&System wide"
+msgstr ""
+
+msgid "Menu edit"
+msgstr "菜单编辑"
+
+msgid "Which menu file do you want to edit?"
+msgstr "您要编辑哪个菜单文件？"
+
+msgid "&Local"
+msgstr "本地(&L)"
 
 msgid "Replace"
 msgstr "替换"
@@ -1007,8 +1010,23 @@ msgstr "替换"
 msgid "%ld replacements made"
 msgstr "替换了 %ld 处"
 
-msgid "&Cancel quit"
-msgstr "取消退出(&C)"
+msgid "[NoName]"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s was modified.\n"
+"Save before close?"
+msgstr ""
+
+msgid "Close file"
+msgstr ""
+
+#, c-format
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file %s?"
+msgstr ""
 
 msgid "This function is not implemented"
 msgstr "该功能尚未实现"
@@ -1090,9 +1108,9 @@ msgid "Press any key:"
 msgstr "按下任意键："
 
 msgid ""
-"Current text was modified without a file save\n"
+"Current text was modified without a file save.\n"
 "Continue discards these changes"
-msgstr "当前文字被修改但没有保存。\n选择继续将丢失这些修改。"
+msgstr "当前文本被修改但没有保存文件。\n选择继续将丢失这些修改。"
 
 msgid "In se&lection"
 msgstr "在选择区域(&L)"
@@ -1131,6 +1149,9 @@ msgstr "打开文件(&O)..."
 
 msgid "&New"
 msgstr "新建(&N)"
+
+msgid "&Close"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "保存为(&a)...l"
@@ -1214,7 +1235,7 @@ msgid "&Prev bookmark"
 msgstr "上一个书签(&P)"
 
 msgid "&Flush bookmarks"
-msgstr ""
+msgstr "清理书签(&F)"
 
 msgid "&Go to line..."
 msgstr "转到行(&G)"
@@ -1252,8 +1273,14 @@ msgstr "删除宏(&O),,,"
 msgid "Record/Repeat &actions"
 msgstr "录制/重复动作(&A)"
 
-msgid "'ispell' s&pell check"
-msgstr "\"ispell\"拼写检查(&P)"
+msgid "S&pell check"
+msgstr ""
+
+msgid "C&heck word"
+msgstr ""
+
+msgid "Change spelling &language"
+msgstr ""
 
 msgid "&Mail..."
 msgstr "发送邮件(&M)..."
@@ -1275,6 +1302,24 @@ msgstr "粘贴输出(&P)..."
 
 msgid "&External formatter"
 msgstr "外部格式化工具(&E)"
+
+msgid "&Move"
+msgstr "移动(&M)"
+
+msgid "&Resize"
+msgstr ""
+
+msgid "&Toggle fullscreen"
+msgstr ""
+
+msgid "&Next"
+msgstr ""
+
+msgid "&Previous"
+msgstr ""
+
+msgid "&List..."
+msgstr ""
 
 msgid "&General..."
 msgstr "常规(&G)..."
@@ -1311,6 +1356,9 @@ msgstr "命令(&C)"
 
 msgid "For&mat"
 msgstr "格式化(&r)"
+
+msgid "&Window"
+msgstr ""
 
 msgid "&Options"
 msgstr "选项(&O) "
@@ -1371,6 +1419,22 @@ msgstr "换行模式"
 
 msgid "Editor options"
 msgstr "编辑器选项"
+
+msgid "About"
+msgstr "关于"
+
+msgid ""
+"Copyright (C) 1996-2012 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+
+msgid "Open files"
+msgstr ""
+
+msgid "NoName"
+msgstr ""
 
 msgid "Edit: "
 msgstr "编辑："
@@ -1793,6 +1857,9 @@ msgstr "扩展文件编辑"
 msgid "Which extension file you want to edit?"
 msgstr "您要编辑哪个扩展文件？"
 
+msgid "&System Wide"
+msgstr "系统范围(&S)"
+
 msgid "Highlighting groups file edit"
 msgstr "突出显示组文件编辑"
 
@@ -1846,6 +1913,9 @@ msgstr "\"%s\"不是符号链接"
 msgid "FTP to machine"
 msgstr "FTP 到机器"
 
+msgid "SFTP to machine"
+msgstr ""
+
 msgid "Shell link to machine"
 msgstr "Shell链接到机器"
 
@@ -1883,14 +1953,14 @@ msgstr "无法进入目录\"%s\"\n%s"
 msgid "Cannot read directory contents"
 msgstr "无法读取目录内容"
 
+msgid "Parameter"
+msgstr "参数"
+
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr "无法创建临时命令文件\n%s"
-
-msgid "Parameter"
-msgstr "参数"
 
 #, c-format
 msgid " %s%s file error"
@@ -2213,12 +2283,6 @@ msgstr "扫描目录"
 msgid "Cannot operate on \"..\"!"
 msgstr "无法操作\"..\"！"
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr "无法查看\"%s\"的状态\n%s"
-
 msgid "Sorry, I could not put the job in background"
 msgstr "抱歉，无法将任务放到后台"
 
@@ -2419,9 +2483,6 @@ msgstr "正在搜索 %s"
 
 msgid "Searching"
 msgstr "正在搜索"
-
-msgid "&Move"
-msgstr "移动(&M)"
 
 msgid "&Remove"
 msgstr "删除(&R)"
@@ -2665,6 +2726,9 @@ msgstr "FTP 链接(&P)..."
 
 msgid "S&hell link..."
 msgstr "S&hell链接..."
+
+msgid "S&FTP link..."
+msgstr ""
 
 msgid "SM&B link..."
 msgstr "SMB 链接(&B)..."
@@ -3374,7 +3438,7 @@ msgid "Warning: Cannot change to %s.\n"
 msgstr "警告：无法换到 %s。\n"
 
 msgid "Using the S-Lang library with terminfo database\n"
-msgstr ""
+msgstr "与terminfo数据库一起使用S-Lang程序库\n"
 
 msgid "Using the ncurses library\n"
 msgstr "使用 ncurses 库\n"
@@ -3421,8 +3485,8 @@ msgstr "虚拟文件系统:"
 msgid "Data types:"
 msgstr "数据类型"
 
-msgid "Home directory:"
-msgstr "主目录："
+msgid "Root directory:"
+msgstr ""
 
 msgid "System data"
 msgstr "系统数据"
@@ -3517,13 +3581,6 @@ msgstr "fish：正在握手版本..."
 msgid "fish: Getting host info..."
 msgstr "fish：获取主机信息..."
 
-msgid "fish: Setting up current directory..."
-msgstr "fish：正在设置当前目录..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish：已连接，主目录%s，"
-
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish：正在读取目录 %s..."
@@ -3544,7 +3601,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish：本地读取失败，正在发送零"
 
 msgid "fish: storing zeros"
-msgstr ""
+msgstr "fish: 存贮0字节"
 
 msgid "fish: storing file"
 msgstr "fish: 保存文件中"
@@ -3858,6 +3915,9 @@ msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr "不能保存文件:\n%s"
+
+msgid "&Cancel quit"
+msgstr "取消退出(&C)"
 
 msgid "View: "
 msgstr "查看："

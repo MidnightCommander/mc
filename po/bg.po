@@ -4,15 +4,15 @@
 # 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
-# Yasen Pramatarov <yasen@lindeas.com>, 2011.
+# Yasen Pramatarov <yasen@lindeas.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2012-03-19 19:08+0300\n"
-"PO-Revision-Date: 2012-03-19 17:04+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Bulgarian (http://www.transifex.net/projects/p/mc/language/bg/)\n"
+"POT-Creation-Date: 2012-07-12 22:14+0400\n"
+"PO-Revision-Date: 2012-07-13 08:36+0000\n"
+"Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
+"Language-Team: Bulgarian (http://www.transifex.com/projects/p/mc/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -94,7 +94,7 @@ msgid "Search string not found"
 msgstr "Търсеният низ не намерен"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "Все още не е внедрено"
 
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
@@ -106,14 +106,14 @@ msgstr ""
 msgid "Regular expression error"
 msgstr "Грешка в регулярен израз"
 
-msgid "&Normal"
+msgid "No&rmal"
 msgstr ""
 
 msgid "Re&gular expression"
 msgstr ""
 
 msgid "He&xadecimal"
-msgstr ""
+msgstr "&Шестнадесетично"
 
 msgid "Wil&dcard search"
 msgstr ""
@@ -402,7 +402,7 @@ msgid "Backslash key"
 msgstr "Обратна накл. черта"
 
 msgid "Number sign #"
-msgstr ""
+msgstr "Знак за номерация #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
@@ -555,14 +555,14 @@ msgstr ""
 msgid "Launches the file viewer on a file"
 msgstr "Показване съдържанието на файл"
 
-msgid "Edits one file"
-msgstr "Редактиране на файл"
+msgid "Edit files"
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Използване възможности на xterm"
 
 msgid "Disable X11 support"
-msgstr ""
+msgstr "Изключване на поддръжката на X11"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -616,7 +616,8 @@ msgid ""
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
@@ -664,7 +665,7 @@ msgid "Terminal options"
 msgstr "Настройки на терминала"
 
 msgid "Arguments parse error!"
-msgstr ""
+msgstr "Грешка при обработка на аргументите"
 
 msgid "No arguments given to the viewer."
 msgstr ""
@@ -673,13 +674,13 @@ msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Background process error"
-msgstr ""
+msgstr "Грешка във фоновия процес"
 
 msgid "Unknown error in child"
-msgstr ""
+msgstr "Непозната грешка в дъщерния процес"
 
 msgid "Child died unexpectedly"
-msgstr ""
+msgstr "Дъщерният процес приключи неочаквано"
 
 msgid "Background protocol error"
 msgstr ""
@@ -705,7 +706,7 @@ msgid "&Backwards"
 msgstr "&Назад"
 
 msgid "Cas&e sensitive"
-msgstr ""
+msgstr "Чувствителност към &регистъра"
 
 msgid "Enter search string:"
 msgstr "Въведете низ за търсене:"
@@ -754,7 +755,7 @@ msgid "Ignore tab &expansion"
 msgstr ""
 
 msgid "&Ignore case"
-msgstr ""
+msgstr "Пренебрегване на &регистъра"
 
 msgid "Diff extra options"
 msgstr ""
@@ -815,6 +816,19 @@ msgstr ""
 msgid "Diff:"
 msgstr "Разлика:"
 
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Diff viewer: invalid mode"
+msgstr ""
+
 msgid "Two files are needed to compare"
 msgstr ""
 
@@ -825,16 +839,6 @@ msgid "< Auto >"
 msgstr ""
 
 msgid "< Reload Current Syntax >"
-msgstr ""
-
-msgid "About"
-msgstr "Относно"
-
-msgid ""
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
 msgstr ""
 
 #, c-format
@@ -855,7 +859,7 @@ msgstr ""
 
 #, c-format
 msgid "File \"%s\" is too large"
-msgstr ""
+msgstr "Файлът \"%s\" е твърде голям"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -869,7 +873,7 @@ msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
+msgstr "Файлът е бил променен междувременно. Да се запише ли въпреки това?"
 
 #, c-format
 msgid "Error writing to pipe: %s"
@@ -893,16 +897,16 @@ msgid "&Do not change"
 msgstr ""
 
 msgid "&Unix format (LF)"
-msgstr ""
+msgstr "Формат за &Unix (LF)"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr ""
+msgstr "Формат за &Windows/DOS (CR LF)"
 
 msgid "&Macintosh format (CR)"
-msgstr ""
+msgstr "Формат за &Macintosh (CR)"
 
 msgid "Change line breaks to:"
-msgstr ""
+msgstr "Преобразуване на новите редове към:"
 
 msgid "Enter file name:"
 msgstr "Въведете име на файл:"
@@ -910,35 +914,14 @@ msgstr "Въведете име на файл:"
 msgid "Save As"
 msgstr "Запазване като"
 
-msgid "Syntax file edit"
-msgstr "Редактирай файл със синтаксис"
-
-msgid "Which syntax file you want to edit?"
-msgstr ""
-
-msgid "&User"
-msgstr "Потребителски"
-
-msgid "&System Wide"
-msgstr "Системен"
-
-msgid "Menu edit"
-msgstr ""
-
-msgid "Which menu file do you want to edit?"
-msgstr ""
-
-msgid "&Local"
-msgstr "Локален"
-
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
 
 msgid "&Quick save"
-msgstr ""
+msgstr "&Бърз запис"
 
 msgid "&Safe save"
-msgstr ""
+msgstr "&Сигурен запис"
 
 msgid "&Do backups with following extension:"
 msgstr ""
@@ -949,14 +932,17 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-msgid "A file already exists with this name"
+msgid "Save as"
+msgstr "Запис като"
+
+msgid "Cannot save: destination is not a regular file"
 msgstr ""
+
+msgid "A file already exists with this name"
+msgstr "Вече съществува файл с такова име"
 
 msgid "&Overwrite"
-msgstr ""
-
-msgid "Save as"
-msgstr ""
+msgstr "&Презаписване"
 
 msgid "Cannot save file"
 msgstr ""
@@ -977,10 +963,10 @@ msgid "Press the macro's new hotkey:"
 msgstr ""
 
 msgid "Repeat last commands"
-msgstr ""
+msgstr "Повтаряне на последните команди"
 
 msgid "Repeat times:"
-msgstr ""
+msgstr "Брой повторения:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -992,13 +978,29 @@ msgstr ""
 msgid "&Save"
 msgstr "Запази"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes"
-msgstr ""
-
 msgid "Load"
 msgstr "Зареждане"
+
+msgid "Syntax file edit"
+msgstr "Редактирай файл със синтаксис"
+
+msgid "Which syntax file you want to edit?"
+msgstr ""
+
+msgid "&User"
+msgstr "Потребителски"
+
+msgid "&System wide"
+msgstr ""
+
+msgid "Menu edit"
+msgstr "Редактиране на меню"
+
+msgid "Which menu file do you want to edit?"
+msgstr "Кой файл на меню искате да редактирате?"
+
+msgid "&Local"
+msgstr "Локален"
 
 msgid "Replace"
 msgstr "Замяна"
@@ -1007,7 +1009,22 @@ msgstr "Замяна"
 msgid "%ld replacements made"
 msgstr ""
 
-msgid "&Cancel quit"
+msgid "[NoName]"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s was modified.\n"
+"Save before close?"
+msgstr ""
+
+msgid "Close file"
+msgstr ""
+
+#, c-format
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file %s?"
 msgstr ""
 
 msgid "This function is not implemented"
@@ -1047,7 +1064,7 @@ msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Подреждане"
 
 msgid "Cannot execute sort command"
 msgstr ""
@@ -1066,7 +1083,7 @@ msgid "External command"
 msgstr "Външна команда"
 
 msgid "Cannot execute command"
-msgstr ""
+msgstr "Грешка при изпълнение на команда"
 
 msgid "Copies to"
 msgstr "Копие до"
@@ -1090,7 +1107,7 @@ msgid "Press any key:"
 msgstr ""
 
 msgid ""
-"Current text was modified without a file save\n"
+"Current text was modified without a file save.\n"
 "Continue discards these changes"
 msgstr ""
 
@@ -1130,6 +1147,9 @@ msgid "&Open file..."
 msgstr "Отвори файл..."
 
 msgid "&New"
+msgstr ""
+
+msgid "&Close"
 msgstr ""
 
 msgid "Save &as..."
@@ -1175,7 +1195,7 @@ msgid "Cop&y"
 msgstr ""
 
 msgid "Mo&ve"
-msgstr ""
+msgstr "Пре&местване"
 
 msgid "&Delete"
 msgstr "Изтрий"
@@ -1190,19 +1210,19 @@ msgid "Pa&ste from clipfile"
 msgstr ""
 
 msgid "&Beginning"
-msgstr ""
+msgstr "&Начало"
 
 msgid "&End"
-msgstr ""
+msgstr "&Край"
 
 msgid "&Search..."
-msgstr ""
+msgstr "&Търсене..."
 
 msgid "Search &again"
-msgstr ""
+msgstr "Търсене &отново"
 
 msgid "&Replace..."
-msgstr ""
+msgstr "&Замяна"
 
 msgid "&Toggle bookmark"
 msgstr ""
@@ -1217,7 +1237,7 @@ msgid "&Flush bookmarks"
 msgstr ""
 
 msgid "&Go to line..."
-msgstr ""
+msgstr "Отиване на &ред..."
 
 msgid "&Toggle line state"
 msgstr ""
@@ -1241,7 +1261,7 @@ msgid "Encod&ing..."
 msgstr ""
 
 msgid "&Refresh screen"
-msgstr ""
+msgstr "О&бновяване на екрана"
 
 msgid "&Start/Stop record macro"
 msgstr ""
@@ -1252,7 +1272,13 @@ msgstr ""
 msgid "Record/Repeat &actions"
 msgstr ""
 
-msgid "'ispell' s&pell check"
+msgid "S&pell check"
+msgstr ""
+
+msgid "C&heck word"
+msgstr ""
+
+msgid "Change spelling &language"
 msgstr ""
 
 msgid "&Mail..."
@@ -1262,18 +1288,36 @@ msgid "Insert &literal..."
 msgstr ""
 
 msgid "Insert &date/time"
-msgstr ""
+msgstr "Вмъкване на &дата и час"
 
 msgid "&Format paragraph"
 msgstr ""
 
 msgid "&Sort..."
-msgstr ""
+msgstr "&Подреждане..."
 
 msgid "&Paste output of..."
 msgstr ""
 
 msgid "&External formatter"
+msgstr ""
+
+msgid "&Move"
+msgstr "Премести"
+
+msgid "&Resize"
+msgstr ""
+
+msgid "&Toggle fullscreen"
+msgstr ""
+
+msgid "&Next"
+msgstr ""
+
+msgid "&Previous"
+msgstr ""
+
+msgid "&List..."
 msgstr ""
 
 msgid "&General..."
@@ -1289,31 +1333,34 @@ msgid "Syntax &highlighting..."
 msgstr ""
 
 msgid "S&yntax file"
-msgstr ""
+msgstr "Файл със &синтаксис"
 
 msgid "&Menu file"
-msgstr ""
+msgstr "Файл с &меню"
 
 msgid "&Save setup"
 msgstr "Запази настройките"
 
 msgid "&File"
-msgstr ""
+msgstr "&Файл"
 
 msgid "&Edit"
-msgstr ""
+msgstr "&Редактиране"
 
 msgid "&Search"
-msgstr ""
+msgstr "&Търсене"
 
 msgid "&Command"
-msgstr ""
+msgstr "&Команда"
 
 msgid "For&mat"
+msgstr "Фор&мат"
+
+msgid "&Window"
 msgstr ""
 
 msgid "&Options"
-msgstr ""
+msgstr "&Настройки"
 
 msgid "None"
 msgstr "Няма"
@@ -1372,8 +1419,24 @@ msgstr "Режим на пренасяне"
 msgid "Editor options"
 msgstr "Настройки на редактора"
 
-msgid "Edit: "
+msgid "About"
+msgstr "Относно"
+
+msgid ""
+"Copyright (C) 1996-2012 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
 msgstr ""
+
+msgid "Open files"
+msgstr ""
+
+msgid "NoName"
+msgstr ""
+
+msgid "Edit: "
+msgstr "Редактиране: "
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -1576,7 +1639,7 @@ msgid "Use &passive mode"
 msgstr ""
 
 msgid "&Use ~/.netrc"
-msgstr ""
+msgstr "&Използване на ~/.netrc"
 
 msgid "&Always use ftp proxy"
 msgstr "Винаги използвай прокси за ftp"
@@ -1739,10 +1802,10 @@ msgid "&Using shell patterns"
 msgstr "Mетасимволи на обвивката"
 
 msgid "&Case sensitive"
-msgstr ""
+msgstr "Чувствителност към &регистъра"
 
 msgid "&Files only"
-msgstr ""
+msgstr "Само &файлове"
 
 #, c-format
 msgid "Link %s to:"
@@ -1793,6 +1856,9 @@ msgstr "Редактирай файл с разширения"
 msgid "Which extension file you want to edit?"
 msgstr ""
 
+msgid "&System Wide"
+msgstr "Системен"
+
 msgid "Highlighting groups file edit"
 msgstr ""
 
@@ -1800,10 +1866,10 @@ msgid "Which highlighting file you want to edit?"
 msgstr ""
 
 msgid "Compare directories"
-msgstr ""
+msgstr "Сравняване на папки"
 
 msgid "Select compare method:"
-msgstr ""
+msgstr "Изберете начин на сравняване:"
 
 msgid "&Quick"
 msgstr "Бърз"
@@ -1846,6 +1912,9 @@ msgstr "`%s' не е връзка"
 msgid "FTP to machine"
 msgstr ""
 
+msgid "SFTP to machine"
+msgstr ""
+
 msgid "Shell link to machine"
 msgstr ""
 
@@ -1865,11 +1934,11 @@ msgstr ""
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr ""
+msgstr "Настройките са записани в %s"
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr ""
+msgstr "Грешка при запис ан настройките в %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
@@ -1883,14 +1952,14 @@ msgstr ""
 msgid "Cannot read directory contents"
 msgstr ""
 
+msgid "Parameter"
+msgstr "Параметър"
+
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr ""
-
-msgid "Parameter"
-msgstr "Параметър"
 
 #, c-format
 msgid " %s%s file error"
@@ -2025,7 +2094,7 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same file"
-msgstr ""
+msgstr "\"%s\"\nи\n\"%s\"\nса един и същи файл"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2193,7 +2262,7 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same directory"
-msgstr ""
+msgstr "\"%s\"\nи\n\"%s\"\nса една и съща папка"
 
 #, c-format
 msgid ""
@@ -2211,12 +2280,6 @@ msgid "Directory scanning"
 msgstr ""
 
 msgid "Cannot operate on \"..\"!"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
 msgstr ""
 
 msgid "Sorry, I could not put the job in background"
@@ -2303,11 +2366,11 @@ msgstr ""
 
 #, c-format
 msgid " Total: %s "
-msgstr ""
+msgstr " Общо: %s "
 
 #, c-format
 msgid " Total: %s/%s "
-msgstr ""
+msgstr " Общо: %s/%s "
 
 msgid "Source"
 msgstr "Източник"
@@ -2369,7 +2432,7 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
-msgstr ""
+msgstr "Пропускане на &скритите"
 
 msgid "Sea&rch for content"
 msgstr ""
@@ -2390,7 +2453,7 @@ msgid "Find File"
 msgstr "Търси файл"
 
 msgid "Content:"
-msgstr ""
+msgstr "Съдържание:"
 
 msgid "File name:"
 msgstr ""
@@ -2421,9 +2484,6 @@ msgstr "Търся %s"
 msgid "Searching"
 msgstr "Търся"
 
-msgid "&Move"
-msgstr "Премести"
-
 msgid "&Remove"
 msgstr "Изтрий"
 
@@ -2446,7 +2506,7 @@ msgid "&Add current"
 msgstr "Добави текущата"
 
 msgid "&Refresh"
-msgstr ""
+msgstr "&Обновяване"
 
 msgid "Fr&ee VFSs now"
 msgstr "Освободи ВФС-тата"
@@ -2490,7 +2550,7 @@ msgstr ""
 
 #, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
-msgstr ""
+msgstr "Наистина ли искате за премахнете записа \"%s\"?"
 
 #, c-format
 msgid ""
@@ -2539,7 +2599,7 @@ msgstr "Няма информация за пространството"
 
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr ""
+msgstr "Свободно пространство %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:      %s"
@@ -2645,7 +2705,7 @@ msgid "File listin&g"
 msgstr ""
 
 msgid "&Quick view"
-msgstr ""
+msgstr "&Бърз преглед"
 
 msgid "&Info"
 msgstr ""
@@ -2668,6 +2728,9 @@ msgstr "FTP връзка..."
 msgid "S&hell link..."
 msgstr ""
 
+msgid "S&FTP link..."
+msgstr ""
+
 msgid "SM&B link..."
 msgstr "SMB връзка..."
 
@@ -2678,16 +2741,16 @@ msgid "&Rescan"
 msgstr ""
 
 msgid "&View"
-msgstr ""
+msgstr "&Преглед"
 
 msgid "Vie&w file..."
-msgstr ""
+msgstr "Преглед на &файла"
 
 msgid "&Filtered view"
 msgstr ""
 
 msgid "&Copy"
-msgstr ""
+msgstr "&Копиране"
 
 msgid "C&hmod"
 msgstr ""
@@ -2711,7 +2774,7 @@ msgid "&Advanced chown"
 msgstr ""
 
 msgid "&Rename/Move"
-msgstr ""
+msgstr "&Преименуване или местене"
 
 msgid "&Mkdir"
 msgstr ""
@@ -2729,7 +2792,7 @@ msgid "&Invert selection"
 msgstr ""
 
 msgid "E&xit"
-msgstr ""
+msgstr "&Изход"
 
 msgid "&User menu"
 msgstr ""
@@ -2798,7 +2861,7 @@ msgid "&Panel options..."
 msgstr ""
 
 msgid "C&onfirmation..."
-msgstr ""
+msgstr "По&твърждение..."
 
 msgid "&Display bits..."
 msgstr "Екран..."
@@ -3015,7 +3078,7 @@ msgid "sort|v"
 msgstr ""
 
 msgid "&Version"
-msgstr ""
+msgstr "&Версия"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3153,7 +3216,7 @@ msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
 msgid "Modified git files"
-msgstr ""
+msgstr "Променени файлове в git"
 
 msgid "Find rejects after patching"
 msgstr "Намери отказите след патч"
@@ -3186,7 +3249,7 @@ msgstr ""
 
 #, c-format
 msgid "Delete %s?"
-msgstr ""
+msgstr "Да се изтрие ли %s?"
 
 msgid "ButtonBar|Static"
 msgstr ""
@@ -3222,7 +3285,7 @@ msgid "False:"
 msgstr ""
 
 msgid "Error calling program"
-msgstr ""
+msgstr "Грешка при извикване на програма"
 
 msgid "Warning -- ignoring file"
 msgstr ""
@@ -3334,7 +3397,7 @@ msgid ""
 msgstr ""
 
 msgid "Home directory path is not absolute"
-msgstr ""
+msgstr "Пътят до домашната папка не е абсолютен"
 
 #, c-format
 msgid ""
@@ -3426,7 +3489,7 @@ msgstr "Виртуални файлови системи:"
 msgid "Data types:"
 msgstr ""
 
-msgid "Home directory:"
+msgid "Root directory:"
 msgstr ""
 
 msgid "System data"
@@ -3522,13 +3585,6 @@ msgstr "fish: Потвърждавм версията..."
 msgid "fish: Getting host info..."
 msgstr "fish: Получавам данни за хоста..."
 
-msgid "fish: Setting up current directory..."
-msgstr "fish: Установявам текуща директория..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: Има връзка, домашна директория %s."
-
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Чета директорията %s..."
@@ -3569,7 +3625,7 @@ msgstr "ftpfs: Изключвам се от %s"
 
 #, c-format
 msgid "FTP: Password required for %s"
-msgstr ""
+msgstr "FTP: Нужна е парола за %s"
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: изпращам потребителско име"
@@ -3579,13 +3635,13 @@ msgstr "ftpfs: изпращам потребителска парола"
 
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr ""
+msgstr "FTP: Нужно е потребителско име за %s"
 
 msgid "Account:"
 msgstr "Сметка:"
 
 msgid "ftpfs: sending user account"
-msgstr ""
+msgstr "ftpfs: изпращане на потребителско име"
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs: вътре сме"
@@ -3687,7 +3743,7 @@ msgid "reconnect to %s failed"
 msgstr ""
 
 msgid "Authentication failed"
-msgstr ""
+msgstr "Грешка при автентикацията"
 
 #, c-format
 msgid "Error %s creating directory %s"
@@ -3761,7 +3817,7 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open file %s"
-msgstr ""
+msgstr "Файлът %s не може да бъде отворен"
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: четене на битовата карта на i-възлите..."
@@ -3810,13 +3866,13 @@ msgid "&Line number (decimal)"
 msgstr ""
 
 msgid "Pe&rcents"
-msgstr ""
+msgstr "&Проценти"
 
 msgid "&Decimal offset"
-msgstr ""
+msgstr "&Десетично отместване"
 
 msgid "He&xadecimal offset"
-msgstr ""
+msgstr "&Шестнадесетично отместване"
 
 msgid "Goto"
 msgstr "Отиди"
@@ -3864,6 +3920,9 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "&Cancel quit"
+msgstr ""
+
 msgid "View: "
 msgstr ""
 
@@ -3880,7 +3939,7 @@ msgid "Seeking to search result"
 msgstr ""
 
 msgid "Search done"
-msgstr ""
+msgstr "Търсенето приключи"
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "Да се продължи ли от началото?"
