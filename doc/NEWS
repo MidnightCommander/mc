@@ -1,3 +1,29 @@
+Version 4.8.1.4
+
+- Misc
+
+    * Tweak and cleanup of code in case of --disable-charset option usage (#2827)
+    * File extension support:
+        - .gem - rubygems (#2797)
+        - .cpio.xz - compressed cpio archives (#2798)
+
+- Fixes
+
+    * Build failure on FreeBSD 6 (#2808)
+    * src/filemanager/filegui.c does not compile on Solaris due to missing macros (#2825)
+    * Loss of data on copy to full partition (#2829)
+    * Misinterpretation of dirs as command line arguments (#2783, #2805)
+    * Number of panelized files was limited to 127 (#2813)
+    * URL with port was stored wrong in history (#2833)
+    * Can't find 00 (zeroes) in patterns in hex search (#2795)
+    * Hotkey conflicts in 'Search' dialog (#2843)
+    * Garbage directory listing in ftpfs (#2800)
+    * Incomplete sand256 skin (#2807)
+    * mcedit scripts are installed as data files (#1437)
+    * Tests failure on PowerPC,S390,S390x (#2804)
+    * Fail to compile if --without-vfs configure option specified (#2834)
+    * do_panel_cd: FTBFS with --enable-tests on [kfreebsd-i386,kfreebsd-amd64,ia64,armhf] (#2803)
+
 Version 4.8.1.3
 
 - Fixes
