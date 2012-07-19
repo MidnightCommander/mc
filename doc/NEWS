@@ -24,6 +24,7 @@ Version 4.8.1.4
     * Fail to compile if --without-vfs configure option specified (#2834)
     * do_panel_cd: FTBFS with --enable-tests on [kfreebsd-i386,kfreebsd-amd64,ia64,armhf] (#2803)
 
+
 Version 4.8.1.3
 
 - Fixes
@@ -32,6 +33,7 @@ Version 4.8.1.3
     * Directories are opened in wrong panels (#2783)
     * Error message when entering into compressed tar and cpio archives (#2785)
     * Fails to build from source with --enable-tests (#2786)
+
 
 Version 4.8.1.2
 
@@ -63,6 +65,7 @@ Version 4.8.1.2
     * Active VFS directories list contain incorrect current path (#2779)
     * Date not set properly in manpage (#2692)
     * Empty texinfo rule in mc.ext (#2774)
+    * Test failure if 'HOME' contains trailing slashes (#2768)
 
 
 Version 4.8.1.1
