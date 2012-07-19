@@ -50,6 +50,7 @@ Version 4.8.4
     * Fail to compile if --without-vfs configure option specified (#2834)
     * do_panel_cd: FTBFS with --enable-tests on [kfreebsd-i386,kfreebsd-amd64,ia64,armhf] (#2803)
 
+
 Version 4.8.3
 
 - Misc
@@ -86,6 +87,8 @@ Version 4.8.3
     * Active VFS directories list contain incorrect current path (#2779)
     * Date not set properly in manpage (#2692)
     * Empty texinfo rule in mc.ext (#2774)
+    * Test failure if 'HOME' contains trailing slashes (#2768)
+
 
 Version 4.8.2
 
@@ -116,7 +119,7 @@ Version 4.8.2
     * Added hotkeys for all radio/check-buttons in search/replace dialogs (#2704)
     * New file bindings:
         - .m4v, .ts - video (#2702)
-        - djv - DjVu? (#2645) 
+        - djv - DjVu? (#2645)
     * Simplify mc.menu - remove LZMA|LZ and change p7 to 7z (#2703)
     * Updated list of known browsers: gnome-moz-remote mozilla firefox konqueror opera (#2725)
     * Added MC_HOME environment variable to set up home directory of MC (as part of #2738)
@@ -136,6 +139,7 @@ Version 4.8.2
     * mcedit crashes when ~/.config is a file (#2738)
     * mcedit: reset selection after END/HOME/PgDn/PgUp (#2726)
     * 'make check' fails on arm and alpha (-z muldefs) (#2732)
+
 
 Version 4.8.1
 
@@ -160,7 +164,7 @@ Version 4.8.1
     * Updated skins:
         - sand256 (#2640)
         - xoria256 (#2641)
-    * Added ability to move MC config files to specified place instead of multiple places in $HOME. (#2636)
+    * Added ability to move MC config files to specified place instead of multiple places in $HOME (#2636)
     * Added configure option --with-homedir (default value: XDG) (#2636)
     * Respect traditional placement of user preferences on Mac OS X (#2658 as part of #2636)
     * A few useful additions to filehighlight.ini (#2646)
@@ -193,7 +197,7 @@ Version 4.8.0
     * Code cleanup (#2620)
     * License version updated to GPL3+ (#1551)
     * Added new translation:
-        - Interlingua 
+        - Interlingua
 
 - Fixes
     * Viewer: cursor position is not restored in hex mode (#2543)
