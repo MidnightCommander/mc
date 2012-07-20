@@ -97,21 +97,7 @@
 
 ### Changes ###
 #
-# Reorganization: 2000-05-01 Michal Svec <rebel@penguin.cz>
-
-
-### TODO ###
-#
-# Postscript	Open: ps2svga [gs -DEVICE=jpeg|zgv or something]
-# Images		asciiview
-#
-# All X Apps	[Nothing/Warning] if no DISPLAY
-# Not found	[Default/Warning]
-# Empty Output	[Default/Warning]
-# Edit:		CopyOut+EDIT+CopyIn
-# Security	Check gzip/bzip EDIT (mktemp)
-#
-# Maybe:	Open/XOpen/GOpen/KOpen/... for Console/X/GNOME/KDE/etc.
+# Reorganization: 2012-03-07 Slava Zanko <slavazanko@gmail.com>
 
 
 ### GIT Repo ###
