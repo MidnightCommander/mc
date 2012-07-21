@@ -880,15 +880,25 @@ regex_command (const vfs_path_t * filename_vpath, const char *action)
             }
             else if (strncmp (p, "shell/", 6) == 0)
             {
+                gboolean case_insense;
+                int (*cmp_func) (const char *s1, const char *s2, size_t n) = strncmp;
+
                 p += 6;
+                case_insense = (strncmp (p, "i/", 2) == 0);
+                if (case_insense)
+                {
+                    p += 2;
+                    cmp_func = strncasecmp;
+                }
+
                 if (*p == '.' && file_len >= (size_t) (q - p))
                 {
-                    if (strncmp (p, filename + file_len - (q - p), q - p) == 0)
+                    if (cmp_func (p, filename + file_len - (q - p), q - p) == 0)
                         found = TRUE;
                 }
                 else
                 {
-                    if ((size_t) (q - p) == file_len && strncmp (p, filename, q - p) == 0)
+                    if ((size_t) (q - p) == file_len && cmp_func (p, filename, q - p) == 0)
                         found = TRUE;
                 }
             }

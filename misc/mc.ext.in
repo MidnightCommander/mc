@@ -12,6 +12,9 @@
 #          i.e. matches all the files *desc . Example: .tar matches *.tar;
 #          if it doesn't start with a dot, it matches only a file of that name)
 #
+#    shell/i (desc is, when starting with a dot, any extension (no wildcars),
+#          The same as shell but with case insensitive.
+#
 #    regex (desc is an extended regular expression)
 #          Please note that we are using the GNU regex library and thus
 #          \| matches the literal | and | has special meaning (or) and
