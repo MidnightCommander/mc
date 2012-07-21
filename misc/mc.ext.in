@@ -119,7 +119,7 @@ regex/\.t([gp]?z|ar\.g?[zZ])$|\.ipk|\.gem$
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.gz
 
-regex/\.tar\.bz$
+shell/.tar.bz
 	# Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.bzip
 
@@ -138,7 +138,7 @@ regex/\.t(ar\.xz|xz)$
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.xz
 
 # .tar.F - used in QNX
-regex/\.tar\.F$
+shell/.tar.F
 	# Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.F
 
@@ -148,7 +148,7 @@ regex/\.qp[rk]$
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.qpr
 
 # tar
-regex/i/\.tar$
+shell/i/.tar
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar
 
@@ -163,12 +163,12 @@ regex/i/\.a(rj|[0-9][0-9])$
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arj
 
 # cab
-regex/i/\.cab$
+shell/i/.cab
 	Open=%cd %p/ucab://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cab
 
 # ha
-regex/i/\.ha$
+shell/i/.ha
 	Open=%cd %p/uha://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view ha
 
@@ -178,7 +178,7 @@ regex/i/\.r(ar|[0-9][0-9])$
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view rar
 
 # ALZip
-regex/i/\.alz$
+shell/i/.alz
 	Open=%cd %p/ualz://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view alz
 
@@ -195,12 +195,12 @@ shell/.cpio.gz
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.gz
 
-shell/.cpio
+shell/i/.cpio
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio
 
 # 7zip archives (they are not man pages)
-regex/i/\.7z$
+shell/i/.7z
 	Open=%cd %p/u7z://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view 7z
 
@@ -218,7 +218,7 @@ regex/(^|\.)ls-?lR(\.gz|Z|bz2)$
 	Open=%cd %p/lslR://
 
 # trpm
-regex/\.trpm$
+shell/.trpm
 	Open=%cd %p/trpm://
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view trpm
 
@@ -227,7 +227,7 @@ regex/\.(src\.rpm|spm)$
 	Open=%cd %p/rpm://
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view src.rpm
 
-regex/\.rpm$
+shell/.rpm
 	Open=%cd %p/rpm://
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view rpm
 
@@ -247,7 +247,7 @@ shell/.deba
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view deba
 
 # ISO9660
-regex/i/\.iso$
+shell/i/.iso
 	Open=%cd %p/iso9660://
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view iso9660
 
@@ -263,7 +263,7 @@ regex/\.s?a$
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view ar
 
 # gplib
-regex/i/\.lib$
+shell/i/.lib
 	Open=%cd %p/ulib://
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lib
 
@@ -320,7 +320,7 @@ shell/.info
 	Open=@EXTHELPERSDIR@/text.sh open info
 
 # Exception: .3gp are video files not manual pages
-regex/i/\.3gp$
+shell/i/.3gp
 	Include=video
 
 # Manual page
@@ -370,7 +370,7 @@ regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.xz$
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.xz %var{PAGER:more}
 
 # CHM
-regex/i/\.chm$
+shell/i/.chm
 	Open=@EXTHELPERSDIR@/text.sh open chm
 
 ### Images ###
@@ -429,10 +429,10 @@ regex/i/\.(wav|snd|voc|au|smp|aiff|snd)$
 regex/i/\.(mod|s3m|xm|it|mtm|669|stm|ult|far)$
 	Open=@EXTHELPERSDIR@/sound.sh open mod
 
-regex/i/\.waw22$
+shell/i/.waw22
 	Open=@EXTHELPERSDIR@/sound.sh open wav22
 
-regex/i/\.mp3$
+shell/i/.mp3
 	Open=@EXTHELPERSDIR@/sound.sh open mp3
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view mp3
 
@@ -446,7 +446,7 @@ regex/i/\.(spx|flac)$
 regex/i/\.(midi?|rmid?)$
 	Open=@EXTHELPERSDIR@/sound.sh open midi
 
-regex/i/\.wma$
+shell/i/.wma
 	Open=@EXTHELPERSDIR@/sound.sh open wma
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view wma
 
@@ -459,16 +459,16 @@ regex/i/\.(m3u|pls)$
 
 ### Video ###
 
-regex/i/\.avi$
+shell/i/.avi
 	Include=video
 
 regex/i/\.as[fx]$
 	Include=video
 
-regex/i/\.divx$
+shell/i/.divx
 	Include=video
 
-regex/i/\.mkv$
+shell/i/.mkv
 	Include=video
 
 regex/i/\.(mov|qt)$
@@ -478,29 +478,29 @@ regex/i/\.(mp4|m4v|mpe?g)$
 	Include=video
 
 # MPEG-2 TS container + H.264 codec
-regex/i/\.mts$
+shell/i/.mts
 	Include=video
 
-regex/i/\.ts$
+shell/i/.ts
 	Include=video
 
-regex/i/\.vob$
+shell/i/.vob
 	Include=video
 
-regex/i/\.wmv$
+shell/i/.wmv
 	Include=video
 
 regex/i/\.fl[icv]$
 	Include=video
 
-regex/i/\.ogm$
+shell/i/.ogm
 	Include=video
 
 regex/i/\.ra?m$
 	Open=@EXTHELPERSDIR@/video.sh open ram
 
 # WebM
-regex/i/\.webm$
+shell/i/.webm
     Include=video
 
 type/WebM
@@ -550,7 +550,7 @@ type/^Microsoft\ Word
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msdoc
 
 # RTF document
-regex/i/\.rtf$
+shell/i/.rtf
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc
 
 # Microsoft Excel Worksheet
@@ -570,12 +570,12 @@ type/^FrameMaker
 	Open=@EXTHELPERSDIR@/doc.sh open framemaker
 
 # DVI
-regex/i/\.dvi$
+shell/i/.dvi
 	Open=@EXTHELPERSDIR@/doc.sh open dvi
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view dvi
 
 # TeX
-regex/i/\.tex$
+shell/i/.tex
 	Include=editor
 
 # DjVu
@@ -598,7 +598,7 @@ regex/^Makefile.(PL|pl)$
 	Open=%var{PERL:perl} %f
 
 # dbf
-regex/i/\.dbf$
+shell/i/.dbf
 	Open=%view{ascii} @EXTHELPERSDIR@/misc.sh open dbf
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dbf
 
@@ -607,13 +607,13 @@ regex/\.(rexx?|cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
 
 # Disk images for Commodore computers (VIC20, C64, C128)
-regex/i/\.d64$
+shell/i/.d64
 	Open=%cd %p/uc1541://
 	View=%view{ascii} c1541 %f -list
 	Extract=c1541 %f -extract
 
 # Glade, a user interface designer for GTK+ and GNOME
-regex/i/\.glade$
+shell/i/.glade
 	Open=@EXTHELPERSDIR@/misc.sh open glade
 
 # Gettext Catalogs
@@ -621,24 +621,24 @@ shell/.mo
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view mo
 
 # lyx
-regex/i/\.lyx$
+shell/i/.lyx
 	Open=@EXTHELPERSDIR@/misc.sh open lyx
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lyx
 
 # torrent
-regex/i/\.torrent$
+shell/i/.torrent
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view torrent
 
 ### Plain compressed files ###
 
 # ace
-regex/i/\.ace$
+shell/i/.ace
 	Open=%cd %p/uace://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view ace
 	Extract=unace x %f
 
 # arc
-regex/i/\.arc$
+shell/i/.arc
 	Open=%cd %p/uarc://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arc
 	Extract=arc x %f '*'
@@ -650,7 +650,7 @@ type/^([Zz][Ii][Pp])\ archive
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
 # zoo
-regex/i/\.zoo$
+shell/i/.zoo
 	Open=%cd %p/uzoo://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zoo
 
