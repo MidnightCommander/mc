@@ -33,7 +33,6 @@ get_unpacker() {
 
 do_view_action() {
     filetype=$1
-    pager=$2
 
     unpacker=`get_unpacker ${filetype}`
 
@@ -60,11 +59,11 @@ do_view_action() {
     man.gz|man.bz|man.bz2|man.lzma|man.xz)
         case "${MC_EXT_CURRENTDIR}"/"${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
-            ${unpacker} %f
+            ${unpacker} "${MC_EXT_FILENAME}"
             ;;
         *)
-             ${unpacker} ${filename} | nroff @MAN_FLAGS@ @MANDOC@
-             ;;
+            ${unpacker} "${MC_EXT_FILENAME}" | nroff @MAN_FLAGS@ @MANDOC@
+            ;;
         esac
         ;;
     *)
@@ -122,7 +121,7 @@ do_open_action() {
 
 case "${action}" in
 view)
-    do_view_action "${filetype}" "${pager}"
+    do_view_action "${filetype}"
     ;;
 open)
     xdg-open "${MC_EXT_FILENAME}" 2>/dev/null || \

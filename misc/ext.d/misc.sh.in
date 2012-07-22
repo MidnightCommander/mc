@@ -8,7 +8,6 @@ filetype=$2
 
 do_view_action() {
     filetype=$1
-    filename=$2
 
     case "${filetype}" in
     iso9660)

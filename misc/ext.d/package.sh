@@ -9,7 +9,6 @@ filetype=$2
 
 do_view_action() {
     filetype=$1
-    filename=$2
 
     case "${filetype}" in
     trpm)
@@ -24,7 +23,7 @@ do_view_action() {
         $RPM -qivlp --scripts "${MC_EXT_FILENAME}"
         ;;
     deb)
-        dpkg-deb -I "${filename}" && echo && dpkg-deb -c "${MC_EXT_FILENAME}"
+        dpkg-deb -I "${MC_EXT_FILENAME}" && echo && dpkg-deb -c "${MC_EXT_FILENAME}"
         ;;
     debd)
         dpkg -s `echo "${MC_EXT_BASENAME}" | sed 's/\([0-9a-z.-]*\).*/\1/'`
