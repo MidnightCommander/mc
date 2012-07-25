@@ -591,10 +591,11 @@ get_file_encoding_local (const vfs_path_t * filename_vpath, char *buf, int bufle
  * Return 1 for match, 0 for no match, -1 errors.
  */
 
-static int
-regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_type)
+static gboolean
+regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_type,
+                  gboolean case_insense, GError ** error)
 {
-    int found = 0;
+    gboolean found = FALSE;
 
     /* Following variables are valid if *have_type is 1 */
     static char content_string[2048];
@@ -605,7 +606,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
     static int got_data = 0;
 
     if (!use_file_to_check_type)
-        return 0;
+        return FALSE;
 
     if (*have_type == 0)
     {
@@ -621,7 +622,16 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
 
         localfile_vpath = mc_getlocalcopy (filename_vpath);
         if (localfile_vpath == NULL)
-            return -1;
+        {
+            char *filename;
+
+            filename = vfs_path_to_str (filename_vpath);
+            g_propagate_error (error,
+                               g_error_new (MC_ERROR, -1,
+                                            _("Cannot fetch a local copy of %s"), filename));
+            g_free (filename);
+            return FALSE;
+        }
 
         realname = vfs_path_get_last_path_str (localfile_vpath);
 
@@ -684,12 +694,27 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
     }
 
     if (got_data == -1)
-        return -1;
-
-    if (content_string[0] != '\0'
-        && mc_search (ptr, content_string + content_shift, MC_SEARCH_T_REGEX))
     {
-        found = 1;
+        g_propagate_error (error, g_error_new (MC_ERROR, -1, _("Pipe failed")));
+        return FALSE;
+    }
+
+    if (content_string[0] != '\0')
+    {
+        mc_search_t *search;
+
+        search = mc_search_new (ptr, -1);
+        if (search != NULL)
+        {
+            search->search_type = MC_SEARCH_T_REGEX;
+            search->is_case_sensitive = !case_insense;
+            found = mc_search_run (search, content_string + content_shift, 0, -1, NULL);
+            mc_search_free (search);
+        }
+        else
+        {
+            g_propagate_error (error, g_error_new (MC_ERROR, -1, _("Regular expression error")));
+        }
     }
 
     return found;
@@ -842,6 +867,8 @@ regex_command (const vfs_path_t * filename_vpath, const char *action)
         {                       /* i.e. starts in the first column, should be
                                  * keyword/descNL
                                  */
+            gboolean case_insense;
+
             found = FALSE;
             q = strchr (p, '\n');
             if (q == NULL)
@@ -856,7 +883,6 @@ regex_command (const vfs_path_t * filename_vpath, const char *action)
             }
             else if (strncmp (p, "regex/", 6) == 0)
             {
-                gboolean case_insense;
                 mc_search_t *search;
 
                 p += 6;
@@ -880,7 +906,6 @@ regex_command (const vfs_path_t * filename_vpath, const char *action)
             }
             else if (strncmp (p, "shell/", 6) == 0)
             {
-                gboolean case_insense;
                 int (*cmp_func) (const char *s1, const char *s2, size_t n) = strncmp;
 
                 p += 6;
@@ -904,14 +929,20 @@ regex_command (const vfs_path_t * filename_vpath, const char *action)
             }
             else if (strncmp (p, "type/", 5) == 0)
             {
-                int res;
+                GError *error = NULL;
 
                 p += 5;
-                res = regex_check_type (filename_vpath, p, &have_type);
-                if (res == 1)
-                    found = TRUE;
-                else if (res == -1)
+
+                case_insense = (strncmp (p, "i/", 2) == 0);
+                if (case_insense)
+                    p += 2;
+
+                found = regex_check_type (filename_vpath, p, &have_type, case_insense, &error);
+                if (error != NULL)
+                {
+                    g_error_free (error);
                     error_flag = TRUE;  /* leave it if file cannot be opened */
+                }
             }
             else if (strncmp (p, "default/", 8) == 0)
                 found = TRUE;

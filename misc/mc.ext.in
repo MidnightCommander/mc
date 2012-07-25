@@ -26,6 +26,9 @@
 #    type  (file matches this if `file %f` matches regular expression desc
 #          (the filename: part from `file %f` is removed))
 #
+#    type/i (file matches this if `file %f` matches regular expression desc)
+#          The same as type but with case insensitive.
+#
 #    directory (matches any directory matching regular expression desc)
 #
 #    include (matches an include directive)
@@ -645,7 +648,7 @@ shell/i/.arc
 	Extract (with flags)=I=%{Enter any Arc flags:}; if test -n "$I"; then arc x $I %f; fi
 
 # zip
-type/^([Zz][Ii][Pp])\ archive
+type/i/^zip\ archive
 	Open=%cd %p/uzip://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
