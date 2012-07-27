@@ -9,6 +9,7 @@ SYNTAXFILES =			\
 	c.syntax		\
 	cabal.syntax		\
 	changelog.syntax	\
+	cmake.syntax		\
 	cs.syntax		\
 	css.syntax		\
 	cxx.syntax		\
