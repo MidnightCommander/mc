@@ -1,6 +1,7 @@
 #
 # NASM,WASM,TASM,MASM and GAS x86 syntax highlight
 # // Mike Gorchak
+# // Andres Farfan 2012
 #
 
 caseinsensitive
@@ -217,6 +218,93 @@ context default lightgray
     keyword whole R13 brightmagenta
     keyword whole R14 brightmagenta
     keyword whole R15 brightmagenta
+
+#AMD64 32-bit registers. 64-bit mode
+    keyword whole %r8d brightmagenta
+    keyword whole %r9d brightmagenta
+    keyword whole %r10d brightmagenta
+    keyword whole %r11d brightmagenta
+    keyword whole %r12d brightmagenta
+    keyword whole %r13d brightmagenta
+    keyword whole %r14d brightmagenta
+    keyword whole %r15d brightmagenta
+
+    keyword whole R8D brightmagenta
+    keyword whole R9D brightmagenta
+    keyword whole R10D brightmagenta
+    keyword whole R11D brightmagenta
+    keyword whole R12D brightmagenta
+    keyword whole R13D brightmagenta
+    keyword whole R14D brightmagenta
+    keyword whole R15D brightmagenta
+
+#AMD64 16-bit registers. 64-bit mode
+    keyword whole %r8w brightmagenta
+    keyword whole %r9w brightmagenta
+    keyword whole %r10w brightmagenta
+    keyword whole %r11w brightmagenta
+    keyword whole %r12w brightmagenta
+    keyword whole %r13w brightmagenta
+    keyword whole %r14w brightmagenta
+    keyword whole %r15w brightmagenta
+
+    keyword whole R8W brightmagenta
+    keyword whole R9W brightmagenta
+    keyword whole R10W brightmagenta
+    keyword whole R11W brightmagenta
+    keyword whole R12W brightmagenta
+    keyword whole R13W brightmagenta
+    keyword whole R14W brightmagenta
+    keyword whole R15W brightmagenta
+
+#AMD64 8-bit registers. 64-bit mode
+    keyword whole %sil brightmagenta
+    keyword whole %dil brightmagenta
+    keyword whole %bpl brightmagenta
+    keyword whole %spl brightmagenta
+    keyword whole %r8b brightmagenta
+    keyword whole %r9b brightmagenta
+    keyword whole %r10b brightmagenta
+    keyword whole %r11b brightmagenta
+    keyword whole %r12b brightmagenta
+    keyword whole %r13b brightmagenta
+    keyword whole %r14b brightmagenta
+    keyword whole %r15b brightmagenta
+
+    keyword whole SIL brightmagenta
+    keyword whole DIL brightmagenta
+    keyword whole BPL brightmagenta
+    keyword whole SPL brightmagenta
+    keyword whole R8B brightmagenta
+    keyword whole R9B brightmagenta
+    keyword whole R10B brightmagenta
+    keyword whole R11B brightmagenta
+    keyword whole R12B brightmagenta
+    keyword whole R13B brightmagenta
+    keyword whole R14B brightmagenta
+    keyword whole R15B brightmagenta
+
+#AMD64 System registers. 64-bit mode
+    keyword whole CR8 magenta
+
+#AMD64 SSE Registers. 64-bit mode
+    keyword whole %xmm8 brightcyan
+    keyword whole %xmm9 brightcyan
+    keyword whole %xmm10 brightcyan
+    keyword whole %xmm11 brightcyan
+    keyword whole %xmm12 brightcyan
+    keyword whole %xmm13 brightcyan
+    keyword whole %xmm14 brightcyan
+    keyword whole %xmm15 brightcyan
+
+    keyword whole xmm8 brightcyan
+    keyword whole xmm9 brightcyan
+    keyword whole xmm10 brightcyan
+    keyword whole xmm11 brightcyan
+    keyword whole xmm12 brightcyan
+    keyword whole xmm13 brightcyan
+    keyword whole xmm14 brightcyan
+    keyword whole xmm15 brightcyan
 
 # FPU registers set
     keyword whole st0 brightcyan
