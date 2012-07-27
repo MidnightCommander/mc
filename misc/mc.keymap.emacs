@@ -63,7 +63,7 @@ HotListAdd = h
 LinkSymbolicEdit = ctrl-s
 Link = l
 LinkSymbolic = s
-LinkSymbolicRelative
+LinkSymbolicRelative = v
 PanelInfo = i
 PanelQuickView = q
 ExternalPanelize = exclamation
