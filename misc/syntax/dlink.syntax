@@ -1,0 +1,216 @@
+# D-Link switch command set syntax
+# Copyleft, by KLArk (A), 2010 y.
+
+context default
+
+    keyword whole linestart create yellow
+    keyword whole linestart config yellow
+    keyword whole linestart delete yellow
+    keyword whole linestart enable yellow
+    keyword whole linestart disable yellow
+    keyword whole linestart save yellow
+    keyword whole linestart logout yellow
+    keyword whole linestart reset\sconfig brightred
+
+    keyword whole permit brightgreen
+    keyword whole enable brightgreen
+    keyword whole disable brightred
+    keyword whole delete brightred
+    keyword whole deny brightred
+    keyword whole drop brightred
+
+    keyword whole authen_enable brightcyan
+    keyword whole authen\sapplication brightcyan
+    keyword whole authen\sparameter brightcyan
+    keyword whole authen\senable_admin brightcyan
+    keyword whole authen_policy brightcyan
+    keyword whole authen_login brightcyan
+
+    keyword whole snmp\ssystem_name brightcyan
+    keyword whole snmp\ssystem_location brightcyan
+    keyword whole snmp\ssystem_contact brightcyan
+    keyword whole snmp\scommunity brightcyan
+    keyword whole snmp\suser brightcyan
+    keyword whole snmp\sgroup brightcyan
+    keyword whole snmp\sview brightcyan
+    keyword whole snmp\sengineID brightcyan
+    keyword whole snmp brightcyan
+
+    keyword whole vlan brightcyan
+    keyword whole gvrp brightcyan
+    keyword whole lldp brightcyan
+    keyword whole stp brightcyan
+    keyword whole double_vlan brightcyan
+    keyword whole clipaging brightcyan
+    keyword whole hol_prevention brightcyan
+    keyword whole ssl\sciphersuite brightcyan
+    keyword whole ssl\scachetimeout brightcyan
+    keyword whole jumbo_frame brightcyan
+    keyword whole pvid\sauto_assign brightcyan
+    keyword whole qinq brightcyan
+    keyword whole rspan brightcyan
+    keyword whole filter\sdhcp_server brightcyan
+    keyword whole bpdu_tunnel brightcyan
+    keyword whole greeting_message brightcyan
+    keyword whole ssh\salgorithm brightcyan
+    keyword whole ssh\sauthmode brightcyan
+    keyword whole ssh\suser brightcyan
+    keyword whole ipif_mac_mapping brightcyan
+    keyword whole mac_based_access_control brightcyan
+    keyword whole ipv6\snd brightcyan
+    keyword whole wac\smethod brightcyan
+    keyword whole wac brightcyan
+    keyword whole route\spreference brightcyan
+    keyword whole ecmp\salgorithm brightcyan
+    keyword whole ecmp\sospf brightcyan
+    keyword whole igmp brightcyan
+    keyword whole pim brightcyan
+    keyword whole dvmrp brightcyan
+    keyword whole rip brightcyan
+    keyword whole ospf brightcyan
+    keyword whole dnsr brightcyan
+    keyword whole dhcp_server brightcyan
+    keyword whole dhcp brightcyan
+    keyword whole option_82 brightcyan
+    keyword whole option_60 brightcyan
+    keyword whole option_61 brightcyan
+    keyword whole vrrp brightcyan
+    keyword whole autoconfig brightcyan
+    keyword whole lacp_port brightcyan
+    keyword whole serial_port brightcyan
+    keyword whole terminal_line brightcyan
+    keyword whole port_security brightcyan
+    keyword whole rmon brightcyan
+    keyword whole password\sencryption brightcyan
+    keyword whole traffic\strap brightcyan
+    keyword whole traffic\scontrol brightcyan
+    keyword whole traffic\scontrol_trap brightcyan
+    keyword whole loopdetect brightcyan
+    keyword whole sim brightcyan
+    keyword whole system_severity brightcyan
+    keyword whole scheduling brightcyan
+    keyword whole fdb brightcyan
+    keyword whole ssh brightcyan
+    keyword whole ssl brightcyan
+    keyword whole safeguard_engine brightcyan
+    keyword whole time_zone brightcyan
+    keyword whole dst brightcyan
+    keyword whole igmp_snooping brightcyan
+    keyword whole multicast_range brightcyan
+    keyword whole limited_multicast_addr brightcyan
+    keyword whole arp_aging brightcyan
+    keyword whole gratuitous_arp brightcyan
+    keyword whole command_prompt brightcyan
+    keyword whole iproute brightcyan
+    keyword whole time brightcyan
+    keyword whole sntp brightcyan
+    keyword whole multicast brightcyan
+    keyword whole arpentry brightcyan
+    keyword whole address_binding brightcyan
+    keyword whole dhcp_relay brightcyan
+    keyword whole dhcp_local_relay brightcyan
+    keyword whole traffic_segmentation brightcyan
+    keyword whole account brightcyan
+    keyword whole syslog brightcyan
+    keyword whole 802.1x brightcyan
+    keyword whole 802.1p brightcyan
+    keyword whole ipif brightcyan
+    keyword whole mirror brightcyan
+    keyword whole policy_route brightcyan
+    keyword whole asymmetric_vlan brightcyan
+    keyword whole bandwidth_control brightcyan
+    keyword whole scheduling_mechanism brightcyan
+    keyword whole log_save_timing brightcyan
+    keyword whole mac_notification brightcyan
+    keyword whole link_aggregation brightcyan
+    keyword whole cpu_interface_filtering brightcyan
+
+    keyword whole access_profile\spacket_content_mask brightcyan
+    keyword whole access_profile\sip brightcyan
+    keyword whole access_profile\sethernet brightcyan
+    keyword whole access_profile\sprofile_id\s\[1234567890\] magenta
+    keyword whole profile_id\s\[1234567890\] brightmagenta
+    keyword whole access_id\s\[1234567890\] blue
+    keyword whole access_id\sauto_assign blue
+    keyword whole \*\*\*\*\*\*\*\* brightred
+    keyword whole \[1234567890\].\[1234567890\].\[1234567890\].\[1234567890\]/\[1234567890\] red
+    keyword whole \[1234567890\].\[1234567890\].\[1234567890\].\[1234567890\] red
+    keyword whole \[1234567890abcdefABCDEDF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\] cyan
+    keyword whole \[1234567890abcdefABCDEDF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\] cyan
+    keyword whole mst_ports\s\[1234567890\-\] white
+    keyword whole ports\s\[1234567890\-\] white
+    keyword whole port\s\[1234567890\-\] white
+    keyword whole web\s\[1234567890\] green
+    keyword whole telnet\s\[1234567890\] green
+    keyword whole udp_port\s\[1234567890\] green
+    keyword whole tcp_port\s\[1234567890\] green
+    keyword whole src_port\s\[1234567890\] green
+    keyword whole dst_port\s\[1234567890\] green
+    keyword whole icmp\stype\s\[1234567890\] green
+    keyword whole ports\sall white
+    keyword whole port\sall white
+    keyword whole telnet brightcyan
+    keyword whole web brightcyan
+
+context exclusive config\sgvrp state
+    keyword whole gvrp brightcyan
+    keyword whole \[1234567890\-\] white
+
+context exclusive traffic_segmentation \n
+    keyword whole \[1234567890\-\] white
+    keyword whole all white
+
+context exclusive traffic\scontrol action
+    keyword whole enable brightgreen
+    keyword whole disable brightred
+    keyword whole \[1234567890\-\] white
+
+context exclusive bandwidth_control \n
+    keyword whole \[1234567890\-\] white
+
+context exclusive default_priority \n
+    keyword whole \[1234567890\-\] white
+
+context exclusive filtering_mode \n
+    keyword whole all white
+
+context exclusive config\srouter_ports_forbidden \n
+    keyword whole router_ports_forbidden brightcyan
+    keyword whole \[1234567890\-\] white
+
+context exclusive config\sssh\sserver \n
+    keyword whole ssh\sserver brightcyan
+    keyword whole port\s\[1234567890\-\] green
+
+context exclusive create\svlan \n
+    keyword whole vlan brightcyan
+    keyword whole \[1234567890\] brightblue
+
+context exclusive pvid \n
+    keyword whole \[1234567890\] brightblue
+
+context exclusive config\svlan\s\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_\-\]\sdelete \n
+    keyword whole vlan brightcyan
+    keyword whole \[1234567890\-\] white
+
+context exclusive CommunityView \n
+    keyword whole \[1234567890\.\] blue
+
+context exclusive restricted \n
+    keyword whole \[1234567890\.\] blue
+
+context exclusive lacp_port mode
+    keyword whole \[1234567890\-\] white
+
+context exclusive add\sforbidden \n
+    keyword whole \[1234567890\-\] white
+
+context exclusive add\suntagged \n
+    keyword whole \[1234567890\-\] white
+
+context exclusive add\stagged \n
+    keyword whole \[1234567890\-\] white
+
+context linestart # \n brown
+    spellcheck
+

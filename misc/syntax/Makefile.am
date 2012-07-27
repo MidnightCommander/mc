@@ -14,6 +14,7 @@ SYNTAXFILES =			\
 	css.syntax		\
 	cxx.syntax		\
 	d.syntax		\
+	dlink.syntax		\
 	debian-changelog.syntax	\
 	debian-control.syntax	\
 	debian-description.syntax	\

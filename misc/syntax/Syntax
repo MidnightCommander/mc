@@ -247,5 +247,8 @@ include sh.syntax
 file ..\*\\.(l|y|yxx|ypp)$ Lex/Flex/Yacc/Bison\ssource
 include yxx.syntax
 
+file ..\*\\.dlink\\.sw$ D-Link\sSwitch\sCommands
+include dlink.syntax
+
 file .\* unknown
 include unknown.syntax
