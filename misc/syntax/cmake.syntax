@@ -1,0 +1,57 @@
+# CMake syntax highlighting
+#
+# Author: Henrik Pauli <henrik.pauli@uhusystems.com>
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
+
+context default
+	keyword ( brightcyan
+	keyword ) brightcyan
+	
+	keyword ${\[^}\]+} brightgreen
+	
+	keyword whole IF magenta
+	keyword whole ELSE magenta
+	keyword whole ENDIF magenta
+	
+	keyword whole cmake_minimum_required yellow
+	keyword whole PROJECT yellow
+	keyword whole SET yellow
+	keyword whole INCLUDE yellow
+	keyword whole ADD_+ yellow
+	keyword whole SET_+ yellow
+	keyword whole TARGET_+ yellow
+	keyword whole FIND_+ yellow
+	keyword whole find_+ yellow
+	keyword whole file yellow
+	keyword whole file_+ yellow
+	keyword whole configure_+ yellow
+	keyword whole install yellow
+
+	keyword whole MESSAGE brightmagenta
+	
+	keyword whole STATIC white
+	keyword whole SHARED white
+
+	keyword whole MATCHES white
+
+	keyword whole ON brightcyan
+	keyword whole OFF brightcyan
+	keyword whole NOT brightcyan
+	keyword whole DEFINED brightcyan
+
+	keyword whole NAMES white
+	keyword whole FILES white
+	keyword whole DIRECTORY white
+	keyword whole TARGETS white
+	keyword whole LIBRARY white
+	keyword whole DESTINATION white
+
+	spellcheck
+
+context # \n brown
+
+context " " green
+	keyword ${\[^}\]+} brightgreen
+
+	spellcheck
