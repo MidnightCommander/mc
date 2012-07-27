@@ -7,17 +7,15 @@
 
 context default lightgray
 # Keys
-    keyword linestart \[\s\t\]\{"$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\}\[!"#$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\] cyan
-    keyword = yellow
-    keyword : yellow
+    keyword linestart \[\s\t\]\{"$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\}\[!"#$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\] yellow
+    keyword = brightcyan
+    keyword : brightcyan
 # Value continuation (first line)
     keyword \\\n yellow
-
     keyword ${*} brightgreen
     keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} magenta
     keyword whole \{-0123456789\}\[0123456789\] brightcyan
     keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] green
-
     keyword whole true white
     keyword whole false white
 
@@ -25,7 +23,6 @@ context default lightgray
 context exclusive \\\n \n lightgray
     keyword linestart \{\s\t\}\[\s\t\] lightgray black
     keyword \\\n yellow
-
     keyword ${*} brightgreen
     keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} magenta
     keyword whole \{-0123456789\}\[0123456789\] brightcyan
