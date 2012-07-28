@@ -66,7 +66,7 @@ Display configure options.
 Reset softkeys to their default from the termcap/terminfo
 database. Only useful on HP terminals when the function keys don't work.
 .TP
-.I \-K file
+.I \-K file, \-\-keymap=file
 Specify a name of keymap file in the command line.
 .TP
 .I \-\-nokeymap
@@ -325,7 +325,13 @@ the input lines in the query dialogs.
 .\"NODE "  Keys_redefine"
 .SH "  Redefine hotkey bindings"
 Hotkey bindings may be read from external file (keymap\-file).
-A keymap\-file is searched on the following algorithm (to the first one found):
+Initially, Mignight Commander creates key bindings using keymap defined
+in the source code. Then, two files
+.B %prefix%/share/mc/mc.keymap
+and
+.B %sysconfdir%/mc/mc.keymap
+are loaded always, sequentially reassigned key bindings defined earlier.
+User\-defined keymap\-file is searched on the following algorithm (to the first one found):
 .IP
 .br
 1) command line option
@@ -345,11 +351,6 @@ of config file.
 4) File
 .B ~/.config/mc/mc.keymap
 .br
-5) File
-.B %sysconfdir%/mc/mc.keymap
-.br
-6) File
-.B %prefix%/share/mc/mc.keymap
 .PP
 Command line option, environment variable and parameter in config file may
 contain the absolute path to the keymap\-file (with the extension \.keymap
