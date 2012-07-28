@@ -578,7 +578,7 @@ create_default_keymap (void)
 {
     mc_config_t *keymap;
 
-    keymap = mc_config_init (NULL);
+    keymap = mc_config_init (NULL, TRUE);
 
     create_default_keymap_section (keymap, KEYMAP_SECTION_MAIN, default_main_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_MAIN_EXT, default_main_x_keymap);

@@ -165,7 +165,7 @@ dlg_read_history (Dlg_head * h)
         return;
 
     profile = mc_config_get_full_path (MC_HISTORY_FILE);
-    event_data.cfg = mc_config_init (profile);
+    event_data.cfg = mc_config_init (profile, TRUE);
     event_data.receiver = NULL;
 
     /* create all histories in dialog */
@@ -1335,7 +1335,7 @@ dlg_save_history (Dlg_head * h)
     {
         ev_history_load_save_t event_data;
 
-        event_data.cfg = mc_config_init (profile);
+        event_data.cfg = mc_config_init (profile, FALSE);
         event_data.receiver = NULL;
 
         /* get all histories in dialog */

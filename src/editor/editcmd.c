@@ -1416,7 +1416,7 @@ edit_delete_macro (WEdit * edit, int hotkey)
     }
 
     macros_fname = mc_config_get_full_path (MC_MACRO_FILE);
-    macros_config = mc_config_init (macros_fname);
+    macros_config = mc_config_init (macros_fname, FALSE);
     g_free (macros_fname);
 
     if (macros_config == NULL)
@@ -1835,7 +1835,7 @@ edit_store_macro_cmd (WEdit * edit)
     edit_delete_macro (edit, hotkey);
 
     macros_fname = mc_config_get_full_path (MC_MACRO_FILE);
-    macros_config = mc_config_init (macros_fname);
+    macros_config = mc_config_init (macros_fname, FALSE);
     g_free (macros_fname);
 
     if (macros_config == NULL)
@@ -1939,7 +1939,7 @@ edit_load_macro_cmd (WEdit * edit)
     (void) edit;
 
     macros_fname = mc_config_get_full_path (MC_MACRO_FILE);
-    macros_config = mc_config_init (macros_fname);
+    macros_config = mc_config_init (macros_fname, TRUE);
     g_free (macros_fname);
 
     if (macros_config == NULL)

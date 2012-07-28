@@ -464,7 +464,7 @@ setup__move_panels_config_into_separate_file (const char *profile)
     if (!exist_file (profile))
         return;
 
-    tmp_cfg = mc_config_init (profile);
+    tmp_cfg = mc_config_init (profile, FALSE);
     if (!tmp_cfg)
         return;
 
@@ -485,7 +485,7 @@ setup__move_panels_config_into_separate_file (const char *profile)
     mc_config_save_to_file (tmp_cfg, panels_profile_name, NULL);
     mc_config_deinit (tmp_cfg);
 
-    tmp_cfg = mc_config_init (profile);
+    tmp_cfg = mc_config_init (profile, FALSE);
     if (!tmp_cfg)
     {
         g_strfreev (groups);
@@ -516,7 +516,7 @@ setup__move_panels_config_into_separate_file (const char *profile)
 */
 
 static void
-load_setup_init_config_from_file (mc_config_t ** config, const char *fname)
+load_setup_init_config_from_file (mc_config_t ** config, const char *fname, gboolean read_only)
 {
     /*
        TODO: IMHO, in future, this function shall be placed in mcconfig module.
@@ -524,9 +524,9 @@ load_setup_init_config_from_file (mc_config_t ** config, const char *fname)
     if (exist_file (fname))
     {
         if (*config != NULL)
-            mc_config_read_file (*config, fname, TRUE);
+            mc_config_read_file (*config, fname, read_only, TRUE);
         else
-            *config = mc_config_init (fname);
+            *config = mc_config_init (fname, read_only);
     }
 }
 
@@ -691,11 +691,11 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
 
     /* 1) /usr/share/mc (mc_global.share_data_dir) */
     share_keymap = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
-    load_setup_init_config_from_file (&keymap_config, share_keymap);
+    load_setup_init_config_from_file (&keymap_config, share_keymap, TRUE);
 
     /* 2) /etc/mc (mc_global.sysconfig_dir) */
     sysconfig_keymap = g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
-    load_setup_init_config_from_file (&keymap_config, sysconfig_keymap);
+    load_setup_init_config_from_file (&keymap_config, sysconfig_keymap, TRUE);
 
     /* then load and merge one of user-defined keymap */
 
@@ -703,7 +703,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     fname = load_setup_get_full_config_name (NULL, mc_args__keymap_file);
     if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
-        load_setup_init_config_from_file (&keymap_config, fname);
+        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
         goto done;
     }
     g_free (fname);
@@ -712,7 +712,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     fname = load_setup_get_full_config_name (NULL, g_getenv ("MC_KEYMAP"));
     if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
-        load_setup_init_config_from_file (&keymap_config, fname);
+        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
         goto done;
     }
     g_free (fname);
@@ -724,14 +724,14 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     g_free (fname2);
     if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
-        load_setup_init_config_from_file (&keymap_config, fname);
+        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
         goto done;
     }
     g_free (fname);
 
     /* 6) ${XDG_CONFIG_HOME}/mc/mc.keymap */
     fname = mc_config_get_full_path (GLOBAL_KEYMAP_FILE);
-    load_setup_init_config_from_file (&keymap_config, fname);
+    load_setup_init_config_from_file (&keymap_config, fname, TRUE);
 
   done:
     g_free (fname);
@@ -890,12 +890,12 @@ load_setup (void)
 
     panels_profile_name = mc_config_get_full_path (MC_PANELS_FILE);
 
-    mc_main_config = mc_config_init (profile);
+    mc_main_config = mc_config_init (profile, FALSE);
 
     if (!exist_file (panels_profile_name))
         setup__move_panels_config_into_separate_file (profile);
 
-    mc_panels_config = mc_config_init (panels_profile_name);
+    mc_panels_config = mc_config_init (panels_profile_name, FALSE);
 
     /* Load integer boolean options */
     for (i = 0; int_options[i].opt_name != NULL; i++)
@@ -1154,7 +1154,7 @@ load_key_defs (void)
      */
     mc_config_t *mc_global_config;
 
-    mc_global_config = mc_config_init (global_profile_name);
+    mc_global_config = mc_config_init (global_profile_name, FALSE);
     if (mc_global_config != NULL)
     {
         load_keys_from_section ("general", mc_global_config);

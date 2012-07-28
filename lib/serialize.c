@@ -281,13 +281,15 @@ mc_deserialize_config (const char *data, GError ** error)
 {
     char *current_group = NULL, *current_param = NULL, *current_value = NULL;
     size_t current_position = 0;
-    mc_config_t *ret_data = mc_config_init (NULL);
+    mc_config_t *ret_data;
     enum automat_status
     {
         WAIT_GROUP,
         WAIT_PARAM,
         WAIT_VALUE
     } current_status = WAIT_GROUP;
+
+    ret_data = mc_config_init (NULL, FALSE);
 
     while (data != NULL)
     {
