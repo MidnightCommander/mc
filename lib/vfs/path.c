@@ -1064,7 +1064,7 @@ vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element)
 char *
 vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
 {
-    mc_config_t *cpath = mc_config_init (NULL);
+    mc_config_t *cpath;
     ssize_t element_index;
     char *ret_value;
 
@@ -1074,6 +1074,9 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
         return NULL;
 
     }
+
+    cpath = mc_config_init (NULL, FALSE);
+
     for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
     {
         char *groupname;
@@ -1117,10 +1120,11 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
 vfs_path_t *
 vfs_path_deserialize (const char *data, GError ** error)
 {
-    mc_config_t *cpath = mc_deserialize_config (data, error);
+    mc_config_t *cpath;
     size_t element_index = 0;
     vfs_path_t *vpath;
 
+    cpath = mc_deserialize_config (data, error);
     if (cpath == NULL)
         return NULL;
 

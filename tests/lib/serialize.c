@@ -117,7 +117,7 @@ START_TEST (test_serialize_config)
     GError *error = NULL;
     char *actual;
 
-    test_data = mc_config_init (NULL);
+    test_data = mc_config_init (NULL, FALSE);
 
     mc_config_set_string_raw (test_data, "group1", "param1", "some value");
     mc_config_set_string (test_data, "group1", "param2", "some value ");

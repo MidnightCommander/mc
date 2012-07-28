@@ -69,7 +69,7 @@ START_TEST (create_ini_file)
     ini_filename = g_build_filename(WORKDIR, "test-create_ini_file.ini",NULL);
     unlink(ini_filename);
 
-    mc_config = mc_config_init (ini_filename);
+    mc_config = mc_config_init (ini_filename, FALSE);
     if (mc_config == NULL)
     {
         fail("unable to create mc_congif_t object!");
@@ -91,7 +91,7 @@ START_TEST (create_ini_file)
     }
 
     mc_config_deinit (mc_config);
-    mc_config = mc_config_init (ini_filename);
+    mc_config = mc_config_init (ini_filename, FALSE);
 
     actual_value = mc_config_get_string(mc_config, "group-not-exists", "param-not_exists", NULL);
     fail_unless(actual_value == NULL, "return value for nonexistent ini-parameters isn't NULL (default value)!");
@@ -139,7 +139,7 @@ START_TEST (emulate__learn_save)
     ini_filename = g_build_filename(WORKDIR, "test-emulate__learn_save.ini",NULL);
     unlink(ini_filename);
 
-    mc_config = mc_config_init (ini_filename);
+    mc_config = mc_config_init (ini_filename, FALSE);
     if (mc_config == NULL)
     {
         fail("unable to create mc_congif_t object!");
@@ -157,7 +157,7 @@ START_TEST (emulate__learn_save)
     }
 
     mc_config_deinit (mc_config);
-    mc_config = mc_config_init (ini_filename);
+    mc_config = mc_config_init (ini_filename, FALSE);
 
     actual_value = mc_config_get_string_raw( mc_config, "test-group1", "test-param1", "not-exists");
     fail_unless_strcmp("T\\;E\\X\\;T-FOR-\\T\\;E\\;S\\TI\\;N'G");

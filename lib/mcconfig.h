@@ -29,8 +29,8 @@ extern mc_config_t *mc_panels_config;
 
 /* mcconfig/common.c: */
 
-mc_config_t *mc_config_init (const gchar *);
-void mc_config_deinit (mc_config_t *);
+mc_config_t *mc_config_init (const gchar * ini_path, gboolean read_only);
+void mc_config_deinit (mc_config_t * mc_config);
 
 gboolean mc_config_del_key (mc_config_t *, const char *, const gchar *);
 gboolean mc_config_del_group (mc_config_t *, const char *);
@@ -38,7 +38,7 @@ gboolean mc_config_del_group (mc_config_t *, const char *);
 gboolean mc_config_has_param (const mc_config_t *, const char *, const gchar *);
 gboolean mc_config_has_group (mc_config_t *, const char *);
 
-gboolean mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path,
+gboolean mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean read_only,
                               gboolean remove_empty);
 
 gboolean mc_config_save_file (mc_config_t * config, GError ** error);

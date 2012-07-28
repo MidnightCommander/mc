@@ -51,7 +51,7 @@ mc_skin_ini_file_load_search_in_dir (mc_skin_t * mc_skin, const gchar * base_dir
     file_name = g_build_filename (base_dir, MC_SKINS_SUBDIR, mc_skin->name, NULL);
     if (exist_file (file_name))
     {
-        mc_skin->config = mc_config_init (file_name);
+        mc_skin->config = mc_config_init (file_name, TRUE);
         g_free (file_name);
         return (mc_skin->config != NULL);
     }
@@ -63,7 +63,7 @@ mc_skin_ini_file_load_search_in_dir (mc_skin_t * mc_skin, const gchar * base_dir
 
     if (exist_file (file_name))
     {
-        mc_skin->config = mc_config_init (file_name);
+        mc_skin->config = mc_config_init (file_name, TRUE);
         g_free (file_name);
         return (mc_skin->config != NULL);
     }
@@ -89,7 +89,7 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
         g_free (file_name);
         if (!g_path_is_absolute (mc_skin->name))
             return FALSE;
-        mc_skin->config = mc_config_init (mc_skin->name);
+        mc_skin->config = mc_config_init (mc_skin->name, TRUE);
         return (mc_skin->config != NULL);
     }
     g_free (file_name);
@@ -127,7 +127,7 @@ mc_skin_ini_file_parse (mc_skin_t * mc_skin)
 void
 mc_skin_set_hardcoded_skin (mc_skin_t * mc_skin)
 {
-    mc_skin->config = mc_config_init (NULL);
+    mc_skin->config = mc_config_init (NULL, TRUE);
 
     mc_config_set_string (mc_skin->config, "skin", "description", "hardcoded skin");
 
