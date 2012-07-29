@@ -1496,8 +1496,9 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 
 #endif
 
-#if (defined STAT_STATVFS64 \
-     || (!defined STAT_STATFS2_FS_DATA && !defined STAT_READ_FILSYS))
+#if (defined STAT_STATVFS64 || defined STAT_STATFS3_OSF1 \
+     || defined STAT_STATFS2_FRSIZE || defined STAT_STATFS2_BSIZE \
+     || defined STAT_STATFS2_FSIZE || defined STAT_STATFS4)
 
     fsp->fsu_blocks = PROPAGATE_ALL_ONES (fsd.f_blocks);
     fsp->fsu_bfree = PROPAGATE_ALL_ONES (fsd.f_bfree);
@@ -1508,6 +1509,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 
 #endif
     (void) disk;                /* avoid argument-unused warning */
+
     return 0;
 }
 #endif /* HAVE_INFOMOUNT */
