@@ -382,18 +382,25 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
        TODO: IMHO, in future, this function shall be placed in mcconfig module.
      */
     char *lc_basename, *ret;
+    char *file_name;
 
     if (config_file_name == NULL)
         return NULL;
 
-    if (g_path_is_absolute (config_file_name))
-    {
-        ret = g_strdup (config_file_name);
-        canonicalize_pathname (ret);
-        return ret;
-    }
+    /* check for .keymap suffix */
+    if (g_str_has_suffix (config_file_name, ".keymap"))
+        file_name = g_strdup (config_file_name);
+    else
+        file_name = g_strconcat (config_file_name, ".keymap", (char *) NULL);
 
-    lc_basename = g_path_get_basename (config_file_name);
+    canonicalize_pathname (file_name);
+
+    if (g_path_is_absolute (file_name))
+        return file_name;
+
+    lc_basename = g_path_get_basename (file_name);
+    g_free (file_name);
+
     if (lc_basename == NULL)
         return NULL;
 
