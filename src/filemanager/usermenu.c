@@ -748,8 +748,9 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     if (c == '%')
         return g_strdup ("%");
 
-    if (mc_global.mc_run_mode == MC_RUN_FULL)
+    switch (mc_global.mc_run_mode)
     {
+    case MC_RUN_FULL:
         if (g_ascii_islower ((gchar) c))
             panel = current_panel;
         else
@@ -759,11 +760,18 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
             panel = other_panel;
         }
         fname = g_strdup (panel->dir.list[panel->selected].fname);
-    }
+        break;
+
 #ifdef USE_INTERNAL_EDIT
-    else if (mc_global.mc_run_mode == MC_RUN_EDITOR)
+    case MC_RUN_EDITOR:
         fname = edit_get_file_name (edit_widget);
+        break;
 #endif
+
+    default:
+        /* other modes don't use formats */
+        return g_strdup ("");
+    }
 
     if (do_quote)
         quote_func = name_quote;
