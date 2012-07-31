@@ -371,33 +371,36 @@ static const struct
 /**
   Get name of config file.
 
- \param subdir
- if not NULL, then config also search into specified subdir.
-
- \param config_file_name
- If specified filename is relative, then will search in standart patches.
-
- \return
- Newly allocated path to config name or NULL if file not found.
-
- If config_file_name is a relative path, then search config in stantart paths.
+  @param subdir If not NULL, config is also searched in specified subdir.
+  @param config_file_name If relative, file if searched in standard paths.
+  @returns Newly allocated string with config name or NULL if file is not found.
 */
 static char *
 load_setup_get_full_config_name (const char *subdir, const char *config_file_name)
 {
     /*
-       TODO: IMHO, in future this function must be placed into mc_config module.
+       TODO: IMHO, in future, this function shall be placed in mcconfig module.
      */
     char *lc_basename, *ret;
+    char *file_name;
 
     if (config_file_name == NULL)
         return NULL;
 
-    if (g_path_is_absolute (config_file_name))
-        return g_strdup (config_file_name);
+    /* check for .keymap suffix */
+    if (g_str_has_suffix (config_file_name, ".keymap"))
+        file_name = g_strdup (config_file_name);
+    else
+        file_name = g_strconcat (config_file_name, ".keymap", (char *) NULL);
 
+    canonicalize_pathname (file_name);
 
-    lc_basename = g_path_get_basename (config_file_name);
+    if (g_path_is_absolute (file_name))
+        return file_name;
+
+    lc_basename = g_path_get_basename (file_name);
+    g_free (file_name);
+
     if (lc_basename == NULL)
         return NULL;
 
@@ -409,6 +412,7 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     if (exist_file (ret))
     {
         g_free (lc_basename);
+        canonicalize_pathname (ret);
         return ret;
     }
     g_free (ret);
@@ -421,6 +425,7 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     if (exist_file (ret))
     {
         g_free (lc_basename);
+        canonicalize_pathname (ret);
         return ret;
     }
     g_free (ret);
@@ -433,11 +438,13 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (lc_basename);
 
     if (exist_file (ret))
+    {
+        canonicalize_pathname (ret);
         return ret;
+    }
 
     g_free (ret);
     return NULL;
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -464,7 +471,7 @@ setup__move_panels_config_into_separate_file (const char *profile)
     if (!exist_file (profile))
         return;
 
-    tmp_cfg = mc_config_init (profile);
+    tmp_cfg = mc_config_init (profile, FALSE);
     if (!tmp_cfg)
         return;
 
@@ -485,7 +492,7 @@ setup__move_panels_config_into_separate_file (const char *profile)
     mc_config_save_to_file (tmp_cfg, panels_profile_name, NULL);
     mc_config_deinit (tmp_cfg);
 
-    tmp_cfg = mc_config_init (profile);
+    tmp_cfg = mc_config_init (profile, FALSE);
     if (!tmp_cfg)
     {
         g_strfreev (groups);
@@ -516,17 +523,17 @@ setup__move_panels_config_into_separate_file (const char *profile)
 */
 
 static void
-load_setup_init_config_from_file (mc_config_t ** config, const char *fname)
+load_setup_init_config_from_file (mc_config_t ** config, const char *fname, gboolean read_only)
 {
     /*
-       TODO: IMHO, in future this function must be placed into mc_config module.
+       TODO: IMHO, in future, this function shall be placed in mcconfig module.
      */
     if (exist_file (fname))
     {
         if (*config != NULL)
-            mc_config_read_file (*config, fname, TRUE);
+            mc_config_read_file (*config, fname, read_only, TRUE);
         else
-            *config = mc_config_init (fname);
+            *config = mc_config_init (fname, read_only);
     }
 }
 
@@ -676,9 +683,10 @@ static mc_config_t *
 load_setup_get_keymap_profile_config (gboolean load_from_file)
 {
     /*
-       TODO: IMHO, in future this function must be placed into mc_config module.
+       TODO: IMHO, in future, this function shall be placed in mcconfig module.
      */
     mc_config_t *keymap_config;
+    char *share_keymap, *sysconfig_keymap;
     char *fname, *fname2;
 
     /* 0) Create default keymap */
@@ -686,47 +694,56 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     if (!load_from_file)
         return keymap_config;
 
+    /* load and merge global keymaps */
+
     /* 1) /usr/share/mc (mc_global.share_data_dir) */
-    fname = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
-    load_setup_init_config_from_file (&keymap_config, fname);
-    g_free (fname);
+    share_keymap = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
+    load_setup_init_config_from_file (&keymap_config, share_keymap, TRUE);
 
     /* 2) /etc/mc (mc_global.sysconfig_dir) */
-    fname = g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
-    load_setup_init_config_from_file (&keymap_config, fname);
-    g_free (fname);
+    sysconfig_keymap = g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
+    load_setup_init_config_from_file (&keymap_config, sysconfig_keymap, TRUE);
 
-    /* 3) ${XDG_CONFIG_HOME}/mc */
-    fname = mc_config_get_full_path (GLOBAL_KEYMAP_FILE);
-    load_setup_init_config_from_file (&keymap_config, fname);
-    g_free (fname);
+    /* then load and merge one of user-defined keymap */
 
-    /* 4) main config; [Midnight Commander] -> keymap */
-    fname2 =
-        mc_config_get_string (mc_main_config, CONFIG_APP_SECTION, "keymap", GLOBAL_KEYMAP_FILE);
-    fname = load_setup_get_full_config_name (NULL, fname2);
-    if (fname != NULL)
-    {
-        load_setup_init_config_from_file (&keymap_config, fname);
-        g_free (fname);
-    }
-    g_free (fname2);
-
-    /* 5) getenv("MC_KEYMAP") */
-    fname = load_setup_get_full_config_name (NULL, g_getenv ("MC_KEYMAP"));
-    if (fname != NULL)
-    {
-        load_setup_init_config_from_file (&keymap_config, fname);
-        g_free (fname);
-    }
-
-    /* 6) --keymap=<keymap> */
+    /* 3) --keymap=<keymap> */
     fname = load_setup_get_full_config_name (NULL, mc_args__keymap_file);
-    if (fname != NULL)
+    if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
-        load_setup_init_config_from_file (&keymap_config, fname);
-        g_free (fname);
+        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
+        goto done;
     }
+    g_free (fname);
+
+    /* 4) getenv("MC_KEYMAP") */
+    fname = load_setup_get_full_config_name (NULL, g_getenv ("MC_KEYMAP"));
+    if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
+    {
+        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
+        goto done;
+    }
+    g_free (fname);
+
+    /* 5) main config; [Midnight Commander] -> keymap */
+    fname2 = mc_config_get_string (mc_main_config, CONFIG_APP_SECTION, "keymap", NULL);
+    if (fname2 != NULL && *fname2 != '\0')
+        fname = load_setup_get_full_config_name (NULL, fname2);
+    g_free (fname2);
+    if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
+    {
+        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
+        goto done;
+    }
+    g_free (fname);
+
+    /* 6) ${XDG_CONFIG_HOME}/mc/mc.keymap */
+    fname = mc_config_get_full_path (GLOBAL_KEYMAP_FILE);
+    load_setup_init_config_from_file (&keymap_config, fname, TRUE);
+
+  done:
+    g_free (fname);
+    g_free (sysconfig_keymap);
+    g_free (share_keymap);
 
     return keymap_config;
 }
@@ -880,12 +897,12 @@ load_setup (void)
 
     panels_profile_name = mc_config_get_full_path (MC_PANELS_FILE);
 
-    mc_main_config = mc_config_init (profile);
+    mc_main_config = mc_config_init (profile, FALSE);
 
     if (!exist_file (panels_profile_name))
         setup__move_panels_config_into_separate_file (profile);
 
-    mc_panels_config = mc_config_init (panels_profile_name);
+    mc_panels_config = mc_config_init (panels_profile_name, FALSE);
 
     /* Load integer boolean options */
     for (i = 0; int_options[i].opt_name != NULL; i++)
@@ -1144,7 +1161,7 @@ load_key_defs (void)
      */
     mc_config_t *mc_global_config;
 
-    mc_global_config = mc_config_init (global_profile_name);
+    mc_global_config = mc_config_init (global_profile_name, FALSE);
     if (mc_global_config != NULL)
     {
         load_keys_from_section ("general", mc_global_config);

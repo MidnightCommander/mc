@@ -102,7 +102,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 mc_config_t *
-mc_config_init (const gchar * ini_path)
+mc_config_init (const gchar * ini_path, gboolean read_only)
 {
     mc_config_t *mc_config;
     struct stat st;
@@ -128,8 +128,13 @@ mc_config_init (const gchar * ini_path)
         vpath = vfs_path_from_str (ini_path);
         if (mc_stat (vpath, &st) == 0 && st.st_size != 0)
         {
+            GKeyFileFlags flags = G_KEY_FILE_NONE;
+
+            if (!read_only)
+                flags |= G_KEY_FILE_KEEP_COMMENTS;
+
             /* file exists and not empty */
-            g_key_file_load_from_file (mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL);
+            g_key_file_load_from_file (mc_config->handle, ini_path, flags, NULL);
         }
         vfs_path_free (vpath);
     }
@@ -207,7 +212,8 @@ mc_config_del_group (mc_config_t * mc_config, const char *group)
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean remove_empty)
+mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean read_only,
+                     gboolean remove_empty)
 {
     mc_config_t *tmp_config;
     gchar **groups, **curr_grp;
@@ -217,7 +223,7 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
     if (mc_config == NULL)
         return FALSE;
 
-    tmp_config = mc_config_init (ini_path);
+    tmp_config = mc_config_init (ini_path, read_only);
     if (tmp_config == NULL)
         return FALSE;
 

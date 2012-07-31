@@ -184,9 +184,9 @@ mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename)
         return FALSE;
 
     if (fhl->config != NULL)
-        return mc_config_read_file (fhl->config, filename, FALSE);
+        return mc_config_read_file (fhl->config, filename, TRUE, FALSE);
 
-    fhl->config = mc_config_init (filename);
+    fhl->config = mc_config_init (filename, TRUE);
     return (fhl->config != NULL);
 }
 

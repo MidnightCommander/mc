@@ -565,7 +565,7 @@ process_special_dirs (GList ** special_dirs, char *file)
     mc_config_t *cfg;
     gsize buffers_len;
 
-    cfg = mc_config_init (file);
+    cfg = mc_config_init (file, TRUE);
     if (cfg == NULL)
         return;
 

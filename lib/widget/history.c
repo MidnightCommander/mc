@@ -151,7 +151,7 @@ history_get (const char *input_name)
         return NULL;
 
     profile = mc_config_get_full_path (MC_HISTORY_FILE);
-    cfg = mc_config_init (profile);
+    cfg = mc_config_init (profile, TRUE);
 
     hist = history_load (cfg, input_name);
 
