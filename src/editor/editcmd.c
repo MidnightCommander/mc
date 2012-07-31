@@ -3492,7 +3492,8 @@ edit_load_back_cmd (WEdit * edit)
         return TRUE;
     }
 
-    if (edit_stack_iterator < 0)
+    /* we are in the bottom of the stack, NO WAY! */
+    if (edit_stack_iterator == 0)
         return FALSE;
 
     edit_stack_iterator--;

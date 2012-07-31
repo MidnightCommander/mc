@@ -103,7 +103,7 @@ int show_right_margin = 0;
 const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = NULL;
 
-int edit_stack_iterator = 0;
+unsigned int edit_stack_iterator = 0;
 edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
 /* magic sequense for say than block is vertical */
 const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
