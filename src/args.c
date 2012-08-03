@@ -545,27 +545,24 @@ parse_mcedit_arguments (int argc, char **argv)
             }
             else
             {
-                arg = mcedit_arg_vpath_new (tmp_vpath, 1);
+                arg = mcedit_arg_vpath_new (tmp_vpath, 0);
                 vfs_path_free (fname_vpath);
             }
 
             g_free (fname);
         }
         else
-            arg = mcedit_arg_new (tmp, 1);
+            arg = mcedit_arg_new (tmp, 0);
 
         flist = g_list_prepend (flist, arg);
     }
 
     if (flist == NULL)
-        flist = g_list_prepend (flist, mcedit_arg_new (NULL, 1));
+        flist = g_list_prepend (flist, mcedit_arg_new (NULL, 0));
     else if (first_line_number != -1)
     {
         /* overwrite line number for first file */
         GList *l;
-
-        if (first_line_number == 0)
-            first_line_number = 1;
 
         l = g_list_last (flist);
         ((mcedit_arg_t *) l->data)->line_number = first_line_number;
@@ -819,7 +816,7 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
  * Create mcedit_arg_t object from file name and the line number.
  *
  * @param file_name   file name
- * @param line_number line number
+ * @param line_number line number. If value is 0, try to restore saved position.
  * @return mcedit_arg_t object
  */
 
@@ -834,7 +831,7 @@ mcedit_arg_new (const char *file_name, int line_number)
  * Create mcedit_arg_t object from vfs_path_t object and the line number.
  *
  * @param file_vpath  file path object
- * @param line_number line number
+ * @param line_number line number. If value is 0, try to restore saved position.
  * @return mcedit_arg_t object
  */
 
@@ -845,8 +842,6 @@ mcedit_arg_vpath_new (vfs_path_t * file_vpath, int line_number)
 
     arg = g_new (mcedit_arg_t, 1);
     arg->file_vpath = file_vpath;
-    if (line_number == 0)
-        line_number = 1;
     arg->line_number = line_number;
 
     return arg;
