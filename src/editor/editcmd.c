@@ -2919,7 +2919,7 @@ edit_ok_to_exit (WEdit * edit)
 gboolean
 edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
 {
-    int len, file;
+    int len = 1, file;
     vfs_path_t *vpath;
 
     vpath = vfs_path_from_str (filename);
