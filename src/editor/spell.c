@@ -71,9 +71,7 @@ static struct AspellStringEnumeration *(*mc_aspell_word_list_elements) (const st
                                                                         * ths);
 static const char *(*mc_aspell_config_retrieve) (struct AspellConfig * ths, const char *key);
 static void (*mc_delete_aspell_speller) (struct AspellSpeller * ths);
-/*
-   static void (*mc_delete_aspell_config) (struct AspellConfig * ths);
- */
+static void (*mc_delete_aspell_config) (struct AspellConfig * ths);
 static void (*mc_delete_aspell_can_have_error) (struct AspellCanHaveError * ths);
 static const char *(*mc_aspell_error_message) (const struct AspellCanHaveError * ths);
 static void (*mc_delete_aspell_string_enumeration) (struct AspellStringEnumeration * ths);
@@ -228,7 +226,7 @@ spell_available (void)
         (spell_module, "delete_aspell_speller", (void *) &mc_delete_aspell_speller))
         goto error_ret;
 
-    if (!g_module_symbol (spell_module, "delete_aspell_config", (void *) &mc_delete_aspell_speller))
+    if (!g_module_symbol (spell_module, "delete_aspell_config", (void *) &mc_delete_aspell_config))
         goto error_ret;
 
     if (!g_module_symbol (spell_module, "delete_aspell_string_enumeration",
@@ -311,7 +309,7 @@ aspell_init (void)
     {
         edit_error_dialog (_("Error"), mc_aspell_error_message (error));
         mc_delete_aspell_can_have_error (error);
-        g_free (global_speller);
+        aspell_clean ();
     }
 }
 
@@ -326,7 +324,12 @@ aspell_clean (void)
     if (global_speller == NULL)
         return;
 
-    mc_delete_aspell_speller (global_speller->speller);
+    if (global_speller->speller != NULL)
+        mc_delete_aspell_speller (global_speller->speller);
+
+    if (global_speller->config != NULL)
+        mc_delete_aspell_config (global_speller->config);
+
     g_free (global_speller);
     global_speller = NULL;
 
