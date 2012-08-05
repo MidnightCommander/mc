@@ -12,13 +12,22 @@
 #          i.e. matches all the files *desc . Example: .tar matches *.tar;
 #          if it doesn't start with a dot, it matches only a file of that name)
 #
+#    shell/i (desc is, when starting with a dot, any extension (no wildcars),
+#          The same as shell but with case insensitive.
+#
 #    regex (desc is an extended regular expression)
 #          Please note that we are using the GNU regex library and thus
 #          \| matches the literal | and | has special meaning (or) and
 #          () have special meaning and \( \) stand for literal ( ).
 #
+#    regex/i (desc is an extended regular expression)
+#          The same as regex but with case insensitive.
+#
 #    type  (file matches this if `file %f` matches regular expression desc
 #          (the filename: part from `file %f` is removed))
+#
+#    type/i (file matches this if `file %f` matches regular expression desc)
+#          The same as type but with case insensitive.
 #
 #    directory (matches any directory matching regular expression desc)
 #
@@ -113,7 +122,7 @@ regex/\.t([gp]?z|ar\.g?[zZ])$|\.ipk|\.gem$
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.gz
 
-regex/\.tar\.bz$
+shell/.tar.bz
 	# Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.bzip
 
@@ -132,17 +141,17 @@ regex/\.t(ar\.xz|xz)$
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.xz
 
 # .tar.F - used in QNX
-regex/\.tar\.F$
+shell/.tar.F
 	# Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.F
 
 # .qpr/.qpk - QNX Neutrino package installer files
-regex/\.(qp[rk])$
+regex/\.qp[rk]$
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.qpr
 
 # tar
-regex/\.(tar|TAR)$
+shell/i/.tar
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar
 
@@ -152,27 +161,27 @@ type/^LHa\ .*archive
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lha
 
 # arj
-regex/\.a(rj|[0-9][0-9])$
+regex/i/\.a(rj|[0-9][0-9])$
 	Open=%cd %p/uarj://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arj
 
 # cab
-regex/\.([cC][aA][bB])$
+shell/i/.cab
 	Open=%cd %p/ucab://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cab
 
 # ha
-regex/\.([Hh][Aa])$
+shell/i/.ha
 	Open=%cd %p/uha://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view ha
 
 # rar
-regex/\.[rR]([aA][rR]|[0-9][0-9])$
+regex/i/\.r(ar|[0-9][0-9])$
 	Open=%cd %p/urar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view rar
 
 # ALZip
-regex/\.(alz|ALZ)$
+shell/i/.alz
 	Open=%cd %p/ualz://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view alz
 
@@ -189,12 +198,12 @@ shell/.cpio.gz
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.gz
 
-shell/.cpio
+shell/i/.cpio
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio
 
 # 7zip archives (they are not man pages)
-regex/\.(7z|7Z)$
+shell/i/.7z
 	Open=%cd %p/u7z://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view 7z
 
@@ -212,7 +221,7 @@ regex/(^|\.)ls-?lR(\.gz|Z|bz2)$
 	Open=%cd %p/lslR://
 
 # trpm
-regex/\.trpm$
+shell/.trpm
 	Open=%cd %p/trpm://
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view trpm
 
@@ -221,7 +230,7 @@ regex/\.(src\.rpm|spm)$
 	Open=%cd %p/rpm://
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view src.rpm
 
-regex/\.rpm$
+shell/.rpm
 	Open=%cd %p/rpm://
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view rpm
 
@@ -241,7 +250,7 @@ shell/.deba
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view deba
 
 # ISO9660
-regex/\.([iI][sS][oO])$
+shell/i/.iso
 	Open=%cd %p/iso9660://
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view iso9660
 
@@ -257,7 +266,7 @@ regex/\.s?a$
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view ar
 
 # gplib
-regex/\.([Ll][Ii][Bb])$
+shell/i/.lib
 	Open=%cd %p/ulib://
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lib
 
@@ -314,7 +323,7 @@ shell/.info
 	Open=@EXTHELPERSDIR@/text.sh open info
 
 # Exception: .3gp are video files not manual pages
-regex/\.(3[gG][pP])$
+shell/i/.3gp
 	Include=video
 
 # Manual page
@@ -364,7 +373,7 @@ regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.xz$
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.xz %var{PAGER:more}
 
 # CHM
-regex/\.(chm|CHM)$
+shell/i/.chm
 	Open=@EXTHELPERSDIR@/text.sh open chm
 
 ### Images ###
@@ -417,84 +426,84 @@ include/image
 
 ### Sound files ###
 
-regex/\.([wW][aA][vV]|[sS][nN][dD]|[vV][oO][cC]|[aA][uU]|[sS][mM][pP]|[aA][iI][fF][fF]|[sS][nN][dD])$
+regex/i/\.(wav|snd|voc|au|smp|aiff|snd)$
 	Open=@EXTHELPERSDIR@/sound.sh open common
 
-regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM]|[iI][tT]|[mM][tT][mM]|669|[sS][tT][mM]|[uU][lL][tT]|[fF][aA][rR])$
+regex/i/\.(mod|s3m|xm|it|mtm|669|stm|ult|far)$
 	Open=@EXTHELPERSDIR@/sound.sh open mod
 
-regex/\.([wW][aA][wW]22)$
+shell/i/.waw22
 	Open=@EXTHELPERSDIR@/sound.sh open wav22
 
-regex/\.([mM][pP]3)$
+shell/i/.mp3
 	Open=@EXTHELPERSDIR@/sound.sh open mp3
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view mp3
 
-regex/\.([oO][gG][gG|aA|vV|xX])$
+regex/i/\.og[gavx]$
 	Open=@EXTHELPERSDIR@/sound.sh open ogg
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view ogg
 
-regex/\.([sS][pP][xX]|[fF][lL][aA][cC])$
+regex/i/\.(spx|flac)$
 	Open=@EXTHELPERSDIR@/sound.sh open common
 
-regex/\.([mM][iI][dD][iI]?|[rR][mM][iI][dD]?)$
+regex/i/\.(midi?|rmid?)$
 	Open=@EXTHELPERSDIR@/sound.sh open midi
 
-regex/\.([wW][mM][aA])$
+shell/i/.wma
 	Open=@EXTHELPERSDIR@/sound.sh open wma
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view wma
 
 
 ### Play lists ###
 
-regex/\.([mM]3[uU]|[pP][lL][sS])$
+regex/i/\.(m3u|pls)$
 	Open=@EXTHELPERSDIR@/sound.sh open playlist
 
 
 ### Video ###
 
-regex/\.([aA][vV][iI])$
+shell/i/.avi
 	Include=video
 
-regex/\.([aA][sS][fFxX])$
+regex/i/\.as[fx]$
 	Include=video
 
-regex/\.([dD][iI][vV][xX])$
+shell/i/.divx
 	Include=video
 
-regex/\.([mM][kK][vV])$
+shell/i/.mkv
 	Include=video
 
-regex/\.([mM][oO][vV]|[qQ][tT])$
+regex/i/\.(mov|qt)$
 	Include=video
 
-regex/\.([mM][pP]4|[mM]4[vV]|[mM][pP][eE]?[gG])$
+regex/i/\.(mp4|m4v|mpe?g)$
 	Include=video
 
 # MPEG-2 TS container + H.264 codec
-regex/\.([mM][tT][sS])$
+shell/i/.mts
 	Include=video
 
-regex/\.([tT][sS])$
+shell/i/.ts
 	Include=video
 
-regex/\.([vV][oO][bB])$
+shell/i/.vob
 	Include=video
 
-regex/\.([wW][mM][vV])$
+shell/i/.wmv
 	Include=video
 
-regex/\.([fF][lL][iIcCvV])$
+regex/i/\.fl[icv]$
 	Include=video
 
-regex/\.([oO][gG][mM])$
+shell/i/.ogm
 	Include=video
 
-regex/\.([rR][aA]?[mM])$
+regex/i/\.ra?m$
 	Open=@EXTHELPERSDIR@/video.sh open ram
 
 # WebM
-regex/\.([wW][eE][bB][mM])$
+shell/i/.webm
     Include=video
 
 type/WebM
@@ -518,7 +527,7 @@ type/^PDF
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view pdf
 
 # html
-regex/\.([hH][tT][mM][lL]?)$
+regex/i/\.html?$
 	Open=@EXTHELPERSDIR@/web.sh open html
 	View=%view{ascii} @EXTHELPERSDIR@/web.sh view html
 
@@ -527,7 +536,7 @@ shell/.sdw
 	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 
 # StarOffice 6 and OpenOffice.org formats
-regex/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|odf|sxm|odm|sxg)$
+regex/i/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|odf|sxm|odm|sxg)$
 	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view odt
 
@@ -536,7 +545,7 @@ shell/.abw
 	Open=@EXTHELPERSDIR@/doc.sh open abw
 
 # Microsoft Word Document
-regex/\.([Dd][oO][cCtT]|[Ww][rR][iI])$
+regex/i/\.(do[ct]|wri)$
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msdoc
 type/^Microsoft\ Word
@@ -544,11 +553,11 @@ type/^Microsoft\ Word
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msdoc
 
 # RTF document
-regex/\.([rR][tT][fF])$
+shell/i/.rtf
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc
 
 # Microsoft Excel Worksheet
-regex/\.([xX][lL][sSwW])$
+regex/i/\.xl[sw]$
 	Open=@EXTHELPERSDIR@/doc.sh open msxls
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
 type/^Microsoft\ Excel
@@ -564,16 +573,16 @@ type/^FrameMaker
 	Open=@EXTHELPERSDIR@/doc.sh open framemaker
 
 # DVI
-regex/\.([dD][vV][iI])$
+shell/i/.dvi
 	Open=@EXTHELPERSDIR@/doc.sh open dvi
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view dvi
 
 # TeX
-regex/\.([Tt][Ee][Xx])$
+shell/i/.tex
 	Include=editor
 
 # DjVu
-regex/\.(djvu?|DJVU?)$
+regex/i/\.djvu?$
 	Open=@EXTHELPERSDIR@/doc.sh open djvu
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view djvu
 
@@ -592,7 +601,7 @@ regex/^Makefile.(PL|pl)$
 	Open=%var{PERL:perl} %f
 
 # dbf
-regex/\.([dD][bB][fF])$
+shell/i/.dbf
 	Open=%view{ascii} @EXTHELPERSDIR@/misc.sh open dbf
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dbf
 
@@ -601,13 +610,13 @@ regex/\.(rexx?|cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
 
 # Disk images for Commodore computers (VIC20, C64, C128)
-regex/\.(d64|D64)$
+shell/i/.d64
 	Open=%cd %p/uc1541://
 	View=%view{ascii} c1541 %f -list
 	Extract=c1541 %f -extract
 
 # Glade, a user interface designer for GTK+ and GNOME
-regex/\.([Gg][Ll][Aa][Dd][Ee])$
+shell/i/.glade
 	Open=@EXTHELPERSDIR@/misc.sh open glade
 
 # Gettext Catalogs
@@ -615,36 +624,36 @@ shell/.mo
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view mo
 
 # lyx
-regex/\.(lyx|LYX)$
+shell/i/.lyx
 	Open=@EXTHELPERSDIR@/misc.sh open lyx
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lyx
 
 # torrent
-regex/\.([tT][oO][rR][rR][eE][nN][tT])$
+shell/i/.torrent
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view torrent
 
 ### Plain compressed files ###
 
 # ace
-regex/\.(ace|ACE)$
+shell/i/.ace
 	Open=%cd %p/uace://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view ace
 	Extract=unace x %f
 
 # arc
-regex/\.(arc|ARC)$
+shell/i/.arc
 	Open=%cd %p/uarc://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arc
 	Extract=arc x %f '*'
 	Extract (with flags)=I=%{Enter any Arc flags:}; if test -n "$I"; then arc x $I %f; fi
 
 # zip
-type/^([Zz][Ii][Pp])\ archive
+type/i/^zip\ archive
 	Open=%cd %p/uzip://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
 # zoo
-regex/\.([Zz][Oo][Oo])$
+shell/i/.zoo
 	Open=%cd %p/uzoo://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zoo
 
