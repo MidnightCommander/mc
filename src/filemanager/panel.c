@@ -3625,16 +3625,14 @@ panel_event (Gpm_Event * event, void *data)
         if (mouse_down && local.x >= w->cols - 4 && local.x <= w->cols - 2)
         {
             directory_history_list (panel);
-            /* both panels have been redrawn */
-            return MOU_NORMAL;
+            goto finish;
         }
 
         /* "." button show/hide hidden files */
         if (mouse_down && local.x == w->cols - 5)
         {
             midnight_dlg->callback (midnight_dlg, NULL, DLG_ACTION, CK_ShowHidden, NULL);
-            /* both panels have been updated */
-            return MOU_NORMAL;
+            goto finish;
         }
 
         /* no other events on 1st line */
@@ -3708,7 +3706,8 @@ panel_event (Gpm_Event * event, void *data)
         do_enter (panel);
 
   finish:
-    send_message (w, WIDGET_DRAW, 0);
+    if (panel->dirty)
+        send_message (w, WIDGET_DRAW, 0);
     return MOU_NORMAL;
 }
 
