@@ -691,7 +691,7 @@ get_prev_undo_action (WEdit * edit)
 static void
 edit_modification (WEdit * edit)
 {
-    edit->caches_valid = 0;
+    edit->caches_valid = FALSE;
 
     /* raise lock when file modified */
     if (!edit->modified && !edit->delete_file)
@@ -896,7 +896,7 @@ edit_find_line (WEdit * edit, int line)
         edit->line_offsets[1] = edit_bol (edit, edit->curs1);
         edit->line_numbers[2] = edit->total_lines;
         edit->line_offsets[2] = edit_bol (edit, edit->last_byte);
-        edit->caches_valid = 1;
+        edit->caches_valid = TRUE;
     }
     if (line >= edit->total_lines)
         return edit->line_offsets[2];
