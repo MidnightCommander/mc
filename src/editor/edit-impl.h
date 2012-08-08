@@ -232,7 +232,7 @@ gboolean edit_load_cmd (Dlg_head * h);
 gboolean edit_load_syntax_file (Dlg_head * h);
 gboolean edit_load_menu_file (Dlg_head * h);
 gboolean edit_close_cmd (WEdit * edit);
-void edit_mark_cmd (WEdit * edit, int unmark);
+void edit_mark_cmd (WEdit * edit, gboolean unmark);
 void edit_mark_current_word_cmd (WEdit * edit);
 void edit_mark_current_line_cmd (WEdit * edit);
 void edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2);

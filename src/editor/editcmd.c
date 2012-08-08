@@ -561,7 +561,7 @@ edit_block_delete (WEdit * edit)
     if (eval_marks (edit, &start_mark, &end_mark))
         return 0;
     if (edit->column_highlight && edit->mark2 < 0)
-        edit_mark_cmd (edit, 0);
+        edit_mark_cmd (edit, FALSE);
     if ((end_mark - start_mark) > option_max_undo / 2)
     {
         /* Warning message with a query to continue or cancel the operation */
@@ -596,7 +596,7 @@ edit_block_delete (WEdit * edit)
             int line_width;
 
             if (edit->mark2 < 0)
-                edit_mark_cmd (edit, 0);
+                edit_mark_cmd (edit, FALSE);
             edit_delete_column_of_text (edit);
             /* move cursor to the saved position */
             edit_move_to_line (edit, curs_line);
@@ -2440,7 +2440,7 @@ edit_block_move_cmd (WEdit * edit)
 
     line = edit->curs_line;
     if (edit->mark2 < 0)
-        edit_mark_cmd (edit, 0);
+        edit_mark_cmd (edit, FALSE);
     edit_push_markers (edit);
 
     if (edit->column_highlight)
@@ -3007,7 +3007,7 @@ edit_cut_to_X_buf_cmd (WEdit * edit)
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 
     edit_block_delete_cmd (edit);
-    edit_mark_cmd (edit, 1);
+    edit_mark_cmd (edit, TRUE);
     return 0;
 }
 

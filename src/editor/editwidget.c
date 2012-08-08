@@ -578,13 +578,13 @@ edit_event (Gpm_Event * event, void *data)
 
             if ((local.type & GPM_DOWN) != 0)
             {
-                edit_mark_cmd (edit, 1);        /* reset */
+                edit_mark_cmd (edit, TRUE);     /* reset */
                 edit->highlight = 0;
             }
 
             done = (local.type & GPM_DRAG) == 0;
             if (done)
-                edit_mark_cmd (edit, 0);
+                edit_mark_cmd (edit, FALSE);
 
           update:
             edit_find_bracket (edit);
