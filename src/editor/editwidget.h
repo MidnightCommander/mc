@@ -125,7 +125,7 @@ struct WEdit
     long bracket;               /* position of a matching bracket */
 
     /* cache speedup for line lookups */
-    int caches_valid;
+    gboolean caches_valid;
     int line_numbers[N_LINE_CACHES];
     long line_offsets[N_LINE_CACHES];
 
