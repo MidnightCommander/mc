@@ -946,10 +946,8 @@ edit_do_search (WEdit * edit)
         search_create_bookmark = FALSE;
         book_mark_flush (edit, -1);
 
-        while (TRUE)
+        while (mc_search_run (edit->search, (void *) edit, q, edit->last_byte, &len))
         {
-            if (!mc_search_run (edit->search, (void *) edit, q, edit->last_byte, &len))
-                break;
             if (found == 0)
                 edit->search_start = edit->search->normal_offset;
             found++;
