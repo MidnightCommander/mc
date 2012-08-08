@@ -30,7 +30,7 @@ typedef enum
 
 struct _book_mark
 {
-    int line;                   /* line number */
+    long line;                  /* line number */
     int c;                      /* color */
     struct _book_mark *next;
     struct _book_mark *prev;
@@ -70,7 +70,7 @@ struct WEdit
 
     char *last_search_string;   /* String that have been searched */
     long search_start;          /* First character to start searching from */
-    int found_len;              /* Length of found string or 0 if none was found */
+    unsigned long found_len;    /* Length of found string or 0 if none was found */
     long found_start;           /* the found word from a search - start position */
 
     /* display information */
@@ -100,13 +100,13 @@ struct WEdit
     long mark1;                 /* position of highlight start */
     long mark2;                 /* position of highlight end */
     long end_mark_curs;         /* position of cursor after end of highlighting */
-    int column1;                /* position of column highlight start */
-    int column2;                /* position of column highlight end */
+    long column1;               /* position of column highlight start */
+    long column2;               /* position of column highlight end */
     long bracket;               /* position of a matching bracket */
 
     /* cache speedup for line lookups */
     gboolean caches_valid;
-    int line_numbers[N_LINE_CACHES];
+    long line_numbers[N_LINE_CACHES];
     long line_offsets[N_LINE_CACHES];
 
     struct _book_mark *book_mark;

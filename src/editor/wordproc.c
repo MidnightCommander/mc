@@ -151,7 +151,7 @@ begin_paragraph (WEdit * edit, int force)
 static long
 end_paragraph (WEdit * edit, int force)
 {
-    int i;
+    long i;
     for (i = edit->curs_line + 1; i <= edit->total_lines; i++)
     {
         if (line_is_blank (edit, i))

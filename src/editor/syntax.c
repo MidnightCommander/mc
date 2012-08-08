@@ -1258,7 +1258,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 #define NENTRIES 30
     FILE *f, *g = NULL;
     char *args[1024], *l = NULL;
-    int line = 0;
+    long line = 0;
     int result = 0;
     int count = 0;
     char *lib_file;

@@ -360,7 +360,7 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-edit_file (const vfs_path_t * _file_vpath, int line)
+edit_file (const vfs_path_t * _file_vpath, long line)
 {
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
