@@ -846,23 +846,30 @@ is_in_indent (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** check whether line in editor is blank or not
+ *
+ * @param edit editor object
+ * @param offset position in file
+ *
+ * @return TRUE if line in blank, FALSE otherwise
+ */
 
-static int
+static gboolean
 is_blank (WEdit * edit, long offset)
 {
     long s, f;
     int c;
+
     s = edit_bol (edit, offset);
     f = edit_eol (edit, offset) - 1;
     while (s <= f)
     {
         c = edit_get_byte (edit, s++);
         if (!isspace (c))
-            return 0;
+            return FALSE;
     }
-    return 1;
+    return TRUE;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /** returns the offset of line i */
@@ -3230,8 +3237,15 @@ edit_move_to_prev_col (WEdit * edit, long p)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** check whether line in editor is blank or not
+ *
+ * @param edit editor object
+ * @param line number of line
+ *
+ * @return TRUE if line in blank, FALSE otherwise
+ */
 
-int
+gboolean
 line_is_blank (WEdit * edit, long line)
 {
     return is_blank (edit, edit_find_line (edit, line));
