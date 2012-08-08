@@ -77,7 +77,7 @@ double_marks (WEdit * edit, struct _book_mark *p)
 /** returns the first bookmark on or before this line */
 
 struct _book_mark *
-book_mark_find (WEdit * edit, int line)
+book_mark_find (WEdit * edit, long line)
 {
     struct _book_mark *p;
 
@@ -142,7 +142,7 @@ book_mark_find (WEdit * edit, int line)
 /** returns true if a bookmark exists at this line of color c */
 
 int
-book_mark_query_color (WEdit * edit, int line, int c)
+book_mark_query_color (WEdit * edit, long line, int c)
 {
     struct _book_mark *p;
 
@@ -163,7 +163,7 @@ book_mark_query_color (WEdit * edit, int line, int c)
 /** insert a bookmark at this line */
 
 void
-book_mark_insert (WEdit * edit, size_t line, int c)
+book_mark_insert (WEdit * edit, long line, int c)
 {
     struct _book_mark *p, *q;
 
@@ -180,10 +180,9 @@ book_mark_insert (WEdit * edit, size_t line, int c)
         return;
     }
 #endif
-    edit->force |= REDRAW_LINE;
     /* create list entry */
     q = g_malloc0 (sizeof (struct _book_mark));
-    q->line = (int) line;
+    q->line = line;
     q->c = c;
     q->next = p->next;
     /* insert into list */
@@ -191,6 +190,8 @@ book_mark_insert (WEdit * edit, size_t line, int c)
     if (p->next != NULL)
         p->next->prev = q;
     p->next = q;
+
+    edit->force |= REDRAW_LINE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -199,7 +200,7 @@ book_mark_insert (WEdit * edit, size_t line, int c)
  */
 
 int
-book_mark_clear (WEdit * edit, int line, int c)
+book_mark_clear (WEdit * edit, long line, int c)
 {
     struct _book_mark *p, *q;
     int r = 1;
@@ -269,7 +270,7 @@ book_mark_flush (WEdit * edit, int c)
 /** shift down bookmarks after this line */
 
 void
-book_mark_inc (WEdit * edit, int line)
+book_mark_inc (WEdit * edit, long line)
 {
     if (edit->book_mark)
     {
@@ -284,7 +285,7 @@ book_mark_inc (WEdit * edit, int line)
 /** shift up bookmarks after this line */
 
 void
-book_mark_dec (WEdit * edit, int line)
+book_mark_dec (WEdit * edit, long line)
 {
     if (edit->book_mark != NULL)
     {

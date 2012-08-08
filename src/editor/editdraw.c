@@ -1051,8 +1051,8 @@ edit_status (WEdit * edit, gboolean active)
 void
 edit_scroll_screen_over_cursor (WEdit * edit)
 {
-    int p;
-    int outby;
+    long p;
+    long outby;
     int b_extreme, t_extreme, l_extreme, r_extreme;
 
     if (edit->widget.lines <= 0 || edit->widget.cols <= 0)

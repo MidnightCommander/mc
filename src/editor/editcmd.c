@@ -2311,7 +2311,7 @@ edit_insert_over (WEdit * edit)
 
 int
 edit_insert_column_of_text_from_file (WEdit * edit, int file,
-                                      long *start_pos, long *end_pos, int *col1, int *col2)
+                                      long *start_pos, long *end_pos, long *col1, long *col2)
 {
     long cursor;
     int col;
@@ -2662,10 +2662,10 @@ edit_replace_cmd (WEdit * edit, int again)
 
             if (edit->replace_mode == 0)
             {
-                int l;
+                long l;
                 int prompt;
 
-                l = edit->curs_row - edit->widget.lines / 3;
+                l = (long) (edit->curs_row - edit->widget.lines / 3);
                 if (l > 0)
                     edit_scroll_downward (edit, l);
                 if (l < 0)

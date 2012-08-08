@@ -481,7 +481,7 @@ parse_mcedit_arguments (int argc, char **argv)
 {
     GList *flist = NULL;
     int i;
-    int first_line_number = -1;
+    long first_line_number = -1;
 
     for (i = 0; i < argc; i++)
     {
@@ -504,7 +504,7 @@ parse_mcedit_arguments (int argc, char **argv)
             if (*error == '\0')
             {
                 /* this is line number */
-                first_line_number = (int) lineno;
+                first_line_number = lineno;
                 continue;
             }
             /* this is file name */
@@ -821,7 +821,7 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
  */
 
 mcedit_arg_t *
-mcedit_arg_new (const char *file_name, int line_number)
+mcedit_arg_new (const char *file_name, long line_number)
 {
     return mcedit_arg_vpath_new (vfs_path_from_str (file_name), line_number);
 }
@@ -836,7 +836,7 @@ mcedit_arg_new (const char *file_name, int line_number)
  */
 
 mcedit_arg_t *
-mcedit_arg_vpath_new (vfs_path_t * file_vpath, int line_number)
+mcedit_arg_vpath_new (vfs_path_t * file_vpath, long line_number)
 {
     mcedit_arg_t *arg;
 

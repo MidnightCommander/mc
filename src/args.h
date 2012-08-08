@@ -13,7 +13,7 @@
 typedef struct
 {
     vfs_path_t *file_vpath;
-    int line_number;
+    long line_number;
 } mcedit_arg_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -33,8 +33,8 @@ gboolean mc_args_parse (int *argc, char ***argv, const char *translation_domain,
 gboolean mc_args_show_info (void);
 gboolean mc_setup_by_args (int argc, char **argv, GError ** error);
 
-mcedit_arg_t *mcedit_arg_new (const char *file_name, int line_number);
-mcedit_arg_t *mcedit_arg_vpath_new (vfs_path_t * file_vpath, int line_number);
+mcedit_arg_t *mcedit_arg_new (const char *file_name, long line_number);
+mcedit_arg_t *mcedit_arg_vpath_new (vfs_path_t * file_vpath, long line_number);
 void mcedit_arg_free (mcedit_arg_t * arg);
 
 /*** inline functions ****************************************************************************/

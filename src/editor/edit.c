@@ -772,10 +772,11 @@ is_blank (WEdit * edit, long offset)
 /** returns the offset of line i */
 
 static long
-edit_find_line (WEdit * edit, int line)
+edit_find_line (WEdit * edit, long line)
 {
-    int i, j = 0;
-    int m = 2000000000;
+    long i, j = 0;
+    long m = 2000000000;        /* what is the magic number? */
+
     if (!edit->caches_valid)
     {
         for (i = 0; i < N_LINE_CACHES; i++)
@@ -794,7 +795,8 @@ edit_find_line (WEdit * edit, int line)
     /* find the closest known point */
     for (i = 0; i < N_LINE_CACHES; i++)
     {
-        int n;
+        long n;
+
         n = abs (edit->line_numbers[i] - line);
         if (n < m)
         {
@@ -823,9 +825,10 @@ edit_find_line (WEdit * edit, int line)
    before a non-blank line is reached */
 
 static void
-edit_move_up_paragraph (WEdit * edit, int do_scroll)
+edit_move_up_paragraph (WEdit * edit, gboolean do_scroll)
 {
-    int i = 0;
+    long i = 0;
+
     if (edit->curs_line > 1)
     {
         if (line_is_blank (edit, edit->curs_line))
@@ -861,9 +864,10 @@ edit_move_up_paragraph (WEdit * edit, int do_scroll)
    before a non-blank line is reached */
 
 static void
-edit_move_down_paragraph (WEdit * edit, int do_scroll)
+edit_move_down_paragraph (WEdit * edit, gboolean do_scroll)
 {
-    int i;
+    long i;
+
     if (edit->curs_line >= edit->total_lines - 1)
     {
         i = edit->total_lines;
@@ -1153,10 +1157,10 @@ edit_left_char_move_cmd (WEdit * edit)
 */
 
 static void
-edit_move_updown (WEdit * edit, unsigned long i, int do_scroll, gboolean direction)
+edit_move_updown (WEdit * edit, long i, gboolean do_scroll, gboolean direction)
 {
-    unsigned long p;
-    unsigned long l = (direction) ? edit->curs_line : edit->total_lines - edit->curs_line;
+    long p;
+    long l = direction ? edit->curs_line : edit->total_lines - edit->curs_line;
 
     if (i > l)
         i = l;
@@ -1175,7 +1179,7 @@ edit_move_updown (WEdit * edit, unsigned long i, int do_scroll, gboolean directi
     }
     p = edit_bol (edit, edit->curs1);
 
-    p = (direction) ? edit_move_backward (edit, p, i) : edit_move_forward (edit, p, i, 0);
+    p = direction ? edit_move_backward (edit, p, i) : edit_move_forward (edit, p, i, 0);
 
     edit_cursor_move (edit, p - edit->curs1);
 
@@ -1506,7 +1510,7 @@ edit_double_newline (WEdit * edit)
 static void
 insert_spaces_tab (WEdit * edit, gboolean half)
 {
-    int i;
+    long i;
 
     edit_update_curs_col (edit);
     i = option_tab_spacing * space_width;
@@ -2118,7 +2122,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
         if (vertical_insertion)
         {
             long mark1, mark2;
-            int c1, c2;
+            long c1, c2;
 
             blocklen = edit_insert_column_of_text_from_file (edit, file, &mark1, &mark2, &c1, &c2);
             edit_set_markers (edit, edit->curs1, mark2, c1, c2);
@@ -3016,10 +3020,10 @@ edit_move_backward (WEdit * edit, long current, long lines)
 /* If upto is zero returns index of cols across from current. */
 
 long
-edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
+edit_move_forward3 (WEdit * edit, long current, long cols, long upto)
 {
     long p, q;
-    int col;
+    long col;
 
     if (upto)
     {
@@ -3086,7 +3090,7 @@ edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 /* --------------------------------------------------------------------------------------------- */
 /** returns the current column position of the cursor */
 
-int
+long
 edit_get_col (WEdit * edit)
 {
     return edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0, edit->curs1);
@@ -3112,7 +3116,7 @@ edit_update_curs_col (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+long
 edit_get_curs_col (const WEdit * edit)
 {
     return edit->curs_col;
@@ -3122,12 +3126,13 @@ edit_get_curs_col (const WEdit * edit)
 /** moves the display start position up by i lines */
 
 void
-edit_scroll_upward (WEdit * edit, unsigned long i)
+edit_scroll_upward (WEdit * edit, long i)
 {
-    unsigned long lines_above = edit->start_line;
+    long lines_above = edit->start_line;
+
     if (i > lines_above)
         i = lines_above;
-    if (i)
+    if (i != 0)
     {
         edit->start_line -= i;
         edit->start_display = edit_move_backward (edit, edit->start_display, i);
@@ -3139,12 +3144,12 @@ edit_scroll_upward (WEdit * edit, unsigned long i)
 
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 if could scroll, 0 otherwise */
 
 void
-edit_scroll_downward (WEdit * edit, int i)
+edit_scroll_downward (WEdit * edit, long i)
 {
-    int lines_below;
+    long lines_below;
+
     lines_below = edit->total_lines - edit->start_line - (edit->widget.lines - 1);
     if (lines_below > 0)
     {
@@ -3161,7 +3166,7 @@ edit_scroll_downward (WEdit * edit, int i)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_scroll_right (WEdit * edit, int i)
+edit_scroll_right (WEdit * edit, long i)
 {
     edit->force |= REDRAW_PAGE;
     edit->force &= (0xfff - REDRAW_CHAR_ONLY);
@@ -3171,7 +3176,7 @@ edit_scroll_right (WEdit * edit, int i)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_scroll_left (WEdit * edit, int i)
+edit_scroll_left (WEdit * edit, long i)
 {
     if (edit->start_col)
     {
@@ -3190,8 +3195,8 @@ edit_scroll_left (WEdit * edit, int i)
 void
 edit_move_to_prev_col (WEdit * edit, long p)
 {
-    int prev = edit->prev_col;
-    int over = edit->over_col;
+    long prev = edit->prev_col;
+    long over = edit->over_col;
     edit_cursor_move (edit, edit_move_forward3 (edit, p, prev + edit->over_col, 0) - edit->curs1);
 
     if (option_cursor_beyond_eol)
@@ -3219,6 +3224,7 @@ edit_move_to_prev_col (WEdit * edit, long p)
         {
             edit_update_curs_col (edit);
             if (space_width)
+            {
                 if (edit->curs_col % (HALF_TAB_SIZE * space_width))
                 {
                     int q = edit->curs_col;
@@ -3230,6 +3236,7 @@ edit_move_to_prev_col (WEdit * edit, long p)
                     if (!left_of_four_spaces (edit))
                         edit_cursor_move (edit, edit_move_forward3 (edit, p, q, 0) - edit->curs1);
                 }
+            }
         }
     }
 }
@@ -3288,7 +3295,7 @@ edit_push_markers (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2)
+edit_set_markers (WEdit * edit, long m1, long m2, long c1, long c2)
 {
     edit->mark1 = m1;
     edit->mark2 = m2;
@@ -3411,7 +3418,7 @@ edit_delete_line (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+long
 edit_indent_width (WEdit * edit, long p)
 {
     long q = p;
@@ -4313,7 +4320,7 @@ edit_stack_free (void)
 /** move i lines */
 
 void
-edit_move_up (WEdit * edit, unsigned long i, int do_scroll)
+edit_move_up (WEdit * edit, long i, gboolean do_scroll)
 {
     edit_move_updown (edit, i, do_scroll, TRUE);
 }
@@ -4322,7 +4329,7 @@ edit_move_up (WEdit * edit, unsigned long i, int do_scroll)
 /** move i lines */
 
 void
-edit_move_down (WEdit * edit, unsigned long i, int do_scroll)
+edit_move_down (WEdit * edit, long i, gboolean do_scroll)
 {
     edit_move_updown (edit, i, do_scroll, FALSE);
 }
