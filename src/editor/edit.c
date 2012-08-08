@@ -834,15 +834,23 @@ edit_backspace (WEdit * edit, const int byte_delete)
 /* --------------------------------------------------------------------------------------------- */
 /* high level cursor movement commands */
 /* --------------------------------------------------------------------------------------------- */
+/** check whether cursor is in indent part of line
+ *
+ * @param edit editor object
+ *
+ * @return TRUE if cursor is in indent, FALSE otherwise
+ */
 
-static int
+static gboolean
 is_in_indent (WEdit * edit)
 {
-    long p = edit_bol (edit, edit->curs1);
-    while (p < edit->curs1)
-        if (!strchr (" \t", edit_get_byte (edit, p++)))
-            return 0;
-    return 1;
+    long p;
+
+    for (p = edit_bol (edit, edit->curs1); p < edit->curs1; p++)
+        if (strchr (" \t", edit_get_byte (edit, p)) == NULL)
+            return FALSE;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
