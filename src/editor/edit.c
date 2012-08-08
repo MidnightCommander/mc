@@ -2674,8 +2674,7 @@ edit_insert (WEdit * edit, int c)
     /* now we must update some info on the file and check if a redraw is required */
     if (c == '\n')
     {
-        if (edit->book_mark)
-            book_mark_inc (edit, edit->curs_line);
+        book_mark_inc (edit, edit->curs_line);
         edit->curs_line++;
         edit->total_lines++;
         edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
@@ -2725,8 +2724,7 @@ edit_insert_ahead (WEdit * edit, int c)
     edit_modification (edit);
     if (c == '\n')
     {
-        if (edit->book_mark)
-            book_mark_inc (edit, edit->curs_line);
+        book_mark_inc (edit, edit->curs_line);
         edit->total_lines++;
         edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -2806,8 +2804,7 @@ edit_delete (WEdit * edit, const int byte_delete)
     edit_modification (edit);
     if (p == '\n')
     {
-        if (edit->book_mark)
-            book_mark_dec (edit, edit->curs_line);
+        book_mark_dec (edit, edit->curs_line);
         edit->total_lines--;
         edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -2873,8 +2870,7 @@ edit_backspace (WEdit * edit, const int byte_delete)
     edit_modification (edit);
     if (p == '\n')
     {
-        if (edit->book_mark)
-            book_mark_dec (edit, edit->curs_line);
+        book_mark_dec (edit, edit->curs_line);
         edit->curs_line--;
         edit->total_lines--;
         edit->force |= REDRAW_AFTER_CURSOR;
