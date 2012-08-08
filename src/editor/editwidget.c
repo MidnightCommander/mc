@@ -193,12 +193,12 @@ edit_event (Gpm_Event * event, void *data)
 
     if (event->type & GPM_DOWN)
     {
-        edit_mark_cmd (edit, 1);        /* reset */
+        edit_mark_cmd (edit, TRUE);     /* reset */
         edit->highlight = 0;
     }
 
     if (!(event->type & GPM_DRAG))
-        edit_mark_cmd (edit, 0);
+        edit_mark_cmd (edit, FALSE);
 
   update:
     edit_find_bracket (edit);

@@ -231,7 +231,7 @@ gboolean edit_ok_to_exit (WEdit * edit);
 gboolean edit_renew (WEdit * edit);
 gboolean edit_new_cmd (WEdit * edit);
 gboolean edit_load_cmd (WEdit * edit, edit_current_file_t what);
-void edit_mark_cmd (WEdit * edit, int unmark);
+void edit_mark_cmd (WEdit * edit, gboolean unmark);
 void edit_mark_current_word_cmd (WEdit * edit);
 void edit_mark_current_line_cmd (WEdit * edit);
 void edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2);

@@ -3311,7 +3311,7 @@ edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2)
 /** highlight marker toggle */
 
 void
-edit_mark_cmd (WEdit * edit, int unmark)
+edit_mark_cmd (WEdit * edit, gboolean unmark)
 {
     edit_push_markers (edit);
     if (unmark)
@@ -3576,8 +3576,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->column_highlight = 0;
         if (edit->highlight == 0 || (edit->mark2 != -1 && edit->mark1 != edit->mark2))
         {
-            edit_mark_cmd (edit, 1);    /* clear */
-            edit_mark_cmd (edit, 0);    /* marking on */
+            edit_mark_cmd (edit, TRUE);         /* clear */
+            edit_mark_cmd (edit, FALSE);        /* marking on */
         }
         edit->highlight = 1;
         break;
@@ -3585,7 +3585,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         /* any other command */
     default:
         if (edit->highlight)
-            edit_mark_cmd (edit, 0);    /* clear */
+            edit_mark_cmd (edit, FALSE);        /* clear */
         edit->highlight = 0;
     }
 
@@ -3695,7 +3695,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
                 if (edit->column_highlight)
                     edit_push_undo_action (edit, COLUMN_ON);
                 edit->column_highlight = 0;
-                edit_mark_cmd (edit, 1);
+                edit_mark_cmd (edit, TRUE);
             }
         }
     }
@@ -3943,7 +3943,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         if (edit->mark1 != edit->mark2 && !option_persistent_selections)
         {
             if (edit->mark2 < 0)
-                edit_mark_cmd (edit, 0);
+                edit_mark_cmd (edit, FALSE);
             edit_move_block_to_right (edit);
         }
         else
@@ -3974,13 +3974,13 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
                 edit_push_undo_action (edit, COLUMN_ON);
             edit->column_highlight = 0;
         }
-        edit_mark_cmd (edit, 0);
+        edit_mark_cmd (edit, FALSE);
         break;
     case CK_MarkColumn:
         if (!edit->column_highlight)
             edit_push_undo_action (edit, COLUMN_OFF);
         edit->column_highlight = 1;
-        edit_mark_cmd (edit, 0);
+        edit_mark_cmd (edit, FALSE);
         break;
     case CK_MarkAll:
         edit_set_markers (edit, 0, edit->last_byte, 0, 0);
@@ -3990,7 +3990,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         if (edit->column_highlight)
             edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
-        edit_mark_cmd (edit, 1);
+        edit_mark_cmd (edit, TRUE);
         break;
     case CK_MarkWord:
         if (edit->column_highlight)
