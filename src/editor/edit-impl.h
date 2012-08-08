@@ -316,7 +316,7 @@ void book_mark_dec (WEdit * edit, int line);
 void book_mark_serialize (WEdit * edit, int color);
 void book_mark_restore (WEdit * edit, int color);
 
-int line_is_blank (WEdit * edit, long line);
+gboolean line_is_blank (WEdit * edit, long line);
 gboolean is_break_char (char c);
 int edit_indent_width (WEdit * edit, long p);
 void edit_insert_indent (WEdit * edit, int indent);
