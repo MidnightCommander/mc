@@ -173,7 +173,7 @@ regex/\.([Hh][Aa])$
 # rar
 regex/\.[rR]([aA][rR]|[0-9][0-9])$
 	Open=%cd %p/urar://
-	View=%view{ascii} rar v -c- %f
+	View=%view{ascii} rar v -c- %f 2>/dev/null || unrar v -c- %f
 
 # ALZip
 regex/\.(alz|ALZ)$
