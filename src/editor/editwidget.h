@@ -72,8 +72,8 @@ struct WEdit
     vfs_path_t *dir_vpath;      /* NULL if filename is absolute */
 
     /* dynamic buffers and cursor position for editor: */
-    long curs1;                 /* position of the cursor from the beginning of the file. */
-    long curs2;                 /* position from the end of the file */
+    off_t curs1;                /* position of the cursor from the beginning of the file. */
+    off_t curs2;                /* position from the end of the file */
     unsigned char *buffers1[MAXBUFF + 1];       /* all data up to curs1 */
     unsigned char *buffers2[MAXBUFF + 1];       /* all data from end of file down to curs2 */
 
@@ -88,12 +88,12 @@ struct WEdit
     edit_search_line_t search_line_type;
 
     char *last_search_string;   /* String that have been searched */
-    long search_start;          /* First character to start searching from */
+    off_t search_start;         /* First character to start searching from */
     unsigned long found_len;    /* Length of found string or 0 if none was found */
-    long found_start;           /* the found word from a search - start position */
+    off_t found_start;          /* the found word from a search - start position */
 
     /* display information */
-    long last_byte;             /* Last byte of file */
+    off_t last_byte;            /* Last byte of file */
     long start_display;         /* First char displayed */
     long start_col;             /* First displayed column, negative */
     long max_column;            /* The maximum cursor position ever reached used to calc hori scroll bar */
@@ -117,17 +117,17 @@ struct WEdit
 
     /* file info */
     long total_lines;           /* total lines in the file */
-    long mark1;                 /* position of highlight start */
-    long mark2;                 /* position of highlight end */
-    long end_mark_curs;         /* position of cursor after end of highlighting */
+    off_t mark1;                /* position of highlight start */
+    off_t mark2;                /* position of highlight end */
+    off_t end_mark_curs;        /* position of cursor after end of highlighting */
     long column1;               /* position of column highlight start */
     long column2;               /* position of column highlight end */
-    long bracket;               /* position of a matching bracket */
+    off_t bracket;              /* position of a matching bracket */
 
     /* cache speedup for line lookups */
     gboolean caches_valid;
     long line_numbers[N_LINE_CACHES];
-    long line_offsets[N_LINE_CACHES];
+    off_t line_offsets[N_LINE_CACHES];
 
     struct _book_mark *book_mark;
     GArray *serialized_bookmarks;

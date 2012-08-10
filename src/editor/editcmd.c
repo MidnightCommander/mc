@@ -132,7 +132,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 {
     char *p;
     gchar *tmp;
-    long filelen = 0;
+    off_t filelen = 0;
     int this_save_mode, fd = -1;
     vfs_path_t *real_filename_vpath;
     vfs_path_t *savename_vpath = NULL;
@@ -285,7 +285,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     }
     else if (edit->lb == LB_ASIS)
     {                           /* do not change line breaks */
-        long buf;
+        off_t buf;
         buf = 0;
         filelen = edit->last_byte;
         while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1)
@@ -514,13 +514,15 @@ edit_load_file_from_filename (Dlg_head * h, const vfs_path_t * vpath)
 static void
 edit_delete_column_of_text (WEdit * edit)
 {
-    long p, q, r, m1, m2;
-    long b, c, d, n;
+    off_t p, q, r;
+    off_t m1, m2;
+    off_t n;
+    long b, c, d;
 
     eval_marks (edit, &m1, &m2);
     n = edit_move_forward (edit, m1, 0, m2) + 1;
-    c = edit_move_forward3 (edit, edit_bol (edit, m1), 0, m1);
-    d = edit_move_forward3 (edit, edit_bol (edit, m2), 0, m2);
+    c = (long) edit_move_forward3 (edit, edit_bol (edit, m1), 0, m1);
+    d = (long) edit_move_forward3 (edit, edit_bol (edit, m2), 0, m2);
     b = max (min (c, d), min (edit->column1, edit->column2));
     c = max (c, max (edit->column1, edit->column2));
 
@@ -553,8 +555,8 @@ edit_delete_column_of_text (WEdit * edit)
 static int
 edit_block_delete (WEdit * edit)
 {
-    long count;
-    long start_mark, end_mark;
+    off_t count;
+    off_t start_mark, end_mark;
     int curs_pos;
     long curs_line, c1, c2;
 
@@ -593,7 +595,7 @@ edit_block_delete (WEdit * edit)
     {
         if (edit->column_highlight)
         {
-            int line_width;
+            long line_width;
 
             if (edit->mark2 < 0)
                 edit_mark_cmd (edit, FALSE);
@@ -601,8 +603,8 @@ edit_block_delete (WEdit * edit)
             /* move cursor to the saved position */
             edit_move_to_line (edit, curs_line);
             /* calculate line width and cursor position before cut */
-            line_width = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
-                                             edit_eol (edit, edit->curs1));
+            line_width = (long) edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
+                                                    edit_eol (edit, edit->curs1));
             if (option_cursor_beyond_eol && curs_pos > line_width)
                 edit->over_col = curs_pos - line_width;
         }
@@ -760,8 +762,8 @@ edit_calculate_start_of_current_line (WEdit * edit, off_t current_pos, char end_
 static void
 edit_search_fix_search_start_if_selection (WEdit * edit)
 {
-    long start_mark = 0;
-    long end_mark = 0;
+    off_t start_mark = 0;
+    off_t end_mark = 0;
 
     if (!edit_search_options.only_in_selection)
         return;
@@ -788,8 +790,8 @@ editcmd_find (WEdit * edit, gsize * len)
 {
     off_t search_start = edit->search_start;
     off_t search_end;
-    long start_mark = 0;
-    long end_mark = edit->last_byte;
+    off_t start_mark = 0;
+    off_t end_mark = edit->last_byte;
     int mark_res = 0;
     char end_string_symbol;
 
@@ -1008,7 +1010,7 @@ edit_search (WEdit * edit)
 /** Return a null terminated length of text. Result must be g_free'd */
 
 static unsigned char *
-edit_get_block (WEdit * edit, long start, long finish, int *l)
+edit_get_block (WEdit * edit, off_t start, off_t finish, int *l)
 {
     unsigned char *s, *r;
     r = s = g_malloc0 (finish - start + 1);
@@ -1019,7 +1021,8 @@ edit_get_block (WEdit * edit, long start, long finish, int *l)
         while (start < finish)
         {
             int c;
-            long x;
+            off_t x;
+
             x = edit_move_forward3 (edit, edit_bol (edit, start), 0, start);
             c = edit_get_byte (edit, start);
             if ((x >= edit->column1 && x < edit->column2)
@@ -1045,7 +1048,7 @@ edit_get_block (WEdit * edit, long start, long finish, int *l)
 /** copies a block to clipboard file */
 
 static gboolean
-edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
+edit_save_block_to_clip_file (WEdit * edit, off_t start, off_t finish)
 {
     gboolean ret;
     gchar *tmp;
@@ -1080,7 +1083,7 @@ pipe_mail (WEdit * edit, char *to, char *subject, char *cc)
 
     if (p)
     {
-        long i;
+        off_t i;
         for (i = 0; i < edit->last_byte; i++)
             fputc (edit_get_byte (edit, i), p);
         pclose (p);
@@ -1091,7 +1094,7 @@ pipe_mail (WEdit * edit, char *to, char *subject, char *cc)
 /** find first character of current word */
 
 static gboolean
-edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
+edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
 {
     int c, last;
     gsize i;
@@ -1100,7 +1103,7 @@ edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
     if (edit->curs1 <= 0)
         return FALSE;
 
-    c = (unsigned char) edit_get_byte (edit, edit->curs1 - 1);
+    c = edit_get_byte (edit, edit->curs1 - 1);
     /* return if not at end or in word */
     if (is_break_char (c))
         return FALSE;
@@ -1113,7 +1116,7 @@ edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
             return FALSE;
 
         last = c;
-        c = (unsigned char) edit_get_byte (edit, edit->curs1 - i);
+        c = edit_get_byte (edit, edit->curs1 - i);
 
         if (is_break_char (c))
         {
@@ -1142,9 +1145,10 @@ edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
  */
 
 static char *
-edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, long word_start)
+edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, off_t word_start)
 {
-    gsize len = 0, i;
+    gsize len = 0;
+    off_t i;
     GString *temp;
 
     if (!mc_search_run (srch, (void *) edit, word_start, edit->last_byte, &len))
@@ -1168,7 +1172,7 @@ edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, lon
 /** collect the possible completions */
 
 static gsize
-edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
+edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
                           char *match_expr, struct selection *compl, gsize * num)
 {
     gsize len = 0;
@@ -1177,7 +1181,7 @@ edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
     int skip;
     GString *temp;
     mc_search_t *srch;
-    long last_byte, start = -1;
+    off_t last_byte, start = -1;
     char *current_word;
 
     srch = mc_search_new (match_expr, -1);
@@ -1216,7 +1220,7 @@ edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
                 continue;
 
             /* skip current word */
-            if (start + (long) i == word_start)
+            if (start + (off_t) i == word_start)
                 break;
 
             g_string_append_c (temp, skip);
@@ -1290,10 +1294,10 @@ edit_collect_completions (WEdit * edit, long word_start, gsize word_len,
 
 static void
 edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width,
-                            long *start_pos, long *end_pos, int *col1, int *col2)
+                            off_t * start_pos, off_t * end_pos, int *col1, int *col2)
 {
-    long cursor;
-    int i, col;
+    off_t cursor;
+    long i, col;
 
     cursor = edit->curs1;
     col = edit_get_col (edit);
@@ -1305,7 +1309,7 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int wid
         else
         {                       /* fill in and move to next line */
             int l;
-            long p;
+            off_t p;
 
             if (edit_get_byte (edit, edit->curs1) != '\n')
             {
@@ -2233,14 +2237,14 @@ edit_close_cmd (WEdit * edit)
  */
 
 int
-eval_marks (WEdit * edit, long *start_mark, long *end_mark)
+eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark)
 {
     if (edit->mark1 != edit->mark2)
     {
-        long start_bol, start_eol;
-        long end_bol, end_eol;
+        off_t start_bol, start_eol;
+        off_t end_bol, end_eol;
+        off_t diff1, diff2;
         long col1, col2;
-        long diff1, diff2;
         long end_mark_curs;
 
         if (edit->end_mark_curs < 0)
@@ -2271,12 +2275,10 @@ eval_marks (WEdit * edit, long *start_mark, long *end_mark)
             col1 = min (edit->column1, edit->column2);
             col2 = max (edit->column1, edit->column2);
 
-            diff1 =
-                edit_move_forward3 (edit, start_bol, col2, 0) - edit_move_forward3 (edit, start_bol,
-                                                                                    col1, 0);
-            diff2 =
-                edit_move_forward3 (edit, end_bol, col2, 0) - edit_move_forward3 (edit, end_bol,
-                                                                                  col1, 0);
+            diff1 = edit_move_forward3 (edit, start_bol, col2, 0) -
+                edit_move_forward3 (edit, start_bol, col1, 0);
+            diff2 = edit_move_forward3 (edit, end_bol, col2, 0) -
+                edit_move_forward3 (edit, end_bol, col1, 0);
 
             *start_mark -= diff1;
             *end_mark += diff2;
@@ -2309,13 +2311,13 @@ edit_insert_over (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+off_t
 edit_insert_column_of_text_from_file (WEdit * edit, int file,
-                                      long *start_pos, long *end_pos, long *col1, long *col2)
+                                      off_t * start_pos, off_t * end_pos, long *col1, long *col2)
 {
-    long cursor;
+    off_t cursor;
     int col;
-    int blocklen = -1, width = 0;
+    off_t blocklen = -1, width = 0;
     unsigned char *data;
 
     cursor = edit->curs1;
@@ -2324,7 +2326,7 @@ edit_insert_column_of_text_from_file (WEdit * edit, int file,
 
     while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0)
     {
-        int i;
+        off_t i;
         for (width = 0; width < blocklen; width++)
         {
             if (data[width] == '\n')
@@ -2334,8 +2336,8 @@ edit_insert_column_of_text_from_file (WEdit * edit, int file,
         {
             if (data[i] == '\n')
             {                   /* fill in and move to next line */
-                int l;
-                long p;
+                long l;
+                off_t p;
                 if (edit_get_byte (edit, edit->curs1) != '\n')
                 {
                     l = width - (edit_get_col (edit) - col);
@@ -2387,9 +2389,9 @@ edit_insert_column_of_text_from_file (WEdit * edit, int file,
 void
 edit_block_copy_cmd (WEdit * edit)
 {
-    long start_mark, end_mark, current = edit->curs1;
+    off_t start_mark, end_mark, current = edit->curs1;
     long col_delta = 0;
-    long mark1, mark2;
+    off_t mark1, mark2;
     int c1, c2;
     int size;
     unsigned char *copy_buf;
@@ -2432,9 +2434,9 @@ edit_block_copy_cmd (WEdit * edit)
 void
 edit_block_move_cmd (WEdit * edit)
 {
-    long current;
+    off_t current;
     unsigned char *copy_buf = NULL;
-    long start_mark, end_mark;
+    off_t start_mark, end_mark;
     long line;
 
     if (eval_marks (edit, &start_mark, &end_mark))
@@ -2447,7 +2449,7 @@ edit_block_move_cmd (WEdit * edit)
 
     if (edit->column_highlight)
     {
-        long mark1, mark2;
+        off_t mark1, mark2;
         int size;
         int b_width = 0;
         int c1, c2;
@@ -2494,7 +2496,7 @@ edit_block_move_cmd (WEdit * edit)
     }
     else
     {
-        long count;
+        off_t count;
 
         current = edit->curs1;
         copy_buf = g_malloc0 (end_mark - start_mark);
@@ -2527,7 +2529,7 @@ edit_block_move_cmd (WEdit * edit)
 int
 edit_block_delete_cmd (WEdit * edit)
 {
-    long start_mark, end_mark;
+    off_t start_mark, end_mark;
     if (eval_marks (edit, &start_mark, &end_mark))
     {
         edit_delete_line (edit);
@@ -2771,7 +2773,7 @@ edit_replace_cmd (WEdit * edit, int again)
 mc_search_cbret_t
 edit_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
 {
-    *current_char = edit_get_byte ((WEdit *) user_data, (long) char_offset);
+    *current_char = edit_get_byte ((WEdit *) user_data, (off_t) char_offset);
     return MC_SEARCH_CB_OK;
 }
 
@@ -2908,7 +2910,7 @@ edit_ok_to_exit (WEdit * edit)
 /** save block, returns TRUE on success */
 
 gboolean
-edit_save_block (WEdit * edit, const char *filename, long start, long finish)
+edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
 {
     int len, file;
     vfs_path_t *vpath;
@@ -2944,7 +2946,8 @@ edit_save_block (WEdit * edit, const char *filename, long start, long finish)
     else
     {
         unsigned char *buf;
-        int i = start, end;
+        off_t i = start;
+        off_t end;
 
         len = finish - start;
         buf = g_malloc0 (TEMP_BUF_LEN);
@@ -2977,7 +2980,7 @@ edit_paste_from_history (WEdit * edit)
 gboolean
 edit_copy_to_X_buf_cmd (WEdit * edit)
 {
-    long start_mark, end_mark;
+    off_t start_mark, end_mark;
 
     if (eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
@@ -2997,7 +3000,7 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
 gboolean
 edit_cut_to_X_buf_cmd (WEdit * edit)
 {
-    long start_mark, end_mark;
+    off_t start_mark, end_mark;
 
     if (eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
@@ -3081,7 +3084,7 @@ edit_goto_cmd (WEdit * edit)
 gboolean
 edit_save_block_cmd (WEdit * edit)
 {
-    long start_mark, end_mark;
+    off_t start_mark, end_mark;
     char *exp, *tmp;
     gboolean ret = FALSE;
 
@@ -3154,7 +3157,7 @@ edit_sort_cmd (WEdit * edit)
 {
     static char *old = 0;
     char *exp, *tmp, *tmp_edit_block_name, *tmp_edit_temp_name;
-    long start_mark, end_mark;
+    off_t start_mark, end_mark;
     int e;
 
     if (eval_marks (edit, &start_mark, &end_mark))
@@ -3343,7 +3346,7 @@ void
 edit_complete_word_cmd (WEdit * edit)
 {
     gsize i, max_len, word_len = 0, num_compl = 0;
-    long word_start = 0;
+    off_t word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
     struct selection compl[MAX_WORD_COMPLETIONS];       /* completions */
@@ -3511,7 +3514,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
     gsize word_len = 0, max_len = 0;
     int num_def = 0;
     int i;
-    long word_start = 0;
+    off_t word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
     char *path = NULL;
@@ -3576,7 +3579,7 @@ edit_suggest_current_word (WEdit * edit)
 {
     gsize cut_len = 0;
     gsize word_len = 0;
-    long word_start = 0;
+    off_t word_start = 0;
     int retval = B_SKIP_WORD;
     char *match_word;
 
