@@ -549,7 +549,7 @@ apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
 /* --------------------------------------------------------------------------------------------- */
 
 static struct syntax_rule
-edit_get_rule (WEdit * edit, long byte_index)
+edit_get_rule (WEdit * edit, off_t byte_index)
 {
     long i;
 
@@ -1415,7 +1415,7 @@ get_first_editor_line (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
+edit_get_syntax_color (WEdit * edit, off_t byte_index, int *color)
 {
     if (!tty_use_colors ())
         *color = 0;

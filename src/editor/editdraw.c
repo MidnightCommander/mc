@@ -149,7 +149,7 @@ status_string (WEdit * edit, char *s, int w)
                     edit->overwrite == 0 ? '-' : 'O',
                     edit->curs_col + edit->over_col,
                     edit->curs_line + 1,
-                    edit->total_lines + 1, edit->curs1, edit->last_byte, byte_str,
+                    edit->total_lines + 1, (long) edit->curs1, (long) edit->last_byte, byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >=
                     0 ? get_codepage_id (mc_global.source_codepage) : ""
@@ -168,7 +168,7 @@ status_string (WEdit * edit, char *s, int w)
                     edit->start_line + 1,
                     edit->curs_row,
                     edit->curs_line + 1,
-                    edit->total_lines + 1, edit->curs1, edit->last_byte, byte_str,
+                    edit->total_lines + 1, (long) edit->curs1, (long) edit->last_byte, byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >=
                     0 ? get_codepage_id (mc_global.source_codepage) : ""
@@ -301,12 +301,13 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
 /** b is a pointer to the beginning of the line */
 
 static void
-edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_col)
+edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_col)
 {
     struct line_s line[MAX_LINE_LEN];
     struct line_s *p = line;
 
-    long m1 = 0, m2 = 0, q, c1, c2;
+    off_t m1 = 0, m2 = 0, q;
+    long c1, c2;
     int col, start_col_real;
     unsigned int c;
     int color;
@@ -360,7 +361,7 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
 
         if (row <= edit->total_lines - edit->start_line)
         {
-            long tws = 0;
+            off_t tws = 0;
             if (tty_use_colors () && visible_tws)
             {
                 tws = edit_eol (edit, b);
@@ -383,8 +384,9 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
                 {
                     if (edit->column_highlight)
                     {
-                        int x;
-                        x = edit_move_forward3 (edit, b, 0, q);
+                        long x;
+
+                        x = (long) edit_move_forward3 (edit, b, 0, q);
                         c1 = min (edit->column1, edit->column2);
                         c2 = max (edit->column1, edit->column2);
                         if (x >= c1 && x < c2)
@@ -619,9 +621,10 @@ edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_co
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-edit_draw_this_char (WEdit * edit, long curs, long row, long start_column, long end_column)
+edit_draw_this_char (WEdit * edit, off_t curs, long row, long start_column, long end_column)
 {
-    int b = edit_bol (edit, curs);
+    off_t b = edit_bol (edit, curs);
+
     edit_draw_this_line (edit, b, row, start_column, end_column);
 }
 
@@ -632,7 +635,7 @@ static inline void
 render_edit_text (WEdit * edit, long start_row, long start_column, long end_row, long end_column)
 {
     static long prev_curs_row = 0;
-    static long prev_curs = 0;
+    static off_t prev_curs = 0;
 
     Widget *w = (Widget *) edit;
     Dlg_head *h = w->owner;
@@ -888,7 +891,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     l_extreme = EDIT_LEFT_EXTREME;
     b_extreme = EDIT_BOTTOM_EXTREME;
     t_extreme = EDIT_TOP_EXTREME;
-    if (edit->found_len)
+    if (edit->found_len != 0)
     {
         b_extreme = max (edit->widget.lines / 4, b_extreme);
         t_extreme = max (edit->widget.lines / 4, t_extreme);
