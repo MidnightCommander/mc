@@ -1153,11 +1153,12 @@ edit_get_block (WEdit * edit, long start, long finish, int *l)
 /* --------------------------------------------------------------------------------------------- */
 /** copies a block to clipboard file */
 
-static int
+static gboolean
 edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
 {
-    int ret;
+    gboolean ret;
     gchar *tmp;
+
     tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
     ret = edit_save_block (edit, tmp, start, finish);
     g_free (tmp);
@@ -2823,9 +2824,9 @@ edit_ok_to_exit (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** save block, returns 1 on success */
+/** save block, returns TRUE on success */
 
-int
+gboolean
 edit_save_block (WEdit * edit, const char *filename, long start, long finish)
 {
     int len, file;
@@ -2836,7 +2837,7 @@ edit_save_block (WEdit * edit, const char *filename, long start, long finish)
                     S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
     vfs_path_free (vpath);
     if (file == -1)
-        return 0;
+        return FALSE;
 
     if (edit->column_highlight)
     {
@@ -2877,9 +2878,8 @@ edit_save_block (WEdit * edit, const char *filename, long start, long finish)
         g_free (buf);
     }
     mc_close (file);
-    if (len)
-        return 0;
-    return 1;
+
+    return (len == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2990,16 +2990,17 @@ edit_goto_cmd (WEdit * edit)
 
 
 /* --------------------------------------------------------------------------------------------- */
-/** Return 1 on success */
+/** Return TRUE on success */
 
-int
+gboolean
 edit_save_block_cmd (WEdit * edit)
 {
     long start_mark, end_mark;
     char *exp, *tmp;
+    gboolean ret = FALSE;
 
     if (eval_marks (edit, &start_mark, &end_mark))
-        return 1;
+        return TRUE;
 
     tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
     exp =
@@ -3007,30 +3008,20 @@ edit_save_block_cmd (WEdit * edit)
                              MC_HISTORY_EDIT_SAVE_BLOCK, tmp);
     g_free (tmp);
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
-    if (exp)
+
+    if (exp != NULL && *exp != '\0')
     {
-        if (!*exp)
-        {
-            g_free (exp);
-            return 0;
-        }
+        if (edit_save_block (edit, exp, start_mark, end_mark))
+            ret = TRUE;
         else
-        {
-            if (edit_save_block (edit, exp, start_mark, end_mark))
-            {
-                g_free (exp);
-                edit->force |= REDRAW_COMPLETELY;
-                return 1;
-            }
-            else
-            {
-                g_free (exp);
-                edit_error_dialog (_("Save block"), get_sys_error (_("Cannot save file")));
-            }
-        }
+            edit_error_dialog (_("Save block"), get_sys_error (_("Cannot save file")));
+
+        edit->force |= REDRAW_COMPLETELY;
     }
-    edit->force |= REDRAW_COMPLETELY;
-    return 0;
+
+    g_free (exp);
+
+    return ret;
 }
 
 

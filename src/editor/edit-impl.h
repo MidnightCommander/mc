@@ -242,8 +242,8 @@ mc_search_cbret_t edit_search_cmd_callback (const void *user_data, gsize char_of
                                             int *current_char);
 void edit_complete_word_cmd (WEdit * edit);
 void edit_get_match_keyword_cmd (WEdit * edit);
-int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
-int edit_save_block_cmd (WEdit * edit);
+gboolean edit_save_block (WEdit * edit, const char *filename, long start, long finish);
+gboolean edit_save_block_cmd (WEdit * edit);
 gboolean edit_insert_file_cmd (WEdit * edit);
 void edit_insert_over (WEdit * edit);
 int edit_insert_column_of_text_from_file (WEdit * edit, int file,
