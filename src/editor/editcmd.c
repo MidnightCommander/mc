@@ -466,9 +466,9 @@ edit_get_save_file_as (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** returns 1 on success */
+/** returns TRUE on success */
 
-static int
+static gboolean
 edit_save_cmd (WEdit * edit)
 {
     int res, save_lock = 0;
@@ -482,7 +482,7 @@ edit_save_cmd (WEdit * edit)
         edit->locked = unlock_file (edit->filename_vpath);
 
     /* On failure try 'save as', it does locking on its own */
-    if (!res)
+    if (res == 0)
         return edit_save_as_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
     if (res > 0)
@@ -491,7 +491,7 @@ edit_save_cmd (WEdit * edit)
         edit->modified = 0;
     }
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1640,8 +1640,8 @@ edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath)
 /* --------------------------------------------------------------------------------------------- */
 /* Here we want to warn the users of overwriting an existing file,
    but only if they have made a change to the filename */
-/* returns 1 on success */
-int
+/* returns TRUE on success */
+gboolean
 edit_save_as_cmd (WEdit * edit)
 {
     /* This heads the 'Save As' dialog box */
@@ -1650,7 +1650,7 @@ edit_save_as_cmd (WEdit * edit)
     int different_filename = 0;
 
     if (!edit_check_newline (edit))
-        return 0;
+        return FALSE;
 
     exp_vpath = edit_get_save_file_as (edit);
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
@@ -1738,7 +1738,7 @@ edit_save_as_cmd (WEdit * edit)
                     edit_load_syntax (edit, NULL, edit->syntax_type);
                 vfs_path_free (exp_vpath);
                 edit->force |= REDRAW_COMPLETELY;
-                return 1;
+                return TRUE;
             default:
                 edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
                 /* fallthrough */
@@ -1754,7 +1754,7 @@ edit_save_as_cmd (WEdit * edit)
   ret:
     vfs_path_free (exp_vpath);
     edit->force |= REDRAW_COMPLETELY;
-    return 0;
+    return FALSE;
 }
 
 /* {{{ Macro stuff starts here */
@@ -2020,18 +2020,18 @@ edit_load_macro_cmd (WEdit * edit)
 /* }}} Macro stuff end here */
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 on success */
+/** returns TRUE on success */
 
-int
+gboolean
 edit_save_confirm_cmd (WEdit * edit)
 {
-    gchar *f = NULL;
+    char *f = NULL;
 
     if (edit->filename_vpath == NULL)
         return edit_save_as_cmd (edit);
 
     if (!edit_check_newline (edit))
-        return 0;
+        return FALSE;
 
     if (edit_confirm_save)
     {
@@ -2044,7 +2044,7 @@ edit_save_confirm_cmd (WEdit * edit)
         ok = (edit_query_dialog2 (_("Save file"), f, _("&Save"), _("&Cancel")) == 0);
         g_free (f);
         if (!ok)
-            return 0;
+            return FALSE;
     }
     return edit_save_cmd (edit);
 }
