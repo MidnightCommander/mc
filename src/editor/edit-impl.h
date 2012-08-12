@@ -222,8 +222,8 @@ void edit_insert_ahead (WEdit * edit, int c);
 long edit_write_stream (WEdit * edit, FILE * f);
 char *edit_get_write_filter (const vfs_path_t * write_name_vpath,
                              const vfs_path_t * filename_vpath);
-int edit_save_confirm_cmd (WEdit * edit);
-int edit_save_as_cmd (WEdit * edit);
+gboolean edit_save_confirm_cmd (WEdit * edit);
+gboolean edit_save_as_cmd (WEdit * edit);
 WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols,
                   const vfs_path_t * filename_vpath, long line);
 gboolean edit_clean (WEdit * edit);
