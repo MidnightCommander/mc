@@ -1764,7 +1764,7 @@ edit_delete_macro_cmd (WEdit * edit)
 {
     int hotkey;
 
-    hotkey = editcmd_dialog_raw_key_query (_("Delete macro"), _("Press macro hotkey:"), 1);
+    hotkey = editcmd_dialog_raw_key_query (_("Delete macro"), _("Press macro hotkey:"), TRUE);
 
     if (hotkey != 0 && !edit_delete_macro (edit, hotkey))
         message (D_ERROR, _("Delete macro"), _("Macro not deleted"));
@@ -1821,7 +1821,8 @@ edit_store_macro_cmd (WEdit * edit)
     gboolean have_macro = FALSE;
     char *skeyname = NULL;
 
-    hotkey = editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), 1);
+    hotkey =
+        editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), TRUE);
     if (hotkey == ESC_CHAR)
         return FALSE;
 
@@ -3417,8 +3418,10 @@ edit_select_codepage_cmd (WEdit * edit)
 void
 edit_insert_literal_cmd (WEdit * edit)
 {
-    int char_for_insertion = editcmd_dialog_raw_key_query (_("Insert literal"),
-                                                           _("Press any key:"), 0);
+    int char_for_insertion;
+
+    char_for_insertion = editcmd_dialog_raw_key_query (_("Insert literal"),
+                                                       _("Press any key:"), FALSE);
     edit_execute_key_command (edit, -1, ascii_alpha_to_cntrl (char_for_insertion));
 }
 
