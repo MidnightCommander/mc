@@ -2974,58 +2974,63 @@ edit_paste_from_history (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_copy_to_X_buf_cmd (WEdit * edit)
 {
     long start_mark, end_mark;
+
     if (eval_marks (edit, &start_mark, &end_mark))
-        return 0;
+        return TRUE;
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
         edit_error_dialog (_("Copy to clipboard"), get_sys_error (_("Unable to save to file")));
-        return 1;
+        return FALSE;
     }
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_cut_to_X_buf_cmd (WEdit * edit)
 {
     long start_mark, end_mark;
+
     if (eval_marks (edit, &start_mark, &end_mark))
-        return 0;
+        return TRUE;
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
         edit_error_dialog (_("Cut to clipboard"), _("Unable to save to file"));
-        return 1;
+        return FALSE;
     }
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 
     edit_block_delete_cmd (edit);
     edit_mark_cmd (edit, TRUE);
-    return 0;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+gboolean
 edit_paste_from_X_buf_cmd (WEdit * edit)
 {
     vfs_path_t *tmp;
+    gboolean ret;
 
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
     tmp = mc_config_get_full_vpath (EDIT_CLIP_FILE);
-    edit_insert_file (edit, tmp);
+    ret = (edit_insert_file (edit, tmp) >= 0);
     vfs_path_free (tmp);
-}
 
+    return ret;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**

@@ -287,9 +287,9 @@ gboolean edit_load_macro_cmd (WEdit * edit);
 void edit_delete_macro_cmd (WEdit * edit);
 gboolean edit_repeat_macro_cmd (WEdit * edit);
 
-int edit_copy_to_X_buf_cmd (WEdit * edit);
-int edit_cut_to_X_buf_cmd (WEdit * edit);
-void edit_paste_from_X_buf_cmd (WEdit * edit);
+gboolean edit_copy_to_X_buf_cmd (WEdit * edit);
+gboolean edit_cut_to_X_buf_cmd (WEdit * edit);
+gboolean edit_paste_from_X_buf_cmd (WEdit * edit);
 
 void edit_select_codepage_cmd (WEdit * edit);
 void edit_insert_literal_cmd (WEdit * edit);
