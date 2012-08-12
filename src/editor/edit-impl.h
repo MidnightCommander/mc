@@ -250,8 +250,8 @@ void edit_spellcheck_file (WEdit * edit);
 void edit_set_spell_lang (void);
 #endif
 
-int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
-int edit_save_block_cmd (WEdit * edit);
+gboolean edit_save_block (WEdit * edit, const char *filename, long start, long finish);
+gboolean edit_save_block_cmd (WEdit * edit);
 gboolean edit_insert_file_cmd (WEdit * edit);
 void edit_insert_over (WEdit * edit);
 int edit_insert_column_of_text_from_file (WEdit * edit, int file,
