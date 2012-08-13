@@ -170,10 +170,6 @@ static off_t last_bracket = -1;
  */
 
 /* --------------------------------------------------------------------------------------------- */
-
-static int left_of_four_spaces (WEdit * edit);
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Initialize the buffers for an empty files.
  */
@@ -1440,38 +1436,40 @@ edit_delete_to_line_begin (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 is_aligned_on_a_tab (WEdit * edit)
 {
+    long curs_col;
+
     edit_update_curs_col (edit);
-    return !((edit->curs_col % (TAB_SIZE * space_width))
-             && edit->curs_col % (TAB_SIZE * space_width) != (HALF_TAB_SIZE * space_width));
+    curs_col = edit->curs_col % (TAB_SIZE * space_width);
+    return (curs_col == 0 || curs_col == (HALF_TAB_SIZE * space_width));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 right_of_four_spaces (WEdit * edit)
 {
     int i, ch = 0;
+
     for (i = 1; i <= HALF_TAB_SIZE; i++)
         ch |= edit_get_byte (edit, edit->curs1 - i);
-    if (ch == ' ')
-        return is_aligned_on_a_tab (edit);
-    return 0;
+
+    return (ch == ' ' && is_aligned_on_a_tab (edit));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 left_of_four_spaces (WEdit * edit)
 {
     int i, ch = 0;
+
     for (i = 0; i < HALF_TAB_SIZE; i++)
         ch |= edit_get_byte (edit, edit->curs1 + i);
-    if (ch == ' ')
-        return is_aligned_on_a_tab (edit);
-    return 0;
+
+    return (ch == ' ' && is_aligned_on_a_tab (edit));
 }
 
 /* --------------------------------------------------------------------------------------------- */
