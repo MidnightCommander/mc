@@ -1629,14 +1629,6 @@ midnight_event (Gpm_Event * event, void *data)
                 ret = ((Widget *) the_menubar)->mouse (event, the_menubar);
         }
     }
-    else if (event->y == h->y + h->lines && mc_global.keybar_visible)
-    {
-        /* buttonbar */
-
-        /* in general, this can be handled in default way (dlg_mouse_event)
-         * but let make it here to avoid walking in widget list */
-        ret = ((Widget *) the_bar)->mouse (event, the_bar);
-    }
 
     return ret;
 }

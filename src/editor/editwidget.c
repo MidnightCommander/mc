@@ -721,15 +721,6 @@ edit_dialog_event (Gpm_Event * event, void *data)
         if (ret == MOU_UNHANDLED)
             dlg_select_widget (w);
     }
-    else if (event->y == h->y + h->lines)
-    {
-        /* buttonbar */
-
-        /* In general, this can be handled in default way (dlg_mouse_event)
-         * but let make it here to avoid walking in widget list */
-        w = (Widget *) find_buttonbar (h);
-        ret = w->mouse (event, w);
-    }
 
     return ret;
 }
