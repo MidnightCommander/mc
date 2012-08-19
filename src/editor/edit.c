@@ -1427,9 +1427,11 @@ edit_do_undo (WEdit * edit)
     edit->start_display = ac - KEY_PRESS;       /* see push and pop above */
     edit_update_curs_row (edit);
 
-  done_undo:;
+  done_undo:
     edit->undo_stack_disable = 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 edit_do_redo (WEdit * edit)
@@ -1501,8 +1503,11 @@ edit_do_redo (WEdit * edit)
     edit->start_display = ac - KEY_PRESS;       /* see push and pop above */
     edit_update_curs_row (edit);
 
-  done_redo:;
+  done_redo:
+    ;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 edit_group_undo (WEdit * edit)
