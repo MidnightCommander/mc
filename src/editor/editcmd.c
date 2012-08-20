@@ -1207,7 +1207,7 @@ is_break_char (char c)
 /* --------------------------------------------------------------------------------------------- */
 /** find first character of current word */
 
-static int
+static gboolean
 edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
 {
     int c, last;
@@ -1215,19 +1215,19 @@ edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
 
     /* return if at begin of file */
     if (edit->curs1 <= 0)
-        return 0;
+        return FALSE;
 
     c = (unsigned char) edit_get_byte (edit, edit->curs1 - 1);
     /* return if not at end or in word */
     if (is_break_char (c))
-        return 0;
+        return FALSE;
 
     /* search start of word to be completed */
     for (i = 2;; i++)
     {
         /* return if at begin of file */
         if ((gsize) edit->curs1 < i)
-            return 0;
+            return FALSE;
 
         last = c;
         c = (unsigned char) edit_get_byte (edit, edit->curs1 - i);
@@ -1236,7 +1236,7 @@ edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
         {
             /* return if word starts with digit */
             if (isdigit (last))
-                return 0;
+                return FALSE;
 
             *word_start = edit->curs1 - (i - 1);        /* start found */
             *word_len = i - 1;
@@ -1244,7 +1244,7 @@ edit_find_word_start (WEdit * edit, long *word_start, gsize * word_len)
         }
     }
     /* success */
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
