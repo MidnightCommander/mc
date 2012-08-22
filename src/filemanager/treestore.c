@@ -458,7 +458,7 @@ tree_store_add_entry (const vfs_path_t * name)
 
     /* Calculate attributes */
     new->name = vfs_path_clone (name);
-    new->sublevel = vfs_path_tokens_count (new->name) + 1;
+    new->sublevel = vfs_path_tokens_count (new->name);
     {
         const char *new_name;
 
@@ -466,6 +466,8 @@ tree_store_add_entry (const vfs_path_t * name)
         new->subname = strrchr (new_name, '/');
         if (new->subname == NULL)
             new->subname = new_name;
+        else
+            new->subname++;
     }
     if (new->next)
         submask = new->next->submask;
@@ -482,18 +484,6 @@ tree_store_add_entry (const vfs_path_t * name)
     {
         current->submask |= 1 << new->sublevel;
         current = current->prev;
-    }
-
-    /* The entry has now been added */
-
-    if (new->sublevel > 1)
-    {
-        /* Let's check if the parent directory is in the tree */
-        vfs_path_t *tmp_vpath;
-
-        tmp_vpath = vfs_path_vtokens_get (new->name, 0, new->sublevel - 1);
-        tree_store_add_entry (tmp_vpath);
-        vfs_path_free (tmp_vpath);
     }
 
     tree_store_dirty (TRUE);
