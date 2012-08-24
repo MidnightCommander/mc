@@ -222,7 +222,8 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         if (savedir == NULL)
             savedir = g_strdup (".");
 
-        saveprefix = mc_build_filename (savedir, "cooledit", NULL);
+        /* Token-related function never return leading slash, so we need add it manually */
+        saveprefix = mc_build_filename ("/", savedir, "cooledit", NULL);
         g_free (savedir);
         fd = mc_mkstemps (&savename_vpath, saveprefix, NULL);
         g_free (saveprefix);
@@ -365,13 +366,21 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 
     if (this_save_mode == EDIT_DO_BACKUP)
     {
+        char *tmp_store_filename;
+        vfs_path_element_t *last_vpath_element;
         vfs_path_t *tmp_vpath;
         gboolean ok;
 
 #ifdef HAVE_ASSERT_H
         assert (option_backup_ext != NULL);
 #endif
-        tmp_vpath = vfs_path_append_new (real_filename_vpath, option_backup_ext, (char *) NULL);
+        /* add backup extention to the path */
+        tmp_vpath = vfs_path_clone (real_filename_vpath);
+        last_vpath_element = (vfs_path_element_t *) vfs_path_get_by_index (tmp_vpath, -1);
+        tmp_store_filename = last_vpath_element->path;
+        last_vpath_element->path = g_strdup_printf ("%s%s", tmp_store_filename, option_backup_ext);
+        g_free (tmp_store_filename);
+
         ok = (mc_rename (real_filename_vpath, tmp_vpath) != -1);
         vfs_path_free (tmp_vpath);
         if (!ok)
