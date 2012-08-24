@@ -908,7 +908,7 @@ tree_store_end_check (void)
     ts.add_queue_vpath = g_list_reverse (ts.add_queue_vpath);
     the_queue = ts.add_queue_vpath;
     ts.add_queue_vpath = NULL;
-    g_free (ts.check_name);
+    vfs_path_free (ts.check_name);
     ts.check_name = NULL;
 
     g_list_foreach (the_queue, (GFunc) vfs_path_free, NULL);
