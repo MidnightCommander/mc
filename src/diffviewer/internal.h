@@ -84,7 +84,7 @@ typedef struct WDiff
     char *label[2];
     FBUF *f[2];
     const char *backup_sufix;
-    gboolean merged;
+    gboolean merged[2];
     GArray *a[2];
     GPtrArray *hdiff;
     int ndiff;                  /* number of hunks */

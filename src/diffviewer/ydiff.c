@@ -2061,12 +2061,17 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
 }
 
 static void
-dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1)
+dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, gboolean merge_direction)
 {
     int line;
     char buf[BUF_10K];
     FILE *f0;
-    f0 = fopen (dview->file[0], "r");
+
+    if (merge_direction)
+        f0 = fopen (dview->file[1], "r");
+    else
+        f0 = fopen (dview->file[0], "r");
+
     line = 0;
     while (fgets (buf, sizeof (buf), f0) != NULL && line < from1 - 1)
     {
@@ -2083,14 +2088,25 @@ dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1)
 }
 
 static void
-dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2)
+dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
+                gboolean merge_direction)
 {
     int line;
     char buf[BUF_10K];
     FILE *f0;
     FILE *f1;
-    f0 = fopen (dview->file[0], "r");
-    f1 = fopen (dview->file[1], "r");
+
+    if (merge_direction)
+    {
+        f0 = fopen (dview->file[1], "r");
+        f1 = fopen (dview->file[0], "r");
+    }
+    else
+    {
+        f0 = fopen (dview->file[0], "r");
+        f1 = fopen (dview->file[1], "r");
+    }
+
     line = 0;
     while (fgets (buf, sizeof (buf), f0) != NULL && line < from1 - 1)
     {
@@ -2113,14 +2129,25 @@ dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2)
 }
 
 static void
-dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int from2, int to2)
+dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int from2, int to2,
+                    gboolean merge_direction)
 {
     int line1, line2;
     char buf[BUF_10K];
     FILE *f0;
     FILE *f1;
-    f0 = fopen (dview->file[0], "r");
-    f1 = fopen (dview->file[1], "r");
+
+    if (merge_direction)
+    {
+        f0 = fopen (dview->file[1], "r");
+        f1 = fopen (dview->file[0], "r");
+    }
+    else
+    {
+        f0 = fopen (dview->file[0], "r");
+        f1 = fopen (dview->file[1], "r");
+    }
+
     line1 = 0;
     while (fgets (buf, sizeof (buf), f0) != NULL && line1 < from1 - 1)
     {
@@ -2145,27 +2172,32 @@ dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int fr
 }
 
 static void
-do_merge_hunk (WDiff * dview)
+do_merge_hunk (WDiff * dview, gboolean merge_direction)
 {
     int from1, to1, from2, to2;
     int res;
     int hunk;
+    int n_merge = merge_direction ? 1 : 0;
 
-    hunk = get_current_hunk (dview, &from1, &to1, &from2, &to2);
+    if (merge_direction)
+        hunk = get_current_hunk (dview, &from2, &to2, &from1, &to1);
+    else
+        hunk = get_current_hunk (dview, &from1, &to1, &from2, &to2);
+
     if (hunk > 0)
     {
         int merge_file_fd;
         FILE *merge_file;
         vfs_path_t *merge_file_name_vpath = NULL;
 
-        if (!dview->merged)
+        if (!dview->merged[n_merge])
         {
-            dview->merged = mc_util_make_backup_if_possible (dview->file[0], "~~~");
-            if (!dview->merged)
+            dview->merged[n_merge] = mc_util_make_backup_if_possible (dview->file[n_merge], "~~~");
+            if (!dview->merged[n_merge])
             {
                 message (D_ERROR, MSG_ERROR,
                          _("Cannot create backup file\n%s%s\n%s"),
-                         dview->file[0], "~~~", unix_error_string (errno));
+                         dview->file[n_merge], "~~~", unix_error_string (errno));
                 return;
             }
 
@@ -2184,18 +2216,24 @@ do_merge_hunk (WDiff * dview)
         switch (hunk)
         {
         case DIFF_DEL:
-            dview_remove_hunk (dview, merge_file, from1, to1);
+            if (merge_direction)
+                dview_add_hunk (dview, merge_file, from1, from2, to2, TRUE);
+            else
+                dview_remove_hunk (dview, merge_file, from1, to1, FALSE);
             break;
         case DIFF_ADD:
-            dview_add_hunk (dview, merge_file, from1, from2, to2);
+            if (merge_direction)
+                dview_remove_hunk (dview, merge_file, from1, to1, TRUE);
+            else
+                dview_add_hunk (dview, merge_file, from1, from2, to2, FALSE);
             break;
         case DIFF_CHG:
-            dview_replace_hunk (dview, merge_file, from1, to1, from2, to2);
+            dview_replace_hunk (dview, merge_file, from1, to1, from2, to2, merge_direction);
             break;
         }
         fflush (merge_file);
         fclose (merge_file);
-        res = rewrite_backup_content (merge_file_name_vpath, dview->file[0]);
+        res = rewrite_backup_content (merge_file_name_vpath, dview->file[n_merge]);
         mc_unlink (merge_file_name_vpath);
         vfs_path_free (merge_file_name_vpath);
     }
@@ -2388,6 +2426,8 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->label[1] = g_strdup (label2);
     dview->f[0] = f[0];
     dview->f[1] = f[1];
+    dview->merged[0] = FALSE;
+    dview->merged[1] = FALSE;
     dview->hdiff = NULL;
     dview->dsrc = dsrc;
     dview->converter = str_cnv_from_term;
@@ -2722,7 +2762,7 @@ dview_status (const WDiff * dview, int ord, int width, int c)
     tty_gotoyx (0, c);
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
 
-    filename_width = width - 22;
+    filename_width = width - 24;
     if (filename_width < 8)
         filename_width = 8;
 
@@ -2731,10 +2771,11 @@ dview_status (const WDiff * dview, int ord, int width, int c)
     vfs_path_free (vpath);
     buf = str_term_trim (path, filename_width);
     if (ord == 0)
-        tty_printf ("%-*s %6d+%-4d Col %-4d ", filename_width, buf, linenum, lineofs,
-                    dview->skip_cols);
+        tty_printf ("%s%-*s %6d+%-4d Col %-4d ", dview->merged[ord] ? "* " : "  ", filename_width,
+                    buf, linenum, lineofs, dview->skip_cols);
     else
-        tty_printf ("%-*s %6d+%-4d Dif %-4d ", filename_width, buf, linenum, lineofs, dview->ndiff);
+        tty_printf ("%s%-*s %6d+%-4d Dif %-4d ", dview->merged[ord] ? "* " : "  ", filename_width,
+                    buf, linenum, lineofs, dview->ndiff);
     g_free (path);
 }
 
@@ -2875,10 +2916,16 @@ static gboolean
 dview_save (WDiff * dview)
 {
     gboolean res = TRUE;
-    if (!dview->merged)
-        return res;
-    res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
-    dview->merged = !res;
+    if (dview->merged[0])
+    {
+        res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+        dview->merged[0] = !res;
+    }
+    if (dview->merged[1])
+    {
+        res = mc_util_unlink_backup_if_possible (dview->file[1], "~~~");
+        dview->merged[1] = !res;
+    }
     return res;
 }
 
@@ -2954,12 +3001,12 @@ dview_ok_to_exit (WDiff * dview)
     gboolean res = TRUE;
     int act;
 
-    if (!dview->merged)
+    if (!dview->merged[0] && !dview->merged[1])
         return res;
 
     act = query_dialog (_("Quit"), !mc_global.midnight_shutdown ?
-                        _("File was modified. Save with exit?") :
-                        _("Midnight Commander is being shut down.\nSave modified file?"),
+                        _("File(s) was modified. Save with exit?") :
+                        _("Midnight Commander is being shut down.\nSave modified file(s)?"),
                         D_NORMAL, 2, _("&Yes"), _("&No"));
 
     /* Esc is No */
@@ -2978,6 +3025,8 @@ dview_ok_to_exit (WDiff * dview)
     case 1:                    /* No */
         if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+        if (mc_util_restore_from_backup_if_possible (dview->file[1], "~~~"))
+            res = mc_util_unlink_backup_if_possible (dview->file[1], "~~~");
         /* fall through */
     default:
         res = TRUE;
@@ -3061,7 +3110,11 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         dview_edit (dview, dview->ord);
         break;
     case CK_Merge:
-        do_merge_hunk (dview);
+        do_merge_hunk (dview, FALSE);
+        dview_redo (dview);
+        break;
+    case CK_MergeOther:
+        do_merge_hunk (dview, TRUE);
         dview_redo (dview);
         break;
     case CK_EditOther:
@@ -3275,7 +3328,8 @@ static char *
 dview_get_title (const Dlg_head * h, size_t len)
 {
     const WDiff *dview = (const WDiff *) find_widget_type (h, dview_callback);
-    const char *modified = dview->merged ? " (*) " : "     ";
+    const char *modified = " (*) ";
+    const char *notmodified = "     ";
     size_t len1;
     GString *title;
 
@@ -3283,9 +3337,10 @@ dview_get_title (const Dlg_head * h, size_t len)
 
     title = g_string_sized_new (len);
     g_string_append (title, _("Diff:"));
-    g_string_append (title, modified);
+    g_string_append (title, dview->merged[0] ? modified : notmodified);
     g_string_append (title, str_term_trim (dview->label[0], len1));
     g_string_append (title, " | ");
+    g_string_append (title, dview->merged[1] ? modified : notmodified);
     g_string_append (title, str_term_trim (dview->label[1], len1));
 
     return g_string_free (title, FALSE);
