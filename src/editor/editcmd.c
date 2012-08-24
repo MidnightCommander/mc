@@ -1156,7 +1156,7 @@ edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, off
 
     temp = g_string_sized_new (len);
 
-    for (i = 0; i < len; i++)
+    for (i = 0; i < (off_t) len; i++)
     {
         int chr;
 
