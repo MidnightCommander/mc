@@ -397,7 +397,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                 }
                 if (q == edit->bracket)
                     p->style |= MOD_BOLD;
-                if (q >= edit->found_start && q < edit->found_start + edit->found_len)
+                if (q >= edit->found_start && q < (off_t) (edit->found_start + edit->found_len))
                     p->style |= MOD_BOLD;
 
                 if (!edit->utf8)
