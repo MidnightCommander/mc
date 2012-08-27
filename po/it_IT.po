@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-12-07 14:20+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-08-27 11:24+0300\n"
 "PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Italian (Italy) (http://www.transifex.net/projects/p/mc/team/it_IT/)\n"
+"Language-Team: Italian (Italy) (http://www.transifex.net/projects/p/mc/team/"
+"it_IT/)\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -104,16 +105,16 @@ msgstr ""
 msgid "Regular expression error"
 msgstr ""
 
-msgid "Normal"
+msgid "No&rmal"
 msgstr ""
 
-msgid "&Regular expression"
+msgid "Re&gular expression"
 msgstr ""
 
-msgid "Hexadecimal"
+msgid "He&xadecimal"
 msgstr ""
 
-msgid "Wildcard search"
+msgid "Wil&dcard search"
 msgstr ""
 
 #, c-format
@@ -229,6 +230,9 @@ msgid "Delete key"
 msgstr ""
 
 msgid "Completion/M-tab"
+msgstr ""
+
+msgid "Back Tabulation S-tab"
 msgstr ""
 
 msgid "+ on keypad"
@@ -421,34 +425,6 @@ msgid ""
 "Check the TERM environment variable.\n"
 msgstr ""
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr ""
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr ""
-
 msgid "Warning"
 msgstr ""
 
@@ -475,6 +451,34 @@ msgid "Getting file"
 msgstr ""
 
 msgid "Changes to file lost"
+msgstr ""
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr ""
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+#, c-format
+msgid "Press any key to continue..."
 msgstr ""
 
 msgid "Cannot parse:"
@@ -550,10 +554,13 @@ msgstr ""
 msgid "Launches the file viewer on a file"
 msgstr ""
 
-msgid "Edits one file"
+msgid "Edit files"
 msgstr ""
 
 msgid "Forces xterm features"
+msgstr ""
+
+msgid "Disable X11 support"
 msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
@@ -608,7 +615,8 @@ msgid ""
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
@@ -649,16 +657,19 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr ""
 
-msgid "No arguments given to the viewer."
-msgstr ""
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr ""
-
 msgid "Main options"
 msgstr ""
 
 msgid "Terminal options"
+msgstr ""
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Background process error"
@@ -684,7 +695,7 @@ msgstr ""
 msgid "&Dismiss"
 msgstr ""
 
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
 
 msgid "&Whole words"
@@ -693,7 +704,7 @@ msgstr ""
 msgid "&Backwards"
 msgstr ""
 
-msgid "Case &sensitive"
+msgid "Cas&e sensitive"
 msgstr ""
 
 msgid "Enter search string:"
@@ -722,9 +733,6 @@ msgstr ""
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-
-msgid "&Normal"
 msgstr ""
 
 msgid "&Fastest (Assume large files)"
@@ -807,6 +815,19 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Diff viewer: invalid mode"
+msgstr ""
+
 msgid "Two files are needed to compare"
 msgstr ""
 
@@ -817,16 +838,6 @@ msgid "< Auto >"
 msgstr ""
 
 msgid "< Reload Current Syntax >"
-msgstr ""
-
-msgid "About"
-msgstr ""
-
-msgid ""
-"Copyright (C) 1996-2010 the Free Software Foundation\n"
-"\n"
-"            A user friendly text editor\n"
-"         written for the Midnight Commander"
 msgstr ""
 
 #, c-format
@@ -902,27 +913,6 @@ msgstr ""
 msgid "Save As"
 msgstr ""
 
-msgid "Syntax file edit"
-msgstr ""
-
-msgid "Which syntax file you want to edit?"
-msgstr ""
-
-msgid "&User"
-msgstr ""
-
-msgid "&System Wide"
-msgstr ""
-
-msgid "Menu edit"
-msgstr ""
-
-msgid "Which menu file do you want to edit?"
-msgstr ""
-
-msgid "&Local"
-msgstr ""
-
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
 
@@ -941,13 +931,16 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
+msgid "Save as"
+msgstr ""
+
+msgid "Cannot save: destination is not a regular file"
+msgstr ""
+
 msgid "A file already exists with this name"
 msgstr ""
 
 msgid "&Overwrite"
-msgstr ""
-
-msgid "Save as"
 msgstr ""
 
 msgid "Cannot save file"
@@ -984,12 +977,28 @@ msgstr ""
 msgid "&Save"
 msgstr ""
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes"
+msgid "Load"
 msgstr ""
 
-msgid "Load"
+msgid "Syntax file edit"
+msgstr ""
+
+msgid "Which syntax file you want to edit?"
+msgstr ""
+
+msgid "&User"
+msgstr ""
+
+msgid "&System wide"
+msgstr ""
+
+msgid "Menu edit"
+msgstr ""
+
+msgid "Which menu file do you want to edit?"
+msgstr ""
+
+msgid "&Local"
 msgstr ""
 
 msgid "Replace"
@@ -999,7 +1008,22 @@ msgstr ""
 msgid "%ld replacements made"
 msgstr ""
 
-msgid "&Cancel quit"
+msgid "[NoName]"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s was modified.\n"
+"Save before close?"
+msgstr ""
+
+msgid "Close file"
+msgstr ""
+
+#, c-format
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file %s?"
 msgstr ""
 
 msgid "This function is not implemented"
@@ -1082,7 +1106,7 @@ msgid "Press any key:"
 msgstr ""
 
 msgid ""
-"Current text was modified without a file save\n"
+"Current text was modified without a file save.\n"
 "Continue discards these changes"
 msgstr ""
 
@@ -1118,10 +1142,16 @@ msgstr ""
 msgid "Confirm replace"
 msgstr ""
 
+msgid "NoName"
+msgstr ""
+
 msgid "&Open file..."
 msgstr ""
 
 msgid "&New"
+msgstr ""
+
+msgid "&Close"
 msgstr ""
 
 msgid "Save &as..."
@@ -1244,7 +1274,13 @@ msgstr ""
 msgid "Record/Repeat &actions"
 msgstr ""
 
-msgid "'ispell' s&pell check"
+msgid "S&pell check"
+msgstr ""
+
+msgid "C&heck word"
+msgstr ""
+
+msgid "Change spelling &language"
 msgstr ""
 
 msgid "&Mail..."
@@ -1266,6 +1302,24 @@ msgid "&Paste output of..."
 msgstr ""
 
 msgid "&External formatter"
+msgstr ""
+
+msgid "&Move"
+msgstr ""
+
+msgid "&Resize"
+msgstr ""
+
+msgid "&Toggle fullscreen"
+msgstr ""
+
+msgid "&Next"
+msgstr ""
+
+msgid "&Previous"
+msgstr ""
+
+msgid "&List..."
 msgstr ""
 
 msgid "&General..."
@@ -1302,6 +1356,9 @@ msgid "&Command"
 msgstr ""
 
 msgid "For&mat"
+msgstr ""
+
+msgid "&Window"
 msgstr ""
 
 msgid "&Options"
@@ -1364,6 +1421,19 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
+msgid "About"
+msgstr ""
+
+msgid ""
+"Copyright (C) 1996-2012 the Free Software Foundation\n"
+"\n"
+"            A user friendly text editor\n"
+"         written for the Midnight Commander"
+msgstr ""
+
+msgid "Open files"
+msgstr ""
+
 msgid "Edit: "
 msgstr ""
 
@@ -1383,6 +1453,24 @@ msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "&Add word"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Misspelled"
+msgstr ""
+
+msgid "Check word"
+msgstr ""
+
+msgid "Suggest"
+msgstr ""
+
+msgid "Select language"
 msgstr ""
 
 msgid "Load syntax file"
@@ -1525,8 +1613,7 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1785,6 +1872,9 @@ msgstr ""
 msgid "Which extension file you want to edit?"
 msgstr ""
 
+msgid "&System Wide"
+msgstr ""
+
 msgid "Highlighting groups file edit"
 msgstr ""
 
@@ -1838,6 +1928,9 @@ msgstr ""
 msgid "FTP to machine"
 msgstr ""
 
+msgid "SFTP to machine"
+msgstr ""
+
 msgid "Shell link to machine"
 msgstr ""
 
@@ -1875,13 +1968,13 @@ msgstr ""
 msgid "Cannot read directory contents"
 msgstr ""
 
+msgid "Parameter"
+msgstr ""
+
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
-msgstr ""
-
-msgid "Parameter"
 msgstr ""
 
 #, c-format
@@ -2264,15 +2357,35 @@ msgid "Background process: File exists"
 msgstr ""
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
 msgstr ""
 
 #, c-format
-msgid "Total: %s of %s"
+msgid "Time: %s %s"
+msgstr ""
+
+#, c-format
+msgid "Time: %s %s (%s)"
+msgstr ""
+
+#, c-format
+msgid "Time: %s"
+msgstr ""
+
+#, c-format
+msgid "Time: %s (%s)"
+msgstr ""
+
+#, c-format
+msgid " Total: %s "
+msgstr ""
+
+#, c-format
+msgid " Total: %s/%s "
 msgstr ""
 
 msgid "Source"
@@ -2331,25 +2444,16 @@ msgstr ""
 msgid "Malformed regular expression"
 msgstr ""
 
-msgid "Cas&e sensitive"
-msgstr ""
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
 msgid "Sea&rch for content"
 msgstr ""
 
 msgid "Case sens&itive"
-msgstr ""
-
-msgid "Re&gular expression"
 msgstr ""
 
 msgid "Fir&st hit"
@@ -2394,9 +2498,6 @@ msgid "Searching %s"
 msgstr ""
 
 msgid "Searching"
-msgstr ""
-
-msgid "&Move"
 msgstr ""
 
 msgid "&Remove"
@@ -2463,14 +2564,13 @@ msgstr ""
 msgid "Name of new group:"
 msgstr ""
 
-msgid "Remove:"
+#, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-msgid "Are you sure you want to remove this entry?"
-msgstr ""
-
+#, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
@@ -2482,7 +2582,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
@@ -2642,6 +2742,9 @@ msgid "FT&P link..."
 msgstr ""
 
 msgid "S&hell link..."
+msgstr ""
+
+msgid "S&FTP link..."
 msgstr ""
 
 msgid "SM&B link..."
@@ -2836,9 +2939,6 @@ msgstr ""
 msgid "A&uto save setup"
 msgstr ""
 
-msgid "Preallocate &space before file copying"
-msgstr ""
-
 msgid "Sa&fe delete"
 msgstr ""
 
@@ -2876,6 +2976,9 @@ msgid "S&ingle press"
 msgstr ""
 
 msgid "Esc key mode"
+msgstr ""
+
+msgid "Preallocate &space"
 msgstr ""
 
 msgid "Mkdi&r autoname"
@@ -3128,6 +3231,9 @@ msgstr ""
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
+msgid "Modified git files"
+msgstr ""
+
 msgid "Find rejects after patching"
 msgstr ""
 
@@ -3306,6 +3412,9 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Home directory path is not absolute"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3394,6 +3503,9 @@ msgstr ""
 
 #, c-format
 msgid "Data types:"
+msgstr ""
+
+msgid "Root directory:"
 msgstr ""
 
 msgid "System data"
@@ -3487,13 +3599,6 @@ msgid "fish: Handshaking version..."
 msgstr ""
 
 msgid "fish: Getting host info..."
-msgstr ""
-
-msgid "fish: Setting up current directory..."
-msgstr ""
-
-#, c-format
-msgid "fish: Connected, home %s."
 msgstr ""
 
 #, c-format
@@ -3647,6 +3752,62 @@ msgstr ""
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
+msgstr ""
+
+#, c-format
+msgid "sftp: an error occured while reading %s: %s"
+msgstr ""
+
+msgid "sftp: Unable to get current user name."
+msgstr ""
+
+msgid "sftp: Invalid host name."
+msgstr ""
+
+msgid "sftp: Invalid port value."
+msgstr ""
+
+#, c-format
+msgid "sftp: %s"
+msgstr ""
+
+#, c-format
+msgid "sftp: making connection to %s"
+msgstr ""
+
+msgid "sftp: connection interrupted by user"
+msgstr ""
+
+#, c-format
+msgid "sftp: connection to server failed: %s"
+msgstr ""
+
+#, c-format
+msgid "sftp: Enter passphrase for %s "
+msgstr ""
+
+msgid "sftp: Passphrase is empty."
+msgstr ""
+
+#, c-format
+msgid "sftp: Enter password for %s "
+msgstr ""
+
+msgid "sftp: Password is empty."
+msgstr ""
+
+#, c-format
+msgid "sftp: Failure establishing SSH session: (%d)"
+msgstr ""
+
+msgid "sftp: No file handler data present for reading file"
+msgstr ""
+
+#, c-format
+msgid "sftp: (Ctrl-G break) Listing... %s"
+msgstr ""
+
+msgid "sftp: Listing done."
 msgstr ""
 
 #, c-format
@@ -3831,18 +3992,15 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "&Cancel quit"
+msgstr ""
+
 msgid "View: "
 msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -3857,5 +4015,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-

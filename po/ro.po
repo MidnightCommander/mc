@@ -1,22 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2012-07-12 22:14+0400\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-08-27 11:24+0300\n"
 "PO-Revision-Date: 2012-07-13 08:36+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Romanian (http://www.transifex.com/projects/p/mc/language/ro/)\n"
+"Language-Team: Romanian (http://www.transifex.com/projects/p/mc/language/"
+"ro/)\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1))\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1))\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -423,7 +425,9 @@ msgstr "Variabila de mediu TERM nu este setată!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "Mărimea %dx%d a ecranului nu este suportată.\nVerificaţi variabila e mediu TERM.\n"
+msgstr ""
+"Mărimea %dx%d a ecranului nu este suportată.\n"
+"Verificaţi variabila e mediu TERM.\n"
 
 msgid "Warning"
 msgstr "Atenţie"
@@ -1142,6 +1146,9 @@ msgstr ""
 msgid "Confirm replace"
 msgstr ""
 
+msgid "NoName"
+msgstr ""
+
 msgid "&Open file..."
 msgstr "D&eschide cu..."
 
@@ -1431,9 +1438,6 @@ msgstr ""
 msgid "Open files"
 msgstr ""
 
-msgid "NoName"
-msgstr ""
-
 msgid "Edit: "
 msgstr ""
 
@@ -1453,6 +1457,25 @@ msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
+msgstr ""
+
+#, fuzzy
+msgid "&Add word"
+msgstr "&Adaugă nou"
+
+msgid "Language"
+msgstr ""
+
+msgid "Misspelled"
+msgstr ""
+
+msgid "Check word"
+msgstr ""
+
+msgid "Suggest"
+msgstr ""
+
+msgid "Select language"
 msgstr ""
 
 msgid "Load syntax file"
@@ -1595,8 +1618,7 @@ msgstr "Ordinea de sortare"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -3235,7 +3257,9 @@ msgstr "Caută programe SUID şi SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr " Nu pot deschide fişierul %s pentru scriere:\n %s\n"
+msgstr ""
+" Nu pot deschide fişierul %s pentru scriere:\n"
+" %s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3274,7 +3298,9 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr "Nu pot scrie în fişierul %s:\n%s\n"
+msgstr ""
+"Nu pot scrie în fişierul %s:\n"
+"%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3298,7 +3324,9 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr "Fişierul %s nu este deţinut de root ori dvs. sau poate fi\nmodificat de oricine. Utilizându-l vă puteţi compromite securitatea"
+msgstr ""
+"Fişierul %s nu este deţinut de root ori dvs. sau poate fi\n"
+"modificat de oricine. Utilizându-l vă puteţi compromite securitatea"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3359,7 +3387,15 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr "Vă rog să apăsaţi %s\niar apoi să aşteptaţi până când mesajul dispare.\n\nApoi, apăsaţi-o din nou pentru a vedea dacă apare OK\nlângă butonul său.\n\nDacă doriţi să ieşiţi, apăsaţi o singură dată tasta Escape\nşi aşteptaţi."
+msgstr ""
+"Vă rog să apăsaţi %s\n"
+"iar apoi să aşteptaţi până când mesajul dispare.\n"
+"\n"
+"Apoi, apăsaţi-o din nou pentru a vedea dacă apare OK\n"
+"lângă butonul său.\n"
+"\n"
+"Dacă doriţi să ieşiţi, apăsaţi o singură dată tasta Escape\n"
+"şi aşteptaţi."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3375,7 +3411,9 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr "Se pare că toate tastele dvs. deja\nfuncţionează corect. Asta e excelent."
+msgstr ""
+"Se pare că toate tastele dvs. deja\n"
+"funcţionează corect. Asta e excelent."
 
 msgid "&Discard"
 msgstr "&Anulează"
@@ -3383,7 +3421,9 @@ msgstr "&Anulează"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr "Excelent! Aveţi o bază de date terminal completă!\nToate tastele dvs. funcţionează corect."
+msgstr ""
+"Excelent! Aveţi o bază de date terminal completă!\n"
+"Toate tastele dvs. funcţionează corect."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Apăsaţi toate tastele menţionate aici. După ce aţi făcut-o, veri-"
@@ -3518,13 +3558,17 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr " Nu pot deschide arhiva cpio\n%s"
+msgstr ""
+" Nu pot deschide arhiva cpio\n"
+"%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr "Sfârşit prematur al arhivei cpio\n%s"
+msgstr ""
+"Sfârşit prematur al arhivei cpio\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3532,7 +3576,10 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "Legături reale inconsistente ale%s\nîn arhiva cpio\n%s"
+msgstr ""
+"Legături reale inconsistente ale%s\n"
+"în arhiva cpio\n"
+"%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3542,19 +3589,25 @@ msgstr "%s conţine intrări duplicate! Trec peste!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr "Antet corupt al arhivei cpio în\n%s"
+msgstr ""
+"Antet corupt al arhivei cpio în\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Sfârşit de fişier (EOF) neaşteptat\n%s"
+msgstr ""
+"Sfârşit de fişier (EOF) neaşteptat\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr " Nu pot deschide arhiva %s\n%s"
+msgstr ""
+" Nu pot deschide arhiva %s\n"
+"%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Arhivă extfs inconsistentă"
@@ -3734,13 +3787,77 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr "Atenţie: Linie invalidă în %s:\n%s\n"
+msgstr ""
+"Atenţie: Linie invalidă în %s:\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr "Atenţie: Indicator %c invalid în %s:\n%s\n"
+msgstr ""
+"Atenţie: Indicator %c invalid în %s:\n"
+"%s\n"
+
+#, c-format
+msgid "sftp: an error occured while reading %s: %s"
+msgstr ""
+
+msgid "sftp: Unable to get current user name."
+msgstr ""
+
+#, fuzzy
+msgid "sftp: Invalid host name."
+msgstr "ftpfs: Nume invalid al gazdei."
+
+#, fuzzy
+msgid "sftp: Invalid port value."
+msgstr "ftpfs: Nume invalid al gazdei."
+
+#, c-format
+msgid "sftp: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "sftp: making connection to %s"
+msgstr "ftpfs: mă conectez la %s"
+
+#, fuzzy
+msgid "sftp: connection interrupted by user"
+msgstr "ftpfs: conectare întreruptă de utilizator"
+
+#, fuzzy, c-format
+msgid "sftp: connection to server failed: %s"
+msgstr "ftpfs: conectarea la server a eşuat: %s"
+
+#, c-format
+msgid "sftp: Enter passphrase for %s "
+msgstr ""
+
+msgid "sftp: Passphrase is empty."
+msgstr ""
+
+#, fuzzy, c-format
+msgid "sftp: Enter password for %s "
+msgstr "ftpfs: trimit parola utilizator"
+
+msgid "sftp: Password is empty."
+msgstr ""
+
+#, c-format
+msgid "sftp: Failure establishing SSH session: (%d)"
+msgstr ""
+
+msgid "sftp: No file handler data present for reading file"
+msgstr ""
+
+#, c-format
+msgid "sftp: (Ctrl-G break) Listing... %s"
+msgstr ""
+
+#, fuzzy
+msgid "sftp: Listing done."
+msgstr "Mod de listare"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3773,7 +3890,9 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr "Nu pot deschide arhiva tar\n%s"
+msgstr ""
+"Nu pot deschide arhiva tar\n"
+"%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Arhivă tar trunchiată"

@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-23 14:11+0200\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-08-27 11:24+0300\n"
 "PO-Revision-Date: 2012-06-23 14:11+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.net/projects/p/mc/language/"
@@ -118,7 +118,8 @@ msgstr " Numero token non valido %d "
 msgid "Regular expression error"
 msgstr "Errore espressione regolare"
 
-msgid "&Normal"
+#, fuzzy
+msgid "No&rmal"
 msgstr "&Normale"
 
 msgid "Re&gular expression"
@@ -1350,8 +1351,16 @@ msgstr "Elimina macr&o..."
 msgid "Record/Repeat &actions"
 msgstr "Registra/ripeti le &azioni"
 
-msgid "'ispell' s&pell check"
+#, fuzzy
+msgid "S&pell check"
 msgstr "Controllo ortogra&fia"
+
+#, fuzzy
+msgid "C&heck word"
+msgstr "&Parole intere"
+
+msgid "Change spelling &language"
+msgstr ""
 
 msgid "&Mail..."
 msgstr "&Posta..."
@@ -1528,6 +1537,27 @@ msgstr "Elimin"
 
 msgid "ButtonBar|PullDn"
 msgstr "AprMen"
+
+#, fuzzy
+msgid "&Add word"
+msgstr "Aggiungi &nuovo"
+
+msgid "Language"
+msgstr ""
+
+msgid "Misspelled"
+msgstr ""
+
+#, fuzzy
+msgid "Check word"
+msgstr "&Parole intere"
+
+msgid "Suggest"
+msgstr ""
+
+#, fuzzy
+msgid "Select language"
+msgstr "Seleziona &gruppo"
 
 msgid "Load syntax file"
 msgstr "Carica file sintassi"

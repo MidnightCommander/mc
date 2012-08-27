@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2012-07-12 22:14+0400\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-08-27 11:24+0300\n"
 "PO-Revision-Date: 2012-07-13 08:36+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: mn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: mn\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Warning: cannot load codepages list"
@@ -423,7 +423,9 @@ msgstr "TERM хувьсагч утга аваагүй байна!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "Дэлгэцийн %dx%d хэмжээсийг сонгох боломжгүй байна.\nTERM хувьсагчийн утгыг шалгана уу.\n"
+msgstr ""
+"Дэлгэцийн %dx%d хэмжээсийг сонгох боломжгүй байна.\n"
+"TERM хувьсагчийн утгыг шалгана уу.\n"
 
 msgid "Warning"
 msgstr "Анхааруулга"
@@ -1142,6 +1144,9 @@ msgstr ""
 msgid "Confirm replace"
 msgstr ""
 
+msgid "NoName"
+msgstr ""
+
 msgid "&Open file..."
 msgstr "Файл &нээх..."
 
@@ -1431,9 +1436,6 @@ msgstr ""
 msgid "Open files"
 msgstr ""
 
-msgid "NoName"
-msgstr ""
-
 msgid "Edit: "
 msgstr ""
 
@@ -1453,6 +1455,25 @@ msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
+msgstr ""
+
+#, fuzzy
+msgid "&Add word"
+msgstr "&Шинийг нэмэх"
+
+msgid "Language"
+msgstr ""
+
+msgid "Misspelled"
+msgstr ""
+
+msgid "Check word"
+msgstr ""
+
+msgid "Suggest"
+msgstr ""
+
+msgid "Select language"
 msgstr ""
 
 msgid "Load syntax file"
@@ -1595,8 +1616,7 @@ msgstr "Эрэмбэлэх дараалал"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -3230,7 +3250,9 @@ msgstr " SUID/SGID программуудыг хайх"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr " %s файлыг уншихаар нээж чадсангүй:\n%s\n"
+msgstr ""
+" %s файлыг уншихаар нээж чадсангүй:\n"
+"%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3269,7 +3291,9 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr " %s файл руу бичиж чадсангүй:\n%s\n"
+msgstr ""
+" %s файл руу бичиж чадсангүй:\n"
+"%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3293,7 +3317,9 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr "Файл %s нь таны эсвэл root ийн эзэмшил биш,\nАюулгүй байдлын үүднээс хэрэглэдэг"
+msgstr ""
+"Файл %s нь таны эсвэл root ийн эзэмшил биш,\n"
+"Аюулгүй байдлын үүднээс хэрэглэдэг"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3354,7 +3380,15 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr "Та товчлуураа дараад %s\nэнэ мэдээллийг гарч иртэл түр хүлээнэ үү.\n\nДараа нь ОК гэж гарч иртэл ,\nдахин дараад түр хүлээнэ үү.\n\nХэрвээ та сургалтаа зогсоохыг хүсвэл\n Esc товчоо дараад түр хүлээнэ үү."
+msgstr ""
+"Та товчлуураа дараад %s\n"
+"энэ мэдээллийг гарч иртэл түр хүлээнэ үү.\n"
+"\n"
+"Дараа нь ОК гэж гарч иртэл ,\n"
+"дахин дараад түр хүлээнэ үү.\n"
+"\n"
+"Хэрвээ та сургалтаа зогсоохыг хүсвэл\n"
+" Esc товчоо дараад түр хүлээнэ үү."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3370,7 +3404,9 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr "Таны бүх товчруурууд хэвийн ажиллаж байна.\nБаяр хүргэе!"
+msgstr ""
+"Таны бүх товчруурууд хэвийн ажиллаж байна.\n"
+"Баяр хүргэе!"
 
 msgid "&Discard"
 msgstr "&Хаах"
@@ -3378,13 +3414,17 @@ msgstr "&Хаах"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr "Сайн! Та бүх баазыг дуусгалаа.\nТаны бүх товчлуурууд дажгүй ажиллаж байна."
+msgstr ""
+"Сайн! Та бүх баазыг дуусгалаа.\n"
+"Таны бүх товчлуурууд дажгүй ажиллаж байна."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Бүх товчлууруудаа дарж үзнэ үү. Дараа нь та аль товчлуур"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr " \"OK\" гэж тэмдэглээдээгүй байгааг шалгаарай. Хоосон зай дарахыг хүлээж байна"
+msgstr ""
+" \"OK\" гэж тэмдэглээдээгүй байгааг шалгаарай. Хоосон зай дарахыг хүлээж "
+"байна"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "товчлуур эсвэл хулганаар дарж үүнийг тодорхойлно. Табын хамт зөөнө."
@@ -3513,13 +3553,17 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr "cpio-архивыг нээж чадсангүй\n%s"
+msgstr ""
+"cpio-архивыг нээж чадсангүй\n"
+"%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr "cpio архивийн цагаасаа өмнө төгсөх\n%s"
+msgstr ""
+"cpio архивийн цагаасаа өмнө төгсөх\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3527,7 +3571,11 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "%s cpio архив дахь \nхүнд холбоос нь\nтохироогүй \n%s"
+msgstr ""
+"%s cpio архив дахь \n"
+"хүнд холбоос нь\n"
+"тохироогүй \n"
+"%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3537,19 +3585,25 @@ msgstr "%s давхардсан бичлэг агуулж байна! Алгас
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr "cpio толгой нь эвдрэл таарсан\n%s"
+msgstr ""
+"cpio толгой нь эвдрэл таарсан\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Файлын төгсөлийн алдаа\n%s"
+msgstr ""
+"Файлын төгсөлийн алдаа\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr " %s-архивыг нээж чадсангүй\n%s"
+msgstr ""
+" %s-архивыг нээж чадсангүй\n"
+"%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Алдаатай архив extfs"
@@ -3729,13 +3783,77 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr "Анхаар: %s д алдаатай мөр:\n%s\n"
+msgstr ""
+"Анхаар: %s д алдаатай мөр:\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr "Анхаар: Алдаатай флаг %c %s -д байна:\n%s\n"
+msgstr ""
+"Анхаар: Алдаатай флаг %c %s -д байна:\n"
+"%s\n"
+
+#, c-format
+msgid "sftp: an error occured while reading %s: %s"
+msgstr ""
+
+msgid "sftp: Unable to get current user name."
+msgstr ""
+
+#, fuzzy
+msgid "sftp: Invalid host name."
+msgstr "ftpfs: буруу хост нэр."
+
+#, fuzzy
+msgid "sftp: Invalid port value."
+msgstr "ftpfs: буруу хост нэр."
+
+#, c-format
+msgid "sftp: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "sftp: making connection to %s"
+msgstr "ftpfs: %s руу холболт үүсгэж байна"
+
+#, fuzzy
+msgid "sftp: connection interrupted by user"
+msgstr "ftpfs: холболтыг хэрэглэгч тасаллаа"
+
+#, fuzzy, c-format
+msgid "sftp: connection to server failed: %s"
+msgstr "ftpfs: сервер руу холбогдолт амжилтгүй боллоо: %s"
+
+#, c-format
+msgid "sftp: Enter passphrase for %s "
+msgstr ""
+
+msgid "sftp: Passphrase is empty."
+msgstr ""
+
+#, fuzzy, c-format
+msgid "sftp: Enter password for %s "
+msgstr "ftpfs: хэрэглэгчийн нууц үгийг илгээж байна"
+
+msgid "sftp: Password is empty."
+msgstr ""
+
+#, c-format
+msgid "sftp: Failure establishing SSH session: (%d)"
+msgstr ""
+
+msgid "sftp: No file handler data present for reading file"
+msgstr ""
+
+#, c-format
+msgid "sftp: (Ctrl-G break) Listing... %s"
+msgstr ""
+
+#, fuzzy
+msgid "sftp: Listing done."
+msgstr "Жасгаалтын горим"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3768,7 +3886,9 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr "tar-архивыг нээж чадсангүй\n%s"
+msgstr ""
+"tar-архивыг нээж чадсангүй\n"
+"%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Алдаатай архив tar"
@@ -3801,7 +3921,8 @@ msgstr ""
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: %d зангилаануудын устгагдсан файлуудын мэдээллийг ачаалж байна "
+msgstr ""
+"undelfs: %d зангилаануудын устгагдсан файлуудын мэдээллийг ачаалж байна "
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
