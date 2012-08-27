@@ -578,13 +578,13 @@ edit_event (Gpm_Event * event, void *data)
 
             if ((local.type & GPM_DOWN) != 0)
             {
-                edit_mark_cmd (edit, 1);        /* reset */
+                edit_mark_cmd (edit, TRUE);     /* reset */
                 edit->highlight = 0;
             }
 
             done = (local.type & GPM_DRAG) == 0;
             if (done)
-                edit_mark_cmd (edit, 0);
+                edit_mark_cmd (edit, FALSE);
 
           update:
             edit_find_bracket (edit);
@@ -1069,7 +1069,7 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
  */
 
 gboolean
-edit_file (const vfs_path_t * file_vpath, int line)
+edit_file (const vfs_path_t * file_vpath, long line)
 {
     mcedit_arg_t arg = { (vfs_path_t *) file_vpath, line };
     GList *files;
@@ -1232,7 +1232,7 @@ edit_save_size (WEdit * edit)
  */
 
 gboolean
-edit_add_window (Dlg_head * h, int y, int x, int lines, int cols, const vfs_path_t * f, int fline)
+edit_add_window (Dlg_head * h, int y, int x, int lines, int cols, const vfs_path_t * f, long fline)
 {
     WEdit *edit;
     Widget *w;

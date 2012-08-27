@@ -341,11 +341,14 @@ editcmd_dialog_search_show (WEdit * edit)
    and Esc are cannot returned */
 
 int
-editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel)
+editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean cancel)
 {
-    int w = str_term_width1 (query) + 7;
+    int w;
+    struct Dlg_head *raw_dlg;
 
-    struct Dlg_head *raw_dlg =
+    w = str_term_width1 (query) + 7;
+
+    raw_dlg =
         create_dlg (TRUE, 0, 0, 7, w, dialog_colors, editcmd_dialog_raw_key_query_cb, NULL,
                     NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
     add_widget (raw_dlg, input_new (3 - cancel, w - 5, input_get_default_colors (),

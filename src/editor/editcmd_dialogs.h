@@ -29,7 +29,7 @@ void editcmd_dialog_replace_show (WEdit *, const char *, const char *, char **, 
 
 gboolean editcmd_dialog_search_show (WEdit * edit);
 
-int editcmd_dialog_raw_key_query (const char *, const char *, int);
+int editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean cancel);
 
 void editcmd_dialog_completion_show (WEdit *, int, int, struct selection *, int);
 
