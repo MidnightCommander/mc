@@ -45,6 +45,9 @@ do_view_action() {
     torrent)
         ctorrent -x "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
+    javaclass)
+        jad -p "${MC_EXT_FILENAME}" 2>/dev/null
+        ;;
     *)
         ;;
     esac
