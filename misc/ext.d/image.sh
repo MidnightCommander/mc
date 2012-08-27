@@ -33,10 +33,10 @@ do_open_action() {
         (gimp "${MC_EXT_FILENAME}" &)
         ;;
     *)
-        if [ "$DISPLAY" = "" ]; then
-            zgv "${MC_EXT_FILENAME}"
-        else
+        if [ -n "$DISPLAY" ]; then
             (gqview "${MC_EXT_FILENAME}" &)
+        else
+            zgv "${MC_EXT_FILENAME}"
         fi
         ;;
     esac

@@ -7,6 +7,22 @@ action=$1
 filetype=$2
 
 
+STAROFFICE_REGEXP='\.(sxw|sdw|stw|sxc|stc|sxi|sti|sxd|std||sxm||sxg)$'
+
+staroffice_console() {
+    filename=$1;shift
+    is_view=$1; shift
+    if [ -n "${is_view}" ]; then
+        is_view='-dump'
+    fi
+
+    tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
+    cd $tmp
+    soffice2html.pl "${filename}"
+    elinks ${is_view} content.html
+    rm -rf "$tmp"
+}
+
 do_view_action() {
     filetype=$1
 
@@ -15,19 +31,36 @@ do_view_action() {
         ps2ascii "${MC_EXT_FILENAME}"
         ;;
     pdf)
-        pdftotext "${MC_EXT_FILENAME}" -
+        pdftotext -layout -nopgbrk "${MC_EXT_FILENAME}" -
         ;;
     odt)
-        odt2txt "${MC_EXT_FILENAME}"
+        if [ ` echo "${MC_EXT_FILENAME}" | grep -c "${STAROFFICE_REGEXP}"` -ne 0 ]; then
+            staroffice_console "${MC_EXT_FILENAME}" "view"
+        else
+            odt2txt "${MC_EXT_FILENAME}"
+        fi
         ;;
     msdoc)
-        antiword -t "${MC_EXT_FILENAME}" || \
+        which wvHtml >/dev/null 2>&1 &&
+        {
+            tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
+            wvHtml "${MC_EXT_FILENAME}" --targetdir="$tmp" page.html
+            elinks -dump "$tmp/page.html"
+            rm -rf "$tmp"
+        } || \
+            antiword -t "${MC_EXT_FILENAME}" || \
             catdoc -w "${MC_EXT_FILENAME}" || \
             word2x -f text "${MC_EXT_FILENAME}" - || \
             strings "${MC_EXT_FILENAME}"
         ;;
     msxls)
-        xls2csv "${MC_EXT_FILENAME}" || \
+        which xlHtml >/dev/null 2>&1 && {
+            tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
+            xlhtml -a "${MC_EXT_FILENAME}" > "$tmp/page.html"
+            elinks -dump "$tmp/page.html"
+            rm -rf "$tmp"
+        } || \
+            xls2csv "${MC_EXT_FILENAME}" || \
             strings "${MC_EXT_FILENAME}"
         ;;
     dvi)
@@ -46,33 +79,74 @@ do_open_action() {
 
     case "${filetype}" in
     ps)
-        (gv "${MC_EXT_FILENAME}" &)
+        if [ -n "$DISPLAY" ]; then
+            (gv "${MC_EXT_FILENAME}" &)
+        else
+            ps2ascii "${MC_EXT_FILENAME}" | ${PAGER:-more}
+        fi
         ;;
     pdf)
-        (xpdf "${MC_EXT_FILENAME}" &)
+        if [ -n "$DISPLAY" ]; then
+            (xpdf "${MC_EXT_FILENAME}" &)
+        else
+            pdftotext -layout -nopgbrk "${MC_EXT_FILENAME}" - | ${PAGER:-more}
+        fi
         #(acroread "${MC_EXT_FILENAME}" &)
         #(ghostview "${MC_EXT_FILENAME}" &)
         ;;
     ooffice)
-        (ooffice "${MC_EXT_FILENAME}" &)
+        if [ -n "$DISPLAY" ]; then
+            (ooffice "${MC_EXT_FILENAME}" &)
+        else
+            if [ ` echo "${MC_EXT_FILENAME}" | grep -c "${STAROFFICE_REGEXP}"` -ne 0 ]; then
+                staroffice_console "${MC_EXT_FILENAME}"
+            else
+                odt2txt "${MC_EXT_FILENAME}" | ${PAGER:-more}
+            fi
+        fi
         ;;
     abw)
         (abiword "${MC_EXT_FILENAME}" &)
         ;;
     msdoc)
-        (abiword "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        if [ -n "$DISPLAY" ]; then
+            (abiword "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        else
+            tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
+            wvHtml "${MC_EXT_FILENAME}" --targetdir="$tmp" page.html -1
+            elinks "$tmp/page.html"
+            rm -rf "$tmp"
+        fi
         ;;
     msxls)
-        (gnumeric "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        if [ -n "$DISPLAY" ]; then
+            (gnumeric "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        else
+            tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
+            xlhtml -a "${MC_EXT_FILENAME}" > "$tmp/page.html"
+            elinks "$tmp/page.html"
+            rm -rf "$tmp"
+        fi
+        ;;
+    msppt)
+        if [ -n "$DISPLAY" ]; then
+            (ooffice %f >/dev/null 2>&1 &)
+        else
+            tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
+            ppthtml %f > "$tmp/page.html"
+            elinks "$tmp/page.html"
+            rm -rf "$tmp"
+        fi
         ;;
     framemaker)
         fmclient -f "${MC_EXT_FILENAME}"
         ;;
     dvi)
-        if [ x$DISPLAY = x ]; then
-            dvisvga "${MC_EXT_FILENAME}"
-        else
+        if [ -n "$DISPLAY" ]; then
             (xdvi "${MC_EXT_FILENAME}" &)
+        else
+            dvisvga "${MC_EXT_FILENAME}" || \
+                dvi2tty "${MC_EXT_FILENAME}" | ${PAGER:-more}
         fi
         ;;
     djvu)

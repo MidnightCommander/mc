@@ -25,7 +25,11 @@ do_open_action() {
         (realplay "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         ;;
     *)
-        (mplayer "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        if [ -n "$DISPLAY" ]; then
+            (mplayer "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        else
+            mplayer -vo null "${MC_EXT_FILENAME}"
+        fi
         #(gtv "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         #(xanim "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         ;;

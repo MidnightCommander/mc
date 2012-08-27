@@ -6,7 +6,6 @@
 action=$1
 filetype=$2
 
-
 do_view_action() {
     filetype=$1
 
@@ -26,10 +25,11 @@ do_open_action() {
 
     case "${filetype}" in
     html)
-        (if test -n "@X11_WWW@" && test -n "$DISPLAY"; then
+        (if [ -n "@X11_WWW@" -a  -n "$DISPLAY" ]; then
             (@X11_WWW@ file://"${MC_EXT_CURRENTDIR}"/"${MC_EXT_BASENAME}" &) 1>&2
         else
-            links "${MC_EXT_FILENAME}" || \
+            elinks "${MC_EXT_FILENAME}" || \
+                links "${MC_EXT_FILENAME}" || \
                 lynx -force_html "${MC_EXT_FILENAME}" || \
                 ${PAGER:-more} "${MC_EXT_FILENAME}"
         fi) 2>/dev/null

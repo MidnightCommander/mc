@@ -564,6 +564,10 @@ type/^Microsoft\ Excel
 	Open=@EXTHELPERSDIR@/doc.sh open msxls
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
 
+regex/i/\.(ppt|pps)$
+	Open=@EXTHELPERSDIR@/doc.sh open msppt
+	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msppt
+
 # Use OpenOffice.org to open any MS Office documents
 type/^Microsoft\ Office\ Document
 	Open=@EXTHELPERSDIR@/doc.sh open ooffice
@@ -588,6 +592,10 @@ regex/i/\.djvu?$
 
 ### Miscellaneous ###
 
+# Compiled Java classes
+shell/.class
+	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view javaclass
+
 # Makefile
 regex/[Mm]akefile$
 	Open=make -f %f %{Enter parameters}
@@ -600,9 +608,14 @@ shell/Imakefile
 regex/^Makefile.(PL|pl)$
 	Open=%var{PERL:perl} %f
 
+# sqlite3.db
+type/^SQLite 3.x database
+	Open=@EXTHELPERSDIR@/misc.sh open sqlite
+	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view sqlite
+
 # dbf
 shell/i/.dbf
-	Open=%view{ascii} @EXTHELPERSDIR@/misc.sh open dbf
+	Open=@EXTHELPERSDIR@/misc.sh open dbf
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dbf
 
 # REXX script
