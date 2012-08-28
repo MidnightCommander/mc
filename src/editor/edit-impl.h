@@ -177,7 +177,7 @@ extern gboolean search_create_bookmark;
 
 /*** declarations of public functions ************************************************************/
 
-int edit_drop_hotkey_menu (WEdit * e, int key);
+gboolean edit_drop_hotkey_menu (WEdit * e, int key);
 void edit_menu_cmd (WEdit * e);
 void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (struct WMenuBar *menubar);
