@@ -182,7 +182,7 @@ void edit_menu_cmd (WEdit * e);
 void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (struct WMenuBar *menubar);
 void menu_save_mode_cmd (void);
-int edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch);
+gboolean edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);
 int edit_get_utf (WEdit * edit, long byte_index, int *char_width);
 long edit_count_lines (WEdit * edit, long current, long upto);
