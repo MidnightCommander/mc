@@ -428,7 +428,7 @@ regex/\.([mM][pP]3)$
 	Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
 	View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
 
-regex/\.([oO][gG][gG|aA|vV|xX])$
+regex/\.([oO][gG][gG|aA|xX])$
 	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
 	View=%view{ascii} ogginfo %s
 
@@ -485,7 +485,7 @@ regex/\.([wW][mM][vV])$
 regex/\.([fF][lL][iIcCvV])$
 	Include=video
 
-regex/\.([oO][gG][mM])$
+regex/\.([oO][gG][mMvV])$
 	Include=video
 
 regex/\.([rR][aA]?[mM])$
