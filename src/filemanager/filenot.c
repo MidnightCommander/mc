@@ -65,7 +65,7 @@ get_absolute_name (const vfs_path_t * vpath)
     if (*(vfs_path_get_by_index (vpath, 0)->path) == PATH_SEP)
         return vfs_path_clone (vpath);
 
-    return vfs_path_append_vpath_new (vfs_get_raw_current_dir (), vpath);
+    return vfs_path_append_vpath_new (vfs_get_raw_current_dir (), vpath, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
