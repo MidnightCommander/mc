@@ -60,6 +60,31 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void test_init_vfs(const char *encoding)
+{
+    str_init_strings (encoding);
+
+    vfs_init ();
+    init_localfs ();
+    vfs_setup_work_dir ();
+
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+    load_codepages_list ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void test_deinit_vfs()
+{
+    free_codepages_list ();
+    str_uninit_strings ();
+    vfs_shut ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 #define path_recode_one_check(input, etalon1, etalon2) {\
     vpath = vfs_path_from_str (input);\
     element = vfs_path_get_by_index(vpath, -1);\
@@ -76,25 +101,13 @@ START_TEST (test_path_recode_base_utf8)
     char *result;
     const vfs_path_element_t *element;
 
-    str_init_strings ("UTF-8");
-
-    vfs_init ();
-    init_localfs ();
-    vfs_setup_work_dir ();
-
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
-
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
-    load_codepages_list ();
+    test_init_vfs("UTF-8");
 
     path_recode_one_check("/ÔÅÓÔÏ×ÙÊ/ÐÕÔØ", "/ÔÅÓÔÏ×ÙÊ/ÐÕÔØ", "/ÔÅÓÔÏ×ÙÊ/ÐÕÔØ");
 
     path_recode_one_check("/#enc:KOI8-R/Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹/Ð¿ÑƒÑ‚ÑŒ", "/ÔÅÓÔÏ×ÙÊ/ÐÕÔØ", "/#enc:KOI8-R/Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹/Ð¿ÑƒÑ‚ÑŒ");
 
-    free_codepages_list ();
-    str_uninit_strings ();
-    vfs_shut ();
-
+    test_deinit_vfs();
 }
 END_TEST
 
@@ -106,25 +119,13 @@ START_TEST (test_path_recode_base_koi8r)
     char *result;
     const vfs_path_element_t *element;
 
-    str_init_strings ("KOI8-R");
-
-    vfs_init ();
-    init_localfs ();
-    vfs_setup_work_dir ();
-
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
-
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
-    load_codepages_list ();
+    test_init_vfs("KOI8-R");
 
     path_recode_one_check("/Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹/Ð¿ÑƒÑ‚ÑŒ", "/Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹/Ð¿ÑƒÑ‚ÑŒ", "/Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹/Ð¿ÑƒÑ‚ÑŒ");
 
     path_recode_one_check("/#enc:UTF-8/ÔÅÓÔÏ×ÙÊ/ÐÕÔØ", "/Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹/Ð¿ÑƒÑ‚ÑŒ", "/#enc:UTF-8/ÔÅÓÔÏ×ÙÊ/ÐÕÔØ");
 
-    free_codepages_list ();
-    str_uninit_strings ();
-    vfs_shut ();
-
+    test_deinit_vfs();
 }
 END_TEST
 
@@ -138,15 +139,7 @@ START_TEST(test_path_to_str_flags)
     vfs_path_t *vpath;
     char *str_path;
 
-    str_init_strings ("UTF-8");
-
-    vfs_init ();
-    init_localfs ();
-
-    vfs_setup_work_dir ();
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
-    load_codepages_list ();
+    test_init_vfs("UTF-8");
 
     test_subclass1.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
@@ -197,10 +190,33 @@ START_TEST(test_path_to_str_flags)
     g_free (str_path);
     vfs_path_free (vpath);
 
-    free_codepages_list ();
-    str_uninit_strings ();
-    vfs_shut ();
+    test_deinit_vfs();
+}
+END_TEST
 
+/* --------------------------------------------------------------------------------------------- */
+
+START_TEST(test_encode_info_at_start)
+{
+    vfs_path_t *vpath;
+    char *actual;
+    const vfs_path_element_t *vpath_element;
+
+    test_init_vfs("UTF-8");
+
+    vpath = vfs_path_from_str ("#enc:KOI8-R/bla-bla/some/path");
+    actual = vfs_path_to_str (vpath);
+
+    fail_unless (strcmp ("/#enc:KOI8-R/bla-bla/some/path", actual) == 0, "\nactual=%s\n", actual);
+
+    vpath_element = vfs_path_get_by_index (vpath, -1);
+
+    fail_unless (strcmp ("/bla-bla/some/path", vpath_element->path) == 0, "\nvpath_element->path=%s\n", vpath_element->path);
+
+    g_free (actual);
+    vfs_path_free (vpath);
+
+    test_deinit_vfs();
 }
 END_TEST
 
@@ -222,6 +238,7 @@ main (void)
     tcase_add_test (tc_core, test_path_recode_base_utf8);
     tcase_add_test (tc_core, test_path_recode_base_koi8r);
     tcase_add_test (tc_core, test_path_to_str_flags);
+    tcase_add_test (tc_core, test_encode_info_at_start);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
