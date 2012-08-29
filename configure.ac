@@ -515,7 +515,6 @@ Makefile
 
 contrib/Makefile
 contrib/dist/Makefile
-contrib/dist/debian/Makefile
 contrib/dist/gentoo/Makefile
 contrib/dist/redhat/Makefile
 contrib/dist/redhat/mc.spec
