@@ -2001,6 +2001,8 @@ find_next_hunk (const GArray * a, size_t pos)
     return pos;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 /**
  * Find start and end lines of the current hunk.
  *
@@ -2066,6 +2068,17 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
     return res;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Remove hunk from file.
+ *
+ * @param dview           widget WDiff
+ * @param merge_file      file stream for writing data
+ * @param from1           first line of hunk
+ * @param to1             last line of hunk
+ * @param merge_direction in what direction files should be merged
+ */
 static void
 dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1,
                    action_direction_t merge_direction)
@@ -2094,6 +2107,18 @@ dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1,
     fclose (f0);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Add hunk to file.
+ *
+ * @param dview           widget WDiff
+ * @param merge_file      file stream for writing data
+ * @param from1           first line of source hunk
+ * @param from2           first line of destination hunk
+ * @param to1             last line of source hunk
+ * @param merge_direction in what direction files should be merged
+ */
 static void
 dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
                 action_direction_t merge_direction)
@@ -2135,6 +2160,19 @@ dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
     fclose (f1);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Replace hunk in file.
+ *
+ * @param dview           widget WDiff
+ * @param merge_file      file stream for writing data
+ * @param from1           first line of source hunk
+ * @param to1             last line of source hunk
+ * @param from2           first line of destination hunk
+ * @param to2             last line of destination hunk
+ * @param merge_direction in what direction files should be merged
+ */
 static void
 dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int from2, int to2,
                     action_direction_t merge_direction)
@@ -2178,6 +2216,14 @@ dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int fr
     fclose (f1);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Merge hunk.
+ *
+ * @param dview           widget WDiff
+ * @param merge_direction in what direction files should be merged
+ */
 static void
 do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
 {
