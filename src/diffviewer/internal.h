@@ -25,6 +25,13 @@ typedef enum
 
 typedef enum
 {
+    DIFF_LEFT = 0,
+    DIFF_RIGHT = 1,
+    DIFF_COUNT = 2
+} diff_place_t;
+
+typedef enum
+{
     DIFF_NONE = 0,
     DIFF_ADD = 1,
     DIFF_DEL = 2,
@@ -54,7 +61,7 @@ typedef struct
 {
     int off;
     int len;
-} BRACKET[2];
+} BRACKET[DIFF_COUNT];
 
 typedef struct
 {
@@ -80,12 +87,12 @@ typedef struct WDiff
     Widget widget;
 
     const char *args;           /* Args passed to diff */
-    const char *file[2];        /* filenames */
-    char *label[2];
-    FBUF *f[2];
+    const char *file[DIFF_COUNT];       /* filenames */
+    char *label[DIFF_COUNT];
+    FBUF *f[DIFF_COUNT];
     const char *backup_sufix;
-    gboolean merged[2];
-    GArray *a[2];
+    gboolean merged[DIFF_COUNT];
+    GArray *a[DIFF_COUNT];
     GPtrArray *hdiff;
     int ndiff;                  /* number of hunks */
     DSRC dsrc;                  /* data source: memory or temporary file */
@@ -105,7 +112,7 @@ typedef struct WDiff
     int display_numbers;
     int show_cr;
     int tab_size;
-    int ord;
+    diff_place_t ord;
     int full;
     gboolean utf8;
     /* converter for translation of text */
