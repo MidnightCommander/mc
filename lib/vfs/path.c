@@ -142,17 +142,27 @@ vfs_canon (const char *path)
     {
         char *result, *local;
 
-        local = tilde_expand (path);
-        if (*local != PATH_SEP)
+        if (g_str_has_prefix (path, VFS_ENCODING_PREFIX))
         {
-            char *curr_dir;
-
-            g_free (local);
-            curr_dir = vfs_get_current_dir ();
-            local = mc_build_filename (curr_dir, path, NULL);
-            g_free (curr_dir);
+            /*
+               encoding prefix placed at start of string without the leading slash
+               should be autofixed by adding the leading slash
+             */
+            local = mc_build_filename (PATH_SEP_STR, path, NULL);
         }
+        else
+        {
+            local = tilde_expand (path);
+            if (*local != PATH_SEP)
+            {
+                char *curr_dir;
 
+                g_free (local);
+                curr_dir = vfs_get_current_dir ();
+                local = mc_build_filename (curr_dir, path, NULL);
+                g_free (curr_dir);
+            }
+        }
         result = vfs_canon (local);
         g_free (local);
         return result;
@@ -423,6 +433,7 @@ vfs_path_from_str_deprecated_parser (char *path, vfs_path_flag_t flags)
 /** Split path string to path elements by URL algorithm.
  *
  * @param path_str VFS-path
+ * @param flags    flags for converter
  *
  * @return pointer to newly created vfs_path_t object with filled path elements array.
 */
