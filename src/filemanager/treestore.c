@@ -851,13 +851,13 @@ tree_store_start_check (const vfs_path_t * vpath)
     len = vfs_path_len (ts.check_name);
 
     current = ts.check_start;
-    while (current != NULL && vfs_path_cmp (current->name, ts.check_name) == 0)
+    while (current != NULL && vfs_path_ncmp (current->name, ts.check_name, len) == 0)
     {
         char *current_name;
         gboolean ok;
 
         current_name = vfs_path_to_str (current->name);
-        ok = (current_name[len] == '\0' || (current_name[len] == PATH_SEP || len == 1));
+        ok = (current_name[len] == '\0' || current_name[len] == PATH_SEP || len == 1);
         g_free (current_name);
         if (!ok)
             break;
@@ -908,7 +908,7 @@ tree_store_end_check (void)
     ts.add_queue_vpath = g_list_reverse (ts.add_queue_vpath);
     the_queue = ts.add_queue_vpath;
     ts.add_queue_vpath = NULL;
-    g_free (ts.check_name);
+    vfs_path_free (ts.check_name);
     ts.check_name = NULL;
 
     g_list_foreach (the_queue, (GFunc) vfs_path_free, NULL);
