@@ -426,7 +426,7 @@ include/image
 
 ### Sound files ###
 
-regex/i/\.(wav|snd|voc|au|smp|aiff|snd)$
+regex/i/\.(wav|snd|voc|au|smp|aiff|snd|m4a)$
 	Open=@EXTHELPERSDIR@/sound.sh open common
 
 regex/i/\.(mod|s3m|xm|it|mtm|669|stm|ult|far)$
@@ -439,7 +439,7 @@ shell/i/.mp3
 	Open=@EXTHELPERSDIR@/sound.sh open mp3
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view mp3
 
-regex/i/\.og[gavx]$
+regex/i/\.og[gax]$
 	Open=@EXTHELPERSDIR@/sound.sh open ogg
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view ogg
 
@@ -496,7 +496,7 @@ shell/i/.wmv
 regex/i/\.fl[icv]$
 	Include=video
 
-shell/i/.ogm
+regex/i/\.og[mv]$
 	Include=video
 
 regex/i/\.ra?m$
