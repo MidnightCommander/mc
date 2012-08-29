@@ -101,6 +101,11 @@ while (0)
 
 /*** file scope type declarations ****************************************************************/
 
+typedef enum {
+    FROM_LEFT_TO_RIGHT,
+    FROM_RIGHT_TO_LEFT
+} action_direction_t;
+
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
@@ -2061,13 +2066,13 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
 }
 
 static void
-dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, gboolean merge_direction)
+dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, action_direction_t merge_direction)
 {
     int line;
     char buf[BUF_10K];
     FILE *f0;
 
-    if (merge_direction)
+    if (merge_direction == FROM_RIGHT_TO_LEFT)
         f0 = fopen (dview->file[1], "r");
     else
         f0 = fopen (dview->file[0], "r");
@@ -2089,14 +2094,14 @@ dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, gboolea
 
 static void
 dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
-                gboolean merge_direction)
+                action_direction_t merge_direction)
 {
     int line;
     char buf[BUF_10K];
     FILE *f0;
     FILE *f1;
 
-    if (merge_direction)
+    if (merge_direction == FROM_RIGHT_TO_LEFT)
     {
         f0 = fopen (dview->file[1], "r");
         f1 = fopen (dview->file[0], "r");
@@ -2130,14 +2135,14 @@ dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
 
 static void
 dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int from2, int to2,
-                    gboolean merge_direction)
+                    action_direction_t merge_direction)
 {
     int line1, line2;
     char buf[BUF_10K];
     FILE *f0;
     FILE *f1;
 
-    if (merge_direction)
+    if (merge_direction == FROM_RIGHT_TO_LEFT)
     {
         f0 = fopen (dview->file[1], "r");
         f1 = fopen (dview->file[0], "r");
@@ -2172,14 +2177,14 @@ dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int fr
 }
 
 static void
-do_merge_hunk (WDiff * dview, gboolean merge_direction)
+do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
 {
     int from1, to1, from2, to2;
     int res;
     int hunk;
-    int n_merge = merge_direction ? 1 : 0;
+    int n_merge = (merge_direction == FROM_RIGHT_TO_LEFT) ? 1 : 0;
 
-    if (merge_direction)
+    if (merge_direction == FROM_RIGHT_TO_LEFT)
         hunk = get_current_hunk (dview, &from2, &to2, &from1, &to1);
     else
         hunk = get_current_hunk (dview, &from1, &to1, &from2, &to2);
@@ -2216,16 +2221,16 @@ do_merge_hunk (WDiff * dview, gboolean merge_direction)
         switch (hunk)
         {
         case DIFF_DEL:
-            if (merge_direction)
-                dview_add_hunk (dview, merge_file, from1, from2, to2, TRUE);
+            if (merge_direction == FROM_RIGHT_TO_LEFT)
+                dview_add_hunk (dview, merge_file, from1, from2, to2, FROM_RIGHT_TO_LEFT);
             else
-                dview_remove_hunk (dview, merge_file, from1, to1, FALSE);
+                dview_remove_hunk (dview, merge_file, from1, to1, FROM_LEFT_TO_RIGHT);
             break;
         case DIFF_ADD:
-            if (merge_direction)
-                dview_remove_hunk (dview, merge_file, from1, to1, TRUE);
+            if (merge_direction == FROM_RIGHT_TO_LEFT)
+                dview_remove_hunk (dview, merge_file, from1, to1, FROM_RIGHT_TO_LEFT);
             else
-                dview_add_hunk (dview, merge_file, from1, from2, to2, FALSE);
+                dview_add_hunk (dview, merge_file, from1, from2, to2, FROM_LEFT_TO_RIGHT);
             break;
         case DIFF_CHG:
             dview_replace_hunk (dview, merge_file, from1, to1, from2, to2, merge_direction);
@@ -3110,11 +3115,11 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         dview_edit (dview, dview->ord);
         break;
     case CK_Merge:
-        do_merge_hunk (dview, FALSE);
+        do_merge_hunk (dview, FROM_LEFT_TO_RIGHT);
         dview_redo (dview);
         break;
     case CK_MergeOther:
-        do_merge_hunk (dview, TRUE);
+        do_merge_hunk (dview, FROM_RIGHT_TO_LEFT);
         dview_redo (dview);
         break;
     case CK_EditOther:
