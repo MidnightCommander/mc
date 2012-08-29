@@ -496,7 +496,7 @@ shell/i/.wmv
 regex/i/\.fl[icv]$
 	Include=video
 
-regex/i/\.og[mv]$
+shell/i/.ogv
 	Include=video
 
 regex/i/\.ra?m$
