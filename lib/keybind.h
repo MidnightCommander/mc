@@ -328,7 +328,8 @@ enum
     CK_HunkNext,
     CK_HunkPrev,
     CK_EditOther,
-    CK_Merge
+    CK_Merge,
+    CK_MergeOther
 };
 
 /*** structures declarations (and typedefs of structures)*****************************************/

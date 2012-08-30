@@ -353,6 +353,7 @@ static name_keymap_t command_names[] = {
     {"HunkPrev", CK_HunkPrev},
     {"EditOther", CK_EditOther},
     {"Merge", CK_Merge},
+    {"MergeOther", CK_MergeOther},
 #endif /* USE_DIFF_VIEW */
 
     {NULL, CK_IgnoreKey}

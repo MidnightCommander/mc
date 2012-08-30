@@ -525,6 +525,7 @@ static const global_keymap_ini_t default_diff_keymap[] = {
     {"Edit", "f4"},
     {"EditOther", "f14"},
     {"Merge", "f5"},
+    {"MergeOther", "f15"},
     {"Search", "f7"},
     {"SearchContinue", "f17"},
     {"Options", "f9"},

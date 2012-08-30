@@ -432,6 +432,7 @@ Save = f2
 Edit = f4
 EditOther = f14
 Merge = f5
+MergeOther = f15
 Search = f7
 SearchContinue = f17
 Options = f9
