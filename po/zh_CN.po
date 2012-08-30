@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2011-12-09 17:32+0300\n"
+"POT-Creation-Date: 2012-08-30 13:50+0400\n"
 "PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.net/projects/p/mc/team/"
 "zh_CN/)\n"
-"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "Warning: cannot load codepages list"
@@ -29,6 +29,26 @@ msgstr "7-bit ASCII"
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "无法从 %s 翻译到 %s"
+
+msgid "Event system already initialized"
+msgstr ""
+
+msgid "Failed to initialize event system"
+msgstr ""
+
+msgid "Event system not initialized"
+msgstr ""
+
+msgid "Check input data! Some of parameters are NULL!"
+msgstr ""
+
+#, c-format
+msgid "Unable to create group '%s' for events!"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Unable to create event '%s'!"
+msgstr "无法保存到文件"
 
 #, c-format
 msgid ""
@@ -49,6 +69,32 @@ msgstr "获取锁(&G)"
 msgid "&Ignore lock"
 msgstr "忽略锁(&I)"
 
+#, c-format
+msgid "Cannot create %s directory"
+msgstr "不能建立目录%s"
+
+#, fuzzy
+msgid "FATAL: not a directory:"
+msgstr "%s不是目录\n"
+
+#, c-format
+msgid "An error occured while migrating user settings: %s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to Freedesktop recommended dirs.\n"
+"To get more info, please visit\n"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
+msgstr ""
+
 msgid "Search string not found"
 msgstr "没有找到要搜索的字符串"
 
@@ -62,16 +108,23 @@ msgstr "替换的标记与找到的标记个数不相等"
 msgid "Invalid token number %d"
 msgstr "无效的标记个数%d "
 
-msgid "Normal"
-msgstr "普通"
-
-msgid "&Regular expression"
+#, fuzzy
+msgid "Regular expression error"
 msgstr "正规表达式(&R)"
 
-msgid "Hexadecimal"
+#, fuzzy
+msgid "No&rmal"
+msgstr "普通"
+
+msgid "Re&gular expression"
+msgstr "正规表达式(&R)"
+
+#, fuzzy
+msgid "He&xadecimal"
 msgstr "十六进制"
 
-msgid "Wildcard search"
+#, fuzzy
+msgid "Wil&dcard search"
 msgstr "通配符查找"
 
 #, c-format
@@ -85,6 +138,15 @@ msgstr ""
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+"无法解析皮肤'%s'。\n"
+"默认皮肤已经加载"
+
+#, fuzzy, c-format
+msgid ""
+"Unable to use '%s' skin with 256 colors support\n"
+"on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
 "无法解析皮肤'%s'。\n"
@@ -185,6 +247,9 @@ msgstr "删除键"
 
 msgid "Completion/M-tab"
 msgstr "补全/M-Tab"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "小键盘 +"
@@ -297,6 +362,10 @@ msgstr "美元符"
 msgid "Quotation mark"
 msgstr "引号"
 
+#, fuzzy
+msgid "Percent sign"
+msgstr "百分比(&R)"
+
 msgid "Caret"
 msgstr "脱字符^"
 
@@ -375,6 +444,34 @@ msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
 
+msgid "Warning"
+msgstr "警告"
+
+msgid "Pipe failed"
+msgstr "管道失败 "
+
+msgid "Dup failed"
+msgstr "复制失败 "
+
+msgid "Error dup'ing old error pipe"
+msgstr "复制原有出错管道时发生错误"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "%s 的目录缓存已过期"
+
+msgid "bytes transferred"
+msgstr "字节已经传输"
+
+msgid "Starting linear transfer..."
+msgstr "正在开始线性传输..."
+
+msgid "Getting file"
+msgstr "正在获取文件"
+
+msgid "Changes to file lost"
+msgstr "对文件的修改被丢失"
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s不是目录\n"
@@ -403,424 +500,17 @@ msgstr "不能创建临时文件\n"
 msgid "Press any key to continue..."
 msgstr "按任意键继续..."
 
-msgid "Warning"
-msgstr "警告"
-
-msgid "Pipe failed"
-msgstr "管道失败 "
-
-msgid "Dup failed"
-msgstr "复制失败 "
-
-msgid "Error dup'ing old error pipe"
-msgstr "复制原有出错管道时发生错误"
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"无法打开 cpio 归档\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"过早结束的cpio 归档\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"在 cpio 归档\n"
-"%2$s\n"
-"中有不一致的\n"
-"%1$s\n"
-"的硬链接"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s 含有重复的项！正在跳过！"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"在 %s 中\n"
-"遇到损坏的 cpio 头"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"异常的文件结束\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "%s 的目录缓存已过期"
-
-msgid "bytes transferred"
-msgstr "字节已经传输"
-
-msgid "Starting linear transfer..."
-msgstr "正在开始线性传输..."
-
-msgid "Getting file"
-msgstr "正在获取文件"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"无法打开 %s 归档\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "不完整的 extfs 归档"
-
-#, c-format
-msgid "Warning: cannot open %s directory\n"
-msgstr "警告：无法打开目录%s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish：正在从 %s 断开连接"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish：正在等待初始化行..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "抱歉，目前无法创建口令验证连接。"
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish：%s 需要口令"
-
-msgid "fish: Sending password..."
-msgstr "fish：正在发送口令..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish：正在发送初始化行..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish：正在握手版本..."
-
-msgid "fish: Getting host info..."
-msgstr "fish：获取主机信息..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish：正在设置当前目录..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish：已连接，主目录%s，"
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish：正在读取目录 %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s：完成"
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s：失败"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish：保存 %s：正在发送命令..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish：本地读取失败，正在发送零"
-
-msgid "fish: storing zeros"
-msgstr "fish: 存贮空白字符"
-
-msgid "fish: storing file"
-msgstr "fish: 存贮文件"
-
-msgid "Aborting transfer..."
-msgstr "正在中止传输..."
-
-msgid "Error reported after abort."
-msgstr "中止后有错误。"
-
-msgid "Aborted transfer would be successful."
-msgstr "被中止的传输可能成功完成了。"
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs：正在断开到 %s 的连接"
-
-#, c-format
-msgid "FTP: Password required for %s"
-msgstr "FTP：%s 需要口令 "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs：正在发送用户登录名"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs：正在发送用户口令"
-
-#, c-format
-msgid "FTP: Account required for user %s"
-msgstr "FTP：用户%s需要账户 "
-
-msgid "Account:"
-msgstr "账户"
-
-msgid "ftpfs: sending user account"
-msgstr "ftpfs：正在发送用户账户"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs：已登录"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs：用户 %s 登录不正确"
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs：无效的主机名。"
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr "ftpfs: %s"
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs：正在连接 %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs：连接被用户中断"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs：连接服务器失败：%s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "正在等待重试... %d (Control-C 取消)"
-
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs：无效的地址族"
-
-#, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr "ftpfs: 无法创建套接字：%s "
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs：无法设置为被动模式"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs：正在中止传输。"
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs：中止错误：%s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs：终止失败"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs：CWD 失败。"
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs：无法解析符号链接"
-
-msgid "Resolving symlink..."
-msgstr "正在解析符号链接..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs：正在读取 FTP 目录 %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(严格遵循 rfc959)"
-
-msgid "(chdir first)"
-msgstr "(先改变目录)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs：失败；没有后备"
-
-msgid "ftpfs: storing file"
-msgstr "ftpfs: 存贮文件"
-
-msgid ""
-"~/.netrc file has incorrect mode\n"
-"Remove password or correct mode"
-msgstr ""
-"~/.netrc 文件权限不正确。\n"
-"删除口令或者改正权限。"
-
 msgid "Cannot parse:"
 msgstr "无法解析："
 
 msgid "More parsing errors will be ignored."
 msgstr "以后的解析错误将被忽略。"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "警告：没有找到文件 %s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"警告：%s 中有无效的行：\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"警告：%2$s 中有无效的标志 %1$c\n"
-"%3$s\n"
-
-#, c-format
-msgid "reconnect to %s failed"
-msgstr "重新连接 %s 失败"
-
-msgid "Authentication failed"
-msgstr "验证失败"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "创建目录%s时出错%s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "删除目录%s时出错%s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s 正在打开远程文件 %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s 正在删除远程文件 %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s 正在重命名文件\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"无法打开 tar 归档文件\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "不完整的 tar 归档文件"
-
-msgid "Unexpected EOF on archive file"
-msgstr "归档文件出现异常 EOF"
-
-#, c-format
-msgid ""
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"不是一个 tar 归档文件。"
-
-msgid "undelfs: error"
-msgstr "undelfs：错误"
-
-msgid "not enough memory"
-msgstr "内存不足"
-
-msgid "while allocating block buffer"
-msgstr "当分配块缓冲时"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan：%d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "当开始 inode 扫描 %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs：正在载入被删除文件的信息 %d inode"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "当调用 ext2_block_iterate %d 时"
-
-msgid "no more memory while reallocating array"
-msgstr "当重新分配数组时没有内存时"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "当进行 inode 扫描 %d 时"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "无法打开文件 %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs：正在读取 inode bitmap..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"无法载入 inode位图自：\n"
-" %s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs：正在读取 block bitmap..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"无法载入块位图自：\n"
-" %s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info 不是文件系统！"
-
-msgid "You have to chdir to extract files first"
-msgstr "您必须先更改目录来解开文件"
-
-msgid "while iterating over blocks"
-msgstr "正当遍历块时"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "无法打开文件\"%s\""
-
-msgid "Ext2lib error"
-msgstr "Ext2lib 错误"
-
 msgid "Internal error:"
 msgstr "内部错误："
 
 msgid "Password:"
 msgstr "口令："
-
-msgid "Changes to file lost"
-msgstr "对文件的修改被丢失"
 
 msgid "Screens"
 msgstr "屏幕"
@@ -859,6 +549,13 @@ msgstr "显示当前版本"
 msgid "Print data directory"
 msgstr "打印数据目录"
 
+msgid "Print extended info about used data directories"
+msgstr ""
+
+#, fuzzy
+msgid "Print configure options"
+msgstr "配置选项"
+
 msgid "Print last working directory to specified file"
 msgstr "将工作目录打印到指定文件"
 
@@ -883,6 +580,10 @@ msgstr "编辑一个文件"
 msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
 
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "禁用子 shell 支持"
+
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
 
@@ -904,6 +605,10 @@ msgstr "在 HP 终端上复位软键"
 msgid "Load definitions of key bindings from specified file"
 msgstr "从指定的文件加载键绑定定义"
 
+#, fuzzy
+msgid "Don't load definitions of key bindings from file, use defaults"
+msgstr "从指定的文件加载键绑定定义"
+
 msgid "Requests to run in black and white"
 msgstr "请求运行在黑白模式"
 
@@ -918,9 +623,9 @@ msgstr "用指定的皮肤显示MC"
 
 #. TRANSLATORS: don't translate keywords
 msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
+"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
 "\n"
 " Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, header\n"
@@ -937,13 +642,19 @@ msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 
-#. TRANSLATORS: don't translate color names
+#. TRANSLATORS: don't translate color names and attributes
+#, fuzzy
 msgid ""
-"Colors:\n"
+"Standard Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+"Extended colors, when 256 colors are available:\n"
+"   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
+"\n"
+"Attributes:\n"
+"   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -976,17 +687,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr "查看器没有指定参数"
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr "两个文件需要调用差异查看器"
-
 msgid "Main options"
 msgstr "主要选项"
 
 msgid "Terminal options"
 msgstr "终端选项 "
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr "查看器没有指定参数"
+
+msgid "Two files are required to evoke the diffviewer."
+msgstr "两个文件需要调用差异查看器"
 
 msgid "Background process error"
 msgstr "后台进程错误"
@@ -1013,8 +727,8 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "取消(&D)"
 
-msgid "All charsets"
-msgstr "所有字体集"
+msgid "&All charsets"
+msgstr "所有字符集(&A)"
 
 msgid "&Whole words"
 msgstr "仅整词(&W)"
@@ -1022,8 +736,8 @@ msgstr "仅整词(&W)"
 msgid "&Backwards"
 msgstr "向上(&B)"
 
-msgid "Case &sensitive"
-msgstr "大小写敏感(&S)"
+msgid "Cas&e sensitive"
+msgstr "大小写敏感(&e)"
 
 msgid "Enter search string:"
 msgstr "输入查找字符串："
@@ -1059,9 +773,6 @@ msgid ""
 msgstr ""
 "无法创建临时合并文件\n"
 "%s "
-
-msgid "&Normal"
-msgstr "普通(&N)"
 
 msgid "&Fastest (Assume large files)"
 msgstr "最快(&F针对大文件)"
@@ -1145,6 +856,21 @@ msgstr ""
 msgid "Diff:"
 msgstr "差异："
 
+#, fuzzy, c-format
+msgid "\"%s\" is a directory"
+msgstr "%s不是目录\n"
+
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+"无法查看\"%s\"的状态\n"
+"%s"
+
+msgid "Diff viewer: invalid mode"
+msgstr ""
+
 msgid "Two files are needed to compare"
 msgstr "比较时需要两个文件"
 
@@ -1190,9 +916,6 @@ msgstr "\"%s\"不是一个常规文件"
 #, c-format
 msgid "File \"%s\" is too large"
 msgstr "文件\"%s\"太大"
-
-msgid "Macro recursion is too deep"
-msgstr "宏递归层次太深"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1247,18 +970,6 @@ msgstr "输入文件名："
 msgid "Save As"
 msgstr "保存为"
 
-msgid "Delete macro"
-msgstr "删除宏"
-
-msgid "Cannot open temp file"
-msgstr "无法打开临时文件"
-
-msgid "Cannot open macro file"
-msgstr "无法打开宏文件"
-
-msgid "Cannot overwrite macro file"
-msgstr "无法覆盖宏文件"
-
 msgid "Syntax file edit"
 msgstr "语法文件编辑"
 
@@ -1298,17 +1009,30 @@ msgstr "检查&POSIX换行"
 msgid "Edit Save Mode"
 msgstr "编辑保存模式 "
 
+msgid "Save as"
+msgstr "保存为"
+
+#, fuzzy
+msgid "Cannot save: destination is not a regular file"
+msgstr "无法查看：不是常规文件"
+
 msgid "A file already exists with this name"
 msgstr "同名文件已存在"
 
 msgid "&Overwrite"
 msgstr "覆盖(&O)"
 
-msgid "Save as"
-msgstr "保存为"
-
 msgid "Cannot save file"
 msgstr "不能保存文件"
+
+msgid "Delete macro"
+msgstr "删除宏"
+
+msgid "Press macro hotkey:"
+msgstr "按下宏热键："
+
+msgid "Macro not deleted"
+msgstr ""
 
 msgid "Save macro"
 msgstr "保存宏"
@@ -1316,11 +1040,12 @@ msgstr "保存宏"
 msgid "Press the macro's new hotkey:"
 msgstr "为该宏按下新热键："
 
-msgid "Press macro hotkey:"
-msgstr "按下宏热键："
+#, fuzzy
+msgid "Repeat last commands"
+msgstr "外部命令"
 
-msgid "Load macro"
-msgstr "加载宏"
+msgid "Repeat times:"
+msgstr ""
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1410,24 +1135,6 @@ msgstr "外部命令"
 msgid "Cannot execute command"
 msgstr "不能执行命令"
 
-msgid "Error creating script:"
-msgstr " 创建脚本时发生错误："
-
-msgid "Error reading script:"
-msgstr " 读取脚本时发生错误："
-
-msgid "Error closing script:"
-msgstr " 关闭脚本时发生错误："
-
-msgid "Script created:"
-msgstr "脚本被创建："
-
-msgid "Process block"
-msgstr "处理块"
-
-msgid "Error calling program"
-msgstr "调用程序错误"
-
 msgid "Copies to"
 msgstr "复制到"
 
@@ -1448,16 +1155,6 @@ msgstr "插入文字"
 
 msgid "Press any key:"
 msgstr "按下任意键："
-
-msgid "Execute macro"
-msgstr "执行宏"
-
-msgid ""
-"Current text was modified without a file save\n"
-"Continue discards these changes"
-msgstr ""
-"当前文字被修改但没有保存。\n"
-"选择继续将丢失这些修改。"
 
 msgid "In se&lection"
 msgstr "在选择区域(&L)"
@@ -1520,6 +1217,10 @@ msgstr "退出(&Q)"
 msgid "&Undo"
 msgstr "撤消(&U)"
 
+#, fuzzy
+msgid "&Redo"
+msgstr "删除(&R)"
+
 msgid "&Toggle ins/overw"
 msgstr "翻转插入/覆盖(&T)"
 
@@ -1577,7 +1278,8 @@ msgstr "下一个书签(&N)"
 msgid "&Prev bookmark"
 msgstr "上一个书签(&P)"
 
-msgid "&Flush bookmark"
+#, fuzzy
+msgid "&Flush bookmarks"
 msgstr "清除书签(&F)       "
 
 msgid "&Go to line..."
@@ -1607,17 +1309,15 @@ msgstr "编码(&I)..."
 msgid "&Refresh screen"
 msgstr "刷新屏幕(&R) "
 
-msgid "&Start record macro"
+#, fuzzy
+msgid "&Start/Stop record macro"
 msgstr "开始记录宏(&S) "
-
-msgid "Finis&h record macro..."
-msgstr "结束记录宏(&H)..."
-
-msgid "&Execute macro..."
-msgstr "执行宏(&E)..."
 
 msgid "Delete macr&o..."
 msgstr "删除宏(&O),,,"
+
+msgid "Record/Repeat &actions"
+msgstr ""
 
 msgid "'ispell' s&pell check"
 msgstr "\"ispell\"拼写检查(&P)"
@@ -1693,6 +1393,10 @@ msgstr "打字机换行"
 
 msgid "Word wrap line length:"
 msgstr "换行位置："
+
+#, fuzzy
+msgid "&Group undo"
+msgstr "群组名"
 
 msgid "Cursor beyond end of line"
 msgstr "光标超出行末尾"
@@ -2239,13 +1943,13 @@ msgstr ""
 msgid "Setup"
 msgstr "设置"
 
-#, c-format
-msgid "Setup saved to ~/%s"
+#, fuzzy, c-format
+msgid "Setup saved to %s"
 msgstr "设置已保存到 ~/%s"
 
-#, c-format
-msgid "Unable to save setup to ~/%s"
-msgstr ""
+#, fuzzy, c-format
+msgid "Unable to save setup to %s"
+msgstr "无法保存到文件"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "您无法在非本地文件系统上执行命令"
@@ -2285,15 +1989,14 @@ msgstr ""
 "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
 "Commander软件包。"
 
-#, c-format
-msgid "~/%s file error"
+#, fuzzy, c-format
+msgid "%s file error"
 msgstr "~/%s文件错误"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
 "文件的样例。"
@@ -2380,6 +2083,9 @@ msgstr ""
 
 msgid "&Abort"
 msgstr "中止(&A)"
+
+msgid "Ski&p all"
+msgstr ""
 
 msgid "&Retry"
 msgstr "重试(&R)"
@@ -2537,6 +2243,14 @@ msgid ""
 "%s"
 msgstr ""
 "无法 fstat 目标文件\"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
+"%s"
+msgstr ""
+"无法创建目标文件\"%s\"\n"
 "%s"
 
 #, c-format
@@ -2720,16 +2434,36 @@ msgstr "文件已存在"
 msgid "Background process: File exists"
 msgstr "后台进程：文件已存在"
 
-#, c-format
-msgid "Files processed: %zu of %zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu/%zu"
 msgstr "已处理的文件: %zu / %zu"
 
-#, c-format
-msgid "Time: %s  %s (%s)"
+#, fuzzy, c-format
+msgid "Files processed: %zu"
+msgstr "已处理的文件: %zu / %zu"
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
 msgstr "时间: %s  %s (%s)"
 
-#, c-format
-msgid "Total: %s of %s"
+#, fuzzy, c-format
+msgid "Time: %s %s (%s)"
+msgstr "时间: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "文件：%s"
+
+#, fuzzy, c-format
+msgid "Time: %s (%s)"
+msgstr "时间: %s  %s (%s)"
+
+#, fuzzy, c-format
+msgid " Total: %s "
+msgstr "总计: %s / %s"
+
+#, fuzzy, c-format
+msgid " Total: %s/%s "
 msgstr "总计: %s / %s"
 
 msgid "Source"
@@ -2788,26 +2522,17 @@ msgstr "找到: %ld"
 msgid "Malformed regular expression"
 msgstr "不正确的正规表达式"
 
-msgid "Cas&e sensitive"
-msgstr "大小写敏感(&e)"
-
 msgid "&Find recursively"
 msgstr "递归查找(&F)"
 
 msgid "S&kip hidden"
 msgstr "跳过隐藏(&K)"
 
-msgid "&All charsets"
-msgstr "所有字符集(&A)"
-
 msgid "Sea&rch for content"
 msgstr "搜索内容(&R)"
 
 msgid "Case sens&itive"
 msgstr "大小写敏感(&T)"
-
-msgid "Re&gular expression"
-msgstr "正规表达式(&R)"
 
 msgid "Fir&st hit"
 msgstr "第一个命中(&S)"
@@ -2827,6 +2552,10 @@ msgstr "内容："
 msgid "File name:"
 msgstr "文件名："
 
+#, fuzzy
+msgid "Ena&ble ignore directories:"
+msgstr "比较目录(&C)"
+
 msgid "Start at:"
 msgstr "开始于："
 
@@ -2836,6 +2565,11 @@ msgstr "在%s中查找字符串"
 
 msgid "Finished"
 msgstr "完成"
+
+#, c-format
+msgid "Finished (ignored %zd directory)"
+msgid_plural "Finished (ignored %zd directories)"
+msgstr[0] ""
 
 #, c-format
 msgid "Searching %s"
@@ -2911,14 +2645,13 @@ msgstr "新建活动表组"
 msgid "Name of new group:"
 msgstr "新建组名："
 
-msgid "Remove:"
-msgstr "删除："
-
-msgid "Are you sure you want to remove this entry?"
+#, fuzzy, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr "您确实要删除这个条目？"
 
+#, fuzzy, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 "组非空。\n"
@@ -2930,9 +2663,9 @@ msgstr "顶级组"
 msgid "Hotlist Load"
 msgstr "加载活动表"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 "MC无法写文件~/%s，\n"
@@ -2956,19 +2689,18 @@ msgstr "Midnight Commander %s"
 msgid "File: %s"
 msgstr "文件：%s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr "空闲节点：%ld (%ld%%) / %ld"
-
 msgid "No node information"
 msgstr "没有节点信息"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "空闲空间：%3$s 中的 %1$s (%2$d%%)"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "没有空间信息"
+
+#, fuzzy, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr "空闲空间：%3$s 中的 %1$s (%2$d%%)"
 
 #, c-format
 msgid "Type:      %s"
@@ -3042,9 +2774,6 @@ msgstr "显示按键条(&K)"
 msgid "Command &prompt"
 msgstr "显示命令提示行(&P)"
 
-msgid "Show &mini status"
-msgstr "显示简要状态(&M)"
-
 msgid "Menu&bar visible"
 msgstr "显示菜单条(&B)"
 
@@ -3102,6 +2831,10 @@ msgstr "S&hell链接..."
 msgid "SM&B link..."
 msgstr "SMB 链接(&B)..."
 
+#, fuzzy
+msgid "Paneli&ze"
+msgstr "面板化"
+
 msgid "&Rescan"
 msgstr "重新扫描(&R)"
 
@@ -3153,8 +2886,9 @@ msgstr "选择群组(&G)"
 msgid "U&nselect group"
 msgstr "取消选择组(&U)"
 
-msgid "Reverse selec&tion"
-msgstr "反转选择(&T)"
+#, fuzzy
+msgid "&Invert selection"
+msgstr "在选择区域(&L)"
 
 msgid "E&xit"
 msgstr "退出(&X)"
@@ -3177,8 +2911,9 @@ msgstr "切换面板开/关(&P)"
 msgid "&Compare directories"
 msgstr "比较目录(&C)"
 
-msgid "&View diff files"
-msgstr "查看Diff文件(&V)"
+#, fuzzy
+msgid "C&ompare files"
+msgstr "比较目录"
 
 msgid "E&xternal panelize"
 msgstr "外部面板(&X)"
@@ -3272,6 +3007,9 @@ msgstr "ButtonBar|更名或移动"
 msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|建目录"
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "从不(&N)"
 
@@ -3322,6 +3060,10 @@ msgstr "按下单个键(&I)"
 
 msgid "Esc key mode"
 msgstr "ESC键模式"
+
+#, fuzzy
+msgid "Preallocate &space"
+msgstr "忽略所有空白(&W)"
 
 msgid "Mkdi&r autoname"
 msgstr "创建目录时自动命名(&R)"
@@ -3401,8 +3143,9 @@ msgstr "混合所有文件(&X)"
 msgid "Use SI si&ze units"
 msgstr "使用SI大小单位(&Z)"
 
-msgid "Main panel options"
-msgstr "主要面板选项"
+#, fuzzy
+msgid "Show mi&ni-status"
+msgstr "显示简要状态(&M)"
 
 msgid "Panel options"
 msgstr "面板选项"
@@ -3535,6 +3278,10 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s in %d files"
 
+#, fuzzy
+msgid "Panelize"
+msgstr "面板化"
+
 msgid "Unknown tag on display format:"
 msgstr "显示格式中未知的标记："
 
@@ -3642,6 +3389,9 @@ msgstr "正确："
 
 msgid "False:"
 msgstr "错误："
+
+msgid "Error calling program"
+msgstr "调用程序错误"
 
 msgid "Warning -- ignoring file"
 msgstr "警告 － 忽略文件"
@@ -3763,8 +3513,20 @@ msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "键，或者用鼠标点击来定义。用 Tab 来移动。"
 
 #, c-format
-msgid "Cannot create %s directory"
-msgstr "不能建立目录%s"
+msgid ""
+"Failed to run:\n"
+"%s\n"
+msgstr ""
+
+msgid "Home directory path is not absolute"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Failed while close:\n"
+"%s\n"
+msgstr ""
 
 msgid "Choose codepage"
 msgstr "选择代码页"
@@ -3854,6 +3616,405 @@ msgstr "虚拟文件系统:"
 msgid "Data types:"
 msgstr "数据类型"
 
+#, fuzzy
+msgid "Root directory:"
+msgstr "目录"
+
+#, fuzzy
+msgid "System data"
+msgstr "系统范围(&S)"
+
+#, fuzzy
+msgid "Config directory:"
+msgstr "无法改变目录"
+
+#, fuzzy
+msgid "Data directory:"
+msgstr "目录"
+
+msgid "VFS plugins and scripts:"
+msgstr ""
+
+#, fuzzy
+msgid "User data"
+msgstr "用户名"
+
+#, fuzzy
+msgid "Cache directory:"
+msgstr "无法改变目录"
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"无法打开 cpio 归档\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"过早结束的cpio 归档\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"在 cpio 归档\n"
+"%2$s\n"
+"中有不一致的\n"
+"%1$s\n"
+"的硬链接"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s 含有重复的项！正在跳过！"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"在 %s 中\n"
+"遇到损坏的 cpio 头"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"异常的文件结束\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"无法打开 %s 归档\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "不完整的 extfs 归档"
+
+#, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "警告：无法打开目录%s\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish：正在从 %s 断开连接"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish：正在等待初始化行..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "抱歉，目前无法创建口令验证连接。"
+
+#, c-format
+msgid "fish: Password is required for %s"
+msgstr "fish：%s 需要口令"
+
+msgid "fish: Sending password..."
+msgstr "fish：正在发送口令..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish：正在发送初始化行..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish：正在握手版本..."
+
+msgid "fish: Getting host info..."
+msgstr "fish：获取主机信息..."
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish：正在读取目录 %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s：完成"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s：失败"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish：保存 %s：正在发送命令..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish：本地读取失败，正在发送零"
+
+msgid "fish: storing zeros"
+msgstr "fish: 存贮空白字符"
+
+msgid "fish: storing file"
+msgstr "fish: 存贮文件"
+
+msgid "Aborting transfer..."
+msgstr "正在中止传输..."
+
+msgid "Error reported after abort."
+msgstr "中止后有错误。"
+
+msgid "Aborted transfer would be successful."
+msgstr "被中止的传输可能成功完成了。"
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs：正在断开到 %s 的连接"
+
+#, c-format
+msgid "FTP: Password required for %s"
+msgstr "FTP：%s 需要口令 "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs：正在发送用户登录名"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs：正在发送用户口令"
+
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr "FTP：用户%s需要账户 "
+
+msgid "Account:"
+msgstr "账户"
+
+msgid "ftpfs: sending user account"
+msgstr "ftpfs：正在发送用户账户"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs：已登录"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs：用户 %s 登录不正确"
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs：无效的主机名。"
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr "ftpfs: %s"
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs：正在连接 %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs：连接被用户中断"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs：连接服务器失败：%s"
+
+#, fuzzy, c-format
+msgid "Waiting to retry... %d (Control-G to cancel)"
+msgstr "正在等待重试... %d (Control-C 取消)"
+
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs：无效的地址族"
+
+#, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr "ftpfs: 无法创建套接字：%s "
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs：无法设置为被动模式"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs：正在中止传输。"
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs：中止错误：%s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs：终止失败"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs：CWD 失败。"
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs：无法解析符号链接"
+
+msgid "Resolving symlink..."
+msgstr "正在解析符号链接..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs：正在读取 FTP 目录 %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(严格遵循 rfc959)"
+
+msgid "(chdir first)"
+msgstr "(先改变目录)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs：失败；没有后备"
+
+msgid "ftpfs: storing file"
+msgstr "ftpfs: 存贮文件"
+
+msgid ""
+"~/.netrc file has incorrect mode\n"
+"Remove password or correct mode"
+msgstr ""
+"~/.netrc 文件权限不正确。\n"
+"删除口令或者改正权限。"
+
+#, fuzzy, c-format
+msgid "%s: Warning: file %s not found\n"
+msgstr "警告：没有找到文件 %s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"警告：%s 中有无效的行：\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"警告：%2$s 中有无效的标志 %1$c\n"
+"%3$s\n"
+
+#, c-format
+msgid "reconnect to %s failed"
+msgstr "重新连接 %s 失败"
+
+msgid "Authentication failed"
+msgstr "验证失败"
+
+#, c-format
+msgid "Error %s creating directory %s"
+msgstr "创建目录%s时出错%s"
+
+#, c-format
+msgid "Error %s removing directory %s"
+msgstr "删除目录%s时出错%s"
+
+#, c-format
+msgid "%s opening remote file %s"
+msgstr "%s 正在打开远程文件 %s"
+
+#, c-format
+msgid "%s removing remote file %s"
+msgstr "%s 正在删除远程文件 %s"
+
+#, c-format
+msgid "%s renaming files\n"
+msgstr "%s 正在重命名文件\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"无法打开 tar 归档文件\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "不完整的 tar 归档文件"
+
+msgid "Unexpected EOF on archive file"
+msgstr "归档文件出现异常 EOF"
+
+#, c-format
+msgid ""
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"%s\n"
+"不是一个 tar 归档文件。"
+
+msgid "undelfs: error"
+msgstr "undelfs：错误"
+
+msgid "not enough memory"
+msgstr "内存不足"
+
+msgid "while allocating block buffer"
+msgstr "当分配块缓冲时"
+
+#, c-format
+msgid "open_inode_scan: %d"
+msgstr "open_inode_scan：%d"
+
+#, c-format
+msgid "while starting inode scan %d"
+msgstr "当开始 inode 扫描 %d"
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs：正在载入被删除文件的信息 %d inode"
+
+#, c-format
+msgid "while calling ext2_block_iterate %d"
+msgstr "当调用 ext2_block_iterate %d 时"
+
+msgid "no more memory while reallocating array"
+msgstr "当重新分配数组时没有内存时"
+
+#, c-format
+msgid "while doing inode scan %d"
+msgstr "当进行 inode 扫描 %d 时"
+
+#, c-format
+msgid "Cannot open file %s"
+msgstr "无法打开文件 %s"
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs：正在读取 inode bitmap..."
+
+#, c-format
+msgid ""
+"Cannot load inode bitmap from:\n"
+"%s"
+msgstr ""
+"无法载入 inode位图自：\n"
+" %s"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs：正在读取 block bitmap..."
+
+#, c-format
+msgid ""
+"Cannot load block bitmap from:\n"
+"%s"
+msgstr ""
+"无法载入块位图自：\n"
+" %s"
+
+msgid "vfs_info is not fs!"
+msgstr "vfs_info 不是文件系统！"
+
+msgid "You have to chdir to extract files first"
+msgstr "您必须先更改目录来解开文件"
+
+msgid "while iterating over blocks"
+msgstr "正当遍历块时"
+
+#, c-format
+msgid "Cannot open file \"%s\""
+msgstr "无法打开文件\"%s\""
+
+msgid "Ext2lib error"
+msgstr "Ext2lib 错误"
+
 msgid "Invalid value"
 msgstr "无效的值"
 
@@ -3937,14 +4098,6 @@ msgstr ""
 "无法打开\"%s\"\n"
 "%s "
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-"无法查看\"%s\"的状态\n"
-"%s"
-
 msgid "Cannot view: not a regular file"
 msgstr "无法查看：不是常规文件"
 
@@ -3956,3 +4109,79 @@ msgstr "搜索完成"
 
 msgid "Continue from beginning?"
 msgstr "从开始处继续？"
+
+#~ msgid "fish: Setting up current directory..."
+#~ msgstr "fish：正在设置当前目录..."
+
+#~ msgid "fish: Connected, home %s."
+#~ msgstr "fish：已连接，主目录%s，"
+
+#~ msgid "All charsets"
+#~ msgstr "所有字体集"
+
+#~ msgid "Case &sensitive"
+#~ msgstr "大小写敏感(&S)"
+
+#~ msgid "&Normal"
+#~ msgstr "普通(&N)"
+
+#~ msgid "Macro recursion is too deep"
+#~ msgstr "宏递归层次太深"
+
+#~ msgid "Cannot open temp file"
+#~ msgstr "无法打开临时文件"
+
+#~ msgid "Cannot open macro file"
+#~ msgstr "无法打开宏文件"
+
+#~ msgid "Cannot overwrite macro file"
+#~ msgstr "无法覆盖宏文件"
+
+#~ msgid "Load macro"
+#~ msgstr "加载宏"
+
+#~ msgid "Error creating script:"
+#~ msgstr " 创建脚本时发生错误："
+
+#~ msgid "Error reading script:"
+#~ msgstr " 读取脚本时发生错误："
+
+#~ msgid "Error closing script:"
+#~ msgstr " 关闭脚本时发生错误："
+
+#~ msgid "Script created:"
+#~ msgstr "脚本被创建："
+
+#~ msgid "Process block"
+#~ msgstr "处理块"
+
+#~ msgid "Execute macro"
+#~ msgstr "执行宏"
+
+#~ msgid ""
+#~ "Current text was modified without a file save\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "当前文字被修改但没有保存。\n"
+#~ "选择继续将丢失这些修改。"
+
+#~ msgid "Finis&h record macro..."
+#~ msgstr "结束记录宏(&H)..."
+
+#~ msgid "&Execute macro..."
+#~ msgstr "执行宏(&E)..."
+
+#~ msgid "Remove:"
+#~ msgstr "删除："
+
+#~ msgid "Free nodes: %ld (%ld%%) of %ld"
+#~ msgstr "空闲节点：%ld (%ld%%) / %ld"
+
+#~ msgid "Reverse selec&tion"
+#~ msgstr "反转选择(&T)"
+
+#~ msgid "&View diff files"
+#~ msgstr "查看Diff文件(&V)"
+
+#~ msgid "Main panel options"
+#~ msgstr "主要面板选项"

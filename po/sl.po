@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # mateju <>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
-"POT-Creation-Date: 2011-10-03 12:28+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2012-08-30 13:50+0400\n"
 "PO-Revision-Date: 2011-10-03 09:31+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.net/projects/p/mc/team/sl/)\n"
@@ -17,7 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3)\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3)\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Opozorilo: ni mogoče naložiti seznama znakovnih naborov"
@@ -28,6 +29,26 @@ msgstr ""
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Ni mogoče prevesti iz %s v %s"
+
+msgid "Event system already initialized"
+msgstr ""
+
+msgid "Failed to initialize event system"
+msgstr ""
+
+msgid "Event system not initialized"
+msgstr ""
+
+msgid "Check input data! Some of parameters are NULL!"
+msgstr ""
+
+#, c-format
+msgid "Unable to create group '%s' for events!"
+msgstr ""
+
+#, c-format
+msgid "Unable to create event '%s'!"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -45,6 +66,32 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
+#, c-format
+msgid "Cannot create %s directory"
+msgstr ""
+
+#, fuzzy
+msgid "FATAL: not a directory:"
+msgstr "%s ni imenik\n"
+
+#, c-format
+msgid "An error occured while migrating user settings: %s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to Freedesktop recommended dirs.\n"
+"To get more info, please visit\n"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
+
+#, c-format
+msgid ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
+msgstr ""
+
 msgid "Search string not found"
 msgstr ""
 
@@ -58,16 +105,20 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-msgid "Normal"
-msgstr ""
-
-msgid "&Regular expression"
+#, fuzzy
+msgid "Regular expression error"
 msgstr "&Regularni izraz"
 
-msgid "Hexadecimal"
+msgid "No&rmal"
 msgstr ""
 
-msgid "Wildcard search"
+msgid "Re&gular expression"
+msgstr ""
+
+msgid "He&xadecimal"
+msgstr ""
+
+msgid "Wil&dcard search"
 msgstr ""
 
 #, c-format
@@ -79,6 +130,13 @@ msgstr ""
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to use '%s' skin with 256 colors support\n"
+"on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
 
@@ -177,6 +235,9 @@ msgstr "Tipka Delete"
 
 msgid "Completion/M-tab"
 msgstr "Dokončaj/tabulator"
+
+msgid "Back Tabulation S-tab"
+msgstr ""
 
 msgid "+ on keypad"
 msgstr "+ na številčni tipkovnici"
@@ -289,6 +350,9 @@ msgstr ""
 msgid "Quotation mark"
 msgstr ""
 
+msgid "Percent sign"
+msgstr ""
+
 msgid "Caret"
 msgstr ""
 
@@ -367,6 +431,34 @@ msgstr ""
 "Velikost zaslona %dx%d ni podprta.\n"
 "Preverite okoljsko spremenljivko TERM.\n"
 
+msgid "Warning"
+msgstr "Opozorilo"
+
+msgid "Pipe failed"
+msgstr ""
+
+msgid "Dup failed"
+msgstr ""
+
+msgid "Error dup'ing old error pipe"
+msgstr ""
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Predpomnilnik imenika za %s je potekel"
+
+msgid "bytes transferred"
+msgstr ""
+
+msgid "Starting linear transfer..."
+msgstr "Začenjam linearen prenos..."
+
+msgid "Getting file"
+msgstr "Dobivam datoteko"
+
+msgid "Changes to file lost"
+msgstr "Spremembe v datoteki izgubljene"
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s ni imenik\n"
@@ -395,416 +487,17 @@ msgstr "Začasne datoteke ne bodo ustvarjene\n"
 msgid "Press any key to continue..."
 msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
 
-msgid "Warning"
-msgstr "Opozorilo"
-
-msgid "Pipe failed"
-msgstr ""
-
-msgid "Dup failed"
-msgstr ""
-
-msgid "Error dup'ing old error pipe"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Ne morem odpreti cpio arhiva\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"Prezgoden konec cpio arhiva\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Nekonsistentne močne povezave \n"
-"%s\n"
-"v cpio archivu\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s vsebuje podvojene vnose! Preskakujem!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Pokvarjena cpio glava v\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Nepričakovan konec datoteke\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "Predpomnilnik imenika za %s je potekel"
-
-msgid "bytes transferred"
-msgstr ""
-
-msgid "Starting linear transfer..."
-msgstr "Začenjam linearen prenos..."
-
-msgid "Getting file"
-msgstr "Dobivam datoteko"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Ne morem odpreti arhiva %s\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Nekonsistenten extfs arhiv"
-
-#, c-format
-msgid "Warning: cannot open %s directory\n"
-msgstr ""
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Prekinjam povezavo z %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Čakam na inicializacijsko vrstico..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Oprostite, zaenkrat ne znamo ustvarjati z geslom avtentificiranih povezav."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr ""
-
-msgid "fish: Sending password..."
-msgstr "fish: Pošiljam geslo..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Pošiljam inicializacijsko vrstico..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Rovanje različic..."
-
-msgid "fish: Getting host info..."
-msgstr ""
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: Nastavljam trenutni imenik..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: Povezan, dom %s."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Berem imenik %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: opravljeno."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: napaka"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: shranjujem %s: pošiljnam ukaz..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Krajevno branje ni uspelo, pošiljam nule"
-
-msgid "fish: storing zeros"
-msgstr ""
-
-msgid "fish: storing file"
-msgstr ""
-
-msgid "Aborting transfer..."
-msgstr "Prekinjam prenos..."
-
-msgid "Error reported after abort."
-msgstr "Napaka sporočena po prekinitvi."
-
-msgid "Aborted transfer would be successful."
-msgstr "Prekinjen prenos bi bil uspešen."
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Prekinjam povezavo z %s"
-
-#, c-format
-msgid "FTP: Password required for %s"
-msgstr ""
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: pošiljam ime za prijavo"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: pošiljam uporabnikovo geslo"
-
-#, c-format
-msgid "FTP: Account required for user %s"
-msgstr ""
-
-msgid "Account:"
-msgstr ""
-
-msgid "ftpfs: sending user account"
-msgstr ""
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: prijavljen sem"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Napačna prijava za uporabnika %s "
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Neveljavno ime gostitelja."
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: ustvarjam povezavo z %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: uporabnik je prekinil povezavo"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: povezava do strežnika ni bila uspešna: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Čakam na nov poizkus... %d (Control-C za preklic)"
-
-msgid "ftpfs: invalid address family"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr ""
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: ne morem nastaviti pasivnega načina"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: prekinjam prenos."
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: prekinitvena napaka: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: prekinitev ni uspela"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD (sprememba delavnega imenika) ni uspela."
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: ne morem razvozlati simbolične povezave"
-
-msgid "Resolving symlink..."
-msgstr "Razvozljujem simbolično povezavo..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Berem FTP imenik %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(striktni rfc959)"
-
-msgid "(chdir first)"
-msgstr "(najprej spremeni imenik)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: spodletel; ni več možnih rešitev"
-
-msgid "ftpfs: storing file"
-msgstr ""
-
-msgid ""
-"~/.netrc file has incorrect mode\n"
-"Remove password or correct mode"
-msgstr ""
-
 msgid "Cannot parse:"
 msgstr "Ne morem razčleniti:"
 
 msgid "More parsing errors will be ignored."
 msgstr "Nadalnje napake pri razčlenitvi bodo ignorirane."
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Opozorilo: datoteka %s ni bila najdena\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Opozorilo: Neveljavna vrstica v %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Opozorilo: Neveljavna zastavica %c v %s:\n"
-"%s\n"
-
-#, c-format
-msgid "reconnect to %s failed"
-msgstr ""
-
-msgid "Authentication failed"
-msgstr ""
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr ""
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr ""
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr ""
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr ""
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Ne morem odpreti tar arhiva\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Nekonsistenten tar arhiv"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Nepričakovan EOF (konec vrstice) v datoteki arhiva"
-
-#, c-format
-msgid ""
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-
-msgid "undelfs: error"
-msgstr ""
-
-msgid "not enough memory"
-msgstr ""
-
-msgid "while allocating block buffer"
-msgstr ""
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr ""
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: nalagam podatke o zbrisanih datotekah %d inovod"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr ""
-
-msgid "no more memory while reallocating array"
-msgstr ""
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr ""
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: berem inode sliko..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: berem sliko blokov..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "vfs_info is not fs!"
-msgstr ""
-
-msgid "You have to chdir to extract files first"
-msgstr ""
-
-msgid "while iterating over blocks"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr ""
-
-msgid "Ext2lib error"
-msgstr ""
-
 msgid "Internal error:"
 msgstr "Interna napaka:"
 
 msgid "Password:"
 msgstr "Geslo:"
-
-msgid "Changes to file lost"
-msgstr "Spremembe v datoteki izgubljene"
 
 msgid "Screens"
 msgstr ""
@@ -843,6 +536,13 @@ msgstr "Pokaže trenutno različico"
 msgid "Print data directory"
 msgstr "Natisne podatkovni imenik"
 
+msgid "Print extended info about used data directories"
+msgstr ""
+
+#, fuzzy
+msgid "Print configure options"
+msgstr "Nastavi"
+
 msgid "Print last working directory to specified file"
 msgstr "Izpiše zadnji delavni imenik v navedeno datoteko"
 
@@ -867,6 +567,10 @@ msgstr "Urejuje eno datoteko"
 msgid "Forces xterm features"
 msgstr "Prisili uporabo xterm dodatkov"
 
+#, fuzzy
+msgid "Disable X11 support"
+msgstr "Izključi podporo za podlupine"
+
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
 
@@ -888,6 +592,9 @@ msgstr "Ponastavi mehke tipke na HP terminalih"
 msgid "Load definitions of key bindings from specified file"
 msgstr ""
 
+msgid "Don't load definitions of key bindings from file, use defaults"
+msgstr ""
+
 msgid "Requests to run in black and white"
 msgstr "Prošnja za izvajanje v črnobelem načinu"
 
@@ -902,9 +609,9 @@ msgstr ""
 
 #. TRANSLATORS: don't translate keywords
 msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
+"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
 "\n"
 " Keywords:\n"
 "   Global:       errors, disabled, reverse, gauge, header\n"
@@ -921,13 +628,18 @@ msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 
-#. TRANSLATORS: don't translate color names
+#. TRANSLATORS: don't translate color names and attributes
 msgid ""
-"Colors:\n"
+"Standard Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+"Extended colors, when 256 colors are available:\n"
+"   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
+"\n"
+"Attributes:\n"
+"   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 
 msgid "Color options"
@@ -952,16 +664,19 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "Polnočni poveljnik GNU %s\n"
 
-msgid "No arguments given to the viewer."
-msgstr ""
-
-msgid "Two files are required to evoke the diffviewer."
-msgstr ""
-
 msgid "Main options"
 msgstr ""
 
 msgid "Terminal options"
+msgstr ""
+
+msgid "Arguments parse error!"
+msgstr ""
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Background process error"
@@ -987,7 +702,7 @@ msgstr ""
 msgid "&Dismiss"
 msgstr "&Opusti"
 
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
 
 msgid "&Whole words"
@@ -996,7 +711,7 @@ msgstr ""
 msgid "&Backwards"
 msgstr "&Nazaj"
 
-msgid "Case &sensitive"
+msgid "Cas&e sensitive"
 msgstr ""
 
 msgid "Enter search string:"
@@ -1025,9 +740,6 @@ msgstr ""
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-
-msgid "&Normal"
 msgstr ""
 
 msgid "&Fastest (Assume large files)"
@@ -1110,6 +822,19 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "\"%s\" is a directory"
+msgstr "%s ni imenik\n"
+
+#, c-format
+msgid ""
+"Cannot stat \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Diff viewer: invalid mode"
+msgstr ""
+
 msgid "Two files are needed to compare"
 msgstr ""
 
@@ -1151,9 +876,6 @@ msgstr ""
 #, c-format
 msgid "File \"%s\" is too large"
 msgstr ""
-
-msgid "Macro recursion is too deep"
-msgstr "Rekurzija makra je pregloboka"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1208,18 +930,6 @@ msgstr ""
 msgid "Save As"
 msgstr ""
 
-msgid "Delete macro"
-msgstr ""
-
-msgid "Cannot open temp file"
-msgstr ""
-
-msgid "Cannot open macro file"
-msgstr ""
-
-msgid "Cannot overwrite macro file"
-msgstr ""
-
 msgid "Syntax file edit"
 msgstr "Urejanje datoteke s sintakso"
 
@@ -1259,16 +969,28 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
+msgid "Save as"
+msgstr ""
+
+msgid "Cannot save: destination is not a regular file"
+msgstr ""
+
 msgid "A file already exists with this name"
 msgstr ""
 
 msgid "&Overwrite"
 msgstr ""
 
-msgid "Save as"
+msgid "Cannot save file"
 msgstr ""
 
-msgid "Cannot save file"
+msgid "Delete macro"
+msgstr ""
+
+msgid "Press macro hotkey:"
+msgstr ""
+
+msgid "Macro not deleted"
 msgstr ""
 
 msgid "Save macro"
@@ -1277,10 +999,10 @@ msgstr ""
 msgid "Press the macro's new hotkey:"
 msgstr ""
 
-msgid "Press macro hotkey:"
+msgid "Repeat last commands"
 msgstr ""
 
-msgid "Load macro"
+msgid "Repeat times:"
 msgstr ""
 
 #, c-format
@@ -1369,24 +1091,6 @@ msgstr ""
 msgid "Cannot execute command"
 msgstr ""
 
-msgid "Error creating script:"
-msgstr "Napaka ob ustvarjanju skripte:"
-
-msgid "Error reading script:"
-msgstr "Napaka ob branju skripte:"
-
-msgid "Error closing script:"
-msgstr "Napaka ob zapiranju skripte:"
-
-msgid "Script created:"
-msgstr "Skripta ustvarjena:"
-
-msgid "Process block"
-msgstr "Procesiraj blok"
-
-msgid "Error calling program"
-msgstr ""
-
 msgid "Copies to"
 msgstr ""
 
@@ -1406,14 +1110,6 @@ msgid "Insert literal"
 msgstr ""
 
 msgid "Press any key:"
-msgstr ""
-
-msgid "Execute macro"
-msgstr ""
-
-msgid ""
-"Current text was modified without a file save\n"
-"Continue discards these changes"
 msgstr ""
 
 msgid "In se&lection"
@@ -1475,6 +1171,10 @@ msgstr "&Končaj"
 msgid "&Undo"
 msgstr ""
 
+#, fuzzy
+msgid "&Redo"
+msgstr "&Odstrani"
+
 msgid "&Toggle ins/overw"
 msgstr ""
 
@@ -1532,7 +1232,7 @@ msgstr ""
 msgid "&Prev bookmark"
 msgstr ""
 
-msgid "&Flush bookmark"
+msgid "&Flush bookmarks"
 msgstr ""
 
 msgid "&Go to line..."
@@ -1562,16 +1262,13 @@ msgstr ""
 msgid "&Refresh screen"
 msgstr ""
 
-msgid "&Start record macro"
-msgstr ""
-
-msgid "Finis&h record macro..."
-msgstr ""
-
-msgid "&Execute macro..."
+msgid "&Start/Stop record macro"
 msgstr ""
 
 msgid "Delete macr&o..."
+msgstr ""
+
+msgid "Record/Repeat &actions"
 msgstr ""
 
 msgid "'ispell' s&pell check"
@@ -1648,6 +1345,10 @@ msgstr "Prevoj tipkalnega stroja"
 
 msgid "Word wrap line length:"
 msgstr ""
+
+#, fuzzy
+msgid "&Group undo"
+msgstr "Ime skupine"
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1852,8 +1553,7 @@ msgstr "Vrstni red sortiranja"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2183,11 +1883,11 @@ msgid "Setup"
 msgstr ""
 
 #, c-format
-msgid "Setup saved to ~/%s"
+msgid "Setup saved to %s"
 msgstr ""
 
 #, c-format
-msgid "Unable to save setup to ~/%s"
+msgid "Unable to save setup to %s"
 msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
@@ -2223,14 +1923,13 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "~/%s file error"
+msgid "%s file error"
 msgstr ""
 
 #, c-format
 msgid ""
-"The format of the ~/%s file has changed with version 3.0. You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write"
-" it."
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2308,6 +2007,9 @@ msgstr ""
 
 msgid "&Abort"
 msgstr "&Prekini"
+
+msgid "Ski&p all"
+msgstr ""
 
 msgid "&Retry"
 msgstr "Poskusi &znova"
@@ -2426,6 +2128,12 @@ msgstr ""
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot preallocate space for target file \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -2583,15 +2291,35 @@ msgid "Background process: File exists"
 msgstr ""
 
 #, c-format
-msgid "Files processed: %zu of %zu"
+msgid "Files processed: %zu/%zu"
 msgstr ""
 
 #, c-format
-msgid "Time: %s  %s (%s)"
+msgid "Files processed: %zu"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s %s"
+msgstr "Datoteka: %s"
+
+#, c-format
+msgid "Time: %s %s (%s)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Time: %s"
+msgstr "Datoteka: %s"
+
+#, c-format
+msgid "Time: %s (%s)"
 msgstr ""
 
 #, c-format
-msgid "Total: %s of %s"
+msgid " Total: %s "
+msgstr ""
+
+#, c-format
+msgid " Total: %s/%s "
 msgstr ""
 
 msgid "Source"
@@ -2650,25 +2378,16 @@ msgstr ""
 msgid "Malformed regular expression"
 msgstr ""
 
-msgid "Cas&e sensitive"
-msgstr ""
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
 msgid "Sea&rch for content"
 msgstr ""
 
 msgid "Case sens&itive"
-msgstr ""
-
-msgid "Re&gular expression"
 msgstr ""
 
 msgid "Fir&st hit"
@@ -2689,6 +2408,9 @@ msgstr ""
 msgid "File name:"
 msgstr ""
 
+msgid "Ena&ble ignore directories:"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Začni pri:"
 
@@ -2698,6 +2420,14 @@ msgstr "Iščem v %s"
 
 msgid "Finished"
 msgstr "Končano"
+
+#, c-format
+msgid "Finished (ignored %zd directory)"
+msgid_plural "Finished (ignored %zd directories)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #, c-format
 msgid "Searching %s"
@@ -2773,14 +2503,13 @@ msgstr ""
 msgid "Name of new group:"
 msgstr ""
 
-msgid "Remove:"
+#, c-format
+msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-msgid "Are you sure you want to remove this entry?"
-msgstr ""
-
+#, c-format
 msgid ""
-"Group not empty.\n"
+"Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
@@ -2792,7 +2521,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"MC was unable to write ~/%s file,\n"
+"MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
@@ -2814,19 +2543,18 @@ msgstr "Polnočni Poveljnik %s"
 msgid "File: %s"
 msgstr "Datoteka: %s"
 
-#, c-format
-msgid "Free nodes: %ld (%ld%%) of %ld"
-msgstr ""
-
 msgid "No node information"
 msgstr "Ni podatka o nodih"
 
-#, c-format
-msgid "Free space: %s (%d%%) of %s"
-msgstr "Neuporabljen prostor: %s (%d%%) od %s"
+msgid "Free nodes:"
+msgstr ""
 
 msgid "No space information"
 msgstr "Ni podatkov o prostoru"
+
+#, fuzzy, c-format
+msgid "Free space: %s/%s (%d%%)"
+msgstr "Neuporabljen prostor: %s (%d%%) od %s"
 
 #, c-format
 msgid "Type:      %s"
@@ -2903,9 +2631,6 @@ msgstr "vidna vrstica s &Tipkami"
 msgid "Command &prompt"
 msgstr ""
 
-msgid "Show &mini status"
-msgstr ""
-
 msgid "Menu&bar visible"
 msgstr ""
 
@@ -2963,6 +2688,10 @@ msgstr "&Lupinska povezava..."
 msgid "SM&B link..."
 msgstr "SM&B povezava..."
 
+#, fuzzy
+msgid "Paneli&ze"
+msgstr "Daj v Pu&lt"
+
 msgid "&Rescan"
 msgstr ""
 
@@ -3014,7 +2743,7 @@ msgstr ""
 msgid "U&nselect group"
 msgstr ""
 
-msgid "Reverse selec&tion"
+msgid "&Invert selection"
 msgstr ""
 
 msgid "E&xit"
@@ -3038,8 +2767,9 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-msgid "&View diff files"
-msgstr ""
+#, fuzzy
+msgid "C&ompare files"
+msgstr "&Hitri seznam datotek"
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3136,6 +2866,9 @@ msgstr ""
 msgid "ButtonBar|Mkdir"
 msgstr ""
 
+msgid "Memory exhausted!"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nikoli"
 
@@ -3185,6 +2918,9 @@ msgid "S&ingle press"
 msgstr ""
 
 msgid "Esc key mode"
+msgstr ""
+
+msgid "Preallocate &space"
 msgstr ""
 
 msgid "Mkdi&r autoname"
@@ -3265,7 +3001,7 @@ msgstr ""
 msgid "Use SI si&ze units"
 msgstr ""
 
-msgid "Main panel options"
+msgid "Show mi&ni-status"
 msgstr ""
 
 msgid "Panel options"
@@ -3402,6 +3138,10 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+#, fuzzy
+msgid "Panelize"
+msgstr "Daj v Pu&lt"
+
 msgid "Unknown tag on display format:"
 msgstr ""
 
@@ -3507,6 +3247,9 @@ msgid "True:"
 msgstr ""
 
 msgid "False:"
+msgstr ""
+
+msgid "Error calling program"
 msgstr ""
 
 msgid "Warning -- ignoring file"
@@ -3629,7 +3372,19 @@ msgstr ""
 "premikate s Tabulatorjem."
 
 #, c-format
-msgid "Cannot create %s directory"
+msgid ""
+"Failed to run:\n"
+"%s\n"
+msgstr ""
+
+msgid "Home directory path is not absolute"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Failed while close:\n"
+"%s\n"
 msgstr ""
 
 msgid "Choose codepage"
@@ -3715,6 +3470,396 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
+#, fuzzy
+msgid "Root directory:"
+msgstr "imenik"
+
+#, fuzzy
+msgid "System data"
+msgstr "&Sistemsko"
+
+#, fuzzy
+msgid "Config directory:"
+msgstr "Ne morem spremeniti imenika"
+
+#, fuzzy
+msgid "Data directory:"
+msgstr "imenik"
+
+msgid "VFS plugins and scripts:"
+msgstr ""
+
+msgid "User data"
+msgstr ""
+
+#, fuzzy
+msgid "Cache directory:"
+msgstr "Ne morem spremeniti imenika"
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"Ne morem odpreti cpio arhiva\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Prezgoden konec cpio arhiva\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Nekonsistentne močne povezave \n"
+"%s\n"
+"v cpio archivu\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s vsebuje podvojene vnose! Preskakujem!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Pokvarjena cpio glava v\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Nepričakovan konec datoteke\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Ne morem odpreti arhiva %s\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Nekonsistenten extfs arhiv"
+
+#, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr ""
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: Prekinjam povezavo z %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: Čakam na inicializacijsko vrstico..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr ""
+"Oprostite, zaenkrat ne znamo ustvarjati z geslom avtentificiranih povezav."
+
+#, c-format
+msgid "fish: Password is required for %s"
+msgstr ""
+
+msgid "fish: Sending password..."
+msgstr "fish: Pošiljam geslo..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: Pošiljam inicializacijsko vrstico..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: Rovanje različic..."
+
+msgid "fish: Getting host info..."
+msgstr ""
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: Berem imenik %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: opravljeno."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: napaka"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: shranjujem %s: pošiljnam ukaz..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: Krajevno branje ni uspelo, pošiljam nule"
+
+msgid "fish: storing zeros"
+msgstr ""
+
+msgid "fish: storing file"
+msgstr ""
+
+msgid "Aborting transfer..."
+msgstr "Prekinjam prenos..."
+
+msgid "Error reported after abort."
+msgstr "Napaka sporočena po prekinitvi."
+
+msgid "Aborted transfer would be successful."
+msgstr "Prekinjen prenos bi bil uspešen."
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: Prekinjam povezavo z %s"
+
+#, c-format
+msgid "FTP: Password required for %s"
+msgstr ""
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: pošiljam ime za prijavo"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: pošiljam uporabnikovo geslo"
+
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr ""
+
+msgid "Account:"
+msgstr ""
+
+msgid "ftpfs: sending user account"
+msgstr ""
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: prijavljen sem"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: Napačna prijava za uporabnika %s "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: Neveljavno ime gostitelja."
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: ustvarjam povezavo z %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: uporabnik je prekinil povezavo"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: povezava do strežnika ni bila uspešna: %s"
+
+#, fuzzy, c-format
+msgid "Waiting to retry... %d (Control-G to cancel)"
+msgstr "Čakam na nov poizkus... %d (Control-C za preklic)"
+
+msgid "ftpfs: invalid address family"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr ""
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: ne morem nastaviti pasivnega načina"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: prekinjam prenos."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: prekinitvena napaka: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: prekinitev ni uspela"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD (sprememba delavnega imenika) ni uspela."
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: ne morem razvozlati simbolične povezave"
+
+msgid "Resolving symlink..."
+msgstr "Razvozljujem simbolično povezavo..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: Berem FTP imenik %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(striktni rfc959)"
+
+msgid "(chdir first)"
+msgstr "(najprej spremeni imenik)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: spodletel; ni več možnih rešitev"
+
+msgid "ftpfs: storing file"
+msgstr ""
+
+msgid ""
+"~/.netrc file has incorrect mode\n"
+"Remove password or correct mode"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Warning: file %s not found\n"
+msgstr "Opozorilo: datoteka %s ni bila najdena\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Opozorilo: Neveljavna vrstica v %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Opozorilo: Neveljavna zastavica %c v %s:\n"
+"%s\n"
+
+#, c-format
+msgid "reconnect to %s failed"
+msgstr ""
+
+msgid "Authentication failed"
+msgstr ""
+
+#, c-format
+msgid "Error %s creating directory %s"
+msgstr ""
+
+#, c-format
+msgid "Error %s removing directory %s"
+msgstr ""
+
+#, c-format
+msgid "%s opening remote file %s"
+msgstr ""
+
+#, c-format
+msgid "%s removing remote file %s"
+msgstr ""
+
+#, c-format
+msgid "%s renaming files\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Ne morem odpreti tar arhiva\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Nekonsistenten tar arhiv"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Nepričakovan EOF (konec vrstice) v datoteki arhiva"
+
+#, c-format
+msgid ""
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+
+msgid "undelfs: error"
+msgstr ""
+
+msgid "not enough memory"
+msgstr ""
+
+msgid "while allocating block buffer"
+msgstr ""
+
+#, c-format
+msgid "open_inode_scan: %d"
+msgstr ""
+
+#, c-format
+msgid "while starting inode scan %d"
+msgstr ""
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: nalagam podatke o zbrisanih datotekah %d inovod"
+
+#, c-format
+msgid "while calling ext2_block_iterate %d"
+msgstr ""
+
+msgid "no more memory while reallocating array"
+msgstr ""
+
+#, c-format
+msgid "while doing inode scan %d"
+msgstr ""
+
+#, c-format
+msgid "Cannot open file %s"
+msgstr ""
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: berem inode sliko..."
+
+#, c-format
+msgid ""
+"Cannot load inode bitmap from:\n"
+"%s"
+msgstr ""
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: berem sliko blokov..."
+
+#, c-format
+msgid ""
+"Cannot load block bitmap from:\n"
+"%s"
+msgstr ""
+
+msgid "vfs_info is not fs!"
+msgstr ""
+
+msgid "You have to chdir to extract files first"
+msgstr ""
+
+msgid "while iterating over blocks"
+msgstr ""
+
+#, c-format
+msgid "Cannot open file \"%s\""
+msgstr ""
+
+msgid "Ext2lib error"
+msgstr ""
+
 msgid "Invalid value"
 msgstr ""
 
@@ -3791,12 +3936,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot stat \"%s\"\n"
-"%s"
-msgstr ""
-
 msgid "Cannot view: not a regular file"
 msgstr ""
 
@@ -3809,4 +3948,26 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
+#~ msgid "fish: Setting up current directory..."
+#~ msgstr "fish: Nastavljam trenutni imenik..."
 
+#~ msgid "fish: Connected, home %s."
+#~ msgstr "fish: Povezan, dom %s."
+
+#~ msgid "Macro recursion is too deep"
+#~ msgstr "Rekurzija makra je pregloboka"
+
+#~ msgid "Error creating script:"
+#~ msgstr "Napaka ob ustvarjanju skripte:"
+
+#~ msgid "Error reading script:"
+#~ msgstr "Napaka ob branju skripte:"
+
+#~ msgid "Error closing script:"
+#~ msgstr "Napaka ob zapiranju skripte:"
+
+#~ msgid "Script created:"
+#~ msgstr "Skripta ustvarjena:"
+
+#~ msgid "Process block"
+#~ msgstr "Procesiraj blok"
