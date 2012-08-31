@@ -4448,7 +4448,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
         str_vfs_convert_from (converter, path_element->path, tmp_conv);
 
         g_free (path_element->path);
-        path_element->path = g_strdup (tmp_conv->str);
+        path_element->path = g_strndup (tmp_conv->str, tmp_conv->len);
 
         g_string_set_size (tmp_conv, 0);
 

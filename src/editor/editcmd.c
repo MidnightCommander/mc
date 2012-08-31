@@ -1388,7 +1388,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
             g_string_free (recoded, TRUE);
         }
 #endif
-        compl[*num].text = g_strdup (temp->str);
+        compl[*num].text = g_strndup (temp->str, temp->len);
         compl[*num].len = temp->len;
         (*num)++;
         start += len;
