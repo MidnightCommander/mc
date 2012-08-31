@@ -1,4 +1,4 @@
-/** \file history.h
+/** \file src/history.h
  *  \brief Header: defines history section names
  */
 

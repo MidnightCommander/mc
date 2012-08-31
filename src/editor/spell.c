@@ -422,7 +422,7 @@ aspell_get_lang (void)
 /**
  * Set the language.
  *
- * @param Language name
+ * @param lang Language name
  * @returns FALSE or error
  */
 

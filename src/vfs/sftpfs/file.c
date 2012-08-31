@@ -220,11 +220,12 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** error)
 /**
  * Read up to 'count' bytes from the file descriptor 'file_handler' to the buffer starting at 'buffer'.
  *
- * @param data   file data handler
+ * @param file_handler file data handler
  * @param buffer buffer for data
- * @param count  data size
- * @param error  pointer to the error handler
- * @return 0 if sucess, negative value otherwise
+ * @param count data size
+ * @param error pointer to the error handler
+ *
+ * @returns 0 on sucess, negative value otherwise
  */
 
 ssize_t
@@ -267,14 +268,16 @@ sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Write up to 'count' bytes from  the buffer starting at 'buffer' to the descriptor 'file_handler'.
  *
- * @param data   file data handler
- * @param buffer buffer for data
- * @param count  data size
- * @param error  pointer to the error handler
- * @return 0 if sucess, negative value otherwise
+ * @param file_handler file data handler
+ * @param buffer       buffer for data
+ * @param count        data size
+ * @param error        pointer to the error handler
+ *
+ * @returns 0 on sucess, negative value otherwise
  */
 
 ssize_t
@@ -312,12 +315,14 @@ sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Close a file descriptor.
  *
- * @param data  file data handler
- * @param error pointer to the error handler
- * @return 0 if sucess, negative value otherwise
+ * @param file_handler    file data handler
+ * @param error           pointer to the error handler
+ *
+ * @returns 0 on sucess, negative value otherwise
  */
 
 int
@@ -338,14 +343,16 @@ sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Reposition the offset of the open file associated with the file descriptor.
  *
- * @param data   file data handler
- * @param offset file offset
- * @param whence method of seek (at begin, at current, at end)
- * @param error  pointer to the error handler
- * @return 0 if sucess, negative value otherwise
+ * @param file_handler   file data handler
+ * @param offset         file offset
+ * @param whence         method of seek (at begin, at current, at end)
+ * @param error          pointer to the error handler
+ *
+ * @returns 0 on sucess, negative value otherwise
  */
 
 off_t

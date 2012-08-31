@@ -527,9 +527,15 @@ int str_verscmp (const char *s1, const char *s2);
 void str_msg_term_size (const char *text, int *lines, int *columns);
 
 /**
- skip first <skip_count>  needle's in haystack and returns pointer to
- <skip_count+1> needle (or NULL if not found).
+ * skip first needle's in haystack
+ *
+ * @param haystack pointer to string
+ * @param needle pointer to string
+ * @param skip_count skip first bytes
+ *
+ * @returns pointer to skip_count+1 needle (or NULL if not found).
  */
+
 char *strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count);
 
 /*** inline functions ****************************************************************************/
@@ -554,7 +560,14 @@ str_replace (char *s, char from, char to)
  *
  * We can't use str*cpy funs here:
  * http://kerneltrap.org/mailarchive/openbsd-misc/2008/5/27/1951294
+ *
+ * @param dest pointer to string
+ * @param src pointer to string
+ *
+ * @returns a newly allocated string
+ *
  */
+
 static inline char *
 str_move (char *dest, const char *src)
 {

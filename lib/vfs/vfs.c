@@ -622,13 +622,14 @@ vfs_change_encoding (vfs_path_t * vpath, const char *encoding)
  * Preallocate space for file in new place for ensure that file
  * will be fully copied with less fragmentation.
  *
- * @param dest_desc mc VFS file handler
+ * @param dest_vfs_fd mc VFS file handler
  * @param src_fsize source file size
  * @param dest_fsize destination file size (if destination exists, otherwise should be 0)
  *
- * @return 0 if success and non-zero otherwise.
+ * @returns 0 if success and non-zero otherwise.
  * Note: function doesn't touch errno global variable.
  */
+
 int
 vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
 {

@@ -1,5 +1,5 @@
 
-/** \file history.h
+/** \file lib/widget/history.h
  *  \brief Header: save, load and show history
  */
 

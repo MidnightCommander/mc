@@ -31,7 +31,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \file
+/** \file lib/util.c
  *  \brief Source: various utilities
  */
 
@@ -915,6 +915,9 @@ wipe_password (char *passwd)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Convert "\E" -> esc character and ^x to control-x key and ^^ to ^ key
+ *
+ * @param p pointer to string
+ *
  * @returns a newly allocated string
  */
 

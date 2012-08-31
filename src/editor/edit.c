@@ -2406,44 +2406,49 @@ edit_set_codeset (WEdit * edit)
 
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
-   Recording stack for undo:
-   The following is an implementation of a compressed stack. Identical
-   pushes are recorded by a negative prefix indicating the number of times the
-   same char was pushed. This saves space for repeated curs-left or curs-right
-   delete etc.
-
-   eg:
-
-   pushed:       stored:
-
-   a
-   b             a
-   b            -3
-   b             b
-   c  -->       -4
-   c             c
-   c             d
-   c
-   d
-
-   If the stack long int is 0-255 it represents a normal insert (from a backspace),
-   256-512 is an insert ahead (from a delete), If it is betwen 600 and 700 it is one
-   of the cursor functions #define'd in edit-impl.h. 1000 through 700'000'000 is to
-   set edit->mark1 position. 700'000'000 through 1400'000'000 is to set edit->mark2
-   position.
-
-   The only way the cursor moves or the buffer is changed is through the routines:
-   insert, backspace, insert_ahead, delete, and cursor_move.
-   These record the reverse undo movements onto the stack each time they are
-   called.
-
-   Each key press results in a set of actions (insert; delete ...). So each time
-   a key is pressed the current position of start_display is pushed as
-   KEY_PRESS + start_display. Then for undoing, we pop until we get to a number
-   over KEY_PRESS. We then assign this number less KEY_PRESS to start_display. So undo
-   tracks scrolling and key actions exactly. (KEY_PRESS is about (2^31) * (2/3) = 1400'000'000)
-
+ * Recording stack for undo:
+ * The following is an implementation of a compressed stack. Identical
+ * pushes are recorded by a negative prefix indicating the number of times the
+ * same char was pushed. This saves space for repeated curs-left or curs-right
+ * delete etc.
+ *
+ * eg:
+ *
+ * pushed:       stored:
+ *
+ * a
+ * b             a
+ * b            -3
+ * b             b
+ * c  -->       -4
+ * c             c
+ * c             d
+ * c
+ * d
+ *
+ * If the stack long int is 0-255 it represents a normal insert (from a backspace),
+ * 256-512 is an insert ahead (from a delete), If it is betwen 600 and 700 it is one
+ * of the cursor functions define'd in edit-impl.h. 1000 through 700'000'000 is to
+ * set edit->mark1 position. 700'000'000 through 1400'000'000 is to set edit->mark2
+ * position.
+ *
+ * The only way the cursor moves or the buffer is changed is through the routines:
+ * insert, backspace, insert_ahead, delete, and cursor_move.
+ * These record the reverse undo movements onto the stack each time they are
+ * called.
+ *
+ * Each key press results in a set of actions (insert; delete ...). So each time
+ * a key is pressed the current position of start_display is pushed as
+ * KEY_PRESS + start_display. Then for undoing, we pop until we get to a number
+ * over KEY_PRESS. We then assign this number less KEY_PRESS to start_display. So undo
+ * tracks scrolling and key actions exactly. (KEY_PRESS is about (2^31) * (2/3) = 1400'000'000)
+ *
+ *
+ *
+ * @param edit editor object
+ * @param c code of the action
  */
 
 void

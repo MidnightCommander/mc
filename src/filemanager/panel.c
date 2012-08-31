@@ -4005,9 +4005,13 @@ panel_new (const char *panel_name)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Panel creation for specified directory.
+/**
+ * Panel creation for specified directory.
+ *
  * @param panel_name specifies the name of the panel for setup retieving
- * @param the path of working panel directory. If path is NULL then panel will be created for current directory
+ * @param wpath the path of working panel directory. If path is NULL then panel will be created
+ * for current directory
+ *
  * @returns new instance of WPanel
  */
 
@@ -4478,12 +4482,14 @@ panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+#ifdef HAVE_CHARSET
+
 /**
  * Change panel encoding.
  * @param panel WPanel object
  */
 
-#ifdef HAVE_CHARSET
 void
 panel_change_encoding (WPanel * panel)
 {
@@ -4584,6 +4590,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
 #endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * This routine reloads the directory in both panels. It tries to
  * select current_file in current_panel and other_file in other_panel.
@@ -4592,6 +4599,9 @@ remove_encoding_from_path (const vfs_path_t * vpath)
  *
  * if force_update has the UP_ONLY_CURRENT bit toggled on, then it
  * will not reload the other panel.
+ *
+ * @param flags for reload panel
+ * @param current_file name of the current file
  */
 
 void

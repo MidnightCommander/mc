@@ -23,7 +23,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \file serialize.c
+/** \file lib/serialize.c
  *  \brief Source: serialize/unserialize functionality for INI-like formats.
  */
 

@@ -369,12 +369,14 @@ static const struct
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  Get name of config file.
+ * Get name of config file.
+ *
+ * @param subdir If not NULL, config is also searched in specified subdir.
+ * @param config_file_name If relative, file if searched in standard paths.
+ *
+ * @returns Newly allocated string with config name or NULL if file is not found.
+ */
 
-  @param subdir If not NULL, config is also searched in specified subdir.
-  @param config_file_name If relative, file if searched in standard paths.
-  @returns Newly allocated string with config name or NULL if file is not found.
-*/
 static char *
 load_setup_get_full_config_name (const char *subdir, const char *config_file_name)
 {

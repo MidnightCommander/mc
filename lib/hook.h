@@ -1,4 +1,4 @@
-/** \file util.h
+/** \file lib/hook.h
  *  \brief Header: hooks
  */
 
