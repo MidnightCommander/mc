@@ -480,10 +480,14 @@ f_trunc (FBUF * fs)
 static int
 f_close (FBUF * fs)
 {
-    int rv;
+    int rv = -1;
 
-    rv = close (fs->fd);
-    f_free (fs);
+    if (fs != NULL)
+    {
+        rv = close (fs->fd);
+        f_free (fs);
+    }
+
     return rv;
 }
 
@@ -541,14 +545,19 @@ p_open (const char *cmd, int flags)
 static int
 p_close (FBUF * fs)
 {
-    int rv;
+    int rv = -1;
 
-    rv = pclose (fs->data);
-    f_free (fs);
+    if (fs != NULL)
+    {
+        rv = pclose (fs->data);
+        f_free (fs);
+    }
+
     return rv;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Get one char (byte) from string
  *
