@@ -1437,7 +1437,7 @@ hot_load_group (struct hotlist *grp)
                 label = g_strdup (tkn_buf->str);
                 CHECK_TOKEN (TKN_URL);
                 CHECK_TOKEN (TKN_STRING);
-                url = g_strdup (tkn_buf->str);
+                url = tilde_expand (tkn_buf->str);
                 add2hotlist (label, url, HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
                 SKIP_TO_EOL;
             }
@@ -1491,7 +1491,7 @@ hot_load_file (struct hotlist *grp)
                 label = g_strdup (tkn_buf->str);
                 CHECK_TOKEN (TKN_URL);
                 CHECK_TOKEN (TKN_STRING);
-                url = g_strdup (tkn_buf->str);
+                url = tilde_expand (tkn_buf->str);
                 add2hotlist (label, url, HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
                 SKIP_TO_EOL;
             }
