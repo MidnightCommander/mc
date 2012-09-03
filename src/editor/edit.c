@@ -2447,7 +2447,7 @@ edit_set_codeset (WEdit * edit)
  */
 
 void
-edit_push_undo_action (WEdit * edit, long c, ...)
+edit_push_undo_action (WEdit * edit, long c)
 {
     unsigned long sp = edit->undo_stack_pointer;
     unsigned long spm1;
@@ -2534,7 +2534,7 @@ edit_push_undo_action (WEdit * edit, long c, ...)
 }
 
 void
-edit_push_redo_action (WEdit * edit, long c, ...)
+edit_push_redo_action (WEdit * edit, long c)
 {
     unsigned long sp = edit->redo_stack_pointer;
     unsigned long spm1;
