@@ -181,7 +181,7 @@ create_command_menu (void)
         g_list_prepend (entries, menu_entry_create (_("C&heck word"), CK_SpellCheckCurrentWord));
     entries =
         g_list_prepend (entries,
-                        menu_entry_create (_("Change spelling &language"),
+                        menu_entry_create (_("Change spelling &language..."),
                                            CK_SpellCheckSelectLang));
     entries = g_list_prepend (entries, menu_separator_create ());
 #endif /* HAVE_ASPELL */
