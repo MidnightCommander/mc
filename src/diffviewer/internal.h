@@ -139,7 +139,4 @@ typedef struct WDiff
 void dview_search_cmd (WDiff * dview);
 void dview_continue_search_cmd (WDiff * dview);
 
-/* ydiff.c */
-void dview_update (WDiff * dview);
-
 #endif /* MC__DIFFVIEW_INTERNAL_H */
