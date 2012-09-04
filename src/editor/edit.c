@@ -817,8 +817,7 @@ edit_backspace (WEdit * edit, const int byte_delete)
     edit_modification (edit);
     if (p == '\n')
     {
-        if (edit->book_mark)
-            book_mark_dec (edit, edit->curs_line);
+        book_mark_dec (edit, edit->curs_line);
         edit->curs_line--;
         edit->total_lines--;
         edit->force |= REDRAW_AFTER_CURSOR;
@@ -2755,8 +2754,7 @@ edit_insert (WEdit * edit, int c)
     /* now we must update some info on the file and check if a redraw is required */
     if (c == '\n')
     {
-        if (edit->book_mark)
-            book_mark_inc (edit, edit->curs_line);
+        book_mark_inc (edit, edit->curs_line);
         edit->curs_line++;
         edit->total_lines++;
         edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
@@ -2806,8 +2804,7 @@ edit_insert_ahead (WEdit * edit, int c)
     edit_modification (edit);
     if (c == '\n')
     {
-        if (edit->book_mark)
-            book_mark_inc (edit, edit->curs_line);
+        book_mark_inc (edit, edit->curs_line);
         edit->total_lines++;
         edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -2887,8 +2884,7 @@ edit_delete (WEdit * edit, const int byte_delete)
     edit_modification (edit);
     if (p == '\n')
     {
-        if (edit->book_mark)
-            book_mark_dec (edit, edit->curs_line);
+        book_mark_dec (edit, edit->curs_line);
         edit->total_lines--;
         edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -4089,11 +4085,12 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->force |= REDRAW_PAGE;
         break;
     case CK_BookmarkNext:
-        if (edit->book_mark)
+        if (edit->book_mark != NULL)
         {
             struct _book_mark *p;
+
             p = (struct _book_mark *) book_mark_find (edit, edit->curs_line);
-            if (p->next)
+            if (p->next != NULL)
             {
                 p = p->next;
                 if (p->line >= edit->start_line + edit->widget.lines || p->line < edit->start_line)
@@ -4103,12 +4100,13 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         }
         break;
     case CK_BookmarkPrev:
-        if (edit->book_mark)
+        if (edit->book_mark != NULL)
         {
             struct _book_mark *p;
+
             p = (struct _book_mark *) book_mark_find (edit, edit->curs_line);
             while (p->line == edit->curs_line)
-                if (p->prev)
+                if (p->prev != NULL)
                     p = p->prev;
             if (p->line >= 0)
             {
