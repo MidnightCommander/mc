@@ -117,10 +117,10 @@ TAB_SKIP (int ts, int pos)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 static void
 dview_set_codeset (WDiff * dview)
 {
-#ifdef HAVE_CHARSET
     const char *encoding_id = NULL;
 
     dview->utf8 = TRUE;
@@ -130,6 +130,7 @@ dview_set_codeset (WDiff * dview)
     if (encoding_id != NULL)
     {
         GIConv conv;
+
         conv = str_crt_conv_from (encoding_id);
         if (conv != INVALID_CONV)
         {
@@ -139,19 +140,18 @@ dview_set_codeset (WDiff * dview)
         }
         dview->utf8 = (gboolean) str_isutf8 (encoding_id);
     }
-#else
-    (void) dview;
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 static void
 dview_select_encoding (WDiff * dview)
 {
     if (do_select_codepage ())
         dview_set_codeset (dview);
+    dview_reread (dview);
+    tty_touch_screen ();
+    repaint_screen ();
 }
 #endif /* HAVE_CHARSET */
 
@@ -590,6 +590,7 @@ p_close (FBUF * fs)
     return rv;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Get one char (byte) from string
  *
@@ -610,7 +611,7 @@ dview_get_byte (char *str, gboolean * result)
     return (unsigned char) *str;
 }
 
-
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Get utf multibyte char from string
  *
@@ -653,6 +654,8 @@ dview_get_utf (char *str, int *char_width, gboolean * result)
     return ch;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 dview_str_utf8_offset_to_pos (const char *text, size_t length)
 {
@@ -687,7 +690,6 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
     }
     return max (length, (size_t) result);
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /* diff parse *************************************************************** */
@@ -2319,7 +2321,9 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->hdiff = NULL;
     dview->dsrc = dsrc;
     dview->converter = str_cnv_from_term;
+#ifdef HAVE_CHARSET
     dview_set_codeset (dview);
+#endif
 
     dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
@@ -3132,9 +3136,6 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
 #ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         dview_select_encoding (dview);
-        dview_reread (dview);
-        tty_touch_screen ();
-        repaint_screen ();
         break;
 #endif
     case CK_Cancel:

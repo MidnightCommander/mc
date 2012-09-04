@@ -129,7 +129,6 @@ typedef struct WDiff
         ssize_t last_found_line;
         ssize_t last_accessed_num_line;
     } search;
-
 } WDiff;
 
 /*** global variables defined in .c file *********************************************************/

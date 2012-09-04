@@ -58,9 +58,13 @@ struct WEdit
     unsigned char *buffers1[MAXBUFF + 1];       /* all data up to curs1 */
     unsigned char *buffers2[MAXBUFF + 1];       /* all data from end of file down to curs2 */
 
-    /* UTF8 */
+#ifdef HAVE_CHARSET
+    /* multibyte support */
+    gboolean utf8;              /* It's multibyte file codeset */
+    GIConv converter;
     char charbuf[4 + 1];
     int charpoint;
+#endif
 
     /* search handler */
     mc_search_t *search;
@@ -89,7 +93,6 @@ struct WEdit
     unsigned int delete_file:1; /* New file, needs to be deleted unless modified */
     unsigned int highlight:1;   /* There is a selected block */
     unsigned int column_highlight:1;
-    unsigned int utf8:1;        /* It's multibyte file codeset */
     long prev_col;              /* recent column position of the cursor - used when moving
                                    up or down past lines that are shorter than the current line */
     long curs_line;             /* line number of the cursor. */
@@ -139,15 +142,11 @@ struct WEdit
     GTree *defines;             /* List of defines */
     gboolean is_case_insensitive;       /* selects language case sensitivity */
 
-    /* user map stuff */
-    GIConv converter;
-
     /* line break */
     LineBreaks lb;
     gboolean extmod;
 
     char *labels[10];
-
 };
 
 /*** global variables defined in .c file *********************************************************/

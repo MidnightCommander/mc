@@ -697,6 +697,7 @@ edit_modification (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 static char *
 edit_get_byte_ptr (WEdit * edit, off_t byte_index)
 {
@@ -715,9 +716,11 @@ edit_get_byte_ptr (WEdit * edit, off_t byte_index)
     return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE] +
                      (byte_index & M_EDIT_BUF_SIZE));
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 static int
 edit_get_prev_utf (WEdit * edit, off_t byte_index, int *char_width)
 {
@@ -760,6 +763,7 @@ edit_get_prev_utf (WEdit * edit, off_t byte_index, int *char_width)
         }
     }
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -773,17 +777,20 @@ edit_backspace (WEdit * edit, const int byte_delete)
     if (!edit->curs1)
         return 0;
 
-    cw = 1;
-
     if (edit->mark2 != edit->mark1)
         edit_push_markers (edit);
 
+#ifdef HAVE_CHARSET
     if (edit->utf8 && byte_delete == 0)
     {
         edit_get_prev_utf (edit, edit->curs1, &cw);
         if (cw < 1)
             cw = 1;
     }
+#else
+    (void) byte_delete;
+#endif
+
     for (i = 1; i <= cw; i++)
     {
         if (edit->mark1 >= edit->curs1)
@@ -1210,6 +1217,8 @@ edit_right_char_move_cmd (WEdit * edit)
 {
     int cw = 1;
     int c = 0;
+
+#ifdef HAVE_CHARSET
     if (edit->utf8)
     {
         c = edit_get_utf (edit, edit->curs1, &cw);
@@ -1217,6 +1226,7 @@ edit_right_char_move_cmd (WEdit * edit)
             cw = 1;
     }
     else
+#endif
     {
         c = edit_get_byte (edit, edit->curs1);
     }
@@ -1236,17 +1246,21 @@ static void
 edit_left_char_move_cmd (WEdit * edit)
 {
     int cw = 1;
+
     if (edit->column_highlight
         && option_cursor_beyond_eol
         && edit->mark1 != edit->mark2
         && edit->over_col == 0 && edit->curs1 == edit_bol (edit, edit->curs1))
         return;
+
+#ifdef HAVE_CHARSET
     if (edit->utf8)
     {
         edit_get_prev_utf (edit, edit->curs1, &cw);
         if (cw < 1)
             cw = 1;
     }
+#endif
     if (option_cursor_beyond_eol && edit->over_col > 0)
     {
         edit->over_col--;
@@ -1954,6 +1968,7 @@ edit_get_byte (WEdit * edit, off_t byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 int
 edit_get_utf (WEdit * edit, off_t byte_index, int *char_width)
 {
@@ -2014,6 +2029,7 @@ edit_get_utf (WEdit * edit, off_t byte_index, int *char_width)
     *char_width = width;
     return ch;
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2325,9 +2341,11 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     edit->redo_stack_size_mask = START_STACK_SIZE - 1;
     edit->redo_stack = g_malloc0 ((edit->redo_stack_size + 10) * sizeof (long));
 
-    edit->utf8 = 0;
+#ifdef HAVE_CHARSET
+    edit->utf8 = FALSE;
     edit->converter = str_cnv_from_term;
     edit_set_codeset (edit);
+#endif
 
     if (!edit_load_file (edit))
     {
@@ -2401,8 +2419,10 @@ edit_clean (WEdit * edit)
     mc_search_free (edit->search);
     edit->search = NULL;
 
+#ifdef HAVE_CHARSET
     if (edit->converter != str_cnv_from_term)
         str_close_conv (edit->converter);
+#endif
 
     edit_purge_widget (edit);
 
@@ -2460,10 +2480,10 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 void
 edit_set_codeset (WEdit * edit)
 {
-#ifdef HAVE_CHARSET
     const char *cp_id;
 
     cp_id =
@@ -2484,11 +2504,8 @@ edit_set_codeset (WEdit * edit)
 
     if (cp_id != NULL)
         edit->utf8 = str_isutf8 (cp_id);
-#else
-    (void) edit;
-#endif
 }
-
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -2826,7 +2843,7 @@ edit_delete (WEdit * edit, const int byte_delete)
     if (!edit->curs2)
         return 0;
 
-    cw = 1;
+#ifdef HAVE_CHARSET
     /* if byte_delete = 1 then delete only one byte not multibyte char */
     if (edit->utf8 && byte_delete == 0)
     {
@@ -2834,6 +2851,9 @@ edit_delete (WEdit * edit, const int byte_delete)
         if (cw < 1)
             cw = 1;
     }
+#else
+    (void) byte_delete;
+#endif
 
     if (edit->mark2 != edit->mark1)
         edit_push_markers (edit);
@@ -3106,7 +3126,11 @@ edit_move_forward3 (WEdit * edit, off_t current, long cols, off_t upto)
             else
                 return p;
         }
-        else if ((c < 32 || c == 127) && (orig_c == c || (!mc_global.utf8_display && !edit->utf8)))
+        else if ((c < 32 || c == 127) && (orig_c == c
+#ifdef HAVE_CHARSET
+                                          || (!mc_global.utf8_display && !edit->utf8)
+#endif
+                ))
             /* '\r' is shown as ^M, so we must advance 2 characters */
             /* Caret notation for control characters */
             col += 2;
@@ -3658,9 +3682,11 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         if (edit->overwrite)
         {
             /* remove char only one time, after input first byte, multibyte chars */
-            if ((!mc_global.utf8_display || edit->charpoint == 0)
-                && edit_get_byte (edit, edit->curs1) != '\n')
-                edit_delete (edit, 0);
+#ifdef HAVE_CHARSET
+            if (!mc_global.utf8_display || edit->charpoint == 0)
+#endif
+                if (edit_get_byte (edit, edit->curs1) != '\n')
+                    edit_delete (edit, 0);
         }
         if (option_cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
