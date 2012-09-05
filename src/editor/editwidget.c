@@ -193,12 +193,12 @@ edit_event (Gpm_Event * event, void *data)
 
     if (event->type & GPM_DOWN)
     {
-        edit_mark_cmd (edit, 1);        /* reset */
+        edit_mark_cmd (edit, TRUE);     /* reset */
         edit->highlight = 0;
     }
 
     if (!(event->type & GPM_DRAG))
-        edit_mark_cmd (edit, 0);
+        edit_mark_cmd (edit, FALSE);
 
   update:
     edit_find_bracket (edit);
@@ -360,7 +360,7 @@ edit_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-edit_file (const vfs_path_t * _file_vpath, int line)
+edit_file (const vfs_path_t * _file_vpath, long line)
 {
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;

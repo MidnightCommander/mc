@@ -278,7 +278,7 @@ edit_menu_cmd (WEdit * e)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 edit_drop_hotkey_menu (WEdit * e, int key)
 {
     int m = 0;
@@ -303,11 +303,11 @@ edit_drop_hotkey_menu (WEdit * e, int key)
         m = 5;
         break;
     default:
-        return 0;
+        return FALSE;
     }
 
     edit_drop_menu_cmd (e, m);
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

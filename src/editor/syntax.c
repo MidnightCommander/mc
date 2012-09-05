@@ -549,7 +549,7 @@ apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
 /* --------------------------------------------------------------------------------------------- */
 
 static struct syntax_rule
-edit_get_rule (WEdit * edit, long byte_index)
+edit_get_rule (WEdit * edit, off_t byte_index)
 {
     long i;
 
@@ -1258,7 +1258,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 #define NENTRIES 30
     FILE *f, *g = NULL;
     char *args[1024], *l = NULL;
-    int line = 0;
+    long line = 0;
     int result = 0;
     int count = 0;
     char *lib_file;
@@ -1415,7 +1415,7 @@ get_first_editor_line (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
+edit_get_syntax_color (WEdit * edit, off_t byte_index, int *color)
 {
     if (!tty_use_colors ())
         *color = 0;

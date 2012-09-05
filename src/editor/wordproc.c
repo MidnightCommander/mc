@@ -71,7 +71,8 @@
 static long
 line_start (WEdit * edit, long line)
 {
-    long p, l;
+    off_t p;
+    long l;
 
     l = edit->curs_line;
     p = edit->curs1;
@@ -90,7 +91,7 @@ line_start (WEdit * edit, long line)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-bad_line_start (WEdit * edit, long p)
+bad_line_start (WEdit * edit, off_t p)
 {
     int c;
     c = edit_get_byte (edit, p);
@@ -151,7 +152,7 @@ begin_paragraph (WEdit * edit, int force)
 static long
 end_paragraph (WEdit * edit, int force)
 {
-    int i;
+    long i;
     for (i = edit->curs_line + 1; i <= edit->total_lines; i++)
     {
         if (line_is_blank (edit, i))
@@ -174,7 +175,7 @@ end_paragraph (WEdit * edit, int force)
 /* --------------------------------------------------------------------------------------------- */
 
 static unsigned char *
-get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
+get_paragraph (WEdit * edit, off_t p, off_t q, int indent, int *size)
 {
     unsigned char *s, *t;
 #if 0
@@ -348,7 +349,7 @@ replace_at (WEdit * edit, long q, int c)
 /** replaces a block of text */
 
 static inline void
-put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
+put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
 {
     long cursor;
     int i, c = 0;
@@ -367,7 +368,7 @@ put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
             }
             else if (t[i - 1] == '\n')
             {
-                long curs;
+                off_t curs;
                 edit_cursor_move (edit, p - edit->curs1);
                 curs = edit->curs1;
                 edit_insert_indent (edit, indent);
@@ -397,7 +398,7 @@ put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline int
-test_indent (WEdit * edit, long p, long q)
+test_indent (WEdit * edit, off_t p, off_t q)
 {
     int indent;
     indent = edit_indent_width (edit, p++);
