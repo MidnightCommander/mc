@@ -7,6 +7,10 @@ VIC20/C64/C128. It requires the utility c1541 that comes bundled with Vice,
 the emulator for the VIC20, C64, C128 and other computers made by Commodore.
 
 Changelog:
+    2.0 Added reading raw D64 image, and mapping for jokers. Now it is
+        possible to read files with PET-ASCII/control sequences in filenames.
+        Working with d64 images only. Added workaround for space at the
+        beggining of the filename.
     1.2 Added configuration env variables: UC1541_VERBOSE and UC1541_HIDE_DEL.
         First one, if set to any value, will cause that error messages from
         c1541 program will be redirected as a failure messages visible in MC.
@@ -16,8 +20,8 @@ Changelog:
     1.0 Initial release
 
 Author: Roman 'gryf' Dobosz <gryf73@gmail.com>
-Date: 2012-08-16
-Version: 1.2
+Date: 2012-09-02
+Version: 2.0
 Licence: BSD
 """
 
@@ -26,55 +30,243 @@ import re
 import os
 from subprocess import Popen, PIPE
 
+if os.getenv('UC1541_DEBUG'):
+    import logging
+    LOG = logging.getLogger('UC1541')
+    LOG.setLevel(logging.DEBUG)
+    FILE_HANDLER = logging.FileHandler("/tmp/uc1541.log")
+    FILE_FORMATTER = logging.Formatter("%(asctime)s %(levelname)-8s "
+                                       "%(lineno)s %(funcName)s - %(message)s")
+    FILE_HANDLER.setFormatter(FILE_FORMATTER)
+    FILE_HANDLER.setLevel(logging.DEBUG)
+    LOG.addHandler(FILE_HANDLER)
+else:
+    class LOG(object):
+        """
+        Dummy logger object. does nothing.
+        """
+        @classmethod
+        def debug(*args, **kwargs):
+            pass
+
+        @classmethod
+        def info(*args, **kwargs):
+            pass
+
+        @classmethod
+        def warning(*args, **kwargs):
+            pass
+
+        @classmethod
+        def error(*args, **kwargs):
+            pass
+
+        @classmethod
+        def critical(*args, **kwargs):
+            pass
+
+
+class D64(object):
+    """
+    Implement d64 directory reader
+    """
+    CHAR_MAP = {32: ' ', 33: '!', 34: '"', 35: '#', 36: '$', 37: '%', 38: '&',
+                39: "'", 40: '(', 41: ')', 42: '*', 43: '+', 44: ',', 45: '-',
+                46: '.', 47: '/', 48: '0', 49: '1', 50: '2', 51: '3', 52: '4',
+                53: '5', 54: '6', 55: '7', 56: '8', 57: '9', 59: ';', 60: '<',
+                61: '=', 62: '>', 63: '?', 64: '@', 65: 'a', 66: 'b', 67: 'c',
+                68: 'd', 69: 'e', 70: 'f', 71: 'g', 72: 'h', 73: 'i', 74: 'j',
+                75: 'k', 76: 'l', 77: 'm', 78: 'n', 79: 'o', 80: 'p', 81: 'q',
+                82: 'r', 83: 's', 84: 't', 85: 'u', 86: 'v', 87: 'w', 88: 'x',
+                89: 'y', 90: 'z', 91: '[', 93: ']', 97: 'A', 98: 'B', 99: 'C',
+                100: 'D', 101: 'E', 102: 'F', 103: 'G', 104: 'H', 105: 'I',
+                106: 'J', 107: 'K', 108: 'L', 109: 'M', 110: 'N', 111: 'O',
+                112: 'P', 113: 'Q', 114: 'R', 115: 'S', 116: 'T', 117: 'U',
+                118: 'V', 119: 'W', 120: 'X', 121: 'Y', 122: 'Z', 193: 'A',
+                194: 'B', 195: 'C', 196: 'D', 197: 'E', 198: 'F', 199: 'G',
+                200: 'H', 201: 'I', 202: 'J', 203: 'K', 204: 'L', 205: 'M',
+                206: 'N', 207: 'O', 208: 'P', 209: 'Q', 210: 'R', 211: 'S',
+                212: 'T', 213: 'U', 214: 'V', 215: 'W', 216: 'X', 217: 'Y',
+                218: 'Z'}
+
+    FILE_TYPES = {0b000: 'del',
+                  0b001: 'seq',
+                  0b010: 'prg',
+                  0b011: 'usr',
+                  0b100: 'rel'}
+
+    def __init__(self, dimage):
+        """
+        Init
+        """
+        LOG.debug('image: %s', dimage)
+        dimage = open(dimage, 'rb')
+        self.raw = dimage.read()
+        dimage.close()
+
+        self.current_sector_data = None
+        self._sector_shift = 256
+        self.next_sector = 0
+        self.next_track = None
+        self._directory_contents = []
+
+    def _map_filename(self, string):
+        """
+        Transcode filename to ASCII compatible. Replace not supported
+        characters with jokers.
+        """
+
+        filename = list()
+        in_fname = True
+
+        for chr_ in string:
+            character = D64.CHAR_MAP.get(ord(chr_), '?')
+
+            if in_fname:
+                if ord(chr_) == 160:
+                    in_fname = False
+                else:
+                    filename.append(character)
+
+        LOG.debug("string: ``%s'' mapped to: ``%s''", string,
+                  "".join(filename))
+        return "".join(filename)
+
+    def _go_to_next_sector(self):
+        """
+        Fetch (if exist) next sector from a directory chain
+        Return False if the chain ends, True otherwise
+        """
+
+        if self.next_track == 0 and self.next_sector == 255:
+            LOG.debug("End of directory")
+            return False
+
+        if self.next_track is None:
+            LOG.debug("Going to the track: 18,1")
+            offset = self._get_d64_offset(18, 1)
+        else:
+            offset = self._get_d64_offset(self.next_track, self.next_sector)
+            LOG.debug("Going to the track: %s,%s", self.next_track,
+                      self.next_sector)
+
+        self.current_sector_data = self.raw[offset:offset + self._sector_shift]
+
+        self.next_track = ord(self.current_sector_data[0])
+        self.next_sector = ord(self.current_sector_data[1])
+        LOG.debug("Next track: %s,%s", self.next_track, self.next_sector)
+        return True
+
+    def _get_ftype(self, num):
+        """
+        Get filetype as a string
+        """
+        return D64.FILE_TYPES.get(int("%d%d%d" % (num & 4 and 1,
+                                                  num & 2 and 1,
+                                                  num & 1), 2), '???')
+
+    def _get_d64_offset(self, track, sector):
+        """
+        Return offset (in bytes) for specified track and sector.
+        """
+
+        offset = 0
+        truncate_track = 0
+
+        if track > 17:
+            offset = 17 * 21 * 256
+            truncate_track = 17
+
+        if track > 24:
+            offset += 6 * 19 * 256
+            truncate_track = 24
+
+        if track > 30:
+            offset += 5 * 18 * 256
+            truncate_track = 30
+
+        track = track - truncate_track
+        offset += track * sector * 256
+
+        return offset
+
+    def _harvest_entries(self):
+        """
+        Traverse through sectors and store entries in _directory_contents
+        """
+        sector = self.current_sector_data
+        for x in range(8):
+            entry = sector[:32]
+            ftype = ord(entry[2])
+
+            if ftype == 0:  # deleted
+                sector = sector[32:]
+                continue
+
+            type_verbose = self._get_ftype(ftype)
+
+            protect = ord(entry[2]) & 64 and "<" or " "
+            fname = entry[5:21]
+            if ftype == 'rel':
+                size = ord(entry[23])
+            else:
+                size = ord(entry[30]) + ord(entry[31]) * 226
+
+            self._directory_contents.append({'fname': self._map_filename(fname),
+                                   'ftype': type_verbose,
+                                   'size': size,
+                                   'protect': protect})
+            sector = sector[32:]
+
+    def list_dir(self):
+        """
+        Return directory list as list of dict with keys:
+            fname, ftype, protect and size
+        """
+        while self._go_to_next_sector():
+            self._harvest_entries()
+
+        return self._directory_contents
+
 
 class Uc1541(object):
     """
     Class for interact with c1541 program and MC
     """
-    PRG = re.compile(r'(\d+)\s+"([^"]*)".+?\s(del|prg)([\s<])')
+    PRG = re.compile(r'(\d+)\s+"([^"]*)".+?\s(del|prg|rel|seq|usr)([\s<])')
 
     def __init__(self, archname):
         self.arch = archname
         self.out = ''
         self.err = ''
         self._verbose = os.getenv("UC1541_VERBOSE", False)
-        self._hide_del =  os.getenv("UC1541_HIDE_DEL", False)
+        self._hide_del = os.getenv("UC1541_HIDE_DEL", False)
+
+        self.pyd64 = D64(archname).list_dir()
+        self.file_map = {}
+        self.directory = []
 
     def list(self):
         """
-        List contents of D64 image.
+        Output list contents of D64 image.
         Convert filenames to be unix filesystem friendly
         Add suffix to show user what kind of file do he dealing with.
         """
-        if not self._call_command('list'):
-            return self._show_error()
+        LOG.info("List contents of %s", self.arch)
+        directory = self._get_dir()
 
-        for line in self.out.split("\n"):
-            if Uc1541.PRG.match(line):
-                blocks, fname, ext, rw = Uc1541.PRG.match(line).groups()
-
-                if ext == 'del' and self._hide_del:
-                    continue
-
-                if '/' in fname:
-                    fname = fname.replace('/', '\\')
-
-                if ext == 'del':
-                    perms = "----------"
-                else:
-                    perms = "-r%s-r--r--" % (rw.strip() and "-" or "w")
-
-                fname = ".".join([fname, ext])
-                sys.stdout.write("%s   1 %-8d %-8d %8d Jan 01 1980"
-                                 " %s\n" % (perms, os.getuid(), os.getgid(),
-                                            int(blocks) * 256, fname))
+        for entry in directory:
+            sys.stdout.write("%(perms)s   1 %(uid)-8d %(gid)-8d %(size)8d "
+                             "Jan 01 1980 %(display_name)s\n" % entry)
         return 0
 
     def rm(self, dst):
         """
         Remove file from D64 image
         """
-        dst = self._correct_fname(dst)
+        LOG.info("Removing file %s", dst)
+        dst = self._get_masked_fname(dst)
+
         if not self._call_command('delete', dst=dst):
             return self._show_error()
 
@@ -92,6 +284,7 @@ class Uc1541(object):
         """
         Copy file to the D64 image. Destination filename has to be corrected.
         """
+        LOG.info("Copy into D64 %s as %s", src, dst)
         dst = self._correct_fname(dst)
 
         if not self._call_command('write', src=src, dst=dst):
@@ -104,27 +297,77 @@ class Uc1541(object):
         Copy file form the D64 image. Source filename has to be corrected,
         since it's representaion differ from the real one inside D64 image.
         """
-        src = self._correct_fname(src)
+        LOG.info("Copy form D64 %s as %s", src, dst)
+        if not src.endswith(".prg"):
+            return "canot read"
+
+        src = self._get_masked_fname(src)
 
         if not self._call_command('read', src=src, dst=dst):
             return self._show_error()
 
         return 0
 
-    def _correct_fname(self, fname):
+    def _get_masked_fname(self, fname):
         """
-        Correct filenames containing backslashes (since in unices slash in
-        filenames is forbidden, and on PET ASCII there is no backslash, but
-        slash in filenames is accepted) and make it into slash. Also remove
-        .del/.prg suffix, since destination, correct file will always be prg.
+        Return masked filename with '?' jokers instead of non ASCII
+        characters, usefull for copying or deleting files with c1541. In case
+        of several files with same name exists in directory, only first one
+        will be operative (first as appeared in directory).
+
+        Warning! If there are two different names but the only differenc is in
+        non-ASCII characters (some PET ASCII or controll characters) there is
+        a risk that one can remove both files.
         """
-        if "\\" in fname:
-            fname = fname.replace('\\', '/')
+        directory = self._get_dir()
 
-        if fname.lower().endswith('.prg') or fname.lower().endswith('.del'):
-            fname = fname[:-4]
+        for entry in directory:
+            if entry['display_name'] == fname:
+                return entry['pattern_name']
 
-        return fname
+    def _get_dir(self):
+        """
+        Retrieve directory via c1541 program
+        """
+        directory = []
+
+        uid = os.getuid()
+        gid = os.getgid()
+
+        if not self._call_command('list'):
+            return self._show_error()
+
+        idx = 0
+        for line in self.out.split("\n"):
+            if Uc1541.PRG.match(line):
+                blocks, fname, ext, rw = Uc1541.PRG.match(line).groups()
+
+                if ext == 'del' and self._hide_del:
+                    continue
+
+                display_name = ".".join([fname, ext])
+                pattern_name = self.pyd64[idx]['fname']
+
+                if '/' in fname:
+                    display_name = fname.replace('/', '|')
+
+                # workaround for space at the beggining of the filename
+                if fname[0] == ' ':
+                    display_name = '~' + display_name[1:]
+
+                if ext == 'del':
+                    perms = "----------"
+                else:
+                    perms = "-r%s-r--r--" % (rw.strip() and "-" or "w")
+
+                directory.append({'pattern_name': pattern_name,
+                                  'display_name': display_name,
+                                  'uid': uid,
+                                  'gid': gid,
+                                  'size': int(blocks) * 256,
+                                  'perms': perms})
+                idx += 1
+        return directory
 
     def _show_error(self):
         """
@@ -197,6 +440,7 @@ def parse_args():
     args = parser.parse_args()
     return args.func(args)
 
+
 def no_parse():
     """
     Failsafe argument "parsing". Note, that it blindly takes positional
@@ -229,6 +473,7 @@ def no_parse():
     CALL_MAP[sys.argv[1]](arg)
 
 if __name__ == "__main__":
+    LOG.debug("Script params: %s", str(sys.argv))
     try:
         from argparse import ArgumentParser
         parse_func = parse_args
