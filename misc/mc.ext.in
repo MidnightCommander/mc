@@ -485,7 +485,7 @@ regex/\.([wW][mM][vV])$
 regex/\.([fF][lL][iIcCvV])$
 	Include=video
 
-regex/\.([oO][gG][mMvV])$
+regex/\.([oO][gG][vV])$
 	Include=video
 
 regex/\.([rR][aA]?[mM])$
