@@ -895,16 +895,23 @@ mkdir_cmd (void)
         input_expand_dialog (_("Create a new Directory"),
                              _("Enter directory name:"), MC_HISTORY_FM_MKDIR, name);
 
-    if (!dir)
-        return;
-
-    if (*dir)
+    if (dir != NULL && dir != '\0')
     {
         vfs_path_t *absdir;
+
         if (dir[0] == '/' || dir[0] == '~')
             absdir = vfs_path_from_str (dir);
         else
-            absdir = vfs_path_append_new (current_panel->cwd_vpath, dir, NULL);
+        {
+            /* possible escaped '~' */
+            /* allow create directory with name '~' */
+            char *tmpdir = dir;
+
+            if (dir[0] == '\\' && dir[1] == '~')
+                tmpdir = dir + 1;
+
+            absdir = vfs_path_append_new (current_panel->cwd_vpath, tmpdir, NULL);
+        }
 
         save_cwds_stat ();
         if (my_mkdir (absdir, 0777) == 0)
