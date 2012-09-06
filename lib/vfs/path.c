@@ -152,16 +152,11 @@ vfs_canon (const char *path)
         }
         else
         {
-            local = tilde_expand (path);
-            if (*local != PATH_SEP)
-            {
-                char *curr_dir;
+            char *curr_dir;
 
-                g_free (local);
-                curr_dir = vfs_get_current_dir ();
-                local = mc_build_filename (curr_dir, path, NULL);
-                g_free (curr_dir);
-            }
+            curr_dir = vfs_get_current_dir ();
+            local = mc_build_filename (curr_dir, path, NULL);
+            g_free (curr_dir);
         }
         result = vfs_canon (local);
         g_free (local);
