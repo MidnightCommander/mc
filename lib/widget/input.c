@@ -1081,6 +1081,7 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case WIDGET_FOCUS:
     case WIDGET_UNFOCUS:
     case WIDGET_DRAW:
+    case WIDGET_RESIZED:
         input_update (in, FALSE);
         return MSG_HANDLED;
 
@@ -1267,6 +1268,10 @@ input_update (WInput * in, gboolean clear_first)
 
     /* Adjust the mark */
     in->mark = min (in->mark, buf_len);
+
+    /* don't draw widget not put into dialog */
+    if (WIDGET(in)->owner == NULL)
+        return;
 
     if (has_history != 0)
         draw_history_button (in);
