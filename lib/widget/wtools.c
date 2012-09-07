@@ -2,7 +2,7 @@
    Widget based utility functions.
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2008, 2009, 2010, 2011
+   2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Authors:
@@ -10,7 +10,7 @@
    Radek Doulik, 1994, 1995
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012
 
    This file is part of the Midnight Commander.
 
@@ -183,84 +183,46 @@ static char *
 fg_input_dialog_help (const char *header, const char *text, const char *help,
                       const char *history_name, const char *def_text, gboolean strip_password)
 {
-    char *my_str;
-    int flags = (strip_password) ? 4 : 0;
-    QuickWidget quick_widgets[] = {
-        /* 0 */ QUICK_BUTTON (6, 64, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
-        /* 1 */ QUICK_BUTTON (3, 64, 1, 0, N_("&OK"), B_ENTER, NULL),
-        /* 2 */ QUICK_INPUT (3, 64, 0, 0, def_text, 58, flags, NULL, &my_str),
-        /* 3 */ QUICK_LABEL (3, 64, 2, 0, ""),
-        QUICK_END
-    };
-
-    int b0_len, b1_len, b_len, gap;
-    char histname[64] = "inp|";
-    int lines, cols;
-    int len;
-    int i;
     char *p_text;
+    char histname[64] = "inp|";
+    int flags = strip_password ? 4 : 0;
+    char *my_str;
     int ret;
 
-    /* buttons */
-#ifdef ENABLE_NLS
-    quick_widgets[0].u.button.text = _(quick_widgets[0].u.button.text);
-    quick_widgets[1].u.button.text = _(quick_widgets[1].u.button.text);
-#endif /* ENABLE_NLS */
+    /* label text */
+    p_text = g_strstrip (g_strdup (text));
 
-    b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
-    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 5;      /* default button */
-    b_len = b0_len + b1_len + 2;        /* including gap */
-
-    /* input line */
+    /* input history */
     if (history_name != NULL && *history_name != '\0')
-    {
         g_strlcpy (histname + 3, history_name, sizeof (histname) - 3);
-        quick_widgets[2].u.input.histname = histname;
-    }
 
     /* The special value of def_text is used to identify password boxes
        and hide characters with "*".  Don't save passwords in history! */
     if (def_text == INPUT_PASSWORD)
     {
-        quick_widgets[2].u.input.flags = 1;
+        flags = 1;
         histname[3] = '\0';
-        quick_widgets[2].u.input.text = "";
+        def_text = "";
     }
 
-    /* text */
-    p_text = g_strstrip (g_strdup (text));
-    str_msg_term_size (p_text, &lines, &cols);
-    quick_widgets[3].u.label.text = p_text;
-
-    /* dialog width */
-    len = str_term_width1 (header);
-    len = max (max (len, cols) + 4, 64);
-    len = min (max (len, b_len + 6), COLS);
-
-    /* button locations */
-    gap = (len - 8 - b_len) / 3;
-    quick_widgets[1].relative_x = 3 + gap;
-    quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + gap + 2;
-
     {
-        QuickDialog Quick_input = {
-            len, lines + 6, -1, -1, header,
-            help, quick_widgets, NULL, NULL, TRUE
+        quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+            QUICK2_LABELED_INPUT (p_text, input_label_above, def_text, flags, histname, &my_str,
+                                  NULL),
+            QUICK2_START_BUTTONS (TRUE, TRUE),
+                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK2_END
+        /* *INDENT-OFF* */
         };
 
-        for (i = 0; i < 4; i++)
-        {
-            quick_widgets[i].x_divisions = Quick_input.xlen;
-            quick_widgets[i].y_divisions = Quick_input.ylen;
-        }
+        quick_dialog_t qdlg = {
+            -1, -1, COLS / 2, header,
+            help, quick_widgets, NULL, NULL
+        };
 
-        for (i = 0; i < 3; i++)
-            quick_widgets[i].relative_y += 2 + lines;
-
-        /* input line length */
-        quick_widgets[2].u.input.len = Quick_input.xlen - 6;
-
-        ret = quick_dialog (&Quick_input);
+        ret = quick2_dialog (&qdlg);
     }
 
     g_free (p_text);
