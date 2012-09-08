@@ -118,7 +118,7 @@ hline_new (int y, int x, int width)
 
     l = g_new (WHLine, 1);
     w = WIDGET (l);
-    init_widget (w, y, x, lines, width, hline_callback, NULL);
+    init_widget (w, y, x, lines, width < 0 ? 1 : width, hline_callback, NULL);
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;
     widget_want_cursor (w, FALSE);
