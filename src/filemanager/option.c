@@ -80,12 +80,13 @@ configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         {
             const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
             Widget *w;
+            WInput *in;
 
-            /* label */
-            w = dlg_find_by_id (h, sender->id - 1);
-            widget_disable (w, not_single);
             /* input */
             w = dlg_find_by_id (h, sender->id - 2);
+            in = (WInput *) w;
+            if (in->label == NULL)
+                in->label = (WLabel *) dlg_find_by_id (h, sender->id - 1);
             widget_disable (w, not_single);
 
             return MSG_HANDLED;

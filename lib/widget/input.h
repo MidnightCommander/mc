@@ -68,6 +68,7 @@ typedef struct
     input_complete_t completion_flags;
     char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
     size_t charpoint;           /* point to end of mulibyte sequence in charbuf */
+    WLabel *label;              /* label associated with this input line*/
 } WInput;
 
 /*** global variables defined in .c file *********************************************************/

@@ -405,7 +405,6 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         {
             gboolean disable = !(content_use_cbox->state & C_BOOL);
 
-            widget_disable (WIDGET (content_label), disable);
             widget_disable (WIDGET (in_with), disable);
             widget_disable (WIDGET (content_first_hit_cbox), disable);
             widget_disable (WIDGET (content_regexp_cbox), disable);
@@ -610,11 +609,10 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     in_with =
         input_new (8, FIND_X / 2 + 1, input_get_default_colors (), FIND_X / 2 - 4, INPUT_LAST_TEXT,
                    MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
+    content_label = label_new (7, FIND_X / 2 + 1, _("Content:"));
+    in_with->label = content_label;
     widget_disable (WIDGET (in_with), disable);
     add_widget (find_dlg, in_with);
-
-    content_label = label_new (7, FIND_X / 2 + 1, _("Content:"));
-    widget_disable (WIDGET (content_label), disable);
     add_widget (find_dlg, content_label);
 
     in_name = input_new (8, 3, input_get_default_colors (),
