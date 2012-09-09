@@ -14,11 +14,9 @@
 
 #define widget_move(w, _y, _x) tty_gotoyx (WIDGET(w)->y + (_y), WIDGET(w)->x + (_x))
 /* Sets/clear the specified flag in the options field */
-#define widget_option(w,f,i) \
-    (w)->options = ((i) ? ((w)->options | (f)) : ((w)->options & (~(f))))
-#define widget_want_cursor(w,i) widget_option((w), W_WANT_CURSOR, (i))
-#define widget_want_hotkey(w,i) widget_option((w), W_WANT_HOTKEY, (i))
-#define widget_disable(w,i) widget_option((w), W_DISABLED, (i))
+#define widget_want_cursor(w,i) widget_set_options(w, W_WANT_CURSOR, i)
+#define widget_want_hotkey(w,i) widget_set_options(w, W_WANT_HOTKEY, i)
+#define widget_disable(w,i) widget_set_options(w, W_DISABLED, i)
 
 /*** enums ***************************************************************************************/
 
@@ -89,6 +87,7 @@ struct Widget
     unsigned int id;            /* Number of the widget, starting with 0 */
     widget_cb_fn callback;
     mouse_h mouse;
+    void (*set_options) (Widget *w, widget_options_t options, gboolean enable);
     struct Dlg_head *owner;
 };
 
@@ -121,6 +120,8 @@ void init_widget (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, mouse_h mouse_handler);
 /* Default callback for widgets */
 cb_ret_t default_widget_callback (Widget * sender, widget_msg_t msg, int parm, void *data);
+void widget_default_set_options_callback (Widget *w, widget_options_t options, gboolean enable);
+void widget_set_options (Widget *w, widget_options_t options, gboolean enable);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (struct Widget *w, gboolean focused, gboolean hotkey);

@@ -438,7 +438,6 @@ confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
             /* input */
             w = dlg_find_by_id (h, sender->id - 1);
             widget_disable (w, not_use);
-            send_message (w, NULL, WIDGET_DRAW, 0, NULL);
 
             return MSG_HANDLED;
         }

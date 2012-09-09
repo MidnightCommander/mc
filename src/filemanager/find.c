@@ -406,21 +406,14 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
             gboolean disable = !(content_use_cbox->state & C_BOOL);
 
             widget_disable (WIDGET (content_label), disable);
-            send_message (WIDGET (content_label), NULL, WIDGET_DRAW, 0, NULL);
             widget_disable (WIDGET (in_with), disable);
-            send_message (WIDGET (in_with), NULL, WIDGET_DRAW, 0, NULL);
             widget_disable (WIDGET (content_first_hit_cbox), disable);
-            send_message (WIDGET (content_first_hit_cbox), NULL, WIDGET_DRAW, 0, NULL);
             widget_disable (WIDGET (content_regexp_cbox), disable);
-            send_message (WIDGET (content_regexp_cbox), NULL, WIDGET_DRAW, 0, NULL);
             widget_disable (WIDGET (content_case_sens_cbox), disable);
-            send_message (WIDGET (content_case_sens_cbox), NULL, WIDGET_DRAW, 0, NULL);
 #ifdef HAVE_CHARSET
             widget_disable (WIDGET (content_all_charsets_cbox), disable);
-            send_message (WIDGET (content_all_charsets_cbox), NULL, WIDGET_DRAW, 0, NULL);
 #endif
             widget_disable (WIDGET (content_whole_words_cbox), disable);
-            send_message (WIDGET (content_whole_words_cbox), NULL, WIDGET_DRAW, 0, NULL);
 
             return MSG_HANDLED;
         }
@@ -430,7 +423,6 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
             gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);
 
             widget_disable (WIDGET (in_ignore), disable);
-            send_message (WIDGET (in_ignore), NULL, WIDGET_DRAW, 0, NULL);
 
             return MSG_HANDLED;
         }

@@ -412,9 +412,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
             }
 
             widget_disable (WIDGET (bleft_widget), eq);
-            send_message (WIDGET (bleft_widget), NULL, WIDGET_DRAW, 0, NULL);
             widget_disable (WIDGET (bright_widget), eq);
-            send_message (WIDGET (bright_widget), NULL, WIDGET_DRAW, 0, NULL);
 
             update_split (h);
 

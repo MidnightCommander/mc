@@ -2228,11 +2228,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     }
 
     w = WIDGET (edit);
-
-    w->y = y;
-    w->x = x;
-    w->lines = lines;
-    w->cols = cols;
+    init_widget (w, y, x, lines, cols, NULL, NULL);
     edit_save_size (edit);
     edit->fullscreen = TRUE;
     edit->drag_state = MCEDIT_DRAG_NORMAL;

@@ -84,11 +84,9 @@ configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
             /* label */
             w = dlg_find_by_id (h, sender->id - 1);
             widget_disable (w, not_single);
-            send_message (w, NULL, WIDGET_DRAW, 0, NULL);
             /* input */
             w = dlg_find_by_id (h, sender->id - 2);
             widget_disable (w, not_single);
-            send_message (w, NULL, WIDGET_DRAW, 0, NULL);
 
             return MSG_HANDLED;
         }

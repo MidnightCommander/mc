@@ -1240,7 +1240,6 @@ edit_add_window (Dlg_head * h, int y, int x, int lines, int cols, const vfs_path
     w = WIDGET (edit);
     w->callback = edit_callback;
     w->mouse = edit_event;
-    widget_want_cursor (w, TRUE);
 
     add_widget (h, w);
     dlg_redraw (h);
