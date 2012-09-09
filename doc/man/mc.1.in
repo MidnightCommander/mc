@@ -36,11 +36,11 @@ Colors
 .\"Colors"
 section.
 .TP
-.I \-S arg
+.I \-S arg, \-\-skin=arg
 Specify a name of skin in the command line. Technology of skins is
 documented in the
 .\"LINK2"
-Skins\&.
+Skins
 .\"Skins"
 section.
 .TP
@@ -75,6 +75,9 @@ Don't load key bindings from any file, use default hardcoded keys.
 .I \-l file, \-\-ftplog=file
 Save the ftpfs dialog with the server in file.
 .TP
+.I \-D N, \-\-debuglevel=N
+Save the debug level for SMB VFS. N is in 0\-10 range.
+.TP
 .I \-P file, \-\-printwd=file
 Print the last working directory to the specified file.  This option is
 not meant to be used directly.  Instead, it's used from a special shell
@@ -87,7 +90,7 @@ the last directory the Midnight Commander was in.  Source the file
 .B mc
 as an alias to the appropriate shell script.
 .TP
-.I \-s
+.I \-s, \-\-slow
 Set alternative mode drawing of frameworks.
 If the section [Lines] is not filled, the symbol for the pseudographics
 frame is a space, otherwise the frame characters are taken from follow params.
