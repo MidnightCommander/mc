@@ -11,6 +11,6 @@
 
 /*** declarations of public functions ************************************************************/
 
-int dview_diff_cmd (const void *f0, const void *f1);
+gboolean dview_diff_cmd (const void *f0, const void *f1);
 
 #endif /* MC__DIFFVIEW_YDIFF_H */

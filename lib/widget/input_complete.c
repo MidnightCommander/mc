@@ -25,7 +25,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \file complete.c
+/** \file lib/widget/input_complete.c
  *  \brief Source: Input line filename/username/hostname/variable/command completion
  */
 

@@ -7,22 +7,19 @@ dnl
 
 AC_DEFUN([MC_WITH_SCREEN], [
 
-    AC_ARG_WITH(screen,
-        [  --with-screen=LIB        Compile with screen library: slang or
-                           ncurses [[slang if found]]])
+    AC_ARG_WITH([screen],
+        AS_HELP_STRING([--with-screen=@<:@LIB@:>@],
+                       [Compile with screen library: slang or ncurses @<:@slang if found@:>@]))
 
     case x$with_screen in
-    xslang)
-        MC_WITH_SLANG(strict)
+    x | xslang)
+        MC_WITH_SLANG
         ;;
     xncurses)
         MC_WITH_NCURSES
         ;;
     xncursesw)
         MC_WITH_NCURSESW
-        ;;
-    x)
-        MC_WITH_SLANG
         ;;
     *)
         AC_MSG_ERROR([Value of the screen library is incorrect])

@@ -43,7 +43,7 @@
  * operations.
  */
 
-/** \file  file.c
+/** \file src/filemanager/file.c
  *  \brief Source: file management
  */
 

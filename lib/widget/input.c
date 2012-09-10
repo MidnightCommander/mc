@@ -209,7 +209,8 @@ do_show_hist (WInput * in)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Strip password from incomplete url (just user:pass@host without VFS prefix).
+/**
+ * Strip password from incomplete url (just user:pass@host without VFS prefix).
  *
  * @param url partial URL
  * @return newly allocated string without password

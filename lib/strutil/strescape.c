@@ -160,16 +160,15 @@ strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** To be compatible with the general posix command lines we have to escape
- strings for the command line
-
- \param src
- string for escaping
-
- \returns
- return escaped string (which needs to be freed later)
-        or NULL when NULL string is passed.
+/**
+ * To be compatible with the general posix command lines we have to escape
+ * strings for the command line
+ *
+ * @param src string for escaping
+ *
+ * @returns escaped string (which needs to be freed later) or NULL when NULL string is passed.
  */
+
 char *
 strutils_shell_escape (const char *src)
 {
@@ -194,15 +193,15 @@ strutils_regex_escape (const char *src)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** Unescape paths or other strings for e.g the internal cd
-    shell-unescape within a given buffer (writing to it!)
-
- \param text
- string for unescaping
-
- \returns
- return unescaped string (which needs to be freed)
+/**
+ * Unescape paths or other strings for e.g the internal cd
+ * shell-unescape within a given buffer (writing to it!)
+ *
+ * @param text string for unescaping
+ *
+ * @returns unescaped string (which needs to be freed)
  */
+
 char *
 strutils_shell_unescape (const char *text)
 {
@@ -226,18 +225,15 @@ strutils_regex_unescape (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** Check if char in pointer contain escape'd chars
-
- \param start
- string for checking
-
- \param current
- pointer to checked character
-
- \returns
- return TRUE if string contain escaped chars
- otherwise return FALSE
+/**
+ * Check if char in pointer contain escape'd chars
+ *
+ * @param start string for checking
+ * @param current pointer to checked character
+ *
+ * @returns TRUE if string contain escaped chars otherwise return FALSE
  */
+
 gboolean
 strutils_is_char_escaped (const char *start, const char *current)
 {

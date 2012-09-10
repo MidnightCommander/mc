@@ -210,7 +210,7 @@ history_load (struct mc_config_t * cfg, const char *name)
                 hist = list_append_unique (hist, this_entry);
             else
             {
-                hist = list_append_unique (hist, g_strdup (buffer->str));
+                hist = list_append_unique (hist, g_strndup (buffer->str, buffer->len));
                 g_free (this_entry);
             }
         }

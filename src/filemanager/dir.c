@@ -21,7 +21,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \file dir.c
+/** \file src/filemanager/dir.c
  *  \brief Source: directory routines
  */
 

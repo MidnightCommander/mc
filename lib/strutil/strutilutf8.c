@@ -984,11 +984,13 @@ str_utf8_search_last (const char *text, const char *search, int case_sen)
 static char *
 str_utf8_normalize (const char *text)
 {
-    GString *fixed = g_string_new ("");
+    GString *fixed;
     char *tmp;
     char *result;
     const char *start;
     const char *end;
+
+    fixed = g_string_sized_new (4);
 
     start = text;
     while (!g_utf8_validate (start, -1, &end) && start[0] != '\0')
@@ -1006,6 +1008,7 @@ str_utf8_normalize (const char *text)
     if (start == text)
     {
         result = g_utf8_normalize (text, -1, G_NORMALIZE_ALL);
+        g_string_free (fixed, TRUE);
     }
     else
     {
@@ -1015,9 +1018,8 @@ str_utf8_normalize (const char *text)
             g_string_append (fixed, tmp);
             g_free (tmp);
         }
-        result = g_strdup (fixed->str);
+        result = g_string_free (fixed, FALSE);
     }
-    g_string_free (fixed, TRUE);
 
     return result;
 }
@@ -1025,11 +1027,13 @@ str_utf8_normalize (const char *text)
 static char *
 str_utf8_casefold_normalize (const char *text)
 {
-    GString *fixed = g_string_new ("");
+    GString *fixed;
     char *tmp, *fold;
     char *result;
     const char *start;
     const char *end;
+
+    fixed = g_string_sized_new (4);
 
     start = text;
     while (!g_utf8_validate (start, -1, &end) && start[0] != '\0')
@@ -1051,6 +1055,7 @@ str_utf8_casefold_normalize (const char *text)
         fold = g_utf8_casefold (text, -1);
         result = g_utf8_normalize (fold, -1, G_NORMALIZE_ALL);
         g_free (fold);
+        g_string_free (fixed, TRUE);
     }
     else
     {
@@ -1062,9 +1067,8 @@ str_utf8_casefold_normalize (const char *text)
             g_free (tmp);
             g_free (fold);
         }
-        result = g_strdup (fixed->str);
+        result = g_string_free (fixed, FALSE);
     }
-    g_string_free (fixed, TRUE);
 
     return result;
 }

@@ -127,15 +127,16 @@ sftpfs_correct_file_name (const char *filename)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+#define POINTER_TO_STRUCTURE_MEMBER(type)  \
+    ((type) ((void *) config_entity + (off_t) config_variables[i].offset))
+
 /**
  * Parse string and filling one config entity by parsed data.
  *
  * @param config_entity config entity structure
  * @param buffer        string for parce
  */
-
-#define POINTER_TO_STRUCTURE_MEMBER(type)  \
-    ((type) ((void *) config_entity + (off_t) config_variables[i].offset))
 
 static void
 sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t * config_entity, char *buffer)

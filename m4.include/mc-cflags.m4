@@ -9,7 +9,7 @@ dnl @copyright Free Software Foundation, Inc.
 
 AC_DEFUN([MC_CHECK_ONE_CFLAG],[
 
-  AC_MSG_CHECKING([if gcc accepts $1])
+  AC_MSG_CHECKING([whether gcc accepts $1])
 
   safe_CFLAGS=$CFLAGS
   CFLAGS="$1"
