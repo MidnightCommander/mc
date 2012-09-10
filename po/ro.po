@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Romanian (http://www.transifex.net/projects/p/mc/team/ro/)\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Romanian (http://www.transifex.com/projects/p/mc/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1))\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -69,9 +68,8 @@ msgstr ""
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "%s nu este un director\n"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -104,9 +102,8 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "&Expresie regulară "
+msgstr ""
 
 msgid "No&rmal"
 msgstr ""
@@ -426,9 +423,7 @@ msgstr "Variabila de mediu TERM nu este setată!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Mărimea %dx%d a ecranului nu este suportată.\n"
-"Verificaţi variabila e mediu TERM.\n"
+msgstr "Mărimea %dx%d a ecranului nu este suportată.\nVerificaţi variabila e mediu TERM.\n"
 
 msgid "Warning"
 msgstr "Atenţie"
@@ -538,9 +533,8 @@ msgstr "Arată datele directorului"
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "Opţiuni de configurare"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr "Arată ultimul directorul curent în fişierul specificat"
@@ -566,9 +560,8 @@ msgstr "Editează un fişier"
 msgid "Forces xterm features"
 msgstr "Forţează facilităţile xterm"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Dezactivează suportul subshell"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -821,9 +814,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "%s nu este un director\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1170,9 +1163,8 @@ msgstr "&Ieşire"
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
 msgid "&Redo"
-msgstr "Ş&Terge"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr ""
@@ -1345,9 +1337,8 @@ msgstr "Tip \"maşină de scris\""
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "Numele grupului"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1552,7 +1543,8 @@ msgstr "Ordinea de sortare"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2297,17 +2289,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Fişier: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Fişier: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -2550,9 +2542,9 @@ msgstr ""
 msgid "No space information"
 msgstr "Nu există date despre spaţiul gol"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Spaţiu gol: %s (%d%%) în %s"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2685,9 +2677,8 @@ msgstr "conexiune s&hell..."
 msgid "SM&B link..."
 msgstr "legătură SM&B..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "Pane&lizare"
+msgstr ""
 
 msgid "&Rescan"
 msgstr ""
@@ -2764,9 +2755,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "listă &Scurtă de fişiere"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3132,9 +3122,8 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#, fuzzy
 msgid "Panelize"
-msgstr "Pane&lizare"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3185,9 +3174,7 @@ msgstr "Caută programe SUID şi SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-" Nu pot deschide fişierul %s pentru scriere:\n"
-" %s\n"
+msgstr " Nu pot deschide fişierul %s pentru scriere:\n %s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3226,9 +3213,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Nu pot scrie în fişierul %s:\n"
-"%s\n"
+msgstr "Nu pot scrie în fişierul %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3252,9 +3237,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Fişierul %s nu este deţinut de root ori dvs. sau poate fi\n"
-"modificat de oricine. Utilizându-l vă puteţi compromite securitatea"
+msgstr "Fişierul %s nu este deţinut de root ori dvs. sau poate fi\nmodificat de oricine. Utilizându-l vă puteţi compromite securitatea"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3315,15 +3298,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Vă rog să apăsaţi %s\n"
-"iar apoi să aşteptaţi până când mesajul dispare.\n"
-"\n"
-"Apoi, apăsaţi-o din nou pentru a vedea dacă apare OK\n"
-"lângă butonul său.\n"
-"\n"
-"Dacă doriţi să ieşiţi, apăsaţi o singură dată tasta Escape\n"
-"şi aşteptaţi."
+msgstr "Vă rog să apăsaţi %s\niar apoi să aşteptaţi până când mesajul dispare.\n\nApoi, apăsaţi-o din nou pentru a vedea dacă apare OK\nlângă butonul său.\n\nDacă doriţi să ieşiţi, apăsaţi o singură dată tasta Escape\nşi aşteptaţi."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3339,9 +3314,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Se pare că toate tastele dvs. deja\n"
-"funcţionează corect. Asta e excelent."
+msgstr "Se pare că toate tastele dvs. deja\nfuncţionează corect. Asta e excelent."
 
 msgid "&Discard"
 msgstr "&Anulează"
@@ -3349,9 +3322,7 @@ msgstr "&Anulează"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Excelent! Aveţi o bază de date terminal completă!\n"
-"Toate tastele dvs. funcţionează corect."
+msgstr "Excelent! Aveţi o bază de date terminal completă!\nToate tastele dvs. funcţionează corect."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Apăsaţi toate tastele menţionate aici. După ce aţi făcut-o, veri-"
@@ -3461,21 +3432,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "director"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "Pentru tot &Sistemul"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "Nu pot deschide directorul %s"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "director"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3483,25 +3450,20 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "Nu pot deschide directorul %s"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-" Nu pot deschide arhiva cpio\n"
-"%s"
+msgstr " Nu pot deschide arhiva cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Sfârşit prematur al arhivei cpio\n"
-"%s"
+msgstr "Sfârşit prematur al arhivei cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3509,10 +3471,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Legături reale inconsistente ale%s\n"
-"în arhiva cpio\n"
-"%s"
+msgstr "Legături reale inconsistente ale%s\nîn arhiva cpio\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3522,25 +3481,19 @@ msgstr "%s conţine intrări duplicate! Trec peste!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Antet corupt al arhivei cpio în\n"
-"%s"
+msgstr "Antet corupt al arhivei cpio în\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Sfârşit de fişier (EOF) neaşteptat\n"
-"%s"
+msgstr "Sfârşit de fişier (EOF) neaşteptat\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-" Nu pot deschide arhiva %s\n"
-"%s"
+msgstr " Nu pot deschide arhiva %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Arhivă extfs inconsistentă"
@@ -3658,9 +3611,9 @@ msgstr "ftpfs: conectare întreruptă de utilizator"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: conectarea la server a eşuat: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Aştept să reîncerc... %d (Control-C pentru a renunţa)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -3712,25 +3665,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "Atenţie: nu am găsit fişierul %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Atenţie: Linie invalidă în %s:\n"
-"%s\n"
+msgstr "Atenţie: Linie invalidă în %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Atenţie: Indicator %c invalid în %s:\n"
-"%s\n"
+msgstr "Atenţie: Indicator %c invalid în %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3763,9 +3712,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Nu pot deschide arhiva tar\n"
-"%s"
+msgstr "Nu pot deschide arhiva tar\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Arhivă tar trunchiată"
@@ -3936,27 +3883,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: Setez directorul curent..."
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: Conectat, director personal %s."
-
-#~ msgid "Macro recursion is too deep"
-#~ msgstr "Recursivitatea macro este prea mare"
-
-#~ msgid "Error creating script:"
-#~ msgstr "Eroare la crearea script-ului: "
-
-#~ msgid "Error reading script:"
-#~ msgstr "Eroare la citirea script-ului: "
-
-#~ msgid "Error closing script:"
-#~ msgstr "Eroare la închiderea script-ului: "
-
-#~ msgid "Script created:"
-#~ msgstr "A fost creat script-ul: "
-
-#~ msgid "Process block"
-#~ msgstr "Prelucrarea blocului"

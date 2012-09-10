@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -68,9 +68,8 @@ msgstr ""
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "無法改變目錄"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -103,9 +102,8 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr " 正規表示式 "
+msgstr ""
 
 msgid "No&rmal"
 msgstr ""
@@ -425,9 +423,7 @@ msgstr "環境變數 TERM 並未設定！ \n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"不支援 %dx%d 的螢幕大小。\n"
-"請檢查 TERM 環境變數。\n"
+msgstr "不支援 %dx%d 的螢幕大小。\n請檢查 TERM 環境變數。\n"
 
 msgid "Warning"
 msgstr "警告"
@@ -537,9 +533,8 @@ msgstr ""
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "設定選項"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -565,9 +560,8 @@ msgstr "編輯一個檔案"
 msgid "Forces xterm features"
 msgstr "強迫使用 xterm 特性"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "不支援使用次殼層 (subshell)"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -820,9 +814,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "複製目錄 \"%s\" 至："
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1169,9 +1163,8 @@ msgstr "結束"
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
 msgid "&Redo"
-msgstr "移除"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr ""
@@ -1344,9 +1337,8 @@ msgstr "打字輸入換行"
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "群組名稱"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1551,7 +1543,8 @@ msgstr "排序的順序"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2296,17 +2289,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "檔案： %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "檔案： %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -2680,9 +2673,8 @@ msgstr ""
 msgid "SM&B link..."
 msgstr "SMB 連結..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "面板化"
+msgstr ""
 
 msgid "&Rescan"
 msgstr ""
@@ -2759,9 +2751,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "簡要的檔案列表"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3121,9 +3112,8 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
 
-#, fuzzy
 msgid "Panelize"
-msgstr "面板化"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3174,9 +3164,7 @@ msgstr "找出 SUID 與 SGID 的程式"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"無法開啟檔案 %s 來寫入資料：\n"
-"%s\n"
+msgstr "無法開啟檔案 %s 來寫入資料：\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3215,9 +3203,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"無法寫入到檔案 %s :\n"
-"%s\n"
+msgstr "無法寫入到檔案 %s :\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3241,9 +3227,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n"
-"使用這個檔案對您系統的安全造成危害。"
+msgstr "檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n使用這個檔案對您系統的安全造成危害。"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3304,15 +3288,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"請按下 %s\n"
-"然後等到此一訊息消失。\n"
-"\n"
-"接著再按一次，看看在按鈕旁邊是不是有\n"
-"顯示 \"好\"。\n"
-"\n"
-"要離開的話，按一下 Esc 鍵，然後等待\n"
-"一下子就可以了。"
+msgstr "請按下 %s\n然後等到此一訊息消失。\n\n接著再按一次，看看在按鈕旁邊是不是有\n顯示 \"好\"。\n\n要離開的話，按一下 Esc 鍵，然後等待\n一下子就可以了。"
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3328,9 +3304,7 @@ msgstr "好"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"看起來您所有的按鍵都\n"
-"正常無誤，很好。"
+msgstr "看起來您所有的按鍵都\n正常無誤，很好。"
 
 msgid "&Discard"
 msgstr "忽略"
@@ -3338,9 +3312,7 @@ msgstr "忽略"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"太好了！您的終端機資料庫很完整！ \n"
-"所有的按鍵都可以正常使用。"
+msgstr "太好了！您的終端機資料庫很完整！ \n所有的按鍵都可以正常使用。"
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "一個個按下這邊顯示的這些按鍵，在您按完以後，檢查一下"
@@ -3450,21 +3422,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "目錄"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "全系統的"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "無法改變目錄"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "目錄"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3472,25 +3440,20 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "無法改變目錄"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"無法開啟 cpio 檔案集\n"
-"%s"
+msgstr "無法開啟 cpio 檔案集\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"cpio 檔案集的結尾過早出現\n"
-"%s"
+msgstr "cpio 檔案集的結尾過早出現\n%s"
 
 #, c-format
 msgid ""
@@ -3498,11 +3461,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"錯誤的硬連結\n"
-"%s\n"
-"在 cpio 檔案集\n"
-"%s"
+msgstr "錯誤的硬連結\n%s\n在 cpio 檔案集\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3512,25 +3471,19 @@ msgstr "%s 有重複的進入點! 放棄中!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"發現不完整的 cpio 標頭\n"
-"%s"
+msgstr "發現不完整的 cpio 標頭\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"未預期的檔案結束\n"
-"%s"
+msgstr "未預期的檔案結束\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"無法開啟 %s 檔案集\n"
-"%s"
+msgstr "無法開啟 %s 檔案集\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "不完整的 extfs 檔案集"
@@ -3648,9 +3601,9 @@ msgstr "ftpfs: 使用者中斷連線"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: 連結到伺服器發生錯誤: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "等候重試... %d (Control-C 結束)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -3702,25 +3655,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "警告：找不到檔案 %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"警告：%s 中此行不正確：\n"
-"%s\n"
+msgstr "警告：%s 中此行不正確：\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"警告：%2$s 中的旗標 %1$c 不正確：\n"
-"%3$s\n"
+msgstr "警告：%2$s 中的旗標 %1$c 不正確：\n%3$s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3753,9 +3702,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"無法開啟 tar 檔案集\n"
-"%s"
+msgstr "無法開啟 tar 檔案集\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 檔案集"
@@ -3926,24 +3873,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: 設定讀取目錄內容"
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fisk: 連結至 %s"
-
-#~ msgid "Error creating script:"
-#~ msgstr "建立指令稿時發生錯誤: "
-
-#~ msgid "Error reading script:"
-#~ msgstr "讀取指令稿時時發生錯誤: "
-
-#~ msgid "Error closing script:"
-#~ msgstr "關閉指令稿錯誤:"
-
-#~ msgid "Script created:"
-#~ msgstr "建立的指令稿:"
-
-#~ msgid "Process block"
-#~ msgstr "處理區塊 "

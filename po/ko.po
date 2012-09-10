@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Korean (http://www.transifex.net/projects/p/mc/team/ko/)\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Korean (http://www.transifex.com/projects/p/mc/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ko\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -68,9 +68,8 @@ msgstr "잠금 무시(&I)"
 msgid "Cannot create %s directory"
 msgstr "%s 디렉터리을 만들 수 없습니다"
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "%s은(는) 디렉터리가 아닙니다\n"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -103,49 +102,39 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "정규 표현식(&R)"
+msgstr ""
 
-#, fuzzy
 msgid "No&rmal"
-msgstr "일반"
+msgstr ""
 
 msgid "Re&gular expression"
 msgstr "정규표현식(&G)"
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "16진수"
+msgstr ""
 
-#, fuzzy
 msgid "Wil&dcard search"
-msgstr "와일드카드 검색"
+msgstr ""
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"스킨 '%s'을(를) 불러올 수 없습니다.\n"
-"기본 스킨으로 불러 옵니다."
+msgstr "스킨 '%s'을(를) 불러올 수 없습니다.\n기본 스킨으로 불러 옵니다."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"스킨 '%s'을(를) 구분할 수 없습니다.\n"
-"기본 스킨으로 불러 옵니다."
+msgstr "스킨 '%s'을(를) 구분할 수 없습니다.\n기본 스킨으로 불러 옵니다."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"스킨 '%s'을(를) 구분할 수 없습니다.\n"
-"기본 스킨으로 불러 옵니다."
 
 msgid "Function key 1"
 msgstr "F1"
@@ -357,9 +346,8 @@ msgstr "달라사인"
 msgid "Quotation mark"
 msgstr "퀘스천 마크"
 
-#, fuzzy
 msgid "Percent sign"
-msgstr "퍼센트(&R)"
+msgstr ""
 
 msgid "Caret"
 msgstr "캐럿"
@@ -435,9 +423,7 @@ msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"화면크기 %dx%d은(는) 지원되지 않습니다.\n"
-"TERM 환경변수를 확인해 보세요.\n"
+msgstr "화면크기 %dx%d은(는) 지원되지 않습니다.\nTERM 환경변수를 확인해 보세요.\n"
 
 msgid "Warning"
 msgstr "경고"
@@ -547,9 +533,8 @@ msgstr "데이터 디렉터리 출력"
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "환경설정 선택항목"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr "프로그램 종료 시 마지막 작업 디렉터리를 주어진 파일로 출력"
@@ -575,9 +560,8 @@ msgstr "한 파일 편집"
 msgid "Forces xterm features"
 msgstr "xterm 기능을 무조건 사용"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "subshell 지원안함"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -600,9 +584,8 @@ msgstr "HP 터미널에서 소프트키 리셋"
 msgid "Load definitions of key bindings from specified file"
 msgstr "주어진 파일로 ftp 다이알로그 로깅"
 
-#, fuzzy
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr "주어진 파일로 ftp 다이알로그 로깅"
+msgstr ""
 
 msgid "Requests to run in black and white"
 msgstr "흑백 모드로 실행을 요구"
@@ -831,9 +814,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "%s은(는) 디렉터리가 아닙니다\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1008,9 +991,8 @@ msgstr ""
 msgid "Press the macro's new hotkey:"
 msgstr ""
 
-#, fuzzy
 msgid "Repeat last commands"
-msgstr "기타 명령어"
+msgstr ""
 
 msgid "Repeat times:"
 msgstr ""
@@ -1181,9 +1163,8 @@ msgstr "종료(&Q)"
 msgid "&Undo"
 msgstr "취소(&U)"
 
-#, fuzzy
 msgid "&Redo"
-msgstr "제거(&R)"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr "삽입/겹침 선택(&T)"
@@ -1242,9 +1223,8 @@ msgstr "다음  북마크(&N)"
 msgid "&Prev bookmark"
 msgstr "이전 북마크(&P)"
 
-#, fuzzy
 msgid "&Flush bookmarks"
-msgstr "북마크 갱신(&F)..."
+msgstr ""
 
 msgid "&Go to line..."
 msgstr "줄찾기(&G)..."
@@ -1273,9 +1253,8 @@ msgstr "인코딩(&I)..."
 msgid "&Refresh screen"
 msgstr "화면 갱신(&R)"
 
-#, fuzzy
 msgid "&Start/Stop record macro"
-msgstr "매크로 저장 시작(&S)"
+msgstr ""
 
 msgid "Delete macr&o..."
 msgstr "매크로 삭제(&O)..."
@@ -1358,9 +1337,8 @@ msgstr "랩 쓰기 유형"
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "집단 이름"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr "끝을 넘은 커서의 선"
@@ -1565,7 +1543,8 @@ msgstr "정렬 순서"
 msgid "Confirmation"
 msgstr "확인"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|기록청소(&H)"
@@ -1934,9 +1913,9 @@ msgid ""
 "Commander package."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s file error"
-msgstr " %s%s 파일 에러 "
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2310,21 +2289,21 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "시간:  %s  %s (%s)"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s (%s)"
-msgstr "시간:  %s  %s (%s)"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "시간:  %s  %s (%s)"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s (%s)"
-msgstr "시간:  %s  %s (%s)"
+msgstr ""
 
 #, c-format
 msgid " Total: %s "
@@ -2420,9 +2399,8 @@ msgstr "내용:"
 msgid "File name:"
 msgstr "파일 이름:"
 
-#, fuzzy
 msgid "Ena&ble ignore directories:"
-msgstr "디렉터리 비교(&C)"
+msgstr ""
 
 msgid "Start at:"
 msgstr "시작위치:"
@@ -2562,9 +2540,9 @@ msgstr ""
 msgid "No space information"
 msgstr "빈 공간: 정보 없음"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "빈 공간: %s (%d%%) of %s"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2695,9 +2673,8 @@ msgstr "쉘 연결(&H)..."
 msgid "SM&B link..."
 msgstr "SMB 연결(&B)..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "패널화(&L)"
+msgstr ""
 
 msgid "&Rescan"
 msgstr "다시읽기(&R)"
@@ -2750,9 +2727,8 @@ msgstr "집단 설정(&G)"
 msgid "U&nselect group"
 msgstr "집단 선택해제(&N)"
 
-#, fuzzy
 msgid "&Invert selection"
-msgstr "선택반전(&L)"
+msgstr ""
 
 msgid "E&xit"
 msgstr "끝내기(&X)"
@@ -2775,9 +2751,8 @@ msgstr "패널 열기/닫기(&P)"
 msgid "&Compare directories"
 msgstr "디렉터리 비교(&C)"
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "디렉터리 비교(&C)"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr "확장 패널(&X)"
@@ -2925,9 +2900,8 @@ msgstr ""
 msgid "Esc key mode"
 msgstr ""
 
-#, fuzzy
 msgid "Preallocate &space"
-msgstr "빈공간 모두 무시(&W)"
+msgstr ""
 
 msgid "Mkdi&r autoname"
 msgstr ""
@@ -3138,9 +3112,8 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
 
-#, fuzzy
 msgid "Panelize"
-msgstr "패널화(&L)"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3191,9 +3164,7 @@ msgstr "SUID와 SGID 풀그림이 있어요"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"쓰기 위한 파일 %s을(를) 열 수 없어요:\n"
-"%s\n"
+msgstr "쓰기 위한 파일 %s을(를) 열 수 없어요:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3232,9 +3203,7 @@ msgstr "ButtonBar|디렉지우기"
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"%s 파일에 쓸 수 없습니다:\n"
-"%s\n"
+msgstr "%s 파일에 쓸 수 없습니다:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3258,9 +3227,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"%s 파일이 root 혹은 당신의 소유가 아니거나 누구든 쓰기 가능합니다.\n"
-"이 파일을 사용하는 것은 보안에 문제가 있습니다"
+msgstr "%s 파일이 root 혹은 당신의 소유가 아니거나 누구든 쓰기 가능합니다.\n이 파일을 사용하는 것은 보안에 문제가 있습니다"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3321,15 +3288,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"%s을(를) 누르십시오\n"
-"그리고 이 메시지가 사라지기를 기다리십시오.\n"
-"\n"
-"그리고, 해당 단추가 OK가 나타나도록 한번 더\n"
-"그 키를 누르십시오\n"
-"\n"
-"만약 빠져나가길 원하시면 Escape키를 한번만 누른 후\n"
-"마찬가지로 기다리십시오."
+msgstr "%s을(를) 누르십시오\n그리고 이 메시지가 사라지기를 기다리십시오.\n\n그리고, 해당 단추가 OK가 나타나도록 한번 더\n그 키를 누르십시오\n\n만약 빠져나가길 원하시면 Escape키를 한번만 누른 후\n마찬가지로 기다리십시오."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3345,9 +3304,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"당신의 키들이 이미 잘 동작하는 것처럼\n"
-"보이는 군요. 아주 좋습니다."
+msgstr "당신의 키들이 이미 잘 동작하는 것처럼\n보이는 군요. 아주 좋습니다."
 
 msgid "&Discard"
 msgstr "버림(&D)"
@@ -3355,9 +3312,7 @@ msgstr "버림(&D)"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"훌륭해요! 당신은 단말창 데이터베이스를 완성했어요!\n"
-"이제 모든 키가 제대로 동작합니다."
+msgstr "훌륭해요! 당신은 단말창 데이터베이스를 완성했어요!\n이제 모든 키가 제대로 동작합니다."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "모든키가 언급되었습니다. 나중에 그것을 확인 할 수 있습니다."
@@ -3400,18 +3355,13 @@ msgstr "%b %e %H:%M"
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr ""
-" 파일을 저장할 수 없습니다.%s:\n"
-"%s "
+msgstr " 파일을 저장할 수 없습니다.%s:\n%s "
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr ""
-"GNU 미드나잇 코맨더는 이미\n"
-"터미널에서 실행 중입니다.\n"
-"Subshell 지원이 비활성화 됩니다."
+msgstr "GNU 미드나잇 코맨더는 이미\n터미널에서 실행 중입니다.\nSubshell 지원이 비활성화 됩니다."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3472,21 +3422,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "디렉터리"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "체계 전체(&S)"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "디렉터리을 바꿀 수 없습니다"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "디렉터리"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3494,25 +3440,20 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "디렉터리을 바꿀 수 없습니다"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"cpio 아카이브를 열 수 없습니다\n"
-"%s"
+msgstr "cpio 아카이브를 열 수 없습니다\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"cpio 아카이브의 끝에 잘못됨\n"
-"%s"
+msgstr "cpio 아카이브의 끝에 잘못됨\n%s"
 
 #, c-format
 msgid ""
@@ -3520,10 +3461,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"일관성 하드링크n%s\n"
-"in cpio archive\n"
-"%s"
+msgstr "일관성 하드링크n%s\nin cpio archive\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3533,25 +3471,19 @@ msgstr "%s 중복된 항목을 포함하고있습니다! 건너 뜁니다!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"cpio 손상된 헤더에 있습니다\n"
-"%s"
+msgstr "cpio 손상된 헤더에 있습니다\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"파일의 끝에 알 수 없습니다\n"
-"%s"
+msgstr "파일의 끝에 알 수 없습니다\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"%s 아카이브를 열 수 없습니다\n"
-"%s"
+msgstr "%s 아카이브를 열 수 없습니다\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "일관적 extfs 아카이브 "
@@ -3669,9 +3601,9 @@ msgstr "ftpfs: 사용자에 의해 연결 중단"
 msgid "ftpfs: connection to server failed: %s"
 msgstr " ftpfs: 서버로 연결할 수 없음: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "재시도를 기다리는 중 ... %d  (Contro-C로 취소)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 잘못된 주소 목록"
@@ -3723,25 +3655,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"경고: %s에 잘못된 라인:\n"
-"%s\n"
+msgstr "경고: %s에 잘못된 라인:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"경고: 잘못된 플래그 %c이(가) %s에 있음:\n"
-"%s\n"
+msgstr "경고: 잘못된 플래그 %c이(가) %s에 있음:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3774,9 +3702,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"tar 아카이브를 열 수 없습니다\n"
-"%s"
+msgstr "tar 아카이브를 열 수 없습니다\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "잘못된 테잎 아카이브"
@@ -3947,42 +3873,3 @@ msgstr "검색결과 없음"
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: 현재 디렉터리의 설정..."
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: 홈 %s, 접속됨."
-
-#~ msgid "All charsets"
-#~ msgstr "모든 문자셋"
-
-#~ msgid "&Normal"
-#~ msgstr "일반(&N)"
-
-#~ msgid "Macro recursion is too deep"
-#~ msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
-
-#~ msgid "Error creating script:"
-#~ msgstr "스크립트 생성 에러:"
-
-#~ msgid "Error reading script:"
-#~ msgstr "스크립트 읽기 에러:"
-
-#~ msgid "Error closing script:"
-#~ msgstr "스크립트 닫기 에러:"
-
-#~ msgid "Script created:"
-#~ msgstr "스크립트 만듬:"
-
-#~ msgid "Process block"
-#~ msgstr "프로세스 블럭"
-
-#~ msgid "Finis&h record macro..."
-#~ msgstr "매크로 저장 끝(&H)..."
-
-#~ msgid "&Execute macro..."
-#~ msgstr "매크로 실행(&E)..."
-
-#~ msgid "Reverse selec&tion"
-#~ msgstr "선택반전(&T)"

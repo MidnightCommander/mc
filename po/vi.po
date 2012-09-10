@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: vi\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -68,9 +68,8 @@ msgstr "&Lời đi khóa"
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "%s không phải là một thư mục\n"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -103,9 +102,8 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "&Biểu thức chính quy"
+msgstr ""
 
 msgid "No&rmal"
 msgstr ""
@@ -425,9 +423,7 @@ msgstr "Biến môi trườn TERM chưa được xác định!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Kích thước màn hình %dx%d không được hỗ trợ.\n"
-"Hãy kiểm tra biến môi trường TERM.\n"
+msgstr "Kích thước màn hình %dx%d không được hỗ trợ.\nHãy kiểm tra biến môi trường TERM.\n"
 
 msgid "Warning"
 msgstr "Cảnh báo"
@@ -537,9 +533,8 @@ msgstr "In ra tên thư mục dữ liệu"
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "Tùy chọn cấu hình"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr "Ghi thư mục làm việc cuối cùng vào tập tin chỉ ra"
@@ -565,9 +560,8 @@ msgstr "Soạn thảo tập tin"
 msgid "Forces xterm features"
 msgstr "Bắt buộc dùng tính năng của xterm"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Tắt hỗ trợ shell con"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -820,9 +814,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "%s không phải là một thư mục\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -997,9 +991,8 @@ msgstr ""
 msgid "Press the macro's new hotkey:"
 msgstr ""
 
-#, fuzzy
 msgid "Repeat last commands"
-msgstr "Lệnh ngoại trú"
+msgstr ""
 
 msgid "Repeat times:"
 msgstr ""
@@ -1170,9 +1163,8 @@ msgstr "&Thoát"
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
 msgid "&Redo"
-msgstr "&Xóa"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr ""
@@ -1345,9 +1337,8 @@ msgstr "Tự độ&ng chuyển dòng"
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "Tên nhóm"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1552,7 +1543,8 @@ msgstr "Thứ tự sắp xếp"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1921,9 +1913,9 @@ msgid ""
 "Commander package."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s file error"
-msgstr " %s%s lỗi tập tin "
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2297,17 +2289,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Tập tin: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Tập tin: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -2548,9 +2540,9 @@ msgstr ""
 msgid "No space information"
 msgstr "Không có thông tin về khoảng trống"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Chỗ trống:    %s (%d%%) của %s"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2681,9 +2673,8 @@ msgstr "kết nối &Shell..."
 msgid "SM&B link..."
 msgstr "kết nối SM&B..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "&Bảng"
+msgstr ""
 
 msgid "&Rescan"
 msgstr ""
@@ -2760,9 +2751,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "&Thu gọn"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3122,9 +3112,8 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s trong %d tập tin"
 
-#, fuzzy
 msgid "Panelize"
-msgstr "&Bảng"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3133,8 +3122,7 @@ msgid "Do you really want to execute?"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
+msgstr "Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
 
 msgid "&Add new"
 msgstr "&Thêm mới"
@@ -3176,9 +3164,7 @@ msgstr "Tìm chương trình có các bit SUID/SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Không mở được tập tin %s để ghi nhớ:\n"
-"%s\n"
+msgstr "Không mở được tập tin %s để ghi nhớ:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3217,9 +3203,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Không ghi nhớ được vào tập tin %s:\n"
-"%s\n"
+msgstr "Không ghi nhớ được vào tập tin %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3243,9 +3227,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Tập tin %s không thuộc quyền sở hữu của root, hay của bạn,\n"
-"hoặc ai cũng có thể ghi. Sử dụng tập tin này có thể không an toàn"
+msgstr "Tập tin %s không thuộc quyền sở hữu của root, hay của bạn,\nhoặc ai cũng có thể ghi. Sử dụng tập tin này có thể không an toàn"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3306,15 +3288,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Xin hãy nhấn lên %s\n"
-"và đợi cho thông báo này biến mất.\n"
-"\n"
-"Sau đó hãy nhấn một lần nữa để chắc chắn là ở bên phải\n"
-"của tên xuất hiện \"OK\".\n"
-"\n"
-"Nếu bạn muốn dừng việc dạy phím, thì hãy nhấn\n"
-"phím Esc và cũng cần đợi một chút."
+msgstr "Xin hãy nhấn lên %s\nvà đợi cho thông báo này biến mất.\n\nSau đó hãy nhấn một lần nữa để chắc chắn là ở bên phải\ncủa tên xuất hiện \"OK\".\n\nNếu bạn muốn dừng việc dạy phím, thì hãy nhấn\nphím Esc và cũng cần đợi một chút."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3330,9 +3304,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Có vẻ như tất cả các phím của bạn\n"
-"làm việc tốt. Thật là tuyệt."
+msgstr "Có vẻ như tất cả các phím của bạn\nlàm việc tốt. Thật là tuyệt."
 
 msgid "&Discard"
 msgstr "&Vứt bỏ"
@@ -3340,17 +3312,13 @@ msgstr "&Vứt bỏ"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Tuyệt! Chúng ta có một cơ sở dữ liệu mô tả terminal đầy đủ!\n"
-"Tất cả các phím đều làm việc tốt."
+msgstr "Tuyệt! Chúng ta có một cơ sở dữ liệu mô tả terminal đầy đủ!\nTất cả các phím đều làm việc tốt."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-"Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
+msgstr "Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
+msgstr "xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."
@@ -3393,10 +3361,7 @@ msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr ""
-"Một GNU Midnight Commander đã làm việc\n"
-"trên terminal này. Sẽ không có hỗ trợ\n"
-"shell con."
+msgstr "Một GNU Midnight Commander đã làm việc\ntrên terminal này. Sẽ không có hỗ trợ\nshell con."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3457,21 +3422,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "thư mục"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "&Hệ thống"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "Không thay đổi được thư mục"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "thư mục"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3479,25 +3440,20 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "Không thay đổi được thư mục"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Không mở được tập tin nén cpio\n"
-"%s"
+msgstr "Không mở được tập tin nén cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Phần cuối của tập tin nén cpio bị hỏng\n"
-"%s"
+msgstr "Phần cuối của tập tin nén cpio bị hỏng\n%s"
 
 #, c-format
 msgid ""
@@ -3505,11 +3461,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Liên kết cứng không thích hợp \n"
-"%s\n"
-"trong tập tin nén cpio\n"
-"%s"
+msgstr "Liên kết cứng không thích hợp \n%s\ntrong tập tin nén cpio\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3519,25 +3471,19 @@ msgstr "%s chứa mục lặp lại! Nhảy qua!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Lỗi phần đầu cpio phát hiện trong\n"
-"%s"
+msgstr "Lỗi phần đầu cpio phát hiện trong\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Kết thúc tập tin không mong đợi\n"
-"%s"
+msgstr "Kết thúc tập tin không mong đợi\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Không mở được tập tin nén %s\n"
-"%s"
+msgstr "Không mở được tập tin nén %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Tập tin nén extfs không thích hợp"
@@ -3655,9 +3601,9 @@ msgstr "ftpfs: người dùng dừng kết nối giữa chừng"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: kết nối tới máy chủ không thành công: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Chờ thử lại... %d (Control-C để hủy bỏ)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -3709,25 +3655,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "Cảnh báo: không tìm thấy tập tin %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Cảnh báo: dòng không đúng trong %s:\n"
-"%s\n"
+msgstr "Cảnh báo: dòng không đúng trong %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Cảnh báo: Cờ không đúng %c trong %s:\n"
-"%s\n"
+msgstr "Cảnh báo: Cờ không đúng %c trong %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3760,9 +3702,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Không mở được tập tin nén tar\n"
-"%s"
+msgstr "Không mở được tập tin nén tar\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Tập tin tar không thích hợp"
@@ -3933,27 +3873,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: Đang đặt thư mục hiện thời..."
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: Kết nối thành công, thư mục cá nhân %s."
-
-#~ msgid "Macro recursion is too deep"
-#~ msgstr "Đệ qui của macro quá sâu"
-
-#~ msgid "Error creating script:"
-#~ msgstr "Lỗi tạo script:"
-
-#~ msgid "Error reading script:"
-#~ msgstr "Lỗi đọc script:"
-
-#~ msgid "Error closing script:"
-#~ msgstr "Lỗi đóng script:"
-
-#~ msgid "Script created:"
-#~ msgstr "Đã tạo script:"
-
-#~ msgid "Process block"
-#~ msgstr "Xử lý khối"

@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 # Tadashi Jokagi <elf@elf.no-ip.org>, 2011.
@@ -9,16 +9,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 16:40+0000\n"
-"Last-Translator: elf <elf@elf.no-ip.org>\n"
-"Language-Team: Japanese (http://www.transifex.net/projects/p/mc/team/ja/)\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/mc/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "警告: コードページの一覧を読み込めません"
@@ -46,19 +46,16 @@ msgstr ""
 msgid "Unable to create group '%s' for events!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to create event '%s'!"
-msgstr "ファイルへの保存に失敗しました"
+msgstr ""
 
 #, c-format
 msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"ファイル \"%s\" は編集中です\n"
-"ユーザ: %s\n"
-"プロセスID: %d"
+msgstr "ファイル \"%s\" は編集中です\nユーザ: %s\nプロセスID: %d"
 
 msgid "File locked"
 msgstr "ファイルがロックされています"
@@ -73,9 +70,8 @@ msgstr "ロック無視(&I)"
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "ディレクトリを変更できません"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -108,49 +104,39 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr "不正なトークン番号 %d"
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "正規表現(&R)"
+msgstr ""
 
-#, fuzzy
 msgid "No&rmal"
-msgstr "通常"
+msgstr ""
 
 msgid "Re&gular expression"
 msgstr ""
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "16進"
+msgstr ""
 
-#, fuzzy
 msgid "Wil&dcard search"
-msgstr "ワイルドカード検索"
+msgstr ""
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"スキン'%s'をロードできません\n"
-"デフォルトのスキンがロードされました"
+msgstr "スキン'%s'をロードできません\nデフォルトのスキンがロードされました"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"スキン'%s'の文法が間違っています\n"
-"デフォルトのスキンがロードされました"
+msgstr "スキン'%s'の文法が間違っています\nデフォルトのスキンがロードされました"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"スキン'%s'の文法が間違っています\n"
-"デフォルトのスキンがロードされました"
 
 msgid "Function key 1"
 msgstr "ファンクション キー 1"
@@ -439,9 +425,7 @@ msgstr "環境変数 TERM がセットされていません\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"スクリーンサイズ %dx%d はサポートされていません\n"
-"TERM環境変数の値をチェックしてください\n"
+msgstr "スクリーンサイズ %dx%d はサポートされていません\nTERM環境変数の値をチェックしてください\n"
 
 msgid "Warning"
 msgstr "警告"
@@ -551,9 +535,8 @@ msgstr ""
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "設定オプション"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -579,9 +562,8 @@ msgstr "ファイルを編集"
 msgid "Forces xterm features"
 msgstr "強制的に xterm 機能を使う"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "サブシェルのサポートを無効化"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -834,9 +816,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "ディレクトリ \"%s\" をコピー:"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1011,9 +993,8 @@ msgstr ""
 msgid "Press the macro's new hotkey:"
 msgstr ""
 
-#, fuzzy
 msgid "Repeat last commands"
-msgstr "外部コマンド"
+msgstr ""
 
 msgid "Repeat times:"
 msgstr ""
@@ -1184,9 +1165,8 @@ msgstr "終了 (&Q)"
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
 msgid "&Redo"
-msgstr "削除(&R)"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr ""
@@ -1275,9 +1255,8 @@ msgstr "エンコード(&I)"
 msgid "&Refresh screen"
 msgstr "画面の再描画(&R)"
 
-#, fuzzy
 msgid "&Start/Stop record macro"
-msgstr "マクロ記録の開始(&S)"
+msgstr ""
 
 msgid "Delete macr&o..."
 msgstr "マクロの削除(&O)..."
@@ -1360,9 +1339,8 @@ msgstr "タイプライター風折返し"
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "グループ名"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1567,7 +1545,8 @@ msgstr "並び変える"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1900,9 +1879,9 @@ msgstr ""
 msgid "Setup saved to %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to %s"
-msgstr "ファイルへの保存に失敗しました"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
@@ -2312,17 +2291,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "ファイル: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "ファイル: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -2422,9 +2401,8 @@ msgstr ""
 msgid "File name:"
 msgstr ""
 
-#, fuzzy
 msgid "Ena&ble ignore directories:"
-msgstr "ディレクトリーの比較"
+msgstr ""
 
 msgid "Start at:"
 msgstr "開始場所:"
@@ -2564,9 +2542,9 @@ msgstr ""
 msgid "No space information"
 msgstr "空き領域情報がありません"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "空き容量: %s (%d%%) of %s"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2697,9 +2675,8 @@ msgstr ""
 msgid "SM&B link..."
 msgstr "SMBリンク(&B)..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "パネル化(&l)"
+msgstr ""
 
 msgid "&Rescan"
 msgstr ""
@@ -2776,9 +2753,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "ディレクトリーの比較"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3138,9 +3114,8 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
 
-#, fuzzy
 msgid "Panelize"
-msgstr "パネル化(&l)"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3191,9 +3166,7 @@ msgstr "SUID と SGID のプログラムを検索"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"書き出しのために %s をオープンすることができません:\n"
-"%s\n"
+msgstr "書き出しのために %s をオープンすることができません:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3232,9 +3205,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"ファイル %s に書き込めません:\n"
-"%s\n"
+msgstr "ファイル %s に書き込めません:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3258,9 +3229,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"ファイル %s は root やあなたの所有物ではないのに誰でも書き込み\n"
-"可能です.利用するとあなたのセキュリティを侵害する恐れがあります"
+msgstr "ファイル %s は root やあなたの所有物ではないのに誰でも書き込み\n可能です.利用するとあなたのセキュリティを侵害する恐れがあります"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3321,15 +3290,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"%s を押してこのメッセージが\n"
-"消えるのを待ってください。そ\n"
-"して、もう一度押してボタンの\n"
-"横に「良」が表示されるのを\n"
-"確認します。\n"
-"\n"
-"中止するにはエスケープキーを押して待ってく\n"
-"ださい"
+msgstr "%s を押してこのメッセージが\n消えるのを待ってください。そ\nして、もう一度押してボタンの\n横に「良」が表示されるのを\n確認します。\n\n中止するにはエスケープキーを押して待ってく\nださい"
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3345,9 +3306,7 @@ msgstr "良"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"すべてのキーは問題なさそうです。\n"
-"すばらしい"
+msgstr "すべてのキーは問題なさそうです。\nすばらしい"
 
 msgid "&Discard"
 msgstr "破棄(&D)"
@@ -3355,9 +3314,7 @@ msgstr "破棄(&D)"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"すばらしい! ターミナルデータベースは完成しました!\n"
-"すべてのキーは動作します"
+msgstr "すばらしい! ターミナルデータベースは完成しました!\nすべてのキーは動作します"
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "ここに表示されているキーをすべて押してください。すべて押したら"
@@ -3467,48 +3424,38 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "directory"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "システム全体(&S)"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "ディレクトリを変更できません"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "directory"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
 
-#, fuzzy
 msgid "User data"
-msgstr "ユーザー名"
+msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "ディレクトリを変更できません"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"cpio アーカイブを開けません\n"
-"%s"
+msgstr "cpio アーカイブを開けません\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"cpio アーカイブの終りが早すぎます\n"
-"%s"
+msgstr "cpio アーカイブの終りが早すぎます\n%s"
 
 #, c-format
 msgid ""
@@ -3516,10 +3463,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"cpio アーカイブ内 %s のハードリンクが\n"
-"矛盾しています\n"
-"%s"
+msgstr "cpio アーカイブ内 %s のハードリンクが\n矛盾しています\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3535,17 +3479,13 @@ msgstr "%s の中で壊れた cpio ヘッダに遭遇した"
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"予期しない EOF です\n"
-"%s"
+msgstr "予期しない EOF です\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"%s アーカイブを開くことが出来ません\n"
-"%s"
+msgstr "%s アーカイブを開くことが出来ません\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "不整合な extfs アーカイブです"
@@ -3663,9 +3603,9 @@ msgstr "ftpfs: ユーザによって接続が断たれました"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: サーバへの接続に失敗しました: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "再試行するのでお待ちください... %d (Control-C で中止)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -3717,25 +3657,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "警告: ファイル %s は見つかりませんでした\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"警告: %s に無効な行があります:\n"
-"%s\n"
+msgstr "警告: %s に無効な行があります:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"警告: %2$s に無効なフラグ %1$c があります:\n"
-"%3$s\n"
+msgstr "警告: %2$s に無効なフラグ %1$c があります:\n%3$s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3768,9 +3704,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"tarアーカイブ%sを\n"
-"開けません"
+msgstr "tarアーカイブ%sを\n開けません"
 
 msgid "Inconsistent tar archive"
 msgstr "tar アーカイブに不整合"
@@ -3827,9 +3761,7 @@ msgstr "undelfs: iノードビットマップをロード中です..."
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
-msgstr ""
-"i ノードビットマップを開けません:\n"
-"%s"
+msgstr "i ノードビットマップを開けません:\n%s"
 
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: ブロックビットマップを読み込んでいます..."
@@ -3838,9 +3770,7 @@ msgstr "undelfs: ブロックビットマップを読み込んでいます..."
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
-msgstr ""
-"ブロックビットマップを開けません:\n"
-"%s"
+msgstr "ブロックビットマップを開けません:\n%s"
 
 msgid "vfs_info is not fs!"
 msgstr ""
@@ -3945,36 +3875,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: カレントディレクトリを設定します..."
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: 接続しました。ホームディレクトリは %s です。"
-
-#~ msgid "Load macro"
-#~ msgstr "マクロの読み込み"
-
-#~ msgid "Error creating script:"
-#~ msgstr "スクリプト作成でエラー:"
-
-#~ msgid "Error reading script:"
-#~ msgstr "スクリプト読み込みでエラー:"
-
-#~ msgid "Error closing script:"
-#~ msgstr "スクリプトクローズエラー:"
-
-#~ msgid "Script created:"
-#~ msgstr "スクリプトは作成されました:"
-
-#~ msgid "Process block"
-#~ msgstr "プロセスブロック"
-
-#~ msgid "Execute macro"
-#~ msgstr "マクロの実行"
-
-#~ msgid "Finis&h record macro..."
-#~ msgstr "マクロ記録の終了(&H)..."
-
-#~ msgid "&Execute macro..."
-#~ msgstr "マクロの実行(&E).."

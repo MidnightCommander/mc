@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Catalan (http://www.transifex.net/projects/p/mc/team/ca/)\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/mc/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -68,9 +68,8 @@ msgstr ""
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "No he pogut canviar de directori"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -103,9 +102,8 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "Expressió &Habitual"
+msgstr ""
 
 msgid "No&rmal"
 msgstr ""
@@ -425,9 +423,7 @@ msgstr "La variable d'entorn TERM no esta definida!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"La mida de la pantalla %dx%d no es pot utilitzar.\n"
-"Reviseu la variable d'entorn TERM.\n"
+msgstr "La mida de la pantalla %dx%d no es pot utilitzar.\nReviseu la variable d'entorn TERM.\n"
 
 msgid "Warning"
 msgstr "Avís"
@@ -537,9 +533,8 @@ msgstr ""
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "Opcions de configuració"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -565,9 +560,8 @@ msgstr "Edita un fitxer"
 msgid "Forces xterm features"
 msgstr "Força l'ús de característiques d'xterm"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Inhabilita el suport de subintèrprets"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -820,9 +814,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "Copia el directori \"%s\" a:"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1169,9 +1163,8 @@ msgstr "&Surt"
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
 msgid "&Redo"
-msgstr "&Suprimeix"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr ""
@@ -1344,9 +1337,8 @@ msgstr "Ajustament de màquina d'escriure"
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "Nom del grup"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1551,7 +1543,8 @@ msgstr "Ordre de classificació"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2296,17 +2289,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Fitxer: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Fitxer: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -2548,9 +2541,9 @@ msgstr ""
 msgid "No space information"
 msgstr "No hi ha informació d'espai"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Espai lliure: %s (%d%%) of %s"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2682,9 +2675,8 @@ msgstr ""
 msgid "SM&B link..."
 msgstr "Enllaç SM&B..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "Converteix-ho en &quadre"
+msgstr ""
 
 msgid "&Rescan"
 msgstr ""
@@ -2761,9 +2753,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "llistat &Breu"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3126,9 +3117,8 @@ msgid_plural "%s in %d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#, fuzzy
 msgid "Panelize"
-msgstr "Converteix-ho en &quadre"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3137,9 +3127,7 @@ msgid "Do you really want to execute?"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"El format facilitat per l'usuari sembla que és invàlid, s'està tornant al "
-"format per defecte."
+msgstr "El format facilitat per l'usuari sembla que és invàlid, s'està tornant al format per defecte."
 
 msgid "&Add new"
 msgstr "Afegeix un &nou"
@@ -3181,9 +3169,7 @@ msgstr "Cerca programes SUID i SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"No puc obrir el fitxer %s per escriure:\n"
-"%s\n"
+msgstr "No puc obrir el fitxer %s per escriure:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3222,9 +3208,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"No puc escriure al fitxer %s:\n"
-"%s\n"
+msgstr "No puc escriure al fitxer %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3248,9 +3232,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"El fitxer %s no pertany ni a l'arrel ni a vostè, o bé és modificable per\n"
-"qualsevol. Usar-lo podria comprometre la seguretat"
+msgstr "El fitxer %s no pertany ni a l'arrel ni a vostè, o bé és modificable per\nqualsevol. Usar-lo podria comprometre la seguretat"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3311,15 +3293,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Per favor, premeu la tecla %s\n"
-"i espereu fins que desaparegui aquest missatge.\n"
-"\n"
-"Aleshores, premeu-la de nou per veure si\n"
-"apareix \"D'acord\" vora el seu botó.\n"
-"\n"
-"Si voleu sortir, premeu un cop la tecla\n"
-"d'Escapada i espereu."
+msgstr "Per favor, premeu la tecla %s\ni espereu fins que desaparegui aquest missatge.\n\nAleshores, premeu-la de nou per veure si\napareix \"D'acord\" vora el seu botó.\n\nSi voleu sortir, premeu un cop la tecla\nd'Escapada i espereu."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3335,9 +3309,7 @@ msgstr "D'acord"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Sembla que les tecles ja\n"
-"funcionen bé. Això és perfecte."
+msgstr "Sembla que les tecles ja\nfuncionen bé. Això és perfecte."
 
 msgid "&Discard"
 msgstr "&Descarta"
@@ -3345,16 +3317,13 @@ msgstr "&Descarta"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Genial! Teniu una base de dades de terminals\n"
-"completa! Totes les tecles funcionen."
+msgstr "Genial! Teniu una base de dades de terminals\ncompleta! Totes les tecles funcionen."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Premeu totes les tecles esmentades. Quan ho hagueu fet, comproveu"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
+msgstr "a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "l'espai o feu-hi clic. Per desplaçar-vos, utilitzeu el tabulador."
@@ -3432,8 +3401,7 @@ msgid "With support for background operations\n"
 msgstr "Amb suport per a operacions en segon pla\n"
 
 msgid "With mouse support on xterm and Linux console\n"
-msgstr ""
-"Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
+msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
 
 msgid "With mouse support on xterm\n"
 msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm.\n"
@@ -3459,21 +3427,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "directori"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "El de tot el &Sistema"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "No he pogut canviar de directori"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "directori"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3481,25 +3445,20 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "No he pogut canviar de directori"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"No s'ha pogut obrir l'arxiu cpio\n"
-"%s"
+msgstr "No s'ha pogut obrir l'arxiu cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"S'ha anticipat el final de l'arxiu de tipus cpio\n"
-"%s"
+msgstr "S'ha anticipat el final de l'arxiu de tipus cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3507,11 +3466,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Enllaços inconsistents de\n"
-"%s\n"
-"a l'arxiu cpio\n"
-"%s"
+msgstr "Enllaços inconsistents de\n%s\na l'arxiu cpio\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3521,25 +3476,19 @@ msgstr "%s conté registres duplicats! S'estan ometent!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"S'ha trobat una capçalera corrupta d'arxiu cpio a \n"
-"%s"
+msgstr "S'ha trobat una capçalera corrupta d'arxiu cpio a \n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Fí de fitxer inesperat a\n"
-"%s"
+msgstr "Fí de fitxer inesperat a\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"No s'ha pogut obrir l'arxiu %s\n"
-"%s"
+msgstr "No s'ha pogut obrir l'arxiu %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "L'arxiu extfs no és consistent"
@@ -3657,9 +3606,9 @@ msgstr "ftpfs: l'usuari ha interromput la connexió"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: ha fallat la connexió amb el servidor: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Està esperant per reintentar... %d (Ctrl-C per cancel·lar)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -3711,25 +3660,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "Avís: no s'ha trobat el fitxer %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Avís: línia no vàlida a %s:\n"
-"%s\n"
+msgstr "Avís: línia no vàlida a %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Avís: Senyalador %c no vàlid a %s:\n"
-"%s\n"
+msgstr "Avís: Senyalador %c no vàlid a %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3762,9 +3707,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"No s'ha pogut obrir l'arxiu tar\n"
-"%s"
+msgstr "No s'ha pogut obrir l'arxiu tar\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "L'arxiu tar no és consistent"
@@ -3797,8 +3740,7 @@ msgstr ""
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-"undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
+msgstr "undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
@@ -3936,24 +3878,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: S'està definint el directori actual..."
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: Connectat, directori inicial %s."
-
-#~ msgid "Error creating script:"
-#~ msgstr "S'ha produït un error en crear la seqüència:"
-
-#~ msgid "Error reading script:"
-#~ msgstr "S'ha produït un error en llegir la seqüència:"
-
-#~ msgid "Error closing script:"
-#~ msgstr "Error en tancar la seqüència:"
-
-#~ msgid "Script created:"
-#~ msgstr "Seqüència creada:"
-
-#~ msgid "Process block"
-#~ msgstr "Processa el bloc"

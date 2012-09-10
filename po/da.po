@@ -1,23 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Jens Hyllegaard <jens.hyllegaard@gmail.com>, 2012.
 # Joe Hansen <joedalton2@yahoo.dk>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
+#   <theoliver@live.co.uk>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Danish (http://www.transifex.net/projects/p/mc/team/da/)\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Jens Hyllegaard <jens.hyllegaard@gmail.com>\n"
+"Language-Team: Danish (http://www.transifex.com/projects/p/mc/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: da\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Advarsel: kan ikke indlæse codepages-liste"
@@ -45,19 +47,16 @@ msgstr ""
 msgid "Unable to create group '%s' for events!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to create event '%s'!"
-msgstr "Kunne ikke gemme fil"
+msgstr ""
 
 #, c-format
 msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Fil »%s« er ved at blive redigeret.\n"
-"Bruger: %s\n"
-"Proces-id: %d"
+msgstr "Fil »%s« er ved at blive redigeret.\nBruger: %s\nProces-id: %d"
 
 msgid "File locked"
 msgstr "Fil låst"
@@ -72,13 +71,12 @@ msgstr "&Ignorer lås"
 msgid "Cannot create %s directory"
 msgstr "Kan ikke oprette mappen %s"
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "%s er ikke en mappe\n"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
-msgstr ""
+msgstr "Der opstod en fejl ved migrering af brugerindstillingerne: %s"
 
 #, c-format
 msgid ""
@@ -86,13 +84,13 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
+msgstr "Dine gamle indstillinger blev migreret fra %s\ntil de af Freedesktop anbefalede mapper.\nFor yderligere oplysninger, besøg venligst\nhttp://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
-msgstr ""
+msgstr "Dine gamle indstillinger blev migreret fra %s\ntil %s\n"
 
 msgid "Search string not found"
 msgstr "Søgestreng blev ikke fundet"
@@ -107,49 +105,39 @@ msgstr "Antal erstatningssymbler svarer ikke til antallet af fundne symboler"
 msgid "Invalid token number %d"
 msgstr "Ugyldigt symbolantal %d"
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "&Regulært udtryk"
+msgstr ""
 
-#, fuzzy
 msgid "No&rmal"
-msgstr "Normal"
+msgstr ""
 
 msgid "Re&gular expression"
 msgstr "&Regulært udtryk"
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "Heksadecimal"
+msgstr ""
 
-#, fuzzy
 msgid "Wil&dcard search"
-msgstr "Søgning med jokertegn"
+msgstr ""
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Kunne ikke indlæse temaet »%s«.\n"
-"Standardtemaet er indlæst"
+msgstr "Kunne ikke indlæse temaet »%s«.\nStandardtemaet er indlæst"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Kunne ikke fortolke temaet »%s«.\n"
-"Standardtemaet er indlæst"
+msgstr "Kunne ikke fortolke temaet »%s«.\nStandardtemaet er indlæst"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"Kunne ikke fortolke temaet »%s«.\n"
-"Standardtemaet er indlæst"
 
 msgid "Function key 1"
 msgstr "Funktionstast 1"
@@ -361,9 +349,8 @@ msgstr "Dollartegn"
 msgid "Quotation mark"
 msgstr "Anførelsestegn"
 
-#, fuzzy
 msgid "Percent sign"
-msgstr "&Procenter"
+msgstr "Procent-tegn"
 
 msgid "Caret"
 msgstr "Markør"
@@ -439,9 +426,7 @@ msgstr "TERM-miljøvariabelen er ikke sat!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Skærmstørrelse %dx%d er ikke understøttet.\n"
-"Tjek TERM-miljøvariabelen.\n"
+msgstr "Skærmstørrelse %dx%d er ikke understøttet.\nTjek TERM-miljøvariabelen.\n"
 
 msgid "Warning"
 msgstr "Advarsel"
@@ -551,9 +536,8 @@ msgstr "Udskriv datamappe"
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "Konfigurer indstillinger"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr "Udskriv sidste arbejdsmappe til angivet fil"
@@ -579,9 +563,8 @@ msgstr "Redigerer en fil"
 msgid "Forces xterm features"
 msgstr "Fremtvinger xterm-funktioner"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Deaktiverer underskalunderstøttelse"
+msgstr "Deaktivér X11 understøttelse"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -604,9 +587,8 @@ msgstr "Genstarter softtaster på HP-terminaler"
 msgid "Load definitions of key bindings from specified file"
 msgstr "Indlæs definitioner på genvejstaster fra angivet fil"
 
-#, fuzzy
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr "Indlæs definitioner på genvejstaster fra angivet fil"
+msgstr ""
 
 msgid "Requests to run in black and white"
 msgstr "Kør i sort-hvid"
@@ -642,7 +624,6 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: don't translate color names and attributes
-#, fuzzy
 msgid ""
 "Standard Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -655,11 +636,6 @@ msgid ""
 "Attributes:\n"
 "   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
-"Farver:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
 
 msgid "Color options"
 msgstr "Farveindstillinger"
@@ -677,10 +653,7 @@ msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
-msgstr ""
-"\n"
-"Send venligst fejlrapporter (inklusive uddata for »mc -V«)\n"
-"som billetter (tickets) på www.midnight-commander.org\n"
+msgstr "\nSend venligst fejlrapporter (inklusive uddata for »mc -V«)\nsom billetter (tickets) på www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -719,9 +692,7 @@ msgstr "Læsning fejlede"
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr ""
-"Baggrundsproces sendte os en forespørgsel om flere\n"
-"argumenter end vi kan håndtere."
+msgstr "Baggrundsproces sendte os en forespørgsel om flere\nargumenter end vi kan håndtere."
 
 msgid "&Dismiss"
 msgstr "&Forkast"
@@ -751,27 +722,20 @@ msgstr "Søgning er deaktiveret"
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
-msgstr ""
-"Kan ikke oprette midlertidig forskelsfil\n"
-"%s"
+msgstr "Kan ikke oprette midlertidig forskelsfil\n%s"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
-msgstr ""
-"Kan ikke oprette sikkerhedskopi\n"
-"%s%s\n"
-"%s"
+msgstr "Kan ikke oprette sikkerhedskopi\n%s%s\n%s"
 
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-"Kan ikke oprette midlertidig flettefil\n"
-"%s"
+msgstr "Kan ikke oprette midlertidig flettefil\n%s"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Hurtigst (Antag store filer)"
@@ -848,24 +812,20 @@ msgstr "Fil blev ændret. Gem under afslutning?"
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
-msgstr ""
-"Midnight Commander er ved at lukke ned.\n"
-"Gem ændret fil?"
+msgstr "Midnight Commander er ved at lukke ned.\nGem ændret fil?"
 
 msgid "Diff:"
 msgstr "Forskel:"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "%s er ikke en mappe\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot stat \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke stat »%s«\n"
-"%s"
+msgstr "Kan ikke stat »%s«\n%s"
 
 msgid "Diff viewer: invalid mode"
 msgstr ""
@@ -890,11 +850,7 @@ msgid ""
 "\n"
 "            A user friendly text editor\n"
 "         written for the Midnight Commander"
-msgstr ""
-"Ophavsret 1996-2010 the Free Software Foundation\n"
-"\n"
-"         Et brugervenligt tekstredigeringsprogram\n"
-"         skrevet til Midnight Commander"
+msgstr "Ophavsret 1996-2010 the Free Software Foundation\n\n         Et brugervenligt tekstredigeringsprogram\n         skrevet til Midnight Commander"
 
 #, c-format
 msgid "Cannot open %s for reading"
@@ -1011,9 +967,8 @@ msgstr "Rediger gemtilstand"
 msgid "Save as"
 msgstr "Gem som"
 
-#, fuzzy
 msgid "Cannot save: destination is not a regular file"
-msgstr "Kan ikke vise: Ikke en regulær fil"
+msgstr ""
 
 msgid "A file already exists with this name"
 msgstr "En fil findes allerede med dette navn"
@@ -1031,7 +986,7 @@ msgid "Press macro hotkey:"
 msgstr "Tast makrogenvej:"
 
 msgid "Macro not deleted"
-msgstr ""
+msgstr "Makro blev ikke slettet"
 
 msgid "Save macro"
 msgstr "Gem makro"
@@ -1039,12 +994,11 @@ msgstr "Gem makro"
 msgid "Press the macro's new hotkey:"
 msgstr "Tast makroens nye genvej:"
 
-#, fuzzy
 msgid "Repeat last commands"
-msgstr "Ekstern kommando"
+msgstr "Gentag sidste kommandoer"
 
 msgid "Repeat times:"
-msgstr ""
+msgstr "Gentag antal gange:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1059,9 +1013,7 @@ msgstr "&Gem"
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes"
-msgstr ""
-"Aktuel teskt blev ændret uden en filgemning.\n"
-"Fortsæt med at fjerne disse ændringer"
+msgstr "Aktuel teskt blev ændret uden en filgemning.\nFortsæt med at fjerne disse ændringer"
 
 msgid "Load"
 msgstr "Indlæs"
@@ -1170,9 +1122,7 @@ msgstr "Annuller"
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
-msgstr ""
-"Aktuel tekst blev ændret uden en filgemning.\n"
-"Fortsæt med at ændre disse ændringer"
+msgstr "Aktuel tekst blev ændret uden en filgemning.\nFortsæt med at ændre disse ændringer"
 
 msgid "&Skip"
 msgstr "&Spring over"
@@ -1216,9 +1166,8 @@ msgstr "A&fslut"
 msgid "&Undo"
 msgstr "&Fortryd"
 
-#, fuzzy
 msgid "&Redo"
-msgstr "&Fjern"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr "&Skift ins/overw"
@@ -1277,9 +1226,8 @@ msgstr "&Næste bogmærke"
 msgid "&Prev bookmark"
 msgstr "&Forr. bogmærke"
 
-#, fuzzy
 msgid "&Flush bookmarks"
-msgstr "&Fjern bogmærke"
+msgstr ""
 
 msgid "&Go to line..."
 msgstr "&Gå til linje..."
@@ -1308,15 +1256,14 @@ msgstr "Kodn&ing..."
 msgid "&Refresh screen"
 msgstr "&Opdater skærm"
 
-#, fuzzy
 msgid "&Start/Stop record macro"
-msgstr "&Start optagelsesmakro"
+msgstr "&Start/Stop optagelse af makro"
 
 msgid "Delete macr&o..."
 msgstr "Slet makr&o..."
 
 msgid "Record/Repeat &actions"
-msgstr ""
+msgstr "Optag/Gentag h&andlinger"
 
 msgid "'ispell' s&pell check"
 msgstr "&Stavekontrol med »ispell«"
@@ -1393,9 +1340,8 @@ msgstr "Skrivemaskineombrydning"
 msgid "Word wrap line length:"
 msgstr "Linjelængde for ordombrydning:"
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "Gruppenavn"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr "Markør bag linjeafslutning"
@@ -1467,9 +1413,7 @@ msgstr "Indlæs syntaksfil"
 msgid ""
 "Cannot open file %s\n"
 "%s"
-msgstr ""
-"Kan ikke åbne fil %s\n"
-"%s"
+msgstr "Kan ikke åbne fil %s\n%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1480,11 +1424,7 @@ msgid ""
 "the subshell claims you are in. Perhaps you have\n"
 "deleted your working directory, or given yourself\n"
 "extra access permissions with the \"su\" command?"
-msgstr ""
-"Commander kan ikke skifte til mappen, som underskallen\n"
-"hævder, du befinder dig i. Måske har du slettet din\n"
-"arbejdsmappe, eller givet dig selv ekstra\n"
-"adgangsrettigheder med kommandoen »su«?"
+msgstr "Commander kan ikke skifte til mappen, som underskallen\nhævder, du befinder dig i. Måske har du slettet din\narbejdsmappe, eller givet dig selv ekstra\nadgangsrettigheder med kommandoen »su«?"
 
 msgid "The shell is already running a command"
 msgstr "Skallen kører allerede en kommando"
@@ -1535,17 +1475,13 @@ msgstr "Avancerede kommando til chown"
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke chmod »%s«\n"
-"%s"
+msgstr "Kan ikke chmod »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke chown »%s«\n"
-"%s"
+msgstr "Kan ikke chown »%s«\n%s"
 
 msgid "&Stop"
 msgstr "&Stop"
@@ -1610,7 +1546,8 @@ msgstr "Sorteringsrækkefølge"
 msgid "Confirmation"
 msgstr "Bekræftelse"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Historikoprydning"
@@ -1682,8 +1619,7 @@ msgid "Symbolic link filename:"
 msgstr "Filnavn for symbolsk henvisning:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-"Eksisterende filnavn (filnavnet den symbolske henvisning skal pege på):"
+msgstr "Eksisterende filnavn (filnavnet den symbolske henvisning skal pege på):"
 
 msgid "Symbolic link"
 msgstr "Symbolsk henvisning"
@@ -1738,16 +1674,16 @@ msgid "set user ID on execution"
 msgstr "sæt bruger-id ved kørsel"
 
 msgid "Name:"
-msgstr ""
+msgstr "Navn:"
 
 msgid "Permissions (octal):"
-msgstr ""
+msgstr "Rettigheder (oktal)"
 
 msgid "Owner name:"
-msgstr ""
+msgstr "Ejer navn:"
 
 msgid "Group name:"
-msgstr ""
+msgstr "Gruppe navn:"
 
 msgid "C&lear marked"
 msgstr "F&jern markerede"
@@ -1894,16 +1830,12 @@ msgstr "&Grundig"
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
-msgstr ""
-"Begge paneler skal være i lyttetilstand\n"
-"for at bruge denne kommando"
+msgstr "Begge paneler skal være i lyttetilstand\nfor at bruge denne kommando"
 
 msgid ""
 "Not an xterm or Linux console;\n"
 "the panels cannot be toggled."
-msgstr ""
-"Ikke en xterm eller Linuxkonsol;\n"
-"panelerne kan ikke skiftes."
+msgstr "Ikke en xterm eller Linuxkonsol;\npanelerne kan ikke skiftes."
 
 #, c-format
 msgid "Symlink `%s' points to:"
@@ -1939,20 +1871,18 @@ msgstr "Gendan filer på et ext2-filsystem"
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
-msgstr ""
-"Indtast enhed (uden /dev/) for at gendanne\n"
-"filer på: (F1 for detaljer)"
+msgstr "Indtast enhed (uden /dev/) for at gendanne\nfiler på: (F1 for detaljer)"
 
 msgid "Setup"
 msgstr "Opsætning"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Setup saved to %s"
-msgstr "Opsætning gemt til ~/%s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to save setup to %s"
-msgstr "Kunne ikke gemme fil"
+msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Kan ikke køre kommandoer på filsystemer der ikke er lokale"
@@ -1961,9 +1891,7 @@ msgstr "Kan ikke køre kommandoer på filsystemer der ikke er lokale"
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke chdir til »%s«\n"
-"%s"
+msgstr "Kan ikke chdir til »%s«\n%s"
 
 msgid "Cannot read directory contents"
 msgstr "Kan ikke læse mappeindhold"
@@ -1972,9 +1900,7 @@ msgstr "Kan ikke læse mappeindhold"
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
-msgstr ""
-"Kan ikke oprette midlertidig kommandofil\n"
-"%s"
+msgstr "Kan ikke oprette midlertidig kommandofil\n%s"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -1988,22 +1914,17 @@ msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
-msgstr ""
-"Formatet på filen %smc.ext er ændret med version 3.0. Installationen ser ud "
-"til at have fejlet. Hent venligst en ny kopi fra Midnight Commandoer-pakken."
+msgstr "Formatet på filen %smc.ext er ændret med version 3.0. Installationen ser ud til at have fejlet. Hent venligst en ny kopi fra Midnight Commandoer-pakken."
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s file error"
-msgstr "~/%s-filfejl"
+msgstr "%s filfejl"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 3.0. You may either want "
 "to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
-"Formatet på filen ~/%s er blevet ændret med version 3.0. Du kan enten "
-"kopiere den fra %smc.ext eller bruge den fil som et eksempel på, hvordan den "
-"skrives."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopier"
@@ -2064,27 +1985,19 @@ msgstr "Kan ikke lave den hårde henvisning"
 msgid ""
 "Cannot read source link \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke læse kildehenvisning »%s«\n"
-"%s"
+msgstr "Kan ikke læse kildehenvisning »%s«\n%s"
 
 msgid ""
 "Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
-msgstr ""
-"Kan ikke lave stabile symbolske henvisninger over filsystemer, der ikke er "
-"lokale:\n"
-"\n"
-"Indstillingen stabile symbolske henvisninger vil blive deaktiveret"
+msgstr "Kan ikke lave stabile symbolske henvisninger over filsystemer, der ikke er lokale:\n\nIndstillingen stabile symbolske henvisninger vil blive deaktiveret"
 
 #, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke oprette symbolsk målhenvisning »%s«\n"
-"%s"
+msgstr "Kan ikke oprette symbolsk målhenvisning »%s«\n%s"
 
 msgid "&Abort"
 msgstr "&Afbryd"
@@ -2099,19 +2012,13 @@ msgid ""
 "\n"
 "Directory not empty.\n"
 "Delete it recursively?"
-msgstr ""
-"\n"
-"Mappe er ikke tom.\n"
-"Slet den rekursivt?"
+msgstr "\nMappe er ikke tom.\nSlet den rekursivt?"
 
 msgid ""
 "\n"
 "Background process: Directory not empty.\n"
 "Delete it recursively?"
-msgstr ""
-"\n"
-"Baggrundsproces: Mappe er ikke tom.\n"
-"Slet den rekursivt?"
+msgstr "\nBaggrundsproces: Mappe er ikke tom.\nSlet den rekursivt?"
 
 msgid "Delete:"
 msgstr "Slet:"
@@ -2123,9 +2030,7 @@ msgstr "Ing&en"
 msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke stat fil »%s«\n"
-"%s"
+msgstr "Kan ikke stat fil »%s«\n%s"
 
 #, c-format
 msgid ""
@@ -2133,11 +2038,7 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same file"
-msgstr ""
-"»%s«\n"
-"og\n"
-"»%s«\n"
-"er den samme fil"
+msgstr "»%s«\nog\n»%s«\ner den samme fil"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2147,81 +2048,61 @@ msgstr "Kan ikke overskrive mappe »%s«"
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke flytte fil »%s« til »%s«\n"
-"%s"
+msgstr "Kan ikke flytte fil »%s« til »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke flytte fil »%s«\n"
-"%s"
+msgstr "Kan ikke flytte fil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke slette fil »%s«\n"
-"%s"
+msgstr "Kan ikke slette fil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke fjerne mappe »%s«\n"
-"%s"
+msgstr "Kan ikke fjerne mappe »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke overskrive mappe »%s«\n"
-"%s"
+msgstr "Kan ikke overskrive mappe »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke stat kildefil »%s«\n"
-"%s"
+msgstr "Kan ikke stat kildefil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke oprette specielfil »%s«\n"
-"%s"
+msgstr "Kan ikke oprette specielfil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke chown målfil »%s«\n"
-"%s"
+msgstr "Kan ikke chown målfil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke chmod målfil »%s«\n"
-"%s"
+msgstr "Kan ikke chmod målfil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke åbne kildefil »%s«\n"
-"%s"
+msgstr "Kan ikke åbne kildefil »%s«\n%s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr "Reget fejlede, ved at overskrive fil"
@@ -2230,49 +2111,37 @@ msgstr "Reget fejlede, ved at overskrive fil"
 msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke fstat kildefil »%s«\n"
-"%s"
+msgstr "Kan ikke fstat kildefil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke oprette målfil »%s«\n"
-"%s"
+msgstr "Kan ikke oprette målfil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke fstat målfil »%s«\n"
-"%s"
+msgstr "Kan ikke fstat målfil »%s«\n%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot preallocate space for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke oprette målfil »%s«\n"
-"%s"
 
 #, c-format
 msgid ""
 "Cannot read source file\"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke læse kildefil »%s«\n"
-"%s"
+msgstr "Kan ikke læse kildefil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke skrive målfil »%s«\n"
-"%s"
+msgstr "Kan ikke skrive målfil »%s«\n%s"
 
 msgid "(stalled)"
 msgstr "(venter)"
@@ -2281,17 +2150,13 @@ msgstr "(venter)"
 msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke lukke kildefil »%s«\n"
-"%s"
+msgstr "Kan ikke lukke kildefil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke lukke målfil »%s«\n"
-"%s"
+msgstr "Kan ikke lukke målfil »%s«\n%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "En fil der ikke er komplet blev hentet ned. Behold den?"
@@ -2303,49 +2168,37 @@ msgstr "&Behold"
 msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke stat kildemappe »%s«\n"
-"%s"
+msgstr "Kan ikke stat kildemappe »%s«\n%s"
 
 #, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
 "%s"
-msgstr ""
-"Kilde »%s« er ikke en mappe\n"
-"%s"
+msgstr "Kilde »%s« er ikke en mappe\n%s"
 
 #, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
 "\"%s\""
-msgstr ""
-"Kan ikke kopiere cyklisk symbolsk henvisning\n"
-"»%s«"
+msgstr "Kan ikke kopiere cyklisk symbolsk henvisning\n»%s«"
 
 #, c-format
 msgid ""
 "Destination \"%s\" must be a directory\n"
 "%s"
-msgstr ""
-"Destination »%s« skal være en mappe\n"
-"%s"
+msgstr "Destination »%s« skal være en mappe\n%s"
 
 #, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke oprette målmappe »%s«\n"
-"%s"
+msgstr "Kan ikke oprette målmappe »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke chown målmappe »%s«\n"
-"%s"
+msgstr "Kan ikke chown målmappe »%s«\n%s"
 
 #, c-format
 msgid ""
@@ -2353,27 +2206,19 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same directory"
-msgstr ""
-"»%s«\n"
-"og\n"
-"»%s«\n"
-"er den samme mappe"
+msgstr "»%s«\nog\n»%s«\ner den samme mappe"
 
 #, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke overskrive fil »%s«\n"
-"%s"
+msgstr "Kan ikke overskrive fil »%s«\n%s"
 
 #, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke flytte mappe »%s« til »%s«\n"
-"%s"
+msgstr "Kan ikke flytte mappe »%s« til »%s«\n%s"
 
 msgid "Directory scanning"
 msgstr "Mappeskanning"
@@ -2439,37 +2284,37 @@ msgstr "Fil findes"
 msgid "Background process: File exists"
 msgstr "Baggrundproces: Fil findes"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu/%zu"
-msgstr "Filer behandlet: %zu af %zu"
+msgstr "Filer behandlet: %zu/%zu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu"
-msgstr "Filer behandlet: %zu af %zu"
+msgstr "Filer behandlet: %zu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Tid: %s  %s (%s)"
+msgstr "Tid: %s %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s (%s)"
-msgstr "Tid: %s  %s (%s)"
+msgstr "Tid: %s %s (%s)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Fil: %s"
+msgstr "Tid: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s (%s)"
-msgstr "Tid: %s  %s (%s)"
+msgstr "Tid: %s (%s)"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s "
-msgstr "I alt: %s af %s"
+msgstr " Total: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s/%s "
-msgstr "I alt: %s af %s"
+msgstr " Total: %s/%s "
 
 msgid "Source"
 msgstr "Kilde"
@@ -2557,9 +2402,8 @@ msgstr "Indhold:"
 msgid "File name:"
 msgstr "Filnavn:"
 
-#, fuzzy
 msgid "Ena&ble ignore directories:"
-msgstr "&Sammenlign mapper"
+msgstr ""
 
 msgid "Start at:"
 msgstr "Start ved:"
@@ -2574,8 +2418,8 @@ msgstr "Færdig"
 #, c-format
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Færdig (ignorerede %zd mappe)"
+msgstr[1] "Færdig (ignorerede %zd mapper)"
 
 #, c-format
 msgid "Searching %s"
@@ -2651,17 +2495,15 @@ msgstr "Ny hotlist-gruppe"
 msgid "Name of new group:"
 msgstr "Navn på ny gruppe:"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
-msgstr "Er du sikker på, at du ønsker at fjerne dette punkt?"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
-msgstr ""
-"Gruppe er ikke tom.\n"
-"Fjern den?"
+msgstr "Gruppen \"%s\" er ikke tom.\nSkal den fjernes?"
 
 msgid "Top level group"
 msgstr "Topniveaugruppe"
@@ -2669,13 +2511,11 @@ msgstr "Topniveaugruppe"
 msgid "Hotlist Load"
 msgstr "Hotlistindlæsning"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
-"MC kunne ikke skrive filen ~/%s,\n"
-"dine gamle hotlistpunkter blev ikke slettet"
 
 #, c-format
 msgid "Label for \"%s\":"
@@ -2704,9 +2544,9 @@ msgstr ""
 msgid "No space information"
 msgstr "Ingen pladsinformation"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Ledig plads: %s (%d%%) af %s"
+msgstr "Ledig plads: %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:      %s"
@@ -2838,9 +2678,8 @@ msgstr "S&kalhenvisning..."
 msgid "SM&B link..."
 msgstr "SM&B-henvisning..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "Pane&liser"
+msgstr ""
 
 msgid "&Rescan"
 msgstr "&Genskan"
@@ -2893,9 +2732,8 @@ msgstr "Vælg &gruppe"
 msgid "U&nselect group"
 msgstr "&Fravælg gruppe"
 
-#, fuzzy
 msgid "&Invert selection"
-msgstr "I &markering"
+msgstr "&Inverter markering"
 
 msgid "E&xit"
 msgstr "&Afslut"
@@ -2918,9 +2756,8 @@ msgstr "Slå &paneler til/fra"
 msgid "&Compare directories"
 msgstr "&Sammenlign mapper"
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "Sammenlign mapper"
+msgstr "Sammenlign filer"
 
 msgid "E&xternal panelize"
 msgstr "&Ekstern panelisering"
@@ -3069,9 +2906,8 @@ msgstr "&Et tryk"
 msgid "Esc key mode"
 msgstr "Tilstand for Esc-tast"
 
-#, fuzzy
 msgid "Preallocate &space"
-msgstr "Ignorer alle &blanktegn"
+msgstr ""
 
 msgid "Mkdi&r autoname"
 msgstr "&Mkdir autonavngiving"
@@ -3151,9 +2987,8 @@ msgstr "&Miks alle filer"
 msgid "Use SI si&ze units"
 msgstr "Brug SI &størrelsesenheder"
 
-#, fuzzy
 msgid "Show mi&ni-status"
-msgstr "Vis &ministatus"
+msgstr "Vis mi&ni-status"
 
 msgid "Panel options"
 msgstr "Panelindstillinger"
@@ -3163,11 +2998,7 @@ msgid ""
 "directory contents. In this case you'll need to do a\n"
 "manual reload of the directory. See the man page for\n"
 "the details."
-msgstr ""
-"Brug af indstilligen hurtig genindlæsning vil ikke\n"
-"nødvendigvis afspejle mappeindholdet. Hvis du ønsker\n"
-"dette så foretag en manuel genindlæsning af mappen.\n"
-"Se manualsiden for detaljer."
+msgstr "Brug af indstilligen hurtig genindlæsning vil ikke\nnødvendigvis afspejle mappeindholdet. Hvis du ønsker\ndette så foretag en manuel genindlæsning af mappen.\nSe manualsiden for detaljer."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3289,9 +3120,8 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s i %d fil"
 msgstr[1] "%s i %d filer"
 
-#, fuzzy
 msgid "Panelize"
-msgstr "Pane&liser"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr "Ukendt mærke på visningsformat:"
@@ -3342,9 +3172,7 @@ msgstr "Find SUID- og SGID-programmer"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Kan ikke åbne filen %s for skriving:\n"
-"%s\n"
+msgstr "Kan ikke åbne filen %s for skriving:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3358,9 +3186,7 @@ msgstr "Flyt mappen »%s« til:"
 msgid ""
 "Cannot stat the destination\n"
 "%s"
-msgstr ""
-"Kan ikke stat destinationen\n"
-"%s"
+msgstr "Kan ikke stat destinationen\n%s"
 
 #, c-format
 msgid "Delete %s?"
@@ -3385,9 +3211,7 @@ msgstr "Rmdir"
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Kan ikke skrive til filen %s:\n"
-"%s\n"
+msgstr "Kan ikke skrive til filen %s:\n%s\n"
 
 msgid "Debug"
 msgstr "Fejlsøg"
@@ -3411,9 +3235,7 @@ msgstr "Advarsel - ignorerer fil"
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Filen %s er hverken ejet af administrator, dig eller er global\n"
-"skrivbar. Brug af den kan muligvis kompromittere din sikkerhed"
+msgstr "Filen %s er hverken ejet af administrator, dig eller er global\nskrivbar. Brug af den kan muligvis kompromittere din sikkerhed"
 
 msgid "Format error on file Extensions File"
 msgstr "Formatfejl på fil for filendelser"
@@ -3430,9 +3252,7 @@ msgstr "Makroen %%var har ingen variabel"
 msgid ""
 "Cannot open file%s\n"
 "%s"
-msgstr ""
-"Kan ikke åbne fil %s\n"
-"%s"
+msgstr "Kan ikke åbne fil %s\n%s"
 
 #, c-format
 msgid "No suitable entries found in %s"
@@ -3476,15 +3296,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Tryk venligst på %s\n"
-"og vent så indtil denne meddelelse forsvinder.\n"
-"\n"
-"Tryk så på den igen for at se om O.k. kommer frem\n"
-"ved siden af dets knappe.\n"
-"\n"
-"Hvis du vil afbryde, tryk på knappen Escape\n"
-"og vent ligeledes."
+msgstr "Tryk venligst på %s\nog vent så indtil denne meddelelse forsvinder.\n\nTryk så på den igen for at se om O.k. kommer frem\nved siden af dets knappe.\n\nHvis du vil afbryde, tryk på knappen Escape\nog vent ligeledes."
 
 msgid "Cannot accept this key"
 msgstr "Kan ikke acceptere denne tast"
@@ -3500,9 +3312,7 @@ msgstr "O.k."
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Det ser ud til, at alle dine taster \n"
-"allerede virker fint. Det er godt."
+msgstr "Det ser ud til, at alle dine taster \nallerede virker fint. Det er godt."
 
 msgid "&Discard"
 msgstr "&Forkast"
@@ -3510,16 +3320,13 @@ msgstr "&Forkast"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Godt! Du har en komplet terminaldatabase!\n"
-"Alle tasterne virker fint."
+msgstr "Godt! Du har en komplet terminaldatabase!\nAlle tasterne virker fint."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Tryk alle de taster ned som vises her. Tjek siden når du er færdig"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"hvilke taster som ikke er markeret med O.k. Tryk mellemrum på den manglende"
+msgstr "hvilke taster som ikke er markeret med O.k. Tryk mellemrum på den manglende"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tast, eller klik med musen for at definere den. Flyt med Tab."
@@ -3528,7 +3335,7 @@ msgstr "tast, eller klik med musen for at definere den. Flyt med Tab."
 msgid ""
 "Failed to run:\n"
 "%s\n"
-msgstr ""
+msgstr "Kunne ikke køre:\n%s\n"
 
 msgid "Home directory path is not absolute"
 msgstr ""
@@ -3556,18 +3363,13 @@ msgstr "%e. %b %H:%M"
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr ""
-"Kan ikke gemme fil %s:\n"
-"%s"
+msgstr "Kan ikke gemme fil %s:\n%s"
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander kører allerede\n"
-"på denne terminal.\n"
-"Underskalunderstøttelse vil blive deaktiveret."
+msgstr "GNU Midnight Commander kører allerede\npå denne terminal.\nUnderskalunderstøttelse vil blive deaktiveret."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3628,48 +3430,38 @@ msgstr "Virtuelle filsystemer:"
 msgid "Data types:"
 msgstr "Datatyper:"
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "mappe"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "Hele &systemet"
+msgstr "Systemdata"
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "Kunne ikke skifte mappe"
+msgstr "Konfig-mappe:"
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "mappe"
+msgstr "Datamappe:"
 
 msgid "VFS plugins and scripts:"
 msgstr ""
 
-#, fuzzy
 msgid "User data"
-msgstr "Brugernavn"
+msgstr "Brugerdata"
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "Kunne ikke skifte mappe"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Kunne ikke åbne cpio-arkiv\n"
-"%s"
+msgstr "Kunne ikke åbne cpio-arkiv\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Præmatur slutning på cpio-arkiv\n"
-"%s"
+msgstr "Præmatur slutning på cpio-arkiv\n%s"
 
 #, c-format
 msgid ""
@@ -3677,11 +3469,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Inkonsistente hårde henvisninger\n"
-"for %s\n"
-"i cpio-arkiv\n"
-"%s"
+msgstr "Inkonsistente hårde henvisninger\nfor %s\ni cpio-arkiv\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3691,25 +3479,19 @@ msgstr "%s indeholder duplikerede indgange! Hopper over!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Korrupt cpio-teksthoved fundet i\n"
-"%s"
+msgstr "Korrupt cpio-teksthoved fundet i\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Uventet EOF\n"
-"%s"
+msgstr "Uventet EOF\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Kunne ikke åbne arkivet %s\n"
-"%s"
+msgstr "Kunne ikke åbne arkivet %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistent extfs-arkiv"
@@ -3827,9 +3609,9 @@ msgstr "ftpfs: Forbindelse afbrudt af bruger"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: Forbindelse til server mislykkedes: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Venter på at forsøge igen... %d (Ctrl-C annullerer)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ugyldig adressefamilie"
@@ -3879,29 +3661,23 @@ msgstr "ftpfs: Gemmer fil"
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
-msgstr ""
-"Filen ~/.netrc har ukorrekt tilstand\n"
-"Fjern adgangskode eller tilpas tilstand"
+msgstr "Filen ~/.netrc har ukorrekt tilstand\nFjern adgangskode eller tilpas tilstand"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "Advarsel: fil %s ikke fundet\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Advarsel: Ugyldig linje i %s.\n"
-"%s\n"
+msgstr "Advarsel: Ugyldig linje i %s.\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Advarsel: Ugyldigt flag %c i %s:\n"
-"%s\n"
+msgstr "Advarsel: Ugyldigt flag %c i %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3934,9 +3710,7 @@ msgstr "%s omdøber filer\n"
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Kunne ikke åbne tar-arkiv\n"
-"%s"
+msgstr "Kunne ikke åbne tar-arkiv\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistent tar-arkiv"
@@ -3948,9 +3722,7 @@ msgstr "Uventet EOF i arkivfilen"
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"ligner ikke et tar-arkiv."
+msgstr "%s\nligner ikke et tar-arkiv."
 
 msgid "undelfs: error"
 msgstr "undelfs: Fejl"
@@ -3995,9 +3767,7 @@ msgstr "undelfs: Læser inode-bitmap..."
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
-msgstr ""
-"Kan ikke indlæse inode-bitmap fra:\n"
-"%s"
+msgstr "Kan ikke indlæse inode-bitmap fra:\n%s"
 
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: Læser blok-bitmap..."
@@ -4006,9 +3776,7 @@ msgstr "undelfs: Læser blok-bitmap..."
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
-msgstr ""
-"Kan ikke indlæse blok-bitmap fra:\n"
-"%s"
+msgstr "Kan ikke indlæse blok-bitmap fra:\n%s"
 
 msgid "vfs_info is not fs!"
 msgstr "vfs_info er ikke fs!"
@@ -4085,18 +3853,13 @@ msgid ""
 "Error while closing the file:\n"
 "%s\n"
 "Data may have been written or not"
-msgstr ""
-"Fejl under luking af filen:\n"
-"%s\n"
-"Data er måske blevet skrevet"
+msgstr "Fejl under luking af filen:\n%s\nData er måske blevet skrevet"
 
 #, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
-msgstr ""
-"Kan ikke gemme fil:\n"
-"%s"
+msgstr "Kan ikke gemme fil:\n%s"
 
 msgid "View: "
 msgstr "Vis: "
@@ -4105,9 +3868,7 @@ msgstr "Vis: "
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
-msgstr ""
-"Kan ikke åbne »%s«\n"
-"%s"
+msgstr "Kan ikke åbne »%s«\n%s"
 
 msgid "Cannot view: not a regular file"
 msgstr "Kan ikke vise: Ikke en regulær fil"
@@ -4119,80 +3880,4 @@ msgid "Search done"
 msgstr "Søgning færdig"
 
 msgid "Continue from beginning?"
-msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fisk: Indstiller den aktive mappe..."
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fisk: Forbundet, hjem %s."
-
-#~ msgid "All charsets"
-#~ msgstr "Alle tegnsæt"
-
-#~ msgid "Case &sensitive"
-#~ msgstr "Store/&små bogstaver"
-
-#~ msgid "&Normal"
-#~ msgstr "&Normal"
-
-#~ msgid "Macro recursion is too deep"
-#~ msgstr "Makrorekursioner er for dybe"
-
-#~ msgid "Cannot open temp file"
-#~ msgstr "Kan ikke åbne midlertidig fil"
-
-#~ msgid "Cannot open macro file"
-#~ msgstr "Kan ikke åbne makrofil"
-
-#~ msgid "Cannot overwrite macro file"
-#~ msgstr "Kan ikke overskrive makrofil"
-
-#~ msgid "Load macro"
-#~ msgstr "Indlæs makro"
-
-#~ msgid "Error creating script:"
-#~ msgstr "Fejl ved oprettelse af skript:"
-
-#~ msgid "Error reading script:"
-#~ msgstr "Fejl ved læsning af skript:"
-
-#~ msgid "Error closing script:"
-#~ msgstr "Fejl ved lukning af skript:"
-
-#~ msgid "Script created:"
-#~ msgstr "Skript oprettet:"
-
-#~ msgid "Process block"
-#~ msgstr "Procesblok"
-
-#~ msgid "Execute macro"
-#~ msgstr "Kør makro"
-
-#~ msgid ""
-#~ "Current text was modified without a file save\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Aktuel tekst blev ændret uden en filgemning\n"
-#~ "Fortsæt med at fjerne disse ændringer."
-
-#~ msgid "Finis&h record macro..."
-#~ msgstr "&Afslut optagelsesmakro..."
-
-#~ msgid "&Execute macro..."
-#~ msgstr "&Kør makro..."
-
-#~ msgid "Remove:"
-#~ msgstr "Fjern:"
-
-#~ msgid "Free nodes: %ld (%ld%%) of %ld"
-#~ msgstr "Ledige knuder: %ld (%ld%%) af %ld"
-
-#~ msgid "Reverse selec&tion"
-#~ msgstr "Omvendt &markering"
-
-#~ msgid "&View diff files"
-#~ msgstr "&Vis forskelsfiler"
-
-#~ msgid "Main panel options"
-#~ msgstr "Indstillinger for hovedpanel"
+msgstr "Fortsæt fra begyndelsen?"

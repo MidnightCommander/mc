@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/projects/p/mc/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fi\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -68,9 +68,8 @@ msgstr ""
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "Ei voitu vaihtaa hakemistoa"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -103,9 +102,8 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "&Säännöllinen lauseke"
+msgstr ""
 
 msgid "No&rmal"
 msgstr ""
@@ -1339,9 +1337,8 @@ msgstr "Kirjoituskonekierto"
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "Ryhmän nimi"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1546,7 +1543,8 @@ msgstr "Järjestys"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2755,9 +2753,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "&Lyhyt tiedostolista"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3430,21 +3427,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "Ei voitu vaihtaa hakemistoa"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "&Järjestelmän laajuinen"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "Ei voitu vaihtaa hakemistoa"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "Ei voitu vaihtaa hakemistoa"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3452,9 +3445,8 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "Ei voitu vaihtaa hakemistoa"
+msgstr ""
 
 #, c-format
 msgid ""

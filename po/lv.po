@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: lv\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -69,9 +68,8 @@ msgstr ""
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "Nevar nomainīt direktoriju"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -104,9 +102,8 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "&Regulāra izteiksme"
+msgstr ""
 
 msgid "No&rmal"
 msgstr ""
@@ -426,9 +423,7 @@ msgstr "TERM mainīgais nav ieslēgts!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Ekrāna izmērs %dx%d nav atbalstīts.\n"
-"Pārbaudi TERM vides mainīgo.\n"
+msgstr "Ekrāna izmērs %dx%d nav atbalstīts.\nPārbaudi TERM vides mainīgo.\n"
 
 msgid "Warning"
 msgstr "Brīdinājums"
@@ -538,9 +533,8 @@ msgstr ""
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "Konfigurēt opcijas"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -566,9 +560,8 @@ msgstr "Rediģē vienu failu"
 msgid "Forces xterm features"
 msgstr "Aktivizē xterm iespējas"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Atslēdz zemčaulas atbalstu"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -821,9 +814,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "Kopēt direktoriju \"%s\" uz:"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1170,9 +1163,8 @@ msgstr "I&Ziet"
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
 msgid "&Redo"
-msgstr "&Izņemt"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr ""
@@ -1345,9 +1337,8 @@ msgstr "Mašīnrakstīšanas iekļaušana"
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "Grupas vārds"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1552,7 +1543,8 @@ msgstr "Kārtošanas secība"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1624,8 +1616,7 @@ msgid "Symbolic link filename:"
 msgstr "Simbolsaites faila nosaukums:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-"Eksistējošs faila nosaukums (faila nosaukums, uz kuru simbolsaite norādīs):"
+msgstr "Eksistējošs faila nosaukums (faila nosaukums, uz kuru simbolsaite norādīs):"
 
 msgid "Symbolic link"
 msgstr "Simbolsaite"
@@ -2298,17 +2289,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Fails: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Fails: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -2551,9 +2542,9 @@ msgstr ""
 msgid "No space information"
 msgstr "Nav vietas informācijas"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Brīvā vieta: %s (%d%%) no %s"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2686,9 +2677,8 @@ msgstr ""
 msgid "SM&B link..."
 msgstr "SM&B saite..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "Pa&nelēt"
+msgstr ""
 
 msgid "&Rescan"
 msgstr ""
@@ -2765,9 +2755,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "&Īss failu saraksts"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3133,9 +3122,8 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#, fuzzy
 msgid "Panelize"
-msgstr "Pa&nelēt"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3144,8 +3132,7 @@ msgid "Do you really want to execute?"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Lietotāja piedāvātais formāts izskatās nepareizs, atgriežamies pie noklusētā."
+msgstr "Lietotāja piedāvātais formāts izskatās nepareizs, atgriežamies pie noklusētā."
 
 msgid "&Add new"
 msgstr "&Pievienot jaunu"
@@ -3187,9 +3174,7 @@ msgstr "Atrast SUID un SGID programmas"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Nevarēja atvērt failu %s, lai ierakstītu:\n"
-"%s\n"
+msgstr "Nevarēja atvērt failu %s, lai ierakstītu:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3228,9 +3213,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
+msgstr "Nevar ierakstīt failā %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3254,9 +3237,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Faila %s īpašnieks nav root vai jūs, vai arī tai ir visiem-rakstīt atļauja.\n"
-"Tā lietošana var kompromitēt jūsu drošību"
+msgstr "Faila %s īpašnieks nav root vai jūs, vai arī tai ir visiem-rakstīt atļauja.\nTā lietošana var kompromitēt jūsu drošību"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3317,15 +3298,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Lūdzu nospied %s\n"
-"un tad gaidi līdz šis ziņojums pazūd.\n"
-"\n"
-"Tad nospied to vēlreiz, lai redzētu, vai parādās OK\n"
-"blakus šai pogai.\n"
-"\n"
-"Ja tu vēlies iziet, vienreiz nospied Escape taustiņu\n"
-"un uzgaidil."
+msgstr "Lūdzu nospied %s\nun tad gaidi līdz šis ziņojums pazūd.\n\nTad nospied to vēlreiz, lai redzētu, vai parādās OK\nblakus šai pogai.\n\nJa tu vēlies iziet, vienreiz nospied Escape taustiņu\nun uzgaidil."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3341,9 +3314,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Izskatās, ka visi tavi taustiņi\n"
-"jau strādā labi. Tas ir lieliski."
+msgstr "Izskatās, ka visi tavi taustiņi\njau strādā labi. Tas ir lieliski."
 
 msgid "&Discard"
 msgstr "&Atsaukt"
@@ -3351,21 +3322,16 @@ msgstr "&Atsaukt"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Lieliski! Jums ir pilnīga termināļa datubāze!\n"
-"Visi jūsu taustiņi strādā labi."
+msgstr "Lieliski! Jums ir pilnīga termināļa datubāze!\nVisi jūsu taustiņi strādā labi."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Nospied visus šeit minētos taustiņus. Kad tas ir izdarīts, pārbaudi"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"kuri taustiņi nav atzīmēti kā OK. Nospiediet atstarpes taustiņu pie "
-"trūkstošajiem"
+msgstr "kuri taustiņi nav atzīmēti kā OK. Nospiediet atstarpes taustiņu pie trūkstošajiem"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr ""
-"taustiņu, vai klikšķini ar peli, lai to definētu. Kosties apkārt ar Tab."
+msgstr "taustiņu, vai klikšķini ar peli, lai to definētu. Kosties apkārt ar Tab."
 
 #, c-format
 msgid ""
@@ -3466,21 +3432,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "direktoriju"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "&Sistēmas Mēroga"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "Nevar nomainīt direktoriju"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "direktoriju"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3488,25 +3450,20 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "Nevar nomainīt direktoriju"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Nevarēja atvērt cpio arhīvu\n"
-"%s"
+msgstr "Nevarēja atvērt cpio arhīvu\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Negaidītas cpio arhīva beigas\n"
-"%s"
+msgstr "Negaidītas cpio arhīva beigas\n%s"
 
 #, c-format
 msgid ""
@@ -3514,11 +3471,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Nekonsekventas cietsaites\n"
-"%s\n"
-"iekš cpio archīva\n"
-"%s"
+msgstr "Nekonsekventas cietsaites\n%s\niekš cpio archīva\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3528,25 +3481,19 @@ msgstr "%s satur dubultus ierakstus! Izlaižu!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Samaitājusies cpio galvene iekš\n"
-"%s"
+msgstr "Samaitājusies cpio galvene iekš\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Negaidītas faila beigas\n"
-"%s"
+msgstr "Negaidītas faila beigas\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Nevar atvērt %s arhīvu\n"
-"%s"
+msgstr "Nevar atvērt %s arhīvu\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Nepatstāvīgs extfs arhīvs"
@@ -3563,8 +3510,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: Gaidām sākotnējo līniju..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
+msgstr "Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3665,9 +3611,9 @@ msgstr "ftpfs: savienojumu pātrauca lietotājs"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: savienojums ar serveri neizdevās: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Gaidam atbildi... %d (Control-C lai atsauktu)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -3719,25 +3665,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "Brīdinājums: fails %s nav atrasts\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Brīdinājums: Nepareiza rindiņa iekš %s:\n"
-"%s\n"
+msgstr "Brīdinājums: Nepareiza rindiņa iekš %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Brīdinājums: Nepareizs karodziņš %c iekš %s:\n"
-"%s\n"
+msgstr "Brīdinājums: Nepareizs karodziņš %c iekš %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3770,9 +3712,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
+msgstr "Nevar atvērt tar arhīvu\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Neatbilstīgs tar arhīvs"
@@ -3943,24 +3883,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: Uzstādam pašreizējo direktoriju..."
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: Savienojies, mājas %s."
-
-#~ msgid "Error creating script:"
-#~ msgstr "Kļūda izveidojot skriptu:"
-
-#~ msgid "Error reading script:"
-#~ msgstr "Kļūda lasot skriptu:"
-
-#~ msgid "Error closing script:"
-#~ msgstr "Kļūda aizverot skriptu:"
-
-#~ msgid "Script created:"
-#~ msgstr "Skripts izveidots:"
-
-#~ msgid "Process block"
-#~ msgstr "Procesa bloks"

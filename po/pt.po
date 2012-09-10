@@ -1,28 +1,29 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Gilberto J <2101458@my.ipleiria.pt>, 2012.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2012-09-07 22:15+0000\n"
+"Last-Translator: Gilberto J <2101458@my.ipleiria.pt>\n"
+"Language-Team: Portuguese (http://www.transifex.com/projects/p/mc/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Warning: cannot load codepages list"
-msgstr ""
+msgstr "Aviso: não é possível carregar lista de páginas de código"
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-bit ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -53,13 +54,13 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
+msgstr "Ficheiro \"%s\" já está a ser editado.\nUtilizador: %s\nProcesso ID: %d"
 
 msgid "File locked"
-msgstr ""
+msgstr "Ficheiro bloqueado"
 
 msgid "&Grab lock"
-msgstr ""
+msgstr "&Grab lock"
 
 msgid "&Ignore lock"
 msgstr ""
@@ -68,9 +69,8 @@ msgstr ""
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "Incapaz de mudar de directório"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -91,21 +91,20 @@ msgid ""
 msgstr ""
 
 msgid "Search string not found"
-msgstr ""
+msgstr "String de procura não encontrada"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "Ainda não implementado"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
+msgstr "Num de tokens de substituição diferente de num de tokens encontrados"
 
 #, c-format
 msgid "Invalid token number %d"
-msgstr ""
+msgstr "Número de token %d inválido"
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "Expressão &regular"
+msgstr ""
 
 msgid "No&rmal"
 msgstr ""
@@ -123,13 +122,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
+msgstr "Não foi possível carregar skin '%s'.\nSkin por defeito carregada"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
+msgstr "Não foi possível fazer o parse da skin '%s'.\nSkin por defeito carregada"
 
 #, c-format
 msgid ""
@@ -250,7 +249,7 @@ msgid "* on keypad"
 msgstr "* no teclado numérico"
 
 msgid "Escape key"
-msgstr ""
+msgstr "Tecla escape"
 
 msgid "Left arrow keypad"
 msgstr "Seta esquerda no teclado numérico"
@@ -286,118 +285,118 @@ msgid "Enter on keypad"
 msgstr "Enter no teclado numérico"
 
 msgid "Function key 21"
-msgstr ""
+msgstr "Tecla função 21"
 
 msgid "Function key 22"
-msgstr ""
+msgstr "Tecla função 22"
 
 msgid "Function key 23"
-msgstr ""
+msgstr "Tecla função 23"
 
 msgid "Function key 24"
-msgstr ""
+msgstr "Tecla função 24"
 
 msgid "A1 key"
-msgstr ""
+msgstr "Tecla A1"
 
 msgid "C1 key"
-msgstr ""
+msgstr "Tecla A1"
 
 msgid "Plus"
-msgstr ""
+msgstr "Mais"
 
 msgid "Minus"
-msgstr ""
+msgstr "Menos"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Asterisco"
 
 msgid "Dot"
-msgstr ""
+msgstr "Ponto"
 
 msgid "Less than"
-msgstr ""
+msgstr "Menor que"
 
 msgid "Great than"
-msgstr ""
+msgstr "Maior que"
 
 msgid "Equal"
-msgstr ""
+msgstr "Igual"
 
 msgid "Comma"
-msgstr ""
+msgstr "Vírgula"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "Apóstrofo"
 
 msgid "Colon"
-msgstr ""
+msgstr "Dois pontos"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Ponto de exclamação"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Ponto de interrogação"
 
 msgid "Ampersand"
-msgstr ""
+msgstr "E comercial"
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "Símbolo de dólar"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "Aspas"
 
 msgid "Percent sign"
 msgstr ""
 
 msgid "Caret"
-msgstr ""
+msgstr "Acento circunflexo"
 
 msgid "Tilda"
-msgstr ""
+msgstr "Til"
 
 msgid "Prime"
 msgstr ""
 
 msgid "Underline"
-msgstr ""
+msgstr "Sublinhado"
 
 msgid "Understrike"
 msgstr ""
 
 msgid "Pipe"
-msgstr ""
+msgstr "Barra vertical"
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "Parêntese esquerdo"
 
 msgid "Right parenthesis"
-msgstr ""
+msgstr "Parêntese direito"
 
 msgid "Left bracket"
-msgstr ""
+msgstr "Parêntese reto esquerdo"
 
 msgid "Right bracket"
-msgstr ""
+msgstr "Parêntese reto direito"
 
 msgid "Left brace"
-msgstr ""
+msgstr "Chaveta esquerda"
 
 msgid "Right brace"
-msgstr ""
+msgstr "Chaveta direita"
 
 msgid "Enter"
-msgstr ""
+msgstr "Enter"
 
 msgid "Tab key"
-msgstr ""
+msgstr "Tecla tab"
 
 msgid "Space key"
-msgstr ""
+msgstr "Barra de espaços"
 
 msgid "Slash key"
-msgstr ""
+msgstr "Tecla barra"
 
 msgid "Backslash key"
 msgstr ""
@@ -425,9 +424,7 @@ msgstr "A variável de ambiente TERM foi limpa!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Tamanho de ecrã %dx%d não é suportado.\n"
-"Verifique a variável de ambiente TERM.\n"
+msgstr "Tamanho de ecrã %dx%d não é suportado.\nVerifique a variável de ambiente TERM.\n"
 
 msgid "Warning"
 msgstr "Aviso"
@@ -537,9 +534,8 @@ msgstr ""
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "Opções de configuração"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -565,9 +561,8 @@ msgstr "Edita um ficheiro"
 msgid "Forces xterm features"
 msgstr "Força funcionalidades xterm"
 
-#, fuzzy
 msgid "Disable X11 support"
-msgstr "Desactiva suporte subterminal"
+msgstr ""
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -820,9 +815,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "Copiar directório \"%s\" para:"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1169,9 +1164,8 @@ msgstr "S&air"
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
 msgid "&Redo"
-msgstr "&Remover"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr ""
@@ -1344,9 +1338,8 @@ msgstr "Quebra máq. escrever"
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "Nome grupo"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1551,7 +1544,8 @@ msgstr "Ordem de ordenação"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2296,17 +2290,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Ficheiro: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Ficheiro: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -2548,9 +2542,9 @@ msgstr ""
 msgid "No space information"
 msgstr "Nenhuma informação de espaço"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Espaço livre: %s (%d%%) de %s"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2682,9 +2676,8 @@ msgstr ""
 msgid "SM&B link..."
 msgstr "Ligação SM&B..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "Em &Paineis"
+msgstr ""
 
 msgid "&Rescan"
 msgstr ""
@@ -2761,9 +2754,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "Lista a&breviada de ficheiros"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3126,9 +3118,8 @@ msgid_plural "%s in %d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#, fuzzy
 msgid "Panelize"
-msgstr "Em &Paineis"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3137,8 +3128,7 @@ msgid "Do you really want to execute?"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Formato indicado pelo utilizador parece inválido, a reverter para defeito."
+msgstr "Formato indicado pelo utilizador parece inválido, a reverter para defeito."
 
 msgid "&Add new"
 msgstr "&Adicionar novo"
@@ -3180,9 +3170,7 @@ msgstr "Encontrar aplicações SUID e SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Incapaz de abrir o ficheiro %s para escrita:\n"
-"%s\n"
+msgstr "Incapaz de abrir o ficheiro %s para escrita:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3221,9 +3209,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Incapaz de escrever para o ficheiro %s:\n"
-"%s\n"
+msgstr "Incapaz de escrever para o ficheiro %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3247,9 +3233,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"O ficheiro %s não é possuido pelo root ou você ou é de escrita para todos.\n"
-"Utiliza-lo poderá comprometer a sua segurança"
+msgstr "O ficheiro %s não é possuido pelo root ou você ou é de escrita para todos.\nUtiliza-lo poderá comprometer a sua segurança"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3310,15 +3294,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Prima %s\n"
-"e depois aguarde que a mensagem desapareça.\n"
-"\n"
-"Depois, prima-a novamente para ver se aparece OK\n"
-"junto ao seu botão.\n"
-"\n"
-"Se quiser sair, prima a tecla Escape\n"
-"e aguarde também."
+msgstr "Prima %s\ne depois aguarde que a mensagem desapareça.\n\nDepois, prima-a novamente para ver se aparece OK\njunto ao seu botão.\n\nSe quiser sair, prima a tecla Escape\ne aguarde também."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3334,9 +3310,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Parece que todas as suas teclas já\n"
-"funcionam bem. Isso é óptimo."
+msgstr "Parece que todas as suas teclas já\nfuncionam bem. Isso é óptimo."
 
 msgid "&Discard"
 msgstr "&Descartar"
@@ -3344,9 +3318,7 @@ msgstr "&Descartar"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Óptimo! Você possui uma base de dados de terminal completa!\n"
-"Todas as suas teclas funcionam bem."
+msgstr "Óptimo! Você possui uma base de dados de terminal completa!\nTodas as suas teclas funcionam bem."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Prima todas as teclas aqui mencionadas. Após faze-lo, verifique"
@@ -3456,21 +3428,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "directório"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "Todo o &Sistema"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "Incapaz de mudar de directório"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "directório"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3478,25 +3446,20 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "Incapaz de mudar de directório"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Incapaz de abrir arquivo cpio\n"
-"%s"
+msgstr "Incapaz de abrir arquivo cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Fim prematuro de arquivo cpio\n"
-"%s"
+msgstr "Fim prematuro de arquivo cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3504,11 +3467,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Hardlinks de\n"
-"%s\n"
-"inconsistentes no arquivo cpio\n"
-"%s"
+msgstr "Hardlinks de\n%s\ninconsistentes no arquivo cpio\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3518,25 +3477,19 @@ msgstr "%s contém entradas duplicadas! A ignorar!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Encontrado cabeçalho de cpio corrompido em\n"
-"%s"
+msgstr "Encontrado cabeçalho de cpio corrompido em\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Fim de ficheiro inesperado\n"
-"%s"
+msgstr "Fim de ficheiro inesperado\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Incapaz de abrir arquivo %s\n"
-"%s"
+msgstr "Incapaz de abrir arquivo %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Arquivo extfs inconsistente"
@@ -3654,9 +3607,9 @@ msgstr "ftpfs: ligação interrompida pelo utilizador"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: ligação ao servidor falhou: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "A aguardar nova tentativa... %d (Ctrl-C para cancelar)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -3708,25 +3661,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "Aviso: ficheiro %s não encontrado\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Aviso: Linha inválida em %s:\n"
-"%s\n"
+msgstr "Aviso: Linha inválida em %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Aviso: Parâmetro inválido %c em %s:\n"
-"%s\n"
+msgstr "Aviso: Parâmetro inválido %c em %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3759,9 +3708,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Incapaz de abrir arquivo tar\n"
-"%s"
+msgstr "Incapaz de abrir arquivo tar\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Arquivo tar inconsistente"
@@ -3932,24 +3879,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: A definir directório actual..."
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: Ligado, home %s."
-
-#~ msgid "Error creating script:"
-#~ msgstr "Erro ao criar script:"
-
-#~ msgid "Error reading script:"
-#~ msgstr "Erro ao ler script:"
-
-#~ msgid "Error closing script:"
-#~ msgstr "Erro ao fechar script:"
-
-#~ msgid "Script created:"
-#~ msgstr "Script criado:"
-
-#~ msgid "Process block"
-#~ msgstr "Processar bloco"

@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Petja Touru <petja@petjatouru.arkku.net>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
-"Language-Team: Finnish (Finland) (http://www.transifex.net/projects/p/mc/"
-"team/fi_FI/)\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fi_FI\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Varoitus: Koodilistaa ei pysty lataamaan"
@@ -54,10 +53,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Tiedosto \"%s\" on juuri nyt käsittelyssä.\n"
-"Käyttäjä: %s\n"
-"Prosessin ID: %d"
+msgstr "Tiedosto \"%s\" on juuri nyt käsittelyssä.\nKäyttäjä: %s\nProsessin ID: %d"
 
 msgid "File locked"
 msgstr "Tiedosto lukittu"
@@ -72,9 +68,8 @@ msgstr "&Vapauta"
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "%s ei ole hakemisto\n"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -110,16 +105,14 @@ msgstr "Token %d ei ole validi"
 msgid "Regular expression error"
 msgstr ""
 
-#, fuzzy
 msgid "No&rmal"
-msgstr "Normaali"
+msgstr ""
 
 msgid "Re&gular expression"
 msgstr ""
 
-#, fuzzy
 msgid "He&xadecimal"
-msgstr "Heksadesimaali"
+msgstr ""
 
 msgid "Wil&dcard search"
 msgstr ""
@@ -128,26 +121,20 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Teemaa '%s' ei pysty lataamaan.\n"
-"Perusteema asetettu."
+msgstr "Teemaa '%s' ei pysty lataamaan.\nPerusteema asetettu."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Teemaa '%s' ei pysty käsittelemään.\n"
-"Perusteema asetettu."
+msgstr "Teemaa '%s' ei pysty käsittelemään.\nPerusteema asetettu."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"Teemaa '%s' ei pysty käsittelemään.\n"
-"Perusteema asetettu."
 
 msgid "Function key 1"
 msgstr "Funktio 1"
@@ -359,9 +346,8 @@ msgstr "Dollarin merkki"
 msgid "Quotation mark"
 msgstr "Lainausmerkki"
 
-#, fuzzy
 msgid "Percent sign"
-msgstr "@"
+msgstr ""
 
 msgid "Caret"
 msgstr ""
@@ -437,9 +423,7 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Näytön koko %dx%d ei ole yhteensopiva.\n"
-"Tarkista TERM.\n"
+msgstr "Näytön koko %dx%d ei ole yhteensopiva.\nTarkista TERM.\n"
 
 msgid "Warning"
 msgstr "Varoitus"
@@ -830,9 +814,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "%s ei ole hakemisto\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1559,7 +1543,8 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -3442,9 +3427,8 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "%s ei ole hakemisto\n"
+msgstr ""
 
 msgid "System data"
 msgstr ""
@@ -3452,9 +3436,8 @@ msgstr ""
 msgid "Config directory:"
 msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "%s ei ole hakemisto\n"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3522,8 +3505,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
+msgstr "Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3624,9 +3606,9 @@ msgstr "ftpfs: yhteys keskeytetty käyttäjän toimesta"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: yhteys palvelimeen epäonnistui: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Odotetaan uudelleenyritystä... %d (Ctrl+C peruuta)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Osoiteperhe ei ole validi"
@@ -3678,25 +3660,21 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "Varoitus: tiedostoa %s ei löytynyt\n"
+msgstr ""
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Varoitus: Invalidi rivi %s:\n"
-"%s\n"
+msgstr "Varoitus: Invalidi rivi %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Virhe: Virheellinen lippu %c kohteessa %s:\n"
-"%s\n"
+msgstr "Virhe: Virheellinen lippu %c kohteessa %s:\n%s\n"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3900,9 +3878,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Setting up current directory..."
-#~ msgstr "fish: Haetaan kansion sisältöä"
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: Yhteys luotu, koti %s."

@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2011-10-03 09:31+0000\n"
-"Last-Translator: slavazanko <slavazanko@gmail.com>\n"
+"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: wa\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -68,9 +68,8 @@ msgstr ""
 msgid "Cannot create %s directory"
 msgstr ""
 
-#, fuzzy
 msgid "FATAL: not a directory:"
-msgstr "Dji n' sai candjî di ridant"
+msgstr ""
 
 #, c-format
 msgid "An error occured while migrating user settings: %s"
@@ -103,9 +102,8 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#, fuzzy
 msgid "Regular expression error"
-msgstr "Erûle&ye Ratoûrneure"
+msgstr ""
 
 msgid "No&rmal"
 msgstr ""
@@ -535,9 +533,8 @@ msgstr ""
 msgid "Print extended info about used data directories"
 msgstr ""
 
-#, fuzzy
 msgid "Print configure options"
-msgstr "Apontyî les tchûzes"
+msgstr ""
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -817,9 +814,9 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory"
-msgstr "Copyî li ridant «%s» dins:"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1166,9 +1163,8 @@ msgstr "&Cwiter"
 msgid "&Undo"
 msgstr ""
 
-#, fuzzy
 msgid "&Redo"
-msgstr "&Waester"
+msgstr ""
 
 msgid "&Toggle ins/overw"
 msgstr ""
@@ -1341,9 +1337,8 @@ msgstr ""
 msgid "Word wrap line length:"
 msgstr ""
 
-#, fuzzy
 msgid "&Group undo"
-msgstr "No do groupe"
+msgstr ""
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -1548,7 +1543,8 @@ msgstr "Ôrde po relire"
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2293,17 +2289,17 @@ msgstr ""
 msgid "Files processed: %zu"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s %s"
-msgstr "Fitchî: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s"
-msgstr "Fitchî: %s"
+msgstr ""
 
 #, c-format
 msgid "Time: %s (%s)"
@@ -2545,9 +2541,9 @@ msgstr ""
 msgid "No space information"
 msgstr "Nole informåcion so li stindeye"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Espace Libe: %s (%d%%) so %s"
+msgstr ""
 
 #, c-format
 msgid "Type:      %s"
@@ -2679,9 +2675,8 @@ msgstr ""
 msgid "SM&B link..."
 msgstr "Loyén SM&B..."
 
-#, fuzzy
 msgid "Paneli&ze"
-msgstr "Mete e &Panea"
+msgstr ""
 
 msgid "&Rescan"
 msgstr ""
@@ -2758,9 +2753,8 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
-#, fuzzy
 msgid "C&ompare files"
-msgstr "&Coûte djîvêye des fitchîs"
+msgstr ""
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -3123,9 +3117,8 @@ msgid_plural "%s in %d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#, fuzzy
 msgid "Panelize"
-msgstr "Mete e &Panea"
+msgstr ""
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3176,9 +3169,7 @@ msgstr "Trover les programes SUID eyet SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Dji n' sai drovî li fitchî %s po scrire divins:\n"
-"%s\n"
+msgstr "Dji n' sai drovî li fitchî %s po scrire divins:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3217,9 +3208,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Dji n' sai scrire e fitchî %s :\n"
-"%s\n"
+msgstr "Dji n' sai scrire e fitchî %s :\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3243,10 +3232,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Li fitchî %s n' est ni da vosse ni da root. Tot l' monde pout bén scrire "
-"divins.\n"
-"Do côp, si vos vos e siervoz, ça pôreut esse dandjureu..."
+msgstr "Li fitchî %s n' est ni da vosse ni da root. Tot l' monde pout bén scrire divins.\nDo côp, si vos vos e siervoz, ça pôreut esse dandjureu..."
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3307,16 +3293,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Tchôkîz so %s\n"
-"et s'  rawårdez djusk' a tant ki li messaedje eva.\n"
-"\n"
-"Adon, tchôkîz co on côp sol minme tape po vey s' i gn a on 'I Va' k' "
-"aparexhe\n"
-"djusse asto do boton.\n"
-"\n"
-"Si vos voloz spiter foû, tchôkîz on côp so Escape\n"
-"et ratindoz eto."
+msgstr "Tchôkîz so %s\net s'  rawårdez djusk' a tant ki li messaedje eva.\n\nAdon, tchôkîz co on côp sol minme tape po vey s' i gn a on 'I Va' k' aparexhe\ndjusse asto do boton.\n\nSi vos voloz spiter foû, tchôkîz on côp so Escape\net ratindoz eto."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3332,9 +3309,7 @@ msgstr "I Va"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Dj' a l' idêye ki totes vos tapes rotèt ddja \n"
-"a môde di djin. Clapant, edon?"
+msgstr "Dj' a l' idêye ki totes vos tapes rotèt ddja \na môde di djin. Clapant, edon?"
 
 msgid "&Discard"
 msgstr "&Taper la hatch et match"
@@ -3342,18 +3317,13 @@ msgstr "&Taper la hatch et match"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Clapant! Li båze di dnêyes po vosse terminå est pår fwaite!\n"
-"Totes vos tapes rotèt a l' idêye."
+msgstr "Clapant! Li båze di dnêyes po vosse terminå est pår fwaite!\nTotes vos tapes rotèt a l' idêye."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-"Tchôkîz totes les tapes k' on vs dit vaici. On côp ki c' est fwait, waitîz"
+msgstr "Tchôkîz totes les tapes k' on vs dit vaici. On côp ki c' est fwait, waitîz"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"les kénès tapes ni sont nén mårkeyes avou 'I Va'. Tchôkîz sol bår d' espåce "
-"so les mankantès"
+msgstr "les kénès tapes ni sont nén mårkeyes avou 'I Va'. Tchôkîz sol bår d' espåce so les mankantès"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tape, ou bén clitchîz avou vosse soris pol defini. Bodjî avou Tab."
@@ -3457,21 +3427,17 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-#, fuzzy
 msgid "Root directory:"
-msgstr "ridant"
+msgstr ""
 
-#, fuzzy
 msgid "System data"
-msgstr "&Tot avå li Sistinme"
+msgstr ""
 
-#, fuzzy
 msgid "Config directory:"
-msgstr "Dji n' sai candjî di ridant"
+msgstr ""
 
-#, fuzzy
 msgid "Data directory:"
-msgstr "ridant"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -3479,17 +3445,14 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#, fuzzy
 msgid "Cache directory:"
-msgstr "Dji n' sai candjî di ridant"
+msgstr ""
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Dji n' sai drovî li fitchî cpio\n"
-"%s"
+msgstr "Dji n' sai drovî li fitchî cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3643,9 +3606,9 @@ msgstr "ftpfs: disraloyî pa l' ûzeu"
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: dj' a fwait berwete come dji m' raloyîve å sierveu: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr "Dji rawåde divant do rataker... %d (Control-C po rnoncî)"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -3697,9 +3660,9 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "Advietixhmint: li fitchî «%s» n' a nén stî trové\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3915,6 +3878,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "fish: Connected, home %s."
-#~ msgstr "fish: Raloyi, måjhon %s."
