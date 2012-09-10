@@ -134,9 +134,11 @@ status_string (WEdit * edit, char *s, int w)
             {
                 cur_byte = edit_get_byte (edit, edit->curs1);
                 g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
-                            (int) cur_byte, (unsigned) cur_utf);
+                            (int) cur_byte, (unsigned) cur_byte);
             }
+#ifdef HAVE_CHARSET
         }
+#endif
     }
     else
     {
