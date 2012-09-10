@@ -2495,7 +2495,7 @@ edit_push_undo_action (WEdit * edit, long c)
             d = edit->undo_stack[(sp - 2) & edit->undo_stack_size_mask];
             if (d == c && edit->undo_stack[spm1] > -1000000000)
             {
-                if (c < KEY_PRESS)  /* --> no need to push multiple do-nothings */
+                if (c < KEY_PRESS)      /* --> no need to push multiple do-nothings */
                     edit->undo_stack[spm1]--;
                 return;
             }
@@ -2572,7 +2572,7 @@ edit_push_redo_action (WEdit * edit, long c)
             d = edit->redo_stack[(sp - 2) & edit->redo_stack_size_mask];
             if (d == c && edit->redo_stack[spm1] > -1000000000)
             {
-                if (c < KEY_PRESS)  /* --> no need to push multiple do-nothings */
+                if (c < KEY_PRESS)      /* --> no need to push multiple do-nothings */
                     edit->redo_stack[spm1]--;
                 return;
             }
@@ -3238,8 +3238,7 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
                 edit->curs_col -= (edit->curs_col % (HALF_TAB_SIZE * space_width));
                 p = edit_bol (edit, edit->curs1);
                 edit_cursor_move (edit,
-                                  edit_move_forward3 (edit, p, edit->curs_col,
-                                                      0) - edit->curs1);
+                                  edit_move_forward3 (edit, p, edit->curs_col, 0) - edit->curs1);
                 if (!left_of_four_spaces (edit))
                     edit_cursor_move (edit, edit_move_forward3 (edit, p, q, 0) - edit->curs1);
             }

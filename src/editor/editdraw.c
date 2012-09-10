@@ -164,8 +164,7 @@ status_string (WEdit * edit, char *s, int w)
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
-                    ""
-            );
+                    "");
     else
         g_snprintf (s, w,
                     "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) %s  %s",
@@ -181,8 +180,7 @@ status_string (WEdit * edit, char *s, int w)
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
-                    ""
-            );
+                    "");
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -629,7 +627,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                 switch (c)
                 {
                 case '\n':
-                    col = end_col - edit->start_col + 1;    /* quit */
+                    col = end_col - edit->start_col + 1;        /* quit */
                     break;
                 case '\t':
                     i = TAB_SIZE - ((int) col % TAB_SIZE);
