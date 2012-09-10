@@ -1046,10 +1046,8 @@ edit_do_search (WEdit * edit)
         search_create_bookmark = FALSE;
         book_mark_flush (edit, -1);
 
-        while (TRUE)
+        while (mc_search_run (edit->search, (void *) edit, q, edit->last_byte, &len))
         {
-            if (!mc_search_run (edit->search, (void *) edit, q, edit->last_byte, &len))
-                break;
             if (found == 0)
                 edit->search_start = edit->search->normal_offset;
             found++;
@@ -1390,7 +1388,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
             g_string_free (recoded, TRUE);
         }
 #endif
-        compl[*num].text = g_strdup (temp->str);
+        compl[*num].text = g_strndup (temp->str, temp->len);
         compl[*num].len = temp->len;
         (*num)++;
         start += len;
@@ -2831,7 +2829,7 @@ edit_ok_to_exit (WEdit * edit)
 gboolean
 edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
 {
-    int len, file;
+    int len = 1, file;
     vfs_path_t *vpath;
 
     vpath = vfs_path_from_str (filename);

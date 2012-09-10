@@ -129,7 +129,6 @@ typedef struct WDiff
         ssize_t last_found_line;
         ssize_t last_accessed_num_line;
     } search;
-
 } WDiff;
 
 /*** global variables defined in .c file *********************************************************/
@@ -139,8 +138,5 @@ typedef struct WDiff
 /* search.c */
 void dview_search_cmd (WDiff * dview);
 void dview_continue_search_cmd (WDiff * dview);
-
-/* ydiff.c */
-void dview_update (WDiff * dview);
 
 #endif /* MC__DIFFVIEW_INTERNAL_H */

@@ -48,7 +48,7 @@ AC_DEFUN([MC_CHECK_NCURSES_BY_PATH], [
 
     if test x"$found_ncurses" = x"yes"; then
         screen_type=ncurses
-        screen_msg="ncurses library (installed on the system)"
+        screen_msg="Ncurses library"
 
         AC_DEFINE(HAVE_NCURSES, 1,
                   [Define to use ncurses library for screen management])
@@ -100,7 +100,7 @@ AC_DEFUN([MC_WITH_NCURSES], [
                        [AC_MSG_ERROR([Cannot find ncurses library])])
 
         screen_type=ncurses
-        screen_msg="ncurses library"
+        screen_msg="Ncurses library"
         AC_DEFINE(USE_NCURSES, 1, 
                   [Define to use ncurses for screen management])
     else
@@ -124,7 +124,7 @@ AC_DEFUN([MC_WITH_NCURSES], [
         fi
 
         screen_type=ncurses
-        screen_msg="ncurses library"
+        screen_msg="Ncurses library"
         AC_DEFINE(USE_NCURSES, 1, 
                   [Define to use ncurses for screen management])
     fi
@@ -174,7 +174,7 @@ AC_DEFUN([MC_WITH_NCURSESW], [
     fi
 
     screen_type=ncursesw
-    screen_msg="ncursesw library"
+    screen_msg="Ncursesw library"
     AC_DEFINE(USE_NCURSESW, 1,
 	      [Define to use ncursesw for screen management])
 

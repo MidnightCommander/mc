@@ -272,9 +272,10 @@ book_mark_flush (WEdit * edit, int c)
 void
 book_mark_inc (WEdit * edit, long line)
 {
-    if (edit->book_mark)
+    if (edit->book_mark != NULL)
     {
         struct _book_mark *p;
+
         p = book_mark_find (edit, line);
         for (p = p->next; p != NULL; p = p->next)
             p->line++;
@@ -290,6 +291,7 @@ book_mark_dec (WEdit * edit, long line)
     if (edit->book_mark != NULL)
     {
         struct _book_mark *p;
+
         p = book_mark_find (edit, line);
         for (p = p->next; p != NULL; p = p->next)
             p->line--;

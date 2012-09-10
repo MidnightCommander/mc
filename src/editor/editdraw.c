@@ -99,9 +99,6 @@ static inline void
 status_string (WEdit * edit, char *s, int w)
 {
     char byte_str[16];
-    unsigned char cur_byte = 0;
-    unsigned int cur_utf = 0;
-    int cw = 1;
 
     /*
      * If we are at the end of file, print <EOF>,
@@ -110,6 +107,11 @@ status_string (WEdit * edit, char *s, int w)
      */
     if (edit->curs1 < edit->last_byte)
     {
+        unsigned char cur_byte = 0;
+
+#ifdef HAVE_CHARSET
+        int cw = 1;
+
         if (!edit->utf8)
         {
             cur_byte = edit_get_byte (edit, edit->curs1);
@@ -119,6 +121,8 @@ status_string (WEdit * edit, char *s, int w)
         }
         else
         {
+            unsigned int cur_utf = 0;
+
             cur_utf = edit_get_utf (edit, edit->curs1, &cw);
             if (cw > 0)
             {
@@ -126,12 +130,12 @@ status_string (WEdit * edit, char *s, int w)
                             (unsigned) cur_utf, (unsigned) cur_utf);
             }
             else
+#endif
             {
-                cur_utf = edit_get_byte (edit, edit->curs1);
+                cur_byte = edit_get_byte (edit, edit->curs1);
                 g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
-                            (int) cur_utf, (unsigned) cur_utf);
+                            (int) cur_byte, (unsigned) cur_utf);
             }
-
         }
     }
     else
@@ -152,10 +156,9 @@ status_string (WEdit * edit, char *s, int w)
                     edit->total_lines + 1, (long) edit->curs1, (long) edit->last_byte, byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >=
-                    0 ? get_codepage_id (mc_global.source_codepage) : ""
-#else
-                    ""
+                    0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
+                    ""
             );
     else
         g_snprintf (s, w,
@@ -171,10 +174,9 @@ status_string (WEdit * edit, char *s, int w)
                     edit->total_lines + 1, (long) edit->curs1, (long) edit->last_byte, byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >=
-                    0 ? get_codepage_id (mc_global.source_codepage) : ""
-#else
-                    ""
+                    0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
+                    ""
             );
 }
 
@@ -313,7 +315,6 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     int color;
     int abn_style;
     int i;
-    int utf8lag = 0;
     unsigned int cur_line = 0;
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
@@ -400,14 +401,12 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                 if (q >= edit->found_start && q < (off_t) (edit->found_start + edit->found_len))
                     p->style |= MOD_BOLD;
 
-                if (!edit->utf8)
-                {
-                    c = edit_get_byte (edit, q);
-                }
-                else
-                {
+#ifdef HAVE_CHARSET
+                if (edit->utf8)
                     c = edit_get_utf (edit, q, &cw);
-                }
+                else
+#endif
+                    c = edit_get_byte (edit, q);
                 /* we don't use bg for mc - fg contains both */
                 if (book_mark)
                 {
@@ -421,7 +420,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                 switch (c)
                 {
                 case '\n':
-                    col = (end_col + utf8lag) - edit->start_col + 1;    /* quit */
+                    col = end_col - edit->start_col + 1;    /* quit */
                     break;
                 case '\t':
                     i = TAB_SIZE - ((int) col % TAB_SIZE);
@@ -553,24 +552,23 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                         control_char = TRUE;
                         break;
                     }
-                    if (!edit->utf8)
+#ifdef HAVE_CHARSET
+                    if (edit->utf8)
                     {
-                        if ((mc_global.utf8_display && g_unichar_isprint (c)) ||
-                            (!mc_global.utf8_display && is_printable (c)))
-                        {
+                        if (g_unichar_isprint (c))
                             p->ch = c;
-                            p++;
-                        }
                         else
                         {
                             p->ch = '.';
                             p->style = abn_style;
-                            p++;
                         }
+                        p++;
                     }
                     else
+#endif
                     {
-                        if (g_unichar_isprint (c))
+                        if ((mc_global.utf8_display && g_unichar_isprint (c)) ||
+                            (!mc_global.utf8_display && is_printable (c)))
                         {
                             p->ch = c;
                             p++;
