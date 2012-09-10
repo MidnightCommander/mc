@@ -1,27 +1,28 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# George Machitidze <giomac@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-09-03 10:08+0400\n"
-"PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"Last-Translator: George Machitidze <giomac@gmail.com>\n"
+"Language-Team: Georgian (http://www.transifex.com/projects/p/mc/language/ka/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ka\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-ბიტიანი ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -55,13 +56,13 @@ msgid ""
 msgstr ""
 
 msgid "File locked"
-msgstr ""
+msgstr "ფაილი დაბლოკილია"
 
 msgid "&Grab lock"
-msgstr ""
+msgstr "ბლოკირების მი&თვისება"
 
 msgid "&Ignore lock"
-msgstr ""
+msgstr "ბლოკირების &იგნორირება"
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -89,10 +90,10 @@ msgid ""
 msgstr ""
 
 msgid "Search string not found"
-msgstr ""
+msgstr "საძებნი სტრიქონი ვერ მოიძებნა"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "ჯერ არაა იმპლემენტირებული"
 
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
@@ -102,16 +103,16 @@ msgid "Invalid token number %d"
 msgstr ""
 
 msgid "Regular expression error"
-msgstr ""
+msgstr "შეცდომა რეგულარულ გამოსახულებაში"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "ნორ&მალური"
 
 msgid "Re&gular expression"
 msgstr ""
 
 msgid "He&xadecimal"
-msgstr ""
+msgstr "ტე&ქვსმეტობითი"
 
 msgid "Wil&dcard search"
 msgstr ""
@@ -202,16 +203,16 @@ msgid "End key"
 msgstr ""
 
 msgid "Up arrow key"
-msgstr ""
+msgstr "ისარი ზევით"
 
 msgid "Down arrow key"
-msgstr ""
+msgstr "ისარი ქვევით"
 
 msgid "Left arrow key"
-msgstr ""
+msgstr "ისარი მარცხნივ"
 
 msgid "Right arrow key"
-msgstr ""
+msgstr "ისარი მარჯვნივ"
 
 msgid "Home key"
 msgstr ""
@@ -223,10 +224,10 @@ msgid "Page Up key"
 msgstr ""
 
 msgid "Insert key"
-msgstr ""
+msgstr "ჩასმის ღილაკი"
 
 msgid "Delete key"
-msgstr ""
+msgstr "წაშლის ღილაკი"
 
 msgid "Completion/M-tab"
 msgstr ""
@@ -247,7 +248,7 @@ msgid "* on keypad"
 msgstr ""
 
 msgid "Escape key"
-msgstr ""
+msgstr "გამოსვლის ღილაკი"
 
 msgid "Left arrow keypad"
 msgstr ""
@@ -295,10 +296,10 @@ msgid "Function key 24"
 msgstr ""
 
 msgid "A1 key"
-msgstr ""
+msgstr "A1 ღილაკი"
 
 msgid "C1 key"
-msgstr ""
+msgstr "C1 ღილაკი"
 
 msgid "Plus"
 msgstr ""
@@ -307,46 +308,46 @@ msgid "Minus"
 msgstr ""
 
 msgid "Asterisk"
-msgstr ""
+msgstr "ვარსკვლავი"
 
 msgid "Dot"
-msgstr ""
+msgstr "წერტილი"
 
 msgid "Less than"
-msgstr ""
+msgstr "ნაკლებობა"
 
 msgid "Great than"
-msgstr ""
+msgstr "მეტობა"
 
 msgid "Equal"
-msgstr ""
+msgstr "ტოლობა"
 
 msgid "Comma"
-msgstr ""
+msgstr "მძიმე"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "აპოსტროფი"
 
 msgid "Colon"
 msgstr ""
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "ძახილის ნიშანი"
 
 msgid "Question mark"
-msgstr ""
+msgstr "კითხვის ნიშანი"
 
 msgid "Ampersand"
 msgstr ""
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "დოლარის ნიშანი"
 
 msgid "Quotation mark"
 msgstr ""
 
 msgid "Percent sign"
-msgstr ""
+msgstr "პროცენტის ნიშანი"
 
 msgid "Caret"
 msgstr ""
@@ -407,13 +408,13 @@ msgid "At sign"
 msgstr ""
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
@@ -441,20 +442,20 @@ msgid "Directory cache expired for %s"
 msgstr ""
 
 msgid "bytes transferred"
-msgstr ""
+msgstr "ბაიტი გადაიგზავნა"
 
 msgid "Starting linear transfer..."
-msgstr ""
+msgstr "წრფივი გადაგზავნის დაწყება..."
 
 msgid "Getting file"
-msgstr ""
+msgstr "ფაილის მიღება"
 
 msgid "Changes to file lost"
 msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
-msgstr ""
+msgstr "%s არ არის დირექტორია\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
@@ -478,7 +479,7 @@ msgstr ""
 
 #, c-format
 msgid "Press any key to continue..."
-msgstr ""
+msgstr "გასაგრძელებლად დააჭირეთ ნებისმიერ ღილაკს..."
 
 msgid "Cannot parse:"
 msgstr ""
@@ -533,7 +534,7 @@ msgid "Print extended info about used data directories"
 msgstr ""
 
 msgid "Print configure options"
-msgstr ""
+msgstr "კონფიგურაციის პარამეტრების ამობეჭდვა"
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -554,13 +555,13 @@ msgid "Launches the file viewer on a file"
 msgstr ""
 
 msgid "Edit files"
-msgstr ""
+msgstr "ფაილების რედაქტირება"
 
 msgid "Forces xterm features"
 msgstr ""
 
 msgid "Disable X11 support"
-msgstr ""
+msgstr "X11-ის მხარდაჭერის გათიშვა"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -654,13 +655,13 @@ msgstr ""
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr ""
+msgstr "GNU-ის Midnight Commander %s\n"
 
 msgid "Main options"
-msgstr ""
+msgstr "ძირითადი პარამეტრები"
 
 msgid "Terminal options"
-msgstr ""
+msgstr "ტერმინალის პარამეტრები"
 
 msgid "Arguments parse error!"
 msgstr ""
@@ -672,7 +673,7 @@ msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Background process error"
-msgstr ""
+msgstr "ფონური პროცესის შეცდომა"
 
 msgid "Unknown error in child"
 msgstr ""
@@ -681,10 +682,10 @@ msgid "Child died unexpectedly"
 msgstr ""
 
 msgid "Background protocol error"
-msgstr ""
+msgstr "ფონური ოქმის შეცდომა"
 
 msgid "Reading failed"
-msgstr ""
+msgstr "წაკითხვა ვერ მოხერხდა"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -701,7 +702,7 @@ msgid "&Whole words"
 msgstr ""
 
 msgid "&Backwards"
-msgstr ""
+msgstr "&უკან"
 
 msgid "Cas&e sensitive"
 msgstr ""
@@ -710,10 +711,10 @@ msgid "Enter search string:"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "ძებნა"
 
 msgid "Search is disabled"
-msgstr ""
+msgstr "ძებნა გათიშულია"
 
 #, c-format
 msgid ""
@@ -765,10 +766,10 @@ msgid "Diff Options"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "რედაქტირება"
 
 msgid "Edit is disabled"
-msgstr ""
+msgstr "რედაქტირება გათიშულია"
 
 msgid "Goto line (left)"
 msgstr ""
@@ -777,31 +778,31 @@ msgid "Goto line (right)"
 msgstr ""
 
 msgid "Enter line:"
-msgstr ""
+msgstr "შეიყვანეთ სტრიქონი:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "დახმ"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "შენახვა"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "რედაქტ"
 
 msgid "ButtonBar|Merge"
-msgstr ""
+msgstr "შერწყმა"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "ძებნა"
 
 msgid "ButtonBar|Options"
-msgstr ""
+msgstr "პარამ"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "გასვლა"
 
 msgid "Quit"
-msgstr ""
+msgstr "გამოსვლა"
 
 msgid "File(s) was modified. Save with exit?"
 msgstr ""
@@ -816,7 +817,7 @@ msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" დირექტორიაა"
 
 #, c-format
 msgid ""
@@ -895,22 +896,22 @@ msgid "&Do not change"
 msgstr ""
 
 msgid "&Unix format (LF)"
-msgstr ""
+msgstr "&Unix-ის ფორმატი(LF)"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr ""
+msgstr "&Windows/DOS-ის ფორმატი(CR LF)"
 
 msgid "&Macintosh format (CR)"
-msgstr ""
+msgstr "&Macintosh-ის ფორმატი (CR)"
 
 msgid "Change line breaks to:"
 msgstr ""
 
 msgid "Enter file name:"
-msgstr ""
+msgstr "შეიყვანეთ ფაილის სახელი:"
 
 msgid "Save As"
-msgstr ""
+msgstr "შეინახე როგორც"
 
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
@@ -946,13 +947,13 @@ msgid "Cannot save file"
 msgstr ""
 
 msgid "Delete macro"
-msgstr ""
+msgstr "მაკროსის წაშლა"
 
 msgid "Press macro hotkey:"
 msgstr ""
 
 msgid "Macro not deleted"
-msgstr ""
+msgstr "მაკროსი არ წაშლილა"
 
 msgid "Save macro"
 msgstr ""
@@ -964,7 +965,7 @@ msgid "Repeat last commands"
 msgstr ""
 
 msgid "Repeat times:"
-msgstr ""
+msgstr "გამეორების დრო:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -980,19 +981,19 @@ msgid "Load"
 msgstr ""
 
 msgid "Syntax file edit"
-msgstr ""
+msgstr "სინტაქსური ფაილის რედაქტირება"
 
 msgid "Which syntax file you want to edit?"
 msgstr ""
 
 msgid "&User"
-msgstr ""
+msgstr "მომ&ხმარებელი"
 
 msgid "&System wide"
 msgstr ""
 
 msgid "Menu edit"
-msgstr ""
+msgstr "მენიუს რედაქტირება"
 
 msgid "Which menu file do you want to edit?"
 msgstr ""
@@ -1017,7 +1018,7 @@ msgid ""
 msgstr ""
 
 msgid "Close file"
-msgstr ""
+msgstr "ფაილის დაკეტვა"
 
 #, c-format
 msgid ""
@@ -1047,7 +1048,7 @@ msgid "Insert file"
 msgstr ""
 
 msgid "Cannot insert file"
-msgstr ""
+msgstr "ფაილის ჩასმა ვერ მოხერხდა"
 
 msgid "Sort block"
 msgstr ""
@@ -1062,7 +1063,7 @@ msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "დალაგება"
 
 msgid "Cannot execute sort command"
 msgstr ""
@@ -1078,31 +1079,31 @@ msgid "Enter shell command(s):"
 msgstr ""
 
 msgid "External command"
-msgstr ""
+msgstr "გარე ბრძანება"
 
 msgid "Cannot execute command"
-msgstr ""
+msgstr "ბრძანების შესრულება ვერ მოხერხდა"
 
 msgid "Copies to"
-msgstr ""
+msgstr "ასლები"
 
 msgid "Subject"
-msgstr ""
+msgstr "სათაური"
 
 msgid "To"
-msgstr ""
+msgstr "ვის"
 
 msgid "mail -s <subject> -c <cc> <to>"
-msgstr ""
+msgstr "mail -s <სათაური> -c <ასლები> <ვის>"
 
 msgid "Mail"
-msgstr ""
+msgstr "წერილი"
 
 msgid "Insert literal"
 msgstr ""
 
 msgid "Press any key:"
-msgstr ""
+msgstr "დააჭირეთ ნებისმიერ ღილაკს:"
 
 msgid ""
 "Current text was modified without a file save.\n"
@@ -1116,10 +1117,10 @@ msgid "Enter replacement string:"
 msgstr ""
 
 msgid "&Find all"
-msgstr ""
+msgstr "&ყველას პოვნა"
 
 msgid "Cancel"
-msgstr ""
+msgstr "შეწყვეტა"
 
 msgid ""
 "Current text was modified without a file save.\n"
@@ -1127,10 +1128,10 @@ msgid ""
 msgstr ""
 
 msgid "&Skip"
-msgstr ""
+msgstr "გამო&ტოვება"
 
 msgid "A&ll"
-msgstr ""
+msgstr "ყვე&ლა"
 
 msgid "&Replace"
 msgstr ""
@@ -1148,10 +1149,10 @@ msgid "&Open file..."
 msgstr ""
 
 msgid "&New"
-msgstr ""
+msgstr "&ახალი"
 
 msgid "&Close"
-msgstr ""
+msgstr "დაკე&ტვა"
 
 msgid "Save &as..."
 msgstr ""
@@ -1166,7 +1167,7 @@ msgid "&User menu..."
 msgstr ""
 
 msgid "A&bout..."
-msgstr ""
+msgstr "&შესახებ..."
 
 msgid "&Quit"
 msgstr ""
@@ -1199,7 +1200,7 @@ msgid "Mo&ve"
 msgstr ""
 
 msgid "&Delete"
-msgstr ""
+msgstr "&წაშლა"
 
 msgid "Co&py to clipfile"
 msgstr ""
@@ -1307,22 +1308,22 @@ msgid "&Move"
 msgstr ""
 
 msgid "&Resize"
-msgstr ""
+msgstr "&ზომის შეცვლა"
 
 msgid "&Toggle fullscreen"
-msgstr ""
+msgstr "&სრულ ეკრანზე"
 
 msgid "&Next"
-msgstr ""
+msgstr "&შემდეგი"
 
 msgid "&Previous"
-msgstr ""
+msgstr "&წინა"
 
 msgid "&List..."
-msgstr ""
+msgstr "ს&ია"
 
 msgid "&General..."
-msgstr ""
+msgstr "&ძირითადი..."
 
 msgid "Save &mode..."
 msgstr ""
@@ -1343,25 +1344,25 @@ msgid "&Save setup"
 msgstr ""
 
 msgid "&File"
-msgstr ""
+msgstr "&ფაილი"
 
 msgid "&Edit"
-msgstr ""
+msgstr "რ&ედაქტირება"
 
 msgid "&Search"
-msgstr ""
+msgstr "&ძებნა"
 
 msgid "&Command"
-msgstr ""
+msgstr "&ბრძანება"
 
 msgid "For&mat"
 msgstr ""
 
 msgid "&Window"
-msgstr ""
+msgstr "&ფანჯარა"
 
 msgid "&Options"
-msgstr ""
+msgstr "&პარამ"
 
 msgid "None"
 msgstr ""
@@ -1421,7 +1422,7 @@ msgid "Editor options"
 msgstr ""
 
 msgid "About"
-msgstr ""
+msgstr "შესახებ"
 
 msgid ""
 "Copyright (C) 1996-2012 the Free Software Foundation\n"
@@ -1431,28 +1432,28 @@ msgid ""
 msgstr ""
 
 msgid "Open files"
-msgstr ""
+msgstr "ფაილების გახსნა"
 
 msgid "Edit: "
 msgstr ""
 
 msgid "ButtonBar|Mark"
-msgstr ""
+msgstr "მონიშ"
 
 msgid "ButtonBar|Replac"
-msgstr ""
+msgstr "შეცვლა"
 
 msgid "ButtonBar|Copy"
-msgstr ""
+msgstr "ასლი"
 
 msgid "ButtonBar|Move"
-msgstr ""
+msgstr "გადატანა"
 
 msgid "ButtonBar|Delete"
-msgstr ""
+msgstr "წაშლა"
 
 msgid "ButtonBar|PullDn"
-msgstr ""
+msgstr "MCმენიუ"
 
 msgid "&Add word"
 msgstr ""
@@ -1612,7 +1613,8 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -1739,16 +1741,16 @@ msgid "set user ID on execution"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "სახელი:"
 
 msgid "Permissions (octal):"
-msgstr ""
+msgstr "უფლებები (8-ბიტიანი):"
 
 msgid "Owner name:"
-msgstr ""
+msgstr "მფლობელის სახელი:"
 
 msgid "Group name:"
-msgstr ""
+msgstr "ჯგუფის სახელი:"
 
 msgid "C&lear marked"
 msgstr ""
@@ -1928,7 +1930,7 @@ msgid "FTP to machine"
 msgstr ""
 
 msgid "SFTP to machine"
-msgstr ""
+msgstr "SFTP მანქანამდე"
 
 msgid "Shell link to machine"
 msgstr ""
@@ -1949,7 +1951,7 @@ msgstr ""
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr ""
+msgstr "პარამეტრები შეინახა %s ფაილში"
 
 #, c-format
 msgid "Unable to save setup to %s"
@@ -2357,11 +2359,11 @@ msgstr ""
 
 #, c-format
 msgid "Files processed: %zu/%zu"
-msgstr ""
+msgstr "დამუშავებული ფაილები: %zu/%zu"
 
 #, c-format
 msgid "Files processed: %zu"
-msgstr ""
+msgstr "დამუშავებული ფაილები: %zu"
 
 #, c-format
 msgid "Time: %s %s"
@@ -2373,19 +2375,19 @@ msgstr ""
 
 #, c-format
 msgid "Time: %s"
-msgstr ""
+msgstr "დრო: %s"
 
 #, c-format
 msgid "Time: %s (%s)"
-msgstr ""
+msgstr "დრო: %s (%s)"
 
 #, c-format
 msgid " Total: %s "
-msgstr ""
+msgstr " სულ: %s "
 
 #, c-format
 msgid " Total: %s/%s "
-msgstr ""
+msgstr " სულ: %s/%s "
 
 msgid "Source"
 msgstr ""
@@ -2606,7 +2608,7 @@ msgid "No node information"
 msgstr ""
 
 msgid "Free nodes:"
-msgstr ""
+msgstr "თავისუფალი კვანძები:"
 
 msgid "No space information"
 msgstr ""
@@ -2691,10 +2693,10 @@ msgid "Menu&bar visible"
 msgstr ""
 
 msgid "&Equal split"
-msgstr ""
+msgstr "&თანაბრად გაყოფა"
 
 msgid "Panel split"
-msgstr ""
+msgstr "პანელის გაყოფა"
 
 msgid "Console output"
 msgstr ""
@@ -2742,13 +2744,13 @@ msgid "S&hell link..."
 msgstr ""
 
 msgid "S&FTP link..."
-msgstr ""
+msgstr "S&FTP ბმა..."
 
 msgid "SM&B link..."
 msgstr ""
 
 msgid "Paneli&ze"
-msgstr ""
+msgstr "&პანელში"
 
 msgid "&Rescan"
 msgstr ""
@@ -2826,7 +2828,7 @@ msgid "&Compare directories"
 msgstr ""
 
 msgid "C&ompare files"
-msgstr ""
+msgstr "ფა&ილების შედარება"
 
 msgid "E&xternal panelize"
 msgstr ""
@@ -2900,25 +2902,25 @@ msgid "&Above"
 msgstr ""
 
 msgid "&Left"
-msgstr ""
+msgstr "მარ&ცხ"
 
 msgid "&Below"
 msgstr ""
 
 msgid "&Right"
-msgstr ""
+msgstr "მარ&ჯვ"
 
 msgid "ButtonBar|Menu"
-msgstr ""
+msgstr "მენიუ"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "ნახვა"
 
 msgid "ButtonBar|RenMov"
-msgstr ""
+msgstr "გადატ"
 
 msgid "ButtonBar|Mkdir"
-msgstr ""
+msgstr "დირშექმ"
 
 msgid "Memory exhausted!"
 msgstr ""
@@ -3008,7 +3010,7 @@ msgid "Quick search"
 msgstr ""
 
 msgid "&Permissions"
-msgstr ""
+msgstr "უ&ფლებები"
 
 msgid "File &types"
 msgstr ""
@@ -3023,7 +3025,7 @@ msgid "Pa&ge scrolling"
 msgstr ""
 
 msgid "L&ynx-like motion"
-msgstr ""
+msgstr "L&ynx-ის მაგვარი გადასვლა"
 
 msgid "Navigation"
 msgstr ""
@@ -3056,7 +3058,7 @@ msgid "Use SI si&ze units"
 msgstr ""
 
 msgid "Show mi&ni-status"
-msgstr ""
+msgstr "მი&ნი სტატუსი"
 
 msgid "Panel options"
 msgstr ""
@@ -3187,7 +3189,7 @@ msgid_plural "%s in %d files"
 msgstr[0] ""
 
 msgid "Panelize"
-msgstr ""
+msgstr "პანელში"
 
 msgid "Unknown tag on display format:"
 msgstr ""
@@ -3262,19 +3264,19 @@ msgid "Delete %s?"
 msgstr ""
 
 msgid "ButtonBar|Static"
-msgstr ""
+msgstr "სტატ"
 
 msgid "ButtonBar|Dynamc"
-msgstr ""
+msgstr "დინამ"
 
 msgid "ButtonBar|Rescan"
-msgstr ""
+msgstr "გადახ"
 
 msgid "ButtonBar|Forget"
-msgstr ""
+msgstr "დავიწება"
 
 msgid "ButtonBar|Rmdir"
-msgstr ""
+msgstr "დირწაშლ"
 
 #, c-format
 msgid ""
@@ -3295,7 +3297,7 @@ msgid "False:"
 msgstr ""
 
 msgid "Error calling program"
-msgstr ""
+msgstr "შეცდომა პროგრამის გამოძახებისას"
 
 msgid "Warning -- ignoring file"
 msgstr ""
@@ -3347,7 +3349,7 @@ msgid "ButtonBar|Index"
 msgstr ""
 
 msgid "ButtonBar|Prev"
-msgstr ""
+msgstr "წინა"
 
 msgid "Learn keys"
 msgstr ""
@@ -3500,22 +3502,22 @@ msgid "Data types:"
 msgstr ""
 
 msgid "Root directory:"
-msgstr ""
+msgstr "სათაო დირექტორია:"
 
 msgid "System data"
-msgstr ""
+msgstr "სისტემური მონაცემები"
 
 msgid "Config directory:"
-msgstr ""
+msgstr "კონფიგურაციის დირექტორია:"
 
 msgid "Data directory:"
-msgstr ""
+msgstr "მონაცემების დირექტორია:"
 
 msgid "VFS plugins and scripts:"
-msgstr ""
+msgstr "VFS დამატებები და სცენარები:"
 
 msgid "User data"
-msgstr ""
+msgstr "სამომხმარებლო მონაცემები"
 
 msgid "Cache directory:"
 msgstr ""
@@ -3584,7 +3586,7 @@ msgid "fish: Password is required for %s"
 msgstr ""
 
 msgid "fish: Sending password..."
-msgstr ""
+msgstr "fish: პაროლის გაგზავნა..."
 
 msgid "fish: Sending initial line..."
 msgstr ""
@@ -3593,11 +3595,11 @@ msgid "fish: Handshaking version..."
 msgstr ""
 
 msgid "fish: Getting host info..."
-msgstr ""
+msgstr "fish: ჰოსტის ინფორმაციის მიღება..."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr ""
+msgstr "fish: იკითხება %s დირექტორია..."
 
 #, c-format
 msgid "%s: done."
@@ -3615,10 +3617,10 @@ msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
 msgid "fish: storing zeros"
-msgstr ""
+msgstr "fish: ნულების ჩაწერა"
 
 msgid "fish: storing file"
-msgstr ""
+msgstr "fish: ფაილის ჩაწერა"
 
 msgid "Aborting transfer..."
 msgstr ""
@@ -3648,7 +3650,7 @@ msgid "FTP: Account required for user %s"
 msgstr ""
 
 msgid "Account:"
-msgstr ""
+msgstr "ანგარიში:"
 
 msgid "ftpfs: sending user account"
 msgstr ""
@@ -3719,7 +3721,7 @@ msgid "(strict rfc959)"
 msgstr ""
 
 msgid "(chdir first)"
-msgstr ""
+msgstr "(ჯერ chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
@@ -3944,34 +3946,34 @@ msgid "Goto"
 msgstr ""
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "Ascii"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "16ძებნ"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "გაშლა"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "გადატანა"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "Hex"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "გადასვლა"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "Raw"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "ფილტრი"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "დაუფორმ"
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "ფორმატი"
 
 #, c-format
 msgid ""
@@ -4016,4 +4018,4 @@ msgid "Search done"
 msgstr ""
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "თავიდან დავიწყო?"

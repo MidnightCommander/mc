@@ -1,24 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 #   <interlusitana@gmail.com>, 2011.
 # Martijn Dekker <mcdutchie@hotmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-09-03 10:08+0400\n"
-"PO-Revision-Date: 2012-07-13 08:36+0000\n"
+"PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>\n"
-"Language-Team: Interlingua (http://www.transifex.com/projects/p/mc/language/"
-"ia/)\n"
+"Language-Team: Interlingua (http://www.transifex.com/projects/p/mc/language/ia/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ia\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Attention: non pote cargar le lista de paginas de codice"
@@ -55,10 +54,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Le file \"%s\" es jam in curso de modification.\n"
-"Usator: %s\n"
-"ID del processo: %d"
+msgstr "Le file \"%s\" es jam in curso de modification.\nUsator: %s\nID del processo: %d"
 
 msgid "File locked"
 msgstr "File serrate"
@@ -126,17 +122,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Impossibile cargar le apparentia '%s'.\n"
-"Le apparentia predefinite ha essite cargate"
+msgstr "Impossibile cargar le apparentia '%s'.\nLe apparentia predefinite ha essite cargate"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Impossibile processar le apparentia '%s'.\n"
-"Le apparentia predefinite ha essite cargate"
+msgstr "Impossibile processar le apparentia '%s'.\nLe apparentia predefinite ha essite cargate"
 
 #, c-format
 msgid ""
@@ -432,9 +424,7 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Le dimenion de schermo %dx%d non es supportate.\n"
-"Verifica le variabile de ambiente TERM.\n"
+msgstr "Le dimenion de schermo %dx%d non es supportate.\nVerifica le variabile de ambiente TERM.\n"
 
 msgid "Warning"
 msgstr "Advertimento"
@@ -662,10 +652,7 @@ msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
-msgstr ""
-"\n"
-"Per favor invia reportos de falta (includente le resultato de 'mc -V')\n"
-"como tickets a www.midnight-commander.org\n"
+msgstr "\nPer favor invia reportos de falta (includente le resultato de 'mc -V')\ncomo tickets a www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -704,9 +691,7 @@ msgstr "Lectura fallite"
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr ""
-"Le processo in secunde plano requestava un numero de parametros\n"
-"excedente lo que nos pote manear."
+msgstr "Le processo in secunde plano requestava un numero de parametros\nexcedente lo que nos pote manear."
 
 msgid "&Dismiss"
 msgstr "&Clauder"
@@ -736,27 +721,20 @@ msgstr "Le recerca es disactivate"
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
-msgstr ""
-"Impossibile crear file diff temporari\n"
-"%s"
+msgstr "Impossibile crear file diff temporari\n%s"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
-msgstr ""
-"Impossibile crear copia de reserva\n"
-"%s%s\n"
-"%s"
+msgstr "Impossibile crear copia de reserva\n%s%s\n%s"
 
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
+msgstr "Impossibile crear file de fusionamento temporari\n%s"
 
 msgid "&Fastest (Assume large files)"
 msgstr "Le plus &rapide (Supponer grande files)"
@@ -827,17 +805,13 @@ msgstr "ButtonBar|Quitar"
 msgid "Quit"
 msgstr "Quitar"
 
-#, fuzzy
 msgid "File(s) was modified. Save with exit?"
-msgstr "Le file ha essite modificate. Salveguardar ante exir?"
+msgstr ""
 
-#, fuzzy
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"Midnight Commander essera ora claudite.\n"
-"Salveguardar le file modificate?"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -1482,9 +1456,8 @@ msgstr ""
 msgid "ButtonBar|PullDn"
 msgstr ""
 
-#, fuzzy
 msgid "&Add word"
-msgstr "&Adder nove"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -1492,16 +1465,14 @@ msgstr ""
 msgid "Misspelled"
 msgstr ""
 
-#, fuzzy
 msgid "Check word"
-msgstr "&Parolas complete"
+msgstr ""
 
 msgid "Suggest"
 msgstr ""
 
-#, fuzzy
 msgid "Select language"
-msgstr "Selige un &gruppo"
+msgstr ""
 
 msgid "Load syntax file"
 msgstr ""
@@ -1643,7 +1614,8 @@ msgstr ""
 msgid "Confirmation"
 msgstr "Confirmation"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -3560,17 +3532,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Impossibile aperir le archivo cpio\n"
-"%s"
+msgstr "Impossibile aperir le archivo cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Fin prematur del archivo cpio\n"
-"%s"
+msgstr "Fin prematur del archivo cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3578,11 +3546,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Ligamines physic inconsistente de\n"
-"%s\n"
-"in le archivo cpio\n"
-"%s"
+msgstr "Ligamines physic inconsistente de\n%s\nin le archivo cpio\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3592,25 +3556,19 @@ msgstr "%s contine entratas duplicate, e es ignorate."
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Capite de cpio corrumpite incontrate in\n"
-"%s"
+msgstr "Capite de cpio corrumpite incontrate in\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Fin de file inexpectate\n"
-"%s"
+msgstr "Fin de file inexpectate\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Impossibile aperir le archivo %s\n"
-"%s"
+msgstr "Impossibile aperir le archivo %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Archivo extfs inconsistente"
@@ -3627,9 +3585,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: Attende le linea initial..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Pro le momento il es impossibile establir connexiones authenticate con "
-"contrasigno."
+msgstr "Pro le momento il es impossibile establir connexiones authenticate con contrasigno."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3782,9 +3738,7 @@ msgstr "ftpfs: immagazina file"
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
-msgstr ""
-"Le file ~/.netrc ha un modo incorrecte\n"
-"Remove le contrasigno o corrige le modo"
+msgstr "Le file ~/.netrc ha un modo incorrecte\nRemove le contrasigno o corrige le modo"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -3794,17 +3748,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Attention: Linea invalide in %s:\n"
-"%s\n"
+msgstr "Attention: Linea invalide in %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Attention: Marca invalide %c in %s:\n"
-"%s\n"
+msgstr "Attention: Marca invalide %c in %s:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occured while reading %s: %s"
@@ -3813,29 +3763,26 @@ msgstr ""
 msgid "sftp: Unable to get current user name."
 msgstr ""
 
-#, fuzzy
 msgid "sftp: Invalid host name."
-msgstr "ftpfs: Nomine de host invalide."
+msgstr ""
 
-#, fuzzy
 msgid "sftp: Invalid port value."
-msgstr "ftpfs: Nomine de host invalide."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: %s"
-msgstr "ftpfs: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: making connection to %s"
-msgstr "ftpfs: establi connexion a %s"
+msgstr ""
 
-#, fuzzy
 msgid "sftp: connection interrupted by user"
-msgstr "ftpfs: connexion interrumpite per le usator"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: connection to server failed: %s"
-msgstr "ftpfs: le connexion al servitor falleva: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -3844,9 +3791,9 @@ msgstr ""
 msgid "sftp: Passphrase is empty."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: Enter password for %s "
-msgstr "ftpfs: invia contrasigno del usator"
+msgstr ""
 
 msgid "sftp: Password is empty."
 msgstr ""
@@ -3862,9 +3809,8 @@ msgstr ""
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: Listing done."
-msgstr "ftpfs: immagazina file"
+msgstr ""
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -3897,9 +3843,7 @@ msgstr "%s renomina files\n"
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Impossibile aperir archivo tar\n"
-"%s"
+msgstr "Impossibile aperir archivo tar\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Archivo tar inconsistente"
@@ -3911,9 +3855,7 @@ msgstr "Fin inexpectate del file de archivo"
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"non resimila un archivo tar."
+msgstr "%s\nnon resimila un archivo tar."
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -3958,9 +3900,7 @@ msgstr "undelfs: lege bitmap de inode..."
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
-msgstr ""
-"Impossibile cargar bitmap de inode ab:\n"
-"%s"
+msgstr "Impossibile cargar bitmap de inode ab:\n%s"
 
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: lege bitmap de bloco..."
@@ -3969,9 +3909,7 @@ msgstr "undelfs: lege bitmap de bloco..."
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
-msgstr ""
-"Impossibile cargar bitmap de bloco ab:\n"
-"%s"
+msgstr "Impossibile cargar bitmap de bloco ab:\n%s"
 
 msgid "vfs_info is not fs!"
 msgstr "vfs_info non es fs!"
@@ -4065,9 +4003,7 @@ msgstr ""
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
-msgstr ""
-"Midnight Commander essera ora claudite.\n"
-"Salveguardar le file modificate?"
+msgstr "Midnight Commander essera ora claudite.\nSalveguardar le file modificate?"
 
 msgid "View: "
 msgstr "Vide:"
