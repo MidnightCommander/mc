@@ -1,3 +1,60 @@
+Version 4.8.5
+
+- Core
+
+    * Implemented case-insensitive patterns in mc.ext bindings (#2250)
+
+- Editor
+
+    * Code refactoring and cleanup (#1977)
+
+- Diff viewer
+
+    * Bidirectional merge (F5 merge left-to-right, F15 - merge right-to-left) (#2863)
+
+- Misc
+
+    * Syntax highlighting news and updates:
+        - update assembler.syntax: x86 AMD64 registers highlighting (#2542)
+        - new cmake.syntax: preliminary and incomplete syntax file for CMakeLists.txt files (#2084)
+        - new dlink.syntax: syntax highlighting for D-Link switches command set (#2649)
+        - update properties.syntax: more nice look-and-feel (#1869)
+    * mc.ext enhancement (#2103):
+        - use chm_http text-mode handler for CHM files
+        - play sounds only from videos in text mode
+        - use pdftotext -layout -nopgbrk switches
+        - try to use elinks before links for HTML
+        - soffice2html text-mode handler for SXW files
+        - wvHtml text-mode handler for doc files
+        - xlhtml text-mode handler for XLS files
+        - ppthtml text-mode handler for PPT/PPS files
+        - open=view+pager fallback (noX) for PostScript, PDF, OD[PST] and DVI
+        - standarized $DISPLAY checks
+    * File extension support:
+        - SQLite database files (#2103)
+        - compiled Java files (*.class) (#2103)
+        - m4a for MP4 containers with audio data in the Advanced Audio Coding (AAC) or its own Apple Lossless (ALE, ALAC) formats (#2869)
+        - .ogm extension was deprecated in favor of .ogv (#2664)
+
+- Fixes
+
+    * Bad EXTHELPERSDIR substitution if --prefix is not set (#2849)
+    * Partially broken loading of user-defined keymap file (#2848)
+    * Enter on directory named '~' goes to the home one (#2874)
+    * Cannot Copy/Move files with filename encoding change (#2791)
+    * Cannot view compressed files named like log.1.gz (with digit in name) (#2852)
+    * Panel is not refreshed if panel history is called using mouse (#2854)
+    * Duplicate entities in panel with 'tree view' mode (#2835)
+    * Broken synchronization with filelist and tree panels (#2862)
+    * Standalone mcedit doesn't load saved file position (#2853)
+    * mcedit segfaults when aspell (en) dictionary is not installed (#2856)
+    * mcedit segfaults after "Back from declaration" call (#2859)
+    * mcedit: unable to save changes in "Safe save" mode(#2832)
+    * Segfault when viewing HTML files with "mc -v" (#2858)
+    * Broken 'Enter' action on a rpm file containing space character in filename (#2838)
+    * extfs: uc1541 broken handling (#2864)
+    * mc.ext: OGV format handled as audio (#2869)
+
 Version 4.8.4
 
 - Core
