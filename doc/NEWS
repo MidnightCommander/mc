@@ -1,3 +1,34 @@
+Version 4.8.1.5
+
+- Editor
+
+    * Code refactoring and cleanup (#1977)
+
+- Misc
+
+    * Use unrar to view RAR archives if rar is unavailable (#2847)
+    * Syntax highlighting news and updates:
+        - update assembler.syntax: x86 AMD64 registers highlighting (#2542)
+        - new cmake.syntax: preliminary and incomplete syntax file for CMakeLists.txt files (#2084)
+        - new dlink.syntax: syntax highlighting for D-Link switches command set (#2649)
+        - update properties.syntax: more nice look-and-feel (#1869)
+    * File extension support:
+        - .ogm extension was deprecated in favor of .ogv (#2664)
+
+- Fixes
+
+    * CK_History removes CK_HistoryNext entries (#2313)
+    * Partially broken loading of user-defined keymap file (#2848)
+    * Enter on directory named '~' goes to the home one (#2874)
+    * Cannot Copy/Move files with filename encoding change (#2791)
+    * Duplicate entities in panel with 'tree view' mode (#2835)
+    * Broken synchronization with filelist and tree panels (#2862)
+    * mcedit segfaults after call "Back from declaration" (#2859)
+    * mcedit: unable to save changes in "Safe save" mode(#2832)
+    * Broken 'Enter' action on a rpm file containing space character in filename (#2838)
+    * extfs: uc1541 broken handling (#2864)
+    * mc.ext: OGV format handled as audio (#2869)
+
 Version 4.8.1.4
 
 - Misc
