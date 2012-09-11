@@ -43,6 +43,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/strutil.h"
+#include "lib/strescape.h"      /* strutils_glob_escape() */
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
@@ -479,10 +480,14 @@ f_trunc (FBUF * fs)
 static int
 f_close (FBUF * fs)
 {
-    int rv;
+    int rv = -1;
 
-    rv = close (fs->fd);
-    f_free (fs);
+    if (fs != NULL)
+    {
+        rv = close (fs->fd);
+        f_free (fs);
+    }
+
     return rv;
 }
 
@@ -540,14 +545,19 @@ p_open (const char *cmd, int flags)
 static int
 p_close (FBUF * fs)
 {
-    int rv;
+    int rv = -1;
 
-    rv = pclose (fs->data);
-    f_free (fs);
+    if (fs != NULL)
+    {
+        rv = pclose (fs->data);
+        f_free (fs);
+    }
+
     return rv;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Get one char (byte) from string
  *
@@ -813,8 +823,15 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
     FBUF *f;
     char *cmd;
     int code;
+    char *file1_esc, *file2_esc;
 
-    cmd = g_strdup_printf ("diff %s %s %s \"%s\" \"%s\"", args, extra, opt, file1, file2);
+    /* escape potential $ to avoid shell variable substitutions in popen() */
+    file1_esc = strutils_shell_escape (file1);
+    file2_esc = strutils_shell_escape (file2);
+    cmd = g_strdup_printf ("diff %s %s %s %s %s", args, extra, opt, file1_esc, file2_esc);
+    g_free (file1_esc);
+    g_free (file2_esc);
+
     if (cmd == NULL)
         return -1;
 
