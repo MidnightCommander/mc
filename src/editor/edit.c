@@ -3085,16 +3085,15 @@ edit_move_forward3 (WEdit * edit, off_t current, long cols, off_t upto)
         c = convert_to_display_c (c);
 #endif
 
+        if (c == '\n')
+            return (upto != 0 ? (off_t) col : p);
         if (c == '\t')
             col += TAB_SIZE - col % TAB_SIZE;
-        else if (c == '\n')
-            return (upto != 0 ? (off_t) col : p);
-
-        if ((c < 32 || c == 127) && (orig_c == c
+        else if ((c < 32 || c == 127) && (orig_c == c
 #ifdef HAVE_CHARSET
-                                     || (!mc_global.utf8_display && !edit->utf8)
+                                          || (!mc_global.utf8_display && !edit->utf8)
 #endif
-            ))
+                 ))
             /* '\r' is shown as ^M, so we must advance 2 characters */
             /* Caret notation for control characters */
             col += 2;
