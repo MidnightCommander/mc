@@ -7,7 +7,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru> 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012
 
    This file is part of the Midnight Commander.
 
@@ -46,17 +46,14 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define OPT_DLG_H 17
-#define OPT_DLG_W 74
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
 
 static const char *wrap_str[] = {
-    N_("None"),
-    N_("Dynamic paragraphing"),
-    N_("Type writer wrap"),
+    N_("&None"),
+    N_("&Dynamic paragraphing"),
+    N_("Type &writer wrap"),
     NULL
 };
 
@@ -120,53 +117,10 @@ edit_reload_syntax (void *data, void *user_data)
 void
 edit_options_dialog (Dlg_head * h)
 {
-    char wrap_length[16], tab_spacing[16], *p, *q;
+    char wrap_length[16], tab_spacing[16];
+    char *p, *q;
     int wrap_mode = 0;
     int old_syntax_hl;
-
-    QuickWidget quick_widgets[] = {
-        /*  0 */ QUICK_BUTTON (6, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&Cancel"), B_CANCEL, NULL),
-        /*  1 */ QUICK_BUTTON (2, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&OK"), B_ENTER, NULL),
-        /*  2 */ QUICK_LABEL (OPT_DLG_W / 2 + 1, OPT_DLG_W, 12, OPT_DLG_H,
-                              N_("Word wrap line length:")),
-        /*  3 */ QUICK_INPUT (OPT_DLG_W / 2 + 25, OPT_DLG_W, 12, OPT_DLG_H,
-                              wrap_length, OPT_DLG_W / 2 - 4 - 24, 0, "edit-word-wrap", &p),
-        /*  4 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 11, OPT_DLG_H,
-                                 N_("&Group undo"), &option_group_undo),
-        /*  5 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 10, OPT_DLG_H,
-                                 N_("Cursor beyond end of line"), &option_cursor_beyond_eol),
-        /*  6 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 9, OPT_DLG_H,
-                                 N_("Pers&istent selection"), &option_persistent_selections),
-        /*  7 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 8, OPT_DLG_H,
-                                 N_("Synta&x highlighting"), &option_syntax_highlighting),
-        /*  8 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 7, OPT_DLG_H,
-                                 N_("Visible tabs"), &visible_tabs),
-        /*  9 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 6, OPT_DLG_H,
-                                 N_("Visible trailing spaces"), &visible_tws),
-        /* 10 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 5, OPT_DLG_H,
-                                 N_("Save file &position"), &option_save_position),
-        /* 11 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 4, OPT_DLG_H,
-                                 N_("Confir&m before saving"), &edit_confirm_save),
-        /* 12 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 3, OPT_DLG_H,
-                                 N_("&Return does autoindent"), &option_return_does_auto_indent),
-        /* 13 */ QUICK_LABEL (3, OPT_DLG_W, 11, OPT_DLG_H, N_("Tab spacing:")),
-        /* 14 */ QUICK_INPUT (3 + 24, OPT_DLG_W, 11, OPT_DLG_H,
-                              tab_spacing, OPT_DLG_W / 2 - 4 - 24, 0, "edit-tab-spacing", &q),
-        /* 15 */ QUICK_CHECKBOX (3, OPT_DLG_W, 10, OPT_DLG_H,
-                                 N_("Fill tabs with &spaces"), &option_fill_tabs_with_spaces),
-        /* 16 */ QUICK_CHECKBOX (3, OPT_DLG_W, 9, OPT_DLG_H,
-                                 N_("&Backspace through tabs"), &option_backspace_through_tabs),
-        /* 17 */ QUICK_CHECKBOX (3, OPT_DLG_W, 8, OPT_DLG_H,
-                                 N_("&Fake half tabs"), &option_fake_half_tabs),
-        /* 18 */ QUICK_RADIO (4, OPT_DLG_W, 4, OPT_DLG_H, 3, wrap_str, &wrap_mode),
-        /* 19 */ QUICK_LABEL (3, OPT_DLG_W, 3, OPT_DLG_H, N_("Wrap mode")),
-        QUICK_END
-    };
-
-    QuickDialog Quick_options = {
-        OPT_DLG_W, OPT_DLG_H, -1, -1, N_("Editor options"),
-        "[Editor options]", quick_widgets, NULL, NULL, FALSE
-    };
 
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
@@ -188,8 +142,57 @@ edit_options_dialog (Dlg_head * h)
     else
         wrap_mode = 0;
 
-    if (quick_dialog (&Quick_options) == B_CANCEL)
-        return;
+    {
+        /* *INDENT-OFF* */
+        quick_widget_t quick_widgets[] = {
+            QUICK2_START_COLUMNS,
+                QUICK2_START_GROUPBOX (N_("Wrap mode")),
+                    QUICK2_RADIO (3, wrap_str, &wrap_mode, NULL),
+                QUICK2_STOP_GROUPBOX,
+                QUICK2_SEPARATOR (FALSE),
+                QUICK2_START_GROUPBOX (N_("Tabulation")),
+                    QUICK2_CHECKBOX (N_("&Fake half tabs"), &option_fake_half_tabs, NULL),
+                    QUICK2_CHECKBOX (N_("&Backspace through tabs"), &option_backspace_through_tabs,
+                                     NULL),
+                    QUICK2_CHECKBOX (N_("Fill tabs with &spaces"), &option_fill_tabs_with_spaces,
+                                     NULL),
+                    QUICK2_LABELED_INPUT (N_("Tab spacing:"), input_label_left, tab_spacing, 0,
+                                          "edit-tab-spacing", &q, NULL),
+                QUICK2_STOP_GROUPBOX,
+            QUICK2_NEXT_COLUMN,
+                QUICK2_START_GROUPBOX (N_("Other options")),
+                    QUICK2_CHECKBOX (N_("&Return does autoindent"), &option_return_does_auto_indent,
+                                     NULL),
+                    QUICK2_CHECKBOX (N_("Confir&m before saving"), &edit_confirm_save, NULL),
+                    QUICK2_CHECKBOX (N_("Save file &position"), &option_save_position, NULL),
+                    QUICK2_CHECKBOX (N_("&Visible trailing spaces"), &visible_tws, NULL),
+                    QUICK2_CHECKBOX (N_("Visible &tabs"), &visible_tabs, NULL),
+                    QUICK2_CHECKBOX (N_("Synta&x highlighting"), &option_syntax_highlighting, NULL),
+                    QUICK2_CHECKBOX (N_("Pers&istent selection"), &option_persistent_selections,
+                                     NULL),
+                    QUICK2_CHECKBOX (N_("Cursor be&yond end of line"), &option_cursor_beyond_eol,
+                                     NULL),
+                    QUICK2_CHECKBOX (N_("&Group undo"), &option_group_undo, NULL),
+                    QUICK2_LABELED_INPUT (N_("Word wrap line length:"), input_label_left,
+                                          wrap_length, 0, "edit-word-wrap", &p, NULL),
+                QUICK2_STOP_GROUPBOX,
+            QUICK2_STOP_COLUMNS,
+            QUICK2_START_BUTTONS (TRUE, TRUE),
+                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK2_END
+            /* *INDENT-ON* */
+        };
+
+        quick_dialog_t qdlg = {
+            -1, -1, 74,
+            N_("Editor options"), "[Editor options]",
+            quick_widgets, NULL, NULL
+        };
+
+        if (quick2_dialog (&qdlg) == B_CANCEL)
+            return;
+    }
 
     old_syntax_hl = option_syntax_highlighting;
 
