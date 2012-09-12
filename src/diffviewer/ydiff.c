@@ -1,11 +1,11 @@
 /*
-   Copyright (C) 2007, 2010, 2011
+   Copyright (C) 2007, 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007
    Slava Zanko <slavazanko@gmail.com>, 2010
-   Andrew Borodin <aborodin@vmail.ru>, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2010, 2012
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
@@ -80,9 +80,6 @@ do { \
 
 #define FILE_READ_BUF 4096
 #define FILE_FLAG_TEMP (1 << 0)
-
-#define OPTX 56
-#define OPTY 17
 
 #define ADD_CH '+'
 #define DEL_CH '-'
@@ -2353,35 +2350,33 @@ dview_diff_options (WDiff * dview)
         N_("&Minimal (Find a smaller set of change)")
     };
 
-    QuickWidget diffopt_widgets[] = {
-        QUICK_BUTTON (6, 10, 14, OPTY, N_("&Cancel"), B_CANCEL, NULL),
-        QUICK_BUTTON (2, 10, 14, OPTY, N_("&OK"), B_ENTER, NULL),
-
-        QUICK_CHECKBOX (3, OPTX, 12, OPTY,
-                        N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr),
-        QUICK_CHECKBOX (3, OPTX, 11, OPTY,
-                        N_("Ignore all &whitespace"), &dview->opt.ignore_all_space),
-        QUICK_CHECKBOX (3, OPTX, 10, OPTY,
-                        N_("Ignore &space change"), &dview->opt.ignore_space_change),
-        QUICK_CHECKBOX (3, OPTX, 9, OPTY,
-                        N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion),
-        QUICK_CHECKBOX (3, OPTX, 8, OPTY,
-                        N_("&Ignore case"), &dview->opt.ignore_case),
-        QUICK_LABEL (3, OPTX, 7, OPTY, N_("Diff extra options")),
-        QUICK_RADIO (3, OPTX, 3, OPTY,
-                     3, (const char **) quality_str, (int *) &dview->opt.quality),
-        QUICK_LABEL (3, OPTX, 2, OPTY, N_("Diff algorithm")),
-
-        QUICK_END
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK2_START_GROUPBOX (N_("Diff algorithm")),
+            QUICK2_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
+        QUICK2_STOP_GROUPBOX,
+        QUICK2_START_GROUPBOX (N_("Diff extra options")),
+            QUICK2_CHECKBOX (N_("&Ignore case"), &dview->opt.ignore_case, NULL),
+            QUICK2_CHECKBOX (N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
+            QUICK2_CHECKBOX (N_("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
+            QUICK2_CHECKBOX (N_("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
+            QUICK2_CHECKBOX (N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
+                             NULL),
+        QUICK2_STOP_GROUPBOX,
+        QUICK2_START_BUTTONS (TRUE, TRUE),
+            QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK2_END
+        /* *INDENT-ON* */
     };
 
-    QuickDialog diffopt = {
-        OPTX, OPTY, -1, -1,
+    quick_dialog_t qdlg = {
+        -1, -1, 56,
         N_("Diff Options"), "[Diff Options]",
-        diffopt_widgets, NULL, NULL, FALSE
+        quick_widgets, NULL, NULL
     };
 
-    if (quick_dialog (&diffopt) != B_CANCEL)
+    if (quick2_dialog (&qdlg) != B_CANCEL)
         dview_reread (dview);
 }
 

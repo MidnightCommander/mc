@@ -1,11 +1,12 @@
 /*
    Search functions for diffviewer.
 
-   Copyright (C) 2010, 2011
+   Copyright (C) 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2010.
+   Andrew Borodin <aborodin@vmail.ru>, 2012
 
    This file is part of the Midnight Commander.
 
@@ -43,9 +44,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define SEARCH_DLG_WIDTH  58
-#define SEARCH_DLG_HEIGHT 13
-
 /*** file scope type declarations ****************************************************************/
 
 typedef struct mcdiffview_search_options_struct
@@ -67,84 +65,55 @@ static mcdiffview_search_options_t mcdiffview_search_options = {
     .all_codepages = FALSE,
 };
 
-/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-#define DLG_BTN1_text N_("&Cancel")
-#define DLG_BTN2_text N_("&OK")
-
-static void
-mcdiffview_dialog_fix_buttons_positions (QuickDialog * dlg)
-{
-    size_t str_cancel_len, str_ok_len;
-    size_t first_start_position;
-
-    str_cancel_len = str_term_width1 (_(DLG_BTN1_text)) + 4;
-    str_ok_len = str_term_width1 (_(DLG_BTN2_text)) + 6;
-
-    first_start_position = (SEARCH_DLG_WIDTH - str_cancel_len - str_ok_len - 1) / 2;
-    dlg->widgets[1].relative_x = first_start_position;
-    dlg->widgets[0].relative_x = first_start_position + str_ok_len + 1;
-}
-
+/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 mcdiffview_dialog_search (WDiff * dview)
 {
     char *exp = NULL;
-
     int qd_result;
-
     size_t num_of_types;
-    gchar **list_of_types = mc_search_get_types_strings_array (&num_of_types);
+    gchar **list_of_types;
 
-    QuickWidget search_widgets[] = {
-        /* 0 */
-        QUICK_BUTTON (3, SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, DLG_BTN1_text,
-                      B_CANCEL, NULL),
-        /* 1 */
-        QUICK_BUTTON (3, SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, DLG_BTN2_text,
-                      B_ENTER, NULL),
-        /* 2 */
+    list_of_types = mc_search_get_types_strings_array (&num_of_types);
+
+    {
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK2_LABELED_INPUT (N_("Enter search string:"), input_label_above,
+                                  INPUT_LAST_TEXT, 0, MC_HISTORY_SHARED_SEARCH, &exp, NULL),
+            QUICK2_SEPARATOR (TRUE),
+            QUICK2_START_COLUMNS,
+                QUICK2_RADIO (num_of_types, (const char **) list_of_types,
+                              (int *) &mcdiffview_search_options.type, NULL),
+            QUICK2_NEXT_COLUMN,
+                QUICK2_CHECKBOX (N_("Cas&e sensitive"), &mcdiffview_search_options.case_sens, NULL),
+                QUICK2_CHECKBOX (N_("&Backwards"), &mcdiffview_search_options.backwards, NULL),
+                QUICK2_CHECKBOX (N_("&Whole words"), &mcdiffview_search_options.whole_words, NULL),
 #ifdef HAVE_CHARSET
-        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&All charsets"),
-                        &mcdiffview_search_options.all_codepages),
+                QUICK2_CHECKBOX (N_("&All charsets"), &mcdiffview_search_options.all_codepages,
+                                 NULL),
 #endif
+            QUICK2_STOP_COLUMNS,
+            QUICK2_START_BUTTONS (TRUE, TRUE),
+                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK2_END
+            /* *INDENT-ON* */
+        };
 
-        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("&Whole words"),
-                        &mcdiffview_search_options.whole_words),
-        /* 3 */
-        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"),
-                        &mcdiffview_search_options.backwards),
-        /* 4 */
-        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("Cas&e sensitive"),
-                        &mcdiffview_search_options.case_sens),
-        /* 5 */
-        QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-                     num_of_types, (const char **) list_of_types,
-                     (int *) &mcdiffview_search_options.type),
-        /* 6 */
-        QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
-                     INPUT_LAST_TEXT, SEARCH_DLG_WIDTH - 6, 0,
-                     MC_HISTORY_SHARED_SEARCH,
-                     &exp),
-        /* 7 */
-        QUICK_LABEL (3, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_("Enter search string:")),
-        QUICK_END
-    };
+        quick_dialog_t qdlg = {
+            -1, -1, 58,
+            N_("Search"), "[Input Line Keys]",
+            quick_widgets, NULL, NULL
+        };
 
-    QuickDialog search_input = {
-        SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1,
-        N_("Search"), "[Input Line Keys]",
-        search_widgets, NULL, NULL, FALSE
-    };
+        qd_result = quick2_dialog (&qdlg);
+    }
 
-    mcdiffview_dialog_fix_buttons_positions (&search_input);
-
-    qd_result = quick_dialog (&search_input);
     g_strfreev (list_of_types);
-
 
     if ((qd_result == B_CANCEL) || (exp == NULL) || (exp[0] == '\0'))
     {
@@ -154,9 +123,10 @@ mcdiffview_dialog_search (WDiff * dview)
 
 #ifdef HAVE_CHARSET
     {
-        GString *tmp = str_convert_to_input (exp);
+        GString *tmp;
 
-        if (tmp)
+        tmp = str_convert_to_input (exp);
+        if (tmp != NULL)
         {
             g_free (exp);
             exp = g_string_free (tmp, FALSE);
