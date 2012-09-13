@@ -94,19 +94,6 @@ int hotlist_has_dot_dot = 1;
 
 #define new_hotlist() g_new0(struct hotlist, 1)
 
-#define CHECK_BUFFER \
-do \
-{ \
-    size_t i; \
-    i = strlen (current->label); \
-    if (i + 3 > buflen) { \
-      g_free (buf); \
-      buflen = 1024 * (i/1024 + 1); \
-      buf = g_malloc (buflen); \
-    } \
-    buf[0] = '\0'; \
-} while (0)
-
 #define TKN_GROUP   0
 #define TKN_ENTRY   1
 #define TKN_STRING  2
@@ -988,103 +975,35 @@ add2hotlist (char *label, char *directory, enum HotListType type, listbox_append
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Support routine for add_new_entry_input()/add_new_group_input()
- * Change positions of buttons (first three widgets).
- *
- * This is just a quick hack. Accurate procedure must take care of
- * internationalized label lengths and total buttonbar length...assume
- * 64 is longer anyway.
- */
-
-#ifdef ENABLE_NLS
-static void
-add_widgets_i18n (QuickWidget * qw, int len)
-{
-    int i, l[3], space, cur_x;
-
-    for (i = 0; i < 3; i++)
-    {
-        qw[i].u.button.text = _(qw[i].u.button.text);
-        l[i] = str_term_width1 (qw[i].u.button.text) + 3;
-    }
-    space = (len - 4 - l[0] - l[1] - l[2]) / 4;
-
-    for (cur_x = 2 + space, i = 3; i--; cur_x += l[i] + space)
-    {
-        qw[i].relative_x = cur_x;
-        qw[i].x_divisions = len;
-    }
-}
-#endif /* ENABLE_NLS */
-
-/* --------------------------------------------------------------------------------------------- */
 
 static int
 add_new_entry_input (const char *header, const char *text1, const char *text2,
                      const char *help, char **r1, char **r2)
 {
-#define RELATIVE_Y_BUTTONS   4
-#define RELATIVE_Y_LABEL_PTH 3
-#define RELATIVE_Y_INPUT_PTH 4
-
-    QuickWidget quick_widgets[] = {
-        /* 0 */ QUICK_BUTTON (55, 80, RELATIVE_Y_BUTTONS, 0, N_("&Cancel"), B_CANCEL, NULL),
-        /* 1 */ QUICK_BUTTON (30, 80, RELATIVE_Y_BUTTONS, 0, N_("&Insert"), B_INSERT, NULL),
-        /* 2 */ QUICK_BUTTON (10, 80, RELATIVE_Y_BUTTONS, 0, N_("&Append"), B_APPEND, NULL),
-        /* 3 */ QUICK_INPUT (4, 80, RELATIVE_Y_INPUT_PTH, 0, *r2, 58, 2, "input-pth", r2),
-        /* 4 */ QUICK_LABEL (4, 80, 3, 0, text2),
-        /* 5 */ QUICK_INPUT (4, 80, 3, 0, *r1, 58, 0, "input-lbl", r1),
-        /* 6 */ QUICK_LABEL (4, 80, 2, 0, text1),
-        QUICK_END
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK2_LABELED_INPUT (text1, input_label_above, *r1, 0, "input-lbl", r1, NULL),
+        QUICK2_SEPARATOR (FALSE),
+        QUICK2_LABELED_INPUT (text2, input_label_above, *r2, 0, "input-lbl", r2, NULL),
+        QUICK2_START_BUTTONS (TRUE, TRUE),
+            QUICK2_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
+            QUICK2_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
+            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK2_END
+        /* *INDENT-ON* */
     };
 
-    int len;
-    int i;
-    int lines1, lines2;
-    int cols1, cols2;
+    quick_dialog_t qdlg = {
+        -1, -1, 64,
+        header, help,
+        quick_widgets, NULL, NULL
+    };
 
-#ifdef ENABLE_NLS
-    static gboolean i18n_flag = FALSE;
-#endif /* ENABLE_NLS */
+    int ret;
 
-    len = str_term_width1 (header);
-    str_msg_term_size (text1, &lines1, &cols1);
-    str_msg_term_size (text2, &lines2, &cols2);
-    len = max (len, cols1);
-    len = max (max (len, cols2) + 4, 64);
+    ret = quick2_dialog (&qdlg);
 
-#ifdef ENABLE_NLS
-    if (!i18n_flag)
-    {
-        add_widgets_i18n (quick_widgets, len);
-        i18n_flag = TRUE;
-    }
-#endif /* ENABLE_NLS */
-
-    {
-        QuickDialog Quick_input = {
-            len, lines1 + lines2 + 7, -1, -1, header,
-            help, quick_widgets, NULL, NULL, FALSE
-        };
-
-        for (i = 0; i < 7; i++)
-            quick_widgets[i].y_divisions = Quick_input.ylen;
-
-        quick_widgets[0].relative_y = RELATIVE_Y_BUTTONS + (lines1 + lines2);
-        quick_widgets[1].relative_y = RELATIVE_Y_BUTTONS + (lines1 + lines2);
-        quick_widgets[2].relative_y = RELATIVE_Y_BUTTONS + (lines1 + lines2);
-        quick_widgets[3].relative_y = RELATIVE_Y_INPUT_PTH + (lines1);
-        quick_widgets[4].relative_y = RELATIVE_Y_LABEL_PTH + (lines1);
-
-        i = quick_dialog (&Quick_input);
-    }
-
-    return (i != B_CANCEL) ? i : 0;
-
-#undef RELATIVE_Y_BUTTONS
-#undef RELATIVE_Y_LABEL_PTH
-#undef RELATIVE_Y_INPUT_PTH
+    return (ret != B_CANCEL) ? ret : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1124,53 +1043,26 @@ add_new_entry_cmd (void)
 static int
 add_new_group_input (const char *header, const char *label, char **result)
 {
-    QuickWidget quick_widgets[] = {
-        /* 0 */ QUICK_BUTTON (55, 80, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
-        /* 1 */ QUICK_BUTTON (30, 80, 1, 0, N_("&Insert"), B_INSERT, NULL),
-        /* 2 */ QUICK_BUTTON (10, 80, 1, 0, N_("&Append"), B_APPEND, NULL),
-        /* 3 */ QUICK_INPUT (4, 80, 0, 0, "", 58, 0, "input", result),
-        /* 4 */ QUICK_LABEL (4, 80, 2, 0, label),
-        QUICK_END
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK2_LABELED_INPUT (label, input_label_above, "", 0, "input", result, NULL),
+        QUICK2_START_BUTTONS (TRUE, TRUE),
+            QUICK2_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
+            QUICK2_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
+            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK2_END
+        /* *INDENT-ON* */
     };
 
-    int len;
-    int i;
-    int lines, cols;
+    quick_dialog_t qdlg = {
+        -1, -1, 64,
+        header, "[Hotlist]",
+        quick_widgets, NULL, NULL
+    };
+
     int ret;
 
-#ifdef ENABLE_NLS
-    static gboolean i18n_flag = FALSE;
-#endif /* ENABLE_NLS */
-
-    len = str_term_width1 (header);
-    str_msg_term_size (label, &lines, &cols);
-    len = max (max (len, cols) + 4, 64);
-
-#ifdef ENABLE_NLS
-    if (!i18n_flag)
-    {
-        add_widgets_i18n (quick_widgets, len);
-        i18n_flag = TRUE;
-    }
-#endif /* ENABLE_NLS */
-
-    {
-        QuickDialog Quick_input = {
-            len, lines + 6, -1, -1, header,
-            "[Hotlist]", quick_widgets, NULL, NULL, FALSE
-        };
-
-        int relative_y[] = { 1, 1, 1, 0, 2 };   /* the relative_x component from the
-                                                   quick_widgets variable above */
-
-        for (i = 0; i < 5; i++)
-            quick_widgets[i].y_divisions = Quick_input.ylen;
-
-        for (i = 0; i < 4; i++)
-            quick_widgets[i].relative_y = relative_y[i] + 2 + lines;
-
-        ret = quick_dialog (&Quick_input);
-    }
+    ret = quick2_dialog (&qdlg);
 
     return (ret != B_CANCEL) ? ret : 0;
 }

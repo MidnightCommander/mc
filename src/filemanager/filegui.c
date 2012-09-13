@@ -1029,160 +1029,81 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
                   gboolean only_one,
                   const char *format, const void *text, const char *def_text, gboolean * do_bg)
 {
-    const size_t FMDY = 13;
-    const size_t FMDX = 68;
     size_t fmd_xlen;
-
-    /* buttons */
-    const size_t gap = 1;
-    size_t b0_len, b2_len;
-    size_t b1_len = 0;
-
+    vfs_path_t *vpath;
     int source_easy_patterns = easy_patterns;
-    size_t i, len;
     char fmd_buf[BUF_MEDIUM];
-    char *source_mask, *orig_mask, *dest_dir, *tmp;
+    char *dest_dir, *tmp;
     char *def_text_secure;
-    int val;
-
-    QuickWidget fmd_widgets[] = {
-        /* 0 */ QUICK_BUTTON (42, 64, 10, FMDY, N_("&Cancel"), B_CANCEL, NULL),
-#ifdef ENABLE_BACKGROUND
-        /* 1 */ QUICK_BUTTON (25, 64, 10, FMDY, N_("&Background"), B_USER, NULL),
-#define OFFSET 0
-#else
-#define OFFSET 1
-#endif /* ENABLE_BACKGROUND */
-        /*  2 - OFFSET */
-        QUICK_BUTTON (14, FMDX, 10, FMDY, N_("&OK"), B_ENTER, NULL),
-        /*  3 - OFFSET */
-        QUICK_CHECKBOX (42, FMDX, 8, FMDY, N_("&Stable Symlinks"), &ctx->stable_symlinks),
-        /*  4 - OFFSET */
-        QUICK_CHECKBOX (31, FMDX, 7, FMDY, N_("Di&ve into subdir if exists"),
-                        &ctx->dive_into_subdirs),
-        /*  5 - OFFSET */
-        QUICK_CHECKBOX (3, FMDX, 8, FMDY, N_("Preserve &attributes"), &ctx->op_preserve),
-        /*  6 - OFFSET */
-        QUICK_CHECKBOX (3, FMDX, 7, FMDY, N_("Follow &links"), &ctx->follow_links),
-        /*  7 - OFFSET */
-        QUICK_INPUT (3, FMDX, 6, FMDY, "", 58, 0, "input2", &dest_dir),
-        /*  8 - OFFSET */
-        QUICK_LABEL (3, FMDX, 5, FMDY, N_("to:")),
-        /*  9 - OFFSET */
-        QUICK_CHECKBOX (37, FMDX, 4, FMDY, N_("&Using shell patterns"), &source_easy_patterns),
-        /* 10 - OFFSET */
-        QUICK_INPUT (3, FMDX, 3, FMDY, easy_patterns ? "*" : "^(.*)$", 58, 0, "input-def",
-                     &source_mask),
-        /* 11 - OFFSET */
-        QUICK_LABEL (3, FMDX, 2, FMDY, fmd_buf),
-        QUICK_END
-    };
 
     g_return_val_if_fail (ctx != NULL, NULL);
 
-#ifdef ENABLE_NLS
-    /* buttons */
-    for (i = 0; i <= 2 - OFFSET; i++)
-        fmd_widgets[i].u.button.text = _(fmd_widgets[i].u.button.text);
-
-    /* checkboxes */
-    for (i = 3 - OFFSET; i <= 9 - OFFSET; i++)
-        if (i != 7 - OFFSET)
-            fmd_widgets[i].u.checkbox.text = _(fmd_widgets[i].u.checkbox.text);
-#endif /* !ENABLE_NLS */
-
-    fmd_xlen = max (FMDX, (size_t) COLS * 2 / 3);
-
-    len = str_term_width1 (fmd_widgets[6 - OFFSET].u.checkbox.text)
-        + str_term_width1 (fmd_widgets[4 - OFFSET].u.checkbox.text) + 15;
-    fmd_xlen = max (fmd_xlen, len);
-
-    len = str_term_width1 (fmd_widgets[5 - OFFSET].u.checkbox.text)
-        + str_term_width1 (fmd_widgets[3 - OFFSET].u.checkbox.text) + 15;
-    fmd_xlen = max (fmd_xlen, len);
-
-    /* buttons */
-    b2_len = str_term_width1 (fmd_widgets[2 - OFFSET].u.button.text) + 6 + gap; /* OK */
-#ifdef ENABLE_BACKGROUND
-    b1_len = str_term_width1 (fmd_widgets[1].u.button.text) + 4 + gap;  /* Background */
-#endif
-    b0_len = str_term_width1 (fmd_widgets[0].u.button.text) + 4;        /* Cancel */
-    len = b0_len + b1_len + b2_len;
-    fmd_xlen = min (max (fmd_xlen, len + 6), (size_t) COLS);
-
-    if (only_one)
-    {
-        int flen;
-
-        flen = str_term_width1 (format);
-        i = fmd_xlen - flen - 4;        /* FIXME */
-        g_snprintf (fmd_buf, sizeof (fmd_buf), format, str_trunc ((const char *) text, i));
-    }
-    else
-    {
-        g_snprintf (fmd_buf, sizeof (fmd_buf), format, *(const int *) text);
-        fmd_xlen = max (fmd_xlen, (size_t) str_term_width1 (fmd_buf) + 6);
-    }
-
-    for (i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]); i > 0;)
-        fmd_widgets[--i].x_divisions = fmd_xlen;
-
-    i = (fmd_xlen - len) / 2;
-    /* OK button */
-    fmd_widgets[2 - OFFSET].relative_x = i;
-    i += b2_len;
-#ifdef ENABLE_BACKGROUND
-    /* Background button */
-    fmd_widgets[1].relative_x = i;
-    i += b1_len;
-#endif
-    /* Cancel button */
-    fmd_widgets[0].relative_x = i;
-
-#define chkbox_xpos(i) \
-    fmd_widgets [i].relative_x = fmd_xlen - str_term_width1 (fmd_widgets [i].u.checkbox.text) - 6
-    chkbox_xpos (3 - OFFSET);
-    chkbox_xpos (4 - OFFSET);
-    chkbox_xpos (9 - OFFSET);
-#undef chkbox_xpos
-
-    /* inputs */
-    fmd_widgets[7 - OFFSET].u.input.len = fmd_widgets[10 - OFFSET].u.input.len = fmd_xlen - 6;
-
     /* unselect checkbox if target filesystem don't support attributes */
     ctx->op_preserve = filegui__check_attrs_on_fs (def_text);
+    ctx->stable_symlinks = FALSE;
+    *do_bg = FALSE;
 
     /* filter out a possible password from def_text */
-    {
-        vfs_path_t *vpath;
+    vpath = vfs_path_from_str_flags (def_text, only_one ? VPF_NO_CANON : VPF_NONE);
+    tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    vfs_path_free (vpath);
 
-        vpath = vfs_path_from_str_flags (def_text, (only_one) ? VPF_NO_CANON : VPF_NONE);
-        tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
-        vfs_path_free (vpath);
-    }
     if (source_easy_patterns)
         def_text_secure = strutils_glob_escape (tmp);
     else
         def_text_secure = strutils_regex_escape (tmp);
     g_free (tmp);
 
-    /* destination */
-    fmd_widgets[7 - OFFSET].u.input.text = def_text_secure;
+    fmd_xlen = max (68, (COLS * 2 / 3));
 
-    ctx->stable_symlinks = FALSE;
-    *do_bg = FALSE;
+    if (only_one)
+        g_snprintf (fmd_buf, sizeof (fmd_buf), format, str_trunc ((const char *) text, fmd_xlen - 7));
+    else
+        g_snprintf (fmd_buf, sizeof (fmd_buf), format, *(const int *) text);
 
     {
+        char *source_mask, *orig_mask;
+        int val;
         struct stat buf;
-        vfs_path_t *vpath;
 
-        QuickDialog Quick_input = {
-            fmd_xlen, FMDY, -1, -1, op_names[operation],
-            "[Mask Copy/Rename]", fmd_widgets, NULL, NULL, TRUE
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK2_LABELED_INPUT (fmd_buf, input_label_above,
+                                  easy_patterns ? "*" : "^(.*)$", 0, "input-def", &source_mask,
+                                  NULL),
+            QUICK2_START_COLUMNS,
+                QUICK2_SEPARATOR (FALSE),
+            QUICK2_NEXT_COLUMN,
+                QUICK2_CHECKBOX (N_("&Using shell patterns"), &source_easy_patterns, NULL),
+            QUICK2_STOP_COLUMNS,
+            QUICK2_LABELED_INPUT (N_("to:"), input_label_above,
+                                  def_text_secure, 0, "input2", &dest_dir, NULL),
+            QUICK2_SEPARATOR (TRUE),
+            QUICK2_START_COLUMNS,
+                QUICK2_CHECKBOX (N_("Follow &links"), &ctx->follow_links, NULL),
+                QUICK2_CHECKBOX (N_("Preserve &attributes"), &ctx->op_preserve, NULL),
+            QUICK2_NEXT_COLUMN,
+                QUICK2_CHECKBOX (N_("Di&ve into subdir if exists"), &ctx->dive_into_subdirs, NULL),
+                QUICK2_CHECKBOX (N_("&Stable symlinks"), &ctx->stable_symlinks, NULL),
+            QUICK2_STOP_COLUMNS,
+            QUICK2_START_BUTTONS (TRUE, TRUE),
+                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+#ifdef ENABLE_BACKGROUND
+                QUICK2_BUTTON (N_("&Background"), B_USER, NULL, NULL),
+#endif /* ENABLE_BACKGROUND */
+                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK2_END
+            /* *INDENT-ON* */
+        };
+
+        quick_dialog_t qdlg = {
+            -1, -1, fmd_xlen,
+            op_names[operation], "[Mask Copy/Rename]",
+            quick_widgets, NULL, NULL
         };
 
       ask_file_mask:
-        val = quick_dialog_skip (&Quick_input, 4);
+        val = quick2_dialog_skip (&qdlg, 4);
 
         if (val == B_CANCEL)
         {
@@ -1204,6 +1125,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         else
         {
             int i2;
+
             ctx->preserve = ctx->preserve_uidgid = FALSE;
             i2 = umask (0);
             umask (i2);
@@ -1260,7 +1182,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
             ctx->dest_mask = g_strdup (ctx->dest_mask);
             *orig_mask = '\0';
         }
-        if (!*dest_dir)
+        if (*dest_dir == '\0')
         {
             g_free (dest_dir);
             dest_dir = g_strdup ("./");

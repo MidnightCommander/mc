@@ -208,10 +208,6 @@ set_panel_filter (WPanel * p)
 static void
 select_unselect_cmd (const char *title, const char *history_name, gboolean do_select)
 {
-    /* dialog sizes */
-    const int DX = 50;
-    const int DY = 7;
-
     int files_only = (select_flags & SELECT_FILES_ONLY) != 0;
     int case_sens = (select_flags & SELECT_MATCH_CASE) != 0;
     int shell_patterns = (select_flags & SELECT_SHELL_PATTERNS) != 0;
@@ -220,29 +216,34 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     mc_search_t *search;
     int i;
 
-    QuickWidget quick_widgets[] = {
-        QUICK_CHECKBOX (3, DX, DY - 3, DY, N_("&Using shell patterns"), &shell_patterns),
-        QUICK_CHECKBOX (DX / 2 + 1, DX, DY - 4, DY, N_("&Case sensitive"), &case_sens),
-        QUICK_CHECKBOX (3, DX, DY - 4, DY, N_("&Files only"), &files_only),
-        QUICK_INPUT (3, DX, DY - 5, DY, INPUT_LAST_TEXT, DX - 6, 0, history_name, &reg_exp),
-        QUICK_END
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK2_INPUT (INPUT_LAST_TEXT, 0, history_name, &reg_exp, NULL),
+        QUICK2_START_COLUMNS,
+            QUICK2_CHECKBOX (N_("&Files only"), &files_only, NULL),
+            QUICK2_CHECKBOX (N_("&Using shell patterns"), &shell_patterns, NULL),
+        QUICK2_NEXT_COLUMN,
+            QUICK2_CHECKBOX (N_("&Case sensitive"), &case_sens, NULL),
+        QUICK2_STOP_COLUMNS,
+        QUICK2_END
+        /* *INDENT-ON* */
     };
 
-    QuickDialog quick_dlg = {
-        DX, DY, -1, -1, title,
-        "[Select/Unselect Files]", quick_widgets, NULL, NULL, FALSE
+    quick_dialog_t qdlg = {
+        -1, -1, 50,
+        title, "[Select/Unselect Files]",
+        quick_widgets, NULL, NULL
     };
 
-    if (quick_dialog (&quick_dlg) == B_CANCEL)
+    if (quick2_dialog (&qdlg) == B_CANCEL)
         return;
 
-    if (reg_exp == NULL)
-        return;
-    if (!*reg_exp)
+    if (reg_exp == NULL || *reg_exp == '\0')
     {
         g_free (reg_exp);
         return;
     }
+
     search = mc_search_new (reg_exp, -1);
     search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
