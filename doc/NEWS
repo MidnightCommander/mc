@@ -1,3 +1,10 @@
+Version 4.8.1.6
+
+- Fixes
+
+    * mcedit: two-columns extra offset of cursor after tab character (#2881)
+    * diffviewer: cannot open file if name contains '$' (#2873)
+
 Version 4.8.1.5
 
 - Editor
