@@ -545,17 +545,17 @@ sort_box (panel_sort_info_t * info)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_START_COLUMNS,
-                QUICK2_RADIO (sort_names_num, sort_orders_names, &sort_idx, NULL),
-            QUICK2_NEXT_COLUMN,
-                QUICK2_CHECKBOX (N_("Executable &first"), &info->exec_first, NULL),
-                QUICK2_CHECKBOX (N_("Case sensi&tive"), &info->case_sensitive, NULL),
-                QUICK2_CHECKBOX (N_("&Reverse"), &info->reverse, NULL),
-            QUICK2_STOP_COLUMNS,
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+            QUICK_START_COLUMNS,
+                QUICK_RADIO (sort_names_num, sort_orders_names, &sort_idx, NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_CHECKBOX (N_("Executable &first"), &info->exec_first, NULL),
+                QUICK_CHECKBOX (N_("Case sensi&tive"), &info->case_sensitive, NULL),
+                QUICK_CHECKBOX (N_("&Reverse"), &info->reverse, NULL),
+            QUICK_STOP_COLUMNS,
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -565,7 +565,7 @@ sort_box (panel_sort_info_t * info)
             quick_widgets, NULL, NULL
         };
 
-        if (quick2_dialog (&qdlg) != B_CANCEL)
+        if (quick_dialog (&qdlg) != B_CANCEL)
             result = panel_get_field_by_title_hotkey (sort_orders_names[sort_idx]);
 
         if (result == NULL)
@@ -585,18 +585,18 @@ confirm_box (void)
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
         /* TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix */
-        QUICK2_CHECKBOX (N_("Confirmation|&Delete"), &confirm_delete, NULL),
-        QUICK2_CHECKBOX (N_("Confirmation|O&verwrite"), &confirm_overwrite, NULL),
-        QUICK2_CHECKBOX (N_("Confirmation|&Execute"), &confirm_execute, NULL),
-        QUICK2_CHECKBOX (N_("Confirmation|E&xit"), &confirm_exit, NULL),
-        QUICK2_CHECKBOX (N_("Confirmation|Di&rectory hotlist delete"),
-                         &confirm_directory_hotlist_delete, NULL),
-        QUICK2_CHECKBOX (N_("Confirmation|&History cleanup"),
-                         &mc_global.widget.confirm_history_cleanup, NULL),
-        QUICK2_START_BUTTONS (TRUE, TRUE),
-            QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-        QUICK2_END
+        QUICK_CHECKBOX (N_("Confirmation|&Delete"), &confirm_delete, NULL),
+        QUICK_CHECKBOX (N_("Confirmation|O&verwrite"), &confirm_overwrite, NULL),
+        QUICK_CHECKBOX (N_("Confirmation|&Execute"), &confirm_execute, NULL),
+        QUICK_CHECKBOX (N_("Confirmation|E&xit"), &confirm_exit, NULL),
+        QUICK_CHECKBOX (N_("Confirmation|Di&rectory hotlist delete"),
+                        &confirm_directory_hotlist_delete, NULL),
+        QUICK_CHECKBOX (N_("Confirmation|&History cleanup"),
+                        &mc_global.widget.confirm_history_cleanup, NULL),
+        QUICK_START_BUTTONS (TRUE, TRUE),
+            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_END
         /* *INDENT-ON* */
     };
 
@@ -606,7 +606,7 @@ confirm_box (void)
         quick_widgets, NULL, NULL
     };
 
-    (void) quick2_dialog (&qdlg);
+    (void) quick_dialog (&qdlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -627,13 +627,13 @@ display_bits_box (void)
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
-        QUICK2_RADIO (4, display_bits_str, &current_mode, NULL),
-        QUICK2_SEPARATOR (TRUE),
-        QUICK2_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
-        QUICK2_START_BUTTONS (TRUE, TRUE),
-            QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-        QUICK2_END
+        QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
+        QUICK_SEPARATOR (TRUE),
+        QUICK_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
+        QUICK_START_BUTTONS (TRUE, TRUE),
+            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_END
         /* *INDENT-ON* */
     };
 
@@ -652,7 +652,7 @@ display_bits_box (void)
 
     new_meta = !use_8th_bit_as_meta;
 
-    if (quick2_dialog (&qdlg) != B_CANCEL)
+    if (quick_dialog (&qdlg) != B_CANCEL)
     {
         mc_global.eight_bit_clean = current_mode < 3;
         mc_global.full_eight_bits = current_mode < 2;
@@ -683,21 +683,21 @@ display_bits_box (void)
 
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_START_COLUMNS,
-                QUICK2_LABEL (N_("Input / display codepage:"), NULL),
-            QUICK2_NEXT_COLUMN,
-            QUICK2_STOP_COLUMNS,
-            QUICK2_START_COLUMNS,
-                QUICK2_LABEL (cpname, &disp_bits_name_id),
-            QUICK2_NEXT_COLUMN,
-                QUICK2_BUTTON (N_("&Select"), B_USER, sel_charset_button, NULL),
-            QUICK2_STOP_COLUMNS,
-            QUICK2_SEPARATOR (TRUE),
-                QUICK2_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+            QUICK_START_COLUMNS,
+                QUICK_LABEL (N_("Input / display codepage:"), NULL),
+            QUICK_NEXT_COLUMN,
+            QUICK_STOP_COLUMNS,
+            QUICK_START_COLUMNS,
+                QUICK_LABEL (cpname, &disp_bits_name_id),
+            QUICK_NEXT_COLUMN,
+                QUICK_BUTTON (N_("&Select"), B_USER, sel_charset_button, NULL),
+            QUICK_STOP_COLUMNS,
+            QUICK_SEPARATOR (TRUE),
+                QUICK_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -710,7 +710,7 @@ display_bits_box (void)
         new_meta = !use_8th_bit_as_meta;
         application_keypad_mode ();
 
-        if (quick2_dialog (&qdlg) == B_ENTER)
+        if (quick_dialog (&qdlg) == B_ENTER)
         {
             char *errmsg;
 
@@ -797,27 +797,27 @@ configure_vfs (void)
 
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_LABELED_INPUT (N_("Timeout for freeing VFSs (sec):"), input_label_left,
-                                  buffer2, 0, "input-timo-vfs", &ret_timeout, NULL),
+            QUICK_LABELED_INPUT (N_("Timeout for freeing VFSs (sec):"), input_label_left,
+                                 buffer2, 0, "input-timo-vfs", &ret_timeout, NULL),
 #ifdef ENABLE_VFS_FTP
-            QUICK2_SEPARATOR (TRUE),
-            QUICK2_LABELED_INPUT (N_("FTP anonymous password:"), input_label_left,
-                                  ftpfs_anonymous_passwd, 0, "input-passwd", &ret_passwd, NULL),
-            QUICK2_LABELED_INPUT (N_("FTP directory cache timeout (sec):"), input_label_left,
-                                  buffer3, 0, "input-timeout", &ret_directory_timeout, NULL),
-            QUICK2_CHECKBOX (N_("&Always use ftp proxy:"), &ftpfs_always_use_proxy,
-                             &ftpfs_always_use_proxy_id),
-            QUICK2_INPUT (ftpfs_proxy_host, 0, "input-ftp-proxy", &ret_ftp_proxy,
-                          &ftpfs_proxy_host_id),
-            QUICK2_CHECKBOX (N_("&Use ~/.netrc"), &ftpfs_use_netrc, NULL),
-            QUICK2_CHECKBOX (N_("Use &passive mode"), &ftpfs_use_passive_connections, NULL),
-            QUICK2_CHECKBOX (N_("Use passive mode over pro&xy"),
-                             &ftpfs_use_passive_connections_over_proxy, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_LABELED_INPUT (N_("FTP anonymous password:"), input_label_left,
+                                 ftpfs_anonymous_passwd, 0, "input-passwd", &ret_passwd, NULL),
+            QUICK_LABELED_INPUT (N_("FTP directory cache timeout (sec):"), input_label_left,
+                                 buffer3, 0, "input-timeout", &ret_directory_timeout, NULL),
+            QUICK_CHECKBOX (N_("&Always use ftp proxy:"), &ftpfs_always_use_proxy,
+                            &ftpfs_always_use_proxy_id),
+            QUICK_INPUT (ftpfs_proxy_host, 0, "input-ftp-proxy", &ret_ftp_proxy,
+                         &ftpfs_proxy_host_id),
+            QUICK_CHECKBOX (N_("&Use ~/.netrc"), &ftpfs_use_netrc, NULL),
+            QUICK_CHECKBOX (N_("Use &passive mode"), &ftpfs_use_passive_connections, NULL),
+            QUICK_CHECKBOX (N_("Use passive mode over pro&xy"),
+                            &ftpfs_use_passive_connections_over_proxy, NULL),
 #endif /* ENABLE_VFS_FTP */
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -838,7 +838,7 @@ configure_vfs (void)
             quick_widgets[5].options = W_DISABLED;
 #endif
 
-        if (quick2_dialog (&qdlg) != B_CANCEL)
+        if (quick_dialog (&qdlg) != B_CANCEL)
         {
             vfs_timeout = atoi (ret_timeout);
             g_free (ret_timeout);
@@ -868,8 +868,8 @@ cd_dialog (void)
     char *my_str;
 
     quick_widget_t quick_widgets[] = {
-        QUICK2_LABELED_INPUT (N_("cd"), input_label_left, "", 2, "input", &my_str, NULL),
-        QUICK2_END
+        QUICK_LABELED_INPUT (N_("cd"), input_label_left, "", 2, "input", &my_str, NULL),
+        QUICK_END
     };
 
     quick_dialog_t qdlg = {
@@ -878,7 +878,7 @@ cd_dialog (void)
         quick_widgets, NULL, NULL
     };
 
-    return (quick2_dialog (&qdlg) != B_CANCEL) ? my_str : NULL;
+    return (quick_dialog (&qdlg) != B_CANCEL) ? my_str : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -896,16 +896,16 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_LABELED_INPUT (N_("Existing filename (filename symlink will point to):"),
-                                  input_label_above,
-                                  existing, 0, "input-2", ret_existing, NULL),
-            QUICK2_SEPARATOR (FALSE),
-            QUICK2_LABELED_INPUT (N_("Symbolic link filename:"), input_label_above,
-                                  new, 0, "input-1", ret_new, NULL),
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+            QUICK_LABELED_INPUT (N_("Existing filename (filename symlink will point to):"),
+                                 input_label_above,
+                                 existing, 0, "input-2", ret_existing, NULL),
+            QUICK_SEPARATOR (FALSE),
+            QUICK_LABELED_INPUT (N_("Symbolic link filename:"), input_label_above,
+                                 new, 0, "input-1", ret_new, NULL),
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -915,7 +915,7 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
             quick_widgets, NULL, NULL
         };
 
-        if (quick2_dialog (&qdlg) == B_CANCEL)
+        if (quick_dialog (&qdlg) == B_CANCEL)
         {
             *ret_new = NULL;
             *ret_existing = NULL;

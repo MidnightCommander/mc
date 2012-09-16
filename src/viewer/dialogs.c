@@ -87,25 +87,25 @@ mcview_dialog_search (mcview_t * view)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                  INPUT_LAST_TEXT, 0, MC_HISTORY_SHARED_SEARCH, &exp, NULL),
-            QUICK2_SEPARATOR (TRUE),
-            QUICK2_START_COLUMNS,
-                QUICK2_RADIO (num_of_types, (const char **) list_of_types,
-                              (int *) &mcview_search_options.type, NULL),
-            QUICK2_NEXT_COLUMN,
-                QUICK2_CHECKBOX (N_("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
-                QUICK2_CHECKBOX (N_("&Backwards"), &mcview_search_options.backwards, NULL),
-                QUICK2_CHECKBOX (N_("&Whole words"), &mcview_search_options.whole_words, NULL),
+            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
+                                 INPUT_LAST_TEXT, 0, MC_HISTORY_SHARED_SEARCH, &exp, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_START_COLUMNS,
+                QUICK_RADIO (num_of_types, (const char **) list_of_types,
+                             (int *) &mcview_search_options.type, NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_CHECKBOX (N_("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (N_("&Backwards"), &mcview_search_options.backwards, NULL),
+                QUICK_CHECKBOX (N_("&Whole words"), &mcview_search_options.whole_words, NULL),
 #ifdef HAVE_CHARSET
-                QUICK2_CHECKBOX (N_("&All charsets"), &mcview_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (N_("&All charsets"), &mcview_search_options.all_codepages, NULL),
 #endif
-            QUICK2_STOP_COLUMNS,
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_STOP_COLUMNS,
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
             /* *INDENT-ON* */
-            QUICK2_END
+            QUICK_END
         };
 
         quick_dialog_t qdlg = {
@@ -114,7 +114,7 @@ mcview_dialog_search (mcview_t * view)
             quick_widgets, NULL, NULL
         };
 
-        qd_result = quick2_dialog (&qdlg);
+        qd_result = quick_dialog (&qdlg);
     }
 
     g_strfreev (list_of_types);
@@ -199,13 +199,13 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_INPUT (INPUT_LAST_TEXT, 0, MC_HISTORY_VIEW_GOTO, &exp, NULL),
-            QUICK2_RADIO (num_of_types, (const char **) mc_view_goto_str,
-                          (int *) &current_goto_type, NULL),
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+            QUICK_INPUT (INPUT_LAST_TEXT, 0, MC_HISTORY_VIEW_GOTO, &exp, NULL),
+            QUICK_RADIO (num_of_types, (const char **) mc_view_goto_str, (int *) &current_goto_type,
+                         NULL),
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -216,7 +216,7 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
         };
 
         /* run dialog */
-        qd_result = quick2_dialog (&qdlg);
+        qd_result = quick_dialog (&qdlg);
     }
 
     *offset = -1;

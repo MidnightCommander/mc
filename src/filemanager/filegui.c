@@ -1068,31 +1068,31 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
 
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_LABELED_INPUT (fmd_buf, input_label_above,
-                                  easy_patterns ? "*" : "^(.*)$", 0, "input-def", &source_mask,
-                                  NULL),
-            QUICK2_START_COLUMNS,
-                QUICK2_SEPARATOR (FALSE),
-            QUICK2_NEXT_COLUMN,
-                QUICK2_CHECKBOX (N_("&Using shell patterns"), &source_easy_patterns, NULL),
-            QUICK2_STOP_COLUMNS,
-            QUICK2_LABELED_INPUT (N_("to:"), input_label_above,
-                                  def_text_secure, 0, "input2", &dest_dir, NULL),
-            QUICK2_SEPARATOR (TRUE),
-            QUICK2_START_COLUMNS,
-                QUICK2_CHECKBOX (N_("Follow &links"), &ctx->follow_links, NULL),
-                QUICK2_CHECKBOX (N_("Preserve &attributes"), &ctx->op_preserve, NULL),
-            QUICK2_NEXT_COLUMN,
-                QUICK2_CHECKBOX (N_("Di&ve into subdir if exists"), &ctx->dive_into_subdirs, NULL),
-                QUICK2_CHECKBOX (N_("&Stable symlinks"), &ctx->stable_symlinks, NULL),
-            QUICK2_STOP_COLUMNS,
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+            QUICK_LABELED_INPUT (fmd_buf, input_label_above,
+                                 easy_patterns ? "*" : "^(.*)$", 0, "input-def", &source_mask,
+                                 NULL),
+            QUICK_START_COLUMNS,
+                QUICK_SEPARATOR (FALSE),
+            QUICK_NEXT_COLUMN,
+                QUICK_CHECKBOX (N_("&Using shell patterns"), &source_easy_patterns, NULL),
+            QUICK_STOP_COLUMNS,
+            QUICK_LABELED_INPUT (N_("to:"), input_label_above,
+                                 def_text_secure, 0, "input2", &dest_dir, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_START_COLUMNS,
+                QUICK_CHECKBOX (N_("Follow &links"), &ctx->follow_links, NULL),
+                QUICK_CHECKBOX (N_("Preserve &attributes"), &ctx->op_preserve, NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_CHECKBOX (N_("Di&ve into subdir if exists"), &ctx->dive_into_subdirs, NULL),
+                QUICK_CHECKBOX (N_("&Stable symlinks"), &ctx->stable_symlinks, NULL),
+            QUICK_STOP_COLUMNS,
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
 #ifdef ENABLE_BACKGROUND
-                QUICK2_BUTTON (N_("&Background"), B_USER, NULL, NULL),
+                QUICK_BUTTON (N_("&Background"), B_USER, NULL, NULL),
 #endif /* ENABLE_BACKGROUND */
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -1103,7 +1103,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         };
 
       ask_file_mask:
-        val = quick2_dialog_skip (&qdlg, 4);
+        val = quick_dialog_skip (&qdlg, 4);
 
         if (val == B_CANCEL)
         {

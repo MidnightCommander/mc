@@ -31,7 +31,6 @@ typedef struct Dlg_head Dlg_head;
 #include "lib/widget/input.h"
 #include "lib/widget/listbox-window.h"
 #include "lib/widget/quick.h"
-#include "lib/widget/quick2.h"
 #include "lib/widget/wtools.h"
 #include "lib/widget/dialog-switch.h"
 

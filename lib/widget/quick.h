@@ -9,131 +9,207 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define QUICK_CHECKBOX(x, xdiv, y, ydiv, txt, st)                       \
-{                                                                       \
-    .widget_type = quick_checkbox,                                      \
-    .relative_x = x,                                                    \
-    .x_divisions = xdiv,                                                \
-    .relative_y = y,                                                    \
-    .y_divisions = ydiv,                                                \
-    .widget = NULL,                                                     \
-    .options = 0,                                                       \
-    .u = {                                                              \
-        .checkbox = {                                                   \
-            .text = txt,                                                \
-            .state = st                                                 \
-        }                                                               \
-    }                                                                   \
+#define QUICK_CHECKBOX(txt, st, id_)                                            \
+{                                                                               \
+    .widget_type = quick_checkbox,                                              \
+    .options = 0,                                                               \
+    .id = id_,                                                                  \
+    .u = {                                                                      \
+        .checkbox = {                                                           \
+            .text = txt,                                                        \
+            .state = st                                                         \
+        }                                                                       \
+    }                                                                           \
 }
 
-#define QUICK_BUTTON(x, xdiv, y, ydiv, txt, act, cb)                    \
-{                                                                       \
-    .widget_type = quick_button,                                        \
-    .relative_x = x,                                                    \
-    .x_divisions = xdiv,                                                \
-    .relative_y = y,                                                    \
-    .y_divisions = ydiv,                                                \
-    .widget = NULL,                                                     \
-    .options = 0,                                                       \
-    .u = {                                                              \
-        .button = {                                                     \
-            .text = txt,                                                \
-            .action = act,                                              \
-            .callback = cb                                              \
-        }                                                               \
-    }                                                                   \
+#define QUICK_BUTTON(txt, act, cb, id_)                                         \
+{                                                                               \
+    .widget_type = quick_button,                                                \
+    .options = 0,                                                               \
+    .id = id_,                                                                  \
+    .u = {                                                                      \
+        .button = {                                                             \
+            .text = txt,                                                        \
+            .action = act,                                                      \
+            .callback = cb                                                      \
+        }                                                                       \
+    }                                                                           \
 }
 
-#define QUICK_INPUT(x, xdiv, y, ydiv, txt, len_, flags_, hname, res)    \
-{                                                                       \
-    .widget_type = quick_input,                                         \
-    .relative_x = x,                                                    \
-    .x_divisions = xdiv,                                                \
-    .relative_y = y,                                                    \
-    .y_divisions = ydiv,                                                \
-    .widget = NULL,                                                     \
-    .options = 0,                                                       \
-    .u = {                                                              \
-        .input = {                                                      \
-            .text = txt,                                                \
-            .len = len_,                                                \
-            .flags = flags_,                                            \
-            .histname = hname,                                          \
-            .result = res                                               \
-        }                                                               \
-    }                                                                   \
+#define QUICK_INPUT(txt, flags_, hname, res, id_)                               \
+{                                                                               \
+    .widget_type = quick_input,                                                 \
+    .options = 0,                                                               \
+    .id = id_,                                                                  \
+    .u = {                                                                      \
+        .input = {                                                              \
+            .label_text = NULL,                                                 \
+            .label_location = input_label_none,                                 \
+            .label = NULL,                                                      \
+            .text = txt,                                                        \
+            .flags = flags_,                                                    \
+            .histname = hname,                                                  \
+            .result = res                                                       \
+        }                                                                       \
+    }                                                                           \
 }
 
-#define QUICK_LABEL(x, xdiv, y, ydiv, txt)                              \
-{                                                                       \
-    .widget_type = quick_label,                                         \
-    .relative_x = x,                                                    \
-    .x_divisions = xdiv,                                                \
-    .relative_y = y,                                                    \
-    .y_divisions = ydiv,                                                \
-    .widget = NULL,                                                     \
-    .options = 0,                                                       \
-    .u = {                                                              \
-        .label = {                                                      \
-            .text = txt                                                 \
-        }                                                               \
-    }                                                                   \
+#define QUICK_LABELED_INPUT(label_, label_loc, txt, flags_, hname, res, id_)    \
+{                                                                               \
+    .widget_type = quick_input,                                                 \
+    .options = 0,                                                               \
+    .id = id_,                                                                  \
+    .u = {                                                                      \
+        .input = {                                                              \
+            .label_text = label_,                                               \
+            .label_location = label_loc,                                        \
+            .label = NULL,                                                      \
+            .text = txt,                                                        \
+            .flags = flags_,                                                    \
+            .histname = hname,                                                  \
+            .result = res                                                       \
+        }                                                                       \
+    }                                                                           \
 }
 
-#define QUICK_RADIO(x, xdiv, y, ydiv, cnt, items_, val)                 \
-{                                                                       \
-    .widget_type = quick_radio,                                         \
-    .relative_x = x,                                                    \
-    .x_divisions = xdiv,                                                \
-    .relative_y = y,                                                    \
-    .y_divisions = ydiv,                                                \
-    .widget = NULL,                                                     \
-    .options = 0,                                                       \
-    .u = {                                                              \
-        .radio = {                                                      \
-            .count = cnt,                                               \
-            .items = items_,                                            \
-            .value = val                                                \
-        }                                                               \
-    }                                                                   \
+#define QUICK_LABEL(txt, id_)                                                   \
+{                                                                               \
+    .widget_type = quick_label,                                                 \
+    .options = 0,                                                               \
+    .id = id_,                                                                  \
+    .u = {                                                                      \
+        .label = {                                                              \
+            .text = txt,                                                        \
+            .input = NULL                                                       \
+        }                                                                       \
+    }                                                                           \
 }
 
-#define QUICK_GROUPBOX(x, xdiv, y, ydiv, w, h, t)                       \
-{                                                                       \
-    .widget_type = quick_groupbox,                                      \
-    .relative_x = x,                                                    \
-    .x_divisions = xdiv,                                                \
-    .relative_y = y,                                                    \
-    .y_divisions = ydiv,                                                \
-    .widget = NULL,                                                     \
-    .options = 0,                                                       \
-    .u = {                                                              \
-        .groupbox = {                                                   \
-            .width = w,                                                 \
-            .height = h,                                                \
-            .title = t                                                  \
-        }                                                               \
-    }                                                                   \
+#define QUICK_RADIO(cnt, items_, val, id_)                                      \
+{                                                                               \
+    .widget_type = quick_radio,                                                 \
+    .options = 0,                                                               \
+    .id = id_,                                                                  \
+    .u = {                                                                      \
+        .radio = {                                                              \
+            .count = cnt,                                                       \
+            .items = items_,                                                    \
+            .value = val                                                        \
+        }                                                                       \
+    }                                                                           \
 }
 
-#define QUICK_END                                                       \
-{                                                                       \
-    .widget_type = quick_end,                                           \
-    .relative_x = 0,                                                    \
-    .x_divisions = 0,                                                   \
-    .relative_y = 0,                                                    \
-    .y_divisions = 0,                                                   \
-    .widget = NULL,                                                     \
-    .options = 0,                                                       \
-    .u = {                                                              \
-        .input = {                                                      \
-            .text = NULL,                                               \
-            .len = 0,                                                   \
-            .flags = 0,                                                 \
-            .histname = NULL,                                           \
-            .result = NULL                                              \
-        }                                                               \
-    }                                                                   \
+#define QUICK_START_GROUPBOX(t)                                                 \
+{                                                                               \
+    .widget_type = quick_start_groupbox,                                        \
+    .options = 0,                                                               \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .groupbox = {                                                           \
+            .title = t                                                          \
+        }                                                                       \
+    }                                                                           \
+}
+
+#define QUICK_STOP_GROUPBOX                                                     \
+{                                                                               \
+    .widget_type = quick_stop_groupbox,                                         \
+    .options = 0,                                                               \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .input = {                                                              \
+            .text = NULL,                                                       \
+            .flags = 0,                                                         \
+            .histname = NULL,                                                   \
+            .result = NULL                                                      \
+        }                                                                       \
+    }                                                                           \
+}
+
+#define QUICK_SEPARATOR(line_)                                                  \
+{                                                                               \
+    .widget_type = quick_separator,                                             \
+    .options = 0,                                                               \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .separator = {                                                          \
+            .space = TRUE,                                                      \
+            .line = line_                                                       \
+        }                                                                       \
+    }                                                                           \
+}
+
+#define QUICK_START_COLUMNS                                                     \
+{                                                                               \
+    .widget_type = quick_start_columns,                                         \
+    .options = 0,                                                               \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .input = {                                                              \
+            .text = NULL,                                                       \
+            .flags = 0,                                                         \
+            .histname = NULL,                                                   \
+            .result = NULL                                                      \
+        }                                                                       \
+    }                                                                           \
+}
+
+#define QUICK_NEXT_COLUMN                                                       \
+{                                                                               \
+    .widget_type = quick_next_column,                                           \
+    .options = 0,                                                               \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .input = {                                                              \
+            .text = NULL,                                                       \
+            .flags = 0,                                                         \
+            .histname = NULL,                                                   \
+            .result = NULL                                                      \
+        }                                                                       \
+    }                                                                           \
+}
+
+#define QUICK_STOP_COLUMNS                                                      \
+{                                                                               \
+    .widget_type = quick_stop_columns,                                          \
+    .options = 0,                                                               \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .input = {                                                              \
+            .text = NULL,                                                       \
+            .flags = 0,                                                         \
+            .histname = NULL,                                                   \
+            .result = NULL                                                      \
+        }                                                                       \
+    }                                                                           \
+}
+
+#define QUICK_START_BUTTONS(space_, line_)                                      \
+{                                                                               \
+    .widget_type = quick_buttons,                                               \
+    .options = 0,                                                               \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .separator = {                                                          \
+            .space = space_,                                                    \
+            .line = line_                                                       \
+        }                                                                       \
+    }                                                                           \
+}
+
+#define QUICK_END                                                               \
+{                                                                               \
+    .widget_type = quick_end,                                                   \
+    .options = 0,                                                               \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .input = {                                                              \
+            .text = NULL,                                                       \
+            .flags = 0,                                                         \
+            .histname = NULL,                                                   \
+            .result = NULL                                                      \
+        }                                                                       \
+    }                                                                           \
 }
 
 /*** enums ***************************************************************************************/
@@ -147,23 +223,35 @@ typedef enum
     quick_input = 3,
     quick_label = 4,
     quick_radio = 5,
-    quick_groupbox = 6
+    quick_start_groupbox = 6,
+    quick_stop_groupbox = 7,
+    quick_separator = 8,
+    quick_start_columns = 9,
+    quick_next_column = 10,
+    quick_stop_columns = 11,
+    quick_buttons = 12
 } quick_t;
+
+typedef enum
+{
+    input_label_none = 0,
+    input_label_above = 1,
+    input_label_left = 2,
+    input_label_right = 3,
+    input_label_below = 4
+} quick_input_label_location_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /* The widget is placed on relative_?/divisions_? of the parent widget */
-typedef struct
+typedef struct quick_widget_t quick_widget_t;
+
+struct quick_widget_t
 {
     quick_t widget_type;
 
-    int relative_x;
-    int x_divisions;
-    int relative_y;
-    int y_divisions;
-
-    Widget *widget;
     widget_options_t options;
+    unsigned long *id;
 
     /* widget parameters */
     union
@@ -183,8 +271,10 @@ typedef struct
 
         struct
         {
+            const char *label_text;
+            quick_input_label_location_t label_location;
+            quick_widget_t *label;
             const char *text;
-            int len;
             int flags;          /* 1 -- is_password, 2 -- INPUT_COMPLETE_CD */
             const char *histname;
             char **result;
@@ -194,6 +284,7 @@ typedef struct
         struct
         {
             const char *text;
+            quick_widget_t *input;
         } label;
 
         struct
@@ -205,37 +296,40 @@ typedef struct
 
         struct
         {
-            int width;
-            int height;
             const char *title;
         } groupbox;
+
+        struct
+        {
+            gboolean space;
+            gboolean line;
+        } separator;
     } u;
-} QuickWidget;
+};
 
 typedef struct
 {
-    int xlen, ylen;
-    int xpos, ypos;             /* if -1, then center the dialog */
+    int y, x;                   /* if -1, then center the dialog */
+    int cols;                   /* heigth is calculated automatically */
     const char *title;
     const char *help;
-    QuickWidget *widgets;
+    quick_widget_t *widgets;
     dlg_cb_fn callback;
     mouse_h mouse;
-    gboolean i18n;              /* If true, internationalization has happened */
-} QuickDialog;
+} quick_dialog_t;
 
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-int quick_dialog_skip (QuickDialog * qd, int nskip);
+int quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip);
 
 /*** inline functions ****************************************************************************/
 
 static inline int
-quick_dialog (QuickDialog * qd)
+quick_dialog (quick_dialog_t * quick_dlg)
 {
-    return quick_dialog_skip (qd, 0);
+    return quick_dialog_skip (quick_dlg, 1);
 }
 
 #endif /* MC__QUICK_H */

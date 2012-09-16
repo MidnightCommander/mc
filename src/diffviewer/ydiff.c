@@ -2352,21 +2352,21 @@ dview_diff_options (WDiff * dview)
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
-        QUICK2_START_GROUPBOX (N_("Diff algorithm")),
-            QUICK2_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
-        QUICK2_STOP_GROUPBOX,
-        QUICK2_START_GROUPBOX (N_("Diff extra options")),
-            QUICK2_CHECKBOX (N_("&Ignore case"), &dview->opt.ignore_case, NULL),
-            QUICK2_CHECKBOX (N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
-            QUICK2_CHECKBOX (N_("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
-            QUICK2_CHECKBOX (N_("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
-            QUICK2_CHECKBOX (N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
-                             NULL),
-        QUICK2_STOP_GROUPBOX,
-        QUICK2_START_BUTTONS (TRUE, TRUE),
-            QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-        QUICK2_END
+        QUICK_START_GROUPBOX (N_("Diff algorithm")),
+            QUICK_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
+        QUICK_STOP_GROUPBOX,
+        QUICK_START_GROUPBOX (N_("Diff extra options")),
+            QUICK_CHECKBOX (N_("&Ignore case"), &dview->opt.ignore_case, NULL),
+            QUICK_CHECKBOX (N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
+            QUICK_CHECKBOX (N_("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
+            QUICK_CHECKBOX (N_("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
+            QUICK_CHECKBOX (N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
+                            NULL),
+        QUICK_STOP_GROUPBOX,
+        QUICK_START_BUTTONS (TRUE, TRUE),
+            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_END
         /* *INDENT-ON* */
     };
 
@@ -2376,7 +2376,7 @@ dview_diff_options (WDiff * dview)
         quick_widgets, NULL, NULL
     };
 
-    if (quick2_dialog (&qdlg) != B_CANCEL)
+    if (quick_dialog (&qdlg) != B_CANCEL)
         dview_reread (dview);
 }
 

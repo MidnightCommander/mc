@@ -18,7 +18,6 @@ libmcwidget_la_SOURCES = \
 	label.c label.h \
 	menu.c menu.h \
 	quick.c quick.h \
-	quick2.c quick2.h \
 	radio.c radio.h \
 	widget-common.c widget-common.h \
 	wtools.c wtools.h

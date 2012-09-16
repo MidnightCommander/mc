@@ -82,25 +82,24 @@ mcdiffview_dialog_search (WDiff * dview)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                  INPUT_LAST_TEXT, 0, MC_HISTORY_SHARED_SEARCH, &exp, NULL),
-            QUICK2_SEPARATOR (TRUE),
-            QUICK2_START_COLUMNS,
-                QUICK2_RADIO (num_of_types, (const char **) list_of_types,
-                              (int *) &mcdiffview_search_options.type, NULL),
-            QUICK2_NEXT_COLUMN,
-                QUICK2_CHECKBOX (N_("Cas&e sensitive"), &mcdiffview_search_options.case_sens, NULL),
-                QUICK2_CHECKBOX (N_("&Backwards"), &mcdiffview_search_options.backwards, NULL),
-                QUICK2_CHECKBOX (N_("&Whole words"), &mcdiffview_search_options.whole_words, NULL),
+            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
+                                 INPUT_LAST_TEXT, 0, MC_HISTORY_SHARED_SEARCH, &exp, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_START_COLUMNS,
+                QUICK_RADIO (num_of_types, (const char **) list_of_types,
+                             (int *) &mcdiffview_search_options.type, NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_CHECKBOX (N_("Cas&e sensitive"), &mcdiffview_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (N_("&Backwards"), &mcdiffview_search_options.backwards, NULL),
+                QUICK_CHECKBOX (N_("&Whole words"), &mcdiffview_search_options.whole_words, NULL),
 #ifdef HAVE_CHARSET
-                QUICK2_CHECKBOX (N_("&All charsets"), &mcdiffview_search_options.all_codepages,
-                                 NULL),
+                QUICK_CHECKBOX (N_("&All charsets"), &mcdiffview_search_options.all_codepages, NULL),
 #endif
-            QUICK2_STOP_COLUMNS,
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+            QUICK_STOP_COLUMNS,
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -110,7 +109,7 @@ mcdiffview_dialog_search (WDiff * dview)
             quick_widgets, NULL, NULL
         };
 
-        qd_result = quick2_dialog (&qdlg);
+        qd_result = quick_dialog (&qdlg);
     }
 
     g_strfreev (list_of_types);

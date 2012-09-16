@@ -462,15 +462,15 @@ edit_get_save_file_as (WEdit * edit)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_LABELED_INPUT (N_("Enter file name:"), input_label_above,  filename, 0, "save-as",
-                                  &filename_res, NULL),
-            QUICK2_SEPARATOR (TRUE),
-            QUICK2_LABEL (N_("Change line breaks to:"), NULL),
-            QUICK2_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+            QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,  filename, 0, "save-as",
+                                 &filename_res, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_LABEL (N_("Change line breaks to:"), NULL),
+            QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -480,7 +480,7 @@ edit_get_save_file_as (WEdit * edit)
             quick_widgets, NULL, NULL
         };
 
-        if (quick2_dialog (&qdlg) != B_CANCEL)
+        if (quick_dialog (&qdlg) != B_CANCEL)
         {
             char *fname;
 
@@ -1603,15 +1603,15 @@ edit_save_mode_cmd (void)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK2_RADIO (3, str, &option_save_mode, &edit_save_mode_radio_id),
-            QUICK2_INPUT (option_backup_ext, 0, "edit-backup-ext", &str_result,
-                          &edit_save_mode_input_id),
-            QUICK2_SEPARATOR (TRUE),
-            QUICK2_CHECKBOX (N_("Check &POSIX new line"), &option_check_nl_at_eof, NULL),
-            QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK2_END
+            QUICK_RADIO (3, str, &option_save_mode, &edit_save_mode_radio_id),
+            QUICK_INPUT (option_backup_ext, 0, "edit-backup-ext", &str_result,
+                         &edit_save_mode_input_id),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_CHECKBOX (N_("Check &POSIX new line"), &option_check_nl_at_eof, NULL),
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
             /* *INDENT-ON* */
         };
 
@@ -1621,7 +1621,7 @@ edit_save_mode_cmd (void)
             quick_widgets, edit_save_mode_callback, NULL
         };
 
-        if (quick2_dialog (&qdlg) != B_CANCEL)
+        if (quick_dialog (&qdlg) != B_CANCEL)
         {
             g_free (option_backup_ext);
             option_backup_ext = str_result;
@@ -3300,20 +3300,20 @@ edit_mail_dialog (WEdit * edit)
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
-        QUICK2_LABEL (N_("mail -s <subject> -c <cc> <to>"), NULL),
-        QUICK2_LABELED_INPUT (N_("To"), input_label_above,
-                              mail_to_last != NULL ? mail_to_last : "", 0,
-                              "mail-dlg-input-3", &tmail_to, NULL),
-        QUICK2_LABELED_INPUT (N_("Subject"), input_label_above,
-                               mail_subject_last != NULL ? mail_subject_last : "", 0,
-                              "mail-dlg-input-2", &tmail_subject, NULL),
-        QUICK2_LABELED_INPUT (N_("Copies to"), input_label_above,
-                              mail_cc_last != NULL ? mail_cc_last  : "", 0,
-                              "mail-dlg-input", &tmail_cc, NULL),
-        QUICK2_START_BUTTONS (TRUE, TRUE),
-            QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-        QUICK2_END
+        QUICK_LABEL (N_("mail -s <subject> -c <cc> <to>"), NULL),
+        QUICK_LABELED_INPUT (N_("To"), input_label_above,
+                             mail_to_last != NULL ? mail_to_last : "", 0,
+                             "mail-dlg-input-3", &tmail_to, NULL),
+        QUICK_LABELED_INPUT (N_("Subject"), input_label_above,
+                              mail_subject_last != NULL ? mail_subject_last : "", 0,
+                             "mail-dlg-input-2", &tmail_subject, NULL),
+        QUICK_LABELED_INPUT (N_("Copies to"), input_label_above,
+                             mail_cc_last != NULL ? mail_cc_last  : "", 0,
+                             "mail-dlg-input", &tmail_cc, NULL),
+        QUICK_START_BUTTONS (TRUE, TRUE),
+            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_END
         /* *INDENT-ON* */
     };
 
@@ -3323,7 +3323,7 @@ edit_mail_dialog (WEdit * edit)
         quick_widgets, NULL, NULL
     };
 
-    if (quick2_dialog (&qdlg) != B_CANCEL)
+    if (quick_dialog (&qdlg) != B_CANCEL)
     {
         g_free (mail_cc_last);
         g_free (mail_subject_last);

@@ -982,14 +982,14 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 {
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
-        QUICK2_LABELED_INPUT (text1, input_label_above, *r1, 0, "input-lbl", r1, NULL),
-        QUICK2_SEPARATOR (FALSE),
-        QUICK2_LABELED_INPUT (text2, input_label_above, *r2, 0, "input-lbl", r2, NULL),
-        QUICK2_START_BUTTONS (TRUE, TRUE),
-            QUICK2_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
-            QUICK2_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
-            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-        QUICK2_END
+        QUICK_LABELED_INPUT (text1, input_label_above, *r1, 0, "input-lbl", r1, NULL),
+        QUICK_SEPARATOR (FALSE),
+        QUICK_LABELED_INPUT (text2, input_label_above, *r2, 0, "input-lbl", r2, NULL),
+        QUICK_START_BUTTONS (TRUE, TRUE),
+            QUICK_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
+            QUICK_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
+            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_END
         /* *INDENT-ON* */
     };
 
@@ -1001,7 +1001,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 
     int ret;
 
-    ret = quick2_dialog (&qdlg);
+    ret = quick_dialog (&qdlg);
 
     return (ret != B_CANCEL) ? ret : 0;
 }
@@ -1045,12 +1045,12 @@ add_new_group_input (const char *header, const char *label, char **result)
 {
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
-        QUICK2_LABELED_INPUT (label, input_label_above, "", 0, "input", result, NULL),
-        QUICK2_START_BUTTONS (TRUE, TRUE),
-            QUICK2_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
-            QUICK2_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
-            QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-        QUICK2_END
+        QUICK_LABELED_INPUT (label, input_label_above, "", 0, "input", result, NULL),
+        QUICK_START_BUTTONS (TRUE, TRUE),
+            QUICK_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
+            QUICK_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
+            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_END
         /* *INDENT-ON* */
     };
 
@@ -1062,7 +1062,7 @@ add_new_group_input (const char *header, const char *label, char **result)
 
     int ret;
 
-    ret = quick2_dialog (&qdlg);
+    ret = quick_dialog (&qdlg);
 
     return (ret != B_CANCEL) ? ret : 0;
 }

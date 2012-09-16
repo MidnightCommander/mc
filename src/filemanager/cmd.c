@@ -218,14 +218,14 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
-        QUICK2_INPUT (INPUT_LAST_TEXT, 0, history_name, &reg_exp, NULL),
-        QUICK2_START_COLUMNS,
-            QUICK2_CHECKBOX (N_("&Files only"), &files_only, NULL),
-            QUICK2_CHECKBOX (N_("&Using shell patterns"), &shell_patterns, NULL),
-        QUICK2_NEXT_COLUMN,
-            QUICK2_CHECKBOX (N_("&Case sensitive"), &case_sens, NULL),
-        QUICK2_STOP_COLUMNS,
-        QUICK2_END
+        QUICK_INPUT (INPUT_LAST_TEXT, 0, history_name, &reg_exp, NULL),
+        QUICK_START_COLUMNS,
+            QUICK_CHECKBOX (N_("&Files only"), &files_only, NULL),
+            QUICK_CHECKBOX (N_("&Using shell patterns"), &shell_patterns, NULL),
+        QUICK_NEXT_COLUMN,
+            QUICK_CHECKBOX (N_("&Case sensitive"), &case_sens, NULL),
+        QUICK_STOP_COLUMNS,
+        QUICK_END
         /* *INDENT-ON* */
     };
 
@@ -235,7 +235,7 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
         quick_widgets, NULL, NULL
     };
 
-    if (quick2_dialog (&qdlg) == B_CANCEL)
+    if (quick_dialog (&qdlg) == B_CANCEL)
         return;
 
     if (reg_exp == NULL || *reg_exp == '\0')
