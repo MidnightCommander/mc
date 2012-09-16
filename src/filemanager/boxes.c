@@ -93,12 +93,13 @@
 
 /*** file scope variables ************************************************************************/
 
-static WRadio *display_radio;
-static WInput *display_user_format;
-static WInput *display_mini_status;
-static WCheck *display_check_status;
-static char **displays_status;
-static int display_user_hotkey = 'u';
+/* Index in list_types[] for "user defined" */
+static const int panel_listing_user_idx = 3;
+
+static char **status_format;
+static int listing_user_hotkey = 'u';
+static unsigned long panel_listing_types_id, panel_user_format_id;
+static unsigned long mini_user_status_id, mini_user_format_id;
 
 #ifdef HAVE_CHARSET
 static int new_display_codepage;
@@ -135,32 +136,41 @@ job_buttons[] =
 
 #endif /* ENABLE_BACKGROUND */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+panel_listing_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
     case DLG_KEY:
         if (parm == '\n')
         {
-            if (dlg_widget_active (display_radio))
+            Widget *wi;
+
+            wi = dlg_find_by_id (h, panel_listing_types_id);
+            if (dlg_widget_active (wi))
             {
-                input_assign_text (display_mini_status, displays_status[display_radio->sel]);
+                WInput *in;
+
+                in = (WInput *) dlg_find_by_id (h, mini_user_format_id);
+                input_assign_text (in, status_format[((WRadio *) wi)->sel]);
                 dlg_stop (h);
                 return MSG_HANDLED;
             }
 
-            if (dlg_widget_active (display_user_format))
+            wi = dlg_find_by_id (h, panel_user_format_id);
+            if (dlg_widget_active (wi))
             {
                 h->ret_value = B_USER + 6;
                 dlg_stop (h);
                 return MSG_HANDLED;
             }
 
-            if (dlg_widget_active (display_mini_status))
+            wi = dlg_find_by_id (h, mini_user_format_id);
+            if (dlg_widget_active (wi))
             {
                 h->ret_value = B_USER + 7;
                 dlg_stop (h);
@@ -168,40 +178,66 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
             }
         }
 
-        if ((g_ascii_tolower (parm) == display_user_hotkey)
-            && dlg_widget_active (display_user_format) && dlg_widget_active (display_mini_status))
+        if (g_ascii_tolower (parm) == listing_user_hotkey)
         {
-            display_radio->pos = display_radio->sel = 3;
-            dlg_select_widget (display_radio);  /* force redraw */
-            h->callback (h, WIDGET (display_radio), DLG_ACTION, 0, NULL);
-            return MSG_HANDLED;
+            Widget *wi;
+
+            wi = dlg_find_by_id (h, panel_user_format_id);
+            if (dlg_widget_active (wi))
+            {
+                wi = dlg_find_by_id (h, mini_user_format_id);
+                if (dlg_widget_active (wi))
+                {
+                    WRadio *r;
+
+                    r = (WRadio *) dlg_find_by_id (h, panel_listing_types_id);
+                    r->pos = r->sel = panel_listing_user_idx;
+                    dlg_select_widget (WIDGET (r));     /* force redraw */
+                    h->callback (h, WIDGET (r), DLG_ACTION, 0, NULL);
+                    return MSG_HANDLED;
+                }
+            }
         }
         return MSG_NOT_HANDLED;
 
     case DLG_ACTION:
-        if (sender == WIDGET (display_radio))
+        if (sender != NULL && sender->id == panel_listing_types_id)
         {
-            if (!(display_check_status->state & C_BOOL))
-                input_assign_text (display_mini_status, displays_status[display_radio->sel]);
-            input_update (display_mini_status, FALSE);
-            input_update (display_user_format, FALSE);
-            widget_disable (WIDGET (display_user_format), display_radio->sel != 3);
+            WCheck *ch;
+            WInput *in1, *in2;
+
+            in1 = (WInput *) dlg_find_by_id (h, panel_user_format_id);
+            ch = (WCheck *) dlg_find_by_id (h, mini_user_status_id);
+            in2 = (WInput *) dlg_find_by_id (h, mini_user_format_id);
+
+            if (!(ch->state & C_BOOL))
+                input_assign_text (in2, status_format[((WRadio *) sender)->sel]);
+            input_update (in2, FALSE);
+            input_update (in1, FALSE);
+            widget_disable (WIDGET (in1), ((WRadio *) sender)->sel != panel_listing_user_idx);
             return MSG_HANDLED;
         }
 
-        if (sender == WIDGET (display_check_status))
+        if (sender != NULL && sender->id == mini_user_status_id)
         {
-            if (display_check_status->state & C_BOOL)
+            WInput *in;
+
+            in = (WInput *) dlg_find_by_id (h, mini_user_format_id);
+
+            if (((WCheck *) sender)->state & C_BOOL)
             {
-                widget_disable (WIDGET (display_mini_status), FALSE);
-                input_assign_text (display_mini_status, displays_status[3]);
+                widget_disable (WIDGET (in), FALSE);
+                input_assign_text (in, status_format[3]);
             }
             else
             {
-                widget_disable (WIDGET (display_mini_status), TRUE);
-                input_assign_text (display_mini_status, displays_status[display_radio->sel]);
+                WRadio *r;
+
+                r = (WRadio *) dlg_find_by_id (h, panel_listing_types_id);
+                widget_disable (WIDGET (in), TRUE);
+                input_assign_text (in, status_format[r->sel]);
             }
-            input_update (display_mini_status, FALSE);
+            /* input_update (in, FALSE); */
             return MSG_HANDLED;
         }
 
@@ -210,101 +246,6 @@ display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static Dlg_head *
-display_init (int radio_sel, char *init_text, int _check_status, char **_status)
-{
-    int dlg_width = 48, dlg_height = 15;
-    Dlg_head *dd;
-
-    /* Controls whether the array strings have been translated */
-    const char *displays[LIST_TYPES] = {
-        N_("&Full file list"),
-        N_("&Brief file list"),
-        N_("&Long file list"),
-        N_("&User defined:")
-    };
-
-    /* Index in displays[] for "user defined" */
-    const int user_type_idx = 3;
-
-    const char *display_title = N_("Listing mode");
-    const char *user_mini_status = N_("User &mini status");
-    const char *ok_name = N_("&OK");
-    const char *cancel_name = N_("&Cancel");
-
-    WButton *ok_button, *cancel_button;
-
-    {
-        int i, maxlen = 0;
-        const char *cp;
-        int ok_len, cancel_len, b_len, gap;
-
-#ifdef ENABLE_NLS
-        display_title = _(display_title);
-        user_mini_status = _(user_mini_status);
-        ok_name = _(ok_name);
-        cancel_name = _(cancel_name);
-
-        for (i = 0; i < LIST_TYPES; i++)
-            displays[i] = _(displays[i]);
-#endif
-
-        /* get hotkey of user-defined format string */
-        cp = strchr (displays[user_type_idx], '&');
-        if (cp != NULL && *++cp != '\0')
-            display_user_hotkey = g_ascii_tolower (*cp);
-
-        /* xpos will be fixed later */
-        ok_button = button_new (dlg_height - 3, 0, B_ENTER, DEFPUSH_BUTTON, ok_name, 0);
-        ok_len = button_get_len (ok_button);
-        cancel_button = button_new (dlg_height - 3, 0, B_CANCEL, NORMAL_BUTTON, cancel_name, 0);
-        cancel_len = button_get_len (cancel_button);
-        b_len = ok_len + cancel_len + 2;
-
-        dlg_width = max (dlg_width, str_term_width1 (display_title) + 10);
-        /* calculate max width of radiobutons */
-        for (i = 0; i < LIST_TYPES; i++)
-            maxlen = max (maxlen, str_term_width1 (displays[i]));
-        dlg_width = max (dlg_width, maxlen);
-        dlg_width = max (dlg_width, str_term_width1 (user_mini_status) + 13);
-
-        /* buttons */
-        dlg_width = max (dlg_width, b_len + 6);
-        gap = (dlg_width - 6 - b_len) / 3;
-        WIDGET (ok_button)->x = 3 + gap;
-        WIDGET (cancel_button)->x = WIDGET (ok_button)->x + ok_len + gap + 2;
-    }
-
-    displays_status = _status;
-
-    dd = create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors,
-                     display_callback, NULL, "[Listing Mode...]", display_title,
-                     DLG_CENTER | DLG_REVERSE);
-
-    add_widget (dd, cancel_button);
-    add_widget (dd, ok_button);
-
-    display_mini_status =
-        input_new (10, 8, input_get_default_colors (), dlg_width - 12, _status[radio_sel],
-                   "mini-input", INPUT_COMPLETE_DEFAULT);
-    add_widget (dd, display_mini_status);
-
-    display_check_status = check_new (9, 4, _check_status, user_mini_status);
-    add_widget (dd, display_check_status);
-
-    display_user_format = input_new (7, 8, input_get_default_colors (), dlg_width - 12, init_text,
-                                     "user-fmt-input", INPUT_COMPLETE_DEFAULT);
-    add_widget (dd, display_user_format);
-
-    display_radio = radio_new (3, 4, LIST_TYPES, displays);
-    display_radio->sel = display_radio->pos = radio_sel;
-    add_widget (dd, display_radio);
-
-    return dd;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -473,16 +414,17 @@ task_cb (WButton * button, int action)
 
 /* return list type */
 int
-display_box (WPanel * panel, char **userp, char **minip, int *use_msformat, int num)
+panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat, int num)
 {
     int result = -1;
-    Dlg_head *dd;
     char *section = NULL;
-    size_t i;
 
     if (panel == NULL)
     {
-        const char *p = get_nth_panel_name (num);
+        const char *p;
+        size_t i;
+
+        p = get_nth_panel_name (num);
         panel = g_new (WPanel, 1);
         panel->list_type = list_full;
         panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
@@ -499,26 +441,76 @@ display_box (WPanel * panel, char **userp, char **minip, int *use_msformat, int 
         g_free (section);
     }
 
-    dd = display_init (panel->list_type, panel->user_format,
-                       panel->user_mini_status, panel->user_status_format);
-
-    if (run_dlg (dd) != B_CANCEL)
     {
-        result = display_radio->sel;
-        *userp = g_strdup (display_user_format->buffer);
-        *minip = g_strdup (display_mini_status->buffer);
-        *use_msformat = display_check_status->state & C_BOOL;
+        int mini_user_status;
+        char *panel_user_format;
+        char *mini_user_format;
+        const char *cp;
+
+        /* Controls whether the array strings have been translated */
+        const char *list_types[LIST_TYPES] = {
+            N_("&Full file list"),
+            N_("&Brief file list"),
+            N_("&Long file list"),
+            N_("&User defined:")
+        };
+
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK_RADIO (LIST_TYPES, list_types, &result, &panel_listing_types_id),
+            QUICK_INPUT (panel->user_format, INPUT_COMPLETE_DEFAULT, "user-fmt-input",
+                         &panel_user_format, &panel_user_format_id),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_CHECKBOX (N_("User &mini status"), &mini_user_status, &mini_user_status_id),
+            QUICK_INPUT (panel->user_status_format[panel->list_type], INPUT_COMPLETE_DEFAULT,
+                         "mini_input", &mini_user_format, &mini_user_format_id),
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
+            /* *INDENT-ON* */
+        };
+
+        quick_dialog_t qdlg = {
+            -1, -1, 48,
+            N_("Listing mode"), "[Listing Mode...]",
+            quick_widgets, panel_listing_callback, NULL
+        };
+
+        /* get hotkey of user-defined format string */
+        cp = strchr (_(list_types[panel_listing_user_idx]), '&');
+        if (cp != NULL && *++cp != '\0')
+            listing_user_hotkey = g_ascii_tolower (*cp);
+
+        mini_user_status = panel->user_mini_status;
+        result = panel->list_type;
+        status_format = panel->user_status_format;
+
+        if (panel->list_type != panel_listing_user_idx)
+            quick_widgets[1].options = W_DISABLED;
+
+        if (!mini_user_status)
+            quick_widgets[4].options = W_DISABLED;
+
+        if (quick_dialog (&qdlg) == B_CANCEL)
+            result = -1;
+        else
+        {
+            *userp = panel_user_format;
+            *minip = mini_user_format;
+            *use_msformat = mini_user_status;
+        }
     }
 
     if (section != NULL)
     {
+        int i;
+
         g_free (panel->user_format);
         for (i = 0; i < LIST_TYPES; i++)
             g_free (panel->user_status_format[i]);
         g_free (panel);
     }
-
-    destroy_dlg (dd);
 
     return result;
 }

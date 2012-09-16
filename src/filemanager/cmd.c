@@ -1699,8 +1699,7 @@ change_listing_cmd (void)
     if (get_display_type (MENU_PANEL_IDX) == view_listing)
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
 
-    list_type = display_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);
-
+    list_type = panel_listing_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);
     if (list_type != -1)
     {
         switch_to_listing (MENU_PANEL_IDX);
