@@ -1672,11 +1672,14 @@ edit_move_block_to_right (WEdit * edit)
     do
     {
         edit_cursor_move (edit, cur_bol - edit->curs1);
-        if (option_fill_tabs_with_spaces)
-            insert_spaces_tab (edit, option_fake_half_tabs);
-        else
-            edit_insert (edit, '\t');
-        edit_cursor_move (edit, edit_bol (edit, cur_bol) - edit->curs1);
+        if (!line_is_blank (edit, edit->curs_line))
+        {
+            if (option_fill_tabs_with_spaces)
+                insert_spaces_tab (edit, option_fake_half_tabs);
+            else
+                edit_insert (edit, '\t');
+            edit_cursor_move (edit, edit_bol (edit, cur_bol) - edit->curs1);
+        }
 
         if (cur_bol == 0)
             break;
