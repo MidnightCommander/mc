@@ -56,8 +56,6 @@
 #define ROWS     13
 #define COLSHIFT 23
 
-#define BUTTONS 2
-
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
@@ -254,21 +252,14 @@ init_learn (void)
     const int dlg_width = 78;
     const int dlg_height = 23;
 
-    struct
-    {
-        int ret_cmd, flags, y, x;
-        const char *text;
-    } learn_but[BUTTONS] =
-    {
-        /* *INDENT-OFF* */
-        {B_CANCEL, NORMAL_BUTTON, 0, 39, N_("&Cancel")},
-        {B_ENTER, DEFPUSH_BUTTON, 0, 25, N_("&Save")}
-        /* *INDENT-ON* */
-    };
+    /* buttons */
+    int bx0, bx1;
+    const char *b0 = N_("&Save");
+    const char *b1 = N_("&Cancel");
+    int bl0, bl1;
 
-    int x, y, i, j;
+    int x, y, i;
     const key_code_name_t *key;
-    char buffer[BUF_TINY];
 
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
@@ -278,59 +269,65 @@ init_learn (void)
         i18n_flag = TRUE;
     }
 
-    learn_but[0].text = _(learn_but[0].text);
-    learn_but[0].x = dlg_width / 2 + 4;
-
-    learn_but[1].text = _(learn_but[1].text);
-    learn_but[1].x = dlg_width / 2 - (str_term_width1 (learn_but[1].text) + 9);
+    b0 = _(b0);
+    b1 = _(b1);
 #endif /* ENABLE_NLS */
 
     do_refresh ();
 
     learn_dlg =
         create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, learn_callback, NULL,
-                    "[Learn keys]", learn_title, DLG_CENTER | DLG_REVERSE);
+                    "[Learn keys]", learn_title, DLG_CENTER);
 
-    for (i = 0; i < BUTTONS; i++)
-        add_widget (learn_dlg,
-                    button_new (dlg_height - 3 + learn_but[i].y, learn_but[i].x,
-                                learn_but[i].ret_cmd, learn_but[i].flags, _(learn_but[i].text), 0));
+    /* find first unshown button */
+    for (key = key_name_conv_tab, learn_total = 0;
+         key->name != NULL && strcmp (key->name, "kpleft") != 0; key++, learn_total++)
+        ;
+
+    learnok = 0;
+    learnchanged = FALSE;
+
+    learnkeys = g_new (learnkey_t, learn_total);
 
     x = UX;
     y = UY;
-    for (key = key_name_conv_tab, j = 0;
-         key->name != NULL && strcmp (key->name, "kpleft") != 0; key++, j++)
-        ;
-    learnkeys = g_new (learnkey_t, j);
-    x += ((j - 1) / ROWS) * COLSHIFT;
-    y += (j - 1) % ROWS;
-    learn_total = j;
-    learnok = 0;
-    learnchanged = FALSE;
-    for (i = j - 1, key = key_name_conv_tab + j - 1; i >= 0; i--, key--)
+
+    /* add buttons and "OK" labels */
+    for (i = 0; i < learn_total; i++)
     {
+        char buffer[BUF_TINY];
+
         learnkeys[i].ok = FALSE;
         learnkeys[i].sequence = NULL;
-        g_snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
+        g_snprintf (buffer, sizeof (buffer), "%-16s", _(key_name_conv_tab[i].longname));
         learnkeys[i].button =
             WIDGET (button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button));
-        add_widget (learn_dlg, learnkeys[i].button);
         learnkeys[i].label = WIDGET (label_new (y, x + 19, ""));
+        add_widget (learn_dlg, learnkeys[i].button);
         add_widget (learn_dlg, learnkeys[i].label);
-        if (i % 13 != 0)
-            y--;
-        else
+
+        y++;
+        if (y == UY + ROWS)
         {
-            x -= COLSHIFT;
-            y = UY + ROWS - 1;
+            x += COLSHIFT;
+            y = UY;
         }
     }
 
+    add_widget (learn_dlg, hline_new (dlg_height - 8, -1, -1));
     add_widget (learn_dlg,
-                label_new (UY + 14, 5,
+                label_new (dlg_height - 7, 5,
                            _("Press all the keys mentioned here. After you have done it, check\n"
                              "which keys are not marked with OK. Press space on the missing\n"
                              "key, or click with the mouse to define it. Move around with Tab.")));
+    add_widget (learn_dlg, hline_new (dlg_height - 4, -1, -1));
+    /* buttons */
+    bl0 = str_term_width1 (b0) + 5; /* default button */
+    bl1 = str_term_width1 (b1) + 3; /* normal button */
+    bx0 = (dlg_width - (bl0 + bl1 + 1)) / 2;
+    bx1 = bx0 + bl0 + 1;
+    add_widget (learn_dlg, button_new (dlg_height - 3, bx0, B_ENTER, DEFPUSH_BUTTON, b0, NULL));
+    add_widget (learn_dlg, button_new (dlg_height - 3, bx1, B_CANCEL, NORMAL_BUTTON, b1, NULL));
 }
 
 /* --------------------------------------------------------------------------------------------- */
