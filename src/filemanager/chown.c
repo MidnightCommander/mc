@@ -2,7 +2,7 @@
    Chown command -- for the Midnight Commander
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2011
+   2007, 2011, 2012
    The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -57,17 +57,8 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define UX 5
-#define UY 2
-
-#define GX 27
-#define GY 2
-
-#define BX 5
-#define BY 15
-
-#define TX 50
-#define TY 2
+#define GH 12
+#define GW 21
 
 #define BUTTONS 5
 
@@ -91,47 +82,85 @@ static WListbox *l_user, *l_group;
 /* *INDENT-OFF* */
 static struct
 {
-    int ret_cmd, flags, y, x;
+    int ret_cmd, flags, y, len;
     const char *text;
 } chown_but[BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON,  0, 53, N_("&Cancel") },
-    { B_ENTER,  DEFPUSH_BUTTON, 0, 40, N_("&Set") },
-    { B_SETUSR, NORMAL_BUTTON,  0, 25, N_("Set &users") },
-    { B_SETGRP, NORMAL_BUTTON,  0, 11, N_("Set &groups") },
-    { B_SETALL, NORMAL_BUTTON,  0, 0,  N_("Set &all") },
+    { B_SETALL, NORMAL_BUTTON,  5, 0, N_("Set &all") },
+    { B_SETGRP, NORMAL_BUTTON,  5, 0, N_("Set &groups") },
+    { B_SETUSR, NORMAL_BUTTON,  5, 0, N_("Set &users") },
+    { B_ENTER,  DEFPUSH_BUTTON, 3, 0, N_("&Set") },
+    { B_CANCEL, NORMAL_BUTTON,  3, 0, N_("&Cancel") },
 };
 
+/* summary length of three buttons */
+static unsigned int blen = 0;
+
 static struct {
-    int y, x;
+    int y;
     WLabel *l;
 } chown_label [LABELS] = {
-    { TY +  2, TX + 2, NULL },
-    { TY +  4, TX + 2, NULL },
-    { TY +  6, TX + 2, NULL },
-    { TY +  8, TX + 2, NULL },
-    { TY + 10, TX + 2, NULL }
+    { 4 , NULL },
+    { 6 , NULL },
+    { 8 , NULL },
+    { 10 , NULL },
+    { 12, NULL }
 };
 /* *INDENT-ON* */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+chown_i18n (void)
+{
+    static gboolean i18n = FALSE;
+    unsigned int i;
+
+    if (i18n)
+        return;
+
+    i18n = TRUE;
+
+#ifdef ENABLE_NLS
+    for (i = 0; i < BUTTONS; i++)
+        chown_but[i].text = _(chown_but[i].text);
+#endif /* ENABLE_NLS */
+
+    for (i = 0; i < BUTTONS; i++)
+    {
+        chown_but[i].len = str_term_width1 (chown_but[i].text) + 3;     /* [], spaces and w/o & */
+        if (chown_but[i].flags == DEFPUSH_BUTTON)
+            chown_but[i].len += 2;      /* <> */
+
+        if (i < BUTTONS - 2)
+            blen += chown_but[i].len;
+    }
+
+    blen += 2;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
 chown_refresh (Dlg_head * h)
 {
+    const int y = 3;
+    const int x = 7 + GW * 2;
+
     common_dialog_repaint (h);
 
     tty_setcolor (COLOR_NORMAL);
 
-    widget_move (h, TY + 1, TX + 2);
+    widget_move (h, y + 0, x);
     tty_print_string (_("Name"));
-    widget_move (h, TY + 3, TX + 2);
+    widget_move (h, y + 2, x);
     tty_print_string (_("Owner name"));
-    widget_move (h, TY + 5, TX + 2);
+    widget_move (h, y + 4, x);
     tty_print_string (_("Group name"));
-    widget_move (h, TY + 7, TX + 2);
+    widget_move (h, y + 6, x);
     tty_print_string (_("Size"));
-    widget_move (h, TY + 9, TX + 2);
+    widget_move (h, y + 8, x);
     tty_print_string (_("Permission"));
 }
 
@@ -167,62 +196,86 @@ chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 static Dlg_head *
 init_chown (void)
 {
+    int lines, cols;
     int i;
+    int y;
     struct passwd *l_pass;
     struct group *l_grp;
     Dlg_head *ch_dlg;
 
     do_refresh ();
+
     end_chown = need_update = current_file = 0;
     single_set = (current_panel->marked < 2) ? 3 : 0;
 
+    cols = GW * 3 + 2 + 6;
+    lines = GH + 4 + (single_set ? 2 : 4);
+
     ch_dlg =
-        create_dlg (TRUE, 0, 0, 18, 74, dialog_colors, chown_callback, NULL, "[Chown]",
-                    _("Chown command"), DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, chown_callback, NULL, "[Chown]",
+                    _("Chown command"), DLG_CENTER);
 
-    for (i = 0; i < BUTTONS - single_set; i++)
-        add_widget (ch_dlg,
-                    button_new (BY + chown_but[i].y, BX + chown_but[i].x,
-                                chown_but[i].ret_cmd, chown_but[i].flags, _(chown_but[i].text), 0));
-
-    /* Add the widgets for the file information */
-    for (i = 0; i < LABELS; i++)
-    {
-        chown_label[i].l = label_new (chown_label[i].y, chown_label[i].x, "");
-        add_widget (ch_dlg, chown_label[i].l);
-    }
-
-    /* get new listboxes */
-    l_user = listbox_new (UY + 1, UX + 1, 10, 19, FALSE, NULL);
-    l_group = listbox_new (GY + 1, GX + 1, 10, 19, FALSE, NULL);
-
-    /* add fields for unknown names (numbers) */
+    add_widget (ch_dlg, groupbox_new (2, 3, GH, GW, _("User name")));
+    l_user = listbox_new (3, 4, GH - 2, GW - 2, FALSE, NULL);
+    add_widget (ch_dlg, l_user);
+    /* add field for unknown names (numbers) */
     listbox_add_item (l_user, LISTBOX_APPEND_AT_END, 0, _("<Unknown user>"), NULL);
-    listbox_add_item (l_group, LISTBOX_APPEND_AT_END, 0, _("<Unknown group>"), NULL);
-
     /* get and put user names in the listbox */
     setpwent ();
     while ((l_pass = getpwent ()) != NULL)
-    {
         listbox_add_item (l_user, LISTBOX_APPEND_SORTED, 0, l_pass->pw_name, NULL);
-    }
     endpwent ();
 
+    add_widget (ch_dlg, groupbox_new (2, 4 + GW, GH, GW, _("Group name")));
+    l_group = listbox_new (3, 5 + GW, GH - 2, GW - 2, FALSE, NULL);
+    add_widget (ch_dlg, l_group);
+    /* add field for unknown names (numbers) */
+    listbox_add_item (l_group, LISTBOX_APPEND_AT_END, 0, _("<Unknown group>"), NULL);
     /* get and put group names in the listbox */
     setgrent ();
     while ((l_grp = getgrent ()) != NULL)
-    {
         listbox_add_item (l_group, LISTBOX_APPEND_SORTED, 0, l_grp->gr_name, NULL);
-    }
     endgrent ();
 
-    add_widget (ch_dlg, groupbox_new (TY, TX, 12, 19, _("File")));
+    add_widget (ch_dlg, groupbox_new (2, 5 + GW * 2, GH, GW, _("File")));
+    /* add widgets for the file information */
+    for (i = 0; i < LABELS; i++)
+    {
+        chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, "");
+        add_widget (ch_dlg, chown_label[i].l);
+    }
 
-    /* add listboxes to the dialogs */
-    add_widget (ch_dlg, l_group);
-    add_widget (ch_dlg, groupbox_new (GY, GX, 12, 21, _("Group name")));
-    add_widget (ch_dlg, l_user);
-    add_widget (ch_dlg, groupbox_new (UY, UX, 12, 21, _("User name")));
+    if (!single_set)
+    {
+        int x;
+
+        add_widget (ch_dlg, hline_new (lines - chown_but[0].y - 1, -1, -1));
+
+        y = lines - chown_but[0].y;
+        x = (cols - blen) / 2;
+
+        for (i = 0; i < BUTTONS - 2; i++)
+        {
+            add_widget (ch_dlg,
+                        button_new (y, x, chown_but[i].ret_cmd, chown_but[i].flags,
+                                    chown_but[i].text, NULL));
+            x += chown_but[i].len + 1;
+        }
+    }
+
+    i = BUTTONS - 2;
+    y = lines - chown_but[i].y;
+    add_widget (ch_dlg, hline_new (y - 1, -1, -1));
+    add_widget (ch_dlg,
+                button_new (y, WIDGET (ch_dlg)->cols / 2 - chown_but[i].len, chown_but[i].ret_cmd,
+                            chown_but[i].flags, chown_but[i].text, NULL));
+    i++;
+    add_widget (ch_dlg,
+                button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chown_but[i].ret_cmd,
+                            chown_but[i].flags, chown_but[i].text, NULL));
+
+    /* select first listbox */
+    dlg_select_widget (l_user);
 
     return ch_dlg;
 }
@@ -284,6 +337,8 @@ chown_cmd (void)
     gid_t new_group;
     char buffer[BUF_TINY];
 
+    chown_i18n ();
+
     do
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
@@ -309,10 +364,10 @@ chown_cmd (void)
         listbox_select_entry (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));
         listbox_select_entry (l_group, listbox_search_text (l_group, get_group (sf_stat.st_gid)));
 
-        chown_label (0, str_trunc (fname, 15));
-        chown_label (1, str_trunc (get_owner (sf_stat.st_uid), 15));
-        chown_label (2, str_trunc (get_group (sf_stat.st_gid), 15));
-        size_trunc_len (buffer, 15, sf_stat.st_size, 0, panels_options.kilobyte_si);
+        chown_label (0, str_trunc (fname, GW - 4));
+        chown_label (1, str_trunc (get_owner (sf_stat.st_uid), GW - 4));
+        chown_label (2, str_trunc (get_group (sf_stat.st_gid), GW - 4));
+        size_trunc_len (buffer, GW - 4, sf_stat.st_size, 0, panels_options.kilobyte_si);
         chown_label (3, buffer);
         chown_label (4, string_perm (sf_stat.st_mode));
 
