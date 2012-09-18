@@ -109,12 +109,13 @@ static char ch_flags[11];
 static const char ch_perm[] = "rwx";
 static mode_t ch_cmode;
 static struct stat *sf_stat;
-static int need_update;
-static int end_chown;
+static gboolean need_update = FALSE;
+static gboolean end_chown = FALSE;
 static int current_file;
 static int single_set;
 static char *fname;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -136,7 +137,7 @@ inc_flag_pos (int f_pos)
         return MSG_NOT_HANDLED;
     }
     flag_pos++;
-    if (!(flag_pos % 3) || f_pos > 2)
+    if ((flag_pos % 3) == 0 || f_pos > 2)
         return MSG_NOT_HANDLED;
     return MSG_HANDLED;
 }
@@ -146,13 +147,13 @@ inc_flag_pos (int f_pos)
 static cb_ret_t
 dec_flag_pos (int f_pos)
 {
-    if (!flag_pos)
+    if (flag_pos == 0)
     {
         flag_pos = 10;
         return MSG_NOT_HANDLED;
     }
     flag_pos--;
-    if (!((flag_pos + 1) % 3) || f_pos > 2)
+    if (((flag_pos + 1) % 3) == 0 || f_pos > 2)
         return MSG_NOT_HANDLED;
     return MSG_HANDLED;
 }
@@ -303,9 +304,10 @@ do_enter_key (Dlg_head * h, int f_pos)
     struct passwd *chl_pass;
     struct group *chl_grp;
     int fe;
-    int lxx, lyy, chl_end, b_pos;
-    int is_owner;
+    int lxx, lyy, b_pos;
+    gboolean chl_end, is_owner;
     const char *title;
+    int result;
 
     do
     {
@@ -314,7 +316,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 
         lxx = (COLS - 74) / 2 + (is_owner ? 35 : 53);
         lyy = (LINES - 13) / 2;
-        chl_end = 0;
+        chl_end = FALSE;
 
         chl_dlg =
             create_dlg (TRUE, lyy, lxx, 13, 17, dialog_colors, chl_callback, NULL,
@@ -322,17 +324,13 @@ do_enter_key (Dlg_head * h, int f_pos)
 
         /* get new listboxes */
         chl_list = listbox_new (1, 1, 11, 15, FALSE, NULL);
-
         listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0, "<Unknown>", NULL);
-
         if (is_owner)
         {
             /* get and put user names in the listbox */
             setpwent ();
-            while ((chl_pass = getpwent ()))
-            {
+            while ((chl_pass = getpwent ()) != NULL)
                 listbox_add_item (chl_list, LISTBOX_APPEND_SORTED, 0, chl_pass->pw_name, NULL);
-            }
             endpwent ();
             fe = listbox_search_text (chl_list, get_owner (sf_stat->st_uid));
         }
@@ -340,10 +338,8 @@ do_enter_key (Dlg_head * h, int f_pos)
         {
             /* get and put group names in the listbox */
             setgrent ();
-            while ((chl_grp = getgrent ()))
-            {
+            while ((chl_grp = getgrent ()) != NULL)
                 listbox_add_item (chl_list, LISTBOX_APPEND_SORTED, 0, chl_grp->gr_name, NULL);
-            }
             endgrent ();
             fe = listbox_search_text (chl_list, get_group (sf_stat->st_gid));
         }
@@ -353,30 +349,30 @@ do_enter_key (Dlg_head * h, int f_pos)
         b_pos = chl_list->pos;
         add_widget (chl_dlg, chl_list);
 
-        run_dlg (chl_dlg);
+        result = run_dlg (chl_dlg);
 
         if (b_pos != chl_list->pos)
         {
-            int ok = 0;
+            gboolean ok = FALSE;
             char *text;
 
             listbox_get_current (chl_list, &text, NULL);
             if (is_owner)
             {
                 chl_pass = getpwnam (text);
-                if (chl_pass)
+                if (chl_pass != NULL)
                 {
-                    ok = 1;
+                    ok = TRUE;
                     sf_stat->st_uid = chl_pass->pw_uid;
                 }
             }
             else
             {
                 chl_grp = getgrnam (text);
-                if (chl_grp)
+                if (chl_grp != NULL)
                 {
                     sf_stat->st_gid = chl_grp->gr_gid;
-                    ok = 1;
+                    ok = TRUE;
                 }
             }
             if (ok)
@@ -388,17 +384,17 @@ do_enter_key (Dlg_head * h, int f_pos)
             if (ok)
                 print_flags ();
         }
-        if (chl_dlg->ret_value == KEY_LEFT)
+        if (result == KEY_LEFT)
         {
             if (!is_owner)
-                chl_end = 1;
+                chl_end = TRUE;
             dlg_one_up (ch_dlg);
             f_pos--;
         }
-        else if (chl_dlg->ret_value == KEY_RIGHT)
+        else if (result == KEY_RIGHT)
         {
             if (is_owner)
-                chl_end = 1;
+                chl_end = TRUE;
             dlg_one_down (ch_dlg);
             f_pos++;
         }
@@ -436,7 +432,7 @@ chown_refresh (void)
     widget_move (ch_dlg, BY + 2, 4);
     tty_print_string (_("Mode"));
 
-    if (!single_set)
+    if (single_set == 0)
     {
         widget_move (ch_dlg, 3, 54);
         tty_printf (_("%6d of %d"), files_on_begin - (current_panel->marked) + 1, files_on_begin);
@@ -479,7 +475,10 @@ b_setpos (int f_pos)
 static cb_ret_t
 advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
-    int i = 0, f_pos = BUTTONS - dlg_get_current_widget_id (h) - single_set - 1;
+    int i = 0;
+    int f_pos;
+
+    f_pos = BUTTONS - dlg_get_current_widget_id (h) - single_set - 1;
 
     switch (msg)
     {
@@ -507,7 +506,6 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
     case DLG_KEY:
         switch (parm)
         {
-
         case XCTRL ('b'):
         case KEY_LEFT:
             if (f_pos < 5)
@@ -610,7 +608,7 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
                 ch_flags[flag_pos] = parm;
                 update_mode (h);
                 advanced_chown_callback (h, sender, DLG_KEY, KEY_RIGHT, NULL);
-                if (flag_pos > 8 || !(flag_pos % 3))
+                if (flag_pos > 8 || (flag_pos % 3) == 0)
                     dlg_one_down (h);
             }
             break;
@@ -628,8 +626,10 @@ static void
 init_chown_advanced (void)
 {
     int i;
-    enum
-    { dlg_h = 13, dlg_w = 74, n_elem = 4 };
+    int dlg_h = 13;
+    int dlg_w = 74;
+    int n_elem = 4;
+
 #ifdef ENABLE_NLS
     static int i18n_len = 0;
 
@@ -654,9 +654,11 @@ init_chown_advanced (void)
     }
 #endif /* ENABLE_NLS */
 
-    sf_stat = g_new (struct stat, 1);
     do_refresh ();
-    end_chown = need_update = current_file = 0;
+
+    sf_stat = g_new (struct stat, 1);
+    current_file = 0;
+    end_chown = need_update = FALSE;
     single_set = (current_panel->marked < 2) ? 2 : 0;
     memset (ch_flags, '=', 11);
     flag_pos = 0;
@@ -671,7 +673,7 @@ init_chown_advanced (void)
         (chown_advanced_but[i].text), 0
 
     for (i = 0; i < BUTTONS - 5; i++)
-        if (!single_set || i < 2)
+        if (single_set == 0 || i < 2)
             add_widget (ch_dlg, button_new (XTRACT (i)));
 
     b_att[0] = button_new (XTRACT (8));
@@ -732,7 +734,7 @@ apply_advanced_chowns (struct stat *sf)
 
     lc_fname = current_panel->dir.list[current_file].fname;
     vpath = vfs_path_from_str (lc_fname);
-    need_update = end_chown = 1;
+    need_update = end_chown = TRUE;
     if (mc_chmod (vpath, get_mode ()) == -1)
         message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                  lc_fname, unix_error_string (errno));
@@ -754,7 +756,9 @@ apply_advanced_chowns (struct stat *sf)
             vfs_path_free (vpath);
             break;
         }
+
         ch_cmode = sf->st_mode;
+
         if (mc_chmod (vpath, get_mode ()) == -1)
             message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                      lc_fname, unix_error_string (errno));
@@ -767,7 +771,7 @@ apply_advanced_chowns (struct stat *sf)
         do_file_mark (current_panel, current_file, 0);
         vfs_path_free (vpath);
     }
-    while (current_panel->marked);
+    while (current_panel->marked != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -782,6 +786,8 @@ chown_advanced_cmd (void)
     do
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
+        int result;
+
         init_chown_advanced ();
 
         if (current_panel->marked)
@@ -803,49 +809,42 @@ chown_advanced_cmd (void)
         update_ownership ();
 
         /* game can begin */
-        run_dlg (ch_dlg);
+        result = run_dlg (ch_dlg);
 
-        switch (ch_dlg->ret_value)
+        switch (result)
         {
         case B_CANCEL:
-            end_chown = 1;
+            end_chown = TRUE;
             break;
 
         case B_ENTER:
-            {
-                vfs_path_t *fname_vpath;
-
-                fname_vpath = vfs_path_from_str (fname);
-                need_update = 1;
-                if (mc_chmod (fname_vpath, get_mode ()) == -1)
-                    message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
-                             fname, unix_error_string (errno));
-                /* call mc_chown only, if mc_chmod didn't fail */
-                else if (mc_chown
-                         (fname_vpath, (ch_flags[9] == '+') ? sf_stat->st_uid : (uid_t) - 1,
-                          (ch_flags[10] == '+') ? sf_stat->st_gid : (gid_t) - 1) == -1)
-                    message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname,
-                             unix_error_string (errno));
-                vfs_path_free (fname_vpath);
-            }
+            need_update = TRUE;
+            if (mc_chmod (vpath, get_mode ()) == -1)
+                message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
+                         fname, unix_error_string (errno));
+            /* call mc_chown only, if mc_chmod didn't fail */
+            else if (mc_chown
+                     (vpath, (ch_flags[9] == '+') ? sf_stat->st_uid : (uid_t) - 1,
+                      (ch_flags[10] == '+') ? sf_stat->st_gid : (gid_t) - 1) == -1)
+                message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname,
+                         unix_error_string (errno));
             break;
+
         case B_SETALL:
             apply_advanced_chowns (sf_stat);
             break;
 
         case B_SKIP:
             break;
-
         }
 
-        if (current_panel->marked && ch_dlg->ret_value != B_CANCEL)
+        if (current_panel->marked && result != B_CANCEL)
         {
             do_file_mark (current_panel, current_file, 0);
-            need_update = 1;
+            need_update = TRUE;
         }
         destroy_dlg (ch_dlg);
         vfs_path_free (vpath);
-
     }
     while (current_panel->marked && !end_chown);
 
