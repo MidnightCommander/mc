@@ -58,16 +58,13 @@
 /*** file scope macro definitions ****************************************************************/
 
 #define BX              5
-#define BY              6
-
-#define TX              50
-#define TY              2
+#define BY              5
 
 #define BUTTONS         9
+#define BUTTONS_PERM    5
 
 #define B_SETALL        B_USER
 #define B_SKIP          (B_USER + 1)
-
 #define B_OWN           (B_USER + 3)
 #define B_GRP           (B_USER + 4)
 #define B_OTH           (B_USER + 5)
@@ -82,27 +79,30 @@ static struct Dlg_head *ch_dlg;
 
 static struct
 {
-    int ret_cmd, flags, y, x;
+    unsigned long id;
+    int ret_cmd, flags, x, len;
     const char *text;
 } chown_advanced_but[BUTTONS] =
 {
     /* *INDENT-OFF* */
-    { B_CANCEL, NORMAL_BUTTON, 4, 53, N_("&Cancel") },
-    { B_ENTER,  DEFPUSH_BUTTON,4, 40, N_("&Set") },
-    { B_SKIP,   NORMAL_BUTTON, 4, 23, N_("S&kip") },
-    { B_SETALL, NORMAL_BUTTON, 4,  0, N_("Set &all")},
-    { B_ENTER,  NARROW_BUTTON, 0, 47, ""},
-    { B_ENTER,  NARROW_BUTTON, 0, 29, ""},
-    { B_ENTER,  NARROW_BUTTON, 0, 19, "   "},
-    { B_ENTER,  NARROW_BUTTON, 0, 11, "   "},
-    { B_ENTER,  NARROW_BUTTON, 0,  3, "   "}
+    { 0, B_ENTER,  NARROW_BUTTON,   3, 0, "   "},
+    { 0, B_ENTER,  NARROW_BUTTON,  11, 0, "   "},
+    { 0, B_ENTER,  NARROW_BUTTON,  19, 0, "   "},
+    { 0, B_ENTER,  NARROW_BUTTON,  29, 0, ""},
+    { 0, B_ENTER,  NARROW_BUTTON,  47, 0, ""},
+
+    { 0, B_SETALL, NORMAL_BUTTON,   0, 0, N_("Set &all")},
+    { 0, B_SKIP,   NORMAL_BUTTON,   0, 0, N_("S&kip") },
+    { 0, B_ENTER,  DEFPUSH_BUTTON,  0, 0, N_("&Set") },
+    { 0, B_CANCEL, NORMAL_BUTTON,   0, 0, N_("&Cancel") }
     /* *INDENT-ON* */
 };
 
 static WButton *b_att[3];       /* permission */
 static WButton *b_user, *b_group;       /* owner */
+static WLabel *l_filename;
+static WLabel *l_mode;
 
-static int files_on_begin;      /* Number of files at startup */
 static int flag_pos;
 static int x_toggle;
 static char ch_flags[11];
@@ -112,7 +112,7 @@ static struct stat *sf_stat;
 static gboolean need_update = FALSE;
 static gboolean end_chown = FALSE;
 static int current_file;
-static int single_set;
+static gboolean single_set = FALSE;
 static char *fname;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -264,12 +264,25 @@ print_flags (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+chown_info_update (void)
+{
+    char buffer[BUF_SMALL];
+
+    /* mode */
+    g_snprintf (buffer, sizeof (buffer), "Permissions (octal): %o", get_mode ());
+    label_set_text (l_mode, buffer);
+
+    /* permissions */
+    update_permissions ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 update_mode (Dlg_head * h)
 {
     print_flags ();
-    tty_setcolor (COLOR_NORMAL);
-    widget_move (h, BY + 2, 9);
-    tty_printf ("%12o", get_mode ());
+    chown_info_update ();
     send_message (WIDGET (h->current->data), NULL, WIDGET_FOCUS, 0, NULL);
 }
 
@@ -320,7 +333,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 
         chl_dlg =
             create_dlg (TRUE, lyy, lxx, 13, 17, dialog_colors, chl_callback, NULL,
-                        "[Advanced Chown]", title, DLG_COMPACT | DLG_REVERSE);
+                        "[Advanced Chown]", title, DLG_COMPACT);
 
         /* get new listboxes */
         chl_list = listbox_new (1, 1, 11, 15, FALSE, NULL);
@@ -425,38 +438,10 @@ chown_refresh (void)
     widget_move (ch_dlg, BY - 1, 53);
     tty_print_string (_("group"));
 
-    widget_move (ch_dlg, 3, 4);
-    tty_print_string (_("On"));
-    widget_move (ch_dlg, BY + 1, 4);
+    widget_move (ch_dlg, BY + 1, 3);
     tty_print_string (_("Flag"));
-    widget_move (ch_dlg, BY + 2, 4);
-    tty_print_string (_("Mode"));
-
-    if (single_set == 0)
-    {
-        widget_move (ch_dlg, 3, 54);
-        tty_printf (_("%6d of %d"), files_on_begin - (current_panel->marked) + 1, files_on_begin);
-    }
 
     print_flags ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-chown_info_update (void)
-{
-    /* display file info */
-    tty_setcolor (COLOR_NORMAL);
-
-    /* name && mode */
-    widget_move (ch_dlg, 3, 8);
-    tty_print_string (str_fit_to_term (fname, 45, J_LEFT_FIT));
-    widget_move (ch_dlg, BY + 2, 9);
-    tty_printf ("%12o", get_mode ());
-
-    /* permissions */
-    update_permissions ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -475,10 +460,18 @@ b_setpos (int f_pos)
 static cb_ret_t
 advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
-    int i = 0;
+    int i;
     int f_pos;
+    unsigned int id;
 
-    f_pos = BUTTONS - dlg_get_current_widget_id (h) - single_set - 1;
+    id = dlg_get_current_widget_id (h);
+
+    for (i = 0; i < BUTTONS_PERM; i++)
+        if (chown_advanced_but[i].id == id)
+            break;
+
+    f_pos = i;
+    i = 0;
 
     switch (msg)
     {
@@ -499,7 +492,7 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
                 flag_pos = f_pos * 3;
             b_setpos (f_pos);
         }
-        else if (f_pos < 5)
+        else if (f_pos < BUTTONS_PERM)
             flag_pos = f_pos + 6;
         return MSG_HANDLED;
 
@@ -508,13 +501,13 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
         {
         case XCTRL ('b'):
         case KEY_LEFT:
-            if (f_pos < 5)
+            if (f_pos < BUTTONS_PERM)
                 return (dec_flag_pos (f_pos));
             break;
 
         case XCTRL ('f'):
         case KEY_RIGHT:
-            if (f_pos < 5)
+            if (f_pos < BUTTONS_PERM)
                 return (inc_flag_pos (f_pos));
             break;
 
@@ -525,7 +518,7 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
 
         case '\n':
         case KEY_ENTER:
-            if (f_pos <= 2 || f_pos >= 5)
+            if (f_pos <= 2 || f_pos >= BUTTONS_PERM)
                 break;
             do_enter_key (h, f_pos);
             return MSG_HANDLED;
@@ -586,11 +579,12 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
             i++;
 
         case '1':
-            if (f_pos > 2)
-                break;
-            flag_pos = i + f_pos * 3;
-            ch_flags[flag_pos] = '=';
-            update_mode (h);
+            if (f_pos <= 2)
+            {
+                flag_pos = i + f_pos * 3;
+                ch_flags[flag_pos] = '=';
+                update_mode (h);
+            }
             break;
 
         case '-':
@@ -626,67 +620,107 @@ static void
 init_chown_advanced (void)
 {
     int i;
-    int dlg_h = 13;
+    int dlg_h = 12;
     int dlg_w = 74;
-    int n_elem = 4;
+    int y;
 
-#ifdef ENABLE_NLS
-    static int i18n_len = 0;
+    static gboolean i18n = FALSE;
 
-    if (i18n_len == 0)
+    if (!i18n)
     {
-        int dx, cx;
-        for (i = 0; i < n_elem; i++)
+        for (i = BUTTONS_PERM; i < BUTTONS; i++)
         {
+#ifdef ENABLE_NLS
             chown_advanced_but[i].text = _(chown_advanced_but[i].text);
-            i18n_len += str_term_width1 (chown_advanced_but[i].text) + 3;
-            if (DEFPUSH_BUTTON == chown_advanced_but[i].flags)
-                i18n_len += 2;  /* "<>" */
-        }
-        cx = dx = (dlg_w - i18n_len - 2) / (n_elem + 1);
-
-        /* Reversed order */
-        for (i = n_elem - 1; i >= 0; i--)
-        {
-            chown_advanced_but[i].x = cx;
-            cx += str_term_width1 (chown_advanced_but[i].text) + 3 + dx;
-        }
-    }
 #endif /* ENABLE_NLS */
+
+            chown_advanced_but[i].len = str_term_width1 (chown_advanced_but[i].text) + 3;
+            if (chown_advanced_but[i].flags == DEFPUSH_BUTTON)
+                chown_advanced_but[i].len += 2; /* "<>" */
+        }
+
+        i18n = TRUE;
+    }
 
     do_refresh ();
 
     sf_stat = g_new (struct stat, 1);
     current_file = 0;
     end_chown = need_update = FALSE;
-    single_set = (current_panel->marked < 2) ? 2 : 0;
+    single_set = (current_panel->marked < 2);
     memset (ch_flags, '=', 11);
     flag_pos = 0;
     x_toggle = 070;
 
+    if (!single_set)
+        dlg_h += 2;
+
     ch_dlg =
         create_dlg (TRUE, 0, 0, dlg_h, dlg_w, dialog_colors, advanced_chown_callback, NULL,
-                    "[Advanced Chown]", _("Chown advanced command"), DLG_CENTER | DLG_REVERSE);
+                    "[Advanced Chown]", _("Chown advanced command"), DLG_CENTER);
 
-#define XTRACT(i) BY+chown_advanced_but[i].y, BX+chown_advanced_but[i].x, \
+
+    l_filename = label_new (2, 3, "");
+    add_widget (ch_dlg, l_filename);
+
+    add_widget (ch_dlg, hline_new (3, -1, -1));
+
+#define XTRACT(i,y) y, BX+chown_advanced_but[i].x, \
         chown_advanced_but[i].ret_cmd, chown_advanced_but[i].flags, \
-        (chown_advanced_but[i].text), 0
+        (chown_advanced_but[i].text), NULL
+    b_att[0] = button_new (XTRACT (0, BY));
+    chown_advanced_but[0].id = add_widget (ch_dlg, b_att[0]);
+    b_att[1] = button_new (XTRACT (1, BY));
+    chown_advanced_but[1].id = add_widget (ch_dlg, b_att[1]);
+    b_att[2] = button_new (XTRACT (2, BY));
+    chown_advanced_but[2].id = add_widget (ch_dlg, b_att[2]);
+    b_user = button_new (XTRACT (3, BY));
+    chown_advanced_but[3].id = add_widget (ch_dlg, b_user);
+    b_group = button_new (XTRACT (4, BY));
+    chown_advanced_but[4].id = add_widget (ch_dlg, b_group);
+#undef XTRACT
 
-    for (i = 0; i < BUTTONS - 5; i++)
-        if (single_set == 0 || i < 2)
-            add_widget (ch_dlg, button_new (XTRACT (i)));
+    l_mode = label_new (BY + 2, 3, "");
+    add_widget (ch_dlg, l_mode);
 
-    b_att[0] = button_new (XTRACT (8));
-    b_att[1] = button_new (XTRACT (7));
-    b_att[2] = button_new (XTRACT (6));
-    b_user = button_new (XTRACT (5));
-    b_group = button_new (XTRACT (4));
+    y = BY + 3;
+    if (!single_set)
+    {
+        i = BUTTONS_PERM;
+        add_widget (ch_dlg, hline_new (y++, -1, -1));
+        chown_advanced_but[i].id = add_widget (ch_dlg,
+                                               button_new (y,
+                                                           WIDGET (ch_dlg)->cols / 2 -
+                                                           chown_advanced_but[i].len,
+                                                           chown_advanced_but[i].ret_cmd,
+                                                           chown_advanced_but[i].flags,
+                                                           chown_advanced_but[i].text, NULL));
+        i++;
+        chown_advanced_but[i].id = add_widget (ch_dlg,
+                                               button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+                                                           chown_advanced_but[i].ret_cmd,
+                                                           chown_advanced_but[i].flags,
+                                                           chown_advanced_but[i].text, NULL));
+        y++;
+    }
 
-    add_widget (ch_dlg, b_group);
-    add_widget (ch_dlg, b_user);
-    add_widget (ch_dlg, b_att[2]);
-    add_widget (ch_dlg, b_att[1]);
-    add_widget (ch_dlg, b_att[0]);
+    i = BUTTONS_PERM + 2;
+    add_widget (ch_dlg, hline_new (y++, -1, -1));
+    chown_advanced_but[i].id = add_widget (ch_dlg,
+                                           button_new (y,
+                                                       WIDGET (ch_dlg)->cols / 2 -
+                                                       chown_advanced_but[i].len,
+                                                       chown_advanced_but[i].ret_cmd,
+                                                       chown_advanced_but[i].flags,
+                                                       chown_advanced_but[i].text, NULL));
+    i++;
+    chown_advanced_but[i].id = add_widget (ch_dlg,
+                                           button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+                                                       chown_advanced_but[i].ret_cmd,
+                                                       chown_advanced_but[i].flags,
+                                                       chown_advanced_but[i].text, NULL));
+
+    dlg_select_widget (b_att[0]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -781,10 +815,15 @@ apply_advanced_chowns (struct stat *sf)
 void
 chown_advanced_cmd (void)
 {
-    files_on_begin = current_panel->marked;
+    /* Number of files at startup */
+    int files_on_begin;
+
+    files_on_begin = max (1, current_panel->marked);
 
     do
     {                           /* do while any files remaining */
+        int file_idx;
+        char buffer[BUF_MEDIUM];
         vfs_path_t *vpath;
         int result;
 
@@ -802,13 +841,17 @@ chown_advanced_cmd (void)
             vfs_path_free (vpath);
             break;
         }
+
         ch_cmode = sf_stat->st_mode;
 
+        file_idx = files_on_begin == 1 ? 1 : (files_on_begin - current_panel->marked + 1);
+        g_snprintf (buffer, sizeof (buffer), "%s (%d/%d)",
+                    str_fit_to_term (fname, WIDGET(ch_dlg)->cols - 20, J_LEFT_FIT),
+                    file_idx, files_on_begin);
+        label_set_text (l_filename, buffer);
         chown_refresh ();
-
         update_ownership ();
 
-        /* game can begin */
         result = run_dlg (ch_dlg);
 
         switch (result)
