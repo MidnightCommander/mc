@@ -240,10 +240,13 @@ button_get_text (const WButton * b)
 void
 button_set_text (WButton * b, const char *text)
 {
+    Widget *w = WIDGET (b);
+
     release_hotkey (b->text);
     b->text = parse_hotkey (text);
-    WIDGET (b)->cols = button_get_len (b);
-    dlg_redraw (WIDGET (b)->owner);
+    w->cols = button_get_len (b);
+    if (w->owner != NULL)
+        send_message (w, NULL, WIDGET_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
