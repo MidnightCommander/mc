@@ -298,6 +298,18 @@ tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         }
         return MSG_HANDLED;
 
+    case DLG_RESIZE:
+        {
+            Widget *bar;
+
+            /* simply call dlg_set_size() with new size */
+            dlg_set_size (h, LINES - 9, COLS - 20);
+            bar = WIDGET (find_buttonbar (h));
+            bar->x = 0;
+            bar->y = LINES - 1;
+            return MSG_HANDLED;
+        }
+
     case DLG_ACTION:
         return send_message (WIDGET (find_tree (h)), NULL, WIDGET_COMMAND, parm, NULL);
 
@@ -733,14 +745,13 @@ tree_box (const char *current_dir)
     (void) current_dir;
 
     /* Create the components */
-    dlg = create_dlg (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors,
-                      tree_callback, NULL, "[Directory Tree]",
-                      _("Directory tree"), DLG_CENTER | DLG_REVERSE);
+    dlg = create_dlg (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors, tree_callback, NULL,
+                      "[Directory Tree]", _("Directory tree"), DLG_CENTER);
     wd = WIDGET (dlg);
 
     mytree = tree_new (2, 2, wd->lines - 6, wd->cols - 5, FALSE);
-    add_widget (dlg, mytree);
-    add_widget (dlg, hline_new (wd->lines - 4, 1, -1));
+    add_widget_autopos (dlg, mytree, WPOS_KEEP_ALL, NULL);
+    add_widget_autopos (dlg, hline_new (wd->lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
     bar = buttonbar_new (TRUE);
     add_widget (dlg, bar);
     /* restore ButtonBar coordinates after add_widget() */
