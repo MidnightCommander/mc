@@ -803,7 +803,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
     new_d->mouse_status = MOU_UNHANDLED;
 
     /* Strip existing spaces, add one space before and after the title */
-    if (title != NULL)
+    if (title != NULL && *title != '\0')
     {
         char *t;
 
