@@ -7,11 +7,13 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define LIST_VFSLIST    0x01
-#define LIST_HOTLIST    0x02
-#define LIST_MOVELIST   0x04
-
 /*** enums ***************************************************************************************/
+
+typedef enum {
+    LIST_VFSLIST = 0x01,
+    LIST_HOTLIST = 0x02,
+    LIST_MOVELIST = 0x04
+} hotlist_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -20,8 +22,8 @@
 /*** declarations of public functions ************************************************************/
 
 void add2hotlist_cmd (void);
-char *hotlist_show (int list_vfs);
-int save_hotlist (void);
+char *hotlist_show (hotlist_t list_type);
+gboolean save_hotlist (void);
 void done_hotlist (void);
 
 /*** inline functions ****************************************************************************/
