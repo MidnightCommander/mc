@@ -108,8 +108,9 @@ groupbox_new (int y, int x, int height, int width, const char *title)
     widget_want_cursor (w, FALSE);
     widget_want_hotkey (w, FALSE);
 
+    g->title = NULL;
     /* Strip existing spaces, add one space before and after the title */
-    if (title != NULL)
+    if (title != NULL && *title != '\0')
     {
         char *t;
 
