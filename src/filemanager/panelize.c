@@ -61,13 +61,9 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define UX 5
+#define UX 3
 #define UY 2
 
-#define BX 5
-#define BY 18
-
-#define BUTTONS  4
 #define LABELS   3
 #define B_ADD    B_USER
 #define B_REMOVE (B_USER + 1)
@@ -81,22 +77,6 @@ static Dlg_head *panelize_dlg;
 static int last_listitem;
 static WInput *pname;
 
-static struct
-{
-    int ret_cmd;
-    button_flags_t flags;
-    int y, x;
-    const char *text;
-} panelize_but[BUTTONS] =
-{
-    /* *INDENT-OFF* */
-    { B_CANCEL, NORMAL_BUTTON, 0, 53, N_("&Cancel") },
-    { B_ADD, NORMAL_BUTTON, 0, 28, N_("&Add new") },
-    { B_REMOVE, NORMAL_BUTTON, 0, 16, N_("&Remove") },
-    { B_ENTER, DEFPUSH_BUTTON, 0, 0, N_("Pane&lize") }
-    /* *INDENT-ON* */
-};
-
 static const char *panelize_section = "Panelize";
 
 /* Directory panelize */
@@ -107,11 +87,8 @@ static struct panelize
     struct panelize *next;
 } *panelize = NULL;
 
-/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-static void do_external_panelize (char *command);
-
+/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -143,12 +120,6 @@ panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
         update_command ();
         return MSG_HANDLED;
 
-    case DLG_DRAW:
-        common_dialog_repaint (h);
-        tty_setcolor (COLOR_NORMAL);
-        draw_box (h, UY, UX, WIDGET (h)->lines - 10, WIDGET (h)->cols - 10, TRUE);
-        return MSG_HANDLED;
-
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
     }
@@ -159,69 +130,80 @@ panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 static void
 init_panelize (void)
 {
-    int i, panelize_cols = COLS - 6;
-    struct panelize *current = panelize;
-
-#ifdef ENABLE_NLS
-    static int i18n_flag = 0;
-    static int maxlen = 0;
-
-    if (!i18n_flag)
+    struct
     {
-        i = sizeof (panelize_but) / sizeof (panelize_but[0]);
-        while (i--)
-        {
-            panelize_but[i].text = _(panelize_but[i].text);
-            maxlen += str_term_width1 (panelize_but[i].text) + 5;
-        }
-        maxlen += 10;
+        int ret_cmd;
+        button_flags_t flags;
+        const char *text;
+    } panelize_but[] =
+    {
+        /* *INDENT-OFF* */
+        { B_ENTER, DEFPUSH_BUTTON, N_("Pane&lize") },
+        { B_REMOVE, NORMAL_BUTTON, N_("&Remove") },
+        { B_ADD, NORMAL_BUTTON, N_("&Add new") },
+        { B_CANCEL, NORMAL_BUTTON, N_("&Cancel") }
+        /* *INDENT-ON* */
+    };
 
-        i18n_flag = 1;
-    }
-    panelize_cols = max (panelize_cols, maxlen);
-
-    panelize_but[2].x = panelize_but[3].x + str_term_width1 (panelize_but[3].text) + 7;
-    panelize_but[1].x = panelize_but[2].x + str_term_width1 (panelize_but[2].text) + 5;
-    panelize_but[0].x = panelize_cols - str_term_width1 (panelize_but[0].text) - 8 - BX;
-
-#endif /* ENABLE_NLS */
+    size_t i;
+    int blen;
+    int panelize_cols;
+    struct panelize *current;
+    int x, y;
 
     last_listitem = 0;
 
     do_refresh ();
 
-    panelize_dlg =
-        create_dlg (TRUE, 0, 0, 22, panelize_cols, dialog_colors,
-                    panelize_callback, NULL, "[External panelize]",
-                    _("External panelize"), DLG_CENTER | DLG_REVERSE);
-
-    for (i = 0; i < BUTTONS; i++)
-        add_widget (panelize_dlg,
-                    button_new (BY + panelize_but[i].y,
-                                BX + panelize_but[i].x,
-                                panelize_but[i].ret_cmd,
-                                panelize_but[i].flags, panelize_but[i].text, 0));
-
-    pname =
-        input_new (UY + 14, UX, input_get_default_colors (),
-                   WIDGET (panelize_dlg)->cols - 10, "", "in", INPUT_COMPLETE_DEFAULT);
-    add_widget (panelize_dlg, pname);
-
-    add_widget (panelize_dlg, label_new (UY + 13, UX, _("Command")));
-
-    /* get new listbox */
-    l_panelize = listbox_new (UY + 1, UX + 1, 10, WIDGET (panelize_dlg)->cols - 12, FALSE, NULL);
-
-    while (current)
+    i = G_N_ELEMENTS (panelize_but);
+    blen = i - 1;               /* gaps between buttons */
+    while (i-- != 0)
     {
-        listbox_add_item (l_panelize, LISTBOX_APPEND_AT_END, 0, current->label, current);
-        current = current->next;
+        panelize_but[i].text = _(panelize_but[i].text);
+        blen += str_term_width1 (panelize_but[i].text) + 3 + 1;
+        if (panelize_but[i].flags == DEFPUSH_BUTTON)
+            blen += 2;
     }
 
+    panelize_cols = COLS - 6;
+    panelize_cols = max (panelize_cols, blen + 4);
+
+    panelize_dlg =
+        create_dlg (TRUE, 0, 0, 20, panelize_cols, dialog_colors, panelize_callback, NULL,
+                    "[External panelize]", _("External panelize"), DLG_CENTER);
+
     /* add listbox to the dialogs */
+    y = UY;
+    add_widget (panelize_dlg, groupbox_new (y++, UX, 12, panelize_cols - UX * 2, ""));
+
+    l_panelize = listbox_new (y, UX + 1, 10, panelize_cols - UX * 2 - 2, FALSE, NULL);
+    for (current = panelize; current != NULL; current = current->next)
+        listbox_add_item (l_panelize, LISTBOX_APPEND_AT_END, 0, current->label, current);
+    listbox_select_entry (l_panelize, listbox_search_text (l_panelize, _("Other command")));
     add_widget (panelize_dlg, l_panelize);
 
-    listbox_select_entry (l_panelize, listbox_search_text (l_panelize, _("Other command")));
+    y += WIDGET (l_panelize)->lines + 1;
+    add_widget (panelize_dlg, label_new (y++, UX, _("Command")));
+    pname =
+        input_new (y++, UX, input_get_default_colors (), panelize_cols - UX * 2, "", "in",
+                   INPUT_COMPLETE_DEFAULT);
+    add_widget (panelize_dlg, pname);
+
+    add_widget (panelize_dlg, hline_new (y++, -1, -1));
+
+    x = (panelize_cols - blen) / 2;
+    for (i = 0; i < G_N_ELEMENTS (panelize_but); i++)
+    {
+        WButton *b;
+
+        b = button_new (y, x,
+                        panelize_but[i].ret_cmd, panelize_but[i].flags, panelize_but[i].text, NULL);
+        add_widget (panelize_dlg, b);
+
+        x += button_get_len (b) + 1;
+    }
+
+    dlg_select_widget (l_panelize);
 }
 
 /* --------------------------------------------------------------------------------------------- */
