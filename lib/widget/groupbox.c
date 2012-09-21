@@ -109,6 +109,21 @@ groupbox_new (int y, int x, int height, int width, const char *title)
     widget_want_hotkey (w, FALSE);
 
     g->title = NULL;
+    groupbox_set_title (g, title);
+
+    return g;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+groupbox_set_title (WGroupbox *g, const char *title)
+{
+    Widget *w = WIDGET (g);
+
+    g_free (g->title);
+    g->title = NULL;
+
     /* Strip existing spaces, add one space before and after the title */
     if (title != NULL && *title != '\0')
     {
@@ -119,7 +134,8 @@ groupbox_new (int y, int x, int height, int width, const char *title)
         g_free (t);
     }
 
-    return g;
+    if (w->owner != NULL)
+        send_message (w, NULL, WIDGET_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
