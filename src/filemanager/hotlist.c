@@ -69,13 +69,12 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define UX 5
+#define UX 3
 #define UY 2
 
 #define BX UX
 #define BY (LINES - 6)
 
-#define BUTTONS G_N_ELEMENTS (hotlist_but)
 #define LABELS          3
 #define B_ADD_CURRENT   B_USER
 #define B_REMOVE        (B_USER + 1)
@@ -164,15 +163,12 @@ struct hotlist
 
 static gboolean hotlist_has_dot_dot = TRUE;
 
-static WListbox *l_hotlist;
-static WListbox *l_movelist;
+static Dlg_head *hotlist_dlg, *movelist_dlg;
+static WGroupbox *hotlist_group, *movelist_group;
+static WListbox *l_hotlist, *l_movelist;
+static WLabel *pname;
 
-static Dlg_head *hotlist_dlg;
-static Dlg_head *movelist_dlg;
-
-static WLabel *pname, *pname_group, *movelist_group;
-
-static struct _hotlist_but
+static struct
 {
     int ret_cmd, flags, y, x, len;
     const char *text;
@@ -181,34 +177,36 @@ static struct _hotlist_but
 } hotlist_but[] =
 {
     /* *INDENT-OFF* */
-    { B_MOVE, NORMAL_BUTTON, 1, 42, 0, N_("&Move"),
-            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_REMOVE, NORMAL_BUTTON, 1, 30, 0, N_("&Remove"),
-            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_APPEND, NORMAL_BUTTON, 1, 15, 0, N_("A&ppend"),
-            LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_INSERT, NORMAL_BUTTON, 1, 0, 0, N_("&Insert"),
-            LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_NEW_ENTRY, NORMAL_BUTTON, 1, 15, 0, N_("New &entry"),
-            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_NEW_GROUP, NORMAL_BUTTON, 1, 0, 0, N_("New &group"),
-            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_CANCEL, NORMAL_BUTTON, 0, 53, 0, N_("&Cancel"),
+    { B_ENTER, DEFPUSH_BUTTON, 0, 0, 0, N_("Change &to"),
             LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_UP_GROUP, NORMAL_BUTTON, 0, 42, 0, N_("&Up"),
-            LIST_HOTLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_ADD_CURRENT, NORMAL_BUTTON, 0, 20, 0, N_("&Add current"),
-            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
 #ifdef ENABLE_VFS
-    { B_REFRESH_VFS, NORMAL_BUTTON, 0, 43, 0, N_("&Refresh"),
-            LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
     { B_FREE_ALL_VFS, NORMAL_BUTTON, 0, 20, 0, N_("&Free VFSs now"),
             LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_REFRESH_VFS, NORMAL_BUTTON, 0, 43, 0, N_("&Refresh"),
+            LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
 #endif
-    { B_ENTER, DEFPUSH_BUTTON, 0, 0, 0, N_("Change &to"),
-            LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM }
+    { B_ADD_CURRENT, NORMAL_BUTTON, 0, 20, 0, N_("&Add current"),
+            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_UP_GROUP, NORMAL_BUTTON, 0, 42, 0, N_("&Up"),
+            LIST_HOTLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_CANCEL, NORMAL_BUTTON, 0, 53, 0, N_("&Cancel"),
+            LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_RIGHT | WPOS_KEEP_BOTTOM },
+    { B_NEW_GROUP, NORMAL_BUTTON, 1, 0, 0, N_("New &group"),
+            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_NEW_ENTRY, NORMAL_BUTTON, 1, 15, 0, N_("New &entry"),
+            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_INSERT, NORMAL_BUTTON, 1, 0, 0, N_("&Insert"),
+            LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_APPEND, NORMAL_BUTTON, 1, 15, 0, N_("A&ppend"),
+            LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_REMOVE, NORMAL_BUTTON, 1, 30, 0, N_("&Remove"),
+            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_MOVE, NORMAL_BUTTON, 1, 42, 0, N_("&Move"),
+            LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM }
     /* *INDENT-ON* */
 };
+
+static const size_t hotlist_but_num = G_N_ELEMENTS (hotlist_but);
 
 static struct hotlist *hotlist = NULL;
 
@@ -226,27 +224,12 @@ static int list_level = 0;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static void init_movelist (hotlist_t, struct hotlist *);
+static void init_movelist (struct hotlist *item);
 static void add_new_group_cmd (void);
 static void add_new_entry_cmd (void);
 static void remove_from_hotlist (struct hotlist *entry);
 static void load_hotlist (void);
 static void add_dotdot_to_list (void);
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-hotlist_refresh (Dlg_head * h)
-{
-    Widget *wh = WIDGET (h);
-
-    /* TODO: use groupboxes here */
-    common_dialog_repaint (h);
-    tty_setcolor (COLOR_NORMAL);
-    draw_box (h, 2, 5, wh->lines - (hotlist_state.moving ? 6 : 10), wh->cols - (UX * 2), TRUE);
-    if (!hotlist_state.moving)
-        draw_box (h, wh->lines - 8, 5, 3, wh->cols - (UX * 2), TRUE);
-}
 
 /* --------------------------------------------------------------------------------------------- */
 /** If current->data is 0, then we are dealing with a VFS pathname */
@@ -257,8 +240,7 @@ update_path_name (void)
     const char *text = "";
     char *p;
     WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
-    Dlg_head *owner = WIDGET (list)->owner;
-    Widget *wo = WIDGET (owner);
+    Widget *w = WIDGET (list);
 
     if (list->count != 0)
     {
@@ -278,17 +260,16 @@ update_path_name (void)
                 text = _("Subgroup - press ENTER to see list");
         }
     }
-    if (!hotlist_state.moving)
-        label_set_text (pname, str_trunc (text, wo->cols - (UX * 2 + 4)));
 
     p = g_strconcat (" ", current_group->label, " ", (char *) NULL);
-    if (!hotlist_state.moving)
-        label_set_text (pname_group, str_trunc (p, wo->cols - (UX * 2 + 4)));
+    if (hotlist_state.moving)
+        groupbox_set_title (movelist_group, str_trunc (p, w->cols - 2));
     else
-        label_set_text (movelist_group, str_trunc (p, wo->cols - (UX * 2 + 4)));
+    {
+        groupbox_set_title (hotlist_group, str_trunc (p, w->cols - 2));
+        label_set_text (pname, str_trunc (text, w->cols));
+    }
     g_free (p);
-
-    dlg_redraw (owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -373,11 +354,9 @@ hotlist_button_callback (WButton * button, int action)
                 return 0;       /* empty group - nothing to do */
 
             listbox_get_current (l_hotlist, NULL, (void **) &item);
+            init_movelist (item);
             hotlist_state.moving = TRUE;
-            init_movelist (LIST_MOVELIST, item);
-
             ret = run_dlg (movelist_dlg);
-
             hotlist_state.moving = FALSE;
             listbox_get_current (l_movelist, NULL, (void **) &moveto_item);
             moveto_group = current_group;
@@ -577,29 +556,21 @@ hotlist_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 {
     switch (msg)
     {
-    case DLG_DRAW:
-        hotlist_refresh (h);
-        return MSG_HANDLED;
-
     case DLG_UNHANDLED_KEY:
         return hotlist_handle_key (h, parm);
 
     case DLG_POST_KEY:
-        if (hotlist_state.moving)
-            dlg_select_widget (l_movelist);
-        else
-            dlg_select_widget (l_hotlist);
+        dlg_select_widget (h == hotlist_dlg ? l_hotlist : l_movelist);
         /* always stay on hotlist */
         /* fall through */
 
     case DLG_INIT:
-        tty_setcolor (MENU_ENTRY_COLOR);
         update_path_name ();
         return MSG_HANDLED;
 
     case DLG_RESIZE:
         /* simply call dlg_set_size() with new size */
-        dlg_set_size (h, LINES - 2, COLS - 6);
+        dlg_set_size (h, LINES - (h == hotlist_dlg ? 2 : 6), COLS - 6);
         return MSG_HANDLED;
 
     default:
@@ -663,14 +634,14 @@ hotlist_listbox_callback (WListbox * list)
 static int
 init_i18n_stuff (int list_type, int cols)
 {
-    int i;
+    size_t i;
 
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
 
     if (!i18n_flag)
     {
-        for (i = 0; i < BUTTONS; i++)
+        for (i = 0; i < hotlist_but_num; i++)
         {
             hotlist_but[i].text = _(hotlist_but[i].text);
             hotlist_but[i].len = str_term_width1 (hotlist_but[i].text) + 3;
@@ -692,8 +663,7 @@ init_i18n_stuff (int list_type, int cols)
         cur_x[0] = cur_x[1] = 0;
 
         /* Count len of buttonbars, assuming 1 extra space between buttons */
-        i = BUTTONS;
-        while (i-- != 0)
+        for (i = 0; i < hotlist_but_num; i++)
             if ((hotlist_but[i].type & list_type) != 0)
             {
                 int row;
@@ -709,8 +679,7 @@ init_i18n_stuff (int list_type, int cols)
         cols = max (cols, max (len[0], len[1]));
 
         /* arrange buttons */
-        i = BUTTONS;
-        while (i-- != 0)
+        for (i = 0; i < hotlist_but_num; i++)
             if ((hotlist_but[i].type & list_type) != 0)
             {
                 int row;
@@ -721,7 +690,7 @@ init_i18n_stuff (int list_type, int cols)
                 {
                     /* not first int the row */
                     if (hotlist_but[i].ret_cmd == B_CANCEL)
-                        hotlist_but[i].x = cols - hotlist_but[i].len - 10;
+                        hotlist_but[i].x = cols - hotlist_but[i].len - 6;
                     else
                         hotlist_but[i].x = cur_x[row];
                 }
@@ -740,11 +709,16 @@ init_hotlist (hotlist_t list_type)
 {
     size_t i;
     const char *title, *help_node;
-    int hotlist_cols;
+    int lines, cols;
+    int y;
+    int dh = 0;
+    WGroupbox *path_box;
+    Widget *hotlist_widget;
 
     do_refresh ();
 
-    hotlist_cols = init_i18n_stuff (list_type, COLS - 6);
+    lines = LINES - 2;
+    cols = init_i18n_stuff (list_type, COLS - 6);
 
     hotlist_state.expanded =
         mc_config_get_int (mc_main_config, "HotlistConfig", "expanded_view_of_groups", 0);
@@ -754,6 +728,7 @@ init_hotlist (hotlist_t list_type)
     {
         title = _("Active VFS directories");
         help_node = "[vfshot]"; /* FIXME - no such node */
+        dh = 1;
     }
     else
 #endif /* !ENABLE_VFS */
@@ -763,44 +738,16 @@ init_hotlist (hotlist_t list_type)
     }
 
     hotlist_dlg =
-        create_dlg (TRUE, 0, 0, LINES - 2, hotlist_cols, dialog_colors,
-                    hotlist_callback, NULL, help_node, title, DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, hotlist_callback, NULL, help_node,
+                    title, DLG_CENTER);
 
-    for (i = 0; i < BUTTONS; i++)
-    {
-        if ((hotlist_but[i].type & list_type) != 0)
-            add_widget_autopos (hotlist_dlg,
-                                button_new (BY + hotlist_but[i].y,
-                                            BX + hotlist_but[i].x,
-                                            hotlist_but[i].ret_cmd,
-                                            hotlist_but[i].flags,
-                                            hotlist_but[i].text,
-                                            hotlist_button_callback), hotlist_but[i].pos_flags,
-                                NULL);
-    }
+    y = UY;
+    hotlist_group = groupbox_new (y, UX, lines - 10 + dh, cols - 2 * UX, _("Top level group"));
+    hotlist_widget = WIDGET (hotlist_group);
+    add_widget_autopos (hotlist_dlg, hotlist_widget, WPOS_KEEP_ALL, NULL);
 
-    /* We add the labels.
-     *    pname       will hold entry's pathname;
-     *    pname_group will hold name of current group
-     */
-    pname = label_new (UY - 11 + LINES, UX + 2, "");
-    add_widget_autopos (hotlist_dlg, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
-
-    {
-        char label_text[BUF_TINY];
-
-        g_snprintf (label_text, sizeof (label_text), " %s ", _("Directory path"));
-        add_widget_autopos (hotlist_dlg,
-                            label_new (UY - 12 + LINES, UX + 2,
-                                       label_text), WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
-
-        /* This one holds the displayed pathname */
-        pname_group = label_new (UY, UX + 2, _("Directory label"));
-        add_widget (hotlist_dlg, pname_group);
-    }
-    /* get new listbox */
     l_hotlist =
-        listbox_new (UY + 1, UX + 1, LINES - 14, COLS - 2 * UX - 8, FALSE,
+        listbox_new (y + 1, UX + 1, hotlist_widget->lines - 2, hotlist_widget->cols - 2, FALSE,
                      hotlist_listbox_callback);
 
     /* Fill the hotlist with the active VFS or the hotlist */
@@ -814,54 +761,80 @@ init_hotlist (hotlist_t list_type)
 #endif /* !ENABLE_VFS */
         fill_listbox (l_hotlist);
 
+    /* insert before groupbox to view scrollbar */
     add_widget_autopos (hotlist_dlg, l_hotlist, WPOS_KEEP_ALL, NULL);
-    /* add listbox to the dialogs */
+
+    y += hotlist_widget->lines;
+
+    path_box = groupbox_new (y, UX, 3, hotlist_widget->cols, _("Directory path"));
+    add_widget_autopos (hotlist_dlg, path_box, WPOS_KEEP_BOTTOM | WPOS_KEEP_HORZ, NULL);
+
+    pname = label_new (y + 1, UX + 2, "");
+    add_widget_autopos (hotlist_dlg, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
+    y += WIDGET (path_box)->lines;
+
+    add_widget_autopos (hotlist_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+
+    for (i = 0; i < hotlist_but_num; i++)
+        if ((hotlist_but[i].type & list_type) != 0)
+            add_widget_autopos (hotlist_dlg,
+                                button_new (y + hotlist_but[i].y, UX + hotlist_but[i].x,
+                                            hotlist_but[i].ret_cmd, hotlist_but[i].flags,
+                                            hotlist_but[i].text, hotlist_button_callback),
+                                            hotlist_but[i].pos_flags, NULL);
+
+    dlg_select_widget (l_hotlist);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-init_movelist (hotlist_t list_type, struct hotlist *item)
+init_movelist ( struct hotlist *item)
 {
     size_t i;
     char *hdr;
-    int movelist_cols;
+    int lines, cols;
+    int y;
+    Widget *movelist_widget;
 
     do_refresh ();
 
+    lines = LINES - 6;
+    cols = init_i18n_stuff (LIST_MOVELIST, COLS - 6);
+
     hdr = g_strdup_printf (_("Moving %s"), item->label);
-    movelist_cols = init_i18n_stuff (list_type, COLS - 6);
 
     movelist_dlg =
-        create_dlg (TRUE, 0, 0, LINES - 6, movelist_cols, dialog_colors,
-                    hotlist_callback, NULL, "[Hotlist]", hdr, DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, hotlist_callback, NULL, "[Hotlist]",
+                    hdr, DLG_CENTER);
+
     g_free (hdr);
 
-    for (i = 0; i < BUTTONS; i++)
-    {
-        if ((hotlist_but[i].type & list_type) != 0)
-            add_widget (movelist_dlg,
-                        button_new (BY - 4 + hotlist_but[i].y,
-                                    BX + hotlist_but[i].x,
-                                    hotlist_but[i].ret_cmd,
-                                    hotlist_but[i].flags,
-                                    hotlist_but[i].text, hotlist_button_callback));
-    }
+    y = UY;
+    movelist_group = groupbox_new (y, UX, lines - 7, cols - 2 * UX, _("Directory label"));
+    movelist_widget = WIDGET (movelist_group);
+    add_widget_autopos (movelist_dlg, movelist_widget, WPOS_KEEP_ALL, NULL);
 
-    /* We add the labels.  We are interested in the last one,
-     * that one will hold the path name label
-     */
-    movelist_group = label_new (UY, UX + 2, _("Directory label"));
-    add_widget (movelist_dlg, movelist_group);
-    /* get new listbox */
     l_movelist =
-        listbox_new (UY + 1, UX + 1, WIDGET (movelist_dlg)->lines - 8,
-                     WIDGET (movelist_dlg)->cols - 2 * UX - 2, FALSE, hotlist_listbox_callback);
-
+        listbox_new (y + 1, UX + 1, movelist_widget->lines - 2, movelist_widget->cols - 2, FALSE,
+                     hotlist_listbox_callback);
     fill_listbox (l_movelist);
+    /* insert before groupbox to view scrollbar */
+    add_widget_autopos (movelist_dlg, l_movelist, WPOS_KEEP_ALL, NULL);
 
-    add_widget (movelist_dlg, l_movelist);
-    /* add listbox to the dialogs */
+    y += movelist_widget->lines;
+
+    add_widget_autopos (movelist_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+
+    for (i = 0; i < hotlist_but_num; i++)
+        if ((hotlist_but[i].type & LIST_MOVELIST) != 0)
+            add_widget_autopos (movelist_dlg,
+                                button_new (y + hotlist_but[i].y, UX + hotlist_but[i].x,
+                                            hotlist_but[i].ret_cmd, hotlist_but[i].flags,
+                                            hotlist_but[i].text, hotlist_button_callback),
+                                            hotlist_but[i].pos_flags, NULL);
+
+    dlg_select_widget (l_movelist);
 }
 
 /* --------------------------------------------------------------------------------------------- */
