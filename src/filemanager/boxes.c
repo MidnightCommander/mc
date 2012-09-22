@@ -990,97 +990,60 @@ jobs_cmd (void)
 struct smb_authinfo *
 vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, const char *user)
 {
-    static int dialog_x = 44;
-    int b0 = 3, dialog_y = 12;
-    static const char *lc_labs[] = { N_("Domain:"), N_("Username:"), N_("Password:") };
-    static const char *buts[] = { N_("&OK"), N_("&Cancel") };
-    static int ilen = 30, istart = 14;
-    static int b2 = 30;
-    char *title;
-    WInput *in_password;
-    WInput *in_user;
-    WInput *in_domain;
-    Dlg_head *auth_dlg;
+    char *label;
     struct smb_authinfo *return_value = NULL;
 
-#ifdef ENABLE_NLS
-    static int i18n_flag = 0;
-
-    if (!i18n_flag)
-    {
-        register int i = sizeof (lc_labs) / sizeof (lc_labs[0]);
-        int l1, maxlen = 0;
-
-        while (i--)
-        {
-            l1 = str_term_width1 (lc_labs[i] = _(lc_labs[i]));
-            if (l1 > maxlen)
-                maxlen = l1;
-        }
-        i = maxlen + ilen + 7;
-        if (i > dialog_x)
-            dialog_x = i;
-
-        for (i = sizeof (buts) / sizeof (buts[0]), l1 = 0; i--;)
-        {
-            l1 += str_term_width1 (buts[i] = _(buts[i]));
-        }
-        l1 += 15;
-        if (l1 > dialog_x)
-            dialog_x = l1;
-
-        ilen = dialog_x - 7 - maxlen;   /* for the case of very long buttons :) */
-        istart = dialog_x - 3 - ilen;
-
-        b2 = dialog_x - (str_term_width1 (buts[1]) + 6);
-
-        i18n_flag = 1;
-    }
-
-#endif /* ENABLE_NLS */
-
-    if (!domain)
+    if (domain == NULL)
         domain = "";
-    if (!user)
+    if (user == NULL)
         user = "";
 
-    title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
+    label = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
 
-    auth_dlg = create_dlg (TRUE, 0, 0, dialog_y, dialog_x, dialog_colors, NULL, NULL,
-                           "[Smb Authinfo]", title, DLG_CENTER | DLG_REVERSE);
+    {
+        char *ret_domain, *ret_user, *ret_password;
 
-    g_free (title);
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK_LABEL (label, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_START_COLUMNS,
+                QUICK_LABEL (N_("Domain:"), NULL),
+                QUICK_SEPARATOR (FALSE),
+                QUICK_LABEL (N_("Username:"), NULL),
+                QUICK_SEPARATOR (FALSE),
+                QUICK_LABEL (N_("Password:"), NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_INPUT (domain, 0, "auth_domain", &ret_domain, NULL),
+                QUICK_SEPARATOR (FALSE),
+                QUICK_INPUT (user, 0, "auth_name", &ret_user, NULL),
+                QUICK_SEPARATOR (FALSE),
+                QUICK_INPUT ("", 1, "auth_password", &ret_password, NULL),
+            QUICK_STOP_COLUMNS,
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
+            /* *INDENT-ON* */
+        };
 
-    in_user =
-        input_new (5, istart, input_get_default_colors (), ilen, user, "auth_name",
-                   INPUT_COMPLETE_DEFAULT);
-    add_widget (auth_dlg, in_user);
+        quick_dialog_t qdlg = {
+            -1, -1, 40,
+            N_("SMB authentication"), "[Smb Authinfo]",
+            quick_widgets, NULL, NULL
+        };
 
-    in_domain =
-        input_new (3, istart, input_get_default_colors (), ilen, domain, "auth_domain",
-                   INPUT_COMPLETE_DEFAULT);
+        if (quick_dialog (&qdlg) != B_CANCEL)
+        {
+            return_value = vfs_smb_authinfo_new (host, share, ret_domain, ret_user, ret_password);
 
-    add_widget (auth_dlg, in_domain);
-    add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON, buts[1], 0));
-    add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
+            g_free (ret_domain);
+            g_free (ret_user);
+            g_free (ret_password);
+        }
+    }
 
-    in_password =
-        input_new (7, istart, input_get_default_colors (), ilen, "", "auth_password",
-                   INPUT_COMPLETE_DEFAULT);
-
-    in_password->completion_flags = 0;
-    in_password->is_password = 1;
-    add_widget (auth_dlg, in_password);
-
-    add_widget (auth_dlg, label_new (7, 3, lc_labs[2]));
-    add_widget (auth_dlg, label_new (5, 3, lc_labs[1]));
-    add_widget (auth_dlg, label_new (3, 3, lc_labs[0]));
-
-    if (run_dlg (auth_dlg) != B_CANCEL)
-        return_value = vfs_smb_authinfo_new (host, share, in_domain->buffer, in_user->buffer,
-                                             in_password->buffer);
-
-    destroy_dlg (auth_dlg);
+    g_free (label);
 
     return return_value;
 }
