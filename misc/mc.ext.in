@@ -421,6 +421,10 @@ shell/.xpm
 shell/.ico
 	Include=image
 
+shell/i/.svg
+	View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
+	Open=@EXTHELPERSDIR@/image.sh open svg
+
 include/image
 	Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
 	View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS

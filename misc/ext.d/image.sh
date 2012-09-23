@@ -32,6 +32,9 @@ do_open_action() {
     xcf)
         (gimp "${MC_EXT_FILENAME}" &)
         ;;
+    svg)
+        (inkscape "${MC_EXT_FILENAME}" &)
+        ;;
     *)
         if [ -n "$DISPLAY" ]; then
             (gqview "${MC_EXT_FILENAME}" &)
