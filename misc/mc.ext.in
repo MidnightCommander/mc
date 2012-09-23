@@ -391,6 +391,12 @@ type/^PC\ bitmap
 type/^PNG
 	Include=image
 
+type/^JNG
+	Include=image
+
+type/^MNG
+	Include=image
+
 type/^TIFF
 	Include=image
 
