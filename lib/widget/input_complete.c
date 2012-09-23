@@ -120,7 +120,7 @@ show_c_flags (input_complete_t flags)
 static char *
 filename_completion_function (const char *text, int state, input_complete_t flags)
 {
-    static DIR *directory;
+    static DIR *directory = NULL;
     static char *filename = NULL;
     static char *dirname = NULL;
     static char *users_dirname = NULL;
@@ -169,7 +169,6 @@ filename_completion_function (const char *text, int state, input_complete_t flag
             dirname = g_strdup (".");
             filename = g_strdup (text);
         }
-        dirname_vpath = vfs_path_from_str (dirname);
 
         /* We aren't done yet.  We also support the "~user" syntax. */
 
@@ -177,6 +176,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         users_dirname = dirname;
         dirname = tilde_expand (dirname);
         canonicalize_pathname (dirname);
+        dirname_vpath = vfs_path_from_str (dirname);
 
         /* Here we should do something with variable expansion
            and `command`.
