@@ -550,6 +550,10 @@ regex/i/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|o
 shell/.abw
 	Open=@EXTHELPERSDIR@/doc.sh open abw
 
+# Gnumeric
+shell/i/.gnumeric
+	Open=@EXTHELPERSDIR@/doc.sh open gnumeric
+
 # Microsoft Word Document
 regex/i/\.(do[ct]|wri)$
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc

@@ -108,6 +108,9 @@ do_open_action() {
     abw)
         (abiword "${MC_EXT_FILENAME}" &)
         ;;
+    gnumeric)
+        (gnumeric "${MC_EXT_FILENAME}" &)
+        ;;
     msdoc)
         if [ -n "$DISPLAY" ]; then
             (abiword "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
