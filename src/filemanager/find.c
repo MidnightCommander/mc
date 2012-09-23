@@ -64,11 +64,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-/* Size of the find window */
-#define FIND2_Y (LINES - 4)
-
-#define FIND2_X_USE (FIND2_X - 20)
-
 /*** file scope type declarations ****************************************************************/
 
 /* A couple of extra messages we need */
@@ -114,18 +109,13 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
+/* button callbacks */
+static int start_stop (WButton * button, int action);
+static int find_do_view_file (WButton * button, int action);
+static int find_do_edit_file (WButton * button, int action);
+
 /* Parsed ignore dirs */
 static char **find_ignore_dirs = NULL;
-
-/* Size of the find parameters window */
-#ifdef HAVE_CHARSET
-static int FIND_Y = 19;
-#else
-static int FIND_Y = 18;
-#endif
-static int FIND_X = 68;
-
-static int FIND2_X = 64;
 
 /* static variables to remember find parameters */
 static WInput *in_start;        /* Start path */
@@ -165,10 +155,8 @@ static int last_pos;
 static size_t ignore_count = 0;
 
 static Dlg_head *find_dlg;      /* The dialog */
-static WButton *stop_button;    /* pointer to the stop button */
 static WLabel *status_label;    /* Finished, Searching etc. */
 static WLabel *found_num_label; /* Number of found items */
-static WListbox *find_list;     /* Listbox with the file list */
 
 /* This keeps track of the directory stack */
 #if GLIB_CHECK_VERSION (2, 14, 0)
@@ -186,21 +174,31 @@ static dir_stack *dir_stack_base = 0;
 /* *INDENT-OFF* */
 static struct
 {
+    int ret_cmd;
+    button_flags_t flags;
     const char *text;
     int len;                    /* length including space and brackets */
     int x;
+    Widget *button;
+    bcback_fn callback;
 } fbuts[] =
 {
-    {N_("&Suspend"), 11, 29},
-    {N_("Con&tinue"), 12, 29},
-    {N_("&Chdir"), 11, 3},
-    {N_("&Again"), 9, 17},
-    {N_("&Quit"), 8, 43},
-    {N_("Pane&lize"), 12, 3},
-    {N_("&View - F3"), 13, 20},
-    {N_("&Edit - F4"), 13, 38}
+    { B_ENTER, DEFPUSH_BUTTON, N_("&Chdir"), 0, 0, NULL, NULL },
+    { B_AGAIN, NORMAL_BUTTON, N_("&Again"), 0, 0, NULL, NULL },
+    { B_STOP, NORMAL_BUTTON, N_("&Suspend"), 0, 0, NULL, start_stop },
+    { B_STOP, NORMAL_BUTTON, N_("Con&tinue"), 0, 0, NULL, NULL },
+    { B_CANCEL, NORMAL_BUTTON, N_("&Quit"), 0, 0, NULL, NULL },
+
+    { B_PANELIZE, NORMAL_BUTTON, N_("Pane&lize"), 0, 0, NULL, NULL },
+    { B_VIEW, NORMAL_BUTTON, N_("&View - F3"), 0, 0, NULL, find_do_view_file },
+    { B_VIEW, NORMAL_BUTTON, N_("&Edit - F4"), 0, 0, NULL, find_do_edit_file }
 };
 /* *INDENT-ON* */
+
+static const size_t fbuts_num = G_N_ELEMENTS (fbuts);
+const size_t quit_button = 4;   /* index of "Quit" button */
+
+static WListbox *find_list;     /* Listbox with the file list */
 
 static find_file_options_t options = {
     TRUE, TRUE, TRUE, FALSE, FALSE,
@@ -212,7 +210,20 @@ static char *in_start_dir = INPUT_LAST_TEXT;
 static mc_search_t *search_file_handle = NULL;
 static mc_search_t *search_content_handle = NULL;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* don't use max macro to avoid double str_term_width1() call in widget length caclulation */
+#undef max
+
+static int
+max (int a, int b)
+{
+    return (a > b ? a : b);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 parse_ignore_dirs (const char *ignore_dirs)
@@ -477,59 +488,105 @@ static gboolean
 find_parameters (char **start_dir, ssize_t * start_dir_len,
                  char **ignore_dirs, char **pattern, char **content)
 {
+    /* Size of the find parameters window */
+#ifdef HAVE_CHARSET
+    const int lines = 19;
+#else
+    const int lines = 18;
+#endif
+    int cols = 68;
+
     gboolean return_value;
 
     /* file name */
-    const char *file_case_label = N_("Cas&e sensitive");
-    const char *file_pattern_label = N_("&Using shell patterns");
+    const char *file_name_label = N_("File name:");
     const char *file_recurs_label = N_("&Find recursively");
-    const char *file_skip_hidden_label = N_("S&kip hidden");
+    const char *file_pattern_label = N_("&Using shell patterns");
 #ifdef HAVE_CHARSET
     const char *file_all_charsets_label = N_("&All charsets");
 #endif
+    const char *file_case_label = N_("Cas&e sensitive");
+    const char *file_skip_hidden_label = N_("S&kip hidden");
 
     /* file content */
+    const char *content_content_label = N_("Content:");
     const char *content_use_label = N_("Sea&rch for content");
-    const char *content_case_label = N_("Case sens&itive");
     const char *content_regexp_label = N_("Re&gular expression");
-    const char *content_first_hit_label = N_("Fir&st hit");
-    const char *content_whole_words_label = N_("&Whole words");
+    const char *content_case_label = N_("Case sens&itive");
 #ifdef HAVE_CHARSET
     const char *content_all_charsets_label = N_("A&ll charsets");
 #endif
+    const char *content_whole_words_label = N_("&Whole words");
+    const char *content_first_hit_label = N_("Fir&st hit");
 
-    const char *buts[] = { N_("&OK"), N_("&Cancel"), N_("&Tree") };
+    const char *buts[] = { N_("&Tree"), N_("&OK"), N_("&Cancel") };
 
-    int b0, b1, b2;
+    /* button lengths */
+    int b0, b1, b2, b12;
+    int y1, y2, x1, x2;
+    /* column width */
+    int cw;
 
-    int cbox_position;
     gboolean disable;
 
 #ifdef ENABLE_NLS
     {
-        int i = sizeof (buts) / sizeof (buts[0]);
-        while (i-- != 0)
-            buts[i] = _(buts[i]);
+        size_t i;
 
-        file_case_label = _(file_case_label);
-        file_pattern_label = _(file_pattern_label);
+        file_name_label = _(file_name_label);
         file_recurs_label = _(file_recurs_label);
-        file_skip_hidden_label = _(file_skip_hidden_label);
+        file_pattern_label = _(file_pattern_label);
 #ifdef HAVE_CHARSET
         file_all_charsets_label = _(file_all_charsets_label);
+#endif
+        file_case_label = _(file_case_label);
+        file_skip_hidden_label = _(file_skip_hidden_label);
+
+        /* file content */
+        content_content_label = _(content_content_label);
+        content_use_label = _(content_use_label);
+        content_regexp_label = _(content_regexp_label);
+        content_case_label = _(content_case_label);
+#ifdef HAVE_CHARSET
         content_all_charsets_label = _(content_all_charsets_label);
 #endif
-        content_use_label = _(content_use_label);
-        content_case_label = _(content_case_label);
-        content_regexp_label = _(content_regexp_label);
-        content_first_hit_label = _(content_first_hit_label);
         content_whole_words_label = _(content_whole_words_label);
+        content_first_hit_label = _(content_first_hit_label);
+
+        for (i = 0; i < G_N_ELEMENTS (buts); i++)
+            buts[i] = _(buts[i]);
     }
 #endif /* ENABLE_NLS */
 
-    b0 = str_term_width1 (buts[0]) + 6; /* default button */
-    b1 = str_term_width1 (buts[1]) + 4;
-    b2 = str_term_width1 (buts[2]) + 4;
+    /* caclulate dialog width */
+
+    /* widget widths */
+    cw = str_term_width1 (file_name_label);
+    cw = max (cw, str_term_width1 (file_recurs_label) + 4);
+    cw = max (cw, str_term_width1 (file_pattern_label) + 4);
+#ifdef HAVE_CHARSET
+    cw = max (cw, str_term_width1 (file_all_charsets_label) + 4);
+#endif
+    cw = max (cw, str_term_width1 (file_case_label) + 4);
+    cw = max (cw, str_term_width1 (file_skip_hidden_label) + 4);
+
+    cw = max (cw, str_term_width1 (content_content_label) + 4);
+    cw = max (cw, str_term_width1 (content_use_label) + 4);
+    cw = max (cw, str_term_width1 (content_regexp_label) + 4);
+    cw = max (cw, str_term_width1 (content_case_label) + 4);
+#ifdef HAVE_CHARSET
+    cw = max (cw, str_term_width1 (content_all_charsets_label) + 4);
+#endif
+    cw = max (cw, str_term_width1 (content_whole_words_label) + 4);
+    cw = max (cw, str_term_width1 (content_first_hit_label) + 4);
+
+    /* button width */
+    b0 = str_term_width1 (buts[0]) + 3;
+    b1 = str_term_width1 (buts[1]) + 5; /* default button */
+    b2 = str_term_width1 (buts[2]) + 3;
+    b12 = b1 + b2 + 1;
+
+    cols = max (cols, max (b12, cw * 2 + 1) + 6);
 
     find_load_options ();
 
@@ -539,103 +596,108 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     disable = !options.content_use;
 
     find_dlg =
-        create_dlg (TRUE, 0, 0, FIND_Y, FIND_X, dialog_colors,
-                    find_parm_callback, NULL, "[Find File]", _("Find File"),
-                    DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, find_parm_callback, NULL, "[Find File]",
+                    _("Find File"), DLG_CENTER);
 
-    add_widget (find_dlg,
-                button_new (FIND_Y - 3, FIND_X * 3 / 4 - b1 / 2, B_CANCEL, NORMAL_BUTTON, buts[1],
-                            0));
-    add_widget (find_dlg,
-                button_new (FIND_Y - 3, FIND_X / 4 - b0 / 2, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
+    x1 = 3;
+    x2 = cols / 2 + 1;
+    cw = (cols - 7) / 2;
+    y1 = 2;
 
-    cbox_position = FIND_Y - 5;
+    add_widget (find_dlg, label_new (y1++, x1, _("Start at:")));
+    in_start =
+        input_new (y1, x1, input_get_default_colors (), cols - b0 - 7, in_start_dir, "start",
+                   INPUT_COMPLETE_DEFAULT);
+    add_widget (find_dlg, in_start);
 
-    content_first_hit_cbox =
-        check_new (cbox_position--, FIND_X / 2 + 1, options.content_first_hit,
-                   content_first_hit_label);
-    widget_disable (WIDGET (content_first_hit_cbox), disable);
-    add_widget (find_dlg, content_first_hit_cbox);
+    add_widget (find_dlg, button_new (y1++, cols - b0 - 3, B_TREE, NORMAL_BUTTON, buts[0], NULL));
 
-    content_whole_words_cbox =
-        check_new (cbox_position--, FIND_X / 2 + 1, options.content_whole_words,
-                   content_whole_words_label);
-    widget_disable (WIDGET (content_whole_words_cbox), disable);
-    add_widget (find_dlg, content_whole_words_cbox);
+    ignore_dirs_cbox =
+        check_new (y1++, x1, options.ignore_dirs_enable, _("Ena&ble ignore directories:"));
+    add_widget (find_dlg, ignore_dirs_cbox);
+
+    in_ignore =
+        input_new (y1++, x1, input_get_default_colors (), cols - 6,
+                   options.ignore_dirs != NULL ? options.ignore_dirs : "", "ignoredirs",
+                   INPUT_COMPLETE_DEFAULT);
+    widget_disable (WIDGET (in_ignore), !options.ignore_dirs_enable);
+    add_widget (find_dlg, in_ignore);
+
+    add_widget (find_dlg, hline_new (y1++, -1, -1));
+
+    y2 = y1;
+
+    /* Start 1st column */
+    add_widget (find_dlg, label_new (y1++, x1, file_name_label));
+    in_name =
+        input_new (y1++, x1, input_get_default_colors (), cw, INPUT_LAST_TEXT, "name",
+                   INPUT_COMPLETE_DEFAULT);
+    add_widget (find_dlg, in_name);
+
+    /* Start 2nd column */
+    content_label = label_new (y2++, x2, content_content_label);
+    add_widget (find_dlg, content_label);
+    in_with =
+        input_new (y2++, x2, input_get_default_colors (), cw, INPUT_LAST_TEXT,
+                   MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
+    in_with->label = content_label;
+    widget_disable (WIDGET (in_with), disable);
+    add_widget (find_dlg, in_with);
+
+    content_use_cbox = check_new (y2++, x2, options.content_use, content_use_label);
+    add_widget (find_dlg, content_use_cbox);
+
+    /* Continue 1st column */
+    recursively_cbox = check_new (y1++, x1, options.find_recurs, file_recurs_label);
+    add_widget (find_dlg, recursively_cbox);
+
+    file_pattern_cbox = check_new (y1++, x1, options.file_pattern, file_pattern_label);
+    add_widget (find_dlg, file_pattern_cbox);
+
+    file_case_sens_cbox = check_new (y1++, x1, options.file_case_sens, file_case_label);
+    add_widget (find_dlg, file_case_sens_cbox);
 
 #ifdef HAVE_CHARSET
-    content_all_charsets_cbox = check_new (cbox_position--, FIND_X / 2 + 1,
-                                           options.content_all_charsets,
-                                           content_all_charsets_label);
+    file_all_charsets_cbox =
+        check_new (y1++, x1, options.file_all_charsets, file_all_charsets_label);
+    add_widget (find_dlg, file_all_charsets_cbox);
+#endif
+
+    skip_hidden_cbox = check_new (y1++, x1, options.skip_hidden, file_skip_hidden_label);
+    add_widget (find_dlg, skip_hidden_cbox);
+
+    /* Continue 2nd column */
+    content_regexp_cbox = check_new (y2++, x2, options.content_regexp, content_regexp_label);
+    widget_disable (WIDGET (content_regexp_cbox), disable);
+    add_widget (find_dlg, content_regexp_cbox);
+
+    content_case_sens_cbox = check_new (y2++, x2, options.content_case_sens, content_case_label);
+    widget_disable (WIDGET (content_case_sens_cbox), disable);
+    add_widget (find_dlg, content_case_sens_cbox);
+
+#ifdef HAVE_CHARSET
+    content_all_charsets_cbox =
+        check_new (y2++, x2, options.content_all_charsets, content_all_charsets_label);
     widget_disable (WIDGET (content_all_charsets_cbox), disable);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
 
-    content_case_sens_cbox =
-        check_new (cbox_position--, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
-    widget_disable (WIDGET (content_case_sens_cbox), disable);
-    add_widget (find_dlg, content_case_sens_cbox);
+    content_whole_words_cbox =
+        check_new (y2++, x2, options.content_whole_words, content_whole_words_label);
+    widget_disable (WIDGET (content_whole_words_cbox), disable);
+    add_widget (find_dlg, content_whole_words_cbox);
 
-    content_regexp_cbox =
-        check_new (cbox_position--, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
-    widget_disable (WIDGET (content_regexp_cbox), disable);
-    add_widget (find_dlg, content_regexp_cbox);
+    content_first_hit_cbox =
+        check_new (y2++, x2, options.content_first_hit, content_first_hit_label);
+    widget_disable (WIDGET (content_first_hit_cbox), disable);
+    add_widget (find_dlg, content_first_hit_cbox);
 
-    cbox_position = FIND_Y - 6;
-
-    skip_hidden_cbox = check_new (cbox_position--, 3, options.skip_hidden, file_skip_hidden_label);
-    add_widget (find_dlg, skip_hidden_cbox);
-
-#ifdef HAVE_CHARSET
-    file_all_charsets_cbox =
-        check_new (cbox_position--, 3, options.file_all_charsets, file_all_charsets_label);
-    add_widget (find_dlg, file_all_charsets_cbox);
-#endif
-
-    file_case_sens_cbox = check_new (cbox_position--, 3, options.file_case_sens, file_case_label);
-    add_widget (find_dlg, file_case_sens_cbox);
-
-    file_pattern_cbox = check_new (cbox_position--, 3, options.file_pattern, file_pattern_label);
-    add_widget (find_dlg, file_pattern_cbox);
-
-    recursively_cbox = check_new (cbox_position, 3, options.find_recurs, file_recurs_label);
-    add_widget (find_dlg, recursively_cbox);
-
-    /* This checkbox is located in the second column */
-    content_use_cbox =
-        check_new (cbox_position, FIND_X / 2 + 1, options.content_use, content_use_label);
-    add_widget (find_dlg, content_use_cbox);
-
-    in_with =
-        input_new (8, FIND_X / 2 + 1, input_get_default_colors (), FIND_X / 2 - 4, INPUT_LAST_TEXT,
-                   MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
-    content_label = label_new (7, FIND_X / 2 + 1, _("Content:"));
-    in_with->label = content_label;
-    widget_disable (WIDGET (in_with), disable);
-    add_widget (find_dlg, in_with);
-    add_widget (find_dlg, content_label);
-
-    in_name = input_new (8, 3, input_get_default_colors (),
-                         FIND_X / 2 - 4, INPUT_LAST_TEXT, "name", INPUT_COMPLETE_DEFAULT);
-    add_widget (find_dlg, in_name);
-    add_widget (find_dlg, label_new (7, 3, _("File name:")));
-
-    in_ignore = input_new (5, 3, input_get_default_colors (), FIND_X - 6,
-                           options.ignore_dirs != NULL ? options.ignore_dirs : "",
-                           "ignoredirs", INPUT_COMPLETE_DEFAULT);
-    widget_disable (WIDGET (in_ignore), !options.ignore_dirs_enable);
-    add_widget (find_dlg, in_ignore);
-
-    ignore_dirs_cbox =
-        check_new (4, 3, options.ignore_dirs_enable, _("Ena&ble ignore directories:"));
-    add_widget (find_dlg, ignore_dirs_cbox);
-
-    add_widget (find_dlg, button_new (3, FIND_X - b2 - 2, B_TREE, NORMAL_BUTTON, buts[2], 0));
-
-    in_start = input_new (3, 3, input_get_default_colors (),
-                          FIND_X - b2 - 6, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
-    add_widget (find_dlg, in_start);
-    add_widget (find_dlg, label_new (2, 3, _("Start at:")));
+    /* buttons */
+    y1 = max (y1, y2);
+    x1 = (cols - b12) / 2;
+    add_widget (find_dlg, hline_new (y1++, -1, -1));
+    add_widget (find_dlg, button_new (y1, x1, B_ENTER, DEFPUSH_BUTTON, buts[1], NULL));
+    add_widget (find_dlg, button_new (y1, x1 + b1 + 1, B_CANCEL, NORMAL_BUTTON, buts[2], NULL));
 
   find_par_start:
     dlg_select_widget (in_name);
@@ -983,9 +1045,9 @@ search_content (Dlg_head * h, const char *directory, const char *filename)
     if (file_fd == -1)
         return FALSE;
 
-    g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), str_trunc (filename, FIND2_X_USE));
+    g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), filename);
+    status_update (str_trunc (buffer, WIDGET (h)->cols - 8));
 
-    status_update (buffer);
     mc_refresh ();
 
     tty_enable_interrupt_key ();
@@ -1128,9 +1190,11 @@ find_rotate_dash (const Dlg_head * h, gboolean finish)
 
     if (verbose)
     {
+        const Widget *w = WIDGET (h);
+
         pos = (pos + 1) % 4;
         tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-        widget_move (h, FIND2_Y - 7, FIND2_X - 4);
+        widget_move (h, w->lines - 7, w->cols - 4);
         tty_print_char (finish ? ' ' : rotating_dash[pos]);
         mc_refresh ();
     }
@@ -1221,11 +1285,10 @@ do_search (Dlg_head * h)
 
                 if (verbose)
                 {
-                    char buffer[BUF_SMALL];
+                    char buffer[BUF_MEDIUM];
 
-                    g_snprintf (buffer, sizeof (buffer), _("Searching %s"),
-                                str_trunc (directory, FIND2_X_USE));
-                    status_update (buffer);
+                    g_snprintf (buffer, sizeof (buffer), _("Searching %s"), directory);
+                    status_update (str_trunc (directory, WIDGET (h)->cols - 8));
                 }
                 /* mc_stat should not be called after mc_opendir
                    because vfs_s_opendir modifies the st_nlink
@@ -1366,6 +1429,45 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+find_calc_button_locations (const Dlg_head * h, gboolean all_buttons)
+{
+    const int cols = WIDGET (h)->cols;
+
+    int l1, l2;
+
+    l1 = fbuts[0].len + fbuts[1].len + fbuts[is_start ? 3 : 2].len + fbuts[4].len + 3;
+    l2 = fbuts[5].len + fbuts[6].len + fbuts[7].len + 2;
+
+    fbuts[0].x = (cols - l1) / 2;
+    fbuts[1].x = fbuts[0].x + fbuts[0].len + 1;
+    fbuts[2].x = fbuts[1].x + fbuts[1].len + 1;
+    fbuts[3].x = fbuts[2].x;
+    fbuts[4].x = fbuts[2].x + fbuts[is_start ? 3 : 2].len + 1;
+
+    if (all_buttons)
+    {
+        fbuts[5].x = (cols - l2) / 2;
+        fbuts[6].x = fbuts[5].x + fbuts[5].len + 1;
+        fbuts[7].x = fbuts[6].x + fbuts[6].len + 1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+find_relocate_buttons (const Dlg_head * h, gboolean all_buttons)
+{
+    size_t i;
+
+    find_calc_button_locations (h, all_buttons);
+
+    for (i = 0; i < fbuts_num; i++)
+        fbuts[i].button->x = WIDGET (h)->x + fbuts[i].x;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 find_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
@@ -1378,10 +1480,13 @@ find_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
             return view_edit_currently_selected_file (unparsed_view, 0);
         }
         if (parm == KEY_F (4))
-        {
             return view_edit_currently_selected_file (0, 1);
-        }
         return MSG_NOT_HANDLED;
+
+    case DLG_RESIZE:
+        dlg_set_size (h, LINES - 4, COLS - 16);
+        find_relocate_buttons (h, TRUE);
+        return MSG_HANDLED;
 
     case DLG_IDLE:
         do_search (h);
@@ -1398,7 +1503,8 @@ find_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
 static int
 start_stop (WButton * button, int action)
 {
-    (void) button;
+    Widget *w = WIDGET (button);
+
     (void) action;
 
     running = is_start;
@@ -1406,7 +1512,10 @@ start_stop (WButton * button, int action)
     is_start = !is_start;
 
     status_update (is_start ? _("Stopped") : _("Searching"));
-    button_set_text (stop_button, fbuts[is_start ? 1 : 0].text);
+    button_set_text (button, fbuts[is_start ? 3 : 2].text);
+
+    find_relocate_buttons (w->owner, FALSE);
+    dlg_redraw (w->owner);
 
     return 0;
 }
@@ -1442,84 +1551,69 @@ find_do_edit_file (WButton * button, int action)
 static void
 setup_gui (void)
 {
+    size_t i;
+    int lines, cols;
+    int y;
+
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
 
     if (!i18n_flag)
     {
-        int i = sizeof (fbuts) / sizeof (fbuts[0]);
-        while (i-- != 0)
+        for (i = 0; i < fbuts_num; i++)
         {
             fbuts[i].text = _(fbuts[i].text);
             fbuts[i].len = str_term_width1 (fbuts[i].text) + 3;
+            if (fbuts[i].flags == DEFPUSH_BUTTON)
+                fbuts[i].len += 2;
         }
 
-        fbuts[2].len += 2;      /* DEFPUSH_BUTTON */
         i18n_flag = TRUE;
     }
 #endif /* ENABLE_NLS */
 
-    /*
-     * Dynamically place buttons centered within current window size
-     */
-    {
-        int l0 = max (fbuts[0].len, fbuts[1].len);
-        int l1 = fbuts[2].len + fbuts[3].len + l0 + fbuts[4].len;
-        int l2 = fbuts[5].len + fbuts[6].len + fbuts[7].len;
-        int r1, r2;
-
-        /* Check, if both button rows fit within FIND2_X */
-        FIND2_X = max (l1 + 9, COLS - 16);
-        FIND2_X = max (l2 + 8, FIND2_X);
-
-        /* compute amount of space between buttons for each row */
-        r1 = (FIND2_X - 4 - l1) % 5;
-        l1 = (FIND2_X - 4 - l1) / 5;
-        r2 = (FIND2_X - 4 - l2) % 4;
-        l2 = (FIND2_X - 4 - l2) / 4;
-
-        /* ...and finally, place buttons */
-        fbuts[2].x = 2 + r1 / 2 + l1;
-        fbuts[3].x = fbuts[2].x + fbuts[2].len + l1;
-        fbuts[0].x = fbuts[3].x + fbuts[3].len + l1;
-        fbuts[4].x = fbuts[0].x + l0 + l1;
-        fbuts[5].x = 2 + r2 / 2 + l2;
-        fbuts[6].x = fbuts[5].x + fbuts[5].len + l2;
-        fbuts[7].x = fbuts[6].x + fbuts[6].len + l2;
-    }
+    lines = LINES - 4;
+    cols = COLS - 16;
 
     find_dlg =
-        create_dlg (TRUE, 0, 0, FIND2_Y, FIND2_X, dialog_colors, find_callback, NULL,
-                    "[Find File]", _("Find File"), DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, find_callback, NULL, "[Find File]",
+                    _("Find File"), DLG_CENTER);
 
-    add_widget (find_dlg,
-                button_new (FIND2_Y - 3, fbuts[7].x, B_VIEW, NORMAL_BUTTON,
-                            fbuts[7].text, find_do_edit_file));
-    add_widget (find_dlg,
-                button_new (FIND2_Y - 3, fbuts[6].x, B_VIEW, NORMAL_BUTTON,
-                            fbuts[6].text, find_do_view_file));
-    add_widget (find_dlg,
-                button_new (FIND2_Y - 3, fbuts[5].x, B_PANELIZE, NORMAL_BUTTON, fbuts[5].text,
-                            NULL));
+    find_calc_button_locations (find_dlg, TRUE);
 
-    add_widget (find_dlg,
-                button_new (FIND2_Y - 4, fbuts[4].x, B_CANCEL, NORMAL_BUTTON, fbuts[4].text, NULL));
-    stop_button =
-        button_new (FIND2_Y - 4, fbuts[0].x, B_STOP, NORMAL_BUTTON, fbuts[0].text, start_stop);
-    add_widget (find_dlg, stop_button);
-    add_widget (find_dlg,
-                button_new (FIND2_Y - 4, fbuts[3].x, B_AGAIN, NORMAL_BUTTON, fbuts[3].text, NULL));
-    add_widget (find_dlg,
-                button_new (FIND2_Y - 4, fbuts[2].x, B_ENTER, DEFPUSH_BUTTON, fbuts[2].text, NULL));
+    y = 2;
+    find_list = listbox_new (y, 2, lines - 10, cols - 4, FALSE, NULL);
+    add_widget_autopos (find_dlg, find_list, WPOS_KEEP_ALL, NULL);
+    y += WIDGET (find_list)->lines;
 
-    status_label = label_new (FIND2_Y - 7, 4, _("Searching"));
-    add_widget (find_dlg, status_label);
+    add_widget_autopos (find_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
-    found_num_label = label_new (FIND2_Y - 6, 4, "");
-    add_widget (find_dlg, found_num_label);
+    found_num_label = label_new (y++, 4, "");
+    add_widget_autopos (find_dlg, found_num_label, WPOS_KEEP_BOTTOM, NULL);
 
-    find_list = listbox_new (2, 2, FIND2_Y - 10, FIND2_X - 4, FALSE, NULL);
-    add_widget (find_dlg, find_list);
+    status_label = label_new (y++, 4, _("Searching"));
+    add_widget_autopos (find_dlg, status_label, WPOS_KEEP_BOTTOM, NULL);
+
+    add_widget_autopos (find_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+
+    for (i = 0; i < fbuts_num; i++)
+    {
+        if (i == 3)
+            fbuts[3].button = fbuts[2].button;
+        else
+        {
+            fbuts[i].button =
+                WIDGET (button_new
+                        (y, fbuts[i].x, fbuts[i].ret_cmd, fbuts[i].flags, fbuts[i].text,
+                         fbuts[i].callback));
+            add_widget_autopos (find_dlg, fbuts[i].button, WPOS_KEEP_BOTTOM, NULL);
+        }
+
+        if (i == quit_button)
+            y++;
+    }
+
+    dlg_select_widget (find_list);
 }
 
 /* --------------------------------------------------------------------------------------------- */
