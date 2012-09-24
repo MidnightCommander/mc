@@ -309,6 +309,10 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     if (count > 0)
     {
+        add_widget (query_dlg, label_new (2, 3, text));
+
+        add_widget (query_dlg, hline_new (lines - 4, -1, -1));
+
         cols = (cols - win_len - 2) / 2 + 2;
         va_start (ap, count);
         for (i = 0; i < count; i++)
@@ -328,7 +332,6 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         }
         va_end (ap);
 
-        add_widget (query_dlg, label_new (2, 3, text));
 
         /* do resize before running and selecting any widget */
         default_query_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
