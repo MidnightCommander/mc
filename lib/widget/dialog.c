@@ -389,10 +389,7 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     {
         Widget *widget = WIDGET (item->data);
 
-        if ((h->flags & DLG_REVERSE) == 0)
-            item = dlg_widget_prev (h, item);
-        else
-            item = dlg_widget_next (h, item);
+        item = dlg_widget_prev (h, item);
 
         if ((widget->options & W_DISABLED) == 0 && widget->mouse != NULL)
         {
@@ -888,51 +885,27 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags, const v
     widget->pos_flags = pos_flags;
     widget->id = h->widget_id++;
 
-    if ((h->flags & DLG_REVERSE) != 0)
+    if (h->widgets == NULL || before == NULL)
     {
-        if (h->widgets == NULL || before == NULL)
-        {
-            h->widgets = g_list_prepend (h->widgets, widget);
-            h->current = h->widgets;
-        }
-        else
-        {
-            GList *b;
-
-            b = g_list_find (h->widgets, before);
-
-            /* don't accept widget not from dialog. This shouldn't happen */
-            if (b == NULL)
-                abort ();
-
-            h->widgets = g_list_insert_before (h->widgets, b, widget);
-            h->current = g_list_previous (b);
-        }
+        h->widgets = g_list_append (h->widgets, widget);
+        h->current = g_list_last (h->widgets);
     }
     else
     {
-        if (h->widgets == NULL || before == NULL)
-        {
-            h->widgets = g_list_append (h->widgets, widget);
-            h->current = g_list_last (h->widgets);
-        }
+        GList *b;
+
+        b = g_list_find (h->widgets, before);
+
+        /* don't accept widget not from dialog. This shouldn't happen */
+        if (b == NULL)
+            abort ();
+
+        b = g_list_next (b);
+        h->widgets = g_list_insert_before (h->widgets, b, widget);
+        if (b != NULL)
+            h->current = g_list_previous (b);
         else
-        {
-            GList *b;
-
-            b = g_list_find (h->widgets, before);
-
-            /* don't accept widget not from dialog. This shouldn't happen */
-            if (b == NULL)
-                abort ();
-
-            b = g_list_next (b);
-            h->widgets = g_list_insert_before (h->widgets, b, widget);
-            if (b != NULL)
-                h->current = g_list_previous (b);
-            else
-                h->current = g_list_last (h->widgets);
-        }
+            h->current = g_list_last (h->widgets);
     }
 
     /* widget has been added in runtime */
@@ -979,12 +952,7 @@ del_widget (void *w)
 
     d = g_list_find (h->widgets, w);
     if (d == h->current)
-    {
-        if ((h->flags & DLG_REVERSE) != 0)
-            h->current = dlg_widget_prev (h, d);
-        else
-            h->current = dlg_widget_next (h, d);
-    }
+        h->current = dlg_widget_next (h, d);
 
     h->widgets = g_list_remove_link (h->widgets, d);
     send_message (d->data, NULL, WIDGET_DESTROY, 0, NULL);
@@ -1027,9 +995,9 @@ do_refresh (void)
 /** broadcast a message to all the widgets in a dialog */
 
 void
-dlg_broadcast_msg (Dlg_head * h, widget_msg_t msg, gboolean reverse)
+dlg_broadcast_msg (Dlg_head * h, widget_msg_t msg)
 {
-    dlg_broadcast_msg_to (h, msg, reverse, 0);
+    dlg_broadcast_msg_to (h, msg, FALSE, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1139,10 +1107,7 @@ dlg_set_top_widget (void *w)
 
     /* widget reordering */
     h->widgets = g_list_remove_link (h->widgets, l);
-    if ((h->flags & DLG_REVERSE) != 0)
-        h->widgets = g_list_concat (l, h->widgets);
-    else
-        h->widgets = g_list_concat (h->widgets, l);
+    h->widgets = g_list_concat (h->widgets, l);
     h->current = l;
 }
 
@@ -1217,7 +1182,7 @@ dlg_redraw (Dlg_head * h)
     }
 
     h->callback (h, NULL, DLG_DRAW, 0, NULL);
-    dlg_broadcast_msg (h, WIDGET_DRAW, (h->flags & DLG_REVERSE) != 0);
+    dlg_broadcast_msg (h, WIDGET_DRAW);
     update_cursor (h);
 }
 
@@ -1248,7 +1213,7 @@ init_dlg (Dlg_head * h)
             dialog_switch_add (h);
 
         h->callback (h, NULL, DLG_INIT, 0, NULL);
-        dlg_broadcast_msg (h, WIDGET_INIT, FALSE);
+        dlg_broadcast_msg (h, WIDGET_INIT);
         dlg_read_history (h);
     }
 
@@ -1324,7 +1289,7 @@ destroy_dlg (Dlg_head * h)
 {
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);
-    dlg_broadcast_msg (h, WIDGET_DESTROY, FALSE);
+    dlg_broadcast_msg (h, WIDGET_DESTROY);
     g_list_foreach (h->widgets, (GFunc) g_free, NULL);
     g_list_free (h->widgets);
     mc_event_group_del (h->event_group);

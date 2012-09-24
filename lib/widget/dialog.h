@@ -49,7 +49,6 @@ typedef enum
 /* Flags for create_dlg */
 typedef enum
 {
-    DLG_REVERSE = (1 << 5),     /* Tab order is opposite to the add order */
     DLG_WANT_TAB = (1 << 4),    /* Should the tab key be sent to the dialog? */
     DLG_WANT_IDLE = (1 << 3),   /* Dialog wants idle events */
     DLG_COMPACT = (1 << 2),     /* Suppress spaces around the frame */
@@ -184,7 +183,7 @@ void set_idle_proc (Dlg_head * d, int enable);
 
 void dlg_redraw (Dlg_head * h);
 
-void dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, gboolean reverse);
+void dlg_broadcast_msg (Dlg_head * h, widget_msg_t message);
 
 /* Default callback for dialogs */
 cb_ret_t default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);

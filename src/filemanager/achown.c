@@ -535,7 +535,7 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
                 ch_flags[i * 3 + parm - 3] = (x_toggle & (1 << parm)) ? '-' : '+';
             x_toggle ^= (1 << parm);
             update_mode (h);
-            dlg_broadcast_msg (h, WIDGET_DRAW, FALSE);
+            dlg_broadcast_msg (h, WIDGET_DRAW);
             send_message (WIDGET (h->current->data), NULL, WIDGET_FOCUS, 0, NULL);
             break;
 
@@ -551,7 +551,7 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
                 ch_flags[i * 3 + parm] = (x_toggle & (1 << parm)) ? '-' : '+';
             x_toggle ^= (1 << parm);
             update_mode (h);
-            dlg_broadcast_msg (h, WIDGET_DRAW, FALSE);
+            dlg_broadcast_msg (h, WIDGET_DRAW);
             send_message (WIDGET (h->current->data), NULL, WIDGET_FOCUS, 0, NULL);
             break;
 
