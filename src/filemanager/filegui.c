@@ -372,18 +372,20 @@ file_bps_prepare_for_show (char *buffer, long bps)
 static replace_action_t
 overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 {
-#define ADD_RD_BUTTON(i) \
+#define ADD_RD_BUTTON(i, ypos) \
     add_widget (ui->replace_dlg, \
-            button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value, \
+            button_new (ypos, rd_widgets [i].xpos, rd_widgets [i].value, \
                         NORMAL_BUTTON, rd_widgets [i].text, 0))
 
-#define ADD_RD_LABEL(i, p1, p2) \
+#define ADD_RD_LABEL(i, p1, p2, ypos) \
     g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2); \
-    add_widget (ui->replace_dlg, label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
+    add_widget (ui->replace_dlg, label_new (ypos, rd_widgets [i].xpos, buffer))
 
     /* dialog sizes */
     const int rd_ylen = 17;
     int rd_xlen = 60;
+    int y = 2;
+    unsigned long yes_id;
 
     struct
     {
@@ -397,36 +399,36 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
         { N_("Target file already exists!"), 3, 4, 0 },
         /*  1 */
         { "%s", 4, 4, 0 },
-        /*  2 */ /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("Source date: %s, size %llu"), 6, 4, 0 },
-        /*  3 */  /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("Target date: %s, size %llu"), 7, 4, 0 },
+        /*  2 */        /* cannot use PRIuMAX here; %llu is used instead */
+        { N_("New     : %s, size %llu"), 6, 4, 0 },
+        /*  3 */        /* cannot use PRIuMAX here; %llu is used instead */
+        { N_("Existing: %s, size %llu"), 7, 4, 0 },
         /*  4 */
-        { N_("&Abort"), 14, 25, REPLACE_ABORT },
+        { N_("Overwrite this target?"), 9, 4, 0 },
         /*  5 */
-        { N_("If &size differs"), 12, 28, REPLACE_SIZE },
+        { N_("&Yes"), 9, 28, REPLACE_YES },
         /*  6 */
-        { N_("Non&e"), 11, 47, REPLACE_NEVER },
+        { N_("&No"), 9, 37, REPLACE_NO },
         /*  7 */
-        { N_("&Update"), 11, 36, REPLACE_UPDATE },
+        { N_("A&ppend"), 9, 45, REPLACE_APPEND },
         /*  8 */
-        { N_("A&ll"), 11, 28, REPLACE_ALWAYS },
+        { N_("&Reget"), 10, 28, REPLACE_REGET },
         /*  9 */
         { N_("Overwrite all targets?"), 11, 4, 0 },
         /* 10 */
-        { N_("&Reget"), 10, 28, REPLACE_REGET },
+        { N_("A&ll"), 11, 28, REPLACE_ALWAYS },
         /* 11 */
-        { N_("A&ppend"), 9, 45, REPLACE_APPEND },
+        { N_("&Update"), 11, 36, REPLACE_UPDATE },
         /* 12 */
-        { N_("&No"), 9, 37, REPLACE_NO },
+        { N_("Non&e"), 11, 47, REPLACE_NEVER },
         /* 13 */
-        { N_("&Yes"), 9, 28, REPLACE_YES },
+        { N_("If &size differs"), 12, 28, REPLACE_SIZE },
         /* 14 */
-        { N_("Overwrite this target?"), 9, 4, 0 }
+        { N_("&Abort"), 14, 25, REPLACE_ABORT }
     /* *INDENT-ON* */
     };
 
-    const int num = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
+    const size_t num = G_N_ELEMENTS (rd_widgets);
     int *widgets_len;
 
     FileOpContextUI *ui = ctx->ui;
@@ -453,7 +455,8 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     stripped_name_len = str_term_width1 (stripped_name);
 
     {
-        int i, l1, l2, l, row;
+        size_t i;
+        int l1, l2, l, row;
 
         for (i = 0; i < num; i++)
         {
@@ -468,11 +471,12 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
          * longest of "Overwrite..." labels
          * (assume "Target date..." are short enough)
          */
-        l1 = max (widgets_len[9], widgets_len[14]);
+        l1 = max (widgets_len[9], widgets_len[4]);
 
         /* longest of button rows */
-        i = num;
-        for (row = l = l2 = 0; i--;)
+        l = l2 = 0;
+        row = 0;
+        for (i = 1; i < num - 1; i++)
             if (rd_widgets[i].value != 0)
             {
                 if (row != rd_widgets[i].ypos)
@@ -491,8 +495,9 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
         /* Now place widgets */
         l1 += 5;                /* start of first button in the row */
-        i = num;
-        for (l = l1, row = 0; --i > 1;)
+        l = l1;
+        row = 0;
+        for (i = 2; i < num - 1; i++)
             if (rd_widgets[i].value != 0)
             {
                 if (row != rd_widgets[i].ypos)
@@ -505,48 +510,61 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
             }
 
         /* Abort button is centered */
-        rd_widgets[4].xpos = (rd_xlen - widgets_len[4] - 3) / 2;
+        rd_widgets[num - 1].xpos = (rd_xlen - widgets_len[num - 1] - 3) / 2;
     }
 
     /* FIXME - missing help node */
     ui->replace_dlg =
-        create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]",
-                    title, DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]", title,
+                    DLG_CENTER);
 
     /* prompt -- centered */
     add_widget (ui->replace_dlg,
-                label_new (rd_widgets[0].ypos, (rd_xlen - widgets_len[0]) / 2, rd_widgets[0].text));
+                label_new (y++, (rd_xlen - widgets_len[0]) / 2, rd_widgets[0].text));
     /* file name -- centered */
     stripped_name = str_trunc (stripped_name, rd_xlen - 8);
     stripped_name_len = str_term_width1 (stripped_name);
-    add_widget (ui->replace_dlg,
-                label_new (rd_widgets[1].ypos, (rd_xlen - stripped_name_len) / 2, stripped_name));
+    add_widget (ui->replace_dlg, label_new (y++, (rd_xlen - stripped_name_len) / 2, stripped_name));
+
+    add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
     /* source date and size */
-    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (unsigned long long) ui->s_stat->st_size);
+    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (unsigned long long) ui->s_stat->st_size,
+                  y++);
     /* destination date and size */
-    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (unsigned long long) ui->d_stat->st_size);
+    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (unsigned long long) ui->d_stat->st_size,
+                  y++);
 
-    ADD_RD_BUTTON (4);          /* Abort */
-    ADD_RD_BUTTON (5);          /* If size differs */
-    ADD_RD_BUTTON (6);          /* None */
-    ADD_RD_BUTTON (7);          /* Update */
-    ADD_RD_BUTTON (8);          /* All" */
-    ADD_RD_LABEL (9, 0, 0);     /* Overwrite all targets? */
+    add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
+
+    ADD_RD_LABEL (4, 0, 0, y);  /* Overwrite this target? */
+    yes_id = ADD_RD_BUTTON (5, y);      /* Yes */
+    ADD_RD_BUTTON (6, y);       /* No */
 
     /* "this target..." widgets */
     if (!S_ISDIR (ui->d_stat->st_mode))
     {
+        ADD_RD_BUTTON (7, y++); /* Append */
+
         if ((ctx->operation == OP_COPY) && (ui->d_stat->st_size != 0)
             && (ui->s_stat->st_size > ui->d_stat->st_size))
-            ADD_RD_BUTTON (10); /* Reget */
-
-        ADD_RD_BUTTON (11);     /* Append */
+            ADD_RD_BUTTON (8, y++);     /* Reget */
     }
-    ADD_RD_BUTTON (12);         /* No */
-    ADD_RD_BUTTON (13);         /* Yes */
-    ADD_RD_LABEL (14, 0, 0);    /* Overwrite this target? */
 
+    add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
+
+    ADD_RD_LABEL (9, 0, 0, y);  /* Overwrite all targets? */
+    ADD_RD_BUTTON (10, y);      /* All" */
+    ADD_RD_BUTTON (11, y);      /* Update */
+    ADD_RD_BUTTON (12, y++);    /* None */
+    ADD_RD_BUTTON (13, y++);    /* If size differs */
+
+    add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
+
+    ADD_RD_BUTTON (14, y);      /* Abort */
+
+    dlg_set_size (ui->replace_dlg, y + 3, rd_xlen);
+    dlg_select_by_id (ui->replace_dlg, yes_id);
     result = run_dlg (ui->replace_dlg);
     destroy_dlg (ui->replace_dlg);
 
@@ -623,6 +641,8 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     const char *skip_button_label = N_("&Skip");
     int abort_button_width, skip_button_width, buttons_width;
     int dlg_width, dlg_height;
+    int y = 2, x = 3;
+    Widget *skip_button;
 
     g_return_if_fail (ctx != NULL);
     g_return_if_fail (ctx->ui == NULL);
@@ -634,79 +654,78 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
 
     abort_button_width = str_term_width1 (abort_button_label) + 3;
     skip_button_width = str_term_width1 (skip_button_label) + 3;
-    buttons_width = abort_button_width + skip_button_width + 2;
+    buttons_width = abort_button_width + skip_button_width + 1;
 
     dlg_width = max (58, buttons_width + 6);
-    dlg_height = 17;            /* to make compiler happy :) */
+    dlg_height = 17;            /* will be adjusted later */
 
     ui = g_new0 (FileOpContextUI, 1);
     ctx->ui = ui;
-
     ctx->dialog_type = dialog_type;
-
-    switch (dialog_type)
-    {
-    case FILEGUI_DIALOG_ONE_ITEM:
-        dlg_height = verbose ? 12 : 10;
-        break;
-    case FILEGUI_DIALOG_MULTI_ITEM:
-        dlg_height = !verbose ? 10 : file_op_compute_totals ? 17 : 15;
-        break;
-    case FILEGUI_DIALOG_DELETE_ITEM:
-        dlg_height = 7;
-        break;
-    }
-
     ctx->recursive_result = RECURSIVE_YES;
-
     ui->replace_result = REPLACE_YES;
     ui->showing_eta = with_eta && file_op_compute_totals;
     ui->showing_bps = with_eta;
 
     ui->op_dlg =
-        create_dlg (TRUE, 0, 0, dlg_height, dlg_width,
-                    dialog_colors, NULL, NULL, NULL, op_names[ctx->operation],
-                    DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, NULL, NULL, NULL,
+                    op_names[ctx->operation], DLG_CENTER);
 
-    add_widget (ui->op_dlg,
-                button_new (dlg_height - 3, dlg_width / 2 + 1, FILE_ABORT,
-                            NORMAL_BUTTON, abort_button_label, NULL));
-    add_widget (ui->op_dlg,
-                button_new (dlg_height - 3, dlg_width / 2 - 1 - skip_button_width, FILE_SKIP,
-                            NORMAL_BUTTON, skip_button_label, NULL));
+    ui->file_label[0] = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->file_label[0]);
+
+    ui->file_string[0] = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->file_string[0]);
+
+    ui->file_label[1] = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->file_label[1]);
+
+    ui->file_string[1] = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->file_string[1]);
+
+    ui->progress_file_gauge = gauge_new (y++, x + 3, 0, 100, 0);
+    if (!classic_progressbar && (current_panel == right_panel))
+        ui->progress_file_gauge->from_left_to_right = FALSE;
+    add_widget (ui->op_dlg, ui->progress_file_gauge);
+
+    ui->progress_file_label = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->progress_file_label);
 
     if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
     {
-        int dy = file_op_compute_totals ? 2 : 0;
+        add_widget (ui->op_dlg, hline_new (y, -1, -1));
+
+        ui->total_bytes_label = label_new (y++, x + 15, "");
+        add_widget (ui->op_dlg, ui->total_bytes_label);
 
         if (file_op_compute_totals)
-            add_widget (ui->op_dlg, ui->progress_total_gauge =
-                        gauge_new (7 + dy, 3 + 3, 0, 100, 0));
+        {
+            ui->progress_total_gauge = gauge_new (y++, x + 3, 0, 100, 0);
+            if (!classic_progressbar && (current_panel == right_panel))
+                ui->progress_total_gauge->from_left_to_right = FALSE;
+            add_widget (ui->op_dlg, ui->progress_total_gauge);
+        }
 
-        add_widget (ui->op_dlg, ui->total_files_processed_label = label_new (9 + dy, 3, ""));
+        ui->total_files_processed_label = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->total_files_processed_label);
 
-        add_widget (ui->op_dlg, ui->time_label = label_new (10 + dy, 3, ""));
-
-        add_widget (ui->op_dlg, ui->total_bytes_label = label_new (8, 3 + 15, ""));
-        add_widget (ui->op_dlg, hline_new (8, 1, dlg_width - 2));
+        ui->time_label = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->time_label);
     }
 
-    add_widget (ui->op_dlg, ui->progress_file_label = label_new (7, 3, ""));
+    add_widget (ui->op_dlg, hline_new (y++, -1, -1));
 
-    add_widget (ui->op_dlg, ui->progress_file_gauge = gauge_new (6, 3 + 3, 0, 100, 0));
+    x = (dlg_width - buttons_width) / 2;
+    skip_button = WIDGET (button_new (y, x, FILE_SKIP, NORMAL_BUTTON, skip_button_label, NULL));
+    add_widget (ui->op_dlg, skip_button);
 
-    add_widget (ui->op_dlg, ui->file_string[1] = label_new (5, 3, ""));
+    x += skip_button_width + 1;
+    add_widget (ui->op_dlg, button_new (y, x, FILE_ABORT, NORMAL_BUTTON, abort_button_label, NULL));
 
-    add_widget (ui->op_dlg, ui->file_label[1] = label_new (4, 3, ""));
-    add_widget (ui->op_dlg, ui->file_string[0] = label_new (3, 3, ""));
-    add_widget (ui->op_dlg, ui->file_label[0] = label_new (2, 3, ""));
+    /* adjust dialog height */
+    dlg_set_size (ui->op_dlg, y + 3, dlg_width);
 
-    if ((right_panel == current_panel) && !classic_progressbar)
-    {
-        ui->progress_file_gauge->from_left_to_right = FALSE;
-        if (verbose && file_op_compute_totals && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
-            ui->progress_total_gauge->from_left_to_right = FALSE;
-    }
+    dlg_select_widget (skip_button);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1057,7 +1076,8 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
     fmd_xlen = max (68, (COLS * 2 / 3));
 
     if (only_one)
-        g_snprintf (fmd_buf, sizeof (fmd_buf), format, str_trunc ((const char *) text, fmd_xlen - 7));
+        g_snprintf (fmd_buf, sizeof (fmd_buf), format,
+                    str_trunc ((const char *) text, fmd_xlen - 7));
     else
         g_snprintf (fmd_buf, sizeof (fmd_buf), format, *(const int *) text);
 
